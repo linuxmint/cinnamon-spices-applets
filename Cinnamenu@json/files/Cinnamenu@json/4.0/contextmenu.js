@@ -38,14 +38,14 @@ class ContextMenuItem extends PopupBaseMenuItem {
         if (this.action === null) {
             return Clutter.EVENT_STOP;
         }
-        this.entered = true;
+        this.has_focus = true;
         this.actor.add_style_pseudo_class('hover');
         this.actor.add_style_pseudo_class('active');
         return Clutter.EVENT_STOP;
     }
 
     handleLeave(actor, e) {
-        this.entered = false;
+        this.has_focus = false;
         this.actor.remove_style_pseudo_class('hover');
         this.actor.remove_style_pseudo_class('active');
         return Clutter.EVENT_STOP;

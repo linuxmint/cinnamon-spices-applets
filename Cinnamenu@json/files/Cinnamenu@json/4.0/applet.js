@@ -428,7 +428,7 @@ class CinnamenuApplet extends TextIconApplet {
             this.currentCategory = 'all';
         }
         this._initDisplay();
-        this.clearEnteredActors();
+        this.clearFocusedActors();
     }
 //==================================================================
     addFavoriteAppToPos(add_id, pos_id) {
@@ -440,12 +440,12 @@ class CinnamenuApplet extends TextIconApplet {
         }
     }
 
-    clearEnteredActors() {
+    clearFocusedActors() {
         if (this.contextMenu.isOpen) {
             this.contextMenu.close();
         }
-        this.appsView.clearAppsViewEnteredActors();
-        this.sidebar.clearSidebarEnteredActors();
+        this.appsView.clearAppsViewFocusedActors();
+        this.sidebar.clearSidebarFocusedActors();
     }
 //----------
     _onOpenStateToggled(menu, open) {
@@ -481,7 +481,7 @@ class CinnamenuApplet extends TextIconApplet {
             if (this.searchActive) {
                 this._endSearchMode();
             }
-            this.clearEnteredActors();
+            this.clearFocusedActors();
             this.appsView.clearApps();//for quicker opening of menu
         }
         return true;
@@ -554,8 +554,8 @@ class CinnamenuApplet extends TextIconApplet {
         let menuWidth = Math.max(minMenuWidth, newWidth);
         this.appsView.applicationsListBox.width = menuWidth - leftSideWidth;
         this.appsView.applicationsGridBox.width = menuWidth - leftSideWidth;
-        this.appsView.officialGridBoxWidth = menuWidth - leftSideWidth; //because subseqentially retrived
-        //applicationsGridBox.width is unreliable.
+        this.appsView.currentGridBoxWidth = menuWidth - leftSideWidth; //because reading
+                                                                //applicationsGridBox.width is unreliable.
 
         //Don't change settings while resizing to avoid excessive disk writes.
         if (!this.resizer.resizingInProgress) {
@@ -600,8 +600,8 @@ class CinnamenuApplet extends TextIconApplet {
         const sidebarButtons = this.sidebar.getButtons();
         const categoryButtons = this.categoriesView.buttons;
 
-        const enteredAppItemIndex = appButtons.findIndex(button => button.entered);
-        const enteredSidebarItemIndex = sidebarButtons.findIndex(button => button.entered);
+        const focusedAppItemIndex = appButtons.findIndex(button => button.has_focus);
+        const focusedSidebarItemIndex = sidebarButtons.findIndex(button => button.has_focus);
 
         let currentlyActiveCategoryIndex = categoryButtons.findIndex(button =>
                                                                     this.currentCategory === button.id);
@@ -609,109 +609,109 @@ class CinnamenuApplet extends TextIconApplet {
             currentlyActiveCategoryIndex = 0;
         }
         //When "activate categories on click" option is set, currentlyActiveCategoryIndex and
-        //enteredCategoryIndex may not be the same.
-        let enteredCategoryIndex = categoryButtons.findIndex(button => button.entered);
-        if (enteredCategoryIndex < 0) {
-            enteredCategoryIndex = currentlyActiveCategoryIndex;
+        //focusedCategoryIndex may not be the same.
+        let focusedCategoryIndex = categoryButtons.findIndex(button => button.has_focus);
+        if (focusedCategoryIndex < 0) {
+            focusedCategoryIndex = currentlyActiveCategoryIndex;
         }
 
-        const enteredAppItemExists = enteredAppItemIndex > -1;
-        const enteredCategoryExists = enteredCategoryIndex > -1;
-        const enteredSidebarItemExists = enteredSidebarItemIndex > -1;
+        const focusedAppItemExists = focusedAppItemIndex > -1;
+        const focusedCategoryExists = focusedCategoryIndex > -1;
+        const focusedSidebarItemExists = focusedSidebarItemIndex > -1;
 
-        let enteredContextMenuItemExists = false;
+        let focusedContextMenuItemExists = false;
         let contextMenuChildren = [];
-        let enteredContextMenuItemIndex = -1;
+        let focusedContextMenuItemIndex = -1;
         if (this.contextMenu.isOpen) {
             contextMenuChildren = this.contextMenu.contextMenuButtons;
-            enteredContextMenuItemIndex = contextMenuChildren.findIndex(button => button.entered);
-            if (enteredContextMenuItemIndex < 0) {
-                enteredContextMenuItemIndex = 0;
+            focusedContextMenuItemIndex = contextMenuChildren.findIndex(button => button.has_focus);
+            if (focusedContextMenuItemIndex < 0) {
+                focusedContextMenuItemIndex = 0;
             }
-            enteredContextMenuItemExists = true;
+            focusedContextMenuItemExists = true;
         }
 
-        const leaveCurrentlyEnteredItem = () => {
-            if (enteredContextMenuItemExists) {
-                contextMenuChildren[enteredContextMenuItemIndex].handleLeave();
-            } else if (enteredAppItemExists) {
-                appButtons[enteredAppItemIndex].handleLeave();
-            } else if (enteredSidebarItemExists) {
-                sidebarButtons[enteredSidebarItemIndex].handleLeave();
-            } else if (enteredCategoryExists) {
-                categoryButtons[enteredCategoryIndex].handleLeave();
+        const leaveCurrentlyFocusedItem = () => {
+            if (focusedContextMenuItemExists) {
+                contextMenuChildren[focusedContextMenuItemIndex].handleLeave();
+            } else if (focusedAppItemExists) {
+                appButtons[focusedAppItemIndex].handleLeave();
+            } else if (focusedSidebarItemExists) {
+                sidebarButtons[focusedSidebarItemIndex].handleLeave();
+            } else if (focusedCategoryExists) {
+                categoryButtons[focusedCategoryIndex].handleLeave();
             }
         };
 
         const nextSidebarItem = () => {
-            if (enteredSidebarItemIndex < sidebarButtons.length - 1) {
-                sidebarButtons[enteredSidebarItemIndex + 1].handleEnter();
+            if (focusedSidebarItemIndex < sidebarButtons.length - 1) {
+                sidebarButtons[focusedSidebarItemIndex + 1].handleEnter();
             } else {
                 sidebarButtons[0].handleEnter();
             }
         };
 
         const previousSidebarItem = () => {
-            if (enteredSidebarItemIndex === 0) {
+            if (focusedSidebarItemIndex === 0) {
                 sidebarButtons[sidebarButtons.length -1].handleEnter();
             } else {
-                sidebarButtons[enteredSidebarItemIndex - 1].handleEnter();
+                sidebarButtons[focusedSidebarItemIndex - 1].handleEnter();
             }
         };
 
         const leftNavigation = () => {
-            if (enteredContextMenuItemExists) {
-                contextMenuChildren[enteredContextMenuItemIndex].handleEnter();//effectively ignore
-            } else if (enteredAppItemExists) {
+            if (focusedContextMenuItemExists) {
+                contextMenuChildren[focusedContextMenuItemIndex].handleEnter();//effectively ignore
+            } else if (focusedAppItemExists) {
                 if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
                     categoryButtons[currentlyActiveCategoryIndex].handleEnter();
                 } else {
-                    if (enteredAppItemIndex > 0) {
-                        appButtons[enteredAppItemIndex - 1].handleEnter();
+                    if (focusedAppItemIndex > 0) {
+                        appButtons[focusedAppItemIndex - 1].handleEnter();
                     } else {
                         appButtons[appButtons.length - 1].handleEnter();
                     }
                 }
-            } else if (enteredSidebarItemExists) {
+            } else if (focusedSidebarItemExists) {
                 if (this.settings.sidebarPlacement === SidebarPlacement.LEFT ||
                                                 this.settings.sidebarPlacement === SidebarPlacement.RIGHT) {
                     categoryButtons[currentlyActiveCategoryIndex].handleEnter();
                 } else {
                     previousSidebarItem();
                 }
-            } else if (enteredCategoryExists) {
+            } else if (focusedCategoryExists) {
                 sidebarButtons[0].handleEnter();
             }
         };
 
         const rightNavigation = () => {
-            if (enteredContextMenuItemExists) {
-                contextMenuChildren[enteredContextMenuItemIndex].handleEnter();//Ignore
-            } else if (enteredAppItemExists) {
+            if (focusedContextMenuItemExists) {
+                contextMenuChildren[focusedContextMenuItemIndex].handleEnter();//Ignore
+            } else if (focusedAppItemExists) {
                 if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-                    appButtons[enteredAppItemIndex].handleEnter();//ignore
+                    appButtons[focusedAppItemIndex].handleEnter();//ignore
                 } else {
-                    if (appButtons[enteredAppItemIndex + 1]) {
-                        appButtons[enteredAppItemIndex + 1].handleEnter();
+                    if (appButtons[focusedAppItemIndex + 1]) {
+                        appButtons[focusedAppItemIndex + 1].handleEnter();
                     } else {
                         appButtons[0].handleEnter();
                     }
                 }
-            } else if (enteredSidebarItemExists) {
+            } else if (focusedSidebarItemExists) {
                 if (this.settings.sidebarPlacement === SidebarPlacement.LEFT ||
                                                     this.settings.sidebarPlacement === SidebarPlacement.RIGHT) {
                     categoryButtons[currentlyActiveCategoryIndex].handleEnter();
                 } else {
                     nextSidebarItem();
                 }
-            } else if (enteredCategoryExists) {
+            } else if (focusedCategoryExists) {
                 appButtons[0].handleEnter();
             }
         };
 
         const downNavigation = () => {
-            if (enteredContextMenuItemExists) {
-                let nextContextMenuItem = enteredContextMenuItemIndex + 1;
+            if (focusedContextMenuItemExists) {
+                let nextContextMenuItem = focusedContextMenuItemIndex + 1;
                 while (!contextMenuChildren[nextContextMenuItem] ||
                                     contextMenuChildren[nextContextMenuItem].action === null) {
                     nextContextMenuItem++;
@@ -720,35 +720,35 @@ class CinnamenuApplet extends TextIconApplet {
                     }
                 }
                 contextMenuChildren[nextContextMenuItem].handleEnter();
-            } else if (enteredAppItemExists) {
+            } else if (focusedAppItemExists) {
                 if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-                    if (appButtons[enteredAppItemIndex + 1]) {
-                        appButtons[enteredAppItemIndex + 1].handleEnter();
+                    if (appButtons[focusedAppItemIndex + 1]) {
+                        appButtons[focusedAppItemIndex + 1].handleEnter();
                     } else {
                         appButtons[0].handleEnter();
                     }
                 } else {//grid view
-                    if (appButtons[enteredAppItemIndex + 1]) {
-                        const column = appButtons[enteredAppItemIndex].actor.layout_column;
-                        let next = enteredAppItemIndex + 1;
+                    if (appButtons[focusedAppItemIndex + 1]) {
+                        const column = appButtons[focusedAppItemIndex].actor.layout_column;
+                        let next = focusedAppItemIndex + 1;
                         while (appButtons[next].actor.layout_column != column && appButtons[next + 1]) {
                             next++;
                         }
                         appButtons[next].handleEnter();
                     } else {
-                        appButtons[enteredAppItemIndex].handleEnter();//effectively no change
+                        appButtons[focusedAppItemIndex].handleEnter();//effectively no change
                     }
                 }
-            } else if (enteredSidebarItemExists) {
+            } else if (focusedSidebarItemExists) {
                 if (this.settings.sidebarPlacement === SidebarPlacement.TOP ||
                                                     this.settings.sidebarPlacement === SidebarPlacement.BOTTOM) {
                     categoryButtons[currentlyActiveCategoryIndex].handleEnter();
                 } else {
                     nextSidebarItem();
                 }
-            } else if (enteredCategoryExists) {
-                if (categoryButtons[enteredCategoryIndex + 1]) {
-                    categoryButtons[enteredCategoryIndex + 1].handleEnter();
+            } else if (focusedCategoryExists) {
+                if (categoryButtons[focusedCategoryIndex + 1]) {
+                    categoryButtons[focusedCategoryIndex + 1].handleEnter();
                 } else {
                     categoryButtons[0].handleEnter();
                 }
@@ -756,8 +756,8 @@ class CinnamenuApplet extends TextIconApplet {
         };
 
         const upNavigation = () => {
-            if (enteredContextMenuItemExists) {
-                let previousContextMenuItem = enteredContextMenuItemIndex - 1;
+            if (focusedContextMenuItemExists) {
+                let previousContextMenuItem = focusedContextMenuItemIndex - 1;
                 while (!contextMenuChildren[previousContextMenuItem] ||
                                     contextMenuChildren[previousContextMenuItem].action === null) {
                     previousContextMenuItem--;
@@ -766,17 +766,17 @@ class CinnamenuApplet extends TextIconApplet {
                     }
                 }
                 contextMenuChildren[previousContextMenuItem].handleEnter();
-            } else if (enteredAppItemExists) {
+            } else if (focusedAppItemExists) {
                 if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-                    if (enteredAppItemIndex > 0) {
-                        appButtons[enteredAppItemIndex - 1].handleEnter();
+                    if (focusedAppItemIndex > 0) {
+                        appButtons[focusedAppItemIndex - 1].handleEnter();
                     } else {
                         appButtons[appButtons.length - 1].handleEnter();
                     }
                 } else {
-                    if (enteredAppItemIndex > 0) {
-                        const column = appButtons[enteredAppItemIndex].actor.layout_column;
-                        let previous = enteredAppItemIndex - 1;
+                    if (focusedAppItemIndex > 0) {
+                        const column = appButtons[focusedAppItemIndex].actor.layout_column;
+                        let previous = focusedAppItemIndex - 1;
                         while (appButtons[previous].actor.layout_column != column && previous > 0) {
                             previous--;
                         }
@@ -785,16 +785,16 @@ class CinnamenuApplet extends TextIconApplet {
                         appButtons[0].handleEnter();//effectively no change
                     }
                 }
-            } else if (enteredSidebarItemExists) {
+            } else if (focusedSidebarItemExists) {
                 if (this.settings.sidebarPlacement === SidebarPlacement.TOP ||
                                                 this.settings.sidebarPlacement === SidebarPlacement.BOTTOM) {
                     categoryButtons[currentlyActiveCategoryIndex].handleEnter();
                 } else {
                     previousSidebarItem();
                 }
-            } else if (enteredCategoryExists) {
-                if (enteredCategoryIndex > 0) {
-                    categoryButtons[enteredCategoryIndex - 1].handleEnter();
+            } else if (focusedCategoryExists) {
+                if (focusedCategoryIndex > 0) {
+                    categoryButtons[focusedCategoryIndex - 1].handleEnter();
                 } else {
                     categoryButtons[categoryButtons.length - 1].handleEnter();
                 }
@@ -806,60 +806,60 @@ class CinnamenuApplet extends TextIconApplet {
         case symbol === Clutter.KEY_Menu && noModifier:
             if (this.contextMenu.isOpen) {
                 this.contextMenu.close();
-            } else if (enteredAppItemExists) {
-                appButtons[enteredAppItemIndex].openContextMenu();
-            } else if (enteredSidebarItemExists) {
-                sidebarButtons[enteredSidebarItemIndex].openContextMenu();
-            } else if (enteredCategoryExists) {
-                categoryButtons[enteredCategoryIndex].openContextMenu();
+            } else if (focusedAppItemExists) {
+                appButtons[focusedAppItemIndex].openContextMenu();
+            } else if (focusedSidebarItemExists) {
+                sidebarButtons[focusedSidebarItemIndex].openContextMenu();
+            } else if (focusedCategoryExists) {
+                categoryButtons[focusedCategoryIndex].openContextMenu();
             }
             return Clutter.EVENT_STOP;
         case (symbol === Clutter.KP_Enter || symbol === Clutter.KEY_Return) && noModifiers:
-            if (enteredContextMenuItemExists) {
-                contextMenuChildren[enteredContextMenuItemIndex].activate();
-            } else if (enteredAppItemExists) {
-                appButtons[enteredAppItemIndex].activate();
-            } else if (enteredSidebarItemExists) {
-                sidebarButtons[enteredSidebarItemIndex].activate();
-            } else if (enteredCategoryExists) {
-                categoryButtons[enteredCategoryIndex].selectCategory();
+            if (focusedContextMenuItemExists) {
+                contextMenuChildren[focusedContextMenuItemIndex].activate();
+            } else if (focusedAppItemExists) {
+                appButtons[focusedAppItemIndex].activate();
+            } else if (focusedSidebarItemExists) {
+                sidebarButtons[focusedSidebarItemIndex].activate();
+            } else if (focusedCategoryExists) {
+                categoryButtons[focusedCategoryIndex].selectCategory();
             }
             return Clutter.EVENT_STOP;
         case (symbol === Clutter.KEY_Up && noModifiers):
-            leaveCurrentlyEnteredItem();
+            leaveCurrentlyFocusedItem();
             upNavigation();
             return Clutter.EVENT_STOP;
         case (symbol === Clutter.KEY_Down && noModifiers):
-            leaveCurrentlyEnteredItem();
+            leaveCurrentlyFocusedItem();
             downNavigation();
             return Clutter.EVENT_STOP;
         case (symbol === Clutter.KEY_Right && noModifiers):
-            leaveCurrentlyEnteredItem();
+            leaveCurrentlyFocusedItem();
             rightNavigation();
             return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
         case (symbol === Clutter.KEY_Left && noModifiers):
-            leaveCurrentlyEnteredItem();
+            leaveCurrentlyFocusedItem();
             leftNavigation();
             return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
         case (symbol === Clutter.ISO_Left_Tab || symbol === Clutter.Tab) && noModifiers:
-            leaveCurrentlyEnteredItem();
-            if (enteredContextMenuItemExists) {
-                contextMenuChildren[enteredContextMenuItemIndex].handleEnter();//effectively ignore keypress
-            } else if (enteredAppItemExists) {
+            leaveCurrentlyFocusedItem();
+            if (focusedContextMenuItemExists) {
+                contextMenuChildren[focusedContextMenuItemIndex].handleEnter();//effectively ignore keypress
+            } else if (focusedAppItemExists) {
                 sidebarButtons[0].handleEnter();
-            } else if (enteredSidebarItemExists && !this.searchActive) {
+            } else if (focusedSidebarItemExists && !this.searchActive) {
                 categoryButtons[currentlyActiveCategoryIndex].handleEnter();
             } else {
                 appButtons[0].handleEnter();
             }
             return Clutter.EVENT_STOP;
         case (symbol === Clutter.ISO_Left_Tab || symbol === Clutter.Tab) && shiftKey:
-            leaveCurrentlyEnteredItem();
-            if (enteredContextMenuItemExists) {
-                contextMenuChildren[enteredContextMenuItemIndex].handleEnter();//effectively ignore keypress
-            } else if (enteredAppItemExists) {
+            leaveCurrentlyFocusedItem();
+            if (focusedContextMenuItemExists) {
+                contextMenuChildren[focusedContextMenuItemIndex].handleEnter();//effectively ignore keypress
+            } else if (focusedAppItemExists) {
                 categoryButtons[currentlyActiveCategoryIndex].handleEnter();
-            } else if (enteredSidebarItemExists && !this.searchActive) {
+            } else if (focusedSidebarItemExists && !this.searchActive) {
                 appButtons[0].handleEnter();
             } else {
                 sidebarButtons[0].handleEnter();
@@ -876,20 +876,20 @@ class CinnamenuApplet extends TextIconApplet {
             }
             return Clutter.EVENT_STOP;
         case (symbol === Clutter.KEY_Page_Up && noModifiers):
-            leaveCurrentlyEnteredItem();
-            if (enteredAppItemExists) {
+            leaveCurrentlyFocusedItem();
+            if (focusedAppItemExists) {
                 appButtons[0].handleEnter();
-            } else if (enteredSidebarItemExists) {
+            } else if (focusedSidebarItemExists) {
                 sidebarButtons[0].handleEnter();
             } else {
                 categoryButtons[0].handleEnter();
             }
             return Clutter.EVENT_STOP;
         case (symbol === Clutter.KEY_Page_Down && noModifiers):
-            leaveCurrentlyEnteredItem();
-            if (enteredAppItemExists) {
+            leaveCurrentlyFocusedItem();
+            if (focusedAppItemExists) {
                 appButtons[appButtons.length - 1].handleEnter();
-            } else if (enteredSidebarItemExists) {
+            } else if (focusedSidebarItemExists) {
                 sidebarButtons[sidebarButtons.length - 1].handleEnter();
             } else {
                 categoryButtons[categoryButtons.length - 1].handleEnter();
@@ -912,14 +912,10 @@ class CinnamenuApplet extends TextIconApplet {
             this.appsView.populate(this.listPlaces());
             break;
         case 'recents':
-            let maxItems = 10;//show 10 items in list view
+            let maxItems = 8;//show 8 items in list view
             if (this.settings.applicationsViewMode === ApplicationsViewModeGRID) {
                 const columns = this.appsView.getGridValues().columns;
-                if (columns <= 4) {
-                    maxItems = columns * 3;
-                } else {
-                    maxItems = columns * 2;
-                }
+                maxItems = Math.ceil(6 / columns) * columns;
             }
 
             this.appsView.populate_init();
@@ -988,7 +984,7 @@ class CinnamenuApplet extends TextIconApplet {
         //from a previous search can be aborted.
         this.currentSearchId = Math.floor(Math.random() * 100000000);
 
-        this.clearEnteredActors();
+        this.clearFocusedActors();
         if (!this.searchActive) {//set search mode
             this.searchActive = true;
             this.searchView.showAndConnectSecondaryIcon();//show edit-delete icon
@@ -1055,7 +1051,8 @@ class CinnamenuApplet extends TextIconApplet {
             if (!this.calcGIcon) {
                 this.calcGIcon = new Gio.FileIcon({ file: Gio.file_new_for_path(__meta.path + '/../icons/calc.png') });
             }
-            otherResults.push({  isSearchResult: true,
+            otherResults.push({
+                            isSearchResult: true,
                             name: ans.toString(),//('Solution:') + ' ' + ans,
                             description: _('Click to copy'),
                             deleteAfterUse: true,
@@ -1064,6 +1061,35 @@ class CinnamenuApplet extends TextIconApplet {
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, ans.toString());}
                          });
             calculatorResult = pattern_raw + " = " + ans;
+        }
+
+        //---web search option---
+        if (this.settings.webSearchOption != 0) {//0==none
+            const iconName = ['google_icon.png', 'bing_icon.png', 'search.png', 'yahoo_icon.png',
+                            'search.png', 'duckgo_icon.png', 'ask.png', 'ecosia.png', 'search.png',
+                            'startpage.png'][this.settings.webSearchOption - 1];
+            const url = [   'https://google.com/search?q=',
+                            'https://www.bing.com/search?q=',
+                            'https://www.baidu.com/s?wd=',
+                            'https://search.yahoo.com/search?p=',
+                            'https://yandex.com/search/?text=',
+                            'https://duckduckgo.com/?q=',
+                            'https://www.ask.com/web?q=',
+                            'https://www.ecosia.org/search?q=',
+                            'https://search.aol.co.uk/aol/search?q=',
+                            'https://www.startpage.com/search/?q='][this.settings.webSearchOption - 1];
+            const engine = ['Google', 'Bing', 'Baidu', 'Yahoo', 'Yandex', 'DuckDuckGo', 'Ask',
+                            'Ecosia', 'AOL', 'Startpage'][this.settings.webSearchOption - 1];
+
+            const gicon = new Gio.FileIcon({file: Gio.file_new_for_path(__meta.path + '/../icons/' + iconName)});
+
+            otherResults.push({
+                        isSearchResult: true,
+                        name: pattern_raw + ' – '+ engine,
+                        description: '',
+                        deleteAfterUse: true,
+                        icon: new St.Icon({ gicon: gicon, icon_size: this.getAppIconSize()}),
+                        activate: () => Util.spawn(['xdg-open', url + encodeURIComponent(pattern_raw)]) });
         }
 
         //---web bookmarks search-----
@@ -1141,35 +1167,6 @@ class CinnamenuApplet extends TextIconApplet {
                                 otherResults = otherResults.concat(wikiResults);
                                 finish();
                             } });
-        }
-
-        //---web search option---
-        if (this.settings.webSearchOption != 0) {//0==none
-            const iconName = ['google_icon.png', 'bing_icon.png', 'search.png', 'yahoo_icon.png',
-                            'search.png', 'duckgo_icon.png', 'ask.png', 'ecosia.png', 'search.png',
-                            'startpage.png'][this.settings.webSearchOption - 1];
-            const url = [   'https://google.com/search?q=',
-                            'https://www.bing.com/search?q=',
-                            'https://www.baidu.com/s?wd=',
-                            'https://search.yahoo.com/search?p=',
-                            'https://yandex.com/search/?text=',
-                            'https://duckduckgo.com/?q=',
-                            'https://www.ask.com/web?q=',
-                            'https://www.ecosia.org/search?q=',
-                            'https://search.aol.co.uk/aol/search?q=',
-                            'https://www.startpage.com/search/?q='][this.settings.webSearchOption - 1];
-            const engine = ['Google', 'Bing', 'Baidu', 'Yahoo', 'Yandex', 'DuckDuckGo', 'Ask',
-                            'Ecosia', 'AOL', 'Startpage'][this.settings.webSearchOption - 1];
-
-            const gicon = new Gio.FileIcon({file: Gio.file_new_for_path(__meta.path + '/../icons/' + iconName)});
-
-            otherResults.push({
-                        isSearchResult: true,
-                        name: pattern_raw + ' – '+ engine,
-                        description: '',
-                        deleteAfterUse: true,
-                        icon: new St.Icon({ gicon: gicon, icon_size: this.getAppIconSize()}),
-                        activate: () => Util.spawn(['xdg-open', url + encodeURIComponent(pattern_raw)]) });
         }
 
         //---emoji search------
@@ -1388,7 +1385,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         //=============mainBox================
         //set style: 'spacing: 0px' so that extra space is not added to mainBox when contextMenuBox is
-        //added. Only happens with themes that have set a spacing value on this node.
+        //added. Only happens with themes that have set a spacing value on this class.
         this.mainBox = new St.BoxLayout({ style_class: 'menu-applications-outer-box', style: 'spacing: 0px;',
                                         vertical: true, reactive: true,
                                         show_on_set_parent: false });
@@ -1408,7 +1405,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.menu.addMenuItem(section);
 
         //if a blank part of the menu was clicked on, close context menu
-        this.displaySignals.connect(this.mainBox, 'button-release-event',() => this.clearEnteredActors());
+        this.displaySignals.connect(this.mainBox, 'button-release-event',() => this.clearFocusedActors());
 
         //monitor mouse motion to prevent category mis-selection
         const onMouseMotion = (actor, event) => {
