@@ -16,10 +16,10 @@ class CategoryButton {
         this.appThis = appThis;
         this.signals = new SignalManager(null);
         this.disabled = false;
-        //Note: When option "Activate categories on click" is on, this.entered category is the one that
-        //has keyboard focus or mouse hover and is not necessarily the same as the currently selected
-        //category (this.appThis.currentCategory)
-        this.entered = false;
+        //Note: When option "Activate categories on click" is on, then the this.has_focus === true category
+        //is the one that has keyboard or mouse focus and is not necessarily the same as the currently
+        //selected category (this.appThis.currentCategory)
+        this.has_focus = false;
         this.id = category_id;
         this.actor = new St.BoxLayout({ style_class: 'menu-category-button', reactive: true,
                                                                 accessible_role: Atk.Role.MENU_ITEM});
@@ -162,17 +162,17 @@ class CategoryButton {
 
     handleEnter(actor, event) {
         //this method handles enter-event, motion-event and keypress
-        if (this.entered || this.disabled || this.appThis.contextMenu.isOpen ||
+        if (this.has_focus || this.disabled || this.appThis.contextMenu.isOpen ||
                             this.appThis.badAngle && event && !this.appThis.settings.categoryClick) {
             return Clutter.EVENT_PROPAGATE;
         }
         if (event) {//mouse
-            this.appThis.clearEnteredActors();
+            this.appThis.clearFocusedActors();
         } else {//keypress
             this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);
         }
 
-        this.entered = true;
+        this.has_focus = true;
         if (this.id === this.appThis.currentCategory) {//No need to select category as already selected
             return Clutter.EVENT_STOP;
         }
@@ -188,13 +188,13 @@ class CategoryButton {
         if (this.disabled || this.appThis.contextMenu.isOpen) {
             return false;
         }
-        this.entered = false;
-        if ((!event || this.appThis.settings.categoryClick) && this.appThis.currentCategory !== this.id) {
-            if (this.id !== this.appThis.currentCategory) {
-                this.setButtonStyleNormal();
-            } else {
-                this.setButtonStyleSelected();
-            }
+        this.has_focus = false;
+
+        //If this category is the this.appThis.currentCategory then we leave this button with
+        //menu-category-button-selected style even though key or mouse focus is moving elsewhere so
+        //that the current category is always indicated.
+        if (this.appThis.currentCategory !== this.id) {
+            this.setButtonStyleNormal(); //i.e. remove hover style
         }
     }
 
@@ -213,6 +213,9 @@ class CategoryButton {
             return Clutter.EVENT_STOP;
         } else if (button === 3) {
             if (this.actor.has_style_class_name('menu-category-button-hover')) {
+                //Remove focus from this category button before opening it's context menu.
+                //Todo: Ideally this button should retain focus style to indicate the button the
+                //context menu was opened on.
                 this.handleLeave();
             }
             this.openContextMenu(event);
@@ -227,7 +230,7 @@ class CategoryButton {
     disable() {
         this._setButtonStyleGreyed();
         this.disabled = true;
-        this.entered = false;
+        this.has_focus = false;
     }
 
     enable() {
@@ -259,9 +262,8 @@ class CategoriesView {
         this.categoriesBox = new St.BoxLayout({ style_class: 'menu-categories-box', vertical: true });
         this.groupCategoriesWorkspacesWrapper = new St.BoxLayout({/*style: 'max-width: 185px;',*/ vertical: true });
         this.groupCategoriesWorkspacesWrapper.add(this.categoriesBox, { });
-        this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({ style_class: 'vfade menu-categories-scrollbox' });
 
-        //const vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
+        this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({ style_class: 'vfade menu-categories-scrollbox' });
         this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);
         this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
         this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
