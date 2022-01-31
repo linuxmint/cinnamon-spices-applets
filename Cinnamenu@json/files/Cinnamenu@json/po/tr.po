@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu 3.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-07 10:55+0100\n"
+"POT-Creation-Date: 2022-01-26 15:40+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
 "Language-Team: tr\n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0\n"
 
 msgid "Type to search..."
 msgstr "Aramak için yaz..."
@@ -111,14 +111,43 @@ msgstr "Dosyaları bul..."
 msgid "Please wait..."
 msgstr "Lütfen bekleyin..."
 
+#, fuzzy
+#| msgid "All applications"
+msgid "Applications"
+msgstr "Tüm uygulamalar"
+
+msgid "Documents"
+msgstr ""
+
+msgid "Videos"
+msgstr ""
+
+msgid "Images"
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
 msgid "No recent Items"
 msgstr "Son dosya yok"
 
 msgid "Click to copy"
 msgstr "Kopyalamak için tıkla"
 
+msgid "Applications and files"
+msgstr ""
+
+msgid "Other search results"
+msgstr ""
+
 msgid "Trash"
 msgstr "Çöp"
+
+msgid "Error while opening file:"
+msgstr "Dosya açılırken hata:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Çok fazla girdi - sadece ilk 1000 girdi gösteriliyor"
 
 msgid "Favorites"
 msgstr "Favoriler"
@@ -128,9 +157,6 @@ msgstr "Son dosyalar"
 
 msgid "Home folder"
 msgstr "Ev dizini"
-
-msgid "Too many entries - showing first 1000 entries only"
-msgstr "Çok fazla girdi - sadece ilk 1000 girdi gösteriliyor"
 
 msgid "Reset category order"
 msgstr "Kategori sırasını sıfırla"
@@ -168,8 +194,24 @@ msgstr "Çöpe taşı"
 msgid "Error while moving file to trash:"
 msgstr "Dosya çöpe taşınırken hata:"
 
-msgid "Error while opening file:"
-msgstr "Dosya açılırken hata:"
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+
+msgid "The following packages will be removed:"
+msgstr ""
+
+msgid "Packages to be removed"
+msgstr ""
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr ""
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr ""
 
 msgid "Open"
 msgstr "Aç"
@@ -483,36 +525,6 @@ msgstr "Arama sonuçlarında imojileri gösterir"
 msgid "Web search option"
 msgstr "Web arama seçenekleri"
 
-msgid "Google"
-msgstr "Google"
-
-msgid "Bing"
-msgstr "Bing"
-
-msgid "Baidu"
-msgstr "Baidu"
-
-msgid "Yahoo"
-msgstr "Yahoo"
-
-msgid "Yandex"
-msgstr "Yandex"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ask"
-msgstr "Ask"
-
-msgid "Ecosia"
-msgstr "Ecosia"
-
-msgid "AOL"
-msgstr "AOL"
-
-msgid "Startpage"
-msgstr "Startpage"
-
 msgid "Show an internet search option in search results"
 msgstr "Arama sonuçlarında bir internet arama seçeneği gösterir"
 
@@ -545,6 +557,9 @@ msgstr "Wikipedia araması"
 msgid "Show some Wikipedia results"
 msgstr "Bazı Wikipedia sonuçlarını gösterir"
 
+msgid "Wikipedia language"
+msgstr ""
+
 msgid "Use a custom icon size"
 msgstr "Özel simge boyutu kullan"
 
@@ -575,3 +590,4 @@ msgid ""
 msgstr ""
 "Uygulama düğmelerinde bir kutu stili gösterir (Not: bazı temalarda "
 "çalışmayabilir)"
+
