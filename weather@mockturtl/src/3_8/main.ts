@@ -8,21 +8,12 @@
 import { DateTime } from "luxon";
 import { Config, ServiceClassMapping } from "./config";
 import { WeatherLoop } from "./loop";
-import { MetUk } from "./providers/met_uk";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
 import { UI } from "./ui";
-import { AwareDateString, CapitalizeFirstLetter, GenerateLocationText, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
-import { DarkSky } from "./providers/darkSky";
-import { OpenWeatherMap } from "./providers/openWeatherMap";
-import { USWeather } from "./providers/us_weather";
-import { Weatherbit } from "./providers/weatherbit";
-import { MetNorway } from "./providers/met_norway";
-import { HttpLib, HttpError, Method, HTTPParams, HTTPHeaders } from "./lib/httpLib";
+import { AwareDateString, CapitalizeFirstLetter, CompassDirectionText, ExtraFieldToUserUnits, GenerateLocationText, MPStoUserUnits, NotEmpty, PercentToLocale, PressToUserUnits, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
+import { HttpLib, HttpError, Method, HTTPParams, HTTPHeaders, ErrorResponse, Response } from "./lib/httpLib";
 import { Logger } from "./lib/logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
-import { VisualCrossing } from "./providers/visualcrossing";
-import { ClimacellV4 } from "./providers/climacellV4";
-import { DanishMI } from "./providers/danishMI";
 import { CloseStream, OverwriteAndGetIOStream, WriteAsync } from "./lib/io_lib";
 import { NotificationService } from "./lib/notification_service";
 import { SpawnProcess } from "./lib/commandRunner";
@@ -59,6 +50,7 @@ export class WeatherApplet extends TextIconApplet {
 	public encounteredError: boolean = false;
 
 	private online: boolean | null = null;
+	private currentWeatherInfo: WeatherData | null = null;
 
 	public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
 		super(orientation, panelHeight, instanceId);
@@ -184,6 +176,7 @@ export class WeatherApplet extends TextIconApplet {
 
 			Logger.Info("Weather Information refreshed");
 			this.loop.ResetErrorCount();
+			this.currentWeatherInfo = weatherInfo;
 			this.Unlock();
 			return RefreshState.Success;
 		}
@@ -205,13 +198,20 @@ export class WeatherApplet extends TextIconApplet {
 
 		const lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
 		this.SetAppletTooltip(`${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`);
-		this.DisplayWeatherOnLabel(weather.temperature, weather.condition.description);
+		this.DisplayWeatherOnLabel(weather);
 		this.SetAppletIcon(weather.condition.icons, weather.condition.customIcon);
 		return true;
 	}
 
-	private DisplayWeatherOnLabel(temperature: number | null, mainCondition: string) {
-		mainCondition = CapitalizeFirstLetter(mainCondition)
+	public RefreshLabel = () => {
+		if (this.currentWeatherInfo == null)
+			return;
+		this.DisplayWeatherOnLabel(this.currentWeatherInfo);
+	}
+
+	private DisplayWeatherOnLabel(weather: WeatherData) {
+		const temperature = weather.temperature;
+		const mainCondition = CapitalizeFirstLetter(weather.condition.main);
 		// Applet panel label
 		let label = "";
 		// Horizontal panels
@@ -241,9 +241,18 @@ export class WeatherApplet extends TextIconApplet {
 		// Overriding temperature panel label
 		if (NotEmpty(this.config._tempTextOverride)) {
 			label = this.config._tempTextOverride
-				.replace("{t}", TempToUserConfig(temperature, this.config, false) ?? "")
-				.replace("{u}", UnitToUnicode(this.config.TemperatureUnit))
-				.replace("{c}", mainCondition);
+				.replace(/{t}/g, TempToUserConfig(temperature, this.config, false) ?? "")
+				.replace(/{u}/g, UnitToUnicode(this.config.TemperatureUnit))
+				.replace(/{c}/g, mainCondition)
+				.replace(/{c_long}/g, weather.condition.description)
+				.replace(/{dew_point}/g, TempToUserConfig(weather.dewPoint, this.config, false) ?? "")
+				.replace(/{humidity}/g, weather.humidity?.toString() ?? "")
+				.replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, this.config._pressureUnit).toString() : "")
+				.replace(/{pressure_unit}/g, this.config._pressureUnit)
+				.replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, this.config) : "")
+				.replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
+				.replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, this.config.WindSpeedUnit) : "")
+				.replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "");
 		}
 
 		this.SetAppletLabel(label);
@@ -270,7 +279,7 @@ export class WeatherApplet extends TextIconApplet {
 	}
 
 	private GetPanelHeight(): number {
-		return this.panel.height;
+		return this.panel?.height ?? 0;
 	}
 
 	// ---------------------------------------------------------------------------
@@ -290,27 +299,39 @@ export class WeatherApplet extends TextIconApplet {
 	// IO Helpers
 
 	/**
+	 * Loads JSON response from specified URL, returns the whole response not just data
+	 * @param url URL without params
+	 * @param params param object
+	 * @param HandleError should return true if you want this function to handle errors, else false
+	 * @param method default is GET
+	 */
+	public async LoadJsonAsyncWithDetails<T, E = any>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: ErrorResponse<E>) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<T, E>> {
+		const response = await HttpLib.Instance.LoadJsonAsync<T, E>(url, params, headers, method);
+
+		// We have errorData inside
+		if (!response.Success) {
+			// check if caller wants
+			if (!!HandleError && !HandleError(response))
+				return response;
+			else {
+				this.HandleHTTPError(response.ErrorData);
+				return response;
+			}
+		}
+
+		return response;
+	}
+
+	/**
 	 * Loads JSON response from specified URLs
 	 * @param url URL without params
 	 * @param params param object
 	 * @param HandleError should return true if you want this function to handle errors, else false
 	 * @param method default is GET
 	 */
-	public async LoadJsonAsync<T>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<T | null> {
-		const response = await HttpLib.Instance.LoadJsonAsync<T>(url, params, headers, method);
-
-		// We have errorData inside
-		if (!response.Success) {
-			// check if caller wants
-			if (!!HandleError && !HandleError(<HttpError>response.ErrorData))
-				return null;
-			else {
-				this.HandleHTTPError(<HttpError>response.ErrorData);
-				return null;
-			}
-		}
-
-		return response.Data;
+	public async LoadJsonAsync<T, E = any>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: ErrorResponse<E>) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<T | null> {
+		const response = await this.LoadJsonAsyncWithDetails<T, E>(url, params, HandleError, headers, method);
+		return (response.Success) ? response.Data : null;
 	}
 
 	/**
@@ -326,10 +347,10 @@ export class WeatherApplet extends TextIconApplet {
 		// We have errorData inside
 		if (!response.Success) {
 			// check if caller wants
-			if (!!HandleError && !HandleError(<HttpError>response.ErrorData))
+			if (!!HandleError && !HandleError(response.ErrorData))
 				return null;
 			else {
-				this.HandleHTTPError(<HttpError>response.ErrorData);
+				this.HandleHTTPError(response.ErrorData);
 				return null;
 			}
 		}
@@ -435,12 +456,13 @@ The contents of the file saved from the applet help page goes here
 		this.loop.Stop();
 	}
 
-	public override on_applet_clicked(event: any): void {
+	public override on_applet_clicked(event: any): boolean {
 		this.ui.Toggle();
+		return false;
 	}
 
 	public override on_applet_middle_clicked(event: any) {
-
+		return false;
 	}
 
 	public override on_panel_height_changed() {

@@ -26,11 +26,8 @@ export class HttpLib {
 	/**
 	 * Handles obtaining JSON over http. 
 	 */
-	public async LoadJsonAsync<T>(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<T>> {
+	public async LoadJsonAsync<T, E = any>(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<T, E>> {
 		const response = await this.LoadAsync(url, params, headers, method);
-
-		if (!response.Success)
-			return response;
 
 		try {
 			const payload = JSON.parse(response.Data);
@@ -39,15 +36,19 @@ export class HttpLib {
 		catch (e) { // Payload is not JSON
 			if (e instanceof Error)
 				Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
-			response.Success = false;
-			response.ErrorData = {
-				code: -1,
-				message: "bad api response - non json",
-				reason_phrase: "",
+			// Only care about JSON parse errors if the request was successful before
+			if (response.Success) {
+				(<GenericResponse>response).Success = false;
+				(<GenericResponse>response).ErrorData = {
+					code: -1,
+					message: "bad api response - non json",
+					reason_phrase: "",
+				}
 			}
+			
 		}
 		finally {
-			return response as Response<T>;
+			return response as Response<T, E>;
 		}
 	}
 
@@ -102,6 +103,11 @@ export class HttpLib {
 			}
 		}
 
+		const responseHeaders: Record<string, string> = {};
+		message?.response_headers?.foreach((name, val) => {
+			responseHeaders[name] = val;
+		})
+
 		if ((message?.status_code ?? -1) > 200 && (message?.status_code ?? -1) < 300) {
 			Logger.Info("Warning: API returned non-OK status code '" + message?.status_code + "'");
 		}
@@ -109,10 +115,12 @@ export class HttpLib {
 		Logger.Verbose("API full response: " + message?.response_body?.data?.toString());
 		if (error != null)
 			Logger.Error("Error calling URL: " + error.reason_phrase + ", " + error?.response?.response_body?.data);
-		return {
+		return <GenericResponse>{
 			Success: (error == null),
 			Data: message?.response_body?.data,
-			ErrorData: error
+			ResponseHeaders: responseHeaders,
+			ErrorData: error,
+			Response: message
 		}
 	}
 
@@ -159,14 +167,32 @@ export class HttpLib {
 export type Method = "GET" | "POST" | "PUT" | "DELETE";
 export type NetworkError = "";
 
-export interface Response<T> extends GenericResponse {
-	Data: T,
+export type Response<T, E = any> = SuccessResponse<T> | ErrorResponse<E>;
+
+export interface SuccessResponse<T> extends GenericSuccessResponse {
+	Data: T;
 }
 
-interface GenericResponse {
-	Success: boolean;
+export interface ErrorResponse<E = any> extends GenericErrorResponse {
+	Data: E;
+}
+
+type GenericResponse = GenericErrorResponse | GenericSuccessResponse;
+
+interface GenericErrorResponse extends BaseGenericResponse {
+	Success: false;
+	ErrorData: HttpError;
+}
+
+interface GenericSuccessResponse extends BaseGenericResponse {
+	Success: true;
+	ErrorData: undefined;
+}
+
+interface BaseGenericResponse {
 	Data: any | undefined;
-	ErrorData: HttpError | undefined;
+	ResponseHeaders: Record<string, string>;
+	Response: imports.gi.Soup.Message | null;
 }
 
 export interface HTTPParams {
@@ -181,6 +207,5 @@ export interface HttpError {
 	code: number;
 	message: ErrorDetail;
 	reason_phrase: string;
-	data?: any;
 	response?: imports.gi.Soup.Message | undefined
 }

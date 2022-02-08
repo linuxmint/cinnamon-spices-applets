@@ -46,7 +46,12 @@ export class UIBar {
 	}
 
 	public Display(weather: WeatherData, provider: WeatherProvider, config: Config, shouldShowToggle: boolean): boolean {
-		this.providerCreditButton.actor.label = _("Powered by") + " " + provider.prettyName;
+		let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
+		if (provider.remainingCalls != null) {
+			creditLabel+= ` (${provider.remainingCalls})`;
+		}
+
+		this.providerCreditButton.actor.label = creditLabel;
 		this.providerCreditButton.url = provider.website;
 		const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
 		this._timestamp.text = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });

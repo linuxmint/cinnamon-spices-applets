@@ -18,6 +18,7 @@ import { ClimacellV4 } from "./providers/climacellV4";
 import { USWeather } from "./providers/us_weather";
 import { VisualCrossing } from "./providers/visualcrossing";
 import { DanishMI } from "./providers/danishMI";
+import { AccuWeather } from "./providers/accuWeather";
 
 const { get_home_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -47,7 +48,8 @@ export type Services =
 	"Met Office UK" |
 	"US Weather" |
 	"Visual Crossing" |
-	"DanishMI";
+	"DanishMI" |
+	"AccuWeather";
 
 export const ServiceClassMapping: ServiceClassMappingType = {
 	"DarkSky": (app) => new DarkSky(app),
@@ -58,7 +60,8 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	"Met Office UK": (app) => new MetUk(app),
 	"US Weather": (app) => new USWeather(app),
 	"Visual Crossing": (app) => new VisualCrossing(app),
-	"DanishMI": (app) => new DanishMI(app)
+	"DanishMI": (app) => new DanishMI(app),
+	"AccuWeather": (app) => new AccuWeather(app)
 }
 
 /**
@@ -75,7 +78,7 @@ const Keys = {
 	TRANSLATE_CONDITION: "translateCondition",
 	VERTICAL_ORIENTATION: "verticalOrientation",
 	SHOW_TEXT_IN_PANEL: "showTextInPanel",
-	TEMP_TEXT_OVERRIDE: "tempTextOverride",
+	//TEMP_TEXT_OVERRIDE: "tempTextOverride",
 	SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
 	SHOW_SUNRISE: "showSunrise",
 	SHOW_24HOURS: "show24Hours",
@@ -165,6 +168,7 @@ export class Config {
 	private settings: imports.ui.settings.AppletSettings;
 	private app: WeatherApplet;
 	private countryCode: string | null;
+	public textColorStyle: string | null = null;
 
 	private timezone: string | undefined = undefined;
 
@@ -218,6 +222,9 @@ export class Config {
 		// Settings what need special care
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
+
+		this.settings.bind("tempTextOverride", "_" + "tempTextOverride",
+			this.app.RefreshLabel)
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);

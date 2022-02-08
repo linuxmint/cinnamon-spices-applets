@@ -13,6 +13,7 @@ export class MetNorway extends BaseProvider {
 	public readonly website = "https://www.met.no/en";
 	public readonly maxHourlyForecastSupport = 48;
 	public readonly needsApiKey = false;
+	public readonly remainingCalls: number | null = null;
 
 	private baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?"
 

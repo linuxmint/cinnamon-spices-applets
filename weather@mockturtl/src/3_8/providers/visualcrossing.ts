@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { Services } from "../config";
-import { HttpError, HTTPParams } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HTTPParams } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
 import { CelsiusToKelvin, IsLangSupported, _ } from "../utils";
@@ -14,6 +14,7 @@ export class VisualCrossing extends BaseProvider {
 	readonly maxHourlyForecastSupport: number = 336;
 	readonly website: string = "https://weather.visualcrossing.com/";
 	readonly needsApiKey: boolean = true;
+	public readonly remainingCalls: number | null = null;
 
 	private url: string = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
 	private params: HTTPParams = {
@@ -308,8 +309,8 @@ export class VisualCrossing extends BaseProvider {
 		return result;
 	}
 
-	private HandleHttpError(error: HttpError): boolean {
-		if (error?.code == 401) {
+	private HandleHttpError(error: ErrorResponse): boolean {
+		if (error?.ErrorData.code == 401) {
 			this.app.ShowError({
 				type: "hard",
 				userError: true,

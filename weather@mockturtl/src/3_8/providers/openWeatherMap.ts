@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { DateTime } from "luxon";
-import { HttpError, HTTPParams } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HTTPParams } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "../types";
@@ -27,6 +27,7 @@ export class OpenWeatherMap extends BaseProvider {
 	public readonly website = "https://openweathermap.org/";
 	public readonly maxHourlyForecastSupport = 48;
 	public readonly needsApiKey = false;
+	public readonly remainingCalls: number | null = null;
 
 	private supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
 		"fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
@@ -69,6 +70,10 @@ export class OpenWeatherMap extends BaseProvider {
 		json.id = cachedID ?? idPayload?.id;
 		return this.ParseWeather(json, loc);
 	};
+
+	public RanOutOfQuota(loc: LocationData): boolean | null {
+		return null;
+	}
 
 	private ParseWeather(json: OWMPayload, loc: LocationData): WeatherData | null {
 		try {
@@ -274,8 +279,8 @@ export class OpenWeatherMap extends BaseProvider {
 		return (!!json?.cod);
 	}
 
-	public HandleError = (error: HttpError): boolean => {
-		if (error.code == 404) {
+	public HandleError = (error: ErrorResponse): boolean => {
+		if (error.ErrorData.code == 404) {
 			this.app.ShowError({
 				detail: "location not found",
 				message: _("Location not found, make sure location is available or it is in the correct format"),

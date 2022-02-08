@@ -7,12 +7,13 @@ import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 
 export class DanishMI extends BaseProvider {
-	needsApiKey: boolean = false;
-	prettyName: string = _("DMI Denmark");
-	name: Services = "DanishMI";
-	maxForecastSupport: number = 10;
-	maxHourlyForecastSupport: number = 48;
-	website: string = "https://www.dmi.dk/";
+	public readonly needsApiKey: boolean = false;
+	public readonly prettyName: string = _("DMI Denmark");
+	public readonly name: Services = "DanishMI";
+	public readonly maxForecastSupport: number = 10;
+	public readonly maxHourlyForecastSupport: number = 48;
+	public readonly website: string = "https://www.dmi.dk/";
+	public readonly remainingCalls: number | null = null;
 
 	private url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
 	private forecastParams: HTTPParams = {

@@ -104,10 +104,10 @@ export class UI {
 	/** Fully rebuilds UI */
 	public Rebuild(config: Config): void {
 		this.ShowLoadingUi();
-		const textColorStyle = this.GetTextColorStyle();
-		this.CurrentWeather.Rebuild(config, textColorStyle);
-		this.HourlyWeather.Rebuild(config, textColorStyle);
-		this.FutureWeather.Rebuild(config, textColorStyle);
+		this.App.config.textColorStyle = this.GetTextColorStyle();
+		this.CurrentWeather.Rebuild(config, this.App.config.textColorStyle);
+		this.HourlyWeather.Rebuild(config, this.App.config.textColorStyle);
+		this.FutureWeather.Rebuild(config, this.App.config.textColorStyle);
 		this.Bar.Rebuild(config);
 	}
 
