@@ -24,7 +24,7 @@ class SidebarButton {
                                         reactive: true,
                                         accessible_role: Atk.Role.MENU_ITEM });
         //this.actor.set_style_class_name('menu-favorites-button');
-        this.entered = false;
+        this.has_focus = false;
         if (icon) {
             this.icon = icon;
             this.actor.add_actor(this.icon);
@@ -69,7 +69,7 @@ class SidebarButton {
     _handleButtonRelease(actor, e) {
         if (this.appThis.contextMenu.isOpen) {
             this.appThis.contextMenu.close();
-            this.appThis.clearEnteredActors();
+            this.appThis.clearFocusedActors();
             this.handleEnter();
             return Clutter.EVENT_STOP;
         }
@@ -116,12 +116,12 @@ class SidebarButton {
         }
 
         if (event) {//mouse event
-            this.appThis.clearEnteredActors();
+            this.appThis.clearFocusedActors();
         } else {//key nav
             this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);
         }
 
-        this.entered = true;
+        this.has_focus = true;
         this.actor.add_style_pseudo_class('hover');
 
         //show tooltip
@@ -141,7 +141,7 @@ class SidebarButton {
         if (this.appThis.contextMenu.isOpen) {
             return true;
         }
-        this.entered = false;
+        this.has_focus = false;
         this.actor.remove_style_pseudo_class('hover');
         hideTooltipIfVisible();
         return true;
@@ -269,8 +269,8 @@ class Sidebar {
         return this.items;
     }
 
-    clearSidebarEnteredActors() {
-        const foundItem = this.items.findIndex(button => button.entered);
+    clearSidebarFocusedActors() {
+        const foundItem = this.items.findIndex(button => button.has_focus);
         if (foundItem > -1) {
             this.items[foundItem].handleLeave();
         }
