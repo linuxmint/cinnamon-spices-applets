@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 21:08+0000\n"
-"PO-Revision-Date: 2021-03-25 21:25+0000\n"
+"POT-Creation-Date: 2022-01-26 15:40+0000\n"
+"PO-Revision-Date: 2022-01-26 18:06+0000\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Type to search..."
@@ -86,15 +86,6 @@ msgstr "Quitter"
 msgid "Shutdown the computer"
 msgstr "Éteindre l'ordinateur"
 
-msgid "Home"
-msgstr "Dossier personnel"
-
-msgid "Computer"
-msgstr "Ordinateur"
-
-msgid "Browse network"
-msgstr "Parcourir le réseau"
-
 msgid "Run with NVIDIA GPU"
 msgstr "Démarrer avec le GPU NVIDIA"
 
@@ -113,23 +104,58 @@ msgstr "Ajouter aux Favoris"
 msgid "Uninstall"
 msgstr "Désinstaller"
 
+msgid "Home"
+msgstr "Dossier personnel"
+
+msgid "Computer"
+msgstr "Ordinateur"
+
+msgid "Browse network"
+msgstr "Parcourir le réseau"
+
 msgid "Find files..."
 msgstr "Rechercher des fichiers..."
 
 msgid "Please wait..."
 msgstr "Veuillez patienter..."
 
+#, fuzzy
+#| msgid "All applications"
+msgid "Applications"
+msgstr "Toutes les applications"
+
+msgid "Documents"
+msgstr ""
+
+msgid "Videos"
+msgstr ""
+
+msgid "Images"
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
 msgid "No recent Items"
 msgstr "Aucun document récent"
-
-msgid "Solution:"
-msgstr "Résultat :"
 
 msgid "Click to copy"
 msgstr "Cliquer pour copier"
 
-msgid "Search web for"
-msgstr "Rechercher sur le Web"
+msgid "Applications and files"
+msgstr ""
+
+msgid "Other search results"
+msgstr ""
+
+msgid "Trash"
+msgstr ""
+
+msgid "Error while opening file:"
+msgstr ""
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Trop d'entrées - affiche uniquement les 1000 premières entrées"
 
 msgid "Favorites"
 msgstr "Favoris"
@@ -140,11 +166,23 @@ msgstr "Récents"
 msgid "Home folder"
 msgstr ""
 
-msgid "Too many entries - showing first 1000 entries only"
-msgstr "Trop d'entrées - affiche uniquement les 1000 premières entrées"
-
 msgid "Reset category order"
 msgstr "Restaurer l'ordre initial des catégories"
+
+msgid "light skin tone"
+msgstr ""
+
+msgid "medium-light skin tone"
+msgstr ""
+
+msgid "medium skin tone"
+msgstr ""
+
+msgid "medium-dark skin tone"
+msgstr ""
+
+msgid "dark skin tone"
+msgstr ""
 
 msgid "This file is no longer available"
 msgstr "Ce fichier n'est plus disponible"
@@ -164,7 +202,23 @@ msgstr "Mettre à la corbeille"
 msgid "Error while moving file to trash:"
 msgstr ""
 
-msgid "Error while opening file:"
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+
+msgid "The following packages will be removed:"
+msgstr ""
+
+msgid "Packages to be removed"
+msgstr ""
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr ""
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
 msgstr ""
 
 msgid "Open"
@@ -222,12 +276,9 @@ msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
 msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
 msgstr ""
-"Un menu flexible offrant des options de formatage, des signets Web, une "
-"recherche parmi vos fichiers et applications, et un support de moteurs de "
-"recherche sur le web."
 
 msgid "Behavior"
 msgstr "Comportement"
@@ -277,16 +328,19 @@ msgstr "Texte affiché sur le tableau de bord"
 msgid "Text to show beside the panel icon"
 msgstr "Texte à afficher à côté de l'icône du panneau"
 
-msgid "pixels"
-msgstr "pixels"
-
-msgid "Category icon size"
+#, fuzzy
+#| msgid "Category icon size"
+msgid "Category icon size (pixels)"
 msgstr "Taille des icônes des catégories du menu"
 
-msgid "Applications list icon size"
+#, fuzzy
+#| msgid "Applications list icon size"
+msgid "Applications list icon size (pixels)"
 msgstr "Taille des icônes pour la vue en liste"
 
-msgid "Applications grid icon size"
+#, fuzzy
+#| msgid "Applications grid icon size"
+msgid "Applications grid icon size (pixels)"
 msgstr "Taille des icônes pour la vue en grille"
 
 msgid "Keyboard shortcut to open and close the menu"
@@ -388,7 +442,9 @@ msgstr "Délai avant l'affichage de l'infobulle"
 msgid "Use a custom menu height"
 msgstr "Utiliser une hauteur de menu personnalisée"
 
-msgid "Custom menu height"
+#, fuzzy
+#| msgid "Custom menu height"
+msgid "Custom menu height (pixels)"
 msgstr "Hauteur de menu personnalisée"
 
 msgid "Applications view mode"
@@ -414,8 +470,8 @@ msgstr "Aucun"
 msgid "Choose where to show application descriptions"
 msgstr "Vous permet de choisir l'emplacement des descriptions des applications"
 
-msgid "Session buttons location"
-msgstr "Emplacement des boutons de session"
+msgid "Sidebar location"
+msgstr ""
 
 msgid "Top"
 msgstr "Haut"
@@ -429,23 +485,29 @@ msgstr "Gauche"
 msgid "Right"
 msgstr "Droite"
 
-msgid "Choose where to show the session buttons (quit, logout, etc.)"
+msgid "Choose where to show the sidebar"
 msgstr ""
-"Vous permet de choisir où, dans le menu, seront affichés les boutons : "
-"Éteindre l'ordinateur, Fermer la session, Verrouiller l'écran"
 
 msgid ""
 "\n"
 "Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 
-msgid "Add favorites to session buttons"
-msgstr "Accoler vos applis favorites aux boutons de session"
+msgid "Show favorites on sidebar"
+msgstr ""
 
-msgid "Show your favorite app icons next to the session buttons"
+#, fuzzy
+#| msgid "Show your favorite app icons next to the session buttons"
+msgid "Show your favorite app and file icons on the sidebar"
 msgstr ""
 "Affiche les icônes de vos applications favorites à côté des boutons de "
 "session"
+
+msgid "Show recent items"
+msgstr ""
+
+msgid "Show recent items category in the menu"
+msgstr ""
 
 msgid "Show favorite apps category"
 msgstr ""
@@ -465,7 +527,15 @@ msgstr "Dernière catégorie utilisée"
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Active le défilement automatique dans la liste des applications"
 
-msgid "Enable emoji search"
+msgid "Show hidden files"
+msgstr "Montrer les fichiers cachés"
+
+msgid "Show hidden files in folder view"
+msgstr ""
+
+#, fuzzy
+#| msgid "Enable emoji search"
+msgid "Emoji search"
 msgstr "Activer la recherche d'emojis"
 
 msgid "Show emojis in search results"
@@ -474,33 +544,37 @@ msgstr ""
 msgid "Web search option"
 msgstr "Option de recherche sur le Web"
 
-msgid "Google"
-msgstr ""
-
-msgid "Bing"
-msgstr ""
-
-msgid "Yahoo"
-msgstr ""
-
-msgid "DuckDuckGo"
-msgstr ""
-
 msgid "Show an internet search option in search results"
 msgstr ""
 
 msgid "Search home folder"
 msgstr "Rechercher dans le dossier de départ"
 
-msgid "When searching, also search home folder for files"
+#, fuzzy
+#| msgid "When searching, also search home folder for files"
+msgid "When searching, also search my home folder for files"
 msgstr ""
 "Lors de la recherche, recherchez également les fichiers dans le dossier de "
 "départ"
 
-msgid "Show hidden files"
-msgstr "Montrer les fichiers cachés"
+msgid "Web bookmarks search"
+msgstr ""
 
-msgid "Show hidden files in folder view"
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+
+msgid "Wikipedia search"
+msgstr ""
+
+msgid "Show some Wikipedia results"
+msgstr ""
+
+msgid "Wikipedia language"
 msgstr ""
 
 msgid "Use a custom icon size"
@@ -509,16 +583,32 @@ msgstr "Utiliser une taille d'icône personnalisée"
 msgid "Use a custom size for the panel icon"
 msgstr "Utilisez une taille personnalisée pour l'icône du panneau"
 
-msgid "Panel icon size"
+#, fuzzy
+#| msgid "Panel icon size"
+msgid "Panel icon size (pixels)"
 msgstr "Taille de l'icône du panneau"
 
 msgid "Choose a custom size for the panel icon"
 msgstr ""
 
-msgid "Session buttons icon size"
-msgstr "Taille des icônes des boutons de session"
+msgid "Sidebar icon size (pixels)"
+msgstr ""
 
-msgid "Use session buttons box style"
+#, fuzzy
+#| msgid "Use session buttons box style"
+msgid "Use sidebar box style"
 msgstr "Afficher un cadre autour des boutons de session"
 
+#, fuzzy
+#| msgid "Use session buttons box style"
+msgid "Use a sidebar box style"
+msgstr "Afficher un cadre autour des boutons de session"
+
+msgid "Use tile style"
+msgstr ""
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
 

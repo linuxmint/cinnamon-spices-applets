@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { HttpError } from "../lib/httpLib";
+import { ErrorResponse, HttpError } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime } from "../types";
@@ -27,6 +27,14 @@ export class DarkSky extends BaseProvider {
 	public readonly website = "https://darksky.net/poweredby/";
 	public readonly maxHourlyForecastSupport = 168;
 	public readonly needsApiKey = true;
+
+	private remainingQuota: number | null = null;
+	public get remainingCalls(): number | null {
+		// Disable this for now, this feature is only really useful for AccuWeather
+		// TODO: when a better place is found for this value add this back 
+		return null;
+		//return this.remainingQuota;
+	};
 
 	private descriptionLineLength = 25;
 	private supportedLanguages = [
@@ -64,16 +72,12 @@ export class DarkSky extends BaseProvider {
 		const query = this.ConstructQuery(loc);
 		if (query == "" && query == null) return null;
 
-		const json = await this.app.LoadJsonAsync<DarkSkyPayload>(query, {}, Lang.bind(this, this.HandleError));
-		if (!json) return null;
-
-		if (!(json as any).code) {                   // No code, Request Success
-			return this.ParseWeather(json);
-		}
-		else {
-			this.HandleResponseErrors(json);
+		const response = await this.app.LoadJsonAsyncWithDetails<DarkSkyPayload>(query, {}, this.HandleError);
+		if (!response.Success)
 			return null;
-		}
+
+		this.remainingQuota = Math.max(1000 - parseInt(response.ResponseHeaders["X-Forecast-API-Calls"]), 0);
+		return this.ParseWeather(response.Data);
 	};
 
 
@@ -156,7 +160,7 @@ export class DarkSky extends BaseProvider {
 				};
 
 				// never null here
-				(<HourlyForecastData[]>result.hourlyForecasts).push(forecast);
+				result.hourlyForecasts!.push(forecast);
 			}
 			return result;
 		}
@@ -194,8 +198,8 @@ export class DarkSky extends BaseProvider {
 	 * @param message Soup Message object
 	 * @returns null if custom error checking does not find anything
 	 */
-	private HandleError(message: HttpError): boolean {
-		if (message.code == 403) { // DarkSky returns auth error on the http level when key is wrong
+	private HandleError = (message: ErrorResponse): boolean => {
+		if (message.ErrorData.code == 403) { // DarkSky returns auth error on the http level when key is wrong
 			this.app.ShowError({
 				type: "hard",
 				userError: true,
@@ -205,7 +209,7 @@ export class DarkSky extends BaseProvider {
 			});
 			return false;
 		}
-		else if (message.code == 401) { // DarkSky returns auth error on the http level when key is wrong
+		else if (message.ErrorData.code == 401) { // DarkSky returns auth error on the http level when key is wrong
 			this.app.ShowError({
 				type: "hard",
 				userError: true,
@@ -356,7 +360,7 @@ export class DarkSky extends BaseProvider {
 		}
 	};
 
-	private ToKelvin(temp: number): number | null {
+	private ToKelvin(temp: number): number {
 		if (this.unit == 'us') {
 			return FahrenheitToKelvin(temp);
 		}
@@ -366,7 +370,7 @@ export class DarkSky extends BaseProvider {
 
 	};
 
-	private ToMPS(speed: number): number | null {
+	private ToMPS(speed: number): number {
 		if (this.unit == 'si') {
 			return speed;
 		}

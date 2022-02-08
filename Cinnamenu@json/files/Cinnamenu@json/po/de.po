@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-22 07:17+0100\n"
-"PO-Revision-Date: 2021-08-25 20:45+0200\n"
+"POT-Creation-Date: 2022-01-26 15:40+0000\n"
+"PO-Revision-Date: 2022-01-29 21:31+0100\n"
 "Last-Translator: erwn16 <elmar_wein@web.de>\n"
 "Language-Team: de\n"
 "Language: de\n"
@@ -116,14 +116,41 @@ msgstr "Dateien finden …"
 msgid "Please wait..."
 msgstr "Bitte warten ..."
 
+msgid "Applications"
+msgstr "Apps"
+
+msgid "Documents"
+msgstr "Dokumente"
+
+msgid "Videos"
+msgstr "Videos"
+
+msgid "Images"
+msgstr "Bilder"
+
+msgid "Music"
+msgstr "Musik"
+
 msgid "No recent Items"
 msgstr "Keine kürzlich verwendeten Dateien oder Apps"
 
 msgid "Click to copy"
 msgstr "Linksklick zum Kopieren"
 
+msgid "Applications and files"
+msgstr "Apps und Dateien"
+
+msgid "Other search results"
+msgstr "Andere Suchergebnisse"
+
 msgid "Trash"
 msgstr "Papierkorb"
+
+msgid "Error while opening file:"
+msgstr "Fehler beim Öffnen der Datei:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Zu viele Ergebnisse - nur die ersten 1.000 Einträge werden angezeigt"
 
 msgid "Favorites"
 msgstr "Favoriten"
@@ -133,9 +160,6 @@ msgstr "Kürzlich"
 
 msgid "Home folder"
 msgstr "Persönlicher Ordner"
-
-msgid "Too many entries - showing first 1000 entries only"
-msgstr "Zu viele Ergebnisse - nur die ersten 1.000 Einträge werden angezeigt"
 
 msgid "Reset category order"
 msgstr "Kategorie-Reihenfolge zurücksetzen"
@@ -173,8 +197,25 @@ msgstr "In den Papierkorb verschieben"
 msgid "Error while moving file to trash:"
 msgstr "Fehler beim Verschieben der Datei in den Papierkorb:"
 
-msgid "Error while opening file:"
-msgstr "Fehler beim Öffnen der Datei:"
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Dieser Menüeintrag ist keinem Paket zugeordnet. Möchten Sie ihn entfernen?"
+
+msgid "The following packages will be removed:"
+msgstr "Folgende Pakete werden entfernt:"
+
+msgid "Packages to be removed"
+msgstr "Zu entfernende Pakete"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Kann Paket %s wegen Beziehungen zu anderen Paketen nicht entfernen."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Zwischen Paket %s und folgenden Paketen bestehen Abhängigkeiten:"
 
 msgid "Open"
 msgstr "Öffnen"
@@ -352,7 +393,7 @@ msgid "Example Search Providers"
 msgstr "Beispiel zur Einbindung eines Suchmaschinenanbieters"
 
 msgid "Open menu on category:"
-msgstr "Menü öffnen mit Kategorie"
+msgstr "Menü öffnen mit Kategorie "
 
 msgid "List"
 msgstr "Liste"
@@ -557,45 +598,3 @@ msgid ""
 msgstr ""
 "App-Symbole in Kacheln anzeigen (Hinweis: Kann bei manchen Themen nicht "
 "funktionieren)"
-
-#~ msgid "Google"
-#~ msgstr "Google"
-
-#~ msgid "Bing"
-#~ msgstr "Bing"
-
-#~ msgid "Baidu"
-#~ msgstr "Baidu"
-
-#~ msgid "Yahoo"
-#~ msgstr "Yahoo"
-
-#~ msgid "Yandex"
-#~ msgstr "Yandex"
-
-#~ msgid "DuckDuckGo"
-#~ msgstr "DuckDuckGo"
-
-#~ msgid "Ask"
-#~ msgstr "\"Ask\""
-
-#~ msgid "Ecosia"
-#~ msgstr "Ecosia"
-
-#~ msgid "AOL"
-#~ msgstr "AOL"
-
-#~ msgid "Startpage"
-#~ msgstr "Startpage"
-
-#~ msgid "pixels"
-#~ msgstr "Pixel"
-
-#~ msgid "Session buttons icon size"
-#~ msgstr "Symbolgröße für die Sitzungsschaltflächen"
-
-#~ msgid "Use session buttons box style"
-#~ msgstr "Sitzungsschaltflächen in einen viereckigen Bereich einbetten"
-
-#~ msgid "Sidebar icon size"
-#~ msgstr "Größe der Icons in der Seitenleiste einstellen"

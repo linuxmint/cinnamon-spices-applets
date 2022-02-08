@@ -8645,12 +8645,25 @@ function LocalizedColon(locale) {
         return " :";
     return ":";
 }
-function PercentToLocale(humidity, locale) {
-    return (humidity / 100).toLocaleString(locale !== null && locale !== void 0 ? locale : undefined, { style: "percent" });
+function PercentToLocale(humidity, locale, withUnit = true) {
+    if (withUnit)
+        return (humidity / 100).toLocaleString(locale !== null && locale !== void 0 ? locale : undefined, { style: "percent" });
+    else
+        return Math.round(humidity).toString();
 }
 const WEATHER_CONV_MPH_IN_MPS = 2.23693629;
 const WEATHER_CONV_KPH_IN_MPS = 3.6;
 const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449;
+function ExtraFieldToUserUnits(extra_field, config, withUnit = false) {
+    switch (extra_field.type) {
+        case "percent":
+            return PercentToLocale(extra_field.value, config.currentLocale, withUnit);
+        case "temperature":
+            return TempToUserConfig(extra_field.value, config, withUnit);
+        default:
+            return _(extra_field.value);
+    }
+}
 function MPStoUserUnits(mps, units) {
     switch (units) {
         case "mph":
@@ -8846,8 +8859,6 @@ function CompassDirection(deg) {
     return directions[Math.round(deg / 45) % directions.length];
 }
 function CompassDirectionText(deg) {
-    if (!deg)
-        return null;
     const directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
     return directions[Math.round(deg / 45) % directions.length];
 }
@@ -9598,6 +9609,7 @@ class MetUk extends BaseProvider {
         this.website = "https://www.metoffice.gov.uk/";
         this.maxHourlyForecastSupport = 36;
         this.needsApiKey = false;
+        this.remainingCalls = null;
         this.baseUrl = "http://datapoint.metoffice.gov.uk/public/data/val/";
         this.forecastPrefix = "wxfcs/all/json/";
         this.threeHourlyUrl = "?res=3hourly";
@@ -10233,6 +10245,7 @@ class DarkSky extends BaseProvider {
         this.website = "https://darksky.net/poweredby/";
         this.maxHourlyForecastSupport = 168;
         this.needsApiKey = true;
+        this.remainingQuota = null;
         this.descriptionLineLength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
@@ -10243,7 +10256,34 @@ class DarkSky extends BaseProvider {
         this.query = "https://api.darksky.net/forecast/";
         this.DarkSkyFilterWords = [_("and"), _("until"), _("in"), _("Possible")];
         this.unit = "si";
+        this.HandleError = (message) => {
+            if (message.ErrorData.code == 403) {
+                this.app.ShowError({
+                    type: "hard",
+                    userError: true,
+                    detail: "bad key",
+                    service: "darksky",
+                    message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+                });
+                return false;
+            }
+            else if (message.ErrorData.code == 401) {
+                this.app.ShowError({
+                    type: "hard",
+                    userError: true,
+                    detail: "no key",
+                    service: "darksky",
+                    message: _("Please Make sure you\nentered the API key that you have from DarkSky")
+                });
+                return false;
+            }
+            return true;
+        };
     }
+    get remainingCalls() {
+        return null;
+    }
+    ;
     async GetWeather(loc) {
         const now = new Date(Date.now());
         if (now.getUTCFullYear() > 2022) {
@@ -10257,16 +10297,11 @@ class DarkSky extends BaseProvider {
         const query = this.ConstructQuery(loc);
         if (query == "" && query == null)
             return null;
-        const json = await this.app.LoadJsonAsync(query, {}, Lang.bind(this, this.HandleError));
-        if (!json)
+        const response = await this.app.LoadJsonAsyncWithDetails(query, {}, this.HandleError);
+        if (!response.Success)
             return null;
-        if (!json.code) {
-            return this.ParseWeather(json);
-        }
-        else {
-            this.HandleResponseErrors(json);
-            return null;
-        }
+        this.remainingQuota = Math.max(1000 - parseInt(response.ResponseHeaders["X-Forecast-API-Calls"]), 0);
+        return this.ParseWeather(response.Data);
     }
     ;
     ParseWeather(json) {
@@ -10367,29 +10402,6 @@ class DarkSky extends BaseProvider {
             query = query + "&lang=" + locale;
         }
         return query;
-    }
-    HandleError(message) {
-        if (message.code == 403) {
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                detail: "bad key",
-                service: "darksky",
-                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
-            });
-            return false;
-        }
-        else if (message.code == 401) {
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                detail: "no key",
-                service: "darksky",
-                message: _("Please Make sure you\nentered the API key that you have from DarkSky")
-            });
-            return false;
-        }
-        return true;
     }
     HandleResponseErrors(json) {
         const code = json.code;
@@ -10560,6 +10572,7 @@ class OpenWeatherMap extends BaseProvider {
         this.website = "https://openweathermap.org/";
         this.maxHourlyForecastSupport = 48;
         this.needsApiKey = false;
+        this.remainingCalls = null;
         this.supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
             "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
@@ -10567,7 +10580,7 @@ class OpenWeatherMap extends BaseProvider {
         this.base_url = "https://api.openweathermap.org/data/2.5/onecall";
         this.id_irl = "https://api.openweathermap.org/data/2.5/weather";
         this.HandleError = (error) => {
-            if (error.code == 404) {
+            if (error.ErrorData.code == 404) {
                 this.app.ShowError({
                     detail: "location not found",
                     message: _("Location not found, make sure location is available or it is in the correct format"),
@@ -10596,6 +10609,9 @@ class OpenWeatherMap extends BaseProvider {
         return this.ParseWeather(json, loc);
     }
     ;
+    RanOutOfQuota(loc) {
+        return null;
+    }
     ParseWeather(json, loc) {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
         try {
@@ -10950,6 +10966,7 @@ class MetNorway extends BaseProvider {
         this.website = "https://www.met.no/en";
         this.maxHourlyForecastSupport = 48;
         this.needsApiKey = false;
+        this.remainingCalls = null;
         this.baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?";
     }
     async GetWeather(loc) {
@@ -11626,6 +11643,10 @@ class Weatherbit extends BaseProvider {
             }
         };
     }
+    get remainingCalls() {
+        return null;
+    }
+    ;
     async GetWeather(loc) {
         const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
         let hourlyPromise = null;
@@ -11710,7 +11731,7 @@ class Weatherbit extends BaseProvider {
     }
     ;
     HandleError(message) {
-        if (message.code == 403) {
+        if (message.ErrorData.code == 403) {
             this.app.ShowError({
                 type: "hard",
                 userError: true,
@@ -11722,7 +11743,7 @@ class Weatherbit extends BaseProvider {
         return true;
     }
     HandleHourlyError(message) {
-        if (message.code == 403) {
+        if (message.ErrorData.code == 403) {
             this.hourlyAccess = false;
             logger_Logger.Info("Hourly forecast is inaccessible, skipping");
             return false;
@@ -11917,6 +11938,7 @@ class Weatherbit extends BaseProvider {
 class ClimacellV4 extends BaseProvider {
     constructor(app) {
         super(app);
+        this.remainingCalls = null;
         this.needsApiKey = true;
         this.prettyName = _("Tomorrow.io");
         this.name = "Tomorrow.io";
@@ -11943,7 +11965,7 @@ class ClimacellV4 extends BaseProvider {
         return this.ParseWeather(loc, response);
     }
     HandleHTTPError(message) {
-        if (message.code == 401) {
+        if (message.ErrorData.code == 401) {
             this.app.ShowError({
                 type: "hard",
                 userError: true,
@@ -12248,14 +12270,13 @@ class USWeather extends BaseProvider {
         this.website = "https://www.weather.gov/";
         this.maxHourlyForecastSupport = 156;
         this.needsApiKey = false;
+        this.remainingCalls = null;
         this.sitesUrl = "https://api.weather.gov/points/";
         this.MAX_STATION_DIST = 50000;
         this.observationStations = [];
         this.OnObtainingGridData = (message) => {
-            var _a, _b, _c, _d;
-            if (message.code == 404 && ((_b = (_a = message === null || message === void 0 ? void 0 : message.response) === null || _a === void 0 ? void 0 : _a.response_body) === null || _b === void 0 ? void 0 : _b.data) != null) {
-                const data = JSON.parse((_d = (_c = message === null || message === void 0 ? void 0 : message.response) === null || _c === void 0 ? void 0 : _c.response_body) === null || _d === void 0 ? void 0 : _d.data);
-                if (data.title == "Data Unavailable For Requested Point") {
+            if (message.ErrorData.code == 404 && (message === null || message === void 0 ? void 0 : message.Data) != null) {
+                if (message.Data.title == "Data Unavailable For Requested Point") {
                     this.app.ShowError({
                         type: "hard",
                         userError: true,
@@ -12797,6 +12818,7 @@ class VisualCrossing extends BaseProvider {
         this.maxHourlyForecastSupport = 336;
         this.website = "https://weather.visualcrossing.com/";
         this.needsApiKey = true;
+        this.remainingCalls = null;
         this.url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
         this.params = {
             unitGroup: "metric",
@@ -13064,7 +13086,7 @@ class VisualCrossing extends BaseProvider {
         return result;
     }
     HandleHttpError(error) {
-        if ((error === null || error === void 0 ? void 0 : error.code) == 401) {
+        if ((error === null || error === void 0 ? void 0 : error.ErrorData.code) == 401) {
             this.app.ShowError({
                 type: "hard",
                 userError: true,
@@ -13090,6 +13112,7 @@ class DanishMI extends BaseProvider {
         this.maxForecastSupport = 10;
         this.maxHourlyForecastSupport = 48;
         this.website = "https://www.dmi.dk/";
+        this.remainingCalls = null;
         this.url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
         this.forecastParams = {
             cmd: "llj",
@@ -13424,7 +13447,349 @@ class DanishMI extends BaseProvider {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/accuWeather.ts
+
+
+
+class AccuWeather extends BaseProvider {
+    constructor(app) {
+        super(app);
+        this.needsApiKey = true;
+        this.prettyName = _("AccuWeather");
+        this.name = "AccuWeather";
+        this.maxForecastSupport = 12;
+        this.maxHourlyForecastSupport = 120;
+        this.website = "https://www.accuweather.com/";
+        this.remainingQuota = null;
+        this.tier = "free";
+        this.baseUrl = "http://dataservice.accuweather.com/";
+        this.locSearchUrl = this.baseUrl + "locations/v1/cities/geoposition/search";
+        this.currentConditionUrl = this.baseUrl + "currentconditions/v1/";
+        this.locationCache = {};
+        this.HandleErrors = (e) => {
+            switch (e.ErrorData.code) {
+                case 400:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "bad api response"
+                    });
+                    return true;
+                case 401:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "bad key",
+                    });
+                    return true;
+                case 403:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "key blocked",
+                    });
+                    return true;
+            }
+            return false;
+        };
+    }
+    get remainingCalls() {
+        return this.remainingQuota == null ? null : Math.floor(this.remainingQuota / 3);
+    }
+    ;
+    get dailyForecastUrl() {
+        let url = this.baseUrl + "forecasts/v1/daily/";
+        if (this.tier == "free" || this.tier == "standard")
+            url += "5day/";
+        else if (this.tier == "prime")
+            url += "10day/";
+        else
+            url += "10day/";
+        return url;
+    }
+    get hourlyForecastUrl() {
+        let url = this.baseUrl + "forecasts/v1/hourly/";
+        if (this.tier == "free" || this.tier == "standard")
+            url += "12hour/";
+        else if (this.tier == "prime")
+            url += "72hour/";
+        else
+            url += "120hour";
+        return url;
+    }
+    async GetWeather(loc) {
+        var _a, _b;
+        const locationID = `${loc.lat},${loc.lon}`;
+        const userLocale = (_b = (_a = this.app.config.currentLocale) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== null && _b !== void 0 ? _b : "en-us";
+        const locale = this.app.config._translateCondition ? userLocale : "en-us";
+        let location;
+        if (this.locationCache[locationID] != null)
+            location = this.locationCache[locationID];
+        else
+            location = await this.app.LoadJsonAsync(this.locSearchUrl, { q: locationID, details: true, language: userLocale, apikey: this.app.config.ApiKey }, this.HandleErrors);
+        if (location == null) {
+            return null;
+        }
+        const [current, forecast, hourly] = await Promise.all([
+            this.app.LoadJsonAsyncWithDetails(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsyncWithDetails(this.dailyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsyncWithDetails(this.hourlyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors)
+        ]);
+        if (!current.Success || !forecast.Success || !hourly.Success)
+            return null;
+        this.remainingQuota = Math.min(parseInt(current.ResponseHeaders["RateLimit-Remaining"]), parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]), parseInt(hourly.ResponseHeaders["RateLimit-Remaining"]));
+        this.SetTier(parseInt(current.ResponseHeaders["RateLimit-Limit"]));
+        return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
+    }
+    SetTier(limit) {
+        if (limit > 1800000)
+            this.tier = "elite";
+        else if (limit > 225000)
+            this.tier = "prime";
+        else if (limit > 50)
+            this.tier = "standard";
+        else
+            this.tier = "free";
+    }
+    ParseWeather(current, daily, hourly, loc) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+        return {
+            date: DateTime.fromISO(current.LocalObservationDateTime),
+            coord: {
+                lat: loc.GeoPosition.Latitude,
+                lon: loc.GeoPosition.Longitude
+            },
+            dewPoint: CelsiusToKelvin((_b = (_a = current.DewPoint) === null || _a === void 0 ? void 0 : _a.Metric) === null || _b === void 0 ? void 0 : _b.Value),
+            humidity: current.RelativeHumidity,
+            pressure: (_d = (_c = current.Pressure) === null || _c === void 0 ? void 0 : _c.Metric) === null || _d === void 0 ? void 0 : _d.Value,
+            location: {
+                city: loc.LocalizedName,
+                country: loc.Country.LocalizedName,
+                timeZone: loc.TimeZone.Name,
+                tzOffset: loc.TimeZone.GmtOffset,
+            },
+            sunrise: DateTime.fromISO(daily.DailyForecasts[0].Sun.Rise),
+            sunset: DateTime.fromISO(daily.DailyForecasts[0].Sun.Set),
+            temperature: CelsiusToKelvin((_f = (_e = current.Temperature) === null || _e === void 0 ? void 0 : _e.Metric) === null || _f === void 0 ? void 0 : _f.Value),
+            wind: {
+                degree: (_h = (_g = current.Wind) === null || _g === void 0 ? void 0 : _g.Direction) === null || _h === void 0 ? void 0 : _h.Degrees,
+                speed: KPHtoMPS((_l = (_k = (_j = current.Wind) === null || _j === void 0 ? void 0 : _j.Speed) === null || _k === void 0 ? void 0 : _k.Metric) === null || _l === void 0 ? void 0 : _l.Value),
+            },
+            condition: Object.assign(Object.assign({}, this.ResolveIcons(current.WeatherIcon, current.IsDayTime)), { main: current.WeatherText, description: current.WeatherText }),
+            hourlyForecasts: this.ParseHourly(hourly),
+            forecasts: this.ParseDaily(daily)
+        };
+    }
+    ParseHourly(hourly) {
+        var _a, _b, _c, _d, _e, _f, _g;
+        const hours = [];
+        for (const hour of hourly) {
+            let precipitation = undefined;
+            if ((_a = hour.PrecipitationProbability) !== null && _a !== void 0 ? _a : 0 > 0) {
+                switch (hour.PrecipitationType) {
+                    case "Rain":
+                        precipitation = {
+                            type: "rain",
+                            chance: hour.RainProbability,
+                            volume: (_c = (_b = hour === null || hour === void 0 ? void 0 : hour.Rain) === null || _b === void 0 ? void 0 : _b.Value) !== null && _c !== void 0 ? _c : undefined
+                        };
+                        break;
+                    case "Snow":
+                        precipitation = {
+                            type: "snow",
+                            chance: hour.SnowProbability,
+                            volume: (_e = (_d = hour === null || hour === void 0 ? void 0 : hour.Snow) === null || _d === void 0 ? void 0 : _d.Value) !== null && _e !== void 0 ? _e : undefined
+                        };
+                        break;
+                    case "Ice":
+                        precipitation = {
+                            type: "ice pellets",
+                            chance: hour.IceProbability,
+                            volume: (_g = (_f = hour === null || hour === void 0 ? void 0 : hour.Ice) === null || _f === void 0 ? void 0 : _f.Value) !== null && _g !== void 0 ? _g : undefined
+                        };
+                        break;
+                }
+            }
+            hours.push({
+                date: DateTime.fromISO(hour.DateTime),
+                condition: Object.assign(Object.assign({}, this.ResolveIcons(hour.WeatherIcon, hour.IsDaylight)), { main: hour.IconPhrase, description: hour.IconPhrase }),
+                temp: CelsiusToKelvin(hour.Temperature.Value),
+                precipitation: precipitation
+            });
+        }
+        return hours;
+    }
+    ParseDaily(daysPayload) {
+        const days = [];
+        for (const day of daysPayload.DailyForecasts) {
+            days.push({
+                date: DateTime.fromISO(day.Date),
+                temp_max: CelsiusToKelvin(day.Temperature.Maximum.Value),
+                temp_min: CelsiusToKelvin(day.Temperature.Minimum.Value),
+                condition: Object.assign(Object.assign({}, this.ResolveIcons(day.Day.Icon, true)), { main: day.Day.IconPhrase, description: day.Day.ShortPhrase })
+            });
+        }
+        return days;
+    }
+    ResolveIcons(icon, day) {
+        switch (icon) {
+            case 1:
+                return {
+                    customIcon: "alien-symbolic",
+                    icons: []
+                };
+            case 1:
+                return {
+                    customIcon: day ? "day-sunny-symbolic" : "night-clear-symbolic",
+                    icons: [day ? "weather-clear" : "weather-clear-night"]
+                };
+            case 2:
+            case 3:
+            case 4:
+                return {
+                    customIcon: day ? "day-cloudy-symbolic" : "night-alt-cloudy-symbolic",
+                    icons: [day ? "weather-few-clouds" : "weather-few-clouds-night"]
+                };
+            case 5:
+                return {
+                    customIcon: day ? "day-fog-symbolic" : "night-fog-symbolic",
+                    icons: [day ? "weather-clear" : "weather-clear-night"]
+                };
+            case 6:
+                return {
+                    customIcon: day ? "day-cloudy-symbolic" : "night-alt-cloudy-symbolic",
+                    icons: day ? ["weather-clouds", "weather-few-clouds"] : ["weather-clouds-night", "weather-few-clouds-night"]
+                };
+            case 7:
+            case 8:
+                return {
+                    customIcon: "cloud-symbolic",
+                    icons: ["weather-overcast"]
+                };
+            case 11:
+                return {
+                    customIcon: "fog-symbolic",
+                    icons: ["weather-fog"]
+                };
+            case 12:
+                return {
+                    customIcon: "rain-wind-symbolic",
+                    icons: ["weather-showers", "weather-rain", "weather-freezing-rain"]
+                };
+            case 13:
+            case 14:
+                return {
+                    customIcon: day ? "day-showers-symbolic" : "night-alt-showers-symbolic",
+                    icons: day ? ["weather-showers-scattered-day", "weather-showers-day", "weather-showers-scattered", "weather-showers"] : ["weather-showers-scattered-night", "weather-showers-night", "weather-showers-scattered", "weather-showers"]
+                };
+            case 15:
+                return {
+                    customIcon: "thunderstorm-symbolic",
+                    icons: ["weather-storm"]
+                };
+            case 16:
+            case 17:
+                return {
+                    customIcon: day ? "day-thunderstorm-symbolic" : "night-alt-thunderstorm-symbolic",
+                    icons: ["weather-storm"]
+                };
+            case 18:
+                return {
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-rain", "weather-showers", "weather-freezing-rain"]
+                };
+            case 19:
+            case 22:
+                return {
+                    customIcon: "snow-symbolic",
+                    icons: ["weather-snow"]
+                };
+            case 20:
+            case 21:
+            case 23:
+                return {
+                    customIcon: day ? "day-snow-symbolic" : "night-alt-snow-symbolic",
+                    icons: day ? ["weather-snow-day", "weather-snow-scattered-day", "weather-snow"] : ["weather-snow-night", "weather-snow-scattered-night", "weather-snow"]
+                };
+            case 24:
+                return {
+                    customIcon: "snowflake-cold-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case 25:
+                return {
+                    customIcon: "sleet-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers"]
+                };
+            case 26:
+                return {
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers"]
+                };
+            case 29:
+                return {
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers"]
+                };
+            case 30:
+                return {
+                    customIcon: "hot-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case 31:
+                return {
+                    customIcon: "snowflake-cold-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case 32:
+                return {
+                    customIcon: "windy-symbolic",
+                    icons: ["weather-windy", "weather-breeze"]
+                };
+            case 33:
+                return {
+                    customIcon: "night-clear-symbolic",
+                    icons: ["weather-clear-night"]
+                };
+            case 34:
+            case 35:
+            case 36:
+            case 38:
+                return {
+                    customIcon: "night-alt-cloudy-symbolic",
+                    icons: ["weather-few-clouds-night"]
+                };
+            case 37:
+                return {
+                    customIcon: "night-fog-symbolic",
+                    icons: ["weather-few-clouds-night"]
+                };
+            case 39:
+            case 40:
+                return {
+                    customIcon: "night-alt-showers-symbolic",
+                    icons: ["weather-showers-scattered-night", "weather-showers-night", "weather-showers"]
+                };
+            case 41:
+            case 42:
+                return {
+                    customIcon: "night-alt-storm-showers-symbolic",
+                    icons: ["weather-storm"]
+                };
+            case 43:
+            case 44:
+                return {
+                    customIcon: "night-alt-snow-symbolic",
+                    icons: ["weather-snow-night", "weather-snow-scattered-night", "weather-snow"]
+                };
+            default:
+                return {
+                    customIcon: "refresh-symbolic",
+                    icons: []
+                };
+        }
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
 
 
 
@@ -13459,7 +13824,8 @@ const ServiceClassMapping = {
     "Met Office UK": (app) => new MetUk(app),
     "US Weather": (app) => new USWeather(app),
     "Visual Crossing": (app) => new VisualCrossing(app),
-    "DanishMI": (app) => new DanishMI(app)
+    "DanishMI": (app) => new DanishMI(app),
+    "AccuWeather": (app) => new AccuWeather(app)
 };
 const Keys = {
     DATA_SERVICE: "dataService",
@@ -13472,7 +13838,6 @@ const Keys = {
     TRANSLATE_CONDITION: "translateCondition",
     VERTICAL_ORIENTATION: "verticalOrientation",
     SHOW_TEXT_IN_PANEL: "showTextInPanel",
-    TEMP_TEXT_OVERRIDE: "tempTextOverride",
     SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
     SHOW_SUNRISE: "showSunrise",
     SHOW_24HOURS: "show24Hours",
@@ -13509,6 +13874,7 @@ class Config {
         this.WEATHER_LOCATION_LIST = "locationList";
         this.doneTypingLocation = null;
         this.currentLocation = null;
+        this.textColorStyle = null;
         this.timezone = undefined;
         this.OnKeySettingsUpdated = () => {
             if (this.keybinding != null) {
@@ -13564,6 +13930,7 @@ class Config {
             this.settings.bindProperty(BindingDirection.IN, key, keyProp, this.OnSettingChanged, null);
         }
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
+        this.settings.bind("tempTextOverride", "_" + "tempTextOverride", this.app.RefreshLabel);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this.OnKeySettingsUpdated, null);
         this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
@@ -14384,6 +14751,8 @@ class UIForecasts {
         try {
             if (!weather.forecasts)
                 return false;
+            if (this.forecasts.length > weather.forecasts.length)
+                this.Rebuild(this.app.config, this.app.config.textColorStyle, weather.forecasts.length);
             const len = Math.min(this.forecasts.length, weather.forecasts.length);
             for (let i = 0; i < len; i++) {
                 const forecastData = weather.forecasts[i];
@@ -14433,7 +14802,7 @@ class UIForecasts {
         }
     }
     ;
-    Rebuild(config, textColorStyle) {
+    Rebuild(config, textColorStyle, availableHours = null) {
         this.Destroy();
         this.forecasts = [];
         this.grid = new GridLayout({
@@ -14445,7 +14814,7 @@ class UIForecasts {
             style_class: STYLE_FORECAST_CONTAINER
         });
         this.actor.set_child(table);
-        const maxDays = this.app.GetMaxForecastDays();
+        const maxDays = availableHours !== null && availableHours !== void 0 ? availableHours : this.app.GetMaxForecastDays();
         let maxRow = config._forecastRows;
         let maxCol = config._forecastColumns;
         if (config._verticalOrientation) {
@@ -14581,6 +14950,9 @@ class UIHourlyForecasts {
         var _a;
         if (!forecasts || !this.hourlyForecasts)
             return true;
+        if (this.hourlyForecasts.length > forecasts.length) {
+            this.Rebuild(this.app.config, this.app.config.textColorStyle, forecasts.length);
+        }
         this.hourlyForecastDates = [];
         const max = Math.min(forecasts.length, this.hourlyForecasts.length);
         for (let index = 0; index < max; index++) {
@@ -14705,9 +15077,9 @@ class UIHourlyForecasts {
     Destroy() {
         this.container.destroy_all_children();
     }
-    Rebuild(config, textColorStyle) {
+    Rebuild(config, textColorStyle, availableHours = null) {
         this.Destroy();
-        const hours = this.app.GetMaxHourlyForecasts();
+        const hours = availableHours !== null && availableHours !== void 0 ? availableHours : this.app.GetMaxHourlyForecasts();
         this.hourlyForecasts = [];
         this.hourlyContainers = [];
         for (let index = 0; index < hours; index++) {
@@ -14814,7 +15186,11 @@ class UIBar {
         this._timestamp.text = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
-        this.providerCreditButton.actor.label = _("Powered by") + " " + provider.prettyName;
+        let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
+        if (provider.remainingCalls != null) {
+            creditLabel += ` (${provider.remainingCalls})`;
+        }
+        this.providerCreditButton.actor.label = creditLabel;
         this.providerCreditButton.url = provider.website;
         const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
         this._timestamp.text = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
@@ -14962,10 +15338,10 @@ class UI {
     }
     Rebuild(config) {
         this.ShowLoadingUi();
-        const textColorStyle = this.GetTextColorStyle();
-        this.CurrentWeather.Rebuild(config, textColorStyle);
-        this.HourlyWeather.Rebuild(config, textColorStyle);
-        this.FutureWeather.Rebuild(config, textColorStyle);
+        this.App.config.textColorStyle = this.GetTextColorStyle();
+        this.CurrentWeather.Rebuild(config, this.App.config.textColorStyle);
+        this.HourlyWeather.Rebuild(config, this.App.config.textColorStyle);
+        this.FutureWeather.Rebuild(config, this.App.config.textColorStyle);
         this.Bar.Rebuild(config);
     }
     UpdateIconType(iconType) {
@@ -15102,8 +15478,6 @@ class HttpLib {
     }
     async LoadJsonAsync(url, params, headers, method = "GET") {
         const response = await this.LoadAsync(url, params, headers, method);
-        if (!response.Success)
-            return response;
         try {
             const payload = JSON.parse(response.Data);
             response.Data = payload;
@@ -15111,19 +15485,21 @@ class HttpLib {
         catch (e) {
             if (e instanceof Error)
                 logger_Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
-            response.Success = false;
-            response.ErrorData = {
-                code: -1,
-                message: "bad api response - non json",
-                reason_phrase: "",
-            };
+            if (response.Success) {
+                response.Success = false;
+                response.ErrorData = {
+                    code: -1,
+                    message: "bad api response - non json",
+                    reason_phrase: "",
+                };
+            }
         }
         finally {
             return response;
         }
     }
     async LoadAsync(url, params, headers, method = "GET") {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         const message = await this.Send(url, params, headers, method);
         let error = undefined;
         if (!message) {
@@ -15166,16 +15542,22 @@ class HttpLib {
                 response: message
             };
         }
-        if (((_a = message === null || message === void 0 ? void 0 : message.status_code) !== null && _a !== void 0 ? _a : -1) > 200 && ((_b = message === null || message === void 0 ? void 0 : message.status_code) !== null && _b !== void 0 ? _b : -1) < 300) {
+        const responseHeaders = {};
+        (_a = message === null || message === void 0 ? void 0 : message.response_headers) === null || _a === void 0 ? void 0 : _a.foreach((name, val) => {
+            responseHeaders[name] = val;
+        });
+        if (((_b = message === null || message === void 0 ? void 0 : message.status_code) !== null && _b !== void 0 ? _b : -1) > 200 && ((_c = message === null || message === void 0 ? void 0 : message.status_code) !== null && _c !== void 0 ? _c : -1) < 300) {
             logger_Logger.Info("Warning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
         }
-        logger_Logger.Verbose("API full response: " + ((_d = (_c = message === null || message === void 0 ? void 0 : message.response_body) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.toString()));
+        logger_Logger.Verbose("API full response: " + ((_e = (_d = message === null || message === void 0 ? void 0 : message.response_body) === null || _d === void 0 ? void 0 : _d.data) === null || _e === void 0 ? void 0 : _e.toString()));
         if (error != null)
-            logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_f = (_e = error === null || error === void 0 ? void 0 : error.response) === null || _e === void 0 ? void 0 : _e.response_body) === null || _f === void 0 ? void 0 : _f.data));
+            logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_g = (_f = error === null || error === void 0 ? void 0 : error.response) === null || _f === void 0 ? void 0 : _f.response_body) === null || _g === void 0 ? void 0 : _g.data));
         return {
             Success: (error == null),
-            Data: (_g = message === null || message === void 0 ? void 0 : message.response_body) === null || _g === void 0 ? void 0 : _g.data,
-            ErrorData: error
+            Data: (_h = message === null || message === void 0 ? void 0 : message.response_body) === null || _h === void 0 ? void 0 : _h.data,
+            ResponseHeaders: responseHeaders,
+            ErrorData: error,
+            Response: message
         };
     }
     async Send(url, params, headers, method = "GET") {
@@ -15231,6 +15613,7 @@ class WeatherApplet extends TextIconApplet {
         this.refreshTriggeredWhileLocked = false;
         this.encounteredError = false;
         this.online = null;
+        this.currentWeatherInfo = null;
         this.OnNetworkConnectivityChanged = () => {
             switch (NetworkMonitor.get_default().connectivity) {
                 case NetworkConnectivity.FULL:
@@ -15250,6 +15633,11 @@ class WeatherApplet extends TextIconApplet {
                     this.online = false;
                     break;
             }
+        };
+        this.RefreshLabel = () => {
+            if (this.currentWeatherInfo == null)
+                return;
+            this.DisplayWeatherOnLabel(this.currentWeatherInfo);
         };
         this.saveLog = async () => {
             var _a;
@@ -15389,6 +15777,7 @@ class WeatherApplet extends TextIconApplet {
             }
             logger_Logger.Info("Weather Information refreshed");
             this.loop.ResetErrorCount();
+            this.currentWeatherInfo = weatherInfo;
             this.Unlock();
             return "success";
         }
@@ -15404,13 +15793,14 @@ class WeatherApplet extends TextIconApplet {
         const location = GenerateLocationText(weather, this.config);
         const lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
         this.SetAppletTooltip(`${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`);
-        this.DisplayWeatherOnLabel(weather.temperature, weather.condition.description);
+        this.DisplayWeatherOnLabel(weather);
         this.SetAppletIcon(weather.condition.icons, weather.condition.customIcon);
         return true;
     }
-    DisplayWeatherOnLabel(temperature, mainCondition) {
-        var _a, _b;
-        mainCondition = CapitalizeFirstLetter(mainCondition);
+    DisplayWeatherOnLabel(weather) {
+        var _a, _b, _c, _d, _e;
+        const temperature = weather.temperature;
+        const mainCondition = CapitalizeFirstLetter(weather.condition.main);
         let label = "";
         if (this.Orientation != main_Side.LEFT && this.Orientation != main_Side.RIGHT) {
             if (this.config._showCommentInPanel) {
@@ -15433,9 +15823,18 @@ class WeatherApplet extends TextIconApplet {
         }
         if (NotEmpty(this.config._tempTextOverride)) {
             label = this.config._tempTextOverride
-                .replace("{t}", (_b = TempToUserConfig(temperature, this.config, false)) !== null && _b !== void 0 ? _b : "")
-                .replace("{u}", UnitToUnicode(this.config.TemperatureUnit))
-                .replace("{c}", mainCondition);
+                .replace(/{t}/g, (_b = TempToUserConfig(temperature, this.config, false)) !== null && _b !== void 0 ? _b : "")
+                .replace(/{u}/g, UnitToUnicode(this.config.TemperatureUnit))
+                .replace(/{c}/g, mainCondition)
+                .replace(/{c_long}/g, weather.condition.description)
+                .replace(/{dew_point}/g, (_c = TempToUserConfig(weather.dewPoint, this.config, false)) !== null && _c !== void 0 ? _c : "")
+                .replace(/{humidity}/g, (_e = (_d = weather.humidity) === null || _d === void 0 ? void 0 : _d.toString()) !== null && _e !== void 0 ? _e : "")
+                .replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, this.config._pressureUnit).toString() : "")
+                .replace(/{pressure_unit}/g, this.config._pressureUnit)
+                .replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, this.config) : "")
+                .replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
+                .replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, this.config.WindSpeedUnit) : "")
+                .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "");
         }
         this.SetAppletLabel(label);
     }
@@ -15457,7 +15856,8 @@ class WeatherApplet extends TextIconApplet {
         this.set_applet_label(label);
     }
     GetPanelHeight() {
-        return this.panel.height;
+        var _a, _b;
+        return (_b = (_a = this.panel) === null || _a === void 0 ? void 0 : _a.height) !== null && _b !== void 0 ? _b : 0;
     }
     GetMaxForecastDays() {
         if (!this.provider)
@@ -15469,17 +15869,21 @@ class WeatherApplet extends TextIconApplet {
             return this.config._forecastHours;
         return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
     }
-    async LoadJsonAsync(url, params, HandleError, headers, method = "GET") {
+    async LoadJsonAsyncWithDetails(url, params, HandleError, headers, method = "GET") {
         const response = await HttpLib.Instance.LoadJsonAsync(url, params, headers, method);
         if (!response.Success) {
-            if (!!HandleError && !HandleError(response.ErrorData))
-                return null;
+            if (!!HandleError && !HandleError(response))
+                return response;
             else {
                 this.HandleHTTPError(response.ErrorData);
-                return null;
+                return response;
             }
         }
-        return response.Data;
+        return response;
+    }
+    async LoadJsonAsync(url, params, HandleError, headers, method = "GET") {
+        const response = await this.LoadJsonAsyncWithDetails(url, params, HandleError, headers, method);
+        return (response.Success) ? response.Data : null;
     }
     async LoadAsync(url, params, HandleError, headers, method = "GET") {
         const response = await HttpLib.Instance.LoadAsync(url, params, headers, method);
@@ -15539,8 +15943,10 @@ The contents of the file saved from the applet help page goes here
     }
     on_applet_clicked(event) {
         this.ui.Toggle();
+        return false;
     }
     on_applet_middle_clicked(event) {
+        return false;
     }
     on_panel_height_changed() {
     }

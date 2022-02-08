@@ -26,6 +26,7 @@ export class MetUk extends BaseProvider {
 	public readonly website = "https://www.metoffice.gov.uk/";
 	public readonly maxHourlyForecastSupport = 36;
 	public readonly needsApiKey = false;
+	public readonly remainingCalls: number | null = null;
 
 	private baseUrl = "http://datapoint.metoffice.gov.uk/public/data/val/";
 

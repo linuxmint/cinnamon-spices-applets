@@ -192,7 +192,8 @@
 			"Visual Crossing (key needed)": "Visual Crossing",
 			"Weatherbit (key needed)": "Weatherbit",
 			"Tomorrow.io (key needed)": "Tomorrow.io",
-			"DarkSky (key needed)": "DarkSky"
+			"DarkSky (key needed)": "DarkSky",
+			"AccuWeather (key needed)": "AccuWeather"
 		}
 	},
 	"apiKey": {
@@ -246,7 +247,7 @@
 		"units": "days",
 		"step": 1,
 		"description": "Forecast length",
-		"tooltip": "Maximum number of days that can be displayed, maximum rows and columns setting in the Presentation tab will affect the final number."
+		"tooltip": "Maximum number of days that can be displayed, available number of data, maximum rows and columns setting in the Presentation tab will affect the final number."
 	},
 	"forecastHours": {
 		"type": "spinbutton",
@@ -255,7 +256,8 @@
 		"max": 168,
 		"units": "hours",
 		"step": 1,
-		"description": "Hourly Forecast length"
+		"description": "Hourly Forecast length",
+		"tooltip": "Maximum number of hours that can be displayed, available numbers of data will affect the final number."
 	},
 	"immediatePrecip": {
 		"type": "checkbox",
@@ -332,7 +334,7 @@
 		"type": "entry",
 		"default": "",
 		"description": "Override label on panel",
-		"tooltip": "Available values are: {c} is condition, {t} is temperature and {u} is unit.\nCan be used if label does not fit on vertical panel, among other smart things."
+		"tooltip": "Some of the available values are: {c} is condition, {t} is temperature and {u} is unit.\nCan be used if label does not fit on vertical panel, among other smart things."
 	},
 	"useCustomAppletIcons": {
 		"type": "checkbox",

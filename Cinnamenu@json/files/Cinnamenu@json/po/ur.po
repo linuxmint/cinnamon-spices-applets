@@ -7,434 +7,566 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-20 12:34+0100\n"
-"PO-Revision-Date: 2020-07-23 07:26+0100\n"
+"POT-Creation-Date: 2021-12-18 21:43+0000\n"
+"PO-Revision-Date: 2022-01-20 15:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ur\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. 3.2 4.0
-msgid "Type to search..."
-msgstr ""
-
-#. 3.2 4.0
 msgid "Initializing"
 msgstr ""
 
-#. 3.2 4.0
-msgid "No description available"
+msgid "Find files..."
 msgstr ""
 
-#. 3.2 4.0
-msgid "All Applications"
-msgstr "تمام ایپلی کیشنز"
-
-#. 3.2 4.0
-msgid "Places"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Recent Files"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Bookmarks"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Favorite Apps"
-msgstr "پسندیدہ ایپس"
-
-#. 3.2 4.0
-msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr ""
-
-#. 3.2 4.0
-msgid "Clear List"
-msgstr ""
-
-#. 3.2 4.0
-msgid "No recent files"
-msgstr ""
-
-#. 3.2
-msgid "Account details"
-msgstr ""
-
-#. 3.2 3.2
-msgid "Grid View"
-msgstr ""
-
-#. 3.2 3.2
-msgid "List View"
-msgstr ""
-
-#. 3.2 3.2
-msgid "Switch to grid view"
-msgstr ""
-
-#. 3.2 3.2
-msgid "Switch to list view"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Lock Screen"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Lock the screen"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Logout"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Leave the session"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Quit"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Shutdown the computer"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Home"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Computer"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Browse network"
-msgstr ""
-
-#. 3.2 3.2 4.0
-#. 4.0
-msgid "Run with NVIDIA GPU"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Add to panel"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Add to desktop"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Remove favorite"
-msgstr "پسندیدہ کو ہٹا دیں"
-
-#. 3.2 4.0
-msgid "Add to favorites"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Uninstall"
-msgstr ""
-
-#. 4.0 4.0
 msgid "Please wait..."
 msgstr ""
 
-#. metadata.json
-#. 3.2
-msgid "Cinnamenu"
+msgid "No recent Items"
 msgstr ""
 
-#. metadata.json
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
-msgstr ""
-"ایک لچکدار مینو جو فارمیٹنگ کے اختیارات ، ویب بُک مارکس ، تلاش فراہم کنندہ کی "
-"معاونت اور مبہم تلاشی فراہم کرتا ہے۔"
-
-#. metadata.json
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
+msgid "Click to copy"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Behavior"
+msgid "Clear List"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Appearance"
+msgid "Trash"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Layout and Content"
-msgstr "لے آؤٹ اور مشمولات"
+msgid "All applications"
+msgstr "تمام ایپلی کیشنز"
 
-#. 3.2
-msgid "Search Providers"
+msgid "Favorites"
 msgstr ""
 
-#. 3.2
-msgid "No search provider extensions found"
+msgid "Places"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Panel"
+msgid "Recent"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Menu"
+msgid "Favorite apps"
+msgstr "پسندیدہ ایپس"
+
+msgid "Home folder"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Layout"
-msgstr "ترتیب"
-
-#. 3.2 4.0
-msgid "Content"
+msgid "Too many entries - showing first 1000 entries only"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Recent files settings"
+msgid "Quit"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Open the menu editor"
+msgid "Shutdown the computer"
 msgstr ""
 
-#. 3.2 4.0
+msgid "Logout"
+msgstr ""
+
+msgid "Leave the session"
+msgstr ""
+
+msgid "Lock screen"
+msgstr ""
+
+msgid "Lock the screen"
+msgstr ""
+
 msgid "Reset category order"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Use a custom icon"
-msgstr "ایک کسٹم آئکن استعمال کریں"
-
-#. 3.2 4.0
-msgid "Use a custom icon in the panel"
+msgid "light skin tone"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Panel icon"
-msgstr "پینل کا آئیکن"
-
-#. 3.2 4.0
-msgid "Panel text"
+msgid "medium-light skin tone"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Text to show beside the panel icon"
+msgid "medium skin tone"
 msgstr ""
 
-#. 3.2 4.0
-msgid "pixels"
+msgid "medium-dark skin tone"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Category icon size"
+msgid "dark skin tone"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Applications list icon size"
+msgid "Run with NVIDIA GPU"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Applications grid icon size"
+msgid "Add to panel"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Keyboard shortcut to open and close the menu"
+msgid "Add to desktop"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Open menu on hover"
+#, fuzzy
+#| msgid "Remove favorite"
+msgid "Remove from favorites"
+msgstr "پسندیدہ کو ہٹا دیں"
+
+msgid "Add to favorites"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Open the menu when I move my mouse over the panel icon"
+msgid "Uninstall"
 msgstr ""
 
-#. 3.2 4.0
-msgid "milliseconds"
+msgid "This file is no longer available"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Menu hover delay"
+msgid "Open with"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Use menu animations"
+msgid "Other application..."
 msgstr ""
 
-#. 3.2 4.0
-msgid "Animate the menu on open and close"
+msgid "Open containing folder"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Activate categories on click"
+msgid "Move to trash"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Activate categories on click instead of on hover"
+msgid "Error while moving file to trash:"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Enable autoscrolling"
+msgid "Error while opening file:"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Enable autoscrolling in application list"
+msgid "Type to search..."
 msgstr ""
 
-#. 3.2 4.0
-msgid "Show web bookmarks"
+msgid "No description available"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Show your browser's web bookmarks in the menu"
+msgid "Recent files"
 msgstr ""
 
-#. 3.2
-msgid "Enable searching of open windows"
+msgid "Bookmarks"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Enable search providers"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr ""
 
-#. 3.2 4.0
-msgid "Include search provider results in searches"
+msgid "No recent files"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Example Search Providers"
+msgid "Account details"
 msgstr ""
 
-#. 3.2
-#. 3.2
-msgid "Startup applications view mode"
-msgstr "اسٹارٹ اپ ایپلیکیشنز ویو موڈ"
-
-#. 3.2 4.0
-msgid "List"
+msgid "Grid View"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Grid"
+msgid "List View"
 msgstr ""
 
-#. 3.2 4.0
-msgid "columns"
+msgid "Switch to grid view"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Number of columns in apps grid"
+msgid "Switch to list view"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Show bookmarks and places"
+msgid "Home"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Show bookmarks and places category in the menu"
+msgid "Computer"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Show application icons"
+msgid "Browse network"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Show category icons"
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
 msgstr ""
 
-#. 3.2
-msgid "Show application descriptions under titles"
+msgid "The following packages will be removed:"
 msgstr ""
 
-#. 3.2
-msgid "Show tooltips"
+msgid "Packages to be removed"
 msgstr ""
 
-#. 3.2
-msgid "Tooltip delay"
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
 msgstr ""
 
-#. 3.2 4.0
-msgid "Use a custom menu height"
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
 msgstr ""
 
-#. 3.2 4.0
-msgid "px"
+msgid "Open"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Custom menu height"
+msgid "Search"
 msgstr ""
 
-#. 4.0
+msgid "Start in"
+msgstr ""
+
+msgid "Select a folder"
+msgstr ""
+
+msgid "Follow symlinks"
+msgstr ""
+
+msgid "Search hidden"
+msgstr ""
+
+msgid "Use regular expressions"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Path"
+msgstr ""
+
+msgid "Searching..."
+msgstr ""
+
+msgid "Search Stopped"
+msgstr ""
+
+msgid "Searching: "
+msgstr ""
+
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+msgid "Search Completed"
+msgstr ""
+
+msgid "Skipping"
+msgstr ""
+
+msgid " - directory already searched"
+msgstr ""
+
+msgid "Cinnamenu"
+msgstr ""
+
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+
+msgid "Layout and Content"
+msgstr "لے آؤٹ اور مشمولات"
+
+msgid "Behavior"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
+
+msgid "Layout"
+msgstr "ترتیب"
+
+msgid "Content"
+msgstr ""
+
+msgid "Panel"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
 msgid "Applications view mode"
 msgstr ""
 
-#. 4.0
+msgid "List"
+msgstr ""
+
+msgid "Grid"
+msgstr ""
+
 msgid "View applications as list or grid"
 msgstr ""
 
-#. 4.0
 msgid "Application description placement"
 msgstr ""
 
-#. 4.0
 msgid "Tooltips"
 msgstr ""
 
-#. 4.0
 msgid "Under titles"
 msgstr ""
 
-#. 4.0
 msgid "None"
 msgstr "کوئی نہیں"
 
-#. 4.0
 msgid "Choose where to show application descriptions"
 msgstr ""
 
-#. 4.0
-msgid "Session buttons location"
+#, fuzzy
+#| msgid "Session buttons location"
+msgid "Sidebar location"
 msgstr "سیشن بٹنوں کا مقام"
 
-#. 4.0
 msgid "Top"
 msgstr ""
 
-#. 4.0
 msgid "Bottom"
 msgstr ""
 
-#. 4.0
 msgid "Left"
 msgstr ""
 
-#. 4.0
 msgid "Right"
 msgstr ""
 
-#. 4.0
-msgid "Choose where to show the session (quit, logout, etc.) buttons"
+msgid "Choose where to show the sidebar"
 msgstr ""
 
-#. 4.0
-msgid "Add favorites to session buttons"
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 
-#. 4.0
-msgid "Show your favorite app icons next to the session buttons"
+msgid "Show favorites on sidebar"
 msgstr ""
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr ""
+
+msgid "Show bookmarks and places"
+msgstr ""
+
+msgid "Show bookmarks and places category in the menu"
+msgstr ""
+
+msgid "Show recent items"
+msgstr ""
+
+msgid "Show recent items category in the menu"
+msgstr ""
+
+msgid "Show favorite apps category"
+msgstr ""
+
+msgid "Show your favorite apps category in the menu"
+msgstr ""
+
+msgid "Show home folder"
+msgstr ""
+
+msgid "Show home folder category in the menu"
+msgstr ""
+
+msgid "Open the menu editor"
+msgstr ""
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr ""
+
+msgid "Open menu on hover"
+msgstr ""
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr ""
+
+msgid "milliseconds"
+msgstr ""
+
+msgid "Menu hover delay"
+msgstr ""
+
+msgid "Use menu animations"
+msgstr ""
+
+msgid "Animate the menu on open and close"
+msgstr ""
+
+msgid "Activate categories on click"
+msgstr ""
+
+msgid "Activate categories on click instead of on hover"
+msgstr ""
+
+msgid "Open menu on category:"
+msgstr ""
+
+msgid "Always open the menu with this category selected"
+msgstr ""
+
+msgid "Last used category"
+msgstr ""
+
+msgid "Enable autoscrolling"
+msgstr ""
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr ""
+
+msgid "Show hidden files"
+msgstr ""
+
+msgid "Show hidden files in folder view"
+msgstr ""
+
+msgid "Emoji search"
+msgstr ""
+
+msgid "Show emojis in search results"
+msgstr ""
+
+msgid "Web search option"
+msgstr ""
+
+msgid "Show an internet search option in search results"
+msgstr ""
+
+msgid "Search home folder"
+msgstr ""
+
+msgid "When searching, also search my home folder for files"
+msgstr ""
+
+msgid "Web bookmarks search"
+msgstr ""
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+
+msgid "Wikipedia search"
+msgstr ""
+
+msgid "Show some Wikipedia results"
+msgstr ""
+
+msgid "Wikipedia language"
+msgstr ""
+
+msgid "Use a custom icon"
+msgstr "ایک کسٹم آئکن استعمال کریں"
+
+msgid "Use a custom icon in the panel"
+msgstr ""
+
+msgid "Panel icon"
+msgstr "پینل کا آئیکن"
+
+msgid "Use a custom icon size"
+msgstr ""
+
+msgid "Use a custom size for the panel icon"
+msgstr ""
+
+msgid "Panel icon size (pixels)"
+msgstr ""
+
+msgid "Choose a custom size for the panel icon"
+msgstr ""
+
+msgid "Panel text"
+msgstr ""
+
+msgid "Text to show beside the panel icon"
+msgstr ""
+
+msgid "Category icon size (pixels)"
+msgstr ""
+
+msgid "Applications list icon size (pixels)"
+msgstr ""
+
+msgid "Applications grid icon size (pixels)"
+msgstr ""
+
+msgid "Sidebar icon size (pixels)"
+msgstr ""
+
+msgid "Use sidebar box style"
+msgstr ""
+
+msgid "Use a sidebar box style"
+msgstr ""
+
+msgid "Use tile style"
+msgstr ""
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+
+msgid "Search Providers"
+msgstr ""
+
+msgid "No search provider extensions found"
+msgstr ""
+
+msgid "Recent files settings"
+msgstr ""
+
+msgid "Enable autoscrolling in application list"
+msgstr ""
+
+msgid "Show web bookmarks"
+msgstr ""
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+
+msgid "Enable searching of open windows"
+msgstr ""
+
+msgid "Enable search providers"
+msgstr ""
+
+msgid "Include search provider results in searches"
+msgstr ""
+
+msgid "Example Search Providers"
+msgstr ""
+
+msgid "columns"
+msgstr ""
+
+msgid "Number of columns in apps grid"
+msgstr ""
+
+msgid "Show application icons"
+msgstr ""
+
+msgid "Show category icons"
+msgstr ""
+
+msgid "Show application descriptions under titles"
+msgstr ""
+
+msgid "Show tooltips"
+msgstr ""
+
+msgid "Tooltip delay"
+msgstr ""
+
+msgid "Use a custom menu height"
+msgstr ""
+
+msgid "Custom menu height (pixels)"
+msgstr ""
+
+#~ msgid ""
+#~ "A flexible menu providing formatting options, web bookmarks, search "
+#~ "provider support and fuzzy searching."
+#~ msgstr ""
+#~ "ایک لچکدار مینو جو فارمیٹنگ کے اختیارات ، ویب بُک مارکس ، تلاش فراہم کنندہ "
+#~ "کی معاونت اور مبہم تلاشی فراہم کرتا ہے۔"
+
+#~ msgid "Startup applications view mode"
+#~ msgstr "اسٹارٹ اپ ایپلیکیشنز ویو موڈ"

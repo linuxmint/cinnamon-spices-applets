@@ -1,18 +1,19 @@
 import { DateTime } from "luxon";
 import { Services } from "../config";
-import { HttpError, HTTPParams } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HTTPParams } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
 import { CelsiusToKelvin, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 
 export class ClimacellV4 extends BaseProvider {
-	needsApiKey: boolean = true;
-	prettyName: string = _("Tomorrow.io");
-	name: Services = "Tomorrow.io";
-	maxForecastSupport: number = 15;
-	maxHourlyForecastSupport: number = 108;
-	website: string = "https://www.tomorrow.io/";
+	public readonly remainingCalls: number | null = null;
+	public readonly needsApiKey: boolean = true;
+	public readonly prettyName: string = _("Tomorrow.io");
+	public readonly name: Services = "Tomorrow.io";
+	public readonly maxForecastSupport: number = 15;
+	public readonly maxHourlyForecastSupport: number = 108;
+	public readonly website: string = "https://www.tomorrow.io/";
 
 	private url = "https://data.climacell.co/v4/timelines";
 
@@ -43,8 +44,8 @@ export class ClimacellV4 extends BaseProvider {
 		return this.ParseWeather(loc, response);
 	}
 
-	private HandleHTTPError(message: HttpError): boolean {
-		if (message.code == 401) {
+	private HandleHTTPError(message: ErrorResponse): boolean {
+		if (message.ErrorData.code == 401) {
 			this.app.ShowError({
 				type: "hard",
 				userError: true,

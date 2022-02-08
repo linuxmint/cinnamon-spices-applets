@@ -2564,7 +2564,9 @@ const createConfig = () => {
     appletSettings.bind('initial-volume', 'customInitVolume');
     appletSettings.bind('last-volume', 'lastVolume');
     appletSettings.bind('tree', 'userStations', (newVal) => {
-        const trimmedStations = newVal.map(val => { return Object.assign(Object.assign({}, val), { url: val.url.trim() }); });
+        // temporariy solution to fix typo in settings-schema
+        // @ts-ignore
+        const trimmedStations = newVal.map(val => { var _a; return Object.assign(Object.assign({}, val), { url: ((_a = val.url) === null || _a === void 0 ? void 0 : _a.trim()) || val.ur.trim() }); });
         if (lodash_es_isEqual(previousUserStations, trimmedStations))
             return;
         stationsHandler.forEach(changeHandler => changeHandler(trimmedStations));
@@ -2883,7 +2885,7 @@ function createMpvHandler() {
                 global.logWarning('initial Volume was null or undefined. Applying 50 as a fallback solution to prevent radio stop working');
                 initialVolume = 50;
             }
-            const command = `mpv --config=no --script=${MPRIS_PLUGIN_PATH} ${url} 
+            const command = `mpv --config=no --no-video --script=${MPRIS_PLUGIN_PATH} ${url} 
                 --volume=${initialVolume}`;
             spawnCommandLine(command);
             return;

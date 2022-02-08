@@ -18,6 +18,7 @@ export interface WeatherProvider {
 	readonly maxForecastSupport: number;
 	readonly maxHourlyForecastSupport: number;
 	readonly website: string;
+	readonly remainingCalls: number | null;
 
 	GetWeather(loc: LocationData): Promise<WeatherData | null>;
 }
@@ -70,14 +71,23 @@ export interface WeatherData {
 }
 
 
-export interface APIUniqueField {
-	name: string,
-	/**
-	 * Refer to the type 
-	 */
-	value: any,
-	type: ExtraField
+export type APIUniqueField = NumberAPIUniqueField | StringAPIUniqueField;
+
+interface BaseAPIUniqueField {
+	name: string;
+	type: ExtraField;
 }
+
+interface NumberAPIUniqueField extends BaseAPIUniqueField {
+	value: number;
+	type: Extract<ExtraField, "temperature" | "percent">
+}
+
+interface StringAPIUniqueField extends BaseAPIUniqueField {
+	value: string;
+	type: Extract<ExtraField, "string">
+}
+
 
 /** 
  * percent: value is a number from 0-100 (or more)
@@ -105,7 +115,7 @@ export interface HourlyForecastData {
 	/** Kelvin */
 	temp: number | null;
 	condition: Condition;
-	precipitation?: Precipitation;
+	precipitation?: Precipitation | undefined;
 }
 
 export interface Precipitation {

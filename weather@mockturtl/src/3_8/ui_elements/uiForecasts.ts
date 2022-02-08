@@ -59,7 +59,12 @@ export class UIForecasts {
 	/** Injects data from forecasts array into popupMenu */
 	public Display(weather: WeatherData, config: Config): boolean {
 		try {
-			if (!weather.forecasts) return false;
+			if (!weather.forecasts) 
+				return false;
+
+			if (this.forecasts.length > weather.forecasts.length)
+				this.Rebuild(this.app.config, this.app.config.textColorStyle!, weather.forecasts.length);
+
 			const len = Math.min(this.forecasts.length, weather.forecasts.length);
 			for (let i = 0; i < len; i++) {
 				const forecastData = weather.forecasts[i];
@@ -120,7 +125,7 @@ export class UIForecasts {
 		}
 	};
 
-	public Rebuild(config: Config, textColorStyle: string): void {
+	public Rebuild(config: Config, textColorStyle: string, availableHours: number | null = null): void {
 		this.Destroy();
 
 		this.forecasts = [];
@@ -136,7 +141,7 @@ export class UIForecasts {
 
 		this.actor.set_child(table);
 
-		const maxDays = this.app.GetMaxForecastDays();
+		const maxDays = availableHours ?? this.app.GetMaxForecastDays();
 		// User settings
 		let maxRow = config._forecastRows;
 		let maxCol = config._forecastColumns;

@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.2.0
+
+* Add requested AccuWeather as a provider
+* Add ability to display remaining number of calls in the UI (where applicable)
+* Fix issue where the applet would display more hourly boxes than available data
+* Improve HttpLib flexibility and type checking
+* Add better support for "Override label on panel" setting
+
 ## 3.1.9
 
 * Fixes [#4184](https://github.com/linuxmint/cinnamon-spices-applets/issues/4184) - missing space in .pot file

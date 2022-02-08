@@ -19,6 +19,7 @@ class AppButton {
         this.app = app;
         const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
         this.signals = new SignalManager(null);
+
         //----------ICON---------------------------------------------
         if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton, isBackButton
             this.icon = this.app.icon;
@@ -45,6 +46,7 @@ class AppButton {
         if (!this.icon) {
             this.icon = new St.Icon({icon_name: 'dialog-error', icon_size: this.appThis.getAppIconSize()});
         }
+
         //--------Label------------------------------------
         this.label = new St.Label({ style_class: 'menu-application-button-label' });
         //.menu-application-button-label{} in themes are designed for list view and may have uneven
@@ -69,6 +71,7 @@ class AppButton {
         const clutterText = this.label.get_clutter_text();
         clutterText.set_markup(markup);
         clutterText.ellipsize = EllipsizeMode.END;
+
         //--------app running indicator--------------
         this.appRunningIndicator = new St.Widget({
                 style: isListView ?
@@ -78,6 +81,7 @@ class AppButton {
                                                     '; margin: 0px; border: 1px; border-radius: 10px;',
                 x_expand: false,
                 y_expand: false});
+
         //-------------actor---------------------
         this.actor = new St.BoxLayout({ vertical: !isListView, reactive: true,
                                             accessible_role: Atk.Role.MENU_ITEM});
@@ -99,6 +103,7 @@ class AppButton {
                                 y_align: St.Align.MIDDLE});
         this._setButtonNormal();
         this._setAppHighlightClass();
+
         //----------dnd--------------
         if (this.app.isApplication) {
             this.actor._delegate = {
@@ -147,13 +152,13 @@ class AppButton {
     }
 
     _setButtonNormal() {
-        this.entered = false;
+        this.has_focus = false;
         this.actor.set_style_class_name('menu-application-button');
         this._addTileStyle();
     }
 
     _setButtonSelected() {
-        this.entered = true;
+        this.has_focus = true;
         this.actor.set_style_class_name('menu-application-button-selected');
         this._addTileStyle();
     }
@@ -183,7 +188,7 @@ class AppButton {
             bgColor.blue = 20;
         }
         let addedStyle = 'border:2px; border-color:' + toRgbaString(bgColor) + '; ';
-        if (!this.entered) {
+        if (!this.has_focus) {
             addedStyle += 'background-color:' + toRgbaString(lightenOrDarkenColor(bgColor)) + ';';
         }
         this.actor.set_style(addedStyle);
@@ -211,7 +216,7 @@ class AppButton {
         }
 
         if (event) {//mouse
-            this.appThis.clearEnteredActors();
+            this.appThis.clearFocusedActors();
         } else {//keyboard navigation
             this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);
         }
@@ -257,7 +262,7 @@ class AppButton {
         const button = e.get_button();
         if (button === 1) {//left click
             if (this.appThis.contextMenu.isOpen) {
-                this.appThis.clearEnteredActors();
+                this.appThis.clearFocusedActors();
                 this.handleEnter();
             } else {
                 this.activate(e);
@@ -265,7 +270,7 @@ class AppButton {
             return Clutter.EVENT_STOP;
         } else if (button === 3) {//right click
             if (this.appThis.contextMenu.isOpen) {
-                this.appThis.clearEnteredActors();
+                this.appThis.clearFocusedActors();
                 this.handleEnter();
                 return Clutter.EVENT_STOP;
             } else {
@@ -307,8 +312,7 @@ class AppButton {
             }
         } else if (this.app.isClearRecentsButton) {
             this.appThis.recentApps.clear();
-            Gtk.RecentManager.get_default().purge_items();
-            this.appThis.recentsJustCleared = true;
+            this.appThis.recentManagerDefault.purge_items();
             this.appThis.setActiveCategory('recents');
             //don't closeMenu
         } else if (this.app.isSearchResult) {
@@ -389,16 +393,21 @@ class AppsView {
     }
 
     populate(appList, headerText = null) {
-        this.applicationsListBox.hide();//hide while populating for performance.
-        this.applicationsGridBox.hide();//
-
-        this.clearApps();
-
         //too many actors in applicationsGridBox causes display errors, don't know why. Plus, it takes a long time
         if (appList.length > 1000) {
             appList.length = 1000; //truncate array
             headerText = _('Too many entries - showing first 1000 entries only');
         }
+        this.populate_init(headerText);
+        this.populate_add(appList, null);
+        this.populate_finish();
+    }
+
+    populate_init(headerText = null) {
+        this.applicationsListBox.hide();//hide while populating for performance.
+        this.applicationsGridBox.hide();//
+
+        this.clearApps();
 
         if (headerText) {
             this.headerText.set_text(headerText);
@@ -407,8 +416,30 @@ class AppsView {
             this.headerText.hide();
         }
 
-        let column = 0;
-        let rownum = 0;
+        this.column = 0;
+        this.rownum = 0;
+    }
+
+    populate_add(appList, subheadingText = null) {
+        if (subheadingText) {
+            if (this.column !== 0) {
+                this.column = 0;
+                this.rownum++;
+            }
+            const subheading = new St.Label({ x_expand: true});
+            const subheadingBox = new St.BoxLayout({ style_class: 'menu-applications-subheading' });
+            subheadingBox.add(subheading, { });
+            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+                this.applicationsListBox.add(subheadingBox);
+            } else {
+                const gridLayout = this.applicationsGridBox.layout_manager;
+                gridLayout.attach(subheadingBox, this.column, this.rownum, this.getGridValues().columns, 1);
+                this.rownum++;
+            }
+            subheading.set_text(subheadingText);
+            subheadingBox.show();
+        }
+
         appList.forEach(app => {
             let appButton = this.buttonStore.find(button => button.app === app);
 
@@ -421,16 +452,19 @@ class AppsView {
             } else {
                 const gridLayout = this.applicationsGridBox.layout_manager;
                 appButton.setGridButtonWidth();// In case menu has been resized.
-                gridLayout.attach(appButton.actor, column, rownum, 1, 1);
-                column++;
+                gridLayout.attach(appButton.actor, this.column, this.rownum, 1, 1);
+                appButton.actor.layout_column = this.column;//used for key navigation
+                this.column++;
 
-                if (column > this.getGridValues().columns - 1) {
-                    column = 0;
-                    rownum++;
+                if (this.column > this.getGridValues().columns - 1) {
+                    this.column = 0;
+                    this.rownum++;
                 }
             }
         });
+    }
 
+    populate_finish() {
         if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
             this.applicationsListBox.show();
         } else {
@@ -444,8 +478,8 @@ class AppsView {
         //When displying search results, ensure first item is highlighted so that pressing
         //return selects top result.
         const buttons = this.getActiveButtons();
-        if (buttons[0] && !buttons[0].entered) {
-            this.appThis.clearEnteredActors();
+        if (buttons[0] && !buttons[0].has_focus) {
+            this.appThis.clearFocusedActors();
             buttons[0].handleEnter();
         }
     }
@@ -456,9 +490,14 @@ class AppsView {
         const newcolumnCount = this.getGridValues().columns;
         if (this.currentGridViewColumnCount === newcolumnCount) {
             //Number of columns are the same so just adjust button widths only.
-            this.applicationsGridBox.get_children().forEach(actor =>
-                                                    actor.width = this.getGridValues().columnWidth );
+            this.applicationsGridBox.get_children().forEach(actor => {
+                            if (actor.has_style_class_name('menu-application-button') ||
+                                actor.has_style_class_name('menu-application-button-selected')) {
+                                actor.width = this.getGridValues().columnWidth;
+                            }
+                         });
         } else {//Rearrange buttons to fit new number of columns.
+            this.applicationsGridBox.hide();//
             const buttons = this.applicationsGridBox.get_children();
             this.applicationsGridBox.remove_all_children();
             let column = 0;
@@ -466,14 +505,26 @@ class AppsView {
             const gridLayout = this.applicationsGridBox.layout_manager;
             const newColumnWidth = this.getGridValues().columnWidth;
             buttons.forEach(actor => {
-                actor.width = newColumnWidth;
-                gridLayout.attach(actor, column, rownum, 1, 1);
-                column++;
-                if (column > newcolumnCount - 1) {
-                    column = 0;
+                if (actor.has_style_class_name('menu-application-button') ||
+                    actor.has_style_class_name('menu-application-button-selected')) {
+                    actor.width = newColumnWidth;
+                    gridLayout.attach(actor, column, rownum, 1, 1);
+                    actor.layout_column = column;//used for key navigation
+                    column++;
+                    if (column > newcolumnCount - 1) {
+                        column = 0;
+                        rownum++;
+                    }
+                } else { //subheading label
+                    if (column !== 0) {
+                        column = 0;
+                        rownum++;
+                    }
+                    gridLayout.attach(actor, column, rownum, newcolumnCount, 1);
                     rownum++;
                 }
             });
+            this.applicationsGridBox.show();
         }
 
         this.applicationsGridBox.show();
@@ -481,7 +532,7 @@ class AppsView {
     }
 
     getGridValues() {
-        const appsBoxWidth = this.applicationsGridBox.width;
+        const appsBoxWidth = this.currentGridBoxWidth;
         const minColumnWidth = Math.max(140, this.appThis.settings.appsGridIconSize * 1.2);
         const columns = Math.floor(appsBoxWidth / (minColumnWidth * global.ui_scale));
         const columnWidth = Math.floor(appsBoxWidth / columns);
@@ -490,19 +541,32 @@ class AppsView {
     }
 
     getActiveButtons() {
-        const buttons = [];
-        this.getActiveContainer().get_children().forEach(child =>
-            buttons.push(this.buttonStore.find(button => button.actor === child) ));
-        return buttons;
+        const activeButtons = [];
+        this.getActiveContainer().get_children().forEach(child => {
+            const foundButton = this.buttonStore.find(button => button.actor === child);
+            if (foundButton) {
+                activeButtons.push(foundButton);
+            }
+        });
+        return activeButtons;
     }
 
     clearApps() {
-        this.clearAppsViewEnteredActors();
+        this.clearAppsViewFocusedActors();
+
+        //destroy subheading labels
+        this.getActiveContainer().get_children().forEach(actor => {
+                    if (!(  actor.has_style_class_name('menu-application-button') ||
+                            actor.has_style_class_name('menu-application-button-selected'))) {
+                        actor.destroy();
+                    }
+                 });
+
         this.getActiveContainer().remove_all_children();
     }
 
-    clearAppsViewEnteredActors() {
-        this.getActiveButtons().forEach(button => { if (button.entered) button.handleLeave(); });
+    clearAppsViewFocusedActors() {
+        this.getActiveButtons().forEach(button => { if (button.has_focus) button.handleLeave(); });
     }
 
     getActiveContainer() {
