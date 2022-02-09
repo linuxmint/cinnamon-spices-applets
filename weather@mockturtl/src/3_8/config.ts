@@ -535,7 +535,17 @@ export class Config {
 
 		const conf = JSON.parse(confString);
 		if (conf?.apiKey?.value != null)
-			conf.apiKey.value = "Redacted";
+			conf.apiKey.value = "REDACTED";
+
+		for (const item of conf?.locationList?.value ?? []) {
+			item.lat = "REDACTED";
+			item.lon = "REDACTED";
+			item.city = "REDACTED";
+			item.entryText = "REDACTED";
+		}
+
+		if (conf?.location?.value != null)
+			conf.location.value = "REDACTED";
 
 		return conf;
 	}

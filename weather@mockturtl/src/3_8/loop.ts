@@ -65,7 +65,7 @@ export class WeatherLoop {
 			this.ValidateLastUpdateTime();
 
 			if (this.pauseRefresh) {
-				Logger.Debug("Configuration error, updating paused")
+				Logger.Debug("Configuration or network error, updating paused")
 				return;
 			}
 
