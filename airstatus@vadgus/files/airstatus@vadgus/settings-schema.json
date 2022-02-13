@@ -1,0 +1,16 @@
+{
+    "interval": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 30,
+        "max": 120,
+        "step": 30,
+        "units": "s",
+        "description": "Update interval"
+    },
+    "notifications": {
+        "type": "switch",
+        "description": "Enable notifications",
+        "default": true
+    }
+}
