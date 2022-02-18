@@ -86,6 +86,7 @@ export class WeatherApplet extends TextIconApplet {
 		switch (NetworkMonitor.get_default().connectivity) {
 			case NetworkConnectivity.FULL:
 			case NetworkConnectivity.LIMITED:
+			case NetworkConnectivity.PORTAL:
 				if (this.online === true)
 					break;
 				Logger.Info("Internet access now available, resuming operations.");
@@ -93,7 +94,6 @@ export class WeatherApplet extends TextIconApplet {
 				this.online = true;
 				break;
 			case NetworkConnectivity.LOCAL:
-			case NetworkConnectivity.PORTAL:
 				if (this.online === false)
 					break;
 				Logger.Info(`Internet access now down with "${NetworkMonitor.get_default().connectivity}", pausing refresh.`);

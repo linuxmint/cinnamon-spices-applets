@@ -15626,6 +15626,7 @@ class WeatherApplet extends TextIconApplet {
             switch (NetworkMonitor.get_default().connectivity) {
                 case NetworkConnectivity.FULL:
                 case NetworkConnectivity.LIMITED:
+                case NetworkConnectivity.PORTAL:
                     if (this.online === true)
                         break;
                     logger_Logger.Info("Internet access now available, resuming operations.");
@@ -15633,12 +15634,10 @@ class WeatherApplet extends TextIconApplet {
                     this.online = true;
                     break;
                 case NetworkConnectivity.LOCAL:
-                case NetworkConnectivity.PORTAL:
                     if (this.online === false)
                         break;
                     logger_Logger.Info(`Internet access now down with "${NetworkMonitor.get_default().connectivity}", pausing refresh.`);
                     this.loop.Pause();
-                    global.log(NetworkMonitor.get_default().connectivity);
                     this.online = false;
                     break;
             }
