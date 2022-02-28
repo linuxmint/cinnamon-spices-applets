@@ -9,6 +9,7 @@ const St = imports.gi.St;
 const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
+const AppletManager = imports.ui.appletManager; //
 //const {SessionManager} = imports.misc.gnomeSession;
 const {ScreenSaverProxy} = imports.misc.screenSaver;
 const {PopupMenuManager, PopupMenuSection, PopupIconMenuItem} = imports.ui.popupMenu;
@@ -47,7 +48,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.gpu_offload_supported = Main.gpu_offload_supported;
         this.isBumblebeeInstalled = GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS);
         this.recentManagerDefault = Gtk.RecentManager.get_default();
-        this.closeMenu = () => this.menu.close();
         this.orientation = orientation;
         this.menuManager = new PopupMenuManager(this);
         this.menu = new AppletPopupMenu(this, this.orientation);
@@ -226,7 +226,21 @@ class CinnamenuApplet extends TextIconApplet {
         return ws.get_work_area_for_monitor(monitor.index);
     }
 //----------------TextIconApplet callbacks---------
-    //on_applet_reloaded() {}
+    /*on_applet_reloaded() {
+        const appletDefinition = AppletManager.getAppletDefinition({applet_id: this.instance_id});
+        global.log(">>>"+appletDefinition.location_label,this.orientation === St.Side.BOTTOM,this.orientation);
+        if (this.orientation === St.Side.BOTTOM &&
+                                appletDefinition.location_label === 'center') {
+            let monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
+            this.monitor_center_pos = Math.floor(monitor.width / 2);
+            this.menu.shiftToPosition(this.monitor_center_pos);
+
+            global.log(">>>monitor_center_pos",this.monitor_center_pos);
+        } else {
+            this.monitor_center_pos = -1;
+            this.menu.shiftToPosition(-1);//Unset slidePosition if set.
+        }
+    }*/
 
     on_orientation_changed(orientation) {
         this.orientation = orientation;
@@ -237,8 +251,6 @@ class CinnamenuApplet extends TextIconApplet {
         }
         this._updateIconAndLabel();
     }
-
-    //on_applet_added_to_panel() {}
 
     on_applet_removed_from_panel() {
         this.willUnmount = true;
@@ -866,13 +878,13 @@ class CinnamenuApplet extends TextIconApplet {
             }
             return Clutter.EVENT_STOP;
         case (symbol === Clutter.ISO_Left_Tab || symbol === Clutter.Tab) && altKey:
-            this.closeMenu();//Close menu as alt-tab is used for app-switcher in cinnamon
+            this.menu.close();//Close menu as alt-tab is used for app-switcher in cinnamon
             return Clutter.EVENT_STOP;
         case (symbol === Clutter.Escape || symbol === Clutter.KEY_Escape) && noModifiers:
             if (this.contextMenu.isOpen) {
                 this.contextMenu.close();
             } else {
-                this.closeMenu();
+                this.menu.close();
             }
             return Clutter.EVENT_STOP;
         case (symbol === Clutter.KEY_Page_Up && noModifiers):
@@ -1020,11 +1032,13 @@ class CinnamenuApplet extends TextIconApplet {
 
         //======Begin search===========
 
-        let primaryResults = this.apps.listApplications('all', pattern)
+        let primaryResults = this.apps.searchApplications(pattern)
                         .concat(this.listFavoriteFiles(pattern))
                         .concat(this.recentsEnabled ? this.searchRecent(pattern) : [])
                         .concat(this.settings.showPlaces ? this.listPlaces(pattern) : []);
         let otherResults = [];
+        const emojiResults = [];
+        const webBookmarksResults = [];
 
         //=======search providers==========
         //---calculator---
@@ -1096,7 +1110,6 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.settings.enableWebBookmarksSearch && pattern.length > 1) {
             const bookmarks = this.bookmarksManager.state;
 
-            const webBookmarksResults = [];
             bookmarks.forEach(bookmark => {
                         if (bookmark.name) {
                             const match = searchStr(pattern, bookmark.name);
@@ -1108,7 +1121,6 @@ class CinnamenuApplet extends TextIconApplet {
                         } });
 
             webBookmarksResults.sort((a, b) =>  a.score < b.score);
-            otherResults = otherResults.concat(webBookmarksResults);
         }
 
         //---------------------------
@@ -1149,6 +1161,12 @@ class CinnamenuApplet extends TextIconApplet {
             if (otherResults.length > 0) {
                 this.appsView.populate_add(otherResults, _('Other search results'));
             }
+            if (webBookmarksResults.length > 0) {
+                this.appsView.populate_add(webBookmarksResults, _('Browser bookmarks'));
+            }
+            if (emojiResults.length > 0) {
+                this.appsView.populate_add(emojiResults, _('Emoji'));
+            }
             this.appsView.populate_finish();
             this.appsView.highlightFirstItem();
 
@@ -1171,7 +1189,6 @@ class CinnamenuApplet extends TextIconApplet {
 
         //---emoji search------
         if (pattern.length > 2 && this.settings.enableEmojiSearch) {
-            let emojiResults = [];
             EMOJI.forEach(emoji => {
                 const match1 = searchStr(pattern, emoji[EMOJI_NAME], true);
                 const match2 = searchStr(pattern, emoji[EMOJI_KEYWORDS], true);
@@ -1195,7 +1212,6 @@ class CinnamenuApplet extends TextIconApplet {
             });
 
             emojiResults.sort((a, b) =>  a.score < b.score);
-            otherResults = otherResults.concat(emojiResults);
         }
 
         //----home folder search--------
@@ -1546,6 +1562,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.recentManagerDefault.get_items().forEach(recentInfo => {
             if (type === 'documents' && !(  recentInfo.get_mime_type().startsWith('application') ||
                                             recentInfo.get_mime_type().startsWith('text') ||
+                                            recentInfo.get_mime_type().startsWith('font') ||
                                             recentInfo.get_mime_type().startsWith('inode'))) {
                 return;
             }
@@ -1837,40 +1854,45 @@ class Apps {//This obj provides the .app objects for all the applications catego
         }
     }
 
-    listApplications(categoryMenuId, pattern) {
+    listApplications(categoryMenuId) {
         if (this.appsNeedRefresh) {
             this._initAppCategories();
         }
-        let res = this.appsByCategory[categoryMenuId];
+        return this.appsByCategory[categoryMenuId];
+    }
 
-        if (pattern) {
-            const _res = [];
-            res.forEach(app => {
-                const keywords = app.get_keywords() || '';
-                let id = app.id.replace('.desktop', '');
-                const idLastDot = id.lastIndexOf('.');
-                if (idLastDot >= 0) {
-                    id = id.substring(idLastDot + 1);
-                }
-                id = id.replace('cinnamon-settings-', '');
-
-                const match1 = searchStr(pattern, app.name);
-                const match2 = searchStr(pattern, app.description);
-                match2.score *= 0.95; //slightly lower priority for description match
-                const match3 = searchStr(pattern, keywords);
-                match3.score *= 0.8; //lower priority for keyword match
-                const match4 = searchStr(pattern, id);
-                const bestMatchScore = Math.max(match1.score, match2.score, match3.score, match4.score);
-                if (bestMatchScore > SEARCH_THRESHOLD) {
-                    app.score = bestMatchScore;
-                    app.nameWithSearchMarkup = match1.result;
-                    app.descriptionWithSearchMarkup = match2.result;
-                    _res.push(app);
-                }
-            });
-            res = _res;
+    searchApplications(pattern) {
+        if (!pattern) {
+            return [];
         }
-        return res;
+
+        const res = this.listApplications('all');
+        const _res = [];
+        res.forEach(app => {
+            const keywords = app.get_keywords() || '';
+            let id = app.id.replace('.desktop', '');
+            const idLastDot = id.lastIndexOf('.');
+            if (idLastDot >= 0) {
+                id = id.substring(idLastDot + 1);
+            }
+            id = id.replace('cinnamon-settings-', '');
+
+            const match1 = searchStr(pattern, app.name);
+            const match2 = searchStr(pattern, app.description);
+            match2.score *= 0.95; //slightly lower priority for description match
+            const match3 = searchStr(pattern, keywords);
+            match3.score *= 0.8; //lower priority for keyword match
+            const match4 = searchStr(pattern, id);
+            const bestMatchScore = Math.max(match1.score, match2.score, match3.score, match4.score);
+            if (bestMatchScore > SEARCH_THRESHOLD) {
+                app.score = bestMatchScore;
+                app.nameWithSearchMarkup = match1.result;
+                app.descriptionWithSearchMarkup = match2.result;
+                _res.push(app);
+            }
+        });
+
+        return _res;
     }
 }
 

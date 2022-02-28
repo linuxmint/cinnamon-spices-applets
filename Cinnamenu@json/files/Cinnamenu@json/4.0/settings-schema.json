@@ -472,7 +472,7 @@
         "type":"checkbox",
         "default":false,
         "description":"Use sidebar box style",
-        "tooltip":"Use sidebar box style"
+        "tooltip":"Use a sidebar box style"
     },
     "use-tile-style":{
         "type":"checkbox",

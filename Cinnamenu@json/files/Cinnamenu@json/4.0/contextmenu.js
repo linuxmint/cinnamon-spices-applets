@@ -117,7 +117,7 @@ class ContextMenu {
                 const item = new ContextMenuItem(this.appThis, newEmoji + ' ' + text, null,
                                         () => { const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, newEmoji);
-                                                this.appThis.closeMenu(); } );
+                                                this.appThis.menu.close(); } );
                 this.menu.addMenuItem(item);
                 this.contextMenuButtons.push(item);
             };
@@ -182,11 +182,11 @@ class ContextMenu {
                                         } catch (e) {
                                             logError(e, 'Could not launch app with dedicated gpu: ');
                                         }
-                                        this.appThis.closeMenu(); } ));
+                                        this.appThis.menu.close(); } ));
         } else if (this.appThis.isBumblebeeInstalled) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Run with NVIDIA GPU'), 'cpu',
                                 () => { spawnCommandLine('optirun gtk-launch ' + app.id);
-                                        this.appThis.closeMenu(); } ));
+                                        this.appThis.menu.close(); } ));
         }
 
         //Add to panel
@@ -236,7 +236,7 @@ class ContextMenu {
             addMenuItem( new ContextMenuItem(this.appThis, _('Uninstall'), 'edit-delete',
                                 () => { spawnCommandLine(__meta.path + "/mint-remove-application.py '" +
                                             app.get_app_info().get_filename() + "'");
-                                        this.appThis.closeMenu(); } ));
+                                        this.appThis.menu.close(); } ));
         }
     }
 
@@ -263,7 +263,7 @@ class ContextMenu {
             if (defaultInfo) {
                 addMenuItem( new ContextMenuItem(   this.appThis, defaultInfo.get_display_name(), null,
                                                     () => { defaultInfo.launch([file], null);
-                                                            this.appThis.closeMenu(); } ));
+                                                            this.appThis.menu.close(); } ));
             }
             Gio.AppInfo.get_all_for_type(app.mimeType).forEach(info => {
                 if (!hasLocalPath(file) || !info.supports_uris() || info.equal(defaultInfo)) {
@@ -271,11 +271,11 @@ class ContextMenu {
                 }
                 addMenuItem( new ContextMenuItem(   this.appThis, info.get_display_name(), null,
                                                     () => { info.launch([file], null);
-                                                            this.appThis.closeMenu(); } ));
+                                                            this.appThis.menu.close(); } ));
             });
             addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
                                                 () => { spawnCommandLine('nemo-open-with ' + app.uri);
-                                                        this.appThis.closeMenu(); } ));
+                                                        this.appThis.menu.close(); } ));
         }
 
         //add/remove favorite
@@ -312,7 +312,7 @@ class ContextMenu {
             addMenuItem( new ContextMenuItem(   this.appThis, _('Open containing folder'), 'go-jump',
                         () => { const fileBrowser = Gio.AppInfo.get_default_for_type('inode/directory', true);
                                 fileBrowser.launch([folder], null);
-                                this.appThis.closeMenu(); } ));
+                                this.appThis.menu.close(); } ));
         }
 
         //Move to trash

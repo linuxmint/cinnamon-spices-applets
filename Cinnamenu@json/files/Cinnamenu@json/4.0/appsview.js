@@ -292,32 +292,32 @@ class AppButton {
             }
             this.appThis.recentApps.add(this.app.id);
             this.app.open_new_window(-1);
-            this.appThis.closeMenu();
+            this.appThis.menu.close();
         } else if (this.app.isPlace) {
             this.app.launch();
-            this.appThis.closeMenu();
+            this.appThis.menu.close();
         } else if (this.app.isWebBookmark) {
             this.app.app.launch_uris([this.app.uri], null);
-            this.appThis.closeMenu();
+            this.appThis.menu.close();
         } else if (this.app.isFolderviewDirectory || this.app.isBackButton) {
             this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
-            //don't closeMenu
+            //don't menu.close()
         } else if (this.app.isFolderviewFile || this.app.isRecentFile || this.app.isFavoriteFile) {
             try {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
-                this.appThis.closeMenu();
+                this.appThis.menu.close();
             } catch (e) {
                 Main.notify(_('Error while opening file:'), e.message);
-                //don't closeMenu
+                //don't menu.close()
             }
         } else if (this.app.isClearRecentsButton) {
             this.appThis.recentApps.clear();
             this.appThis.recentManagerDefault.purge_items();
             this.appThis.setActiveCategory('recents');
-            //don't closeMenu
+            //don't menu.close
         } else if (this.app.isSearchResult) {
             this.app.activate(this.app);
-            this.appThis.closeMenu();
+            this.appThis.menu.close();
         }
     }
 
