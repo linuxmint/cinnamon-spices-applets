@@ -58,6 +58,16 @@
     "description" : "Border width",
     "tooltip" : "Select the border width"
  },
+  "margin": {
+    "type": "scale",
+    "default" : 0,
+    "min" : 0,
+    "max" : 10,
+    "step" : 1,
+    "units" : "pixels",
+    "description" : "Margin",
+    "tooltip" : "Select the margin"
+ },
   "custom-color":{
     "type" : "switch",
     "default" : "false",
