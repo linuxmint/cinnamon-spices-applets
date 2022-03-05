@@ -1,175 +1,175 @@
-# Spices Update
+# Nadopune dodataka
 
-## Summary
+## Sažetak
 
-Cinnamon Spices are Applets, Desklets, Extensions and Themes.
+Cinnamon Dodaci su Apleti, Deskleti, Proširenja i Teme.
 
-You usually check updates for the Spices using Cinnamon Settings. But, like me, you do it too seldom.
+Uobičajeno provjeravate nadopune dodataka u Cinnamon postavkama. Ali, poput mene, to činite povremeno.
 
-The **Spices Update** applet, highly configurable, plays these roles:
+**Nadopune dodataka** aplet, koji je vrlo prilagodljiv, čini to umjesto vas:
 
-  * It warns you when the Spices you have installed need updates.
-  * Optional: It can also warn you when new Spices are available.
-  * It gives you direct access to Cinnamon Settings for Applets, Desklets, Extensions and Themes.
-  * Only with Cinnamon 3.8 or greater:
-    * It allows you to renew the download of the latest version of a Spice.
-    * It guarantees you to always download the latest version of a Spice when an update needs to be done.
-    * It allows you to ignore the available updates for spices that you do not want to upgrade.
-    * By a middle-click on its icon, it allows you to force refresh the data about new Spices and available updates, or open all system settings useful to perform the available updates.
+  * Upozorava vas kada instalirani dodaci imaju dostupne nadopune.
+  * Neobavezno: Može vas upozoriti kada je dostupan novi dodatak.
+  * Daje vam izravan pristup u Cinnamon postavke za aplete, desklete, proširenja i teme.
+  * Samo za Cinnamon 3.8 ili noviji:
+    * Omogućuje vam da nastavite preuzimanje najnovije inačice dodatka.
+    * Jamči vam da uvijek preuzmete najnoviju inačicu dodatka kada je nadopuna dostupna.
+    * Omogućuje vam da zanemarite dostupne nadopune za dodatke koje ne želite nadograditi.
+    * Srednji klik na ikonu apleta, omogućuje vam trenutno osvježavanje podataka o dostupnim novim dodacima i nadopunama, ili otvara postavke sustava korisne za izvođenje dostupnih nadopuna.
 
 
-## Status
+## Stanje
 
-Usable from Cinnamon 2.8 to Cinnamon 4.4.
+Koristi se za Cinnamon 2.8 do Cinnamon 4.4.
 
-Fully supported by the author, under continuing development and in continuous use on several machines, running with **Linux Mint**, **Fedora**,  **Archlinux** or **Debian 10**.
+Potpuno podržan od strane autora, pod neprekidnim razvojem i neprekidnim korištenjem na nekoliko računala, pogonjenih s **Linux Mintom**, **Fedorom**,  **Archlinuxom** i **Debianom 10**.
 
-From version v3.0.0 ~ 20190808:
+Od inačice v3.0.0 ~ 20190808:
 
-  * Spices Update is compatible with Cinnamon 2.8 -> 4.4 (Mint 17.3 -> 19.3).
-  * From Cinnamon 3.8 to 4.4 (Mint 19 -> 19.3): **Perfectly functional, as usual.**
-  * From Cinnamon 2.8 to 3.6 (Mint 17.3 -> 18.3): Some features are reduced:
-    * The Spices configuration window does not open on the second tab, but on the first one. You will need to click on the second tab and select the sort by date yourself.
-    * The Settings window of this applet does not contain any tabs.
-    * In the settings of this applet, you can not access Spices lists to disable their monitoring. Therefore, all installed Spices are monitored.
-    * The script `generate_mo.sh` (in the `scripts` folder) allows you to install all available translations. Restart Cinnamon after execution.
-    * If the `Symbola_Hinted` font can not be automatically installed, then place you into the `fonts/symbola` folder and double-click on the `Symbola_Hinted.ttf` file. Install it with the just opened `gnome-font-viewer`.
-    * Cinnamon 2.8: The number of changes does not appear next to the Spices Update icon.
+  * Nadopune dodataka su kompatibilne s Cinnamon 2.8 -> 4.4 (Mint 17.3 -> 19.3).
+  * Od Cinnamona 3.8 do 4.4 (Mint 19 -> 19.3): **Izvanredno funkcionalan, kao i obično.**
+  * Od Cinnamona 2.8 do 3.6 (Mint 17.3 -> 18.3): Određene značajke su uskraćene:
+    * Prozor podešavanja dodataka ne otvara se u drugoj kartici, nego samo u prvoj. Morat ćete kliknuti na drugu karticu i odabradi razvrstaj prema datumu.
+    * Prozor postavki ovog apleta ne sadrži kartice.
+    * U postavkama ovog apleta, ne možete pristupiti popisu dodataka kako bi onemogućili njihovo nadgledanje. Stoga, svi instalirani dodaci se nadgledaju.
+    * Skripta `generate_mo.sh` (u `scripts` mapi) omogućuje vam instalaciju svih dostupnih prijevoda. Ponovno pokrenite Cinnamon nakon pokretanja skripte.
+    * Ako `Symbola_Hinted` font se ne može automatski instalirati, tada ga smjestite u `fonts/symbola` mapu i dvostruko kliknite na `Symbola_Hinted.ttf` datoteku. Instalirajte ga jednostavno otvaranjem `gnome-font-viewer` aplikacije.
+    * Cinnamon 2.8: Broj promjena ne pojavljuje se pokraj ikone apleta Nadopune dodataka.
 
-## Requirements
+## Zahtjevi
 
-The Spices Update requires the ```notify-send``` tool and the ```symbola``` TrueType font.
+Nadopune dodataka aplet zahtijeva ```notify-send``` alat i ```symbola``` TrueType font.
 
-**This applet helps you to install these dependencies, if needed.**
+**Ovaj aplet vam pomaže u instalaciji tih zavisnosti, ako je potrebno.**
 
-To install them manually:
+Ručno ih možete instalirati pokretanjem naredbi:
 
   * Fedora: `sudo dnf install libnotify gdouros-symbola-fonts`
   * Arch:
     * ```sudo pacman -Syu libnotify```
     * `yay -S ttf-symbola` _or_ `pamac build ttf-symbola`
   * Linux Mint, Ubuntu: ```sudo apt install libnotify-bin fonts-symbola```
-  * Debian (without sudo):
+  * Debian (bez sudo):
     * `su`
     * ```apt install libnotify-bin fonts-symbola```
 
 
-## Settings
+## Postavke
 
 ![screenshot](https://cinnamon-spices.linuxmint.com/git/applets/SpicesUpdate@claudiux/screenshot.png)
 
-There are five tabs in settings.
+Postoji pet kartica u postavkama.
 
-The first, _General_, allows you to:
+Prva, _Općenito_, omogućuje vam:
 
-  * Select the _Time interval between two checks_ (in hours). Please note that the first check will take place one minute after starting this applet.
-  * Select the ways to warn you : changing the appearance (by color changing) of the icon of this applet and/or displaying messages in the notification zone. You can also choose the type of notification: Minimal or With a button to open the Download tab in System Settings. If desired, the notification may contain the description of each update or new Spice.
-  * Select the _Type of display_ of the icon: with or without text?
-  * Hide the icon applet while nothing is to report. _Please note that Spices Update settings are only accessible when the applet icon is visible or by opening the Cinnamon Settings-> Applets._
+  * Odabir _Vremenskog razdoblja između nadopuna_ (u satima). Zapamtite da će se prva provjera pokrenuti jednu minutu nakon pokretanja ovog apleta.
+  * Odabir načina obavijesti: promjena izgleda (prema boji) ikone ovog apleta i/ili prikaza poruke u području obavijesti. Možete odabrati i vrstu obavijesti: Minimalna ili s tipkom za otvaranje kartice Preuzimanje u postavkama sustava. Ako je potrebno, obavijest može sadržavati opis pojedine nadopune ili novog dodatka.
+  * Odabir _vrste prikaza_ ikone: s ili bez teksta?
+  * Sakrivanje ikone apleta kada nema nikakvih nadopuna ili novih dodataka. _Zapamtite da postavke Nadopune dodataka su dostupne samo kada je ikona apleta vidljiva ili otvaranjem Cinnamon postavki-> Apleti._
 
 ![system_settings_applets](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/System_Settings_Applets.png)
 
-For the content of the other tabs (_Applets_, _Desklets_, etc), please look at the screenshot bellow and note that **the list of installed Spices is automatically filled** at startup; a Refresh button allows you to refill it and refresh data about updates.
+Za sadržaj ostalih kartica (_Apleti_, _Deskleti_, itd.), pogledajte snimku zaslona ispod i zapamtite da se **popis instaliranih dodataka automatski popunjava** pri pokretanju; tipke osvježavanja omogućuje vam nadopunjavanje i osvježavanje podataka o nadopunama.
 
-Set to _FALSE_ (or uncheck the first box of) all the Spices you _do not want_ to check updates. There are two reasons to do this:
+Postavite na _LAŽ_ (ili uklonite prvi odabir) sve dodatke za koje _ne želite_ provjeriti nadopunu. Postoje dva razloga za to:
 
-  * A spice is OK for you, and you do not want to be notified of any changes to it.
-  * You are a developer working on a Spice and you want to protect it during development.
+  * Dodatak ispravno funkcionira i ne želite biti obaviješteni o bilo kakvim promjenama.
+  * Vi ste razvijatelj koji radi na dodatku i želite zaštiti svoj rad tijekom razvijanja dodatka.
 
-From Cinnamon 3.8, you can request to renew the download of the latest version of a Spice checking both boxes (or setting both switches to TRUE) then clicking the Refresh button.
+Od Cinnamona 3.8, možete zatražiti obnovu preuzimanja najnovije inačice dodatka odabirom obje mogućnosti (ili postavljanje oba preklopnika na ISTINU) zatim klikom na tipku osvježavanja.
 
 ![SpicesUpdate-settings_applets](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/Settings_Spices_Update_Applets.png)
 
-## Menu
+## Izbornik
 
-In the menu of this applet:
+U izborniku ovog apleta:
 
-  * a Refresh button allows you to force checking the availability of updates for your Spices;
-  * a dot appears in front of each type of Spice when at least one update is available;
-  * a click on a type of Spice (Applets, Desklets, etc) opens the Download tab of the corresponding page in Cinnamon Settings, with Spices sorted by date;
-  * when new Spices are available:
-    * an option _Forget new Spices_ appears; clicking it will clear these notifications of new spices, until others arrive;
-  * when updates or new Spices are available:
-    * an option _Open useful Cinnamon Settings_ (to perform updates) appears;
-  * a Configure... button opens the Spices Update Settings.
+  * tipka osvježavanja omogućuje vam ručno pokretanje provjere dostupnosti nadopuna za vaše dodatke;
+  * pojavljuje se točka ispred svakog dodatka kada je najmanje jedna nadopuna dostupna;
+  * klik na vrstu dodatka (Apleti, Deskleti, itd.) otvara karticu preuzimanja odgovarajuće stranice u Cinnamon postavkama, s dodacima razvrstanim prema datumu;
+  * kada su novi dodaci dostupni:
+    * pojavi se mogućnost _Ne obavještavaj o novim dodacima_; klikom na nju će se ukloniti te obavijesti o novim dodacima, dok se ne pojavi novi dodatak;
+  * kada su dostupni novi dodaci ili nadopune:
+    * pojavi se mogućnost _Otvori korisne Cinnamon postavke_ (za pokretanje nadopuna);
+  * Prilagodi... tipka otvara postavke Nadopune dodataka.
 
-## Icon
+## Ikona
 
-The color of the icon changes when at least one of your Spices needs an update.
+Boja ikone se promijeni kada je dostupna najmanje jedna nadopuna dodataka.
 
-From Cinnamon 3.8, the icon rotates and its color darkens while data are being refreshed.
+Od Cinnamona 3.8, ikona se okreće i njena boja potamni tijekom osvježavanja podataka.
 
-A _Middle-Click_ on applet icon:
+_Srednji klik_ na ikonu apleta:
 
-  * Performs a Refresh while no available updates are reported.
-  * Opens all useful Cinnamon Settings, when Spices updates are available, to allow the user to perform these updates.
+  * Pokreće osvježavanja bez obavijesti o novim nadopunama.
+  * Otvara sve korisne Cinnamon postavke, kada su nadopune dodataka dostupne, dopuštajući korisniku pokretanje tih nadopuna.
 
-Its tooltip (the message displayed hovering over the icon) contains the list of Spices to update, if any.
+Savjet ikone (poruka prikazana prijelazom pokazivača miša iznad ikone) sadrži popis dodataka s dostupnim nadopunama.
 
 ![hovering_icon](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/hovering_icon.png)
 
 
-## Notifications
+## Obavijesti
 
-There are two types of notifications: _Minimal_ or _With buttons_. Each of them may or may not contain details: the reason for an update or the description of a new spice.
+Postoje dvije vrste obavijesti: _Minimalna_ ili _S tipkama radnje_. Svaka od njih može ili ne treba sadržavati pojedinosti: razlog nadopune ili opis novog dodatka.
 
-### Minimal notifications
+### Minimalna obavijest
 
-Here with the reason for update:
+Primjer s razlogom nadopune:
 
 ![notif_simple_with_details](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_simple_with_details.png)
 
-### Notifications with buttons
+### Obavijest s tipkama radnje
 
-Two buttons: firstly a button to open the System Settings page to download updates; secondly a button to refresh notifications.
+Sadrži dvije tipke: prva tipka otvara stranicu preuzimanja nadopuna u postavkama sustava; druga tipka osvježava obavijesti.
 
 ![notif_with_details](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_with_details2.png)
 
-## Translations
+## Prijevodi
 
-Any translation is welcome. Thank you for contributing to translate the applet's messages into new languages, or to improve or supplement existing translations.
+Svaki prijevod je dobrodošao. Hvala vam na doprisu prevođenja poruka apleta na nove jezike ili poboljšanju ili nadopuni postojećih prijevoda.
 
 ### Available translations and their authors
 
-  * Croatian (hr): muzena
-  * Dutch (nl): Jurien (French77)
-  * Finnish (fi): MahtiAnkka
-  * French (fr): claudiux
-  * German (de): Mintulix
-  * Italian (it): Dragone2
-  * Spanish (es): claudiux
-  * Swedish (sv): Åke Engelbrektson (eson57)
+  * Hrvatski (hr): muzena
+  * Nizozemski (nl): Jurien (French77)
+  * Finski (fi): MahtiAnkka
+  * Francuski (fr): claudiux
+  * Njemački (de): Mintulix
+  * Talijanski (it): Dragone2
+  * Španjolski (es): claudiux
+  * Švedski (sv): Åke Engelbrektson (eson57)
 
-Many thanks to them!
+Hvala im puno!
 
-### How to offer a translation
+### Kako poslati prijevod
 
-  1. Create an account on [Github](https://github.com/).
-  2. Fork the [cinnamon-spices-applets](https://github.com/linuxmint/cinnamon-spices-applets) repository.
-  3. In your fork, create a branch (named like `SpicesUpdate-YOUR_LANGUAGE_CODE`) from the master one.
-  4. On your computer, install _git_ and _poedit_.
-  5. Clone your branch on your computer:
+  1. Stvorite račun na [Githubu](https://github.com/).
+  2. Fork [cinnamon-spices-applets](https://github.com/linuxmint/cinnamon-spices-applets) repozitorij.
+  3. U vašem forku, stvorite ogranak (branch) (naziva poput `SpicesUpdate-YOUR_LANGUAGE_CODE`) iz master ogranka (branch).
+  4. Na svojem računalu, instalirajte _git_ i _poedit_ programe.
+  5. Klonirajte vaš ogranak (branch) na svoje računalo:
 
-    `git clone -b SpicesUpdate-YOUR_LANGUAGE_CODE --single-branch https://github.com/YOUR_GITHUB_ACCOUNT/cinnamon-spices-applets.git SpicesUpdate-YOUR_LANGUAGE_CODE`
-  6. Open the `SpicesUpdate@claudiux.pot` file (which is in the `po` directory) with poedit and create your translation. You obtain a YOUR_LANGUAGE_CODE.po file.
-  7. On Github, upload this `YOUR_LANGUAGE_CODE.po` file at the right place into your branch then go to the root of your branch and make a Pull Request.
+    `git clone -b SpicesUpdate-VAŠ_JEZIČNI_KÔD --single-branch https://github.com/VAŠ_GITHUB_RAČUN/cinnamon-spices-applets.git SpicesUpdate-VAŠ_JEZIČNI_KÔD`
+  6. Otvorite `SpicesUpdate@claudiux.pot` datoteku (koja se nalazi u `po` direktoriju) u poeditu i stvorite svoj prijevod. Tada nastaje VAŠ_JEZIČNI_KÔD.po datoteka.
+  7. Na Githubu, pošaljite `VAŠ_JEZIČNI_KÔD.po` datoteku na pravo mjesto u vaš ogranak (branch) zatim načinite zahtjev za povlačenjem (Pull Request).
 
-## Installation
+## Instalacija
 
-### Automatic Installation
+### Automatska instalacija
 
-Use the _Applets_ menu in Cinnamon Settings, or _Add Applets to Panel_ in the context menu (right-click) of your desktop panel. Then go on the Download tab to install this Spices Update applet.
+Koristite izbornik _ApletI_ u Cinnamon postavkama, ili _Apleti_ u sadržajnom izborniku (desni klik) vašeg panela radne površine. Zatim idite u karticu preuzimanja za instalaciju apleta Nadopune dodataka.
 
-### Manual Installation:
+### Ručna instalacija:
 
-   * Install the additional programs required.
-   * Download the **[latest version of Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?04831377-cbe4-482d-b035-b8ce9349632e)** from the Spices Web Site.
-   * Unzip and extract the folder ```SpicesUpdate@claudiux``` into ```~/.local/share/cinnamon/applets/```
-   * Enable this applet in System Settings -> Applets.
-   * You can also access the Settings Screen from System Settings -> Applets, or from the context menu of this applet (right-clicking on its icon).
+   * Instalirajte dodatne potrebne programe.
+   * Preuzmite **[najnoviju inačicu apleta Nadopune dodataka](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?04831377-cbe4-482d-b035-b8ce9349632e)** s web stranice dodataka.
+   * Otpakrajte mapu ```SpicesUpdate@claudiux``` u ```~/.local/share/cinnamon/applets/```
+   * Omogućite ovaj aplet u Postavke sustava -> Apleti.
+   * Prozoru postavki možete pristupiti i iz Postavke sustava -> Apleti, ili iz sadržajnog izbornika ovog apleta (desni klik na apletovu ikonu).
 
-## A Star to thank the author
+## Zvijezdica za zahvalu autoru
 
-If you like this Spices Update applet, please do not offer money or coffee, but log in and click on the Star at the top of **[this page](https://cinnamon-spices.linuxmint.com/applets/view/309)**.
+Ako vam se sviđa ovaj aplet Nadopune dodataka, ne nudite mi novac ili kavu, radije se prijavite i kliknite na zvijezdicu pri vrhu **[ove stranice](https://cinnamon-spices.linuxmint.com/applets/view/309)**.
 
-Many Thanks.
+Puno Vam hvala.
