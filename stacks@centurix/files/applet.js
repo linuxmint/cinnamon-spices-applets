@@ -14,8 +14,7 @@ const EDITOR = '/usr/bin/xed';
 
 const APPLET_FOLDER = global.userdatadir + "/applets/stacks@centurix/";
 
-const ICON_UP = APPLET_FOLDER + "icons/docker_compose_up_128x128.png";
-const ICON_DOWN = APPLET_FOLDER + "icons/docker_compose_down_128x128.png";
+const ICON_UP = APPLET_FOLDER + "icons/docker_compose_128x128.png";
 const ICON_MISSING = APPLET_FOLDER + "icons/docker_compose_missing_128x128.png";
 
 /**
@@ -69,6 +68,15 @@ Stacks.prototype = {
 		}
 	},
 
+	checkDockerComposeExists: function() {
+		try {
+			let [res, list, err, status] = GLib.spawn_command_line_sync("which docker-compose");
+			return parseInt(status) == 0;
+		} catch(e) {
+			global.log(UUID + "::checkDockerComposeExists: " + e);
+		}
+	},
+
 	newIconMenuItem: function(icon, label, callback, options = {}) {
 		try {
 			let newItem = new PopupMenu.PopupIconMenuItem(label, icon, St.IconType.FULLCOLOR, options);
@@ -106,7 +114,7 @@ Stacks.prototype = {
 	},
 
     refreshApplet: function() {
-        this.updateApplet(true)
+        this.updateApplet()
 	},
 
 	notification: function(message) {
@@ -116,7 +124,7 @@ Stacks.prototype = {
 	},
 
 	transitionMenu: function(message, refresh = false) {
-		this.set_applet_icon_path(ICON_DOWN);
+		this.set_applet_icon_path(ICON_MISSING);
 		this.set_applet_tooltip(message);
 		this.menu.removeAll();
 		this.menu.addMenuItem(this.newIconMenuItem('dialog-information', message, null, {reactive: false}));
@@ -132,24 +140,40 @@ Stacks.prototype = {
 		}
 	},
 
-	updateApplet: function(exists, status) {
+	openDockerComposeInstructions: function() {
+		Main.Util.spawnCommandLine("xdg-open https://docs.docker.com/compose/install/");
+	},
+
+	updateApplet: function(status) {
+		/*
+		 * Draw the main menu.
+		 * Check for the existance for docker-compose. If it doesn't exist, alert the user and direct them to installation instructions
+		 * 
+		 */
 		try {
-			if (!exists) {
+			if (!this.checkDockerComposeExists()) {
 				this.set_applet_icon_path(ICON_MISSING);
 				this.set_applet_tooltip(_("Stacks: Docker compose missing or not configured."));
 				this.notification(_("Docker compose missing or not configured."));
+
+				this.menu.removeAll();
+				this.menu.addMenuItem(this.newIconMenuItem('apport', _('Docker-compose not installed'), null, {reactive: false}));
+				this.menu.addMenuItem(this.newIconMenuItem('emblem-web', _('Click here for installation instructions'), this.openDockerComposeInstructions));
+				this.menu.addMenuItem(this.newIconMenuItem('view-refresh', _('Refresh this menu'), this.refreshApplet));
+				return
 			}
 
 			this.set_applet_icon_path(ICON_UP);
 
 			this.menu.removeAll();
 
-            this.subMenuSites = new PopupMenu.PopupSubMenuMenuItem(_('Running containers'));
+            this.subMenuSites = new PopupMenu.PopupSubMenuMenuItem(_('Configured Stacks'));
 
             this.subMenuSites.menu.addMenuItem(this.newIconMenuItem('emblem-web', 'Stack #1', this.openBrowser));
             this.subMenuSites.menu.addMenuItem(this.newIconMenuItem('emblem-web', 'Stack #2', this.openBrowser));
             this.subMenuSites.menu.addMenuItem(this.newIconMenuItem('emblem-web', 'Stack #3', this.openBrowser));
             this.subMenuSites.menu.addMenuItem(this.newIconMenuItem('emblem-web', 'Stack #4', this.openBrowser));
+            this.subMenuSites.menu.addMenuItem(this.newIconMenuItem('emblem-web', 'Stack #5', this.openBrowser));
 
             this.menu.addMenuItem(this.subMenuSites);
             this.menu.addMenuItem(this.newSeparator());
