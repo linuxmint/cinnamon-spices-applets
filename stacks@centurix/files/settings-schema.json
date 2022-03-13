@@ -1,7 +1,7 @@
 {
 	"dockerComposeProjectFolder": {
 		"type": "filechooser",
-		"default": "~/docker-projects",
+		"default": "~/docker_projects",
 		"description": "Docker Compose base project folder",
 		"select-dir": true,
         "allow-none" : false,
@@ -9,7 +9,7 @@
 	},
 	"dockerComposeCmd": {
 		"type": "filechooser",
-		"default": "docker-compose2",
+		"default": "docker-compose",
 		"description": "Docker Compose command location",
         "allow-none" : false,
 		"tooltip": "This is the command that is run to start Docker Compose."

@@ -1,5 +1,6 @@
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
+const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const Settings = imports.ui.settings;
 const Gtk = imports.gi.Gtk;
@@ -15,8 +16,8 @@ const APPLET_FOLDER = global.userdatadir + "/applets/stacks@centurix/";
 const ICON_UP = APPLET_FOLDER + "icons/docker_compose_128x128.png";
 const ICON_MISSING = APPLET_FOLDER + "icons/docker_compose_missing_128x128.png";
 
-const DOCKER_COMPOSE_PROJECT_FOLDER = "~/docker-projects";
-const DOCKER_COMPOSE_CMD = "docker-compose2";
+const DOCKER_COMPOSE_PROJECT_FOLDER = "~/docker_projects";
+const DOCKER_COMPOSE_CMD = "docker-compose";
 const EDITOR = 'xed';
 
 /**
@@ -197,6 +198,7 @@ Stacks.prototype = {
 
 	checkDockerComposeExists: function() {
 		try {
+			global.log(UUID + "::checkDockerComposeExists: checking for " + this.docker_compose_cmd);
 			let [res, list, err, status] = GLib.spawn_command_line_sync("which " + this.docker_compose_cmd);
 			return parseInt(status) == 0;
 		} catch(e) {
@@ -205,7 +207,51 @@ Stacks.prototype = {
 	},
 
 	openDockerComposeInstructions: function() {
-		Main.Util.spawnCommandLine("xdg-open https://docs.docker.com/compose/install/");
+		this.openBrowser("https://docs.docker.com/compose/install/");
+	},
+
+	findDockerComposeFiles: function(currentDir) {
+		// Scan through the docker compose project folder for:
+		// docker-compose.yaml and docker-compose.yml files
+		try {
+			let compose_files = [];
+			let enumerator = currentDir.enumerate_children("standard::*", Gio.FileQueryInfoFlags.NONE, null);
+
+			let info;
+			while ( (info = enumerator.next_file(null)) != null ) {
+				if ( info.get_is_hidden() ) continue;
+				if ( info.get_file_type() == Gio.FileType.DIRECTORY) {
+					let childDir = currentDir.get_child(info.get_name());
+					compose_files = compose_files.concat(this.findDockerComposeFiles(childDir));
+				} else {
+					if ( !info.get_name().endsWith(".yaml") && !info.get_name().endsWith(".yml") ) continue;
+					compose_files.push(currentDir.get_child(info.get_name()).get_path());
+				}
+			}
+			return compose_files;
+		} catch(e) {
+			global.log(UUID + "::findDockerComposeFiles: " + e);
+		}
+	},
+
+	dockerComposeToggle: function(event) {
+		try {
+			if (event._switch.state) {
+				this.transitionMenu(_("Docker Compose: Bringing Stack up, please wait..."));
+				// this.homestead.up(Lang.bind(this, this.refreshApplet));
+				this.notification(_("Bringing Stack up..."));
+				return true;
+			}
+			this.transitionMenu(_("Docker Compose: Taking Stack down, please wait..."));
+			// this.homestead.halt(Lang.bind(this, this.refreshApplet));
+			this.notification(_("Taking Stack down..."));
+		} catch(e) {
+			global.log(UUID + '::dockerComposeToggle: ' + e);
+		}
+	},
+
+	dockerComposeSSH: function() {
+		this.notification(_("Docker Compose SSH Terminal opened"));
 	},
 
 	updateApplet: function(status) {
@@ -227,19 +273,30 @@ Stacks.prototype = {
 				return
 			}
 
+			let dir = Gio.file_new_for_path(resolveHome(this.docker_compose_project_folder));
+			let docker_projects = this.findDockerComposeFiles(dir);
+
+			global.log(UUID + "::updateMenu: FOUND PROJECTS: " + docker_projects);
+
 			this.set_applet_icon_path(ICON_UP);
 
 			this.menu.removeAll();
 
-            this.subMenuSites = new PopupMenu.PopupSubMenuMenuItem(_('Configured Stacks'));
+			this.stacks = [];
 
-            this.subMenuSites.menu.addMenuItem(this.newIconMenuItem('emblem-web', 'Stack #1', this.openBrowser));
-            this.subMenuSites.menu.addMenuItem(this.newIconMenuItem('emblem-web', 'Stack #2', this.openBrowser));
-            this.subMenuSites.menu.addMenuItem(this.newIconMenuItem('emblem-web', 'Stack #3', this.openBrowser));
-            this.subMenuSites.menu.addMenuItem(this.newIconMenuItem('emblem-web', 'Stack #4', this.openBrowser));
-            this.subMenuSites.menu.addMenuItem(this.newIconMenuItem('emblem-web', 'Stack #5', this.openBrowser));
+			for (let index = 0; index < docker_projects.length; index ++) {
+				let stack = new PopupMenu.PopupSubMenuMenuItem(docker_projects[index]);
+				stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Down", false, this.dockerComposeToggle));
 
-            this.menu.addMenuItem(this.subMenuSites);
+				// stack.menu.addMenuItem(this.newIconMenuItem('system-run', _('Docker Compose Up'), this.homesteadProvision));
+				// stack.menu.addMenuItem(this.newIconMenuItem('media-playback-pause', _('Docker Compose Down'), this.homesteadSuspend));
+				stack.menu.addMenuItem(this.newIconMenuItem('utilities-terminal', _('SSH Terminal...'), this.dockerComposeSSH));
+
+				this.stacks.push(stack);
+				this.menu.addMenuItem(stack);
+			}
+
+            // this.menu.addMenuItem(this.subMenuSites);
             this.menu.addMenuItem(this.newSeparator());
 			this.menu.addMenuItem(this.newIconMenuItem('view-refresh', _('Refresh this menu'), this.refreshApplet));
 
@@ -247,6 +304,11 @@ Stacks.prototype = {
 			global.log(UUID + "::updateMenu: " + e);
 		}
 	}
+}
+
+function resolveHome(path) {
+	let home = GLib.get_home_dir();
+	return path.replace('~', home);
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {
