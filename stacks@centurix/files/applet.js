@@ -10,13 +10,15 @@ const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const UUID = "stacks@centurix";
 
-const EDITOR = '/usr/bin/xed';
-
 const APPLET_FOLDER = global.userdatadir + "/applets/stacks@centurix/";
 
 const ICON_UP = APPLET_FOLDER + "icons/docker_compose_up_128x128.png";
 const ICON_DOWN = APPLET_FOLDER + "icons/docker_compose_down_128x128.png";
 const ICON_MISSING = APPLET_FOLDER + "icons/docker_compose_missing_128x128.png";
+
+const DOCKER_COMPOSE_PROJECT_FOLDER = "~/docker-projects";
+const DOCKER_COMPOSE_CMD = "docker-compose2";
+const EDITOR = 'xed';
 
 /**
  * TODO
@@ -63,10 +65,72 @@ Stacks.prototype = {
 			this._msgsrc = new MessageTray.SystemNotificationSource("Stacks");
 			Main.messageTray.add(this._msgsrc);
 
+			this.docker_compose_project_folder = DOCKER_COMPOSE_PROJECT_FOLDER;
+			this.docker_compose_cmd = DOCKER_COMPOSE_CMD;
+			this.editor = EDITOR;
+
+			global.log(UUID + "::docker_compose_project_folder: " + this.docker_compose_project_folder);
+			global.log(UUID + "::docker_compose_cmd: " + this.docker_compose_cmd);
+			global.log(UUID + "::editor: " + this.editor);
+
+			this.settings.bindProperty(
+				Settings.BindingDirection.IN, 
+				"dockerComposeProjectFolder",
+				"docker_compose_project_folder",
+				this.onDockerComposeProjectFolderUpdate
+			);
+			this.settings.bindProperty(
+				Settings.BindingDirection.IN, 
+				"dockerComposeCmd",
+				"docker_compose_cmd",
+				this.onDockerComposeCmdUpdate
+			);
+			this.settings.bindProperty(
+				Settings.BindingDirection.IN, 
+				"editor",
+				"editor",
+				this.onEditorUpdate
+			);
+			this.settingsApiCheck();
+
 			this.refreshApplet();
 		} catch (e) {
 			global.log(UUID + "::_init: " + e);
 		}
+	},
+
+	onDockerComposeProjectFolderUpdate: function() {
+		// Refresh the list of docker compose projects in the menu
+		global.log(UUID + "::onDockerComposeProjectFolderUpdate: " + this.docker_compose_project_folder);
+        this.updateApplet(true)
+	},
+
+	onDockerComposeCmdUpdate: function() {
+		// Refresh any docker compose related info based on the selected version of the command
+		global.log(UUID + "::onDockerComposeProjectFolderUpdate: " + this.docker_compose_cmd);
+        this.updateApplet(true)
+	},
+
+	onEditorUpdate: function() {
+		global.log(UUID + "::onDockerComposeProjectFolderUpdate: " + this.editor);
+	},
+
+	settingsApiCheck: function() {
+		const Config = imports.misc.config;
+		const SETTINGS_API_MIN_VERSION = 2;
+		const CMD_SETTINGS = "cinnamon-settings applets " + UUID;
+
+		let cinnamonVersion = Config.PACKAGE_VERSION.split('.');
+		let majorVersion = parseInt(cinnamonVersion[0]);
+
+		if (majorVersion >= SETTINGS_API_MIN_VERSION) {
+			return;
+		}
+
+		let mi = new Applet.MenuItem(_("Settings"), Gtk.STOCK_EDIT, Lang.bind(this, function() {
+			Util.spawnCommandLine(CMD_SETTINGS)
+		}));
+		this._applet_context_menu.addMenuItem(mi);
 	},
 
 	newIconMenuItem: function(icon, label, callback, options = {}) {
@@ -132,9 +196,18 @@ Stacks.prototype = {
 		}
 	},
 
+	checkDockerComposeExists: function() {
+		try {
+			let [res, list, err, status] = GLib.spawn_command_line_sync("which " + this.docker_compose_cmd);
+			return parseInt(status) == 0;
+		} catch(e) {
+			global.log(UUID + "::checkDockerComposeExists: " + e);
+		}
+	},
+
 	updateApplet: function(exists, status) {
 		try {
-			if (!exists) {
+			if (!this.checkDockerComposeExists()) {
 				this.set_applet_icon_path(ICON_MISSING);
 				this.set_applet_tooltip(_("Stacks: Docker compose missing or not configured."));
 				this.notification(_("Docker compose missing or not configured."));
