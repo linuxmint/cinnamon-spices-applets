@@ -23,7 +23,10 @@ class AppButton {
         //----------ICON---------------------------------------------
         if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton, isBackButton
             this.icon = this.app.icon;
-        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, isWebBookmark,
+        } else if (this.app.iconFilename) { //some of isWebBookmark
+            const gicon = new Gio.FileIcon({file: Gio.file_new_for_path(this.app.iconFilename)});
+            this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
+        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, some of isWebBookmark,
                                     //isFolderviewFile/Directory, isSearchResult(wikipedia)
             let gicon = this.app.gicon;
             if (!this.app.isWebBookmark && !this.app.isSearchResult) {
