@@ -321,7 +321,7 @@ class CinnamenuApplet extends TextIconApplet {
 
     _onEnableWebBookmarksChange() { //web bookmarks
         if (this.settings.enableWebBookmarksSearch) {
-            this.bookmarksManager = new BookmarksManager(this.appSystem);
+            this.bookmarksManager = new BookmarksManager();
         } else if (this.bookmarksManager) {
             this.bookmarksManager = null;
         }
@@ -1033,9 +1033,9 @@ class CinnamenuApplet extends TextIconApplet {
         //======Begin search===========
 
         let primaryResults = this.apps.searchApplications(pattern)
-                        .concat(this.listFavoriteFiles(pattern))
+                        .concat(this.searchFavoriteFiles(pattern))
                         .concat(this.recentsEnabled ? this.searchRecent(pattern) : [])
-                        .concat(this.settings.showPlaces ? this.listPlaces(pattern) : []);
+                        .concat(this.settings.showPlaces ? this.searchPlaces(pattern) : []);
         let otherResults = [];
         const emojiResults = [];
         const webBookmarksResults = [];
@@ -1108,7 +1108,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         //---web bookmarks search-----
         if (this.settings.enableWebBookmarksSearch && pattern.length > 1) {
-            const bookmarks = this.bookmarksManager.state;
+            const bookmarks = this.bookmarksManager.bookmarks;
 
             bookmarks.forEach(bookmark => {
                         if (bookmark.name) {
@@ -1121,6 +1121,9 @@ class CinnamenuApplet extends TextIconApplet {
                         } });
 
             webBookmarksResults.sort((a, b) =>  a.score < b.score);
+            if (webBookmarksResults.length > 12) {
+                webBookmarksResults.length = 12;
+            }
         }
 
         //---------------------------
@@ -1212,6 +1215,9 @@ class CinnamenuApplet extends TextIconApplet {
             });
 
             emojiResults.sort((a, b) =>  a.score < b.score);
+            if (emojiResults.length > 36) {
+                emojiResults.length = 36;
+            }
         }
 
         //----home folder search--------
@@ -1345,7 +1351,7 @@ class CinnamenuApplet extends TextIconApplet {
                         } else if (providerResult.icon_filename){
                             providerResult.icon = new St.Icon({
                                   gicon: new Gio.FileIcon({
-                                        file: Gio.file_new_for_path(providerResults[i].icon_filename)}),
+                                        file: Gio.file_new_for_path(providerResult.icon_filename)}),
                                         icon_size: this.getAppIconSize() });
                         }
                     });
@@ -1560,10 +1566,9 @@ class CinnamenuApplet extends TextIconApplet {
         //param "type" is one of all|documents|video|image|audio.
         const res = [];
         this.recentManagerDefault.get_items().forEach(recentInfo => {
-            if (type === 'documents' && !(  recentInfo.get_mime_type().startsWith('application') ||
-                                            recentInfo.get_mime_type().startsWith('text') ||
-                                            recentInfo.get_mime_type().startsWith('font') ||
-                                            recentInfo.get_mime_type().startsWith('inode'))) {
+            if (type === 'documents' && (   recentInfo.get_mime_type().startsWith('video') ||
+                                            recentInfo.get_mime_type().startsWith('image') ||
+                                            recentInfo.get_mime_type().startsWith('audio') )) {
                 return;
             }
             if ((type === 'video' || type === 'image' || type === 'audio') &&
@@ -1611,8 +1616,8 @@ class CinnamenuApplet extends TextIconApplet {
         return res;
     }
 
-    listPlaces(pattern) {
-        let res = [];
+    listPlaces() {
+        const res = [];
         Main.placesManager.getAllPlaces().forEach(place => {
             let selectedAppId = place.idDecoded.substr(place.idDecoded.indexOf(':') + 1);
             const fileIndex = selectedAppId.indexOf('file:///');
@@ -1640,26 +1645,29 @@ class CinnamenuApplet extends TextIconApplet {
                                                     icon_size: size })
                         });
 
-        if (pattern) {
-            const _res = [];
-            res.forEach(place => {
-                const match = searchStr(pattern, place.name);
-                if (match.score > SEARCH_THRESHOLD) {
-                    place.nameWithSearchMarkup = match.result;
-                    place.score = match.score;
-                    _res.push(place);
-                }
-            });
-            res = _res;
-        }
         return res;
     }
 
-    listFavoriteFiles(pattern) {
+    searchPlaces(pattern){
+        const places = this.listPlaces();
+        const res = [];
+        places.forEach(place => {
+            const match = searchStr(pattern, place.name);
+            if (match.score > SEARCH_THRESHOLD) {
+                place.nameWithSearchMarkup = match.result;
+                place.score = match.score;
+                res.push(place);
+            }
+        });
+
+        return res;
+    }
+
+    listFavoriteFiles() {
         if (!XApp.Favorites) {
             return [];
         }
-        let res = [];
+        const res = [];
         const favorite_infos = XApp.Favorites.get_default().get_favorites(null);
         favorite_infos.forEach(info => {
             const found = this.appsView.buttonStore.find(button =>
@@ -1677,19 +1685,22 @@ class CinnamenuApplet extends TextIconApplet {
         });
 
         res.sort( (a, b) => a.name.toUpperCase() > b.name.toUpperCase() );
+        return res;
+    }
 
-        if (pattern) {
-            const _res = [];
-            res.forEach(item => {
-                const match = searchStr(pattern, item.name);
-                if (item.name && match.score > SEARCH_THRESHOLD) {
-                    item.score = match.score;
-                    item.nameWithSearchMarkup = match.result;
-                    _res.push(item);
-                }
-            });
-            res = _res;
-        }
+    searchFavoriteFiles(pattern){
+        const favs = this.listFavoriteFiles();
+        const res = [];
+
+        favs.forEach(item => {
+            const match = searchStr(pattern, item.name);
+            if (item.name && match.score > SEARCH_THRESHOLD) {
+                item.score = match.score;
+                item.nameWithSearchMarkup = match.result;
+                res.push(item);
+            }
+        });
+
         return res;
     }
 
@@ -1896,7 +1907,7 @@ class Apps {//This obj provides the .app objects for all the applications catego
     }
 }
 
-class RecentApps {// simple class to remember the last 3 used apps which are shown in the "recent" category
+class RecentApps {// simple class to remember the last 4 used apps which are shown in the "recent" category
     constructor(appThis) {
         this.appThis = appThis;
     }
