@@ -23,13 +23,13 @@ class AppButton {
         //----------ICON---------------------------------------------
         if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton, isBackButton
             this.icon = this.app.icon;
-        } else if (this.app.iconFilename) { //some of isWebBookmark
-            const gicon = new Gio.FileIcon({file: Gio.file_new_for_path(this.app.iconFilename)});
+        } else if (this.app.icon_filename) { //some of isSearchResult
+            const gicon = new Gio.FileIcon({file: Gio.file_new_for_path(this.app.icon_filename)});
             this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
-        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, some of isWebBookmark,
-                                    //isFolderviewFile/Directory, isSearchResult(wikipedia)
+        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile,
+                                    //isFolderviewFile/Directory, some of isSearchResult
             let gicon = this.app.gicon;
-            if (!this.app.isWebBookmark && !this.app.isSearchResult) {
+            if (!this.app.isSearchResult) {
                 gicon = getThumbnail_gicon(this.app.uri, this.app.mimeType) || gicon;
             }
             this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
@@ -296,12 +296,6 @@ class AppButton {
             this.appThis.recentApps.add(this.app.id);
             this.app.open_new_window(-1);
             this.appThis.menu.close();
-        } else if (this.app.isPlace) {
-            this.app.launch();
-            this.appThis.menu.close();
-        } else if (this.app.isWebBookmark) {
-            this.app.app.launch_uris([this.app.uri], null);
-            this.appThis.menu.close();
         } else if (this.app.isFolderviewDirectory || this.app.isBackButton) {
             this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
             //don't menu.close()
@@ -318,7 +312,7 @@ class AppButton {
             this.appThis.recentManagerDefault.purge_items();
             this.appThis.setActiveCategory('recents');
             //don't menu.close
-        } else if (this.app.isSearchResult) {
+        } else if (this.app.isSearchResult || this.app.isPlace) {
             this.app.activate(this.app);
             this.appThis.menu.close();
         }

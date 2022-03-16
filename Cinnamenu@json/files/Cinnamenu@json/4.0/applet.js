@@ -28,6 +28,7 @@ const {CategoriesView} = require('./categoriesview');
 const {Sidebar} = require('./sidebar');
 const {BookmarksManager} = require('./browserBookmarks');
 const {wikiSearch, clearWikiSearchCache} = require('./wikipediaSearch');
+const {search_browser} = require('./browserHistory');
 const {EMOJI} = require('./emoji');
 const EMOJI_CODE = 0, EMOJI_NAME = 1, EMOJI_KEYWORDS = 2;
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
@@ -89,9 +90,7 @@ class CinnamenuApplet extends TextIconApplet {
         //this.session = new SessionManager();
         this.screenSaverProxy = new ScreenSaverProxy();
         this.initSettings();
-        if (this.settings.enableWebBookmarksSearch) {
-            this.bookmarksManager = new BookmarksManager();
-        }
+        this.bookmarksManager = new BookmarksManager();
         this.recentApps = new RecentApps(this);
         this._onEnableRecentsChange();
         this._updateActivateOnHover();
@@ -134,7 +133,8 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'enable-emoji-search',       value: 'enableEmojiSearch',     cb: null },
         { key: 'web-search-option',         value: 'webSearchOption',       cb: null },
         { key: 'enable-home-folder-search', value: 'searchHomeFolder',      cb: null },
-        { key: 'enable-web-bookmarks-search', value: 'enableWebBookmarksSearch', cb: this._onEnableWebBookmarksChange },
+        { key: 'enable-web-history-search', value: 'enableWebHistorySearch', cb: null },
+        { key: 'enable-web-bookmarks-search', value: 'enableWebBookmarksSearch', cb: null },
         { key: 'enable-wikipedia-search',   value: 'enableWikipediaSearch', cb: null },
         { key: 'wikipedia-language',        value: 'wikipediaLanguage',     cb: clearWikiSearchCache },
 
@@ -316,14 +316,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.recentsEnabled = this.settings.showRecents; // && recentFilesEnabled;
         if (this.currentCategory === 'recents' && !this.recentsEnabled) {
             this.currentCategory = 'all';
-        }
-    }
-
-    _onEnableWebBookmarksChange() { //web bookmarks
-        if (this.settings.enableWebBookmarksSearch) {
-            this.bookmarksManager = new BookmarksManager();
-        } else if (this.bookmarksManager) {
-            this.bookmarksManager = null;
         }
     }
 
@@ -1039,7 +1031,27 @@ class CinnamenuApplet extends TextIconApplet {
         let otherResults = [];
         const emojiResults = [];
         const webBookmarksResults = [];
+        let webHistoryResults = [];
 
+        //-----
+        let BOOKMARKS_PREFIX = false;
+        let HISTORY_PREFIX = false;
+        let EMOJI_PREFIX = false;
+        let FILE_PREFIX = false;
+        if (pattern.length > 2) {
+            if (pattern.startsWith('B ')) {
+                BOOKMARKS_PREFIX = true;
+            }
+            if (pattern.startsWith('H ')) {
+                HISTORY_PREFIX = true;
+            }
+            if (pattern.startsWith('E ')) {
+                EMOJI_PREFIX = true;
+            }
+            if (pattern.startsWith('F ')) {
+                FILE_PREFIX = true;
+            }
+        }
         //=======search providers==========
         //---calculator---
         let calculatorResult = null;
@@ -1107,12 +1119,17 @@ class CinnamenuApplet extends TextIconApplet {
         }
 
         //---web bookmarks search-----
-        if (this.settings.enableWebBookmarksSearch && pattern.length > 1) {
+        if (this.settings.enableWebBookmarksSearch && pattern.length > 1 ||
+                                                BOOKMARKS_PREFIX && pattern.length > 3) {
+            let bpattern = pattern;
+            if (BOOKMARKS_PREFIX) {
+                bpattern = pattern.substring(2);
+            }
             const bookmarks = this.bookmarksManager.bookmarks;
 
             bookmarks.forEach(bookmark => {
                         if (bookmark.name) {
-                            const match = searchStr(pattern, bookmark.name);
+                            const match = searchStr(bpattern, bookmark.name);
                             if (match.score > SEARCH_THRESHOLD) {
                                 bookmark.score = match.score;
                                 bookmark.nameWithSearchMarkup = match.result;
@@ -1127,7 +1144,7 @@ class CinnamenuApplet extends TextIconApplet {
         }
 
         //---------------------------
-        const finish = () => {//sort and display primaryResults[] and otherResults[]
+        const finish = () => {//sort and display all search results
             if (!this.searchActive || thisSearchId != this.currentSearchId){
                 return; //Search mode has ended or search string has changed
             }
@@ -1164,6 +1181,9 @@ class CinnamenuApplet extends TextIconApplet {
             if (otherResults.length > 0) {
                 this.appsView.populate_add(otherResults, _('Other search results'));
             }
+            if (webHistoryResults.length > 0) {
+                this.appsView.populate_add(webHistoryResults, _('Browser history'));
+            }
             if (webBookmarksResults.length > 0) {
                 this.appsView.populate_add(webBookmarksResults, _('Browser bookmarks'));
             }
@@ -1180,6 +1200,30 @@ class CinnamenuApplet extends TextIconApplet {
                                     });
         };
 
+        //---web history search---
+        if (this.settings.enableWebHistorySearch && pattern.length > 1 || HISTORY_PREFIX && pattern.length > 3) {
+            let hpattern = pattern;
+            if (HISTORY_PREFIX) {
+                hpattern = pattern.substring(2);
+            }
+            let history = [];
+            const thisSearchId = this.currentSearchId;
+            Promise.all([
+                search_browser(['chromium', 'Default'], 'chromium-browser', hpattern),
+                search_browser(['google-chrome', 'Default'], 'google-chrome', hpattern),
+                search_browser(['opera'], 'opera', hpattern),
+                search_browser(['vivaldi', 'Default'], 'vivaldi-stable', hpattern),
+                search_browser(['BraveSoftware', 'Brave-Browser', 'Default'], 'brave-browser', hpattern),
+                search_browser(['microsoft-edge', 'Default'], 'microsoft-edge', hpattern)
+            ]).then( results => {
+                results.forEach( result => history = history.concat(result));
+                if (history.length > 0 && this.searchActive && thisSearchId === this.currentSearchId) {
+                    webHistoryResults = history;
+                    finish();
+                }
+            }).catch((e) => global.log('>>>caught error:',e.message, e.stack));
+        }
+
         //---Wikipedia search----
         if (this.settings.enableWikipediaSearch && pattern_raw.length > 1 ) {
             wikiSearch(pattern_raw, this.settings.wikipediaLanguage, (wikiResults) => {
@@ -1191,10 +1235,15 @@ class CinnamenuApplet extends TextIconApplet {
         }
 
         //---emoji search------
-        if (pattern.length > 2 && this.settings.enableEmojiSearch) {
+        if (pattern.length > 2 && this.settings.enableEmojiSearch || EMOJI_PREFIX && pattern.length > 4) {
+            let epattern = pattern;
+            if (EMOJI_PREFIX) {
+                epattern = pattern.substring(2);
+            }
+
             EMOJI.forEach(emoji => {
-                const match1 = searchStr(pattern, emoji[EMOJI_NAME], true);
-                const match2 = searchStr(pattern, emoji[EMOJI_KEYWORDS], true);
+                const match1 = searchStr(epattern, emoji[EMOJI_NAME], true);
+                const match2 = searchStr(epattern, emoji[EMOJI_KEYWORDS], true);
                 match2.score *= 0.95; //slightly lower priority for keyword match
                 const bestMatchScore = Math.max(match1.score, match2.score);
                 if (bestMatchScore > SEARCH_THRESHOLD) {
@@ -1221,7 +1270,11 @@ class CinnamenuApplet extends TextIconApplet {
         }
 
         //----home folder search--------
-        if (pattern.length > 1 && this.settings.searchHomeFolder) {
+        if (pattern.length > 1 && this.settings.searchHomeFolder || FILE_PREFIX && pattern.length > 3) {
+            let fpattern = pattern;
+            if (FILE_PREFIX) {
+                fpattern = pattern.substring(2);
+            }
             //Call function searchNextDir() consecutively and asynchronously on each folder to be searched so
             //that search can be interupted at any time. Starting with home folder, all folders to be
             //searched are added to foldersToDo[] with currentFolderIndex being the folder currently
@@ -1270,14 +1323,14 @@ class CinnamenuApplet extends TextIconApplet {
                         const filename = next.get_name();
                         const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
                         const filePath = folder + (folder === '/' ? '' : '/') + filename;
-                        const match = searchStr(pattern, filename, true, true);
+                        const match = searchStr(fpattern, filename, true, true);
                         if (match.score > 1) { //any word boundary match
                             const file = Gio.file_new_for_path(filePath);
                             match.score -= 0.01;
                             //if file then treat as isFolderviewFile and if directory then treat as isPlace
                             const foundFile = {
                                         name: filename,
-                                        score: match.score * (pattern.length > 2 ? 1 : 0.9),
+                                        score: match.score * (fpattern.length > 2 ? 1 : 0.9),
                                         nameWithSearchMarkup: match.result,
                                         gicon: next.get_icon(),
                                         uri: file.get_uri(),
@@ -1289,7 +1342,7 @@ class CinnamenuApplet extends TextIconApplet {
                             if (isDirectory) {
                                 const defaultInfo = Gio.AppInfo.get_default_for_type('inode/directory', false);
                                 if (defaultInfo) {
-                                    foundFile.launch = () => { defaultInfo.launch([file], null); };
+                                    foundFile.activate = () => { defaultInfo.launch([file], null); };
                                 }
                             }
                             results.push(foundFile);
@@ -1520,7 +1573,6 @@ class CinnamenuApplet extends TextIconApplet {
  *  .isSearchResult
  *  .deleteAfterUse
  *  .emoji
- *  .launch()
  *  .activate()
  */
 
@@ -1629,6 +1681,7 @@ class CinnamenuApplet extends TextIconApplet {
             }
             place.isPlace = true;
             place.description = selectedAppId;
+            place.activate = () => place.launch();//don't pass any params to launch()
             if (place.id.startsWith('bookmark:')) {
                 place.uri = place.id.substr(9);
             }
@@ -1639,7 +1692,7 @@ class CinnamenuApplet extends TextIconApplet {
                 name: _('Trash'),
                 description: _('Trash'),
                 isPlace: true,
-                launch: () => Util.spawnCommandLine('xdg-open trash:'),
+                activate: () => Util.spawnCommandLine('xdg-open trash:'),
                 iconFactory: (size) => new St.Icon({icon_name: 'user-trash',
                                                     icon_type: St.IconType.FULLCOLOR,
                                                     icon_size: size })
