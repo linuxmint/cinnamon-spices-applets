@@ -168,7 +168,7 @@ function readFirefoxProfiles() {
 const readChromiumBookmarks = function(path, wmClass) {
 
     return new Promise(function(resolve, reject) {
-        let appSystem = Cinnamon.AppSystem.get_default();
+        const appSystem = Cinnamon.AppSystem.get_default();
         let foundBookmarks = [];
 
         let foundApps = appSystem.lookup_desktop_wmclass(path[0]);
@@ -176,6 +176,7 @@ const readChromiumBookmarks = function(path, wmClass) {
             foundApps = appSystem.lookup_desktop_wmclass(wmClass);
             if (!foundApps || foundApps.length === 0) {
                 resolve(foundBookmarks);
+                return;
             }
         }
 
@@ -185,11 +186,13 @@ const readChromiumBookmarks = function(path, wmClass) {
 
         if (!bookmarksFile.query_exists(null)) {
             resolve(foundBookmarks);
+            return;
         }
 
         readJSONAsync(bookmarksFile).then(function(jsonResult) {
             if (!jsonResult.hasOwnProperty('roots')) {
                 resolve(foundBookmarks);
+                return;
             }
 
             const recurseBookmarks = (children, cont) => {
@@ -229,12 +232,12 @@ const readChromiumBookmarks = function(path, wmClass) {
                 results = JSON.parse(results);
                 foundBookmarks.forEach( bookmark => {
                     if (bookmark.domain in results) {
-                        bookmark.iconFilename = results[bookmark.domain];
+                        bookmark.icon_filename = results[bookmark.domain];
                     }
                 });
                 resolve(foundBookmarks);
             });
-        }).catch(() => resolve(foundBookmarks));
+        });
     });
 };
 
@@ -257,7 +260,7 @@ class BookmarksManager {
             this.bookmarks = this.bookmarks.concat(readFirefoxProfiles());
 
             this.bookmarks.forEach( bookmark => {
-                if (!bookmark.iconFilename){
+                if (!bookmark.icon_filename){
                     bookmark.gicon = bookmark.app.get_icon();
                 }
                 //bookmarks.mime = null;
@@ -266,7 +269,9 @@ class BookmarksManager {
                     desc = desc.slice(0, 150) + ' ...';
                 }
                 bookmark.description = desc;
-                bookmark.isWebBookmark = true;
+                bookmark.isSearchResult = true;
+                bookmark.activate = () => Util.spawn(['xdg-open', bookmark.uri]);
+                //bookmark.activate = () => bookmak.app.launch_uris([bookmark.uri], null);
             });
 
             // Create a unique list of bookmarks across all browsers.
