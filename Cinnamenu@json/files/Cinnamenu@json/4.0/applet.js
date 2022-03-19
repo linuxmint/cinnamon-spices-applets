@@ -36,6 +36,8 @@ const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const SEARCH_THRESHOLD = 0.45;
 const SidebarPlacement = Object.freeze({ TOP: 0, BOTTOM: 1, LEFT: 2, RIGHT: 3});
 
+var customMenuPosition;
+
 class CinnamenuApplet extends TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
@@ -225,23 +227,8 @@ class CinnamenuApplet extends TextIconApplet {
         const ws = global.screen.get_active_workspace();
         return ws.get_work_area_for_monitor(monitor.index);
     }
+
 //----------------TextIconApplet callbacks---------
-    /*on_applet_reloaded() {
-        const appletDefinition = AppletManager.getAppletDefinition({applet_id: this.instance_id});
-        global.log(">>>"+appletDefinition.location_label,this.orientation === St.Side.BOTTOM,this.orientation);
-        if (this.orientation === St.Side.BOTTOM &&
-                                appletDefinition.location_label === 'center') {
-            let monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
-            this.monitor_center_pos = Math.floor(monitor.width / 2);
-            this.menu.shiftToPosition(this.monitor_center_pos);
-
-            global.log(">>>monitor_center_pos",this.monitor_center_pos);
-        } else {
-            this.monitor_center_pos = -1;
-            this.menu.shiftToPosition(-1);//Unset slidePosition if set.
-        }
-    }*/
-
     on_orientation_changed(orientation) {
         this.orientation = orientation;
         if (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT) {
@@ -269,6 +256,15 @@ class CinnamenuApplet extends TextIconApplet {
             this.set_applet_label(_('Please wait...'));
             return;
         }
+
+        //center menu if applet in center zone of top or bottom panel
+        const appletDefinition = AppletManager.getAppletDefinition({applet_id: this.instance_id});
+        if ((this.orientation === St.Side.BOTTOM || this.orientation === St.Side.TOP) &&
+                                                    appletDefinition.location_label === 'center') {
+            let monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
+            this.menu.shiftToPosition(Math.floor(monitor.width / 2));
+        }
+
         this.menu.toggle_with_options(this.settings.enableAnimation);
     }
 
@@ -1209,7 +1205,7 @@ class CinnamenuApplet extends TextIconApplet {
             let history = [];
             const thisSearchId = this.currentSearchId;
             Promise.all([
-                search_browser(['chromium', 'Default'], 'chromium-browser', hpattern),
+                search_browser(['chromium', 'Default'], 'chromium', hpattern),
                 search_browser(['google-chrome', 'Default'], 'google-chrome', hpattern),
                 search_browser(['opera'], 'opera', hpattern),
                 search_browser(['vivaldi', 'Default'], 'vivaldi-stable', hpattern),
@@ -1227,11 +1223,10 @@ class CinnamenuApplet extends TextIconApplet {
         //---Wikipedia search----
         if (this.settings.enableWikipediaSearch && pattern_raw.length > 1 ) {
             wikiSearch(pattern_raw, this.settings.wikipediaLanguage, (wikiResults) => {
-                            if (this.searchActive && thisSearchId === this.currentSearchId &&
-                                                                            wikiResults.length > 0) {
-                                otherResults = otherResults.concat(wikiResults);
-                                finish();
-                            } });
+                    if (this.searchActive && thisSearchId === this.currentSearchId && wikiResults.length > 0) {
+                        otherResults = otherResults.concat(wikiResults);
+                        finish();
+                    } });
         }
 
         //---emoji search------
@@ -1249,8 +1244,7 @@ class CinnamenuApplet extends TextIconApplet {
                 if (bestMatchScore > SEARCH_THRESHOLD) {
                     emojiResults.push({
                         name: emoji[EMOJI_NAME],
-                        score: bestMatchScore / 10.0, //gives score between 0 and 0.121 so that
-                                                      //emoji results come last.
+                        score: bestMatchScore,
                         description: _('Click to copy'),
                         nameWithSearchMarkup: match1.result,
                         isSearchResult: true,
@@ -1662,7 +1656,7 @@ class CinnamenuApplet extends TextIconApplet {
                         icon: new St.Icon({ icon_name: 'edit-clear',
                                             icon_type: St.IconType.SYMBOLIC,
                                             icon_size: this.getAppIconSize()}),
-                        isClearRecentsButton: true });
+                                            isClearRecentsButton: true });
         }
 
         return res;

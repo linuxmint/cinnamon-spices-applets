@@ -9,13 +9,10 @@ function search_browser(path, wmClass, pattern) {
     current_pattern = pattern;
     return new Promise(function(resolve, reject) {
         const appSystem = Cinnamon.AppSystem.get_default();
-        let foundApps = appSystem.lookup_desktop_wmclass(path[0]);
+        const foundApps = appSystem.lookup_desktop_wmclass(wmClass);
         if (!foundApps || foundApps.length === 0) {
-            foundApps = appSystem.lookup_desktop_wmclass(wmClass);
-            if (!foundApps || foundApps.length === 0) {
-                resolve([]);
-                return;
-            }
+            resolve([]);
+            return;
         }
         const appInfo = foundApps.get_app_info();
 
@@ -35,9 +32,6 @@ function search_browser(path, wmClass, pattern) {
                 resolve(results);
             }
         });
-    }).catch((e) => {
-        global.log('caught error:',e.message, e.stack);
-        resolve([]);
     });
 }
 

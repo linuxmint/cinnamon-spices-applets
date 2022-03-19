@@ -169,29 +169,26 @@ const readChromiumBookmarks = function(path, wmClass) {
 
     return new Promise(function(resolve, reject) {
         const appSystem = Cinnamon.AppSystem.get_default();
-        let foundBookmarks = [];
+        const foundBookmarks = [];
 
-        let foundApps = appSystem.lookup_desktop_wmclass(path[0]);
+        const foundApps = appSystem.lookup_desktop_wmclass(wmClass);
         if (!foundApps || foundApps.length === 0) {
-            foundApps = appSystem.lookup_desktop_wmclass(wmClass);
-            if (!foundApps || foundApps.length === 0) {
-                resolve(foundBookmarks);
-                return;
-            }
+            resolve([]);
+            return;
         }
+        global.log(wmClass);
+        const appInfo = foundApps.get_app_info();
 
-        let appInfo = foundApps.get_app_info();
-        let bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev(
+        const bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev(
                                         [GLib.get_user_config_dir(), ...path, 'Bookmarks']));
-
         if (!bookmarksFile.query_exists(null)) {
-            resolve(foundBookmarks);
+            resolve([]);
             return;
         }
 
         readJSONAsync(bookmarksFile).then(function(jsonResult) {
             if (!jsonResult.hasOwnProperty('roots')) {
-                resolve(foundBookmarks);
+                resolve([]);
                 return;
             }
 
@@ -248,7 +245,7 @@ class BookmarksManager {
         this.bookmarks = [];
 
         Promise.all([
-            readChromiumBookmarks(['chromium', 'Default'], 'chromium-browser'),
+            readChromiumBookmarks(['chromium', 'Default'], 'chromium'),
             readChromiumBookmarks(['google-chrome', 'Default'], 'google-chrome'),
             readChromiumBookmarks(['opera'], 'opera'),
             readChromiumBookmarks(['vivaldi', 'Default'], 'vivaldi-stable'),
@@ -263,7 +260,6 @@ class BookmarksManager {
                 if (!bookmark.icon_filename){
                     bookmark.gicon = bookmark.app.get_icon();
                 }
-                //bookmarks.mime = null;
                 let desc = bookmark.uri;
                 if (desc.length > 150) {
                     desc = desc.slice(0, 150) + ' ...';
