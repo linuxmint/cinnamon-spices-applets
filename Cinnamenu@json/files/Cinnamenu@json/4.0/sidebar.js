@@ -94,11 +94,11 @@ class SidebarButton {
         } else if (this.app.isApplication) {
             this.appThis.recentApps.add(this.app.id);
             this.app.open_new_window(-1);
-            this.appThis.closeMenu();
+            this.appThis.menu.close();
         } else if (this.app.isFavoriteFile) {
             try {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
-                this.appThis.closeMenu();
+                this.appThis.menu.close();
             } catch (e) {
                 Main.notify(_('Error while opening file:'), e.message);
             }
@@ -194,10 +194,10 @@ class Sidebar {
         };
         this.items.push(new SidebarButton( this.appThis, newSidebarIcon('system-shutdown'), null, _('Quit'),
                     _('Shutdown the computer'), () => { Util.spawnCommandLine('cinnamon-session-quit --power-off');
-                                                                this.appThis.closeMenu(); } ));
+                                                                this.appThis.menu.close(); } ));
         this.items.push(new SidebarButton( this.appThis, newSidebarIcon('system-log-out'), null, _('Logout'),
                                     _('Leave the session'), () => { Util.spawnCommandLine('cinnamon-session-quit');
-                                                                        this.appThis.closeMenu(); } ));
+                                                                        this.appThis.menu.close(); } ));
         this.items.push(new SidebarButton( this.appThis, newSidebarIcon('system-lock-screen'), null, _('Lock screen'),
                     _('Lock the screen'), () => {
                         const screensaver_settings = new Gio.Settings({
@@ -212,7 +212,7 @@ class Sidebar {
                         } else {
                             this.screenSaverProxy.LockRemote('');
                         }
-                        this.appThis.closeMenu(); }));
+                        this.appThis.menu.close(); }));
         //----add favorite apps and favorite files to this.items[]
         if (this.appThis.settings.addFavorites) {
             this.appThis.listFavoriteApps().forEach(fav => {

@@ -17,7 +17,7 @@ function _(str) {
     return Gettext.dgettext('Cinnamenu@json', str);
 }
 
-const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+)|\S+?(\s|$|-|=|\+)/g ).join('\n');
+const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+|_|&|\\)|\S+?(\s|$|-|=|\+|_|&|\\)/g ).join('\n');
 
 //===========================================================
 
@@ -94,7 +94,7 @@ class NewTooltip {
 
     show() {
         this.showTimer = null;
-        
+
         this.tooltip = new St.Label({
             name: 'Tooltip'
         });

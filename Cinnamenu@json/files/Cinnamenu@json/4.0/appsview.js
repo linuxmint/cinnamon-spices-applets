@@ -23,10 +23,13 @@ class AppButton {
         //----------ICON---------------------------------------------
         if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton, isBackButton
             this.icon = this.app.icon;
-        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, isWebBookmark,
-                                    //isFolderviewFile/Directory, isSearchResult(wikipedia)
+        } else if (this.app.icon_filename) { //some of isSearchResult
+            const gicon = new Gio.FileIcon({file: Gio.file_new_for_path(this.app.icon_filename)});
+            this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
+        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile,
+                                    //isFolderviewFile/Directory, some of isSearchResult
             let gicon = this.app.gicon;
-            if (!this.app.isWebBookmark && !this.app.isSearchResult) {
+            if (!this.app.isSearchResult) {
                 gicon = getThumbnail_gicon(this.app.uri, this.app.mimeType) || gicon;
             }
             this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
@@ -292,32 +295,26 @@ class AppButton {
             }
             this.appThis.recentApps.add(this.app.id);
             this.app.open_new_window(-1);
-            this.appThis.closeMenu();
-        } else if (this.app.isPlace) {
-            this.app.launch();
-            this.appThis.closeMenu();
-        } else if (this.app.isWebBookmark) {
-            this.app.app.launch_uris([this.app.uri], null);
-            this.appThis.closeMenu();
+            this.appThis.menu.close();
         } else if (this.app.isFolderviewDirectory || this.app.isBackButton) {
             this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
-            //don't closeMenu
+            //don't menu.close()
         } else if (this.app.isFolderviewFile || this.app.isRecentFile || this.app.isFavoriteFile) {
             try {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
-                this.appThis.closeMenu();
+                this.appThis.menu.close();
             } catch (e) {
                 Main.notify(_('Error while opening file:'), e.message);
-                //don't closeMenu
+                //don't menu.close()
             }
         } else if (this.app.isClearRecentsButton) {
             this.appThis.recentApps.clear();
             this.appThis.recentManagerDefault.purge_items();
             this.appThis.setActiveCategory('recents');
-            //don't closeMenu
-        } else if (this.app.isSearchResult) {
+            //don't menu.close
+        } else if (this.app.isSearchResult || this.app.isPlace) {
             this.app.activate(this.app);
-            this.appThis.closeMenu();
+            this.appThis.menu.close();
         }
     }
 

@@ -70,9 +70,9 @@ function qLOG(msg, ...data) {
             try {
                 arg = JSON.stringify(arg);
             } catch (e) {
-                arg = to_string(arg);
+                arg = to_string(""+arg);
             }
-            return arg;
+            return ""+arg;
         }
         let isGObject = arg instanceof GObject.Object;
         let space = '';
@@ -90,7 +90,7 @@ function qLOG(msg, ...data) {
             }
             let array = isArray ? arg : Object.keys(arg);
             // Add beginning bracket with indentation
-            let string = brackets[0] + (recursion + 1 > depth ? '' : '\n');
+            let string = "" + brackets[0] + (recursion + 1 > depth ? '' : '\n');
             for (let j = 0, len = array.length; j < len; j++) {
                 if (isArray) {
                     string += space + formatLogArgument(arg[j], recursion + 1, depth) + ',\n';
@@ -103,12 +103,15 @@ function qLOG(msg, ...data) {
             arg = string + space + brackets[1];
             // Functions, numbers, etc.
         } else if (typeof arg === 'function') {
-            let array = to_string(arg).split('\n');
+            //~ var array = to_string(arg).split('\n');
+            var array = arg.toString().split('\n');
             for (let i = 0; i < array.length; i++) {
                 if (i === 0) continue;
                 array[i] = space + array[i];
             }
             arg = array.join('\n');
+        } else if (typeof arg === 'number') {
+            arg = "" + arg;
         } else if (typeof arg !== 'string' || isGObject) {
             arg = to_string(arg);
         }

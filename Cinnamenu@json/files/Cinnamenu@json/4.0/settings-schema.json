@@ -87,9 +87,11 @@
                 "enable-emoji-search",
                 "web-search-option",
                 "enable-home-folder-search",
+                "enable-web-history-search",
                 "enable-web-bookmarks-search",
                 "enable-wikipedia-search",
-                "wikipedia-language"
+                "wikipedia-language",
+                "search-help"
             ]
         },
         "panel-appear":{
@@ -299,6 +301,12 @@
         "description":"Search home folder",
         "tooltip":"When searching, also search my home folder for files"
     },
+    "enable-web-history-search":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Web history search",
+        "tooltip":"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\nNote: Firefox history is not currently supported."
+    },
     "enable-web-bookmarks-search":{
         "type":"checkbox",
         "default":false,
@@ -390,6 +398,10 @@
         },
         "tooltip":"Wikipedia language"
     },
+    "search-help":{
+        "type":"label",
+        "description":"\nNote: Some search options can still be used even if you have not enabled them here by prefixing your search term.\nFor example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+    },
 
     "menu-icon-custom":{
         "type":"checkbox",
@@ -472,7 +484,7 @@
         "type":"checkbox",
         "default":false,
         "description":"Use sidebar box style",
-        "tooltip":"Use sidebar box style"
+        "tooltip":"Use a sidebar box style"
     },
     "use-tile-style":{
         "type":"checkbox",

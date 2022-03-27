@@ -14122,7 +14122,7 @@ class Config {
         return size;
     }
     async GetAppletConfigJson() {
-        var _a, _b;
+        var _a, _b, _c, _d, _e;
         const home = (_a = config_get_home_dir()) !== null && _a !== void 0 ? _a : "~";
         const configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
         const configFile = config_File.new_for_path(configFilePath);
@@ -14135,7 +14135,15 @@ class Config {
         }
         const conf = JSON.parse(confString);
         if (((_b = conf === null || conf === void 0 ? void 0 : conf.apiKey) === null || _b === void 0 ? void 0 : _b.value) != null)
-            conf.apiKey.value = "Redacted";
+            conf.apiKey.value = "REDACTED";
+        for (const item of (_d = (_c = conf === null || conf === void 0 ? void 0 : conf.locationList) === null || _c === void 0 ? void 0 : _c.value) !== null && _d !== void 0 ? _d : []) {
+            item.lat = "REDACTED";
+            item.lon = "REDACTED";
+            item.city = "REDACTED";
+            item.entryText = "REDACTED";
+        }
+        if (((_e = conf === null || conf === void 0 ? void 0 : conf.location) === null || _e === void 0 ? void 0 : _e.value) != null)
+            conf.location.value = "REDACTED";
         return conf;
     }
 }
@@ -14161,7 +14169,7 @@ class WeatherLoop {
                     this.IncrementErrorCount();
                 this.ValidateLastUpdateTime();
                 if (this.pauseRefresh) {
-                    logger_Logger.Debug("Configuration error, updating paused");
+                    logger_Logger.Debug("Configuration or network error, updating paused");
                     return;
                 }
                 if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
@@ -15617,18 +15625,18 @@ class WeatherApplet extends TextIconApplet {
         this.OnNetworkConnectivityChanged = () => {
             switch (NetworkMonitor.get_default().connectivity) {
                 case NetworkConnectivity.FULL:
+                case NetworkConnectivity.LIMITED:
+                case NetworkConnectivity.PORTAL:
                     if (this.online === true)
                         break;
                     logger_Logger.Info("Internet access now available, resuming operations.");
                     this.loop.Resume();
                     this.online = true;
                     break;
-                case NetworkConnectivity.LIMITED:
                 case NetworkConnectivity.LOCAL:
-                case NetworkConnectivity.PORTAL:
                     if (this.online === false)
                         break;
-                    logger_Logger.Info("Internet access now down, pausing refresh.");
+                    logger_Logger.Info(`Internet access now down with "${NetworkMonitor.get_default().connectivity}", pausing refresh.`);
                     this.loop.Pause();
                     this.online = false;
                     break;

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 15:40+0000\n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,6 +141,15 @@ msgid "Applications and files"
 msgstr ""
 
 msgid "Other search results"
+msgstr ""
+
+msgid "Browser history"
+msgstr ""
+
+msgid "Browser bookmarks"
+msgstr ""
+
+msgid "Emoji"
 msgstr ""
 
 msgid "Trash"
@@ -528,6 +537,14 @@ msgstr ""
 msgid "When searching, also search my home folder for files"
 msgstr ""
 
+msgid "Web history search"
+msgstr ""
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+
 msgid "Web bookmarks search"
 msgstr ""
 
@@ -543,6 +560,12 @@ msgid "Show some Wikipedia results"
 msgstr ""
 
 msgid "Wikipedia language"
+msgstr ""
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
 msgstr ""
 
 msgid "Use a custom icon size"

@@ -25,6 +25,7 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
 const Cinnamon = imports.gi.Cinnamon;
+const Util = imports.misc.util;
 
 let Gda = null;
 try {
@@ -164,54 +165,76 @@ function readFirefoxProfiles() {
     return [];
 }
 
-const readChromiumBookmarks = function(bookmarks, path, wmClass) {
+const readChromiumBookmarks = function(path, wmClass) {
 
     return new Promise(function(resolve, reject) {
-        let appSystem = Cinnamon.AppSystem.get_default();
+        const appSystem = Cinnamon.AppSystem.get_default();
+        const foundBookmarks = [];
 
-        let foundApps = appSystem.lookup_desktop_wmclass(path[0]);
+        const foundApps = appSystem.lookup_desktop_wmclass(wmClass);
         if (!foundApps || foundApps.length === 0) {
-            foundApps = appSystem.lookup_desktop_wmclass(wmClass);
-            if (!foundApps || foundApps.length === 0) {
-                resolve(bookmarks);
-            }
+            resolve([]);
+            return;
         }
+        global.log(wmClass);
+        const appInfo = foundApps.get_app_info();
 
-        let appInfo = foundApps.get_app_info();
-        let bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev([GLib.get_user_config_dir(), ...path]));
-
+        const bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev(
+                                        [GLib.get_user_config_dir(), ...path, 'Bookmarks']));
         if (!bookmarksFile.query_exists(null)) {
-            resolve(bookmarks);
+            resolve([]);
+            return;
         }
 
         readJSONAsync(bookmarksFile).then(function(jsonResult) {
             if (!jsonResult.hasOwnProperty('roots')) {
-                resolve(bookmarks);
+                resolve([]);
+                return;
             }
 
-            let recurseBookmarks = (children, cont)=>{
-                for (let i = 0, len = children.length; i < len; i++) {
-                    if (children[i].type == 'url') {
-                        bookmarks.push({
+            const recurseBookmarks = (children, cont) => {
+                children.forEach( child => {
+                    if (child.type == 'url') {
+                        const url = child.url;
+                        const domain = url.slice(0, url.indexOf('/', url.indexOf('://') + 3));
+                        foundBookmarks.push({
                             app: appInfo,
-                            name: children[i].name,
-                            uri: children[i].url
+                            name: child.name,
+                            uri: url,
+                            domain: domain
                         });
-                    } else if (children[i].hasOwnProperty('children')) {
-                        recurseBookmarks(children[i].children);
+                    } else if (child.hasOwnProperty('children')) {
+                        recurseBookmarks(child.children);
                     }
-                }
+                });
             };
 
             for (let bookmarkLocation in jsonResult.roots) {
-                let children = jsonResult.roots[bookmarkLocation].children;
+                const children = jsonResult.roots[bookmarkLocation].children;
                 if (children === undefined) {
                     continue;
                 }
                 recurseBookmarks(children);
             }
-            resolve(bookmarks);
-        }).catch(() => resolve(bookmarks));
+
+            const faviconsFile = GLib.build_filenamev([GLib.get_user_config_dir(), ...path, 'Favicons']);
+            const domains = [];
+            foundBookmarks.forEach( bookmark => {
+                domains.push(bookmark.domain);
+            });
+            const domainsJSON = JSON.stringify(domains);
+
+            Util.spawn_async(['python', __meta.path + '/getFavicons.py', faviconsFile, domainsJSON],
+                                                                                            (results) => {
+                results = JSON.parse(results);
+                foundBookmarks.forEach( bookmark => {
+                    if (bookmark.domain in results) {
+                        bookmark.icon_filename = results[bookmark.domain];
+                    }
+                });
+                resolve(foundBookmarks);
+            });
+        });
     });
 };
 
@@ -219,40 +242,43 @@ const readChromiumBookmarks = function(bookmarks, path, wmClass) {
 
 class BookmarksManager {
     constructor() {
-        let bookmarks = [];
+        this.bookmarks = [];
 
         Promise.all([
-            readChromiumBookmarks(bookmarks, ['chromium', 'Default', 'Bookmarks'], 'chromium-browser'),
-            readChromiumBookmarks(bookmarks, ['google-chrome', 'Default', 'Bookmarks'], 'google-chrome'),
-            readChromiumBookmarks(bookmarks, ['opera', 'Bookmarks'], 'opera'),
-            readChromiumBookmarks(bookmarks, ['vivaldi', 'Default', 'Bookmarks'], 'vivaldi-stable'),
-            readChromiumBookmarks(bookmarks, ['BraveSoftware', 'Brave-Browser', 'Default', 'Bookmarks'],
-                                                                                            'brave-browser'),
-            readChromiumBookmarks(bookmarks, ['microsoft-edge', 'Default', 'Bookmarks'], 'microsoft-edge')
-        ]).then(() => {
-            bookmarks = bookmarks.concat(readFirefoxProfiles());
+            readChromiumBookmarks(['chromium', 'Default'], 'chromium'),
+            readChromiumBookmarks(['google-chrome', 'Default'], 'google-chrome'),
+            readChromiumBookmarks(['opera'], 'opera'),
+            readChromiumBookmarks(['vivaldi', 'Default'], 'vivaldi-stable'),
+            readChromiumBookmarks(['BraveSoftware', 'Brave-Browser', 'Default'], 'brave-browser'),
+            readChromiumBookmarks(['microsoft-edge', 'Default'], 'microsoft-edge')
+        ]).then((results) => {
+            results.forEach( result => this.bookmarks = this.bookmarks.concat(result));
 
-            for (let i = 0, len = bookmarks.length; i < len; i++) {
-                bookmarks[i].gicon = bookmarks[i].app.get_icon();
-                //bookmarks[i].mime = null;
-                bookmarks[i].description = bookmarks[i].uri;
-                bookmarks[i].isWebBookmark = true;
-            }
+            this.bookmarks = this.bookmarks.concat(readFirefoxProfiles());
+
+            this.bookmarks.forEach( bookmark => {
+                if (!bookmark.icon_filename){
+                    bookmark.gicon = bookmark.app.get_icon();
+                }
+                let desc = bookmark.uri;
+                if (desc.length > 150) {
+                    desc = desc.slice(0, 150) + ' ...';
+                }
+                bookmark.description = desc;
+                bookmark.isSearchResult = true;
+                bookmark.activate = () => Util.spawn(['xdg-open', bookmark.uri]);
+                //bookmark.activate = () => bookmak.app.launch_uris([bookmark.uri], null);
+            });
 
             // Create a unique list of bookmarks across all browsers.
             const bm = {};
-            for (let i = 0, len = bookmarks.length; i < len; i++ ) {
-                bm[bookmarks[i].uri] = bookmarks[i];
-            }
-            const bmKeys = Object.keys(bm);
-            this.state = [];
-            for (let i = 0; i < bmKeys.length; i++ ) {
-                if (bm[bmKeys[i]]) {
-                    this.state.push(bm[bmKeys[i]]);
-                }
-            }
-            this.state.sort( (a, b) => { return (a.name.toUpperCase() > b.name.toUpperCase()) ?
-                                            1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;  });
+            this.bookmarks.forEach( bookmark => bm[bookmark.uri] = bookmark );
+            this.bookmarks = [];
+            Object.keys(bm).forEach( key => this.bookmarks.push(bm[key]) );
+
+            this.bookmarks.sort( (a, b) => { return (a.name.toUpperCase() > b.name.toUpperCase()) ?
+                                                1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;  });
+
         }).catch((e) => global.log(e.message, e.stack));
     }
 }
