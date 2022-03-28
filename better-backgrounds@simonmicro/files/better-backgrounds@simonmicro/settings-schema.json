@@ -5,7 +5,7 @@
         "pageBehaviour": {
             "type": "page",
             "title": "Behaviour",
-            "sections": ["applet", "changeon"]
+            "sections": ["applet", "applet-store", "changeon"]
         },
         "pageEffects": {
             "type": "page",
@@ -25,12 +25,17 @@
         "applet": {
             "type": "section",
             "title": "Applet",
-            "keys": ["applet-icon-animation", "applet-show-notification", "applet-save-location", "applet-info-issues"]
+            "keys": ["applet-icon-animation", "applet-show-notification", "applet-info-issues"]
+        },
+        "applet-store": {
+            "type": "section",
+            "title": "Save Pictures",
+            "keys": ["applet-store-location", "applet-store-info"]
         },
         "effects": {
             "type": "section",
             "title": "Image effects",
-            "keys": ["effect-note", "effect-select"]
+            "keys": ["effect-select", "effect-note"]
         },
         "changeon": {
             "type": "section",
@@ -102,16 +107,20 @@
         "description": "Show notifications on problems",
         "tooltip": "Bad network? Faulty setup? The applet will notify you. Every time."
     },
-    "applet-save-location" : {
+    "applet-info-issues" : {
+        "type" : "label",
+        "description" : "You found a bug or want to suggest a missing feature? Just checkout the source code at https://github.com/simonmicro/better-backgrounds right over on Github!"
+    },
+    "applet-store-location" : {
         "type" : "filechooser",
         "description": "Picture save location",
         "default" : "",
         "select-dir" : true,
         "tooltip": "When you choose to save the current background, where do you want to put it?"
     },
-    "applet-info-issues" : {
+    "applet-store-info" : {
         "type" : "label",
-        "description" : "You found a bug or want to suggest a missing feature? Just checkout the source code at https://github.com/Simonmicro/better-backgrounds right over on Github!"
+        "description" : "This feature uses the command 'convert' from the package 'imagemagick'. Please make sure this package or command is installed."
     },
     "change-onstart" : {
         "type" : "switch",
@@ -148,7 +157,7 @@
     },
     "effect-note" : {
         "type" : "label",
-        "description" : "Apply here some effects with imagemagick (make sure that package is installed or at least the mogrify command)..."
+        "description" : "This feature uses the command 'mogrify' from the package 'imagemagick'. Please make sure this package or command is installed."
     },
     "effect-select" : {
         "type" : "combobox",
@@ -185,7 +194,7 @@
     },
     "install-warn-imagemagick" : {
         "type" : "label",
-        "description" : "Please make sure to install the 'imagemagick' package from the package manager of your choice!",
+        "description" : "This feature uses the command 'montage' from the package 'imagemagick'. Please make sure this package or command is installed.",
         "dependency" : "image-source=himawari"
     },
     "image-res-manual" : {
