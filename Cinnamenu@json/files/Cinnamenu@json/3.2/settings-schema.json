@@ -139,9 +139,9 @@
     "min": 16,
     "max": 256,
     "step": 1,
-    "units": "pixels",
-    "description": "Category icon size",
-    "tooltip": "Category icon size"
+    "units": "",
+    "description": "Category icon size (pixels)",
+    "tooltip": "Category icon size (pixels)"
   },
   "apps-list-icon-size": {
     "indent": true,
@@ -151,9 +151,9 @@
     "min": 16,
     "max": 256,
     "step": 1,
-    "units": "pixels",
-    "description": "Applications list icon size",
-    "tooltip": "Applications list icon size"
+    "units": "",
+    "description": "Applications list icon size (pixels)",
+    "tooltip": "Applications list icon size (pixels)"
   },
   "apps-grid-icon-size": {
     "indent": true,
@@ -163,9 +163,9 @@
     "min": 16,
     "max": 256,
     "step": 1,
-    "units": "pixels",
-    "description": "Applications grid icon size",
-    "tooltip": "Applications grid icon size"
+    "units": "",
+    "description": "Applications grid icon size (pixels)",
+    "tooltip": "Applications grid icon size (pixels)"
   },
   "overlay-key": {
     "type": "keybinding",
@@ -303,9 +303,9 @@
     "min": 360,
     "max": 9999,
     "step": 1,
-    "units": "pixels",
-    "description": "Custom menu height",
-    "tooltip": "Custom menu height",
+    "units": "",
+    "description": "Custom menu height (pixels)",
+    "tooltip": "Custom menu height (pixels)",
     "dependency": "enable-custom-menu-height"
   }
 }

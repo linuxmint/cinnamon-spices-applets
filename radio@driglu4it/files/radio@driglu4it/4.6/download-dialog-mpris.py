@@ -3,10 +3,12 @@
 from pathlib import Path
 import subprocess
 import gettext
-from gi.repository import Gtk
-import sys
 import gi
 gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
+import sys
+
+
 
 # i18n
 gettext.install("radio@driglu4it", str(Path.home()) + "/.local/share/locale")

@@ -129,7 +129,7 @@ declare namespace imports.ui.messageTray {
 		protected _titleLabel: gi.St.Label;
 		protected _icon: gi.St.Icon;
 		protected _bodyUrlHighlighter: URLHighlighter;
-		protected _destroyedReason: string;
+		protected _destroyedReason: NotificationDestroyedReason;
 
 		public constructor(source: SystemNotificationSource, title: string, body: string, params?: Partial<NotificationParams>);
 
@@ -194,17 +194,17 @@ declare namespace imports.ui.messageTray {
 
 		public setUseActionIcons(useIcons: boolean): void;
 
-		protected _onActionInvoked(actor: gi.Clutter.Actor, mouseButtonClicked: number, id: string): void;
+		protected _onActionInvoked(actor: gi.St.Button, mouseButtonClicked: number, id: string): void;
 
 		protected _onClicked(): void;
 
 		protected _onDestroy(): void;
 
-		public destroy(reason: string): void;
+		public destroy(reason: NotificationDestroyedReason): void;
 
 		public connect(event: 'action-invoked', cb: (actor: this, actionId: string) => void): void
 		public connect(event: 'done-displaying' | 'clicked', cb: (actor: this) => void): void
-		public connect(event: 'destroyed', cb: (actor: this, destroyedReason: string) => void): void
+		public connect(event: 'destroy', cb: (actor: this, destroyedReason: NotificationDestroyedReason) => void): void
 
 	}
 
@@ -290,6 +290,10 @@ declare namespace imports.ui.messageTray {
 		 * Default implementation is to destroy this source, but subclasses can override
 		 */
 		protected _lastNotificationRemoved(): void;
+
+		public connect(event: 'notification-added', cb: (actor: this, notification: Notification) => void): number
+		public connect(event: 'notify', cb: (actor: this, notification: Notification) => void): number
+		public connect(event: 'destroy', cb: (actor: this, reason: NotificationDestroyedReason) => void): number
 	}
 
 	type MessageTrayEmitters = "notify-applet-update";
@@ -359,6 +363,8 @@ declare namespace imports.ui.messageTray {
 		protected _hideNotification(): void;
 
 		protected _hideNotificationCompleted(): void;
+
+		public connect(event: 'notify-applet-update', cb: (actor: this, notification: Notification) => void): number
 	}
 
 

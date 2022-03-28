@@ -1,0 +1,6 @@
+{
+  "uuid": "batterypower@joka42",
+  "name": "Power Consumption Display",
+  "description": "Shows power consumption when in battery mode",
+  "cinnamon-version": ["5.0"]
+}

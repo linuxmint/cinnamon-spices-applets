@@ -17,7 +17,7 @@ function _(str) {
     return Gettext.dgettext('Cinnamenu@json', str);
 }
 
-const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+)|\S+?(\s|$|-|=|\+)/g ).join('\n');
+const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+|_|&|\\)|\S+?(\s|$|-|=|\+|_|&|\\)/g ).join('\n');
 
 //===========================================================
 
@@ -28,8 +28,8 @@ const getThumbnail_gicon = (uri, mimeType) => {
         return null;
     }
     //
-    const isImage = mimeType === 'image/jpeg' || mimeType === 'image/png' || mimeType === 'image/svg+xml' ||
-                            mimeType === 'image/tiff' || mimeType === 'image/bmp' || mimeType === 'image/gif';
+    const isImage = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/tiff', 'image/bmp',
+                                                                'image/gif'].includes(mimeType);
     const fileSize = file.query_info('standard::size', Gio.FileQueryInfoFlags.NONE, null).get_size();
 
     //----Get thumbnail from cache
@@ -80,7 +80,8 @@ const hideTooltipIfVisible = () => {
 };
 
 class NewTooltip {
-    constructor(actor, xpos, ypos, center_x, text) {
+    constructor(actor, xpos, ypos, center_x /*boolean*/, text) {
+        //if center_x then tooltip should be centered on xpos
         this.actor = actor;
         this.xpos = xpos;
         this.ypos = ypos;

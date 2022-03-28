@@ -67,6 +67,7 @@
 			"type": "section",
 			"title": "Youtube Download",
 			"keys": [
+				"youtube-download-cli",
 				"music-download-dir-select"
 			]
 		}
@@ -94,18 +95,27 @@
 		],
 		"default": [
 			{
-				"name": "Chillout",
-				"url": "http://ic7.101.ru:8000/c15_3",
+				"name": "Smooth Chill",
+				"url": "https://media-ssl.musicradio.com/ChillMP3",
 				"inc": true
 			},
 			{
 				"name": "Austrian Rock Radio",
 				"url": "http://live.antenne.at/arr",
 				"inc": true
+			},{
+				"name": "Rádio KIKS Rock", 
+				"url": "https://stream.radiokiks.sk/kiks_rock.mp3", 
+				"inc": true
 			},
 			{
-				"name": "Deep House",
-				"url": "http://yp.shoutcast.com/sbin/tunein-station.pls?id=499023",
+				"name": "Radio BOB", 
+				"url": "http://live6.infonetmedia.si/Europa05", 
+				"inc": true
+			},
+			{
+				"name": "Deep House Radio",
+				"url": "http://62.210.105.16:7000/stream",
 				"inc": true
 			}
 		]
@@ -160,7 +170,17 @@
 	"last-url": {
 		"type": "generic",
 		"value": null,
-		"dfault": null
+		"default": null
+	},
+	"youtube-download-cli": {
+		"type": "combobox", 
+		"description": "Youtube Download CLI tool", 
+		"tooltip": "The CLI tool used to download songs from Youtube", 
+		"default": "youtube-dl",
+		"options": {
+			"yt-dlp": "yt-dlp", 
+			"youtube-dl": "youtube-dl"
+		}
 	},
 	"music-download-dir-select": {
 		"type": "filechooser",
@@ -172,7 +192,6 @@
 	"radio-search-widget": {
 		"type": "custom",
 		"file": "RadioSearchWidget.py",
-		"widget": "RadioSearchWidget",
-		"description": "Try out this custom widget!"
+		"widget": "RadioSearchWidget"
 	}
 }

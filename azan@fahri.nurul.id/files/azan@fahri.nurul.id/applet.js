@@ -208,6 +208,15 @@ AzanApplet.prototype = {
 
         this._settingsProvider.bindProperty(
             Settings.BindingDirection.IN,
+            "time_format",
+            "_opt_timeFormat",
+            function() {
+                this._updateLabel();
+            }
+        );
+		
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
             "juristic",
             "_opt_juristic",
             function() {
@@ -249,7 +258,7 @@ AzanApplet.prototype = {
 
         let currentSeconds = this._calculateSecondsFromDate(currentDate);
 
-        let timesStr = this._prayTimes.getTimes(currentDate, myLocation, myTimezone, 'auto', '24h');
+        let timesStr = this._prayTimes.getTimes(currentDate, myLocation, myTimezone, 'auto', this._opt_timeFormat);
         let timesFloat = this._prayTimes.getTimes(currentDate, myLocation, myTimezone, 'auto', 'Float');
 
         let nearestPrayerId;

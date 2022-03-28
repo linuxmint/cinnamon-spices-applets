@@ -1,0 +1,17 @@
+{
+  "show-unit": {
+    "type": "switch",
+    "default": true,
+    "description": "Show unit",
+    "tooltip": "Show Watt symbol after the value."
+  },
+  "interval": {
+    "type": "spinbutton",
+    "default": 5000,
+    "min": 1000,
+    "max": 30000,
+    "step": 1000,
+    "units": "ms",
+    "description": "Update interval"
+  }
+}

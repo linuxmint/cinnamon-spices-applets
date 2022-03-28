@@ -47,11 +47,19 @@ export function createPopupMenu(args: Arguments) {
 
     box.connect('key-press-event', (actor, event) => {
         event.get_key_symbol() === KEY_Escape && close()
+        return false
     })
 
     launcher.connect('queue-relayout', () => {
         if (!box.visible) return
 
+        setTimeout(() => {
+            setLayout()
+        }, 0);
+    })
+
+    bin.connect('queue-relayout', () => {
+        if (!box.visible) return
 
         setTimeout(() => {
             setLayout()
@@ -99,15 +107,16 @@ export function createPopupMenu(args: Arguments) {
         const freeSpaceHeight = (freeSpace.bottom - freeSpace.top) / global.ui_scale
 
         const boxThemeNode = box.get_theme_node()
-
         const binThemeNode = bin.get_theme_node()
 
-        const paddingTop = boxThemeNode.get_padding(Side.TOP)
-        const paddingBottom = boxThemeNode.get_padding(Side.BOTTOM)
-        const borderWidthTop = binThemeNode.get_border_width(Side.TOP)
-        const borderWidthBottom = binThemeNode.get_border_width(Side.BOTTOM)
+        const paddingTopBox = boxThemeNode.get_padding(Side.TOP)
+        const paddingBottomBox = boxThemeNode.get_padding(Side.BOTTOM)
+        const borderWidthTopBin = binThemeNode.get_border_width(Side.TOP)
+        const borderWidthBottomBIN = binThemeNode.get_border_width(Side.BOTTOM)
+        const paddingTopBin = binThemeNode.get_padding(Side.TOP)
+        const paddingBottomBin = binThemeNode.get_padding(Side.BOTTOM)
 
-        const maxHeight = freeSpaceHeight - paddingBottom - paddingTop - borderWidthTop - borderWidthBottom
+        const maxHeight = freeSpaceHeight - paddingBottomBox - paddingTopBox - borderWidthTopBin - borderWidthBottomBIN - paddingTopBin - paddingBottomBin
 
         return maxHeight
     }
@@ -118,7 +127,7 @@ export function createPopupMenu(args: Arguments) {
 
         const [minWidth, minHeight, natWidth, natHeight] = box.get_preferred_size();
 
-        const margin = (natWidth - appletBox.get_width()) / 2
+        const margin = ((natWidth || 0) - appletBox.get_width()) / 2
 
         const xLeftNormal = Math.max(freeSpace.left, appletBox.x1 - margin);
         const xRightNormal = appletBox.x2 + margin
@@ -126,7 +135,7 @@ export function createPopupMenu(args: Arguments) {
         const xLeft = (xRightNormal < freeSpace.right) ? xLeftNormal : xLeftMax
 
         const yTopNormal = Math.max(appletBox.y1, freeSpace.top);
-        const yBottomNormal = yTopNormal + natHeight;
+        const yBottomNormal = yTopNormal + (natHeight || 0);
         const yTopMax = freeSpace.bottom - box.height;
         const yTop = (yBottomNormal < freeSpace.bottom) ? yTopNormal : yTopMax
 
@@ -149,8 +158,14 @@ export function createPopupMenu(args: Arguments) {
         pushModal(box)
 
         // For some reason, it is emmited the button-press event when clicking e.g on the desktop but the button-release-event when clicking on another applet
-        global.stage.connect('button-press-event', handleClick)
-        global.stage.connect('button-release-event', handleClick)
+        global.stage.connect('button-press-event', (actor, event) => {
+            handleClick(actor, event)
+            return false
+        })
+        global.stage.connect('button-release-event', (actor, event) => {
+            handleClick(actor, event)
+            return false
+        })
     }
 
     function close() {
@@ -178,6 +193,7 @@ export function createPopupMenu(args: Arguments) {
     }
 
     (box as PopupMenu).toggle = toggle;
+    // TODO: remove close
     (box as PopupMenu).close = close
 
     return (box as PopupMenu)

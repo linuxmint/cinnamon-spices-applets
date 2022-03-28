@@ -1,11 +1,12 @@
-import { OpenUrl } from "lib/commandRunner";
-import { Config, DistanceUnits } from "config";
-import { SIGNAL_CLICKED, ELLIPSIS } from "consts";
-import { Event } from "lib/events";
-import { WeatherApplet } from "main";
-import { CustomIcons, WeatherData, WeatherProvider } from "types";
-import { _, AwareDateString, MetreToUserUnits } from "utils";
-import { WeatherButton } from "ui_elements/weatherbutton";
+import { OpenUrl } from "../lib/commandRunner";
+import { Config, DistanceUnits } from "../config";
+import { SIGNAL_CLICKED, ELLIPSIS } from "../consts";
+import { Event } from "../lib/events";
+import { WeatherApplet } from "../main";
+import { CustomIcons, WeatherData, WeatherProvider } from "../types";
+import { _, AwareDateString, MetreToUserUnits } from "../utils";
+import { WeatherButton } from "../ui_elements/weatherbutton";
+import { DateTime } from "luxon";
 
 const { BoxLayout, IconType, Label, Icon, Align, } = imports.gi.St;
 
@@ -20,9 +21,10 @@ export class UIBar {
 
 	public ToggleClicked: Event<UIBar, boolean> = new Event();
 
-	private providerCreditButton: WeatherButton = null;
-	private hourlyButton: WeatherButton = null;
-	private _timestamp: imports.gi.St.Label = null;
+	// TODO: assert these properly
+	private providerCreditButton!: WeatherButton;
+	private hourlyButton!: WeatherButton;
+	private _timestamp!: imports.gi.St.Label;
 
 	private app: WeatherApplet;
 
@@ -44,20 +46,25 @@ export class UIBar {
 	}
 
 	public Display(weather: WeatherData, provider: WeatherProvider, config: Config, shouldShowToggle: boolean): boolean {
-		this.providerCreditButton.actor.label = _("Powered by") + " " + provider.prettyName;
+		let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
+		if (provider.remainingCalls != null) {
+			creditLabel+= ` (${provider.remainingCalls})`;
+		}
+
+		this.providerCreditButton.actor.label = creditLabel;
 		this.providerCreditButton.url = provider.website;
-		let lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours);
+		const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
 		this._timestamp.text = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
 
 		if (weather.location.distanceFrom != null) {
-			let stringFormat = {
+			const stringFormat = {
 				distance: MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
 				distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
 			}
-			this._timestamp.text += `, ${_("{distance}{distanceUnit} from you", stringFormat)}`;
+			this._timestamp.text += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
 		}
 
-		if (!shouldShowToggle)
+		if (!shouldShowToggle || config._alwaysShowHourlyWeather)
 			this.HideHourlyToggle();
 		return true;
 	}

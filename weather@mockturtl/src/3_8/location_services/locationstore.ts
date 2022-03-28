@@ -1,14 +1,15 @@
-import { Config } from "config";
-import { Event } from "lib/events";
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { NotificationService } from "lib/notification_service";
-import { LocationData } from "types";
-import { _ } from "utils";
+import { Config } from "../config";
+import { Event } from "../lib/events";
+import { Logger } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { NotificationService } from "../lib/notification_service";
+import { LocationData } from "../types";
+import { ValidTimezone, _ } from "../utils";
+import { DateTime } from "luxon";
 export class LocationStore {
 	private locations: LocationData[] = [];
-	private app: WeatherApplet = null;
-	private config: Config = null;
+	private app: WeatherApplet;
+	private config: Config;
 
 	/**
 	 * Current head on locationStore array.
@@ -57,9 +58,9 @@ export class LocationStore {
 			currentlyDisplayedChanged = !this.IsEqual(this.locations?.[currentIndex], locs?.[currentIndex])
 		else if (newIndex == -1)
 			currentlyDisplayedDeleted = true;
-		// currenlty displayed position's changed
+		// currently displayed position's changed
 		// even tho this seems to happen automatically, 
-		// probably beacause I'm using object references somewhere
+		// probably because I'm using object references somewhere
 		else if (newIndex != currentIndex)
 			this.currentIndex = newIndex
 
@@ -67,7 +68,7 @@ export class LocationStore {
 		this.locations = locs.concat(tmp);
 
 		if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
-			Log.Instance.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.")
+			Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.")
 			this.app.RefreshAndRebuild()
 		}
 		this.InvokeStorageChanged();
@@ -80,30 +81,37 @@ export class LocationStore {
 	 * @param loc preferably obtained from storage
 	 */
 	public SwitchToLocation(loc: LocationData): boolean {
-		let index = this.FindIndex(loc);
+		const index = this.FindIndex(loc);
 		if (index == -1) return false;
 
 		this.currentIndex = index;
+		return true;
 	}
 
 	/**
 	 * Tries to find a location in storage based on the entryText
 	 * @param entryText 
 	 */
-	public FindLocation(entryText: string): LocationData {
-		for (let index = 0; index < this.locations.length; index++) {
-			const element = this.locations[index];
-			if (element.entryText == entryText)
+	public FindLocation(entryText: string): LocationData | null {
+		for (const location of this.locations) {
+			if (location.entryText == entryText)
 				return {
-					country: element.country,
-					city: element.city,
-					entryText: element.entryText,
-					lat: element.lat,
-					lon: element.lon,
-					timeZone: element.timeZone,
+					country: location.country,
+					city: location.city,
+					entryText: location.entryText,
+					lat: location.lat,
+					lon: location.lon,
+					timeZone: this.NormalizeTZ(location.timeZone),
 				};
 		}
 		return null;
+	}
+
+	private NormalizeTZ(tz: string): string {
+		const valid = ValidTimezone(tz) ? tz : DateTime.local().zoneName;
+		if (!valid)
+			Logger.Info(`Timezone '${tz}' is not valid for saved location, switching for local tz '${DateTime.local().zoneName}'`)
+		return valid;
 	}
 
 	private EnsureSearchEntry(loc: LocationData): LocationData {
@@ -116,13 +124,16 @@ export class LocationStore {
 	/** Only gets the location, if you want to switch between locations, use 
 	 * Config.SwitchToNextLocation function
 	 */
-	public GetNextLocation(currentLoc: LocationData): LocationData {
-		Log.Instance.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
+	public GetNextLocation(currentLoc: LocationData | null): LocationData | null {
+		if (currentLoc == null)
+			return null;
+
+		Logger.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
 		if (this.locations.length == 0) return currentLoc; // this should not happen, as buttons are useless in this case
 		let nextIndex = null;
 		if (this.InStorage(currentLoc)) { // if location is stored move to the one next to it
 			nextIndex = this.FindIndex(currentLoc) + 1;
-			Log.Instance.Debug("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index")
+			Logger.Debug("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index")
 		}
 		else { // move to the location next to the last used location
 			nextIndex = this.currentIndex++;
@@ -131,10 +142,10 @@ export class LocationStore {
 		// Rotate if reached end of array
 		if (nextIndex > this.locations.length - 1) {
 			nextIndex = 0;
-			Log.Instance.Debug("Reached end of storage, move to the beginning")
+			Logger.Debug("Reached end of storage, move to the beginning")
 		}
 
-		Log.Instance.Debug("Switching to index " + nextIndex.toString() + "...");
+		Logger.Debug("Switching to index " + nextIndex.toString() + "...");
 		this.currentIndex = nextIndex;
 		// Return copy, not original so nothing interferes with fileStore
 		return {
@@ -150,12 +161,15 @@ export class LocationStore {
 	/** Only gets the location, if you want to switch between locations, use 
 	 * Config.SwitchToPreviousLocation function
 	 */
-	public GetPreviousLocation(currentLoc: LocationData): LocationData {
+	public GetPreviousLocation(currentLoc: LocationData | null): LocationData | null {
+		if (currentLoc == null)
+			return null;
+
 		if (this.locations.length == 0) return currentLoc; // this should not happen, as buttons are useless in this case
 		let previousIndex = null;
 		if (this.InStorage(currentLoc)) { // if location is stored move to the previous one
 			previousIndex = this.FindIndex(currentLoc) - 1;
-			Log.Instance.Debug("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index")
+			Logger.Debug("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index")
 		}
 		else { // move to the location previous to the last used location
 			previousIndex = this.currentIndex--;
@@ -164,10 +178,10 @@ export class LocationStore {
 		// Rotate if reached end of array
 		if (previousIndex < 0) {
 			previousIndex = this.locations.length - 1;
-			Log.Instance.Debug("Reached start of storage, move to the end")
+			Logger.Debug("Reached start of storage, move to the end")
 		}
 
-		Log.Instance.Debug("Switching to index " + previousIndex.toString() + "...");
+		Logger.Debug("Switching to index " + previousIndex.toString() + "...");
 		this.currentIndex = previousIndex;
 		return {
 			country: this.locations[previousIndex].country,
@@ -179,15 +193,18 @@ export class LocationStore {
 		};
 	}
 
-	public ShouldShowLocationSelectors(currentLoc: LocationData): boolean {
-		let threshold = this.InStorage(currentLoc) ? 2 : 1;
+	public ShouldShowLocationSelectors(currentLoc: LocationData | null): boolean {
+		if (currentLoc == null)
+			return false;
+
+		const threshold = this.InStorage(currentLoc) ? 2 : 1;
 		if (this.locations.length >= threshold)
 			return true;
 		else
 			return false;
 	}
 
-	public async SaveCurrentLocation(loc: LocationData) {
+	public async SaveCurrentLocation(loc: LocationData | null) {
 		if (this.app.Locked()) {
 			NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
 			return;
@@ -200,7 +217,10 @@ export class LocationStore {
 			NotificationService.Instance.Send(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
 			return;
 		}
-		loc.timeZone = this.app.config.Timezone;
+		// Save tz if it exists
+		if (this.app.config.Timezone)
+			loc.timeZone = this.app.config.Timezone;
+
 		this.locations.push(loc);
 		this.currentIndex = this.locations.length - 1; // head to saved location
 		this.InvokeStorageChanged();
@@ -219,11 +239,10 @@ export class LocationStore {
 		return this.FindIndex(loc) != -1;
 	}
 
-	private FindIndex(loc: LocationData, locations: LocationData[] = null): number {
+	private FindIndex(loc: LocationData | null, locations: LocationData[] | null = null): number {
 		if (loc == null) return -1;
 		if (locations == null) locations = this.locations
-		for (let index = 0; index < locations.length; index++) {
-			const element = locations[index];
+		for (const [index, element] of locations.entries()) {
 			if (element.entryText == loc.entryText) return index;
 		}
 		return -1;
@@ -239,8 +258,9 @@ export class LocationStore {
 			return false;
 		if (newLoc == null)
 			return false;
-		for (let key in newLoc) {
-			if ((oldLoc as any)[key] != (newLoc as any)[key]) {
+		let key: keyof LocationData;
+		for (key in newLoc) {
+			if (oldLoc[key] != newLoc[key]) {
 				return false
 			}
 		}

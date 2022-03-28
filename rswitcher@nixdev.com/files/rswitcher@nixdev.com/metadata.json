@@ -1,0 +1,5 @@
+{
+    "uuid": "rswitcher@nixdev.com",
+    "name": "Resolution Switcher",
+    "description": "Switch resolution on-the-fly with HiDPI support"
+}

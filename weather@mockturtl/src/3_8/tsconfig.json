@@ -3,18 +3,16 @@
 		"lib": [
 			"es2017"
 		],
-		"module": "CommonJS",
 		"target": "es2017",
-		"baseUrl": "./",
-		"noImplicitAny": true,
 		"removeComments": true,
-		"preserveConstEnums": false,
-		"sourceMap": false,
-		"noImplicitThis": true,
-		"strictBindCallApply": true,
-		"strictFunctionTypes": true,
-		"alwaysStrict": true,
-		"outDir": "../../files/weather@mockturtl/3.8/"
+		"sourceMap": true,
+		"strict": true,
+        "noFallthroughCasesInSwitch": true,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+		"noImplicitAny": true,
+        "experimentalDecorators": true,
 	},
 	"include": [
 		"./**/*",

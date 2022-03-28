@@ -1,18 +1,20 @@
-import { Services } from "config";
-import { HttpError, HTTPParams } from "lib/httpLib";
-import { WeatherApplet } from "main";
-import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "types";
-import { CelsiusToKelvin, IsLangSupported, _ } from "utils";
+import { DateTime } from "luxon";
+import { Services } from "../config";
+import { ErrorResponse, HttpError, HTTPParams } from "../lib/httpLib";
+import { WeatherApplet } from "../main";
+import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
+import { CelsiusToKelvin, IsLangSupported, _ } from "../utils";
+import { BaseProvider } from "./BaseProvider";
 
 
-
-export class VisualCrossing implements WeatherProvider {
+export class VisualCrossing extends BaseProvider {
 	readonly prettyName: string = _("Visual Crossing");
 	readonly name: Services = "Visual Crossing";
 	readonly maxForecastSupport: number = 15;
 	readonly maxHourlyForecastSupport: number = 336;
 	readonly website: string = "https://weather.visualcrossing.com/";
 	readonly needsApiKey: boolean = true;
+	public readonly remainingCalls: number | null = null;
 
 	private url: string = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
 	private params: HTTPParams = {
@@ -25,13 +27,11 @@ export class VisualCrossing implements WeatherProvider {
 
 	private supportedLangs: string[] = ["en", "de", "fr", "es"]
 
-	private app: WeatherApplet;
-
 	constructor(app: WeatherApplet) {
-		this.app = app;
+		super(app);
 	}
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData> {
+	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
 		if (loc == null) return null;
 		this.params['key'] = this.app.config.ApiKey;
 		let translate = true;
@@ -40,17 +40,17 @@ export class VisualCrossing implements WeatherProvider {
 			translate = false;
 		}
 
-		let url = this.url + loc.lat + "," + loc.lon;
-		let json = await this.app.LoadJsonAsync<VisualCrossingPayload>(url, this.params, (e) => this.HandleHttpError(e));
+		const url = this.url + loc.lat + "," + loc.lon;
+		const json = await this.app.LoadJsonAsync<VisualCrossingPayload>(url, this.params, (e) => this.HandleHttpError(e));
 
 		if (!json) return null;
 		return this.ParseWeather(json, translate);
 	}
 
 	private ParseWeather(weather: VisualCrossingPayload, translate: boolean): WeatherData {
-		let currentHour = this.GetCurrentHour(weather.days);
-		let result: WeatherData = {
-			date: new Date(weather.currentConditions.datetimeEpoch * 1000),
+		const currentHour = this.GetCurrentHour(weather.days, weather.timezone);
+		const result: WeatherData = {
+			date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch, { zone: weather.timezone }),
 			location: {
 				url: encodeURI("https://www.visualcrossing.com/weather-history/" + weather.latitude + "," + weather.longitude + "/"),
 				timeZone: weather.timezone,
@@ -60,89 +60,90 @@ export class VisualCrossing implements WeatherProvider {
 				lat: weather.latitude,
 				lon: weather.longitude,
 			},
-			humidity: weather.currentConditions.humidity ?? currentHour.humidity,
-			pressure: weather.currentConditions.pressure ?? currentHour.pressure,
+			humidity: weather.currentConditions.humidity ?? currentHour?.humidity,
+			pressure: weather.currentConditions.pressure ?? currentHour?.pressure,
+			dewPoint: CelsiusToKelvin(weather.currentConditions.dew ?? currentHour?.dew),
 			wind: {
-				degree: weather.currentConditions.winddir ?? currentHour.winddir,
-				speed: weather.currentConditions.windspeed ?? currentHour.windspeed,
+				degree: weather.currentConditions.winddir ?? currentHour?.winddir,
+				speed: weather.currentConditions.windspeed ?? currentHour?.windspeed,
 			},
-			temperature: CelsiusToKelvin(weather.currentConditions.temp ?? currentHour.temp),
-			sunrise: new Date(weather.currentConditions.sunriseEpoch * 1000),
-			sunset: new Date(weather.currentConditions.sunsetEpoch * 1000),
+			temperature: CelsiusToKelvin(weather.currentConditions.temp ?? currentHour?.temp),
+			sunrise: DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, { zone: weather.timezone }),
+			sunset: DateTime.fromSeconds(weather.currentConditions.sunsetEpoch, { zone: weather.timezone }),
 			condition: this.GenerateCondition(weather.currentConditions.icon, weather.currentConditions.conditions, translate),
 			extra_field: {
 				name: _("Feels Like"),
 				type: "temperature",
 				// use current hour instead, observations feels like doesn't seem to differ at all
-				value: CelsiusToKelvin(currentHour.feelslike ?? weather.currentConditions.feelslike)
+				value: CelsiusToKelvin(currentHour?.feelslike ?? weather.currentConditions.feelslike)
 			},
-			forecasts: this.ParseForecasts(weather.days, translate),
-			hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate)
+			forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
+			hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
 		}
 
 		return result;
 	}
 
-	private ParseForecasts(forecasts: DayForecast[], translate: boolean): ForecastData[] {
-		let result: ForecastData[] = [];
-		for (let index = 0; index < forecasts.length; index++) {
-			const element = forecasts[index];
-			result.push({
-				date: new Date(element.datetimeEpoch * 1000),
-				condition: this.GenerateCondition(element.icon, element.conditions, translate),
-				temp_max: CelsiusToKelvin(element.tempmax),
-				temp_min: CelsiusToKelvin(element.tempmin)
-			});
+	private ParseForecasts(forecasts: DayForecast[] | undefined, translate: boolean, tz: string): ForecastData[] {
+		const result: ForecastData[] = [];
+		if (!!forecasts) {
+			for (const element of forecasts) {
+				result.push({
+					date: DateTime.fromSeconds(element.datetimeEpoch, { zone: tz }),
+					condition: this.GenerateCondition(element.icon, element.conditions, translate),
+					temp_max: CelsiusToKelvin(element.tempmax),
+					temp_min: CelsiusToKelvin(element.tempmin)
+				});
+			}
 		}
 
 		return result;
 	}
 
-	private ParseHourlyForecasts(forecasts: DayForecast[], translate: boolean): HourlyForecastData[] {
-		let currentHour = new Date();
-		currentHour.setMinutes(0, 0, 0);
+	private ParseHourlyForecasts(forecasts: DayForecast[] | undefined, translate: boolean, tz: string): HourlyForecastData[] {
+		const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
 
-		let result: HourlyForecastData[] = [];
-		for (let index = 0; index < forecasts.length; index++) {
-			const element = forecasts[index];
-			for (let index = 0; index < element.hours.length; index++) {
-				const hour = element.hours[index];
-				let time = new Date(hour.datetimeEpoch * 1000);
-				if (time < currentHour) continue;
-				let item: HourlyForecastData = {
-					date: time,
-					temp: CelsiusToKelvin(hour.temp),
-					condition: this.GenerateCondition(hour.icon, hour.conditions, translate)
-				}
+		const result: HourlyForecastData[] = [];
+		if (!!forecasts) {
+			for (const element of forecasts) {
+				if (!element.hours)
+					continue;
 
-				if (hour.preciptype != null) {
-					item.precipitation = {
-						type: hour.preciptype[0],
-						chance: hour.precipprob,
-						volume: hour.precip
+				for (const hour of element.hours) {
+					const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
+					if (time < currentHour) continue;
+					const item: HourlyForecastData = {
+						date: time,
+						temp: CelsiusToKelvin(hour.temp),
+						condition: this.GenerateCondition(hour.icon, hour.conditions, translate)
 					}
 
-					/*if (item.precipitation.type == "snow")
-					item.precipitation.volume = hour.snow;*/
-				}
+					if (hour.preciptype != null) {
+						item.precipitation = {
+							type: hour.preciptype[0],
+							chance: hour.precipprob,
+							volume: hour.precip
+						}
 
-				result.push(item);
+						/*if (item.precipitation.type == "snow")
+						item.precipitation.volume = hour.snow;*/
+					}
+
+					result.push(item);
+				}
 			}
 		}
 		return result;
 	}
 
-	private GetCurrentHour(forecasts: DayForecast[]): HourForecast {
-		if (forecasts?.length < 1)
+	private GetCurrentHour(forecasts: DayForecast[] | undefined, tz: string): HourForecast | null {
+		if (!forecasts || forecasts?.length < 1 || !forecasts[0].hours)
 			return null;
 
-		let currentHour = new Date();
-		currentHour.setMinutes(0, 0, 0);
+		const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
 
-		const element = forecasts[0];
-		for (let index = 0; index < element.hours.length; index++) {
-			const hour = element.hours[index];
-			let time = new Date(hour.datetimeEpoch * 1000);
+		for (const hour of forecasts[0].hours) {
+			const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
 			if (time < currentHour) continue;
 			return hour;
 		}
@@ -150,7 +151,7 @@ export class VisualCrossing implements WeatherProvider {
 	}
 
 	private GenerateCondition(icon: string, condition: string, translate: boolean): Condition {
-		let result: Condition = {
+		const result: Condition = {
 			main: (translate) ? this.ResolveTypeID(this.GetFirstCondition(condition)) : this.GetFirstCondition(condition),
 			description: (translate) ? this.ResolveTypeIDs(condition) : condition,
 			icons: [],
@@ -200,7 +201,7 @@ export class VisualCrossing implements WeatherProvider {
 	}
 
 	private GetFirstCondition(condition: string): string {
-		let split = condition.split(", ");
+		const split = condition.split(", ");
 		return split[0];
 	}
 
@@ -219,7 +220,7 @@ export class VisualCrossing implements WeatherProvider {
 			case "type_6":
 				return _("Light drizzle/rain");
 			case "type_7":
-				return _("Duststorm");
+				return _("Dust Storm");
 			case "type_8":
 				return _("Fog");
 			case "type_9":
@@ -299,8 +300,7 @@ export class VisualCrossing implements WeatherProvider {
 	private ResolveTypeIDs(condition: string): string {
 		let result = "";
 		let split = condition.split(", ");
-		for (let index = 0; index < split.length; index++) {
-			const element = split[index];
+		for (const [index, element] of split.entries()) {
 			result += this.ResolveTypeID(element);
 			// not the last
 			if (index < split.length - 1)
@@ -309,8 +309,8 @@ export class VisualCrossing implements WeatherProvider {
 		return result;
 	}
 
-	private HandleHttpError(error: HttpError): boolean {
-		if (error?.code == 401) {
+	private HandleHttpError(error: ErrorResponse): boolean {
+		if (error?.ErrorData.code == 401) {
 			this.app.ShowError({
 				type: "hard",
 				userError: true,

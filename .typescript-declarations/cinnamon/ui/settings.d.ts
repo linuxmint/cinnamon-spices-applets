@@ -97,7 +97,7 @@ declare namespace imports.ui.settings {
 		 *
 		 * Returns (boolean): Whether the bind was successful
 		 */
-		public bind<T>(key: string, applet_prop: string, callback?: (arg?: T) => any, user_data?: T): boolean;
+		public bind<T = undefined>(key: string, applet_prop: string, callback?: (arg: T) => any, user_data?: T): boolean;
 
 		/**
 		 * bindProperty:

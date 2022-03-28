@@ -56,6 +56,14 @@ declare namespace imports.ui.popupMenu {
 		actor: gi.Clutter.Actor
 	}
 
+	interface PopupBaseMenuItem {
+		connect(event: 'activate', cb: (actor: this, event: gi.Clutter.Event, keepMenu: boolean) => void): number
+		connect(event: 'active-changed', cb: (actor: this, active: boolean) => void): number
+		connect(event: 'sensitive-changed', cb: (actor: this, sensitive: boolean) => void): number
+		connect(event: 'destroy', cb: (actor: this) => void): number
+		emit(signal: string, ...args: any): any;
+	}
+
 	export class PopupBaseMenuItem {
 		public readonly actor: gi.Cinnamon.GenericContainer;
 		public readonly active: boolean;
@@ -118,11 +126,6 @@ declare namespace imports.ui.popupMenu {
 		protected _allocate(actor: gi.Cinnamon.GenericContainer, box: gi.Clutter.ActorBox, flags: gi.Clutter.AllocationFlags): void;
 
 		setColumnWidths(widths: number[]): void;
-
-		public connect(event: 'activate', cb: (actor: this, event: gi.Clutter.Event, keepMenu: boolean) => void): number
-		public connect(event: 'active-changed', cb: (actor: this, active: boolean) => void): number
-		public connect(event: 'sensitive-changed', cb: (actor: this, sensitive: boolean) => void): number
-		public connect(event: 'destroy', cb: (actor: this) => void): number
 	}
 
 	export class PopupMenuItem extends PopupBaseMenuItem {
@@ -204,6 +207,7 @@ declare namespace imports.ui.popupMenu {
 	}
 
 	export class Switch {
+		actor: gi.St.Bin
 		state: boolean;
 		constructor(state: boolean);
 
@@ -211,7 +215,18 @@ declare namespace imports.ui.popupMenu {
 		toggle(): void;
 	}
 
-	export class PopupSwitchMenuItem extends PopupBaseMenuItem {
+	interface IPopupSwitchMenu {
+		connect(event: 'toggled', cb: (actor: this, state: boolean) => void): number
+	}
+
+	type PopupSwitchMenuItemProps = IPopupSwitchMenu & PopupBaseMenuItem ;
+
+	interface PopupSwitchMenuItem extends PopupSwitchMenuItemProps {}
+	export class PopupSwitchMenuItem {
+		protected _switch: Switch;
+		protected _statusLabel: gi.St.Label;
+		protected _statusBin: gi.St.Bin;
+
 		label: gi.St.Label;
 		constructor(text: string, active: boolean, params?: PopupBaseMenuItemParams)
 
@@ -574,11 +589,11 @@ declare namespace imports.ui.popupMenu {
 		 */
 		setColumnWidths(widths: number[]): void;
 
-		private _menuQueueRelayout(): void;
+		protected _menuQueueRelayout(): void;
 
 		addActor(actor: gi.St.Widget): void;
 
-		private _getMenuItems(): PopupBaseMenuItem[];
+		protected _getMenuItems(): PopupBaseMenuItem[];
 
 		/** 
 		 * The first item in the popup menu
@@ -792,7 +807,6 @@ declare namespace imports.ui.popupMenu {
 		menu: PopupSubMenu;
 		protected _triangleBin: gi.St.Bin
 
-
 		constructor(text: string)
 
 		private _subMenuOpenStateChanged(menu: PopupSubMenu, open: boolean): void;
@@ -847,27 +861,27 @@ declare namespace imports.ui.popupMenu {
 	*/
 	export class PopupMenuFactory {
 
-		private _createShellItem(factoryItem: any, launcher: any, orientation: gi.St.Side): any;
+		protected _createShellItem(factoryItem: PopupMenuAbstractItem, launcher: any, orientation: gi.St.Side): any;
 
 		getShellMenu(factoryMenu: any): any;
 
 		buildShellMenu(client: any, launcher: any, orientation: gi.St.Side): any;
 
-		private _attachToMenu(shellItem: any, factoryItem: any): void;
+		protected _attachToMenu(shellItem: any, factoryItem: PopupMenuAbstractItem): void;
 
-		private _onDestroyMainMenu(factoryItem: any): void;
+		protected _onDestroyMainMenu(factoryItem: PopupMenuAbstractItem): void;
 
-		private _createItem(factoryItem: any): any;
+		protected _createItem<T extends PopupMenuAbstractItem>(factoryItem: T): T;
 
-		private _createChildrens(factoryItem: any): void;
+		protected _createChildrens(factoryItem: PopupMenuAbstractItem): void;
 
-		private _onChildAdded(factoryItem: any, child: any, position: number): void;
+		protected _onChildAdded(factoryItem: PopupMenuAbstractItem, child: any, position: number): void;
 
-		private _onChildMoved(factoryItem: any, child: any, oldpos: number, newpos: number): void;
+		protected _onChildMoved(factoryItem: PopupMenuAbstractItem, child: any, oldpos: number, newpos: number): void;
 
-		private _onTypeChanged(factoryItem: any): void;
+		protected _onTypeChanged(factoryItem: PopupMenuAbstractItem): void;
 
-		private _moveItemInMenu(menu: PopupMenu, factoryItem: any, newpos: number): void;
+		protected _moveItemInMenu(menu: PopupMenu, factoryItem: PopupMenuAbstractItem, newpos: number): void;
 	}
 
 	/* Basic implementation of a menu manager.

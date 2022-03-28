@@ -48,19 +48,4 @@ describe('setting volume is working', () => {
 
         expect(spy).toHaveBeenCalledWith('Volume: 0 %')
     })
-
-
-    it('tooltip text is set to Default when calling setVolume with null', () => {
-        const spy = jest.spyOn(PanelItemTooltip.prototype, 'set_text')
-
-        const tooltip = createAppletTooltip({
-            applet,
-            orientation: topOrientation
-        })
-
-        tooltip.setVolume(null)
-
-        expect(spy).toHaveBeenCalledWith(DEFAULT_TOOLTIP_TXT)
-
-    })
 })

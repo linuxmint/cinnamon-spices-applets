@@ -3,7 +3,7 @@
 		"type": "header",
 		"description": "Settings - Bash Sensors (write commands in Bash!)"
 	},
-	"title1": {
+	"title": {
 		"type": "entry",
 		"default": "Bash sensors",
 		"description": "Title",

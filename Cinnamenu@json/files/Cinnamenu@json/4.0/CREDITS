@@ -6,6 +6,8 @@ duckgo_icon.png, ask.png, yahoo_icon.png, ecosia.png and bing_icon.png logos are
 
 search.py taken from placesCenter@scollins cinnamon applet https://github.com/linuxmint/cinnamon-spices-applets/tree/master/placesCenter%40scollins
 
+Additional keywords in emoji.js are from emojilib (https://github.com/muan/emojilib) License: MIT
+
 ---------------
 Forked from Gnomenu by The Panacea Projects - https://github.com/The-Panacea-Projects/Gnomenu.
 

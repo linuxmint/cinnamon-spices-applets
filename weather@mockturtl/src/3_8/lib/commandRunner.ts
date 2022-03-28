@@ -1,5 +1,5 @@
-import { Log } from "lib/logger";
-import { WeatherButton } from "ui_elements/weatherbutton";
+import { Logger } from "./logger";
+import { WeatherButton } from "../ui_elements/weatherbutton";
 
 const { spawnCommandLineAsyncIO } = imports.misc.util;
 
@@ -7,24 +7,25 @@ const { spawnCommandLineAsyncIO } = imports.misc.util;
  * Doesn't do JSON typechecking, you have to do that manually
  * @param command 
  */
-export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedResponse<TData>> {
-	let response = await SpawnProcess(command);
-	if (!response.Success) return response;
+export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedResponse<TData> | TypedFailResponse> {
+	const response = await SpawnProcess(command);
+	if (!response.Success) return response as TypedFailResponse;
 
 	try {
 		response.Data = JSON.parse(response.Data);
 	}
 	catch (e) {
-		Log.Instance.Error("Error: Command response is not JSON. The response: " + response.Data);
+		if (e instanceof Error)
+			Logger.Error("Error: Command response is not JSON. The response: " + response.Data, e);
 		response.Success = false;
 		response.ErrorData = {
 			Code: -1,
-			Message: null,
+			Message: "Failed to parse JSON",
 			Type: "jsonParse",
 		}
 	}
 	finally {
-		return response;
+		return response as TypedFailResponse;
 	}
 }
 
@@ -33,16 +34,15 @@ export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedR
 export async function SpawnProcess(command: string[]): Promise<GenericResponse> {
 	// prepare command
 	let cmd = "";
-	for (let index = 0; index < command.length; index++) {
-		const element = command[index];
+	for (const element of command) {
 		cmd += "'" + element + "' ";
 	}
 
-	let response = await new Promise((resolve, reject) => {
+	const response = await new Promise((resolve, reject) => {
 		spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {
 			let result: GenericResponse = {
 				Success: exitCode == 0,
-				ErrorData: null,
+				ErrorData: undefined,
 				Data: aStdout ?? null
 			}
 
@@ -68,14 +68,24 @@ export function OpenUrl(element: WeatherButton) {
 	)
 }
 
-interface GenericResponse {
-	Success: boolean;
-	Data: any;
-	ErrorData: ErrorData;
+interface GenericResponse extends ProcessResponse {
+	Data: string;
 }
 
-interface TypedResponse<TData> extends GenericResponse {
+interface TypedResponse<TData> extends ProcessResponse {
+	Success: true;
 	Data: TData;
+}
+
+interface TypedFailResponse extends ProcessResponse {
+	Success: false;
+	Data: string;
+}
+
+interface ProcessResponse {
+	Success: boolean;
+	Data: any;
+	ErrorData: ErrorData | undefined;
 }
 
 interface ErrorData {

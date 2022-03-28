@@ -1,10 +1,11 @@
-import { createActivWidget } from "lib/ActivWidget";
-import { limitString } from "functions/limitString"
+import { createActivWidget } from "./ActivWidget";
+import { limitString } from "../functions/limitString"
 
 const { Icon, IconType, Label, BoxLayout } = imports.gi.St
+const { Point } = imports.gi.Clutter
 
 interface Arguments {
-    text?: string,
+    initialText?: string | undefined,
     iconName?: string,
     onActivated?: () => void
     maxCharNumber: number,
@@ -13,58 +14,46 @@ interface Arguments {
 export function createIconMenuItem(args: Arguments) {
 
     const {
-        text,
+        initialText,
         maxCharNumber,
         iconName,
         onActivated
     } = args
 
+    const icon = new Icon({
+        icon_type: IconType.SYMBOLIC,
+        style_class: 'popup-menu-icon',
+        pivot_point: new Point({ x: 0.5, y: 0.5 }), 
+        icon_name: iconName || '', 
+        visible: !!iconName
+    })
 
-    let icon: imports.gi.St.Icon
-    let label: imports.gi.St.Label
+    const label = new Label({
+        text: limitString(initialText || '', maxCharNumber) 
+    })
 
     const container = new BoxLayout({
         style_class: 'popup-menu-item'
     })
 
-    setIconName(iconName)
-    setText(text)
+    container.add_child(icon)
+    container.add_child(label)
+    initialText && setText(initialText)
 
-    function setIconName(name: string | null) {
+    function setIconName(name: string | null | undefined) {
 
-        if (icon && !name) {
-            container.remove_child(icon)
-            icon = null
+        if (!name) {
+            icon.visible = false
             return
         }
 
-        if (!name) return
-
-        initIcon()
-
         icon.icon_name = name
-
-        if (container.get_child_at_index(0) !== icon)
-            container.insert_child_at_index(icon, 0)
-    }
-
-    function initIcon() {
-        if (!icon) {
-            icon = new Icon({
-                icon_type: IconType.SYMBOLIC,
-                style_class: 'popup-menu-icon'
-            })
-        }
+        icon.visible = true
+ 
     }
 
     function setText(text: string) {
-        const labelText = text || ' '
-
-        if (!label) {
-            label = new Label();
-            container.add_child(label)
-        }
-        label.set_text(limitString(labelText, maxCharNumber))
+        label.set_text(limitString(text || ' ', maxCharNumber))
     }
 
     onActivated && createActivWidget({ widget: container, onActivated });
@@ -72,7 +61,8 @@ export function createIconMenuItem(args: Arguments) {
     return {
         actor: container,
         setIconName,
-        setText
+        setText,
+        getIcon: () => icon
     }
 
 

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-08 17:18+0100\n"
-"PO-Revision-Date: 2021-03-05 10:27+0300\n"
-"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"PO-Revision-Date: 2021-08-24 17:28+0300\n"
 "Language-Team: \n"
-"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
+"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr\n"
 
 #: 4.6/utils.js:61
 #, javascript-format
@@ -33,8 +33,8 @@ msgid ""
 "Make sure that the URL is valid and you have a stable internet connection. "
 "Don't hestitate to open an Issue on Github if the problem persists."
 msgstr ""
-"URL'nin geçerli olduğundan ve sabit bir internet bağlantınız olduğundan emin "
-"olun. Sorun devam ederse Github'da bir Sorun açmaktan çekinmeyin."
+"URL'nin geçerli olduğundan ve sabit bir internet bağlantınız olduğundan "
+"emin olun. Sorun devam ederse Github'da bir Sorun açmaktan çekinmeyin."
 
 #: 4.6/applet.js:177 3.0/applet.js:140
 msgid "Stop"
@@ -103,6 +103,14 @@ msgstr "Radyo++ Durduruldu"
 msgid "Please install the '%s' package."
 msgstr "Lütfen '%s' paketini kurun."
 
+#: 4.6/RadioSearchWidget.py:48
+msgid "Find Radio Station"
+msgstr "Radyo İstasyonu Bul"
+
+#: 4.6/RadioSearchWidget.py:53
+msgid "Add to My Stations"
+msgstr "İstasyonlarıma Ekle"
+
 #: 4.6/download-dialog-mpris.py:36 4.6/download-dialog-youtube-dl.py:36
 msgid "Download Confirmation Dialog"
 msgstr "İndirme İşlemi Onayı"
@@ -160,16 +168,20 @@ msgid "A simple radio applet for Cinnamon"
 msgstr "Cinnamon için basit bir radyo uygulaması"
 
 #. 4.6->settings-schema.json->radio-stations-page->title
-msgid "Radio Stations"
-msgstr "Radyo İstasyonları"
+msgid "My Stations"
+msgstr "İstasyonlarım"
 
 #. 4.6->settings-schema.json->preferences-page->title
 msgid "Preferences"
 msgstr "Tercihler"
 
+#. 4.6->settings-schema.json->search-page->title
+msgid "Find Station"
+msgstr "İstasyon Bul"
+
 #. 4.6->settings-schema.json->find-station-section->title
-msgid "Find station"
-msgstr "İstasyon bul"
+msgid "Search Radio station"
+msgstr "Radyo istasyonu Ara"
 
 #. 4.6->settings-schema.json->appearance-section->title
 msgid "Appearance"
@@ -239,6 +251,10 @@ msgstr "Çift renkli"
 msgid "Color of symbolic icon when playing a radio station"
 msgstr "Radyo çalarken Sembolik Simgenin Rengi"
 
+#. 4.6->settings-schema.json->color-paused->description
+msgid "Color of symbolic icon while a radio station is paused"
+msgstr "Radyo duraklatıldığında sembolik simgenin rengi"
+
 #. 4.6->settings-schema.json->channel-on-panel->description
 msgid "Show current radio station on the panel"
 msgstr "Radyo Kanalını Panelde Göster"
@@ -286,7 +302,7 @@ msgstr "Sembolik Simge Rengi"
 
 #. 3.0->settings-schema.json->icon-type->description
 msgid "Type"
-msgstr "Tip"
+msgstr "Tür"
 
 #. 3.0->settings-schema.json->icon-type->options
 msgid "Symbolic Icon"
@@ -302,42 +318,4 @@ msgstr "Çift renkli Simge"
 
 #. 3.0->settings-schema.json->color-on->description
 msgid "Color of Symbolic Icon when playing a radio"
-msgstr "Radyo çalarken Sembolik Simgenin Rengi"
-
-msgid "Find Station"
-msgstr "İstasyon Bul"
-
-#. 4.6->settings-schema.json->find-station-section->title
-#. 3.0->settings-schema.json->page1->title
-#. 3.0->settings-schema.json->tree->description
-msgid "Search Radio station"
-msgstr "Radyo istasyonu Ara"
-
-msgid "My Stations"
-msgstr "İstasyonlarım"
-
-#~ msgid ""
-#~ "Can't increase Volume. Volume already at maximum. Change the Maximum "
-#~ "Volume in the Settings to further increase the Volume."
-#~ msgstr ""
-#~ "Sesi artıramıyorum. Hacim zaten maksimumda. Sesi daha da artırmak için "
-#~ "Ayarlar'dan Maksimum Sesi değiştirin."
-
-#~ msgid "Audio Player"
-#~ msgstr "Ses oynatıcı"
-
-#~ msgid "Maximum Volume"
-#~ msgstr "En yüksek Ses seviyesi"
-
-#~ msgid "Caliyor %s"
-#~ msgstr "Caliyor %s"
-
-#~ msgid ""
-#~ "This simple radio for Cinnamon. Require moc player. In setting you may "
-#~ "add, edit and remove stations."
-#~ msgstr ""
-#~ "Bu Cinnamon için basit bir radyo uygulamacığıdır. Moc player gerektirir. "
-#~ "Ayarlardan radyo istasyonu ekleme, silme ve düzenlemesi yapılabilir."
-
-#~ msgid "Include of list"
-#~ msgstr "Listenin dahil edilmesi"
+msgstr "Radyo çalarken sembolik simgenin rengi"

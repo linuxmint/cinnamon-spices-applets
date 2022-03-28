@@ -7,13 +7,13 @@ const MOCKED_LOADING_TIME = 10
 const VALID_VOLUME_PERCENT_1 = 80
 const VALID_VOLUME_PERCENT_2 = 50
 
-import { initMprisMocks } from './MpvMock'
+import { initMprisMocks } from '../../utils/MpvMock'
 const { resetInterfaces, simulateMpvStart, simulateTitleChanged } = initMprisMocks(
     { loadingTime: MOCKED_LOADING_TIME }
 )
 
 import { createMpvHandler } from 'mpv/MpvHandler'
-import { MprisMediaPlayerDbus } from 'MprisTypes'
+import { MprisMediaPlayerDbus } from 'types'
 import { MEDIA_PLAYER_2_PLAYER_NAME, MPV_MPRIS_BUS_NAME } from 'consts'
 const { getDBusProxyWithOwner } = imports.misc.interfaces
 const { MixerControl } = imports.gi.Cvc
@@ -34,9 +34,7 @@ const callbacks = { onPlaybackstatusChanged, onUrlChanged, onVolumeChanged, onTi
 
 function initMpvListener(args: { lastUrl?: string }) {
 
-    const {
-        lastUrl
-    } = args
+    const lastUrl = args.lastUrl || ''
 
     let mprisListener = createMpvHandler({
         ...callbacks,
@@ -53,12 +51,9 @@ function createMpvDbusServerPlayer(): MprisMediaPlayerDbus {
 }
 
 afterEach(() => {
-
     const serverPlayer = createMpvDbusServerPlayer()
     serverPlayer.StopSync()
     resetInterfaces()
-
-    jest.clearAllMocks();
 })
 
 describe('Starting mpv with valid url is working', () => {
@@ -164,7 +159,7 @@ describe('changing url is working', () => {
     })
 
 
-    it('changing url fram valid url to another valid url should change playbackstatus to previous state after loading', async (done) => {
+    it('changing url from valid url to another valid url should change playbackstatus to previous state after loading', async () => {
         await simulateMpvStart({
             url: VALID_URL_1,
             volume: VALID_VOLUME_PERCENT_1,
@@ -176,12 +171,10 @@ describe('changing url is working', () => {
         initMpvListener({ lastUrl: VALID_URL_1 })
         onPlaybackstatusChanged.mockClear()
 
-        serverPlayer.OpenUriRemote(VALID_URL_2)
+        await serverPlayer.OpenUriRemote(VALID_URL_2)
 
-        setTimeout(() => {
-            expect(onPlaybackstatusChanged).toHaveBeenLastCalledWith('Paused')
-            done()
-        }, MOCKED_LOADING_TIME)
+        expect(onPlaybackstatusChanged).toHaveBeenLastCalledWith('Paused')
+
     })
 
     /**
@@ -194,7 +187,7 @@ describe('changing url is working', () => {
      * So it is AFAICS not possible to determine 100 % correctly if the url has changed due to a user manually opening a new url (or file) or due to the behaviour described above. However it seems much more valube to correclty handle .pls files than user opening an invalid url as this a very uncommon behaviour (theoretically possible with playerctl) 
      * 
     */
-    it('changing url from valid url to invalid url should be ignored', async (done) => {
+    it('changing url from valid url to invalid url should be ignored', async () => {
         await simulateMpvStart({
             url: VALID_URL_1,
             volume: VALID_VOLUME_PERCENT_1,
@@ -205,14 +198,10 @@ describe('changing url is working', () => {
         onUrlChanged.mockClear()
 
         const serverPlayer = createMpvDbusServerPlayer()
-        serverPlayer.OpenUriRemote(INVALID_URL)
+        await serverPlayer.OpenUriRemote(INVALID_URL)
 
-        setTimeout(() => {
-            expect(onUrlChanged).not.toHaveBeenCalled()
-            done()
-        }, MOCKED_LOADING_TIME);
-
-
+        expect(onUrlChanged).not.toHaveBeenCalled()
+ 
     })
 
     // TODO: test corner case: starting mpv with invalid url and changing later to valid url
@@ -306,8 +295,11 @@ describe('changing volume is working', () => {
         })
 
         const expectedCvcVolume = control.get_vol_max_norm() * VALID_VOLUME_PERCENT_2 / 100
-        expect(cvcStream.volume).toBe(expectedCvcVolume)
+        expect(cvcStream!.volume).toBe(expectedCvcVolume)
     });
 
 });
 
+describe('Changing position is working', () => {
+    it.todo('Should change to valid value')
+});

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: calendar@ccprog VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 15:40+0100\n"
+"POT-Creation-Date: 2021-09-13 13:37+0200\n"
 "PO-Revision-Date: 2021-02-27 15:40+0100\n"
 "Last-Translator: Claus Colloseus <ccprog@gmx.de>\n"
 "Language-Team: German\n"
@@ -29,6 +29,7 @@ msgstr "Eintrag bearbeiten"
 #. settings-schema.json->region_aus->description
 #. settings-schema.json->region_can->description
 #. settings-schema.json->region_deu->description
+#. settings-schema.json->region_esp->description
 #. settings-schema.json->region_nzl->description
 #. settings-schema.json->region_svk->description
 #. settings-schema.json->region_che->description
@@ -155,6 +156,10 @@ msgid "Bosnia and Herzegovina"
 msgstr "Bosnien und Herzogowina"
 
 #. settings-schema.json->country->options
+msgid "Belarus"
+msgstr "Weißrussland"
+
+#. settings-schema.json->country->options
 msgid "Brazil"
 msgstr "Brasilien"
 
@@ -189,6 +194,10 @@ msgstr "Dänemark"
 #. settings-schema.json->country->options
 msgid "Estonia"
 msgstr "Estland"
+
+#. settings-schema.json->country->options
+msgid "Spain"
+msgstr "Spanien"
 
 #. settings-schema.json->country->options
 msgid "Finland"
@@ -489,6 +498,82 @@ msgstr "Schleswig-Holstein"
 #. settings-schema.json->region_deu->options
 msgid "Thüringen"
 msgstr "Thüringen"
+
+#. settings-schema.json->region_esp->options
+msgid "Andalucía"
+msgstr "Andalusien"
+
+#. settings-schema.json->region_esp->options
+msgid "Aragón"
+msgstr "Aragonien"
+
+#. settings-schema.json->region_esp->options
+msgid "Asturias"
+msgstr "Asturien"
+
+#. settings-schema.json->region_esp->options
+msgid "Canarias"
+msgstr "Kanarische Inseln"
+
+#. settings-schema.json->region_esp->options
+msgid "Cantabria"
+msgstr "Kantabrien"
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla y León"
+msgstr "Kastilien und León"
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla-La Mancha"
+msgstr "Kastilien-La Mancha"
+
+#. settings-schema.json->region_esp->options
+msgid "Cataluña"
+msgstr "Katalonien"
+
+#. settings-schema.json->region_esp->options
+msgid "Ceuta"
+msgstr "Ceuta"
+
+#. settings-schema.json->region_esp->options
+msgid "Extremadura"
+msgstr "Extremadura"
+
+#. settings-schema.json->region_esp->options
+msgid "Galicia"
+msgstr "Galizien"
+
+#. settings-schema.json->region_esp->options
+msgid "Islas Baleares"
+msgstr "Balearische Inseln"
+
+#. settings-schema.json->region_esp->options
+msgid "La Rioja"
+msgstr "La Rioja"
+
+#. settings-schema.json->region_esp->options
+msgid "Madrid"
+msgstr "Madrid"
+
+#. settings-schema.json->region_esp->options
+msgid "Melilla"
+msgstr "Melilla"
+
+#. settings-schema.json->region_esp->options
+msgid "Murcia"
+msgstr "Murcia"
+
+#. settings-schema.json->region_esp->options
+msgid "Navarra"
+msgstr "Navarra"
+
+#. settings-schema.json->region_esp->options
+msgid "País Vasco"
+msgstr "Baskenland"
+
+#. settings-schema.json->region_esp->options
+msgid "Valencia"
+msgstr "Valencia"
 
 #. settings-schema.json->region_nzl->options
 msgid "Auckland"

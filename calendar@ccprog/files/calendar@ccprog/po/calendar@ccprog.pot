@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 15:40+0100\n"
+"POT-Creation-Date: 2021-09-13 13:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,6 +32,7 @@ msgstr ""
 #. settings-schema.json->region_aus->description
 #. settings-schema.json->region_can->description
 #. settings-schema.json->region_deu->description
+#. settings-schema.json->region_esp->description
 #. settings-schema.json->region_nzl->description
 #. settings-schema.json->region_svk->description
 #. settings-schema.json->region_che->description
@@ -152,6 +153,10 @@ msgid "Bosnia and Herzegovina"
 msgstr ""
 
 #. settings-schema.json->country->options
+msgid "Belarus"
+msgstr ""
+
+#. settings-schema.json->country->options
 msgid "Brazil"
 msgstr ""
 
@@ -185,6 +190,10 @@ msgstr ""
 
 #. settings-schema.json->country->options
 msgid "Estonia"
+msgstr ""
+
+#. settings-schema.json->country->options
+msgid "Spain"
 msgstr ""
 
 #. settings-schema.json->country->options
@@ -485,6 +494,82 @@ msgstr ""
 
 #. settings-schema.json->region_deu->options
 msgid "Thüringen"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Andalucía"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Aragón"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Asturias"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Canarias"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Cantabria"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla y León"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla-La Mancha"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Cataluña"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Ceuta"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Extremadura"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Galicia"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Islas Baleares"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "La Rioja"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Madrid"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Melilla"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Murcia"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Navarra"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "País Vasco"
+msgstr ""
+
+#. settings-schema.json->region_esp->options
+msgid "Valencia"
 msgstr ""
 
 #. settings-schema.json->region_nzl->options

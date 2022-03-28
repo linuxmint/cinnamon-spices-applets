@@ -8,8 +8,8 @@
 // You should have received a copy of the GNU General Public License along with
 // this file. If not, see <http://www.gnu.org/licenses/>.
 const UUID = 'multicore-sys-monitor@ccadeptic23';
-const Gtk = imports.gi.Gtk;
 imports.gi.versions.Gtk = '3.0';
+const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
 const Gdk = imports.gi.Gdk;
 

@@ -20,7 +20,11 @@ export function createActivWidget(args: Arguments) {
     widget.reactive = true
     widget.track_hover = true
 
-    widget.connect('button-release-event', () => onActivated?.())
+    widget.connect('button-release-event', () => { 
+        onActivated?.()
+        return false
+    })
+
 
     // TODO: This is needed because some themes (at least Adapta-Nokto but maybe also others) don't provide style for the hover pseudo class. But it would be much easier to once (and on theme changes) programmatically set the hover pseudo class equal to the active pseudo class when the hover class isn't provided by the theme. 
     widget.connect('notify::hover', () => {
@@ -35,5 +39,7 @@ export function createActivWidget(args: Arguments) {
 
         if (relevantKeys.includes(symbol) && widget.hover)
             onActivated?.()
+        
+        return false
     })
 }

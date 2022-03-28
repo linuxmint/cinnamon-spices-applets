@@ -35,8 +35,7 @@ export class Event<TSender, TArgs> implements IEvent<TSender, TArgs> {
 	public Invoke(sender: TSender, args: TArgs): void {
 		if (this.subscribers.length == 0) return;
 
-		for (let index = 0; index < this.subscribers.length; index++) {
-			const element = this.subscribers[index];
+		for (const element of this.subscribers) {
 			element(sender, args);
 		}
 	}
