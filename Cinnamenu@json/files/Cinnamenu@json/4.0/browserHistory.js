@@ -17,6 +17,11 @@ function search_browser(path, wmClass, pattern) {
         const appInfo = foundApps.get_app_info();
 
         const full_path = GLib.get_user_config_dir() + '/' + path.join('/');
+        if (!GLib.file_test(full_path + '/History', GLib.FileTest.EXISTS)) {
+            resolve([]);
+            return;
+        }
+        
         Util.spawn_async(['python', __meta.path + '/searchHistory.py', full_path, pattern], (results) => {
             if (pattern == current_pattern) {
                 results = JSON.parse(results);
