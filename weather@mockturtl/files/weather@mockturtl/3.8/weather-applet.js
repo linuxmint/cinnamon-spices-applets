@@ -15169,11 +15169,16 @@ class UIHourlyForecasts {
 
 
 
-const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label, Icon: uiBar_Icon, Align: uiBar_Align, } = imports.gi.St;
+const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button } = imports.gi.St;
+const { Tooltip } = imports.ui.tooltips;
 const STYLE_BAR = 'bottombar';
 class UIBar {
     constructor(app) {
         this.ToggleClicked = new Event();
+        this.providerCreditButton = null;
+        this.hourlyButton = null;
+        this._timestamp = null;
+        this.timestampTooltip = null;
         this.app = app;
         this.actor = new uiBar_BoxLayout({ vertical: false, style_class: STYLE_BAR });
     }
@@ -15191,9 +15196,13 @@ class UIBar {
             this.hourlyButton.actor.child.icon_name = "custom-up-arrow-symbolic";
     }
     DisplayErrorMessage(msg) {
-        this._timestamp.text = msg;
+        if (this._timestamp == null)
+            return;
+        this._timestamp.label = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
+        if (this._timestamp == null || this.providerCreditButton == null || this.providerCreditButton.actor.is_finalized())
+            return false;
         let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
         if (provider.remainingCalls != null) {
             creditLabel += ` (${provider.remainingCalls})`;
@@ -15201,24 +15210,27 @@ class UIBar {
         this.providerCreditButton.actor.label = creditLabel;
         this.providerCreditButton.url = provider.website;
         const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
-        this._timestamp.text = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
+        this._timestamp.label = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
         if (weather.location.distanceFrom != null) {
             const stringFormat = {
                 distance: MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
                 distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
             };
-            this._timestamp.text += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
+            this._timestamp.label += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
         }
         if (!shouldShowToggle || config._alwaysShowHourlyWeather)
             this.HideHourlyToggle();
         return true;
     }
     Destroy() {
+        var _a;
         this.actor.destroy_all_children();
+        (_a = this.timestampTooltip) === null || _a === void 0 ? void 0 : _a.destroy();
     }
     Rebuild(config) {
         this.Destroy();
-        this._timestamp = new uiBar_Label({ text: "Placeholder" });
+        this._timestamp = new uiBar_Button({ label: "Placeholder" });
+        this.timestampTooltip = new Tooltip(this._timestamp, "Testing");
         this.actor.add(this._timestamp, {
             x_fill: false,
             x_align: uiBar_Align.START,
