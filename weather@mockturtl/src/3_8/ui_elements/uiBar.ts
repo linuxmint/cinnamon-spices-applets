@@ -64,12 +64,16 @@ export class UIBar {
 		const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
 		this._timestamp.label = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
 
-		if (weather.location.distanceFrom != null) {
+		if (weather?.stationInfo?.distanceFrom != null) {
 			const stringFormat = {
-				distance: MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
+				distance: MetreToUserUnits(weather.stationInfo.distanceFrom, config.DistanceUnit).toString(),
 				distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
 			}
 			this._timestamp.label += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
+		}
+
+		if (weather?.stationInfo?.name != null) {
+			this.timestampTooltip?.set_text(weather.stationInfo.name);
 		}
 
 		if (!shouldShowToggle || config._alwaysShowHourlyWeather)
@@ -85,7 +89,7 @@ export class UIBar {
 	public Rebuild(config: Config) {
 		this.Destroy();
 		this._timestamp = new Button({ label: "Placeholder" });
-		this.timestampTooltip = new Tooltip(this._timestamp, "Testing");
+		this.timestampTooltip = new Tooltip(this._timestamp, "");
 
 		this.actor.add(this._timestamp, {
 			x_fill: false,

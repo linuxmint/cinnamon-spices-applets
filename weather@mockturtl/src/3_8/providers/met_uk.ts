@@ -199,7 +199,12 @@ export class MetUk extends BaseProvider {
 					city: undefined,
 					country: undefined,
 					timeZone: undefined,
-					distanceFrom: this.observationSites[dataIndex].dist
+				},
+				stationInfo: {
+					distanceFrom: this.observationSites[dataIndex].dist,
+					name:  this.observationSites[dataIndex].name,
+					lat: parseFloat(this.observationSites[dataIndex].latitude),
+					lon: parseFloat(this.observationSites[dataIndex].longitude),
 				},
 				date: DateTime.fromISO(json[dataIndex].SiteRep.DV.dataDate, { zone: loc.timeZone }),
 				sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),

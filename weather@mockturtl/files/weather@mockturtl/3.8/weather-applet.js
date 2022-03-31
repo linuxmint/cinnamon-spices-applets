@@ -9799,7 +9799,12 @@ class MetUk extends BaseProvider {
                     city: undefined,
                     country: undefined,
                     timeZone: undefined,
-                    distanceFrom: this.observationSites[dataIndex].dist
+                },
+                stationInfo: {
+                    distanceFrom: this.observationSites[dataIndex].dist,
+                    name: this.observationSites[dataIndex].name,
+                    lat: parseFloat(this.observationSites[dataIndex].latitude),
+                    lon: parseFloat(this.observationSites[dataIndex].longitude),
                 },
                 date: DateTime.fromISO(json[dataIndex].SiteRep.DV.dataDate, { zone: loc.timeZone }),
                 sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
@@ -12489,6 +12494,8 @@ class USWeather extends BaseProvider {
                     country: undefined,
                     url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
                     timeZone: this.observationStations[0].properties.timeZone,
+                },
+                stationInfo: {
                     distanceFrom: this.observationStations[0].dist
                 },
                 date: timestamp,
@@ -15201,6 +15208,7 @@ class UIBar {
         this._timestamp.label = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
+        var _a, _b, _c;
         if (this._timestamp == null || this.providerCreditButton == null || this.providerCreditButton.actor.is_finalized())
             return false;
         let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
@@ -15211,12 +15219,15 @@ class UIBar {
         this.providerCreditButton.url = provider.website;
         const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
         this._timestamp.label = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
-        if (weather.location.distanceFrom != null) {
+        if (((_a = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _a === void 0 ? void 0 : _a.distanceFrom) != null) {
             const stringFormat = {
-                distance: MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
+                distance: MetreToUserUnits(weather.stationInfo.distanceFrom, config.DistanceUnit).toString(),
                 distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
             };
             this._timestamp.label += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
+        }
+        if (((_b = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _b === void 0 ? void 0 : _b.name) != null) {
+            (_c = this.timestampTooltip) === null || _c === void 0 ? void 0 : _c.set_text(weather.stationInfo.name);
         }
         if (!shouldShowToggle || config._alwaysShowHourlyWeather)
             this.HideHourlyToggle();
@@ -15230,7 +15241,7 @@ class UIBar {
     Rebuild(config) {
         this.Destroy();
         this._timestamp = new uiBar_Button({ label: "Placeholder" });
-        this.timestampTooltip = new Tooltip(this._timestamp, "Testing");
+        this.timestampTooltip = new Tooltip(this._timestamp, "");
         this.actor.add(this._timestamp, {
             x_fill: false,
             x_align: uiBar_Align.START,

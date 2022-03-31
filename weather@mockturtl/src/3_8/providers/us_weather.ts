@@ -246,6 +246,8 @@ export class USWeather extends BaseProvider {
 					country: /*"USA"*/undefined,
 					url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
 					timeZone: this.observationStations[0].properties.timeZone,
+				},
+				stationInfo: {
 					distanceFrom: this.observationStations[0].dist
 				},
 				date: timestamp,
