@@ -18,62 +18,54 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: it\n"
 
-#: applet.js:97
+msgid "Scr Lock"
+msgstr "Scr Num"
+
 msgid "Num Lock"
 msgstr "Bloc Num"
 
-#: applet.js:103
 msgid "Caps Lock"
 msgstr "Bloc Maiusc"
 
-#: applet.js:142
 msgid "Lock Keys"
 msgstr "Tasti di Blocco"
 
-#: applet.js:190
+msgid "Scr lock on"
+msgstr "Bloc Scr attivo"
+
+msgid "Scr lock off"
+msgstr "Bloc Scr disattivo"
+
 msgid "Num lock on"
 msgstr "Bloc Num attivo"
 
-#: applet.js:193
 msgid "Num lock off"
 msgstr "Bloc Num disattivo"
 
-#: applet.js:201
 msgid "Caps lock on"
 msgstr "Bloc Maiusc attivo"
 
-#: applet.js:204
 msgid "Caps lock off"
 msgstr "Bloc Maiusc disattivo"
 
-#. betterlock->settings-schema.json->show-notifications->description
 msgid "Show notifications"
 msgstr "Mostra notifiche"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Num Lock only"
-msgstr "Solo Bloc Num"
+msgid "Show caps lock indicator"
+msgstr "Mostra l'indicatore di blocco delle maiuscole"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Caps Lock only"
-msgstr "Solo Bloc Maiusc"
+msgid "Show num lock indicator"
+msgstr "Mostra l'indicatore di blocco numerico"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Num Lock and Caps Lock"
-msgstr "Bloc Num e Bloc Maiusc"
+msgid "Show scr lock indicator"
+msgstr "Mostra l'indicatore di blocco scr"
 
-#. betterlock->settings-schema.json->indicator-type->description
-msgid "Choose which indicator to show"
-msgstr "Scegli quale indicatore mostrare"
-
-#. betterlock->metadata.json->description
 msgid ""
-"Shows whether caps lock/num lock is on, and displays a notification when "
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification when "
 "these change."
 msgstr ""
-"Indica se il blocco maiuscole/blocco numerico è attivo e visualizza una "
-"notifica quando cambiano."
+"Mostra se il blocco maiuscole/blocco num/blocco scr è attivo e visualizza una "
+"notifica quando questi cambiano."
 
-#. betterlock->metadata.json->name
-msgid "Num Lock/Caps Lock indicator with notifications"
-msgstr "Indicatore Bloc Num/Bloc Maiusc con notifiche"
+msgid "Lock keys indicator with notifications"
+msgstr "Indicatore dei tasti di blocco con notifiche"

@@ -36,10 +36,13 @@ MyApplet.prototype = {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        global.log(this.settings.settings);
+        this.settings.bind("show-notifications", "showNotifications", null);
+        this.settings.bind("show-caps-lock-indicator", "showCapsLockIndicator", this._updateIconVisibility);
+        this.settings.bind("show-num-lock-indicator", "showNumLockIndicator", this._updateIconVisibility);
+        this.settings.bind("show-scr-lock-indicator", "showScrLockIndicator", this._updateIconVisibility);
 
-        this.settings.bind("show-notifications", "showNotifications", null)
-        this.settings.bind("indicator-type", "indicatorType", this._updateIconVisibility);
-
+        this.binScr = new St.Bin({ reactive: true });
         this.binNum = new St.Bin({ reactive: true });
         this.binCaps = new St.Bin({ reactive: true });
 
@@ -67,7 +70,20 @@ MyApplet.prototype = {
             icon_size: ICON_SIZE,
             style_class: "system-status-icon"
         });
+        this.scr_on = new St.Icon({
+            icon_name: "scr-on",
+            icon_type: St.IconType.SYMBOLIC,
+            icon_size: ICON_SIZE,
+            style_class: "system-status-icon"
+        });
+        this.scr_off = new St.Icon({
+            icon_name: "scr-off",
+            icon_type: St.IconType.SYMBOLIC,
+            icon_size: ICON_SIZE,
+            style_class: "system-status-icon"
+        });
 
+        this.binScr.child = this.scr_off;
         this.binNum.child = this.num_off;
         this.binCaps.child = this.caps_off;
         this.actor.add(this.binCaps, {
@@ -78,8 +94,16 @@ MyApplet.prototype = {
             y_align: St.Align.MIDDLE,
             y_fill: false
         });
+        this.actor.add(this.binScr, {
+            y_align: St.Align.MIDDLE,
+            y_fill: false
+        });
         this.actor.style = 'spacing: 2px';
 
+
+        this.scrMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Scr Lock"), false);
+        this.scrMenuItem.connect('activate', Lang.bind(this, this._onScrChanged));
+        this._applet_context_menu.addMenuItem(this.scrMenuItem);
 
         this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false);
         this.numMenuItem.connect('activate', Lang.bind(this, this._onNumChanged));
@@ -132,22 +156,36 @@ MyApplet.prototype = {
     },
 
     _updateIconVisibility: function() {
-        if (this.indicatorType == "both" || this.indicatorType == "caps-only")
+        if (this.showCapsLockIndicator) {
             this.binCaps.show();
-        else
+        } else {
             this.binCaps.hide();
-        if (this.indicatorType == "both" || this.indicatorType == "num-only")
+        }
+        if (this.showNumLockIndicator) {
             this.binNum.show();
-        else
+        } else {
             this.binNum.hide();
+        }
+        if (this.showScrLockIndicator) {
+            this.binScr.show();
+        } else {
+            this.binScr.hide();
+        }
     },
 
     _updateState: function() {
+        this.scrlock_state = this._getScrlockState();
         this.numlock_state = this._getNumlockState();
         this.capslock_state = this._getCapslockState();
 
+        let scrlock_prev = this.binScr.child;
         let numlock_prev = this.binNum.child;
         let capslock_prev = this.binCaps.child;
+        if (this.scrlock_state)
+            this.binScr.child = this.scr_on;
+        else
+            this.binScr.child = this.scr_off;
+
         if (this.numlock_state)
             this.binNum.child = this.num_on;
         else
@@ -160,8 +198,21 @@ MyApplet.prototype = {
 
         let msg, icon_name;
 
+        this.scrMenuItem.setToggleState(this.scrlock_state);
         this.numMenuItem.setToggleState(this.numlock_state);
         this.capsMenuItem.setToggleState(this.capslock_state);
+        if (scrlock_prev != this.binScr.child && !this._firstRun) {
+            if (this.binScr.child == this.scr_on) {
+                msg = _("Scr lock on");
+                icon_name = 'scr-on';
+            } else {this.indicatorType == "num-only"
+                msg = _("Scr lock off");
+                icon_name = 'scr-off';
+            }
+            if (this.showNotifications && this.showScrLockIndicator) {
+                this._notifyMessage(icon_name, msg);
+            }
+        }
         if (numlock_prev != this.binNum.child && !this._firstRun) {
             if (this.binNum.child == this.num_on) {
                 msg = _("Num lock on");
@@ -170,8 +221,9 @@ MyApplet.prototype = {
                 msg = _("Num lock off");
                 icon_name = 'num-off';
             }
-            if (this.showNotifications && (this.indicatorType == "both" || this.indicatorType == "num-only"))
+            if (this.showNotifications && this.showNumLockIndicator) {
                 this._notifyMessage(icon_name, msg);
+            }
         }
         if (capslock_prev != this.binCaps.child && !this._firstRun) {
             if (this.binCaps.child == this.caps_on) {
@@ -181,10 +233,15 @@ MyApplet.prototype = {
                 msg = _("Caps lock off");
                 icon_name = 'caps-off';
             }
-            if (this.showNotifications && (this.indicatorType == "both" || this.indicatorType == "caps-only"))
+            if (this.showNotifications && this.showCapsLockIndicator) {
                 this._notifyMessage(icon_name, msg);
+            }
         }
         this._firstRun = false;
+    },
+
+    _getScrlockState: function() {
+        return Keymap.get_scroll_lock_state();
     },
 
     _getNumlockState: function() {
@@ -196,36 +253,40 @@ MyApplet.prototype = {
     },
 
     on_applet_clicked: function(event) {
-        if (this.indicatorType === "caps-only" || event.get_source() === this.binCaps)
+        if (this.showCapsLockIndicator && event.get_source() === this.binCaps) {
             this._onCapsChanged();
-        else if (this.indicatorType === "num-only" || event.get_source() === this.binNum)
+        } else if (this.showNumLockIndicator && event.get_source() === this.binNum) {
             this._onNumChanged();
+        } else if (this.showScrLockIndicator && event.get_source() === this.binScr) {
+            this._onScrChanged();
+        }
     },
 
-    _onNumChanged: function(actor, event) {
+    _onLockChanged: function(keyval) {
+        if (Caribou.XAdapter.get_default !== undefined) {
+            //caribou <= 0.4.11
+            Caribou.XAdapter.get_default().keyval_press(keyval);
+            Caribou.XAdapter.get_default().keyval_release(keyval);
+        } else {
+            Caribou.DisplayAdapter.get_default().keyval_press(keyval);
+            Caribou.DisplayAdapter.get_default().keyval_release(keyval);
+        }
+        this._updateState();
+    },
+
+    _onScrChanged: function(_actor, _event) {
+        let keyval = Gdk.keyval_from_name("Scroll_Lock");
+        this._onLockChanged(keyval);
+    },
+
+    _onNumChanged: function(_actor, _event) {
         let keyval = Gdk.keyval_from_name("Num_Lock");
-        if (Caribou.XAdapter.get_default !== undefined) {
-            //caribou <= 0.4.11
-            Caribou.XAdapter.get_default().keyval_press(keyval);
-            Caribou.XAdapter.get_default().keyval_release(keyval);
-        } else {
-            Caribou.DisplayAdapter.get_default().keyval_press(keyval);
-            Caribou.DisplayAdapter.get_default().keyval_release(keyval);
-        }
-        this._updateState();
+        this._onLockChanged(keyval);
     },
 
-    _onCapsChanged: function(actor, event) {
+    _onCapsChanged: function(_actor, _event) {
         let keyval = Gdk.keyval_from_name("Caps_Lock");
-        if (Caribou.XAdapter.get_default !== undefined) {
-            //caribou <= 0.4.11
-            Caribou.XAdapter.get_default().keyval_press(keyval);
-            Caribou.XAdapter.get_default().keyval_release(keyval);
-        } else {
-            Caribou.DisplayAdapter.get_default().keyval_press(keyval);
-            Caribou.DisplayAdapter.get_default().keyval_release(keyval);
-        }
-        this._updateState();
+        this._onLockChanged(keyval);
     }
 };
 
