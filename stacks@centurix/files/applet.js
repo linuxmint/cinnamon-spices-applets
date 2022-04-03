@@ -9,6 +9,14 @@ const Main = imports.ui.main;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
+let Util;
+if (typeof require !== 'undefined') {
+	Util = require('./util');
+} else {
+	const AppletDir = imports.ui.appletManager.applets['stacks@centurix'];
+	Util = AppletDir.util;
+}
+
 const UUID = "stacks@centurix";
 
 const APPLET_FOLDER = global.userdatadir + "/applets/stacks@centurix/";
@@ -234,16 +242,63 @@ Stacks.prototype = {
 		}
 	},
 
+	dockerComposeExec: function(command, callback = null) {
+		callback = callback;
+		try {
+			global.log("Calling spawn_async_with_pipes()...");
+			global.log("Calling from " + this.docker_compose_project_folder);
+			global.log(['/usr/bin/docker-compose', "-f", "/home/chris/docker_projects/docker-compose.yml", "up"]);
+			global.log(Util.resolveHome(this.docker_compose_project_folder));
+
+			let [exit, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(
+				Util.resolveHome(this.docker_compose_project_folder),
+				['/usr/bin/docker-compose', "-f", "/home/chris/docker_projects/docker-compose.yml", "up"],
+				null,
+				GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+				null
+			);
+			global.log(exit);
+			global.log(pid);
+			global.log(stdin);
+			global.log(stdout);
+			global.log(stderr);
+
+			let out_reader = new Gio.DataInputStream({ base_stream: new Gio.UnixInputStream({fd: stdout}) });
+
+			let [out, size] = out_reader.read_line(null);
+
+			global.log(out);
+			global.log(size);
+		
+			global.log("Calling child_watch_add()...");
+			this._watch = GLib.child_watch_add(
+				GLib.PRIORITY_DEFAULT,
+				pid,
+				Lang.bind(this, function(pid, status, requestObj) {
+					GLib.source_remove(this._watch);
+					if (typeof callback == 'function') {
+						callback();
+					}
+				})
+			);
+			global.log(this._watch);
+		} catch(e) {
+			global.log(UUID + "::dockerComposeExec(" + command + "): " + e);
+		}
+	},
+
 	dockerComposeToggle: function(event) {
 		try {
 			if (event._switch.state) {
 				this.transitionMenu(_("Docker Compose: Bringing Stack up, please wait..."));
 				// this.homestead.up(Lang.bind(this, this.refreshApplet));
+				this.dockerComposeExec("up");
 				this.notification(_("Bringing Stack up..."));
 				return true;
 			}
 			this.transitionMenu(_("Docker Compose: Taking Stack down, please wait..."));
 			// this.homestead.halt(Lang.bind(this, this.refreshApplet));
+			this.dockerComposeExec("down");
 			this.notification(_("Taking Stack down..."));
 		} catch(e) {
 			global.log(UUID + '::dockerComposeToggle: ' + e);
