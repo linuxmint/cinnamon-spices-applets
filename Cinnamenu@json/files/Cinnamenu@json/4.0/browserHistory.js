@@ -21,8 +21,8 @@ function search_browser(path, wmClass, pattern) {
             resolve([]);
             return;
         }
-        
-        Util.spawn_async(['python', __meta.path + '/searchHistory.py', full_path, pattern], (results) => {
+
+        Util.spawn_async([__meta.path + '/searchHistory.py', full_path, pattern], (results) => {
             if (pattern == current_pattern) {
                 results = JSON.parse(results);
                 results.forEach( result => {

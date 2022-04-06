@@ -146,17 +146,6 @@
         },
         "tooltip":"View applications as list or grid"
     },
-    "description-placement":{
-        "type":"combobox",
-        "default":1,
-        "description":"Application description placement",
-        "options":{
-            "Tooltips":1,
-            "Under titles":2,
-            "None":3
-        },
-        "tooltip":"Choose where to show application descriptions"
-    },
     "sidebar-placement":{
         "type":"combobox",
         "default":1,
@@ -169,16 +158,28 @@
         },
         "tooltip":"Choose where to show the sidebar"
     },
-    "info-box":{
-        "type":"label",
-        "description":"\nInfo/tip: Drag on the menu edge to change the menu size.\n"
-    },
     "add-favorites":{
         "type":"switch",
         "default":true,
         "description":"Show favorites on sidebar",
         "tooltip":"Show your favorite app and file icons on the sidebar"
     },
+    "description-placement":{
+        "type":"combobox",
+        "default":1,
+        "description":"Application description placement",
+        "options":{
+            "Tooltips":1,
+            "Under titles":2,
+            "None":3
+        },
+        "tooltip":"Choose where to show application descriptions"
+    },
+    "info-box":{
+        "type":"label",
+        "description":"\nInfo/tip: Drag on the menu edge to change the menu size.\n"
+    },
+
     "show-places-category":{
         "type":"switch",
         "default":true,

@@ -51,7 +51,7 @@ def get_favicons(sqlite_file, domains_list):
 
         cur.close()
     except:
-        unusedvar = 5 #no nothing
+        pass
 
     if os.path.exists(temp_filename):
         os.unlink(temp_filename)
