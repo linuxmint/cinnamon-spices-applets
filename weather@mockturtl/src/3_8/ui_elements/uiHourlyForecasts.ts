@@ -31,6 +31,11 @@ export class UIHourlyForecasts {
 		return this.hourlyToggled;
 	}
 
+	/** Current position in the horizontal plane. */
+	public get CurrentScrollIndex(): number {
+		return this.actor.get_hscroll_bar().get_adjustment().get_value();
+	}
+
 	constructor(app: WeatherApplet, menu: imports.ui.applet.AppletPopupMenu) {
 		this.app = app;
 		// Hourly Weather
@@ -81,9 +86,9 @@ export class UIHourlyForecasts {
 	 *
 	 * @param date 
 	 */
-	public ScrollTo(date: DateTime) {
+	public DateToScrollIndex(date: DateTime): number | null {
 		if (this.hourlyForecastDates == null)
-			return;
+			return null;
 
 		const itemWidth = this.GetHourlyBoxItemWidth();
 		let midnightIndex: number | null = null;
@@ -93,13 +98,22 @@ export class UIHourlyForecasts {
 
 			// Adjust dates so we jump to 6 in the morning, not midnight when we scroll to a date
 			if (OnSameDay(this.hourlyForecastDates[index].minus({ hours: 6 }), date)) {
-				this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
-				break;
+				return index * itemWidth;
 			}
 		}
 		// Day has hourly forecasts earlier than 6 but not later than 6, scroll to midnight
 		if (midnightIndex != null)
-			this.actor.get_hscroll_bar().get_adjustment().set_value(midnightIndex * itemWidth);
+			return midnightIndex * itemWidth;
+
+		return null;
+	}
+
+	public ScrollTo(index: number, animate: boolean = true) {
+		const adjustment = this.actor.get_hscroll_bar().get_adjustment();
+		if (global.settings.get_boolean("desktop-effects-on-menus") && animate)
+				addTween(adjustment, { value: index, time: 0.25});
+		else
+			adjustment.set_value(index);
 	}
 
 	/** Changes all icon's type what are affected by

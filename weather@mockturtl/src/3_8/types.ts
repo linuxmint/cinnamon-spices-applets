@@ -49,6 +49,7 @@ export interface WeatherData {
 		name?: string,
 		lat?: number,
 		lon?: number,
+		area?: string
 	}
 	/** preferably in UTC */
 	sunrise: DateTime | null,

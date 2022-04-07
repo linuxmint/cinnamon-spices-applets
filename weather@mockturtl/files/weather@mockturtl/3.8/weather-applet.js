@@ -9803,6 +9803,7 @@ class MetUk extends BaseProvider {
                 stationInfo: {
                     distanceFrom: this.observationSites[dataIndex].dist,
                     name: this.observationSites[dataIndex].name,
+                    area: this.observationSites[dataIndex].unitaryAuthArea,
                     lat: parseFloat(this.observationSites[dataIndex].latitude),
                     lon: parseFloat(this.observationSites[dataIndex].longitude),
                 },
@@ -14948,21 +14949,31 @@ class UIHourlyForecasts {
     get Toggled() {
         return this.hourlyToggled;
     }
-    ScrollTo(date) {
+    get CurrentScrollIndex() {
+        return this.actor.get_hscroll_bar().get_adjustment().get_value();
+    }
+    DateToScrollIndex(date) {
         if (this.hourlyForecastDates == null)
-            return;
+            return null;
         const itemWidth = this.GetHourlyBoxItemWidth();
         let midnightIndex = null;
         for (let index = 0; index < this.hourlyForecastDates.length; index++) {
             if (OnSameDay(this.hourlyForecastDates[index], date))
                 midnightIndex = index;
             if (OnSameDay(this.hourlyForecastDates[index].minus({ hours: 6 }), date)) {
-                this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
-                break;
+                return index * itemWidth;
             }
         }
         if (midnightIndex != null)
-            this.actor.get_hscroll_bar().get_adjustment().set_value(midnightIndex * itemWidth);
+            return midnightIndex * itemWidth;
+        return null;
+    }
+    ScrollTo(index, animate = true) {
+        const adjustment = this.actor.get_hscroll_bar().get_adjustment();
+        if (global.settings.get_boolean("desktop-effects-on-menus") && animate)
+            addTween(adjustment, { value: index, time: 0.25 });
+        else
+            adjustment.set_value(index);
     }
     UpdateIconType(iconType) {
         if (!this.hourlyForecasts)
@@ -15220,7 +15231,7 @@ class UIBar {
         this._timestamp.label = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         if (this._timestamp == null || this.providerCreditButton == null || this.providerCreditButton.actor.is_finalized())
             return false;
         let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
@@ -15238,9 +15249,14 @@ class UIBar {
             };
             this._timestamp.label += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
         }
-        if (((_b = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _b === void 0 ? void 0 : _b.name) != null) {
-            (_c = this.timestampTooltip) === null || _c === void 0 ? void 0 : _c.set_text(weather.stationInfo.name);
+        let tooltipText = "";
+        if (((_b = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _b === void 0 ? void 0 : _b.name) != null)
+            tooltipText = _("Station Name: {stationName}", { stationName: weather.stationInfo.name });
+        if (((_c = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _c === void 0 ? void 0 : _c.area) != null) {
+            tooltipText += ", ";
+            tooltipText += _("Area: {stationArea}", { stationArea: weather.stationInfo.area });
         }
+        (_d = this.timestampTooltip) === null || _d === void 0 ? void 0 : _d.set_markup(tooltipText);
         if (!shouldShowToggle || config._alwaysShowHourlyWeather)
             this.HideHourlyToggle();
         return true;
@@ -15339,7 +15355,6 @@ const STYLE_WEATHER_MENU = 'weather-menu';
 class UI {
     constructor(app, orientation) {
         this.lightTheme = false;
-        this.lastDateToggled = undefined;
         this.noHourlyWeather = false;
         this.App = app;
         this.menuManager = new PopupMenuManager(this.App);
@@ -15472,15 +15487,16 @@ class UI {
         }));
     }
     async OnDayClicked(sender, date) {
-        var _a;
-        if (!this.HourlyWeather.Toggled)
+        const wasOpen = this.HourlyWeather.Toggled;
+        if (!wasOpen)
             await this.ShowHourlyWeather();
-        else if ((_a = this.lastDateToggled) === null || _a === void 0 ? void 0 : _a.equals(date)) {
+        const newIndex = this.HourlyWeather.DateToScrollIndex(date);
+        if (wasOpen && newIndex == this.HourlyWeather.CurrentScrollIndex) {
             await this.HideHourlyWeather();
             return;
         }
-        this.HourlyWeather.ScrollTo(date);
-        this.lastDateToggled = date;
+        if (newIndex != null)
+            this.HourlyWeather.ScrollTo(newIndex, wasOpen);
     }
     async ShowHourlyWeather(animate = true) {
         this.HourlySeparator.Show();
@@ -15489,14 +15505,12 @@ class UI {
     }
     async HideHourlyWeather(animate = true) {
         if (this.App.config._alwaysShowHourlyWeather) {
-            this.lastDateToggled = undefined;
             this.HourlyWeather.ResetScroll();
             return;
         }
         await this.ForceHideHourlyWeather(animate);
     }
     async ForceHideHourlyWeather(animate = true) {
-        this.lastDateToggled = undefined;
         this.HourlySeparator.Hide();
         this.Bar.SwitchButtonToShow();
         await this.HourlyWeather.Hide(animate);

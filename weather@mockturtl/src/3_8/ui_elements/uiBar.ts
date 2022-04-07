@@ -26,7 +26,7 @@ export class UIBar {
 	private providerCreditButton: WeatherButton | null = null;
 	private hourlyButton: WeatherButton | null = null;
 	private _timestamp: imports.gi.St.Button | null = null;
-	private timestampTooltip: imports.ui.tooltips.Tooltip | null = null;
+	private timestampTooltip: imports.ui.tooltips.Tooltip<imports.gi.St.Button> | null = null;
 
 	private app: WeatherApplet;
 
@@ -72,9 +72,16 @@ export class UIBar {
 			this._timestamp.label += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
 		}
 
-		if (weather?.stationInfo?.name != null) {
-			this.timestampTooltip?.set_text(weather.stationInfo.name);
+		let tooltipText = "";
+		if (weather?.stationInfo?.name != null)
+			tooltipText = _("Station Name: {stationName}", { stationName: weather.stationInfo.name });
+
+		if (weather?.stationInfo?.area != null) {
+			tooltipText += ", ";
+			tooltipText += _("Area: {stationArea}", {stationArea: weather.stationInfo.area});
 		}
+
+		this.timestampTooltip?.set_markup(tooltipText);
 
 		if (!shouldShowToggle || config._alwaysShowHourlyWeather)
 			this.HideHourlyToggle();

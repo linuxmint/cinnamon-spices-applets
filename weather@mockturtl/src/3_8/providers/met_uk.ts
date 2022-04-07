@@ -203,6 +203,7 @@ export class MetUk extends BaseProvider {
 				stationInfo: {
 					distanceFrom: this.observationSites[dataIndex].dist,
 					name:  this.observationSites[dataIndex].name,
+					area: this.observationSites[dataIndex].unitaryAuthArea,
 					lat: parseFloat(this.observationSites[dataIndex].latitude),
 					lon: parseFloat(this.observationSites[dataIndex].longitude),
 				},
