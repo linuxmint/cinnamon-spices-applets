@@ -12497,7 +12497,8 @@ class USWeather extends BaseProvider {
                     timeZone: this.observationStations[0].properties.timeZone,
                 },
                 stationInfo: {
-                    distanceFrom: this.observationStations[0].dist
+                    distanceFrom: this.observationStations[0].dist,
+                    name: this.observationStations[0].properties.name,
                 },
                 date: timestamp,
                 sunrise: suntimes.sunrise,
