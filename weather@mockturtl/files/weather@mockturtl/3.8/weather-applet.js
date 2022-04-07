@@ -14906,6 +14906,7 @@ class UIForecasts {
 
 
 const { PolicyType } = imports.gi.Gtk;
+const { ScrollDirection } = imports.gi.Clutter;
 const { addTween } = imports.ui.tweener;
 const { BoxLayout: uiHourlyForecasts_BoxLayout, Side, Label: uiHourlyForecasts_Label, ScrollView, Icon: uiHourlyForecasts_Icon, Align: uiHourlyForecasts_Align } = imports.gi.St;
 class UIHourlyForecasts {
@@ -14922,12 +14923,23 @@ class UIHourlyForecasts {
             y_align: uiHourlyForecasts_Align.MIDDLE,
             x_align: uiHourlyForecasts_Align.MIDDLE
         });
-        const vScroll = this.actor.get_vscroll_bar();
-        vScroll.connect("scroll-start", () => { menu.passEvents = true; });
-        vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
         const hScroll = this.actor.get_hscroll_bar();
         hScroll.connect("scroll-start", () => { menu.passEvents = true; });
         hScroll.connect("scroll-stop", () => { menu.passEvents = false; });
+        const vScroll = this.actor.get_vscroll_bar();
+        vScroll.connect("scroll-start", () => { menu.passEvents = true; });
+        vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
+        this.actor.connect("scroll-event", (owner, event) => {
+            const adjustment = hScroll.get_adjustment();
+            const direction = event.get_scroll_direction();
+            const newVal = adjustment.get_value() +
+                (direction === ScrollDirection.UP ? -adjustment.step_increment : adjustment.step_increment);
+            if (global.settings.get_boolean("desktop-effects-on-menus"))
+                addTween(adjustment, { value: newVal, time: 0.25 });
+            else
+                adjustment.set_value(newVal);
+            return false;
+        });
         this.actor.hide();
         this.actor.set_clip_to_allocation(true);
         this.container = new uiHourlyForecasts_BoxLayout({ style_class: "hourly-box" });

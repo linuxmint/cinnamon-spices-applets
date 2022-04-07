@@ -7,6 +7,7 @@ import { HourlyForecastData, Precipitation } from "../types";
 import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay } from "../utils";
 
 const { PolicyType } = imports.gi.Gtk;
+const { ScrollDirection } = imports.gi.Clutter;
 const { addTween } = imports.ui.tweener;
 const { BoxLayout, Side, Label, ScrollView, Icon, Align } = imports.gi.St;
 
@@ -45,12 +46,25 @@ export class UIHourlyForecasts {
 		);
 
 		// Stop event passing while scrolling to allow scrolling
-		const vScroll = this.actor.get_vscroll_bar();
-		vScroll.connect("scroll-start", () => { menu.passEvents = true; });
-		vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
 		const hScroll = this.actor.get_hscroll_bar();
 		hScroll.connect("scroll-start", () => { menu.passEvents = true; });
 		hScroll.connect("scroll-stop", () => { menu.passEvents = false; });
+		const vScroll = this.actor.get_vscroll_bar();
+		vScroll.connect("scroll-start", () => { menu.passEvents = true; });
+		vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
+		// Add scroll capabilities to hourly ScrollView
+		this.actor.connect("scroll-event", (owner, event) => {
+			const adjustment = hScroll.get_adjustment();
+			const direction = event.get_scroll_direction();
+			const newVal = adjustment.get_value() + 
+				(direction === ScrollDirection.UP ? -adjustment.step_increment : adjustment.step_increment);
+			
+			if (global.settings.get_boolean("desktop-effects-on-menus"))
+				addTween(adjustment, { value: newVal, time: 0.25});
+			else
+				adjustment.set_value(newVal);
+			return false;
+		})
 
 		this.actor.hide();
 		this.actor.set_clip_to_allocation(true);
