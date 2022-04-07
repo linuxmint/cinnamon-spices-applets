@@ -17,7 +17,7 @@ declare namespace imports.ui.tweener {
 	 * @param target the object to tween
 	 * @param tweeningParameters parameters
 	 */
-	export function addTween(target: any, tweeningParameters?: TweeningParameters): void;
+	export function addTween(target: object, tweeningParameters?: TweeningParameters): void;
 
 	export interface TweeningParameters {
 		/** Any of the target's properties */
