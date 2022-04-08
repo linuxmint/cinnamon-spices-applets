@@ -14971,6 +14971,8 @@ class UIHourlyForecasts {
     }
     ScrollTo(index, animate = true) {
         const adjustment = this.actor.get_hscroll_bar().get_adjustment();
+        const [, lower, upper, , , page_size] = adjustment.get_values();
+        index = Math.max(Math.min(index, upper - page_size), lower);
         if (global.settings.get_boolean("desktop-effects-on-menus") && animate)
             addTween(adjustment, { value: index, time: 0.25 });
         else
