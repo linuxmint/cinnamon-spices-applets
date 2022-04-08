@@ -176,7 +176,7 @@ const readChromiumBookmarks = function(path, wmClass) {
             resolve([]);
             return;
         }
-        global.log(wmClass);
+
         const appInfo = foundApps.get_app_info();
 
         const bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev(
@@ -224,7 +224,7 @@ const readChromiumBookmarks = function(path, wmClass) {
             });
             const domainsJSON = JSON.stringify(domains);
 
-            Util.spawn_async(['python', __meta.path + '/getFavicons.py', faviconsFile, domainsJSON],
+            Util.spawn_async([__meta.path + '/getFavicons.py', faviconsFile, domainsJSON],
                                                                                             (results) => {
                 results = JSON.parse(results);
                 foundBookmarks.forEach( bookmark => {
@@ -232,6 +232,7 @@ const readChromiumBookmarks = function(path, wmClass) {
                         bookmark.icon_filename = results[bookmark.domain];
                     }
                 });
+
                 resolve(foundBookmarks);
             });
         });

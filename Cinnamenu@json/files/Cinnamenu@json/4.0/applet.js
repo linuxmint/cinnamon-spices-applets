@@ -901,8 +901,8 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     setActiveCategory(categoryId) {
-        //categoryId is one of 3 things: a special category ('places', 'recents', etc), an application
-        //category id, or an absolute path used in folderview (must begin with a /)
+        //categoryId is one of 3 things: a special category (one of 'places', 'recents', 'favorite_files' or
+        //'favorite_apps'), an application category id, or an absolute path used in folderview (must begin with a /)
         this.currentCategory = categoryId;
         this.categoriesView.setSelectedCategoryStyle(categoryId);
         this.appsView.buttonStoreCleanup();
@@ -912,7 +912,9 @@ class CinnamenuApplet extends TextIconApplet {
             this.appsView.populate(this.listPlaces());
             break;
         case 'recents':
-            let maxItems = 8;//show 8 items in list view
+            let maxItems = 8;//show 8 items of each type in list view or
+            //adjust number of items according to number of columns in grid view to make
+            //best use of available space.
             if (this.settings.applicationsViewMode === ApplicationsViewModeGRID) {
                 const columns = this.appsView.getGridValues().columns;
                 maxItems = Math.ceil(6 / columns) * columns;
@@ -1364,7 +1366,7 @@ class CinnamenuApplet extends TextIconApplet {
                             results.length = 0;
                         }
                         lastUpdateTime = Date.now();
-                        updateInterval *= 3;//progressively longer update intervals
+                        updateInterval *= 2;//progressively longer update intervals
                     }
 
                     //continue search if not completed
@@ -1916,6 +1918,7 @@ class Apps {//This obj provides the .app objects for all the applications catego
         if (this.appsNeedRefresh) {
             this._initAppCategories();
         }
+
         return this.appsByCategory[categoryMenuId];
     }
 
