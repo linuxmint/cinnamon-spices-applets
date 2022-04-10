@@ -18,62 +18,54 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: tr\n"
 
-#: applet.js:97
+msgid "Scr Lock"
+msgstr "Scr Lock"
+
 msgid "Num Lock"
-msgstr "Sayı Kilidi"
+msgstr "Num Lock"
 
-#: applet.js:103
 msgid "Caps Lock"
-msgstr "Başlık Kilidi"
+msgstr "Caps Lock"
 
-#: applet.js:142
 msgid "Lock Keys"
 msgstr "Tuşları Kilitle"
 
-#: applet.js:190
+msgid "Scr lock on"
+msgstr "Scr kilidi açık"
+
+msgid "Scr lock off"
+msgstr "Scr kilidi kapalı"
+
 msgid "Num lock on"
 msgstr "Sayı kilidi açık"
 
-#: applet.js:193
 msgid "Num lock off"
 msgstr "Sayı kilidi kapalı"
 
-#: applet.js:201
 msgid "Caps lock on"
 msgstr "Başlık kilidi açık"
 
-#: applet.js:204
 msgid "Caps lock off"
 msgstr "Başlık kilidi kapalı"
 
-#. betterlock->settings-schema.json->show-notifications->description
 msgid "Show notifications"
 msgstr "Bildirim göster"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Num Lock only"
-msgstr "Sadece Sayı Kilidi"
+msgid "Show caps lock indicator"
+msgstr "Büyük harf kilidi göstergesini göster"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Caps Lock only"
-msgstr "Sadece Başlık Kilidi"
+msgid "Show num lock indicator"
+msgstr "Num Lock göstergesini göster"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Num Lock and Caps Lock"
-msgstr "Sayı Kilidi ve Başlık Kilidi"
+msgid "Show scr lock indicator"
+msgstr "Scr Lock göstergesini göster"
 
-#. betterlock->settings-schema.json->indicator-type->description
-msgid "Choose which indicator to show"
-msgstr "Hangi göstergenin gösterileceğini seçin"
-
-#. betterlock->metadata.json->description
 msgid ""
-"Shows whether caps lock/num lock is on, and displays a notification when "
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification when "
 "these change."
 msgstr ""
-"Başlık kilidi ve sayı kilidinin durumu ile bunlar değiştiğinde bildirim "
-"gösterir."
+"Caps lock/num lock/scr lock'un açık olup olmadığını gösterir ve bunlar "
+"değiştiğinde bir bildirim görüntüler."
 
-#. betterlock->metadata.json->name
-msgid "Num Lock/Caps Lock indicator with notifications"
-msgstr "Sayı Kilidi/Başlık Kilidi göstergesi ve bildirimleri"
+msgid "Lock keys indicator with notifications"
+msgstr "Bildirimlerle kilit tuşları göstergesi"

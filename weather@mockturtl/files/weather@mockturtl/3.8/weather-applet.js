@@ -9799,7 +9799,13 @@ class MetUk extends BaseProvider {
                     city: undefined,
                     country: undefined,
                     timeZone: undefined,
-                    distanceFrom: this.observationSites[dataIndex].dist
+                },
+                stationInfo: {
+                    distanceFrom: this.observationSites[dataIndex].dist,
+                    name: this.observationSites[dataIndex].name,
+                    area: this.observationSites[dataIndex].unitaryAuthArea,
+                    lat: parseFloat(this.observationSites[dataIndex].latitude),
+                    lon: parseFloat(this.observationSites[dataIndex].longitude),
                 },
                 date: DateTime.fromISO(json[dataIndex].SiteRep.DV.dataDate, { zone: loc.timeZone }),
                 sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
@@ -12489,7 +12495,10 @@ class USWeather extends BaseProvider {
                     country: undefined,
                     url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
                     timeZone: this.observationStations[0].properties.timeZone,
-                    distanceFrom: this.observationStations[0].dist
+                },
+                stationInfo: {
+                    distanceFrom: this.observationStations[0].dist,
+                    name: this.observationStations[0].properties.name,
                 },
                 date: timestamp,
                 sunrise: suntimes.sunrise,
@@ -14899,6 +14908,7 @@ class UIForecasts {
 
 
 const { PolicyType } = imports.gi.Gtk;
+const { ScrollDirection } = imports.gi.Clutter;
 const { addTween } = imports.ui.tweener;
 const { BoxLayout: uiHourlyForecasts_BoxLayout, Side, Label: uiHourlyForecasts_Label, ScrollView, Icon: uiHourlyForecasts_Icon, Align: uiHourlyForecasts_Align } = imports.gi.St;
 class UIHourlyForecasts {
@@ -14915,12 +14925,23 @@ class UIHourlyForecasts {
             y_align: uiHourlyForecasts_Align.MIDDLE,
             x_align: uiHourlyForecasts_Align.MIDDLE
         });
-        const vScroll = this.actor.get_vscroll_bar();
-        vScroll.connect("scroll-start", () => { menu.passEvents = true; });
-        vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
         const hScroll = this.actor.get_hscroll_bar();
         hScroll.connect("scroll-start", () => { menu.passEvents = true; });
         hScroll.connect("scroll-stop", () => { menu.passEvents = false; });
+        const vScroll = this.actor.get_vscroll_bar();
+        vScroll.connect("scroll-start", () => { menu.passEvents = true; });
+        vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
+        this.actor.connect("scroll-event", (owner, event) => {
+            const adjustment = hScroll.get_adjustment();
+            const direction = event.get_scroll_direction();
+            const newVal = adjustment.get_value() +
+                (direction === ScrollDirection.UP ? -adjustment.step_increment : adjustment.step_increment);
+            if (global.settings.get_boolean("desktop-effects-on-menus"))
+                addTween(adjustment, { value: newVal, time: 0.25 });
+            else
+                adjustment.set_value(newVal);
+            return false;
+        });
         this.actor.hide();
         this.actor.set_clip_to_allocation(true);
         this.container = new uiHourlyForecasts_BoxLayout({ style_class: "hourly-box" });
@@ -14929,21 +14950,33 @@ class UIHourlyForecasts {
     get Toggled() {
         return this.hourlyToggled;
     }
-    ScrollTo(date) {
+    get CurrentScrollIndex() {
+        return this.actor.get_hscroll_bar().get_adjustment().get_value();
+    }
+    DateToScrollIndex(date) {
         if (this.hourlyForecastDates == null)
-            return;
+            return null;
         const itemWidth = this.GetHourlyBoxItemWidth();
         let midnightIndex = null;
         for (let index = 0; index < this.hourlyForecastDates.length; index++) {
             if (OnSameDay(this.hourlyForecastDates[index], date))
                 midnightIndex = index;
             if (OnSameDay(this.hourlyForecastDates[index].minus({ hours: 6 }), date)) {
-                this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
-                break;
+                return index * itemWidth;
             }
         }
         if (midnightIndex != null)
-            this.actor.get_hscroll_bar().get_adjustment().set_value(midnightIndex * itemWidth);
+            return midnightIndex * itemWidth;
+        return null;
+    }
+    ScrollTo(index, animate = true) {
+        const adjustment = this.actor.get_hscroll_bar().get_adjustment();
+        const [, lower, upper, , , page_size] = adjustment.get_values();
+        index = Math.max(Math.min(index, upper - page_size), lower);
+        if (global.settings.get_boolean("desktop-effects-on-menus") && animate)
+            addTween(adjustment, { value: index, time: 0.25 });
+        else
+            adjustment.set_value(index);
     }
     UpdateIconType(iconType) {
         if (!this.hourlyForecasts)
@@ -15169,11 +15202,16 @@ class UIHourlyForecasts {
 
 
 
-const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label, Icon: uiBar_Icon, Align: uiBar_Align, } = imports.gi.St;
+const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button } = imports.gi.St;
+const { Tooltip } = imports.ui.tooltips;
 const STYLE_BAR = 'bottombar';
 class UIBar {
     constructor(app) {
         this.ToggleClicked = new Event();
+        this.providerCreditButton = null;
+        this.hourlyButton = null;
+        this._timestamp = null;
+        this.timestampTooltip = null;
         this.app = app;
         this.actor = new uiBar_BoxLayout({ vertical: false, style_class: STYLE_BAR });
     }
@@ -15191,9 +15229,14 @@ class UIBar {
             this.hourlyButton.actor.child.icon_name = "custom-up-arrow-symbolic";
     }
     DisplayErrorMessage(msg) {
-        this._timestamp.text = msg;
+        if (this._timestamp == null)
+            return;
+        this._timestamp.label = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
+        var _a, _b, _c, _d;
+        if (this._timestamp == null || this.providerCreditButton == null || this.providerCreditButton.actor.is_finalized())
+            return false;
         let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
         if (provider.remainingCalls != null) {
             creditLabel += ` (${provider.remainingCalls})`;
@@ -15201,24 +15244,35 @@ class UIBar {
         this.providerCreditButton.actor.label = creditLabel;
         this.providerCreditButton.url = provider.website;
         const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
-        this._timestamp.text = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
-        if (weather.location.distanceFrom != null) {
+        this._timestamp.label = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
+        if (((_a = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _a === void 0 ? void 0 : _a.distanceFrom) != null) {
             const stringFormat = {
-                distance: MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
+                distance: MetreToUserUnits(weather.stationInfo.distanceFrom, config.DistanceUnit).toString(),
                 distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
             };
-            this._timestamp.text += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
+            this._timestamp.label += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
         }
+        let tooltipText = "";
+        if (((_b = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _b === void 0 ? void 0 : _b.name) != null)
+            tooltipText = _("Station Name: {stationName}", { stationName: weather.stationInfo.name });
+        if (((_c = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _c === void 0 ? void 0 : _c.area) != null) {
+            tooltipText += ", ";
+            tooltipText += _("Area: {stationArea}", { stationArea: weather.stationInfo.area });
+        }
+        (_d = this.timestampTooltip) === null || _d === void 0 ? void 0 : _d.set_markup(tooltipText);
         if (!shouldShowToggle || config._alwaysShowHourlyWeather)
             this.HideHourlyToggle();
         return true;
     }
     Destroy() {
+        var _a;
         this.actor.destroy_all_children();
+        (_a = this.timestampTooltip) === null || _a === void 0 ? void 0 : _a.destroy();
     }
     Rebuild(config) {
         this.Destroy();
-        this._timestamp = new uiBar_Label({ text: "Placeholder" });
+        this._timestamp = new uiBar_Button({ label: "Placeholder" });
+        this.timestampTooltip = new Tooltip(this._timestamp, "");
         this.actor.add(this._timestamp, {
             x_fill: false,
             x_align: uiBar_Align.START,
@@ -15304,7 +15358,6 @@ const STYLE_WEATHER_MENU = 'weather-menu';
 class UI {
     constructor(app, orientation) {
         this.lightTheme = false;
-        this.lastDateToggled = undefined;
         this.noHourlyWeather = false;
         this.App = app;
         this.menuManager = new PopupMenuManager(this.App);
@@ -15437,15 +15490,16 @@ class UI {
         }));
     }
     async OnDayClicked(sender, date) {
-        var _a;
-        if (!this.HourlyWeather.Toggled)
+        const wasOpen = this.HourlyWeather.Toggled;
+        if (!wasOpen)
             await this.ShowHourlyWeather();
-        else if ((_a = this.lastDateToggled) === null || _a === void 0 ? void 0 : _a.equals(date)) {
+        const newIndex = this.HourlyWeather.DateToScrollIndex(date);
+        if (wasOpen && newIndex == this.HourlyWeather.CurrentScrollIndex) {
             await this.HideHourlyWeather();
             return;
         }
-        this.HourlyWeather.ScrollTo(date);
-        this.lastDateToggled = date;
+        if (newIndex != null)
+            this.HourlyWeather.ScrollTo(newIndex, wasOpen);
     }
     async ShowHourlyWeather(animate = true) {
         this.HourlySeparator.Show();
@@ -15454,14 +15508,12 @@ class UI {
     }
     async HideHourlyWeather(animate = true) {
         if (this.App.config._alwaysShowHourlyWeather) {
-            this.lastDateToggled = undefined;
             this.HourlyWeather.ResetScroll();
             return;
         }
         await this.ForceHideHourlyWeather(animate);
     }
     async ForceHideHourlyWeather(animate = true) {
-        this.lastDateToggled = undefined;
         this.HourlySeparator.Hide();
         this.Bar.SwitchButtonToShow();
         await this.HourlyWeather.Hide(animate);

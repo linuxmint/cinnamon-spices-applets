@@ -13,15 +13,15 @@ import getFavicons
 
 if __name__ == "__main__":
     if len(sys.argv) > 2:
+        path = sys.argv[1]
+        fd, temp_filename = tempfile.mkstemp()
+        os.close(fd)
         try:
-            path = sys.argv[1]
-            fd, temp_filename = tempfile.mkstemp()
-            os.close(fd)
             shutil.copyfile(os.path.join(path, "History"), temp_filename)
 
             conn = sqlite3.Connection(temp_filename)
             cur = conn.cursor()
-
+            
             words = []
             for i in sys.argv[2:]:
                 words += i.split()
@@ -54,7 +54,6 @@ if __name__ == "__main__":
                     })
 
             cur.close()
-            os.unlink(temp_filename)
 
             favicons_file = os.path.join(path, "Favicons")
             domains_to_favicons = getFavicons.get_favicons(favicons_file, domains_list)
@@ -66,3 +65,6 @@ if __name__ == "__main__":
             print(json.dumps(results))
         except:
             print(json.dumps([]))
+
+        if os.path.exists(temp_filename):
+            os.unlink(temp_filename)

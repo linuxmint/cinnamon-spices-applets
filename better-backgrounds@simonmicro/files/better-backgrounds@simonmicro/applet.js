@@ -32,7 +32,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
 
         this.settings.bind("applet-icon-animation", "applet_icon_animation", this.on_settings_changed);
         this.settings.bind("applet-show-notification", "applet_show_notification", this.on_settings_changed);
-        this.settings.bind("applet-save-location", "applet_save_location", this.on_settings_changed);
+        this.settings.bind("applet-store-location", "applet_save_location", this.on_settings_changed);
         this.settings.bind("change-onstart", "change_onstart", this.on_settings_changed);
         this.settings.bind("change-onclick", "change_onclick", this.on_settings_changed);
         this.settings.bind("change-ontime", "change_ontime", this.on_settings_changed);

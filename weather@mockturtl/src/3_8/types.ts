@@ -41,10 +41,16 @@ export interface WeatherData {
 		country?: string | undefined,
 		timeZone?: string | undefined,
 		url?: string,
-		/** in metres */
-		distanceFrom?: number | undefined,
 		tzOffset?: number
 	},
+	stationInfo?: {
+		/** in metres */
+		distanceFrom: number | undefined,
+		name?: string,
+		lat?: number,
+		lon?: number,
+		area?: string
+	}
 	/** preferably in UTC */
 	sunrise: DateTime | null,
 	/** preferably in UTC */

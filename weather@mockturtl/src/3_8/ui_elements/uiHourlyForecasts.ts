@@ -7,6 +7,7 @@ import { HourlyForecastData, Precipitation } from "../types";
 import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay } from "../utils";
 
 const { PolicyType } = imports.gi.Gtk;
+const { ScrollDirection } = imports.gi.Clutter;
 const { addTween } = imports.ui.tweener;
 const { BoxLayout, Side, Label, ScrollView, Icon, Align } = imports.gi.St;
 
@@ -30,6 +31,11 @@ export class UIHourlyForecasts {
 		return this.hourlyToggled;
 	}
 
+	/** Current position in the horizontal plane. */
+	public get CurrentScrollIndex(): number {
+		return this.actor.get_hscroll_bar().get_adjustment().get_value();
+	}
+
 	constructor(app: WeatherApplet, menu: imports.ui.applet.AppletPopupMenu) {
 		this.app = app;
 		// Hourly Weather
@@ -45,12 +51,25 @@ export class UIHourlyForecasts {
 		);
 
 		// Stop event passing while scrolling to allow scrolling
-		const vScroll = this.actor.get_vscroll_bar();
-		vScroll.connect("scroll-start", () => { menu.passEvents = true; });
-		vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
 		const hScroll = this.actor.get_hscroll_bar();
 		hScroll.connect("scroll-start", () => { menu.passEvents = true; });
 		hScroll.connect("scroll-stop", () => { menu.passEvents = false; });
+		const vScroll = this.actor.get_vscroll_bar();
+		vScroll.connect("scroll-start", () => { menu.passEvents = true; });
+		vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
+		// Add scroll capabilities to hourly ScrollView
+		this.actor.connect("scroll-event", (owner, event) => {
+			const adjustment = hScroll.get_adjustment();
+			const direction = event.get_scroll_direction();
+			const newVal = adjustment.get_value() + 
+				(direction === ScrollDirection.UP ? -adjustment.step_increment : adjustment.step_increment);
+			
+			if (global.settings.get_boolean("desktop-effects-on-menus"))
+				addTween(adjustment, { value: newVal, time: 0.25});
+			else
+				adjustment.set_value(newVal);
+			return false;
+		})
 
 		this.actor.hide();
 		this.actor.set_clip_to_allocation(true);
@@ -67,9 +86,9 @@ export class UIHourlyForecasts {
 	 *
 	 * @param date 
 	 */
-	public ScrollTo(date: DateTime) {
+	public DateToScrollIndex(date: DateTime): number | null {
 		if (this.hourlyForecastDates == null)
-			return;
+			return null;
 
 		const itemWidth = this.GetHourlyBoxItemWidth();
 		let midnightIndex: number | null = null;
@@ -79,13 +98,24 @@ export class UIHourlyForecasts {
 
 			// Adjust dates so we jump to 6 in the morning, not midnight when we scroll to a date
 			if (OnSameDay(this.hourlyForecastDates[index].minus({ hours: 6 }), date)) {
-				this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
-				break;
+				return index * itemWidth;
 			}
 		}
 		// Day has hourly forecasts earlier than 6 but not later than 6, scroll to midnight
 		if (midnightIndex != null)
-			this.actor.get_hscroll_bar().get_adjustment().set_value(midnightIndex * itemWidth);
+			return midnightIndex * itemWidth;
+
+		return null;
+	}
+
+	public ScrollTo(index: number, animate: boolean = true) {
+		const adjustment = this.actor.get_hscroll_bar().get_adjustment();
+		const [, lower, upper, , , page_size] = adjustment.get_values();
+		index = Math.max(Math.min(index, upper - page_size), lower);
+		if (global.settings.get_boolean("desktop-effects-on-menus") && animate)
+			addTween(adjustment, { value: index, time: 0.25});
+		else
+			adjustment.set_value(index);
 	}
 
 	/** Changes all icon's type what are affected by
