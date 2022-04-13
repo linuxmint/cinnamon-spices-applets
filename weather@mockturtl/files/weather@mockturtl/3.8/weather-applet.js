@@ -15259,7 +15259,7 @@ class UIBar {
             tooltipText += ", ";
             tooltipText += _("Area: {stationArea}", { stationArea: weather.stationInfo.area });
         }
-        (_d = this.timestampTooltip) === null || _d === void 0 ? void 0 : _d.set_markup(tooltipText);
+        (_d = this.timestampTooltip) === null || _d === void 0 ? void 0 : _d.set_text(tooltipText);
         if (!shouldShowToggle || config._alwaysShowHourlyWeather)
             this.HideHourlyToggle();
         return true;
