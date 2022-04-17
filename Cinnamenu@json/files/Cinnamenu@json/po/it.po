@@ -364,7 +364,7 @@ msgid "Keyboard shortcut to open and close the menu"
 msgstr "Scorciatoia da tastiera per aprire e chiudere il menu"
 
 msgid "Open menu on hover"
-msgstr "Apri l'editor del menu al passaggio del mouse"
+msgstr "Apri il menu al passaggio del mouse"
 
 #, fuzzy
 #| msgid "Open the menu when I move my mouse over it"
@@ -425,7 +425,7 @@ msgid "Example Search Providers"
 msgstr "Esempio di motore di ricerca"
 
 msgid "Open menu on category:"
-msgstr "Apri l'editor del menu alla categoria:"
+msgstr "Apri il menu alla categoria:"
 
 msgid "List"
 msgstr "Lista"
