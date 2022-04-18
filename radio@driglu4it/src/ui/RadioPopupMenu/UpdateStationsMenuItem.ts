@@ -65,8 +65,6 @@ export function createUpdateStationsMenuItem() {
 
       notify('Upating Radio stations... \n\nThis can take several minutes!')
 
-      notifyYoutubeDownloadFailed({ youtubeCli: 'youtube-dl', errorMessage: 'some error' })
-
       makeJsonHttpRequest<RadioStation[]>({
         url: "http://de1.api.radio-browser.info/json/stations",
         onSuccess: (resp) => saveStations(resp),
@@ -86,7 +84,5 @@ export function createUpdateStationsMenuItem() {
 
   return menuItem.actor
 }
-function notifyYoutubeDownloadFailed(arg0: { youtubeCli: string; errorMessage: string; }) {
-  throw new Error("Function not implemented.");
-}
+
 

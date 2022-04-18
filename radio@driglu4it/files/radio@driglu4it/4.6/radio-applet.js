@@ -5524,7 +5524,6 @@ function createUpdateStationsMenuItem() {
             isLoading = true;
             self.setText('Updating Radio stations...');
             notify('Upating Radio stations... \n\nThis can take several minutes!');
-            UpdateStationsMenuItem_notifyYoutubeDownloadFailed({ youtubeCli: 'youtube-dl', errorMessage: 'some error' });
             makeJsonHttpRequest({
                 url: "http://de1.api.radio-browser.info/json/stations",
                 onSuccess: (resp) => saveStations(resp),
@@ -5539,9 +5538,6 @@ function createUpdateStationsMenuItem() {
         },
     });
     return menuItem.actor;
-}
-function UpdateStationsMenuItem_notifyYoutubeDownloadFailed(arg0) {
-    throw new Error("Function not implemented.");
 }
 
 ;// CONCATENATED MODULE: ./src/ui/RadioContextMenu.ts
