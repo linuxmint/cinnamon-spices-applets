@@ -35,7 +35,7 @@ def obtain_versions(applet: Applet) -> List[Version]:
     output = subprocess.check_output([
         "git",
         "log",
-        "--oneline",
+        "--pretty=format:%h;%aI;%s%d",
         "--", 
         str(metadataPath)
     ], cwd=REPO_FOLDER, encoding="utf-8")
@@ -45,7 +45,7 @@ def obtain_versions(applet: Applet) -> List[Version]:
         if line is None:
             continue
 
-        [commit, message] = line.split(" ", 1)
+        [commit, timestamp, message] = line.split(";", 2)
         try:
             metadata: Metadata = json.loads(subprocess.check_output([
                 "git",
@@ -61,6 +61,7 @@ def obtain_versions(applet: Applet) -> List[Version]:
                 "version": version,
                 "commit": commit,
                 "message": message,
+                "date": timestamp,
                 "url": f"https://github.com/linuxmint/cinnamon-spices-applets/archive/{commit}.zip"
             })
         previousVersion = version
