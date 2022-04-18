@@ -23,7 +23,11 @@ class Applet(TypedDict):
     path: str
     versions: List[Version]
 
-REPO_FOLDER = Path(os.path.abspath(__file__)).parent.parent
+REPO_FOLDER = Path(subprocess.check_output([
+    "git",
+    "rev-parse",
+    "--show-toplevel"
+], encoding="utf-8").strip())
 
 def get_current_metadata(path: Path) -> Metadata:
     with open(path, "r") as f:
