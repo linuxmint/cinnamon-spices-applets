@@ -136,6 +136,12 @@ class CustomAppList(SettingsWidget):
         self.edit_button.connect("clicked", self.edit_item)
         self.edit_button.set_sensitive(False)
 
+        self.duplicate_button = Gtk.ToolButton(None, None)
+        self.duplicate_button.set_icon_name("edit-copy-symbolic")
+        self.duplicate_button.set_tooltip_text(_("Duplicate selected entry"))
+        self.duplicate_button.connect("clicked", self.duplicate_item)
+        self.duplicate_button.set_sensitive(False)
+
         self.move_up_button = Gtk.ToolButton(None, None)
         self.move_up_button.set_icon_name("go-up-symbolic")
         self.move_up_button.set_tooltip_text(_("Move selected entry up"))
@@ -150,6 +156,7 @@ class CustomAppList(SettingsWidget):
 
         button_toolbar.insert(self.add_button, -1)
         button_toolbar.insert(self.edit_button, -1)
+        button_toolbar.insert(self.duplicate_button, -1)
         button_toolbar.insert(Gtk.SeparatorToolItem(), -1)
         button_toolbar.insert(self.move_up_button, -1)
         button_toolbar.insert(self.move_down_button, -1)
@@ -256,6 +263,11 @@ class CustomAppList(SettingsWidget):
         else:
             self.remove_button.set_sensitive(True)
             self.edit_button.set_sensitive(True)
+
+        if self.store[selected][0]["type"] != "group":
+            self.duplicate_button.set_sensitive(True)
+        else:
+            self.duplicate_button.set_sensitive(False)
 
         if selected is None or model.iter_previous(selected) is None:
             self.move_up_button.set_sensitive(False)
@@ -377,6 +389,15 @@ class CustomAppList(SettingsWidget):
             if new_color is not None:
                 self.store[item][0]['color'] = new_color
                 self.store[item][2] = self.create_separator_markup(new_color)
+
+        self.list_changed()
+
+    def duplicate_item(self, *args):
+        store, item = self.tree_view.get_selection().get_selected()
+        parent = self.store[item].get_parent()
+        if parent is not None:
+            parent = parent.iter
+        self.store.insert_after(parent, item, [*self.store[item]])
 
         self.list_changed()
 
