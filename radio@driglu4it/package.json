@@ -1,6 +1,5 @@
 {
   "name": "radio-applet",
-  "version": "1.0.0",
   "description": "",
   "sideEffects": false,
   "main": "index.js",

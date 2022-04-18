@@ -6,6 +6,7 @@ import { createSeeker } from "../Seeker"
 import { createVolumeSlider } from "../VolumeSlider"
 import { createChannelList } from "./ChannelList"
 import { createMediaControlToolbar } from "./MediaControlToolbar/MediaControlToolbar"
+import { createUpdateStationsMenuItem } from "./UpdateStationsMenuItem"
 
 const { BoxLayout } = imports.gi.St
 

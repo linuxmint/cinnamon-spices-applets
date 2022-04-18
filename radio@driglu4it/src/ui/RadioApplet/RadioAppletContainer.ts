@@ -7,8 +7,9 @@ import { createRadioAppletIcon } from "./RadioAppletIcon"
 import { APPLET_SITE, MPRIS_PLUGIN_PATH, VOLUME_DELTA } from "../../consts"
 import { createRadioPopupMenu } from "../RadioPopupMenu/RadioPopupMenu"
 import { installMpvWithMpris } from "../../services/mpv/CheckInstallation"
-import { notify } from "../Notifications/GenericNotification"
 import { createYoutubeDownloadIcon } from "./YoutubeDownloadIcon"
+import { notify } from "../../lib/notify"
+import { createRadioContextMenu } from "../RadioContextMenu"
 
 const { ScrollDirection } = imports.gi.Clutter;
 
@@ -21,7 +22,10 @@ export function createRadioAppletContainer() {
         onMoved: () => mpvHandler.deactivateAllListener(),
         onRemoved: handleAppletRemoved,
         onClick: handleClick,
-        onRightClick: () => popupMenu?.close(),
+        onRightClick: () => {
+            popupMenu?.close()
+            contextMenu?.toggle()
+        },
         onScroll: handleScroll
     });
 
@@ -32,6 +36,7 @@ export function createRadioAppletContainer() {
     const tooltip = createRadioAppletTooltip({ appletContainer })
 
     const popupMenu = createRadioPopupMenu({ launcher: appletContainer.actor })
+    const contextMenu = createRadioContextMenu({ launcher: appletContainer.actor })
 
     popupMenu.connect('notify::visible', () => {
         popupMenu.visible && tooltip.hide()
@@ -49,6 +54,7 @@ export function createRadioAppletContainer() {
     }
 
     async function handleClick() {
+        contextMenu?.close()
         if (installationInProgress) return
 
         try {
@@ -59,7 +65,7 @@ export function createRadioAppletContainer() {
             const notificationText =
                 `Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin is located at ${MPRIS_PLUGIN_PATH} and correctly compiled for your environment. Refer to ${APPLET_SITE} (section Known Issues)`
 
-            notify({ text: notificationText, transient: false })
+            notify(notificationText, { transient: false })
             global.logError(error)
         } finally {
             installationInProgress = false

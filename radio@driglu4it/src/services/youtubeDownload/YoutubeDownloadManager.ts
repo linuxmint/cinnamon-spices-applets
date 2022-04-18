@@ -1,11 +1,11 @@
-import { notifyYoutubeDownloadFailed } from "../../ui/Notifications/YoutubeDownloadFailedNotification";
-import { notifyYoutubeDownloadFinished } from "../../ui/Notifications/YoutubeDownloadFinishedNotification";
-import { notifyYoutubeDownloadStarted } from "../../ui/Notifications/YoutubeDownloadStartedNotification";
+import { APPLET_SITE } from "../../consts";
+import { notify, notifyError } from "../../lib/notify";
+import { YoutubeClis } from "../../types";
 import { configs } from "../Config";
-import { mpvHandler } from "../mpv/MpvHandler";
 import { downloadWithYoutubeDl } from "./YoutubeDl";
 import { downloadWithYtDlp } from "./YtDlp";
 
+const { spawnCommandLine } = imports.misc.util
 const { get_tmp_dir, get_home_dir } = imports.gi.GLib
 const { File, FileCopyFlags } = imports.gi.Gio
 
@@ -21,31 +21,76 @@ export interface YoutubeDownloadServiceReturnType {
     cancel: () => void
 }
 
-interface DownloadingSong {
-    title: string,
+interface DownloadProcess {
+    songTitle: string,
     cancelDownload: () => void
 }
 
-export let downloadingSongs: DownloadingSong[] = []
+const notifyYoutubeDownloadFailed = (props: { youtubeCli: YoutubeClis, errorMessage: string }) => {
 
-const downloadingSongsChangedListener: ((downloadingSongs: DownloadingSong[]) => void)[] = []
+    const { youtubeCli, errorMessage } = props
 
-export function downloadSongFromYoutube() {
+    notifyError(`Couldn't download Song from Youtube due to an Error. Make Sure you have the newest version of ${youtubeCli} installed. 
+    \n<b>Important:</b> Don't use apt for the installation but follow the installation instruction given on the Radio Applet Site in the Cinnamon Store instead`, errorMessage, {
+        additionalBtns: [
+            {
+                text: 'View Installation Instruction',
+                onClick: () => spawnCommandLine(`xdg-open ${APPLET_SITE} `)
+            }
+        ]
+    })
+}
 
-    const title = mpvHandler.getCurrentTitle()
+const notifyYoutubeDownloadStarted = (title: string) => {
+    notify(`Downloading ${title} ...`, {
+        buttons: [
+            {
+                text: 'Cancel',
+                onClick: () => cancelDownload(title)
+            }
+        ]
+    })
+}
+
+const notifyYoutubeDownloadFinished = (props: { downloadPath: string, fileAlreadyExist?: boolean }) => {
+    const {
+        downloadPath,
+        fileAlreadyExist = false
+    } = props
+
+    notify(
+        fileAlreadyExist ?
+            'Downloaded Song not saved as a file with the same name already exists' :
+            `Download finished. File saved to ${downloadPath}`,
+        {
+            isMarkup: true,
+            transient: false,
+            buttons: [
+                {
+                    text: 'Play',
+                    onClick: () => spawnCommandLine(`xdg-open '${downloadPath}'`)
+                }
+            ]
+        }
+    )
+}
+
+let downloadProcesses: DownloadProcess[] = []
+
+const downloadingSongsChangedListener: ((downloadingSongs: DownloadProcess[]) => void)[] = []
+
+export function downloadSongFromYoutube(title: string) {
+
     const downloadDir = configs.settingsObject.musicDownloadDir
     const youtubeCli = configs.settingsObject.youtubeCli
 
-    let music_dir_absolut = downloadDir
-
-    if (music_dir_absolut.charAt(0) === '~') {
-        music_dir_absolut = downloadDir.replace('~', get_home_dir())
-    }
+    const music_dir_absolut = downloadDir.charAt(0) === '~' ?
+        downloadDir.replace('~', get_home_dir()) : downloadDir
 
     if (!title) return
 
-    const sameSongIsDownloading = downloadingSongs.find(downloadingSong => {
-        return downloadingSong.title === title
+    const sameSongIsDownloading = downloadProcesses.find(process => {
+        return process.songTitle === title
     })
 
     if (sameSongIsDownloading)
@@ -55,12 +100,11 @@ export function downloadSongFromYoutube() {
         title,
         downloadDir: get_tmp_dir(),
         onError: (errorMessage, downloadCommand: string,) => {
-            global.logError(`The following error occured at youtube download attempt: ${errorMessage}. The used download Command was: ${downloadCommand}`)
-            notifyYoutubeDownloadFailed({ youtubeCli })
+            notifyYoutubeDownloadFailed({ youtubeCli, errorMessage: `The following error occured at youtube download attempt: ${errorMessage}. The used download Command was: ${downloadCommand}` })
         },
         onFinished: () => {
-            downloadingSongs = downloadingSongs.filter(downloadingSong => downloadingSong.title !== title)
-            downloadingSongsChangedListener.forEach(listener => listener(downloadingSongs))
+            downloadProcesses = downloadProcesses.filter(downloadingSong => downloadingSong.songTitle !== title)
+            downloadingSongsChangedListener.forEach(listener => listener(downloadProcesses))
         },
         onSuccess: (downloadPath) => {
             const tmpFile = File.new_for_path(downloadPath)
@@ -69,19 +113,18 @@ export function downloadSongFromYoutube() {
             const targetFile = File.parse_name(targetPath)
 
             if (targetFile.query_exists(null)) {
-                notifyYoutubeDownloadFinished({ downloadPath: targetPath, fileAlreadExist: true })
+                notifyYoutubeDownloadFinished({ downloadPath: targetPath, fileAlreadyExist: true })
                 return
             }
 
             try {
                 // @ts-ignore
                 tmpFile.move(File.parse_name(targetPath), FileCopyFlags.BACKUP, null, null)
-
                 notifyYoutubeDownloadFinished({ downloadPath: targetPath })
 
             } catch (error) {
-                notifyYoutubeDownloadFailed({youtubeCli})
-                global.logError('failed to copy from tmp dir. The following error occured', error as imports.gi.GLib.Error)
+                const errorMessage = error instanceof imports.gi.GLib.Error ? error.message : 'Unknown Error Type'
+                notifyYoutubeDownloadFailed({ youtubeCli, errorMessage: `Failed to copy download from tmp dir. The following error occurred: ${errorMessage}` })
             }
 
         }
@@ -91,12 +134,26 @@ export function downloadSongFromYoutube() {
         downloadWithYoutubeDl(downloadProps) :
         downloadWithYtDlp(downloadProps)
 
-    notifyYoutubeDownloadStarted({ title, onCancelClicked: () => cancel() })
-    downloadingSongs.push({ title, cancelDownload: cancel })
-    downloadingSongsChangedListener.forEach(listener => listener(downloadingSongs))
+    notifyYoutubeDownloadStarted(title)
+
+    downloadProcesses.push({ songTitle: title, cancelDownload: cancel })
+    downloadingSongsChangedListener.forEach(listener => listener(downloadProcesses))
 }
 
+export const getCurrentDownloadingSongs = () => {
+    return downloadProcesses.map((downloadingSong) => downloadingSong.songTitle)
+}
 
-export function addDownloadingSongsChangeListener(callback: (downloadingSongs: DownloadingSong[]) => void) {
+export const cancelDownload = (songTitle: string) => {
+    const downloadProcess = downloadProcesses.find((process) => process.songTitle === songTitle)
+
+    if (!downloadProcess) {
+        global.logWarning(`can't cancel download for song ${songTitle} as it seems that the song is currently not downloading`)
+        return
+    }
+    downloadProcess.cancelDownload()
+}
+
+export function addDownloadingSongsChangeListener(callback: (downloadingSongs: DownloadProcess[]) => void) {
     downloadingSongsChangedListener.push(callback)
 }
