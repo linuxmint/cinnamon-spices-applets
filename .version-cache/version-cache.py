@@ -1,8 +1,9 @@
 import os
 from pathlib import Path
-from typing import Dict, List, Optional, TypedDict
+from typing import Dict, List, Optional, Tuple, TypedDict
 import subprocess
 import json
+from multiprocessing import Pool
 
 class Version(TypedDict):
     version: str
@@ -22,8 +23,7 @@ class Applet(TypedDict):
     path: str
     versions: List[Version]
 
-REPO_FOLDER = Path(os.path.realpath(os.path.abspath(os.path.join(
-    os.path.normpath(os.path.join(os.getcwd(), *([".."] * 1)))))))
+REPO_FOLDER = Path(os.path.abspath(__file__)).parent.parent
 
 def get_current_metadata(path: Path) -> Metadata:
     with open(path, "r") as f:
@@ -51,7 +51,7 @@ def obtain_versions(applet: Applet) -> List[Version]:
                 "git",
                 "show",
                 f"{commit}:{str(metadataPath)}"
-            ]))
+            ], cwd=REPO_FOLDER))
         except subprocess.CalledProcessError:
             continue
 
@@ -68,8 +68,20 @@ def obtain_versions(applet: Applet) -> List[Version]:
         
     return versions
 
+def get_applet_info(metadata: Metadata, item: Path) -> Applet:
+    applet: Applet = {
+            "id": metadata["uuid"],
+            "path": str(item.joinpath("files/" + item.name).relative_to(REPO_FOLDER)),
+            "versions": []
+        }
+
+    applet["versions"] = obtain_versions(applet)
+    return applet
+
 if __name__ == "__main__":
     applets: Dict[str, Applet] = {}
+    pool = Pool()
+    items: List[Tuple[Metadata, Path]] = []
     for item in sorted(REPO_FOLDER.iterdir()):
         if not item.is_dir():
             continue
@@ -78,15 +90,12 @@ if __name__ == "__main__":
             continue
         
         metadata = get_current_metadata(metadataFile)
-        applet: Applet = {
-            "id": metadata["uuid"],
-            "path": str(item.joinpath("files/" + item.name).relative_to(REPO_FOLDER)),
-            "versions": []
-        }
+        items.append((metadata, item))
 
-        applet["versions"] = obtain_versions(applet)
-        applets[metadata["uuid"]] = applet
-    #print(applets)
+    results = pool.starmap(get_applet_info, items)
+    for result in results:
+        applets[result["id"]] = result
+    
     print(json.dumps(applets, indent=4))
 
 
