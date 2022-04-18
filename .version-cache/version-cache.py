@@ -9,6 +9,7 @@ class Version(TypedDict):
     commit: str
     date: str
     url: str
+    message: str
 
 class Metadata(TypedDict):
     uuid: str
@@ -18,7 +19,7 @@ class Metadata(TypedDict):
 
 class Applet(TypedDict):
     id: str
-    path: Path
+    path: str
     versions: List[Version]
 
 REPO_FOLDER = Path(os.path.realpath(os.path.abspath(os.path.join(
@@ -29,14 +30,46 @@ def get_current_metadata(path: Path) -> Metadata:
         return json.load(f)
 
 def obtain_versions(applet: Applet) -> List[Version]:
-    output = subprocess.run("git log --oneline -- ", applet['path'].joinpath(f'files/{applet["id"]}'), )
-    # git show ca17fc46:weather@mockturtl/files/weather@mockturtl/metadata.json
+    versions: List[Version] = []
+    metadataPath = Path(applet['path']).joinpath(f'metadata.json')
+    output = subprocess.check_output([
+        "git",
+        "log",
+        "--oneline",
+        "--", 
+        str(metadataPath)
+    ], cwd=REPO_FOLDER, encoding="utf-8")
 
-    pass
+    previousVersion: Optional[str] = None
+    for line in reversed(output.splitlines()):
+        if line is None:
+            continue
+
+        [commit, message] = line.split(" ", 1)
+        try:
+            metadata: Metadata = json.loads(subprocess.check_output([
+                "git",
+                "show",
+                f"{commit}:{str(metadataPath)}"
+            ]))
+        except subprocess.CalledProcessError:
+            continue
+
+        version = str(metadata["version"]) if metadata.get("version") is not None else "0.0.0"
+        if (version != previousVersion):
+            versions.append({
+                "version": version,
+                "commit": commit,
+                "message": message,
+                "url": f"https://github.com/linuxmint/cinnamon-spices-applets/archive/{commit}.zip"
+            })
+        previousVersion = version
+        
+    return versions
 
 if __name__ == "__main__":
     applets: Dict[str, Applet] = {}
-    for item in REPO_FOLDER.iterdir():
+    for item in sorted(REPO_FOLDER.iterdir()):
         if not item.is_dir():
             continue
         metadataFile = item.joinpath(f"files/{item.name}/metadata.json")
@@ -44,12 +77,15 @@ if __name__ == "__main__":
             continue
         
         metadata = get_current_metadata(metadataFile)
-        applets[metadata["uuid"]] = {
+        applet: Applet = {
             "id": metadata["uuid"],
-            "path": item.relative_to(REPO_FOLDER),
+            "path": str(item.joinpath("files/" + item.name).relative_to(REPO_FOLDER)),
             "versions": []
         }
 
+        applet["versions"] = obtain_versions(applet)
+        applets[metadata["uuid"]] = applet
+    #print(applets)
     print(json.dumps(applets, indent=4))
 
 
