@@ -30,6 +30,8 @@ def get_current_metadata(path: Path) -> Metadata:
 
 def obtain_versions(applet: Applet) -> List[Version]:
     output = subprocess.run("git log --oneline -- ", applet['path'].joinpath(f'files/{applet["id"]}'), )
+    # git show ca17fc46:weather@mockturtl/files/weather@mockturtl/metadata.json
+
     pass
 
 if __name__ == "__main__":
