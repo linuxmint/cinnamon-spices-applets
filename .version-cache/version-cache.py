@@ -10,6 +10,7 @@ class Version(TypedDict):
     commit: str
     date: str
     url: str
+    hash: str
     message: str
 
 class Metadata(TypedDict):
@@ -32,6 +33,15 @@ REPO_FOLDER = Path(subprocess.check_output([
 def get_current_metadata(path: Path) -> Metadata:
     with open(path, "r") as f:
         return json.load(f)
+
+def get_applet_hash(applet_folder: Path, hash: str) -> str:
+    output = subprocess.check_output([
+        "git",
+        "rev-parse",
+        f"{hash}:{str(applet_folder)}", 
+        
+    ], cwd=REPO_FOLDER, encoding="utf-8")
+    return output.strip()
 
 def obtain_versions(applet: Applet) -> List[Version]:
     versions: List[Version] = []
@@ -66,6 +76,7 @@ def obtain_versions(applet: Applet) -> List[Version]:
                 "commit": commit,
                 "message": message,
                 "date": timestamp,
+                "hash": get_applet_hash(Path(applet["path"]), commit),
                 "url": f"https://github.com/linuxmint/cinnamon-spices-applets/archive/{commit}.zip"
             })
         previousVersion = version
