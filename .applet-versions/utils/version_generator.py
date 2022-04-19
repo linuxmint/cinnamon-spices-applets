@@ -35,6 +35,7 @@ def get_current_metadata(path: Path) -> Metadata:
         return json.load(f)
 
 def get_applet_hash(applet_folder: Path, hash: str) -> Optional[str]:
+    '''Gets hash of the applet "dist" ({name}/files/{name}) folder'''
     try:
         output = subprocess.check_output([
             "git",
@@ -60,14 +61,16 @@ def obtain_versions(applet: Applet) -> List[Version]:
     ], cwd=REPO_FOLDER, encoding="utf-8")
 
     previousVersion: Optional[str] = None
-    currentMinor: int = 1
+    currentRevision: int = 1
     for line in reversed(output.splitlines()):
         if line is None:
             continue
 
+        # Get information on commit
         [commit, timestamp, message] = line.split(";", 2)
         hash = get_applet_hash(Path(applet["path"]), commit)
         if (hash is None):
+            # No files in applet dist folder, skip
             continue
         
         try:
@@ -77,16 +80,18 @@ def obtain_versions(applet: Applet) -> List[Version]:
                 f"{commit}:{str(metadataPath)}"
             ], cwd=REPO_FOLDER))
         except subprocess.CalledProcessError:
+            # No metadata.json file in commit, skip
             continue
 
+        # Normalize version, can't be null and we add revision that we increment when version was not changed
         version = str(metadata["version"]) if metadata.get("version") is not None else "0.0.0"
         if (version == previousVersion):
-            currentMinor += 1
+            currentRevision += 1
         else:
-            currentMinor = 1
+            currentRevision = 1
 
         versions.append({
-            "version": f"{version}-{str(currentMinor)}",
+            "version": f"{version}-{str(currentRevision)}",
             "commit": commit,
             "message": message,
             "date": timestamp,
