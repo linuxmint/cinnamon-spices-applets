@@ -107,7 +107,7 @@ def get_applet_info(metadata: Metadata, item: Path) -> Applet:
     applet["versions"] = obtain_versions(applet)
     return applet
 
-if __name__ == "__main__":
+def generate_applet_version_map() -> Dict[str, Applet]:
     applets: Dict[str, Applet] = {}
     pool = Pool()
     items: List[Tuple[Metadata, Path]] = []
@@ -124,9 +124,7 @@ if __name__ == "__main__":
     results = pool.starmap(get_applet_info, items)
     for result in results:
         applets[result["id"]] = result
-    
-    print(json.dumps(applets, indent=4))
+    return applets
 
-
-
-
+if __name__ == "__main__":
+    print(json.dumps(generate_applet_version_map(), indent=4))
