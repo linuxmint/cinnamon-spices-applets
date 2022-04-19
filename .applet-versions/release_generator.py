@@ -1,4 +1,4 @@
-from .version_generator import generate_applet_version_map
+from utils.version_generator import generate_applet_version_map
 import os
 from pathlib import Path
 import json
