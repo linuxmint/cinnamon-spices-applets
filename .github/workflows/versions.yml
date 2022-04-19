@@ -29,7 +29,7 @@ jobs:
           sudo apt-get update -y >/dev/null 2>&1
           sudo apt-get install -y python3 gettext >/dev/null 2>&1
           cd .applet-versions
-          python3 release_generator.py --quiet
+          python3 release_generator.py
           git config user.name "NikoKrause"
           git config user.email "8415124+NikoKrause@users.noreply.github.com"
           git add .
