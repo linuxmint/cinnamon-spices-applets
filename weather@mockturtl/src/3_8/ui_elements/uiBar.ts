@@ -81,7 +81,7 @@ export class UIBar {
 			tooltipText += _("Area: {stationArea}", {stationArea: weather.stationInfo.area});
 		}
 
-		this.timestampTooltip?.set_markup(tooltipText);
+		this.timestampTooltip?.set_text(tooltipText);
 
 		if (!shouldShowToggle || config._alwaysShowHourlyWeather)
 			this.HideHourlyToggle();
