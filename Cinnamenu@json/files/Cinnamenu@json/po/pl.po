@@ -26,7 +26,7 @@ msgstr "Brak dostępnego opisu"
 
 #. 3.2 4.0
 msgid "All Applications"
-msgstr "Wszystkie"
+msgstr "Wszystkie aplikacje"
 
 #. 3.2 4.0
 msgid "Places"
@@ -62,7 +62,7 @@ msgstr "Szczegóły Konta"
 
 #. 3.2 3.2
 msgid "Grid View"
-msgstr "Siatka"
+msgstr "Widok siatki"
 
 #. 3.2 3.2
 msgid "List View"
@@ -70,11 +70,11 @@ msgstr "Lista"
 
 #. 3.2 3.2
 msgid "Switch to grid view"
-msgstr ""
+msgstr "Przełącz do widoku siatki"
 
 #. 3.2 3.2
 msgid "Switch to list view"
-msgstr ""
+msgstr "Przełącz do widoku listy"
 
 #. 3.2 4.0
 msgid "Lock Screen"
@@ -181,7 +181,7 @@ msgstr "Nie znaleziono rozszerzeń dostawcy wyszukiwania"
 
 #. 3.2 4.0
 msgid "Panel"
-msgstr "Płyta"
+msgstr ""
 
 #. 3.2 4.0
 msgid "Menu"
@@ -213,7 +213,7 @@ msgstr "Użyj niestandardowej ikony"
 
 #. 3.2 4.0
 msgid "Use a custom icon in the panel"
-msgstr ""
+msgstr "Użyj niestandardowej ikony"
 
 #. 3.2 4.0
 msgid "Panel icon"
@@ -281,7 +281,7 @@ msgstr "Aktywuj kategorie po kliknięciu"
 
 #. 3.2 4.0
 msgid "Enable autoscrolling"
-msgstr ""
+msgstr "Włącz automatyczne przewijanie"
 
 #. 3.2 4.0
 msgid "Enable autoscrolling in application list"
@@ -293,7 +293,7 @@ msgstr "Pokaż zakładki internetowe"
 
 #. 3.2 4.0
 msgid "Show your browser's web bookmarks in the menu"
-msgstr ""
+msgstr "Pokaż zakładki internetowe"
 
 #. 3.2
 msgid "Enable searching of open windows"
@@ -305,8 +305,7 @@ msgstr "Włącz dostawców wyszukiwania"
 
 #. 3.2 4.0
 msgid "Include search provider results in searches"
-msgstr ""
-"Wybierz, czy wyniki wyszukiwania są indeksowane podczas wyszukiwania w menu."
+msgstr "Wybierz, czy wyniki wyszukiwania są indeksowane podczas wyszukiwania w menu"
 
 #. 3.2 4.0
 msgid "Example Search Providers"
@@ -354,11 +353,11 @@ msgstr ""
 
 #. 3.2
 msgid "Show tooltips"
-msgstr ""
+msgstr "Pokaż podpowiedzi"
 
 #. 3.2
 msgid "Tooltip delay"
-msgstr ""
+msgstr "Opóźnienie podpowiedzi"
 
 #. 3.2 4.0
 msgid "Use a custom menu height"
@@ -406,11 +405,11 @@ msgstr "Lokalizacja przycisków sesji"
 
 #. 4.0
 msgid "Top"
-msgstr ""
+msgstr "Góra"
 
 #. 4.0
 msgid "Bottom"
-msgstr "Dolny"
+msgstr "Dół"
 
 #. 4.0
 msgid "Left"
@@ -418,13 +417,11 @@ msgstr "Lewo"
 
 #. 4.0
 msgid "Right"
-msgstr "Dobrze"
+msgstr "Prawo"
 
 #. 4.0
 msgid "Choose where to show the session (quit, logout, etc.) buttons"
-msgstr ""
-"Wybierz, gdzie mają być wyświetlane przyciski sesji (zamknij, wyloguj się "
-"itp.)"
+msgstr "Wybierz, gdzie mają być wyświetlane przyciski sesji (zamknij, wyloguj się, etc.)"
 
 #. 4.0
 msgid "Add favorites to session buttons"
