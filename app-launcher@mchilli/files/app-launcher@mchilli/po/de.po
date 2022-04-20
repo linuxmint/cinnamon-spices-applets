@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-22 22:11+0100\n"
-"PO-Revision-Date: 2021-11-22 22:14+0100\n"
+"POT-Creation-Date: 2022-04-18 11:06+0200\n"
+"PO-Revision-Date: 2022-04-18 11:07+0200\n"
 "Last-Translator: MCHilli\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -106,14 +106,18 @@ msgid "Edit selected entry"
 msgstr "Ausgewählten Eintrag bearbeiten"
 
 #: widgets.py:141
+msgid "Duplicate selected entry"
+msgstr "Ausgewählten Eintrag duplizieren"
+
+#: widgets.py:147
 msgid "Move selected entry up"
 msgstr "Ausgewählten Eintrag nach oben bewegen"
 
-#: widgets.py:147
+#: widgets.py:153
 msgid "Move selected entry down"
 msgstr "Ausgewählten Eintrag nach unten bewegen"
 
-#: widgets.py:304
+#: widgets.py:316
 msgid "Separator"
 msgstr "Trenner"
 
