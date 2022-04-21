@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-31 01:03-0500\n"
-"PO-Revision-Date: 2022-03-12 11:09+0100\n"
+"PO-Revision-Date: 2022-04-21 12:30+0200\n"
 "Last-Translator: Livedevelop Live User <mortaromarcello@gmail.com>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -160,7 +160,7 @@ msgid ""
 "A flexible menu providing formatting options, web bookmarks, open window "
 "lookup, and search provider support with fuzzy searching."
 msgstr ""
-"Un menu flessibile che fornisce opzioni di formattazione, segnalibri web, "
+"Un menù flessibile che fornisce opzioni di formattazione, segnalibri web, "
 "ricerca nelle finestre aperte e supporto per provider di ricerca."
 
 #. settings-schema.json->panel->title
@@ -169,19 +169,19 @@ msgstr "Comportamento"
 
 #. settings-schema.json->appearance->title
 msgid "Appearance"
-msgstr "Apparenza"
+msgstr "Aspetto"
 
 #. settings-schema.json->menu->title
 msgid "Layout and Content"
-msgstr "Disposizione e Contenuto"
+msgstr "Layout e Contenuto"
 
 #. settings-schema.json->providers->title
 msgid "Search Providers"
-msgstr "Fornitori di Ricerca"
+msgstr "Motori di Ricerca"
 
 #. settings-schema.json->extensionProvidersSection->title
 msgid "No search provider extensions found"
-msgstr "Nessuna estensione per fornitori di ricerca trovata"
+msgstr "Nessuna estensione per motori di ricerca trovata"
 
 #. settings-schema.json->panel-appear->title
 #. settings-schema.json->panel-behave->title
@@ -191,11 +191,11 @@ msgstr "Pannello"
 #. settings-schema.json->menu-behave->title
 #. settings-schema.json->menu-icons->title
 msgid "Menu"
-msgstr "Menu"
+msgstr "Menù"
 
 #. settings-schema.json->menu-layout->title
 msgid "Layout"
-msgstr "Disposizione"
+msgstr "Layout"
 
 #. settings-schema.json->menu-content->title
 msgid "Content"
@@ -213,11 +213,11 @@ msgstr ""
 
 #. settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
-msgstr "Apri l'editor del menu"
+msgstr "Apri l'editor del menù"
 
 #. settings-schema.json->menu-editor-button->tooltip
 msgid "Press this button to customize your menu entries."
-msgstr "Premi questo pulsante per personalizzare il menu."
+msgstr "Premi questo pulsante per personalizzare il menù."
 
 #. settings-schema.json->resetCategoryOrder-button->description
 msgid "Reset category order"
@@ -267,15 +267,15 @@ msgstr "Dimensione della griglia delle applicazioni"
 
 #. settings-schema.json->overlay-key->description
 msgid "Keyboard shortcut to open and close the menu"
-msgstr "Scorciatoia da tastiera per aprire e chiudere il menu"
+msgstr "Scorciatoia da tastiera per aprire e chiudere il menù"
 
 #. settings-schema.json->activate-on-hover->description
 msgid "Open the menu when I move my mouse over it"
-msgstr "Apre il menu al passaggio del mouse"
+msgstr "Apre il menù al passaggio del mouse"
 
 #. settings-schema.json->activate-on-hover->tooltip
 msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "Abilita l'apertura del menu al passaggio del mouse"
+msgstr "Abilita l'apertura del menù al passaggio del mouse"
 
 #. settings-schema.json->hover-delay->units
 #. settings-schema.json->tooltip-delay->units
@@ -284,7 +284,7 @@ msgstr "millisecondi"
 
 #. settings-schema.json->hover-delay->description
 msgid "Menu hover delay:"
-msgstr "Ritardo al passaggio del mouse sul menu:"
+msgstr "Ritardo al passaggio del mouse sul menù:"
 
 #. settings-schema.json->hover-delay->tooltip
 msgid "Delay between switching categories"
@@ -292,11 +292,11 @@ msgstr "Ritardo per cambio di categoria"
 
 #. settings-schema.json->enable-animation->description
 msgid "Use menu animations"
-msgstr "Usa animazione del menu"
+msgstr "Usa animazione del menù"
 
 #. settings-schema.json->enable-animation->tooltip
 msgid "Allow the menu to animate on open and close"
-msgstr "Consenti l'animazione del menu all'apertura e alla chiusura"
+msgstr "Consenti l'animazione del menù all'apertura e alla chiusura"
 
 #. settings-schema.json->category-click->description
 msgid "Activate categories on click"
@@ -326,7 +326,7 @@ msgstr "Visualizza i preferiti web"
 
 #. settings-schema.json->enable-bookmarks->tooltip
 msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Scegli se indicizzare o meno i preferiti nel menu."
+msgstr "Scegli se indicizzare o meno i preferiti nel menù."
 
 #. settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
@@ -338,7 +338,7 @@ msgstr "Scegli se indicizzare o meno le finestre aperte."
 
 #. settings-schema.json->enable-search-providers->description
 msgid "Enable search providers"
-msgstr "Abilita i fornitori di ricerca"
+msgstr "Abilita i motori di ricerca"
 
 #. settings-schema.json->enable-search-providers->tooltip
 msgid ""
@@ -347,7 +347,7 @@ msgstr "Scegli se indicizzare o meno i risultati di ricerca."
 
 #. settings-schema.json->get-providers->description
 msgid "Example Search Providers"
-msgstr "Esempio di fornitore di ricerca"
+msgstr "Esempio di motore di ricerca"
 
 #. settings-schema.json->startup-view-mode->description
 #. settings-schema.json->startup-view-mode->tooltip
@@ -356,11 +356,11 @@ msgstr "Modalità di visualizzazione delle applicazioni di avvio"
 
 #. settings-schema.json->startup-view-mode->options
 msgid "List"
-msgstr "List"
+msgstr "Lista"
 
 #. settings-schema.json->startup-view-mode->options
 msgid "Grid"
-msgstr "Grid"
+msgstr "Griglia"
 
 #. settings-schema.json->apps-grid-column-count->units
 msgid "columns"
@@ -377,7 +377,7 @@ msgstr "Visualizza preferiti e posizioni"
 
 #. settings-schema.json->show-places->tooltip
 msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "Scegli se visualizzare o meno preferiti e posizioni nel menu."
+msgstr "Scegli se visualizzare o meno preferiti e posizioni nel menù."
 
 #. settings-schema.json->show-application-icons->description
 msgid "Show application icons"
@@ -439,7 +439,7 @@ msgstr ""
 #. settings-schema.json->enable-custom-menu-height->description
 #. settings-schema.json->enable-custom-menu-height->tooltip
 msgid "Use a custom menu height"
-msgstr "Usa altezza personalizzata del menu"
+msgstr "Usa altezza personalizzata del menù"
 
 #. settings-schema.json->custom-menu-height->units
 msgid "px"
@@ -448,7 +448,7 @@ msgstr "px"
 #. settings-schema.json->custom-menu-height->description
 #. settings-schema.json->custom-menu-height->tooltip
 msgid "Custom menu height"
-msgstr "Altezza personalizzata del menu"
+msgstr "Altezza personalizzata del menù"
 
 msgid "All applications"
 msgstr "Tutte le applicazioni"
