@@ -1,6 +1,5 @@
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
-const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const Settings = imports.ui.settings;
 const Gtk = imports.gi.Gtk;
@@ -9,11 +8,13 @@ const Main = imports.ui.main;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
-let Util;
+let Util, DockerCompose;
 if (typeof require !== 'undefined') {
+	DockerCompose = require('./dockercompose');
 	Util = require('./util');
 } else {
 	const AppletDir = imports.ui.appletManager.applets['stacks@centurix'];
+	DockerCompose = AppletDir.docker_compose;
 	Util = AppletDir.util;
 }
 
@@ -34,12 +35,8 @@ const EDITOR = 'xed';
  * 
  * Add configuration for docker-compose storage area
  * List stacks
- * Add/Remove stacks
  * Up/down a stack
  * Edit a docker-compose.yml file using xed
- * Show the running containers in the stack
- * Show the logs
- * Show the open ports and open browsers
  */
 
 /**
@@ -100,6 +97,7 @@ Stacks.prototype = {
 				this.onEditorUpdate
 			);
 			this.settingsApiCheck();
+			this.docker_compose = new DockerCompose.DockerCompose(this.docker_compose_cmd, this.docker_compose_project_folder);
 
 			this.refreshApplet();
 		} catch (e) {
@@ -115,12 +113,13 @@ Stacks.prototype = {
 
 	onDockerComposeCmdUpdate: function() {
 		// Refresh any docker compose related info based on the selected version of the command
-		global.log(UUID + "::onDockerComposeProjectFolderUpdate: " + this.docker_compose_cmd);
+		global.log(UUID + "::onDockerComposeCmdUpdate: " + this.docker_compose_cmd);
+		this.DockerCompose.setDockerComposeCmd(this.docker_compose_cmd);
         this.updateApplet(true)
 	},
 
 	onEditorUpdate: function() {
-		global.log(UUID + "::onDockerComposeProjectFolderUpdate: " + this.editor);
+		global.log(UUID + "::onEditorUpdate: " + this.editor);
 	},
 
 	settingsApiCheck: function() {
@@ -161,8 +160,11 @@ Stacks.prototype = {
 		return newItem;
 	},
 
-	newSwitchMenuItem: function(label, state, callback) {
+	newSwitchMenuItem: function(label, state, callback, docker_compose_file) {
 		let newItem = new PopupMenu.PopupSwitchMenuItem(label, state);
+		if (docker_compose_file) {
+			newItem.docker_compose_file = docker_compose_file;
+		}
 		if (callback) {
 			newItem.connect("activate", Lang.bind(this, callback));
 		}
@@ -204,102 +206,26 @@ Stacks.prototype = {
 		}
 	},
 
-	checkDockerComposeExists: function() {
-		try {
-			global.log(UUID + "::checkDockerComposeExists: checking for " + this.docker_compose_cmd);
-			let [res, list, err, status] = GLib.spawn_command_line_sync("which " + this.docker_compose_cmd);
-			return parseInt(status) == 0;
-		} catch(e) {
-			global.log(UUID + "::checkDockerComposeExists: " + e);
-		}
-	},
-
 	openDockerComposeInstructions: function() {
 		this.openBrowser("https://docs.docker.com/compose/install/");
 	},
 
-	findDockerComposeFiles: function(currentDir) {
-		// Scan through the docker compose project folder for:
-		// docker-compose.yaml and docker-compose.yml files
-		try {
-			let compose_files = [];
-			let enumerator = currentDir.enumerate_children("standard::*", Gio.FileQueryInfoFlags.NONE, null);
-
-			let info;
-			while ( (info = enumerator.next_file(null)) != null ) {
-				if ( info.get_is_hidden() ) continue;
-				if ( info.get_file_type() == Gio.FileType.DIRECTORY) {
-					let childDir = currentDir.get_child(info.get_name());
-					compose_files = compose_files.concat(this.findDockerComposeFiles(childDir));
-				} else {
-					if ( !info.get_name().endsWith(".yaml") && !info.get_name().endsWith(".yml") ) continue;
-					compose_files.push(currentDir.get_child(info.get_name()).get_path());
-				}
-			}
-			return compose_files;
-		} catch(e) {
-			global.log(UUID + "::findDockerComposeFiles: " + e);
-		}
-	},
-
-	dockerComposeExec: function(command, callback = null) {
-		callback = callback;
-		try {
-			global.log("Calling spawn_async_with_pipes()...");
-			global.log("Calling from " + this.docker_compose_project_folder);
-			global.log(['/usr/bin/docker-compose', "-f", "/home/chris/docker_projects/docker-compose.yml", "up"]);
-			global.log(Util.resolveHome(this.docker_compose_project_folder));
-
-			let [exit, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(
-				Util.resolveHome(this.docker_compose_project_folder),
-				['/usr/bin/docker-compose', "-f", "/home/chris/docker_projects/docker-compose.yml", "up"],
-				null,
-				GLib.SpawnFlags.DO_NOT_REAP_CHILD,
-				null
-			);
-			global.log(exit);
-			global.log(pid);
-			global.log(stdin);
-			global.log(stdout);
-			global.log(stderr);
-
-			let out_reader = new Gio.DataInputStream({ base_stream: new Gio.UnixInputStream({fd: stdout}) });
-
-			let [out, size] = out_reader.read_line(null);
-
-			global.log(out);
-			global.log(size);
-		
-			global.log("Calling child_watch_add()...");
-			this._watch = GLib.child_watch_add(
-				GLib.PRIORITY_DEFAULT,
-				pid,
-				Lang.bind(this, function(pid, status, requestObj) {
-					GLib.source_remove(this._watch);
-					if (typeof callback == 'function') {
-						callback();
-					}
-				})
-			);
-			global.log(this._watch);
-		} catch(e) {
-			global.log(UUID + "::dockerComposeExec(" + command + "): " + e);
-		}
-	},
-
 	dockerComposeToggle: function(event) {
+		global.log(UUID + '::dockerComposeToggle: Bringing stack up with ' + event.docker_compose_file)
 		try {
 			if (event._switch.state) {
 				this.transitionMenu(_("Docker Compose: Bringing Stack up, please wait..."));
 				// this.homestead.up(Lang.bind(this, this.refreshApplet));
-				this.dockerComposeExec("up");
+				this.docker_compose.up(event.docker_compose_file);
 				this.notification(_("Bringing Stack up..."));
+				this.refreshApplet();
 				return true;
 			}
 			this.transitionMenu(_("Docker Compose: Taking Stack down, please wait..."));
 			// this.homestead.halt(Lang.bind(this, this.refreshApplet));
-			this.dockerComposeExec("down");
+			this.docker_compose.down(event.docker_compose_file);
 			this.notification(_("Taking Stack down..."));
+			this.refreshApplet();
 		} catch(e) {
 			global.log(UUID + '::dockerComposeToggle: ' + e);
 		}
@@ -307,16 +233,16 @@ Stacks.prototype = {
 
 	dockerComposeSSH: function() {
 		this.notification(_("Docker Compose SSH Terminal opened"));
+		this.docker_compose.ssh();
 	},
 
 	updateApplet: function(status) {
 		/*
 		 * Draw the main menu.
 		 * Check for the existance for docker-compose. If it doesn't exist, alert the user and direct them to installation instructions
-		 * 
 		 */
 		try {
-			if (!this.checkDockerComposeExists()) {
+			if (!this.docker_compose.exists()) {
 				this.set_applet_icon_path(ICON_MISSING);
 				this.set_applet_tooltip(_("Stacks: Docker compose missing or not configured."));
 				this.notification(_("Docker compose missing or not configured."));
@@ -328,8 +254,7 @@ Stacks.prototype = {
 				return
 			}
 
-			let dir = Gio.file_new_for_path(resolveHome(this.docker_compose_project_folder));
-			let docker_projects = this.findDockerComposeFiles(dir);
+			let docker_projects = this.docker_compose.listDockerComposefiles();
 
 			global.log(UUID + "::updateMenu: FOUND PROJECTS: " + docker_projects);
 
@@ -341,17 +266,17 @@ Stacks.prototype = {
 
 			for (let index = 0; index < docker_projects.length; index ++) {
 				let stack = new PopupMenu.PopupSubMenuMenuItem(docker_projects[index]);
-				stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Down", false, this.dockerComposeToggle));
-
-				// stack.menu.addMenuItem(this.newIconMenuItem('system-run', _('Docker Compose Up'), this.homesteadProvision));
-				// stack.menu.addMenuItem(this.newIconMenuItem('media-playback-pause', _('Docker Compose Down'), this.homesteadSuspend));
-				stack.menu.addMenuItem(this.newIconMenuItem('utilities-terminal', _('SSH Terminal...'), this.dockerComposeSSH));
+				if (this.docker_compose.status(docker_projects[index])) {
+					stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Up", true, this.dockerComposeToggle, docker_projects[index]));
+					stack.menu.addMenuItem(this.newIconMenuItem('utilities-terminal', _('SSH Terminal...'), this.dockerComposeSSH));
+				} else {
+					stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Down", false, this.dockerComposeToggle, docker_projects[index]));
+				}
 
 				this.stacks.push(stack);
 				this.menu.addMenuItem(stack);
 			}
 
-            // this.menu.addMenuItem(this.subMenuSites);
             this.menu.addMenuItem(this.newSeparator());
 			this.menu.addMenuItem(this.newIconMenuItem('view-refresh', _('Refresh this menu'), this.refreshApplet));
 
@@ -359,11 +284,6 @@ Stacks.prototype = {
 			global.log(UUID + "::updateMenu: " + e);
 		}
 	}
-}
-
-function resolveHome(path) {
-	let home = GLib.get_home_dir();
-	return path.replace('~', home);
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {
