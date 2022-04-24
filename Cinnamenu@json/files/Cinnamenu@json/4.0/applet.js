@@ -915,13 +915,15 @@ class CinnamenuApplet extends TextIconApplet {
             let maxItems = 8;//show 8 items of each type in list view or
             //adjust number of items according to number of columns in grid view to make
             //best use of available space.
+            let maxRecentItems = 4;
             if (this.settings.applicationsViewMode === ApplicationsViewModeGRID) {
                 const columns = this.appsView.getGridValues().columns;
                 maxItems = Math.ceil(6 / columns) * columns;
+                maxRecentItems = Math.max(maxRecentItems, columns);
             }
 
             this.appsView.populate_init();
-            const recentApps = this.listRecent_apps();
+            const recentApps = this.listRecent_apps(maxRecentItems);
             if (recentApps.length > 0) {
                 this.appsView.populate_add(recentApps,_('Applications'));
             }
@@ -1597,10 +1599,10 @@ class CinnamenuApplet extends TextIconApplet {
         return res;
     }
 
-    listRecent_apps() {
+    listRecent_apps(maxRecentItems) {
         const res = [];
 
-        this.recentApps.getApps().forEach(recentId => {
+        this.recentApps.getApps(maxRecentItems).forEach(recentId => {
             const app = this.apps.listApplications('all').find(app => app.id === recentId);
             if (app) {//Check because app may have been uninstalled
                 res.push(app);
@@ -1966,11 +1968,11 @@ class RecentApps {// simple class to remember the last 4 used apps which are sho
         const recentApps = this.appThis.settings.recentApps.slice();
         const duplicate = recentApps.indexOf(appId);
         if (duplicate > -1) {
-            recentApps.splice(duplicate,1);
+            recentApps.splice(duplicate, 1);
         }
         recentApps.unshift(appId);
-        if (recentApps.length > 4) {
-            recentApps.length = 4;
+        if (recentApps.length > 20) {
+            recentApps.length = 20;
         }
         this.appThis.settings.recentApps = recentApps;
     }
@@ -1979,8 +1981,8 @@ class RecentApps {// simple class to remember the last 4 used apps which are sho
         this.appThis.settings.recentApps = [];
     }
 
-    getApps() {
-        return this.appThis.settings.recentApps;
+    getApps(max_count) {
+        return this.appThis.settings.recentApps.slice(0, max_count);
     }
 }
 
