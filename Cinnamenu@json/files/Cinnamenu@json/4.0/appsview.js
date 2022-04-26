@@ -133,6 +133,7 @@ class AppButton {
                     _getDragActor: () => new Clutter.Clone({source: this.actor}),
                     getDragActor: () => new Clutter.Clone({source: this.icon}),
                     id: this.app.id,
+                    get_app_id: () => this.app.id, //used when eg. dragging to panel launcher
                     isDraggableApp: true
             };
 
