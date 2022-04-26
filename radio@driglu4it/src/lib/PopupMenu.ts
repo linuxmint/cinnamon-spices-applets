@@ -4,7 +4,7 @@ const { KEY_Escape } = imports.gi.Clutter
 const { util_get_transformed_allocation } = imports.gi.Cinnamon
 const { PanelLoc } = imports.ui.popupMenu
 
-interface Arguments {
+export interface PopupMenuArguments {
     launcher: imports.gi.St.Widget,
 }
 
@@ -24,7 +24,7 @@ interface PopupMenu extends imports.gi.St.BoxLayout {
 }
 
 
-export function createPopupMenu(args: Arguments) {
+export function createPopupMenu(args: PopupMenuArguments) {
 
     const {
         launcher

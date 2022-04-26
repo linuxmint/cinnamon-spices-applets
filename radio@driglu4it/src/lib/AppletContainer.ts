@@ -30,7 +30,7 @@ export function createAppletContainer(args: Arguments) {
         onClick()
         return true
     }
-    
+
     applet.on_applet_middle_clicked = () => {
         onMiddleClick()
         return true
@@ -52,6 +52,7 @@ export function createAppletContainer(args: Arguments) {
 
         if (event.get_button() === 3) {
             onRightClick()
+            return true
         }
         return false
 
