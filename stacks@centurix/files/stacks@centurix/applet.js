@@ -268,6 +268,7 @@ Stacks.prototype = {
 				let stack = new PopupMenu.PopupSubMenuMenuItem(docker_projects[index]);
 				if (this.docker_compose.status(docker_projects[index])) {
 					stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Up", true, this.dockerComposeToggle, docker_projects[index]));
+					let images = this.docker_compose.listImages(docker_projects[index]);
 					stack.menu.addMenuItem(this.newIconMenuItem('utilities-terminal', _('SSH Terminal...'), this.dockerComposeSSH));
 				} else {
 					stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Down", false, this.dockerComposeToggle, docker_projects[index]));

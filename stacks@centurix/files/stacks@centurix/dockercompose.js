@@ -65,18 +65,34 @@ DockerCompose.prototype = {
         return this.findDockerComposeFiles(Gio.file_new_for_path(Util.resolveHome(this.docker_compose_project_folder)));
     },
 
+	listImages: function(stack_file) {
+		/*
+		Grab the results from the command and parse it
+		       Container          Repository    Tag       Image Id       Size  
+		-----------------------------------------------------------------------
+		traffcap_node_1           node         16       15ddf4b49c29   904.6 MB
+		traffcap_vault-server_1   vault        latest   f46a4c1a979e   198.6 MB
+		*/
+		let results = this.exec(stack_file, "images");
+		let lines = results.split("\n");
+		global.log("IMAGES RESULTS");
+		lines.forEach((line) => {
+			global.log(line);
+		})
+	},
+
     ssh: function(stack_file) {
         // Open up an SSH terminal
     },
 
     up: function(stack_file) {
         // Bring a stack up with `docker-compose up`
-        this.exec(stack_file, "up")
+        this.exec(stack_file, "up", null, false);
     },
 
     down: function(stack_file) {
         // Bring a stack down with `docker-compose down`
-        this.exec(stack_file, "down")
+        this.exec(stack_file, "down", null, false);
     },
 
 	status: function(stack_file) {
@@ -87,14 +103,9 @@ DockerCompose.prototype = {
 		return (result != "");
 	},
 
-	exec: function(stack_file, command, callback = null) {
+	exec: function(stack_file, command, callback = null, capture = true) {
 		callback = callback;
 		try {
-			global.log("Calling spawn_async_with_pipes()...");
-			global.log("Calling from " + this.docker_compose_project_folder);
-			global.log(['/usr/bin/docker-compose', "-f", stack_file, command]);
-			global.log(Util.resolveHome(this.docker_compose_project_folder));
-
 			let [exit, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(
 				Util.resolveHome(this.docker_compose_project_folder),
 				['/usr/bin/docker-compose', "-f", stack_file, command],
@@ -102,40 +113,46 @@ DockerCompose.prototype = {
 				GLib.SpawnFlags.DO_NOT_REAP_CHILD,
 				null
 			);
-			global.log(exit);
-			global.log(pid);
-			global.log(stdin);
-			global.log(stdout);
-			global.log(stderr);
 
-			let out_reader = new Gio.DataInputStream({ base_stream: new Gio.UnixInputStream({fd: stdout}) });
+			let out = "";
 
-			let [out, size] = out_reader.read_line(null);
+			if (capture) {
+				let out_reader = new Gio.DataInputStream({ base_stream: new Gio.UnixInputStream({fd: stdout}) });
 
-			global.log("***********************OUTPUT***********************");
-			let result = "";
-			if (out) {
-				out.forEach(value => {
-					result += String.fromCharCode(value);
-				});	
-			}
-			global.log(result);
-			global.log("***********************END OUTPUT***********************");
-			global.log(size);
-		
-			global.log("Calling child_watch_add()...");
-			this._watch = GLib.child_watch_add(
-				GLib.PRIORITY_DEFAULT,
-				pid,
-				Lang.bind(this, function(pid, status, requestObj) {
-					GLib.source_remove(this._watch);
-					if (typeof callback == 'function') {
-						callback();
+				let lines = [];
+				let line;
+				let length = 0;
+	
+				while (true) {
+					[line, length] = out_reader.read_line(null);
+					lines.push(line);
+					if (length == 0) {
+						break;
 					}
-				})
-			);
-			global.log(this._watch);
-			return result;
+				}
+	
+				out = lines.join("\n");
+	
+				global.log("***********************OUTPUT***********************");
+				global.log(out);
+				global.log("***********************END OUTPUT***********************");	
+			} else {
+				global.log("***********************NOT CHECKING  OUTPUT***********************")
+			}
+		
+			// global.log("Calling child_watch_add()...");
+			// this._watch = GLib.child_watch_add(
+			// 	GLib.PRIORITY_DEFAULT,
+			// 	pid,
+			// 	Lang.bind(this, function(pid, status, requestObj) {
+			// 		GLib.source_remove(this._watch);
+			// 		if (typeof callback == 'function') {
+			// 			callback();
+			// 		}
+			// 	})
+			// );
+			// global.log(this._watch);
+			return out;
 		} catch(e) {
 			global.log(UUID + "::DockerCompose:Exec(" + command + "): " + e);
 		}
