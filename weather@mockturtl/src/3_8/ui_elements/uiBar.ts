@@ -51,7 +51,7 @@ export class UIBar {
 	}
 
 	public Display(weather: WeatherData, provider: WeatherProvider, config: Config, shouldShowToggle: boolean): boolean {
-		if (this._timestamp == null || this.providerCreditButton == null || this.providerCreditButton.actor.is_finalized())
+		if (this._timestamp == null || this.providerCreditButton == null || this.providerCreditButton?.actor.is_finalized?.())
 			return false;
 
 		let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
