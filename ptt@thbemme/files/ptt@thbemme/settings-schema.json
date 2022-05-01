@@ -12,7 +12,7 @@
     "keybinding_ptt_key": {
         "type": "keybinding",
         "description": "PTT",
-        "default": "F11",
+        "default": "F9",
         "indent": true
     },
     "keybinding_ptt_toggle": {
