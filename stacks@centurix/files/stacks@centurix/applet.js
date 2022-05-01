@@ -217,6 +217,7 @@ Stacks.prototype = {
 				this.transitionMenu(_("Docker Compose: Bringing Stack up, please wait..."));
 				// this.homestead.up(Lang.bind(this, this.refreshApplet));
 				this.docker_compose.up(event.docker_compose_file);
+				this.docker_compose.events(event.docker_compose_file);
 				this.notification(_("Bringing Stack up..."));
 				this.refreshApplet();
 				return true;

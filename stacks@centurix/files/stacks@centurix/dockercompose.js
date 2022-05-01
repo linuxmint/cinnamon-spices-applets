@@ -103,6 +103,16 @@ DockerCompose.prototype = {
 		return (result != "");
 	},
 
+	events: function(stack_file) {
+		// Add a sink for events
+		global.log("*********************ADDING EVENTS SINK***********************");
+		let result = this.exec(stack_file, "events", function(arg1, arg2, arg3) {
+			global.log("ARG1: " + arg1);
+			global.log("ARG2: " + arg2);
+			global.log("ARG3: " + arg3);
+		});
+	},
+
 	exec: function(stack_file, command, callback = null, capture = true) {
 		callback = callback;
 		try {
@@ -139,19 +149,22 @@ DockerCompose.prototype = {
 			} else {
 				global.log("***********************NOT CHECKING  OUTPUT***********************")
 			}
-		
-			// global.log("Calling child_watch_add()...");
-			// this._watch = GLib.child_watch_add(
-			// 	GLib.PRIORITY_DEFAULT,
-			// 	pid,
-			// 	Lang.bind(this, function(pid, status, requestObj) {
-			// 		GLib.source_remove(this._watch);
-			// 		if (typeof callback == 'function') {
-			// 			callback();
-			// 		}
-			// 	})
-			// );
-			// global.log(this._watch);
+
+			if (callback) {
+				global.log("Calling child_watch_add()...");
+				this._watch = GLib.child_watch_add(
+					GLib.PRIORITY_DEFAULT,
+					pid,
+					Lang.bind(this, function(pid, status, requestObj) {
+						GLib.source_remove(this._watch);
+						if (typeof callback == 'function') {
+							callback();
+						}
+					})
+				);
+				global.log(this._watch);
+			}
+
 			return out;
 		} catch(e) {
 			global.log(UUID + "::DockerCompose:Exec(" + command + "): " + e);
