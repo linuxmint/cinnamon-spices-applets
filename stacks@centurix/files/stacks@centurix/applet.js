@@ -217,7 +217,7 @@ Stacks.prototype = {
 				this.transitionMenu(_("Docker Compose: Bringing Stack up, please wait..."));
 				// this.homestead.up(Lang.bind(this, this.refreshApplet));
 				this.docker_compose.up(event.docker_compose_file);
-				this.docker_compose.events(event.docker_compose_file);
+				// this.docker_compose.events(event.docker_compose_file);
 				this.notification(_("Bringing Stack up..."));
 				this.refreshApplet();
 				return true;
@@ -229,6 +229,16 @@ Stacks.prototype = {
 			this.refreshApplet();
 		} catch(e) {
 			global.log(UUID + '::dockerComposeToggle: ' + e);
+		}
+	},
+
+	attachSink: function(event) {
+		global.log(UUID + '::attachSink: Attaching applet to docker-compose event sink ' + event.docker_compose_file)
+		try {
+			this.docker_compose.events(event.docker_compose_file);
+			return true;
+		} catch(e) {
+			global.log(UUID + '::attachSink: ' + e);
 		}
 	},
 
@@ -269,6 +279,7 @@ Stacks.prototype = {
 				let stack = new PopupMenu.PopupSubMenuMenuItem(docker_projects[index]);
 				if (this.docker_compose.status(docker_projects[index])) {
 					stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Up", true, this.dockerComposeToggle, docker_projects[index]));
+					stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Attach Sink", true, this.attachSink, docker_projects[index]));
 					let images = this.docker_compose.listImages(docker_projects[index]);
 					stack.menu.addMenuItem(this.newIconMenuItem('utilities-terminal', _('SSH Terminal...'), this.dockerComposeSSH));
 				} else {

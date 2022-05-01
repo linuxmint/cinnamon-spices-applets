@@ -73,7 +73,7 @@ DockerCompose.prototype = {
 		traffcap_node_1           node         16       15ddf4b49c29   904.6 MB
 		traffcap_vault-server_1   vault        latest   f46a4c1a979e   198.6 MB
 		*/
-		let results = this.exec(stack_file, "images");
+		let results = this.exec(stack_file, ["images"]);
 		let lines = results.split("\n");
 		global.log("IMAGES RESULTS");
 		lines.forEach((line) => {
@@ -87,18 +87,18 @@ DockerCompose.prototype = {
 
     up: function(stack_file) {
         // Bring a stack up with `docker-compose up`
-        this.exec(stack_file, "up", null, false);
+        this.exec(stack_file, ["up"], null, false);
     },
 
     down: function(stack_file) {
         // Bring a stack down with `docker-compose down`
-        this.exec(stack_file, "down", null, false);
+        this.exec(stack_file, ["down"], null, false);
     },
 
 	status: function(stack_file) {
 		// Check to see if any processes are running, return true/false
 		global.log("*********************CHECKING RUNNING STATE***********************");
-		let result = this.exec(stack_file, "top");
+		let result = this.exec(stack_file, ["top"]);
 		global.log("RUNNING STATE: " + result);
 		return (result != "");
 	},
@@ -106,19 +106,48 @@ DockerCompose.prototype = {
 	events: function(stack_file) {
 		// Add a sink for events
 		global.log("*********************ADDING EVENTS SINK***********************");
-		let result = this.exec(stack_file, "events", function(arg1, arg2, arg3) {
-			global.log("ARG1: " + arg1);
-			global.log("ARG2: " + arg2);
-			global.log("ARG3: " + arg3);
-		});
+		let result = this.exec(stack_file, ["events", "--json"], this.capturedEvent, false);
+	},
+
+	readAsync : function()
+    {
+        this.out_reader.fill_async(-1, GLib.PRIORITY_DEFAULT, null, Lang.bind(this, this.capturedEvent));
+    },
+
+	capturedEvent: function(istr, res) {
+        try
+        {
+            var avail = istr.get_available();
+            global.log("readAsyncCallback avail " + avail);
+            if (avail > 0)
+            {
+                var buf = istr.read_bytes(avail, null).get_data();
+                global.log("buf " + buf);
+                this.readBuffer += buf;
+                this.readAsync();
+            }
+            else
+            {
+                // this.freeResources(this.DO_NOT_FINISH_PROCESS);
+                // if (this.callback != null)
+                // {
+                //     this.callback(0, this.readBuffer);
+                // }
+                // this.isProcFinished = true;
+            }
+        }
+        catch (e)
+        {
+            global.log("readAsyncCallback:");
+            // this.freeResources();
+        }
 	},
 
 	exec: function(stack_file, command, callback = null, capture = true) {
-		callback = callback;
 		try {
 			let [exit, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(
 				Util.resolveHome(this.docker_compose_project_folder),
-				['/usr/bin/docker-compose', "-f", stack_file, command],
+				['/usr/bin/docker-compose', "-f", stack_file].concat(command),
 				null,
 				GLib.SpawnFlags.DO_NOT_REAP_CHILD,
 				null
@@ -127,14 +156,14 @@ DockerCompose.prototype = {
 			let out = "";
 
 			if (capture) {
-				let out_reader = new Gio.DataInputStream({ base_stream: new Gio.UnixInputStream({fd: stdout}) });
+				this.out_reader = new Gio.DataInputStream({ base_stream: new Gio.UnixInputStream({fd: stdout}) });
 
 				let lines = [];
 				let line;
 				let length = 0;
 	
 				while (true) {
-					[line, length] = out_reader.read_line(null);
+					[line, length] = this.out_reader.read_line(null);
 					lines.push(line);
 					if (length == 0) {
 						break;
@@ -151,17 +180,16 @@ DockerCompose.prototype = {
 			}
 
 			if (callback) {
+				this.out_reader = new Gio.DataInputStream({ base_stream: new Gio.UnixInputStream({fd: stdout}) });
 				global.log("Calling child_watch_add()...");
-				this._watch = GLib.child_watch_add(
-					GLib.PRIORITY_DEFAULT,
-					pid,
-					Lang.bind(this, function(pid, status, requestObj) {
-						GLib.source_remove(this._watch);
-						if (typeof callback == 'function') {
-							callback();
-						}
-					})
-				);
+				this.readAsync()
+				// out_reader.fill_async(-1, GLib.PRIORITY_DEFAULT, null, Land.bind(this, callback));
+				// this._watch = GLib.child_watch_add(
+				// 	GLib.PRIORITY_DEFAULT,
+				// 	pid,
+				// 	Lang.bind(this, callback)
+				// );
+				global.log("Added child_watch_add()...");
 				global.log(this._watch);
 			}
 
@@ -170,4 +198,5 @@ DockerCompose.prototype = {
 			global.log(UUID + "::DockerCompose:Exec(" + command + "): " + e);
 		}
 	}
+
 }
