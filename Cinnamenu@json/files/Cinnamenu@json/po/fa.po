@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 "Last-Translator: MohammadSaleh Kamyab <mskf1383@protonmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"Language: fa_IR\n"
+"Language: fa\n"
 
 msgid "Type to search..."
 msgstr "نوشتن برای جست‌وجو…"
