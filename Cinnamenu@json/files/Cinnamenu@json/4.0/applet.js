@@ -257,14 +257,6 @@ class CinnamenuApplet extends TextIconApplet {
             return;
         }
 
-        //center menu if applet in center zone of top or bottom panel
-        const appletDefinition = AppletManager.getAppletDefinition({applet_id: this.instance_id});
-        if ((this.orientation === St.Side.BOTTOM || this.orientation === St.Side.TOP) &&
-                                                    appletDefinition.location_label === 'center') {
-            let monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
-            this.menu.shiftToPosition(Math.floor(monitor.width / 2));
-        }
-
         this.menu.toggle_with_options(this.settings.enableAnimation);
     }
 
@@ -477,6 +469,14 @@ class CinnamenuApplet extends TextIconApplet {
             this.updateMenuSize();
             this.setActiveCategory(openOnCategory);
             this.panel.peekPanel();
+
+            //center menu if applet in center zone of top or bottom panel
+            const appletDefinition = AppletManager.getAppletDefinition({applet_id: this.instance_id});
+            if ((this.orientation === St.Side.BOTTOM || this.orientation === St.Side.TOP) &&
+                                                        appletDefinition.location_label === 'center') {
+                const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
+                this.menu.shiftToPosition(Math.floor(monitor.width / 2));
+            }
         } else {
             if (this.searchActive) {
                 this._endSearchMode();
@@ -994,7 +994,11 @@ class CinnamenuApplet extends TextIconApplet {
             this.searchView.showAndConnectSecondaryIcon();//show edit-delete icon
             this.categoriesView.buttons.forEach(button => button.disable());
         }
-        setTimeout(() => this._doSearch(searchText, this.currentSearchId));
+
+        //When doSearch() below is called by setTimeout, this.currentSearchId may have changed so store its
+        //current value in a const as the current lexical scope is preserved.
+        const currentSearchId = this.currentSearchId;
+        setTimeout(() => this._doSearch(searchText, currentSearchId));
     }
 
     _endSearchMode() {
@@ -1207,7 +1211,7 @@ class CinnamenuApplet extends TextIconApplet {
                 hpattern = pattern.substring(2);
             }
             let history = [];
-            const thisSearchId = this.currentSearchId;
+
             Promise.all([
                 search_browser(['chromium', 'Default'], 'chromium', hpattern),
                 search_browser(['google-chrome', 'Default'], 'google-chrome', hpattern),

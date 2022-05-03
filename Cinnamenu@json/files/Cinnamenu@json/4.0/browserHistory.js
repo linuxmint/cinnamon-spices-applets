@@ -35,6 +35,8 @@ function search_browser(path, wmClass, pattern) {
                     result.activate = () => Util.spawn(['xdg-open', result.uri]);
                 });
                 resolve(results);
+            } else {
+                resolve([]);
             }
         });
     });
