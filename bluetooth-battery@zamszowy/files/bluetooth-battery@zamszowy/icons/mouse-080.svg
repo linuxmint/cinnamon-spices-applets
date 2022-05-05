@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="22"
+   height="22"
+   version="1.1"
+   id="svg60"
+   sodipodi:docname="mouse-080.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview62"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="34.954545"
+     inkscape:cx="5.5214565"
+     inkscape:cy="9.4980495"
+     inkscape:window-width="1920"
+     inkscape:window-height="1014"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g58" />
+  <defs
+     id="defs50">
+    <style
+       id="current-color-scheme"
+       type="text/css">
+   .ColorScheme-Text { color:#dfdfdf; } .ColorScheme-Highlight { color:#4285f4; } .ColorScheme-NeutralText { color:#ff9800; } .ColorScheme-PositiveText { color:#4caf50; } .ColorScheme-NegativeText { color:#f44336; }
+  </style>
+  </defs>
+  <g
+     transform="translate(-57 -719.36)"
+     id="g58">
+    <path
+       opacity="0.35"
+       style="fill:currentColor;stroke-width:0.999938"
+       class="ColorScheme-Text"
+       d="m 60.5,722.36 c -0.277,0 -0.5,0.22298 -0.5,0.49995 v 0.49994 h -2 v -2.6e-4 l -1.5e-5,14.50018 c 0,0.27697 0.223,0.49994 0.5,0.49994 h 6 c 0.277,0 0.5,-0.22297 0.5,-0.49994 v -14.49819 l -0.50002,0.002 h -1.5 v -0.49993 c 0,-0.27697 -0.223,-0.49995 -0.5,-0.49995 z"
+       id="path52" />
+    <path
+       style="fill:currentColor;stroke-width:1.04436"
+       class="ColorScheme-Text"
+       d="m 58,726.36 -1.5e-5,11.45464 c 0,0.30212 0.223,0.54536 0.5,0.54536 h 6 c 0.277,0 0.5,-0.24324 0.5,-0.54536 v -11.45247 z"
+       id="path54" />
+    <path
+       style="color:#dfdfdf;fill:currentColor"
+       class="ColorScheme-Text"
+       d="m 72,722.36 c -2.77,0 -5,2.676 -5,6 h 5 z m 1,0 v 6 h 5 c 0,-3.324 -2.23,-6 -5,-6 z m -6,7 v 3 c 0,3.324 2.23,6 5,6 h 1 c 2.77,0 5,-2.676 5,-6 v -3 h -5 z"
+       id="path86" />
+  </g>
+</svg>

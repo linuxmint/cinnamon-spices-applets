@@ -1,0 +1,85 @@
+{
+  "layout1": {
+    "type": "layout",
+    "pages": ["page1", "page2"],
+      "page1": {
+        "type": "page",
+        "title": "Settings",
+        "sections": ["section0", "section1"]
+      },
+      "page2": {
+        "type": "page",
+        "title": "Blacklist",
+        "sections": ["section2"]
+      },
+
+    "section0": {
+      "type": "section",
+      "title": "Enable battery monitoring for:",
+      "keys": ["enable-keyboards", "enable-mice", "enable-headphones", "enable-others"]
+    },
+
+    "section1": {
+      "type": "section",
+      "title": "Icon/Text:",
+      "keys": ["applet-icon"]
+    },
+
+    "section2": {
+      "type": "section",
+      "title": "Disable monitoring for selected devices. You can use model or serial of the device.\nComment starts with '#'",
+      "keys": ["blacklist", "blacklist-apply"]
+    }
+  },
+
+  "enable-keyboards": {
+    "type": "switch",
+    "default": true,
+    "description": "Keyboards"
+  },
+
+  "enable-mice": {
+    "type": "switch",
+    "default": true,
+    "description": "Mice"
+  },
+
+  "enable-headphones": {
+    "type": "switch",
+    "default": true,
+    "description": "Headphones"
+  },
+
+  "enable-others": {
+    "type": "switch",
+    "default": true,
+    "description": "Other devices"
+  },
+
+  "applet-icon": {
+    "type": "radiogroup",
+    "default": true,
+    "description": "Display",
+    "default": "icon-text",
+    "options": {
+      "Icon and Text" : "icon-text",
+      "Icon" : "icon",
+      "Text" : "text"
+    }
+  },
+
+  "blacklist": {
+    "type": "textview",
+    "description": "",
+    "default": "",
+    "tooltip": "tooltip",
+    "height": 150
+  },
+
+  "blacklist-apply": {
+    "type": "button",
+    "callback": "_on_settings_change",
+    "description": "Apply",
+    "tooltip": "Apply changes"
+  }
+}
