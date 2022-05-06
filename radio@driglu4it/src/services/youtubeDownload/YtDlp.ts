@@ -1,7 +1,7 @@
 import { YoutubeDownloadServiceProps, YoutubeDownloadServiceReturnType } from "./YoutubeDownloadManager";
 const { spawnCommandLineAsyncIO } = imports.misc.util;
 
-
+// TODO: there are some redudances with downloadWithYoutubeDl.
 export function downloadWithYtDlp(props: YoutubeDownloadServiceProps): YoutubeDownloadServiceReturnType {
     const { downloadDir, title, onFinished, onSuccess, onError } = props
 

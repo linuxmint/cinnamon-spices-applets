@@ -15234,8 +15234,8 @@ class UIBar {
         this._timestamp.label = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
-        var _a, _b, _c, _d;
-        if (this._timestamp == null || this.providerCreditButton == null || this.providerCreditButton.actor.is_finalized())
+        var _a, _b, _c, _d, _e, _f, _g;
+        if (this._timestamp == null || this.providerCreditButton == null || ((_c = (_a = this.providerCreditButton) === null || _a === void 0 ? void 0 : (_b = _a.actor).is_finalized) === null || _c === void 0 ? void 0 : _c.call(_b)))
             return false;
         let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
         if (provider.remainingCalls != null) {
@@ -15245,7 +15245,7 @@ class UIBar {
         this.providerCreditButton.url = provider.website;
         const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
         this._timestamp.label = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
-        if (((_a = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _a === void 0 ? void 0 : _a.distanceFrom) != null) {
+        if (((_d = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _d === void 0 ? void 0 : _d.distanceFrom) != null) {
             const stringFormat = {
                 distance: MetreToUserUnits(weather.stationInfo.distanceFrom, config.DistanceUnit).toString(),
                 distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
@@ -15253,13 +15253,13 @@ class UIBar {
             this._timestamp.label += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
         }
         let tooltipText = "";
-        if (((_b = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _b === void 0 ? void 0 : _b.name) != null)
+        if (((_e = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _e === void 0 ? void 0 : _e.name) != null)
             tooltipText = _("Station Name: {stationName}", { stationName: weather.stationInfo.name });
-        if (((_c = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _c === void 0 ? void 0 : _c.area) != null) {
+        if (((_f = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _f === void 0 ? void 0 : _f.area) != null) {
             tooltipText += ", ";
             tooltipText += _("Area: {stationArea}", { stationArea: weather.stationInfo.area });
         }
-        (_d = this.timestampTooltip) === null || _d === void 0 ? void 0 : _d.set_markup(tooltipText);
+        (_g = this.timestampTooltip) === null || _g === void 0 ? void 0 : _g.set_text(tooltipText);
         if (!shouldShowToggle || config._alwaysShowHourlyWeather)
             this.HideHourlyToggle();
         return true;

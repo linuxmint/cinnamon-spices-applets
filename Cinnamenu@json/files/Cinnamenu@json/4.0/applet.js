@@ -257,14 +257,6 @@ class CinnamenuApplet extends TextIconApplet {
             return;
         }
 
-        //center menu if applet in center zone of top or bottom panel
-        const appletDefinition = AppletManager.getAppletDefinition({applet_id: this.instance_id});
-        if ((this.orientation === St.Side.BOTTOM || this.orientation === St.Side.TOP) &&
-                                                    appletDefinition.location_label === 'center') {
-            let monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
-            this.menu.shiftToPosition(Math.floor(monitor.width / 2));
-        }
-
         this.menu.toggle_with_options(this.settings.enableAnimation);
     }
 
@@ -477,6 +469,14 @@ class CinnamenuApplet extends TextIconApplet {
             this.updateMenuSize();
             this.setActiveCategory(openOnCategory);
             this.panel.peekPanel();
+
+            //center menu if applet in center zone of top or bottom panel
+            const appletDefinition = AppletManager.getAppletDefinition({applet_id: this.instance_id});
+            if ((this.orientation === St.Side.BOTTOM || this.orientation === St.Side.TOP) &&
+                                                        appletDefinition.location_label === 'center') {
+                const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
+                this.menu.shiftToPosition(Math.floor(monitor.width / 2));
+            }
         } else {
             if (this.searchActive) {
                 this._endSearchMode();
@@ -915,13 +915,15 @@ class CinnamenuApplet extends TextIconApplet {
             let maxItems = 8;//show 8 items of each type in list view or
             //adjust number of items according to number of columns in grid view to make
             //best use of available space.
+            let maxRecentItems = 4;
             if (this.settings.applicationsViewMode === ApplicationsViewModeGRID) {
                 const columns = this.appsView.getGridValues().columns;
                 maxItems = Math.ceil(6 / columns) * columns;
+                maxRecentItems = Math.max(maxRecentItems, columns);
             }
 
             this.appsView.populate_init();
-            const recentApps = this.listRecent_apps();
+            const recentApps = this.listRecent_apps(maxRecentItems);
             if (recentApps.length > 0) {
                 this.appsView.populate_add(recentApps,_('Applications'));
             }
@@ -992,7 +994,11 @@ class CinnamenuApplet extends TextIconApplet {
             this.searchView.showAndConnectSecondaryIcon();//show edit-delete icon
             this.categoriesView.buttons.forEach(button => button.disable());
         }
-        setTimeout(() => this._doSearch(searchText, this.currentSearchId));
+
+        //When doSearch() below is called by setTimeout, this.currentSearchId may have changed so store its
+        //current value in a const as the current lexical scope is preserved.
+        const currentSearchId = this.currentSearchId;
+        setTimeout(() => this._doSearch(searchText, currentSearchId));
     }
 
     _endSearchMode() {
@@ -1205,7 +1211,7 @@ class CinnamenuApplet extends TextIconApplet {
                 hpattern = pattern.substring(2);
             }
             let history = [];
-            const thisSearchId = this.currentSearchId;
+
             Promise.all([
                 search_browser(['chromium', 'Default'], 'chromium', hpattern),
                 search_browser(['google-chrome', 'Default'], 'google-chrome', hpattern),
@@ -1597,10 +1603,10 @@ class CinnamenuApplet extends TextIconApplet {
         return res;
     }
 
-    listRecent_apps() {
+    listRecent_apps(maxRecentItems) {
         const res = [];
 
-        this.recentApps.getApps().forEach(recentId => {
+        this.recentApps.getApps(maxRecentItems).forEach(recentId => {
             const app = this.apps.listApplications('all').find(app => app.id === recentId);
             if (app) {//Check because app may have been uninstalled
                 res.push(app);
@@ -1966,11 +1972,11 @@ class RecentApps {// simple class to remember the last 4 used apps which are sho
         const recentApps = this.appThis.settings.recentApps.slice();
         const duplicate = recentApps.indexOf(appId);
         if (duplicate > -1) {
-            recentApps.splice(duplicate,1);
+            recentApps.splice(duplicate, 1);
         }
         recentApps.unshift(appId);
-        if (recentApps.length > 4) {
-            recentApps.length = 4;
+        if (recentApps.length > 20) {
+            recentApps.length = 20;
         }
         this.appThis.settings.recentApps = recentApps;
     }
@@ -1979,8 +1985,8 @@ class RecentApps {// simple class to remember the last 4 used apps which are sho
         this.appThis.settings.recentApps = [];
     }
 
-    getApps() {
-        return this.appThis.settings.recentApps;
+    getApps(max_count) {
+        return this.appThis.settings.recentApps.slice(0, max_count);
     }
 }
 

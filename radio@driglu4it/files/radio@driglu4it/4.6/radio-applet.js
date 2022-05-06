@@ -4064,6 +4064,7 @@ function createAppletContainer(args) {
             return false;
         if (event.get_button() === 3) {
             onRightClick();
+            return true;
         }
         return false;
     });
@@ -4105,97 +4106,63 @@ function createRadioAppletLabel() {
     return label;
 }
 
-;// CONCATENATED MODULE: ./src/ui/Notifications/NotificationBase.ts
+;// CONCATENATED MODULE: ./src/lib/notify.ts
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const { messageTray } = imports.ui.main;
 const { Icon, IconType } = imports.gi.St;
+const { spawnCommandLine: notify_spawnCommandLine } = imports.misc.util;
+const { get_home_dir: notify_get_home_dir } = imports.gi.GLib;
 
 const messageSource = new SystemNotificationSource('Radio Applet');
 messageTray.add(messageSource);
-function createBasicNotification(args) {
-    const { notificationText, isMarkup = false, transient = true } = args;
+function notify(text, options) {
+    const { 
+    // TODO: is there a reason to ever set this to false??
+    isMarkup = true, transient = true, buttons } = options || {};
     const icon = new Icon({
         icon_type: IconType.SYMBOLIC,
         icon_name: RADIO_SYMBOLIC_ICON_NAME,
         icon_size: 25
     });
-    const notification = new Notification(messageSource, __meta.name, notificationText, { icon, bodyMarkup: isMarkup });
+    const notification = new Notification(messageSource, __meta.name, text, { icon });
     notification.setTransient(transient);
-    notification.notify = () => {
-        messageSource.notify(notification);
-    };
-    return notification;
-}
-
-;// CONCATENATED MODULE: ./src/ui/Notifications/YoutubeDownloadFailedNotification.ts
-
-
-const { spawnCommandLine: YoutubeDownloadFailedNotification_spawnCommandLine } = imports.misc.util;
-const { get_home_dir: YoutubeDownloadFailedNotification_get_home_dir } = imports.gi.GLib;
-function notifyYoutubeDownloadFailed(props) {
-    const { youtubeCli } = props;
-    const notificationText = `Couldn't download Song from Youtube due to an Error. Make Sure you have the newest version of ${youtubeCli} installed. 
-        \n<b>Important:</b> Don't use apt for the installation but follow the installation instruction given on the Radio Applet Site in the Cinnamon Store instead
-        \nFor more information see the logs`;
-    const notification = createBasicNotification({
-        notificationText,
-        isMarkup: true,
-        transient: false
-    });
-    const viewStoreBtnId = 'viewStoreBtn';
-    const viewLogBtnId = 'viewLogBtn';
-    notification.addButton(viewStoreBtnId, 'View Installation Instruction');
-    notification.addButton(viewLogBtnId, "View Logs");
-    notification.connect('action-invoked', (actor, id) => {
-        if (id === viewStoreBtnId) {
-            YoutubeDownloadFailedNotification_spawnCommandLine(`xdg-open ${APPLET_SITE} `);
-        }
-        if (id === viewLogBtnId) {
-            YoutubeDownloadFailedNotification_spawnCommandLine(`xdg-open ${YoutubeDownloadFailedNotification_get_home_dir()}/.xsession-errors`);
-        }
-    });
-    notification.notify();
-}
-
-;// CONCATENATED MODULE: ./src/ui/Notifications/YoutubeDownloadFinishedNotification.ts
-
-const { spawnCommandLine: YoutubeDownloadFinishedNotification_spawnCommandLine } = imports.misc.util;
-function notifyYoutubeDownloadFinished(args) {
-    const { downloadPath, fileAlreadExist = false } = args;
-    const notificationText = fileAlreadExist ?
-        'Downloaded Song not saved as a file with the same name already exists' :
-        `Download finished. File saved to ${downloadPath}`;
-    const notification = createBasicNotification({
-        notificationText,
-        isMarkup: false,
-        transient: false
-    });
+    if (buttons && buttons.length > 0) {
+        buttons.forEach(({ text }) => {
+            notification.addButton(text, text);
+        });
+        notification.connect('action-invoked', (_, id) => {
+            const clickedBtn = buttons.find(({ text }) => text === id);
+            clickedBtn === null || clickedBtn === void 0 ? void 0 : clickedBtn.onClick();
+        });
+    }
     // workaround to remove the underline of the downloadPath
-    notification["_bodyUrlHighlighter"].actor.clutter_text.set_markup(notificationText);
-    const playBtnId = 'openBtn';
-    notification.addButton(playBtnId, 'Play');
-    notification.connect('action-invoked', (actor, id) => {
-        if (id === playBtnId) {
-            YoutubeDownloadFinishedNotification_spawnCommandLine(`xdg-open '${downloadPath}'`);
-        }
-    });
-    notification.notify();
+    isMarkup && notification["_bodyUrlHighlighter"].actor.clutter_text.set_markup(text);
+    messageSource.notify(notification);
 }
-
-;// CONCATENATED MODULE: ./src/ui/Notifications/YoutubeDownloadStartedNotification.ts
-
-function notifyYoutubeDownloadStarted(args) {
-    const { title, onCancelClicked } = args;
-    const notification = createBasicNotification({
-        notificationText: `Downloading ${title} ...`,
+function notifyError(prefix, errMessage, options) {
+    const { showInternetInfo, showViewLogBtn = true, additionalBtns = [] } = options || {};
+    global.logError(errMessage);
+    const notificationSentences = [prefix];
+    if (showInternetInfo) {
+        notificationSentences.push('Make sure you are connected to the internet and try again');
+    }
+    notificationSentences.push("Don't hesitate to open an issue on github if the problem remains.");
+    if (showViewLogBtn) {
+        notificationSentences.push(`\n\nFor more information see the logs`);
+    }
+    const notificationText = notificationSentences.join('');
+    const buttons = [];
+    if (showViewLogBtn) {
+        buttons.push({
+            text: 'View Logs',
+            onClick: () => notify_spawnCommandLine(`xdg-open ${notify_get_home_dir()}/.xsession-errors`)
+        });
+    }
+    additionalBtns.forEach((additionalBtn) => buttons.push(additionalBtn));
+    return notify(notificationText, {
+        buttons,
+        transient: false
     });
-    const cancelBtnId = 'cancelBtn';
-    notification.addButton(cancelBtnId, 'Cancel');
-    notification.connect('action-invoked', (actor, id) => {
-        if (id === cancelBtnId)
-            onCancelClicked();
-    });
-    notification.notify();
 }
 
 ;// CONCATENATED MODULE: ./src/services/youtubeDownload/YoutubeDl.ts
@@ -4242,6 +4209,7 @@ function getDownloadPath(stdout) {
 
 ;// CONCATENATED MODULE: ./src/services/youtubeDownload/YtDlp.ts
 const { spawnCommandLineAsyncIO: YtDlp_spawnCommandLineAsyncIO } = imports.misc.util;
+// TODO: there are some redudances with downloadWithYoutubeDl.
 function downloadWithYtDlp(props) {
     const { downloadDir, title, onFinished, onSuccess, onError } = props;
     let hasBeenCancelled = false;
@@ -4285,24 +4253,57 @@ function YtDlp_getDownloadPath(stdout) {
 
 
 
-
-
+const { spawnCommandLine: YoutubeDownloadManager_spawnCommandLine } = imports.misc.util;
 const { get_tmp_dir, get_home_dir: YoutubeDownloadManager_get_home_dir } = imports.gi.GLib;
 const { File, FileCopyFlags } = imports.gi.Gio;
-let downloadingSongs = [];
+const notifyYoutubeDownloadFailed = (props) => {
+    const { youtubeCli, errorMessage } = props;
+    notifyError(`Couldn't download Song from Youtube due to an Error. Make Sure you have the newest version of ${youtubeCli} installed. 
+    \n<b>Important:</b> Don't use apt for the installation but follow the installation instruction given on the Radio Applet Site in the Cinnamon Store instead`, errorMessage, {
+        additionalBtns: [
+            {
+                text: 'View Installation Instruction',
+                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open ${APPLET_SITE} `)
+            }
+        ]
+    });
+};
+const notifyYoutubeDownloadStarted = (title) => {
+    notify(`Downloading ${title} ...`, {
+        buttons: [
+            {
+                text: 'Cancel',
+                onClick: () => cancelDownload(title)
+            }
+        ]
+    });
+};
+const notifyYoutubeDownloadFinished = (props) => {
+    const { downloadPath, fileAlreadyExist = false } = props;
+    notify(fileAlreadyExist ?
+        'Downloaded Song not saved as a file with the same name already exists' :
+        `Download finished. File saved to ${downloadPath}`, {
+        isMarkup: true,
+        transient: false,
+        buttons: [
+            {
+                text: 'Play',
+                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open '${downloadPath}'`)
+            }
+        ]
+    });
+};
+let downloadProcesses = [];
 const downloadingSongsChangedListener = [];
-function downloadSongFromYoutube() {
-    const title = mpvHandler.getCurrentTitle();
+function downloadSongFromYoutube(title) {
     const downloadDir = configs.settingsObject.musicDownloadDir;
     const youtubeCli = configs.settingsObject.youtubeCli;
-    let music_dir_absolut = downloadDir;
-    if (music_dir_absolut.charAt(0) === '~') {
-        music_dir_absolut = downloadDir.replace('~', YoutubeDownloadManager_get_home_dir());
-    }
+    const music_dir_absolut = downloadDir.charAt(0) === '~' ?
+        downloadDir.replace('~', YoutubeDownloadManager_get_home_dir()) : downloadDir;
     if (!title)
         return;
-    const sameSongIsDownloading = downloadingSongs.find(downloadingSong => {
-        return downloadingSong.title === title;
+    const sameSongIsDownloading = downloadProcesses.find(process => {
+        return process.songTitle === title;
     });
     if (sameSongIsDownloading)
         return;
@@ -4310,12 +4311,11 @@ function downloadSongFromYoutube() {
         title,
         downloadDir: get_tmp_dir(),
         onError: (errorMessage, downloadCommand) => {
-            global.logError(`The following error occured at youtube download attempt: ${errorMessage}. The used download Command was: ${downloadCommand}`);
-            notifyYoutubeDownloadFailed({ youtubeCli });
+            notifyYoutubeDownloadFailed({ youtubeCli, errorMessage: `The following error occured at youtube download attempt: ${errorMessage}. The used download Command was: ${downloadCommand}` });
         },
         onFinished: () => {
-            downloadingSongs = downloadingSongs.filter(downloadingSong => downloadingSong.title !== title);
-            downloadingSongsChangedListener.forEach(listener => listener(downloadingSongs));
+            downloadProcesses = downloadProcesses.filter(downloadingSong => downloadingSong.songTitle !== title);
+            downloadingSongsChangedListener.forEach(listener => listener(downloadProcesses));
         },
         onSuccess: (downloadPath) => {
             const tmpFile = File.new_for_path(downloadPath);
@@ -4323,7 +4323,7 @@ function downloadSongFromYoutube() {
             const targetPath = `${music_dir_absolut}/${fileName}`;
             const targetFile = File.parse_name(targetPath);
             if (targetFile.query_exists(null)) {
-                notifyYoutubeDownloadFinished({ downloadPath: targetPath, fileAlreadExist: true });
+                notifyYoutubeDownloadFinished({ downloadPath: targetPath, fileAlreadyExist: true });
                 return;
             }
             try {
@@ -4332,18 +4332,29 @@ function downloadSongFromYoutube() {
                 notifyYoutubeDownloadFinished({ downloadPath: targetPath });
             }
             catch (error) {
-                notifyYoutubeDownloadFailed({ youtubeCli });
-                global.logError('failed to copy from tmp dir. The following error occured', error);
+                const errorMessage = error instanceof imports.gi.GLib.Error ? error.message : 'Unknown Error Type';
+                notifyYoutubeDownloadFailed({ youtubeCli, errorMessage: `Failed to copy download from tmp dir. The following error occurred: ${errorMessage}` });
             }
         }
     };
     const { cancel } = youtubeCli === 'youtube-dl' ?
         downloadWithYoutubeDl(downloadProps) :
         downloadWithYtDlp(downloadProps);
-    notifyYoutubeDownloadStarted({ title, onCancelClicked: () => cancel() });
-    downloadingSongs.push({ title, cancelDownload: cancel });
-    downloadingSongsChangedListener.forEach(listener => listener(downloadingSongs));
+    notifyYoutubeDownloadStarted(title);
+    downloadProcesses.push({ songTitle: title, cancelDownload: cancel });
+    downloadingSongsChangedListener.forEach(listener => listener(downloadProcesses));
 }
+const getCurrentDownloadingSongs = () => {
+    return downloadProcesses.map((downloadingSong) => downloadingSong.songTitle);
+};
+const cancelDownload = (songTitle) => {
+    const downloadProcess = downloadProcesses.find((process) => process.songTitle === songTitle);
+    if (!downloadProcess) {
+        global.logWarning(`can't cancel download for song ${songTitle} as it seems that the song is currently not downloading`);
+        return;
+    }
+    downloadProcess.cancelDownload();
+};
 function addDownloadingSongsChangeListener(callback) {
     downloadingSongsChangedListener.push(callback);
 }
@@ -4374,11 +4385,12 @@ function createRadioAppletTooltip(args) {
             ['<b>Station</b>'],
             [`${markup_escape_text(mpvHandler.getCurrentChannelName() || '', -1)} `],
         ];
-        if (downloadingSongs.length !== 0) {
+        const currentDownloadingSongs = getCurrentDownloadingSongs();
+        if (currentDownloadingSongs.length !== 0) {
             [
                 [],
                 ['<b>Songs downloading:</b>'],
-                ...downloadingSongs.map(downloadingSong => [markup_escape_text(downloadingSong.title, -1)])
+                ...currentDownloadingSongs.map(downloadingSong => [markup_escape_text(downloadingSong, -1)])
             ].forEach(line => lines.push(line));
         }
         const markupTxt = lines.join(`\n`);
@@ -4710,24 +4722,24 @@ function limitString(text, maxCharNumber) {
     return [...text].slice(0, maxCharNumber - 3).join('') + '...';
 }
 
-;// CONCATENATED MODULE: ./src/lib/IconMenuItem.ts
+;// CONCATENATED MODULE: ./src/lib/SimpleMenuItem.ts
 
 
-const { Icon: IconMenuItem_Icon, IconType: IconMenuItem_IconType, Label: IconMenuItem_Label, BoxLayout: IconMenuItem_BoxLayout } = imports.gi.St;
-const { Point: IconMenuItem_Point } = imports.gi.Clutter;
-function createIconMenuItem(args) {
-    const { initialText, maxCharNumber, iconName, onActivated } = args;
-    const icon = new IconMenuItem_Icon({
-        icon_type: IconMenuItem_IconType.SYMBOLIC,
+const { Icon: SimpleMenuItem_Icon, IconType: SimpleMenuItem_IconType, Label: SimpleMenuItem_Label, BoxLayout: SimpleMenuItem_BoxLayout } = imports.gi.St;
+const { Point: SimpleMenuItem_Point } = imports.gi.Clutter;
+function createSimpleMenuItem(args) {
+    const { text: initialText = '', maxCharNumber, iconName, onActivated } = args;
+    const icon = new SimpleMenuItem_Icon({
+        icon_type: SimpleMenuItem_IconType.SYMBOLIC,
         style_class: 'popup-menu-icon',
-        pivot_point: new IconMenuItem_Point({ x: 0.5, y: 0.5 }),
+        pivot_point: new SimpleMenuItem_Point({ x: 0.5, y: 0.5 }),
         icon_name: iconName || '',
         visible: !!iconName
     });
-    const label = new IconMenuItem_Label({
-        text: limitString(initialText || '', maxCharNumber)
+    const label = new SimpleMenuItem_Label({
+        text: maxCharNumber ? limitString(initialText, maxCharNumber) : initialText
     });
-    const container = new IconMenuItem_BoxLayout({
+    const container = new SimpleMenuItem_BoxLayout({
         style_class: 'popup-menu-item'
     });
     container.add_child(icon);
@@ -4742,15 +4754,17 @@ function createIconMenuItem(args) {
         icon.visible = true;
     }
     function setText(text) {
-        label.set_text(limitString(text || ' ', maxCharNumber));
+        const visibleText = maxCharNumber ? limitString(text, maxCharNumber) : text;
+        label.set_text(visibleText);
     }
-    onActivated && createActivWidget({ widget: container, onActivated });
-    return {
+    const menuItem = {
         actor: container,
         setIconName,
         setText,
         getIcon: () => icon
     };
+    onActivated && createActivWidget({ widget: container, onActivated: () => onActivated(menuItem) });
+    return menuItem;
 }
 
 ;// CONCATENATED MODULE: ./src/ui/InfoSection.ts
@@ -4760,14 +4774,14 @@ function createIconMenuItem(args) {
 const { BoxLayout: InfoSection_BoxLayout } = imports.gi.St;
 function createInfoSection() {
     const { addChannelChangeHandler, addTitleChangeHandler, getCurrentChannelName, getCurrentTitle } = mpvHandler;
-    const channelInfoItem = createIconMenuItem({
+    const channelInfoItem = createSimpleMenuItem({
         iconName: RADIO_SYMBOLIC_ICON_NAME,
-        initialText: getCurrentChannelName(),
+        text: getCurrentChannelName(),
         maxCharNumber: MAX_STRING_LENGTH
     });
-    const songInfoItem = createIconMenuItem({
+    const songInfoItem = createSimpleMenuItem({
         iconName: SONG_INFO_ICON_NAME,
-        initialText: getCurrentTitle(),
+        text: getCurrentTitle(),
         maxCharNumber: MAX_STRING_LENGTH
     });
     const infoSection = new InfoSection_BoxLayout({
@@ -5080,9 +5094,9 @@ function createChannelMenuItem(args) {
         ["Loading", LOADING_ICON_NAME],
         ["Stopped", null]
     ]);
-    const iconMenuItem = createIconMenuItem({
+    const iconMenuItem = createSimpleMenuItem({
         maxCharNumber: MAX_STRING_LENGTH,
-        initialText: channelName,
+        text: channelName,
         onActivated: () => {
             onActivated(channelName);
         }
@@ -5267,26 +5281,26 @@ function createStopBtn() {
 
 
 function createDownloadButton() {
-    const handleBtnClicked = () => {
+    const getState = () => {
         const currentTitle = mpvHandler.getCurrentTitle();
+        const currentTitleIsDownloading = getCurrentDownloadingSongs().some(downloadingSong => downloadingSong === currentTitle);
+        return { currentTitle, currentTitleIsDownloading };
+    };
+    const handleBtnClicked = () => {
+        const { currentTitleIsDownloading, currentTitle } = getState();
         if (!currentTitle)
-            return;
-        const download = getDownloadOfTitle(currentTitle);
-        download ? download.cancelDownload() : downloadSongFromYoutube();
+            return; // this should actually never happe
+        currentTitleIsDownloading ? cancelDownload(currentTitle) : downloadSongFromYoutube(currentTitle);
     };
     const downloadButton = createControlBtn({
         onClick: handleBtnClicked
     });
     const setRefreshBtn = () => {
-        const currentTitle = mpvHandler.getCurrentTitle();
-        const currentTitleIsDownloading = !!getDownloadOfTitle(currentTitle);
+        const { currentTitle, currentTitleIsDownloading } = getState();
         const iconName = currentTitleIsDownloading ? CANCEL_ICON_NAME : DOWNLOAD_ICON_NAME;
         const tooltipTxt = currentTitleIsDownloading ? `Cancel downloading ${currentTitle}` : "Download current song from Youtube";
         downloadButton.icon.set_icon_name(iconName);
         downloadButton.tooltip.set_text(tooltipTxt);
-    };
-    const getDownloadOfTitle = (title) => {
-        return downloadingSongs.find(downloadingSong => downloadingSong.title === title);
     };
     setRefreshBtn();
     addDownloadingSongsChangeListener(setRefreshBtn);
@@ -5354,18 +5368,6 @@ const spawnCommandLinePromise = function (command) {
     });
 };
 
-;// CONCATENATED MODULE: ./src/ui/Notifications/GenericNotification.ts
-
-function notify(args) {
-    const { text, isMarkup = false, transient = true } = args;
-    const notification = createBasicNotification({
-        notificationText: text,
-        isMarkup,
-        transient
-    });
-    notification.notify();
-}
-
 ;// CONCATENATED MODULE: ./src/services/mpv/CheckInstallation.ts
 
 
@@ -5377,7 +5379,7 @@ async function installMpvWithMpris() {
     !mprisPluginDownloaded && await downloadMrisPluginInteractive();
     if (!mpvInstalled) {
         const notificationText = `Please ${mprisPluginDownloaded ? '' : 'also'} install the mpv package.`;
-        notify({ text: notificationText });
+        notify(notificationText);
         await installMpvInteractive();
     }
 }
@@ -5431,7 +5433,168 @@ function createYoutubeDownloadIcon() {
     return icon;
 }
 
+;// CONCATENATED MODULE: ./src/lib/HttpHandler.ts
+const { Message, SessionAsync } = imports.gi.Soup;
+const httpSession = new SessionAsync();
+function isHttpError(x) {
+    return typeof x.reason_phrase === "string";
+}
+function checkForHttpError(message) {
+    var _a;
+    const code = (message === null || message === void 0 ? void 0 : message.status_code) | 0;
+    const reason_phrase = (message === null || message === void 0 ? void 0 : message.reason_phrase) || "no network response";
+    let errMessage;
+    if (code < 100) {
+        errMessage = "no network response";
+    }
+    else if (code < 200 || code > 300) {
+        errMessage = "bad status code";
+    }
+    else if (!((_a = message.response_body) === null || _a === void 0 ? void 0 : _a.data)) {
+        errMessage = "no response body";
+    }
+    return errMessage
+        ? {
+            code,
+            reason_phrase,
+            message: errMessage,
+        }
+        : false;
+}
+function makeJsonHttpRequest(args) {
+    const { url, method = "GET", onErr, onSuccess, onSettled, headers, } = args;
+    const uri = url;
+    // const uri = queryParams ? `${url}?${stringify(queryParams)}` : url
+    const message = Message.new(method, uri);
+    if (!message) {
+        throw new Error(`Message Object couldn't be created`);
+    }
+    headers &&
+        Object.entries(headers).forEach(([key, value]) => {
+            message.request_headers.append(key, value);
+        });
+    httpSession.queue_message(message, (session, msgResponse) => {
+        onSettled === null || onSettled === void 0 ? void 0 : onSettled();
+        const error = checkForHttpError(msgResponse);
+        if (error) {
+            onErr(error);
+            return;
+        }
+        // TODO: We should actually check if this is really of type T1
+        const data = JSON.parse(msgResponse.response_body.data);
+        onSuccess(data);
+    });
+}
+
+;// CONCATENATED MODULE: ./src/ui/RadioPopupMenu/UpdateStationsMenuItem.ts
+
+
+
+const { File: UpdateStationsMenuItem_File, FileCreateFlags } = imports.gi.Gio;
+const { Bytes } = imports.gi.GLib;
+const saveStations = (stationsUnfiltered) => {
+    const filteredStations = stationsUnfiltered.flatMap(({ name, url }, index) => {
+        const isDuplicate = stationsUnfiltered.findIndex((val) => val.name === name && val.url === url) !== index;
+        if (isDuplicate)
+            return [];
+        if (name.length > 200 || url.length > 200) {
+            // some stations have unnormal long names/urls - probably due to some encoding issue on radio browser api side or so. 
+            return [];
+        }
+        return [[name.trim(), url.trim()]];
+    })
+        // We need to sort our self - even though they should already be sorted - because some stations are wrongly shown first due to leading spaces
+        .sort((a, b) => a[0].localeCompare(b[0]));
+    const file = UpdateStationsMenuItem_File.new_for_path(`${__meta.path}/allStations.json`);
+    if (!file.query_exists(null)) {
+        file.create(FileCreateFlags.NONE, null);
+    }
+    file.replace_contents_bytes_async(new Bytes(JSON.stringify(filteredStations)), null, false, FileCreateFlags.REPLACE_DESTINATION, null, (file, result) => {
+        notify('Stations updated successfully');
+    });
+};
+function createUpdateStationsMenuItem() {
+    const defaultText = 'Update Radio Stationlist';
+    let isLoading = false;
+    const menuItem = createSimpleMenuItem({
+        text: defaultText,
+        onActivated: async (self) => {
+            if (isLoading)
+                return;
+            isLoading = true;
+            self.setText('Updating Radio stations...');
+            notify('Upating Radio stations... \n\nThis can take several minutes!');
+            makeJsonHttpRequest({
+                url: "http://de1.api.radio-browser.info/json/stations",
+                onSuccess: (resp) => saveStations(resp),
+                onErr: (err) => {
+                    notifyError(`Couldn't update the station list due to an error`, err.reason_phrase, { showInternetInfo: true });
+                },
+                onSettled: () => {
+                    self.setText(defaultText);
+                    isLoading = false;
+                }
+            });
+        },
+    });
+    return menuItem.actor;
+}
+
+;// CONCATENATED MODULE: ./src/ui/RadioContextMenu.ts
+
+
+
+
+const { spawnCommandLineAsyncIO: RadioContextMenu_spawnCommandLineAsyncIO } = imports.misc.util;
+const { ConfirmDialog } = imports.ui.modalDialog;
+const AppletManager = imports.ui.appletManager;
+const showRemoveAppletDialog = () => {
+    const dialog = new ConfirmDialog(`Are you sure you want to remove '${__meta.name}'`, () => AppletManager['_removeAppletFromPanel'](__meta.uuid, __meta.instanceId));
+    dialog.open();
+};
+const spawnCommandLineWithErrorLogging = (command) => {
+    RadioContextMenu_spawnCommandLineAsyncIO(command, (stdout, stderr) => {
+        if (stderr) {
+            global.logError(`Failed executing: ${command}. The following error occured: ${stderr}`);
+        }
+    });
+};
+function createRadioContextMenu(args) {
+    const contextMenu = createPopupMenu(args);
+    const defaultMenuArgs = [
+        {
+            iconName: 'dialog-question',
+            text: 'About...',
+            onActivated: () => {
+                spawnCommandLineWithErrorLogging(`xlet-about-dialog applets ${__meta.uuid}`);
+            }
+        },
+        {
+            iconName: 'system-run',
+            text: 'Configure...',
+            onActivated: () => {
+                spawnCommandLineWithErrorLogging(`xlet-settings applet ${__meta.uuid} ${__meta.instanceId} -t 0`);
+            }
+        }, {
+            iconName: 'edit-delete',
+            text: `Remove '${__meta.name}`,
+            onActivated: showRemoveAppletDialog
+        }
+    ];
+    contextMenu.add_child(createUpdateStationsMenuItem());
+    contextMenu.add(createSeparatorMenuItem());
+    defaultMenuArgs.forEach((menuArg) => {
+        const menuItem = createSimpleMenuItem(Object.assign(Object.assign({}, menuArg), { onActivated: (self) => {
+                contextMenu.close();
+                menuArg.onActivated && (menuArg === null || menuArg === void 0 ? void 0 : menuArg.onActivated(self));
+            } }));
+        contextMenu.add_child(menuItem.actor);
+    });
+    return contextMenu;
+}
+
 ;// CONCATENATED MODULE: ./src/ui/RadioApplet/RadioAppletContainer.ts
+
 
 
 
@@ -5450,7 +5613,10 @@ function createRadioAppletContainer() {
         onMoved: () => mpvHandler.deactivateAllListener(),
         onRemoved: handleAppletRemoved,
         onClick: handleClick,
-        onRightClick: () => popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.close(),
+        onRightClick: () => {
+            popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.close();
+            contextMenu === null || contextMenu === void 0 ? void 0 : contextMenu.toggle();
+        },
         onScroll: handleScroll
     });
     [createRadioAppletIcon(), createYoutubeDownloadIcon(), createRadioAppletLabel()].forEach(widget => {
@@ -5458,6 +5624,7 @@ function createRadioAppletContainer() {
     });
     const tooltip = createRadioAppletTooltip({ appletContainer });
     const popupMenu = createRadioPopupMenu({ launcher: appletContainer.actor });
+    const contextMenu = createRadioContextMenu({ launcher: appletContainer.actor });
     popupMenu.connect('notify::visible', () => {
         popupMenu.visible && tooltip.hide();
     });
@@ -5470,6 +5637,7 @@ function createRadioAppletContainer() {
         mpvHandler.increaseDecreaseVolume(volumeChange);
     }
     async function handleClick() {
+        contextMenu === null || contextMenu === void 0 ? void 0 : contextMenu.close();
         if (installationInProgress)
             return;
         try {
@@ -5479,7 +5647,7 @@ function createRadioAppletContainer() {
         }
         catch (error) {
             const notificationText = `Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin is located at ${MPRIS_PLUGIN_PATH} and correctly compiled for your environment. Refer to ${APPLET_SITE} (section Known Issues)`;
-            notify({ text: notificationText, transient: false });
+            notify(notificationText, { transient: false });
             global.logError(error);
         }
         finally {

@@ -16,7 +16,7 @@ function search_browser(path, wmClass, pattern) {
         }
         const appInfo = foundApps.get_app_info();
 
-        const full_path = GLib.get_user_config_dir() + '/' + path.join('/');
+        const full_path = GLib.build_filenamev([GLib.get_user_config_dir()].concat(path));
         if (!GLib.file_test(full_path + '/History', GLib.FileTest.EXISTS)) {
             resolve([]);
             return;
@@ -35,6 +35,8 @@ function search_browser(path, wmClass, pattern) {
                     result.activate = () => Util.spawn(['xdg-open', result.uri]);
                 });
                 resolve(results);
+            } else {
+                resolve([]);
             }
         });
     });

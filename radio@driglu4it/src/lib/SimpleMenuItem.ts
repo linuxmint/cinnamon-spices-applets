@@ -4,17 +4,19 @@ import { limitString } from "../functions/limitString"
 const { Icon, IconType, Label, BoxLayout } = imports.gi.St
 const { Point } = imports.gi.Clutter
 
-interface Arguments {
-    initialText?: string | undefined,
+type SimpleMenuItem = ReturnType<typeof createSimpleMenuItem>
+
+export interface SimpleMenuItemArguments {
+    text?: string | undefined,
     iconName?: string,
-    onActivated?: () => void
-    maxCharNumber: number,
+    onActivated?: (self: SimpleMenuItem) => void
+    maxCharNumber?: number,
 }
 
-export function createIconMenuItem(args: Arguments) {
+export function createSimpleMenuItem(args: SimpleMenuItemArguments) {
 
     const {
-        initialText,
+        text: initialText = '',
         maxCharNumber,
         iconName,
         onActivated
@@ -23,13 +25,13 @@ export function createIconMenuItem(args: Arguments) {
     const icon = new Icon({
         icon_type: IconType.SYMBOLIC,
         style_class: 'popup-menu-icon',
-        pivot_point: new Point({ x: 0.5, y: 0.5 }), 
-        icon_name: iconName || '', 
+        pivot_point: new Point({ x: 0.5, y: 0.5 }),
+        icon_name: iconName || '',
         visible: !!iconName
     })
 
     const label = new Label({
-        text: limitString(initialText || '', maxCharNumber) 
+        text: maxCharNumber ? limitString(initialText, maxCharNumber) : initialText
     })
 
     const container = new BoxLayout({
@@ -49,21 +51,24 @@ export function createIconMenuItem(args: Arguments) {
 
         icon.icon_name = name
         icon.visible = true
- 
+
     }
 
     function setText(text: string) {
-        label.set_text(limitString(text || ' ', maxCharNumber))
+        const visibleText = maxCharNumber ? limitString(text, maxCharNumber) : text
+        label.set_text(visibleText)
     }
 
-    onActivated && createActivWidget({ widget: container, onActivated });
-
-    return {
+    const menuItem = {
         actor: container,
         setIconName,
         setText,
         getIcon: () => icon
     }
+
+    onActivated && createActivWidget({ widget: container, onActivated: () => onActivated(menuItem) });
+
+    return menuItem
 
 
 }
