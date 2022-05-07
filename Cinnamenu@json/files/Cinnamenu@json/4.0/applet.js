@@ -1013,7 +1013,7 @@ class CinnamenuApplet extends TextIconApplet {
     _doSearch(pattern_raw, thisSearchId) {
         //this fuction has been called asynchronously meaning that a keypress may have changed the
         //search query before this function is called. Check that this search is still valid.
-        if (thisSearchId !== this.currentSearchId) {
+        if (!this.searchActive || thisSearchId !== this.currentSearchId) {
             return;
         }
         //if (!text || !text.trim()) return;
