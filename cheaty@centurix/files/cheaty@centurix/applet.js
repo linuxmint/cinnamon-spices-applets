@@ -142,6 +142,7 @@ DescriptionMenuItem.prototype =
 
 
 function Cheaty(metadata, orientation, panelHeight, instanceId) {
+	this.instance_id = instanceId;
 	this.settings = new Settings.AppletSettings(this, UUID, instanceId);
 	this._init(orientation, panelHeight, instanceId);
 }
@@ -169,6 +170,9 @@ Cheaty.prototype = {
 			this.onCheatsheetFolderUpdate, 
 			null
 		);
+		this.settings.bind("keyOpen", "keyOpen", this._setKeybinding);
+		this._setKeybinding();
+
 
 		this._msgsrc = new MessageTray.SystemNotificationSource("Cheaty");
 		Main.messageTray.add(this._msgsrc);
@@ -223,6 +227,18 @@ Cheaty.prototype = {
 		}
 	},
 
+	_setKeybinding: function () {
+		Main.keybindingManager.addHotKey("cheaty-show-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
+	},
+
+	on_applet_removed_from_panel: function () {
+		Main.keybindingManager.removeHotKey("cheaty-show-" + this.instance_id);
+	},
+
+	_openMenu: function () {
+		this.menu.toggle();
+	},
+
 	onCheatsheetFolderUpdate: function() {
 	},
 
@@ -256,7 +272,7 @@ Cheaty.prototype = {
 	},
 
 	on_applet_clicked: function(event) {
-		this.menu.toggle();
+		this._openMenu();
 	}
 }
 
