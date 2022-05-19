@@ -1,5 +1,8 @@
 {
-    "uuid": "ptt@thbemme",
-    "name": "PTT Applet",
-    "description": "Push-to-talk applet and microphone indicator"
+	"uuid": "ptt@thbemme",
+	"name": "PTT Applet",
+	"version": "0.2",
+	"description": "Push-to-talk applet and microphone indicator",
+	"last-edited": 1652986404
+
 }
