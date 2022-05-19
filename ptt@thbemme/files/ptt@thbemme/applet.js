@@ -53,7 +53,7 @@ MyApplet.prototype = {
         this.preserve_state = this.is_muted;
         this.set_icon_mode();
         this.set_applet_icon_name(this.icon_mic_on);
-        this.set_applet_tooltip(_('Click or press ' + this.keybinding_ptt_toggle + ' to activate PTT'));
+        this.set_applet_tooltip(_('Click or press ' + this.keybinding_ptt_toggle.replace(/[^\w]/g, "") + ' to activate PTT'));
         this.keybindset_ptt_toggle();
         global.log("PTT Applet: Initializing ptt loop");
         this.refresh_loop();
@@ -229,7 +229,7 @@ MyApplet.prototype = {
         if (this.active) {
             this.active = false;
             this.keybindremove_ptt_activate();
-            this.set_applet_tooltip(_('Click or press ' + this.keybinding_ptt_toggle + ' to activate PTT'));
+            this.set_applet_tooltip(_('Click or press ' + this.keybinding_ptt_toggle.replace(/[^\w]/g, "") + ' to activate PTT'));
             global.log("PTT Applet: Disable ptt and remove keybind");
             if (this.preserve_state) {
                 this.set_nocap();
@@ -241,7 +241,7 @@ MyApplet.prototype = {
             this.preserve_state = this.is_muted;
             this.active = true;
             this.keybindset_ptt_activate();
-            this.set_applet_tooltip(_('PTT is active, ' + this.keybinding_ptt_key + ' to talk'));
+            this.set_applet_tooltip(_('PTT is active, ' + this.keybinding_ptt_key.replace(/[^\w]/g, "") + ' to talk'));
             this.set_nocap();
             global.log("PTT Applet: Enable ptt and add keybind");
         }
