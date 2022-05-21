@@ -5,12 +5,12 @@
       "page1": {
         "type": "page",
         "title": "Settings",
-        "sections": ["section0", "section1"]
+        "sections": ["section0", "section1", "section2"]
       },
       "page2": {
         "type": "page",
         "title": "Blacklist",
-        "sections": ["section2"]
+        "sections": ["section3"]
       },
 
     "section0": {
@@ -26,6 +26,12 @@
     },
 
     "section2": {
+      "type": "section",
+      "title": "Device to display",
+      "keys": ["override-enable", "override-entry", "override-select"]
+    },
+
+    "section3": {
       "type": "section",
       "title": "Disable monitoring for selected devices. You can use model or serial of the device.\nComment starts with '#'",
       "keys": ["blacklist", "blacklist-apply"]
@@ -80,5 +86,25 @@
     "callback": "_on_settings_change",
     "description": "Apply",
     "tooltip": "Apply changes"
+  },
+
+  "override-enable": {
+    "type": "switch",
+    "default": false,
+    "description": "Manually select main device to display (instead of the one with lowest battery)"
+  },
+
+  "override-entry": {
+    "type": "entry",
+    "default": "",
+    "dependency":"override-enable",
+    "description": "Selected device:"
+  },
+
+  "override-select": {
+    "type": "button",
+    "callback": "_on_override_select",
+    "dependency":"override-enable",
+    "description": "Select device to display"
   }
 }

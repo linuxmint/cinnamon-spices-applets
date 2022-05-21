@@ -46,6 +46,7 @@ BtBattery.prototype = {
         });
 
         this.dbus_map = new Map();
+        this.monitored_devs = new Array();
     },
 
     _init: function(metadata, orientation, panel_height, instance_id) {
@@ -67,6 +68,8 @@ BtBattery.prototype = {
         this.settings.bind("enable-others", "enable_others", this._on_settings_change, null);
         this.settings.bind("applet-icon", "applet_icon", this._on_settings_change, null);
         this.settings.bind("blacklist", "blacklist", null, null);
+        this.settings.bind("override-entry", "override_entry", null, null);
+        this.settings.bind("override-enable", "override_enabled", this.on_override_enable, null);
 
         this._init_dbus();
 
@@ -75,11 +78,60 @@ BtBattery.prototype = {
 
     _on_settings_change: function() {
         this.setup();
+        this.check_override_device();
+    },
+
+    on_override_enable: function() {
+        this.check_override_device();
+        this.setup();
+    },
+
+    check_override_device: function() {
+        if (!this.override_enabled) {
+            return;
+        }
+
+        if (!this.monitored_devs.includes(this.override_entry)) {
+            // entry in settings page seems to be refreshing only when external process returns after a while
+            Util.spawn_async(['/usr/bin/sleep', "2"], Lang.bind(this, function(stdout){
+                this.override_entry = this.monitored_devs.length > 0 ? this.monitored_devs[0] : "(no device available)";
+                this.setup(false);
+            }));
+        }
+    },
+
+    _on_override_select: function() {
+        let args = new Array();
+        args.push('/usr/bin/cjs');
+        args.push(this.applet_path + '/override-select.js');
+
+        if (this.monitored_devs.length > 0) {
+            for (const dev of this.monitored_devs) {
+                args.push(dev);
+            }
+            // push active item index as last arg
+            if (this.monitored_devs.includes(this.override_entry)) {
+                args.push(this.monitored_devs.indexOf(this.override_entry).toString());
+            } else {
+                args.push("0");
+            }
+        } else {
+            args.push('(no device available)');
+        }
+
+        Util.spawn_async(args, Lang.bind(this, function(stdout) {
+            const trimmed_out = stdout.trim();
+
+            if (trimmed_out != "") {
+                this.override_entry = trimmed_out;
+                this.setup();
+            }
+        }));
     },
 
     on_applet_clicked: function() {
         this.setup();
-        if (this.added_count > 0) {
+        if (this.monitored_devs.length > 0) {
             this.menu.toggle();
         }
     },
@@ -88,11 +140,14 @@ BtBattery.prototype = {
         this.settings.finalize();
     },
 
-    setup: function() {
+    setup: function(check_override = true) {
         this.menu.removeAll();
         this._contentSection = new PopupMenu.PopupMenuSection();
         this.menu.addMenuItem(this._contentSection);
 
+        if (check_override) {
+            this.check_override_device();
+        }
         this.setup_dbus();
     },
 
@@ -118,6 +173,8 @@ BtBattery.prototype = {
     },
 
     setup_dbus: function() {
+        this.monitored_devs = new Array();
+
         for (let [ident, props] of this.dbus_map) {
             this.dbus_map.set(ident, {device: props.device, proxy: props.proxy, updated: false});
         }
@@ -186,7 +243,6 @@ BtBattery.prototype = {
         let bat_min_perc = "100";
         let bat_min_type = UPower.DeviceKind.UNKNOWN;
         let bat_min_name = "unknown";
-        this.added_count = 0;
 
         for (let [ident, props] of this.dbus_map) {
             let dev = props.device;
@@ -213,16 +269,25 @@ BtBattery.prototype = {
             ii.addActor(perc_label, {align: St.Align.END});
             this.menu.addMenuItem(ii);
 
+            this.monitored_devs.push(name);
+
             if (perc <= bat_min_perc) {
                 bat_min_perc = perc;
                 bat_min_name = name;
                 bat_min_type = type;
             }
-
-            this.added_count += 1;
         }
 
-        if (this.added_count > 0) {
+        if (this.override_enabled) {
+            if (this.monitored_devs.length > 0 && this.monitored_devs.includes(this.override_entry) && this.dbus_map.has(this.override_entry)) {
+                let d = this.dbus_map.get(this.override_entry);
+                bat_min_name = this.override_entry;
+                bat_min_perc = d.device.percentage;
+                bat_min_type = d.device.kind;
+            }
+        }
+
+        if (this.monitored_devs.length > 0) {
             this.set_applet_label(bat_min_perc.toString() + "%");
             this.set_applet_icon_name(this.get_device_batt_icon(bat_min_type, bat_min_perc));
             this.set_applet_tooltip(bat_min_name.toString());
