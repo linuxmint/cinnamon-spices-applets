@@ -57,8 +57,7 @@
   },
 
   "applet-icon": {
-    "type": "radiogroup",
-    "default": true,
+    "type": "combobox",
     "description": "Display",
     "default": "icon-text",
     "options": {
