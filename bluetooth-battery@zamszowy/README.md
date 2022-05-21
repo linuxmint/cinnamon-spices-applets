@@ -8,6 +8,12 @@ Device with lowest battery is displayed in panel. When clicked, it displays list
 You can disable monitoring (it also disables blacklist configuration) of keyboards, mice, headphones or all other devices.  
 You can also choose to display in applet icon only, text only or icon and text.
 
+## Notifications
+Notifications are enabled by default and the applet will emit notification when battery level of any of the monitored devices will drop below configured level.  
+Another notification with "critical" urgency will be emitted when battery level will drop even further below another configured level.
+
+You can also rely on notifications alone and disable applet icon and text entirely, but configure it to show only when battery drops below configured warning/critical level.
+
 ## Blacklist
 You can blacklist any device detected by the applet.  
 All detected devices are automatically added to blacklist (common devices like mice and keyboards are added just as comments, other are disabled right away).
