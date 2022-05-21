@@ -61,12 +61,12 @@ BtBattery.prototype = {
         this.menuManager.addMenu(this.menu);
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "enable-keyboards", "enable_keyboards", this._on_settings_change, null);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "enable-mice", "enable_mice", this._on_settings_change, null);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "enable-headphones", "enable_headphones", this._on_settings_change, null);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "enable-others", "enable_others", this._on_settings_change, null);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "applet-icon", "applet_icon", this._on_settings_change, null);
-        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "blacklist", "blacklist", null, null);
+        this.settings.bind("enable-keyboards", "enable_keyboards", this._on_settings_change, null);
+        this.settings.bind("enable-mice", "enable_mice", this._on_settings_change, null);
+        this.settings.bind("enable-headphones", "enable_headphones", this._on_settings_change, null);
+        this.settings.bind("enable-others", "enable_others", this._on_settings_change, null);
+        this.settings.bind("applet-icon", "applet_icon", this._on_settings_change, null);
+        this.settings.bind("blacklist", "blacklist", null, null);
 
         this._init_dbus();
 
@@ -82,6 +82,10 @@ BtBattery.prototype = {
         if (this.added_count > 0) {
             this.menu.toggle();
         }
+    },
+
+    on_applet_removed: function() {
+        this.settings.finalize();
     },
 
     setup: function() {
