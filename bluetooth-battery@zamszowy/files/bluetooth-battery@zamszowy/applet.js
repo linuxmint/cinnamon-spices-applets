@@ -186,7 +186,6 @@ BtBattery.prototype = {
 
         for (let [ident, props] of this.dbus_map) {
             let dev = props.device;
-            dev.refresh_sync(null);
 
             if (dev.battery_level != UPower.DeviceLevel.NONE) {
                 continue;
