@@ -16,6 +16,8 @@ const xml ='<node>\
 </node>';
 const {Gio, UPowerGlib: UPower} = imports.gi;
 const PowerManagerProxy = Gio.DBusProxy.makeProxyWrapper(xml);
+const { messageTray } = imports.ui.main;
+const { SystemNotificationSource, Notification, Urgency } = imports.ui.messageTray;
 
 var dbusCon;
 
@@ -46,6 +48,21 @@ BtBattery.prototype = {
         });
 
         this.dbus_map = new Map();
+        this.monitored_devs = new Array();
+    },
+
+    _init_notifications: function() {
+        this.MessageSource = new SystemNotificationSource("Bluetooth Battery");
+        messageTray.add(this.MessageSource);
+
+        this.settings.bind("notification-warn-enable", "notification_warn_enable", this._on_settings_change, null);
+        this.settings.bind("notification-warn-level", "notification_warn_level", null, null);
+        this.settings.bind("notification-crit-enable", "notification_crit_enable", this._on_settings_change, null);
+        this.settings.bind("notification-crit-level", "notification_crit_level", null, null);
+        this.settings.bind("notification-multiple", "notification_multiple", null, null);
+        this.settings.bind("notification-applet-icon", "notification_applet_icon", this._on_settings_change, null);
+
+        this.notified_devices = new Map();
     },
 
     _init: function(metadata, orientation, panel_height, instance_id) {
@@ -61,34 +78,114 @@ BtBattery.prototype = {
         this.menuManager.addMenu(this.menu);
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "enable-keyboards", "enable_keyboards", this._on_settings_change, null);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "enable-mice", "enable_mice", this._on_settings_change, null);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "enable-headphones", "enable_headphones", this._on_settings_change, null);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "enable-others", "enable_others", this._on_settings_change, null);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "applet-icon", "applet_icon", this._on_settings_change, null);
-        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "blacklist", "blacklist", null, null);
+        this.settings.bind("enable-keyboards", "enable_keyboards", this._on_settings_change, null);
+        this.settings.bind("enable-mice", "enable_mice", this._on_settings_change, null);
+        this.settings.bind("enable-headphones", "enable_headphones", this._on_settings_change, null);
+        this.settings.bind("enable-others", "enable_others", this._on_settings_change, null);
+        this.settings.bind("applet-icon", "applet_icon", this._on_settings_change, null);
+        this.settings.bind("blacklist", "blacklist", null, null);
+        this.settings.bind("override-entry", "override_entry", null, null);
+        this.settings.bind("override-enable", "override_enabled", this.on_override_enable, null);
 
         this._init_dbus();
+        this._init_notifications();
 
         this.setup();
     },
 
     _on_settings_change: function() {
         this.setup();
+        this.check_override_device();
+    },
+
+    on_override_enable: function() {
+        this.check_override_device();
+        this.setup();
+    },
+
+    check_override_device: function() {
+        if (!this.override_enabled) {
+            return;
+        }
+
+        if (!this.monitored_devs.includes(this.override_entry)) {
+            // entry in settings page seems to be refreshing only when external process returns after a while
+            Util.spawn_async(['/usr/bin/sleep', "2"], Lang.bind(this, function(stdout){
+                this.override_entry = this.monitored_devs.length > 0 ? this.monitored_devs[0] : "(no device available)";
+                this.setup(false);
+            }));
+        }
+    },
+
+    _on_override_select: function() {
+        let args = new Array();
+        args.push('/usr/bin/cjs');
+        args.push(this.applet_path + '/override-select.js');
+
+        if (this.monitored_devs.length > 0) {
+            for (const dev of this.monitored_devs) {
+                args.push(dev);
+            }
+            // push active item index as last arg
+            if (this.monitored_devs.includes(this.override_entry)) {
+                args.push(this.monitored_devs.indexOf(this.override_entry).toString());
+            } else {
+                args.push("0");
+            }
+        } else {
+            args.push('(no device available)');
+        }
+
+        Util.spawn_async(args, Lang.bind(this, function(stdout) {
+            const trimmed_out = stdout.trim();
+
+            if (trimmed_out != "") {
+                this.override_entry = trimmed_out;
+                this.setup();
+            }
+        }));
+    },
+
+    _on_notification_warn_demo: function() {
+        this.notify("Test notification", "Battery dropped below " + this.notification_warn_level + "%",
+            this.get_device_batt_icon(UPower.DeviceKind.KEYBOARD, this.notification_warn_level), Urgency.NORMAL);
+    },
+
+    _on_notification_crit_demo: function() {
+        this.notify("Test notification", "Battery dropped below " + this.notification_crit_level + "%",
+            this.get_device_batt_icon(UPower.DeviceKind.MOUSE, this.notification_crit_level), Urgency.CRITICAL);
     },
 
     on_applet_clicked: function() {
         this.setup();
-        if (this.added_count > 0) {
+        if (this.monitored_devs.length > 0) {
             this.menu.toggle();
         }
     },
 
-    setup: function() {
+    on_applet_removed: function() {
+        this.settings.finalize();
+    },
+
+    notify: function(title, message, icon_name, urgency = Urgency.NORMAL) {
+        let icon = new St.Icon({ icon_name: icon_name,
+        icon_type: St.IconType.FULLCOLOR,
+        icon_size: 16 });
+
+        const notification = new Notification(this.MessageSource, title, message, {icon: icon });
+        notification.setTransient(false);
+        notification.setUrgency(urgency);
+        this.MessageSource.notify(notification);
+    },
+
+    setup: function(check_override = true) {
         this.menu.removeAll();
         this._contentSection = new PopupMenu.PopupMenuSection();
         this.menu.addMenuItem(this._contentSection);
 
+        if (check_override) {
+            this.check_override_device();
+        }
         this.setup_dbus();
     },
 
@@ -113,7 +210,37 @@ BtBattery.prototype = {
         return containes;
     },
 
+    notify_if_needed: function() {
+        if (!this.notification_warn_enable && !this.notification_crit_enable) {
+            return;
+        }
+
+        for (const dev of this.monitored_devs) {
+            if (!this.dbus_map.has(dev)) {
+                continue;
+            }
+
+            const device = this.dbus_map.get(dev).device;
+            let notified_warn = this.notified_devices.has(dev) ? this.notified_devices.get(dev).warn : false;
+            let notified_crit = this.notified_devices.has(dev) ? this.notified_devices.get(dev).crit : false;
+
+            if (this.notification_warn_enable && !notified_warn && device.percentage < this.notification_warn_level) {
+                this.notify(dev + " (" + device.percentage + "%)", "Battery dropped below " + this.notification_warn_level + "%",
+                    this.get_device_batt_icon(device.kind, device.percentage));
+                notified_warn = !this.notification_multiple;
+            }
+            if (this.notification_crit_enable && !notified_crit && device.percentage < this.notification_crit_level) {
+                this.notify(dev + " (" + device.percentage + "%)", "Battery dropped below " + this.notification_crit_level + "%",
+                    this.get_device_batt_icon(device.kind, device.percentage));
+                notified_crit = !this.notification_multiple;
+            }
+            this.notified_devices.set(dev, {warn: notified_warn, crit: notified_crit});
+        }
+    },
+
     setup_dbus: function() {
+        this.monitored_devs = new Array();
+
         for (let [ident, props] of this.dbus_map) {
             this.dbus_map.set(ident, {device: props.device, proxy: props.proxy, updated: false});
         }
@@ -179,14 +306,8 @@ BtBattery.prototype = {
             this.set_applet_enabled(true);
         }
 
-        let bat_min_perc = "100";
-        let bat_min_type = UPower.DeviceKind.UNKNOWN;
-        let bat_min_name = "unknown";
-        this.added_count = 0;
-
         for (let [ident, props] of this.dbus_map) {
             let dev = props.device;
-            dev.refresh_sync(null);
 
             if (dev.battery_level != UPower.DeviceLevel.NONE) {
                 continue;
@@ -210,32 +331,69 @@ BtBattery.prototype = {
             ii.addActor(perc_label, {align: St.Align.END});
             this.menu.addMenuItem(ii);
 
-            if (perc <= bat_min_perc) {
-                bat_min_perc = perc;
-                bat_min_name = name;
-                bat_min_type = type;
-            }
-
-            this.added_count += 1;
+            this.monitored_devs.push(name);
         }
 
-        if (this.added_count > 0) {
-            this.set_applet_label(bat_min_perc.toString() + "%");
-            this.set_applet_icon_name(this.get_device_batt_icon(bat_min_type, bat_min_perc));
-            this.set_applet_tooltip(bat_min_name.toString());
-
-            if (this.applet_icon == "text") {
-                this.hide_applet_icon();
-            } else if (this.applet_icon == "icon") {
-                this.hide_applet_label(true);
-            } else {
-
-            }
-        } else {
+        if (this.monitored_devs == 0) {
             this.set_applet_label("");
             this.set_applet_tooltip("all BT devices has been disabled");
             this.set_applet_icon_name("bluetooth-disabled");
+        } else {
+            const [min_name, min_kind, min_perc] = this.get_lowest_battery_device();
+
+            if ((this.notification_applet_icon == "warn" && this.notification_warn_enable && min_perc >= this.notification_warn_level)
+                || (this.notification_applet_icon == "crit" && this.notification_crit_enable && min_perc >= this.notification_crit_level)) {
+                this.set_applet_enabled(false);
+            } else {
+                this.set_applet_enabled(true);
+                if (this.override_enabled
+                    && this.monitored_devs.includes(this.override_entry)
+                    && this.dbus_map.has(this.override_entry)) {
+
+                    let d = this.dbus_map.get(this.override_entry).device;
+                    this.show_hide_text_icon(this.override_entry, d.kind, d.percentage);
+                } else {
+                    this.show_hide_text_icon(min_name, min_kind, min_perc);
+                }
+            }
         }
+
+        this.notify_if_needed();
+    },
+
+    show_hide_text_icon: function(name, kind, perc) {
+        this.set_applet_label(perc.toString() + "%");
+        this.set_applet_icon_name(this.get_device_batt_icon(kind, perc));
+        this.set_applet_tooltip(name.toString());
+
+        if (this.applet_icon == "text") {
+            this.hide_applet_icon();
+        } else if (this.applet_icon == "icon") {
+            this.hide_applet_label(true);
+        }
+    },
+
+    get_lowest_battery_device: function() {
+        if (this.monitored_devs.length == 0) {
+            return null;
+        }
+
+        let lowest_bat_dev_ident = null;
+        let lowest_bat_dev = null;
+
+        this.monitored_devs.forEach((name) => {
+            if (!this.dbus_map.has(name)) {
+                return;
+            }
+
+            const dev = this.dbus_map.get(name).device;
+            if (lowest_bat_dev == null || dev.percentage < lowest_bat_dev.percentage) {
+                lowest_bat_dev = dev;
+                lowest_bat_dev_ident = name;
+            }
+        });
+
+        return [lowest_bat_dev_ident, lowest_bat_dev.kind, lowest_bat_dev.percentage];
     },
 
     get_device_batt_icon: function(type, batt) {
