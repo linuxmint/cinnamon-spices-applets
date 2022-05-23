@@ -140,7 +140,7 @@ MyApplet.prototype = {
         if(Gio.file_new_for_path("/usr/bin/xclip").query_exists(null)) {
             global.set_stage_input_mode(Cinnamon.StageInputMode.FULLSCREEN);
             global.set_cursor(Cinnamon.Cursor.CROSSHAIR);
-            Util.spawn_async(["python3", this.appletPath + "/cp.py", this.combo_choice], Lang.bind(this, function(output) {
+            Util.spawn_async(["/usr/bin/python3", this.appletPath + "/cp.py", this.combo_choice], Lang.bind(this, function(output) {
                 global.unset_cursor();
                 global.set_stage_input_mode(Cinnamon.StageInputMode.NORMAL);
 

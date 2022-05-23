@@ -69,7 +69,7 @@ var Yahoo = (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })])];
+                        return [4, this.app.SpawnProcess(["/usr/bin/python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })])];
                     case 2:
                         json = _a.sent();
                         return [3, 4];

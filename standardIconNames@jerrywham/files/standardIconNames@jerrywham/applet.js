@@ -470,7 +470,7 @@ MyApplet.prototype = {
   	let item = new PopupMenu.PopupIconMenuItem(_(""+label+""), ""+label+"", St.IconType.SYMBOLIC);
     item.connect('activate', Lang.bind(this, function() {
         if(Gio.file_new_for_path("/usr/bin/xclip").query_exists(null)) {
-           Util.spawn_async(["python3", this.appletPath + "/copyscript.py", item.label.get_text()], Lang.bind(this, function(output) {
+           Util.spawn_async(["/usr/bin/python3", this.appletPath + "/copyscript.py", item.label.get_text()], Lang.bind(this, function(output) {
                global.unset_cursor();
                output = output.replace(/\n$/, "");
                if (output == "ImportError Xlib") {

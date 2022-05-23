@@ -150,7 +150,7 @@ FeedApplet.prototype = {
 
     /* private function to check, confirm and install any dependencies */
     _check_dependencies: function() {
-       Util.spawn_async(['python3', APPLET_PATH + '/check_feedparser.py'], Lang.bind(this, this._check_feedparser));
+       Util.spawn_async(['/usr/bin/python3', APPLET_PATH + '/check_feedparser.py'], Lang.bind(this, this._check_feedparser));
     },
 
     /* private function that connects to the settings-schema and initializes the variables */
@@ -262,7 +262,7 @@ FeedApplet.prototype = {
             this.instance_name = instance_name.trim();
         }
         // Read the json config file.
-        let argv = ["python3", APPLET_PATH + "/ConfigFileManager.py", FEED_CONFIG_FILE];
+        let argv = ["/usr/bin/python3", APPLET_PATH + "/ConfigFileManager.py", FEED_CONFIG_FILE];
         Util.spawn_async(argv, Lang.bind(this, this._load_feeds));                    
     },
     /* Private method used to load / reload all the feeds. */
@@ -456,7 +456,7 @@ FeedApplet.prototype = {
         try {            
             this._set_permissions(pythonfile);
 
-            let argv = ['python3', APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE, this.instance_name];
+            let argv = ['/usr/bin/python3', APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE, this.instance_name];
             Util.spawn_async(argv, Lang.bind(this, this._read_json_config));     
         }
         catch (e) {
@@ -472,7 +472,7 @@ FeedApplet.prototype = {
         let pythonfile = 'ConfigFileManager.py';
         try {
             this._set_permissions(pythonfile);        
-            let argv = ['python3', APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE];
+            let argv = ['/usr/bin/python3', APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE];
             argv.push('--instance', this.instance_name);
             argv.push('--oldurl', current_url);
             argv.push('--newurl', redirected_url);

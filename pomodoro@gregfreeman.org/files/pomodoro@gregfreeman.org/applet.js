@@ -100,7 +100,7 @@ PomodoroApplet.prototype = {
         this._loadSoundEffects();
 
         // If cinnamon crashes or restarts, we want to make sure no zombie sounds are still looping
-        let killLoopingSoundCommand = 'python3 %s %s'.format(metadata.path + '/bin/kill-looping-sound.py', this._sounds.tick.getSoundPath());
+        let killLoopingSoundCommand = '/usr/bin/python3 %s %s'.format(metadata.path + '/bin/kill-looping-sound.py', this._sounds.tick.getSoundPath());
         Util.trySpawnCommandLine(killLoopingSoundCommand);
 
         this._timers = {

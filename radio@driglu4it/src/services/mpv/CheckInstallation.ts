@@ -52,7 +52,7 @@ function downloadMrisPluginInteractive() {
         }
 
         let [stderr, stdout, exitCode] = await spawnCommandLinePromise(
-            `python3  ${__meta.path}/download-dialog-mpris.py`
+            `/usr/bin/python3  ${__meta.path}/download-dialog-mpris.py`
         )
 
         if (stdout?.trim() !== 'Continue') { return reject() }

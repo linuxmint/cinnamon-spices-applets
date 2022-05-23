@@ -45,7 +45,7 @@ MyApplet.prototype = {
 
         this.panel_height = panel_height;
         this.orientation = orientation;
-        this.python_name = "python3";
+        this.python_name = "/usr/bin/python3";
         this.tts_engine_name = "espeak";
         this.start_stop_keybind_id = uuid + instance_id + "start-stop";
         this.pause_resume_keybind_id = uuid + instance_id + "pause-resume";

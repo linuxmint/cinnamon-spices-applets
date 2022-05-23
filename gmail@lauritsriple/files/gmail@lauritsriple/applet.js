@@ -110,13 +110,13 @@ MyApplet.prototype = {
     	//Crypt password with pythonscript
 		if ((this.oldUsername!=this.username) && (this.password!="Crypted")){
 			//Try to delete old password
-			Util.spawn_async(['python3',APPLET_PATH+'/removeCredentials.py',this.oldUsername],Lang.bind(this,function(){
+			Util.spawn_async(['/usr/bin/python3',APPLET_PATH+'/removeCredentials.py',this.oldUsername],Lang.bind(this,function(){
 				this.oldUsername=this.username
 			}));
 		}
-		//Util.spawn_async(['python3',APPLETPATH+'/storeCredentials.py',this.username,this.password]);
+		//Util.spawn_async(['/usr/bin/python3',APPLETPATH+'/storeCredentials.py',this.username,this.password]);
 		if(this.password!="Crypted"){
-    		Util.spawn_async(['python3',APPLET_PATH+'/storeCredentials.py',this.username,this.password],Lang.bind(this,function(response){
+    		Util.spawn_async(['/usr/bin/python3',APPLET_PATH+'/storeCredentials.py',this.username,this.password],Lang.bind(this,function(response){
 			this.password="Crypted";
 			}));
 		}
@@ -211,7 +211,7 @@ MyApplet.prototype = {
 
     getJsonFeed: function(){
 		//this.logger.debug("getJsonFeed Called");
-    	Util.spawn_async(['python3',APPLET_PATH+'/getGmailFeedJson.py',this.username],Lang.bind(this,this.processJsonFeed));
+    	Util.spawn_async(['/usr/bin/python3',APPLET_PATH+'/getGmailFeedJson.py',this.username],Lang.bind(this,this.processJsonFeed));
 		//this.logger.debug("getJsonFeed finished process. ProcessJsonFeed finished as well");
     },
 

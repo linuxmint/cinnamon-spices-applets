@@ -788,7 +788,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
     _onButtonDelete() {
         this.applet.menu.close();
         Util.spawn_async(
-            ['python3', `${this.applet.metadata.path}/dialogs.py`, 'confirm', this.icon, this.name],
+            ['/usr/bin/python3', `${this.applet.metadata.path}/dialogs.py`, 'confirm', this.icon, this.name],
             (response) => {
                 response = JSON.parse(response);
                 if (response === Gtk.ResponseType.YES) {
@@ -803,7 +803,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
         this.applet.menu.close();
         Util.spawn_async(
             [
-                'python3',
+                '/usr/bin/python3',
                 `${this.applet.metadata.path}/dialogs.py`,
                 'edit',
                 JSON.stringify(this.applet.listGroups),
@@ -1045,7 +1045,7 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
     _onButtonDelete() {
         this.applet.menu.close();
         Util.spawn_async(
-            ['python3', `${this.applet.metadata.path}/dialogs.py`, 'confirm', this.icon, this.name],
+            ['/usr/bin/python3', `${this.applet.metadata.path}/dialogs.py`, 'confirm', this.icon, this.name],
             (response) => {
                 response = JSON.parse(response);
                 if (response === Gtk.ResponseType.YES) {
@@ -1060,7 +1060,7 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
         this.applet.menu.close();
         Util.spawn_async(
             [
-                'python3',
+                '/usr/bin/python3',
                 `${this.applet.metadata.path}/dialogs.py`,
                 'edit',
                 JSON.stringify(this.applet.listGroups),

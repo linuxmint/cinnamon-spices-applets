@@ -77,7 +77,7 @@ BatteryPowerApplet.prototype = {
 		}
 
 		if (!this.UPowerRefreshed){
-			Main.Util.spawnCommandLine(`python3 ${__meta.path}/update_upower.py`);
+			Main.Util.spawnCommandLine(`/usr/bin/python3 ${__meta.path}/update_upower.py`);
 			this.UPowerRefreshed = true;
 		}
 		const stateFile = ".batterystate";
@@ -114,7 +114,7 @@ BatteryPowerApplet.prototype = {
 		// If the files could not be used, we need to update upower information and use info
 		// from there.
 		if (!this.UPowerRefreshed){
-			Main.Util.spawnCommandLine(`python3 ${__meta.path}/update_upower.py`);
+			Main.Util.spawnCommandLine(`/usr/bin/python3 ${__meta.path}/update_upower.py`);
 			this.UPowerRefreshed = true;
 		}
 		const upowerEnergyRateFile = ".energyrate"

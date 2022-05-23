@@ -69,11 +69,11 @@ MyApplet.prototype = {
      },
 
     config_yubikey: function() {
-                Util.trySpawn(['python',softyubikey_settings]);
+                Util.trySpawn(['/usr/bin/python',softyubikey_settings]);
     },
 
     on_applet_clicked: function(event) {
-            Util.trySpawn(['python',ykey,'\n']);
+            Util.trySpawn(['/usr/bin/python',ykey,'\n']);
     }
 };
 
