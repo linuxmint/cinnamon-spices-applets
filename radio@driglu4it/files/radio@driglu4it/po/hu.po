@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-08 17:18+0100\n"
-"PO-Revision-Date: 2021-12-23 09:06+0100\n"
+"PO-Revision-Date: 2022-05-25 15:28+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -54,7 +54,7 @@ msgstr "Letöltés a YouTube-ról"
 
 #: 4.6/applet.js:215
 msgid "Can't copy current Song. Is the Radio playing?"
-msgstr ""
+msgstr "A jelenlegi szám nem másolható. Műsort szór a rádióállomás?"
 
 #: 4.6/applet.js:235
 #, javascript-format
@@ -63,7 +63,7 @@ msgstr "fájl letöltése sikerült. A fájl ide lett mentve: „%s”"
 
 #: 4.6/applet.js:237
 msgid "Couldn't download song from Youtube due to an Error."
-msgstr ""
+msgstr "Egy hiba miatt a zeneszám nem tölthető le a Youtube-ról."
 
 #: 4.6/applet.js:238
 msgid "See Logs for more information"
@@ -108,7 +108,7 @@ msgstr "Saját rádióállomásokhoz adás"
 
 #: 4.6/download-dialog-mpris.py:36 4.6/download-dialog-youtube-dl.py:36
 msgid "Download Confirmation Dialog"
-msgstr ""
+msgstr "Letöltés jóváhagyás párbeszédablak"
 
 #: 4.6/download-dialog-mpris.py:39
 #, python-format
@@ -209,6 +209,8 @@ msgstr "Rádióállomás keresőmotor megnyitása"
 #. 3.0->settings-schema.json->streamurl-button->tooltip
 msgid "Opens a website, which helps you to determine radio stream URLs."
 msgstr ""
+"Megnyit egy weboldalt, amely segít meghatározni a rádió adatfolyamának URL-"
+"címét."
 
 #. 4.6->settings-schema.json->radiolist-button->description
 #. 3.0->settings-schema.json->radiolist-button->description
