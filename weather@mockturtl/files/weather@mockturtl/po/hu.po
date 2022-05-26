@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: oversteer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-08 08:40+0100\n"
-"PO-Revision-Date: 2022-04-11 10:54+0200\n"
+"PO-Revision-Date: 2022-05-25 15:29+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu_HU\n"
@@ -517,7 +517,7 @@ msgstr "Ismeretlen hiba"
 
 #: 3.0/darkSky.js:71 3.8/weather-applet.js:10263
 msgid "and"
-msgstr ""
+msgstr "és"
 
 #: 3.0/darkSky.js:71 3.8/weather-applet.js:10263
 msgid "until"
@@ -1643,7 +1643,6 @@ msgid "Heavy mixed rain and snow"
 msgstr "Erős eső és havazás"
 
 #: 3.8/weather-applet.js:13467
-#| msgid "Weather"
 msgid "AccuWeather"
 msgstr "AccuWeather"
 
@@ -2254,6 +2253,8 @@ msgid ""
 "Saves location information to file so you can switch between them with "
 "buttons in the applet, which will appear if you have more than one."
 msgstr ""
+"Földrajzi helyzet információ fájlba mentése, így több kisalkalmazás "
+"használata esetén megjelenő gombokkal válthat közöttük."
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
@@ -2264,6 +2265,8 @@ msgid ""
 "If you are using a provider with API keys set it to an interval you won't "
 "run out of your quota with."
 msgstr ""
+"Amennyiben API-kulcsot igénylő időjárás-előrejelzés szolgáltatót használ, a "
+"kvóta kimerítés elkerülése érdekében állítson be frissítési időközt."
 
 #. 3.8->settings-schema.json->forecastDays->tooltip
 msgid ""
@@ -2471,6 +2474,8 @@ msgid ""
 "This includes logs for the applet and the current settings with your API key "
 "redacted."
 msgstr ""
+"Ez hozzáadja a kisalkalmazás naplófájlokat és beállításokat, kivéve a "
+"beállított API kulcsot."
 
 #. 3.8->settings-schema.json->selectedLogPath->description
 msgid "Selected path to save Logs"
