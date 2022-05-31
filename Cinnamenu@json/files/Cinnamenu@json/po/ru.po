@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-16 02:20+0000\n"
-"PO-Revision-Date: 2022-05-21 02:40+0100\n"
-"Last-Translator: Ivan Komaritsyn <vantu5z@mail.ru>\n"
+"PO-Revision-Date: 2022-05-31 05:53+0100\n"
+"Last-Translator: Google translate; Ivan Komaritsyn <vantu5z@mail.ru>\n"
 "Language-Team: \n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -259,10 +259,10 @@ msgid "Search Stopped"
 msgstr "Поиск остановлен"
 
 msgid "Searching: "
-msgstr "Поиск:"
+msgstr "Поиск: "
 
 msgid "Error: insufficient permissions to read folder "
-msgstr "Ошибка: недостаточно прав для чтения папки"
+msgstr "Ошибка: недостаточно прав для чтения папки "
 
 msgid "Search Completed"
 msgstr "Поиск завершен"
@@ -600,5 +600,3 @@ msgstr "Использовать стиль плитки"
 
 msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
 msgstr "Используйте стиль плитки для кнопок приложения (Примечание: может не работать в некоторых темах)"
-
-
