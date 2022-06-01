@@ -6,10 +6,10 @@
 # Åke Engelbrektson <eson@svenskasprakfiler.se> - 2017, 2019
 msgid ""
 msgstr ""
-"Project-Id-Version: weather@mockturtl 3.2.2\n"
+"Project-Id-Version: weather@mockturtl 3.2.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-08 08:40+0100\n"
-"PO-Revision-Date: 2022-04-10 12:56+0200\n"
+"PO-Revision-Date: 2022-06-01 19:41+0200\n"
 "Last-Translator: jorgenqv <jorgenqv@yahoo.com>\n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -66,7 +66,7 @@ msgstr "Platsen täcks inte"
 
 #: 3.0/applet.js:193 3.0/applet.js:378 3.8/weather-applet.js:9299
 msgid "Weather Applet"
-msgstr "Väder-applet"
+msgstr "Väder-panelprogram"
 
 #: 3.0/applet.js:217 3.8/weather-applet.js:16015
 msgid "..."
@@ -200,7 +200,7 @@ msgstr "Varning"
 
 #: 3.0/applet.js:2032 3.8/weather-applet.js:9465
 msgid "You can only save correct locations when the applet is not refreshing"
-msgstr "Du kan bara spara korrekt plats när appleten inte uppdateras"
+msgstr "Du kan bara spara korrekt plats när panelprogrammet inte uppdateras"
 
 #: 3.0/applet.js:2036 3.8/weather-applet.js:9469
 msgid "You can't save an incorrect location"
@@ -226,7 +226,7 @@ msgstr "Plats är sparad till bibliotek"
 
 #: 3.0/applet.js:2062
 msgid "You can't remove a location while the applet is refreshing"
-msgstr "Du kan inte ta bort en plats medan appleten uppdateras"
+msgstr "Du kan inte ta bort en plats medan panelprogrammet uppdateras"
 
 #: 3.0/applet.js:2066
 msgid "You can't remove an incorrect location"
@@ -842,7 +842,7 @@ msgstr ""
 #: 3.0/openWeatherMap.js:250 3.8/weather-applet.js:10795
 msgid "If this problem persists, please contact the Author of this applet"
 msgstr ""
-"Om detta problem fortsätter, vänligen kontakta denna applets utvecklare"
+"Om detta problem fortsätter, vänligen kontakta detta panelprograms utvecklare"
 
 #: 3.0/openWeatherMap.js:254 3.8/weather-applet.js:10799
 msgid "Unknown Error, please see the logs in Looking Glass"
@@ -2108,7 +2108,7 @@ msgstr "Ikoner"
 
 #. 3.0->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons in the applet"
-msgstr "Använd symboliska ikoner i applet"
+msgstr "Använd symboliska ikoner i panelprogrammet"
 
 #. 3.0->settings-schema.json->useCustomMenuIcons->description
 #. 3.8->settings-schema.json->useCustomMenuIcons->description
@@ -2158,7 +2158,7 @@ msgstr "Snabbtangenter"
 
 #. 3.8->settings-schema.json->more-info->title
 msgid "More about the Weather applet"
-msgstr "Mera om Väder-applet"
+msgstr "Mera om Väder-panelprogrammet"
 
 #. 3.8->settings-schema.json->submit-issue->title
 msgid "Report an issue"
@@ -2228,11 +2228,11 @@ msgid ""
 "buttons in the applet, which will appear if you have more than one."
 msgstr ""
 "Sparar platsinformation till fil, så du kan pendla emellan dem med knapparna "
-"i appleten, som kommer att visas om du har mer än en."
+"i panelprogrammet, som kommer att visas om du har mer än en."
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
-msgstr "Väder-applet på Cinnamon Spieces webbplats"
+msgstr "Väder-panelprogrammet på Cinnamon Spieces webbplats"
 
 #. 3.8->settings-schema.json->refreshInterval->tooltip
 msgid ""
@@ -2356,7 +2356,7 @@ msgstr "Gäller inte för special-ikoner, de är symboliska enligt standard"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
-msgstr "Använd symboliska ikoner genomgående i appleten"
+msgstr "Använd symboliska ikoner genomgående i panelprogrammet"
 
 #. 3.8->settings-schema.json->more-info-label->description
 msgid ""
@@ -2365,7 +2365,7 @@ msgid ""
 "clicking the button below. Here you can ask questions etc in the comment "
 "section by logging in with your Github account."
 msgstr ""
-"För mer detaljerad information om applet-programmet vänligen gå till Spices-"
+"För mer detaljerad information om panelprogrammet vänligen gå till Spices-"
 "webbplatsen där information om kända problem, felsökning, förändringsloggar "
 "med mera finns, så klicka på knappen nedan. Här kan du ställa frågor och "
 "annat i kommentarsfältet på denna sida genom att logga in med ditt Github-"
@@ -2381,8 +2381,8 @@ msgid ""
 "GitHub account.\n"
 " Please make sure that the issue is not already submitted."
 msgstr ""
-"Öppnar webbsida där du kan skriva om nya problem med appleten, behöver ett "
-"GitHub-konto.\n"
+"Öppnar webbsida där du kan skriva om nya problem med panelprogrammet, ett "
+"GitHub-konto behövs.\n"
 " Vänligen kontrollera först att problemet inte redan har skickats in."
 
 #. 3.8->settings-schema.json->maintainer->description
@@ -2401,15 +2401,15 @@ msgid ""
 "the issue is about. Logs with Debug level (which can be saved to a file "
 "below) are also appreciated."
 msgstr ""
-"Om du hittar ett problem med denna applet vänligen gör en rapport genom att "
-"klicka på knappen nedan och logga in med ditt Github-konto..\n"
+"Om du hittar ett problem med detta panelprogram så vänligen gör en rapport "
+"genom att klicka på knappen nedan och logga in med ditt Github-konto.\n"
 "\n"
 "Innan du börjar skriva, se till att problemet inte redan har skickats in i "
 "Issue-avdelningen och granska dina förifyllda uppgifter i "
 "problembeskrivningen. Glöm inte att lägga till en kort beskrivning i det "
-"översta rubrikfältet bredvid appletens namn för att göra det lättare för "
-"alla att veta vad problemet handlar om. Loggar med felsökningsnivå (som kan "
-"sparas i en fil nedan) uppskattas också."
+"översta rubrikfältet bredvid panelprogrammets namn för att göra det lättare "
+"för alla att veta vad problemet handlar om. Loggar med felsökningsnivå (som "
+"kan sparas i en fil nedan) uppskattas också."
 
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
@@ -2455,8 +2455,8 @@ msgid ""
 "This includes logs for the applet and the current settings with your API key "
 "redacted."
 msgstr ""
-"Detta inkluderar loggar för appleten och de aktuella inställningarna med din "
-"API-nyckel redigerad."
+"Detta inkluderar loggar för panelprogrammet och de aktuella inställningarna "
+"med din API-nyckel redigerad."
 
 #. 3.8->settings-schema.json->selectedLogPath->description
 msgid "Selected path to save Logs"
