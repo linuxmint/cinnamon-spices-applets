@@ -7,26 +7,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu@json 1.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-21 21:19+0000\n"
-"PO-Revision-Date: 2021-03-22 17:30+0000\n"
-"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 17:07+0100\n"
+"Last-Translator: Google translate; gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "Type to search..."
 msgstr "Upišite za pretragu..."
 
 msgid "Initializing"
-msgstr ""
+msgstr "Inicijalizacija"
 
 msgid "No description available"
-msgstr ""
+msgstr "Opis nije dostupan"
 
 msgid "All applications"
 msgstr "Sve aplikacije"
@@ -50,10 +49,10 @@ msgid "Clear List"
 msgstr "Obriši Popis"
 
 msgid "No recent files"
-msgstr ""
+msgstr "Nema nedavnih datoteka"
 
 msgid "Account details"
-msgstr ""
+msgstr "Detalji Računa"
 
 msgid "Grid View"
 msgstr "Pogled mreže"
@@ -85,15 +84,6 @@ msgstr "Isključi"
 msgid "Shutdown the computer"
 msgstr "Isključite računalo"
 
-msgid "Home"
-msgstr "Osobna mapa"
-
-msgid "Computer"
-msgstr "Računalo"
-
-msgid "Browse network"
-msgstr "Pregledaj mrežu"
-
 msgid "Run with NVIDIA GPU"
 msgstr "Pokreni s NVIDIA GPU"
 
@@ -112,117 +102,184 @@ msgstr "Dodaj u omiljeno"
 msgid "Uninstall"
 msgstr "Deinstaliraj"
 
+msgid "Home"
+msgstr "Osobna mapa"
+
+msgid "Computer"
+msgstr "Računalo"
+
+msgid "Browse network"
+msgstr "Pregledaj mrežu"
+
 msgid "Find files..."
-msgstr ""
+msgstr "Pronađi datoteke..."
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Molimo pričekajte..."
+
+msgid "Applications"
+msgstr "Prijave"
+
+msgid "Documents"
+msgstr "Dokumenti"
+
+msgid "Videos"
+msgstr "Videozapisi"
+
+msgid "Images"
+msgstr "Slike"
+
+msgid "Music"
+msgstr "glazba, muzika"
 
 msgid "No recent Items"
 msgstr "Nema nedavnih dokumenata"
 
-msgid "Solution:"
-msgstr ""
-
 msgid "Click to copy"
-msgstr ""
+msgstr "Kliknite za kopiranje"
 
-msgid "Search web for"
-msgstr ""
+msgid "Applications and files"
+msgstr "Aplikacije i datoteke"
 
-msgid "Favorites"
-msgstr ""
+msgid "Other search results"
+msgstr "Ostali rezultati pretraživanja"
 
-msgid "Recent"
-msgstr ""
+msgid "Browser history"
+msgstr "Povijest preglednika"
 
-msgid "Home folder"
-msgstr ""
+msgid "Browser bookmarks"
+msgstr "Oznake preglednika"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Trash"
+msgstr "Otpad"
+
+msgid "Error while opening file:"
+msgstr "Greška pri otvaranju datoteke:"
 
 msgid "Too many entries - showing first 1000 entries only"
-msgstr ""
+msgstr "Previše unosa - prikazuje se samo prvih 1000 unosa"
+
+msgid "Favorites"
+msgstr "Favoriti"
+
+msgid "Recent"
+msgstr "Nedavno"
+
+msgid "Home folder"
+msgstr "Početna mapa"
 
 msgid "Reset category order"
 msgstr "Poništi redoslijed kategorije"
 
+msgid "light skin tone"
+msgstr "svijetli ton kože"
+
+msgid "medium-light skin tone"
+msgstr "srednje svijetli ton kože"
+
+msgid "medium skin tone"
+msgstr "srednji ton kože"
+
+msgid "medium-dark skin tone"
+msgstr "srednje tamni ton kože"
+
+msgid "dark skin tone"
+msgstr "tamni ton kože"
+
 msgid "This file is no longer available"
-msgstr ""
+msgstr "Ova datoteka više nije dostupna"
 
 msgid "Open with"
-msgstr ""
+msgstr "Otvoriti sa"
 
 msgid "Other application..."
-msgstr ""
+msgstr "Druga aplikacija..."
 
 msgid "Open containing folder"
-msgstr ""
+msgstr "Otvorite mapu koja sadrži"
 
 msgid "Move to trash"
-msgstr ""
+msgstr "Baci u smeće"
 
 msgid "Error while moving file to trash:"
-msgstr ""
+msgstr "Pogreška prilikom premještanja datoteke u smeće:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Ova stavka izbornika nije povezana ni s jednim paketom. Želite li ga ipak ukloniti s izbornika?"
+
+msgid "The following packages will be removed:"
+msgstr "Sljedeći paketi će biti uklonjeni:"
+
+msgid "Packages to be removed"
+msgstr "Paketi za uklanjanje"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Nije moguće ukloniti paket %s jer to zahtijevaju drugi paketi."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Paket %s je ovisnost o sljedećim paketima:"
 
 msgid "Open"
-msgstr ""
+msgstr "Otvorena"
 
 msgid "Search"
-msgstr ""
+msgstr "traži"
 
 msgid "Start in"
-msgstr ""
+msgstr "Počni U"
 
 msgid "Select a folder"
-msgstr ""
+msgstr "Odaberite mapu"
 
 msgid "Follow symlinks"
-msgstr ""
+msgstr "Slijedite simbolične veze"
 
 msgid "Search hidden"
-msgstr ""
+msgstr "Pretraga je skrivena"
 
 msgid "Use regular expressions"
-msgstr ""
+msgstr "Koristite regularne izraze"
 
 msgid "Stop"
-msgstr ""
+msgstr "Stop"
 
 msgid "File"
-msgstr ""
+msgstr "Datoteka"
 
 msgid "Path"
-msgstr ""
+msgstr "Staza"
 
 msgid "Searching..."
-msgstr ""
+msgstr "Pretraživanje..."
 
 msgid "Search Stopped"
-msgstr ""
+msgstr "Pretraga je zaustavljena"
 
 msgid "Searching: "
-msgstr ""
+msgstr "Pretraživanje: "
 
 msgid "Error: insufficient permissions to read folder "
-msgstr ""
+msgstr "Pogreška: nedovoljno dopuštenja za čitanje mape "
 
 msgid "Search Completed"
-msgstr ""
+msgstr "Pretraga dovršena"
 
 msgid "Skipping"
-msgstr ""
+msgstr "Preskakanje"
 
 msgid " - directory already searched"
-msgstr ""
+msgstr " - imenik je već pretraživan"
 
 msgid "Cinnamenu"
-msgstr "Cinna izbornik"
+msgstr "Cinnamenu"
 
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
-msgstr ""
-"Fleksibilan izbornik koji nudi mogućnosti formatiranja, web oznake, podršku "
-"pružatelja usluga pretraživanja i brzo pretraživanje."
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Fleksibilan izbornik s opcijama izgleda mreže ili popisa, preglednikom datoteka i pretraživanjem emotikona."
 
 msgid "Behavior"
 msgstr "Ponašanje"
@@ -234,10 +291,10 @@ msgid "Layout and Content"
 msgstr "Izgled i sadržaj"
 
 msgid "Search Providers"
-msgstr ""
+msgstr "Davatelji usluga pretraživanja"
 
 msgid "No search provider extensions found"
-msgstr ""
+msgstr "Nije pronađeno nijedno proširenje davatelja usluga pretraživanja"
 
 msgid "Panel"
 msgstr "Ploča"
@@ -252,7 +309,7 @@ msgid "Content"
 msgstr "Sadržaj"
 
 msgid "Recent files settings"
-msgstr ""
+msgstr "Postavke nedavnih datoteka"
 
 msgid "Open the menu editor"
 msgstr "Otvori uređivač izbornika"
@@ -272,17 +329,14 @@ msgstr "Tekst na ploči"
 msgid "Text to show beside the panel icon"
 msgstr "Tekst za prikaz pored ikone na ploči"
 
-msgid "pixels"
-msgstr "pikseli"
+msgid "Category icon size (pixels)"
+msgstr "Veličina kategorija ikone (pikseli)"
 
-msgid "Category icon size"
-msgstr "Veličina kategorija ikone"
+msgid "Applications list icon size (pixels)"
+msgstr "Veličina ikona popisa aplikacija (pikseli)"
 
-msgid "Applications list icon size"
-msgstr "Veličina ikona popisa aplikacija"
-
-msgid "Applications grid icon size"
-msgstr "Veličina ikone mreže aplikacija"
+msgid "Applications grid icon size (pixels)"
+msgstr "Veličina ikone mreže aplikacija (pikseli)"
 
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Prečaci tipkovnice za otvaranje i zatvaranje izbornika"
@@ -309,7 +363,7 @@ msgid "Activate categories on click"
 msgstr "Aktivirajte kategorije klikom"
 
 msgid "Activate categories on click instead of on hover"
-msgstr ""
+msgstr "Aktivirajte kategorije klikom umjesto miša"
 
 msgid "Enable autoscrolling"
 msgstr "Omogući automatsko pomicanje u popisu aplikacija"
@@ -324,21 +378,23 @@ msgid ""
 "Show your browser's web bookmarks in the menu.\n"
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
+"Prikaži web oznake vašeg preglednika u izborniku.\n"
+"Napomena: Instalirajte paket gir1.2-gda-5.0 za čitanje firefox oznaka."
 
 msgid "Enable searching of open windows"
-msgstr ""
+msgstr "Omogućite pretraživanje otvorenih prozora"
 
 msgid "Enable search providers"
-msgstr ""
+msgstr "Omogućite davatelje usluga pretraživanja"
 
 msgid "Include search provider results in searches"
 msgstr "Uključite rezultate davatelja usluga pretraživanja"
 
 msgid "Example Search Providers"
-msgstr ""
+msgstr "Primjer pružatelja usluga pretraživanja"
 
 msgid "Open menu on category:"
-msgstr ""
+msgstr "Otvorite izbornik na kategoriji:"
 
 msgid "List"
 msgstr "Popis"
@@ -347,7 +403,7 @@ msgid "Grid"
 msgstr "Mreža"
 
 msgid "Always open the menu with this category selected"
-msgstr ""
+msgstr "Uvijek otvorite izbornik s odabranom ovom kategorijom"
 
 msgid "columns"
 msgstr "stupci"
@@ -359,7 +415,7 @@ msgid "Show bookmarks and places"
 msgstr "Prikaži zabilješke i lokacije"
 
 msgid "Show bookmarks and places category in the menu"
-msgstr ""
+msgstr "Prikaži kategoriju oznaka i mjesta u izborniku"
 
 msgid "Show application icons"
 msgstr "Prikaži ikone aplikacija"
@@ -368,19 +424,19 @@ msgid "Show category icons"
 msgstr "Prikaži ikone kategorija"
 
 msgid "Show application descriptions under titles"
-msgstr ""
+msgstr "Prikaži opise aplikacija pod naslovima"
 
 msgid "Show tooltips"
-msgstr ""
+msgstr "Prikaži opise alata"
 
 msgid "Tooltip delay"
-msgstr ""
+msgstr "Odgoda u opisu alata"
 
 msgid "Use a custom menu height"
 msgstr "Koristite prilagođenu visinu izbornika"
 
-msgid "Custom menu height"
-msgstr ""
+msgid "Custom menu height (pixels)"
+msgstr "Prilagođena visina izbornika (pikseli)"
 
 msgid "Applications view mode"
 msgstr "Način prikaza aplikacija"
@@ -392,116 +448,157 @@ msgid "Application description placement"
 msgstr "Položaj opisa aplikacije"
 
 msgid "Tooltips"
-msgstr ""
+msgstr "Alati"
 
 msgid "Under titles"
-msgstr ""
+msgstr "Pod naslovima"
 
 msgid "None"
-msgstr ""
+msgstr "Nijedan"
 
 msgid "Choose where to show application descriptions"
 msgstr "Odaberite mjesto za prikazivanje opisa aplikacija"
 
-msgid "Session buttons location"
-msgstr ""
+msgid "Sidebar location"
+msgstr "Položaj bočne trake"
 
 msgid "Top"
-msgstr ""
+msgstr "Vrh"
 
 msgid "Bottom"
-msgstr ""
+msgstr "Dno"
 
 msgid "Left"
-msgstr ""
+msgstr "Lijevo"
 
 msgid "Right"
-msgstr ""
+msgstr "Pravo"
 
-msgid "Choose where to show the session buttons (quit, logout, etc.)"
-msgstr ""
+msgid "Choose where to show the sidebar"
+msgstr "Odaberite gdje želite prikazati bočnu traku"
 
 msgid ""
 "\n"
 "Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
+"\n"
+"Informacije/savjet: povucite po rubu izbornika da promijenite veličinu izbornika.\n"
 
-msgid "Add favorites to session buttons"
-msgstr ""
+msgid "Show favorites on sidebar"
+msgstr "Prikaži favorite na bočnoj traci"
 
-msgid "Show your favorite app icons next to the session buttons"
-msgstr ""
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Prikažite svoje omiljene aplikacije i ikone datoteka na bočnoj traci"
+
+msgid "Show recent items"
+msgstr "Prikaži nedavne stavke"
+
+msgid "Show recent items category in the menu"
+msgstr "Prikaži kategoriju nedavnih stavki u izborniku"
 
 msgid "Show favorite apps category"
-msgstr ""
+msgstr "Prikaži kategoriju omiljenih aplikacija"
 
 msgid "Show your favorite apps category in the menu"
-msgstr ""
+msgstr "Prikažite svoju omiljenu kategoriju aplikacija u izborniku"
 
 msgid "Show home folder"
-msgstr ""
+msgstr "Prikaži početnu mapu"
 
 msgid "Show home folder category in the menu"
-msgstr ""
+msgstr "Prikaži kategoriju početne mape u izborniku"
 
 msgid "Last used category"
-msgstr ""
+msgstr "Posljednja korištena kategorija"
 
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Omogući automatsko pomicanje u popisu aplikacija"
 
-msgid "Enable emoji search"
-msgstr ""
-
-msgid "Show emojis in search results"
-msgstr ""
-
-msgid "Web search option"
-msgstr ""
-
-msgid "Google"
-msgstr ""
-
-msgid "Bing"
-msgstr ""
-
-msgid "Yahoo"
-msgstr ""
-
-msgid "DuckDuckGo"
-msgstr ""
-
-msgid "Show an internet search option in search results"
-msgstr ""
-
-msgid "Search home folder"
-msgstr ""
-
-msgid "When searching, also search home folder for files"
-msgstr ""
-
 msgid "Show hidden files"
-msgstr ""
+msgstr "Prikaži skrivene datoteke"
 
 msgid "Show hidden files in folder view"
+msgstr "Prikaži skrivene datoteke u prikazu mape"
+
+msgid "Emoji search"
+msgstr "Pretraživanje emotikona"
+
+msgid "Show emojis in search results"
+msgstr "Prikaži emojije u rezultatima pretraživanja"
+
+msgid "Web search option"
+msgstr "Opcija pretraživanja weba"
+
+msgid "Show an internet search option in search results"
+msgstr "Prikaži opciju internetskog pretraživanja u rezultatima pretraživanja"
+
+msgid "Search home folder"
+msgstr "Pretražite početnu mapu"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Prilikom pretraživanja, pretražite i datoteke u mojoj početnoj mapi"
+
+msgid "Web history search"
+msgstr "Pretraživanje web povijesti"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
 msgstr ""
+"Prilikom pretraživanja također pretražite povijest mog preglednika (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Napomena: Firefox povijest trenutno nije podržana."
+
+msgid "Web bookmarks search"
+msgstr "Pretraživanje web oznaka"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Prilikom pretraživanja također pretražite web oznake mog preglednika (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Napomena: Za pretraživanje Firefox oznaka morat ćete instalirati paket gir1.2-gda-5.0 (distribucije temeljene na Debianu, uključujući Ubuntu & Linux Mint) ili pakirajte libgda (distribucije temeljene na Arch) i ponovno pokrenite računalo."
+
+msgid "Wikipedia search"
+msgstr "Pretraživanje Wikipedije"
+
+msgid "Show some Wikipedia results"
+msgstr "Prikaži neke rezultate Wikipedije"
+
+msgid "Wikipedia language"
+msgstr "Jezik Wikipedije"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Napomena: Neke se opcije pretraživanja i dalje mogu koristiti čak i ako ih ovdje niste omogućili dodavanjem prefiksa za svoj pojam za pretraživanje.\n"
+"Na primjer: da biste tražili emoji, upišite 'e heart' da biste pronašli emotikone srca. Isto tako, koristite prefikse 'f' za pretraživanje datoteka, 'h' za web povijest i 'b' za pretraživanje web oznaka.\n"
 
 msgid "Use a custom icon size"
-msgstr ""
+msgstr "Koristite prilagođenu veličinu ikone"
 
 msgid "Use a custom size for the panel icon"
-msgstr ""
+msgstr "Koristite prilagođenu veličinu za ikonu ploče"
 
-msgid "Panel icon size"
-msgstr ""
+msgid "Panel icon size (pixels)"
+msgstr "Veličina ikone ploče (pikseli)"
 
 msgid "Choose a custom size for the panel icon"
-msgstr ""
+msgstr "Odaberite prilagođenu veličinu za ikonu ploče"
 
-msgid "Session buttons icon size"
-msgstr ""
+msgid "Sidebar icon size (pixels)"
+msgstr "Veličina ikone bočne trake (pikseli)"
 
-msgid "Use session buttons box style"
-msgstr ""
+msgid "Use sidebar box style"
+msgstr "Koristite stil okvira bočne trake"
 
+msgid "Use a sidebar box style"
+msgstr "Koristite stil okvira bočne trake"
 
+msgid "Use tile style"
+msgstr "Koristite stil pločica"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Koristite stil pločica za gumbe aplikacije (Napomena: možda neće raditi na nekim temama)"

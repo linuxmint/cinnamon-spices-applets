@@ -7,566 +7,598 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-18 21:43+0000\n"
-"PO-Revision-Date: 2022-01-20 15:55+0000\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 17:12+0100\n"
+"Last-Translator: Google translate\n"
 "Language-Team: \n"
 "Language: ur\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Type to search..."
+msgstr "تلاش کرنے کے لیے ٹائپ کریں..."
 
 msgid "Initializing"
-msgstr ""
+msgstr "شروع کر رہا ہے۔"
 
-msgid "Find files..."
-msgstr ""
-
-msgid "Please wait..."
-msgstr ""
-
-msgid "No recent Items"
-msgstr ""
-
-msgid "Click to copy"
-msgstr ""
-
-msgid "Clear List"
-msgstr ""
-
-msgid "Trash"
-msgstr ""
+msgid "No description available"
+msgstr "کوئی تفصیل موجود نہیں ہے"
 
 msgid "All applications"
 msgstr "تمام ایپلی کیشنز"
 
-msgid "Favorites"
-msgstr ""
-
 msgid "Places"
-msgstr ""
+msgstr "مقامات"
 
-msgid "Recent"
-msgstr ""
+msgid "Recent files"
+msgstr "حالیہ فائلیں۔"
+
+msgid "Bookmarks"
+msgstr "بک مارکس"
 
 msgid "Favorite apps"
 msgstr "پسندیدہ ایپس"
 
-msgid "Home folder"
-msgstr ""
-
-msgid "Too many entries - showing first 1000 entries only"
-msgstr ""
-
-msgid "Quit"
-msgstr ""
-
-msgid "Shutdown the computer"
-msgstr ""
-
-msgid "Logout"
-msgstr ""
-
-msgid "Leave the session"
-msgstr ""
-
-msgid "Lock screen"
-msgstr ""
-
-msgid "Lock the screen"
-msgstr ""
-
-msgid "Reset category order"
-msgstr ""
-
-msgid "light skin tone"
-msgstr ""
-
-msgid "medium-light skin tone"
-msgstr ""
-
-msgid "medium skin tone"
-msgstr ""
-
-msgid "medium-dark skin tone"
-msgstr ""
-
-msgid "dark skin tone"
-msgstr ""
-
-msgid "Run with NVIDIA GPU"
-msgstr ""
-
-msgid "Add to panel"
-msgstr ""
-
-msgid "Add to desktop"
-msgstr ""
-
-#, fuzzy
-#| msgid "Remove favorite"
-msgid "Remove from favorites"
-msgstr "پسندیدہ کو ہٹا دیں"
-
-msgid "Add to favorites"
-msgstr ""
-
-msgid "Uninstall"
-msgstr ""
-
-msgid "This file is no longer available"
-msgstr ""
-
-msgid "Open with"
-msgstr ""
-
-msgid "Other application..."
-msgstr ""
-
-msgid "Open containing folder"
-msgstr ""
-
-msgid "Move to trash"
-msgstr ""
-
-msgid "Error while moving file to trash:"
-msgstr ""
-
-msgid "Error while opening file:"
-msgstr ""
-
-msgid "Type to search..."
-msgstr ""
-
-msgid "No description available"
-msgstr ""
-
-msgid "Recent files"
-msgstr ""
-
-msgid "Bookmarks"
-msgstr ""
-
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr ""
+msgstr "gir1.2-gda-5.0 پیکیج Firefox اور Midori بک مارکس کے لیے درکار ہے۔"
+
+msgid "Clear List"
+msgstr "فہرست صاف کریں۔"
 
 msgid "No recent files"
-msgstr ""
+msgstr "کوئی حالیہ فائلز نہیں ہیں۔"
 
 msgid "Account details"
-msgstr ""
+msgstr "اکاؤنٹ کی تفصیلات"
 
 msgid "Grid View"
-msgstr ""
+msgstr "جالی دار نظارہ"
 
 msgid "List View"
-msgstr ""
+msgstr "فہرست دیکھیں"
 
 msgid "Switch to grid view"
-msgstr ""
+msgstr "گرڈ ویو پر سوئچ کریں۔"
 
 msgid "Switch to list view"
-msgstr ""
+msgstr "فہرست منظر پر سوئچ کریں۔"
+
+msgid "Lock screen"
+msgstr "اسکرین کو لاک کرنا"
+
+msgid "Lock the screen"
+msgstr "اسکرین کو لاک کریں۔"
+
+msgid "Logout"
+msgstr "لاگ آوٹ"
+
+msgid "Leave the session"
+msgstr "سیشن چھوڑ دو"
+
+msgid "Quit"
+msgstr "چھوڑو"
+
+msgid "Shutdown the computer"
+msgstr "کمپیوٹر بند کریں۔"
+
+msgid "Run with NVIDIA GPU"
+msgstr "NVIDIA GPU کے ساتھ چلائیں۔"
+
+msgid "Add to panel"
+msgstr "پینل میں شامل کریں۔"
+
+msgid "Add to desktop"
+msgstr "ڈیسک ٹاپ میں شامل کریں۔"
+
+msgid "Remove from favorites"
+msgstr "پسندیدہ سے ہٹا دیں۔"
+
+msgid "Add to favorites"
+msgstr "پسندیدہ میں شامل کریں۔"
+
+msgid "Uninstall"
+msgstr "ان انسٹال کریں۔"
 
 msgid "Home"
-msgstr ""
+msgstr "گھر"
 
 msgid "Computer"
-msgstr ""
+msgstr "کمپیوٹر"
 
 msgid "Browse network"
-msgstr ""
+msgstr "نیٹ ورک کو براؤز کریں۔"
 
-msgid ""
-"This menu item is not associated to any package. Do you want to remove it "
-"from the menu anyway?"
-msgstr ""
+msgid "Find files..."
+msgstr "فائلیں تلاش کریں..."
+
+msgid "Please wait..."
+msgstr "برائے مہربانی انتظار کریں..."
+
+msgid "Applications"
+msgstr "ایپلی کیشنز"
+
+msgid "Documents"
+msgstr "دستاویزات"
+
+msgid "Videos"
+msgstr "ویڈیوز"
+
+msgid "Images"
+msgstr "امیجز"
+
+msgid "Music"
+msgstr "موسیقی"
+
+msgid "No recent Items"
+msgstr "کوئی حالیہ آئٹمز نہیں۔"
+
+msgid "Click to copy"
+msgstr "کاپی کرنے کے لیے کلک کریں۔"
+
+msgid "Applications and files"
+msgstr "درخواستیں اور فائلیں۔"
+
+msgid "Other search results"
+msgstr "دیگر تلاش کے نتائج"
+
+msgid "Browser history"
+msgstr "براؤزر کی تاریخ"
+
+msgid "Browser bookmarks"
+msgstr "براؤزر بک مارکس"
+
+msgid "Emoji"
+msgstr "ایموجی"
+
+msgid "Trash"
+msgstr "ردی کی ٹوکری"
+
+msgid "Error while opening file:"
+msgstr "فائل کھولتے وقت خرابی:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "بہت زیادہ اندراجات - صرف پہلی 1000 اندراجات دکھا رہے ہیں۔"
+
+msgid "Favorites"
+msgstr "پسندیدہ"
+
+msgid "Recent"
+msgstr "حالیہ"
+
+msgid "Home folder"
+msgstr "ہوم فولڈر"
+
+msgid "Reset category order"
+msgstr "زمرہ آرڈر کو دوبارہ ترتیب دیں۔"
+
+msgid "light skin tone"
+msgstr "جلد کا ہلکا رنگ"
+
+msgid "medium-light skin tone"
+msgstr "درمیانی ہلکی جلد کا رنگ"
+
+msgid "medium skin tone"
+msgstr "جلد کا درمیانی رنگ"
+
+msgid "medium-dark skin tone"
+msgstr "درمیانی سیاہ جلد کا رنگ"
+
+msgid "dark skin tone"
+msgstr "جلد کا سیاہ رنگ"
+
+msgid "This file is no longer available"
+msgstr "یہ فائل اب دستیاب نہیں ہے۔"
+
+msgid "Open with"
+msgstr "کے ساتھ کھولیں۔"
+
+msgid "Other application..."
+msgstr "دوسری درخواست..."
+
+msgid "Open containing folder"
+msgstr "پر مشتمل فولڈر کھولیں۔"
+
+msgid "Move to trash"
+msgstr "ردی میں ڈالیں"
+
+msgid "Error while moving file to trash:"
+msgstr "فائل کو کوڑے دان میں منتقل کرتے وقت خرابی:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "یہ مینو آئٹم کسی پیکج سے وابستہ نہیں ہے۔ کیا آپ اسے ویسے بھی مینو سے ہٹانا چاہتے ہیں؟"
 
 msgid "The following packages will be removed:"
-msgstr ""
+msgstr "درج ذیل پیکیجز کو ہٹا دیا جائے گا:"
 
 msgid "Packages to be removed"
-msgstr ""
+msgstr "ہٹائے جانے والے پیکجز"
 
 #, python-format
 msgid "Cannot remove package %s as it is required by other packages."
-msgstr ""
+msgstr "پیکج %s کو ہٹایا نہیں جا سکتا کیونکہ یہ دوسرے پیکجوں کے لیے درکار ہے۔"
 
 #, python-format
 msgid "Package %s is a dependency of the following packages:"
-msgstr ""
+msgstr "پیکیج %s درج ذیل پیکجوں کا انحصار ہے۔"
 
 msgid "Open"
-msgstr ""
+msgstr "کھولیں۔"
 
 msgid "Search"
-msgstr ""
+msgstr "تلاش کریں۔"
 
 msgid "Start in"
-msgstr ""
+msgstr "میں شروع کریں۔"
 
 msgid "Select a folder"
-msgstr ""
+msgstr "ایک فولڈر منتخب کریں۔"
 
 msgid "Follow symlinks"
-msgstr ""
+msgstr "سملنک پر عمل کریں۔"
 
 msgid "Search hidden"
-msgstr ""
+msgstr "چھپی ہوئی تلاش"
 
 msgid "Use regular expressions"
-msgstr ""
+msgstr "ریگولر ایکسپریشنز استعمال کریں۔"
 
 msgid "Stop"
-msgstr ""
+msgstr "رک جاؤ"
 
 msgid "File"
-msgstr ""
+msgstr "فائل"
 
 msgid "Path"
-msgstr ""
+msgstr "راستہ"
 
 msgid "Searching..."
-msgstr ""
+msgstr "تلاش کر رہا ہے..."
 
 msgid "Search Stopped"
-msgstr ""
+msgstr "تلاش روک دی گئی۔"
 
 msgid "Searching: "
-msgstr ""
+msgstr "تلاش کرنا: "
 
 msgid "Error: insufficient permissions to read folder "
-msgstr ""
+msgstr "خرابی: فولڈر کو پڑھنے کے لیے ناکافی اجازتیں۔ "
 
 msgid "Search Completed"
-msgstr ""
+msgstr "تلاش مکمل ہو گئی۔"
 
 msgid "Skipping"
-msgstr ""
+msgstr "اچھالنا"
 
 msgid " - directory already searched"
-msgstr ""
+msgstr " - ڈائریکٹری پہلے ہی تلاش کی گئی ہے۔"
 
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinnamenu"
 
-msgid ""
-"A flexible menu with grid or list layout options, file browser and emoji "
-"search."
-msgstr ""
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "گرڈ یا فہرست لے آؤٹ کے اختیارات، فائل براؤزر اور ایموجی تلاش کے ساتھ ایک لچکدار مینو۔"
+
+msgid "Behavior"
+msgstr "رویہ"
+
+msgid "Appearance"
+msgstr "ظہور"
 
 msgid "Layout and Content"
 msgstr "لے آؤٹ اور مشمولات"
 
-msgid "Behavior"
-msgstr ""
+msgid "Search Providers"
+msgstr "فراہم کنندگان کو تلاش کریں۔"
 
-msgid "Appearance"
-msgstr ""
+msgid "No search provider extensions found"
+msgstr "تلاش فراہم کرنے والے کی کوئی توسیع نہیں ملی"
+
+msgid "Panel"
+msgstr "پینل"
+
+msgid "Menu"
+msgstr "مینو"
 
 msgid "Layout"
 msgstr "ترتیب"
 
 msgid "Content"
-msgstr ""
+msgstr "مواد"
 
-msgid "Panel"
-msgstr ""
-
-msgid "Menu"
-msgstr ""
-
-msgid "Applications view mode"
-msgstr ""
-
-msgid "List"
-msgstr ""
-
-msgid "Grid"
-msgstr ""
-
-msgid "View applications as list or grid"
-msgstr ""
-
-msgid "Application description placement"
-msgstr ""
-
-msgid "Tooltips"
-msgstr ""
-
-msgid "Under titles"
-msgstr ""
-
-msgid "None"
-msgstr "کوئی نہیں"
-
-msgid "Choose where to show application descriptions"
-msgstr ""
-
-#, fuzzy
-#| msgid "Session buttons location"
-msgid "Sidebar location"
-msgstr "سیشن بٹنوں کا مقام"
-
-msgid "Top"
-msgstr ""
-
-msgid "Bottom"
-msgstr ""
-
-msgid "Left"
-msgstr ""
-
-msgid "Right"
-msgstr ""
-
-msgid "Choose where to show the sidebar"
-msgstr ""
-
-msgid ""
-"\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
-msgstr ""
-
-msgid "Show favorites on sidebar"
-msgstr ""
-
-msgid "Show your favorite app and file icons on the sidebar"
-msgstr ""
-
-msgid "Show bookmarks and places"
-msgstr ""
-
-msgid "Show bookmarks and places category in the menu"
-msgstr ""
-
-msgid "Show recent items"
-msgstr ""
-
-msgid "Show recent items category in the menu"
-msgstr ""
-
-msgid "Show favorite apps category"
-msgstr ""
-
-msgid "Show your favorite apps category in the menu"
-msgstr ""
-
-msgid "Show home folder"
-msgstr ""
-
-msgid "Show home folder category in the menu"
-msgstr ""
+msgid "Recent files settings"
+msgstr "حالیہ فائلوں کی ترتیبات"
 
 msgid "Open the menu editor"
-msgstr ""
-
-msgid "Keyboard shortcut to open and close the menu"
-msgstr ""
-
-msgid "Open menu on hover"
-msgstr ""
-
-msgid "Open the menu when I move my mouse over the panel icon"
-msgstr ""
-
-msgid "milliseconds"
-msgstr ""
-
-msgid "Menu hover delay"
-msgstr ""
-
-msgid "Use menu animations"
-msgstr ""
-
-msgid "Animate the menu on open and close"
-msgstr ""
-
-msgid "Activate categories on click"
-msgstr ""
-
-msgid "Activate categories on click instead of on hover"
-msgstr ""
-
-msgid "Open menu on category:"
-msgstr ""
-
-msgid "Always open the menu with this category selected"
-msgstr ""
-
-msgid "Last used category"
-msgstr ""
-
-msgid "Enable autoscrolling"
-msgstr ""
-
-msgid "Autoscroll the application list on mouse hover"
-msgstr ""
-
-msgid "Show hidden files"
-msgstr ""
-
-msgid "Show hidden files in folder view"
-msgstr ""
-
-msgid "Emoji search"
-msgstr ""
-
-msgid "Show emojis in search results"
-msgstr ""
-
-msgid "Web search option"
-msgstr ""
-
-msgid "Show an internet search option in search results"
-msgstr ""
-
-msgid "Search home folder"
-msgstr ""
-
-msgid "When searching, also search my home folder for files"
-msgstr ""
-
-msgid "Web bookmarks search"
-msgstr ""
-
-msgid ""
-"When searching, also search my browser's web bookmarks (Google Chrome, "
-"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Note: To search Firefox bookmarks you will need to install package gir1.2-"
-"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
-"libgda (Arch based distributions) and restart your computer."
-msgstr ""
-
-msgid "Wikipedia search"
-msgstr ""
-
-msgid "Show some Wikipedia results"
-msgstr ""
-
-msgid "Wikipedia language"
-msgstr ""
+msgstr "مینو ایڈیٹر کھولیں۔"
 
 msgid "Use a custom icon"
 msgstr "ایک کسٹم آئکن استعمال کریں"
 
 msgid "Use a custom icon in the panel"
-msgstr ""
+msgstr "پینل میں حسب ضرورت آئیکن استعمال کریں۔"
 
 msgid "Panel icon"
 msgstr "پینل کا آئیکن"
 
-msgid "Use a custom icon size"
-msgstr ""
-
-msgid "Use a custom size for the panel icon"
-msgstr ""
-
-msgid "Panel icon size (pixels)"
-msgstr ""
-
-msgid "Choose a custom size for the panel icon"
-msgstr ""
-
 msgid "Panel text"
-msgstr ""
+msgstr "پینل کا متن"
 
 msgid "Text to show beside the panel icon"
-msgstr ""
+msgstr "پینل آئیکن کے ساتھ دکھانے کے لیے متن"
 
 msgid "Category icon size (pixels)"
-msgstr ""
+msgstr "زمرہ آئیکن سائز (پکسل)"
 
 msgid "Applications list icon size (pixels)"
-msgstr ""
+msgstr "ایپلیکیشنز لسٹ آئیکن سائز (پکسل)"
 
 msgid "Applications grid icon size (pixels)"
-msgstr ""
+msgstr "ایپلیکیشنز گرڈ آئیکن سائز (پکسل)"
 
-msgid "Sidebar icon size (pixels)"
-msgstr ""
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "مینو کو کھولنے اور بند کرنے کے لیے کی بورڈ شارٹ کٹ"
 
-msgid "Use sidebar box style"
-msgstr ""
+msgid "Open menu on hover"
+msgstr "ہور پر مینو کھولیں۔"
 
-msgid "Use a sidebar box style"
-msgstr ""
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "جب میں اپنے ماؤس کو پینل آئیکن پر منتقل کروں تو مینو کھولیں۔"
 
-msgid "Use tile style"
-msgstr ""
+msgid "milliseconds"
+msgstr "ملی سیکنڈ"
 
-msgid ""
-"Use a tile style for the application buttons (Note: may not work on some "
-"themes)"
-msgstr ""
+msgid "Menu hover delay"
+msgstr "مینو ہوور میں تاخیر"
 
-msgid "Search Providers"
-msgstr ""
+msgid "Use menu animations"
+msgstr "مینو اینیمیشن استعمال کریں۔"
 
-msgid "No search provider extensions found"
-msgstr ""
+msgid "Animate the menu on open and close"
+msgstr "کھلے اور بند پر مینو کو متحرک کریں۔"
 
-msgid "Recent files settings"
-msgstr ""
+msgid "Activate categories on click"
+msgstr "کلک پر زمرہ جات کو چالو کریں۔"
+
+msgid "Activate categories on click instead of on hover"
+msgstr "ہوور پر کی بجائے کلک پر زمرہ جات کو فعال کریں۔"
+
+msgid "Enable autoscrolling"
+msgstr "آٹو سکرولنگ کو فعال کریں۔"
 
 msgid "Enable autoscrolling in application list"
-msgstr ""
+msgstr "درخواست کی فہرست میں آٹو سکرولنگ کو فعال کریں۔"
 
 msgid "Show web bookmarks"
-msgstr ""
+msgstr "ویب بُک مارکس دکھائیں۔"
 
 msgid ""
 "Show your browser's web bookmarks in the menu.\n"
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
+"مینو میں اپنے براؤزر کے ویب بُک مارکس دکھائیں۔\n"
+"نوٹ: فائر فاکس بُک مارکس پڑھنے کے لیے پیکیج gir1.2-gda-5.0 انسٹال کریں۔"
 
 msgid "Enable searching of open windows"
-msgstr ""
+msgstr "کھلی کھڑکیوں کی تلاش کو فعال کریں۔"
 
 msgid "Enable search providers"
-msgstr ""
+msgstr "تلاش فراہم کنندگان کو فعال کریں۔"
 
 msgid "Include search provider results in searches"
-msgstr ""
+msgstr "تلاش میں تلاش فراہم کنندہ کے نتائج شامل کریں۔"
 
 msgid "Example Search Providers"
-msgstr ""
+msgstr "مثال تلاش فراہم کنندگان"
+
+msgid "Open menu on category:"
+msgstr "زمرہ پر مینو کھولیں:"
+
+msgid "List"
+msgstr "فہرست"
+
+msgid "Grid"
+msgstr "گرڈ"
+
+msgid "Always open the menu with this category selected"
+msgstr "اس زمرے کے منتخب کردہ مینو کو ہمیشہ کھولیں۔"
 
 msgid "columns"
-msgstr ""
+msgstr "کالم"
 
 msgid "Number of columns in apps grid"
-msgstr ""
+msgstr "ایپس گرڈ میں کالموں کی تعداد"
+
+msgid "Show bookmarks and places"
+msgstr "بُک مارکس اور مقامات دکھائیں۔"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "مینو میں بُک مارکس اور مقامات کا زمرہ دکھائیں۔"
 
 msgid "Show application icons"
-msgstr ""
+msgstr "ایپلیکیشن آئیکنز دکھائیں۔"
 
 msgid "Show category icons"
-msgstr ""
+msgstr "زمرہ کی شبیہیں دکھائیں۔"
 
 msgid "Show application descriptions under titles"
-msgstr ""
+msgstr "عنوانات کے تحت درخواست کی تفصیل دکھائیں۔"
 
 msgid "Show tooltips"
-msgstr ""
+msgstr "ٹول ٹپس دکھائیں۔"
 
 msgid "Tooltip delay"
-msgstr ""
+msgstr "ٹول ٹِپ میں تاخیر"
 
 msgid "Use a custom menu height"
-msgstr ""
+msgstr "اپنی مرضی کے مینو کی اونچائی کا استعمال کریں۔"
 
 msgid "Custom menu height (pixels)"
+msgstr "حسب ضرورت مینو اونچائی (پکسل)"
+
+msgid "Applications view mode"
+msgstr "ایپلیکیشنز ویو موڈ"
+
+msgid "View applications as list or grid"
+msgstr "ایپلیکیشنز کو فہرست یا گرڈ کے بطور دیکھیں"
+
+msgid "Application description placement"
+msgstr "درخواست کی تفصیل کی جگہ کا تعین"
+
+msgid "Tooltips"
+msgstr "ٹول ٹپس"
+
+msgid "Under titles"
+msgstr "عنوانات کے تحت"
+
+msgid "None"
+msgstr "کوئی نہیں"
+
+msgid "Choose where to show application descriptions"
+msgstr "منتخب کریں کہ درخواست کی تفصیل کہاں دکھائی جائے۔"
+
+msgid "Sidebar location"
+msgstr "سائڈبار کا مقام"
+
+msgid "Top"
+msgstr "اوپر"
+
+msgid "Bottom"
+msgstr "نیچے"
+
+msgid "Left"
+msgstr "بائیں"
+
+msgid "Right"
+msgstr "صحیح"
+
+msgid "Choose where to show the sidebar"
+msgstr "منتخب کریں کہ سائڈبار کہاں دکھانا ہے۔"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
+"\n"
+"معلومات/ٹپ: مینو کا سائز تبدیل کرنے کے لیے مینو کے کنارے پر گھسیٹیں۔\n"
 
-#~ msgid ""
-#~ "A flexible menu providing formatting options, web bookmarks, search "
-#~ "provider support and fuzzy searching."
-#~ msgstr ""
-#~ "ایک لچکدار مینو جو فارمیٹنگ کے اختیارات ، ویب بُک مارکس ، تلاش فراہم کنندہ "
-#~ "کی معاونت اور مبہم تلاشی فراہم کرتا ہے۔"
+msgid "Show favorites on sidebar"
+msgstr "سائڈبار پر پسندیدہ دکھائیں۔"
 
-#~ msgid "Startup applications view mode"
-#~ msgstr "اسٹارٹ اپ ایپلیکیشنز ویو موڈ"
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "سائڈبار پر اپنی پسندیدہ ایپ اور فائل آئیکنز دکھائیں۔"
+
+msgid "Show recent items"
+msgstr "حالیہ آئٹمز دکھائیں۔"
+
+msgid "Show recent items category in the menu"
+msgstr "مینو میں حالیہ آئٹمز کا زمرہ دکھائیں۔"
+
+msgid "Show favorite apps category"
+msgstr "پسندیدہ ایپس کیٹیگری دکھائیں۔"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "مینو میں اپنی پسندیدہ ایپس کیٹیگری دکھائیں۔"
+
+msgid "Show home folder"
+msgstr "ہوم فولڈر دکھائیں۔"
+
+msgid "Show home folder category in the menu"
+msgstr "مینو میں ہوم فولڈر کا زمرہ دکھائیں۔"
+
+msgid "Last used category"
+msgstr "آخری استعمال شدہ زمرہ"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "ماؤس ہور پر ایپلیکیشن لسٹ کو آٹو سکرول کریں۔"
+
+msgid "Show hidden files"
+msgstr "چھپی ہوئی فائلیں دکھائیں۔"
+
+msgid "Show hidden files in folder view"
+msgstr "پوشیدہ فائلوں کو فولڈر ویو میں دکھائیں۔"
+
+msgid "Emoji search"
+msgstr "ایموجی کی تلاش"
+
+msgid "Show emojis in search results"
+msgstr "تلاش کے نتائج میں ایموجیز دکھائیں۔"
+
+msgid "Web search option"
+msgstr "ویب سرچ آپشن"
+
+msgid "Show an internet search option in search results"
+msgstr "تلاش کے نتائج میں انٹرنیٹ تلاش کا اختیار دکھائیں۔"
+
+msgid "Search home folder"
+msgstr "ہوم فولڈر تلاش کریں۔"
+
+msgid "When searching, also search my home folder for files"
+msgstr "تلاش کرتے وقت، فائلوں کے لیے میرا ہوم فولڈر بھی تلاش کریں۔"
+
+msgid "Web history search"
+msgstr "ویب ہسٹری کی تلاش"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"تلاش کرتے وقت، میرے براؤزر کی سرگزشت بھی تلاش کریں (گوگل کروم، کرومیم، اوپیرا، ویوالڈی، بہادر)\n"
+"نوٹ: فائر فاکس کی تاریخ فی الحال تعاون یافتہ نہیں ہے۔"
+
+msgid "Web bookmarks search"
+msgstr "ویب بُک مارکس کی تلاش"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"تلاش کرتے وقت، میرے براؤزر کے ویب بُک مارکس بھی تلاش کریں (گوگل کروم، فائر فاکس، کرومیم، اوپیرا، ویوالڈی، بہادر)\n"
+"نوٹ: فائر فاکس بک مارکس کو تلاش کرنے کے لیے آپ کو پیکیج gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu) انسٹال کرنا ہوگا۔ اور لینکس منٹ) یا پیکیج libgda (آرچ پر مبنی تقسیم) اور اپنے کمپیوٹر کو دوبارہ شروع کریں۔"
+
+msgid "Wikipedia search"
+msgstr "ویکیپیڈیا کی تلاش"
+
+msgid "Show some Wikipedia results"
+msgstr "ویکیپیڈیا کے کچھ نتائج دکھائیں۔"
+
+msgid "Wikipedia language"
+msgstr "ویکیپیڈیا کی زبان"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"نوٹ: کچھ تلاش کے اختیارات اب بھی استعمال کیے جاسکتے ہیں یہاں تک کہ اگر آپ نے اپنی تلاش کی اصطلاح کا سابقہ ​​لگا کر انہیں یہاں فعال نہیں کیا ہے۔\n"
+"مثال کے طور پر: ایموجی تلاش کرنے کے لیے، ہارٹ ایموجیز تلاش کرنے کے لیے 'ای ہارٹ' ٹائپ کریں۔ اسی طرح، فائل کی تلاش کے لیے 'f'، ویب ہسٹری کے لیے 'h' اور ویب بُک مارکس کی تلاش کے لیے 'b' کا سابقہ ​​استعمال کریں۔\n"
+
+msgid "Use a custom icon size"
+msgstr "اپنی مرضی کے مطابق آئیکن کا سائز استعمال کریں۔"
+
+msgid "Use a custom size for the panel icon"
+msgstr "پینل آئیکن کے لیے حسب ضرورت سائز استعمال کریں۔"
+
+msgid "Panel icon size (pixels)"
+msgstr "پینل آئیکن سائز (پکسل)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "پینل آئیکن کے لیے حسب ضرورت سائز کا انتخاب کریں۔"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "سائڈبار آئیکن سائز (پکسل)"
+
+msgid "Use sidebar box style"
+msgstr "سائڈبار باکس اسٹائل استعمال کریں۔"
+
+msgid "Use a sidebar box style"
+msgstr "سائڈبار باکس اسٹائل کا استعمال کریں۔"
+
+msgid "Use tile style"
+msgstr "ٹائل کا انداز استعمال کریں۔"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "ایپلیکیشن بٹنوں کے لیے ٹائل اسٹائل کا استعمال کریں (نوٹ: ہو سکتا ہے کچھ تھیمز پر کام نہ کریں)"
