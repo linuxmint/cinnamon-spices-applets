@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-18 13:04+0800\n"
-"PO-Revision-Date: 2019-10-24 21:57+0200\n"
+"PO-Revision-Date: 2022-06-03 18:29+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it\n"
 
 #: applet.js:21
 msgid "Currently preventing screensaver"
@@ -32,7 +32,9 @@ msgstr "Impostazioni screensaver"
 
 #. screen-inhibit@mtwebster->metadata.json->description
 msgid "Click to inhibit the screensaver, click again to remove inhibition"
-msgstr "Fare clic per inibire lo screensaver, fare di nuovo clic per rimuovere l'inibizione"
+msgstr ""
+"Fare clic per inibire lo screensaver, fare di nuovo clic per rimuovere "
+"l'inibizione"
 
 #. screen-inhibit@mtwebster->metadata.json->name
 msgid "Screensaver Inhibitor"
@@ -45,7 +47,9 @@ msgstr "Icona di gestione risparmio energetico:"
 #. screen-inhibit@mtwebster->settings-schema.json->on-icon->tooltip
 #. screen-inhibit@mtwebster->settings-schema.json->off-icon->tooltip
 msgid "Select an icon file, or you can type an icon name into the entry box"
-msgstr "Seleziona un file icona, oppure puoi digitare un nome icona nella casella di inserimento"
+msgstr ""
+"Seleziona un file icona, oppure puoi digitare un nome icona nella casella di "
+"inserimento"
 
 #. screen-inhibit@mtwebster->settings-schema.json->head->description
 msgid "Icons"
