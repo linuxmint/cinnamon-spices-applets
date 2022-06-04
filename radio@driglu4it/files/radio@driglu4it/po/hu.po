@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-08 17:18+0100\n"
-"PO-Revision-Date: 2022-05-25 15:28+0200\n"
+"PO-Revision-Date: 2022-06-04 16:39+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -32,6 +32,9 @@ msgid ""
 "Make sure that the URL is valid and you have a stable internet connection. "
 "Don't hestitate to open an Issue on Github if the problem persists."
 msgstr ""
+"Győződjön meg róla, hogy az URL érvényes, és stabil internetkapcsolattal "
+"rendelkezik. Ha a probléma továbbra is fennáll, nyisson egy hibajegyet a "
+"Github webhelyen."
 
 #: 4.6/applet.js:177 3.0/applet.js:140
 msgid "Stop"
@@ -74,6 +77,9 @@ msgid ""
 "couldn't install required dependencies. Make sure you are connected to the "
 "internet. See the Logs for more information"
 msgstr ""
+"nem tudta telepíteni a szükséges függőségeket. Győződjön meg róla, hogy az "
+"internet-kapcsolata működőképes. További információkért tekintse meg a "
+"naplófájlokat"
 
 #: 4.6/applet.js:319
 msgid "Can't increase Volume. Volume already at maximum."
@@ -116,10 +122,13 @@ msgid ""
 "The radio applet depends on the '%s' plugin. It's a 3rd party plugin for "
 "mpv, which allows controlling the radio player with the sound applet."
 msgstr ""
+"A rádió kisalkalmazás a(z) „%s” bővítménytől függ. Ez egy harmadik féltől "
+"származó bővítmény az mpv alkalmazáshoz, amely lehetővé teszi a "
+"rádiólejátszó vezérlését a hangalkalmazással."
 
 #: 4.6/download-dialog-mpris.py:39
 msgid "Do you want to proceed the download at your own risk?"
-msgstr ""
+msgstr "Biztos benne, hogy el kívánja végezni a letöltést?"
 
 #: 4.6/download-dialog-mpris.py:40
 msgid "Cancel download"
@@ -140,10 +149,13 @@ msgid ""
 "Currently the newest version of this package is only included in the Debian "
 "package respository but not yet in the default Linux Mint repositories."
 msgstr ""
+"Ez a funkció a(z) „%s” apt csomag legújabb verziójától függ. Jelenleg ennek "
+"a csomagnak a legújabb verziója csak a Debian csomagtárában található meg, "
+"de az alapértelmezett Linux Mint csomagtárolókban még nem."
 
 #: 4.6/download-dialog-youtube-dl.py:39
 msgid "Do you want to proceed the Installation at your own risk?"
-msgstr ""
+msgstr "Biztos benne, hogy végre kívánja hajtani a telepítést?"
 
 #: 4.6/download-dialog-youtube-dl.py:40
 msgid "Cancel Installation"
@@ -264,6 +276,8 @@ msgid ""
 "The initial volume is applied when clicking on a radio stream and no other "
 "radio stream is already running"
 msgstr ""
+"A kezdeti hangerő akkor kerül beállításra, amikor egy rádió adatfolyamot "
+"indít el, és egyetlen másik rádió adatfolyam sincs lejátszás alatt"
 
 #. 4.6->settings-schema.json->music-download-dir-select->description
 msgid "Download directory"
@@ -274,6 +288,8 @@ msgid ""
 "Songs downloaded from Youtube will be saved to this directory. This feature "
 "can be found in the right-click-menu of the applet"
 msgstr ""
+"A Youtube webhelyről letöltött zenék ebbe a mappába kerülnek elmentésre. Ez "
+"a funkció az kisalkalmazás helyi menüjében található"
 
 #. 3.0->settings-schema.json->page2->title
 #. 3.0->settings-schema.json->section2->title
