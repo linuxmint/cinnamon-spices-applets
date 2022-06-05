@@ -1,0 +1,604 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 18:11+0100\n"
+"Last-Translator: Google translate\n"
+"Language-Team: \n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Type to search..."
+msgstr "Ierakstiet, lai meklētu..."
+
+msgid "Initializing"
+msgstr "Inicializēšana"
+
+msgid "No description available"
+msgstr "Apraksts nav pieejams"
+
+msgid "All applications"
+msgstr "Visas lietojumprogrammas"
+
+msgid "Places"
+msgstr "Vietas"
+
+msgid "Recent files"
+msgstr "Jaunākie faili"
+
+msgid "Bookmarks"
+msgstr "Grāmatzīmes"
+
+msgid "Favorite apps"
+msgstr "Iecienītākās lietotnes"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Firefox un Midori grāmatzīmēm nepieciešama pakotne gir1.2-gda-5.0."
+
+msgid "Clear List"
+msgstr "Notīrīt sarakstu"
+
+msgid "No recent files"
+msgstr "Nav jaunāko failu"
+
+msgid "Account details"
+msgstr "Konta informācija"
+
+msgid "Grid View"
+msgstr "Režģa skats"
+
+msgid "List View"
+msgstr "Saraksta skats"
+
+msgid "Switch to grid view"
+msgstr "Pārslēdzieties uz režģa skatu"
+
+msgid "Switch to list view"
+msgstr "Pārslēdzieties uz saraksta skatu"
+
+msgid "Lock screen"
+msgstr "Bloķēšanas ekrāns"
+
+msgid "Lock the screen"
+msgstr "Bloķējiet ekrānu"
+
+msgid "Logout"
+msgstr "Izlogoties"
+
+msgid "Leave the session"
+msgstr "Iziet no sesijas"
+
+msgid "Quit"
+msgstr "Beidz"
+
+msgid "Shutdown the computer"
+msgstr "Izslēdziet datoru"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Palaist ar NVIDIA GPU"
+
+msgid "Add to panel"
+msgstr "Pievienot panelim"
+
+msgid "Add to desktop"
+msgstr "Pievienot darbvirsmai"
+
+msgid "Remove from favorites"
+msgstr "Noņemt no izlases"
+
+msgid "Add to favorites"
+msgstr "Pievienot pie favorītiem"
+
+msgid "Uninstall"
+msgstr "Atinstalēt"
+
+msgid "Home"
+msgstr "Mājas"
+
+msgid "Computer"
+msgstr "Dators"
+
+msgid "Browse network"
+msgstr "Pārlūkot tīklu"
+
+msgid "Find files..."
+msgstr "Atrast failus..."
+
+msgid "Please wait..."
+msgstr "Lūdzu uzgaidiet..."
+
+msgid "Applications"
+msgstr "Lietojumprogrammas"
+
+msgid "Documents"
+msgstr "Dokumenti"
+
+msgid "Videos"
+msgstr "Videoklipi"
+
+msgid "Images"
+msgstr "Attēli"
+
+msgid "Music"
+msgstr "Mūzika"
+
+msgid "No recent Items"
+msgstr "Nav nesenu vienumu"
+
+msgid "Click to copy"
+msgstr "Noklikšķiniet, lai kopētu"
+
+msgid "Applications and files"
+msgstr "Lietojumprogrammas un faili"
+
+msgid "Other search results"
+msgstr "Citi meklēšanas rezultāti"
+
+msgid "Browser history"
+msgstr "Pārlūka vēsture"
+
+msgid "Browser bookmarks"
+msgstr "Pārlūka grāmatzīmes"
+
+msgid "Emoji"
+msgstr "Emocijzīme"
+
+msgid "Trash"
+msgstr "Atkritumi"
+
+msgid "Error while opening file:"
+msgstr "Kļūda, atverot failu:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Pārāk daudz ierakstu — tiek rādīti tikai pirmie 1000 ieraksti"
+
+msgid "Favorites"
+msgstr "Izlase"
+
+msgid "Recent"
+msgstr "Nesen"
+
+msgid "Home folder"
+msgstr "Mājas mape"
+
+msgid "Reset category order"
+msgstr "Atiestatīt kategoriju secību"
+
+msgid "light skin tone"
+msgstr "gaišs ādas tonis"
+
+msgid "medium-light skin tone"
+msgstr "vidēji gaišs ādas tonis"
+
+msgid "medium skin tone"
+msgstr "vidējs ādas tonis"
+
+msgid "medium-dark skin tone"
+msgstr "vidēji tumšs ādas tonis"
+
+msgid "dark skin tone"
+msgstr "tumšs ādas tonis"
+
+msgid "This file is no longer available"
+msgstr "Šis fails vairs nav pieejams"
+
+msgid "Open with"
+msgstr "Atvērt ar"
+
+msgid "Other application..."
+msgstr "Cita lietojumprogramma..."
+
+msgid "Open containing folder"
+msgstr "Atveriet mapi, kas satur"
+
+msgid "Move to trash"
+msgstr "Pārvietot uz miskasti"
+
+msgid "Error while moving file to trash:"
+msgstr "Pārvietojot failu uz miskasti, radās kļūda:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Šis izvēlnes vienums nav saistīts ar nevienu pakotni. Vai tomēr vēlaties to noņemt no izvēlnes?"
+
+msgid "The following packages will be removed:"
+msgstr "Tiks noņemti šādi iepakojumi:"
+
+msgid "Packages to be removed"
+msgstr "Pakas, kas jāizņem"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Nevar noņemt pakotni %s, jo to pieprasa citas pakotnes."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Pakotne %s ir atkarība no šādām pakotnēm:"
+
+msgid "Open"
+msgstr "Atvērt"
+
+msgid "Search"
+msgstr "Meklēt"
+
+msgid "Start in"
+msgstr "Sāciet iekšā"
+
+msgid "Select a folder"
+msgstr "Izvēlieties mapi"
+
+msgid "Follow symlinks"
+msgstr "Sekojiet simbolu saitēm"
+
+msgid "Search hidden"
+msgstr "Meklēt paslēptu"
+
+msgid "Use regular expressions"
+msgstr "Izmantojiet regulāras izteiksmes"
+
+msgid "Stop"
+msgstr "Stop"
+
+msgid "File"
+msgstr "Fails"
+
+msgid "Path"
+msgstr "Ceļš"
+
+msgid "Searching..."
+msgstr "Meklēšana..."
+
+msgid "Search Stopped"
+msgstr "Meklēšana apturēta"
+
+msgid "Searching: "
+msgstr "Meklēšana: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Kļūda: nepietiek atļaujas, lai lasītu mapi "
+
+msgid "Search Completed"
+msgstr "Meklēšana pabeigta"
+
+msgid "Skipping"
+msgstr "Izlaižot"
+
+msgid " - directory already searched"
+msgstr " - katalogs jau ir meklēts"
+
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Elastīga izvēlne ar režģa vai saraksta izkārtojuma opcijām, failu pārlūkprogrammu un emocijzīmju meklēšanu."
+
+msgid "Behavior"
+msgstr "Uzvedība"
+
+msgid "Appearance"
+msgstr "Izskats"
+
+msgid "Layout and Content"
+msgstr "Izkārtojums un saturs"
+
+msgid "Search Providers"
+msgstr "Meklēšanas pakalpojumu sniedzēji"
+
+msgid "No search provider extensions found"
+msgstr "Nav atrasts neviens meklēšanas nodrošinātāja paplašinājums"
+
+msgid "Panel"
+msgstr "Panelis"
+
+msgid "Menu"
+msgstr "Izvēlne"
+
+msgid "Layout"
+msgstr "Izkārtojums"
+
+msgid "Content"
+msgstr "Saturs"
+
+msgid "Recent files settings"
+msgstr "Jaunākie failu iestatījumi"
+
+msgid "Open the menu editor"
+msgstr "Atveriet izvēlnes redaktoru"
+
+msgid "Use a custom icon"
+msgstr "Izmantojiet pielāgotu ikonu"
+
+msgid "Use a custom icon in the panel"
+msgstr "Izmantojiet pielāgotu ikonu panelī"
+
+msgid "Panel icon"
+msgstr "Paneļa ikona"
+
+msgid "Panel text"
+msgstr "Paneļa teksts"
+
+msgid "Text to show beside the panel icon"
+msgstr "Teksts, kas jāparāda blakus paneļa ikonai"
+
+msgid "Category icon size (pixels)"
+msgstr "Kategorijas ikonas izmērs (pikseļos)"
+
+msgid "Applications list icon size (pixels)"
+msgstr "Lietojumprogrammu saraksta ikonas lielums (pikseļos)"
+
+msgid "Applications grid icon size (pixels)"
+msgstr "Lietojumprogrammu režģa ikonas izmērs (pikseļos)"
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Tastatūras īsinājumtaustiņš, lai atvērtu un aizvērtu izvēlni"
+
+msgid "Open menu on hover"
+msgstr "Atveriet izvēlni, novietojot kursoru"
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Atveriet izvēlni, kad pārvietoju peles kursoru virs paneļa ikonas"
+
+msgid "milliseconds"
+msgstr "milisekundes"
+
+msgid "Menu hover delay"
+msgstr "Izvēlnes kursora aizkave"
+
+msgid "Use menu animations"
+msgstr "Izmantojiet izvēlnes animācijas"
+
+msgid "Animate the menu on open and close"
+msgstr "Animējiet izvēlni, atverot un aizverot"
+
+msgid "Activate categories on click"
+msgstr "Aktivizējiet kategorijas, noklikšķinot"
+
+msgid "Activate categories on click instead of on hover"
+msgstr "Aktivizējiet kategorijas, noklikšķinot, nevis virzot kursoru"
+
+msgid "Enable autoscrolling"
+msgstr "Iespējot automātisko ritināšanu"
+
+msgid "Enable autoscrolling in application list"
+msgstr "Iespējot automātisko ritināšanu lietojumprogrammu sarakstā"
+
+msgid "Show web bookmarks"
+msgstr "Rādīt tīmekļa grāmatzīmes"
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Izvēlnē parādiet pārlūkprogrammas tīmekļa grāmatzīmes.\n"
+"Piezīme. Lai lasītu Firefox grāmatzīmes, instalējiet pakotni gir1.2-gda-5.0."
+
+msgid "Enable searching of open windows"
+msgstr "Iespējot atvērto logu meklēšanu"
+
+msgid "Enable search providers"
+msgstr "Iespējot meklēšanas pakalpojumu sniedzējus"
+
+msgid "Include search provider results in searches"
+msgstr "Iekļaut meklējumos meklēšanas nodrošinātāja rezultātus"
+
+msgid "Example Search Providers"
+msgstr "Meklēšanas pakalpojumu sniedzēju piemēri"
+
+msgid "Open menu on category:"
+msgstr "Atvērt izvēlni kategorijā:"
+
+msgid "List"
+msgstr "Saraksts"
+
+msgid "Grid"
+msgstr "Režģis"
+
+msgid "Always open the menu with this category selected"
+msgstr "Vienmēr atveriet izvēlni ar atlasītu šo kategoriju"
+
+msgid "columns"
+msgstr "kolonnas"
+
+msgid "Number of columns in apps grid"
+msgstr "Kolonnu skaits lietotņu režģī"
+
+msgid "Show bookmarks and places"
+msgstr "Rādīt grāmatzīmes un vietas"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "Rādīt izvēlnē grāmatzīmju un vietu kategoriju"
+
+msgid "Show application icons"
+msgstr "Rādīt lietojumprogrammu ikonas"
+
+msgid "Show category icons"
+msgstr "Rādīt kategoriju ikonas"
+
+msgid "Show application descriptions under titles"
+msgstr "Rādīt lietojumprogrammu aprakstus zem nosaukumiem"
+
+msgid "Show tooltips"
+msgstr "Rādīt rīka padomus"
+
+msgid "Tooltip delay"
+msgstr "Rīka padoma aizkave"
+
+msgid "Use a custom menu height"
+msgstr "Izmantojiet pielāgotu izvēlnes augstumu"
+
+msgid "Custom menu height (pixels)"
+msgstr "Pielāgots izvēlnes augstums (pikseļos)"
+
+msgid "Applications view mode"
+msgstr "Lietojumprogrammu skata režīms"
+
+msgid "View applications as list or grid"
+msgstr "Skatiet lietojumprogrammas kā sarakstu vai režģi"
+
+msgid "Application description placement"
+msgstr "Lietojumprogrammas apraksta izvietojums"
+
+msgid "Tooltips"
+msgstr "Rīku padomi"
+
+msgid "Under titles"
+msgstr "Zem nosaukumiem"
+
+msgid "None"
+msgstr "Nav"
+
+msgid "Choose where to show application descriptions"
+msgstr "Izvēlieties, kur rādīt lietojumprogrammu aprakstus"
+
+msgid "Sidebar location"
+msgstr "Sānjoslas atrašanās vieta"
+
+msgid "Top"
+msgstr "Tops"
+
+msgid "Bottom"
+msgstr "Apakšā"
+
+msgid "Left"
+msgstr "Pa kreisi"
+
+msgid "Right"
+msgstr "Pa labi"
+
+msgid "Choose where to show the sidebar"
+msgstr "Izvēlieties, kur rādīt sānjoslu"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"Informācija/padoms: velciet uz izvēlnes malas, lai mainītu izvēlnes izmēru.\n"
+
+msgid "Show favorites on sidebar"
+msgstr "Rādīt izlasi sānjoslā"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Sānjoslā parādiet iecienītākās lietotnes un failu ikonas"
+
+msgid "Show recent items"
+msgstr "Rādīt jaunākos vienumus"
+
+msgid "Show recent items category in the menu"
+msgstr "Rādīt jaunāko vienumu kategoriju izvēlnē"
+
+msgid "Show favorite apps category"
+msgstr "Rādīt iecienītāko lietotņu kategoriju"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Parādiet izvēlnē savu iecienītāko lietotņu kategoriju"
+
+msgid "Show home folder"
+msgstr "Rādīt mājas mapi"
+
+msgid "Show home folder category in the menu"
+msgstr "Rādīt izvēlnē mājas mapes kategoriju"
+
+msgid "Last used category"
+msgstr "Pēdējā lietotā kategorija"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Automātiski ritiniet lietojumprogrammu sarakstu, novietojot peles kursoru"
+
+msgid "Show hidden files"
+msgstr "Rādīt slēptos failus"
+
+msgid "Show hidden files in folder view"
+msgstr "Rādīt slēptos failus mapes skatā"
+
+msgid "Emoji search"
+msgstr "Emocijzīmju meklēšana"
+
+msgid "Show emojis in search results"
+msgstr "Rādīt emocijzīmes meklēšanas rezultātos"
+
+msgid "Web search option"
+msgstr "Tīmekļa meklēšanas opcija"
+
+msgid "Show an internet search option in search results"
+msgstr "Rādīt meklēšanas rezultātos interneta meklēšanas opciju"
+
+msgid "Search home folder"
+msgstr "Meklēt mājas mapē"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Veicot meklēšanu, meklējiet failus arī manā mājas mapē"
+
+msgid "Web history search"
+msgstr "Meklēšana tīmekļa vēsturē"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Veicot meklēšanu, meklējiet arī manas pārlūkprogrammas vēsturē (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Piezīme: Firefox vēsture pašlaik netiek atbalstīta."
+
+msgid "Web bookmarks search"
+msgstr "Tīmekļa grāmatzīmju meklēšana"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Veicot meklēšanu, meklējiet arī manas pārlūkprogrammas tīmekļa grāmatzīmes (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Piezīme. Lai meklētu Firefox grāmatzīmes, jums būs jāinstalē pakotne gir1.2-gda-5.0 (Debian balstīti izplatījumi, ieskaitot Ubuntu & Linux Mint) vai pakotnē libgda (arh balstīti izplatījumi) un restartējiet datoru."
+
+msgid "Wikipedia search"
+msgstr "Wikipedia meklēšana"
+
+msgid "Show some Wikipedia results"
+msgstr "Parādiet dažus Wikipedia rezultātus"
+
+msgid "Wikipedia language"
+msgstr "Vikipēdijas valoda"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Piezīme. Dažas meklēšanas opcijas joprojām var izmantot pat tad, ja neesat tās šeit iespējojis, pievienojot meklēšanas vienuma prefiksu.\n"
+"Piemēram: lai meklētu emocijzīmi, ierakstiet “e heart”, lai atrastu sirsniņu emocijzīmes. Tāpat izmantojiet prefiksus “f” failu meklēšanai, “h” tīmekļa vēsturei un “b” tīmekļa grāmatzīmju meklēšanai.\n"
+
+msgid "Use a custom icon size"
+msgstr "Izmantojiet pielāgotu ikonas izmēru"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Izmantojiet pielāgotu izmēru paneļa ikonai"
+
+msgid "Panel icon size (pixels)"
+msgstr "Paneļa ikonas izmērs (pikseļos)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Izvēlieties pielāgotu paneļa ikonas izmēru"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Sānjoslas ikonas izmērs (pikseļos)"
+
+msgid "Use sidebar box style"
+msgstr "Izmantojiet sānjoslas lodziņu stilu"
+
+msgid "Use a sidebar box style"
+msgstr "Izmantojiet sānjoslas kastes stilu"
+
+msgid "Use tile style"
+msgstr "Izmantojiet flīžu stilu"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Lietojumprogrammu pogām izmantojiet flīžu stilu (piezīme: var nedarboties ar dažiem motīviem)"
