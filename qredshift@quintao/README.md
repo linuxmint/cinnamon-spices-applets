@@ -4,6 +4,9 @@ A Cinnamon applet that sets brightness, gamma levels and color temperature with 
 
 Original Repository: [https://github.com/raphaelquintao/QRedshift](https://github.com/raphaelquintao/QRedshift)
 
+## Translations
+If you want to submit some translations please make it on the original repository. It's a lot easier to me keep it synced.
+
 ## Buy me a coffee
  - [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZLHQD3GQ5YNR6&source=url)
  - Bitcoin: `1NaiaFcVGrrMs9amjyb4aVV1dJoLfdKe3Q`
@@ -32,6 +35,10 @@ Original Repository: [https://github.com/raphaelquintao/QRedshift](https://githu
     - If you want to enable it again, run `systemctl unmask --user redshift.service`
 
 ## Changelog
+* 1.7.1
+    - Auto update is only used when night is enabled.
+    - Added translations:
+      - Polish by [szedar14](https://github.com/szedar14 "@szedar14 on Github")
 * 1.7.0
     - Fixed issues with asynchronous command calls.
         - Main redshift call reverted to synchronous, so the cinnamon will show the annoying message again: ***This applet contains function calls that could potentially cause Cinnamon to crash or freeze***.

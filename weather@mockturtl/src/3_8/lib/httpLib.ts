@@ -26,27 +26,29 @@ export class HttpLib {
 	/**
 	 * Handles obtaining JSON over http. 
 	 */
-	public async LoadJsonAsync<T>(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<T>> {
-		let response = await this.LoadAsync(url, params, headers, method);
-
-		if (!response.Success)
-			return response;
+	public async LoadJsonAsync<T, E = any>(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<T, E>> {
+		const response = await this.LoadAsync(url, params, headers, method);
 
 		try {
-			let payload = JSON.parse(response.Data);
+			const payload = JSON.parse(response.Data);
 			response.Data = payload;
 		}
 		catch (e) { // Payload is not JSON
-			Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
-			response.Success = false;
-			response.ErrorData = {
-				code: -1,
-				message: "bad api response - non json",
-				reason_phrase: "",
+			if (e instanceof Error)
+				Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
+			// Only care about JSON parse errors if the request was successful before
+			if (response.Success) {
+				(<GenericResponse>response).Success = false;
+				(<GenericResponse>response).ErrorData = {
+					code: -1,
+					message: "bad api response - non json",
+					reason_phrase: "",
+				}
 			}
+			
 		}
 		finally {
-			return response as Response<T>;
+			return response as Response<T, E>;
 		}
 	}
 
@@ -54,7 +56,7 @@ export class HttpLib {
 	 * Handles obtaining data over http. 
 	 */
 	public async LoadAsync(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<GenericResponse> {
-		let message = await this.Send(url, params, headers, method);
+		const message = await this.Send(url, params, headers, method);
 
 		let error: HttpError | undefined = undefined;
 
@@ -101,17 +103,24 @@ export class HttpLib {
 			}
 		}
 
-		if (message?.status_code > 200 && message?.status_code < 300) {
+		const responseHeaders: Record<string, string> = {};
+		message?.response_headers?.foreach((name, val) => {
+			responseHeaders[name] = val;
+		})
+
+		if ((message?.status_code ?? -1) > 200 && (message?.status_code ?? -1) < 300) {
 			Logger.Info("Warning: API returned non-OK status code '" + message?.status_code + "'");
 		}
 
-		Logger.Debug2("API full response: " + message?.response_body?.data?.toString());
+		Logger.Verbose("API full response: " + message?.response_body?.data?.toString());
 		if (error != null)
 			Logger.Error("Error calling URL: " + error.reason_phrase + ", " + error?.response?.response_body?.data);
-		return {
+		return <GenericResponse>{
 			Success: (error == null),
 			Data: message?.response_body?.data,
-			ErrorData: error
+			ResponseHeaders: responseHeaders,
+			ErrorData: error,
+			Response: message
 		}
 	}
 
@@ -121,29 +130,33 @@ export class HttpLib {
 	 * @param params 
 	 * @param method 
 	 */
-	public async Send(url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method: Method = "GET"): Promise<imports.gi.Soup.Message> {
+	public async Send(url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method: Method = "GET"): Promise<imports.gi.Soup.Message | null> {
 		// Add params to url
 		if (params != null) {
-			let items = Object.keys(params);
-			for (let index = 0; index < items.length; index++) {
-				const item = items[index];
+			const items = Object.keys(params);
+			for (const [index, item] of items.entries()) {
 				url += (index == 0) ? "?" : "&";
 				url += (item) + "=" + params[item]
 			}
 		}
 
-		let query = encodeURI(url);
+		const query = encodeURI(url);
 		Logger.Debug("URL called: " + query);
-		let data: imports.gi.Soup.Message = await new Promise((resolve, reject) => {
-			let message = Message.new(method, query);
-			if (headers != null) {
-				for (const key in headers) {
-					message.request_headers.append(key, headers[key]);
-				}
+		const data: imports.gi.Soup.Message | null = await new Promise((resolve, reject) => {
+			const message = Message.new(method, query);
+			if (message == null) {
+				resolve(null);
 			}
-			this._httpSession.queue_message(message, (session, message) => {
-				resolve(message);
-			});
+			else {
+				if (headers != null) {
+					for (const key in headers) {
+						message.request_headers.append(key, headers[key]);
+					}
+				}
+				this._httpSession.queue_message(message, (session, message) => {
+					resolve(message);
+				});
+			}
 		});
 
 		return data;
@@ -154,14 +167,32 @@ export class HttpLib {
 export type Method = "GET" | "POST" | "PUT" | "DELETE";
 export type NetworkError = "";
 
-export interface Response<T> extends GenericResponse {
-	Data: T,
+export type Response<T, E = any> = SuccessResponse<T> | ErrorResponse<E>;
+
+export interface SuccessResponse<T> extends GenericSuccessResponse {
+	Data: T;
 }
 
-interface GenericResponse {
-	Success: boolean;
-	Data: any;
-	ErrorData?: HttpError;
+export interface ErrorResponse<E = any> extends GenericErrorResponse {
+	Data: E;
+}
+
+type GenericResponse = GenericErrorResponse | GenericSuccessResponse;
+
+interface GenericErrorResponse extends BaseGenericResponse {
+	Success: false;
+	ErrorData: HttpError;
+}
+
+interface GenericSuccessResponse extends BaseGenericResponse {
+	Success: true;
+	ErrorData: undefined;
+}
+
+interface BaseGenericResponse {
+	Data: any | undefined;
+	ResponseHeaders: Record<string, string>;
+	Response: imports.gi.Soup.Message | null;
 }
 
 export interface HTTPParams {
@@ -176,6 +207,5 @@ export interface HttpError {
 	code: number;
 	message: ErrorDetail;
 	reason_phrase: string;
-	data?: any;
-	response?: imports.gi.Soup.Message
+	response?: imports.gi.Soup.Message | undefined
 }

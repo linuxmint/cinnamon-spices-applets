@@ -19,23 +19,24 @@ You can also save locations what you entered manually and switch between them in
 
 ## Weather providers to choose from
 
-| Weather Providers       | Needs API key | **Maximum Forecast Days** | **Maximum Forecast Hours** | Required Packages         |
-| ----------------------- | ------------- | ------------------------- | -------------------------- | ------------------------- |
-| **OpenWeatherMap**      | No            | 8                         | 48                         | --                        |
-| **MET Norway**          | No            | 10                        | 48                         | --                        |
-| **DMI Denmark**         | No            | 10                        | 48                         | --                        |
-| **Met Office UK**       | No            | 5                         | 36                         | --                        |
-| **US National Weather** | No            | 7                         | 156                        | --                        |
-| **WeatherBit**          | Yes           | 16                        | 0**                        | --                        |
-| **Visual Crossing**     | Yes           | 15                        | 336                        | --                        |
-| **ClimacellV4**         | Yes           | 15                        | 108                        | --                        |
-| **DarkSky**             | Yes*          | 8                         | 168                        | --                        |
+| Weather Providers       | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Other information             |
+| ----------------------- | ------------- | --------------------- | ---------------------- | ----------------------------- |
+| **OpenWeatherMap**      | No            | 8                     | 48                     | Default provider              |
+| **MET Norway**          | No            | 10                    | 48                     | --                            |
+| **DMI Denmark**         | No            | 10                    | 48                     | --                            |
+| **Met Office UK**       | No            | 5                     | 36                     | --                            |
+| **US National Weather** | No            | 7                     | 156                    | --                            |
+| **WeatherBit**          | Yes           | 16                    | 0**                    | --                            |
+| **Visual Crossing**     | Yes           | 15                    | 336                    | --                            |
+| **Tomorrow.io**         | Yes           | 15                    | 108                    | Previously known as Climacell |
+| **DarkSky**             | Yes           | 8                     | 168                    | Signups closed, will end 2022 |
+| **AccuWeather**         | Yes           | 5***                  | 12                     | Limited free calls            |
 
 ### OpenWeatherMap
 
 Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with headquaters in London UK. [OpenWeatherMap Website](https://openweathermap.org/) 
 
-This is the default provider that works out of the box. Big Thanks to them supporting free open source projects, like this!
+* This is the default provider that works out of the box. Big Thanks to them supporting free open source projects, like this!
 
 ### MET Norway
 
@@ -87,7 +88,7 @@ Weather service from Visual Crossing Corporation founded in 2003 with headquarte
 
 * Provides 1000 Free calls a day
 
-### Tomorrow.io (ClimacellV4)
+### Tomorrow.io
 
 Meteorological data from American weather technology company with headquarters in Boston since 2016. Changed name from Climacell to Tomorrow.io in March 2021. [Tomorrow.io Website](https://www.tomowrrow.io/)
 
@@ -97,9 +98,36 @@ Meteorological data from American weather technology company with headquarters i
 
 ### DarkSky
 
-Online Service from The Dark Sky Company in the US that specializes in weather forecasting and visualization. [DarkSky Website](https://darksky.net/)
+Online Service started by The Dark Sky Company founded 2012 in the US that specializes in weather forecasting and visualization. [DarkSky Website](https://darksky.net/)
 
-* **[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. **It does not allow new signups and it will cease to function at [the end of 2022](https://blog.darksky.net/).**
+* [DarkSky was acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/) as of March 31, 2020. The service does not allow new signups and it will cease to function at [the end of 2022](https://blog.darksky.net/).
+
+### AccuWeather
+
+Online Service from company AccuWeather Inc, founded in 1962 with headquarters in the US, provides a global weather source. [AccuWeather Website](https://www.accuweather.com/)
+
+* With the free plan, there are only a very limited number of calls for a day, which will be displayed in the applet menu. Please lower your Update interval setting in Configuration or you may run out of calls and then the service will stop with an error message until the next day.
+- ***Number of available hours and days are specified for the free plan, [paid plans allow more](https://developer.accuweather.com/packages).
+- API keys can be obtained [here](https://developer.accuweather.com/user/register). Register, then you must add a new App. When it's created Click on the App and the key will be displayed.
+
+## Usage of "Override label on panel" setting
+
+The setting allows you to make the applet display basically anything in the form of text in the panel. In addition, it exposes a number of values for you to use as you like, these will be replaced with actual data values. The full text-to-value mapping can be found below.
+
+| Text to enter     | Mapped value                                              |
+| ----------------- | --------------------------------------------------------- |
+| `{t}`             | Temperature value                                         |
+| `{u}`             | Temperature unit                                          |
+| `{c}`             | Short condition text                                      |
+| `{c_long}`        | Long condition text (same as short if not available)      |
+| `{dew_point}`     | Dew point value                                           |
+| `{humidity}`      | Humidity value (always as percent)                        |
+| `{pressure}`      | Pressure value                                            |
+| `{pressure_unit}` | Pressure unit                                             |
+| `{extra_value}`   | API specific value (usually "Feels Like" or "Cloudiness") |
+| `{extra_name}`    | API specific value's name                                 |
+| `{wind_speed}`    | Wind speed with unit                                      |
+| `{wind_dir}`      | Wind direction in text format (NW, etc)                   |
 
 ## Versions
 
@@ -118,7 +146,7 @@ http://groups.google.com/group/cinnamon-weather
 
 ## Future Plans
 
-* None at the moment, I can take requests for provider integrations or for new features
+* Add special formatting options (like padded temperature) for values in panel in the "Override label on panel" setting 
 
 ## Language Translations
 
@@ -135,9 +163,13 @@ by making a PR (pull request) on Github or contact the current maintainer of the
 
 * Hourly forecast toggle button is not centered to the middle of the popup menu
 
-* Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location with some of the weather providers (Yahoo, for example)
+* Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location with some of the weather providers
 
 * DarkSky verbose conditions are only in cm/Celsius or in/Fahrenheit
+
+### Report a new issue
+
+You need a Github login to make a issue report. Please first check if the issue already is reported [here](https://github.com/linuxmint/cinnamon-spices-applets/issues?q=is%3Aissue+is%3Aopen+weather). You will find more information about reporting in the Configuration under the Help Tab, accessible by right clicking on the applet. Here you can save logs to file with debug level that is much appreciated. By using the *Submit an Issue* Button under this Tab, useful system information will be generated for your report form in your default web browser at Github.com. 
 
 ### Troubleshooting
 

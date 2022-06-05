@@ -334,24 +334,65 @@ PomodoroApplet.prototype = {
     },
 
     _setTimerLabel: function(ticks) {
-        ticks = ticks || 0;
-
-        let minutes, seconds;
-        minutes = seconds = 0;
-
-        if (ticks > 0) {
-            minutes = parseInt(ticks / 60);
-            seconds = parseInt(ticks % 60);
+        let timeLeft = this._getFormattedTimeLeft(ticks);
+        if (timeLeft === undefined) {
+            return;
         }
 
         let timerText = "%d".format(this._numPomodoroSetFinished);
 
         if (this._opt_showTimerInPanel) {
             timerText += " \u00B7 "; // Separator
-            timerText += "%02d:%02d".format(Math.abs(minutes), Math.abs(seconds));
+            timerText += timeLeft;
         }
 
         this.set_applet_label(timerText);
+    },
+
+    _setAppletTooltip: function(ticks) {
+        let timeLeft = this._getFormattedTimeLeft(ticks);
+        let timeLeftExtension = "";
+        if (timeLeft !== undefined) {
+            timeLeftExtension = " (%s)".format(timeLeft);
+        }
+
+        let message;
+        switch (this._currentState) {
+        case 'short-break':
+            message = _("Short break running") + timeLeftExtension;
+            break;
+        case 'long-break':
+            message = _("Long break running") + timeLeftExtension;
+            break;
+        case 'pomodoro':
+            message = _("Pomodori %d, set %d running").format(
+                this._numPomodoriFinished + 1, this._numPomodoroSetFinished + 1
+            ) + timeLeftExtension;
+            break;
+        case 'pomodoro-stop':
+            message = _("Waiting to start");
+            break;
+        default:
+            message = "";
+            break;
+        }
+
+        this.set_applet_tooltip(message);
+    },
+
+    _clearAppletTooltip: function() {
+        this.set_applet_tooltip("");
+    },
+
+    _getFormattedTimeLeft: function(ticks) {
+        if (typeof ticks !== "number" || isNaN(ticks) || ticks < 0) {
+            return;
+        }
+
+        let minutes = parseInt(ticks / 60);
+        let seconds = parseInt(ticks % 60);
+
+        return "%02d:%02d".format(minutes, seconds);
     },
 
     /**
@@ -434,7 +475,7 @@ PomodoroApplet.prototype = {
                 timerQueue.preventStart(true);
                 timerQueue.stop();
                 this._appletMenu.toggleTimerState(false);
-                this.set_applet_tooltip(_("Waiting to start"));
+                this._setAppletTooltip(0);
 
                 if (this._opt_showDialogMessages) {
                     this._playStartSound();
@@ -452,7 +493,6 @@ PomodoroApplet.prototype = {
         pomodoroTimer.connect('timer-running', Lang.bind(this, function() {
             this._setCurrentState('pomodoro');
             this._playTickerSound();
-            this.set_applet_tooltip(_("Pomodori %d, set %d running").format(this._numPomodoriFinished + 1, this._numPomodoroSetFinished + 1));
         }));
 
         pomodoroTimer.connect('timer-started', Lang.bind(this, function() {
@@ -475,7 +515,6 @@ PomodoroApplet.prototype = {
             this._appletMenu.updateCounts(this._numPomodoroSetFinished, this._numPomodoriFinished);
             this._appletMenu.showPomodoroInProgress(this._opt_pomodoriNumber);
             Main.notify(_("Take a short break"));
-            this.set_applet_tooltip(_("Short break running"));
         }));
 
         shortBreakTimer.connect('timer-stopped', Lang.bind(this, function() {
@@ -496,7 +535,6 @@ PomodoroApplet.prototype = {
             } else {
                 Main.notify(_("Take a long break"));
             }
-            this.set_applet_tooltip(_("Long break running"));
         }));
 
         longBreakTimer.connect('timer-stopped', Lang.bind(this, function() {
@@ -528,7 +566,7 @@ PomodoroApplet.prototype = {
     _turnOff: function() {
         this._resetTimerQueueState();
         this._appletMenu.toggleTimerState(false);
-        this.set_applet_tooltip("");
+        this._clearAppletTooltip();
 
         Main.notify(_("Pomodoro ended"));
     },
@@ -540,6 +578,7 @@ PomodoroApplet.prototype = {
      */
     _timerTickUpdate: function(timer) {
         this._setTimerLabel(timer.getTicksRemaining());
+        this._setAppletTooltip(timer.getTicksRemaining());
     },
 
     /**
@@ -645,20 +684,20 @@ PomodoroApplet.prototype = {
 
         menu.connect('stop-timer', Lang.bind(this, function() {
             this._timerQueue.stop();
-            this.set_applet_tooltip("");
+            this._clearAppletTooltip();
         }));
 
         menu.connect('reset-timer', Lang.bind(this, function() {
             this._timerQueue.reset();
             this._setTimerLabel(0);
-            this.set_applet_tooltip("");
+            this._clearAppletTooltip();
         }));
 
         menu.connect('reset-counts', Lang.bind(this, function() {
             this._numPomodoriFinished = 0;
             this._numPomodoroSetFinished = 0;
             this._appletMenu.updateCounts(0, 0);
-            this.set_applet_tooltip("");
+            this._clearAppletTooltip();
         }));
 
         menu.connect('what-is-this', Lang.bind(this, function() {
@@ -685,7 +724,7 @@ PomodoroApplet.prototype = {
             } else {
                 this._timerQueue.stop();
                 this._appletMenu.toggleTimerState(false);
-                this.set_applet_tooltip("");
+                this._clearAppletTooltip();
             }
 
             this._longBreakdialog.close();
@@ -734,7 +773,6 @@ PomodoroApplet.prototype = {
         dialog.connect('pause-pomodoro', Lang.bind(this, function() {
             this._timerQueue.stop();
             this._appletMenu.toggleTimerState(false);
-            this.set_applet_tooltip(_("Waiting to start"));
 
             this._shortBreakdialog.close();
         }));

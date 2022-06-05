@@ -1,6 +1,5 @@
 {
-  "name": "most-simple-applet",
-  "version": "1.0.0",
+  "name": "radio-applet",
   "description": "",
   "sideEffects": false,
   "main": "index.js",
@@ -12,7 +11,7 @@
   "author": "Jonathan Heard",
   "license": "MIT",
   "devDependencies": {
-    "@ci-types/cjs": "^1.0.4",
+    "@ci-types/cjs": "^1.0.17",
     "@types/jest": "^27.0.1",
     "@types/lodash": "^4.14.170",
     "@types/lodash-es": "^4.17.5",
@@ -26,7 +25,6 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
-    "cinnamonpopup": "^1.0.2",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21"
   }

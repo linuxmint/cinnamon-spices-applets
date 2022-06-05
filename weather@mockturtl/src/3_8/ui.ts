@@ -43,7 +43,7 @@ export class UI {
 	private readonly menuManager: imports.ui.popupMenu.PopupMenuManager;
 	private readonly signals: imports.misc.signalManager.SignalManager;
 
-	private lastDateToggled?: DateTime = undefined;
+	private noHourlyWeather: boolean = false;
 
 	constructor(app: WeatherApplet, orientation: imports.gi.St.Side) {
 		this.App = app;
@@ -64,7 +64,30 @@ export class UI {
 	}
 
 	public Toggle(): void {
-		this.menu.toggle();
+		// Hourly weather is always open
+		if (!this.noHourlyWeather && this.App.config._alwaysShowHourlyWeather) {
+			if (this.menu.isOpen) {
+				this.menu.close(true);
+			}
+			else {
+				this.menu.open(false);
+				// Showing hourly weather height calculation only works when it's visible
+				// so we trigger it then, and we need it every time
+				// so element width is set properly based on displayed text
+				this.ShowHourlyWeather(false);
+				this.menu.close(false);
+				// Open it properly here
+				this.menu.open(true);
+			}
+		}
+		// Normal behaviour
+		else {
+			// Close hourly weather because it should always start closed.
+			if (this.HourlyWeather.Toggled && !this.menu.isOpen)
+				this.HideHourlyWeather(false);
+
+			this.menu.toggle();
+		}
 	}
 
 	public async ToggleHourlyWeather(): Promise<void> {
@@ -79,10 +102,10 @@ export class UI {
 	/** Fully rebuilds UI */
 	public Rebuild(config: Config): void {
 		this.ShowLoadingUi();
-		let textColorStyle = this.GetTextColorStyle();
-		this.CurrentWeather.Rebuild(config, textColorStyle);
-		this.HourlyWeather.Rebuild(config, textColorStyle);
-		this.FutureWeather.Rebuild(config, textColorStyle);
+		this.App.config.textColorStyle = this.GetTextColorStyle();
+		this.CurrentWeather.Rebuild(config, this.App.config.textColorStyle);
+		this.HourlyWeather.Rebuild(config, this.App.config.textColorStyle);
+		this.FutureWeather.Rebuild(config, this.App.config.textColorStyle);
 		this.Bar.Rebuild(config);
 	}
 
@@ -109,7 +132,12 @@ export class UI {
 	public Display(weather: WeatherData, config: Config, provider: WeatherProvider): boolean {
 		this.CurrentWeather.Display(weather, config);
 		this.FutureWeather.Display(weather, config);
-		let shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
+		const shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
+		this.noHourlyWeather = !shouldShowToggle;
+		// Hourly weather is not shown, make sure it's closed
+		if (!shouldShowToggle)
+			this.ForceHideHourlyWeather();
+
 		this.Bar.Display(weather, provider, config, shouldShowToggle);
 		return true;
 	}
@@ -118,14 +146,14 @@ export class UI {
 	// Callbacks
 
 	/**
-	 * Resetting flags from Hourly scrollview when theme changed to 
+	 * Resetting flags from Hourly scroll view when theme changed to 
 	 * prevent incorrect height requests, rebuild 
 	 * when switching between light and dark themes
 	 * to recolor some of the text
 	 */
 	private OnThemeChanged(): void {
 		this.HideHourlyWeather();
-		let newThemeIsLight = this.IsLightTheme();
+		const newThemeIsLight = this.IsLightTheme();
 		// Theme changed between light and dark theme
 		if (newThemeIsLight != this.lightTheme) {
 			this.lightTheme = newThemeIsLight;
@@ -150,7 +178,7 @@ export class UI {
 	 */
 	private IsLightTheme(): boolean {
 		// using foreground color, more reliable than background color (more themes has it)
-		let color = this.menu.actor.get_theme_node().get_color("color");
+		const color = this.menu.actor.get_theme_node().get_color("color");
 		// luminance between 0 and 1
 		let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
 		// Inverse, we assume the background color here
@@ -164,12 +192,12 @@ export class UI {
 	 */
 	private ForegroundColor(): string {
 		// Get hex color without alpha, because it is not supported in css
-		let hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
+		const hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
 		return hex;
 	}
 
 	private GetTextColorStyle(): string {
-		let hexColor = null;
+		let hexColor: string | null = null;
 		if (this.lightTheme) {
 			// Darken default foreground color
 			hexColor = ShadeHexColor(this.ForegroundColor(), -0.40);
@@ -193,7 +221,7 @@ export class UI {
 		this.HourlySeparator.Hide();
 
 		// Add everything to the PopupMenu
-		let mainBox = new BoxLayout({ vertical: true })
+		const mainBox = new BoxLayout({ vertical: true })
 		mainBox.add_actor(this.CurrentWeather.actor)
 		mainBox.add_actor(this.HourlySeparator.Actor);
 		mainBox.add_actor(this.HourlyWeather.actor);
@@ -218,29 +246,40 @@ export class UI {
 	}
 
 	private async OnDayClicked(sender: WeatherButton, date: DateTime): Promise<void> {
+		const wasOpen = this.HourlyWeather.Toggled;
 		// Open hourly weather if collapsed
-		if (!this.HourlyWeather.Toggled)
+		if (!wasOpen)
 			await this.ShowHourlyWeather();
+
+		const newIndex = this.HourlyWeather.DateToScrollIndex(date);
 		// If the same day was toggle the second time, collapse
-		else if (this.lastDateToggled?.equals(date)) {
+		if (wasOpen && newIndex == this.HourlyWeather.CurrentScrollIndex) {
 			await this.HideHourlyWeather();
 			return;
 		}
 
-		this.HourlyWeather.ScrollTo(date);
-		this.lastDateToggled = date;
+		if (newIndex != null)
+			this.HourlyWeather.ScrollTo(newIndex, wasOpen);
 	}
 
-	private async ShowHourlyWeather(): Promise<void> {
+	private async ShowHourlyWeather(animate: boolean = true): Promise<void> {
 		this.HourlySeparator.Show();
 		this.Bar.SwitchButtonToHide();
-		await this.HourlyWeather.Show();
+		await this.HourlyWeather.Show(animate);
 	}
 
-	private async HideHourlyWeather(): Promise<void> {
-		this.lastDateToggled = undefined;
+	private async HideHourlyWeather(animate: boolean = true): Promise<void> {
+		if (this.App.config._alwaysShowHourlyWeather) {
+			this.HourlyWeather.ResetScroll();
+			return;
+		}
+
+		await this.ForceHideHourlyWeather(animate);
+	}
+
+	private async ForceHideHourlyWeather(animate: boolean = true): Promise<void> {
 		this.HourlySeparator.Hide();
 		this.Bar.SwitchButtonToShow();
-		await this.HourlyWeather.Hide();
+		await this.HourlyWeather.Hide(animate);
 	}
 }

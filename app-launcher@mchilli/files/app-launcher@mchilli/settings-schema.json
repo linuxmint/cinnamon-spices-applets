@@ -27,13 +27,14 @@
                 "custom-launcher-icon",
                 "launcher-icon",
                 "notification-enabled",
-                "notification-text"
+                "notification-text",
+                "hotkey-binding"
             ]
         },
         "section-settings-applications": {
             "type": "section",
             "title": "Application Settings",
-            "keys": ["visible-app-icons", "use-symbolic-icons", "app-icon-size"]
+            "keys": ["fixed-menu-width", "visible-app-icons", "use-symbolic-icons", "app-icon-size"]
         }
     },
     "custom-app-list": {
@@ -100,6 +101,18 @@
         "default": "Launch '%s'.",
         "dependency": "notification-enabled",
         "tooltip": "%s will be your application name"
+    },
+    "hotkey-binding": {
+        "type": "keybinding",
+        "description": "Show menu",
+        "default": "",
+        "tooltip": "Set keybinding(s) to show the menu"
+    },
+    "fixed-menu-width": {
+        "type": "switch",
+        "description": "Fixed Menu Width",
+        "default": false,
+        "tooltip": "Based on the largest submenu item, to prevent menu width flickering"
     },
     "visible-app-icons": {
         "type": "switch",

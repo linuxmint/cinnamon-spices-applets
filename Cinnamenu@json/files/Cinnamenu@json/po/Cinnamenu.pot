@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-22 07:17+0100\n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,13 +116,49 @@ msgstr ""
 msgid "Please wait..."
 msgstr ""
 
+msgid "Applications"
+msgstr ""
+
+msgid "Documents"
+msgstr ""
+
+msgid "Videos"
+msgstr ""
+
+msgid "Images"
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
 msgid "No recent Items"
 msgstr ""
 
 msgid "Click to copy"
 msgstr ""
 
+msgid "Applications and files"
+msgstr ""
+
+msgid "Other search results"
+msgstr ""
+
+msgid "Browser history"
+msgstr ""
+
+msgid "Browser bookmarks"
+msgstr ""
+
+msgid "Emoji"
+msgstr ""
+
 msgid "Trash"
+msgstr ""
+
+msgid "Error while opening file:"
+msgstr ""
+
+msgid "Too many entries - showing first 1000 entries only"
 msgstr ""
 
 msgid "Favorites"
@@ -132,9 +168,6 @@ msgid "Recent"
 msgstr ""
 
 msgid "Home folder"
-msgstr ""
-
-msgid "Too many entries - showing first 1000 entries only"
 msgstr ""
 
 msgid "Reset category order"
@@ -173,7 +206,23 @@ msgstr ""
 msgid "Error while moving file to trash:"
 msgstr ""
 
-msgid "Error while opening file:"
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+
+msgid "The following packages will be removed:"
+msgstr ""
+
+msgid "Packages to be removed"
+msgstr ""
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr ""
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
 msgstr ""
 
 msgid "Open"
@@ -488,11 +537,19 @@ msgstr ""
 msgid "When searching, also search my home folder for files"
 msgstr ""
 
+msgid "Web history search"
+msgstr ""
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+
 msgid "Web bookmarks search"
 msgstr ""
 
 msgid ""
-"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Brave)\n"
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
 "Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
 msgstr ""
 
@@ -503,6 +560,12 @@ msgid "Show some Wikipedia results"
 msgstr ""
 
 msgid "Wikipedia language"
+msgstr ""
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
 msgstr ""
 
 msgid "Use a custom icon size"

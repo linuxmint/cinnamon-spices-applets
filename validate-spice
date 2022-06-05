@@ -13,17 +13,19 @@ if len(sys.argv) != 2:
 
 SPICE_TYPE="applet"
 
+class CheckError(Exception):
+    pass
+
 # function with checks for an xlet
 def validate_xlet(uuid):
-    valid = True
+    valid = False
     os.chdir(uuid)
 
     try:
         # Check mandatory files
         for file in ["info.json", "screenshot.png", "files/%s/metadata.json" % uuid, "files/%s/icon.png" % uuid]:
             if not os.path.exists(file):
-                print("[%s] Missing file: %s" % (uuid, file))
-                valid = False
+                raise CheckError("[%s] Missing file: %s" % (uuid, file))
 
         found = False
         for root, dirs, files in os.walk("files/%s" % uuid):
@@ -31,61 +33,66 @@ def validate_xlet(uuid):
                 if file == "%s.js" % SPICE_TYPE:
                     found = True
         if not found:
-            print("[%s] Missing main %s.js" % (uuid, SPICE_TYPE))
+            raise CheckError("[%s] Missing main %s.js" % (uuid, SPICE_TYPE))
 
         # Check forbidden files
         for file in ["icon.png"]:
             if os.path.exists(file):
-                print("[%s] Forbidden file: %s" % (uuid, file))
-                valid = False
+                raise CheckError("[%s] Forbidden file: %s" % (uuid, file))
 
         # Check mandatory directories
         for directory in ["files", "files/%s" % uuid]:
             if not os.path.isdir(directory):
-                print("[%s] Missing directory: %s" % (uuid, directory))
-                valid = False
-                return
+                raise CheckError("[%s] Missing directory: %s" % (uuid, directory))
 
         # Check that there are no files in files other than the uuid directory
         if len(os.listdir("files")) != 1:
-            print("[%s] The files directory should ONLY contain the $uuid directory!" % (uuid))
-            valid = False
+            raise CheckError("[%s] The files directory should ONLY contain the $uuid directory!" % (uuid))
 
-        # check json
+        # check info.json
+        with open("info.json") as file:
+            try:
+                info = json.load(file)
+            except Exception as e:
+                raise CheckError("Could not parse info.json: %s" % e)
+
+            # check mandatory fields
+            for field in ['author']:
+                if field not in info.keys():
+                    raise CheckError("[%s] Missing field '%s' in info.json" % (uuid, field))
+
+        # check metadata.json
         with open("files/%s/metadata.json" % uuid) as file:
-            metadata = json.load(file)
+            try:
+                metadata = json.load(file)
+            except Exception as e:
+                raise CheckError("Could not parse metadata.json: %s" % e)
 
             # check forbidden fields
             for field in ['icon', 'dangerous', 'last-edited']:
                 if field in metadata.keys():
-                    print("[%s] Forbidden field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
-                    valid = False
+                    raise CheckError("[%s] Forbidden field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
 
             # check mandatory fields
             for field in ['uuid', 'name', 'description']:
                 if field not in metadata.keys():
-                    print("[%s] Missing field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
-                    valid = False
-                    return
+                    raise CheckError("[%s] Missing field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
 
             # check uuid value
             if metadata['uuid'] != uuid:
-                print("[%s] Wrong uuid in %s" % (uuid, "files/%s/metadata.json" % uuid))
-                valid = False
+                raise CheckError("[%s] Wrong uuid in %s" % (uuid, "files/%s/metadata.json" % uuid))
 
             # check for unicode characters in metadata
             for field in metadata.keys():
                 strvalue = str(metadata[field])
                 if len(strvalue.encode()) != len(strvalue):
-                    print("[%s] Forbidden unicode characters in field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
-                    valid = False
+                    raise CheckError("[%s] Forbidden unicode characters in field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
 
         # check if icon is square
         im = Image.open("files/%s/icon.png" % uuid)
         (width, height) = im.size
         if width != height:
-            print("[%s] icon.png has to be square." % uuid)
-            valid = False
+            raise CheckError("[%s] icon.png has to be square." % uuid)
 
         # check po and pot files
         podir = "files/%s/po" % uuid
@@ -94,29 +101,32 @@ def validate_xlet(uuid):
                 if file.endswith(".po"):
                     pocheck = subprocess.run(["msgfmt", "-c", os.path.join(podir, file), "-o", "-"], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
                     if pocheck.stderr:
-                        print("[%s] The following errors were found in translation file '%s':\n%s"
+                        raise CheckError("[%s] The following errors were found in translation file '%s':\n%s"
                               "HINT: Most errors in translation file `%s` can usually be prevented and solved by using Poedit.\n"
                               % (uuid, file, pocheck.stderr, file)
                         )
-                        valid = False
                 elif file.endswith(".pot"):
                     potcheck = subprocess.run(["xgettext", os.path.join(podir, file), "-o", "-"], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
                     if potcheck.stderr:
-                        print("[%s] The following errors were found in translation template '%s':\n%s" % (uuid, file, potcheck.stderr))
-                        valid = False
+                        raise CheckError("[%s] The following errors were found in translation template '%s':\n%s" % (uuid, file, potcheck.stderr))
 
+        # Finally...
+        valid = True
+    except CheckError as error:
+        print("[%s] Error during validation: %s" % (uuid, error))
     except Exception as error:
         print("[%s] Unknown error. %s" % (uuid, error))
 
     os.chdir("..")
-    return (valid)
+    return valid
 
 def quit(valid):
     if (valid):
         print ("No errors found. Everything looks good.")
         sys.exit(0)
     else:
-        print ("Errors were found!")
+        print ("\nErrors were found! Once you fix the issue, please re-run "
+               "'validate-spice <uuid>'' to check for further errors.")
         sys.exit(1)
 
 if sys.argv[1] == "--all":

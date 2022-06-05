@@ -17,11 +17,14 @@ declare namespace imports.ui.tweener {
 	 * @param target the object to tween
 	 * @param tweeningParameters parameters
 	 */
-	export function addTween(target: gi.St.Widget, tweeningParameters?: TweeningParameters): void;
+	export function addTween<T extends object = object>(target: T, tweeningParameters?: TweeningParameters & TweeningExtraParams<T>): void;
+
+	/** The target's properties with number type */
+	type TweeningExtraParams<T extends object = object> = {
+		[Property in keyof T as T[Property] extends number? Property : never]?: T[Property];
+	};
 
 	export interface TweeningParameters {
-		/** Any of the target's properties */
-		[key: string]: any;
 		/** The duration of the transition in seconds */
 		time?: number;
 		/** The delay (in seconds) before the transition starts. The

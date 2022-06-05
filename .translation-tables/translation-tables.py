@@ -155,6 +155,10 @@ def populate_translation_matrix():
             if file.endswith(".pot"):
                 pot_file_path = os.path.join(spices_po_dir, file)
 
+        if pot_file_path == None:
+            print("No potfile found for %s, skipping it." % uuid)
+            continue
+
         #% count number of translatable Strings in pot file
         pot_length = int(os.popen('grep "^msgid " ' + pot_file_path + ' | wc -l').read()) - 1
         TRANSLATION_UUID_MATRIX[uuid]["length"] = pot_length

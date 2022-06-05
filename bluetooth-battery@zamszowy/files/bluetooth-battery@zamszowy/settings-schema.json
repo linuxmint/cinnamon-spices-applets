@@ -1,0 +1,204 @@
+{
+  "layout1": {
+    "type": "layout",
+    "pages": ["page1", "page2", "page3"],
+      "page1": {
+        "type": "page",
+        "title": "Settings",
+        "sections": ["section0", "section1", "section2"]
+      },
+      "page2": {
+        "type": "page",
+        "title": "Notifications",
+        "sections": ["section4", "section5", "section6", "section7"]
+      },
+      "page3": {
+        "type": "page",
+        "title": "Blacklist",
+        "sections": ["section3"]
+      },
+
+    "section0": {
+      "type": "section",
+      "title": "Enable battery monitoring for:",
+      "keys": ["enable-keyboards", "enable-mice", "enable-headphones", "enable-others"]
+    },
+
+    "section1": {
+      "type": "section",
+      "title": "Icon/Text:",
+      "keys": ["applet-icon"]
+    },
+
+    "section2": {
+      "type": "section",
+      "title": "Device to display",
+      "keys": ["override-enable", "override-entry", "override-select"]
+    },
+
+    "section3": {
+      "type": "section",
+      "title": "Disable monitoring for selected devices. You can use model or serial of the device.\nComment starts with '#'",
+      "keys": ["blacklist", "blacklist-apply"]
+    },
+
+    "section4": {
+      "type": "section",
+      "title": "Warning notifications",
+      "keys": ["notification-warn-enable", "notification-warn-level", "notification-warn-demo"]
+    },
+
+    "section5": {
+      "type": "section",
+      "title": "Critical notifications",
+      "keys": ["notification-crit-enable", "notification-crit-level", "notification-crit-demo"]
+    },
+
+    "section6": {
+      "type": "section",
+      "title": "Showing of configured applet icon/text",
+      "keys": ["notification-applet-icon"]
+    },
+
+    "section7": {
+      "type": "section",
+      "title": "Display notification only once in session,\nor every time battery drops below warning/critical level (e.g. after recharge)",
+      "keys": ["notification-multiple"]
+    }
+  },
+
+  "enable-keyboards": {
+    "type": "switch",
+    "default": true,
+    "description": "Keyboards"
+  },
+
+  "enable-mice": {
+    "type": "switch",
+    "default": true,
+    "description": "Mice"
+  },
+
+  "enable-headphones": {
+    "type": "switch",
+    "default": true,
+    "description": "Headphones"
+  },
+
+  "enable-others": {
+    "type": "switch",
+    "default": true,
+    "description": "Other devices"
+  },
+
+  "applet-icon": {
+    "type": "combobox",
+    "description": "Display",
+    "default": "icon-text",
+    "options": {
+      "Icon and Text" : "icon-text",
+      "Icon" : "icon",
+      "Text" : "text"
+    }
+  },
+
+  "blacklist": {
+    "type": "textview",
+    "description": "",
+    "default": "",
+    "tooltip": "tooltip",
+    "height": 150
+  },
+
+  "blacklist-apply": {
+    "type": "button",
+    "callback": "_on_settings_change",
+    "description": "Apply",
+    "tooltip": "Apply changes"
+  },
+
+  "override-enable": {
+    "type": "switch",
+    "default": false,
+    "description": "Manually select main device to display (instead of the one with lowest battery)"
+  },
+
+  "override-entry": {
+    "type": "entry",
+    "default": "",
+    "dependency":"override-enable",
+    "description": "Selected device:"
+  },
+
+  "override-select": {
+    "type": "button",
+    "callback": "_on_override_select",
+    "dependency":"override-enable",
+    "description": "Select device to display"
+  },
+
+  "notification-warn-enable": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable notification for battery warning level"
+  },
+
+  "notification-warn-level" : {
+    "type" : "scale",
+    "default" : 20,
+    "min" : 1,
+    "max" : 100,
+    "step" : 1,
+    "show-value" : true,
+    "description" : "Notify when battery below [%]",
+    "dependency": "notification-warn-enable"
+  },
+
+  "notification-warn-demo": {
+    "type": "button",
+    "callback": "_on_notification_warn_demo",
+    "dependency": "notification-warn-enable",
+    "description": "Test notification"
+  },
+
+  "notification-crit-enable": {
+    "type": "switch",
+    "default": true,
+    "description": "Enable notification for battery critical level"
+  },
+
+  "notification-crit-level" : {
+    "type" : "scale",
+    "default" : 10,
+    "min" : 1,
+    "max" : 100,
+    "step" : 1,
+    "show-value" : true,
+    "description" : "Notify when battery below [%]",
+    "dependency": "notification-crit-enable"
+  },
+
+  "notification-crit-demo": {
+    "type": "button",
+    "callback": "_on_notification_crit_demo",
+    "dependency": "notification-crit-enable",
+    "description": "Test notification"
+  },
+
+  "notification-applet-icon": {
+    "type": "combobox",
+    "description": "Show icon/text only if:",
+    "default": "always",
+    "options": {
+      "show always" : "always",
+      "battery below warning level" : "warn",
+      "battery below critical level" : "crit"
+    }
+  },
+
+  "notification-multiple": {
+    "type": "switch",
+    "default": false,
+    "description": "Display multiple times per session"
+  }
+}

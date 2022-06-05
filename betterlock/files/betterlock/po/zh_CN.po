@@ -18,44 +18,52 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Language: zh_CN\n"
 
-#: applet.js:70
+msgid "Scr Lock"
+msgstr "Scr 锁"
+
 msgid "Num Lock"
 msgstr "数字锁定键"
 
-#: applet.js:74
 msgid "Caps Lock"
 msgstr "大写锁定键"
 
-#: applet.js:79
-msgid "Notifications"
-msgstr "通知"
-
-#: applet.js:114
 msgid "Lock Keys"
 msgstr "锁定键"
 
-#: applet.js:148
+msgid "Scr lock on"
+msgstr "Scr 锁定开启"
+
+msgid "Scr lock off"
+msgstr "Scr 锁定关闭"
+
 msgid "Num lock on"
 msgstr "数字锁定键开"
 
-#: applet.js:153
 msgid "Num lock off"
 msgstr "数字锁定键关"
 
-#: applet.js:163
 msgid "Caps lock on"
 msgstr "大写锁定键开"
 
-#: applet.js:168
 msgid "Caps lock off"
 msgstr "大写锁定键关"
 
-#. betterlock->metadata.json->description
-msgid ""
-"Shows whether caps lock/num lock is on, and displays a notification when "
-"these change."
-msgstr "显示大写锁定键/数字锁定键是否启用，并在其更改时显示一个通知。"
+msgid "Show notifications"
+msgstr "显示通知"
 
-#. betterlock->metadata.json->name
-msgid "Num Lock/Caps Lock indicator with notifications"
-msgstr "含消息托盘通知的数字锁定键/大写锁定键指示器"
+msgid "Show caps lock indicator"
+msgstr "显示大写锁定指示器"
+
+msgid "Show num lock indicator"
+msgstr "显示 num lock 指示器"
+
+msgid "Show scr lock indicator"
+msgstr "显示 scr 锁定指示器"
+
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification when "
+"these change."
+msgstr "显示 caps lock/num lock/scr lock 是否打开，并在这些更改时显示通知。"
+
+msgid "Lock keys indicator with notifications"
+msgstr "带通知的锁定键指示器"

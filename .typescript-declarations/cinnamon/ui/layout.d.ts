@@ -5,7 +5,7 @@ declare namespace imports.ui.layout {
 
 	interface ChromeParams {
 		/** The actor should be hidden when a window on the same monitor is fullscreen. Default %false. */
-		visibleInFullcreen: boolean;
+		visibleInFullscreen: boolean;
 		/** The actor's allocation should be used to add window manager struts. Default %false. */
 		affectsStruts: boolean;
 		/**  The actor should be added to the stage input region. Default %true. */
@@ -48,7 +48,7 @@ declare namespace imports.ui.layout {
 		public edgeRight: edgeFlip.EdgeFlipper;
 		public edgeLeft: edgeFlip.EdgeFlipper;
 		public hideIdleId: number;
-		protected _Chrome: Chrome;
+		protected _chrome: Chrome;
 		public enabledEdgeFlip: boolean;
 		public edgeFlipDelay: number;
 		public keyboardBox: gi.St.BoxLayout;

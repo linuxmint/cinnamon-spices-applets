@@ -1,29 +1,27 @@
 # App Launcher
 
-A simple App Launcher for your panels
+_A simple launcher for your panels_
 
-### Feature
+### **Features:**
 
--   organize your applications, even in groups
+-   a GUI to organize your applications, even in groups
 -   add new applications via **drag'n'drop**
--   open **context menu** with rightclick
+-   add colorful **separators**
+-   run **multiple apps** with middleclick
+-   rightclick opens the **context menu** to edit your apps
 -   support for horizontal and vertical panels
 -   set **custom icons** for applications and groups
--   customize different properties of the applet:
+-   customize different properties of your applet:
     -   set/hide label
     -   set custom applet icon
-    -   enable/disable notification
+    -   enable/disable **notification**
+    -   set **hotkey** to open the menu
     -   show/hide application icons
     -   set application icon size
 
----
+|          Drag'n'Drop           |       Context Menu       |
+| :----------------------------: | :----------------------: |
+| ![Drag'n'Drop Demo][dragndrop] | ![Context Demo][context] |
 
-#### Drag'n'Drop
-
-<img src="https://raw.githubusercontent.com/mchilli/cinnamon-spices/master/applets/app-launcher%40mchilli/drag'n'drop%20demo.gif" width="480" alt="Drag'n'Drop Demo"/>
-
----
-
-#### Context Menu
-
-<img src="https://raw.githubusercontent.com/mchilli/cinnamon-spices/master/applets/app-launcher%40mchilli/context%20demo.gif" width="480" alt="Context Demo"/>
+[dragndrop]: https://raw.githubusercontent.com/mchilli/cinnamon-spices/master/applets/app-launcher%40mchilli/drag'n'drop%20demo.gif
+[context]: https://raw.githubusercontent.com/mchilli/cinnamon-spices/master/applets/app-launcher%40mchilli/context%20demo.gif

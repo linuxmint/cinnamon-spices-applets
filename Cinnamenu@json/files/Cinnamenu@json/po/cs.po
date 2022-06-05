@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 21:08+0000\n"
-"PO-Revision-Date: 2021-03-28 20:04+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 17:51+0100\n"
+"Last-Translator: Google translate\n"
 "Language-Team: \n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "Type to search..."
 msgstr "Zadejte vyhledávání ..."
@@ -84,15 +84,6 @@ msgstr "Přestat"
 msgid "Shutdown the computer"
 msgstr "Vypněte počítač"
 
-msgid "Home"
-msgstr "Domov"
-
-msgid "Computer"
-msgstr "Počítač"
-
-msgid "Browse network"
-msgstr "Procházet síť"
-
 msgid "Run with NVIDIA GPU"
 msgstr "Běh s grafickou kartou NVIDIA"
 
@@ -111,23 +102,65 @@ msgstr "Přidat k oblíbeným"
 msgid "Uninstall"
 msgstr "Odinstalovat"
 
+msgid "Home"
+msgstr "Domov"
+
+msgid "Computer"
+msgstr "Počítač"
+
+msgid "Browse network"
+msgstr "Procházet síť"
+
 msgid "Find files..."
 msgstr "Najít soubory ..."
 
 msgid "Please wait..."
 msgstr "Prosím, čekejte..."
 
+msgid "Applications"
+msgstr "Aplikace"
+
+msgid "Documents"
+msgstr "dokumenty"
+
+msgid "Videos"
+msgstr "videa"
+
+msgid "Images"
+msgstr "snímky"
+
+msgid "Music"
+msgstr "Hudba"
+
 msgid "No recent Items"
 msgstr "Žádné nedávné položky"
-
-msgid "Solution:"
-msgstr "Řešení:"
 
 msgid "Click to copy"
 msgstr "Kliknutím zkopírujte"
 
-msgid "Search web for"
-msgstr "Hledat na webu"
+msgid "Applications and files"
+msgstr "Aplikace a soubory"
+
+msgid "Other search results"
+msgstr "Další výsledky hledání"
+
+msgid "Browser history"
+msgstr "Historie prohlížeče"
+
+msgid "Browser bookmarks"
+msgstr "Záložky prohlížeče"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Trash"
+msgstr "Odpadky"
+
+msgid "Error while opening file:"
+msgstr "Chyba při otevírání souboru:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Příliš mnoho záznamů - zobrazuje se pouze prvních 1000 záznamů"
 
 msgid "Favorites"
 msgstr "Oblíbené"
@@ -138,11 +171,23 @@ msgstr "Nedávno"
 msgid "Home folder"
 msgstr "Domovská složka"
 
-msgid "Too many entries - showing first 1000 entries only"
-msgstr "Příliš mnoho záznamů - zobrazuje se pouze prvních 1000 záznamů"
-
 msgid "Reset category order"
 msgstr "Resetovat pořadí kategorií"
+
+msgid "light skin tone"
+msgstr "světlý tón pleti"
+
+msgid "medium-light skin tone"
+msgstr "středně světlý tón pleti"
+
+msgid "medium skin tone"
+msgstr "střední tón pleti"
+
+msgid "medium-dark skin tone"
+msgstr "středně tmavý odstín pleti"
+
+msgid "dark skin tone"
+msgstr "tmavý odstín pleti"
 
 msgid "This file is no longer available"
 msgstr "Tento soubor již není k dispozici"
@@ -162,8 +207,22 @@ msgstr "Přesunout do koše"
 msgid "Error while moving file to trash:"
 msgstr "Chyba při přesouvání souboru do koše:"
 
-msgid "Error while opening file:"
-msgstr "Chyba při otevírání souboru:"
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Tato položka nabídky není přidružena k žádnému balíčku. Chcete jej přesto odstranit z nabídky?"
+
+msgid "The following packages will be removed:"
+msgstr "Následující balíčky budou odstraněny:"
+
+msgid "Packages to be removed"
+msgstr "Balíčky k odstranění"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Nelze odstranit balíček %s, protože to vyžadují jiné balíčky."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Balíček %s je závislý na následujících balících:"
 
 msgid "Open"
 msgstr "Otevřeno"
@@ -217,14 +276,10 @@ msgid " - directory already searched"
 msgstr " - adresář již prohledáván"
 
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinnamenu"
 
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
-msgstr ""
-"Flexibilní nabídka poskytující možnosti formátování, webové záložky, podporu "
-"poskytovatele vyhledávání a fuzzy vyhledávání."
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Flexibilní nabídka s možnostmi rozvržení mřížky nebo seznamu, prohlížečem souborů a vyhledáváním emodži."
 
 msgid "Behavior"
 msgstr "Chování"
@@ -274,17 +329,14 @@ msgstr "Text panelu"
 msgid "Text to show beside the panel icon"
 msgstr "Text, který se zobrazí vedle ikony panelu"
 
-msgid "pixels"
-msgstr "pixelů"
+msgid "Category icon size (pixels)"
+msgstr "Velikost ikony kategorie (v pixelech)"
 
-msgid "Category icon size"
-msgstr "Velikost ikony kategorie"
+msgid "Applications list icon size (pixels)"
+msgstr "Velikost ikony seznamu aplikací (v pixelech)"
 
-msgid "Applications list icon size"
-msgstr "Velikost ikony seznamu aplikací"
-
-msgid "Applications grid icon size"
-msgstr "Velikost ikony mřížky aplikací"
+msgid "Applications grid icon size (pixels)"
+msgstr "Velikost ikony mřížky aplikací (v pixelech)"
 
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Klávesová zkratka pro otevření a zavření nabídky"
@@ -383,8 +435,8 @@ msgstr "Popisek zpoždění"
 msgid "Use a custom menu height"
 msgstr "Použijte vlastní výšku nabídky"
 
-msgid "Custom menu height"
-msgstr "Vlastní výška nabídky"
+msgid "Custom menu height (pixels)"
+msgstr "Vlastní výška nabídky (v pixelech)"
 
 msgid "Applications view mode"
 msgstr "Režim zobrazení aplikací"
@@ -407,8 +459,8 @@ msgstr "Žádný"
 msgid "Choose where to show application descriptions"
 msgstr "Vyberte, kde se mají zobrazovat popisy aplikací"
 
-msgid "Session buttons location"
-msgstr "Umístění tlačítek relace"
+msgid "Sidebar location"
+msgstr "Umístění postranního panelu"
 
 msgid "Top"
 msgstr "Horní"
@@ -417,13 +469,13 @@ msgid "Bottom"
 msgstr "Dno"
 
 msgid "Left"
-msgstr "Vlevo, odjet"
+msgstr "Doleva"
 
 msgid "Right"
-msgstr "Že jo"
+msgstr "Pravice"
 
-msgid "Choose where to show the session buttons (quit, logout, etc.)"
-msgstr "Zvolte, kde se mají zobrazovat tlačítka relace (ukončení, odhlášení atd.)"
+msgid "Choose where to show the sidebar"
+msgstr "Vyberte, kde chcete zobrazit postranní panel"
 
 msgid ""
 "\n"
@@ -432,11 +484,17 @@ msgstr ""
 "\n"
 "Info / tip: Přetažením na okraji nabídky změníte velikost nabídky.\n"
 
-msgid "Add favorites to session buttons"
-msgstr "Přidejte k tlačítkům relace oblíbené položky"
+msgid "Show favorites on sidebar"
+msgstr "Zobrazit oblíbené na postranním panelu"
 
-msgid "Show your favorite app icons next to the session buttons"
-msgstr "Ukažte své oblíbené ikony aplikací vedle tlačítek relace"
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Zobrazte své oblíbené aplikace a ikony souborů na postranním panelu"
+
+msgid "Show recent items"
+msgstr "Zobrazit poslední položky"
+
+msgid "Show recent items category in the menu"
+msgstr "Zobrazit kategorii posledních položek v nabídce"
 
 msgid "Show favorite apps category"
 msgstr "Zobrazit kategorii oblíbených aplikací"
@@ -454,37 +512,7 @@ msgid "Last used category"
 msgstr "Předchozí kategorie"
 
 msgid "Autoscroll the application list on mouse hover"
-msgstr ""
-
-msgid "Enable emoji search"
-msgstr "Povolit vyhledávání emodži"
-
-msgid "Show emojis in search results"
-msgstr "Zobrazit emodži ve výsledcích vyhledávání"
-
-msgid "Web search option"
-msgstr "Možnost vyhledávání na webu"
-
-msgid "Google"
-msgstr ""
-
-msgid "Bing"
-msgstr ""
-
-msgid "Yahoo"
-msgstr ""
-
-msgid "DuckDuckGo"
-msgstr ""
-
-msgid "Show an internet search option in search results"
-msgstr "Zobrazit ve výsledcích hledání možnost hledání na internetu"
-
-msgid "Search home folder"
-msgstr "Hledat domovskou složku"
-
-msgid "When searching, also search home folder for files"
-msgstr "Při vyhledávání také vyhledejte soubory v domovské složce"
+msgstr "Automatické rolování seznamu aplikací při najetí myší"
 
 msgid "Show hidden files"
 msgstr "Zobrazit skryté soubory"
@@ -492,20 +520,85 @@ msgstr "Zobrazit skryté soubory"
 msgid "Show hidden files in folder view"
 msgstr "Zobrazit skryté soubory v zobrazení složek"
 
+msgid "Emoji search"
+msgstr "Vyhledávání emodži"
+
+msgid "Show emojis in search results"
+msgstr "Zobrazit emodži ve výsledcích vyhledávání"
+
+msgid "Web search option"
+msgstr "Možnost vyhledávání na webu"
+
+msgid "Show an internet search option in search results"
+msgstr "Zobrazit ve výsledcích hledání možnost hledání na internetu"
+
+msgid "Search home folder"
+msgstr "Hledat domovskou složku"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Při vyhledávání také vyhledejte soubory v domovské složce"
+
+msgid "Web history search"
+msgstr "vyhledávání webové historie"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Při vyhledávání prohledávat také historii mého prohlížeče (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Poznámka: Historie Firefoxu není aktuálně podporována."
+
+msgid "Web bookmarks search"
+msgstr "Vyhledávání webových záložek"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Při vyhledávání také prohledávejte webové záložky mého prohlížeče (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Poznámka: Chcete-li prohledávat záložky Firefoxu, budete si muset nainstalovat balíček gir1.2-gda-5.0 (distribuce založené na Debianu vč. Ubuntu & Linux Mint) nebo zabalte libgda (distribuce založené na Arch) a restartujte počítač."
+
+msgid "Wikipedia search"
+msgstr "vyhledávání na Wikipedii"
+
+msgid "Show some Wikipedia results"
+msgstr "Zobrazit některé výsledky Wikipedie"
+
+msgid "Wikipedia language"
+msgstr "jazyk Wikipedie"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Poznámka: Některé možnosti vyhledávání lze stále používat, i když jste je zde nepovolili přidáním předpony hledanému výrazu.\n"
+"Například: Chcete-li vyhledat emotikony, zadejte 'e srdce', abyste našli emotikony srdce. Podobně použijte předpony „f“ pro vyhledávání souborů, „h“ pro webovou historii a „b“ pro vyhledávání webových záložek.\n"
+
 msgid "Use a custom icon size"
 msgstr "Použijte vlastní velikost ikony"
 
 msgid "Use a custom size for the panel icon"
 msgstr "Pro ikonu panelu použijte vlastní velikost"
 
-msgid "Panel icon size"
-msgstr "Velikost ikony panelu"
+msgid "Panel icon size (pixels)"
+msgstr "Velikost ikony panelu (v pixelech)"
 
 msgid "Choose a custom size for the panel icon"
 msgstr "Zvolte vlastní velikost ikony panelu"
 
-msgid "Session buttons icon size"
-msgstr "Velikost ikony tlačítka relace"
+msgid "Sidebar icon size (pixels)"
+msgstr "Velikost ikony postranního panelu (v pixelech)"
 
-msgid "Use session buttons box style"
-msgstr "Použijte styl pole tlačítek relace"
+msgid "Use sidebar box style"
+msgstr "Použijte styl rámečku postranního panelu"
+
+msgid "Use a sidebar box style"
+msgstr "Použijte styl rámečku postranního panelu"
+
+msgid "Use tile style"
+msgstr "Použijte styl dlaždic"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Použijte styl dlaždic pro tlačítka aplikace (Poznámka: nemusí fungovat u některých motivů)"

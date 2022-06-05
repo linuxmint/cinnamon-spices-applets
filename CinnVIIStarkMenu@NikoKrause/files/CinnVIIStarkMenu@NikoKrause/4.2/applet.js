@@ -1080,6 +1080,9 @@ class TextBoxItem extends AppPopupSubMenuMenuItem {
                 icon_type: St.IconType.FULLCOLOR,
             });
 
+            if (this.icon.search("-symbolic") != -1)
+                this.name_icon.icon_type = St.IconType.SYMBOLIC
+
             let iconFileName = this.icon;
             let iconFile = Gio.file_new_for_path(iconFileName);
             let icon;
@@ -1312,13 +1315,9 @@ HoverIcon.prototype = {
                 let iconFile = Gio.file_new_for_path(iconFileName);
                 let icon;
                 if (iconFile.query_exists(null)) {
-                    icon = new Gio.FileIcon({
-                        file: iconFile
-                    });
+                    icon = new Gio.FileIcon({file: iconFile});
                 } else {
-                    icon = new Gio.ThemedIcon({
-                        name: 'avatar-default'
-                    });
+                    icon = new Gio.ThemedIcon({name: 'avatar-default'});
                 }
                 this._userIcon.set_gicon(icon);
                 this.icon.hide();
@@ -1329,6 +1328,11 @@ HoverIcon.prototype = {
 
     _refresh: function(icon) {
         this._userIcon.hide();
+
+        if (icon.search("-symbolic") != -1)
+            this.icon.icon_type = St.IconType.SYMBOLIC
+        else
+            this.icon.icon_type = St.IconType.FULLCOLOR
 
         let iconFileName = icon;
         let iconFile = Gio.file_new_for_path(iconFileName);

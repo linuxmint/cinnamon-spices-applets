@@ -212,7 +212,7 @@
 		"type": "checkbox",
 		"default": false,
 		"description": "Only display hours for hourly forecast time",
-		"tooltip": "Instead of 15:00 or 3 pm it will show up as 15 or 3 pm"
+		"tooltip": "Instead of 15:00 or 3:00 pm it will show up as 15 or 3 pm"
 	},
 	"showForecastDates": {
 		"type": "checkbox",

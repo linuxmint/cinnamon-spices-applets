@@ -1,5 +1,64 @@
 # Changelog
 
+## 3.2.4
+
+* Fix issue on Cinnamon versions where `is_finalized` is not injected into GObject
+
+## 3.2.3
+
+* Fix [#4306](https://github.com/linuxmint/cinnamon-spices-applets/issues/4306)
+
+## 3.2.2
+
+* Fix [#4292](https://github.com/linuxmint/cinnamon-spices-applets/issues/4292)
+* Fix [#4285](https://github.com/linuxmint/cinnamon-spices-applets/issues/4285)
+
+## 3.2.1
+
+* Fix [#4255](https://github.com/linuxmint/cinnamon-spices-applets/issues/4255)
+* Redact more things when generating logs
+
+## 3.2.0
+
+* Add requested AccuWeather as a provider
+* Add ability to display remaining number of calls in the UI (where applicable)
+* Fix issue where the applet would display more hourly boxes than available data
+* Improve HttpLib flexibility and type checking
+* Add better support for "Override label on panel" setting
+
+## 3.1.9
+
+* Fixes [#4184](https://github.com/linuxmint/cinnamon-spices-applets/issues/4184) - missing space in .pot file
+* Fixes [#4127](https://github.com/linuxmint/cinnamon-spices-applets/issues/4127) - Text is at an abnormal height
+* Fix issue in WeatherBit provider where it would break if it tries to parse a date with January for month
+* Various minor syntax improvements (usage of consts and for-of loops)
+* Use mapping for getting provider classes instead of a big switch statement
+
+## 3.1.8
+
+* Fixes [#4136](https://github.com/linuxmint/cinnamon-spices-applets/issues/4136) - Fix custom widget not applying translations
+* Fixes [#4147](https://github.com/linuxmint/cinnamon-spices-applets/issues/4147)
+
+## 3.1.7
+
+* Switch to stricter typechecking
+* Resolves [#4096](https://github.com/linuxmint/cinnamon-spices-applets/issues/4096) - Change old translated string to new version
+* Resolves [#3916](https://github.com/linuxmint/cinnamon-spices-applets/issues/3916)
+* Applet now detects if network is down and pauses/resumes accordingly
+
+## 3.1.6
+
+* Support changing logging level from settings
+* Support saving logs specific to the applet into file along with the applet's settings
+* Pre-fill the Github issue form on opening a new issue from the applet
+* Update with new declarations
+
+## 3.1.5
+
+* Add Fixes to README by @jorgenqv
+* Resolves [#3975](https://github.com/linuxmint/cinnamon-spices-applets/issues/3975) Add option to make hourly weather always visible #3975
+* Resolves [#3976](https://github.com/linuxmint/cinnamon-spices-applets/issues/3976) Add dew point as a metric #3976
+
 ## 3.1.4
 
 * Update translations file
@@ -76,7 +135,7 @@
 * Add minutely precipitation under current condition, when there is any (and the setting is on)
 * Add more tooltips to settings
 * OpenWeatherMap can also display Precipitation chance if there is no volume specified
-* Autoformat 3.8 and new declaration files
+* Auto-format 3.8 and new declaration files
 * Fixes [#3637](https://github.com/linuxmint/cinnamon-spices-applets/issues/3637)
 
 ## 3.0.3
@@ -113,7 +172,7 @@
 
 * Fix wind icon color when non-symbolic icons used in the applet
 
-* Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and doesn't accept new signups.
+* Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and doesn't accept new sign-ups.
 
 * Make network and DNS related errors soft errors again
 
@@ -215,7 +274,7 @@ Fixes:
 
 * Custom icons changed to fit their bounding boxes
 
-* Make Daily forecasts tileable
+* Make Daily forecasts tile-able
 
 * Fix [#2892](https://github.com/linuxmint/cinnamon-spices-applets/issues/2892), buttons adhere to current theme
 

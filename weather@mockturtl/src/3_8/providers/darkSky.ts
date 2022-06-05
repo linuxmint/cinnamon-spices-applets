@@ -6,16 +6,17 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { HttpError } from "../lib/httpLib";
+import { ErrorResponse, HttpError } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime } from "../types";
 import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../utils";
 import { DateTime } from "luxon";
+import { BaseProvider } from "./BaseProvider";
 
 const Lang: typeof imports.lang = imports.lang;
 
-export class DarkSky implements WeatherProvider {
+export class DarkSky extends BaseProvider {
 
 	//--------------------------------------------------------
 	//  Properties
@@ -26,6 +27,14 @@ export class DarkSky implements WeatherProvider {
 	public readonly website = "https://darksky.net/poweredby/";
 	public readonly maxHourlyForecastSupport = 168;
 	public readonly needsApiKey = true;
+
+	private remainingQuota: number | null = null;
+	public get remainingCalls(): number | null {
+		// Disable this for now, this feature is only really useful for AccuWeather
+		// TODO: when a better place is found for this value add this back 
+		return null;
+		//return this.remainingQuota;
+	};
 
 	private descriptionLineLength = 25;
 	private supportedLanguages = [
@@ -41,17 +50,15 @@ export class DarkSky implements WeatherProvider {
 
 	private unit: queryUnits = "si";
 
-	private app: WeatherApplet
-
 	constructor(_app: WeatherApplet) {
-		this.app = _app;
+		super(_app);
 	}
 
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
 	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
-		let now = new Date(Date.now());
+		const now = new Date(Date.now());
 		if (now.getUTCFullYear() > 2022) {
 			this.app.ShowError(
 				{
@@ -62,27 +69,23 @@ export class DarkSky implements WeatherProvider {
 			)
 			return null;
 		}
-		let query = this.ConstructQuery(loc);
+		const query = this.ConstructQuery(loc);
 		if (query == "" && query == null) return null;
 
-		let json = await this.app.LoadJsonAsync<DarkSkyPayload>(query, {}, Lang.bind(this, this.HandleError));
-		if (!json) return null;
-
-		if (!(json as any).code) {                   // No code, Request Success
-			return this.ParseWeather(json);
-		}
-		else {
-			this.HandleResponseErrors(json);
+		const response = await this.app.LoadJsonAsyncWithDetails<DarkSkyPayload>(query, {}, this.HandleError);
+		if (!response.Success)
 			return null;
-		}
+
+		this.remainingQuota = Math.max(1000 - parseInt(response.ResponseHeaders["X-Forecast-API-Calls"]), 0);
+		return this.ParseWeather(response.Data);
 	};
 
 
 	private ParseWeather(json: DarkSkyPayload): WeatherData | null {
 		try {
-			let sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
-			let sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
-			let result: WeatherData = {
+			const sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
+			const sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
+			const result: WeatherData = {
 				date: DateTime.fromSeconds(json.currently.time, { zone: json.timezone }),
 				coord: {
 					lat: json.latitude,
@@ -101,6 +104,7 @@ export class DarkSky implements WeatherProvider {
 				temperature: this.ToKelvin(json.currently.temperature),
 				pressure: json.currently.pressure,
 				humidity: json.currently.humidity * 100,
+				dewPoint: this.ToKelvin(json.currently.dewPoint),
 				condition: {
 					main: this.GetShortCurrentSummary(json.currently.summary),
 					description: json.currently.summary,
@@ -117,9 +121,8 @@ export class DarkSky implements WeatherProvider {
 			}
 
 			// Forecast
-			for (let i = 0; i < json.daily.data.length; i++) {
-				let day = json.daily.data[i];
-				let forecast: ForecastData = {
+			for (const day of json.daily.data) {
+				const forecast: ForecastData = {
 					date: DateTime.fromSeconds(day.time, { zone: json.timezone }),
 					temp_min: this.ToKelvin(day.temperatureLow),
 					temp_max: this.ToKelvin(day.temperatureHigh),
@@ -139,9 +142,8 @@ export class DarkSky implements WeatherProvider {
 				result.forecasts.push(forecast);
 			}
 
-			for (let i = 0; i < json.hourly.data.length; i++) {
-				let hour = json.hourly.data[i];
-				let forecast: HourlyForecastData = {
+			for (const hour of json.hourly.data) {
+				const forecast: HourlyForecastData = {
 					date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
 					temp: this.ToKelvin(hour.temperature),
 					condition: {
@@ -158,12 +160,13 @@ export class DarkSky implements WeatherProvider {
 				};
 
 				// never null here
-				(<HourlyForecastData[]>result.hourlyForecasts).push(forecast);
+				result.hourlyForecasts!.push(forecast);
 			}
 			return result;
 		}
 		catch (e) {
-			Logger.Error("DarkSky payload parsing error: " + e, e)
+			if (e instanceof Error)
+				Logger.Error("DarkSky payload parsing error: " + e, e)
 			this.app.ShowError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
 			return null;
 		}
@@ -176,14 +179,14 @@ export class DarkSky implements WeatherProvider {
 		if (systemLocale == "zh-tw") {
 			return systemLocale;
 		}
-		let lang = systemLocale.split("-")[0];
+		const lang = systemLocale.split("-")[0];
 		return lang;
 	}
 
 	private ConstructQuery(loc: LocationData): string {
 		this.SetQueryUnit();
 		let query = this.query + this.app.config.ApiKey + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
-		let locale = this.ConvertToAPILocale(this.app.config.currentLocale);
+		const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
 		if (IsLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
 			query = query + "&lang=" + locale;
 		}
@@ -195,8 +198,8 @@ export class DarkSky implements WeatherProvider {
 	 * @param message Soup Message object
 	 * @returns null if custom error checking does not find anything
 	 */
-	private HandleError(message: HttpError): boolean {
-		if (message.code == 403) { // DarkSky returns auth error on the http level when key is wrong
+	private HandleError = (message: ErrorResponse): boolean => {
+		if (message.ErrorData.code == 403) { // DarkSky returns auth error on the http level when key is wrong
 			this.app.ShowError({
 				type: "hard",
 				userError: true,
@@ -206,7 +209,7 @@ export class DarkSky implements WeatherProvider {
 			});
 			return false;
 		}
-		else if (message.code == 401) { // DarkSky returns auth error on the http level when key is wrong
+		else if (message.ErrorData.code == 401) { // DarkSky returns auth error on the http level when key is wrong
 			this.app.ShowError({
 				type: "hard",
 				userError: true,
@@ -220,9 +223,9 @@ export class DarkSky implements WeatherProvider {
 	}
 
 	private HandleResponseErrors(json: any): void {
-		let code = json.code;
-		let error = json.error;
-		let errorMsg = "DarkSky API: "
+		const code = json.code;
+		const error = json.error;
+		const errorMsg = "DarkSky API: "
 		Logger.Debug("DarksSky API error payload: " + json);
 		switch (code) {
 			case "400":
@@ -235,27 +238,27 @@ export class DarkSky implements WeatherProvider {
 	};
 
 	private ProcessSummary(summary: string): string {
-		let processed = summary.split(" ");
+		const processed = summary.split(" ");
 		let result = "";
 		let lineLength = 0;
-		for (let i = 0; i < processed.length; i++) {
-			if (lineLength + processed[i].length > this.descriptionLineLength) {
+		for (const elem of processed) {
+			if (lineLength + elem.length > this.descriptionLineLength) {
 				result = result + "\n";
 				lineLength = 0;
 			}
-			result = result + processed[i] + " ";
-			lineLength = lineLength + processed[i].length + 1;
+			result = result + elem + " ";
+			lineLength = lineLength + elem.length + 1;
 		}
 		return result;
 	};
 
 	private GetShortSummary(summary: string): string {
-		let processed = summary.split(" ");
+		const processed = summary.split(" ");
 		if (processed.length == 1) return processed[0];
-		let result: string[] = [];
-		for (let i = 0; i < processed.length; i++) {
-			if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
-				result.push(processed[i]) + " ";
+		const result: string[] = [];
+		for (const elem of processed) {
+			if (!/[\(\)]/.test(elem) && !this.WordBanned(elem)) {
+				result.push(elem);
 			}
 			if (result.length == 2) break;
 		}
@@ -263,7 +266,7 @@ export class DarkSky implements WeatherProvider {
 	};
 
 	private GetShortCurrentSummary(summary: string): string {
-		let processed = summary.split(" ");
+		const processed = summary.split(" ");
 		let result = "";
 		let maxLoop;
 		(processed.length < 2) ? maxLoop = processed.length : maxLoop = 2;
@@ -357,7 +360,7 @@ export class DarkSky implements WeatherProvider {
 		}
 	};
 
-	private ToKelvin(temp: number): number | null {
+	private ToKelvin(temp: number): number {
 		if (this.unit == 'us') {
 			return FahrenheitToKelvin(temp);
 		}
@@ -367,7 +370,7 @@ export class DarkSky implements WeatherProvider {
 
 	};
 
-	private ToMPS(speed: number): number | null {
+	private ToMPS(speed: number): number {
 		if (this.unit == 'si') {
 			return speed;
 		}

@@ -4,19 +4,20 @@ import { HTTPParams } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
 import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
+import { BaseProvider } from "./BaseProvider";
 
-export class DanishMI implements WeatherProvider {
-	needsApiKey: boolean = false;
-	prettyName: string = _("DMI Denmark");
-	name: Services = "DanishMI";
-	maxForecastSupport: number = 10;
-	maxHourlyForecastSupport: number = 48;
-	website: string = "https://www.dmi.dk/";
+export class DanishMI extends BaseProvider {
+	public readonly needsApiKey: boolean = false;
+	public readonly prettyName: string = _("DMI Denmark");
+	public readonly name: Services = "DanishMI";
+	public readonly maxForecastSupport: number = 10;
+	public readonly maxHourlyForecastSupport: number = 48;
+	public readonly website: string = "https://www.dmi.dk/";
+	public readonly remainingCalls: number | null = null;
 
-	private app: WeatherApplet;
 	private url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
 	private forecastParams: HTTPParams = {
-		cmd: "llj", // latlongjson
+		cmd: "llj", // lat long json
 		lon: null,
 		lat: null,
 		tz: "UTC"   // have to as in UTC unless we don't get proper times
@@ -32,7 +33,7 @@ export class DanishMI implements WeatherProvider {
 	}
 
 	constructor(app: WeatherApplet) {
-		this.app = app;
+		super(app);
 	}
 
 	async GetWeather(loc: LocationData): Promise<WeatherData | null> {
@@ -40,12 +41,12 @@ export class DanishMI implements WeatherProvider {
 			return null;
 
 		this.GetLocationBoundingBox(loc);
-		let observations = this.OrderObservations(await this.app.LoadJsonAsync<DanishObservationPayloads>(this.url, this.observationParams), loc);
+		const observations = this.OrderObservations(await this.app.LoadJsonAsync<DanishObservationPayloads>(this.url, this.observationParams), loc);
 
 		this.forecastParams.lat = loc.lat;
 		this.forecastParams.lon = loc.lon;
 
-		let forecasts = await this.app.LoadJsonAsync<DanishMIPayload>(this.url, this.forecastParams);
+		const forecasts = await this.app.LoadJsonAsync<DanishMIPayload>(this.url, this.forecastParams);
 		if (forecasts == null)
 			return null;
 
@@ -53,8 +54,8 @@ export class DanishMI implements WeatherProvider {
 	}
 
 	private ParseWeather(observations: DanishObservationPayload[], forecasts: DanishMIPayload, loc: LocationData): WeatherData {
-		let observation = this.MergeObservations(observations);
-		let result = {
+		const observation = this.MergeObservations(observations);
+		const result = {
 			temperature: CelsiusToKelvin(observation.Temperature2m ?? null),
 			condition: this.ResolveCondition(observation.symbol),
 			humidity: observation.RelativeHumidity,
@@ -62,7 +63,8 @@ export class DanishMI implements WeatherProvider {
 			wind: {
 				degree: observation.WindDirection,
 				speed: observation.WindSpeed10m
-			}
+			},
+			dewPoint: null,
 		} as WeatherData;
 
 		result.location = {
@@ -88,7 +90,7 @@ export class DanishMI implements WeatherProvider {
 			result.condition = this.ResolveCondition(forecasts.timeserie[0].symbol);
 		}
 
-		let forecastData: ForecastData[] = [];
+		const forecastData: ForecastData[] = [];
 		// for the last one we don't have symbols, so skip
 		for (let index = 0; index < forecasts.aggData.length - 1; index++) {
 			const element = forecasts.aggData[index];
@@ -101,13 +103,12 @@ export class DanishMI implements WeatherProvider {
 		}
 		result.forecasts = forecastData;
 
-		let hourlyData: HourlyForecastData[] = [];
-		for (let index = 0; index < forecasts.timeserie.length; index++) {
-			const element = forecasts.timeserie[index];
+		const hourlyData: HourlyForecastData[] = [];
+		for (const element of forecasts.timeserie) {
 			if (element.time == null)
 				continue
 
-			let hour: HourlyForecastData = {
+			const hour: HourlyForecastData = {
 				date: DateTime.fromJSDate(this.DateStringToDate(element.time), { zone: loc.timeZone }),
 				temp: CelsiusToKelvin(element.temp),
 				condition: this.ResolveCondition(element.symbol)
@@ -128,16 +129,17 @@ export class DanishMI implements WeatherProvider {
 	}
 
 	private MergeObservations(observations: DanishObservationPayload[]): DanishObservationData {
-		let result: DanishObservationData = {
+		const result: DanishObservationData = {
 			symbol: undefined,
 			PressureMSL: undefined,
 			Temperature2m: undefined,
 			WindDirection: undefined,
 			RelativeHumidity: undefined,
 			WindSpeed10m: undefined,
+			PrecAmount10Min: undefined,
+			WindGustLast10Min: undefined
 		}
-		for (let index = 0; index < observations.length; index++) {
-			const element = observations[index];
+		for (const element of observations) {
 			result.symbol = result.symbol ?? element.values.symbol;
 			result.PressureMSL = result.PressureMSL ?? element.values.PressureMSL;
 			result.Temperature2m = result.Temperature2m ?? element.values.Temperature2m;
@@ -151,20 +153,20 @@ export class DanishMI implements WeatherProvider {
 
 	private ResolveDailyCondition(hourlyData: DanishMIHourlyPayload[], date: DateTime) {
 		// change it to 6 in the morning so a day makes more sense
-		let target = date.set({ hour: 6 });
+		const target = date.set({ hour: 6 });
 
 		// next day boundary
-		let upto = target.plus({ days: 1 });
+		const upto = target.plus({ days: 1 });
 
-		let relevantHours = hourlyData.filter((x) => {
-			let hour = DateTime.fromJSDate(this.DateStringToDate(x.time), { zone: target.zoneName });
+		const relevantHours = hourlyData.filter((x) => {
+			const hour = DateTime.fromJSDate(this.DateStringToDate(x.time), { zone: target.zoneName });
 			if (hour >= target && hour < upto)
 				return true;
 			return false;
 		});
 
 		// convert night symbols to day symbols for daily
-		let normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
+		const normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
 
 		let resultSymbol: number;
 		// symbols include rain or other stuff, get most severe
@@ -178,15 +180,15 @@ export class DanishMI implements WeatherProvider {
 	}
 
 	private ResolveCondition(symbol: number | undefined): Condition {
-		if (symbol == null) 
+		if (symbol == null)
 			return {
 				main: _("NOT FOUND"),
 				description: _("NOT FOUND"),
 				customIcon: "alien-symbolic",
 				icons: ["weather-severe-alert"]
 			}
-			
-		let isNight = (symbol > 100);
+
+		const isNight = (symbol > 100);
 		if (isNight)
 			symbol = symbol - 100;
 		switch (symbol) {
@@ -352,7 +354,7 @@ export class DanishMI implements WeatherProvider {
 	}
 
 	private OrderObservations(observations: DanishObservationPayloads | null, loc: LocationData): ExtendedDanishObservationPayload[] {
-		let result: ExtendedDanishObservationPayload[] = [];
+		const result: ExtendedDanishObservationPayload[] = [];
 		for (const key in observations) {
 			const element = observations[key];
 			result.push({
@@ -401,7 +403,7 @@ export class DanishMI implements WeatherProvider {
 			if (str.length == 3) {
 				str = ("0000" + str).substr(-4, 4);
 			}
-			let today = new Date();
+			const today = new Date();
 			today.setUTCHours(parseInt(str.substring(0, 2)), parseInt(str.substring(2, 4)), 0, 0);
 			return today;
 		}
@@ -414,18 +416,18 @@ interface DanishObservationPayloads {
 
 interface DanishObservationData {
 	/** last observations ascending (last is freshest), C */
-	Temperature2m?: number;
+	Temperature2m: number | undefined;
 	/** last observations ascending (last is freshest), % */
-	RelativeHumidity?: number;
+	RelativeHumidity: number | undefined;
 	/** mm? */
-	PrecAmount10Min?: number;
-	PressureMSL?: number;
-	WindDirection?: number;
+	PrecAmount10Min: number | undefined;
+	PressureMSL: number | undefined;
+	WindDirection: number | undefined;
 	/** m/s? */
-	WindSpeed10m?: number;
+	WindSpeed10m: number | undefined;
 	/** m/s? */
-	WindGustLast10Min?: number;
-	symbol?: number;
+	WindGustLast10Min: number | undefined;
+	symbol: number | undefined;
 }
 
 interface DanishObservationPayload {
