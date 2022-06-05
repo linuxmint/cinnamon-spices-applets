@@ -7,434 +7,598 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-20 12:34+0100\n"
-"PO-Revision-Date: 2020-07-23 07:46+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 17:58+0100\n"
+"Last-Translator: Google translate\n"
 "Language-Team: \n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#. 3.2 4.0
 msgid "Type to search..."
-msgstr ""
+msgstr "Πληκτρολογήστε για αναζήτηση..."
 
-#. 3.2 4.0
 msgid "Initializing"
-msgstr ""
+msgstr "Αρχικοποίηση"
 
-#. 3.2 4.0
 msgid "No description available"
-msgstr ""
+msgstr "Δεν υπάρχει διαθέσιμη περιγραφή"
 
-#. 3.2 4.0
-msgid "All Applications"
-msgstr ""
+msgid "All applications"
+msgstr "Όλες οι εφαρμογές"
 
-#. 3.2 4.0
 msgid "Places"
-msgstr ""
+msgstr "Μέρη"
 
-#. 3.2 4.0
-msgid "Recent Files"
-msgstr ""
+msgid "Recent files"
+msgstr "Πρόσφατοι φάκελοι"
 
-#. 3.2 4.0
 msgid "Bookmarks"
-msgstr ""
+msgstr "Σελιδοδείκτες"
 
-#. 3.2 4.0
-msgid "Favorite Apps"
-msgstr ""
+msgid "Favorite apps"
+msgstr "Αγαπημένες εφαρμογές"
 
-#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr ""
+msgstr "Απαιτείται πακέτο gir1.2-gda-5.0 για σελιδοδείκτες Firefox και Midori."
 
-#. 3.2 4.0
 msgid "Clear List"
-msgstr ""
+msgstr "Σαφή κατάλογο"
 
-#. 3.2 4.0
 msgid "No recent files"
-msgstr ""
+msgstr "Δεν υπάρχουν πρόσφατα αρχεία"
 
-#. 3.2
 msgid "Account details"
-msgstr ""
+msgstr "Λεπτομέρειες λογαριασμού"
 
-#. 3.2 3.2
 msgid "Grid View"
-msgstr ""
+msgstr "Προβολή πλέγματος"
 
-#. 3.2 3.2
 msgid "List View"
-msgstr ""
+msgstr "Προβολή λίστας"
 
-#. 3.2 3.2
 msgid "Switch to grid view"
-msgstr ""
+msgstr "Μετάβαση σε προβολή πλέγματος"
 
-#. 3.2 3.2
 msgid "Switch to list view"
-msgstr ""
+msgstr "Μετάβαση σε προβολή λίστας"
 
-#. 3.2 4.0
-msgid "Lock Screen"
-msgstr ""
+msgid "Lock screen"
+msgstr "Κλείδωμα οθόνης"
 
-#. 3.2 4.0
 msgid "Lock the screen"
-msgstr ""
+msgstr "Κλειδώστε την οθόνη"
 
-#. 3.2 4.0
 msgid "Logout"
-msgstr ""
+msgstr "Αποσύνδεση"
 
-#. 3.2 4.0
 msgid "Leave the session"
-msgstr ""
+msgstr "Αφήστε τη συνεδρία"
 
-#. 3.2 4.0
 msgid "Quit"
-msgstr ""
+msgstr "Εγκαταλείπω"
 
-#. 3.2 4.0
 msgid "Shutdown the computer"
-msgstr ""
+msgstr "Κλείσε τον υπολογιστή"
 
-#. 3.2 4.0
-msgid "Home"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Computer"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Browse network"
-msgstr ""
-
-#. 3.2 3.2 4.0
-#. 4.0
 msgid "Run with NVIDIA GPU"
-msgstr ""
+msgstr "Εκτέλεση με GPU NVIDIA"
 
-#. 3.2 4.0
 msgid "Add to panel"
-msgstr ""
+msgstr "Προσθήκη στον πίνακα"
 
-#. 3.2 4.0
 msgid "Add to desktop"
-msgstr ""
+msgstr "Προσθήκη στην επιφάνεια εργασίας"
 
-#. 3.2 4.0
-msgid "Remove favorite"
-msgstr ""
+msgid "Remove from favorites"
+msgstr "Αφαίρεση από τα αγαπημένα"
 
-#. 3.2 4.0
 msgid "Add to favorites"
-msgstr ""
+msgstr "Προσθήκη στα αγαπημένα"
 
-#. 3.2 4.0
 msgid "Uninstall"
-msgstr ""
+msgstr "Απεγκατάσταση"
 
-#. 4.0 4.0
+msgid "Home"
+msgstr "Σπίτι"
+
+msgid "Computer"
+msgstr "Υπολογιστή"
+
+msgid "Browse network"
+msgstr "Περιήγηση στο δίκτυο"
+
+msgid "Find files..."
+msgstr "Εύρεση αρχείων..."
+
 msgid "Please wait..."
-msgstr ""
+msgstr "Παρακαλώ περιμένετε..."
 
-#. metadata.json
-#. 3.2
+msgid "Applications"
+msgstr "Εφαρμογές"
+
+msgid "Documents"
+msgstr "Εγγραφα"
+
+msgid "Videos"
+msgstr "Βίντεο"
+
+msgid "Images"
+msgstr "εικόνες"
+
+msgid "Music"
+msgstr "ΜΟΥΣΙΚΗ"
+
+msgid "No recent Items"
+msgstr "Δεν υπάρχουν πρόσφατα στοιχεία"
+
+msgid "Click to copy"
+msgstr "Κάντε κλικ για αντιγραφή"
+
+msgid "Applications and files"
+msgstr "Εφαρμογές και αρχεία"
+
+msgid "Other search results"
+msgstr "Άλλα αποτελέσματα αναζήτησης"
+
+msgid "Browser history"
+msgstr "Ιστορικό προγράμματος περιήγησης"
+
+msgid "Browser bookmarks"
+msgstr "Σελιδοδείκτες προγράμματος περιήγησης"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Trash"
+msgstr "Σκουπίδια"
+
+msgid "Error while opening file:"
+msgstr "Σφάλμα κατά το άνοιγμα του αρχείου:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Πάρα πολλές καταχωρήσεις - εμφανίζονται μόνο οι πρώτες 1000 καταχωρήσεις"
+
+msgid "Favorites"
+msgstr "Αγαπημένα"
+
+msgid "Recent"
+msgstr "Πρόσφατος"
+
+msgid "Home folder"
+msgstr "Αρχικό φάκελο"
+
+msgid "Reset category order"
+msgstr "Επαναφορά σειράς κατηγορίας"
+
+msgid "light skin tone"
+msgstr "ανοιχτόχρωμο δέρμα"
+
+msgid "medium-light skin tone"
+msgstr "μεσαίου ανοιχτού τόνου δέρματος"
+
+msgid "medium skin tone"
+msgstr "μεσαίου τόνου δέρματος"
+
+msgid "medium-dark skin tone"
+msgstr "μεσαίου-σκούρου τόνου δέρματος"
+
+msgid "dark skin tone"
+msgstr "σκούρο τόνο δέρματος"
+
+msgid "This file is no longer available"
+msgstr "Αυτό το αρχείο δεν είναι πλέον διαθέσιμο"
+
+msgid "Open with"
+msgstr "Ανοιγμα με"
+
+msgid "Other application..."
+msgstr "Άλλη εφαρμογή..."
+
+msgid "Open containing folder"
+msgstr "Άνοιγμα φακέλου που περιέχει"
+
+msgid "Move to trash"
+msgstr "Μετακίνηση στον κάδο απορριμμάτων"
+
+msgid "Error while moving file to trash:"
+msgstr "Σφάλμα κατά τη μεταφορά του αρχείου στον κάδο απορριμμάτων:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Αυτό το στοιχείο μενού δεν σχετίζεται με κανένα πακέτο. Θέλετε να το αφαιρέσετε από το μενού ούτως ή άλλως;"
+
+msgid "The following packages will be removed:"
+msgstr "Τα ακόλουθα πακέτα θα αφαιρεθούν:"
+
+msgid "Packages to be removed"
+msgstr "Πακέτα προς κατάργηση"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Δεν είναι δυνατή η κατάργηση του πακέτου %s καθώς απαιτείται από άλλα πακέτα."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Το πακέτο %s είναι μια εξάρτηση από τα ακόλουθα πακέτα:"
+
+msgid "Open"
+msgstr "Ανοιξε"
+
+msgid "Search"
+msgstr "Αναζήτηση"
+
+msgid "Start in"
+msgstr "Ξεκινήστε μέσα"
+
+msgid "Select a folder"
+msgstr "Επιλέξτε ένα φάκελο"
+
+msgid "Follow symlinks"
+msgstr "Ακολουθήστε τους συμβολικούς συνδέσμους"
+
+msgid "Search hidden"
+msgstr "Η αναζήτηση είναι κρυφή"
+
+msgid "Use regular expressions"
+msgstr "Χρησιμοποιήστε κανονικές εκφράσεις"
+
+msgid "Stop"
+msgstr "Να σταματήσει"
+
+msgid "File"
+msgstr "Αρχείο"
+
+msgid "Path"
+msgstr "Μονοπάτι"
+
+msgid "Searching..."
+msgstr "Ερευνητικός..."
+
+msgid "Search Stopped"
+msgstr "Η αναζήτηση σταμάτησε"
+
+msgid "Searching: "
+msgstr "Ερευνητικός: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Σφάλμα: ανεπαρκή δικαιώματα για την ανάγνωση του φακέλου "
+
+msgid "Search Completed"
+msgstr "Η αναζήτηση ολοκληρώθηκε"
+
+msgid "Skipping"
+msgstr "Παράκαμψη"
+
+msgid " - directory already searched"
+msgstr " - ο κατάλογος έχει ήδη αναζητηθεί"
+
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinnamenu"
 
-#. metadata.json
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
-msgstr ""
-"Ένα ευέλικτο μενού που παρέχει επιλογές μορφοποίησης, σελιδοδείκτες ιστού, "
-"υποστήριξη παρόχου αναζήτησης και ασαφή αναζήτηση."
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Ένα ευέλικτο μενού με επιλογές διάταξης πλέγματος ή λίστας, πρόγραμμα περιήγησης αρχείων και αναζήτηση emoji."
 
-#. metadata.json
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
-msgstr ""
-
-#. 3.2 4.0
 msgid "Behavior"
-msgstr ""
+msgstr "η ΣΥΜΠΕΡΙΦΟΡΑ"
 
-#. 3.2 4.0
 msgid "Appearance"
-msgstr ""
+msgstr "Εμφάνιση"
 
-#. 3.2 4.0
 msgid "Layout and Content"
 msgstr "Διάταξη και περιεχόμενο"
 
-#. 3.2
 msgid "Search Providers"
-msgstr ""
+msgstr "Αναζήτηση παρόχων"
 
-#. 3.2
 msgid "No search provider extensions found"
-msgstr ""
+msgstr "Δεν βρέθηκαν επεκτάσεις παρόχου αναζήτησης"
 
-#. 3.2 4.0
 msgid "Panel"
-msgstr ""
+msgstr "Πίνακας"
 
-#. 3.2 4.0
 msgid "Menu"
-msgstr ""
+msgstr "Μενού"
 
-#. 3.2 4.0
 msgid "Layout"
-msgstr ""
+msgstr "Διάταξη"
 
-#. 3.2 4.0
 msgid "Content"
-msgstr ""
+msgstr "Περιεχόμενο"
 
-#. 3.2 4.0
 msgid "Recent files settings"
 msgstr "Πρόσφατες ρυθμίσεις αρχείων"
 
-#. 3.2 4.0
 msgid "Open the menu editor"
-msgstr ""
+msgstr "Ανοίξτε το πρόγραμμα επεξεργασίας μενού"
 
-#. 3.2 4.0
-msgid "Reset category order"
-msgstr ""
-
-#. 3.2 4.0
 msgid "Use a custom icon"
 msgstr "Χρησιμοποιήστε ένα προσαρμοσμένο εικονίδιο"
 
-#. 3.2 4.0
 msgid "Use a custom icon in the panel"
-msgstr ""
+msgstr "Χρησιμοποιήστε ένα προσαρμοσμένο εικονίδιο στον πίνακα"
 
-#. 3.2 4.0
 msgid "Panel icon"
-msgstr ""
+msgstr "Εικονίδιο πίνακα"
 
-#. 3.2 4.0
 msgid "Panel text"
 msgstr "Κείμενο πίνακα"
 
-#. 3.2 4.0
 msgid "Text to show beside the panel icon"
-msgstr ""
+msgstr "Κείμενο προς εμφάνιση δίπλα στο εικονίδιο του πίνακα"
 
-#. 3.2 4.0
-msgid "pixels"
-msgstr ""
+msgid "Category icon size (pixels)"
+msgstr "Μέγεθος εικονιδίου κατηγορίας (pixel)"
 
-#. 3.2 4.0
-msgid "Category icon size"
-msgstr "Μέγεθος εικονιδίου κατηγορίας"
+msgid "Applications list icon size (pixels)"
+msgstr "Μέγεθος εικονιδίου λίστας εφαρμογών (pixel)"
 
-#. 3.2 4.0
-msgid "Applications list icon size"
-msgstr ""
+msgid "Applications grid icon size (pixels)"
+msgstr "Μέγεθος εικονιδίου πλέγματος εφαρμογών (pixel)"
 
-#. 3.2 4.0
-msgid "Applications grid icon size"
-msgstr ""
-
-#. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
-msgstr ""
+msgstr "Συντόμευση πληκτρολογίου για άνοιγμα και κλείσιμο του μενού"
 
-#. 3.2 4.0
 msgid "Open menu on hover"
-msgstr ""
+msgstr "Άνοιγμα μενού κατά την τοποθέτηση του δείκτη"
 
-#. 3.2 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr ""
+msgstr "Ανοίξτε το μενού όταν μετακινώ το ποντίκι μου πάνω από το εικονίδιο του πίνακα"
 
-#. 3.2 4.0
 msgid "milliseconds"
-msgstr ""
+msgstr "χιλιοστά του δευτερολέπτου"
 
-#. 3.2 4.0
 msgid "Menu hover delay"
 msgstr "Καθυστέρηση αιωρημάτων μενού"
 
-#. 3.2 4.0
 msgid "Use menu animations"
-msgstr ""
+msgstr "Χρησιμοποιήστε κινούμενα σχέδια μενού"
 
-#. 3.2 4.0
 msgid "Animate the menu on open and close"
-msgstr ""
+msgstr "Κινούμενη κίνηση του μενού στο άνοιγμα και κλείσιμο"
 
-#. 3.2 4.0
 msgid "Activate categories on click"
-msgstr ""
+msgstr "Ενεργοποίηση κατηγοριών με κλικ"
 
-#. 3.2 4.0
 msgid "Activate categories on click instead of on hover"
-msgstr ""
+msgstr "Ενεργοποιήστε τις κατηγορίες στο κλικ αντί για το δείκτη του ποντικιού"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling"
-msgstr ""
+msgstr "Ενεργοποίηση αυτόματης κύλισης"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
-msgstr ""
+msgstr "Ενεργοποίηση αυτόματης κύλισης στη λίστα εφαρμογών"
 
-#. 3.2 4.0
 msgid "Show web bookmarks"
-msgstr ""
+msgstr "Εμφάνιση σελιδοδεικτών ιστού"
 
-#. 3.2 4.0
-msgid "Show your browser's web bookmarks in the menu"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
+"Εμφάνιση των σελιδοδεικτών web του προγράμματος περιήγησής σας στο μενού.\n"
+"Σημείωση: Εγκαταστήστε το πακέτο gir1.2-gda-5.0 για να διαβάσετε τους σελιδοδείκτες του firefox."
 
-#. 3.2
 msgid "Enable searching of open windows"
-msgstr ""
+msgstr "Ενεργοποίηση αναζήτησης ανοιχτών παραθύρων"
 
-#. 3.2 4.0
 msgid "Enable search providers"
-msgstr ""
+msgstr "Ενεργοποίηση παρόχων αναζήτησης"
 
-#. 3.2 4.0
 msgid "Include search provider results in searches"
-msgstr ""
+msgstr "Συμπεριλάβετε αποτελέσματα παρόχου αναζήτησης στις αναζητήσεις"
 
-#. 3.2 4.0
 msgid "Example Search Providers"
-msgstr ""
+msgstr "Παράδειγμα παρόχων αναζήτησης"
 
-#. 3.2
-#. 3.2
-msgid "Startup applications view mode"
-msgstr ""
+msgid "Open menu on category:"
+msgstr "Άνοιγμα μενού στην κατηγορία:"
 
-#. 3.2 4.0
 msgid "List"
-msgstr ""
+msgstr "Λίστα"
 
-#. 3.2 4.0
 msgid "Grid"
-msgstr ""
+msgstr "Πλέγμα"
 
-#. 3.2 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Να ανοίγετε πάντα το μενού με επιλεγμένη αυτή την κατηγορία"
+
 msgid "columns"
-msgstr ""
+msgstr "στήλες"
 
-#. 3.2 4.0
 msgid "Number of columns in apps grid"
-msgstr ""
+msgstr "Αριθμός στηλών στο πλέγμα εφαρμογών"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places"
-msgstr ""
+msgstr "Εμφάνιση σελιδοδεικτών και τοποθεσιών"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places category in the menu"
-msgstr ""
+msgstr "Εμφάνιση σελιδοδεικτών και κατηγορίας τοποθεσιών στο μενού"
 
-#. 3.2 4.0
 msgid "Show application icons"
-msgstr ""
+msgstr "Εμφάνιση εικονιδίων εφαρμογών"
 
-#. 3.2 4.0
 msgid "Show category icons"
-msgstr ""
+msgstr "Εμφάνιση εικονιδίων κατηγορίας"
 
-#. 3.2
 msgid "Show application descriptions under titles"
-msgstr ""
+msgstr "Εμφάνιση περιγραφών εφαρμογών κάτω από τίτλους"
 
-#. 3.2
 msgid "Show tooltips"
-msgstr ""
+msgstr "Εμφάνιση συμβουλών εργαλείων"
 
-#. 3.2
 msgid "Tooltip delay"
-msgstr ""
+msgstr "Καθυστέρηση επεξήγησης εργαλείου"
 
-#. 3.2 4.0
 msgid "Use a custom menu height"
-msgstr ""
+msgstr "Χρησιμοποιήστε ένα προσαρμοσμένο ύψος μενού"
 
-#. 3.2 4.0
-msgid "px"
-msgstr ""
+msgid "Custom menu height (pixels)"
+msgstr "Προσαρμοσμένο ύψος μενού (pixel)"
 
-#. 3.2 4.0
-msgid "Custom menu height"
-msgstr ""
-
-#. 4.0
 msgid "Applications view mode"
 msgstr "Λειτουργία προβολής εφαρμογών"
 
-#. 4.0
 msgid "View applications as list or grid"
-msgstr ""
+msgstr "Προβολή εφαρμογών ως λίστα ή πλέγμα"
 
-#. 4.0
 msgid "Application description placement"
 msgstr "Τοποθέτηση περιγραφής εφαρμογής"
 
-#. 4.0
 msgid "Tooltips"
-msgstr ""
+msgstr "Συμβουλές εργαλείων"
 
-#. 4.0
 msgid "Under titles"
-msgstr ""
+msgstr "Κάτω από τίτλους"
 
-#. 4.0
 msgid "None"
-msgstr ""
+msgstr "Κανένας"
 
-#. 4.0
 msgid "Choose where to show application descriptions"
-msgstr ""
+msgstr "Επιλέξτε πού θα εμφανίζονται οι περιγραφές εφαρμογών"
 
-#. 4.0
-msgid "Session buttons location"
-msgstr ""
+msgid "Sidebar location"
+msgstr "Τοποθεσία πλευρικής γραμμής"
 
-#. 4.0
 msgid "Top"
-msgstr ""
+msgstr "Μπλουζα"
 
-#. 4.0
 msgid "Bottom"
-msgstr ""
+msgstr "Κάτω μέρος"
 
-#. 4.0
 msgid "Left"
-msgstr ""
+msgstr "Αριστερά"
 
-#. 4.0
 msgid "Right"
-msgstr ""
+msgstr "δεξιά"
 
-#. 4.0
-msgid "Choose where to show the session (quit, logout, etc.) buttons"
-msgstr ""
+msgid "Choose where to show the sidebar"
+msgstr "Επιλέξτε πού θα εμφανίζεται η πλαϊνή γραμμή"
 
-#. 4.0
-msgid "Add favorites to session buttons"
-msgstr "Προσθήκη αγαπημένων στα κουμπιά συνεδρίας"
-
-#. 4.0
-msgid "Show your favorite app icons next to the session buttons"
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
+"\n"
+"Πληροφορίες/συμβουλή: Σύρετε στην άκρη του μενού για να αλλάξετε το μέγεθος του μενού.\n"
+
+msgid "Show favorites on sidebar"
+msgstr "Εμφάνιση αγαπημένων στην πλαϊνή γραμμή"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Εμφάνιση των αγαπημένων σας εφαρμογών και εικονιδίων αρχείων στην πλαϊνή γραμμή"
+
+msgid "Show recent items"
+msgstr "Εμφάνιση πρόσφατων στοιχείων"
+
+msgid "Show recent items category in the menu"
+msgstr "Εμφάνιση της κατηγορίας πρόσφατων στοιχείων στο μενού"
+
+msgid "Show favorite apps category"
+msgstr "Εμφάνιση κατηγορίας αγαπημένων εφαρμογών"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Εμφάνιση της κατηγορίας των αγαπημένων σας εφαρμογών στο μενού"
+
+msgid "Show home folder"
+msgstr "Εμφάνιση αρχικού φακέλου"
+
+msgid "Show home folder category in the menu"
+msgstr "Εμφάνιση κατηγορίας αρχικού φακέλου στο μενού"
+
+msgid "Last used category"
+msgstr "Κατηγορία τελευταίας χρήσης"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Αυτόματη κύλιση στη λίστα εφαρμογών κατά την τοποθέτηση του ποντικιού"
+
+msgid "Show hidden files"
+msgstr "Εμφάνιση κρυφών αρχείων"
+
+msgid "Show hidden files in folder view"
+msgstr "Εμφάνιση κρυφών αρχείων σε προβολή φακέλου"
+
+msgid "Emoji search"
+msgstr "Αναζήτηση emoji"
+
+msgid "Show emojis in search results"
+msgstr "Εμφάνιση emojis στα αποτελέσματα αναζήτησης"
+
+msgid "Web search option"
+msgstr "Επιλογή αναζήτησης στο Web"
+
+msgid "Show an internet search option in search results"
+msgstr "Εμφάνιση μιας επιλογής αναζήτησης στο διαδίκτυο στα αποτελέσματα αναζήτησης"
+
+msgid "Search home folder"
+msgstr "Αναζήτηση στον αρχικό φάκελο"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Κατά την αναζήτηση, αναζητήστε επίσης αρχεία στον αρχικό μου φάκελο"
+
+msgid "Web history search"
+msgstr "Αναζήτηση ιστορικού ιστού"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Κατά την αναζήτηση, πραγματοποιήστε επίσης αναζήτηση στο ιστορικό του προγράμματος περιήγησής μου (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Σημείωση: Το ιστορικό του Firefox δεν υποστηρίζεται αυτήν τη στιγμή."
+
+msgid "Web bookmarks search"
+msgstr "Αναζήτηση σελιδοδεικτών Ιστού"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Κατά την αναζήτηση, πραγματοποιήστε επίσης αναζήτηση στους σελιδοδείκτες ιστού του προγράμματος περιήγησής μου (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Σημείωση: Για να πραγματοποιήσετε αναζήτηση σε σελιδοδείκτες Firefox, θα χρειαστεί να εγκαταστήσετε το πακέτο gir1.2-gda-5.0 (διανομές που βασίζονται στο Debian συμπεριλαμβανομένου του Ubuntu & Linux Mint) ή πακέτο libgda (διανομές βασισμένες στο Arch) και επανεκκινήστε τον υπολογιστή σας."
+
+msgid "Wikipedia search"
+msgstr "Αναζήτηση Wikipedia"
+
+msgid "Show some Wikipedia results"
+msgstr "Εμφάνιση ορισμένων αποτελεσμάτων της Wikipedia"
+
+msgid "Wikipedia language"
+msgstr "Γλώσσα Wikipedia"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Σημείωση: Ορισμένες επιλογές αναζήτησης μπορούν ακόμα να χρησιμοποιηθούν ακόμα κι αν δεν τις έχετε ενεργοποιήσει εδώ, θέτοντας πρόθεμα τον όρο αναζήτησής σας.\n"
+"Για παράδειγμα: για να αναζητήσετε ένα emoji, πληκτρολογήστε \"e heart\" για να βρείτε emoji καρδιάς. Ομοίως, χρησιμοποιήστε τα προθέματα 'f ' για την αναζήτηση αρχείων, 'h ' για το ιστορικό ιστού και 'b ' για την αναζήτηση σελιδοδεικτών ιστού.\n"
+
+msgid "Use a custom icon size"
+msgstr "Χρησιμοποιήστε ένα προσαρμοσμένο μέγεθος εικονιδίου"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Χρησιμοποιήστε ένα προσαρμοσμένο μέγεθος για το εικονίδιο του πίνακα"
+
+msgid "Panel icon size (pixels)"
+msgstr "Μέγεθος εικονιδίου πίνακα (pixel)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Επιλέξτε ένα προσαρμοσμένο μέγεθος για το εικονίδιο του πίνακα"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Μέγεθος εικονιδίου πλευρικής γραμμής (pixel)"
+
+msgid "Use sidebar box style"
+msgstr "Χρησιμοποιήστε το στυλ πλαισίου πλαϊνής γραμμής"
+
+msgid "Use a sidebar box style"
+msgstr "Χρησιμοποιήστε ένα στυλ πλαισίου πλαϊνής γραμμής"
+
+msgid "Use tile style"
+msgstr "Χρησιμοποιήστε στυλ πλακιδίων"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Χρησιμοποιήστε ένα στυλ πλακιδίων για τα κουμπιά της εφαρμογής (Σημείωση: ενδέχεται να μην λειτουργεί σε ορισμένα θέματα)"
