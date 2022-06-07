@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-25 00:24+0100\n"
-"PO-Revision-Date: 2019-10-24 22:43+0200\n"
+"PO-Revision-Date: 2022-06-03 18:38+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it\n"
 
 #: applet.js:156
 msgid "Settings"
@@ -100,7 +100,7 @@ msgstr "Homestead in esecuzione."
 
 #: applet.js:278
 msgid " (Running)"
-msgstr "(In esecuzione)"
+msgstr " (In esecuzione)"
 
 #: applet.js:282
 msgid "Rancher: Homestead suspended."
@@ -124,7 +124,7 @@ msgstr "Homestead arrestato."
 
 #: applet.js:289
 msgid " (Down)"
-msgstr "(Arrestato)"
+msgstr " (Arrestato)"
 
 #: applet.js:292
 msgid "Rancher: Homestead not created."
@@ -136,7 +136,7 @@ msgstr "Homestead non creato"
 
 #: applet.js:294 applet.js:299
 msgid " (Not created/Destroyed)"
-msgstr "(Non creato/Distrutto)"
+msgstr " (Non creato/Distrutto)"
 
 #: applet.js:297
 msgid "Rancher: Homestead not installed."
@@ -144,7 +144,7 @@ msgstr "Rancher: Homestead non è installato."
 
 #: applet.js:298 applet.js 305
 msgid "Homestead not installed"
-msgstr "Homestead non è installato."
+msgstr "Homestead non è installato"
 
 #: applet.js 306
 msgid "Click here for installation instructions"
