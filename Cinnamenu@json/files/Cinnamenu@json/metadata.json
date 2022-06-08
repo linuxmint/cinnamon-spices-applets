@@ -3,7 +3,7 @@
     "name": "Cinnamenu",
     "description": "A flexible menu with grid or list layout options, file browser and emoji search.",
     "max-instances": 2,
-    "version": "4.15.7",
+    "version": "4.15.8",
     "multiversion": true,
     "website": "https://github.com/linuxmint/cinnamon-spices-applets",
     "cinnamon-version": [
