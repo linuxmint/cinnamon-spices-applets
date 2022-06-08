@@ -1,0 +1,604 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-27 23:46+0100\n"
+"Last-Translator: Google translate\n"
+"Language-Team: \n"
+"Language: nb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Type to search..."
+msgstr "Skriv for å søke..."
+
+msgid "Initializing"
+msgstr "Initialiserer"
+
+msgid "No description available"
+msgstr "Ingen beskrivelse tilgjengelig"
+
+msgid "All applications"
+msgstr "Alle applikasjoner"
+
+msgid "Places"
+msgstr "Steder"
+
+msgid "Recent files"
+msgstr "Nylige filer"
+
+msgid "Bookmarks"
+msgstr "Bokmerker"
+
+msgid "Favorite apps"
+msgstr "Favorittapper"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0-pakke kreves for Firefox- og Midori-bokmerker."
+
+msgid "Clear List"
+msgstr "Klar liste"
+
+msgid "No recent files"
+msgstr "Ingen nyere filer"
+
+msgid "Account details"
+msgstr "Kontodetaljer"
+
+msgid "Grid View"
+msgstr "Rutenett visning"
+
+msgid "List View"
+msgstr "Listevisning"
+
+msgid "Switch to grid view"
+msgstr "Bytt til rutenettvisning"
+
+msgid "Switch to list view"
+msgstr "Bytt til listevisning"
+
+msgid "Lock screen"
+msgstr "Låseskjerm"
+
+msgid "Lock the screen"
+msgstr "Lås skjermen"
+
+msgid "Logout"
+msgstr "Logg ut"
+
+msgid "Leave the session"
+msgstr "Gå ut av økten"
+
+msgid "Quit"
+msgstr "Slutte"
+
+msgid "Shutdown the computer"
+msgstr "Slå av datamaskinen"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Kjør med NVIDIA GPU"
+
+msgid "Add to panel"
+msgstr "Legg til panel"
+
+msgid "Add to desktop"
+msgstr "Legg til skrivebordet"
+
+msgid "Remove from favorites"
+msgstr "Fjern fra favoritter"
+
+msgid "Add to favorites"
+msgstr "Legg til i favoritter"
+
+msgid "Uninstall"
+msgstr "Avinstaller"
+
+msgid "Home"
+msgstr "Hjem"
+
+msgid "Computer"
+msgstr "Datamaskin"
+
+msgid "Browse network"
+msgstr "Bla gjennom nettverket"
+
+msgid "Find files..."
+msgstr "Finn filer..."
+
+msgid "Please wait..."
+msgstr "Vennligst vent..."
+
+msgid "Applications"
+msgstr "applikasjoner"
+
+msgid "Documents"
+msgstr "Dokumenter"
+
+msgid "Videos"
+msgstr "Videoer"
+
+msgid "Images"
+msgstr "Bilder"
+
+msgid "Music"
+msgstr "Musikk"
+
+msgid "No recent Items"
+msgstr "Ingen nylige varer"
+
+msgid "Click to copy"
+msgstr "Klikk for å kopiere"
+
+msgid "Applications and files"
+msgstr "Applikasjoner og filer"
+
+msgid "Other search results"
+msgstr "Andre søkeresultater"
+
+msgid "Browser history"
+msgstr "Nettleserhistorikk"
+
+msgid "Browser bookmarks"
+msgstr "Nettleserbokmerker"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Trash"
+msgstr "Søppel"
+
+msgid "Error while opening file:"
+msgstr "Feil under åpning av fil:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "For mange oppføringer - viser kun de første 1000 oppføringene"
+
+msgid "Favorites"
+msgstr "Favoritter"
+
+msgid "Recent"
+msgstr "Nylig"
+
+msgid "Home folder"
+msgstr "Hjemmemappe"
+
+msgid "Reset category order"
+msgstr "Tilbakestill kategorirekkefølgen"
+
+msgid "light skin tone"
+msgstr "lys hudtone"
+
+msgid "medium-light skin tone"
+msgstr "middels lys hudtone"
+
+msgid "medium skin tone"
+msgstr "medium hudtone"
+
+msgid "medium-dark skin tone"
+msgstr "middels mørk hudtone"
+
+msgid "dark skin tone"
+msgstr "mørk hudtone"
+
+msgid "This file is no longer available"
+msgstr "Denne filen er ikke lenger tilgjengelig"
+
+msgid "Open with"
+msgstr "Åpne med"
+
+msgid "Other application..."
+msgstr "Annen applikasjon..."
+
+msgid "Open containing folder"
+msgstr "Åpne innholdsmappe"
+
+msgid "Move to trash"
+msgstr "Flytt til søppel"
+
+msgid "Error while moving file to trash:"
+msgstr "Feil under flytting av fil til papirkurven:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Dette menyelementet er ikke knyttet til noen pakke. Vil du fjerne den fra menyen likevel?"
+
+msgid "The following packages will be removed:"
+msgstr "Følgende pakker vil bli fjernet:"
+
+msgid "Packages to be removed"
+msgstr "Pakker som skal fjernes"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Kan ikke fjerne pakken %s da den kreves av andre pakker."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Pakke %s er en avhengighet av følgende pakker:"
+
+msgid "Open"
+msgstr "Åpen"
+
+msgid "Search"
+msgstr "Søk"
+
+msgid "Start in"
+msgstr "Start inn"
+
+msgid "Select a folder"
+msgstr "Velg en mappe"
+
+msgid "Follow symlinks"
+msgstr "Følg symbolkoblinger"
+
+msgid "Search hidden"
+msgstr "Søk skjult"
+
+msgid "Use regular expressions"
+msgstr "Bruk regulære uttrykk"
+
+msgid "Stop"
+msgstr "Stoppe"
+
+msgid "File"
+msgstr "Fil"
+
+msgid "Path"
+msgstr "Sti"
+
+msgid "Searching..."
+msgstr "Søker..."
+
+msgid "Search Stopped"
+msgstr "Søk stoppet"
+
+msgid "Searching: "
+msgstr "Søker: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Feil: utilstrekkelige tillatelser til å lese mappen "
+
+msgid "Search Completed"
+msgstr "Søk fullført"
+
+msgid "Skipping"
+msgstr "Hopp over"
+
+msgid " - directory already searched"
+msgstr " - katalogen er allerede søkt"
+
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "En fleksibel meny med alternativer for rutenett eller listelayout, filleser og emoji-søk."
+
+msgid "Behavior"
+msgstr "Oppførsel"
+
+msgid "Appearance"
+msgstr "Utseende"
+
+msgid "Layout and Content"
+msgstr "Layout og innhold"
+
+msgid "Search Providers"
+msgstr "Søkeleverandører"
+
+msgid "No search provider extensions found"
+msgstr "Finner ingen utvidelser for søkeleverandører"
+
+msgid "Panel"
+msgstr "Panel"
+
+msgid "Menu"
+msgstr "Meny"
+
+msgid "Layout"
+msgstr "Oppsett"
+
+msgid "Content"
+msgstr "Innhold"
+
+msgid "Recent files settings"
+msgstr "Nylige filinnstillinger"
+
+msgid "Open the menu editor"
+msgstr "Åpne menyredigering"
+
+msgid "Use a custom icon"
+msgstr "Bruk et tilpasset ikon"
+
+msgid "Use a custom icon in the panel"
+msgstr "Bruk et tilpasset ikon i panelet"
+
+msgid "Panel icon"
+msgstr "Panelikon"
+
+msgid "Panel text"
+msgstr "Paneltekst"
+
+msgid "Text to show beside the panel icon"
+msgstr "Tekst som skal vises ved siden av panelikonet"
+
+msgid "Category icon size (pixels)"
+msgstr "Kategoriikonstørrelse (piksler)"
+
+msgid "Applications list icon size (pixels)"
+msgstr "Applisteikonstørrelse (piksler)"
+
+msgid "Applications grid icon size (pixels)"
+msgstr "Applikasjonsrutenett-ikonstørrelse (piksler)"
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Tastatursnarvei for å åpne og lukke menyen"
+
+msgid "Open menu on hover"
+msgstr "Åpne menyen ved å holde musepekeren"
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Åpne menyen når jeg beveger musen over panelikonet"
+
+msgid "milliseconds"
+msgstr "millisekunder"
+
+msgid "Menu hover delay"
+msgstr "Forsinkelse for sveving av meny"
+
+msgid "Use menu animations"
+msgstr "Bruk menyanimasjoner"
+
+msgid "Animate the menu on open and close"
+msgstr "Animer menyen på åpne og lukke"
+
+msgid "Activate categories on click"
+msgstr "Aktiver kategorier ved klikk"
+
+msgid "Activate categories on click instead of on hover"
+msgstr "Aktiver kategorier ved klikk i stedet for ved sveving"
+
+msgid "Enable autoscrolling"
+msgstr "Aktiver automatisk rulling"
+
+msgid "Enable autoscrolling in application list"
+msgstr "Aktiver automatisk rulling i applikasjonslisten"
+
+msgid "Show web bookmarks"
+msgstr "Vis nettbokmerker"
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Vis nettleserens nettbokmerker i menyen.\n"
+"Merk: Installer pakken gir1.2-gda-5.0 for å lese firefox-bokmerker."
+
+msgid "Enable searching of open windows"
+msgstr "Aktiver søk i åpne vinduer"
+
+msgid "Enable search providers"
+msgstr "Aktiver søkeleverandører"
+
+msgid "Include search provider results in searches"
+msgstr "Inkluder søkeleverandørresultater i søk"
+
+msgid "Example Search Providers"
+msgstr "Eksempel på søkeleverandører"
+
+msgid "Open menu on category:"
+msgstr "Åpne meny for kategori:"
+
+msgid "List"
+msgstr "Liste"
+
+msgid "Grid"
+msgstr "Nett"
+
+msgid "Always open the menu with this category selected"
+msgstr "Åpne alltid menyen med denne kategorien valgt"
+
+msgid "columns"
+msgstr "kolonner"
+
+msgid "Number of columns in apps grid"
+msgstr "Antall kolonner i app-rutenettet"
+
+msgid "Show bookmarks and places"
+msgstr "Vis bokmerker og steder"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "Vis bokmerker og stedskategori i menyen"
+
+msgid "Show application icons"
+msgstr "Vis programikoner"
+
+msgid "Show category icons"
+msgstr "Vis kategoriikoner"
+
+msgid "Show application descriptions under titles"
+msgstr "Vis søknadsbeskrivelser under titler"
+
+msgid "Show tooltips"
+msgstr "Vis verktøytips"
+
+msgid "Tooltip delay"
+msgstr "Verktøytipsforsinkelse"
+
+msgid "Use a custom menu height"
+msgstr "Bruk en egendefinert menyhøyde"
+
+msgid "Custom menu height (pixels)"
+msgstr "Egendefinert menyhøyde (piksler)"
+
+msgid "Applications view mode"
+msgstr "Visningsmodus for applikasjoner"
+
+msgid "View applications as list or grid"
+msgstr "Vis applikasjoner som liste eller rutenett"
+
+msgid "Application description placement"
+msgstr "Søknadsbeskrivelse plassering"
+
+msgid "Tooltips"
+msgstr "Verktøytips"
+
+msgid "Under titles"
+msgstr "Under titler"
+
+msgid "None"
+msgstr "Ingen"
+
+msgid "Choose where to show application descriptions"
+msgstr "Velg hvor du vil vise applikasjonsbeskrivelser"
+
+msgid "Sidebar location"
+msgstr "Sidefelts plassering"
+
+msgid "Top"
+msgstr "Topp"
+
+msgid "Bottom"
+msgstr "Bunn"
+
+msgid "Left"
+msgstr "Venstre"
+
+msgid "Right"
+msgstr "Ikke sant"
+
+msgid "Choose where to show the sidebar"
+msgstr "Velg hvor sidefeltet skal vises"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"Info/tips: Dra på menykanten for å endre menystørrelsen.\n"
+
+msgid "Show favorites on sidebar"
+msgstr "Vis favoritter på sidefeltet"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Vis favorittappen og filikonene dine på sidefeltet"
+
+msgid "Show recent items"
+msgstr "Vis nylige elementer"
+
+msgid "Show recent items category in the menu"
+msgstr "Vis kategorien nylige elementer i menyen"
+
+msgid "Show favorite apps category"
+msgstr "Vis kategorien favorittapper"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Vis favorittappkategorien din i menyen"
+
+msgid "Show home folder"
+msgstr "Vis hjemmemappe"
+
+msgid "Show home folder category in the menu"
+msgstr "Vis hjemmemappekategori i menyen"
+
+msgid "Last used category"
+msgstr "Sist brukte kategori"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Rull applikasjonslisten automatisk ved å holde musepekeren"
+
+msgid "Show hidden files"
+msgstr "Vis skjulte filer"
+
+msgid "Show hidden files in folder view"
+msgstr "Vis skjulte filer i mappevisning"
+
+msgid "Emoji search"
+msgstr "Emoji-søk"
+
+msgid "Show emojis in search results"
+msgstr "Vis emojier i søkeresultater"
+
+msgid "Web search option"
+msgstr "Alternativ for nettsøk"
+
+msgid "Show an internet search option in search results"
+msgstr "Vis et alternativ for internettsøk i søkeresultatene"
+
+msgid "Search home folder"
+msgstr "Søk i hjemmemappe"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Når du søker, søk også hjemmemappen min etter filer"
+
+msgid "Web history search"
+msgstr "Søk i netthistorikk"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Når du søker, søk også i nettleserens historie (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Merk: Firefox-historikk støttes for øyeblikket ikke."
+
+msgid "Web bookmarks search"
+msgstr "Søk etter nettbokmerker"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Når du søker, søk også nettleserens nettbokmerker (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Merk: For å søke i Firefox-bokmerker må du installere pakken gir1.2-gda-5.0 (Debian-baserte distribusjoner inkl. Ubuntu & Linux Mint) eller pakke libgda (Arch-baserte distribusjoner) og start datamaskinen på nytt."
+
+msgid "Wikipedia search"
+msgstr "Wikipedia-søk"
+
+msgid "Show some Wikipedia results"
+msgstr "Vis noen Wikipedia-resultater"
+
+msgid "Wikipedia language"
+msgstr "Wikipedia språk"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Merk: Noen søkealternativer kan fortsatt brukes selv om du ikke har aktivert dem her ved å sette inn søkeordet ditt foran.\n"
+"For eksempel: for å søke etter en emoji, skriv inn «e heart» for å finne hjerte-emojier. På samme måte bruker du prefiksene 'f ' for filsøk, 'h ' for netthistorikk og 'b ' for nettbokmerkesøk.\n"
+
+msgid "Use a custom icon size"
+msgstr "Bruk en egendefinert ikonstørrelse"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Bruk en egendefinert størrelse for panelikonet"
+
+msgid "Panel icon size (pixels)"
+msgstr "Panelikonstørrelse (piksler)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Velg en egendefinert størrelse for panelikonet"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Sidefeltikonstørrelse (piksler)"
+
+msgid "Use sidebar box style"
+msgstr "Bruk sidefeltstil"
+
+msgid "Use a sidebar box style"
+msgstr "Bruk en sidefeltboksstil"
+
+msgid "Use tile style"
+msgstr "Bruk flisstil"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Bruk en flisstil for applikasjonsknappene (Merk: fungerer kanskje ikke på enkelte temaer)"
