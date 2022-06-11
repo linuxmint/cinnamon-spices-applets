@@ -197,7 +197,6 @@ class CinnamenuApplet extends TextIconApplet {
 
         const box = button.actor.get_allocation_box();
         const y1 = box.y1, y2 = box.y2;
-        //global.log('value', value,' y1:',y1,' y2:',y2);
         const PADDING_ALLOWANCE = 20; //In case button parent(s) have padding meaning y1 won't go to 0
         if (y1 < value + offset) {
             if (y1 < PADDING_ALLOWANCE) {
@@ -1097,7 +1096,7 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.settings.webSearchOption != 0) {//0==none
             const iconName = ['google_icon.png', 'bing_icon.png', 'search.png', 'yahoo_icon.png',
                             'search.png', 'duckgo_icon.png', 'ask.png', 'ecosia.png', 'search.png',
-                            'startpage.png'][this.settings.webSearchOption - 1];
+                            'startpage.png', 'brave.png'][this.settings.webSearchOption - 1];
             const url = [   'https://google.com/search?q=',
                             'https://www.bing.com/search?q=',
                             'https://www.baidu.com/s?wd=',
@@ -1107,9 +1106,10 @@ class CinnamenuApplet extends TextIconApplet {
                             'https://www.ask.com/web?q=',
                             'https://www.ecosia.org/search?q=',
                             'https://search.aol.co.uk/aol/search?q=',
-                            'https://www.startpage.com/search/?q='][this.settings.webSearchOption - 1];
+                            'https://www.startpage.com/search/?q=',
+                            'https://search.brave.com/search?q='][this.settings.webSearchOption - 1];
             const engine = ['Google', 'Bing', 'Baidu', 'Yahoo', 'Yandex', 'DuckDuckGo', 'Ask',
-                            'Ecosia', 'AOL', 'Startpage'][this.settings.webSearchOption - 1];
+                            'Ecosia', 'AOL', 'Startpage', 'Brave'][this.settings.webSearchOption - 1];
 
             const gicon = new Gio.FileIcon({file: Gio.file_new_for_path(__meta.path + '/../icons/' + iconName)});
 
@@ -1225,7 +1225,7 @@ class CinnamenuApplet extends TextIconApplet {
                     webHistoryResults = history;
                     finish();
                 }
-            }).catch((e) => global.log('>>>caught error:',e.message, e.stack));
+            }).catch((e) => global.logError('Cinnamenu browser search',e.message, e.stack));
         }
 
         //---Wikipedia search----
@@ -1321,39 +1321,39 @@ class CinnamenuApplet extends TextIconApplet {
                     let searchTimeLimit = Date.now() + 200; // allow max 200ms to search each folder to
                     //prevent freezing if a folder has a large number of files.
                     while (next && Date.now() < searchTimeLimit) {
-
-                        const filename = next.get_name();
-                        const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
-                        const filePath = folder + (folder === '/' ? '' : '/') + filename;
-                        const match = searchStr(fpattern, filename, true, true);
-                        if (match.score > 1) { //any word boundary match
-                            const file = Gio.file_new_for_path(filePath);
-                            match.score -= 0.01;
-                            //if file then treat as isFolderviewFile and if directory then treat as isPlace
-                            const foundFile = {
-                                        name: filename,
-                                        score: match.score * (fpattern.length > 2 ? 1 : 0.9),
-                                        nameWithSearchMarkup: match.result,
-                                        gicon: next.get_icon(),
-                                        uri: file.get_uri(),
-                                        mimeType: next.get_content_type(),
-                                        description: filePath,
-                                        isPlace: isDirectory,
-                                        isFolderviewFile: !isDirectory,
-                                        deleteAfterUse: true };
-                            if (isDirectory) {
-                                const defaultInfo = Gio.AppInfo.get_default_for_type('inode/directory', false);
-                                if (defaultInfo) {
-                                    foundFile.activate = () => { defaultInfo.launch([file], null); };
+                        if (!next.get_is_hidden()) {
+                            const filename = next.get_name();
+                            const isDirectory = next.get_file_type() === Gio.FileType.DIRECTORY;
+                            const filePath = folder + (folder === '/' ? '' : '/') + filename;
+                            const match = searchStr(fpattern, filename, true, true);
+                            if (match.score > 1) { //any word boundary match
+                                const file = Gio.file_new_for_path(filePath);
+                                match.score -= 0.01;
+                                //if file then treat as isFolderviewFile and if directory then treat as isPlace
+                                const foundFile = {
+                                            name: filename,
+                                            score: match.score * (fpattern.length > 2 ? 1 : 0.9),
+                                            nameWithSearchMarkup: match.result,
+                                            gicon: next.get_icon(),
+                                            uri: file.get_uri(),
+                                            mimeType: next.get_content_type(),
+                                            description: filePath,
+                                            isPlace: isDirectory,
+                                            isFolderviewFile: !isDirectory,
+                                            deleteAfterUse: true };
+                                if (isDirectory) {
+                                    const defaultInfo = Gio.AppInfo.get_default_for_type('inode/directory', false);
+                                    if (defaultInfo) {
+                                        foundFile.activate = () => { defaultInfo.launch([file], null); };
+                                    }
                                 }
+                                results.push(foundFile);
                             }
-                            results.push(foundFile);
-                        }
 
-                        //Add subdirectories to foldersToDo[]
-                        if (isDirectory && !next.get_is_hidden() && !next.get_is_symlink() &&
-                                                                foldersToDo.length < MAX_FOLDERS_TODO) {
-                            foldersToDo.push(filePath);
+                            //Add subdirectories to foldersToDo[]
+                            if (isDirectory && !next.get_is_symlink() && foldersToDo.length < MAX_FOLDERS_TODO) {
+                                foldersToDo.push(filePath);
+                            }
                         }
                         next = enumerator.next_file(null);
                     }
@@ -1696,6 +1696,16 @@ class CinnamenuApplet extends TextIconApplet {
                 isPlace: true,
                 activate: () => Util.spawnCommandLine('xdg-open trash:'),
                 iconFactory: (size) => new St.Icon({icon_name: 'user-trash',
+                                                    icon_type: St.IconType.FULLCOLOR,
+                                                    icon_size: size })
+                        });
+        res.splice(2, 0, {
+                id: 'special:computer',
+                name: _('Computer'),
+                description: _('Computer'),
+                isPlace: true,
+                activate: () => Util.spawnCommandLine('xdg-open computer:'),
+                iconFactory: (size) => new St.Icon({icon_name: 'computer',
                                                     icon_type: St.IconType.FULLCOLOR,
                                                     icon_size: size })
                         });
