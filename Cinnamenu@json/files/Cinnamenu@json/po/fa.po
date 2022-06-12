@@ -477,10 +477,10 @@ msgid "Bottom"
 msgstr "پایین"
 
 msgid "Left"
-msgstr "چپ"
+msgstr "راست"
 
 msgid "Right"
-msgstr "راست"
+msgstr "چپ"
 
 msgid "Choose where to show the sidebar"
 msgstr "مکان نمایش نوار کناری را انتخاب کنید"

@@ -292,7 +292,8 @@
             "Ask":7,
             "Ecosia":8,
             "AOL":9,
-            "Startpage":10
+            "Startpage":10,
+            "Brave":11
         },
         "tooltip":"Show an internet search option in search results"
     },
