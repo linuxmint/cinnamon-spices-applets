@@ -7,58 +7,58 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-08 19:11+0200\n"
-"PO-Revision-Date: 2019-10-24 21:44+0200\n"
+"POT-Creation-Date: 2021-02-24 20:57+0100\n"
+"PO-Revision-Date: 2022-06-03 17:36+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it\n"
 
-#: applet.js:144
+#: applet.js:148
 msgid "(Right click to open folder)"
 msgstr "(Fare clic con il tasto destro per aprire la cartella)"
 
-#: applet.js:166
+#: applet.js:170
 msgid "Places"
 msgstr "Posizioni"
 
-#: applet.js:281
+#: applet.js:284
 msgid "Search Home Folder"
 msgstr "Cerca nella cartella Home"
 
-#: applet.js:304
+#: applet.js:307
 msgid "SYSTEM"
 msgstr "SISTEMA"
 
-#: applet.js:313
+#: applet.js:316
 msgid "Search File System"
 msgstr "Cerca nel File System"
 
-#: applet.js:338
+#: applet.js:341
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTI RECENTI"
 
-#: applet.js:352
+#: applet.js:355
 msgid "Clear"
 msgstr "Pulisci"
 
-#: applet.js:395
+#: applet.js:398
 msgid "Computer"
 msgstr "Computer"
 
-#: applet.js:401
+#: applet.js:404
 msgid "File System"
 msgstr "File System"
 
-#: applet.js:417
+#: applet.js:420
 msgid "Network"
 msgstr "Rete"
 
-#: applet.js:554
+#: applet.js:560
 msgid "Trash"
 msgstr "Cestino"
 
@@ -120,7 +120,7 @@ msgstr "Cercando: "
 
 #: search.py:220
 msgid "Error: insufficient permissions to read folder "
-msgstr "Errore: autorizzazioni insufficienti per leggere la cartella"
+msgstr "Errore: autorizzazioni insufficienti per leggere la cartella "
 
 #: search.py:252
 msgid "Search Completed"
@@ -131,7 +131,7 @@ msgid "Skipping"
 msgstr "Tralasciando"
 
 #: search.py:259
-msgid " - direcotry already searched"
+msgid " - directory already searched"
 msgstr " - directory già cercata"
 
 #. metadata.json->name
@@ -293,27 +293,27 @@ msgstr "Mostra documenti recenti"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "10"
-msgstr ""
+msgstr "10"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "15"
-msgstr ""
+msgstr "15"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "20"
-msgstr ""
+msgstr "20"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "25"
-msgstr ""
+msgstr "25"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "30"
-msgstr ""
+msgstr "30"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "All Recent Documents"

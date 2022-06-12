@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-09 13:47+0200\n"
-"PO-Revision-Date: 2019-10-17 21:28+0200\n"
+"PO-Revision-Date: 2022-06-03 19:33+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #: applet.js:46
 msgid "Tor network"
@@ -106,8 +106,12 @@ msgid "Launch Tor as tor user"
 msgstr "Avvia Tor come utente tor"
 
 #. tor-button@shatur->settings-schema.json->runAsRoot->tooltip
-msgid "Launch Tor with polkit as tor user. Needed if you don't have permissions to launch Tor as normal user."
-msgstr "Avvia Tor con polkit come utente tor. Necessario se non si dispone delle autorizzazioni per avviare Tor come utente normale."
+msgid ""
+"Launch Tor with polkit as tor user. Needed if you don't have permissions to "
+"launch Tor as normal user."
+msgstr ""
+"Avvia Tor con polkit come utente tor. Necessario se non si dispone delle "
+"autorizzazioni per avviare Tor come utente normale."
 
 #. tor-button@shatur->metadata.json->description
 msgid "Applet for Tor network management"
