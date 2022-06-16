@@ -47,7 +47,7 @@ class PopupResizeHandler {
 
         //---Start drag------
 
-        this._grabEvents();
+        this._grabEvents(event);
         this.resizingInProgress = true;
 
         let [stageX, stageY] = event.get_coords();
@@ -59,18 +59,25 @@ class PopupResizeHandler {
         return true;
     }
 
-    _grabEvents() {
+    _grabEvents(event) {
         this._eventsGrabbed = true;
 
-        Clutter.grab_pointer(this.actor);
+        this.drag_device = event.get_device();
+        this.drag_device.grab(this.actor);
+
         this._onEventId = this.actor.connect('event', (...args) => this._onEvent(...args));
     }
 
-    _ungrabEvents() {
+    _ungrabEvents(event) {
         if (!this._eventsGrabbed)
             return;
 
-        Clutter.ungrab_pointer();
+        if (this.drag_device) {
+            this.drag_device.ungrab();
+            this.drag_device = null;
+        } else if (event) {//this shouldn't arise
+            event.get_device().ungrab();
+        }
         this._eventsGrabbed = false;
 
         this.actor.disconnect(this._onEventId);
@@ -82,7 +89,7 @@ class PopupResizeHandler {
             return;
         }
         global.unset_cursor();
-        this._ungrabEvents();
+        this._ungrabEvents(event);
 
         this.actor.queue_relayout();
 
