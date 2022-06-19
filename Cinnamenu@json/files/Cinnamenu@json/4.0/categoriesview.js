@@ -295,9 +295,9 @@ class CategoriesView {
                         const prefIdB = prefCats.indexOf(b.get_menu_id().toUpperCase());
                         if (prefIdA < 0 && prefIdB >= 0) return -1;
                         if (prefIdA >= 0 && prefIdB < 0) return 1;
-                        const nameA = a.get_name().toUpperCase();
-                        const nameB = b.get_name().toUpperCase();
-                        return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 ); });
+                        return a.get_name().localeCompare(b.get_name(), undefined,
+                                                          {sensitivity: "base", ignorePunctuation: true});
+                    });
         dirs.forEach(dir => {
                 if (!dir.get_is_nodisplay()) {
                     const dirId = dir.get_menu_id();

@@ -1749,7 +1749,8 @@ class CinnamenuApplet extends TextIconApplet {
             }
         });
 
-        res.sort( (a, b) => a.name.toUpperCase() > b.name.toUpperCase() );
+        res.sort( (a, b) =>
+                    a.name.localeCompare(b.name, undefined, {sensitivity: "base", ignorePunctuation: true}));
         return res;
     }
 
@@ -1849,11 +1850,8 @@ class Apps {//This obj provides the .app objects for all the applications catego
     }
 
     _initAppCategories() {
-        const apps_sort = arr => arr.sort( (a, b) => {
-                        if (!a.name || !b.name) return -1;
-                        return (a.name.toUpperCase() > b.name.toUpperCase()) ?
-                                1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;
-                    });
+        const apps_sort = arr => arr.sort((a, b) => a.name.localeCompare(b.name, undefined,
+                                                    {sensitivity: "base", ignorePunctuation: true}));
         const dirs = [];
         const iter = this.appThis.appSystem.get_tree().get_root_directory().iter();
         let nextType;
