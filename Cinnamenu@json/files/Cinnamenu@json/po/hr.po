@@ -534,7 +534,7 @@ msgid "Emoji search"
 msgstr "Pretraga emotikoina"
 
 msgid "Show emojis in search results"
-msgstr "Prikaži smajlije u rezultatima pretrage"
+msgstr "Prikaži emotikoine u rezultatima pretrage"
 
 msgid "Web search option"
 msgstr "Mogućnost web pretrage"
