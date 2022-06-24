@@ -48,6 +48,9 @@ BtBattery.prototype = {
         });
 
         this.dbus_map = new Map();
+        this.dbus_map[Symbol.iterator] = function* () {
+            yield* [...this.entries()].sort((a, b) => b[1].device.percentage - a[1].device.percentage);
+        }
         this.monitored_devs = new Array();
     },
 
@@ -387,7 +390,7 @@ BtBattery.prototype = {
             }
 
             const dev = this.dbus_map.get(name).device;
-            if (lowest_bat_dev == null || dev.percentage < lowest_bat_dev.percentage) {
+            if (lowest_bat_dev == null || dev.percentage <= lowest_bat_dev.percentage) {
                 lowest_bat_dev = dev;
                 lowest_bat_dev_ident = name;
             }
