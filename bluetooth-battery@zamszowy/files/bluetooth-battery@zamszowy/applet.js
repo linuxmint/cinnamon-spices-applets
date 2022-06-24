@@ -338,9 +338,7 @@ BtBattery.prototype = {
         }
 
         if (this.monitored_devs == 0) {
-            this.set_applet_label("");
-            this.set_applet_tooltip("all BT devices has been disabled");
-            this.set_applet_icon_name("bluetooth-disabled");
+            this.set_applet_enabled(false);
         } else {
             const [min_name, min_kind, min_perc] = this.get_lowest_battery_device();
 
