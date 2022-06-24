@@ -21,7 +21,7 @@ const {addTween} = imports.ui.tweener;
 
 const {PopupResizeHandler} = require('./resizer');
 const {AppletSettings} = require('./settings');
-const {_, getThumbnail_gicon, searchStr} = require('./utils');
+const {_, graphemeBaseChars, getThumbnail_gicon, searchStr} = require('./utils');
 const {ContextMenu} = require('./contextmenu');
 const {AppsView} = require('./appsview');
 const {CategoriesView} = require('./categoriesview');
@@ -474,7 +474,7 @@ class CinnamenuApplet extends TextIconApplet {
             if ((this.orientation === St.Side.BOTTOM || this.orientation === St.Side.TOP) &&
                                                         appletDefinition.location_label === 'center') {
                 const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
-                this.menu.shiftToPosition(Math.floor(monitor.width / 2));
+                this.menu.shiftToPosition(Math.floor(monitor.width / 2) + monitor.x);
             }
         } else {
             if (this.searchActive) {
@@ -1017,13 +1017,13 @@ class CinnamenuApplet extends TextIconApplet {
         }
         //if (!text || !text.trim()) return;
 
-        const pattern = Util.latinise(pattern_raw.toUpperCase());
+        const pattern = graphemeBaseChars(pattern_raw).toLocaleUpperCase();
         //Don't repeat the same search. This can happen if a key and backspace are pressed in quick
         //succession while a previous search is being carried out.
-        if (pattern === this.previousSearchPattern) {
+        if (pattern_raw === this.previousSearchPattern) {
             return;
         }
-        this.previousSearchPattern = pattern;
+        this.previousSearchPattern = pattern_raw;
 
         //======Begin search===========
 
