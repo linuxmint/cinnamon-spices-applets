@@ -62,7 +62,7 @@ BtBattery.prototype = {
         this.settings.bind("notification-warn-level", "notification_warn_level", null, null);
         this.settings.bind("notification-crit-enable", "notification_crit_enable", this._on_settings_change, null);
         this.settings.bind("notification-crit-level", "notification_crit_level", null, null);
-        this.settings.bind("notification-multiple", "notification_multiple", null, null);
+        this.settings.bind("notification-filter", "notification_filter", null, null);
         this.settings.bind("notification-applet-icon", "notification_applet_icon", this._on_settings_change, null);
 
         this.notified_devices = new Map();
@@ -189,6 +189,7 @@ BtBattery.prototype = {
         if (check_override) {
             this.check_override_device();
         }
+
         this.setup_dbus();
     },
 
@@ -235,16 +236,32 @@ BtBattery.prototype = {
             let notified_warn = this.notified_devices.has(dev) ? this.notified_devices.get(dev).warn : false;
             let notified_crit = this.notified_devices.has(dev) ? this.notified_devices.get(dev).crit : false;
 
-            if (this.notification_warn_enable && !notified_warn && device.percentage < this.notification_warn_level) {
+            if (!this.notified_devices.has(dev) && device.percentage == 0) {
+                // device connected for the first time with 0% battery - seems like some kind of bug,
+                // let's add it when it will report something else
+                continue;
+            }
+
+            if (device.percentage >= this.notification_warn_level + this.notification_filter) {
+                // device recharged, enable notification
+                notified_warn = false;
+            } else if (this.notification_warn_enable && !notified_warn && device.percentage < this.notification_warn_level) {
                 this.notify(dev + " (" + device.percentage + "%)", "Battery dropped below " + this.notification_warn_level + "%",
                     this.get_device_batt_icon(device.kind, device.percentage));
-                notified_warn = !this.notification_multiple;
+
+                notified_warn = true;
             }
-            if (this.notification_crit_enable && !notified_crit && device.percentage < this.notification_crit_level) {
+
+            if (device.percentage >= this.notification_crit_level + this.notification_filter) {
+                // device recharged, enable notification
+                notified_crit = false;
+            } else if (this.notification_crit_enable && !notified_crit && device.percentage < this.notification_crit_level) {
                 this.notify(dev + " (" + device.percentage + "%)", "Battery dropped below " + this.notification_crit_level + "%",
                     this.get_device_batt_icon(device.kind, device.percentage));
-                notified_crit = !this.notification_multiple;
+
+                notified_crit = true;
             }
+
             this.notified_devices.set(dev, {warn: notified_warn, crit: notified_crit});
         }
     },
