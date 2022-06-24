@@ -192,8 +192,12 @@ BtBattery.prototype = {
         this.setup_dbus();
     },
 
+    blacklist_containes_any: function(dev) {
+        return !((!dev.serial || !this.blacklist.includes(dev.serial)) && (!dev.model || !this.blacklist.includes(dev.model)));
+    },
+
     blacklist_add: function(dev, active) {
-        if ((!dev.serial || !this.blacklist.includes(dev.serial)) && (!dev.model || !this.blacklist.includes(dev.model))) {
+        if (!this.blacklist_containes_any(dev)) {
             this.blacklist += (this.blacklist ? "\n" : "") + (active ? "" : "# ") + (dev.model ? dev.model : dev.serial);
         }
     },
@@ -211,6 +215,10 @@ BtBattery.prototype = {
         }
 
         return containes;
+    },
+
+    blacklist_containes_inactive: function(dev) {
+        return this.blacklist_containes_any(dev) && !this.blacklist_containes_active(dev);
     },
 
     notify_if_needed: function() {
@@ -251,7 +259,13 @@ BtBattery.prototype = {
         var upowerClient = UPower.Client.new_full(null);
         var devices = upowerClient.get_devices();
         for (let i=0; i < devices.length; i++) {
-            let dev = devices[i]
+            let dev = devices[i];
+
+            if ((!dev.model && !dev.serial) || this.blacklist_containes_active(dev)) {
+                // skip entirely blacklisted devices or the ones without model and serial
+                continue;
+            }
+
             if (dev.kind != UPower.DeviceKind.MOUSE
                 && dev.kind != UPower.DeviceKind.KEYBOARD
                 && dev.kind != UPower.DeviceKind.GAMING_INPUT
@@ -259,17 +273,12 @@ BtBattery.prototype = {
                 && dev.kind != UPower.DeviceKind.HEADPHONES
                 && dev.kind != UPower.DeviceKind.MEDIA_PLAYER) {
 
-                if (dev.model || dev.serial) {
-                    // blacklist by default non mouse/kb/phone/gaming input/mediaplayer devices
+                // blacklist by default non mouse/kb/phone/gaming input/mediaplayer/headphones devices
+                // and then skip them (if not commented out of blacklist)
+                if (!this.blacklist_containes_inactive(dev)) {
                     this.blacklist_add(dev, true);
-                } else {
-                    // skip entirely devices without model and serial
                     continue;
                 }
-            }
-
-            if (this.blacklist_containes_active(dev)) {
-                continue;
             } else {
                 this.blacklist_add(dev, false);
             }
