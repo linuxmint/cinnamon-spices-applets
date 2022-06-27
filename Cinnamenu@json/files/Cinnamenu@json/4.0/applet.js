@@ -21,7 +21,7 @@ const {addTween} = imports.ui.tweener;
 
 const {PopupResizeHandler} = require('./resizer');
 const {AppletSettings} = require('./settings');
-const {_, getThumbnail_gicon, searchStr} = require('./utils');
+const {_, graphemeBaseChars, getThumbnail_gicon, searchStr} = require('./utils');
 const {ContextMenu} = require('./contextmenu');
 const {AppsView} = require('./appsview');
 const {CategoriesView} = require('./categoriesview');
@@ -30,13 +30,12 @@ const {BookmarksManager} = require('./browserBookmarks');
 const {wikiSearch, clearWikiSearchCache} = require('./wikipediaSearch');
 const {search_browser} = require('./browserHistory');
 const {EMOJI} = require('./emoji');
+const {searchSuggestions} = require('./suggestions');
 const EMOJI_CODE = 0, EMOJI_NAME = 1, EMOJI_KEYWORDS = 2;
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 //const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const SEARCH_THRESHOLD = 0.45;
 const SidebarPlacement = Object.freeze({ TOP: 0, BOTTOM: 1, LEFT: 2, RIGHT: 3});
-
-var customMenuPosition;
 
 class CinnamenuApplet extends TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -134,6 +133,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         { key: 'enable-emoji-search',       value: 'enableEmojiSearch',     cb: null },
         { key: 'web-search-option',         value: 'webSearchOption',       cb: null },
+        { key: 'web-suggestions',           value: 'webSuggestionsOption',  cb: null },
         { key: 'enable-home-folder-search', value: 'searchHomeFolder',      cb: null },
         { key: 'enable-web-history-search', value: 'enableWebHistorySearch', cb: null },
         { key: 'enable-web-bookmarks-search', value: 'enableWebBookmarksSearch', cb: null },
@@ -474,7 +474,7 @@ class CinnamenuApplet extends TextIconApplet {
             if ((this.orientation === St.Side.BOTTOM || this.orientation === St.Side.TOP) &&
                                                         appletDefinition.location_label === 'center') {
                 const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
-                this.menu.shiftToPosition(Math.floor(monitor.width / 2));
+                this.menu.shiftToPosition(Math.floor(monitor.width / 2) + monitor.x);
             }
         } else {
             if (this.searchActive) {
@@ -1017,13 +1017,13 @@ class CinnamenuApplet extends TextIconApplet {
         }
         //if (!text || !text.trim()) return;
 
-        const pattern = Util.latinise(pattern_raw.toUpperCase());
+        const pattern = graphemeBaseChars(pattern_raw).toLocaleUpperCase();
         //Don't repeat the same search. This can happen if a key and backspace are pressed in quick
         //succession while a previous search is being carried out.
-        if (pattern === this.previousSearchPattern) {
+        if (pattern_raw === this.previousSearchPattern) {
             return;
         }
-        this.previousSearchPattern = pattern;
+        this.previousSearchPattern = pattern_raw;
 
         //======Begin search===========
 
@@ -1120,6 +1120,23 @@ class CinnamenuApplet extends TextIconApplet {
                         deleteAfterUse: true,
                         icon: new St.Icon({ gicon: gicon, icon_size: this.getAppIconSize()}),
                         activate: () => Util.spawn(['xdg-open', url + encodeURIComponent(pattern_raw)]) });
+            if (this.settings.webSuggestionsOption) {
+                searchSuggestions(pattern_raw, (results) => {
+                    if (results.length > 0 && this.searchActive && thisSearchId === this.currentSearchId) {
+                        results.forEach( suggestion => {
+                            otherResults.push({
+                                isSearchResult: true,
+                                name: suggestion + ' – '+ engine,
+                                description: '',
+                                deleteAfterUse: true,
+                                icon: new St.Icon({ gicon: gicon, icon_size: this.getAppIconSize()}),
+                                activate: () => Util.spawn(['xdg-open', url + encodeURIComponent(suggestion)])
+                            });
+                        });
+                        finish();
+                    }
+                });
+            }
         }
 
         //---web bookmarks search-----

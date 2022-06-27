@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"POT-Creation-Date: 2022-06-26 02:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -217,11 +217,9 @@ msgstr ""
 msgid "Packages to be removed"
 msgstr ""
 
-#, python-format
 msgid "Cannot remove package %s as it is required by other packages."
 msgstr ""
 
-#, python-format
 msgid "Package %s is a dependency of the following packages:"
 msgstr ""
 
@@ -445,21 +443,6 @@ msgstr ""
 msgid "View applications as list or grid"
 msgstr ""
 
-msgid "Application description placement"
-msgstr ""
-
-msgid "Tooltips"
-msgstr ""
-
-msgid "Under titles"
-msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Choose where to show application descriptions"
-msgstr ""
-
 msgid "Sidebar location"
 msgstr ""
 
@@ -478,15 +461,30 @@ msgstr ""
 msgid "Choose where to show the sidebar"
 msgstr ""
 
-msgid ""
-"\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
-msgstr ""
-
 msgid "Show favorites on sidebar"
 msgstr ""
 
 msgid "Show your favorite app and file icons on the sidebar"
+msgstr ""
+
+msgid "Application description placement"
+msgstr ""
+
+msgid "Tooltips"
+msgstr ""
+
+msgid "Under titles"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Choose where to show application descriptions"
+msgstr ""
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 
 msgid "Show recent items"
@@ -529,6 +527,14 @@ msgid "Web search option"
 msgstr ""
 
 msgid "Show an internet search option in search results"
+msgstr ""
+
+msgid "Web search suggestions"
+msgstr ""
+
+msgid ""
+"With web search option, also show search suggestions. (Note: This uses "
+"Google's search API)"
 msgstr ""
 
 msgid "Search home folder"
