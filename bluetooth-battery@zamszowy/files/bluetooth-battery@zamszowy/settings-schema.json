@@ -56,14 +56,14 @@
 
     "section6": {
       "type": "section",
-      "title": "Showing of configured applet icon/text",
-      "keys": ["notification-applet-icon"]
+      "title": "Ignore small changes of battery levels - if device reports small battery changes back and forth, this setting would help",
+      "keys": ["notification-filter"]
     },
 
     "section7": {
       "type": "section",
-      "title": "Display notification only once in session,\nor every time battery drops below warning/critical level (e.g. after recharge)",
-      "keys": ["notification-multiple"]
+      "title": "Showing of configured applet icon/text",
+      "keys": ["notification-applet-icon"]
     }
   },
 
@@ -196,9 +196,13 @@
     }
   },
 
-  "notification-multiple": {
-    "type": "switch",
-    "default": false,
-    "description": "Display multiple times per session"
+  "notification-filter": {
+    "type": "spinbutton",
+    "description": "Notify again only if battery increased above configured level by at least: ",
+    "min": 0,
+    "max": 11,
+    "step": 1,
+    "units": "%",
+    "default": 0
   }
 }
