@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-19 14:22+0800\n"
-"PO-Revision-Date: 2019-10-24 21:34+0200\n"
+"PO-Revision-Date: 2022-06-03 17:54+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it\n"
 
 #. mylauncher@markbokil.com->metadata.json->name
 #: applet.js:64
@@ -93,7 +93,7 @@ msgstr "Impostazioni di Sistema"
 
 #: mylauncher.properties:23
 msgid "CompizConfig"
-msgstr ""
+msgstr "CompizConfig"
 
 #: mylauncher.properties:24
 msgid "Cinnamon Settings"

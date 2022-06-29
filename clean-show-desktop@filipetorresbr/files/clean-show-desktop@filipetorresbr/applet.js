@@ -32,6 +32,7 @@ class CleanShowDesktop extends Applet.IconApplet {
         this.settings.bind("on-hover-background", "hoverbackground");
         this.settings.bind("on-hover-border", "hoverborder");
         this.settings.bind("border-width", "borderwidth");
+        this.settings.bind("margin", "margin");
         this.settings.bind("custom-color", "custom_color");
         this.actor.track_hover = true;
         this.signals = new SignalManager.SignalManager(null);
@@ -63,20 +64,20 @@ class CleanShowDesktop extends Applet.IconApplet {
     fillcolor(state){
 	  	if (this.custom_color == true) {
 	  		if (state == "hover") {
-        		const STYLE = "padding: " + this.width + "px;background: " + this.hoverbackground + ";border-color: " + this.hoverborder +  ";border-width: " + this.borderwidth + "px;";
+        		const STYLE = "padding: " + this.width + "px;background: " + this.hoverbackground + ";border-color: " + this.hoverborder +  ";border-left: " + this.borderwidth + "px;" + "margin-left: " + this.margin + "px";
         		this.actor.set_style(STYLE);
 
 	  		}else{
-        	   	const STYLE = "padding: " + this.width + "px;background: " + this.background + ";border-color: " + this.border +  ";border-width: " + this.borderwidth + "px;";
+        	   	const STYLE = "padding: " + this.width + "px;background: " + this.background + ";border-color: " + this.border +  ";border-left: " + this.borderwidth + "px;" + "margin-left: " + this.margin + "px";
 	        	this.actor.set_style(STYLE);		
 	  		}	
     	}else{
 	  		if (state == "hover") {
-        		const STYLE = "padding: " + this.width + "px;background: " + this.color + ", 1);border-color: " + this.color +  ", 1);border-width: " + this.borderwidth + "px;";
+        		const STYLE = "padding: " + this.width + "px;background: " + this.color + ", 1);border-color: " + this.color +  ", 1);border-left: " + this.borderwidth + "px;" + "margin-left: " + this.margin + "px";
         		this.actor.set_style(STYLE);
 
 	  		}else{
-        	   	const STYLE = "padding: " + this.width + "px;background: " + this.color + ", 0.5);border-color: " + this.color +  ", 1);border-width: " + this.borderwidth + "px;";
+        	   	const STYLE = "padding: " + this.width + "px;background: " + this.color + ", 0.5);border-color: " + this.color +  ", 1);border-left: " + this.borderwidth + "px;" + "margin-left: " + this.margin + "px";
 	        	this.actor.set_style(STYLE);
 	  		}	
     	}

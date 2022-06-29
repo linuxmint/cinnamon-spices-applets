@@ -16,6 +16,9 @@ import io
 import os
 import subprocess
 
+import gi
+gi.require_version('Gtk', '3.0')
+
 from gi.repository import Gtk, GLib  # pylint: disable-msg=E0611
 
 # prefer simplejson if available (it's faster), and fallback to json

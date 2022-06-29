@@ -2,7 +2,7 @@ const { DrawingArea } = imports.gi.St
 const { cairo_set_source_color, grab_pointer, ungrab_pointer } = imports.gi.Clutter
 
 interface SliderArguments {
-    /** the value initally applied when between 0 and 1. If the value is below 0, the slider value is set to 0. If the value is above 1, the slider value is set to 1 */
+    /** The value initally applied. Should be between 0 and 1. If the value is below 0, the slider value is set to 0. If the value is above 1, the slider value is set to 1 */
     initialValue?: number,
     /**
      * @param newValue value between 0 and 1
@@ -20,7 +20,7 @@ export function createSlider(args: SliderArguments) {
     } = args
 
     let value: number
-    if (initialValue) value = limitToMinMax(initialValue)
+    if (initialValue != null) value = limitToMinMax(initialValue)
 
     const drawing = new DrawingArea({
         style_class,
@@ -86,16 +86,19 @@ export function createSlider(args: SliderArguments) {
 
         const motionId = drawing.connect('motion-event', (actor, event) => {
             moveHandle(event)
+            return false
         })
 
         const buttonReleaseId = drawing.connect('button-release-event', () => {
             drawing.disconnect(buttonReleaseId)
             drawing.disconnect(motionId)
             ungrab_pointer()
+            return false
         })
 
         moveHandle(event)
 
+        return false
     })
 
     function moveHandle(event: imports.gi.Clutter.Event) {
@@ -103,7 +106,7 @@ export function createSlider(args: SliderArguments) {
         const [absX, absY] = event.get_coords()
 
         const [sliderX, sliderY] = drawing.get_transformed_position();
-        const relX = absX - sliderX;
+        const relX = absX - (sliderX || 0);
 
         const width = drawing.width;
         const handleRadius = drawing.get_theme_node().get_length('-slider-handle-radius');

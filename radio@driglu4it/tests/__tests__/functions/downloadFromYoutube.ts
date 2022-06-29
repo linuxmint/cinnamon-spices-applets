@@ -4,8 +4,72 @@ interface YoutbeDlOption {
     value?: string
 }
 
-// @ts-ignore
-imports.misc.util.spawnCommandLineAsyncIO = mockCommandLineAsyncIo
+const mockedDownloadtime = 1 // in ms
+
+function spawnCommandLineAsyncIO(command: string, cb: (stdout: string, stderr: string, exitCode: number) =>
+    void) {
+
+    const subStrings = createSubstrings()
+
+    subStrings.forEach((subString, index) => {
+
+        const isCommandOption = subString.startsWith('--') || !subStrings[index - 1]?.startsWith('--')
+
+        if (isCommandOption) {
+
+            let option: YoutbeDlOption = { command: subString }
+            let potentialCommandValue = subStrings[index + 1]
+            const commandHasValue = !potentialCommandValue?.startsWith('--') && potentialCommandValue
+
+            if (commandHasValue)
+                option.value = potentialCommandValue
+
+            youtubeDlOptions.push(option)
+        }
+    })
+
+    if (youtubeDlOptions[0].command !== 'youtube-dl')
+        throw new RangeError('spawnCommandLineAsyncIo not called with youtube-dl')
+
+    const timer = setTimeout(() => {
+        // @ts-ignore
+        youtubeInstalled ? cb(workingExample.stdOut, null, 0) : cb(null, 'line 1: youtube-dl: command not found', 127)
+    }, mockedDownloadtime);
+
+    return {
+        force_exit: () => {
+            clearTimeout(timer)
+            // @ts-ignore
+            cb(null, null, 1)
+        }
+    }
+
+    function createSubstrings() {
+        let spaceIndex = -1
+        let isInsideDoubleQuote = false
+        const subStrings: string[] = [];
+        const chars = [...command]
+
+        chars.forEach((char, index) => {
+
+            if (char === " " && !isInsideDoubleQuote || index + 1 === chars.length) {
+                subStrings.push(command.substring(spaceIndex + 1, index + 1).trim())
+                spaceIndex = index
+            }
+
+            if (char === "\"" && command[index - 1] !== "\\") {
+                isInsideDoubleQuote = !isInsideDoubleQuote
+            }
+        })
+
+        return subStrings
+    }
+}
+
+imports.misc.util = {
+    // @ts-ignore
+    spawnCommandLineAsyncIO
+}
 
 import { initPolyfills } from 'polyfill';
 import { downloadSongFromYoutube } from "functions/downloadFromYoutube";
@@ -49,66 +113,7 @@ let youtubeInstalled: boolean = false
 let youtubeDlOptions: YoutbeDlOption[] = []
 
 
-const mockedDownloadtime = 1 // in ms
 
-function mockCommandLineAsyncIo(command: string, cb: (stdout: string, stderr: string, exitCode: number) =>
-    void) {
-
-    const subStrings = createSubstrings()
-
-    subStrings.forEach((subString, index) => {
-
-        const isCommandOption = subString.startsWith('--') || !subStrings[index - 1]?.startsWith('--')
-
-        if (isCommandOption) {
-
-            let option: YoutbeDlOption = { command: subString }
-
-            let potentialCommandValue = subStrings[index + 1]
-            const commandHasValue = !potentialCommandValue?.startsWith('--') && potentialCommandValue
-
-            if (commandHasValue)
-                option.value = potentialCommandValue
-
-            youtubeDlOptions.push(option)
-        }
-    })
-
-    if (youtubeDlOptions[0].command !== 'youtube-dl')
-        throw new RangeError('spawnCommandLineAsyncIo not called with youtube-dl')
-
-    const timer = setTimeout(() => {
-        youtubeInstalled ? cb(workingExample.stdOut, null, 0) : cb(null, 'line 1: youtube-dl: command not found', 127)
-    }, mockedDownloadtime);
-
-    return {
-        force_exit: () => {
-            clearTimeout(timer)
-            cb(null, null, 1)
-        }
-    }
-
-    function createSubstrings() {
-        let spaceIndex = -1
-        let isInsideDoubleQuote = false
-        const subStrings = [];
-        const chars = [...command]
-
-        chars.forEach((char, index) => {
-
-            if (char === " " && !isInsideDoubleQuote || index + 1 === chars.length) {
-                subStrings.push(command.substring(spaceIndex + 1, index + 1).trim())
-                spaceIndex = index
-            }
-
-            if (char === "\"" && command[index - 1] !== "\\") {
-                isInsideDoubleQuote = !isInsideDoubleQuote
-            }
-        })
-
-        return subStrings
-    }
-}
 
 afterEach(() => {
     jest.clearAllMocks()
@@ -141,7 +146,7 @@ it('youtubeDl called with correct arguments', done => {
             expect(youtubeDlOptions.find(option => option.command === command)).toBeTruthy()
         })
 
-        const audioFormat = youtubeDlOptions.find(option => option.command === '--audio-format').value
+        const audioFormat = youtubeDlOptions?.find(option => option.command === '--audio-format')?.value
         expect(audioFormat).toBe('mp3')
         done()
     }, mockedDownloadtime);
@@ -200,9 +205,9 @@ it('double quotes are correctly escaped', () => {
 
     const searchPrefix = 'ytsearch1:'
 
-    const searchTerm = youtubeDlOptions.find(
+    const searchTerm = youtubeDlOptions?.find(
         option => option.command.startsWith(searchPrefix)
-    ).command.split(searchPrefix)[1].substr(1).slice(0, -1)
+    )?.command.split(searchPrefix)[1].substr(1).slice(0, -1)
 
     expect(title.replaceAll('"', '\\"')).toBe(searchTerm)
 

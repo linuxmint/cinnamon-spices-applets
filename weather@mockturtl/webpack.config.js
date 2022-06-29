@@ -1,6 +1,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const TerserPlugin = require("terser-webpack-plugin")
 
 // TODO: use env variable to share between bash script and the config. Or bash script even necessary?
 const cinnamonVersion = '3.8'
@@ -13,6 +14,25 @@ module.exports = {
     //devtool: "eval-source-map",
     target: 'node', // without webpack renames 'global'
     optimization: {
+        /*minimizer: [
+            new TerserPlugin({
+                parallel: true,
+                extractComments: false,
+                terserOptions: {
+                    compress: {
+                        defaults: false,
+                        unused: true,
+                    },
+                    output: {
+                        beautify: true
+                    },
+                    mangle: false,
+                    format: {
+                        comments: 'all'
+                    }
+                }
+            })
+        ],*/
         minimize: false,
         usedExports: true,
     },

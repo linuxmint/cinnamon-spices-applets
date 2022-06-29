@@ -1,9 +1,9 @@
 declare function require(path: string): any;
 
-declare function setInterval(callback: { (): void }, delay: number): number;
-declare function clearInterval(intervalID: number): void;
-declare function setTimeout(callback: { (): void }, delay: number): number;
-declare function clearTimeout(timouetId: number): void;
+declare const setInterval: typeof imports.misc.util.setInterval
+declare const clearInterval: typeof imports.misc.util.clearInterval
+declare const setTimeout: typeof imports.misc.util.setTimeout
+declare const clearTimeout: typeof imports.misc.util.clearTimeout
 
 /** Interface typing for the global variable.
  * Extendable, for example overloading in a d.ts file:
@@ -12,16 +12,18 @@ declare function clearTimeout(timouetId: number): void;
 	}
  */
 declare interface Global {
-    log(...any: Array<any>): void;
-    logWarning(...any: Array<any>): void;
-    logError(...text: Array<string>): void;
+    log: typeof imports.ui.main._logInfo;
+    logWarning: typeof imports.ui.main._logWarning
+    logError: typeof imports.ui.main._logError
+    logTrace: typeof imports.ui.main._logTrace
+    
     create_app_launch_context(): imports.gi.Gio.AppLaunchContext;
     /** Main Cinnamon settings */
     settings: imports.gi.Gio.Settings;
     set_cursor(cursor: imports.gi.Cinnamon.Cursor): void;
     unset_cursor(): void;
     /** equivalent to imports.gi.Meta */
-    screen: any;
+    screen: imports.gi.Meta.Screen;
     display: imports.gi.Meta.Display;
     stage: imports.gi.Clutter.Stage;
     /** Gets the pointer coordinates and current modifier key state */
@@ -38,6 +40,8 @@ declare interface Global {
     ui_scale: number;
 
     stage_input_mode: imports.gi.Cinnamon.StageInputMode;
+
+    reparentActor(actor_before: imports.gi.Clutter.Actor, actor_after: imports.gi.Clutter.Actor): void
 }
 
 declare const global: Global;
@@ -46,20 +50,25 @@ interface String {
     format(...args: string[]): string
 }
 
-declare class __meta {
-    static uuid: string;
-    static path: string;
-    static name: string;
-    static description: string;
-    static "max-instances": number;
-    static multiversion: boolean;
-    static author: string;
-    static "last-edited": number;
-    static error: any;
-    static "force-loaded": boolean
+declare interface  Meta {
+    uuid: string;
+    path: string;
+    name: string;
+    description: string;
+    "max-instances": number;
+    multiversion: boolean;
+    author: string;
+    "last-edited": number;
+    error: any;
+    "force-loaded": boolean
 }
 
-declare class GJSError {
+declare const __meta: Meta
+
+declare const __dirname: string
+declare const __filename: string
+
+declare class GJSError extends Error {
     stack: any;
     fileName: string;
     lineNumber: number;
@@ -80,7 +89,7 @@ declare namespace imports.cairo {
     }
 }
 
-/** DEPRECATED. Mainloop is simply a layer of convenience and backwards-compatibility over some GLib functions (such as `GLib.timeout_add()` which in GJS is mapped to `g_timeout_add_full()`). It's use is not generally recommended anymore */
+/** @deprecated Mainloop is simply a layer of convenience and backwards-compatibility over some GLib functions (such as `GLib.timeout_add()` which in GJS is mapped to `g_timeout_add_full()`). It's use is not generally recommended anymore */
 declare namespace imports.mainloop {
     /**
      * Calls callback function after given seconds
@@ -108,6 +117,6 @@ declare namespace imports {
     export const signals: Signals
 
     class Signals {
-        addSignalMethods(protoype: any): void
+        addSignalMethods(prototype: any): void
     }
 }

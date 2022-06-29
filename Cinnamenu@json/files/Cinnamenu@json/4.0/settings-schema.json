@@ -86,10 +86,13 @@
             "keys":[
                 "enable-emoji-search",
                 "web-search-option",
+                "web-suggestions",
                 "enable-home-folder-search",
+                "enable-web-history-search",
                 "enable-web-bookmarks-search",
                 "enable-wikipedia-search",
-                "wikipedia-language"
+                "wikipedia-language",
+                "search-help"
             ]
         },
         "panel-appear":{
@@ -144,17 +147,6 @@
         },
         "tooltip":"View applications as list or grid"
     },
-    "description-placement":{
-        "type":"combobox",
-        "default":1,
-        "description":"Application description placement",
-        "options":{
-            "Tooltips":1,
-            "Under titles":2,
-            "None":3
-        },
-        "tooltip":"Choose where to show application descriptions"
-    },
     "sidebar-placement":{
         "type":"combobox",
         "default":1,
@@ -167,16 +159,28 @@
         },
         "tooltip":"Choose where to show the sidebar"
     },
-    "info-box":{
-        "type":"label",
-        "description":"\nInfo/tip: Drag on the menu edge to change the menu size.\n"
-    },
     "add-favorites":{
         "type":"switch",
         "default":true,
         "description":"Show favorites on sidebar",
         "tooltip":"Show your favorite app and file icons on the sidebar"
     },
+    "description-placement":{
+        "type":"combobox",
+        "default":1,
+        "description":"Application description placement",
+        "options":{
+            "Tooltips":1,
+            "Under titles":2,
+            "None":3
+        },
+        "tooltip":"Choose where to show application descriptions"
+    },
+    "info-box":{
+        "type":"label",
+        "description":"\nInfo/tip: Drag on the menu edge to change the menu size.\n"
+    },
+
     "show-places-category":{
         "type":"switch",
         "default":true,
@@ -289,9 +293,16 @@
             "Ask":7,
             "Ecosia":8,
             "AOL":9,
-            "Startpage":10
+            "Startpage":10,
+            "Brave":11
         },
         "tooltip":"Show an internet search option in search results"
+    },
+    "web-suggestions":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Web search suggestions",
+        "tooltip":"With web search option, also show search suggestions. (Note: This uses Google's search API)"
     },
     "enable-home-folder-search":{
         "type":"checkbox",
@@ -299,11 +310,17 @@
         "description":"Search home folder",
         "tooltip":"When searching, also search my home folder for files"
     },
+    "enable-web-history-search":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Web history search",
+        "tooltip":"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\nNote: Firefox history is not currently supported."
+    },
     "enable-web-bookmarks-search":{
         "type":"checkbox",
         "default":false,
         "description":"Web bookmarks search",
-        "tooltip":"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Brave)\nNote: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+        "tooltip":"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\nNote: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
     },
     "enable-wikipedia-search":{
         "type":"checkbox",
@@ -389,6 +406,10 @@
             "မြန်မာဘာသာ":"my"
         },
         "tooltip":"Wikipedia language"
+    },
+    "search-help":{
+        "type":"label",
+        "description":"\nNote: Some search options can still be used even if you have not enabled them here by prefixing your search term.\nFor example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
     },
 
     "menu-icon-custom":{

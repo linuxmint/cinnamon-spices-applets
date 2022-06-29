@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./build.sh
+./build.sh
 #source ./build3_0.sh
 #rm -rf ~/.local/share/cinnamon/applets/weather@mockturtl/
 #mkdir ~/.local/share/cinnamon/applets/weather@mockturtl/

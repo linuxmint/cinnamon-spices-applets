@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-03 14:53+0300\n"
-"PO-Revision-Date: 2021-04-07 21:47+0200\n"
+"PO-Revision-Date: 2021-09-26 07:39+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.3\n"
 
 #: 3.2/providers.js:15 3.8/providers.js:17
 msgid "Dependency missing"
@@ -24,7 +24,7 @@ msgstr "Függőség hiányzik"
 #: 3.2/providers.js:19 3.8/providers.js:21
 #, javascript-format
 msgid "to use the applet %s"
-msgstr ""
+msgstr "a kisalkalmazás használatához (%s)"
 
 #: 3.2/providers.js:15 3.8/providers.js:17
 msgid ""
@@ -459,11 +459,11 @@ msgstr "Vízszintes panel szélessége vagy függőleges panel magassága"
 #. 3.8->settings-schema.json->diskwrite_size->tooltip
 #. 3.8->settings-schema.json->bat_size->tooltip
 msgid ""
-"Set the width of the graph for horizontal panels, or the height of the "
-"graph for vertical panels."
+"Set the width of the graph for horizontal panels, or the height of the graph "
+"for vertical panels."
 msgstr ""
-"Állítsa be a grafikon szélességét vízszintes panelhez, vagy annak "
-"magasságát függőleges panelhez."
+"Állítsa be a grafikon szélességét vízszintes panelhez, vagy annak magasságát "
+"függőleges panelhez."
 
 #. 3.2->settings-schema.json->cpu_use_custom_label->description
 #. 3.2->settings-schema.json->mem_use_custom_label->description
@@ -669,8 +669,7 @@ msgstr "LEMEZ (olvasás) grafikon megjelenítése"
 #. 3.2->settings-schema.json->diskread_enable_graph->tooltip
 #. 3.8->settings-schema.json->diskread_enable_graph->tooltip
 msgid ""
-"Show or hide the DISK (read) graph. Shows usage of the drive specified "
-"below."
+"Show or hide the DISK (read) graph. Shows usage of the drive specified below."
 msgstr ""
 "A LEMEZ (olvasás) grafikon megjelenítése vagy elrejtése. Az alábbiakban "
 "megadott meghajtó használatát mutatja."
@@ -803,5 +802,4 @@ msgstr ""
 #. 3.8->settings-schema.json->diskwrite_device_name->description
 #. 3.8->settings-schema.json->diskwrite_device_name->tooltip
 msgid "Set the device to monitor for the DISK (write) graph."
-msgstr ""
-"Állítson be egy megfigyelni kívánt eszközt a LEMEZ (írás) grafikonhoz."
+msgstr "Állítson be egy megfigyelni kívánt eszközt a LEMEZ (írás) grafikonhoz."

@@ -1,0 +1,604 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 18:20+0100\n"
+"Last-Translator: Google translate\n"
+"Language-Team: \n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Type to search..."
+msgstr "Sláðu inn til að leita..."
+
+msgid "Initializing"
+msgstr "Frumstillir"
+
+msgid "No description available"
+msgstr "Engin lýsing tiltæk"
+
+msgid "All applications"
+msgstr "Allar umsóknir"
+
+msgid "Places"
+msgstr "Staðir"
+
+msgid "Recent files"
+msgstr "Nýlegar skrár"
+
+msgid "Bookmarks"
+msgstr "Bókamerki"
+
+msgid "Favorite apps"
+msgstr "Uppáhalds öpp"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0 pakki þarf fyrir Firefox og Midori bókamerki."
+
+msgid "Clear List"
+msgstr "Hreinsa lista"
+
+msgid "No recent files"
+msgstr "Engar nýlegar skrár"
+
+msgid "Account details"
+msgstr "Reikningsupplýsingar"
+
+msgid "Grid View"
+msgstr "Grid View"
+
+msgid "List View"
+msgstr "Listasýn"
+
+msgid "Switch to grid view"
+msgstr "Skiptu yfir í töfluyfirlit"
+
+msgid "Switch to list view"
+msgstr "Skiptu yfir í listaskjá"
+
+msgid "Lock screen"
+msgstr "Læsa skjá"
+
+msgid "Lock the screen"
+msgstr "Læstu skjánum"
+
+msgid "Logout"
+msgstr "Að skrá þig út"
+
+msgid "Leave the session"
+msgstr "Yfirgefa fundinn"
+
+msgid "Quit"
+msgstr "Hætta"
+
+msgid "Shutdown the computer"
+msgstr "Slökktu á tölvunni"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Keyra með NVIDIA GPU"
+
+msgid "Add to panel"
+msgstr "Bæta við spjaldið"
+
+msgid "Add to desktop"
+msgstr "Bæta við skjáborð"
+
+msgid "Remove from favorites"
+msgstr "Fjarlægja úr eftirlæti"
+
+msgid "Add to favorites"
+msgstr "Bæta við Uppáhalds"
+
+msgid "Uninstall"
+msgstr "Fjarlægðu"
+
+msgid "Home"
+msgstr "Heim"
+
+msgid "Computer"
+msgstr "Tölva"
+
+msgid "Browse network"
+msgstr "Skoðaðu net"
+
+msgid "Find files..."
+msgstr "Finndu skrár..."
+
+msgid "Please wait..."
+msgstr "Vinsamlegast bíðið..."
+
+msgid "Applications"
+msgstr "Umsóknir"
+
+msgid "Documents"
+msgstr "Skjöl"
+
+msgid "Videos"
+msgstr "Myndbönd"
+
+msgid "Images"
+msgstr "Myndir"
+
+msgid "Music"
+msgstr "Tónlist"
+
+msgid "No recent Items"
+msgstr "Engir nýlegir hlutir"
+
+msgid "Click to copy"
+msgstr "Smelltu til að afrita"
+
+msgid "Applications and files"
+msgstr "Forrit og skrár"
+
+msgid "Other search results"
+msgstr "Aðrar leitarniðurstöður"
+
+msgid "Browser history"
+msgstr "Saga vafra"
+
+msgid "Browser bookmarks"
+msgstr "Bókamerki vafra"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Trash"
+msgstr "Rusl"
+
+msgid "Error while opening file:"
+msgstr "Villa við að opna skrá:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Of margar færslur - sýnir aðeins fyrstu 1000 færslurnar"
+
+msgid "Favorites"
+msgstr "Uppáhalds"
+
+msgid "Recent"
+msgstr "Nýleg"
+
+msgid "Home folder"
+msgstr "Heima mappa"
+
+msgid "Reset category order"
+msgstr "Endurstilla flokkaröð"
+
+msgid "light skin tone"
+msgstr "ljós húðlitur"
+
+msgid "medium-light skin tone"
+msgstr "meðalljós húðlitur"
+
+msgid "medium skin tone"
+msgstr "meðalhúðlitur"
+
+msgid "medium-dark skin tone"
+msgstr "meðaldökkur húðlitur"
+
+msgid "dark skin tone"
+msgstr "dökkur húðlitur"
+
+msgid "This file is no longer available"
+msgstr "Þessi skrá er ekki lengur tiltæk"
+
+msgid "Open with"
+msgstr "Opna með"
+
+msgid "Other application..."
+msgstr "Önnur umsókn..."
+
+msgid "Open containing folder"
+msgstr "Opnaðu möppuna sem inniheldur"
+
+msgid "Move to trash"
+msgstr "Færa í ruslið"
+
+msgid "Error while moving file to trash:"
+msgstr "Villa við að flytja skrá í ruslið:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Þetta valmyndaratriði er ekki tengt neinum pakka. Viltu samt fjarlægja það úr valmyndinni?"
+
+msgid "The following packages will be removed:"
+msgstr "Eftirfarandi pakkar verða fjarlægðir:"
+
+msgid "Packages to be removed"
+msgstr "Pakkar sem á að fjarlægja"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Ekki er hægt að fjarlægja pakkann %s þar sem hann er krafist af öðrum pakka."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Pakkinn %s er háður eftirfarandi pakka:"
+
+msgid "Open"
+msgstr "Opið"
+
+msgid "Search"
+msgstr "Leita"
+
+msgid "Start in"
+msgstr "Byrjaðu inn"
+
+msgid "Select a folder"
+msgstr "Veldu möppu"
+
+msgid "Follow symlinks"
+msgstr "Fylgdu tákntenglum"
+
+msgid "Search hidden"
+msgstr "Leita falin"
+
+msgid "Use regular expressions"
+msgstr "Notaðu reglulegar orðasambönd"
+
+msgid "Stop"
+msgstr "Hættu"
+
+msgid "File"
+msgstr "Skrá"
+
+msgid "Path"
+msgstr "Leið"
+
+msgid "Searching..."
+msgstr "Leita..."
+
+msgid "Search Stopped"
+msgstr "Leit hætt"
+
+msgid "Searching: "
+msgstr "Leita: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Villa: ófullnægjandi heimildir til að lesa möppu "
+
+msgid "Search Completed"
+msgstr "Leit lokið"
+
+msgid "Skipping"
+msgstr "Sleppa"
+
+msgid " - directory already searched"
+msgstr " - möppu þegar leitað"
+
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Sveigjanlegur valmynd með valmöguleikum fyrir rist eða lista, skráarvafra og emoji leit."
+
+msgid "Behavior"
+msgstr "Hegðun"
+
+msgid "Appearance"
+msgstr "Útlit"
+
+msgid "Layout and Content"
+msgstr "Skipulag og innihald"
+
+msgid "Search Providers"
+msgstr "Leitaraðilar"
+
+msgid "No search provider extensions found"
+msgstr "Engar viðbætur fyrir leitarþjónustu fundust"
+
+msgid "Panel"
+msgstr "Panel"
+
+msgid "Menu"
+msgstr "Matseðill"
+
+msgid "Layout"
+msgstr "Skipulag"
+
+msgid "Content"
+msgstr "Efni"
+
+msgid "Recent files settings"
+msgstr "Nýlegar skráarstillingar"
+
+msgid "Open the menu editor"
+msgstr "Opnaðu valmyndaritilinn"
+
+msgid "Use a custom icon"
+msgstr "Notaðu sérsniðið tákn"
+
+msgid "Use a custom icon in the panel"
+msgstr "Notaðu sérsniðið tákn á spjaldið"
+
+msgid "Panel icon"
+msgstr "Tákn fyrir pallborð"
+
+msgid "Panel text"
+msgstr "Paneltexti"
+
+msgid "Text to show beside the panel icon"
+msgstr "Texti til að sýna við hlið spjaldiðáknisins"
+
+msgid "Category icon size (pixels)"
+msgstr "Stærð flokkatákn (pixlar)"
+
+msgid "Applications list icon size (pixels)"
+msgstr "Táknstærð forritalista (pixlar)"
+
+msgid "Applications grid icon size (pixels)"
+msgstr "Stærð forritatáknis (pixlar)"
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Flýtilykla til að opna og loka valmyndinni"
+
+msgid "Open menu on hover"
+msgstr "Opnaðu valmynd á sveimi"
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Opnaðu valmyndina þegar ég færi músina yfir spjaldstáknið"
+
+msgid "milliseconds"
+msgstr "millisekúndur"
+
+msgid "Menu hover delay"
+msgstr "Töf á valmyndarsveiflu"
+
+msgid "Use menu animations"
+msgstr "Notaðu hreyfimyndir í valmyndinni"
+
+msgid "Animate the menu on open and close"
+msgstr "Hreyfi valmyndina á opna og loka"
+
+msgid "Activate categories on click"
+msgstr "Virkjaðu flokka með því að smella"
+
+msgid "Activate categories on click instead of on hover"
+msgstr "Virkjaðu flokka með því að smella í stað þess að sveima"
+
+msgid "Enable autoscrolling"
+msgstr "Virkja sjálfvirka flettingu"
+
+msgid "Enable autoscrolling in application list"
+msgstr "Virkjaðu sjálfvirka flettingu í forritalista"
+
+msgid "Show web bookmarks"
+msgstr "Sýna vefbókamerki"
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Sýndu vefbókamerki vafrans þíns í valmyndinni.\n"
+"Athugið: Settu upp pakkann gir1.2-gda-5.0 til að lesa firefox bókamerki."
+
+msgid "Enable searching of open windows"
+msgstr "Virkjaðu leit á opnum gluggum"
+
+msgid "Enable search providers"
+msgstr "Virkjaðu leitarþjónustu"
+
+msgid "Include search provider results in searches"
+msgstr "Láttu niðurstöður leitarþjónustu fylgja með í leit"
+
+msgid "Example Search Providers"
+msgstr "Dæmi um leitarþjónustu"
+
+msgid "Open menu on category:"
+msgstr "Opna valmynd fyrir flokk:"
+
+msgid "List"
+msgstr "Listi"
+
+msgid "Grid"
+msgstr "Grid"
+
+msgid "Always open the menu with this category selected"
+msgstr "Opnaðu alltaf valmyndina með þennan flokk valinn"
+
+msgid "columns"
+msgstr "dálkar"
+
+msgid "Number of columns in apps grid"
+msgstr "Fjöldi dálka í forritatöflu"
+
+msgid "Show bookmarks and places"
+msgstr "Sýna bókamerki og staði"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "Sýna bókamerki og staðsetningarflokk í valmyndinni"
+
+msgid "Show application icons"
+msgstr "Sýna forritatákn"
+
+msgid "Show category icons"
+msgstr "Sýna flokkatákn"
+
+msgid "Show application descriptions under titles"
+msgstr "Sýna umsóknarlýsingar undir titlum"
+
+msgid "Show tooltips"
+msgstr "Sýndu verkfæraleiðbeiningar"
+
+msgid "Tooltip delay"
+msgstr "Töf á tólum"
+
+msgid "Use a custom menu height"
+msgstr "Notaðu sérsniðna valmyndarhæð"
+
+msgid "Custom menu height (pixels)"
+msgstr "Sérsniðin hæð valmyndar (pixlar)"
+
+msgid "Applications view mode"
+msgstr "Forritaskoðunarstilling"
+
+msgid "View applications as list or grid"
+msgstr "Skoðaðu forrit sem lista eða rist"
+
+msgid "Application description placement"
+msgstr "Umsóknarlýsing staðsetning"
+
+msgid "Tooltips"
+msgstr "Verkfæraráð"
+
+msgid "Under titles"
+msgstr "Undir titlum"
+
+msgid "None"
+msgstr "Enginn"
+
+msgid "Choose where to show application descriptions"
+msgstr "Veldu hvar á að sýna umsóknarlýsingar"
+
+msgid "Sidebar location"
+msgstr "Staðsetning hliðarstikunnar"
+
+msgid "Top"
+msgstr "Efst"
+
+msgid "Bottom"
+msgstr "Neðst"
+
+msgid "Left"
+msgstr "Vinstri"
+
+msgid "Right"
+msgstr "til hægri"
+
+msgid "Choose where to show the sidebar"
+msgstr "Veldu hvar á að sýna hliðarstikuna"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"Upplýsingar/ábending: Dragðu á brún valmyndarinnar til að breyta stærð valmyndarinnar.\n"
+
+msgid "Show favorites on sidebar"
+msgstr "Sýna eftirlæti á hliðarstikunni"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Sýndu uppáhaldsforritið þitt og skráartákn á hliðarstikunni"
+
+msgid "Show recent items"
+msgstr "Sýna nýleg atriði"
+
+msgid "Show recent items category in the menu"
+msgstr "Sýna flokk nýlegra hluta í valmyndinni"
+
+msgid "Show favorite apps category"
+msgstr "Sýna uppáhalds forritaflokk"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Sýndu uppáhalds forritaflokkinn þinn í valmyndinni"
+
+msgid "Show home folder"
+msgstr "Sýna heimamöppu"
+
+msgid "Show home folder category in the menu"
+msgstr "Sýna heimamöppuflokk í valmyndinni"
+
+msgid "Last used category"
+msgstr "Síðast notaður flokkur"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Skrunaðu forritalistann sjálfkrafa með músinni"
+
+msgid "Show hidden files"
+msgstr "Sýna faldar skrár"
+
+msgid "Show hidden files in folder view"
+msgstr "Sýna faldar skrár í möppuskjá"
+
+msgid "Emoji search"
+msgstr "Emoji leit"
+
+msgid "Show emojis in search results"
+msgstr "Sýna emojis í leitarniðurstöðum"
+
+msgid "Web search option"
+msgstr "Vefleitarmöguleiki"
+
+msgid "Show an internet search option in search results"
+msgstr "Sýna internetleitarmöguleika í leitarniðurstöðum"
+
+msgid "Search home folder"
+msgstr "Leita í heimamöppu"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Þegar þú leitar skaltu líka leita í heimamöppunni minni að skrám"
+
+msgid "Web history search"
+msgstr "Leit á vefsögu"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Þegar þú leitar skaltu einnig leita í feril vafrans míns (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Athugið: Firefox ferill er ekki studdur eins og er."
+
+msgid "Web bookmarks search"
+msgstr "Leit að bókamerkjum á vefnum"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Þegar þú leitar skaltu líka leita í bókamerkjum vafrans míns (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Athugið: Til að leita í Firefox bókamerkjum þarftu að setja upp pakkann gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) eða pakka libgda (Arch based dreifingar) og endurræstu tölvuna þína."
+
+msgid "Wikipedia search"
+msgstr "Wikipedia leit"
+
+msgid "Show some Wikipedia results"
+msgstr "Sýndu nokkrar Wikipedia niðurstöður"
+
+msgid "Wikipedia language"
+msgstr "Wikipedia tungumál"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Athugið: Suma leitarvalkosti er samt hægt að nota jafnvel þó að þú hafir ekki virkjað þá hér með því að setja leitarorðið þitt forskot.\n"
+"Til dæmis: til að leita að emoji skaltu slá inn 'e heart' til að finna hjarta-emoji. Notaðu sömuleiðis forskeyti 'f ' fyrir skráaleit, 'h ' fyrir vefferil og 'b ' fyrir vefbókamerkjaleit.\n"
+
+msgid "Use a custom icon size"
+msgstr "Notaðu sérsniðna táknstærð"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Notaðu sérsniðna stærð fyrir spjaldtáknið"
+
+msgid "Panel icon size (pixels)"
+msgstr "Stærð spjaldstákn (pixlar)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Veldu sérsniðna stærð fyrir spjaldtáknið"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Stærð hliðarstikunnar (pixlar)"
+
+msgid "Use sidebar box style"
+msgstr "Notaðu hliðarstiku kassa stíl"
+
+msgid "Use a sidebar box style"
+msgstr "Notaðu hliðarstiku kassa stíl"
+
+msgid "Use tile style"
+msgstr "Notaðu flísastíl"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Notaðu flísastíl fyrir forritahnappana (Athugið: virkar kannski ekki á sumum þemum)"

@@ -379,51 +379,6 @@ const ELLIPSIS = '...';
 const EN_DASH = '\u2013';
 const FORWARD_SLASH = '\u002F';
 
-;// CONCATENATED MODULE: ./src/3_8/lib/logger.ts
-
-class Log {
-    constructor(_instanceId) {
-        this.debug = false;
-        this.level = 1;
-        this.ID = _instanceId;
-        this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
-        this.debug = this.DEBUG();
-    }
-    DEBUG() {
-        let path = this.appletDir + "/../DEBUG";
-        let _debug = imports.gi.Gio.file_new_for_path(path);
-        let result = _debug.query_exists(null);
-        if (result)
-            this.Info("DEBUG file found in " + path + ", enabling Debug mode");
-        return result;
-    }
-    ;
-    Info(message) {
-        let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
-        global.log(msg);
-    }
-    Error(error, e) {
-        global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
-        if (!!(e === null || e === void 0 ? void 0 : e.stack))
-            global.logError(e.stack);
-    }
-    ;
-    Debug(message) {
-        if (this.debug) {
-            this.Info(message);
-        }
-    }
-    Debug2(message) {
-        if (this.debug && this.level > 1) {
-            this.Info(message);
-        }
-    }
-    UpdateInstanceID(instanceID) {
-        this.ID = instanceID;
-    }
-}
-const logger_Logger = new Log();
-
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/errors.js
 // these aren't really private, but nor are they really useful to document
 
@@ -3270,14 +3225,14 @@ const isoOrdinalWithTimeExtensionRegex = combineRegexes(isoOrdinalRegex, isoTime
 const isoTimeCombinedRegex = combineRegexes(isoTimeRegex);
 const extractISOYmdTimeAndOffset = combineExtractors(extractISOYmd, extractISOTime, extractISOOffset);
 const extractISOWeekTimeAndOffset = combineExtractors(extractISOWeekData, extractISOTime, extractISOOffset);
-const extractISOOrdinalDataAndTime = combineExtractors(extractISOOrdinalData, extractISOTime);
+const extractISOOrdinalDateAndTime = combineExtractors(extractISOOrdinalData, extractISOTime, extractISOOffset);
 const extractISOTimeAndOffset = combineExtractors(extractISOTime, extractISOOffset);
 /**
  * @private
  */
 
 function parseISODate(s) {
-  return parse(s, [isoYmdWithTimeExtensionRegex, extractISOYmdTimeAndOffset], [isoWeekWithTimeExtensionRegex, extractISOWeekTimeAndOffset], [isoOrdinalWithTimeExtensionRegex, extractISOOrdinalDataAndTime], [isoTimeCombinedRegex, extractISOTimeAndOffset]);
+  return parse(s, [isoYmdWithTimeExtensionRegex, extractISOYmdTimeAndOffset], [isoWeekWithTimeExtensionRegex, extractISOWeekTimeAndOffset], [isoOrdinalWithTimeExtensionRegex, extractISOOrdinalDateAndTime], [isoTimeCombinedRegex, extractISOTimeAndOffset]);
 }
 function parseRFC2822Date(s) {
   return parse(preprocessRFC2822(s), [rfc2822, extractRFC2822]);
@@ -3523,7 +3478,7 @@ class Duration {
     }, opts));
   }
   /**
-   * Create a Duration from a JavaScript object with keys like 'years' and 'hours.
+   * Create a Duration from a JavaScript object with keys like 'years' and 'hours'.
    * If this object is empty then a zero milliseconds duration is returned.
    * @param {Object} obj - the object to create the DateTime from
    * @param {number} obj.years
@@ -8551,6 +8506,7 @@ function friendlyDateTime(dateTimeish) {
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
+const { Object: utils_Object } = imports.gi.GObject;
 function _(str, args) {
     let result = imports.gettext.dgettext(UUID, str);
     if (result === str && result === "")
@@ -8560,13 +8516,13 @@ function _(str, args) {
     return result;
 }
 function format(str, args) {
-    for (let key in args) {
+    for (const key in args) {
         str = str.replace(new RegExp("\\{" + key + "\\}"), args[key]);
     }
     return str;
 }
 function UnitToUnicode(unit) {
-    return unit == "fahrenheit" ? '\u2109' : '\u2103';
+    return unit == "fahrenheit" ? '°F' : '°C';
 }
 function GenerateLocationText(weather, config) {
     let location = "";
@@ -8592,10 +8548,9 @@ function CapitalizeEveryWord(description) {
     if ((description == undefined || description == null)) {
         return "";
     }
-    let split = description.split(" ");
+    const split = description.split(" ");
     let result = "";
-    for (let index = 0; index < split.length; index++) {
-        const element = split[index];
+    for (const [index, element] of split.entries()) {
         result += CapitalizeFirstLetter(element);
         if (index != split.length - 1)
             result += " ";
@@ -8608,9 +8563,8 @@ function NormalizeTimezone(tz) {
     return tz;
 }
 function GetDayName(date, locale, showDate = false, tz) {
-    let params = {
+    const params = {
         weekday: "long",
-        timeZone: tz
     };
     params.timeZone = NormalizeTimezone(tz);
     if (showDate) {
@@ -8628,8 +8582,7 @@ function GetDayName(date, locale, showDate = false, tz) {
     if (!!locale)
         date = date.setLocale(locale);
     let dateString = date.toLocaleString(params);
-    if (locale === null || locale === void 0 ? void 0 : locale.startsWith("fr"))
-        dateString = CapitalizeFirstLetter(dateString);
+    dateString = CapitalizeFirstLetter(dateString);
     if (date.hasSame(now, "day"))
         dateString = _("Today");
     if (date.hasSame(tomorrow, "day"))
@@ -8637,10 +8590,9 @@ function GetDayName(date, locale, showDate = false, tz) {
     return dateString;
 }
 function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
-    let params = {
+    const params = {
         hour: "numeric",
         hour12: !hours24Format,
-        timeZone: tz
     };
     params.timeZone = NormalizeTimezone(tz);
     if (!onlyHours)
@@ -8652,13 +8604,12 @@ function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
     return date.toLocaleString(params);
 }
 function AwareDateString(date, locale, hours24Format, tz) {
-    let now = DateTime.utc().setZone(tz);
+    const now = DateTime.utc().setZone(tz);
     date = date.setZone(tz);
-    let params = {
+    const params = {
         hour: "numeric",
         minute: "2-digit",
         hour12: !hours24Format,
-        timeZone: tz
     };
     if (!date.hasSame(now, "day")) {
         params.month = "short";
@@ -8694,12 +8645,25 @@ function LocalizedColon(locale) {
         return " :";
     return ":";
 }
-function PrecentToLocale(humidity, locale) {
-    return (humidity / 100).toLocaleString(locale !== null && locale !== void 0 ? locale : undefined, { style: "percent" });
+function PercentToLocale(humidity, locale, withUnit = true) {
+    if (withUnit)
+        return (humidity / 100).toLocaleString(locale !== null && locale !== void 0 ? locale : undefined, { style: "percent" });
+    else
+        return Math.round(humidity).toString();
 }
 const WEATHER_CONV_MPH_IN_MPS = 2.23693629;
 const WEATHER_CONV_KPH_IN_MPS = 3.6;
 const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449;
+function ExtraFieldToUserUnits(extra_field, config, withUnit = false) {
+    switch (extra_field.type) {
+        case "percent":
+            return PercentToLocale(extra_field.value, config.currentLocale, withUnit);
+        case "temperature":
+            return TempToUserConfig(extra_field.value, config, withUnit);
+        default:
+            return _(extra_field.value);
+    }
+}
 function MPStoUserUnits(mps, units) {
     switch (units) {
         case "mph":
@@ -8760,7 +8724,7 @@ function TempToUserConfig(kelvin, config, withUnit = true) {
     if (withUnit)
         temp = `${temp} ${UnitToUnicode(config.TemperatureUnit)}`;
     if (config._showBothTempUnits) {
-        let secondUnit = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
+        const secondUnit = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
         let secondTemp = (config.TemperatureUnit == "celsius") ? KelvinToFahrenheit(kelvin) : KelvinToCelsius(kelvin);
         secondTemp = RussianTransform(secondTemp, config._tempRussianStyle);
         if (withUnit)
@@ -8780,10 +8744,10 @@ function RussianTransform(temp, russianStyle) {
     return temp.toString();
 }
 function TempRangeToUserConfig(min, max, config) {
-    let t_low = TempToUserConfig(min, config, false);
-    let t_high = TempToUserConfig(max, config, false);
-    let first_temperature = config._temperatureHighFirst ? t_high : t_low;
-    let second_temperature = config._temperatureHighFirst ? t_low : t_high;
+    const t_low = TempToUserConfig(min, config, false);
+    const t_high = TempToUserConfig(max, config, false);
+    const first_temperature = config._temperatureHighFirst ? t_high : t_low;
+    const second_temperature = config._temperatureHighFirst ? t_low : t_high;
     let result = "";
     if (first_temperature != null)
         result = first_temperature;
@@ -8792,7 +8756,7 @@ function TempRangeToUserConfig(min, max, config) {
         result += `${second_temperature} `;
     result += `${UnitToUnicode(config.TemperatureUnit)}`;
     if (config._showBothTempUnits) {
-        let secondUnit = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
+        const secondUnit = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
         result += ` (${UnitToUnicode(secondUnit)})`;
     }
     return result;
@@ -8882,7 +8846,7 @@ function CompassToDeg(compass) {
     }
 }
 function CompassDirection(deg) {
-    let directions = [
+    const directions = [
         'south-arrow-weather-symbolic',
         'south-west-arrow-weather-symbolic',
         'west-arrow-weather-symbolic',
@@ -8895,17 +8859,15 @@ function CompassDirection(deg) {
     return directions[Math.round(deg / 45) % directions.length];
 }
 function CompassDirectionText(deg) {
-    if (!deg)
-        return null;
-    let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
+    const directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
     return directions[Math.round(deg / 45) % directions.length];
 }
 function IsNight(sunTimes, date) {
     if (!sunTimes)
         return false;
-    let time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
-    let sunrise = MilitaryTime(sunTimes.sunrise);
-    let sunset = MilitaryTime(sunTimes.sunset);
+    const time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
+    const sunrise = MilitaryTime(sunTimes.sunrise);
+    const sunset = MilitaryTime(sunTimes.sunset);
     if (time >= sunrise && time < sunset)
         return false;
     return true;
@@ -8940,10 +8902,10 @@ function mode(arr) {
     }, { mode: null, greatestFreq: -Infinity, numMapping: {} }).mode;
 }
 ;
-function WeatherIconSafely(code, icon_type) {
-    for (let i = 0; i < code.length; i++) {
-        if (HasIcon(code[i], icon_type))
-            return code[i];
+function WeatherIconSafely(icons, icon_type) {
+    for (const icon of icons) {
+        if (HasIcon(icon, icon_type))
+            return icon;
     }
     return 'weather-severe-alert';
 }
@@ -8953,12 +8915,12 @@ function ShadeHexColor(color, percent) {
 }
 function ConstructJsLocale(locale) {
     let jsLocale = locale.split(".")[0];
-    let tmp = jsLocale.split("_");
+    const tmp = jsLocale.split("_");
     jsLocale = "";
-    for (let i = 0; i < tmp.length; i++) {
+    for (const [i, item] of tmp.entries()) {
         if (i != 0)
             jsLocale += "-";
-        jsLocale += tmp[i].toLowerCase();
+        jsLocale += item.toLowerCase();
     }
     if (locale == "c" || locale == null)
         jsLocale = null;
@@ -8977,10 +8939,7 @@ function GetDistance(lat1, lon1, lat2, lon2) {
     return R * c;
 }
 function GetFuncName(func) {
-    if (!!func.name)
-        return func.name;
-    var result = /^function\s+([\w\$]+)\s*\(/.exec(func.toString());
-    return result ? result[1] : '';
+    return func.name;
 }
 function Guid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -8988,12 +8947,48 @@ function Guid() {
         return v.toString(16);
     });
 }
+const isFinalized = function (obj) {
+    return obj && utils_Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
+};
+function CompareVersion(v1, v2, options) {
+    const zeroExtend = options && options.zeroExtend, v1parts = v1.split('.'), v2parts = v2.split('.');
+    function isValidPart(x) {
+        return (/^\d+$/).test(x);
+    }
+    if (!v1parts.every(isValidPart) || !v2parts.every(isValidPart)) {
+        return NaN;
+    }
+    if (zeroExtend) {
+        while (v1parts.length < v2parts.length)
+            v1parts.push("0");
+        while (v2parts.length < v1parts.length)
+            v2parts.push("0");
+    }
+    for (var i = 0; i < v1parts.length; ++i) {
+        if (v2parts.length == i) {
+            return 1;
+        }
+        if (v1parts[i] == v2parts[i]) {
+            continue;
+        }
+        else if (v1parts[i] > v2parts[i]) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    }
+    if (v1parts.length != v2parts.length) {
+        return -1;
+    }
+    return 0;
+}
 function utils_setTimeout(func, ms) {
     let args = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    let id = timeout_add(ms, () => {
+    const id = timeout_add(ms, () => {
         func.apply(null, args);
         return false;
     });
@@ -9016,13 +9011,207 @@ function utils_setInterval(func, ms) {
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    let id = timeout_add(ms, () => {
+    const id = timeout_add(ms, () => {
         func.apply(null, args);
         return true;
     });
     return id;
 }
 ;
+
+;// CONCATENATED MODULE: ./src/3_8/lib/io_lib.ts
+
+const Gio = imports.gi.Gio;
+const ByteArray = imports.byteArray;
+async function GetFileInfo(file) {
+    return new Promise((resolve, reject) => {
+        file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
+            const result = file.query_info_finish(res);
+            resolve(result);
+            return result;
+        });
+    });
+}
+async function FileExists(file, dictionary = false) {
+    try {
+        return file.query_exists(null);
+    }
+    catch (e) {
+        if (e instanceof Error)
+            logger_Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ", e);
+        return false;
+    }
+}
+async function LoadContents(file) {
+    return new Promise((resolve, reject) => {
+        file.load_contents_async(null, (obj, res) => {
+            let result, contents = null;
+            try {
+                [result, contents] = file.load_contents_finish(res);
+            }
+            catch (e) {
+                reject(e);
+                return e;
+            }
+            if (result != true) {
+                resolve(null);
+                return null;
+            }
+            if (contents instanceof Uint8Array)
+                contents = ByteArray.toString(contents);
+            resolve(contents.toString());
+            return contents.toString();
+        });
+    });
+}
+async function DeleteFile(file) {
+    const result = await new Promise((resolve, reject) => {
+        file.delete_async(null, null, (obj, res) => {
+            let result = null;
+            try {
+                result = file.delete_finish(res);
+            }
+            catch (e) {
+                if (e instanceof Error) {
+                    let error = e;
+                    if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                        resolve(true);
+                        return true;
+                    }
+                    Logger.Error("Can't delete file, reason: ", e);
+                }
+                resolve(false);
+                return false;
+            }
+            resolve(result);
+            return result;
+        });
+    });
+    return result;
+}
+async function OverwriteAndGetIOStream(file) {
+    const parent = file.get_parent();
+    if (parent != null && !FileExists(parent))
+        parent.make_directory_with_parents(null);
+    return new Promise((resolve, reject) => {
+        file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
+            const ioStream = file.replace_readwrite_finish(result);
+            resolve(ioStream);
+            return ioStream;
+        });
+    });
+}
+async function WriteAsync(outputStream, buffer) {
+    const text = ByteArray.fromString(buffer);
+    if (outputStream.is_closed())
+        return false;
+    return new Promise((resolve, reject) => {
+        outputStream.write_bytes_async(text, null, null, (obj, res) => {
+            const ioStream = outputStream.write_bytes_finish(res);
+            resolve(true);
+            return true;
+        });
+    });
+}
+async function CloseStream(stream) {
+    return new Promise((resolve, reject) => {
+        stream.close_async(null, null, (obj, res) => {
+            const result = stream.close_finish(res);
+            resolve(result);
+            return result;
+        });
+    });
+}
+
+;// CONCATENATED MODULE: ./src/3_8/lib/logger.ts
+
+
+
+const { File } = imports.gi.Gio;
+const { get_home_dir } = imports.gi.GLib;
+const LogLevelSeverity = {
+    always: 0,
+    critical: 1,
+    error: 5,
+    info: 10,
+    debug: 50,
+    verbose: 100
+};
+class Log {
+    constructor(_instanceId) {
+        this.logLevel = "info";
+        this.ID = _instanceId;
+    }
+    ChangeLevel(level) {
+        this.logLevel = level;
+    }
+    CanLog(level) {
+        return LogLevelSeverity[level] <= LogLevelSeverity[this.logLevel];
+    }
+    Info(message) {
+        if (!this.CanLog("info"))
+            return;
+        const msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
+        global.log(msg);
+    }
+    Error(error, e) {
+        if (!this.CanLog("error"))
+            return;
+        global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
+        if (!!(e === null || e === void 0 ? void 0 : e.stack))
+            global.logError(e.stack);
+    }
+    ;
+    Debug(message) {
+        if (!this.CanLog("debug"))
+            return;
+        this.Info(message);
+    }
+    Verbose(message) {
+        if (!this.CanLog("verbose"))
+            return;
+        this.Info(message);
+    }
+    UpdateInstanceID(instanceID) {
+        this.ID = instanceID;
+    }
+    async GetAppletLogs() {
+        var _a, _b, _c;
+        const home = (_a = get_home_dir()) !== null && _a !== void 0 ? _a : "~";
+        let logFilePath = `${home}/`;
+        if (CompareVersion(imports.misc.config.PACKAGE_VERSION, "3.8.8") == -1) {
+            logFilePath += ".cinnamon/glass.log";
+        }
+        else {
+            logFilePath += ".xsession-errors";
+        }
+        const logFile = File.new_for_path(logFilePath);
+        if (!await FileExists(logFile)) {
+            throw new Error(_("Could not retrieve logs, log file was not found under path\n {logFilePath}", { logFilePath: logFilePath }));
+        }
+        const logs = await LoadContents(logFile);
+        if (logs == null) {
+            throw new Error(_("Could not get contents of log file under path\n {logFilePath}", { logFilePath: logFilePath }));
+        }
+        const logLines = logs.split("\n");
+        const filteredLines = [];
+        let lastWasCinnamonLog = false;
+        for (const line of logLines) {
+            if (lastWasCinnamonLog && ((_c = (_b = line.match(/.js:\d+:\d+$/gm)) === null || _b === void 0 ? void 0 : _b.length) !== null && _c !== void 0 ? _c : 0) > 0) {
+                filteredLines.push(line);
+            }
+            else if (line.includes("LookingGlass") && line.includes(UUID)) {
+                filteredLines.push(line);
+                lastWasCinnamonLog = true;
+            }
+            else {
+                lastWasCinnamonLog = false;
+            }
+        }
+        return filteredLines;
+    }
+}
+const logger_Logger = new Log();
 
 ;// CONCATENATED MODULE: ./src/3_8/location_services/ipApi.ts
 
@@ -9033,7 +9222,7 @@ class IpApi {
         this.app = _app;
     }
     async GetLocation() {
-        let json = await this.app.LoadJsonAsync(this.query);
+        const json = await this.app.LoadJsonAsync(this.query);
         if (!json) {
             return null;
         }
@@ -9046,7 +9235,7 @@ class IpApi {
     ;
     ParseInformation(json) {
         try {
-            let result = {
+            const result = {
                 lat: json.lat,
                 lon: json.lon,
                 city: json.city,
@@ -9092,8 +9281,7 @@ class Event {
     Invoke(sender, args) {
         if (this.subscribers.length == 0)
             return;
-        for (let index = 0; index < this.subscribers.length; index++) {
-            const element = this.subscribers[index];
+        for (const element of this.subscribers) {
             element(sender, args);
         }
     }
@@ -9118,7 +9306,7 @@ class NotificationService {
         return this.instance;
     }
     Send(title, message, transient) {
-        let notification = new Notification(this.MessageSource, this.Title + ": " + title, message);
+        const notification = new Notification(this.MessageSource, this.Title + ": " + title, message);
         if (transient)
             notification.setTransient((!transient) ? false : true);
         this.MessageSource.notify(notification);
@@ -9175,29 +9363,28 @@ class LocationStore {
         this.InvokeStorageChanged();
     }
     SwitchToLocation(loc) {
-        let index = this.FindIndex(loc);
+        const index = this.FindIndex(loc);
         if (index == -1)
             return false;
         this.currentIndex = index;
         return true;
     }
     FindLocation(entryText) {
-        for (let index = 0; index < this.locations.length; index++) {
-            const element = this.locations[index];
-            if (element.entryText == entryText)
+        for (const location of this.locations) {
+            if (location.entryText == entryText)
                 return {
-                    country: element.country,
-                    city: element.city,
-                    entryText: element.entryText,
-                    lat: element.lat,
-                    lon: element.lon,
-                    timeZone: this.NormalizeTZ(element.timeZone),
+                    country: location.country,
+                    city: location.city,
+                    entryText: location.entryText,
+                    lat: location.lat,
+                    lon: location.lon,
+                    timeZone: this.NormalizeTZ(location.timeZone),
                 };
         }
         return null;
     }
     NormalizeTZ(tz) {
-        let valid = ValidTimezone(tz) ? tz : DateTime.local().zoneName;
+        const valid = ValidTimezone(tz) ? tz : DateTime.local().zoneName;
         if (!valid)
             logger_Logger.Info(`Timezone '${tz}' is not valid for saved location, switching for local tz '${DateTime.local().zoneName}'`);
         return valid;
@@ -9267,7 +9454,7 @@ class LocationStore {
     ShouldShowLocationSelectors(currentLoc) {
         if (currentLoc == null)
             return false;
-        let threshold = this.InStorage(currentLoc) ? 2 : 1;
+        const threshold = this.InStorage(currentLoc) ? 2 : 1;
         if (this.locations.length >= threshold)
             return true;
         else
@@ -9307,8 +9494,7 @@ class LocationStore {
             return -1;
         if (locations == null)
             locations = this.locations;
-        for (let index = 0; index < locations.length; index++) {
-            const element = locations[index];
+        for (const [index, element] of locations.entries()) {
             if (element.entryText == loc.entryText)
                 return index;
         }
@@ -9319,7 +9505,8 @@ class LocationStore {
             return false;
         if (newLoc == null)
             return false;
-        for (let key in newLoc) {
+        let key;
+        for (key in newLoc) {
             if (oldLoc[key] != newLoc[key]) {
                 return false;
             }
@@ -9343,12 +9530,12 @@ class GeoLocation {
         var _a;
         try {
             searchText = searchText.trim();
-            let cached = (_a = this.cache) === null || _a === void 0 ? void 0 : _a.searchText;
+            const cached = (_a = this.cache) === null || _a === void 0 ? void 0 : _a.searchText;
             if (cached != null) {
                 logger_Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
                 return cached;
             }
-            let locationData = await this.App.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params);
+            const locationData = await this.App.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params);
             if (locationData == null)
                 return null;
             if (locationData.length == 0) {
@@ -9360,7 +9547,7 @@ class GeoLocation {
                 return null;
             }
             logger_Logger.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
-            let result = {
+            const result = {
                 lat: parseFloat(locationData[0].lat),
                 lon: parseFloat(locationData[0].lon),
                 city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
@@ -9384,8 +9571,8 @@ class GeoLocation {
     BuildEntryText(locationData) {
         if (locationData.address == null)
             return locationData.display_name;
-        let entryText = [];
-        for (let key in locationData.address) {
+        const entryText = [];
+        for (const key in locationData.address) {
             if (key == "state_district")
                 continue;
             if (key == "county")
@@ -9398,426 +9585,31 @@ class GeoLocation {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/config.ts
-
-
-
-
-
-
-
-const { AppletSettings, BindingDirection } = imports.ui.settings;
-const Lang = imports.lang;
-const keybindingManager = imports.ui.main.keybindingManager;
-const { IconType: config_IconType } = imports.gi.St;
-const { get_language_names } = imports.gi.GLib;
-const { Settings: config_Settings } = imports.gi.Gio;
-const Keys = {
-    DATA_SERVICE: "dataService",
-    API_KEY: "apiKey",
-    TEMPERATURE_UNIT_KEY: "temperatureUnit",
-    TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
-    WIND_SPEED_UNIT: "windSpeedUnit",
-    DISTANCE_UNIT: "distanceUnit",
-    CITY: "locationLabelOverride",
-    TRANSLATE_CONDITION: "translateCondition",
-    VERTICAL_ORIENTATION: "verticalOrientation",
-    SHOW_TEXT_IN_PANEL: "showTextInPanel",
-    TEMP_TEXT_OVERRIDE: "tempTextOverride",
-    SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
-    SHOW_SUNRISE: "showSunrise",
-    SHOW_24HOURS: "show24Hours",
-    FORECAST_DAYS: "forecastDays",
-    FORECAST_HOURS: "forecastHours",
-    FORECAST_COLS: "forecastColumns",
-    FORECAST_ROWS: "forecastRows",
-    REFRESH_INTERVAL: "refreshInterval",
-    PRESSURE_UNIT: "pressureUnit",
-    SHORT_CONDITIONS: "shortConditions",
-    MANUAL_LOCATION: "manualLocation",
-    USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
-    USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
-    RUSSIAN_STYLE: "tempRussianStyle",
-    SHORT_HOURLY_TIME: "shortHourlyTime",
-    SHOW_FORECAST_DATES: "showForecastDates",
-    WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
-    IMMEDIATE_PRECIP: "immediatePrecip",
-    SHOW_BOTH_TEMP: "showBothTempUnits",
-    DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText"
-};
-class Config {
-    constructor(app, instanceID) {
-        this.fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
-        this.windSpeedUnitLocales = {
-            "fi kr no pl ru se": "m/s",
-            "us gb": "mph"
-        };
-        this.distanceUnitLocales = {
-            "us gb": "imperial"
-        };
-        this.WEATHER_LOCATION = "location";
-        this.WEATHER_LOCATION_LIST = "locationList";
-        this.doneTypingLocation = null;
-        this.currentLocation = null;
-        this.timezone = undefined;
-        this.app = app;
-        this.currentLocale = ConstructJsLocale(get_language_names()[0]);
-        logger_Logger.Debug("System locale is " + this.currentLocale);
-        this.autoLocProvider = new IpApi(app);
-        this.geoLocationService = new GeoLocation(app);
-        this.countryCode = this.GetCountryCode(this.currentLocale);
-        this.settings = new AppletSettings(this, UUID, instanceID);
-        this.InterfaceSettings = new config_Settings({ schema: "org.cinnamon.desktop.interface" });
-        this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
-        this.currentFontSize = this.GetCurrentFontSize();
-        this.BindSettings();
-        this.LocStore = new LocationStore(this.app, this);
-    }
-    get Timezone() {
-        return this.timezone;
-    }
-    set Timezone(value) {
-        if (!value || value == "")
-            value = undefined;
-        this.timezone = value;
-    }
-    BindSettings() {
-        let k;
-        for (k in Keys) {
-            let key = Keys[k];
-            let keyProp = "_" + key;
-            this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
-        }
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), Lang.bind(this, this.OnLocationStoreChanged), null);
-        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this, this.OnKeySettingsUpdated), null);
-        keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
-    }
-    get CurrentFontSize() {
-        return this.currentFontSize;
-    }
-    get CurrentLocation() {
-        return this.currentLocation;
-    }
-    get ApiKey() {
-        return this._apiKey.replace(" ", "");
-    }
-    get Language() {
-        return this.GetLanguage(this.currentLocale);
-    }
-    get TemperatureUnit() {
-        if (this._temperatureUnit == "automatic")
-            return this.GetLocaleTemperateUnit(this.countryCode);
-        return this._temperatureUnit;
-    }
-    get WindSpeedUnit() {
-        if (this._windSpeedUnit == "automatic")
-            return this.GetLocaleWindSpeedUnit(this.countryCode);
-        return this._windSpeedUnit;
-    }
-    get DistanceUnit() {
-        if (this._distanceUnit == "automatic")
-            return this.GetLocaleDistanceUnit(this.countryCode);
-        return this._distanceUnit;
-    }
-    get IconType() {
-        if (this._useCustomMenuIcons)
-            return config_IconType.SYMBOLIC;
-        return this._useSymbolicIcons ?
-            config_IconType.SYMBOLIC :
-            config_IconType.FULLCOLOR;
-    }
-    ;
-    get AppletIconType() {
-        if (this._useCustomAppletIcons)
-            return config_IconType.SYMBOLIC;
-        return this._useSymbolicIcons ?
-            config_IconType.SYMBOLIC :
-            config_IconType.FULLCOLOR;
-    }
-    SwitchToNextLocation() {
-        let nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
-        if (nextLoc == null)
-            return null;
-        this.InjectLocationToConfig(nextLoc, true);
-        return nextLoc;
-    }
-    SwitchToPreviousLocation() {
-        let previousLoc = this.LocStore.GetPreviousLocation(this.CurrentLocation);
-        if (previousLoc == null)
-            return null;
-        this.InjectLocationToConfig(previousLoc, true);
-        return previousLoc;
-    }
-    NoApiKey() {
-        var _a;
-        let key = (_a = this._apiKey) === null || _a === void 0 ? void 0 : _a.replace(" ", "");
-        return (!key || key == "");
-    }
-    ;
-    async EnsureLocation() {
-        this.currentLocation = null;
-        if (!this._manualLocation) {
-            let location = await this.autoLocProvider.GetLocation();
-            if (!location)
-                return null;
-            this.InjectLocationToConfig(location);
-            return location;
-        }
-        let loc = this._location;
-        if (loc == undefined || loc.trim() == "") {
-            this.app.ShowError({
-                type: "hard",
-                detail: "no location",
-                userError: true,
-                message: _("Make sure you entered a location or use Automatic location instead")
-            });
-            return null;
-        }
-        let location = this.LocStore.FindLocation(this._location);
-        if (location != null) {
-            logger_Logger.Debug("location exist in locationstore, retrieve");
-            this.LocStore.SwitchToLocation(location);
-            this.InjectLocationToConfig(location, true);
-            return location;
-        }
-        else if (IsCoordinate(loc)) {
-            loc = loc.replace(" ", "");
-            let latLong = loc.split(",");
-            let location = {
-                lat: parseFloat(latLong[0]),
-                lon: parseFloat(latLong[1]),
-                timeZone: DateTime.now().zoneName,
-                entryText: loc,
-            };
-            this.InjectLocationToConfig(location);
-            return location;
-        }
-        logger_Logger.Debug("Location is text, geolocating...");
-        let locationData = await this.geoLocationService.GetLocation(loc);
-        if (locationData == null)
-            return null;
-        if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.entryText)) {
-            logger_Logger.Debug("Address found via address search");
-        }
-        location = this.LocStore.FindLocation(locationData.entryText);
-        if (location != null) {
-            logger_Logger.Debug("Found location was found in locationStore, return that instead");
-            this.InjectLocationToConfig(location);
-            this.LocStore.SwitchToLocation(location);
-            return location;
-        }
-        else {
-            this.InjectLocationToConfig(locationData);
-            return locationData;
-        }
-    }
-    InjectLocationToConfig(loc, switchToManual = false) {
-        logger_Logger.Debug("Location setting is now: " + loc.entryText);
-        let text = (loc.entryText + "");
-        this.SetLocation(text);
-        this.currentLocation = loc;
-        if (switchToManual == true)
-            this.settings.setValue(Keys.MANUAL_LOCATION, true);
-    }
-    OnKeySettingsUpdated() {
-        if (this.keybinding != null) {
-            keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
-        }
-    }
-    OnLocationChanged() {
-        logger_Logger.Debug("User changed location, waiting 3 seconds...");
-        if (this.doneTypingLocation != null)
-            utils_clearTimeout(this.doneTypingLocation);
-        this.doneTypingLocation = utils_setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
-    }
-    OnLocationStoreChanged() {
-        this.LocStore.OnLocationChanged(this._locationList);
-    }
-    OnFontChanged() {
-        this.currentFontSize = this.GetCurrentFontSize();
-        this.app.RefreshAndRebuild();
-    }
-    DoneTypingLocation() {
-        logger_Logger.Debug("User has finished typing, beginning refresh");
-        this.doneTypingLocation = null;
-        this.app.RefreshAndRebuild();
-    }
-    OnSettingChanged() {
-        this.app.RefreshAndRebuild();
-    }
-    SetLocation(value) {
-        this.settings.setValue(this.WEATHER_LOCATION, value);
-    }
-    SetLocationList(list) {
-        this.settings.setValue(this.WEATHER_LOCATION_LIST, list);
-    }
-    GetLocaleTemperateUnit(code) {
-        if (code == null || !this.fahrenheitCountries.includes(code))
-            return "celsius";
-        return "fahrenheit";
-    }
-    GetLocaleWindSpeedUnit(code) {
-        if (code == null)
-            return "kph";
-        for (const key in this.windSpeedUnitLocales) {
-            if (key.includes(code))
-                return this.windSpeedUnitLocales[key];
-        }
-        return "kph";
-    }
-    GetLocaleDistanceUnit(code) {
-        if (code == null)
-            return "metric";
-        for (const key in this.distanceUnitLocales) {
-            if (key.includes(code))
-                return this.distanceUnitLocales[key];
-        }
-        return "metric";
-    }
-    GetCountryCode(locale) {
-        if (locale == null)
-            return null;
-        let split = locale.split("-");
-        if (split.length < 2)
-            return null;
-        return split[1];
-    }
-    GetLanguage(locale) {
-        if (locale == null)
-            return null;
-        let split = locale.split("-");
-        if (split.length < 1)
-            return null;
-        return split[0];
-    }
-    GetCurrentFontSize() {
-        let nameString = this.InterfaceSettings.get_string("font-name");
-        let elements = nameString.split(" ");
-        let size = parseFloat(elements[elements.length - 1]);
-        logger_Logger.Debug("Font size changed to " + size.toString());
-        return size;
-    }
-}
-
-;// CONCATENATED MODULE: ./src/3_8/loop.ts
-
-
-var weatherAppletGUIDs = {};
-class WeatherLoop {
-    constructor(app, instanceID) {
-        this.lastUpdated = new Date(0);
-        this.pauseRefresh = false;
-        this.LOOP_INTERVAL = 15;
-        this.appletRemoved = false;
-        this.errorCount = 0;
-        this.app = app;
-        this.instanceID = instanceID;
-        this.GUID = Guid();
-        weatherAppletGUIDs[instanceID] = this.GUID;
-    }
-    IsDataTooOld() {
-        if (!this.lastUpdated)
-            return true;
-        let oldDate = this.lastUpdated;
-        oldDate.setMinutes(oldDate.getMinutes() + (this.app.config._refreshInterval * 2));
-        return (this.lastUpdated > oldDate);
-    }
-    async Start() {
-        while (true) {
-            try {
-                if (this.IsStray())
-                    return;
-                if (this.app.encounteredError == true)
-                    this.IncrementErrorCount();
-                this.ValidateLastUpdate();
-                if (this.pauseRefresh) {
-                    logger_Logger.Debug("Configuration error, updating paused");
-                    await delay(this.LoopInterval());
-                    continue;
-                }
-                if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
-                    logger_Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
-                        + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
-                        + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
-                    let state = await this.app.RefreshWeather(false);
-                    if (state == "error")
-                        logger_Logger.Info("App is currently refreshing, refresh skipped in main loop");
-                    if (state == "success" || "locked")
-                        this.lastUpdated = new Date();
-                }
-                else {
-                    logger_Logger.Debug("No need to update yet, skipping");
-                }
-            }
-            catch (e) {
-                logger_Logger.Error("Error in Main loop: " + e, e);
-                this.app.encounteredError = true;
-            }
-            await delay(this.LoopInterval());
-        }
-    }
-    ;
-    Stop() {
-        this.appletRemoved = true;
-    }
-    Pause() {
-        this.pauseRefresh = true;
-    }
-    Resume() {
-        this.pauseRefresh = false;
-    }
-    ResetErrorCount() {
-        this.errorCount = 0;
-    }
-    GetSecondsUntilNextRefresh() {
-        return (this.errorCount > 0) ? (this.errorCount) * this.LOOP_INTERVAL : this.LOOP_INTERVAL;
-    }
-    IsStray() {
-        if (this.appletRemoved == true)
-            return true;
-        if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
-            logger_Logger.Debug("Applet GUID: " + this.GUID);
-            logger_Logger.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
-            logger_Logger.Info("GUID mismatch, terminating applet");
-            return true;
-        }
-        return false;
-    }
-    IncrementErrorCount() {
-        this.app.encounteredError = false;
-        this.errorCount++;
-        logger_Logger.Debug("Encountered error in previous loop");
-        if (this.errorCount > 60)
-            this.errorCount = 60;
-    }
-    NextUpdate() {
-        return new Date(this.lastUpdated.getTime() + this.app.config._refreshInterval * 60000);
-    }
-    ValidateLastUpdate() {
-        if (this.lastUpdated > new Date())
-            this.lastUpdated = new Date(0);
-    }
-    LoopInterval() {
-        return (this.errorCount > 0) ? this.LOOP_INTERVAL * this.errorCount * 1000 : this.LOOP_INTERVAL * 1000;
-    }
-}
-
 // EXTERNAL MODULE: ./node_modules/suncalc/suncalc.js
 var suncalc = __webpack_require__(969);
+;// CONCATENATED MODULE: ./src/3_8/providers/BaseProvider.ts
+class BaseProvider {
+    constructor(app) {
+        this.app = app;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_uk.ts
 
 
 
 
-class MetUk {
+
+class MetUk extends BaseProvider {
     constructor(_app) {
+        super(_app);
         this.prettyName = _("Met Office UK");
         this.name = "Met Office UK";
         this.maxForecastSupport = 5;
         this.website = "https://www.metoffice.gov.uk/";
         this.maxHourlyForecastSupport = 36;
         this.needsApiKey = false;
+        this.remainingCalls = null;
         this.baseUrl = "http://datapoint.metoffice.gov.uk/public/data/val/";
         this.forecastPrefix = "wxfcs/all/json/";
         this.threeHourlyUrl = "?res=3hourly";
@@ -9830,15 +9622,14 @@ class MetUk {
         this.MAX_STATION_DIST = 50000;
         this.ParseForecast = (json, loc) => {
             var _a, _b;
-            let forecasts = [];
+            const forecasts = [];
             try {
-                for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
-                    let element = json.SiteRep.DV.Location.Period[i];
+                for (const element of json.SiteRep.DV.Location.Period) {
                     if (!Array.isArray(element.Rep))
                         continue;
-                    let day = element.Rep[0];
-                    let night = element.Rep[1];
-                    let forecast = {
+                    const day = element.Rep[0];
+                    const night = element.Rep[1];
+                    const forecast = {
                         date: DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone }),
                         temp_min: CelsiusToKelvin(parseFloat((_a = night.Nm) !== null && _a !== void 0 ? _a : "0")),
                         temp_max: CelsiusToKelvin(parseFloat((_b = day.Dm) !== null && _b !== void 0 ? _b : "0")),
@@ -9849,32 +9640,31 @@ class MetUk {
                 return forecasts;
             }
             catch (e) {
-                logger_Logger.Error("MET UK Forecast Parsing error: " + e, e);
+                if (e instanceof Error)
+                    logger_Logger.Error("MET UK Forecast Parsing error: " + e, e);
                 this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
         };
         this.ParseHourlyForecast = (json, loc) => {
-            let forecasts = [];
+            const forecasts = [];
             try {
-                for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
-                    let day = json.SiteRep.DV.Location.Period[i];
-                    let date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
+                for (const day of json.SiteRep.DV.Location.Period) {
+                    const date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
                     if (!Array.isArray(day.Rep))
                         continue;
-                    for (let index = 0; index < day.Rep.length; index++) {
-                        const hour = day.Rep[index];
-                        let timestamp = date.plus({ hours: parseInt(hour.$) / 60 });
-                        let threshold = DateTime.utc().setZone(loc.timeZone).minus({ hours: 3 });
+                    for (const element of day.Rep) {
+                        const hour = element;
+                        const timestamp = date.plus({ hours: parseInt(hour.$) / 60 });
+                        const threshold = DateTime.utc().setZone(loc.timeZone).minus({ hours: 3 });
                         if (timestamp < threshold)
                             continue;
-                        let forecast = {
+                        const forecast = {
                             date: timestamp,
                             temp: CelsiusToKelvin(parseFloat(hour.T)),
                             condition: this.ResolveCondition(hour.W),
                             precipitation: {
                                 type: "rain",
-                                volume: undefined,
                                 chance: parseFloat(hour.Pp)
                             }
                         };
@@ -9884,23 +9674,23 @@ class MetUk {
                 return forecasts;
             }
             catch (e) {
-                logger_Logger.Error("MET UK Forecast Parsing error: " + e, e);
+                if (e instanceof Error)
+                    logger_Logger.Error("MET UK Forecast Parsing error: " + e, e);
                 this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
                 return null;
             }
         };
-        this.app = _app;
     }
     async GetWeather(newLoc) {
-        let loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
+        const loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
         if (this.currentLocID == null || this.currentLocID != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
             logger_Logger.Info("Downloading new site data");
             this.currentLoc = newLoc;
             this.currentLocID = loc;
-            let forecastSite = await this.GetClosestForecastSite(newLoc);
+            const forecastSite = await this.GetClosestForecastSite(newLoc);
             if (forecastSite == null)
                 return null;
-            let observationSites = await this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST);
+            const observationSites = await this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST);
             if (observationSites == null)
                 return null;
             this.forecastSite = forecastSite;
@@ -9920,32 +9710,31 @@ class MetUk {
             });
             return null;
         }
-        let forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc);
-        let hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc);
-        let observations = await this.GetObservationData(this.observationSites);
-        let currentResult = this.ParseCurrent(observations, newLoc);
+        const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc);
+        const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc);
+        const observations = await this.GetObservationData(this.observationSites);
+        const currentResult = this.ParseCurrent(observations, newLoc);
         if (!currentResult)
             return null;
-        let forecastResult = await forecastPromise;
+        const forecastResult = await forecastPromise;
         currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
-        let threeHourlyForecast = await hourlyPayload;
+        const threeHourlyForecast = await hourlyPayload;
         currentResult.hourlyForecasts = (!threeHourlyForecast) ? [] : threeHourlyForecast;
         return currentResult;
     }
     ;
     async GetClosestForecastSite(loc) {
-        let forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
+        const forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
         if (forecastSitelist == null)
             return null;
         return this.GetClosestSite(forecastSitelist, loc);
     }
     async GetObservationSitesInRange(loc, range) {
-        let observationSiteList = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
+        const observationSiteList = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
         if (observationSiteList == null)
             return null;
         let observationSites = [];
-        for (let index = 0; index < observationSiteList.Locations.Location.length; index++) {
-            const element = observationSiteList.Locations.Location[index];
+        for (const element of observationSiteList.Locations.Location) {
             element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
             if (element.dist > range)
                 continue;
@@ -9956,11 +9745,10 @@ class MetUk {
         return observationSites;
     }
     async GetObservationData(observationSites) {
-        let observations = [];
-        for (let index = 0; index < observationSites.length; index++) {
-            const element = observationSites[index];
+        const observations = [];
+        for (const element of observationSites) {
             logger_Logger.Debug("Getting observation data from station: " + element.id);
-            let payload = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
+            const payload = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
             if (!!payload)
                 observations.push(payload);
             else {
@@ -9973,20 +9761,19 @@ class MetUk {
         if (query == null)
             return null;
         logger_Logger.Debug("Query: " + query);
-        let json = await this.app.LoadJsonAsync(query);
+        const json = await this.app.LoadJsonAsync(query);
         if (json == null)
             return null;
         return ParseFunction(json, loc);
     }
     ;
     ParseCurrent(json, loc) {
-        let observation = this.MeshObservations(json, loc);
+        const observation = this.MeshObservations(json, loc);
         if (!observation) {
             return null;
         }
         let dataIndex = -1;
-        for (let index = 0; index < json.length; index++) {
-            const element = json[index];
+        for (const [index, element] of json.entries()) {
             if (element.SiteRep.DV.Location == null)
                 continue;
             dataIndex = index;
@@ -10001,9 +9788,9 @@ class MetUk {
             });
             return null;
         }
-        let times = (0,suncalc.getTimes)(new Date(), parseFloat(json[dataIndex].SiteRep.DV.Location.lat), parseFloat(json[dataIndex].SiteRep.DV.Location.lon), parseFloat(json[dataIndex].SiteRep.DV.Location.elevation));
+        const times = (0,suncalc.getTimes)(new Date(), parseFloat(json[dataIndex].SiteRep.DV.Location.lat), parseFloat(json[dataIndex].SiteRep.DV.Location.lon), parseFloat(json[dataIndex].SiteRep.DV.Location.elevation));
         try {
-            let weather = {
+            const weather = {
                 coord: {
                     lat: parseFloat(json[dataIndex].SiteRep.DV.Location.lat),
                     lon: parseFloat(json[dataIndex].SiteRep.DV.Location.lon)
@@ -10011,9 +9798,14 @@ class MetUk {
                 location: {
                     city: undefined,
                     country: undefined,
-                    url: undefined,
                     timeZone: undefined,
-                    distanceFrom: this.observationSites[dataIndex].dist
+                },
+                stationInfo: {
+                    distanceFrom: this.observationSites[dataIndex].dist,
+                    name: this.observationSites[dataIndex].name,
+                    area: this.observationSites[dataIndex].unitaryAuthArea,
+                    lat: parseFloat(this.observationSites[dataIndex].latitude),
+                    lon: parseFloat(this.observationSites[dataIndex].longitude),
                 },
                 date: DateTime.fromISO(json[dataIndex].SiteRep.DV.dataDate, { zone: loc.timeZone }),
                 sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
@@ -10025,6 +9817,7 @@ class MetUk {
                 temperature: null,
                 pressure: null,
                 humidity: null,
+                dewPoint: null,
                 condition: this.ResolveCondition(observation === null || observation === void 0 ? void 0 : observation.W),
                 forecasts: []
             };
@@ -10050,19 +9843,23 @@ class MetUk {
             if ((observation === null || observation === void 0 ? void 0 : observation.H) != null) {
                 weather.humidity = parseFloat(observation.H);
             }
+            if ((observation === null || observation === void 0 ? void 0 : observation.Dp) != null) {
+                weather.dewPoint = CelsiusToKelvin(parseFloat(observation.Dp));
+            }
             return weather;
         }
         catch (e) {
-            logger_Logger.Error("Met UK Weather Parsing error: " + e, e);
+            if (e instanceof Error)
+                logger_Logger.Error("Met UK Weather Parsing error: " + e, e);
             this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     }
     ;
     VisibilityToText(dist) {
-        let distance = parseInt(dist);
-        let unit = this.app.config.DistanceUnit;
-        let stringFormat = {
+        const distance = parseInt(dist);
+        const unit = this.app.config.DistanceUnit;
+        const stringFormat = {
             distanceUnit: this.DistanceUnitFor(unit)
         };
         if (distance < 1000) {
@@ -10115,7 +9912,7 @@ class MetUk {
         return observations;
     }
     MeshObservations(observations, loc) {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
+        var _a, _b, _c, _d, _e, _f, _g;
         if (!observations)
             return null;
         if (observations.length == 0)
@@ -10123,16 +9920,16 @@ class MetUk {
         let result = this.GetLatestObservation((_d = (_c = (_b = (_a = observations[0]) === null || _a === void 0 ? void 0 : _a.SiteRep) === null || _b === void 0 ? void 0 : _b.DV) === null || _c === void 0 ? void 0 : _c.Location) === null || _d === void 0 ? void 0 : _d.Period, DateTime.utc().setZone(loc.timeZone), loc);
         if (observations.length == 1)
             return result;
-        for (let index = 0; index < observations.length; index++) {
-            if (((_h = (_g = (_f = (_e = observations[index]) === null || _e === void 0 ? void 0 : _e.SiteRep) === null || _f === void 0 ? void 0 : _f.DV) === null || _g === void 0 ? void 0 : _g.Location) === null || _h === void 0 ? void 0 : _h.Period) == null)
+        for (const [index, observation] of observations.entries()) {
+            if (((_g = (_f = (_e = observation === null || observation === void 0 ? void 0 : observation.SiteRep) === null || _e === void 0 ? void 0 : _e.DV) === null || _f === void 0 ? void 0 : _f.Location) === null || _g === void 0 ? void 0 : _g.Period) == null)
                 continue;
-            let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
+            const nextObservation = this.GetLatestObservation(observation.SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
             if (result == null)
                 result = nextObservation;
-            let debugText = " Observation data missing, plugged in from ID " +
-                observations[index].SiteRep.DV.Location.i + ", index " + index +
+            const debugText = " Observation data missing, plugged in from ID " +
+                observation.SiteRep.DV.Location.i + ", index " + index +
                 ", distance "
-                + Math.round(GetDistance(parseFloat(observations[index].SiteRep.DV.Location.lat), parseFloat(observations[index].SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
+                + Math.round(GetDistance(parseFloat(observation.SiteRep.DV.Location.lat), parseFloat(observation.SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
                 + " metres";
             if (result != null) {
                 if ((result === null || result === void 0 ? void 0 : result.V) == null) {
@@ -10163,6 +9960,10 @@ class MetUk {
                     result.H = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.H;
                     logger_Logger.Debug("Humidity" + debugText);
                 }
+                if ((result === null || result === void 0 ? void 0 : result.Dp) == null) {
+                    result.Dp = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.Dp;
+                    logger_Logger.Debug("Dew Point" + debugText);
+                }
             }
         }
         return result;
@@ -10170,9 +9971,8 @@ class MetUk {
     GetLatestObservation(observations, day, loc) {
         if (observations == null)
             return null;
-        for (let index = 0; index < observations.length; index++) {
-            const element = observations[index];
-            let date = DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone });
+        for (const element of observations) {
+            const date = DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone });
             if (!OnSameDay(date, day))
                 continue;
             if (Array.isArray(element.Rep))
@@ -10186,11 +9986,10 @@ class MetUk {
         return (date.replace("Z", "")) + "T00:00:00Z";
     }
     GetClosestSite(siteList, loc) {
-        let sites = siteList.Locations.Location;
+        const sites = siteList.Locations.Location;
         let closest = sites[0];
         closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), loc.lat, loc.lon);
-        for (let index = 0; index < sites.length; index++) {
-            const element = sites[index];
+        for (const element of sites) {
             element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
             if (element.dist < closest.dist) {
                 closest = element;
@@ -10437,1154 +10236,22 @@ class MetUk {
 }
 ;
 
-;// CONCATENATED MODULE: ./src/3_8/lib/commandRunner.ts
-
-const { spawnCommandLineAsyncIO } = imports.misc.util;
-async function SpawnProcessJson(command) {
-    let response = await SpawnProcess(command);
-    if (!response.Success)
-        return response;
-    try {
-        response.Data = JSON.parse(response.Data);
-    }
-    catch (e) {
-        Logger.Error("Error: Command response is not JSON. The response: " + response.Data, e);
-        response.Success = false;
-        response.ErrorData = {
-            Code: -1,
-            Message: "Failed to parse JSON",
-            Type: "jsonParse",
-        };
-    }
-    finally {
-        return response;
-    }
-}
-async function SpawnProcess(command) {
-    let cmd = "";
-    for (let index = 0; index < command.length; index++) {
-        const element = command[index];
-        cmd += "'" + element + "' ";
-    }
-    let response = await new Promise((resolve, reject) => {
-        spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
-            let result = {
-                Success: exitCode == 0,
-                ErrorData: undefined,
-                Data: aStdout !== null && aStdout !== void 0 ? aStdout : null
-            };
-            if (exitCode != 0) {
-                result.ErrorData = {
-                    Code: exitCode,
-                    Message: err !== null && err !== void 0 ? err : null,
-                    Type: "unknown"
-                };
-            }
-            resolve(result);
-            return result;
-        });
-    });
-    return response;
-}
-function OpenUrl(element) {
-    if (!element.url)
-        return;
-    imports.gi.Gio.app_info_launch_default_for_uri(element.url, global.create_app_launch_context());
-}
-
-;// CONCATENATED MODULE: ./src/3_8/ui_elements/weatherbutton.ts
-
-const { Button } = imports.gi.St;
-const { SignalManager } = imports.misc.signalManager;
-class WeatherButton {
-    constructor(options, doNotAddPadding = false) {
-        this.signals = new SignalManager();
-        this.disabled = false;
-        this.Hovered = new Event();
-        this.Clicked = new Event();
-        this.actor = new Button(options);
-        this.actor.add_style_class_name("popup-menu-item");
-        if (doNotAddPadding)
-            this.actor.set_style('padding: 0px; border-radius: 2px;');
-        else
-            this.actor.set_style('padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;');
-        this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
-        this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);
-        this.actor.connect("clicked", () => this.clicked());
-        this.actor.connect("enter-event", (actor, event) => this.hovered(event));
-    }
-    handleEnter(actor) {
-        if (!this.disabled)
-            this.actor.add_style_pseudo_class('active');
-    }
-    handleLeave() {
-        this.actor.remove_style_pseudo_class('active');
-    }
-    disable() {
-        this.disabled = true;
-        this.actor.reactive = false;
-    }
-    enable() {
-        this.disabled = false;
-        this.actor.reactive = true;
-    }
-    clicked() {
-        if (!this.disabled) {
-            this.actor.add_style_pseudo_class('active');
-            this.Clicked.Invoke(this, null);
-        }
-    }
-    hovered(event) {
-        this.Hovered.Invoke(this, event);
-    }
-}
-
-;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiCurrentWeather.ts
-
-
-
-
-
-const { Bin, BoxLayout, IconType: uiCurrentWeather_IconType, Label, Icon, Align } = imports.gi.St;
-const uiCurrentWeather_Lang = imports.lang;
-const STYLE_SUMMARYBOX = 'weather-current-summarybox';
-const STYLE_SUMMARY = 'weather-current-summary';
-const STYLE_DATABOX = 'weather-current-databox';
-const STYLE_ICON = 'weather-current-icon';
-const STYLE_ICONBOX = 'weather-current-iconbox';
-const STYLE_DATABOX_CAPTIONS = 'weather-current-databox-captions';
-const STYLE_ASTRONOMY = 'weather-current-astronomy';
-const STYLE_DATABOX_VALUES = 'weather-current-databox-values';
-const STYLE_CURRENT = 'current';
-const STYLE_LOCATION_SELECTOR = 'location-selector';
-class CurrentWeather {
-    constructor(app) {
-        this.app = app;
-        this.actor = new Bin();
-        this.actor.style_class = STYLE_CURRENT;
-        this.app.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a));
-    }
-    Display(weather, config) {
-        try {
-            if (this.app.config.LocStore.ShouldShowLocationSelectors(config.CurrentLocation))
-                this.ShowLocationSelectors();
-            else
-                this.HideLocationSelectors();
-            let location = GenerateLocationText(weather, config);
-            this.SetLocation(location, weather.location.url);
-            this.SetConditionText(weather.condition.description);
-            this.SetWeatherIcon(weather.condition.icons, weather.condition.customIcon);
-            this.SetTemperature(weather.temperature);
-            this.SetHumidity(weather.humidity);
-            this.SetWind(weather.wind.speed, weather.wind.degree);
-            this.SetPressure(weather.pressure);
-            this.SetAPIUniqueField(weather.extra_field);
-            if (config._showSunrise)
-                this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
-            this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
-            return true;
-        }
-        catch (e) {
-            logger_Logger.Error("DisplayWeatherError: " + e, e);
-            return false;
-        }
-    }
-    ;
-    UpdateIconType(iconType) {
-        this.weatherIcon.icon_type = iconType;
-    }
-    Destroy() {
-        if (this.actor.get_child() != null)
-            this.actor.get_child().destroy();
-    }
-    Rebuild(config, textColorStyle) {
-        this.Destroy();
-        this.weatherIcon = new Icon({
-            icon_type: config.IconType,
-            icon_size: 64,
-            icon_name: APPLET_ICON,
-            style_class: STYLE_ICON
-        });
-        let box = new BoxLayout({ style_class: STYLE_ICONBOX });
-        box.add_actor(this.weatherIcon);
-        box.add_actor(this.BuildMiddleColumn(config, textColorStyle));
-        box.add_actor(this.BuildRightColumn(textColorStyle, config));
-        this.actor.set_child(box);
-    }
-    ;
-    BuildMiddleColumn(config, textColorStyle) {
-        this.weatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
-        let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
-        middleColumn.add_actor(this.BuildLocationSection());
-        middleColumn.add(this.weatherSummary, { expand: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, x_fill: false, y_fill: false });
-        this.immediatePrecipitationLabel = new Label({ style_class: "weather-immediate-precipitation" });
-        this.immediatePrecipitationBox = new Bin();
-        this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel);
-        this.immediatePrecipitationBox.hide();
-        middleColumn.add_actor(this.immediatePrecipitationBox);
-        if (config._showSunrise)
-            middleColumn.add_actor(this.BuildSunBox(config, textColorStyle));
-        return middleColumn;
-    }
-    BuildRightColumn(textColorStyle, config) {
-        let textOb = {
-            text: ELLIPSIS
-        };
-        this.temperatureLabel = new Label(textOb);
-        this.humidityLabel = new Label(textOb);
-        this.pressureLabel = new Label(textOb);
-        this.apiUniqueLabel = new Label({ text: '' });
-        this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
-        let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
-        let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle }));
-        rb_captions.add_actor(this.apiUniqueCaptionLabel);
-        rb_values.add_actor(this.temperatureLabel);
-        rb_values.add_actor(this.humidityLabel);
-        rb_values.add_actor(this.pressureLabel);
-        rb_values.add_actor(this.BuildWind(config));
-        rb_values.add_actor(this.apiUniqueLabel);
-        let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
-        rightColumn.add_actor(rb_captions);
-        rightColumn.add_actor(rb_values);
-        return rightColumn;
-    }
-    BuildWind(config) {
-        let windBox = new BoxLayout({ vertical: false });
-        let iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
-        let iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
-        let iconSize = Math.round(config.CurrentFontSize * 0.8);
-        this.windLabel = new Label({ text: ELLIPSIS });
-        this.windDirectionIcon = new Icon({
-            icon_type: uiCurrentWeather_IconType.SYMBOLIC,
-            icon_name: APPLET_ICON,
-            icon_size: iconSize,
-            style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"
-        });
-        if (!config._displayWindAsText)
-            windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
-        windBox.add(this.windLabel);
-        return windBox;
-    }
-    BuildLocationSection() {
-        this.locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), });
-        this.location = this.locationButton.actor;
-        this.location.connect(SIGNAL_CLICKED, () => {
-            if (this.app.encounteredError)
-                this.app.RefreshWeather(true);
-            else if (this.locationButton.url == null)
-                return;
-            else
-                OpenUrl(this.locationButton);
-        });
-        this.nextLocationButton = new WeatherButton({
-            reactive: true,
-            can_focus: true,
-            child: new Icon({
-                icon_type: uiCurrentWeather_IconType.SYMBOLIC,
-                icon_size: this.app.config.CurrentFontSize,
-                icon_name: "custom-right-arrow-symbolic",
-                style_class: STYLE_LOCATION_SELECTOR
-            }),
-        });
-        this.nextLocationButton.actor.connect(SIGNAL_CLICKED, uiCurrentWeather_Lang.bind(this, this.NextLocationClicked));
-        this.previousLocationButton = new WeatherButton({
-            reactive: true,
-            can_focus: true,
-            child: new Icon({
-                icon_type: uiCurrentWeather_IconType.SYMBOLIC,
-                icon_size: this.app.config.CurrentFontSize,
-                icon_name: "custom-left-arrow-symbolic",
-                style_class: STYLE_LOCATION_SELECTOR
-            }),
-        });
-        this.previousLocationButton.actor.connect(SIGNAL_CLICKED, uiCurrentWeather_Lang.bind(this, this.PreviousLocationClicked));
-        let box = new BoxLayout();
-        box.add(this.previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
-        box.add(this.location, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
-        box.add(this.nextLocationButton.actor, { x_fill: false, x_align: Align.END, y_align: Align.MIDDLE, expand: false });
-        return box;
-    }
-    BuildSunBox(config, textColorStyle) {
-        let sunBin = new Bin();
-        this.sunriseLabel = new Label({ text: ELLIPSIS, style: textColorStyle });
-        this.sunsetLabel = new Label({ text: ELLIPSIS, style: textColorStyle });
-        let sunriseBox = new BoxLayout();
-        let sunsetBox = new BoxLayout();
-        if (config._showSunrise) {
-            let sunsetIcon = new Icon({
-                icon_name: "sunset-symbolic",
-                icon_type: uiCurrentWeather_IconType.SYMBOLIC,
-                icon_size: 25,
-                style: textColorStyle
-            });
-            let sunriseIcon = new Icon({
-                icon_name: "sunrise-symbolic",
-                icon_type: uiCurrentWeather_IconType.SYMBOLIC,
-                icon_size: 25,
-                style: textColorStyle
-            });
-            sunriseBox.add_actor(sunriseIcon);
-            sunsetBox.add_actor(sunsetIcon);
-        }
-        let textOptions = {
-            x_fill: false,
-            x_align: Align.START,
-            y_align: Align.MIDDLE,
-            y_fill: false,
-            expand: true
-        };
-        sunriseBox.add(this.sunriseLabel, textOptions);
-        sunsetBox.add(this.sunsetLabel, textOptions);
-        let ab_spacerLabel = new Label({ text: BLANK });
-        let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
-        sunBox.add_actor(sunriseBox);
-        sunBox.add_actor(ab_spacerLabel);
-        sunBox.add_actor(sunsetBox);
-        sunBin.set_child(sunBox);
-        return sunBin;
-    }
-    SetImmediatePrecipitation(precip, config) {
-        if (!config._immediatePrecip || !precip || precip.end == null || precip.start == null) {
-            this.immediatePrecipitationBox.hide();
-            return;
-        }
-        this.immediatePrecipitationBox.show();
-        if (precip.start == -1) {
-            this.immediatePrecipitationBox.hide();
-        }
-        else if (precip.start == 0) {
-            if (precip.end != -1)
-                this.immediatePrecipitationLabel.text = _("Precipitation will end in {precipEnd} minutes", { precipEnd: precip.end });
-            else
-                this.immediatePrecipitationLabel.text = _("Precipitation won't end in within an hour");
-        }
-        else {
-            this.immediatePrecipitationLabel.text = _("Precipitation will start within {precipStart} minutes", { precipStart: precip.start });
-        }
-    }
-    SetSunriseAndSunset(sunrise, sunset, tz) {
-        let sunriseText = "";
-        let sunsetText = "";
-        if (sunrise != null && sunset != null && this.app.config._showSunrise) {
-            sunriseText = (GetHoursMinutes(sunrise, this.app.config.currentLocale, this.app.config._show24Hours, tz));
-            sunsetText = (GetHoursMinutes(sunset, this.app.config.currentLocale, this.app.config._show24Hours, tz));
-        }
-        this.sunriseLabel.text = sunriseText;
-        this.sunsetLabel.text = sunsetText;
-    }
-    SetAPIUniqueField(extra_field) {
-        this.apiUniqueLabel.text = "";
-        this.apiUniqueCaptionLabel.text = "";
-        if (!!extra_field) {
-            this.apiUniqueCaptionLabel.text = _(extra_field.name) + LocalizedColon(this.app.config.currentLocale);
-            let value;
-            switch (extra_field.type) {
-                case "percent":
-                    value = PrecentToLocale(extra_field.value, this.app.config.currentLocale);
-                    break;
-                case "temperature":
-                    value = TempToUserConfig(extra_field.value, this.app.config);
-                    break;
-                default:
-                    value = _(extra_field.value);
-                    break;
-            }
-            this.apiUniqueLabel.text = value !== null && value !== void 0 ? value : "";
-        }
-    }
-    SetWeatherIcon(iconNames, customIconName) {
-        if (this.app.config._useCustomMenuIcons) {
-            this.weatherIcon.icon_name = customIconName;
-            this.UpdateIconType(uiCurrentWeather_IconType.SYMBOLIC);
-        }
-        else {
-            let icon = WeatherIconSafely(iconNames, this.app.config.IconType);
-            this.weatherIcon.icon_name = icon;
-            this.UpdateIconType(this.app.config.IconType);
-        }
-    }
-    SetConditionText(condition) {
-        this.weatherSummary.text = condition;
-    }
-    SetTemperature(temperature) {
-        let temp = TempToUserConfig(temperature, this.app.config);
-        if (temp == null)
-            return;
-        this.temperatureLabel.text = temp;
-    }
-    SetHumidity(humidity) {
-        if (humidity != null) {
-            this.humidityLabel.text = PrecentToLocale(humidity, this.app.config.currentLocale);
-        }
-    }
-    async SetWind(windSpeed, windDegree) {
-        if (windSpeed == null || windDegree == null)
-            return;
-        let wind_direction = CompassDirection(windDegree);
-        this.windDirectionIcon.icon_name = wind_direction;
-        if (this.app.config._displayWindAsText) {
-            let dirText = CompassDirectionText(windDegree);
-            this.windLabel.text = `${(dirText != null ? _(dirText) + " " : "")}${MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit)}`;
-        }
-        else {
-            this.windLabel.text = MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
-        }
-        if (this.app.config.WindSpeedUnit != "Beaufort")
-            this.windLabel.text += " " + _(this.app.config.WindSpeedUnit);
-    }
-    SetPressure(pressure) {
-        if (pressure != null) {
-            this.pressureLabel.text = PressToUserUnits(pressure, this.app.config._pressureUnit) + ' ' + _(this.app.config._pressureUnit);
-        }
-    }
-    SetLocation(locationString, url) {
-        this.location.label = locationString;
-        if (!url)
-            this.locationButton.disable();
-        else
-            this.locationButton.url = url;
-    }
-    NextLocationClicked() {
-        let loc = this.app.config.SwitchToNextLocation();
-        this.app.RefreshAndRebuild(loc);
-    }
-    PreviousLocationClicked() {
-        let loc = this.app.config.SwitchToPreviousLocation();
-        this.app.RefreshAndRebuild(loc);
-    }
-    onLocationStorageChanged(sender, itemCount) {
-        logger_Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
-        if (this.app.config.LocStore.ShouldShowLocationSelectors(this.app.config.CurrentLocation))
-            this.ShowLocationSelectors();
-        else
-            this.HideLocationSelectors();
-    }
-    ShowLocationSelectors() {
-        var _a, _b, _c, _d;
-        (_b = (_a = this.nextLocationButton) === null || _a === void 0 ? void 0 : _a.actor) === null || _b === void 0 ? void 0 : _b.show();
-        (_d = (_c = this.previousLocationButton) === null || _c === void 0 ? void 0 : _c.actor) === null || _d === void 0 ? void 0 : _d.show();
-    }
-    HideLocationSelectors() {
-        var _a, _b, _c, _d;
-        (_b = (_a = this.nextLocationButton) === null || _a === void 0 ? void 0 : _a.actor) === null || _b === void 0 ? void 0 : _b.hide();
-        (_d = (_c = this.previousLocationButton) === null || _c === void 0 ? void 0 : _c.actor) === null || _d === void 0 ? void 0 : _d.hide();
-    }
-}
-
-;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiForecasts.ts
-
-
-
-
-
-const { Bin: uiForecasts_Bin, BoxLayout: uiForecasts_BoxLayout, Label: uiForecasts_Label, Icon: uiForecasts_Icon, Widget } = imports.gi.St;
-const { GridLayout } = imports.gi.Clutter;
-const STYLE_FORECAST_ICON = 'weather-forecast-icon';
-const STYLE_FORECAST_DATABOX = 'weather-forecast-databox';
-const STYLE_FORECAST_DAY = 'weather-forecast-day';
-const STYLE_FORECAST_SUMMARY = 'weather-forecast-summary';
-const STYLE_FORECAST_TEMPERATURE = 'weather-forecast-temperature';
-const STYLE_FORECAST_BOX = 'weather-forecast-box';
-const STYLE_FORECAST_CONTAINER = 'weather-forecast-container';
-const STYLE_FORECAST = 'forecast';
-class UIForecasts {
-    constructor(app) {
-        this.DayClicked = new Event();
-        this.DayHovered = new Event();
-        this.app = app;
-        this.actor = new uiForecasts_Bin({ style_class: STYLE_FORECAST });
-        this.DayClickedCallback = (s, e) => this.OnDayClicked(s, e);
-        this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
-    }
-    UpdateIconType(iconType) {
-        var _a;
-        if (!this.forecasts)
-            return;
-        for (let i = 0; i < this.forecasts.length; i++) {
-            if (!((_a = this.forecasts[i]) === null || _a === void 0 ? void 0 : _a.Icon))
-                continue;
-            this.forecasts[i].Icon.icon_type = iconType;
-        }
-    }
-    Display(weather, config) {
-        try {
-            if (!weather.forecasts)
-                return false;
-            let len = Math.min(this.forecasts.length, weather.forecasts.length);
-            for (let i = 0; i < len; i++) {
-                let forecastData = weather.forecasts[i];
-                let forecastUi = this.forecasts[i];
-                let comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
-                let dayName = GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
-                forecastUi.Day.actor.label = dayName;
-                forecastUi.Day.Hovered.Unsubscribe(this.DayHoveredCallback);
-                forecastUi.Day.Clicked.Unsubscribe(this.DayClickedCallback);
-                let hasHourlyWeather = false;
-                if (weather.hourlyForecasts != null) {
-                    for (let index = 0; index < this.app.GetMaxHourlyForecasts(); index++) {
-                        const element = weather.hourlyForecasts[index];
-                        if (!element)
-                            break;
-                        if (OnSameDay(element.date, forecastData.date)) {
-                            hasHourlyWeather = true;
-                            break;
-                        }
-                    }
-                }
-                forecastUi.Day.ID = forecastData.date;
-                if (hasHourlyWeather) {
-                    forecastUi.Day.enable();
-                    forecastUi.Day.Hovered.Subscribe(this.DayHoveredCallback);
-                    forecastUi.Day.Clicked.Subscribe(this.DayClickedCallback);
-                }
-                else {
-                    forecastUi.Day.disable();
-                }
-                forecastUi.Temperature.text = TempRangeToUserConfig(forecastData.temp_min, forecastData.temp_max, config);
-                forecastUi.Summary.text = comment;
-                forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : WeatherIconSafely(forecastData.condition.icons, config.IconType);
-            }
-            return true;
-        }
-        catch (e) {
-            this.app.ShowError({
-                type: "hard",
-                detail: "unknown",
-                message: "Forecast parsing failed: " + e.toString(),
-                userError: false
-            });
-            logger_Logger.Error("DisplayForecastError " + e, e);
-            return false;
-        }
-    }
-    ;
-    Rebuild(config, textColorStyle) {
-        this.Destroy();
-        this.forecasts = [];
-        this.grid = new GridLayout({
-            orientation: config._verticalOrientation
-        });
-        this.grid.set_column_homogeneous(true);
-        let table = new Widget({
-            layout_manager: this.grid,
-            style_class: STYLE_FORECAST_CONTAINER
-        });
-        this.actor.set_child(table);
-        let maxDays = this.app.GetMaxForecastDays();
-        let maxRow = config._forecastRows;
-        let maxCol = config._forecastColumns;
-        if (config._verticalOrientation) {
-            [maxRow, maxCol] = [maxCol, maxRow];
-        }
-        let curRow = 0;
-        let curCol = 0;
-        for (let i = 0; i < maxDays; i++) {
-            let forecastWeather = {};
-            if (curCol >= maxCol) {
-                curRow++;
-                curCol = 0;
-            }
-            if (curRow >= maxRow)
-                break;
-            forecastWeather.Icon = new uiForecasts_Icon({
-                icon_type: config.IconType,
-                icon_size: 48,
-                icon_name: APPLET_ICON,
-                style_class: STYLE_FORECAST_ICON
-            });
-            forecastWeather.Day = new WeatherButton({
-                style_class: STYLE_FORECAST_DAY,
-                reactive: true,
-                style: textColorStyle,
-                label: ""
-            }, true);
-            forecastWeather.Day.disable();
-            forecastWeather.Summary = new uiForecasts_Label({
-                style_class: STYLE_FORECAST_SUMMARY,
-                reactive: true
-            });
-            forecastWeather.Temperature = new uiForecasts_Label({
-                style_class: STYLE_FORECAST_TEMPERATURE
-            });
-            let by = new uiForecasts_BoxLayout({
-                vertical: true,
-                style_class: STYLE_FORECAST_DATABOX
-            });
-            by.add(forecastWeather.Day.actor, { x_align: imports.gi.St.Align.START, expand: false, x_fill: false });
-            by.add_actor(forecastWeather.Summary);
-            by.add_actor(forecastWeather.Temperature);
-            let bb = new uiForecasts_BoxLayout({
-                style_class: STYLE_FORECAST_BOX
-            });
-            bb.add_actor(forecastWeather.Icon);
-            bb.add_actor(by);
-            this.forecasts[i] = forecastWeather;
-            if (!config._verticalOrientation) {
-                this.grid.attach(bb, curCol, curRow, 1, 1);
-            }
-            else {
-                this.grid.attach(bb, curRow, curCol, 1, 1);
-            }
-            curCol++;
-        }
-    }
-    Destroy() {
-        if (this.actor.get_child() != null)
-            this.actor.get_child().destroy();
-    }
-    OnDayHovered(sender, event) {
-        logger_Logger.Debug("Day Hovered: " + sender.ID.toJSDate().toDateString());
-        this.DayHovered.Invoke(sender, sender.ID);
-    }
-    OnDayClicked(sender, event) {
-        logger_Logger.Debug("Day Clicked: " + sender.ID.toJSDate().toDateString());
-        this.DayClicked.Invoke(sender, sender.ID);
-    }
-}
-
-;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiHourlyForecasts.ts
-
-
-
-const { PolicyType } = imports.gi.Gtk;
-const { addTween } = imports.ui.tweener;
-const { BoxLayout: uiHourlyForecasts_BoxLayout, Side, Label: uiHourlyForecasts_Label, ScrollView, Icon: uiHourlyForecasts_Icon, Align: uiHourlyForecasts_Align } = imports.gi.St;
-class UIHourlyForecasts {
-    constructor(app, menu) {
-        this.hourlyForecasts = [];
-        this.hourlyContainers = [];
-        this.hourlyToggled = false;
-        this.app = app;
-        this.actor = new ScrollView({
-            hscrollbar_policy: PolicyType.AUTOMATIC,
-            vscrollbar_policy: PolicyType.NEVER,
-            x_fill: true,
-            y_fill: true,
-            y_align: uiHourlyForecasts_Align.MIDDLE,
-            x_align: uiHourlyForecasts_Align.MIDDLE
-        });
-        this.actor.overlay_scrollbars = true;
-        let vScroll = this.actor.get_vscroll_bar();
-        vScroll.connect("scroll-start", () => { menu.passEvents = true; });
-        vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
-        let hScroll = this.actor.get_hscroll_bar();
-        hScroll.connect("scroll-start", () => { menu.passEvents = true; });
-        hScroll.connect("scroll-stop", () => { menu.passEvents = false; });
-        this.actor.hide();
-        this.actor.set_clip_to_allocation(true);
-        this.container = new uiHourlyForecasts_BoxLayout({ style_class: "hourly-box" });
-        this.actor.add_actor(this.container);
-    }
-    get Toggled() {
-        return this.hourlyToggled;
-    }
-    ScrollTo(date) {
-        if (this.hourlyForecastDates == null)
-            return;
-        let itemWidth = this.GetHourlyBoxItemWidth();
-        let midnightIndex = null;
-        for (let index = 0; index < this.hourlyForecastDates.length; index++) {
-            if (OnSameDay(this.hourlyForecastDates[index], date))
-                midnightIndex = index;
-            if (OnSameDay(this.hourlyForecastDates[index].minus({ hours: 6 }), date)) {
-                this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
-                break;
-            }
-        }
-        if (midnightIndex != null)
-            this.actor.get_hscroll_bar().get_adjustment().set_value(midnightIndex * itemWidth);
-    }
-    UpdateIconType(iconType) {
-        var _a;
-        if (!this.hourlyForecasts)
-            return;
-        for (let i = 0; i < this.hourlyForecasts.length; i++) {
-            if (!((_a = this.hourlyForecasts[i]) === null || _a === void 0 ? void 0 : _a.Icon))
-                continue;
-            this.hourlyForecasts[i].Icon.icon_type = iconType;
-        }
-    }
-    Display(forecasts, config, tz) {
-        var _a;
-        if (!forecasts || !this.hourlyForecasts)
-            return true;
-        this.hourlyForecastDates = [];
-        let max = Math.min(forecasts.length, this.hourlyForecasts.length);
-        for (let index = 0; index < max; index++) {
-            const hour = forecasts[index];
-            const ui = this.hourlyForecasts[index];
-            this.hourlyForecastDates.push(hour.date);
-            ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
-            ui.Temperature.text = (_a = TempToUserConfig(hour.temp, config)) !== null && _a !== void 0 ? _a : "";
-            ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
-            ui.Summary.text = hour.condition.main;
-            ui.Precipitation.text = this.GeneratePrecipitationText(hour.precipitation, config);
-        }
-        this.AdjustHourlyBoxItemWidth();
-        return !(max <= 0);
-    }
-    async Show() {
-        this.actor.show();
-        this.actor.hide();
-        this.AdjustHourlyBoxItemWidth();
-        let [minWidth, naturalWidth] = this.actor.get_preferred_width(-1);
-        let [minHeight, naturalHeight] = this.actor.get_preferred_height(minWidth);
-        logger_Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
-        this.actor.set_width(minWidth);
-        this.actor.show();
-        this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
-        this.hourlyToggled = true;
-        return new Promise((resolve, reject) => {
-            if (global.settings.get_boolean("desktop-effects-on-menus")) {
-                this.actor.height = 0;
-                addTween(this.actor, {
-                    height: naturalHeight,
-                    time: 0.25,
-                    onUpdate: () => { },
-                    onComplete: () => {
-                        this.actor.set_height(naturalHeight);
-                        resolve();
-                    }
-                });
-            }
-            else {
-                this.actor.set_height(naturalHeight);
-                resolve();
-            }
-        });
-    }
-    async Hide() {
-        let hscroll = this.actor.get_hscroll_bar();
-        this.hourlyToggled = false;
-        return new Promise((resolve, reject) => {
-            if (global.settings.get_boolean("desktop-effects-on-menus")) {
-                addTween(this.actor, {
-                    height: 0,
-                    time: 0.25,
-                    onUpdate: () => { },
-                    onComplete: () => {
-                        this.actor.set_height(-1);
-                        this.actor.style = "";
-                        this.actor.hide();
-                        hscroll.get_adjustment().set_value(0);
-                        resolve();
-                    }
-                });
-            }
-            else {
-                this.actor.style = "";
-                this.actor.set_height(-1);
-                this.actor.hide();
-                resolve();
-            }
-        });
-    }
-    AdjustHourlyBoxItemWidth() {
-        let requiredWidth = this.GetHourlyBoxItemWidth();
-        for (let index = 0; index < this.hourlyContainers.length; index++) {
-            const element = this.hourlyContainers[index];
-            element.set_width(requiredWidth);
-        }
-    }
-    GetHourlyBoxItemWidth() {
-        let requiredWidth = 0;
-        if (!this.hourlyForecasts)
-            return requiredWidth;
-        for (let index = 0; index < this.hourlyContainers.length; index++) {
-            const ui = this.hourlyForecasts[index];
-            let hourWidth = ui.Hour.get_preferred_width(-1)[1];
-            let iconWidth = ui.Icon.get_preferred_width(-1)[1];
-            let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
-            let temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
-            let precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
-            if (precipitationWidth > iconWidth || summaryWidth > iconWidth) {
-                if (precipitationWidth > summaryWidth)
-                    precipitationWidth += 10;
-                else
-                    summaryWidth += 10;
-            }
-            if (requiredWidth < hourWidth)
-                requiredWidth = hourWidth;
-            if (requiredWidth < iconWidth)
-                requiredWidth = iconWidth;
-            if (requiredWidth < summaryWidth)
-                requiredWidth = summaryWidth;
-            if (requiredWidth < temperatureWidth)
-                requiredWidth = temperatureWidth;
-            if (requiredWidth < precipitationWidth)
-                requiredWidth = precipitationWidth;
-        }
-        return requiredWidth;
-    }
-    Destroy() {
-        this.container.destroy_all_children();
-    }
-    Rebuild(config, textColorStyle) {
-        this.Destroy();
-        let hours = this.app.GetMaxHourlyForecasts();
-        this.hourlyForecasts = [];
-        this.hourlyContainers = [];
-        for (let index = 0; index < hours; index++) {
-            let box = new uiHourlyForecasts_BoxLayout({ vertical: true, style_class: "hourly-box-item" });
-            this.hourlyContainers.push(box);
-            this.hourlyForecasts.push({
-                Hour: new uiHourlyForecasts_Label({ text: "Hour", style_class: "hourly-time", style: textColorStyle }),
-                Icon: new uiHourlyForecasts_Icon({
-                    icon_type: config.IconType,
-                    icon_size: 24,
-                    icon_name: APPLET_ICON,
-                    style_class: "hourly-icon"
-                }),
-                Precipitation: new uiHourlyForecasts_Label({ text: " ", style_class: "hourly-data" }),
-                Summary: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
-                Temperature: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
-            });
-            this.hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
-            box.add_child(this.hourlyForecasts[index].Hour);
-            box.add_child(this.hourlyForecasts[index].Icon);
-            box.add_child(this.hourlyForecasts[index].Summary);
-            box.add_child(this.hourlyForecasts[index].Temperature);
-            box.add_child(this.hourlyForecasts[index].Precipitation);
-            this.container.add(box, {
-                x_fill: true,
-                x_align: uiHourlyForecasts_Align.MIDDLE,
-                y_align: uiHourlyForecasts_Align.MIDDLE,
-                y_fill: true,
-                expand: true
-            });
-        }
-    }
-    GeneratePrecipitationText(precip, config) {
-        if (!precip)
-            return "";
-        let precipitationText = "";
-        if (!!precip.volume && precip.volume > 0) {
-            precipitationText = MillimeterToUserUnits(precip.volume, config.DistanceUnit) + " " + ((config.DistanceUnit == "metric") ? _("mm") : _("in"));
-        }
-        if (!!precip.chance) {
-            precipitationText = (NotEmpty(precipitationText)) ? (precipitationText + ", ") : "";
-            precipitationText += (Math.round(precip.chance).toString() + "%");
-        }
-        return precipitationText;
-    }
-    GetScrollViewHeight() {
-        let boxItemHeight = 0;
-        if (!this.hourlyForecasts)
-            return boxItemHeight;
-        for (let index = 0; index < this.hourlyContainers.length; index++) {
-            const ui = this.hourlyForecasts[index];
-            logger_Logger.Debug("Height requests of Hourly box Items: " + index);
-            let hourHeight = ui.Hour.get_preferred_height(-1)[1];
-            let iconHeight = ui.Icon.get_preferred_height(-1)[1];
-            let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
-            let temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
-            let precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
-            let itemHeight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
-            if (boxItemHeight < itemHeight)
-                boxItemHeight = itemHeight;
-        }
-        logger_Logger.Debug("Final Hourly box item height is: " + boxItemHeight);
-        let scrollBarHeight = this.actor.get_hscroll_bar().get_preferred_width(-1)[1];
-        logger_Logger.Debug("Scrollbar height is " + scrollBarHeight);
-        let theme = this.container.get_theme_node();
-        let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
-        logger_Logger.Debug("ScollbarBox vertical padding and margin is: " + styling);
-        return (boxItemHeight + scrollBarHeight + styling);
-    }
-}
-
-;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiBar.ts
-
-
-
-
-
-
-const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label, Icon: uiBar_Icon, Align: uiBar_Align, } = imports.gi.St;
-const STYLE_BAR = 'bottombar';
-class UIBar {
-    constructor(app) {
-        this.ToggleClicked = new Event();
-        this.app = app;
-        this.actor = new uiBar_BoxLayout({ vertical: false, style_class: STYLE_BAR });
-    }
-    get Actor() {
-        return this.actor;
-    }
-    SwitchButtonToShow() {
-        var _a;
-        if (!!((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child))
-            this.hourlyButton.actor.child.icon_name = "custom-down-arrow-symbolic";
-    }
-    SwitchButtonToHide() {
-        var _a;
-        if (!!((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child))
-            this.hourlyButton.actor.child.icon_name = "custom-up-arrow-symbolic";
-    }
-    DisplayErrorMessage(msg) {
-        this._timestamp.text = msg;
-    }
-    Display(weather, provider, config, shouldShowToggle) {
-        this.providerCreditButton.actor.label = _("Powered by") + " " + provider.prettyName;
-        this.providerCreditButton.url = provider.website;
-        let lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
-        this._timestamp.text = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
-        if (weather.location.distanceFrom != null) {
-            let stringFormat = {
-                distance: MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
-                distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
-            };
-            this._timestamp.text += `, ${_("{distance}{distanceUnit} from you", stringFormat)}`;
-        }
-        if (!shouldShowToggle)
-            this.HideHourlyToggle();
-        return true;
-    }
-    Destroy() {
-        this.actor.destroy_all_children();
-    }
-    Rebuild(config) {
-        this.Destroy();
-        this._timestamp = new uiBar_Label({ text: "Placeholder" });
-        this.actor.add(this._timestamp, {
-            x_fill: false,
-            x_align: uiBar_Align.START,
-            y_align: uiBar_Align.MIDDLE,
-            y_fill: false,
-            expand: true
-        });
-        this.hourlyButton = new WeatherButton({
-            reactive: true,
-            can_focus: true,
-            child: new uiBar_Icon({
-                icon_type: uiBar_IconType.SYMBOLIC,
-                icon_size: config.CurrentFontSize + 3,
-                icon_name: "custom-down-arrow-symbolic",
-                style: "margin: 2px 5px;"
-            }),
-        });
-        this.hourlyButton.actor.connect(SIGNAL_CLICKED, () => this.ToggleClicked.Invoke(this, true));
-        this.actor.add(this.hourlyButton.actor, {
-            x_fill: false,
-            x_align: uiBar_Align.MIDDLE,
-            y_align: uiBar_Align.MIDDLE,
-            y_fill: false,
-            expand: true
-        });
-        if (this.app.GetMaxHourlyForecasts() <= 0) {
-            this.HideHourlyToggle();
-        }
-        this.providerCreditButton = new WeatherButton({ label: _(ELLIPSIS), reactive: true });
-        this.providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(this.providerCreditButton));
-        this.actor.add(this.providerCreditButton.actor, {
-            x_fill: false,
-            x_align: uiBar_Align.END,
-            y_align: uiBar_Align.MIDDLE,
-            y_fill: false,
-            expand: true
-        });
-    }
-    BigDistanceUnitFor(unit) {
-        if (unit == "imperial")
-            return _("mi");
-        return _("km");
-    }
-    HideHourlyToggle() {
-        if (this.hourlyButton != null)
-            this.hourlyButton.actor.child = null;
-    }
-}
-
-;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiSeparator.ts
-const { PopupSeparatorMenuItem } = imports.ui.popupMenu;
-class UISeparator {
-    constructor() {
-        this.actor = new PopupSeparatorMenuItem();
-        this.actor.actor.remove_style_class_name("popup-menu-item");
-    }
-    get Actor() {
-        return this.actor.actor;
-    }
-    Show() {
-        this.actor.actor.show();
-    }
-    Hide() {
-        this.actor.actor.hide();
-    }
-}
-
-;// CONCATENATED MODULE: ./src/3_8/ui.ts
-
-
-
-
-
-
-
-const { PopupMenuManager } = imports.ui.popupMenu;
-const { BoxLayout: ui_BoxLayout, IconType: ui_IconType, Label: ui_Label } = imports.gi.St;
-const ui_Lang = imports.lang;
-const { AppletPopupMenu } = imports.ui.applet;
-const { themeManager } = imports.ui.main;
-const { SignalManager: ui_SignalManager } = imports.misc.signalManager;
-const STYLE_WEATHER_MENU = 'weather-menu';
-class UI {
-    constructor(app, orientation) {
-        this.lightTheme = false;
-        this.lastDateToggled = undefined;
-        this.App = app;
-        this.menuManager = new PopupMenuManager(this.App);
-        this.menu = new AppletPopupMenu(this.App, orientation);
-        this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
-        logger_Logger.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
-        this.menuManager.addMenu(this.menu);
-        this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
-        this.signals = new ui_SignalManager();
-        this.lightTheme = this.IsLightTheme();
-        this.BuildPopupMenu();
-        this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
-    }
-    Toggle() {
-        this.menu.toggle();
-    }
-    async ToggleHourlyWeather() {
-        if (this.HourlyWeather.Toggled) {
-            await this.HideHourlyWeather();
-        }
-        else {
-            await this.ShowHourlyWeather();
-        }
-    }
-    Rebuild(config) {
-        this.ShowLoadingUi();
-        let textColorStyle = this.GetTextColorStyle();
-        this.CurrentWeather.Rebuild(config, textColorStyle);
-        this.HourlyWeather.Rebuild(config, textColorStyle);
-        this.FutureWeather.Rebuild(config, textColorStyle);
-        this.Bar.Rebuild(config);
-    }
-    UpdateIconType(iconType) {
-        if (iconType == ui_IconType.FULLCOLOR && this.App.config._useCustomMenuIcons)
-            return;
-        this.CurrentWeather.UpdateIconType(iconType);
-        this.FutureWeather.UpdateIconType(iconType);
-        this.HourlyWeather.UpdateIconType(iconType);
-    }
-    DisplayErrorMessage(msg, errorType) {
-        this.Bar.DisplayErrorMessage(msg);
-    }
-    Display(weather, config, provider) {
-        this.CurrentWeather.Display(weather, config);
-        this.FutureWeather.Display(weather, config);
-        let shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
-        this.Bar.Display(weather, provider, config, shouldShowToggle);
-        return true;
-    }
-    OnThemeChanged() {
-        this.HideHourlyWeather();
-        let newThemeIsLight = this.IsLightTheme();
-        if (newThemeIsLight != this.lightTheme) {
-            this.lightTheme = newThemeIsLight;
-        }
-        this.App.RefreshAndRebuild();
-    }
-    async PopupMenuToggled(caller, data) {
-        if (data == false) {
-            await delay(100);
-            this.HideHourlyWeather();
-        }
-    }
-    IsLightTheme() {
-        let color = this.menu.actor.get_theme_node().get_color("color");
-        let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
-        luminance = Math.abs(1 - luminance);
-        logger_Logger.Debug("Theme is Light: " + (luminance > 0.5));
-        return (luminance > 0.5);
-    }
-    ForegroundColor() {
-        let hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
-        return hex;
-    }
-    GetTextColorStyle() {
-        let hexColor = null;
-        if (this.lightTheme) {
-            hexColor = ShadeHexColor(this.ForegroundColor(), -0.40);
-        }
-        return "color: " + hexColor;
-    }
-    BuildPopupMenu() {
-        this.CurrentWeather = new CurrentWeather(this.App);
-        this.FutureWeather = new UIForecasts(this.App);
-        this.HourlyWeather = new UIHourlyForecasts(this.App, this.menu);
-        this.FutureWeather.DayClicked.Subscribe((s, e) => this.OnDayClicked(s, e));
-        this.Bar = new UIBar(this.App);
-        this.Bar.ToggleClicked.Subscribe(ui_Lang.bind(this, this.ToggleHourlyWeather));
-        this.ForecastSeparator = new UISeparator();
-        this.HourlySeparator = new UISeparator();
-        this.BarSeparator = new UISeparator();
-        this.HourlySeparator.Hide();
-        let mainBox = new ui_BoxLayout({ vertical: true });
-        mainBox.add_actor(this.CurrentWeather.actor);
-        mainBox.add_actor(this.HourlySeparator.Actor);
-        mainBox.add_actor(this.HourlyWeather.actor);
-        mainBox.add_actor(this.ForecastSeparator.Actor);
-        mainBox.add_actor(this.FutureWeather.actor);
-        mainBox.add_actor(this.BarSeparator.Actor);
-        mainBox.add_actor(this.Bar.Actor);
-        this.menu.addActor(mainBox);
-    }
-    ShowLoadingUi() {
-        this.CurrentWeather.Destroy();
-        this.FutureWeather.Destroy();
-        this.Bar.Destroy();
-        this.CurrentWeather.actor.set_child(new ui_Label({
-            text: _('Loading current weather ...')
-        }));
-        this.FutureWeather.actor.set_child(new ui_Label({
-            text: _('Loading future weather ...')
-        }));
-    }
-    async OnDayClicked(sender, date) {
-        var _a;
-        if (!this.HourlyWeather.Toggled)
-            await this.ShowHourlyWeather();
-        else if ((_a = this.lastDateToggled) === null || _a === void 0 ? void 0 : _a.equals(date)) {
-            await this.HideHourlyWeather();
-            return;
-        }
-        this.HourlyWeather.ScrollTo(date);
-        this.lastDateToggled = date;
-    }
-    async ShowHourlyWeather() {
-        this.HourlySeparator.Show();
-        this.Bar.SwitchButtonToHide();
-        await this.HourlyWeather.Show();
-    }
-    async HideHourlyWeather() {
-        this.lastDateToggled = undefined;
-        this.HourlySeparator.Hide();
-        this.Bar.SwitchButtonToShow();
-        await this.HourlyWeather.Hide();
-    }
-}
-
 ;// CONCATENATED MODULE: ./src/3_8/providers/darkSky.ts
 
 
 
-const darkSky_Lang = imports.lang;
-class DarkSky {
+
+const Lang = imports.lang;
+class DarkSky extends BaseProvider {
     constructor(_app) {
+        super(_app);
         this.prettyName = _("DarkSky");
         this.name = "DarkSky";
         this.maxForecastSupport = 8;
         this.website = "https://darksky.net/poweredby/";
         this.maxHourlyForecastSupport = 168;
         this.needsApiKey = true;
+        this.remainingQuota = null;
         this.descriptionLineLength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
@@ -11595,11 +10262,37 @@ class DarkSky {
         this.query = "https://api.darksky.net/forecast/";
         this.DarkSkyFilterWords = [_("and"), _("until"), _("in"), _("Possible")];
         this.unit = "si";
-        this.app = _app;
+        this.HandleError = (message) => {
+            if (message.ErrorData.code == 403) {
+                this.app.ShowError({
+                    type: "hard",
+                    userError: true,
+                    detail: "bad key",
+                    service: "darksky",
+                    message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+                });
+                return false;
+            }
+            else if (message.ErrorData.code == 401) {
+                this.app.ShowError({
+                    type: "hard",
+                    userError: true,
+                    detail: "no key",
+                    service: "darksky",
+                    message: _("Please Make sure you\nentered the API key that you have from DarkSky")
+                });
+                return false;
+            }
+            return true;
+        };
     }
+    get remainingCalls() {
+        return null;
+    }
+    ;
     async GetWeather(loc) {
-        let now = new Date(Date.now());
-        if (now.getUTCFullYear() >= 2022) {
+        const now = new Date(Date.now());
+        if (now.getUTCFullYear() > 2022) {
             this.app.ShowError({
                 type: "hard",
                 detail: "no api response",
@@ -11607,26 +10300,21 @@ class DarkSky {
             });
             return null;
         }
-        let query = this.ConstructQuery(loc);
+        const query = this.ConstructQuery(loc);
         if (query == "" && query == null)
             return null;
-        let json = await this.app.LoadJsonAsync(query, {}, darkSky_Lang.bind(this, this.HandleError));
-        if (!json)
+        const response = await this.app.LoadJsonAsyncWithDetails(query, {}, this.HandleError);
+        if (!response.Success)
             return null;
-        if (!json.code) {
-            return this.ParseWeather(json);
-        }
-        else {
-            this.HandleResponseErrors(json);
-            return null;
-        }
+        this.remainingQuota = Math.max(1000 - parseInt(response.ResponseHeaders["X-Forecast-API-Calls"]), 0);
+        return this.ParseWeather(response.Data);
     }
     ;
     ParseWeather(json) {
         try {
-            let sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
-            let sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
-            let result = {
+            const sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
+            const sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
+            const result = {
                 date: DateTime.fromSeconds(json.currently.time, { zone: json.timezone }),
                 coord: {
                     lat: json.latitude,
@@ -11645,6 +10333,7 @@ class DarkSky {
                 temperature: this.ToKelvin(json.currently.temperature),
                 pressure: json.currently.pressure,
                 humidity: json.currently.humidity * 100,
+                dewPoint: this.ToKelvin(json.currently.dewPoint),
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
@@ -11659,9 +10348,8 @@ class DarkSky {
                 forecasts: [],
                 hourlyForecasts: []
             };
-            for (let i = 0; i < json.daily.data.length; i++) {
-                let day = json.daily.data[i];
-                let forecast = {
+            for (const day of json.daily.data) {
+                const forecast = {
                     date: DateTime.fromSeconds(day.time, { zone: json.timezone }),
                     temp_min: this.ToKelvin(day.temperatureLow),
                     temp_max: this.ToKelvin(day.temperatureHigh),
@@ -11675,9 +10363,8 @@ class DarkSky {
                 forecast.date = forecast.date.set({ hour: 12 });
                 result.forecasts.push(forecast);
             }
-            for (let i = 0; i < json.hourly.data.length; i++) {
-                let hour = json.hourly.data[i];
-                let forecast = {
+            for (const hour of json.hourly.data) {
+                const forecast = {
                     date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
                     temp: this.ToKelvin(hour.temperature),
                     condition: {
@@ -11697,7 +10384,8 @@ class DarkSky {
             return result;
         }
         catch (e) {
-            logger_Logger.Error("DarkSky payload parsing error: " + e, e);
+            if (e instanceof Error)
+                logger_Logger.Error("DarkSky payload parsing error: " + e, e);
             this.app.ShowError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
             return null;
         }
@@ -11709,45 +10397,22 @@ class DarkSky {
         if (systemLocale == "zh-tw") {
             return systemLocale;
         }
-        let lang = systemLocale.split("-")[0];
+        const lang = systemLocale.split("-")[0];
         return lang;
     }
     ConstructQuery(loc) {
         this.SetQueryUnit();
         let query = this.query + this.app.config.ApiKey + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
-        let locale = this.ConvertToAPILocale(this.app.config.currentLocale);
+        const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (IsLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + locale;
         }
         return query;
     }
-    HandleError(message) {
-        if (message.code == 403) {
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                detail: "bad key",
-                service: "darksky",
-                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
-            });
-            return false;
-        }
-        else if (message.code == 401) {
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                detail: "no key",
-                service: "darksky",
-                message: _("Please Make sure you\nentered the API key that you have from DarkSky")
-            });
-            return false;
-        }
-        return true;
-    }
     HandleResponseErrors(json) {
-        let code = json.code;
-        let error = json.error;
-        let errorMsg = "DarkSky API: ";
+        const code = json.code;
+        const error = json.error;
+        const errorMsg = "DarkSky API: ";
         logger_Logger.Debug("DarksSky API error payload: " + json);
         switch (code) {
             case "400":
@@ -11760,28 +10425,28 @@ class DarkSky {
     }
     ;
     ProcessSummary(summary) {
-        let processed = summary.split(" ");
+        const processed = summary.split(" ");
         let result = "";
         let lineLength = 0;
-        for (let i = 0; i < processed.length; i++) {
-            if (lineLength + processed[i].length > this.descriptionLineLength) {
+        for (const elem of processed) {
+            if (lineLength + elem.length > this.descriptionLineLength) {
                 result = result + "\n";
                 lineLength = 0;
             }
-            result = result + processed[i] + " ";
-            lineLength = lineLength + processed[i].length + 1;
+            result = result + elem + " ";
+            lineLength = lineLength + elem.length + 1;
         }
         return result;
     }
     ;
     GetShortSummary(summary) {
-        let processed = summary.split(" ");
+        const processed = summary.split(" ");
         if (processed.length == 1)
             return processed[0];
-        let result = [];
-        for (let i = 0; i < processed.length; i++) {
-            if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
-                result.push(processed[i]) + " ";
+        const result = [];
+        for (const elem of processed) {
+            if (!/[\(\)]/.test(elem) && !this.WordBanned(elem)) {
+                result.push(elem);
             }
             if (result.length == 2)
                 break;
@@ -11790,7 +10455,7 @@ class DarkSky {
     }
     ;
     GetShortCurrentSummary(summary) {
-        let processed = summary.split(" ");
+        const processed = summary.split(" ");
         let result = "";
         let maxLoop;
         (processed.length < 2) ? maxLoop = processed.length : maxLoop = 2;
@@ -11902,21 +10567,26 @@ class DarkSky {
 
 
 
-class OpenWeatherMap {
+
+const IDCache = {};
+class OpenWeatherMap extends BaseProvider {
     constructor(_app) {
+        super(_app);
         this.prettyName = _("OpenWeatherMap");
         this.name = "OpenWeatherMap";
         this.maxForecastSupport = 8;
         this.website = "https://openweathermap.org/";
         this.maxHourlyForecastSupport = 48;
         this.needsApiKey = false;
+        this.remainingCalls = null;
         this.supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
             "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
         ];
-        this.base_url = "https://api.openweathermap.org/data/2.5/onecall?";
+        this.base_url = "https://api.openweathermap.org/data/2.5/onecall";
+        this.id_irl = "https://api.openweathermap.org/data/2.5/weather";
         this.HandleError = (error) => {
-            if (error.code == 404) {
+            if (error.ErrorData.code == 404) {
                 this.app.ShowError({
                     detail: "location not found",
                     message: _("Location not found, make sure location is available or it is in the correct format"),
@@ -11927,30 +10597,37 @@ class OpenWeatherMap {
             }
             return true;
         };
-        this.app = _app;
     }
     async GetWeather(loc) {
-        let query = this.ConstructQuery(this.base_url, loc);
-        if (query == null)
-            return null;
-        let json = await this.app.LoadJsonAsync(query, {}, this.HandleError);
+        const params = this.ConstructParams(loc);
+        const cachedID = IDCache[`${loc.lat},${loc.lon}`];
+        const [json, idPayload] = await Promise.all([
+            this.app.LoadJsonAsync(this.base_url, params, this.HandleError),
+            (cachedID == null) ? this.app.LoadJsonAsync(this.id_irl, params) : Promise.resolve()
+        ]);
+        if (cachedID == null && (idPayload === null || idPayload === void 0 ? void 0 : idPayload.id) != null)
+            IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
         if (!json)
             return null;
         if (this.HadErrors(json))
             return null;
+        json.id = cachedID !== null && cachedID !== void 0 ? cachedID : idPayload === null || idPayload === void 0 ? void 0 : idPayload.id;
         return this.ParseWeather(json, loc);
     }
     ;
+    RanOutOfQuota(loc) {
+        return null;
+    }
     ParseWeather(json, loc) {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
         try {
-            let weather = {
+            const weather = {
                 coord: {
                     lat: json.lat,
                     lon: json.lon
                 },
                 location: {
-                    url: "https://openweathermap.org/city/",
+                    url: (json.id == null) ? "https://openweathermap.org/city/" : `https://openweathermap.org/city/${json.id}`,
                     timeZone: json.timezone
                 },
                 date: DateTime.fromSeconds(json.current.dt, { zone: json.timezone }),
@@ -11963,6 +10640,7 @@ class OpenWeatherMap {
                 temperature: json.current.temp,
                 pressure: json.current.pressure,
                 humidity: json.current.humidity,
+                dewPoint: json.current.dew_point,
                 condition: {
                     main: (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main,
                     description: (_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description,
@@ -11977,12 +10655,11 @@ class OpenWeatherMap {
                 forecasts: []
             };
             if (json.minutely != null) {
-                let immediate = {
+                const immediate = {
                     start: -1,
                     end: -1
                 };
-                for (let index = 0; index < json.minutely.length; index++) {
-                    const element = json.minutely[index];
+                for (const [index, element] of json.minutely.entries()) {
                     if (element.precipitation > 0 && immediate.start == -1) {
                         immediate.start = index;
                         continue;
@@ -11994,10 +10671,9 @@ class OpenWeatherMap {
                 }
                 weather.immediatePrecipitation = immediate;
             }
-            let forecasts = [];
-            for (let i = 0; i < json.daily.length; i++) {
-                let day = json.daily[i];
-                let forecast = {
+            const forecasts = [];
+            for (const day of json.daily) {
+                const forecast = {
                     date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
                     temp_min: day.temp.min,
                     temp_max: day.temp.max,
@@ -12011,10 +10687,9 @@ class OpenWeatherMap {
                 forecasts.push(forecast);
             }
             weather.forecasts = forecasts;
-            let hourly = [];
-            for (let index = 0; index < json.hourly.length; index++) {
-                const hour = json.hourly[index];
-                let forecast = {
+            const hourly = [];
+            for (const hour of json.hourly) {
+                const forecast = {
                     date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
                     temp: hour.temp,
                     condition: {
@@ -12028,11 +10703,10 @@ class OpenWeatherMap {
                     forecast.precipitation = {
                         chance: hour.pop * 100,
                         type: "none",
-                        volume: undefined
                     };
                 }
                 if (!!hour.rain && forecast.precipitation != null) {
-                    forecast.precipitation.volume = hour.rain["1h"];
+                    forecast.precipitation.volume = hour === null || hour === void 0 ? void 0 : hour.rain["1h"];
                     forecast.precipitation.type = "rain";
                 }
                 if (!!hour.snow && forecast.precipitation != null) {
@@ -12045,7 +10719,8 @@ class OpenWeatherMap {
             return weather;
         }
         catch (e) {
-            logger_Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
+            if (e instanceof Error)
+                logger_Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
             this.app.ShowError({
                 type: "soft",
                 service: "openweathermap",
@@ -12056,15 +10731,17 @@ class OpenWeatherMap {
         }
     }
     ;
-    ConstructQuery(baseUrl, loc) {
-        let query = baseUrl;
-        query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
-        query += "1c73f8259a86c6fd43c7163b543c8640";
-        let locale = this.ConvertToAPILocale(this.app.config.currentLocale);
+    ConstructParams(loc) {
+        const params = {
+            lat: loc.lat,
+            lon: loc.lon,
+            appid: "1c73f8259a86c6fd43c7163b543c8640"
+        };
+        const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (this.app.config._translateCondition && IsLangSupported(locale, this.supportedLanguages)) {
-            query = query + "&lang=" + locale;
+            params.lang = locale;
         }
-        return query;
+        return params;
     }
     ;
     ConvertToAPILocale(systemLocale) {
@@ -12073,7 +10750,7 @@ class OpenWeatherMap {
         if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
             return systemLocale;
         }
-        let lang = systemLocale.split("-")[0];
+        const lang = systemLocale.split("-")[0];
         if (lang == "sv") {
             return "se";
         }
@@ -12094,12 +10771,12 @@ class OpenWeatherMap {
     HadErrors(json) {
         if (!this.HasReturnedError(json))
             return false;
-        let errorMsg = "OpenWeatherMap Response: ";
-        let error = {
+        const errorMsg = "OpenWeatherMap Response: ";
+        const error = {
             service: "openweathermap",
             type: "hard",
         };
-        let errorPayload = json;
+        const errorPayload = json;
         switch (errorPayload.cod) {
             case ("400"):
                 error.detail = "bad location format";
@@ -12280,988 +10957,29 @@ const openWeatherMapConditionLibrary = [
     _("Overcast clouds")
 ];
 
-;// CONCATENATED MODULE: ./src/3_8/providers/us_weather.ts
-
-
-
-
-class USWeather {
-    constructor(_app) {
-        this.prettyName = _("US Weather");
-        this.name = "US Weather";
-        this.maxForecastSupport = 7;
-        this.website = "https://www.weather.gov/";
-        this.maxHourlyForecastSupport = 156;
-        this.needsApiKey = false;
-        this.sitesUrl = "https://api.weather.gov/points/";
-        this.MAX_STATION_DIST = 50000;
-        this.observationStations = [];
-        this.OnObtainingGridData = (message) => {
-            var _a, _b, _c, _d;
-            if (message.code == 404 && ((_b = (_a = message === null || message === void 0 ? void 0 : message.response) === null || _a === void 0 ? void 0 : _a.response_body) === null || _b === void 0 ? void 0 : _b.data) != null) {
-                let data = JSON.parse((_d = (_c = message === null || message === void 0 ? void 0 : message.response) === null || _c === void 0 ? void 0 : _c.response_body) === null || _d === void 0 ? void 0 : _d.data);
-                if (data.title == "Data Unavailable For Requested Point") {
-                    this.app.ShowError({
-                        type: "hard",
-                        userError: true,
-                        detail: "location not covered",
-                        service: "us-weather",
-                        message: _("Location is outside US, please use a different provider.")
-                    });
-                }
-                return false;
-            }
-            return true;
-        };
-        this.ParseForecast = (json) => {
-            let forecasts = [];
-            try {
-                let startIndex = (this.CheckIfHasThreeElementsForDay(json) ? 1 : 0);
-                startIndex = this.FindTodayIndex(json, startIndex);
-                if (startIndex == -1)
-                    return null;
-                if (json.properties.periods[startIndex].isDaytime == false) {
-                    startIndex++;
-                    let today = json.properties.periods[0];
-                    let forecast = {
-                        date: DateTime.fromISO(today.startTime).setZone(this.observationStations[0].properties.timeZone),
-                        temp_min: FahrenheitToKelvin(today.temperature),
-                        temp_max: FahrenheitToKelvin(today.temperature),
-                        condition: this.ResolveCondition(today.icon),
-                    };
-                    forecasts.push(forecast);
-                }
-                for (let i = startIndex; i < json.properties.periods.length; i += 2) {
-                    let day = json.properties.periods[i];
-                    let night = json.properties.periods[i + 1];
-                    if (!night)
-                        night = day;
-                    let forecast = {
-                        date: DateTime.fromISO(day.startTime).setZone(this.observationStations[0].properties.timeZone),
-                        temp_min: FahrenheitToKelvin(night.temperature),
-                        temp_max: FahrenheitToKelvin(day.temperature),
-                        condition: this.ResolveCondition(day.icon),
-                    };
-                    forecasts.push(forecast);
-                }
-                return forecasts;
-            }
-            catch (e) {
-                logger_Logger.Error("US Weather Forecast Parsing error: " + e, e);
-                this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
-                return null;
-            }
-        };
-        this.ParseHourlyForecast = (json) => {
-            let forecasts = [];
-            try {
-                for (let i = 0; i < json.properties.periods.length; i++) {
-                    let hour = json.properties.periods[i];
-                    let timestamp = DateTime.fromISO(hour.startTime).setZone(this.observationStations[0].properties.timeZone);
-                    let forecast = {
-                        date: timestamp,
-                        temp: CelsiusToKelvin(hour.temperature),
-                        condition: this.ResolveCondition(hour.icon, !hour.isDaytime),
-                        precipitation: undefined
-                    };
-                    forecasts.push(forecast);
-                }
-                return forecasts;
-            }
-            catch (e) {
-                logger_Logger.Error("US Weather service Forecast Parsing error: " + e, e);
-                this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") });
-                return null;
-            }
-        };
-        this.app = _app;
-    }
-    async GetWeather(loc) {
-        var _a, _b;
-        let locID = loc.lat.toString() + "," + loc.lon.toString();
-        if (!this.grid || !this.observationStations || this.currentLocID != locID) {
-            logger_Logger.Info("Downloading new site data");
-            this.currentLoc = loc;
-            this.currentLocID = locID;
-            let grid = await this.GetGridData(loc);
-            if (grid == null)
-                return null;
-            logger_Logger.Debug("Grid found: " + JSON.stringify(grid, null, 2));
-            let observationStations = await this.GetStationData(grid.properties.observationStations);
-            if (observationStations == null)
-                return null;
-            this.grid = grid;
-            this.observationStations = observationStations;
-        }
-        else {
-            logger_Logger.Debug("Site data downloading skipped");
-        }
-        let observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
-        let hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si");
-        let forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
-        let hourly = await hourlyForecastPromise;
-        let forecast = await forecastPromise;
-        if (!hourly || !forecast) {
-            logger_Logger.Error("Failed to obtain forecast Data");
-            return null;
-        }
-        let weather = this.ParseCurrent(observations, hourly, loc);
-        if (!!weather) {
-            weather.forecasts = (_a = this.ParseForecast(forecast)) !== null && _a !== void 0 ? _a : [];
-            weather.hourlyForecasts = (_b = this.ParseHourlyForecast(hourly)) !== null && _b !== void 0 ? _b : undefined;
-        }
-        return weather;
-    }
-    ;
-    async GetGridData(loc) {
-        let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), {}, this.OnObtainingGridData);
-        return siteData;
-    }
-    async GetStationData(stationListUrl) {
-        let stations = await this.app.LoadJsonAsync(stationListUrl);
-        return stations === null || stations === void 0 ? void 0 : stations.features;
-    }
-    async GetObservationsInRange(range, loc, stations) {
-        let observations = [];
-        for (let index = 0; index < stations.length; index++) {
-            const element = stations[index];
-            element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
-            if (element.dist > range)
-                break;
-            let observation = await this.app.LoadJsonAsync(stations[index].id + "/observations/latest", {}, (msg) => false);
-            if (observation == null) {
-                logger_Logger.Debug("Failed to get observations from " + stations[index].id);
-            }
-            else {
-                observations.push(observation);
-            }
-        }
-        return observations;
-    }
-    MeshObservationData(observations) {
-        if (observations.length < 1)
-            return null;
-        let result = observations[0];
-        if (observations.length == 1)
-            return result;
-        for (let index = 1; index < observations.length; index++) {
-            const element = observations[index];
-            let debugText = " Observation data missing, plugged in from ID " +
-                element.id + ", index " + index +
-                ", distance "
-                + Math.round(GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], this.currentLoc.lat, this.currentLoc.lon))
-                + " metres";
-            if (result.properties.icon == null) {
-                result.properties.icon = element.properties.icon;
-                result.properties.textDescription = element.properties.textDescription;
-                logger_Logger.Debug("Weather condition" + debugText);
-            }
-            if (result.properties.temperature.value == null) {
-                result.properties.temperature.value = element.properties.temperature.value;
-                logger_Logger.Debug("Temperature" + debugText);
-            }
-            if (result.properties.windSpeed.value == null) {
-                result.properties.windSpeed.value = element.properties.windSpeed.value;
-                logger_Logger.Debug("Wind Speed" + debugText);
-            }
-            if (result.properties.windDirection.value == null) {
-                result.properties.windDirection.value = element.properties.windDirection.value;
-                logger_Logger.Debug("Wind degree" + debugText);
-            }
-            if (result.properties.barometricPressure.value == null) {
-                result.properties.barometricPressure.value = element.properties.barometricPressure.value;
-                logger_Logger.Debug("Pressure" + debugText);
-            }
-            if (result.properties.relativeHumidity.value == null) {
-                result.properties.relativeHumidity.value = element.properties.relativeHumidity.value;
-                logger_Logger.Debug("Humidity" + debugText);
-            }
-            if (result.properties.windChill.value == null) {
-                result.properties.windChill.value = element.properties.windChill.value;
-                logger_Logger.Debug("WindChill" + debugText);
-            }
-            if (result.properties.visibility.value == null) {
-                result.properties.visibility.value = element.properties.visibility.value;
-                logger_Logger.Debug("Visibility" + debugText);
-            }
-        }
-        return result;
-    }
-    ParseCurrent(json, hourly, loc) {
-        var _a, _b;
-        let observation = this.MeshObservationData(json);
-        if (observation == null || !this.observationStations[0]) {
-            logger_Logger.Error("No observation stations/data are available");
-            return null;
-        }
-        let timestamp = DateTime.fromISO(observation.properties.timestamp, { zone: this.observationStations[0].properties.timeZone });
-        let times = (0,suncalc.getTimes)(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
-        let suntimes = {
-            sunrise: DateTime.fromJSDate(times.sunrise, { zone: this.observationStations[0].properties.timeZone }),
-            sunset: DateTime.fromJSDate(times.sunset, { zone: this.observationStations[0].properties.timeZone })
-        };
-        try {
-            let weather = {
-                coord: {
-                    lat: (_a = observation === null || observation === void 0 ? void 0 : observation.geometry) === null || _a === void 0 ? void 0 : _a.coordinates[1],
-                    lon: (_b = observation === null || observation === void 0 ? void 0 : observation.geometry) === null || _b === void 0 ? void 0 : _b.coordinates[0]
-                },
-                location: {
-                    city: undefined,
-                    country: undefined,
-                    url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
-                    timeZone: this.observationStations[0].properties.timeZone,
-                    distanceFrom: this.observationStations[0].dist
-                },
-                date: timestamp,
-                sunrise: suntimes.sunrise,
-                sunset: suntimes.sunset,
-                wind: {
-                    speed: KPHtoMPS(observation.properties.windSpeed.value),
-                    degree: observation.properties.windDirection.value
-                },
-                temperature: CelsiusToKelvin(observation.properties.temperature.value),
-                pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100,
-                humidity: observation.properties.relativeHumidity.value,
-                condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
-                forecasts: []
-            };
-            if (observation.properties.windChill.value != null) {
-                weather.extra_field = {
-                    name: _("Feels Like"),
-                    value: CelsiusToKelvin(observation.properties.windChill.value),
-                    type: "temperature"
-                };
-            }
-            if (weather.condition == null && hourly != null) {
-                weather.condition = this.ResolveCondition(hourly.properties.periods[0].icon);
-            }
-            return weather;
-        }
-        catch (e) {
-            logger_Logger.Error("US Weather Parsing error: " + e, e);
-            this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
-            return null;
-        }
-    }
-    ;
-    CheckIfHasThreeElementsForDay(json) {
-        var _a, _b, _c;
-        if (((_b = (_a = json === null || json === void 0 ? void 0 : json.properties) === null || _a === void 0 ? void 0 : _a.periods) === null || _b === void 0 ? void 0 : _b.length) < 3 || ((_c = this.observationStations[0]) === null || _c === void 0 ? void 0 : _c.properties))
-            return false;
-        let counter = 0;
-        for (let index = 1; index < 3; index++) {
-            const element = json.properties.periods[index];
-            const prevElement = json.properties.periods[index - 1];
-            let prevDate = DateTime.fromISO(prevElement.startTime).setZone(this.observationStations[0].properties.timeZone);
-            let curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
-            if (OnSameDay(prevDate, curDate))
-                counter++;
-            else
-                counter = 0;
-            if (counter > 1) {
-                global.log("3 elements");
-                return true;
-            }
-        }
-        return false;
-    }
-    FindTodayIndex(json, startIndex = 0) {
-        var _a;
-        if (!this.observationStations[0] || !((_a = json === null || json === void 0 ? void 0 : json.properties) === null || _a === void 0 ? void 0 : _a.periods)) {
-            return -1;
-        }
-        let today = DateTime.utc().setZone(this.observationStations[0].properties.timeZone);
-        for (let index = startIndex; index < json.properties.periods.length; index++) {
-            const element = json.properties.periods[index];
-            let curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
-            if (!OnSameDay(today, curDate))
-                continue;
-            global.log(index);
-            return index;
-        }
-        return -1;
-    }
-    ResolveCondition(icon, isNight = false) {
-        if (icon == null)
-            return {
-                main: _("Unknown"),
-                description: _("Unknown"),
-                customIcon: "cloud-refresh-symbolic",
-                icons: ["weather-severe-alert"]
-            };
-        let code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/);
-        switch (code === null || code === void 0 ? void 0 : code[0]) {
-            case "skc":
-                return {
-                    main: _("Clear"),
-                    description: _("Clear"),
-                    customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
-                    icons: (isNight) ? ["weather-clear-night", "weather-severe-alert"] : ["weather-clear", "weather-severe-alert"]
-                };
-            case "few":
-                return {
-                    main: _("Few clouds"),
-                    description: _("Few clouds"),
-                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icons: ["weather-clear-night", "weather-severe-alert"]
-                };
-            case "sct":
-                return {
-                    main: _("Partly cloudy"),
-                    description: _("Partly cloudy"),
-                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icons: ["weather-clear", "weather-severe-alert"]
-                };
-            case "bkn":
-                return {
-                    main: _("Mostly cloudy"),
-                    description: _("Mostly cloudy"),
-                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icons: ["weather-clouds-night", "weather-overcast", "weather-severe-alert"]
-                };
-            case "ovc":
-                return {
-                    main: _("Overcast"),
-                    description: _("Overcast"),
-                    customIcon: "cloudy-symbolic",
-                    icons: ["weather-clouds", "weather-overcast", "weather-severe-alert"]
-                };
-            case "wind_skc":
-                return {
-                    main: _("Clear"),
-                    description: _("Clear and windy"),
-                    customIcon: (IsNight) ? "night-alt-wind-symbolic" : "day-windy-symbolic",
-                    icons: (isNight) ? ["weather-clear-night"] : ["weather-clear"]
-                };
-            case "wind_few":
-                return {
-                    main: _("Few clouds"),
-                    description: _("Few clouds and windy"),
-                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
-                    icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
-                };
-            case "wind_sct":
-                return {
-                    main: _("Partly cloudy"),
-                    description: _("Partly cloudy and windy"),
-                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
-                    icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
-                };
-            case "wind_bkn":
-                return {
-                    main: _("Mostly cloudy"),
-                    description: _("Mostly cloudy and windy"),
-                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
-                    icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
-                };
-            case "wind_ovc":
-                return {
-                    main: _("Overcast"),
-                    description: _("Overcast and windy"),
-                    customIcon: "cloudy-symbolic",
-                    icons: ["weather-overcast", "weather-many-clouds", "weather-severe-alert"]
-                };
-            case "snow":
-                return {
-                    main: _("Snow"),
-                    description: _("Snow"),
-                    customIcon: "snow-symbolic",
-                    icons: ["weather-snow", "weather-severe-alert"]
-                };
-            case "rain_snow":
-                return {
-                    main: _("Rain"),
-                    description: _("Snowy rain"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-snow-rain", "weather-snow", "weather-severe-alert"]
-                };
-            case "rain_sleet":
-                return {
-                    main: _("Sleet"),
-                    description: _("Sleet"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-freezing-rain", "weather-severe-alert"]
-                };
-            case "snow_sleet":
-                return {
-                    main: _("Sleet"),
-                    description: _("Sleet"),
-                    customIcon: "sleet-symbolic",
-                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
-                };
-            case "fzra":
-                return {
-                    main: _("Freezing rain"),
-                    description: _("Freezing rain"),
-                    customIcon: "rain-wind-symbolic",
-                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
-                };
-            case "rain_fzra":
-                return {
-                    main: _("Freezing rain"),
-                    description: _("Freezing rain"),
-                    customIcon: "rain-wind-symbolic",
-                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
-                };
-            case "snow_fzra":
-                return {
-                    main: _("Freezing rain"),
-                    description: _("Freezing rain and snow"),
-                    customIcon: "rain-wind-symbolic",
-                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
-                };
-            case "sleet":
-                return {
-                    main: _("Sleet"),
-                    description: _("Sleet"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-freezing-rain", "weather-rain", "weather-severe-alert"]
-                };
-            case "rain":
-                return {
-                    main: _("Rain"),
-                    description: _("Rain"),
-                    customIcon: "rain-symbolic",
-                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
-                };
-            case "rain_showers":
-            case "rain_showers_hi":
-                return {
-                    main: _("Rain"),
-                    description: _("Rain showers"),
-                    customIcon: "rain-mix-symbolic",
-                    icons: ["weather-showers", "weather-showers-scattered", "weather-rain", "weather-freezing-rain", "weather-severe-alert"]
-                };
-            case "tsra":
-            case "tsra_sct":
-            case "tsra_hi":
-                return {
-                    main: _("Thunderstorm"),
-                    description: _("Thunderstorm"),
-                    customIcon: "thunderstorm-symbolic",
-                    icons: ["weather-storm", "weather-severe-alert"]
-                };
-            case "tornado":
-                return {
-                    main: _("Tornado"),
-                    description: _("Tornado"),
-                    customIcon: "tornado-symbolic",
-                    icons: ["weather-severe-alert"]
-                };
-            case "hurricane":
-                return {
-                    main: _("Hurricane"),
-                    description: _("Hurricane"),
-                    customIcon: "hurricane-symbolic",
-                    icons: ["weather-severe-alert"]
-                };
-            case "tropical_storm":
-                return {
-                    main: _("Storm"),
-                    description: _("Tropical storm"),
-                    customIcon: "thunderstorm-symbolic",
-                    icons: ["weather-storm", "weather-severe-alert"]
-                };
-            case "dust":
-                return {
-                    main: _("Dust"),
-                    description: _("Dust"),
-                    customIcon: "dust-symbolic",
-                    icons: ["weather-fog", "weather-severe-alert"]
-                };
-            case "smoke":
-                return {
-                    main: _("Smoke"),
-                    description: _("Smoke"),
-                    customIcon: "smoke-symbolic",
-                    icons: ["weather-fog", "weather-severe-alert"]
-                };
-            case "haze":
-                return {
-                    main: _("Haze"),
-                    description: _("Haze"),
-                    customIcon: "fog-symbolic",
-                    icons: ["weather-fog", "weather-severe-alert"]
-                };
-            case "hot":
-                return {
-                    main: _("Hot"),
-                    description: _("Hot"),
-                    customIcon: "hot-symbolic",
-                    icons: ["weather-severe-alert"]
-                };
-            case "cold":
-                return {
-                    main: _("Cold"),
-                    description: _("Cold"),
-                    customIcon: "snowflake-cold-symbolic",
-                    icons: ["weather-storm", "weather-severe-alert"]
-                };
-            case "blizzard":
-                return {
-                    main: _("Blizzard"),
-                    description: _("Blizzard"),
-                    customIcon: "thunderstorm-symbolic",
-                    icons: ["weather-storm", "weather-severe-alert"]
-                };
-            case "fog":
-                return {
-                    main: _("Fog"),
-                    description: _("Fog"),
-                    customIcon: "fog-symbolic",
-                    icons: ["weather-fog", "weather-severe-alert"]
-                };
-            default:
-                return {
-                    main: _("Unknown"),
-                    description: _("Unknown"),
-                    customIcon: "cloud-refresh-symbolic",
-                    icons: ["weather-severe-alert"]
-                };
-        }
-    }
-    ;
-}
-;
-
-;// CONCATENATED MODULE: ./src/3_8/providers/weatherbit.ts
-
-
-
-class Weatherbit {
-    constructor(_app) {
-        this.prettyName = _("WeatherBit");
-        this.name = "Weatherbit";
-        this.maxForecastSupport = 16;
-        this.website = "https://www.weatherbit.io/";
-        this.maxHourlyForecastSupport = 48;
-        this.needsApiKey = true;
-        this.supportedLanguages = [
-            'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
-            'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',
-            'kw', 'lv', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr',
-            'sv', 'tr', 'uk', 'zh', 'zh-tw'
-        ];
-        this.current_url = "https://api.weatherbit.io/v2.0/current?";
-        this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
-        this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
-        this.hourlyAccess = true;
-        this.ParseCurrent = (json) => {
-            json = json.data[0];
-            let hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
-            if (hourDiff != 0)
-                logger_Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
-            try {
-                let weather = {
-                    coord: {
-                        lat: json.lat,
-                        lon: json.lon
-                    },
-                    location: {
-                        city: json.city_name,
-                        country: json.country_code,
-                        url: undefined,
-                        timeZone: json.timezone
-                    },
-                    date: DateTime.fromSeconds(json.ts, { zone: json.timezone }),
-                    sunrise: this.TimeToDate(json.sunrise, hourDiff, json.timezone),
-                    sunset: this.TimeToDate(json.sunset, hourDiff, json.timezone),
-                    wind: {
-                        speed: json.wind_spd,
-                        degree: json.wind_dir
-                    },
-                    temperature: json.temp,
-                    pressure: json.pres,
-                    humidity: json.rh,
-                    condition: {
-                        main: json.weather.description,
-                        description: json.weather.description,
-                        icons: this.ResolveIcon(json.weather.icon),
-                        customIcon: this.ResolveCustomIcon(json.weather.icon)
-                    },
-                    extra_field: {
-                        name: _("Feels Like"),
-                        value: json.app_temp,
-                        type: "temperature"
-                    },
-                    forecasts: []
-                };
-                return weather;
-            }
-            catch (e) {
-                logger_Logger.Error("Weatherbit Weather Parsing error: " + e, e);
-                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
-                return null;
-            }
-        };
-        this.ParseForecast = (json) => {
-            let forecasts = [];
-            try {
-                for (let i = 0; i < json.data.length; i++) {
-                    let day = json.data[i];
-                    let forecast = {
-                        date: DateTime.fromSeconds(day.ts, { zone: json.timezone }),
-                        temp_min: day.min_temp,
-                        temp_max: day.max_temp,
-                        condition: {
-                            main: day.weather.description,
-                            description: day.weather.description,
-                            icons: this.ResolveIcon(day.weather.icon),
-                            customIcon: this.ResolveCustomIcon(day.weather.icon)
-                        },
-                    };
-                    forecasts.push(forecast);
-                }
-                return forecasts;
-            }
-            catch (e) {
-                logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
-                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
-                return null;
-            }
-        };
-        this.ParseHourlyForecast = (json) => {
-            let forecasts = [];
-            try {
-                for (let i = 0; i < json.data.length; i++) {
-                    let hour = json.data[i];
-                    let forecast = {
-                        date: DateTime.fromSeconds(hour.ts, { zone: json.timezone }),
-                        temp: hour.temp,
-                        condition: {
-                            main: hour.weather.description,
-                            description: hour.weather.description,
-                            icons: this.ResolveIcon(hour.weather.icon),
-                            customIcon: this.ResolveCustomIcon(hour.weather.icon)
-                        },
-                        precipitation: {
-                            type: "rain",
-                            volume: hour.precip,
-                            chance: hour.pop
-                        }
-                    };
-                    if (!!forecast.precipitation && hour.snow != 0) {
-                        forecast.precipitation.type = "snow";
-                        forecast.precipitation.volume = hour.snow;
-                    }
-                    forecasts.push(forecast);
-                }
-                return forecasts;
-            }
-            catch (e) {
-                logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
-                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
-                return null;
-            }
-        };
-        this.app = _app;
-    }
-    async GetWeather(loc) {
-        let forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
-        let hourlyPromise = null;
-        if (!!this.hourlyAccess)
-            hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
-        let currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent);
-        if (!currentResult)
-            return null;
-        let forecastResult = await forecastPromise;
-        currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
-        let hourlyResult = await hourlyPromise;
-        currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
-        return currentResult;
-    }
-    ;
-    async GetData(baseUrl, loc, ParseFunction) {
-        let query = this.ConstructQuery(baseUrl, loc);
-        if (query == null)
-            return null;
-        let json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleError(e));
-        if (json == null)
-            return null;
-        return ParseFunction(json);
-    }
-    async GetHourlyData(baseUrl, loc) {
-        let query = this.ConstructQuery(baseUrl, loc);
-        if (query == null)
-            return null;
-        let json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleHourlyError(e));
-        if (!!(json === null || json === void 0 ? void 0 : json.error)) {
-            return null;
-        }
-        if (json == null)
-            return null;
-        return this.ParseHourlyForecast(json);
-    }
-    ;
-    TimeToDate(time, hourDiff, tz) {
-        let hoursMinutes = time.split(":");
-        let date = DateTime.utc().set({
-            hour: parseInt(hoursMinutes[0]) - hourDiff,
-            minute: parseInt(hoursMinutes[1]),
-        }).setZone(tz);
-        return date;
-    }
-    HourDifference(correctTime, incorrectTime) {
-        if (incorrectTime == null)
-            return 0;
-        return Math.round((incorrectTime.hour - correctTime.hour) / (1000 * 60 * 60));
-    }
-    ParseStringTime(last_ob_time, tz) {
-        let split = last_ob_time.split(/[T\-\s:]/);
-        if (split.length != 5)
-            return null;
-        return DateTime.fromObject({
-            year: parseInt(split[0]),
-            month: parseInt(split[1]) - 1,
-            day: parseInt(split[2]),
-            hour: parseInt(split[3]),
-            minute: parseInt(split[4])
-        }).setZone(tz);
-    }
-    ConvertToAPILocale(systemLocale) {
-        if (!systemLocale)
-            return null;
-        if (systemLocale == "zh-tw") {
-            return systemLocale;
-        }
-        let lang = systemLocale.split("-")[0];
-        if (lang == "cs") {
-            return "cz";
-        }
-        return lang;
-    }
-    ConstructQuery(query, loc) {
-        query = query + "key=" + this.app.config.ApiKey + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
-        let lang = this.ConvertToAPILocale(this.app.config.currentLocale);
-        if (IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
-            query = query + "&lang=" + lang;
-        }
-        return query;
-    }
-    ;
-    HandleError(message) {
-        if (message.code == 403) {
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                detail: "bad key",
-                service: "weatherbit",
-                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
-            });
-        }
-        return true;
-    }
-    HandleHourlyError(message) {
-        if (message.code == 403) {
-            this.hourlyAccess = false;
-            logger_Logger.Info("Hourly forecast is inaccessible, skipping");
-            return false;
-        }
-        return true;
-    }
-    ResolveIcon(icon) {
-        switch (icon) {
-            case "t01n":
-            case "t01d":
-            case "t02n":
-            case "t02d":
-            case "t03n":
-            case "t03d":
-            case "t04n":
-            case "t04d":
-            case "t05n":
-            case "t05d":
-                return ["weather-storm"];
-            case "d01d":
-            case "d01n":
-            case "d02d":
-            case "d02n":
-            case "d03d":
-            case "d03n":
-                return ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"];
-            case "r01d":
-            case "r01n":
-            case "r02d":
-            case "r02n":
-            case "r03d":
-            case "r03n":
-            case "r04d":
-            case "r04n":
-            case "r05d":
-            case "r05n":
-            case "r06d":
-            case "r06n":
-                return ["weather-rain", "weather-freezing-rain", "weather-showers-scattered"];
-            case "s01d":
-            case "s01n":
-            case "s02d":
-            case "s02n":
-            case "s03d":
-            case "s03n":
-            case "s04d":
-            case "s04n":
-            case "s06d":
-            case "s06n":
-                return ["weather-snow"];
-            case "s05d":
-            case "s05n":
-                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
-            case "a01d":
-            case "a01n":
-            case "a02d":
-            case "a02n":
-            case "a03d":
-            case "a03n":
-            case "a04d":
-            case "a04n":
-            case "a05d":
-            case "a05n":
-            case "a06d":
-            case "a06n":
-                return ["weather-fog"];
-            case "c02d":
-                return ["weather-few-clouds"];
-            case "c02n":
-                return ["weather-few-clouds-night"];
-            case "c01n":
-                return ["weather-clear-night"];
-            case "c01d":
-                return ["weather-clear"];
-            case "c03d":
-                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
-            case "c03n":
-                return ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"];
-            case "c04n":
-                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
-            case "c04d":
-                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
-            case "u00d":
-            case "u00n":
-                return ["weather-severe-alert"];
-            default:
-                return ["weather-severe-alert"];
-        }
-    }
-    ;
-    ResolveCustomIcon(icon) {
-        switch (icon) {
-            case "t01d":
-            case "t02d":
-            case "t03d":
-                return "day-thunderstorm-symbolic";
-            case "t04d":
-            case "t05d":
-                return "thunderstorm-symbolic";
-            case "t01n":
-            case "t02n":
-            case "t03n":
-                return "night-alt-thunderstorm-symbolic";
-            case "t04n":
-            case "t05n":
-                return "thunderstorm-symbolic";
-            case "d01d":
-            case "d02d":
-            case "d03d":
-            case "d01n":
-            case "d02n":
-            case "d03n":
-                return "showers-symbolic";
-            case "r01d":
-            case "r02d":
-            case "r03d":
-            case "r01n":
-            case "r02n":
-            case "r03n":
-                return "rain-symbolic";
-            case "r04d":
-            case "r05d":
-                return "day-rain-symbolic";
-            case "r06d":
-                return "rain-symbolic";
-            case "r04n":
-            case "r05n":
-                return "night-alt-rain-symbolic";
-            case "r06n":
-                return "rain-symbolic";
-            case "s01d":
-            case "s04d":
-                return "day-snow-symbolic";
-            case "s02d":
-            case "s03d":
-            case "s06d":
-                return "snow-symbolic";
-            case "s01n":
-            case "s04n":
-                return "night-alt-snow-symbolic";
-            case "s02n":
-            case "s03n":
-            case "s06n":
-                return "snow-symbolic";
-            case "s05d":
-            case "s05n":
-                return "sleet-symbolic";
-            case "a01d":
-            case "a02d":
-            case "a03d":
-            case "a04d":
-            case "a05d":
-            case "a06d":
-                return "day-fog-symbolic";
-            case "a01n":
-            case "a02n":
-            case "a03n":
-            case "a04n":
-            case "a05n":
-            case "a06n":
-                return "night-fog-symbolic";
-            case "c02d":
-                return "day-cloudy-symbolic";
-            case "c02n":
-                return "night-alt-cloudy-symbolic";
-            case "c01n":
-                return "night-clear-symbolic";
-            case "c01d":
-                return "day-sunny-symbolic";
-            case "c03d":
-                return "day-cloudy-symbolic";
-            case "c03n":
-                return "night-alt-cloudy-symbolic";
-            case "c04n":
-                return "cloudy-symbolic";
-            case "c04d":
-                return "cloudy-symbolic";
-            case "u00d":
-            case "u00n":
-                return "cloud-refresh-symbolic";
-            default:
-                return "cloud-refresh-symbolic";
-        }
-    }
-}
-;
-
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_norway.ts
 
 
 
 
-class MetNorway {
+
+class MetNorway extends BaseProvider {
     constructor(app) {
+        super(app);
         this.prettyName = _("MET Norway");
         this.name = "MetNorway";
         this.maxForecastSupport = 10;
         this.website = "https://www.met.no/en";
         this.maxHourlyForecastSupport = 48;
         this.needsApiKey = false;
+        this.remainingCalls = null;
         this.baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?";
-        this.app = app;
     }
     async GetWeather(loc) {
-        let query = this.GetUrl(loc);
+        const query = this.GetUrl(loc);
         if (query == null)
             return null;
-        let json = await this.app.LoadJsonAsync(query);
+        const json = await this.app.LoadJsonAsync(query);
         if (!json) {
             logger_Logger.Error("MET Norway: Empty response from API");
             return null;
@@ -13269,11 +10987,10 @@ class MetNorway {
         return this.ParseWeather(json, loc);
     }
     RemoveEarlierElements(json, loc) {
-        let now = DateTime.now().setZone(loc.timeZone);
+        const now = DateTime.now().setZone(loc.timeZone);
         let startIndex = -1;
-        for (let i = 0; i < json.properties.timeseries.length; i++) {
-            const element = json.properties.timeseries[i];
-            let timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
+        for (const [i, element] of json.properties.timeseries.entries()) {
+            const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
             if (timestamp < now && now.hour != timestamp.hour) {
                 startIndex = i;
             }
@@ -13290,13 +11007,13 @@ class MetNorway {
     ParseWeather(json, loc) {
         var _a, _b;
         json = this.RemoveEarlierElements(json, loc);
-        let times = (0,suncalc.getTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
-        let suntimes = {
+        const times = (0,suncalc.getTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
+        const suntimes = {
             sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
             sunset: DateTime.fromJSDate(times.sunset, { zone: loc.timeZone })
         };
-        let current = json.properties.timeseries[0];
-        let result = {
+        const current = json.properties.timeseries[0];
+        const result = {
             temperature: CelsiusToKelvin(current.data.instant.details.air_temperature),
             coord: {
                 lat: json.geometry.coordinates[1],
@@ -13306,6 +11023,7 @@ class MetNorway {
             condition: this.ResolveCondition((_b = (_a = current.data.next_1_hours) === null || _a === void 0 ? void 0 : _a.summary) === null || _b === void 0 ? void 0 : _b.symbol_code, IsNight(suntimes)),
             humidity: current.data.instant.details.relative_humidity,
             pressure: current.data.instant.details.air_pressure_at_sea_level,
+            dewPoint: CelsiusToKelvin(current.data.instant.details.dew_point_temperature),
             extra_field: {
                 name: _("Cloudiness"),
                 type: "percent",
@@ -13317,14 +11035,11 @@ class MetNorway {
                 degree: current.data.instant.details.wind_from_direction,
                 speed: current.data.instant.details.wind_speed
             },
-            location: {
-                url: undefined,
-            },
+            location: {},
             forecasts: []
         };
-        let hourlyForecasts = [];
-        for (let i = 0; i < json.properties.timeseries.length; i++) {
-            const element = json.properties.timeseries[i];
+        const hourlyForecasts = [];
+        for (const element of json.properties.timeseries) {
             if (!!element.data.next_1_hours) {
                 hourlyForecasts.push({
                     date: DateTime.fromISO(element.time, { zone: loc.timeZone }),
@@ -13342,10 +11057,10 @@ class MetNorway {
         return result;
     }
     BuildForecasts(forecastsData, loc) {
-        let forecasts = [];
-        let days = this.SortDataByDay(forecastsData, loc);
-        for (let i = 0; i < days.length; i++) {
-            let forecast = {
+        const forecasts = [];
+        const days = this.SortDataByDay(forecastsData, loc);
+        for (const day of days) {
+            const forecast = {
                 condition: {
                     customIcon: "cloudy-symbolic",
                     description: "",
@@ -13356,9 +11071,8 @@ class MetNorway {
                 temp_max: Number.NEGATIVE_INFINITY,
                 temp_min: Number.POSITIVE_INFINITY
             };
-            let conditionCounter = {};
-            for (let j = 0; j < days[i].length; j++) {
-                const element = days[i][j];
+            const conditionCounter = {};
+            for (const element of day) {
                 if (!element.data.next_6_hours)
                     continue;
                 forecast.date = DateTime.fromISO(element.time, { zone: loc.timeZone });
@@ -13366,8 +11080,8 @@ class MetNorway {
                     forecast.temp_max = element.data.next_6_hours.details.air_temperature_max;
                 if (element.data.next_6_hours.details.air_temperature_min < forecast.temp_min)
                     forecast.temp_min = element.data.next_6_hours.details.air_temperature_min;
-                let [symbol] = element.data.next_6_hours.summary.symbol_code.split("_");
-                let severity = conditionSeverity[symbol];
+                const [symbol] = element.data.next_6_hours.summary.symbol_code.split("_");
+                const severity = conditionSeverity[symbol];
                 if (!conditionCounter[severity])
                     conditionCounter[severity] = { count: 0, name: symbol };
                 conditionCounter[severity].count = conditionCounter[severity].count + 1;
@@ -13381,9 +11095,9 @@ class MetNorway {
     }
     GetEarliestDataForToday(events, loc) {
         let earliest = 0;
-        for (let i = 0; i < events.length; i++) {
-            const earliestElementTime = DateTime.fromISO(events[earliest].time, { zone: loc.timeZone });
-            let timestamp = DateTime.fromISO(events[i].time, { zone: loc.timeZone });
+        for (const [i, element] of events.entries()) {
+            const earliestElementTime = DateTime.fromISO(element.time, { zone: loc.timeZone });
+            const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
             if (!DateTime.utc().setZone(loc.timeZone).hasSame(timestamp, "day"))
                 continue;
             if (earliestElementTime < timestamp)
@@ -13393,12 +11107,11 @@ class MetNorway {
         return events[earliest];
     }
     SortDataByDay(data, loc) {
-        let days = [];
+        const days = [];
         let currentDay = DateTime.fromISO(this.GetEarliestDataForToday(data, loc).time, { zone: loc.timeZone });
         let dayIndex = 0;
         days.push([]);
-        for (let i = 0; i < data.length; i++) {
-            const element = data[i];
+        for (const element of data) {
             const timestamp = DateTime.fromISO(element.time, { zone: loc.timeZone });
             if (OnSameDay(timestamp, currentDay)) {
                 days[dayIndex].push(element);
@@ -13414,7 +11127,7 @@ class MetNorway {
     }
     GetMostCommonCondition(count) {
         let result = -1;
-        for (let key in count) {
+        for (const key in count) {
             if (result == -1)
                 result = parseInt(key);
             if (count[result].count < count[key].count)
@@ -13424,10 +11137,10 @@ class MetNorway {
     }
     GetMostSevereCondition(conditions) {
         let result = -1;
-        for (let key in conditions) {
-            let conditionID = parseInt(key);
-            let resultStripped = (result > 100) ? result - 100 : result;
-            let conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
+        for (const key in conditions) {
+            const conditionID = parseInt(key);
+            const resultStripped = (result > 100) ? result - 100 : result;
+            const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
             if (conditionIDStripped > resultStripped)
                 result = conditionID;
         }
@@ -13442,7 +11155,7 @@ class MetNorway {
         return url;
     }
     DeconstructCondition(icon) {
-        let condition = icon.split("_");
+        const condition = icon.split("_");
         return {
             timeOfDay: condition[1],
             condition: condition[0]
@@ -13458,7 +11171,7 @@ class MetNorway {
                 icons: ["weather-severe-alert"]
             };
         }
-        let weather = this.DeconstructCondition(icon);
+        const weather = this.DeconstructCondition(icon);
         switch (weather.condition) {
             case "clearsky":
                 return {
@@ -13802,449 +11515,463 @@ const conditionSeverity = {
     snowshowersandthunder: 21
 };
 
-;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
-
-const { Message, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
-class HttpLib {
-    constructor() {
-        this._httpSession = new SessionAsync();
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
-        this._httpSession.timeout = 10;
-        this._httpSession.idle_timeout = 10;
-        this._httpSession.add_feature(new ProxyResolverDefault());
-    }
-    static get Instance() {
-        if (this.instance == null)
-            this.instance = new HttpLib();
-        return this.instance;
-    }
-    async LoadJsonAsync(url, params, method = "GET") {
-        let response = await this.LoadAsync(url, params, method);
-        if (!response.Success)
-            return response;
-        try {
-            let payload = JSON.parse(response.Data);
-            response.Data = payload;
-        }
-        catch (e) {
-            logger_Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
-            response.Success = false;
-            response.ErrorData = {
-                code: -1,
-                message: "bad api response - non json",
-                reason_phrase: "",
-            };
-        }
-        finally {
-            return response;
-        }
-    }
-    async LoadAsync(url, params, method = "GET") {
-        var _a, _b, _c, _d, _e;
-        let message = await this.Send(url, params, method);
-        let error = undefined;
-        if (!message) {
-            error = {
-                code: 0,
-                message: "no network response",
-                reason_phrase: "no network response",
-                response: undefined
-            };
-        }
-        else if (message.status_code < 100 && message.status_code >= 0) {
-            error = {
-                code: message.status_code,
-                message: "no network response",
-                reason_phrase: message.reason_phrase,
-                response: message
-            };
-        }
-        else if (message.status_code > 300 || message.status_code < 200) {
-            error = {
-                code: message.status_code,
-                message: "bad status code",
-                reason_phrase: message.reason_phrase,
-                response: message
-            };
-        }
-        else if (!message.response_body) {
-            error = {
-                code: message.status_code,
-                message: "no response body",
-                reason_phrase: message.reason_phrase,
-                response: message
-            };
-        }
-        else if (!message.response_body.data) {
-            error = {
-                code: message.status_code,
-                message: "no response data",
-                reason_phrase: message.reason_phrase,
-                response: message
-            };
-        }
-        if ((message === null || message === void 0 ? void 0 : message.status_code) > 200 && (message === null || message === void 0 ? void 0 : message.status_code) < 300) {
-            logger_Logger.Info("Wrning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
-        }
-        logger_Logger.Debug2("API full response: " + ((_b = (_a = message === null || message === void 0 ? void 0 : message.response_body) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.toString()));
-        if (error != null)
-            logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_d = (_c = error === null || error === void 0 ? void 0 : error.response) === null || _c === void 0 ? void 0 : _c.response_body) === null || _d === void 0 ? void 0 : _d.data));
-        return {
-            Success: (error == null),
-            Data: (_e = message === null || message === void 0 ? void 0 : message.response_body) === null || _e === void 0 ? void 0 : _e.data,
-            ErrorData: error
-        };
-    }
-    async Send(url, params, method = "GET") {
-        if (params != null) {
-            let items = Object.keys(params);
-            for (let index = 0; index < items.length; index++) {
-                const item = items[index];
-                url += (index == 0) ? "?" : "&";
-                url += (item) + "=" + params[item];
-            }
-        }
-        let query = encodeURI(url);
-        logger_Logger.Debug("URL called: " + query);
-        let data = await new Promise((resolve, reject) => {
-            let message = Message.new(method, query);
-            this._httpSession.queue_message(message, (session, message) => {
-                resolve(message);
-            });
-        });
-        return data;
-    }
-}
-
-;// CONCATENATED MODULE: ./src/3_8/providers/visualcrossing.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/weatherbit.ts
 
 
-class VisualCrossing {
-    constructor(app) {
-        this.prettyName = _("Visual Crossing");
-        this.name = "Visual Crossing";
-        this.maxForecastSupport = 15;
-        this.maxHourlyForecastSupport = 336;
-        this.website = "https://weather.visualcrossing.com/";
+
+
+class Weatherbit extends BaseProvider {
+    constructor(_app) {
+        super(_app);
+        this.prettyName = _("WeatherBit");
+        this.name = "Weatherbit";
+        this.maxForecastSupport = 16;
+        this.website = "https://www.weatherbit.io/";
+        this.maxHourlyForecastSupport = 48;
         this.needsApiKey = true;
-        this.url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
-        this.params = {
-            unitGroup: "metric",
-            key: null,
-            include: "fcst,hours,current",
-            lang: "id"
-        };
-        this.supportedLangs = ["en", "de", "fr", "es"];
-        this.app = app;
-    }
-    async GetWeather(loc) {
-        if (loc == null)
-            return null;
-        this.params['key'] = this.app.config.ApiKey;
-        let translate = true;
-        if (IsLangSupported(this.app.config.Language, this.supportedLangs)) {
-            this.params['lang'] = this.app.config.Language;
-            translate = false;
-        }
-        let url = this.url + loc.lat + "," + loc.lon;
-        let json = await this.app.LoadJsonAsync(url, this.params, (e) => this.HandleHttpError(e));
-        if (!json)
-            return null;
-        return this.ParseWeather(json, translate);
-    }
-    ParseWeather(weather, translate) {
-        var _a, _b, _c, _d, _e, _f;
-        let currentHour = this.GetCurrentHour(weather.days, weather.timezone);
-        let result = {
-            date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch, { zone: weather.timezone }),
-            location: {
-                url: encodeURI("https://www.visualcrossing.com/weather-history/" + weather.latitude + "," + weather.longitude + "/"),
-                timeZone: weather.timezone,
-                tzOffset: weather.tzoffset,
-            },
-            coord: {
-                lat: weather.latitude,
-                lon: weather.longitude,
-            },
-            humidity: (_a = weather.currentConditions.humidity) !== null && _a !== void 0 ? _a : currentHour === null || currentHour === void 0 ? void 0 : currentHour.humidity,
-            pressure: (_b = weather.currentConditions.pressure) !== null && _b !== void 0 ? _b : currentHour === null || currentHour === void 0 ? void 0 : currentHour.pressure,
-            wind: {
-                degree: (_c = weather.currentConditions.winddir) !== null && _c !== void 0 ? _c : currentHour === null || currentHour === void 0 ? void 0 : currentHour.winddir,
-                speed: (_d = weather.currentConditions.windspeed) !== null && _d !== void 0 ? _d : currentHour === null || currentHour === void 0 ? void 0 : currentHour.windspeed,
-            },
-            temperature: CelsiusToKelvin((_e = weather.currentConditions.temp) !== null && _e !== void 0 ? _e : currentHour === null || currentHour === void 0 ? void 0 : currentHour.temp),
-            sunrise: DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, { zone: weather.timezone }),
-            sunset: DateTime.fromSeconds(weather.currentConditions.sunsetEpoch, { zone: weather.timezone }),
-            condition: this.GenerateCondition(weather.currentConditions.icon, weather.currentConditions.conditions, translate),
-            extra_field: {
-                name: _("Feels Like"),
-                type: "temperature",
-                value: CelsiusToKelvin((_f = currentHour === null || currentHour === void 0 ? void 0 : currentHour.feelslike) !== null && _f !== void 0 ? _f : weather.currentConditions.feelslike)
-            },
-            forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
-            hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
-        };
-        return result;
-    }
-    ParseForecasts(forecasts, translate, tz) {
-        let result = [];
-        if (!!forecasts) {
-            for (let index = 0; index < forecasts.length; index++) {
-                const element = forecasts[index];
-                result.push({
-                    date: DateTime.fromSeconds(element.datetimeEpoch, { zone: tz }),
-                    condition: this.GenerateCondition(element.icon, element.conditions, translate),
-                    temp_max: CelsiusToKelvin(element.tempmax),
-                    temp_min: CelsiusToKelvin(element.tempmin)
-                });
+        this.supportedLanguages = [
+            'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
+            'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',
+            'kw', 'lv', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr',
+            'sv', 'tr', 'uk', 'zh', 'zh-tw'
+        ];
+        this.current_url = "https://api.weatherbit.io/v2.0/current?";
+        this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
+        this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
+        this.hourlyAccess = true;
+        this.ParseCurrent = (json) => {
+            json = json.data[0];
+            const hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
+            if (hourDiff != 0)
+                logger_Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
+            try {
+                const weather = {
+                    coord: {
+                        lat: json.lat,
+                        lon: json.lon
+                    },
+                    location: {
+                        city: json.city_name,
+                        country: json.country_code,
+                        timeZone: json.timezone
+                    },
+                    date: DateTime.fromSeconds(json.ts, { zone: json.timezone }),
+                    sunrise: this.TimeToDate(json.sunrise, hourDiff, json.timezone),
+                    sunset: this.TimeToDate(json.sunset, hourDiff, json.timezone),
+                    wind: {
+                        speed: json.wind_spd,
+                        degree: json.wind_dir
+                    },
+                    temperature: json.temp,
+                    pressure: json.pres,
+                    humidity: json.rh,
+                    dewPoint: json.dewpt,
+                    condition: {
+                        main: json.weather.description,
+                        description: json.weather.description,
+                        icons: this.ResolveIcon(json.weather.icon),
+                        customIcon: this.ResolveCustomIcon(json.weather.icon)
+                    },
+                    extra_field: {
+                        name: _("Feels Like"),
+                        value: json.app_temp,
+                        type: "temperature"
+                    },
+                    forecasts: []
+                };
+                return weather;
             }
-        }
-        return result;
-    }
-    ParseHourlyForecasts(forecasts, translate, tz) {
-        let currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
-        let result = [];
-        if (!!forecasts) {
-            for (let index = 0; index < forecasts.length; index++) {
-                const element = forecasts[index];
-                if (!element.hours)
-                    continue;
-                for (let index = 0; index < element.hours.length; index++) {
-                    const hour = element.hours[index];
-                    let time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
-                    if (time < currentHour)
-                        continue;
-                    let item = {
-                        date: time,
-                        temp: CelsiusToKelvin(hour.temp),
-                        condition: this.GenerateCondition(hour.icon, hour.conditions, translate)
+            catch (e) {
+                if (e instanceof Error)
+                    logger_Logger.Error("Weatherbit Weather Parsing error: " + e, e);
+                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
+                return null;
+            }
+        };
+        this.ParseForecast = (json) => {
+            const forecasts = [];
+            try {
+                for (const day of json.data) {
+                    const forecast = {
+                        date: DateTime.fromSeconds(day.ts, { zone: json.timezone }),
+                        temp_min: day.min_temp,
+                        temp_max: day.max_temp,
+                        condition: {
+                            main: day.weather.description,
+                            description: day.weather.description,
+                            icons: this.ResolveIcon(day.weather.icon),
+                            customIcon: this.ResolveCustomIcon(day.weather.icon)
+                        },
                     };
-                    if (hour.preciptype != null) {
-                        item.precipitation = {
-                            type: hour.preciptype[0],
-                            chance: hour.precipprob,
-                            volume: hour.precip
-                        };
-                    }
-                    result.push(item);
+                    forecasts.push(forecast);
                 }
+                return forecasts;
             }
-        }
-        return result;
+            catch (e) {
+                if (e instanceof Error)
+                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
+                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+                return null;
+            }
+        };
+        this.ParseHourlyForecast = (json) => {
+            const forecasts = [];
+            try {
+                for (const hour of json.data.length) {
+                    const forecast = {
+                        date: DateTime.fromSeconds(hour.ts, { zone: json.timezone }),
+                        temp: hour.temp,
+                        condition: {
+                            main: hour.weather.description,
+                            description: hour.weather.description,
+                            icons: this.ResolveIcon(hour.weather.icon),
+                            customIcon: this.ResolveCustomIcon(hour.weather.icon)
+                        },
+                        precipitation: {
+                            type: "rain",
+                            volume: hour.precip,
+                            chance: hour.pop
+                        }
+                    };
+                    if (!!forecast.precipitation && hour.snow != 0) {
+                        forecast.precipitation.type = "snow";
+                        forecast.precipitation.volume = hour.snow;
+                    }
+                    forecasts.push(forecast);
+                }
+                return forecasts;
+            }
+            catch (e) {
+                if (e instanceof Error)
+                    logger_Logger.Error("Weatherbit Forecast Parsing error: " + e, e);
+                this.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+                return null;
+            }
+        };
     }
-    GetCurrentHour(forecasts, tz) {
-        if (!forecasts || (forecasts === null || forecasts === void 0 ? void 0 : forecasts.length) < 1 || !forecasts[0].hours)
-            return null;
-        let currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
-        for (let index = 0; index < forecasts[0].hours.length; index++) {
-            const hour = forecasts[0].hours[index];
-            let time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
-            if (time < currentHour)
-                continue;
-            return hour;
-        }
+    get remainingCalls() {
         return null;
     }
-    GenerateCondition(icon, condition, translate) {
-        let result = {
-            main: (translate) ? this.ResolveTypeID(this.GetFirstCondition(condition)) : this.GetFirstCondition(condition),
-            description: (translate) ? this.ResolveTypeIDs(condition) : condition,
-            icons: [],
-            customIcon: "refresh-symbolic"
-        };
-        switch (icon) {
-            case "clear-day":
-                result.icons = ["weather-clear"];
-                result.customIcon = "day-sunny-symbolic";
-                break;
-            case "clear-night":
-                result.icons = ["weather-clear-night"];
-                result.customIcon = "night-clear-symbolic";
-                break;
-            case "partly-cloudy-day":
-                result.icons = ["weather-few-clouds"];
-                result.customIcon = "day-cloudy-symbolic";
-                break;
-            case "partly-cloudy-night":
-                result.icons = ["weather-few-clouds-night"];
-                result.customIcon = "night-alt-cloudy-symbolic";
-                break;
-            case "cloudy":
-                result.icons = ["weather-overcast", "weather-clouds", "weather-many-clouds"];
-                result.customIcon = "cloudy-symbolic";
-                break;
-            case "wind":
-                result.icons = ["weather-windy", "weather-breeze"];
-                result.customIcon = "windy-symbolic";
-                break;
-            case "fog":
-                result.icons = ["weather-fog"];
-                result.customIcon = "fog-symbolic";
-                break;
-            case "rain":
-                result.icons = ["weather-rain", "weather-freezing-rain", "weather-snow-rain", "weather-showers"];
-                result.customIcon = "rain-symbolic";
-                break;
-            case "snow":
-                result.icons = ["weather-snow"];
-                result.customIcon = "snow-symbolic";
-                break;
+    ;
+    async GetWeather(loc) {
+        const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
+        let hourlyPromise = null;
+        if (!!this.hourlyAccess)
+            hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
+        const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent);
+        if (!currentResult)
+            return null;
+        const forecastResult = await forecastPromise;
+        currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+        const hourlyResult = await hourlyPromise;
+        currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
+        return currentResult;
+    }
+    ;
+    async GetData(baseUrl, loc, ParseFunction) {
+        const query = this.ConstructQuery(baseUrl, loc);
+        if (query == null)
+            return null;
+        const json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleError(e));
+        if (json == null)
+            return null;
+        return ParseFunction(json);
+    }
+    async GetHourlyData(baseUrl, loc) {
+        const query = this.ConstructQuery(baseUrl, loc);
+        if (query == null)
+            return null;
+        const json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleHourlyError(e));
+        if (!!(json === null || json === void 0 ? void 0 : json.error)) {
+            return null;
         }
-        return result;
+        if (json == null)
+            return null;
+        return this.ParseHourlyForecast(json);
     }
-    GetFirstCondition(condition) {
-        let split = condition.split(", ");
-        return split[0];
+    ;
+    TimeToDate(time, hourDiff, tz) {
+        const hoursMinutes = time.split(":");
+        const date = DateTime.utc().set({
+            hour: parseInt(hoursMinutes[0]) - hourDiff,
+            minute: parseInt(hoursMinutes[1]),
+        }).setZone(tz);
+        return date;
     }
-    ResolveTypeID(condition) {
-        switch (condition.toLowerCase()) {
-            case "type_1":
-                return _("Blowing or drifting snow");
-            case "type_2":
-                return _("Drizzle");
-            case "type_3":
-                return _("Heavy drizzle");
-            case "type_4":
-                return _("Light drizzle");
-            case "type_5":
-                return _("Heavy drizzle/rain");
-            case "type_6":
-                return _("Light drizzle/rain");
-            case "type_7":
-                return _("Duststorm");
-            case "type_8":
-                return _("Fog");
-            case "type_9":
-                return _("Freezing drizzle/freezing rain");
-            case "type_10":
-                return _("Heavy freezing drizzle/freezing rain");
-            case "type_11":
-                return _("Light freezing drizzle/freezing rain");
-            case "type_12":
-                return _("Freezing fog");
-            case "type_13":
-                return _("Heavy freezing rain");
-            case "type_14":
-                return _("Light freezing rain");
-            case "type_15":
-                return _("Funnel cloud/tornado");
-            case "type_16":
-                return _("Hail showers");
-            case "type_17":
-                return _("Ice");
-            case "type_18":
-                return _("Lightning without thunder");
-            case "type_19":
-                return _("Mist");
-            case "type_20":
-                return _("Precipitation in vicinity");
-            case "type_21":
-                return _("Rain");
-            case "type_22":
-                return _("Heavy rain and snow");
-            case "type_23":
-                return _("Light rain And snow");
-            case "type_24":
-                return _("Rain showers");
-            case "type_25":
-                return _("Heavy rain");
-            case "type_26":
-                return _("Light rain");
-            case "type_27":
-                return _("Sky coverage decreasing");
-            case "type_28":
-                return _("Sky coverage increasing");
-            case "type_29":
-                return _("Sky unchanged");
-            case "type_30":
-                return _("Smoke or haze");
-            case "type_31":
-                return _("Snow");
-            case "type_32":
-                return _("Snow and rain showers");
-            case "type_33":
-                return _("Snow showers");
-            case "type_34":
-                return _("Heavy snow");
-            case "type_35":
-                return _("Light snow");
-            case "type_36":
-                return _("Squalls");
-            case "type_37":
-                return _("Thunderstorm");
-            case "type_38":
-                return _("Thunderstorm without precipitation");
-            case "type_39":
-                return _("Diamond dust");
-            case "type_40":
-                return _("Hail");
-            case "type_41":
-                return _("Overcast");
-            case "type_42":
-                return _("Partially cloudy");
-            case "type_43":
-                return _("Clear");
+    HourDifference(correctTime, incorrectTime) {
+        if (incorrectTime == null)
+            return 0;
+        return Math.round((incorrectTime.hour - correctTime.hour) / (1000 * 60 * 60));
+    }
+    ParseStringTime(last_ob_time, tz) {
+        const split = last_ob_time.split(/[T\-\s:]/);
+        if (split.length != 5)
+            return null;
+        return DateTime.fromObject({
+            year: parseInt(split[0]),
+            month: parseInt(split[1]),
+            day: parseInt(split[2]),
+            hour: parseInt(split[3]),
+            minute: parseInt(split[4])
+        }).setZone(tz);
+    }
+    ConvertToAPILocale(systemLocale) {
+        if (!systemLocale)
+            return null;
+        if (systemLocale == "zh-tw") {
+            return systemLocale;
         }
-        return condition;
-    }
-    ResolveTypeIDs(condition) {
-        let result = "";
-        let split = condition.split(", ");
-        for (let index = 0; index < split.length; index++) {
-            const element = split[index];
-            result += this.ResolveTypeID(element);
-            if (index < split.length - 1)
-                result += ", ";
+        const lang = systemLocale.split("-")[0];
+        if (lang == "cs") {
+            return "cz";
         }
-        return result;
+        return lang;
     }
-    HandleHttpError(error) {
-        if ((error === null || error === void 0 ? void 0 : error.code) == 401) {
+    ConstructQuery(query, loc) {
+        query = query + "key=" + this.app.config.ApiKey + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
+        const lang = this.ConvertToAPILocale(this.app.config.currentLocale);
+        if (IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
+            query = query + "&lang=" + lang;
+        }
+        return query;
+    }
+    ;
+    HandleError(message) {
+        if (message.ErrorData.code == 403) {
             this.app.ShowError({
                 type: "hard",
                 userError: true,
                 detail: "bad key",
-                message: _("Please make sure you entered the API key correctly")
+                service: "weatherbit",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
             });
+        }
+        return true;
+    }
+    HandleHourlyError(message) {
+        if (message.ErrorData.code == 403) {
+            this.hourlyAccess = false;
+            logger_Logger.Info("Hourly forecast is inaccessible, skipping");
             return false;
         }
         return true;
     }
+    ResolveIcon(icon) {
+        switch (icon) {
+            case "t01n":
+            case "t01d":
+            case "t02n":
+            case "t02d":
+            case "t03n":
+            case "t03d":
+            case "t04n":
+            case "t04d":
+            case "t05n":
+            case "t05d":
+                return ["weather-storm"];
+            case "d01d":
+            case "d01n":
+            case "d02d":
+            case "d02n":
+            case "d03d":
+            case "d03n":
+                return ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"];
+            case "r01d":
+            case "r01n":
+            case "r02d":
+            case "r02n":
+            case "r03d":
+            case "r03n":
+            case "r04d":
+            case "r04n":
+            case "r05d":
+            case "r05n":
+            case "r06d":
+            case "r06n":
+                return ["weather-rain", "weather-freezing-rain", "weather-showers-scattered"];
+            case "s01d":
+            case "s01n":
+            case "s02d":
+            case "s02n":
+            case "s03d":
+            case "s03n":
+            case "s04d":
+            case "s04n":
+            case "s06d":
+            case "s06n":
+                return ["weather-snow"];
+            case "s05d":
+            case "s05n":
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
+            case "a01d":
+            case "a01n":
+            case "a02d":
+            case "a02n":
+            case "a03d":
+            case "a03n":
+            case "a04d":
+            case "a04n":
+            case "a05d":
+            case "a05n":
+            case "a06d":
+            case "a06n":
+                return ["weather-fog"];
+            case "c02d":
+                return ["weather-few-clouds"];
+            case "c02n":
+                return ["weather-few-clouds-night"];
+            case "c01n":
+                return ["weather-clear-night"];
+            case "c01d":
+                return ["weather-clear"];
+            case "c03d":
+                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
+            case "c03n":
+                return ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"];
+            case "c04n":
+                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
+            case "c04d":
+                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
+            case "u00d":
+            case "u00n":
+                return ["weather-severe-alert"];
+            default:
+                return ["weather-severe-alert"];
+        }
+    }
+    ;
+    ResolveCustomIcon(icon) {
+        switch (icon) {
+            case "t01d":
+            case "t02d":
+            case "t03d":
+                return "day-thunderstorm-symbolic";
+            case "t04d":
+            case "t05d":
+                return "thunderstorm-symbolic";
+            case "t01n":
+            case "t02n":
+            case "t03n":
+                return "night-alt-thunderstorm-symbolic";
+            case "t04n":
+            case "t05n":
+                return "thunderstorm-symbolic";
+            case "d01d":
+            case "d02d":
+            case "d03d":
+            case "d01n":
+            case "d02n":
+            case "d03n":
+                return "showers-symbolic";
+            case "r01d":
+            case "r02d":
+            case "r03d":
+            case "r01n":
+            case "r02n":
+            case "r03n":
+                return "rain-symbolic";
+            case "r04d":
+            case "r05d":
+                return "day-rain-symbolic";
+            case "r06d":
+                return "rain-symbolic";
+            case "r04n":
+            case "r05n":
+                return "night-alt-rain-symbolic";
+            case "r06n":
+                return "rain-symbolic";
+            case "s01d":
+            case "s04d":
+                return "day-snow-symbolic";
+            case "s02d":
+            case "s03d":
+            case "s06d":
+                return "snow-symbolic";
+            case "s01n":
+            case "s04n":
+                return "night-alt-snow-symbolic";
+            case "s02n":
+            case "s03n":
+            case "s06n":
+                return "snow-symbolic";
+            case "s05d":
+            case "s05n":
+                return "sleet-symbolic";
+            case "a01d":
+            case "a02d":
+            case "a03d":
+            case "a04d":
+            case "a05d":
+            case "a06d":
+                return "day-fog-symbolic";
+            case "a01n":
+            case "a02n":
+            case "a03n":
+            case "a04n":
+            case "a05n":
+            case "a06n":
+                return "night-fog-symbolic";
+            case "c02d":
+                return "day-cloudy-symbolic";
+            case "c02n":
+                return "night-alt-cloudy-symbolic";
+            case "c01n":
+                return "night-clear-symbolic";
+            case "c01d":
+                return "day-sunny-symbolic";
+            case "c03d":
+                return "day-cloudy-symbolic";
+            case "c03n":
+                return "night-alt-cloudy-symbolic";
+            case "c04n":
+                return "cloudy-symbolic";
+            case "c04d":
+                return "cloudy-symbolic";
+            case "u00d":
+            case "u00n":
+                return "cloud-refresh-symbolic";
+            default:
+                return "cloud-refresh-symbolic";
+        }
+    }
 }
+;
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/climacellV4.ts
 
 
-class ClimacellV4 {
+
+class ClimacellV4 extends BaseProvider {
     constructor(app) {
+        super(app);
+        this.remainingCalls = null;
         this.needsApiKey = true;
-        this.prettyName = _("Climacell");
-        this.name = "ClimacellV4";
+        this.prettyName = _("Tomorrow.io");
+        this.name = "Tomorrow.io";
         this.maxForecastSupport = 15;
         this.maxHourlyForecastSupport = 108;
-        this.website = "https://www.climacell.co/";
+        this.website = "https://www.tomorrow.io/";
         this.url = "https://data.climacell.co/v4/timelines";
         this.params = {
             apikey: null,
             location: null,
             timesteps: "current,1h,1d",
             units: "metric",
-            fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
+            fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,dewPoint,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
         };
-        this.app = app;
     }
     async GetWeather(loc) {
         if (loc == null)
             return null;
         this.params.apikey = this.app.config.ApiKey;
         this.params.location = loc.lat + "," + loc.lon;
-        let response = await this.app.LoadJsonAsync(this.url, this.params, (m) => this.HandleHTTPError(m));
+        const response = await this.app.LoadJsonAsync(this.url, this.params, (m) => this.HandleHTTPError(m));
         if (response == null)
             return null;
         return this.ParseWeather(loc, response);
     }
     HandleHTTPError(message) {
-        if (message.code == 401) {
+        if (message.ErrorData.code == 401) {
             this.app.ShowError({
                 type: "hard",
                 userError: true,
@@ -14258,12 +11985,12 @@ class ClimacellV4 {
     }
     ParseWeather(loc, data) {
         var _a, _b, _c, _d, _e;
-        let current = (_b = (_a = data.data.timelines.find(x => x.timestep == "current")) === null || _a === void 0 ? void 0 : _a.intervals) === null || _b === void 0 ? void 0 : _b[0];
-        let hourly = (_c = data.data.timelines.find(x => x.timestep == "1h")) === null || _c === void 0 ? void 0 : _c.intervals;
-        let daily = (_d = data.data.timelines.find(x => x.timestep == "1d")) === null || _d === void 0 ? void 0 : _d.intervals;
+        const current = (_b = (_a = data.data.timelines.find(x => x.timestep == "current")) === null || _a === void 0 ? void 0 : _a.intervals) === null || _b === void 0 ? void 0 : _b[0];
+        const hourly = (_c = data.data.timelines.find(x => x.timestep == "1h")) === null || _c === void 0 ? void 0 : _c.intervals;
+        const daily = (_d = data.data.timelines.find(x => x.timestep == "1d")) === null || _d === void 0 ? void 0 : _d.intervals;
         if (!current || !daily || !hourly || !((_e = daily[0]) === null || _e === void 0 ? void 0 : _e.values))
             return null;
-        let result = {
+        const result = {
             coord: {
                 lat: loc.lat,
                 lon: loc.lon
@@ -14277,10 +12004,11 @@ class ClimacellV4 {
                 degree: current.values.windDirection,
                 speed: current.values.windSpeed
             },
+            dewPoint: CelsiusToKelvin(current.values.dewPoint),
             sunrise: DateTime.fromISO(daily[0].values.sunriseTime, { zone: loc.timeZone }),
             sunset: DateTime.fromISO(daily[0].values.sunsetTime, { zone: loc.timeZone }),
             location: {
-                url: "https://www.climacell.co/weather"
+                url: "https://www.tomorrow.io/weather"
             },
             extra_field: {
                 name: _("Feels Like"),
@@ -14289,10 +12017,9 @@ class ClimacellV4 {
             },
             forecasts: []
         };
-        let hours = [];
-        let days = [];
-        for (let index = 0; index < daily.length; index++) {
-            const element = daily[index];
+        const hours = [];
+        const days = [];
+        for (const element of daily) {
             days.push({
                 condition: this.ResolveCondition(element.values.weatherCode),
                 date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
@@ -14300,9 +12027,8 @@ class ClimacellV4 {
                 temp_min: CelsiusToKelvin(element.values.temperatureMin)
             });
         }
-        for (let index = 0; index < hourly.length; index++) {
-            const element = hourly[index];
-            let hour = {
+        for (const element of hourly) {
+            const hour = {
                 condition: this.ResolveCondition(element.values.weatherCode),
                 date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
                 temp: CelsiusToKelvin(element.values.temperature)
@@ -14322,7 +12048,7 @@ class ClimacellV4 {
         return result;
     }
     ResolveCondition(weatherCode, isNight = false) {
-        let result = {
+        const result = {
             customIcon: "refresh-symbolic",
             icons: ["weather-severe-alert"],
             main: _("Unknown"),
@@ -14535,17 +12261,867 @@ class ClimacellV4 {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/us_weather.ts
+
+
+
+
+
+class USWeather extends BaseProvider {
+    constructor(_app) {
+        super(_app);
+        this.prettyName = _("US Weather");
+        this.name = "US Weather";
+        this.maxForecastSupport = 7;
+        this.website = "https://www.weather.gov/";
+        this.maxHourlyForecastSupport = 156;
+        this.needsApiKey = false;
+        this.remainingCalls = null;
+        this.sitesUrl = "https://api.weather.gov/points/";
+        this.MAX_STATION_DIST = 50000;
+        this.observationStations = [];
+        this.OnObtainingGridData = (message) => {
+            if (message.ErrorData.code == 404 && (message === null || message === void 0 ? void 0 : message.Data) != null) {
+                if (message.Data.title == "Data Unavailable For Requested Point") {
+                    this.app.ShowError({
+                        type: "hard",
+                        userError: true,
+                        detail: "location not covered",
+                        service: "us-weather",
+                        message: _("Location is outside US, please use a different provider.")
+                    });
+                }
+                return false;
+            }
+            return true;
+        };
+        this.ParseForecast = (json) => {
+            const forecasts = [];
+            try {
+                let startIndex = (this.CheckIfHasThreeElementsForDay(json) ? 1 : 0);
+                startIndex = this.FindTodayIndex(json, startIndex);
+                if (startIndex == -1)
+                    return null;
+                if (json.properties.periods[startIndex].isDaytime == false) {
+                    startIndex++;
+                    const today = json.properties.periods[0];
+                    const forecast = {
+                        date: DateTime.fromISO(today.startTime).setZone(this.observationStations[0].properties.timeZone),
+                        temp_min: FahrenheitToKelvin(today.temperature),
+                        temp_max: FahrenheitToKelvin(today.temperature),
+                        condition: this.ResolveCondition(today.icon),
+                    };
+                    forecasts.push(forecast);
+                }
+                for (let i = startIndex; i < json.properties.periods.length; i += 2) {
+                    const day = json.properties.periods[i];
+                    let night = json.properties.periods[i + 1];
+                    if (!night)
+                        night = day;
+                    const forecast = {
+                        date: DateTime.fromISO(day.startTime).setZone(this.observationStations[0].properties.timeZone),
+                        temp_min: FahrenheitToKelvin(night.temperature),
+                        temp_max: FahrenheitToKelvin(day.temperature),
+                        condition: this.ResolveCondition(day.icon),
+                    };
+                    forecasts.push(forecast);
+                }
+                return forecasts;
+            }
+            catch (e) {
+                if (e instanceof Error)
+                    logger_Logger.Error("US Weather Forecast Parsing error: " + e, e);
+                this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+                return null;
+            }
+        };
+        this.ParseHourlyForecast = (json) => {
+            const forecasts = [];
+            try {
+                for (const hour of json.properties.periods) {
+                    const timestamp = DateTime.fromISO(hour.startTime).setZone(this.observationStations[0].properties.timeZone);
+                    const forecast = {
+                        date: timestamp,
+                        temp: CelsiusToKelvin(hour.temperature),
+                        condition: this.ResolveCondition(hour.icon, !hour.isDaytime),
+                    };
+                    forecasts.push(forecast);
+                }
+                return forecasts;
+            }
+            catch (e) {
+                if (e instanceof Error)
+                    logger_Logger.Error("US Weather service Forecast Parsing error: " + e, e);
+                this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") });
+                return null;
+            }
+        };
+    }
+    async GetWeather(loc) {
+        var _a, _b;
+        const locID = loc.lat.toString() + "," + loc.lon.toString();
+        if (!this.grid || !this.observationStations || this.currentLocID != locID) {
+            logger_Logger.Info("Downloading new site data");
+            this.currentLoc = loc;
+            this.currentLocID = locID;
+            const grid = await this.GetGridData(loc);
+            if (grid == null)
+                return null;
+            logger_Logger.Debug("Grid found: " + JSON.stringify(grid, null, 2));
+            const observationStations = await this.GetStationData(grid.properties.observationStations);
+            if (observationStations == null)
+                return null;
+            this.grid = grid;
+            this.observationStations = observationStations;
+        }
+        else {
+            logger_Logger.Debug("Site data downloading skipped");
+        }
+        const observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
+        const hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si");
+        const forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
+        const hourly = await hourlyForecastPromise;
+        const forecast = await forecastPromise;
+        if (!hourly || !forecast) {
+            logger_Logger.Error("Failed to obtain forecast Data");
+            return null;
+        }
+        const weather = this.ParseCurrent(observations, hourly, loc);
+        if (!!weather) {
+            weather.forecasts = (_a = this.ParseForecast(forecast)) !== null && _a !== void 0 ? _a : [];
+            weather.hourlyForecasts = (_b = this.ParseHourlyForecast(hourly)) !== null && _b !== void 0 ? _b : undefined;
+        }
+        return weather;
+    }
+    ;
+    async GetGridData(loc) {
+        const siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), {}, this.OnObtainingGridData);
+        return siteData;
+    }
+    async GetStationData(stationListUrl) {
+        const stations = await this.app.LoadJsonAsync(stationListUrl);
+        return stations === null || stations === void 0 ? void 0 : stations.features;
+    }
+    async GetObservationsInRange(range, loc, stations) {
+        const observations = [];
+        for (const element of stations) {
+            element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
+            if (element.dist > range)
+                break;
+            const observation = await this.app.LoadJsonAsync(element.id + "/observations/latest", {}, (msg) => false);
+            if (observation == null) {
+                logger_Logger.Debug("Failed to get observations from " + element.id);
+            }
+            else {
+                observations.push(observation);
+            }
+        }
+        return observations;
+    }
+    MeshObservationData(observations) {
+        if (observations.length < 1)
+            return null;
+        const result = observations[0];
+        if (observations.length == 1)
+            return result;
+        for (let index = 1; index < observations.length; index++) {
+            const element = observations[index];
+            const debugText = " Observation data missing, plugged in from ID " +
+                element.id + ", index " + index +
+                ", distance "
+                + Math.round(GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], this.currentLoc.lat, this.currentLoc.lon))
+                + " metres";
+            if (result.properties.icon == null) {
+                result.properties.icon = element.properties.icon;
+                result.properties.textDescription = element.properties.textDescription;
+                logger_Logger.Debug("Weather condition" + debugText);
+            }
+            if (result.properties.temperature.value == null) {
+                result.properties.temperature.value = element.properties.temperature.value;
+                logger_Logger.Debug("Temperature" + debugText);
+            }
+            if (result.properties.windSpeed.value == null) {
+                result.properties.windSpeed.value = element.properties.windSpeed.value;
+                logger_Logger.Debug("Wind Speed" + debugText);
+            }
+            if (result.properties.windDirection.value == null) {
+                result.properties.windDirection.value = element.properties.windDirection.value;
+                logger_Logger.Debug("Wind degree" + debugText);
+            }
+            if (result.properties.barometricPressure.value == null) {
+                result.properties.barometricPressure.value = element.properties.barometricPressure.value;
+                logger_Logger.Debug("Pressure" + debugText);
+            }
+            if (result.properties.relativeHumidity.value == null) {
+                result.properties.relativeHumidity.value = element.properties.relativeHumidity.value;
+                logger_Logger.Debug("Humidity" + debugText);
+            }
+            if (result.properties.windChill.value == null) {
+                result.properties.windChill.value = element.properties.windChill.value;
+                logger_Logger.Debug("WindChill" + debugText);
+            }
+            if (result.properties.visibility.value == null) {
+                result.properties.visibility.value = element.properties.visibility.value;
+                logger_Logger.Debug("Visibility" + debugText);
+            }
+            if (result.properties.dewpoint.value == null) {
+                result.properties.dewpoint.value = element.properties.dewpoint.value;
+                logger_Logger.Debug("Dew Point" + debugText);
+            }
+        }
+        return result;
+    }
+    ParseCurrent(json, hourly, loc) {
+        var _a, _b;
+        const observation = this.MeshObservationData(json);
+        if (observation == null || !this.observationStations[0]) {
+            logger_Logger.Error("No observation stations/data are available");
+            return null;
+        }
+        const timestamp = DateTime.fromISO(observation.properties.timestamp, { zone: this.observationStations[0].properties.timeZone });
+        const times = (0,suncalc.getTimes)(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
+        const suntimes = {
+            sunrise: DateTime.fromJSDate(times.sunrise, { zone: this.observationStations[0].properties.timeZone }),
+            sunset: DateTime.fromJSDate(times.sunset, { zone: this.observationStations[0].properties.timeZone })
+        };
+        try {
+            const weather = {
+                coord: {
+                    lat: (_a = observation === null || observation === void 0 ? void 0 : observation.geometry) === null || _a === void 0 ? void 0 : _a.coordinates[1],
+                    lon: (_b = observation === null || observation === void 0 ? void 0 : observation.geometry) === null || _b === void 0 ? void 0 : _b.coordinates[0]
+                },
+                location: {
+                    city: undefined,
+                    country: undefined,
+                    url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
+                    timeZone: this.observationStations[0].properties.timeZone,
+                },
+                stationInfo: {
+                    distanceFrom: this.observationStations[0].dist,
+                    name: this.observationStations[0].properties.name,
+                },
+                date: timestamp,
+                sunrise: suntimes.sunrise,
+                sunset: suntimes.sunset,
+                wind: {
+                    speed: KPHtoMPS(observation.properties.windSpeed.value),
+                    degree: observation.properties.windDirection.value
+                },
+                temperature: CelsiusToKelvin(observation.properties.temperature.value),
+                pressure: (observation.properties.barometricPressure.value == null) ? null : observation.properties.barometricPressure.value / 100,
+                humidity: observation.properties.relativeHumidity.value,
+                dewPoint: CelsiusToKelvin(observation.properties.dewpoint.value),
+                condition: this.ResolveCondition(observation.properties.icon, IsNight(suntimes)),
+                forecasts: []
+            };
+            if (observation.properties.windChill.value != null) {
+                weather.extra_field = {
+                    name: _("Feels Like"),
+                    value: CelsiusToKelvin(observation.properties.windChill.value),
+                    type: "temperature"
+                };
+            }
+            if (weather.condition == null && hourly != null) {
+                weather.condition = this.ResolveCondition(hourly.properties.periods[0].icon);
+            }
+            return weather;
+        }
+        catch (e) {
+            if (e instanceof Error)
+                logger_Logger.Error("US Weather Parsing error: " + e, e);
+            this.app.ShowError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
+            return null;
+        }
+    }
+    ;
+    CheckIfHasThreeElementsForDay(json) {
+        var _a, _b, _c;
+        if (((_b = (_a = json === null || json === void 0 ? void 0 : json.properties) === null || _a === void 0 ? void 0 : _a.periods) === null || _b === void 0 ? void 0 : _b.length) < 3 || ((_c = this.observationStations[0]) === null || _c === void 0 ? void 0 : _c.properties))
+            return false;
+        let counter = 0;
+        for (let index = 1; index < 3; index++) {
+            const element = json.properties.periods[index];
+            const prevElement = json.properties.periods[index - 1];
+            const prevDate = DateTime.fromISO(prevElement.startTime).setZone(this.observationStations[0].properties.timeZone);
+            const curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
+            if (OnSameDay(prevDate, curDate))
+                counter++;
+            else
+                counter = 0;
+            if (counter > 1) {
+                global.log("3 elements");
+                return true;
+            }
+        }
+        return false;
+    }
+    FindTodayIndex(json, startIndex = 0) {
+        var _a;
+        if (!this.observationStations[0] || !((_a = json === null || json === void 0 ? void 0 : json.properties) === null || _a === void 0 ? void 0 : _a.periods)) {
+            return -1;
+        }
+        const today = DateTime.utc().setZone(this.observationStations[0].properties.timeZone);
+        for (let index = startIndex; index < json.properties.periods.length; index++) {
+            const element = json.properties.periods[index];
+            const curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
+            if (!OnSameDay(today, curDate))
+                continue;
+            global.log(index);
+            return index;
+        }
+        return -1;
+    }
+    ResolveCondition(icon, isNight = false) {
+        if (icon == null)
+            return {
+                main: _("Unknown"),
+                description: _("Unknown"),
+                customIcon: "cloud-refresh-symbolic",
+                icons: ["weather-severe-alert"]
+            };
+        const code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/);
+        switch (code === null || code === void 0 ? void 0 : code[0]) {
+            case "skc":
+                return {
+                    main: _("Clear"),
+                    description: _("Clear"),
+                    customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
+                    icons: (isNight) ? ["weather-clear-night", "weather-severe-alert"] : ["weather-clear", "weather-severe-alert"]
+                };
+            case "few":
+                return {
+                    main: _("Few clouds"),
+                    description: _("Few clouds"),
+                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                    icons: ["weather-clear-night", "weather-severe-alert"]
+                };
+            case "sct":
+                return {
+                    main: _("Partly cloudy"),
+                    description: _("Partly cloudy"),
+                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                    icons: ["weather-clear", "weather-severe-alert"]
+                };
+            case "bkn":
+                return {
+                    main: _("Mostly cloudy"),
+                    description: _("Mostly cloudy"),
+                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                    icons: ["weather-clouds-night", "weather-overcast", "weather-severe-alert"]
+                };
+            case "ovc":
+                return {
+                    main: _("Overcast"),
+                    description: _("Overcast"),
+                    customIcon: "cloudy-symbolic",
+                    icons: ["weather-clouds", "weather-overcast", "weather-severe-alert"]
+                };
+            case "wind_skc":
+                return {
+                    main: _("Clear"),
+                    description: _("Clear and windy"),
+                    customIcon: (IsNight) ? "night-alt-wind-symbolic" : "day-windy-symbolic",
+                    icons: (isNight) ? ["weather-clear-night"] : ["weather-clear"]
+                };
+            case "wind_few":
+                return {
+                    main: _("Few clouds"),
+                    description: _("Few clouds and windy"),
+                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
+                    icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
+                };
+            case "wind_sct":
+                return {
+                    main: _("Partly cloudy"),
+                    description: _("Partly cloudy and windy"),
+                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
+                    icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
+                };
+            case "wind_bkn":
+                return {
+                    main: _("Mostly cloudy"),
+                    description: _("Mostly cloudy and windy"),
+                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
+                    icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
+                };
+            case "wind_ovc":
+                return {
+                    main: _("Overcast"),
+                    description: _("Overcast and windy"),
+                    customIcon: "cloudy-symbolic",
+                    icons: ["weather-overcast", "weather-many-clouds", "weather-severe-alert"]
+                };
+            case "snow":
+                return {
+                    main: _("Snow"),
+                    description: _("Snow"),
+                    customIcon: "snow-symbolic",
+                    icons: ["weather-snow", "weather-severe-alert"]
+                };
+            case "rain_snow":
+                return {
+                    main: _("Rain"),
+                    description: _("Snowy rain"),
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-snow-rain", "weather-snow", "weather-severe-alert"]
+                };
+            case "rain_sleet":
+                return {
+                    main: _("Sleet"),
+                    description: _("Sleet"),
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-freezing-rain", "weather-severe-alert"]
+                };
+            case "snow_sleet":
+                return {
+                    main: _("Sleet"),
+                    description: _("Sleet"),
+                    customIcon: "sleet-symbolic",
+                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
+                };
+            case "fzra":
+                return {
+                    main: _("Freezing rain"),
+                    description: _("Freezing rain"),
+                    customIcon: "rain-wind-symbolic",
+                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
+                };
+            case "rain_fzra":
+                return {
+                    main: _("Freezing rain"),
+                    description: _("Freezing rain"),
+                    customIcon: "rain-wind-symbolic",
+                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
+                };
+            case "snow_fzra":
+                return {
+                    main: _("Freezing rain"),
+                    description: _("Freezing rain and snow"),
+                    customIcon: "rain-wind-symbolic",
+                    icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
+                };
+            case "sleet":
+                return {
+                    main: _("Sleet"),
+                    description: _("Sleet"),
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-severe-alert"]
+                };
+            case "rain":
+                return {
+                    main: _("Rain"),
+                    description: _("Rain"),
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
+                };
+            case "rain_showers":
+            case "rain_showers_hi":
+                return {
+                    main: _("Rain"),
+                    description: _("Rain showers"),
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-showers", "weather-showers-scattered", "weather-rain", "weather-freezing-rain", "weather-severe-alert"]
+                };
+            case "tsra":
+            case "tsra_sct":
+            case "tsra_hi":
+                return {
+                    main: _("Thunderstorm"),
+                    description: _("Thunderstorm"),
+                    customIcon: "thunderstorm-symbolic",
+                    icons: ["weather-storm", "weather-severe-alert"]
+                };
+            case "tornado":
+                return {
+                    main: _("Tornado"),
+                    description: _("Tornado"),
+                    customIcon: "tornado-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case "hurricane":
+                return {
+                    main: _("Hurricane"),
+                    description: _("Hurricane"),
+                    customIcon: "hurricane-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case "tropical_storm":
+                return {
+                    main: _("Storm"),
+                    description: _("Tropical storm"),
+                    customIcon: "thunderstorm-symbolic",
+                    icons: ["weather-storm", "weather-severe-alert"]
+                };
+            case "dust":
+                return {
+                    main: _("Dust"),
+                    description: _("Dust"),
+                    customIcon: "dust-symbolic",
+                    icons: ["weather-fog", "weather-severe-alert"]
+                };
+            case "smoke":
+                return {
+                    main: _("Smoke"),
+                    description: _("Smoke"),
+                    customIcon: "smoke-symbolic",
+                    icons: ["weather-fog", "weather-severe-alert"]
+                };
+            case "haze":
+                return {
+                    main: _("Haze"),
+                    description: _("Haze"),
+                    customIcon: "fog-symbolic",
+                    icons: ["weather-fog", "weather-severe-alert"]
+                };
+            case "hot":
+                return {
+                    main: _("Hot"),
+                    description: _("Hot"),
+                    customIcon: "hot-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case "cold":
+                return {
+                    main: _("Cold"),
+                    description: _("Cold"),
+                    customIcon: "snowflake-cold-symbolic",
+                    icons: ["weather-storm", "weather-severe-alert"]
+                };
+            case "blizzard":
+                return {
+                    main: _("Blizzard"),
+                    description: _("Blizzard"),
+                    customIcon: "thunderstorm-symbolic",
+                    icons: ["weather-storm", "weather-severe-alert"]
+                };
+            case "fog":
+                return {
+                    main: _("Fog"),
+                    description: _("Fog"),
+                    customIcon: "fog-symbolic",
+                    icons: ["weather-fog", "weather-severe-alert"]
+                };
+            default:
+                return {
+                    main: _("Unknown"),
+                    description: _("Unknown"),
+                    customIcon: "cloud-refresh-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+        }
+    }
+    ;
+}
+;
+
+;// CONCATENATED MODULE: ./src/3_8/providers/visualcrossing.ts
+
+
+
+class VisualCrossing extends BaseProvider {
+    constructor(app) {
+        super(app);
+        this.prettyName = _("Visual Crossing");
+        this.name = "Visual Crossing";
+        this.maxForecastSupport = 15;
+        this.maxHourlyForecastSupport = 336;
+        this.website = "https://weather.visualcrossing.com/";
+        this.needsApiKey = true;
+        this.remainingCalls = null;
+        this.url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
+        this.params = {
+            unitGroup: "metric",
+            key: null,
+            include: "fcst,hours,current",
+            lang: "id"
+        };
+        this.supportedLangs = ["en", "de", "fr", "es"];
+    }
+    async GetWeather(loc) {
+        if (loc == null)
+            return null;
+        this.params['key'] = this.app.config.ApiKey;
+        let translate = true;
+        if (IsLangSupported(this.app.config.Language, this.supportedLangs)) {
+            this.params['lang'] = this.app.config.Language;
+            translate = false;
+        }
+        const url = this.url + loc.lat + "," + loc.lon;
+        const json = await this.app.LoadJsonAsync(url, this.params, (e) => this.HandleHttpError(e));
+        if (!json)
+            return null;
+        return this.ParseWeather(json, translate);
+    }
+    ParseWeather(weather, translate) {
+        var _a, _b, _c, _d, _e, _f, _g;
+        const currentHour = this.GetCurrentHour(weather.days, weather.timezone);
+        const result = {
+            date: DateTime.fromSeconds(weather.currentConditions.datetimeEpoch, { zone: weather.timezone }),
+            location: {
+                url: encodeURI("https://www.visualcrossing.com/weather-history/" + weather.latitude + "," + weather.longitude + "/"),
+                timeZone: weather.timezone,
+                tzOffset: weather.tzoffset,
+            },
+            coord: {
+                lat: weather.latitude,
+                lon: weather.longitude,
+            },
+            humidity: (_a = weather.currentConditions.humidity) !== null && _a !== void 0 ? _a : currentHour === null || currentHour === void 0 ? void 0 : currentHour.humidity,
+            pressure: (_b = weather.currentConditions.pressure) !== null && _b !== void 0 ? _b : currentHour === null || currentHour === void 0 ? void 0 : currentHour.pressure,
+            dewPoint: CelsiusToKelvin((_c = weather.currentConditions.dew) !== null && _c !== void 0 ? _c : currentHour === null || currentHour === void 0 ? void 0 : currentHour.dew),
+            wind: {
+                degree: (_d = weather.currentConditions.winddir) !== null && _d !== void 0 ? _d : currentHour === null || currentHour === void 0 ? void 0 : currentHour.winddir,
+                speed: (_e = weather.currentConditions.windspeed) !== null && _e !== void 0 ? _e : currentHour === null || currentHour === void 0 ? void 0 : currentHour.windspeed,
+            },
+            temperature: CelsiusToKelvin((_f = weather.currentConditions.temp) !== null && _f !== void 0 ? _f : currentHour === null || currentHour === void 0 ? void 0 : currentHour.temp),
+            sunrise: DateTime.fromSeconds(weather.currentConditions.sunriseEpoch, { zone: weather.timezone }),
+            sunset: DateTime.fromSeconds(weather.currentConditions.sunsetEpoch, { zone: weather.timezone }),
+            condition: this.GenerateCondition(weather.currentConditions.icon, weather.currentConditions.conditions, translate),
+            extra_field: {
+                name: _("Feels Like"),
+                type: "temperature",
+                value: CelsiusToKelvin((_g = currentHour === null || currentHour === void 0 ? void 0 : currentHour.feelslike) !== null && _g !== void 0 ? _g : weather.currentConditions.feelslike)
+            },
+            forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
+            hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
+        };
+        return result;
+    }
+    ParseForecasts(forecasts, translate, tz) {
+        const result = [];
+        if (!!forecasts) {
+            for (const element of forecasts) {
+                result.push({
+                    date: DateTime.fromSeconds(element.datetimeEpoch, { zone: tz }),
+                    condition: this.GenerateCondition(element.icon, element.conditions, translate),
+                    temp_max: CelsiusToKelvin(element.tempmax),
+                    temp_min: CelsiusToKelvin(element.tempmin)
+                });
+            }
+        }
+        return result;
+    }
+    ParseHourlyForecasts(forecasts, translate, tz) {
+        const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
+        const result = [];
+        if (!!forecasts) {
+            for (const element of forecasts) {
+                if (!element.hours)
+                    continue;
+                for (const hour of element.hours) {
+                    const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
+                    if (time < currentHour)
+                        continue;
+                    const item = {
+                        date: time,
+                        temp: CelsiusToKelvin(hour.temp),
+                        condition: this.GenerateCondition(hour.icon, hour.conditions, translate)
+                    };
+                    if (hour.preciptype != null) {
+                        item.precipitation = {
+                            type: hour.preciptype[0],
+                            chance: hour.precipprob,
+                            volume: hour.precip
+                        };
+                    }
+                    result.push(item);
+                }
+            }
+        }
+        return result;
+    }
+    GetCurrentHour(forecasts, tz) {
+        if (!forecasts || (forecasts === null || forecasts === void 0 ? void 0 : forecasts.length) < 1 || !forecasts[0].hours)
+            return null;
+        const currentHour = DateTime.utc().setZone(tz).set({ minute: 0, second: 0, millisecond: 0 });
+        for (const hour of forecasts[0].hours) {
+            const time = DateTime.fromSeconds(hour.datetimeEpoch, { zone: tz });
+            if (time < currentHour)
+                continue;
+            return hour;
+        }
+        return null;
+    }
+    GenerateCondition(icon, condition, translate) {
+        const result = {
+            main: (translate) ? this.ResolveTypeID(this.GetFirstCondition(condition)) : this.GetFirstCondition(condition),
+            description: (translate) ? this.ResolveTypeIDs(condition) : condition,
+            icons: [],
+            customIcon: "refresh-symbolic"
+        };
+        switch (icon) {
+            case "clear-day":
+                result.icons = ["weather-clear"];
+                result.customIcon = "day-sunny-symbolic";
+                break;
+            case "clear-night":
+                result.icons = ["weather-clear-night"];
+                result.customIcon = "night-clear-symbolic";
+                break;
+            case "partly-cloudy-day":
+                result.icons = ["weather-few-clouds"];
+                result.customIcon = "day-cloudy-symbolic";
+                break;
+            case "partly-cloudy-night":
+                result.icons = ["weather-few-clouds-night"];
+                result.customIcon = "night-alt-cloudy-symbolic";
+                break;
+            case "cloudy":
+                result.icons = ["weather-overcast", "weather-clouds", "weather-many-clouds"];
+                result.customIcon = "cloudy-symbolic";
+                break;
+            case "wind":
+                result.icons = ["weather-windy", "weather-breeze"];
+                result.customIcon = "windy-symbolic";
+                break;
+            case "fog":
+                result.icons = ["weather-fog"];
+                result.customIcon = "fog-symbolic";
+                break;
+            case "rain":
+                result.icons = ["weather-rain", "weather-freezing-rain", "weather-snow-rain", "weather-showers"];
+                result.customIcon = "rain-symbolic";
+                break;
+            case "snow":
+                result.icons = ["weather-snow"];
+                result.customIcon = "snow-symbolic";
+                break;
+        }
+        return result;
+    }
+    GetFirstCondition(condition) {
+        const split = condition.split(", ");
+        return split[0];
+    }
+    ResolveTypeID(condition) {
+        switch (condition.toLowerCase()) {
+            case "type_1":
+                return _("Blowing or drifting snow");
+            case "type_2":
+                return _("Drizzle");
+            case "type_3":
+                return _("Heavy drizzle");
+            case "type_4":
+                return _("Light drizzle");
+            case "type_5":
+                return _("Heavy drizzle/rain");
+            case "type_6":
+                return _("Light drizzle/rain");
+            case "type_7":
+                return _("Dust Storm");
+            case "type_8":
+                return _("Fog");
+            case "type_9":
+                return _("Freezing drizzle/freezing rain");
+            case "type_10":
+                return _("Heavy freezing drizzle/freezing rain");
+            case "type_11":
+                return _("Light freezing drizzle/freezing rain");
+            case "type_12":
+                return _("Freezing fog");
+            case "type_13":
+                return _("Heavy freezing rain");
+            case "type_14":
+                return _("Light freezing rain");
+            case "type_15":
+                return _("Funnel cloud/tornado");
+            case "type_16":
+                return _("Hail showers");
+            case "type_17":
+                return _("Ice");
+            case "type_18":
+                return _("Lightning without thunder");
+            case "type_19":
+                return _("Mist");
+            case "type_20":
+                return _("Precipitation in vicinity");
+            case "type_21":
+                return _("Rain");
+            case "type_22":
+                return _("Heavy rain and snow");
+            case "type_23":
+                return _("Light rain And snow");
+            case "type_24":
+                return _("Rain showers");
+            case "type_25":
+                return _("Heavy rain");
+            case "type_26":
+                return _("Light rain");
+            case "type_27":
+                return _("Sky coverage decreasing");
+            case "type_28":
+                return _("Sky coverage increasing");
+            case "type_29":
+                return _("Sky unchanged");
+            case "type_30":
+                return _("Smoke or haze");
+            case "type_31":
+                return _("Snow");
+            case "type_32":
+                return _("Snow and rain showers");
+            case "type_33":
+                return _("Snow showers");
+            case "type_34":
+                return _("Heavy snow");
+            case "type_35":
+                return _("Light snow");
+            case "type_36":
+                return _("Squalls");
+            case "type_37":
+                return _("Thunderstorm");
+            case "type_38":
+                return _("Thunderstorm without precipitation");
+            case "type_39":
+                return _("Diamond dust");
+            case "type_40":
+                return _("Hail");
+            case "type_41":
+                return _("Overcast");
+            case "type_42":
+                return _("Partially cloudy");
+            case "type_43":
+                return _("Clear");
+        }
+        return condition;
+    }
+    ResolveTypeIDs(condition) {
+        let result = "";
+        let split = condition.split(", ");
+        for (const [index, element] of split.entries()) {
+            result += this.ResolveTypeID(element);
+            if (index < split.length - 1)
+                result += ", ";
+        }
+        return result;
+    }
+    HandleHttpError(error) {
+        if ((error === null || error === void 0 ? void 0 : error.ErrorData.code) == 401) {
+            this.app.ShowError({
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                message: _("Please make sure you entered the API key correctly")
+            });
+            return false;
+        }
+        return true;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/danishMI.ts
 
 
-class DanishMI {
+
+class DanishMI extends BaseProvider {
     constructor(app) {
+        super(app);
         this.needsApiKey = false;
         this.prettyName = _("DMI Denmark");
         this.name = "DanishMI";
         this.maxForecastSupport = 10;
         this.maxHourlyForecastSupport = 48;
         this.website = "https://www.dmi.dk/";
+        this.remainingCalls = null;
         this.url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
         this.forecastParams = {
             cmd: "llj",
@@ -14560,24 +13136,23 @@ class DanishMI {
             south: null,
             north: null
         };
-        this.app = app;
     }
     async GetWeather(loc) {
         if (loc == null)
             return null;
         this.GetLocationBoundingBox(loc);
-        let observations = this.OrderObservations(await this.app.LoadJsonAsync(this.url, this.observationParams), loc);
+        const observations = this.OrderObservations(await this.app.LoadJsonAsync(this.url, this.observationParams), loc);
         this.forecastParams.lat = loc.lat;
         this.forecastParams.lon = loc.lon;
-        let forecasts = await this.app.LoadJsonAsync(this.url, this.forecastParams);
+        const forecasts = await this.app.LoadJsonAsync(this.url, this.forecastParams);
         if (forecasts == null)
             return null;
         return this.ParseWeather(observations, forecasts, loc);
     }
     ParseWeather(observations, forecasts, loc) {
         var _a, _b, _c, _d, _e, _f;
-        let observation = this.MergeObservations(observations);
-        let result = {
+        const observation = this.MergeObservations(observations);
+        const result = {
             temperature: CelsiusToKelvin((_a = observation.Temperature2m) !== null && _a !== void 0 ? _a : null),
             condition: this.ResolveCondition(observation.symbol),
             humidity: observation.RelativeHumidity,
@@ -14585,7 +13160,8 @@ class DanishMI {
             wind: {
                 degree: observation.WindDirection,
                 speed: observation.WindSpeed10m
-            }
+            },
+            dewPoint: null,
         };
         result.location = {
             city: forecasts.city,
@@ -14608,7 +13184,7 @@ class DanishMI {
         if (result.condition.customIcon == "alien-symbolic") {
             result.condition = this.ResolveCondition(forecasts.timeserie[0].symbol);
         }
-        let forecastData = [];
+        const forecastData = [];
         for (let index = 0; index < forecasts.aggData.length - 1; index++) {
             const element = forecasts.aggData[index];
             forecastData.push({
@@ -14619,12 +13195,11 @@ class DanishMI {
             });
         }
         result.forecasts = forecastData;
-        let hourlyData = [];
-        for (let index = 0; index < forecasts.timeserie.length; index++) {
-            const element = forecasts.timeserie[index];
+        const hourlyData = [];
+        for (const element of forecasts.timeserie) {
             if (element.time == null)
                 continue;
-            let hour = {
+            const hour = {
                 date: DateTime.fromJSDate(this.DateStringToDate(element.time), { zone: loc.timeZone }),
                 temp: CelsiusToKelvin(element.temp),
                 condition: this.ResolveCondition(element.symbol)
@@ -14642,16 +13217,17 @@ class DanishMI {
     }
     MergeObservations(observations) {
         var _a, _b, _c, _d, _e, _f;
-        let result = {
+        const result = {
             symbol: undefined,
             PressureMSL: undefined,
             Temperature2m: undefined,
             WindDirection: undefined,
             RelativeHumidity: undefined,
             WindSpeed10m: undefined,
+            PrecAmount10Min: undefined,
+            WindGustLast10Min: undefined
         };
-        for (let index = 0; index < observations.length; index++) {
-            const element = observations[index];
+        for (const element of observations) {
             result.symbol = (_a = result.symbol) !== null && _a !== void 0 ? _a : element.values.symbol;
             result.PressureMSL = (_b = result.PressureMSL) !== null && _b !== void 0 ? _b : element.values.PressureMSL;
             result.Temperature2m = (_c = result.Temperature2m) !== null && _c !== void 0 ? _c : element.values.Temperature2m;
@@ -14662,15 +13238,15 @@ class DanishMI {
         return result;
     }
     ResolveDailyCondition(hourlyData, date) {
-        let target = date.set({ hour: 6 });
-        let upto = target.plus({ days: 1 });
-        let relevantHours = hourlyData.filter((x) => {
-            let hour = DateTime.fromJSDate(this.DateStringToDate(x.time), { zone: target.zoneName });
+        const target = date.set({ hour: 6 });
+        const upto = target.plus({ days: 1 });
+        const relevantHours = hourlyData.filter((x) => {
+            const hour = DateTime.fromJSDate(this.DateStringToDate(x.time), { zone: target.zoneName });
             if (hour >= target && hour < upto)
                 return true;
             return false;
         });
-        let normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
+        const normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
         let resultSymbol;
         if (!!normalizedSymbols.find(x => x > 10 && x != 45))
             resultSymbol = Math.max(...normalizedSymbols);
@@ -14686,7 +13262,7 @@ class DanishMI {
                 customIcon: "alien-symbolic",
                 icons: ["weather-severe-alert"]
             };
-        let isNight = (symbol > 100);
+        const isNight = (symbol > 100);
         if (isNight)
             symbol = symbol - 100;
         switch (symbol) {
@@ -14845,7 +13421,7 @@ class DanishMI {
         this.observationParams.south = loc.lat - 0.04;
     }
     OrderObservations(observations, loc) {
-        let result = [];
+        const result = [];
         for (const key in observations) {
             const element = observations[key];
             result.push(Object.assign(Object.assign({}, element), { dist: GetDistance(loc.lat, loc.lon, element.latitude, element.longitude) }));
@@ -14873,10 +13449,2204 @@ class DanishMI {
             if (str.length == 3) {
                 str = ("0000" + str).substr(-4, 4);
             }
-            let today = new Date();
+            const today = new Date();
             today.setUTCHours(parseInt(str.substring(0, 2)), parseInt(str.substring(2, 4)), 0, 0);
             return today;
         }
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/accuWeather.ts
+
+
+
+class AccuWeather extends BaseProvider {
+    constructor(app) {
+        super(app);
+        this.needsApiKey = true;
+        this.prettyName = _("AccuWeather");
+        this.name = "AccuWeather";
+        this.maxForecastSupport = 12;
+        this.maxHourlyForecastSupport = 120;
+        this.website = "https://www.accuweather.com/";
+        this.remainingQuota = null;
+        this.tier = "free";
+        this.baseUrl = "http://dataservice.accuweather.com/";
+        this.locSearchUrl = this.baseUrl + "locations/v1/cities/geoposition/search";
+        this.currentConditionUrl = this.baseUrl + "currentconditions/v1/";
+        this.locationCache = {};
+        this.HandleErrors = (e) => {
+            switch (e.ErrorData.code) {
+                case 400:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "bad api response"
+                    });
+                    return true;
+                case 401:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "bad key",
+                    });
+                    return true;
+                case 403:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "key blocked",
+                    });
+                    return true;
+            }
+            return false;
+        };
+    }
+    get remainingCalls() {
+        return this.remainingQuota == null ? null : Math.floor(this.remainingQuota / 3);
+    }
+    ;
+    get dailyForecastUrl() {
+        let url = this.baseUrl + "forecasts/v1/daily/";
+        if (this.tier == "free" || this.tier == "standard")
+            url += "5day/";
+        else if (this.tier == "prime")
+            url += "10day/";
+        else
+            url += "10day/";
+        return url;
+    }
+    get hourlyForecastUrl() {
+        let url = this.baseUrl + "forecasts/v1/hourly/";
+        if (this.tier == "free" || this.tier == "standard")
+            url += "12hour/";
+        else if (this.tier == "prime")
+            url += "72hour/";
+        else
+            url += "120hour";
+        return url;
+    }
+    async GetWeather(loc) {
+        var _a, _b;
+        const locationID = `${loc.lat},${loc.lon}`;
+        const userLocale = (_b = (_a = this.app.config.currentLocale) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== null && _b !== void 0 ? _b : "en-us";
+        const locale = this.app.config._translateCondition ? userLocale : "en-us";
+        let location;
+        if (this.locationCache[locationID] != null)
+            location = this.locationCache[locationID];
+        else
+            location = await this.app.LoadJsonAsync(this.locSearchUrl, { q: locationID, details: true, language: userLocale, apikey: this.app.config.ApiKey }, this.HandleErrors);
+        if (location == null) {
+            return null;
+        }
+        const [current, forecast, hourly] = await Promise.all([
+            this.app.LoadJsonAsyncWithDetails(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsyncWithDetails(this.dailyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsyncWithDetails(this.hourlyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors)
+        ]);
+        if (!current.Success || !forecast.Success || !hourly.Success)
+            return null;
+        this.remainingQuota = Math.min(parseInt(current.ResponseHeaders["RateLimit-Remaining"]), parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]), parseInt(hourly.ResponseHeaders["RateLimit-Remaining"]));
+        this.SetTier(parseInt(current.ResponseHeaders["RateLimit-Limit"]));
+        return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
+    }
+    SetTier(limit) {
+        if (limit > 1800000)
+            this.tier = "elite";
+        else if (limit > 225000)
+            this.tier = "prime";
+        else if (limit > 50)
+            this.tier = "standard";
+        else
+            this.tier = "free";
+    }
+    ParseWeather(current, daily, hourly, loc) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+        return {
+            date: DateTime.fromISO(current.LocalObservationDateTime),
+            coord: {
+                lat: loc.GeoPosition.Latitude,
+                lon: loc.GeoPosition.Longitude
+            },
+            dewPoint: CelsiusToKelvin((_b = (_a = current.DewPoint) === null || _a === void 0 ? void 0 : _a.Metric) === null || _b === void 0 ? void 0 : _b.Value),
+            humidity: current.RelativeHumidity,
+            pressure: (_d = (_c = current.Pressure) === null || _c === void 0 ? void 0 : _c.Metric) === null || _d === void 0 ? void 0 : _d.Value,
+            location: {
+                city: loc.LocalizedName,
+                country: loc.Country.LocalizedName,
+                timeZone: loc.TimeZone.Name,
+                tzOffset: loc.TimeZone.GmtOffset,
+            },
+            sunrise: DateTime.fromISO(daily.DailyForecasts[0].Sun.Rise),
+            sunset: DateTime.fromISO(daily.DailyForecasts[0].Sun.Set),
+            temperature: CelsiusToKelvin((_f = (_e = current.Temperature) === null || _e === void 0 ? void 0 : _e.Metric) === null || _f === void 0 ? void 0 : _f.Value),
+            wind: {
+                degree: (_h = (_g = current.Wind) === null || _g === void 0 ? void 0 : _g.Direction) === null || _h === void 0 ? void 0 : _h.Degrees,
+                speed: KPHtoMPS((_l = (_k = (_j = current.Wind) === null || _j === void 0 ? void 0 : _j.Speed) === null || _k === void 0 ? void 0 : _k.Metric) === null || _l === void 0 ? void 0 : _l.Value),
+            },
+            condition: Object.assign(Object.assign({}, this.ResolveIcons(current.WeatherIcon, current.IsDayTime)), { main: current.WeatherText, description: current.WeatherText }),
+            hourlyForecasts: this.ParseHourly(hourly),
+            forecasts: this.ParseDaily(daily)
+        };
+    }
+    ParseHourly(hourly) {
+        var _a, _b, _c, _d, _e, _f, _g;
+        const hours = [];
+        for (const hour of hourly) {
+            let precipitation = undefined;
+            if ((_a = hour.PrecipitationProbability) !== null && _a !== void 0 ? _a : 0 > 0) {
+                switch (hour.PrecipitationType) {
+                    case "Rain":
+                        precipitation = {
+                            type: "rain",
+                            chance: hour.RainProbability,
+                            volume: (_c = (_b = hour === null || hour === void 0 ? void 0 : hour.Rain) === null || _b === void 0 ? void 0 : _b.Value) !== null && _c !== void 0 ? _c : undefined
+                        };
+                        break;
+                    case "Snow":
+                        precipitation = {
+                            type: "snow",
+                            chance: hour.SnowProbability,
+                            volume: (_e = (_d = hour === null || hour === void 0 ? void 0 : hour.Snow) === null || _d === void 0 ? void 0 : _d.Value) !== null && _e !== void 0 ? _e : undefined
+                        };
+                        break;
+                    case "Ice":
+                        precipitation = {
+                            type: "ice pellets",
+                            chance: hour.IceProbability,
+                            volume: (_g = (_f = hour === null || hour === void 0 ? void 0 : hour.Ice) === null || _f === void 0 ? void 0 : _f.Value) !== null && _g !== void 0 ? _g : undefined
+                        };
+                        break;
+                }
+            }
+            hours.push({
+                date: DateTime.fromISO(hour.DateTime),
+                condition: Object.assign(Object.assign({}, this.ResolveIcons(hour.WeatherIcon, hour.IsDaylight)), { main: hour.IconPhrase, description: hour.IconPhrase }),
+                temp: CelsiusToKelvin(hour.Temperature.Value),
+                precipitation: precipitation
+            });
+        }
+        return hours;
+    }
+    ParseDaily(daysPayload) {
+        const days = [];
+        for (const day of daysPayload.DailyForecasts) {
+            days.push({
+                date: DateTime.fromISO(day.Date),
+                temp_max: CelsiusToKelvin(day.Temperature.Maximum.Value),
+                temp_min: CelsiusToKelvin(day.Temperature.Minimum.Value),
+                condition: Object.assign(Object.assign({}, this.ResolveIcons(day.Day.Icon, true)), { main: day.Day.IconPhrase, description: day.Day.ShortPhrase })
+            });
+        }
+        return days;
+    }
+    ResolveIcons(icon, day) {
+        switch (icon) {
+            case 1:
+                return {
+                    customIcon: "alien-symbolic",
+                    icons: []
+                };
+            case 1:
+                return {
+                    customIcon: day ? "day-sunny-symbolic" : "night-clear-symbolic",
+                    icons: [day ? "weather-clear" : "weather-clear-night"]
+                };
+            case 2:
+            case 3:
+            case 4:
+                return {
+                    customIcon: day ? "day-cloudy-symbolic" : "night-alt-cloudy-symbolic",
+                    icons: [day ? "weather-few-clouds" : "weather-few-clouds-night"]
+                };
+            case 5:
+                return {
+                    customIcon: day ? "day-fog-symbolic" : "night-fog-symbolic",
+                    icons: [day ? "weather-clear" : "weather-clear-night"]
+                };
+            case 6:
+                return {
+                    customIcon: day ? "day-cloudy-symbolic" : "night-alt-cloudy-symbolic",
+                    icons: day ? ["weather-clouds", "weather-few-clouds"] : ["weather-clouds-night", "weather-few-clouds-night"]
+                };
+            case 7:
+            case 8:
+                return {
+                    customIcon: "cloud-symbolic",
+                    icons: ["weather-overcast"]
+                };
+            case 11:
+                return {
+                    customIcon: "fog-symbolic",
+                    icons: ["weather-fog"]
+                };
+            case 12:
+                return {
+                    customIcon: "rain-wind-symbolic",
+                    icons: ["weather-showers", "weather-rain", "weather-freezing-rain"]
+                };
+            case 13:
+            case 14:
+                return {
+                    customIcon: day ? "day-showers-symbolic" : "night-alt-showers-symbolic",
+                    icons: day ? ["weather-showers-scattered-day", "weather-showers-day", "weather-showers-scattered", "weather-showers"] : ["weather-showers-scattered-night", "weather-showers-night", "weather-showers-scattered", "weather-showers"]
+                };
+            case 15:
+                return {
+                    customIcon: "thunderstorm-symbolic",
+                    icons: ["weather-storm"]
+                };
+            case 16:
+            case 17:
+                return {
+                    customIcon: day ? "day-thunderstorm-symbolic" : "night-alt-thunderstorm-symbolic",
+                    icons: ["weather-storm"]
+                };
+            case 18:
+                return {
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-rain", "weather-showers", "weather-freezing-rain"]
+                };
+            case 19:
+            case 22:
+                return {
+                    customIcon: "snow-symbolic",
+                    icons: ["weather-snow"]
+                };
+            case 20:
+            case 21:
+            case 23:
+                return {
+                    customIcon: day ? "day-snow-symbolic" : "night-alt-snow-symbolic",
+                    icons: day ? ["weather-snow-day", "weather-snow-scattered-day", "weather-snow"] : ["weather-snow-night", "weather-snow-scattered-night", "weather-snow"]
+                };
+            case 24:
+                return {
+                    customIcon: "snowflake-cold-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case 25:
+                return {
+                    customIcon: "sleet-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers"]
+                };
+            case 26:
+                return {
+                    customIcon: "rain-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers"]
+                };
+            case 29:
+                return {
+                    customIcon: "rain-mix-symbolic",
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers"]
+                };
+            case 30:
+                return {
+                    customIcon: "hot-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case 31:
+                return {
+                    customIcon: "snowflake-cold-symbolic",
+                    icons: ["weather-severe-alert"]
+                };
+            case 32:
+                return {
+                    customIcon: "windy-symbolic",
+                    icons: ["weather-windy", "weather-breeze"]
+                };
+            case 33:
+                return {
+                    customIcon: "night-clear-symbolic",
+                    icons: ["weather-clear-night"]
+                };
+            case 34:
+            case 35:
+            case 36:
+            case 38:
+                return {
+                    customIcon: "night-alt-cloudy-symbolic",
+                    icons: ["weather-few-clouds-night"]
+                };
+            case 37:
+                return {
+                    customIcon: "night-fog-symbolic",
+                    icons: ["weather-few-clouds-night"]
+                };
+            case 39:
+            case 40:
+                return {
+                    customIcon: "night-alt-showers-symbolic",
+                    icons: ["weather-showers-scattered-night", "weather-showers-night", "weather-showers"]
+                };
+            case 41:
+            case 42:
+                return {
+                    customIcon: "night-alt-storm-showers-symbolic",
+                    icons: ["weather-storm"]
+                };
+            case 43:
+            case 44:
+                return {
+                    customIcon: "night-alt-snow-symbolic",
+                    icons: ["weather-snow-night", "weather-snow-scattered-night", "weather-snow"]
+                };
+            default:
+                return {
+                    customIcon: "refresh-symbolic",
+                    icons: []
+                };
+        }
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/config.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const { get_home_dir: config_get_home_dir } = imports.gi.GLib;
+const { File: config_File } = imports.gi.Gio;
+const { AppletSettings, BindingDirection } = imports.ui.settings;
+const config_Lang = imports.lang;
+const keybindingManager = imports.ui.main.keybindingManager;
+const { IconType: config_IconType } = imports.gi.St;
+const { get_language_names } = imports.gi.GLib;
+const { Settings: config_Settings } = imports.gi.Gio;
+const ServiceClassMapping = {
+    "DarkSky": (app) => new DarkSky(app),
+    "OpenWeatherMap": (app) => new OpenWeatherMap(app),
+    "MetNorway": (app) => new MetNorway(app),
+    "Weatherbit": (app) => new Weatherbit(app),
+    "Tomorrow.io": (app) => new ClimacellV4(app),
+    "Met Office UK": (app) => new MetUk(app),
+    "US Weather": (app) => new USWeather(app),
+    "Visual Crossing": (app) => new VisualCrossing(app),
+    "DanishMI": (app) => new DanishMI(app),
+    "AccuWeather": (app) => new AccuWeather(app)
+};
+const Keys = {
+    DATA_SERVICE: "dataService",
+    API_KEY: "apiKey",
+    TEMPERATURE_UNIT_KEY: "temperatureUnit",
+    TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
+    WIND_SPEED_UNIT: "windSpeedUnit",
+    DISTANCE_UNIT: "distanceUnit",
+    CITY: "locationLabelOverride",
+    TRANSLATE_CONDITION: "translateCondition",
+    VERTICAL_ORIENTATION: "verticalOrientation",
+    SHOW_TEXT_IN_PANEL: "showTextInPanel",
+    SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
+    SHOW_SUNRISE: "showSunrise",
+    SHOW_24HOURS: "show24Hours",
+    FORECAST_DAYS: "forecastDays",
+    FORECAST_HOURS: "forecastHours",
+    FORECAST_COLS: "forecastColumns",
+    FORECAST_ROWS: "forecastRows",
+    REFRESH_INTERVAL: "refreshInterval",
+    PRESSURE_UNIT: "pressureUnit",
+    SHORT_CONDITIONS: "shortConditions",
+    MANUAL_LOCATION: "manualLocation",
+    USE_CUSTOM_APPLET_ICONS: 'useCustomAppletIcons',
+    USE_CUSTOM_MENU_ICONS: "useCustomMenuIcons",
+    RUSSIAN_STYLE: "tempRussianStyle",
+    SHORT_HOURLY_TIME: "shortHourlyTime",
+    SHOW_FORECAST_DATES: "showForecastDates",
+    WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
+    IMMEDIATE_PRECIP: "immediatePrecip",
+    SHOW_BOTH_TEMP: "showBothTempUnits",
+    DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText",
+    ALWAYS_SHOW_HOURLY: "alwaysShowHourlyWeather"
+};
+class Config {
+    constructor(app, instanceID) {
+        this.fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
+        this.windSpeedUnitLocales = {
+            "fi kr no pl ru se": "m/s",
+            "us gb": "mph"
+        };
+        this.distanceUnitLocales = {
+            "us gb": "imperial"
+        };
+        this.WEATHER_LOCATION = "location";
+        this.WEATHER_LOCATION_LIST = "locationList";
+        this.doneTypingLocation = null;
+        this.currentLocation = null;
+        this.textColorStyle = null;
+        this.timezone = undefined;
+        this.OnKeySettingsUpdated = () => {
+            if (this.keybinding != null) {
+                keybindingManager.addHotKey(UUID, this.keybinding, config_Lang.bind(this.app, this.app.on_applet_clicked));
+            }
+        };
+        this.onLogLevelUpdated = () => {
+            logger_Logger.ChangeLevel(this._logLevel);
+        };
+        this.OnLocationChanged = () => {
+            logger_Logger.Debug("User changed location, waiting 3 seconds...");
+            if (this.doneTypingLocation != null)
+                utils_clearTimeout(this.doneTypingLocation);
+            this.doneTypingLocation = utils_setTimeout(config_Lang.bind(this, this.DoneTypingLocation), 3000);
+        };
+        this.OnLocationStoreChanged = () => {
+            this.LocStore.OnLocationChanged(this._locationList);
+        };
+        this.OnFontChanged = () => {
+            this.currentFontSize = this.GetCurrentFontSize();
+            this.app.RefreshAndRebuild();
+        };
+        this.OnSettingChanged = () => {
+            this.app.RefreshAndRebuild();
+        };
+        this.app = app;
+        this.currentLocale = ConstructJsLocale(get_language_names()[0]);
+        logger_Logger.Debug("System locale is " + this.currentLocale);
+        this.autoLocProvider = new IpApi(app);
+        this.geoLocationService = new GeoLocation(app);
+        this.countryCode = this.GetCountryCode(this.currentLocale);
+        this.settings = new AppletSettings(this, UUID, instanceID);
+        this.InterfaceSettings = new config_Settings({ schema: "org.cinnamon.desktop.interface" });
+        this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
+        this.currentFontSize = this.GetCurrentFontSize();
+        this.BindSettings();
+        this.LocStore = new LocationStore(this.app, this);
+        this.onLogLevelUpdated();
+    }
+    get Timezone() {
+        return this.timezone;
+    }
+    set Timezone(value) {
+        if (!value || value == "")
+            value = undefined;
+        this.timezone = value;
+    }
+    BindSettings() {
+        let k;
+        for (k in Keys) {
+            const key = Keys[k];
+            const keyProp = "_" + key;
+            this.settings.bindProperty(BindingDirection.IN, key, keyProp, this.OnSettingChanged, null);
+        }
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
+        this.settings.bind("tempTextOverride", "_" + "tempTextOverride", this.app.RefreshLabel);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
+        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this.OnKeySettingsUpdated, null);
+        this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
+        this.settings.bind("selectedLogPath", "_selectedLogPath", this.app.saveLog);
+        keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked(null));
+    }
+    get CurrentFontSize() {
+        return this.currentFontSize;
+    }
+    get CurrentLocation() {
+        return this.currentLocation;
+    }
+    get ApiKey() {
+        return this._apiKey.replace(" ", "");
+    }
+    get Language() {
+        return this.GetLanguage(this.currentLocale);
+    }
+    get TemperatureUnit() {
+        if (this._temperatureUnit == "automatic")
+            return this.GetLocaleTemperateUnit(this.countryCode);
+        return this._temperatureUnit;
+    }
+    get WindSpeedUnit() {
+        if (this._windSpeedUnit == "automatic")
+            return this.GetLocaleWindSpeedUnit(this.countryCode);
+        return this._windSpeedUnit;
+    }
+    get DistanceUnit() {
+        if (this._distanceUnit == "automatic")
+            return this.GetLocaleDistanceUnit(this.countryCode);
+        return this._distanceUnit;
+    }
+    get IconType() {
+        if (this._useCustomMenuIcons)
+            return config_IconType.SYMBOLIC;
+        return this._useSymbolicIcons ?
+            config_IconType.SYMBOLIC :
+            config_IconType.FULLCOLOR;
+    }
+    ;
+    get AppletIconType() {
+        if (this._useCustomAppletIcons)
+            return config_IconType.SYMBOLIC;
+        return this._useSymbolicIcons ?
+            config_IconType.SYMBOLIC :
+            config_IconType.FULLCOLOR;
+    }
+    SwitchToNextLocation() {
+        const nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
+        if (nextLoc == null)
+            return null;
+        this.InjectLocationToConfig(nextLoc, true);
+        return nextLoc;
+    }
+    SwitchToPreviousLocation() {
+        const previousLoc = this.LocStore.GetPreviousLocation(this.CurrentLocation);
+        if (previousLoc == null)
+            return null;
+        this.InjectLocationToConfig(previousLoc, true);
+        return previousLoc;
+    }
+    NoApiKey() {
+        var _a;
+        const key = (_a = this._apiKey) === null || _a === void 0 ? void 0 : _a.replace(" ", "");
+        return (!key || key == "");
+    }
+    ;
+    async EnsureLocation() {
+        this.currentLocation = null;
+        if (!this._manualLocation) {
+            const location = await this.autoLocProvider.GetLocation();
+            if (!location)
+                return null;
+            this.InjectLocationToConfig(location);
+            return location;
+        }
+        let loc = this._location;
+        if (loc == undefined || loc.trim() == "") {
+            this.app.ShowError({
+                type: "hard",
+                detail: "no location",
+                userError: true,
+                message: _("Make sure you entered a location or use Automatic location instead")
+            });
+            return null;
+        }
+        let location = this.LocStore.FindLocation(this._location);
+        if (location != null) {
+            logger_Logger.Debug("location exist in locationstore, retrieve");
+            this.LocStore.SwitchToLocation(location);
+            this.InjectLocationToConfig(location, true);
+            return location;
+        }
+        else if (IsCoordinate(loc)) {
+            loc = loc.replace(" ", "");
+            const latLong = loc.split(",");
+            const location = {
+                lat: parseFloat(latLong[0]),
+                lon: parseFloat(latLong[1]),
+                timeZone: DateTime.now().zoneName,
+                entryText: loc,
+            };
+            this.InjectLocationToConfig(location);
+            return location;
+        }
+        logger_Logger.Debug("Location is text, geo locating...");
+        const locationData = await this.geoLocationService.GetLocation(loc);
+        if (locationData == null)
+            return null;
+        if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.entryText)) {
+            logger_Logger.Debug("Address found via address search");
+        }
+        location = this.LocStore.FindLocation(locationData.entryText);
+        if (location != null) {
+            logger_Logger.Debug("Found location was found in locationStore, return that instead");
+            this.InjectLocationToConfig(location);
+            this.LocStore.SwitchToLocation(location);
+            return location;
+        }
+        else {
+            this.InjectLocationToConfig(locationData);
+            return locationData;
+        }
+    }
+    InjectLocationToConfig(loc, switchToManual = false) {
+        logger_Logger.Debug("Location setting is now: " + loc.entryText);
+        const text = (loc.entryText + "");
+        this.SetLocation(text);
+        this.currentLocation = loc;
+        if (switchToManual == true)
+            this.settings.setValue(Keys.MANUAL_LOCATION, true);
+    }
+    DoneTypingLocation() {
+        logger_Logger.Debug("User has finished typing, beginning refresh");
+        this.doneTypingLocation = null;
+        this.app.RefreshAndRebuild();
+    }
+    SetLocation(value) {
+        this.settings.setValue(this.WEATHER_LOCATION, value);
+    }
+    SetLocationList(list) {
+        this.settings.setValue(this.WEATHER_LOCATION_LIST, list);
+    }
+    GetLocaleTemperateUnit(code) {
+        if (code == null || !this.fahrenheitCountries.includes(code))
+            return "celsius";
+        return "fahrenheit";
+    }
+    GetLocaleWindSpeedUnit(code) {
+        if (code == null)
+            return "kph";
+        for (const key in this.windSpeedUnitLocales) {
+            if (key.includes(code))
+                return this.windSpeedUnitLocales[key];
+        }
+        return "kph";
+    }
+    GetLocaleDistanceUnit(code) {
+        if (code == null)
+            return "metric";
+        for (const key in this.distanceUnitLocales) {
+            if (key.includes(code))
+                return this.distanceUnitLocales[key];
+        }
+        return "metric";
+    }
+    GetCountryCode(locale) {
+        if (locale == null)
+            return null;
+        const split = locale.split("-");
+        if (split.length < 2)
+            return null;
+        return split[1];
+    }
+    GetLanguage(locale) {
+        if (locale == null)
+            return null;
+        const split = locale.split("-");
+        if (split.length < 1)
+            return null;
+        return split[0];
+    }
+    GetCurrentFontSize() {
+        const nameString = this.InterfaceSettings.get_string("font-name");
+        const elements = nameString.split(" ");
+        const size = parseFloat(elements[elements.length - 1]);
+        logger_Logger.Debug("Font size changed to " + size.toString());
+        return size;
+    }
+    async GetAppletConfigJson() {
+        var _a, _b, _c, _d, _e;
+        const home = (_a = config_get_home_dir()) !== null && _a !== void 0 ? _a : "~";
+        const configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+        const configFile = config_File.new_for_path(configFilePath);
+        if (!await FileExists(configFile)) {
+            throw new Error(_("Could not retrieve config, file was not found under path\n {configFilePath}", { configFilePath: configFilePath }));
+        }
+        const confString = await LoadContents(configFile);
+        if (confString == null) {
+            throw new Error(_("Could not get contents of config file under path\n {configFilePath}", { configFilePath: configFilePath }));
+        }
+        const conf = JSON.parse(confString);
+        if (((_b = conf === null || conf === void 0 ? void 0 : conf.apiKey) === null || _b === void 0 ? void 0 : _b.value) != null)
+            conf.apiKey.value = "REDACTED";
+        for (const item of (_d = (_c = conf === null || conf === void 0 ? void 0 : conf.locationList) === null || _c === void 0 ? void 0 : _c.value) !== null && _d !== void 0 ? _d : []) {
+            item.lat = "REDACTED";
+            item.lon = "REDACTED";
+            item.city = "REDACTED";
+            item.entryText = "REDACTED";
+        }
+        if (((_e = conf === null || conf === void 0 ? void 0 : conf.location) === null || _e === void 0 ? void 0 : _e.value) != null)
+            conf.location.value = "REDACTED";
+        return conf;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/loop.ts
+
+
+var weatherAppletGUIDs = {};
+class WeatherLoop {
+    constructor(app, instanceID) {
+        this.lastUpdated = new Date(0);
+        this.pauseRefresh = false;
+        this.LOOP_INTERVAL = 15;
+        this.appletRemoved = false;
+        this.updating = false;
+        this.errorCount = 0;
+        this.DoCheck = async () => {
+            if (this.updating)
+                return;
+            try {
+                this.updating = true;
+                if (this.app.encounteredError == true)
+                    this.IncrementErrorCount();
+                this.ValidateLastUpdateTime();
+                if (this.pauseRefresh) {
+                    logger_Logger.Debug("Configuration or network error, updating paused");
+                    return;
+                }
+                if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
+                    logger_Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
+                        + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
+                        + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
+                    const state = await this.app.RefreshWeather(false);
+                    if (state == "error")
+                        logger_Logger.Info("App is currently refreshing, refresh skipped in main loop");
+                    if (state == "success" || "locked")
+                        this.lastUpdated = new Date();
+                }
+                else {
+                    logger_Logger.Debug("No need to update yet, skipping");
+                }
+            }
+            catch (e) {
+                if (e instanceof Error)
+                    logger_Logger.Error("Error in Main loop: " + e, e);
+                this.app.encounteredError = true;
+            }
+            finally {
+                this.updating = false;
+            }
+        };
+        this.app = app;
+        this.instanceID = instanceID;
+        this.GUID = Guid();
+        weatherAppletGUIDs[instanceID] = this.GUID;
+    }
+    IsDataTooOld() {
+        if (!this.lastUpdated)
+            return true;
+        const oldDate = this.lastUpdated;
+        oldDate.setMinutes(oldDate.getMinutes() + (this.app.config._refreshInterval * 2));
+        return (this.lastUpdated > oldDate);
+    }
+    async Start() {
+        while (true) {
+            if (this.IsStray())
+                return;
+            await this.DoCheck();
+            await delay(this.LoopInterval());
+        }
+    }
+    ;
+    Stop() {
+        this.appletRemoved = true;
+    }
+    Pause() {
+        this.pauseRefresh = true;
+    }
+    async Resume() {
+        this.pauseRefresh = false;
+        await this.DoCheck();
+    }
+    ResetErrorCount() {
+        this.errorCount = 0;
+    }
+    GetSecondsUntilNextRefresh() {
+        return (this.errorCount > 0) ? (this.errorCount) * this.LOOP_INTERVAL : this.LOOP_INTERVAL;
+    }
+    IsStray() {
+        if (this.appletRemoved == true)
+            return true;
+        if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
+            logger_Logger.Debug("Applet GUID: " + this.GUID);
+            logger_Logger.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
+            logger_Logger.Info("GUID mismatch, terminating applet");
+            return true;
+        }
+        return false;
+    }
+    IncrementErrorCount() {
+        this.app.encounteredError = false;
+        this.errorCount++;
+        logger_Logger.Debug("Encountered error in previous loop");
+        if (this.errorCount > 60)
+            this.errorCount = 60;
+    }
+    NextUpdate() {
+        return new Date(this.lastUpdated.getTime() + this.app.config._refreshInterval * 60000);
+    }
+    ValidateLastUpdateTime() {
+        if (this.lastUpdated > new Date())
+            this.lastUpdated = new Date(0);
+    }
+    LoopInterval() {
+        return (this.errorCount > 0) ? this.LOOP_INTERVAL * this.errorCount * 1000 : this.LOOP_INTERVAL * 1000;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/lib/commandRunner.ts
+
+const { spawnCommandLineAsyncIO } = imports.misc.util;
+async function SpawnProcessJson(command) {
+    const response = await SpawnProcess(command);
+    if (!response.Success)
+        return response;
+    try {
+        response.Data = JSON.parse(response.Data);
+    }
+    catch (e) {
+        if (e instanceof Error)
+            Logger.Error("Error: Command response is not JSON. The response: " + response.Data, e);
+        response.Success = false;
+        response.ErrorData = {
+            Code: -1,
+            Message: "Failed to parse JSON",
+            Type: "jsonParse",
+        };
+    }
+    finally {
+        return response;
+    }
+}
+async function SpawnProcess(command) {
+    let cmd = "";
+    for (const element of command) {
+        cmd += "'" + element + "' ";
+    }
+    const response = await new Promise((resolve, reject) => {
+        spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
+            let result = {
+                Success: exitCode == 0,
+                ErrorData: undefined,
+                Data: aStdout !== null && aStdout !== void 0 ? aStdout : null
+            };
+            if (exitCode != 0) {
+                result.ErrorData = {
+                    Code: exitCode,
+                    Message: err !== null && err !== void 0 ? err : null,
+                    Type: "unknown"
+                };
+            }
+            resolve(result);
+            return result;
+        });
+    });
+    return response;
+}
+function OpenUrl(element) {
+    if (!element.url)
+        return;
+    imports.gi.Gio.app_info_launch_default_for_uri(element.url, global.create_app_launch_context());
+}
+
+;// CONCATENATED MODULE: ./src/3_8/ui_elements/weatherbutton.ts
+
+const { Button } = imports.gi.St;
+const { SignalManager } = imports.misc.signalManager;
+class WeatherButton {
+    constructor(options, doNotAddPadding = false) {
+        this.disabled = false;
+        this.Hovered = new Event();
+        this.Clicked = new Event();
+        this.onHoverLeave = (event) => {
+            this.handleLeave();
+            return false;
+        };
+        this.actor = new Button(options);
+        this.actor.add_style_class_name("popup-menu-item");
+        if (doNotAddPadding)
+            this.actor.set_style('padding: 0px; border-radius: 2px;');
+        else
+            this.actor.set_style('padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;');
+        this.actor.connect("clicked", () => this.clicked());
+        this.actor.connect("enter-event", (actor, event) => this.onHoverEnter(event));
+        this.actor.connect("leave-event", (actor, event) => this.onHoverLeave(event));
+    }
+    handleEnter(actor) {
+        if (!this.disabled)
+            this.actor.add_style_pseudo_class('active');
+    }
+    handleLeave() {
+        this.actor.remove_style_pseudo_class('active');
+    }
+    disable() {
+        this.disabled = true;
+        this.actor.reactive = false;
+    }
+    enable() {
+        this.disabled = false;
+        this.actor.reactive = true;
+    }
+    clicked() {
+        if (!this.disabled) {
+            this.actor.add_style_pseudo_class('active');
+            this.Clicked.Invoke(this, null);
+        }
+    }
+    onHoverEnter(event) {
+        this.handleEnter();
+        this.Hovered.Invoke(this, event);
+        return false;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiCurrentWeather.ts
+
+
+
+
+
+const { Bin, BoxLayout, IconType: uiCurrentWeather_IconType, Label, Icon, Align } = imports.gi.St;
+const uiCurrentWeather_Lang = imports.lang;
+const STYLE_SUMMARYBOX = 'weather-current-summarybox';
+const STYLE_SUMMARY = 'weather-current-summary';
+const STYLE_DATABOX = 'weather-current-databox';
+const STYLE_ICON = 'weather-current-icon';
+const STYLE_ICONBOX = 'weather-current-iconbox';
+const STYLE_DATABOX_CAPTIONS = 'weather-current-databox-captions';
+const STYLE_ASTRONOMY = 'weather-current-astronomy';
+const STYLE_DATABOX_VALUES = 'weather-current-databox-values';
+const STYLE_CURRENT = 'current';
+const STYLE_LOCATION_SELECTOR = 'location-selector';
+class CurrentWeather {
+    constructor(app) {
+        this.app = app;
+        this.actor = new Bin();
+        this.actor.style_class = STYLE_CURRENT;
+        this.app.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a));
+    }
+    Display(weather, config) {
+        try {
+            if (this.app.config.LocStore.ShouldShowLocationSelectors(config.CurrentLocation))
+                this.ShowLocationSelectors();
+            else
+                this.HideLocationSelectors();
+            const location = GenerateLocationText(weather, config);
+            this.SetLocation(location, weather.location.url);
+            this.SetConditionText(weather.condition.description);
+            this.SetWeatherIcon(weather.condition.icons, weather.condition.customIcon);
+            this.SetTemperature(weather.temperature);
+            this.SetHumidity(weather.humidity);
+            this.SetWind(weather.wind.speed, weather.wind.degree);
+            this.SetPressure(weather.pressure);
+            this.SetDewPointField(weather.dewPoint);
+            this.SetAPIUniqueField(weather.extra_field);
+            if (config._showSunrise)
+                this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
+            this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
+            return true;
+        }
+        catch (e) {
+            if (e instanceof Error)
+                logger_Logger.Error("DisplayWeatherError: " + e, e);
+            return false;
+        }
+    }
+    ;
+    UpdateIconType(iconType) {
+        this.weatherIcon.icon_type = iconType;
+    }
+    Destroy() {
+        if (this.actor.get_child() != null)
+            this.actor.get_child().destroy();
+    }
+    Rebuild(config, textColorStyle) {
+        this.Destroy();
+        this.weatherIcon = new Icon({
+            icon_type: config.IconType,
+            icon_size: 64,
+            icon_name: APPLET_ICON,
+            style_class: STYLE_ICON
+        });
+        const box = new BoxLayout({ style_class: STYLE_ICONBOX });
+        box.add_actor(this.weatherIcon);
+        box.add_actor(this.BuildMiddleColumn(config, textColorStyle));
+        box.add_actor(this.BuildRightColumn(textColorStyle, config));
+        this.actor.set_child(box);
+    }
+    ;
+    BuildMiddleColumn(config, textColorStyle) {
+        this.weatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
+        const middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
+        middleColumn.add_actor(this.BuildLocationSection());
+        middleColumn.add(this.weatherSummary, { expand: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, x_fill: false, y_fill: false });
+        this.immediatePrecipitationLabel = new Label({ style_class: "weather-immediate-precipitation" });
+        this.immediatePrecipitationBox = new Bin();
+        this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel);
+        this.immediatePrecipitationBox.hide();
+        middleColumn.add_actor(this.immediatePrecipitationBox);
+        if (config._showSunrise)
+            middleColumn.add_actor(this.BuildSunBox(config, textColorStyle));
+        return middleColumn;
+    }
+    BuildRightColumn(textColorStyle, config) {
+        const textOb = {
+            text: ELLIPSIS
+        };
+        this.temperatureLabel = new Label(textOb);
+        this.humidityLabel = new Label(textOb);
+        this.pressureLabel = new Label(textOb);
+        this.dewPointLabel = new Label({ text: '' });
+        this.apiUniqueLabel = new Label({ text: '' });
+        this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
+        this.dewPointCaption = new Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
+        const rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
+        const rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
+        rb_captions.add_actor(new Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+        rb_captions.add_actor(this.dewPointCaption);
+        rb_captions.add_actor(this.apiUniqueCaptionLabel);
+        rb_values.add_actor(this.temperatureLabel);
+        rb_values.add_actor(this.humidityLabel);
+        rb_values.add_actor(this.pressureLabel);
+        rb_values.add_actor(this.BuildWind(config));
+        rb_values.add_actor(this.dewPointLabel);
+        rb_values.add_actor(this.apiUniqueLabel);
+        const rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
+        rightColumn.add_actor(rb_captions);
+        rightColumn.add_actor(rb_values);
+        return rightColumn;
+    }
+    BuildWind(config) {
+        const windBox = new BoxLayout({ vertical: false });
+        const iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
+        const iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
+        const iconSize = Math.round(config.CurrentFontSize * 0.8);
+        this.windLabel = new Label({ text: ELLIPSIS });
+        this.windDirectionIcon = new Icon({
+            icon_type: uiCurrentWeather_IconType.SYMBOLIC,
+            icon_name: APPLET_ICON,
+            icon_size: iconSize,
+            style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"
+        });
+        if (!config._displayWindAsText)
+            windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
+        windBox.add(this.windLabel);
+        return windBox;
+    }
+    BuildLocationSection() {
+        this.locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), });
+        this.location = this.locationButton.actor;
+        this.location.connect(SIGNAL_CLICKED, () => {
+            if (this.app.encounteredError)
+                this.app.RefreshWeather(true);
+            else if (this.locationButton.url == null)
+                return;
+            else
+                OpenUrl(this.locationButton);
+        });
+        this.nextLocationButton = new WeatherButton({
+            reactive: true,
+            can_focus: true,
+            child: new Icon({
+                icon_type: uiCurrentWeather_IconType.SYMBOLIC,
+                icon_size: this.app.config.CurrentFontSize,
+                icon_name: "custom-right-arrow-symbolic",
+                style_class: STYLE_LOCATION_SELECTOR
+            }),
+        });
+        this.nextLocationButton.actor.connect(SIGNAL_CLICKED, uiCurrentWeather_Lang.bind(this, this.NextLocationClicked));
+        this.previousLocationButton = new WeatherButton({
+            reactive: true,
+            can_focus: true,
+            child: new Icon({
+                icon_type: uiCurrentWeather_IconType.SYMBOLIC,
+                icon_size: this.app.config.CurrentFontSize,
+                icon_name: "custom-left-arrow-symbolic",
+                style_class: STYLE_LOCATION_SELECTOR
+            }),
+        });
+        this.previousLocationButton.actor.connect(SIGNAL_CLICKED, uiCurrentWeather_Lang.bind(this, this.PreviousLocationClicked));
+        const box = new BoxLayout();
+        box.add(this.previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
+        box.add(this.location, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
+        box.add(this.nextLocationButton.actor, { x_fill: false, x_align: Align.END, y_align: Align.MIDDLE, expand: false });
+        return box;
+    }
+    BuildSunBox(config, textColorStyle) {
+        const sunBin = new Bin();
+        this.sunriseLabel = new Label({ text: ELLIPSIS, style: textColorStyle });
+        this.sunsetLabel = new Label({ text: ELLIPSIS, style: textColorStyle });
+        const sunriseBox = new BoxLayout();
+        const sunsetBox = new BoxLayout();
+        if (config._showSunrise) {
+            const sunsetIcon = new Icon({
+                icon_name: "sunset-symbolic",
+                icon_type: uiCurrentWeather_IconType.SYMBOLIC,
+                icon_size: 25,
+                style: textColorStyle
+            });
+            const sunriseIcon = new Icon({
+                icon_name: "sunrise-symbolic",
+                icon_type: uiCurrentWeather_IconType.SYMBOLIC,
+                icon_size: 25,
+                style: textColorStyle
+            });
+            sunriseBox.add_actor(sunriseIcon);
+            sunsetBox.add_actor(sunsetIcon);
+        }
+        const textOptions = {
+            x_fill: false,
+            x_align: Align.START,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        };
+        sunriseBox.add(this.sunriseLabel, textOptions);
+        sunsetBox.add(this.sunsetLabel, textOptions);
+        const ab_spacerLabel = new Label({ text: BLANK });
+        const sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
+        sunBox.add_actor(sunriseBox);
+        sunBox.add_actor(ab_spacerLabel);
+        sunBox.add_actor(sunsetBox);
+        sunBin.set_child(sunBox);
+        return sunBin;
+    }
+    SetImmediatePrecipitation(precip, config) {
+        if (!config._immediatePrecip || !precip || precip.end == null || precip.start == null) {
+            this.immediatePrecipitationBox.hide();
+            return;
+        }
+        this.immediatePrecipitationBox.show();
+        if (precip.start == -1) {
+            this.immediatePrecipitationBox.hide();
+        }
+        else if (precip.start == 0) {
+            if (precip.end != -1)
+                this.immediatePrecipitationLabel.text = _("Precipitation will end in {precipEnd} minutes", { precipEnd: precip.end });
+            else
+                this.immediatePrecipitationLabel.text = _("Precipitation won't end in within an hour");
+        }
+        else {
+            this.immediatePrecipitationLabel.text = _("Precipitation will start within {precipStart} minutes", { precipStart: precip.start });
+        }
+    }
+    SetSunriseAndSunset(sunrise, sunset, tz) {
+        let sunriseText = "";
+        let sunsetText = "";
+        if (sunrise != null && sunset != null && this.app.config._showSunrise) {
+            sunriseText = (GetHoursMinutes(sunrise, this.app.config.currentLocale, this.app.config._show24Hours, tz));
+            sunsetText = (GetHoursMinutes(sunset, this.app.config.currentLocale, this.app.config._show24Hours, tz));
+        }
+        this.sunriseLabel.text = sunriseText;
+        this.sunsetLabel.text = sunsetText;
+    }
+    SetAPIUniqueField(extra_field) {
+        this.apiUniqueLabel.text = "";
+        this.apiUniqueCaptionLabel.text = "";
+        if (!!extra_field) {
+            this.apiUniqueCaptionLabel.text = _(extra_field.name) + LocalizedColon(this.app.config.currentLocale);
+            let value = null;
+            switch (extra_field.type) {
+                case "percent":
+                    value = PercentToLocale(extra_field.value, this.app.config.currentLocale);
+                    break;
+                case "temperature":
+                    value = TempToUserConfig(extra_field.value, this.app.config);
+                    break;
+                default:
+                    value = _(extra_field.value);
+                    break;
+            }
+            this.apiUniqueLabel.text = value !== null && value !== void 0 ? value : "";
+        }
+    }
+    SetDewPointField(dewPoint) {
+        const temp = TempToUserConfig(dewPoint, this.app.config);
+        if (temp == null) {
+            this.dewPointCaption.set_style_class_name("weather-hidden");
+            this.dewPointLabel.set_style_class_name("weather-hidden");
+            return;
+        }
+        this.dewPointCaption.remove_style_class_name("weather-hidden");
+        this.dewPointLabel.remove_style_class_name("weather-hidden");
+        this.dewPointLabel.text = temp;
+    }
+    SetWeatherIcon(iconNames, customIconName) {
+        if (this.app.config._useCustomMenuIcons) {
+            this.weatherIcon.icon_name = customIconName;
+            this.UpdateIconType(uiCurrentWeather_IconType.SYMBOLIC);
+        }
+        else {
+            const icon = WeatherIconSafely(iconNames, this.app.config.IconType);
+            this.weatherIcon.icon_name = icon;
+            this.UpdateIconType(this.app.config.IconType);
+        }
+    }
+    SetConditionText(condition) {
+        this.weatherSummary.text = condition;
+    }
+    SetTemperature(temperature) {
+        const temp = TempToUserConfig(temperature, this.app.config);
+        if (temp == null)
+            return;
+        this.temperatureLabel.text = temp;
+    }
+    SetHumidity(humidity) {
+        if (humidity != null) {
+            this.humidityLabel.text = PercentToLocale(humidity, this.app.config.currentLocale);
+        }
+    }
+    async SetWind(windSpeed, windDegree) {
+        if (windSpeed == null || windDegree == null)
+            return;
+        const wind_direction = CompassDirection(windDegree);
+        this.windDirectionIcon.icon_name = wind_direction;
+        if (this.app.config._displayWindAsText) {
+            const dirText = CompassDirectionText(windDegree);
+            this.windLabel.text = `${(dirText != null ? _(dirText) + " " : "")}${MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit)}`;
+        }
+        else {
+            this.windLabel.text = MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
+        }
+        if (this.app.config.WindSpeedUnit != "Beaufort")
+            this.windLabel.text += " " + _(this.app.config.WindSpeedUnit);
+    }
+    SetPressure(pressure) {
+        if (pressure != null) {
+            this.pressureLabel.text = PressToUserUnits(pressure, this.app.config._pressureUnit) + ' ' + _(this.app.config._pressureUnit);
+        }
+    }
+    SetLocation(locationString, url) {
+        this.location.label = locationString;
+        if (!url)
+            this.locationButton.disable();
+        else
+            this.locationButton.url = url;
+    }
+    NextLocationClicked() {
+        const loc = this.app.config.SwitchToNextLocation();
+        this.app.RefreshAndRebuild(loc);
+    }
+    PreviousLocationClicked() {
+        const loc = this.app.config.SwitchToPreviousLocation();
+        this.app.RefreshAndRebuild(loc);
+    }
+    onLocationStorageChanged(sender, itemCount) {
+        logger_Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
+        if (this.app.config.LocStore.ShouldShowLocationSelectors(this.app.config.CurrentLocation))
+            this.ShowLocationSelectors();
+        else
+            this.HideLocationSelectors();
+    }
+    ShowLocationSelectors() {
+        var _a, _b, _c, _d;
+        (_b = (_a = this.nextLocationButton) === null || _a === void 0 ? void 0 : _a.actor) === null || _b === void 0 ? void 0 : _b.show();
+        (_d = (_c = this.previousLocationButton) === null || _c === void 0 ? void 0 : _c.actor) === null || _d === void 0 ? void 0 : _d.show();
+    }
+    HideLocationSelectors() {
+        var _a, _b, _c, _d;
+        (_b = (_a = this.nextLocationButton) === null || _a === void 0 ? void 0 : _a.actor) === null || _b === void 0 ? void 0 : _b.hide();
+        (_d = (_c = this.previousLocationButton) === null || _c === void 0 ? void 0 : _c.actor) === null || _d === void 0 ? void 0 : _d.hide();
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiForecasts.ts
+
+
+
+
+
+const { Bin: uiForecasts_Bin, BoxLayout: uiForecasts_BoxLayout, Label: uiForecasts_Label, Icon: uiForecasts_Icon, Widget } = imports.gi.St;
+const { GridLayout, Orientation } = imports.gi.Clutter;
+const STYLE_FORECAST_ICON = 'weather-forecast-icon';
+const STYLE_FORECAST_DATABOX = 'weather-forecast-databox';
+const STYLE_FORECAST_DAY = 'weather-forecast-day';
+const STYLE_FORECAST_SUMMARY = 'weather-forecast-summary';
+const STYLE_FORECAST_TEMPERATURE = 'weather-forecast-temperature';
+const STYLE_FORECAST_BOX = 'weather-forecast-box';
+const STYLE_FORECAST_CONTAINER = 'weather-forecast-container';
+const STYLE_FORECAST = 'forecast';
+class UIForecasts {
+    constructor(app) {
+        this.DayClicked = new Event();
+        this.DayHovered = new Event();
+        this.app = app;
+        this.actor = new uiForecasts_Bin({ style_class: STYLE_FORECAST });
+        this.DayClickedCallback = (s, e) => this.OnDayClicked(s, e);
+        this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
+    }
+    UpdateIconType(iconType) {
+        if (!this.forecasts)
+            return;
+        for (const forecast of this.forecasts) {
+            if (!(forecast === null || forecast === void 0 ? void 0 : forecast.Icon))
+                continue;
+            forecast.Icon.icon_type = iconType;
+        }
+    }
+    Display(weather, config) {
+        try {
+            if (!weather.forecasts)
+                return false;
+            if (this.forecasts.length > weather.forecasts.length)
+                this.Rebuild(this.app.config, this.app.config.textColorStyle, weather.forecasts.length);
+            const len = Math.min(this.forecasts.length, weather.forecasts.length);
+            for (let i = 0; i < len; i++) {
+                const forecastData = weather.forecasts[i];
+                const forecastUi = this.forecasts[i];
+                const comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
+                const dayName = GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
+                forecastUi.Day.actor.label = dayName;
+                forecastUi.Day.Hovered.Unsubscribe(this.DayHoveredCallback);
+                forecastUi.Day.Clicked.Unsubscribe(this.DayClickedCallback);
+                let hasHourlyWeather = false;
+                if (weather.hourlyForecasts != null) {
+                    for (let index = 0; index < this.app.GetMaxHourlyForecasts(); index++) {
+                        const element = weather.hourlyForecasts[index];
+                        if (!element)
+                            break;
+                        if (OnSameDay(element.date, forecastData.date)) {
+                            hasHourlyWeather = true;
+                            break;
+                        }
+                    }
+                }
+                forecastUi.Day.ID = forecastData.date;
+                if (hasHourlyWeather) {
+                    forecastUi.Day.enable();
+                    forecastUi.Day.Hovered.Subscribe(this.DayHoveredCallback);
+                    forecastUi.Day.Clicked.Subscribe(this.DayClickedCallback);
+                }
+                else {
+                    forecastUi.Day.disable();
+                }
+                forecastUi.Temperature.text = TempRangeToUserConfig(forecastData.temp_min, forecastData.temp_max, config);
+                forecastUi.Summary.text = comment;
+                forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : WeatherIconSafely(forecastData.condition.icons, config.IconType);
+            }
+            return true;
+        }
+        catch (e) {
+            this.app.ShowError({
+                type: "hard",
+                detail: "unknown",
+                message: _("Forecast parsing failed, see logs for more details."),
+                userError: false
+            });
+            if (e instanceof Error)
+                logger_Logger.Error("DisplayForecastError: " + e, e);
+            return false;
+        }
+    }
+    ;
+    Rebuild(config, textColorStyle, availableHours = null) {
+        this.Destroy();
+        this.forecasts = [];
+        this.grid = new GridLayout({
+            orientation: config._verticalOrientation ? Orientation.VERTICAL : Orientation.VERTICAL
+        });
+        this.grid.set_column_homogeneous(true);
+        const table = new Widget({
+            layout_manager: this.grid,
+            style_class: STYLE_FORECAST_CONTAINER
+        });
+        this.actor.set_child(table);
+        const maxDays = availableHours !== null && availableHours !== void 0 ? availableHours : this.app.GetMaxForecastDays();
+        let maxRow = config._forecastRows;
+        let maxCol = config._forecastColumns;
+        if (config._verticalOrientation) {
+            [maxRow, maxCol] = [maxCol, maxRow];
+        }
+        let curRow = 0;
+        let curCol = 0;
+        for (let i = 0; i < maxDays; i++) {
+            const forecastWeather = {};
+            if (curCol >= maxCol) {
+                curRow++;
+                curCol = 0;
+            }
+            if (curRow >= maxRow)
+                break;
+            forecastWeather.Icon = new uiForecasts_Icon({
+                icon_type: config.IconType,
+                icon_size: 48,
+                icon_name: APPLET_ICON,
+                style_class: STYLE_FORECAST_ICON
+            });
+            forecastWeather.Day = new WeatherButton({
+                style_class: STYLE_FORECAST_DAY,
+                reactive: true,
+                style: textColorStyle,
+                label: ""
+            }, true);
+            forecastWeather.Day.disable();
+            forecastWeather.Summary = new uiForecasts_Label({
+                style_class: STYLE_FORECAST_SUMMARY,
+                reactive: true
+            });
+            forecastWeather.Temperature = new uiForecasts_Label({
+                style_class: STYLE_FORECAST_TEMPERATURE
+            });
+            const by = new uiForecasts_BoxLayout({
+                vertical: true,
+                style_class: STYLE_FORECAST_DATABOX
+            });
+            by.add(forecastWeather.Day.actor, { x_align: imports.gi.St.Align.START, expand: false, x_fill: false });
+            by.add_actor(forecastWeather.Summary);
+            by.add_actor(forecastWeather.Temperature);
+            const bb = new uiForecasts_BoxLayout({
+                style_class: STYLE_FORECAST_BOX
+            });
+            bb.add_actor(forecastWeather.Icon);
+            bb.add_actor(by);
+            this.forecasts[i] = forecastWeather;
+            if (!config._verticalOrientation) {
+                this.grid.attach(bb, curCol, curRow, 1, 1);
+            }
+            else {
+                this.grid.attach(bb, curRow, curCol, 1, 1);
+            }
+            curCol++;
+        }
+    }
+    Destroy() {
+        if (this.actor.get_child() != null)
+            this.actor.get_child().destroy();
+    }
+    OnDayHovered(sender, event) {
+        logger_Logger.Debug("Day Hovered: " + sender.ID.toJSDate().toDateString());
+        this.DayHovered.Invoke(sender, sender.ID);
+    }
+    OnDayClicked(sender, event) {
+        logger_Logger.Debug("Day Clicked: " + sender.ID.toJSDate().toDateString());
+        this.DayClicked.Invoke(sender, sender.ID);
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiHourlyForecasts.ts
+
+
+
+const { PolicyType } = imports.gi.Gtk;
+const { ScrollDirection } = imports.gi.Clutter;
+const { addTween } = imports.ui.tweener;
+const { BoxLayout: uiHourlyForecasts_BoxLayout, Side, Label: uiHourlyForecasts_Label, ScrollView, Icon: uiHourlyForecasts_Icon, Align: uiHourlyForecasts_Align } = imports.gi.St;
+class UIHourlyForecasts {
+    constructor(app, menu) {
+        this.hourlyForecasts = [];
+        this.hourlyContainers = [];
+        this.hourlyToggled = false;
+        this.app = app;
+        this.actor = new ScrollView({
+            hscrollbar_policy: PolicyType.AUTOMATIC,
+            vscrollbar_policy: PolicyType.NEVER,
+            x_fill: true,
+            y_fill: true,
+            y_align: uiHourlyForecasts_Align.MIDDLE,
+            x_align: uiHourlyForecasts_Align.MIDDLE
+        });
+        const hScroll = this.actor.get_hscroll_bar();
+        hScroll.connect("scroll-start", () => { menu.passEvents = true; });
+        hScroll.connect("scroll-stop", () => { menu.passEvents = false; });
+        const vScroll = this.actor.get_vscroll_bar();
+        vScroll.connect("scroll-start", () => { menu.passEvents = true; });
+        vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
+        this.actor.connect("scroll-event", (owner, event) => {
+            const adjustment = hScroll.get_adjustment();
+            const direction = event.get_scroll_direction();
+            const newVal = adjustment.get_value() +
+                (direction === ScrollDirection.UP ? -adjustment.step_increment : adjustment.step_increment);
+            if (global.settings.get_boolean("desktop-effects-on-menus"))
+                addTween(adjustment, { value: newVal, time: 0.25 });
+            else
+                adjustment.set_value(newVal);
+            return false;
+        });
+        this.actor.hide();
+        this.actor.set_clip_to_allocation(true);
+        this.container = new uiHourlyForecasts_BoxLayout({ style_class: "hourly-box" });
+        this.actor.add_actor(this.container);
+    }
+    get Toggled() {
+        return this.hourlyToggled;
+    }
+    get CurrentScrollIndex() {
+        return this.actor.get_hscroll_bar().get_adjustment().get_value();
+    }
+    DateToScrollIndex(date) {
+        if (this.hourlyForecastDates == null)
+            return null;
+        const itemWidth = this.GetHourlyBoxItemWidth();
+        let midnightIndex = null;
+        for (let index = 0; index < this.hourlyForecastDates.length; index++) {
+            if (OnSameDay(this.hourlyForecastDates[index], date))
+                midnightIndex = index;
+            if (OnSameDay(this.hourlyForecastDates[index].minus({ hours: 6 }), date)) {
+                return index * itemWidth;
+            }
+        }
+        if (midnightIndex != null)
+            return midnightIndex * itemWidth;
+        return null;
+    }
+    ScrollTo(index, animate = true) {
+        const adjustment = this.actor.get_hscroll_bar().get_adjustment();
+        const [, lower, upper, , , page_size] = adjustment.get_values();
+        index = Math.max(Math.min(index, upper - page_size), lower);
+        if (global.settings.get_boolean("desktop-effects-on-menus") && animate)
+            addTween(adjustment, { value: index, time: 0.25 });
+        else
+            adjustment.set_value(index);
+    }
+    UpdateIconType(iconType) {
+        if (!this.hourlyForecasts)
+            return;
+        for (const hourly of this.hourlyForecasts) {
+            if (!(hourly === null || hourly === void 0 ? void 0 : hourly.Icon))
+                continue;
+            hourly.Icon.icon_type = iconType;
+        }
+    }
+    Display(forecasts, config, tz) {
+        var _a;
+        if (!forecasts || !this.hourlyForecasts)
+            return true;
+        if (this.hourlyForecasts.length > forecasts.length) {
+            this.Rebuild(this.app.config, this.app.config.textColorStyle, forecasts.length);
+        }
+        this.hourlyForecastDates = [];
+        const max = Math.min(forecasts.length, this.hourlyForecasts.length);
+        for (let index = 0; index < max; index++) {
+            const hour = forecasts[index];
+            const ui = this.hourlyForecasts[index];
+            this.hourlyForecastDates.push(hour.date);
+            ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
+            ui.Temperature.text = (_a = TempToUserConfig(hour.temp, config)) !== null && _a !== void 0 ? _a : "";
+            ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
+            ui.Summary.text = hour.condition.main;
+            ui.Precipitation.text = this.GeneratePrecipitationText(hour.precipitation, config);
+        }
+        this.AdjustHourlyBoxItemWidth();
+        return !(max <= 0);
+    }
+    ResetScroll() {
+        const hscroll = this.actor.get_hscroll_bar();
+        hscroll.get_adjustment().set_value(0);
+    }
+    async Show(animate = true) {
+        this.actor.show();
+        this.actor.hide();
+        this.AdjustHourlyBoxItemWidth();
+        const [minWidth, naturalWidth] = this.actor.get_preferred_width(-1);
+        if (minWidth == null)
+            return;
+        const [minHeight, naturalHeight] = this.actor.get_preferred_height(minWidth);
+        if (naturalHeight == null)
+            return;
+        logger_Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
+        this.actor.set_width(minWidth);
+        this.actor.show();
+        this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
+        this.hourlyToggled = true;
+        return new Promise((resolve, reject) => {
+            if (naturalHeight == null)
+                return;
+            const height = naturalHeight;
+            if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
+                this.actor.height = 0;
+                addTween(this.actor, {
+                    height: height,
+                    time: 0.25,
+                    onUpdate: () => { },
+                    onComplete: () => {
+                        this.actor.set_height(height);
+                        resolve();
+                    }
+                });
+            }
+            else {
+                this.actor.set_height(height);
+                resolve();
+            }
+        });
+    }
+    async Hide(animate = true) {
+        this.hourlyToggled = false;
+        return new Promise((resolve, reject) => {
+            if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
+                addTween(this.actor, {
+                    height: 0,
+                    time: 0.25,
+                    onUpdate: () => { },
+                    onComplete: () => {
+                        this.actor.set_height(-1);
+                        this.actor.style = "";
+                        this.actor.hide();
+                        this.ResetScroll();
+                        resolve();
+                    }
+                });
+            }
+            else {
+                this.actor.style = "";
+                this.actor.set_height(-1);
+                this.ResetScroll();
+                this.actor.hide();
+                resolve();
+            }
+        });
+    }
+    AdjustHourlyBoxItemWidth() {
+        const requiredWidth = this.GetHourlyBoxItemWidth();
+        for (const element of this.hourlyContainers) {
+            element.set_width(requiredWidth);
+        }
+    }
+    GetHourlyBoxItemWidth() {
+        let requiredWidth = 0;
+        if (!this.hourlyForecasts)
+            return requiredWidth;
+        for (let index = 0; index < this.hourlyContainers.length; index++) {
+            const ui = this.hourlyForecasts[index];
+            const hourWidth = ui.Hour.get_preferred_width(-1)[1];
+            const iconWidth = ui.Icon.get_preferred_width(-1)[1];
+            let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
+            const temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
+            let precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
+            if (precipitationWidth == null || temperatureWidth == null ||
+                hourWidth == null || iconWidth == null || summaryWidth == null)
+                continue;
+            if (precipitationWidth > iconWidth || summaryWidth > iconWidth) {
+                if (precipitationWidth > summaryWidth)
+                    precipitationWidth += 10;
+                else
+                    summaryWidth += 10;
+            }
+            if (requiredWidth < hourWidth)
+                requiredWidth = hourWidth;
+            if (requiredWidth < iconWidth)
+                requiredWidth = iconWidth;
+            if (requiredWidth < summaryWidth)
+                requiredWidth = summaryWidth;
+            if (requiredWidth < temperatureWidth)
+                requiredWidth = temperatureWidth;
+            if (requiredWidth < precipitationWidth)
+                requiredWidth = precipitationWidth;
+        }
+        return requiredWidth;
+    }
+    Destroy() {
+        this.container.destroy_all_children();
+    }
+    Rebuild(config, textColorStyle, availableHours = null) {
+        this.Destroy();
+        const hours = availableHours !== null && availableHours !== void 0 ? availableHours : this.app.GetMaxHourlyForecasts();
+        this.hourlyForecasts = [];
+        this.hourlyContainers = [];
+        for (let index = 0; index < hours; index++) {
+            const box = new uiHourlyForecasts_BoxLayout({ vertical: true, style_class: "hourly-box-item" });
+            this.hourlyContainers.push(box);
+            this.hourlyForecasts.push({
+                Hour: new uiHourlyForecasts_Label({ text: "Hour", style_class: "hourly-time", style: textColorStyle }),
+                Icon: new uiHourlyForecasts_Icon({
+                    icon_type: config.IconType,
+                    icon_size: 24,
+                    icon_name: APPLET_ICON,
+                    style_class: "hourly-icon"
+                }),
+                Precipitation: new uiHourlyForecasts_Label({ text: " ", style_class: "hourly-data" }),
+                Summary: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
+                Temperature: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
+            });
+            this.hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
+            box.add_child(this.hourlyForecasts[index].Hour);
+            box.add_child(this.hourlyForecasts[index].Icon);
+            box.add_child(this.hourlyForecasts[index].Summary);
+            box.add_child(this.hourlyForecasts[index].Temperature);
+            box.add_child(this.hourlyForecasts[index].Precipitation);
+            this.container.add(box, {
+                x_fill: true,
+                x_align: uiHourlyForecasts_Align.MIDDLE,
+                y_align: uiHourlyForecasts_Align.MIDDLE,
+                y_fill: true,
+                expand: true
+            });
+        }
+    }
+    GeneratePrecipitationText(precip, config) {
+        if (!precip)
+            return "";
+        let precipitationText = "";
+        if (!!precip.volume && precip.volume > 0) {
+            precipitationText = MillimeterToUserUnits(precip.volume, config.DistanceUnit) + " " + ((config.DistanceUnit == "metric") ? _("mm") : _("in"));
+        }
+        if (!!precip.chance) {
+            precipitationText = (NotEmpty(precipitationText)) ? (precipitationText + ", ") : "";
+            precipitationText += (Math.round(precip.chance).toString() + "%");
+        }
+        return precipitationText;
+    }
+    GetScrollViewHeight() {
+        let boxItemHeight = 0;
+        if (!this.hourlyForecasts)
+            return boxItemHeight;
+        for (let index = 0; index < this.hourlyContainers.length; index++) {
+            const ui = this.hourlyForecasts[index];
+            logger_Logger.Debug("Height requests of Hourly box Items: " + index);
+            const hourHeight = ui.Hour.get_preferred_height(-1)[1];
+            const iconHeight = ui.Icon.get_preferred_height(-1)[1];
+            const summaryHeight = ui.Summary.get_preferred_height(-1)[1];
+            const temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
+            const precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
+            if (precipitationHeight == null || temperatureHeight == null ||
+                hourHeight == null || iconHeight == null || summaryHeight == null)
+                continue;
+            const itemHeight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
+            if (boxItemHeight < itemHeight)
+                boxItemHeight = itemHeight;
+        }
+        logger_Logger.Debug("Final Hourly box item height is: " + boxItemHeight);
+        const scrollBarHeight = this.actor.get_hscroll_bar().get_preferred_width(-1)[1];
+        logger_Logger.Debug("Scrollbar height is " + scrollBarHeight);
+        const theme = this.container.get_theme_node();
+        const styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
+        logger_Logger.Debug("ScrollbarBox vertical padding and margin is: " + styling);
+        return (boxItemHeight + (scrollBarHeight !== null && scrollBarHeight !== void 0 ? scrollBarHeight : 0) + styling);
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiBar.ts
+
+
+
+
+
+
+const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button } = imports.gi.St;
+const { Tooltip } = imports.ui.tooltips;
+const STYLE_BAR = 'bottombar';
+class UIBar {
+    constructor(app) {
+        this.ToggleClicked = new Event();
+        this.providerCreditButton = null;
+        this.hourlyButton = null;
+        this._timestamp = null;
+        this.timestampTooltip = null;
+        this.app = app;
+        this.actor = new uiBar_BoxLayout({ vertical: false, style_class: STYLE_BAR });
+    }
+    get Actor() {
+        return this.actor;
+    }
+    SwitchButtonToShow() {
+        var _a;
+        if (!!((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child))
+            this.hourlyButton.actor.child.icon_name = "custom-down-arrow-symbolic";
+    }
+    SwitchButtonToHide() {
+        var _a;
+        if (!!((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child))
+            this.hourlyButton.actor.child.icon_name = "custom-up-arrow-symbolic";
+    }
+    DisplayErrorMessage(msg) {
+        if (this._timestamp == null)
+            return;
+        this._timestamp.label = msg;
+    }
+    Display(weather, provider, config, shouldShowToggle) {
+        var _a, _b, _c, _d, _e, _f, _g;
+        if (this._timestamp == null || this.providerCreditButton == null || ((_c = (_a = this.providerCreditButton) === null || _a === void 0 ? void 0 : (_b = _a.actor).is_finalized) === null || _c === void 0 ? void 0 : _c.call(_b)))
+            return false;
+        let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
+        if (provider.remainingCalls != null) {
+            creditLabel += ` (${provider.remainingCalls})`;
+        }
+        this.providerCreditButton.actor.label = creditLabel;
+        this.providerCreditButton.url = provider.website;
+        const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
+        this._timestamp.label = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
+        if (((_d = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _d === void 0 ? void 0 : _d.distanceFrom) != null) {
+            const stringFormat = {
+                distance: MetreToUserUnits(weather.stationInfo.distanceFrom, config.DistanceUnit).toString(),
+                distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
+            };
+            this._timestamp.label += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
+        }
+        let tooltipText = "";
+        if (((_e = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _e === void 0 ? void 0 : _e.name) != null)
+            tooltipText = _("Station Name: {stationName}", { stationName: weather.stationInfo.name });
+        if (((_f = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _f === void 0 ? void 0 : _f.area) != null) {
+            tooltipText += ", ";
+            tooltipText += _("Area: {stationArea}", { stationArea: weather.stationInfo.area });
+        }
+        (_g = this.timestampTooltip) === null || _g === void 0 ? void 0 : _g.set_text(tooltipText);
+        if (!shouldShowToggle || config._alwaysShowHourlyWeather)
+            this.HideHourlyToggle();
+        return true;
+    }
+    Destroy() {
+        var _a;
+        this.actor.destroy_all_children();
+        (_a = this.timestampTooltip) === null || _a === void 0 ? void 0 : _a.destroy();
+    }
+    Rebuild(config) {
+        this.Destroy();
+        this._timestamp = new uiBar_Button({ label: "Placeholder" });
+        this.timestampTooltip = new Tooltip(this._timestamp, "");
+        this.actor.add(this._timestamp, {
+            x_fill: false,
+            x_align: uiBar_Align.START,
+            y_align: uiBar_Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        });
+        this.hourlyButton = new WeatherButton({
+            reactive: true,
+            can_focus: true,
+            child: new uiBar_Icon({
+                icon_type: uiBar_IconType.SYMBOLIC,
+                icon_size: config.CurrentFontSize + 3,
+                icon_name: "custom-down-arrow-symbolic",
+                style: "margin: 2px 5px;"
+            }),
+        });
+        this.hourlyButton.actor.connect(SIGNAL_CLICKED, () => this.ToggleClicked.Invoke(this, true));
+        this.actor.add(this.hourlyButton.actor, {
+            x_fill: false,
+            x_align: uiBar_Align.MIDDLE,
+            y_align: uiBar_Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        });
+        if (this.app.GetMaxHourlyForecasts() <= 0) {
+            this.HideHourlyToggle();
+        }
+        this.providerCreditButton = new WeatherButton({ label: _(ELLIPSIS), reactive: true });
+        this.providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(this.providerCreditButton));
+        this.actor.add(this.providerCreditButton.actor, {
+            x_fill: false,
+            x_align: uiBar_Align.END,
+            y_align: uiBar_Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        });
+    }
+    BigDistanceUnitFor(unit) {
+        if (unit == "imperial")
+            return _("mi");
+        return _("km");
+    }
+    HideHourlyToggle() {
+        if (this.hourlyButton != null)
+            this.hourlyButton.actor.child = null;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiSeparator.ts
+const { PopupSeparatorMenuItem } = imports.ui.popupMenu;
+class UISeparator {
+    constructor() {
+        this.actor = new PopupSeparatorMenuItem();
+        this.actor.actor.remove_style_class_name("popup-menu-item");
+    }
+    get Actor() {
+        return this.actor.actor;
+    }
+    Show() {
+        this.actor.actor.show();
+    }
+    Hide() {
+        this.actor.actor.hide();
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/ui.ts
+
+
+
+
+
+
+
+const { PopupMenuManager } = imports.ui.popupMenu;
+const { BoxLayout: ui_BoxLayout, IconType: ui_IconType, Label: ui_Label } = imports.gi.St;
+const ui_Lang = imports.lang;
+const { AppletPopupMenu } = imports.ui.applet;
+const { themeManager } = imports.ui.main;
+const { SignalManager: ui_SignalManager } = imports.misc.signalManager;
+const STYLE_WEATHER_MENU = 'weather-menu';
+class UI {
+    constructor(app, orientation) {
+        this.lightTheme = false;
+        this.noHourlyWeather = false;
+        this.App = app;
+        this.menuManager = new PopupMenuManager(this.App);
+        this.menu = new AppletPopupMenu(this.App, orientation);
+        this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
+        logger_Logger.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
+        this.menuManager.addMenu(this.menu);
+        this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
+        this.signals = new ui_SignalManager();
+        this.lightTheme = this.IsLightTheme();
+        this.BuildPopupMenu();
+        this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
+    }
+    Toggle() {
+        if (!this.noHourlyWeather && this.App.config._alwaysShowHourlyWeather) {
+            if (this.menu.isOpen) {
+                this.menu.close(true);
+            }
+            else {
+                this.menu.open(false);
+                this.ShowHourlyWeather(false);
+                this.menu.close(false);
+                this.menu.open(true);
+            }
+        }
+        else {
+            if (this.HourlyWeather.Toggled && !this.menu.isOpen)
+                this.HideHourlyWeather(false);
+            this.menu.toggle();
+        }
+    }
+    async ToggleHourlyWeather() {
+        if (this.HourlyWeather.Toggled) {
+            await this.HideHourlyWeather();
+        }
+        else {
+            await this.ShowHourlyWeather();
+        }
+    }
+    Rebuild(config) {
+        this.ShowLoadingUi();
+        this.App.config.textColorStyle = this.GetTextColorStyle();
+        this.CurrentWeather.Rebuild(config, this.App.config.textColorStyle);
+        this.HourlyWeather.Rebuild(config, this.App.config.textColorStyle);
+        this.FutureWeather.Rebuild(config, this.App.config.textColorStyle);
+        this.Bar.Rebuild(config);
+    }
+    UpdateIconType(iconType) {
+        if (iconType == ui_IconType.FULLCOLOR && this.App.config._useCustomMenuIcons)
+            return;
+        this.CurrentWeather.UpdateIconType(iconType);
+        this.FutureWeather.UpdateIconType(iconType);
+        this.HourlyWeather.UpdateIconType(iconType);
+    }
+    DisplayErrorMessage(msg, errorType) {
+        this.Bar.DisplayErrorMessage(msg);
+    }
+    Display(weather, config, provider) {
+        this.CurrentWeather.Display(weather, config);
+        this.FutureWeather.Display(weather, config);
+        const shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
+        this.noHourlyWeather = !shouldShowToggle;
+        if (!shouldShowToggle)
+            this.ForceHideHourlyWeather();
+        this.Bar.Display(weather, provider, config, shouldShowToggle);
+        return true;
+    }
+    OnThemeChanged() {
+        this.HideHourlyWeather();
+        const newThemeIsLight = this.IsLightTheme();
+        if (newThemeIsLight != this.lightTheme) {
+            this.lightTheme = newThemeIsLight;
+        }
+        this.App.RefreshAndRebuild();
+    }
+    async PopupMenuToggled(caller, data) {
+        if (data == false) {
+            await delay(100);
+            this.HideHourlyWeather();
+        }
+    }
+    IsLightTheme() {
+        const color = this.menu.actor.get_theme_node().get_color("color");
+        let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+        luminance = Math.abs(1 - luminance);
+        logger_Logger.Debug("Theme is Light: " + (luminance > 0.5));
+        return (luminance > 0.5);
+    }
+    ForegroundColor() {
+        const hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
+        return hex;
+    }
+    GetTextColorStyle() {
+        let hexColor = null;
+        if (this.lightTheme) {
+            hexColor = ShadeHexColor(this.ForegroundColor(), -0.40);
+        }
+        return "color: " + hexColor;
+    }
+    BuildPopupMenu() {
+        this.CurrentWeather = new CurrentWeather(this.App);
+        this.FutureWeather = new UIForecasts(this.App);
+        this.HourlyWeather = new UIHourlyForecasts(this.App, this.menu);
+        this.FutureWeather.DayClicked.Subscribe((s, e) => this.OnDayClicked(s, e));
+        this.Bar = new UIBar(this.App);
+        this.Bar.ToggleClicked.Subscribe(ui_Lang.bind(this, this.ToggleHourlyWeather));
+        this.ForecastSeparator = new UISeparator();
+        this.HourlySeparator = new UISeparator();
+        this.BarSeparator = new UISeparator();
+        this.HourlySeparator.Hide();
+        const mainBox = new ui_BoxLayout({ vertical: true });
+        mainBox.add_actor(this.CurrentWeather.actor);
+        mainBox.add_actor(this.HourlySeparator.Actor);
+        mainBox.add_actor(this.HourlyWeather.actor);
+        mainBox.add_actor(this.ForecastSeparator.Actor);
+        mainBox.add_actor(this.FutureWeather.actor);
+        mainBox.add_actor(this.BarSeparator.Actor);
+        mainBox.add_actor(this.Bar.Actor);
+        this.menu.addActor(mainBox);
+    }
+    ShowLoadingUi() {
+        this.CurrentWeather.Destroy();
+        this.FutureWeather.Destroy();
+        this.Bar.Destroy();
+        this.CurrentWeather.actor.set_child(new ui_Label({
+            text: _('Loading current weather ...')
+        }));
+        this.FutureWeather.actor.set_child(new ui_Label({
+            text: _('Loading future weather ...')
+        }));
+    }
+    async OnDayClicked(sender, date) {
+        const wasOpen = this.HourlyWeather.Toggled;
+        if (!wasOpen)
+            await this.ShowHourlyWeather();
+        const newIndex = this.HourlyWeather.DateToScrollIndex(date);
+        if (wasOpen && newIndex == this.HourlyWeather.CurrentScrollIndex) {
+            await this.HideHourlyWeather();
+            return;
+        }
+        if (newIndex != null)
+            this.HourlyWeather.ScrollTo(newIndex, wasOpen);
+    }
+    async ShowHourlyWeather(animate = true) {
+        this.HourlySeparator.Show();
+        this.Bar.SwitchButtonToHide();
+        await this.HourlyWeather.Show(animate);
+    }
+    async HideHourlyWeather(animate = true) {
+        if (this.App.config._alwaysShowHourlyWeather) {
+            this.HourlyWeather.ResetScroll();
+            return;
+        }
+        await this.ForceHideHourlyWeather(animate);
+    }
+    async ForceHideHourlyWeather(animate = true) {
+        this.HourlySeparator.Hide();
+        this.Bar.SwitchButtonToShow();
+        await this.HourlyWeather.Hide(animate);
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
+
+const { Message, ProxyResolverDefault, SessionAsync, MessageHeaders, MessageHeadersType } = imports.gi.Soup;
+class HttpLib {
+    constructor() {
+        this._httpSession = new SessionAsync();
+        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
+        this._httpSession.timeout = 10;
+        this._httpSession.idle_timeout = 10;
+        this._httpSession.add_feature(new ProxyResolverDefault());
+    }
+    static get Instance() {
+        if (this.instance == null)
+            this.instance = new HttpLib();
+        return this.instance;
+    }
+    async LoadJsonAsync(url, params, headers, method = "GET") {
+        const response = await this.LoadAsync(url, params, headers, method);
+        try {
+            const payload = JSON.parse(response.Data);
+            response.Data = payload;
+        }
+        catch (e) {
+            if (e instanceof Error)
+                logger_Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
+            if (response.Success) {
+                response.Success = false;
+                response.ErrorData = {
+                    code: -1,
+                    message: "bad api response - non json",
+                    reason_phrase: "",
+                };
+            }
+        }
+        finally {
+            return response;
+        }
+    }
+    async LoadAsync(url, params, headers, method = "GET") {
+        var _a, _b, _c, _d, _e, _f, _g, _h;
+        const message = await this.Send(url, params, headers, method);
+        let error = undefined;
+        if (!message) {
+            error = {
+                code: 0,
+                message: "no network response",
+                reason_phrase: "no network response",
+                response: undefined
+            };
+        }
+        else if (message.status_code < 100 && message.status_code >= 0) {
+            error = {
+                code: message.status_code,
+                message: "no network response",
+                reason_phrase: message.reason_phrase,
+                response: message
+            };
+        }
+        else if (message.status_code > 300 || message.status_code < 200) {
+            error = {
+                code: message.status_code,
+                message: "bad status code",
+                reason_phrase: message.reason_phrase,
+                response: message
+            };
+        }
+        else if (!message.response_body) {
+            error = {
+                code: message.status_code,
+                message: "no response body",
+                reason_phrase: message.reason_phrase,
+                response: message
+            };
+        }
+        else if (!message.response_body.data) {
+            error = {
+                code: message.status_code,
+                message: "no response data",
+                reason_phrase: message.reason_phrase,
+                response: message
+            };
+        }
+        const responseHeaders = {};
+        (_a = message === null || message === void 0 ? void 0 : message.response_headers) === null || _a === void 0 ? void 0 : _a.foreach((name, val) => {
+            responseHeaders[name] = val;
+        });
+        if (((_b = message === null || message === void 0 ? void 0 : message.status_code) !== null && _b !== void 0 ? _b : -1) > 200 && ((_c = message === null || message === void 0 ? void 0 : message.status_code) !== null && _c !== void 0 ? _c : -1) < 300) {
+            logger_Logger.Info("Warning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
+        }
+        logger_Logger.Verbose("API full response: " + ((_e = (_d = message === null || message === void 0 ? void 0 : message.response_body) === null || _d === void 0 ? void 0 : _d.data) === null || _e === void 0 ? void 0 : _e.toString()));
+        if (error != null)
+            logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_g = (_f = error === null || error === void 0 ? void 0 : error.response) === null || _f === void 0 ? void 0 : _f.response_body) === null || _g === void 0 ? void 0 : _g.data));
+        return {
+            Success: (error == null),
+            Data: (_h = message === null || message === void 0 ? void 0 : message.response_body) === null || _h === void 0 ? void 0 : _h.data,
+            ResponseHeaders: responseHeaders,
+            ErrorData: error,
+            Response: message
+        };
+    }
+    async Send(url, params, headers, method = "GET") {
+        if (params != null) {
+            const items = Object.keys(params);
+            for (const [index, item] of items.entries()) {
+                url += (index == 0) ? "?" : "&";
+                url += (item) + "=" + params[item];
+            }
+        }
+        const query = encodeURI(url);
+        logger_Logger.Debug("URL called: " + query);
+        const data = await new Promise((resolve, reject) => {
+            const message = Message.new(method, query);
+            if (message == null) {
+                resolve(null);
+            }
+            else {
+                if (headers != null) {
+                    for (const key in headers) {
+                        message.request_headers.append(key, headers[key]);
+                    }
+                }
+                this._httpSession.queue_message(message, (session, message) => {
+                    resolve(message);
+                });
+            }
+        });
+        return data;
     }
 }
 
@@ -14892,21 +15662,76 @@ class DanishMI {
 
 
 
-
-
-
-
-
-
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
+const { File: main_File, NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
         this.lock = false;
         this.refreshTriggeredWhileLocked = false;
         this.encounteredError = false;
+        this.online = null;
+        this.currentWeatherInfo = null;
+        this.OnNetworkConnectivityChanged = () => {
+            switch (NetworkMonitor.get_default().connectivity) {
+                case NetworkConnectivity.FULL:
+                case NetworkConnectivity.LIMITED:
+                case NetworkConnectivity.PORTAL:
+                    if (this.online === true)
+                        break;
+                    logger_Logger.Info("Internet access now available, resuming operations.");
+                    this.loop.Resume();
+                    this.online = true;
+                    break;
+                case NetworkConnectivity.LOCAL:
+                    if (this.online === false)
+                        break;
+                    logger_Logger.Info(`Internet access now down with "${NetworkMonitor.get_default().connectivity}", pausing refresh.`);
+                    this.loop.Pause();
+                    this.online = false;
+                    break;
+            }
+        };
+        this.RefreshLabel = () => {
+            if (this.currentWeatherInfo == null)
+                return;
+            this.DisplayWeatherOnLabel(this.currentWeatherInfo);
+        };
+        this.saveLog = async () => {
+            var _a;
+            if (!(((_a = this.config._selectedLogPath) === null || _a === void 0 ? void 0 : _a.length) > 0))
+                return;
+            let logLines = [];
+            try {
+                logLines = await logger_Logger.GetAppletLogs();
+            }
+            catch (e) {
+                if (e instanceof Error) {
+                    NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
+                }
+                return;
+            }
+            let settings = null;
+            try {
+                settings = await this.config.GetAppletConfigJson();
+            }
+            catch (e) {
+                if (e instanceof Error) {
+                    NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
+                }
+            }
+            const appletLogFile = main_File.new_for_path(this.config._selectedLogPath);
+            const stream = await OverwriteAndGetIOStream(appletLogFile);
+            await WriteAsync(stream.get_output_stream(), logLines.join("\n"));
+            if (settings != null) {
+                await WriteAsync(stream.get_output_stream(), "\n\n------------------- SETTINGS JSON -----------------\n\n");
+                await WriteAsync(stream.get_output_stream(), JSON.stringify(settings, null, 2));
+            }
+            await CloseStream(stream.get_output_stream());
+            NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", { filePath: this.config._selectedLogPath }));
+        };
         this.errMsg = {
             unknown: _("Error"),
             "bad api response - non json": _("Service Error"),
@@ -14926,6 +15751,7 @@ class WeatherApplet extends TextIconApplet {
             "import error": _("Missing Packages"),
             "location not covered": _("Location not covered"),
         };
+        this.metadata = metadata;
         this.AppletDir = metadata.path;
         logger_Logger.Debug("Applet created with instanceID " + instanceId);
         logger_Logger.Debug("AppletDir is: " + this.AppletDir);
@@ -14943,6 +15769,8 @@ class WeatherApplet extends TextIconApplet {
         catch (e) {
         }
         this.loop.Start();
+        this.OnNetworkConnectivityChanged();
+        NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
     }
     get Orientation() {
         return this.orientation;
@@ -15009,27 +15837,30 @@ class WeatherApplet extends TextIconApplet {
             }
             logger_Logger.Info("Weather Information refreshed");
             this.loop.ResetErrorCount();
+            this.currentWeatherInfo = weatherInfo;
             this.Unlock();
             return "success";
         }
         catch (e) {
-            logger_Logger.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
+            if (e instanceof Error)
+                logger_Logger.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
             this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             this.Unlock();
             return "fail";
         }
     }
     DisplayWeather(weather) {
-        let location = GenerateLocationText(weather, this.config);
-        let lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
+        const location = GenerateLocationText(weather, this.config);
+        const lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
         this.SetAppletTooltip(`${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`);
-        this.DisplayWeatherOnLabel(weather.temperature, weather.condition.description);
+        this.DisplayWeatherOnLabel(weather);
         this.SetAppletIcon(weather.condition.icons, weather.condition.customIcon);
         return true;
     }
-    DisplayWeatherOnLabel(temperature, mainCondition) {
-        var _a, _b;
-        mainCondition = CapitalizeFirstLetter(mainCondition);
+    DisplayWeatherOnLabel(weather) {
+        var _a, _b, _c, _d, _e;
+        const temperature = weather.temperature;
+        const mainCondition = CapitalizeFirstLetter(weather.condition.main);
         let label = "";
         if (this.Orientation != main_Side.LEFT && this.Orientation != main_Side.RIGHT) {
             if (this.config._showCommentInPanel) {
@@ -15052,9 +15883,18 @@ class WeatherApplet extends TextIconApplet {
         }
         if (NotEmpty(this.config._tempTextOverride)) {
             label = this.config._tempTextOverride
-                .replace("{t}", (_b = TempToUserConfig(temperature, this.config, false)) !== null && _b !== void 0 ? _b : "")
-                .replace("{u}", UnitToUnicode(this.config.TemperatureUnit))
-                .replace("{c}", mainCondition);
+                .replace(/{t}/g, (_b = TempToUserConfig(temperature, this.config, false)) !== null && _b !== void 0 ? _b : "")
+                .replace(/{u}/g, UnitToUnicode(this.config.TemperatureUnit))
+                .replace(/{c}/g, mainCondition)
+                .replace(/{c_long}/g, weather.condition.description)
+                .replace(/{dew_point}/g, (_c = TempToUserConfig(weather.dewPoint, this.config, false)) !== null && _c !== void 0 ? _c : "")
+                .replace(/{humidity}/g, (_e = (_d = weather.humidity) === null || _d === void 0 ? void 0 : _d.toString()) !== null && _e !== void 0 ? _e : "")
+                .replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, this.config._pressureUnit).toString() : "")
+                .replace(/{pressure_unit}/g, this.config._pressureUnit)
+                .replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, this.config) : "")
+                .replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
+                .replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, this.config.WindSpeedUnit) : "")
+                .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "");
         }
         this.SetAppletLabel(label);
     }
@@ -15066,7 +15906,7 @@ class WeatherApplet extends TextIconApplet {
             this.SetCustomIcon(customIcon);
         }
         else {
-            let icon = WeatherIconSafely(iconNames, this.config.AppletIconType);
+            const icon = WeatherIconSafely(iconNames, this.config.AppletIconType);
             this.config.AppletIconType == main_IconType.SYMBOLIC ?
                 this.set_applet_icon_symbolic_name(icon) :
                 this.set_applet_icon_name(icon);
@@ -15076,7 +15916,8 @@ class WeatherApplet extends TextIconApplet {
         this.set_applet_label(label);
     }
     GetPanelHeight() {
-        return this.panel.height;
+        var _a, _b;
+        return (_b = (_a = this.panel) === null || _a === void 0 ? void 0 : _a.height) !== null && _b !== void 0 ? _b : 0;
     }
     GetMaxForecastDays() {
         if (!this.provider)
@@ -15088,20 +15929,24 @@ class WeatherApplet extends TextIconApplet {
             return this.config._forecastHours;
         return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
     }
-    async LoadJsonAsync(url, params, HandleError, method = "GET") {
-        let response = await HttpLib.Instance.LoadJsonAsync(url, params, method);
+    async LoadJsonAsyncWithDetails(url, params, HandleError, headers, method = "GET") {
+        const response = await HttpLib.Instance.LoadJsonAsync(url, params, headers, method);
         if (!response.Success) {
-            if (!!HandleError && !HandleError(response.ErrorData))
-                return null;
+            if (!!HandleError && !HandleError(response))
+                return response;
             else {
                 this.HandleHTTPError(response.ErrorData);
-                return null;
+                return response;
             }
         }
-        return response.Data;
+        return response;
     }
-    async LoadAsync(url, params, HandleError, method = "GET") {
-        let response = await HttpLib.Instance.LoadAsync(url, params, method);
+    async LoadJsonAsync(url, params, HandleError, headers, method = "GET") {
+        const response = await this.LoadJsonAsyncWithDetails(url, params, HandleError, headers, method);
+        return (response.Success) ? response.Data : null;
+    }
+    async LoadAsync(url, params, HandleError, headers, method = "GET") {
+        const response = await HttpLib.Instance.LoadAsync(url, params, headers, method);
         if (!response.Success) {
             if (!!HandleError && !HandleError(response.ErrorData))
                 return null;
@@ -15113,12 +15958,36 @@ class WeatherApplet extends TextIconApplet {
         return response.Data;
     }
     async locationLookup() {
-        let command = "xdg-open ";
+        const command = "xdg-open ";
         spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
     }
     async submitIssue() {
-        let command = "xdg-open ";
-        spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
+        var _a, _b, _c;
+        const command = "xdg-open";
+        const baseUrl = 'https://github.com/linuxmint/cinnamon-spices-applets/issues/new';
+        const title = "weather@mockturl - ";
+        const distribution = (_b = (_a = (await SpawnProcess(["uname", "-vrosmi"]))) === null || _a === void 0 ? void 0 : _a.Data) === null || _b === void 0 ? void 0 : _b.trim();
+        const appletVersion = this.metadata.version;
+        const cinnamonVersion = imports.misc.config.PACKAGE_VERSION;
+        const vgaInfo = (_c = (await SpawnProcess(["lspci"])).Data) === null || _c === void 0 ? void 0 : _c.split("\n").filter(x => x.includes("VGA"));
+        let body = "```\n";
+        body += ` * Applet version - ${appletVersion}\n`;
+        body += ` * Cinnamon version - ${cinnamonVersion}\n`;
+        body += ` * Distribution - ${distribution}\n`;
+        body += ` * Graphics hardware - ${vgaInfo.join(", ")}\n`;
+        body += "```\n\n";
+        body += `**Notify author of applet**\n@Gr3q\n\n`;
+        body += "**Issue**\n\n\n\n**Steps to reproduce**\n\n\n\n**Expected behaviour**\n\n\n\n**Other information**\n\n";
+        body += `<details>
+<summary>Relevant Logs</summary>
+
+\`\`\`
+The contents of the file saved from the applet help page goes here
+\`\`\`
+
+</details>\n\n`;
+        const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[\(\)#]/g, "");
+        spawnCommandLine(`${command} ${finalUrl}`);
     }
     async saveCurrentLocation() {
         this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
@@ -15134,8 +16003,10 @@ class WeatherApplet extends TextIconApplet {
     }
     on_applet_clicked(event) {
         this.ui.Toggle();
+        return false;
     }
     on_applet_middle_clicked(event) {
+        return false;
     }
     on_panel_height_changed() {
     }
@@ -15153,12 +16024,12 @@ class WeatherApplet extends TextIconApplet {
         }
     }
     AddRefreshButton() {
-        let itemLabel = _("Refresh");
-        let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.RefreshAndRebuild());
+        const itemLabel = _("Refresh");
+        const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.RefreshAndRebuild());
         this._applet_context_menu.addMenuItem(refreshMenuItem);
     }
     HandleHTTPError(error) {
-        let appletError = {
+        const appletError = {
             detail: error.message,
             userError: false,
             code: error.code,
@@ -15177,48 +16048,9 @@ class WeatherApplet extends TextIconApplet {
     }
     EnsureProvider(force = false) {
         var _a;
-        let currentName = (_a = this.provider) === null || _a === void 0 ? void 0 : _a.name;
-        switch (this.config._dataService) {
-            case "DarkSky":
-                if (currentName != "DarkSky" || force)
-                    this.provider = new DarkSky(this);
-                break;
-            case "OpenWeatherMap":
-                if (currentName != "OpenWeatherMap" || force)
-                    this.provider = new OpenWeatherMap(this);
-                break;
-            case "MetNorway":
-                if (currentName != "MetNorway" || force)
-                    this.provider = new MetNorway(this);
-                break;
-            case "Weatherbit":
-                if (currentName != "Weatherbit" || force)
-                    this.provider = new Weatherbit(this);
-                break;
-            case "ClimacellV4":
-                if (currentName != "ClimacellV4" || force)
-                    this.provider = new ClimacellV4(this);
-                break;
-            case "Met Office UK":
-                if (currentName != "Met Office UK" || force)
-                    this.provider = new MetUk(this);
-                break;
-            case "US Weather":
-                if (currentName != "US Weather" || force)
-                    this.provider = new USWeather(this);
-                break;
-            case "Visual Crossing":
-                if (currentName != "Visual Crossing" || force)
-                    this.provider = new VisualCrossing(this);
-                break;
-            case "DanishMI":
-                if (currentName != "DanishMI" || force)
-                    this.provider = new DanishMI(this);
-                break;
-            default:
-                logger_Logger.Error(`Provider string "${currentName}" from settings doesn't exist, please contact the developer!`);
-                this.DisplayHardError("Critical Error", "Please see logs and contact developer");
-        }
+        const currentName = (_a = this.provider) === null || _a === void 0 ? void 0 : _a.name;
+        if (currentName != this.config._dataService || force)
+            this.provider = ServiceClassMapping[this.config._dataService](this);
     }
     MergeWeatherData(weatherInfo, locationData) {
         if (weatherInfo.location.city == null)
@@ -15235,13 +16067,13 @@ class WeatherApplet extends TextIconApplet {
             weatherInfo.hourlyForecasts = [];
         weatherInfo.condition.main = ProcessCondition(weatherInfo.condition.main, this.config._translateCondition);
         weatherInfo.condition.description = ProcessCondition(weatherInfo.condition.description, this.config._translateCondition);
-        for (let index = 0; index < weatherInfo.forecasts.length; index++) {
-            const condition = weatherInfo.forecasts[index].condition;
+        for (const forecast of weatherInfo.forecasts) {
+            const condition = forecast.condition;
             condition.main = ProcessCondition(condition.main, this.config._translateCondition);
             condition.description = ProcessCondition(condition.description, this.config._translateCondition);
         }
-        for (let index = 0; index < weatherInfo.hourlyForecasts.length; index++) {
-            const condition = weatherInfo.hourlyForecasts[index].condition;
+        for (const forecast of weatherInfo.hourlyForecasts) {
+            const condition = forecast.condition;
             condition.main = ProcessCondition(condition.main, this.config._translateCondition);
             condition.description = ProcessCondition(condition.description, this.config._translateCondition);
         }
@@ -15278,7 +16110,7 @@ class WeatherApplet extends TextIconApplet {
             this.loop.Pause();
             return;
         }
-        let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
+        const nextRefresh = this.loop.GetSecondsUntilNextRefresh();
         logger_Logger.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
     }
 }

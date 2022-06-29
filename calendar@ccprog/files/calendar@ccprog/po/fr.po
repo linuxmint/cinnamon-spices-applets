@@ -112,8 +112,8 @@ msgstr "Utiliser un format de date personnalisé"
 msgid ""
 "Check this to define a custom format for the date in the calendar applet."
 msgstr ""
-"Cochez cette case pour définir votre propre format de date dans la barre "
-"des tâches."
+"Cochez cette case pour définir votre propre format de date dans la barre des "
+"tâches."
 
 #. settings-schema.json->custom-format->description
 msgid "Date format"
@@ -130,8 +130,7 @@ msgstr "Afficher des indications sur la syntaxe du format de date"
 #. settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
 msgstr ""
-"Cliquez sur ce bouton pour en savoir plus sur la syntaxe des formats de "
-"date."
+"Cliquez sur ce bouton pour en savoir plus sur la syntaxe des formats de date."
 
 #. settings-schema.json->country->description
 msgid "Country"
@@ -159,7 +158,7 @@ msgstr "Bosnie-Herzégovine"
 
 #. settings-schema.json->country->options
 msgid "Belarus"
-msgstr ""
+msgstr "Biélorussie"
 
 #. settings-schema.json->country->options
 msgid "Brazil"
@@ -199,7 +198,7 @@ msgstr "Estonie"
 
 #. settings-schema.json->country->options
 msgid "Spain"
-msgstr ""
+msgstr "Espagne"
 
 #. settings-schema.json->country->options
 msgid "Finland"
@@ -503,79 +502,79 @@ msgstr "Thuringe"
 
 #. settings-schema.json->region_esp->options
 msgid "Andalucía"
-msgstr ""
+msgstr "Andalousie"
 
 #. settings-schema.json->region_esp->options
 msgid "Aragón"
-msgstr ""
+msgstr "Aragon"
 
 #. settings-schema.json->region_esp->options
 msgid "Asturias"
-msgstr ""
+msgstr "Asturies"
 
 #. settings-schema.json->region_esp->options
 msgid "Canarias"
-msgstr ""
+msgstr "Îles Canaries"
 
 #. settings-schema.json->region_esp->options
 msgid "Cantabria"
-msgstr ""
+msgstr "Cantabrie"
 
 #. settings-schema.json->region_esp->options
 msgid "Castilla y León"
-msgstr ""
+msgstr "Castille-et-León"
 
 #. settings-schema.json->region_esp->options
 msgid "Castilla-La Mancha"
-msgstr ""
+msgstr "Castille-La Manche"
 
 #. settings-schema.json->region_esp->options
 msgid "Cataluña"
-msgstr ""
+msgstr "Catalogne"
 
 #. settings-schema.json->region_esp->options
 msgid "Ceuta"
-msgstr ""
+msgstr "Ceuta"
 
 #. settings-schema.json->region_esp->options
 msgid "Extremadura"
-msgstr ""
+msgstr "Estrémadure"
 
 #. settings-schema.json->region_esp->options
 msgid "Galicia"
-msgstr ""
+msgstr "Galice"
 
 #. settings-schema.json->region_esp->options
 msgid "Islas Baleares"
-msgstr ""
+msgstr "Îles Baléares"
 
 #. settings-schema.json->region_esp->options
 msgid "La Rioja"
-msgstr ""
+msgstr "La Rioja"
 
 #. settings-schema.json->region_esp->options
 msgid "Madrid"
-msgstr ""
+msgstr "Madrid"
 
 #. settings-schema.json->region_esp->options
 msgid "Melilla"
-msgstr ""
+msgstr "Melilla"
 
 #. settings-schema.json->region_esp->options
 msgid "Murcia"
-msgstr ""
+msgstr "Murcie"
 
 #. settings-schema.json->region_esp->options
 msgid "Navarra"
-msgstr ""
+msgstr "Navarre"
 
 #. settings-schema.json->region_esp->options
 msgid "País Vasco"
-msgstr ""
+msgstr "Pays Basque"
 
 #. settings-schema.json->region_esp->options
 msgid "Valencia"
-msgstr ""
+msgstr "Valence"
 
 #. settings-schema.json->region_nzl->options
 msgid "Auckland"

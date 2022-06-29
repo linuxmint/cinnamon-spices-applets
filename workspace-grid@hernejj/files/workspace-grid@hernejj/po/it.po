@@ -6,11 +6,11 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #. workspace-grid@hernejj->metadata.json->description
 msgid "2D workspace grid and switcher for Cinnamon"
@@ -44,12 +44,17 @@ msgstr "Griglia"
 #. workspace-grid@hernejj->settings-
 #. schema.json->registerUpDownKeyBindings->description
 msgid "Use Keyboard shortcuts (Ctrl+Alt+Up/Down) to switch desktop rows"
-msgstr "Utilizza le scorciatoie da tastiera (Ctrl+Alt+Su/Giù) per cambiare le righe del desktop"
+msgstr ""
+"Utilizza le scorciatoie da tastiera (Ctrl+Alt+Su/Giù) per cambiare le righe "
+"del desktop"
 
 #. workspace-grid@hernejj->settings-
 #. schema.json->registerUpDownKeyBindings->tooltip
-msgid "This prevents the use of the Expo and Scale keyboard shortcuts in Cinnamon"
-msgstr "Questo impedisce l'uso delle scorciatoie da tastiera di Esposizione e di Scala in Cinnamon"
+msgid ""
+"This prevents the use of the Expo and Scale keyboard shortcuts in Cinnamon"
+msgstr ""
+"Questo impedisce l'uso delle scorciatoie da tastiera di Esposizione e di "
+"Scala in Cinnamon"
 
 #. workspace-grid@hernejj->settings-schema.json->numCols->description
 msgid "Number of columns:"

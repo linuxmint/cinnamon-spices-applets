@@ -21,7 +21,7 @@ export class NotificationService {
 	}
 
 	public Send(title: string, message: string, transient?: boolean) {
-		let notification = new Notification(this.MessageSource, this.Title + ": " + title, message);
+		const notification = new Notification(this.MessageSource, this.Title + ": " + title, message);
 		if (transient) notification.setTransient((!transient) ? false : true);
 		this.MessageSource.notify(notification);
 	}

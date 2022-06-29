@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-25 12:25+0200\n"
+"POT-Creation-Date: 2022-04-18 11:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,107 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:91
+#: applet.js:102
 msgid "Edit Applications"
+msgstr ""
+
+#: applet.js:694 applet.js:948
+msgid "Delete"
+msgstr ""
+
+#: applet.js:695 applet.js:949
+msgid "Edit"
+msgstr ""
+
+#: applet.js:696 applet.js:950
+msgid "Cancel"
+msgstr ""
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#: dialogs.py:35 widgets.py:35
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:41
+msgid "Group"
+msgstr ""
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:42 widgets.py:42
+msgid "Command"
+msgstr ""
+
+#: dialogs.py:178
+msgid "The name cannot be empty"
+msgstr ""
+
+#: dialogs.py:183
+msgid "The name is already used"
+msgstr ""
+
+#: dialogs.py:190
+msgid "Valid name"
+msgstr ""
+
+#: dialogs.py:196
+msgid "Valid command"
+msgstr ""
+
+#: dialogs.py:199
+msgid "The command is not valid"
+msgstr ""
+
+#: dialogs.py:211
+msgid "Which data should be replaced from *.desktop file?"
+msgstr ""
+
+#: dialogs.py:256
+msgid "really delete?"
+msgstr ""
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. settings-schema.json->launcher-icon->description
+#: widgets.py:28
+msgid "Icon"
+msgstr ""
+
+#: widgets.py:116
+msgid "Add application"
+msgstr ""
+
+#: widgets.py:117
+msgid "Add new entry"
+msgstr ""
+
+#: widgets.py:121
+msgid "Add separator"
+msgstr ""
+
+#: widgets.py:129
+msgid "Remove selected entry"
+msgstr ""
+
+#: widgets.py:135
+msgid "Edit selected entry"
+msgstr ""
+
+#: widgets.py:141
+msgid "Duplicate selected entry"
+msgstr ""
+
+#: widgets.py:147
+msgid "Move selected entry up"
+msgstr ""
+
+#: widgets.py:153
+msgid "Move selected entry down"
+msgstr ""
+
+#: widgets.py:316
+msgid "Separator"
 msgstr ""
 
 #. metadata.json->name
@@ -38,51 +137,12 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#. settings-schema.json->section-groups->title
-msgid "Groups"
-msgstr ""
-
 #. settings-schema.json->section-settings-global->title
 msgid "Global Settings"
 msgstr ""
 
 #. settings-schema.json->section-settings-applications->title
 msgid "Application Settings"
-msgstr ""
-
-#. settings-schema.json->list-applications->columns->title
-#. settings-schema.json->list-groups->columns->title
-msgid "Name"
-msgstr ""
-
-#. settings-schema.json->list-applications->columns->title
-msgid "Group"
-msgstr ""
-
-#. settings-schema.json->list-applications->columns->title
-#. settings-schema.json->list-groups->columns->title
-#. settings-schema.json->launcher-icon->description
-msgid "Icon"
-msgstr ""
-
-#. settings-schema.json->list-applications->columns->title
-msgid "Command"
-msgstr ""
-
-#. settings-schema.json->info-applications->description
-msgid ""
-"If you don't type in a group, the application will be displayed without a "
-"submenu."
-msgstr ""
-
-#. settings-schema.json->force-update-groups->description
-msgid "Update Groups"
-msgstr ""
-
-#. settings-schema.json->info-force-update->description
-msgid ""
-"Unfortunately you must be force update the group list. It updates internally\n"
-"but it will not be shown in the list without a restart of this dialog."
 msgstr ""
 
 #. settings-schema.json->visible-launcher-label->description
@@ -111,6 +171,22 @@ msgstr ""
 
 #. settings-schema.json->notification-text->tooltip
 msgid "%s will be your application name"
+msgstr ""
+
+#. settings-schema.json->hotkey-binding->description
+msgid "Show menu"
+msgstr ""
+
+#. settings-schema.json->hotkey-binding->tooltip
+msgid "Set keybinding(s) to show the menu"
+msgstr ""
+
+#. settings-schema.json->fixed-menu-width->description
+msgid "Fixed Menu Width"
+msgstr ""
+
+#. settings-schema.json->fixed-menu-width->tooltip
+msgid "Based on the largest submenu item, to prevent menu width flickering"
 msgstr ""
 
 #. settings-schema.json->visible-app-icons->description

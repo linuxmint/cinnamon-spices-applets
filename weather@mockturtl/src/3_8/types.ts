@@ -18,6 +18,7 @@ export interface WeatherProvider {
 	readonly maxForecastSupport: number;
 	readonly maxHourlyForecastSupport: number;
 	readonly website: string;
+	readonly remainingCalls: number | null;
 
 	GetWeather(loc: LocationData): Promise<WeatherData | null>;
 }
@@ -36,14 +37,20 @@ export interface WeatherData {
 		lon: number,
 	};
 	location: {
-		city?: string,
-		country?: string,
-		timeZone?: string,
+		city?: string | undefined,
+		country?: string | undefined,
+		timeZone?: string | undefined,
 		url?: string,
-		/** in metres */
-		distanceFrom?: number,
 		tzOffset?: number
 	},
+	stationInfo?: {
+		/** in metres */
+		distanceFrom: number | undefined,
+		name?: string,
+		lat?: number,
+		lon?: number,
+		area?: string
+	}
 	/** preferably in UTC */
 	sunrise: DateTime | null,
 	/** preferably in UTC */
@@ -60,22 +67,33 @@ export interface WeatherData {
 	pressure: number | null;
 	/** In percent */
 	humidity: number | null;
+	/** In kelvin */
+	dewPoint: number | null;
 	condition: Condition
 	forecasts: ForecastData[];
-	hourlyForecasts?: HourlyForecastData[]
+	hourlyForecasts?: HourlyForecastData[] | undefined
 	extra_field?: APIUniqueField;
 	immediatePrecipitation?: ImmediatePrecipitation;
 }
 
 
-export interface APIUniqueField {
-	name: string,
-	/**
-	 * Refer to the type 
-	 */
-	value: any,
-	type: ExtraField
+export type APIUniqueField = NumberAPIUniqueField | StringAPIUniqueField;
+
+interface BaseAPIUniqueField {
+	name: string;
+	type: ExtraField;
 }
+
+interface NumberAPIUniqueField extends BaseAPIUniqueField {
+	value: number;
+	type: Extract<ExtraField, "temperature" | "percent">
+}
+
+interface StringAPIUniqueField extends BaseAPIUniqueField {
+	value: string;
+	type: Extract<ExtraField, "string">
+}
+
 
 /** 
  * percent: value is a number from 0-100 (or more)
@@ -103,23 +121,23 @@ export interface HourlyForecastData {
 	/** Kelvin */
 	temp: number | null;
 	condition: Condition;
-	precipitation?: Precipitation;
+	precipitation?: Precipitation | undefined;
 }
 
 export interface Precipitation {
 	type: PrecipitationType,
 	/** in mm */
-	volume?: number,
+	volume?: number | undefined,
 	/** % */
-	chance?: number
+	chance?: number | undefined
 }
 
 type LocationSource = "ip-api" | "address-search" | "manual";
 export interface LocationData {
 	lat: number;
 	lon: number;
-	city?: string;
-	country?: string;
+	city?: string | undefined;
+	country?: string | undefined;
 	/** Always set, if not available system tz is provided */
 	timeZone: string;
 	entryText: string;
@@ -155,13 +173,13 @@ export interface Condition {
 	/** Long Description */
 	description: string,
 	/** GTK icon name, descending from most fit to least fit.
-	 * needs mutiple in case one/some of them are not available
+	 * needs multiple in case one/some of them are not available
 	 */
 	icons: BuiltinIcons[],
 	customIcon: CustomIcons
 }
 
-/** Immediate precipitation for the next hour, currenlty only OpenWeatherMap uses it.
+/** Immediate precipitation for the next hour, currently only OpenWeatherMap uses it.
  */
 export interface ImmediatePrecipitation {
 	/** Precipitation in * minutes */

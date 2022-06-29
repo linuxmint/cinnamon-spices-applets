@@ -39,7 +39,7 @@ MyApplet.prototype = {
 
         try {
             this.set_applet_icon_name("emblem-web");
-            this.set_applet_tooltip(_("Your percieved location."));
+            this.set_applet_tooltip(_("Your perceived location."));
             this.set_applet_label("...");
         }
         catch (error) {

@@ -1,12 +1,17 @@
 import * as consts from "consts"
 import { limitString } from "functions/limitString"
 import { createChannelMenuItem } from "ui/ChannelList/ChannelMenuItem"
+import { triggerEvent } from "../../../utils/TriggerEvent"
 
 const channelName = 'WDR 2 Rhein und Ruhr'
 const channelNameShortened = limitStringToMaxLength(channelName)
+const onActivated = jest.fn(() => { })
+
+type LabelType = InstanceType<typeof imports.gi.St.Label>
+type IconType = InstanceType<typeof imports.gi.St.Icon>
 
 jest.mock('consts', () => ({
-    ...jest.requireActual('consts'),
+    ...jest.requireActual<typeof consts>('consts'),
     MAX_STRING_LENGTH: 10
 }))
 
@@ -14,71 +19,77 @@ function limitStringToMaxLength(text: string) {
     return limitString(text, consts.MAX_STRING_LENGTH)
 }
 
-function getChildren(channelMenuItem: ReturnType<typeof createChannelMenuItem>) {
-    return channelMenuItem.actor["_children"]
-}
 
 describe('initialization is working', () => {
 
-    it('Only channelName is added to menuItem', () => {
+    it('only channelName added to MenuItem when playbackStatus is stopped', () => {
         const channelMenuItem = createChannelMenuItem({
-            channelName
+            channelName,
+            onActivated,
+            playbackStatus: 'Stopped'
         })
 
-        const children = getChildren(channelMenuItem)
-        const label = children[0].actor as imports.gi.St.Label
+        expect(channelMenuItem.actor.get_children().length).toBe(1)
 
-        expect(label.text).toBe(channelNameShortened)
+        const expectedLabel = channelMenuItem.actor.get_child_at_index<LabelType>(0)
+
+        expect(expectedLabel.text).toBe(channelNameShortened)
+    });
+
+    it('icon and ChannelName set when playbackStatus is not stopped', () => {
+        const channelMenuItem = createChannelMenuItem({
+            channelName,
+            onActivated,
+            playbackStatus: 'Playing'
+        })
+
+        const children = channelMenuItem.actor.get_children<[IconType, LabelType]>()
+
+        expect(children[0].icon_name).toBe(consts.PLAY_ICON_NAME)
+        expect(children[1].text).toBe(channelNameShortened)
+    });
+
+    // this actually also should be triggered on similar Actions such as pressing enter
+    it('Callback executed onClick', () => {
+
+        const channelMenuItem = createChannelMenuItem({
+            channelName,
+            onActivated,
+            playbackStatus: 'Playing'
+        })
+
+        triggerEvent(channelMenuItem.actor, 'button-release-event')
+
     })
 })
 
 describe('setting playbackstatus is working', () => {
-    it('changing first time to non stop is working', () => {
+    it('Icon and Text shown when changing first time to non stop', () => {
         const channelMenuItem = createChannelMenuItem({
-            channelName
+            channelName,
+            onActivated,
+            playbackStatus: 'Stopped'
         })
 
         channelMenuItem.setPlaybackStatus('Playing')
 
-        const children = getChildren(channelMenuItem)
+        const children = channelMenuItem.actor.get_children<[IconType, LabelType]>()
 
-        const icon = children[0].actor as imports.gi.St.Icon
-        const label = children[1].actor as imports.gi.St.Label
-
-        expect(icon.icon_name).toBe(consts.PLAY_ICON_NAME)
-        expect(label.text).toBe(channelNameShortened)
+        expect(children[0].icon_name).toBe(consts.PLAY_ICON_NAME)
+        expect(children[1].text).toBe(channelNameShortened)
     })
 
-    it('changing back to stop is working', () => {
+    it('Only Text shown when changing to stop', () => {
         const channelMenuItem = createChannelMenuItem({
-            channelName
+            channelName,
+            onActivated,
+            playbackStatus: 'Playing'
         })
 
-        channelMenuItem.setPlaybackStatus('Paused')
         channelMenuItem.setPlaybackStatus('Stopped')
-        channelMenuItem.setPlaybackStatus('Paused')
+        const children = channelMenuItem.actor.get_children<[LabelType]>()
+        expect(children.length).toBe(1)
+        expect(children[0].text).toBe(channelNameShortened)
 
-        const children = getChildren(channelMenuItem)
-
-        const icon = children[0].actor as imports.gi.St.Icon
-        const label = children[1].actor as imports.gi.St.Label
-
-        expect(icon.icon_name).toBe(consts.PAUSE_ICON_NAME)
-        expect(label.text).toBe(channelNameShortened)
-
-    })
-
-    it('changing to non-stop there and back is working', () => {
-        const channelMenuItem = createChannelMenuItem({
-            channelName
-        })
-
-        channelMenuItem.setPlaybackStatus('Paused')
-        channelMenuItem.setPlaybackStatus('Stopped')
-        const children = getChildren(channelMenuItem)
-
-        const label = children[0].actor as imports.gi.St.Label
-
-        expect(label.text).toBe(channelNameShortened)
     })
 })

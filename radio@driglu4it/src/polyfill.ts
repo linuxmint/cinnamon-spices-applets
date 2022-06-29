@@ -1,4 +1,4 @@
-import { isObject, mapValues } from "lodash";
+import { isObject, mapValues } from 'lodash-es';
 
 const { Variant } = imports.gi.GLib
 
@@ -23,6 +23,12 @@ declare global {
       callback: (this: This, value: T, index: number, array: T[]) => U | ReadonlyArray<U>,
       thisArg?: This
     ): U[]
+  }
+
+  // added during build (see webpack.config.js)
+  interface Meta {
+    instanceId: number
+    orientation: imports.gi.St.Side
   }
 }
 
@@ -74,6 +80,7 @@ export function initPolyfills() {
       configurable: true,
       writable: true,
       value: function () {
+        // @ts-ignore
         return Array.prototype.map.apply(this, arguments).flat(1);
       },
     });
@@ -83,8 +90,8 @@ export function initPolyfills() {
   // included in LM 20.1 (cinnamon 4.8) but not in LM 20.0 (cinnamon 4.6.7)
   Variant.prototype.deepUnpack = Variant.prototype.deep_unpack
 
-  // included in LM 20.1 (cinnamon 4.8) but not in LM 20.0 (cinnamon 4.6.7)
-  // TODO: write unit test. Are arrays handled correct??
+  // // included in LM 20.1 (cinnamon 4.8) but not in LM 20.0 (cinnamon 4.6.7)
+  // // TODO: write unit test. Are arrays handled correct??
   if (!Variant.prototype.recursiveUnpack) {
     Variant.prototype.recursiveUnpack = function () {
       function recursiveUnpackKey(key: any) {

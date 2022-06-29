@@ -1,11 +1,11 @@
 import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
-import { GetTimesResult } from "suncalc";
-import { ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
+import { APIUniqueField, ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
 import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
+const { Object } = imports.gi.GObject;
 
 // --------------------------------------------------------------
 // Text Generators
@@ -26,14 +26,17 @@ interface KeysValuePairs {
 }
 
 export function format(str: string, args: KeysValuePairs) {
-	for (let key in args) {
+	for (const key in args) {
 		str = str.replace(new RegExp("\\{" + key + "\\}"), args[key]);
 	}
 	return str;
 }
 
-export function UnitToUnicode(unit: WeatherUnits): string {
-	return unit == "fahrenheit" ? '\u2109' : '\u2103'
+export function UnitToUnicode(unit: Exclude<WeatherUnits, "automatic">): string {
+	//return unit == "fahrenheit" ? '\u2109' : '\u2103';
+	// Use the not dedicated characters, it exists in more fonts fixing some alignment issues with
+	// fallbacks
+	return unit == "fahrenheit" ? '°F' : '°C';	
 }
 
 /** Generates text for the LocationButton on to of the popup menu and tooltip */
@@ -64,10 +67,9 @@ export function CapitalizeEveryWord(description: string): string {
 	if ((description == undefined || description == null)) {
 		return "";
 	}
-	let split = description.split(" ");
+	const split = description.split(" ");
 	let result = "";
-	for (let index = 0; index < split.length; index++) {
-		const element = split[index];
+	for (const [index, element] of split.entries()) {
 		result += CapitalizeFirstLetter(element);
 		if (index != split.length - 1)
 			result += " ";
@@ -78,19 +80,18 @@ export function CapitalizeEveryWord(description: string): string {
 // ---------------------------------------------------------------------------------
 // TimeString generators
 
-function NormalizeTimezone(tz?: string) {
+function NormalizeTimezone(tz?: string | undefined) {
 	if (!tz || tz == "" || tz == "UTC")
 		tz = undefined;
 	return tz;
 }
 
-export function GetDayName(date: DateTime, locale: string | null, showDate: boolean = false, tz?: string): string {
-	let params: Intl.DateTimeFormatOptions = {
+export function GetDayName(date: DateTime, locale: string | null, showDate: boolean = false, tz?: string | undefined): string {
+	const params: Intl.DateTimeFormatOptions = {
 		weekday: "long",
-		timeZone: tz
 	}
 
-	params.timeZone = NormalizeTimezone(tz);
+	params.timeZone = <string>NormalizeTimezone(tz);
 
 	if (showDate) {
 		params.day = 'numeric';
@@ -113,10 +114,7 @@ export function GetDayName(date: DateTime, locale: string | null, showDate: bool
 		date = date.setLocale(locale);
 
 	let dateString = date.toLocaleString(params);
-
-	// Make sure French days are caapitalised (they are not by default)
-	if (locale?.startsWith("fr"))
-		dateString = CapitalizeFirstLetter(dateString);
+	dateString = CapitalizeFirstLetter(dateString);
 
 	if (date.hasSame(now, "day")) dateString = _("Today");
 	if (date.hasSame(tomorrow, "day")) dateString = _("Tomorrow");
@@ -125,10 +123,9 @@ export function GetDayName(date: DateTime, locale: string | null, showDate: bool
 }
 
 export function GetHoursMinutes(date: DateTime, locale: string | null, hours24Format: boolean, tz?: string, onlyHours: boolean = false): string {
-	let params: Intl.DateTimeFormatOptions = {
+	const params: Intl.DateTimeFormatOptions = {
 		hour: "numeric",
 		hour12: !hours24Format,
-		timeZone: tz
 	}
 
 	params.timeZone = NormalizeTimezone(tz);
@@ -143,13 +140,12 @@ export function GetHoursMinutes(date: DateTime, locale: string | null, hours24Fo
 }
 
 export function AwareDateString(date: DateTime, locale: string | null, hours24Format: boolean, tz: string): string {
-	let now = DateTime.utc().setZone(tz);
+	const now = DateTime.utc().setZone(tz);
 	date = date.setZone(tz)
-	let params: Intl.DateTimeFormatOptions = {
+	const params: Intl.DateTimeFormatOptions = {
 		hour: "numeric",
 		minute: "2-digit",
 		hour12: !hours24Format,
-		timeZone: tz
 	};
 
 	if (!date.hasSame(now, "day")) {
@@ -206,14 +202,28 @@ export function LocalizedColon(locale: string | null): string {
 	return ":"
 }
 
-export function PrecentToLocale(humidity: number, locale: string | null): string {
-	return (humidity / 100).toLocaleString(locale ?? undefined, { style: "percent" });
+export function PercentToLocale(humidity: number, locale: string | null, withUnit: boolean = true): string {
+	if (withUnit)
+		return (humidity / 100).toLocaleString(locale ?? undefined, { style: "percent" });
+	else
+		return Math.round(humidity).toString();
 }
 
 // Conversion Factors
 const WEATHER_CONV_MPH_IN_MPS = 2.23693629
 const WEATHER_CONV_KPH_IN_MPS = 3.6
 const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449
+
+export function ExtraFieldToUserUnits(extra_field: APIUniqueField, config: Config, withUnit: boolean = false): string {
+	switch (extra_field.type) {
+		case "percent":
+			return PercentToLocale(extra_field.value, config.currentLocale, withUnit);
+		case "temperature":
+			return TempToUserConfig(extra_field.value, config, withUnit);
+		default:
+			return _(extra_field.value);
+	}
+}
 
 export function MPStoUserUnits(mps: number, units: WeatherWindSpeedUnits): string {
 	// Override wind units with our preference, takes Meter/Second wind speed
@@ -275,6 +285,8 @@ export function MPStoUserUnits(mps: number, units: WeatherWindSpeedUnits): strin
 }
 
 // Conversion from Kelvin
+export function TempToUserConfig(kelvin: number, config: Config, withUnit?: boolean): string;
+export function TempToUserConfig(kelvin: number | null, config: Config, withUnit?: boolean): string | null;
 export function TempToUserConfig(kelvin: number | null, config: Config, withUnit: boolean = true): string | null {
 	if (kelvin == null)
 		return null;
@@ -286,7 +298,7 @@ export function TempToUserConfig(kelvin: number | null, config: Config, withUnit
 		temp = `${temp} ${UnitToUnicode(config.TemperatureUnit)}`;
 
 	if (config._showBothTempUnits) {
-		let secondUnit: WeatherUnits = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
+		const secondUnit: WeatherUnits = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
 		let secondTemp: number | string = (config.TemperatureUnit == "celsius") ? KelvinToFahrenheit(kelvin) : KelvinToCelsius(kelvin);
 		secondTemp = RussianTransform(secondTemp, config._tempRussianStyle);
 		if (withUnit)
@@ -303,16 +315,16 @@ export function RussianTransform(temp: number, russianStyle: boolean): string {
 		if (temp < 0) return `−${Math.abs(temp).toString()}`;
 		else if (temp > 0) return `+${temp.toString()}`;
 	}
-	
+
 	return temp.toString();
 }
 
 export function TempRangeToUserConfig(min: number | null, max: number | null, config: Config): string {
-	let t_low = TempToUserConfig(min, config, false);
-	let t_high = TempToUserConfig(max, config, false);
+	const t_low = TempToUserConfig(min, config, false);
+	const t_high = TempToUserConfig(max, config, false);
 
-	let first_temperature = config._temperatureHighFirst ? t_high : t_low;
-	let second_temperature = config._temperatureHighFirst ? t_low : t_high;
+	const first_temperature = config._temperatureHighFirst ? t_high : t_low;
+	const second_temperature = config._temperatureHighFirst ? t_low : t_high;
 
 	let result = "";
 	if (first_temperature != null)
@@ -324,7 +336,7 @@ export function TempRangeToUserConfig(min: number | null, max: number | null, co
 		result += `${second_temperature} `;
 	result += `${UnitToUnicode(config.TemperatureUnit)}`;
 	if (config._showBothTempUnits) {
-		let secondUnit: WeatherUnits = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
+		const secondUnit: WeatherUnits = (config.TemperatureUnit == "celsius") ? "fahrenheit" : "celsius";
 		result += ` (${UnitToUnicode(secondUnit)})`;
 	}
 	return result;
@@ -380,17 +392,23 @@ export function KPHtoMPS(speed: number | null): number {
 	return speed / WEATHER_CONV_KPH_IN_MPS;
 };
 
+export function CelsiusToKelvin(celsius: number): number;
+export function CelsiusToKelvin(celsius: number | null): number | null;
 export function CelsiusToKelvin(celsius: number | null): number | null {
 	if (celsius == null) return null;
 	return (celsius + 273.15);
 }
 
+export function FahrenheitToKelvin(fahrenheit: number): number;
+export function FahrenheitToKelvin(fahrenheit: number | null): number | null;
 export function FahrenheitToKelvin(fahrenheit: number | null): number | null {
 	if (fahrenheit == null) return null;
 	return ((fahrenheit - 32) / 1.8 + 273.15);
 };
 
-export function MPHtoMPS(speed: number): number | null {
+export function MPHtoMPS(speed: number): number;
+export function MPHtoMPS(speed: number | null): number | null;
+export function MPHtoMPS(speed: number | null): number | null {
 	if (speed == null || speed == undefined) return null;
 	return speed * 0.44704;
 }
@@ -399,7 +417,9 @@ export function KmToM(km: number): number {
 	return km * 0.6213712;
 }
 
-export function CompassToDeg(compass: string): number | null {
+export function CompassToDeg(compass: string): number;
+export function CompassToDeg(compass: string | null): number | null;
+export function CompassToDeg(compass: string | null): number | null {
 	if (!compass) return null;
 	compass = compass.toUpperCase();
 	switch (compass) {
@@ -424,7 +444,7 @@ export function CompassToDeg(compass: string): number | null {
 }
 
 export function CompassDirection(deg: number): ArrowIcons {
-	let directions: ArrowIcons[] = [
+	const directions: ArrowIcons[] = [
 		'south-arrow-weather-symbolic',
 		'south-west-arrow-weather-symbolic',
 		'west-arrow-weather-symbolic',
@@ -437,10 +457,8 @@ export function CompassDirection(deg: number): ArrowIcons {
 	return directions[Math.round(deg / 45) % directions.length]
 }
 
-export function CompassDirectionText(deg: number): string | null {
-	if (!deg)
-		return null;
-	let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
+export function CompassDirectionText(deg: number): string {
+	const directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
 	return directions[Math.round(deg / 45) % directions.length]
 }
 
@@ -455,9 +473,9 @@ export function CompassDirectionText(deg: number): string | null {
  */
 export function IsNight(sunTimes: SunTime, date?: DateTime): boolean {
 	if (!sunTimes) return false;
-	let time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
-	let sunrise = MilitaryTime(sunTimes.sunrise);
-	let sunset = MilitaryTime(sunTimes.sunset);
+	const time = (!!date) ? MilitaryTime(date) : MilitaryTime(DateTime.utc().setZone(sunTimes.sunset.zoneName));
+	const sunrise = MilitaryTime(sunTimes.sunrise);
+	const sunset = MilitaryTime(sunTimes.sunset);
 	if (time >= sunrise && time < sunset) return false;
 	return true;
 }
@@ -496,14 +514,14 @@ export function mode<T>(arr: T[]): T | null {
 			current.mode = item;
 		}
 		return current;
-	}, { mode: null, greatestFreq: -Infinity, numMapping: {} as any} as { mode: T | null, greatestFreq: number, numMapping: any }).mode;
+	}, { mode: null, greatestFreq: -Infinity, numMapping: {} as any } as { mode: T | null, greatestFreq: number, numMapping: any }).mode;
 };
 
 // Passing appropriate resolver function for the API, and the code
-export function WeatherIconSafely(code: BuiltinIcons[], icon_type: imports.gi.St.IconType): BuiltinIcons {
-	for (let i = 0; i < code.length; i++) {
-		if (HasIcon(code[i], icon_type))
-			return code[i];
+export function WeatherIconSafely(icons: BuiltinIcons[], icon_type: imports.gi.St.IconType): BuiltinIcons {
+	for (const icon of icons) {
+		if (HasIcon(icon, icon_type))
+			return icon;
 	}
 	return 'weather-severe-alert';
 }
@@ -524,11 +542,11 @@ export function ShadeHexColor(color: string, percent: number): string {
  */
 export function ConstructJsLocale(locale: string): string | null {
 	let jsLocale: string | null = locale.split(".")[0];
-	let tmp: string[] = jsLocale.split("_");
+	const tmp: string[] = jsLocale.split("_");
 	jsLocale = "";
-	for (let i = 0; i < tmp.length; i++) {
+	for (const [i, item] of tmp.entries()) {
 		if (i != 0) jsLocale += "-";
-		jsLocale += tmp[i].toLowerCase();
+		jsLocale += item.toLowerCase();
 	}
 
 	if (locale == "c" || locale == null) jsLocale = null;
@@ -559,12 +577,7 @@ export function GetDistance(lat1: number, lon1: number, lat2: number, lon2: numb
 }
 
 export function GetFuncName(func: Function): string {
-	// ES6
-	if (!!func.name) return func.name;
-	// ES5
-	// https://stackoverflow.com/a/17923727
-	var result = /^function\s+([\w\$]+)\s*\(/.exec(func.toString())
-	return result ? result[1] : '' // for an anonymous function there won't be a match
+	return func.name;
 }
 
 export function Guid() {
@@ -572,6 +585,69 @@ export function Guid() {
 		var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 		return v.toString(16);
 	});
+}
+
+export const isFinalized = function (obj: any) {
+	return obj && Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
+}
+
+interface CompareVersionOptions {
+	/**
+	 * Changes the result if one version string has less parts than the other. In
+ 	 * this case the shorter string will be padded with "zero" parts instead of being considered smaller.
+	 */
+	zeroExtend: boolean;
+}
+/**
+ * Compares two software version numbers (e.g. "1.7.1" or "1.2b").
+ * @param v1 The first version to be compared.
+ * @param v2 The second version to be compared.
+ * @param options Optional flags that affect comparison behavior:
+ * @returns 
+ *   - 0 if the versions are equal
+ *   - a negative integer iff v1 < v2
+ *   - a positive integer iff v1 > v2
+ *   - NaN if either version string is in the wrong format
+ */
+export function CompareVersion(v1: string, v2: string, options?: CompareVersionOptions) {
+	const zeroExtend = options && options.zeroExtend,
+		v1parts = v1.split('.'),
+		v2parts = v2.split('.');
+
+	function isValidPart(x: string) {
+		return (/^\d+$/).test(x);
+	}
+
+	if (!v1parts.every(isValidPart) || !v2parts.every(isValidPart)) {
+		return NaN;
+	}
+
+	if (zeroExtend) {
+		while (v1parts.length < v2parts.length) v1parts.push("0");
+		while (v2parts.length < v1parts.length) v2parts.push("0");
+	}
+
+	for (var i = 0; i < v1parts.length; ++i) {
+		if (v2parts.length == i) {
+			return 1;
+		}
+
+		if (v1parts[i] == v2parts[i]) {
+			continue;
+		}
+		else if (v1parts[i] > v2parts[i]) {
+			return 1;
+		}
+		else {
+			return -1;
+		}
+	}
+
+	if (v1parts.length != v2parts.length) {
+		return -1;
+	}
+
+	return 0;
 }
 
 // -----------------------------------------------------------
@@ -583,7 +659,7 @@ export function setTimeout(func: Function, ms: number) {
 		args = args.slice.call(arguments, 2);
 	}
 
-	let id = timeout_add(ms, () => {
+	const id = timeout_add(ms, () => {
 		func.apply(null, args);
 		return false; // Stop repeating
 	});
@@ -609,7 +685,7 @@ export function setInterval(func: Function, ms: number) {
 		args = args.slice.call(arguments, 2);
 	}
 
-	let id = timeout_add(ms, () => {
+	const id = timeout_add(ms, () => {
 		func.apply(null, args);
 		return true; // Repeat
 	});
