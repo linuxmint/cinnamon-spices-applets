@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-13 13:37+0200\n"
+"POT-Creation-Date: 2022-06-30 17:27+0200\n"
 "PO-Revision-Date: 2021-02-27 16:16+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -18,9 +18,57 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:65
+#: applet.js:21
+msgid "%B %-e, %Y"
+msgstr "%-e. %B %Y"
+
+#: applet.js:22 eventView.js:26
+msgid "%A, %B %-e, %Y"
+msgstr "%A den %-e. %B %Y"
+
+#: applet.js:131
 msgid "Date and Time Settings"
-msgstr ""
+msgstr "Indstillinger for dato og tid"
+
+#: eventView.js:65
+msgid "Starting in a few minutes"
+msgstr "Starter om få minutter"
+
+#: eventView.js:69
+#, javascript-format
+msgid "Starting in %d minutes"
+msgstr "Starter om %d minutter"
+
+#: eventView.js:79
+msgid "This evening"
+msgstr "I aften"
+
+#: eventView.js:82
+msgid "Starting later today"
+msgstr "Starter senere i dag"
+
+#: eventView.js:85
+#, javascript-format
+msgid "In %d hour"
+msgid_plural "In %d hours"
+msgstr[0] "Om %d time"
+msgstr[1] "Om %d timer"
+
+#: eventView.js:664
+msgid "No Events"
+msgstr "Ingen begivenheder"
+
+#: eventView.js:925
+msgid "In progress"
+msgstr "I gang"
+
+#: eventView.js:946
+msgid "All day"
+msgstr "Hele dagen"
+
+#: eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
+msgid "Today"
+msgstr "I dag"
 
 #: settings_widgets.py:95
 msgid "Add new entry"
@@ -79,6 +127,14 @@ msgstr ""
 #. settings-schema.json->section4->title
 msgid "Show World Times"
 msgstr "Vis verdenstid"
+
+#. settings-schema.json->show-events->description
+msgid "Show calendar events"
+msgstr "Vis kalenderbegivenheder"
+
+#. settings-schema.json->show-events->tooltip
+msgid "Check this to display events in the calendar."
+msgstr "Aktivér denne for at få vist begivenheder i kalenderen."
 
 #. settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"
