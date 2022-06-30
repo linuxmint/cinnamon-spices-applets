@@ -20,7 +20,7 @@ function _(str) {
 const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+|_|&|\\)|\S+?(\s|$|-|=|\+|_|&|\\)/g ).join('\n');
 
 const graphemeBaseChars = s => //decompose and remove discritics.
-                s.normalize('NFKD').replace(/\p{Grapheme_Extend}/gu,"");
+                s.normalize('NFKD').replace(/[\u0300-\u036f]/g, "");
 
 //===========================================================
 
