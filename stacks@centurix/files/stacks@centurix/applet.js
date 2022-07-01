@@ -270,7 +270,7 @@ Stacks.prototype = {
 			if (event._switch.state) {
 				this.transitionMenu(_("Docker Compose: Bringing Stack up, please wait..."));
 				this.docker_compose.up(event.docker_compose_file);
-				this.docker_compose.events(event.docker_compose_file);
+				// this.docker_compose.events(event.docker_compose_file);
 				this.notification(_("Bringing Stack up..."));
 				this.refreshApplet();
 				return true;
@@ -281,6 +281,16 @@ Stacks.prototype = {
 			this.refreshApplet();
 		} catch(e) {
 			global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${e}`);
+		}
+	},
+
+	attachSink: function(event) {
+		global.log(UUID + '::attachSink: Attaching applet to docker-compose event sink ' + event.docker_compose_file)
+		try {
+			this.docker_compose.events(event.docker_compose_file);
+			return true;
+		} catch(e) {
+			global.log(UUID + '::attachSink: ' + e);
 		}
 	},
 

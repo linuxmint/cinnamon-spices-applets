@@ -168,12 +168,12 @@ DockerCompose.prototype = {
 
     up: function(stack_file) {
         // Bring a stack up with `docker-compose up`
-        this.exec(stack_file, "up", null, false);
+        this.exec(stack_file, ["up"], null, false);
     },
 
     down: function(stack_file) {
         // Bring a stack down with `docker-compose down`
-        this.exec(stack_file, "down", null, false);
+        this.exec(stack_file, ["down"], null, false);
     },
 
 	status: function(stack_file) {
@@ -260,4 +260,5 @@ DockerCompose.prototype = {
 			}
 		})
 	}
+
 }
