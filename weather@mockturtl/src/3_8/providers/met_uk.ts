@@ -83,7 +83,7 @@ export class MetUk extends BaseProvider {
 				type: "hard",
 				userError: true,
 				detail: "location not covered",
-				message: "MET Office UK only covers the UK, please make sure your location is in the country",
+				message: _("MET Office UK only covers the UK, please make sure your location is in the country"),
 				service: "met-uk"
 			})
 			return null;

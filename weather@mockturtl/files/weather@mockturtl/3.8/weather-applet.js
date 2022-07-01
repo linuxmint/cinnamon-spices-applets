@@ -131,6 +131,10 @@ var weatherApplet;
 
   function hourAngle(h, phi, d) {
     return acos((sin(h) - sin(phi) * sin(d)) / (cos(phi) * cos(d)));
+  }
+
+  function observerAngle(height) {
+    return -2.076 * Math.sqrt(height) / 60;
   } // returns set time for the given sun altitude
 
 
@@ -138,12 +142,15 @@ var weatherApplet;
     var w = hourAngle(h, phi, dec),
         a = approxTransit(w, lw, n);
     return solarTransitJ(a, M, L);
-  } // calculates sun times for a given date and latitude/longitude
+  } // calculates sun times for a given date, latitude/longitude, and, optionally,
+  // the observer height (in meters) relative to the horizon
 
 
-  SunCalc.getTimes = function (date, lat, lng) {
+  SunCalc.getTimes = function (date, lat, lng, height) {
+    height = height || 0;
     var lw = rad * -lng,
         phi = rad * lat,
+        dh = observerAngle(height),
         d = toDays(date),
         n = julianCycle(d, lw),
         ds = approxTransit(0, lw, n),
@@ -154,6 +161,7 @@ var weatherApplet;
         i,
         len,
         time,
+        h0,
         Jset,
         Jrise;
     var result = {
@@ -163,7 +171,8 @@ var weatherApplet;
 
     for (i = 0, len = times.length; i < len; i += 1) {
       time = times[i];
-      Jset = getSetJ(time[0] * rad, lw, phi, dec, n, M, L);
+      h0 = (time[0] + dh) * rad;
+      Jset = getSetJ(h0, lw, phi, dec, n, M, L);
       Jrise = Jnoon - (Jset - Jnoon);
       result[time[1]] = fromJulian(Jrise);
       result[time[2]] = fromJulian(Jset);
@@ -9705,7 +9714,7 @@ class MetUk extends BaseProvider {
                 type: "hard",
                 userError: true,
                 detail: "location not covered",
-                message: "MET Office UK only covers the UK, please make sure your location is in the country",
+                message: _("MET Office UK only covers the UK, please make sure your location is in the country"),
                 service: "met-uk"
             });
             return null;
@@ -13797,7 +13806,60 @@ class AccuWeather extends BaseProvider {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/deutscherWetterdienst.ts
+
+
+
+class DeutscherWetterdienst extends BaseProvider {
+    constructor() {
+        super(...arguments);
+        this.needsApiKey = false;
+        this.prettyName = _("Deutscher Wetterdienst");
+        this.name = "DeutscherWetterdienst";
+        this.maxForecastSupport = 10;
+        this.maxHourlyForecastSupport = 240;
+        this.website = "https://www.dwd.de/DE/Home/home_node.html";
+        this.remainingCalls = null;
+        this.baseUrl = "https://api.brightsky.dev/";
+        this.HandleErrors = (message) => {
+            var _a;
+            if (((_a = message.Response) === null || _a === void 0 ? void 0 : _a.status_code) == 404) {
+                this.app.ShowError({
+                    detail: "location not covered",
+                    message: _("Please select a different provider or location"),
+                    userError: true,
+                    type: "hard"
+                });
+                return true;
+            }
+            return false;
+        };
+    }
+    async GetWeather(loc) {
+        const [current, hourly] = await Promise.all([
+            this.app.LoadJsonAsync(`${this.baseUrl}current`, this.GetDefaultParams(loc), this.HandleErrors),
+            this.app.LoadJsonAsync(`${this.baseUrl}current_weather`, this.GetHourlyParams(loc), this.HandleErrors)
+        ]);
+        return null;
+    }
+    GetDefaultParams(loc) {
+        return {
+            lat: loc.lat,
+            lon: loc.lon,
+            units: "si"
+        };
+    }
+    GetHourlyParams(loc) {
+        const params = this.GetDefaultParams(loc);
+        const date = loc.timeZone ? DateTime.now().setZone(loc.timeZone) : DateTime.now();
+        params.date = date.toISO();
+        params.last_date = date.plus({ days: 10 }).toISO();
+        return params;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
 
 
 
@@ -13834,7 +13896,8 @@ const ServiceClassMapping = {
     "US Weather": (app) => new USWeather(app),
     "Visual Crossing": (app) => new VisualCrossing(app),
     "DanishMI": (app) => new DanishMI(app),
-    "AccuWeather": (app) => new AccuWeather(app)
+    "AccuWeather": (app) => new AccuWeather(app),
+    "DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app)
 };
 const Keys = {
     DATA_SERVICE: "dataService",
