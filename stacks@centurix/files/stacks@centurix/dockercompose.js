@@ -63,7 +63,9 @@ DockerCompose.prototype = {
 	},
 
 	availableDockerComposeCmd: function() {
-		// this.docker_cmd = "chappy";
+		/*
+		 * Fetch the best available docker compose command
+		 */
 		global.log(`${UUID}::DockerCompose:${(new Error().stack).split('@')[0]}: Checking Docker commands`);
 
 		return new Promise((resolve, reject) => {
@@ -91,9 +93,9 @@ DockerCompose.prototype = {
 		})
 	},
 
-    exists: function() {
+    available: function() {
 		/*
-		 * Look for either docker-compose or the newer "docker compose" command
+		 * See if everything is there
 		 */
 		return new Promise((resolve, reject) => {
 			// 1. Check to see if docker_cmd is present

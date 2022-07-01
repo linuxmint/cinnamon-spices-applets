@@ -167,21 +167,21 @@ Stacks.prototype = {
 	onDockerComposeProjectFolderUpdate: function() {
 		// Refresh the list of docker compose projects in the menu
 		global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${this.docker_compose_project_folder}`);
-        this.updateApplet(true)
+        this.updateApplet()
 	},
 
 	onDockerComposeCmdUpdate: function() {
 		// Refresh any docker compose related info based on the selected version of the command
 		global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${this.docker_compose_cmd}`);
 		this.DockerCompose.setDockerComposeCmd(this.docker_compose_cmd);
-        this.updateApplet(true)
+        this.updateApplet()
 	},
 
 	onDockerCmdUpdate: function() {
 		// Refresh any docker related info based on the selected version of the command
 		global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${this.docker_cmd}`);
 		this.DockerCompose.setDockerCmd(this.docker_cmd);
-        this.updateApplet(true)
+        this.updateApplet()
 	},
 
 	onEditorUpdate: function() {
@@ -303,13 +303,13 @@ Stacks.prototype = {
         this.updateApplet()
 	},
 
-	updateApplet: function(status) {
+	updateApplet: function() {
 		/*
 		 * Draw the main menu.
 		 * Check for the existance for docker-compose. If it doesn't exist, alert the user and direct them to installation instructions
 		 */
 		try {
-			this.docker_compose.exists().then(results => {
+			this.docker_compose.available().then(results => {
 				let docker_projects = this.docker_compose.listDockerComposefiles();
 
 				global.log(`${UUID}::${(new Error().stack).split('@')[0]}: Found Docker Compose projects ${docker_projects}`);
