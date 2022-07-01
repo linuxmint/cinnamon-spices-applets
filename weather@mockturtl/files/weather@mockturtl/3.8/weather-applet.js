@@ -13810,6 +13810,7 @@ class AccuWeather extends BaseProvider {
 
 
 
+
 class DeutscherWetterdienst extends BaseProvider {
     constructor() {
         super(...arguments);
@@ -13836,11 +13837,144 @@ class DeutscherWetterdienst extends BaseProvider {
         };
     }
     async GetWeather(loc) {
+        var _a, _b, _c;
         const [current, hourly] = await Promise.all([
-            this.app.LoadJsonAsync(`${this.baseUrl}current`, this.GetDefaultParams(loc), this.HandleErrors),
-            this.app.LoadJsonAsync(`${this.baseUrl}current_weather`, this.GetHourlyParams(loc), this.HandleErrors)
+            this.app.LoadJsonAsync(`${this.baseUrl}current_weather`, this.GetDefaultParams(loc), this.HandleErrors),
+            this.app.LoadJsonAsync(`${this.baseUrl}weather`, this.GetHourlyParams(loc), this.HandleErrors)
         ]);
-        return null;
+        if (current == null || hourly == null)
+            return null;
+        const currentTime = DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone);
+        const sunTimes = (0,suncalc.getTimes)(currentTime.toJSDate(), loc.lat, loc.lon);
+        const mainSource = (_a = current.sources.find(source => source.id == current.weather.source_id)) !== null && _a !== void 0 ? _a : current.sources[0];
+        return {
+            date: DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone),
+            location: {
+                city: (_b = current.sources[0].station_name) !== null && _b !== void 0 ? _b : loc.city,
+                country: loc.country,
+                timeZone: loc.timeZone,
+            },
+            coord: {
+                lon: loc.lon,
+                lat: loc.lat,
+            },
+            sunrise: DateTime.fromJSDate(sunTimes.sunrise).setZone(loc.timeZone),
+            sunset: DateTime.fromJSDate(sunTimes.sunset).setZone(loc.timeZone),
+            condition: this.IconToInfo(current.weather.icon),
+            wind: {
+                degree: current.weather.wind_direction_10,
+                speed: current.weather.wind_speed_10
+            },
+            temperature: current.weather.temperature,
+            pressure: current.weather.pressure_msl ? (current.weather.pressure_msl / 100) : null,
+            humidity: current.weather.relative_humidity,
+            dewPoint: current.weather.dew_point,
+            stationInfo: {
+                distanceFrom: mainSource.distance,
+                lat: mainSource.lat,
+                lon: mainSource.lon,
+                name: (_c = mainSource.station_name) !== null && _c !== void 0 ? _c : undefined
+            },
+            forecasts: this.ParseForecast(current, hourly)
+        };
+    }
+    ParseForecast(current, forecast) {
+        return [];
+    }
+    IconToInfo(icon) {
+        switch (icon) {
+            case "clear-day":
+                return {
+                    main: _("Clear"),
+                    description: _("Clear"),
+                    icons: ["weather-clear"],
+                    customIcon: "day-sunny-symbolic"
+                };
+            case "clear-night":
+                return {
+                    main: _("Clear"),
+                    description: _("Clear"),
+                    icons: ["weather-clear-night"],
+                    customIcon: "night-clear-symbolic"
+                };
+            case "cloudy":
+                return {
+                    main: _("Cloudy"),
+                    description: _("Cloudy"),
+                    icons: ["weather-overcast"],
+                    customIcon: "cloudy-symbolic"
+                };
+            case "fog":
+                return {
+                    main: _("Fog"),
+                    description: _("Fog"),
+                    icons: ["weather-fog"],
+                    customIcon: "fog-symbolic"
+                };
+            case "hail":
+                return {
+                    main: _("Hail"),
+                    description: _("Hail"),
+                    icons: ["weather-freezing-rain"],
+                    customIcon: "hail-symbolic"
+                };
+            case "partly-cloudy-day":
+                return {
+                    main: _("Partly Cloudy"),
+                    description: _("Partly Cloudy"),
+                    icons: ["weather-few-clouds"],
+                    customIcon: "day-cloudy-symbolic"
+                };
+            case "partly-cloudy-night":
+                return {
+                    main: _("Partly Cloudy"),
+                    description: _("Partly Cloudy"),
+                    icons: ["weather-few-clouds-night"],
+                    customIcon: "night-cloudy-symbolic"
+                };
+            case "rain":
+                return {
+                    main: _("Rain"),
+                    description: _("Rain"),
+                    icons: ["weather-rain", "weather-showers", "weather-showers-scattered"],
+                    customIcon: "rain-symbolic"
+                };
+            case "sleet":
+                return {
+                    main: _("Sleet"),
+                    description: _("Sleet"),
+                    icons: ["weather-rain", "weather-showers", "weather-showers-scattered"],
+                    customIcon: "sleet-symbolic"
+                };
+            case "snow":
+                return {
+                    main: _("Snow"),
+                    description: _("Snow"),
+                    icons: ["weather-snow"],
+                    customIcon: "snow-symbolic"
+                };
+            case "thunderstorm":
+                return {
+                    main: _("Thunderstorm"),
+                    description: _("Thunderstorm"),
+                    icons: ["weather-storm"],
+                    customIcon: "thunderstorm-symbolic"
+                };
+            case "wind":
+                return {
+                    main: _("Wind"),
+                    description: _("Wind"),
+                    icons: ["weather-windy", "weather-breeze"],
+                    customIcon: "windy-symbolic"
+                };
+            default:
+                return {
+                    main: _("Unknown"),
+                    description: _("Unknown"),
+                    icons: [],
+                    customIcon: "cloud-refresh-symbolic"
+                };
+        }
     }
     GetDefaultParams(loc) {
         return {

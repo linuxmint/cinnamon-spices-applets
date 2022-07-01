@@ -1,7 +1,8 @@
 import { DateTime } from "luxon";
+import { getTimes } from "suncalc";
 import { Services } from "../config";
 import { ErrorResponse, HTTPParams } from "../lib/httpLib";
-import { LocationData, WeatherData } from "../types";
+import { Condition, ForecastData, LocationData, WeatherData } from "../types";
 import { _ } from "../utils";
 import { BaseProvider } from "./BaseProvider"
 
@@ -19,12 +20,147 @@ export class DeutscherWetterdienst extends BaseProvider {
 
     public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
         const [current, hourly] = await Promise.all([
-            this.app.LoadJsonAsync<CurrentWeatherPayload>(`${this.baseUrl}current`, this.GetDefaultParams(loc), this.HandleErrors),
-            this.app.LoadJsonAsync<HourlyForecastPayload>(`${this.baseUrl}current_weather`, this.GetHourlyParams(loc), this.HandleErrors)
+            this.app.LoadJsonAsync<CurrentWeatherPayload>(`${this.baseUrl}current_weather`, this.GetDefaultParams(loc), this.HandleErrors),
+            this.app.LoadJsonAsync<HourlyForecastPayload>(`${this.baseUrl}weather`, this.GetHourlyParams(loc), this.HandleErrors)
         ]);
 
+        if (current == null || hourly == null)
+            return null;
 
-        return null;
+        const currentTime = DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone);
+        const sunTimes = getTimes(currentTime.toJSDate(), loc.lat, loc.lon);
+        const mainSource = current.sources.find(source => source.id == current.weather.source_id) ?? current.sources[0];
+
+        return {
+            date: DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone),
+            location: {
+                city: current.sources[0].station_name ?? loc.city,
+                country: loc.country,
+                timeZone: loc.timeZone,
+            },
+            coord: {
+                lon: loc.lon,
+                lat: loc.lat,
+            },
+            sunrise: DateTime.fromJSDate(sunTimes.sunrise).setZone(loc.timeZone),
+            sunset: DateTime.fromJSDate(sunTimes.sunset).setZone(loc.timeZone),
+            condition: this.IconToInfo(current.weather.icon),
+            wind: {
+                degree: current.weather.wind_direction_10,
+                speed: current.weather.wind_speed_10
+            },
+            temperature: current.weather.temperature,
+            pressure: current.weather.pressure_msl ? (current.weather.pressure_msl / 100) : null,
+            humidity: current.weather.relative_humidity,
+            dewPoint: current.weather.dew_point,
+            stationInfo: {
+                distanceFrom: mainSource.distance,
+                lat: mainSource.lat,
+                lon: mainSource.lon,
+                name: mainSource.station_name ?? undefined
+            },
+            forecasts: this.ParseForecast(current, hourly)
+        };
+    }
+
+    private ParseForecast(current: CurrentWeatherPayload, forecast: HourlyForecastPayload): ForecastData[] {
+        return []
+    }
+
+    private IconToInfo(icon: Icon | null): Condition {
+        switch(icon) {
+            case "clear-day":
+                return {
+                    main: _("Clear"),
+                    description: _("Clear"),
+                    icons: ["weather-clear"],
+                    customIcon: "day-sunny-symbolic"
+                }
+            case "clear-night":
+                return {
+                    main: _("Clear"),
+                    description: _("Clear"),
+                    icons: ["weather-clear-night"],
+                    customIcon: "night-clear-symbolic"
+                }
+            case "cloudy":
+                return {
+                    main: _("Cloudy"),
+                    description: _("Cloudy"),
+                    icons: ["weather-overcast"],
+                    customIcon: "cloudy-symbolic"
+                }
+            case "fog":
+                return {
+                    main: _("Fog"),
+                    description: _("Fog"),
+                    icons: ["weather-fog"],
+                    customIcon: "fog-symbolic"
+                }
+            case "hail":
+                return {
+                    main: _("Hail"),
+                    description: _("Hail"),
+                    icons: ["weather-freezing-rain"],
+                    customIcon: "hail-symbolic"
+                }
+            case "partly-cloudy-day":
+                return {
+                    main: _("Partly Cloudy"),
+                    description: _("Partly Cloudy"),
+                    icons: ["weather-few-clouds"],
+                    customIcon: "day-cloudy-symbolic"
+                }
+            case "partly-cloudy-night":
+                return {
+                    main: _("Partly Cloudy"),
+                    description: _("Partly Cloudy"),
+                    icons: ["weather-few-clouds-night"],
+                    customIcon: "night-cloudy-symbolic"
+                }
+            case "rain":
+                return {
+                    main: _("Rain"),
+                    description: _("Rain"),
+                    icons: ["weather-rain", "weather-showers", "weather-showers-scattered"],
+                    customIcon: "rain-symbolic"
+                }
+            case "sleet":
+                return {
+                    main: _("Sleet"),
+                    description: _("Sleet"),
+                    icons: ["weather-rain", "weather-showers", "weather-showers-scattered"],
+                    customIcon: "sleet-symbolic"
+                }
+            case "snow":
+                return {
+                    main: _("Snow"),
+                    description: _("Snow"),
+                    icons: ["weather-snow"],
+                    customIcon: "snow-symbolic"
+                }
+            case "thunderstorm":
+                return {
+                    main: _("Thunderstorm"),
+                    description: _("Thunderstorm"),
+                    icons: ["weather-storm"],
+                    customIcon: "thunderstorm-symbolic"
+                }
+            case "wind":
+                return {
+                    main: _("Wind"),
+                    description: _("Wind"),
+                    icons: ["weather-windy", "weather-breeze"],
+                    customIcon: "windy-symbolic"
+                }
+            default: 
+                return {
+                    main: _("Unknown"),
+                    description: _("Unknown"),
+                    icons: [],
+                    customIcon: "cloud-refresh-symbolic"
+                }
+        }
     }
 
     private HandleErrors = (message: ErrorResponse): boolean => {
@@ -59,7 +195,7 @@ export class DeutscherWetterdienst extends BaseProvider {
 }
 
 interface CurrentWeatherPayload {
-    weather: [CurrentWeatherInfo];
+    weather: CurrentWeatherInfo;
     sources: StationData[];
 }
 
@@ -76,7 +212,7 @@ interface CurrentWeatherInfo {
     /** Total cloud cover at timestamp */
     cloud_cover: number | null;
     /** Current weather conditions. Unlike the numerical parameters, this field is not taken as-is from the raw data (because it does not exist), but is calculated from different fields in the raw data as a best effort. Not all values are available for all source types. */
-    condition: Condition | null;
+    condition: DWDCondition | null;
     /** Dew point at timestamp, 2 m above ground */
     dew_point: number | null;
     /** Icon alias suitable for the current weather conditions. Unlike the numerical parameters, this field is not taken as-is from the raw data (because it does not exist), but is calculated from different fields in the raw data as a best effort. Not all values are available for all source types. */
@@ -133,7 +269,7 @@ interface HourlyForecastInfo {
     /**  Total cloud cover at timestamp, % */
     cloud_cover: number | null;
     /**  Current weather conditions. Unlike the numerical parameters, this field is not taken as-is from the raw data (because it does not exist), but is calculated from different fields in the raw data as a best effort. Not all values are available for all source types.   */
-    condition: Condition | null;
+    condition: DWDCondition | null;
     /** Dew point at timestamp, 2 m above ground. Kelvin */
     dew_point: number | null;
     /** Icon alias suitable for the current weather conditions. Unlike the numerical parameters, this field is not taken as-is from the raw data (because it does not exist), but is calculated from different fields in the raw data as a best effort. Not all values are available for all source types. */
@@ -162,7 +298,7 @@ interface HourlyForecastInfo {
     fallback_source_ids: any;
 }
 
-type Condition = "dry" | "fog" | "rain" | "sleet" | "snow" | "hail" | "thunderstorm";
+type DWDCondition = "dry" | "fog" | "rain" | "sleet" | "snow" | "hail" | "thunderstorm";
 
 type Icon = "clear-day" | "clear-night" | "partly-cloudy-day" | "partly-cloudy-night" | "cloudy" | "fog" | "wind" | "rain" | "sleet" | "snow" | "hail" | "thunderstorm";
 
