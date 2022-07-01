@@ -11,6 +11,7 @@ const Tooltips = imports.ui.tooltips;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
+const ByteArray = imports.byteArray;
 const UUID = "cheaty@centurix";
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
@@ -197,7 +198,7 @@ Cheaty.prototype = {
 
 					let [ok, data, etag] = sheet.load_contents(null);
 					if (ok) {
-						let contents = JSON.parse(data);
+						let contents = JSON.parse(ByteArray.toString(data));
 
 						let iconPath = resolveHome(this.cheatsheetFolder) + '/' + sheetName + '/icon.svg';
 
