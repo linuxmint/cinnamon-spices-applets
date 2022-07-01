@@ -14,6 +14,13 @@
         "allow-none" : false,
 		"tooltip": "This is the command that is run to start Docker Compose."
 	},
+	"dockerCmd": {
+		"type": "filechooser",
+		"default": "docker",
+		"description": "Docker command location",
+        "allow-none" : false,
+		"tooltip": "This is the command that is run to start Docker."
+	},
 	"editor": {
 		"type": "filechooser",
 		"default": "xed",

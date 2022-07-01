@@ -19,6 +19,7 @@ if (typeof require !== 'undefined') {
 }
 
 const UUID = "stacks@centurix";
+const APPLET_NAME = "Stacks";
 
 const APPLET_FOLDER = global.userdatadir + "/applets/stacks@centurix/";
 
@@ -27,6 +28,7 @@ const ICON_MISSING = APPLET_FOLDER + "icons/docker_compose_missing_128x128.png";
 
 const DOCKER_COMPOSE_PROJECT_FOLDER = "~/docker_projects";
 const DOCKER_COMPOSE_CMD = "docker-compose";
+const DOCKER_CMD = "docker";
 const EDITOR = 'xed';
 
 /**
@@ -59,67 +61,84 @@ function Stacks(metadata, orientation, panelHeight, instanceId) {
 Stacks.prototype = {
 	__proto__: Applet.IconApplet.prototype,
 
+	/************************************************
+	 * Bootstrapping the applet
+	 ************************************************/
+
 	_init: function(orientation, panelHeight, instanceId) {
 		Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
 		try {
-		    this.menuManager = new PopupMenu.PopupMenuManager(this);
-			this.menu = new Applet.AppletPopupMenu(this, orientation);
-			this.menuManager.addMenu(this.menu);
-
-			this._msgsrc = new MessageTray.SystemNotificationSource("Stacks");
-			Main.messageTray.add(this._msgsrc);
-
+			// Use default values until we get proper config
 			this.docker_compose_project_folder = DOCKER_COMPOSE_PROJECT_FOLDER;
 			this.docker_compose_cmd = DOCKER_COMPOSE_CMD;
+			this.docker_compose_cmd = DOCKER_CMD;
 			this.editor = EDITOR;
 
-			global.log(UUID + "::docker_compose_project_folder: " + this.docker_compose_project_folder);
-			global.log(UUID + "::docker_compose_cmd: " + this.docker_compose_cmd);
-			global.log(UUID + "::editor: " + this.editor);
+			this.createMainMenu(orientation);
+			this.attachNotifications();
+			this.attachSettings();
 
-			this.settings.bindProperty(
-				Settings.BindingDirection.IN, 
-				"dockerComposeProjectFolder",
-				"docker_compose_project_folder",
-				this.onDockerComposeProjectFolderUpdate
-			);
-			this.settings.bindProperty(
-				Settings.BindingDirection.IN, 
-				"dockerComposeCmd",
-				"docker_compose_cmd",
-				this.onDockerComposeCmdUpdate
-			);
-			this.settings.bindProperty(
-				Settings.BindingDirection.IN, 
-				"editor",
-				"editor",
-				this.onEditorUpdate
-			);
-			this.settingsApiCheck();
-			this.docker_compose = new DockerCompose.DockerCompose(this.docker_compose_cmd, this.docker_compose_project_folder);
+			/*
+			 * Create and instance of the main docker compose object
+			 */
+			this.docker_compose = new DockerCompose.DockerCompose(this.docker_compose_cmd, this.docker_cmd, this.docker_compose_project_folder);
 
 			this.refreshApplet();
 		} catch (e) {
-			global.log(UUID + "::_init: " + e);
+			global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${e}`);
 		}
 	},
 
-	onDockerComposeProjectFolderUpdate: function() {
-		// Refresh the list of docker compose projects in the menu
-		global.log(UUID + "::onDockerComposeProjectFolderUpdate: " + this.docker_compose_project_folder);
-        this.updateApplet(true)
+	createMainMenu: function(orientation) {
+		/*
+		 * Attach the main menu to Cinnamon
+		 */
+		this.menuManager = new PopupMenu.PopupMenuManager(this);
+		this.menu = new Applet.AppletPopupMenu(this, orientation);
+		this.menuManager.addMenu(this.menu);
 	},
 
-	onDockerComposeCmdUpdate: function() {
-		// Refresh any docker compose related info based on the selected version of the command
-		global.log(UUID + "::onDockerComposeCmdUpdate: " + this.docker_compose_cmd);
-		this.DockerCompose.setDockerComposeCmd(this.docker_compose_cmd);
-        this.updateApplet(true)
+	attachNotifications: function() {
+		/*
+		 * Add a notification source to this tray item
+		 */
+		this._msgsrc = new MessageTray.SystemNotificationSource(APPLET_NAME);
+		Main.messageTray.add(this._msgsrc);
 	},
 
-	onEditorUpdate: function() {
-		global.log(UUID + "::onEditorUpdate: " + this.editor);
+	attachSettings: function() {
+		/*
+		 * Attach the applets settings
+		 */
+		this.settings.bindProperty(
+			Settings.BindingDirection.IN, 
+			"dockerComposeProjectFolder",
+			"docker_compose_project_folder",
+			this.onDockerComposeProjectFolderUpdate
+		);
+
+		this.settings.bindProperty(
+			Settings.BindingDirection.IN, 
+			"dockerComposeCmd",
+			"docker_compose_cmd",
+			this.onDockerComposeCmdUpdate
+		);
+
+		this.settings.bindProperty(
+			Settings.BindingDirection.IN, 
+			"dockerCmd",
+			"docker_cmd",
+			this.onDockerCmdUpdate
+		);
+
+		this.settings.bindProperty(
+			Settings.BindingDirection.IN, 
+			"editor",
+			"editor",
+			this.onEditorUpdate
+		);
+		this.settingsApiCheck();
 	},
 
 	settingsApiCheck: function() {
@@ -140,6 +159,45 @@ Stacks.prototype = {
 		this._applet_context_menu.addMenuItem(mi);
 	},
 
+	/************************************************
+	 * Applet events
+	 ************************************************/
+
+	/* Settings changes */
+	onDockerComposeProjectFolderUpdate: function() {
+		// Refresh the list of docker compose projects in the menu
+		global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${this.docker_compose_project_folder}`);
+        this.updateApplet(true)
+	},
+
+	onDockerComposeCmdUpdate: function() {
+		// Refresh any docker compose related info based on the selected version of the command
+		global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${this.docker_compose_cmd}`);
+		this.DockerCompose.setDockerComposeCmd(this.docker_compose_cmd);
+        this.updateApplet(true)
+	},
+
+	onDockerCmdUpdate: function() {
+		// Refresh any docker related info based on the selected version of the command
+		global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${this.docker_cmd}`);
+		this.DockerCompose.setDockerCmd(this.docker_cmd);
+        this.updateApplet(true)
+	},
+
+	onEditorUpdate: function() {
+		global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${this.editor}`);
+	},
+
+	/* Base cinnamon applet events */
+	on_applet_clicked: function(event) {
+		// Right-click menu popup
+		this.menu.toggle();
+	},
+
+	/************************************************
+	 * Menu item management
+	 ************************************************/
+
 	newIconMenuItem: function(icon, label, callback, options = {}) {
 		try {
 			let newItem = new PopupMenu.PopupIconMenuItem(label, icon, St.IconType.FULLCOLOR, options);
@@ -148,7 +206,7 @@ Stacks.prototype = {
 			}
 			return newItem;
 		} catch(e) {
-			global.log(UUID + "::newIconMenuItem: " + e);
+			global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${e}`);
 		}
 	},
 
@@ -175,20 +233,6 @@ Stacks.prototype = {
 		return new PopupMenu.PopupSeparatorMenuItem();
 	},
 
-	on_applet_clicked: function(event) {
-		this.menu.toggle();
-	},
-
-    refreshApplet: function() {
-        this.updateApplet()
-	},
-
-	notification: function(message) {
-		let notification = new MessageTray.Notification(this._msgsrc, "Stacks", message);
-		notification.setTransient(true);
-		this._msgsrc.notify(notification);
-	},
-
 	transitionMenu: function(message, refresh = false) {
 		this.set_applet_icon_path(ICON_MISSING);
 		this.set_applet_tooltip(message);
@@ -197,6 +241,16 @@ Stacks.prototype = {
 		if (refresh) {
 			this.menu.addMenuItem(this.newIconMenuItem('view-refresh', _('Refresh this menu'), this.refreshApplet));
 		}
+	},
+
+	/************************************************
+	 * Behaviour
+	 ************************************************/
+
+	notification: function(message) {
+		let notification = new MessageTray.Notification(this._msgsrc, APPLET_NAME, message);
+		notification.setTransient(true);
+		this._msgsrc.notify(notification);
 	},
 
 	openBrowser: function(url) {
@@ -211,11 +265,10 @@ Stacks.prototype = {
 	},
 
 	dockerComposeToggle: function(event) {
-		global.log(UUID + '::dockerComposeToggle: Bringing stack up with ' + event.docker_compose_file)
+		global.log(`${UUID}::${(new Error().stack).split('@')[0]}: Bringing stack up with ${event.docker_compose_file}`);
 		try {
 			if (event._switch.state) {
 				this.transitionMenu(_("Docker Compose: Bringing Stack up, please wait..."));
-				// this.homestead.up(Lang.bind(this, this.refreshApplet));
 				this.docker_compose.up(event.docker_compose_file);
 				this.docker_compose.events(event.docker_compose_file);
 				this.notification(_("Bringing Stack up..."));
@@ -223,12 +276,11 @@ Stacks.prototype = {
 				return true;
 			}
 			this.transitionMenu(_("Docker Compose: Taking Stack down, please wait..."));
-			// this.homestead.halt(Lang.bind(this, this.refreshApplet));
 			this.docker_compose.down(event.docker_compose_file);
 			this.notification(_("Taking Stack down..."));
 			this.refreshApplet();
 		} catch(e) {
-			global.log(UUID + '::dockerComposeToggle: ' + e);
+			global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${e}`);
 		}
 	},
 
@@ -237,13 +289,44 @@ Stacks.prototype = {
 		this.docker_compose.ssh();
 	},
 
+	refreshApplet: function() {
+        this.updateApplet()
+	},
+
 	updateApplet: function(status) {
 		/*
 		 * Draw the main menu.
 		 * Check for the existance for docker-compose. If it doesn't exist, alert the user and direct them to installation instructions
 		 */
 		try {
-			if (!this.docker_compose.exists()) {
+			this.docker_compose.exists().then(results => {
+				let docker_projects = this.docker_compose.listDockerComposefiles();
+
+				global.log(`${UUID}::${(new Error().stack).split('@')[0]}: Found Docker Compose projects ${docker_projects}`);
+	
+				this.set_applet_icon_path(ICON_UP);
+	
+				this.menu.removeAll();
+	
+				this.stacks = [];
+	
+				for (let index = 0; index < docker_projects.length; index ++) {
+					let stack = new PopupMenu.PopupSubMenuMenuItem(docker_projects[index]);
+					if (this.docker_compose.status(docker_projects[index])) {
+						stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Up", true, this.dockerComposeToggle, docker_projects[index]));
+						let images = this.docker_compose.listImages(docker_projects[index]);
+						stack.menu.addMenuItem(this.newIconMenuItem('utilities-terminal', _('SSH Terminal...'), this.dockerComposeSSH));
+					} else {
+						stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Down", false, this.dockerComposeToggle, docker_projects[index]));
+					}
+	
+					this.stacks.push(stack);
+					this.menu.addMenuItem(stack);
+				}
+	
+				this.menu.addMenuItem(this.newSeparator());
+				this.menu.addMenuItem(this.newIconMenuItem('view-refresh', _('Refresh this menu'), this.refreshApplet));	
+			}).catch(results => {
 				this.set_applet_icon_path(ICON_MISSING);
 				this.set_applet_tooltip(_("Stacks: Docker compose missing or not configured."));
 				this.notification(_("Docker compose missing or not configured."));
@@ -253,37 +336,9 @@ Stacks.prototype = {
 				this.menu.addMenuItem(this.newIconMenuItem('emblem-web', _('Click here for installation instructions'), this.openDockerComposeInstructions));
 				this.menu.addMenuItem(this.newIconMenuItem('view-refresh', _('Refresh this menu'), this.refreshApplet));
 				return
-			}
-
-			let docker_projects = this.docker_compose.listDockerComposefiles();
-
-			global.log(UUID + "::updateMenu: FOUND PROJECTS: " + docker_projects);
-
-			this.set_applet_icon_path(ICON_UP);
-
-			this.menu.removeAll();
-
-			this.stacks = [];
-
-			for (let index = 0; index < docker_projects.length; index ++) {
-				let stack = new PopupMenu.PopupSubMenuMenuItem(docker_projects[index]);
-				if (this.docker_compose.status(docker_projects[index])) {
-					stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Up", true, this.dockerComposeToggle, docker_projects[index]));
-					let images = this.docker_compose.listImages(docker_projects[index]);
-					stack.menu.addMenuItem(this.newIconMenuItem('utilities-terminal', _('SSH Terminal...'), this.dockerComposeSSH));
-				} else {
-					stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Down", false, this.dockerComposeToggle, docker_projects[index]));
-				}
-
-				this.stacks.push(stack);
-				this.menu.addMenuItem(stack);
-			}
-
-            this.menu.addMenuItem(this.newSeparator());
-			this.menu.addMenuItem(this.newIconMenuItem('view-refresh', _('Refresh this menu'), this.refreshApplet));
-
+			})
 		} catch(e) {
-			global.log(UUID + "::updateMenu: " + e);
+			global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${e}`);
 		}
 	}
 }

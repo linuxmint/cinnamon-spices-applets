@@ -1,4 +1,5 @@
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 
 function objectSniff(object_sniff) {
 	let keys = Object.keys(object_sniff);
