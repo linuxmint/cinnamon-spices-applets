@@ -1,9 +1,9 @@
 import { DateTime } from "luxon";
-import { getTimes } from "suncalc";
+import { getTimes, GetTimesResult } from "suncalc";
 import { Services } from "../config";
 import { ErrorResponse, HTTPParams } from "../lib/httpLib";
-import { Condition, ForecastData, LocationData, WeatherData } from "../types";
-import { _ } from "../utils";
+import { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData } from "../types";
+import { IsNight, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider"
 
 
@@ -59,12 +59,120 @@ export class DeutscherWetterdienst extends BaseProvider {
                 lon: mainSource.lon,
                 name: mainSource.station_name ?? undefined
             },
-            forecasts: this.ParseForecast(current, hourly)
+            forecasts: this.ParseForecast(current, hourly, loc),
+            hourlyForecasts: this.ParseHourlyForecast(hourly)
         };
     }
 
-    private ParseForecast(current: CurrentWeatherPayload, forecast: HourlyForecastPayload): ForecastData[] {
-        return []
+    private ParseForecast(current: CurrentWeatherPayload, forecast: HourlyForecastPayload, loc: LocationData): ForecastData[] {
+        const result: ForecastData[] = [];
+        // Now normalized to the current hour 
+        const days = this.SplitToDays(forecast, loc);
+
+        for (const day of days) {
+            let tempMax: number = -Infinity;
+            let tempMin: number = Infinity;
+            let conditions: Icon[] = [];
+            let time: DateTime | null = null;
+
+            for (const hour of day) {
+                // Setting time only once is enough
+                if (time == null)
+                    time = DateTime.fromISO(hour.timestamp).setZone(loc.timeZone);
+
+                if (hour.icon != null)
+                    conditions.push(hour.icon);
+                if (hour.temperature != null) {
+                    tempMax = Math.max(tempMax, hour.temperature);
+                    tempMin = Math.min(tempMin, hour.temperature);
+                }
+            }
+            
+            // a day had 0 items or no temperature data, we have to break of otherwise we will have inconsistent data on display
+            if (time == null || tempMin == Infinity || tempMax == -Infinity)
+                break;
+
+            result.push({
+                date: time.set({hour: 12, minute: 0, second: 0, millisecond: 0}),
+                temp_max: tempMax,
+                temp_min: tempMin,
+                // If day begins with night
+                condition: this.CalculateDayCondition(conditions)
+            })
+        }
+        return result;
+    }
+
+    private SplitToDays(forecast: HourlyForecastPayload, loc: LocationData): HourlyForecastInfo[][] {
+        const now = DateTime.now().setZone(loc.timeZone).set({minute: 0, second: 0, millisecond: 0});
+        const days: HourlyForecastInfo[][] = [];
+
+        let prevTimeStamp: DateTime = now;
+        let currentDay: HourlyForecastInfo[] = [];
+        for (const hour of forecast.weather) {
+            const time = DateTime.fromISO(hour.timestamp).setZone(loc.timeZone);
+            // Don't include stuff in the past
+            if (time < now)
+                continue;
+
+            // Accumulate if still on the same day
+            if (prevTimeStamp.hasSame(time, "day")) {
+                currentDay.push(hour);
+            }
+            // reached a boundary, push to days and cleanup
+            else {
+                days.push(currentDay);
+                currentDay = [];
+                currentDay.push(hour);
+            }
+
+            prevTimeStamp = time;
+        }
+        // Push the last day if it has items
+        if (currentDay.length > 0)
+            days.push(currentDay);
+
+        return days;
+    }
+
+    private CalculateDayCondition(conditions: Icon[]): Condition {
+        if (conditions.length == 0)
+            return {
+                main: _("Unknown"),
+                description: _("Unknown"),
+                icons: [],
+                customIcon: "cloud-refresh-symbolic"
+            }
+
+        // Normalize conditions
+        for (let i = 0; i < conditions.length; i++) {
+            const condition = conditions[i];
+            // Clearly there is an easier way to do this, but this is fine if it's just 2
+            if (condition == "clear-night")
+                conditions[i] = "clear-day";
+            if (condition == "partly-cloudy-night")
+                conditions[i] = "partly-cloudy-day";
+        }
+
+        const severeWeathers: Partial<Record<Icon, number>> = {};
+        const regularWeather: Partial<Record<Icon, number>> = {};
+        const regularConditions: Icon[] = [ "clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night" ]
+
+        for (const condition of conditions) {
+            if (regularConditions.includes(condition))
+                regularWeather[condition] == null ? regularWeather[condition] = 0 : regularWeather[condition]!++;
+            else
+                severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]!++;
+        }
+
+        const conditionsToCount = Object.keys(severeWeathers).length > 0 ? severeWeathers : regularWeather; 
+
+        const mostFrequentCondition = Object.entries(conditionsToCount).reduce((p, c) => p[1] > c[1] ? p : c)[0] as Icon;
+        return this.IconToInfo(mostFrequentCondition);
+    }
+
+    private ParseHourlyForecast(forecast: HourlyForecastPayload): HourlyForecastData[] {
+        return [];
     }
 
     private IconToInfo(icon: Icon | null): Condition {

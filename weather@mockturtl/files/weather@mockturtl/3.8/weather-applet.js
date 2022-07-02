@@ -13875,10 +13875,91 @@ class DeutscherWetterdienst extends BaseProvider {
                 lon: mainSource.lon,
                 name: (_c = mainSource.station_name) !== null && _c !== void 0 ? _c : undefined
             },
-            forecasts: this.ParseForecast(current, hourly)
+            forecasts: this.ParseForecast(current, hourly, loc),
+            hourlyForecasts: this.ParseHourlyForecast(hourly)
         };
     }
-    ParseForecast(current, forecast) {
+    ParseForecast(current, forecast, loc) {
+        const result = [];
+        const days = this.SplitToDays(forecast, loc);
+        for (const day of days) {
+            let tempMax = -Infinity;
+            let tempMin = Infinity;
+            let conditions = [];
+            let time = null;
+            for (const hour of day) {
+                if (time == null)
+                    time = DateTime.fromISO(hour.timestamp).setZone(loc.timeZone);
+                if (hour.icon != null)
+                    conditions.push(hour.icon);
+                if (hour.temperature != null) {
+                    tempMax = Math.max(tempMax, hour.temperature);
+                    tempMin = Math.min(tempMin, hour.temperature);
+                }
+            }
+            if (time == null || tempMin == Infinity || tempMax == -Infinity)
+                break;
+            result.push({
+                date: time.set({ hour: 12, minute: 0, second: 0, millisecond: 0 }),
+                temp_max: tempMax,
+                temp_min: tempMin,
+                condition: this.CalculateDayCondition(conditions)
+            });
+        }
+        return result;
+    }
+    SplitToDays(forecast, loc) {
+        const now = DateTime.now().setZone(loc.timeZone).set({ minute: 0, second: 0, millisecond: 0 });
+        const days = [];
+        let prevTimeStamp = now;
+        let currentDay = [];
+        for (const hour of forecast.weather) {
+            const time = DateTime.fromISO(hour.timestamp).setZone(loc.timeZone);
+            if (time < now)
+                continue;
+            if (prevTimeStamp.hasSame(time, "day")) {
+                currentDay.push(hour);
+            }
+            else {
+                days.push(currentDay);
+                currentDay = [];
+                currentDay.push(hour);
+            }
+            prevTimeStamp = time;
+        }
+        if (currentDay.length > 0)
+            days.push(currentDay);
+        return days;
+    }
+    CalculateDayCondition(conditions) {
+        if (conditions.length == 0)
+            return {
+                main: _("Unknown"),
+                description: _("Unknown"),
+                icons: [],
+                customIcon: "cloud-refresh-symbolic"
+            };
+        for (let i = 0; i < conditions.length; i++) {
+            const condition = conditions[i];
+            if (condition == "clear-night")
+                conditions[i] = "clear-day";
+            if (condition == "partly-cloudy-night")
+                conditions[i] = "partly-cloudy-day";
+        }
+        const severeWeathers = {};
+        const regularWeather = {};
+        const regularConditions = ["clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night"];
+        for (const condition of conditions) {
+            if (regularConditions.includes(condition))
+                regularWeather[condition] == null ? regularWeather[condition] = 0 : regularWeather[condition]++;
+            else
+                severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]++;
+        }
+        const conditionsToCount = Object.keys(severeWeathers).length > 0 ? severeWeathers : regularWeather;
+        const mostFrequentCondition = Object.entries(conditionsToCount).reduce((p, c) => p[1] > c[1] ? p : c)[0];
+        return this.IconToInfo(mostFrequentCondition);
+    }
+    ParseHourlyForecast(forecast) {
         return [];
     }
     IconToInfo(icon) {
