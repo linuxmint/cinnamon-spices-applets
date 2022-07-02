@@ -13876,7 +13876,7 @@ class DeutscherWetterdienst extends BaseProvider {
                 name: (_c = mainSource.station_name) !== null && _c !== void 0 ? _c : undefined
             },
             forecasts: this.ParseForecast(current, hourly, loc),
-            hourlyForecasts: this.ParseHourlyForecast(hourly)
+            hourlyForecasts: this.ParseHourlyForecast(hourly, loc)
         };
     }
     ParseForecast(current, forecast, loc) {
@@ -13959,8 +13959,43 @@ class DeutscherWetterdienst extends BaseProvider {
         const mostFrequentCondition = Object.entries(conditionsToCount).reduce((p, c) => p[1] > c[1] ? p : c)[0];
         return this.IconToInfo(mostFrequentCondition);
     }
-    ParseHourlyForecast(forecast) {
-        return [];
+    ParseHourlyForecast(forecast, loc) {
+        const now = DateTime.now().setZone(loc.timeZone).set({ minute: 0, second: 0, millisecond: 0 });
+        const result = [];
+        for (const hour of forecast.weather) {
+            const time = DateTime.fromISO(hour.timestamp).setZone(loc.timeZone);
+            if (time < now)
+                continue;
+            const data = {
+                condition: this.IconToInfo(hour.icon),
+                date: time,
+                temp: hour.temperature,
+            };
+            if (hour.precipitation != null && hour.precipitation > 0 && hour.condition != null && ["snow", "rain"].includes(hour.condition)) {
+                data.precipitation = {
+                    volume: hour.precipitation,
+                    type: this.DWDConditionToPrecipType(hour.condition)
+                };
+            }
+            result.push(data);
+        }
+        return result;
+    }
+    DWDConditionToPrecipType(condition) {
+        switch (condition) {
+            case "dry":
+            case "fog":
+            case "thunderstorm":
+                return "none";
+            case "rain":
+                return "rain";
+            case "snow":
+                return "snow";
+            case "hail":
+                return "ice pellets";
+            case "sleet":
+                return "freezing rain";
+        }
     }
     IconToInfo(icon) {
         switch (icon) {

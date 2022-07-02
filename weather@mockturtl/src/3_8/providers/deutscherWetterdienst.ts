@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 import { getTimes, GetTimesResult } from "suncalc";
 import { Services } from "../config";
 import { ErrorResponse, HTTPParams } from "../lib/httpLib";
-import { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData } from "../types";
+import { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData, PrecipitationType } from "../types";
 import { IsNight, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider"
 
@@ -60,7 +60,7 @@ export class DeutscherWetterdienst extends BaseProvider {
                 name: mainSource.station_name ?? undefined
             },
             forecasts: this.ParseForecast(current, hourly, loc),
-            hourlyForecasts: this.ParseHourlyForecast(hourly)
+            hourlyForecasts: this.ParseHourlyForecast(hourly, loc)
         };
     }
 
@@ -171,8 +171,48 @@ export class DeutscherWetterdienst extends BaseProvider {
         return this.IconToInfo(mostFrequentCondition);
     }
 
-    private ParseHourlyForecast(forecast: HourlyForecastPayload): HourlyForecastData[] {
-        return [];
+    private ParseHourlyForecast(forecast: HourlyForecastPayload, loc: LocationData): HourlyForecastData[] {
+        const now = DateTime.now().setZone(loc.timeZone).set({minute: 0, second: 0, millisecond: 0});
+        const result: HourlyForecastData[] = [];
+        for (const hour of forecast.weather) {
+            const time = DateTime.fromISO(hour.timestamp).setZone(loc.timeZone);
+            // Don't include stuff in the past
+            if (time < now)
+                continue;
+
+            const data: HourlyForecastData = {
+                condition: this.IconToInfo(hour.icon),
+                date: time,
+                temp: hour.temperature,
+            }
+            if (hour.precipitation != null && hour.precipitation > 0 && hour.condition != null && ["snow", "rain"].includes(hour.condition)) {
+                data.precipitation = {
+                    volume: hour.precipitation,
+                    type: this.DWDConditionToPrecipType(hour.condition)
+                }
+            }
+
+            result.push(data);
+        }
+
+        return result;
+    }
+
+    private DWDConditionToPrecipType(condition: DWDCondition): PrecipitationType {
+        switch(condition) {
+            case "dry":
+            case "fog":
+            case "thunderstorm":
+                return "none";
+            case "rain":
+                return "rain";
+            case "snow":
+                return "snow";
+            case "hail":
+                return "ice pellets";
+            case "sleet":
+                return "freezing rain";
+        }
     }
 
     private IconToInfo(icon: Icon | null): Condition {
