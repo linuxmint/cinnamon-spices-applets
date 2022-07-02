@@ -1,6 +1,6 @@
-
+const {_} = require('./utils');
 //This list is taken from https://unicode.org/emoji/charts/emoji-list.html
-//Emoji List, v13.1
+//Emoji List, v14.0
 
 //Additional keywords are from emojilib (https://github.com/muan/emojilib) License: MIT
 
@@ -7421,7 +7421,7 @@ const EMOJI = [
 ];
 
 //this list is taken from https://unicode.org/emoji/charts/full-emoji-modifiers.html
-//Full Emoji Modifier Sequences, v13.1
+//Full Emoji Modifier Sequences, v14.0
 
 const MODED = [
 '👋🏻',
@@ -7735,4 +7735,16 @@ for (let i = 0; i < MODED.length; i++) {
     MODABLE[i] = MODED[i].replace(/\u{1F3FB}/ug, '');
 }
 
-module.exports = {EMOJI, MODED, MODABLE};
+const EMOJI_CATEGORIES = [
+    {name: _('Smileys & Emotion'),  start: 0,       end: 163},
+    {name: _('People & Body'),      start: 163,     end: 528},
+    {name: _('Animals & Nature'),   start: 528,     end: 672},
+    {name: _('Food & Drink'),       start: 672,     end: 804},
+    {name: _('Travel & Places'),    start: 804,     end: 1022},
+    {name: _('Activities'),         start: 1022,    end: 1108},
+    {name: _('Objects'),            start: 1108,    end: 1363},
+    {name: _('Symbols'),            start: 1363,    end: 1584},
+    {name: _('Flags'),              start: 1584,    end: 1853}
+];
+
+module.exports = {EMOJI, MODED, MODABLE, EMOJI_CATEGORIES};
