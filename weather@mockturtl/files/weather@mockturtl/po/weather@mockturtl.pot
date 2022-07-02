@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 10:34+0200\n"
+"POT-Creation-Date: 2022-07-02 10:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1620,7 +1620,6 @@ msgstr ""
 msgid "AccuWeather"
 msgstr ""
 
-#. 3.8->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:13818
 msgid "Deutscher Wetterdienst"
 msgstr ""
@@ -2159,6 +2158,10 @@ msgid ""
 "forecast length, and they all need a functional internet connection to work."
 " The options are described in detail on the Cinnamon Spices Website which "
 "you can access with the button on the Help tab."
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Deutscher Wetterdienst (Germany only)"
 msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
