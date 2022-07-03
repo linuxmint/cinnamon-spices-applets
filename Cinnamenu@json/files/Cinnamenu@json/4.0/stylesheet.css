@@ -65,6 +65,12 @@ margin to override*/
     /*text-align: center;*//*known bug: causes label to jump about when resizing menu*/
 }
 
+.menu-applications-subheading-clickable { /*emoji categories*/
+    /*font-weight: bold;*/
+    font-size: 100%;
+    /*text-align: center;*//*known bug: causes label to jump about when resizing menu*/
+}
+
 .menu-application-button {} /*(Note: in grid view, .menu-application-button l&r padding are set to 0px)*/
 
 .menu-application-button-label {}
