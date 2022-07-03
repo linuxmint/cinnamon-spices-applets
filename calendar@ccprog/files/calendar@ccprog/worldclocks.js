@@ -6,16 +6,16 @@ const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 
 class Worldclocks {
-    constructor(menu) {
-        this._separator = new PopupMenu.PopupSeparatorMenuItem();
-        menu.addMenuItem(this._separator);
+    constructor(box) {
+//        this._separator = new PopupMenu.PopupSeparatorMenuItem();
+//        box.add_actor(this._separator);
 
         this.actor = new St.Table({
             homogeneous: false, 
             style_class: "calendar calendar-world-list", 
             reactive: false, 
             x_expand: true });
-        menu.addActor(this.actor, {expand: true});
+        box.add_actor(this.actor, {expand: true});
     }
 
     _formatTime(time) {
@@ -27,11 +27,11 @@ class Worldclocks {
         this.actor.destroy_all_children();
         this.clocks = [];
 
-        if (settings.clocks.length) {
-            this._separator.actor.show();
+       if (settings.clocks.length) {
+            //this._separator.actor.show();
             this.actor.show();
         } else {
-            this._separator.actor.hide();
+            //this._separator.actor.hide();
             this.actor.hide();
         }
 

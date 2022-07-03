@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: calendar@ccprog 1.1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-13 13:37+0200\n"
+"POT-Creation-Date: 2022-06-30 17:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: \n"
@@ -14,9 +14,57 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: applet.js:65
+#: applet.js:21
+msgid "%B %-e, %Y"
+msgstr ""
+
+#: applet.js:22 eventView.js:26
+msgid "%A, %B %-e, %Y"
+msgstr ""
+
+#: applet.js:131
 msgid "Date and Time Settings"
 msgstr "Paramètres date et heure"
+
+#: eventView.js:65
+msgid "Starting in a few minutes"
+msgstr "Commence dans quelques minutes"
+
+#: eventView.js:69
+#, javascript-format
+msgid "Starting in %d minutes"
+msgstr "Commence dans %d minutes"
+
+#: eventView.js:79
+msgid "This evening"
+msgstr "Cet après-midi"
+
+#: eventView.js:82
+msgid "Starting later today"
+msgstr "Commence plus tard aujourd'hui"
+
+#: eventView.js:85
+#, javascript-format
+msgid "In %d hour"
+msgid_plural "In %d hours"
+msgstr[0] "Dans %d heure"
+msgstr[1] "Dans %d heures"
+
+#: eventView.js:664
+msgid "No Events"
+msgstr "Aucun évènement"
+
+#: eventView.js:925
+msgid "In progress"
+msgstr "En cours"
+
+#: eventView.js:946
+msgid "All day"
+msgstr "Journée entière"
+
+#: eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
+msgid "Today"
+msgstr "Aujourd'hui"
 
 #: settings_widgets.py:95
 msgid "Add new entry"
@@ -77,6 +125,15 @@ msgstr "Raccourcis clavier"
 #. settings-schema.json->section4->title
 msgid "Show World Times"
 msgstr "Afficher les heures mondiales"
+
+#. settings-schema.json->show-events->description
+msgid "Show calendar events"
+msgstr "Afficher les évènements de calendrier"
+
+#. settings-schema.json->show-events->tooltip
+msgid "Check this to display events in the calendar."
+msgstr ""
+"Activez cette option pour afficher les évênements dans le calendrier."
 
 #. settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"
