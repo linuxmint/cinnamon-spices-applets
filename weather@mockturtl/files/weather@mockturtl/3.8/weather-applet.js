@@ -131,6 +131,10 @@ var weatherApplet;
 
   function hourAngle(h, phi, d) {
     return acos((sin(h) - sin(phi) * sin(d)) / (cos(phi) * cos(d)));
+  }
+
+  function observerAngle(height) {
+    return -2.076 * Math.sqrt(height) / 60;
   } // returns set time for the given sun altitude
 
 
@@ -138,12 +142,15 @@ var weatherApplet;
     var w = hourAngle(h, phi, dec),
         a = approxTransit(w, lw, n);
     return solarTransitJ(a, M, L);
-  } // calculates sun times for a given date and latitude/longitude
+  } // calculates sun times for a given date, latitude/longitude, and, optionally,
+  // the observer height (in meters) relative to the horizon
 
 
-  SunCalc.getTimes = function (date, lat, lng) {
+  SunCalc.getTimes = function (date, lat, lng, height) {
+    height = height || 0;
     var lw = rad * -lng,
         phi = rad * lat,
+        dh = observerAngle(height),
         d = toDays(date),
         n = julianCycle(d, lw),
         ds = approxTransit(0, lw, n),
@@ -154,6 +161,7 @@ var weatherApplet;
         i,
         len,
         time,
+        h0,
         Jset,
         Jrise;
     var result = {
@@ -163,7 +171,8 @@ var weatherApplet;
 
     for (i = 0, len = times.length; i < len; i += 1) {
       time = times[i];
-      Jset = getSetJ(time[0] * rad, lw, phi, dec, n, M, L);
+      h0 = (time[0] + dh) * rad;
+      Jset = getSetJ(h0, lw, phi, dec, n, M, L);
       Jrise = Jnoon - (Jset - Jnoon);
       result[time[1]] = fromJulian(Jrise);
       result[time[2]] = fromJulian(Jset);
@@ -9705,7 +9714,7 @@ class MetUk extends BaseProvider {
                 type: "hard",
                 userError: true,
                 detail: "location not covered",
-                message: "MET Office UK only covers the UK, please make sure your location is in the country",
+                message: _("MET Office UK only covers the UK, please make sure your location is in the country"),
                 service: "met-uk"
             });
             return null;
@@ -13797,7 +13806,310 @@ class AccuWeather extends BaseProvider {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/deutscherWetterdienst.ts
+
+
+
+
+class DeutscherWetterdienst extends BaseProvider {
+    constructor() {
+        super(...arguments);
+        this.needsApiKey = false;
+        this.prettyName = _("Deutscher Wetterdienst");
+        this.name = "DeutscherWetterdienst";
+        this.maxForecastSupport = 10;
+        this.maxHourlyForecastSupport = 240;
+        this.website = "https://www.dwd.de/DE/Home/home_node.html";
+        this.remainingCalls = null;
+        this.baseUrl = "https://api.brightsky.dev/";
+        this.HandleErrors = (message) => {
+            var _a;
+            if (((_a = message.Response) === null || _a === void 0 ? void 0 : _a.status_code) == 404) {
+                this.app.ShowError({
+                    detail: "location not covered",
+                    message: _("Please select a different provider or location"),
+                    userError: true,
+                    type: "hard"
+                });
+                return true;
+            }
+            return false;
+        };
+    }
+    async GetWeather(loc) {
+        var _a, _b, _c;
+        const [current, hourly] = await Promise.all([
+            this.app.LoadJsonAsync(`${this.baseUrl}current_weather`, this.GetDefaultParams(loc), this.HandleErrors),
+            this.app.LoadJsonAsync(`${this.baseUrl}weather`, this.GetHourlyParams(loc), this.HandleErrors)
+        ]);
+        if (current == null || hourly == null)
+            return null;
+        const currentTime = DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone);
+        const sunTimes = (0,suncalc.getTimes)(currentTime.toJSDate(), loc.lat, loc.lon);
+        const mainSource = (_a = current.sources.find(source => source.id == current.weather.source_id)) !== null && _a !== void 0 ? _a : current.sources[0];
+        return {
+            date: DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone),
+            location: {
+                city: (_b = current.sources[0].station_name) !== null && _b !== void 0 ? _b : loc.city,
+                country: loc.country,
+                timeZone: loc.timeZone,
+            },
+            coord: {
+                lon: loc.lon,
+                lat: loc.lat,
+            },
+            sunrise: DateTime.fromJSDate(sunTimes.sunrise).setZone(loc.timeZone),
+            sunset: DateTime.fromJSDate(sunTimes.sunset).setZone(loc.timeZone),
+            condition: this.IconToInfo(current.weather.icon),
+            wind: {
+                degree: current.weather.wind_direction_10,
+                speed: current.weather.wind_speed_10
+            },
+            temperature: current.weather.temperature,
+            pressure: current.weather.pressure_msl ? (current.weather.pressure_msl / 100) : null,
+            humidity: current.weather.relative_humidity,
+            dewPoint: current.weather.dew_point,
+            stationInfo: {
+                distanceFrom: mainSource.distance,
+                lat: mainSource.lat,
+                lon: mainSource.lon,
+                name: (_c = mainSource.station_name) !== null && _c !== void 0 ? _c : undefined
+            },
+            forecasts: this.ParseForecast(current, hourly, loc),
+            hourlyForecasts: this.ParseHourlyForecast(hourly, loc)
+        };
+    }
+    ParseForecast(current, forecast, loc) {
+        const result = [];
+        const days = this.SplitToDays(forecast, loc);
+        for (const day of days) {
+            let tempMax = -Infinity;
+            let tempMin = Infinity;
+            let conditions = [];
+            let time = null;
+            for (const hour of day) {
+                if (time == null)
+                    time = DateTime.fromISO(hour.timestamp).setZone(loc.timeZone);
+                if (hour.icon != null)
+                    conditions.push(hour.icon);
+                if (hour.temperature != null) {
+                    tempMax = Math.max(tempMax, hour.temperature);
+                    tempMin = Math.min(tempMin, hour.temperature);
+                }
+            }
+            if (time == null || tempMin == Infinity || tempMax == -Infinity)
+                break;
+            result.push({
+                date: time.set({ hour: 12, minute: 0, second: 0, millisecond: 0 }),
+                temp_max: tempMax,
+                temp_min: tempMin,
+                condition: this.CalculateDayCondition(conditions)
+            });
+        }
+        return result;
+    }
+    SplitToDays(forecast, loc) {
+        const now = DateTime.now().setZone(loc.timeZone).set({ minute: 0, second: 0, millisecond: 0 });
+        const days = [];
+        let prevTimeStamp = now;
+        let currentDay = [];
+        for (const hour of forecast.weather) {
+            const time = DateTime.fromISO(hour.timestamp).setZone(loc.timeZone);
+            if (time < now)
+                continue;
+            if (prevTimeStamp.hasSame(time, "day")) {
+                currentDay.push(hour);
+            }
+            else {
+                days.push(currentDay);
+                currentDay = [];
+                currentDay.push(hour);
+            }
+            prevTimeStamp = time;
+        }
+        if (currentDay.length > 0)
+            days.push(currentDay);
+        return days;
+    }
+    CalculateDayCondition(conditions) {
+        if (conditions.length == 0)
+            return {
+                main: _("Unknown"),
+                description: _("Unknown"),
+                icons: [],
+                customIcon: "cloud-refresh-symbolic"
+            };
+        for (let i = 0; i < conditions.length; i++) {
+            const condition = conditions[i];
+            if (condition == "clear-night")
+                conditions[i] = "clear-day";
+            if (condition == "partly-cloudy-night")
+                conditions[i] = "partly-cloudy-day";
+        }
+        const severeWeathers = {};
+        const regularWeather = {};
+        const regularConditions = ["clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night"];
+        for (const condition of conditions) {
+            if (regularConditions.includes(condition))
+                regularWeather[condition] == null ? regularWeather[condition] = 0 : regularWeather[condition]++;
+            else
+                severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]++;
+        }
+        const conditionsToCount = Object.keys(severeWeathers).length > 0 ? severeWeathers : regularWeather;
+        const mostFrequentCondition = Object.entries(conditionsToCount).reduce((p, c) => p[1] > c[1] ? p : c)[0];
+        return this.IconToInfo(mostFrequentCondition);
+    }
+    ParseHourlyForecast(forecast, loc) {
+        const now = DateTime.now().setZone(loc.timeZone).set({ minute: 0, second: 0, millisecond: 0 });
+        const result = [];
+        for (const hour of forecast.weather) {
+            const time = DateTime.fromISO(hour.timestamp).setZone(loc.timeZone);
+            if (time < now)
+                continue;
+            const data = {
+                condition: this.IconToInfo(hour.icon),
+                date: time,
+                temp: hour.temperature,
+            };
+            if (hour.precipitation != null && hour.precipitation > 0 && hour.condition != null && ["snow", "rain"].includes(hour.condition)) {
+                data.precipitation = {
+                    volume: hour.precipitation,
+                    type: this.DWDConditionToPrecipType(hour.condition)
+                };
+            }
+            result.push(data);
+        }
+        return result;
+    }
+    DWDConditionToPrecipType(condition) {
+        switch (condition) {
+            case "dry":
+            case "fog":
+            case "thunderstorm":
+                return "none";
+            case "rain":
+                return "rain";
+            case "snow":
+                return "snow";
+            case "hail":
+                return "ice pellets";
+            case "sleet":
+                return "freezing rain";
+        }
+    }
+    IconToInfo(icon) {
+        switch (icon) {
+            case "clear-day":
+                return {
+                    main: _("Clear"),
+                    description: _("Clear"),
+                    icons: ["weather-clear"],
+                    customIcon: "day-sunny-symbolic"
+                };
+            case "clear-night":
+                return {
+                    main: _("Clear"),
+                    description: _("Clear"),
+                    icons: ["weather-clear-night"],
+                    customIcon: "night-clear-symbolic"
+                };
+            case "cloudy":
+                return {
+                    main: _("Cloudy"),
+                    description: _("Cloudy"),
+                    icons: ["weather-overcast"],
+                    customIcon: "cloudy-symbolic"
+                };
+            case "fog":
+                return {
+                    main: _("Fog"),
+                    description: _("Fog"),
+                    icons: ["weather-fog"],
+                    customIcon: "fog-symbolic"
+                };
+            case "hail":
+                return {
+                    main: _("Hail"),
+                    description: _("Hail"),
+                    icons: ["weather-freezing-rain"],
+                    customIcon: "hail-symbolic"
+                };
+            case "partly-cloudy-day":
+                return {
+                    main: _("Partly Cloudy"),
+                    description: _("Partly Cloudy"),
+                    icons: ["weather-few-clouds"],
+                    customIcon: "day-cloudy-symbolic"
+                };
+            case "partly-cloudy-night":
+                return {
+                    main: _("Partly Cloudy"),
+                    description: _("Partly Cloudy"),
+                    icons: ["weather-few-clouds-night"],
+                    customIcon: "night-cloudy-symbolic"
+                };
+            case "rain":
+                return {
+                    main: _("Rain"),
+                    description: _("Rain"),
+                    icons: ["weather-rain", "weather-showers", "weather-showers-scattered"],
+                    customIcon: "rain-symbolic"
+                };
+            case "sleet":
+                return {
+                    main: _("Sleet"),
+                    description: _("Sleet"),
+                    icons: ["weather-rain", "weather-showers", "weather-showers-scattered"],
+                    customIcon: "sleet-symbolic"
+                };
+            case "snow":
+                return {
+                    main: _("Snow"),
+                    description: _("Snow"),
+                    icons: ["weather-snow"],
+                    customIcon: "snow-symbolic"
+                };
+            case "thunderstorm":
+                return {
+                    main: _("Thunderstorm"),
+                    description: _("Thunderstorm"),
+                    icons: ["weather-storm"],
+                    customIcon: "thunderstorm-symbolic"
+                };
+            case "wind":
+                return {
+                    main: _("Wind"),
+                    description: _("Wind"),
+                    icons: ["weather-windy", "weather-breeze"],
+                    customIcon: "windy-symbolic"
+                };
+            default:
+                return {
+                    main: _("Unknown"),
+                    description: _("Unknown"),
+                    icons: [],
+                    customIcon: "cloud-refresh-symbolic"
+                };
+        }
+    }
+    GetDefaultParams(loc) {
+        return {
+            lat: loc.lat,
+            lon: loc.lon,
+            units: "si"
+        };
+    }
+    GetHourlyParams(loc) {
+        const params = this.GetDefaultParams(loc);
+        const date = loc.timeZone ? DateTime.now().setZone(loc.timeZone) : DateTime.now();
+        params.date = date.toISO();
+        params.last_date = date.plus({ days: 10 }).toISO();
+        return params;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
 
 
 
@@ -13834,7 +14146,8 @@ const ServiceClassMapping = {
     "US Weather": (app) => new USWeather(app),
     "Visual Crossing": (app) => new VisualCrossing(app),
     "DanishMI": (app) => new DanishMI(app),
-    "AccuWeather": (app) => new AccuWeather(app)
+    "AccuWeather": (app) => new AccuWeather(app),
+    "DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app)
 };
 const Keys = {
     DATA_SERVICE: "dataService",

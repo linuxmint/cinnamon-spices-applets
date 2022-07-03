@@ -46,7 +46,7 @@ export interface WeatherData {
 	stationInfo?: {
 		/** in metres */
 		distanceFrom: number | undefined,
-		name?: string,
+		name?: string | undefined,
 		lat?: number,
 		lon?: number,
 		area?: string

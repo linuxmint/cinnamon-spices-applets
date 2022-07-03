@@ -19,18 +19,19 @@ You can also save locations what you entered manually and switch between them in
 
 ## Weather providers to choose from
 
-| Weather Providers       | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Other information                |
-| ----------------------- | ------------- | --------------------- | ---------------------- | -------------------------------- |
-| **OpenWeatherMap**      | No            | 8                     | 48                     | Default provider                 |
-| **MET Norway**          | No            | 10                    | 48                     | --                               |
-| **DMI Denmark**         | No            | 10                    | 48                     | --                               |
-| **Met Office UK**       | No            | 5                     | 36                     | --                               |
-| **US National Weather** | No            | 7                     | 156                    | --                               |
-| **WeatherBit**          | Yes           | 16                    | 0**                    | --                               |
-| **Visual Crossing**     | Yes           | 15                    | 336                    | --                               |
-| **Tomorrow.io**         | Yes           | 15                    | 108                    | Previously known as Climacell    |
-| **DarkSky**             | Yes           | 8                     | 168                    | Signups closed, will end Q2 2023 |
-| **AccuWeather**         | Yes           | 5***                  | 12                     | Limited free calls               |
+| Weather Providers          | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Other information                |
+| -------------------------- | ------------- | --------------------- | ---------------------- | -------------------------------- |
+| **OpenWeatherMap**         | No            | 8                     | 48                     | Default provider                 |
+| **MET Norway**             | No            | 10                    | 48                     | --                               |
+| **DMI Denmark**            | No            | 10                    | 48                     | --                               |
+| **Deutscher Wetterdienst** | No            | 10                    | 240                    | --                               |
+| **Met Office UK**          | No            | 5                     | 36                     | --                               |
+| **US National Weather**    | No            | 7                     | 156                    | --                               |
+| **WeatherBit**             | Yes           | 16                    | 0**                    | --                               |
+| **Visual Crossing**        | Yes           | 15                    | 336                    | --                               |
+| **Tomorrow.io**            | Yes           | 15                    | 108                    | Previously known as Climacell    |
+| **DarkSky**                | Yes           | 8                     | 168                    | Signups closed, will end Q2 2023 |
+| **AccuWeather**            | Yes           | 5***                  | 12                     | Limited free calls               |
 
 ### OpenWeatherMap
 
@@ -49,6 +50,12 @@ Free meteorological data and forecasts from the Norwegian Meteorological Institu
 The Danish Meteorological Institute formed in 1872 and makes weather forecasts and observations for Denmark, Greenland, and the Faroe Islands. [DMI Denmark Website](https://www.dmi.dk) Read more about the institure [here](https://en.wikipedia.org/wiki/Danish_Meteorological_Institute).
 
 * The service is global with open weather data.
+
+### Deutscher Wetterdienst
+
+German National Weather Provider. [Deutsche Wetterdienst Website](https://www.dwd.de/DE/Home/home_node.html). Read more about the institure [here](https://en.wikipedia.org/wiki/Deutscher_Wetterdienst).
+
+* Only covers Germany.
 
 ### Met Office UK
 
