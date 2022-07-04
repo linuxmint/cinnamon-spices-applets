@@ -17,6 +17,7 @@ const Main = imports.ui.main;
 const Util = imports.misc.util;
 const Mainloop = imports.mainloop;
 const Tweener = imports.ui.tweener;
+const Interfaces = imports.misc.interfaces;
 
 const STATUS_UNKNOWN = 0;
 const STATUS_NO_CALENDARS = 1;
@@ -28,6 +29,7 @@ const DAY_FORMAT = CinnamonDesktop.WallClock.lctime_format("cinnamon", "%A");
 
 // https://www.w3schools.com/charsets/ref_utf_geometric.asp
 const ARROW_SEPARATOR = "  ►  "
+const EDS_BUS_NAME = "org.gnome.evolution.dataserver.Calendar8"
 
 function locale_cap(str) {
     return str.charAt(0).toLocaleUpperCase() + str.slice(1);
@@ -282,6 +284,7 @@ class EventsManager {
     constructor(settings, desktop_settings) {
         this.settings = settings;
         this.desktop_settings = desktop_settings;
+        this._bus_watch_id
         this._calendar_server = null;
         this.current_month_year = null;
         this.current_selected_date = GLib.DateTime.new_from_unix_local(0);
@@ -301,10 +304,22 @@ class EventsManager {
     }
 
     start_events() {
+        this._bus_watch_id = Gio.bus_watch_name(Gio.BusType.SESSION,
+                                                EDS_BUS_NAME,
+                                                Gio.BusNameWatcherFlags.NONE,
+                                                this.eds_service_found.bind(this),
+                                                null);
+    }
+
+    eds_service_found(connection, name, name_owner) {
+        Gio.bus_unwatch_name(this._bus_watch_id);
+        this._bus_watch_id = 0;
+
         if (this._calendar_server == null) {
+            log("calendar@cinnamon.org: Calendar events supported.")
+
             Cinnamon.CalendarServerProxy.new_for_bus(
                 Gio.BusType.SESSION,
-                // Gio.DBusProxyFlags.NONE,
                 Gio.DBusProxyFlags.DO_NOT_AUTO_START_AT_CONSTRUCTION,
                 "org.cinnamon.CalendarServer",
                 "/org/cinnamon/CalendarServer",
@@ -312,6 +327,10 @@ class EventsManager {
                 this._calendar_server_ready.bind(this)
             );
         }
+    }
+
+    log_dbus_error(e) {
+        global.logError(`calendar@cinnamon.org: Could not check for calendar event support: ${e.toString()}`);
     }
 
     _calendar_server_ready(obj, res) {
@@ -947,6 +966,8 @@ class EventRow {
             } else {
                 // a timed event: "12:00 pm"
                 final_str += this.event.start.format(time_format);
+                final_str += ARROW_SEPARATOR;
+                final_str += this.event.end.format(time_format);
             }
 
             this.event_time.set_text(final_str);

@@ -156,7 +156,8 @@ class Calendar {
         this._digitWidth = NaN;
         this.settings = settings;
 
-        this.update_id = 0;
+        this._update_id = 0;
+        this._set_date_idle_id = 0;
 
         this.settings.bindWithObject(this, SHOW_WEEKDATE_KEY, "show_week_numbers", this._onSettingsChange);
         this.settings.bindWithObject(this, WEEKEND_LENGHTE_KEY, "weekend_length", this._onSettingsChange);
@@ -218,23 +219,38 @@ class Calendar {
     }
 
     _cancel_update() {
-        if (this.update_id > 0) {
-            Mainloop.source_remove(this.update_id);
-            this.update_id = 0;
+        if (this._update_id > 0) {
+            Mainloop.source_remove(this._update_id);
+            this._update_id = 0;
         }
     }
 
     _queue_update() {
         this._cancel_update();
 
-        this.update_id = Mainloop.idle_add(Lang.bind(this, this._idle_do_update));
+        this._update_id = Mainloop.idle_add(Lang.bind(this, this._idle_do_update));
     }
 
     _idle_do_update() {
-        this.update_id = 0;
+        this._update_id = 0;
         this._update();
 
         return GLib.SOURCE_REMOVE;
+    }
+
+    _queue_set_date_idle(date) {
+        this.setDate(date, false);
+        this._set_date_idle_id = 0;
+
+        return GLib.SOURCE_REMOVE;
+     }
+
+    queue_set_date(date) {
+        if (this._set_date_idle_id > 0) {
+            return;
+        }
+
+        this._set_date_idle_id = Mainloop.timeout_add(25, this._queue_set_date_idle.bind(this, date));
     }
 
     _update_events_enabled(em) {
@@ -398,7 +414,7 @@ class Calendar {
 
         let newDate = new Date();
         newDate.setFullYear(newYear, newMonth, newDayOfMonth);
-        this.setDate(newDate, false);
+        this.queue_set_date(newDate);
     }
 
     _onPrevYearButtonClicked() {
@@ -426,7 +442,7 @@ class Calendar {
         // Remove everything but the topBox and the weekday labels
         let children = this.actor.get_children();
         for (let i = this._firstDayIndex; i < children.length; i++) {
-            children[i].destroy();
+            this.actor.remove_actor(children[i]);
         }
 
         // Start at the beginning of the week before the start of the month
@@ -444,11 +460,7 @@ class Calendar {
         let row = 2;
 
         while (true) {
-            let group = new Clutter.Actor(
-                {
-                    layout_manager: new Clutter.FixedLayout()
-                }
-            );
+            let group = new Cinnamon.Stack();
             let button = new St.Button(
                 {
                     label: iter.getDate().toString(),
@@ -460,12 +472,6 @@ class Calendar {
             let dot_box = new Cinnamon.GenericContainer(
                 {
                     style_class: "calendar-day-event-dot-box",
-                    constraints: new Clutter.BindConstraint(
-                        {
-                            source: group,
-                            coordinate: Clutter.BindCoordinate.WIDTH
-                        }
-                    )
                 }
             );
             dot_box.connect('allocate', this._allocate_dot_box.bind(this));

@@ -1,3 +1,7 @@
+### 1.2.1
+- move to multiversion setup. This ensures event manager is only started
+  on Cinnamon 5.2+.
+
 ### 1.2.0
 - Merged the event manager from calender@cinnamon.org
 - Updated layout to match changes in calender@cinnamon.org
