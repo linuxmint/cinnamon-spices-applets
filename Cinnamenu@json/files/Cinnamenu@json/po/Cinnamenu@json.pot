@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-26 02:43+0100\n"
+"POT-Creation-Date: 2022-07-02 02:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -204,6 +204,33 @@ msgid "Move to trash"
 msgstr ""
 
 msgid "Error while moving file to trash:"
+msgstr ""
+
+msgid "Smileys & Emotion"
+msgstr ""
+
+msgid "People & Body"
+msgstr ""
+
+msgid "Animals & Nature"
+msgstr ""
+
+msgid "Food & Drink"
+msgstr ""
+
+msgid "Travel & Places"
+msgstr ""
+
+msgid "Activities"
+msgstr ""
+
+msgid "Objects"
+msgstr ""
+
+msgid "Symbols"
+msgstr ""
+
+msgid "Flags"
 msgstr ""
 
 msgid ""
@@ -503,6 +530,12 @@ msgid "Show home folder"
 msgstr ""
 
 msgid "Show home folder category in the menu"
+msgstr ""
+
+msgid "Show emoji category"
+msgstr ""
+
+msgid "Show emoji category in the menu"
 msgstr ""
 
 msgid "Last used category"

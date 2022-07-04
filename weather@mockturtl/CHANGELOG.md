@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.5
+
+* Fix [#4378](https://github.com/linuxmint/cinnamon-spices-applets/issues/4378) - Add DWD as a weather provider
+
 ## 3.2.4
 
 * Fix issue on Cinnamon versions where `is_finalized` is not injected into GObject

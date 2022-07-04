@@ -57,6 +57,7 @@
                 "show-recents-category",
                 "show-favorite-apps-category",
                 "show-home-folder-category",
+                "show-emoji-category",
                 "menu-editor-button"
             ]
         },
@@ -136,6 +137,10 @@
         "type":"generic",
         "default":[]
     },
+    "search-start-folder":{
+        "type":"generic",
+        "default":""
+    },
 
     "applications-view-mode":{
         "type":"combobox",
@@ -204,6 +209,12 @@
         "default":true,
         "description":"Show home folder",
         "tooltip":"Show home folder category in the menu"
+    },
+    "show-emoji-category":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Show emoji category",
+        "tooltip":"Show emoji category in the menu"
     },
     "menu-editor-button":{
         "type":"button",
