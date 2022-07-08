@@ -1,0 +1,395 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Heimen Stoffels <vistausss@fastmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-08 23:00-0400\n"
+"PO-Revision-Date: 2022-06-19 16:59+0200\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.04.2\n"
+
+#: applet.js:684
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+#: applet.js:687
+msgid "About..."
+msgstr "Over…"
+
+#: applet.js:691
+msgid "Configure..."
+msgstr "Instellen…"
+
+#: applet.js:695
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "‘%s’ verwijderen"
+
+#: applet.js:695
+msgid "Cassia Panel launchers"
+msgstr "Cassia-paneelstarters"
+
+#. settings-schema.json->middle-click->options
+#. settings-schema.json->back-click->options
+#. settings-schema.json->forward-click->options
+#. settings-schema.json->preview-middle-click->options
+#. settings-schema.json->preview-back-click->options
+#. settings-schema.json->preview-forward-click->options
+#: applet.js:700
+msgid "Open new window"
+msgstr "Nieuw venster openen"
+
+#: applet.js:717
+msgid "Run with NVIDIA GPU"
+msgstr "Uitvoeren met Nvidia-videokaart"
+
+#: applet.js:722
+msgid "Add new launcher"
+msgstr "Starter toevoegen"
+
+#: applet.js:726
+msgid "Edit this launcher"
+msgstr "Starter bewerken"
+
+#: applet.js:730
+msgid "Remove this launcher"
+msgstr "Starter verwijderen"
+
+#. metadata.json->name
+msgid "Cassia Panel Launchers"
+msgstr "Cassia-paneelstarters"
+
+#. metadata.json->description
+msgid "Launch applications from the panel"
+msgstr "Start toepassingen vanaf het paneel"
+
+#. settings-schema.json->general-page->title
+msgid "General"
+msgstr "Algemeen"
+
+#. settings-schema.json->preview-page->title
+msgid "Thumbnails"
+msgstr "Miniaturen"
+
+#. settings-schema.json->general-settings->title
+msgid "General launcher settings"
+msgstr "Algemene voorkeuren"
+
+#. settings-schema.json->general-mouse->title
+msgid "Launcher mouse settings"
+msgstr "Muisvoorkeuren"
+
+#. settings-schema.json->preview-settings->title
+msgid "Thumbnails menu settings"
+msgstr "Miniatuurmenuvoorkeuren"
+
+#. settings-schema.json->preview-mouse-section->title
+msgid "Thumbnails mouse settings"
+msgstr "Miniatuurmuisvoorkeuren"
+
+#. settings-schema.json->allow-dragging->description
+msgid "Allow dragging of launchers buttons"
+msgstr "Herordenen van starters toestaan"
+
+#. settings-schema.json->show-tooltips->description
+msgid "Show tooltips for launcher buttons"
+msgstr "Tekstballonnen tonen op starters"
+
+#. settings-schema.json->show-tooltips->tooltip
+msgid ""
+"Enable to show tooltips using window title or application name when hovering"
+" over launcher buttons"
+msgstr ""
+"Schakel in om tekstballonnen met de venstertitel of toepassingsnaam te tonen"
+" na het aanwijzen van starters"
+
+#. settings-schema.json->display-number->options
+msgid "Never"
+msgstr "Nooit"
+
+#. settings-schema.json->display-number->options
+msgid "Always"
+msgstr "Altijd"
+
+#. settings-schema.json->display-number->options
+msgid "2 or more windows"
+msgstr "Bij 2 of meer geopende vensters"
+
+#. settings-schema.json->display-number->description
+msgid "Display number of running application windows"
+msgstr "Aantal geopende vensters tonen"
+
+#. settings-schema.json->grouped-left-click->options
+msgid "Restore/Minimize most recent window"
+msgstr "Recentste venster minimaliseren/herstellen"
+
+#. settings-schema.json->grouped-left-click->options
+msgid "Restore then cycle windows"
+msgstr "Herstellen, dan schakelen"
+
+#. settings-schema.json->grouped-left-click->options
+msgid "Show thumbnail menu"
+msgstr "Miniatuurmenu openen"
+
+#. settings-schema.json->grouped-left-click->description
+msgid "Left button action (2+ windows)"
+msgstr "Linkermuisknopactie (2 of meer vensters)"
+
+#. settings-schema.json->grouped-left-click->tooltip
+msgid ""
+"Action taken when using the left mouse button on a launcher button with more"
+" then one running window"
+msgstr ""
+"De actie die dient te worden uitgevoerd door met de linkermuisknop te klikken"
+" op een starter waarvan meer dan één venster geopend is"
+
+#. settings-schema.json->middle-click->options
+#. settings-schema.json->back-click->options
+#. settings-schema.json->forward-click->options
+msgid "Thumbnail menu toggle"
+msgstr "Miniatuurmenu openen/sluiten"
+
+#. settings-schema.json->middle-click->options
+#. settings-schema.json->back-click->options
+#. settings-schema.json->forward-click->options
+msgid "Thumbnail menu hold"
+msgstr "Miniatuurmenu geopend houden"
+
+#. settings-schema.json->middle-click->options
+#. settings-schema.json->back-click->options
+#. settings-schema.json->forward-click->options
+#. settings-schema.json->preview-middle-click->options
+#. settings-schema.json->preview-back-click->options
+#. settings-schema.json->preview-forward-click->options
+msgid "Close window"
+msgstr "Venster sluiten"
+
+#. settings-schema.json->middle-click->options
+#. settings-schema.json->back-click->options
+#. settings-schema.json->forward-click->options
+#. settings-schema.json->preview-middle-click->options
+#. settings-schema.json->preview-back-click->options
+#. settings-schema.json->preview-forward-click->options
+msgid "Minimize/Restore"
+msgstr "Minimaliseren/Herstellen"
+
+#. settings-schema.json->middle-click->options
+#. settings-schema.json->back-click->options
+#. settings-schema.json->forward-click->options
+#. settings-schema.json->preview-middle-click->options
+#. settings-schema.json->preview-back-click->options
+#. settings-schema.json->preview-forward-click->options
+msgid "Maximize/Restore"
+msgstr "Maximaliseren/Herstellen"
+
+#. settings-schema.json->middle-click->options
+#. settings-schema.json->back-click->options
+#. settings-schema.json->forward-click->options
+#. settings-schema.json->preview-middle-click->options
+#. settings-schema.json->preview-back-click->options
+#. settings-schema.json->preview-forward-click->options
+msgid "Move to workspace 1"
+msgstr "Verplaatsen naar werkblad 1"
+
+#. settings-schema.json->middle-click->options
+#. settings-schema.json->back-click->options
+#. settings-schema.json->forward-click->options
+#. settings-schema.json->preview-middle-click->options
+#. settings-schema.json->preview-back-click->options
+#. settings-schema.json->preview-forward-click->options
+msgid "Move to workspace 2"
+msgstr "Verplaatsen naar werkblad 2"
+
+#. settings-schema.json->middle-click->options
+#. settings-schema.json->back-click->options
+#. settings-schema.json->forward-click->options
+#. settings-schema.json->preview-middle-click->options
+#. settings-schema.json->preview-back-click->options
+#. settings-schema.json->preview-forward-click->options
+msgid "Move to workspace 3"
+msgstr "Verplaatsen naar werkblad 3"
+
+#. settings-schema.json->middle-click->options
+#. settings-schema.json->back-click->options
+#. settings-schema.json->forward-click->options
+#. settings-schema.json->preview-middle-click->options
+#. settings-schema.json->preview-back-click->options
+#. settings-schema.json->preview-forward-click->options
+msgid "Move to workspace 4"
+msgstr "Verplaatsen naar werkblad 4"
+
+#. settings-schema.json->middle-click->options
+#. settings-schema.json->back-click->options
+#. settings-schema.json->forward-click->options
+#. settings-schema.json->preview-middle-click->options
+#. settings-schema.json->preview-back-click->options
+#. settings-schema.json->preview-forward-click->options
+msgid "Visible on this/all workspaces"
+msgstr "Zichtbaar op dit of alle werkbladen"
+
+#. settings-schema.json->middle-click->options
+#. settings-schema.json->back-click->options
+#. settings-schema.json->forward-click->options
+#. settings-schema.json->preview-middle-click->options
+#. settings-schema.json->preview-back-click->options
+#. settings-schema.json->preview-forward-click->options
+msgid "Do nothing"
+msgstr "Niets doen"
+
+#. settings-schema.json->middle-click->description
+msgid "Middle button action"
+msgstr "Middelste muisknopactie"
+
+#. settings-schema.json->back-click->description
+msgid "Back button action"
+msgstr "Terugknopactie"
+
+#. settings-schema.json->forward-click->description
+msgid "Forward button action"
+msgstr "Vooruitknopactie"
+
+#. settings-schema.json->menu-show-on-hover->description
+msgid "Show on hover"
+msgstr "Tonen na aanwijzen met muis"
+
+#. settings-schema.json->menu-show-on-hover->tooltip
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"hovering over a launcher button"
+msgstr ""
+"Schakel in om een pop-upmenu met geopende vensters te tonen door een starter"
+" aan te wijzen met de muis"
+
+#. settings-schema.json->show-previews->description
+msgid "Show window thumbnails in the popup window list menu"
+msgstr "Vensterminiaturen tonen in vensterpop-upmenu"
+
+#. settings-schema.json->show-previews->tooltip
+msgid ""
+"If enabled, the popup menu will show window thumbnails,\n"
+"otherwise the menu will only show window titles\n"
+"(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr ""
+"Schakel in om het pop-upmenu te voorzien van vensterminiaturen\n"
+"in plaats van alleen venstertitels.\n"
+"(Deze optie is uitgeschakeld bij gebruik van softwareversnelling.)"
+
+#. settings-schema.json->number-of-unshrunk-previews->options
+msgid "Extra large"
+msgstr "Extra groot"
+
+#. settings-schema.json->number-of-unshrunk-previews->options
+msgid "Large"
+msgstr "Groot"
+
+#. settings-schema.json->number-of-unshrunk-previews->options
+msgid "Medium"
+msgstr "Gemiddeld"
+
+#. settings-schema.json->number-of-unshrunk-previews->options
+msgid "Small"
+msgstr "Klein"
+
+#. settings-schema.json->number-of-unshrunk-previews->options
+msgid "Extra small"
+msgstr "Extra klein"
+
+#. settings-schema.json->number-of-unshrunk-previews->description
+msgid "Default thumbnail window size"
+msgstr "Standaard miniatuuromvang"
+
+#. settings-schema.json->preview-timeout-show->units
+#. settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr "milliseconden"
+
+#. settings-schema.json->preview-timeout-show->description
+msgid "Hover time before showing menu"
+msgstr "Menu tonen na aanwijzen, gedurende"
+
+#. settings-schema.json->preview-timeout-show->tooltip
+msgid ""
+"The waiting time before the thumbnail menu appears when hovering over a"
+" launcher button\n"
+"(Not used when moving directly to a different launcher button)"
+msgstr ""
+"De wachttijd na aanwijzen van een starter alvorens het pop-upmenu wordt"
+" getoond.\n"
+"(Niet van toepassing bij direct verplaatsen naar een andere starter.)"
+
+#. settings-schema.json->preview-timeout-hide->description
+msgid "Time before closing after pointer leaves the menu"
+msgstr "Menu verbergen na muisverplaatsing, gedurende"
+
+#. settings-schema.json->preview-timeout-hide->tooltip
+msgid ""
+"The waiting time for the thumbnail menu to close when leaving a launcher"
+" button\n"
+"(Not used when moving directly to a different launcher button)"
+msgstr ""
+"De wachttijd alvorens het pop-upmenu wordt verborgen zodra de muis verplaatst"
+" is.\n"
+"(Niet van toepassing bij direct verplaatsen naar een andere starter.)"
+
+#. settings-schema.json->preview-middle-click->options
+#. settings-schema.json->preview-back-click->options
+#. settings-schema.json->preview-forward-click->options
+msgid "Close thumbnail menu"
+msgstr "Pop-upmenu sluiten"
+
+#. settings-schema.json->preview-middle-click->options
+#. settings-schema.json->preview-back-click->options
+#. settings-schema.json->preview-forward-click->options
+msgid "Group/Ungroup windows"
+msgstr "Vensters (de)groeperen"
+
+#. settings-schema.json->preview-middle-click->description
+msgid "Thumbnail window middle button action"
+msgstr "Middelste muisknopactie op pop-upmenu"
+
+#. settings-schema.json->preview-back-click->description
+msgid "Thumbnail window back button action"
+msgstr "Terugknopactie op pop-upmenu"
+
+#. settings-schema.json->preview-forward-click->description
+msgid "Thumbnail window forward button action"
+msgstr "Vooruitknopactie op pop-upmenu"
+
+#. settings-schema.json->wheel-adjusts-preview-size->options
+msgid "Off"
+msgstr "Uit"
+
+#. settings-schema.json->wheel-adjusts-preview-size->options
+msgid "On (temporary)"
+msgstr "Aan (tijdelijk)"
+
+#. settings-schema.json->wheel-adjusts-preview-size->options
+msgid "On (global default)"
+msgstr "Aan (globaal)"
+
+#. settings-schema.json->wheel-adjusts-preview-size->options
+msgid "On (button default)"
+msgstr "Aan (volgens knopvoorkeuren)"
+
+#. settings-schema.json->wheel-adjusts-preview-size->description
+msgid "Adjust the thumbnail window sizes using the scroll-wheel"
+msgstr "Miniatuuromvang wijzigen met muiswiel"
+
+#. settings-schema.json->wheel-adjusts-preview-size->tooltip
+msgid ""
+"If enabled, the size of thumbnail windows will respond to the mouse scroll-"
+"wheel. The new size can have a temporary effect or persist on a global or "
+"per button basis"
+msgstr ""
+"Schakel in om miniatuuromvangen te wijzigen door er met de muis overheen te"
+" scrollen. De nieuwe omvang kan per starter van tijdelijke of permanente aard"
+" zijn."

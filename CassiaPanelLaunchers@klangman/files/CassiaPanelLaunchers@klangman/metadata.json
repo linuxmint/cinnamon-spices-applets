@@ -1,0 +1,8 @@
+{
+ "uuid": "CassiaPanelLaunchers@klangman",
+ "name": "Cassia Panel Launchers",
+ "description": "Launch applications from the panel",
+ "role": "panellauncher",
+ "author": "klangman",
+ "max-instances": -1
+}
