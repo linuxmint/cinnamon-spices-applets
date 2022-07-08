@@ -73,20 +73,26 @@ DockerCompose.prototype = {
 				// Docker exists, check for the compose command
 				this.execAsyncCmd(`${this.docker_cmd} compose`).then(result => {
 					// Docker compose exists, use that
+					global.log(`FOUND ${this.docker_cmd}`);
 					resolve(result);
 				}).catch(result => {
 					// Older docker command
+					global.log(`MISSING ${this.docker_cmd}`);
 					this.execAsyncCmd(`which ${this.docker_compose_cmd}`).then(result => {
+						global.log(`FOUND ${this.docker_compose_cmd}`);
 						resolve(this.docker_compose_cmd);
 					}).catch(result => {
+						global.log(`MISSING ${this.docker_compose_cmd}`);
 						reject("");
 					})
 				})
 			}).catch(result => {
 				// Look for docker-compose
 				this.execAsyncCmd(`which ${this.docker_compose_cmd}`).then(result => {
+					global.log(`FOUND ${this.docker_compose_cmd}`);
 					resolve(this.docker_compose_cmd);
 				}).catch(result => {
+					global.log(`MISSING ${this.docker_compose_cmd}`);
 					reject("");
 				})
 			});	
@@ -102,10 +108,10 @@ DockerCompose.prototype = {
 			// 2. If it does, check the version for the new "docker compose" command and use that
 			// 3. If it does not, check for the older Python based "docker-compose"
 			this.availableDockerComposeCmd().then(result => {
-				global.log(`FOUND: ${result}`);
+				global.log("RESOLVING");
 				resolve(result);
 			}).catch(result => {
-				global.log(`NOT FOUND!`);
+				global.log("REJECTING");
 				reject(result)
 			})
 		})
@@ -114,6 +120,28 @@ DockerCompose.prototype = {
 	/*
 	 * Deal with docker compose files in the project root
 	 */
+
+	createEventListener: function(stack_file) {
+		global.log(`CREATING EVENT LISTENER: ${stack_file}`)
+		this.exec(stack_file, "events", function() {
+			global.log("CAPTURED AN EVENT!");
+		});
+		return stack_file;
+
+
+		this.exec(stack_file, "events", function(arg1, arg2, arg3) {
+			global.log(`${UUID}::DockerCompose:${(new Error().stack).split('@')[0]}: ARG1 ${arg1}`);
+			global.log(`${UUID}::DockerCompose:${(new Error().stack).split('@')[0]}: ARG2 ${arg2}`);
+			global.log(`${UUID}::DockerCompose:${(new Error().stack).split('@')[0]}: ARG3 ${arg3}`);
+		});
+
+	},
+
+	destroyEventListener: function(stack_file) {
+		global.log(`DESTROYING EVENT LISTENER: ${stack_file}`)
+		// Kill the PID
+		return stack_file;
+	},
 
 	findDockerComposeFiles: function(currentDir) {
 		// Scan through the docker compose project folder for:
@@ -154,14 +182,14 @@ DockerCompose.prototype = {
 		traffcap_node_1           node         16       15ddf4b49c29   904.6 MB
 		traffcap_vault-server_1   vault        latest   f46a4c1a979e   198.6 MB
 		*/
-		this.exec(stack_file, "images").then((results) => {
-			let images = this.exec(stack_file, "images");
-			let lines = images.split("\n");
-			global.log(`${UUID}::DockerCompose:${(new Error().stack).split('@')[0]}: Image results`);
-			lines.forEach((line) => {
-				global.log(`${UUID}::DockerCompose:${(new Error().stack).split('@')[0]}: ${line}`);
-			})
-		})
+		// this.exec(stack_file, "images").then((results) => {
+		// 	let images = this.exec(stack_file, "images");
+		// 	let lines = images.split("\n");
+		// 	global.log(`${UUID}::DockerCompose:${(new Error().stack).split('@')[0]}: Image results`);
+		// 	lines.forEach((line) => {
+		// 		global.log(`${UUID}::DockerCompose:${(new Error().stack).split('@')[0]}: ${line}`);
+		// 	})
+		// })
 	},
 
     ssh: function(stack_file) {
@@ -170,23 +198,26 @@ DockerCompose.prototype = {
 
     up: function(stack_file) {
         // Bring a stack up with `docker-compose up`
-        this.exec(stack_file, ["up"], null, false);
+        this.exec(stack_file, "up", null, false);
     },
 
     down: function(stack_file) {
         // Bring a stack down with `docker-compose down`
-        this.exec(stack_file, ["down"], null, false);
+        this.exec(stack_file, "down", null, false);
     },
 
-	status: function(stack_file) {
-		// Check to see if any processes are running, return true/false
-		global.log(`${UUID}::DockerCompose:${(new Error().stack).split('@')[0]}: CHECKING RUNNING STATE`);
-		this.exec(stack_file, "top").then(result => {
-			global.log(`${UUID}::DockerCompose:${(new Error().stack).split('@')[0]}: RUNNING STATE: ${result}`);
-		}).catch(result => {
-
-		});
-		return (result != "");
+	isUp: function(stack_file) {
+		return new Promise((resolve, reject) => {
+			// Check to see if any processes are running, return true/false
+			global.log(`${UUID}::DockerCompose:${(new Error().stack).split('@')[0]}: CHECKING RUNNING STATE`);
+			this.exec(stack_file, "top").then(result => {
+				global.log(`${UUID}::DockerCompose:${(new Error().stack).split('@')[0]}: RUNNING STATE: UP`);
+				resolve();
+			}).catch(result => {
+				global.log(`${UUID}::DockerCompose:${(new Error().stack).split('@')[0]}: RUNNING STATE: DOWN`);
+				reject();
+			});
+		})
 	},
 
 	events: function(stack_file) {
@@ -204,9 +235,11 @@ DockerCompose.prototype = {
 			callback = callback;
 			try {
 				this.availableDockerComposeCmd().then(cmd => {
+					let fullCmd = `${cmd} -f ${stack_file} ${command}`;
+					global.log(fullCmd);
 					let [exit, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(
 						Util.resolveHome(this.docker_compose_project_folder),
-						[cmd, "-f", stack_file, command],
+						fullCmd.split(" "),
 						null,
 						GLib.SpawnFlags.DO_NOT_REAP_CHILD,
 						null
@@ -223,7 +256,7 @@ DockerCompose.prototype = {
 			
 						while (true) {
 							[line, length] = out_reader.read_line(null);
-							lines.push(line);
+							lines.push(ByteArray.toString(line));
 							if (length == 0) {
 								break;
 							}

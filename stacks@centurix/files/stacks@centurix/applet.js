@@ -84,6 +84,9 @@ Stacks.prototype = {
 			 */
 			this.docker_compose = new DockerCompose.DockerCompose(this.docker_compose_cmd, this.docker_cmd, this.docker_compose_project_folder);
 
+			// List of event listeners for docker compose
+			this.eventListeners = [];
+
 			this.refreshApplet();
 		} catch (e) {
 			global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${e}`);
@@ -308,8 +311,10 @@ Stacks.prototype = {
 		 * Draw the main menu.
 		 * Check for the existance for docker-compose. If it doesn't exist, alert the user and direct them to installation instructions
 		 */
+		global.log("UPDATING APPLET");
 		try {
 			this.docker_compose.available().then(results => {
+				global.log("FOUND A COMMAND");
 				let docker_projects = this.docker_compose.listDockerComposefiles();
 
 				global.log(`${UUID}::${(new Error().stack).split('@')[0]}: Found Docker Compose projects ${docker_projects}`);
@@ -319,17 +324,24 @@ Stacks.prototype = {
 				this.menu.removeAll();
 	
 				this.stacks = [];
-	
+
+				// Are there any current event listeners?
+				this.eventListeners.forEach((listener) => {
+					this.docker_compose.destroyEventListener(listener);
+				})
+
 				for (let index = 0; index < docker_projects.length; index ++) {
 					let stack = new PopupMenu.PopupSubMenuMenuItem(docker_projects[index]);
-					if (this.docker_compose.status(docker_projects[index])) {
+					// For each docker project, add an event listener
+					//let listener = this.docker_compose.createEventListener(docker_projects[index]);
+					this.docker_compose.isUp(docker_projects[index]).then(result => {
 						stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Up", true, this.dockerComposeToggle, docker_projects[index]));
-						let images = this.docker_compose.listImages(docker_projects[index]);
 						stack.menu.addMenuItem(this.newIconMenuItem('utilities-terminal', _('SSH Terminal...'), this.dockerComposeSSH));
-					} else {
+					}).catch(result => {
 						stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Down", false, this.dockerComposeToggle, docker_projects[index]));
-					}
+					})
 	
+					this.eventListeners.push(listener);
 					this.stacks.push(stack);
 					this.menu.addMenuItem(stack);
 				}
@@ -337,6 +349,7 @@ Stacks.prototype = {
 				this.menu.addMenuItem(this.newSeparator());
 				this.menu.addMenuItem(this.newIconMenuItem('view-refresh', _('Refresh this menu'), this.refreshApplet));	
 			}).catch(results => {
+				global.log(`DIDNT FIND A COMMAND: ${results}`);
 				this.set_applet_icon_path(ICON_MISSING);
 				this.set_applet_tooltip(_("Stacks: Docker compose missing or not configured."));
 				this.notification(_("Docker compose missing or not configured."));
@@ -345,7 +358,6 @@ Stacks.prototype = {
 				this.menu.addMenuItem(this.newIconMenuItem('apport', _('Docker-compose not installed'), null, {reactive: false}));
 				this.menu.addMenuItem(this.newIconMenuItem('emblem-web', _('Click here for installation instructions'), this.openDockerComposeInstructions));
 				this.menu.addMenuItem(this.newIconMenuItem('view-refresh', _('Refresh this menu'), this.refreshApplet));
-				return
 			})
 		} catch(e) {
 			global.log(`${UUID}::${(new Error().stack).split('@')[0]}: ${e}`);
