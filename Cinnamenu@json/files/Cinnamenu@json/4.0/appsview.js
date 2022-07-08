@@ -23,18 +23,20 @@ class AppButton {
         //----------ICON---------------------------------------------
         if (this.app.icon) { //isSearchResult(excl. emoji), isClearRecentsButton, isBackButton
             this.icon = this.app.icon;
-        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, isWebBookmark,
-                                    //isFolderviewFile/Directory, isSearchResult(wikipedia)
+        } else if (this.app.icon_filename) { //some of isSearchResult
+            const gicon = new Gio.FileIcon({file: Gio.file_new_for_path(this.app.icon_filename)});
+            this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
+        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile,
+                                    //isFolderviewFile/Directory, some of isSearchResult
             let gicon = this.app.gicon;
-            if (!this.app.isWebBookmark && !this.app.isSearchResult) {
+            if (!this.app.isSearchResult) {
                 gicon = getThumbnail_gicon(this.app.uri, this.app.mimeType) || gicon;
             }
             this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
         } else if (this.app.emoji) {//emoji search result
-            const iconLabel = new St.Label({ style: 'color: white; font-size: ' +
+            this.icon = new St.Label({ style: 'color: white; font-size: ' +
                                             (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
-            iconLabel.get_clutter_text().set_markup(this.app.emoji);
-            this.icon = iconLabel;
+            this.icon.get_clutter_text().set_markup(this.app.emoji);
         } else if (this.app.isApplication) {//isApplication
             this.icon = this.app.create_icon_texture(this.appThis.getAppIconSize());
         } else if (this.app.iconFactory) {//isPlace
@@ -130,6 +132,7 @@ class AppButton {
                     _getDragActor: () => new Clutter.Clone({source: this.actor}),
                     getDragActor: () => new Clutter.Clone({source: this.icon}),
                     id: this.app.id,
+                    get_app_id: () => this.app.id, //used when eg. dragging to panel launcher
                     isDraggableApp: true
             };
 
@@ -293,12 +296,6 @@ class AppButton {
             this.appThis.recentApps.add(this.app.id);
             this.app.open_new_window(-1);
             this.appThis.menu.close();
-        } else if (this.app.isPlace) {
-            this.app.launch();
-            this.appThis.menu.close();
-        } else if (this.app.isWebBookmark) {
-            this.app.app.launch_uris([this.app.uri], null);
-            this.appThis.menu.close();
         } else if (this.app.isFolderviewDirectory || this.app.isBackButton) {
             this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
             //don't menu.close()
@@ -315,7 +312,7 @@ class AppButton {
             this.appThis.recentManagerDefault.purge_items();
             this.appThis.setActiveCategory('recents');
             //don't menu.close
-        } else if (this.app.isSearchResult) {
+        } else if (this.app.isSearchResult || this.app.isPlace) {
             this.app.activate(this.app);
             this.appThis.menu.close();
         }
@@ -358,6 +355,46 @@ class AppButton {
             this.icon.destroy();
         }
         this.actor.destroy();
+    }
+}
+
+class Subheading {
+    constructor(appThis, subheadingText, clickAction) {
+        this.appThis = appThis;
+        this.subheadingText = subheadingText;
+        this.clickAction = clickAction;
+        this.signals = new SignalManager(null);
+        this.subheading = new St.Label({ text: subheadingText, x_expand: true, reactive: true});
+        const subheadingStyleClass = clickAction?'menu-applications-subheading-clickable':'menu-applications-subheading';
+        this.subheadingBox = new St.BoxLayout({ style_class: subheadingStyleClass,
+                                                accessible_role: Atk.Role.MENU_ITEM});
+        this.subheadingBox.add(this.subheading, { });
+
+        if (this.clickAction) {
+            this.signals.connect(this.subheading, 'button-press-event', (...args) =>
+                                                                    this._handleButtonPress(...args));
+        }
+    }
+
+    _handleButtonPress(actor, e) {
+        const button = e.get_button();
+        if (button === 1) {//left click
+            if (this.appThis.contextMenu.isOpen) {
+                this.appThis.contextMenu.close();
+                return Clutter.EVENT_STOP;
+            }
+            if (this.clickAction) {
+                this.clickAction();
+            }
+            return Clutter.EVENT_STOP;
+        }
+        return Clutter.EVENT_PROPAGATE;
+    }
+
+    destroy(){
+        this.signals.disconnectAllSignals();
+        this.subheading.destroy();
+        this.subheadingBox.destroy();
     }
 }
 
@@ -406,8 +443,8 @@ class AppsView {
     populate_init(headerText = null) {
         this.applicationsListBox.hide();//hide while populating for performance.
         this.applicationsGridBox.hide();//
-
         this.clearApps();
+        this.applicationsScrollBox.vscroll.adjustment.set_value(0);//scroll to top
 
         if (headerText) {
             this.headerText.set_text(headerText);
@@ -418,26 +455,29 @@ class AppsView {
 
         this.column = 0;
         this.rownum = 0;
+
+        this.subheadings = [];
     }
 
-    populate_add(appList, subheadingText = null) {
+    populate_add(appList, subheadingText = null, clickAction = null) {
         if (subheadingText) {
             if (this.column !== 0) {
                 this.column = 0;
                 this.rownum++;
             }
-            const subheading = new St.Label({ x_expand: true});
-            const subheadingBox = new St.BoxLayout({ style_class: 'menu-applications-subheading' });
-            subheadingBox.add(subheading, { });
+
+            const subheading = new Subheading(this.appThis, subheadingText, clickAction);
             if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-                this.applicationsListBox.add(subheadingBox);
+                this.applicationsListBox.add(subheading.subheadingBox);
             } else {
                 const gridLayout = this.applicationsGridBox.layout_manager;
-                gridLayout.attach(subheadingBox, this.column, this.rownum, this.getGridValues().columns, 1);
+                gridLayout.attach(subheading.subheadingBox, this.column, this.rownum,
+                                                                    this.getGridValues().columns, 1);
                 this.rownum++;
             }
-            subheading.set_text(subheadingText);
-            subheadingBox.show();
+
+            subheading.subheadingBox.show();
+            this.subheadings.push(subheading);
         }
 
         appList.forEach(app => {
@@ -555,12 +595,10 @@ class AppsView {
         this.clearAppsViewFocusedActors();
 
         //destroy subheading labels
-        this.getActiveContainer().get_children().forEach(actor => {
-                    if (!(  actor.has_style_class_name('menu-application-button') ||
-                            actor.has_style_class_name('menu-application-button-selected'))) {
-                        actor.destroy();
-                    }
-                 });
+        if(this.subheadings){
+            this.subheadings.forEach(subheading => subheading.destroy());
+        }
+        this.subheadings = [];
 
         this.getActiveContainer().remove_all_children();
     }

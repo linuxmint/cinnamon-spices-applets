@@ -8,7 +8,7 @@ const DESCRIPTION = "A radio applet with 1000's of searchable stations, mpris su
 const NAME = 'Radio++'
 const MAX_INSTANCES = 1
 const CINNAMON_VERSION = '4.6' // When set to null, the build output path is set to the files applet folder, else to a sub dir inside the applet files dir
-const APPLET_VERSION = '2.0.4'
+const APPLET_VERSION = '2.1.4'
 
 // Automatic calculated constants
 const UUID = __dirname.split('/').slice(-1)[0]
@@ -29,7 +29,14 @@ function main(metadata, orientation, panel_height, instance_id) {
     __meta.orientation = orientation
 
     const appletDefinition = getAppletDefinition({applet_id: instance_id})
-    const panel = panelManager.panels.find(panel => panel?.panelId === appletDefinition.panelId)
+
+    const panel = panelManager.panels.find(pnl => {
+        // not using Optional chaining (?.) as this is not supported in Linux Mint 20 which is the lowest supported version
+        if (!pnl) return false
+
+        return pnl.panelId === appletDefinition.panelId
+    })
+
     const locationLabel = appletDefinition.location_label
 
     __meta.panel = panel

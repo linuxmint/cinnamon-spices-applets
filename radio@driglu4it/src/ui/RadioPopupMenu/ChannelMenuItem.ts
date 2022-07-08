@@ -1,6 +1,6 @@
 import * as consts from '../../consts'
 import { createRotateAnimation } from '../../functions/tweens';
-import { createIconMenuItem } from '../../lib/IconMenuItem';
+import { createSimpleMenuItem } from '../../lib/SimpleMenuItem';
 import { AdvancedPlaybackStatus } from '../../types';
 
 
@@ -25,9 +25,9 @@ export function createChannelMenuItem(args: Arguments) {
         ["Stopped", null]
     ])
 
-    const iconMenuItem = createIconMenuItem({
+    const iconMenuItem = createSimpleMenuItem({
         maxCharNumber: consts.MAX_STRING_LENGTH,
-        initialText: channelName,
+        text: channelName,
         onActivated: () => {
             onActivated(channelName)
         }

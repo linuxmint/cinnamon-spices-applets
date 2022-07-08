@@ -18,71 +18,54 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:97
+msgid "Scr Lock"
+msgstr "Scr-Lock-Taste"
+
 msgid "Num Lock"
 msgstr "Num-Lock-Taste"
 
-#: applet.js:103
 msgid "Caps Lock"
 msgstr "Feststelltaste"
 
-#: applet.js:142
 msgid "Lock Keys"
 msgstr "Lock-Tasten"
 
-#: applet.js:190
+msgid "Scr lock on"
+msgstr "Scr-Lock-Taste ein"
+
+msgid "Scr lock off"
+msgstr "Scr-Lock-Taste aus"
+
 msgid "Num lock on"
 msgstr "Num-Lock-Taste ein"
 
-#: applet.js:193
 msgid "Num lock off"
 msgstr "Num-Lock-Taste aus"
 
-#: applet.js:201
 msgid "Caps lock on"
 msgstr "Feststelltaste ein"
 
-#: applet.js:204
 msgid "Caps lock off"
 msgstr "Feststelltaste aus"
 
-#. betterlock->settings-schema.json->show-notifications->description
 msgid "Show notifications"
 msgstr "Benachrichtigungen anzeigen"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Num Lock only"
-msgstr "Nur Num-Lock-Taste"
+msgid "Show caps lock indicator"
+msgstr "Zeigt die Feststelltaste an"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Caps Lock only"
-msgstr "Nur Feststelltaste"
+msgid "Show num lock indicator"
+msgstr "Num-Lock-Indikator anzeigen"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Num Lock and Caps Lock"
-msgstr "Num-Lock-Taste und Feststelltaste"
+msgid "Show scr lock indicator"
+msgstr "Scr-Lock-Indikator anzeigen"
 
-#. betterlock->settings-schema.json->indicator-type->description
-msgid "Choose which indicator to show"
-msgstr "Auswählen welches Symbol angezeigt wird"
-
-#. betterlock->metadata.json->description
 msgid ""
-"Shows whether caps lock/num lock is on, and displays a notification when "
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification when "
 "these change."
 msgstr ""
-"Zeigt an, ob die Feststelltaste/Num-Lock-Taste aktiviert ist, und zeigt eine "
-"Benachrichtigung an, wenn diese betätigt werden."
+"Zeigt an, ob die Feststelltaste/Num-Taste/Scr-Taste aktiviert ist, und zeigt eine "
+"Benachrichtigung an, wenn sich diese ändern."
 
-#. betterlock->metadata.json->name
-msgid "Num Lock/Caps Lock indicator with notifications"
-msgstr "Num-Lock-Taste/Feststelltaste-Anzeige mit Benachrichtigungen"
-
-#~ msgid "Notifications"
-#~ msgstr "Benachrichtigungen"
-
-#~ msgid "Show Num Lock indicator"
-#~ msgstr "Symbol für Num-Lock-Taste anzeigen"
-
-#~ msgid "Show Caps Lock indicator"
-#~ msgstr "Symbol für Feststelltaste anzeigen"
+msgid "Lock keys indicator with notifications"
+msgstr "Sperrtastenanzeige mit Benachrichtigungen"

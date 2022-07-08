@@ -7,435 +7,598 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-20 12:34+0100\n"
-"PO-Revision-Date: 2021-03-22 17:33+0000\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 17:45+0100\n"
+"Last-Translator: Google translate\n"
 "Language-Team: \n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#. 3.2 4.0
 msgid "Type to search..."
-msgstr ""
+msgstr "Унесите за претрагу..."
 
-#. 3.2 4.0
 msgid "Initializing"
-msgstr ""
+msgstr "Иницијализација"
 
-#. 3.2 4.0
 msgid "No description available"
-msgstr ""
+msgstr "Опис није доступан"
 
-#. 3.2 4.0
-msgid "All Applications"
+msgid "All applications"
 msgstr "Све апликације"
 
-#. 3.2 4.0
 msgid "Places"
-msgstr ""
+msgstr "Места"
 
-#. 3.2 4.0
-msgid "Recent Files"
+msgid "Recent files"
 msgstr "Недавне датотеке"
 
-#. 3.2 4.0
 msgid "Bookmarks"
-msgstr ""
+msgstr "обележивача"
 
-#. 3.2 4.0
-msgid "Favorite Apps"
-msgstr ""
+msgid "Favorite apps"
+msgstr "Омиљене апликације"
 
-#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr ""
+msgstr "гир1.2-гда-5.0 пакет потребан за Фирефок и Мидори обележиваче."
 
-#. 3.2 4.0
 msgid "Clear List"
-msgstr ""
+msgstr "Обриши листу"
 
-#. 3.2 4.0
 msgid "No recent files"
-msgstr ""
+msgstr "Нема недавних датотека"
 
-#. 3.2
 msgid "Account details"
-msgstr ""
+msgstr "Детаљи о рачуну"
 
-#. 3.2 3.2
 msgid "Grid View"
-msgstr ""
+msgstr "Поглед мрежа"
 
-#. 3.2 3.2
 msgid "List View"
-msgstr ""
+msgstr "Лист Виев"
 
-#. 3.2 3.2
 msgid "Switch to grid view"
-msgstr ""
+msgstr "Пребаците се на приказ мреже"
 
-#. 3.2 3.2
 msgid "Switch to list view"
-msgstr ""
+msgstr "Пребаците се на приказ листе"
 
-#. 3.2 4.0
-msgid "Lock Screen"
-msgstr ""
+msgid "Lock screen"
+msgstr "Закључавање екрана"
 
-#. 3.2 4.0
 msgid "Lock the screen"
-msgstr ""
+msgstr "Закључајте екран"
 
-#. 3.2 4.0
 msgid "Logout"
-msgstr ""
+msgstr "Одјавити се"
 
-#. 3.2 4.0
 msgid "Leave the session"
-msgstr ""
+msgstr "Напустите сесију"
 
-#. 3.2 4.0
 msgid "Quit"
-msgstr ""
+msgstr "Одустати"
 
-#. 3.2 4.0
 msgid "Shutdown the computer"
-msgstr ""
+msgstr "Искључите рачунар"
 
-#. 3.2 4.0
-msgid "Home"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Computer"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Browse network"
-msgstr ""
-
-#. 3.2 3.2 4.0
-#. 4.0
 msgid "Run with NVIDIA GPU"
-msgstr ""
+msgstr "Покрени са НВИДИА ГПУ"
 
-#. 3.2 4.0
 msgid "Add to panel"
-msgstr ""
+msgstr "Додај на панел"
 
-#. 3.2 4.0
 msgid "Add to desktop"
-msgstr ""
+msgstr "Додај на радну површину"
 
-#. 3.2 4.0
-msgid "Remove favorite"
-msgstr "Уклоните омиљено"
+msgid "Remove from favorites"
+msgstr "Избаци из омиљених"
 
-#. 3.2 4.0
 msgid "Add to favorites"
-msgstr ""
+msgstr "Додај у фаворите"
 
-#. 3.2 4.0
 msgid "Uninstall"
-msgstr ""
+msgstr "Деинсталирај"
 
-#. 4.0 4.0
+msgid "Home"
+msgstr "Кућа"
+
+msgid "Computer"
+msgstr "рачунар"
+
+msgid "Browse network"
+msgstr "Прегледајте мрежу"
+
+msgid "Find files..."
+msgstr "Пронађи датотеке..."
+
 msgid "Please wait..."
-msgstr ""
+msgstr "Сачекајте..."
 
-#. metadata.json
-#. 3.2
+msgid "Applications"
+msgstr "Пријаве"
+
+msgid "Documents"
+msgstr "Документи"
+
+msgid "Videos"
+msgstr "Видеос"
+
+msgid "Images"
+msgstr "Слике"
+
+msgid "Music"
+msgstr "Музика"
+
+msgid "No recent Items"
+msgstr "Нема недавних ставки"
+
+msgid "Click to copy"
+msgstr "Кликните да бисте копирали"
+
+msgid "Applications and files"
+msgstr "Апликације и датотеке"
+
+msgid "Other search results"
+msgstr "Други резултати претраге"
+
+msgid "Browser history"
+msgstr "Историја претраживача"
+
+msgid "Browser bookmarks"
+msgstr "Обележивачи претраживача"
+
+msgid "Emoji"
+msgstr "Емоји"
+
+msgid "Trash"
+msgstr "Смеће"
+
+msgid "Error while opening file:"
+msgstr "Грешка при отварању датотеке:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Превише уноса – приказује се само првих 1000 уноса"
+
+msgid "Favorites"
+msgstr "Фаворитес"
+
+msgid "Recent"
+msgstr "Скорашњи"
+
+msgid "Home folder"
+msgstr "Почетна фасцикла"
+
+msgid "Reset category order"
+msgstr "Ресетуј редослед категорија"
+
+msgid "light skin tone"
+msgstr "светли тон коже"
+
+msgid "medium-light skin tone"
+msgstr "средње светла боја коже"
+
+msgid "medium skin tone"
+msgstr "средњи тон коже"
+
+msgid "medium-dark skin tone"
+msgstr "средње тамни тон коже"
+
+msgid "dark skin tone"
+msgstr "тамни тон коже"
+
+msgid "This file is no longer available"
+msgstr "Ова датотека више није доступна"
+
+msgid "Open with"
+msgstr "Отвори са"
+
+msgid "Other application..."
+msgstr "Друга апликација..."
+
+msgid "Open containing folder"
+msgstr "Отворите садржећи фолдер"
+
+msgid "Move to trash"
+msgstr "Пошаљи у ђубре"
+
+msgid "Error while moving file to trash:"
+msgstr "Грешка при премештању датотеке у отпад:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Ова ставка менија није повезана ни са једним пакетом. Да ли ипак желите да га уклоните из менија?"
+
+msgid "The following packages will be removed:"
+msgstr "Следећи пакети ће бити уклоњени:"
+
+msgid "Packages to be removed"
+msgstr "Пакети које треба уклонити"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Није могуће уклонити пакет %s јер то захтевају други пакети."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Пакет %s је зависност од следећих пакета:"
+
+msgid "Open"
+msgstr "Отвори"
+
+msgid "Search"
+msgstr "Претрага"
+
+msgid "Start in"
+msgstr "Почни У"
+
+msgid "Select a folder"
+msgstr "Изаберите фолдер"
+
+msgid "Follow symlinks"
+msgstr "Пратите симболичне везе"
+
+msgid "Search hidden"
+msgstr "Претрага је скривена"
+
+msgid "Use regular expressions"
+msgstr "Користите регуларне изразе"
+
+msgid "Stop"
+msgstr "Зауставити"
+
+msgid "File"
+msgstr "Филе"
+
+msgid "Path"
+msgstr "Пут"
+
+msgid "Searching..."
+msgstr "У потрази..."
+
+msgid "Search Stopped"
+msgstr "Претрага заустављена"
+
+msgid "Searching: "
+msgstr "У потрази: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Грешка: недовољно дозвола за читање фасцикле "
+
+msgid "Search Completed"
+msgstr "Претрага је завршена"
+
+msgid "Skipping"
+msgstr "Прескакање"
+
+msgid " - directory already searched"
+msgstr " - директоријум је већ претраживан"
+
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinnamenu"
 
-#. metadata.json
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
-msgstr ""
-"Флексибилан мени који нуди опције форматирања, веб маркере, подршку "
-"провајдера за претрагу и нејасно претраживање."
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Флексибилан мени са опцијама распореда мреже или листе, претраживачем датотека и претрагом емоџија."
 
-#. metadata.json
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
-msgstr ""
-
-#. 3.2 4.0
 msgid "Behavior"
-msgstr ""
+msgstr "Понашање"
 
-#. 3.2 4.0
 msgid "Appearance"
-msgstr ""
+msgstr "Изглед"
 
-#. 3.2 4.0
 msgid "Layout and Content"
-msgstr ""
+msgstr "Изглед и садржај"
 
-#. 3.2
 msgid "Search Providers"
-msgstr ""
+msgstr "Сеарцх Провидерс"
 
-#. 3.2
 msgid "No search provider extensions found"
-msgstr ""
+msgstr "Није пронађен ниједан додатак добављача претраге"
 
-#. 3.2 4.0
 msgid "Panel"
-msgstr ""
+msgstr "Панел"
 
-#. 3.2 4.0
 msgid "Menu"
-msgstr ""
+msgstr "Мени"
 
-#. 3.2 4.0
 msgid "Layout"
-msgstr ""
+msgstr "Лаиоут"
 
-#. 3.2 4.0
 msgid "Content"
-msgstr ""
+msgstr "Садржај"
 
-#. 3.2 4.0
 msgid "Recent files settings"
-msgstr ""
+msgstr "Подешавања недавних датотека"
 
-#. 3.2 4.0
 msgid "Open the menu editor"
 msgstr "Отворите уређивач менија"
 
-#. 3.2 4.0
-msgid "Reset category order"
-msgstr ""
-
-#. 3.2 4.0
 msgid "Use a custom icon"
-msgstr ""
+msgstr "Користите прилагођену икону"
 
-#. 3.2 4.0
 msgid "Use a custom icon in the panel"
-msgstr ""
+msgstr "Користите прилагођену икону на табли"
 
-#. 3.2 4.0
 msgid "Panel icon"
-msgstr ""
+msgstr "Икона панела"
 
-#. 3.2 4.0
 msgid "Panel text"
-msgstr ""
+msgstr "Текст панела"
 
-#. 3.2 4.0
 msgid "Text to show beside the panel icon"
-msgstr ""
+msgstr "Текст који ће се приказати поред иконе панела"
 
-#. 3.2 4.0
-msgid "pixels"
-msgstr ""
+msgid "Category icon size (pixels)"
+msgstr "Величина иконе категорије (пиксели)"
 
-#. 3.2 4.0
-msgid "Category icon size"
-msgstr ""
+msgid "Applications list icon size (pixels)"
+msgstr "Величина иконе листе апликација (пиксели)"
 
-#. 3.2 4.0
-msgid "Applications list icon size"
-msgstr ""
+msgid "Applications grid icon size (pixels)"
+msgstr "Величина иконе мреже апликација (пиксели)"
 
-#. 3.2 4.0
-msgid "Applications grid icon size"
-msgstr ""
-
-#. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
-msgstr ""
+msgstr "Пречица на тастатури за отварање и затварање менија"
 
-#. 3.2 4.0
 msgid "Open menu on hover"
-msgstr ""
+msgstr "Отворите мени када пређете мишем"
 
-#. 3.2 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr ""
+msgstr "Отворите мени када померим миш преко иконе панела"
 
-#. 3.2 4.0
 msgid "milliseconds"
-msgstr ""
+msgstr "милисекунди"
 
-#. 3.2 4.0
 msgid "Menu hover delay"
-msgstr ""
+msgstr "Одлагање курсора менија"
 
-#. 3.2 4.0
 msgid "Use menu animations"
 msgstr "Користите анимације менија"
 
-#. 3.2 4.0
 msgid "Animate the menu on open and close"
-msgstr ""
+msgstr "Анимирајте мени на отварању и затварању"
 
-#. 3.2 4.0
 msgid "Activate categories on click"
-msgstr ""
+msgstr "Активирајте категорије кликом"
 
-#. 3.2 4.0
 msgid "Activate categories on click instead of on hover"
-msgstr ""
+msgstr "Активирајте категорије на клик уместо на курсор"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling"
-msgstr ""
+msgstr "Омогући аутоматско померање"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
-msgstr ""
+msgstr "Омогућите аутоматско померање на листи апликација"
 
-#. 3.2 4.0
 msgid "Show web bookmarks"
-msgstr ""
+msgstr "Прикажи веб обележиваче"
 
-#. 3.2 4.0
-msgid "Show your browser's web bookmarks in the menu"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
+"Прикажи веб обележиваче вашег претраживача у менију.\n"
+"Напомена: Инсталирајте пакет гир1.2-гда-5.0 да бисте читали фирефок обележиваче."
 
-#. 3.2
 msgid "Enable searching of open windows"
-msgstr ""
+msgstr "Омогућите претрагу отворених прозора"
 
-#. 3.2 4.0
 msgid "Enable search providers"
-msgstr ""
+msgstr "Омогућите добављаче претраге"
 
-#. 3.2 4.0
 msgid "Include search provider results in searches"
-msgstr ""
+msgstr "Укључите резултате добављача претраге у претраге"
 
-#. 3.2 4.0
 msgid "Example Search Providers"
-msgstr ""
+msgstr "Пример добављача претраге"
 
-#. 3.2
-#. 3.2
-msgid "Startup applications view mode"
-msgstr "Режим прегледа апликација за покретање"
+msgid "Open menu on category:"
+msgstr "Отворите мени у категорији:"
 
-#. 3.2 4.0
 msgid "List"
-msgstr ""
+msgstr "Листа"
 
-#. 3.2 4.0
 msgid "Grid"
-msgstr ""
+msgstr "Грид"
 
-#. 3.2 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Увек отворите мени са изабраном овом категоријом"
+
 msgid "columns"
-msgstr ""
+msgstr "колоне"
 
-#. 3.2 4.0
 msgid "Number of columns in apps grid"
-msgstr ""
+msgstr "Број колона у мрежи апликација"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places"
 msgstr "Прикажи ознаке и места"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places category in the menu"
-msgstr ""
+msgstr "Прикажи категорију обележивача и места у менију"
 
-#. 3.2 4.0
 msgid "Show application icons"
-msgstr ""
+msgstr "Прикажи иконе апликација"
 
-#. 3.2 4.0
 msgid "Show category icons"
 msgstr "Прикажи иконе категорије"
 
-#. 3.2
 msgid "Show application descriptions under titles"
-msgstr ""
+msgstr "Прикажи описе апликација под насловима"
 
-#. 3.2
 msgid "Show tooltips"
-msgstr ""
+msgstr "Прикажи описе алатки"
 
-#. 3.2
 msgid "Tooltip delay"
-msgstr ""
+msgstr "Кашњење у опису алатке"
 
-#. 3.2 4.0
 msgid "Use a custom menu height"
-msgstr ""
+msgstr "Користите прилагођену висину менија"
 
-#. 3.2 4.0
-msgid "px"
-msgstr ""
+msgid "Custom menu height (pixels)"
+msgstr "Прилагођена висина менија (пиксели)"
 
-#. 3.2 4.0
-msgid "Custom menu height"
-msgstr ""
-
-#. 4.0
 msgid "Applications view mode"
-msgstr ""
+msgstr "Режим прегледа апликација"
 
-#. 4.0
 msgid "View applications as list or grid"
 msgstr "View applications as list or grid"
 
-#. 4.0
 msgid "Application description placement"
-msgstr ""
+msgstr "Постављање описа апликације"
 
-#. 4.0
 msgid "Tooltips"
-msgstr ""
+msgstr "Описи алатки"
 
-#. 4.0
 msgid "Under titles"
-msgstr ""
+msgstr "Под насловима"
 
-#. 4.0
 msgid "None"
-msgstr ""
+msgstr "Ниједан"
 
-#. 4.0
 msgid "Choose where to show application descriptions"
-msgstr ""
+msgstr "Изаберите где ће се приказати описи апликација"
 
-#. 4.0
-msgid "Session buttons location"
-msgstr "Локација тастера за сесију"
+msgid "Sidebar location"
+msgstr "Локација бочне траке"
 
-#. 4.0
 msgid "Top"
-msgstr ""
+msgstr "Врх"
 
-#. 4.0
 msgid "Bottom"
-msgstr ""
+msgstr "Дно"
 
-#. 4.0
 msgid "Left"
-msgstr ""
+msgstr "Лево"
 
-#. 4.0
 msgid "Right"
-msgstr ""
+msgstr "десно"
 
-#. 4.0
-msgid "Choose where to show the session (quit, logout, etc.) buttons"
-msgstr ""
+msgid "Choose where to show the sidebar"
+msgstr "Изаберите где да се прикаже бочна трака"
 
-#. 4.0
-msgid "Add favorites to session buttons"
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
+"\n"
+"Информације/савет: Превуците ивицу менија да бисте променили величину менија.\n"
 
-#. 4.0
-msgid "Show your favorite app icons next to the session buttons"
+msgid "Show favorites on sidebar"
+msgstr "Прикажи фаворите на бочној траци"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Прикажите своје омиљене апликације и иконе датотека на бочној траци"
+
+msgid "Show recent items"
+msgstr "Прикажи недавне ставке"
+
+msgid "Show recent items category in the menu"
+msgstr "Прикажи категорију недавних ставки у менију"
+
+msgid "Show favorite apps category"
+msgstr "Прикажи категорију омиљених апликација"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Прикажите категорију омиљених апликација у менију"
+
+msgid "Show home folder"
+msgstr "Прикажи почетни фолдер"
+
+msgid "Show home folder category in the menu"
+msgstr "Прикажи категорију матичне фасцикле у менију"
+
+msgid "Last used category"
+msgstr "Последња коришћена категорија"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Аутоматско померање листе апликација при лебдењу мишем"
+
+msgid "Show hidden files"
+msgstr "Прикажи скривене датотеке"
+
+msgid "Show hidden files in folder view"
+msgstr "Прикажи скривене датотеке у приказу фолдера"
+
+msgid "Emoji search"
+msgstr "Претрага емоџија"
+
+msgid "Show emojis in search results"
+msgstr "Прикажи емоџије у резултатима претраге"
+
+msgid "Web search option"
+msgstr "Опција веб претраге"
+
+msgid "Show an internet search option in search results"
+msgstr "Прикажи опцију интернет претраге у резултатима претраге"
+
+msgid "Search home folder"
+msgstr "Претражите почетну фасциклу"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Када претражујете, такође потражите датотеке у мојој почетној фасцикли"
+
+msgid "Web history search"
+msgstr "Претрага веб историје"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
 msgstr ""
+"Када претражујете, такође претражите историју мог прегледача (Гоогле Цхроме, Цхромиум, Опера, Вивалди, Браве)\n"
+"Напомена: Фирефок историја тренутно није подржана."
+
+msgid "Web bookmarks search"
+msgstr "Претрага веб обележивача"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Када претражујете, такође претражите веб обележиваче мог прегледача (Гоогле Цхроме, Фирефок, Цхромиум, Опера, Вивалди, Браве)\n"
+"Напомена: Да бисте претраживали Фирефок обележиваче, мораћете да инсталирате пакет гир1.2-гда-5.0 (дистрибуције засноване на Дебиану, укључујући Убунту & Линук Минт) или пакет либгда (дистрибуције засноване на Арцх) и поново покрените рачунар."
+
+msgid "Wikipedia search"
+msgstr "Претрага на Википедији"
+
+msgid "Show some Wikipedia results"
+msgstr "Прикажи неке резултате Википедије"
+
+msgid "Wikipedia language"
+msgstr "Језик Википедије"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Напомена: Неке опције претраге и даље могу да се користе чак и ако их овде нисте омогућили тако што сте поставили префикс за термин за претрагу.\n"
+"На пример: да бисте тражили емоџи, откуцајте 'е хеарт' да бисте пронашли емоџије срца. Исто тако, користите префиксе 'ф' за претрагу датотека, 'х' за веб историју и 'б' за претрагу веб обележивача.\n"
+
+msgid "Use a custom icon size"
+msgstr "Користите прилагођену величину иконе"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Користите прилагођену величину за икону панела"
+
+msgid "Panel icon size (pixels)"
+msgstr "Величина иконе панела (пиксели)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Одаберите прилагођену величину иконе панела"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Величина иконе бочне траке (пиксели)"
+
+msgid "Use sidebar box style"
+msgstr "Користите стил бочне траке"
+
+msgid "Use a sidebar box style"
+msgstr "Користите стил бочне траке"
+
+msgid "Use tile style"
+msgstr "Користите стил плочица"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Користите стил плочице за дугмад апликације (Напомена: можда неће радити на неким темама)"

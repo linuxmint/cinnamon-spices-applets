@@ -130,7 +130,7 @@ class MyApplet extends Applet.TextIconApplet {
                         itemWidths.push(item.getWidth());
                     }
                 }
-                if (item instanceof MyPopupMenuItem) {
+                if (item instanceof MyPopupMenuItem || item instanceof MyPopupSeparatorMenuItem) {
                     this.menu.addMenuAppItem(item);
                 }
             });
@@ -1211,6 +1211,10 @@ class MyPopupSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
 
         cr.$dispose();
     }
+
+    // fix: let the seperator count like an item for editing
+    unselect() {}
+    isSelected() {}
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {

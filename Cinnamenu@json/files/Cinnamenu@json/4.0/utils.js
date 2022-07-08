@@ -6,7 +6,7 @@ const Lang = imports.lang;
 const St = imports.gi.St;
 const Main = imports.ui.main;
 const ByteArray = imports.byteArray;
-const {latinise, escapeRegExp} = imports.misc.util;
+const {escapeRegExp} = imports.misc.util;
 Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + '/.local/share/locale');
 
 function _(str) {
@@ -17,7 +17,10 @@ function _(str) {
     return Gettext.dgettext('Cinnamenu@json', str);
 }
 
-const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+)|\S+?(\s|$|-|=|\+)/g ).join('\n');
+const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+|_|&|\\)|\S+?(\s|$|-|=|\+|_|&|\\)/g ).join('\n');
+
+const graphemeBaseChars = s => //decompose and remove discritics.
+                s.normalize('NFKD').replace(/[\u0300-\u036f]/g, "");
 
 //===========================================================
 
@@ -94,7 +97,7 @@ class NewTooltip {
 
     show() {
         this.showTimer = null;
-        
+
         this.tooltip = new St.Label({
             name: 'Tooltip'
         });
@@ -140,8 +143,8 @@ const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => 
     const HIGHTLIGHT_MATCH = true;
     let foundPosition = 0;
     let foundLength = 0;
-    const str2 = latinise(str.toUpperCase());
-    //q is already latinise() & toUpperCase() in _doSearch()
+    const str2 = graphemeBaseChars(str).toLocaleUpperCase();
+    //q is already graphemeBaseChars() in _doSearch()
     let score = 0, bigrams_score = 0;
 
     if (new RegExp('\\b'+escapeRegExp(q)).test(str2)) { //match substring from beginning of words
@@ -199,4 +202,4 @@ const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => 
 
 
 
-module.exports = {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible, searchStr};
+module.exports = {_, wordWrap, graphemeBaseChars, getThumbnail_gicon, showTooltip, hideTooltipIfVisible, searchStr};

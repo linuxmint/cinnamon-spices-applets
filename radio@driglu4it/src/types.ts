@@ -370,5 +370,6 @@ type MprisMetadataDeepUnpacked = {
 }
 
 export type MprisMetadataRecursiveUnpacked = {
+    // @ts-ignore
     [P in keyof MprisMetadataDeepUnpacked]: ReturnType<MprisMetadataDeepUnpacked[P]['unpack']>
 }

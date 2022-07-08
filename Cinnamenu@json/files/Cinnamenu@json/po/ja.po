@@ -2,465 +2,597 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-18 23:08+0100\n"
-"Last-Translator: BALLOON a.k.a. Fu-sen. <fu-sen@shigakeiichi.com>\n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 05:50+0100\n"
+"Last-Translator: Google translate; BALLOON a.k.a. Fu-sen. <fu-sen@shigakeiichi.com>\n"
 "Language-Team: \n"
 "Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#. 3.2 4.0
 msgid "Type to search..."
 msgstr "入力して検索..."
 
-#. 3.2 4.0
 msgid "Initializing"
-msgstr ""
+msgstr "初期化中"
 
-#. 3.2 4.0
 msgid "No description available"
-msgstr ""
+msgstr "説明はありません"
 
-#. 3.2 4.0
-msgid "All Applications"
+msgid "All applications"
 msgstr "すべてのアプリケーション"
 
-#. 3.2 4.0
 msgid "Places"
 msgstr "場所"
 
-#. 3.2 4.0
-msgid "Recent Files"
+msgid "Recent files"
 msgstr "最近"
 
-#. 3.2 4.0
 msgid "Bookmarks"
-msgstr ""
+msgstr "ブックマーク"
 
-#. 3.2 4.0
-msgid "Favorite Apps"
-msgstr ""
+msgid "Favorite apps"
+msgstr "お気に入りのアプリ"
 
-#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr "FirefoxとMidoriのブックマークにはgir1.2-gda-5.0パッケージが必要です。"
 
-#. 3.2 4.0
 msgid "Clear List"
-msgstr ""
+msgstr "明確なリスト"
 
-#. 3.2 4.0
-msgid "No recent documents"
-msgstr ""
+msgid "No recent files"
+msgstr "最近のファイルはありません"
 
-#. 3.2
 msgid "Account details"
-msgstr ""
+msgstr "アカウント詳細"
 
-#. 3.2 3.2
 msgid "Grid View"
 msgstr "グリット一覧"
 
-#. 3.2 3.2
 msgid "List View"
 msgstr "リスト一覧"
 
-#. 3.2 3.2
 msgid "Switch to grid view"
-msgstr ""
+msgstr "グリッドビューに切り替えます"
 
-#. 3.2 3.2
 msgid "Switch to list view"
-msgstr ""
+msgstr "リストビューに切り替えます"
 
-#. 3.2 4.0
-msgid "Lock Screen"
+msgid "Lock screen"
 msgstr "画面ロック"
 
-#. 3.2 4.0
 msgid "Lock the screen"
-msgstr ""
+msgstr "画面をロックする"
 
-#. 3.2 4.0
 msgid "Logout"
-msgstr ""
+msgstr "ログアウト"
 
-#. 3.2 4.0
 msgid "Leave the session"
-msgstr ""
+msgstr "セッションを終了する"
 
-#. 3.2 4.0
 msgid "Quit"
-msgstr ""
+msgstr "終了する"
 
-#. 3.2 4.0
 msgid "Shutdown the computer"
-msgstr ""
+msgstr "コンピューターを終了させて​​下さい"
 
-#. 3.2 4.0
-msgid "Home"
-msgstr "ホーム"
-
-#. 3.2 4.0
-msgid "Computer"
-msgstr "コンピューター"
-
-#. 3.2 4.0
-msgid "Browse network"
-msgstr ""
-
-#. 3.2 4.0
 msgid "Run with NVIDIA GPU"
-msgstr ""
+msgstr "NVIDIAGPUで実行"
 
-#. 3.2 4.0
 msgid "Add to panel"
-msgstr ""
+msgstr "パネルに追加"
 
-#. 3.2 4.0
 msgid "Add to desktop"
-msgstr ""
+msgstr "デスクトップに追加"
 
-#. 3.2 4.0
-msgid "Remove favorite"
-msgstr ""
+msgid "Remove from favorites"
+msgstr "お気に入りから削除"
 
-#. 3.2 4.0
 msgid "Add to favorites"
-msgstr ""
+msgstr "お気に入りに追加"
 
-#. 3.2 4.0
 msgid "Uninstall"
 msgstr "アンインストール"
 
-#. 4.0 4.0
+msgid "Home"
+msgstr "ホーム"
+
+msgid "Computer"
+msgstr "コンピューター"
+
+msgid "Browse network"
+msgstr "ネットワークを閲覧する"
+
+msgid "Find files..."
+msgstr "ファイルを検索..."
+
 msgid "Please wait..."
-msgstr ""
+msgstr "お待ちください..."
 
-#. metadata.json->name
-#. 3.2
+msgid "Applications"
+msgstr "アプリケーション"
+
+msgid "Documents"
+msgstr "ドキュメント"
+
+msgid "Videos"
+msgstr "ビデオ"
+
+msgid "Images"
+msgstr "画像"
+
+msgid "Music"
+msgstr "音楽"
+
+msgid "No recent Items"
+msgstr "最近のアイテムはありません"
+
+msgid "Click to copy"
+msgstr "クリックしてコピー"
+
+msgid "Applications and files"
+msgstr "アプリケーションとファイル"
+
+msgid "Other search results"
+msgstr "その他の検索結果"
+
+msgid "Browser history"
+msgstr "ブラウザの履歴"
+
+msgid "Browser bookmarks"
+msgstr "ブラウザのブックマーク"
+
+msgid "Emoji"
+msgstr "絵文字"
+
+msgid "Trash"
+msgstr "ごみ"
+
+msgid "Error while opening file:"
+msgstr "ファイルを開く際のエラー："
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "エントリが多すぎます-最初の1000エントリのみを表示します"
+
+msgid "Favorites"
+msgstr "お気に入り"
+
+msgid "Recent"
+msgstr "最近"
+
+msgid "Home folder"
+msgstr "ホームフォルダ"
+
+msgid "Reset category order"
+msgstr "カテゴリの順序をリセット"
+
+msgid "light skin tone"
+msgstr "明るい肌のトーン"
+
+msgid "medium-light skin tone"
+msgstr "ミディアムライトスキントーン"
+
+msgid "medium skin tone"
+msgstr "ミディアムスキントーン"
+
+msgid "medium-dark skin tone"
+msgstr "ミディアムダークスキントーン"
+
+msgid "dark skin tone"
+msgstr "肌の色が濃い"
+
+msgid "This file is no longer available"
+msgstr "このファイルは使用できなくなりました"
+
+msgid "Open with"
+msgstr "で開く"
+
+msgid "Other application..."
+msgstr "その他のアプリケーション..."
+
+msgid "Open containing folder"
+msgstr "含まれているフォルダを開く"
+
+msgid "Move to trash"
+msgstr "ゴミ箱へ移動"
+
+msgid "Error while moving file to trash:"
+msgstr "ファイルをゴミ箱に移動中にエラーが発生しました："
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "このメニュー項目は、どのパッケージにも関連付けられていません。とにかくメニューから削除しますか？"
+
+msgid "The following packages will be removed:"
+msgstr "次のパッケージが削除されます。"
+
+msgid "Packages to be removed"
+msgstr "削除するパッケージ"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "他のパッケージで必要なため、パッケージ %s を削除できません。"
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "パッケージ %s は、次のパッケージの依存関係です。"
+
+msgid "Open"
+msgstr "開ける"
+
+msgid "Search"
+msgstr "探す"
+
+msgid "Start in"
+msgstr "で開始"
+
+msgid "Select a folder"
+msgstr "フォルダを選択します"
+
+msgid "Follow symlinks"
+msgstr "シンボリックリンクをたどる"
+
+msgid "Search hidden"
+msgstr "非表示の検索"
+
+msgid "Use regular expressions"
+msgstr "正規表現を使用する"
+
+msgid "Stop"
+msgstr "止まる"
+
+msgid "File"
+msgstr "ファイル"
+
+msgid "Path"
+msgstr "道"
+
+msgid "Searching..."
+msgstr "検索中..."
+
+msgid "Search Stopped"
+msgstr "検索が停止しました"
+
+msgid "Searching: "
+msgstr "検索： "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "エラー：フォルダを読み取るための十分な権限がありません "
+
+msgid "Search Completed"
+msgstr "検索が完了しました"
+
+msgid "Skipping"
+msgstr "スキップ"
+
+msgid " - directory already searched"
+msgstr " -ディレクトリはすでに検索されています"
+
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinnamenu"
 
-#. metadata.json->description
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
-msgstr ""
-"書式設定オプション、Webブックマーク、検索プロバイダーサポート、あいまい検索を"
-"提供する柔軟なメニュー。"
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "グリッドまたはリストのレイアウトオプション、ファイルブラウザ、絵文字検索を備えた柔軟なメニュー。"
 
-#. metadata.json->comments
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
-msgstr ""
-
-#. 3.2 4.0
 msgid "Behavior"
-msgstr ""
+msgstr "行動"
 
-#. 3.2 4.0
 msgid "Appearance"
-msgstr ""
+msgstr "外観"
 
-#. 3.2 4.0
 msgid "Layout and Content"
-msgstr ""
+msgstr "レイアウトとコンテンツ"
 
-#. 3.2
 msgid "Search Providers"
-msgstr ""
+msgstr "検索プロバイダー"
 
-#. 3.2
 msgid "No search provider extensions found"
-msgstr ""
+msgstr "検索プロバイダーの拡張機能が見つかりません"
 
-#. 3.2 4.0
 msgid "Panel"
-msgstr ""
+msgstr "パネル"
 
-#. 3.2 4.0
 msgid "Menu"
-msgstr ""
+msgstr "メニュー"
 
-#. 3.2 4.0
 msgid "Layout"
-msgstr ""
+msgstr "レイアウト"
 
-#. 3.2 4.0
 msgid "Content"
-msgstr ""
+msgstr "コンテンツ"
 
-#. 3.2 4.0
 msgid "Recent files settings"
 msgstr "最近のファイル設定"
 
-#. 3.2 4.0
 msgid "Open the menu editor"
-msgstr ""
+msgstr "メニューエディタを開きます"
 
-#. 3.2 4.0
-msgid "Reset category order"
-msgstr ""
-
-#. 3.2 4.0
 msgid "Use a custom icon"
 msgstr "カスタムアイコンを使用する"
 
-#. 3.2 4.0
 msgid "Use a custom icon in the panel"
-msgstr ""
+msgstr "パネルでカスタムアイコンを使用する"
 
-#. 3.2 4.0
 msgid "Panel icon"
-msgstr ""
+msgstr "パネルアイコン"
 
-#. 3.2 4.0
 msgid "Panel text"
-msgstr ""
+msgstr "パネルテキスト"
 
-#. 3.2 4.0
 msgid "Text to show beside the panel icon"
-msgstr ""
+msgstr "パネルアイコンの横に表示するテキスト"
 
-#. 3.2 4.0
-msgid "pixels"
-msgstr ""
+msgid "Category icon size (pixels)"
+msgstr "カテゴリアイコンのサイズ（ピクセル）"
 
-#. 3.2 4.0
-msgid "Category icon size"
-msgstr ""
+msgid "Applications list icon size (pixels)"
+msgstr "アプリケーションリストのアイコンサイズ（ピクセル）"
 
-#. 3.2 4.0
-msgid "Applications list icon size"
-msgstr ""
+msgid "Applications grid icon size (pixels)"
+msgstr "アプリケーショングリッドアイコンサイズ（ピクセル）"
 
-#. 3.2 4.0
-msgid "Applications grid icon size"
-msgstr ""
-
-#. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
-msgstr ""
+msgstr "メニューを開いたり閉じたりするためのキーボードショートカット"
 
-#. 3.2 4.0
 msgid "Open menu on hover"
-msgstr ""
+msgstr "ホバーでメニューを開く"
 
-#. 3.2 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr ""
+msgstr "パネルアイコンの上にマウスを移動するとメニューが開きます"
 
-#. 3.2 4.0
 msgid "milliseconds"
-msgstr ""
+msgstr "ミリ秒"
 
-#. 3.2 4.0
 msgid "Menu hover delay"
-msgstr ""
+msgstr "メニューホバー遅延"
 
-#. 3.2 4.0
 msgid "Use menu animations"
 msgstr "メニューアニメーションを使用する"
 
-#. 3.2 4.0
 msgid "Animate the menu on open and close"
-msgstr ""
+msgstr "開いた状態と閉じた状態でメニューをアニメーション化する"
 
-#. 3.2 4.0
 msgid "Activate categories on click"
-msgstr ""
+msgstr "クリック時にカテゴリをアクティブ化"
 
-#. 3.2 4.0
 msgid "Activate categories on click instead of on hover"
-msgstr ""
+msgstr "ホバーではなくクリックでカテゴリをアクティブ化する"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling"
-msgstr ""
+msgstr "自動スクロールを有効にする"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
-msgstr ""
+msgstr "アプリケーションリストで自動スクロールを有効にする"
 
-#. 3.2 4.0
 msgid "Show web bookmarks"
 msgstr "Webブックマークを表示"
 
-#. 3.2 4.0
-msgid "Show your browser's web bookmarks in the menu"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
+"メニューにブラウザのWebブックマークを表示します。\n"
+"注：Firefoxブックマークを読み取るには、パッケージgir1.2-gda-5.0をインストールしてください。"
 
-#. 3.2
 msgid "Enable searching of open windows"
-msgstr ""
+msgstr "開いているウィンドウの検索を有効にする"
 
-#. 3.2 4.0
 msgid "Enable search providers"
-msgstr ""
+msgstr "検索プロバイダーを有効にする"
 
-#. 3.2 4.0
 msgid "Include search provider results in searches"
 msgstr "検索プロバイダーの結果を検索に含める"
 
-#. 3.2 4.0
 msgid "Example Search Providers"
-msgstr ""
+msgstr "検索プロバイダーの例"
 
-#. 3.2
-msgid "Startup applications view mode"
-msgstr ""
+msgid "Open menu on category:"
+msgstr "カテゴリのメニューを開く："
 
-#. 3.2 4.0
 msgid "List"
 msgstr "リスト"
 
-#. 3.2 4.0
 msgid "Grid"
 msgstr "グリッド"
 
-#. 3.2 4.0
+msgid "Always open the menu with this category selected"
+msgstr "常にこのカテゴリを選択してメニューを開いてください"
+
 msgid "columns"
-msgstr ""
+msgstr "列"
 
-#. 3.2 4.0
 msgid "Number of columns in apps grid"
-msgstr ""
+msgstr "アプリグリッドの列数"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places"
 msgstr "ブックマークと場所を表示する"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places category in the menu"
 msgstr "メニューにブックマークと場所のカテゴリを表示する"
 
-#. 3.2 4.0
 msgid "Show application icons"
 msgstr "アプリケーションアイコンを表示する"
 
-#. 3.2 4.0
 msgid "Show category icons"
 msgstr "カテゴリアイコンを表示する"
 
-#. 3.2
 msgid "Show application descriptions under titles"
 msgstr "タイトルの下にアプリケーションの説明を表示する"
 
-#. 3.2
 msgid "Show tooltips"
-msgstr ""
+msgstr "ツールチップを表示する"
 
-#. 3.2
 msgid "Tooltip delay"
-msgstr ""
+msgstr "ツールチップの遅延"
 
-#. 3.2 4.0
 msgid "Use a custom menu height"
 msgstr "カスタムメニューの高さを使用する"
 
-#. 3.2 4.0
-msgid "px"
-msgstr ""
+msgid "Custom menu height (pixels)"
+msgstr "カスタムメニューの高さ（ピクセル）"
 
-#. 3.2 4.0
-msgid "Custom menu height"
-msgstr ""
-
-#. 4.0
 msgid "Applications view mode"
 msgstr "アプリケーション表示モード"
 
-#. 4.0
 msgid "View applications as list or grid"
-msgstr ""
+msgstr "アプリケーションをリストまたはグリッドとして表示"
 
-#. 4.0
 msgid "Application description placement"
 msgstr "アプリケーション記述の配置"
 
-#. 4.0
 msgid "Tooltips"
-msgstr ""
+msgstr "ツールチップ"
 
-#. 4.0
 msgid "Under titles"
 msgstr "タイトルの下"
 
-#. 4.0
 msgid "None"
-msgstr ""
+msgstr "なし"
 
-#. 4.0
 msgid "Choose where to show application descriptions"
 msgstr "アプリケーションの説明を表示する場所を選択してください"
 
-#. 4.0
-msgid "Session buttons location"
-msgstr ""
+msgid "Sidebar location"
+msgstr "サイドバーの位置"
 
-#. 4.0
 msgid "Top"
-msgstr ""
+msgstr "上"
 
-#. 4.0
 msgid "Bottom"
-msgstr ""
+msgstr "下"
 
-#. 4.0
 msgid "Left"
-msgstr ""
+msgstr "左"
 
-#. 4.0
 msgid "Right"
+msgstr "右"
+
+msgid "Choose where to show the sidebar"
+msgstr "サイドバーを表示する場所を選択します"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
+"\n"
+"情報/ヒント：メニューの端をドラッグしてメニューサイズを変更します。\n"
 
-#. 4.0
-msgid "Choose where to show the session (quit, logout, etc.) buttons"
+msgid "Show favorites on sidebar"
+msgstr "サイドバーにお気に入りを表示"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "お気に入りのアプリとファイルのアイコンをサイドバーに表示します"
+
+msgid "Show recent items"
+msgstr "最近のアイテムを表示する"
+
+msgid "Show recent items category in the menu"
+msgstr "メニューに最近のアイテムカテゴリを表示する"
+
+msgid "Show favorite apps category"
+msgstr "お気に入りのアプリのカテゴリを表示する"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "メニューにお気に入りのアプリのカテゴリを表示する"
+
+msgid "Show home folder"
+msgstr "ホームフォルダを表示する"
+
+msgid "Show home folder category in the menu"
+msgstr "メニューにホームフォルダのカテゴリを表示する"
+
+msgid "Last used category"
+msgstr "最後に使用したカテゴリ"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "マウスホバーでアプリケーションリストを自動スクロールします"
+
+msgid "Show hidden files"
+msgstr "非表示のファイルを表示する"
+
+msgid "Show hidden files in folder view"
+msgstr "フォルダビューで非表示のファイルを表示する"
+
+msgid "Emoji search"
+msgstr "絵文字検索"
+
+msgid "Show emojis in search results"
+msgstr "検索結果に絵文字を表示する"
+
+msgid "Web search option"
+msgstr "Web検索オプション"
+
+msgid "Show an internet search option in search results"
+msgstr "検索結果にインターネット検索オプションを表示する"
+
+msgid "Search home folder"
+msgstr "ホームフォルダを検索"
+
+msgid "When searching, also search my home folder for files"
+msgstr "検索するときは、ホームフォルダでファイルも検索してください"
+
+msgid "Web history search"
+msgstr "Web履歴検索"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
 msgstr ""
+"検索するときは、ブラウザの履歴（Google Chrome、Chromium、Opera、Vivaldi、Brave）も検索してください。\n"
+"注：Firefoxの履歴は現在サポートされていません。"
 
-#. 4.0
-msgid "Add favorites to session buttons"
+msgid "Web bookmarks search"
+msgstr "Webブックマーク検索"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
 msgstr ""
+"検索するときは、ブラウザのWebブックマーク（Google Chrome、Firefox、Chromium、Opera、Vivaldi、Brave）も検索します\n"
+"注：Firefoxブックマークを検索するには、パッケージgir1.2-gda-5.0（Debianベースのディストリビューションを含むUbuntu）をインストールする必要があります。 ＆Linux Mint）またはlibgda（Archベースのディストリビューション）をパッケージ化して、コンピューターを再起動します。"
 
-#. 4.0
-msgid "Show your favorite app icons next to the session buttons"
+msgid "Wikipedia search"
+msgstr "ウィキペディア検索"
+
+msgid "Show some Wikipedia results"
+msgstr "ウィキペディアの結果を表示する"
+
+msgid "Wikipedia language"
+msgstr "ウィキペディアの言語"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
 msgstr ""
+"\n"
+"注：ここで検索語の前に付けることで有効にしていない場合でも、一部の検索オプションを使用できます。\n"
+"例：絵文字を検索するには、「eheart」と入力してハートの絵文字を検索します。同様に、ファイル検索にはプレフィックス「f」、Web履歴には「h」、Webブックマーク検索には「b」を使用します。\n"
 
-#, fuzzy
-#~ msgid "Toggle recent files"
-#~ msgstr "最近"
+msgid "Use a custom icon size"
+msgstr "カスタムアイコンサイズを使用する"
 
-#, fuzzy
-#~ msgid "Choose whether or not bookmarks are indexed in the menu."
-#~ msgstr "メニューにブックマークと場所を表示するかどうかを選択します。"
+msgid "Use a custom size for the panel icon"
+msgstr "パネルアイコンにカスタムサイズを使用する"
 
-#, fuzzy
-#~ msgid "Choose whether or not open windows are indexed in menu searches."
-#~ msgstr "メニューにブックマークと場所を表示するかどうかを選択します。"
+msgid "Panel icon size (pixels)"
+msgstr "パネルアイコンのサイズ（ピクセル）"
 
-#~ msgid "Choose whether or not to show bookmarks and places in the menu."
-#~ msgstr "メニューにブックマークと場所を表示するかどうかを選択します。"
+msgid "Choose a custom size for the panel icon"
+msgstr "パネルアイコンのカスタムサイズを選択します"
 
-#~ msgid "Choose whether or not to show icons on applications."
-#~ msgstr "アプリケーションにアイコンを表示するかどうかを選択します。"
+msgid "Sidebar icon size (pixels)"
+msgstr "サイドバーアイコンのサイズ（ピクセル）"
 
-#~ msgid "Choose whether or not to show icons on categories."
-#~ msgstr "カテゴリにアイコンを表示するかどうかを選択します。"
+msgid "Use sidebar box style"
+msgstr "サイドバーボックススタイルを使用"
 
-#~ msgid ""
-#~ "Choose whether or not to show the application description on the "
-#~ "application buttons."
-#~ msgstr ""
-#~ "アプリケーションボタンにアプリケーションの説明を表示するかどうかを選択しま"
-#~ "す。"
+msgid "Use a sidebar box style"
+msgstr "サイドバーボックススタイルを使用する"
 
-#~ msgid "Enable filesystem path entry in search box"
-#~ msgstr "検索ボックスでファイルシステムのパスエントリを有効にする"
+msgid "Use tile style"
+msgstr "タイルスタイルを使用する"
 
-#~ msgid "Allows path entry in the menu search box."
-#~ msgstr "メニュー検索ボックスのパス入力を許可します。"
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "アプリケーションボタンにタイルスタイルを使用します（注：一部のテーマでは機能しない場合があります）"

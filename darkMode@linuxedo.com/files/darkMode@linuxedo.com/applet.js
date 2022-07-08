@@ -282,8 +282,14 @@ MyApplet.prototype = {
         this.window_border_themes = {};
         let local_themes_dir = Gio.File.new_for_path(LOCAL_THEMES_DIR);
         let local_icons_dir = Gio.File.new_for_path(LOCAL_ICONS_DIR);
-        FileUtils.listDirAsync(local_themes_dir, Lang.bind(this, this.collect_local_themes));
-        FileUtils.listDirAsync(local_icons_dir, Lang.bind(this, this.collect_local_icons));
+
+        if (local_themes_dir.query_exists(null)) {
+            FileUtils.listDirAsync(local_themes_dir, Lang.bind(this, this.collect_local_themes));
+        }
+
+        if (local_icons_dir.query_exists(null)) {
+            FileUtils.listDirAsync(local_icons_dir, Lang.bind(this, this.collect_local_icons));
+        }
     },
 
     change_mode_automatically: function () {

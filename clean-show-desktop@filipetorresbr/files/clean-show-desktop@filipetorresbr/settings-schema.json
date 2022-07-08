@@ -40,7 +40,7 @@
  },
  "width": {
     "type": "scale",
-    "default" : 1,
+    "default" : 2,
     "min" : 1,
     "max" : 10,
     "step" : 1,
@@ -70,7 +70,7 @@
  },
   "custom-color":{
     "type" : "switch",
-    "default" : "false",
+    "default" : false,
     "description" : "Customize the applet colors",
     "tooltip" : "When this option is disabled, the applet will try to find the theme color"
  },

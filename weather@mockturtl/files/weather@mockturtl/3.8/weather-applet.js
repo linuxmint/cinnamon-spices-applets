@@ -131,6 +131,10 @@ var weatherApplet;
 
   function hourAngle(h, phi, d) {
     return acos((sin(h) - sin(phi) * sin(d)) / (cos(phi) * cos(d)));
+  }
+
+  function observerAngle(height) {
+    return -2.076 * Math.sqrt(height) / 60;
   } // returns set time for the given sun altitude
 
 
@@ -138,12 +142,15 @@ var weatherApplet;
     var w = hourAngle(h, phi, dec),
         a = approxTransit(w, lw, n);
     return solarTransitJ(a, M, L);
-  } // calculates sun times for a given date and latitude/longitude
+  } // calculates sun times for a given date, latitude/longitude, and, optionally,
+  // the observer height (in meters) relative to the horizon
 
 
-  SunCalc.getTimes = function (date, lat, lng) {
+  SunCalc.getTimes = function (date, lat, lng, height) {
+    height = height || 0;
     var lw = rad * -lng,
         phi = rad * lat,
+        dh = observerAngle(height),
         d = toDays(date),
         n = julianCycle(d, lw),
         ds = approxTransit(0, lw, n),
@@ -154,6 +161,7 @@ var weatherApplet;
         i,
         len,
         time,
+        h0,
         Jset,
         Jrise;
     var result = {
@@ -163,7 +171,8 @@ var weatherApplet;
 
     for (i = 0, len = times.length; i < len; i += 1) {
       time = times[i];
-      Jset = getSetJ(time[0] * rad, lw, phi, dec, n, M, L);
+      h0 = (time[0] + dh) * rad;
+      Jset = getSetJ(h0, lw, phi, dec, n, M, L);
       Jrise = Jnoon - (Jset - Jnoon);
       result[time[1]] = fromJulian(Jrise);
       result[time[2]] = fromJulian(Jset);
@@ -9705,7 +9714,7 @@ class MetUk extends BaseProvider {
                 type: "hard",
                 userError: true,
                 detail: "location not covered",
-                message: "MET Office UK only covers the UK, please make sure your location is in the country",
+                message: _("MET Office UK only covers the UK, please make sure your location is in the country"),
                 service: "met-uk"
             });
             return null;
@@ -9799,7 +9808,13 @@ class MetUk extends BaseProvider {
                     city: undefined,
                     country: undefined,
                     timeZone: undefined,
-                    distanceFrom: this.observationSites[dataIndex].dist
+                },
+                stationInfo: {
+                    distanceFrom: this.observationSites[dataIndex].dist,
+                    name: this.observationSites[dataIndex].name,
+                    area: this.observationSites[dataIndex].unitaryAuthArea,
+                    lat: parseFloat(this.observationSites[dataIndex].latitude),
+                    lon: parseFloat(this.observationSites[dataIndex].longitude),
                 },
                 date: DateTime.fromISO(json[dataIndex].SiteRep.DV.dataDate, { zone: loc.timeZone }),
                 sunrise: DateTime.fromJSDate(times.sunrise, { zone: loc.timeZone }),
@@ -12489,7 +12504,10 @@ class USWeather extends BaseProvider {
                     country: undefined,
                     url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
                     timeZone: this.observationStations[0].properties.timeZone,
-                    distanceFrom: this.observationStations[0].dist
+                },
+                stationInfo: {
+                    distanceFrom: this.observationStations[0].dist,
+                    name: this.observationStations[0].properties.name,
                 },
                 date: timestamp,
                 sunrise: suntimes.sunrise,
@@ -13788,7 +13806,310 @@ class AccuWeather extends BaseProvider {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/deutscherWetterdienst.ts
+
+
+
+
+class DeutscherWetterdienst extends BaseProvider {
+    constructor() {
+        super(...arguments);
+        this.needsApiKey = false;
+        this.prettyName = _("Deutscher Wetterdienst");
+        this.name = "DeutscherWetterdienst";
+        this.maxForecastSupport = 10;
+        this.maxHourlyForecastSupport = 240;
+        this.website = "https://www.dwd.de/DE/Home/home_node.html";
+        this.remainingCalls = null;
+        this.baseUrl = "https://api.brightsky.dev/";
+        this.HandleErrors = (message) => {
+            var _a;
+            if (((_a = message.Response) === null || _a === void 0 ? void 0 : _a.status_code) == 404) {
+                this.app.ShowError({
+                    detail: "location not covered",
+                    message: _("Please select a different provider or location"),
+                    userError: true,
+                    type: "hard"
+                });
+                return true;
+            }
+            return false;
+        };
+    }
+    async GetWeather(loc) {
+        var _a, _b, _c;
+        const [current, hourly] = await Promise.all([
+            this.app.LoadJsonAsync(`${this.baseUrl}current_weather`, this.GetDefaultParams(loc), this.HandleErrors),
+            this.app.LoadJsonAsync(`${this.baseUrl}weather`, this.GetHourlyParams(loc), this.HandleErrors)
+        ]);
+        if (current == null || hourly == null)
+            return null;
+        const currentTime = DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone);
+        const sunTimes = (0,suncalc.getTimes)(currentTime.toJSDate(), loc.lat, loc.lon);
+        const mainSource = (_a = current.sources.find(source => source.id == current.weather.source_id)) !== null && _a !== void 0 ? _a : current.sources[0];
+        return {
+            date: DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone),
+            location: {
+                city: (_b = current.sources[0].station_name) !== null && _b !== void 0 ? _b : loc.city,
+                country: loc.country,
+                timeZone: loc.timeZone,
+            },
+            coord: {
+                lon: loc.lon,
+                lat: loc.lat,
+            },
+            sunrise: DateTime.fromJSDate(sunTimes.sunrise).setZone(loc.timeZone),
+            sunset: DateTime.fromJSDate(sunTimes.sunset).setZone(loc.timeZone),
+            condition: this.IconToInfo(current.weather.icon),
+            wind: {
+                degree: current.weather.wind_direction_10,
+                speed: current.weather.wind_speed_10
+            },
+            temperature: current.weather.temperature,
+            pressure: current.weather.pressure_msl ? (current.weather.pressure_msl / 100) : null,
+            humidity: current.weather.relative_humidity,
+            dewPoint: current.weather.dew_point,
+            stationInfo: {
+                distanceFrom: mainSource.distance,
+                lat: mainSource.lat,
+                lon: mainSource.lon,
+                name: (_c = mainSource.station_name) !== null && _c !== void 0 ? _c : undefined
+            },
+            forecasts: this.ParseForecast(current, hourly, loc),
+            hourlyForecasts: this.ParseHourlyForecast(hourly, loc)
+        };
+    }
+    ParseForecast(current, forecast, loc) {
+        const result = [];
+        const days = this.SplitToDays(forecast, loc);
+        for (const day of days) {
+            let tempMax = -Infinity;
+            let tempMin = Infinity;
+            let conditions = [];
+            let time = null;
+            for (const hour of day) {
+                if (time == null)
+                    time = DateTime.fromISO(hour.timestamp).setZone(loc.timeZone);
+                if (hour.icon != null)
+                    conditions.push(hour.icon);
+                if (hour.temperature != null) {
+                    tempMax = Math.max(tempMax, hour.temperature);
+                    tempMin = Math.min(tempMin, hour.temperature);
+                }
+            }
+            if (time == null || tempMin == Infinity || tempMax == -Infinity)
+                break;
+            result.push({
+                date: time.set({ hour: 12, minute: 0, second: 0, millisecond: 0 }),
+                temp_max: tempMax,
+                temp_min: tempMin,
+                condition: this.CalculateDayCondition(conditions)
+            });
+        }
+        return result;
+    }
+    SplitToDays(forecast, loc) {
+        const now = DateTime.now().setZone(loc.timeZone).set({ minute: 0, second: 0, millisecond: 0 });
+        const days = [];
+        let prevTimeStamp = now;
+        let currentDay = [];
+        for (const hour of forecast.weather) {
+            const time = DateTime.fromISO(hour.timestamp).setZone(loc.timeZone);
+            if (time < now)
+                continue;
+            if (prevTimeStamp.hasSame(time, "day")) {
+                currentDay.push(hour);
+            }
+            else {
+                days.push(currentDay);
+                currentDay = [];
+                currentDay.push(hour);
+            }
+            prevTimeStamp = time;
+        }
+        if (currentDay.length > 0)
+            days.push(currentDay);
+        return days;
+    }
+    CalculateDayCondition(conditions) {
+        if (conditions.length == 0)
+            return {
+                main: _("Unknown"),
+                description: _("Unknown"),
+                icons: [],
+                customIcon: "cloud-refresh-symbolic"
+            };
+        for (let i = 0; i < conditions.length; i++) {
+            const condition = conditions[i];
+            if (condition == "clear-night")
+                conditions[i] = "clear-day";
+            if (condition == "partly-cloudy-night")
+                conditions[i] = "partly-cloudy-day";
+        }
+        const severeWeathers = {};
+        const regularWeather = {};
+        const regularConditions = ["clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night"];
+        for (const condition of conditions) {
+            if (regularConditions.includes(condition))
+                regularWeather[condition] == null ? regularWeather[condition] = 0 : regularWeather[condition]++;
+            else
+                severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]++;
+        }
+        const conditionsToCount = Object.keys(severeWeathers).length > 0 ? severeWeathers : regularWeather;
+        const mostFrequentCondition = Object.entries(conditionsToCount).reduce((p, c) => p[1] > c[1] ? p : c)[0];
+        return this.IconToInfo(mostFrequentCondition);
+    }
+    ParseHourlyForecast(forecast, loc) {
+        const now = DateTime.now().setZone(loc.timeZone).set({ minute: 0, second: 0, millisecond: 0 });
+        const result = [];
+        for (const hour of forecast.weather) {
+            const time = DateTime.fromISO(hour.timestamp).setZone(loc.timeZone);
+            if (time < now)
+                continue;
+            const data = {
+                condition: this.IconToInfo(hour.icon),
+                date: time,
+                temp: hour.temperature,
+            };
+            if (hour.precipitation != null && hour.precipitation > 0 && hour.condition != null && ["snow", "rain"].includes(hour.condition)) {
+                data.precipitation = {
+                    volume: hour.precipitation,
+                    type: this.DWDConditionToPrecipType(hour.condition)
+                };
+            }
+            result.push(data);
+        }
+        return result;
+    }
+    DWDConditionToPrecipType(condition) {
+        switch (condition) {
+            case "dry":
+            case "fog":
+            case "thunderstorm":
+                return "none";
+            case "rain":
+                return "rain";
+            case "snow":
+                return "snow";
+            case "hail":
+                return "ice pellets";
+            case "sleet":
+                return "freezing rain";
+        }
+    }
+    IconToInfo(icon) {
+        switch (icon) {
+            case "clear-day":
+                return {
+                    main: _("Clear"),
+                    description: _("Clear"),
+                    icons: ["weather-clear"],
+                    customIcon: "day-sunny-symbolic"
+                };
+            case "clear-night":
+                return {
+                    main: _("Clear"),
+                    description: _("Clear"),
+                    icons: ["weather-clear-night"],
+                    customIcon: "night-clear-symbolic"
+                };
+            case "cloudy":
+                return {
+                    main: _("Cloudy"),
+                    description: _("Cloudy"),
+                    icons: ["weather-overcast"],
+                    customIcon: "cloudy-symbolic"
+                };
+            case "fog":
+                return {
+                    main: _("Fog"),
+                    description: _("Fog"),
+                    icons: ["weather-fog"],
+                    customIcon: "fog-symbolic"
+                };
+            case "hail":
+                return {
+                    main: _("Hail"),
+                    description: _("Hail"),
+                    icons: ["weather-freezing-rain"],
+                    customIcon: "hail-symbolic"
+                };
+            case "partly-cloudy-day":
+                return {
+                    main: _("Partly Cloudy"),
+                    description: _("Partly Cloudy"),
+                    icons: ["weather-few-clouds"],
+                    customIcon: "day-cloudy-symbolic"
+                };
+            case "partly-cloudy-night":
+                return {
+                    main: _("Partly Cloudy"),
+                    description: _("Partly Cloudy"),
+                    icons: ["weather-few-clouds-night"],
+                    customIcon: "night-cloudy-symbolic"
+                };
+            case "rain":
+                return {
+                    main: _("Rain"),
+                    description: _("Rain"),
+                    icons: ["weather-rain", "weather-showers", "weather-showers-scattered"],
+                    customIcon: "rain-symbolic"
+                };
+            case "sleet":
+                return {
+                    main: _("Sleet"),
+                    description: _("Sleet"),
+                    icons: ["weather-rain", "weather-showers", "weather-showers-scattered"],
+                    customIcon: "sleet-symbolic"
+                };
+            case "snow":
+                return {
+                    main: _("Snow"),
+                    description: _("Snow"),
+                    icons: ["weather-snow"],
+                    customIcon: "snow-symbolic"
+                };
+            case "thunderstorm":
+                return {
+                    main: _("Thunderstorm"),
+                    description: _("Thunderstorm"),
+                    icons: ["weather-storm"],
+                    customIcon: "thunderstorm-symbolic"
+                };
+            case "wind":
+                return {
+                    main: _("Wind"),
+                    description: _("Wind"),
+                    icons: ["weather-windy", "weather-breeze"],
+                    customIcon: "windy-symbolic"
+                };
+            default:
+                return {
+                    main: _("Unknown"),
+                    description: _("Unknown"),
+                    icons: [],
+                    customIcon: "cloud-refresh-symbolic"
+                };
+        }
+    }
+    GetDefaultParams(loc) {
+        return {
+            lat: loc.lat,
+            lon: loc.lon,
+            units: "si"
+        };
+    }
+    GetHourlyParams(loc) {
+        const params = this.GetDefaultParams(loc);
+        const date = loc.timeZone ? DateTime.now().setZone(loc.timeZone) : DateTime.now();
+        params.date = date.toISO();
+        params.last_date = date.plus({ days: 10 }).toISO();
+        return params;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
 
 
 
@@ -13825,7 +14146,8 @@ const ServiceClassMapping = {
     "US Weather": (app) => new USWeather(app),
     "Visual Crossing": (app) => new VisualCrossing(app),
     "DanishMI": (app) => new DanishMI(app),
-    "AccuWeather": (app) => new AccuWeather(app)
+    "AccuWeather": (app) => new AccuWeather(app),
+    "DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app)
 };
 const Keys = {
     DATA_SERVICE: "dataService",
@@ -14899,6 +15221,7 @@ class UIForecasts {
 
 
 const { PolicyType } = imports.gi.Gtk;
+const { ScrollDirection } = imports.gi.Clutter;
 const { addTween } = imports.ui.tweener;
 const { BoxLayout: uiHourlyForecasts_BoxLayout, Side, Label: uiHourlyForecasts_Label, ScrollView, Icon: uiHourlyForecasts_Icon, Align: uiHourlyForecasts_Align } = imports.gi.St;
 class UIHourlyForecasts {
@@ -14915,12 +15238,23 @@ class UIHourlyForecasts {
             y_align: uiHourlyForecasts_Align.MIDDLE,
             x_align: uiHourlyForecasts_Align.MIDDLE
         });
-        const vScroll = this.actor.get_vscroll_bar();
-        vScroll.connect("scroll-start", () => { menu.passEvents = true; });
-        vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
         const hScroll = this.actor.get_hscroll_bar();
         hScroll.connect("scroll-start", () => { menu.passEvents = true; });
         hScroll.connect("scroll-stop", () => { menu.passEvents = false; });
+        const vScroll = this.actor.get_vscroll_bar();
+        vScroll.connect("scroll-start", () => { menu.passEvents = true; });
+        vScroll.connect("scroll-stop", () => { menu.passEvents = false; });
+        this.actor.connect("scroll-event", (owner, event) => {
+            const adjustment = hScroll.get_adjustment();
+            const direction = event.get_scroll_direction();
+            const newVal = adjustment.get_value() +
+                (direction === ScrollDirection.UP ? -adjustment.step_increment : adjustment.step_increment);
+            if (global.settings.get_boolean("desktop-effects-on-menus"))
+                addTween(adjustment, { value: newVal, time: 0.25 });
+            else
+                adjustment.set_value(newVal);
+            return false;
+        });
         this.actor.hide();
         this.actor.set_clip_to_allocation(true);
         this.container = new uiHourlyForecasts_BoxLayout({ style_class: "hourly-box" });
@@ -14929,21 +15263,33 @@ class UIHourlyForecasts {
     get Toggled() {
         return this.hourlyToggled;
     }
-    ScrollTo(date) {
+    get CurrentScrollIndex() {
+        return this.actor.get_hscroll_bar().get_adjustment().get_value();
+    }
+    DateToScrollIndex(date) {
         if (this.hourlyForecastDates == null)
-            return;
+            return null;
         const itemWidth = this.GetHourlyBoxItemWidth();
         let midnightIndex = null;
         for (let index = 0; index < this.hourlyForecastDates.length; index++) {
             if (OnSameDay(this.hourlyForecastDates[index], date))
                 midnightIndex = index;
             if (OnSameDay(this.hourlyForecastDates[index].minus({ hours: 6 }), date)) {
-                this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
-                break;
+                return index * itemWidth;
             }
         }
         if (midnightIndex != null)
-            this.actor.get_hscroll_bar().get_adjustment().set_value(midnightIndex * itemWidth);
+            return midnightIndex * itemWidth;
+        return null;
+    }
+    ScrollTo(index, animate = true) {
+        const adjustment = this.actor.get_hscroll_bar().get_adjustment();
+        const [, lower, upper, , , page_size] = adjustment.get_values();
+        index = Math.max(Math.min(index, upper - page_size), lower);
+        if (global.settings.get_boolean("desktop-effects-on-menus") && animate)
+            addTween(adjustment, { value: index, time: 0.25 });
+        else
+            adjustment.set_value(index);
     }
     UpdateIconType(iconType) {
         if (!this.hourlyForecasts)
@@ -15169,11 +15515,16 @@ class UIHourlyForecasts {
 
 
 
-const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label, Icon: uiBar_Icon, Align: uiBar_Align, } = imports.gi.St;
+const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button } = imports.gi.St;
+const { Tooltip } = imports.ui.tooltips;
 const STYLE_BAR = 'bottombar';
 class UIBar {
     constructor(app) {
         this.ToggleClicked = new Event();
+        this.providerCreditButton = null;
+        this.hourlyButton = null;
+        this._timestamp = null;
+        this.timestampTooltip = null;
         this.app = app;
         this.actor = new uiBar_BoxLayout({ vertical: false, style_class: STYLE_BAR });
     }
@@ -15191,9 +15542,14 @@ class UIBar {
             this.hourlyButton.actor.child.icon_name = "custom-up-arrow-symbolic";
     }
     DisplayErrorMessage(msg) {
-        this._timestamp.text = msg;
+        if (this._timestamp == null)
+            return;
+        this._timestamp.label = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
+        var _a, _b, _c, _d, _e, _f, _g;
+        if (this._timestamp == null || this.providerCreditButton == null || ((_c = (_a = this.providerCreditButton) === null || _a === void 0 ? void 0 : (_b = _a.actor).is_finalized) === null || _c === void 0 ? void 0 : _c.call(_b)))
+            return false;
         let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
         if (provider.remainingCalls != null) {
             creditLabel += ` (${provider.remainingCalls})`;
@@ -15201,24 +15557,35 @@ class UIBar {
         this.providerCreditButton.actor.label = creditLabel;
         this.providerCreditButton.url = provider.website;
         const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
-        this._timestamp.text = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
-        if (weather.location.distanceFrom != null) {
+        this._timestamp.label = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
+        if (((_d = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _d === void 0 ? void 0 : _d.distanceFrom) != null) {
             const stringFormat = {
-                distance: MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
+                distance: MetreToUserUnits(weather.stationInfo.distanceFrom, config.DistanceUnit).toString(),
                 distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
             };
-            this._timestamp.text += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
+            this._timestamp.label += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
         }
+        let tooltipText = "";
+        if (((_e = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _e === void 0 ? void 0 : _e.name) != null)
+            tooltipText = _("Station Name: {stationName}", { stationName: weather.stationInfo.name });
+        if (((_f = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _f === void 0 ? void 0 : _f.area) != null) {
+            tooltipText += ", ";
+            tooltipText += _("Area: {stationArea}", { stationArea: weather.stationInfo.area });
+        }
+        (_g = this.timestampTooltip) === null || _g === void 0 ? void 0 : _g.set_text(tooltipText);
         if (!shouldShowToggle || config._alwaysShowHourlyWeather)
             this.HideHourlyToggle();
         return true;
     }
     Destroy() {
+        var _a;
         this.actor.destroy_all_children();
+        (_a = this.timestampTooltip) === null || _a === void 0 ? void 0 : _a.destroy();
     }
     Rebuild(config) {
         this.Destroy();
-        this._timestamp = new uiBar_Label({ text: "Placeholder" });
+        this._timestamp = new uiBar_Button({ label: "Placeholder" });
+        this.timestampTooltip = new Tooltip(this._timestamp, "");
         this.actor.add(this._timestamp, {
             x_fill: false,
             x_align: uiBar_Align.START,
@@ -15304,7 +15671,6 @@ const STYLE_WEATHER_MENU = 'weather-menu';
 class UI {
     constructor(app, orientation) {
         this.lightTheme = false;
-        this.lastDateToggled = undefined;
         this.noHourlyWeather = false;
         this.App = app;
         this.menuManager = new PopupMenuManager(this.App);
@@ -15437,15 +15803,16 @@ class UI {
         }));
     }
     async OnDayClicked(sender, date) {
-        var _a;
-        if (!this.HourlyWeather.Toggled)
+        const wasOpen = this.HourlyWeather.Toggled;
+        if (!wasOpen)
             await this.ShowHourlyWeather();
-        else if ((_a = this.lastDateToggled) === null || _a === void 0 ? void 0 : _a.equals(date)) {
+        const newIndex = this.HourlyWeather.DateToScrollIndex(date);
+        if (wasOpen && newIndex == this.HourlyWeather.CurrentScrollIndex) {
             await this.HideHourlyWeather();
             return;
         }
-        this.HourlyWeather.ScrollTo(date);
-        this.lastDateToggled = date;
+        if (newIndex != null)
+            this.HourlyWeather.ScrollTo(newIndex, wasOpen);
     }
     async ShowHourlyWeather(animate = true) {
         this.HourlySeparator.Show();
@@ -15454,14 +15821,12 @@ class UI {
     }
     async HideHourlyWeather(animate = true) {
         if (this.App.config._alwaysShowHourlyWeather) {
-            this.lastDateToggled = undefined;
             this.HourlyWeather.ResetScroll();
             return;
         }
         await this.ForceHideHourlyWeather(animate);
     }
     async ForceHideHourlyWeather(animate = true) {
-        this.lastDateToggled = undefined;
         this.HourlySeparator.Hide();
         this.Bar.SwitchButtonToShow();
         await this.HourlyWeather.Hide(animate);

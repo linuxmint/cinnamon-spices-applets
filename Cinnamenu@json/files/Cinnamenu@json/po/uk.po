@@ -8,255 +8,248 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-18 21:43+0000\n"
-"PO-Revision-Date: 2022-01-20 16:04+0000\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2022-05-31 17:40+0100\n"
+"Last-Translator: Google translate\n"
 "Language-Team: \n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "Initializing"
-msgstr ""
+msgstr "Ініціалізація"
 
 msgid "Find files..."
-msgstr ""
+msgstr "Знайти файли..."
 
 msgid "Please wait..."
-msgstr ""
+msgstr "Будь ласка, зачекайте..."
 
 msgid "No recent Items"
-msgstr ""
+msgstr "Немає останніх елементів"
 
 msgid "Click to copy"
-msgstr ""
+msgstr "Натисніть, щоб скопіювати"
 
 msgid "Clear List"
-msgstr ""
+msgstr "Чіткий перелік"
 
 msgid "Trash"
-msgstr ""
+msgstr "покидьки"
 
 msgid "All applications"
 msgstr "Усі програми"
 
 msgid "Favorites"
-msgstr ""
+msgstr "Вибране"
 
 msgid "Places"
-msgstr ""
+msgstr "Місця"
 
-#, fuzzy
-#| msgid "Recent Files"
 msgid "Recent"
-msgstr "Останні файли"
+msgstr "Останні"
 
 msgid "Favorite apps"
-msgstr ""
+msgstr "Улюблені програми"
 
 msgid "Home folder"
-msgstr ""
+msgstr "Домашня папка"
 
 msgid "Too many entries - showing first 1000 entries only"
-msgstr ""
+msgstr "Забагато записів – показуються лише перші 1000 записів"
 
 msgid "Quit"
-msgstr ""
+msgstr "Вийти"
 
 msgid "Shutdown the computer"
-msgstr ""
+msgstr "Вимкніть комп’ютер"
 
 msgid "Logout"
-msgstr ""
+msgstr "Вийти"
 
 msgid "Leave the session"
-msgstr ""
+msgstr "Залиште сесію"
 
 msgid "Lock screen"
-msgstr ""
+msgstr "Екран блокування"
 
 msgid "Lock the screen"
-msgstr ""
+msgstr "Заблокувати екран"
 
 msgid "Reset category order"
-msgstr ""
+msgstr "Скинути порядок категорій"
 
 msgid "light skin tone"
-msgstr ""
+msgstr "світлий тон шкіри"
 
 msgid "medium-light skin tone"
-msgstr ""
+msgstr "середньо-світлий тон шкіри"
 
 msgid "medium skin tone"
-msgstr ""
+msgstr "середній тон шкіри"
 
 msgid "medium-dark skin tone"
-msgstr ""
+msgstr "середньо-темний тон шкіри"
 
 msgid "dark skin tone"
-msgstr ""
+msgstr "темний тон шкіри"
 
 msgid "Run with NVIDIA GPU"
-msgstr ""
+msgstr "Запуск із графічним процесором NVIDIA"
 
 msgid "Add to panel"
-msgstr ""
+msgstr "Додати на панель"
 
 msgid "Add to desktop"
-msgstr ""
+msgstr "Додати на робочий стіл"
 
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Видалити з вибраного"
 
 msgid "Add to favorites"
-msgstr ""
+msgstr "Додати в обране"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Видалити"
 
 msgid "This file is no longer available"
-msgstr ""
+msgstr "Цей файл більше не доступний"
 
 msgid "Open with"
-msgstr ""
+msgstr "Відкрити за допомогою"
 
 msgid "Other application..."
-msgstr ""
+msgstr "Інша програма..."
 
 msgid "Open containing folder"
-msgstr ""
+msgstr "Відкрити папку, що містить"
 
 msgid "Move to trash"
-msgstr ""
+msgstr "Перемістити в кошик"
 
 msgid "Error while moving file to trash:"
-msgstr ""
+msgstr "Помилка під час переміщення файлу в кошик:"
 
 msgid "Error while opening file:"
-msgstr ""
+msgstr "Помилка під час відкриття файлу:"
 
 msgid "Type to search..."
-msgstr ""
+msgstr "Введіть для пошуку..."
 
 msgid "No description available"
-msgstr ""
+msgstr "Немає опису"
 
 msgid "Recent files"
 msgstr "Останні файли"
 
 msgid "Bookmarks"
-msgstr ""
+msgstr "Закладки"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr ""
+msgstr "Для закладок Firefox і Midori потрібен пакет gir1.2-gda-5.0."
 
 msgid "No recent files"
-msgstr ""
+msgstr "Немає останніх файлів"
 
 msgid "Account details"
-msgstr ""
+msgstr "Дані облікового запису"
 
 msgid "Grid View"
-msgstr ""
+msgstr "Перегляд сітки"
 
 msgid "List View"
-msgstr ""
+msgstr "Перегляд списку"
 
 msgid "Switch to grid view"
-msgstr ""
+msgstr "Перейти до перегляду сітки"
 
 msgid "Switch to list view"
-msgstr ""
+msgstr "Перейти до перегляду списку"
 
 msgid "Home"
-msgstr ""
+msgstr "Додому"
 
 msgid "Computer"
-msgstr ""
+msgstr "комп'ютер"
 
 msgid "Browse network"
-msgstr ""
+msgstr "Перегляд мережі"
 
-msgid ""
-"This menu item is not associated to any package. Do you want to remove it "
-"from the menu anyway?"
-msgstr ""
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Цей пункт меню не пов’язаний з жодним пакетом. Ви все одно хочете видалити його з меню?"
 
 msgid "The following packages will be removed:"
-msgstr ""
+msgstr "Наступні пакети будуть видалені:"
 
 msgid "Packages to be removed"
-msgstr ""
+msgstr "Пакети для видалення"
 
 #, python-format
 msgid "Cannot remove package %s as it is required by other packages."
-msgstr ""
+msgstr "Неможливо видалити пакет %s, оскільки цього вимагають інші пакунки."
 
 #, python-format
 msgid "Package %s is a dependency of the following packages:"
-msgstr ""
+msgstr "Пакет %s є залежністю від наступних пакетів:"
 
 msgid "Open"
-msgstr ""
+msgstr "ВІДЧИНЕНО"
 
 msgid "Search"
-msgstr ""
+msgstr "Пошук"
 
 msgid "Start in"
-msgstr ""
+msgstr "Почніть в"
 
 msgid "Select a folder"
-msgstr ""
+msgstr "Виберіть папку"
 
 msgid "Follow symlinks"
-msgstr ""
+msgstr "Дотримуйтесь символічних посилань"
 
 msgid "Search hidden"
-msgstr ""
+msgstr "Пошук прихований"
 
 msgid "Use regular expressions"
-msgstr ""
+msgstr "Використовуйте регулярні вирази"
 
 msgid "Stop"
-msgstr ""
+msgstr "СТОП"
 
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 msgid "Path"
-msgstr ""
+msgstr "Шлях"
 
 msgid "Searching..."
-msgstr ""
+msgstr "Пошук..."
 
 msgid "Search Stopped"
-msgstr ""
+msgstr "Пошук зупинено"
 
 msgid "Searching: "
-msgstr ""
+msgstr "Пошук: "
 
 msgid "Error: insufficient permissions to read folder "
-msgstr ""
+msgstr "Помилка: недостатньо дозволів для читання папки "
 
 msgid "Search Completed"
-msgstr ""
+msgstr "Пошук завершено"
 
 msgid "Skipping"
-msgstr ""
+msgstr "Пропуск"
 
 msgid " - directory already searched"
-msgstr ""
+msgstr " - каталог уже шукали"
 
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinnamenu"
 
-msgid ""
-"A flexible menu with grid or list layout options, file browser and emoji "
-"search."
-msgstr ""
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Гнучке меню з параметрами макета сітки або списку, браузером файлів і пошуком смайлів."
 
 msgid "Layout and Content"
 msgstr "Макет і зміст"
@@ -265,315 +258,298 @@ msgid "Behavior"
 msgstr "Поведінка"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Зовнішній вигляд"
 
 msgid "Layout"
-msgstr ""
+msgstr "Макет"
 
 msgid "Content"
-msgstr ""
+msgstr "Зміст"
 
 msgid "Panel"
-msgstr ""
+msgstr "Панель"
 
 msgid "Menu"
-msgstr ""
+msgstr "Меню"
 
 msgid "Applications view mode"
-msgstr ""
+msgstr "Режим перегляду програм"
 
 msgid "List"
-msgstr ""
+msgstr "Список"
 
 msgid "Grid"
 msgstr "Сітка"
 
 msgid "View applications as list or grid"
-msgstr ""
+msgstr "Перегляд програм у вигляді списку або сітки"
 
 msgid "Application description placement"
-msgstr ""
+msgstr "Розміщення опису програми"
 
 msgid "Tooltips"
-msgstr ""
+msgstr "Підказки"
 
 msgid "Under titles"
-msgstr ""
+msgstr "Під заголовками"
 
 msgid "None"
-msgstr ""
+msgstr "Жодного"
 
 msgid "Choose where to show application descriptions"
-msgstr ""
+msgstr "Виберіть, де показувати описи програми"
 
-#, fuzzy
-#| msgid "Session buttons location"
 msgid "Sidebar location"
-msgstr "Розташування кнопок сесії"
+msgstr "Розташування бічної панелі"
 
 msgid "Top"
-msgstr ""
+msgstr "Верхній"
 
 msgid "Bottom"
-msgstr ""
+msgstr "Нижня частина"
 
 msgid "Left"
-msgstr ""
+msgstr "Ліворуч"
 
 msgid "Right"
-msgstr ""
+msgstr "направо"
 
-#, fuzzy
-#| msgid "Choose where to show the session (quit, logout, etc.) buttons"
 msgid "Choose where to show the sidebar"
-msgstr "Виберіть, де відображати кнопки сеансу (вихід, вихід із системи тощо)"
+msgstr "Виберіть, де відображати бічну панель"
 
 msgid ""
 "\n"
 "Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
+"\n"
+"Інформація/порада: перетягніть край меню, щоб змінити розмір меню.\n"
 
 msgid "Show favorites on sidebar"
-msgstr ""
+msgstr "Показати вибране на бічній панелі"
 
 msgid "Show your favorite app and file icons on the sidebar"
-msgstr ""
+msgstr "Покажіть свої улюблені програми та значки файлів на бічній панелі"
 
 msgid "Show bookmarks and places"
-msgstr ""
+msgstr "Показати закладки та місця"
 
 msgid "Show bookmarks and places category in the menu"
-msgstr ""
+msgstr "Показати закладки та категорію місць у меню"
 
 msgid "Show recent items"
-msgstr ""
+msgstr "Показати останні елементи"
 
 msgid "Show recent items category in the menu"
-msgstr ""
+msgstr "Показати категорію останніх елементів у меню"
 
 msgid "Show favorite apps category"
-msgstr ""
+msgstr "Показати категорію улюблених програм"
 
 msgid "Show your favorite apps category in the menu"
-msgstr ""
+msgstr "Покажіть у меню категорію улюблених програм"
 
 msgid "Show home folder"
-msgstr ""
+msgstr "Показати домашню папку"
 
 msgid "Show home folder category in the menu"
-msgstr ""
+msgstr "Показати категорію домашньої папки в меню"
 
 msgid "Open the menu editor"
 msgstr "Відкрийте редактор меню"
 
 msgid "Keyboard shortcut to open and close the menu"
-msgstr ""
+msgstr "Комбінація клавіш для відкриття та закриття меню"
 
 msgid "Open menu on hover"
-msgstr ""
+msgstr "Відкрийте меню при наведенні курсора"
 
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr ""
+msgstr "Відкривати меню, коли я наводжу курсор на піктограму панелі"
 
 msgid "milliseconds"
-msgstr ""
+msgstr "мілісекунд"
 
 msgid "Menu hover delay"
-msgstr ""
+msgstr "Затримка наведення курсора меню"
 
 msgid "Use menu animations"
-msgstr ""
+msgstr "Використовуйте анімацію меню"
 
 msgid "Animate the menu on open and close"
-msgstr ""
+msgstr "Анімація меню при відкритті та закритті"
 
 msgid "Activate categories on click"
 msgstr "Активуйте категорії при натисканні"
 
 msgid "Activate categories on click instead of on hover"
-msgstr ""
+msgstr "Активуйте категорії при натисканні замість наведення"
 
 msgid "Open menu on category:"
-msgstr ""
+msgstr "Відкрити меню по категорії:"
 
 msgid "Always open the menu with this category selected"
-msgstr ""
+msgstr "Завжди відкривайте меню з вибраною категорією"
 
 msgid "Last used category"
-msgstr ""
+msgstr "Остання використана категорія"
 
 msgid "Enable autoscrolling"
 msgstr "Увімкнути автоматичне прокручування"
 
 msgid "Autoscroll the application list on mouse hover"
-msgstr ""
+msgstr "Автоматична прокрутка списку програм при наведенні миші"
 
 msgid "Show hidden files"
-msgstr ""
+msgstr "Показати приховані файли"
 
 msgid "Show hidden files in folder view"
-msgstr ""
+msgstr "Показати приховані файли в режимі перегляду папок"
 
 msgid "Emoji search"
-msgstr ""
+msgstr "Пошук Emoji"
 
 msgid "Show emojis in search results"
-msgstr ""
+msgstr "Показувати смайли в результатах пошуку"
 
 msgid "Web search option"
-msgstr ""
+msgstr "Опція веб-пошуку"
 
 msgid "Show an internet search option in search results"
-msgstr ""
+msgstr "Показати варіант пошуку в Інтернеті в результатах пошуку"
 
 msgid "Search home folder"
-msgstr ""
+msgstr "Пошук у домашній папці"
 
 msgid "When searching, also search my home folder for files"
-msgstr ""
+msgstr "Під час пошуку також шукайте файли в моїй домашній папці"
 
 msgid "Web bookmarks search"
-msgstr ""
+msgstr "Пошук веб-закладок"
 
 msgid ""
-"When searching, also search my browser's web bookmarks (Google Chrome, "
-"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Note: To search Firefox bookmarks you will need to install package gir1.2-"
-"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
-"libgda (Arch based distributions) and restart your computer."
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
 msgstr ""
+"Під час пошуку також виконуйте пошук у веб-закладках мого веб-переглядача (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Примітка: для пошуку закладок Firefox вам потрібно буде встановити пакет gir1.2-gda-5.0 (дистрибутиви на базі Debian, включаючи Ubuntu & Linux Mint) або запакуйте libgda (дистрибутиви на основі Arch) і перезавантажте комп’ютер."
 
 msgid "Wikipedia search"
-msgstr ""
+msgstr "Пошук у Вікіпедії"
 
 msgid "Show some Wikipedia results"
-msgstr ""
+msgstr "Покажіть деякі результати Вікіпедії"
 
 msgid "Wikipedia language"
-msgstr ""
+msgstr "Мова Вікіпедії"
 
 msgid "Use a custom icon"
-msgstr ""
+msgstr "Використовуйте спеціальний значок"
 
 msgid "Use a custom icon in the panel"
-msgstr ""
+msgstr "Використовуйте спеціальний значок на панелі"
 
 msgid "Panel icon"
-msgstr ""
+msgstr "Значок панелі"
 
 msgid "Use a custom icon size"
-msgstr ""
+msgstr "Використовуйте власний розмір значка"
 
 msgid "Use a custom size for the panel icon"
-msgstr ""
+msgstr "Використовуйте спеціальний розмір для значка панелі"
 
 msgid "Panel icon size (pixels)"
-msgstr ""
+msgstr "Розмір значка панелі (пікселі)"
 
 msgid "Choose a custom size for the panel icon"
-msgstr ""
+msgstr "Виберіть власний розмір для значка панелі"
 
 msgid "Panel text"
-msgstr ""
+msgstr "Текст панелі"
 
 msgid "Text to show beside the panel icon"
-msgstr ""
+msgstr "Текст, який відображатиметься біля значка панелі"
 
 msgid "Category icon size (pixels)"
-msgstr ""
+msgstr "Розмір значка категорії (пікселі)"
 
 msgid "Applications list icon size (pixels)"
-msgstr ""
+msgstr "Розмір значка списку програм (пікселі)"
 
-#, fuzzy
-#| msgid "Applications grid icon size"
 msgid "Applications grid icon size (pixels)"
-msgstr "Розмір піктограми сітки програм"
+msgstr "Розмір значка сітки програм (пікселі)"
 
 msgid "Sidebar icon size (pixels)"
-msgstr ""
+msgstr "Розмір значка бічної панелі (пікселі)"
 
 msgid "Use sidebar box style"
-msgstr ""
+msgstr "Використовуйте стиль бічної панелі"
 
 msgid "Use a sidebar box style"
-msgstr ""
+msgstr "Використовуйте стиль бічної панелі"
 
 msgid "Use tile style"
-msgstr ""
+msgstr "Використовуйте стиль плитки"
 
-msgid ""
-"Use a tile style for the application buttons (Note: may not work on some "
-"themes)"
-msgstr ""
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Використовуйте стиль плитки для кнопок програми (Примітка: для деяких тем може не працювати)"
 
 msgid "Search Providers"
-msgstr ""
+msgstr "Пошук провайдерів"
 
 msgid "No search provider extensions found"
-msgstr ""
+msgstr "Розширень постачальника пошуку не знайдено"
 
 msgid "Recent files settings"
-msgstr ""
+msgstr "Налаштування останніх файлів"
 
 msgid "Enable autoscrolling in application list"
-msgstr ""
+msgstr "Увімкнути автопрокрутку в списку програм"
 
 msgid "Show web bookmarks"
-msgstr ""
+msgstr "Показати веб-закладки"
 
 msgid ""
 "Show your browser's web bookmarks in the menu.\n"
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
+"Показуйте веб-закладки вашого браузера в меню.\n"
+"Примітка: встановіть пакет gir1.2-gda-5.0, щоб прочитати закладки firefox."
 
 msgid "Enable searching of open windows"
-msgstr ""
+msgstr "Увімкнути пошук відкритих вікон"
 
 msgid "Enable search providers"
-msgstr ""
+msgstr "Увімкніть пошукових постачальників"
 
 msgid "Include search provider results in searches"
-msgstr ""
+msgstr "Включіть результати пошукового постачальника в пошукові запити"
 
 msgid "Example Search Providers"
-msgstr ""
+msgstr "Приклад пошукових постачальників"
 
 msgid "columns"
-msgstr ""
+msgstr "колонки"
 
 msgid "Number of columns in apps grid"
-msgstr ""
+msgstr "Кількість стовпців у сітці програм"
 
 msgid "Show application icons"
-msgstr ""
+msgstr "Показати значки програм"
 
 msgid "Show category icons"
-msgstr ""
+msgstr "Показати значки категорій"
 
 msgid "Show application descriptions under titles"
-msgstr ""
+msgstr "Показуйте описи програм під заголовками"
 
 msgid "Show tooltips"
-msgstr ""
+msgstr "Показати підказки"
 
 msgid "Tooltip delay"
-msgstr ""
+msgstr "Затримка підказки"
 
 msgid "Use a custom menu height"
-msgstr ""
+msgstr "Використовуйте спеціальну висоту меню"
 
-#, fuzzy
-#| msgid "Custom menu height"
 msgid "Custom menu height (pixels)"
-msgstr "Спеціальна висота меню"
-
-#~ msgid ""
-#~ "A flexible menu providing formatting options, web bookmarks, search "
-#~ "provider support and fuzzy searching."
-#~ msgstr ""
-#~ "Гнучке меню, що пропонує параметри форматування, веб-закладок, підтримку "
-#~ "постачальника пошуку та нечіткий пошук."
-
-#~ msgid "Add favorites to session buttons"
-#~ msgstr "Додати вибране до кнопок сеансу"
+msgstr "Висота спеціального меню (пікселі)"

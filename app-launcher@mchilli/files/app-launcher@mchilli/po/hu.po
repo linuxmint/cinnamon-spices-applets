@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-22 22:11+0100\n"
-"PO-Revision-Date: 2021-12-23 09:05+0100\n"
+"POT-Creation-Date: 2022-04-18 11:06+0200\n"
+"PO-Revision-Date: 2022-05-25 15:32+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -105,14 +105,18 @@ msgid "Edit selected entry"
 msgstr "Kijelölt bejegyzés szerkesztése"
 
 #: widgets.py:141
+msgid "Duplicate selected entry"
+msgstr "Kijelölt bejegyzés másolása"
+
+#: widgets.py:147
 msgid "Move selected entry up"
 msgstr "Kijelölt bejegyzés mozgatása fel"
 
-#: widgets.py:147
+#: widgets.py:153
 msgid "Move selected entry down"
 msgstr "Kijelölt bejegyzés mozgatása le"
 
-#: widgets.py:304
+#: widgets.py:316
 msgid "Separator"
 msgstr "Elválasztó"
 
@@ -183,7 +187,9 @@ msgstr "Rögzített szélességű menü"
 
 #. settings-schema.json->fixed-menu-width->tooltip
 msgid "Based on the largest submenu item, to prevent menu width flickering"
-msgstr "A legszélesebb almenü alapján kiválasztott szélességgel elkerülhető menü urgálása"
+msgstr ""
+"A legszélesebb almenü alapján kiválasztott szélességgel elkerülhető menü "
+"urgálása"
 
 #. settings-schema.json->visible-app-icons->description
 msgid "Show Application Icons"

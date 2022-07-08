@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 21:08+0000\n"
-"PO-Revision-Date: 2021-03-25 21:16+0000\n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-28 04:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "Type to search..."
 msgstr "Kirjoita haku..."
@@ -84,15 +84,6 @@ msgstr "Lopeta"
 msgid "Shutdown the computer"
 msgstr "Sammuta tietokone"
 
-msgid "Home"
-msgstr "Koti"
-
-msgid "Computer"
-msgstr "Tietokone"
-
-msgid "Browse network"
-msgstr "Selaa verkkoa"
-
 msgid "Run with NVIDIA GPU"
 msgstr "Suorita NVIDIA GPU:lla"
 
@@ -111,23 +102,65 @@ msgstr "Lisää suosikkeihin"
 msgid "Uninstall"
 msgstr "Asennuksen poisto"
 
+msgid "Home"
+msgstr "Koti"
+
+msgid "Computer"
+msgstr "Tietokone"
+
+msgid "Browse network"
+msgstr "Selaa verkkoa"
+
 msgid "Find files..."
 msgstr "Hae tiedostoja..."
 
 msgid "Please wait..."
 msgstr "Odota hetki..."
 
+msgid "Applications"
+msgstr "Sovellukset"
+
+msgid "Documents"
+msgstr "Asiakirjat"
+
+msgid "Videos"
+msgstr "Videot"
+
+msgid "Images"
+msgstr "kuvat"
+
+msgid "Music"
+msgstr "Musiikki"
+
 msgid "No recent Items"
 msgstr "Ei viimeaikaisia tuotteita"
-
-msgid "Solution:"
-msgstr "Ratkaisu:"
 
 msgid "Click to copy"
 msgstr "Kopioi napsauttamalla"
 
-msgid "Search web for"
-msgstr "Hae verkosta"
+msgid "Applications and files"
+msgstr "Sovellukset ja tiedostot"
+
+msgid "Other search results"
+msgstr "Muut hakutulokset"
+
+msgid "Browser history"
+msgstr "Selaimen historia"
+
+msgid "Browser bookmarks"
+msgstr "Selaimen kirjanmerkit"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Trash"
+msgstr "Roskakori"
+
+msgid "Error while opening file:"
+msgstr "Virhe avattaessa tiedostoa:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Liian monta - vain ensimmäiset 1000 näytetään"
 
 msgid "Favorites"
 msgstr "Suosikit"
@@ -138,11 +171,23 @@ msgstr "Viimeaikaiset"
 msgid "Home folder"
 msgstr "Koti"
 
-msgid "Too many entries - showing first 1000 entries only"
-msgstr "Liian monta - vain ensimmäiset 1000 näytetään"
-
 msgid "Reset category order"
 msgstr "Nollaa järjestys"
+
+msgid "light skin tone"
+msgstr "vaalea ihonsävy"
+
+msgid "medium-light skin tone"
+msgstr "keskivaalea ihonsävy"
+
+msgid "medium skin tone"
+msgstr "keskisävyinen iho"
+
+msgid "medium-dark skin tone"
+msgstr "keskitumman ihon sävy"
+
+msgid "dark skin tone"
+msgstr "tumma ihonsävy"
 
 msgid "This file is no longer available"
 msgstr "Tämä tiedosto ei ole enää saatavilla"
@@ -162,8 +207,22 @@ msgstr "Siirrä roskakoriin"
 msgid "Error while moving file to trash:"
 msgstr "Virhe siirrettäessä tiedostoa roskakoriin:"
 
-msgid "Error while opening file:"
-msgstr ""
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Tätä valikkokohtaa ei ole liitetty mihinkään pakettiin. Haluatko silti poistaa sen valikosta?"
+
+msgid "The following packages will be removed:"
+msgstr "Seuraavat paketit poistetaan:"
+
+msgid "Packages to be removed"
+msgstr "Poistettavat paketit"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Pakettia %s ei voi poistaa, koska muut paketit vaativat sitä."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Paketti %s on riippuvainen seuraavista paketeista:"
 
 msgid "Open"
 msgstr "Avaa"
@@ -219,12 +278,8 @@ msgstr " - hakemisto jo haettu"
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
-msgstr ""
-"Valikko, joka tarjoaa joustavat asetukset, kirjanmerkit, hakupalvelun ja "
-"sumeaa tiedotojen hakua."
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Joustava valikko, jossa on ruudukko- tai luetteloasetteluvaihtoehdot, tiedostoselain ja emojihaku."
 
 msgid "Behavior"
 msgstr "Käyttäytyminen"
@@ -274,17 +329,14 @@ msgstr "Paneelin teksti"
 msgid "Text to show beside the panel icon"
 msgstr "Kuvakkeen vieressä näkyvä teksti"
 
-msgid "pixels"
-msgstr "pikseliä"
+msgid "Category icon size (pixels)"
+msgstr "Luokkakuvakkeen koko (pikseliä)"
 
-msgid "Category icon size"
-msgstr "Ryhmän kuvakekoko"
+msgid "Applications list icon size (pixels)"
+msgstr "Sovellusluettelon kuvakkeen koko (pikseliä)"
 
-msgid "Applications list icon size"
-msgstr "Ohjelmien kuvakekoko luettelona"
-
-msgid "Applications grid icon size"
-msgstr "Ohjelmien kuvakekoko ruudukossa"
+msgid "Applications grid icon size (pixels)"
+msgstr "Sovellusruudukon kuvakkeen koko (pikseliä)"
 
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Valikon avaa ja sulje pikanäppäin"
@@ -383,8 +435,8 @@ msgstr "Työkaluvinkin viive"
 msgid "Use a custom menu height"
 msgstr "Käytä mukautettua valikon korkeutta"
 
-msgid "Custom menu height"
-msgstr "Muokatun valikon korkeus"
+msgid "Custom menu height (pixels)"
+msgstr "Muokattu valikon korkeus (pikseliä)"
 
 msgid "Applications view mode"
 msgstr "Sovellukset näytetään"
@@ -407,8 +459,8 @@ msgstr "Ei mitään"
 msgid "Choose where to show application descriptions"
 msgstr "Valitse, missä sovellusten kuvaukset näytetään"
 
-msgid "Session buttons location"
-msgstr "Sijainti Istunnon painikkeille"
+msgid "Sidebar location"
+msgstr "Sivupalkin sijainti"
 
 msgid "Top"
 msgstr "Ylös"
@@ -422,9 +474,8 @@ msgstr "Vasen"
 msgid "Right"
 msgstr "Oikea"
 
-msgid "Choose where to show the session buttons (quit, logout, etc.)"
-msgstr ""
-"Valitse missä näytetään istunnon painikkeet (lopeta, kirjaudu ulos, jne.)"
+msgid "Choose where to show the sidebar"
+msgstr "Valitse, missä sivupalkki näytetään"
 
 msgid ""
 "\n"
@@ -433,11 +484,17 @@ msgstr ""
 "\n"
 " Vihje/vinkki: Muuta valikon kokoa vetämällä valikon reunaa.\n"
 
-msgid "Add favorites to session buttons"
-msgstr "Lisää suosikit istunnon painikkeisiin"
+msgid "Show favorites on sidebar"
+msgstr "Näytä suosikit sivupalkissa"
 
-msgid "Show your favorite app icons next to the session buttons"
-msgstr "Näytä suositut sovellukset kuvake istunnon painikkeiden vieressä"
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Näytä suosikkisovelluksesi ja -tiedostosi kuvakkeet sivupalkissa"
+
+msgid "Show recent items"
+msgstr "Näytä viimeisimmät kohteet"
+
+msgid "Show recent items category in the menu"
+msgstr "Näytä viimeisimpien kohteiden luokka valikossa"
 
 msgid "Show favorite apps category"
 msgstr "Näytä suositut sovellukset"
@@ -457,8 +514,14 @@ msgstr "Viimeksi käytetty luokka"
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Vieritä sovelluslistaa automaattisesti hiiren osoittimen kohdalla"
 
-msgid "Enable emoji search"
-msgstr "Emojien haku"
+msgid "Show hidden files"
+msgstr "Näytä piilotiedostot"
+
+msgid "Show hidden files in folder view"
+msgstr "Näytä piilotetut tiedostot kansioissa"
+
+msgid "Emoji search"
+msgstr "Emoji-haku"
 
 msgid "Show emojis in search results"
 msgstr "Näytä emojit hakutuloksissa"
@@ -466,32 +529,52 @@ msgstr "Näytä emojit hakutuloksissa"
 msgid "Web search option"
 msgstr "Hakupalvelun vaihtoehdot"
 
-msgid "Google"
-msgstr "Google"
-
-msgid "Bing"
-msgstr "Bing"
-
-msgid "Yahoo"
-msgstr "Yahoo"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
 msgid "Show an internet search option in search results"
 msgstr "Näytä hakupalvelun vaihtoehdot hakutuloksissa"
 
 msgid "Search home folder"
 msgstr "Hae kotikansiosta"
 
-msgid "When searching, also search home folder for files"
+msgid "When searching, also search my home folder for files"
 msgstr "Haettaessa etsi myös tiedostoja kotikansiosta"
 
-msgid "Show hidden files"
-msgstr "Näytä piilotiedostot"
+msgid "Web history search"
+msgstr "Verkkohistorian haku"
 
-msgid "Show hidden files in folder view"
-msgstr "Näytä piilotetut tiedostot kansioissa"
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Kun haet, tee hakuja myös selaimeni historiasta (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Huomaa: Firefoxin historiaa ei tueta tällä hetkellä."
+
+msgid "Web bookmarks search"
+msgstr "Verkkokirjanmerkkihaku"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Kun haet, tee hakuja myös selaimeni verkkokirjanmerkeistä (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Huomaa: Jotta voit etsiä Firefoxin kirjanmerkkejä, sinun on asennettava paketti gir1.2-gda-5.0 (Debian-pohjaiset jakelut, mukaan lukien Ubuntu & Linux Mint) tai pakkaa libgda (Arch-pohjaiset jakelut) ja käynnistä tietokone uudelleen."
+
+msgid "Wikipedia search"
+msgstr "Wikipedia haku"
+
+msgid "Show some Wikipedia results"
+msgstr "Näytä joitain Wikipedia-tuloksia"
+
+msgid "Wikipedia language"
+msgstr "Wikipedian kieli"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Huomaa: Joitakin hakuvaihtoehtoja voidaan silti käyttää, vaikka et olisi ottanut niitä käyttöön tässä etuliiteellä hakutermiäsi.\n"
+"Esimerkiksi: jos haluat etsiä hymiötä, kirjoita e sydän löytääksesi sydänemojit. Käytä samoin etuliitteitä 'f' tiedostohakuun, 'h' verkkohistoriaan ja 'b' verkkokirjanmerkkihakuun.\n"
 
 msgid "Use a custom icon size"
 msgstr "Mukauta kuvakeen kokoa"
@@ -499,16 +582,23 @@ msgstr "Mukauta kuvakeen kokoa"
 msgid "Use a custom size for the panel icon"
 msgstr "Mukauta kokoa paneelin kuvakkeessa"
 
-msgid "Panel icon size"
-msgstr "Paneelin kuvakkeen koko"
+msgid "Panel icon size (pixels)"
+msgstr "Paneelin kuvakkeen koko (pikseliä)"
 
 msgid "Choose a custom size for the panel icon"
 msgstr "Valitse mukautettu koko paneelin kuvakkeeseen"
 
-msgid "Session buttons icon size"
-msgstr "Istunnon painikkeiden kuvakekoko"
+msgid "Sidebar icon size (pixels)"
+msgstr "Sivupalkin kuvakkeen koko (pikseliä)"
 
-msgid "Use session buttons box style"
-msgstr "Lokeroidut painikkeet istunnon tyylissä"
+msgid "Use sidebar box style"
+msgstr "Käytä sivupalkin laatikkotyyliä"
 
+msgid "Use a sidebar box style"
+msgstr "Käytä sivupalkin laatikkotyyliä"
 
+msgid "Use tile style"
+msgstr "Käytä laatatyyliä"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Käytä sovelluspainikkeissa laatatyyliä (Huomaa: ei ehkä toimi joissain teemoissa)"

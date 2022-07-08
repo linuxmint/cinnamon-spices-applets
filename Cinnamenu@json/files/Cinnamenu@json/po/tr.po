@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu 3.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 15:40+0000\n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
 "Language-Team: tr\n"
@@ -138,6 +138,15 @@ msgstr "Uygulamalar ve dosyalar"
 msgid "Other search results"
 msgstr "Diğer arama sonuçları"
 
+msgid "Browser history"
+msgstr "Tarayıcı geçmişi"
+
+msgid "Browser bookmarks"
+msgstr "Tarayıcı yer imleri"
+
+msgid "Emoji"
+msgstr "İmoji"
+
 msgid "Trash"
 msgstr "Çöp"
 
@@ -207,8 +216,7 @@ msgstr "Kaldırılacak paketler"
 
 #, python-format
 msgid "Cannot remove package %s as it is required by other packages."
-msgstr ""
-"%s paketi diğer paketler tarafından gerekli olduğu için kaldırılamaz. "
+msgstr "%s paketi diğer paketler tarafından gerekli olduğu için kaldırılamaz. "
 
 #, python-format
 msgid "Package %s is a dependency of the following packages:"
@@ -535,6 +543,18 @@ msgstr "Ev dizininde ara"
 msgid "When searching, also search my home folder for files"
 msgstr "Arama yaparken, ev dizininde de dosya araması yapar"
 
+msgid "Web history search"
+msgstr "Web geçmişinde ara"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Arama yaparken, tarayıcının geçmişinde de ara (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Not: Firefox geçmişi şu anda desteklenmemektedir."
+
 msgid "Web bookmarks search"
 msgstr "Web sık kullanılanlarında ara"
 
@@ -560,6 +580,22 @@ msgstr "Bazı Wikipedia sonuçlarını gösterir"
 
 msgid "Wikipedia language"
 msgstr "Wikipedia dili"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Not: Bazı arama seçeneklerini arama teriminizin önüne ekleyerek; bunlar için "
+"arama pasif olsa bile arama yapabilirsiniz.\n"
+"Örneğin: Bir emojiyi aramak için, kalp emojilerini bulmak amacıyla 'e heart' "
+"yazın. Benzer şekilde, dosya araması için 'f', tarayıcı geçmişinde arama "
+"için 'h' ve tarayıcı yer imlerinde arama için 'b' öneklerini "
+"kullanabilirsiniz.\n"
 
 msgid "Use a custom icon size"
 msgstr "Özel simge boyutu kullan"

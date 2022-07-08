@@ -1,0 +1,604 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 17:15+0100\n"
+"Last-Translator: Google translate\n"
+"Language-Team: \n"
+"Language: sw\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Type to search..."
+msgstr "Andika ili kutafuta..."
+
+msgid "Initializing"
+msgstr "Kuanzisha"
+
+msgid "No description available"
+msgstr "Hakuna maelezo yanayopatikana"
+
+msgid "All applications"
+msgstr "Maombi yote"
+
+msgid "Places"
+msgstr "Maeneo"
+
+msgid "Recent files"
+msgstr "Faili za hivi majuzi"
+
+msgid "Bookmarks"
+msgstr "Alamisho"
+
+msgid "Favorite apps"
+msgstr "Programu unazopenda"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0 kifurushi kinachohitajika kwa alamisho za Firefox na Midori."
+
+msgid "Clear List"
+msgstr "Orodha ya wazi"
+
+msgid "No recent files"
+msgstr "Hakuna faili za hivi majuzi"
+
+msgid "Account details"
+msgstr "Maelezo ya akaunti"
+
+msgid "Grid View"
+msgstr "Mwonekano wa Gridi"
+
+msgid "List View"
+msgstr "Mwonekano wa Orodha"
+
+msgid "Switch to grid view"
+msgstr "Badili hadi mwonekano wa gridi"
+
+msgid "Switch to list view"
+msgstr "Badili hadi mwonekano wa orodha"
+
+msgid "Lock screen"
+msgstr "Funga skrini"
+
+msgid "Lock the screen"
+msgstr "Funga skrini"
+
+msgid "Logout"
+msgstr "Ondoka"
+
+msgid "Leave the session"
+msgstr "Ondoka kwenye kikao"
+
+msgid "Quit"
+msgstr "Acha"
+
+msgid "Shutdown the computer"
+msgstr "Zima kompyuta"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Endesha ukitumia NVIDIA GPU"
+
+msgid "Add to panel"
+msgstr "Ongeza kwenye paneli"
+
+msgid "Add to desktop"
+msgstr "Ongeza kwenye eneo-kazi"
+
+msgid "Remove from favorites"
+msgstr "Ondoa kutoka kwa vipendwa"
+
+msgid "Add to favorites"
+msgstr "Ongeza kwa vipendwa"
+
+msgid "Uninstall"
+msgstr "Sanidua"
+
+msgid "Home"
+msgstr "Nyumbani"
+
+msgid "Computer"
+msgstr "Kompyuta"
+
+msgid "Browse network"
+msgstr "Vinjari mtandao"
+
+msgid "Find files..."
+msgstr "Tafuta faili..."
+
+msgid "Please wait..."
+msgstr "Tafadhali subiri..."
+
+msgid "Applications"
+msgstr "Maombi"
+
+msgid "Documents"
+msgstr "Nyaraka"
+
+msgid "Videos"
+msgstr "Video"
+
+msgid "Images"
+msgstr "Picha"
+
+msgid "Music"
+msgstr "Muziki"
+
+msgid "No recent Items"
+msgstr "Hakuna Vipengee vya hivi majuzi"
+
+msgid "Click to copy"
+msgstr "Bofya ili kunakili"
+
+msgid "Applications and files"
+msgstr "Maombi na faili"
+
+msgid "Other search results"
+msgstr "Matokeo mengine ya utafutaji"
+
+msgid "Browser history"
+msgstr "Historia ya kivinjari"
+
+msgid "Browser bookmarks"
+msgstr "Alamisho za kivinjari"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Trash"
+msgstr "Takataka"
+
+msgid "Error while opening file:"
+msgstr "Hitilafu wakati wa kufungua faili:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Maingizo mengi sana - yanaonyesha maingizo 1000 pekee"
+
+msgid "Favorites"
+msgstr "Vipendwa"
+
+msgid "Recent"
+msgstr "Hivi karibuni"
+
+msgid "Home folder"
+msgstr "Folda ya nyumbani"
+
+msgid "Reset category order"
+msgstr "Weka upya mpangilio wa kategoria"
+
+msgid "light skin tone"
+msgstr "ngozi nyepesi"
+
+msgid "medium-light skin tone"
+msgstr "ngozi ya wastani"
+
+msgid "medium skin tone"
+msgstr "ngozi ya wastani"
+
+msgid "medium-dark skin tone"
+msgstr "ngozi ya wastani ya ngozi"
+
+msgid "dark skin tone"
+msgstr "sauti ya ngozi nyeusi"
+
+msgid "This file is no longer available"
+msgstr "Faili hii haipatikani tena"
+
+msgid "Open with"
+msgstr "Fungua na"
+
+msgid "Other application..."
+msgstr "Programu nyingine..."
+
+msgid "Open containing folder"
+msgstr "Fungua folda iliyo na"
+
+msgid "Move to trash"
+msgstr "Hamisha hadi kwenye tupio"
+
+msgid "Error while moving file to trash:"
+msgstr "Hitilafu wakati wa kuhamisha faili hadi kwenye tupio:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Kipengee hiki cha menyu hakihusiani na kifurushi chochote. Je, ungependa kuiondoa kwenye menyu hata hivyo?"
+
+msgid "The following packages will be removed:"
+msgstr "Vifurushi vifuatavyo vitaondolewa:"
+
+msgid "Packages to be removed"
+msgstr "Vifurushi vya kuondolewa"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Haiwezi kuondoa kifurushi %s kama inavyotakiwa na vifurushi vingine."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Kifurushi %s ni tegemezi la vifurushi vifuatavyo:"
+
+msgid "Open"
+msgstr "Fungua"
+
+msgid "Search"
+msgstr "Tafuta"
+
+msgid "Start in"
+msgstr "Anza ndani"
+
+msgid "Select a folder"
+msgstr "Chagua folda"
+
+msgid "Follow symlinks"
+msgstr "Fuata ulinganifu"
+
+msgid "Search hidden"
+msgstr "Utafutaji umefichwa"
+
+msgid "Use regular expressions"
+msgstr "Tumia misemo ya kawaida"
+
+msgid "Stop"
+msgstr "Acha"
+
+msgid "File"
+msgstr "Faili"
+
+msgid "Path"
+msgstr "Njia"
+
+msgid "Searching..."
+msgstr "Inatafuta..."
+
+msgid "Search Stopped"
+msgstr "Utafutaji Umesimamishwa"
+
+msgid "Searching: "
+msgstr "Inatafuta: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Hitilafu: ruhusa haitoshi kusoma folda "
+
+msgid "Search Completed"
+msgstr "Utafutaji Umekamilika"
+
+msgid "Skipping"
+msgstr "Kuruka"
+
+msgid " - directory already searched"
+msgstr " - saraka tayari imetafutwa"
+
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Menyu inayoweza kunyumbulika yenye chaguzi za mpangilio wa gridi au orodha, kivinjari cha faili na utafutaji wa emoji."
+
+msgid "Behavior"
+msgstr "Tabia"
+
+msgid "Appearance"
+msgstr "Mwonekano"
+
+msgid "Layout and Content"
+msgstr "Muundo na Maudhui"
+
+msgid "Search Providers"
+msgstr "Watoa Huduma za Utafutaji"
+
+msgid "No search provider extensions found"
+msgstr "Hakuna viendelezi vya mtoaji wa utafutaji vilivyopatikana"
+
+msgid "Panel"
+msgstr "Paneli"
+
+msgid "Menu"
+msgstr "Menyu"
+
+msgid "Layout"
+msgstr "Mpangilio"
+
+msgid "Content"
+msgstr "Maudhui"
+
+msgid "Recent files settings"
+msgstr "Mipangilio ya faili za hivi majuzi"
+
+msgid "Open the menu editor"
+msgstr "Fungua kihariri cha menyu"
+
+msgid "Use a custom icon"
+msgstr "Tumia ikoni maalum"
+
+msgid "Use a custom icon in the panel"
+msgstr "Tumia ikoni maalum kwenye paneli"
+
+msgid "Panel icon"
+msgstr "Aikoni ya paneli"
+
+msgid "Panel text"
+msgstr "Maandishi ya paneli"
+
+msgid "Text to show beside the panel icon"
+msgstr "Maandishi ya kuonyesha kando ya ikoni ya paneli"
+
+msgid "Category icon size (pixels)"
+msgstr "Ukubwa wa aikoni ya aina (pixels)"
+
+msgid "Applications list icon size (pixels)"
+msgstr "Saizi ya ikoni ya orodha ya programu (pixels)"
+
+msgid "Applications grid icon size (pixels)"
+msgstr "Ukubwa wa ikoni ya gridi ya programu (pixels)"
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Njia ya mkato ya kibodi ili kufungua na kufunga menyu"
+
+msgid "Open menu on hover"
+msgstr "Fungua menyu kwenye kuelea"
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Fungua menyu ninaposogeza kipanya changu juu ya ikoni ya paneli"
+
+msgid "milliseconds"
+msgstr "millisekunde"
+
+msgid "Menu hover delay"
+msgstr "Kuchelewa kwa menyu kuelea"
+
+msgid "Use menu animations"
+msgstr "Tumia uhuishaji wa menyu"
+
+msgid "Animate the menu on open and close"
+msgstr "Huisha menyu kwenye fungua na funga"
+
+msgid "Activate categories on click"
+msgstr "Washa kategoria unapobofya"
+
+msgid "Activate categories on click instead of on hover"
+msgstr "Washa kategoria unapobofya badala ya kuelea"
+
+msgid "Enable autoscrolling"
+msgstr "Washa usogezaji kiotomatiki"
+
+msgid "Enable autoscrolling in application list"
+msgstr "Washa usogezaji kiotomatiki katika orodha ya programu"
+
+msgid "Show web bookmarks"
+msgstr "Onyesha alamisho za wavuti"
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Onyesha alamisho za wavuti za kivinjari chako kwenye menyu.\n"
+"Kumbuka: Sakinisha kifurushi cha gir1.2-gda-5.0 ili kusoma alamisho za Firefox."
+
+msgid "Enable searching of open windows"
+msgstr "Washa utafutaji wa madirisha wazi"
+
+msgid "Enable search providers"
+msgstr "Washa watoa huduma wa utafutaji"
+
+msgid "Include search provider results in searches"
+msgstr "Jumuisha matokeo ya mtoa huduma wa utafutaji katika utafutaji"
+
+msgid "Example Search Providers"
+msgstr "Mfano Watoa Huduma"
+
+msgid "Open menu on category:"
+msgstr "Fungua menyu kwenye kitengo:"
+
+msgid "List"
+msgstr "Orodha"
+
+msgid "Grid"
+msgstr "Gridi"
+
+msgid "Always open the menu with this category selected"
+msgstr "Fungua menyu kila wakati na aina hii iliyochaguliwa"
+
+msgid "columns"
+msgstr "nguzo"
+
+msgid "Number of columns in apps grid"
+msgstr "Idadi ya safu wima katika gridi ya programu"
+
+msgid "Show bookmarks and places"
+msgstr "Onyesha vialamisho na maeneo"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "Onyesha alamisho na kategoria ya maeneo kwenye menyu"
+
+msgid "Show application icons"
+msgstr "Onyesha ikoni za programu"
+
+msgid "Show category icons"
+msgstr "Onyesha aikoni za kategoria"
+
+msgid "Show application descriptions under titles"
+msgstr "Onyesha maelezo ya programu chini ya mada"
+
+msgid "Show tooltips"
+msgstr "Onyesha vidokezo vya zana"
+
+msgid "Tooltip delay"
+msgstr "Kuchelewa kwa kidokezo"
+
+msgid "Use a custom menu height"
+msgstr "Tumia urefu wa menyu maalum"
+
+msgid "Custom menu height (pixels)"
+msgstr "Urefu wa menyu maalum (pixels)"
+
+msgid "Applications view mode"
+msgstr "Hali ya kutazama programu"
+
+msgid "View applications as list or grid"
+msgstr "Tazama programu kama orodha au gridi ya taifa"
+
+msgid "Application description placement"
+msgstr "Uwekaji wa maelezo ya maombi"
+
+msgid "Tooltips"
+msgstr "Vidokezo vya zana"
+
+msgid "Under titles"
+msgstr "Chini ya majina"
+
+msgid "None"
+msgstr "Hakuna"
+
+msgid "Choose where to show application descriptions"
+msgstr "Chagua mahali pa kuonyesha maelezo ya programu"
+
+msgid "Sidebar location"
+msgstr "Mahali pa utepe"
+
+msgid "Top"
+msgstr "Juu"
+
+msgid "Bottom"
+msgstr "Chini"
+
+msgid "Left"
+msgstr "Kushoto"
+
+msgid "Right"
+msgstr "Haki"
+
+msgid "Choose where to show the sidebar"
+msgstr "Chagua mahali pa kuonyesha utepe"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"Maelezo/kidokezo: Buruta kwenye ukingo wa menyu ili kubadilisha ukubwa wa menyu.\n"
+
+msgid "Show favorites on sidebar"
+msgstr "Onyesha vipendwa kwenye utepe"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Onyesha aikoni za programu na faili zako uzipendazo kwenye upau wa kando"
+
+msgid "Show recent items"
+msgstr "Onyesha vipengee vya hivi majuzi"
+
+msgid "Show recent items category in the menu"
+msgstr "Onyesha kategoria ya vipengee vya hivi majuzi kwenye menyu"
+
+msgid "Show favorite apps category"
+msgstr "Onyesha kategoria ya programu unazopenda"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Onyesha aina ya programu unazopenda kwenye menyu"
+
+msgid "Show home folder"
+msgstr "Onyesha folda ya nyumbani"
+
+msgid "Show home folder category in the menu"
+msgstr "Onyesha kategoria ya folda ya nyumbani kwenye menyu"
+
+msgid "Last used category"
+msgstr "Kategoria iliyotumika mwisho"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Sogeza kiotomatiki orodha ya programu kwenye kieleezaji cha kipanya"
+
+msgid "Show hidden files"
+msgstr "Onyesha faili zilizofichwa"
+
+msgid "Show hidden files in folder view"
+msgstr "Onyesha faili zilizofichwa katika mwonekano wa folda"
+
+msgid "Emoji search"
+msgstr "Utafutaji wa emoji"
+
+msgid "Show emojis in search results"
+msgstr "Onyesha emoji katika matokeo ya utafutaji"
+
+msgid "Web search option"
+msgstr "Chaguo la utafutaji kwenye wavuti"
+
+msgid "Show an internet search option in search results"
+msgstr "Onyesha chaguo la utafutaji wa mtandaoni katika matokeo ya utafutaji"
+
+msgid "Search home folder"
+msgstr "Tafuta folda ya nyumbani"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Wakati wa kutafuta, pia tafuta folda yangu ya nyumbani kwa faili"
+
+msgid "Web history search"
+msgstr "Utafutaji wa historia ya wavuti"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Wakati wa kutafuta, tafuta pia historia ya kivinjari changu (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Kumbuka: Historia ya Firefox haitumiki kwa sasa."
+
+msgid "Web bookmarks search"
+msgstr "Utafutaji wa vialamisho vya wavuti"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Wakati wa kutafuta, tafuta pia alamisho za wavuti za kivinjari changu (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Kumbuka: Ili kutafuta alamisho za Firefox utahitaji kusakinisha kifurushi gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu) & Linux Mint) au kifurushi libgda (Usambazaji kulingana na Tao) na uwashe upya kompyuta yako."
+
+msgid "Wikipedia search"
+msgstr "Utafutaji wa Wikipedia"
+
+msgid "Show some Wikipedia results"
+msgstr "Onyesha baadhi ya matokeo ya Wikipedia"
+
+msgid "Wikipedia language"
+msgstr "Lugha ya Wikipedia"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Kumbuka: Baadhi ya chaguo za utafutaji bado zinaweza kutumika hata kama hujaziwezesha hapa kwa kutanguliza neno lako la utafutaji.\n"
+"Kwa mfano: ili kutafuta emoji, andika 'e heart' ili kupata emoji za moyo. Vile vile, tumia viambishi awali 'f' kwa utafutaji wa faili, 'h' kwa historia ya wavuti na 'b' kwa utafutaji wa vialamisho vya wavuti.\n"
+
+msgid "Use a custom icon size"
+msgstr "Tumia saizi maalum ya ikoni"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Tumia saizi maalum kwa ikoni ya paneli"
+
+msgid "Panel icon size (pixels)"
+msgstr "Ukubwa wa aikoni ya paneli (pixels)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Chagua saizi maalum ya ikoni ya paneli"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Saizi ya ikoni ya upau wa kando (pixels)"
+
+msgid "Use sidebar box style"
+msgstr "Tumia mtindo wa kisanduku cha utepe"
+
+msgid "Use a sidebar box style"
+msgstr "Tumia mtindo wa kisanduku cha utepe"
+
+msgid "Use tile style"
+msgstr "Tumia mtindo wa tile"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Tumia mtindo wa kigae kwa vitufe vya programu (Kumbuka: huenda isifanye kazi kwenye baadhi ya mandhari)"

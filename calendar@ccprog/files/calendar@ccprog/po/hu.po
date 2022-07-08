@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-13 13:37+0200\n"
+"POT-Creation-Date: 2022-06-30 17:27+0200\n"
 "PO-Revision-Date: 2021-09-26 06:55+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -16,10 +16,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:65
+#: applet.js:21
+msgid "%B %-e, %Y"
+msgstr ""
+
+#: applet.js:22 eventView.js:26
+msgid "%A, %B %-e, %Y"
+msgstr ""
+
+#: applet.js:131
 msgid "Date and Time Settings"
 msgstr "Dátum és idő beállítások"
+
+#: eventView.js:65
+msgid "Starting in a few minutes"
+msgstr "Perceken belül elindul"
+
+#: eventView.js:69
+#, javascript-format
+msgid "Starting in %d minutes"
+msgstr "%d perc múlva elindul"
+
+#: eventView.js:79
+msgid "This evening"
+msgstr "Ma reggel"
+
+#: eventView.js:82
+msgid "Starting later today"
+msgstr "Mai nap folyamán kezdődik"
+
+#: eventView.js:85
+#, javascript-format
+msgid "In %d hour"
+msgid_plural "In %d hours"
+msgstr[0] "%d órán belül"
+msgstr[1] "%d órán belül"
+
+#: eventView.js:664
+msgid "No Events"
+msgstr "Nincsenek események"
+
+#: eventView.js:925
+msgid "In progress"
+msgstr "Folyamatban"
+
+#: eventView.js:946
+msgid "All day"
+msgstr "Egész nap"
+
+#: eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
+msgid "Today"
+msgstr "Ma"
 
 #: settings_widgets.py:95
 msgid "Add new entry"
@@ -80,6 +129,14 @@ msgstr "Gyorsbillentyűk"
 #. settings-schema.json->section4->title
 msgid "Show World Times"
 msgstr "Időzónák megjelenítése"
+
+#. settings-schema.json->show-events->description
+msgid "Show calendar events"
+msgstr "Naptáresemények megjelenítése"
+
+#. settings-schema.json->show-events->tooltip
+msgid "Check this to display events in the calendar."
+msgstr "Válassza ki ezt az események a naptárban történő megjelenítéséhez."
 
 #. settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"

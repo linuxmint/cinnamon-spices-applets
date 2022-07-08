@@ -34,9 +34,9 @@ declare namespace imports.ui.tooltips {
 	 * the owner is being dragged, they can set the `this.preventShow` variable to
 	 * `true`.
 	 */
-	export class TooltipBase {
+	export class TooltipBase<T = gi.Clutter.Actor> {
 		/** The object owning the tooltip. */
-		public readonly item: gi.Clutter.Actor;
+		public readonly item: T;
 		/** Whether the tooltip is currently visible */
 		public readonly visible: boolean;
 		/** Whether to inhibit the display of the tooltip */
@@ -46,17 +46,17 @@ declare namespace imports.ui.tooltips {
 
 		public readonly signals: misc.signalManager.SignalManager;
 
-		constructor(item: gi.Clutter.Actor);
+		constructor(item: T);
 
-		private _onMotionEvent(actor: gi.Clutter.Actor, event: gi.Clutter.Event): void;
+		private _onMotionEvent(actor: T, event: gi.Clutter.Event): void;
 
-		private _onEnterEvent(actor: gi.Clutter.Actor, event: gi.Clutter.Event): void;
+		private _onEnterEvent(actor: T, event: gi.Clutter.Event): void;
 
 		private _onShowTimerComplete(): void | boolean;
 
 		private _onHideTimerComplete(): void | boolean;
 
-		private _hide(actor: gi.Clutter.Actor, event: gi.Clutter.Event): void;
+		private _hide(actor: T, event: gi.Clutter.Event): void;
 		/**
 		 * Destroys the tooltip.
 		 */
@@ -77,7 +77,7 @@ declare namespace imports.ui.tooltips {
 	 *
 	 * Note that the tooltip refuses to show if the tooltip text is empty.
 	 */
-	export class Tooltip extends TooltipBase {
+	export class Tooltip<T = gi.Clutter.Actor> extends TooltipBase<T> {
 		public readonly desktop_settings: gi.Gio.Settings;
 		private readonly _tooltip: gi.St.Label;
 
@@ -86,7 +86,7 @@ declare namespace imports.ui.tooltips {
 		 * @param item  the actor owning the tooltip
 		 * @param initTitle the string to display initially
 		 */
-		constructor(item: gi.Clutter.Actor, initTitle?: string | null);
+		constructor(item: T, initTitle?: string | null);
 
 		public hide(): void;
 
@@ -117,7 +117,7 @@ declare namespace imports.ui.tooltips {
 	 * `panelItem._applet` set as the actual applet, since we need to access the
 	 * applet to listen to orientation changes.
 	 */
-	export class PanelItemTooltip extends Tooltip {
+	export class PanelItemTooltip extends Tooltip<gi.St.BoxLayout> {
 		/** The applet owning the tooltip */
 		public readonly _panelItem: applet.Applet;
 		/** The orientation of the applet */

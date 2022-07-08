@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-10 14:25+0200\n"
-"PO-Revision-Date: 2019-10-24 22:09+0200\n"
+"PO-Revision-Date: 2022-06-03 19:28+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it\n"
 
 #: applet.js:92
 msgid "Mark all as read"
@@ -44,7 +44,7 @@ msgstr "Nascondi l'icona del pannello quando non ci sono commenti non letti"
 
 #. metadata.json->name
 msgid "Spices notifier"
-msgstr ""
+msgstr "Spices notifier"
 
 #. metadata.json->description
 msgid "Notifies of comments on the Cinnamon Spices website"

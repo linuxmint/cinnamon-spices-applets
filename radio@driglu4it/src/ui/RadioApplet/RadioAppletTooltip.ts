@@ -1,6 +1,6 @@
 import { DEFAULT_TOOLTIP_TXT } from "../../consts"
 import { mpvHandler } from "../../services/mpv/MpvHandler"
-import { addDownloadingSongsChangeListener, downloadingSongs } from "../../services/youtubeDownload/YoutubeDownloadManager"
+import { addDownloadingSongsChangeListener, getCurrentDownloadingSongs } from "../../services/youtubeDownload/YoutubeDownloadManager"
 
 const { PanelItemTooltip } = imports.ui.tooltips
 const { markup_escape_text } = imports.gi.GLib
@@ -36,11 +36,12 @@ export function createRadioAppletTooltip(args: Arguments) {
             [`${markup_escape_text(mpvHandler.getCurrentChannelName() || '', -1)} `],
         ];
 
-        if (downloadingSongs.length !== 0) {
+        const currentDownloadingSongs = getCurrentDownloadingSongs()
+        if (currentDownloadingSongs.length !== 0) {
             [
                 [],
                 ['<b>Songs downloading:</b>'],
-                ...downloadingSongs.map(downloadingSong => [markup_escape_text(downloadingSong.title, -1)])
+                ...currentDownloadingSongs.map(downloadingSong => [markup_escape_text(downloadingSong, -1)])
             ].forEach(line => lines.push(line))
         }
 

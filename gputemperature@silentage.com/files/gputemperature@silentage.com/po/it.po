@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-27 12:49+0800\n"
-"PO-Revision-Date: 2019-10-24 20:51+0200\n"
+"PO-Revision-Date: 2022-06-03 17:12+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it\n"
 
 #: applet.js:58
 msgid "GPU: ??ᴼC"
@@ -64,7 +64,7 @@ msgstr "Interfaccia"
 
 #: applet.js:375
 msgid "Memory Clock"
-msgstr "Clock Memoria:"
+msgstr "Clock Memoria"
 
 #: applet.js:380
 msgid "Cuda Cores"
@@ -80,7 +80,7 @@ msgstr "Velocità PCI"
 
 #: applet.js:403
 msgid "Fan "
-msgstr "Ventola"
+msgstr "Ventola "
 
 #: applet.js:411
 msgid "Displays:"
@@ -116,8 +116,7 @@ msgstr "e il pacchetto nvidia-settings per la tua distribuzione."
 
 #: applet.js:852
 msgid "If you have an ATI GPU, please install the LM-SENSORS"
-msgstr ""
-"Se si dispone di una GPU ATI, installare il pacchetto LM-SENSORS"
+msgstr "Se si dispone di una GPU ATI, installare il pacchetto LM-SENSORS"
 
 #: applet.js:853
 msgid "packages for your distribution."
@@ -132,5 +131,5 @@ msgid ""
 "Shows NVidia/ATI GPU temperature in the panel, and detailed/multi-gpu "
 "information in a popup menu."
 msgstr ""
-"Mostra la temperatura della GPU nVidia/ATI nel pannello e "
-"informazioni dettagliate/multi-gpu in un menù popup."
+"Mostra la temperatura della GPU nVidia/ATI nel pannello e informazioni "
+"dettagliate/multi-gpu in un menù popup."
