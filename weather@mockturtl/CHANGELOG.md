@@ -3,6 +3,7 @@
 ## 3.2.6
 
 * Fix [#4387](https://github.com/linuxmint/cinnamon-spices-applets/issues/4387)
+* also add some more location-related entries into the applet label override
 
 ## 3.2.5
 
