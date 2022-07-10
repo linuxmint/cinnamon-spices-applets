@@ -13837,7 +13837,7 @@ class DeutscherWetterdienst extends BaseProvider {
         };
     }
     async GetWeather(loc) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         const [current, hourly] = await Promise.all([
             this.app.LoadJsonAsync(`${this.baseUrl}current_weather`, this.GetDefaultParams(loc), this.HandleErrors),
             this.app.LoadJsonAsync(`${this.baseUrl}weather`, this.GetHourlyParams(loc), this.HandleErrors)
@@ -13850,7 +13850,7 @@ class DeutscherWetterdienst extends BaseProvider {
         return {
             date: DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone),
             location: {
-                city: (_b = current.sources[0].station_name) !== null && _b !== void 0 ? _b : loc.city,
+                city: (_c = (_b = loc.city) !== null && _b !== void 0 ? _b : current.sources[0].station_name) !== null && _c !== void 0 ? _c : undefined,
                 country: loc.country,
                 timeZone: loc.timeZone,
             },
@@ -13873,7 +13873,7 @@ class DeutscherWetterdienst extends BaseProvider {
                 distanceFrom: mainSource.distance,
                 lat: mainSource.lat,
                 lon: mainSource.lon,
-                name: (_c = mainSource.station_name) !== null && _c !== void 0 ? _c : undefined
+                name: (_d = mainSource.station_name) !== null && _d !== void 0 ? _d : undefined
             },
             forecasts: this.ParseForecast(current, hourly, loc),
             hourlyForecasts: this.ParseHourlyForecast(hourly, loc)

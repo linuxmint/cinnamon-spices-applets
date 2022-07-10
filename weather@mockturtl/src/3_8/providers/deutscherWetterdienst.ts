@@ -34,7 +34,7 @@ export class DeutscherWetterdienst extends BaseProvider {
         return {
             date: DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone),
             location: {
-                city: current.sources[0].station_name ?? loc.city,
+                city: loc.city ?? current.sources[0].station_name ?? undefined,
                 country: loc.country,
                 timeZone: loc.timeZone,
             },
