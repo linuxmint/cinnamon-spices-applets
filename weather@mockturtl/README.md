@@ -137,6 +137,9 @@ The setting allows you to make the applet display basically anything in the form
 | `{extra_name}`    | API specific value's name                                 |
 | `{wind_speed}`    | Wind speed with unit                                      |
 | `{wind_dir}`      | Wind direction in text format (NW, etc)                   |
+| `{city}`          | City name shown in the popup                              |
+| `{country}`       | Country name shown in the popup                           |
+| `{search_entry}`  | Search entry text in manual location (or location store)  |
 
 ## Versions
 
