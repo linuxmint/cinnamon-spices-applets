@@ -13837,7 +13837,7 @@ class DeutscherWetterdienst extends BaseProvider {
         };
     }
     async GetWeather(loc) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         const [current, hourly] = await Promise.all([
             this.app.LoadJsonAsync(`${this.baseUrl}current_weather`, this.GetDefaultParams(loc), this.HandleErrors),
             this.app.LoadJsonAsync(`${this.baseUrl}weather`, this.GetHourlyParams(loc), this.HandleErrors)
@@ -13850,7 +13850,7 @@ class DeutscherWetterdienst extends BaseProvider {
         return {
             date: DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone),
             location: {
-                city: (_b = current.sources[0].station_name) !== null && _b !== void 0 ? _b : loc.city,
+                city: (_c = (_b = loc.city) !== null && _b !== void 0 ? _b : current.sources[0].station_name) !== null && _c !== void 0 ? _c : undefined,
                 country: loc.country,
                 timeZone: loc.timeZone,
             },
@@ -13873,7 +13873,7 @@ class DeutscherWetterdienst extends BaseProvider {
                 distanceFrom: mainSource.distance,
                 lat: mainSource.lat,
                 lon: mainSource.lon,
-                name: (_c = mainSource.station_name) !== null && _c !== void 0 ? _c : undefined
+                name: (_d = mainSource.station_name) !== null && _d !== void 0 ? _d : undefined
             },
             forecasts: this.ParseForecast(current, hourly, loc),
             hourlyForecasts: this.ParseHourlyForecast(hourly, loc)
@@ -16171,7 +16171,7 @@ class WeatherApplet extends TextIconApplet {
         return true;
     }
     DisplayWeatherOnLabel(weather) {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
         const temperature = weather.temperature;
         const mainCondition = CapitalizeFirstLetter(weather.condition.main);
         let label = "";
@@ -16207,7 +16207,10 @@ class WeatherApplet extends TextIconApplet {
                 .replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, this.config) : "")
                 .replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
                 .replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, this.config.WindSpeedUnit) : "")
-                .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "");
+                .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
+                .replace(/{city}/g, (_f = weather.location.city) !== null && _f !== void 0 ? _f : "")
+                .replace(/{country}/g, (_g = weather.location.country) !== null && _g !== void 0 ? _g : "")
+                .replace(/{search_entry}/g, (_j = (_h = this.config.CurrentLocation) === null || _h === void 0 ? void 0 : _h.entryText) !== null && _j !== void 0 ? _j : "");
         }
         this.SetAppletLabel(label);
     }
