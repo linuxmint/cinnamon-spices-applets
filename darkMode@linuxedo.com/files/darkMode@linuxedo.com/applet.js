@@ -417,18 +417,19 @@ MyApplet.prototype = {
                 }
             }
         }
+        
         this.add_to_map(gtk_theme_names, this.gtk_themes);
         this.add_to_map(cinnamon_theme_names, this.cinnamon_themes);
         this.add_to_map(win_border_theme_names, this.window_border_themes);
+        
+        this.settings.setOptions("light_win_border_theme", Object.assign({}, this.window_border_themes));
+        this.settings.setOptions("dark_win_border_theme", Object.assign({}, this.window_border_themes));
 
-        this.settings.setOptions("light_win_border_theme", this.window_border_themes);
-        this.settings.setOptions("dark_win_border_theme", this.window_border_themes);
+        this.settings.setOptions("light_gtk_theme", Object.assign({}, this.gtk_themes));
+        this.settings.setOptions("dark_gtk_theme", Object.assign({}, this.gtk_themes));
 
-        this.settings.setOptions("light_gtk_theme", this.gtk_themes);
-        this.settings.setOptions("dark_gtk_theme", this.gtk_themes);
-
-        this.settings.setOptions("light_cinnamon_theme", this.cinnamon_themes);
-        this.settings.setOptions("dark_cinnamon_theme", this.cinnamon_themes);
+        this.settings.setOptions("light_cinnamon_theme", Object.assign({}, this.cinnamon_themes));
+        this.settings.setOptions("dark_cinnamon_theme", Object.assign({}, this.cinnamon_themes));
     },
 
     collect_icons: function (parent, dir_entry) {
@@ -440,10 +441,11 @@ MyApplet.prototype = {
                 icon_names.push(icon_name);
             }
         }
+        
         this.add_to_map(icon_names, this.icons);
-
-        this.settings.setOptions("light_icon_theme", this.icons);
-        this.settings.setOptions("dark_icon_theme", this.icons);
+        
+        this.settings.setOptions("light_icon_theme", Object.assign({}, this.icons));
+        this.settings.setOptions("dark_icon_theme", Object.assign({}, this.icons));
     },
 
     set_random_light_wallpaper: function () {
