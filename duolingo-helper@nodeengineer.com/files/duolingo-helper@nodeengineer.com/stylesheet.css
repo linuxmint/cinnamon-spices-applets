@@ -1,0 +1,39 @@
+.top-box {
+  height: 30px;
+  width: 100px;
+}
+
+.icon {
+  padding: 5px;
+  height: 25px;
+  width: 22px;
+  margin-left: 5px;
+  padding-bottom: 5px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 5px;
+  padding-left: 2px;
+}
+
+.bottom-box {
+  height: 30px;
+  width: 100px;
+}
+
+.button {
+  height: 28px;
+  width: 298px;
+  border-radius: 5px;
+  border: 1px solid #222222;
+  background-color: #444444; 
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #888888;
+  font-weight: bold;
+}

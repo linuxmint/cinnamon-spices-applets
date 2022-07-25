@@ -1,0 +1,604 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 17:43+0100\n"
+"Last-Translator: Google translate\n"
+"Language-Team: \n"
+"Language: bn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Type to search..."
+msgstr "অনুসন্ধান করতে টাইপ করুন..."
+
+msgid "Initializing"
+msgstr "শুরু করা হচ্ছে"
+
+msgid "No description available"
+msgstr "কোন বর্ণনা নাই"
+
+msgid "All applications"
+msgstr "সমস্ত অ্যাপ্লিকেশন"
+
+msgid "Places"
+msgstr "জায়গা"
+
+msgid "Recent files"
+msgstr "সাম্প্রতিক নথিপত্র"
+
+msgid "Bookmarks"
+msgstr "বুকমার্ক"
+
+msgid "Favorite apps"
+msgstr "প্রিয় অ্যাপস"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "ফায়ারফক্স এবং মিডোরি বুকমার্কের জন্য gir1.2-gda-5.0 প্যাকেজ প্রয়োজন।"
+
+msgid "Clear List"
+msgstr "লিস্ট পরিষ্কার করো"
+
+msgid "No recent files"
+msgstr "কোনো সাম্প্রতিক ফাইল নেই"
+
+msgid "Account details"
+msgstr "বিস্তারিত হিসাব"
+
+msgid "Grid View"
+msgstr "গ্রিড ভিউ"
+
+msgid "List View"
+msgstr "তালিকা দেখুন"
+
+msgid "Switch to grid view"
+msgstr "গ্রিড ভিউতে স্যুইচ করুন"
+
+msgid "Switch to list view"
+msgstr "তালিকা দৃশ্যে স্যুইচ করুন"
+
+msgid "Lock screen"
+msgstr "বন্ধ পর্দা"
+
+msgid "Lock the screen"
+msgstr "স্ক্রীন লক করুন"
+
+msgid "Logout"
+msgstr "প্রস্থান"
+
+msgid "Leave the session"
+msgstr "অধিবেশন ছেড়ে দিন"
+
+msgid "Quit"
+msgstr "প্রস্থান করুন"
+
+msgid "Shutdown the computer"
+msgstr "কম্পিউটার বন্ধ করুন"
+
+msgid "Run with NVIDIA GPU"
+msgstr "NVIDIA GPU দিয়ে চালান"
+
+msgid "Add to panel"
+msgstr "প্যানেলে যোগ করুন"
+
+msgid "Add to desktop"
+msgstr "ডেস্কটপে যোগ করুন"
+
+msgid "Remove from favorites"
+msgstr "পছন্দের তালিকা থেকে অপসারণ"
+
+msgid "Add to favorites"
+msgstr "ফেভারিটে যোগ করুন"
+
+msgid "Uninstall"
+msgstr "আনইনস্টল করুন"
+
+msgid "Home"
+msgstr "বাড়ি"
+
+msgid "Computer"
+msgstr "কম্পিউটার"
+
+msgid "Browse network"
+msgstr "নেটওয়ার্ক ব্রাউজ করুন"
+
+msgid "Find files..."
+msgstr "ফাইল খুঁজুন..."
+
+msgid "Please wait..."
+msgstr "অনুগ্রহপূর্বক অপেক্ষা করুন..."
+
+msgid "Applications"
+msgstr "অ্যাপ্লিকেশন"
+
+msgid "Documents"
+msgstr "নথিপত্র"
+
+msgid "Videos"
+msgstr "ভিডিও"
+
+msgid "Images"
+msgstr "ছবি"
+
+msgid "Music"
+msgstr "সঙ্গীত"
+
+msgid "No recent Items"
+msgstr "কোনো সাম্প্রতিক আইটেম নেই"
+
+msgid "Click to copy"
+msgstr "কপি করতে ক্লিক করুন"
+
+msgid "Applications and files"
+msgstr "অ্যাপ্লিকেশন এবং ফাইল"
+
+msgid "Other search results"
+msgstr "অন্যান্য অনুসন্ধান ফলাফল"
+
+msgid "Browser history"
+msgstr "ব্রাউজার ইতিহাস"
+
+msgid "Browser bookmarks"
+msgstr "ব্রাউজার বুকমার্ক"
+
+msgid "Emoji"
+msgstr "ইমোজি"
+
+msgid "Trash"
+msgstr "আবর্জনা"
+
+msgid "Error while opening file:"
+msgstr "ফাইল খোলার সময় ত্রুটি:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "অনেকগুলি এন্ট্রি - শুধুমাত্র প্রথম 1000টি এন্ট্রি দেখাচ্ছে৷"
+
+msgid "Favorites"
+msgstr "প্রিয়"
+
+msgid "Recent"
+msgstr "সাম্প্রতিক"
+
+msgid "Home folder"
+msgstr "হোম ফোল্ডার"
+
+msgid "Reset category order"
+msgstr "বিভাগ অর্ডার রিসেট করুন"
+
+msgid "light skin tone"
+msgstr "হালকা ত্বকের স্বর"
+
+msgid "medium-light skin tone"
+msgstr "মাঝারি-হালকা ত্বকের স্বর"
+
+msgid "medium skin tone"
+msgstr "মাঝারি ত্বকের স্বর"
+
+msgid "medium-dark skin tone"
+msgstr "মাঝারি-গাঢ় ত্বকের স্বর"
+
+msgid "dark skin tone"
+msgstr "গাঢ় ত্বক টোন"
+
+msgid "This file is no longer available"
+msgstr "এই ফাইলটি আর উপলব্ধ নেই৷"
+
+msgid "Open with"
+msgstr "সঙ্গে খোলা"
+
+msgid "Other application..."
+msgstr "অন্য আবেদন..."
+
+msgid "Open containing folder"
+msgstr "ফোল্ডার খুলুন"
+
+msgid "Move to trash"
+msgstr "আবর্জনা সরান"
+
+msgid "Error while moving file to trash:"
+msgstr "ট্র্যাশে ফাইল সরানোর সময় ত্রুটি:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "এই মেনু আইটেমটি কোনো প্যাকেজের সাথে যুক্ত নয়। আপনি যেভাবেই মেনু থেকে এটি সরাতে চান?"
+
+msgid "The following packages will be removed:"
+msgstr "নিম্নলিখিত প্যাকেজগুলি সরানো হবে:"
+
+msgid "Packages to be removed"
+msgstr "প্যাকেজ অপসারণ করা হবে"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "প্যাকেজ %s অপসারণ করা যাবে না কারণ এটি অন্যান্য প্যাকেজের জন্য প্রয়োজন।"
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "প্যাকেজ %s হল নিম্নলিখিত প্যাকেজের নির্ভরতা:"
+
+msgid "Open"
+msgstr "খোলা"
+
+msgid "Search"
+msgstr "অনুসন্ধান করুন"
+
+msgid "Start in"
+msgstr "আপনি উত্তর দিবেন না"
+
+msgid "Select a folder"
+msgstr "একটি ফোল্ডার নির্বাচন করুন"
+
+msgid "Follow symlinks"
+msgstr "সিমলিংক অনুসরণ করুন"
+
+msgid "Search hidden"
+msgstr "লুকানো অনুসন্ধান"
+
+msgid "Use regular expressions"
+msgstr "রেগুলার এক্সপ্রেশন ব্যবহার করুন"
+
+msgid "Stop"
+msgstr "থামো"
+
+msgid "File"
+msgstr "ফাইল"
+
+msgid "Path"
+msgstr "পথ"
+
+msgid "Searching..."
+msgstr "অনুসন্ধান করা হচ্ছে..."
+
+msgid "Search Stopped"
+msgstr "অনুসন্ধান বন্ধ"
+
+msgid "Searching: "
+msgstr "অনুসন্ধান করা হচ্ছে:"
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "ত্রুটি: ফোল্ডার পড়ার জন্য অপর্যাপ্ত অনুমতি"
+
+msgid "Search Completed"
+msgstr "অনুসন্ধান সম্পূর্ণ হয়েছে৷"
+
+msgid "Skipping"
+msgstr "স্কিপিং"
+
+msgid " - directory already searched"
+msgstr " - ডিরেক্টরি ইতিমধ্যে অনুসন্ধান করা হয়েছে"
+
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "গ্রিড বা তালিকা লেআউট বিকল্প, ফাইল ব্রাউজার এবং ইমোজি অনুসন্ধান সহ একটি নমনীয় মেনু।"
+
+msgid "Behavior"
+msgstr "আচরণ"
+
+msgid "Appearance"
+msgstr "চেহারা"
+
+msgid "Layout and Content"
+msgstr "বিন্যাস এবং বিষয়বস্তু"
+
+msgid "Search Providers"
+msgstr "অনুসন্ধান প্রদানকারী"
+
+msgid "No search provider extensions found"
+msgstr "কোন অনুসন্ধান প্রদানকারী এক্সটেনশন পাওয়া যায়নি"
+
+msgid "Panel"
+msgstr "প্যানেল"
+
+msgid "Menu"
+msgstr "তালিকা"
+
+msgid "Layout"
+msgstr "লেআউট"
+
+msgid "Content"
+msgstr "বিষয়বস্তু"
+
+msgid "Recent files settings"
+msgstr "সাম্প্রতিক ফাইল সেটিংস"
+
+msgid "Open the menu editor"
+msgstr "মেনু এডিটর খুলুন"
+
+msgid "Use a custom icon"
+msgstr "একটি কাস্টম আইকন ব্যবহার করুন"
+
+msgid "Use a custom icon in the panel"
+msgstr "প্যানেলে একটি কাস্টম আইকন ব্যবহার করুন"
+
+msgid "Panel icon"
+msgstr "প্যানেল আইকন"
+
+msgid "Panel text"
+msgstr "প্যানেল পাঠ্য"
+
+msgid "Text to show beside the panel icon"
+msgstr "প্যানেল আইকনের পাশে দেখানোর জন্য পাঠ্য"
+
+msgid "Category icon size (pixels)"
+msgstr "বিভাগ আইকন আকার (পিক্সেল)"
+
+msgid "Applications list icon size (pixels)"
+msgstr "অ্যাপ্লিকেশন তালিকা আইকন আকার (পিক্সেল)"
+
+msgid "Applications grid icon size (pixels)"
+msgstr "অ্যাপ্লিকেশন গ্রিড আইকন আকার (পিক্সেল)"
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "মেনু খুলতে এবং বন্ধ করতে কীবোর্ড শর্টকাট"
+
+msgid "Open menu on hover"
+msgstr "হোভারে মেনু খুলুন"
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "যখন আমি প্যানেল আইকনের উপর আমার মাউস নিয়ে যাই তখন মেনু খুলুন"
+
+msgid "milliseconds"
+msgstr "মিলিসেকেন্ড"
+
+msgid "Menu hover delay"
+msgstr "মেনু হোভার বিলম্ব"
+
+msgid "Use menu animations"
+msgstr "মেনু অ্যানিমেশন ব্যবহার করুন"
+
+msgid "Animate the menu on open and close"
+msgstr "খোলা এবং বন্ধ মেনু অ্যানিমেট"
+
+msgid "Activate categories on click"
+msgstr "ক্লিকে বিভাগ সক্রিয় করুন"
+
+msgid "Activate categories on click instead of on hover"
+msgstr "হোভারের পরিবর্তে ক্লিকে বিভাগগুলি সক্রিয় করুন"
+
+msgid "Enable autoscrolling"
+msgstr "অটোস্ক্রলিং সক্ষম করুন"
+
+msgid "Enable autoscrolling in application list"
+msgstr "অ্যাপ্লিকেশন তালিকায় অটোস্ক্রলিং সক্ষম করুন"
+
+msgid "Show web bookmarks"
+msgstr "ওয়েব বুকমার্ক দেখান"
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"মেনুতে আপনার ব্রাউজারের ওয়েব বুকমার্কগুলি দেখান৷\n"
+"দ্রষ্টব্য: ফায়ারফক্স বুকমার্ক পড়তে gir1.2-gda-5.0 প্যাকেজ ইনস্টল করুন৷"
+
+msgid "Enable searching of open windows"
+msgstr "খোলা উইন্ডো অনুসন্ধান সক্ষম করুন"
+
+msgid "Enable search providers"
+msgstr "অনুসন্ধান প্রদানকারী সক্রিয় করুন"
+
+msgid "Include search provider results in searches"
+msgstr "অনুসন্ধানে অনুসন্ধান প্রদানকারীর ফলাফল অন্তর্ভুক্ত করুন"
+
+msgid "Example Search Providers"
+msgstr "উদাহরণ অনুসন্ধান প্রদানকারী"
+
+msgid "Open menu on category:"
+msgstr "বিভাগে মেনু খুলুন:"
+
+msgid "List"
+msgstr "তালিকা"
+
+msgid "Grid"
+msgstr "গ্রিড"
+
+msgid "Always open the menu with this category selected"
+msgstr "এই বিভাগটি নির্বাচন করে সর্বদা মেনু খুলুন"
+
+msgid "columns"
+msgstr "কলাম"
+
+msgid "Number of columns in apps grid"
+msgstr "অ্যাপস গ্রিডে কলামের সংখ্যা"
+
+msgid "Show bookmarks and places"
+msgstr "বুকমার্ক এবং স্থান দেখান"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "মেনুতে বুকমার্ক এবং স্থানের বিভাগ দেখান"
+
+msgid "Show application icons"
+msgstr "অ্যাপ্লিকেশন আইকন দেখান"
+
+msgid "Show category icons"
+msgstr "বিভাগ আইকন দেখান"
+
+msgid "Show application descriptions under titles"
+msgstr "শিরোনাম অধীনে অ্যাপ্লিকেশন বিবরণ দেখান"
+
+msgid "Show tooltips"
+msgstr "টুলটিপ দেখান"
+
+msgid "Tooltip delay"
+msgstr "টুলটিপ বিলম্ব"
+
+msgid "Use a custom menu height"
+msgstr "একটি কাস্টম মেনু উচ্চতা ব্যবহার করুন"
+
+msgid "Custom menu height (pixels)"
+msgstr "কাস্টম মেনু উচ্চতা (পিক্সেল)"
+
+msgid "Applications view mode"
+msgstr "অ্যাপ্লিকেশন ভিউ মোড"
+
+msgid "View applications as list or grid"
+msgstr "তালিকা বা গ্রিড হিসাবে অ্যাপ্লিকেশন দেখুন"
+
+msgid "Application description placement"
+msgstr "আবেদন বিবরণ বসানো"
+
+msgid "Tooltips"
+msgstr "টুলটিপস"
+
+msgid "Under titles"
+msgstr "শিরোনাম অধীনে"
+
+msgid "None"
+msgstr "কোনোটিই নয়"
+
+msgid "Choose where to show application descriptions"
+msgstr "আবেদনের বিবরণ কোথায় দেখাতে হবে তা বেছে নিন"
+
+msgid "Sidebar location"
+msgstr "সাইডবার অবস্থান"
+
+msgid "Top"
+msgstr "শীর্ষ"
+
+msgid "Bottom"
+msgstr "নীচে"
+
+msgid "Left"
+msgstr "বাম"
+
+msgid "Right"
+msgstr "ডানদিকে"
+
+msgid "Choose where to show the sidebar"
+msgstr "সাইডবার কোথায় দেখাতে হবে তা বেছে নিন"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"তথ্য/টিপ: মেনুর আকার পরিবর্তন করতে মেনু প্রান্তে টেনে আনুন।\n"
+
+msgid "Show favorites on sidebar"
+msgstr "সাইডবারে ফেভারিট দেখান"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "সাইডবারে আপনার প্রিয় অ্যাপ এবং ফাইল আইকন দেখান"
+
+msgid "Show recent items"
+msgstr "সাম্প্রতিক আইটেম দেখান"
+
+msgid "Show recent items category in the menu"
+msgstr "মেনুতে সাম্প্রতিক আইটেম বিভাগ দেখান"
+
+msgid "Show favorite apps category"
+msgstr "প্রিয় অ্যাপ্লিকেশন বিভাগ দেখান"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "মেনুতে আপনার প্রিয় অ্যাপের বিভাগ দেখান"
+
+msgid "Show home folder"
+msgstr "হোম ফোল্ডার দেখান"
+
+msgid "Show home folder category in the menu"
+msgstr "মেনুতে হোম ফোল্ডার বিভাগ দেখান"
+
+msgid "Last used category"
+msgstr "সর্বশেষ ব্যবহৃত বিভাগ"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "মাউস হোভারে অ্যাপ্লিকেশন তালিকা অটোস্ক্রোল করুন"
+
+msgid "Show hidden files"
+msgstr "গোপন ফাইলগুলো দেখুন"
+
+msgid "Show hidden files in folder view"
+msgstr "ফোল্ডার ভিউতে লুকানো ফাইল দেখান"
+
+msgid "Emoji search"
+msgstr "ইমোজি অনুসন্ধান"
+
+msgid "Show emojis in search results"
+msgstr "অনুসন্ধান ফলাফলে ইমোজি দেখান"
+
+msgid "Web search option"
+msgstr "ওয়েব অনুসন্ধান বিকল্প"
+
+msgid "Show an internet search option in search results"
+msgstr "অনুসন্ধান ফলাফলে একটি ইন্টারনেট অনুসন্ধান বিকল্প দেখান"
+
+msgid "Search home folder"
+msgstr "হোম ফোল্ডার অনুসন্ধান করুন"
+
+msgid "When searching, also search my home folder for files"
+msgstr "অনুসন্ধান করার সময়, ফাইলগুলির জন্য আমার হোম ফোল্ডারটিও অনুসন্ধান করুন"
+
+msgid "Web history search"
+msgstr "ওয়েব ইতিহাস অনুসন্ধান"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"অনুসন্ধান করার সময়, আমার ব্রাউজারের ইতিহাসও অনুসন্ধান করুন (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"দ্রষ্টব্য: ফায়ারফক্স ইতিহাস বর্তমানে সমর্থিত নয়।"
+
+msgid "Web bookmarks search"
+msgstr "ওয়েব বুকমার্ক অনুসন্ধান"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"অনুসন্ধান করার সময়, আমার ব্রাউজারের ওয়েব বুকমার্কগুলিও অনুসন্ধান করুন (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"দ্রষ্টব্য: ফায়ারফক্স বুকমার্কগুলি অনুসন্ধান করতে আপনাকে প্যাকেজ gir1.2-gda-5.0 (ডেবিয়ান ভিত্তিক বিতরণ inc. উবুন্টু) ইনস্টল করতে হবে এবং লিনাক্স মিন্ট) বা প্যাকেজ libgda (আর্ক ভিত্তিক বিতরণ) এবং আপনার কম্পিউটার পুনরায় চালু করুন।"
+
+msgid "Wikipedia search"
+msgstr "উইকিপিডিয়া অনুসন্ধান"
+
+msgid "Show some Wikipedia results"
+msgstr "কিছু উইকিপিডিয়া ফলাফল দেখান"
+
+msgid "Wikipedia language"
+msgstr "উইকিপিডিয়ার ভাষা"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"দ্রষ্টব্য: কিছু অনুসন্ধান বিকল্প এখনও ব্যবহার করা যেতে পারে যদি আপনি এখানে আপনার অনুসন্ধান শব্দের উপসর্গ দিয়ে সেগুলি সক্রিয় না করে থাকেন৷\n"
+"উদাহরণস্বরূপ: একটি ইমোজি অনুসন্ধান করতে, হার্ট ইমোজিগুলি খুঁজতে 'ই হার্ট' টাইপ করুন৷ একইভাবে, ফাইল অনুসন্ধানের জন্য 'f', ওয়েব ইতিহাসের জন্য 'h' এবং ওয়েব বুকমার্ক অনুসন্ধানের জন্য 'b' উপসর্গ ব্যবহার করুন।\n"
+
+msgid "Use a custom icon size"
+msgstr "একটি কাস্টম আইকন আকার ব্যবহার করুন"
+
+msgid "Use a custom size for the panel icon"
+msgstr "প্যানেল আইকনের জন্য একটি কাস্টম আকার ব্যবহার করুন"
+
+msgid "Panel icon size (pixels)"
+msgstr "প্যানেল আইকনের আকার (পিক্সেল)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "প্যানেল আইকনের জন্য একটি কাস্টম আকার চয়ন করুন৷"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "সাইডবার আইকনের আকার (পিক্সেল)"
+
+msgid "Use sidebar box style"
+msgstr "সাইডবার বক্স শৈলী ব্যবহার করুন"
+
+msgid "Use a sidebar box style"
+msgstr "একটি সাইডবার বক্স শৈলী ব্যবহার করুন"
+
+msgid "Use tile style"
+msgstr "টাইল শৈলী ব্যবহার করুন"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "অ্যাপ্লিকেশন বোতামগুলির জন্য একটি টাইল শৈলী ব্যবহার করুন (দ্রষ্টব্য: কিছুতে কাজ নাও করতে পারে"

@@ -25,7 +25,7 @@ BatteryPowerApplet.prototype = {
 		this.state = {};
 		this.settings = new Settings.AppletSettings(this.state, metadata.uuid, instance_id);
 		this.settings.bindProperty(Settings.BindingDirection.IN, 'show-unit', 'showunit', () => this.on_settings_changed(), null);
-    	this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval', () => this.on_settings_changed(), null);
+		this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval', () => this.on_settings_changed(), null);
 		this.UPowerRefreshed = false;
 
 		this.loopId = Mainloop.timeout_add(this.state.interval, () => this.update());
@@ -73,7 +73,11 @@ BatteryPowerApplet.prototype = {
 	_getBatteryStatus: function () {
 		const statusFile = "/sys/class/power_supply/BAT0/status";
 		if (GLib.file_test(statusFile, 1 << 4)) {
-			return String(GLib.file_get_contents(statusFile)[1]).trim();
+			try {
+				return String(GLib.file_get_contents(statusFile)[1]).trim();
+			} catch (error) {
+				// do nothing
+			}
 		}
 
 		if (!this.UPowerRefreshed){
@@ -83,10 +87,13 @@ BatteryPowerApplet.prototype = {
 		const stateFile = ".batterystate";
 		//Main.Util.spawnCommandLine(`upower -i $(upower -e | grep BAT) | grep state | rev | cut -d ' ' -f 1 | rev > ${__meta.path}/${stateFile}`);
 		if (GLib.file_test(stateFile, 1 << 4)) {
-			return String(GLib.file_get_contents(stateFile)[1]).trim();
+			try{
+				return String(GLib.file_get_contents(stateFile)[1]).trim();
+			} catch (error) {
+				// do nothing
+			}
 		}
-		
-		return "" 
+		return "";
 	},
 
 	_getBatteryPower: function () {
@@ -99,16 +106,23 @@ BatteryPowerApplet.prototype = {
 
 		const powerDrawFile = "/sys/class/power_supply/BAT0/power_now";
 		if(GLib.file_test(powerDrawFile, 1 << 4)) {
-			return parseInt(GLib.file_get_contents(powerDrawFile)[1]) / 1000000.0;
+			try{
+				return parseInt(GLib.file_get_contents(powerDrawFile)[1]) / 1000000.0;
+			} catch (error) {
+				return 0.0;
+			}
 		}
 		
 		const currentDrawFile = "/sys/class/power_supply/BAT0/current_now";
 		const voltageDrawFile = "/sys/class/power_supply/BAT0/voltage_now";
 		if (GLib.file_test(currentDrawFile, 1 << 4) && GLib.file_test(voltageDrawFile, 1 << 4)) {
-			const current = parseInt(GLib.file_get_contents(currentDrawFile)[1]) / 1000000.0;
-			const voltage = parseInt(GLib.file_get_contents(voltageDrawFile)[1]) / 1000000.0;
-			
-			return current * voltage;
+			try {
+				const current = parseInt(GLib.file_get_contents(currentDrawFile)[1]) / 1000000.0;
+				const voltage = parseInt(GLib.file_get_contents(voltageDrawFile)[1]) / 1000000.0;
+				return current * voltage;
+			} catch (error) {
+				return 0.0;
+			}
 		}
 
 		// If the files could not be used, we need to update upower information and use info
@@ -119,10 +133,14 @@ BatteryPowerApplet.prototype = {
 		}
 		const upowerEnergyRateFile = ".energyrate"
 		if(GLib.file_test(upowerEnergyRateFile, 1 << 4)) {
-			return parseFloat(GLib.file_get_contents(upowerEnergyRateFile)[1]);
+			try {
+				return parseFloat(GLib.file_get_contents(upowerEnergyRateFile)[1]);
+			} catch (error) {
+				return 0.0;
+			}
 		}
 		
-		return NaN
+		return NaN;
 	},
 
 	on_settings_changed: function() {

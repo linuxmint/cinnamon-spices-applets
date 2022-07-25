@@ -4,5 +4,11 @@
 		"default": "~/.local/share/cinnamon/applets/cheaty@centurix/refdocs",
 		"description": "cheatsheetFolder",
 		"select-dir": true
+	},
+	"keyOpen": {
+		"type": "keybinding",
+		"description": "Show Cheaty popup menu",
+		"default": "<Super>m",
+		"tooltip" : "Set keybinding(s) to show the Cheaty popup menu."
 	}
 }

@@ -1,0 +1,445 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "page1",
+            "page2"
+        ],
+        "page1": {
+            "type": "page",
+            "title": "Calendar",
+            "sections": [
+                "section1",
+                "section2",
+                "section3"
+            ]
+        },
+        "page2": {
+            "type": "page",
+            "title": "World Clocks",
+            "sections": [
+                "section4"
+            ]
+        },
+        "section1": {
+            "type": "section",
+            "title": "Display",
+            "keys": [
+                "show-events",
+                "show-week-numbers",
+                "weekend-length",
+                "use-custom-format",
+                "custom-format",
+                "format-button"
+            ]
+        },
+        "section2": {
+            "type": "section",
+            "title": "Get Public Holidays for",
+            "keys": [
+                "country",
+                "has_region",
+                "region_aus",
+                "region_can",
+                "region_deu",
+                "region_esp",
+                "region_nzl",
+                "region_svk",
+                "region_che",
+                "region_gbr",
+                "region_usa"
+            ]
+        },
+        "section3": {
+            "type": "section",
+            "title": "Keyboard shortcuts",
+            "keys": [
+                "keyOpen"
+            ]
+        },
+        "section4": {
+            "type": "section",
+            "title": "Show World Times",
+            "keys": [
+                "worldclocks"
+            ]
+        }
+    },
+    "show-events" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "Show calendar events",
+        "tooltip": "Check this to display events in the calendar."
+    },
+    "show-week-numbers": {
+        "type": "switch",
+        "default": false,
+        "description": "Show week numbers in calendar",
+        "tooltip": "Check this to show week numbers in the calendar."
+    },
+    "weekend-length": {
+        "type": "radiogroup",
+        "default": 2,
+        "description": "Mark as weekend days",
+        "tooltip": "Set how many days are marked as non-working days per week.",
+        "options": {
+            "One day": 1,
+            "Two days": 2
+        }
+    },
+    "use-custom-format": {
+        "type": "switch",
+        "default": false,
+        "description": "Use a custom date format",
+        "tooltip": "Check this to define a custom format for the date in the calendar applet."
+    },
+    "custom-format": {
+        "type": "entry",
+        "default": "%A, %B %e, %H:%M",
+        "description": "Date format",
+        "indent": true,
+        "dependency": "use-custom-format",
+        "tooltip": "Set your custom format here."
+    },
+    "format-button": {
+        "type": "button",
+        "description": "Show information on date format syntax",
+        "indent": true,
+        "dependency": "use-custom-format",
+        "callback": "on_custom_format_button_pressed",
+        "tooltip": "Click this button to know more about the syntax for date formats."
+    },
+    "country": {
+        "type": "combobox",
+        "default": null,
+        "description": "Country",
+        "options": {
+            "Angola": "ago",
+            "Australia": "aus",
+            "Austria": "aut",
+            "Belgium": "bel",
+            "Bosnia and Herzegovina": "bih",
+            "Belarus": "blr",
+            "Brazil": "bra",
+            "Canada": "can",
+            "Chile": "chl",
+            "China": "chn",
+            "Colombia": "col",
+            "Croatia": "hrv",
+            "Czech Republic": "cze",
+            "Denmark": "dnk",
+            "Estonia": "est",
+            "Spain": "esp",
+            "Finland": "fin",
+            "France": "fra",
+            "Germany": "deu",
+            "Greece": "grc",
+            "Hong Kong": "hkg",
+            "Hungary": "hun",
+            "Iceland": "isl",
+            "Ireland": "irl",
+            "Isle of Man": "imn",
+            "Israel": "isr",
+            "Italy": "ita",
+            "Japan": "jpn",
+            "Korea (South)": "kor",
+            "Latvia": "lva",
+            "Lithuania": "ltu",
+            "Luxembourg": "lux",
+            "Macedonia": "mkd",
+            "Mexico": "mex",
+            "Netherlands": "nld",
+            "New Zealand": "nzl",
+            "Norway": "nor",
+            "Peru": "per",
+            "Philippines": "phl",
+            "Poland": "pol",
+            "Portugal": "prt",
+            "Romania": "rou",
+            "Russian Federation": "rus",
+            "Serbia": "srb",
+            "Singapore": "sgp",
+            "Slovakia": "svk",
+            "Slovenia": "svn",
+            "South Africa": "zaf",
+            "Sweden": "swe",
+            "Switzerland": "che",
+            "Turkey": "tur",
+            "Ukraine": "ukr",
+            "United Kingdom": "gbr",
+            "United States of America": "usa"
+        }
+    },
+    "has_region": {
+        "type": "generic",
+        "default": [
+            "aus",
+            "can",
+            "deu",
+            "esp",
+            "nzl",
+            "svk",
+            "che",
+            "gbr",
+            "usa"
+        ]
+    },
+    "region_aus": {
+        "type": "combobox",
+        "default": null,
+        "description": "Region",
+        "options": {
+            "Australian Capital Territory": "act",
+            "Queensland": "qld",
+            "New South Wales": "nsw",
+            "Northern Territory": "nt",
+            "South Australia": "sa",
+            "Tasmania": "tas",
+            "Victoria": "vic",
+            "Western Australia": "wa"
+        },
+        "dependency": "country=aus"
+    },
+    "region_can": {
+        "type": "combobox",
+        "default": null,
+        "description": "Region",
+        "options": {
+            "Alberta": "ab",
+            "British Columbia": "bc",
+            "Manitoba": "mb",
+            "New Brunswick": "nb",
+            "Newfoundland and Labrador": "nl",
+            "Northwest Territories": "nt",
+            "Nova Scotia": "ns",
+            "Nunavut": "nu",
+            "Ontario": "on",
+            "Prince Edward Island": "pe",
+            "Quebec": "qc",
+            "Saskatchewan": "sk",
+            "Yukon": "yt"
+        },
+        "dependency": "country=can"
+    },
+    "region_deu": {
+        "type": "combobox",
+        "default": null,
+        "description": "Region",
+        "options": {
+            "Baden-Württemberg": "bw",
+            "Bayern": "by",
+            "Berlin": "be",
+            "Brandenburg": "bb",
+            "Bremen": "hb",
+            "Hamburg": "hh",
+            "Hessen": "he",
+            "Niedersachsen": "ni",
+            "Mecklenburg-Vorpommern": "mv",
+            "Nordrhein-Westfalen": "nw",
+            "Rheinland-Pfalz": "rp",
+            "Saarland": "sl",
+            "Sachsen": "sn",
+            "Sachsen-Anhalt": "st",
+            "Schleswig-Holstein": "sh",
+            "Thüringen": "th"
+        },
+        "dependency": "country=deu"
+    },
+    "region_esp": {
+        "type": "combobox",
+        "default": null,
+        "description": "Region",
+        "options": {
+            "Andalucía": "an",
+            "Aragón": "ar",
+            "Asturias": "as",
+            "Canarias": "cn",
+            "Cantabria": "cb",
+            "Castilla y León": "cl",
+            "Castilla-La Mancha": "cm",
+            "Cataluña": "ct",
+            "Ceuta": "ce",
+            "Extremadura": "ex",
+            "Galicia": "ga",
+            "Islas Baleares": "ib",
+            "La Rioja": "ri",
+            "Madrid": "md",
+            "Melilla": "ml",
+            "Murcia": "mc",
+            "Navarra": "nc",
+            "País Vasco": "pv",
+            "Valencia": "vc"
+        },
+        "dependency": "country=esp"
+    },
+    "region_nzl": {
+        "type": "combobox",
+        "default": null,
+        "description": "Region",
+        "options": {
+            "Auckland": "auk",
+            "Bay of Plenty": "bop",
+            "Canterbury": "can",
+            "Gisborne": "gis",
+            "Hawke's Bay": "hkb",
+            "Marlborough": "mbh",
+            "Manawatu-Wanganui": "mwt",
+            "Nelson": "nsn",
+            "Northland": "ntl",
+            "Otago": "ota",
+            "Southland": "stl",
+            "Tasman": "tas",
+            "Taranaki": "tki",
+            "Waikato": "wko",
+            "Wellington": "wgn",
+            "West Coast": "wtc",
+            "Chatham Islands Territory": "cit"
+        },
+        "dependency": "country=nzl"
+    },
+    "region_svk": {
+        "type": "combobox",
+        "default": null,
+        "description": "Region",
+        "options": {
+            "Banskobystrický kraj": "bc",
+            "Bratislavský kraj": "bl",
+            "Košický kraj": "ki",
+            "Nitriansky kraj": "ni",
+            "Prešovský kraj": "pv",
+            "Trnavský kraj": "ta",
+            "Trenčiansky kraj": "tc",
+            "Žilinský kraj": "zi"
+        },
+        "dependency": "country=svk"
+    },
+    "region_che": {
+        "type": "combobox",
+        "default": null,
+        "description": "Region",
+        "options": {
+            "Aargau": "ag",
+            "Appenzell Innerrhoden": "ai",
+            "Appenzell Ausserrhoden": "ar",
+            "Basel-Landschaft": "bl",
+            "Basel-Stadt": "bs",
+            "Bern": "be",
+            "Fribourg": "fr",
+            "Geneva": "ge",
+            "Glarus": "gl",
+            "Grisons": "gr",
+            "Jura": "ju",
+            "Luzern": "lu",
+            "Neuchâtel": "ne",
+            "Nidwalden": "nw",
+            "Obwalden": "ow",
+            "St. Gallen": "sg",
+            "Schaffhausen": "sh",
+            "Schwyz": "sz",
+            "Solothurn": "so",
+            "Thurgau": "tg",
+            "Ticino": "ti",
+            "Uri": "ur",
+            "Valais": "vs",
+            "Vaud": "vd",
+            "Zug": "zg",
+            "Zürich": "zh"
+        },
+        "dependency": "country=che"
+    },
+    "region_gbr": {
+        "type": "combobox",
+        "default": null,
+        "description": "Region",
+        "options": {
+            "England": "eng",
+            "Northern Ireland": "nir",
+            "Scotland": "sct",
+            "Wales": "wls"
+        },
+        "dependency": "country=gbr"
+    },
+    "region_usa": {
+        "type": "combobox",
+        "default": null,
+        "description": "Region",
+        "options": {
+            "Alabama": "al",
+            "Alaska": "ak",
+            "Arizona": "az",
+            "Arkansas": "ar",
+            "California": "ca",
+            "Colorado": "co",
+            "Connecticut": "ct",
+            "Delaware": "de",
+            "District of Columbia": "dc",
+            "Florida": "fl",
+            "Georgia": "ga",
+            "Hawaii": "hi",
+            "Idaho": "id",
+            "Illinois": "il",
+            "Indiana": "in",
+            "Iowa": "ia",
+            "Kansas": "ks",
+            "Kentucky": "ky",
+            "Louisiana": "la",
+            "Maine": "me",
+            "Maryland": "md",
+            "Massachusetts": "ma",
+            "Michigan": "mi",
+            "Minnesota": "mn",
+            "Mississippi": "ms",
+            "Missouri": "mo",
+            "Montana": "mt",
+            "Nebraska": "ne",
+            "Nevada": "nv",
+            "New Hampshire": "nh",
+            "New Jersey": "nj",
+            "New Mexico": "nm",
+            "New York": "ny",
+            "North Carolina": "nc",
+            "North Dakota": "nd",
+            "Ohio": "oh",
+            "Oklahoma": "ok",
+            "Oregon": "or",
+            "Pennsylvania": "pa",
+            "Rhode Island": "ri",
+            "South Carolina": "sc",
+            "South Dakota": "sd",
+            "Tennessee": "tn",
+            "Texas": "tx",
+            "Utah": "ut",
+            "Vermont": "vt",
+            "Virginia": "va",
+            "Washington": "wa",
+            "West Virginia": "wv",
+            "Wisconsin": "wi",
+            "Wyoming": "wy"
+        },
+        "dependency": "country=usa"
+    },
+    "keyOpen": {
+        "type": "keybinding",
+        "description": "Show calendar",
+        "default": "<Super>c",
+        "tooltip": "Set keybinding(s) to show the calendar."
+    },
+    "worldclocks": {
+        "type": "custom",
+        "description": "World Clocks",
+        "file": "settings_widgets.py",
+        "widget": "ClocksList",
+        "columns": [{
+                "id": "label",
+                "title": "Display name",
+                "type": "string"
+            },
+            {
+                "id": "timezone",
+                "title": "Timezone",
+                "type": "string"
+            }
+        ],
+        "default": []
+    }
+}

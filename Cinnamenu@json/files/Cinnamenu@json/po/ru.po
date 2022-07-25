@@ -1,437 +1,631 @@
-# Translator list
-# Ivan Komaritsyn <vantu5z@mail.ru>, 2015, 2016.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Cinnamenu\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-20 08:10+0100\n"
-"Last-Translator: Ivan Komaritsyn <vantu5z@mail.ru>\n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-06-05 11:17+0300\n"
 "Language-Team: \n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: ArturS <arturs@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.3.1\n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Language: ru\n"
 
-#. 3.2 4.0
 msgid "Type to search..."
-msgstr "Введите запрос для поиска..."
+msgstr "Введите для поиска..."
 
-#. 3.2 4.0
 msgid "Initializing"
-msgstr ""
+msgstr "Инициализация"
 
-#. 3.2 4.0
 msgid "No description available"
-msgstr "Нет доступного описания"
+msgstr "Описание отсутствует"
 
-#. 3.2 4.0
-msgid "All Applications"
+msgid "All applications"
 msgstr "Все приложения"
 
-#. 3.2 4.0
 msgid "Places"
 msgstr "Места"
 
-#. 3.2 4.0
-msgid "Recent Files"
+msgid "Recent files"
 msgstr "Недавние файлы"
 
-#. 3.2 4.0
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#. 3.2 4.0
-msgid "Favorite Apps"
+msgid "Favorite apps"
 msgstr "Избранные приложения"
 
-#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "gir1.2-gda-5.0, необходимый для закладок Firefox и Midori."
+msgstr "для закладок Firefox и Midori необходим пакет gir1.2-gda-5.0."
 
-#. 3.2 4.0
 msgid "Clear List"
 msgstr "Очистить список"
 
-#. 3.2 4.0
-msgid "No recent documents"
-msgstr "Нет последних документов"
+msgid "No recent files"
+msgstr "Нет последних файлов"
 
-#. 3.2
 msgid "Account details"
-msgstr "Детали учетной записи"
+msgstr "Детали аккаунта"
 
-#. 3.2 3.2
 msgid "Grid View"
 msgstr "В виде сетки"
 
-#. 3.2 3.2
 msgid "List View"
 msgstr "В виде списка"
 
-#. 3.2 3.2
 msgid "Switch to grid view"
 msgstr "Переключить на вид сетки"
 
-#. 3.2 3.2
 msgid "Switch to list view"
 msgstr "Переключить на вид списка"
 
-#. 3.2 4.0
-msgid "Lock Screen"
-msgstr "Заблокировать экран"
+msgid "Lock screen"
+msgstr "Блокировка экрана"
 
-#. 3.2 4.0
 msgid "Lock the screen"
 msgstr "Заблокировать экран"
 
-#. 3.2 4.0
 msgid "Logout"
 msgstr "Выйти"
 
-#. 3.2 4.0
 msgid "Leave the session"
 msgstr "Покинуть сессию"
 
-#. 3.2 4.0
 msgid "Quit"
 msgstr "Выход"
 
-#. 3.2 4.0
 msgid "Shutdown the computer"
 msgstr "Выключить компьютер"
 
-#. 3.2 4.0
-msgid "Home"
-msgstr "Домашняя папка"
-
-#. 3.2 4.0
-msgid "Computer"
-msgstr "Компьютер"
-
-#. 3.2 4.0
-msgid "Browse network"
-msgstr "Обзор сети"
-
-#. 3.2 4.0
 msgid "Run with NVIDIA GPU"
-msgstr "Запустить с NVIDIA GPU"
+msgstr "Запуск с GPU NVIDIA"
 
-#. 3.2 4.0
 msgid "Add to panel"
 msgstr "Добавить на панель"
 
-#. 3.2 4.0
 msgid "Add to desktop"
-msgstr "Добавить на Рабочий стол"
+msgstr "Добавить на рабочий стол"
 
-#. 3.2 4.0
-msgid "Remove favorite"
-msgstr "Удалить любимую"
+msgid "Remove from favorites"
+msgstr "Убрать из \"Избранных\""
 
-#. 3.2 4.0
 msgid "Add to favorites"
-msgstr "Добавить в Избранное"
+msgstr "Добавить в \"Избранные\""
 
-#. 3.2 4.0
 msgid "Uninstall"
 msgstr "Удалить"
 
-#. 4.0 4.0
-msgid "Please wait..."
-msgstr "Пожалуйста, подождите..."
+msgid "Home"
+msgstr "Домашний каталог"
 
-#. metadata.json->name
-#. 3.2
+msgid "Computer"
+msgstr "Компьютер"
+
+msgid "Browse network"
+msgstr "Обзор сети"
+
+msgid "Find files..."
+msgstr "Поиск файлов..."
+
+msgid "Please wait..."
+msgstr "Подождите, пожалуйста..."
+
+msgid "Applications"
+msgstr "Приложения"
+
+msgid "Documents"
+msgstr "Документы"
+
+msgid "Videos"
+msgstr "Видео"
+
+msgid "Images"
+msgstr "Картинки"
+
+msgid "Music"
+msgstr "Музыка"
+
+msgid "No recent Items"
+msgstr "Нет последних сообщений"
+
+msgid "Click to copy"
+msgstr "Кликните, чтобы скопировать"
+
+msgid "Applications and files"
+msgstr "Приложения и файлы"
+
+msgid "Other search results"
+msgstr "Другие результаты поиска"
+
+msgid "Browser history"
+msgstr "История браузера"
+
+msgid "Browser bookmarks"
+msgstr "Закладки браузера"
+
+msgid "Emoji"
+msgstr "Смайлики"
+
+msgid "Trash"
+msgstr "Корзина"
+
+msgid "Error while opening file:"
+msgstr "Ошибка при открытии файла:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Слишком много записей - показаны только первые 1000 записей"
+
+msgid "Favorites"
+msgstr "Избранное"
+
+msgid "Recent"
+msgstr "Последние"
+
+msgid "Home folder"
+msgstr "Домашний каталог"
+
+msgid "Reset category order"
+msgstr "Восстановить порядок категорий"
+
+msgid "light skin tone"
+msgstr "светлый тон скина"
+
+msgid "medium-light skin tone"
+msgstr "средне-светлый тон скина"
+
+msgid "medium skin tone"
+msgstr "средний тон скина"
+
+msgid "medium-dark skin tone"
+msgstr "средне-темный тон скина"
+
+msgid "dark skin tone"
+msgstr "темный тон скина"
+
+msgid "This file is no longer available"
+msgstr "Этот файл больше не доступен"
+
+msgid "Open with"
+msgstr "Открыть с помощью"
+
+msgid "Other application..."
+msgstr "Другие приложения..."
+
+msgid "Open containing folder"
+msgstr "Открыть каталог содержащий"
+
+msgid "Move to trash"
+msgstr "Переместить в корзину"
+
+msgid "Error while moving file to trash:"
+msgstr "Ошибка при перемещении файла в корзину:"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Этот пункт меню не связан ни с каким пакетом. Вы все равно хотите удалить "
+"его из меню?"
+
+msgid "The following packages will be removed:"
+msgstr "Будут удалены следующие пакеты:"
+
+msgid "Packages to be removed"
+msgstr "Пакеты, подлежащие удалению"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Невозможно удалить пакет %s, так как он необходим другим пакетам."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Пакет %s является зависимостью следующих пакетов:"
+
+msgid "Open"
+msgstr "Открыть"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Start in"
+msgstr "Начать"
+
+msgid "Select a folder"
+msgstr "Выбрать каталог"
+
+msgid "Follow symlinks"
+msgstr "Переход по симлинкам"
+
+msgid "Search hidden"
+msgstr "Искать скрытые"
+
+msgid "Use regular expressions"
+msgstr "Использовать регулярные выражения"
+
+msgid "Stop"
+msgstr "Стоп"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Path"
+msgstr "Путь"
+
+msgid "Searching..."
+msgstr "Поиск..."
+
+msgid "Search Stopped"
+msgstr "Поиск прекращен"
+
+msgid "Searching: "
+msgstr "Поиск:"
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Ошибка: нет прав на чтение каталога "
+
+msgid "Search Completed"
+msgstr "Поиск завершен"
+
+msgid "Skipping"
+msgstr "Пропустить"
+
+msgid " - directory already searched"
+msgstr " - каталог уже был найден"
+
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-#. metadata.json->description
 msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
 msgstr ""
-"Гибкое меню с параметрами форматирования, веб-закладками, поддержкой "
-"поставщиков поиска и нечетким поиском."
+"Гибкое меню с вариантами компоновки в виде сетки или списка, браузером "
+"файлов и поиском по смайликам."
 
-#. metadata.json->comments
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
-msgstr ""
-
-#. 3.2 4.0
 msgid "Behavior"
 msgstr "Поведение"
 
-#. 3.2 4.0
 msgid "Appearance"
-msgstr "Оформление"
+msgstr "Внешний вид"
 
-#. 3.2 4.0
 msgid "Layout and Content"
-msgstr "Макет и содержание"
+msgstr "Оформление и содержание"
 
-#. 3.2
 msgid "Search Providers"
-msgstr "Поисковые провайдеры"
+msgstr "Поисковики"
 
-#. 3.2
 msgid "No search provider extensions found"
-msgstr ""
+msgstr "Расширение поисковика не найдено"
 
-#. 3.2 4.0
 msgid "Panel"
-msgstr "панель"
+msgstr "Панель"
 
-#. 3.2 4.0
 msgid "Menu"
 msgstr "Меню"
 
-#. 3.2 4.0
 msgid "Layout"
-msgstr "раскладка"
+msgstr "Внешний вид"
 
-#. 3.2 4.0
 msgid "Content"
-msgstr "содержание"
+msgstr "Содержание"
 
-#. 3.2 4.0
 msgid "Recent files settings"
 msgstr "Настройки последних файлов"
 
-#. 3.2 4.0
 msgid "Open the menu editor"
 msgstr "Открыть редактор меню"
 
-#. 3.2 4.0
-msgid "Reset category order"
-msgstr "Сбросить заказ категории"
-
-#. 3.2 4.0
 msgid "Use a custom icon"
-msgstr "Использовать свой значок"
+msgstr "Использовать собственную иконку"
 
-#. 3.2 4.0
 msgid "Use a custom icon in the panel"
-msgstr "Используйте пользовательский значок на панели"
+msgstr "Использовать собственную иконку на панели"
 
-#. 3.2 4.0
 msgid "Panel icon"
-msgstr "Значок панели"
+msgstr "Иконка панели"
 
-#. 3.2 4.0
 msgid "Panel text"
 msgstr "Текст панели"
 
-#. 3.2 4.0
 msgid "Text to show beside the panel icon"
-msgstr "Текст для отображения рядом со значком панели"
+msgstr "Текст, отображаемый рядом со значком панели"
 
-#. 3.2 4.0
-msgid "pixels"
-msgstr "пиксели"
+msgid "Category icon size (pixels)"
+msgstr "Размер значка категории (в пикселях)"
 
-#. 3.2 4.0
-msgid "Category icon size"
-msgstr "Размер значка категорий"
+msgid "Applications list icon size (pixels)"
+msgstr "Размер значка списка приложений (в пикселях)"
 
-#. 3.2 4.0
-msgid "Applications list icon size"
-msgstr "Размер значков в списке приложений"
+msgid "Applications grid icon size (pixels)"
+msgstr "Размер значка приложений сетки (в пикселях)"
 
-#. 3.2 4.0
-msgid "Applications grid icon size"
-msgstr "Размер значков в сетке приложений"
-
-#. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Сочетание клавиш для открытия и закрытия меню"
 
-#. 3.2 4.0
 msgid "Open menu on hover"
-msgstr "Открыть меню при наведении"
+msgstr "Открывать меню при наведении курсора мыши"
 
-#. 3.2 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr "Откройте меню, когда наведите курсор мыши на значок панели"
+msgstr "Открывать меню при наведении мыши на значок панели"
 
-#. 3.2 4.0
 msgid "milliseconds"
 msgstr "миллисекунды"
 
-#. 3.2 4.0
 msgid "Menu hover delay"
-msgstr "Задержка меню"
+msgstr "Задержка при наведении на меню"
 
-#. 3.2 4.0
 msgid "Use menu animations"
 msgstr "Использовать анимацию меню"
 
-#. 3.2 4.0
 msgid "Animate the menu on open and close"
-msgstr "Анимировать меню на открывать и закрывать"
+msgstr "Анимация меню при открытии и закрытии"
 
-#. 3.2 4.0
 msgid "Activate categories on click"
-msgstr "Активировать категории по клику"
+msgstr "Активация категории по щелчку мыши"
 
-#. 3.2 4.0
 msgid "Activate categories on click instead of on hover"
-msgstr "Активировать категории по клику, а не при наведении"
+msgstr "Активация категорий по щелчку, а не по наведению курсора"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling"
 msgstr "Включить автопрокрутку"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
 msgstr "Включить автопрокрутку в списке приложений"
 
-#. 3.2 4.0
 msgid "Show web bookmarks"
-msgstr "Показать веб-закладки"
+msgstr "Отображать веб-закладки"
 
-#. 3.2 4.0
-msgid "Show your browser's web bookmarks in the menu"
-msgstr "Показывать веб-закладки вашего браузера в меню"
-
-#. 3.2
-msgid "Enable searching of open windows"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
+"Отображение веб-закладок браузера в меню.\n"
+"Примечание: Для чтения закладок firefox установите пакет gir1.2-gda-5.0."
 
-#. 3.2 4.0
+msgid "Enable searching of open windows"
+msgstr "Включить поиск в открытых окнах"
+
 msgid "Enable search providers"
-msgstr "Включить поисковые провайдеры"
+msgstr "Включить поисковые службы"
 
-#. 3.2 4.0
 msgid "Include search provider results in searches"
-msgstr "Включить результаты поиска в результаты поиска"
+msgstr "Включить результаты поиска в поисковый запрос"
 
-#. 3.2 4.0
 msgid "Example Search Providers"
-msgstr "Пример поиска поставщиков"
+msgstr "Примеры поисковых служб"
 
-#. 3.2
-msgid "Startup applications view mode"
-msgstr "Режим просмотра запускаемых приложений"
+msgid "Open menu on category:"
+msgstr "Открыть меню в категории:"
 
-#. 3.2 4.0
 msgid "List"
 msgstr "Список"
 
-#. 3.2 4.0
 msgid "Grid"
 msgstr "Сетка"
 
-#. 3.2 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Всегда открывать меню с избранной категорией"
+
 msgid "columns"
 msgstr "колонки"
 
-#. 3.2 4.0
 msgid "Number of columns in apps grid"
-msgstr "Номер колонки в сетке приложений"
+msgstr "Кол-во столбцов в сетке приложений"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places"
 msgstr "Показывать закладки и места"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places category in the menu"
-msgstr "Показать категорию закладок и мест в меню"
+msgstr "Показывать в меню закладки и категории мест"
 
-#. 3.2 4.0
 msgid "Show application icons"
 msgstr "Показывать значки приложений"
 
-#. 3.2 4.0
 msgid "Show category icons"
 msgstr "Показывать значки категорий"
 
-#. 3.2
 msgid "Show application descriptions under titles"
 msgstr "Показывать описания приложений под заголовками"
 
-#. 3.2
 msgid "Show tooltips"
-msgstr ""
+msgstr "Показывать всплывающие подсказки"
 
-#. 3.2
 msgid "Tooltip delay"
 msgstr "Задержка всплывающей подсказки"
 
-#. 3.2 4.0
 msgid "Use a custom menu height"
-msgstr "Используйте настраиваемую высоту меню"
+msgstr "Использовать собственную высоту меню"
 
-#. 3.2 4.0
-msgid "px"
-msgstr "px"
+msgid "Custom menu height (pixels)"
+msgstr "Высота настраиваемого меню (в пикселях)"
 
-#. 3.2 4.0
-msgid "Custom menu height"
-msgstr "Пользовательская высота меню"
-
-#. 4.0
 msgid "Applications view mode"
-msgstr "Режим просмотра приложений"
+msgstr "Вид просмотра приложений"
 
-#. 4.0
 msgid "View applications as list or grid"
 msgstr "Просмотр приложений в виде списка или сетки"
 
-#. 4.0
 msgid "Application description placement"
-msgstr "Размещение описания приложения"
+msgstr "Размещение описания приложений"
 
-#. 4.0
 msgid "Tooltips"
-msgstr "Всплывающие"
+msgstr "Всплывающие подсказки"
 
-#. 4.0
 msgid "Under titles"
-msgstr "Под заголовками"
+msgstr "Под названиями"
 
-#. 4.0
 msgid "None"
-msgstr "Никто"
+msgstr "Нет"
 
-#. 4.0
 msgid "Choose where to show application descriptions"
-msgstr "Выберите, где показывать описания приложений"
+msgstr "Выбор места отображения описаний приложений"
 
-#. 4.0
-msgid "Session buttons location"
-msgstr "Расположение кнопок сеанса"
+msgid "Sidebar location"
+msgstr "Расположение боковой панели"
 
-#. 4.0
 msgid "Top"
-msgstr "внизу"
+msgstr "Вверху"
 
-#. 4.0
 msgid "Bottom"
-msgstr "внизу"
+msgstr "Внизу"
 
-#. 4.0
 msgid "Left"
-msgstr "налево"
+msgstr "Слева"
 
-#. 4.0
 msgid "Right"
-msgstr "направо"
+msgstr "Справа"
 
-#. 4.0
-msgid "Choose where to show the session (quit, logout, etc.) buttons"
-msgstr "Выберите, где показывать кнопки сеанса (выход, выход и т. Д.)"
+msgid "Choose where to show the sidebar"
+msgstr "Выбор места отображения боковой панели"
 
-#. 4.0
-msgid "Add favorites to session buttons"
-msgstr "Добавить избранное в кнопки сеанса"
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"Информация/совет: Для изменения размера меню потяните его за край.\n"
 
-#. 4.0
-msgid "Show your favorite app icons next to the session buttons"
-msgstr "Покажите ваши любимые значки приложений рядом с кнопками сеанса"
+msgid "Show favorites on sidebar"
+msgstr "Показывать избранное на боковой панели"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Показывать значки избранных приложений и файлов на боковой панели"
+
+msgid "Show recent items"
+msgstr "Показывать последние элементы"
+
+msgid "Show recent items category in the menu"
+msgstr "Показывать категорию последних элементов в меню"
+
+msgid "Show favorite apps category"
+msgstr "Показывать категорию избранных приложений"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Показывать категорию избранных приложений в меню"
+
+msgid "Show home folder"
+msgstr "Показывать домашний каталог"
+
+msgid "Show home folder category in the menu"
+msgstr "Показывать в меню категорию домашнего каталога"
+
+msgid "Last used category"
+msgstr "Последняя используемая категория"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Автопрокрутка списка приложений при наведении мыши"
+
+msgid "Show hidden files"
+msgstr "Показывать скрытые файлы"
+
+msgid "Show hidden files in folder view"
+msgstr "Показывать скрытые файлы в режиме просмотра каталогов"
+
+msgid "Emoji search"
+msgstr "Поиск по эмодзи"
+
+msgid "Show emojis in search results"
+msgstr "Показывать эмодзи в результатах поиска"
+
+msgid "Web search option"
+msgstr "Опция поиска в Интернете"
+
+msgid "Show an internet search option in search results"
+msgstr "Показывать опцию поиска в Интернете в результатах поиска"
+
+msgid "Search home folder"
+msgstr "Искать в домашнем каталоге"
+
+msgid "When searching, also search my home folder for files"
+msgstr "При поиске искать файлы и в домашнем каталоге"
+
+msgid "Web history search"
+msgstr "История веб-поиска"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"При поиске также искать в истории браузера (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave).\n"
+"Примечание: история Firefox в настоящее время не поддерживается."
+
+msgid "Web bookmarks search"
+msgstr "Поиск веб-закладок"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"При поиске также искать закладки в моем браузере (Google Chrome, Firefox, "
+"Chromium, Opera, Vivaldi, Brave).\n"
+"Примечание: Для поиска закладок Firefox вам необходимо установить пакет "
+"gir1.2-gda-5.0 (дистрибутивы на базе Debian, включая Ubuntu и Linux Mint) "
+"или пакет libgda (дистрибутивы на базе Arch) и перезагрузить компьютер."
+
+msgid "Wikipedia search"
+msgstr "Поиск в Википедии"
+
+msgid "Show some Wikipedia results"
+msgstr "Показать результаты Википедии"
+
+msgid "Wikipedia language"
+msgstr "Язык Википедии"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Примечание: Некоторые параметры поиска можно использовать, даже если вы не "
+"включали их здесь, добавив префикс к поисковому запросу.\n"
+"Например, для поиска эмодзи введите 'e heart', чтобы найти эмодзи сердца. "
+"Аналогично, используйте префиксы 'f ' для поиска файлов, 'h ' для веб-"
+"истории и 'b ' для поиска веб-закладок.\n"
+
+msgid "Use a custom icon size"
+msgstr "Использовать настраиваемый размер значка"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Использовать настраиваемый размер для значка панели"
+
+msgid "Panel icon size (pixels)"
+msgstr "Размер значка панели (в пикселях)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Выбор произвольного размера для значка панели"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Размер значка боковой панели (в пикселях)"
+
+msgid "Use sidebar box style"
+msgstr "Использование стиля боковой панели"
+
+msgid "Use a sidebar box style"
+msgstr "Используйте стиль боковой панели"
+
+msgid "Use tile style"
+msgstr "Использовать стиль плитки"
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Использовать стиль плитки для кнопок приложений (Примечание: может не "
+"работать в некоторых темах)"

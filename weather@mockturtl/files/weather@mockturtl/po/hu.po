@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: oversteer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-08 08:40+0100\n"
-"PO-Revision-Date: 2022-04-11 10:54+0200\n"
+"PO-Revision-Date: 2022-06-04 16:20+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu_HU\n"
@@ -123,7 +123,7 @@ msgstr ""
 
 #: 3.0/applet.js:969 3.0/applet.js:1110
 msgid "As of"
-msgstr ""
+msgstr "Ekkorra:"
 
 #: 3.0/applet.js:1108 3.8/weather-applet.js:15240
 msgid "Powered by"
@@ -140,7 +140,7 @@ msgstr "mm"
 #: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:10263
 #: 3.8/weather-applet.js:15161
 msgid "in"
-msgstr ""
+msgstr "múlva"
 
 #: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:9901
 #: 3.8/weather-applet.js:15316
@@ -517,7 +517,7 @@ msgstr "Ismeretlen hiba"
 
 #: 3.0/darkSky.js:71 3.8/weather-applet.js:10263
 msgid "and"
-msgstr ""
+msgstr "és"
 
 #: 3.0/darkSky.js:71 3.8/weather-applet.js:10263
 msgid "until"
@@ -1643,7 +1643,6 @@ msgid "Heavy mixed rain and snow"
 msgstr "Erős eső és havazás"
 
 #: 3.8/weather-applet.js:13467
-#| msgid "Weather"
 msgid "AccuWeather"
 msgstr "AccuWeather"
 
@@ -1952,7 +1951,7 @@ msgstr "psi"
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "at"
-msgstr ""
+msgstr "itt:"
 
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
@@ -2254,6 +2253,8 @@ msgid ""
 "Saves location information to file so you can switch between them with "
 "buttons in the applet, which will appear if you have more than one."
 msgstr ""
+"Földrajzi helyzet információ fájlba mentése, így több kisalkalmazás "
+"használata esetén megjelenő gombokkal válthat közöttük."
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
@@ -2264,6 +2265,8 @@ msgid ""
 "If you are using a provider with API keys set it to an interval you won't "
 "run out of your quota with."
 msgstr ""
+"Amennyiben API-kulcsot igénylő időjárás-előrejelzés szolgáltatót használ, a "
+"kvóta kimerítés elkerülése érdekében állítson be frissítési időközt."
 
 #. 3.8->settings-schema.json->forecastDays->tooltip
 msgid ""
@@ -2271,12 +2274,17 @@ msgid ""
 "maximum rows and columns setting in the Presentation tab will affect the "
 "final number."
 msgstr ""
+"A megjeleníthető napok maximális száma, a rendelkezésre álló adatok száma, a "
+"Megjelenítés lapon beállított maximális sorok és oszlopok beállítása "
+"befolyásolja a végső számot."
 
 #. 3.8->settings-schema.json->forecastHours->tooltip
 msgid ""
 "Maximum number of hours that can be displayed, available numbers of data "
 "will affect the final number."
 msgstr ""
+"A megjeleníthető órák maximális száma, a rendelkezésre álló adatok száma "
+"befolyásolja a végső számot."
 
 #. 3.8->settings-schema.json->immediatePrecip->description
 msgid "Enable minutely precipitation forecast"
@@ -2288,6 +2296,9 @@ msgid ""
 "as location to help its accuracy. Currently implemented with OpenWeatherMap "
 "only."
 msgstr ""
+"Ha ezt a beállítást szeretné használni, győződjön meg róla, hogy a pontos "
+"koordinátákat vagy címet adott meg földrajzi helyzetként. Jelenleg csak az "
+"OpenWeatherMap szolgáltatás támogatott."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
@@ -2445,6 +2456,14 @@ msgid ""
 "format. After 3 seconds without typing the address you entered is replaced "
 "automatically for validating your choice."
 msgstr ""
+"A legtöbb esetben a helymeghatározás automatikusan működik, de kézzel is "
+"megadhatja a koordinátákat „szélességi,hosszúsági” koordinátákkal (például: "
+"51.5085,-0.1257), vagy használhatja a „város,országkód„ formátumban "
+"(például: Budapest,HU), vagy próbálja meg megadni a {Házszám} {Közterület} "
+"{Település} {Postai irányítószám} {Ország} formában. A keresési algoritmus "
+"nagyon rugalmas a formátumot illetően. A beírt címet 3 másodperc beírás "
+"utáni várakozás után a rendszer automatikusan kicseréli a felismert címre, "
+"hogy érvényesítse a megadott címet."
 
 #. 3.8->settings-schema.json->logLevel->description
 msgid "Log Level"
@@ -2456,6 +2475,11 @@ msgid ""
 "request payloads. Changing this will only be effective on future logs. Only "
 "change it you are instructed or you know what you are doing."
 msgstr ""
+"Az „Info” az általános naplózás, a „Debug” a hibakeresés, a „Verbose” pedig "
+"a hálózati kérések hasznos kommunikációját is naplózza. Ennek "
+"megváltoztatása csak a jövőbeli naplózásoknál lesz érvényes. Csak akkor "
+"változtassa meg, ha utasítást kap a fejlesztőktől, vagy ha tudja, hogy mit "
+"csinál."
 
 #. 3.8->settings-schema.json->logLevel->options
 msgid "Verbose"
@@ -2471,6 +2495,8 @@ msgid ""
 "This includes logs for the applet and the current settings with your API key "
 "redacted."
 msgstr ""
+"Ez hozzáadja a kisalkalmazás naplófájlokat és beállításokat, kivéve a "
+"beállított API kulcsot."
 
 #. 3.8->settings-schema.json->selectedLogPath->description
 msgid "Selected path to save Logs"

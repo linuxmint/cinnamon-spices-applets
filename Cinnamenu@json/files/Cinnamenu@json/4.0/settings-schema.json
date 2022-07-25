@@ -57,6 +57,7 @@
                 "show-recents-category",
                 "show-favorite-apps-category",
                 "show-home-folder-category",
+                "show-emoji-category",
                 "menu-editor-button"
             ]
         },
@@ -86,6 +87,7 @@
             "keys":[
                 "enable-emoji-search",
                 "web-search-option",
+                "web-suggestions",
                 "enable-home-folder-search",
                 "enable-web-history-search",
                 "enable-web-bookmarks-search",
@@ -134,6 +136,10 @@
     "recent-apps":{
         "type":"generic",
         "default":[]
+    },
+    "search-start-folder":{
+        "type":"generic",
+        "default":""
     },
 
     "applications-view-mode":{
@@ -203,6 +209,12 @@
         "default":true,
         "description":"Show home folder",
         "tooltip":"Show home folder category in the menu"
+    },
+    "show-emoji-category":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Show emoji category",
+        "tooltip":"Show emoji category in the menu"
     },
     "menu-editor-button":{
         "type":"button",
@@ -292,9 +304,16 @@
             "Ask":7,
             "Ecosia":8,
             "AOL":9,
-            "Startpage":10
+            "Startpage":10,
+            "Brave":11
         },
         "tooltip":"Show an internet search option in search results"
+    },
+    "web-suggestions":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Web search suggestions",
+        "tooltip":"With web search option, also show search suggestions. (Note: This uses Google's search API)"
     },
     "enable-home-folder-search":{
         "type":"checkbox",

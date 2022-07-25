@@ -1,6 +1,6 @@
-
+const {_} = require('./utils');
 //This list is taken from https://unicode.org/emoji/charts/emoji-list.html
-//Emoji List, v13.1
+//Emoji List, v14.0
 
 //Additional keywords are from emojilib (https://github.com/muan/emojilib) License: MIT
 
@@ -45,6 +45,10 @@ const EMOJI = [
 '🙃',
 'upside-down face',
 'face upside-down upside down face flipped silly smile'
+],[
+'🫠',
+'melting face',
+'disappear dissolve liquid melt'
 ],[
 '😉',
 'winking face',
@@ -126,6 +130,14 @@ const EMOJI = [
 'face with hand over mouth',
 'whoops shock sudden realization surprise face'
 ],[
+'🫢',
+'face with open eyes and hand over mouth',
+'whoops shock sudden realization surprise face'
+],[
+'🫣',
+'face with peeking eye',
+'captivated peep stare'
+],[
 '🤫',
 'shushing face',
 'quiet shush face shhh'
@@ -133,6 +145,10 @@ const EMOJI = [
 '🤔',
 'thinking face',
 'face thinking hmmm think consider'
+],[
+'🫡',
+'saluting face',
+'ok salute sunny troops yes'
 ],[
 '🤐',
 'zipper-mouth face',
@@ -153,6 +169,10 @@ const EMOJI = [
 '😶',
 'face without mouth',
 'face mouth quiet silent hellokitty'
+],[
+'🫥',
+'dotted line face',
+'depressed disappear hide introvert invisible'
 ],[
 '😶‍🌫️',
 'face in clouds',
@@ -278,6 +298,10 @@ const EMOJI = [
 'confused face',
 'confused face meh indifference huh weird hmmm :/'
 ],[
+'🫤',
+'face with diagonal mouth',
+'disappointed meh skeptical unsure :/'
+],[
 '😟',
 'worried face',
 'face worried concern nervous :('
@@ -309,6 +333,10 @@ const EMOJI = [
 '🥺',
 'pleading face',
 'begging mercy puppy eyes face'
+],[
+'🥹',
+'face holding back tears',
+'angry cry proud resist sad'
 ],[
 '😦',
 'frowning face with open mouth',
@@ -650,6 +678,22 @@ const EMOJI = [
 'vulcan salute',
 'finger hand spock vulcan fingers star trek'
 ],[
+'🫱',
+'rightwards hand',
+'right'
+],[
+'🫲',
+'leftwards hand',
+'left'
+],[
+'🫳',
+'palm down hand',
+'dismiss drop shoo'
+],[
+'🫴',
+'palm up hand',
+'beckon catch come offer'
+],[
 '👌',
 'OK hand',
 'hand OK ok hand fingers limbs perfect ok okay'
@@ -669,6 +713,10 @@ const EMOJI = [
 '🤞',
 'crossed fingers',
 'cross finger hand luck good lucky'
+],[
+'🫰',
+'hand with index finger and thumb crossed',
+'expensive heart love money snap cash'
 ],[
 '🤟',
 'love-you gesture',
@@ -706,6 +754,10 @@ const EMOJI = [
 'index pointing up',
 'finger hand index point up fingers direction'
 ],[
+'🫵',
+'index pointing at the viewer',
+'finger index point you'
+],[
 '👍',
 'thumbs up',
 '+1 hand thumb up thumbsup yes awesome good agree accept cool like'
@@ -737,6 +789,10 @@ const EMOJI = [
 '🙌',
 'raising hands',
 'celebration gesture hand hooray raised yea hands'
+],[
+'🫶',
+'heart hands',
+'love'
 ],[
 '👐',
 'open hands',
@@ -833,6 +889,10 @@ const EMOJI = [
 '👄',
 'mouth',
 'lips kiss'
+],[
+'🫦',
+'biting lip',
+'anxious fear flirting nervous uncomfortable worried sexy'
 ],[
 '👶',
 'baby',
@@ -1310,6 +1370,10 @@ const EMOJI = [
 'woman construction worker',
 'construction woman worker female human wip build labor'
 ],[
+'🫅',
+'person with crown',
+'monarch noble regal royalty king queen'
+],[
 '🤴',
 'prince',
 'boy man male crown royal king'
@@ -1364,7 +1428,15 @@ const EMOJI = [
 ],[
 '🤰',
 'pregnant woman',
-'pregnant woman baby'
+'belly full pregnant woman baby'
+],[
+'🫃',
+'pregnant man',
+'belly full pregnant'
+],[
+'🫄',
+'pregnant person',
+'belly full pregnant'
 ],[
 '🤱',
 'breast-feeding',
@@ -1505,6 +1577,10 @@ const EMOJI = [
 '🧟‍♀️',
 'woman zombie',
 'undead walking dead woman female'
+],[
+'🧌',
+'troll',
+'fairy tale fantasy monster ogre'
 ],[
 '💆',
 'person getting massage',
@@ -2446,6 +2522,10 @@ const EMOJI = [
 'spiral shell',
 'shell spiral nature sea beach'
 ],[
+'🪸',
+'coral',
+'ocean sea reef'
+],[
 '🐌',
 'snail',
 'slow animal shell'
@@ -2521,6 +2601,10 @@ const EMOJI = [
 '💮',
 'white flower',
 'flower japanese spring'
+],[
+'🪷',
+'lotus',
+'Buddhism flower Hinduism India purity Vietnam'
 ],[
 '🏵',
 'rosette',
@@ -2601,6 +2685,14 @@ const EMOJI = [
 '🍃',
 'leaf fluttering in wind',
 'blow flutter leaf wind nature plant tree vegetable grass lawn spring'
+],[
+'🪹',
+'empty nest',
+'nesting birds'
+],[
+'🪺',
+'nest with eggs',
+'nesting birds'
 ],[
 '🍇',
 'grapes',
@@ -2733,6 +2825,10 @@ const EMOJI = [
 '🥜',
 'peanuts',
 'food nut peanut vegetable'
+],[
+'🫘',
+'beans',
+'food kidney legume'
 ],[
 '🌰',
 'chestnut',
@@ -3074,6 +3170,10 @@ const EMOJI = [
 'tumbler glass',
 'glass liquor shot tumbler whisky drink beverage drunk alcohol booze bourbon scotch'
 ],[
+'🫗',
+'pouring liquid',
+'drink empty glass spill'
+],[
 '🥤',
 'cup with straw',
 'juice soda malt soft drink water drink'
@@ -3113,6 +3213,10 @@ const EMOJI = [
 '🔪',
 'kitchen knife',
 'cooking hocho knife tool weapon blade cutlery kitchen'
+],[
+'🫙',
+'jar',
+'condiment container empty sauce store'
 ],[
 '🏺',
 'amphora',
@@ -3362,6 +3466,10 @@ const EMOJI = [
 'carousel horse',
 'carousel horse photo carnival'
 ],[
+'🛝',
+'playground slide',
+'amusement park play'
+],[
 '🎡',
 'ferris wheel',
 'amusement park ferris wheel photo carnival londoneye'
@@ -3554,6 +3662,10 @@ const EMOJI = [
 'fuel pump',
 'diesel fuel fuelpump gas pump station gas station petroleum'
 ],[
+'🛞',
+'wheel',
+'circle tire turn'
+],[
 '🚨',
 'police car light',
 'beacon car light police revolving ambulance 911 emergency alert error pinged law legal'
@@ -3577,6 +3689,10 @@ const EMOJI = [
 '⚓',
 'anchor',
 'ship tool ferry sea boat'
+],[
+'🛟',
+'ring buoy',
+'float life preserver saver rescue safety'
 ],[
 '⛵',
 'sailboat',
@@ -4222,6 +4338,10 @@ const EMOJI = [
 'nazar amulet',
 'bead charm evil-eye nazar talisman'
 ],[
+'🪬',
+'hamsa',
+'amulet Fatima hand Mary Miriam protection'
+],[
 '🎮',
 'video game',
 'controller game play console PS4'
@@ -4249,6 +4369,10 @@ const EMOJI = [
 '🪅',
 'piñata',
 'celebration party pinata mexico candy'
+],[
+'🪩',
+'mirror ball',
+'dance disco glitter party'
 ],[
 '🪆',
 'nesting dolls',
@@ -4629,6 +4753,10 @@ const EMOJI = [
 '🔋',
 'battery',
 'power energy sustain'
+],[
+'🪫',
+'low battery',
+'electronic power low energy drained empty'
 ],[
 '🔌',
 'electric plug',
@@ -5190,9 +5318,17 @@ const EMOJI = [
 'adhesive bandage',
 'bandage heal'
 ],[
+'🩼',
+'crutch',
+'cane disability hurt mobility aid stick'
+],[
 '🩺',
 'stethoscope',
 'doctor heart medicine health'
+],[
+'🩻',
+'x-ray',
+'bones doctor medical skeleton'
 ],[
 '🚪',
 'door',
@@ -5274,6 +5410,10 @@ const EMOJI = [
 'soap',
 'bar bathing cleaning lather soapdish'
 ],[
+'🫧',
+'bubbles',
+'burp clean soap underwater'
+],[
 '🪥',
 'toothbrush',
 'bathroom brush clean dental hygiene teeth'
@@ -5313,6 +5453,10 @@ const EMOJI = [
 '🪧',
 'placard',
 'demonstration picket protest sign announcement'
+],[
+'🪪',
+'identification card',
+'credentials ID license security'
 ],[
 '🏧',
 'ATM sign',
@@ -5725,6 +5869,10 @@ const EMOJI = [
 '➗',
 'divide',
 '÷ division math sign division sign calculation'
+],[
+'🟰',
+'heavy equals sign',
+'equality math equation'
 ],[
 '♾',
 'infinity',
@@ -7273,7 +7421,7 @@ const EMOJI = [
 ];
 
 //this list is taken from https://unicode.org/emoji/charts/full-emoji-modifiers.html
-//Full Emoji Modifier Sequences, v13.1
+//Full Emoji Modifier Sequences, v14.0
 
 const MODED = [
 '👋🏻',
@@ -7281,11 +7429,16 @@ const MODED = [
 '🖐🏻',
 '✋🏻',
 '🖖🏻',
+'🫱🏻',
+'🫲🏻',
+'🫳🏻',
+'🫴🏻',
 '👌🏻',
 '🤌🏻',
 '🤏🏻',
 '✌🏻',
 '🤞🏻',
+'🫰🏻',
 '🤟🏻',
 '🤘🏻',
 '🤙🏻',
@@ -7295,6 +7448,7 @@ const MODED = [
 '🖕🏻',
 '👇🏻',
 '☝🏻',
+'🫵🏻',
 '👍🏻',
 '👎🏻',
 '✊🏻',
@@ -7303,6 +7457,7 @@ const MODED = [
 '🤜🏻',
 '👏🏻',
 '🙌🏻',
+'🫶🏻',
 '👐🏻',
 '🤲🏻',
 '🙏🏻',
@@ -7434,6 +7589,7 @@ const MODED = [
 '👷🏻',
 '👷🏻‍♂️',
 '👷🏻‍♀️',
+'🫅🏻',
 '🤴🏻',
 '👸🏻',
 '👳🏻',
@@ -7448,6 +7604,8 @@ const MODED = [
 '👰🏻‍♂️',
 '👰🏻‍♀️',
 '🤰🏻',
+'🫃🏻',
+'🫄🏻',
 '🤱🏻',
 '👩🏻‍🍼',
 '👨🏻‍🍼',
@@ -7577,4 +7735,16 @@ for (let i = 0; i < MODED.length; i++) {
     MODABLE[i] = MODED[i].replace(/\u{1F3FB}/ug, '');
 }
 
-module.exports = {EMOJI, MODED, MODABLE};
+const EMOJI_CATEGORIES = [
+    {name: _('Smileys & Emotion'),  start: 0,       end: 163},
+    {name: _('People & Body'),      start: 163,     end: 528},
+    {name: _('Animals & Nature'),   start: 528,     end: 672},
+    {name: _('Food & Drink'),       start: 672,     end: 804},
+    {name: _('Travel & Places'),    start: 804,     end: 1022},
+    {name: _('Activities'),         start: 1022,    end: 1108},
+    {name: _('Objects'),            start: 1108,    end: 1363},
+    {name: _('Symbols'),            start: 1363,    end: 1584},
+    {name: _('Flags'),              start: 1584,    end: 1853}
+];
+
+module.exports = {EMOJI, MODED, MODABLE, EMOJI_CATEGORIES};

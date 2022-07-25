@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-25 21:08+0000\n"
-"PO-Revision-Date: 2021-03-25 21:15+0000\n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-29 02:23+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "Type to search..."
 msgstr "Skriv for at søge …"
@@ -84,15 +84,6 @@ msgstr "Afslut"
 msgid "Shutdown the computer"
 msgstr "Sluk computeren"
 
-msgid "Home"
-msgstr "Hjem"
-
-msgid "Computer"
-msgstr "Computer"
-
-msgid "Browse network"
-msgstr "Gennemse netværk"
-
 msgid "Run with NVIDIA GPU"
 msgstr "Kør med NVIDIA GPU"
 
@@ -111,23 +102,65 @@ msgstr "Tilføj til favoritter"
 msgid "Uninstall"
 msgstr "Fjern"
 
+msgid "Home"
+msgstr "Hjem"
+
+msgid "Computer"
+msgstr "Computer"
+
+msgid "Browse network"
+msgstr "Gennemse netværk"
+
 msgid "Find files..."
 msgstr "Find filer ..."
 
 msgid "Please wait..."
 msgstr "Vent venligst …"
 
+msgid "Applications"
+msgstr "Ansøgninger"
+
+msgid "Documents"
+msgstr "Dokumenter"
+
+msgid "Videos"
+msgstr "Videoer"
+
+msgid "Images"
+msgstr "Billeder"
+
+msgid "Music"
+msgstr "musik"
+
 msgid "No recent Items"
 msgstr "Ingen seneste varer"
-
-msgid "Solution:"
-msgstr "Løsning:"
 
 msgid "Click to copy"
 msgstr "Klik for at kopiere"
 
-msgid "Search web for"
-msgstr "Søg på nettet efter"
+msgid "Applications and files"
+msgstr "Programmer og filer"
+
+msgid "Other search results"
+msgstr "Andre søgeresultater"
+
+msgid "Browser history"
+msgstr "Browser historie"
+
+msgid "Browser bookmarks"
+msgstr "Browser bogmærker"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Trash"
+msgstr "Skraldespand"
+
+msgid "Error while opening file:"
+msgstr "Fejl under åbning af fil:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "For mange poster - viser kun de 1000 første poster"
 
 msgid "Favorites"
 msgstr "Favoritter"
@@ -138,11 +171,23 @@ msgstr "Seneste"
 msgid "Home folder"
 msgstr "Hjem"
 
-msgid "Too many entries - showing first 1000 entries only"
-msgstr "For mange poster - viser kun de 1000 første poster"
-
 msgid "Reset category order"
 msgstr "Nulstil rækkefølgen af kategorier"
+
+msgid "light skin tone"
+msgstr "lys hudfarve"
+
+msgid "medium-light skin tone"
+msgstr "medium lys hudfarve"
+
+msgid "medium skin tone"
+msgstr "medium hudfarve"
+
+msgid "medium-dark skin tone"
+msgstr "medium-mørk hudfarve"
+
+msgid "dark skin tone"
+msgstr "mørk hudfarve"
 
 msgid "This file is no longer available"
 msgstr "Filen er ikke længere tilgængelig"
@@ -162,8 +207,22 @@ msgstr "Smid i papirkurven"
 msgid "Error while moving file to trash:"
 msgstr "Fejl ved flytning af filen til papirkurven:"
 
-msgid "Error while opening file:"
-msgstr ""
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Dette menupunkt er ikke knyttet til nogen pakke. Vil du alligevel fjerne det fra menuen?"
+
+msgid "The following packages will be removed:"
+msgstr "Følgende pakker vil blive fjernet:"
+
+msgid "Packages to be removed"
+msgstr "Pakker skal fjernes"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Kan ikke fjerne pakken %s, da den kræves af andre pakker."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Pakke %s er en afhængighed af følgende pakker:"
 
 msgid "Open"
 msgstr "Åben"
@@ -178,7 +237,7 @@ msgid "Select a folder"
 msgstr "Vælg en mappe"
 
 msgid "Follow symlinks"
-msgstr ""
+msgstr "Følg symbolske links"
 
 msgid "Search hidden"
 msgstr "Søgning skjult"
@@ -187,13 +246,13 @@ msgid "Use regular expressions"
 msgstr "Brug regulære udtryk"
 
 msgid "Stop"
-msgstr ""
+msgstr "Hold op"
 
 msgid "File"
-msgstr ""
+msgstr "Fil"
 
 msgid "Path"
-msgstr ""
+msgstr "Sti"
 
 msgid "Searching..."
 msgstr "Søger..."
@@ -205,26 +264,22 @@ msgid "Searching: "
 msgstr "Søger: "
 
 msgid "Error: insufficient permissions to read folder "
-msgstr ""
+msgstr "Fejl: utilstrækkelige tilladelser til at læse mappe "
 
 msgid "Search Completed"
-msgstr ""
+msgstr "Søgning afsluttet"
 
 msgid "Skipping"
-msgstr ""
+msgstr "Springer over"
 
 msgid " - directory already searched"
-msgstr ""
+msgstr "  - biblioteket er allerede søgt"
 
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
-msgstr ""
-"En fleksibel menu med mulighed for formatering, webbogmærker, understøttelse "
-"af søgemaskineudbydere og fuzzy søgning."
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "En fleksibel menu med gitter- eller listelayoutindstillinger, filbrowser og emoji-søgning."
 
 msgid "Behavior"
 msgstr "Opførsel"
@@ -274,17 +329,14 @@ msgstr "Paneltekst"
 msgid "Text to show beside the panel icon"
 msgstr "Tekst som vises ved siden af panelikonet"
 
-msgid "pixels"
-msgstr "pixler"
+msgid "Category icon size (pixels)"
+msgstr "Ikonstørrelse for kategori (pixels)"
 
-msgid "Category icon size"
-msgstr "Ikonstørrelse for kategori"
+msgid "Applications list icon size (pixels)"
+msgstr "Ikonstørrelse for programliste (pixels)"
 
-msgid "Applications list icon size"
-msgstr "Ikonstørrelse for programliste"
-
-msgid "Applications grid icon size"
-msgstr "Ikonstørrelse for programgitter"
+msgid "Applications grid icon size (pixels)"
+msgstr "Ikonstørrelse for programgitter (pixels)"
 
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Tastaturgenvej til åbning og lukning af menuen"
@@ -383,8 +435,8 @@ msgstr "Forsinkelse af værktøjstip"
 msgid "Use a custom menu height"
 msgstr "Anvend en selvvalgt menuhøjde"
 
-msgid "Custom menu height"
-msgstr "Selvvalgt menuhøjde"
+msgid "Custom menu height (pixels)"
+msgstr "Selvvalgt menuhøjde (pixels)"
 
 msgid "Applications view mode"
 msgstr "Visningstilstand for programmer"
@@ -407,8 +459,8 @@ msgstr "Ingen"
 msgid "Choose where to show application descriptions"
 msgstr "Vælg hvor beskrivelse af programmet skal vises"
 
-msgid "Session buttons location"
-msgstr "Sessionsknappers placering"
+msgid "Sidebar location"
+msgstr "Sidebar placering"
 
 msgid "Top"
 msgstr "Øverst"
@@ -422,8 +474,8 @@ msgstr "Venstre"
 msgid "Right"
 msgstr "Højre"
 
-msgid "Choose where to show the session buttons (quit, logout, etc.)"
-msgstr "Vælg, hvor sessionsknapper (afslut, log ud osv.) skal vises"
+msgid "Choose where to show the sidebar"
+msgstr "Vælg, hvor sidebjælken skal vises"
 
 msgid ""
 "\n"
@@ -432,11 +484,17 @@ msgstr ""
 "\n"
 " Info / tip: Træk i menukanten for at ændre menustørrelsen.\n"
 
-msgid "Add favorites to session buttons"
-msgstr "Tilføj favoritter til sessionsknapper"
+msgid "Show favorites on sidebar"
+msgstr "Vis favoritter på sidebjælken"
 
-msgid "Show your favorite app icons next to the session buttons"
-msgstr "Vis dine favoritprogrammers ikoner ved siden af sessionsknapperne"
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Vis dine foretrukne app- og filikoner på sidebjælken"
+
+msgid "Show recent items"
+msgstr "Vis seneste elementer"
+
+msgid "Show recent items category in the menu"
+msgstr "Vis kategorien seneste varer i menuen"
 
 msgid "Show favorite apps category"
 msgstr "Vis kategorien favoritprogrammer"
@@ -456,8 +514,14 @@ msgstr "Sidst anvendt kategori"
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Automatisk rulning i programlisten, når markøren føres hen over"
 
-msgid "Enable emoji search"
-msgstr "Aktivér søgning efter emojis"
+msgid "Show hidden files"
+msgstr "Vis skjulte filer"
+
+msgid "Show hidden files in folder view"
+msgstr "Vis skjulte filer i mappevisning"
+
+msgid "Emoji search"
+msgstr "Emoji-søgning"
 
 msgid "Show emojis in search results"
 msgstr "Vis emojis i søgeresultater"
@@ -465,32 +529,52 @@ msgstr "Vis emojis i søgeresultater"
 msgid "Web search option"
 msgstr "Indstillinger for websøgning"
 
-msgid "Google"
-msgstr "Google"
-
-msgid "Bing"
-msgstr "Bing"
-
-msgid "Yahoo"
-msgstr "Yahoo"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
 msgid "Show an internet search option in search results"
 msgstr "Vis en internetsøgemulighed i søgeresultaterne"
 
 msgid "Search home folder"
 msgstr "Søg i hjemmemappen"
 
-msgid "When searching, also search home folder for files"
+msgid "When searching, also search my home folder for files"
 msgstr "Når du søger, skal du også søge i hjemmemappen efter filer"
 
-msgid "Show hidden files"
-msgstr "Vis skjulte filer"
+msgid "Web history search"
+msgstr "Søgning i webhistorik"
 
-msgid "Show hidden files in folder view"
-msgstr "Vis skjulte filer i mappevisning"
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Når du søger, skal du også søge i min browsers historie (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Bemærk: Firefox-historik understøttes ikke i øjeblikket."
+
+msgid "Web bookmarks search"
+msgstr "Webbogmærkesøgning"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Når du søger, skal du også søge i min browsers webbogmærker (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Bemærk: For at søge i Firefox-bogmærker skal du installere pakken gir1.2-gda-5.0 (Debian-baserede distributioner inkl. Ubuntu & Linux Mint) eller pakken libgda (Arch-baserede distributioner) og genstarte din computer."
+
+msgid "Wikipedia search"
+msgstr "Wikipedia-søgning"
+
+msgid "Show some Wikipedia results"
+msgstr "Vis nogle Wikipedia-resultater"
+
+msgid "Wikipedia language"
+msgstr "Wikipedia sprog"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Bemærk: Nogle søgemuligheder kan stadig bruges, selvom du ikke har aktiveret dem her ved at sætte dit søgeord foran.\n"
+"For eksempel: for at søge efter en emoji skal du skrive 'e heart' for at finde hjerte-emojis. Ligeledes skal du bruge præfikser 'f ' til filsøgning, 'h ' for webhistorik og 'b ' til webbogmærkesøgning.\n"
 
 msgid "Use a custom icon size"
 msgstr "Brug en brugerdefineret ikonstørrelse"
@@ -498,15 +582,23 @@ msgstr "Brug en brugerdefineret ikonstørrelse"
 msgid "Use a custom size for the panel icon"
 msgstr "Brug en brugerdefineret størrelse til panelikonet"
 
-msgid "Panel icon size"
-msgstr "Panelikonstørrelse"
+msgid "Panel icon size (pixels)"
+msgstr "Panelikonstørrelse (pixels)"
 
 msgid "Choose a custom size for the panel icon"
 msgstr "Vælg en brugerdefineret størrelse til panelikonet"
 
-msgid "Session buttons icon size"
-msgstr "Sessionsknappernes ikonstørrelse"
+msgid "Sidebar icon size (pixels)"
+msgstr "Sidebjælkeikonstørrelse (pixels)"
 
-msgid "Use session buttons box style"
+msgid "Use sidebar box style"
 msgstr "Brug kassestil til sessionsknapper"
 
+msgid "Use a sidebar box style"
+msgstr "Brug kassestil til sessionsknapper"
+
+msgid "Use tile style"
+msgstr "Brug flisestil"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Brug en flisestil til applikationsknapperne (Bemærk: virker muligvis ikke på nogle temaer)"

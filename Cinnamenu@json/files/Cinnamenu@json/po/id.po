@@ -1,0 +1,603 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 18:24+0100\n"
+"Last-Translator: Google translate\n"
+"Language-Team: \n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Type to search..."
+msgstr "halo bagaimana kabarmu untuk mencari..."
+
+msgid "Initializing"
+msgstr "Inisialisasi"
+
+msgid "No description available"
+msgstr "Deskripsi tidak tersedia"
+
+msgid "All applications"
+msgstr "Semua aplikasi"
+
+msgid "Places"
+msgstr "Tempat"
+
+msgid "Recent files"
+msgstr "File terbaru"
+
+msgid "Bookmarks"
+msgstr "Bookmark"
+
+msgid "Favorite apps"
+msgstr "Aplikasi favorit"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "paket gir1.2-gda-5.0 diperlukan untuk bookmark Firefox dan Midori."
+
+msgid "Clear List"
+msgstr "Hapus Daftar"
+
+msgid "No recent files"
+msgstr "Tidak ada file terbaru"
+
+msgid "Account details"
+msgstr "Detail akun"
+
+msgid "Grid View"
+msgstr "Tampilan bergaris"
+
+msgid "List View"
+msgstr "Tampilan Daftar"
+
+msgid "Switch to grid view"
+msgstr "Beralih ke tampilan kisi"
+
+msgid "Switch to list view"
+msgstr "Beralih ke tampilan daftar"
+
+msgid "Lock screen"
+msgstr "Layar kunci"
+
+msgid "Lock the screen"
+msgstr "Kunci layar"
+
+msgid "Logout"
+msgstr "Keluar"
+
+msgid "Leave the session"
+msgstr "Tinggalkan sesi"
+
+msgid "Quit"
+msgstr "Berhenti"
+
+msgid "Shutdown the computer"
+msgstr "Matikan komputer"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Jalankan dengan GPU NVIDIA"
+
+msgid "Add to panel"
+msgstr "Tambahkan ke panel"
+
+msgid "Add to desktop"
+msgstr "Tambahkan ke desktop"
+
+msgid "Remove from favorites"
+msgstr "Hapus dari favorit"
+
+msgid "Add to favorites"
+msgstr "Tambahkan ke Favorit"
+
+msgid "Uninstall"
+msgstr "Copot pemasangan"
+
+msgid "Home"
+msgstr "Rumah"
+
+msgid "Computer"
+msgstr "Komputer"
+
+msgid "Browse network"
+msgstr "Jelajahi jaringan"
+
+msgid "Find files..."
+msgstr "Temukan file..."
+
+msgid "Please wait..."
+msgstr "Mohon tunggu..."
+
+msgid "Applications"
+msgstr "Aplikasi"
+
+msgid "Documents"
+msgstr "Dokumen"
+
+msgid "Videos"
+msgstr "Video"
+
+msgid "Images"
+msgstr "Gambar-gambar"
+
+msgid "Music"
+msgstr "Musik"
+
+msgid "No recent Items"
+msgstr "Tidak ada Item terbaru"
+
+msgid "Click to copy"
+msgstr "Klik untuk menyalin"
+
+msgid "Applications and files"
+msgstr "Aplikasi dan file"
+
+msgid "Other search results"
+msgstr "Hasil pencarian lainnya"
+
+msgid "Browser history"
+msgstr "Riwayat peramban"
+
+msgid "Browser bookmarks"
+msgstr "Penanda peramban"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Trash"
+msgstr "Sampah"
+
+msgid "Error while opening file:"
+msgstr "Kesalahan saat membuka file:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Terlalu banyak entri - hanya menampilkan 1000 entri pertama"
+
+msgid "Favorites"
+msgstr "Favorit"
+
+msgid "Recent"
+msgstr "Terkini"
+
+msgid "Home folder"
+msgstr "folder rumah"
+
+msgid "Reset category order"
+msgstr "Setel ulang urutan kategori"
+
+msgid "light skin tone"
+msgstr "warna kulit cerah"
+
+msgid "medium-light skin tone"
+msgstr "warna kulit cerah-sedang"
+
+msgid "medium skin tone"
+msgstr "warna kulit sedang"
+
+msgid "medium-dark skin tone"
+msgstr "warna kulit gelap-sedang"
+
+msgid "dark skin tone"
+msgstr "warna kulit gelap"
+
+msgid "This file is no longer available"
+msgstr "File ini tidak lagi tersedia"
+
+msgid "Open with"
+msgstr "Buka dengan"
+
+msgid "Other application..."
+msgstr "aplikasi lain..."
+
+msgid "Open containing folder"
+msgstr "Buka folder yang berisi"
+
+msgid "Move to trash"
+msgstr "Pindah ke sampah"
+
+msgid "Error while moving file to trash:"
+msgstr "Kesalahan saat memindahkan file ke sampah:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Item menu ini tidak terkait dengan paket apa pun. Tetap ingin menghapusnya dari menu?"
+
+msgid "The following packages will be removed:"
+msgstr "Paket berikut akan dihapus:"
+
+msgid "Packages to be removed"
+msgstr "Paket yang akan dihapus"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Tidak dapat menghapus paket %s karena diperlukan oleh paket lain."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Paket %s adalah ketergantungan dari paket-paket berikut:"
+
+msgid "Open"
+msgstr "Membuka"
+
+msgid "Search"
+msgstr "Mencari"
+
+msgid "Start in"
+msgstr "Mulai masuk"
+
+msgid "Select a folder"
+msgstr "Pilih folder"
+
+msgid "Follow symlinks"
+msgstr "Ikuti symlink"
+
+msgid "Search hidden"
+msgstr "Cari tersembunyi"
+
+msgid "Use regular expressions"
+msgstr "Gunakan ekspresi reguler"
+
+msgid "Stop"
+msgstr "Berhenti"
+
+msgid "File"
+msgstr "Mengajukan"
+
+msgid "Path"
+msgstr "Jalur"
+
+msgid "Searching..."
+msgstr "Mencari..."
+
+msgid "Search Stopped"
+msgstr "Pencarian Dihentikan"
+
+msgid "Searching: "
+msgstr "Mencari: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Kesalahan: izin tidak cukup untuk membaca folder "
+
+msgid "Search Completed"
+msgstr "Pencarian Selesai"
+
+msgid "Skipping"
+msgstr "Melewatkan"
+
+msgid " - directory already searched"
+msgstr " - direktori sudah dicari"
+
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Menu fleksibel dengan opsi tata letak kisi atau daftar, browser file, dan pencarian emoji."
+
+msgid "Behavior"
+msgstr "Perilaku"
+
+msgid "Appearance"
+msgstr "Penampilan"
+
+msgid "Layout and Content"
+msgstr "Tata Letak dan Konten"
+
+msgid "Search Providers"
+msgstr "Cari Penyedia"
+
+msgid "No search provider extensions found"
+msgstr "Tidak ada ekstensi penyedia pencarian yang ditemukan"
+
+msgid "Panel"
+msgstr "Panel"
+
+msgid "Menu"
+msgstr "Tidak bisa"
+
+msgid "Layout"
+msgstr "tata letak"
+
+msgid "Content"
+msgstr "Isi"
+
+msgid "Recent files settings"
+msgstr "Pengaturan file terbaru"
+
+msgid "Open the menu editor"
+msgstr "Buka editor menu"
+
+msgid "Use a custom icon"
+msgstr "Gunakan ikon khusus"
+
+msgid "Use a custom icon in the panel"
+msgstr "Gunakan ikon khusus di panel"
+
+msgid "Panel icon"
+msgstr "ikon panel"
+
+msgid "Panel text"
+msgstr "Teks panel"
+
+msgid "Text to show beside the panel icon"
+msgstr "Teks untuk ditampilkan di samping ikon panel"
+
+msgid "Category icon size (pixels)"
+msgstr "Ukuran ikon kategori (piksel)"
+
+msgid "Applications list icon size (pixels)"
+msgstr "Ukuran ikon daftar aplikasi (piksel)"
+
+msgid "Applications grid icon size (pixels)"
+msgstr "Ukuran ikon kisi aplikasi (piksel)"
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Pintasan keyboard untuk membuka dan menutup menu"
+
+msgid "Open menu on hover"
+msgstr "Buka menu saat melayang"
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Buka menu saat saya menggerakkan mouse ke atas ikon panel"
+
+msgid "milliseconds"
+msgstr "milidetik"
+
+msgid "Menu hover delay"
+msgstr "Penundaan hover menu"
+
+msgid "Use menu animations"
+msgstr "Gunakan animasi menu"
+
+msgid "Animate the menu on open and close"
+msgstr "Animasikan menu saat buka dan tutup"
+
+msgid "Activate categories on click"
+msgstr "Aktifkan kategori saat klik"
+
+msgid "Activate categories on click instead of on hover"
+msgstr "Aktifkan kategori saat klik alih-alih saat mengarahkan kursor"
+
+msgid "Enable autoscrolling"
+msgstr "Aktifkan pengguliran otomatis"
+
+msgid "Enable autoscrolling in application list"
+msgstr "Aktifkan pengguliran otomatis dalam daftar aplikasi"
+
+msgid "Show web bookmarks"
+msgstr "Tampilkan bookmark web"
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Tampilkan bookmark web browser Anda di menu.\n"
+"Catatan: Instal paket gir1.2-gda-5.0 untuk membaca bookmark firefox."
+
+msgid "Enable searching of open windows"
+msgstr "Aktifkan pencarian jendela yang terbuka"
+
+msgid "Enable search providers"
+msgstr "Aktifkan penyedia pencarian"
+
+msgid "Include search provider results in searches"
+msgstr "Sertakan hasil penyedia pencarian dalam pencarian"
+
+msgid "Example Search Providers"
+msgstr "Penyedia Pencarian Contoh"
+
+msgid "Open menu on category:"
+msgstr "Buka menu pada kategori:"
+
+msgid "List"
+msgstr "Daftar"
+
+msgid "Grid"
+msgstr "kisi-kisi"
+
+msgid "Always open the menu with this category selected"
+msgstr "Selalu buka menu dengan kategori ini dipilih"
+
+msgid "columns"
+msgstr "kolom"
+
+msgid "Number of columns in apps grid"
+msgstr "Jumlah kolom di kisi aplikasi"
+
+msgid "Show bookmarks and places"
+msgstr "Tampilkan bookmark dan tempat"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "Tampilkan bookmark dan kategori tempat di menu"
+
+msgid "Show application icons"
+msgstr "Tampilkan ikon aplikasi"
+
+msgid "Show category icons"
+msgstr "Tampilkan ikon kategori"
+
+msgid "Show application descriptions under titles"
+msgstr "Tampilkan deskripsi aplikasi di bawah judul"
+
+msgid "Show tooltips"
+msgstr "Tampilkan tooltips"
+
+msgid "Tooltip delay"
+msgstr "Keterlambatan tooltip"
+
+msgid "Use a custom menu height"
+msgstr "Gunakan ketinggian menu khusus"
+
+msgid "Custom menu height (pixels)"
+msgstr "Tinggi menu khusus (piksel)"
+
+msgid "Applications view mode"
+msgstr "Mode tampilan aplikasi"
+
+msgid "View applications as list or grid"
+msgstr "Lihat aplikasi sebagai daftar atau kisi"
+
+msgid "Application description placement"
+msgstr "Penempatan deskripsi aplikasi"
+
+msgid "Tooltips"
+msgstr "Keterangan alat"
+
+msgid "Under titles"
+msgstr "Di bawah judul"
+
+msgid "None"
+msgstr "Tidak ada"
+
+msgid "Choose where to show application descriptions"
+msgstr "Pilih tempat untuk menampilkan deskripsi aplikasi"
+
+msgid "Sidebar location"
+msgstr "Lokasi bilah sisi"
+
+msgid "Top"
+msgstr "Atas"
+
+msgid "Bottom"
+msgstr "Dasar"
+
+msgid "Left"
+msgstr "Kiri"
+
+msgid "Right"
+msgstr "Sebelah kanan"
+
+msgid "Choose where to show the sidebar"
+msgstr "Pilih tempat untuk menampilkan bilah sisi"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"Info/tip: Seret di tepi menu untuk mengubah ukuran menu.\n"
+
+msgid "Show favorites on sidebar"
+msgstr "Tampilkan favorit di bilah sisi"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Tampilkan ikon aplikasi dan file favorit Anda di bilah sisi"
+
+msgid "Show recent items"
+msgstr "Tampilkan item terbaru"
+
+msgid "Show recent items category in the menu"
+msgstr "Tampilkan kategori item terbaru di menu"
+
+msgid "Show favorite apps category"
+msgstr "Tampilkan kategori aplikasi favorit"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Tampilkan kategori aplikasi favorit Anda di menu"
+
+msgid "Show home folder"
+msgstr "Tampilkan folder rumah"
+
+msgid "Show home folder category in the menu"
+msgstr "Tampilkan kategori folder rumah di menu"
+
+msgid "Last used category"
+msgstr "Kategori yang terakhir digunakan"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Gulir otomatis daftar aplikasi pada kursor mouse"
+
+msgid "Show hidden files"
+msgstr "Tampilkan file tersembunyi"
+
+msgid "Show hidden files in folder view"
+msgstr "Tampilkan file tersembunyi dalam tampilan folder"
+
+msgid "Emoji search"
+msgstr "Pencarian emoji"
+
+msgid "Show emojis in search results"
+msgstr "Tampilkan emoji di hasil pencarian"
+
+msgid "Web search option"
+msgstr "Opsi pencarian web"
+
+msgid "Show an internet search option in search results"
+msgstr "Tampilkan opsi pencarian internet di hasil pencarian"
+
+msgid "Search home folder"
+msgstr "Cari folder rumah"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Saat mencari, cari juga folder rumah saya untuk file"
+
+msgid "Web history search"
+msgstr "Pencarian riwayat web"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Saat menelusuri, cari juga riwayat peramban saya (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Catatan: Riwayat Firefox saat ini tidak didukung."
+
+msgid "Web bookmarks search"
+msgstr "Pencarian bookmark web"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Saat mencari, cari juga bookmark web browser saya (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Catatan: Untuk mencari bookmark Firefox, Anda perlu menginstal paket gir1.2-gda-5.0 (distribusi berbasis Debian termasuk Ubuntu & Linux Mint) atau paket libgda (distribusi berbasis Arch) dan restart komputer Anda."
+
+msgid "Wikipedia search"
+msgstr "Pencarian Wikipedia"
+
+msgid "Show some Wikipedia results"
+msgstr "Tampilkan beberapa hasil Wikipedia"
+
+msgid "Wikipedia language"
+msgstr "bahasa Wikipedia"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Catatan: Beberapa opsi penelusuran masih dapat digunakan meskipun Anda belum mengaktifkannya di sini dengan mengawali istilah penelusuran Anda.\n"
+"Misalnya: untuk menelusuri emoji, ketik 'e hati' untuk menemukan emoji hati. Demikian juga, gunakan awalan 'f ' untuk pencarian file, 'h ' untuk riwayat web dan 'b ' untuk pencarian bookmark web.\n"
+
+msgid "Use a custom icon size"
+msgstr "Gunakan ukuran ikon khusus"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Gunakan ukuran khusus untuk ikon panel"
+
+msgid "Panel icon size (pixels)"
+msgstr "Ukuran ikon panel (piksel)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Pilih ukuran khusus untuk ikon panel"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Ukuran ikon bilah sisi (piksel)"
+
+msgid "Use sidebar box style"
+msgstr "Gunakan gaya kotak bilah sisi"
+
+msgid "Use a sidebar box style"
+msgstr "Gunakan gaya kotak bilah sisi"
+
+msgid "Use tile style"
+msgstr "Gunakan gaya ubin"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Gunakan gaya ubin untuk tombol aplikasi (Catatan: mungkin"

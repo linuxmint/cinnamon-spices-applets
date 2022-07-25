@@ -26,8 +26,14 @@ class CategoryButton {
 
         //----icon
         if (icon_name) {
-            this.icon = new St.Icon({   icon_name: icon_name, icon_type: St.IconType.FULLCOLOR,
-                                        icon_size: this.appThis.settings.categoryIconSize});
+            if (icon_name === 'emoji-grinning-face') {
+                this.icon = new St.Label({ style: 'color: white; font-size: ' +
+                                    (Math.round(this.appThis.settings.categoryIconSize * 0.85)) + 'px;'});
+                this.icon.get_clutter_text().set_markup('🌷');
+            } else {
+                this.icon = new St.Icon({   icon_name: icon_name, icon_type: St.IconType.FULLCOLOR,
+                                            icon_size: this.appThis.settings.categoryIconSize});
+            }
         } else {
             this.icon = new St.Icon({   gicon: gicon, icon_type: St.IconType.FULLCOLOR,
                                         icon_size: this.appThis.settings.categoryIconSize});
@@ -173,7 +179,8 @@ class CategoryButton {
         }
 
         this.has_focus = true;
-        if (this.id === this.appThis.currentCategory) {//No need to select category as already selected
+        if (this.id === this.appThis.currentCategory || //No need to select category as already selected
+                            this.id === 'emoji:' && this.appThis.currentCategory.startsWith('emoji:')) {
             return Clutter.EVENT_STOP;
         }
         if (this.appThis.settings.categoryClick) {
@@ -193,7 +200,8 @@ class CategoryButton {
         //If this category is the this.appThis.currentCategory then we leave this button with
         //menu-category-button-selected style even though key or mouse focus is moving elsewhere so
         //that the current category is always indicated.
-        if (this.appThis.currentCategory !== this.id) {
+        if (this.appThis.currentCategory !== this.id && this.id !== 'emoji:' ||
+                        this.id === 'emoji:' && !this.appThis.currentCategory.startsWith('emoji:')) {
             this.setButtonStyleNormal(); //i.e. remove hover style
         }
     }
@@ -295,9 +303,9 @@ class CategoriesView {
                         const prefIdB = prefCats.indexOf(b.get_menu_id().toUpperCase());
                         if (prefIdA < 0 && prefIdB >= 0) return -1;
                         if (prefIdA >= 0 && prefIdB < 0) return 1;
-                        const nameA = a.get_name().toUpperCase();
-                        const nameB = b.get_name().toUpperCase();
-                        return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 ); });
+                        return a.get_name().localeCompare(b.get_name(), undefined,
+                                                          {sensitivity: "base", ignorePunctuation: true});
+                    });
         dirs.forEach(dir => {
                 if (!dir.get_is_nodisplay()) {
                     const dirId = dir.get_menu_id();
@@ -319,7 +327,8 @@ class CategoriesView {
             [this.appThis.settings.showPlaces, 'places', _('Places'), 'folder'],
             [this.appThis.recentsEnabled, 'recents', _('Recent'), 'document-open-recent'],
             [this.appThis.settings.showFavAppsCategory, 'favorite_apps', _('Favorite apps'), 'emblem-favorite'],
-            [this.appThis.settings.showHomeFolder, homeDir,_('Home folder'), 'user-home']
+            [this.appThis.settings.showHomeFolder, homeDir,_('Home folder'), 'user-home'],
+            [this.appThis.settings.showEmojiCategory, 'emoji:', _('Emoji'), 'emoji-grinning-face']
         ].forEach(param => {
                 if (param[0]) {
                     let button = this.buttons.find(button => button.id === param[1]);
@@ -357,7 +366,8 @@ class CategoriesView {
 
     setSelectedCategoryStyle(categoryId) {
         this.buttons.forEach(categoryButton => {
-                    if (categoryButton.id === categoryId) {
+                    if (categoryButton.id === categoryId ||
+                                    categoryButton.id === 'emoji:' && categoryId.startsWith('emoji:')) {
                         categoryButton.setButtonStyleSelected();
                     } else {
                         categoryButton.setButtonStyleNormal();

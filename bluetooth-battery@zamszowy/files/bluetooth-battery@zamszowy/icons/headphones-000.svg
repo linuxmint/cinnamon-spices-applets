@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="22"
+   height="22"
+   version="1.1"
+   id="svg17"
+   sodipodi:docname="headphones-000.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview19"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="34.954545"
+     inkscape:cx="10.985696"
+     inkscape:cy="10.985696"
+     inkscape:window-width="1920"
+     inkscape:window-height="1014"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg17" />
+  <defs
+     id="defs11">
+    <style
+       id="current-color-scheme"
+       type="text/css">
+   .ColorScheme-Text { color:#dfdfdf; } .ColorScheme-Highlight { color:#4285f4; } .ColorScheme-NeutralText { color:#ff9800; } .ColorScheme-PositiveText { color:#4caf50; } .ColorScheme-NegativeText { color:#f44336; }
+  </style>
+  </defs>
+  <path
+     opacity=".35"
+     style="fill:currentColor"
+     class="ColorScheme-NegativeText"
+     d="m3.5 3c-0.277 0-0.5 0.223-0.5 0.5v0.5l-2-0.002v-0.00026l-0.00002 14.502c0 0.277 0.223 0.5 0.5 0.5h6c0.277 0 0.5-0.223 0.5-0.5v-14.501l-0.50002 0.002h-1.5v-0.5c0-0.277-0.223-0.50001-0.5-0.50001z"
+     id="path13" />
+  <path
+     style="fill:#dfdfdf;fill-opacity:1;stroke-width:0.717355"
+     d="m 15.5,3.0006736 c -3.047,0 -5.5,3.3809102 -5.5,7.5807334 v 5.053682 c 0,0 0,2.526841 1.833333,2.526841 h 6.11e-4 v -6.317208 h -6.11e-4 V 10.58128 c 0,-2.7997552 1.635334,-5.0536813 3.666667,-5.0536813 2.031333,0 3.666667,2.2539682 3.666667,5.0536813 v 0.838155 h 6.11e-4 v 6.742453 C 19.170678,18.161046 21,18.158488 21,15.634415 V 10.580733 C 21,6.3809101 18.547,3 15.5,3 Z"
+     id="path538" />
+  <path
+     style="fill:#dfdfdf;fill-opacity:1;stroke-width:0.717355"
+     d="M 11.833944,13.105511 V 19 h 1.833334 v -5.894489 z m 5.5,0 V 19 h 1.833334 v -5.894489 z"
+     id="path542" />
+</svg>

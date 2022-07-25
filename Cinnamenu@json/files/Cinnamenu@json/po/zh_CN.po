@@ -7,145 +7,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-18 21:43+0000\n"
-"PO-Revision-Date: 2022-01-20 15:53+0000\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-26 15:51+0100\n"
+"Last-Translator: Google translate\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-msgid "Initializing"
-msgstr ""
-
-msgid "Find files..."
-msgstr ""
-
-msgid "Please wait..."
-msgstr ""
-
-#, fuzzy
-#| msgid "No recent documents"
-msgid "No recent Items"
-msgstr "没有最近的文档"
-
-msgid "Click to copy"
-msgstr ""
-
-msgid "Clear List"
-msgstr "清除列表"
-
-msgid "Trash"
-msgstr ""
-
-msgid "All applications"
-msgstr "所有应用程序"
-
-msgid "Favorites"
-msgstr ""
-
-msgid "Places"
-msgstr "位置"
-
-#, fuzzy
-#| msgid "Recent Files"
-msgid "Recent"
-msgstr "最近的文件"
-
-msgid "Favorite apps"
-msgstr "收藏夹应用程序"
-
-msgid "Home folder"
-msgstr ""
-
-msgid "Too many entries - showing first 1000 entries only"
-msgstr ""
-
-msgid "Quit"
-msgstr "退出"
-
-msgid "Shutdown the computer"
-msgstr "关闭计算机"
-
-msgid "Logout"
-msgstr "注销"
-
-msgid "Leave the session"
-msgstr "离开会话"
-
-msgid "Lock screen"
-msgstr "锁定屏幕"
-
-msgid "Lock the screen"
-msgstr "锁定屏幕"
-
-msgid "Reset category order"
-msgstr "重置类别顺序"
-
-msgid "light skin tone"
-msgstr ""
-
-msgid "medium-light skin tone"
-msgstr ""
-
-msgid "medium skin tone"
-msgstr ""
-
-msgid "medium-dark skin tone"
-msgstr ""
-
-msgid "dark skin tone"
-msgstr ""
-
-msgid "Run with NVIDIA GPU"
-msgstr "使用NVIDIA GPU运行"
-
-msgid "Add to panel"
-msgstr "添加到面板"
-
-msgid "Add to desktop"
-msgstr "添加到桌面"
-
-#, fuzzy
-#| msgid "Remove favorite"
-msgid "Remove from favorites"
-msgstr "删除收藏夹"
-
-msgid "Add to favorites"
-msgstr "添加到收藏夹"
-
-msgid "Uninstall"
-msgstr "卸载"
-
-msgid "This file is no longer available"
-msgstr ""
-
-msgid "Open with"
-msgstr ""
-
-msgid "Other application..."
-msgstr ""
-
-msgid "Open containing folder"
-msgstr ""
-
-msgid "Move to trash"
-msgstr ""
-
-msgid "Error while moving file to trash:"
-msgstr ""
-
-msgid "Error while opening file:"
-msgstr ""
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "Type to search..."
 msgstr "键入以搜索..."
 
+msgid "Initializing"
+msgstr "初始化"
+
 msgid "No description available"
 msgstr "没有可用的描述"
+
+msgid "All applications"
+msgstr "所有应用程序"
+
+msgid "Places"
+msgstr "位置"
 
 msgid "Recent files"
 msgstr "最近的文件"
@@ -153,14 +39,20 @@ msgstr "最近的文件"
 msgid "Bookmarks"
 msgstr "书签"
 
+msgid "Favorite apps"
+msgstr "收藏夹应用程序"
+
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr "Firefox和Midori书签所需的gir1.2-gda-5.0包。"
 
+msgid "Clear List"
+msgstr "清除列表"
+
 msgid "No recent files"
-msgstr ""
+msgstr "没有最近的文件"
 
 msgid "Account details"
-msgstr ""
+msgstr "帐户详细资料"
 
 msgid "Grid View"
 msgstr "网格视图"
@@ -174,6 +66,42 @@ msgstr "切换到网格视图"
 msgid "Switch to list view"
 msgstr "切换到列表视图"
 
+msgid "Lock screen"
+msgstr "锁定屏幕"
+
+msgid "Lock the screen"
+msgstr "锁定屏幕"
+
+msgid "Logout"
+msgstr "注销"
+
+msgid "Leave the session"
+msgstr "离开会话"
+
+msgid "Quit"
+msgstr "退出"
+
+msgid "Shutdown the computer"
+msgstr "关闭计算机"
+
+msgid "Run with NVIDIA GPU"
+msgstr "使用NVIDIA GPU运行"
+
+msgid "Add to panel"
+msgstr "添加到面板"
+
+msgid "Add to desktop"
+msgstr "添加到桌面"
+
+msgid "Remove from favorites"
+msgstr "从收藏夹中删除"
+
+msgid "Add to favorites"
+msgstr "添加到收藏夹"
+
+msgid "Uninstall"
+msgstr "卸载"
+
 msgid "Home"
 msgstr "主目录"
 
@@ -183,30 +111,124 @@ msgstr "计算机"
 msgid "Browse network"
 msgstr "浏览网络"
 
-msgid ""
-"This menu item is not associated to any package. Do you want to remove it "
-"from the menu anyway?"
-msgstr ""
+msgid "Find files..."
+msgstr "查找文件..."
+
+msgid "Please wait..."
+msgstr "请稍等..."
+
+msgid "Applications"
+msgstr "应用"
+
+msgid "Documents"
+msgstr "文件"
+
+msgid "Videos"
+msgstr "视频"
+
+msgid "Images"
+msgstr "图片"
+
+msgid "Music"
+msgstr "音乐"
+
+msgid "No recent Items"
+msgstr "没有最近的项目"
+
+msgid "Click to copy"
+msgstr "点击复制"
+
+msgid "Applications and files"
+msgstr "应用程序和文件"
+
+msgid "Other search results"
+msgstr "其他搜索结果"
+
+msgid "Browser history"
+msgstr "浏览器历史"
+
+msgid "Browser bookmarks"
+msgstr "浏览器书签"
+
+msgid "Emoji"
+msgstr "表情符号"
+
+msgid "Trash"
+msgstr "垃圾"
+
+msgid "Error while opening file:"
+msgstr "打开文件时出错："
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "条目过多 - 仅显示前 1000 个条目"
+
+msgid "Favorites"
+msgstr "收藏夹"
+
+msgid "Recent"
+msgstr "最近的"
+
+msgid "Home folder"
+msgstr "主文件夹"
+
+msgid "Reset category order"
+msgstr "重置类别顺序"
+
+msgid "light skin tone"
+msgstr "浅肤色"
+
+msgid "medium-light skin tone"
+msgstr "中浅肤色"
+
+msgid "medium skin tone"
+msgstr "中等肤色"
+
+msgid "medium-dark skin tone"
+msgstr "中深肤色"
+
+msgid "dark skin tone"
+msgstr "深色肤色"
+
+msgid "This file is no longer available"
+msgstr "此文件不再可用"
+
+msgid "Open with"
+msgstr "打开用"
+
+msgid "Other application..."
+msgstr "其他应用..."
+
+msgid "Open containing folder"
+msgstr "打开包含文件夹"
+
+msgid "Move to trash"
+msgstr "移到废纸篓"
+
+msgid "Error while moving file to trash:"
+msgstr "将文件移动到垃圾箱时出错："
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "此菜单项不与任何包关联。是否仍要将其从菜单中删除？"
 
 msgid "The following packages will be removed:"
-msgstr ""
+msgstr "以下软件包将被删除："
 
 msgid "Packages to be removed"
-msgstr ""
+msgstr "要删除的包"
 
 #, python-format
 msgid "Cannot remove package %s as it is required by other packages."
-msgstr ""
+msgstr "无法删除包 %s，因为其他包需要它。"
 
 #, python-format
 msgid "Package %s is a dependency of the following packages:"
-msgstr ""
+msgstr "包 %s 是以下包的依赖项："
 
 msgid "Open"
-msgstr ""
+msgstr "打开"
 
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 msgid "Start in"
 msgstr ""
@@ -218,7 +240,7 @@ msgid "Follow symlinks"
 msgstr ""
 
 msgid "Search hidden"
-msgstr ""
+msgstr "搜索隐藏"
 
 msgid "Use regular expressions"
 msgstr ""
@@ -256,13 +278,8 @@ msgstr ""
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-msgid ""
-"A flexible menu with grid or list layout options, file browser and emoji "
-"search."
-msgstr ""
-
-msgid "Layout and Content"
-msgstr "布局和内容"
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "具有网格或列表布局选项、文件浏览器和表情符号搜索的灵活菜单。"
 
 msgid "Behavior"
 msgstr "行为"
@@ -270,11 +287,14 @@ msgstr "行为"
 msgid "Appearance"
 msgstr "外观"
 
-msgid "Layout"
-msgstr "布局"
+msgid "Layout and Content"
+msgstr "布局和内容"
 
-msgid "Content"
-msgstr "内容"
+msgid "Search Providers"
+msgstr "搜索提供者"
+
+msgid "No search provider extensions found"
+msgstr "未找到搜索提供程序扩展"
 
 msgid "Panel"
 msgstr "面板"
@@ -282,92 +302,41 @@ msgstr "面板"
 msgid "Menu"
 msgstr "菜单"
 
-msgid "Applications view mode"
-msgstr "应用程序查看模式"
+msgid "Layout"
+msgstr "布局"
 
-msgid "List"
-msgstr "列表"
+msgid "Content"
+msgstr "内容"
 
-msgid "Grid"
-msgstr "网格"
-
-msgid "View applications as list or grid"
-msgstr "以列表或网格查看应用程序"
-
-msgid "Application description placement"
-msgstr "应用说明放置"
-
-msgid "Tooltips"
-msgstr "工具提示"
-
-msgid "Under titles"
-msgstr "在标题下"
-
-msgid "None"
-msgstr "没有"
-
-msgid "Choose where to show application descriptions"
-msgstr "选择显示应用程序描述的位置"
-
-#, fuzzy
-#| msgid "Session buttons location"
-msgid "Sidebar location"
-msgstr "会话按钮的位置"
-
-msgid "Top"
-msgstr "最佳"
-
-msgid "Bottom"
-msgstr "底部"
-
-msgid "Left"
-msgstr "剩下"
-
-msgid "Right"
-msgstr "对"
-
-msgid "Choose where to show the sidebar"
-msgstr ""
-
-msgid ""
-"\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
-msgstr ""
-
-msgid "Show favorites on sidebar"
-msgstr ""
-
-#, fuzzy
-#| msgid "Show your favorite app icons next to the session buttons"
-msgid "Show your favorite app and file icons on the sidebar"
-msgstr "在会话按钮旁边显示您喜欢的应用程序图标"
-
-msgid "Show bookmarks and places"
-msgstr "显示书签和位置"
-
-msgid "Show bookmarks and places category in the menu"
-msgstr "显示书签和位置"
-
-msgid "Show recent items"
-msgstr ""
-
-msgid "Show recent items category in the menu"
-msgstr ""
-
-msgid "Show favorite apps category"
-msgstr ""
-
-msgid "Show your favorite apps category in the menu"
-msgstr ""
-
-msgid "Show home folder"
-msgstr ""
-
-msgid "Show home folder category in the menu"
-msgstr ""
+msgid "Recent files settings"
+msgstr "最近的文件设置"
 
 msgid "Open the menu editor"
 msgstr "打开菜单编辑器"
+
+msgid "Use a custom icon"
+msgstr "使用自定义图标"
+
+msgid "Use a custom icon in the panel"
+msgstr "在面板中使用自定义图标"
+
+msgid "Panel icon"
+msgstr "面板图标"
+
+msgid "Panel text"
+msgstr "面板文字"
+
+msgid "Text to show beside the panel icon"
+msgstr "在面板图标旁边显示的文本"
+
+msgid "Category icon size (pixels)"
+msgstr "类别图标大小（像素）"
+
+msgid "Applications list icon size (pixels)"
+msgstr "应用程序列表图标大小（像素）"
+
+msgid "Applications grid icon size (pixels)"
+msgstr "应用程序网格图标大小（像素）"
 
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "打开和关闭菜单的键盘快捷键"
@@ -396,136 +365,8 @@ msgstr "点击激活类别"
 msgid "Activate categories on click instead of on hover"
 msgstr "点击激活类别"
 
-msgid "Open menu on category:"
-msgstr ""
-
-msgid "Always open the menu with this category selected"
-msgstr ""
-
-msgid "Last used category"
-msgstr ""
-
 msgid "Enable autoscrolling"
 msgstr "启用自动滚动"
-
-#, fuzzy
-#| msgid "Enable autoscrolling in application list"
-msgid "Autoscroll the application list on mouse hover"
-msgstr "在应用程序列表中启用自动滚动"
-
-msgid "Show hidden files"
-msgstr ""
-
-msgid "Show hidden files in folder view"
-msgstr ""
-
-msgid "Emoji search"
-msgstr ""
-
-msgid "Show emojis in search results"
-msgstr ""
-
-msgid "Web search option"
-msgstr ""
-
-msgid "Show an internet search option in search results"
-msgstr ""
-
-msgid "Search home folder"
-msgstr ""
-
-msgid "When searching, also search my home folder for files"
-msgstr ""
-
-#, fuzzy
-#| msgid "Show web bookmarks"
-msgid "Web bookmarks search"
-msgstr "显示网络书签"
-
-msgid ""
-"When searching, also search my browser's web bookmarks (Google Chrome, "
-"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Note: To search Firefox bookmarks you will need to install package gir1.2-"
-"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
-"libgda (Arch based distributions) and restart your computer."
-msgstr ""
-
-msgid "Wikipedia search"
-msgstr ""
-
-msgid "Show some Wikipedia results"
-msgstr ""
-
-msgid "Wikipedia language"
-msgstr ""
-
-msgid "Use a custom icon"
-msgstr "使用自定义图标"
-
-msgid "Use a custom icon in the panel"
-msgstr "在面板中使用自定义图标"
-
-msgid "Panel icon"
-msgstr "面板图标"
-
-msgid "Use a custom icon size"
-msgstr ""
-
-msgid "Use a custom size for the panel icon"
-msgstr ""
-
-msgid "Panel icon size (pixels)"
-msgstr ""
-
-msgid "Choose a custom size for the panel icon"
-msgstr ""
-
-msgid "Panel text"
-msgstr "面板文字"
-
-msgid "Text to show beside the panel icon"
-msgstr "在面板图标旁边显示的文本"
-
-#, fuzzy
-#| msgid "Category icon size"
-msgid "Category icon size (pixels)"
-msgstr "类别图标大小："
-
-#, fuzzy
-#| msgid "Applications list icon size"
-msgid "Applications list icon size (pixels)"
-msgstr "应用程序列表图标大小"
-
-#, fuzzy
-#| msgid "Applications grid icon size"
-msgid "Applications grid icon size (pixels)"
-msgstr "应用程序网格图标大小"
-
-msgid "Sidebar icon size (pixels)"
-msgstr ""
-
-msgid "Use sidebar box style"
-msgstr ""
-
-msgid "Use a sidebar box style"
-msgstr ""
-
-msgid "Use tile style"
-msgstr ""
-
-msgid ""
-"Use a tile style for the application buttons (Note: may not work on some "
-"themes)"
-msgstr ""
-
-msgid "Search Providers"
-msgstr "搜索提供者"
-
-msgid "No search provider extensions found"
-msgstr ""
-
-msgid "Recent files settings"
-msgstr "最近的文件设置"
 
 msgid "Enable autoscrolling in application list"
 msgstr "在应用程序列表中启用自动滚动"
@@ -537,24 +378,44 @@ msgid ""
 "Show your browser's web bookmarks in the menu.\n"
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
+"在菜单中显示浏览器的网络书签。\n"
+"注意：安装包 gir1.2-gda-5.0 以阅读 Firefox 书签。"
 
 msgid "Enable searching of open windows"
-msgstr ""
+msgstr "启用搜索打开的窗口"
 
 msgid "Enable search providers"
 msgstr "启用搜索提供商"
 
 msgid "Include search provider results in searches"
-msgstr ""
+msgstr "在搜索中包含搜索提供程序结果"
 
 msgid "Example Search Providers"
 msgstr "示例搜索提供程序"
+
+msgid "Open menu on category:"
+msgstr "打开类别菜单："
+
+msgid "List"
+msgstr "列表"
+
+msgid "Grid"
+msgstr "网格"
+
+msgid "Always open the menu with this category selected"
+msgstr "始终打开选择此类别的菜单"
 
 msgid "columns"
 msgstr "列"
 
 msgid "Number of columns in apps grid"
 msgstr "应用程序网格中列的数量"
+
+msgid "Show bookmarks and places"
+msgstr "显示书签和位置"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "显示书签和位置"
 
 msgid "Show application icons"
 msgstr "显示应用程序图标"
@@ -566,7 +427,7 @@ msgid "Show application descriptions under titles"
 msgstr "在标题下显示应用程序描述"
 
 msgid "Show tooltips"
-msgstr ""
+msgstr "显示工具提示"
 
 msgid "Tooltip delay"
 msgstr "工具提示延迟"
@@ -574,30 +435,176 @@ msgstr "工具提示延迟"
 msgid "Use a custom menu height"
 msgstr "使用自定义菜单高度"
 
-#, fuzzy
-#| msgid "Custom menu height"
 msgid "Custom menu height (pixels)"
-msgstr "自定义菜单高度"
+msgstr "自定义菜单高度（像素）"
 
-#~ msgid ""
-#~ "A flexible menu providing formatting options, web bookmarks, search "
-#~ "provider support and fuzzy searching."
-#~ msgstr "灵活的菜单，提供格式选项，Web书签，搜索提供程序支持和模糊搜索。"
+msgid "Applications view mode"
+msgstr "应用程序查看模式"
 
-#~ msgid "pixels"
-#~ msgstr "像素"
+msgid "View applications as list or grid"
+msgstr "以列表或网格查看应用程序"
 
-#~ msgid "Show your browser's web bookmarks in the menu"
-#~ msgstr "在菜单中显示浏览器的网络书签"
+msgid "Application description placement"
+msgstr "应用说明放置"
 
-#~ msgid "Startup applications view mode"
-#~ msgstr "启动应用程序视图模式"
+msgid "Tooltips"
+msgstr "工具提示"
 
-#~ msgid "px"
-#~ msgstr "px"
+msgid "Under titles"
+msgstr "在标题下"
 
-#~ msgid "Choose where to show the session (quit, logout, etc.) buttons"
-#~ msgstr "选择显示会话（退出，注销等）按钮的位置"
+msgid "None"
+msgstr "没有"
 
-#~ msgid "Add favorites to session buttons"
-#~ msgstr "将收藏夹添加到会话按钮"
+msgid "Choose where to show application descriptions"
+msgstr "选择显示应用程序描述的位置"
+
+msgid "Sidebar location"
+msgstr "侧边栏位置"
+
+msgid "Top"
+msgstr "最佳"
+
+msgid "Bottom"
+msgstr "底部"
+
+msgid "Left"
+msgstr "剩下"
+
+msgid "Right"
+msgstr "对"
+
+msgid "Choose where to show the sidebar"
+msgstr "选择显示侧边栏的位置"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"信息/提示：拖动菜单边缘以更改菜单大小。\n"
+
+msgid "Show favorites on sidebar"
+msgstr "在侧边栏显示收藏夹"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "在侧边栏显示您最喜欢的应用程序和文件图标"
+
+msgid "Show recent items"
+msgstr "显示最近的项目"
+
+msgid "Show recent items category in the menu"
+msgstr "在菜单中显示最近的项目类别"
+
+msgid "Show favorite apps category"
+msgstr "显示最喜欢的应用类别"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "在菜单中显示您最喜欢的应用类别"
+
+msgid "Show home folder"
+msgstr "显示主文件夹"
+
+msgid "Show home folder category in the menu"
+msgstr "在菜单中显示主文件夹类别"
+
+msgid "Last used category"
+msgstr "上次使用的类别"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "鼠标悬停时自动滚动应用程序列表"
+
+msgid "Show hidden files"
+msgstr "显示隐藏文件"
+
+msgid "Show hidden files in folder view"
+msgstr "在文件夹视图中显示隐藏文件"
+
+msgid "Emoji search"
+msgstr "表情符号搜索"
+
+msgid "Show emojis in search results"
+msgstr "在搜索结果中显示表情符号"
+
+msgid "Web search option"
+msgstr "网络搜索选项"
+
+msgid "Show an internet search option in search results"
+msgstr "在搜索结果中显示 Internet 搜索选项"
+
+msgid "Search home folder"
+msgstr "搜索主文件夹"
+
+msgid "When searching, also search my home folder for files"
+msgstr "搜索时，还要在我的主文件夹中搜索文件"
+
+msgid "Web history search"
+msgstr "网络历史搜索"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"搜索时，还要搜索我的浏览器历史记录（Google Chrome、Chromium、Opera、Vivaldi、Brave）\n"
+"注意：目前不支持 Firefox 历史记录。"
+
+msgid "Web bookmarks search"
+msgstr "网络书签搜索"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, "
+"Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions "
+"inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"搜索时，还要搜索我的浏览器的网络书签（Google Chrome、Firefox、Chromium、Opera、Vivaldi、Brave）\n"
+"注意：要搜索 Firefox 书签，您需要安装包 gir1.2-gda-5.0（基于 Debian 的发行版 inc。Ubuntu & Linux Mint）或打包 "
+"libgda（基于 Arch 的发行版）并重新启动计算机。"
+
+msgid "Wikipedia search"
+msgstr "维基百科搜索"
+
+msgid "Show some Wikipedia results"
+msgstr "显示一些维基百科结果"
+
+msgid "Wikipedia language"
+msgstr "维基百科语言"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search "
+"term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file "
+"search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"注意：即使您没有在此处通过为搜索词添加前缀启用某些搜索选项，它们仍然可以使用。\n"
+"例如：要搜索表情符号，请键入“e heart”以查找心形表情符号。同样，使用前缀“f ”进行文件搜索，使用前缀“h ”搜索网络历"
+"史记录，使用前缀“b ”搜索网络书签。\n"
+
+msgid "Use a custom icon size"
+msgstr "使用自定义图标大小"
+
+msgid "Use a custom size for the panel icon"
+msgstr "为面板图标使用自定义大小"
+
+msgid "Panel icon size (pixels)"
+msgstr "面板图标大小（像素）"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "为面板图标选择自定义大小"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "侧边栏图标大小（像素）"
+
+msgid "Use sidebar box style"
+msgstr "使用侧边栏框样式"
+
+msgid "Use a sidebar box style"
+msgstr "使用侧边栏框样式"
+
+msgid "Use tile style"
+msgstr "使用平铺样式"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "为应用程序按钮使用平铺样式（注意：可能不适用于某些主题）"

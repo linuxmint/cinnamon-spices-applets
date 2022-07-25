@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-20 11:14+0800\n"
-"PO-Revision-Date: 2019-10-24 21:31+0200\n"
+"PO-Revision-Date: 2022-06-03 17:55+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it\n"
 
 #. mybookmarks@markbokil.com->metadata.json->name
 #: applet.js:60
@@ -37,51 +37,51 @@ msgstr "Informazioni"
 
 #: mybookmarks.properties:6
 msgid "Blogger"
-msgstr ""
+msgstr "Blogger"
 
 #: mybookmarks.properties:7
 msgid "Talk"
-msgstr ""
+msgstr "Talk"
 
 #: mybookmarks.properties:8
 msgid "Voice"
-msgstr ""
+msgstr "Voice"
 
 #: mybookmarks.properties:9
 msgid "Translate"
-msgstr ""
+msgstr "Translate"
 
 #: mybookmarks.properties:10
 msgid "Play"
-msgstr ""
+msgstr "Play"
 
 #: mybookmarks.properties:11
 msgid "Books"
-msgstr ""
+msgstr "Books"
 
 #: mybookmarks.properties:12
 msgid "Reader"
-msgstr ""
+msgstr "Reader"
 
 #: mybookmarks.properties:13
 msgid "Maps"
-msgstr ""
+msgstr "Maps"
 
 #: mybookmarks.properties:14
 msgid "Youtube"
-msgstr ""
+msgstr "Youtube"
 
 #: mybookmarks.properties:15
 msgid "iGoogle"
-msgstr ""
+msgstr "iGoogle"
 
 #: mybookmarks.properties:17
 msgid "DuckDuckGo"
-msgstr ""
+msgstr "DuckDuckGo"
 
 #: mybookmarks.properties:18
 msgid "Google Search"
-msgstr ""
+msgstr "Google Search"
 
 #: mybookmarks.properties:19
 msgid "Advanced Search"
@@ -101,7 +101,7 @@ msgstr "Home"
 
 #: mybookmarks.properties:25
 msgid "Dropbox"
-msgstr ""
+msgstr "Dropbox"
 
 #: mybookmarks.properties:26
 msgid "Documents"
@@ -137,31 +137,31 @@ msgstr "Forum di Cinnamon"
 
 #: mybookmarks.properties:36
 msgid "News"
-msgstr ""
+msgstr "News"
 
 #: mybookmarks.properties:37
 msgid "Google+"
-msgstr ""
+msgstr "Google+"
 
 #: mybookmarks.properties:38
 msgid "Cloud Storage"
-msgstr ""
+msgstr "Cloud Storage"
 
 #: mybookmarks.properties:39
 msgid "Calendar"
-msgstr ""
+msgstr "Calendar"
 
 #: mybookmarks.properties:40
 msgid "Mail"
-msgstr ""
+msgstr "Mail"
 
 #: mybookmarks.properties:41
 msgid "Yahoo Mail"
-msgstr ""
+msgstr "Yahoo Mail"
 
 #: mybookmarks.properties:42
 msgid "Hotmail"
-msgstr ""
+msgstr "Hotmail"
 
 #. mybookmarks@markbokil.com->metadata.json->description
 msgid "Web apps launcher"
