@@ -486,13 +486,18 @@ class QPopupSlider extends QPopupItem {
         this.emit('drag-begin');
         this._dragging = true;
 
-
-        // FIXME: we should only grab the specific device that originated
-        // the event, but for some weird reason events are still delivered
-        // outside the slider if using clutter_grab_pointer_for_device
-        Clutter.grab_pointer(this.slider);
-        this._signals.connect(this.slider, 'button-release-event', this._endDragging.bind(this));
-        this._signals.connect(this.slider, 'motion-event', this._motionEvent.bind(this));
+        if (imports.misc.config.PACKAGE_VERSION < "5.4") {
+            // FIXME: we should only grab the specific device that originated
+            // the event, but for some weird reason events are still delivered
+            // outside the slider if using clutter_grab_pointer_for_device
+            Clutter.grab_pointer(this.slider);
+            this._signals.connect(this.slider, 'button-release-event', this._endDragging.bind(this));
+            this._signals.connect(this.slider, 'motion-event', this._motionEvent.bind(this));
+        }
+        else {
+            this._signals.connect(this.actor, 'button-release-event', this._endDragging.bind(this));
+            this._signals.connect(this.actor, 'motion-event', this._motionEvent.bind(this));
+        }
 
         let absX, absY;
         [absX, absY] = event.get_coords();
@@ -501,10 +506,16 @@ class QPopupSlider extends QPopupItem {
 
     _endDragging() {
         if (this._dragging) {
-            this._signals.disconnect('button-release-event', this.slider);
-            this._signals.disconnect('motion-event', this.slider);
+            if (imports.misc.config.PACKAGE_VERSION < "5.4") {
+                this._signals.disconnect('button-release-event', this.slider);
+                this._signals.disconnect('motion-event', this.slider);
+                Clutter.ungrab_pointer();
+            }
+            else {
+                this._signals.disconnect('button-release-event', this.actor);
+                this._signals.disconnect('motion-event', this.actor);
+            }
 
-            Clutter.ungrab_pointer();
             this._dragging = false;
 
             this.emit('drag-end');
