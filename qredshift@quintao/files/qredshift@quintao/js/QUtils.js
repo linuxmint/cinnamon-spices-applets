@@ -545,6 +545,8 @@ class QPopupSlider extends QPopupItem {
         } else if (direction == Clutter.ScrollDirection.UP) {
             newvalue += this.STEP;
         }
+        else
+            return;
 
         // qLOG('LOG', this._signals);
 
