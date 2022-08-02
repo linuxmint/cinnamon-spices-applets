@@ -497,10 +497,9 @@ class QPopupSlider extends QPopupItem {
 
     _endDragging(actor, event) {
         if (this._dragging) {
-            
-            event.get_device().ungrab(this.slider);
             this._signals.disconnect('button-release-event', this.slider);
             this._signals.disconnect('motion-event', this.slider);
+            event.get_device().ungrab(this.slider);
             this._dragging = false;
 
             this.emit('drag-end');
