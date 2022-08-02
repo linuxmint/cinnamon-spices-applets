@@ -6,11 +6,11 @@ function WorkspaceController(cols, rows) {
 }
 
 WorkspaceController.prototype = {
-    
+
     _init: function(cols, rows) {
         this.set_workspace_grid(cols, rows);
     },
-     
+
     // Create proper workspace layout geometry within Gnome
     set_workspace_grid: function (cols, rows) {
         this.cols = cols;
@@ -18,12 +18,12 @@ WorkspaceController.prototype = {
         this.__equalize_num_workspaces();
         global.screen.override_workspace_layout(Meta.ScreenCorner.TOPLEFT, false, rows, cols);
     },
-    
+
     // Update Gnome's view of workspaces to reflect our count based on row*col.
     __equalize_num_workspaces: function() {
         let new_ws_count = this.cols * this.rows;
         let old_ws_count = global.screen.n_workspaces;
-        
+
         if (new_ws_count > old_ws_count) {
             for (let i=old_ws_count; i<new_ws_count; i++)
                 global.screen.append_new_workspace(false, global.get_current_time());
@@ -35,7 +35,7 @@ WorkspaceController.prototype = {
             }
         }
     },
-    
+
     // This applet is going away. Revert to allowing Cinnamon to control workspaces.
     release_control: function() {
         this.set_workspace_grid(-1, 1); // Set to no rows, and a single desktop
