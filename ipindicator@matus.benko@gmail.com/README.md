@@ -40,7 +40,7 @@ Following IP Services are called:
 # Screenshots
 IP: 
 
-![ip](screenshot-ip.png)
+![ip](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/ipindicator%40matus.benko%40gmail.com/screenshot-ip.png)
 
 Icon: 
 
