@@ -1,3 +1,13 @@
+### 1.2.1
+- move to multiversion setup. This ensures event manager is only started
+  on Cinnamon 5.2+.
+
+### 1.2.0
+- Merged the event manager from calender@cinnamon.org
+- Updated layout to match changes in calender@cinnamon.org
+- Thanks to haggen88 for the spanish translation and to Dragone2 for
+  the italian translation.
+
 ### 1.1.7
 - Thanks to serkan-master for the turkish translation, to ViniciusQueirozVQ
   for the portuguese/brazilian translation, and to FabienRCT for his work

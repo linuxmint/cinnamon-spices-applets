@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu applet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-22 07:17+0100\n"
-"PO-Revision-Date: 2021-10-25 15:18+0100\n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-28 04:50+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: \n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "Type to search..."
 msgstr "Escreva para pesquisar..."
@@ -44,8 +44,7 @@ msgid "Favorite apps"
 msgstr "Aplicações favoritas"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr ""
-"Pacote gir1.2-gda-5.0 necessário para os marcadores do Firefox e Midori."
+msgstr "Pacote gir1.2-gda-5.0 necessário para os marcadores do Firefox e Midori."
 
 msgid "Clear List"
 msgstr "Limpar lista"
@@ -119,14 +118,50 @@ msgstr "Localizar ficheiros..."
 msgid "Please wait..."
 msgstr "Aguarde..."
 
+msgid "Applications"
+msgstr "Formulários"
+
+msgid "Documents"
+msgstr "Documentos"
+
+msgid "Videos"
+msgstr "Vídeos"
+
+msgid "Images"
+msgstr "Imagens"
+
+msgid "Music"
+msgstr "Música"
+
 msgid "No recent Items"
 msgstr "Sem itens recentes"
 
 msgid "Click to copy"
 msgstr "Clique para copiar"
 
+msgid "Applications and files"
+msgstr "Aplicativos e arquivos"
+
+msgid "Other search results"
+msgstr "Outros resultados da pesquisa"
+
+msgid "Browser history"
+msgstr "Histórico do navegador"
+
+msgid "Browser bookmarks"
+msgstr "Favoritos do navegador"
+
+msgid "Emoji"
+msgstr "Emoji"
+
 msgid "Trash"
 msgstr "Lixo"
+
+msgid "Error while opening file:"
+msgstr "Erro ao abrir ficheiro:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Demasiadas entradas - mostrando apenas as primeiras 1000 entradas"
 
 msgid "Favorites"
 msgstr "Favoritas"
@@ -136,9 +171,6 @@ msgstr "Recentes"
 
 msgid "Home folder"
 msgstr "Pasta pessoal"
-
-msgid "Too many entries - showing first 1000 entries only"
-msgstr "Demasiadas entradas - mostrando apenas as primeiras 1000 entradas"
 
 msgid "Reset category order"
 msgstr "Repor ordem de categorias"
@@ -164,7 +196,6 @@ msgstr "Este ficheiro já não está disponível"
 msgid "Open with"
 msgstr "Abrir com"
 
-#| msgid "Show application icons"
 msgid "Other application..."
 msgstr "Outras aplicações..."
 
@@ -177,8 +208,22 @@ msgstr "Mover para o lixo"
 msgid "Error while moving file to trash:"
 msgstr "Erro ao mover o ficheiro para o lixo:"
 
-msgid "Error while opening file:"
-msgstr "Erro ao abrir ficheiro:"
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Este item de menu não está associado a nenhum pacote. Deseja removê-lo do menu mesmo assim?"
+
+msgid "The following packages will be removed:"
+msgstr "Os seguintes pacotes serão removidos:"
+
+msgid "Packages to be removed"
+msgstr "Pacotes a serem removidos"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Não é possível remover o pacote %s, pois é exigido por outros pacotes."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "O pacote %s é uma dependência dos seguintes pacotes:"
 
 msgid "Open"
 msgstr "Abrir"
@@ -234,12 +279,8 @@ msgstr " - diretório já pesquisado"
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-msgid ""
-"A flexible menu with grid or list layout options, file browser and emoji "
-"search."
-msgstr ""
-"Um menu flexível com opções de disposição em grelha ou lista, navegador de "
-"ficheiros e pesquisa emoji."
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Um menu flexível com opções de disposição em grelha ou lista, navegador de ficheiros e pesquisa emoji."
 
 msgid "Behavior"
 msgstr "Comportamento"
@@ -448,8 +489,7 @@ msgid "Show favorites on sidebar"
 msgstr "Mostrar favoritos na barra lateral"
 
 msgid "Show your favorite app and file icons on the sidebar"
-msgstr ""
-"Mostrar os ícones de aplicações e ficheiros favoritos na barra lateral"
+msgstr "Mostrar os ícones de aplicações e ficheiros favoritos na barra lateral"
 
 msgid "Show recent items"
 msgstr "Mostrar ficheiros recentes"
@@ -499,22 +539,25 @@ msgstr "Pesquisar pasta principal"
 msgid "When searching, also search my home folder for files"
 msgstr "Ao pesquisar, pesquisar também a minha pasta pessoal por ficheiros"
 
+msgid "Web history search"
+msgstr "Pesquisa no histórico da web"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Ao pesquisar, pesquise também o histórico do meu navegador (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Observação: o histórico do Firefox não é suportado no momento."
+
 msgid "Web bookmarks search"
 msgstr "Pesquisa de marcadores web"
 
 msgid ""
-"When searching, also search my browser's web bookmarks (Google Chrome, "
-"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Note: To search Firefox bookmarks you will need to install package gir1.2-"
-"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
-"libgda (Arch based distributions) and restart your computer."
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
 msgstr ""
-"Ao pesquisar, pesquisar também nos marcadores do navegador (Google Chrome, "
-"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Nota: Para pesquisar nos favoritos do Firefox terá de instalar o pacote "
-"gir1.2-gda-5.0 (distribuições baseadas em Debian inc. Ubuntu e Linux Mint) "
-"ou o pacote libgda (distribuições baseadas em Arch) e reiniciar o "
-"computador."
+"Ao pesquisar, pesquisar também nos marcadores do navegador (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Nota: Para pesquisar nos favoritos do Firefox terá de instalar o pacote gir1.2-gda-5.0 (distribuições baseadas em Debian inc. Ubuntu e Linux Mint) ou o pacote libgda (distribuições baseadas em Arch) e reiniciar o computador."
 
 msgid "Wikipedia search"
 msgstr "Pesquisa na Wikipédia"
@@ -524,6 +567,15 @@ msgstr "Mostrar alguns resultados da Wikipédia"
 
 msgid "Wikipedia language"
 msgstr "Idioma da Wikipédia"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Observação: algumas opções de pesquisa ainda podem ser usadas mesmo que você não as tenha ativado aqui prefixando o termo de pesquisa.\n"
+"Por exemplo: para pesquisar um emoji, digite 'e heart' para encontrar emojis de coração. Da mesma forma, use prefixos 'f ' para pesquisa de arquivos, 'h ' para histórico da web e 'b ' para pesquisa de favoritos da web.\n"
 
 msgid "Use a custom icon size"
 msgstr "Usar um tamanho de ícone personalizado"
@@ -549,28 +601,5 @@ msgstr "Usa um estilo de barra lateral tipo caixa"
 msgid "Use tile style"
 msgstr "Usar estilo mosaico"
 
-msgid ""
-"Use a tile style for the application buttons (Note: may not work on some "
-"themes)"
-msgstr ""
-"Usa um estilo de mosaico para os botões das aplicações (Nota: pode não "
-"funcionar em alguns temas)"
-
-#~ msgid ""
-#~ "A flexible menu providing formatting options, web bookmarks, search "
-#~ "provider support and fuzzy searching."
-#~ msgstr ""
-#~ "Um menu flexível que oferece opções de formatação, favoritos da web, "
-#~ "suporte ao provedor de pesquisa e pesquisa difusa."
-
-#~ msgid "pixels"
-#~ msgstr "pixeis"
-
-#~ msgid "Startup applications view mode"
-#~ msgstr "Modo de vista das aplicações de arranque"
-
-#~ msgid "px"
-#~ msgstr "px"
-
-#~ msgid "Add favorites to session buttons"
-#~ msgstr "Adicione favoritos aos botões da sessão"
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Usa um estilo de mosaico para os botões das aplicações (Nota: pode não funcionar em alguns temas)"

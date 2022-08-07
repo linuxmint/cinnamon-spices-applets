@@ -1,22 +1,22 @@
 # Swedish translation for Cinnamenu@json.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2021.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-07 10:55+0100\n"
-"PO-Revision-Date: 2021-08-09 14:42+0200\n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-07 14:13+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "Type to search..."
 msgstr "Skriv för att söka..."
@@ -117,14 +117,50 @@ msgstr "Hitta filer..."
 msgid "Please wait..."
 msgstr "Vänta..."
 
+msgid "Applications"
+msgstr "Program"
+
+msgid "Documents"
+msgstr "Dokument"
+
+msgid "Videos"
+msgstr "Video"
+
+msgid "Images"
+msgstr "Bilder"
+
+msgid "Music"
+msgstr "Musik"
+
 msgid "No recent Items"
 msgstr "Inga nya artiklar"
 
 msgid "Click to copy"
 msgstr "Klicka för att kopiera"
 
+msgid "Applications and files"
+msgstr "Program och filer"
+
+msgid "Other search results"
+msgstr "Andra sökresultat"
+
+msgid "Browser history"
+msgstr "Webbläsarhistorik"
+
+msgid "Browser bookmarks"
+msgstr "Webbläsarbokmärken"
+
+msgid "Emoji"
+msgstr "Emoji"
+
 msgid "Trash"
 msgstr "Skräp"
+
+msgid "Error while opening file:"
+msgstr "Ett fel inträffade vid öppning av filen:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "För många poster - Visar endast de 1000 första posterna"
 
 msgid "Favorites"
 msgstr "Favoriter"
@@ -134,9 +170,6 @@ msgstr "Senaste"
 
 msgid "Home folder"
 msgstr "Hemmapp"
-
-msgid "Too many entries - showing first 1000 entries only"
-msgstr "För många poster - Visar endast de 1000 första posterna"
 
 msgid "Reset category order"
 msgstr "Återställ kategoriordningen"
@@ -174,8 +207,26 @@ msgstr "Flytta till papperskorgen"
 msgid "Error while moving file to trash:"
 msgstr "Kunde inte flytta filen till papperskorgen:"
 
-msgid "Error while opening file:"
-msgstr "Ett fel inträffade vid öppning av filen:"
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Det här menyalternativet är inte kopplat till något paket. Vill du ta bort "
+"det från menyn ändå?"
+
+msgid "The following packages will be removed:"
+msgstr "Följande paket kommer att tas bort:"
+
+msgid "Packages to be removed"
+msgstr "Paket att ta bort"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Kan inte ta bort paketet %s, eftersom andra paket är beroende av det."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Följande paket är beroende av paketet %s:"
 
 msgid "Open"
 msgstr "Öppen"
@@ -486,36 +537,6 @@ msgstr "Visa emojis i sökresultat"
 msgid "Web search option"
 msgstr "Webbsökalternativ"
 
-msgid "Google"
-msgstr "Google"
-
-msgid "Bing"
-msgstr "Bing"
-
-msgid "Baidu"
-msgstr "Baidu"
-
-msgid "Yahoo"
-msgstr "Yahoo"
-
-msgid "Yandex"
-msgstr "Yandex"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ask"
-msgstr "Fråga"
-
-msgid "Ecosia"
-msgstr "Ekosien"
-
-msgid "AOL"
-msgstr "AOL"
-
-msgid "Startpage"
-msgstr "Startpage"
-
 msgid "Show an internet search option in search results"
 msgstr "Visa ett internetsökalternativ i sökresultat"
 
@@ -524,6 +545,18 @@ msgstr "Sök i hemmappen"
 
 msgid "When searching, also search my home folder for files"
 msgstr "Vid sökning, sök även i min hemkatalog efter filer"
+
+msgid "Web history search"
+msgstr "Webbhistoriksök"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Vid sökning, sök också i min webbläsares historik (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Notera att Firefox-historiken inte stöds för närvarande."
 
 msgid "Web bookmarks search"
 msgstr "Webbokmärkessök"
@@ -536,7 +569,7 @@ msgid ""
 "libgda (Arch based distributions) and restart your computer."
 msgstr ""
 "Genomsök också min webbläsares bokmärken vid sökning (Google Chrome, "
-"Chromium, Opera, Vivaldi, Brave & Firefox).\n"
+"Chromium, Opera, Brave, Vivaldi & Firefox).\n"
 "OBS! För att söka i Firefox bokmärken, måste du installera paketet, gir1.2-"
 "gda-5.0 (Debian-baserade distributioner inkl. Ubuntu & Linux Mint) eller "
 "paketet libgda (Arch-baserade distributioner) och starta om din dator."
@@ -546,6 +579,24 @@ msgstr "Wikipedia-sök"
 
 msgid "Show some Wikipedia results"
 msgstr "Visa några Wikipedia-resultat"
+
+msgid "Wikipedia language"
+msgstr "Wikipedia-språk"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Notis: Vissa sökalternativ kan fortfarande användas genom att prefixa "
+"söktermen, även om du inte har aktiverat dem här.\n"
+"Exempel: för att söka efter en emoji, skriv 'e heart' för att hitta "
+"hjärtemojis. Använd också prefixen 'f' för filsökning, 'h' för webbhistorik "
+"och 'b' för sökning efter webbbokmärken.\n"
 
 msgid "Use a custom icon size"
 msgstr "Använd en anpassad ikonstorlek"
@@ -577,6 +628,36 @@ msgid ""
 msgstr ""
 "Använd ett panelformat för programknapparna (OBS! Kanske inte fungerar på "
 "vissa teman)"
+
+#~ msgid "Google"
+#~ msgstr "Google"
+
+#~ msgid "Bing"
+#~ msgstr "Bing"
+
+#~ msgid "Baidu"
+#~ msgstr "Baidu"
+
+#~ msgid "Yahoo"
+#~ msgstr "Yahoo"
+
+#~ msgid "Yandex"
+#~ msgstr "Yandex"
+
+#~ msgid "DuckDuckGo"
+#~ msgstr "DuckDuckGo"
+
+#~ msgid "Ask"
+#~ msgstr "Fråga"
+
+#~ msgid "Ecosia"
+#~ msgstr "Ekosien"
+
+#~ msgid "AOL"
+#~ msgstr "AOL"
+
+#~ msgid "Startpage"
+#~ msgstr "Startpage"
 
 #~ msgid "pixels"
 #~ msgstr "pixlar"

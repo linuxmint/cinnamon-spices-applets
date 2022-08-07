@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-22 22:11+0100\n"
+"POT-Creation-Date: 2022-04-18 11:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,14 +105,18 @@ msgid "Edit selected entry"
 msgstr ""
 
 #: widgets.py:141
-msgid "Move selected entry up"
+msgid "Duplicate selected entry"
 msgstr ""
 
 #: widgets.py:147
+msgid "Move selected entry up"
+msgstr ""
+
+#: widgets.py:153
 msgid "Move selected entry down"
 msgstr ""
 
-#: widgets.py:304
+#: widgets.py:316
 msgid "Separator"
 msgstr ""
 

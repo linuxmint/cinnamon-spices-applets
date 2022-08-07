@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: calendar@ccprog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-13 13:37+0200\n"
+"POT-Creation-Date: 2022-06-30 17:27+0200\n"
 "PO-Revision-Date: 2021-02-27 16:18+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -18,9 +18,57 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:65
+#: applet.js:21
+msgid "%B %-e, %Y"
+msgstr ""
+
+#: applet.js:22 eventView.js:26
+msgid "%A, %B %-e, %Y"
+msgstr ""
+
+#: applet.js:131
 msgid "Date and Time Settings"
 msgstr ""
+
+#: eventView.js:65
+msgid "Starting in a few minutes"
+msgstr "Startar om några minuter"
+
+#: eventView.js:69
+#, javascript-format
+msgid "Starting in %d minutes"
+msgstr "Startar om %d minuter"
+
+#: eventView.js:79
+msgid "This evening"
+msgstr "Ikväll"
+
+#: eventView.js:82
+msgid "Starting later today"
+msgstr "Senare idag"
+
+#: eventView.js:85
+#, javascript-format
+msgid "In %d hour"
+msgid_plural "In %d hours"
+msgstr[0] "Om %d timme"
+msgstr[1] "Om %d timmar"
+
+#: eventView.js:664
+msgid "No Events"
+msgstr "Inga händelser"
+
+#: eventView.js:925
+msgid "In progress"
+msgstr "Pågår"
+
+#: eventView.js:946
+msgid "All day"
+msgstr "Hela dagen"
+
+#: eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
+msgid "Today"
+msgstr "Idag"
 
 #: settings_widgets.py:95
 msgid "Add new entry"
@@ -79,6 +127,14 @@ msgstr ""
 #. settings-schema.json->section4->title
 msgid "Show World Times"
 msgstr "Visa världstider"
+
+#. settings-schema.json->show-events->description
+msgid "Show calendar events"
+msgstr "Visa kalenderhändelser"
+
+#. settings-schema.json->show-events->tooltip
+msgid "Check this to display events in the calendar."
+msgstr "Välj detta för att visa händelser i kalendern"
 
 #. settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"

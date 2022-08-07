@@ -9,15 +9,15 @@ function _(str) {
     return Gettext.dgettext(UUID, str);
 }
 
-function MyApplet(orientation) {
-    this._init(orientation);
+function MyApplet(orientation, panelHeight, instance_id) {
+    this._init(orientation, panelHeight, instance_id);
 }
 
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    _init: function(orientation) {
-        Applet.IconApplet.prototype._init.call(this, orientation);
+    _init: function(orientation, panelHeight, instance_id) {
+        Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instance_id);
 
         try {
             this.set_applet_icon_symbolic_name("system-lock-screen");
@@ -34,7 +34,7 @@ MyApplet.prototype = {
 
 };
 
-function main(metadata, orientation) {
-    let myApplet = new MyApplet(orientation);
+function main(metadata, orientation, panelHeight, instance_id) {
+    let myApplet = new MyApplet(orientation, panelHeight, instance_id);
     return myApplet;
 }

@@ -1,7 +1,8 @@
 import { spawnCommandLinePromise } from "../../functions/promiseHelpers";
 
 import { MPRIS_PLUGIN_PATH, MPRIS_PLUGIN_URL } from '../../consts'
-import { notify } from "../../ui/Notifications/GenericNotification";
+import { notify } from "../../lib/notify";
+
 
 const { find_program_in_path, file_test, FileTest } = imports.gi.GLib;
 
@@ -14,7 +15,7 @@ export async function installMpvWithMpris() {
 
     if (!mpvInstalled) {
         const notificationText = `Please ${mprisPluginDownloaded ? '' : 'also'} install the mpv package.`
-        notify({ text: notificationText })
+        notify(notificationText)
         await installMpvInteractive()
     }
 }

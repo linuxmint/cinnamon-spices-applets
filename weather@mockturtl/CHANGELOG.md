@@ -1,5 +1,27 @@
 # Changelog
 
+## 3.2.6
+
+* Fix [#4387](https://github.com/linuxmint/cinnamon-spices-applets/issues/4387)
+* also add some more location-related entries into the applet label override
+
+## 3.2.5
+
+* Fix [#4378](https://github.com/linuxmint/cinnamon-spices-applets/issues/4378) - Add DWD as a weather provider
+
+## 3.2.4
+
+* Fix issue on Cinnamon versions where `is_finalized` is not injected into GObject
+
+## 3.2.3
+
+* Fix [#4306](https://github.com/linuxmint/cinnamon-spices-applets/issues/4306)
+
+## 3.2.2
+
+* Fix [#4292](https://github.com/linuxmint/cinnamon-spices-applets/issues/4292)
+* Fix [#4285](https://github.com/linuxmint/cinnamon-spices-applets/issues/4285)
+
 ## 3.2.1
 
 * Fix [#4255](https://github.com/linuxmint/cinnamon-spices-applets/issues/4255)

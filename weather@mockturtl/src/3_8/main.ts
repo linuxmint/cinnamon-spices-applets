@@ -252,7 +252,10 @@ export class WeatherApplet extends TextIconApplet {
 				.replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, this.config) : "")
 				.replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
 				.replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, this.config.WindSpeedUnit) : "")
-				.replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "");
+				.replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
+				.replace(/{city}/g, weather.location.city ?? "")
+				.replace(/{country}/g, weather.location.country ?? "")
+				.replace(/{search_entry}/g, this.config.CurrentLocation?.entryText ?? "");
 		}
 
 		this.SetAppletLabel(label);

@@ -44,23 +44,23 @@ IP:
 
 Icon: 
 
-![icon](screenshot-icon.png)
+![icon](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/ipindicator%40matus.benko%40gmail.com/screenshot-icon.png)
 
 Icon and IP:
 
-![iconIp](screenshot.png)
+![iconIp](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/ipindicator%40matus.benko%40gmail.com/screenshot.png)
 
 Tooltip:
 
-![tooltip](screenshot-tooltip.png)
+![tooltip](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/ipindicator%40matus.benko%40gmail.com/screenshot-tooltip.png)
 
 Settings:
 
-![settings](screenshot-settings.png)
+![settings](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/ipindicator%40matus.benko%40gmail.com/screenshot-settings.png)
 
 Custom ISP icon:
 
-![isp](screenshot-isp.png)
+![isp](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/ipindicator%40matus.benko%40gmail.com/screenshot-isp.png)
 
 # Kudos
 

@@ -7,436 +7,598 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-20 09:09+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 18:09+0100\n"
+"Last-Translator: Google translate\n"
 "Language-Team: \n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
-"2:1));\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#. 3.2 4.0
 msgid "Type to search..."
 msgstr "Scrie pentru a căuta..."
 
-#. 3.2 4.0
 msgid "Initializing"
 msgstr "Inițializare"
 
-#. 3.2 4.0
 msgid "No description available"
 msgstr "Nu este disponibilă o descriere"
 
-#. 3.2 4.0
-msgid "All Applications"
+msgid "All applications"
 msgstr "Toate Aplicațiile"
 
-#. 3.2 4.0
 msgid "Places"
 msgstr "Locuri"
 
-#. 3.2 4.0
-msgid "Recent Files"
+msgid "Recent files"
 msgstr "Fișiere recente"
 
-#. 3.2 4.0
 msgid "Bookmarks"
 msgstr "Marcaje"
 
-#. 3.2 4.0
-msgid "Favorite Apps"
+msgid "Favorite apps"
 msgstr "Aplicații favorite"
 
-#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr "Pachetul gir1.2-gda-5.0 este necesar pentru marcaje Firefox și Midori."
 
-#. 3.2 4.0
 msgid "Clear List"
 msgstr "Curăță lista"
 
-#. 3.2 4.0
-msgid "No recent documents"
-msgstr "Nu sunt documente recente"
+msgid "No recent files"
+msgstr "Nu există fișiere recente"
 
-#. 3.2
 msgid "Account details"
 msgstr "Detaliile contului"
 
-#. 3.2 3.2
 msgid "Grid View"
 msgstr "Vedere grilă"
 
-#. 3.2 3.2
 msgid "List View"
 msgstr "Vedere listă"
 
-#. 3.2 3.2
 msgid "Switch to grid view"
 msgstr "Schimbă la vedere grilă"
 
-#. 3.2 3.2
 msgid "Switch to list view"
 msgstr "Schimbă la vedere listă"
 
-#. 3.2 4.0
-msgid "Lock Screen"
+msgid "Lock screen"
 msgstr "Ecran de blocare"
 
-#. 3.2 4.0
 msgid "Lock the screen"
 msgstr "Blochează ecranul"
 
-#. 3.2 4.0
 msgid "Logout"
 msgstr "Delogare"
 
-#. 3.2 4.0
 msgid "Leave the session"
 msgstr "Părăsește sesiunea"
 
-#. 3.2 4.0
 msgid "Quit"
 msgstr "Închide"
 
-#. 3.2 4.0
 msgid "Shutdown the computer"
 msgstr "Închide calculatorul"
 
-#. 3.2 4.0
-msgid "Home"
-msgstr "Acasă"
-
-#. 3.2 4.0
-msgid "Computer"
-msgstr "Calculator"
-
-#. 3.2 4.0
-msgid "Browse network"
-msgstr "Navighează rețeaua"
-
-#. 3.2 4.0
 msgid "Run with NVIDIA GPU"
 msgstr "Rulează cu placa grafică NVIDIA"
 
-#. 3.2 4.0
 msgid "Add to panel"
 msgstr "Adaugă la panou"
 
-#. 3.2 4.0
 msgid "Add to desktop"
 msgstr "Adaugă la desktop"
 
-#. 3.2 4.0
-msgid "Remove favorite"
-msgstr "Eliminați favoritul"
+msgid "Remove from favorites"
+msgstr "Eliminați din favorite"
 
-#. 3.2 4.0
 msgid "Add to favorites"
 msgstr "Adaugă la favorite"
 
-#. 3.2 4.0
 msgid "Uninstall"
 msgstr "Dezinstalează"
 
-#. 4.0 4.0
+msgid "Home"
+msgstr "Acasă"
+
+msgid "Computer"
+msgstr "Calculator"
+
+msgid "Browse network"
+msgstr "Navighează rețeaua"
+
+msgid "Find files..."
+msgstr "Găsiți fișiere..."
+
 msgid "Please wait..."
-msgstr ""
+msgstr "Te rog asteapta..."
 
-#. metadata.json->name
-#. 3.2
-msgid "Cinnamenu"
-msgstr "Cinnamenu"
+msgid "Applications"
+msgstr "Aplicații"
 
-#. metadata.json->description
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
-msgstr ""
-"Un meniu flexibil care oferă opțiuni de formatare, semne de carte web, "
-"asistență pentru furnizorii de căutare și căutare incorectă."
+msgid "Documents"
+msgstr "Documente"
 
-#. metadata.json->comments
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
-msgstr ""
+msgid "Videos"
+msgstr "Videoclipuri"
 
-#. 3.2 4.0
-msgid "Behavior"
-msgstr "Comportament"
+msgid "Images"
+msgstr "Imagini"
 
-#. 3.2 4.0
-msgid "Appearance"
-msgstr "Aspect"
+msgid "Music"
+msgstr "Muzică"
 
-#. 3.2 4.0
-msgid "Layout and Content"
-msgstr "Amplasare și conținut"
+msgid "No recent Items"
+msgstr "Nu există articole recente"
 
-#. 3.2
-msgid "Search Providers"
-msgstr "Furnizori de căutare"
+msgid "Click to copy"
+msgstr "Faceți clic pentru a copia"
 
-#. 3.2
-msgid "No search provider extensions found"
-msgstr "Nu s-a găsit nicio extensie pentru furnizori de căutare"
+msgid "Applications and files"
+msgstr "Aplicații și fișiere"
 
-#. 3.2 4.0
-msgid "Panel"
-msgstr "Panou"
+msgid "Other search results"
+msgstr "Alte rezultate ale căutării"
 
-#. 3.2 4.0
-msgid "Menu"
-msgstr "Meniu"
+msgid "Browser history"
+msgstr "Istoricul browserului"
 
-#. 3.2 4.0
-msgid "Layout"
-msgstr "Amplasare"
+msgid "Browser bookmarks"
+msgstr "Marcaje din browser"
 
-#. 3.2 4.0
-msgid "Content"
-msgstr "Conținut"
+msgid "Emoji"
+msgstr "Emoji"
 
-#. 3.2 4.0
-msgid "Recent files settings"
-msgstr "Setări recente de fișiere"
+msgid "Trash"
+msgstr "Gunoi"
 
-#. 3.2 4.0
-msgid "Open the menu editor"
-msgstr "Deschide editorul meniului"
+msgid "Error while opening file:"
+msgstr "Eroare la deschiderea fișierului:"
 
-#. 3.2 4.0
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Prea multe intrări - se afișează numai primele 1000 de intrări"
+
+msgid "Favorites"
+msgstr "Favorite"
+
+msgid "Recent"
+msgstr "Recent"
+
+msgid "Home folder"
+msgstr "Dosarul principal"
+
 msgid "Reset category order"
 msgstr "Resetează ordinea categoriilor"
 
-#. 3.2 4.0
+msgid "light skin tone"
+msgstr "ton deschis al pielii"
+
+msgid "medium-light skin tone"
+msgstr "ton mediu-deschis al pielii"
+
+msgid "medium skin tone"
+msgstr "ton mediu al pielii"
+
+msgid "medium-dark skin tone"
+msgstr "ton mediu-întunecat al pielii"
+
+msgid "dark skin tone"
+msgstr "tonul închis al pielii"
+
+msgid "This file is no longer available"
+msgstr "Acest fișier nu mai este disponibil"
+
+msgid "Open with"
+msgstr "Deschis cu"
+
+msgid "Other application..."
+msgstr "Altă aplicație..."
+
+msgid "Open containing folder"
+msgstr "Deschideți folderul care conține"
+
+msgid "Move to trash"
+msgstr "Aruncă la gunoi"
+
+msgid "Error while moving file to trash:"
+msgstr "Eroare la mutarea fișierului în coșul de gunoi:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Acest element de meniu nu este asociat niciunui pachet. Oricum vrei să-l elimini din meniu?"
+
+msgid "The following packages will be removed:"
+msgstr "Următoarele pachete vor fi eliminate:"
+
+msgid "Packages to be removed"
+msgstr "Pachetele de eliminat"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Nu se poate elimina pachetul %s deoarece este cerut de alte pachete."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Pachetul %s este o dependență a următoarelor pachete:"
+
+msgid "Open"
+msgstr "Deschis"
+
+msgid "Search"
+msgstr "Căutare"
+
+msgid "Start in"
+msgstr "Incepe in"
+
+msgid "Select a folder"
+msgstr "Selectați un folder"
+
+msgid "Follow symlinks"
+msgstr "Urmați legăturile simbolice"
+
+msgid "Search hidden"
+msgstr "Căutare ascunsă"
+
+msgid "Use regular expressions"
+msgstr "Folosiți expresii regulate"
+
+msgid "Stop"
+msgstr "Stop"
+
+msgid "File"
+msgstr "Fişier"
+
+msgid "Path"
+msgstr "cale"
+
+msgid "Searching..."
+msgstr "In cautarea..."
+
+msgid "Search Stopped"
+msgstr "Căutare oprită"
+
+msgid "Searching: "
+msgstr "In cautarea: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Eroare: permisiuni insuficiente pentru a citi folderul "
+
+msgid "Search Completed"
+msgstr "Căutare finalizată"
+
+msgid "Skipping"
+msgstr "Sărind peste"
+
+msgid " - directory already searched"
+msgstr " - directorul deja căutat"
+
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Un meniu flexibil cu opțiuni de aspect pentru grilă sau listă, browser de fișiere și căutare emoji."
+
+msgid "Behavior"
+msgstr "Comportament"
+
+msgid "Appearance"
+msgstr "Aspect"
+
+msgid "Layout and Content"
+msgstr "Amplasare și conținut"
+
+msgid "Search Providers"
+msgstr "Furnizori de căutare"
+
+msgid "No search provider extensions found"
+msgstr "Nu s-a găsit nicio extensie pentru furnizori de căutare"
+
+msgid "Panel"
+msgstr "Panou"
+
+msgid "Menu"
+msgstr "Meniu"
+
+msgid "Layout"
+msgstr "Amplasare"
+
+msgid "Content"
+msgstr "Conținut"
+
+msgid "Recent files settings"
+msgstr "Setări recente de fișiere"
+
+msgid "Open the menu editor"
+msgstr "Deschide editorul meniului"
+
 msgid "Use a custom icon"
 msgstr "Folosește o pictogramă personalizată"
 
-#. 3.2 4.0
 msgid "Use a custom icon in the panel"
 msgstr "Folosește o pictogramă personalizată"
 
-#. 3.2 4.0
 msgid "Panel icon"
 msgstr "Pictograma panoului"
 
-#. 3.2 4.0
 msgid "Panel text"
 msgstr "Textul panoului"
 
-#. 3.2 4.0
 msgid "Text to show beside the panel icon"
 msgstr "Text de afișat lângă pictograma panoului"
 
-#. 3.2 4.0
-msgid "pixels"
-msgstr "pixeli"
+msgid "Category icon size (pixels)"
+msgstr "Dimensiunea pictogramei categorie (pixeli)"
 
-#. 3.2 4.0
-msgid "Category icon size"
-msgstr "Mărimea pictogramelor categoriilor"
+msgid "Applications list icon size (pixels)"
+msgstr "Dimensiunea pictogramei listei de aplicații (pixeli)"
 
-#. 3.2 4.0
-msgid "Applications list icon size"
-msgstr "Mărimea pictogramei în lista de aplicații"
+msgid "Applications grid icon size (pixels)"
+msgstr "Dimensiunea pictogramei grilă de aplicații (pixeli)"
 
-#. 3.2 4.0
-msgid "Applications grid icon size"
-msgstr "Mărimea pictogramei în grila de aplicații"
-
-#. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Scurtătura de pe tastatură pentru a deschide și închide meniul"
 
-#. 3.2 4.0
 msgid "Open menu on hover"
 msgstr "Deschideți meniul în cursură"
 
-#. 3.2 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Deschide meniul când pun cursorul pe el"
 
-#. 3.2 4.0
 msgid "milliseconds"
 msgstr "milisecunde"
 
-#. 3.2 4.0
 msgid "Menu hover delay"
 msgstr "Întărziere la cursor deasupra meniului"
 
-#. 3.2 4.0
 msgid "Use menu animations"
 msgstr "Folosește animații pentru meniu"
 
-#. 3.2 4.0
 msgid "Animate the menu on open and close"
 msgstr "Permite animarea meniului la deschidere și închidere"
 
-#. 3.2 4.0
 msgid "Activate categories on click"
 msgstr "Activează categorii când dau click"
 
-#. 3.2 4.0
 msgid "Activate categories on click instead of on hover"
 msgstr "Activează categorii când dau click"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling"
 msgstr "Activează derularea automată în lista de aplicații"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
 msgstr "Activează derularea automată în lista de aplicații"
 
-#. 3.2 4.0
 msgid "Show web bookmarks"
 msgstr "Arată marcaje web"
 
-#. 3.2 4.0
-msgid "Show your browser's web bookmarks in the menu"
-msgstr "Afișați marcajele web ale browserului dvs. în meniu"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Afișați marcajele web ale browserului dvs. în meniu.\n"
+"Notă: Instalați pachetul gir1.2-gda-5.0 pentru a citi marcajele Firefox."
 
-#. 3.2
 msgid "Enable searching of open windows"
 msgstr "Activează căutarea în ferestre deschise"
 
-#. 3.2 4.0
 msgid "Enable search providers"
 msgstr "Activează furnizori de căutare"
 
-#. 3.2 4.0
 msgid "Include search provider results in searches"
-msgstr ""
-"Alege dacă rezultatele de la furnizorii de căutare sunt indexate în "
-"căutarile în menu"
+msgstr "Alege dacă rezultatele de la furnizorii de căutare sunt indexate în căutarile în menu"
 
-#. 3.2 4.0
 msgid "Example Search Providers"
 msgstr "Exemple de furnizori de căutare"
 
-#. 3.2
-msgid "Startup applications view mode"
-msgstr "Modul de vizualizare al aplicațiilor de pornire"
+msgid "Open menu on category:"
+msgstr "Deschide meniul pe categorie:"
 
-#. 3.2 4.0
 msgid "List"
 msgstr "Listă"
 
-#. 3.2 4.0
 msgid "Grid"
 msgstr "Grilă"
 
-#. 3.2 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Deschideți întotdeauna meniul cu această categorie selectată"
+
 msgid "columns"
 msgstr "coloane"
 
-#. 3.2 4.0
 msgid "Number of columns in apps grid"
 msgstr "Numărul de coloane din grila de aplicații"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places"
 msgstr "Arată marcaje și locuri"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places category in the menu"
 msgstr "Arată marcaje și locuri"
 
-#. 3.2 4.0
 msgid "Show application icons"
 msgstr "Arată pictogramele aplicațiilor"
 
-#. 3.2 4.0
 msgid "Show category icons"
 msgstr "Arată pictogramele categoriilor"
 
-#. 3.2
 msgid "Show application descriptions under titles"
 msgstr "Arată descrierea aplicațiilor sub titluri"
 
-#. 3.2
 msgid "Show tooltips"
 msgstr "Arată baloane explicative"
 
-#. 3.2
 msgid "Tooltip delay"
 msgstr "Întârzierea balonului explicativ"
 
-#. 3.2 4.0
 msgid "Use a custom menu height"
 msgstr "Folosește o înălțime personalizată a meniului"
 
-#. 3.2 4.0
-msgid "px"
-msgstr "px"
+msgid "Custom menu height (pixels)"
+msgstr "Înălțimea meniului personalizat (pixeli)"
 
-#. 3.2 4.0
-msgid "Custom menu height"
-msgstr "Înălțime personalizată pentru meniu"
-
-#. 4.0
 msgid "Applications view mode"
 msgstr "Modul vizualizare aplicații"
 
-#. 4.0
 msgid "View applications as list or grid"
 msgstr "Vizualizați aplicațiile ca listă sau grilă"
 
-#. 4.0
 msgid "Application description placement"
 msgstr "Poziționarea descrierilor aplicațiilor"
 
-#. 4.0
 msgid "Tooltips"
 msgstr "Baloane explicative"
 
-#. 4.0
 msgid "Under titles"
 msgstr "Sub titluri"
 
-#. 4.0
 msgid "None"
 msgstr "Niciuna"
 
-#. 4.0
 msgid "Choose where to show application descriptions"
 msgstr "Alegeți unde să afișați descrierile aplicațiilor"
 
-#. 4.0
-msgid "Session buttons location"
-msgstr "Locația butoanelor de sesiune"
+msgid "Sidebar location"
+msgstr "Locația din bara laterală"
 
-#. 4.0
 msgid "Top"
 msgstr "În vârf"
 
-#. 4.0
 msgid "Bottom"
 msgstr "În partea de jos"
 
-#. 4.0
 msgid "Left"
 msgstr "În stânga"
 
-#. 4.0
 msgid "Right"
 msgstr "La dreapta"
 
-#. 4.0
-msgid "Choose where to show the session (quit, logout, etc.) buttons"
+msgid "Choose where to show the sidebar"
+msgstr "Alegeți unde să afișați bara laterală"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
-"Alegeți unde să afișați butoanele sesiunii (renunțare, deconectare etc.)"
+"\n"
+"Informații/sfat: trageți pe marginea meniului pentru a modifica dimensiunea meniului.\n"
 
-#. 4.0
-msgid "Add favorites to session buttons"
-msgstr "Adăugați favorite la butoanele de sesiune"
+msgid "Show favorites on sidebar"
+msgstr "Afișați favoritele pe bara laterală"
 
-#. 4.0
-msgid "Show your favorite app icons next to the session buttons"
-msgstr "Afișează pictogramele aplicației preferate lângă butoanele sesiunii"
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Afișați pictogramele aplicației și fișierelor preferate pe bara laterală"
+
+msgid "Show recent items"
+msgstr "Afișați articolele recente"
+
+msgid "Show recent items category in the menu"
+msgstr "Afișați categoria articolelor recente în meniu"
+
+msgid "Show favorite apps category"
+msgstr "Afișați categoria de aplicații preferate"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Afișați categoria de aplicații preferate în meniu"
+
+msgid "Show home folder"
+msgstr "Afișează folderul de acasă"
+
+msgid "Show home folder category in the menu"
+msgstr "Afișați categoria folderului de acasă în meniu"
+
+msgid "Last used category"
+msgstr "Ultima categorie folosită"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Defilați automat lista de aplicații la trecerea mouse-ului"
+
+msgid "Show hidden files"
+msgstr "Arată fișierele ascunse"
+
+msgid "Show hidden files in folder view"
+msgstr "Afișează fișierele ascunse în vizualizarea folderului"
+
+msgid "Emoji search"
+msgstr "Căutare emoji"
+
+msgid "Show emojis in search results"
+msgstr "Afișați emoji-urile în rezultatele căutării"
+
+msgid "Web search option"
+msgstr "Opțiune de căutare pe web"
+
+msgid "Show an internet search option in search results"
+msgstr "Afișați o opțiune de căutare pe internet în rezultatele căutării"
+
+msgid "Search home folder"
+msgstr "Căutați folderul de acasă"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Când căutați, căutați și în folderul meu de acasă fișiere"
+
+msgid "Web history search"
+msgstr "Căutare în istoricul web"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Când căutați, căutați și în istoricul browserului meu (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Notă: istoricul Firefox nu este acceptat în prezent."
+
+msgid "Web bookmarks search"
+msgstr "Căutare de marcaje pe web"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Când căutați, căutați și marcajele web ale browserului meu (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Notă: Pentru a căuta marcaje Firefox, va trebui să instalați pachetul gir1.2-gda-5.0 (distribuții bazate pe Debian, inclusiv Ubuntu). & Linux Mint) sau pachet libgda (distribuții bazate pe Arch) și reporniți computerul."
+
+msgid "Wikipedia search"
+msgstr "căutare Wikipedia"
+
+msgid "Show some Wikipedia results"
+msgstr "Afișați câteva rezultate Wikipedia"
+
+msgid "Wikipedia language"
+msgstr "Limba Wikipedia"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Notă: unele opțiuni de căutare pot fi utilizate în continuare, chiar dacă nu le-ați activat aici, prefixând termenul de căutare.\n"
+"De exemplu: pentru a căuta un emoji, tastați „e heart” pentru a găsi emoji-uri de inimă. De asemenea, utilizați prefixele „f” pentru căutarea fișierelor, „h” pentru istoricul web și „b” pentru căutarea marcajelor web.\n"
+
+msgid "Use a custom icon size"
+msgstr "Utilizați o dimensiune personalizată a pictogramei"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Utilizați o dimensiune personalizată pentru pictograma panoului"
+
+msgid "Panel icon size (pixels)"
+msgstr "Dimensiunea pictogramei panoului (pixeli)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Alegeți o dimensiune personalizată pentru pictograma panoului"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Dimensiunea pictogramei din bara laterală (pixeli)"
+
+msgid "Use sidebar box style"
+msgstr "Folosiți stilul casetei din bara laterală"
+
+msgid "Use a sidebar box style"
+msgstr "Utilizați un stil de casetă cu bară laterală"
+
+msgid "Use tile style"
+msgstr "Folosiți stilul plăcilor"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Utilizați un stil de țiglă pentru butoanele aplicației (Notă: este posibil să nu funcționeze pe unele teme)"
