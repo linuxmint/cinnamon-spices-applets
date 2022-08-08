@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.7
+
+* Fix [#4390](https://github.com/linuxmint/cinnamon-spices-applets/issues/4390) - Make sure applet works with not configured Locale
+
 ## 3.2.6
 
 * Fix [#4387](https://github.com/linuxmint/cinnamon-spices-applets/issues/4387)
