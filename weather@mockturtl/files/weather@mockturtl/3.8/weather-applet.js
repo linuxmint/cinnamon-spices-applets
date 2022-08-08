@@ -131,10 +131,6 @@ var weatherApplet;
 
   function hourAngle(h, phi, d) {
     return acos((sin(h) - sin(phi) * sin(d)) / (cos(phi) * cos(d)));
-  }
-
-  function observerAngle(height) {
-    return -2.076 * Math.sqrt(height) / 60;
   } // returns set time for the given sun altitude
 
 
@@ -142,15 +138,12 @@ var weatherApplet;
     var w = hourAngle(h, phi, dec),
         a = approxTransit(w, lw, n);
     return solarTransitJ(a, M, L);
-  } // calculates sun times for a given date, latitude/longitude, and, optionally,
-  // the observer height (in meters) relative to the horizon
+  } // calculates sun times for a given date and latitude/longitude
 
 
-  SunCalc.getTimes = function (date, lat, lng, height) {
-    height = height || 0;
+  SunCalc.getTimes = function (date, lat, lng) {
     var lw = rad * -lng,
         phi = rad * lat,
-        dh = observerAngle(height),
         d = toDays(date),
         n = julianCycle(d, lw),
         ds = approxTransit(0, lw, n),
@@ -161,7 +154,6 @@ var weatherApplet;
         i,
         len,
         time,
-        h0,
         Jset,
         Jrise;
     var result = {
@@ -171,8 +163,7 @@ var weatherApplet;
 
     for (i = 0, len = times.length; i < len; i += 1) {
       time = times[i];
-      h0 = (time[0] + dh) * rad;
-      Jset = getSetJ(h0, lw, phi, dec, n, M, L);
+      Jset = getSetJ(time[0] * rad, lw, phi, dec, n, M, L);
       Jrise = Jnoon - (Jset - Jnoon);
       result[time[1]] = fromJulian(Jrise);
       result[time[2]] = fromJulian(Jset);
@@ -8923,17 +8914,19 @@ function ShadeHexColor(color, percent) {
     return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 }
 function ConstructJsLocale(locale) {
-    let jsLocale = locale.split(".")[0];
+    if (locale == null)
+        return null;
+    const jsLocale = locale.split(/[.\s@]/)[0].trim();
     const tmp = jsLocale.split("_");
-    jsLocale = "";
+    let result = "";
     for (const [i, item] of tmp.entries()) {
         if (i != 0)
-            jsLocale += "-";
-        jsLocale += item.toLowerCase();
+            result += "-";
+        result += item.toLowerCase();
     }
-    if (locale == "c" || locale == null)
-        jsLocale = null;
-    return jsLocale;
+    if (result == "c")
+        return null;
+    return result;
 }
 function GetDistance(lat1, lon1, lat2, lon2) {
     const R = 6371e3;
@@ -14223,18 +14216,18 @@ class Config {
             this.app.RefreshAndRebuild();
         };
         this.app = app;
+        this.settings = new AppletSettings(this, UUID, instanceID);
+        this.BindSettings();
+        this.onLogLevelUpdated();
         this.currentLocale = ConstructJsLocale(get_language_names()[0]);
-        logger_Logger.Debug("System locale is " + this.currentLocale);
+        logger_Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
+        this.countryCode = this.GetCountryCode(this.currentLocale);
         this.autoLocProvider = new IpApi(app);
         this.geoLocationService = new GeoLocation(app);
-        this.countryCode = this.GetCountryCode(this.currentLocale);
-        this.settings = new AppletSettings(this, UUID, instanceID);
         this.InterfaceSettings = new config_Settings({ schema: "org.cinnamon.desktop.interface" });
         this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
         this.currentFontSize = this.GetCurrentFontSize();
-        this.BindSettings();
         this.LocStore = new LocationStore(this.app, this);
-        this.onLogLevelUpdated();
     }
     get Timezone() {
         return this.timezone;
