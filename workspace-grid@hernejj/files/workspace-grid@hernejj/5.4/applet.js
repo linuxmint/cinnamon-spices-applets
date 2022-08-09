@@ -31,8 +31,8 @@ function registerKeyBindings(registerUpDownKeyBindings) {
             Meta.keybindings_set_custom_handler('switch-to-workspace-down', switchWorkspaceDown);
         }
         else {
-            Meta.keybindings_set_custom_handler('switch-to-workspace-up', Lang.bind(Main.wm, Main.wm._showWorkspaceSwitcher));
-            Meta.keybindings_set_custom_handler('switch-to-workspace-down', Lang.bind(Main.wm, Main.wm._showWorkspaceSwitcher));
+            Meta.keybindings_set_custom_handler('switch-to-workspace-up', (d, w, b) => Main.wm._showWorkspaceSwitcher(d, w, b));
+            Meta.keybindings_set_custom_handler('switch-to-workspace-down', (d, w, b) => Main.wm._showWorkspaceSwitcher(d, w, b));
         }
         Meta.keybindings_set_custom_handler('switch-to-workspace-left', switchWorkspaceLeft);
         Meta.keybindings_set_custom_handler('switch-to-workspace-right', switchWorkspaceRight);
@@ -44,10 +44,10 @@ function registerKeyBindings(registerUpDownKeyBindings) {
 }
 
 function deregisterKeyBindings() {
-    Meta.keybindings_set_custom_handler('switch-to-workspace-up', Lang.bind(Main.wm, Main.wm._showWorkspaceSwitcher));
-    Meta.keybindings_set_custom_handler('switch-to-workspace-down', Lang.bind(Main.wm, Main.wm._showWorkspaceSwitcher));
-    Meta.keybindings_set_custom_handler('switch-to-workspace-left', Lang.bind(Main.wm, Main.wm._showWorkspaceSwitcher));
-    Meta.keybindings_set_custom_handler('switch-to-workspace-right', Lang.bind(Main.wm, Main.wm._showWorkspaceSwitcher));
+    Meta.keybindings_set_custom_handler('switch-to-workspace-up', (d, w, b) => Main.wm._showWorkspaceSwitcher(d, w, b));
+    Meta.keybindings_set_custom_handler('switch-to-workspace-down', (d, w, b) => Main.wm._showWorkspaceSwitcher(d, w, b));
+    Meta.keybindings_set_custom_handler('switch-to-workspace-left', (d, w, b) => Main.wm._showWorkspaceSwitcher(d, w, b));
+    Meta.keybindings_set_custom_handler('switch-to-workspace-right', (d, w, b) => Main.wm._showWorkspaceSwitcher(d, w, b));
 }
 
 function switchWorkspaceUp(display, screen, window) {
@@ -98,7 +98,7 @@ MyApplet.prototype = {
         this.metadata = metadata;
 
         try {
-            global.log("workspace-grid@hernejj: v0.7");
+            global.log("workspace-grid@hernejj: v0.9");
             this.actor.set_style_class_name("workspace-switcher-box");
             this.settings = new Settings.AppletSettings(this, "workspace-grid@hernejj", instanceId);
             this.settings.bindProperty(Settings.BindingDirection.IN, "numCols", "numCols", this.onUpdateNumberOfWorkspaces, null);
@@ -111,7 +111,7 @@ MyApplet.prototype = {
             this.onUpdateStyle();
 
             this.onPanelEditModeChanged();
-            global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.onPanelEditModeChanged));
+            global.settings.connect('changed::panel-edit-mode', onPanelEditModeChanged);
         }
         catch (e) {
             global.logError("workspace-grid@hernejj Main Applet Exception: " + e.toString());
