@@ -197,19 +197,19 @@ export class Config {
 
 	constructor(app: WeatherApplet, instanceID: number) {
 		this.app = app;
+		this.settings = new AppletSettings(this, UUID, instanceID);
+		// Bind as early as possible so that we can update the log level asap
+		this.BindSettings();
+		this.onLogLevelUpdated();
 		this.currentLocale = ConstructJsLocale(get_language_names()[0]);
-		Logger.Debug("System locale is " + this.currentLocale);
-
+		Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
+		this.countryCode = this.GetCountryCode(this.currentLocale);
 		this.autoLocProvider = new IpApi(app); // IP location lookup
 		this.geoLocationService = new GeoLocation(app);
-		this.countryCode = this.GetCountryCode(this.currentLocale);
-		this.settings = new AppletSettings(this, UUID, instanceID);
 		this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });
 		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
 		this.currentFontSize = this.GetCurrentFontSize();
-		this.BindSettings();
 		this.LocStore = new LocationStore(this.app, this);
-		this.onLogLevelUpdated();
 	}
 
 	/** Attaches settings to functions */
