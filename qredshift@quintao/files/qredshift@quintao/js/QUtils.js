@@ -485,12 +485,8 @@ class QPopupSlider extends QPopupItem {
 
         this.emit('drag-begin');
         this._dragging = true;
-
-
-        // FIXME: we should only grab the specific device that originated
-        // the event, but for some weird reason events are still delivered
-        // outside the slider if using clutter_grab_pointer_for_device
-        Clutter.grab_pointer(this.slider);
+        
+        event.get_device().grab(this.slider);
         this._signals.connect(this.slider, 'button-release-event', this._endDragging.bind(this));
         this._signals.connect(this.slider, 'motion-event', this._motionEvent.bind(this));
 
@@ -499,12 +495,11 @@ class QPopupSlider extends QPopupItem {
         this._moveHandle(absX, absY);
     }
 
-    _endDragging() {
+    _endDragging(actor, event) {
         if (this._dragging) {
             this._signals.disconnect('button-release-event', this.slider);
             this._signals.disconnect('motion-event', this.slider);
-
-            Clutter.ungrab_pointer();
+            event.get_device().ungrab(this.slider);
             this._dragging = false;
 
             this.emit('drag-end');
@@ -550,6 +545,8 @@ class QPopupSlider extends QPopupItem {
         } else if (direction == Clutter.ScrollDirection.UP) {
             newvalue += this.STEP;
         }
+        else
+            return;
 
         // qLOG('LOG', this._signals);
 
