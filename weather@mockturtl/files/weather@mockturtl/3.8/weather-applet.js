@@ -14101,7 +14101,192 @@ class DeutscherWetterdienst extends BaseProvider {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/weatherUnderground.ts
+
+
+
+
+class WeatherUnderground extends BaseProvider {
+    constructor() {
+        super(...arguments);
+        this.needsApiKey = true;
+        this.prettyName = _("Weather Underground");
+        this.name = "WeatherUnderground";
+        this.maxForecastSupport = 6;
+        this.maxHourlyForecastSupport = 0;
+        this.website = "https://www.wunderground.com/";
+        this.remainingCalls = null;
+        this.baseURl = "https://api.weather.com/";
+        this.locationCache = {};
+        this.GetWeather = async (loc) => {
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+            const locString = `${loc.lat},${loc.lon}`;
+            const location = (_a = this.locationCache[locString]) !== null && _a !== void 0 ? _a : (await this.GetNearbyStations(loc));
+            if (location == null) {
+                return null;
+            }
+            this.locationCache[locString] = location;
+            const forecast = await this.app.LoadJsonAsync(`${this.baseURl}v3/wx/forecast/daily/5day`, {
+                geocode: locString,
+                language: (_b = this.app.config.currentLocale) !== null && _b !== void 0 ? _b : "en-US",
+                format: "json",
+                apiKey: this.app.config.ApiKey,
+                units: "s",
+            });
+            if (forecast == null)
+                return null;
+            const observation = await this.GetObservations(location, forecast, loc);
+            global.log(observation);
+            return {
+                date: (_c = observation.date) !== null && _c !== void 0 ? _c : DateTime.fromISO(forecast.validTimeLocal[0]).setZone(loc.timeZone),
+                temperature: (_d = observation.temperature) !== null && _d !== void 0 ? _d : null,
+                coord: {
+                    lat: loc.lat,
+                    lon: loc.lon,
+                },
+                location: {},
+                condition: {
+                    customIcon: "alien-symbolic",
+                    description: "Unknown",
+                    icons: [],
+                    main: "Unknown",
+                },
+                dewPoint: (_e = observation.dewPoint) !== null && _e !== void 0 ? _e : null,
+                humidity: (_f = observation.humidity) !== null && _f !== void 0 ? _f : null,
+                pressure: (_g = observation.pressure) !== null && _g !== void 0 ? _g : null,
+                wind: {
+                    speed: (_h = observation.wind.speed) !== null && _h !== void 0 ? _h : null,
+                    degree: (_j = observation.wind.degree) !== null && _j !== void 0 ? _j : null,
+                },
+                sunrise: null,
+                sunset: null,
+                stationInfo: observation.stationInfo,
+                forecasts: [],
+                hourlyForecasts: [],
+            };
+        };
+        this.GetNearbyStations = async (loc) => {
+            var _a;
+            const result = [];
+            const payload = await this.app.LoadJsonAsync(`${this.baseURl}v3/location/near`, {
+                geocode: `${loc.lat},${loc.lon}`,
+                format: "json",
+                apiKey: this.app.config.ApiKey,
+                product: "observation"
+            });
+            if (payload == null)
+                return null;
+            for (let i = 0; i < payload.location.stationId.length; i++) {
+                const stationID = payload.location.stationId[i];
+                if (stationID == null)
+                    continue;
+                result.push({
+                    stationId: stationID,
+                    stationName: payload.location.stationName[i],
+                    latitude: payload.location.latitude[i],
+                    longitude: payload.location.longitude[i],
+                    ianaTimeZone: payload.location.ianaTimeZone[i],
+                    distanceKm: (_a = payload.location.distanceKm[i]) !== null && _a !== void 0 ? _a : GetDistance(loc.lat, loc.lon, payload.location.latitude[i], payload.location.longitude[i]) / 1000,
+                });
+            }
+            if (result.length == 0)
+                return null;
+            return result;
+        };
+        this.GetObservations = async (stations, forecast, loc) => {
+            var _a, _b;
+            const result = {
+                wind: {
+                    speed: null,
+                    degree: null,
+                }
+            };
+            const observationData = (await Promise.all(stations.map(v => this.GetObservation(v.stationId)))).filter(v => v != null);
+            const tz = (_b = (_a = stations.find(v => v.ianaTimeZone != null)) === null || _a === void 0 ? void 0 : _a.ianaTimeZone) !== null && _b !== void 0 ? _b : loc.timeZone;
+            for (const observations of observationData) {
+                const station = stations.find(v => v.stationId == observations.stationID);
+                if (result.date == null && observations.obsTimeUtc != null)
+                    result.date = DateTime.fromISO(observations.obsTimeUtc).setZone(tz);
+                if (result.temperature == null)
+                    result.temperature = observations.metric_si.temp;
+                if (result.pressure == null)
+                    result.pressure = observations.metric_si.pressure;
+                if (result.humidity == null)
+                    result.humidity = observations.humidity;
+                if (result.wind.speed == null)
+                    result.wind.speed = observations.metric_si.windSpeed;
+                if (result.wind.degree == null)
+                    result.wind.degree = observations.winddir;
+                if (result.dewPoint == null)
+                    result.dewPoint = observations.metric_si.dewpt;
+                if (result.stationInfo == null) {
+                    result.stationInfo = {
+                        name: station.stationName,
+                        lat: station.latitude,
+                        lon: station.longitude,
+                        distanceFrom: station.distanceKm * 1000,
+                    };
+                }
+                if (result.immediatePrecipitation == null) {
+                }
+            }
+            return result;
+        };
+        this.GetObservation = async (stationID) => {
+            const observationString = await this.app.LoadAsync(`${this.baseURl}v2/pws/observations/current`, {
+                format: "json",
+                stationId: stationID,
+                apiKey: this.app.config.ApiKey,
+                units: "s",
+                numericPrecision: "decimal",
+            }, this.HandleErrors);
+            let observation = null;
+            if (observationString != null) {
+                try {
+                    observation = JSON.parse(observationString);
+                }
+                catch (e) {
+                    logger_Logger.Debug("could not JSON parse observation payload from station ID " + stationID);
+                }
+            }
+            return observation;
+        };
+        this.HandleErrors = (message) => {
+            switch (message.ErrorData.code) {
+                case 401:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "bad key",
+                        message: _("The API key you provided is invalid.")
+                    });
+                    return true;
+                case 404:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "location not found",
+                        message: _("The location you provided was not found.")
+                    });
+                    return true;
+                case 204:
+                    return true;
+                default:
+                    return false;
+            }
+        };
+    }
+    GetLocation(loc) {
+        var _a;
+        return this.app.LoadJsonAsync(`${this.baseURl}v3/location/point`, {
+            geocode: `${loc.lat},${loc.lon}`,
+            language: (_a = this.app.config.currentLocale) !== null && _a !== void 0 ? _a : "en-US",
+            format: "json",
+            apiKey: this.app.config.ApiKey,
+        });
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
 
 
 
@@ -14140,7 +14325,8 @@ const ServiceClassMapping = {
     "Visual Crossing": (app) => new VisualCrossing(app),
     "DanishMI": (app) => new DanishMI(app),
     "AccuWeather": (app) => new AccuWeather(app),
-    "DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app)
+    "DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
+    "WeatherUnderground": (app) => new WeatherUnderground(app)
 };
 const Keys = {
     DATA_SERVICE: "dataService",
@@ -15865,7 +16051,7 @@ class HttpLib {
         }
     }
     async LoadAsync(url, params, headers, method = "GET") {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
         const message = await this.Send(url, params, headers, method);
         let error = undefined;
         if (!message) {
@@ -15920,7 +16106,7 @@ class HttpLib {
             logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_g = (_f = error === null || error === void 0 ? void 0 : error.response) === null || _f === void 0 ? void 0 : _f.response_body) === null || _g === void 0 ? void 0 : _g.data));
         return {
             Success: (error == null),
-            Data: (_h = message === null || message === void 0 ? void 0 : message.response_body) === null || _h === void 0 ? void 0 : _h.data,
+            Data: ((_j = (_h = message === null || message === void 0 ? void 0 : message.response_body) === null || _h === void 0 ? void 0 : _h.data) !== null && _j !== void 0 ? _j : null),
             ResponseHeaders: responseHeaders,
             ErrorData: error,
             Response: message
@@ -16257,7 +16443,7 @@ class WeatherApplet extends TextIconApplet {
     async LoadAsync(url, params, HandleError, headers, method = "GET") {
         const response = await HttpLib.Instance.LoadAsync(url, params, headers, method);
         if (!response.Success) {
-            if (!!HandleError && !HandleError(response.ErrorData))
+            if (!!HandleError && !HandleError(response))
                 return null;
             else {
                 this.HandleHTTPError(response.ErrorData);

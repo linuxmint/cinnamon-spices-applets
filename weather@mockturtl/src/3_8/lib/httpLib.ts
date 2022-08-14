@@ -55,7 +55,7 @@ export class HttpLib {
 	/**
 	 * Handles obtaining data over http. 
 	 */
-	public async LoadAsync(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<GenericResponse> {
+	public async LoadAsync<E = any>(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<string | null, E>> {
 		const message = await this.Send(url, params, headers, method);
 
 		let error: HttpError | undefined = undefined;
@@ -117,7 +117,7 @@ export class HttpLib {
 			Logger.Error("Error calling URL: " + error.reason_phrase + ", " + error?.response?.response_body?.data);
 		return <GenericResponse>{
 			Success: (error == null),
-			Data: message?.response_body?.data,
+			Data: (message?.response_body?.data ?? null),
 			ResponseHeaders: responseHeaders,
 			ErrorData: error,
 			Response: message

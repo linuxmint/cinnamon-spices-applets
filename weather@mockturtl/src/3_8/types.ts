@@ -50,7 +50,7 @@ export interface WeatherData {
 		lat?: number,
 		lon?: number,
 		area?: string
-	}
+	} | undefined,
 	/** preferably in UTC */
 	sunrise: DateTime | null,
 	/** preferably in UTC */
