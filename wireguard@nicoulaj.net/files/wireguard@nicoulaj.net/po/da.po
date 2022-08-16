@@ -60,11 +60,11 @@ msgstr "Kunne ikke læse netværksgrænseflader"
 msgid ""
 "Failed accessing WireGuard configs directory, please make sure it is "
 "accessible\n"
-"sudo chmod o+r /etc/wireguard"
+"sudo chmod o+r /etc/wireguard or sudo setfacl -m u:$username:rx /etc/wireguard"
 msgstr ""
 "Kunne ikke tilgå WireGuards konfigurationsmappe. Sikr dig, at den er "
 "tilgængelig.\n"
-"sudo chmod o+r /etc/wireguard"
+"sudo chmod o+r /etc/wireguard or sudo setfacl -m u:$username:rx /etc/wireguard"
 
 #: applet.js:219
 msgid "Error details"

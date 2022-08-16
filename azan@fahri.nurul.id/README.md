@@ -17,6 +17,7 @@ Azan is an Islamic prayer times applet for Cinnamon.
 ### Changelog
 
 - 0.1 : initial upload
+- 0.2 : Juristic Method option added in applet Settings
 
 ### License
 

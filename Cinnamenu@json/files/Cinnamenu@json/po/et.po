@@ -7,432 +7,598 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-31 07:55+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 18:00+0100\n"
+"Last-Translator: Google translate\n"
 "Language-Team: \n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#. 3.2 4.0
 msgid "Type to search..."
-msgstr ""
+msgstr "Sisestage otsimiseks..."
 
-#. 3.2 4.0
 msgid "Initializing"
-msgstr ""
+msgstr "Initsialiseerimine"
 
-#. 3.2 4.0
 msgid "No description available"
-msgstr ""
+msgstr "Kirjeldus puudub"
 
-#. 3.2 4.0
-msgid "All Applications"
-msgstr ""
+msgid "All applications"
+msgstr "Kõik rakendused"
 
-#. 3.2 4.0
 msgid "Places"
-msgstr ""
+msgstr "Kohad"
 
-#. 3.2 4.0
-msgid "Recent Files"
-msgstr ""
+msgid "Recent files"
+msgstr "Viimased failid"
 
-#. 3.2 4.0
 msgid "Bookmarks"
-msgstr ""
+msgstr "Järjehoidjad"
 
-#. 3.2 4.0
-msgid "Favorite Apps"
-msgstr ""
+msgid "Favorite apps"
+msgstr "Lemmikrakendused"
 
-#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr ""
+msgstr "Firefoxi ja Midori järjehoidjate jaoks on vajalik pakett gir1.2-gda-5.0."
 
-#. 3.2 4.0
 msgid "Clear List"
-msgstr ""
+msgstr "Tühjenda nimekiri"
 
-#. 3.2 4.0
-msgid "No recent documents"
-msgstr ""
+msgid "No recent files"
+msgstr "Hiljutised failid puuduvad"
 
-#. 3.2
 msgid "Account details"
-msgstr ""
+msgstr "Konto üksikasjad"
 
-#. 3.2 3.2
 msgid "Grid View"
-msgstr ""
+msgstr "Võrguvaade"
 
-#. 3.2 3.2
 msgid "List View"
-msgstr ""
+msgstr "Loendivaade"
 
-#. 3.2 3.2
 msgid "Switch to grid view"
-msgstr ""
+msgstr "Lülitu ruudustikuvaatele"
 
-#. 3.2 3.2
 msgid "Switch to list view"
-msgstr ""
+msgstr "Lülitu loendivaatele"
 
-#. 3.2 4.0
-msgid "Lock Screen"
-msgstr ""
+msgid "Lock screen"
+msgstr "Lukusta ekraan"
 
-#. 3.2 4.0
 msgid "Lock the screen"
-msgstr ""
+msgstr "Lukustage ekraan"
 
-#. 3.2 4.0
 msgid "Logout"
-msgstr ""
+msgstr "Logi välja"
 
-#. 3.2 4.0
 msgid "Leave the session"
-msgstr ""
+msgstr "Lahku seansist"
 
-#. 3.2 4.0
 msgid "Quit"
-msgstr ""
+msgstr "Lõpeta"
 
-#. 3.2 4.0
 msgid "Shutdown the computer"
-msgstr ""
+msgstr "Lülitage arvuti välja"
 
-#. 3.2 4.0
-msgid "Home"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Computer"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Browse network"
-msgstr ""
-
-#. 3.2 4.0
 msgid "Run with NVIDIA GPU"
-msgstr ""
+msgstr "Käitage NVIDIA GPU-ga"
 
-#. 3.2 4.0
 msgid "Add to panel"
-msgstr ""
+msgstr "Lisa paneelile"
 
-#. 3.2 4.0
 msgid "Add to desktop"
-msgstr ""
+msgstr "Lisage töölauale"
 
-#. 3.2 4.0
-msgid "Remove favorite"
-msgstr ""
+msgid "Remove from favorites"
+msgstr "Eemalda lemmikutest"
 
-#. 3.2 4.0
 msgid "Add to favorites"
-msgstr ""
+msgstr "Lisa lemmikutesse"
 
-#. 3.2 4.0
 msgid "Uninstall"
-msgstr ""
+msgstr "Desinstallige"
 
-#. 4.0 4.0
+msgid "Home"
+msgstr "Kodu"
+
+msgid "Computer"
+msgstr "Arvuti"
+
+msgid "Browse network"
+msgstr "Sirvi võrku"
+
+msgid "Find files..."
+msgstr "Otsi faile..."
+
 msgid "Please wait..."
-msgstr ""
+msgstr "Palun oota..."
 
-#. metadata.json->name
-#. 3.2
-msgid "Cinnamenu"
-msgstr ""
+msgid "Applications"
+msgstr "Rakendused"
 
-#. metadata.json->description
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
-msgstr ""
-"Paindlik menüü, mis pakub vorminguvõimalusi, veebi järjehoidjaid, "
-"otsinguteenuse pakkuja tuge ja häguseid otsinguid."
+msgid "Documents"
+msgstr "Dokumendid"
 
-#. metadata.json->comments
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
-msgstr ""
+msgid "Videos"
+msgstr "Videod"
 
-#. 3.2 4.0
-msgid "Behavior"
-msgstr ""
+msgid "Images"
+msgstr "Pildid"
 
-#. 3.2 4.0
-msgid "Appearance"
-msgstr ""
+msgid "Music"
+msgstr "Muusika"
 
-#. 3.2 4.0
-msgid "Layout and Content"
-msgstr ""
+msgid "No recent Items"
+msgstr "Hiljutisi üksusi pole"
 
-#. 3.2
-msgid "Search Providers"
-msgstr ""
+msgid "Click to copy"
+msgstr "Kopeerimiseks klõpsake"
 
-#. 3.2
-msgid "No search provider extensions found"
-msgstr ""
+msgid "Applications and files"
+msgstr "Rakendused ja failid"
 
-#. 3.2 4.0
-msgid "Panel"
-msgstr ""
+msgid "Other search results"
+msgstr "Muud otsingutulemused"
 
-#. 3.2 4.0
-msgid "Menu"
-msgstr ""
+msgid "Browser history"
+msgstr "Brauseri ajalugu"
 
-#. 3.2 4.0
-msgid "Layout"
-msgstr ""
+msgid "Browser bookmarks"
+msgstr "Brauseri järjehoidjad"
 
-#. 3.2 4.0
-msgid "Content"
-msgstr ""
+msgid "Emoji"
+msgstr "Emotikonid"
 
-#. 3.2 4.0
-msgid "Recent files settings"
-msgstr ""
+msgid "Trash"
+msgstr "Prügikast"
 
-#. 3.2 4.0
-msgid "Open the menu editor"
-msgstr ""
+msgid "Error while opening file:"
+msgstr "Viga faili avamisel:"
 
-#. 3.2 4.0
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Liiga palju kirjeid – kuvatakse ainult esimesed 1000 kirjet"
+
+msgid "Favorites"
+msgstr "Lemmikud"
+
+msgid "Recent"
+msgstr "Viimased"
+
+msgid "Home folder"
+msgstr "Kodukaust"
+
 msgid "Reset category order"
-msgstr ""
+msgstr "Lähtesta kategooriate järjekord"
 
-#. 3.2 4.0
+msgid "light skin tone"
+msgstr "hele nahatoon"
+
+msgid "medium-light skin tone"
+msgstr "keskmiselt hele nahatoon"
+
+msgid "medium skin tone"
+msgstr "keskmine nahatoon"
+
+msgid "medium-dark skin tone"
+msgstr "keskmiselt tume nahatoon"
+
+msgid "dark skin tone"
+msgstr "tume nahatoon"
+
+msgid "This file is no longer available"
+msgstr "See fail pole enam saadaval"
+
+msgid "Open with"
+msgstr "Ava koos"
+
+msgid "Other application..."
+msgstr "Muu rakendus..."
+
+msgid "Open containing folder"
+msgstr "Ava sisaldav kaust"
+
+msgid "Move to trash"
+msgstr "Teisalda prügikasti"
+
+msgid "Error while moving file to trash:"
+msgstr "Viga faili teisaldamisel prügikasti:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "See menüüelement ei ole seotud ühegi paketiga. Kas soovite selle ikkagi menüüst eemaldada?"
+
+msgid "The following packages will be removed:"
+msgstr "Järgmised paketid eemaldatakse:"
+
+msgid "Packages to be removed"
+msgstr "Eemaldatavad pakendid"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Paketti %s ei saa eemaldada, kuna seda nõuavad teised paketid."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Pakett %s on sõltuvus järgmistest pakettidest:"
+
+msgid "Open"
+msgstr "Avatud"
+
+msgid "Search"
+msgstr "Otsing"
+
+msgid "Start in"
+msgstr "Alusta sisse"
+
+msgid "Select a folder"
+msgstr "Valige kaust"
+
+msgid "Follow symlinks"
+msgstr "Järgige sümboleid"
+
+msgid "Search hidden"
+msgstr "Otsing peidetud"
+
+msgid "Use regular expressions"
+msgstr "Kasutage regulaaravaldisi"
+
+msgid "Stop"
+msgstr "Peatus"
+
+msgid "File"
+msgstr "Fail"
+
+msgid "Path"
+msgstr "Tee"
+
+msgid "Searching..."
+msgstr "Otsimine..."
+
+msgid "Search Stopped"
+msgstr "Otsing peatatud"
+
+msgid "Searching: "
+msgstr "Otsimine: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Viga: kausta lugemiseks pole piisavalt õigusi "
+
+msgid "Search Completed"
+msgstr "Otsing lõpetatud"
+
+msgid "Skipping"
+msgstr "Vahelejätmine"
+
+msgid " - directory already searched"
+msgstr " - kataloog on juba otsitud"
+
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Paindlik menüü ruudustiku või loendi paigutuse, failibrauseri ja emotikonide otsinguga."
+
+msgid "Behavior"
+msgstr "Käitumine"
+
+msgid "Appearance"
+msgstr "Välimus"
+
+msgid "Layout and Content"
+msgstr "Paigutus ja sisu"
+
+msgid "Search Providers"
+msgstr "Otsingupakkujad"
+
+msgid "No search provider extensions found"
+msgstr "Otsingupakkuja laiendeid ei leitud"
+
+msgid "Panel"
+msgstr "Paneel"
+
+msgid "Menu"
+msgstr "Menüü"
+
+msgid "Layout"
+msgstr "Paigutus"
+
+msgid "Content"
+msgstr "Sisu"
+
+msgid "Recent files settings"
+msgstr "Hiljutised failiseaded"
+
+msgid "Open the menu editor"
+msgstr "Avage menüüredaktor"
+
 msgid "Use a custom icon"
-msgstr ""
+msgstr "Kasutage kohandatud ikooni"
 
-#. 3.2 4.0
 msgid "Use a custom icon in the panel"
-msgstr ""
+msgstr "Kasutage paneelil kohandatud ikooni"
 
-#. 3.2 4.0
 msgid "Panel icon"
-msgstr ""
+msgstr "Paneeli ikoon"
 
-#. 3.2 4.0
 msgid "Panel text"
-msgstr ""
+msgstr "Paneeli tekst"
 
-#. 3.2 4.0
 msgid "Text to show beside the panel icon"
-msgstr ""
+msgstr "Paneeli ikooni kõrval kuvatav tekst"
 
-#. 3.2 4.0
-msgid "pixels"
-msgstr ""
+msgid "Category icon size (pixels)"
+msgstr "Kategooriaikooni suurus (pikslites)"
 
-#. 3.2 4.0
-msgid "Category icon size"
-msgstr ""
+msgid "Applications list icon size (pixels)"
+msgstr "Rakenduste loendi ikooni suurus (pikslites)"
 
-#. 3.2 4.0
-msgid "Applications list icon size"
-msgstr ""
+msgid "Applications grid icon size (pixels)"
+msgstr "Rakenduste ruudustiku ikooni suurus (pikslites)"
 
-#. 3.2 4.0
-msgid "Applications grid icon size"
-msgstr ""
-
-#. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
-msgstr ""
+msgstr "Klaviatuuri otsetee menüü avamiseks ja sulgemiseks"
 
-#. 3.2 4.0
 msgid "Open menu on hover"
-msgstr ""
+msgstr "Avage menüü hõljutades"
 
-#. 3.2 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr ""
+msgstr "Avage menüü, kui liigutan kursorit paneeliikooni kohal"
 
-#. 3.2 4.0
 msgid "milliseconds"
-msgstr ""
+msgstr "millisekundid"
 
-#. 3.2 4.0
 msgid "Menu hover delay"
-msgstr ""
+msgstr "Menüü hõljutamise viivitus"
 
-#. 3.2 4.0
 msgid "Use menu animations"
-msgstr ""
+msgstr "Kasutage menüüanimatsioone"
 
-#. 3.2 4.0
 msgid "Animate the menu on open and close"
-msgstr ""
+msgstr "Animeerige menüü avamisel ja sulgemisel"
 
-#. 3.2 4.0
 msgid "Activate categories on click"
-msgstr "Aktiveerige kategooriad klikkimisel"
+msgstr "Aktiveerige kategooriad klõpsuga"
 
-#. 3.2 4.0
 msgid "Activate categories on click instead of on hover"
-msgstr ""
+msgstr "Aktiveerige kategooriad klõpsamisel, mitte hõljutamisel"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling"
-msgstr ""
+msgstr "Luba automaatne kerimine"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
-msgstr ""
+msgstr "Lubage rakenduste loendis automaatne kerimine"
 
-#. 3.2 4.0
 msgid "Show web bookmarks"
-msgstr ""
+msgstr "Kuva veebijärjehoidjad"
 
-#. 3.2 4.0
-msgid "Show your browser's web bookmarks in the menu"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
+"Kuvage menüüs brauseri veebijärjehoidjad.\n"
+"Märkus. Installige pakett gir1.2-gda-5.0, et lugeda Firefoxi järjehoidjaid."
 
-#. 3.2
 msgid "Enable searching of open windows"
-msgstr ""
+msgstr "Avatud akende otsimise lubamine"
 
-#. 3.2 4.0
 msgid "Enable search providers"
-msgstr ""
+msgstr "Luba otsingupakkujad"
 
-#. 3.2 4.0
 msgid "Include search provider results in searches"
-msgstr ""
+msgstr "Kaasake otsingutesse otsingupakkuja tulemused"
 
-#. 3.2 4.0
 msgid "Example Search Providers"
-msgstr ""
+msgstr "Näidisotsingu pakkujad"
 
-#. 3.2
-msgid "Startup applications view mode"
-msgstr ""
+msgid "Open menu on category:"
+msgstr "Ava menüü kategoorias:"
 
-#. 3.2 4.0
 msgid "List"
-msgstr ""
+msgstr "Nimekiri"
 
-#. 3.2 4.0
 msgid "Grid"
-msgstr ""
+msgstr "Võre"
 
-#. 3.2 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Ava menüü alati, kui see kategooria on valitud"
+
 msgid "columns"
-msgstr ""
+msgstr "veerud"
 
-#. 3.2 4.0
 msgid "Number of columns in apps grid"
-msgstr ""
+msgstr "Veergude arv rakenduste ruudustikus"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places"
-msgstr ""
+msgstr "Kuva järjehoidjad ja kohad"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places category in the menu"
-msgstr ""
+msgstr "Kuva menüüs järjehoidjate ja kohtade kategooria"
 
-#. 3.2 4.0
 msgid "Show application icons"
-msgstr ""
+msgstr "Kuva rakenduse ikoonid"
 
-#. 3.2 4.0
 msgid "Show category icons"
-msgstr ""
+msgstr "Kuva kategooria ikoonid"
 
-#. 3.2
 msgid "Show application descriptions under titles"
-msgstr ""
+msgstr "Kuva rakenduste kirjeldused pealkirjade all"
 
-#. 3.2
 msgid "Show tooltips"
-msgstr ""
+msgstr "Näita vihjeid"
 
-#. 3.2
 msgid "Tooltip delay"
-msgstr ""
+msgstr "Tööriistavihje viivitus"
 
-#. 3.2 4.0
 msgid "Use a custom menu height"
-msgstr ""
+msgstr "Kasutage kohandatud menüü kõrgust"
 
-#. 3.2 4.0
-msgid "px"
-msgstr ""
+msgid "Custom menu height (pixels)"
+msgstr "Kohandatud menüü kõrgus (pikslites)"
 
-#. 3.2 4.0
-msgid "Custom menu height"
-msgstr ""
-
-#. 4.0
 msgid "Applications view mode"
-msgstr ""
+msgstr "Rakenduste vaatamise režiim"
 
-#. 4.0
 msgid "View applications as list or grid"
-msgstr ""
+msgstr "Vaadake rakendusi loendi või ruudustikuna"
 
-#. 4.0
 msgid "Application description placement"
-msgstr ""
+msgstr "Rakenduse kirjelduse paigutus"
 
-#. 4.0
 msgid "Tooltips"
-msgstr ""
+msgstr "Tööriistanõuanded"
 
-#. 4.0
 msgid "Under titles"
-msgstr ""
+msgstr "Pealkirjade all"
 
-#. 4.0
 msgid "None"
-msgstr ""
+msgstr "Mitte ühtegi"
 
-#. 4.0
 msgid "Choose where to show application descriptions"
-msgstr ""
+msgstr "Valige, kus kuvada rakenduste kirjeldusi"
 
-#. 4.0
-msgid "Session buttons location"
-msgstr ""
+msgid "Sidebar location"
+msgstr "Külgriba asukoht"
 
-#. 4.0
 msgid "Top"
-msgstr ""
+msgstr "Üles"
 
-#. 4.0
 msgid "Bottom"
-msgstr ""
+msgstr "Altpoolt"
 
-#. 4.0
 msgid "Left"
-msgstr ""
+msgstr "Vasakule"
 
-#. 4.0
 msgid "Right"
-msgstr ""
+msgstr "paremale"
 
-#. 4.0
-msgid "Choose where to show the session (quit, logout, etc.) buttons"
-msgstr ""
+msgid "Choose where to show the sidebar"
+msgstr "Valige külgriba kuvamise koht"
 
-#. 4.0
-msgid "Add favorites to session buttons"
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
+"\n"
+"Teave/vihje: menüü suuruse muutmiseks lohistage menüü serva.\n"
 
-#. 4.0
-msgid "Show your favorite app icons next to the session buttons"
+msgid "Show favorites on sidebar"
+msgstr "Kuva lemmikud külgribal"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Kuvage külgribal oma lemmikrakenduste ja -failide ikoonid"
+
+msgid "Show recent items"
+msgstr "Kuva hiljutised üksused"
+
+msgid "Show recent items category in the menu"
+msgstr "Kuva menüüs viimaste üksuste kategooria"
+
+msgid "Show favorite apps category"
+msgstr "Kuva lemmikrakenduste kategooria"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Kuvage menüüs oma lemmikrakenduste kategooria"
+
+msgid "Show home folder"
+msgstr "Kuva kodukaust"
+
+msgid "Show home folder category in the menu"
+msgstr "Kuva menüüs kodukausta kategooria"
+
+msgid "Last used category"
+msgstr "Viimati kasutatud kategooria"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Rakenduste loendi automaatne kerimine hiirt hõljutades"
+
+msgid "Show hidden files"
+msgstr "Näita peidetud faile"
+
+msgid "Show hidden files in folder view"
+msgstr "Kuva peidetud failid kaustavaates"
+
+msgid "Emoji search"
+msgstr "Emotikonide otsing"
+
+msgid "Show emojis in search results"
+msgstr "Kuva emotikonid otsingutulemustes"
+
+msgid "Web search option"
+msgstr "Veebiotsingu valik"
+
+msgid "Show an internet search option in search results"
+msgstr "Kuvage otsingutulemustes Interneti-otsingu valik"
+
+msgid "Search home folder"
+msgstr "Otsige kodukausta"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Otsimisel otsi faile ka minu kodukaustast"
+
+msgid "Web history search"
+msgstr "Otsing veebiajaloost"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
 msgstr ""
+"Otsimisel otsige ka minu brauseri ajaloost (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Märkus: Firefoxi ajalugu praegu ei toetata."
+
+msgid "Web bookmarks search"
+msgstr "Veebi järjehoidjate otsing"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Otsimisel otsige ka minu brauseri veebijärjehoidjatest (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Märkus: Firefoxi järjehoidjate otsimiseks peate installima paketi gir1.2-gda-5.0 (Debianipõhised distributsioonid, sh Ubuntu & Linux Mint) või paketti libgda (Archipõhised distributsioonid) ja taaskäivitage arvuti."
+
+msgid "Wikipedia search"
+msgstr "Wikipedia otsing"
+
+msgid "Show some Wikipedia results"
+msgstr "Näita mõningaid Wikipedia tulemusi"
+
+msgid "Wikipedia language"
+msgstr "Vikipeedia keel"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Märkus. Mõnda otsinguvalikut saab siiski kasutada ka siis, kui te pole neid siin otsingusõna ette lisades lubanud.\n"
+"Näiteks: emotikonide otsimiseks tippige südameemotikonide leidmiseks sõna „e süda”. Samamoodi kasutage failiotsingu jaoks eesliiteid 'f ', veebiajaloo jaoks h ' ja veebijärjehoidjate otsimiseks eesliiteid 'b '.\n"
+
+msgid "Use a custom icon size"
+msgstr "Kasutage kohandatud ikooni suurust"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Kasutage paneeli ikooni kohandatud suurust"
+
+msgid "Panel icon size (pixels)"
+msgstr "Paneeli ikooni suurus (pikslites)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Valige paneeli ikooni kohandatud suurus"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Külgriba ikooni suurus (pikslites)"
+
+msgid "Use sidebar box style"
+msgstr "Kasutage külgriba kasti stiili"
+
+msgid "Use a sidebar box style"
+msgstr "Kasutage külgriba kasti stiili"
+
+msgid "Use tile style"
+msgstr "Kasutage plaatide stiili"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Kasutage rakenduse nuppude jaoks paani stiili (Märkus: ei pruugi mõne teema puhul töötada)"

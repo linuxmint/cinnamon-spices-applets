@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: calendar@ccprog VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 15:40+0100\n"
+"POT-Creation-Date: 2022-06-30 17:27+0200\n"
 "PO-Revision-Date: 2021-02-27 15:40+0100\n"
 "Last-Translator: Claus Colloseus <ccprog@gmx.de>\n"
 "Language-Team: German\n"
@@ -14,9 +14,57 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 
-#: applet.js:65
+#: applet.js:21
+msgid "%B %-e, %Y"
+msgstr ""
+
+#: applet.js:22 eventView.js:26
+msgid "%A, %B %-e, %Y"
+msgstr ""
+
+#: applet.js:131
 msgid "Date and Time Settings"
 msgstr "Datums- und Zeiteinstellungen"
+
+#: eventView.js:65
+msgid "Starting in a few minutes"
+msgstr "Beginnt in wenigen Minuten"
+
+#: eventView.js:69
+#, javascript-format
+msgid "Starting in %d minutes"
+msgstr "Wird in %d Minuten gestartet"
+
+#: eventView.js:79
+msgid "This evening"
+msgstr "Heute Abend"
+
+#: eventView.js:82
+msgid "Starting later today"
+msgstr "Beginnt heute später"
+
+#: eventView.js:85
+#, javascript-format
+msgid "In %d hour"
+msgid_plural "In %d hours"
+msgstr[0] "In %d Stunde"
+msgstr[1] "In %d Stunden"
+
+#: eventView.js:664
+msgid "No Events"
+msgstr "Keine Termine"
+
+#: eventView.js:925
+msgid "In progress"
+msgstr "Zur Zeit"
+
+#: eventView.js:946
+msgid "All day"
+msgstr "Ganztägig"
+
+#: eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
+msgid "Today"
+msgstr "Heute"
 
 #: settings_widgets.py:95
 msgid "Add new entry"
@@ -29,6 +77,7 @@ msgstr "Eintrag bearbeiten"
 #. settings-schema.json->region_aus->description
 #. settings-schema.json->region_can->description
 #. settings-schema.json->region_deu->description
+#. settings-schema.json->region_esp->description
 #. settings-schema.json->region_nzl->description
 #. settings-schema.json->region_svk->description
 #. settings-schema.json->region_che->description
@@ -74,6 +123,14 @@ msgstr "Tastenkombinationen"
 #. settings-schema.json->section4->title
 msgid "Show World Times"
 msgstr "Zeige Weltzeiten"
+
+#. settings-schema.json->show-events->description
+msgid "Show calendar events"
+msgstr "Kalendereinträge anzeigen"
+
+#. settings-schema.json->show-events->tooltip
+msgid "Check this to display events in the calendar."
+msgstr "Aktivieren, um Termine im Kalender anzuzeigen."
 
 #. settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"
@@ -155,6 +212,10 @@ msgid "Bosnia and Herzegovina"
 msgstr "Bosnien und Herzogowina"
 
 #. settings-schema.json->country->options
+msgid "Belarus"
+msgstr "Weißrussland"
+
+#. settings-schema.json->country->options
 msgid "Brazil"
 msgstr "Brasilien"
 
@@ -189,6 +250,10 @@ msgstr "Dänemark"
 #. settings-schema.json->country->options
 msgid "Estonia"
 msgstr "Estland"
+
+#. settings-schema.json->country->options
+msgid "Spain"
+msgstr "Spanien"
 
 #. settings-schema.json->country->options
 msgid "Finland"
@@ -489,6 +554,82 @@ msgstr "Schleswig-Holstein"
 #. settings-schema.json->region_deu->options
 msgid "Thüringen"
 msgstr "Thüringen"
+
+#. settings-schema.json->region_esp->options
+msgid "Andalucía"
+msgstr "Andalusien"
+
+#. settings-schema.json->region_esp->options
+msgid "Aragón"
+msgstr "Aragonien"
+
+#. settings-schema.json->region_esp->options
+msgid "Asturias"
+msgstr "Asturien"
+
+#. settings-schema.json->region_esp->options
+msgid "Canarias"
+msgstr "Kanarische Inseln"
+
+#. settings-schema.json->region_esp->options
+msgid "Cantabria"
+msgstr "Kantabrien"
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla y León"
+msgstr "Kastilien und León"
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla-La Mancha"
+msgstr "Kastilien-La Mancha"
+
+#. settings-schema.json->region_esp->options
+msgid "Cataluña"
+msgstr "Katalonien"
+
+#. settings-schema.json->region_esp->options
+msgid "Ceuta"
+msgstr "Ceuta"
+
+#. settings-schema.json->region_esp->options
+msgid "Extremadura"
+msgstr "Extremadura"
+
+#. settings-schema.json->region_esp->options
+msgid "Galicia"
+msgstr "Galizien"
+
+#. settings-schema.json->region_esp->options
+msgid "Islas Baleares"
+msgstr "Balearische Inseln"
+
+#. settings-schema.json->region_esp->options
+msgid "La Rioja"
+msgstr "La Rioja"
+
+#. settings-schema.json->region_esp->options
+msgid "Madrid"
+msgstr "Madrid"
+
+#. settings-schema.json->region_esp->options
+msgid "Melilla"
+msgstr "Melilla"
+
+#. settings-schema.json->region_esp->options
+msgid "Murcia"
+msgstr "Murcia"
+
+#. settings-schema.json->region_esp->options
+msgid "Navarra"
+msgstr "Navarra"
+
+#. settings-schema.json->region_esp->options
+msgid "País Vasco"
+msgstr "Baskenland"
+
+#. settings-schema.json->region_esp->options
+msgid "Valencia"
+msgstr "Valencia"
 
 #. settings-schema.json->region_nzl->options
 msgid "Auckland"

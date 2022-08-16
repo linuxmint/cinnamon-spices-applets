@@ -1,4 +1,15 @@
 {
+ "appearance": {
+    "type": "radiogroup",
+    "options": {
+       "Icon": "icon",
+       "IP": "ip",
+       "Icon and IP": "iconIp"
+    },
+    "default": "icon",
+    "description": "Appearance"
+ },
+
  "update_interval_ifconfig" : {
     "type": "spinbutton",
     "default" : 5,

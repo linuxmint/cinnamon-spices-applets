@@ -287,7 +287,8 @@ class SimpleMenuItem {
     addDescription(appName, appDescription) {
         if (appDescription == '')
             appDescription = _("No description available");
-        this.label.get_clutter_text().set_markup(appName.replace("&", "&amp;") + '\n' + '<span size="small">' + appDescription.replace("&", "&amp;") + '</span>');
+        this.label.get_clutter_text().set_markup(appName.replace(/\&/g, "&amp;").replace(/\</g, "&lt;").replace(/\>/g, "&gt;") + '\n' + '<span size="small">'
+                                                 + appDescription.replace(/\&/g, "&amp;").replace(/\</g, "&lt;").replace(/\>/g, "&gt;") + '</span>');
     }
 
     /**
@@ -664,7 +665,7 @@ class WebSearchButton extends SimpleMenuItem {
 
     changeLabel(pattern) {
         this.name = pattern;
-        let searchLabel = pattern;
+        let searchLabel = pattern.replace(/\&/g, "&amp;").replace(/\</g, "&lt;").replace(/\>/g, "&gt;");
         if (this.searchEngineName != '')
             searchLabel += ' - ' + '<span size="small">' + this.searchEngineName + '</span>';
         this.label.clutter_text.set_markup(searchLabel);
@@ -1079,6 +1080,9 @@ class TextBoxItem extends AppPopupSubMenuMenuItem {
                 icon_type: St.IconType.FULLCOLOR,
             });
 
+            if (this.icon.search("-symbolic") != -1)
+                this.name_icon.icon_type = St.IconType.SYMBOLIC
+
             let iconFileName = this.icon;
             let iconFile = Gio.file_new_for_path(iconFileName);
             let icon;
@@ -1311,13 +1315,9 @@ HoverIcon.prototype = {
                 let iconFile = Gio.file_new_for_path(iconFileName);
                 let icon;
                 if (iconFile.query_exists(null)) {
-                    icon = new Gio.FileIcon({
-                        file: iconFile
-                    });
+                    icon = new Gio.FileIcon({file: iconFile});
                 } else {
-                    icon = new Gio.ThemedIcon({
-                        name: 'avatar-default'
-                    });
+                    icon = new Gio.ThemedIcon({name: 'avatar-default'});
                 }
                 this._userIcon.set_gicon(icon);
                 this.icon.hide();
@@ -1328,6 +1328,11 @@ HoverIcon.prototype = {
 
     _refresh: function(icon) {
         this._userIcon.hide();
+
+        if (icon.search("-symbolic") != -1)
+            this.icon.icon_type = St.IconType.SYMBOLIC
+        else
+            this.icon.icon_type = St.IconType.FULLCOLOR
 
         let iconFileName = icon;
         let iconFile = Gio.file_new_for_path(iconFileName);
@@ -3281,8 +3286,8 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                                                     type: 'recent-clear',
                                                     styleClass: 'menu-application-button' });
             button.addIcon(APPLICATION_ICON_SIZE, 'edit-clear', null, true);
-            button.addLabel("", 'menu-application-button-label');
-            button.label.clutter_text.set_markup(`<b>${button.name}</b>`);
+            button.addLabel(button.name, 'menu-application-button-label');
+            button.label.set_style('font-weight: bold;');
             button.activate = () => {
                 this.menu.close();
                 (new Gtk.RecentManager()).purge_items();

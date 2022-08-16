@@ -50,7 +50,7 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
         this._wg_monitor_id = null;
         this._wg_interfaces = null;
 
-        this.set_applet_icon_symbolic_name("off");
+        this.set_applet_icon_name("off");
         this.set_applet_tooltip(_("WireGuard"));
     }
 
@@ -120,7 +120,7 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
 
         try {
             const proc = Gio.Subprocess.new(
-                ['wg-quick', enable ? 'up' : 'down', iface],
+                ['pkexec', 'wg-quick', enable ? 'up' : 'down', iface],
                 Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_MERGE | GLib.SpawnFlags.SEARCH_PATH
             );
 
@@ -183,7 +183,7 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
                     interfaces.push(file.get_name().slice(0, -5));
             return interfaces;
         } catch (e) {
-            this._handle_error(_("Failed accessing WireGuard configs directory, please make sure it is accessible\nsudo chmod o+r /etc/wireguard"), e);
+            this._handle_error(_("Failed accessing WireGuard configs directory, please make sure it is accessible\nsudo chmod o+r /etc/wireguard or sudo setfacl -m u:$username:rx /etc/wireguard"), e);
         }
     }
 
@@ -208,7 +208,7 @@ const WireGuardApplet = class WireGuardApplet extends Applet.IconApplet {
             this._menu.addMenuItem(item);
         }
 
-        this.set_applet_icon_symbolic_name(active_ifaces > 0 ? "on" : "off");
+        this.set_applet_icon_name(active_ifaces > 0 ? "on" : "off");
         this.set_applet_tooltip(_("WireGuard"));
     }
 

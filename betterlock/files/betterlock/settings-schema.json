@@ -4,14 +4,19 @@
         "default": false,
         "description" : "Show notifications"
     },
-   "indicator-type" : {
-      "type": "combobox",
-      "default": "both",
-      "options": {
-           "Num Lock and Caps Lock": "both",
-           "Num Lock only": "num-only",
-           "Caps Lock only": "caps-only"
-       },
-      "description": "Choose which indicator to show"
-   }
+    "show-caps-lock-indicator": {
+        "type": "switch",
+        "default": false,
+        "description" : "Show caps lock indicator"
+    },
+    "show-num-lock-indicator": {
+        "type": "switch",
+        "default": false,
+        "description" : "Show num lock indicator"
+    },
+    "show-scr-lock-indicator": {
+        "type": "switch",
+        "default": false,
+        "description" : "Show scr lock indicator"
+    }
 }

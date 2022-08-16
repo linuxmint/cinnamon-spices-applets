@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-20 21:57+0800\n"
-"PO-Revision-Date: 2019-10-16 21:50+0200\n"
+"PO-Revision-Date: 2022-06-03 16:39+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #. CommandRunner@appdevsw->metadata.json->name
 #: applet.js:47
@@ -71,8 +71,8 @@ msgid ""
 "Applet runs script or application periodically and displays its output on "
 "the taskbar"
 msgstr ""
-"L'applet esegue periodicamente uno script o applicazione e visualizza il "
-"suo output sulla barra delle applicazioni"
+"L'applet esegue periodicamente uno script o applicazione e visualizza il suo "
+"output sulla barra delle applicazioni"
 
 #. CommandRunner@appdevsw->settings-
 #. schema.json->form_interval_unit->description
@@ -158,8 +158,8 @@ msgid ""
 "Text or character displayed at the beginning of the command result (in text "
 "mode only)."
 msgstr ""
-"Testo o carattere visualizzati all'inizio del risultato del comando (solo "
-"in modalità testo)."
+"Testo o carattere visualizzati all'inizio del risultato del comando (solo in "
+"modalità testo)."
 
 #. CommandRunner@appdevsw->settings-schema.json->apply->description
 msgid "Apply"

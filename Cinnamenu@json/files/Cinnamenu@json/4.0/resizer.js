@@ -19,9 +19,9 @@ class PopupResizeHandler {
 
         this._signals = new SignalManager.SignalManager(null);
 
-        this._signals.connect(this.actor, "motion-event", (...args) => this._motion_event(...args));
-        this._signals.connect(this.actor, "leave-event", (...args) => this._leave_event(...args));
-        this._signals.connect(this.actor, "button-press-event", (...args) => this._onButtonPress(...args));
+        this._signals.connect(this.actor, 'motion-event', (...args) => this._motion_event(...args));
+        this._signals.connect(this.actor, 'leave-event', (...args) => this._leave_event(...args));
+        this._signals.connect(this.actor, 'button-press-event', (...args) => this._onButtonPress(...args));
 
         this.no_edges_draggable = true;
         this.inhibit_resizing = false;
@@ -45,14 +45,9 @@ class PopupResizeHandler {
         if (event.get_button() != 1)
             return false;
 
-        //---Start drag---
-        //Due to an intermittent bug causing cinnamon to crash while resizing, ensure no settings callbacks
-        //are called during resizing.
-        //https://github.com/linuxmint/cinnamon/pull/9771#issuecomment-755081805
-        this.applet.settingsObj.finalize();
-        this.applet.initSettings();
+        //---Start drag------
 
-        this._grabEvents();
+        this._grabEvents(event);
         this.resizingInProgress = true;
 
         let [stageX, stageY] = event.get_coords();
@@ -64,18 +59,25 @@ class PopupResizeHandler {
         return true;
     }
 
-    _grabEvents() {
+    _grabEvents(event) {
         this._eventsGrabbed = true;
 
-        Clutter.grab_pointer(this.actor);
+        this.drag_device = event.get_device();
+        this.drag_device.grab(this.actor);
+
         this._onEventId = this.actor.connect('event', (...args) => this._onEvent(...args));
     }
 
-    _ungrabEvents() {
+    _ungrabEvents(event) {
         if (!this._eventsGrabbed)
             return;
 
-        Clutter.ungrab_pointer();
+        if (this.drag_device) {
+            this.drag_device.ungrab();
+            this.drag_device = null;
+        } else if (event) {//this shouldn't arise
+            event.get_device().ungrab();
+        }
         this._eventsGrabbed = false;
 
         this.actor.disconnect(this._onEventId);
@@ -87,7 +89,7 @@ class PopupResizeHandler {
             return;
         }
         global.unset_cursor();
-        this._ungrabEvents();
+        this._ungrabEvents(event);
 
         this.actor.queue_relayout();
 

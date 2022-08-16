@@ -326,7 +326,8 @@ GraphicalHWMonitorApplet.prototype = {
     },
 
     update: function() {
-        Mainloop.idle_add_full(Mainloop.PRIORITY_LOW, () => this._update());
+        this._update();
+
         return this.shouldUpdate;
     },
 

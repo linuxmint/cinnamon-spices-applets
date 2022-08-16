@@ -4,6 +4,7 @@
         "pages":[
             "layout",
             "behaviour",
+            "search",
             "appearance"
         ],
         "layout":{
@@ -20,6 +21,13 @@
             "sections":[
                 "panel-behave",
                 "menu-behave"
+            ]
+        },
+        "search":{
+            "type":"page",
+            "title":"Search",
+            "sections":[
+                "search-search"
             ]
         },
         "appearance":{
@@ -47,9 +55,9 @@
             "keys":[
                 "show-places-category",
                 "show-recents-category",
-                "show-web-bookmarks-category",
                 "show-favorite-apps-category",
                 "show-home-folder-category",
+                "show-emoji-category",
                 "menu-editor-button"
             ]
         },
@@ -70,9 +78,22 @@
                 "category-click",
                 "open-on-category",
                 "enable-autoscroll",
-                "web-search-option",
-                "enable-emoji-search",
                 "show-hidden-files"
+            ]
+        },
+        "search-search":{
+            "type":"section",
+            "title":"Search",
+            "keys":[
+                "enable-emoji-search",
+                "web-search-option",
+                "web-suggestions",
+                "enable-home-folder-search",
+                "enable-web-history-search",
+                "enable-web-bookmarks-search",
+                "enable-wikipedia-search",
+                "wikipedia-language",
+                "search-help"
             ]
         },
         "panel-appear":{
@@ -94,7 +115,8 @@
                 "apps-list-icon-size",
                 "apps-grid-icon-size",
                 "sidebar-icon-size",
-                "use-box-style"
+                "use-box-style",
+                "use-tile-style"
             ]
         }
     },
@@ -111,6 +133,14 @@
         "type":"generic",
         "default":530
     },
+    "recent-apps":{
+        "type":"generic",
+        "default":[]
+    },
+    "search-start-folder":{
+        "type":"generic",
+        "default":""
+    },
 
     "applications-view-mode":{
         "type":"combobox",
@@ -121,6 +151,24 @@
             "Grid":1
         },
         "tooltip":"View applications as list or grid"
+    },
+    "sidebar-placement":{
+        "type":"combobox",
+        "default":1,
+        "description":"Sidebar location",
+        "options":{
+            "Top":0,
+            "Bottom":1,
+            "Left":2,
+            "Right":3
+        },
+        "tooltip":"Choose where to show the sidebar"
+    },
+    "add-favorites":{
+        "type":"switch",
+        "default":true,
+        "description":"Show favorites on sidebar",
+        "tooltip":"Show your favorite app and file icons on the sidebar"
     },
     "description-placement":{
         "type":"combobox",
@@ -133,28 +181,11 @@
         },
         "tooltip":"Choose where to show application descriptions"
     },
-    "sidebar-placement":{
-        "type":"combobox",
-        "default":1,
-        "description":"Session buttons location",
-        "options":{
-            "Top":0,
-            "Bottom":1,
-            "Left":2,
-            "Right":3
-        },
-        "tooltip":"Choose where to show the session buttons (quit, logout, etc.)"
-    },
     "info-box":{
         "type":"label",
         "description":"\nInfo/tip: Drag on the menu edge to change the menu size.\n"
     },
-    "add-favorites":{
-        "type":"switch",
-        "default":true,
-        "description":"Add favorites to session buttons",
-        "tooltip":"Show your favorite app icons next to the session buttons"
-    },
+
     "show-places-category":{
         "type":"switch",
         "default":true,
@@ -164,14 +195,8 @@
     "show-recents-category":{
         "type":"switch",
         "default":true,
-        "description":"Show recent files",
-        "tooltip":"Show recent files category in the menu"
-    },
-    "show-web-bookmarks-category":{
-        "type":"checkbox",
-        "default":false,
-        "description":"Show web bookmarks",
-        "tooltip":"Show your browser's web bookmarks in the menu.\nNote: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+        "description":"Show recent items",
+        "tooltip":"Show recent items category in the menu"
     },
     "show-favorite-apps-category":{
         "type":"switch",
@@ -184,6 +209,12 @@
         "default":true,
         "description":"Show home folder",
         "tooltip":"Show home folder category in the menu"
+    },
+    "show-emoji-category":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Show emoji category",
+        "tooltip":"Show emoji category in the menu"
     },
     "menu-editor-button":{
         "type":"button",
@@ -203,7 +234,6 @@
         "tooltip":"Open the menu when I move my mouse over the panel icon"
     },
     "hover-delay":{
-        "indent":true,
         "dependency":"activate-on-hover",
         "type":"spinbutton",
         "default":50,
@@ -222,7 +252,7 @@
 
     "category-click":{
         "type":"checkbox",
-        "default":false,
+        "default":true,
         "description":"Activate categories on click",
         "tooltip":"Activate categories on click instead of on hover"
     },
@@ -234,7 +264,7 @@
         "options":{
             "Last used category":0,
             "Favorite apps":1,
-            "Recent files":2,
+            "Recent":2,
             "Places":3,
             "All applications":4,
             "Home folder":5
@@ -246,30 +276,151 @@
         "description":"Enable autoscrolling",
         "tooltip":"Autoscroll the application list on mouse hover"
     },
-    "web-search-option":{
-        "type":"combobox",
-        "default":0,
-        "description":"Web search option",
-        "options":{
-            "Google":0,
-            "Bing":1,
-            "Yahoo":2,
-            "DuckDuckGo":3,
-            "None":4
-        },
-        "tooltip":"Show an internet search option in search results"
-    },
-    "enable-emoji-search":{
-        "type":"checkbox",
-        "default":true,
-        "description":"Enable emoji search",
-        "tooltip":"Show emojis in search results"
-    },
     "show-hidden-files":{
         "type":"checkbox",
         "default":false,
         "description":"Show hidden files",
         "tooltip":"Show hidden files in folder view"
+    },
+
+    "enable-emoji-search":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Emoji search",
+        "tooltip":"Show emojis in search results"
+    },
+    "web-search-option":{
+        "type":"combobox",
+        "default":1,
+        "description":"Web search option",
+        "options":{
+            "None":0,
+            "Google":1,
+            "Bing":2,
+            "Baidu":3,
+            "Yahoo":4,
+            "Yandex":5,
+            "DuckDuckGo":6,
+            "Ask":7,
+            "Ecosia":8,
+            "AOL":9,
+            "Startpage":10,
+            "Brave":11
+        },
+        "tooltip":"Show an internet search option in search results"
+    },
+    "web-suggestions":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Web search suggestions",
+        "tooltip":"With web search option, also show search suggestions. (Note: This uses Google's search API)"
+    },
+    "enable-home-folder-search":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Search home folder",
+        "tooltip":"When searching, also search my home folder for files"
+    },
+    "enable-web-history-search":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Web history search",
+        "tooltip":"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\nNote: Firefox history is not currently supported."
+    },
+    "enable-web-bookmarks-search":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Web bookmarks search",
+        "tooltip":"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\nNote: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+    },
+    "enable-wikipedia-search":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Wikipedia search",
+        "tooltip":"Show some Wikipedia results"
+    },
+    "wikipedia-language":{
+        "type":"combobox",
+        "default":"en",
+        "description":"Wikipedia language",
+        "dependency":"enable-wikipedia-search",
+        "options":{
+            "English":"en",
+            "Sinugboanong Binisaya":"ceb",
+            "Svenska":"sv",
+            "Deutsch":"de",
+            "Français":"fr",
+            "Nederlands":"nl",
+            "Русский":"ru",
+            "Italiano":"it",
+            "Español":"es",
+            "Polski":"pl",
+            "مصرى (Maṣri)":"arz",
+            "日本語":"ja",
+            "Tiếng Việt":"vi",
+            "Winaray":"war",
+            "中文":"zh",
+            "العربية":"ar",
+            "Українська":"uk",
+            "Português":"pt",
+            "فارسی":"fa",
+            "Català":"ca",
+            "Српски / Srpski":"sr",
+            "Bahasa Indonesia":"id",
+            "Norsk (Bokmål)":"no",
+            "한국어":"ko",
+            "Suomi":"fi",
+            "Magyar":"hu",
+            "Čeština":"cs",
+            "Srpskohrvatski / Српскохрватски":"sh",
+            "Bân-lâm-gú":"zh-min-nan",
+            "Türkçe":"tr",
+            "Română":"ro",
+            "Нохчийн":"ce",
+            "Euskara":"eu",
+            "Bahasa Melayu":"ms",
+            "Tatarça / Татарча":"tt",
+            "Esperanto":"eo",
+            "עברית":"he",
+            "Հայերեն":"hy",
+            "Български":"bg",
+            "Dansk":"da",
+            "تۆرکجه":"azb",
+            "Slovenčina":"sk",
+            "Қазақша":"kk",
+            "Minangkabau":"min",
+            "Eesti":"et",
+            "Hrvatski":"hr",
+            "Беларуская":"be",
+            "Lietuvių":"lt",
+            "Ελληνικά":"el",
+            "Simple English":"simple",
+            "Azərbaycanca":"az",
+            "Galego":"gl",
+            "Slovenščina":"sl",
+            "اردو":"ur",
+            "Nynorsk":"nn",
+            "ქართული":"ka",
+            "हिन्दी":"hi",
+            "தமிழ்":"ta",
+            "ไทย":"th",
+            "O‘zbek":"uz",
+            "Latina":"la",
+            "Cymraeg":"cy",
+            "Asturianu":"ast",
+            "Volapük":"vo",
+            "粵語":"zh-yue",
+            "Македонски":"mk",
+            "বাংলা":"bn",
+            "Latviešu":"lv",
+            "Тоҷикӣ":"tg",
+            "မြန်မာဘာသာ":"my"
+        },
+        "tooltip":"Wikipedia language"
+    },
+    "search-help":{
+        "type":"label",
+        "description":"\nNote: Some search options can still be used even if you have not enabled them here by prefixing your search term.\nFor example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
     },
 
     "menu-icon-custom":{
@@ -283,7 +434,6 @@
         "default":"cinnamon-symbolic",
         "description":"Panel icon",
         "dependency":"menu-icon-custom",
-        "indent":"true",
         "tooltip":"Panel icon"
     },
     "menu-icon-size-custom":{
@@ -298,10 +448,9 @@
         "min":0,
         "max":60,
         "step":1,
-        "units":"pixels",
-        "description":"Panel icon size",
+        "units":"",
+        "description":"Panel icon size (pixels)",
         "dependency":"menu-icon-size-custom",
-        "indent":"true",
         "tooltip":"Choose a custom size for the panel icon"
     },
     "menu-label":{
@@ -312,53 +461,55 @@
     },
 
     "category-icon-size":{
-        "indent":true,
         "type":"spinbutton",
         "default":24,
         "min":0,
         "max":256,
         "step":1,
-        "units":"pixels",
-        "description":"Category icon size",
-        "tooltip":"Category icon size"
+        "units":"",
+        "description":"Category icon size (pixels)",
+        "tooltip":"Category icon size (pixels)"
     },
     "apps-list-icon-size":{
-        "indent":true,
         "type":"spinbutton",
         "default":24,
         "min":0,
         "max":256,
         "step":1,
-        "units":"pixels",
-        "description":"Applications list icon size",
-        "tooltip":"Applications list icon size"
+        "units":"",
+        "description":"Applications list icon size (pixels)",
+        "tooltip":"Applications list icon size (pixels)"
     },
     "apps-grid-icon-size":{
-        "indent":true,
         "type":"spinbutton",
         "default":64,
         "min":0,
         "max":256,
         "step":1,
-        "units":"pixels",
-        "description":"Applications grid icon size",
-        "tooltip":"Applications grid icon size"
+        "units":"",
+        "description":"Applications grid icon size (pixels)",
+        "tooltip":"Applications grid icon size (pixels)"
     },
     "sidebar-icon-size":{
-        "indent":true,
         "type":"spinbutton",
         "default":32,
         "min":6,
         "max":64,
         "step":1,
-        "units":"pixels",
-        "description":"Session buttons icon size",
-        "tooltip":"Session buttons icon size"
+        "units":"",
+        "description":"Sidebar icon size (pixels)",
+        "tooltip":"Sidebar icon size (pixels)"
     },
     "use-box-style":{
         "type":"checkbox",
         "default":false,
-        "description":"Use session buttons box style",
-        "tooltip":"Use session buttons box style"
+        "description":"Use sidebar box style",
+        "tooltip":"Use a sidebar box style"
+    },
+    "use-tile-style":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Use tile style",
+        "tooltip":"Use a tile style for the application buttons (Note: may not work on some themes)"
     }
 }

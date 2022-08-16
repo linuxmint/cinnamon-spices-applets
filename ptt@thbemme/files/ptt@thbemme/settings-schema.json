@@ -1,0 +1,24 @@
+{
+    "head": {
+        "type": "header",
+        "description": "General Settings for the PTT Applet"
+    },
+    "darkmode": {
+        "type": "checkbox",
+        "description": "Darkmode",
+        "default": false,
+        "indent": true
+    },
+    "keybinding_ptt_key": {
+        "type": "keybinding",
+        "description": "PTT",
+        "default": "F9",
+        "indent": true
+    },
+    "keybinding_ptt_toggle": {
+        "type": "keybinding",
+        "description": "Switch bewteen PTT and normal mode",
+        "default": "F12",
+        "indent": true
+    }
+}

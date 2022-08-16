@@ -21,9 +21,12 @@ const AboutURL = "http://markbokil.com/downloads/mybookmarks/about.php?appname=m
 const AppIcon = 'mybookmarks.svg';
 
 // external JS library options
-let AppOptions, DebugMode, OpenFileCmd, OpenFTPCmd, AppIconType;
+let AppOptions, DebugMode, OpenFileCmd, OpenFTPCmd, AppIconType, config;
 if (typeof require !== 'undefined') {
-    let config = require('./config');
+    config = require('./config');
+}
+
+if (Object.entries(config).length !== 0) {
     AppOptions = config.Options;
     DebugMode = config.Options.DebugMode;
     OpenFileCmd = config.Options.OpenFileCmd;

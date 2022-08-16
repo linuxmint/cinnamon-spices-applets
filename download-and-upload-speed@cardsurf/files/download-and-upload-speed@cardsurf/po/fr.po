@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-27 00:05+0100\n"
-"PO-Revision-Date: 2021-02-27 09:02+0100\n"
+"PO-Revision-Date: 2021-02-28 18:06+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -263,7 +263,7 @@ msgstr ""
 
 #. settings-schema.json->gui_symbolic_icon->description
 msgid "Show a default set of symbolic icons"
-msgstr "Affiche par défaut un ensemble d'icônes symboliques"
+msgstr "Afficher par défaut un ensemble d'icônes symboliques"
 
 #. settings-schema.json->hover_popup_text_css->description
 msgid "Popup text CSS"

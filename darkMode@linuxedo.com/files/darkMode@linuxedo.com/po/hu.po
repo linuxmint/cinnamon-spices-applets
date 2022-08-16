@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-21 17:15-0500\n"
+"PO-Revision-Date: 2021-12-23 09:03+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+
+#. metadata.json->name
+#. settings-schema.json->page_dark_mode->title
+#: applet.js:75 applet.js:177
+msgid "Dark Mode"
+msgstr "Éjszakai üzemmód"
+
+#. metadata.json->description
+msgid "Easily switch between dark mode and light mode with one click."
+msgstr "Könnyű váltás egy kattintással a nappali- és éjszakai üzemmód között."
+
+#. settings-schema.json->page_general->title
+msgid "General"
+msgstr "Általános"
+
+#. settings-schema.json->page_light_mode->title
+msgid "Light Mode"
+msgstr "Nappali üzemmód"
+
+#. settings-schema.json->enable_dark_mode->description
+msgid "Dark mode"
+msgstr "Éjszakai üzemmód"
+
+#. settings-schema.json->enable_auto_mode_switch->description
+msgid "Automatically switch modes"
+msgstr "Automatikus váltás az üzemmódok között"
+
+#. settings-schema.json->light_mode_start->description
+msgid "Light mode start time"
+msgstr "Nappali üzemmód bekapcsolási időpontja"
+
+#. settings-schema.json->dark_mode_start->description
+msgid "Dark mode start time"
+msgstr "Éjszakai üzemmód bekapcsolási időpontja"
+
+#. settings-schema.json->light_gtk_theme->description
+#. settings-schema.json->dark_gtk_theme->description
+msgid "Window control theme"
+msgstr "Ablak vezérlőelemek téma"
+
+#. settings-schema.json->light_win_border_theme->description
+#. settings-schema.json->dark_win_border_theme->description
+msgid "Window border theme"
+msgstr "Ablakkeret téma"
+
+#. settings-schema.json->light_cinnamon_theme->description
+#. settings-schema.json->dark_cinnamon_theme->description
+msgid "Desktop theme"
+msgstr "Asztaltéma"
+
+#. settings-schema.json->light_icon_theme->description
+#. settings-schema.json->dark_icon_theme->description
+msgid "Icon theme"
+msgstr "Ikontéma"
+
+#. settings-schema.json->enable_light_background_switch->description
+#. settings-schema.json->enable_dark_background_switch->description
+msgid "Change desktop background"
+msgstr "Asztal hátterének módosítása"
+
+#. settings-schema.json->light_background_dir->description
+#. settings-schema.json->dark_background_dir->description
+msgid "Desktop background location"
+msgstr "Asztal hátterének helye"
+
+#. settings-schema.json->light_background_dir->tooltip
+#. settings-schema.json->dark_background_dir->tooltip
+msgid "A picture from this folder will be randomly chosen."
+msgstr "Ebből a mappából a háttérkép véletlenszerűen lesz kiválasztva."
+
+#. settings-schema.json->postpone_auto_mode_until->description
+msgid "Internal use"
+msgstr "Belső használat"

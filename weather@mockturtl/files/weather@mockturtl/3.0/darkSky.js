@@ -235,7 +235,7 @@ var DarkSky = (function () {
                 userError: true,
                 detail: "no key",
                 service: "darksky",
-                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+                message: _("Please Make sure you\nentered the API key that you have from DarkSky")
             };
         }
         return null;

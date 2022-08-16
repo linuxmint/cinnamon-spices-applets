@@ -19,7 +19,7 @@ cd $DIR/src/3_0
 
 echo Building 3.0...
 cp promise-polyfill.js $DIR/files/weather@mockturtl/3.0/
-tsc -p tsconfig.30.json
+tsc -p tsconfig.json
 cd $DIR
 
 for f in files/weather@mockturtl/3.0/*.js; do

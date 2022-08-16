@@ -7,434 +7,598 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-20 12:34+0100\n"
-"PO-Revision-Date: 2020-07-23 07:48+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-31 17:51+0100\n"
+"Last-Translator: Google translate\n"
 "Language-Team: \n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#. 3.2 4.0
 msgid "Type to search..."
-msgstr ""
+msgstr "Zadejte vyhledávání ..."
 
-#. 3.2 4.0
 msgid "Initializing"
-msgstr ""
+msgstr "Inicializace"
 
-#. 3.2 4.0
 msgid "No description available"
-msgstr ""
+msgstr "Popis není dostupný"
 
-#. 3.2 4.0
-msgid "All Applications"
+msgid "All applications"
 msgstr "Všechny aplikace"
 
-#. 3.2 4.0
 msgid "Places"
-msgstr ""
+msgstr "Místa"
 
-#. 3.2 4.0
-msgid "Recent Files"
-msgstr ""
+msgid "Recent files"
+msgstr "Poslední soubory"
 
-#. 3.2 4.0
 msgid "Bookmarks"
-msgstr ""
+msgstr "Záložky"
 
-#. 3.2 4.0
-msgid "Favorite Apps"
-msgstr ""
+msgid "Favorite apps"
+msgstr "Oblíbené aplikace"
 
-#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr ""
+msgstr "Pro záložky Firefox a Midori je vyžadován balíček gir1.2-gda-5.0."
 
-#. 3.2 4.0
 msgid "Clear List"
-msgstr ""
+msgstr "Prázdný seznam"
 
-#. 3.2 4.0
 msgid "No recent files"
-msgstr ""
+msgstr "Žádné nedávné soubory"
 
-#. 3.2
 msgid "Account details"
-msgstr ""
+msgstr "Detaily účtu"
 
-#. 3.2 3.2
 msgid "Grid View"
-msgstr ""
+msgstr "Zobrazení mřížky"
 
-#. 3.2 3.2
 msgid "List View"
-msgstr ""
+msgstr "Zobrazení seznamu"
 
-#. 3.2 3.2
 msgid "Switch to grid view"
-msgstr ""
+msgstr "Přepnout do zobrazení mřížky"
 
-#. 3.2 3.2
 msgid "Switch to list view"
-msgstr ""
+msgstr "Přepněte na zobrazení seznamu"
 
-#. 3.2 4.0
-msgid "Lock Screen"
-msgstr ""
+msgid "Lock screen"
+msgstr "Uzamknout obrazovku"
 
-#. 3.2 4.0
 msgid "Lock the screen"
-msgstr ""
+msgstr "Uzamknout obrazovku"
 
-#. 3.2 4.0
 msgid "Logout"
-msgstr ""
+msgstr "Odhlásit se"
 
-#. 3.2 4.0
 msgid "Leave the session"
-msgstr ""
+msgstr "Opusťte relaci"
 
-#. 3.2 4.0
 msgid "Quit"
-msgstr ""
+msgstr "Přestat"
 
-#. 3.2 4.0
 msgid "Shutdown the computer"
-msgstr ""
+msgstr "Vypněte počítač"
 
-#. 3.2 4.0
-msgid "Home"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Computer"
-msgstr ""
-
-#. 3.2 4.0
-msgid "Browse network"
-msgstr ""
-
-#. 3.2 3.2 4.0
-#. 4.0
 msgid "Run with NVIDIA GPU"
-msgstr ""
+msgstr "Běh s grafickou kartou NVIDIA"
 
-#. 3.2 4.0
 msgid "Add to panel"
-msgstr ""
+msgstr "Přidat do panelu"
 
-#. 3.2 4.0
 msgid "Add to desktop"
-msgstr ""
+msgstr "Přidat na plochu"
 
-#. 3.2 4.0
-msgid "Remove favorite"
-msgstr ""
+msgid "Remove from favorites"
+msgstr "Odstranit z oblíbených"
 
-#. 3.2 4.0
 msgid "Add to favorites"
-msgstr ""
+msgstr "Přidat k oblíbeným"
 
-#. 3.2 4.0
 msgid "Uninstall"
-msgstr ""
+msgstr "Odinstalovat"
 
-#. 4.0 4.0
+msgid "Home"
+msgstr "Domov"
+
+msgid "Computer"
+msgstr "Počítač"
+
+msgid "Browse network"
+msgstr "Procházet síť"
+
+msgid "Find files..."
+msgstr "Najít soubory ..."
+
 msgid "Please wait..."
-msgstr ""
+msgstr "Prosím, čekejte..."
 
-#. metadata.json
-#. 3.2
-msgid "Cinnamenu"
-msgstr ""
+msgid "Applications"
+msgstr "Aplikace"
 
-#. metadata.json
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
-msgstr ""
-"Flexibilní nabídka poskytující možnosti formátování, webové záložky, podporu "
-"poskytovatele vyhledávání a fuzzy vyhledávání."
+msgid "Documents"
+msgstr "dokumenty"
 
-#. metadata.json
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
-msgstr ""
+msgid "Videos"
+msgstr "videa"
 
-#. 3.2 4.0
-msgid "Behavior"
-msgstr ""
+msgid "Images"
+msgstr "snímky"
 
-#. 3.2 4.0
-msgid "Appearance"
-msgstr ""
+msgid "Music"
+msgstr "Hudba"
 
-#. 3.2 4.0
-msgid "Layout and Content"
-msgstr ""
+msgid "No recent Items"
+msgstr "Žádné nedávné položky"
 
-#. 3.2
-msgid "Search Providers"
-msgstr ""
+msgid "Click to copy"
+msgstr "Kliknutím zkopírujte"
 
-#. 3.2
-msgid "No search provider extensions found"
-msgstr ""
+msgid "Applications and files"
+msgstr "Aplikace a soubory"
 
-#. 3.2 4.0
-msgid "Panel"
-msgstr ""
+msgid "Other search results"
+msgstr "Další výsledky hledání"
 
-#. 3.2 4.0
-msgid "Menu"
-msgstr ""
+msgid "Browser history"
+msgstr "Historie prohlížeče"
 
-#. 3.2 4.0
-msgid "Layout"
-msgstr ""
+msgid "Browser bookmarks"
+msgstr "Záložky prohlížeče"
 
-#. 3.2 4.0
-msgid "Content"
-msgstr ""
+msgid "Emoji"
+msgstr "Emoji"
 
-#. 3.2 4.0
-msgid "Recent files settings"
-msgstr ""
+msgid "Trash"
+msgstr "Odpadky"
 
-#. 3.2 4.0
-msgid "Open the menu editor"
-msgstr ""
+msgid "Error while opening file:"
+msgstr "Chyba při otevírání souboru:"
 
-#. 3.2 4.0
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Příliš mnoho záznamů - zobrazuje se pouze prvních 1000 záznamů"
+
+msgid "Favorites"
+msgstr "Oblíbené"
+
+msgid "Recent"
+msgstr "Nedávno"
+
+msgid "Home folder"
+msgstr "Domovská složka"
+
 msgid "Reset category order"
-msgstr ""
+msgstr "Resetovat pořadí kategorií"
 
-#. 3.2 4.0
+msgid "light skin tone"
+msgstr "světlý tón pleti"
+
+msgid "medium-light skin tone"
+msgstr "středně světlý tón pleti"
+
+msgid "medium skin tone"
+msgstr "střední tón pleti"
+
+msgid "medium-dark skin tone"
+msgstr "středně tmavý odstín pleti"
+
+msgid "dark skin tone"
+msgstr "tmavý odstín pleti"
+
+msgid "This file is no longer available"
+msgstr "Tento soubor již není k dispozici"
+
+msgid "Open with"
+msgstr "Otevřít s"
+
+msgid "Other application..."
+msgstr "Další aplikace ..."
+
+msgid "Open containing folder"
+msgstr "Otevřít složku obsahující"
+
+msgid "Move to trash"
+msgstr "Přesunout do koše"
+
+msgid "Error while moving file to trash:"
+msgstr "Chyba při přesouvání souboru do koše:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Tato položka nabídky není přidružena k žádnému balíčku. Chcete jej přesto odstranit z nabídky?"
+
+msgid "The following packages will be removed:"
+msgstr "Následující balíčky budou odstraněny:"
+
+msgid "Packages to be removed"
+msgstr "Balíčky k odstranění"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Nelze odstranit balíček %s, protože to vyžadují jiné balíčky."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Balíček %s je závislý na následujících balících:"
+
+msgid "Open"
+msgstr "Otevřeno"
+
+msgid "Search"
+msgstr "Vyhledávání"
+
+msgid "Start in"
+msgstr "Začít v"
+
+msgid "Select a folder"
+msgstr "Vyberte složku"
+
+msgid "Follow symlinks"
+msgstr "Postupujte podle symbolických odkazů"
+
+msgid "Search hidden"
+msgstr "Hledání skryté"
+
+msgid "Use regular expressions"
+msgstr "Používejte regulární výrazy"
+
+msgid "Stop"
+msgstr "Stop"
+
+msgid "File"
+msgstr "Soubor"
+
+msgid "Path"
+msgstr "Cesta"
+
+msgid "Searching..."
+msgstr "Hledám ..."
+
+msgid "Search Stopped"
+msgstr "Hledání zastaveno"
+
+msgid "Searching: "
+msgstr "Hledání: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Chyba: nedostatečné oprávnění ke čtení složky "
+
+msgid "Search Completed"
+msgstr "Hledání bylo dokončeno"
+
+msgid "Skipping"
+msgstr "Skákání"
+
+msgid " - directory already searched"
+msgstr " - adresář již prohledáván"
+
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Flexibilní nabídka s možnostmi rozvržení mřížky nebo seznamu, prohlížečem souborů a vyhledáváním emodži."
+
+msgid "Behavior"
+msgstr "Chování"
+
+msgid "Appearance"
+msgstr "Vzhled"
+
+msgid "Layout and Content"
+msgstr "Rozvržení a obsah"
+
+msgid "Search Providers"
+msgstr "Poskytovatelé vyhledávání"
+
+msgid "No search provider extensions found"
+msgstr "Nebyla nalezena žádná rozšíření poskytovatele vyhledávání"
+
+msgid "Panel"
+msgstr "Panel"
+
+msgid "Menu"
+msgstr "Jídelní lístek"
+
+msgid "Layout"
+msgstr "Rozložení"
+
+msgid "Content"
+msgstr "Obsah"
+
+msgid "Recent files settings"
+msgstr "Nastavení posledních souborů"
+
+msgid "Open the menu editor"
+msgstr "Otevřete editor nabídek"
+
 msgid "Use a custom icon"
-msgstr ""
+msgstr "Použijte vlastní ikonu"
 
-#. 3.2 4.0
 msgid "Use a custom icon in the panel"
-msgstr ""
+msgstr "Použijte vlastní ikonu na panelu"
 
-#. 3.2 4.0
 msgid "Panel icon"
-msgstr ""
+msgstr "Ikona panelu"
 
-#. 3.2 4.0
 msgid "Panel text"
-msgstr ""
+msgstr "Text panelu"
 
-#. 3.2 4.0
 msgid "Text to show beside the panel icon"
-msgstr ""
+msgstr "Text, který se zobrazí vedle ikony panelu"
 
-#. 3.2 4.0
-msgid "pixels"
-msgstr ""
+msgid "Category icon size (pixels)"
+msgstr "Velikost ikony kategorie (v pixelech)"
 
-#. 3.2 4.0
-msgid "Category icon size"
-msgstr ""
+msgid "Applications list icon size (pixels)"
+msgstr "Velikost ikony seznamu aplikací (v pixelech)"
 
-#. 3.2 4.0
-msgid "Applications list icon size"
-msgstr "Velikost ikony seznamu aplikací"
+msgid "Applications grid icon size (pixels)"
+msgstr "Velikost ikony mřížky aplikací (v pixelech)"
 
-#. 3.2 4.0
-msgid "Applications grid icon size"
-msgstr ""
-
-#. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
-msgstr ""
+msgstr "Klávesová zkratka pro otevření a zavření nabídky"
 
-#. 3.2 4.0
 msgid "Open menu on hover"
-msgstr ""
+msgstr "Otevřete nabídku při najetí myší"
 
-#. 3.2 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr ""
+msgstr "Když přejedu myší nad ikonou panelu, otevřete nabídku"
 
-#. 3.2 4.0
 msgid "milliseconds"
-msgstr ""
+msgstr "milisekundy"
 
-#. 3.2 4.0
 msgid "Menu hover delay"
-msgstr ""
+msgstr "Zpoždění přechodu nabídky"
 
-#. 3.2 4.0
 msgid "Use menu animations"
-msgstr ""
+msgstr "Použijte animace nabídky"
 
-#. 3.2 4.0
 msgid "Animate the menu on open and close"
-msgstr ""
+msgstr "Animace nabídky při otevírání a zavírání"
 
-#. 3.2 4.0
 msgid "Activate categories on click"
-msgstr ""
+msgstr "Aktivujte kategorie kliknutím"
 
-#. 3.2 4.0
 msgid "Activate categories on click instead of on hover"
-msgstr ""
+msgstr "Aktivujte kategorie kliknutím, nikoli umístěním kurzoru myši"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling"
-msgstr ""
+msgstr "Povolit automatický posuv"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
-msgstr ""
+msgstr "Povolit automatický posuv v seznamu aplikací"
 
-#. 3.2 4.0
 msgid "Show web bookmarks"
-msgstr ""
+msgstr "Zobrazit webové záložky"
 
-#. 3.2 4.0
-msgid "Show your browser's web bookmarks in the menu"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
+"V nabídce zobrazte webové záložky prohlížeče.\n"
+"Poznámka: Nainstalujte balíček gir1.2-gda-5.0 a přečtěte si záložky firefoxu."
 
-#. 3.2
 msgid "Enable searching of open windows"
-msgstr ""
+msgstr "Povolit vyhledávání otevřených oken"
 
-#. 3.2 4.0
 msgid "Enable search providers"
-msgstr ""
+msgstr "Povolit poskytovatele vyhledávání"
 
-#. 3.2 4.0
 msgid "Include search provider results in searches"
-msgstr ""
+msgstr "Zahrnout do vyhledávání výsledky poskytovatele vyhledávání"
 
-#. 3.2 4.0
 msgid "Example Search Providers"
-msgstr ""
+msgstr "Příklad poskytovatelů vyhledávání"
 
-#. 3.2
-#. 3.2
-msgid "Startup applications view mode"
-msgstr ""
+msgid "Open menu on category:"
+msgstr "Otevřít nabídku v kategorii:"
 
-#. 3.2 4.0
 msgid "List"
-msgstr ""
+msgstr "Seznam"
 
-#. 3.2 4.0
 msgid "Grid"
-msgstr ""
+msgstr "Mřížka"
 
-#. 3.2 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Vždy otevřete nabídku s vybranou touto kategorií"
+
 msgid "columns"
-msgstr ""
+msgstr "sloupce"
 
-#. 3.2 4.0
 msgid "Number of columns in apps grid"
-msgstr ""
+msgstr "Počet sloupců v mřížce aplikací"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places"
-msgstr ""
+msgstr "Zobrazit záložky a místa"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places category in the menu"
-msgstr ""
+msgstr "Zobrazit záložky a kategorie míst v nabídce"
 
-#. 3.2 4.0
 msgid "Show application icons"
-msgstr ""
+msgstr "Zobrazit ikony aplikací"
 
-#. 3.2 4.0
 msgid "Show category icons"
-msgstr ""
+msgstr "Zobrazit ikony kategorií"
 
-#. 3.2
 msgid "Show application descriptions under titles"
-msgstr ""
+msgstr "Zobrazit popisy aplikací pod nadpisy"
 
-#. 3.2
 msgid "Show tooltips"
-msgstr ""
+msgstr "Zobrazit popisky"
 
-#. 3.2
 msgid "Tooltip delay"
-msgstr ""
+msgstr "Popisek zpoždění"
 
-#. 3.2 4.0
 msgid "Use a custom menu height"
-msgstr ""
+msgstr "Použijte vlastní výšku nabídky"
 
-#. 3.2 4.0
-msgid "px"
-msgstr ""
+msgid "Custom menu height (pixels)"
+msgstr "Vlastní výška nabídky (v pixelech)"
 
-#. 3.2 4.0
-msgid "Custom menu height"
-msgstr "Vlastní výška nabídky"
-
-#. 4.0
 msgid "Applications view mode"
 msgstr "Režim zobrazení aplikací"
 
-#. 4.0
 msgid "View applications as list or grid"
-msgstr ""
+msgstr "Prohlížejte aplikace jako seznam nebo mřížku"
 
-#. 4.0
 msgid "Application description placement"
-msgstr ""
+msgstr "Umístění popisu aplikace"
 
-#. 4.0
 msgid "Tooltips"
-msgstr ""
+msgstr "Tipy"
 
-#. 4.0
 msgid "Under titles"
-msgstr ""
+msgstr "Pod tituly"
 
-#. 4.0
 msgid "None"
-msgstr ""
+msgstr "Žádný"
 
-#. 4.0
 msgid "Choose where to show application descriptions"
-msgstr ""
+msgstr "Vyberte, kde se mají zobrazovat popisy aplikací"
 
-#. 4.0
-msgid "Session buttons location"
-msgstr ""
+msgid "Sidebar location"
+msgstr "Umístění postranního panelu"
 
-#. 4.0
 msgid "Top"
-msgstr ""
+msgstr "Horní"
 
-#. 4.0
 msgid "Bottom"
-msgstr ""
+msgstr "Dno"
 
-#. 4.0
 msgid "Left"
-msgstr ""
+msgstr "Doleva"
 
-#. 4.0
 msgid "Right"
-msgstr ""
+msgstr "Pravice"
 
-#. 4.0
-msgid "Choose where to show the session (quit, logout, etc.) buttons"
-msgstr ""
+msgid "Choose where to show the sidebar"
+msgstr "Vyberte, kde chcete zobrazit postranní panel"
 
-#. 4.0
-msgid "Add favorites to session buttons"
-msgstr "Přidání oblíbených položek do relačních tlačítek"
-
-#. 4.0
-msgid "Show your favorite app icons next to the session buttons"
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
+"\n"
+"Info / tip: Přetažením na okraji nabídky změníte velikost nabídky.\n"
+
+msgid "Show favorites on sidebar"
+msgstr "Zobrazit oblíbené na postranním panelu"
+
+msgid "Show your favorite app and file icons on the sidebar"
+msgstr "Zobrazte své oblíbené aplikace a ikony souborů na postranním panelu"
+
+msgid "Show recent items"
+msgstr "Zobrazit poslední položky"
+
+msgid "Show recent items category in the menu"
+msgstr "Zobrazit kategorii posledních položek v nabídce"
+
+msgid "Show favorite apps category"
+msgstr "Zobrazit kategorii oblíbených aplikací"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "V nabídce zobrazte kategorii oblíbených aplikací"
+
+msgid "Show home folder"
+msgstr "Zobrazit domovskou složku"
+
+msgid "Show home folder category in the menu"
+msgstr "Zobrazit kategorii domovské složky v nabídce"
+
+msgid "Last used category"
+msgstr "Předchozí kategorie"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Automatické rolování seznamu aplikací při najetí myší"
+
+msgid "Show hidden files"
+msgstr "Zobrazit skryté soubory"
+
+msgid "Show hidden files in folder view"
+msgstr "Zobrazit skryté soubory v zobrazení složek"
+
+msgid "Emoji search"
+msgstr "Vyhledávání emodži"
+
+msgid "Show emojis in search results"
+msgstr "Zobrazit emodži ve výsledcích vyhledávání"
+
+msgid "Web search option"
+msgstr "Možnost vyhledávání na webu"
+
+msgid "Show an internet search option in search results"
+msgstr "Zobrazit ve výsledcích hledání možnost hledání na internetu"
+
+msgid "Search home folder"
+msgstr "Hledat domovskou složku"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Při vyhledávání také vyhledejte soubory v domovské složce"
+
+msgid "Web history search"
+msgstr "vyhledávání webové historie"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Při vyhledávání prohledávat také historii mého prohlížeče (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Poznámka: Historie Firefoxu není aktuálně podporována."
+
+msgid "Web bookmarks search"
+msgstr "Vyhledávání webových záložek"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Při vyhledávání také prohledávejte webové záložky mého prohlížeče (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Poznámka: Chcete-li prohledávat záložky Firefoxu, budete si muset nainstalovat balíček gir1.2-gda-5.0 (distribuce založené na Debianu vč. Ubuntu & Linux Mint) nebo zabalte libgda (distribuce založené na Arch) a restartujte počítač."
+
+msgid "Wikipedia search"
+msgstr "vyhledávání na Wikipedii"
+
+msgid "Show some Wikipedia results"
+msgstr "Zobrazit některé výsledky Wikipedie"
+
+msgid "Wikipedia language"
+msgstr "jazyk Wikipedie"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Poznámka: Některé možnosti vyhledávání lze stále používat, i když jste je zde nepovolili přidáním předpony hledanému výrazu.\n"
+"Například: Chcete-li vyhledat emotikony, zadejte 'e srdce', abyste našli emotikony srdce. Podobně použijte předpony „f“ pro vyhledávání souborů, „h“ pro webovou historii a „b“ pro vyhledávání webových záložek.\n"
+
+msgid "Use a custom icon size"
+msgstr "Použijte vlastní velikost ikony"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Pro ikonu panelu použijte vlastní velikost"
+
+msgid "Panel icon size (pixels)"
+msgstr "Velikost ikony panelu (v pixelech)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Zvolte vlastní velikost ikony panelu"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Velikost ikony postranního panelu (v pixelech)"
+
+msgid "Use sidebar box style"
+msgstr "Použijte styl rámečku postranního panelu"
+
+msgid "Use a sidebar box style"
+msgstr "Použijte styl rámečku postranního panelu"
+
+msgid "Use tile style"
+msgstr "Použijte styl dlaždic"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Použijte styl dlaždic pro tlačítka aplikace (Poznámka: nemusí fungovat u některých motivů)"

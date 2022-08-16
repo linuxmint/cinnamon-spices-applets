@@ -1,17 +1,21 @@
 {
-    "compilerOptions": {
-        "lib": ["es2017"],
-        "module": "CommonJS",
-        "target": "es2017",
-        "noImplicitAny": true,
-        "removeComments": true,
-        "preserveConstEnums": false,
-        "sourceMap": false,
-		"noImplicitThis": true,
-		"outDir": "../../files/weather@mockturtl/3.8/"
-    },
-    "include": [
-        "./**/*",
-        "../declarations/*"
-    ],
+	"compilerOptions": {
+		"lib": [
+			"es2017"
+		],
+		"target": "es2017",
+		"removeComments": true,
+		"sourceMap": true,
+		"strict": true,
+        "noFallthroughCasesInSwitch": true,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+		"noImplicitAny": true,
+        "experimentalDecorators": true,
+	},
+	"include": [
+		"./**/*",
+		"../../../.typescript-declarations/**/*",
+	],
 }

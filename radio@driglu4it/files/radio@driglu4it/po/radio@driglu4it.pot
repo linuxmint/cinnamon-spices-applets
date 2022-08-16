@@ -98,6 +98,14 @@ msgstr ""
 msgid "Please install the '%s' package."
 msgstr ""
 
+#: 4.6/RadioSearchWidget.py:48
+msgid "Find Radio Station"
+msgstr ""
+
+#: 4.6/RadioSearchWidget.py:53
+msgid "Add to My Stations"
+msgstr ""
+
 #: 4.6/download-dialog-mpris.py:36 4.6/download-dialog-youtube-dl.py:36
 msgid "Download Confirmation Dialog"
 msgstr ""
@@ -150,15 +158,19 @@ msgid "A simple radio applet for Cinnamon"
 msgstr ""
 
 #. 4.6->settings-schema.json->radio-stations-page->title
-msgid "Radio Stations"
+msgid "My Stations"
 msgstr ""
 
 #. 4.6->settings-schema.json->preferences-page->title
 msgid "Preferences"
 msgstr ""
 
+#. 4.6->settings-schema.json->search-page->title
+msgid "Find Station"
+msgstr ""
+
 #. 4.6->settings-schema.json->find-station-section->title
-msgid "Find station"
+msgid "Search Radio station"
 msgstr ""
 
 #. 4.6->settings-schema.json->appearance-section->title
@@ -226,6 +238,10 @@ msgstr ""
 
 #. 4.6->settings-schema.json->color-on->description
 msgid "Color of symbolic icon when playing a radio station"
+msgstr ""
+
+#. 4.6->settings-schema.json->color-paused->description
+msgid "Color of symbolic icon while a radio station is paused"
 msgstr ""
 
 #. 4.6->settings-schema.json->channel-on-panel->description

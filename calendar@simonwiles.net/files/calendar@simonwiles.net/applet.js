@@ -30,6 +30,7 @@ if (typeof require !== 'undefined') {
 }
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const CinnamonDesktop = imports.gi.CinnamonDesktop;
 
 let DEFAULT_FORMAT = _("%l:%M %p");
 
@@ -80,6 +81,9 @@ MyApplet.prototype = {
 
             this._initContextMenu();
             this._initRightClickMenu();
+
+            this.clock = new CinnamonDesktop.WallClock();
+            this.clock_notify_id = 0;
 
             this._calendarArea = new St.BoxLayout({name: "calendarArea" });
             this.menu.addActor(this._calendarArea);
@@ -169,7 +173,6 @@ MyApplet.prototype = {
             // Start the clock
             this.on_settings_changed();
             addWorldClocks();
-            this._updateClockAndDatePeriodic();
         }
         catch (e) {
             global.logError(e);
@@ -181,6 +184,10 @@ MyApplet.prototype = {
             Main.keybindingManager.addHotKey(EXTENSION_UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
 
         this.on_applet_clicked;
+    },
+
+    _clockNotify(obj, pspec, data) {
+        this._updateClockAndDate();
     },
 
     on_applet_clicked: function() {
@@ -198,7 +205,7 @@ MyApplet.prototype = {
             this._dateFormat = this.custom_format;
         } else {
             let use_24h = this.desktop_settings.get_boolean("clock-use-24h");
-            let show_seconds = this.desktop_settings.get_boolean("clock-show-seconds");            
+            let show_seconds = this.desktop_settings.get_boolean("clock-show-seconds");
 
             if (use_24h) {
                 if (show_seconds) {
@@ -251,14 +258,18 @@ MyApplet.prototype = {
         }
     },
 
-    _updateClockAndDatePeriodic: function() {
-        this._updateClockAndDate();
-        this._periodicTimeoutId = Mainloop.timeout_add_seconds(1, Lang.bind(this, this._updateClockAndDatePeriodic));
+    on_applet_added_to_panel: function() {
+        this.on_settings_changed();
+
+        if (this.clock_notify_id == 0) {
+            this.clock_notify_id = this.clock.connect("notify::clock", () => this._clockNotify());
+        }
     },
 
     on_applet_removed_from_panel: function() {
-        if (this._periodicTimeoutId){
-            Mainloop.source_remove(this._periodicTimeoutId);
+        if (this.clock_notify_id > 0) {
+            this.clock.disconnect(this.clock_notify_id);
+            this.clock_notify_id = 0;
         }
     },
 

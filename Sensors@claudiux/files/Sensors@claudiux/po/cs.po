@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Sensors@claudiux.pot 1.4.0\n"
+"Project-Id-Version: Sensors@claudiux.pot Czech 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-24 00:44+0200\n"
-"PO-Revision-Date: 2021-01-23 11:28+0100\n"
+"PO-Revision-Date: 2021-04-21 19:33+0200\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: checkDependencies.js:306
 msgid "Please execute, in the just opened terminal, the commands:"
-msgstr "V právě otevřeném okně terminálu prosím spusť následující příkazy:"
+msgstr "V právě otevřeném okně terminálu prosím proveďte následující příkazy:"
 
 #: checkDependencies.js:307
 msgid "Some dependencies are not installed!"
@@ -41,7 +41,7 @@ msgstr "Některé závislosti nejsou nainstalované!"
 #. metadata.json->name
 #: applet.js:83
 msgid "Sensors Monitor"
-msgstr "Monitor senzorů"
+msgstr "Sledování senzorů"
 
 #: applet.js:352
 msgid "high:"
@@ -116,7 +116,7 @@ msgstr "Znovunačíst tento applet"
 #: applet.js:914
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
-msgstr "Jsi si jistý, že chceš odstranit '%s'?"
+msgstr "Opravdu odstranit '%s'?"
 
 #. metadata.json->description
 msgid ""
@@ -124,9 +124,10 @@ msgid ""
 "GPU - Power Supply), Fan Speed, Voltages, Intrusions. Notifies you with "
 "color changes when a value reaches or exceeds its limit."
 msgstr ""
-"Zobrazuje hodnoty mnoha senzorů počítače zahrnujíce teplotní (CPU - GPU - "
-"zdroj), rychlosti větráků, napětí a narušení (průnik pod kryty). Upozorní "
-"barevnými změnami když hodnoty dosáhnout nebo přesáhnou limit."
+"Zobrazuje hodnoty různých senzorů počítače jako jsou teplotní čidla (CPU - "
+"GPU - zdroj), rychlosti větráků, hodnoty napětí a detekce narušení (otevření "
+"krytu). Upozorní barevnými změnami pokud hodnoty dosáhnout nebo přesáhnou "
+"limity."
 
 #. settings-schema.json->page_Temperatures->title
 msgid "🌡 Temperature"
@@ -158,15 +159,14 @@ msgstr "Hodnoty senzorů"
 
 #. settings-schema.json->section_remove_incompatible_xlets->title
 msgid "Remove from panels certain applets that also use sensors"
-msgstr ""
-"Odstraň z panelu některý z appletů, který rovněž sleduje senzory počítače"
+msgstr "Odstraňte z panelu jiné applety, rovněž sledující senzory počítače"
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
 #. settings-schema.json->section_voltDisplay->title
 #. settings-schema.json->section_intrusionDisplay->title
 msgid "Display"
-msgstr "Zobrazit"
+msgstr "Zobrazení"
 
 #. settings-schema.json->section_tempSensors->title
 msgid "Temperature sensors"
@@ -246,7 +246,7 @@ msgstr "60"
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
-msgstr "Interval obnovení (sekundy)"
+msgstr "Interval obnovení (sekund)"
 
 #. settings-schema.json->keep_size->description
 msgid "Avoid size changes"
@@ -258,9 +258,9 @@ msgid ""
 "have been defined.\n"
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
-"Aktivní: velikost appletu zůstává neměnná od chvíle definování vlastních "
+"Aktivní: velikost appletu zůstává neměnná ve chvili definování vlastních "
 "nastavení.\n"
-"Neaktivní: Velikost appletu je optimalizována, ale může se změnit."
+"Neaktivní: Velikost appletu je optimalizována, ale může se měnit."
 
 #. settings-schema.json->char_size->description
 msgid "Character size (% of standard size)"
@@ -272,7 +272,7 @@ msgstr "Bez okrajové linky"
 
 #. settings-schema.json->remove_border->tooltip
 msgid "Whether or not to remove the border line around this applet."
-msgstr "Zobrazit s linkou kolem appletu či naopak."
+msgstr "Zobrazit s linkou kolem appletu či bez ní."
 
 #. settings-schema.json->remove_icons->description
 msgid "Remove icons"
@@ -284,7 +284,7 @@ msgstr "Zapne či vypne zobrazení ikon."
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
-msgstr "Hodnoty ve vyskakovací bublině zobrazovat tučně"
+msgstr "Hodnoty ve vyskakovací bublině zobrazovat tučným písmem"
 
 #. settings-schema.json->bold_values->tooltip
 msgid "Whether or not to show values in bold in the tooltip."
@@ -315,7 +315,7 @@ msgstr "Možnost zobrazit položky 'Restartovat tento applet' v jeho menu."
 #. settings-schema.json->show_volt->description
 #. settings-schema.json->show_intrusion->description
 msgid "Display the values of these selected sensors"
-msgstr "Zobrazovat hodnoty těchto vybraných senzorů"
+msgstr "Zobrazovat hodnoty senzorů této právě vybrané kategorie"
 
 #. settings-schema.json->show_temp->tooltip
 #. settings-schema.json->show_fan->tooltip
@@ -343,23 +343,23 @@ msgstr "Zobrazovat celá čísla"
 
 #. settings-schema.json->only_integer_part->tooltip
 msgid "Whether or not to round the values."
-msgstr "Zvolit možnost jestli hodnoty zaokrouhlovat na celá čísla."
+msgstr "Umožňuje zaokrouhlovat hodnoty na celá čísla."
 
 #. settings-schema.json->show_unit->description
 #. settings-schema.json->show_fan_unit->description
 #. settings-schema.json->show_volt_unit->description
 msgid "Show unit"
-msgstr "Zobrazit jednotky"
+msgstr "Zobrazit stupně"
 
 #. settings-schema.json->show_unit->tooltip
 #. settings-schema.json->show_fan_unit->tooltip
 #. settings-schema.json->show_volt_unit->tooltip
 msgid "Whether or not to show the unit after the value."
-msgstr "Umožní připojit či odebrat jednotku za hodnotou."
+msgstr "Umožní připojit či odebrat zobrazení značky stupňů za hodnotou."
 
 #. settings-schema.json->show_unit_letter->description
 msgid "Show unit character"
-msgstr "Připojit zkratku jednotky"
+msgstr "Připojit jednotky"
 
 #. settings-schema.json->show_unit_letter->tooltip
 msgid "Whether or not to show the unit character (C or F)."
@@ -375,8 +375,8 @@ msgid ""
 "Whether or not to show, in a vertical panel, °C or °F on the same line as "
 "the temperature value."
 msgstr ""
-"V případě používání panelu umístěného vertikálně, zvolit, jestli hodnota a "
-"jednotka °C či °F budou na stejném řádku."
+"V případě používání panelu umístěného vertikálně lze zvolit, jestli hodnota "
+"a jednotka °C či °F budou na stejném řádku."
 
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
@@ -403,7 +403,9 @@ msgstr ""
 msgid ""
 "Show\n"
 "in panel"
-msgstr "Zobrazit na panelu"
+msgstr ""
+"Zobrazit\n"
+"na panelu"
 
 #. settings-schema.json->temp_sensors->columns->title
 #. settings-schema.json->fan_sensors->columns->title
@@ -412,14 +414,18 @@ msgstr "Zobrazit na panelu"
 msgid ""
 "Show\n"
 "in tooltip"
-msgstr "Zobrazit v bublinové nabídce"
+msgstr ""
+"Zobrazit\n"
+"v bublině"
 
 #. settings-schema.json->temp_sensors->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
 msgid "Shown name"
-msgstr "Zobrazit jméno"
+msgstr ""
+"Zobrazované\n"
+"jméno"
 
 #. settings-schema.json->temp_sensors->tooltip
 #. settings-schema.json->fan_sensors->tooltip
@@ -429,8 +435,8 @@ msgid ""
 "Double-click on a line to change Shown name.\n"
 "To reset a Shown name, copy/paste the Sensor name."
 msgstr ""
-"Dvoukliem na řádek je možné změnit zobrazený název.\n"
-"K obnovení původního názvu jej zkopíruj z položky Jméno senzoru."
+"Dvoukliem na řádek je možné změnit zobrazovaný název jednotky.\n"
+"K obnovení původního názvu jej zkopírujte z položky Název senzoru."
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
@@ -454,7 +460,8 @@ msgstr "Pouze mV"
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
-msgstr "Zobrazit na panelu upozornění na 'narušení' pouze v případě detekování"
+msgstr ""
+"Zobrazit na panelu upozornění na 'narušení' pouze v případě jeho detekování"
 
 #. settings-schema.json->report->description
 msgid "Example of sensor values from this computer"
@@ -462,7 +469,7 @@ msgstr "Ukázka hodnot senzorů dostupných na tomto počítači"
 
 #. settings-schema.json->report->tooltip
 msgid "Useful for reporting an issue."
-msgstr "Vhodné pro případ reportování problému."
+msgstr "Vhodné v případě nahlašování problému."
 
 #. settings-schema.json->update_display->description
 msgid "Update display"

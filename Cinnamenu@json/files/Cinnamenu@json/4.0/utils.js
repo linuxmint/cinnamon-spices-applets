@@ -1,7 +1,13 @@
-const SEARCH_DEBUG = false;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
-Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + "/.local/share/locale");
+const Mainloop = imports.mainloop;
+const Lang = imports.lang;
+const St = imports.gi.St;
+const Main = imports.ui.main;
+const ByteArray = imports.byteArray;
+const {escapeRegExp} = imports.misc.util;
+Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + '/.local/share/locale');
 
 function _(str) {
     let cinnamonTranslation = Gettext.gettext(str);
@@ -11,67 +17,56 @@ function _(str) {
     return Gettext.dgettext('Cinnamenu@json', str);
 }
 
-const APPTYPE = {
-    application: 0,
-    place: 1,
-    file: 2,
-    provider: 3,
-    clearlist_button: 4
-};
+const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+|_|&|\\)|\S+?(\s|$|-|=|\+|_|&|\\)/g ).join('\n');
 
-// Work around Cinnamon#8201
-const tryFn = function(callback, errCallback) {
-    try {
-        return callback();
-    } catch (e) {
-        if (typeof errCallback === 'function') {
-            return errCallback(e);
-        }
-    }
-};
-
-const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+)|\S+?(\s|$|-|=|\+)/g ).join('\n');
-//=========================================
-
-const Gio = imports.gi.Gio;
-const ByteArray = imports.byteArray;
-
-const readFileAsync = function(file, opts = {utf8: true}) {
-    const {utf8} = opts;
-    return new Promise(function(resolve, reject) {
-        if (typeof file === 'string' || file instanceof String) {
-            file = Gio.File.new_for_path(file);
-        }
-        if (!file.query_exists(null)) reject(new Error('File does not exist.'));
-        file.load_contents_async(null, function(object, result) {
-            tryFn(() => {
-                let [success, data] = file.load_contents_finish(result);
-                if (!success) return reject(new Error('File cannot be read.'));
-                if (utf8) {
-                    if (data instanceof Uint8Array) data = ByteArray.toString(data);
-                    else data = data.toString();
-                }
-                resolve(data);
-            }, (e) => reject(e));
-        });
-    });
-};
-
-const readJSONAsync = function(file) {
-    return readFileAsync(file).then(function(json) {
-        return JSON.parse(json);
-    });
-};
+const graphemeBaseChars = s => //decompose and remove discritics.
+                s.normalize('NFKD').replace(/[\u0300-\u036f]/g, "");
 
 //===========================================================
 
-const Mainloop = imports.mainloop;
-const Lang = imports.lang;
-const St = imports.gi.St;
-const Main = imports.ui.main;
+const getThumbnail_gicon = (uri, mimeType) => {
+    //Note: this function doesn't check if thumbnail is up to date.
+    const file = Gio.File.new_for_uri(uri);
+    if (!file.query_exists(null)) {//check because it's possible for isFavoriteFile's to not exist.
+        return null;
+    }
+    //
+    const isImage = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/tiff', 'image/bmp',
+                                                                'image/gif'].includes(mimeType);
+    const fileSize = file.query_info('standard::size', Gio.FileQueryInfoFlags.NONE, null).get_size();
+
+    //----Get thumbnail from cache
+    if (!(isImage && fileSize < 50000)) {//Don't bother with thumbnail cache if file is a
+                            //small image, quicker to just create icon from file itself and avoids
+                            //possible out of date cached thumbnail.
+        const ba = ByteArray.fromString(uri, 'UTF-8');
+        const md5 = GLib.Checksum.new(GLib.ChecksumType.MD5);
+        md5.update(ba);
+        const thumbDir = GLib.get_user_cache_dir() + '/thumbnails/';
+        const thumbName = md5.get_string() + '.png';
+        const thumbPathNormal = thumbDir + 'normal/' + thumbName;
+        const thumbPathLarge = thumbDir + 'large/' + thumbName;
+        if (GLib.file_test(thumbPathNormal, GLib.FileTest.EXISTS)) {
+            return new Gio.FileIcon({ file: Gio.file_new_for_path(thumbPathNormal) });
+        }
+        if (GLib.file_test(thumbPathLarge, GLib.FileTest.EXISTS)) {
+            return new Gio.FileIcon({ file: Gio.file_new_for_path(thumbPathLarge) });
+        }
+    }
+
+    //----No cached thumbnail available so make icon from image.
+    if (isImage && fileSize < 30000000) {//don't read image files > 30MB
+        return new Gio.FileIcon({ file: file });
+    }
+
+    //----No thumbnail
+    return null;
+};
+
+//============================================================
 
 let onlyOneTooltip = null;
-var showTooltip = (actor, xpos, ypos, center_x, text) => {
+const showTooltip = (actor, xpos, ypos, center_x, text) => {
     if (onlyOneTooltip) {
         global.log("Cinnamenu: Previous tooltip still exists...removing...");
         onlyOneTooltip.destroy();
@@ -80,17 +75,16 @@ var showTooltip = (actor, xpos, ypos, center_x, text) => {
     onlyOneTooltip = new NewTooltip (actor, xpos, ypos, center_x, text);
 };
 
-var hideTooltip = () => {
+const hideTooltipIfVisible = () => {
     if (onlyOneTooltip) {
         onlyOneTooltip.destroy();
         onlyOneTooltip = null;
-    } else {
-        global.log("Cinnamenu: Tooltip already removed.");
     }
 };
 
 class NewTooltip {
-    constructor(actor, xpos, ypos, center_x, text) {
+    constructor(actor, xpos, ypos, center_x /*boolean*/, text) {
+        //if center_x then tooltip should be centered on xpos
         this.actor = actor;
         this.xpos = xpos;
         this.ypos = ypos;
@@ -141,32 +135,29 @@ class NewTooltip {
 
 //===================================================
 
-const {latinise} = imports.misc.util;
-
-const searchStr = (q, str, quick = false) => {
-    const HIGHTLIGHT_MATCH = true;
-    if ( !(typeof q === 'string' && q && typeof str === 'string' && str) ) {
+const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => {
+    if (!str) {
         return { score: 0, result: str };
     }
+
+    const HIGHTLIGHT_MATCH = true;
     let foundPosition = 0;
     let foundLength = 0;
-    const str2 = latinise(str.toLowerCase());
-    const qletters = q.replace(/[^a-zA-Z0-9_ ]/g, ''); //latinise(q.toLowerCase()); //already done in doSearch()
-    if (qletters.length == 0){
-        return { score: 0, result: str };
-    }
+    const str2 = graphemeBaseChars(str).toLocaleUpperCase();
+    //q is already graphemeBaseChars() in _doSearch()
     let score = 0, bigrams_score = 0;
-    if (new RegExp('\\b'+qletters).test(str2)) { //match substring from beginning of words
-        foundPosition = str2.indexOf(qletters);
+
+    if (new RegExp('\\b'+escapeRegExp(q)).test(str2)) { //match substring from beginning of words
+        foundPosition = str2.indexOf(q);
         score = (foundPosition === 0) ? 1.21 : 1.2;//slightly higher score if from beginning
-        foundLength = qletters.length;
-    } else if (str2.indexOf(q) !== -1) { //else match substring
+        foundLength = q.length;
+    } else if (!noSubStringSearch && str2.indexOf(q) !== -1) { //else match substring
         score = 1.1;
         foundPosition = str2.indexOf(q);
         foundLength = q.length;
-    } else if (!quick){ //else fuzzy match
-        //find longest substring of str2 made up of letters from qletters
-        const found = str2.match(new RegExp('[' + qletters + ']+','g'));
+    } else if (!noFuzzySearch){ //else fuzzy match
+        //find longest substring of str2 made up of letters from q
+        const found = str2.match(new RegExp('[' + q + ']+','g'));
         let length = 0;
         let longest;
         if (found) {
@@ -179,11 +170,11 @@ const searchStr = (q, str, quick = false) => {
         }
         if (longest) {
             //get a score for similarity by counting 2 letter pairs (bigrams) that match
-            if (qletters.length >= 2) {
-                const max_bigrams = qletters.length -1;
+            if (q.length >= 2) {
+                const max_bigrams = q.length -1;
                 let found_bigrams = 0;
                 for (let qi = 0; qi < max_bigrams; qi++ ) {
-                    if (longest.indexOf(qletters[qi] + qletters[qi + 1]) >= 0) {
+                    if (longest.indexOf(q[qi] + q[qi + 1]) >= 0) {
                         found_bigrams++;
                     }
                 }
@@ -194,10 +185,8 @@ const searchStr = (q, str, quick = false) => {
 
             foundPosition = str2.indexOf(longest);
             foundLength = longest.length;
-            score = Math.min(longest.length / qletters.length, 1.0) * bigrams_score;
-            /*if (score>=0.4){
-                global.log(qletters+">"+longest+" "+score+":"+bigrams_score);
-            }*/
+            //return a fuzzy match score of between 0 and 1.
+            score = Math.min(longest.length / q.length, 1.0) * bigrams_score;
         }
     }
     //return result of match
@@ -205,14 +194,12 @@ const searchStr = (q, str, quick = false) => {
         let markup = str.slice(0, foundPosition) + '<b>' +
                                     str.slice(foundPosition, foundPosition + foundLength) + '</b>' +
                                                     str.slice(foundPosition + foundLength, str.length);
-        if (SEARCH_DEBUG) {
-            markup += ':' + score + ':' + bigrams_score;
-        }
         return {score: score, result: markup};
     } else {
         return {score: score, result: str};
     }
 };
 
-module.exports = {SEARCH_DEBUG, _, APPTYPE, tryFn, readFileAsync, readJSONAsync, wordWrap,
-                                                            showTooltip, hideTooltip, searchStr};
+
+
+module.exports = {_, wordWrap, graphemeBaseChars, getThumbnail_gicon, showTooltip, hideTooltipIfVisible, searchStr};

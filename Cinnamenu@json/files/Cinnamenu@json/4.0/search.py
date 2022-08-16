@@ -40,12 +40,12 @@ class Context(Gtk.Menu):
         self.attach_to_widget(parent, None)
 
         launch = Gtk.MenuItem()
-        launch.set_label(_("Open..."))
+        launch.set_label(_("Open"))
         launch.connect("activate", self.launchItem)
         self.append(launch)
 
         openFolder = Gtk.MenuItem()
-        openFolder.set_label(_("Open Containing Folder..."))
+        openFolder.set_label(_("Open containing folder"))
         openFolder.connect("activate", self.openFolder)
         self.append(openFolder)
 

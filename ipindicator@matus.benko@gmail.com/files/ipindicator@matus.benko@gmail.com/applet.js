@@ -38,35 +38,48 @@ const IpGateway = {
             url: "https://api.ipify.org?format=json",
             parse: function (jsonResponse) {
                 let response = JSON.parse(jsonResponse);
-                return response.ip;
+                return response.ip.trim();
             }
         });
         this._services.push({
-            url: "https://bot.whatismyipaddress.com/",
+            url: "https://api.my-ip.io/ip",
             parse: function (response) {
-                return response;
+                return response.trim();
             }
         });
         this._services.push({
             url: "https://myexternalip.com/json",
             parse: function (jsonResponse) {
                 let response = JSON.parse(jsonResponse);
-                return response.ip;
+                return response.ip.trim();
             }
         });
         this._services.push({
             url: "https://icanhazip.com",
             parse: function (response) {
-                return response;
+                return response.trim();
             }
         });
         this._services.push({
             url: "https://ipinfo.io/json",
             parse: function (jsonResponse) {
                 let response = JSON.parse(jsonResponse);
-                return response.ip;
+                return response.ip.trim();
             }
         });
+        this._services.push({
+            url: "https://ip.seeip.org/",
+            parse: function (response) {
+                return response.ip.trim();
+            }
+        });
+        this._services.push({
+            url: "https://api.myip.com/",
+            parse: function (jsonResponse) {
+                let response = JSON.parse(jsonResponse);
+                return response.ip.trim();
+            }
+        });        
 
         // ISP Service should be only one, because different services return different ISPs
         this._ispServices.push({
@@ -75,13 +88,14 @@ const IpGateway = {
             parse: function (jsonResponse) {
                 let response = JSON.parse(jsonResponse);
                 return {
-                    ip: response.query,
-                    isp: response.isp,
-                    country: response.country,
-                    countryCode: response.countryCode
+                    ip: response.query.trim(),
+                    isp: response.isp.trim(),
+                    country: response.country.trim(),
+                    countryCode: response.countryCode.toLowerCase().trim()
                 };
             }
         });
+
     },
 
     getOnlyIp: function (callback) {
@@ -132,10 +146,10 @@ function IpIndicatorApplet(metadata, orientation, panel_height, instance_id) {
 }
 
 IpIndicatorApplet.prototype = {
-    __proto__: Applet.IconApplet.prototype,
+    __proto__: Applet.TextIconApplet.prototype,
 
     _init: function (metadata, orientation, panel_height, instance_id) {
-        Applet.IconApplet.prototype._init.call(this, orientation, panel_height,
+        Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height,
             instance_id);
         try {
             this.icon_theme = Gtk.IconTheme.get_default();
@@ -222,6 +236,9 @@ IpIndicatorApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN,
             "debug_level", "debuggerLogLevel", this._updateLogLevel, null);
         this._prepareIspsSettings();
+
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+            "appearance", "appearance", this._updateSettings, null);
     },
 
     _updateLogLevel: function () {
@@ -259,8 +276,7 @@ IpIndicatorApplet.prototype = {
 
         this._infoBox = new St.BoxLayout();
         this._infoBox.set_vertical(true);
-        this._infoBox.set_margin_left(22);
-        this._infoBox.set_margin_right(22);
+        this._infoBox.set_style("margin-left: 22px; margin-right: 22px");
 
         this._ip = new St.Label();
         this._infoBox.add(this._ip);
@@ -276,34 +292,34 @@ IpIndicatorApplet.prototype = {
 
     _prepareIspsSettings: function () {
         this.homeIsp = {
-            name: this.homeIspName,
+            name: this.homeIspName.trim(),
             icon: this.homeIspIcon,
-            nickname: this.homeIspNickname
+            nickname: this.homeIspNickname.trim()
         };
         this.other1_isp = {
-            name: this.other1IspName,
+            name: this.other1IspName.trim(),
             icon: this.other1IspIcon,
-            nickname: this.other1IspNickname
+            nickname: this.other1IspNickname.trim()
         };
         this.other2_isp = {
-            name: this.other2IspName,
+            name: this.other2IspName.trim(),
             icon: this.other2IspIcon,
-            nickname: this.other2IspNickname
+            nickname: this.other2IspNickname.trim()
         };
         this.other3_isp = {
-            name: this.other3IspName,
+            name: this.other3IspName.trim(),
             icon: this.other3IspIcon,
-            nickname: this.other3IspNickname
+            nickname: this.other3IspNickname.trim()
         };
         this.other4_isp = {
-            name: this.other4IspName,
+            name: this.other4IspName.trim(),
             icon: this.other4IspIcon,
-            nickname: this.other4IspNickname
+            nickname: this.other4IspNickname.trim()
         };
         this.other5_isp = {
-            name: this.other5IspName,
+            name: this.other5IspName.trim(),
             icon: this.other5IspIcon,
-            nickname: this.other5IspNickname
+            nickname: this.other5IspNickname.trim()
         };
         this.ispsSettings = [this.homeIsp, this.other1_isp, this.other2_isp,
             this.other3_isp, this.other4_isp, this.other5_isp
@@ -320,11 +336,11 @@ IpIndicatorApplet.prototype = {
         this.set_applet_tooltip(defaultTooltip);
         this.set_applet_icon_symbolic_name(noConnectionIcon);
         this.set_applet_icon_name(noConnectionIcon);
+        this.set_applet_label("");
     },
 
     _updateInfo: function (ip, isp, country, countryCode) {
         Debugger.log("Updating info");
-        countryCode = countryCode.toLowerCase();
         Debugger.log("ip = " + ip, 2);
         Debugger.log("isp = " + isp, 2);
         Debugger.log("country = " + country, 2);
@@ -334,7 +350,6 @@ IpIndicatorApplet.prototype = {
         this._ip.set_text(ip);
         this._country.set_text(country);
 
-        let tooltip = ip;
         let ispName = isp;
         let iconName;
         let isIspSettingFound = false;
@@ -342,7 +357,7 @@ IpIndicatorApplet.prototype = {
         Debugger.log("Searching for ISP settings", 2);
         for (let i = 0; i < this.ispsSettings.length; i++) {
             const ispSetting = this.ispsSettings[i];
-            if (isp === ispSetting.name) {
+            if (ispSetting.name != "" && isp.toLowerCase().includes(ispSetting.name.toLowerCase())) {
                 Debugger.log("ISP setting found: " + ispSetting.name, 2);
                 if (ispSetting.icon) {
                     iconName = ispSetting.icon;
@@ -351,7 +366,6 @@ IpIndicatorApplet.prototype = {
                 }
                 Debugger.log("iconName: " + iconName, 2);
                 if (ispSetting.nickname) {
-                    tooltip = ispSetting.nickname;
                     ispName = ispSetting.nickname;
                     Debugger.log("nickname: " + ispSetting.nickname, 2);
                 }
@@ -359,11 +373,30 @@ IpIndicatorApplet.prototype = {
                 break;
             }
         }
-
+        
         if (!isIspSettingFound) {
             iconName = countryCode;
         }
 
+        this.set_applet_label(ip);
+
+        Debugger.log("Appearance is " + this.appearance);
+        if (this.appearance === "icon") {
+            this.hideLabel();
+            this._showIcon(iconName);
+        } else if (this.appearance === "ip") {
+            this.showLabel();
+            this.hide_applet_icon();
+        } else {
+            this.showLabel();
+            this._showIcon(iconName);
+        }
+
+        this.set_applet_tooltip(ip);
+        this._isp.set_text(ispName);
+    },
+
+    _showIcon: function (iconName) {
         const icon_file = Gio.File.new_for_path(iconName);
         if (icon_file.query_exists(null)) {
             this.set_applet_icon_path(iconName);
@@ -371,9 +404,6 @@ IpIndicatorApplet.prototype = {
             this.set_applet_icon_symbolic_name(iconName);
             this.set_applet_icon_name(iconName);
         }
-
-        this.set_applet_tooltip(tooltip);
-        this._isp.set_text(ispName);
     },
 
     _isPublicIpChanged: function (actionIfYes) {
@@ -411,10 +441,6 @@ IpIndicatorApplet.prototype = {
         Debugger.log("Executing " + this._getNetworkInterfacesPath, 2);
         let output = GLib.spawn_command_line_sync(this._getNetworkInterfacesPath);
         let interfaces = output[1].toString().split("\n");
-        //remove Iface column header
-        interfaces.splice(0, 1);
-        //remove last empty element
-        interfaces.splice(-1, 1);
         return interfaces;
     },
 

@@ -22,6 +22,7 @@ const UPowerGlib = imports.gi.UPowerGlib;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const CinnamonDesktop = imports.gi.CinnamonDesktop;
 
 let DEFAULT_FORMAT = _("%l:%M %p %Z");
 
@@ -55,6 +56,8 @@ MyApplet.prototype = {
 
             this._initRightClickMenu();
 
+            this.clock = new CinnamonDesktop.WallClock();
+
             // Track changes to clock settings
             this._dateFormat = DEFAULT_FORMAT;
 
@@ -66,6 +69,8 @@ MyApplet.prototype = {
             this.settings.bindProperty(Settings.BindingDirection.IN, "custom-format", "custom_format", this.on_settings_changed, null);
             // this.settings.bindProperty(Settings.BindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
 
+            this.clock_notify_id = 0;
+
             // https://bugzilla.gnome.org/show_bug.cgi?id=655129
             this._upClient = new UPowerGlib.Client();
             try {
@@ -74,9 +79,8 @@ MyApplet.prototype = {
                 this._upClient.connect("notify::resume", this._updateClockAndDate);
             }
 
-            // Start the clock
+            // Update the clock config
             this.on_settings_changed();
-            this._updateClockAndDatePeriodic();
         }
         catch (e) {
             global.logError(e);
@@ -90,11 +94,16 @@ MyApplet.prototype = {
         this.on_applet_clicked;
     },
 
+    _clockNotify(obj, pspec, data) {
+        this._updateClockAndDate();
+    },
+
     on_applet_clicked: function() {
         // this.menu.toggle();
     },
 
     on_settings_changed: function() {
+        this.timezone = GLib.TimeZone.new(this.displayed_timezone);
         this._updateFormatString();
         this._updateClockAndDate();
     },
@@ -143,8 +152,7 @@ MyApplet.prototype = {
 
     _updateClockAndDate: function() {
         try {
-            let timezone = GLib.TimeZone.new(this.displayed_timezone);
-            let displayDate = this._get_world_time(GLib.DateTime.new_now_local(), timezone);
+            let displayDate = this._get_world_time(GLib.DateTime.new_now_local(), this.timezone);
             let label_string = displayDate;
 
             if (!displayDate) {
@@ -166,14 +174,18 @@ MyApplet.prototype = {
         }
     },
 
-    _updateClockAndDatePeriodic: function() {
-        this._updateClockAndDate();
-        this._periodicTimeoutId = Mainloop.timeout_add_seconds(1, Lang.bind(this, this._updateClockAndDatePeriodic));
+    on_applet_added_to_panel: function() {
+        this.on_settings_changed();
+
+        if (this.clock_notify_id == 0) {
+            this.clock_notify_id = this.clock.connect("notify::clock", () => this._clockNotify());
+        }
     },
 
     on_applet_removed_from_panel: function() {
-        if (this._periodicTimeoutId){
-            Mainloop.source_remove(this._periodicTimeoutId);
+        if (this.clock_notify_id > 0) {
+            this.clock.disconnect(this.clock_notify_id);
+            this.clock_notify_id = 0;
         }
     },
 
