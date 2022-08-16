@@ -1,7 +1,11 @@
 //
+imports.gi.versions.Soup = "2"
 const Soup = imports.gi.Soup;
-const _httpSession = new Soup.SessionAsync();
-Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+let _httpSession;
+if (Soup.MAJOR_VERSION == 2) {
+    _httpSession = new Soup.SessionAsync();
+    Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+}
 
 var last_search;
 
@@ -19,6 +23,10 @@ function searchSuggestions(pattern, callback) {
             global.logWarning('Error retrieving address ' + url + '. Status: ' +
                                         resultPages.status_code + ': ' + resultPages.reason_phrase);
         }
+    }
+
+    if (Soup.MAJOR_VERSION !== 2) {
+        return;
     }
 
     try {
