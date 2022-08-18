@@ -11,7 +11,7 @@
   "author": "Jonathan Heard",
   "license": "MIT",
   "devDependencies": {
-    "@ci-types/cjs": "^1.0.17",
+    "@ci-types/cjs": "^5.4.2",
     "@types/jest": "^27.0.1",
     "@types/lodash": "^4.14.170",
     "@types/lodash-es": "^4.17.5",
