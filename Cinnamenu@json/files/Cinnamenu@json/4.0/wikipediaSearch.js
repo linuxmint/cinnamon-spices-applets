@@ -2,9 +2,13 @@
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Util = imports.misc.util;
+imports.gi.versions.Soup = "2"
 const Soup = imports.gi.Soup;
-const _httpSession = new Soup.SessionAsync();
-Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+let _httpSession;
+if (Soup.MAJOR_VERSION == 2) {
+    _httpSession = new Soup.SessionAsync();
+    Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+}
 
 let last_search;
 
@@ -92,6 +96,10 @@ function wikiSearch(pattern, langCode, callback) {
         } catch(e) {
             global.logError(e);
         }
+    }
+
+    if (Soup.MAJOR_VERSION !== 2) {
+        return;
     }
 
     try {
