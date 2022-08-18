@@ -111,7 +111,7 @@ MyApplet.prototype = {
             this.onUpdateStyle();
 
             this.onPanelEditModeChanged();
-            global.settings.connect('changed::panel-edit-mode', onPanelEditModeChanged);
+            global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.onPanelEditModeChanged));
         }
         catch (e) {
             global.logError("workspace-grid@hernejj Main Applet Exception: " + e.toString());
