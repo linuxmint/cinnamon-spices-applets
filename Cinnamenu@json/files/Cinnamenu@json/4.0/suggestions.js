@@ -1,5 +1,4 @@
 //
-imports.gi.versions.Soup = "2"
 const Soup = imports.gi.Soup;
 let _httpSession;
 if (Soup.MAJOR_VERSION == 2) {

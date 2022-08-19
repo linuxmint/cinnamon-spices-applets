@@ -2,7 +2,6 @@
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Util = imports.misc.util;
-imports.gi.versions.Soup = "2"
 const Soup = imports.gi.Soup;
 let _httpSession;
 if (Soup.MAJOR_VERSION == 2) {
