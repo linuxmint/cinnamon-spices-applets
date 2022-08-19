@@ -25,7 +25,7 @@ function searchSuggestions(pattern, callback) {
         }
     }
 
-    if (Soup.MAJOR_VERSION !== 2) {
+    if (Soup.MAJOR_VERSION !== 2.4) {
         return;
     }
 
