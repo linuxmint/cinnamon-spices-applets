@@ -14106,6 +14106,12 @@ class DeutscherWetterdienst extends BaseProvider {
 
 
 
+const unitTypeMap = {
+    "us": "e",
+    "lr": "e",
+    "mm": "e",
+    "gb": "h",
+};
 class WeatherUnderground extends BaseProvider {
     constructor() {
         super(...arguments);
@@ -14119,7 +14125,7 @@ class WeatherUnderground extends BaseProvider {
         this.baseURl = "https://api.weather.com/";
         this.locationCache = {};
         this.GetWeather = async (loc) => {
-            var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
             const locString = `${loc.lat},${loc.lon}`;
             const location = (_a = this.locationCache[locString]) !== null && _a !== void 0 ? _a : (await this.GetNearbyStations(loc));
             if (location == null) {
@@ -14131,12 +14137,11 @@ class WeatherUnderground extends BaseProvider {
                 language: (_b = this.app.config.currentLocale) !== null && _b !== void 0 ? _b : "en-US",
                 format: "json",
                 apiKey: this.app.config.ApiKey,
-                units: "s",
+                units: this.currentUnit,
             });
             if (forecast == null)
                 return null;
             const observation = await this.GetObservations(location, forecast, loc);
-            global.log(observation);
             return {
                 date: (_c = observation.date) !== null && _c !== void 0 ? _c : DateTime.fromISO(forecast.validTimeLocal[0]).setZone(loc.timeZone),
                 temperature: (_d = observation.temperature) !== null && _d !== void 0 ? _d : null,
@@ -14145,18 +14150,18 @@ class WeatherUnderground extends BaseProvider {
                     lon: loc.lon,
                 },
                 location: {},
-                condition: {
+                condition: (_e = observation.condition) !== null && _e !== void 0 ? _e : {
+                    description: "unknown",
                     customIcon: "alien-symbolic",
-                    description: "Unknown",
                     icons: [],
-                    main: "Unknown",
+                    main: "Unknown"
                 },
-                dewPoint: (_e = observation.dewPoint) !== null && _e !== void 0 ? _e : null,
-                humidity: (_f = observation.humidity) !== null && _f !== void 0 ? _f : null,
-                pressure: (_g = observation.pressure) !== null && _g !== void 0 ? _g : null,
+                dewPoint: (_f = observation.dewPoint) !== null && _f !== void 0 ? _f : null,
+                humidity: (_g = observation.humidity) !== null && _g !== void 0 ? _g : null,
+                pressure: (_h = observation.pressure) !== null && _h !== void 0 ? _h : null,
                 wind: {
-                    speed: (_h = observation.wind.speed) !== null && _h !== void 0 ? _h : null,
-                    degree: (_j = observation.wind.degree) !== null && _j !== void 0 ? _j : null,
+                    speed: (_j = observation.wind.speed) !== null && _j !== void 0 ? _j : null,
+                    degree: (_k = observation.wind.degree) !== null && _k !== void 0 ? _k : null,
                 },
                 sunrise: null,
                 sunset: null,
@@ -14173,7 +14178,7 @@ class WeatherUnderground extends BaseProvider {
                 format: "json",
                 apiKey: this.app.config.ApiKey,
                 product: "observation"
-            });
+            }, this.HandleErrors);
             if (payload == null)
                 return null;
             for (let i = 0; i < payload.location.stationId.length; i++) {
@@ -14207,8 +14212,8 @@ class WeatherUnderground extends BaseProvider {
                 const station = stations.find(v => v.stationId == observations.stationID);
                 if (result.date == null && observations.obsTimeUtc != null)
                     result.date = DateTime.fromISO(observations.obsTimeUtc).setZone(tz);
-                if (result.temperature == null)
-                    result.temperature = observations.metric_si.temp;
+                if (result.temperature == null && observations.metric_si.temp)
+                    result.temperature = CelsiusToKelvin(observations.metric_si.temp);
                 if (result.pressure == null)
                     result.pressure = observations.metric_si.pressure;
                 if (result.humidity == null)
@@ -14218,7 +14223,7 @@ class WeatherUnderground extends BaseProvider {
                 if (result.wind.degree == null)
                     result.wind.degree = observations.winddir;
                 if (result.dewPoint == null)
-                    result.dewPoint = observations.metric_si.dewpt;
+                    result.dewPoint = CelsiusToKelvin(observations.metric_si.dewpt);
                 if (result.stationInfo == null) {
                     result.stationInfo = {
                         name: station.stationName,
@@ -14229,6 +14234,22 @@ class WeatherUnderground extends BaseProvider {
                 }
                 if (result.immediatePrecipitation == null) {
                 }
+            }
+            const dayPartIndex = forecast.daypart[0].daypartName.findIndex(v => v != null);
+            if (result.date == null)
+                result.date = DateTime.now().setZone(tz);
+            if (result.temperature == null)
+                result.temperature = this.ToKelvin(forecast.daypart[0].temperature[dayPartIndex]);
+            if (result.humidity == null)
+                result.humidity = forecast.daypart[0].relativeHumidity[dayPartIndex];
+            if (result.wind.speed == null)
+                result.wind.speed = forecast.daypart[0].windSpeed[dayPartIndex];
+            if (result.wind.degree == null)
+                result.wind.degree = forecast.daypart[0].windDirection[dayPartIndex];
+            if (result.condition == null) {
+                const icon = forecast.daypart[0].iconCode[dayPartIndex];
+                if (icon != null)
+                    result.condition = this.IconToCondition(icon);
             }
             return result;
         };
@@ -14259,29 +14280,370 @@ class WeatherUnderground extends BaseProvider {
                         detail: "bad key",
                         message: _("The API key you provided is invalid.")
                     });
-                    return true;
+                    return false;
                 case 404:
                     this.app.ShowError({
                         type: "hard",
                         detail: "location not found",
                         message: _("The location you provided was not found.")
                     });
-                    return true;
-                case 204:
-                    return true;
-                default:
                     return false;
+                case 204:
+                    return false;
+                default:
+                    return true;
+            }
+        };
+        this.IconToCondition = (icon) => {
+            switch (icon) {
+                case 0:
+                    return {
+                        customIcon: "tornado-symbolic",
+                        icons: ["weather-tornado"],
+                        main: _("Tornado"),
+                        description: _("Tornado"),
+                    };
+                case 1:
+                    return {
+                        customIcon: "tornado-symbolic",
+                        icons: ["weather-tornado"],
+                        main: _("Tropical Storm"),
+                        description: _("Tropical Storm"),
+                    };
+                case 2:
+                    return {
+                        customIcon: "tornado-symbolic",
+                        icons: ["weather-tornado"],
+                        main: _("Hurricane"),
+                        description: _("Hurricane"),
+                    };
+                case 3:
+                    return {
+                        customIcon: "storm-warning-symbolic",
+                        icons: ["weather-storm", "weather-freezing-rain"],
+                        main: _("Strong Storm"),
+                        description: _("Strong Storm"),
+                    };
+                case 4:
+                    return {
+                        customIcon: "storm-showers-symbolic",
+                        icons: ["weather-storm", "weather-freezing-rain"],
+                        main: _("Thunderstorms"),
+                        description: _("Thunderstorms"),
+                    };
+                case 5:
+                case 7:
+                    return {
+                        customIcon: "rain-mix-symbolic",
+                        icons: ["weather-freezing-rain"],
+                        main: _("Rain and Snow"),
+                        description: _("Rain and Snow"),
+                    };
+                case 6:
+                    return {
+                        customIcon: "rain-mix-symbolic",
+                        icons: ["weather-freezing-rain"],
+                        main: _("Rain and Sleet"),
+                        description: _("Rain and Sleet"),
+                    };
+                case 8:
+                    return {
+                        customIcon: "rain-mix-symbolic",
+                        icons: ["weather-freezing-rain", "weather-rain"],
+                        main: _("Freezing Drizzle"),
+                        description: _("Freezing Drizzle"),
+                    };
+                case 9:
+                    return {
+                        customIcon: "rain-mix-symbolic",
+                        icons: ["weather-rain", "weather-freezing-rain"],
+                        main: _("Drizzle"),
+                        description: _("Drizzle"),
+                    };
+                case 10:
+                    return {
+                        customIcon: "rain-symbolic",
+                        icons: ["weather-freezing-rain", "weather-rain"],
+                        main: _("Freezing Rain"),
+                        description: _("Freezing Rain"),
+                    };
+                case 11:
+                    return {
+                        customIcon: "showers-symbolic",
+                        icons: ["weather-rain", "weather-freezing-rain"],
+                        main: _("Showers"),
+                        description: _("Showers"),
+                    };
+                case 12:
+                    return {
+                        customIcon: "rain-symbolic",
+                        icons: ["weather-rain", "weather-freezing-rain"],
+                        main: _("Rain"),
+                        description: _("Rain"),
+                    };
+                case 13:
+                    return {
+                        customIcon: "snow-symbolic",
+                        icons: ["weather-snow"],
+                        main: _("Flurries"),
+                        description: _("Flurries"),
+                    };
+                case 14:
+                    return {
+                        customIcon: "snow-symbolic",
+                        icons: ["weather-snow"],
+                        main: _("Snow Showers"),
+                        description: _("Snow Showers"),
+                    };
+                case 15:
+                    return {
+                        customIcon: "snow-wind-symbolic",
+                        icons: ["weather-snow"],
+                        main: _("Blowing Snow"),
+                        description: _("Blowing Snow"),
+                    };
+                case 16:
+                    return {
+                        customIcon: "snow-symbolic",
+                        icons: ["weather-snow"],
+                        main: _("Snow"),
+                        description: _("Snow"),
+                    };
+                case 17:
+                    return {
+                        customIcon: "hail-symbolic",
+                        icons: ["weather-hail", "weather-snow"],
+                        main: _("Hail"),
+                        description: _("Hail"),
+                    };
+                case 18:
+                    return {
+                        customIcon: "sleet-symbolic",
+                        icons: ["weather-hail", "weather-snow"],
+                        main: _("Sleet"),
+                        description: _("Sleet"),
+                    };
+                case 19:
+                    return {
+                        customIcon: "dust-symbolic",
+                        icons: ["weather-fog"],
+                        main: _("Dust"),
+                        description: _("Dust"),
+                    };
+                case 20:
+                    return {
+                        customIcon: "fog-symbolic",
+                        icons: ["weather-fog"],
+                        main: _("Fog"),
+                        description: _("Fog"),
+                    };
+                case 21:
+                    return {
+                        customIcon: "fog-symbolic",
+                        icons: ["weather-fog"],
+                        main: _("Haze"),
+                        description: _("Haze"),
+                    };
+                case 22:
+                    return {
+                        customIcon: "fog-symbolic",
+                        icons: ["weather-fog"],
+                        main: _("Smoke"),
+                        description: _("Smoke"),
+                    };
+                case 23:
+                    return {
+                        customIcon: "windy-symbolic",
+                        icons: ["weather-windy"],
+                        main: _("Breezy"),
+                        description: _("Breezy"),
+                    };
+                case 24:
+                    return {
+                        customIcon: "windy-symbolic",
+                        icons: ["weather-windy"],
+                        main: _("Windy"),
+                        description: _("Windy"),
+                    };
+                case 25:
+                    return {
+                        customIcon: "windy-symbolic",
+                        icons: ["weather-windy"],
+                        main: _("Frigid"),
+                        description: _("Frigid"),
+                    };
+                case 26:
+                    return {
+                        customIcon: "cloudy-symbolic",
+                        icons: ["weather-overcast"],
+                        main: _("Cloudy"),
+                        description: _("Cloudy"),
+                    };
+                case 27:
+                    return {
+                        customIcon: "night-alt-cloudy-symbolic",
+                        icons: ["weather-clouds-night", "weather-few-clouds-night"],
+                        main: _("Mostly Cloudy"),
+                        description: _("Mostly Cloudy"),
+                    };
+                case 28:
+                    return {
+                        customIcon: "day-cloudy-symbolic",
+                        icons: ["weather-clouds", "weather-few-clouds"],
+                        main: _("Mostly Cloudy"),
+                        description: _("Mostly Cloudy"),
+                    };
+                case 29:
+                    return {
+                        customIcon: "night-alt-cloudy-symbolic",
+                        icons: ["weather-few-clouds-night"],
+                        main: _("Partly Cloudy"),
+                        description: _("Partly Cloudy"),
+                    };
+                case 30:
+                    return {
+                        customIcon: "day-cloudy-symbolic",
+                        icons: ["weather-few-clouds"],
+                        main: _("Partly Cloudy"),
+                        description: _("Partly Cloudy"),
+                    };
+                case 31:
+                    return {
+                        customIcon: "night-clear-symbolic",
+                        icons: ["weather-clear-night"],
+                        main: _("Clear"),
+                        description: _("Clear"),
+                    };
+                case 32:
+                    return {
+                        customIcon: "day-sunny-symbolic",
+                        icons: ["weather-clear"],
+                        main: _("Sunny"),
+                        description: _("Sunny"),
+                    };
+                case 33:
+                    return {
+                        customIcon: "night-alt-cloudy-symbolic",
+                        icons: ["weather-few-clouds-night"],
+                        main: _("Mostly Clear"),
+                        description: _("Mostly Clear"),
+                    };
+                case 34:
+                    return {
+                        customIcon: "day-cloudy-symbolic",
+                        icons: ["weather-few-clouds"],
+                        main: _("Mostly Sunny"),
+                        description: _("Mostly Sunny"),
+                    };
+                case 35:
+                    return {
+                        customIcon: "day-rain-mix-symbolic",
+                        icons: ["weather-freezing-rain"],
+                        main: _("Mixed Rain and Hail"),
+                        description: _("Mixed Rain and Hail"),
+                    };
+                case 36:
+                    return {
+                        customIcon: "day-sunny-symbolic",
+                        icons: ["weather-clear"],
+                        main: _("Hot"),
+                        description: _("Hot"),
+                    };
+                case 37:
+                    return {
+                        customIcon: "day-thunderstorm-symbolic",
+                        icons: ["weather-storm"],
+                        main: _("Isolated Thunderstorms"),
+                        description: _("Isolated Thunderstorms"),
+                    };
+                case 38:
+                    return {
+                        customIcon: "day-thunderstorm-symbolic",
+                        icons: ["weather-storm"],
+                        main: _("Scattered Thunderstorms"),
+                        description: _("Scattered Thunderstorms"),
+                    };
+                case 39:
+                    return {
+                        customIcon: "day-showers-symbolic",
+                        icons: ["weather-showers-scattered", "weather-showers-scattered-day", "weather-rain", "weather-freezing-rain"],
+                        main: _("Scattered Showers"),
+                        description: _("Scattered Showers"),
+                    };
+                case 40:
+                    return {
+                        customIcon: "rain-symbolic",
+                        icons: ["weather-rain", "weather-freezing-rain"],
+                        main: _("Heavy Rain"),
+                        description: _("Heavy Rain"),
+                    };
+                case 41:
+                    return {
+                        customIcon: "day-snow-symbolic",
+                        icons: ["weather-snow-scattered-day", "weather-snow-scattered", "weather-snow-day", "weather-snow"],
+                        main: _("Scattered Snow Showers"),
+                        description: _("Scattered Snow Showers"),
+                    };
+                case 42:
+                    return {
+                        customIcon: "snow-symbolic",
+                        icons: ["weather-snow"],
+                        main: _("Heavy Snow"),
+                        description: _("Heavy Snow"),
+                    };
+                case 43:
+                    return {
+                        customIcon: "snow-symbolic",
+                        icons: ["weather-snow"],
+                        main: _("Blizzard"),
+                        description: _("Blizzard"),
+                    };
+                case 45:
+                    return {
+                        customIcon: "night-alt-showers-symbolic",
+                        icons: ["weather-showers-scattered-night", "weather-rain", "weather-freezing-rain"],
+                        main: _("Scattered Showers"),
+                        description: _("Scattered Showers"),
+                    };
+                case 46:
+                    return {
+                        customIcon: "night-alt-snow-symbolic",
+                        icons: ["weather-snow-scattered-night", "weather-snow-scattered", "weather-snow"],
+                        main: _("Scattered Snow Showers"),
+                        description: _("Scattered Snow Showers"),
+                    };
+                case 47:
+                    return {
+                        customIcon: "night-alt-thunderstorm-symbolic",
+                        icons: ["weather-storm"],
+                        main: _("Scattered Thunderstorms"),
+                        description: _("Scattered Thunderstorms"),
+                    };
+                default:
+                    return {
+                        customIcon: "cloud-refresh-symbolic",
+                        description: _("Unknown"),
+                        icons: [],
+                        main: _("Unknown"),
+                    };
+            }
+        };
+        this.ToKelvin = (c) => {
+            switch (this.currentUnit) {
+                case "e":
+                    return FahrenheitToKelvin(c);
+                case "m":
+                case "h":
+                    return CelsiusToKelvin(c);
             }
         };
     }
-    GetLocation(loc) {
+    get currentUnit() {
         var _a;
-        return this.app.LoadJsonAsync(`${this.baseURl}v3/location/point`, {
-            geocode: `${loc.lat},${loc.lon}`,
-            language: (_a = this.app.config.currentLocale) !== null && _a !== void 0 ? _a : "en-US",
-            format: "json",
-            apiKey: this.app.config.ApiKey,
-        });
+        if (this.app.config.countryCode == null)
+            return "m";
+        else
+            return (_a = unitTypeMap[this.app.config.countryCode.toLowerCase()]) !== null && _a !== void 0 ? _a : "m";
     }
 }
 
