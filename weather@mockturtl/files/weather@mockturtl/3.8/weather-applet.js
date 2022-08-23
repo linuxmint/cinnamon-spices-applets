@@ -14106,6 +14106,7 @@ class DeutscherWetterdienst extends BaseProvider {
 
 
 
+
 const unitTypeMap = {
     "us": "e",
     "lr": "e",
@@ -14125,7 +14126,7 @@ class WeatherUnderground extends BaseProvider {
         this.baseURl = "https://api.weather.com/";
         this.locationCache = {};
         this.GetWeather = async (loc) => {
-            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j;
             const locString = `${loc.lat},${loc.lon}`;
             const location = (_a = this.locationCache[locString]) !== null && _a !== void 0 ? _a : (await this.GetNearbyStations(loc));
             if (location == null) {
@@ -14143,30 +14144,30 @@ class WeatherUnderground extends BaseProvider {
                 return null;
             const observation = await this.GetObservations(location, forecast, loc);
             return {
-                date: (_c = observation.date) !== null && _c !== void 0 ? _c : DateTime.fromISO(forecast.validTimeLocal[0]).setZone(loc.timeZone),
-                temperature: (_d = observation.temperature) !== null && _d !== void 0 ? _d : null,
+                date: observation.date,
+                temperature: (_c = observation.temperature) !== null && _c !== void 0 ? _c : null,
                 coord: {
                     lat: loc.lat,
                     lon: loc.lon,
                 },
                 location: {},
-                condition: (_e = observation.condition) !== null && _e !== void 0 ? _e : {
+                condition: (_d = observation.condition) !== null && _d !== void 0 ? _d : {
                     description: "unknown",
                     customIcon: "alien-symbolic",
                     icons: [],
                     main: "Unknown"
                 },
-                dewPoint: (_f = observation.dewPoint) !== null && _f !== void 0 ? _f : null,
-                humidity: (_g = observation.humidity) !== null && _g !== void 0 ? _g : null,
-                pressure: (_h = observation.pressure) !== null && _h !== void 0 ? _h : null,
+                dewPoint: (_e = observation.dewPoint) !== null && _e !== void 0 ? _e : null,
+                humidity: (_f = observation.humidity) !== null && _f !== void 0 ? _f : null,
+                pressure: (_g = observation.pressure) !== null && _g !== void 0 ? _g : null,
                 wind: {
-                    speed: (_j = observation.wind.speed) !== null && _j !== void 0 ? _j : null,
-                    degree: (_k = observation.wind.degree) !== null && _k !== void 0 ? _k : null,
+                    speed: (_h = observation.wind.speed) !== null && _h !== void 0 ? _h : null,
+                    degree: (_j = observation.wind.degree) !== null && _j !== void 0 ? _j : null,
                 },
-                sunrise: null,
-                sunset: null,
+                sunrise: observation.sunrise,
+                sunset: observation.sunset,
                 stationInfo: observation.stationInfo,
-                forecasts: [],
+                forecasts: this.ParseForecasts(loc, forecast),
                 hourlyForecasts: [],
             };
         };
@@ -14200,14 +14201,17 @@ class WeatherUnderground extends BaseProvider {
         };
         this.GetObservations = async (stations, forecast, loc) => {
             var _a, _b;
+            const observationData = (await Promise.all(stations.map(v => this.GetObservation(v.stationId)))).filter(v => v != null);
+            const tz = (_b = (_a = stations.find(v => v.ianaTimeZone != null)) === null || _a === void 0 ? void 0 : _a.ianaTimeZone) !== null && _b !== void 0 ? _b : loc.timeZone;
             const result = {
                 wind: {
                     speed: null,
                     degree: null,
-                }
+                },
+                sunrise: null,
+                sunset: null,
+                date: null
             };
-            const observationData = (await Promise.all(stations.map(v => this.GetObservation(v.stationId)))).filter(v => v != null);
-            const tz = (_b = (_a = stations.find(v => v.ianaTimeZone != null)) === null || _a === void 0 ? void 0 : _a.ianaTimeZone) !== null && _b !== void 0 ? _b : loc.timeZone;
             for (const observations of observationData) {
                 const station = stations.find(v => v.stationId == observations.stationID);
                 if (result.date == null && observations.obsTimeUtc != null)
@@ -14251,6 +14255,9 @@ class WeatherUnderground extends BaseProvider {
                 if (icon != null)
                     result.condition = this.IconToCondition(icon);
             }
+            const times = (0,suncalc.getTimes)(result.date.toJSDate(), loc.lat, loc.lon);
+            result.sunrise = DateTime.fromJSDate(times.sunrise).setZone(tz);
+            result.sunset = DateTime.fromJSDate(times.sunset).setZone(tz);
             return result;
         };
         this.GetObservation = async (stationID) => {
@@ -14274,6 +14281,8 @@ class WeatherUnderground extends BaseProvider {
         };
         this.HandleErrors = (message) => {
             switch (message.ErrorData.code) {
+                case 7:
+                    return false;
                 case 401:
                     this.app.ShowError({
                         type: "hard",
@@ -14335,49 +14344,49 @@ class WeatherUnderground extends BaseProvider {
                 case 7:
                     return {
                         customIcon: "rain-mix-symbolic",
-                        icons: ["weather-freezing-rain"],
+                        icons: ["weather-freezing-rain", "weather-showers-scattered",],
                         main: _("Rain and Snow"),
                         description: _("Rain and Snow"),
                     };
                 case 6:
                     return {
                         customIcon: "rain-mix-symbolic",
-                        icons: ["weather-freezing-rain"],
+                        icons: ["weather-freezing-rain", "weather-showers-scattered",],
                         main: _("Rain and Sleet"),
                         description: _("Rain and Sleet"),
                     };
                 case 8:
                     return {
                         customIcon: "rain-mix-symbolic",
-                        icons: ["weather-freezing-rain", "weather-rain"],
+                        icons: ["weather-showers-scattered", "weather-freezing-rain", "weather-rain"],
                         main: _("Freezing Drizzle"),
                         description: _("Freezing Drizzle"),
                     };
                 case 9:
                     return {
                         customIcon: "rain-mix-symbolic",
-                        icons: ["weather-rain", "weather-freezing-rain"],
+                        icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"],
                         main: _("Drizzle"),
                         description: _("Drizzle"),
                     };
                 case 10:
                     return {
                         customIcon: "rain-symbolic",
-                        icons: ["weather-freezing-rain", "weather-rain"],
+                        icons: ["weather-freezing-rain", "weather-rain", "weather-showers"],
                         main: _("Freezing Rain"),
                         description: _("Freezing Rain"),
                     };
                 case 11:
                     return {
                         customIcon: "showers-symbolic",
-                        icons: ["weather-rain", "weather-freezing-rain"],
+                        icons: ["weather-showers", "weather-rain", "weather-freezing-rain",],
                         main: _("Showers"),
                         description: _("Showers"),
                     };
                 case 12:
                     return {
                         customIcon: "rain-symbolic",
-                        icons: ["weather-rain", "weather-freezing-rain"],
+                        icons: ["weather-rain", "weather-freezing-rain", "weather-showers"],
                         main: _("Rain"),
                         description: _("Rain"),
                     };
@@ -14644,6 +14653,20 @@ class WeatherUnderground extends BaseProvider {
             return "m";
         else
             return (_a = unitTypeMap[this.app.config.countryCode.toLowerCase()]) !== null && _a !== void 0 ? _a : "m";
+    }
+    ParseForecasts(loc, forecast) {
+        var _a;
+        const result = [];
+        for (let index = 0; index < forecast.dayOfWeek.length; index++) {
+            const icons = [forecast.daypart[0].iconCode[index * 2], forecast.daypart[0].iconCode[index * 2 + 1]];
+            result.push({
+                date: DateTime.fromSeconds(forecast.validTimeUtc[index]).setZone(loc.timeZone),
+                condition: this.IconToCondition((_a = icons[0]) !== null && _a !== void 0 ? _a : icons[1]),
+                temp_max: forecast.temperatureMax[index] == null ? null : this.ToKelvin(forecast.temperatureMax[index]),
+                temp_min: forecast.temperatureMin[index] == null ? null : this.ToKelvin(forecast.temperatureMin[index]),
+            });
+        }
+        return result;
     }
 }
 

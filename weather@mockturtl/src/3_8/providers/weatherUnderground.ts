@@ -1,8 +1,9 @@
 import { DateTime } from "luxon";
+import { getTimes } from "suncalc";
 import { Services } from "../config";
 import { ErrorResponse, HttpError } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
-import { Condition, LocationData, WeatherData } from "../types";
+import { Condition, ForecastData, LocationData, WeatherData } from "../types";
 import { CelsiusToKelvin, FahrenheitToKelvin, GetDistance, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 
@@ -59,7 +60,7 @@ export class WeatherUnderground extends BaseProvider {
         const observation = await this.GetObservations(location, forecast, loc);
 
         return {
-            date: observation.date ?? DateTime.fromISO(forecast.validTimeLocal[0]).setZone(loc.timeZone),
+            date: observation.date!,
             temperature: observation.temperature ?? null,
             coord: {
                 lat: loc.lat,
@@ -81,22 +82,27 @@ export class WeatherUnderground extends BaseProvider {
                 speed: observation.wind.speed ?? null,
                 degree: observation.wind.degree ?? null,
             },
-            sunrise: null,
-            sunset: null,
+            sunrise: observation.sunrise,
+            sunset: observation.sunset,
             stationInfo: observation.stationInfo,
-            forecasts: [],
+            forecasts: this.ParseForecasts(loc, forecast),
             hourlyForecasts: [],
         };
     }
 
-    // private GetLocation(loc: LocationData): Promise<LocationPayload | null> {
-    //     return this.app.LoadJsonAsync<LocationPayload>(`${this.baseURl}v3/location/point`,  {
-    //         geocode: `${loc.lat},${loc.lon}`,
-    //         language: this.app.config.currentLocale ?? "en-US",
-    //         format: "json",
-    //         apiKey: this.app.config.ApiKey,
-    //     });
-    // }
+    private ParseForecasts(loc: LocationData, forecast: ForecastPayload): ForecastData[] {
+        const result: ForecastData[] = [];
+        for (let index = 0; index < forecast.dayOfWeek.length; index++) {
+            const icons = [ forecast.daypart[0].iconCode[index * 2],  forecast.daypart[0].iconCode[index * 2 + 1]];
+            result.push({
+                date: DateTime.fromSeconds(forecast.validTimeUtc[index]).setZone(loc.timeZone),
+                condition: this.IconToCondition(icons[0] ?? icons[1]!),
+                temp_max: forecast.temperatureMax[index] == null ? null : this.ToKelvin(forecast.temperatureMax[index]!),
+                temp_min: forecast.temperatureMin[index] == null ? null : this.ToKelvin(forecast.temperatureMin[index]),
+            })
+        }
+        return result;
+    }
 
     private GetNearbyStations = async (loc: LocationData): Promise<NearbyStation[] | null> => {
         const result: NearbyStation[] = [];
@@ -132,16 +138,18 @@ export class WeatherUnderground extends BaseProvider {
     }
 
     private GetObservations = async (stations: NearbyStation[], forecast: ForecastPayload, loc: LocationData): Promise<ObservationData> => {
+        const observationData: ObservationPayload[] = (await Promise.all(stations.map(v => this.GetObservation(v.stationId)))).filter(v => v != null) as ObservationPayload[];
+        const tz = stations.find(v => v.ianaTimeZone != null)?.ianaTimeZone ?? loc.timeZone;
+        
         const result: ObservationData = {
             wind: {
                 speed: null,
                 degree: null,
-            }
+            },
+            sunrise: null,
+            sunset: null,
+            date: null as any
         };
-        
-        const observationData: ObservationPayload[] = (await Promise.all(stations.map(v => this.GetObservation(v.stationId)))).filter(v => v != null) as ObservationPayload[];
-
-        const tz = stations.find(v => v.ianaTimeZone != null)?.ianaTimeZone ?? loc.timeZone;
 
         for (const observations of observationData) {
             const station = stations.find(v => v.stationId == observations.stationID)!;
@@ -195,6 +203,11 @@ export class WeatherUnderground extends BaseProvider {
         }
         // if (result.dewPoint == null)
         //     result.dewPoint = forecast.daypart.wxPhraseLong;
+
+        const times = getTimes(result.date.toJSDate(), loc.lat, loc.lon);
+        result.sunrise = DateTime.fromJSDate(times.sunrise).setZone(tz);
+        result.sunset = DateTime.fromJSDate(times.sunset).setZone(tz);
+
         return result;
     }
 
@@ -222,6 +235,8 @@ export class WeatherUnderground extends BaseProvider {
 
     private HandleErrors = (message: ErrorResponse): boolean => {
         switch(message.ErrorData.code) {
+            case 7:
+                return false;
             case 401:
                 this.app.ShowError({
                     type: "hard",
@@ -289,49 +304,49 @@ export class WeatherUnderground extends BaseProvider {
             case 7:
                 return {
                     customIcon: "rain-mix-symbolic",
-                    icons: ["weather-freezing-rain"],
+                    icons: ["weather-freezing-rain", "weather-showers-scattered",],
                     main: _("Rain and Snow"),
                     description: _("Rain and Snow"),
                 };
             case 6:
                 return {
                     customIcon: "rain-mix-symbolic",
-                    icons: ["weather-freezing-rain"],
+                    icons: ["weather-freezing-rain", "weather-showers-scattered",],
                     main: _("Rain and Sleet"),
                     description: _("Rain and Sleet"),
                 };
             case 8:
                 return {
                     customIcon: "rain-mix-symbolic",
-                    icons: ["weather-freezing-rain", "weather-rain"],
+                    icons: ["weather-showers-scattered", "weather-freezing-rain", "weather-rain"],
                     main: _("Freezing Drizzle"),
                     description: _("Freezing Drizzle"),
                 };
             case 9:
                 return {
                     customIcon: "rain-mix-symbolic",
-                    icons: ["weather-rain", "weather-freezing-rain"],
+                    icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"],
                     main: _("Drizzle"),
                     description: _("Drizzle"),
                 };
             case 10:
                 return {
                     customIcon: "rain-symbolic",
-                    icons: ["weather-freezing-rain", "weather-rain"],
+                    icons: ["weather-freezing-rain", "weather-rain", "weather-showers"],
                     main: _("Freezing Rain"),
                     description: _("Freezing Rain"),
                 };
             case 11:
                 return {
                     customIcon: "showers-symbolic",
-                    icons: ["weather-rain", "weather-freezing-rain"],
+                    icons: ["weather-showers", "weather-rain", "weather-freezing-rain", ],
                     main: _("Showers"),
                     description: _("Showers"),
                 };
             case 12:
                 return {
                     customIcon: "rain-symbolic",
-                    icons: ["weather-rain", "weather-freezing-rain"],
+                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers"],
                     main: _("Rain"),
                     description: _("Rain"),
                 };
@@ -864,4 +879,5 @@ interface NearbyStation {
 }
 
 
-type ObservationData = Partial<Omit<WeatherData, "forecasts" | "hourlyForecast" | "location" | "coord" | "sunrise" | "sunset" | "wind">> & Pick<WeatherData, "wind">; 
+type ObservationData = Partial<Omit<WeatherData, "forecasts" | "hourlyForecast" | "location" | "coord" | "wind" | "sunrise" | "date" | "sunset">> & 
+                       Pick<WeatherData, "wind" | "date" | "sunrise" | "sunset">; 
