@@ -5,7 +5,7 @@ const Soup = imports.gi.Soup;
 let _httpSession;
 if (Soup.MAJOR_VERSION == 2) {
     _httpSession = new Soup.SessionAsync();
-    //Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+    Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
 } else if (Soup.MAJOR_VERSION == 3) {
     _httpSession = new Soup.Session();
 }
