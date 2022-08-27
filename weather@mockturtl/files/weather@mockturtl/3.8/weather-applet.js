@@ -14153,6 +14153,7 @@ class WeatherUnderground extends BaseProvider {
                 location: {
                     city: (_d = loc.city) !== null && _d !== void 0 ? _d : observation.location.city,
                     country: (_e = loc.country) !== null && _e !== void 0 ? _e : observation.location.country,
+                    url: observation.location.url
                 },
                 condition: (_f = observation.condition) !== null && _f !== void 0 ? _f : {
                     description: "unknown",
@@ -14223,6 +14224,8 @@ class WeatherUnderground extends BaseProvider {
                     result.location.city = observations.neighborhood;
                 if (result.location.country == null && observations.country != null)
                     result.location.country = observations.country;
+                if (result.location.url == null)
+                    result.location.url = `https://www.wunderground.com/weather/${observations.stationID}`;
                 if (result.temperature == null && observations.metric_si.temp)
                     result.temperature = CelsiusToKelvin(observations.metric_si.temp);
                 if (result.pressure == null)

@@ -40,8 +40,8 @@ export interface WeatherData {
 		city?: string | undefined,
 		country?: string | undefined,
 		timeZone?: string | undefined,
-		url?: string,
-		tzOffset?: number
+		url?: string | undefined,
+		tzOffset?: number | undefined
 	},
 	stationInfo?: {
 		/** in metres */

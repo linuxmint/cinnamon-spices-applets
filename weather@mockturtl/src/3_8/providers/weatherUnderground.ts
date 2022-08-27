@@ -69,6 +69,7 @@ export class WeatherUnderground extends BaseProvider {
             location: {
                 city: loc.city ?? observation.location.city,
                 country: loc.country ?? observation.location.country,
+                url: observation.location.url
             },
             condition: observation.condition ?? {
                 description: "unknown",
@@ -163,6 +164,8 @@ export class WeatherUnderground extends BaseProvider {
                 result.location.city = observations.neighborhood;
             if (result.location.country == null && observations.country != null)
                 result.location.country = observations.country;
+            if (result.location.url == null)
+                result.location.url = `https://www.wunderground.com/weather/${observations.stationID}`;
             if (result.temperature == null && observations.metric_si.temp)
                 result.temperature = CelsiusToKelvin(observations.metric_si.temp);
             if (result.pressure == null)

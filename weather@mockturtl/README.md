@@ -32,6 +32,7 @@ You can also save locations what you entered manually and switch between them in
 | **Tomorrow.io**            | Yes           | 15                    | 108                    | Previously known as Climacell    |
 | **DarkSky**                | Yes           | 8                     | 168                    | Signups closed, will end Q2 2023 |
 | **AccuWeather**            | Yes           | 5***                  | 12                     | Limited free calls               |
+| **Weather Underground**    | Yes           | 5                     | 0                      | --                               |
 
 ### OpenWeatherMap
 
@@ -118,6 +119,10 @@ Online Service from company AccuWeather Inc, founded in 1962 with headquarters i
 * ***Number of available hours and days are specified for the free plan, [paid plans allow more](https://developer.accuweather.com/packages).
 
 * API keys can be obtained [here](https://developer.accuweather.com/user/register). Register, then you must add a new App. When it's created Click on the App and the key will be displayed.
+
+### Weather Underground
+
+
 
 ## Usage of "Override label on panel" setting
 
