@@ -547,8 +547,10 @@ class CollapsibleSystrayApplet extends CinnamonSystray.CinnamonSystrayApplet {
                     if (state) {
                         actor.csEnable();
                         actor.csEnableAfter();
+                        actor.show();
                     } else {
                         actor.csDisable();
+                        actor.hide();
                     }
                 }
             }));
