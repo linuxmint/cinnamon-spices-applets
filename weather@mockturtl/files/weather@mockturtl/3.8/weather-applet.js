@@ -14126,7 +14126,7 @@ class WeatherUnderground extends BaseProvider {
         this.baseURl = "https://api.weather.com/";
         this.locationCache = {};
         this.GetWeather = async (loc) => {
-            var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
             const locString = `${loc.lat},${loc.lon}`;
             const location = (_a = this.locationCache[locString]) !== null && _a !== void 0 ? _a : (await this.GetNearbyStations(loc));
             if (location == null) {
@@ -14150,25 +14150,28 @@ class WeatherUnderground extends BaseProvider {
                     lat: loc.lat,
                     lon: loc.lon,
                 },
-                location: {},
-                condition: (_d = observation.condition) !== null && _d !== void 0 ? _d : {
+                location: {
+                    city: (_d = loc.city) !== null && _d !== void 0 ? _d : observation.location.city,
+                    country: (_e = loc.country) !== null && _e !== void 0 ? _e : observation.location.country,
+                },
+                condition: (_f = observation.condition) !== null && _f !== void 0 ? _f : {
                     description: "unknown",
                     customIcon: "alien-symbolic",
                     icons: [],
                     main: "Unknown"
                 },
-                dewPoint: (_e = observation.dewPoint) !== null && _e !== void 0 ? _e : null,
-                humidity: (_f = observation.humidity) !== null && _f !== void 0 ? _f : null,
-                pressure: (_g = observation.pressure) !== null && _g !== void 0 ? _g : null,
+                dewPoint: (_g = observation.dewPoint) !== null && _g !== void 0 ? _g : null,
+                humidity: (_h = observation.humidity) !== null && _h !== void 0 ? _h : null,
+                pressure: (_j = observation.pressure) !== null && _j !== void 0 ? _j : null,
                 wind: {
-                    speed: (_h = observation.wind.speed) !== null && _h !== void 0 ? _h : null,
-                    degree: (_j = observation.wind.degree) !== null && _j !== void 0 ? _j : null,
+                    speed: (_k = observation.wind.speed) !== null && _k !== void 0 ? _k : null,
+                    degree: (_l = observation.wind.degree) !== null && _l !== void 0 ? _l : null,
                 },
                 sunrise: observation.sunrise,
                 sunset: observation.sunset,
                 stationInfo: observation.stationInfo,
+                extra_field: observation.extra_field,
                 forecasts: this.ParseForecasts(loc, forecast),
-                hourlyForecasts: [],
             };
         };
         this.GetNearbyStations = async (loc) => {
@@ -14178,7 +14181,7 @@ class WeatherUnderground extends BaseProvider {
                 geocode: `${loc.lat},${loc.lon}`,
                 format: "json",
                 apiKey: this.app.config.ApiKey,
-                product: "observation"
+                product: "pws"
             }, this.HandleErrors);
             if (payload == null)
                 return null;
@@ -14191,7 +14194,6 @@ class WeatherUnderground extends BaseProvider {
                     stationName: payload.location.stationName[i],
                     latitude: payload.location.latitude[i],
                     longitude: payload.location.longitude[i],
-                    ianaTimeZone: payload.location.ianaTimeZone[i],
                     distanceKm: (_a = payload.location.distanceKm[i]) !== null && _a !== void 0 ? _a : GetDistance(loc.lat, loc.lon, payload.location.latitude[i], payload.location.longitude[i]) / 1000,
                 });
             }
@@ -14200,22 +14202,27 @@ class WeatherUnderground extends BaseProvider {
             return result;
         };
         this.GetObservations = async (stations, forecast, loc) => {
-            var _a, _b;
+            var _a;
             const observationData = (await Promise.all(stations.map(v => this.GetObservation(v.stationId)))).filter(v => v != null);
-            const tz = (_b = (_a = stations.find(v => v.ianaTimeZone != null)) === null || _a === void 0 ? void 0 : _a.ianaTimeZone) !== null && _b !== void 0 ? _b : loc.timeZone;
+            const tz = loc.timeZone;
             const result = {
                 wind: {
                     speed: null,
                     degree: null,
                 },
+                location: {},
                 sunrise: null,
                 sunset: null,
-                date: null
+                date: null,
             };
             for (const observations of observationData) {
                 const station = stations.find(v => v.stationId == observations.stationID);
                 if (result.date == null && observations.obsTimeUtc != null)
                     result.date = DateTime.fromISO(observations.obsTimeUtc).setZone(tz);
+                if (result.location.city == null && observations.neighborhood != null)
+                    result.location.city = observations.neighborhood;
+                if (result.location.country == null && observations.country != null)
+                    result.location.country = observations.country;
                 if (result.temperature == null && observations.metric_si.temp)
                     result.temperature = CelsiusToKelvin(observations.metric_si.temp);
                 if (result.pressure == null)
@@ -14228,6 +14235,14 @@ class WeatherUnderground extends BaseProvider {
                     result.wind.degree = observations.winddir;
                 if (result.dewPoint == null)
                     result.dewPoint = CelsiusToKelvin(observations.metric_si.dewpt);
+                if (((_a = result.extra_field) === null || _a === void 0 ? void 0 : _a.value) == null && observations.metric_si.windChill != null) {
+                    result.extra_field = {
+                        name: _("Feels Like"),
+                        type: "temperature",
+                        value: this.ToKelvin(observations.metric_si.windChill)
+                    };
+                }
+                result.dewPoint = CelsiusToKelvin(observations.metric_si.dewpt);
                 if (result.stationInfo == null) {
                     result.stationInfo = {
                         name: station.stationName,
@@ -14261,6 +14276,7 @@ class WeatherUnderground extends BaseProvider {
             return result;
         };
         this.GetObservation = async (stationID) => {
+            var _a;
             const observationString = await this.app.LoadAsync(`${this.baseURl}v2/pws/observations/current`, {
                 format: "json",
                 stationId: stationID,
@@ -14277,7 +14293,7 @@ class WeatherUnderground extends BaseProvider {
                     logger_Logger.Debug("could not JSON parse observation payload from station ID " + stationID);
                 }
             }
-            return observation;
+            return (_a = observation === null || observation === void 0 ? void 0 : observation.observations[0]) !== null && _a !== void 0 ? _a : null;
         };
         this.HandleErrors = (message) => {
             switch (message.ErrorData.code) {
@@ -14659,12 +14675,15 @@ class WeatherUnderground extends BaseProvider {
         const result = [];
         for (let index = 0; index < forecast.dayOfWeek.length; index++) {
             const icons = [forecast.daypart[0].iconCode[index * 2], forecast.daypart[0].iconCode[index * 2 + 1]];
-            result.push({
+            const data = {
                 date: DateTime.fromSeconds(forecast.validTimeUtc[index]).setZone(loc.timeZone),
                 condition: this.IconToCondition((_a = icons[0]) !== null && _a !== void 0 ? _a : icons[1]),
                 temp_max: forecast.temperatureMax[index] == null ? null : this.ToKelvin(forecast.temperatureMax[index]),
                 temp_min: forecast.temperatureMin[index] == null ? null : this.ToKelvin(forecast.temperatureMin[index]),
-            });
+            };
+            if (!this.app.config._shortConditions)
+                data.condition.description = forecast.narrative[index];
+            result.push(data);
         }
         return result;
     }

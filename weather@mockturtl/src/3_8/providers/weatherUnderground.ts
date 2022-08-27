@@ -67,7 +67,8 @@ export class WeatherUnderground extends BaseProvider {
                 lon: loc.lon,
             },
             location: {
-                
+                city: loc.city ?? observation.location.city,
+                country: loc.country ?? observation.location.country,
             },
             condition: observation.condition ?? {
                 description: "unknown",
@@ -85,8 +86,8 @@ export class WeatherUnderground extends BaseProvider {
             sunrise: observation.sunrise,
             sunset: observation.sunset,
             stationInfo: observation.stationInfo,
+            extra_field: observation.extra_field,
             forecasts: this.ParseForecasts(loc, forecast),
-            hourlyForecasts: [],
         };
     }
 
@@ -94,12 +95,15 @@ export class WeatherUnderground extends BaseProvider {
         const result: ForecastData[] = [];
         for (let index = 0; index < forecast.dayOfWeek.length; index++) {
             const icons = [ forecast.daypart[0].iconCode[index * 2],  forecast.daypart[0].iconCode[index * 2 + 1]];
-            result.push({
+            const data: ForecastData = {
                 date: DateTime.fromSeconds(forecast.validTimeUtc[index]).setZone(loc.timeZone),
                 condition: this.IconToCondition(icons[0] ?? icons[1]!),
                 temp_max: forecast.temperatureMax[index] == null ? null : this.ToKelvin(forecast.temperatureMax[index]!),
                 temp_min: forecast.temperatureMin[index] == null ? null : this.ToKelvin(forecast.temperatureMin[index]),
-            })
+            }
+            if (!this.app.config._shortConditions)
+                data.condition.description = forecast.narrative[index];
+            result.push(data);
         }
         return result;
     }
@@ -110,7 +114,7 @@ export class WeatherUnderground extends BaseProvider {
             geocode: `${loc.lat},${loc.lon}`,
             format: "json",
             apiKey: this.app.config.ApiKey,
-            product: "observation"
+            product: "pws"
         }, this.HandleErrors);
 
         if (payload == null)
@@ -126,7 +130,6 @@ export class WeatherUnderground extends BaseProvider {
                 stationName: payload.location.stationName[i],
                 latitude: payload.location.latitude[i],
                 longitude: payload.location.longitude[i],
-                ianaTimeZone: payload.location.ianaTimeZone[i],
                 distanceKm: payload.location.distanceKm[i] ?? GetDistance(loc.lat, loc.lon, payload.location.latitude[i], payload.location.longitude[i]) / 1000,
             })
         }
@@ -137,24 +140,29 @@ export class WeatherUnderground extends BaseProvider {
         return result;
     }
 
-    private GetObservations = async (stations: NearbyStation[], forecast: ForecastPayload, loc: LocationData): Promise<ObservationData> => {
-        const observationData: ObservationPayload[] = (await Promise.all(stations.map(v => this.GetObservation(v.stationId)))).filter(v => v != null) as ObservationPayload[];
-        const tz = stations.find(v => v.ianaTimeZone != null)?.ianaTimeZone ?? loc.timeZone;
+    private GetObservations = async (stations: NearbyStation[], forecast: ForecastPayload, loc: LocationData): Promise<ObservationInternalData> => {
+        const observationData: ObservationData[] = (await Promise.all(stations.map(v => this.GetObservation(v.stationId)))).filter(v => v != null) as ObservationData[];
+        const tz = loc.timeZone;
         
-        const result: ObservationData = {
+        const result: ObservationInternalData = {
             wind: {
                 speed: null,
                 degree: null,
             },
+            location: {},
             sunrise: null,
             sunset: null,
-            date: null as any
+            date: null as any,
         };
 
         for (const observations of observationData) {
             const station = stations.find(v => v.stationId == observations.stationID)!;
             if (result.date == null && observations.obsTimeUtc != null)
                 result.date = DateTime.fromISO(observations.obsTimeUtc).setZone(tz); 
+            if (result.location.city == null && observations.neighborhood != null)
+                result.location.city = observations.neighborhood;
+            if (result.location.country == null && observations.country != null)
+                result.location.country = observations.country;
             if (result.temperature == null && observations.metric_si.temp)
                 result.temperature = CelsiusToKelvin(observations.metric_si.temp);
             if (result.pressure == null)
@@ -166,7 +174,15 @@ export class WeatherUnderground extends BaseProvider {
             if (result.wind.degree == null)
                 result.wind.degree = observations.winddir; 
             if (result.dewPoint == null)
-                result.dewPoint = CelsiusToKelvin(observations.metric_si.dewpt); 
+                result.dewPoint = CelsiusToKelvin(observations.metric_si.dewpt);
+            if (result.extra_field?.value == null && observations.metric_si.windChill != null) {
+                result.extra_field = {
+                    name: _("Feels Like"),
+                    type: "temperature",
+                    value: this.ToKelvin(observations.metric_si.windChill)
+                }
+            }
+                result.dewPoint = CelsiusToKelvin(observations.metric_si.dewpt);
             if (result.stationInfo == null) {
                 result.stationInfo = {
                     name: station.stationName,
@@ -188,8 +204,6 @@ export class WeatherUnderground extends BaseProvider {
             result.date = DateTime.now().setZone(tz); 
         if (result.temperature == null)
             result.temperature = this.ToKelvin(forecast.daypart[0].temperature[dayPartIndex]);
-        // if (result.pressure == null)
-        //     result.pressure = forecast.daypart.; 
         if (result.humidity == null)
             result.humidity = forecast.daypart[0].relativeHumidity[dayPartIndex]; 
         if (result.wind.speed == null)
@@ -201,8 +215,6 @@ export class WeatherUnderground extends BaseProvider {
             if (icon != null)
                 result.condition = this.IconToCondition(icon);
         }
-        // if (result.dewPoint == null)
-        //     result.dewPoint = forecast.daypart.wxPhraseLong;
 
         const times = getTimes(result.date.toJSDate(), loc.lat, loc.lon);
         result.sunrise = DateTime.fromJSDate(times.sunrise).setZone(tz);
@@ -211,7 +223,7 @@ export class WeatherUnderground extends BaseProvider {
         return result;
     }
 
-    private GetObservation = async (stationID: string): Promise<ObservationPayload | null> => {
+    private GetObservation = async (stationID: string): Promise<ObservationData | null> => {
         const observationString = await this.app.LoadAsync(`${this.baseURl}v2/pws/observations/current`, {
             format: "json",
             stationId: stationID,
@@ -230,7 +242,7 @@ export class WeatherUnderground extends BaseProvider {
             }
         }
 
-        return observation;
+        return observation?.observations[0] ?? null;
     }
 
     private HandleErrors = (message: ErrorResponse): boolean => {
@@ -656,12 +668,8 @@ interface LocationPayload {
 
 interface NearObservationPayload {
     location: {
-        adminDistrictCode: (string | null)[];
         stationName: string[];
-        countryCode: (string | null)[];
         stationId: (string | null)[];
-        ianaTimeZone: (string | null)[];
-        obsType: (string | null)[];
         latitude: (number)[];
         longitude: (number)[];
         distanceKm: (number | null)[];
@@ -669,9 +677,11 @@ interface NearObservationPayload {
     }
 }
 
-type WULocationData = LocationPayload["location"];
-
 interface ObservationPayload {
+    observations: ObservationData[]
+}
+
+interface ObservationData {
     /** Country Code */
     country: string | null;
     /** Time in UNIX seconds */
@@ -872,12 +882,11 @@ The wind is treated as a vector; hence, winds must have direction and magnitude 
 interface NearbyStation {
     stationName: string;
     stationId: string;
-    ianaTimeZone: string | null;
     latitude: number;
     longitude: number;
     distanceKm: number;
 }
 
 
-type ObservationData = Partial<Omit<WeatherData, "forecasts" | "hourlyForecast" | "location" | "coord" | "wind" | "sunrise" | "date" | "sunset">> & 
-                       Pick<WeatherData, "wind" | "date" | "sunrise" | "sunset">; 
+type ObservationInternalData = Partial<Omit<WeatherData, "forecasts" | "hourlyForecast" | "location" | "coord" | "wind" | "sunrise" | "date" | "sunset">> & 
+                       Pick<WeatherData, "wind" | "date" | "sunrise" | "sunset" | "location">; 

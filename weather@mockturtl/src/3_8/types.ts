@@ -72,7 +72,7 @@ export interface WeatherData {
 	condition: Condition
 	forecasts: ForecastData[];
 	hourlyForecasts?: HourlyForecastData[] | undefined
-	extra_field?: APIUniqueField;
+	extra_field?: APIUniqueField | undefined;
 	immediatePrecipitation?: ImmediatePrecipitation;
 }
 
