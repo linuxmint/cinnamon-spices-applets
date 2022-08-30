@@ -82,6 +82,7 @@ If you want to submit some translations please make it on the original repositor
 | Dutch                 | <a href="https://github.com/Vistaus" target="_blank" title="@Vistaus on Github">@Vistaus</a>                      |
 | French                | <a href="https://github.com/claudiux" target="_blank" title="@claudiux on Github">@claudiux</a>                   |
 | German                | <a href="https://github.com/OzzieIsaacs" target="_blank" title="@OzzieIsaacs on Github">@OzzieIsaacs</a>          |
+| Hungarian             | <a href="https://github.com/kami911" target="_blank" title="@kami911 on Github">@kami911</a>                      |
 | Italian               | <a href="https://github.com/eperulli" target="_blank" title="@eperulli on Github">@eperulli</a>                   |
 | Polish                | <a href="https://github.com/szedar14" target="_blank" title="@szedar14 on Github">@szedar14</a>                   |
 | Portuguese (Brazil)   | <a href="https://github.com/raphaelquintao" target="_blank" title="@raphaelquintao on Github">@raphaelquintao</a> |
