@@ -810,8 +810,9 @@ class CinnamenuApplet extends TextIconApplet {
         };
 
         switch (true) {
-        case (symbol === Clutter.KP_Enter || symbol === Clutter.KEY_Return) && ctrlKey:
-        case symbol === Clutter.KEY_Menu && noModifier:
+        case (symbol === Clutter.KEY_KP_Enter || symbol === Clutter.KP_Enter ||
+                                            symbol === Clutter.KEY_Return) && ctrlKey:
+        case (symbol === Clutter.KEY_Menu) && noModifiers:
             if (this.contextMenu.isOpen) {
                 this.contextMenu.close();
             } else if (focusedAppItemExists) {
@@ -822,7 +823,8 @@ class CinnamenuApplet extends TextIconApplet {
                 categoryButtons[focusedCategoryIndex].openContextMenu();
             }
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.KP_Enter || symbol === Clutter.KEY_Return) && noModifiers:
+        case (symbol === Clutter.KP_Enter || symbol === Clutter.KEY_KP_Enter ||
+                                        symbol === Clutter.KEY_Return) && noModifiers:
             if (focusedContextMenuItemExists) {
                 contextMenuChildren[focusedContextMenuItemIndex].activate();
             } else if (focusedAppItemExists) {
@@ -849,7 +851,8 @@ class CinnamenuApplet extends TextIconApplet {
             leaveCurrentlyFocusedItem();
             leftNavigation();
             return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
-        case (symbol === Clutter.ISO_Left_Tab || symbol === Clutter.Tab) && noModifiers:
+        case (symbol === Clutter.KEY_ISO_Left_Tab || symbol === Clutter.ISO_Left_Tab ||
+                                symbol === Clutter.Tab || symbol === Clutter.KEY_Tab) && noModifiers:
             leaveCurrentlyFocusedItem();
             if (focusedContextMenuItemExists) {
                 contextMenuChildren[focusedContextMenuItemIndex].handleEnter();//effectively ignore keypress
@@ -861,7 +864,8 @@ class CinnamenuApplet extends TextIconApplet {
                 appButtons[0].handleEnter();
             }
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.ISO_Left_Tab || symbol === Clutter.Tab) && shiftKey:
+        case (symbol === Clutter.KEY_ISO_Left_Tab || symbol === Clutter.ISO_Left_Tab ||
+                                symbol === Clutter.Tab || symbol === Clutter.KEY_Tab) && shiftKey:
             leaveCurrentlyFocusedItem();
             if (focusedContextMenuItemExists) {
                 contextMenuChildren[focusedContextMenuItemIndex].handleEnter();//effectively ignore keypress
