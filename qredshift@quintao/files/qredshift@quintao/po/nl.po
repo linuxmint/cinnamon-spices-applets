@@ -1,171 +1,168 @@
-# French translation for qredshift@quintao.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Claudiux <claude.clerc@gmail.com>, 2020.
 #
+# Heimen Stoffels <vistausss@fastmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: qredshift@quintao\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-04 13:58-0300\n"
-"PO-Revision-Date: 2020-01-05 02:01+0100\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
-"Language-Team: \n"
-"Language: fr\n"
+"PO-Revision-Date: 2022-06-22 18:19+0200\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.04.2\n"
 
 #: applet.js:115
 msgid "REDSHIFT NOT INSTALLED!"
-msgstr "REDSHIFT N'EST PAS INSTALLÉ !"
+msgstr "REDSHIFT IS NIET GEÏNSTALLEERD!"
 
 #: applet.js:116
 msgid "Requires Redshift: sudo apt-get install redshift"
-msgstr "Nécessite l'installation de Redshift : sudo apt-get install redshift"
+msgstr "Installeer Redshift: sudo apt-get install redshift"
 
 #: applet.js:119 applet.js:159
 msgid "Reload Applet"
-msgstr "Relancer cette applet"
+msgstr "Werkbalkhulpje herladen"
 
 #: applet.js:164
 msgid "Recompile Translations"
-msgstr "Recompiler les traductions"
+msgstr "Vertalingen opnieuw samenstellen"
 
 #. settings-schema.json->enabled->description
 #: applet.js:356
 msgid "Enabled"
-msgstr "Activé"
+msgstr "Ingeschakeld"
 
 #: applet.js:364 applet.js:410
 msgid "Temp:"
-msgstr "Temp. :"
+msgstr "Temp.:"
 
 #: applet.js:375 applet.js:421
 msgid "Bright:"
-msgstr "Brill. :"
+msgstr "Helderh.:"
 
 #: applet.js:387 applet.js:635
 msgid "Gamma:"
-msgstr "Gamma :"
+msgstr "Gamma:"
 
 #. settings-schema.json->enabledNight->description
 #: applet.js:402
 msgid "Night Enabled"
-msgstr "Activer les paramètres de nuit"
+msgstr "'s Avonds inschakelen"
 
 #. settings-schema.json->iconLabel->description
 #: applet.js:464
 msgid "Show Label"
-msgstr "Afficher l'étiquette de cette applet"
+msgstr "Label tonen"
 
 #: applet.js:618
 msgid "On"
-msgstr "Activé"
+msgstr "Aan"
 
 #: applet.js:618 applet.js:620
 msgid "Off"
-msgstr "Désactivé"
+msgstr "Uit"
 
 #: applet.js:626
 msgid "Day Temperature"
-msgstr "Température de jour"
+msgstr "Dagtemperatuur"
 
 #: applet.js:627
 msgid "Day Brightness"
-msgstr "Brillance de jour"
+msgstr "Daghelderheid"
 
 #: applet.js:629
 msgid "Night Temperature"
-msgstr "Température de nuit"
+msgstr "Avondtemperatuur"
 
 #: applet.js:630
 msgid "Night Brightness"
-msgstr "Brillance de nuit"
+msgstr "Avondhelderheid"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
 #: applet.js:632
 msgid "Temperature"
-msgstr "Température"
+msgstr "Temperatuur"
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
 #: applet.js:633
 msgid "Brightness"
-msgstr "Brillance"
+msgstr "Helderheid"
 
 #. metadata.json->name
 msgid "QRedshift"
 msgstr "QRedshift"
 
 #. metadata.json->description
-msgid ""
-"Sets brightness, gamma levels and color temperature with Redshift.\n"
+msgid "Sets brightness, gamma levels and color temperature with Redshift. "
 "This applet conflicts with redshift-gtk, make sure you remove it."
-msgstr ""
-"Règle les niveaux de luminosité, de gamma et de température de couleur avec "
-"Redshift.\n"
-"Cette applet est en conflit avec le paquet redshift-gtk, assurez-vous de le supprimer."
+msgstr "Stel de helderheid, kleurtemperatuur en het gamma van Redshift in. "
+"Let op: dit werkbalkhulpje botst met redshift-gtk, dus zorg er voor dat dat"
+" pakket verwijderd is."
 
 #. settings-schema.json->panel-options->title
 msgid "Settings"
-msgstr "Paramètres"
+msgstr "Voorkeuren"
 
 #. settings-schema.json->panel-location->title
 msgid "Location"
-msgstr "Lieu"
+msgstr "Locatie"
 
 #. settings-schema.json->panel-shortcuts->title
 msgid "Shortcuts"
-msgstr "Raccourcis"
+msgstr "Sneltoetsen"
 
 #. settings-schema.json->info-section->title
 msgid "Tips"
-msgstr "Astuces"
+msgstr "Tips"
 
 #. settings-schema.json->opt-section->title
 msgid "Options"
-msgstr "Options"
+msgstr "Opties"
 
 #. settings-schema.json->day-section->title
 msgid "Day Settings"
-msgstr "Paramètres pour le jour"
+msgstr "Dagvoorkeuren"
 
 #. settings-schema.json->night-section->title
 msgid "Night Settings"
-msgstr "Paramètres pour la nuit"
+msgstr "Avondvoorkeuren"
 
 #. settings-schema.json->keybind-section->title
 msgid "Key Bindings"
-msgstr "Raccourcis clavier"
+msgstr "Sneltoetsen"
 
 #. settings-schema.json->location-section->title
 msgid "Location Settings"
-msgstr "Paramètres de lieu"
+msgstr "Locatievoorkeuren"
 
 #. settings-schema.json->autoUpdate->description
 msgid "Auto Update"
-msgstr "Passage automatique nuit/jour et jour/nuit"
+msgstr "Automatisch bijwerken"
 
 #. settings-schema.json->autoUpdate->tooltip
 msgid "Continuously adjust color temperature"
-msgstr "Ajuster continuellement la température de couleur"
+msgstr "Werk de kleurtemperatuur continu bij"
 
 #. settings-schema.json->autoUpdateInterval->units
 msgid "Sec."
-msgstr "Sec."
+msgstr "sec."
 
 #. settings-schema.json->autoUpdateInterval->description
 msgid "Update interval"
-msgstr "Intervalle de temps entre deux vérifications"
+msgstr "Periodiek bijwerken"
 
 #. settings-schema.json->adjustmentMethod->description
 msgid "Adjustment Method"
-msgstr "Méthode d'ajustement"
+msgstr "Instelmethode"
 
 #. settings-schema.json->adjustmentMethod->options
 msgid "needload"
@@ -181,24 +178,48 @@ msgstr "vidmode"
 
 #. settings-schema.json->adjustmentMethod->tooltip
 msgid "Method to use to set color temperature"
-msgstr "Méthode à utiliser pour définir la température de couleur"
+msgstr "De methode die dient te worden gebruikt om de kleurtemperatuur in te stellen"
 
 #. settings-schema.json->labelScrollAction->description
 msgid "Icon Scroll Action"
-msgstr "Action du roulement de molette sur l'icône"
+msgstr "Actie na scrollen op pictogram"
 
 #. settings-schema.json->labelScrollAction->options
 msgid "Disabled"
-msgstr "Désactivé"
+msgstr "Uitgeschakeld"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->keyToggle->description
 msgid "On/Off"
-msgstr "Marche/Arrêt"
+msgstr "Aan/Uit"
+
+#. settings-schema.json->keyBrightnessUp->description
+msgid "Increase brightness level"
+msgstr "Helderheid verhogen"
+
+#. settings-schema.json->keyBrightnessDown->description
+msgid "Decrease brightness level"
+msgstr "Helderheid verlagen"
+
+#. settings-schema.json->keyTempUp->description
+msgid "Increase temperature level"
+msgstr "Temperatuur verhogen"
+
+#. settings-schema.json->keyTempDown->description
+msgid "Decrease temperature level"
+msgstr "Temperatuur verlagen"
+
+#. settings-schema.json->keyGammaUp->description
+msgid "Increase gamma level"
+msgstr "Gamma verhogen"
+
+#. settings-schema.json->keyGammaDown->description
+msgid "Decrease gamma level"
+msgstr "Gamma verlagen"
 
 #. settings-schema.json->labelScrollAction->options
 msgid "Bright"
-msgstr "Brill."
+msgstr "Helderh."
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->gammaMix->description
@@ -207,7 +228,8 @@ msgstr "Gamma"
 
 #. settings-schema.json->labelScrollAction->tooltip
 msgid "Action when scroll on applet icon."
-msgstr "Action du roulement de molette sur l'icône de l'applet."
+msgstr "De actie die dient te worden uitgevoerd na het scrollen op het pictogram van"
+" het werkbalhulpje."
 
 #. settings-schema.json->dayTemp->units
 #. settings-schema.json->nightTemp->units
@@ -221,54 +243,39 @@ msgstr "%"
 
 #. settings-schema.json->locationRemote->description
 msgid "Remote Location"
-msgstr "Utiliser un service de géolocalisation"
+msgstr "Externe locatie gebruiken"
 
 #. settings-schema.json->locationRemote->tooltip
 #. settings-schema.json->locationUpdate->tooltip
 msgid "Native geoclue on redshift can make the experience slow."
-msgstr "Votre géolocalisation peut prendre quelque temps."
+msgstr "Let op: Geoclue kan Redshift vertragen."
 
 #. settings-schema.json->locationUpdate->description
 msgid "Update Location"
-msgstr "Me géolocaliser"
+msgstr "Locatie bijwerken"
 
 #. settings-schema.json->locationLatitude->description
 msgid "Latitude"
-msgstr "Latitude"
+msgstr "Breedtegraad"
 
 #. settings-schema.json->locationLongitude->description
 msgid "Longitude"
-msgstr "Longitude"
+msgstr "Lengtegraad"
 
 #. settings-schema.json->aboutLocation->description
-msgid ""
-"Native geoclue on redshift can make the experience slow.\n"
+msgid "Native geoclue on redshift can make the experience slow.\n"
 "Using: https://geolocation-db.com/"
-msgstr ""
-"Votre géolocalisation peut ne pas se faire instantanément.\n"
-"Cette applet utilise https://geolocation-db.com/ comme service de "
-"géolocalisation."
+msgstr "Let op: Geoclue kan Redshift vertragen.\n"
+"In gebruik zijnde dienst: https://geolocation-db.com/"
 
 #. settings-schema.json->textTips->description
 msgid "* Right-click the sliders to reset the default (neutral) value."
-msgstr ""
-"* Cliquez avec le bouton droit sur les curseurs pour les réinitialiser à "
-"leur valeur par défaut."
+msgstr "* Klik met de rechtermuisknop op een schuifknop om de standaardwaarde"
+" (neutraal) ervan te herstellen."
 
 #. settings-schema.json->textInfo->description
-msgid ""
-"If you like and use this applet take the time to visit it's page on Cinnamon "
-"Spices and give it a star. You only need a github account to do this."
-msgstr ""
-"Si vous utilisez et appréciez cette applet, prenez le temps de visiter sa "
-"page sur Cinnamon Spices et attribuez-lui une étoile. Pour ce faire, vous "
-"n'avez besoin que d'un compte Github."
-
-#~ msgid "Temperature:"
-#~ msgstr "Température :"
-
-#~ msgid "Brightness:"
-#~ msgstr "Brillance :"
-
-#~ msgid "Sec"
-#~ msgstr "secondes"
+msgid "If you like and use this applet take the time to visit it's page on Cinnamon"
+" Spices and give it a star. You only need a github account to do this."
+msgstr "Als u dit werkbalkhulpje graag gebruikt, dan zou ik het zeer op prijs stellen"
+" als u de pagina op Cinnamon Spices wilt openen en een ster wilt uitdelen. U"
+" heeft hiervoor alléén een GitHub-account nodig."
