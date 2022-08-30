@@ -32,6 +32,7 @@ You can also save locations what you entered manually and switch between them in
 | **Tomorrow.io**            | Yes           | 15                    | 108                    | Previously known as Climacell    |
 | **DarkSky**                | Yes           | 8                     | 168                    | Signups closed, will end Q2 2023 |
 | **AccuWeather**            | Yes           | 5***                  | 12                     | Limited free calls               |
+| **Weather Underground**    | Yes           | 5                     | 0                      | --                               |
 
 ### OpenWeatherMap
 
@@ -118,6 +119,13 @@ Online Service from company AccuWeather Inc, founded in 1962 with headquarters i
 * ***Number of available hours and days are specified for the free plan, [paid plans allow more](https://developer.accuweather.com/packages).
 
 * API keys can be obtained [here](https://developer.accuweather.com/user/register). Register, then you must add a new App. When it's created Click on the App and the key will be displayed.
+
+### Weather Underground
+
+Weather Underground is a privately owned, web-based weather information company. It provides weather observations and forecasts in a large number of locations around the world. It was founded by Jeff Masters in 1995 with headquarters in Ann Arbor United States. [Weather Underground website](https://www.wunderground.com/). Read more about the service [here](https://en.wikipedia.org/wiki/Weather_Underground_(weather_service)).
+
+- Weather Underground is a global community of people connecting data from environmental sensors like weather stations (250.000) and air quality monitors so they can provide the rich, hyperlocal data you need.
+- You need an API key. If you don't have a weather station to share data with WU, you can't have an API key. However, you can add a Raspberry Pi as a device for the weather station choice when [registering](https://www.wunderground.com/signup), even if you don't have one, and it will get you the API key.
 
 ## Usage of "Override label on panel" setting
 

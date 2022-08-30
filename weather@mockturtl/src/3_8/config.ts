@@ -20,6 +20,7 @@ import { VisualCrossing } from "./providers/visualcrossing";
 import { DanishMI } from "./providers/danishMI";
 import { AccuWeather } from "./providers/accuWeather";
 import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
+import { WeatherUnderground } from "./providers/weatherUnderground";
 
 const { get_home_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -51,7 +52,8 @@ export type Services =
 	"Visual Crossing" |
 	"DanishMI" |
 	"AccuWeather" |
-	"DeutscherWetterdienst";
+	"DeutscherWetterdienst" |
+	"WeatherUnderground";
 
 export const ServiceClassMapping: ServiceClassMappingType = {
 	"DarkSky": (app) => new DarkSky(app),
@@ -64,7 +66,8 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	"Visual Crossing": (app) => new VisualCrossing(app),
 	"DanishMI": (app) => new DanishMI(app),
 	"AccuWeather": (app) => new AccuWeather(app),
-	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app)
+	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
+	"WeatherUnderground": (app) => new WeatherUnderground(app)
 }
 
 /**
@@ -170,7 +173,7 @@ export class Config {
 
 	private settings: imports.ui.settings.AppletSettings;
 	private app: WeatherApplet;
-	private countryCode: string | null;
+	public readonly countryCode: string | null;
 	public textColorStyle: string | null = null;
 
 	private timezone: string | undefined = undefined;

@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.8
+
+* Resolve [#4426](https://github.com/linuxmint/cinnamon-spices-applets/issues/4426) - Add Weather Underground as a provider
+
 ## 3.2.7
 
 * Fix [#4390](https://github.com/linuxmint/cinnamon-spices-applets/issues/4390) - Make sure applet works with not configured Locale
