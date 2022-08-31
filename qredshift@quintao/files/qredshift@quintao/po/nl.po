@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-04 13:58-0300\n"
-"PO-Revision-Date: 2022-06-22 18:19+0200\n"
+"POT-Creation-Date: 2022-08-30 00:45-0300\n"
+"PO-Revision-Date: 2022-08-30 18:18+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
 "Language: nl\n"
@@ -15,85 +15,105 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Poedit 3.1.1\n"
 
-#: applet.js:115
-msgid "REDSHIFT NOT INSTALLED!"
-msgstr "REDSHIFT IS NIET GEÏNSTALLEERD!"
-
-#: applet.js:116
-msgid "Requires Redshift: sudo apt-get install redshift"
-msgstr "Installeer Redshift: sudo apt-get install redshift"
-
-#: applet.js:119 applet.js:159
+#: applet.js:232
 msgid "Reload Applet"
 msgstr "Werkbalkhulpje herladen"
 
-#: applet.js:164
+#: applet.js:243
 msgid "Recompile Translations"
 msgstr "Vertalingen opnieuw samenstellen"
 
+#: applet.js:296
+msgid "REDSHIFT NOT INSTALLED!"
+msgstr "REDSHIFT IS NIET GEÏNSTALLEERD!"
+
+#: applet.js:297
+msgid "Requires Redshift: sudo apt-get install redshift"
+msgstr "Installeer Redshift: sudo apt-get install redshift"
+
+#: applet.js:446 applet.js:467
+msgid "should be removed."
+msgstr "dient te worden verwijderd."
+
 #. settings-schema.json->enabled->description
-#: applet.js:356
+#: applet.js:629
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
-#: applet.js:364 applet.js:410
+#: applet.js:637 applet.js:682
 msgid "Temp:"
 msgstr "Temp.:"
 
-#: applet.js:375 applet.js:421
+#: applet.js:648 applet.js:693
 msgid "Bright:"
 msgstr "Helderh.:"
 
-#: applet.js:387 applet.js:635
+#: applet.js:659 applet.js:975
 msgid "Gamma:"
 msgstr "Gamma:"
 
 #. settings-schema.json->enabledNight->description
-#: applet.js:402
+#: applet.js:674
 msgid "Night Enabled"
 msgstr "'s Avonds inschakelen"
 
 #. settings-schema.json->iconLabel->description
-#: applet.js:464
+#: applet.js:736
 msgid "Show Label"
 msgstr "Label tonen"
 
-#: applet.js:618
+#: applet.js:935 applet.js:958
+msgid "Transition to day"
+msgstr "Overgang naar dag"
+
+#: applet.js:936 applet.js:959
+msgid "Transition to night"
+msgstr "Overgang naar avond"
+
+#: applet.js:937 applet.js:960
+msgid "Night"
+msgstr "Avond"
+
+#: applet.js:938 applet.js:961
+msgid "Day"
+msgstr "Dag"
+
+#: applet.js:949
 msgid "On"
 msgstr "Aan"
 
-#: applet.js:618 applet.js:620
+#: applet.js:949 applet.js:951
 msgid "Off"
 msgstr "Uit"
 
-#: applet.js:626
+#: applet.js:966
 msgid "Day Temperature"
 msgstr "Dagtemperatuur"
 
-#: applet.js:627
+#: applet.js:967
 msgid "Day Brightness"
 msgstr "Daghelderheid"
 
-#: applet.js:629
+#: applet.js:969
 msgid "Night Temperature"
 msgstr "Avondtemperatuur"
 
-#: applet.js:630
+#: applet.js:970
 msgid "Night Brightness"
 msgstr "Avondhelderheid"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
-#: applet.js:632
+#: applet.js:972
 msgid "Temperature"
 msgstr "Temperatuur"
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
-#: applet.js:633
+#: applet.js:973
 msgid "Brightness"
 msgstr "Helderheid"
 
@@ -102,11 +122,12 @@ msgid "QRedshift"
 msgstr "QRedshift"
 
 #. metadata.json->description
-msgid "Sets brightness, gamma levels and color temperature with Redshift. "
-"This applet conflicts with redshift-gtk, make sure you remove it."
-msgstr "Stel de helderheid, kleurtemperatuur en het gamma van Redshift in. "
-"Let op: dit werkbalkhulpje botst met redshift-gtk, dus zorg er voor dat dat"
-" pakket verwijderd is."
+msgid ""
+"It makes the color of your computer's display adapt to the time of day, warm "
+"at night and like sunlight during the day."
+msgstr ""
+"Stelt de kleur van uw beeldscherm af op het tijdstip van de dag: overdag "
+"helder, 's avonds warm."
 
 #. settings-schema.json->panel-options->title
 msgid "Settings"
@@ -153,8 +174,8 @@ msgid "Continuously adjust color temperature"
 msgstr "Werk de kleurtemperatuur continu bij"
 
 #. settings-schema.json->autoUpdateInterval->units
-msgid "Sec."
-msgstr "sec."
+msgid "Seconds"
+msgstr "seconden"
 
 #. settings-schema.json->autoUpdateInterval->description
 msgid "Update interval"
@@ -178,7 +199,8 @@ msgstr "vidmode"
 
 #. settings-schema.json->adjustmentMethod->tooltip
 msgid "Method to use to set color temperature"
-msgstr "De methode die dient te worden gebruikt om de kleurtemperatuur in te stellen"
+msgstr ""
+"De methode die dient te worden gebruikt om de kleurtemperatuur in te stellen"
 
 #. settings-schema.json->labelScrollAction->description
 msgid "Icon Scroll Action"
@@ -192,6 +214,25 @@ msgstr "Uitgeschakeld"
 #. settings-schema.json->keyToggle->description
 msgid "On/Off"
 msgstr "Aan/Uit"
+
+#. settings-schema.json->labelScrollAction->options
+msgid "Bright"
+msgstr "Helderh."
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->gammaMix->description
+msgid "Gamma"
+msgstr "Gamma"
+
+#. settings-schema.json->labelScrollAction->tooltip
+msgid "Action when scroll on applet icon."
+msgstr ""
+"De actie die dient te worden uitgevoerd na het scrollen op het pictogram van "
+"het werkbalhulpje."
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "Symbolisch pictogram gebruiken"
 
 #. settings-schema.json->keyBrightnessUp->description
 msgid "Increase brightness level"
@@ -217,20 +258,6 @@ msgstr "Gamma verhogen"
 msgid "Decrease gamma level"
 msgstr "Gamma verlagen"
 
-#. settings-schema.json->labelScrollAction->options
-msgid "Bright"
-msgstr "Helderh."
-
-#. settings-schema.json->labelScrollAction->options
-#. settings-schema.json->gammaMix->description
-msgid "Gamma"
-msgstr "Gamma"
-
-#. settings-schema.json->labelScrollAction->tooltip
-msgid "Action when scroll on applet icon."
-msgstr "De actie die dient te worden uitgevoerd na het scrollen op het pictogram van"
-" het werkbalhulpje."
-
 #. settings-schema.json->dayTemp->units
 #. settings-schema.json->nightTemp->units
 msgid "K"
@@ -240,6 +267,30 @@ msgstr "K"
 #. settings-schema.json->nightBrightness->units
 msgid "%"
 msgstr "%"
+
+#. settings-schema.json->smoothTransition->description
+msgid "Smooth transition between day and night"
+msgstr "Vloeiende overgang tussen dag en avond"
+
+#. settings-schema.json->transitionDuration->units
+msgid "Minutes"
+msgstr "minuten"
+
+#. settings-schema.json->transitionDuration->description
+msgid "Transition Duration"
+msgstr "Overgangsduur"
+
+#. settings-schema.json->manualNightTime->description
+msgid "Use Manual Night Time"
+msgstr "Eigen avondklok instellen"
+
+#. settings-schema.json->nightTimeStart->description
+msgid "Choose Start Time"
+msgstr "Kies een begintijd"
+
+#. settings-schema.json->nightTimeEnd->description
+msgid "Choose End Time"
+msgstr "Kies een eindtijd"
 
 #. settings-schema.json->locationRemote->description
 msgid "Remote Location"
@@ -263,19 +314,46 @@ msgid "Longitude"
 msgstr "Lengtegraad"
 
 #. settings-schema.json->aboutLocation->description
-msgid "Native geoclue on redshift can make the experience slow.\n"
+msgid ""
+"Native geoclue on redshift can make the experience slow.\n"
 "Using: https://geolocation-db.com/"
-msgstr "Let op: Geoclue kan Redshift vertragen.\n"
+msgstr ""
+"Let op: Geoclue kan Redshift vertragen.\n"
 "In gebruik zijnde dienst: https://geolocation-db.com/"
 
 #. settings-schema.json->textTips->description
 msgid "* Right-click the sliders to reset the default (neutral) value."
-msgstr "* Klik met de rechtermuisknop op een schuifknop om de standaardwaarde"
-" (neutraal) ervan te herstellen."
+msgstr ""
+"* Klik met de rechtermuisknop op een schuifknop om de standaardwaarde "
+"(neutraal) ervan te herstellen."
+
+#. settings-schema.json->textHelp->description
+msgid ""
+"When update to a new version make sure you reset the configs to default by "
+"deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
+"You will lost all your configs."
+msgstr ""
+"Als u een nieuwe versie installeert, wis dan de configuratiebestanden door "
+"de map ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json te "
+"verwijderen.\n"
+"Let op: hierna dient u al uw voorkeuren opnieuw in te stellen."
 
 #. settings-schema.json->textInfo->description
-msgid "If you like and use this applet take the time to visit it's page on Cinnamon"
-" Spices and give it a star. You only need a github account to do this."
-msgstr "Als u dit werkbalkhulpje graag gebruikt, dan zou ik het zeer op prijs stellen"
-" als u de pagina op Cinnamon Spices wilt openen en een ster wilt uitdelen. U"
-" heeft hiervoor alléén een GitHub-account nodig."
+msgid ""
+"If you like and use this applet take the time to visit it's page on Cinnamon "
+"Spices and give it a star. You only need a github account to do this."
+msgstr ""
+"Als u dit werkbalkhulpje graag gebruikt, dan zou ik het zeer op prijs "
+"stellen als u de pagina op Cinnamon Spices wilt openen en een ster wilt "
+"uitdelen. U heeft hiervoor alléén een GitHub-account nodig."
+
+#~ msgid ""
+#~ "Sets brightness, gamma levels and color temperature with Redshift. This "
+#~ "applet conflicts with redshift-gtk, make sure you remove it."
+#~ msgstr ""
+#~ "Stel de helderheid, kleurtemperatuur en het gamma van Redshift in. Let "
+#~ "op: dit werkbalkhulpje botst met redshift-gtk, dus zorg er voor dat dat "
+#~ "pakket verwijderd is."
+
+#~ msgid "Sec."
+#~ msgstr "sec."

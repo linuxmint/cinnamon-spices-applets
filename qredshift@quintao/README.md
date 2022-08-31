@@ -36,8 +36,11 @@ If you want to submit some translations please make it on the original repositor
     - If you want to enable it again, run `systemctl unmask --user redshift.service`
 
 ## Changelog
+* 1.7.3
+    - Fixed small bug on smooth transition.
+    - Fixed messages when not using manual night time.
 * 1.7.2
-    - Fix sliders on Cinnamon 5.4
+    - Fixed sliders on Cinnamon 5.4
     - Automatically check for redshift-gtk and notify to remove it.
     - Smooth transition between day and night.
 * 1.7.1
