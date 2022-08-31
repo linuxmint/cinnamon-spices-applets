@@ -182,7 +182,7 @@ class SpicesNotifier extends Applet.TextIconApplet {
             });
         } else { //version 3
             session.send_and_read_async(msg, Soup.MessagePriority.NORMAL, null, (session, message) => {
-                if (iteration === this.iteration) {
+                if (msg.get_status() === 200 && iteration === this.iteration) {
                     const bytes = session.send_and_read_finish(message);
                     let xlets = JSON.parse(ByteArray.toString(bytes.get_data()));
                     this.save_xlet_cache(type, xlets);
@@ -234,21 +234,20 @@ class SpicesNotifier extends Applet.TextIconApplet {
         };
         
 		let msg = Soup.Message.new('GET', xlet.page);
-        if (Soup.MAJOR_VERSION == 2) {
+        if (Soup.MAJOR_VERSION === 2) {
             session.queue_message(msg, (session, message) => {
                 if (message.status_code === 200) {
                     process_result(message.response_body.data);
                 }
             });
         } else { //version 3
-            try {
-                session.send_and_read_async(msg, Soup.MessagePriority.NORMAL, null, (session, message) => {
+            session.send_and_read_async(msg, Soup.MessagePriority.NORMAL, null, (session, message) => {
+                if (msg.get_status() === 200) {
                     const bytes = session.send_and_read_finish(message);
                     process_result(ByteArray.toString(bytes.get_data()));
-                });
-            } catch(e) {
-                global.logError(e);
-            } 
+                }
+            });
+            
         }
 	}
 
