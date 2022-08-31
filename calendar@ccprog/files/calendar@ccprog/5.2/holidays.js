@@ -2,6 +2,7 @@
 /* eslint camelcase: "off" */
 
 const Soup = imports.gi.Soup;
+const ByteArray = imports.byteArray;
 const Gio = imports.gi.Gio;
 const Utils = require("./utils");
 const AppletDir = imports.ui.appletManager.appletMeta["calendar@ccprog"].path;
@@ -11,8 +12,13 @@ const MSECS_IN_DAY = 24 * 60 * 60 * 1000;
 const Langinfo = Utils.getInfo("LC_ADDRESS");
 const LC_LANG = Langinfo.lang_ab;
 
-const _httpSession = new Soup.SessionAsync();
-Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+let _httpSession;
+if (Soup.MAJOR_VERSION === 2) {
+    _httpSession = new Soup.SessionAsync();
+    Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+} else { //version 3
+    _httpSession = new Soup.Session();
+}
 
 const UPDATE_PERIOD = 24 * 60 * 60 * 1000 * 50; // last number is num of days
 
@@ -47,14 +53,25 @@ class Provider {
     static loadJsonAsync(url, params, callback) {
         const message = Soup.Message.new("GET", url);
         global.log("get", url);
+        
+        if (Soup.MAJOR_VERSION === 2) {
+            _httpSession.queue_message(message, (session, message) => {
+                const retrieved = message.response_headers.get_one("date");
+                const data = JSON.parse(message.response_body.data);
+                global.log("response", retrieved);
 
-        _httpSession.queue_message(message, (session, message) => {
-            const retrieved = message.response_headers.get_one("date");
-            const data = JSON.parse(message.response_body.data);
-            global.log("response", retrieved);
+                callback(data, params, retrieved);
+            });
+        } else { //version 3
+            _httpSession.send_and_read_async(message, Soup.MessagePriority.NORMAL, null, (session, result) => {
+                const retrieved = message.get_response_headers().get_one("date");
+                const bytes = _httpSession.send_and_read_finish(result);
+                const data = JSON.parse(ByteArray.toString(bytes.get_data()));
+                global.log("response", retrieved);
 
-            callback(data, params, retrieved);
-        });
+                callback(data, params, retrieved);
+            });
+        }
     }
 }
 Provider.path = AppletDir;
