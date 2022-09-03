@@ -6,7 +6,7 @@ import { downloadWithYoutubeDl } from "./YoutubeDl";
 import { downloadWithYtDlp } from "./YtDlp";
 
 const { spawnCommandLine } = imports.misc.util;
-const { get_tmp_dir, get_home_dir, dir_make_tmp } = imports.gi.GLib;
+const { get_home_dir, dir_make_tmp } = imports.gi.GLib;
 const { File, FileCopyFlags, FileQueryInfoFlags } = imports.gi.Gio;
 
 export interface YoutubeDownloadServiceProps {
@@ -130,7 +130,6 @@ export function downloadSongFromYoutube(title: string) {
           tmpDirPath,
           onFileMoved: (props) => {
             const { fileAlreadyExist, targetFilePath } = props;
-            global.log("fileAlreadyExist in onFileMoved", fileAlreadyExist);
             notifyYoutubeDownloadFinished({
               downloadPath: targetFilePath,
               fileAlreadyExist,
