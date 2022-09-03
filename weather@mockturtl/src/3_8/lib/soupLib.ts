@@ -1,6 +1,8 @@
 import { HTTPHeaders, HTTPParams, Method } from "./httpLib";
 import { Logger } from "./logger";
 const { Message, Session } = imports.gi.Soup;
+const { PRIORITY_DEFAULT }  = imports.gi.GLib;
+const ByteArray = imports.byteArray;
 
 export interface SoupLib {
     Send: (url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method?: Method) => Promise<SoupResponse | null>;
@@ -11,6 +13,63 @@ export interface SoupResponse {
 	reason_phrase: string;
 	response_body: string | null;
 	response_headers: Record<string, string>;
+}
+
+class Soup3 implements SoupLib {
+
+    /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
+	private readonly _httpSession = new Session();
+
+    constructor() {
+        const { proxy_resolver_get_default }  = imports.gi.Gio;
+        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
+		this._httpSession.timeout = 10;
+		this._httpSession.idle_timeout = 10;
+		this._httpSession.add_feature(proxy_resolver_get_default());
+    }
+
+    async Send(url: string, params?: HTTPParams | null | undefined, headers?: HTTPHeaders | undefined, method: Method = "GET"): Promise<SoupResponse | null> {
+        // Add params to url
+        if (params != null) {
+            const items = Object.keys(params);
+            for (const [index, item] of items.entries()) {
+                url += (index == 0) ? "?" : "&";
+                url += (item) + "=" + params[item]
+            }
+        }
+
+        const query = encodeURI(url);
+        Logger.Debug("URL called: " + query);
+        const data: SoupResponse | null = await new Promise((resolve, reject) => {
+            const message = Message.new(method, query);
+            if (message == null) {
+                resolve(null);
+            }
+            else {
+                if (headers != null) {
+                    for (const key in headers) {
+                        message.request_headers.append(key, headers[key]);
+                    }
+                }
+                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, null, (session, result) => {
+                    const res = this._httpSession.send_and_read_finish(result);
+                    const headers: Record<string, string> = {};
+                    message.get_response_headers().foreach((name, value) => {
+                        headers[name] = value;
+                    })
+
+                    resolve({
+                        reason_phrase: message.reason_phrase,
+                        status_code: message.status_code,
+                        response_body: res != null ? ByteArray.toString(ByteArray.fromGBytes(res)) : null,
+                        response_headers: headers
+                    });
+                });
+            }
+        });
+
+        return data;
+    }
 }
 
 class Soup2 implements SoupLib {
