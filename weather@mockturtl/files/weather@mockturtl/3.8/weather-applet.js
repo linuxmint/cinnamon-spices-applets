@@ -16422,6 +16422,65 @@ class UI {
 ;// CONCATENATED MODULE: ./src/3_8/lib/soupLib.ts
 
 const { Message, Session } = imports.gi.Soup;
+const { PRIORITY_DEFAULT } = imports.gi.GLib;
+const soupLib_ByteArray = imports.byteArray;
+function AddParamsToURI(url, params) {
+    let result = url;
+    if (params != null) {
+        const items = Object.keys(params);
+        for (const [index, item] of items.entries()) {
+            result += (index == 0) ? "?" : "&";
+            result += (item) + "=" + params[item];
+        }
+    }
+    return result;
+}
+function AddHeadersToMessage(message, headers) {
+    if (headers != null) {
+        for (const key in headers) {
+            message.request_headers.append(key, headers[key]);
+        }
+    }
+}
+class Soup3 {
+    constructor() {
+        this._httpSession = new Session();
+        const { proxy_resolver_get_default } = imports.gi.Gio;
+        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
+        this._httpSession.timeout = 10;
+        this._httpSession.idle_timeout = 10;
+        this._httpSession.add_feature(proxy_resolver_get_default());
+    }
+    async Send(url, params, headers, method = "GET") {
+        url = AddParamsToURI(url, params);
+        const query = encodeURI(url);
+        logger_Logger.Debug("URL called: " + query);
+        const data = await new Promise((resolve, reject) => {
+            const message = Message.new(method, query);
+            if (message == null) {
+                resolve(null);
+            }
+            else {
+                AddHeadersToMessage(message, headers);
+                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, null, (session, result) => {
+                    var _a;
+                    const res = this._httpSession.send_and_read_finish(result);
+                    const headers = {};
+                    message.get_response_headers().foreach((name, value) => {
+                        headers[name] = value;
+                    });
+                    resolve({
+                        reason_phrase: (_a = message.get_reason_phrase()) !== null && _a !== void 0 ? _a : "",
+                        status_code: message.get_status(),
+                        response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
+                        response_headers: headers
+                    });
+                });
+            }
+        });
+        return data;
+    }
+}
 class Soup2 {
     constructor() {
         this._httpSession = new Session();
@@ -16432,13 +16491,7 @@ class Soup2 {
         this._httpSession.add_feature(new ProxyResolverDefault());
     }
     async Send(url, params, headers, method = "GET") {
-        if (params != null) {
-            const items = Object.keys(params);
-            for (const [index, item] of items.entries()) {
-                url += (index == 0) ? "?" : "&";
-                url += (item) + "=" + params[item];
-            }
-        }
+        url = AddParamsToURI(url, params);
         const query = encodeURI(url);
         logger_Logger.Debug("URL called: " + query);
         const data = await new Promise((resolve, reject) => {
@@ -16447,11 +16500,7 @@ class Soup2 {
                 resolve(null);
             }
             else {
-                if (headers != null) {
-                    for (const key in headers) {
-                        message.request_headers.append(key, headers[key]);
-                    }
-                }
+                AddHeadersToMessage(message, headers);
                 this._httpSession.queue_message(message, (session, message) => {
                     var _a, _b;
                     const headers = {};
@@ -16470,7 +16519,7 @@ class Soup2 {
         return data;
     }
 }
-const soupLib = new Soup2();
+const soupLib = imports.gi.Soup.MAJOR_VERSION == 3 ? new Soup3() : new Soup2();
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
 

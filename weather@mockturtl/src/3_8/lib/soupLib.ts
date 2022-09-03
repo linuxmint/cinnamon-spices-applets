@@ -15,6 +15,26 @@ export interface SoupResponse {
 	response_headers: Record<string, string>;
 }
 
+function AddParamsToURI(url: string, params?: HTTPParams | null): string {
+    let result = url;
+    if (params != null) {
+        const items = Object.keys(params);
+        for (const [index, item] of items.entries()) {
+            result += (index == 0) ? "?" : "&";
+            result += (item) + "=" + params[item]
+        }
+    }
+    return result;
+}
+
+function AddHeadersToMessage(message: imports.gi.Soup.Message, headers?: HTTPHeaders): void {
+    if (headers != null) {
+        for (const key in headers) {
+            message.request_headers.append(key, headers[key]);
+        }
+    }
+}
+
 class Soup3 implements SoupLib {
 
     /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
@@ -25,18 +45,12 @@ class Soup3 implements SoupLib {
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
 		this._httpSession.timeout = 10;
 		this._httpSession.idle_timeout = 10;
-		this._httpSession.add_feature(proxy_resolver_get_default());
+		this._httpSession.add_feature(proxy_resolver_get_default() as any);
     }
 
     async Send(url: string, params?: HTTPParams | null | undefined, headers?: HTTPHeaders | undefined, method: Method = "GET"): Promise<SoupResponse | null> {
         // Add params to url
-        if (params != null) {
-            const items = Object.keys(params);
-            for (const [index, item] of items.entries()) {
-                url += (index == 0) ? "?" : "&";
-                url += (item) + "=" + params[item]
-            }
-        }
+        url = AddParamsToURI(url, params);
 
         const query = encodeURI(url);
         Logger.Debug("URL called: " + query);
@@ -46,21 +60,17 @@ class Soup3 implements SoupLib {
                 resolve(null);
             }
             else {
-                if (headers != null) {
-                    for (const key in headers) {
-                        message.request_headers.append(key, headers[key]);
-                    }
-                }
-                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, null, (session, result) => {
-                    const res = this._httpSession.send_and_read_finish(result);
+                AddHeadersToMessage(message, headers);
+                (this._httpSession as any).send_and_read_async(message, PRIORITY_DEFAULT, null, (session: any, result: any) => {
+                    const res: imports.gi.GLib.Bytes | null = (this._httpSession as any).send_and_read_finish(result);
                     const headers: Record<string, string> = {};
-                    message.get_response_headers().foreach((name, value) => {
+                    (message as any).get_response_headers().foreach((name: string, value: string) => {
                         headers[name] = value;
                     })
 
                     resolve({
-                        reason_phrase: message.reason_phrase,
-                        status_code: message.status_code,
+                        reason_phrase: (message as any).get_reason_phrase() ?? "",
+                        status_code: (message as any).get_status(),
                         response_body: res != null ? ByteArray.toString(ByteArray.fromGBytes(res)) : null,
                         response_headers: headers
                     });
@@ -93,13 +103,7 @@ class Soup2 implements SoupLib {
 	 */
 	public async Send(url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method: Method = "GET"): Promise<SoupResponse | null> {
 		// Add params to url
-		if (params != null) {
-			const items = Object.keys(params);
-			for (const [index, item] of items.entries()) {
-				url += (index == 0) ? "?" : "&";
-				url += (item) + "=" + params[item]
-			}
-		}
+		url = AddParamsToURI(url, params);
 
 		const query = encodeURI(url);
 		Logger.Debug("URL called: " + query);
@@ -109,11 +113,7 @@ class Soup2 implements SoupLib {
 				resolve(null);
 			}
 			else {
-				if (headers != null) {
-					for (const key in headers) {
-						message.request_headers.append(key, headers[key]);
-					}
-				}
+				AddHeadersToMessage(message, headers);
 				this._httpSession.queue_message(message, (session, message) => {
 					const headers: Record<string, string> = {};
 					message.response_headers.foreach((name, value) => {
@@ -135,4 +135,4 @@ class Soup2 implements SoupLib {
 }
 
 
-export const soupLib: SoupLib = new Soup2();
+export const soupLib: SoupLib = imports.gi.Soup.MAJOR_VERSION == 3 ? new Soup3() : new Soup2();
