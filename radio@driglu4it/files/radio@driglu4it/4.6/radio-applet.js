@@ -4171,7 +4171,7 @@ function downloadWithYoutubeDl(props) {
     const { downloadDir, title, onFinished, onSuccess, onError } = props;
     let hasBeenCancelled = false;
     // ytsearch option found here https://askubuntu.com/a/731511/1013434 (not given in the youtube-dl docs ...)
-    const downloadCommand = `youtube-dl --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\\"')}" --add-metadata --embed-thumbnail`;
+    const downloadCommand = `youtube-dl --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\"')}" --add-metadata --embed-thumbnail`;
     const process = spawnCommandLineAsyncIO(downloadCommand, (stdout, stderr) => {
         onFinished();
         if (hasBeenCancelled) {
@@ -4179,12 +4179,7 @@ function downloadWithYoutubeDl(props) {
             return;
         }
         if (stdout) {
-            const downloadPath = getDownloadPath(stdout);
-            if (!downloadPath) {
-                onError('downloadPath could not be determined from stdout. Most likely the download has failed', downloadCommand);
-                return;
-            }
-            onSuccess(downloadPath);
+            onSuccess();
             return;
         }
         if (stderr) {
@@ -4199,13 +4194,6 @@ function downloadWithYoutubeDl(props) {
     }
     return { cancel };
 }
-function getDownloadPath(stdout) {
-    var _a;
-    const arrayOfLines = stdout.match(/[^\r\n]+/g);
-    // there is only one line in stdout which gives the path of the downloaded mp3. This start with [ffmpeg] Destination ...
-    const searchString = '[ffmpeg] Destination: ';
-    return (_a = arrayOfLines === null || arrayOfLines === void 0 ? void 0 : arrayOfLines.find(line => line.includes(searchString))) === null || _a === void 0 ? void 0 : _a.split(searchString)[1];
-}
 
 ;// CONCATENATED MODULE: ./src/services/youtubeDownload/YtDlp.ts
 const { spawnCommandLineAsyncIO: YtDlp_spawnCommandLineAsyncIO } = imports.misc.util;
@@ -4213,7 +4201,7 @@ const { spawnCommandLineAsyncIO: YtDlp_spawnCommandLineAsyncIO } = imports.misc.
 function downloadWithYtDlp(props) {
     const { downloadDir, title, onFinished, onSuccess, onError } = props;
     let hasBeenCancelled = false;
-    const downloadCommand = `yt-dlp --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\\"')}" --add-metadata --embed-thumbnail`;
+    const downloadCommand = `yt-dlp --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\"')}" --add-metadata --embed-thumbnail`;
     const process = YtDlp_spawnCommandLineAsyncIO(downloadCommand, (stdout, stderr) => {
         onFinished();
         if (hasBeenCancelled) {
@@ -4221,12 +4209,7 @@ function downloadWithYtDlp(props) {
             return;
         }
         if (stdout) {
-            const downloadPath = YtDlp_getDownloadPath(stdout);
-            if (!downloadPath) {
-                onError('downloadPath could not be determined from stdout. Most likely the download has failed', downloadCommand);
-                return;
-            }
-            onSuccess(downloadPath);
+            onSuccess();
             return;
         }
         if (stderr) {
@@ -4240,12 +4223,6 @@ function downloadWithYtDlp(props) {
     }
     return { cancel };
 }
-function YtDlp_getDownloadPath(stdout) {
-    var _a;
-    const arrayOfLines = stdout.match(/[^\r\n]+/g);
-    const searchString = '[ExtractAudio] Destination: ';
-    return (_a = arrayOfLines === null || arrayOfLines === void 0 ? void 0 : arrayOfLines.find(line => line.includes(searchString))) === null || _a === void 0 ? void 0 : _a.split(searchString)[1];
-}
 
 ;// CONCATENATED MODULE: ./src/services/youtubeDownload/YoutubeDownloadManager.ts
 
@@ -4254,43 +4231,43 @@ function YtDlp_getDownloadPath(stdout) {
 
 
 const { spawnCommandLine: YoutubeDownloadManager_spawnCommandLine } = imports.misc.util;
-const { get_tmp_dir, get_home_dir: YoutubeDownloadManager_get_home_dir } = imports.gi.GLib;
-const { File, FileCopyFlags } = imports.gi.Gio;
+const { get_tmp_dir, get_home_dir: YoutubeDownloadManager_get_home_dir, dir_make_tmp } = imports.gi.GLib;
+const { File, FileCopyFlags, FileQueryInfoFlags } = imports.gi.Gio;
 const notifyYoutubeDownloadFailed = (props) => {
     const { youtubeCli, errorMessage } = props;
     notifyError(`Couldn't download Song from Youtube due to an Error. Make Sure you have the newest version of ${youtubeCli} installed. 
     \n<b>Important:</b> Don't use apt for the installation but follow the installation instruction given on the Radio Applet Site in the Cinnamon Store instead`, errorMessage, {
         additionalBtns: [
             {
-                text: 'View Installation Instruction',
-                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open ${APPLET_SITE} `)
-            }
-        ]
+                text: "View Installation Instruction",
+                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open ${APPLET_SITE} `),
+            },
+        ],
     });
 };
 const notifyYoutubeDownloadStarted = (title) => {
     notify(`Downloading ${title} ...`, {
         buttons: [
             {
-                text: 'Cancel',
-                onClick: () => cancelDownload(title)
-            }
-        ]
+                text: "Cancel",
+                onClick: () => cancelDownload(title),
+            },
+        ],
     });
 };
 const notifyYoutubeDownloadFinished = (props) => {
     const { downloadPath, fileAlreadyExist = false } = props;
-    notify(fileAlreadyExist ?
-        'Downloaded Song not saved as a file with the same name already exists' :
-        `Download finished. File saved to ${downloadPath}`, {
+    notify(fileAlreadyExist
+        ? "Downloaded Song not saved as a file with the same name already exists"
+        : `Download finished. File saved to ${downloadPath}`, {
         isMarkup: true,
         transient: false,
         buttons: [
             {
-                text: 'Play',
-                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open '${downloadPath}'`)
-            }
-        ]
+                text: "Play",
+                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open '${downloadPath}'`),
+            },
+        ],
     });
 };
 let downloadProcesses = [];
@@ -4298,52 +4275,82 @@ const downloadingSongsChangedListener = [];
 function downloadSongFromYoutube(title) {
     const downloadDir = configs.settingsObject.musicDownloadDir;
     const youtubeCli = configs.settingsObject.youtubeCli;
-    const music_dir_absolut = downloadDir.charAt(0) === '~' ?
-        downloadDir.replace('~', YoutubeDownloadManager_get_home_dir()) : downloadDir;
+    const music_dir_absolut = downloadDir.charAt(0) === "~"
+        ? downloadDir.replace("~", YoutubeDownloadManager_get_home_dir())
+        : downloadDir;
     if (!title)
         return;
-    const sameSongIsDownloading = downloadProcesses.find(process => {
+    const sameSongIsDownloading = downloadProcesses.find((process) => {
         return process.songTitle === title;
     });
     if (sameSongIsDownloading)
         return;
+    const tmpDirPath = dir_make_tmp(null);
     const downloadProps = {
         title,
-        downloadDir: get_tmp_dir(),
+        downloadDir: tmpDirPath,
         onError: (errorMessage, downloadCommand) => {
-            notifyYoutubeDownloadFailed({ youtubeCli, errorMessage: `The following error occured at youtube download attempt: ${errorMessage}. The used download Command was: ${downloadCommand}` });
+            notifyYoutubeDownloadFailed({
+                youtubeCli,
+                errorMessage: `The following error occured at youtube download attempt: ${errorMessage}. The used download Command was: ${downloadCommand}`,
+            });
         },
         onFinished: () => {
-            downloadProcesses = downloadProcesses.filter(downloadingSong => downloadingSong.songTitle !== title);
-            downloadingSongsChangedListener.forEach(listener => listener(downloadProcesses));
+            downloadProcesses = downloadProcesses.filter((downloadingSong) => downloadingSong.songTitle !== title);
+            downloadingSongsChangedListener.forEach((listener) => listener(downloadProcesses));
         },
-        onSuccess: (downloadPath) => {
-            const tmpFile = File.new_for_path(downloadPath);
-            const fileName = tmpFile.get_basename();
-            const targetPath = `${music_dir_absolut}/${fileName}`;
-            const targetFile = File.parse_name(targetPath);
-            if (targetFile.query_exists(null)) {
-                notifyYoutubeDownloadFinished({ downloadPath: targetPath, fileAlreadyExist: true });
-                return;
-            }
+        onSuccess: () => {
             try {
-                // @ts-ignore
-                tmpFile.move(File.parse_name(targetPath), FileCopyFlags.BACKUP, null, null);
-                notifyYoutubeDownloadFinished({ downloadPath: targetPath });
+                moveFileFromTmpDir({
+                    targetDirPath: music_dir_absolut,
+                    tmpDirPath,
+                    onFileMoved: (props) => {
+                        const { fileAlreadyExist, targetFilePath } = props;
+                        global.log("fileAlreadyExist in onFileMoved", fileAlreadyExist);
+                        notifyYoutubeDownloadFinished({
+                            downloadPath: targetFilePath,
+                            fileAlreadyExist,
+                        });
+                    },
+                });
             }
             catch (error) {
-                const errorMessage = error instanceof imports.gi.GLib.Error ? error.message : 'Unknown Error Type';
-                notifyYoutubeDownloadFailed({ youtubeCli, errorMessage: `Failed to copy download from tmp dir. The following error occurred: ${errorMessage}` });
+                const errorMessage = error instanceof imports.gi.GLib.Error ? error.message : error;
+                notifyYoutubeDownloadFailed({
+                    youtubeCli,
+                    errorMessage: `Failed to copy download from tmp dir. The following error occurred: ${errorMessage}`,
+                });
             }
-        }
+        },
     };
-    const { cancel } = youtubeCli === 'youtube-dl' ?
-        downloadWithYoutubeDl(downloadProps) :
-        downloadWithYtDlp(downloadProps);
+    const { cancel } = youtubeCli === "youtube-dl"
+        ? downloadWithYoutubeDl(downloadProps)
+        : downloadWithYtDlp(downloadProps);
     notifyYoutubeDownloadStarted(title);
     downloadProcesses.push({ songTitle: title, cancelDownload: cancel });
-    downloadingSongsChangedListener.forEach(listener => listener(downloadProcesses));
+    downloadingSongsChangedListener.forEach((listener) => listener(downloadProcesses));
 }
+const moveFileFromTmpDir = (props) => {
+    var _a;
+    const { tmpDirPath, targetDirPath, onFileMoved } = props;
+    const fileName = (_a = File.new_for_path(tmpDirPath)
+        .enumerate_children("standard::*", FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null)
+        .next_file(null)) === null || _a === void 0 ? void 0 : _a.get_name();
+    if (!fileName) {
+        throw new Error(`filename couldn't be determined`);
+    }
+    const tmpFilePath = `${tmpDirPath}/${fileName}`;
+    const tmpFile = File.new_for_path(tmpFilePath);
+    const targetFilePath = `${targetDirPath}/${fileName}`;
+    const targetFile = File.parse_name(targetFilePath);
+    if (targetFile.query_exists(null)) {
+        onFileMoved({ targetFilePath, fileAlreadyExist: true });
+        return;
+    }
+    // @ts-ignore
+    tmpFile.move(File.parse_name(targetFilePath), FileCopyFlags.BACKUP, null, null);
+    onFileMoved({ targetFilePath, fileAlreadyExist: false });
+};
 const getCurrentDownloadingSongs = () => {
     return downloadProcesses.map((downloadingSong) => downloadingSong.songTitle);
 };
