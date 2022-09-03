@@ -1,6 +1,6 @@
 import { HTTPHeaders, HTTPParams, Method } from "./httpLib";
 import { Logger } from "./logger";
-const { Message, Session } = imports.gi.Soup;
+const { Message, Session, SessionAsync } = imports.gi.Soup;
 const { PRIORITY_DEFAULT }  = imports.gi.GLib;
 const ByteArray = imports.byteArray;
 
@@ -85,7 +85,7 @@ class Soup3 implements SoupLib {
 class Soup2 implements SoupLib {
 
     /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
-	private readonly _httpSession = new Session();
+	private readonly _httpSession = new SessionAsync();
 
     constructor() {
         const {ProxyResolverDefault}  = imports.gi.Soup;

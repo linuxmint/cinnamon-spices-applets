@@ -16421,7 +16421,7 @@ class UI {
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/soupLib.ts
 
-const { Message, Session } = imports.gi.Soup;
+const { Message, Session, SessionAsync } = imports.gi.Soup;
 const { PRIORITY_DEFAULT } = imports.gi.GLib;
 const soupLib_ByteArray = imports.byteArray;
 function AddParamsToURI(url, params) {
@@ -16483,7 +16483,7 @@ class Soup3 {
 }
 class Soup2 {
     constructor() {
-        this._httpSession = new Session();
+        this._httpSession = new SessionAsync();
         const { ProxyResolverDefault } = imports.gi.Soup;
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         this._httpSession.timeout = 10;
