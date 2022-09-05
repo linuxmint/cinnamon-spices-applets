@@ -12,6 +12,7 @@ const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
 const Soup = imports.gi.Soup;
+const ByteArray = imports.byteArray;
 const Clutter = imports.gi.Clutter;
 const MessageTray = imports.ui.messageTray;
 const Json = imports.ui.appletManager.applets[UUID].json_parse;
@@ -56,12 +57,18 @@ MyApplet.prototype = {
         this.notificationSource = new MessageTray.SystemNotificationSource();
         Main.messageTray.add(this.notificationSource);
 
-        try {
-            this.httpSession = new Soup.SessionAsync();
-        } catch (e){ throw 'LiveScore: Creating SessionAsync failed: ' + e; }
-        try {
-            Soup.Session.prototype.add_feature.call(this.httpSession, new Soup.ProxyResolverDefault());
-        } catch (e){ throw 'LiveScore: Adding ProxyResolverDefault failed: ' + e; }
+        if (Soup.MAJOR_VERSION === 2) {
+            try {
+                this.httpSession = new Soup.SessionAsync();
+            } catch (e){ throw 'LiveScore: Creating SessionAsync failed: ' + e; }
+        } else { //version 3
+            this.httpSession = new Soup.Session();
+        }
+        if (Soup.MAJOR_VERSION === 2) {
+            try {
+                Soup.Session.prototype.add_feature.call(this.httpSession, new Soup.ProxyResolverDefault());
+            } catch (e){ throw 'LiveScore: Adding ProxyResolverDefault failed: ' + e; }
+        }
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.settings.bindProperty(Settings.BindingDirection.IN, "amount", "amount", this._update_settings);
@@ -98,13 +105,24 @@ MyApplet.prototype = {
 
     _loadHistory: function(unit, length, callback) {
         let message = Soup.Message.new('GET', `https://min-api.cryptocompare.com/data/${unit}?fsym=${this.ticker}&tsym=${this.currency}&limit=${length}`);
-        this.httpSession.queue_message(message, Lang.bind(this, function(session, message) {
-            if (message.status_code !== 200) {
-                global.logWarning('Failure to receive valid response from remote api');
-            } else {
-                Lang.bind(this, callback)(message.response_body.data);
-            }
-        }));
+        if (Soup.MAJOR_VERSION == 2) {
+            this.httpSession.queue_message(message, (session, response) => {
+                if (response.status_code !== 200) {
+                    global.logWarning('Failure to receive valid response from remote api');
+                } else {
+                    Lang.bind(this, callback)(response.response_body.data);
+                }
+            });
+        } else { //version 3
+            this.httpSession.send_and_read_async(message, Soup.MessagePriority.NORMAL, null, (session, response) => {
+                if (message.get_status() !== 200) {
+                    global.logWarning('Failure to receive valid response from remote api');
+                } else {
+                    const bytes = this.httpSession.send_and_read_finish(response);
+                    Lang.bind(this, callback)(ByteArray.toString(bytes.get_data()));
+                }
+            });
+        }
     },
 
     _drawGraph: function() {
@@ -260,15 +278,6 @@ MyApplet.prototype = {
         }
     },
 
-    _onHandleResponse: function (session, message) {
-        if (message.status_code !== 200) {
-            this.set_applet_label('Loading...');
-            global.logWarning('Failure to receive valid response from remote api');
-        } else {
-            this._parseJSON(message.response_body.data);
-        }
-    },
-
     _parseJSON: function (data) {
         const response = Json.json_parse(data, null);
         if (response.hasOwnProperty('Response') && response['Response'] === 'Error') {
@@ -369,7 +378,26 @@ MyApplet.prototype = {
     _loadTrackers: function(url) {
         let this_ = this;
         let message = Soup.Message.new('GET', url);
-        this.httpSession.queue_message(message, function(session,message){this_._onHandleResponse(session,message)});
+        if (Soup.MAJOR_VERSION === 2) {
+            this.httpSession.queue_message(message, (session, response) => {
+                if (response.status_code !== 200) {
+                    this.set_applet_label('Loading...');
+                    global.logWarning('Failure to receive valid response from remote api');
+                } else {
+                    this._parseJSON(response.response_body.data);
+                }
+            });
+        } else { //version 3
+            this.httpSession.send_and_read_async(message, Soup.MessagePriority.NORMAL, null, (session, response) => {
+                if (message.get_status() !== 200) {
+                    this.set_applet_label('Loading...');
+                    global.logWarning('Failure to receive valid response from remote api');
+                } else {
+                    const bytes = session.send_and_read_finish(response);
+                    this._parseJSON(ByteArray.toString(bytes.get_data()));
+                }
+            });
+        }
     },
 
     _loadIcon: function() {
@@ -380,16 +408,27 @@ MyApplet.prototype = {
 
         let this_ = this;
         let message = Soup.Message.new('GET', 'https://min-api.cryptocompare.com/data/all/coinlist');
-        this.httpSession.queue_message(message, function(session,message){this_._onHandleIconResponse(session,message)});
-    },
-
-    _onHandleIconResponse: function (session, message) {
-        if (message.status_code !== 200) {
-            this.hide_applet_icon();
-            global.logWarning('Failure to receive valid response from remote api');
-        } else {
-            this._parseIconJSON(message.response_body.data);
+        if (Soup.MAJOR_VERSION === 2) {
+            this.httpSession.queue_message(message, (session, response) => {
+                if (response.status_code !== 200) {
+                    this.hide_applet_icon();
+                    global.logWarning('Failure to receive valid response from remote api');
+                } else {
+                    this._parseIconJSON(response.response_body.data);
+                }
+            });
+        } else { //version 3
+            this.httpSession.send_and_read_async(message, Soup.MessagePriority.NORMAL, null, (session, response) => {
+                if (message.get_status() !== 200) {
+                    this.hide_applet_icon();
+                    global.logWarning('Failure to receive valid response from remote api');
+                } else {
+                    const bytes = session.send_and_read_finish(response);
+                    this._parseIconJSON(ByteArray.toString(bytes.get_data()));
+                }
+            });
         }
+
     },
 
     _parseIconJSON: function (data) {
