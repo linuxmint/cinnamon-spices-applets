@@ -16445,11 +16445,9 @@ function AddHeadersToMessage(message, headers) {
 class Soup3 {
     constructor() {
         this._httpSession = new Session();
-        const { proxy_resolver_get_default } = imports.gi.Gio;
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
-        this._httpSession.add_feature(proxy_resolver_get_default());
     }
     async Send(url, params, headers, method = "GET") {
         url = AddParamsToURI(url, params);
