@@ -1,52 +1,92 @@
 import * as consts from '../../consts'
 import { createRotateAnimation } from '../../functions/tweens';
-import { createSimpleMenuItem } from '../../lib/SimpleMenuItem';
+import { createSimpleMenuItem, SimpleMenuItem } from '../../lib/SimpleMenuItem';
 import { AdvancedPlaybackStatus } from '../../types';
+const { BoxLayout } = imports.gi.St
 
-
-export interface Arguments {
+export interface ChannelMenuItemProps {
     channelName: string,
-    onActivated: (channelName: string) => void,
-    playbackStatus?: AdvancedPlaybackStatus
+    onActivated: () => void,
+    initialPlaybackStatus: AdvancedPlaybackStatus
+    onRemoveClick: () => void
 }
 
-export function createChannelMenuItem(args: Arguments) {
+const playbackIconMap: Map<AdvancedPlaybackStatus, string | null> = new Map([
+    ["Playing", consts.PLAY_ICON_NAME],
+    ["Paused", consts.PAUSE_ICON_NAME],
+    ["Loading", consts.LOADING_ICON_NAME],
+    ["Stopped", null]
+])
+
+const createMainMenuItem = (props: { channelName: string, onActivated: () => void, onRightClick: () => void, initialPlaybackStatus: AdvancedPlaybackStatus }) => {
+    const { channelName, onActivated, onRightClick, initialPlaybackStatus } = props
+
+    const mainMenuItem = createSimpleMenuItem({
+        maxCharNumber: consts.MAX_STRING_LENGTH,
+        text: channelName,
+        onActivated,
+        onRightClick
+    })
+
+    const { startResumeRotation, stopRotation } = createRotateAnimation(mainMenuItem.getIcon())
+
+    const setPlaybackStatus = (playbackStatus: AdvancedPlaybackStatus) => {
+        const iconName = playbackIconMap.get(playbackStatus)
+        playbackStatus === 'Loading' ? startResumeRotation() : stopRotation()
+        mainMenuItem.setIconName(iconName)
+    }
+
+    initialPlaybackStatus && setPlaybackStatus(initialPlaybackStatus)
+
+    return {
+        actor: mainMenuItem.actor,
+        setPlaybackStatus
+    }
+
+}
+
+export const createChannelMenuItem = (props: ChannelMenuItemProps) => {
 
     const {
         channelName,
         onActivated,
-        playbackStatus
-    } = args
+        initialPlaybackStatus,
+        onRemoveClick,
+    } = props
 
-    const playbackIconMap: Map<AdvancedPlaybackStatus, string | null> = new Map([
-        ["Playing", consts.PLAY_ICON_NAME],
-        ["Paused", consts.PAUSE_ICON_NAME],
-        ["Loading", consts.LOADING_ICON_NAME],
-        ["Stopped", null]
-    ])
-
-    const iconMenuItem = createSimpleMenuItem({
-        maxCharNumber: consts.MAX_STRING_LENGTH,
-        text: channelName,
-        onActivated: () => {
-            onActivated(channelName)
-        }
+    const removeChannelItem = createSimpleMenuItem({
+        text: 'Remove Channel',
+        onActivated: onRemoveClick,
+        iconName: 'edit-delete',
     })
 
-    const { startResumeRotation, stopRotation } = createRotateAnimation(iconMenuItem.getIcon())
-    
-    function setPlaybackStatus(playbackStatus: AdvancedPlaybackStatus) {
-        const iconName = playbackIconMap.get(playbackStatus)
-        playbackStatus === 'Loading' ? startResumeRotation() : stopRotation()
+    const contextMenuContainer = new BoxLayout({ vertical: true, style: `padding-left:20px;` })
+    contextMenuContainer.add_child(removeChannelItem.actor)
 
-        iconMenuItem.setIconName(iconName)
+    const menuItemContainer = new BoxLayout({ vertical: true })
+
+
+    const handleMainMenuItemRightClicked = () => {
+        if (menuItemContainer.get_child_at_index(1) === contextMenuContainer) {
+            menuItemContainer.remove_child(contextMenuContainer)
+            return
+        }
+        menuItemContainer.add_child(contextMenuContainer)
     }
 
-    playbackStatus && setPlaybackStatus(playbackStatus)
+    const mainMenuItem = createMainMenuItem({
+        channelName,
+        onActivated: () => onActivated(),
+        onRightClick: handleMainMenuItemRightClicked,
+        initialPlaybackStatus
+    })
+
+    menuItemContainer.add_child(mainMenuItem.actor)
+
 
     return {
-        setPlaybackStatus,
-        actor: iconMenuItem.actor,
+        setPlaybackStatus: mainMenuItem.setPlaybackStatus,
+        actor: menuItemContainer,
         getChannelName: () => channelName
     }
 }

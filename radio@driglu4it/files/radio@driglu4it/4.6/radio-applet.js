@@ -4693,14 +4693,19 @@ function createSeparatorMenuItem() {
 
 ;// CONCATENATED MODULE: ./src/lib/ActivWidget.ts
 const { KEY_space, KEY_KP_Enter, KEY_Return } = imports.gi.Clutter;
+/**  */
 function createActivWidget(args) {
     const { widget, onActivated } = args;
     // TODO: understand can_focus
     widget.can_focus = true;
     widget.reactive = true;
     widget.track_hover = true;
-    widget.connect('button-release-event', () => {
-        onActivated === null || onActivated === void 0 ? void 0 : onActivated();
+    widget.connect('button-release-event', (_, event) => {
+        const button = event.get_button();
+        // only if it is not a right click
+        if (button !== 3) {
+            onActivated === null || onActivated === void 0 ? void 0 : onActivated();
+        }
         return false;
     });
     // TODO: This is needed because some themes (at least Adapta-Nokto but maybe also others) don't provide style for the hover pseudo class. But it would be much easier to once (and on theme changes) programmatically set the hover pseudo class equal to the active pseudo class when the hover class isn't provided by the theme. 
@@ -4732,7 +4737,7 @@ const { Icon: SimpleMenuItem_Icon, IconType: SimpleMenuItem_IconType, Label: Sim
 // @ts-ignore
 const { Point: SimpleMenuItem_Point } = imports.gi.Clutter;
 function createSimpleMenuItem(args) {
-    const { text: initialText = "", maxCharNumber, iconName, onActivated } = args;
+    const { text: initialText = "", maxCharNumber, iconName, onActivated, onRightClick } = args;
     const icon = new SimpleMenuItem_Icon({
         icon_type: SimpleMenuItem_IconType.SYMBOLIC,
         style_class: "popup-menu-icon",
@@ -4767,6 +4772,13 @@ function createSimpleMenuItem(args) {
         setText,
         getIcon: () => icon,
     };
+    container.connect('button-press-event', (_, event) => {
+        const button = event.get_button();
+        if (button === 3) {
+            onRightClick === null || onRightClick === void 0 ? void 0 : onRightClick(menuItem);
+        }
+        return false;
+    });
     onActivated &&
         createActivWidget({
             widget: container,
@@ -5102,40 +5114,70 @@ function createSubMenu(args) {
 
 
 
-function createChannelMenuItem(args) {
-    const { channelName, onActivated, playbackStatus } = args;
-    const playbackIconMap = new Map([
-        ["Playing", PLAY_ICON_NAME],
-        ["Paused", PAUSE_ICON_NAME],
-        ["Loading", LOADING_ICON_NAME],
-        ["Stopped", null]
-    ]);
-    const iconMenuItem = createSimpleMenuItem({
+const { BoxLayout: ChannelMenuItem_BoxLayout } = imports.gi.St;
+const playbackIconMap = new Map([
+    ["Playing", PLAY_ICON_NAME],
+    ["Paused", PAUSE_ICON_NAME],
+    ["Loading", LOADING_ICON_NAME],
+    ["Stopped", null]
+]);
+const createMainMenuItem = (props) => {
+    const { channelName, onActivated, onRightClick, initialPlaybackStatus } = props;
+    const mainMenuItem = createSimpleMenuItem({
         maxCharNumber: MAX_STRING_LENGTH,
         text: channelName,
-        onActivated: () => {
-            onActivated(channelName);
-        }
+        onActivated,
+        onRightClick
     });
-    const { startResumeRotation, stopRotation } = createRotateAnimation(iconMenuItem.getIcon());
-    function setPlaybackStatus(playbackStatus) {
+    const { startResumeRotation, stopRotation } = createRotateAnimation(mainMenuItem.getIcon());
+    const setPlaybackStatus = (playbackStatus) => {
         const iconName = playbackIconMap.get(playbackStatus);
         playbackStatus === 'Loading' ? startResumeRotation() : stopRotation();
-        iconMenuItem.setIconName(iconName);
-    }
-    playbackStatus && setPlaybackStatus(playbackStatus);
+        mainMenuItem.setIconName(iconName);
+    };
+    initialPlaybackStatus && setPlaybackStatus(initialPlaybackStatus);
     return {
-        setPlaybackStatus,
-        actor: iconMenuItem.actor,
+        actor: mainMenuItem.actor,
+        setPlaybackStatus
+    };
+};
+const createChannelMenuItem = (props) => {
+    const { channelName, onActivated, initialPlaybackStatus, onRemoveClick, } = props;
+    const removeChannelItem = createSimpleMenuItem({
+        text: 'Remove Channel',
+        onActivated: onRemoveClick,
+        iconName: 'edit-delete',
+    });
+    const contextMenuContainer = new ChannelMenuItem_BoxLayout({ vertical: true, style: `padding-left:20px;` });
+    contextMenuContainer.add_child(removeChannelItem.actor);
+    const menuItemContainer = new ChannelMenuItem_BoxLayout({ vertical: true });
+    const handleMainMenuItemRightClicked = () => {
+        if (menuItemContainer.get_child_at_index(1) === contextMenuContainer) {
+            menuItemContainer.remove_child(contextMenuContainer);
+            return;
+        }
+        menuItemContainer.add_child(contextMenuContainer);
+    };
+    const mainMenuItem = createMainMenuItem({
+        channelName,
+        onActivated: () => onActivated(),
+        onRightClick: handleMainMenuItemRightClicked,
+        initialPlaybackStatus
+    });
+    menuItemContainer.add_child(mainMenuItem.actor);
+    return {
+        setPlaybackStatus: mainMenuItem.setPlaybackStatus,
+        actor: menuItemContainer,
         getChannelName: () => channelName
     };
-}
+};
 
 ;// CONCATENATED MODULE: ./src/ui/RadioPopupMenu/ChannelList.ts
 
 
 
 
+const { BoxLayout: ChannelList_BoxLayout } = imports.gi.St;
 function createChannelList() {
     const { getPlaybackStatus, getCurrentChannelName: getCurrentChannel, addChannelChangeHandler, addPlaybackStatusChangeHandler, setUrl } = mpvHandler;
     const { addStationsListChangeHandler, settingsObject } = configs;
@@ -5149,22 +5191,30 @@ function createChannelList() {
             throw new Error(`couldn't find a url for the provided name. That should not have happened :-/`);
         return channel.url;
     };
+    const handleChannelRemoveClicked = (channelName) => {
+        const previousStations = configs.settingsObject.userStations;
+        configs.settingsObject.userStations = previousStations.filter((cnl) => cnl.name !== channelName);
+    };
     // the channelItems are saved here to the map as well as to the container as on the container only the reduced name are shown. Theoretically it therefore couldn't be differentiated between two long channel names with the same first 30 (or so) characters   
     let channelItems = [];
-    function setRefreshList(names) {
+    const setRefreshList = (names) => {
         channelItems = [];
         subMenu.box.destroy_all_children();
-        names.forEach(name => {
+        names.forEach((name, index) => {
             const channelPlaybackstatus = (name === getCurrentChannel()) ? getPlaybackStatus() : 'Stopped';
+            // TODO: addd this to createChannelMenuItem
+            const channelItemContainer = new ChannelList_BoxLayout({ vertical: true });
             const channelItem = createChannelMenuItem({
                 channelName: name,
                 onActivated: () => setUrl(findUrl(name)),
-                playbackStatus: channelPlaybackstatus
+                initialPlaybackStatus: channelPlaybackstatus,
+                onRemoveClick: () => handleChannelRemoveClicked(name)
             });
+            channelItemContainer.add_child(channelItem.actor);
             channelItems.push(channelItem);
-            subMenu.box.add_child(channelItem.actor);
+            subMenu.box.add_child(channelItemContainer);
         });
-    }
+    };
     function updateChannel(name) {
         channelItems.forEach(item => {
             item.getChannelName() === name ? item.setPlaybackStatus(getPlaybackStatus()) : item.setPlaybackStatus('Stopped');

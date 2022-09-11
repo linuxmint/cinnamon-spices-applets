@@ -3,6 +3,9 @@ import { createChannelMenuItem } from "./ChannelMenuItem";
 import { AdvancedPlaybackStatus } from "../../types";
 import { mpvHandler } from "../../services/mpv/MpvHandler";
 import { configs } from "../../services/Config";
+import { createSimpleMenuItem, SimpleMenuItem } from "../../lib/SimpleMenuItem";
+
+const { BoxLayout } = imports.gi.St
 
 
 export function createChannelList() {
@@ -34,25 +37,39 @@ export function createChannelList() {
         return channel.url
     }
 
+    const handleChannelRemoveClicked = (channelName: string) => {
+        const previousStations = configs.settingsObject.userStations
+
+        configs.settingsObject.userStations = previousStations.filter((cnl) => cnl.name !== channelName)
+
+    }
+
     // the channelItems are saved here to the map as well as to the container as on the container only the reduced name are shown. Theoretically it therefore couldn't be differentiated between two long channel names with the same first 30 (or so) characters   
     let channelItems: ReturnType<typeof createChannelMenuItem>[] = []
 
-    function setRefreshList(names: string[]) {
+    const setRefreshList = (names: string[]) => {
         channelItems = []
         subMenu.box.destroy_all_children()
 
-        names.forEach(name => {
+        names.forEach((name, index) => {
             const channelPlaybackstatus =
                 (name === getCurrentChannel()) ? getPlaybackStatus() : 'Stopped'
+
+            // TODO: addd this to createChannelMenuItem
+            const channelItemContainer = new BoxLayout({ vertical: true })
+
 
             const channelItem = createChannelMenuItem({
                 channelName: name,
                 onActivated: () => setUrl(findUrl(name)),
-                playbackStatus: channelPlaybackstatus
+                initialPlaybackStatus: channelPlaybackstatus,
+                onRemoveClick: () => handleChannelRemoveClicked(name)
             })
 
+            channelItemContainer.add_child(channelItem.actor)
+
             channelItems.push(channelItem)
-            subMenu.box.add_child(channelItem.actor)
+            subMenu.box.add_child(channelItemContainer)
         })
     }
 
