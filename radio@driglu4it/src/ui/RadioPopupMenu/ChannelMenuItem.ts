@@ -65,7 +65,11 @@ export const createChannelMenuItem = (props: ChannelMenuItemProps) => {
         iconName: 'edit-delete',
     })
 
-    const contextMenuContainer = new BoxLayout({ vertical: true, style: `padding-left:22px;` })
+    const contextMenuContainer = new BoxLayout({
+        vertical: true,
+        style: `padding-left:20px;`
+    })
+
     contextMenuContainer.add_child(removeChannelItem.actor)
 
     const menuItemContainer = new BoxLayout({ vertical: true })
