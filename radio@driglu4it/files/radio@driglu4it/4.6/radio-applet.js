@@ -4369,7 +4369,10 @@ const cancelDownload = (songTitle) => {
 };
 /** for some reasons the downloaded files have by default a weird modified time stamp (this is neither the time the file has been created locally nor any metadata about the song), which makes it hard (impossible?) to sort the songs by last recently added.  */
 const updateFileModifiedTime = (filePath) => {
-    YoutubeDownloadManager_spawnCommandLine(`touch '${filePath}'`);
+    YoutubeDownloadManager_spawnCommandLine(`touch ${filePath
+        .replaceAll("'", "\\'")
+        .replaceAll(" ", "\\ ")
+        .replaceAll('"', '\\"')}`);
     // TODO: this would be better but for some reasons it doesn't work:
     // const file = File.new_for_path(filePath);
     // const fileInfo = file.query_info(
