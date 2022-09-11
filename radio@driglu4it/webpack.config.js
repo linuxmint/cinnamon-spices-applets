@@ -9,7 +9,7 @@ const DESCRIPTION =
 const NAME = "Radio++";
 const MAX_INSTANCES = 1;
 const CINNAMON_VERSION = "4.6"; // When set to null, the build output path is set to the files applet folder, else to a sub dir inside the applet files dir
-const APPLET_VERSION = "2.1.5";
+const APPLET_VERSION = "2.2.0";
 
 // Automatic calculated constants
 const UUID = __dirname.split("/").slice(-1)[0];
