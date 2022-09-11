@@ -4231,7 +4231,7 @@ function downloadWithYtDlp(props) {
 
 
 const { spawnCommandLine: YoutubeDownloadManager_spawnCommandLine } = imports.misc.util;
-const { get_tmp_dir, get_home_dir: YoutubeDownloadManager_get_home_dir, dir_make_tmp } = imports.gi.GLib;
+const { get_home_dir: YoutubeDownloadManager_get_home_dir, dir_make_tmp, DateTime } = imports.gi.GLib;
 const { File, FileCopyFlags, FileQueryInfoFlags } = imports.gi.Gio;
 const notifyYoutubeDownloadFailed = (props) => {
     const { youtubeCli, errorMessage } = props;
@@ -4306,7 +4306,7 @@ function downloadSongFromYoutube(title) {
                     tmpDirPath,
                     onFileMoved: (props) => {
                         const { fileAlreadyExist, targetFilePath } = props;
-                        global.log("fileAlreadyExist in onFileMoved", fileAlreadyExist);
+                        updateFileModifiedTime(targetFilePath);
                         notifyYoutubeDownloadFinished({
                             downloadPath: targetFilePath,
                             fileAlreadyExist,
@@ -4361,6 +4361,19 @@ const cancelDownload = (songTitle) => {
         return;
     }
     downloadProcess.cancelDownload();
+};
+/** for some reasons the downloaded files have by default a weird modified time stamp (this is neither the time the file has been created locally nor any metadata about the song), which makes it hard (impossible?) to sort the songs by last recently added.  */
+const updateFileModifiedTime = (filePath) => {
+    YoutubeDownloadManager_spawnCommandLine(`touch '${filePath}'`);
+    // TODO: this would be better but for some reasons it doesn't work:
+    // const file = File.new_for_path(filePath);
+    // const fileInfo = file.query_info(
+    //   "standard::*",
+    //   FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
+    //   null
+    // );
+    // const now = DateTime.new_now_local();
+    // fileInfo.set_modification_date_time(now);
 };
 function addDownloadingSongsChangeListener(callback) {
     downloadingSongsChangedListener.push(callback);
