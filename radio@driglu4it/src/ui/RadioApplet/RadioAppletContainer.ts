@@ -4,7 +4,7 @@ import { createRadioAppletLabel } from "./RadioAppletLabel";
 import { createRadioAppletTooltip } from "./RadioAppletTooltip";
 import { createRadioAppletIcon } from "./RadioAppletIcon";
 import { APPLET_SITE, MPRIS_PLUGIN_PATH, VOLUME_DELTA } from "../../consts";
-import { createRadioPopupMenu } from "../RadioPopupMenu/RadioPopupMenu";
+import { radioPopupMenu, initRadioPopupMenu } from "../RadioPopupMenu/RadioPopupMenu";
 import { installMpvWithMpris } from "../../services/mpv/CheckInstallation";
 import { createYoutubeDownloadIcon } from "./YoutubeDownloadIcon";
 import { notify } from "../../lib/notify";
@@ -21,7 +21,7 @@ export function createRadioAppletContainer() {
     onRemoved: handleAppletRemoved,
     onClick: handleClick,
     onRightClick: () => {
-      popupMenu?.close();
+      radioPopupMenu?.close();
       contextMenu?.toggle();
     },
     onScroll: handleScroll,
@@ -37,13 +37,14 @@ export function createRadioAppletContainer() {
 
   const tooltip = createRadioAppletTooltip({ appletContainer });
 
-  const popupMenu = createRadioPopupMenu({ launcher: appletContainer.actor });
+  initRadioPopupMenu({ launcher: appletContainer.actor })
+
   const contextMenu = createRadioContextMenu({
     launcher: appletContainer.actor,
   });
 
-  popupMenu.connect("notify::visible", () => {
-    popupMenu.visible && tooltip.hide();
+  radioPopupMenu.connect("notify::visible", () => {
+    radioPopupMenu.visible && tooltip.hide();
   });
 
   function handleAppletRemoved() {
@@ -69,7 +70,7 @@ export function createRadioAppletContainer() {
     try {
       installationInProgress = true;
       await installMpvWithMpris();
-      popupMenu?.toggle();
+      radioPopupMenu?.toggle();
     } catch (error) {
       const notificationText = `Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin is located at ${MPRIS_PLUGIN_PATH} and correctly compiled for your environment. Refer to ${APPLET_SITE} (section Known Issues)`;
 

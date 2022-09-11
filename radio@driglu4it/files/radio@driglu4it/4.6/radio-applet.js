@@ -2676,8 +2676,13 @@ const { getDBusProperties, getDBus, getDBusProxyWithOwner } = imports.misc.inter
 const { spawnCommandLine } = imports.misc.util;
 // see https://lazka.github.io/pgi-docs/Cvc-1.0/index.html
 const { MixerControl } = imports.gi.Cvc;
+// TODO: this is not really right as the mpvHandler is initally undefined but it is much easier that way..
 let mpvHandler;
 const initMpvHandler = () => {
+    if (mpvHandler) {
+        global.logWarning('mpvHandler already initiallized');
+        return;
+    }
     mpvHandler = createMpvHandler();
 };
 function createMpvHandler() {
@@ -4545,8 +4550,9 @@ const { uiGroup, layoutManager, panelManager, pushModal, popModal } = imports.ui
 const { KEY_Escape } = imports.gi.Clutter;
 const { util_get_transformed_allocation } = imports.gi.Cinnamon;
 const { PanelLoc } = imports.ui.popupMenu;
-function createPopupMenu(args) {
-    const { launcher } = args;
+const onPopupMenuClosedHandlers = [];
+function createPopupMenu(props) {
+    const { launcher } = props;
     const box = new BoxLayout({
         style_class: 'popup-menu-content',
         vertical: true,
@@ -4658,6 +4664,7 @@ function createPopupMenu(args) {
         box.hide();
         launcher.remove_style_pseudo_class('checked');
         popModal(box);
+        onPopupMenuClosedHandlers.forEach((handler) => handler());
     }
     function handleClick(actor, event) {
         if (!box.visible) {
@@ -4668,6 +4675,10 @@ function createPopupMenu(args) {
         const appletClicked = launcher.contains(clickedActor);
         (!binClicked && !appletClicked) && close();
     }
+    const addPopupMenuCloseHandler = (changeHandler) => {
+        onPopupMenuClosedHandlers.push(changeHandler);
+    };
+    box.addPopupMenuCloseHandler = addPopupMenuCloseHandler;
     box.toggle = toggle;
     // TODO: remove close
     box.close = close;
@@ -4713,14 +4724,19 @@ function createSeparatorMenuItem() {
 
 ;// CONCATENATED MODULE: ./src/lib/ActivWidget.ts
 const { KEY_space, KEY_KP_Enter, KEY_Return } = imports.gi.Clutter;
+/**  */
 function createActivWidget(args) {
     const { widget, onActivated } = args;
     // TODO: understand can_focus
     widget.can_focus = true;
     widget.reactive = true;
     widget.track_hover = true;
-    widget.connect('button-release-event', () => {
-        onActivated === null || onActivated === void 0 ? void 0 : onActivated();
+    widget.connect('button-release-event', (_, event) => {
+        const button = event.get_button();
+        // only if it is not a right click
+        if (button !== 3) {
+            onActivated === null || onActivated === void 0 ? void 0 : onActivated();
+        }
         return false;
     });
     // TODO: This is needed because some themes (at least Adapta-Nokto but maybe also others) don't provide style for the hover pseudo class. But it would be much easier to once (and on theme changes) programmatically set the hover pseudo class equal to the active pseudo class when the hover class isn't provided by the theme. 
@@ -4752,7 +4768,7 @@ const { Icon: SimpleMenuItem_Icon, IconType: SimpleMenuItem_IconType, Label: Sim
 // @ts-ignore
 const { Point: SimpleMenuItem_Point } = imports.gi.Clutter;
 function createSimpleMenuItem(args) {
-    const { text: initialText = "", maxCharNumber, iconName, onActivated } = args;
+    const { text: initialText = "", maxCharNumber, iconName, onActivated, onRightClick } = args;
     const icon = new SimpleMenuItem_Icon({
         icon_type: SimpleMenuItem_IconType.SYMBOLIC,
         style_class: "popup-menu-icon",
@@ -4787,6 +4803,13 @@ function createSimpleMenuItem(args) {
         setText,
         getIcon: () => icon,
     };
+    container.connect('button-press-event', (_, event) => {
+        const button = event.get_button();
+        if (button === 3) {
+            onRightClick === null || onRightClick === void 0 ? void 0 : onRightClick(menuItem);
+        }
+        return false;
+    });
     onActivated &&
         createActivWidget({
             widget: container,
@@ -5122,42 +5145,86 @@ function createSubMenu(args) {
 
 
 
-function createChannelMenuItem(args) {
-    const { channelName, onActivated, playbackStatus } = args;
-    const playbackIconMap = new Map([
-        ["Playing", PLAY_ICON_NAME],
-        ["Paused", PAUSE_ICON_NAME],
-        ["Loading", LOADING_ICON_NAME],
-        ["Stopped", null]
-    ]);
-    const iconMenuItem = createSimpleMenuItem({
+const { BoxLayout: ChannelMenuItem_BoxLayout } = imports.gi.St;
+const playbackIconMap = new Map([
+    ["Playing", PLAY_ICON_NAME],
+    ["Paused", PAUSE_ICON_NAME],
+    ["Loading", LOADING_ICON_NAME],
+    ["Stopped", null]
+]);
+const createMainMenuItem = (props) => {
+    const { channelName, onActivated, onRightClick, initialPlaybackStatus } = props;
+    const mainMenuItem = createSimpleMenuItem({
         maxCharNumber: MAX_STRING_LENGTH,
         text: channelName,
-        onActivated: () => {
-            onActivated(channelName);
-        }
+        onActivated,
+        onRightClick
     });
-    const { startResumeRotation, stopRotation } = createRotateAnimation(iconMenuItem.getIcon());
-    function setPlaybackStatus(playbackStatus) {
+    const { startResumeRotation, stopRotation } = createRotateAnimation(mainMenuItem.getIcon());
+    const setPlaybackStatus = (playbackStatus) => {
         const iconName = playbackIconMap.get(playbackStatus);
         playbackStatus === 'Loading' ? startResumeRotation() : stopRotation();
-        iconMenuItem.setIconName(iconName);
-    }
-    playbackStatus && setPlaybackStatus(playbackStatus);
-    return {
-        setPlaybackStatus,
-        actor: iconMenuItem.actor,
-        getChannelName: () => channelName
+        mainMenuItem.setIconName(iconName);
     };
-}
+    initialPlaybackStatus && setPlaybackStatus(initialPlaybackStatus);
+    return {
+        actor: mainMenuItem.actor,
+        setPlaybackStatus
+    };
+};
+const createChannelMenuItem = (props) => {
+    const { channelName, onActivated, initialPlaybackStatus, onRemoveClick, onContextMenuOpened } = props;
+    const removeChannelItem = createSimpleMenuItem({
+        text: 'Remove Channel',
+        onActivated: onRemoveClick,
+        iconName: 'edit-delete',
+    });
+    const contextMenuContainer = new ChannelMenuItem_BoxLayout({
+        vertical: true,
+        style: `padding-left:20px;`
+    });
+    contextMenuContainer.add_child(removeChannelItem.actor);
+    const menuItemContainer = new ChannelMenuItem_BoxLayout({ vertical: true });
+    const getContextMenuOpen = () => menuItemContainer.get_child_at_index(1) === contextMenuContainer;
+    const handleMainMenuItemRightClicked = () => {
+        const contextMenuOpen = getContextMenuOpen();
+        if (contextMenuOpen) {
+            closeContextMenu();
+            return;
+        }
+        onContextMenuOpened();
+        menuItemContainer.add_child(contextMenuContainer);
+    };
+    const closeContextMenu = () => {
+        const contextMenuOpen = getContextMenuOpen();
+        if (contextMenuOpen) {
+            menuItemContainer.remove_child(contextMenuContainer);
+        }
+    };
+    const mainMenuItem = createMainMenuItem({
+        channelName,
+        onActivated: () => onActivated(),
+        onRightClick: handleMainMenuItemRightClicked,
+        initialPlaybackStatus
+    });
+    menuItemContainer.add_child(mainMenuItem.actor);
+    return {
+        setPlaybackStatus: mainMenuItem.setPlaybackStatus,
+        actor: menuItemContainer,
+        getChannelName: () => channelName,
+        closeContextMenu
+    };
+};
 
 ;// CONCATENATED MODULE: ./src/ui/RadioPopupMenu/ChannelList.ts
 
 
 
 
+
+const { BoxLayout: ChannelList_BoxLayout } = imports.gi.St;
 function createChannelList() {
-    const { getPlaybackStatus, getCurrentChannelName: getCurrentChannel, addChannelChangeHandler, addPlaybackStatusChangeHandler, setUrl } = mpvHandler;
+    const { getPlaybackStatus, getCurrentChannelName: getCurrentChannel, addChannelChangeHandler, addPlaybackStatusChangeHandler, setUrl } = mpvHandler || {};
     const { addStationsListChangeHandler, settingsObject } = configs;
     const subMenu = createSubMenu({ text: 'My Stations' });
     const getUserStationNames = () => {
@@ -5169,22 +5236,42 @@ function createChannelList() {
             throw new Error(`couldn't find a url for the provided name. That should not have happened :-/`);
         return channel.url;
     };
+    const handleChannelRemoveClicked = (channelName) => {
+        const previousStations = configs.settingsObject.userStations;
+        configs.settingsObject.userStations = previousStations.filter((cnl) => cnl.name !== channelName);
+    };
     // the channelItems are saved here to the map as well as to the container as on the container only the reduced name are shown. Theoretically it therefore couldn't be differentiated between two long channel names with the same first 30 (or so) characters   
     let channelItems = [];
-    function setRefreshList(names) {
+    const closeAllChannelContextMenus = (props) => {
+        const { exceptionChannelName } = props || {};
+        channelItems.forEach((channelItem) => {
+            if (channelItem.getChannelName() !== exceptionChannelName) {
+                channelItem.closeContextMenu();
+            }
+        });
+    };
+    const setRefreshList = (names) => {
         channelItems = [];
         subMenu.box.destroy_all_children();
-        names.forEach(name => {
+        names.forEach((name, index) => {
             const channelPlaybackstatus = (name === getCurrentChannel()) ? getPlaybackStatus() : 'Stopped';
+            // TODO: addd this to createChannelMenuItem
+            const channelItemContainer = new ChannelList_BoxLayout({ vertical: true });
             const channelItem = createChannelMenuItem({
                 channelName: name,
-                onActivated: () => setUrl(findUrl(name)),
-                playbackStatus: channelPlaybackstatus
+                onActivated: () => {
+                    closeAllChannelContextMenus();
+                    setUrl(findUrl(name));
+                },
+                initialPlaybackStatus: channelPlaybackstatus,
+                onRemoveClick: () => handleChannelRemoveClicked(name),
+                onContextMenuOpened: () => closeAllChannelContextMenus({ exceptionChannelName: name })
             });
+            channelItemContainer.add_child(channelItem.actor);
             channelItems.push(channelItem);
-            subMenu.box.add_child(channelItem.actor);
+            subMenu.box.add_child(channelItemContainer);
         });
-    }
+    };
     function updateChannel(name) {
         channelItems.forEach(item => {
             item.getChannelName() === name ? item.setPlaybackStatus(getPlaybackStatus()) : item.setPlaybackStatus('Stopped');
@@ -5197,9 +5284,10 @@ function createChannelList() {
         currentChannel === null || currentChannel === void 0 ? void 0 : currentChannel.setPlaybackStatus(playbackStatus);
     }
     setRefreshList(getUserStationNames());
-    addChannelChangeHandler((newChannel) => updateChannel(newChannel));
+    addChannelChangeHandler === null || addChannelChangeHandler === void 0 ? void 0 : addChannelChangeHandler((newChannel) => updateChannel(newChannel));
     addPlaybackStatusChangeHandler((newStatus) => updatePlaybackStatus(newStatus));
     addStationsListChangeHandler(() => setRefreshList(getUserStationNames()));
+    radioPopupMenu.addPopupMenuCloseHandler(() => closeAllChannelContextMenus());
     return subMenu.actor;
 }
 
@@ -5374,10 +5462,15 @@ const createMediaControlToolbar = () => {
 
 
 const { BoxLayout: RadioPopupMenu_BoxLayout } = imports.gi.St;
-function createRadioPopupMenu(props) {
+let radioPopupMenu;
+const initRadioPopupMenu = (props) => {
+    if (radioPopupMenu) {
+        global.logWarning('radioPopupMenu already initiallized');
+        return;
+    }
     const { launcher, } = props;
     const { getPlaybackStatus, addPlaybackStatusChangeHandler } = mpvHandler;
-    const popupMenu = createPopupMenu({ launcher });
+    radioPopupMenu = createPopupMenu({ launcher });
     const radioActiveSection = new RadioPopupMenu_BoxLayout({
         vertical: true,
         visible: getPlaybackStatus() !== 'Stopped'
@@ -5386,13 +5479,12 @@ function createRadioPopupMenu(props) {
         radioActiveSection.add_child(createSeparatorMenuItem());
         radioActiveSection.add_child(widget);
     });
-    popupMenu.add_child(createChannelList());
-    popupMenu.add_child(radioActiveSection);
+    radioPopupMenu.add_child(createChannelList());
+    radioPopupMenu.add_child(radioActiveSection);
     addPlaybackStatusChangeHandler((newValue) => {
         radioActiveSection.visible = newValue !== 'Stopped';
     });
-    return popupMenu;
-}
+};
 
 ;// CONCATENATED MODULE: ./src/functions/promiseHelpers.ts
 const { spawnCommandLineAsyncIO: promiseHelpers_spawnCommandLineAsyncIO } = imports.misc.util;
@@ -5650,7 +5742,7 @@ function createRadioAppletContainer() {
         onRemoved: handleAppletRemoved,
         onClick: handleClick,
         onRightClick: () => {
-            popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.close();
+            radioPopupMenu === null || radioPopupMenu === void 0 ? void 0 : radioPopupMenu.close();
             contextMenu === null || contextMenu === void 0 ? void 0 : contextMenu.toggle();
         },
         onScroll: handleScroll,
@@ -5663,12 +5755,12 @@ function createRadioAppletContainer() {
         appletContainer.actor.add_child(widget);
     });
     const tooltip = createRadioAppletTooltip({ appletContainer });
-    const popupMenu = createRadioPopupMenu({ launcher: appletContainer.actor });
+    initRadioPopupMenu({ launcher: appletContainer.actor });
     const contextMenu = createRadioContextMenu({
         launcher: appletContainer.actor,
     });
-    popupMenu.connect("notify::visible", () => {
-        popupMenu.visible && tooltip.hide();
+    radioPopupMenu.connect("notify::visible", () => {
+        radioPopupMenu.visible && tooltip.hide();
     });
     function handleAppletRemoved() {
         mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener();
@@ -5690,7 +5782,7 @@ function createRadioAppletContainer() {
         try {
             installationInProgress = true;
             await installMpvWithMpris();
-            popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.toggle();
+            radioPopupMenu === null || radioPopupMenu === void 0 ? void 0 : radioPopupMenu.toggle();
         }
         catch (error) {
             const notificationText = `Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin is located at ${MPRIS_PLUGIN_PATH} and correctly compiled for your environment. Refer to ${APPLET_SITE} (section Known Issues)`;
