@@ -3,11 +3,9 @@ import { ChannelMenuItem, createChannelMenuItem } from "./ChannelMenuItem";
 import { AdvancedPlaybackStatus } from "../../types";
 import { mpvHandler } from "../../services/mpv/MpvHandler";
 import { configs } from "../../services/Config";
-import { createSimpleMenuItem, SimpleMenuItem } from "../../lib/SimpleMenuItem";
 import { radioPopupMenu } from "./RadioPopupMenu";
 
 const { BoxLayout } = imports.gi.St
-
 
 export function createChannelList() {
 
