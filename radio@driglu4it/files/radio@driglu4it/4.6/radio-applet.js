@@ -5142,21 +5142,30 @@ const createMainMenuItem = (props) => {
     };
 };
 const createChannelMenuItem = (props) => {
-    const { channelName, onActivated, initialPlaybackStatus, onRemoveClick, } = props;
+    const { channelName, onActivated, initialPlaybackStatus, onRemoveClick, onContextMenuOpened } = props;
     const removeChannelItem = createSimpleMenuItem({
         text: 'Remove Channel',
         onActivated: onRemoveClick,
         iconName: 'edit-delete',
     });
-    const contextMenuContainer = new ChannelMenuItem_BoxLayout({ vertical: true, style: `padding-left:20px;` });
+    const contextMenuContainer = new ChannelMenuItem_BoxLayout({ vertical: true, style: `padding-left:22px;` });
     contextMenuContainer.add_child(removeChannelItem.actor);
     const menuItemContainer = new ChannelMenuItem_BoxLayout({ vertical: true });
+    const getContextMenuOpen = () => menuItemContainer.get_child_at_index(1) === contextMenuContainer;
     const handleMainMenuItemRightClicked = () => {
-        if (menuItemContainer.get_child_at_index(1) === contextMenuContainer) {
-            menuItemContainer.remove_child(contextMenuContainer);
+        const contextMenuOpen = getContextMenuOpen();
+        if (contextMenuOpen) {
+            closeContextMenu();
             return;
         }
+        onContextMenuOpened();
         menuItemContainer.add_child(contextMenuContainer);
+    };
+    const closeContextMenu = () => {
+        const contextMenuOpen = getContextMenuOpen();
+        if (contextMenuOpen) {
+            menuItemContainer.remove_child(contextMenuContainer);
+        }
     };
     const mainMenuItem = createMainMenuItem({
         channelName,
@@ -5168,7 +5177,8 @@ const createChannelMenuItem = (props) => {
     return {
         setPlaybackStatus: mainMenuItem.setPlaybackStatus,
         actor: menuItemContainer,
-        getChannelName: () => channelName
+        getChannelName: () => channelName,
+        closeContextMenu
     };
 };
 
@@ -5208,7 +5218,14 @@ function createChannelList() {
                 channelName: name,
                 onActivated: () => setUrl(findUrl(name)),
                 initialPlaybackStatus: channelPlaybackstatus,
-                onRemoveClick: () => handleChannelRemoveClicked(name)
+                onRemoveClick: () => handleChannelRemoveClicked(name),
+                onContextMenuOpened: () => {
+                    channelItems.forEach((cnlItem) => {
+                        if (cnlItem.getChannelName() !== name) {
+                            cnlItem.closeContextMenu();
+                        }
+                    });
+                }
             });
             channelItemContainer.add_child(channelItem.actor);
             channelItems.push(channelItem);

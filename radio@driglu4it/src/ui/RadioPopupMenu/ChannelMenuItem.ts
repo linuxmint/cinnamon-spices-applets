@@ -9,6 +9,7 @@ export interface ChannelMenuItemProps {
     onActivated: () => void,
     initialPlaybackStatus: AdvancedPlaybackStatus
     onRemoveClick: () => void
+    onContextMenuOpened: () => void
 }
 
 const playbackIconMap: Map<AdvancedPlaybackStatus, string | null> = new Map([
@@ -45,6 +46,9 @@ const createMainMenuItem = (props: { channelName: string, onActivated: () => voi
 
 }
 
+
+export type ChannelMenuItem = ReturnType<typeof createChannelMenuItem>
+
 export const createChannelMenuItem = (props: ChannelMenuItemProps) => {
 
     const {
@@ -52,6 +56,7 @@ export const createChannelMenuItem = (props: ChannelMenuItemProps) => {
         onActivated,
         initialPlaybackStatus,
         onRemoveClick,
+        onContextMenuOpened
     } = props
 
     const removeChannelItem = createSimpleMenuItem({
@@ -60,19 +65,33 @@ export const createChannelMenuItem = (props: ChannelMenuItemProps) => {
         iconName: 'edit-delete',
     })
 
-    const contextMenuContainer = new BoxLayout({ vertical: true, style: `padding-left:20px;` })
+    const contextMenuContainer = new BoxLayout({ vertical: true, style: `padding-left:22px;` })
     contextMenuContainer.add_child(removeChannelItem.actor)
 
     const menuItemContainer = new BoxLayout({ vertical: true })
 
+    const getContextMenuOpen = () => menuItemContainer.get_child_at_index(1) === contextMenuContainer
 
     const handleMainMenuItemRightClicked = () => {
-        if (menuItemContainer.get_child_at_index(1) === contextMenuContainer) {
-            menuItemContainer.remove_child(contextMenuContainer)
-            return
+        const contextMenuOpen = getContextMenuOpen()
+
+        if (contextMenuOpen) {
+            closeContextMenu()
+            return;
         }
+
+        onContextMenuOpened()
         menuItemContainer.add_child(contextMenuContainer)
     }
+
+    const closeContextMenu = () => {
+        const contextMenuOpen = getContextMenuOpen()
+
+        if (contextMenuOpen) {
+            menuItemContainer.remove_child(contextMenuContainer)
+        }
+    }
+
 
     const mainMenuItem = createMainMenuItem({
         channelName,
@@ -87,6 +106,7 @@ export const createChannelMenuItem = (props: ChannelMenuItemProps) => {
     return {
         setPlaybackStatus: mainMenuItem.setPlaybackStatus,
         actor: menuItemContainer,
-        getChannelName: () => channelName
+        getChannelName: () => channelName,
+        closeContextMenu
     }
 }

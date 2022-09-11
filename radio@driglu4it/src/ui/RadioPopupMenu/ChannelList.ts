@@ -1,5 +1,5 @@
 import { createSubMenu } from "../../lib/PopupSubMenu";
-import { createChannelMenuItem } from "./ChannelMenuItem";
+import { ChannelMenuItem, createChannelMenuItem } from "./ChannelMenuItem";
 import { AdvancedPlaybackStatus } from "../../types";
 import { mpvHandler } from "../../services/mpv/MpvHandler";
 import { configs } from "../../services/Config";
@@ -45,7 +45,7 @@ export function createChannelList() {
     }
 
     // the channelItems are saved here to the map as well as to the container as on the container only the reduced name are shown. Theoretically it therefore couldn't be differentiated between two long channel names with the same first 30 (or so) characters   
-    let channelItems: ReturnType<typeof createChannelMenuItem>[] = []
+    let channelItems: ChannelMenuItem[] = []
 
     const setRefreshList = (names: string[]) => {
         channelItems = []
@@ -63,7 +63,14 @@ export function createChannelList() {
                 channelName: name,
                 onActivated: () => setUrl(findUrl(name)),
                 initialPlaybackStatus: channelPlaybackstatus,
-                onRemoveClick: () => handleChannelRemoveClicked(name)
+                onRemoveClick: () => handleChannelRemoveClicked(name),
+                onContextMenuOpened: () => {
+                    channelItems.forEach((cnlItem) => {
+                        if (cnlItem.getChannelName() !== name) {
+                            cnlItem.closeContextMenu()
+                        }
+                    })
+                }
             })
 
             channelItemContainer.add_child(channelItem.actor)
