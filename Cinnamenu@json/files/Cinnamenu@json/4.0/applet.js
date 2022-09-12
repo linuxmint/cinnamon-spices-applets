@@ -21,14 +21,14 @@ const {addTween} = imports.ui.tweener;
 
 const {PopupResizeHandler} = require('./resizer');
 const {AppletSettings} = require('./settings');
-const {_, graphemeBaseChars, getThumbnail_gicon, searchStr} = require('./utils');
+const {_, graphemeBaseChars, searchStr} = require('./utils');
 const {ContextMenu} = require('./contextmenu');
 const {AppsView} = require('./appsview');
 const {CategoriesView} = require('./categoriesview');
 const {Sidebar} = require('./sidebar');
 const {BookmarksManager} = require('./browserBookmarks');
 const {wikiSearch, clearWikiSearchCache} = require('./wikipediaSearch');
-const {search_browser} = require('./browserHistory');
+const {searchBrowserHistory} = require('./browserHistory');
 const {EMOJI, EMOJI_CATEGORIES} = require('./emoji');
 const {searchSuggestions} = require('./suggestions');
 const EMOJI_CODE = 0, EMOJI_NAME = 1, EMOJI_KEYWORDS = 2;
@@ -475,7 +475,8 @@ class CinnamenuApplet extends TextIconApplet {
             this.updateMenuSize();
             this.setActiveCategory(openOnCategory);
 
-            this.panel.peekPanel();
+            //Show panel when auto hide is on.
+            //this.panel.peekPanel(); //no longer works on cinnamon 5.4.x
 
             //center menu if applet in center zone of top or bottom panel
             const appletDefinition = AppletManager.getAppletDefinition({applet_id: this.instance_id});
@@ -809,8 +810,9 @@ class CinnamenuApplet extends TextIconApplet {
         };
 
         switch (true) {
-        case (symbol === Clutter.KP_Enter || symbol === Clutter.KEY_Return) && ctrlKey:
-        case symbol === Clutter.KEY_Menu && noModifier:
+        case (symbol === Clutter.KEY_KP_Enter || symbol === Clutter.KP_Enter ||
+                                            symbol === Clutter.KEY_Return) && ctrlKey:
+        case (symbol === Clutter.KEY_Menu) && noModifiers:
             if (this.contextMenu.isOpen) {
                 this.contextMenu.close();
             } else if (focusedAppItemExists) {
@@ -821,7 +823,8 @@ class CinnamenuApplet extends TextIconApplet {
                 categoryButtons[focusedCategoryIndex].openContextMenu();
             }
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.KP_Enter || symbol === Clutter.KEY_Return) && noModifiers:
+        case (symbol === Clutter.KP_Enter || symbol === Clutter.KEY_KP_Enter ||
+                                        symbol === Clutter.KEY_Return) && noModifiers:
             if (focusedContextMenuItemExists) {
                 contextMenuChildren[focusedContextMenuItemIndex].activate();
             } else if (focusedAppItemExists) {
@@ -848,7 +851,8 @@ class CinnamenuApplet extends TextIconApplet {
             leaveCurrentlyFocusedItem();
             leftNavigation();
             return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
-        case (symbol === Clutter.ISO_Left_Tab || symbol === Clutter.Tab) && noModifiers:
+        case (symbol === Clutter.KEY_ISO_Left_Tab || symbol === Clutter.ISO_Left_Tab ||
+                                symbol === Clutter.Tab || symbol === Clutter.KEY_Tab) && noModifiers:
             leaveCurrentlyFocusedItem();
             if (focusedContextMenuItemExists) {
                 contextMenuChildren[focusedContextMenuItemIndex].handleEnter();//effectively ignore keypress
@@ -860,7 +864,8 @@ class CinnamenuApplet extends TextIconApplet {
                 appButtons[0].handleEnter();
             }
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.ISO_Left_Tab || symbol === Clutter.Tab) && shiftKey:
+        case (symbol === Clutter.KEY_ISO_Left_Tab || symbol === Clutter.ISO_Left_Tab ||
+                                symbol === Clutter.Tab || symbol === Clutter.KEY_Tab) && shiftKey:
             leaveCurrentlyFocusedItem();
             if (focusedContextMenuItemExists) {
                 contextMenuChildren[focusedContextMenuItemIndex].handleEnter();//effectively ignore keypress
@@ -1258,22 +1263,13 @@ class CinnamenuApplet extends TextIconApplet {
             if (HISTORY_PREFIX) {
                 hpattern = pattern.substring(2);
             }
-            let history = [];
 
-            Promise.all([
-                search_browser(['chromium', 'Default'], 'chromium', hpattern),
-                search_browser(['google-chrome', 'Default'], 'google-chrome', hpattern),
-                search_browser(['opera'], 'opera', hpattern),
-                search_browser(['vivaldi', 'Default'], 'vivaldi-stable', hpattern),
-                search_browser(['BraveSoftware', 'Brave-Browser', 'Default'], 'brave-browser', hpattern),
-                search_browser(['microsoft-edge', 'Default'], 'microsoft-edge', hpattern)
-            ]).then( results => {
-                results.forEach( result => history = history.concat(result));
+            searchBrowserHistory(hpattern, history => {
                 if (history.length > 0 && this.searchActive && thisSearchId === this.currentSearchId) {
                     webHistoryResults = history;
                     finish();
                 }
-            }).catch((e) => global.logError('Cinnamenu browser search',e.message, e.stack));
+            });
         }
 
         //---Wikipedia search----

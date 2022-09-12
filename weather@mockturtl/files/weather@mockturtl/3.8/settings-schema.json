@@ -194,7 +194,8 @@
 			"Weatherbit (key needed)": "Weatherbit",
 			"Tomorrow.io (key needed)": "Tomorrow.io",
 			"DarkSky (key needed)": "DarkSky",
-			"AccuWeather (key needed)": "AccuWeather"
+			"AccuWeather (key needed)": "AccuWeather",
+			"Weather Underground (key needed)": "WeatherUnderground"
 		}
 	},
 	"apiKey": {

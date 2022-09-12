@@ -20,6 +20,7 @@ import { VisualCrossing } from "./providers/visualcrossing";
 import { DanishMI } from "./providers/danishMI";
 import { AccuWeather } from "./providers/accuWeather";
 import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
+import { WeatherUnderground } from "./providers/weatherUnderground";
 
 const { get_home_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -51,7 +52,8 @@ export type Services =
 	"Visual Crossing" |
 	"DanishMI" |
 	"AccuWeather" |
-	"DeutscherWetterdienst";
+	"DeutscherWetterdienst" |
+	"WeatherUnderground";
 
 export const ServiceClassMapping: ServiceClassMappingType = {
 	"DarkSky": (app) => new DarkSky(app),
@@ -64,7 +66,8 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	"Visual Crossing": (app) => new VisualCrossing(app),
 	"DanishMI": (app) => new DanishMI(app),
 	"AccuWeather": (app) => new AccuWeather(app),
-	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app)
+	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
+	"WeatherUnderground": (app) => new WeatherUnderground(app)
 }
 
 /**
@@ -170,7 +173,7 @@ export class Config {
 
 	private settings: imports.ui.settings.AppletSettings;
 	private app: WeatherApplet;
-	private countryCode: string | null;
+	public readonly countryCode: string | null;
 	public textColorStyle: string | null = null;
 
 	private timezone: string | undefined = undefined;
@@ -197,19 +200,19 @@ export class Config {
 
 	constructor(app: WeatherApplet, instanceID: number) {
 		this.app = app;
+		this.settings = new AppletSettings(this, UUID, instanceID);
+		// Bind as early as possible so that we can update the log level asap
+		this.BindSettings();
+		this.onLogLevelUpdated();
 		this.currentLocale = ConstructJsLocale(get_language_names()[0]);
-		Logger.Debug("System locale is " + this.currentLocale);
-
+		Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
+		this.countryCode = this.GetCountryCode(this.currentLocale);
 		this.autoLocProvider = new IpApi(app); // IP location lookup
 		this.geoLocationService = new GeoLocation(app);
-		this.countryCode = this.GetCountryCode(this.currentLocale);
-		this.settings = new AppletSettings(this, UUID, instanceID);
 		this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });
 		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
 		this.currentFontSize = this.GetCurrentFontSize();
-		this.BindSettings();
 		this.LocStore = new LocationStore(this.app, this);
-		this.onLogLevelUpdated();
 	}
 
 	/** Attaches settings to functions */

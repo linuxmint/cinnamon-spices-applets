@@ -4059,7 +4059,7 @@ function createAppletContainer(args) {
         appletReloaded ? onMoved() : onRemoved();
         appletReloaded = false;
     };
-    applet.actor.connect('event', (actor, event) => {
+    applet.actor.connect("event", (actor, event) => {
         if (event.type() !== EventType.BUTTON_PRESS)
             return false;
         if (event.get_button() === 3) {
@@ -4068,7 +4068,7 @@ function createAppletContainer(args) {
         }
         return false;
     });
-    applet.actor.connect('scroll-event', (actor, event) => {
+    applet.actor.connect("scroll-event", (actor, event) => {
         onScroll(event.get_scroll_direction());
         return false;
     });
@@ -4409,6 +4409,7 @@ function createRadioAppletTooltip(args) {
 
 ;// CONCATENATED MODULE: ./src/lib/AppletIcon.ts
 const { Icon: AppletIcon_Icon, IconType: AppletIcon_IconType } = imports.gi.St;
+// @ts-ignore
 const { Point } = imports.gi.Clutter;
 function createAppletIcon(props) {
     const icon_type = (props === null || props === void 0 ? void 0 : props.icon_type) || AppletIcon_IconType.SYMBOLIC;
@@ -4417,13 +4418,15 @@ function createAppletIcon(props) {
         return panel.getPanelZoneIconSize(__meta.locationLabel, icon_type);
     }
     function getStyleClass() {
-        return icon_type === AppletIcon_IconType.SYMBOLIC ? 'system-status-icon' : 'applet-icon';
+        return icon_type === AppletIcon_IconType.SYMBOLIC
+            ? "system-status-icon"
+            : "applet-icon";
     }
     const icon = new AppletIcon_Icon(Object.assign({ icon_type, style_class: getStyleClass(), icon_size: getIconSize(), pivot_point: new Point({ x: 0.5, y: 0.5 }) }, props));
-    panel.connect('icon-size-changed', () => {
+    panel.connect("icon-size-changed", () => {
         icon.set_icon_size(getIconSize());
     });
-    icon.connect('notify::icon-type', () => {
+    icon.connect("notify::icon-type", () => {
         icon.style_class = getStyleClass();
     });
     return icon;
@@ -4726,21 +4729,22 @@ function limitString(text, maxCharNumber) {
 
 
 const { Icon: SimpleMenuItem_Icon, IconType: SimpleMenuItem_IconType, Label: SimpleMenuItem_Label, BoxLayout: SimpleMenuItem_BoxLayout } = imports.gi.St;
+// @ts-ignore
 const { Point: SimpleMenuItem_Point } = imports.gi.Clutter;
 function createSimpleMenuItem(args) {
-    const { text: initialText = '', maxCharNumber, iconName, onActivated } = args;
+    const { text: initialText = "", maxCharNumber, iconName, onActivated } = args;
     const icon = new SimpleMenuItem_Icon({
         icon_type: SimpleMenuItem_IconType.SYMBOLIC,
-        style_class: 'popup-menu-icon',
+        style_class: "popup-menu-icon",
         pivot_point: new SimpleMenuItem_Point({ x: 0.5, y: 0.5 }),
-        icon_name: iconName || '',
-        visible: !!iconName
+        icon_name: iconName || "",
+        visible: !!iconName,
     });
     const label = new SimpleMenuItem_Label({
-        text: maxCharNumber ? limitString(initialText, maxCharNumber) : initialText
+        text: maxCharNumber ? limitString(initialText, maxCharNumber) : initialText,
     });
     const container = new SimpleMenuItem_BoxLayout({
-        style_class: 'popup-menu-item'
+        style_class: "popup-menu-item",
     });
     container.add_child(icon);
     container.add_child(label);
@@ -4761,9 +4765,13 @@ function createSimpleMenuItem(args) {
         actor: container,
         setIconName,
         setText,
-        getIcon: () => icon
+        getIcon: () => icon,
     };
-    onActivated && createActivWidget({ widget: container, onActivated: () => onActivated(menuItem) });
+    onActivated &&
+        createActivWidget({
+            widget: container,
+            onActivated: () => onActivated(menuItem),
+        });
     return menuItem;
 }
 
@@ -4801,9 +4809,9 @@ function createInfoSection() {
 
 ;// CONCATENATED MODULE: ./src/lib/Slider.ts
 const { DrawingArea: Slider_DrawingArea } = imports.gi.St;
-const { cairo_set_source_color, grab_pointer, ungrab_pointer } = imports.gi.Clutter;
+const { cairo_set_source_color } = imports.gi.Clutter;
 function createSlider(args) {
-    const style_class = 'popup-slider-menu-item';
+    const style_class = "popup-slider-menu-item";
     const { initialValue, onValueChanged } = args;
     let value;
     if (initialValue != null)
@@ -4811,23 +4819,23 @@ function createSlider(args) {
     const drawing = new Slider_DrawingArea({
         style_class,
         reactive: true,
-        x_expand: true
+        x_expand: true,
     });
-    drawing.connect('repaint', () => {
+    drawing.connect("repaint", () => {
         const cr = drawing.get_context();
         const themeNode = drawing.get_theme_node();
         const [width, height] = drawing.get_surface_size();
-        const handleRadius = themeNode.get_length('-slider-handle-radius');
-        const sliderHeight = themeNode.get_length('-slider-height');
-        const sliderBorderWidth = themeNode.get_length('-slider-border-width');
+        const handleRadius = themeNode.get_length("-slider-handle-radius");
+        const sliderHeight = themeNode.get_length("-slider-height");
+        const sliderBorderWidth = themeNode.get_length("-slider-border-width");
         const sliderBorderRadius = Math.min(width, sliderHeight) / 2;
-        const sliderBorderColor = themeNode.get_color('-slider-border-color');
-        const sliderColor = themeNode.get_color('-slider-background-color');
-        const sliderActiveBorderColor = themeNode.get_color('-slider-active-border-color');
-        const sliderActiveColor = themeNode.get_color('-slider-active-background-color');
+        const sliderBorderColor = themeNode.get_color("-slider-border-color");
+        const sliderColor = themeNode.get_color("-slider-background-color");
+        const sliderActiveBorderColor = themeNode.get_color("-slider-active-border-color");
+        const sliderActiveColor = themeNode.get_color("-slider-active-background-color");
         const TAU = Math.PI * 2;
         const handleX = handleRadius + (width - 2 * handleRadius) * value;
-        cr.arc(sliderBorderRadius + sliderBorderWidth, height / 2, sliderBorderRadius, TAU * 1 / 4, TAU * 3 / 4);
+        cr.arc(sliderBorderRadius + sliderBorderWidth, height / 2, sliderBorderRadius, (TAU * 1) / 4, (TAU * 3) / 4);
         cr.lineTo(handleX, (height - sliderHeight) / 2);
         cr.lineTo(handleX, (height + sliderHeight) / 2);
         cr.lineTo(sliderBorderRadius + sliderBorderWidth, (height + sliderHeight) / 2);
@@ -4836,7 +4844,7 @@ function createSlider(args) {
         cairo_set_source_color(cr, sliderActiveBorderColor);
         cr.setLineWidth(sliderBorderWidth);
         cr.stroke();
-        cr.arc(width - sliderBorderRadius - sliderBorderWidth, height / 2, sliderBorderRadius, TAU * 3 / 4, TAU * 1 / 4);
+        cr.arc(width - sliderBorderRadius - sliderBorderWidth, height / 2, sliderBorderRadius, (TAU * 3) / 4, (TAU * 1) / 4);
         cr.lineTo(handleX, (height + sliderHeight) / 2);
         cr.lineTo(handleX, (height - sliderHeight) / 2);
         cr.lineTo(width - sliderBorderRadius - sliderBorderWidth, (height - sliderHeight) / 2);
@@ -4852,16 +4860,16 @@ function createSlider(args) {
         cr.fill();
         cr.$dispose();
     });
-    drawing.connect('button-press-event', (actor, event) => {
-        grab_pointer(drawing);
-        const motionId = drawing.connect('motion-event', (actor, event) => {
+    drawing.connect("button-press-event", (actor, event) => {
+        event.get_device().grab(drawing);
+        const motionId = drawing.connect("motion-event", (actor, event) => {
             moveHandle(event);
             return false;
         });
-        const buttonReleaseId = drawing.connect('button-release-event', () => {
+        const buttonReleaseId = drawing.connect("button-release-event", (actor, event) => {
             drawing.disconnect(buttonReleaseId);
             drawing.disconnect(motionId);
-            ungrab_pointer();
+            event.get_device().ungrab();
             return false;
         });
         moveHandle(event);
@@ -4872,7 +4880,9 @@ function createSlider(args) {
         const [sliderX, sliderY] = drawing.get_transformed_position();
         const relX = absX - (sliderX || 0);
         const width = drawing.width;
-        const handleRadius = drawing.get_theme_node().get_length('-slider-handle-radius');
+        const handleRadius = drawing
+            .get_theme_node()
+            .get_length("-slider-handle-radius");
         const newValue = (relX - handleRadius) / (width - 2 * handleRadius);
         const newValueLimitToMinMax = limitToMinMax(newValue);
         setValue(newValueLimitToMinMax);
@@ -4895,7 +4905,7 @@ function createSlider(args) {
     return {
         actor: drawing,
         setValue,
-        getValue
+        getValue,
     };
 }
 
@@ -4966,45 +4976,50 @@ const { BoxLayout: VolumeSlider_BoxLayout, Icon: VolumeSlider_Icon, IconType: Vo
 const { Tooltip } = imports.ui.tooltips;
 const { KEY_Right, KEY_Left, ScrollDirection } = imports.gi.Clutter;
 function createVolumeSlider() {
-    const { getVolume, setVolume, addVolumeChangeHandler, addPlaybackStatusChangeHandler } = mpvHandler;
+    const { getVolume, setVolume, addVolumeChangeHandler, addPlaybackStatusChangeHandler, } = mpvHandler;
     const container = new VolumeSlider_BoxLayout({
         style_class: POPUP_MENU_ITEM_CLASS,
     });
     createActivWidget({
-        widget: container
+        widget: container,
     });
     const slider = createSlider({
-        onValueChanged: (newValue) => setVolume(newValue * 100)
+        onValueChanged: (newValue) => setVolume(newValue * 100),
     });
     const tooltip = new Tooltip(slider.actor, null);
     const icon = new VolumeSlider_Icon({
         icon_type: VolumeSlider_IconType.SYMBOLIC,
         style_class: POPUP_ICON_CLASS,
-        reactive: true
+        reactive: true,
     });
-    [icon, slider.actor].forEach(widget => {
+    [icon, slider.actor].forEach((widget) => {
         container.add_child(widget);
     });
-    container.connect('key-press-event', (actor, event) => {
+    container.connect("key-press-event", (actor, event) => {
         const key = event.get_key_symbol();
         if (key === KEY_Right || key === KEY_Left) {
-            const direction = (key === KEY_Right) ? 'increase' : 'decrease';
+            const direction = key === KEY_Right ? "increase" : "decrease";
             handleDeltaChange(direction);
         }
         return false;
     });
-    container.connect('scroll-event', (actor, event) => {
+    container.connect("scroll-event", (actor, event) => {
         const scrollDirection = event.get_scroll_direction();
-        const direction = (scrollDirection === ScrollDirection.UP) ? 'increase' : 'decrease';
-        handleDeltaChange(direction);
+        if (scrollDirection === ScrollDirection.UP) {
+            handleDeltaChange("increase");
+            return false;
+        }
+        if (scrollDirection === ScrollDirection.DOWN) {
+            handleDeltaChange("decrease");
+        }
         return false;
     });
-    icon.connect('button-press-event', () => {
+    icon.connect("button-press-event", () => {
         slider.setValue(0);
         return false;
     });
     function handleDeltaChange(direction) {
-        const delta = (direction === 'increase') ? VOLUME_DELTA : -VOLUME_DELTA;
+        const delta = direction === "increase" ? VOLUME_DELTA : -VOLUME_DELTA;
         const newValue = slider.getValue() + delta / 100;
         slider.setValue(newValue);
     }
@@ -5016,7 +5031,7 @@ function createVolumeSlider() {
             icon.set_icon_name(getVolumeIcon({ volume }));
         }
     };
-    [addVolumeChangeHandler, addPlaybackStatusChangeHandler].forEach(cb => cb(setRefreshVolumeSlider));
+    [addVolumeChangeHandler, addPlaybackStatusChangeHandler].forEach((cb) => cb(setRefreshVolumeSlider));
     setRefreshVolumeSlider();
     return container;
 }
@@ -5024,41 +5039,42 @@ function createVolumeSlider() {
 ;// CONCATENATED MODULE: ./src/lib/PopupSubMenu.ts
 
 const { BoxLayout: PopupSubMenu_BoxLayout, Label: PopupSubMenu_Label, Icon: PopupSubMenu_Icon, ScrollView } = imports.gi.St;
+// @ts-ignore
 const { ActorAlign: PopupSubMenu_ActorAlign, Point: PopupSubMenu_Point } = imports.gi.Clutter;
 const { PolicyType } = imports.gi.Gtk;
 function createSubMenu(args) {
     const { text } = args;
     const container = new PopupSubMenu_BoxLayout({
-        vertical: true
+        vertical: true,
     });
     const label = new PopupSubMenu_Label({
-        text
+        text,
     });
     const triangle = new PopupSubMenu_Icon({
-        style_class: 'popup-menu-arrow',
-        icon_name: 'pan-end',
+        style_class: "popup-menu-arrow",
+        icon_name: "pan-end",
         rotation_angle_z: 90,
         x_expand: true,
         x_align: PopupSubMenu_ActorAlign.END,
         pivot_point: new PopupSubMenu_Point({ x: 0.5, y: 0.5 }),
-        important: true // without this, it looks ugly on Mint-X Themes
+        important: true, // without this, it looks ugly on Mint-X Themes
     });
     const toggle = new PopupSubMenu_BoxLayout({
-        style_class: 'popup-menu-item popup-submenu-menu-item'
+        style_class: "popup-menu-item popup-submenu-menu-item",
     });
     createActivWidget({
         widget: toggle,
-        onActivated: toggleScrollbox
+        onActivated: toggleScrollbox,
     });
-    [label, triangle].forEach(widget => toggle.add_child(widget));
+    [label, triangle].forEach((widget) => toggle.add_child(widget));
     container.add_child(toggle);
     const scrollbox = new ScrollView({
-        style_class: 'popup-sub-menu',
+        style_class: "popup-sub-menu",
         vscrollbar_policy: PolicyType.AUTOMATIC,
-        hscrollbar_policy: PolicyType.NEVER
+        hscrollbar_policy: PolicyType.NEVER,
     });
     const box = new PopupSubMenu_BoxLayout({
-        vertical: true
+        vertical: true,
     });
     function toggleScrollbox() {
         scrollbox.visible ? closeMenu() : openMenu();
@@ -5073,7 +5089,7 @@ function createSubMenu(args) {
     }
     // add_child is recommended but doesn't work: https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/3172
     scrollbox.add_actor(box);
-    [toggle, scrollbox].forEach(widget => container.add_child(widget));
+    [toggle, scrollbox].forEach((widget) => container.add_child(widget));
     return {
         /** the container which should be used to add it as child to a parent Actor */
         actor: container,
@@ -5617,15 +5633,21 @@ function createRadioAppletContainer() {
             popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.close();
             contextMenu === null || contextMenu === void 0 ? void 0 : contextMenu.toggle();
         },
-        onScroll: handleScroll
+        onScroll: handleScroll,
     });
-    [createRadioAppletIcon(), createYoutubeDownloadIcon(), createRadioAppletLabel()].forEach(widget => {
+    [
+        createRadioAppletIcon(),
+        createYoutubeDownloadIcon(),
+        createRadioAppletLabel(),
+    ].forEach((widget) => {
         appletContainer.actor.add_child(widget);
     });
     const tooltip = createRadioAppletTooltip({ appletContainer });
     const popupMenu = createRadioPopupMenu({ launcher: appletContainer.actor });
-    const contextMenu = createRadioContextMenu({ launcher: appletContainer.actor });
-    popupMenu.connect('notify::visible', () => {
+    const contextMenu = createRadioContextMenu({
+        launcher: appletContainer.actor,
+    });
+    popupMenu.connect("notify::visible", () => {
         popupMenu.visible && tooltip.hide();
     });
     function handleAppletRemoved() {
@@ -5633,8 +5655,13 @@ function createRadioAppletContainer() {
         mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.stop();
     }
     function handleScroll(scrollDirection) {
-        const volumeChange = scrollDirection === RadioAppletContainer_ScrollDirection.UP ? VOLUME_DELTA : -VOLUME_DELTA;
-        mpvHandler.increaseDecreaseVolume(volumeChange);
+        if (scrollDirection === RadioAppletContainer_ScrollDirection.UP) {
+            mpvHandler.increaseDecreaseVolume(VOLUME_DELTA);
+            return;
+        }
+        if (scrollDirection === RadioAppletContainer_ScrollDirection.DOWN) {
+            mpvHandler.increaseDecreaseVolume(-VOLUME_DELTA);
+        }
     }
     async function handleClick() {
         contextMenu === null || contextMenu === void 0 ? void 0 : contextMenu.close();
