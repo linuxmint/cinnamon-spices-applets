@@ -1,7 +1,10 @@
 # Turkish translation for gnome-shell-extension-weather
+# Türkçe çeviri gnome-hava durumu-kabuk-eklentisi-için
 # Traductions françaises du paquet gnome-shell-extension-weather.
 # Copyright (C) 2011
+# Telif hakkı (C) 2011
 # This file is distributed under the same license as the gnome-shell-extension-weather package.
+# Bu dosya, gnome-shell-extension-weather paketi ile aynı lisans altında dağıtılmaktadır.
 # Simon Claessens <gagalago@gmail.com>, 2011.
 # ecyrbe <ecyrbe@gmail.com>, 2011.
 # Serdar Sağlam <teknomobil@yandex.com>, 2018.
@@ -9,79 +12,79 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.2.2\n"
+"Project-Id-Version: 3.2.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-08 08:40+0100\n"
-"PO-Revision-Date: 2022-04-10 17:27+0300\n"
-"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"POT-Creation-Date: 2022-08-27 12:46+0100\n"
+"PO-Revision-Date: 2022-09-12 12:30+0300\n"
+"Last-Translator: Serkan Önder <serkanonder@outlook.com>\n"
 "Language-Team: \n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
-#: 3.8/weather-applet.js:15736
+#: 3.8/weather-applet.js:16635
 msgid "Error"
 msgstr "Hata"
 
 #: 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
 #: 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
-#: 3.8/weather-applet.js:15737 3.8/weather-applet.js:15739
-#: 3.8/weather-applet.js:15741 3.8/weather-applet.js:15744
-#: 3.8/weather-applet.js:15747 3.8/weather-applet.js:15748
-#: 3.8/weather-applet.js:15749 3.8/weather-applet.js:15750
+#: 3.8/weather-applet.js:16636 3.8/weather-applet.js:16638
+#: 3.8/weather-applet.js:16640 3.8/weather-applet.js:16643
+#: 3.8/weather-applet.js:16646 3.8/weather-applet.js:16647
+#: 3.8/weather-applet.js:16648 3.8/weather-applet.js:16649
 msgid "Service Error"
 msgstr "Servis Hatası"
 
-#: 3.0/applet.js:168 3.8/weather-applet.js:15738
+#: 3.0/applet.js:168 3.8/weather-applet.js:16637
 msgid "Incorrect API Key"
 msgstr "Hatalı API Anahtarı"
 
-#: 3.0/applet.js:170 3.8/weather-applet.js:15740
+#: 3.0/applet.js:170 3.8/weather-applet.js:16639
 msgid "Incorrect Location Format"
 msgstr "Yanlış Konum Biçimi"
 
-#: 3.0/applet.js:172 3.8/weather-applet.js:15742
+#: 3.0/applet.js:172 3.8/weather-applet.js:16641
 msgid "Key Blocked"
 msgstr "Anahtar Engellendi"
 
-#: 3.0/applet.js:173 3.8/weather-applet.js:15743
+#: 3.0/applet.js:173 3.8/weather-applet.js:16642
 msgid "Can't find location"
 msgstr "Konum bulunamadı"
 
-#: 3.0/applet.js:175 3.8/weather-applet.js:15745
+#: 3.0/applet.js:175 3.8/weather-applet.js:16644
 msgid "No Api Key"
 msgstr "Api Anahtarı Yok"
 
-#: 3.0/applet.js:176 3.8/weather-applet.js:15746
+#: 3.0/applet.js:176 3.8/weather-applet.js:16645
 msgid "No Location"
 msgstr "Konum Yok"
 
-#: 3.0/applet.js:181 3.8/weather-applet.js:15751
+#: 3.0/applet.js:181 3.8/weather-applet.js:16650
 msgid "Missing Packages"
 msgstr "Eksik Paketler"
 
-#: 3.0/applet.js:182 3.8/weather-applet.js:15752
+#: 3.0/applet.js:182 3.8/weather-applet.js:16651
 msgid "Location not covered"
 msgstr "Konum kapsanmamış"
 
-#: 3.0/applet.js:193 3.0/applet.js:378 3.8/weather-applet.js:9299
+#: 3.0/applet.js:193 3.0/applet.js:378 3.8/weather-applet.js:9301
 msgid "Weather Applet"
 msgstr "Hava Durumu Uygulaması"
 
-#: 3.0/applet.js:217 3.8/weather-applet.js:16015
+#: 3.0/applet.js:217 3.8/weather-applet.js:16917
 msgid "..."
 msgstr "..."
 
-#: 3.0/applet.js:218 3.8/weather-applet.js:16016
+#: 3.0/applet.js:218 3.8/weather-applet.js:16918
 msgid "Click to open"
 msgstr "Açmak için tıklayın"
 
-#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:14517
-#: 3.8/weather-applet.js:16027
+#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:15416
+#: 3.8/weather-applet.js:16929
 msgid "Refresh"
 msgstr "Yenile"
 
@@ -91,8 +94,8 @@ msgstr "API, 400 ile 500 arasında durum kodu döndürdü"
 
 #: 3.0/applet.js:426 3.0/applet.js:2032 3.0/applet.js:2036 3.0/applet.js:2040
 #: 3.0/applet.js:2049 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
-#: 3.0/applet.js:2083 3.0/applet.js:2131 3.8/weather-applet.js:9465
-#: 3.8/weather-applet.js:9469 3.8/weather-applet.js:9473
+#: 3.0/applet.js:2083 3.0/applet.js:2131 3.8/weather-applet.js:9467
+#: 3.8/weather-applet.js:9471 3.8/weather-applet.js:9475
 msgid "Location Store"
 msgstr "Konum Deposu"
 
@@ -104,13 +107,13 @@ msgstr "Otomatik olarak elde edilen bir konumu kaydedemezsiniz, üzgünüm"
 msgid "Could not get weather information"
 msgstr "Hava durumu bilgisi alınamadı"
 
-#: 3.0/applet.js:624 3.8/weather-applet.js:15847
+#: 3.0/applet.js:624 3.8/weather-applet.js:16746
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 "Hava Yenileme Sırasında Beklenmeyen Hata, lütfen Hata günlüklerine bakın"
 
-#: 3.0/applet.js:670 3.8/weather-applet.js:16105
+#: 3.0/applet.js:670 3.8/weather-applet.js:17007
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
@@ -126,7 +129,7 @@ msgstr "Ağ Hatası, lütfen Hata günlüklerini kontrol edin"
 msgid "As of"
 msgstr "İtibarıyla"
 
-#: 3.0/applet.js:1108 3.8/weather-applet.js:15240
+#: 3.0/applet.js:1108 3.8/weather-applet.js:16139
 msgid "Powered by"
 msgstr "Veri sağlayıcı"
 
@@ -134,89 +137,90 @@ msgstr "Veri sağlayıcı"
 msgid "from you"
 msgstr "sizden"
 
-#: 3.0/applet.js:1132 3.8/weather-applet.js:15161
+#: 3.0/applet.js:1132 3.8/weather-applet.js:16060
 msgid "mm"
 msgstr "mm"
 
-#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:10263
-#: 3.8/weather-applet.js:15161
+#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:10265
+#: 3.8/weather-applet.js:16060
 msgid "in"
 msgstr "in"
 
-#: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:9901
-#: 3.8/weather-applet.js:15316
+#: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:9903
+#: 3.8/weather-applet.js:16215
 msgid "mi"
 msgstr "mi"
 
-#: 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:9902
-#: 3.8/weather-applet.js:15317
+#: 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:9904
+#: 3.8/weather-applet.js:16216
 msgid "km"
 msgstr "km"
 
-#: 3.0/applet.js:1227 3.8/weather-applet.js:15486
+#: 3.0/applet.js:1227 3.8/weather-applet.js:16385
 msgid "Loading current weather ..."
 msgstr "Mevcut hava durumu yükleniyor ..."
 
-#: 3.0/applet.js:1230 3.8/weather-applet.js:15489
+#: 3.0/applet.js:1230 3.8/weather-applet.js:16388
 msgid "Loading future weather ..."
 msgstr "Gelecekteki hava durumu yükleniyor ..."
 
-#: 3.0/applet.js:1280 3.8/weather-applet.js:14456
+#: 3.0/applet.js:1280 3.8/weather-applet.js:15355
 msgid "Loading ..."
 msgstr "Yükleniyor ..."
 
-#: 3.0/applet.js:1329 3.8/weather-applet.js:14482
+#: 3.0/applet.js:1329 3.8/weather-applet.js:15381
 msgid "Temperature"
 msgstr "Sıcaklık"
 
-#: 3.0/applet.js:1330 3.8/weather-applet.js:14483
+#: 3.0/applet.js:1330 3.8/weather-applet.js:15382
 msgid "Humidity"
 msgstr "Nem"
 
-#: 3.0/applet.js:1331 3.8/weather-applet.js:14484
+#: 3.0/applet.js:1331 3.8/weather-applet.js:15383
 msgid "Pressure"
 msgstr "Basınç"
 
-#: 3.0/applet.js:1332 3.8/weather-applet.js:12111 3.8/weather-applet.js:12118
-#: 3.8/weather-applet.js:12119 3.8/weather-applet.js:12125
-#: 3.8/weather-applet.js:14485
+#: 3.0/applet.js:1332 3.8/weather-applet.js:12113 3.8/weather-applet.js:12120
+#: 3.8/weather-applet.js:12121 3.8/weather-applet.js:12127
+#: 3.8/weather-applet.js:14074 3.8/weather-applet.js:14075
+#: 3.8/weather-applet.js:15384
 msgid "Wind"
 msgstr "Rüzgar"
 
-#: 3.0/applet.js:1639 3.8/weather-applet.js:14026
+#: 3.0/applet.js:1639 3.8/weather-applet.js:14925
 msgid "Make sure you entered a location or use Automatic location instead"
 msgstr ""
 "Bir konum girdiğinizden emin olun veya bunun yerine Otomatik konum kullanın"
 
-#: 3.0/applet.js:1877 3.8/weather-applet.js:9545
+#: 3.0/applet.js:1877 3.8/weather-applet.js:9547
 msgid "Could not find location based on address, please check if it's right"
 msgstr ""
 "Adrese göre konum bulunamadı, lütfen doğru olup olmadığını kontrol edin"
 
-#: 3.0/applet.js:1901 3.8/weather-applet.js:9566
+#: 3.0/applet.js:1901 3.8/weather-applet.js:9568
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
 msgstr "Geolocation API çağrılamadı, hatalar için Hata Günlüklerine bakın."
 
-#: 3.0/applet.js:2032 3.0/applet.js:2036 3.8/weather-applet.js:9465
-#: 3.8/weather-applet.js:9469
+#: 3.0/applet.js:2032 3.0/applet.js:2036 3.8/weather-applet.js:9467
+#: 3.8/weather-applet.js:9471
 msgid "Warning"
 msgstr "Uyarı"
 
-#: 3.0/applet.js:2032 3.8/weather-applet.js:9465
+#: 3.0/applet.js:2032 3.8/weather-applet.js:9467
 msgid "You can only save correct locations when the applet is not refreshing"
 msgstr "Doğru konumları yalnızca uygulama yenilenmediğinde kaydedebilirsiniz"
 
-#: 3.0/applet.js:2036 3.8/weather-applet.js:9469
+#: 3.0/applet.js:2036 3.8/weather-applet.js:9471
 msgid "You can't save an incorrect location"
 msgstr "Yanlış bir konumu kaydedemezsiniz"
 
 #. 3.8->settings-schema.json->logLevel->options
 #: 3.0/applet.js:2040 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
-#: 3.8/weather-applet.js:9473
+#: 3.8/weather-applet.js:9475
 msgid "Info"
 msgstr "Bilgi"
 
-#: 3.0/applet.js:2040 3.8/weather-applet.js:9473
+#: 3.0/applet.js:2040 3.8/weather-applet.js:9475
 msgid "Location is already saved"
 msgstr "Konum zaten kaydedildi"
 
@@ -254,14 +258,15 @@ msgstr ""
 
 #: 3.0/climacell.js:163 3.0/darkSky.js:143 3.0/openWeatherMap.js:129
 #: 3.0/us_weather.js:322 3.0/weatherbit.js:202 3.0/yahoo.js:141
-#: 3.8/weather-applet.js:10344 3.8/weather-applet.js:10651
-#: 3.8/weather-applet.js:11576 3.8/weather-applet.js:12014
-#: 3.8/weather-applet.js:12519 3.8/weather-applet.js:12881
+#: 3.8/weather-applet.js:10346 3.8/weather-applet.js:10653
+#: 3.8/weather-applet.js:11578 3.8/weather-applet.js:12016
+#: 3.8/weather-applet.js:12521 3.8/weather-applet.js:12883
+#: 3.8/weather-applet.js:14243
 msgid "Feels Like"
 msgstr "Hissedilen"
 
 #: 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
-#: 3.8/weather-applet.js:10389
+#: 3.8/weather-applet.js:10391
 msgid "Failed to Process Weather Info"
 msgstr "Hava Durumu Bilgisi İşlenemedi"
 
@@ -274,7 +279,7 @@ msgstr ""
 "veya https://developer.climacell.co/sign-up adresinden bir tane edinin"
 
 #: 3.0/climacell.js:239 3.0/darkSky.js:229 3.0/weatherbit.js:331
-#: 3.8/weather-applet.js:10272 3.8/weather-applet.js:11746
+#: 3.8/weather-applet.js:10274 3.8/weather-applet.js:11748
 msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
@@ -282,7 +287,7 @@ msgstr ""
 "Lütfen API anahtarını doğru girdiğinizden emin olun\n"
 "hesabınız kilitli değil"
 
-#: 3.0/climacell.js:248 3.8/weather-applet.js:11980
+#: 3.0/climacell.js:248 3.8/weather-applet.js:11982
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Climacell"
@@ -293,58 +298,60 @@ msgstr ""
 #: 3.0/climacell.js:259 3.0/climacell.js:260 3.0/met_norway.js:308
 #: 3.0/met_norway.js:309 3.0/met_norway.js:315 3.0/met_norway.js:322
 #: 3.0/met_norway.js:329 3.0/met_uk.js:617 3.0/met_uk.js:624 3.0/met_uk.js:631
-#: 3.0/met_uk.js:632 3.8/weather-applet.js:10102 3.8/weather-applet.js:10109
-#: 3.8/weather-applet.js:10116 3.8/weather-applet.js:10117
-#: 3.8/weather-applet.js:11207 3.8/weather-applet.js:11208
-#: 3.8/weather-applet.js:11214 3.8/weather-applet.js:11221
-#: 3.8/weather-applet.js:11228 3.8/weather-applet.js:12154
-#: 3.8/weather-applet.js:13047
+#: 3.0/met_uk.js:632 3.8/weather-applet.js:10104 3.8/weather-applet.js:10111
+#: 3.8/weather-applet.js:10118 3.8/weather-applet.js:10119
+#: 3.8/weather-applet.js:11209 3.8/weather-applet.js:11210
+#: 3.8/weather-applet.js:11216 3.8/weather-applet.js:11223
+#: 3.8/weather-applet.js:11230 3.8/weather-applet.js:12156
+#: 3.8/weather-applet.js:13049
 msgid "Heavy rain"
 msgstr "Şiddetli yağmur"
 
 #: 3.0/climacell.js:266 3.0/climacell.js:267 3.0/met_norway.js:483
 #: 3.0/met_norway.js:484 3.0/met_norway.js:490 3.0/us_weather.js:484
 #: 3.0/us_weather.js:533 3.0/us_weather.js:534 3.0/us_weather.js:541
-#: 3.0/yahoo.js:448 3.8/weather-applet.js:11382 3.8/weather-applet.js:11383
-#: 3.8/weather-applet.js:11389 3.8/weather-applet.js:12139
-#: 3.8/weather-applet.js:12140 3.8/weather-applet.js:12146
-#: 3.8/weather-applet.js:12153 3.8/weather-applet.js:12195
-#: 3.8/weather-applet.js:12202 3.8/weather-applet.js:12209
-#: 3.8/weather-applet.js:12663 3.8/weather-applet.js:12712
-#: 3.8/weather-applet.js:12713 3.8/weather-applet.js:12720
-#: 3.8/weather-applet.js:13039 3.8/weather-applet.js:13306
-#: 3.8/weather-applet.js:13307 3.8/weather-applet.js:13348
+#: 3.0/yahoo.js:448 3.8/weather-applet.js:11384 3.8/weather-applet.js:11385
+#: 3.8/weather-applet.js:11391 3.8/weather-applet.js:12141
+#: 3.8/weather-applet.js:12142 3.8/weather-applet.js:12148
+#: 3.8/weather-applet.js:12155 3.8/weather-applet.js:12197
+#: 3.8/weather-applet.js:12204 3.8/weather-applet.js:12211
+#: 3.8/weather-applet.js:12665 3.8/weather-applet.js:12714
+#: 3.8/weather-applet.js:12715 3.8/weather-applet.js:12722
+#: 3.8/weather-applet.js:13041 3.8/weather-applet.js:13308
+#: 3.8/weather-applet.js:13309 3.8/weather-applet.js:13350
+#: 3.8/weather-applet.js:14046 3.8/weather-applet.js:14047
+#: 3.8/weather-applet.js:14409 3.8/weather-applet.js:14410
 msgid "Rain"
 msgstr "Yağmur"
 
 #: 3.0/climacell.js:273 3.0/climacell.js:274 3.0/met_norway.js:392
 #: 3.0/met_norway.js:393 3.0/met_norway.js:399 3.0/met_norway.js:406
 #: 3.0/met_norway.js:413 3.0/met_uk.js:589 3.0/met_uk.js:596 3.0/met_uk.js:610
-#: 3.0/met_uk.js:611 3.0/openWeatherMap.js:381 3.8/weather-applet.js:10074
-#: 3.8/weather-applet.js:10081 3.8/weather-applet.js:10095
-#: 3.8/weather-applet.js:10096 3.8/weather-applet.js:10920
-#: 3.8/weather-applet.js:11291 3.8/weather-applet.js:11292
-#: 3.8/weather-applet.js:11298 3.8/weather-applet.js:11305
-#: 3.8/weather-applet.js:11312 3.8/weather-applet.js:12147
-#: 3.8/weather-applet.js:13049
+#: 3.0/met_uk.js:611 3.0/openWeatherMap.js:381 3.8/weather-applet.js:10076
+#: 3.8/weather-applet.js:10083 3.8/weather-applet.js:10097
+#: 3.8/weather-applet.js:10098 3.8/weather-applet.js:10922
+#: 3.8/weather-applet.js:11293 3.8/weather-applet.js:11294
+#: 3.8/weather-applet.js:11300 3.8/weather-applet.js:11307
+#: 3.8/weather-applet.js:11314 3.8/weather-applet.js:12149
+#: 3.8/weather-applet.js:13051
 msgid "Light rain"
 msgstr "Hafif yağmur"
 
-#: 3.0/climacell.js:280 3.8/weather-applet.js:12210 3.8/weather-applet.js:13023
+#: 3.0/climacell.js:280 3.8/weather-applet.js:12212 3.8/weather-applet.js:13025
 msgid "Heavy freezing rain"
 msgstr "Şiddetli dondurucu yağmur"
 
 #: 3.0/climacell.js:281 3.0/climacell.js:287 3.0/climacell.js:288
 #: 3.0/climacell.js:295 3.0/openWeatherMap.js:386 3.0/us_weather.js:505
 #: 3.0/us_weather.js:506 3.0/us_weather.js:512 3.0/us_weather.js:513
-#: 3.0/us_weather.js:519 3.8/weather-applet.js:10925
-#: 3.8/weather-applet.js:12196 3.8/weather-applet.js:12684
-#: 3.8/weather-applet.js:12685 3.8/weather-applet.js:12691
-#: 3.8/weather-applet.js:12692 3.8/weather-applet.js:12698
+#: 3.0/us_weather.js:519 3.8/weather-applet.js:10927
+#: 3.8/weather-applet.js:12198 3.8/weather-applet.js:12686
+#: 3.8/weather-applet.js:12687 3.8/weather-applet.js:12693
+#: 3.8/weather-applet.js:12694 3.8/weather-applet.js:12700
 msgid "Freezing rain"
 msgstr "Dolu yağışlı"
 
-#: 3.0/climacell.js:294 3.8/weather-applet.js:12203 3.8/weather-applet.js:13025
+#: 3.0/climacell.js:294 3.8/weather-applet.js:12205 3.8/weather-applet.js:13027
 msgid "Light freezing rain"
 msgstr "Hafif donan yağmur"
 
@@ -352,174 +359,189 @@ msgstr "Hafif donan yağmur"
 msgid "Light freezing drizzle"
 msgstr "Hafif dondurucu çiseleme"
 
-#: 3.0/climacell.js:302 3.8/weather-applet.js:12189
+#: 3.0/climacell.js:302 3.8/weather-applet.js:12191
 msgid "Freezing drizzle"
 msgstr "Dondurucu çiseleme"
 
-#: 3.0/climacell.js:308 3.0/climacell.js:309 3.8/weather-applet.js:13005
+#: 3.0/climacell.js:308 3.0/climacell.js:309 3.8/weather-applet.js:13007
 msgid "Light drizzle"
 msgstr "Hafif çiseleme"
 
-#: 3.0/climacell.js:315 3.8/weather-applet.js:12224
+#: 3.0/climacell.js:315 3.8/weather-applet.js:12226
 msgid "Heavy ice pellets"
 msgstr "Yoğun buz topakları"
 
 #: 3.0/climacell.js:316 3.0/climacell.js:322 3.0/climacell.js:323
-#: 3.0/climacell.js:330 3.8/weather-applet.js:12216 3.8/weather-applet.js:12217
-#: 3.8/weather-applet.js:12223 3.8/weather-applet.js:12230
+#: 3.0/climacell.js:330 3.8/weather-applet.js:12218 3.8/weather-applet.js:12219
+#: 3.8/weather-applet.js:12225 3.8/weather-applet.js:12232
 msgid "Ice pellets"
 msgstr "Buz topakları"
 
-#: 3.0/climacell.js:329 3.8/weather-applet.js:12231
+#: 3.0/climacell.js:329 3.8/weather-applet.js:12233
 msgid "Light ice pellets"
 msgstr "Hafif buz topakları"
 
 #: 3.0/climacell.js:336 3.0/climacell.js:337 3.0/met_norway.js:364
 #: 3.0/met_norway.js:365 3.0/met_norway.js:371 3.0/met_norway.js:378
 #: 3.0/met_norway.js:385 3.0/met_uk.js:701 3.0/met_uk.js:708 3.0/met_uk.js:715
-#: 3.0/met_uk.js:716 3.0/openWeatherMap.js:393 3.8/weather-applet.js:10186
-#: 3.8/weather-applet.js:10193 3.8/weather-applet.js:10200
-#: 3.8/weather-applet.js:10201 3.8/weather-applet.js:10932
-#: 3.8/weather-applet.js:11263 3.8/weather-applet.js:11264
-#: 3.8/weather-applet.js:11270 3.8/weather-applet.js:11277
-#: 3.8/weather-applet.js:11284 3.8/weather-applet.js:12182
-#: 3.8/weather-applet.js:13065 3.8/weather-applet.js:13383
+#: 3.0/met_uk.js:716 3.0/openWeatherMap.js:393 3.8/weather-applet.js:10188
+#: 3.8/weather-applet.js:10195 3.8/weather-applet.js:10202
+#: 3.8/weather-applet.js:10203 3.8/weather-applet.js:10934
+#: 3.8/weather-applet.js:11265 3.8/weather-applet.js:11266
+#: 3.8/weather-applet.js:11272 3.8/weather-applet.js:11279
+#: 3.8/weather-applet.js:11286 3.8/weather-applet.js:12184
+#: 3.8/weather-applet.js:13067 3.8/weather-applet.js:13385
 msgid "Heavy snow"
 msgstr "Ağır kar yağışı"
 
 #: 3.0/climacell.js:343 3.0/climacell.js:344 3.0/met_norway.js:539
 #: 3.0/met_norway.js:540 3.0/met_norway.js:546 3.0/openWeatherMap.js:392
 #: 3.0/us_weather.js:477 3.0/us_weather.js:478 3.0/yahoo.js:452
-#: 3.8/weather-applet.js:10931 3.8/weather-applet.js:11438
-#: 3.8/weather-applet.js:11439 3.8/weather-applet.js:11445
-#: 3.8/weather-applet.js:12160 3.8/weather-applet.js:12161
-#: 3.8/weather-applet.js:12174 3.8/weather-applet.js:12181
-#: 3.8/weather-applet.js:12656 3.8/weather-applet.js:12657
-#: 3.8/weather-applet.js:13059 3.8/weather-applet.js:13292
-#: 3.8/weather-applet.js:13376
+#: 3.8/weather-applet.js:10933 3.8/weather-applet.js:11440
+#: 3.8/weather-applet.js:11441 3.8/weather-applet.js:11447
+#: 3.8/weather-applet.js:12162 3.8/weather-applet.js:12163
+#: 3.8/weather-applet.js:12176 3.8/weather-applet.js:12183
+#: 3.8/weather-applet.js:12658 3.8/weather-applet.js:12659
+#: 3.8/weather-applet.js:13061 3.8/weather-applet.js:13294
+#: 3.8/weather-applet.js:13378 3.8/weather-applet.js:14060
+#: 3.8/weather-applet.js:14061 3.8/weather-applet.js:14437
+#: 3.8/weather-applet.js:14438
 msgid "Snow"
 msgstr "Kar"
 
 #: 3.0/climacell.js:350 3.0/climacell.js:351 3.0/met_norway.js:448
 #: 3.0/met_norway.js:449 3.0/met_norway.js:455 3.0/met_norway.js:462
 #: 3.0/met_norway.js:469 3.0/met_uk.js:680 3.0/met_uk.js:687 3.0/met_uk.js:694
-#: 3.0/met_uk.js:695 3.0/openWeatherMap.js:391 3.8/weather-applet.js:10165
-#: 3.8/weather-applet.js:10172 3.8/weather-applet.js:10179
-#: 3.8/weather-applet.js:10180 3.8/weather-applet.js:10930
-#: 3.8/weather-applet.js:11347 3.8/weather-applet.js:11348
-#: 3.8/weather-applet.js:11354 3.8/weather-applet.js:11361
-#: 3.8/weather-applet.js:11368 3.8/weather-applet.js:12175
-#: 3.8/weather-applet.js:13067
+#: 3.0/met_uk.js:695 3.0/openWeatherMap.js:391 3.8/weather-applet.js:10167
+#: 3.8/weather-applet.js:10174 3.8/weather-applet.js:10181
+#: 3.8/weather-applet.js:10182 3.8/weather-applet.js:10932
+#: 3.8/weather-applet.js:11349 3.8/weather-applet.js:11350
+#: 3.8/weather-applet.js:11356 3.8/weather-applet.js:11363
+#: 3.8/weather-applet.js:11370 3.8/weather-applet.js:12177
+#: 3.8/weather-applet.js:13069
 msgid "Light snow"
 msgstr "Hafif kar"
 
-#: 3.0/climacell.js:357 3.0/climacell.js:358 3.8/weather-applet.js:12167
-#: 3.8/weather-applet.js:12168
+#: 3.0/climacell.js:357 3.0/climacell.js:358 3.8/weather-applet.js:12169
+#: 3.8/weather-applet.js:12170 3.8/weather-applet.js:14416
+#: 3.8/weather-applet.js:14417
 msgid "Flurries"
 msgstr "Sağanak yağış"
 
 #: 3.0/climacell.js:364 3.0/climacell.js:365 3.0/openWeatherMap.js:366
-#: 3.0/us_weather.js:550 3.0/us_weather.js:551 3.8/weather-applet.js:10905
-#: 3.8/weather-applet.js:12237 3.8/weather-applet.js:12238
-#: 3.8/weather-applet.js:12729 3.8/weather-applet.js:12730
-#: 3.8/weather-applet.js:13071 3.8/weather-applet.js:13390
-#: 3.8/weather-applet.js:13391
+#: 3.0/us_weather.js:550 3.0/us_weather.js:551 3.8/weather-applet.js:10907
+#: 3.8/weather-applet.js:12239 3.8/weather-applet.js:12240
+#: 3.8/weather-applet.js:12731 3.8/weather-applet.js:12732
+#: 3.8/weather-applet.js:13073 3.8/weather-applet.js:13392
+#: 3.8/weather-applet.js:13393 3.8/weather-applet.js:14067
+#: 3.8/weather-applet.js:14068
 msgid "Thunderstorm"
 msgstr "Gökgürültülü Fırtınalı"
 
-#: 3.0/climacell.js:371 3.0/climacell.js:372 3.8/weather-applet.js:12105
+#: 3.0/climacell.js:371 3.0/climacell.js:372 3.8/weather-applet.js:12107
 msgid "Light fog"
 msgstr "Hafif Sis"
 
 #: 3.0/climacell.js:378 3.0/climacell.js:379 3.0/met_norway.js:301
 #: 3.0/met_norway.js:302 3.0/met_uk.js:568 3.0/met_uk.js:569
 #: 3.0/openWeatherMap.js:405 3.0/us_weather.js:620 3.0/us_weather.js:621
-#: 3.8/weather-applet.js:10053 3.8/weather-applet.js:10054
-#: 3.8/weather-applet.js:10944 3.8/weather-applet.js:11200
-#: 3.8/weather-applet.js:11201 3.8/weather-applet.js:12097
-#: 3.8/weather-applet.js:12098 3.8/weather-applet.js:12104
-#: 3.8/weather-applet.js:12799 3.8/weather-applet.js:12800
-#: 3.8/weather-applet.js:13013
+#: 3.8/weather-applet.js:10055 3.8/weather-applet.js:10056
+#: 3.8/weather-applet.js:10946 3.8/weather-applet.js:11202
+#: 3.8/weather-applet.js:11203 3.8/weather-applet.js:12099
+#: 3.8/weather-applet.js:12100 3.8/weather-applet.js:12106
+#: 3.8/weather-applet.js:12801 3.8/weather-applet.js:12802
+#: 3.8/weather-applet.js:13015 3.8/weather-applet.js:14018
+#: 3.8/weather-applet.js:14019 3.8/weather-applet.js:14465
+#: 3.8/weather-applet.js:14466
 msgid "Fog"
 msgstr "Sisli"
 
 #: 3.0/climacell.js:385 3.0/climacell.js:386 3.0/met_norway.js:287
 #: 3.0/met_norway.js:288 3.0/met_uk.js:575 3.0/met_uk.js:576 3.0/yahoo.js:462
-#: 3.8/weather-applet.js:10060 3.8/weather-applet.js:10061
-#: 3.8/weather-applet.js:11186 3.8/weather-applet.js:11187
-#: 3.8/weather-applet.js:12069 3.8/weather-applet.js:12070
-#: 3.8/weather-applet.js:13285 3.8/weather-applet.js:13286
+#: 3.8/weather-applet.js:10062 3.8/weather-applet.js:10063
+#: 3.8/weather-applet.js:11188 3.8/weather-applet.js:11189
+#: 3.8/weather-applet.js:12071 3.8/weather-applet.js:12072
+#: 3.8/weather-applet.js:13287 3.8/weather-applet.js:13288
+#: 3.8/weather-applet.js:14011 3.8/weather-applet.js:14012
+#: 3.8/weather-applet.js:14507 3.8/weather-applet.js:14508
 msgid "Cloudy"
 msgstr "Bulutlu"
 
 #: 3.0/climacell.js:392 3.0/climacell.js:393 3.0/us_weather.js:428
-#: 3.0/us_weather.js:429 3.0/us_weather.js:463 3.8/weather-applet.js:12090
-#: 3.8/weather-applet.js:12091 3.8/weather-applet.js:12607
-#: 3.8/weather-applet.js:12608 3.8/weather-applet.js:12642
+#: 3.0/us_weather.js:429 3.0/us_weather.js:463 3.8/weather-applet.js:12092
+#: 3.8/weather-applet.js:12093 3.8/weather-applet.js:12609
+#: 3.8/weather-applet.js:12610 3.8/weather-applet.js:12644
 msgid "Mostly cloudy"
 msgstr "Çok Bulutlu"
 
 #: 3.0/climacell.js:399 3.0/climacell.js:400 3.0/met_norway.js:476
 #: 3.0/met_norway.js:477 3.0/met_uk.js:540 3.0/met_uk.js:541 3.0/met_uk.js:547
 #: 3.0/met_uk.js:548 3.0/us_weather.js:421 3.0/us_weather.js:422
-#: 3.0/us_weather.js:456 3.8/weather-applet.js:10025
-#: 3.8/weather-applet.js:10026 3.8/weather-applet.js:10032
-#: 3.8/weather-applet.js:10033 3.8/weather-applet.js:11375
-#: 3.8/weather-applet.js:11376 3.8/weather-applet.js:12083
-#: 3.8/weather-applet.js:12084 3.8/weather-applet.js:12600
-#: 3.8/weather-applet.js:12601 3.8/weather-applet.js:12635
-#: 3.8/weather-applet.js:13278 3.8/weather-applet.js:13279
+#: 3.0/us_weather.js:456 3.8/weather-applet.js:10027
+#: 3.8/weather-applet.js:10028 3.8/weather-applet.js:10034
+#: 3.8/weather-applet.js:10035 3.8/weather-applet.js:11377
+#: 3.8/weather-applet.js:11378 3.8/weather-applet.js:12085
+#: 3.8/weather-applet.js:12086 3.8/weather-applet.js:12602
+#: 3.8/weather-applet.js:12603 3.8/weather-applet.js:12637
+#: 3.8/weather-applet.js:13280 3.8/weather-applet.js:13281
 msgid "Partly cloudy"
 msgstr "Parçalı Bulutlu"
 
-#: 3.0/climacell.js:406 3.0/climacell.js:407 3.8/weather-applet.js:12076
-#: 3.8/weather-applet.js:12077
+#: 3.0/climacell.js:406 3.0/climacell.js:407 3.8/weather-applet.js:12078
+#: 3.8/weather-applet.js:12079
 msgid "Mostly clear"
 msgstr "Çoğunlukla Açık"
 
 #: 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:526
 #: 3.0/met_uk.js:527 3.0/openWeatherMap.js:411 3.0/us_weather.js:407
 #: 3.0/us_weather.js:408 3.0/us_weather.js:442 3.0/yahoo.js:465
-#: 3.8/weather-applet.js:10011 3.8/weather-applet.js:10012
-#: 3.8/weather-applet.js:10950 3.8/weather-applet.js:12062
-#: 3.8/weather-applet.js:12063 3.8/weather-applet.js:12586
-#: 3.8/weather-applet.js:12587 3.8/weather-applet.js:12621
-#: 3.8/weather-applet.js:13083 3.8/weather-applet.js:13271
-#: 3.8/weather-applet.js:13272
+#: 3.8/weather-applet.js:10013 3.8/weather-applet.js:10014
+#: 3.8/weather-applet.js:10952 3.8/weather-applet.js:12064
+#: 3.8/weather-applet.js:12065 3.8/weather-applet.js:12588
+#: 3.8/weather-applet.js:12589 3.8/weather-applet.js:12623
+#: 3.8/weather-applet.js:13085 3.8/weather-applet.js:13273
+#: 3.8/weather-applet.js:13274 3.8/weather-applet.js:13997
+#: 3.8/weather-applet.js:13998 3.8/weather-applet.js:14004
+#: 3.8/weather-applet.js:14005 3.8/weather-applet.js:14542
+#: 3.8/weather-applet.js:14543
 msgid "Clear"
 msgstr "Açık"
 
 #: 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:533
-#: 3.0/met_uk.js:534 3.0/yahoo.js:466 3.8/weather-applet.js:10018
-#: 3.8/weather-applet.js:10019 3.8/weather-applet.js:12062
-#: 3.8/weather-applet.js:12063
+#: 3.0/met_uk.js:534 3.0/yahoo.js:466 3.8/weather-applet.js:10020
+#: 3.8/weather-applet.js:10021 3.8/weather-applet.js:12064
+#: 3.8/weather-applet.js:12065 3.8/weather-applet.js:14549
+#: 3.8/weather-applet.js:14550
 msgid "Sunny"
 msgstr "Güneşli"
 
 #: 3.0/climacell.js:421 3.0/climacell.js:422 3.0/met_norway.js:568
 #: 3.0/met_norway.js:569 3.0/met_uk.js:519 3.0/met_uk.js:520 3.0/met_uk.js:554
 #: 3.0/met_uk.js:555 3.0/met_uk.js:743 3.0/met_uk.js:744 3.0/us_weather.js:627
-#: 3.0/us_weather.js:628 3.8/weather-applet.js:10004
-#: 3.8/weather-applet.js:10005 3.8/weather-applet.js:10039
-#: 3.8/weather-applet.js:10040 3.8/weather-applet.js:10228
-#: 3.8/weather-applet.js:10229 3.8/weather-applet.js:11169
-#: 3.8/weather-applet.js:11170 3.8/weather-applet.js:11467
-#: 3.8/weather-applet.js:11468 3.8/weather-applet.js:12054
-#: 3.8/weather-applet.js:12055 3.8/weather-applet.js:12577
-#: 3.8/weather-applet.js:12578 3.8/weather-applet.js:12806
-#: 3.8/weather-applet.js:12807
+#: 3.0/us_weather.js:628 3.8/weather-applet.js:10006
+#: 3.8/weather-applet.js:10007 3.8/weather-applet.js:10041
+#: 3.8/weather-applet.js:10042 3.8/weather-applet.js:10230
+#: 3.8/weather-applet.js:10231 3.8/weather-applet.js:11171
+#: 3.8/weather-applet.js:11172 3.8/weather-applet.js:11469
+#: 3.8/weather-applet.js:11470 3.8/weather-applet.js:12056
+#: 3.8/weather-applet.js:12057 3.8/weather-applet.js:12579
+#: 3.8/weather-applet.js:12580 3.8/weather-applet.js:12808
+#: 3.8/weather-applet.js:12809 3.8/weather-applet.js:13930
+#: 3.8/weather-applet.js:13931 3.8/weather-applet.js:14081
+#: 3.8/weather-applet.js:14082 3.8/weather-applet.js:14653
+#: 3.8/weather-applet.js:14655
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
-#: 3.0/darkSky.js:71 3.8/weather-applet.js:10263
+#: 3.0/darkSky.js:71 3.8/weather-applet.js:10265
 msgid "and"
 msgstr "ve"
 
-#: 3.0/darkSky.js:71 3.8/weather-applet.js:10263
+#: 3.0/darkSky.js:71 3.8/weather-applet.js:10265
 msgid "until"
 msgstr "a kadar"
 
-#: 3.0/darkSky.js:71 3.8/weather-applet.js:10263
+#: 3.0/darkSky.js:71 3.8/weather-applet.js:10265
 msgid "Possible"
 msgstr "Mümkün"
 
@@ -531,7 +553,7 @@ msgstr ""
 "Lütfen ayarlara API anahtarını girin,\n"
 "veya https://darksky.net/dev/register adresinden bir tane edinin"
 
-#: 3.0/darkSky.js:238 3.8/weather-applet.js:10282
+#: 3.0/darkSky.js:238 3.8/weather-applet.js:10284
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from DarkSky"
@@ -539,130 +561,130 @@ msgstr ""
 "Lütfen emin ol\n"
 "DarkSky'den sahip olduğunuz API anahtarını girdiniz"
 
-#: 3.0/ipApi.js:89 3.8/weather-applet.js:9251
+#: 3.0/ipApi.js:89 3.8/weather-applet.js:9253
 msgid "Could not obtain location"
 msgstr "Konum alınamadı"
 
-#: 3.0/ipApi.js:95 3.8/weather-applet.js:9257
+#: 3.0/ipApi.js:95 3.8/weather-applet.js:9259
 msgid ""
 "Location Service responded with errors, please see the logs in Looking Glass"
 msgstr "Konum Hizmeti hatalarla yanıt verdi, lütfen hata günlüklerine bakın"
 
-#: 3.0/met_norway.js:131 3.8/weather-applet.js:11028
+#: 3.0/met_norway.js:131 3.8/weather-applet.js:11030
 msgid "Cloudiness"
 msgstr "Bulanıklık"
 
 #: 3.0/met_norway.js:280 3.0/met_norway.js:281 3.0/openWeatherMap.js:412
-#: 3.8/weather-applet.js:10951 3.8/weather-applet.js:11179
-#: 3.8/weather-applet.js:11180
+#: 3.8/weather-applet.js:10953 3.8/weather-applet.js:11181
+#: 3.8/weather-applet.js:11182
 msgid "Clear sky"
 msgstr "Hava açık"
 
 #: 3.0/met_norway.js:294 3.0/met_norway.js:295 3.0/yahoo.js:468
-#: 3.8/weather-applet.js:11193 3.8/weather-applet.js:11194
+#: 3.8/weather-applet.js:11195 3.8/weather-applet.js:11196
 msgid "Fair"
 msgstr "Açık"
 
-#: 3.0/met_norway.js:316 3.8/weather-applet.js:11215
+#: 3.0/met_norway.js:316 3.8/weather-applet.js:11217
 msgid "Heavy rain and thunder"
 msgstr "Şiddetli yağmur ve gök gürültüsü"
 
-#: 3.0/met_norway.js:323 3.8/weather-applet.js:11222
+#: 3.0/met_norway.js:323 3.8/weather-applet.js:11224
 msgid "Heavy rain showers"
 msgstr "Şiddetli sağnak yağmur"
 
-#: 3.0/met_norway.js:330 3.8/weather-applet.js:11229
+#: 3.0/met_norway.js:330 3.8/weather-applet.js:11231
 msgid "Heavy rain showers and thunder"
 msgstr "Şiddetli sağnak yağmur ve gök gürültüsü"
 
 #: 3.0/met_norway.js:336 3.0/met_norway.js:337 3.0/met_norway.js:343
-#: 3.0/met_norway.js:350 3.0/met_norway.js:357 3.8/weather-applet.js:11235
-#: 3.8/weather-applet.js:11236 3.8/weather-applet.js:11242
-#: 3.8/weather-applet.js:11249 3.8/weather-applet.js:11256
+#: 3.0/met_norway.js:350 3.0/met_norway.js:357 3.8/weather-applet.js:11237
+#: 3.8/weather-applet.js:11238 3.8/weather-applet.js:11244
+#: 3.8/weather-applet.js:11251 3.8/weather-applet.js:11258
 msgid "Heavy sleet"
 msgstr "Yoğun sulu kar"
 
-#: 3.0/met_norway.js:344 3.8/weather-applet.js:11243
+#: 3.0/met_norway.js:344 3.8/weather-applet.js:11245
 msgid "Heavy sleet and thunder"
 msgstr "Yoğun sulu kar ve gök gürültüsü"
 
-#: 3.0/met_norway.js:351 3.8/weather-applet.js:11250
+#: 3.0/met_norway.js:351 3.8/weather-applet.js:11252
 msgid "Heavy sleet showers"
 msgstr "Şiddetl isağnak sulu kar"
 
-#: 3.0/met_norway.js:358 3.8/weather-applet.js:11257
+#: 3.0/met_norway.js:358 3.8/weather-applet.js:11259
 msgid "Heavy sleet showers and thunder"
 msgstr "Şiddetli sağnak sulu kar ve gök gürültüsü"
 
-#: 3.0/met_norway.js:372 3.8/weather-applet.js:11271
+#: 3.0/met_norway.js:372 3.8/weather-applet.js:11273
 msgid "Heavy snow and thunder"
 msgstr "Yoğun kar ve gök gürültüsü"
 
-#: 3.0/met_norway.js:379 3.8/weather-applet.js:11278
-#: 3.8/weather-applet.js:13384
+#: 3.0/met_norway.js:379 3.8/weather-applet.js:11280
+#: 3.8/weather-applet.js:13386
 msgid "Heavy snow showers"
 msgstr "Şiddetli sağnak kar yağışı"
 
-#: 3.0/met_norway.js:386 3.8/weather-applet.js:11285
+#: 3.0/met_norway.js:386 3.8/weather-applet.js:11287
 msgid "Heavy snow showers and thunder"
 msgstr "Şiddetli sağnak kar yağışı ve gök gürültüsü"
 
-#: 3.0/met_norway.js:400 3.8/weather-applet.js:11299
+#: 3.0/met_norway.js:400 3.8/weather-applet.js:11301
 msgid "Light rain and thunder"
 msgstr "Hafif yağmur ve gök gürültüsü"
 
-#: 3.0/met_norway.js:407 3.8/weather-applet.js:11306
+#: 3.0/met_norway.js:407 3.8/weather-applet.js:11308
 msgid "Light rain showers"
 msgstr "Hafif sağanak yağmur"
 
-#: 3.0/met_norway.js:414 3.8/weather-applet.js:11313
+#: 3.0/met_norway.js:414 3.8/weather-applet.js:11315
 msgid "Light rain showers and thunder"
 msgstr "Hafif sağanak yağmur ve gök gürültüsü"
 
 #: 3.0/met_norway.js:420 3.0/met_norway.js:421 3.0/met_norway.js:427
-#: 3.0/met_norway.js:434 3.0/met_norway.js:441 3.8/weather-applet.js:11319
-#: 3.8/weather-applet.js:11320 3.8/weather-applet.js:11326
-#: 3.8/weather-applet.js:11333 3.8/weather-applet.js:11340
+#: 3.0/met_norway.js:434 3.0/met_norway.js:441 3.8/weather-applet.js:11321
+#: 3.8/weather-applet.js:11322 3.8/weather-applet.js:11328
+#: 3.8/weather-applet.js:11335 3.8/weather-applet.js:11342
 msgid "Light sleet"
 msgstr "Hafif Sulu kar"
 
-#: 3.0/met_norway.js:428 3.8/weather-applet.js:11327
+#: 3.0/met_norway.js:428 3.8/weather-applet.js:11329
 msgid "Light sleet and thunder"
 msgstr "Hafif karla karışık yağmur ve gök gürültüsü"
 
-#: 3.0/met_norway.js:435 3.8/weather-applet.js:11334
+#: 3.0/met_norway.js:435 3.8/weather-applet.js:11336
 msgid "Light sleet showers"
 msgstr "Hafif sağnak karla karışık yağmur"
 
-#: 3.0/met_norway.js:442 3.8/weather-applet.js:11341
+#: 3.0/met_norway.js:442 3.8/weather-applet.js:11343
 msgid "Light sleet showers and thunder"
 msgstr "Hafif sağnak karla karışık yağmur ve gök gürültüsü"
 
-#: 3.0/met_norway.js:456 3.8/weather-applet.js:11355
+#: 3.0/met_norway.js:456 3.8/weather-applet.js:11357
 msgid "Light snow and thunder"
 msgstr "Hafif kar yağışı ve gök gürültüsü"
 
-#: 3.0/met_norway.js:463 3.8/weather-applet.js:11362
+#: 3.0/met_norway.js:463 3.8/weather-applet.js:11364
 msgid "Light snow showers"
 msgstr "Hafif sağanak kar yağışı"
 
-#: 3.0/met_norway.js:470 3.8/weather-applet.js:11369
+#: 3.0/met_norway.js:470 3.8/weather-applet.js:11371
 msgid "Light snow showers and thunder"
 msgstr "Hafif sağnak kar yağışı ve gök gürültüsü"
 
-#: 3.0/met_norway.js:491 3.8/weather-applet.js:11390
+#: 3.0/met_norway.js:491 3.8/weather-applet.js:11392
 msgid "Rain and thunder"
 msgstr "Yağmur ve gök gürültüsü"
 
 #: 3.0/met_norway.js:497 3.0/met_norway.js:498 3.0/met_norway.js:504
-#: 3.0/us_weather.js:542 3.8/weather-applet.js:11396
-#: 3.8/weather-applet.js:11397 3.8/weather-applet.js:11403
-#: 3.8/weather-applet.js:12721 3.8/weather-applet.js:13045
-#: 3.8/weather-applet.js:13349 3.8/weather-applet.js:13355
+#: 3.0/us_weather.js:542 3.8/weather-applet.js:11398
+#: 3.8/weather-applet.js:11399 3.8/weather-applet.js:11405
+#: 3.8/weather-applet.js:12723 3.8/weather-applet.js:13047
+#: 3.8/weather-applet.js:13351 3.8/weather-applet.js:13357
 msgid "Rain showers"
 msgstr "Sağanak yağmur"
 
-#: 3.0/met_norway.js:505 3.8/weather-applet.js:11404
+#: 3.0/met_norway.js:505 3.8/weather-applet.js:11406
 msgid "Rain showers and thunder"
 msgstr "Sağanak yağmur ve gök gürültüsü"
 
@@ -671,42 +693,44 @@ msgstr "Sağanak yağmur ve gök gürültüsü"
 #: 3.0/met_uk.js:645 3.0/met_uk.js:652 3.0/met_uk.js:653
 #: 3.0/openWeatherMap.js:394 3.0/us_weather.js:491 3.0/us_weather.js:492
 #: 3.0/us_weather.js:498 3.0/us_weather.js:499 3.0/us_weather.js:526
-#: 3.0/us_weather.js:527 3.0/yahoo.js:454 3.8/weather-applet.js:10123
-#: 3.8/weather-applet.js:10130 3.8/weather-applet.js:10137
-#: 3.8/weather-applet.js:10138 3.8/weather-applet.js:10933
-#: 3.8/weather-applet.js:11410 3.8/weather-applet.js:11411
-#: 3.8/weather-applet.js:11417 3.8/weather-applet.js:11424
-#: 3.8/weather-applet.js:11431 3.8/weather-applet.js:12670
-#: 3.8/weather-applet.js:12671 3.8/weather-applet.js:12677
-#: 3.8/weather-applet.js:12678 3.8/weather-applet.js:12705
-#: 3.8/weather-applet.js:12706
+#: 3.0/us_weather.js:527 3.0/yahoo.js:454 3.8/weather-applet.js:10125
+#: 3.8/weather-applet.js:10132 3.8/weather-applet.js:10139
+#: 3.8/weather-applet.js:10140 3.8/weather-applet.js:10935
+#: 3.8/weather-applet.js:11412 3.8/weather-applet.js:11413
+#: 3.8/weather-applet.js:11419 3.8/weather-applet.js:11426
+#: 3.8/weather-applet.js:11433 3.8/weather-applet.js:12672
+#: 3.8/weather-applet.js:12673 3.8/weather-applet.js:12679
+#: 3.8/weather-applet.js:12680 3.8/weather-applet.js:12707
+#: 3.8/weather-applet.js:12708 3.8/weather-applet.js:14053
+#: 3.8/weather-applet.js:14054 3.8/weather-applet.js:14451
+#: 3.8/weather-applet.js:14452
 msgid "Sleet"
 msgstr "Karla karışık yağmur"
 
-#: 3.0/met_norway.js:519 3.8/weather-applet.js:11418
+#: 3.0/met_norway.js:519 3.8/weather-applet.js:11420
 msgid "Sleet and thunder"
 msgstr "Karla karışık yağmur ve gök gürültüsü"
 
-#: 3.0/met_norway.js:526 3.8/weather-applet.js:11425
+#: 3.0/met_norway.js:526 3.8/weather-applet.js:11427
 msgid "Sleet showers"
 msgstr "Karla karışık yağmur"
 
-#: 3.0/met_norway.js:533 3.8/weather-applet.js:11432
+#: 3.0/met_norway.js:533 3.8/weather-applet.js:11434
 msgid "Sleet showers and thunder"
 msgstr "Karla karışık sağanak yağmur ve gök gürültüsü"
 
-#: 3.0/met_norway.js:547 3.8/weather-applet.js:11446
+#: 3.0/met_norway.js:547 3.8/weather-applet.js:11448
 msgid "Snow and thunder"
 msgstr "Kar ve gök gürültüsü"
 
 #: 3.0/met_norway.js:553 3.0/met_norway.js:554 3.0/met_norway.js:560
-#: 3.8/weather-applet.js:11452 3.8/weather-applet.js:11453
-#: 3.8/weather-applet.js:11459 3.8/weather-applet.js:13063
-#: 3.8/weather-applet.js:13377
+#: 3.8/weather-applet.js:11454 3.8/weather-applet.js:11455
+#: 3.8/weather-applet.js:11461 3.8/weather-applet.js:13065
+#: 3.8/weather-applet.js:13379
 msgid "Snow showers"
 msgstr "Sağanak kar"
 
-#: 3.0/met_norway.js:561 3.8/weather-applet.js:11460
+#: 3.0/met_norway.js:561 3.8/weather-applet.js:11462
 msgid "Snow showers and thunder"
 msgstr "Sağanak kar ve gök gürültüsü"
 
@@ -715,20 +739,20 @@ msgstr "Sağanak kar ve gök gürültüsü"
 msgid "Unexpected response from API"
 msgstr "API'den beklenmeyen yanıt"
 
-#: 3.0/met_uk.js:316 3.8/weather-applet.js:9826
+#: 3.0/met_uk.js:316 3.8/weather-applet.js:9828
 msgid "Visibility"
 msgstr "Görüş mesafesi"
 
 #: 3.0/met_uk.js:340 3.0/openWeatherMap.js:190 3.0/us_weather.js:334
-#: 3.0/weatherbit.js:212 3.8/weather-applet.js:9854 3.8/weather-applet.js:10728
-#: 3.8/weather-applet.js:11587 3.8/weather-applet.js:12532
+#: 3.0/weatherbit.js:212 3.8/weather-applet.js:9856 3.8/weather-applet.js:10730
+#: 3.8/weather-applet.js:11589 3.8/weather-applet.js:12534
 msgid "Failed to Process Current Weather Info"
 msgstr "Mevcut Hava Durumu Bilgisi İşlenemedi"
 
 #: 3.0/met_uk.js:364 3.0/met_uk.js:400 3.0/us_weather.js:371
-#: 3.0/weatherbit.js:239 3.0/weatherbit.js:274 3.8/weather-applet.js:9645
-#: 3.8/weather-applet.js:9679 3.8/weather-applet.js:11613
-#: 3.8/weather-applet.js:11647 3.8/weather-applet.js:12334
+#: 3.0/weatherbit.js:239 3.0/weatherbit.js:274 3.8/weather-applet.js:9647
+#: 3.8/weather-applet.js:9681 3.8/weather-applet.js:11615
+#: 3.8/weather-applet.js:11649 3.8/weather-applet.js:12336
 msgid "Failed to Process Forecast Info"
 msgstr "Tahmin Bilgileri İşlenemedi"
 
@@ -757,85 +781,88 @@ msgid "Excellent - More than"
 msgstr "Mükemmel - Şundan fazla"
 
 #: 3.0/met_uk.js:561 3.0/met_uk.js:562 3.0/openWeatherMap.js:401
-#: 3.8/weather-applet.js:10046 3.8/weather-applet.js:10047
-#: 3.8/weather-applet.js:10940 3.8/weather-applet.js:13035
+#: 3.8/weather-applet.js:10048 3.8/weather-applet.js:10049
+#: 3.8/weather-applet.js:10942 3.8/weather-applet.js:13037
 msgid "Mist"
 msgstr "Buğulu"
 
 #: 3.0/met_uk.js:582 3.0/met_uk.js:583 3.0/us_weather.js:435
-#: 3.0/us_weather.js:436 3.0/us_weather.js:470 3.8/weather-applet.js:10067
-#: 3.8/weather-applet.js:10068 3.8/weather-applet.js:12614
-#: 3.8/weather-applet.js:12615 3.8/weather-applet.js:12649
-#: 3.8/weather-applet.js:13079
+#: 3.0/us_weather.js:436 3.0/us_weather.js:470 3.8/weather-applet.js:10069
+#: 3.8/weather-applet.js:10070 3.8/weather-applet.js:12616
+#: 3.8/weather-applet.js:12617 3.8/weather-applet.js:12651
+#: 3.8/weather-applet.js:13081
 msgid "Overcast"
 msgstr "Bulutlu"
 
-#: 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/weather-applet.js:10075
-#: 3.8/weather-applet.js:10082
+#: 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/weather-applet.js:10077
+#: 3.8/weather-applet.js:10084
 msgid "Light rain shower"
 msgstr "Hafif sağanak yağmur"
 
 #: 3.0/met_uk.js:603 3.0/met_uk.js:604 3.0/openWeatherMap.js:373
-#: 3.0/yahoo.js:445 3.8/weather-applet.js:10088 3.8/weather-applet.js:10089
-#: 3.8/weather-applet.js:10912 3.8/weather-applet.js:12132
-#: 3.8/weather-applet.js:12133 3.8/weather-applet.js:12188
-#: 3.8/weather-applet.js:13001
+#: 3.0/yahoo.js:445 3.8/weather-applet.js:10090 3.8/weather-applet.js:10091
+#: 3.8/weather-applet.js:10914 3.8/weather-applet.js:12134
+#: 3.8/weather-applet.js:12135 3.8/weather-applet.js:12190
+#: 3.8/weather-applet.js:13003 3.8/weather-applet.js:14388
+#: 3.8/weather-applet.js:14389
 msgid "Drizzle"
 msgstr "Çiseleme"
 
-#: 3.0/met_uk.js:618 3.0/met_uk.js:625 3.8/weather-applet.js:10103
-#: 3.8/weather-applet.js:10110
+#: 3.0/met_uk.js:618 3.0/met_uk.js:625 3.8/weather-applet.js:10105
+#: 3.8/weather-applet.js:10112
 msgid "Heavy rain shower"
 msgstr "Şiddetli sağnak yağmur"
 
-#: 3.0/met_uk.js:639 3.0/met_uk.js:646 3.8/weather-applet.js:10124
-#: 3.8/weather-applet.js:10131
+#: 3.0/met_uk.js:639 3.0/met_uk.js:646 3.8/weather-applet.js:10126
+#: 3.8/weather-applet.js:10133
 msgid "Sleet shower"
 msgstr "Karla karışık yağmur"
 
 #: 3.0/met_uk.js:659 3.0/met_uk.js:666 3.0/met_uk.js:673 3.0/met_uk.js:674
-#: 3.0/yahoo.js:453 3.8/weather-applet.js:10144 3.8/weather-applet.js:10151
-#: 3.8/weather-applet.js:10158 3.8/weather-applet.js:10159
-#: 3.8/weather-applet.js:13077
+#: 3.0/yahoo.js:453 3.8/weather-applet.js:10146 3.8/weather-applet.js:10153
+#: 3.8/weather-applet.js:10160 3.8/weather-applet.js:10161
+#: 3.8/weather-applet.js:13079 3.8/weather-applet.js:14025
+#: 3.8/weather-applet.js:14026 3.8/weather-applet.js:14444
+#: 3.8/weather-applet.js:14445
 msgid "Hail"
 msgstr "Dolu"
 
-#: 3.0/met_uk.js:660 3.0/met_uk.js:667 3.8/weather-applet.js:10145
-#: 3.8/weather-applet.js:10152
+#: 3.0/met_uk.js:660 3.0/met_uk.js:667 3.8/weather-applet.js:10147
+#: 3.8/weather-applet.js:10154
 msgid "Hail shower"
 msgstr "Sağanak dolu"
 
-#: 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/weather-applet.js:10166
-#: 3.8/weather-applet.js:10173
+#: 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/weather-applet.js:10168
+#: 3.8/weather-applet.js:10175
 msgid "Light snow shower"
 msgstr "Hafif sağanak kar yağışı"
 
-#: 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/weather-applet.js:10187
-#: 3.8/weather-applet.js:10194
+#: 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/weather-applet.js:10189
+#: 3.8/weather-applet.js:10196
 msgid "Heavy snow shower"
 msgstr "Şiddetli sağnak kar yağışı"
 
 #: 3.0/met_uk.js:722 3.0/met_uk.js:729 3.0/met_uk.js:736 3.0/met_uk.js:737
-#: 3.8/weather-applet.js:10207 3.8/weather-applet.js:10214
-#: 3.8/weather-applet.js:10221 3.8/weather-applet.js:10222
+#: 3.8/weather-applet.js:10209 3.8/weather-applet.js:10216
+#: 3.8/weather-applet.js:10223 3.8/weather-applet.js:10224
 msgid "Thunder"
 msgstr "Gökgürültülü"
 
-#: 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/weather-applet.js:10208
-#: 3.8/weather-applet.js:10215
+#: 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/weather-applet.js:10210
+#: 3.8/weather-applet.js:10217
 msgid "Thunder shower"
 msgstr "Gökgürültülü sağnak"
 
-#: 3.0/openWeatherMap.js:238 3.8/weather-applet.js:10783
+#: 3.0/openWeatherMap.js:238 3.8/weather-applet.js:10785
 msgid "Please make sure Location is in the correct format in the Settings"
 msgstr "Lütfen Ayarda Konumun doğru biçimde olduğundan emin olun"
 
-#: 3.0/openWeatherMap.js:242 3.8/weather-applet.js:10787
+#: 3.0/openWeatherMap.js:242 3.8/weather-applet.js:10789
 msgid "Make sure you entered the correct key in settings"
 msgstr "Ayarlara doğru anahtarı girdiğinizden emin olun"
 
 #: 3.0/openWeatherMap.js:246 3.0/openWeatherMap.js:266
-#: 3.8/weather-applet.js:10592 3.8/weather-applet.js:10791
+#: 3.8/weather-applet.js:10594 3.8/weather-applet.js:10793
 msgid ""
 "Location not found, make sure location is available or it is in the correct "
 "format"
@@ -843,207 +870,211 @@ msgstr ""
 "Konum bulunamadı, konumun kullanılabilir olduğundan veya doğru biçimde "
 "olduğundan emin olun"
 
-#: 3.0/openWeatherMap.js:250 3.8/weather-applet.js:10795
+#: 3.0/openWeatherMap.js:250 3.8/weather-applet.js:10797
 msgid "If this problem persists, please contact the Author of this applet"
 msgstr "Bu sorun devam ederse, lütfen bu uygulamanın Yazarına başvurun"
 
-#: 3.0/openWeatherMap.js:254 3.8/weather-applet.js:10799
+#: 3.0/openWeatherMap.js:254 3.8/weather-applet.js:10801
 msgid "Unknown Error, please see the logs in Looking Glass"
 msgstr "Bilinmeyen Hata, lütfen Hata günlüklere bakın"
 
-#: 3.0/openWeatherMap.js:362 3.8/weather-applet.js:10901
+#: 3.0/openWeatherMap.js:362 3.8/weather-applet.js:10903
 msgid "Thunderstorm with light rain"
 msgstr "Hafif yağmur ve gök gürültülü sağanak yağış"
 
-#: 3.0/openWeatherMap.js:363 3.8/weather-applet.js:10902
+#: 3.0/openWeatherMap.js:363 3.8/weather-applet.js:10904
 msgid "Thunderstorm with rain"
 msgstr "Fırtına ve yağmur"
 
-#: 3.0/openWeatherMap.js:364 3.8/weather-applet.js:10903
+#: 3.0/openWeatherMap.js:364 3.8/weather-applet.js:10905
 msgid "Thunderstorm with heavy rain"
 msgstr "Fırtına şiddetli yağmur"
 
-#: 3.0/openWeatherMap.js:365 3.8/weather-applet.js:10904
+#: 3.0/openWeatherMap.js:365 3.8/weather-applet.js:10906
 msgid "Light thunderstorm"
 msgstr "Hafif gök gürültülü fırtına"
 
-#: 3.0/openWeatherMap.js:367 3.8/weather-applet.js:10906
+#: 3.0/openWeatherMap.js:367 3.8/weather-applet.js:10908
 msgid "Heavy thunderstorm"
 msgstr "Yoğun gök gürültülü fırtına"
 
-#: 3.0/openWeatherMap.js:368 3.8/weather-applet.js:10907
+#: 3.0/openWeatherMap.js:368 3.8/weather-applet.js:10909
 msgid "Ragged thunderstorm"
 msgstr "Düzensiz fırtına"
 
-#: 3.0/openWeatherMap.js:369 3.8/weather-applet.js:10908
+#: 3.0/openWeatherMap.js:369 3.8/weather-applet.js:10910
 msgid "Thunderstorm with light drizzle"
 msgstr "Gök gürültülü hafif çiseleme"
 
-#: 3.0/openWeatherMap.js:370 3.8/weather-applet.js:10909
+#: 3.0/openWeatherMap.js:370 3.8/weather-applet.js:10911
 msgid "Thunderstorm with drizzle"
 msgstr "Çiseleyen yağmur fırtınası"
 
-#: 3.0/openWeatherMap.js:371 3.8/weather-applet.js:10910
+#: 3.0/openWeatherMap.js:371 3.8/weather-applet.js:10912
 msgid "Thunderstorm with heavy drizzle"
 msgstr "Fırtına ağır çiseleyen yağmur ile"
 
-#: 3.0/openWeatherMap.js:372 3.8/weather-applet.js:10911
+#: 3.0/openWeatherMap.js:372 3.8/weather-applet.js:10913
 msgid "Light intensity drizzle"
 msgstr "Hafif yoğun çiseleme"
 
-#: 3.0/openWeatherMap.js:374 3.8/weather-applet.js:10913
+#: 3.0/openWeatherMap.js:374 3.8/weather-applet.js:10915
 msgid "Heavy intensity drizzle"
 msgstr "Ağır yoğun çiseleme"
 
-#: 3.0/openWeatherMap.js:375 3.8/weather-applet.js:10914
+#: 3.0/openWeatherMap.js:375 3.8/weather-applet.js:10916
 msgid "Light intensity drizzle rain"
 msgstr "Hafif yoğun yağmurlu"
 
-#: 3.0/openWeatherMap.js:376 3.8/weather-applet.js:10915
+#: 3.0/openWeatherMap.js:376 3.8/weather-applet.js:10917
 msgid "Drizzle rain"
 msgstr "Çiseleyen yağmur"
 
-#: 3.0/openWeatherMap.js:377 3.8/weather-applet.js:10916
+#: 3.0/openWeatherMap.js:377 3.8/weather-applet.js:10918
 msgid "Heavy intensity drizzle rain"
 msgstr "Şiddetli yoğun yağmur"
 
-#: 3.0/openWeatherMap.js:378 3.8/weather-applet.js:10917
+#: 3.0/openWeatherMap.js:378 3.8/weather-applet.js:10919
 msgid "Shower rain and drizzle"
 msgstr "Çiseleme ve ahmak ıslatan"
 
-#: 3.0/openWeatherMap.js:379 3.8/weather-applet.js:10918
+#: 3.0/openWeatherMap.js:379 3.8/weather-applet.js:10920
 msgid "Heavy shower rain and drizzle"
 msgstr "Şiddetli çiseleme ve ahmak ıslatan"
 
-#: 3.0/openWeatherMap.js:380 3.8/weather-applet.js:10919
+#: 3.0/openWeatherMap.js:380 3.8/weather-applet.js:10921
 msgid "Shower drizzle"
 msgstr "Çiseleme ahmak ıslatan"
 
-#: 3.0/openWeatherMap.js:382 3.8/weather-applet.js:10921
-#: 3.8/weather-applet.js:13313 3.8/weather-applet.js:13314
+#: 3.0/openWeatherMap.js:382 3.8/weather-applet.js:10923
+#: 3.8/weather-applet.js:13315 3.8/weather-applet.js:13316
 msgid "Moderate rain"
 msgstr "Ilımlı yağmur"
 
-#: 3.0/openWeatherMap.js:383 3.8/weather-applet.js:10922
+#: 3.0/openWeatherMap.js:383 3.8/weather-applet.js:10924
 msgid "Heavy intensity rain"
 msgstr "Yüksek yoğun yağmur"
 
-#: 3.0/openWeatherMap.js:384 3.8/weather-applet.js:10923
+#: 3.0/openWeatherMap.js:384 3.8/weather-applet.js:10925
 msgid "Very heavy rain"
 msgstr "Çok şiddetli yağmur"
 
-#: 3.0/openWeatherMap.js:385 3.8/weather-applet.js:10924
+#: 3.0/openWeatherMap.js:385 3.8/weather-applet.js:10926
 msgid "Extreme rain"
 msgstr "Aşırı yağmur"
 
-#: 3.0/openWeatherMap.js:387 3.8/weather-applet.js:10926
+#: 3.0/openWeatherMap.js:387 3.8/weather-applet.js:10928
 msgid "Light intensity shower rain"
 msgstr "Hafif şiddetli yağmur"
 
-#: 3.0/openWeatherMap.js:388 3.8/weather-applet.js:10927
+#: 3.0/openWeatherMap.js:388 3.8/weather-applet.js:10929
 msgid "Shower rain"
 msgstr "Şiddetli yağmur"
 
-#: 3.0/openWeatherMap.js:389 3.8/weather-applet.js:10928
+#: 3.0/openWeatherMap.js:389 3.8/weather-applet.js:10930
 msgid "Heavy intensity shower rain"
 msgstr "Sağanak yağmur"
 
-#: 3.0/openWeatherMap.js:390 3.8/weather-applet.js:10929
+#: 3.0/openWeatherMap.js:390 3.8/weather-applet.js:10931
 msgid "Ragged shower rain"
 msgstr "Düzensiz sağanak yağmur"
 
-#: 3.0/openWeatherMap.js:395 3.8/weather-applet.js:10934
+#: 3.0/openWeatherMap.js:395 3.8/weather-applet.js:10936
 msgid "Shower sleet"
 msgstr "Ahmak ıslatan"
 
-#: 3.0/openWeatherMap.js:396 3.8/weather-applet.js:10935
+#: 3.0/openWeatherMap.js:396 3.8/weather-applet.js:10937
 msgid "Light rain and snow"
 msgstr "Hafif kar ve yağmur"
 
-#: 3.0/openWeatherMap.js:397 3.8/weather-applet.js:10936
-#: 3.8/weather-applet.js:13320 3.8/weather-applet.js:13321
-#: 3.8/weather-applet.js:13327 3.8/weather-applet.js:13362
-#: 3.8/weather-applet.js:13369
+#: 3.0/openWeatherMap.js:397 3.8/weather-applet.js:10938
+#: 3.8/weather-applet.js:13322 3.8/weather-applet.js:13323
+#: 3.8/weather-applet.js:13329 3.8/weather-applet.js:13364
+#: 3.8/weather-applet.js:13371
 msgid "Rain and snow"
 msgstr "Yağmur ve kar"
 
-#: 3.0/openWeatherMap.js:398 3.8/weather-applet.js:10937
+#: 3.0/openWeatherMap.js:398 3.8/weather-applet.js:10939
 msgid "Light shower snow"
 msgstr "Hafif şiddetli kar yağışı"
 
-#: 3.0/openWeatherMap.js:399 3.8/weather-applet.js:10938
+#: 3.0/openWeatherMap.js:399 3.8/weather-applet.js:10940
 msgid "Shower snow"
 msgstr "Şiddetli kar"
 
-#: 3.0/openWeatherMap.js:400 3.8/weather-applet.js:10939
+#: 3.0/openWeatherMap.js:400 3.8/weather-applet.js:10941
 msgid "Heavy shower snow"
 msgstr "Ağır şiddetli kar"
 
 #: 3.0/openWeatherMap.js:402 3.0/us_weather.js:585 3.0/us_weather.js:586
-#: 3.8/weather-applet.js:10941 3.8/weather-applet.js:12764
-#: 3.8/weather-applet.js:12765
+#: 3.8/weather-applet.js:10943 3.8/weather-applet.js:12766
+#: 3.8/weather-applet.js:12767 3.8/weather-applet.js:14479
+#: 3.8/weather-applet.js:14480
 msgid "Smoke"
 msgstr "Dumanlı"
 
 #: 3.0/openWeatherMap.js:403 3.0/us_weather.js:592 3.0/us_weather.js:593
-#: 3.0/yahoo.js:457 3.8/weather-applet.js:10942 3.8/weather-applet.js:12771
-#: 3.8/weather-applet.js:12772
+#: 3.0/yahoo.js:457 3.8/weather-applet.js:10944 3.8/weather-applet.js:12773
+#: 3.8/weather-applet.js:12774 3.8/weather-applet.js:14472
+#: 3.8/weather-applet.js:14473
 msgid "Haze"
 msgstr "Puslu"
 
-#: 3.0/openWeatherMap.js:404 3.8/weather-applet.js:10943
+#: 3.0/openWeatherMap.js:404 3.8/weather-applet.js:10945
 msgid "Sand, dust whirls"
 msgstr "Kum, toz fırtınası"
 
-#: 3.0/openWeatherMap.js:406 3.8/weather-applet.js:10945
+#: 3.0/openWeatherMap.js:406 3.8/weather-applet.js:10947
 msgid "Sand"
 msgstr "Kum"
 
 #: 3.0/openWeatherMap.js:407 3.0/us_weather.js:578 3.0/us_weather.js:579
-#: 3.0/yahoo.js:455 3.8/weather-applet.js:10946 3.8/weather-applet.js:12757
-#: 3.8/weather-applet.js:12758
+#: 3.0/yahoo.js:455 3.8/weather-applet.js:10948 3.8/weather-applet.js:12759
+#: 3.8/weather-applet.js:12760 3.8/weather-applet.js:14458
+#: 3.8/weather-applet.js:14459
 msgid "Dust"
 msgstr "Tozlu"
 
-#: 3.0/openWeatherMap.js:408 3.8/weather-applet.js:10947
+#: 3.0/openWeatherMap.js:408 3.8/weather-applet.js:10949
 msgid "Volcanic ash"
 msgstr "Volkanik kül"
 
-#: 3.0/openWeatherMap.js:409 3.8/weather-applet.js:10948
-#: 3.8/weather-applet.js:13069
+#: 3.0/openWeatherMap.js:409 3.8/weather-applet.js:10950
+#: 3.8/weather-applet.js:13071
 msgid "Squalls"
 msgstr "Bağrışma"
 
 #: 3.0/openWeatherMap.js:410 3.0/us_weather.js:557 3.0/us_weather.js:558
-#: 3.0/yahoo.js:436 3.8/weather-applet.js:10949 3.8/weather-applet.js:12736
-#: 3.8/weather-applet.js:12737
+#: 3.0/yahoo.js:436 3.8/weather-applet.js:10951 3.8/weather-applet.js:12738
+#: 3.8/weather-applet.js:12739 3.8/weather-applet.js:14331
+#: 3.8/weather-applet.js:14332
 msgid "Tornado"
 msgstr "Bora"
 
-#: 3.0/openWeatherMap.js:413 3.8/weather-applet.js:10952
+#: 3.0/openWeatherMap.js:413 3.8/weather-applet.js:10954
 msgid "Sky is clear"
 msgstr "Gökyüzü açık"
 
-#: 3.0/openWeatherMap.js:414 3.8/weather-applet.js:10953
+#: 3.0/openWeatherMap.js:414 3.8/weather-applet.js:10955
 msgid "Clouds"
 msgstr "Bulutlu"
 
 #: 3.0/openWeatherMap.js:415 3.0/us_weather.js:414 3.0/us_weather.js:415
-#: 3.0/us_weather.js:449 3.8/weather-applet.js:10954
-#: 3.8/weather-applet.js:12593 3.8/weather-applet.js:12594
-#: 3.8/weather-applet.js:12628
+#: 3.0/us_weather.js:449 3.8/weather-applet.js:10956
+#: 3.8/weather-applet.js:12595 3.8/weather-applet.js:12596
+#: 3.8/weather-applet.js:12630
 msgid "Few clouds"
 msgstr "Az bulutlu"
 
-#: 3.0/openWeatherMap.js:416 3.8/weather-applet.js:10955
+#: 3.0/openWeatherMap.js:416 3.8/weather-applet.js:10957
 msgid "Scattered clouds"
 msgstr "Dağınık bulutlu"
 
-#: 3.0/openWeatherMap.js:417 3.8/weather-applet.js:10956
+#: 3.0/openWeatherMap.js:417 3.8/weather-applet.js:10958
 msgid "Broken clouds"
 msgstr "Parçalı bulutlu"
 
-#: 3.0/openWeatherMap.js:418 3.8/weather-applet.js:10957
+#: 3.0/openWeatherMap.js:418 3.8/weather-applet.js:10959
 msgid "Overcast clouds"
 msgstr "Kapalı bulanık"
 
@@ -1051,69 +1082,72 @@ msgstr "Kapalı bulanık"
 msgid "Could not get forecast for your area"
 msgstr "Bölgeniz için hava tahmini alınamadı"
 
-#: 3.0/us_weather.js:231 3.8/weather-applet.js:12291
+#: 3.0/us_weather.js:231 3.8/weather-applet.js:12293
 msgid "Location is outside US, please use a different provider."
 msgstr "Konum ABD dışında, lütfen farklı bir sağlayıcı kullanın."
 
-#: 3.0/us_weather.js:394 3.8/weather-applet.js:12355
+#: 3.0/us_weather.js:394 3.8/weather-applet.js:12357
 msgid "Failed to Process Hourly Forecast Info"
 msgstr "Saatlik Tahmin Bilgileri İşlenemedi"
 
-#: 3.0/us_weather.js:443 3.8/weather-applet.js:12622
+#: 3.0/us_weather.js:443 3.8/weather-applet.js:12624
 msgid "Clear and windy"
 msgstr "Açık ve rüzgarlı"
 
-#: 3.0/us_weather.js:450 3.8/weather-applet.js:12629
+#: 3.0/us_weather.js:450 3.8/weather-applet.js:12631
 msgid "Few clouds and windy"
 msgstr "Az bulutluAz bulutlu ve rüzgarlı"
 
-#: 3.0/us_weather.js:457 3.8/weather-applet.js:12636
+#: 3.0/us_weather.js:457 3.8/weather-applet.js:12638
 msgid "Partly cloudy and windy"
 msgstr "Parçalı ve rüzgarlı"
 
-#: 3.0/us_weather.js:464 3.8/weather-applet.js:12643
+#: 3.0/us_weather.js:464 3.8/weather-applet.js:12645
 msgid "Mostly cloudy and windy"
 msgstr "Çoğunlukla bulutlu ve rüzgarlı"
 
-#: 3.0/us_weather.js:471 3.8/weather-applet.js:12650
+#: 3.0/us_weather.js:471 3.8/weather-applet.js:12652
 msgid "Overcast and windy"
 msgstr "Bulutlu ve rüzgarlı"
 
-#: 3.0/us_weather.js:485 3.8/weather-applet.js:12664
+#: 3.0/us_weather.js:485 3.8/weather-applet.js:12666
 msgid "Snowy rain"
 msgstr "Karlı yağmur"
 
-#: 3.0/us_weather.js:520 3.8/weather-applet.js:12699
+#: 3.0/us_weather.js:520 3.8/weather-applet.js:12701
 msgid "Freezing rain and snow"
 msgstr "Dondurucu Yağmur ve kar"
 
 #: 3.0/us_weather.js:564 3.0/us_weather.js:565 3.0/utils.js:336
-#: 3.0/yahoo.js:438 3.8/weather-applet.js:8714 3.8/weather-applet.js:12743
-#: 3.8/weather-applet.js:12744
+#: 3.0/yahoo.js:438 3.8/weather-applet.js:8714 3.8/weather-applet.js:12745
+#: 3.8/weather-applet.js:12746 3.8/weather-applet.js:14345
+#: 3.8/weather-applet.js:14346
 msgid "Hurricane"
 msgstr "Kasırga"
 
 #: 3.0/us_weather.js:571 3.0/utils.js:331 3.8/weather-applet.js:8709
-#: 3.8/weather-applet.js:12750
+#: 3.8/weather-applet.js:12752
 msgid "Storm"
 msgstr "Fırtına"
 
-#: 3.0/us_weather.js:572 3.8/weather-applet.js:12751
+#: 3.0/us_weather.js:572 3.8/weather-applet.js:12753
 msgid "Tropical storm"
 msgstr "Tropik Fırtına"
 
 #: 3.0/us_weather.js:599 3.0/us_weather.js:600 3.0/yahoo.js:470
-#: 3.8/weather-applet.js:12778 3.8/weather-applet.js:12779
+#: 3.8/weather-applet.js:12780 3.8/weather-applet.js:12781
+#: 3.8/weather-applet.js:14577 3.8/weather-applet.js:14578
 msgid "Hot"
 msgstr "Sıcak"
 
 #: 3.0/us_weather.js:606 3.0/us_weather.js:607 3.0/yahoo.js:461
-#: 3.8/weather-applet.js:12785 3.8/weather-applet.js:12786
+#: 3.8/weather-applet.js:12787 3.8/weather-applet.js:12788
 msgid "Cold"
 msgstr "Soğuk"
 
 #: 3.0/us_weather.js:613 3.0/us_weather.js:614 3.0/yahoo.js:477
-#: 3.8/weather-applet.js:12792 3.8/weather-applet.js:12793
+#: 3.8/weather-applet.js:12794 3.8/weather-applet.js:12795
+#: 3.8/weather-applet.js:14626 3.8/weather-applet.js:14627
 msgid "Blizzard"
 msgstr "Kar fırtınası"
 
@@ -1277,7 +1311,7 @@ msgstr ""
 "Hava durumu alınırken bilinmeyen bir hata oluştu, daha fazla bilgi için Hata "
 "günlüklerine bakın"
 
-#: 3.0/yahoo.js:437
+#: 3.0/yahoo.js:437 3.8/weather-applet.js:14338 3.8/weather-applet.js:14339
 msgid "Tropical Storm"
 msgstr "Tropikal Fırtına"
 
@@ -1285,7 +1319,7 @@ msgstr "Tropikal Fırtına"
 msgid "Severe Thunderstorms"
 msgstr "Şiddetli Fırtınalar"
 
-#: 3.0/yahoo.js:440
+#: 3.0/yahoo.js:440 3.8/weather-applet.js:14359 3.8/weather-applet.js:14360
 msgid "Thunderstorms"
 msgstr "Gök gürültülü"
 
@@ -1301,15 +1335,15 @@ msgstr "Sulu Kar"
 msgid "Mixed Snow and Sleet"
 msgstr "Sulu Kar"
 
-#: 3.0/yahoo.js:444
+#: 3.0/yahoo.js:444 3.8/weather-applet.js:14381 3.8/weather-applet.js:14382
 msgid "Freezing Drizzle"
 msgstr "Dondurucu Çiseleme"
 
-#: 3.0/yahoo.js:446
+#: 3.0/yahoo.js:446 3.8/weather-applet.js:14395 3.8/weather-applet.js:14396
 msgid "Freezing Rain"
 msgstr "Dondurucu yağmur"
 
-#: 3.0/yahoo.js:447
+#: 3.0/yahoo.js:447 3.8/weather-applet.js:14402 3.8/weather-applet.js:14403
 msgid "Showers"
 msgstr "Sağanak"
 
@@ -1321,11 +1355,11 @@ msgstr "Kar Fırtınası"
 msgid "Light Snow Showers"
 msgstr "Hafif Kar Yağışı"
 
-#: 3.0/yahoo.js:451
+#: 3.0/yahoo.js:451 3.8/weather-applet.js:14430 3.8/weather-applet.js:14431
 msgid "Blowing Snow"
 msgstr "Tipi"
 
-#: 3.0/yahoo.js:456 3.8/weather-applet.js:13299 3.8/weather-applet.js:13300
+#: 3.0/yahoo.js:456 3.8/weather-applet.js:13301 3.8/weather-applet.js:13302
 msgid "Foggy"
 msgstr "Sisli"
 
@@ -1337,47 +1371,54 @@ msgstr "Dumanlı"
 msgid "Blustery"
 msgstr "Fırtınalı"
 
-#: 3.0/yahoo.js:460
+#: 3.0/yahoo.js:460 3.8/weather-applet.js:14493 3.8/weather-applet.js:14494
 msgid "Windy"
 msgstr "Rüzgarlı"
 
-#: 3.0/yahoo.js:463
+#: 3.0/yahoo.js:463 3.8/weather-applet.js:14514 3.8/weather-applet.js:14515
+#: 3.8/weather-applet.js:14521 3.8/weather-applet.js:14522
 msgid "Mostly Cloudy"
 msgstr "Çok Bulutlu"
 
-#: 3.0/yahoo.js:464
+#: 3.0/yahoo.js:464 3.8/weather-applet.js:14032 3.8/weather-applet.js:14033
+#: 3.8/weather-applet.js:14039 3.8/weather-applet.js:14040
+#: 3.8/weather-applet.js:14528 3.8/weather-applet.js:14529
+#: 3.8/weather-applet.js:14535 3.8/weather-applet.js:14536
 msgid "Partly Cloudy"
 msgstr "Parçalı Bulutlu"
 
-#: 3.0/yahoo.js:467
+#: 3.0/yahoo.js:467 3.8/weather-applet.js:14563 3.8/weather-applet.js:14564
 msgid "Mostly Sunny"
 msgstr "Çoğunlukla Güneşli"
 
-#: 3.0/yahoo.js:469
+#: 3.0/yahoo.js:469 3.8/weather-applet.js:14570 3.8/weather-applet.js:14571
 msgid "Mixed Rain and Hail"
 msgstr "Karışık Yağmur ve Dolu"
 
-#: 3.0/yahoo.js:471
+#: 3.0/yahoo.js:471 3.8/weather-applet.js:14584 3.8/weather-applet.js:14585
 msgid "Isolated Thunderstorms"
 msgstr "İzole Fırtınalar"
 
-#: 3.0/yahoo.js:472
+#: 3.0/yahoo.js:472 3.8/weather-applet.js:14591 3.8/weather-applet.js:14592
+#: 3.8/weather-applet.js:14647 3.8/weather-applet.js:14648
 msgid "Scattered Thunderstorms"
 msgstr "Aralıklı sağanak"
 
-#: 3.0/yahoo.js:473
+#: 3.0/yahoo.js:473 3.8/weather-applet.js:14598 3.8/weather-applet.js:14599
+#: 3.8/weather-applet.js:14633 3.8/weather-applet.js:14634
 msgid "Scattered Showers"
 msgstr "Sağanak Yağış"
 
-#: 3.0/yahoo.js:474
+#: 3.0/yahoo.js:474 3.8/weather-applet.js:14605 3.8/weather-applet.js:14606
 msgid "Heavy Rain"
 msgstr "Şiddetli Yağmur"
 
-#: 3.0/yahoo.js:475
+#: 3.0/yahoo.js:475 3.8/weather-applet.js:14612 3.8/weather-applet.js:14613
+#: 3.8/weather-applet.js:14640 3.8/weather-applet.js:14641
 msgid "Scattered Snow Showers"
 msgstr "Dağınık Kar Yağışı"
 
-#: 3.0/yahoo.js:476
+#: 3.0/yahoo.js:476 3.8/weather-applet.js:14619 3.8/weather-applet.js:14620
 msgid "Heavy Snow"
 msgstr "Şiddetli Kar"
 
@@ -1389,7 +1430,7 @@ msgstr "Müsait değil"
 msgid "Scattered Thundershowers"
 msgstr "Fırtına Bulutlu"
 
-#: 3.8/weather-applet.js:9190
+#: 3.8/weather-applet.js:9192
 msgid ""
 "Could not retrieve logs, log file was not found under path\n"
 " {logFilePath}"
@@ -1397,7 +1438,7 @@ msgstr ""
 "Günlükler alınamadı, günlük dosyası yol altında bulunamadı\n"
 " {logFilePath}"
 
-#: 3.8/weather-applet.js:9194
+#: 3.8/weather-applet.js:9196
 msgid ""
 "Could not get contents of log file under path\n"
 " {logFilePath}"
@@ -1406,235 +1447,291 @@ msgstr ""
 " {logFilePath}"
 
 #. 3.0->settings-schema.json->dataService->options
-#: 3.8/weather-applet.js:9606
+#: 3.8/weather-applet.js:9608
 msgid "Met Office UK"
 msgstr "Met Office UK"
 
-#: 3.8/weather-applet.js:9786
+#: 3.8/weather-applet.js:9710
+msgid ""
+"MET Office UK only covers the UK, please make sure your location is in the "
+"country"
+msgstr ""
+"MET Office UK yalnızca Birleşik Krallık'ı kapsar, lütfen konumunuzun ülke "
+"içinde olduğundan emin olun"
+
+#: 3.8/weather-applet.js:9788
 msgid "Data was not found for location"
 msgstr "Konum için veri bulunamadı"
 
-#: 3.8/weather-applet.js:9867
+#: 3.8/weather-applet.js:9869
 msgid "Very poor"
 msgstr "Çok zayıf"
 
-#: 3.8/weather-applet.js:9867
+#: 3.8/weather-applet.js:9869
 msgid "Less than {distance} {distanceUnit}"
 msgstr "{distance} {distanceUnit} 'den az"
 
-#: 3.8/weather-applet.js:9871
+#: 3.8/weather-applet.js:9873
 msgid "Excellent"
 msgstr "Mükemmel"
 
-#: 3.8/weather-applet.js:9871
+#: 3.8/weather-applet.js:9873
 msgid "More than {distance} {distanceUnit}"
 msgstr "{distance} {distanceUnit} 'den fazla"
 
-#: 3.8/weather-applet.js:9876
+#: 3.8/weather-applet.js:9878
 msgid "Poor"
 msgstr "Zayıf"
 
-#: 3.8/weather-applet.js:9876 3.8/weather-applet.js:9881
-#: 3.8/weather-applet.js:9886 3.8/weather-applet.js:9891
-#: 3.8/weather-applet.js:9896
+#: 3.8/weather-applet.js:9878 3.8/weather-applet.js:9883
+#: 3.8/weather-applet.js:9888 3.8/weather-applet.js:9893
+#: 3.8/weather-applet.js:9898
 msgid "Between {smallerDistance}-{biggerDistance} {distanceUnit}"
 msgstr "{smallerDistance}-{biggerDistance} {distanceUnit} arasında"
 
-#: 3.8/weather-applet.js:9881
+#: 3.8/weather-applet.js:9883
 msgid "Moderate"
 msgstr "Ilımlı"
 
-#: 3.8/weather-applet.js:9886
+#: 3.8/weather-applet.js:9888
 msgid "Good"
 msgstr "İyi"
 
-#: 3.8/weather-applet.js:9891 3.8/weather-applet.js:9896
+#: 3.8/weather-applet.js:9893 3.8/weather-applet.js:9898
 msgid "Very good"
 msgstr "Çok iyi"
 
-#: 3.8/weather-applet.js:10248
+#: 3.8/weather-applet.js:10250
 msgid "DarkSky"
 msgstr "DarkSky"
 
-#: 3.8/weather-applet.js:10299
+#: 3.8/weather-applet.js:10301
 msgid "This API has ceased to function, please use another one."
 msgstr "Bu API çalışmayı durdurdu, lütfen başka bir tane kullanın."
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
-#: 3.8/weather-applet.js:10575
+#: 3.8/weather-applet.js:10577
 msgid "OpenWeatherMap"
 msgstr "OpenWeatherMap"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
-#: 3.8/weather-applet.js:10969
+#: 3.8/weather-applet.js:10971
 msgid "MET Norway"
 msgstr "MET Norveç"
 
-#: 3.8/weather-applet.js:11526
+#: 3.8/weather-applet.js:11528
 msgid "WeatherBit"
 msgstr "WeatherBit"
 
-#: 3.8/weather-applet.js:11949
+#: 3.8/weather-applet.js:11951
 msgid "Tomorrow.io"
 msgstr "Tomorrow.io"
 
-#: 3.8/weather-applet.js:12112
+#: 3.8/weather-applet.js:12114
 msgid "Light wind"
 msgstr "Hafif Rüzgar"
 
-#: 3.8/weather-applet.js:12126
+#: 3.8/weather-applet.js:12128
 msgid "Strong wind"
 msgstr "Şiddetli Rüzgar"
 
-#: 3.8/weather-applet.js:12273
+#: 3.8/weather-applet.js:12275
 msgid "US Weather"
 msgstr "ABD Hava Durumu"
 
-#: 3.8/weather-applet.js:12824
+#: 3.8/weather-applet.js:12826
 msgid "Visual Crossing"
 msgstr "Görsel Geçiş"
 
-#: 3.8/weather-applet.js:12999
+#: 3.8/weather-applet.js:13001
 msgid "Blowing or drifting snow"
 msgstr "Üfleyen veya sürüklenen kar"
 
-#: 3.8/weather-applet.js:13003
+#: 3.8/weather-applet.js:13005
 msgid "Heavy drizzle"
 msgstr "Yoğun çiseleme"
 
-#: 3.8/weather-applet.js:13007
+#: 3.8/weather-applet.js:13009
 msgid "Heavy drizzle/rain"
 msgstr "Şiddetli çiseleme/yağmur"
 
-#: 3.8/weather-applet.js:13009
+#: 3.8/weather-applet.js:13011
 msgid "Light drizzle/rain"
 msgstr "Hafif çiseleme/yağmur"
 
-#: 3.8/weather-applet.js:13011
+#: 3.8/weather-applet.js:13013
 msgid "Dust Storm"
 msgstr "Toz Fırtınası"
 
-#: 3.8/weather-applet.js:13015
+#: 3.8/weather-applet.js:13017
 msgid "Freezing drizzle/freezing rain"
 msgstr "Dondurucu çiseleme/dondurucu yağmur"
 
-#: 3.8/weather-applet.js:13017
+#: 3.8/weather-applet.js:13019
 msgid "Heavy freezing drizzle/freezing rain"
 msgstr "Şiddetli donan çiseleme/dondurucu yağmur"
 
-#: 3.8/weather-applet.js:13019
+#: 3.8/weather-applet.js:13021
 msgid "Light freezing drizzle/freezing rain"
 msgstr "Hafif donan çiseleme/dondurucu yağmur"
 
-#: 3.8/weather-applet.js:13021
+#: 3.8/weather-applet.js:13023
 msgid "Freezing fog"
 msgstr "Dondurucu sis"
 
-#: 3.8/weather-applet.js:13027
+#: 3.8/weather-applet.js:13029
 msgid "Funnel cloud/tornado"
 msgstr "Huni bulutu/kasırga"
 
-#: 3.8/weather-applet.js:13029
+#: 3.8/weather-applet.js:13031
 msgid "Hail showers"
 msgstr "Dolu sağanakları"
 
-#: 3.8/weather-applet.js:13031
+#: 3.8/weather-applet.js:13033
 msgid "Ice"
 msgstr "Buz"
 
-#: 3.8/weather-applet.js:13033
+#: 3.8/weather-applet.js:13035
 msgid "Lightning without thunder"
 msgstr "Gök gürültüsü olmayan şimşek"
 
-#: 3.8/weather-applet.js:13037
+#: 3.8/weather-applet.js:13039
 msgid "Precipitation in vicinity"
 msgstr "Yakın çevrede yağış"
 
-#: 3.8/weather-applet.js:13041 3.8/weather-applet.js:13328
+#: 3.8/weather-applet.js:13043 3.8/weather-applet.js:13330
 msgid "Heavy rain and snow"
 msgstr "Şiddetli yağmur ve kar"
 
-#: 3.8/weather-applet.js:13043
+#: 3.8/weather-applet.js:13045
 msgid "Light rain And snow"
 msgstr "Hafif yağmur ve kar"
 
-#: 3.8/weather-applet.js:13051
+#: 3.8/weather-applet.js:13053
 msgid "Sky coverage decreasing"
 msgstr "Gökyüzü kapsama alanı azalıyor"
 
-#: 3.8/weather-applet.js:13053
+#: 3.8/weather-applet.js:13055
 msgid "Sky coverage increasing"
 msgstr "Gökyüzü kapsama alanı artıyor"
 
-#: 3.8/weather-applet.js:13055
+#: 3.8/weather-applet.js:13057
 msgid "Sky unchanged"
 msgstr "Gökyüzü değişmedi"
 
-#: 3.8/weather-applet.js:13057
+#: 3.8/weather-applet.js:13059
 msgid "Smoke or haze"
 msgstr "Duman veya pus"
 
-#: 3.8/weather-applet.js:13061
+#: 3.8/weather-applet.js:13063
 msgid "Snow and rain showers"
 msgstr "Kar ve yağmur sağanakları"
 
-#: 3.8/weather-applet.js:13073
+#: 3.8/weather-applet.js:13075
 msgid "Thunderstorm without precipitation"
 msgstr "Yağışsız fırtına"
 
-#: 3.8/weather-applet.js:13075
+#: 3.8/weather-applet.js:13077
 msgid "Diamond dust"
 msgstr "Elmas tozu"
 
-#: 3.8/weather-applet.js:13081
+#: 3.8/weather-applet.js:13083
 msgid "Partially cloudy"
 msgstr "Parçalı bulutlu"
 
-#: 3.8/weather-applet.js:13103
+#: 3.8/weather-applet.js:13105
 msgid "Please make sure you entered the API key correctly"
 msgstr "Lütfen API anahtarını doğru girdiğinizden emin olun"
 
 #. 3.8->settings-schema.json->dataService->options
-#: 3.8/weather-applet.js:13119
+#: 3.8/weather-applet.js:13121
 msgid "DMI Denmark"
 msgstr "DMI Danimarka"
 
-#: 3.8/weather-applet.js:13260 3.8/weather-applet.js:13261
-#: 3.8/weather-applet.js:13397 3.8/weather-applet.js:13398
+#: 3.8/weather-applet.js:13262 3.8/weather-applet.js:13263
+#: 3.8/weather-applet.js:13399 3.8/weather-applet.js:13400
 msgid "NOT FOUND"
 msgstr "BULUNAMADI"
 
-#: 3.8/weather-applet.js:13293
+#: 3.8/weather-applet.js:13295
 msgid "Blowing snow"
 msgstr "Tipi"
 
-#: 3.8/weather-applet.js:13334 3.8/weather-applet.js:13335
+#: 3.8/weather-applet.js:13336 3.8/weather-applet.js:13337
 msgid "Slight snow"
 msgstr "Hafif kar"
 
-#: 3.8/weather-applet.js:13341 3.8/weather-applet.js:13342
+#: 3.8/weather-applet.js:13343 3.8/weather-applet.js:13344
 msgid "Moderate snow"
 msgstr "Orta şiddette kar"
 
-#: 3.8/weather-applet.js:13356
+#: 3.8/weather-applet.js:13358
 msgid "Moderate rain showers"
 msgstr "Orta şiddetli sağanak yağmur"
 
-#: 3.8/weather-applet.js:13363
+#: 3.8/weather-applet.js:13365
 msgid "Mixed rain and snow"
 msgstr "Karla karışık yağmur"
 
-#: 3.8/weather-applet.js:13370
+#: 3.8/weather-applet.js:13372
 msgid "Heavy mixed rain and snow"
 msgstr "Şiddetli karla karışık yağmur"
 
-#: 3.8/weather-applet.js:13467
+#: 3.8/weather-applet.js:13469
 msgid "AccuWeather"
 msgstr "AccuWeather"
 
-#: 3.8/weather-applet.js:14139
+#: 3.8/weather-applet.js:13811
+msgid "Deutscher Wetterdienst"
+msgstr "Alman Hava Servisi"
+
+#: 3.8/weather-applet.js:13823
+msgid "Please select a different provider or location"
+msgstr "Lütfen farklı bir sağlayıcı veya konum seçin"
+
+#: 3.8/weather-applet.js:14120
+msgid "Weather Underground"
+msgstr "Weather Underground"
+
+#: 3.8/weather-applet.js:14309
+msgid "The API key you provided is invalid."
+msgstr "Sağladığınız API anahtarı geçersiz."
+
+#: 3.8/weather-applet.js:14316
+msgid "The location you provided was not found."
+msgstr "Sağladığınız konum bulunamadı."
+
+#: 3.8/weather-applet.js:14352 3.8/weather-applet.js:14353
+msgid "Strong Storm"
+msgstr "Güçlü Fırtına"
+
+#: 3.8/weather-applet.js:14367 3.8/weather-applet.js:14368
+msgid "Rain and Snow"
+msgstr "Yağmur ve Kar"
+
+#: 3.8/weather-applet.js:14374 3.8/weather-applet.js:14375
+msgid "Rain and Sleet"
+msgstr "Yağmur ve Sulu Kar"
+
+#: 3.8/weather-applet.js:14423 3.8/weather-applet.js:14424
+msgid "Snow Showers"
+msgstr "Sağanak Kar"
+
+#: 3.8/weather-applet.js:14486 3.8/weather-applet.js:14487
+msgid "Breezy"
+msgstr "Esintili"
+
+#: 3.8/weather-applet.js:14500 3.8/weather-applet.js:14501
+msgid "Frigid"
+msgstr "Soğuk"
+
+#: 3.8/weather-applet.js:14556 3.8/weather-applet.js:14557
+msgid "Mostly Clear"
+msgstr "Çoğunlukla Açık"
+
+#: 3.8/weather-applet.js:15038
 msgid ""
 "Could not retrieve config, file was not found under path\n"
 " {configFilePath}"
@@ -1642,7 +1739,7 @@ msgstr ""
 "Yapılandırma alınamadı, dosya yol altında bulunamadı\n"
 " {configFilePath}"
 
-#: 3.8/weather-applet.js:14143
+#: 3.8/weather-applet.js:15042
 msgid ""
 "Could not get contents of config file under path\n"
 " {configFilePath}"
@@ -1650,56 +1747,56 @@ msgstr ""
 "Yol altında yapılandırma dosyasının içeriği alınamadı\n"
 " {configFilePath}"
 
-#: 3.8/weather-applet.js:14479
+#: 3.8/weather-applet.js:15378
 msgid "Dew Point"
 msgstr "Çiy Noktası"
 
-#: 3.8/weather-applet.js:14605
+#: 3.8/weather-applet.js:15504
 msgid "Precipitation will end in {precipEnd} minutes"
 msgstr "Yağış {precipEnd} dakika içinde sona erecek"
 
-#: 3.8/weather-applet.js:14607
+#: 3.8/weather-applet.js:15506
 msgid "Precipitation won't end in within an hour"
 msgstr "Yağış bir saat içinde bitmeyecek"
 
-#: 3.8/weather-applet.js:14610
+#: 3.8/weather-applet.js:15509
 msgid "Precipitation will start within {precipStart} minutes"
 msgstr "Yağış {precipStart} dakika içinde başlayacak"
 
-#: 3.8/weather-applet.js:14813
+#: 3.8/weather-applet.js:15712
 msgid "Forecast parsing failed, see logs for more details."
 msgstr ""
 "Tahmin ayrıştırma başarısız oldu, daha fazla ayrıntı için günlüklere bakın."
 
-#: 3.8/weather-applet.js:15247 3.8/weather-applet.js:15855
+#: 3.8/weather-applet.js:16146 3.8/weather-applet.js:16754
 msgid "As of {lastUpdatedTime}"
 msgstr "{lastUpdatedTime} itibarıyla"
 
-#: 3.8/weather-applet.js:15253
+#: 3.8/weather-applet.js:16152
 msgid "{distance} {distanceUnit} from you"
 msgstr "Sizden {distance} {distanceUnit}"
 
-#: 3.8/weather-applet.js:15257
+#: 3.8/weather-applet.js:16156
 msgid "Station Name: {stationName}"
 msgstr "İstasyon Adı: {stationName}"
 
-#: 3.8/weather-applet.js:15260
+#: 3.8/weather-applet.js:16159
 msgid "Area: {stationArea}"
 msgstr "Alan: {stationArea}"
 
-#: 3.8/weather-applet.js:15712 3.8/weather-applet.js:15722
+#: 3.8/weather-applet.js:16611 3.8/weather-applet.js:16621
 msgid "Error Saving Debug Information"
 msgstr "Hata Ayıklama Bilgileri Kaydedilirken Hata"
 
-#: 3.8/weather-applet.js:15733
+#: 3.8/weather-applet.js:16632
 msgid "Debug Information saved successfully"
 msgstr "Hata Ayıklama Bilgileri başarıyla kaydedildi"
 
-#: 3.8/weather-applet.js:15733
+#: 3.8/weather-applet.js:16632
 msgid "Saved to {filePath}"
 msgstr "{filePath} klasörüne kaydedildi"
 
-#: 3.8/weather-applet.js:15814
+#: 3.8/weather-applet.js:16713
 msgid "This provider requires an API key to operate"
 msgstr "Bu sağlayıcının çalışması için bir API anahtarı gerekiyor"
 
@@ -2187,6 +2284,10 @@ msgstr ""
 "detaylı olarak açıklanmıştır."
 
 #. 3.8->settings-schema.json->dataService->options
+msgid "Deutscher Wetterdienst (Germany only)"
+msgstr "Alman Hava Servisi (Yalnızca Almanya)"
+
+#. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (UK only)"
 msgstr "Met Office UK (yalnızca İngiltere)"
 
@@ -2205,6 +2306,10 @@ msgstr "Tomorrow.io (anahtar gerekli)"
 #. 3.8->settings-schema.json->dataService->options
 msgid "AccuWeather (key needed)"
 msgstr "AccuWeather (anahtar gerekli)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weather Underground (key needed)"
+msgstr "Weather Underground (anahtar gerekli)"
 
 #. 3.8->settings-schema.json->location->tooltip
 msgid ""
@@ -2508,9 +2613,6 @@ msgstr "Günlükleri kaydetmek için seçilen yol"
 #~ msgid "Rain Showers"
 #~ msgstr "Sağanak Yağmur"
 
-#~ msgid "Snow Showers"
-#~ msgstr "Sağanak Kar"
-
 #~ msgid "Few Clouds"
 #~ msgstr "Az bulutlu"
 
@@ -2540,9 +2642,6 @@ msgstr "Günlükleri kaydetmek için seçilen yol"
 
 #~ msgid "Settings"
 #~ msgstr "Ayarlar"
-
-#~ msgid "No location provided"
-#~ msgstr "Konum belirtilmedi"
 
 #~ msgid "Cloudiness:"
 #~ msgstr "Bulanıklık:"
