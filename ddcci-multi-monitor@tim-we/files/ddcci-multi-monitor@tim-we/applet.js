@@ -224,23 +224,26 @@ async function getDisplays() {
             const index = parseInt(displayMR[1], 10);
 
             if (currentDisplay) {
+                if (currentDisplay.name === undefined) {
+                    currentDisplay.name = currentDisplay.fallbackName;
+                }
                 displays.push(currentDisplay);
             }
 
             currentDisplay = {
                 index,
-                name: displayMR[0],
+                fallbackName: displayMR[0],
             };
         } else {
             if (currentDisplay) {
                 const busMR = line.match(/^\s+I2C bus:\s+\/dev\/i2c-(\d+)$/);
 
-                if (busMR && busMR.length === 2) {
+                if (busMR && busMR.length === 2 && currentDisplay.bus === undefined) {
                     currentDisplay.bus = parseInt(busMR[1], 10);
                 } else {
                     const modelMR = line.match(/^\s+Model:\s+(.+)$/);
 
-                    if (modelMR && modelMR.length === 2) {
+                    if (modelMR && modelMR.length === 2 && currentDisplay.name === undefined) {
                         currentDisplay.name = modelMR[1];
                     }
                 }
@@ -251,6 +254,9 @@ async function getDisplays() {
     }
 
     if (currentDisplay) {
+        if (currentDisplay.name === undefined) {
+            currentDisplay.name = currentDisplay.fallbackName;
+        }
         displays.push(currentDisplay);
     }
 
