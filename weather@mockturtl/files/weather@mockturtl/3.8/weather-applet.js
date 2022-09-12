@@ -16419,17 +16419,110 @@ class UI {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
+;// CONCATENATED MODULE: ./src/3_8/lib/soupLib.ts
 
-const { Message, ProxyResolverDefault, SessionAsync, MessageHeaders, MessageHeadersType } = imports.gi.Soup;
-class HttpLib {
+const { Message, Session, SessionAsync } = imports.gi.Soup;
+const { PRIORITY_DEFAULT } = imports.gi.GLib;
+const soupLib_ByteArray = imports.byteArray;
+function AddParamsToURI(url, params) {
+    let result = url;
+    if (params != null) {
+        const items = Object.keys(params);
+        for (const [index, item] of items.entries()) {
+            result += (index == 0) ? "?" : "&";
+            result += (item) + "=" + params[item];
+        }
+    }
+    return result;
+}
+function AddHeadersToMessage(message, headers) {
+    if (headers != null) {
+        for (const key in headers) {
+            message.request_headers.append(key, headers[key]);
+        }
+    }
+}
+class Soup3 {
+    constructor() {
+        this._httpSession = new Session();
+        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
+        this._httpSession.timeout = 10;
+        this._httpSession.idle_timeout = 10;
+    }
+    async Send(url, params, headers, method = "GET") {
+        url = AddParamsToURI(url, params);
+        const query = encodeURI(url);
+        logger_Logger.Debug("URL called: " + query);
+        const data = await new Promise((resolve, reject) => {
+            const message = Message.new(method, query);
+            if (message == null) {
+                resolve(null);
+            }
+            else {
+                AddHeadersToMessage(message, headers);
+                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, null, (session, result) => {
+                    var _a;
+                    const res = this._httpSession.send_and_read_finish(result);
+                    const headers = {};
+                    message.get_response_headers().foreach((name, value) => {
+                        headers[name] = value;
+                    });
+                    resolve({
+                        reason_phrase: (_a = message.get_reason_phrase()) !== null && _a !== void 0 ? _a : "",
+                        status_code: message.get_status(),
+                        response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
+                        response_headers: headers
+                    });
+                });
+            }
+        });
+        return data;
+    }
+}
+class Soup2 {
     constructor() {
         this._httpSession = new SessionAsync();
+        const { ProxyResolverDefault } = imports.gi.Soup;
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
         this._httpSession.add_feature(new ProxyResolverDefault());
     }
+    async Send(url, params, headers, method = "GET") {
+        url = AddParamsToURI(url, params);
+        const query = encodeURI(url);
+        logger_Logger.Debug("URL called: " + query);
+        const data = await new Promise((resolve, reject) => {
+            const message = Message.new(method, query);
+            if (message == null) {
+                resolve(null);
+            }
+            else {
+                AddHeadersToMessage(message, headers);
+                this._httpSession.queue_message(message, (session, message) => {
+                    var _a, _b;
+                    const headers = {};
+                    message.response_headers.foreach((name, value) => {
+                        headers[name] = value;
+                    });
+                    resolve({
+                        reason_phrase: message.reason_phrase,
+                        status_code: message.status_code,
+                        response_body: (_b = (_a = message.response_body) === null || _a === void 0 ? void 0 : _a.data) !== null && _b !== void 0 ? _b : null,
+                        response_headers: headers
+                    });
+                });
+            }
+        });
+        return data;
+    }
+}
+const soupLib = imports.gi.Soup.MAJOR_VERSION == 3 ? new Soup3() : new Soup2();
+
+;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
+
+
+class HttpLib {
     static get Instance() {
         if (this.instance == null)
             this.instance = new HttpLib();
@@ -16458,8 +16551,8 @@ class HttpLib {
         }
     }
     async LoadAsync(url, params, headers, method = "GET") {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
-        const message = await this.Send(url, params, headers, method);
+        var _a, _b, _c, _d, _e;
+        const message = await soupLib.Send(url, params, headers, method);
         let error = undefined;
         if (!message) {
             error = {
@@ -16488,64 +16581,24 @@ class HttpLib {
         else if (!message.response_body) {
             error = {
                 code: message.status_code,
-                message: "no response body",
-                reason_phrase: message.reason_phrase,
-                response: message
-            };
-        }
-        else if (!message.response_body.data) {
-            error = {
-                code: message.status_code,
                 message: "no response data",
                 reason_phrase: message.reason_phrase,
                 response: message
             };
         }
-        const responseHeaders = {};
-        (_a = message === null || message === void 0 ? void 0 : message.response_headers) === null || _a === void 0 ? void 0 : _a.foreach((name, val) => {
-            responseHeaders[name] = val;
-        });
-        if (((_b = message === null || message === void 0 ? void 0 : message.status_code) !== null && _b !== void 0 ? _b : -1) > 200 && ((_c = message === null || message === void 0 ? void 0 : message.status_code) !== null && _c !== void 0 ? _c : -1) < 300) {
+        if (((_a = message === null || message === void 0 ? void 0 : message.status_code) !== null && _a !== void 0 ? _a : -1) > 200 && ((_b = message === null || message === void 0 ? void 0 : message.status_code) !== null && _b !== void 0 ? _b : -1) < 300) {
             logger_Logger.Info("Warning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
         }
-        logger_Logger.Verbose("API full response: " + ((_e = (_d = message === null || message === void 0 ? void 0 : message.response_body) === null || _d === void 0 ? void 0 : _d.data) === null || _e === void 0 ? void 0 : _e.toString()));
+        logger_Logger.Verbose("API full response: " + ((_c = message === null || message === void 0 ? void 0 : message.response_body) === null || _c === void 0 ? void 0 : _c.toString()));
         if (error != null)
-            logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_g = (_f = error === null || error === void 0 ? void 0 : error.response) === null || _f === void 0 ? void 0 : _f.response_body) === null || _g === void 0 ? void 0 : _g.data));
+            logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_d = error === null || error === void 0 ? void 0 : error.response) === null || _d === void 0 ? void 0 : _d.response_body));
         return {
             Success: (error == null),
-            Data: ((_j = (_h = message === null || message === void 0 ? void 0 : message.response_body) === null || _h === void 0 ? void 0 : _h.data) !== null && _j !== void 0 ? _j : null),
-            ResponseHeaders: responseHeaders,
+            Data: ((_e = message === null || message === void 0 ? void 0 : message.response_body) !== null && _e !== void 0 ? _e : null),
+            ResponseHeaders: message === null || message === void 0 ? void 0 : message.response_headers,
             ErrorData: error,
             Response: message
         };
-    }
-    async Send(url, params, headers, method = "GET") {
-        if (params != null) {
-            const items = Object.keys(params);
-            for (const [index, item] of items.entries()) {
-                url += (index == 0) ? "?" : "&";
-                url += (item) + "=" + params[item];
-            }
-        }
-        const query = encodeURI(url);
-        logger_Logger.Debug("URL called: " + query);
-        const data = await new Promise((resolve, reject) => {
-            const message = Message.new(method, query);
-            if (message == null) {
-                resolve(null);
-            }
-            else {
-                if (headers != null) {
-                    for (const key in headers) {
-                        message.request_headers.append(key, headers[key]);
-                    }
-                }
-                this._httpSession.queue_message(message, (session, message) => {
-                    resolve(message);
-                });
-            }
-        });
-        return data;
     }
 }
 

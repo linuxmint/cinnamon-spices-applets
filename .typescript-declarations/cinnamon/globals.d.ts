@@ -120,3 +120,7 @@ declare namespace imports {
         addSignalMethods(prototype: any): void
     }
 }
+
+declare namespace imports.gi {
+    const versions: Record<string, string>;
+}
