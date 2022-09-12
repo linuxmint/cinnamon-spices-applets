@@ -6,7 +6,8 @@ const Lang = imports.lang;
 const St = imports.gi.St;
 const Main = imports.ui.main;
 const ByteArray = imports.byteArray;
-const {latinise, escapeRegExp} = imports.misc.util;
+const Cinnamon = imports.gi.Cinnamon;
+const {escapeRegExp} = imports.misc.util;
 Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + '/.local/share/locale');
 
 function _(str) {
@@ -18,6 +19,9 @@ function _(str) {
 }
 
 const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+|_|&|\\)|\S+?(\s|$|-|=|\+|_|&|\\)/g ).join('\n');
+
+const graphemeBaseChars = s => //decompose and remove discritics.
+                s.normalize('NFKD').replace(/[\u0300-\u036f]/g, "");
 
 //===========================================================
 
@@ -65,7 +69,7 @@ const getThumbnail_gicon = (uri, mimeType) => {
 let onlyOneTooltip = null;
 const showTooltip = (actor, xpos, ypos, center_x, text) => {
     if (onlyOneTooltip) {
-        global.log("Cinnamenu: Previous tooltip still exists...removing...");
+        global.logWarning("Cinnamenu: Previous tooltip still exists...removing...");
         onlyOneTooltip.destroy();
         onlyOneTooltip = null;
     }
@@ -140,8 +144,8 @@ const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => 
     const HIGHTLIGHT_MATCH = true;
     let foundPosition = 0;
     let foundLength = 0;
-    const str2 = latinise(str.toUpperCase());
-    //q is already latinise() & toUpperCase() in _doSearch()
+    const str2 = graphemeBaseChars(str).toLocaleUpperCase();
+    //q is already graphemeBaseChars() in _doSearch()
     let score = 0, bigrams_score = 0;
 
     if (new RegExp('\\b'+escapeRegExp(q)).test(str2)) { //match substring from beginning of words
@@ -197,6 +201,52 @@ const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => 
     }
 };
 
+const getChromiumProfileDirs = function() {
+    //Find profile dirs of various chromium based browsers
+    const appSystem = Cinnamon.AppSystem.get_default();
+    const folders = [];
+    [
+        [['chromium'], 'chromium'],
+        [['google-chrome'], 'google-chrome'],
+        [['opera'], 'opera'],
+        [['vivaldi'], 'vivaldi-stable'],
+        [['BraveSoftware', 'Brave-Browser'], 'brave-browser'],
+        [['microsoft-edge'], 'microsoft-edge']
+    ].forEach( browser => {
+        const path = browser[0];
+        const wmClass = browser[1];
+
+        const foundApps = appSystem.lookup_desktop_wmclass(wmClass);
+        if (!foundApps || foundApps.length === 0) {
+            return; //browser not installed
+        }
+        const appInfo = foundApps.get_app_info();
+
+        const addFolderIfExists = function(subfolder) {
+            const bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev(
+                                        [GLib.get_user_config_dir(), ...path, subfolder, 'Bookmarks']));
+            if (bookmarksFile.query_exists(null)) {
+                folders.push([path.concat(subfolder), appInfo]);
+            }
+        };
+
+        addFolderIfExists(''); //i.e. no subfolder
+        addFolderIfExists('Default');
+        for (let i = 1; i<10; i++) {
+            addFolderIfExists('Profile ' + i);
+        }
+    });
+
+    return folders;
+};
 
 
-module.exports = {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible, searchStr};
+module.exports = {  _,
+                    wordWrap,
+                    graphemeBaseChars,
+                    getThumbnail_gicon,
+                    showTooltip,
+                    hideTooltipIfVisible,
+                    searchStr,
+                    getChromiumProfileDirs
+                 };

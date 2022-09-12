@@ -40,17 +40,17 @@ export interface WeatherData {
 		city?: string | undefined,
 		country?: string | undefined,
 		timeZone?: string | undefined,
-		url?: string,
-		tzOffset?: number
+		url?: string | undefined,
+		tzOffset?: number | undefined
 	},
 	stationInfo?: {
 		/** in metres */
 		distanceFrom: number | undefined,
-		name?: string,
+		name?: string | undefined,
 		lat?: number,
 		lon?: number,
 		area?: string
-	}
+	} | undefined,
 	/** preferably in UTC */
 	sunrise: DateTime | null,
 	/** preferably in UTC */
@@ -72,7 +72,7 @@ export interface WeatherData {
 	condition: Condition
 	forecasts: ForecastData[];
 	hourlyForecasts?: HourlyForecastData[] | undefined
-	extra_field?: APIUniqueField;
+	extra_field?: APIUniqueField | undefined;
 	immediatePrecipitation?: ImmediatePrecipitation;
 }
 

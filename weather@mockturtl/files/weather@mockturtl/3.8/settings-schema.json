@@ -187,13 +187,15 @@
 			"OpenWeatherMap": "OpenWeatherMap",
 			"MET Norway": "MetNorway",
 			"DMI Denmark": "DanishMI",
+			"Deutscher Wetterdienst (Germany only)": "DeutscherWetterdienst",
 			"Met Office UK (UK only)": "Met Office UK",
 			"US National Weather (US only)": "US Weather",
 			"Visual Crossing (key needed)": "Visual Crossing",
 			"Weatherbit (key needed)": "Weatherbit",
 			"Tomorrow.io (key needed)": "Tomorrow.io",
 			"DarkSky (key needed)": "DarkSky",
-			"AccuWeather (key needed)": "AccuWeather"
+			"AccuWeather (key needed)": "AccuWeather",
+			"Weather Underground (key needed)": "WeatherUnderground"
 		}
 	},
 	"apiKey": {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"POT-Creation-Date: 2022-07-02 02:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -206,6 +206,33 @@ msgstr ""
 msgid "Error while moving file to trash:"
 msgstr ""
 
+msgid "Smileys & Emotion"
+msgstr ""
+
+msgid "People & Body"
+msgstr ""
+
+msgid "Animals & Nature"
+msgstr ""
+
+msgid "Food & Drink"
+msgstr ""
+
+msgid "Travel & Places"
+msgstr ""
+
+msgid "Activities"
+msgstr ""
+
+msgid "Objects"
+msgstr ""
+
+msgid "Symbols"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
 msgid ""
 "This menu item is not associated to any package. Do you want to remove it "
 "from the menu anyway?"
@@ -217,11 +244,9 @@ msgstr ""
 msgid "Packages to be removed"
 msgstr ""
 
-#, python-format
 msgid "Cannot remove package %s as it is required by other packages."
 msgstr ""
 
-#, python-format
 msgid "Package %s is a dependency of the following packages:"
 msgstr ""
 
@@ -445,21 +470,6 @@ msgstr ""
 msgid "View applications as list or grid"
 msgstr ""
 
-msgid "Application description placement"
-msgstr ""
-
-msgid "Tooltips"
-msgstr ""
-
-msgid "Under titles"
-msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Choose where to show application descriptions"
-msgstr ""
-
 msgid "Sidebar location"
 msgstr ""
 
@@ -478,15 +488,30 @@ msgstr ""
 msgid "Choose where to show the sidebar"
 msgstr ""
 
-msgid ""
-"\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
-msgstr ""
-
 msgid "Show favorites on sidebar"
 msgstr ""
 
 msgid "Show your favorite app and file icons on the sidebar"
+msgstr ""
+
+msgid "Application description placement"
+msgstr ""
+
+msgid "Tooltips"
+msgstr ""
+
+msgid "Under titles"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Choose where to show application descriptions"
+msgstr ""
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 
 msgid "Show recent items"
@@ -505,6 +530,12 @@ msgid "Show home folder"
 msgstr ""
 
 msgid "Show home folder category in the menu"
+msgstr ""
+
+msgid "Show emoji category"
+msgstr ""
+
+msgid "Show emoji category in the menu"
 msgstr ""
 
 msgid "Last used category"
@@ -529,6 +560,14 @@ msgid "Web search option"
 msgstr ""
 
 msgid "Show an internet search option in search results"
+msgstr ""
+
+msgid "Web search suggestions"
+msgstr ""
+
+msgid ""
+"With web search option, also show search suggestions. (Note: This uses "
+"Google's search API)"
 msgstr ""
 
 msgid "Search home folder"

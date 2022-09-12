@@ -48,6 +48,9 @@ BtBattery.prototype = {
         });
 
         this.dbus_map = new Map();
+        this.dbus_map[Symbol.iterator] = function* () {
+            yield* [...this.entries()].sort((a, b) => b[1].device.percentage - a[1].device.percentage);
+        }
         this.monitored_devs = new Array();
     },
 
@@ -59,7 +62,7 @@ BtBattery.prototype = {
         this.settings.bind("notification-warn-level", "notification_warn_level", null, null);
         this.settings.bind("notification-crit-enable", "notification_crit_enable", this._on_settings_change, null);
         this.settings.bind("notification-crit-level", "notification_crit_level", null, null);
-        this.settings.bind("notification-multiple", "notification_multiple", null, null);
+        this.settings.bind("notification-filter", "notification_filter", null, null);
         this.settings.bind("notification-applet-icon", "notification_applet_icon", this._on_settings_change, null);
 
         this.notified_devices = new Map();
@@ -186,11 +189,16 @@ BtBattery.prototype = {
         if (check_override) {
             this.check_override_device();
         }
+
         this.setup_dbus();
     },
 
+    blacklist_containes_any: function(dev) {
+        return !((!dev.serial || !this.blacklist.includes(dev.serial)) && (!dev.model || !this.blacklist.includes(dev.model)));
+    },
+
     blacklist_add: function(dev, active) {
-        if ((!dev.serial || !this.blacklist.includes(dev.serial)) && (!dev.model || !this.blacklist.includes(dev.model))) {
+        if (!this.blacklist_containes_any(dev)) {
             this.blacklist += (this.blacklist ? "\n" : "") + (active ? "" : "# ") + (dev.model ? dev.model : dev.serial);
         }
     },
@@ -210,6 +218,10 @@ BtBattery.prototype = {
         return containes;
     },
 
+    blacklist_containes_inactive: function(dev) {
+        return this.blacklist_containes_any(dev) && !this.blacklist_containes_active(dev);
+    },
+
     notify_if_needed: function() {
         if (!this.notification_warn_enable && !this.notification_crit_enable) {
             return;
@@ -224,16 +236,32 @@ BtBattery.prototype = {
             let notified_warn = this.notified_devices.has(dev) ? this.notified_devices.get(dev).warn : false;
             let notified_crit = this.notified_devices.has(dev) ? this.notified_devices.get(dev).crit : false;
 
-            if (this.notification_warn_enable && !notified_warn && device.percentage < this.notification_warn_level) {
+            if (!this.notified_devices.has(dev) && device.percentage == 0) {
+                // device connected for the first time with 0% battery - seems like some kind of bug,
+                // let's add it when it will report something else
+                continue;
+            }
+
+            if (device.percentage >= this.notification_warn_level + this.notification_filter) {
+                // device recharged, enable notification
+                notified_warn = false;
+            } else if (this.notification_warn_enable && !notified_warn && device.percentage < this.notification_warn_level) {
                 this.notify(dev + " (" + device.percentage + "%)", "Battery dropped below " + this.notification_warn_level + "%",
                     this.get_device_batt_icon(device.kind, device.percentage));
-                notified_warn = !this.notification_multiple;
+
+                notified_warn = true;
             }
-            if (this.notification_crit_enable && !notified_crit && device.percentage < this.notification_crit_level) {
+
+            if (device.percentage >= this.notification_crit_level + this.notification_filter) {
+                // device recharged, enable notification
+                notified_crit = false;
+            } else if (this.notification_crit_enable && !notified_crit && device.percentage < this.notification_crit_level) {
                 this.notify(dev + " (" + device.percentage + "%)", "Battery dropped below " + this.notification_crit_level + "%",
                     this.get_device_batt_icon(device.kind, device.percentage));
-                notified_crit = !this.notification_multiple;
+
+                notified_crit = true;
             }
+
             this.notified_devices.set(dev, {warn: notified_warn, crit: notified_crit});
         }
     },
@@ -248,7 +276,13 @@ BtBattery.prototype = {
         var upowerClient = UPower.Client.new_full(null);
         var devices = upowerClient.get_devices();
         for (let i=0; i < devices.length; i++) {
-            let dev = devices[i]
+            let dev = devices[i];
+
+            if ((!dev.model && !dev.serial) || this.blacklist_containes_active(dev)) {
+                // skip entirely blacklisted devices or the ones without model and serial
+                continue;
+            }
+
             if (dev.kind != UPower.DeviceKind.MOUSE
                 && dev.kind != UPower.DeviceKind.KEYBOARD
                 && dev.kind != UPower.DeviceKind.GAMING_INPUT
@@ -256,17 +290,12 @@ BtBattery.prototype = {
                 && dev.kind != UPower.DeviceKind.HEADPHONES
                 && dev.kind != UPower.DeviceKind.MEDIA_PLAYER) {
 
-                if (dev.model || dev.serial) {
-                    // blacklist by default non mouse/kb/phone/gaming input/mediaplayer devices
+                // blacklist by default non mouse/kb/phone/gaming input/mediaplayer/headphones devices
+                // and then skip them (if not commented out of blacklist)
+                if (!this.blacklist_containes_inactive(dev)) {
                     this.blacklist_add(dev, true);
-                } else {
-                    // skip entirely devices without model and serial
                     continue;
                 }
-            }
-
-            if (this.blacklist_containes_active(dev)) {
-                continue;
             } else {
                 this.blacklist_add(dev, false);
             }
@@ -335,9 +364,7 @@ BtBattery.prototype = {
         }
 
         if (this.monitored_devs == 0) {
-            this.set_applet_label("");
-            this.set_applet_tooltip("all BT devices has been disabled");
-            this.set_applet_icon_name("bluetooth-disabled");
+            this.set_applet_enabled(false);
         } else {
             const [min_name, min_kind, min_perc] = this.get_lowest_battery_device();
 
@@ -387,7 +414,7 @@ BtBattery.prototype = {
             }
 
             const dev = this.dbus_map.get(name).device;
-            if (lowest_bat_dev == null || dev.percentage < lowest_bat_dev.percentage) {
+            if (lowest_bat_dev == null || dev.percentage <= lowest_bat_dev.percentage) {
                 lowest_bat_dev = dev;
                 lowest_bat_dev_ident = name;
             }

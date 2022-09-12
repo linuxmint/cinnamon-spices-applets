@@ -252,7 +252,10 @@ export class WeatherApplet extends TextIconApplet {
 				.replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, this.config) : "")
 				.replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
 				.replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, this.config.WindSpeedUnit) : "")
-				.replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "");
+				.replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
+				.replace(/{city}/g, weather.location.city ?? "")
+				.replace(/{country}/g, weather.location.country ?? "")
+				.replace(/{search_entry}/g, this.config.CurrentLocation?.entryText ?? "");
 		}
 
 		this.SetAppletLabel(label);
@@ -302,7 +305,7 @@ export class WeatherApplet extends TextIconApplet {
 	 * Loads JSON response from specified URL, returns the whole response not just data
 	 * @param url URL without params
 	 * @param params param object
-	 * @param HandleError should return true if you want this function to handle errors, else false
+	 * @param HandleError should return false to mark error handled, else true
 	 * @param method default is GET
 	 */
 	public async LoadJsonAsyncWithDetails<T, E = any>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: ErrorResponse<E>) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<T, E>> {
@@ -326,7 +329,7 @@ export class WeatherApplet extends TextIconApplet {
 	 * Loads JSON response from specified URLs
 	 * @param url URL without params
 	 * @param params param object
-	 * @param HandleError should return true if you want this function to handle errors, else false
+	 * @param HandleError should return false to mark error handled, else true
 	 * @param method default is GET
 	 */
 	public async LoadJsonAsync<T, E = any>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: ErrorResponse<E>) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<T | null> {
@@ -338,16 +341,16 @@ export class WeatherApplet extends TextIconApplet {
 	 * Loads response from specified URLs
 	 * @param url URL without params
 	 * @param params param object
-	 * @param HandleError should return true if you want this function to handle errors, else false
+	 * @param HandleError should return false to mark error handled, else true
 	 * @param method default is GET
 	 */
-	public async LoadAsync(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<string | null> {
+	public async LoadAsync<E = any>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: ErrorResponse<E>) => boolean, headers?: HTTPHeaders, method: Method = "GET"): Promise<string | null> {
 		const response = await HttpLib.Instance.LoadAsync(url, params, headers, method);
 
 		// We have errorData inside
 		if (!response.Success) {
 			// check if caller wants
-			if (!!HandleError && !HandleError(response.ErrorData))
+			if (!!HandleError && !HandleError(response))
 				return null;
 			else {
 				this.HandleHTTPError(response.ErrorData);

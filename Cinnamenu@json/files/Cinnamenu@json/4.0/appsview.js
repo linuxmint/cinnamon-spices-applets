@@ -34,10 +34,9 @@ class AppButton {
             }
             this.icon = new St.Icon({ gicon: gicon, icon_size: this.appThis.getAppIconSize()});
         } else if (this.app.emoji) {//emoji search result
-            const iconLabel = new St.Label({ style: 'color: white; font-size: ' +
+            this.icon = new St.Label({ style: 'color: white; font-size: ' +
                                             (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
-            iconLabel.get_clutter_text().set_markup(this.app.emoji);
-            this.icon = iconLabel;
+            this.icon.get_clutter_text().set_markup(this.app.emoji);
         } else if (this.app.isApplication) {//isApplication
             this.icon = this.app.create_icon_texture(this.appThis.getAppIconSize());
         } else if (this.app.iconFactory) {//isPlace
@@ -359,6 +358,46 @@ class AppButton {
     }
 }
 
+class Subheading {
+    constructor(appThis, subheadingText, clickAction) {
+        this.appThis = appThis;
+        this.subheadingText = subheadingText;
+        this.clickAction = clickAction;
+        this.signals = new SignalManager(null);
+        this.subheading = new St.Label({ text: subheadingText, x_expand: true, reactive: true,
+                                            accessible_role: Atk.Role.HEADING});
+        const subheadingStyleClass = clickAction?'menu-applications-subheading-clickable':'menu-applications-subheading';
+        this.subheadingBox = new St.BoxLayout({ style_class: subheadingStyleClass });
+        this.subheadingBox.add(this.subheading, { });
+
+        if (this.clickAction) {
+            this.signals.connect(this.subheading, 'button-press-event', (...args) =>
+                                                                    this._handleButtonPress(...args));
+        }
+    }
+
+    _handleButtonPress(actor, e) {
+        const button = e.get_button();
+        if (button === 1) {//left click
+            if (this.appThis.contextMenu.isOpen) {
+                this.appThis.contextMenu.close();
+                return Clutter.EVENT_STOP;
+            }
+            if (this.clickAction) {
+                this.clickAction();
+            }
+            return Clutter.EVENT_STOP;
+        }
+        return Clutter.EVENT_PROPAGATE;
+    }
+
+    destroy(){
+        this.signals.disconnectAllSignals();
+        this.subheading.destroy();
+        this.subheadingBox.destroy();
+    }
+}
+
 /*Creates and populates the main applications view. Takes .app objects and creates AppButton objs with
  *.app as a property. this.buttonStore[] array is used to store AppButton objs for later reuse
  *otherwise new AppButton's would need to be created each time a category is clicked on.*/
@@ -404,8 +443,8 @@ class AppsView {
     populate_init(headerText = null) {
         this.applicationsListBox.hide();//hide while populating for performance.
         this.applicationsGridBox.hide();//
-
         this.clearApps();
+        this.applicationsScrollBox.vscroll.adjustment.set_value(0);//scroll to top
 
         if (headerText) {
             this.headerText.set_text(headerText);
@@ -416,26 +455,29 @@ class AppsView {
 
         this.column = 0;
         this.rownum = 0;
+
+        this.subheadings = [];
     }
 
-    populate_add(appList, subheadingText = null) {
+    populate_add(appList, subheadingText = null, clickAction = null) {
         if (subheadingText) {
             if (this.column !== 0) {
                 this.column = 0;
                 this.rownum++;
             }
-            const subheading = new St.Label({ x_expand: true});
-            const subheadingBox = new St.BoxLayout({ style_class: 'menu-applications-subheading' });
-            subheadingBox.add(subheading, { });
+
+            const subheading = new Subheading(this.appThis, subheadingText, clickAction);
             if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-                this.applicationsListBox.add(subheadingBox);
+                this.applicationsListBox.add(subheading.subheadingBox);
             } else {
                 const gridLayout = this.applicationsGridBox.layout_manager;
-                gridLayout.attach(subheadingBox, this.column, this.rownum, this.getGridValues().columns, 1);
+                gridLayout.attach(subheading.subheadingBox, this.column, this.rownum,
+                                                                    this.getGridValues().columns, 1);
                 this.rownum++;
             }
-            subheading.set_text(subheadingText);
-            subheadingBox.show();
+
+            subheading.subheadingBox.show();
+            this.subheadings.push(subheading);
         }
 
         appList.forEach(app => {
@@ -553,12 +595,10 @@ class AppsView {
         this.clearAppsViewFocusedActors();
 
         //destroy subheading labels
-        this.getActiveContainer().get_children().forEach(actor => {
-                    if (!(  actor.has_style_class_name('menu-application-button') ||
-                            actor.has_style_class_name('menu-application-button-selected'))) {
-                        actor.destroy();
-                    }
-                 });
+        if(this.subheadings){
+            this.subheadings.forEach(subheading => subheading.destroy());
+        }
+        this.subheadings = [];
 
         this.getActiveContainer().remove_all_children();
     }
