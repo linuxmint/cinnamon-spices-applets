@@ -22,8 +22,12 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
-        this.menuBtnChangeBack = new PopupMenu.PopupMenuItem('Change background');
-        this.menuBtnSavePic = new PopupMenu.PopupMenuItem('Save current picture');
+        this.paused = false;
+        this.menuSwtchPaused = new PopupMenu.PopupSwitchMenuItem('Pause all change triggers', this.paused);
+        this.menuSwtchPaused.connect('toggled', imports.lang.bind(this, this._toggle_paused));
+        this.menu.addMenuItem(this.menuSwtchPaused);
+        this.menuBtnChangeBack = new PopupMenu.PopupMenuItem('Change background now');
+        this.menuBtnSavePic = new PopupMenu.PopupMenuItem('Save current background');
         this.menuBtnChangeBack.connect('activate', imports.lang.bind(this, this._change_background));
         this.menuBtnSavePic.connect('activate', imports.lang.bind(this, this._store_background));
         this.menu.addMenuItem(this.menuBtnChangeBack);
@@ -75,7 +79,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
     }
 
     _timeout_update() {
-        if(this.change_ontime)
+        if(this.change_ontime && !this.paused)
             this._timeout_enable();
         else
             this._timeout_disable();
@@ -90,6 +94,11 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
     _timeout_enable() {
         this._timeout_disable();
         this._timeout = imports.mainloop.timeout_add_seconds(this.change_time * 60, imports.lang.bind(this, this._auto_change_background));
+    }
+
+    _toggle_paused() {
+        this.paused = !this.paused;
+        this._timeout_update();
     }
 
     _set_icon_rotation(newValue, seconds) {
