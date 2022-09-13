@@ -358,9 +358,6 @@ class QRedshift extends Applet.TextIconApplet {
             }
             percent = 1 - percent;
             
-            if (percent > 1.0) percent = 1;
-            else if (percent < 0) percent = 0;
-            
             debug = {
                 d: d.toLocaleTimeString('pt-br'),
                 date_s: date_s.toLocaleTimeString('pt-br'),
@@ -370,6 +367,8 @@ class QRedshift extends Applet.TextIconApplet {
                 percent: percent
             };
             
+            if (percent > 1.0) percent = 0;
+            else if (percent < 0) percent = 0;
             
             if (night) {
                 period = 'night';
@@ -866,10 +865,17 @@ class QRedshift extends Applet.TextIconApplet {
         if (!success || out == null) return;
         let resp = QUtils.byte_array_to_string(out);
         
-        let period = resp.match(/Period:.+/g);
-        if (period && period[0]) {
-            this.opt.period = period[0].split(':')[1].trim();
-        }
+        try {
+            let resp_array = resp.trim().split('\n');
+            
+            let period = resp_array[resp_array.length - 3].match(/.*:\s*(.+)$/)[1];
+            let temp = resp_array[resp_array.length - 2].match(/\d+/)[0];
+            
+            this.opt.period = period;
+            this.current_temp = temp;
+            
+        } catch (e) {}
+        
         this.updateTooltip(prd);
         this.setInfo(prd);
         this.setIcon();
