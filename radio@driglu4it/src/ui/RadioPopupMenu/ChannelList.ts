@@ -1,9 +1,11 @@
 import { createSubMenu } from "../../lib/PopupSubMenu";
-import { createChannelMenuItem } from "./ChannelMenuItem";
+import { ChannelMenuItem, createChannelMenuItem } from "./ChannelMenuItem";
 import { AdvancedPlaybackStatus } from "../../types";
 import { mpvHandler } from "../../services/mpv/MpvHandler";
 import { configs } from "../../services/Config";
+import { radioPopupMenu } from "./RadioPopupMenu";
 
+const { BoxLayout } = imports.gi.St
 
 export function createChannelList() {
 
@@ -13,7 +15,7 @@ export function createChannelList() {
         addChannelChangeHandler,
         addPlaybackStatusChangeHandler,
         setUrl
-    } = mpvHandler
+    } = mpvHandler || {}
 
     const {
         addStationsListChangeHandler,
@@ -34,25 +36,54 @@ export function createChannelList() {
         return channel.url
     }
 
-    // the channelItems are saved here to the map as well as to the container as on the container only the reduced name are shown. Theoretically it therefore couldn't be differentiated between two long channel names with the same first 30 (or so) characters   
-    let channelItems: ReturnType<typeof createChannelMenuItem>[] = []
+    const handleChannelRemoveClicked = (channelName: string) => {
+        const previousStations = configs.settingsObject.userStations
 
-    function setRefreshList(names: string[]) {
+        configs.settingsObject.userStations = previousStations.filter((cnl) => cnl.name !== channelName)
+    }
+
+
+    // the channelItems are saved here to the map as well as to the container as on the container only the reduced name are shown. Theoretically it therefore couldn't be differentiated between two long channel names with the same first 30 (or so) characters   
+    let channelItems: ChannelMenuItem[] = []
+
+    const closeAllChannelContextMenus = (props?: { exceptionChannelName?: string }) => {
+        const { exceptionChannelName } = props || {}
+
+        channelItems.forEach((channelItem) => {
+            if (channelItem.getChannelName() !== exceptionChannelName) {
+                channelItem.closeContextMenu()
+            }
+        })
+    }
+
+
+    const setRefreshList = (names: string[]) => {
         channelItems = []
         subMenu.box.destroy_all_children()
 
-        names.forEach(name => {
+        names.forEach((name, index) => {
             const channelPlaybackstatus =
                 (name === getCurrentChannel()) ? getPlaybackStatus() : 'Stopped'
 
+            // TODO: addd this to createChannelMenuItem
+            const channelItemContainer = new BoxLayout({ vertical: true })
+
+
             const channelItem = createChannelMenuItem({
                 channelName: name,
-                onActivated: () => setUrl(findUrl(name)),
-                playbackStatus: channelPlaybackstatus
+                onActivated: () => {
+                    closeAllChannelContextMenus()
+                    setUrl(findUrl(name))
+                },
+                initialPlaybackStatus: channelPlaybackstatus,
+                onRemoveClick: () => handleChannelRemoveClicked(name),
+                onContextMenuOpened: () => closeAllChannelContextMenus({ exceptionChannelName: name })
             })
 
+            channelItemContainer.add_child(channelItem.actor)
+
             channelItems.push(channelItem)
-            subMenu.box.add_child(channelItem.actor)
+            subMenu.box.add_child(channelItemContainer)
         })
     }
 
@@ -72,9 +103,11 @@ export function createChannelList() {
 
     setRefreshList(getUserStationNames())
 
-    addChannelChangeHandler((newChannel) => updateChannel(newChannel))
+    addChannelChangeHandler?.((newChannel) => updateChannel(newChannel))
     addPlaybackStatusChangeHandler((newStatus) => updatePlaybackStatus(newStatus))
     addStationsListChangeHandler(() => setRefreshList(getUserStationNames()))
+
+    radioPopupMenu.addPopupMenuCloseHandler(() => closeAllChannelContextMenus())
 
     return subMenu.actor
 }

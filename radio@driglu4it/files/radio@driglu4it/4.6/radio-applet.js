@@ -2676,8 +2676,13 @@ const { getDBusProperties, getDBus, getDBusProxyWithOwner } = imports.misc.inter
 const { spawnCommandLine } = imports.misc.util;
 // see https://lazka.github.io/pgi-docs/Cvc-1.0/index.html
 const { MixerControl } = imports.gi.Cvc;
+// TODO: this is not really right as the mpvHandler is initally undefined but it is much easier that way..
 let mpvHandler;
 const initMpvHandler = () => {
+    if (mpvHandler) {
+        global.logWarning('mpvHandler already initiallized');
+        return;
+    }
     mpvHandler = createMpvHandler();
 };
 function createMpvHandler() {
@@ -4171,7 +4176,7 @@ function downloadWithYoutubeDl(props) {
     const { downloadDir, title, onFinished, onSuccess, onError } = props;
     let hasBeenCancelled = false;
     // ytsearch option found here https://askubuntu.com/a/731511/1013434 (not given in the youtube-dl docs ...)
-    const downloadCommand = `youtube-dl --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\\"')}" --add-metadata --embed-thumbnail`;
+    const downloadCommand = `youtube-dl --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\"')}" --add-metadata --embed-thumbnail`;
     const process = spawnCommandLineAsyncIO(downloadCommand, (stdout, stderr) => {
         onFinished();
         if (hasBeenCancelled) {
@@ -4179,12 +4184,7 @@ function downloadWithYoutubeDl(props) {
             return;
         }
         if (stdout) {
-            const downloadPath = getDownloadPath(stdout);
-            if (!downloadPath) {
-                onError('downloadPath could not be determined from stdout. Most likely the download has failed', downloadCommand);
-                return;
-            }
-            onSuccess(downloadPath);
+            onSuccess();
             return;
         }
         if (stderr) {
@@ -4199,13 +4199,6 @@ function downloadWithYoutubeDl(props) {
     }
     return { cancel };
 }
-function getDownloadPath(stdout) {
-    var _a;
-    const arrayOfLines = stdout.match(/[^\r\n]+/g);
-    // there is only one line in stdout which gives the path of the downloaded mp3. This start with [ffmpeg] Destination ...
-    const searchString = '[ffmpeg] Destination: ';
-    return (_a = arrayOfLines === null || arrayOfLines === void 0 ? void 0 : arrayOfLines.find(line => line.includes(searchString))) === null || _a === void 0 ? void 0 : _a.split(searchString)[1];
-}
 
 ;// CONCATENATED MODULE: ./src/services/youtubeDownload/YtDlp.ts
 const { spawnCommandLineAsyncIO: YtDlp_spawnCommandLineAsyncIO } = imports.misc.util;
@@ -4213,7 +4206,7 @@ const { spawnCommandLineAsyncIO: YtDlp_spawnCommandLineAsyncIO } = imports.misc.
 function downloadWithYtDlp(props) {
     const { downloadDir, title, onFinished, onSuccess, onError } = props;
     let hasBeenCancelled = false;
-    const downloadCommand = `yt-dlp --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\\"')}" --add-metadata --embed-thumbnail`;
+    const downloadCommand = `yt-dlp --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\"')}" --add-metadata --embed-thumbnail`;
     const process = YtDlp_spawnCommandLineAsyncIO(downloadCommand, (stdout, stderr) => {
         onFinished();
         if (hasBeenCancelled) {
@@ -4221,12 +4214,7 @@ function downloadWithYtDlp(props) {
             return;
         }
         if (stdout) {
-            const downloadPath = YtDlp_getDownloadPath(stdout);
-            if (!downloadPath) {
-                onError('downloadPath could not be determined from stdout. Most likely the download has failed', downloadCommand);
-                return;
-            }
-            onSuccess(downloadPath);
+            onSuccess();
             return;
         }
         if (stderr) {
@@ -4240,12 +4228,6 @@ function downloadWithYtDlp(props) {
     }
     return { cancel };
 }
-function YtDlp_getDownloadPath(stdout) {
-    var _a;
-    const arrayOfLines = stdout.match(/[^\r\n]+/g);
-    const searchString = '[ExtractAudio] Destination: ';
-    return (_a = arrayOfLines === null || arrayOfLines === void 0 ? void 0 : arrayOfLines.find(line => line.includes(searchString))) === null || _a === void 0 ? void 0 : _a.split(searchString)[1];
-}
 
 ;// CONCATENATED MODULE: ./src/services/youtubeDownload/YoutubeDownloadManager.ts
 
@@ -4254,43 +4236,43 @@ function YtDlp_getDownloadPath(stdout) {
 
 
 const { spawnCommandLine: YoutubeDownloadManager_spawnCommandLine } = imports.misc.util;
-const { get_tmp_dir, get_home_dir: YoutubeDownloadManager_get_home_dir } = imports.gi.GLib;
-const { File, FileCopyFlags } = imports.gi.Gio;
+const { get_home_dir: YoutubeDownloadManager_get_home_dir, dir_make_tmp, DateTime } = imports.gi.GLib;
+const { File, FileCopyFlags, FileQueryInfoFlags } = imports.gi.Gio;
 const notifyYoutubeDownloadFailed = (props) => {
     const { youtubeCli, errorMessage } = props;
     notifyError(`Couldn't download Song from Youtube due to an Error. Make Sure you have the newest version of ${youtubeCli} installed. 
     \n<b>Important:</b> Don't use apt for the installation but follow the installation instruction given on the Radio Applet Site in the Cinnamon Store instead`, errorMessage, {
         additionalBtns: [
             {
-                text: 'View Installation Instruction',
-                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open ${APPLET_SITE} `)
-            }
-        ]
+                text: "View Installation Instruction",
+                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open ${APPLET_SITE} `),
+            },
+        ],
     });
 };
 const notifyYoutubeDownloadStarted = (title) => {
     notify(`Downloading ${title} ...`, {
         buttons: [
             {
-                text: 'Cancel',
-                onClick: () => cancelDownload(title)
-            }
-        ]
+                text: "Cancel",
+                onClick: () => cancelDownload(title),
+            },
+        ],
     });
 };
 const notifyYoutubeDownloadFinished = (props) => {
     const { downloadPath, fileAlreadyExist = false } = props;
-    notify(fileAlreadyExist ?
-        'Downloaded Song not saved as a file with the same name already exists' :
-        `Download finished. File saved to ${downloadPath}`, {
+    notify(fileAlreadyExist
+        ? "Downloaded Song not saved as a file with the same name already exists"
+        : `Download finished. File saved to ${downloadPath}`, {
         isMarkup: true,
         transient: false,
         buttons: [
             {
-                text: 'Play',
-                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open '${downloadPath}'`)
-            }
-        ]
+                text: "Play",
+                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open '${downloadPath}'`),
+            },
+        ],
     });
 };
 let downloadProcesses = [];
@@ -4298,52 +4280,82 @@ const downloadingSongsChangedListener = [];
 function downloadSongFromYoutube(title) {
     const downloadDir = configs.settingsObject.musicDownloadDir;
     const youtubeCli = configs.settingsObject.youtubeCli;
-    const music_dir_absolut = downloadDir.charAt(0) === '~' ?
-        downloadDir.replace('~', YoutubeDownloadManager_get_home_dir()) : downloadDir;
+    const music_dir_absolut = downloadDir.charAt(0) === "~"
+        ? downloadDir.replace("~", YoutubeDownloadManager_get_home_dir())
+        : downloadDir;
     if (!title)
         return;
-    const sameSongIsDownloading = downloadProcesses.find(process => {
+    const sameSongIsDownloading = downloadProcesses.find((process) => {
         return process.songTitle === title;
     });
     if (sameSongIsDownloading)
         return;
+    const tmpDirPath = dir_make_tmp(null);
     const downloadProps = {
         title,
-        downloadDir: get_tmp_dir(),
+        downloadDir: tmpDirPath,
         onError: (errorMessage, downloadCommand) => {
-            notifyYoutubeDownloadFailed({ youtubeCli, errorMessage: `The following error occured at youtube download attempt: ${errorMessage}. The used download Command was: ${downloadCommand}` });
+            notifyYoutubeDownloadFailed({
+                youtubeCli,
+                errorMessage: `The following error occured at youtube download attempt: ${errorMessage}. The used download Command was: ${downloadCommand}`,
+            });
         },
         onFinished: () => {
-            downloadProcesses = downloadProcesses.filter(downloadingSong => downloadingSong.songTitle !== title);
-            downloadingSongsChangedListener.forEach(listener => listener(downloadProcesses));
+            downloadProcesses = downloadProcesses.filter((downloadingSong) => downloadingSong.songTitle !== title);
+            downloadingSongsChangedListener.forEach((listener) => listener(downloadProcesses));
         },
-        onSuccess: (downloadPath) => {
-            const tmpFile = File.new_for_path(downloadPath);
-            const fileName = tmpFile.get_basename();
-            const targetPath = `${music_dir_absolut}/${fileName}`;
-            const targetFile = File.parse_name(targetPath);
-            if (targetFile.query_exists(null)) {
-                notifyYoutubeDownloadFinished({ downloadPath: targetPath, fileAlreadyExist: true });
-                return;
-            }
+        onSuccess: () => {
             try {
-                // @ts-ignore
-                tmpFile.move(File.parse_name(targetPath), FileCopyFlags.BACKUP, null, null);
-                notifyYoutubeDownloadFinished({ downloadPath: targetPath });
+                moveFileFromTmpDir({
+                    targetDirPath: music_dir_absolut,
+                    tmpDirPath,
+                    onFileMoved: (props) => {
+                        const { fileAlreadyExist, targetFilePath } = props;
+                        updateFileModifiedTime(targetFilePath);
+                        notifyYoutubeDownloadFinished({
+                            downloadPath: targetFilePath,
+                            fileAlreadyExist,
+                        });
+                    },
+                });
             }
             catch (error) {
-                const errorMessage = error instanceof imports.gi.GLib.Error ? error.message : 'Unknown Error Type';
-                notifyYoutubeDownloadFailed({ youtubeCli, errorMessage: `Failed to copy download from tmp dir. The following error occurred: ${errorMessage}` });
+                const errorMessage = error instanceof imports.gi.GLib.Error ? error.message : error;
+                notifyYoutubeDownloadFailed({
+                    youtubeCli,
+                    errorMessage: `Failed to copy download from tmp dir. The following error occurred: ${errorMessage}`,
+                });
             }
-        }
+        },
     };
-    const { cancel } = youtubeCli === 'youtube-dl' ?
-        downloadWithYoutubeDl(downloadProps) :
-        downloadWithYtDlp(downloadProps);
+    const { cancel } = youtubeCli === "youtube-dl"
+        ? downloadWithYoutubeDl(downloadProps)
+        : downloadWithYtDlp(downloadProps);
     notifyYoutubeDownloadStarted(title);
     downloadProcesses.push({ songTitle: title, cancelDownload: cancel });
-    downloadingSongsChangedListener.forEach(listener => listener(downloadProcesses));
+    downloadingSongsChangedListener.forEach((listener) => listener(downloadProcesses));
 }
+const moveFileFromTmpDir = (props) => {
+    var _a;
+    const { tmpDirPath, targetDirPath, onFileMoved } = props;
+    const fileName = (_a = File.new_for_path(tmpDirPath)
+        .enumerate_children("standard::*", FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null)
+        .next_file(null)) === null || _a === void 0 ? void 0 : _a.get_name();
+    if (!fileName) {
+        throw new Error(`filename couldn't be determined`);
+    }
+    const tmpFilePath = `${tmpDirPath}/${fileName}`;
+    const tmpFile = File.new_for_path(tmpFilePath);
+    const targetFilePath = `${targetDirPath}/${fileName}`;
+    const targetFile = File.parse_name(targetFilePath);
+    if (targetFile.query_exists(null)) {
+        onFileMoved({ targetFilePath, fileAlreadyExist: true });
+        return;
+    }
+    // @ts-ignore
+    tmpFile.move(File.parse_name(targetFilePath), FileCopyFlags.BACKUP, null, null);
+    onFileMoved({ targetFilePath, fileAlreadyExist: false });
+};
 const getCurrentDownloadingSongs = () => {
     return downloadProcesses.map((downloadingSong) => downloadingSong.songTitle);
 };
@@ -4354,6 +4366,22 @@ const cancelDownload = (songTitle) => {
         return;
     }
     downloadProcess.cancelDownload();
+};
+/** for some reasons the downloaded files have by default a weird modified time stamp (this is neither the time the file has been created locally nor any metadata about the song), which makes it hard (impossible?) to sort the songs by last recently added.  */
+const updateFileModifiedTime = (filePath) => {
+    YoutubeDownloadManager_spawnCommandLine(`touch ${filePath
+        .replaceAll("'", "\\'")
+        .replaceAll(" ", "\\ ")
+        .replaceAll('"', '\\"')}`);
+    // TODO: this would be better but for some reasons it doesn't work:
+    // const file = File.new_for_path(filePath);
+    // const fileInfo = file.query_info(
+    //   "standard::*",
+    //   FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
+    //   null
+    // );
+    // const now = DateTime.new_now_local();
+    // fileInfo.set_modification_date_time(now);
 };
 function addDownloadingSongsChangeListener(callback) {
     downloadingSongsChangedListener.push(callback);
@@ -4525,8 +4553,9 @@ const { uiGroup, layoutManager, panelManager, pushModal, popModal } = imports.ui
 const { KEY_Escape } = imports.gi.Clutter;
 const { util_get_transformed_allocation } = imports.gi.Cinnamon;
 const { PanelLoc } = imports.ui.popupMenu;
-function createPopupMenu(args) {
-    const { launcher } = args;
+const onPopupMenuClosedHandlers = [];
+function createPopupMenu(props) {
+    const { launcher } = props;
     const box = new BoxLayout({
         style_class: 'popup-menu-content',
         vertical: true,
@@ -4638,6 +4667,7 @@ function createPopupMenu(args) {
         box.hide();
         launcher.remove_style_pseudo_class('checked');
         popModal(box);
+        onPopupMenuClosedHandlers.forEach((handler) => handler());
     }
     function handleClick(actor, event) {
         if (!box.visible) {
@@ -4648,6 +4678,10 @@ function createPopupMenu(args) {
         const appletClicked = launcher.contains(clickedActor);
         (!binClicked && !appletClicked) && close();
     }
+    const addPopupMenuCloseHandler = (changeHandler) => {
+        onPopupMenuClosedHandlers.push(changeHandler);
+    };
+    box.addPopupMenuCloseHandler = addPopupMenuCloseHandler;
     box.toggle = toggle;
     // TODO: remove close
     box.close = close;
@@ -4693,14 +4727,19 @@ function createSeparatorMenuItem() {
 
 ;// CONCATENATED MODULE: ./src/lib/ActivWidget.ts
 const { KEY_space, KEY_KP_Enter, KEY_Return } = imports.gi.Clutter;
+/**  */
 function createActivWidget(args) {
     const { widget, onActivated } = args;
     // TODO: understand can_focus
     widget.can_focus = true;
     widget.reactive = true;
     widget.track_hover = true;
-    widget.connect('button-release-event', () => {
-        onActivated === null || onActivated === void 0 ? void 0 : onActivated();
+    widget.connect('button-release-event', (_, event) => {
+        const button = event.get_button();
+        // only if it is not a right click
+        if (button !== 3) {
+            onActivated === null || onActivated === void 0 ? void 0 : onActivated();
+        }
         return false;
     });
     // TODO: This is needed because some themes (at least Adapta-Nokto but maybe also others) don't provide style for the hover pseudo class. But it would be much easier to once (and on theme changes) programmatically set the hover pseudo class equal to the active pseudo class when the hover class isn't provided by the theme. 
@@ -4732,7 +4771,7 @@ const { Icon: SimpleMenuItem_Icon, IconType: SimpleMenuItem_IconType, Label: Sim
 // @ts-ignore
 const { Point: SimpleMenuItem_Point } = imports.gi.Clutter;
 function createSimpleMenuItem(args) {
-    const { text: initialText = "", maxCharNumber, iconName, onActivated } = args;
+    const { text: initialText = "", maxCharNumber, iconName, onActivated, onRightClick } = args;
     const icon = new SimpleMenuItem_Icon({
         icon_type: SimpleMenuItem_IconType.SYMBOLIC,
         style_class: "popup-menu-icon",
@@ -4767,6 +4806,13 @@ function createSimpleMenuItem(args) {
         setText,
         getIcon: () => icon,
     };
+    container.connect('button-press-event', (_, event) => {
+        const button = event.get_button();
+        if (button === 3) {
+            onRightClick === null || onRightClick === void 0 ? void 0 : onRightClick(menuItem);
+        }
+        return false;
+    });
     onActivated &&
         createActivWidget({
             widget: container,
@@ -5102,42 +5148,86 @@ function createSubMenu(args) {
 
 
 
-function createChannelMenuItem(args) {
-    const { channelName, onActivated, playbackStatus } = args;
-    const playbackIconMap = new Map([
-        ["Playing", PLAY_ICON_NAME],
-        ["Paused", PAUSE_ICON_NAME],
-        ["Loading", LOADING_ICON_NAME],
-        ["Stopped", null]
-    ]);
-    const iconMenuItem = createSimpleMenuItem({
+const { BoxLayout: ChannelMenuItem_BoxLayout } = imports.gi.St;
+const playbackIconMap = new Map([
+    ["Playing", PLAY_ICON_NAME],
+    ["Paused", PAUSE_ICON_NAME],
+    ["Loading", LOADING_ICON_NAME],
+    ["Stopped", null]
+]);
+const createMainMenuItem = (props) => {
+    const { channelName, onActivated, onRightClick, initialPlaybackStatus } = props;
+    const mainMenuItem = createSimpleMenuItem({
         maxCharNumber: MAX_STRING_LENGTH,
         text: channelName,
-        onActivated: () => {
-            onActivated(channelName);
-        }
+        onActivated,
+        onRightClick
     });
-    const { startResumeRotation, stopRotation } = createRotateAnimation(iconMenuItem.getIcon());
-    function setPlaybackStatus(playbackStatus) {
+    const { startResumeRotation, stopRotation } = createRotateAnimation(mainMenuItem.getIcon());
+    const setPlaybackStatus = (playbackStatus) => {
         const iconName = playbackIconMap.get(playbackStatus);
         playbackStatus === 'Loading' ? startResumeRotation() : stopRotation();
-        iconMenuItem.setIconName(iconName);
-    }
-    playbackStatus && setPlaybackStatus(playbackStatus);
-    return {
-        setPlaybackStatus,
-        actor: iconMenuItem.actor,
-        getChannelName: () => channelName
+        mainMenuItem.setIconName(iconName);
     };
-}
+    initialPlaybackStatus && setPlaybackStatus(initialPlaybackStatus);
+    return {
+        actor: mainMenuItem.actor,
+        setPlaybackStatus
+    };
+};
+const createChannelMenuItem = (props) => {
+    const { channelName, onActivated, initialPlaybackStatus, onRemoveClick, onContextMenuOpened } = props;
+    const removeChannelItem = createSimpleMenuItem({
+        text: 'Remove Channel',
+        onActivated: onRemoveClick,
+        iconName: 'edit-delete',
+    });
+    const contextMenuContainer = new ChannelMenuItem_BoxLayout({
+        vertical: true,
+        style: `padding-left:20px;`
+    });
+    contextMenuContainer.add_child(removeChannelItem.actor);
+    const menuItemContainer = new ChannelMenuItem_BoxLayout({ vertical: true });
+    const getContextMenuOpen = () => menuItemContainer.get_child_at_index(1) === contextMenuContainer;
+    const handleMainMenuItemRightClicked = () => {
+        const contextMenuOpen = getContextMenuOpen();
+        if (contextMenuOpen) {
+            closeContextMenu();
+            return;
+        }
+        onContextMenuOpened();
+        menuItemContainer.add_child(contextMenuContainer);
+    };
+    const closeContextMenu = () => {
+        const contextMenuOpen = getContextMenuOpen();
+        if (contextMenuOpen) {
+            menuItemContainer.remove_child(contextMenuContainer);
+        }
+    };
+    const mainMenuItem = createMainMenuItem({
+        channelName,
+        onActivated: () => onActivated(),
+        onRightClick: handleMainMenuItemRightClicked,
+        initialPlaybackStatus
+    });
+    menuItemContainer.add_child(mainMenuItem.actor);
+    return {
+        setPlaybackStatus: mainMenuItem.setPlaybackStatus,
+        actor: menuItemContainer,
+        getChannelName: () => channelName,
+        closeContextMenu
+    };
+};
 
 ;// CONCATENATED MODULE: ./src/ui/RadioPopupMenu/ChannelList.ts
 
 
 
 
+
+const { BoxLayout: ChannelList_BoxLayout } = imports.gi.St;
 function createChannelList() {
-    const { getPlaybackStatus, getCurrentChannelName: getCurrentChannel, addChannelChangeHandler, addPlaybackStatusChangeHandler, setUrl } = mpvHandler;
+    const { getPlaybackStatus, getCurrentChannelName: getCurrentChannel, addChannelChangeHandler, addPlaybackStatusChangeHandler, setUrl } = mpvHandler || {};
     const { addStationsListChangeHandler, settingsObject } = configs;
     const subMenu = createSubMenu({ text: 'My Stations' });
     const getUserStationNames = () => {
@@ -5149,22 +5239,42 @@ function createChannelList() {
             throw new Error(`couldn't find a url for the provided name. That should not have happened :-/`);
         return channel.url;
     };
+    const handleChannelRemoveClicked = (channelName) => {
+        const previousStations = configs.settingsObject.userStations;
+        configs.settingsObject.userStations = previousStations.filter((cnl) => cnl.name !== channelName);
+    };
     // the channelItems are saved here to the map as well as to the container as on the container only the reduced name are shown. Theoretically it therefore couldn't be differentiated between two long channel names with the same first 30 (or so) characters   
     let channelItems = [];
-    function setRefreshList(names) {
+    const closeAllChannelContextMenus = (props) => {
+        const { exceptionChannelName } = props || {};
+        channelItems.forEach((channelItem) => {
+            if (channelItem.getChannelName() !== exceptionChannelName) {
+                channelItem.closeContextMenu();
+            }
+        });
+    };
+    const setRefreshList = (names) => {
         channelItems = [];
         subMenu.box.destroy_all_children();
-        names.forEach(name => {
+        names.forEach((name, index) => {
             const channelPlaybackstatus = (name === getCurrentChannel()) ? getPlaybackStatus() : 'Stopped';
+            // TODO: addd this to createChannelMenuItem
+            const channelItemContainer = new ChannelList_BoxLayout({ vertical: true });
             const channelItem = createChannelMenuItem({
                 channelName: name,
-                onActivated: () => setUrl(findUrl(name)),
-                playbackStatus: channelPlaybackstatus
+                onActivated: () => {
+                    closeAllChannelContextMenus();
+                    setUrl(findUrl(name));
+                },
+                initialPlaybackStatus: channelPlaybackstatus,
+                onRemoveClick: () => handleChannelRemoveClicked(name),
+                onContextMenuOpened: () => closeAllChannelContextMenus({ exceptionChannelName: name })
             });
+            channelItemContainer.add_child(channelItem.actor);
             channelItems.push(channelItem);
-            subMenu.box.add_child(channelItem.actor);
+            subMenu.box.add_child(channelItemContainer);
         });
-    }
+    };
     function updateChannel(name) {
         channelItems.forEach(item => {
             item.getChannelName() === name ? item.setPlaybackStatus(getPlaybackStatus()) : item.setPlaybackStatus('Stopped');
@@ -5177,9 +5287,10 @@ function createChannelList() {
         currentChannel === null || currentChannel === void 0 ? void 0 : currentChannel.setPlaybackStatus(playbackStatus);
     }
     setRefreshList(getUserStationNames());
-    addChannelChangeHandler((newChannel) => updateChannel(newChannel));
+    addChannelChangeHandler === null || addChannelChangeHandler === void 0 ? void 0 : addChannelChangeHandler((newChannel) => updateChannel(newChannel));
     addPlaybackStatusChangeHandler((newStatus) => updatePlaybackStatus(newStatus));
     addStationsListChangeHandler(() => setRefreshList(getUserStationNames()));
+    radioPopupMenu.addPopupMenuCloseHandler(() => closeAllChannelContextMenus());
     return subMenu.actor;
 }
 
@@ -5354,10 +5465,15 @@ const createMediaControlToolbar = () => {
 
 
 const { BoxLayout: RadioPopupMenu_BoxLayout } = imports.gi.St;
-function createRadioPopupMenu(props) {
+let radioPopupMenu;
+const initRadioPopupMenu = (props) => {
+    if (radioPopupMenu) {
+        global.logWarning('radioPopupMenu already initiallized');
+        return;
+    }
     const { launcher, } = props;
     const { getPlaybackStatus, addPlaybackStatusChangeHandler } = mpvHandler;
-    const popupMenu = createPopupMenu({ launcher });
+    radioPopupMenu = createPopupMenu({ launcher });
     const radioActiveSection = new RadioPopupMenu_BoxLayout({
         vertical: true,
         visible: getPlaybackStatus() !== 'Stopped'
@@ -5366,13 +5482,12 @@ function createRadioPopupMenu(props) {
         radioActiveSection.add_child(createSeparatorMenuItem());
         radioActiveSection.add_child(widget);
     });
-    popupMenu.add_child(createChannelList());
-    popupMenu.add_child(radioActiveSection);
+    radioPopupMenu.add_child(createChannelList());
+    radioPopupMenu.add_child(radioActiveSection);
     addPlaybackStatusChangeHandler((newValue) => {
         radioActiveSection.visible = newValue !== 'Stopped';
     });
-    return popupMenu;
-}
+};
 
 ;// CONCATENATED MODULE: ./src/functions/promiseHelpers.ts
 const { spawnCommandLineAsyncIO: promiseHelpers_spawnCommandLineAsyncIO } = imports.misc.util;
@@ -5630,7 +5745,7 @@ function createRadioAppletContainer() {
         onRemoved: handleAppletRemoved,
         onClick: handleClick,
         onRightClick: () => {
-            popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.close();
+            radioPopupMenu === null || radioPopupMenu === void 0 ? void 0 : radioPopupMenu.close();
             contextMenu === null || contextMenu === void 0 ? void 0 : contextMenu.toggle();
         },
         onScroll: handleScroll,
@@ -5643,12 +5758,12 @@ function createRadioAppletContainer() {
         appletContainer.actor.add_child(widget);
     });
     const tooltip = createRadioAppletTooltip({ appletContainer });
-    const popupMenu = createRadioPopupMenu({ launcher: appletContainer.actor });
+    initRadioPopupMenu({ launcher: appletContainer.actor });
     const contextMenu = createRadioContextMenu({
         launcher: appletContainer.actor,
     });
-    popupMenu.connect("notify::visible", () => {
-        popupMenu.visible && tooltip.hide();
+    radioPopupMenu.connect("notify::visible", () => {
+        radioPopupMenu.visible && tooltip.hide();
     });
     function handleAppletRemoved() {
         mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener();
@@ -5670,7 +5785,7 @@ function createRadioAppletContainer() {
         try {
             installationInProgress = true;
             await installMpvWithMpris();
-            popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.toggle();
+            radioPopupMenu === null || radioPopupMenu === void 0 ? void 0 : radioPopupMenu.toggle();
         }
         catch (error) {
             const notificationText = `Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin is located at ${MPRIS_PLUGIN_PATH} and correctly compiled for your environment. Refer to ${APPLET_SITE} (section Known Issues)`;
