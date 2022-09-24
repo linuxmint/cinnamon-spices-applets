@@ -11128,24 +11128,26 @@ class MetNorway extends BaseProvider {
         return days;
     }
     GetMostCommonCondition(count) {
-        let result = -1;
+        let result = null;
         for (const key in count) {
-            if (result == -1)
-                result = parseInt(key);
-            if (count[result].count < count[key].count)
+            if (result == null || count[result].count < count[key].count)
                 result = parseInt(key);
         }
+        if (result == null)
+            return null;
         return count[result].name;
     }
     GetMostSevereCondition(conditions) {
-        let result = -1;
+        let result = null;
         for (const key in conditions) {
             const conditionID = parseInt(key);
-            const resultStripped = (result > 100) ? result - 100 : result;
+            const resultStripped = result == null ? -1 : (result > 100) ? result - 100 : result;
             const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
             if (conditionIDStripped > resultStripped)
                 result = conditionID;
         }
+        if (result == null)
+            return null;
         if (result <= 4) {
             return this.GetMostCommonCondition(conditions);
         }

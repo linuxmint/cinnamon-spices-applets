@@ -199,29 +199,34 @@ export class MetNorway extends BaseProvider {
 		return days;
 	}
 
-	private GetMostCommonCondition(count: ConditionCount): string {
-		let result: number = -1;
+	private GetMostCommonCondition(count: ConditionCount): string | null {
+		let result: number | null = null;
 		for (const key in count) {
-			if (result == -1) result = parseInt(key);
-			if (count[result].count < count[key].count) result = parseInt(key);
+			if (result == null || count[result].count < count[key].count)
+				result = parseInt(key);
 		}
+
+		if (result == null)
+			return null;
+
 		return count[result].name;
 	}
 
-	private GetMostSevereCondition(conditions: ConditionCount): string {
-		// for Weather conditions
-		//this.app.log.Debug(JSON.stringify(conditions));
-
+	private GetMostSevereCondition(conditions: ConditionCount): string | null {
 		// We want to know the worst condition
-		let result: number = -1;
+		let result: number | null = null;
 		for (const key in conditions) {
 			const conditionID = parseInt(key);
 			// Polar night id's are above 100, make sure to remove them for checking
-			const resultStripped = (result > 100) ? result - 100 : result;
+			const resultStripped = result == null ? -1 : (result > 100) ? result - 100 : result;
 			const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
 			// Make the comparison, keep the polar night condition id
 			if (conditionIDStripped > resultStripped) result = conditionID;
 		}
+
+		if (result == null)
+			return null;
+
 		// If there is no rain or worse, just get the most common condition for the day
 		if (result <= 4) {
 			return this.GetMostCommonCondition(conditions);
@@ -244,7 +249,7 @@ export class MetNorway extends BaseProvider {
 		}
 	}
 
-	private ResolveCondition(icon: string | undefined, isNight: boolean = false): Condition {
+	private ResolveCondition(icon: string | undefined | null, isNight: boolean = false): Condition {
 		if (icon == null) {
 			Logger.Error("Icon was not found");
 			return {
