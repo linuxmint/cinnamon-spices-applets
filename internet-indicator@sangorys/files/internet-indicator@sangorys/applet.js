@@ -92,7 +92,7 @@ class InternetIndicatorApplet extends Applet.TextIconApplet {
                            //Util.spawnCommandLine("/usr/sbin/notify-send test on"); //OK
                            this._send_ping();	
                          }));
-            this.menu.addMenuItem(item);*/r
+            this.menu.addMenuItem(item);*/
 
 
             // START THE PERIODIC TASK TO CHECK INTERNET CONNECTION
