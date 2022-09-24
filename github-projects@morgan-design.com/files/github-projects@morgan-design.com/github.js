@@ -1,4 +1,5 @@
 const Soup = imports.gi.Soup;
+const ByteArray = imports.byteArray;
 const Lang = imports.lang;
 
 const API_ROOT = "https://api.github.com";
@@ -56,19 +57,25 @@ function GitHub(options){
 	}
 
 	try {
-		this.httpSession = new Soup.SessionAsync();
+		if (Soup.MAJOR_VERSION === 2) {
+			this.httpSession = new Soup.SessionAsync();
+		} else { //version 3
+			this.httpSession = new Soup.Session();
+		}
 		this.httpSession.user_agent = this.user_agent;
 		
 		//Authorization: token OAUTH-TOKEN
 		
 	} catch(e) {
-		throw 'GitHub: Creating SessionAsync failed: ' + e;
+		throw 'GitHub: Creating Soup Session failed: ' + e;
 	}
 
-	try {
-		Soup.Session.prototype.add_feature.call(this.httpSession, new Soup.ProxyResolverDefault());
-	} catch(e) {
-		throw 'GitHub: Adding ProxyResolverDefault failed: ' + e;
+	if (Soup.MAJOR_VERSION === 2) {
+		try {
+			Soup.Session.prototype.add_feature.call(this.httpSession, new Soup.ProxyResolverDefault());
+		} catch(e) {
+			throw 'GitHub: Adding ProxyResolverDefault failed: ' + e;
+		}
 	}
 }
 
@@ -82,26 +89,39 @@ GitHub.prototype.loadDataFeed = function(){
 
 	let request = Soup.Message.new('GET', feedUrl);
 
-	this.httpSession.queue_message(request, function(session, message){
-		_this.onHandleFeedResponse(session, message)
-	});
+	if (Soup.MAJOR_VERSION == 2) {
+		this.httpSession.queue_message(request, (session, response) => {
+			this.apiLimit			= response.response_headers.get_one("X-RateLimit-Limit");
+			this.apiLimitRemaining 	= response.response_headers.get_one("X-RateLimit-Remaining");
+			this.apiLimitResetTime	= response.response_headers.get_one("X-RateLimit-Reset");
+			const status_code = response.status_code;
+			this.onHandleFeedResponse(status_code, response.response_body.data)
+		});
+	} else { //version 3
+		this.httpSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (session, response) => {
+			this.apiLimit			= request.get_response_headers().get_one("X-RateLimit-Limit");
+			this.apiLimitRemaining 	= request.get_response_headers().get_one("X-RateLimit-Remaining");
+			this.apiLimitResetTime	= request.get_response_headers().get_one("X-RateLimit-Reset");
+			const status_code = request.get_status();
+			const bytes = this.httpSession.send_and_read_finish(response);
+			if (bytes) {
+				this.onHandleFeedResponse(status_code, ByteArray.toString(bytes.get_data()));
+			} else {
+				this.onHandleFeedResponse(status_code, null);
+			}
+		});
+	}
 }
 
-GitHub.prototype.onHandleFeedResponse = function(session, message) {
-
-	this.apiLimit			= message.response_headers.get_one("X-RateLimit-Limit");
-	this.apiLimitRemaining 	= message.response_headers.get_one("X-RateLimit-Remaining");
-	this.apiLimitResetTime	= message.response_headers.get_one("X-RateLimit-Reset");
-
+GitHub.prototype.onHandleFeedResponse = function(status_code, data) {
 	this.logger.debug("Header [X-RateLimit-Limit]: " + this.apiLimit);
 	this.logger.debug("Header [X-RateLimit-Remaining]: " + this.apiLimitRemaining);
 	this.logger.debug("Header [X-RateLimit-Reset]: " + this.apiLimitResetTime);
 
-	let status_code = message.status_code;
 	this.logger.debug("HTTP Response Status code [" + status_code + "]");
 
 	try {
-		var responseJson = this.parseJsonResponse(message);
+		var responseJson = JSON.parse(data);
 
 		// Successful request
 		if(status_code === 200){
@@ -202,7 +222,3 @@ GitHub.prototype.notOverFailureCountLimit = function() {
 	return this.totalFailuresAllowed >= this.totalFailureCount;
 }
 
-GitHub.prototype.parseJsonResponse = function(request){
-	var rawResponseJSON = request.response_body.data;
-	return JSON.parse(rawResponseJSON);
-}
