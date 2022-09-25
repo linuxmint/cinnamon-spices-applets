@@ -10959,7 +10959,53 @@ const openWeatherMapConditionLibrary = [
     _("Overcast clouds")
 ];
 
-;// CONCATENATED MODULE: ./src/3_8/providers/met_norway.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/types/common.ts
+const conditionSeverity = {
+    clearsky: 1,
+    cloudy: 4,
+    fair: 2,
+    fog: 15,
+    heavyrain: 10,
+    heavyrainandthunder: 11,
+    heavyrainshowers: 41,
+    heavyrainshowersandthunder: 25,
+    heavysleet: 48,
+    heavysleetandthunder: 32,
+    heavysleetshowers: 43,
+    heavysleetshowersandthunder: 27,
+    heavysnow: 50,
+    heavysnowandthunder: 34,
+    heavysnowshowers: 45,
+    heavysnowshowersandthunder: 29,
+    lightrain: 46,
+    lightrainandthunder: 30,
+    lightrainshowers: 40,
+    lightrainshowersandthunder: 24,
+    lightsleet: 47,
+    lightsleetandthunder: 31,
+    lightsleetshowers: 42,
+    lightsnow: 49,
+    lightsnowandthunder: 33,
+    lightsnowshowers: 44,
+    lightssleetshowersandthunder: 26,
+    lightssnowshowersandthunder: 28,
+    partlycloudy: 3,
+    rain: 9,
+    rainandthunder: 22,
+    rainshowers: 5,
+    rainshowersandthunder: 6,
+    sleet: 12,
+    sleetandthunder: 23,
+    sleetshowers: 7,
+    sleetshowersandthunder: 20,
+    snow: 13,
+    snowandthunder: 14,
+    snowshowers: 8,
+    snowshowersandthunder: 21
+};
+
+;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/met_norway.ts
+
 
 
 
@@ -10975,13 +11021,10 @@ class MetNorway extends BaseProvider {
         this.maxHourlyForecastSupport = 48;
         this.needsApiKey = false;
         this.remainingCalls = null;
-        this.baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?";
+        this.baseUrl = "https://api.met.no/weatherapi";
     }
     async GetWeather(loc) {
-        const query = this.GetUrl(loc);
-        if (query == null)
-            return null;
-        const json = await this.app.LoadJsonAsync(query);
+        const json = await this.app.LoadJsonAsync(`${this.baseUrl}/locationforecast/2.0/complete`, { lat: loc.lat, lon: loc.lon });
         if (!json) {
             logger_Logger.Error("MET Norway: Empty response from API");
             return null;
@@ -11152,11 +11195,6 @@ class MetNorway extends BaseProvider {
             return this.GetMostCommonCondition(conditions);
         }
         return conditions[result].name;
-    }
-    GetUrl(loc) {
-        let url = this.baseUrl + "lat=";
-        url += (loc.lat + "&lon=" + loc.lon);
-        return url;
     }
     DeconstructCondition(icon) {
         const condition = icon.split("_");
@@ -11475,49 +11513,6 @@ class MetNorway extends BaseProvider {
         }
     }
 }
-const conditionSeverity = {
-    clearsky: 1,
-    cloudy: 4,
-    fair: 2,
-    fog: 15,
-    heavyrain: 10,
-    heavyrainandthunder: 11,
-    heavyrainshowers: 41,
-    heavyrainshowersandthunder: 25,
-    heavysleet: 48,
-    heavysleetandthunder: 32,
-    heavysleetshowers: 43,
-    heavysleetshowersandthunder: 27,
-    heavysnow: 50,
-    heavysnowandthunder: 34,
-    heavysnowshowers: 45,
-    heavysnowshowersandthunder: 29,
-    lightrain: 46,
-    lightrainandthunder: 30,
-    lightrainshowers: 40,
-    lightrainshowersandthunder: 24,
-    lightsleet: 47,
-    lightsleetandthunder: 31,
-    lightsleetshowers: 42,
-    lightsnow: 49,
-    lightsnowandthunder: 33,
-    lightsnowshowers: 44,
-    lightssleetshowersandthunder: 26,
-    lightssnowshowersandthunder: 28,
-    partlycloudy: 3,
-    rain: 9,
-    rainandthunder: 22,
-    rainshowers: 5,
-    rainshowersandthunder: 6,
-    sleet: 12,
-    sleetandthunder: 23,
-    sleetshowers: 7,
-    sleetshowersandthunder: 20,
-    snow: 13,
-    snowandthunder: 14,
-    snowshowers: 8,
-    snowshowersandthunder: 21
-};
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/weatherbit.ts
 
