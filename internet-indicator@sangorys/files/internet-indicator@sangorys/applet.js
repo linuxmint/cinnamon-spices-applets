@@ -35,9 +35,9 @@ class InternetIndicatorApplet extends Applet.TextIconApplet {
     constructor(orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
         
-        printDebug("Start applet (Cyril)");
+        printDebug("Start internet-indicator applet");
 
-        this.set_applet_tooltip(_("Is Internet connected ?"));
+        this.set_applet_tooltip(_("Initializing"));
         //this.set_applet_label("NordVPN");
         this.connected = false;
         
@@ -145,26 +145,6 @@ class InternetIndicatorApplet extends Applet.TextIconApplet {
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    // THIS FUNCTION SHOULD BE REMOVED SOON IF NOT USED
-    _get_status(){
-        let status = this._run_cmd("nordvpn status");
-        let result = status.split("\n")[0].split(": ")[1];
-        let outString;
-        if (result === "Connected"){
-            this.connected = true;
-            outString = "ON";
-        }else if (result === "Disconnected"){
-            this.connected = false;
-            outString = "OFF";
-        }else{
-            this.connected = false,
-            outString = "..."
-        }
-        this.set_applet_label(outString);
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
     _update_loop() {
 		this._send_ping();	
 		this._updateLoopID = Mainloop.timeout_add(this.update_interval * 1000, Lang.bind(this, this._update_loop));
@@ -205,8 +185,9 @@ class InternetIndicatorApplet extends Applet.TextIconApplet {
 			{
 			  //printDebug("connected");
 			  oldStderr = stderr.toString();
-			  Util.spawnCommandLine("/usr/sbin/notify-send 'Internet OK'");
-              this.set_applet_tooltip(_("Internet is connected :)"));
+              let TextMessage = _("Internet OK");
+			  Util.spawnCommandLine("/usr/sbin/notify-send '" + TextMessage + "'");
+              this.set_applet_tooltip(TextMessage);
 			  this.update_interval = this.update_interval_when_internet;
 			  this.set_applet_icon_name("internet");
 			}
@@ -219,8 +200,9 @@ class InternetIndicatorApplet extends Applet.TextIconApplet {
 			{
 			  //printDebug("connected");
 			  oldStderr = stderr.toString();
-			  Util.spawnCommandLine("/usr/sbin/notify-send 'No internet'");
-              this.set_applet_tooltip(_("No Internet  :("));
+              let TextMessage = _("No Internet");
+			  Util.spawnCommandLine("/usr/sbin/notify-send '" + TextMessage + "'");
+              this.set_applet_tooltip(TextMessage);
 			  this.update_interval = this.update_interval_when_no_internet;
 			  this.set_applet_icon_name("no-internet");
 			}
@@ -240,6 +222,7 @@ class InternetIndicatorApplet extends Applet.TextIconApplet {
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    // NOT USED YET. FOR FUTURE USAGE
     testInternetFree() {
         
 		// INIT
