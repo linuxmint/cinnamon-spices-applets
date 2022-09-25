@@ -1,0 +1,6 @@
+{
+    "description": "A simple system controls applet to restart Cinnamon, lock the screen, switch users, log off, suspend, hibernate, reboot, or power off the computer",
+    "uuid": "system-controls@rcalixte",
+    "name": "System Controls Applet",
+    "max-instances": -1
+}
