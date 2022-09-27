@@ -1,7 +1,6 @@
 import { Logger } from "../../lib/logger";
-import { WeatherApplet } from "../../main";
 import { getTimes } from "suncalc";
-import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../../types";
+import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime, ImmediatePrecipitation } from "../../types";
 import { CelsiusToKelvin, IsNight, OnSameDay, _ } from "../../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
@@ -20,20 +19,57 @@ export class MetNorway extends BaseProvider {
 
 	private baseUrl = "https://api.met.no/weatherapi";
 
-	constructor(app: WeatherApplet) {
-		super(app);
-	}
-
 	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
-		const json = await this.app.LoadJsonAsync<MetNorwayForecastPayload>(`${this.baseUrl}/locationforecast/2.0/complete`, {lat: loc.lat, lon: loc.lon});
+		const [forecast, nowcast] = await Promise.all([
+			this.app.LoadJsonAsync<MetNorwayForecastPayload>(`${this.baseUrl}/locationforecast/2.0/complete`, {lat: loc.lat, lon: loc.lon}),
+			this.app.LoadJsonAsync<MetNorwayNowcastPayload>(`${this.baseUrl}/nowcast/2.0/complete`, {lat: loc.lat, lon: loc.lon}, (e) => e.ErrorData.code != 422),
+		]);
 
-
-		if (!json) {
+		if (!forecast) {
 			Logger.Error("MET Norway: Empty response from API");
 			return null;
 		}
 
-		return this.ParseWeather(json, loc);
+		const result = this.ParseWeather(forecast, loc);
+
+		if (nowcast != null) {
+			result.date = DateTime.fromISO(nowcast.properties.meta.updated_at, { zone: loc.timeZone });
+			result.temperature = CelsiusToKelvin(nowcast.properties.timeseries[0].data.instant.details.air_temperature);
+			result.condition = this.ResolveCondition(nowcast.properties.timeseries[0].data.next_1_hours.summary.symbol_code);
+			result.wind.degree = nowcast.properties.timeseries[0].data.instant.details.wind_from_direction;
+			result.wind.speed = nowcast.properties.timeseries[0].data.instant.details.wind_speed;
+			result.humidity = nowcast.properties.timeseries[0].data.instant.details.relative_humidity;
+
+			if (IsCovered(nowcast)) {
+				if (nowcast.properties.timeseries[0].data.next_1_hours.details.precipitation_amount > 0) {
+					const immediate: ImmediatePrecipitation = {
+						start: -1,
+						end: -1
+					}
+
+					for (let i = 0; i < nowcast.properties.timeseries.length; i++) {
+						const element = nowcast.properties.timeseries[i];
+						const next = nowcast.properties.timeseries[i+1];
+						// Next element is already in the past, skip this one
+						if (next != null && DateTime.fromISO(next.time).diffNow().milliseconds < 0) 
+							continue;
+
+						if (element.data.instant.details.precipitation_rate > 0 && immediate.start == -1) {
+							immediate.start = DateTime.fromISO(element.time).diffNow().minutes;
+							continue;
+						}
+						else if (element.data.instant.details.precipitation_rate == 0 && immediate.start != -1) {
+							immediate.end = DateTime.fromISO(element.time).diffNow().minutes;
+							break
+						}
+					}
+
+					result.immediatePrecipitation = immediate;
+				}
+			}
+		}
+
+		return result;
 	}
 
 	private RemoveEarlierElements(json: MetNorwayForecastPayload, loc: LocationData): MetNorwayForecastPayload {

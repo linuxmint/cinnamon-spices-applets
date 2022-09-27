@@ -26,24 +26,32 @@ interface MetNorwayNowcastBasePayload {
 				wind_speed: string;
 				wind_speed_of_gust: string;
 			}
-			radar_coverage: "no coverage" | "temporarily unavailable" | "ok"
+			radar_coverage: "no coverage" | "temporarily unavailable" | "ok";
 		}
+		timeseries: [MetNorwayNowcastFirstData & MetNorwayNowcastPrecipData, ...MetNorwayNowcastPrecipData[]] | [MetNorwayNowcastFirstData]
 	}
-	timeseries: [MetNorwayNowcastFirstData & MetNorwayNowcastPrecipData, ...MetNorwayNowcastPrecipData[]] | [MetNorwayNowcastFirstData]
 }
 
 export interface MetNorwayNowcastNoCoveragePayload extends MetNorwayNowcastBasePayload {
 	properties: {
-		meta: MetNorwayNowcastBasePayload["properties"]["meta"] & {radar_coverage: "no coverage" | "temporarily unavailable"};
+		meta: MetNorwayNowcastBasePayload["properties"]["meta"] & 
+		{
+			radar_coverage: "no coverage" | "temporarily unavailable";
+			
+		};
+		timeseries: [MetNorwayNowcastFirstData];
 	}
-	timeseries: [MetNorwayNowcastFirstData]
 }
 
 export interface MetNorwayNowcastCoveragePayload extends MetNorwayNowcastBasePayload {
 	properties: {
-		meta: MetNorwayNowcastBasePayload["properties"]["meta"] & {radar_coverage: "ok"};
+		meta: MetNorwayNowcastBasePayload["properties"]["meta"] & 
+		{
+			radar_coverage: "ok";
+			
+		};
+		timeseries: [MetNorwayNowcastFirstData & MetNorwayNowcastPrecipData, ...MetNorwayNowcastPrecipData[]];
 	}
-	timeseries: [MetNorwayNowcastFirstData & MetNorwayNowcastPrecipData, ...MetNorwayNowcastPrecipData[]]
 }
 
 export type MetNorwayNowcastPayload = MetNorwayNowcastCoveragePayload | MetNorwayNowcastNoCoveragePayload;
