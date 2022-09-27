@@ -10293,8 +10293,7 @@ class DarkSky extends BaseProvider {
     }
     ;
     async GetWeather(loc) {
-        const now = new Date(Date.now());
-        if (now.getUTCFullYear() > 2022) {
+        if (DateTime.fromObject({ year: 2023, month: 3, day: 31 }).diffNow().milliseconds < 0) {
             this.app.ShowError({
                 type: "hard",
                 detail: "no api response",
@@ -10411,21 +10410,6 @@ class DarkSky extends BaseProvider {
         }
         return query;
     }
-    HandleResponseErrors(json) {
-        const code = json.code;
-        const error = json.error;
-        const errorMsg = "DarkSky API: ";
-        logger_Logger.Debug("DarksSky API error payload: " + json);
-        switch (code) {
-            case "400":
-                logger_Logger.Error(errorMsg + error);
-                break;
-            default:
-                logger_Logger.Error(errorMsg + error);
-                break;
-        }
-    }
-    ;
     ProcessSummary(summary) {
         const processed = summary.split(" ");
         let result = "";
