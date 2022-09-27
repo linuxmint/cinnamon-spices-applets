@@ -36,25 +36,26 @@ You can also save locations what you entered manually and switch between them in
 
 ### OpenWeatherMap
 
-Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with headquaters in London UK. [OpenWeatherMap Website](https://openweathermap.org/). Read more about the service [here](https://en.wikipedia.org/wiki/OpenWeatherMap).
+Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with headquarters in London UK. [OpenWeatherMap Website](https://openweathermap.org/). Read more about the service [here](https://en.wikipedia.org/wiki/OpenWeatherMap).
 
 * This is the default provider that works out of the box. Big Thanks to them supporting free open source projects, like this!
 
 ### MET Norway
 
-Free meteorological data and forecasts from the Norwegian Meteorological Institute founded in 1866. [MET Norway Website](https://www.met.no/en). Read more about the institure [here](https://en.wikipedia.org/wiki/Norwegian_Meteorological_Institute).
+Free meteorological data and forecasts from the Norwegian Meteorological Institute founded in 1866. [MET Norway Website](https://www.met.no/en). Read more about the institute [here](https://en.wikipedia.org/wiki/Norwegian_Meteorological_Institute).
 
-* Current weather is shown for the next hour, and the daily forecasts are generated from 6 hour forecasts, so there is a possibility that they are inaccurate sometimes.
+* It doesn't support minutely precipitation and current weather is shown for the next hour outside Norway.
+* and the daily forecasts are generated from 6 hour forecasts, so there is a possibility that they are inaccurate sometimes.
 
 ### DMI Denmark
 
-The Danish Meteorological Institute formed in 1872 and makes weather forecasts and observations for Denmark, Greenland, and the Faroe Islands. [DMI Denmark Website](https://www.dmi.dk) Read more about the institure [here](https://en.wikipedia.org/wiki/Danish_Meteorological_Institute).
+The Danish Meteorological Institute formed in 1872 and makes weather forecasts and observations for Denmark, Greenland, and the Faroe Islands. [DMI Denmark Website](https://www.dmi.dk) Read more about the institute [here](https://en.wikipedia.org/wiki/Danish_Meteorological_Institute).
 
 * The service is global with open weather data.
 
 ### Deutscher Wetterdienst
 
-German National Weather Provider. [Deutsche Wetterdienst Website](https://www.dwd.de/DE/Home/home_node.html). Read more about the institure [here](https://en.wikipedia.org/wiki/Deutscher_Wetterdienst).
+German National Weather Provider. [Deutsche Wetterdienst Website](https://www.dwd.de/DE/Home/home_node.html). Read more about the institute [here](https://en.wikipedia.org/wiki/Deutscher_Wetterdienst).
 
 * Only covers Germany.
 
