@@ -9,8 +9,10 @@ const Settings = imports.ui.settings;
 const QUtils = require('./js/QUtils.js');
 const QIcon = QUtils.QIcon;
 
-
+// FOR TRANSLATION
+const Gettext = imports.gettext;
 const UUID = "internet-indicator@sangorys";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 
 var nbTry = 0;
 var message="init";
@@ -24,6 +26,12 @@ function printDebug(text) {
     if (debug == 1){
         global.log(text);
     }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+function _(str) {
+    return Gettext.dgettext(UUID, str);
 }
 
 
@@ -215,7 +223,7 @@ class InternetIndicatorApplet extends Applet.TextIconApplet {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // WARNING : IS NEVER CALLED !!!! WHY ?
     reloadApplet() {
-        let cmd = `dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'${this.metadata.uuid}' string:'APPLET'`;
+        let cmd = "dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'internet-indicator@sangorys' string:'APPLET'";
         printDebug(cmd);
         Util.spawnCommandLine(cmd);
     }
