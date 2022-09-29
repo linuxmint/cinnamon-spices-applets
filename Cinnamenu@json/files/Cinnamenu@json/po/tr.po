@@ -491,7 +491,7 @@ msgstr ""
 msgid "Show favorites on sidebar"
 msgstr "Kenar çubuğunda sık kullanılanları göster"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr ""
 "Kenar çubuğunda sık kullanılan uygulamaları ve dosya simgelerini gösterir"
 

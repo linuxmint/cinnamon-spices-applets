@@ -500,7 +500,7 @@ msgstr "Válassza ki, hogy hol jelenjen meg az oldalsáv"
 msgid "Show favorites on sidebar"
 msgstr "Kedvencek kategória megjelenítése az oldalsávon"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "A Kedvenc alkalmazások kategória megjelenítése az oldalsávon"
 
 msgid "Application description placement"

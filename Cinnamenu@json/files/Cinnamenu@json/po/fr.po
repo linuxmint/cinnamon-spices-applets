@@ -489,7 +489,7 @@ msgstr "Afficher les favoris dans la barre latérale"
 
 #, fuzzy
 #| msgid "Show your favorite app icons next to the session buttons"
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "Affiche les icônes de vos applications favorites à côté des boutons de session"
 
 msgid "Show recent items"

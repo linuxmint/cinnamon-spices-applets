@@ -482,7 +482,7 @@ msgstr ""
 msgid "Show favorites on sidebar"
 msgstr "Zobraziť obľúbené položky na bočnom paneli"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "Zobrazte na bočnom paneli ikony svojich obľúbených aplikácií a súborov"
 
 msgid "Show recent items"

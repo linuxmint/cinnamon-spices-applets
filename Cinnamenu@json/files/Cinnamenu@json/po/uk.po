@@ -327,7 +327,7 @@ msgstr ""
 msgid "Show favorites on sidebar"
 msgstr "Показати вибране на бічній панелі"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "Покажіть свої улюблені програми та значки файлів на бічній панелі"
 
 msgid "Show bookmarks and places"
