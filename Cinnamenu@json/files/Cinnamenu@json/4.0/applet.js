@@ -118,7 +118,7 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'applications-view-mode',    value: 'applicationsViewMode',  cb: this._refresh },
         { key: 'description-placement',     value: 'descriptionPlacement',  cb: this._refresh },
         { key: 'sidebar-placement',         value: 'sidebarPlacement',      cb: this._refresh },
-        { key: 'add-favorites',             value: 'addFavorites',          cb: this._refresh },
+        { key: 'sidebar-favorites',         value: 'sidebarFavorites',      cb: this._refresh },
 
         { key: 'show-places-category',      value: 'showPlaces',            cb: this._onEnablePlacesChange },
         { key: 'show-recents-category',     value: 'showRecents',           cb: this._onEnableRecentsChange },

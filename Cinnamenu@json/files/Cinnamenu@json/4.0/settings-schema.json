@@ -44,7 +44,7 @@
             "keys":[
                 "applications-view-mode",
                 "sidebar-placement",
-                "add-favorites",
+                "sidebar-favorites",
                 "description-placement",
                 "info-box"
             ]
@@ -164,11 +164,17 @@
         },
         "tooltip":"Choose where to show the sidebar"
     },
-    "add-favorites":{
-        "type":"switch",
-        "default":true,
+    "sidebar-favorites":{
+        "type":"combobox",
+        "default":3,
         "description":"Show favorites on sidebar",
-        "tooltip":"Show your favorite app and file icons on the sidebar"
+        "options":{
+            "None":0,
+            "Apps only":1,
+            "Files only":2,
+            "Apps and files":3
+        },
+        "tooltip":"Show your favorite apps and file icons on the sidebar"
     },
     "description-placement":{
         "type":"combobox",
