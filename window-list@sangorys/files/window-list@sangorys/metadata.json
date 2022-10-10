@@ -1,7 +1,7 @@
 {
- "uuid": "window-list@cinnamon.org",
- "name": "Window list",
- "description": "Main Cinnamon window list",
+ "uuid": "window-list@sangorys",
+ "name": "Sangorys Window list",
+ "description": "Main Cinnamon window list + some improvemnents",
  "icon": "cs-windows",
  "role": "windowattentionhandler",
  "max-instances": -1
