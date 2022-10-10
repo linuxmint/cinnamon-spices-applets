@@ -499,7 +499,7 @@ msgstr "Scegli se mostrare o meno la barra laterale"
 msgid "Show favorites on sidebar"
 msgstr "Mostra preferiti sulla barra laterale"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "Mostra le icone delle tue app e file preferiti sulla barra laterale"
 
 msgid "Application description placement"

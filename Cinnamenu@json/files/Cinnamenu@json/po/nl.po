@@ -486,7 +486,7 @@ msgstr ""
 msgid "Show favorites on sidebar"
 msgstr "Favorieten weergeven in zijbalk"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "Toon uw favoriete app- en bestandspictogrammen in de zijbalk"
 
 msgid "Show recent items"

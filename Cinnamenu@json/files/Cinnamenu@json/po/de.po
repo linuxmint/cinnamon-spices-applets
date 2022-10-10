@@ -501,7 +501,7 @@ msgstr ""
 msgid "Show favorites on sidebar"
 msgstr "Favoriten in der Seitenleiste anzeigen"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "Favoriten in der Seitenleiste anzeigen"
 
 msgid "Application description placement"
