@@ -65,6 +65,8 @@ const SignalManager = imports.misc.signalManager;
 const Tooltips = imports.ui.tooltips;
 const WindowUtils = imports.misc.windowUtils;
 
+const appletDirectory = AppletManager.appletMeta["window-list@sangorys"].path;
+
 const MAX_TEXT_LENGTH = 1000;
 const FLASH_INTERVAL = 500;
 const FLASH_MAX_COUNT = 4;
@@ -86,11 +88,9 @@ function printDebug(text) {
 function fileAppend(text) {
     if (debug == 1){
         try {
-            let file = Gio.file_new_for_path("/home/sangorys/.local/share/cinnamon/applets/window-list@sangorys/windowOrderHistory.txt");
+            let file = Gio.file_new_for_path(appletDirectory + "/windowOrderHistory.txt");
             let out = file.append_to (Gio.FileCreateFlags.NONE, null);
             out.write (text, null);
-            //out.println();
-            //let lineSeparator = System.getProperty("line.separator");
             out.write ("\n", null);
             out.close(null);
         } catch(error) { global.log(error) };
@@ -1476,7 +1476,7 @@ class CinnamonWindowListApplet extends Applet.Applet {
         
         if (isOrderToSavedToFile) {
             try {
-                let file = Gio.file_new_for_path("/home/sangorys/.local/share/cinnamon/applets/window-list@sangorys/windowOrder.txt");
+                let file = Gio.file_new_for_path(appletDirectory + "/windowOrder.txt");
                 let raw = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
                 let out = Gio.BufferedOutputStream.new_sized (raw, 4096);
                 Cinnamon.write_string_to_stream(out, this.lastWindowOrder);
