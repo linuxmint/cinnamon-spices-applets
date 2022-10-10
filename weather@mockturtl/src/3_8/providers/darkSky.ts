@@ -58,8 +58,7 @@ export class DarkSky extends BaseProvider {
 	//  Functions
 	//--------------------------------------------------------
 	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
-		const now = new Date(Date.now());
-		if (now.getUTCFullYear() > 2022) {
+		if (DateTime.fromObject({year: 2023, month: 3, day: 31}).diffNow().milliseconds < 0) {
 			this.app.ShowError(
 				{
 					type: "hard",
@@ -221,21 +220,6 @@ export class DarkSky extends BaseProvider {
 		}
 		return true;
 	}
-
-	private HandleResponseErrors(json: any): void {
-		const code = json.code;
-		const error = json.error;
-		const errorMsg = "DarkSky API: "
-		Logger.Debug("DarksSky API error payload: " + json);
-		switch (code) {
-			case "400":
-				Logger.Error(errorMsg + error);
-				break;
-			default:
-				Logger.Error(errorMsg + error);
-				break
-		}
-	};
 
 	private ProcessSummary(summary: string): string {
 		const processed = summary.split(" ");

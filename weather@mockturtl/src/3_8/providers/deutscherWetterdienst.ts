@@ -312,7 +312,7 @@ export class DeutscherWetterdienst extends BaseProvider {
     }
 
     private HandleErrors = (message: ErrorResponse): boolean => {
-        if (message.Response?.status_code == 404) {
+        if (message.ErrorData.code == 404) {
             this.app.ShowError({
                 detail: "location not covered",
                 message: _("Please select a different provider or location"),

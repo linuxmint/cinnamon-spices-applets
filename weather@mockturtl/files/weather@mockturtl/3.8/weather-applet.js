@@ -10293,8 +10293,7 @@ class DarkSky extends BaseProvider {
     }
     ;
     async GetWeather(loc) {
-        const now = new Date(Date.now());
-        if (now.getUTCFullYear() > 2022) {
+        if (DateTime.fromObject({ year: 2023, month: 3, day: 31 }).diffNow().milliseconds < 0) {
             this.app.ShowError({
                 type: "hard",
                 detail: "no api response",
@@ -10411,21 +10410,6 @@ class DarkSky extends BaseProvider {
         }
         return query;
     }
-    HandleResponseErrors(json) {
-        const code = json.code;
-        const error = json.error;
-        const errorMsg = "DarkSky API: ";
-        logger_Logger.Debug("DarksSky API error payload: " + json);
-        switch (code) {
-            case "400":
-                logger_Logger.Error(errorMsg + error);
-                break;
-            default:
-                logger_Logger.Error(errorMsg + error);
-                break;
-        }
-    }
-    ;
     ProcessSummary(summary) {
         const processed = summary.split(" ");
         let result = "";
@@ -10959,15 +10943,67 @@ const openWeatherMapConditionLibrary = [
     _("Overcast clouds")
 ];
 
-;// CONCATENATED MODULE: ./src/3_8/providers/met_norway.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/types/common.ts
+const conditionSeverity = {
+    clearsky: 1,
+    cloudy: 4,
+    fair: 2,
+    fog: 15,
+    heavyrain: 10,
+    heavyrainandthunder: 11,
+    heavyrainshowers: 41,
+    heavyrainshowersandthunder: 25,
+    heavysleet: 48,
+    heavysleetandthunder: 32,
+    heavysleetshowers: 43,
+    heavysleetshowersandthunder: 27,
+    heavysnow: 50,
+    heavysnowandthunder: 34,
+    heavysnowshowers: 45,
+    heavysnowshowersandthunder: 29,
+    lightrain: 46,
+    lightrainandthunder: 30,
+    lightrainshowers: 40,
+    lightrainshowersandthunder: 24,
+    lightsleet: 47,
+    lightsleetandthunder: 31,
+    lightsleetshowers: 42,
+    lightsnow: 49,
+    lightsnowandthunder: 33,
+    lightsnowshowers: 44,
+    lightssleetshowersandthunder: 26,
+    lightssnowshowersandthunder: 28,
+    partlycloudy: 3,
+    rain: 9,
+    rainandthunder: 22,
+    rainshowers: 5,
+    rainshowersandthunder: 6,
+    sleet: 12,
+    sleetandthunder: 23,
+    sleetshowers: 7,
+    sleetshowersandthunder: 20,
+    snow: 13,
+    snowandthunder: 14,
+    snowshowers: 8,
+    snowshowersandthunder: 21
+};
+
+;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/types/nowcast.ts
+function IsCovered(payload) {
+    return payload.properties.meta.radar_coverage == "ok";
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/provider.ts
+
+
 
 
 
 
 
 class MetNorway extends BaseProvider {
-    constructor(app) {
-        super(app);
+    constructor() {
+        super(...arguments);
         this.prettyName = _("MET Norway");
         this.name = "MetNorway";
         this.maxForecastSupport = 10;
@@ -10975,18 +11011,50 @@ class MetNorway extends BaseProvider {
         this.maxHourlyForecastSupport = 48;
         this.needsApiKey = false;
         this.remainingCalls = null;
-        this.baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?";
+        this.baseUrl = "https://api.met.no/weatherapi";
     }
     async GetWeather(loc) {
-        const query = this.GetUrl(loc);
-        if (query == null)
-            return null;
-        const json = await this.app.LoadJsonAsync(query);
-        if (!json) {
+        const [forecast, nowcast] = await Promise.all([
+            this.app.LoadJsonAsync(`${this.baseUrl}/locationforecast/2.0/complete`, { lat: loc.lat, lon: loc.lon }),
+            this.app.LoadJsonAsync(`${this.baseUrl}/nowcast/2.0/complete`, { lat: loc.lat, lon: loc.lon }, (e) => e.ErrorData.code != 422),
+        ]);
+        if (!forecast) {
             logger_Logger.Error("MET Norway: Empty response from API");
             return null;
         }
-        return this.ParseWeather(json, loc);
+        const result = this.ParseWeather(forecast, loc);
+        if (nowcast != null) {
+            result.date = DateTime.fromISO(nowcast.properties.meta.updated_at, { zone: loc.timeZone });
+            result.temperature = CelsiusToKelvin(nowcast.properties.timeseries[0].data.instant.details.air_temperature);
+            result.condition = this.ResolveCondition(nowcast.properties.timeseries[0].data.next_1_hours.summary.symbol_code);
+            result.wind.degree = nowcast.properties.timeseries[0].data.instant.details.wind_from_direction;
+            result.wind.speed = nowcast.properties.timeseries[0].data.instant.details.wind_speed;
+            result.humidity = nowcast.properties.timeseries[0].data.instant.details.relative_humidity;
+            if (IsCovered(nowcast)) {
+                if (nowcast.properties.timeseries[0].data.next_1_hours.details.precipitation_amount > 0) {
+                    const immediate = {
+                        start: -1,
+                        end: -1
+                    };
+                    for (let i = 0; i < nowcast.properties.timeseries.length; i++) {
+                        const element = nowcast.properties.timeseries[i];
+                        const next = nowcast.properties.timeseries[i + 1];
+                        if (next != null && DateTime.fromISO(next.time).diffNow().milliseconds < 0)
+                            continue;
+                        if (element.data.instant.details.precipitation_rate > 0 && immediate.start == -1) {
+                            immediate.start = DateTime.fromISO(element.time).diffNow().minutes;
+                            continue;
+                        }
+                        else if (element.data.instant.details.precipitation_rate == 0 && immediate.start != -1) {
+                            immediate.end = DateTime.fromISO(element.time).diffNow().minutes;
+                            break;
+                        }
+                    }
+                    result.immediatePrecipitation = immediate;
+                }
+            }
+        }
+        return result;
     }
     RemoveEarlierElements(json, loc) {
         const now = DateTime.now().setZone(loc.timeZone);
@@ -11128,33 +11196,30 @@ class MetNorway extends BaseProvider {
         return days;
     }
     GetMostCommonCondition(count) {
-        let result = -1;
+        let result = null;
         for (const key in count) {
-            if (result == -1)
-                result = parseInt(key);
-            if (count[result].count < count[key].count)
+            if (result == null || count[result].count < count[key].count)
                 result = parseInt(key);
         }
+        if (result == null)
+            return null;
         return count[result].name;
     }
     GetMostSevereCondition(conditions) {
-        let result = -1;
+        let result = null;
         for (const key in conditions) {
             const conditionID = parseInt(key);
-            const resultStripped = (result > 100) ? result - 100 : result;
+            const resultStripped = result == null ? -1 : (result > 100) ? result - 100 : result;
             const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
             if (conditionIDStripped > resultStripped)
                 result = conditionID;
         }
+        if (result == null)
+            return null;
         if (result <= 4) {
             return this.GetMostCommonCondition(conditions);
         }
         return conditions[result].name;
-    }
-    GetUrl(loc) {
-        let url = this.baseUrl + "lat=";
-        url += (loc.lat + "&lon=" + loc.lon);
-        return url;
     }
     DeconstructCondition(icon) {
         const condition = icon.split("_");
@@ -11473,49 +11538,6 @@ class MetNorway extends BaseProvider {
         }
     }
 }
-const conditionSeverity = {
-    clearsky: 1,
-    cloudy: 4,
-    fair: 2,
-    fog: 15,
-    heavyrain: 10,
-    heavyrainandthunder: 11,
-    heavyrainshowers: 41,
-    heavyrainshowersandthunder: 25,
-    heavysleet: 48,
-    heavysleetandthunder: 32,
-    heavysleetshowers: 43,
-    heavysleetshowersandthunder: 27,
-    heavysnow: 50,
-    heavysnowandthunder: 34,
-    heavysnowshowers: 45,
-    heavysnowshowersandthunder: 29,
-    lightrain: 46,
-    lightrainandthunder: 30,
-    lightrainshowers: 40,
-    lightrainshowersandthunder: 24,
-    lightsleet: 47,
-    lightsleetandthunder: 31,
-    lightsleetshowers: 42,
-    lightsnow: 49,
-    lightsnowandthunder: 33,
-    lightsnowshowers: 44,
-    lightssleetshowersandthunder: 26,
-    lightssnowshowersandthunder: 28,
-    partlycloudy: 3,
-    rain: 9,
-    rainandthunder: 22,
-    rainshowers: 5,
-    rainshowersandthunder: 6,
-    sleet: 12,
-    sleetandthunder: 23,
-    sleetshowers: 7,
-    sleetshowersandthunder: 20,
-    snow: 13,
-    snowandthunder: 14,
-    snowshowers: 8,
-    snowshowersandthunder: 21
-};
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/weatherbit.ts
 
@@ -13816,8 +13838,7 @@ class DeutscherWetterdienst extends BaseProvider {
         this.remainingCalls = null;
         this.baseUrl = "https://api.brightsky.dev/";
         this.HandleErrors = (message) => {
-            var _a;
-            if (((_a = message.Response) === null || _a === void 0 ? void 0 : _a.status_code) == 404) {
+            if (message.ErrorData.code == 404) {
                 this.app.ShowError({
                     detail: "location not covered",
                     message: _("Please select a different provider or location"),
@@ -16535,9 +16556,9 @@ class HttpLib {
             response.Data = payload;
         }
         catch (e) {
-            if (e instanceof Error)
-                logger_Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
             if (response.Success) {
+                if (e instanceof Error)
+                    logger_Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
                 response.Success = false;
                 response.ErrorData = {
                     code: -1,
@@ -16591,7 +16612,7 @@ class HttpLib {
         }
         logger_Logger.Verbose("API full response: " + ((_c = message === null || message === void 0 ? void 0 : message.response_body) === null || _c === void 0 ? void 0 : _c.toString()));
         if (error != null)
-            logger_Logger.Error("Error calling URL: " + error.reason_phrase + ", " + ((_d = error === null || error === void 0 ? void 0 : error.response) === null || _d === void 0 ? void 0 : _d.response_body));
+            logger_Logger.Info("Error calling URL: " + error.reason_phrase + ", " + ((_d = error === null || error === void 0 ? void 0 : error.response) === null || _d === void 0 ? void 0 : _d.response_body));
         return {
             Success: (error == null),
             Data: ((_e = message === null || message === void 0 ? void 0 : message.response_body) !== null && _e !== void 0 ? _e : null),

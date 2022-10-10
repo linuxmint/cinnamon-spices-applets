@@ -12,7 +12,7 @@ import { MetUk } from "./providers/met_uk";
 import { BaseProvider } from "./providers/BaseProvider";
 import { DarkSky } from "./providers/darkSky";
 import { OpenWeatherMap } from "./providers/openWeatherMap";
-import { MetNorway } from "./providers/met_norway";
+import { MetNorway } from "./providers/met_norway/provider";
 import { Weatherbit } from "./providers/weatherbit";
 import { ClimacellV4 } from "./providers/climacellV4";
 import { USWeather } from "./providers/us_weather";

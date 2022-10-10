@@ -265,7 +265,7 @@
 		"type": "checkbox",
 		"default": false,
 		"description": "Enable minutely precipitation forecast",
-		"tooltip": "If you'd like to use this make sure you use your exact coordinates/address as location to help its accuracy. Currently implemented with OpenWeatherMap only."
+		"tooltip": "If you'd like to use this make sure you use your exact coordinates/address as location to help its accuracy. Currently implemented with OpenWeatherMap and MET Norway only."
 	},
 	"temperatureUnit": {
 		"type": "radiogroup",

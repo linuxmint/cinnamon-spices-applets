@@ -23,10 +23,10 @@ export class HttpLib {
 			response.Data = payload;
 		}
 		catch (e) { // Payload is not JSON
-			if (e instanceof Error)
-				Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
 			// Only care about JSON parse errors if the request was successful before
 			if (response.Success) {
+				if (e instanceof Error)
+				 	Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
 				(<GenericResponse>response).Success = false;
 				(<GenericResponse>response).ErrorData = {
 					code: -1,
@@ -34,7 +34,6 @@ export class HttpLib {
 					reason_phrase: "",
 				}
 			}
-			
 		}
 		finally {
 			return response as Response<T, E>;
@@ -90,7 +89,7 @@ export class HttpLib {
 
 		Logger.Verbose("API full response: " + message?.response_body?.toString());
 		if (error != null)
-			Logger.Error("Error calling URL: " + error.reason_phrase + ", " + error?.response?.response_body);
+			Logger.Info("Error calling URL: " + error.reason_phrase + ", " + error?.response?.response_body);
 		return <GenericResponse>{
 			Success: (error == null),
 			Data: (message?.response_body ?? null),
@@ -130,7 +129,6 @@ interface GenericSuccessResponse extends BaseGenericResponse {
 interface BaseGenericResponse {
 	Data: any | undefined;
 	ResponseHeaders: Record<string, string>;
-	Response: imports.gi.Soup.Message | null;
 }
 
 export interface HTTPParams {

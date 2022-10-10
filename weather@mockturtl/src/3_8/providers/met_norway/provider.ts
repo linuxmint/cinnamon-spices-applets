@@ -1,10 +1,12 @@
-import { Logger } from "../lib/logger";
-import { WeatherApplet } from "../main";
+import { Logger } from "../../lib/logger";
 import { getTimes } from "suncalc";
-import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime } from "../types";
-import { CelsiusToKelvin, IsNight, OnSameDay, _ } from "../utils";
+import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime, ImmediatePrecipitation } from "../../types";
+import { CelsiusToKelvin, IsNight, OnSameDay, _ } from "../../utils";
 import { DateTime } from "luxon";
-import { BaseProvider } from "./BaseProvider";
+import { BaseProvider } from "../BaseProvider";
+import { Conditions, conditionSeverity, TimeOfDay } from "./types/common";
+import { IsCovered, MetNorwayNowcastPayload } from "./types/nowcast";
+import { MetNorwayForecastData, MetNorwayForecastPayload } from "./types/forecast";
 
 export class MetNorway extends BaseProvider {
 	public readonly prettyName = _("MET Norway");
@@ -15,28 +17,62 @@ export class MetNorway extends BaseProvider {
 	public readonly needsApiKey = false;
 	public readonly remainingCalls: number | null = null;
 
-	private baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?"
-
-	constructor(app: WeatherApplet) {
-		super(app);
-	}
+	private baseUrl = "https://api.met.no/weatherapi";
 
 	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
-		const query = this.GetUrl(loc);
-		if (query == null)
-			return null;
+		const [forecast, nowcast] = await Promise.all([
+			this.app.LoadJsonAsync<MetNorwayForecastPayload>(`${this.baseUrl}/locationforecast/2.0/complete`, {lat: loc.lat, lon: loc.lon}),
+			this.app.LoadJsonAsync<MetNorwayNowcastPayload>(`${this.baseUrl}/nowcast/2.0/complete`, {lat: loc.lat, lon: loc.lon}, (e) => e.ErrorData.code != 422),
+		]);
 
-		const json = await this.app.LoadJsonAsync<MetNorwayPayload>(query);
-
-		if (!json) {
+		if (!forecast) {
 			Logger.Error("MET Norway: Empty response from API");
 			return null;
 		}
 
-		return this.ParseWeather(json, loc);
+		const result = this.ParseWeather(forecast, loc);
+
+		if (nowcast != null) {
+			result.date = DateTime.fromISO(nowcast.properties.meta.updated_at, { zone: loc.timeZone });
+			result.temperature = CelsiusToKelvin(nowcast.properties.timeseries[0].data.instant.details.air_temperature);
+			result.condition = this.ResolveCondition(nowcast.properties.timeseries[0].data.next_1_hours.summary.symbol_code);
+			result.wind.degree = nowcast.properties.timeseries[0].data.instant.details.wind_from_direction;
+			result.wind.speed = nowcast.properties.timeseries[0].data.instant.details.wind_speed;
+			result.humidity = nowcast.properties.timeseries[0].data.instant.details.relative_humidity;
+
+			if (IsCovered(nowcast)) {
+				if (nowcast.properties.timeseries[0].data.next_1_hours.details.precipitation_amount > 0) {
+					const immediate: ImmediatePrecipitation = {
+						start: -1,
+						end: -1
+					}
+
+					for (let i = 0; i < nowcast.properties.timeseries.length; i++) {
+						const element = nowcast.properties.timeseries[i];
+						const next = nowcast.properties.timeseries[i+1];
+						// Next element is already in the past, skip this one
+						if (next != null && DateTime.fromISO(next.time).diffNow().milliseconds < 0) 
+							continue;
+
+						if (element.data.instant.details.precipitation_rate > 0 && immediate.start == -1) {
+							immediate.start = DateTime.fromISO(element.time).diffNow().minutes;
+							continue;
+						}
+						else if (element.data.instant.details.precipitation_rate == 0 && immediate.start != -1) {
+							immediate.end = DateTime.fromISO(element.time).diffNow().minutes;
+							break
+						}
+					}
+
+					result.immediatePrecipitation = immediate;
+				}
+			}
+		}
+
+		return result;
 	}
 
-	private RemoveEarlierElements(json: MetNorwayPayload, loc: LocationData): MetNorwayPayload {
+	private RemoveEarlierElements(json: MetNorwayForecastPayload, loc: LocationData): MetNorwayForecastPayload {
 		const now = DateTime.now().setZone(loc.timeZone);
 		let startIndex = -1;
 		for (const [i, element] of json.properties.timeseries.entries()) {
@@ -57,7 +93,7 @@ export class MetNorway extends BaseProvider {
 		return json;
 	}
 
-	private ParseWeather(json: MetNorwayPayload, loc: LocationData): WeatherData {
+	private ParseWeather(json: MetNorwayForecastPayload, loc: LocationData): WeatherData {
 		json = this.RemoveEarlierElements(json, loc);
 
 		const times = (getTimes as correctGetTimes)(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
@@ -114,7 +150,7 @@ export class MetNorway extends BaseProvider {
 		return result;
 	}
 
-	private BuildForecasts(forecastsData: MetNorwayData[], loc: LocationData): ForecastData[] {
+	private BuildForecasts(forecastsData: MetNorwayForecastData[], loc: LocationData): ForecastData[] {
 		const forecasts: ForecastData[] = [];
 		const days = this.SortDataByDay(forecastsData, loc);
 
@@ -162,7 +198,7 @@ export class MetNorway extends BaseProvider {
 	//
 	// -----------------------------------------------
 
-	private GetEarliestDataForToday(events: MetNorwayData[], loc: LocationData): MetNorwayData {
+	private GetEarliestDataForToday(events: MetNorwayForecastData[], loc: LocationData): MetNorwayForecastData {
 		let earliest: number = 0;
 		for (const [i, element] of events.entries()) {
 			const earliestElementTime = DateTime.fromISO(element.time, { zone: loc.timeZone });
@@ -177,8 +213,8 @@ export class MetNorway extends BaseProvider {
 		return events[earliest];
 	}
 
-	private SortDataByDay(data: MetNorwayData[], loc: LocationData): MetNorwayData[][] {
-		const days: MetNorwayData[][] = []
+	private SortDataByDay(data: MetNorwayForecastData[], loc: LocationData): MetNorwayForecastData[][] {
+		const days: MetNorwayForecastData[][] = []
 		// Sort and containerize forecasts by date
 		let currentDay = DateTime.fromISO(this.GetEarliestDataForToday(data, loc).time, { zone: loc.timeZone });
 		let dayIndex = 0;
@@ -199,40 +235,39 @@ export class MetNorway extends BaseProvider {
 		return days;
 	}
 
-	private GetMostCommonCondition(count: ConditionCount): string {
-		let result: number = -1;
+	private GetMostCommonCondition(count: ConditionCount): string | null {
+		let result: number | null = null;
 		for (const key in count) {
-			if (result == -1) result = parseInt(key);
-			if (count[result].count < count[key].count) result = parseInt(key);
+			if (result == null || count[result].count < count[key].count)
+				result = parseInt(key);
 		}
+
+		if (result == null)
+			return null;
+
 		return count[result].name;
 	}
 
-	private GetMostSevereCondition(conditions: ConditionCount): string {
-		// for Weather conditions
-		//this.app.log.Debug(JSON.stringify(conditions));
-
+	private GetMostSevereCondition(conditions: ConditionCount): string | null {
 		// We want to know the worst condition
-		let result: number = -1;
+		let result: number | null = null;
 		for (const key in conditions) {
 			const conditionID = parseInt(key);
 			// Polar night id's are above 100, make sure to remove them for checking
-			const resultStripped = (result > 100) ? result - 100 : result;
+			const resultStripped = result == null ? -1 : (result > 100) ? result - 100 : result;
 			const conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
 			// Make the comparison, keep the polar night condition id
 			if (conditionIDStripped > resultStripped) result = conditionID;
 		}
+
+		if (result == null)
+			return null;
+
 		// If there is no rain or worse, just get the most common condition for the day
 		if (result <= 4) {
 			return this.GetMostCommonCondition(conditions);
 		}
 		return conditions[result].name;
-	}
-
-	private GetUrl(loc: LocationData): string {
-		let url = this.baseUrl + "lat=";
-		url += (loc.lat + "&lon=" + loc.lon);
-		return url;
 	}
 
 	private DeconstructCondition(icon: string) {
@@ -244,7 +279,7 @@ export class MetNorway extends BaseProvider {
 		}
 	}
 
-	private ResolveCondition(icon: string | undefined, isNight: boolean = false): Condition {
+	private ResolveCondition(icon: string | undefined | null, isNight: boolean = false): Condition {
 		if (icon == null) {
 			Logger.Error("Icon was not found");
 			return {
@@ -567,144 +602,6 @@ export class MetNorway extends BaseProvider {
 	}
 }
 
-/** https://api.met.no/weatherapi/weathericon/2.0/documentation#!/data/get_legends */
-const conditionSeverity: ConditionProperties = {
-	clearsky: 1,
-	cloudy: 4,
-	fair: 2,
-	fog: 15,
-	heavyrain: 10,
-	heavyrainandthunder: 11,
-	heavyrainshowers: 41,
-	heavyrainshowersandthunder: 25,
-	heavysleet: 48,
-	heavysleetandthunder: 32,
-	heavysleetshowers: 43,
-	heavysleetshowersandthunder: 27,
-	heavysnow: 50,
-	heavysnowandthunder: 34,
-	heavysnowshowers: 45,
-	heavysnowshowersandthunder: 29,
-	lightrain: 46,
-	lightrainandthunder: 30,
-	lightrainshowers: 40,
-	lightrainshowersandthunder: 24,
-	lightsleet: 47,
-	lightsleetandthunder: 31,
-	lightsleetshowers: 42,
-	lightsnow: 49,
-	lightsnowandthunder: 33,
-	lightsnowshowers: 44,
-	lightssleetshowersandthunder: 26,
-	lightssnowshowersandthunder: 28,
-	partlycloudy: 3,
-	rain: 9,
-	rainandthunder: 22,
-	rainshowers: 5,
-	rainshowersandthunder: 6,
-	sleet: 12,
-	sleetandthunder: 23,
-	sleetshowers: 7,
-	sleetshowersandthunder: 20,
-	snow: 13,
-	snowandthunder: 14,
-	snowshowers: 8,
-	snowshowersandthunder: 21
-}
-
-interface MetNorwayPayload {
-	type: string,
-	geometry: {
-		type: string,
-		/** lon, lat, alt */
-		coordinates: number[]
-	},
-	properties: {
-		meta: {
-			updated_at: string,
-			units: {
-				air_pressure_at_sea_level: string,
-				air_temperature: string,
-				air_temperature_max: string,
-				air_temperature_min: string,
-				cloud_area_fraction: string,
-				cloud_area_fraction_high: string,
-				cloud_area_fraction_low: string,
-				cloud_area_fraction_medium: string,
-				dew_point_temperature: string,
-				fog_area_fraction: string,
-				precipitation_amount: string,
-				relative_humidity: string,
-				ultraviolet_index_clear_sky: string,
-				wind_from_direction: string,
-				wind_speed: string
-			}
-		},
-		timeseries: MetNorwayData[]
-	}
-}
-
-interface MetNorwayData {
-	time: string,
-	data: {
-		instant: {
-			details: {
-				/**hPa */
-				air_pressure_at_sea_level: number,
-				/** C */
-				air_temperature: number,
-				/** % */
-				cloud_area_fraction: number,
-				/** % */
-				cloud_area_fraction_high: number,
-				/** % */
-				cloud_area_fraction_low: number,
-				/** % */
-				cloud_area_fraction_medium: number,
-				/** C */
-				dew_point_temperature: number,
-				/** % */
-				fog_area_fraction: number,
-				/** % */
-				relative_humidity: number,
-				/** 1 */
-				ultraviolet_index_clear_sky: number,
-				/** degrees */
-				wind_from_direction: number,
-				/** m/s */
-				wind_speed: number
-			}
-		},
-		next_12_hour?: {
-			summary: {
-				symbol_code: string
-			}
-		},
-		next_1_hours?: {
-			summary: {
-				symbol_code: string
-			},
-			details: {
-				/** mm */
-				precipitation_amount: number
-			}
-		},
-		next_6_hours?: {
-			summary: {
-				symbol_code: string
-			},
-			details: {
-				/** C */
-				air_temperature_max: number,
-				/** C */
-				air_temperature_min: number,
-				/** mm */
-				precipitation_amount: number
-			}
-		}
-	}
-}
-
 interface ConditionCount {
 	[key: number]: METCondition
 }
@@ -713,52 +610,3 @@ interface METCondition {
 	count: number;
 	name: Conditions;
 }
-
-type TimeOfDay = "day" | "night" | "polartwilight";
-
-type ConditionProperties = {
-	[key in Conditions]: number
-}
-
-type Conditions =
-	"clearsky" |
-	"cloudy" |
-	"fair" |
-	"fog" |
-	"heavyrain" |
-	"heavyrainandthunder" |
-	"heavyrainshowers" |
-	"heavyrainshowersandthunder" |
-	"heavysleet" |
-	"heavysleetandthunder" |
-	"heavysleetshowers" |
-	"heavysleetshowersandthunder" |
-	"heavysnow" |
-	"heavysnowandthunder" |
-	"heavysnowshowers" |
-	"heavysnowshowersandthunder" |
-	"lightrain" |
-	"lightrainandthunder" |
-	"lightrainshowers" |
-	"lightrainshowersandthunder" |
-	"lightsleet" |
-	"lightsleetandthunder" |
-	"lightsleetshowers" |
-	"lightsnow" |
-	"lightsnowandthunder" |
-	"lightsnowshowers" |
-	"lightssleetshowersandthunder" |
-	"lightssnowshowersandthunder" |
-	"partlycloudy" |
-	"rain" |
-	"rainandthunder" |
-	"rainshowers" |
-	"rainshowersandthunder" |
-	"sleet" |
-	"sleetandthunder" |
-	"sleetshowers" |
-	"sleetshowersandthunder" |
-	"snow" |
-	"snowandthunder" |
-	"snowshowers" |
-	"snowshowersandthunder";
