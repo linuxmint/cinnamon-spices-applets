@@ -75,30 +75,6 @@ const FLASH_MAX_COUNT = 4;
 const WINDOW_PREVIEW_WIDTH = 200;
 const WINDOW_PREVIEW_HEIGHT = 150;
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-var debug = 0;
-
-function printDebug(text) {
-    if (debug == 1){
-        global.log(text);
-    }
-}
-
-
-function fileAppend(text) {
-    if (debug == 1){
-        try {
-            let file = Gio.file_new_for_path(tempDirectory + "/window-list-OrderHistory.txt");
-            let out = file.append_to (Gio.FileCreateFlags.NONE, null);
-            out.write (text, null);
-            out.write ("\n", null);
-            out.close(null);
-        } catch(error) { global.log(error) };
-    }
-}
-
-
 class WindowPreview extends Tooltips.TooltipBase {
     constructor(item, metaWindow, previewScale, showLabel) {
         super(item.actor);
@@ -1063,7 +1039,7 @@ class CinnamonWindowListApplet extends Applet.Applet {
         this._windows = [];
         this._monitorWatchList = [];
 
-        this.settings = new Settings.AppletSettings(this, "window-list@sangorys", this.instance_id);
+        this.settings = new Settings.AppletSettings(this, "window-list@cinnamon.org", this.instance_id);
 
         this.settings.bind("show-all-workspaces", "showAllWorkspaces");
         this.settings.bind("enable-alerts", "enableAlerts", this._updateAttentionGrabber);
@@ -1380,15 +1356,11 @@ class CinnamonWindowListApplet extends Applet.Applet {
             }
         }
 
-        this._saveOrder(true);
-        
+        this._saveOrder();
         this._updateAllIconGeometry();
     }
 
     _removeWindow(metaWindow) {
-        printDebug("_removeWindow()");
-
-        
         let i = this._windows.length;
         // Do an inverse loop because we might remove some elements
         while (i--) {
@@ -1413,23 +1385,6 @@ class CinnamonWindowListApplet extends Applet.Applet {
     */
 
     _applySavedOrder() {
-        printDebug("_applySavedOrder()");
-
-        let savedLastWindowOrder = "";
-
-        try{
-            savedLastWindowOrder = "";
-            savedLastWindowOrder = Cinnamon.get_file_contents_utf8_sync(tempDirectory + "/window-list-Order.txt");
-        }
-        catch (e) {	global.logError(e);	}
-        
-        if (savedLastWindowOrder != this.lastWindowOrder) {
-            this.lastWindowOrder = savedLastWindowOrder
-            printDebug("different");
-            printDebug("this.lastWindowOrder   =" + this.lastWindowOrder);
-            printDebug("savedLastWindowOrder=" + savedLastWindowOrder);
-        }
-
         let order = this.lastWindowOrder.split("::");
 
         order.reverse();
@@ -1445,16 +1400,13 @@ class CinnamonWindowListApplet extends Applet.Applet {
 
             if (found) {
                 this.manager_container.set_child_at_index(found.actor, 0);
-                printDebug("found.xid=" + found.xid + " | found.actor=" + found.actor);
             }
         }
 
-        this._saveOrder(true);
-        printDebug("_applySavedOrder().end\n");
-   }
+        this._saveOrder();
+    }
 
-    _saveOrder(isOrderToSavedToFile) {
-        printDebug("_saveOrder()");
+    _saveOrder() {
         if (this.refreshing) {
             return;
         }
@@ -1472,20 +1424,6 @@ class CinnamonWindowListApplet extends Applet.Applet {
         }
 
         this.lastWindowOrder = new_order.join("::");
-        printDebug("this.lastWindowOrder=" + this.lastWindowOrder);
-        
-        
-        if (isOrderToSavedToFile) {
-            try {
-                let file = Gio.file_new_for_path(tempDirectory + "/window-list-Order.txt");
-                let raw = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
-                let out = Gio.BufferedOutputStream.new_sized (raw, 4096);
-                Cinnamon.write_string_to_stream(out, this.lastWindowOrder);
-                out.close(null);
-            } catch(error) { global.log(error) };
-            
-            fileAppend(this.lastWindowOrder)
-        }
     }
 
     _updateAllIconGeometry() {
@@ -1539,10 +1477,7 @@ class CinnamonWindowListApplet extends Applet.Applet {
 
         this.manager_container.set_child_at_index(source.actor, this._dragPlaceholderPos);
 
-        printDebug("acceptDrop() run _saveOrder()")
-        this._saveOrder(true);
-        printDebug("_saveOrder().end from acceptDrop")
-
+        this._saveOrder();
         this._updateAllIconGeometry();
 
         return true;
