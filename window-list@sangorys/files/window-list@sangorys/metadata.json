@@ -1,7 +1,0 @@
-{
- "uuid": "window-list@sangorys",
- "name": "Sangorys Window list",
- "description": "Main Cinnamon window list + some improvements",
- "role": "windowattentionhandler",
- "max-instances": -1
-}
