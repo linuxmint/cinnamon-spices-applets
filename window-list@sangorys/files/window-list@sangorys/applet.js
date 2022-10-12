@@ -65,7 +65,8 @@ const SignalManager = imports.misc.signalManager;
 const Tooltips = imports.ui.tooltips;
 const WindowUtils = imports.misc.windowUtils;
 
-const appletDirectory = AppletManager.appletMeta["window-list@sangorys"].path;
+//const tempDirectory = AppletManager.appletMeta["window-list@sangorys"].path;
+const tempDirectory = "/tmp"
 
 const MAX_TEXT_LENGTH = 1000;
 const FLASH_INTERVAL = 500;
@@ -88,7 +89,7 @@ function printDebug(text) {
 function fileAppend(text) {
     if (debug == 1){
         try {
-            let file = Gio.file_new_for_path(appletDirectory + "/windowOrderHistory.txt");
+            let file = Gio.file_new_for_path(tempDirectory + "/window-list-OrderHistory.txt");
             let out = file.append_to (Gio.FileCreateFlags.NONE, null);
             out.write (text, null);
             out.write ("\n", null);
@@ -1397,7 +1398,7 @@ class CinnamonWindowListApplet extends Applet.Applet {
             }
         }
 
-        this._saveOrder(false); //false because when Cinnamon restart, this function is called and we lost the window order
+        this._saveOrder(false); //false to prevent to save to disk because when Cinnamon restart, this function is called on each opend window, then we lost the window order. Maybe there is a cleaner solution ?
         this._updateAllIconGeometry();
     }
 
@@ -1418,7 +1419,7 @@ class CinnamonWindowListApplet extends Applet.Applet {
 
         try{
             savedLastWindowOrder = "";
-            savedLastWindowOrder = Cinnamon.get_file_contents_utf8_sync("/home/sangorys/.local/share/cinnamon/applets/window-list@sangorys/windowOrder.txt");
+            savedLastWindowOrder = Cinnamon.get_file_contents_utf8_sync(tempDirectory + "/window-list-Order.txt");
         }
         catch (e) {	global.logError(e);	}
         
@@ -1476,7 +1477,7 @@ class CinnamonWindowListApplet extends Applet.Applet {
         
         if (isOrderToSavedToFile) {
             try {
-                let file = Gio.file_new_for_path(appletDirectory + "/windowOrder.txt");
+                let file = Gio.file_new_for_path(tempDirectory + "/window-list-Order.txt");
                 let raw = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
                 let out = Gio.BufferedOutputStream.new_sized (raw, 4096);
                 Cinnamon.write_string_to_stream(out, this.lastWindowOrder);
