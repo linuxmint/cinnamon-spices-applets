@@ -1,6 +1,6 @@
 import { CANCEL_ICON_NAME, COPY_ICON_NAME, DOWNLOAD_ICON_NAME } from "../../../consts";
 import { createControlBtn } from "./ControlBtn";
-import { addDownloadingSongsChangeListener, cancelDownload, downloadSongFromYoutube, getCurrentDownloadingSongs } from "../../../services/youtubeDownload/YoutubeDownloadManager";
+import { addDownloadingSongsChangeListener, cancelDownload, downloadSongFromYouTube, getCurrentDownloadingSongs } from "../../../services/youtubeDownload/YoutubeDownloadManager";
 import { mpvHandler } from "../../../services/mpv/MpvHandler";
 
 
@@ -19,7 +19,7 @@ export function createDownloadButton() {
 
         if (!currentTitle) return // this should actually never happe
 
-        currentTitleIsDownloading ? cancelDownload(currentTitle) : downloadSongFromYoutube(currentTitle)
+        currentTitleIsDownloading ? cancelDownload(currentTitle) : downloadSongFromYouTube(currentTitle)
 
     }
 
@@ -32,7 +32,7 @@ export function createDownloadButton() {
 
         const { currentTitle, currentTitleIsDownloading } = getState()
         const iconName = currentTitleIsDownloading ? CANCEL_ICON_NAME : DOWNLOAD_ICON_NAME
-        const tooltipTxt = currentTitleIsDownloading ? `Cancel downloading ${currentTitle}` : "Download current song from Youtube"
+        const tooltipTxt = currentTitleIsDownloading ? `Cancel downloading ${currentTitle}` : "Download current song from YouTube"
 
         downloadButton.icon.set_icon_name(iconName)
         downloadButton.tooltip.set_text(tooltipTxt)
