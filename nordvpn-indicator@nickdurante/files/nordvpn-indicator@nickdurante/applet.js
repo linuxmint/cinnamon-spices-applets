@@ -108,7 +108,8 @@ NordVPNApplet.prototype = {
 
     _get_status: function(){
         let status = this._run_cmd("nordvpn status");
-        let result = status.split("\n")[0].split(": ")[1];
+        let regex = /Status: ([a-zA-Z]+)/i;
+        let result = regex.exec(status)[1];
         let outString;
         if (result === "Connected"){
             this.connected = true;
