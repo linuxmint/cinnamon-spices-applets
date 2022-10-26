@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-09 19:25-0600\n"
-"PO-Revision-Date: 2019-11-30 13:30+0100\n"
+"POT-Creation-Date: 2021-02-24 23:19+0100\n"
+"PO-Revision-Date: 2022-10-25 19:16+0200\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:33
 msgid "American Sign Language"
@@ -26,218 +26,32 @@ msgstr "Amerikansk tegnsprog"
 msgid "Alphabet"
 msgstr "Alfabet"
 
-#: applet.js:59
-msgid "Letter A"
-msgstr "Bogstavet A"
+#: applet.js:59 applet.js:65 applet.js:71 applet.js:77 applet.js:83
+#: applet.js:89 applet.js:95 applet.js:101 applet.js:107 applet.js:113
+#: applet.js:119 applet.js:125 applet.js:131 applet.js:137 applet.js:143
+#: applet.js:149 applet.js:155 applet.js:161 applet.js:167 applet.js:173
+#: applet.js:179 applet.js:185 applet.js:191 applet.js:197 applet.js:203
+#: applet.js:209
+msgid "Letter"
+msgstr "Bogstav"
 
-#: applet.js:61
-msgid "A - ASL"
-msgstr "A - ASL"
-
-#: applet.js:66
-msgid "Letter B"
-msgstr "Bogstavet B"
-
-#: applet.js:67
-msgid "B - ASL"
-msgstr "B - ASL"
-
-#: applet.js:72
-msgid "Letter C"
-msgstr "Bogstavet C"
-
-#: applet.js:73
-msgid "C - ASL"
-msgstr "C - ASL"
-
-#: applet.js:78
-msgid "Letter D"
-msgstr "Bogstavet D"
-
-#: applet.js:79
-msgid "D - ASL"
-msgstr "D - ASL"
-
-#: applet.js:84
-msgid "Letter E"
-msgstr "Bogstavet E"
-
-#: applet.js:85
-msgid "E - ASL"
-msgstr "E - ASL"
-
-#: applet.js:90
-msgid "Letter F"
-msgstr "Bogstavet F"
-
-#: applet.js:91
-msgid "F - ASL"
-msgstr "F - ASL"
-
-#: applet.js:96
-msgid "Letter G"
-msgstr "Bogstavet G"
-
-#: applet.js:97
-msgid "G - ASL"
-msgstr "G - ASL"
-
-#: applet.js:102
-msgid "Letter H"
-msgstr "Bogstavet H"
-
-#: applet.js:103
-msgid "H - ASL"
-msgstr "H - ASL"
-
-#: applet.js:108
-msgid "Letter I"
-msgstr "Bogstavet I"
-
-#: applet.js:109
-msgid "I - ASL"
-msgstr "I - ASL"
-
-#: applet.js:114
-msgid "Letter J"
-msgstr "Bogstavet J"
-
-#: applet.js:115
-msgid "J - ASL"
-msgstr "J - ASL"
-
-#: applet.js:120
-msgid "Letter K"
-msgstr "Bogstavet K"
-
-#: applet.js:121
-msgid "K - ASL"
-msgstr "K - ASL"
-
-#: applet.js:126
-msgid "Letter L"
-msgstr "Bogstavet L"
-
-#: applet.js:127
-msgid "L - ASL"
-msgstr "L - ASL"
-
-#: applet.js:132
-msgid "Letter M"
-msgstr "Bogstavet M"
-
-#: applet.js:133
-msgid "M - ASL"
-msgstr "M - ASL"
-
-#: applet.js:138
-msgid "Letter N"
-msgstr "Bogstavet N"
-
-#: applet.js:139
-msgid "N - ASL"
-msgstr "N - ASL"
-
-#: applet.js:144
-msgid "Letter O"
-msgstr "Bogstavet O"
-
-#: applet.js:145
-msgid "O - ASL"
-msgstr "O - ASL"
-
-#: applet.js:150
-msgid "Letter P"
-msgstr "Bogstavet P"
-
-#: applet.js:151
-msgid "P - ASL"
-msgstr "P - ASL"
-
-#: applet.js:156
-msgid "Letter Q"
-msgstr "Bogstavet Q"
-
-#: applet.js:157
-msgid "Q - ASL"
-msgstr "Q - ASL"
-
-#: applet.js:162
-msgid "Letter R"
-msgstr "Bogstavet R"
-
-#: applet.js:163
-msgid "R - ASL"
-msgstr "R - ASL"
-
-#: applet.js:168
-msgid "Letter S"
-msgstr "Bogstavet S"
-
-#: applet.js:169
-msgid "S - ASL"
-msgstr "S - ASL"
-
-#: applet.js:174
-msgid "Letter T"
-msgstr "Bogstavet T"
-
-#: applet.js:175
-msgid "T - ASL"
-msgstr "T - ASL"
-
-#: applet.js:180
-msgid "Letter U"
-msgstr "Bogstavet U"
-
-#: applet.js:181
-msgid "U - ASL"
-msgstr "U - ASL"
-
-#: applet.js:186
-msgid "Letter V"
-msgstr "Bogstavet V"
-
-#: applet.js:187
-msgid "V - ASL"
-msgstr "V - ASL"
-
-#: applet.js:192
-msgid "Letter W"
-msgstr "Bogstavet W"
-
-#: applet.js:193
-msgid "W - ASL"
-msgstr "W - ASL"
-
-#: applet.js:198
-msgid "Letter X"
-msgstr "Bogstavet X"
-
-#: applet.js:199
-msgid "X - ASL"
-msgstr "X - ASL"
-
-#: applet.js:204
-msgid "Letter Y"
-msgstr "Bogstavet Y"
-
-#: applet.js:205
-msgid "Y - ASL"
-msgstr "Y - ASL"
-
+#: applet.js:60 applet.js:66 applet.js:72 applet.js:78 applet.js:84
+#: applet.js:90 applet.js:96 applet.js:102 applet.js:108 applet.js:114
+#: applet.js:120 applet.js:126 applet.js:132 applet.js:138 applet.js:144
+#: applet.js:150 applet.js:156 applet.js:162 applet.js:168 applet.js:174
+#: applet.js:180 applet.js:186 applet.js:192 applet.js:198 applet.js:204
 #: applet.js:210
-msgid "Letter Z"
-msgstr "Bogstavet Z"
+msgid "ASL"
+msgstr "ASL"
 
-#: applet.js:211
-msgid "Z - ASL"
-msgstr "Z - ASL"
+#: applet.js:320
+msgid "Check more vocabulary"
+msgstr "Tjek flere ordbøger"
 
 #. metadata.json->name
 msgid "American Sign Language vocabulary"
-msgstr "Amerikansk tegnsprogsordbog"
+msgstr "Ordbog over amerikansk tegnsprog"
 
 #. metadata.json->description
 msgid "Information to American Sign Language vocabulary"
-msgstr "Information til amerikansk tegnsprogsordbog"
+msgstr "Information til ordbog over amerikansk tegnsprog"
