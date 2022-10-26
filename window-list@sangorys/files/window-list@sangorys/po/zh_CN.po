@@ -1,0 +1,98 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-28 18:37+0800\n"
+"PO-Revision-Date: 2017-07-28 18:37+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "A window list with app grouping and window previews"
+msgstr "带应用程序分组和窗口预览的窗口列表"
+
+msgid "Remove this applet"
+msgstr "移除此小程序"
+
+msgid "Open new window"
+msgstr "打开新窗口"
+
+msgid "Captions"
+msgstr "标题"
+
+msgid "Caption type"
+msgstr "标题类型"
+
+msgid "Name"
+msgstr "名称"
+
+msgid "Title"
+msgstr "标题"
+
+msgid "Display Caption For"
+msgstr "显示标题"
+
+msgid "None"
+msgstr "无"
+
+msgid "All"
+msgstr "全部"
+
+msgid "Running"
+msgstr "正在运行"
+
+msgid "Focused"
+msgstr "焦点"
+
+msgid "Label width"
+msgstr "标签宽度"
+
+msgid "Animate label"
+msgstr "标签动画"
+
+msgid "Label animation time"
+msgstr "标签动画时间"
+
+msgid "Display Number"
+msgstr "显示编号"
+
+msgid "Smart"
+msgstr "智能"
+
+msgid "Group Windows"
+msgstr "分组窗口"
+
+msgid "Display Favorites"
+msgstr "显示收藏"
+
+msgid "Animation Time"
+msgstr "动画时间"
+
+msgid "Previews"
+msgstr "预览"
+
+msgid "Show on hover"
+msgstr "悬停时显示"
+
+msgid "Timeout Show"
+msgstr "超时显示"
+
+msgid "Timeout Hide"
+msgstr "超时隐藏"
+
+msgid "Pin app to window list"
+msgstr "固顶应用程序到窗口列表"
+
+msgid "Unpin app from window list"
+msgstr "取消固顶应用程序到窗口列表"
+
+msgid "Unmaximize"
+msgstr "取消最大化"
+
+msgid "Close window on mouse-wheel click"
+msgstr "点击鼠标滚轮关闭窗口"

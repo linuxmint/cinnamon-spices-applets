@@ -50,6 +50,7 @@ const Cogl = imports.gi.Cogl;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gdk = imports.gi.Gdk;
+const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Meta = imports.gi.Meta;
@@ -64,7 +65,12 @@ const Settings = imports.ui.settings;
 const SignalManager = imports.misc.signalManager;
 const Tooltips = imports.ui.tooltips;
 const WindowUtils = imports.misc.windowUtils;
+const Util = imports.misc.util;
 
+const appletDirectory = AppletManager.appletMeta["window-list@sangorys"].path;
+const tempDirectory = "/tmp"
+const userOrderPath = appletDirectory.replace("window-list@sangorys", "") + "window-list-userOrder.txt" // path to the file which contains the order preferences for the users
+const historyPath = tempDirectory + "/window-list-History.txt"
 const MAX_TEXT_LENGTH = 1000;
 const FLASH_INTERVAL = 500;
 const FLASH_MAX_COUNT = 4;
@@ -72,6 +78,334 @@ const FLASH_MAX_COUNT = 4;
 const WINDOW_PREVIEW_WIDTH = 200;
 const WINDOW_PREVIEW_HEIGHT = 150;
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+var debug = 0;
+
+
+function logif(context, text) {
+    if (context)
+        log(String(text));
+}
+
+function log(text) {
+    if (debug == 1){
+        //global.log(text);
+        if (typeof(text) == "string")
+            fileAppend(text);
+        else
+            fileAppend(String(text));
+    }
+}
+
+
+function logm(text) {
+    if (debug == 1){
+        if (typeof(text) == "string")
+        global.log(text);
+        else
+            global.log(String(text));
+        //fileAppend(text);
+    }
+}
+
+
+function msgbox(text) {
+    if (debug == 1){
+        //global.log(text);
+        ;
+    }
+}
+
+
+function fileAppend(text) {
+    //if (debug == 1){
+        try {
+            let file = Gio.file_new_for_path(historyPath);
+            let out = file.append_to (Gio.FileCreateFlags.NONE, null);
+            out.write (text, null);
+            out.write ("\n", null);
+            out.close(null);
+        } catch(error) { global.logError(error) };
+    //}
+}
+
+
+function notify(title, text="", icon="info") {
+    //log("notify-send --icon=\"info\" \" + title + \" \"text\"");
+    Util.spawnCommandLine("notify-send --icon=\"" + icon + "\" \"" + title + "\" \"" + text + "\"");
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+class UserOrder {
+    constructor() {
+        this.debug=true;//false;
+        log("UserOrder");
+        logif(this.debug, "UserOrder()");
+
+        this.separator = ";"
+        this.fileUserOrder = new FileUserOrder(this);
+        this.fileUserOrder.writeString("", historyPath);
+
+        this.tableOfDictionary = this.fileUserOrder.readToTableOfDictionary();
+        //this.printDictionnary();
+        //this._cleanTableOfDictionary();
+
+        //log("UserOrder:" + String(this.tableOfDictionary.length));
+        //log("1st class:" + String(this.tableOfDictionary[0]["class"]));
+    }
+
+    add(xid, listOfPreviousXid, position, theClass, title) {
+        logif(this.debug, "add()");
+        /*let position = this.getIndexFrom("windowId", xid);
+        log("position="+position);
+        if (position >= 0){
+            // Update existing entry
+            this.tableOfDictionary.splice(position, 1,
+            {
+                "windowId":xid,
+                "after": "",
+                "position": "",
+                "class": theClass,
+                "title": title
+            });
+        }else*/ {
+            // Add at the end
+            this.tableOfDictionary.push({
+                "windowId":xid,
+                "after": "[" + listOfPreviousXid + "]",
+                "position": position,
+                "class": theClass,
+                "title": title});
+            }
+        logif(this.debug, "add() end");
+        }
+
+
+    addAndSave(xid, listOfPreviousXid, position, theClass, title) {
+        logif(this.debug, "addAndSave()");
+        add(xid, listOfPreviousXid, position, theClass, title);
+        this.fileUserOrder.writeDictionary(this.tableOfDictionary);
+        logif(this.debug, "addAndSave() end");
+        }
+
+
+    _cleanTableOfDictionary(){
+        // REMOVE DUPLICATE CLASS (we keep the first one)
+        let fileToUpdate=false;
+        for (let i=0 ; i < this.tableOfDictionary.length ; i++)
+            for (let j=i+1 ; j < this.tableOfDictionary.length ; j++)
+                if (this.tableOfDictionary[i]["class"] == this.tableOfDictionary[j]["class"]){
+                    logif("Remove " + this.tableOfDictionary[j]["class"]);
+                    this.tableOfDictionary.splice(j);
+                    fileToUpdate=true;
+                }
+
+        if (fileToUpdate)
+            fileUserOrder.writeTableOfDictionary(this.tableOfDictionary);
+    }
+
+
+    getXidFrom(type, value, startPosition=0){
+        let fileIndex = this.getIndexFrom(type, value, startPosition);
+        if (fileIndex >= 0)
+            return this.tableOfDictionary[fileIndex]["windowId"];
+    }
+
+    getIndexFrom(type, value, toExcludeClosedWindow = false){
+        logif(this.debug, "getIndexFrom(" + type + "," + String(value) + ")");
+        logif(this.debug, "tableOfDictionary.length = " + this.tableOfDictionary.length);
+
+        let index = 0;
+
+        for (let i=0 ; i < this.tableOfDictionary.length ; i++) {
+            //log("");
+            //logif("search in " + this.tableOfDictionary[i]["class"]);
+            //logif(this.tableOfDictionary[i]["windowId"]);
+            //log(typeof(this.tableOfDictionary[i]["windowId"]));
+            //log(i + "." + index);
+            //log(this.tableOfDictionary[i][type]);
+            if (toExcludeClosedWindow == false && this.tableOfDictionary[i]["windowId"] == ""){
+                continue;
+            }
+
+            if (this.tableOfDictionary[i][type] == value)
+            {
+                logif(this.debug, "return " + index);
+                return index;
+            }
+            index++;
+
+        }
+        logif(this.debug, "return -1 (not found)");
+        return -1;
+    }
+
+
+    getIndexFromReverse(type, value, toExcludeClosedWindow = false){
+        logif(this.debug, "\ngetIndexFromReverse(" + type + "," + String(value) + ")");
+        logif(this.debug, "tableOfDictionary length=" + String(this.tableOfDictionary.length));
+
+        for (let i=this.tableOfDictionary.length-1 ; i >= 0  ; i--) {
+            log(this.tableOfDictionary[i][type]);
+            if (this.tableOfDictionary[i][type] == value) {
+                try {
+                    if (toExcludeClosedWindow == false && this.tableOfDictionary[i]["windowId"] == ""){
+                        continue;
+                    }
+                    } catch(error) { log(error) };
+                
+                logif(this.debug, "getIndexFromReverse() => return " + i); //this.getIndexFrom("windowId", this.tableOfDictionary[i]["windowId"], toExcludeClosedWindow));
+                return i; //this.getIndexFrom("windowId", this.tableOfDictionary[i]["windowId"], toExcludeClosedWindow);
+            }
+        }
+        logif(this.debug, "getIndexFromReverse() => return -1");
+        return -1;
+    }
+
+
+    printDictionnary(){
+        log("printDictionnary()");
+
+        for (let i=0 ; i < this.tableOfDictionary.length ; i++) {
+            log("  o " +
+                this.tableOfDictionary[i]["windowId"] + ", " +
+                this.tableOfDictionary[i]["class"] + ", " +
+                this.tableOfDictionary[i]["title"]
+            )
+        }
+    }
+
+
+}
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+class FileUserOrder {
+    constructor(userOrder) {
+        this.debug=false;
+        logif(this.debug, "FileUserOrder()");
+
+        this.separator = ";"
+        this.userOrder = userOrder;
+    }
+
+
+    appendString(textData) {
+        logif(this.debug, "appendString()");
+        try {
+            let file = Gio.file_new_for_path(userOrderPath);
+            let out = file.append_to (Gio.FileCreateFlags.NONE, null);
+            out.write (textData, null);
+            out.write ("\n", null);
+            out.close(null);
+        } catch(error) { global.logError(error) };
+    }
+
+
+    readToString() {
+        logif(this.debug, "readToString() : " + userOrderPath);
+        let textData="";
+        try {
+            textData = Cinnamon.get_file_contents_utf8_sync(userOrderPath);//.split("\n")
+        }catch(error) { global.logError(error) };
+        logif(this.debug, textData);
+        logif(this.debug, "readToString() END");
+        return textData;
+    }
+
+
+    readToTable(separator=this.separator) {
+        logif(this.debug, "readToTable()");
+        let table = this.readToString().split(separator);
+        //let table = [];
+
+        /*for (let i=0 ; i < textData.length ; i++) {
+            global.log(i)
+            if (textData[i].length != 0) {
+                table.push(textData[i].split(separator));
+            }
+        }*/
+        logif(this.debug, "readToTable(size=" + table.length + ") END");
+        return table;//table;
+    }
+
+
+    readToTableOfDictionary() {
+        logif(this.debug, "readToTableOfDictionary()");
+        let windowTable = this.readToTable("\n");
+        let listData = [];
+        let localDictionary=[]; //Init again
+        //log(1);
+        //log("readToTableOfDictionary");
+        for (let i=0 ; i < windowTable.length ; i++) {
+            //global.log(i)
+            //log(i);
+            if (windowTable[i].length != 0) {
+                let dict={};
+                listData=windowTable[i].split(this.separator);
+                dict["windowId"]    = listData[0];
+                dict["after"]       = listData[1];
+                dict["position"]    = listData[2];
+                dict["class"]       = listData[3];
+                dict["title"]        = listData[4];
+                
+                localDictionary.push(dict);
+            }
+        }
+        logif(localDictionary.length + " items in localDictionary");
+        logif(this.debug, "readToTableOfDictionary() END()");
+        return localDictionary;
+    }
+
+
+    writeTableOfDictionary(tableOfDictionary = this.userOrder.tableOfDictionary) {
+        logif(this.debug, "writeDictionary()");
+        let textData="";
+
+        for (let iLine=0 ; iLine < tableOfDictionary.length ; iLine++) {
+            textData += 
+                tableOfDictionary[iLine]["windowId"]    + this.separator
+                + tableOfDictionary[iLine]["after"]     + this.separator
+                + tableOfDictionary[iLine]["position"]  + this.separator
+                + tableOfDictionary[iLine]["class"]     + this.separator
+                + tableOfDictionary[iLine]["title"] + "\n";
+        }
+
+        this.writeString(textData)
+    }
+
+
+    writeTable(table) {
+        logif(this.debug, "writeTable()");
+        let textData="";
+
+        for (let iLine=0 ; iLine < table.length ; iLine++) {
+            textData += table[iLine].join(this.separator) + "\n";
+        }
+
+        this.writeString(textData)
+    }
+
+
+    writeString(textData, path = userOrderPath) {
+        logif(this.debug, "writeString()");
+        try {
+            let file = Gio.file_new_for_path(path);
+            let raw = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
+            let out = Gio.BufferedOutputStream.new_sized (raw, 4096);
+            Cinnamon.write_string_to_stream(out, textData);
+            out.close(null);
+        } catch(error) { global.logError(error) };
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
 class WindowPreview extends Tooltips.TooltipBase {
     constructor(item, metaWindow, previewScale, showLabel) {
         super(item.actor);
@@ -582,6 +916,7 @@ class AppMenuButton {
         }
     }
 
+
     _onButtonRelease(actor, event) {
         this._tooltip.hide();
         if (this.transient) {
@@ -834,12 +1169,94 @@ class AppMenuButtonRightClickMenu extends Applet.AppletPopupMenu {
 
         this.orientation = orientation;
         this.metaWindow = metaWindow;
+        
     }
+
+
+    _renameWindow(mw) {
+        //let read = Cinnamon.get_file_contents_utf8_sync("/tmp/aaa.txt");
+        //Main._logWarning("info");
+        Main.notify("_renameWindow", "read");
+        //log("metaWindow has no actor!");
+        Main._logWarning("info");
+        fileAppend("");
+        fileAppend("mw.title=" + mw.title);
+        fileAppend("mw.wm_class=" + mw.wm_class);
+        fileAppend("mw.get_wm_class_instance()=" + mw.get_wm_class_instance());
+        
+        fileAppend("mw.gtk_application_id=" + mw.gtk_application_id);
+        fileAppend("mw.gtk_application_object_path=" + mw.gtk_application_object_path);
+        fileAppend("mw.gtk_application_object_pathget_pid()=" + mw.get_pid());
+        //fileAppend(string(mw.get_transient_for_as_xid()));
+        fileAppend("mw.get_startup_id()=" + mw.get_startup_id());
+        //fileAppend("xid=" + actors._delagate.xid);
+        //fileAppend("xid=" + this._windows.actors._delagate.xid);
+        
+        for (let window of this._windows)
+                if (window.actor.visible &&
+                    window.metaWindow == this.metaWindow &&
+                   !window._needsAttention) {
+                        fileAppend(window.metaWindow.title);
+                        fileAppend("" + window.xid);
+                   }
+                    
+        
+        //Main.notify("_populateMenu", "read");
+        
+        //alert("aueiuia");
+    };
+
 
     _populateMenu() {
         let mw = this.metaWindow;
         let item;
         let length;
+        let window=this._windows;
+        let applet = this._launcher._applet;
+        
+        
+        // GET THE XID (I am sure there is a better way but I am learning coding applet...)
+        for (window of this._windows)
+            if (window.actor.visible &&
+                window.metaWindow == this.metaWindow &&
+               !window._needsAttention) {
+                   //fileAppend("window.xid=" + window.xid);
+                   break
+               }
+
+        // SHOW INFO
+        //item = new PopupMenu.PopupMenuItem(_("Window information"), "dialog-question", St.IconType.SYMBOLIC);
+        item = new PopupMenu.PopupMenuItem(_("Window information"));
+        this._signals.connect(item, 'activate', function() {
+               try {
+                applet._onShowInfo(window);
+             } catch(error) { global.log(error) };
+            });
+        this.addMenuItem(item);
+        //this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    
+        //fileAppend(window.xid)
+        // MANAGE THE ORDER
+        if (this._launcher._applet.isUserOrderDefined(window.xid)) {
+            item = new PopupMenu.PopupMenuItem(_("Unfreeze user order"));
+            this._signals.connect(item, 'activate', function() {
+                   try {
+                    applet.onRemoveUserOrder(window.xid);
+                 } catch(error) { global.log(error) };
+                });
+        } else {
+            item = new PopupMenu.PopupMenuItem(_("Memorize user order"));
+            this._signals.connect(item, 'activate', function() {
+                try {
+                    applet.resetUserOrderFile();
+                } catch(error) { global.log(error) };
+            });
+        }
+        
+
+        this.addMenuItem(item);
+        this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
 
         // Move to monitor
         if ((length = Main.layoutManager.monitors.length) == 2) {
@@ -1004,6 +1421,7 @@ class CinnamonWindowListApplet extends Applet.Applet {
     constructor(orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
+        this.userOrder= new UserOrder();
         this.signals = new SignalManager.SignalManager(null);
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
@@ -1036,7 +1454,7 @@ class CinnamonWindowListApplet extends Applet.Applet {
         this._windows = [];
         this._monitorWatchList = [];
 
-        this.settings = new Settings.AppletSettings(this, "window-list@cinnamon.org", this.instance_id);
+        this.settings = new Settings.AppletSettings(this, "window-list@sangorys", this.instance_id);
 
         this.settings.bind("show-all-workspaces", "showAllWorkspaces");
         this.settings.bind("enable-alerts", "enableAlerts", this._updateAttentionGrabber);
@@ -1066,6 +1484,28 @@ class CinnamonWindowListApplet extends Applet.Applet {
 
         this.on_orientation_changed(orientation);
         this._updateAttentionGrabber();
+    }
+
+
+    _getActorIndex(xid) {
+        let localDebug=false;
+        log(localDebug, "\n_getActorIndex(" + xid + ")");
+        let actors = this.manager_container.get_children();
+
+        log(localDebug, actors.length + " actors");
+        for (let k = 0; k < actors.length; k++ ) {
+            try {
+                log(localDebug, "actors["+k+"]._delegate.xid = " + actors[k]._delegate.xid + " / " + typeof(actors[k]._delegate.xid));
+                log(localDebug, "xid=" + xid + " / " + typeof(xid));
+                if (String(actors[k]._delegate.xid) == xid) {
+                    log(localDebug, "_getActorIndex() return ");// + String(k));
+                    return k;
+                }
+                } catch(error) { log("ERROR : " + error); };
+                log(localDebug, "next k");
+        }
+        log(localDebug, "_getActorIndex(). Not found. Return -1"); //the last item " + String(actors.length-1));
+        return -1;
     }
 
     on_applet_added_to_panel(userEnabled) {
@@ -1146,6 +1586,24 @@ class CinnamonWindowListApplet extends Applet.Applet {
 
         this._updateAllIconGeometry()
     }
+
+    _onShowInfo(window) {
+        //Main.notify(mw.wm_class + ". " +  mw.gtk_application_id + ". " + mw.title);
+        log("_onShowInfo()");
+        //log(window.metaWindow.wm_class);
+        let index=this.userOrder.getIndexFrom("windowId", window.xid);
+        log("getIndexFrom=" + index);
+        log(this.userOrder.tableOfDictionary[index]["class"]);
+        //let xid
+        notify(
+             "class     = " + window.metaWindow.wm_class,
+            + "title    = " + window.metaWindow.title  + "\n"
+            + "xid      = " + window.xid + "\n"
+            + "Position (file) = " + this.userOrder.getIndexFrom("windowId", window.xid) + "\n"
+            + "Position (task bar) = " + this._getActorIndex(window.xid) + "\n");
+
+    };
+
 
     _updateSpacing() {
         let themeNode = this.actor.get_theme_node();
@@ -1229,6 +1687,113 @@ class CinnamonWindowListApplet extends Applet.Applet {
         if (window.get_workspace() != global.workspace_manager.get_active_workspace())
             this._addWindow(window, true);
     }
+
+    /**
+     * 
+     * @param {*} xid 
+     * @returns True if the user order is defined
+     */
+    isUserOrderDefined(xid) {
+        //log("isUserOrderDefined");
+        let userOrderData;
+
+        if (GLib.file_test(userOrderPath, GLib.FileTest.EXISTS)) {
+            userOrderData = Cinnamon.get_file_contents_utf8_sync(userOrderPath);
+            for (let line of userOrderData.split("\n")) {
+                //fileAppend("isUserOrderDefined found");
+                if (line.split(";")[0] == xid) return true;
+            }
+        }
+
+        //fileAppend("isUserOrderDefined not found");
+        return false;
+    }
+
+
+    /* When memorize the position :
+     *  1. The list of all previous window xid are recordered
+    */
+
+    /**
+ * Solves equations of the form a * x = b
+ * @example
+ * // returns 2
+ * globalNS.method1(5, 10);
+ * @example
+ * // returns 3
+ * globalNS.method(5, 15);
+ * @returns {Number} Returns the value of x for the equation.
+ */
+    resetUserOrderFile() {
+        let localDebug = false;
+        let isError=true;
+        logif(localDebug, "resetUserOrderFile");
+        //userOrder.fileUserOrder.writeTableOfDictionary();
+        //return;
+        // Add in the end of the file
+
+        logif(localDebug, "20");
+        let actors = this.manager_container.get_children();
+        
+
+        // RESET tableOfDictionary
+        //log("Recreate tableOfDictionary")
+        logif(localDebug, "1");
+        delete this.userOrder.tableOfDictionary;
+        logif(localDebug, "2");
+        this.userOrder.tableOfDictionary=[];
+        logif(localDebug, "3");
+
+        // RECREATE tableOfDictionary 
+        for (let j = 0; j < actors.length; j++ ) {
+            log(j);
+            isError=true;
+            try {
+                log(j + "/" + actors.length + " => " + actors[j]._delegate.metaWindow.wm_class);
+                this.userOrder.add(
+                    actors[j]._delegate.xid,
+                    "",
+                    "", 
+                    actors[j]._delegate.metaWindow.wm_class, 
+                    actors[j]._delegate.metaWindow.title);
+                isError=false;
+        } catch(error) { log(error) };
+
+            //if (isError()) {
+            //    this.userOrder.add(actors[j]._delegate.xid,"","", "", "");
+            //}
+        }
+
+
+        // SAVE TO FILE
+        this.userOrder.fileUserOrder.writeTableOfDictionary();
+        //log("resetUserOrderFile OK")
+        logif(localDebug, "resetUserOrderFile END")
+    }
+
+
+    onRemoveUserOrder(xid) {
+        global.logError("onRemoveUserOrder")
+        //this.userOrder.fileUserOrder.writeTableOfDictionary();
+        this.resetUserOrderFile();
+        return;
+
+        //let userOrderData = fileUserOrder.readToString();
+        let userOrderDataTable=fileUserOrder.readToTable();
+    
+        try {
+            
+        for (let iLine=0 ; iLine < userOrderDataTable.length ; iLine++) {
+            if (userOrderDataTable[iLine][0] == xid ) {
+                global.log("Remove :" + userOrderDataTable[iLine]);
+                userOrderDataTable.splice(iLine, 1);
+            }
+        }
+    
+        fileUserOrder.writeTable(userOrderDataTable);
+        }catch(error) { global.logError(error) };
+    }
+
 
     _refreshItem(window) {
         window.actor.visible =
@@ -1333,10 +1898,13 @@ class CinnamonWindowListApplet extends Applet.Applet {
                 window.transient == transient)
                 return;
 
+        log("\n_addWindow (" + metaWindow.wm_class + ", " + metaWindow.get_title())
         let appButton = new AppMenuButton(this, metaWindow, transient);
         this.manager_container.add_actor(appButton.actor);
-
+        let toMove=0;
+        let realIndex = 0;
         this._windows.push(appButton);
+
 
         /* We want to make the AppMenuButtons look like they are ordered by
          * workspace. So if we add an AppMenuButton for a window in another
@@ -1353,22 +1921,199 @@ class CinnamonWindowListApplet extends Applet.Applet {
             }
         }
 
-        this._saveOrder();
+        //this._showActorPosition();
+        //log("_addWindow " + metaWindow.wm_class + ", " + appButton.xid);
+        // MOVE THE WINDOW TO THE GOOD PLACE
+        //try {
+            let index=this.userOrder.getIndexFrom("windowId", appButton.xid);
+            log("index = " + index);
+
+
+            if (index >= 0) // and (index != this._windows.index => index exists ?)
+            { 
+
+                // CASE 1 : XID ALREADY EXISTS
+                // WE MOVE IT TO THE RIGHT PLACE (for instance if Cinnamon crashes)
+                toMove=1;
+                log("XID already exist. To move " + this.userOrder.tableOfDictionary[index]["class"] + " to index " + index);
+                //realIndex = index;
+
+                //FIND THE POSITION OF THE PREVIOUS EXISTING WINDOW
+                for (let i=index-1; i>=0 ; i--){
+                    if (this.userOrder.tableOfDictionary[index]["windowId"] != this.userOrder.tableOfDictionary[i]["windowId"]) try{
+                        log("Search " + this.userOrder.tableOfDictionary[i]["class"] + " / " + this.userOrder.tableOfDictionary[i]["windowId"] + " in the task bar");
+                        let actorIndex = this._getActorIndex(this.userOrder.tableOfDictionary[i]["windowId"]);
+                        if (actorIndex != -1){
+                            log(this.userOrder.tableOfDictionary[i]["class"] + " has been found in the task bar in position" + actorIndex);
+                            realIndex = actorIndex + 1;
+                            break;
+                        }
+                    } catch(error) { log(error) };
+                }
+
+            }
+            else 
+            {
+                // CASE 2 : XID NOT EXIST
+                //  => SEARCH THE CLASS THEN TITLE
+                log("XID for " + metaWindow.wm_class + " not found ");
+                index=this.userOrder.getIndexFromReverse("class", metaWindow.wm_class, true);
+                //index=this.userOrder.getIndexFrom("title", metaWindow.get_title());
+                if (index >= 0){
+
+                    // CASE 2.1 : THE WINDOW HAS BEEN MEMORIZED
+                    log(this.userOrder.tableOfDictionary[index]["class"] + " class found");
+
+                    //FIND THE FILE POSITION OF THE PREVIOUS EXISTING WINDOW
+                    for (let i=index; i>=0 ; i--) try {
+                        if (this.userOrder.tableOfDictionary[i]["windowId"] != ""){
+                            index = i; // maybe we need to not change index and use i only for getActoIndex ???
+                            break;
+                        }
+                    } catch(error) { log(error) };
+
+                    // GET THE WINDOW LIST POSITION
+                    realIndex = this._getActorIndex(this.userOrder.tableOfDictionary[index]["windowId"]) + 1;
+                    log("Position in the task bar = " + String(realIndex));
+
+                    // IS IT A POSITION OF AN OLD CLOSED WINDOW OR AN EXISTING WINDOW ?
+                    if (this.userOrder.tableOfDictionary[index]["windowId"] == ""){
+                        toMove=1;
+                    }else { toMove=0 ;}
+                        /*
+
+                    while (metaWindow.get_title() != this.userOrder.tableOfDictionary[index]["title"]) {
+                        index=this.userOrder.getIndexFrom("class", metaWindow.wm_class, index);
+                        if (index == -1)
+                            break;
+                    }
+
+                    if (index >= 0) {
+                        // MATCH CLASS AND TITLE
+                        logm(this.userOrder.tableOfDictionary[index]["class"] + " class and title found ");
+                    } else {
+                        // MATCH CLASS ONLY
+                        logm("Only " + this.userOrder.tableOfDictionary[index]["class"] + " class found ");
+                        index = firstIndex;
+                    }*/
+
+
+
+
+                }else {
+                    // CASE : NEW WINDOW, NEVER MEMORIZE
+                    // Nothing to do
+                    //log("Class " + metaWindow.wm_class + " not found. Keep it at the end");
+                }
+            }
+
+
+
+
+            if (index >= 0){
+                log("move window to " + realIndex + "(" + index + ")/" + this._windows.length + ". toMove=" + toMove);
+                // MOVE TO THE RIGHT PLACE
+                this.manager_container.set_child_at_index(
+                    appButton.actor,
+                    realIndex);
+
+                // ADD OR MOVE THE WINDOW TO tableOfDictionary
+                //this.userOrder.tableOfDictionary.splice(index,1);
+                //if (toMove == 1)
+                //    log("move to dictionary");
+                //else
+                //    log("add to dictionary");
+
+                //this.userOrder.printDictionnary();
+                this.userOrder.tableOfDictionary.splice(index+(1-toMove), toMove,
+                    {
+                        "windowId":appButton.xid,
+                        "after": "",
+                        "position": "",
+                        "class": metaWindow.wm_class,
+                        "title": metaWindow.get_title()
+                    });
+                }else{
+                log("Add at the end");
+                // UPDATE THE PREVIOUS INFO
+                //this.userOrder.tableOfDictionary.splice(index,1);
+                this.userOrder.add(
+                        appButton.xid,
+                        "",
+                        "",
+                        metaWindow.wm_class,
+                        metaWindow.get_title());
+            }
+
+            //this.userOrder.printDictionnary();
+            //this.userOrder.fileUserOrder.writeTableOfDictionary(this.userOrder.tableOfDictionary);
+
+                
+        //} catch(error) { global.log(error) };
+        // 3. SEARCH THE CLASS
+
+
+
+            //log("Search " + metaWindow.wm_class + ":");
+            //log( String(this.userOrder.getIndexFrom("class", metaWindow.wm_class)));
+            //log("1");
+            //Main.notify(String(this.userOrder.getIndexFrom("class", metaWindow.wm_class)));
+            //let index=this.userOrder.getIndexFrom("class", metaWindow.wm_class);
+            /*if (index > -1){ //if the class is in the user define list
+                //Main.notify(metaWindow.wm_class + " found :)")
+                log(metaWindow.wm_class + " found at position " + String(this.userOrder.tableOfDictionary[index]["position"] + " for row " + index));
+                this.manager_container.set_child_at_index(
+                    appButton.actor,
+                    this.userOrder.tableOfDictionary[index]["position"]);
+            }
+            } catch(error) { global.log(error) };*/
+
+        //appButton._needsAttention=true;
+        //appButton._flashButton();
+        //notify(1);
+    
+        this._saveOrder(true);
+        
         this._updateAllIconGeometry();
+        log("_addWindow() END at position " + index);
+        log("");
     }
 
     _removeWindow(metaWindow) {
-        let i = this._windows.length;
+        log("_removeWindow(" + metaWindow.wm_class);
+
+        let toSave = false;
+
+        try {
+        
+            let i = this._windows.length;
         // Do an inverse loop because we might remove some elements
         while (i--) {
             if (this._windows[i].metaWindow == metaWindow) {
+                let index = this.userOrder.getIndexFrom("windowId", this._windows[i].xid);
+                //log("found at index " + String(index));
+                if (index >=0) {
+                    this.userOrder.tableOfDictionary[index]["windowId"] = "";
+                    this.userOrder.fileUserOrder.writeTableOfDictionary();
+                }
+
                 this._windows[i].destroy();
                 this._windows.splice(i, 1);
+
+                if (this._windows[i].actor.visible)
+                    toSave = true;
+
+
+                // Can we do a "break" here to spare CPU utilization ?
+
             }
         }
+    } catch(error) { global.log(error) };
 
-        this._saveOrder();
-        this._updateAllIconGeometry();
+        if (toSave == true)
+            this._saveOrder(false); //false to prevent to save to disk because when Cinnamon restart, this function is called on each opend window, then we lost the window order. Maybe there is a cleaner solution ?
+
+        this._updateAllIconGeometry(); //Can we spare CPU load by moving this line inside the toSave block ?
     }
 
     _shouldAdd(metaWindow) {
@@ -1382,6 +2127,23 @@ class CinnamonWindowListApplet extends Applet.Applet {
     */
 
     _applySavedOrder() {
+        log("_applySavedOrder()");
+
+        let savedLastWindowOrder = "";
+
+        try{
+            savedLastWindowOrder = "";
+            savedLastWindowOrder = Cinnamon.get_file_contents_utf8_sync(tempDirectory + "/window-list-Order.txt");
+        }
+        catch (e) {	global.logError(e);	}
+        
+        if (savedLastWindowOrder != this.lastWindowOrder) {
+            this.lastWindowOrder = savedLastWindowOrder
+            log("different");
+            log("this.lastWindowOrder   =" + this.lastWindowOrder);
+            log("savedLastWindowOrder=" + savedLastWindowOrder);
+        }
+
         let order = this.lastWindowOrder.split("::");
 
         order.reverse();
@@ -1397,13 +2159,16 @@ class CinnamonWindowListApplet extends Applet.Applet {
 
             if (found) {
                 this.manager_container.set_child_at_index(found.actor, 0);
+                //log("found.xid=" + found.xid + " | found.actor=" + found.actor);
             }
         }
 
-        this._saveOrder();
-    }
+        this._saveOrder(true);
+        //log("_applySavedOrder().end\n");
+   }
 
-    _saveOrder() {
+    _saveOrder(isOrderToSavedToFile) {
+        log("_saveOrder()");
         if (this.refreshing) {
             return;
         }
@@ -1421,6 +2186,35 @@ class CinnamonWindowListApplet extends Applet.Applet {
         }
 
         this.lastWindowOrder = new_order.join("::");
+        //log("this.lastWindowOrder=" + this.lastWindowOrder);
+        
+        
+        if (isOrderToSavedToFile) {
+            try {
+                /*let file = Gio.file_new_for_path(tempDirectory + "/window-list-Order.txt");
+                let raw = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
+                let out = Gio.BufferedOutputStream.new_sized (raw, 4096);
+                Cinnamon.write_string_to_stream(out, this.lastWindowOrder);
+                out.close(null);*/
+
+
+            } catch(error) { global.log(error) };
+            
+            this.userOrder.fileUserOrder.writeTableOfDictionary();
+
+            fileAppend(this.lastWindowOrder)
+        }
+    }
+
+    _showActorPosition() {
+        log("_showActorPosition()");
+        let actors = this.manager_container.get_children();
+
+        log(actors.length + " actors");
+        for (let k = 0; k < actors.length; k++ ) try {
+            log(actors[k]._delegate.xid + " - " + actors[k]._delegate.metaWindow.class);
+        } catch(error) { log(error) };
+        log("_showActorPosition().END");
     }
 
     _updateAllIconGeometry() {
@@ -1472,10 +2266,21 @@ class CinnamonWindowListApplet extends Applet.Applet {
         if (!(source instanceof AppMenuButton)) return false;
         if (this._dragPlaceholderPos == undefined) return false;
 
+        let oldPos = this._getActorIndex(actor.xid);
         this.manager_container.set_child_at_index(source.actor, this._dragPlaceholderPos);
 
-        this._saveOrder();
+        let oldIndex = this.userOrder.getIndexFrom("windowId", actor.xid);
+        // How to find the new position in the file ???
+
+        log("acceptDrop() run _saveOrder()")
+        this._saveOrder(true);
+        log("_saveOrder().end from acceptDrop")
+
+        // Waiting for this solution, we reset the file (we loose the position of the removed window )
+
         this._updateAllIconGeometry();
+
+        this.resetUserOrderFile();
 
         return true;
     }
@@ -1508,6 +2313,10 @@ class CinnamonWindowListApplet extends Applet.Applet {
         }
     }
 }
+
+
+//const fileUserOrder = new FileUserOrder();
+//const userOrder="";
 
 function main(metadata, orientation, panel_height, instance_id) {
     return new CinnamonWindowListApplet(orientation, panel_height, instance_id);
