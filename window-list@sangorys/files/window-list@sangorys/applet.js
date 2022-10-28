@@ -80,7 +80,7 @@ const WINDOW_PREVIEW_HEIGHT = 150;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-var debug = 0;
+var debug = true;
 
 
 function logif(context, text) {
@@ -89,7 +89,7 @@ function logif(context, text) {
 }
 
 function log(text) {
-    if (debug == 1){
+    if (debug){
         //global.log(text);
         if (typeof(text) == "string")
             fileAppend(text);
@@ -100,7 +100,7 @@ function log(text) {
 
 
 function logm(text) {
-    if (debug == 1){
+    if (debug){
         if (typeof(text) == "string")
         global.log(text);
         else
@@ -111,7 +111,7 @@ function logm(text) {
 
 
 function msgbox(text) {
-    if (debug == 1){
+    if (debug){
         //global.log(text);
         ;
     }
@@ -119,7 +119,7 @@ function msgbox(text) {
 
 
 function fileAppend(text) {
-    //if (debug == 1){
+    //if (debug){
         try {
             let file = Gio.file_new_for_path(historyPath);
             let out = file.append_to (Gio.FileCreateFlags.NONE, null);
@@ -151,7 +151,7 @@ class UserOrder {
 
         this.tableOfDictionary = this.fileUserOrder.readToTableOfDictionary();
         //this.printDictionnary();
-        //this._cleanTableOfDictionary();
+        this._cleanTableOfDictionary();
 
         //log("UserOrder:" + String(this.tableOfDictionary.length));
         //log("1st class:" + String(this.tableOfDictionary[0]["class"]));
@@ -193,19 +193,29 @@ class UserOrder {
 
 
     _cleanTableOfDictionary(){
-        // REMOVE DUPLICATE CLASS (we keep the first one)
-        let fileToUpdate=false;
-        for (let i=0 ; i < this.tableOfDictionary.length ; i++)
-            for (let j=i+1 ; j < this.tableOfDictionary.length ; j++)
-                if (this.tableOfDictionary[i]["class"] == this.tableOfDictionary[j]["class"]){
-                    logif("Remove " + this.tableOfDictionary[j]["class"]);
-                    this.tableOfDictionary.splice(j);
-                    fileToUpdate=true;
-                }
+        logif(this.debug, "_cleanTableOfDictionary()");
 
-        if (fileToUpdate)
-            fileUserOrder.writeTableOfDictionary(this.tableOfDictionary);
-    }
+        try {
+            // REMOVE DUPLICATE CLASS (we keep the first one)
+            let fileToUpdate=false;
+            for (let i=0 ; i < this.tableOfDictionary.length ; i++)
+                for (let j=i+1 ; j < this.tableOfDictionary.length ; j++)
+                    if (this.tableOfDictionary[i]["class"] == this.tableOfDictionary[j]["class"]
+                    && this.tableOfDictionary[j]["windowId"] == "") {
+                        logif(this.debug, "Found " + this.tableOfDictionary[i]["class"] + " in row " + i);
+                        logif(this.debug, "Remove " + this.tableOfDictionary[j]["class"] + " from row " + j);
+                        this.tableOfDictionary.splice(j, 1);
+                        fileToUpdate=true;
+                        logif(this.debug, "Removed ");
+                    }
+
+            if (fileToUpdate){
+                fileUserOrder.writeTableOfDictionary(this.tableOfDictionary);
+            }
+        } catch(error) { log(error) };
+
+    logif(this.debug, "_cleanTableOfDictionary().END ");
+}
 
 
     getXidFrom(type, value, startPosition=0){
@@ -2129,21 +2139,6 @@ class CinnamonWindowListApplet extends Applet.Applet {
     _applySavedOrder() {
         log("_applySavedOrder()");
 
-        let savedLastWindowOrder = "";
-
-        try{
-            savedLastWindowOrder = "";
-            savedLastWindowOrder = Cinnamon.get_file_contents_utf8_sync(tempDirectory + "/window-list-Order.txt");
-        }
-        catch (e) {	global.logError(e);	}
-        
-        if (savedLastWindowOrder != this.lastWindowOrder) {
-            this.lastWindowOrder = savedLastWindowOrder
-            log("different");
-            log("this.lastWindowOrder   =" + this.lastWindowOrder);
-            log("savedLastWindowOrder=" + savedLastWindowOrder);
-        }
-
         let order = this.lastWindowOrder.split("::");
 
         order.reverse();
@@ -2168,7 +2163,7 @@ class CinnamonWindowListApplet extends Applet.Applet {
    }
 
     _saveOrder(isOrderToSavedToFile) {
-        log("_saveOrder()");
+        logif(debug, "_saveOrder()");
         if (this.refreshing) {
             return;
         }
@@ -2180,29 +2175,12 @@ class CinnamonWindowListApplet extends Applet.Applet {
             new_order.push(actors[i]._delegate.xid);
         }
 
-        if (new_order.length === 0) {
-            this.lastWindowOrder = "";
-            return;
-        }
-
-        this.lastWindowOrder = new_order.join("::");
-        //log("this.lastWindowOrder=" + this.lastWindowOrder);
-        
-        
         if (isOrderToSavedToFile) {
             try {
-                /*let file = Gio.file_new_for_path(tempDirectory + "/window-list-Order.txt");
-                let raw = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
-                let out = Gio.BufferedOutputStream.new_sized (raw, 4096);
-                Cinnamon.write_string_to_stream(out, this.lastWindowOrder);
-                out.close(null);*/
-
-
+                //Do we have to move writeTableOfDictionary() here ???
             } catch(error) { global.log(error) };
             
             this.userOrder.fileUserOrder.writeTableOfDictionary();
-
-            fileAppend(this.lastWindowOrder)
         }
     }
 
@@ -2280,7 +2258,7 @@ class CinnamonWindowListApplet extends Applet.Applet {
 
         this._updateAllIconGeometry();
 
-        this.resetUserOrderFile();
+        this.resetUserOrderFile(); // We reset everything until we found a new way of moving items in tableOfDictionnary
 
         return true;
     }
@@ -2314,9 +2292,6 @@ class CinnamonWindowListApplet extends Applet.Applet {
     }
 }
 
-
-//const fileUserOrder = new FileUserOrder();
-//const userOrder="";
 
 function main(metadata, orientation, panel_height, instance_id) {
     return new CinnamonWindowListApplet(orientation, panel_height, instance_id);
