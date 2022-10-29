@@ -67,10 +67,11 @@ const Tooltips = imports.ui.tooltips;
 const WindowUtils = imports.misc.windowUtils;
 const Util = imports.misc.util;
 
-const appletDirectory = AppletManager.appletMeta["window-list@sangorys"].path;
-const tempDirectory = "/tmp"
-const userOrderPath = appletDirectory.replace("window-list@sangorys", "") + "window-list-userOrder.txt" // path to the file which contains the order preferences for the users
-const historyPath = tempDirectory + "/window-list-History.txt"
+const APPLET_DIRECTORY = AppletManager.appletMeta["window-list@sangorys"].path;
+const TEMP_DIRECTORY = "/tmp"
+const USER_ORDER_PATH = APPLET_DIRECTORY.replace("window-list@sangorys", "") + "window-list@sangorys-userOrder.txt" // path to the file which contains the order preferences for the users
+const LOG_PATH = TEMP_DIRECTORY + "/window-list@sangorys.log"
+
 const MAX_TEXT_LENGTH = 1000;
 const FLASH_INTERVAL = 500;
 const FLASH_MAX_COUNT = 4;
@@ -121,7 +122,7 @@ function msgbox(text) {
 function fileAppend(text) {
     //if (debug){
         try {
-            let file = Gio.file_new_for_path(historyPath);
+            let file = Gio.file_new_for_path(LOG_PATH);
             let out = file.append_to (Gio.FileCreateFlags.NONE, null);
             out.write (text, null);
             out.write ("\n", null);
@@ -147,7 +148,7 @@ class UserOrder {
 
         this.separator = ";"
         this.fileUserOrder = new FileUserOrder(this);
-        this.fileUserOrder.writeString("", historyPath);
+        this.fileUserOrder.writeString("", LOG_PATH);
 
         logif(this.debug, "UserOrder()");
 
@@ -340,7 +341,7 @@ class FileUserOrder {
     appendString(textData) {
         logif(this.debug, "appendString()");
         try {
-            let file = Gio.file_new_for_path(userOrderPath);
+            let file = Gio.file_new_for_path(USER_ORDER_PATH);
             let out = file.append_to (Gio.FileCreateFlags.NONE, null);
             out.write (textData, null);
             out.write ("\n", null);
@@ -350,10 +351,10 @@ class FileUserOrder {
 
 
     readToString() {
-        logif(this.debug, "readToString() : " + userOrderPath);
+        logif(this.debug, "readToString() : " + USER_ORDER_PATH);
         let textData="";
         try {
-            textData = Cinnamon.get_file_contents_utf8_sync(userOrderPath);//.split("\n")
+            textData = Cinnamon.get_file_contents_utf8_sync(USER_ORDER_PATH);//.split("\n")
         }catch(error) { global.logError(error) };
         logif(this.debug, textData);
         logif(this.debug, "readToString() END");
@@ -434,7 +435,7 @@ class FileUserOrder {
     }
 
 
-    writeString(textData, path = userOrderPath) {
+    writeString(textData, path = USER_ORDER_PATH) {
         logif(this.debug, "writeString()");
         try {
             let file = Gio.file_new_for_path(path);
@@ -1280,7 +1281,7 @@ class AppMenuButtonRightClickMenu extends Applet.AppletPopupMenu {
     
         //fileAppend(window.xid)
         // MANAGE THE ORDER
-        if (this._launcher._applet.isUserOrderDefined(window.xid)) {
+        /*if (this._launcher._applet.isUserOrderDefined(window.xid)) {
             item = new PopupMenu.PopupMenuItem(_("Unfreeze user order"));
             this._signals.connect(item, 'activate', function() {
                    try {
@@ -1294,7 +1295,7 @@ class AppMenuButtonRightClickMenu extends Applet.AppletPopupMenu {
                     applet.resetUserOrderFile();
                 } catch(error) { global.log(error) };
             });
-        }
+        }*/
         
 
         this.addMenuItem(item);
@@ -1740,8 +1741,8 @@ class CinnamonWindowListApplet extends Applet.Applet {
         //log("isUserOrderDefined");
         let userOrderData;
 
-        if (GLib.file_test(userOrderPath, GLib.FileTest.EXISTS)) {
-            userOrderData = Cinnamon.get_file_contents_utf8_sync(userOrderPath);
+        if (GLib.file_test(USER_ORDER_PATH, GLib.FileTest.EXISTS)) {
+            userOrderData = Cinnamon.get_file_contents_utf8_sync(USER_ORDER_PATH);
             for (let line of userOrderData.split("\n")) {
                 //fileAppend("isUserOrderDefined found");
                 if (line.split(";")[0] == xid) return true;
