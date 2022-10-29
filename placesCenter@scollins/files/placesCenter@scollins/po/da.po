@@ -7,58 +7,58 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-08 19:11+0200\n"
-"PO-Revision-Date: 2019-12-03 18:13+0100\n"
+"POT-Creation-Date: 2021-02-24 20:57+0100\n"
+"PO-Revision-Date: 2022-10-27 19:44+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:144
+#: applet.js:148
 msgid "(Right click to open folder)"
 msgstr "(Højreklik for at åbne mappen)"
 
-#: applet.js:166
+#: applet.js:170
 msgid "Places"
 msgstr "Steder"
 
-#: applet.js:281
+#: applet.js:284
 msgid "Search Home Folder"
 msgstr "Søg i mappen Hjem"
 
-#: applet.js:304
+#: applet.js:307
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#: applet.js:313
+#: applet.js:316
 msgid "Search File System"
 msgstr "Søg i Filsystem"
 
-#: applet.js:338
+#: applet.js:341
 msgid "RECENT DOCUMENTS"
 msgstr "SENESTE DOKUMENTER"
 
-#: applet.js:352
+#: applet.js:355
 msgid "Clear"
 msgstr "Ryd"
 
-#: applet.js:395
+#: applet.js:398
 msgid "Computer"
 msgstr "Computer"
 
-#: applet.js:401
+#: applet.js:404
 msgid "File System"
 msgstr "Filsystem"
 
-#: applet.js:417
+#: applet.js:420
 msgid "Network"
 msgstr "Netværk"
 
-#: applet.js:554
+#: applet.js:560
 msgid "Trash"
 msgstr "Papirkurven"
 
@@ -131,8 +131,8 @@ msgid "Skipping"
 msgstr "Springer over"
 
 #: search.py:259
-msgid " - direcotry already searched"
-msgstr " - allerede søgt i mappe"
+msgid " - directory already searched"
+msgstr " - mappe allerede gennemsøgt"
 
 #. metadata.json->name
 msgid "Places Center"
