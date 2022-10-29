@@ -569,7 +569,7 @@ msgid "Show hidden files in folder view"
 msgstr "Verborgen bestanden weergeven in mapweergave"
 
 msgid "Emoji search"
-msgstr "Emotiepictogram zoeken"
+msgstr "Emotiepictogrammen doorzoeken"
 
 msgid "Show emojis in search results"
 msgstr "Emotiepictogrammen weergeven in zoekresultaten"
@@ -591,7 +591,7 @@ msgstr ""
 "Google)."
 
 msgid "Search home folder"
-msgstr "Zoek thuismap"
+msgstr "Zoeken in thuismap"
 
 msgid "When searching, also search my home folder for files"
 msgstr "Zoek bij het zoeken ook in mijn thuismap naar bestanden"
@@ -625,7 +625,7 @@ msgstr ""
 "paskket libgda (Arch-gebaseerde distributies) en uw computer herstarten."
 
 msgid "Wikipedia search"
-msgstr "Wikipedia zoeken"
+msgstr "Wikipedia doorzoeken"
 
 msgid "Show some Wikipedia results"
 msgstr "Enkele Wikipedia-resultaten weergeven"
