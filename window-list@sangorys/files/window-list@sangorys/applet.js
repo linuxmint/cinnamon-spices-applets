@@ -80,7 +80,7 @@ const WINDOW_PREVIEW_HEIGHT = 150;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-var debug = true;
+var debug = false;
 
 
 function logif(context, text) {
@@ -332,7 +332,7 @@ class FileUserOrder {
         this.debug=false;
         logif(this.debug, "FileUserOrder()");
 
-        this.separator = ";"
+        this.separator = ";;"
         this.userOrder = userOrder;
     }
 
@@ -391,10 +391,10 @@ class FileUserOrder {
                 let dict={};
                 listData=windowTable[i].split(this.separator);
                 dict["xid"]    = listData[0];
-                dict["after"]       = listData[1];
-                dict["position"]    = listData[2];
-                dict["class"]       = listData[3];
-                dict["title"]        = listData[4];
+                //dict["after"]       = listData[1];
+                //dict["position"]    = listData[2];
+                dict["class"]       = listData[1];
+                dict["title"]        = listData[2];
                 
                 localDictionary.push(dict);
             }
@@ -412,8 +412,8 @@ class FileUserOrder {
         for (let iLine=0 ; iLine < tableOfDictionary.length ; iLine++) {
             textData += 
                 tableOfDictionary[iLine]["xid"]    + this.separator
-                + tableOfDictionary[iLine]["after"]     + this.separator
-                + tableOfDictionary[iLine]["position"]  + this.separator
+                /*+ tableOfDictionary[iLine]["after"]     + this.separator
+                + tableOfDictionary[iLine]["position"]  + this.separator*/
                 + tableOfDictionary[iLine]["class"]     + this.separator
                 + tableOfDictionary[iLine]["title"] + "\n";
         }
