@@ -115,6 +115,15 @@ export class WeatherApplet extends TextIconApplet {
 		this.RefreshWeather(true, loc);
 	};
 
+	public Refresh(this: WeatherApplet, loc: LocationData | null = null, rebuild: boolean = false, ): void {
+		this.loop.Resume();
+		if (this.Locked()) {
+			this.refreshTriggeredWhileLocked = true;
+			return;
+		}
+		this.RefreshWeather(rebuild, loc);
+	}
+
 	/**
 	 * Main function pulling and refreshing data
 	 * @param rebuild 

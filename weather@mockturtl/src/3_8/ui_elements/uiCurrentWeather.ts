@@ -42,15 +42,21 @@ export class CurrentWeather {
 	private sunriseLabel!: imports.gi.St.Label;
 	/** If config._showSunrise is not true this can be null|deallocated */
 	private sunsetLabel!: imports.gi.St.Label;
+
+	private temperatureCaption!: imports.gi.St.Label;
+	private humidityCaption!: imports.gi.St.Label;
+	private pressureCaption!: imports.gi.St.Label;
+	private windCaption!: imports.gi.St.Label;
+	private dewPointCaption!: imports.gi.St.Label;
+	private apiUniqueCaption!: imports.gi.St.Label;
+
 	private temperatureLabel!: imports.gi.St.Label;
 	private humidityLabel!: imports.gi.St.Label;
 	private pressureLabel!: imports.gi.St.Label;
 	private windLabel!: imports.gi.St.Label;
-	private dewPointLabel!: imports.gi.St.Label;
-	private dewPointCaption!: imports.gi.St.Label;
 	private windDirectionIcon!: imports.gi.St.Icon;
+	private dewPointLabel!: imports.gi.St.Label;
 	private apiUniqueLabel!: imports.gi.St.Label;
-	private apiUniqueCaptionLabel!: imports.gi.St.Label;
 
 	private immediatePrecipitationBox!: imports.gi.St.Bin;
 	private immediatePrecipitationLabel!: imports.gi.St.Label;
@@ -155,18 +161,22 @@ export class CurrentWeather {
 		this.dewPointLabel = new Label({ text: '' });
 
 		this.apiUniqueLabel = new Label({ text: '' })
-		// APi Unique Caption
-		this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
+		this.temperatureCaption = new Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle });
+		this.humidityCaption = new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle });
+		this.pressureCaption = new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle });
+		this.windCaption = new Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle });
 		this.dewPointCaption = new Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
+		// APi Unique Caption
+		this.apiUniqueCaption = new Label({ text: '', style: textColorStyle });
 
 		const rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
 		const rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES })
-		rb_captions.add_actor(new Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle }));
-		rb_captions.add_actor(new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle }));
-		rb_captions.add_actor(new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle }));
-		rb_captions.add_actor(new Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+		rb_captions.add_actor(this.temperatureCaption);
+		rb_captions.add_actor(this.humidityCaption);
+		rb_captions.add_actor(this.pressureCaption);
+		rb_captions.add_actor(this.windCaption);
 		rb_captions.add_actor(this.dewPointCaption);
-		rb_captions.add_actor(this.apiUniqueCaptionLabel);
+		rb_captions.add_actor(this.apiUniqueCaption);
 		rb_values.add_actor(this.temperatureLabel);
 		rb_values.add_actor(this.humidityLabel);
 		rb_values.add_actor(this.pressureLabel);
@@ -328,35 +338,38 @@ export class CurrentWeather {
 	}
 
 	private SetAPIUniqueField(extra_field?: APIUniqueField) {
-		// API Unique display
-		this.apiUniqueLabel.text = "";
-		this.apiUniqueCaptionLabel.text = "";
-		if (!!extra_field) {
-			this.apiUniqueCaptionLabel.text = _(extra_field.name) + LocalizedColon(this.app.config.currentLocale);
-			let value: string | null = null;
-			switch (extra_field.type) {
-				case "percent":
-					value = PercentToLocale(extra_field.value, this.app.config.currentLocale);
-					break;
-				case "temperature":
-					value = TempToUserConfig(extra_field.value, this.app.config);
-					break;
-				default:
-					value = _(extra_field.value);
-					break;
-			}
-			this.apiUniqueLabel.text = value ?? "";
+		if (extra_field == null) {
+			this.apiUniqueCaption.set_style_class_name("weather-hidden");
+			this.apiUniqueLabel.set_style_class_name("weather-hidden");
+			return;
 		}
+
+		this.apiUniqueCaption.text = _(extra_field.name) + LocalizedColon(this.app.config.currentLocale);
+		let value: string | null = null;
+		switch (extra_field.type) {
+			case "percent":
+				value = PercentToLocale(extra_field.value, this.app.config.currentLocale);
+				break;
+			case "temperature":
+				value = TempToUserConfig(extra_field.value, this.app.config);
+				break;
+			default:
+				value = _(extra_field.value);
+				break;
+		}
+		this.apiUniqueLabel.text = value ?? "";
+		this.apiUniqueCaption.remove_style_class_name("weather-hidden");
+		this.apiUniqueLabel.remove_style_class_name("weather-hidden");
 	}
 
 	private SetDewPointField(dewPoint: number | null): void {
-		const temp = TempToUserConfig(dewPoint, this.app.config);
-		if (temp == null) {
+		if (dewPoint == null) {
 			this.dewPointCaption.set_style_class_name("weather-hidden");
 			this.dewPointLabel.set_style_class_name("weather-hidden");
 			return;
 		}
 
+		const temp = TempToUserConfig(dewPoint, this.app.config);
 		this.dewPointCaption.remove_style_class_name("weather-hidden");
 		this.dewPointLabel.remove_style_class_name("weather-hidden");
 		this.dewPointLabel.text = temp;
@@ -379,20 +392,36 @@ export class CurrentWeather {
 	}
 
 	private SetTemperature(temperature: number | null) {
+		if (temperature == null) {
+			this.temperatureCaption.set_style_class_name("weather-hidden");
+			this.temperatureLabel.set_style_class_name("weather-hidden");
+			return;
+		}
+
 		const temp = TempToUserConfig(temperature, this.app.config);
-		if (temp == null) return;
 		this.temperatureLabel.text = temp;
+		this.temperatureCaption.remove_style_class_name("weather-hidden");
+		this.temperatureLabel.remove_style_class_name("weather-hidden");
 	}
 
 	private SetHumidity(humidity: number | null) {
-		if (humidity != null) {
-			this.humidityLabel.text = PercentToLocale(humidity, this.app.config.currentLocale);
+		if (humidity == null) {
+			this.humidityCaption.set_style_class_name("weather-hidden");
+			this.humidityLabel.set_style_class_name("weather-hidden");
+			return;
 		}
+
+		this.humidityLabel.text = PercentToLocale(humidity, this.app.config.currentLocale);
+		this.humidityCaption.remove_style_class_name("weather-hidden");
+		this.humidityLabel.remove_style_class_name("weather-hidden");
 	}
 
 	private async SetWind(windSpeed: number | null, windDegree: number | null) {
-		if (windSpeed == null || windDegree == null)
+		if (windSpeed == null || windDegree == null) {
+			this.windCaption.set_style_class_name("weather-hidden");
+			this.windLabel.set_style_class_name("weather-hidden");
 			return;
+		}
 
 		const wind_direction = CompassDirection(windDegree);
 		this.windDirectionIcon.icon_name = wind_direction;
@@ -406,12 +435,20 @@ export class CurrentWeather {
 
 		// No need to display unit to Beaufort scale
 		if (this.app.config.WindSpeedUnit != "Beaufort") this.windLabel.text += " " + _(this.app.config.WindSpeedUnit);
+		this.windCaption.remove_style_class_name("weather-hidden");
+		this.windLabel.remove_style_class_name("weather-hidden");
 	}
 
 	private SetPressure(pressure: number | null) {
-		if (pressure != null) {
-			this.pressureLabel.text = PressToUserUnits(pressure, this.app.config._pressureUnit) + ' ' + _(this.app.config._pressureUnit);
+		if (pressure == null) {
+			this.pressureCaption.set_style_class_name("weather-hidden");
+			this.pressureLabel.set_style_class_name("weather-hidden");
+			return;
 		}
+
+		this.pressureLabel.text = PressToUserUnits(pressure, this.app.config._pressureUnit) + ' ' + _(this.app.config._pressureUnit);
+		this.pressureCaption.remove_style_class_name("weather-hidden");
+		this.pressureLabel.remove_style_class_name("weather-hidden");
 	}
 
 	private SetLocation(locationString: string, url?: string) {
@@ -426,12 +463,12 @@ export class CurrentWeather {
 
 	private NextLocationClicked() {
 		const loc = this.app.config.SwitchToNextLocation();
-		this.app.RefreshAndRebuild(loc);
+		this.app.Refresh(loc);
 	}
 
 	private PreviousLocationClicked() {
 		const loc = this.app.config.SwitchToPreviousLocation();
-		this.app.RefreshAndRebuild(loc);
+		this.app.Refresh(loc);
 	}
 
 	private onLocationStorageChanged(sender: LocationStore, itemCount: number): void {
