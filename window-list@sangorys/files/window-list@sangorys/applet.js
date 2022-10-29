@@ -2019,7 +2019,6 @@ class CinnamonWindowListApplet extends Applet.Applet {
 
 // CASE 2.1 : FOUND A WINDOW MATCHING WITH CLASS AND TITLE
                     logif(localDebug,this.userOrder.tableOfDictionary[index]["class"] + " / " + this.userOrder.tableOfDictionary[index]["title"] +  " has been found");
-
                     //FIND THE FILE POSITION OF THE PREVIOUS EXISTING WINDOW
                     for (let i=index; i>=0 ; i--) try {
                         if (this.userOrder.tableOfDictionary[i]["xid"] != ""){
@@ -2039,9 +2038,8 @@ class CinnamonWindowListApplet extends Applet.Applet {
                     }else { toMove=0 ;}
 
                 }else {
-                    // CLASS / TITLE NOT FOUND
-                    logif(localDebug,this.userOrder.tableOfDictionary[index]["class"] + " / " + this.userOrder.tableOfDictionary[index]["title"] +  " not been found. Search only the class");
-
+                    // INDEX=-1 => CLASS / TITLE NOT FOUND
+                    logif(localDebug,metaWindow.wm_class + " / " + metaWindow.get_title() +  " not been found. Search only the class");
                     index=this.userOrder.getIndexFromReverse("class", metaWindow.wm_class, true);
 
                     if (index >= 0){
@@ -2303,9 +2301,9 @@ class CinnamonWindowListApplet extends Applet.Applet {
 
         log(actors.length + " actors");
         for (let k = 0; k < actors.length; k++ ) try {
-            log(actors[k]._delegate.xid + " - " + actors[k]._delegate.metaWindow.class);
+            log("  o " + actors[k]._delegate.xid + " - " + actors[k]._delegate.metaWindow.wm_class);
         } catch(error) { log(error) };
-        log("_printActorPosition().END");
+        //log("_printActorPosition().END");
     }
 
     _updateAllIconGeometry() {
