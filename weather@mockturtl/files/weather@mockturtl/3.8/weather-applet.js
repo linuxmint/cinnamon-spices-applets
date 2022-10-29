@@ -14734,6 +14734,7 @@ class WeatherUnderground extends BaseProvider {
 
 
 
+
 const { get_home_dir: config_get_home_dir } = imports.gi.GLib;
 const { File: config_File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
@@ -14801,6 +14802,34 @@ class Config {
         };
         this.WEATHER_LOCATION = "location";
         this.WEATHER_LOCATION_LIST = "locationList";
+        this.DataServiceChanged = new Event();
+        this.TranslateConditionChanged = new Event();
+        this.PressureUnitChanged = new Event();
+        this.Show24HoursChanged = new Event();
+        this.ForecastDaysChanged = new Event();
+        this.ForecastHoursChanged = new Event();
+        this.ForecastColumnsChanged = new Event();
+        this.ForecastRowsChanged = new Event();
+        this.VerticalOrientationChanged = new Event();
+        this.TemperatureHighFirstChanged = new Event();
+        this.ShortConditionsChanged = new Event();
+        this.ShowSunriseChanged = new Event();
+        this.ShowCommentInPanelChanged = new Event();
+        this.ShowTextInPanelChanged = new Event();
+        this.LocationLabelOverrideChanged = new Event();
+        this.UseCustomAppletIconsChanged = new Event();
+        this.UseCustomMenuIconsChanged = new Event();
+        this.TempTextOverrideChanged = new Event();
+        this.TempRussianStyleChanged = new Event();
+        this.ShortHourlyTimeChanged = new Event();
+        this.ShowForecastDatesChanged = new Event();
+        this.LocationListChanged = new Event();
+        this.ImmediatePrecipChanged = new Event();
+        this.ShowBothTempUnitsChanged = new Event();
+        this.DisplayWindAsTextChanged = new Event();
+        this.AlwaysShowHourlyWeatherChanged = new Event();
+        this.LogLevelChanged = new Event();
+        this.SelectedLogPathChanged = new Event();
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.textColorStyle = null;
@@ -14850,21 +14879,6 @@ class Config {
         if (!value || value == "")
             value = undefined;
         this.timezone = value;
-    }
-    BindSettings() {
-        let k;
-        for (k in Keys) {
-            const key = Keys[k];
-            const keyProp = "_" + key;
-            this.settings.bindProperty(BindingDirection.IN, key, keyProp, this.OnSettingChanged, null);
-        }
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
-        this.settings.bind("tempTextOverride", "_" + "tempTextOverride", this.app.RefreshLabel);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
-        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this.OnKeySettingsUpdated, null);
-        this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
-        this.settings.bind("selectedLogPath", "_selectedLogPath", this.app.saveLog);
-        keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked(null));
     }
     get CurrentFontSize() {
         return this.currentFontSize;
@@ -14984,6 +14998,46 @@ class Config {
             this.InjectLocationToConfig(locationData);
             return locationData;
         }
+    }
+    BindSettings() {
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.DATA_SERVICE, ("_" + Keys.DATA_SERVICE), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.API_KEY, ("_" + Keys.API_KEY), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TEMPERATURE_UNIT_KEY, ("_" + Keys.TEMPERATURE_UNIT_KEY), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TEMPERATURE_HIGH_FIRST, ("_" + Keys.TEMPERATURE_HIGH_FIRST), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.WIND_SPEED_UNIT, ("_" + Keys.WIND_SPEED_UNIT), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.DISTANCE_UNIT, ("_" + Keys.DISTANCE_UNIT), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.CITY, ("_" + Keys.CITY), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TRANSLATE_CONDITION, ("_" + Keys.TRANSLATE_CONDITION), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.VERTICAL_ORIENTATION, ("_" + Keys.VERTICAL_ORIENTATION), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHOW_TEXT_IN_PANEL, ("_" + Keys.SHOW_TEXT_IN_PANEL), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHOW_COMMENT_IN_PANEL, ("_" + Keys.SHOW_COMMENT_IN_PANEL), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHOW_SUNRISE, ("_" + Keys.SHOW_SUNRISE), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHOW_24HOURS, ("_" + Keys.SHOW_24HOURS), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.FORECAST_DAYS, ("_" + Keys.FORECAST_DAYS), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.FORECAST_HOURS, ("_" + Keys.FORECAST_HOURS), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.FORECAST_COLS, ("_" + Keys.FORECAST_COLS), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.FORECAST_ROWS, ("_" + Keys.FORECAST_ROWS), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.REFRESH_INTERVAL, ("_" + Keys.REFRESH_INTERVAL), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.PRESSURE_UNIT, ("_" + Keys.PRESSURE_UNIT), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHORT_CONDITIONS, ("_" + Keys.SHORT_CONDITIONS), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.MANUAL_LOCATION, ("_" + Keys.MANUAL_LOCATION), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.USE_CUSTOM_APPLET_ICONS, ("_" + Keys.USE_CUSTOM_APPLET_ICONS), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.USE_CUSTOM_MENU_ICONS, ("_" + Keys.USE_CUSTOM_MENU_ICONS), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.RUSSIAN_STYLE, ("_" + Keys.RUSSIAN_STYLE), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHORT_HOURLY_TIME, ("_" + Keys.SHORT_HOURLY_TIME), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHOW_FORECAST_DATES, ("_" + Keys.SHOW_FORECAST_DATES), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.WEATHER_USE_SYMBOLIC_ICONS_KEY, ("_" + Keys.WEATHER_USE_SYMBOLIC_ICONS_KEY), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.IMMEDIATE_PRECIP, ("_" + Keys.IMMEDIATE_PRECIP), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHOW_BOTH_TEMP, ("_" + Keys.SHOW_BOTH_TEMP), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.DISPLAY_WIND_DIR_AS_TEXT, ("_" + Keys.DISPLAY_WIND_DIR_AS_TEXT), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.ALWAYS_SHOW_HOURLY, ("_" + Keys.ALWAYS_SHOW_HOURLY), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
+        this.settings.bind("tempTextOverride", "_" + "tempTextOverride", this.app.RefreshLabel);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
+        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this.OnKeySettingsUpdated, null);
+        this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
+        this.settings.bind("selectedLogPath", "_selectedLogPath", this.app.saveLog);
+        keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked(null));
     }
     InjectLocationToConfig(loc, switchToManual = false) {
         logger_Logger.Debug("Location setting is now: " + loc.entryText);

@@ -21,6 +21,7 @@ import { DanishMI } from "./providers/danishMI";
 import { AccuWeather } from "./providers/accuWeather";
 import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
 import { WeatherUnderground } from "./providers/weatherUnderground";
+import { Event } from "./lib/events";
 
 const { get_home_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -167,6 +168,38 @@ export class Config {
 	public readonly _logLevel!: LogLevel;
 	public readonly _selectedLogPath!: string;
 
+	public readonly DataServiceChanged = new Event<Config, Services>();
+	public readonly TranslateConditionChanged = new Event<Config, boolean>();
+	public readonly PressureUnitChanged = new Event<Config, WeatherPressureUnits>();
+	public readonly Show24HoursChanged = new Event<Config, boolean>();
+	public readonly ForecastDaysChanged = new Event<Config, number>();
+	public readonly ForecastHoursChanged = new Event<Config, number>();
+	public readonly ForecastColumnsChanged = new Event<Config, number>();
+	public readonly ForecastRowsChanged = new Event<Config, number>();
+	/**
+	 * true is vertical, false is horizontal
+	 */
+	public readonly VerticalOrientationChanged = new Event<Config, boolean>();
+	public readonly TemperatureHighFirstChanged = new Event<Config, boolean>();
+	public readonly ShortConditionsChanged = new Event<Config, boolean>();
+	public readonly ShowSunriseChanged = new Event<Config, boolean>();
+	public readonly ShowCommentInPanelChanged = new Event<Config, boolean>();
+	public readonly ShowTextInPanelChanged = new Event<Config, boolean>();
+	public readonly LocationLabelOverrideChanged = new Event<Config, string>();
+	public readonly UseCustomAppletIconsChanged = new Event<Config, boolean>();
+	public readonly UseCustomMenuIconsChanged = new Event<Config, boolean>();
+	public readonly TempTextOverrideChanged = new Event<Config, string>();
+	public readonly TempRussianStyleChanged = new Event<Config, boolean>();
+	public readonly ShortHourlyTimeChanged = new Event<Config, boolean>();
+	public readonly ShowForecastDatesChanged = new Event<Config, boolean>();
+	public readonly LocationListChanged = new Event<Config, LocationData[]>();
+	public readonly ImmediatePrecipChanged = new Event<Config, boolean>();
+	public readonly ShowBothTempUnitsChanged = new Event<Config, boolean>();
+	public readonly DisplayWindAsTextChanged = new Event<Config, boolean>();
+	public readonly AlwaysShowHourlyWeatherChanged = new Event<Config, boolean>();
+	public readonly LogLevelChanged = new Event<Config, LogLevel>();
+	public readonly SelectedLogPathChanged = new Event<Config, string>();
+
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
 	private currentLocation: LocationData | null = null;
@@ -213,39 +246,6 @@ export class Config {
 		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
 		this.currentFontSize = this.GetCurrentFontSize();
 		this.LocStore = new LocationStore(this.app, this);
-	}
-
-	/** Attaches settings to functions */
-	private BindSettings() {
-		let k: keyof typeof Keys;
-		for (k in Keys) {
-			const key = Keys[k];
-			const keyProp = "_" + key;
-			this.settings.bindProperty(BindingDirection.IN,
-				key, keyProp, this.OnSettingChanged, null);
-		}
-
-		// Settings what need special care
-		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
-
-		this.settings.bind("tempTextOverride", "_" + "tempTextOverride",
-			this.app.RefreshLabel)
-
-		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
-
-		this.settings.bindProperty(BindingDirection.IN, "keybinding",
-			"keybinding", this.OnKeySettingsUpdated, null);
-
-		this.settings.bindProperty(BindingDirection.IN, "logLevel",
-			"_logLevel", this.onLogLevelUpdated, null);
-
-		this.settings.bind("selectedLogPath",
-			"_selectedLogPath", this.app.saveLog);
-
-		keybindingManager.addHotKey(
-			UUID, this.keybinding, () => this.app.on_applet_clicked(null));
 	}
 
 	public get CurrentFontSize(): number {
@@ -407,6 +407,249 @@ export class Config {
 			this.InjectLocationToConfig(locationData);
 			return locationData;
 		}
+	}
+
+	/** Attaches settings to functions */
+	private BindSettings() {
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.DATA_SERVICE, 
+			("_" + Keys.DATA_SERVICE),
+			// () => this.DataServiceChanged.Invoke(this, this._dataService),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.API_KEY,
+			("_" + Keys.API_KEY),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.TEMPERATURE_UNIT_KEY,
+			("_" + Keys.TEMPERATURE_UNIT_KEY),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.TEMPERATURE_HIGH_FIRST,
+			("_" + Keys.TEMPERATURE_HIGH_FIRST),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.WIND_SPEED_UNIT,
+			("_" + Keys.WIND_SPEED_UNIT),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.DISTANCE_UNIT,
+			("_" + Keys.DISTANCE_UNIT),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.CITY,
+			("_" + Keys.CITY),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.TRANSLATE_CONDITION,
+			("_" + Keys.TRANSLATE_CONDITION),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.VERTICAL_ORIENTATION,
+			("_" + Keys.VERTICAL_ORIENTATION),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.SHOW_TEXT_IN_PANEL,
+			("_" + Keys.SHOW_TEXT_IN_PANEL),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.SHOW_COMMENT_IN_PANEL,
+			("_" + Keys.SHOW_COMMENT_IN_PANEL),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.SHOW_SUNRISE,
+			("_" + Keys.SHOW_SUNRISE),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.SHOW_24HOURS,
+			("_" + Keys.SHOW_24HOURS),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.FORECAST_DAYS,
+			("_" + Keys.FORECAST_DAYS),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.FORECAST_HOURS,
+			("_" + Keys.FORECAST_HOURS),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.FORECAST_COLS,
+			("_" + Keys.FORECAST_COLS),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.FORECAST_ROWS,
+			("_" + Keys.FORECAST_ROWS),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.REFRESH_INTERVAL,
+			("_" + Keys.REFRESH_INTERVAL),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.PRESSURE_UNIT,
+			("_" + Keys.PRESSURE_UNIT),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.SHORT_CONDITIONS,
+			("_" + Keys.SHORT_CONDITIONS),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.MANUAL_LOCATION,
+			("_" + Keys.MANUAL_LOCATION),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.USE_CUSTOM_APPLET_ICONS,
+			("_" + Keys.USE_CUSTOM_APPLET_ICONS),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.USE_CUSTOM_MENU_ICONS,
+			("_" + Keys.USE_CUSTOM_MENU_ICONS),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.RUSSIAN_STYLE,
+			("_" + Keys.RUSSIAN_STYLE),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.SHORT_HOURLY_TIME,
+			("_" + Keys.SHORT_HOURLY_TIME),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.SHOW_FORECAST_DATES,
+			("_" + Keys.SHOW_FORECAST_DATES),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.WEATHER_USE_SYMBOLIC_ICONS_KEY,
+			("_" + Keys.WEATHER_USE_SYMBOLIC_ICONS_KEY),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.IMMEDIATE_PRECIP,
+			("_" + Keys.IMMEDIATE_PRECIP),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.SHOW_BOTH_TEMP,
+			("_" + Keys.SHOW_BOTH_TEMP),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.DISPLAY_WIND_DIR_AS_TEXT,
+			("_" + Keys.DISPLAY_WIND_DIR_AS_TEXT),
+			this.OnSettingChanged,
+			null
+		);
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			Keys.ALWAYS_SHOW_HOURLY,
+			("_" + Keys.ALWAYS_SHOW_HOURLY),
+			this.OnSettingChanged,
+			null
+		);
+
+		// Settings what need special care
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
+
+		this.settings.bind("tempTextOverride", "_" + "tempTextOverride",
+			this.app.RefreshLabel)
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
+
+		this.settings.bindProperty(BindingDirection.IN, "keybinding",
+			"keybinding", this.OnKeySettingsUpdated, null);
+
+		this.settings.bindProperty(BindingDirection.IN, "logLevel",
+			"_logLevel", this.onLogLevelUpdated, null);
+
+		this.settings.bind("selectedLogPath",
+			"_selectedLogPath", this.app.saveLog);
+
+		keybindingManager.addHotKey(
+			UUID, this.keybinding, () => this.app.on_applet_clicked(null));
 	}
 
 	// UTILS
