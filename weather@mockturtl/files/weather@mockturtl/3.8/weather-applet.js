@@ -9267,6 +9267,12 @@ class IpApi {
 class Event {
     constructor() {
         this.subscribers = [];
+        Event.eventStore.push(this);
+    }
+    static DestroyAll() {
+        for (const event of this.eventStore) {
+            event.UnSubscribeAll();
+        }
     }
     Subscribe(fn) {
         this.subscribers.push(fn);
@@ -9291,6 +9297,7 @@ class Event {
         this.subscribers = [];
     }
 }
+Event.eventStore = [];
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/notification_service.ts
 
@@ -15138,41 +15145,6 @@ class Config {
     }
     Destroy() {
         var _a, _b;
-        this.ApiKeyChanged.UnSubscribeAll();
-        this.TemperatuReUnitChanged.UnSubscribeAll();
-        this.WindSpeedUnitChanged.UnSubscribeAll();
-        this.DistanceUnitChanged.UnSubscribeAll();
-        this.RefreshIntervalChanged.UnSubscribeAll();
-        this.ManualLocationChanged.UnSubscribeAll();
-        this.UseSymbolicIconsChanged.UnSubscribeAll();
-        this.DataServiceChanged.UnSubscribeAll();
-        this.TranslateConditionChanged.UnSubscribeAll();
-        this.PressureUnitChanged.UnSubscribeAll();
-        this.Show24HoursChanged.UnSubscribeAll();
-        this.ForecastDaysChanged.UnSubscribeAll();
-        this.ForecastHoursChanged.UnSubscribeAll();
-        this.ForecastColumnsChanged.UnSubscribeAll();
-        this.ForecastRowsChanged.UnSubscribeAll();
-        this.VerticalOrientationChanged.UnSubscribeAll();
-        this.TemperatureHighFirstChanged.UnSubscribeAll();
-        this.ShortConditionsChanged.UnSubscribeAll();
-        this.ShowSunriseChanged.UnSubscribeAll();
-        this.ShowCommentInPanelChanged.UnSubscribeAll();
-        this.ShowTextInPanelChanged.UnSubscribeAll();
-        this.LocationLabelOverrideChanged.UnSubscribeAll();
-        this.UseCustomAppletIconsChanged.UnSubscribeAll();
-        this.UseCustomMenuIconsChanged.UnSubscribeAll();
-        this.TempTextOverrideChanged.UnSubscribeAll();
-        this.TempRussianStyleChanged.UnSubscribeAll();
-        this.ShortHourlyTimeChanged.UnSubscribeAll();
-        this.ShowForecastDatesChanged.UnSubscribeAll();
-        this.LocationListChanged.UnSubscribeAll();
-        this.ImmediatePrecipChanged.UnSubscribeAll();
-        this.ShowBothTempUnitsChanged.UnSubscribeAll();
-        this.DisplayWindAsTextChanged.UnSubscribeAll();
-        this.AlwaysShowHourlyWeatherChanged.UnSubscribeAll();
-        this.LogLevelChanged.UnSubscribeAll();
-        this.SelectedLogPathChanged.UnSubscribeAll();
         (_b = (_a = this.settings).finalize) === null || _b === void 0 ? void 0 : _b.call(_a);
     }
 }
@@ -16762,6 +16734,7 @@ class HttpLib {
 
 
 
+
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
@@ -17150,6 +17123,7 @@ The contents of the file saved from the applet help page goes here
         logger_Logger.Info("Removing applet instance...");
         this.loop.Stop();
         this.config.Destroy();
+        Event.DestroyAll();
     }
     on_applet_clicked(event) {
         this.ui.Toggle();

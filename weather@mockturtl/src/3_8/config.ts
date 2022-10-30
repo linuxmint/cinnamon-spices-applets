@@ -806,41 +806,6 @@ export class Config {
 	}
 
 	public Destroy() {
-		this.ApiKeyChanged.UnSubscribeAll();
-		this.TemperatuReUnitChanged.UnSubscribeAll();
-		this.WindSpeedUnitChanged.UnSubscribeAll();
-		this.DistanceUnitChanged.UnSubscribeAll();
-		this.RefreshIntervalChanged.UnSubscribeAll();
-		this.ManualLocationChanged.UnSubscribeAll();
-		this.UseSymbolicIconsChanged.UnSubscribeAll();
-		this.DataServiceChanged.UnSubscribeAll();
-		this.TranslateConditionChanged.UnSubscribeAll();
-		this.PressureUnitChanged.UnSubscribeAll();
-		this.Show24HoursChanged.UnSubscribeAll();
-		this.ForecastDaysChanged.UnSubscribeAll();
-		this.ForecastHoursChanged.UnSubscribeAll();
-		this.ForecastColumnsChanged.UnSubscribeAll();
-		this.ForecastRowsChanged.UnSubscribeAll();
-		this.VerticalOrientationChanged.UnSubscribeAll();
-		this.TemperatureHighFirstChanged.UnSubscribeAll();
-		this.ShortConditionsChanged.UnSubscribeAll();
-		this.ShowSunriseChanged.UnSubscribeAll();
-		this.ShowCommentInPanelChanged.UnSubscribeAll();
-		this.ShowTextInPanelChanged.UnSubscribeAll();
-		this.LocationLabelOverrideChanged.UnSubscribeAll();
-		this.UseCustomAppletIconsChanged.UnSubscribeAll();
-		this.UseCustomMenuIconsChanged.UnSubscribeAll();
-		this.TempTextOverrideChanged.UnSubscribeAll();
-		this.TempRussianStyleChanged.UnSubscribeAll();
-		this.ShortHourlyTimeChanged.UnSubscribeAll();
-		this.ShowForecastDatesChanged.UnSubscribeAll();
-		this.LocationListChanged.UnSubscribeAll();
-		this.ImmediatePrecipChanged.UnSubscribeAll();
-		this.ShowBothTempUnitsChanged.UnSubscribeAll();
-		this.DisplayWindAsTextChanged.UnSubscribeAll();
-		this.AlwaysShowHourlyWeatherChanged.UnSubscribeAll();
-		this.LogLevelChanged.UnSubscribeAll();
-		this.SelectedLogPathChanged.UnSubscribeAll();
 		this.settings.finalize?.();
 	}
 }

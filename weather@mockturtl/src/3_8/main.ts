@@ -17,6 +17,7 @@ import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { CloseStream, OverwriteAndGetIOStream, WriteAsync } from "./lib/io_lib";
 import { NotificationService } from "./lib/notification_service";
 import { SpawnProcess } from "./lib/commandRunner";
+import { Event } from "./lib/events";
 
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
@@ -506,6 +507,7 @@ The contents of the file saved from the applet help page goes here
 		Logger.Info("Removing applet instance...")
 		this.loop.Stop();
 		this.config.Destroy();
+		Event.DestroyAll();
 	}
 
 	public override on_applet_clicked(event: any): boolean {
