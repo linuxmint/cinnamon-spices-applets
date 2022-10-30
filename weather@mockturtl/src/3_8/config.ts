@@ -156,7 +156,6 @@ export class Config {
 	public readonly _locationLabelOverride!: string;
 	public readonly _useCustomAppletIcons!: boolean;
 	public readonly _useCustomMenuIcons!: boolean;
-	public readonly _tempTextOverride!: string;
 	public readonly _tempRussianStyle!: boolean;
 	public readonly _shortHourlyTime!: boolean;
 	public readonly _showForecastDates!: boolean;
@@ -167,6 +166,7 @@ export class Config {
 	public readonly _alwaysShowHourlyWeather!: boolean;
 	public readonly _logLevel!: LogLevel;
 	public readonly _selectedLogPath!: string;
+	public readonly _panelTextOverride!: string;
 
 	public readonly DataServiceChanged = new Event<Config, Services>();
 	public readonly ApiKeyChanged = new Event<Config, string>();
@@ -195,7 +195,6 @@ export class Config {
 	public readonly UseCustomAppletIconsChanged = new Event<Config, boolean>();
 	public readonly UseCustomMenuIconsChanged = new Event<Config, boolean>();
 	public readonly UseSymbolicIconsChanged = new Event<Config, boolean>();
-	public readonly TempTextOverrideChanged = new Event<Config, string>();
 	public readonly TempRussianStyleChanged = new Event<Config, boolean>();
 	public readonly ShortHourlyTimeChanged = new Event<Config, boolean>();
 	public readonly ShowForecastDatesChanged = new Event<Config, boolean>();
@@ -639,7 +638,7 @@ export class Config {
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
 
-		this.settings.bind("tempTextOverride", "_" + "tempTextOverride",
+		this.settings.bind("tempTextOverride", "_" + "panelTextOverride",
 			this.app.RefreshLabel)
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,

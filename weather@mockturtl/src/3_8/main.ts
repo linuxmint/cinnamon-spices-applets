@@ -31,6 +31,11 @@ export class WeatherApplet extends TextIconApplet {
 	private unlockFunc: (() => void) | null = null;
 	private manualRefreshTriggeredWhileLocked = false;
 
+	private currentWeatherInfo: WeatherData | null = null;
+	public get CurrentData(): WeatherData | null {
+		return this.currentWeatherInfo;
+	}
+
 	public get WaitForRefresh(): Promise<void> {
 		if (this.refreshing == null)
 			return Promise.resolve();
@@ -59,7 +64,6 @@ export class WeatherApplet extends TextIconApplet {
 	public encounteredError: boolean = false;
 
 	private online: boolean | null = null;
-	private currentWeatherInfo: WeatherData | null = null;
 
 	public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
 		super(orientation, panelHeight, instanceId);
@@ -85,37 +89,44 @@ export class WeatherApplet extends TextIconApplet {
 		this.loop.Start();
 		this.OnNetworkConnectivityChanged();
 		NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
+		// We need a full rebuild and refresh for these
 		this.config.DataServiceChanged.Subscribe(() => this.RefreshAndRebuild());
+
+		// We need a full rebuild without refresh for these
 		this.config.VerticalOrientationChanged.Subscribe(() => this.RefreshAndRebuild());
 		this.config.ForecastColumnsChanged.Subscribe(() => this.RefreshAndRebuild());
 		this.config.ForecastRowsChanged.Subscribe(() => this.RefreshAndRebuild());
 
+		this.config.UseCustomAppletIconsChanged.Subscribe(() => this.RefreshAndRebuild());
+		this.config.UseCustomMenuIconsChanged.Subscribe(() => this.RefreshAndRebuild());
+		this.config.UseSymbolicIconsChanged.Subscribe(() => this.RefreshAndRebuild());
+
+		// We need a full refresh for these
 		this.config.ApiKeyChanged.Subscribe(() => this.Refresh());
+		// Some translations come from the API we need a refresh
+		this.config.TranslateConditionChanged.Subscribe(() => this.Refresh());
+		this.config.ManualLocationChanged.Subscribe(() => this.Refresh());
+
+		// Misc Triggers
+		this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Resume());
+
+		// Panel
+		this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
+		this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
+
 		this.config.TemperatureUnitChanged.Subscribe(this.OnConfigChanged);
 		this.config.WindSpeedUnitChanged.Subscribe(this.OnConfigChanged);
 		this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
-		this.config.TranslateConditionChanged.Subscribe(this.OnConfigChanged);
 		this.config.PressureUnitChanged.Subscribe(this.OnConfigChanged);
 		this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged);
 		this.config.ForecastDaysChanged.Subscribe(this.OnConfigChanged);
 		this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
-		this.config.RefreshIntervalChanged.Subscribe(this.OnConfigChanged);
-		this.config.ManualLocationChanged.Subscribe(this.OnConfigChanged);
 		this.config.TemperatureHighFirstChanged.Subscribe(this.OnConfigChanged);
 		this.config.ShortConditionsChanged.Subscribe(this.OnConfigChanged);
-		this.config.ShowSunriseChanged.Subscribe(this.OnConfigChanged);
-		this.config.ShowCommentInPanelChanged.Subscribe(this.OnConfigChanged);
-		this.config.ShowTextInPanelChanged.Subscribe(this.OnConfigChanged);
 		this.config.LocationLabelOverrideChanged.Subscribe(this.OnConfigChanged);
-		this.config.UseCustomAppletIconsChanged.Subscribe(this.OnConfigChanged);
-		this.config.UseCustomMenuIconsChanged.Subscribe(this.OnConfigChanged);
-		this.config.UseSymbolicIconsChanged.Subscribe(this.OnConfigChanged);
-		this.config.TempTextOverrideChanged.Subscribe(this.OnConfigChanged);
 		this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
 		this.config.ShortHourlyTimeChanged.Subscribe(this.OnConfigChanged);
-		this.config.ShowForecastDatesChanged.Subscribe(this.OnConfigChanged);
 		this.config.LocationListChanged.Subscribe(this.OnConfigChanged);
-		this.config.ImmediatePrecipChanged.Subscribe(this.OnConfigChanged);
 		this.config.ShowBothTempUnitsChanged.Subscribe(this.OnConfigChanged);
 		this.config.DisplayWindAsTextChanged.Subscribe(this.OnConfigChanged);
 		this.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.OnConfigChanged);
@@ -237,6 +248,7 @@ export class WeatherApplet extends TextIconApplet {
 			}
 
 			weatherInfo = this.MergeWeatherData(weatherInfo, location);
+			this.currentWeatherInfo = weatherInfo;
 			this.config.Timezone = weatherInfo.location.timeZone;
 
 			if (rebuild) this.ui.Rebuild(this.config);
@@ -248,7 +260,6 @@ export class WeatherApplet extends TextIconApplet {
 
 			Logger.Info("Weather Information refreshed");
 			this.loop.ResetErrorCount();
-			this.currentWeatherInfo = weatherInfo;
 			this.Unlock();
 			return RefreshState.Success;
 		}
@@ -311,8 +322,8 @@ export class WeatherApplet extends TextIconApplet {
 		}
 
 		// Overriding temperature panel label
-		if (NotEmpty(this.config._tempTextOverride)) {
-			label = this.config._tempTextOverride
+		if (NotEmpty(this.config._panelTextOverride)) {
+			label = this.config._panelTextOverride
 				.replace(/{t}/g, TempToUserConfig(temperature, this.config, false) ?? "")
 				.replace(/{u}/g, UnitToUnicode(this.config.TemperatureUnit))
 				.replace(/{c}/g, mainCondition)

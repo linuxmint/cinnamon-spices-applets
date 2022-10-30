@@ -1,13 +1,13 @@
 import { OpenUrl } from "../lib/commandRunner";
 import { Config } from "../config";
-import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "../consts";
+import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK, STYLE_HIDDEN } from "../consts";
 import { LocationStore } from "../location_services/locationstore";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../types";
-import { _, GetHoursMinutes, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PercentToLocale, CompassDirectionText } from "../utils";
+import { _, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, WeatherIconSafely, LocalizedColon, PercentToLocale, CompassDirectionText } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
-import { DateTime } from "luxon";
+import { SunTimesUI } from "./uiSunTimes";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
 const Lang: typeof imports.lang = imports.lang;
@@ -19,10 +19,9 @@ const STYLE_DATABOX = 'weather-current-databox'
 const STYLE_ICON = 'weather-current-icon'
 const STYLE_ICONBOX = 'weather-current-iconbox'
 const STYLE_DATABOX_CAPTIONS = 'weather-current-databox-captions'
-const STYLE_ASTRONOMY = 'weather-current-astronomy'
 const STYLE_DATABOX_VALUES = 'weather-current-databox-values'
 const STYLE_CURRENT = 'current'
-const STYLE_LOCATION_SELECTOR = 'location-selector'
+const STYLE_LOCATION_SELECTOR = 'location-selector';
 
 export class CurrentWeather {
 	public readonly actor: imports.gi.St.Bin;
@@ -37,11 +36,6 @@ export class CurrentWeather {
 
 	private previousLocationButton!: WeatherButton;
 	private nextLocationButton!: WeatherButton;
-
-	/** If config._showSunrise is not true this can be null|deallocated */
-	private sunriseLabel!: imports.gi.St.Label;
-	/** If config._showSunrise is not true this can be null|deallocated */
-	private sunsetLabel!: imports.gi.St.Label;
 
 	private temperatureCaption!: imports.gi.St.Label;
 	private humidityCaption!: imports.gi.St.Label;
@@ -63,11 +57,15 @@ export class CurrentWeather {
 
 	private app: WeatherApplet;
 
+	private sunTimesUI: SunTimesUI;
+
 	constructor(app: WeatherApplet) {
 		this.app = app;
 		this.actor = new Bin();
 		this.actor.style_class = STYLE_CURRENT;
+		this.sunTimesUI = new SunTimesUI(app);
 		this.app.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a)); //on location store change
+		this.app.config.ImmediatePrecipChanged.Subscribe(() => this.SetImmediatePrecipitation(this.app.CurrentData?.immediatePrecipitation, this.app.config));
 	}
 
 	/** Injects data from weather object into the popupMenu */
@@ -87,8 +85,7 @@ export class CurrentWeather {
 			this.SetPressure(weather.pressure);
 			this.SetDewPointField(weather.dewPoint);
 			this.SetAPIUniqueField(weather.extra_field);
-			if (config._showSunrise)
-				this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
+			this.sunTimesUI.Display(weather.sunrise, weather.sunset, weather.location.timeZone);
 
 			this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
 			return true;
@@ -142,9 +139,7 @@ export class CurrentWeather {
 		this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel)
 		this.immediatePrecipitationBox.hide();
 		middleColumn.add_actor(this.immediatePrecipitationBox);
-
-		if (config._showSunrise)
-			middleColumn.add_actor(this.BuildSunBox(config, textColorStyle));
+		middleColumn.add_actor(this.sunTimesUI.Rebuild(config, textColorStyle));
 
 		return middleColumn;
 	}
@@ -253,55 +248,6 @@ export class CurrentWeather {
 		return box;
 	}
 
-	private BuildSunBox(config: Config, textColorStyle: string) {
-		// Bin is used here to horizontally center BoxLayout inside BoxLayout, normal add() function does not work here 
-		const sunBin = new Bin();
-		this.sunriseLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
-		this.sunsetLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
-
-		const sunriseBox = new BoxLayout();
-		const sunsetBox = new BoxLayout();
-		if (config._showSunrise) {
-			const sunsetIcon = new Icon({
-				icon_name: "sunset-symbolic",
-				icon_type: IconType.SYMBOLIC,
-				icon_size: 25,
-				style: textColorStyle
-			});
-
-			const sunriseIcon = new Icon({
-				icon_name: "sunrise-symbolic",
-				icon_type: IconType.SYMBOLIC,
-				icon_size: 25,
-				style: textColorStyle
-			});
-
-			sunriseBox.add_actor(sunriseIcon);
-			sunsetBox.add_actor(sunsetIcon);
-		}
-
-		const textOptions: Partial<imports.gi.St.BoxLayoutChildInitOptions> = {
-			x_fill: false,
-			x_align: Align.START,
-			y_align: Align.MIDDLE,
-			y_fill: false,
-			expand: true
-		}
-
-		sunriseBox.add(this.sunriseLabel, textOptions);
-		sunsetBox.add(this.sunsetLabel, textOptions);
-
-		const ab_spacerLabel = new Label({ text: BLANK })
-
-		const sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY })
-		sunBox.add_actor(sunriseBox)
-		sunBox.add_actor(ab_spacerLabel)
-		sunBox.add_actor(sunsetBox);
-
-		sunBin.set_child(sunBox);
-		return sunBin;
-	}
-
 	// Data display helpers
 
 	private SetImmediatePrecipitation(precip: ImmediatePrecipitation | undefined, config: Config): void {
@@ -325,22 +271,10 @@ export class CurrentWeather {
 		}
 	}
 
-	private SetSunriseAndSunset(sunrise: DateTime | null, sunset: DateTime | null, tz?: string): void {
-		let sunriseText = "";
-		let sunsetText = "";
-		if (sunrise != null && sunset != null && this.app.config._showSunrise) {
-			sunriseText = (GetHoursMinutes(sunrise, this.app.config.currentLocale, this.app.config._show24Hours, tz));
-			sunsetText = (GetHoursMinutes(sunset, this.app.config.currentLocale, this.app.config._show24Hours, tz));
-		}
-
-		this.sunriseLabel.text = sunriseText;
-		this.sunsetLabel.text = sunsetText;
-	}
-
 	private SetAPIUniqueField(extra_field?: APIUniqueField) {
 		if (extra_field == null) {
-			this.apiUniqueCaption.set_style_class_name("weather-hidden");
-			this.apiUniqueLabel.set_style_class_name("weather-hidden");
+			this.apiUniqueCaption.set_style_class_name(STYLE_HIDDEN);
+			this.apiUniqueLabel.set_style_class_name(STYLE_HIDDEN);
 			return;
 		}
 
@@ -358,20 +292,20 @@ export class CurrentWeather {
 				break;
 		}
 		this.apiUniqueLabel.text = value ?? "";
-		this.apiUniqueCaption.remove_style_class_name("weather-hidden");
-		this.apiUniqueLabel.remove_style_class_name("weather-hidden");
+		this.apiUniqueCaption.remove_style_class_name(STYLE_HIDDEN);
+		this.apiUniqueLabel.remove_style_class_name(STYLE_HIDDEN);
 	}
 
 	private SetDewPointField(dewPoint: number | null): void {
 		if (dewPoint == null) {
-			this.dewPointCaption.set_style_class_name("weather-hidden");
-			this.dewPointLabel.set_style_class_name("weather-hidden");
+			this.dewPointCaption.set_style_class_name(STYLE_HIDDEN);
+			this.dewPointLabel.set_style_class_name(STYLE_HIDDEN);
 			return;
 		}
 
 		const temp = TempToUserConfig(dewPoint, this.app.config);
-		this.dewPointCaption.remove_style_class_name("weather-hidden");
-		this.dewPointLabel.remove_style_class_name("weather-hidden");
+		this.dewPointCaption.remove_style_class_name(STYLE_HIDDEN);
+		this.dewPointLabel.remove_style_class_name(STYLE_HIDDEN);
 		this.dewPointLabel.text = temp;
 	}
 
@@ -393,33 +327,33 @@ export class CurrentWeather {
 
 	private SetTemperature(temperature: number | null) {
 		if (temperature == null) {
-			this.temperatureCaption.set_style_class_name("weather-hidden");
-			this.temperatureLabel.set_style_class_name("weather-hidden");
+			this.temperatureCaption.set_style_class_name(STYLE_HIDDEN);
+			this.temperatureLabel.set_style_class_name(STYLE_HIDDEN);
 			return;
 		}
 
 		const temp = TempToUserConfig(temperature, this.app.config);
 		this.temperatureLabel.text = temp;
-		this.temperatureCaption.remove_style_class_name("weather-hidden");
-		this.temperatureLabel.remove_style_class_name("weather-hidden");
+		this.temperatureCaption.remove_style_class_name(STYLE_HIDDEN);
+		this.temperatureLabel.remove_style_class_name(STYLE_HIDDEN);
 	}
 
 	private SetHumidity(humidity: number | null) {
 		if (humidity == null) {
-			this.humidityCaption.set_style_class_name("weather-hidden");
-			this.humidityLabel.set_style_class_name("weather-hidden");
+			this.humidityCaption.set_style_class_name(STYLE_HIDDEN);
+			this.humidityLabel.set_style_class_name(STYLE_HIDDEN);
 			return;
 		}
 
 		this.humidityLabel.text = PercentToLocale(humidity, this.app.config.currentLocale);
-		this.humidityCaption.remove_style_class_name("weather-hidden");
-		this.humidityLabel.remove_style_class_name("weather-hidden");
+		this.humidityCaption.remove_style_class_name(STYLE_HIDDEN);
+		this.humidityLabel.remove_style_class_name(STYLE_HIDDEN);
 	}
 
 	private async SetWind(windSpeed: number | null, windDegree: number | null) {
 		if (windSpeed == null || windDegree == null) {
-			this.windCaption.set_style_class_name("weather-hidden");
-			this.windLabel.set_style_class_name("weather-hidden");
+			this.windCaption.set_style_class_name(STYLE_HIDDEN);
+			this.windLabel.set_style_class_name(STYLE_HIDDEN);
 			return;
 		}
 
@@ -435,20 +369,20 @@ export class CurrentWeather {
 
 		// No need to display unit to Beaufort scale
 		if (this.app.config.WindSpeedUnit != "Beaufort") this.windLabel.text += " " + _(this.app.config.WindSpeedUnit);
-		this.windCaption.remove_style_class_name("weather-hidden");
-		this.windLabel.remove_style_class_name("weather-hidden");
+		this.windCaption.remove_style_class_name(STYLE_HIDDEN);
+		this.windLabel.remove_style_class_name(STYLE_HIDDEN);
 	}
 
 	private SetPressure(pressure: number | null) {
 		if (pressure == null) {
-			this.pressureCaption.set_style_class_name("weather-hidden");
-			this.pressureLabel.set_style_class_name("weather-hidden");
+			this.pressureCaption.set_style_class_name(STYLE_HIDDEN);
+			this.pressureLabel.set_style_class_name(STYLE_HIDDEN);
 			return;
 		}
 
 		this.pressureLabel.text = PressToUserUnits(pressure, this.app.config._pressureUnit) + ' ' + _(this.app.config._pressureUnit);
-		this.pressureCaption.remove_style_class_name("weather-hidden");
-		this.pressureLabel.remove_style_class_name("weather-hidden");
+		this.pressureCaption.remove_style_class_name(STYLE_HIDDEN);
+		this.pressureLabel.remove_style_class_name(STYLE_HIDDEN);
 	}
 
 	private SetLocation(locationString: string, url?: string) {

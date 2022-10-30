@@ -42,6 +42,14 @@ export class UIForecasts {
 
 		this.DayClickedCallback = (s, e) => this.OnDayClicked(s, e);
 		this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
+		this.app.config.ShowForecastDatesChanged.Subscribe(this.OnConfigChanged);
+	}
+
+	public OnConfigChanged = async () => {
+		if (this.app.CurrentData == null)
+				return;
+		await this.app.WaitForRefresh;
+		this.Display(this.app.CurrentData, this.app.config);
 	}
 
 	public UpdateIconType(iconType: imports.gi.St.IconType): void {
