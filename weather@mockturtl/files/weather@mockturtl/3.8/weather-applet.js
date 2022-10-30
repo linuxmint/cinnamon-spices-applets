@@ -14811,7 +14811,7 @@ class Config {
         this.WEATHER_LOCATION_LIST = "locationList";
         this.DataServiceChanged = new Event();
         this.ApiKeyChanged = new Event();
-        this.TemperatuReUnitChanged = new Event();
+        this.TemperatureUnitChanged = new Event();
         this.WindSpeedUnitChanged = new Event();
         this.DistanceUnitChanged = new Event();
         this.TranslateConditionChanged = new Event();
@@ -15016,7 +15016,7 @@ class Config {
     BindSettings() {
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.DATA_SERVICE, ("_" + Keys.DATA_SERVICE), () => this.DataServiceChanged.Invoke(this, this._dataService), null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.API_KEY, ("_" + Keys.API_KEY), () => this.ApiKeyChanged.Invoke(this, this.ApiKey), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TEMPERATURE_UNIT_KEY, ("_" + Keys.TEMPERATURE_UNIT_KEY), () => this.TemperatuReUnitChanged.Invoke(this, this.TemperatureUnit), null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TEMPERATURE_UNIT_KEY, ("_" + Keys.TEMPERATURE_UNIT_KEY), () => this.TemperatureUnitChanged.Invoke(this, this.TemperatureUnit), null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TEMPERATURE_HIGH_FIRST, ("_" + Keys.TEMPERATURE_HIGH_FIRST), () => this.TemperatureHighFirstChanged.Invoke(this, this._temperatureHighFirst), null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.WIND_SPEED_UNIT, ("_" + Keys.WIND_SPEED_UNIT), this.OnSettingChanged, null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.DISTANCE_UNIT, ("_" + Keys.DISTANCE_UNIT), () => this.DistanceUnitChanged.Invoke(this, this.DistanceUnit), null);
@@ -15177,7 +15177,7 @@ class WeatherLoop {
                     logger_Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
                         + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
                         + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
-                    const state = await this.app.RefreshWeather(false);
+                    const state = await this.app.RefreshWeather(false, null, false);
                     if (state == "error")
                         logger_Logger.Info("App is currently refreshing, refresh skipped in main loop");
                     if (state == "success" || "locked")
@@ -16742,8 +16742,9 @@ const { File: main_File, NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
-        this.lock = false;
-        this.refreshTriggeredWhileLocked = false;
+        this.refreshing = null;
+        this.unlockFunc = null;
+        this.manualRefreshTriggeredWhileLocked = false;
         this.encounteredError = false;
         this.online = null;
         this.currentWeatherInfo = null;
@@ -16847,9 +16848,12 @@ class WeatherApplet extends TextIconApplet {
         this.loop.Start();
         this.OnNetworkConnectivityChanged();
         NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
-        this.config.DataServiceChanged.Subscribe(this.OnConfigChanged);
-        this.config.ApiKeyChanged.Subscribe(this.OnConfigChanged);
-        this.config.TemperatuReUnitChanged.Subscribe(this.OnConfigChanged);
+        this.config.DataServiceChanged.Subscribe(() => this.RefreshAndRebuild());
+        this.config.VerticalOrientationChanged.Subscribe(() => this.RefreshAndRebuild());
+        this.config.ForecastColumnsChanged.Subscribe(() => this.RefreshAndRebuild());
+        this.config.ForecastRowsChanged.Subscribe(() => this.RefreshAndRebuild());
+        this.config.ApiKeyChanged.Subscribe(() => this.Refresh());
+        this.config.TemperatureUnitChanged.Subscribe(this.OnConfigChanged);
         this.config.WindSpeedUnitChanged.Subscribe(this.OnConfigChanged);
         this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
         this.config.TranslateConditionChanged.Subscribe(this.OnConfigChanged);
@@ -16857,9 +16861,6 @@ class WeatherApplet extends TextIconApplet {
         this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged);
         this.config.ForecastDaysChanged.Subscribe(this.OnConfigChanged);
         this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
-        this.config.ForecastColumnsChanged.Subscribe(this.OnConfigChanged);
-        this.config.ForecastRowsChanged.Subscribe(this.OnConfigChanged);
-        this.config.VerticalOrientationChanged.Subscribe(this.OnConfigChanged);
         this.config.RefreshIntervalChanged.Subscribe(this.OnConfigChanged);
         this.config.ManualLocationChanged.Subscribe(this.OnConfigChanged);
         this.config.TemperatureHighFirstChanged.Subscribe(this.OnConfigChanged);
@@ -16883,36 +16884,53 @@ class WeatherApplet extends TextIconApplet {
         this.config.LogLevelChanged.Subscribe(this.OnConfigChanged);
         this.config.SelectedLogPathChanged.Subscribe(this.OnConfigChanged);
     }
+    get WaitForRefresh() {
+        if (this.refreshing == null)
+            return Promise.resolve();
+        return this.refreshing;
+    }
     get Orientation() {
         return this.orientation;
     }
     Locked() {
-        return this.lock;
+        return this.refreshing != null;
+    }
+    async Lock() {
+        if (this.refreshing != null)
+            await this.refreshing;
+        this.refreshing = new Promise((resolve, reject) => {
+            this.unlockFunc = resolve;
+        });
+    }
+    Unlock() {
+        var _a;
+        (_a = this.unlockFunc) === null || _a === void 0 ? void 0 : _a.call(this);
+        this.unlockFunc = null;
+        this.refreshing = null;
+        if (this.manualRefreshTriggeredWhileLocked) {
+            logger_Logger.Info("Refreshing triggered by config change while refreshing, starting now...");
+            this.manualRefreshTriggeredWhileLocked = false;
+            this.RefreshAndRebuild();
+        }
     }
     RefreshAndRebuild(loc) {
-        this.loop.Resume();
-        if (this.Locked()) {
-            this.refreshTriggeredWhileLocked = true;
-            return;
-        }
         this.RefreshWeather(true, loc);
     }
     ;
     Refresh(loc = null, rebuild = false) {
-        this.loop.Resume();
-        if (this.Locked()) {
-            this.refreshTriggeredWhileLocked = true;
-            return;
-        }
         this.RefreshWeather(rebuild, loc);
     }
-    async RefreshWeather(rebuild, location) {
+    async RefreshWeather(rebuild, location = null, manual = true) {
         try {
-            if (this.lock) {
+            if (this.Locked()) {
                 logger_Logger.Info("Refreshing in progress, refresh skipped.");
+                if (manual) {
+                    this.manualRefreshTriggeredWhileLocked = true;
+                    this.loop.Resume();
+                }
                 return "locked";
             }
-            this.lock = true;
+            await this.Lock();
             this.encounteredError = false;
             if (!location) {
                 location = await this.config.EnsureLocation();
@@ -17138,14 +17156,6 @@ The contents of the file saved from the applet help page goes here
         this.set_applet_icon_name(APPLET_ICON);
         this.set_applet_label(_("..."));
         this.set_applet_tooltip(_("Click to open"));
-    }
-    Unlock() {
-        this.lock = false;
-        if (this.refreshTriggeredWhileLocked) {
-            logger_Logger.Info("Refreshing triggered by config change while refreshing, starting now...");
-            this.refreshTriggeredWhileLocked = false;
-            this.RefreshAndRebuild();
-        }
     }
     AddRefreshButton() {
         const itemLabel = _("Refresh");

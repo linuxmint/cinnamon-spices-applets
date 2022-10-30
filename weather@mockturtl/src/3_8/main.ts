@@ -10,7 +10,7 @@ import { Config, ServiceClassMapping, Services } from "./config";
 import { WeatherLoop } from "./loop";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
 import { UI } from "./ui";
-import { AwareDateString, CapitalizeFirstLetter, CompassDirectionText, ExtraFieldToUserUnits, GenerateLocationText, MPStoUserUnits, NotEmpty, PercentToLocale, PressToUserUnits, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
+import { AwareDateString, CapitalizeFirstLetter, CompassDirectionText, delay, ExtraFieldToUserUnits, GenerateLocationText, MPStoUserUnits, NotEmpty, PercentToLocale, PressToUserUnits, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
 import { HttpLib, HttpError, Method, HTTPParams, HTTPHeaders, ErrorResponse, Response } from "./lib/httpLib";
 import { Logger } from "./lib/logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
@@ -27,8 +27,16 @@ const { File, NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 
 export class WeatherApplet extends TextIconApplet {
 	private readonly loop: WeatherLoop;
-	private lock = false;
-	private refreshTriggeredWhileLocked = false;
+	private refreshing: Promise<void> | null = null;
+	private unlockFunc: (() => void) | null = null;
+	private manualRefreshTriggeredWhileLocked = false;
+
+	public get WaitForRefresh(): Promise<void> {
+		if (this.refreshing == null)
+			return Promise.resolve();
+
+		return this.refreshing;
+	}
 
 	/** Chosen API */
 	private provider?: WeatherProvider;
@@ -77,9 +85,13 @@ export class WeatherApplet extends TextIconApplet {
 		this.loop.Start();
 		this.OnNetworkConnectivityChanged();
 		NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
-		this.config.DataServiceChanged.Subscribe(this.OnConfigChanged);
-		this.config.ApiKeyChanged.Subscribe(this.OnConfigChanged);
-		this.config.TemperatuReUnitChanged.Subscribe(this.OnConfigChanged);
+		this.config.DataServiceChanged.Subscribe(() => this.RefreshAndRebuild());
+		this.config.VerticalOrientationChanged.Subscribe(() => this.RefreshAndRebuild());
+		this.config.ForecastColumnsChanged.Subscribe(() => this.RefreshAndRebuild());
+		this.config.ForecastRowsChanged.Subscribe(() => this.RefreshAndRebuild());
+
+		this.config.ApiKeyChanged.Subscribe(() => this.Refresh());
+		this.config.TemperatureUnitChanged.Subscribe(this.OnConfigChanged);
 		this.config.WindSpeedUnitChanged.Subscribe(this.OnConfigChanged);
 		this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
 		this.config.TranslateConditionChanged.Subscribe(this.OnConfigChanged);
@@ -87,9 +99,6 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged);
 		this.config.ForecastDaysChanged.Subscribe(this.OnConfigChanged);
 		this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
-		this.config.ForecastColumnsChanged.Subscribe(this.OnConfigChanged);
-		this.config.ForecastRowsChanged.Subscribe(this.OnConfigChanged);
-		this.config.VerticalOrientationChanged.Subscribe(this.OnConfigChanged);
 		this.config.RefreshIntervalChanged.Subscribe(this.OnConfigChanged);
 		this.config.ManualLocationChanged.Subscribe(this.OnConfigChanged);
 		this.config.TemperatureHighFirstChanged.Subscribe(this.OnConfigChanged);
@@ -115,7 +124,27 @@ export class WeatherApplet extends TextIconApplet {
 	}
 
 	public Locked(): boolean {
-		return this.lock;
+		return this.refreshing != null;
+	}
+
+	private async Lock(): Promise<void> {
+		if (this.refreshing != null)
+			await this.refreshing;
+
+		this.refreshing = new Promise<void>((resolve, reject) => {
+			this.unlockFunc = resolve;
+		});
+	}
+
+	private Unlock(): void {
+		this.unlockFunc?.();
+		this.unlockFunc = null;
+		this.refreshing = null;
+		if (this.manualRefreshTriggeredWhileLocked) {
+			Logger.Info("Refreshing triggered by config change while refreshing, starting now...");
+			this.manualRefreshTriggeredWhileLocked = false;
+			this.RefreshAndRebuild();
+		}
 	}
 
 	private OnNetworkConnectivityChanged = () => {
@@ -147,20 +176,10 @@ export class WeatherApplet extends TextIconApplet {
 	 * @returns Queues a refresh if if refresh was triggered while locked.
 	 */
 	public RefreshAndRebuild(this: WeatherApplet, loc?: LocationData | null): void {
-		this.loop.Resume();
-		if (this.Locked()) {
-			this.refreshTriggeredWhileLocked = true;
-			return;
-		}
 		this.RefreshWeather(true, loc);
 	};
 
 	public Refresh(this: WeatherApplet, loc: LocationData | null = null, rebuild: boolean = false, ): void {
-		this.loop.Resume();
-		if (this.Locked()) {
-			this.refreshTriggeredWhileLocked = true;
-			return;
-		}
 		this.RefreshWeather(rebuild, loc);
 	}
 
@@ -168,14 +187,18 @@ export class WeatherApplet extends TextIconApplet {
 	 * Main function pulling and refreshing data
 	 * @param rebuild 
 	 */
-	public async RefreshWeather(this: WeatherApplet, rebuild: boolean, location?: LocationData | null): Promise<RefreshState> {
+	public async RefreshWeather(this: WeatherApplet, rebuild: boolean, location: LocationData | null = null, manual: boolean = true): Promise<RefreshState> {
 		try {
-			if (this.lock) {
+			if (this.Locked()) {
 				Logger.Info("Refreshing in progress, refresh skipped.");
+				if (manual) { // Config change or user requested refresh
+					this.manualRefreshTriggeredWhileLocked = true;
+					this.loop.Resume();
+				}
 				return RefreshState.Locked;
 			}
 
-			this.lock = true;
+			await this.Lock();
 			this.encounteredError = false;
 
 			if (!location) {
@@ -531,16 +554,6 @@ The contents of the file saved from the applet help page goes here
 		this.set_applet_icon_name(APPLET_ICON);
 		this.set_applet_label(_("..."));
 		this.set_applet_tooltip(_("Click to open"));
-	}
-
-	private Unlock(): void {
-		this.lock = false;
-		if (this.refreshTriggeredWhileLocked) {
-			Logger.Info("Refreshing triggered by config change while refreshing, starting now...");
-			this.refreshTriggeredWhileLocked = false;
-			this.RefreshAndRebuild();
-		}
-
 	}
 
 	/** Into right-click context menu */

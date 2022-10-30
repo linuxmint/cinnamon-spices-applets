@@ -170,7 +170,7 @@ export class Config {
 
 	public readonly DataServiceChanged = new Event<Config, Services>();
 	public readonly ApiKeyChanged = new Event<Config, string>();
-	public readonly TemperatuReUnitChanged = new Event<Config, WeatherUnits>();
+	public readonly TemperatureUnitChanged = new Event<Config, WeatherUnits>();
 	public readonly WindSpeedUnitChanged = new Event<Config, WeatherWindSpeedUnits>();
 	public readonly DistanceUnitChanged = new Event<Config, DistanceUnits>();
 	public readonly TranslateConditionChanged = new Event<Config, boolean>();
@@ -435,7 +435,7 @@ export class Config {
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.TEMPERATURE_UNIT_KEY,
 			("_" + Keys.TEMPERATURE_UNIT_KEY),
-			() => this.TemperatuReUnitChanged.Invoke(this, this.TemperatureUnit),
+			() => this.TemperatureUnitChanged.Invoke(this, this.TemperatureUnit),
 			null
 		);
 
