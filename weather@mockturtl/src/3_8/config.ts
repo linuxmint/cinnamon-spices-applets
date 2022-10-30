@@ -169,6 +169,10 @@ export class Config {
 	public readonly _selectedLogPath!: string;
 
 	public readonly DataServiceChanged = new Event<Config, Services>();
+	public readonly ApiKeyChanged = new Event<Config, string>();
+	public readonly TemperatuReUnitChanged = new Event<Config, WeatherUnits>();
+	public readonly WindSpeedUnitChanged = new Event<Config, WeatherWindSpeedUnits>();
+	public readonly DistanceUnitChanged = new Event<Config, DistanceUnits>();
 	public readonly TranslateConditionChanged = new Event<Config, boolean>();
 	public readonly PressureUnitChanged = new Event<Config, WeatherPressureUnits>();
 	public readonly Show24HoursChanged = new Event<Config, boolean>();
@@ -180,6 +184,8 @@ export class Config {
 	 * true is vertical, false is horizontal
 	 */
 	public readonly VerticalOrientationChanged = new Event<Config, boolean>();
+	public readonly RefreshIntervalChanged = new Event<Config, number>();
+	public readonly ManualLocationChanged = new Event<Config, boolean>();
 	public readonly TemperatureHighFirstChanged = new Event<Config, boolean>();
 	public readonly ShortConditionsChanged = new Event<Config, boolean>();
 	public readonly ShowSunriseChanged = new Event<Config, boolean>();
@@ -188,6 +194,7 @@ export class Config {
 	public readonly LocationLabelOverrideChanged = new Event<Config, string>();
 	public readonly UseCustomAppletIconsChanged = new Event<Config, boolean>();
 	public readonly UseCustomMenuIconsChanged = new Event<Config, boolean>();
+	public readonly UseSymbolicIconsChanged = new Event<Config, boolean>();
 	public readonly TempTextOverrideChanged = new Event<Config, string>();
 	public readonly TempRussianStyleChanged = new Event<Config, boolean>();
 	public readonly ShortHourlyTimeChanged = new Event<Config, boolean>();
@@ -414,29 +421,28 @@ export class Config {
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.DATA_SERVICE, 
 			("_" + Keys.DATA_SERVICE),
-			// () => this.DataServiceChanged.Invoke(this, this._dataService),
-			this.OnSettingChanged,
+			() => this.DataServiceChanged.Invoke(this, this._dataService),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.API_KEY,
 			("_" + Keys.API_KEY),
-			this.OnSettingChanged,
+			() => this.ApiKeyChanged.Invoke(this, this.ApiKey),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.TEMPERATURE_UNIT_KEY,
 			("_" + Keys.TEMPERATURE_UNIT_KEY),
-			this.OnSettingChanged,
+			() => this.TemperatuReUnitChanged.Invoke(this, this.TemperatureUnit),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.TEMPERATURE_HIGH_FIRST,
 			("_" + Keys.TEMPERATURE_HIGH_FIRST),
-			this.OnSettingChanged,
+			() => this.TemperatureHighFirstChanged.Invoke(this, this._temperatureHighFirst),
 			null
 		);
 
@@ -450,182 +456,182 @@ export class Config {
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.DISTANCE_UNIT,
 			("_" + Keys.DISTANCE_UNIT),
-			this.OnSettingChanged,
+			() => this.DistanceUnitChanged.Invoke(this, this.DistanceUnit),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.CITY,
 			("_" + Keys.CITY),
-			this.OnSettingChanged,
+			() => this.LocationLabelOverrideChanged.Invoke(this, this._locationLabelOverride),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.TRANSLATE_CONDITION,
 			("_" + Keys.TRANSLATE_CONDITION),
-			this.OnSettingChanged,
+			() => this.TranslateConditionChanged.Invoke(this, this._translateCondition),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.VERTICAL_ORIENTATION,
 			("_" + Keys.VERTICAL_ORIENTATION),
-			this.OnSettingChanged,
+			() => this.VerticalOrientationChanged.Invoke(this, this._verticalOrientation),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.SHOW_TEXT_IN_PANEL,
 			("_" + Keys.SHOW_TEXT_IN_PANEL),
-			this.OnSettingChanged,
+			() => this.ShowTextInPanelChanged.Invoke(this, this._showTextInPanel),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.SHOW_COMMENT_IN_PANEL,
 			("_" + Keys.SHOW_COMMENT_IN_PANEL),
-			this.OnSettingChanged,
+			() => this.ShowCommentInPanelChanged.Invoke(this, this._showCommentInPanel),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.SHOW_SUNRISE,
 			("_" + Keys.SHOW_SUNRISE),
-			this.OnSettingChanged,
+			() => this.ShowSunriseChanged.Invoke(this, this._showSunrise),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.SHOW_24HOURS,
 			("_" + Keys.SHOW_24HOURS),
-			this.OnSettingChanged,
+			() => this.Show24HoursChanged.Invoke(this, this._show24Hours),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.FORECAST_DAYS,
 			("_" + Keys.FORECAST_DAYS),
-			this.OnSettingChanged,
+			() => this.ForecastDaysChanged.Invoke(this, this._forecastDays),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.FORECAST_HOURS,
 			("_" + Keys.FORECAST_HOURS),
-			this.OnSettingChanged,
+			() => this.ForecastHoursChanged.Invoke(this, this._forecastHours),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.FORECAST_COLS,
 			("_" + Keys.FORECAST_COLS),
-			this.OnSettingChanged,
+			() => this.ForecastColumnsChanged.Invoke(this, this._forecastColumns),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.FORECAST_ROWS,
 			("_" + Keys.FORECAST_ROWS),
-			this.OnSettingChanged,
+			() => this.ForecastRowsChanged.Invoke(this, this._forecastRows),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.REFRESH_INTERVAL,
 			("_" + Keys.REFRESH_INTERVAL),
-			this.OnSettingChanged,
+			() => this.RefreshIntervalChanged.Invoke(this, this._refreshInterval),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.PRESSURE_UNIT,
 			("_" + Keys.PRESSURE_UNIT),
-			this.OnSettingChanged,
+			() => this.PressureUnitChanged.Invoke(this, this._pressureUnit),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.SHORT_CONDITIONS,
 			("_" + Keys.SHORT_CONDITIONS),
-			this.OnSettingChanged,
+			() => this.ShortConditionsChanged.Invoke(this, this._shortConditions),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.MANUAL_LOCATION,
 			("_" + Keys.MANUAL_LOCATION),
-			this.OnSettingChanged,
+			() => this.ManualLocationChanged.Invoke(this, this._manualLocation),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.USE_CUSTOM_APPLET_ICONS,
 			("_" + Keys.USE_CUSTOM_APPLET_ICONS),
-			this.OnSettingChanged,
+			() => this.UseCustomAppletIconsChanged.Invoke(this, this._useCustomAppletIcons),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.USE_CUSTOM_MENU_ICONS,
 			("_" + Keys.USE_CUSTOM_MENU_ICONS),
-			this.OnSettingChanged,
+			() => this.UseCustomMenuIconsChanged.Invoke(this, this._useCustomMenuIcons),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.RUSSIAN_STYLE,
 			("_" + Keys.RUSSIAN_STYLE),
-			this.OnSettingChanged,
+			() => this.TempRussianStyleChanged.Invoke(this, this._tempRussianStyle),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.SHORT_HOURLY_TIME,
 			("_" + Keys.SHORT_HOURLY_TIME),
-			this.OnSettingChanged,
+			() => this.ShortHourlyTimeChanged.Invoke(this, this._shortHourlyTime),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.SHOW_FORECAST_DATES,
 			("_" + Keys.SHOW_FORECAST_DATES),
-			this.OnSettingChanged,
+			() => this.ShowForecastDatesChanged.Invoke(this, this._showForecastDates),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.WEATHER_USE_SYMBOLIC_ICONS_KEY,
 			("_" + Keys.WEATHER_USE_SYMBOLIC_ICONS_KEY),
-			this.OnSettingChanged,
+			() => this.UseSymbolicIconsChanged.Invoke(this, this._useSymbolicIcons),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.IMMEDIATE_PRECIP,
 			("_" + Keys.IMMEDIATE_PRECIP),
-			this.OnSettingChanged,
+			() => this.ImmediatePrecipChanged.Invoke(this, this._immediatePrecip),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.SHOW_BOTH_TEMP,
 			("_" + Keys.SHOW_BOTH_TEMP),
-			this.OnSettingChanged,
+			() => this.ShowBothTempUnitsChanged.Invoke(this, this._showBothTempUnits),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.DISPLAY_WIND_DIR_AS_TEXT,
 			("_" + Keys.DISPLAY_WIND_DIR_AS_TEXT),
-			this.OnSettingChanged,
+			() => this.DisplayWindAsTextChanged.Invoke(this, this._displayWindAsText),
 			null
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.ALWAYS_SHOW_HOURLY,
 			("_" + Keys.ALWAYS_SHOW_HOURLY),
-			this.OnSettingChanged,
+			() => this.AlwaysShowHourlyWeatherChanged.Invoke(this, this._alwaysShowHourlyWeather),
 			null
 		);
 
@@ -797,6 +803,45 @@ export class Config {
 			conf.location.value = "REDACTED";
 
 		return conf;
+	}
+
+	public Destroy() {
+		this.ApiKeyChanged.UnSubscribeAll();
+		this.TemperatuReUnitChanged.UnSubscribeAll();
+		this.WindSpeedUnitChanged.UnSubscribeAll();
+		this.DistanceUnitChanged.UnSubscribeAll();
+		this.RefreshIntervalChanged.UnSubscribeAll();
+		this.ManualLocationChanged.UnSubscribeAll();
+		this.UseSymbolicIconsChanged.UnSubscribeAll();
+		this.DataServiceChanged.UnSubscribeAll();
+		this.TranslateConditionChanged.UnSubscribeAll();
+		this.PressureUnitChanged.UnSubscribeAll();
+		this.Show24HoursChanged.UnSubscribeAll();
+		this.ForecastDaysChanged.UnSubscribeAll();
+		this.ForecastHoursChanged.UnSubscribeAll();
+		this.ForecastColumnsChanged.UnSubscribeAll();
+		this.ForecastRowsChanged.UnSubscribeAll();
+		this.VerticalOrientationChanged.UnSubscribeAll();
+		this.TemperatureHighFirstChanged.UnSubscribeAll();
+		this.ShortConditionsChanged.UnSubscribeAll();
+		this.ShowSunriseChanged.UnSubscribeAll();
+		this.ShowCommentInPanelChanged.UnSubscribeAll();
+		this.ShowTextInPanelChanged.UnSubscribeAll();
+		this.LocationLabelOverrideChanged.UnSubscribeAll();
+		this.UseCustomAppletIconsChanged.UnSubscribeAll();
+		this.UseCustomMenuIconsChanged.UnSubscribeAll();
+		this.TempTextOverrideChanged.UnSubscribeAll();
+		this.TempRussianStyleChanged.UnSubscribeAll();
+		this.ShortHourlyTimeChanged.UnSubscribeAll();
+		this.ShowForecastDatesChanged.UnSubscribeAll();
+		this.LocationListChanged.UnSubscribeAll();
+		this.ImmediatePrecipChanged.UnSubscribeAll();
+		this.ShowBothTempUnitsChanged.UnSubscribeAll();
+		this.DisplayWindAsTextChanged.UnSubscribeAll();
+		this.AlwaysShowHourlyWeatherChanged.UnSubscribeAll();
+		this.LogLevelChanged.UnSubscribeAll();
+		this.SelectedLogPathChanged.UnSubscribeAll();
+		this.settings.finalize?.();
 	}
 }
 

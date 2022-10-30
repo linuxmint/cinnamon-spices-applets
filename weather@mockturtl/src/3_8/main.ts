@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------
 
 import { DateTime } from "luxon";
-import { Config, ServiceClassMapping } from "./config";
+import { Config, ServiceClassMapping, Services } from "./config";
 import { WeatherLoop } from "./loop";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
 import { UI } from "./ui";
@@ -76,6 +76,41 @@ export class WeatherApplet extends TextIconApplet {
 		this.loop.Start();
 		this.OnNetworkConnectivityChanged();
 		NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
+		this.config.DataServiceChanged.Subscribe(this.OnConfigChanged);
+		this.config.ApiKeyChanged.Subscribe(this.OnConfigChanged);
+		this.config.TemperatuReUnitChanged.Subscribe(this.OnConfigChanged);
+		this.config.WindSpeedUnitChanged.Subscribe(this.OnConfigChanged);
+		this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
+		this.config.TranslateConditionChanged.Subscribe(this.OnConfigChanged);
+		this.config.PressureUnitChanged.Subscribe(this.OnConfigChanged);
+		this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged);
+		this.config.ForecastDaysChanged.Subscribe(this.OnConfigChanged);
+		this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
+		this.config.ForecastColumnsChanged.Subscribe(this.OnConfigChanged);
+		this.config.ForecastRowsChanged.Subscribe(this.OnConfigChanged);
+		this.config.VerticalOrientationChanged.Subscribe(this.OnConfigChanged);
+		this.config.RefreshIntervalChanged.Subscribe(this.OnConfigChanged);
+		this.config.ManualLocationChanged.Subscribe(this.OnConfigChanged);
+		this.config.TemperatureHighFirstChanged.Subscribe(this.OnConfigChanged);
+		this.config.ShortConditionsChanged.Subscribe(this.OnConfigChanged);
+		this.config.ShowSunriseChanged.Subscribe(this.OnConfigChanged);
+		this.config.ShowCommentInPanelChanged.Subscribe(this.OnConfigChanged);
+		this.config.ShowTextInPanelChanged.Subscribe(this.OnConfigChanged);
+		this.config.LocationLabelOverrideChanged.Subscribe(this.OnConfigChanged);
+		this.config.UseCustomAppletIconsChanged.Subscribe(this.OnConfigChanged);
+		this.config.UseCustomMenuIconsChanged.Subscribe(this.OnConfigChanged);
+		this.config.UseSymbolicIconsChanged.Subscribe(this.OnConfigChanged);
+		this.config.TempTextOverrideChanged.Subscribe(this.OnConfigChanged);
+		this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
+		this.config.ShortHourlyTimeChanged.Subscribe(this.OnConfigChanged);
+		this.config.ShowForecastDatesChanged.Subscribe(this.OnConfigChanged);
+		this.config.LocationListChanged.Subscribe(this.OnConfigChanged);
+		this.config.ImmediatePrecipChanged.Subscribe(this.OnConfigChanged);
+		this.config.ShowBothTempUnitsChanged.Subscribe(this.OnConfigChanged);
+		this.config.DisplayWindAsTextChanged.Subscribe(this.OnConfigChanged);
+		this.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.OnConfigChanged);
+		this.config.LogLevelChanged.Subscribe(this.OnConfigChanged);
+		this.config.SelectedLogPathChanged.Subscribe(this.OnConfigChanged);
 	}
 
 	public Locked(): boolean {
@@ -101,6 +136,10 @@ export class WeatherApplet extends TextIconApplet {
 				this.online = false;
 				break;
 		}
+	}
+
+	private OnConfigChanged = (conf: Config, service: any) => {
+		this.RefreshAndRebuild();
 	}
 
 	/**
@@ -466,6 +505,7 @@ The contents of the file saved from the applet help page goes here
 	public override on_applet_removed_from_panel(deleteConfig: any) {
 		Logger.Info("Removing applet instance...")
 		this.loop.Stop();
+		this.config.Destroy();
 	}
 
 	public override on_applet_clicked(event: any): boolean {
