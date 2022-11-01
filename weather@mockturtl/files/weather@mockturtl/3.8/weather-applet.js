@@ -15531,13 +15531,22 @@ const STYLE_CURRENT = 'current';
 const STYLE_LOCATION_SELECTOR = 'location-selector';
 class CurrentWeather {
     constructor(app) {
+        this.OnLocationOverrideChanged = async (config) => {
+            await this.app.Refreshing;
+            const data = this.app.CurrentData;
+            if (data == null)
+                return;
+            const location = GenerateLocationText(data, config);
+            this.SetLocation(location, data.location.url);
+        };
         this.app = app;
         this.actor = new uiCurrentWeather_Bin();
         this.actor.style_class = STYLE_CURRENT;
         this.sunTimesUI = new SunTimesUI(app);
         this.windBox = new WindBox(app);
         this.app.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a));
-        this.app.config.ImmediatePrecipChanged.Subscribe(() => { var _a; return this.SetImmediatePrecipitation((_a = this.app.CurrentData) === null || _a === void 0 ? void 0 : _a.immediatePrecipitation, this.app.config); });
+        this.app.config.ImmediatePrecipChanged.Subscribe((config) => { var _a; return this.SetImmediatePrecipitation((_a = this.app.CurrentData) === null || _a === void 0 ? void 0 : _a.immediatePrecipitation, config); });
+        this.app.config.LocationLabelOverrideChanged.Subscribe(this.OnLocationOverrideChanged);
     }
     Display(weather, config) {
         try {
@@ -16933,7 +16942,6 @@ class WeatherApplet extends TextIconApplet {
         this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
         this.config.TemperatureHighFirstChanged.Subscribe(this.OnConfigChanged);
         this.config.ShortConditionsChanged.Subscribe(this.OnConfigChanged);
-        this.config.LocationLabelOverrideChanged.Subscribe(this.OnConfigChanged);
         this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
         this.config.ShortHourlyTimeChanged.Subscribe(this.OnConfigChanged);
         this.config.LocationListChanged.Subscribe(this.OnConfigChanged);

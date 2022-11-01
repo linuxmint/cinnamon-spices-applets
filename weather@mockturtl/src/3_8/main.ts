@@ -123,7 +123,6 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
 		this.config.TemperatureHighFirstChanged.Subscribe(this.OnConfigChanged);
 		this.config.ShortConditionsChanged.Subscribe(this.OnConfigChanged);
-		this.config.LocationLabelOverrideChanged.Subscribe(this.OnConfigChanged);
 		this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
 		this.config.ShortHourlyTimeChanged.Subscribe(this.OnConfigChanged);
 		this.config.LocationListChanged.Subscribe(this.OnConfigChanged);

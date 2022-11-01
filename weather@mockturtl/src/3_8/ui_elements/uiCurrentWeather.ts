@@ -65,7 +65,18 @@ export class CurrentWeather {
 		this.sunTimesUI = new SunTimesUI(app);
 		this.windBox = new WindBox(app);
 		this.app.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a)); //on location store change
-		this.app.config.ImmediatePrecipChanged.Subscribe(() => this.SetImmediatePrecipitation(this.app.CurrentData?.immediatePrecipitation, this.app.config));
+		this.app.config.ImmediatePrecipChanged.Subscribe((config) => this.SetImmediatePrecipitation(this.app.CurrentData?.immediatePrecipitation, config));
+		this.app.config.LocationLabelOverrideChanged.Subscribe(this.OnLocationOverrideChanged);
+	}
+
+	private OnLocationOverrideChanged = async (config: Config) => {
+		await this.app.Refreshing;
+		const data = this.app.CurrentData;
+		if (data == null)
+			return;
+
+		const location = GenerateLocationText(data, config);
+		this.SetLocation(location, data.location.url);
 	}
 
 	/** Injects data from weather object into the popupMenu */
