@@ -125,10 +125,8 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.ShortConditionsChanged.Subscribe(this.OnConfigChanged);
 		this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
 		this.config.ShortHourlyTimeChanged.Subscribe(this.OnConfigChanged);
-		this.config.LocationListChanged.Subscribe(this.OnConfigChanged);
 		this.config.ShowBothTempUnitsChanged.Subscribe(this.OnConfigChanged);
 		this.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.OnConfigChanged);
-		this.config.SelectedLogPathChanged.Subscribe(this.OnConfigChanged);
 	}
 
 	public Locked(): boolean {

@@ -81,7 +81,7 @@ const Keys = {
 	TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
 	WIND_SPEED_UNIT: "windSpeedUnit",
 	DISTANCE_UNIT: "distanceUnit",
-	CITY: "locationLabelOverride",
+	LOCATION_LABEL_OVERRIDE: "locationLabelOverride",
 	TRANSLATE_CONDITION: "translateCondition",
 	VERTICAL_ORIENTATION: "verticalOrientation",
 	SHOW_TEXT_IN_PANEL: "showTextInPanel",
@@ -198,13 +198,10 @@ export class Config {
 	public readonly TempRussianStyleChanged = new Event<Config, boolean>();
 	public readonly ShortHourlyTimeChanged = new Event<Config, boolean>();
 	public readonly ShowForecastDatesChanged = new Event<Config, boolean>();
-	public readonly LocationListChanged = new Event<Config, LocationData[]>();
 	public readonly ImmediatePrecipChanged = new Event<Config, boolean>();
 	public readonly ShowBothTempUnitsChanged = new Event<Config, boolean>();
 	public readonly DisplayWindAsTextChanged = new Event<Config, boolean>();
 	public readonly AlwaysShowHourlyWeatherChanged = new Event<Config, boolean>();
-	public readonly LogLevelChanged = new Event<Config, LogLevel>();
-	public readonly SelectedLogPathChanged = new Event<Config, string>();
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
@@ -460,8 +457,8 @@ export class Config {
 		);
 
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-			Keys.CITY,
-			("_" + Keys.CITY),
+			Keys.LOCATION_LABEL_OVERRIDE,
+			("_" + Keys.LOCATION_LABEL_OVERRIDE),
 			() => this.LocationLabelOverrideChanged.Invoke(this, this._locationLabelOverride),
 			null
 		);

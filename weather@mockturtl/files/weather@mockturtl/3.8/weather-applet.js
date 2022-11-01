@@ -14772,7 +14772,7 @@ const Keys = {
     TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
     WIND_SPEED_UNIT: "windSpeedUnit",
     DISTANCE_UNIT: "distanceUnit",
-    CITY: "locationLabelOverride",
+    LOCATION_LABEL_OVERRIDE: "locationLabelOverride",
     TRANSLATE_CONDITION: "translateCondition",
     VERTICAL_ORIENTATION: "verticalOrientation",
     SHOW_TEXT_IN_PANEL: "showTextInPanel",
@@ -14837,13 +14837,10 @@ class Config {
         this.TempRussianStyleChanged = new Event();
         this.ShortHourlyTimeChanged = new Event();
         this.ShowForecastDatesChanged = new Event();
-        this.LocationListChanged = new Event();
         this.ImmediatePrecipChanged = new Event();
         this.ShowBothTempUnitsChanged = new Event();
         this.DisplayWindAsTextChanged = new Event();
         this.AlwaysShowHourlyWeatherChanged = new Event();
-        this.LogLevelChanged = new Event();
-        this.SelectedLogPathChanged = new Event();
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.textColorStyle = null;
@@ -15020,7 +15017,7 @@ class Config {
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TEMPERATURE_HIGH_FIRST, ("_" + Keys.TEMPERATURE_HIGH_FIRST), () => this.TemperatureHighFirstChanged.Invoke(this, this._temperatureHighFirst), null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.WIND_SPEED_UNIT, ("_" + Keys.WIND_SPEED_UNIT), () => this.WindSpeedUnitChanged.Invoke(this, this.WindSpeedUnit), null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.DISTANCE_UNIT, ("_" + Keys.DISTANCE_UNIT), () => this.DistanceUnitChanged.Invoke(this, this.DistanceUnit), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.CITY, ("_" + Keys.CITY), () => this.LocationLabelOverrideChanged.Invoke(this, this._locationLabelOverride), null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.LOCATION_LABEL_OVERRIDE, ("_" + Keys.LOCATION_LABEL_OVERRIDE), () => this.LocationLabelOverrideChanged.Invoke(this, this._locationLabelOverride), null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TRANSLATE_CONDITION, ("_" + Keys.TRANSLATE_CONDITION), () => this.TranslateConditionChanged.Invoke(this, this._translateCondition), null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.VERTICAL_ORIENTATION, ("_" + Keys.VERTICAL_ORIENTATION), () => this.VerticalOrientationChanged.Invoke(this, this._verticalOrientation), null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHOW_TEXT_IN_PANEL, ("_" + Keys.SHOW_TEXT_IN_PANEL), () => this.ShowTextInPanelChanged.Invoke(this, this._showTextInPanel), null);
@@ -16944,10 +16941,8 @@ class WeatherApplet extends TextIconApplet {
         this.config.ShortConditionsChanged.Subscribe(this.OnConfigChanged);
         this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
         this.config.ShortHourlyTimeChanged.Subscribe(this.OnConfigChanged);
-        this.config.LocationListChanged.Subscribe(this.OnConfigChanged);
         this.config.ShowBothTempUnitsChanged.Subscribe(this.OnConfigChanged);
         this.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.OnConfigChanged);
-        this.config.SelectedLogPathChanged.Subscribe(this.OnConfigChanged);
     }
     get CurrentData() {
         return this.currentWeatherInfo;
