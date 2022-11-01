@@ -15018,7 +15018,7 @@ class Config {
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.API_KEY, ("_" + Keys.API_KEY), () => this.ApiKeyChanged.Invoke(this, this.ApiKey), null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TEMPERATURE_UNIT_KEY, ("_" + Keys.TEMPERATURE_UNIT_KEY), () => this.TemperatureUnitChanged.Invoke(this, this.TemperatureUnit), null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TEMPERATURE_HIGH_FIRST, ("_" + Keys.TEMPERATURE_HIGH_FIRST), () => this.TemperatureHighFirstChanged.Invoke(this, this._temperatureHighFirst), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.WIND_SPEED_UNIT, ("_" + Keys.WIND_SPEED_UNIT), this.OnSettingChanged, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.WIND_SPEED_UNIT, ("_" + Keys.WIND_SPEED_UNIT), () => this.WindSpeedUnitChanged.Invoke(this, this.WindSpeedUnit), null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.DISTANCE_UNIT, ("_" + Keys.DISTANCE_UNIT), () => this.DistanceUnitChanged.Invoke(this, this.DistanceUnit), null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.CITY, ("_" + Keys.CITY), () => this.LocationLabelOverrideChanged.Invoke(this, this._locationLabelOverride), null);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TRANSLATE_CONDITION, ("_" + Keys.TRANSLATE_CONDITION), () => this.TranslateConditionChanged.Invoke(this, this._translateCondition), null);

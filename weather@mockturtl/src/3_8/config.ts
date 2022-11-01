@@ -448,7 +448,7 @@ export class Config {
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
 			Keys.WIND_SPEED_UNIT,
 			("_" + Keys.WIND_SPEED_UNIT),
-			this.OnSettingChanged,
+			() => this.WindSpeedUnitChanged.Invoke(this, this.WindSpeedUnit),
 			null
 		);
 
