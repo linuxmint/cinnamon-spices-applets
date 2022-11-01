@@ -36,7 +36,7 @@ export class WeatherApplet extends TextIconApplet {
 		return this.currentWeatherInfo;
 	}
 
-	public get WaitForRefresh(): Promise<void> {
+	public get Refreshing(): Promise<void> {
 		if (this.refreshing == null)
 			return Promise.resolve();
 
@@ -114,8 +114,8 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
 		this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
 
+		// TODO:
 		this.config.TemperatureUnitChanged.Subscribe(this.OnConfigChanged);
-		this.config.WindSpeedUnitChanged.Subscribe(this.OnConfigChanged);
 		this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
 		this.config.PressureUnitChanged.Subscribe(this.OnConfigChanged);
 		this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged);
@@ -128,9 +128,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.ShortHourlyTimeChanged.Subscribe(this.OnConfigChanged);
 		this.config.LocationListChanged.Subscribe(this.OnConfigChanged);
 		this.config.ShowBothTempUnitsChanged.Subscribe(this.OnConfigChanged);
-		this.config.DisplayWindAsTextChanged.Subscribe(this.OnConfigChanged);
 		this.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.OnConfigChanged);
-		this.config.LogLevelChanged.Subscribe(this.OnConfigChanged);
 		this.config.SelectedLogPathChanged.Subscribe(this.OnConfigChanged);
 	}
 
@@ -541,7 +539,7 @@ The contents of the file saved from the applet help page goes here
 		Logger.Info("Removing applet instance...")
 		this.loop.Stop();
 		this.config.Destroy();
-		Event.DestroyAll();
+		Event.DisconnectAll();
 	}
 
 	public override on_applet_clicked(event: any): boolean {

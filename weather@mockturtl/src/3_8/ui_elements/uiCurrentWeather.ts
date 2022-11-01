@@ -8,6 +8,7 @@ import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } fro
 import { _, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, WeatherIconSafely, LocalizedColon, PercentToLocale, CompassDirectionText } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { SunTimesUI } from "./uiSunTimes";
+import { WindBox } from "./windBox";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
 const Lang: typeof imports.lang = imports.lang;
@@ -40,15 +41,12 @@ export class CurrentWeather {
 	private temperatureCaption!: imports.gi.St.Label;
 	private humidityCaption!: imports.gi.St.Label;
 	private pressureCaption!: imports.gi.St.Label;
-	private windCaption!: imports.gi.St.Label;
 	private dewPointCaption!: imports.gi.St.Label;
 	private apiUniqueCaption!: imports.gi.St.Label;
 
 	private temperatureLabel!: imports.gi.St.Label;
 	private humidityLabel!: imports.gi.St.Label;
 	private pressureLabel!: imports.gi.St.Label;
-	private windLabel!: imports.gi.St.Label;
-	private windDirectionIcon!: imports.gi.St.Icon;
 	private dewPointLabel!: imports.gi.St.Label;
 	private apiUniqueLabel!: imports.gi.St.Label;
 
@@ -58,12 +56,14 @@ export class CurrentWeather {
 	private app: WeatherApplet;
 
 	private sunTimesUI: SunTimesUI;
+	private windBox: WindBox;
 
 	constructor(app: WeatherApplet) {
 		this.app = app;
 		this.actor = new Bin();
 		this.actor.style_class = STYLE_CURRENT;
 		this.sunTimesUI = new SunTimesUI(app);
+		this.windBox = new WindBox(app);
 		this.app.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a)); //on location store change
 		this.app.config.ImmediatePrecipChanged.Subscribe(() => this.SetImmediatePrecipitation(this.app.CurrentData?.immediatePrecipitation, this.app.config));
 	}
@@ -81,7 +81,7 @@ export class CurrentWeather {
 			this.SetWeatherIcon(weather.condition.icons, weather.condition.customIcon);
 			this.SetTemperature(weather.temperature);
 			this.SetHumidity(weather.humidity);
-			this.SetWind(weather.wind.speed, weather.wind.degree);
+			this.windBox.Display(weather.wind.speed, weather.wind.degree);
 			this.SetPressure(weather.pressure);
 			this.SetDewPointField(weather.dewPoint);
 			this.SetAPIUniqueField(weather.extra_field);
@@ -159,23 +159,24 @@ export class CurrentWeather {
 		this.temperatureCaption = new Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle });
 		this.humidityCaption = new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle });
 		this.pressureCaption = new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle });
-		this.windCaption = new Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle });
 		this.dewPointCaption = new Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
 		// APi Unique Caption
 		this.apiUniqueCaption = new Label({ text: '', style: textColorStyle });
+
+		const [windCaption, windLabel] = this.windBox.Rebuild(config, textColorStyle);
 
 		const rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
 		const rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES })
 		rb_captions.add_actor(this.temperatureCaption);
 		rb_captions.add_actor(this.humidityCaption);
 		rb_captions.add_actor(this.pressureCaption);
-		rb_captions.add_actor(this.windCaption);
+		rb_captions.add_actor(windCaption);
 		rb_captions.add_actor(this.dewPointCaption);
 		rb_captions.add_actor(this.apiUniqueCaption);
 		rb_values.add_actor(this.temperatureLabel);
 		rb_values.add_actor(this.humidityLabel);
 		rb_values.add_actor(this.pressureLabel);
-		rb_values.add_actor(this.BuildWind(config));
+		rb_values.add_actor(windLabel);
 		rb_values.add_actor(this.dewPointLabel);
 		rb_values.add_actor(this.apiUniqueLabel);
 
@@ -183,29 +184,6 @@ export class CurrentWeather {
 		rightColumn.add_actor(rb_captions);
 		rightColumn.add_actor(rb_values);
 		return rightColumn;
-	}
-
-	private BuildWind(config: Config) {
-		const windBox = new BoxLayout({ vertical: false });
-
-		// We try to make sure that icon doesn't take up more vertical space than text
-		// Also we position it close to the bottom to be perceived vertically centered
-		const iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
-		const iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
-		const iconSize = Math.round(config.CurrentFontSize * 0.8);
-
-		this.windLabel = new Label({ text: ELLIPSIS });
-		this.windDirectionIcon = new Icon({
-			icon_type: IconType.SYMBOLIC,
-			icon_name: APPLET_ICON,
-			icon_size: iconSize,
-			style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"
-		});
-		if (!config._displayWindAsText)
-			windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
-		windBox.add(this.windLabel);
-
-		return windBox;
 	}
 
 	private BuildLocationSection() {
@@ -348,29 +326,6 @@ export class CurrentWeather {
 		this.humidityLabel.text = PercentToLocale(humidity, this.app.config.currentLocale);
 		this.humidityCaption.remove_style_class_name(STYLE_HIDDEN);
 		this.humidityLabel.remove_style_class_name(STYLE_HIDDEN);
-	}
-
-	private async SetWind(windSpeed: number | null, windDegree: number | null) {
-		if (windSpeed == null || windDegree == null) {
-			this.windCaption.set_style_class_name(STYLE_HIDDEN);
-			this.windLabel.set_style_class_name(STYLE_HIDDEN);
-			return;
-		}
-
-		const wind_direction = CompassDirection(windDegree);
-		this.windDirectionIcon.icon_name = wind_direction;
-		if (this.app.config._displayWindAsText) {
-			const dirText = CompassDirectionText(windDegree);
-			this.windLabel.text = `${(dirText != null ? _(dirText) + " " : "")}${MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit)}`;
-		}
-		else {
-			this.windLabel.text = MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
-		}
-
-		// No need to display unit to Beaufort scale
-		if (this.app.config.WindSpeedUnit != "Beaufort") this.windLabel.text += " " + _(this.app.config.WindSpeedUnit);
-		this.windCaption.remove_style_class_name(STYLE_HIDDEN);
-		this.windLabel.remove_style_class_name(STYLE_HIDDEN);
 	}
 
 	private SetPressure(pressure: number | null) {

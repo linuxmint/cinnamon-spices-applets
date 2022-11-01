@@ -9270,7 +9270,7 @@ class Event {
         this.subscribers = [];
         Event.eventStore.push(this);
     }
-    static DestroyAll() {
+    static DisconnectAll() {
         for (const event of this.eventStore) {
             event.UnSubscribeAll();
         }
@@ -15376,13 +15376,15 @@ const { Bin, BoxLayout, IconType: uiSunTimes_IconType, Label, Icon, Align } = im
 const STYLE_ASTRONOMY = 'weather-current-astronomy';
 class SunTimesUI {
     constructor(app) {
-        this.app = app;
-        this.app.config.ShowSunriseChanged.Subscribe(() => {
+        this.OnConfigChanged = async () => {
+            await this.app.Refreshing;
             const data = this.app.CurrentData;
             if (data == null)
                 return;
             this.Display(data.sunrise, data.sunset, data.location.timeZone);
-        });
+        };
+        this.app = app;
+        this.app.config.ShowSunriseChanged.Subscribe(this.OnConfigChanged);
     }
     get actor() {
         return this._actor;
@@ -15436,7 +15438,80 @@ class SunTimesUI {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/ui_elements/windBox.ts
+
+
+const { BoxLayout: windBox_BoxLayout, IconType: windBox_IconType, Label: windBox_Label, Icon: windBox_Icon, Align: windBox_Align } = imports.gi.St;
+class WindBox {
+    constructor(app) {
+        this.OnConfigChanged = async () => {
+            await this.app.Refreshing;
+            const data = this.app.CurrentData;
+            if (data == null)
+                return;
+            this.Display(data.wind.speed, data.wind.degree);
+        };
+        this.OnDisplayWindAsTextChanged = async (config, displayWindAsText) => {
+            await this.app.Refreshing;
+            const data = this.app.CurrentData;
+            if (data == null)
+                return;
+            this._label.remove_all_children();
+            if (!displayWindAsText)
+                this._label.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: windBox_Align.MIDDLE, y_align: windBox_Align.MIDDLE, expand: false });
+            this._label.add(this.labelText);
+            this.Display(data.wind.speed, data.wind.degree);
+        };
+        this.app = app;
+        this.app.config.DisplayWindAsTextChanged.Subscribe(this.OnDisplayWindAsTextChanged);
+        this.app.config.WindSpeedUnitChanged.Subscribe(this.OnConfigChanged);
+    }
+    Rebuild(config, textColorStyle) {
+        this._caption = new windBox_Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle });
+        this._label = this.BuildLabel(config);
+        return [this._caption, this._label];
+    }
+    BuildLabel(config) {
+        const windBox = new windBox_BoxLayout({ vertical: false });
+        const iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
+        const iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
+        const iconSize = Math.round(config.CurrentFontSize * 0.8);
+        this.labelText = new windBox_Label({ text: ELLIPSIS });
+        this.windDirectionIcon = new windBox_Icon({
+            icon_type: windBox_IconType.SYMBOLIC,
+            icon_name: APPLET_ICON,
+            icon_size: iconSize,
+            style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"
+        });
+        if (!config._displayWindAsText)
+            windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: windBox_Align.MIDDLE, y_align: windBox_Align.MIDDLE, expand: false });
+        windBox.add(this.labelText);
+        return windBox;
+    }
+    Display(windSpeed, windDegree) {
+        if (windSpeed == null || windDegree == null) {
+            this._caption.hide();
+            this._label.hide();
+            return;
+        }
+        const wind_direction = CompassDirection(windDegree);
+        this.windDirectionIcon.icon_name = wind_direction;
+        if (this.app.config._displayWindAsText) {
+            const dirText = CompassDirectionText(windDegree);
+            this.labelText.text = `${(dirText != null ? _(dirText) + " " : "")}${MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit)}`;
+        }
+        else {
+            this.labelText.text = MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
+        }
+        if (this.app.config.WindSpeedUnit != "Beaufort")
+            this.labelText.text += " " + _(this.app.config.WindSpeedUnit);
+        this._caption.show();
+        this._label.show();
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiCurrentWeather.ts
+
 
 
 
@@ -15460,6 +15535,7 @@ class CurrentWeather {
         this.actor = new uiCurrentWeather_Bin();
         this.actor.style_class = STYLE_CURRENT;
         this.sunTimesUI = new SunTimesUI(app);
+        this.windBox = new WindBox(app);
         this.app.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a));
         this.app.config.ImmediatePrecipChanged.Subscribe(() => { var _a; return this.SetImmediatePrecipitation((_a = this.app.CurrentData) === null || _a === void 0 ? void 0 : _a.immediatePrecipitation, this.app.config); });
     }
@@ -15475,7 +15551,7 @@ class CurrentWeather {
             this.SetWeatherIcon(weather.condition.icons, weather.condition.customIcon);
             this.SetTemperature(weather.temperature);
             this.SetHumidity(weather.humidity);
-            this.SetWind(weather.wind.speed, weather.wind.degree);
+            this.windBox.Display(weather.wind.speed, weather.wind.degree);
             this.SetPressure(weather.pressure);
             this.SetDewPointField(weather.dewPoint);
             this.SetAPIUniqueField(weather.extra_field);
@@ -15537,44 +15613,27 @@ class CurrentWeather {
         this.temperatureCaption = new uiCurrentWeather_Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle });
         this.humidityCaption = new uiCurrentWeather_Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle });
         this.pressureCaption = new uiCurrentWeather_Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle });
-        this.windCaption = new uiCurrentWeather_Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle });
         this.dewPointCaption = new uiCurrentWeather_Label({ text: _("Dew Point") + LocalizedColon(config.currentLocale), style: textColorStyle });
         this.apiUniqueCaption = new uiCurrentWeather_Label({ text: '', style: textColorStyle });
+        const [windCaption, windLabel] = this.windBox.Rebuild(config, textColorStyle);
         const rb_captions = new uiCurrentWeather_BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
         const rb_values = new uiCurrentWeather_BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
         rb_captions.add_actor(this.temperatureCaption);
         rb_captions.add_actor(this.humidityCaption);
         rb_captions.add_actor(this.pressureCaption);
-        rb_captions.add_actor(this.windCaption);
+        rb_captions.add_actor(windCaption);
         rb_captions.add_actor(this.dewPointCaption);
         rb_captions.add_actor(this.apiUniqueCaption);
         rb_values.add_actor(this.temperatureLabel);
         rb_values.add_actor(this.humidityLabel);
         rb_values.add_actor(this.pressureLabel);
-        rb_values.add_actor(this.BuildWind(config));
+        rb_values.add_actor(windLabel);
         rb_values.add_actor(this.dewPointLabel);
         rb_values.add_actor(this.apiUniqueLabel);
         const rightColumn = new uiCurrentWeather_BoxLayout({ style_class: STYLE_DATABOX });
         rightColumn.add_actor(rb_captions);
         rightColumn.add_actor(rb_values);
         return rightColumn;
-    }
-    BuildWind(config) {
-        const windBox = new uiCurrentWeather_BoxLayout({ vertical: false });
-        const iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
-        const iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
-        const iconSize = Math.round(config.CurrentFontSize * 0.8);
-        this.windLabel = new uiCurrentWeather_Label({ text: ELLIPSIS });
-        this.windDirectionIcon = new uiCurrentWeather_Icon({
-            icon_type: uiCurrentWeather_IconType.SYMBOLIC,
-            icon_name: APPLET_ICON,
-            icon_size: iconSize,
-            style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"
-        });
-        if (!config._displayWindAsText)
-            windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: uiCurrentWeather_Align.MIDDLE, y_align: uiCurrentWeather_Align.MIDDLE, expand: false });
-        windBox.add(this.windLabel);
-        return windBox;
     }
     BuildLocationSection() {
         this.locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), });
@@ -15703,26 +15762,6 @@ class CurrentWeather {
         this.humidityCaption.remove_style_class_name(STYLE_HIDDEN);
         this.humidityLabel.remove_style_class_name(STYLE_HIDDEN);
     }
-    async SetWind(windSpeed, windDegree) {
-        if (windSpeed == null || windDegree == null) {
-            this.windCaption.set_style_class_name(STYLE_HIDDEN);
-            this.windLabel.set_style_class_name(STYLE_HIDDEN);
-            return;
-        }
-        const wind_direction = CompassDirection(windDegree);
-        this.windDirectionIcon.icon_name = wind_direction;
-        if (this.app.config._displayWindAsText) {
-            const dirText = CompassDirectionText(windDegree);
-            this.windLabel.text = `${(dirText != null ? _(dirText) + " " : "")}${MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit)}`;
-        }
-        else {
-            this.windLabel.text = MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
-        }
-        if (this.app.config.WindSpeedUnit != "Beaufort")
-            this.windLabel.text += " " + _(this.app.config.WindSpeedUnit);
-        this.windCaption.remove_style_class_name(STYLE_HIDDEN);
-        this.windLabel.remove_style_class_name(STYLE_HIDDEN);
-    }
     SetPressure(pressure) {
         if (pressure == null) {
             this.pressureCaption.set_style_class_name(STYLE_HIDDEN);
@@ -15790,7 +15829,7 @@ class UIForecasts {
         this.OnConfigChanged = async () => {
             if (this.app.CurrentData == null)
                 return;
-            await this.app.WaitForRefresh;
+            await this.app.Refreshing;
             this.Display(this.app.CurrentData, this.app.config);
         };
         this.app = app;
@@ -16887,7 +16926,6 @@ class WeatherApplet extends TextIconApplet {
         this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.TemperatureUnitChanged.Subscribe(this.OnConfigChanged);
-        this.config.WindSpeedUnitChanged.Subscribe(this.OnConfigChanged);
         this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
         this.config.PressureUnitChanged.Subscribe(this.OnConfigChanged);
         this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged);
@@ -16900,15 +16938,13 @@ class WeatherApplet extends TextIconApplet {
         this.config.ShortHourlyTimeChanged.Subscribe(this.OnConfigChanged);
         this.config.LocationListChanged.Subscribe(this.OnConfigChanged);
         this.config.ShowBothTempUnitsChanged.Subscribe(this.OnConfigChanged);
-        this.config.DisplayWindAsTextChanged.Subscribe(this.OnConfigChanged);
         this.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.OnConfigChanged);
-        this.config.LogLevelChanged.Subscribe(this.OnConfigChanged);
         this.config.SelectedLogPathChanged.Subscribe(this.OnConfigChanged);
     }
     get CurrentData() {
         return this.currentWeatherInfo;
     }
-    get WaitForRefresh() {
+    get Refreshing() {
         if (this.refreshing == null)
             return Promise.resolve();
         return this.refreshing;
@@ -17165,7 +17201,7 @@ The contents of the file saved from the applet help page goes here
         logger_Logger.Info("Removing applet instance...");
         this.loop.Stop();
         this.config.Destroy();
-        Event.DestroyAll();
+        Event.DisconnectAll();
     }
     on_applet_clicked(event) {
         this.ui.Toggle();

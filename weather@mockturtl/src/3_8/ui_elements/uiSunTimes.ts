@@ -18,16 +18,19 @@ export class SunTimesUI {
 
     public constructor(app: WeatherApplet) {
         this.app = app;
-        this.app.config.ShowSunriseChanged.Subscribe(() => {
-			const data = this.app.CurrentData;
-			if (data == null)
-				return;
-			this.Display(data.sunrise, data.sunset, data.location.timeZone);
-		});
+        this.app.config.ShowSunriseChanged.Subscribe(this.OnConfigChanged);
     }
 
 	private sunriseLabel!: imports.gi.St.Label;
 	private sunsetLabel!: imports.gi.St.Label;
+
+    private OnConfigChanged = async () => {
+        await this.app.Refreshing;
+        const data = this.app.CurrentData;
+        if (data == null)
+            return;
+        this.Display(data.sunrise, data.sunset, data.location.timeZone);
+    }
 
     public Rebuild(config: Config, textColorStyle: string): imports.gi.St.Bin {
         // Bin is used here to horizontally center BoxLayout inside BoxLayout, normal add() function does not work here 

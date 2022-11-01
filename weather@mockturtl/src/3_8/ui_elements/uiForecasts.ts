@@ -48,7 +48,7 @@ export class UIForecasts {
 	public OnConfigChanged = async () => {
 		if (this.app.CurrentData == null)
 				return;
-		await this.app.WaitForRefresh;
+		await this.app.Refreshing;
 		this.Display(this.app.CurrentData, this.app.config);
 	}
 

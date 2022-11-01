@@ -13,7 +13,7 @@ export class Event<TSender, TArgs> implements IEvent<TSender, TArgs> {
 	private static eventStore: Event<any, any>[] = [];
 
 	/** Safe Unsubscription of all callbacks, Should be used on Applet removal. */
-	public static DestroyAll() {
+	public static DisconnectAll() {
 		for (const event of this.eventStore) {
 			event.UnSubscribeAll();
 		}
