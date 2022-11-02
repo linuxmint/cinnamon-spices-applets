@@ -15990,6 +15990,9 @@ class UIHourlyForecasts {
         this.hourlyForecasts = [];
         this.hourlyContainers = [];
         this.hourlyToggled = false;
+        this.OnShortHourlyTimeChanged = (config, shortTime, data) => {
+            this.Display(data.hourlyForecasts, config, config.Timezone);
+        };
         this.app = app;
         this.actor = new ScrollView({
             hscrollbar_policy: PolicyType.AUTOMATIC,
@@ -16020,6 +16023,7 @@ class UIHourlyForecasts {
         this.actor.set_clip_to_allocation(true);
         this.container = new uiHourlyForecasts_BoxLayout({ style_class: "hourly-box" });
         this.actor.add_actor(this.container);
+        this.app.config.ShortHourlyTimeChanged.Subscribe(this.app.AfterRefresh(this.OnShortHourlyTimeChanged));
     }
     get Toggled() {
         return this.hourlyToggled;
@@ -16945,7 +16949,6 @@ class WeatherApplet extends TextIconApplet {
         this.config.TemperatureHighFirstChanged.Subscribe(this.OnConfigChanged);
         this.config.ShortConditionsChanged.Subscribe(this.OnConfigChanged);
         this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
-        this.config.ShortHourlyTimeChanged.Subscribe(this.OnConfigChanged);
         this.config.ShowBothTempUnitsChanged.Subscribe(this.OnConfigChanged);
     }
     get CurrentData() {
