@@ -61,6 +61,13 @@ export class UI {
 		this.BuildPopupMenu();
 		// Subscriptions
 		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this); // on theme change
+		this.App.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.App.AfterRefresh(this.OnAlwaysShowHourlyWeatherChanged));
+	}
+
+	private OnAlwaysShowHourlyWeatherChanged = (config: Config, alwaysShowHourly: boolean, data: WeatherData) => {
+		if (this.App.Provider == null)
+			return;
+		this.Display(data, config, this.App.Provider);
 	}
 
 	public Toggle(): void {

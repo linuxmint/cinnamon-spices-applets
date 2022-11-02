@@ -16336,6 +16336,8 @@ class UIBar {
         (_g = this.timestampTooltip) === null || _g === void 0 ? void 0 : _g.set_text(tooltipText);
         if (!shouldShowToggle || config._alwaysShowHourlyWeather)
             this.HideHourlyToggle();
+        else
+            this.ShowHourlyToggle();
         return true;
     }
     Destroy() {
@@ -16391,8 +16393,12 @@ class UIBar {
         return _("km");
     }
     HideHourlyToggle() {
-        if (this.hourlyButton != null)
-            this.hourlyButton.actor.child = null;
+        var _a;
+        (_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.hide();
+    }
+    ShowHourlyToggle() {
+        var _a;
+        (_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.show();
     }
 }
 
@@ -16433,6 +16439,11 @@ class UI {
     constructor(app, orientation) {
         this.lightTheme = false;
         this.noHourlyWeather = false;
+        this.OnAlwaysShowHourlyWeatherChanged = (config, alwaysShowHourly, data) => {
+            if (this.App.Provider == null)
+                return;
+            this.Display(data, config, this.App.Provider);
+        };
         this.App = app;
         this.menuManager = new PopupMenuManager(this.App);
         this.menu = new AppletPopupMenu(this.App, orientation);
@@ -16444,6 +16455,7 @@ class UI {
         this.lightTheme = this.IsLightTheme();
         this.BuildPopupMenu();
         this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
+        this.App.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.App.AfterRefresh(this.OnAlwaysShowHourlyWeatherChanged));
     }
     Toggle() {
         if (!this.noHourlyWeather && this.App.config._alwaysShowHourlyWeather) {
@@ -16935,7 +16947,6 @@ class WeatherApplet extends TextIconApplet {
         this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
         this.config.ShortHourlyTimeChanged.Subscribe(this.OnConfigChanged);
         this.config.ShowBothTempUnitsChanged.Subscribe(this.OnConfigChanged);
-        this.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.OnConfigChanged);
     }
     get CurrentData() {
         return this.currentWeatherInfo;
@@ -16944,6 +16955,9 @@ class WeatherApplet extends TextIconApplet {
         if (this.refreshing == null)
             return Promise.resolve();
         return this.refreshing;
+    }
+    get Provider() {
+        return this.provider;
     }
     get Orientation() {
         return this.orientation;

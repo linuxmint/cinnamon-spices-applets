@@ -46,6 +46,10 @@ export class WeatherApplet extends TextIconApplet {
 	/** Chosen API */
 	private provider?: WeatherProvider;
 
+	public get Provider(): WeatherProvider | undefined {
+		return this.provider;
+	}
+
 	private orientation: imports.gi.St.Side;
 	public get Orientation() {
 		return this.orientation;
@@ -125,7 +129,6 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
 		this.config.ShortHourlyTimeChanged.Subscribe(this.OnConfigChanged);
 		this.config.ShowBothTempUnitsChanged.Subscribe(this.OnConfigChanged);
-		this.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.OnConfigChanged);
 	}
 
 	public Locked(): boolean {
