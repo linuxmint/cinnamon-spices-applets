@@ -15820,7 +15820,13 @@ class UIForecasts {
     constructor(app) {
         this.DayClicked = new Event();
         this.DayHovered = new Event();
-        this.OnConfigChanged = async (config, showDorecastDates, data) => {
+        this.OnConfigChanged = async (config, showForecastDates, data) => {
+            this.Display(data, config);
+        };
+        this.OnForecastDaysChanged = async (config, forecastDays, data) => {
+            if (config.textColorStyle == null)
+                return;
+            this.Rebuild(config, config.textColorStyle);
             this.Display(data, config);
         };
         this.app = app;
@@ -15828,6 +15834,8 @@ class UIForecasts {
         this.DayClickedCallback = (s, e) => this.OnDayClicked(s, e);
         this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
         this.app.config.ShowForecastDatesChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
+        this.app.config.TemperatureHighFirstChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
+        this.app.config.ForecastDaysChanged.Subscribe(this.app.AfterRefresh(this.OnForecastDaysChanged));
     }
     UpdateIconType(iconType) {
         if (!this.forecasts)
@@ -16942,13 +16950,11 @@ class WeatherApplet extends TextIconApplet {
         this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.TemperatureUnitChanged.Subscribe(this.OnConfigChanged);
+        this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
         this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
         this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged);
-        this.config.ForecastDaysChanged.Subscribe(this.OnConfigChanged);
         this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
-        this.config.TemperatureHighFirstChanged.Subscribe(this.OnConfigChanged);
         this.config.ShortConditionsChanged.Subscribe(this.OnConfigChanged);
-        this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
         this.config.ShowBothTempUnitsChanged.Subscribe(this.OnConfigChanged);
     }
     get CurrentData() {

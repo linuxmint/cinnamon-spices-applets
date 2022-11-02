@@ -43,9 +43,18 @@ export class UIForecasts {
 		this.DayClickedCallback = (s, e) => this.OnDayClicked(s, e);
 		this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
 		this.app.config.ShowForecastDatesChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
+		this.app.config.TemperatureHighFirstChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
+		this.app.config.ForecastDaysChanged.Subscribe(this.app.AfterRefresh(this.OnForecastDaysChanged));
 	}
 
-	public OnConfigChanged = async (config: Config, showDorecastDates: boolean, data: WeatherData) => {
+	private OnConfigChanged = async (config: Config, showForecastDates: boolean, data: WeatherData) => {
+		this.Display(data, config);
+	}
+
+	private OnForecastDaysChanged = async (config: Config, forecastDays: number, data: WeatherData) => {
+		if (config.textColorStyle == null)
+			return;
+		this.Rebuild(config, config.textColorStyle);
 		this.Display(data, config);
 	}
 

@@ -120,13 +120,11 @@ export class WeatherApplet extends TextIconApplet {
 
 		// TODO:
 		this.config.TemperatureUnitChanged.Subscribe(this.OnConfigChanged);
-		this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
-		this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged);
-		this.config.ForecastDaysChanged.Subscribe(this.OnConfigChanged);
-		this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
-		this.config.TemperatureHighFirstChanged.Subscribe(this.OnConfigChanged);
-		this.config.ShortConditionsChanged.Subscribe(this.OnConfigChanged);
 		this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
+		this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
+		this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged); // hourly, sunrise/sunset
+		this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
+		this.config.ShortConditionsChanged.Subscribe(this.OnConfigChanged);
 		this.config.ShowBothTempUnitsChanged.Subscribe(this.OnConfigChanged);
 	}
 
