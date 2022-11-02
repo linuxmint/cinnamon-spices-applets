@@ -1,6 +1,7 @@
-import { Config } from "../config";
+import { Config, WeatherWindSpeedUnits } from "../config";
 import { APPLET_ICON, ELLIPSIS } from "../consts";
 import { type WeatherApplet } from "../main";
+import { WeatherData } from "../types";
 import { CompassDirection, CompassDirectionText, LocalizedColon, MPStoUserUnits, _ } from "../utils";
 const { BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
 
@@ -14,24 +15,15 @@ export class WindBox {
 
     public constructor(app: WeatherApplet) {
         this.app = app;
-        this.app.config.DisplayWindAsTextChanged.Subscribe(this.OnDisplayWindAsTextChanged);
-        this.app.config.WindSpeedUnitChanged.Subscribe(this.OnConfigChanged);
+        this.app.config.DisplayWindAsTextChanged.Subscribe(this.app.AfterRefresh(this.OnDisplayWindAsTextChanged));
+        this.app.config.WindSpeedUnitChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
     }
 
-    private OnConfigChanged = async () => {
-        await this.app.Refreshing;
-        const data = this.app.CurrentData;
-        if (data == null)
-            return;
+    private OnConfigChanged = (config: Config, unit: WeatherWindSpeedUnits, data: WeatherData) => {
         this.Display(data.wind.speed, data.wind.degree);
     }
 
-    private OnDisplayWindAsTextChanged = async (config: Config, displayWindAsText: boolean) => {
-        await this.app.Refreshing;
-        const data = this.app.CurrentData;
-        if (data == null)
-            return;
-
+    private OnDisplayWindAsTextChanged = (config: Config, displayWindAsText: boolean, data: WeatherData) => {
         this._label.remove_all_children();
 
         if (!displayWindAsText)

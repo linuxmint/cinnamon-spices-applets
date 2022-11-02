@@ -117,7 +117,6 @@ export class WeatherApplet extends TextIconApplet {
 		// TODO:
 		this.config.TemperatureUnitChanged.Subscribe(this.OnConfigChanged);
 		this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
-		this.config.PressureUnitChanged.Subscribe(this.OnConfigChanged);
 		this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged);
 		this.config.ForecastDaysChanged.Subscribe(this.OnConfigChanged);
 		this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
@@ -522,6 +521,23 @@ The contents of the file saved from the applet help page goes here
 		
 		await CloseStream(stream.get_output_stream());
 		NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", {filePath: this.config._selectedLogPath}));
+	}
+
+	
+	/**
+	 * Callback wrapper for events, awaits until a refresh is done and ensures complete
+	 * weather data is provided.
+	 * @param callback 
+	 * @returns 
+	 */
+	public AfterRefresh = <T, TT>(callback: (owner: T, data: TT, weatherData: WeatherData) => void | Promise<void>): ((owner: T, data: TT) => Promise<void>) => {
+		return async (owner, data) => {
+			await this.Refreshing;
+			const weatherData = this.CurrentData;
+			if (weatherData == null)
+				return;
+			callback(owner, data, weatherData); 
+		}
 	}
 
 	// -------------------------------------------------------------------

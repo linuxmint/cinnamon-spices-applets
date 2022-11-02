@@ -42,14 +42,11 @@ export class UIForecasts {
 
 		this.DayClickedCallback = (s, e) => this.OnDayClicked(s, e);
 		this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
-		this.app.config.ShowForecastDatesChanged.Subscribe(this.OnConfigChanged);
+		this.app.config.ShowForecastDatesChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
 	}
 
-	public OnConfigChanged = async () => {
-		if (this.app.CurrentData == null)
-				return;
-		await this.app.Refreshing;
-		this.Display(this.app.CurrentData, this.app.config);
+	public OnConfigChanged = async (config: Config, showDorecastDates: boolean, data: WeatherData) => {
+		this.Display(data, config);
 	}
 
 	public UpdateIconType(iconType: imports.gi.St.IconType): void {

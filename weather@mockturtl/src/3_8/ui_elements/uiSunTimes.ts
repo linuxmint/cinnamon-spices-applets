@@ -2,6 +2,7 @@ import { DateTime } from "luxon";
 import { Config } from "../config";
 import { BLANK, ELLIPSIS } from "../consts";
 import { type WeatherApplet } from "../main";
+import { WeatherData } from "../types";
 import { GetHoursMinutes } from "../utils";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
@@ -16,19 +17,19 @@ export class SunTimesUI {
         return this._actor;
     }
 
+    private get config(): Config {
+        return this.app.config;
+    }
+
     public constructor(app: WeatherApplet) {
         this.app = app;
-        this.app.config.ShowSunriseChanged.Subscribe(this.OnConfigChanged);
+        this.config.ShowSunriseChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
     }
 
 	private sunriseLabel!: imports.gi.St.Label;
 	private sunsetLabel!: imports.gi.St.Label;
 
-    private OnConfigChanged = async () => {
-        await this.app.Refreshing;
-        const data = this.app.CurrentData;
-        if (data == null)
-            return;
+    private OnConfigChanged = async (config: Config, showSunrise: boolean, data: WeatherData) => {
         this.Display(data.sunrise, data.sunset, data.location.timeZone);
     }
 

@@ -15373,18 +15373,17 @@ const { Bin, BoxLayout, IconType: uiSunTimes_IconType, Label, Icon, Align } = im
 const STYLE_ASTRONOMY = 'weather-current-astronomy';
 class SunTimesUI {
     constructor(app) {
-        this.OnConfigChanged = async () => {
-            await this.app.Refreshing;
-            const data = this.app.CurrentData;
-            if (data == null)
-                return;
+        this.OnConfigChanged = async (config, showSunrise, data) => {
             this.Display(data.sunrise, data.sunset, data.location.timeZone);
         };
         this.app = app;
-        this.app.config.ShowSunriseChanged.Subscribe(this.OnConfigChanged);
+        this.config.ShowSunriseChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
     }
     get actor() {
         return this._actor;
+    }
+    get config() {
+        return this.app.config;
     }
     Rebuild(config, textColorStyle) {
         const sunBin = new Bin();
@@ -15441,18 +15440,10 @@ class SunTimesUI {
 const { BoxLayout: windBox_BoxLayout, IconType: windBox_IconType, Label: windBox_Label, Icon: windBox_Icon, Align: windBox_Align } = imports.gi.St;
 class WindBox {
     constructor(app) {
-        this.OnConfigChanged = async () => {
-            await this.app.Refreshing;
-            const data = this.app.CurrentData;
-            if (data == null)
-                return;
+        this.OnConfigChanged = (config, unit, data) => {
             this.Display(data.wind.speed, data.wind.degree);
         };
-        this.OnDisplayWindAsTextChanged = async (config, displayWindAsText) => {
-            await this.app.Refreshing;
-            const data = this.app.CurrentData;
-            if (data == null)
-                return;
+        this.OnDisplayWindAsTextChanged = (config, displayWindAsText, data) => {
             this._label.remove_all_children();
             if (!displayWindAsText)
                 this._label.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: windBox_Align.MIDDLE, y_align: windBox_Align.MIDDLE, expand: false });
@@ -15460,8 +15451,8 @@ class WindBox {
             this.Display(data.wind.speed, data.wind.degree);
         };
         this.app = app;
-        this.app.config.DisplayWindAsTextChanged.Subscribe(this.OnDisplayWindAsTextChanged);
-        this.app.config.WindSpeedUnitChanged.Subscribe(this.OnConfigChanged);
+        this.app.config.DisplayWindAsTextChanged.Subscribe(this.app.AfterRefresh(this.OnDisplayWindAsTextChanged));
+        this.app.config.WindSpeedUnitChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
     }
     Rebuild(config, textColorStyle) {
         this._caption = new windBox_Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle });
@@ -15528,11 +15519,7 @@ const STYLE_CURRENT = 'current';
 const STYLE_LOCATION_SELECTOR = 'location-selector';
 class CurrentWeather {
     constructor(app) {
-        this.OnLocationOverrideChanged = async (config) => {
-            await this.app.Refreshing;
-            const data = this.app.CurrentData;
-            if (data == null)
-                return;
+        this.OnLocationOverrideChanged = async (config, label, data) => {
             const location = GenerateLocationText(data, config);
             this.SetLocation(location, data.location.url);
         };
@@ -15542,8 +15529,9 @@ class CurrentWeather {
         this.sunTimesUI = new SunTimesUI(app);
         this.windBox = new WindBox(app);
         this.app.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a));
-        this.app.config.ImmediatePrecipChanged.Subscribe((config) => { var _a; return this.SetImmediatePrecipitation((_a = this.app.CurrentData) === null || _a === void 0 ? void 0 : _a.immediatePrecipitation, config); });
-        this.app.config.LocationLabelOverrideChanged.Subscribe(this.OnLocationOverrideChanged);
+        this.app.config.ImmediatePrecipChanged.Subscribe(this.app.AfterRefresh((config, precip, data) => this.SetImmediatePrecipitation(data.immediatePrecipitation, config)));
+        this.app.config.LocationLabelOverrideChanged.Subscribe(this.app.AfterRefresh(this.OnLocationOverrideChanged));
+        this.app.config.PressureUnitChanged.Subscribe(this.app.AfterRefresh((config, pressure, data) => this.SetPressure(data.pressure)));
     }
     Display(weather, config) {
         try {
@@ -15832,17 +15820,14 @@ class UIForecasts {
     constructor(app) {
         this.DayClicked = new Event();
         this.DayHovered = new Event();
-        this.OnConfigChanged = async () => {
-            if (this.app.CurrentData == null)
-                return;
-            await this.app.Refreshing;
-            this.Display(this.app.CurrentData, this.app.config);
+        this.OnConfigChanged = async (config, showDorecastDates, data) => {
+            this.Display(data, config);
         };
         this.app = app;
         this.actor = new uiForecasts_Bin({ style_class: STYLE_FORECAST });
         this.DayClickedCallback = (s, e) => this.OnDayClicked(s, e);
         this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
-        this.app.config.ShowForecastDatesChanged.Subscribe(this.OnConfigChanged);
+        this.app.config.ShowForecastDatesChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
     }
     UpdateIconType(iconType) {
         if (!this.forecasts)
@@ -16879,6 +16864,15 @@ class WeatherApplet extends TextIconApplet {
             await CloseStream(stream.get_output_stream());
             NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", { filePath: this.config._selectedLogPath }));
         };
+        this.AfterRefresh = (callback) => {
+            return async (owner, data) => {
+                await this.Refreshing;
+                const weatherData = this.CurrentData;
+                if (weatherData == null)
+                    return;
+                callback(owner, data, weatherData);
+            };
+        };
         this.errMsg = {
             unknown: _("Error"),
             "bad api response - non json": _("Service Error"),
@@ -16933,7 +16927,6 @@ class WeatherApplet extends TextIconApplet {
         this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.TemperatureUnitChanged.Subscribe(this.OnConfigChanged);
         this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
-        this.config.PressureUnitChanged.Subscribe(this.OnConfigChanged);
         this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged);
         this.config.ForecastDaysChanged.Subscribe(this.OnConfigChanged);
         this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
