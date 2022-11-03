@@ -124,11 +124,11 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.TemperatureUnitChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
 		this.config.TempRussianStyleChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
 		this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
+		this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
+		this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
 
 		// TODO:
-		this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged); // current, hourly
-		this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged); // hourly, sunrise/sunset
-		this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged); // hourly
+		this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged); // hourly and bar
 	}
 
 	public Locked(): boolean {

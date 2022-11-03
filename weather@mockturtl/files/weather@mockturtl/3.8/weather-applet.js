@@ -14765,39 +14765,6 @@ const ServiceClassMapping = {
     "DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
     "WeatherUnderground": (app) => new WeatherUnderground(app)
 };
-const Keys = {
-    DATA_SERVICE: "dataService",
-    API_KEY: "apiKey",
-    TEMPERATURE_UNIT_KEY: "temperatureUnit",
-    TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
-    WIND_SPEED_UNIT: "windSpeedUnit",
-    DISTANCE_UNIT: "distanceUnit",
-    LOCATION_LABEL_OVERRIDE: "locationLabelOverride",
-    TRANSLATE_CONDITION: "translateCondition",
-    VERTICAL_ORIENTATION: "verticalOrientation",
-    SHOW_TEXT_IN_PANEL: "showTextInPanel",
-    SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
-    SHOW_SUNRISE: "showSunrise",
-    SHOW_24HOURS: "show24Hours",
-    FORECAST_DAYS: "forecastDays",
-    FORECAST_HOURS: "forecastHours",
-    FORECAST_COLS: "forecastColumns",
-    FORECAST_ROWS: "forecastRows",
-    REFRESH_INTERVAL: "refreshInterval",
-    PRESSURE_UNIT: "pressureUnit",
-    SHORT_CONDITIONS: "shortConditions",
-    MANUAL_LOCATION: "manualLocation",
-    USE_CUSTOM_APPLET_ICONS: 'useCustomAppletIcons',
-    USE_CUSTOM_MENU_ICONS: "useCustomMenuIcons",
-    RUSSIAN_STYLE: "tempRussianStyle",
-    SHORT_HOURLY_TIME: "shortHourlyTime",
-    SHOW_FORECAST_DATES: "showForecastDates",
-    WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
-    IMMEDIATE_PRECIP: "immediatePrecip",
-    SHOW_BOTH_TEMP: "showBothTempUnits",
-    DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText",
-    ALWAYS_SHOW_HOURLY: "alwaysShowHourlyWeather"
-};
 class Config {
     constructor(app, instanceID) {
         this.fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
@@ -14813,30 +14780,30 @@ class Config {
         this.DataServiceChanged = new Event();
         this.ApiKeyChanged = new Event();
         this.TemperatureUnitChanged = new Event();
+        this.TemperatureHighFirstChanged = new Event();
         this.WindSpeedUnitChanged = new Event();
         this.DistanceUnitChanged = new Event();
+        this.LocationLabelOverrideChanged = new Event();
         this.TranslateConditionChanged = new Event();
-        this.PressureUnitChanged = new Event();
+        this.VerticalOrientationChanged = new Event();
+        this.ShowTextInPanelChanged = new Event();
+        this.ShowCommentInPanelChanged = new Event();
+        this.ShowSunriseChanged = new Event();
         this.Show24HoursChanged = new Event();
         this.ForecastDaysChanged = new Event();
         this.ForecastHoursChanged = new Event();
         this.ForecastColumnsChanged = new Event();
         this.ForecastRowsChanged = new Event();
-        this.VerticalOrientationChanged = new Event();
         this.RefreshIntervalChanged = new Event();
-        this.ManualLocationChanged = new Event();
-        this.TemperatureHighFirstChanged = new Event();
+        this.PressureUnitChanged = new Event();
         this.ShortConditionsChanged = new Event();
-        this.ShowSunriseChanged = new Event();
-        this.ShowCommentInPanelChanged = new Event();
-        this.ShowTextInPanelChanged = new Event();
-        this.LocationLabelOverrideChanged = new Event();
+        this.ManualLocationChanged = new Event();
         this.UseCustomAppletIconsChanged = new Event();
         this.UseCustomMenuIconsChanged = new Event();
-        this.UseSymbolicIconsChanged = new Event();
         this.TempRussianStyleChanged = new Event();
         this.ShortHourlyTimeChanged = new Event();
         this.ShowForecastDatesChanged = new Event();
+        this.UseSymbolicIconsChanged = new Event();
         this.ImmediatePrecipChanged = new Event();
         this.ShowBothTempUnitsChanged = new Event();
         this.DisplayWindAsTextChanged = new Event();
@@ -15011,37 +14978,13 @@ class Config {
         }
     }
     BindSettings() {
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.DATA_SERVICE, ("_" + Keys.DATA_SERVICE), () => this.DataServiceChanged.Invoke(this, this._dataService), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.API_KEY, ("_" + Keys.API_KEY), () => this.ApiKeyChanged.Invoke(this, this.ApiKey), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TEMPERATURE_UNIT_KEY, ("_" + Keys.TEMPERATURE_UNIT_KEY), () => this.TemperatureUnitChanged.Invoke(this, this.TemperatureUnit), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TEMPERATURE_HIGH_FIRST, ("_" + Keys.TEMPERATURE_HIGH_FIRST), () => this.TemperatureHighFirstChanged.Invoke(this, this._temperatureHighFirst), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.WIND_SPEED_UNIT, ("_" + Keys.WIND_SPEED_UNIT), () => this.WindSpeedUnitChanged.Invoke(this, this.WindSpeedUnit), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.DISTANCE_UNIT, ("_" + Keys.DISTANCE_UNIT), () => this.DistanceUnitChanged.Invoke(this, this.DistanceUnit), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.LOCATION_LABEL_OVERRIDE, ("_" + Keys.LOCATION_LABEL_OVERRIDE), () => this.LocationLabelOverrideChanged.Invoke(this, this._locationLabelOverride), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.TRANSLATE_CONDITION, ("_" + Keys.TRANSLATE_CONDITION), () => this.TranslateConditionChanged.Invoke(this, this._translateCondition), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.VERTICAL_ORIENTATION, ("_" + Keys.VERTICAL_ORIENTATION), () => this.VerticalOrientationChanged.Invoke(this, this._verticalOrientation), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHOW_TEXT_IN_PANEL, ("_" + Keys.SHOW_TEXT_IN_PANEL), () => this.ShowTextInPanelChanged.Invoke(this, this._showTextInPanel), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHOW_COMMENT_IN_PANEL, ("_" + Keys.SHOW_COMMENT_IN_PANEL), () => this.ShowCommentInPanelChanged.Invoke(this, this._showCommentInPanel), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHOW_SUNRISE, ("_" + Keys.SHOW_SUNRISE), () => this.ShowSunriseChanged.Invoke(this, this._showSunrise), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHOW_24HOURS, ("_" + Keys.SHOW_24HOURS), () => this.Show24HoursChanged.Invoke(this, this._show24Hours), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.FORECAST_DAYS, ("_" + Keys.FORECAST_DAYS), () => this.ForecastDaysChanged.Invoke(this, this._forecastDays), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.FORECAST_HOURS, ("_" + Keys.FORECAST_HOURS), () => this.ForecastHoursChanged.Invoke(this, this._forecastHours), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.FORECAST_COLS, ("_" + Keys.FORECAST_COLS), () => this.ForecastColumnsChanged.Invoke(this, this._forecastColumns), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.FORECAST_ROWS, ("_" + Keys.FORECAST_ROWS), () => this.ForecastRowsChanged.Invoke(this, this._forecastRows), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.REFRESH_INTERVAL, ("_" + Keys.REFRESH_INTERVAL), () => this.RefreshIntervalChanged.Invoke(this, this._refreshInterval), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.PRESSURE_UNIT, ("_" + Keys.PRESSURE_UNIT), () => this.PressureUnitChanged.Invoke(this, this._pressureUnit), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHORT_CONDITIONS, ("_" + Keys.SHORT_CONDITIONS), () => this.ShortConditionsChanged.Invoke(this, this._shortConditions), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.MANUAL_LOCATION, ("_" + Keys.MANUAL_LOCATION), () => this.ManualLocationChanged.Invoke(this, this._manualLocation), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.USE_CUSTOM_APPLET_ICONS, ("_" + Keys.USE_CUSTOM_APPLET_ICONS), () => this.UseCustomAppletIconsChanged.Invoke(this, this._useCustomAppletIcons), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.USE_CUSTOM_MENU_ICONS, ("_" + Keys.USE_CUSTOM_MENU_ICONS), () => this.UseCustomMenuIconsChanged.Invoke(this, this._useCustomMenuIcons), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.RUSSIAN_STYLE, ("_" + Keys.RUSSIAN_STYLE), () => this.TempRussianStyleChanged.Invoke(this, this._tempRussianStyle), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHORT_HOURLY_TIME, ("_" + Keys.SHORT_HOURLY_TIME), () => this.ShortHourlyTimeChanged.Invoke(this, this._shortHourlyTime), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHOW_FORECAST_DATES, ("_" + Keys.SHOW_FORECAST_DATES), () => this.ShowForecastDatesChanged.Invoke(this, this._showForecastDates), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.WEATHER_USE_SYMBOLIC_ICONS_KEY, ("_" + Keys.WEATHER_USE_SYMBOLIC_ICONS_KEY), () => this.UseSymbolicIconsChanged.Invoke(this, this._useSymbolicIcons), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.IMMEDIATE_PRECIP, ("_" + Keys.IMMEDIATE_PRECIP), () => this.ImmediatePrecipChanged.Invoke(this, this._immediatePrecip), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.SHOW_BOTH_TEMP, ("_" + Keys.SHOW_BOTH_TEMP), () => this.ShowBothTempUnitsChanged.Invoke(this, this._showBothTempUnits), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.DISPLAY_WIND_DIR_AS_TEXT, ("_" + Keys.DISPLAY_WIND_DIR_AS_TEXT), () => this.DisplayWindAsTextChanged.Invoke(this, this._displayWindAsText), null);
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, Keys.ALWAYS_SHOW_HOURLY, ("_" + Keys.ALWAYS_SHOW_HOURLY), () => this.AlwaysShowHourlyWeatherChanged.Invoke(this, this._alwaysShowHourlyWeather), null);
+        let key;
+        for (key in Keys) {
+            if (Object.prototype.hasOwnProperty.call(Keys, key)) {
+                const element = Keys[key];
+                this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, element.key, ("_" + element.key), () => this[`${element.prop}Changed`].Invoke(this, this[`_${element.key}`]), null);
+            }
+        }
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
         this.settings.bind("tempTextOverride", "_" + "panelTextOverride", this.app.RefreshLabel);
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
@@ -15056,7 +14999,7 @@ class Config {
         this.SetLocation(text);
         this.currentLocation = loc;
         if (switchToManual == true)
-            this.settings.setValue(Keys.MANUAL_LOCATION, true);
+            this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
     }
     DoneTypingLocation() {
         logger_Logger.Debug("User has finished typing, beginning refresh");
@@ -15145,6 +15088,132 @@ class Config {
         (_b = (_a = this.settings).finalize) === null || _b === void 0 ? void 0 : _b.call(_a);
     }
 }
+const Keys = {
+    DATA_SERVICE: {
+        key: "dataService",
+        prop: "DataService"
+    },
+    API_KEY: {
+        key: "apiKey",
+        prop: "ApiKey"
+    },
+    TEMPERATURE_UNIT_KEY: {
+        key: "temperatureUnit",
+        prop: "TemperatureUnit"
+    },
+    TEMPERATURE_HIGH_FIRST: {
+        key: "temperatureHighFirst",
+        prop: "TemperatureHighFirst"
+    },
+    WIND_SPEED_UNIT: {
+        key: "windSpeedUnit",
+        prop: "WindSpeedUnit"
+    },
+    DISTANCE_UNIT: {
+        key: "distanceUnit",
+        prop: "DistanceUnit"
+    },
+    LOCATION_LABEL_OVERRIDE: {
+        key: "locationLabelOverride",
+        prop: "LocationLabelOverride"
+    },
+    TRANSLATE_CONDITION: {
+        key: "translateCondition",
+        prop: "TranslateCondition"
+    },
+    VERTICAL_ORIENTATION: {
+        key: "verticalOrientation",
+        prop: "VerticalOrientation"
+    },
+    SHOW_TEXT_IN_PANEL: {
+        key: "showTextInPanel",
+        prop: "ShowTextInPanel"
+    },
+    SHOW_COMMENT_IN_PANEL: {
+        key: "showCommentInPanel",
+        prop: "ShowCommentInPanel"
+    },
+    SHOW_SUNRISE: {
+        key: "showSunrise",
+        prop: "ShowSunrise"
+    },
+    SHOW_24HOURS: {
+        key: "show24Hours",
+        prop: "Show24Hours"
+    },
+    FORECAST_DAYS: {
+        key: "forecastDays",
+        prop: "ForecastDays"
+    },
+    FORECAST_HOURS: {
+        key: "forecastHours",
+        prop: "ForecastHours"
+    },
+    FORECAST_COLS: {
+        key: "forecastColumns",
+        prop: "ForecastColumns"
+    },
+    FORECAST_ROWS: {
+        key: "forecastRows",
+        prop: "ForecastRows"
+    },
+    REFRESH_INTERVAL: {
+        key: "refreshInterval",
+        prop: "RefreshInterval"
+    },
+    PRESSURE_UNIT: {
+        key: "pressureUnit",
+        prop: "PressureUnit"
+    },
+    SHORT_CONDITIONS: {
+        key: "shortConditions",
+        prop: "ShortConditions"
+    },
+    MANUAL_LOCATION: {
+        key: "manualLocation",
+        prop: "ManualLocation"
+    },
+    USE_CUSTOM_APPLET_ICONS: {
+        key: 'useCustomAppletIcons',
+        prop: 'UseCustomAppletIcons'
+    },
+    USE_CUSTOM_MENU_ICONS: {
+        key: "useCustomMenuIcons",
+        prop: "UseCustomMenuIcons"
+    },
+    RUSSIAN_STYLE: {
+        key: "tempRussianStyle",
+        prop: "TempRussianStyle"
+    },
+    SHORT_HOURLY_TIME: {
+        key: "shortHourlyTime",
+        prop: "ShortHourlyTime"
+    },
+    SHOW_FORECAST_DATES: {
+        key: "showForecastDates",
+        prop: "ShowForecastDates"
+    },
+    WEATHER_USE_SYMBOLIC_ICONS_KEY: {
+        key: 'useSymbolicIcons',
+        prop: 'UseSymbolicIcons'
+    },
+    IMMEDIATE_PRECIP: {
+        key: "immediatePrecip",
+        prop: "ImmediatePrecip"
+    },
+    SHOW_BOTH_TEMP: {
+        key: "showBothTempUnits",
+        prop: "ShowBothTempUnits"
+    },
+    DISPLAY_WIND_DIR_AS_TEXT: {
+        key: "displayWindAsText",
+        prop: "DisplayWindAsText"
+    },
+    ALWAYS_SHOW_HOURLY: {
+        key: "alwaysShowHourlyWeather",
+        prop: "AlwaysShowHourlyWeather"
+    }
+};
 
 ;// CONCATENATED MODULE: ./src/3_8/loop.ts
 
@@ -16959,8 +17028,8 @@ class WeatherApplet extends TextIconApplet {
         this.config.TemperatureUnitChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
         this.config.TempRussianStyleChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
         this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
-        this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
-        this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged);
+        this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
+        this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
         this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
     }
     get CurrentData() {
