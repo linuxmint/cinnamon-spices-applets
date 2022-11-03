@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-03 08:53+0000\n"
+"POT-Creation-Date: 2022-11-03 09:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,48 +18,48 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
-#: 3.8/weather-applet.js:16910
+#: 3.8/weather-applet.js:16907
 msgid "Error"
 msgstr ""
 
 #: 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
 #: 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
-#: 3.8/weather-applet.js:16911 3.8/weather-applet.js:16913
-#: 3.8/weather-applet.js:16915 3.8/weather-applet.js:16918
-#: 3.8/weather-applet.js:16921 3.8/weather-applet.js:16922
-#: 3.8/weather-applet.js:16923 3.8/weather-applet.js:16924
+#: 3.8/weather-applet.js:16908 3.8/weather-applet.js:16910
+#: 3.8/weather-applet.js:16912 3.8/weather-applet.js:16915
+#: 3.8/weather-applet.js:16918 3.8/weather-applet.js:16919
+#: 3.8/weather-applet.js:16920 3.8/weather-applet.js:16921
 msgid "Service Error"
 msgstr ""
 
-#: 3.0/applet.js:168 3.8/weather-applet.js:16912
+#: 3.0/applet.js:168 3.8/weather-applet.js:16909
 msgid "Incorrect API Key"
 msgstr ""
 
-#: 3.0/applet.js:170 3.8/weather-applet.js:16914
+#: 3.0/applet.js:170 3.8/weather-applet.js:16911
 msgid "Incorrect Location Format"
 msgstr ""
 
-#: 3.0/applet.js:172 3.8/weather-applet.js:16916
+#: 3.0/applet.js:172 3.8/weather-applet.js:16913
 msgid "Key Blocked"
 msgstr ""
 
-#: 3.0/applet.js:173 3.8/weather-applet.js:16917
+#: 3.0/applet.js:173 3.8/weather-applet.js:16914
 msgid "Can't find location"
 msgstr ""
 
-#: 3.0/applet.js:175 3.8/weather-applet.js:16919
+#: 3.0/applet.js:175 3.8/weather-applet.js:16916
 msgid "No Api Key"
 msgstr ""
 
-#: 3.0/applet.js:176 3.8/weather-applet.js:16920
+#: 3.0/applet.js:176 3.8/weather-applet.js:16917
 msgid "No Location"
 msgstr ""
 
-#: 3.0/applet.js:181 3.8/weather-applet.js:16925
+#: 3.0/applet.js:181 3.8/weather-applet.js:16922
 msgid "Missing Packages"
 msgstr ""
 
-#: 3.0/applet.js:182 3.8/weather-applet.js:16926
+#: 3.0/applet.js:182 3.8/weather-applet.js:16923
 msgid "Location not covered"
 msgstr ""
 
@@ -67,16 +67,16 @@ msgstr ""
 msgid "Weather Applet"
 msgstr ""
 
-#: 3.0/applet.js:217 3.8/weather-applet.js:17245
+#: 3.0/applet.js:217 3.8/weather-applet.js:17242
 msgid "..."
 msgstr ""
 
-#: 3.0/applet.js:218 3.8/weather-applet.js:17246
+#: 3.0/applet.js:218 3.8/weather-applet.js:17243
 msgid "Click to open"
 msgstr ""
 
 #: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:15633
-#: 3.8/weather-applet.js:17249
+#: 3.8/weather-applet.js:17246
 msgid "Refresh"
 msgstr ""
 
@@ -99,12 +99,12 @@ msgstr ""
 msgid "Could not get weather information"
 msgstr ""
 
-#: 3.0/applet.js:624 3.8/weather-applet.js:17072
+#: 3.0/applet.js:624 3.8/weather-applet.js:17069
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 
-#: 3.0/applet.js:670 3.8/weather-applet.js:17327
+#: 3.0/applet.js:670 3.8/weather-applet.js:17324
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
@@ -145,11 +145,11 @@ msgstr ""
 msgid "km"
 msgstr ""
 
-#: 3.0/applet.js:1227 3.8/weather-applet.js:16587
+#: 3.0/applet.js:1227 3.8/weather-applet.js:16584
 msgid "Loading current weather ..."
 msgstr ""
 
-#: 3.0/applet.js:1230 3.8/weather-applet.js:16590
+#: 3.0/applet.js:1230 3.8/weather-applet.js:16587
 msgid "Loading future weather ..."
 msgstr ""
 
@@ -1726,7 +1726,7 @@ msgstr ""
 msgid "Forecast parsing failed, see logs for more details."
 msgstr ""
 
-#: 3.8/weather-applet.js:16333 3.8/weather-applet.js:17080
+#: 3.8/weather-applet.js:16333 3.8/weather-applet.js:17077
 msgid "As of {lastUpdatedTime}"
 msgstr ""
 
@@ -1742,19 +1742,19 @@ msgstr ""
 msgid "Area: {stationArea}"
 msgstr ""
 
-#: 3.8/weather-applet.js:16877 3.8/weather-applet.js:16887
+#: 3.8/weather-applet.js:16874 3.8/weather-applet.js:16884
 msgid "Error Saving Debug Information"
 msgstr ""
 
-#: 3.8/weather-applet.js:16898
+#: 3.8/weather-applet.js:16895
 msgid "Debug Information saved successfully"
 msgstr ""
 
-#: 3.8/weather-applet.js:16898
+#: 3.8/weather-applet.js:16895
 msgid "Saved to {filePath}"
 msgstr ""
 
-#: 3.8/weather-applet.js:17039
+#: 3.8/weather-applet.js:17036
 msgid "This provider requires an API key to operate"
 msgstr ""
 

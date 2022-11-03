@@ -15955,7 +15955,7 @@ class UIForecasts {
             });
             by.add(forecastWeather.Day.actor, { x_align: imports.gi.St.Align.START, expand: false, x_fill: false });
             by.add_actor(forecastWeather.Summary);
-            by.add(forecastWeather.Temperature, { expand: true });
+            by.add(forecastWeather.Temperature, { expand: true, x_fill: true });
             const bb = new uiForecasts_BoxLayout({
                 style_class: STYLE_FORECAST_BOX
             });
@@ -16468,9 +16468,6 @@ class UI {
         this.BuildPopupMenu();
         this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
         this.App.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged));
-        this.App.config.TemperatureUnitChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged));
-        this.App.config.TempRussianStyleChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged));
-        this.App.config.ShowBothTempUnitsChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged));
     }
     Toggle() {
         if (!this.noHourlyWeather && this.App.config._alwaysShowHourlyWeather) {

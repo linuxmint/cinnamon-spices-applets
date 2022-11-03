@@ -62,9 +62,6 @@ export class UI {
 		// Subscriptions
 		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this); // on theme change
 		this.App.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged));
-		this.App.config.TemperatureUnitChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged)); // current, hourly, forecast
-		this.App.config.TempRussianStyleChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged)); // current,
-		this.App.config.ShowBothTempUnitsChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged)); // current, hourly forecast
 	}
 
 	private OnConfigChanged = (config: Config, confChange: any, data: WeatherData) => {
