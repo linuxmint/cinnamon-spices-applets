@@ -61,10 +61,13 @@ export class UI {
 		this.BuildPopupMenu();
 		// Subscriptions
 		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this); // on theme change
-		this.App.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.App.AfterRefresh(this.OnAlwaysShowHourlyWeatherChanged));
+		this.App.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged));
+		this.App.config.TemperatureUnitChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged)); // current, hourly, forecast
+		this.App.config.TempRussianStyleChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged)); // current,
+		this.App.config.ShowBothTempUnitsChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged)); // current, hourly forecast
 	}
 
-	private OnAlwaysShowHourlyWeatherChanged = (config: Config, alwaysShowHourly: boolean, data: WeatherData) => {
+	private OnConfigChanged = (config: Config, confChange: any, data: WeatherData) => {
 		if (this.App.Provider == null)
 			return;
 		this.Display(data, config, this.App.Provider);

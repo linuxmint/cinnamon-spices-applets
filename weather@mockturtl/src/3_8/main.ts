@@ -107,6 +107,8 @@ export class WeatherApplet extends TextIconApplet {
 
 		// We need a full refresh for these
 		this.config.ApiKeyChanged.Subscribe(() => this.Refresh());
+		// We change how we process data when this is changed
+		this.config.ShortConditionsChanged.Subscribe(() => this.Refresh());
 		// Some translations come from the API we need a refresh
 		this.config.TranslateConditionChanged.Subscribe(() => this.Refresh());
 		this.config.ManualLocationChanged.Subscribe(() => this.Refresh());
@@ -118,14 +120,15 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
 		this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
 
+		// Redisplay
+		this.config.TemperatureUnitChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
+		this.config.TempRussianStyleChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
+		this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
+
 		// TODO:
-		this.config.TemperatureUnitChanged.Subscribe(this.OnConfigChanged);
-		this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
-		this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
+		this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged); // current, hourly
 		this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged); // hourly, sunrise/sunset
-		this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
-		this.config.ShortConditionsChanged.Subscribe(this.OnConfigChanged);
-		this.config.ShowBothTempUnitsChanged.Subscribe(this.OnConfigChanged);
+		this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged); // hourly
 	}
 
 	public Locked(): boolean {
@@ -171,6 +174,14 @@ export class WeatherApplet extends TextIconApplet {
 				this.online = false;
 				break;
 		}
+	}
+
+	private OnUISettingsChanged = (conf: Config, changedData: any, data: WeatherData) => {
+		if (this.Provider == null)
+			return;
+
+		this.DisplayWeather(data);
+		this.ui.Display(data, conf, this.Provider);
 	}
 
 	private OnConfigChanged = (conf: Config, service: any) => {

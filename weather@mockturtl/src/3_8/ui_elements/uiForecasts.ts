@@ -214,7 +214,7 @@ export class UIForecasts {
 			});
 			by.add(forecastWeather.Day.actor, { x_align: imports.gi.St.Align.START, expand: false, x_fill: false });
 			by.add_actor(forecastWeather.Summary);
-			by.add_actor(forecastWeather.Temperature);
+			by.add(forecastWeather.Temperature, {expand: true});
 
 			const bb = new BoxLayout({
 				style_class: STYLE_FORECAST_BOX

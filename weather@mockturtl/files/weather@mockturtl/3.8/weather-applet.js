@@ -15955,7 +15955,7 @@ class UIForecasts {
             });
             by.add(forecastWeather.Day.actor, { x_align: imports.gi.St.Align.START, expand: false, x_fill: false });
             by.add_actor(forecastWeather.Summary);
-            by.add_actor(forecastWeather.Temperature);
+            by.add(forecastWeather.Temperature, { expand: true });
             const bb = new uiForecasts_BoxLayout({
                 style_class: STYLE_FORECAST_BOX
             });
@@ -16451,7 +16451,7 @@ class UI {
     constructor(app, orientation) {
         this.lightTheme = false;
         this.noHourlyWeather = false;
-        this.OnAlwaysShowHourlyWeatherChanged = (config, alwaysShowHourly, data) => {
+        this.OnConfigChanged = (config, confChange, data) => {
             if (this.App.Provider == null)
                 return;
             this.Display(data, config, this.App.Provider);
@@ -16467,7 +16467,10 @@ class UI {
         this.lightTheme = this.IsLightTheme();
         this.BuildPopupMenu();
         this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
-        this.App.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.App.AfterRefresh(this.OnAlwaysShowHourlyWeatherChanged));
+        this.App.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged));
+        this.App.config.TemperatureUnitChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged));
+        this.App.config.TempRussianStyleChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged));
+        this.App.config.ShowBothTempUnitsChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged));
     }
     Toggle() {
         if (!this.noHourlyWeather && this.App.config._alwaysShowHourlyWeather) {
@@ -16847,6 +16850,12 @@ class WeatherApplet extends TextIconApplet {
                     break;
             }
         };
+        this.OnUISettingsChanged = (conf, changedData, data) => {
+            if (this.Provider == null)
+                return;
+            this.DisplayWeather(data);
+            this.ui.Display(data, conf, this.Provider);
+        };
         this.OnConfigChanged = (conf, service) => {
             this.RefreshAndRebuild();
         };
@@ -16944,18 +16953,18 @@ class WeatherApplet extends TextIconApplet {
         this.config.UseCustomMenuIconsChanged.Subscribe(() => this.RefreshAndRebuild());
         this.config.UseSymbolicIconsChanged.Subscribe(() => this.RefreshAndRebuild());
         this.config.ApiKeyChanged.Subscribe(() => this.Refresh());
+        this.config.ShortConditionsChanged.Subscribe(() => this.Refresh());
         this.config.TranslateConditionChanged.Subscribe(() => this.Refresh());
         this.config.ManualLocationChanged.Subscribe(() => this.Refresh());
         this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Resume());
         this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
-        this.config.TemperatureUnitChanged.Subscribe(this.OnConfigChanged);
-        this.config.TempRussianStyleChanged.Subscribe(this.OnConfigChanged);
+        this.config.TemperatureUnitChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
+        this.config.TempRussianStyleChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
+        this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
         this.config.DistanceUnitChanged.Subscribe(this.OnConfigChanged);
         this.config.Show24HoursChanged.Subscribe(this.OnConfigChanged);
         this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
-        this.config.ShortConditionsChanged.Subscribe(this.OnConfigChanged);
-        this.config.ShowBothTempUnitsChanged.Subscribe(this.OnConfigChanged);
     }
     get CurrentData() {
         return this.currentWeatherInfo;
