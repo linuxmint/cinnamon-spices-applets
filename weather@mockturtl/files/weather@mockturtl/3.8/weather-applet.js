@@ -14833,9 +14833,6 @@ class Config {
             this.currentFontSize = this.GetCurrentFontSize();
             this.app.RefreshAndRebuild();
         };
-        this.OnSettingChanged = () => {
-            this.app.RefreshAndRebuild();
-        };
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
@@ -15004,7 +15001,7 @@ class Config {
     DoneTypingLocation() {
         logger_Logger.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
-        this.app.RefreshAndRebuild();
+        this.app.Refresh();
     }
     SetLocation(value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
@@ -16916,14 +16913,18 @@ class WeatherApplet extends TextIconApplet {
                     break;
             }
         };
+        this.onSettingNeedsRebuild = (conf, changedData, data) => {
+            if (this.Provider == null)
+                return;
+            this.ui.Rebuild(conf);
+            this.DisplayWeather(data);
+            this.ui.Display(data, conf, this.Provider);
+        };
         this.OnUISettingsChanged = (conf, changedData, data) => {
             if (this.Provider == null)
                 return;
             this.DisplayWeather(data);
             this.ui.Display(data, conf, this.Provider);
-        };
-        this.OnConfigChanged = (conf, service) => {
-            this.RefreshAndRebuild();
         };
         this.RefreshLabel = () => {
             if (this.currentWeatherInfo == null)
@@ -17012,12 +17013,13 @@ class WeatherApplet extends TextIconApplet {
         this.OnNetworkConnectivityChanged();
         NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
         this.config.DataServiceChanged.Subscribe(() => this.RefreshAndRebuild());
-        this.config.VerticalOrientationChanged.Subscribe(() => this.RefreshAndRebuild());
-        this.config.ForecastColumnsChanged.Subscribe(() => this.RefreshAndRebuild());
-        this.config.ForecastRowsChanged.Subscribe(() => this.RefreshAndRebuild());
-        this.config.UseCustomAppletIconsChanged.Subscribe(() => this.RefreshAndRebuild());
-        this.config.UseCustomMenuIconsChanged.Subscribe(() => this.RefreshAndRebuild());
-        this.config.UseSymbolicIconsChanged.Subscribe(() => this.RefreshAndRebuild());
+        this.config.VerticalOrientationChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+        this.config.ForecastColumnsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+        this.config.ForecastRowsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+        this.config.UseCustomAppletIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+        this.config.UseCustomMenuIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+        this.config.UseSymbolicIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+        this.config.ForecastHoursChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.ApiKeyChanged.Subscribe(() => this.Refresh());
         this.config.ShortConditionsChanged.Subscribe(() => this.Refresh());
         this.config.TranslateConditionChanged.Subscribe(() => this.Refresh());
@@ -17030,7 +17032,6 @@ class WeatherApplet extends TextIconApplet {
         this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
         this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
         this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
-        this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged);
     }
     get CurrentData() {
         return this.currentWeatherInfo;

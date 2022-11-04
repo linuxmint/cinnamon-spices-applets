@@ -97,13 +97,13 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.DataServiceChanged.Subscribe(() => this.RefreshAndRebuild());
 
 		// We need a full rebuild without refresh for these
-		this.config.VerticalOrientationChanged.Subscribe(() => this.RefreshAndRebuild());
-		this.config.ForecastColumnsChanged.Subscribe(() => this.RefreshAndRebuild());
-		this.config.ForecastRowsChanged.Subscribe(() => this.RefreshAndRebuild());
-
-		this.config.UseCustomAppletIconsChanged.Subscribe(() => this.RefreshAndRebuild());
-		this.config.UseCustomMenuIconsChanged.Subscribe(() => this.RefreshAndRebuild());
-		this.config.UseSymbolicIconsChanged.Subscribe(() => this.RefreshAndRebuild());
+		this.config.VerticalOrientationChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+		this.config.ForecastColumnsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+		this.config.ForecastRowsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+		this.config.UseCustomAppletIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+		this.config.UseCustomMenuIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+		this.config.UseSymbolicIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+		this.config.ForecastHoursChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
 
 		// We need a full refresh for these
 		this.config.ApiKeyChanged.Subscribe(() => this.Refresh());
@@ -126,9 +126,6 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
 		this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
 		this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
-
-		// TODO:
-		this.config.ForecastHoursChanged.Subscribe(this.OnConfigChanged); // hourly and bar
 	}
 
 	public Locked(): boolean {
@@ -176,16 +173,21 @@ export class WeatherApplet extends TextIconApplet {
 		}
 	}
 
+	private onSettingNeedsRebuild = (conf: Config, changedData: any, data: WeatherData) => {
+		if (this.Provider == null)
+			return;
+
+		this.ui.Rebuild(conf);
+		this.DisplayWeather(data);
+		this.ui.Display(data, conf, this.Provider);
+	}
+
 	private OnUISettingsChanged = (conf: Config, changedData: any, data: WeatherData) => {
 		if (this.Provider == null)
 			return;
 
 		this.DisplayWeather(data);
 		this.ui.Display(data, conf, this.Provider);
-	}
-
-	private OnConfigChanged = (conf: Config, service: any) => {
-		this.RefreshAndRebuild();
 	}
 
 	/**
