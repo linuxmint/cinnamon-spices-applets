@@ -121,11 +121,11 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
 
 		// Redisplay
-		this.config.TemperatureUnitChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
-		this.config.TempRussianStyleChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
-		this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
-		this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
-		this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
+		this.config.TemperatureUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+		this.config.TempRussianStyleChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+		this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+		this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+		this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
 	}
 
 	public Locked(): boolean {
@@ -182,7 +182,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.ui.Display(data, conf, this.Provider);
 	}
 
-	private OnUISettingsChanged = (conf: Config, changedData: any, data: WeatherData) => {
+	private OnSettingNeedRedisplay = (conf: Config, changedData: any, data: WeatherData) => {
 		if (this.Provider == null)
 			return;
 
@@ -255,7 +255,6 @@ export class WeatherApplet extends TextIconApplet {
 			}
 
 			weatherInfo = this.MergeWeatherData(weatherInfo, location);
-			this.currentWeatherInfo = weatherInfo;
 			this.config.Timezone = weatherInfo.location.timeZone;
 
 			if (rebuild) this.ui.Rebuild(this.config);
@@ -264,6 +263,7 @@ export class WeatherApplet extends TextIconApplet {
 				this.Unlock();
 				return RefreshState.Failure;
 			}
+			this.currentWeatherInfo = weatherInfo;
 
 			Logger.Info("Weather Information refreshed");
 			this.loop.ResetErrorCount();

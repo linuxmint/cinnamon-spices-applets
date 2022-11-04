@@ -16920,7 +16920,7 @@ class WeatherApplet extends TextIconApplet {
             this.DisplayWeather(data);
             this.ui.Display(data, conf, this.Provider);
         };
-        this.OnUISettingsChanged = (conf, changedData, data) => {
+        this.OnSettingNeedRedisplay = (conf, changedData, data) => {
             if (this.Provider == null)
                 return;
             this.DisplayWeather(data);
@@ -17027,11 +17027,11 @@ class WeatherApplet extends TextIconApplet {
         this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Resume());
         this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
-        this.config.TemperatureUnitChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
-        this.config.TempRussianStyleChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
-        this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
-        this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
-        this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnUISettingsChanged));
+        this.config.TemperatureUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+        this.config.TempRussianStyleChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+        this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+        this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+        this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
     }
     get CurrentData() {
         return this.currentWeatherInfo;
@@ -17119,7 +17119,6 @@ class WeatherApplet extends TextIconApplet {
                 return "fail";
             }
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
-            this.currentWeatherInfo = weatherInfo;
             this.config.Timezone = weatherInfo.location.timeZone;
             if (rebuild)
                 this.ui.Rebuild(this.config);
@@ -17128,6 +17127,7 @@ class WeatherApplet extends TextIconApplet {
                 this.Unlock();
                 return "fail";
             }
+            this.currentWeatherInfo = weatherInfo;
             logger_Logger.Info("Weather Information refreshed");
             this.loop.ResetErrorCount();
             this.Unlock();
