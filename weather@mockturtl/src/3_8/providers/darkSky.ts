@@ -27,6 +27,8 @@ export class DarkSky extends BaseProvider {
 	public readonly website = "https://darksky.net/poweredby/";
 	public readonly maxHourlyForecastSupport = 168;
 	public readonly needsApiKey = true;
+	public readonly supportHourlyPrecipChance = true;
+	public readonly supportHourlyPrecipVolume = true;
 
 	private remainingQuota: number | null = null;
 	public get remainingCalls(): number | null {

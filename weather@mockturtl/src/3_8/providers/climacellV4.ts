@@ -14,6 +14,8 @@ export class ClimacellV4 extends BaseProvider {
 	public readonly maxForecastSupport: number = 15;
 	public readonly maxHourlyForecastSupport: number = 108;
 	public readonly website: string = "https://www.tomorrow.io/";
+	public readonly supportHourlyPrecipChance = true;
+	public readonly supportHourlyPrecipVolume = true;
 
 	private url = "https://data.climacell.co/v4/timelines";
 

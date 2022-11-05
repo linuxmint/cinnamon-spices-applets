@@ -25,6 +25,8 @@ export class WeatherUnderground extends BaseProvider {
     public maxHourlyForecastSupport: number = 0;
     public website: string = "https://www.wunderground.com/";
     public remainingCalls: number | null = null;
+    public readonly supportHourlyPrecipChance = false;
+	public readonly supportHourlyPrecipVolume = false;
 
     private readonly baseURl: string = "https://api.weather.com/";
 

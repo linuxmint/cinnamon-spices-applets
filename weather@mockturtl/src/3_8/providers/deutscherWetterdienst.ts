@@ -15,6 +15,8 @@ export class DeutscherWetterdienst extends BaseProvider {
     public maxHourlyForecastSupport: number = 240;
     public website: string = "https://www.dwd.de/DE/Home/home_node.html";
     public remainingCalls: number | null = null;
+    public readonly supportHourlyPrecipChance = false;
+	public readonly supportHourlyPrecipVolume = true;
 
     private readonly baseUrl: string = "https://api.brightsky.dev/";
 

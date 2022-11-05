@@ -342,8 +342,10 @@ export class UIHourlyForecasts {
 			box.add_child(this.hourlyForecasts[index].Hour);
 			box.add_child(this.hourlyForecasts[index].Icon);
 			box.add_child(this.hourlyForecasts[index].Temperature);
-			box.add_child(this.hourlyForecasts[index].PrecipPercent);
-			box.add_child(this.hourlyForecasts[index].PrecipVolume);
+			if (this.app.Provider?.supportHourlyPrecipChance)
+				box.add_child(this.hourlyForecasts[index].PrecipPercent);
+			if (this.app.Provider?.supportHourlyPrecipVolume)
+				box.add_child(this.hourlyForecasts[index].PrecipVolume);
 
 			this.container.add(box, {
 				x_fill: true,

@@ -14,6 +14,8 @@ export class DanishMI extends BaseProvider {
 	public readonly maxHourlyForecastSupport: number = 48;
 	public readonly website: string = "https://www.dmi.dk/";
 	public readonly remainingCalls: number | null = null;
+	public readonly supportHourlyPrecipChance = false;
+	public readonly supportHourlyPrecipVolume = true;
 
 	private url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
 	private forecastParams: HTTPParams = {
@@ -114,7 +116,7 @@ export class DanishMI extends BaseProvider {
 				condition: this.ResolveCondition(element.symbol)
 			};
 
-			if (element.precip1 > 0.01 && element.precipType != null) {
+			if (element.precip1 > 0.05 && element.precipType != null) {
 				hour.precipitation = {
 					type: this.DanishPrecipToType(element.precipType),
 					volume: element.precip1

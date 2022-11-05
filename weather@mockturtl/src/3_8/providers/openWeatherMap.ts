@@ -28,6 +28,8 @@ export class OpenWeatherMap extends BaseProvider {
 	public readonly maxHourlyForecastSupport = 48;
 	public readonly needsApiKey = false;
 	public readonly remainingCalls: number | null = null;
+	public readonly supportHourlyPrecipChance = true;
+	public readonly supportHourlyPrecipVolume = true;
 
 	private supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
 		"fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",

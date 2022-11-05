@@ -9620,6 +9620,8 @@ class MetUk extends BaseProvider {
         this.maxHourlyForecastSupport = 36;
         this.needsApiKey = false;
         this.remainingCalls = null;
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = false;
         this.baseUrl = "http://datapoint.metoffice.gov.uk/public/data/val/";
         this.forecastPrefix = "wxfcs/all/json/";
         this.threeHourlyUrl = "?res=3hourly";
@@ -10261,6 +10263,8 @@ class DarkSky extends BaseProvider {
         this.website = "https://darksky.net/poweredby/";
         this.maxHourlyForecastSupport = 168;
         this.needsApiKey = true;
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
         this.remainingQuota = null;
         this.descriptionLineLength = 25;
         this.supportedLanguages = [
@@ -10573,6 +10577,8 @@ class OpenWeatherMap extends BaseProvider {
         this.maxHourlyForecastSupport = 48;
         this.needsApiKey = false;
         this.remainingCalls = null;
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
         this.supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
             "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
@@ -11019,6 +11025,8 @@ class MetNorway extends BaseProvider {
         this.maxHourlyForecastSupport = 48;
         this.needsApiKey = false;
         this.remainingCalls = null;
+        this.supportHourlyPrecipChance = false;
+        this.supportHourlyPrecipVolume = true;
         this.baseUrl = "https://api.met.no/weatherapi";
     }
     async GetWeather(loc) {
@@ -11281,14 +11289,14 @@ class MetNorway extends BaseProvider {
                     customIcon: "rain-symbolic",
                     main: _("Heavy rain"),
                     description: _("Heavy rain"),
-                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
+                    icons: ["weather-rain", "weather-showers", "weather-freezing-rain"]
                 };
             case "heavyrainandthunder":
                 return {
                     customIcon: "thunderstorm-symbolic",
                     main: _("Heavy rain"),
                     description: _("Heavy rain and thunder"),
-                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
+                    icons: ["weather-rain", "weather-showers", "weather-freezing-rain"]
                 };
             case "heavyrainshowers":
                 return {
@@ -11309,28 +11317,28 @@ class MetNorway extends BaseProvider {
                     customIcon: "sleet-symbolic",
                     main: _("Heavy sleet"),
                     description: _("Heavy sleet"),
-                    icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
+                    icons: ["weather-freezing-rain", "weather-showers", "weather-rain"]
                 };
             case "heavysleetandthunder":
                 return {
                     customIcon: "sleet-storm-symbolic",
                     main: _("Heavy sleet"),
                     description: _("Heavy sleet and thunder"),
-                    icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
+                    icons: ["weather-freezing-rain", "weather-showers", "weather-rain"]
                 };
             case "heavysleetshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
                     main: _("Heavy sleet"),
                     description: _("Heavy sleet showers"),
-                    icons: ["weather-showers", "weather-showers-scattered", "weather-freezing-rain"]
+                    icons: ["weather-freezing-rain", "weather-showers", "weather-showers-scattered"]
                 };
             case "heavysleetshowersandthunder":
                 return {
                     customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
                     main: _("Heavy sleet"),
                     description: _("Heavy sleet showers and thunder"),
-                    icons: ["weather-showers", "weather-showers-scattered", "weather-freezing-rain"]
+                    icons: ["weather-freezing-rain", "weather-showers", "weather-showers-scattered"]
                 };
             case "heavysnow":
                 return {
@@ -11456,14 +11464,14 @@ class MetNorway extends BaseProvider {
                     customIcon: "rain-symbolic",
                     main: _("Rain"),
                     description: _("Rain"),
-                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers-scattered"]
+                    icons: ["weather-rain", "weather-showers-scattered", "weather-showers"]
                 };
             case "rainandthunder":
                 return {
                     customIcon: "thunderstorm-symbolic",
                     main: _("Rain"),
                     description: _("Rain and thunder"),
-                    icons: ["weather-storm", "weather-rain", "weather-freezing-rain", "weather-showers-scattered"]
+                    icons: ["weather-storm", "weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-showers"]
                 };
             case "rainshowers":
                 return {
@@ -11561,6 +11569,8 @@ class Weatherbit extends BaseProvider {
         this.website = "https://www.weatherbit.io/";
         this.maxHourlyForecastSupport = 48;
         this.needsApiKey = true;
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
             'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',
@@ -11983,6 +11993,8 @@ class ClimacellV4 extends BaseProvider {
         this.maxForecastSupport = 15;
         this.maxHourlyForecastSupport = 108;
         this.website = "https://www.tomorrow.io/";
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
         this.url = "https://data.climacell.co/v4/timelines";
         this.params = {
             apikey: null,
@@ -12309,6 +12321,8 @@ class USWeather extends BaseProvider {
         this.maxHourlyForecastSupport = 156;
         this.needsApiKey = false;
         this.remainingCalls = null;
+        this.supportHourlyPrecipChance = false;
+        this.supportHourlyPrecipVolume = false;
         this.sitesUrl = "https://api.weather.gov/points/";
         this.MAX_STATION_DIST = 50000;
         this.observationStations = [];
@@ -12860,6 +12874,8 @@ class VisualCrossing extends BaseProvider {
         this.website = "https://weather.visualcrossing.com/";
         this.needsApiKey = true;
         this.remainingCalls = null;
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
         this.url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
         this.params = {
             unitGroup: "metric",
@@ -13154,6 +13170,8 @@ class DanishMI extends BaseProvider {
         this.maxHourlyForecastSupport = 48;
         this.website = "https://www.dmi.dk/";
         this.remainingCalls = null;
+        this.supportHourlyPrecipChance = false;
+        this.supportHourlyPrecipVolume = true;
         this.url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
         this.forecastParams = {
             cmd: "llj",
@@ -13236,7 +13254,7 @@ class DanishMI extends BaseProvider {
                 temp: CelsiusToKelvin(element.temp),
                 condition: this.ResolveCondition(element.symbol)
             };
-            if (element.precip1 > 0.01 && element.precipType != null) {
+            if (element.precip1 > 0.05 && element.precipType != null) {
                 hour.precipitation = {
                     type: this.DanishPrecipToType(element.precipType),
                     volume: element.precip1
@@ -13501,6 +13519,8 @@ class AccuWeather extends BaseProvider {
         this.maxForecastSupport = 12;
         this.maxHourlyForecastSupport = 120;
         this.website = "https://www.accuweather.com/";
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
         this.remainingQuota = null;
         this.tier = "free";
         this.baseUrl = "http://dataservice.accuweather.com/";
@@ -13844,6 +13864,8 @@ class DeutscherWetterdienst extends BaseProvider {
         this.maxHourlyForecastSupport = 240;
         this.website = "https://www.dwd.de/DE/Home/home_node.html";
         this.remainingCalls = null;
+        this.supportHourlyPrecipChance = false;
+        this.supportHourlyPrecipVolume = true;
         this.baseUrl = "https://api.brightsky.dev/";
         this.HandleErrors = (message) => {
             if (message.ErrorData.code == 404) {
@@ -14152,6 +14174,8 @@ class WeatherUnderground extends BaseProvider {
         this.maxHourlyForecastSupport = 0;
         this.website = "https://www.wunderground.com/";
         this.remainingCalls = null;
+        this.supportHourlyPrecipChance = false;
+        this.supportHourlyPrecipVolume = false;
         this.baseURl = "https://api.weather.com/";
         this.locationCache = {};
         this.GetWeather = async (loc) => {
@@ -16271,6 +16295,7 @@ class UIHourlyForecasts {
         this.container.destroy_all_children();
     }
     Rebuild(config, textColorStyle, availableHours = null) {
+        var _a, _b;
         this.Destroy();
         const hours = availableHours !== null && availableHours !== void 0 ? availableHours : this.app.GetMaxHourlyForecasts();
         this.hourlyForecasts = [];
@@ -16294,8 +16319,10 @@ class UIHourlyForecasts {
             box.add_child(this.hourlyForecasts[index].Hour);
             box.add_child(this.hourlyForecasts[index].Icon);
             box.add_child(this.hourlyForecasts[index].Temperature);
-            box.add_child(this.hourlyForecasts[index].PrecipPercent);
-            box.add_child(this.hourlyForecasts[index].PrecipVolume);
+            if ((_a = this.app.Provider) === null || _a === void 0 ? void 0 : _a.supportHourlyPrecipChance)
+                box.add_child(this.hourlyForecasts[index].PrecipPercent);
+            if ((_b = this.app.Provider) === null || _b === void 0 ? void 0 : _b.supportHourlyPrecipVolume)
+                box.add_child(this.hourlyForecasts[index].PrecipVolume);
             this.container.add(box, {
                 x_fill: true,
                 x_align: uiHourlyForecasts_Align.MIDDLE,

@@ -13,6 +13,8 @@ export class AccuWeather extends BaseProvider {
     public readonly maxForecastSupport: number = 12;
     public readonly maxHourlyForecastSupport: number = 120;
     public readonly website: string = "https://www.accuweather.com/";
+    public readonly supportHourlyPrecipChance = true;
+	public readonly supportHourlyPrecipVolume = true;
 
     // Quota
     private remainingQuota: number | null = null;

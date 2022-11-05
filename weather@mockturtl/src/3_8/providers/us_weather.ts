@@ -27,6 +27,8 @@ export class USWeather extends BaseProvider {
 	public readonly maxHourlyForecastSupport = 156;
 	public readonly needsApiKey = false;
 	public readonly remainingCalls: number | null = null;
+	public readonly supportHourlyPrecipChance = false;
+	public readonly supportHourlyPrecipVolume = false;
 
 	private sitesUrl = "https://api.weather.gov/points/";
 

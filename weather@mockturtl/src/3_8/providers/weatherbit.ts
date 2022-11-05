@@ -25,6 +25,8 @@ export class Weatherbit extends BaseProvider {
 	public readonly website = "https://www.weatherbit.io/";
 	public readonly maxHourlyForecastSupport = 48;
 	public readonly needsApiKey = true;
+	public readonly supportHourlyPrecipChance = true;
+	public readonly supportHourlyPrecipVolume = true;
 
 	public get remainingCalls(): number | null {
 		return null;
