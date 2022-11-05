@@ -8794,7 +8794,7 @@ function MetreToUserUnits(m, distanceUnit) {
 }
 function MillimeterToUserUnits(mm, distanceUnit) {
     if (distanceUnit == "metric")
-        return Math.round(mm * 100) / 100;
+        return Math.round(mm * 10) / 10;
     return Math.round(mm * 0.03937 * 100) / 100;
 }
 function KPHtoMPS(speed) {
@@ -16155,8 +16155,8 @@ class UIHourlyForecasts {
             ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
             ui.Temperature.text = (_a = TempToUserConfig(hour.temp, config)) !== null && _a !== void 0 ? _a : "";
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
-            ui.Summary.text = hour.condition.main;
-            ui.Precipitation.text = this.GeneratePrecipitationText(hour.precipitation, config);
+            ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation, config);
+            ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
         }
         this.AdjustHourlyBoxItemWidth();
         return !(max <= 0);
@@ -16242,9 +16242,9 @@ class UIHourlyForecasts {
             const ui = this.hourlyForecasts[index];
             const hourWidth = ui.Hour.get_preferred_width(-1)[1];
             const iconWidth = ui.Icon.get_preferred_width(-1)[1];
-            let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
+            let summaryWidth = ui.PrecipVolume.get_preferred_width(-1)[1];
             const temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
-            let precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
+            let precipitationWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
             if (precipitationWidth == null || temperatureWidth == null ||
                 hourWidth == null || iconWidth == null || summaryWidth == null)
                 continue;
@@ -16286,16 +16286,16 @@ class UIHourlyForecasts {
                     icon_name: APPLET_ICON,
                     style_class: "hourly-icon"
                 }),
-                Precipitation: new uiHourlyForecasts_Label({ text: " ", style_class: "hourly-data" }),
-                Summary: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
+                PrecipPercent: new uiHourlyForecasts_Label({ text: " ", style_class: "hourly-data" }),
+                PrecipVolume: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
                 Temperature: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
             });
-            this.hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
+            this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
             box.add_child(this.hourlyForecasts[index].Hour);
             box.add_child(this.hourlyForecasts[index].Icon);
-            box.add_child(this.hourlyForecasts[index].Summary);
             box.add_child(this.hourlyForecasts[index].Temperature);
-            box.add_child(this.hourlyForecasts[index].Precipitation);
+            box.add_child(this.hourlyForecasts[index].PrecipPercent);
+            box.add_child(this.hourlyForecasts[index].PrecipVolume);
             this.container.add(box, {
                 x_fill: true,
                 x_align: uiHourlyForecasts_Align.MIDDLE,
@@ -16305,13 +16305,19 @@ class UIHourlyForecasts {
             });
         }
     }
-    GeneratePrecipitationText(precip, config) {
+    GeneratePrecipitationVolume(precip, config) {
         if (!precip)
             return "";
         let precipitationText = "";
         if (!!precip.volume && precip.volume > 0) {
-            precipitationText = MillimeterToUserUnits(precip.volume, config.DistanceUnit) + " " + ((config.DistanceUnit == "metric") ? _("mm") : _("in"));
+            precipitationText = `${MillimeterToUserUnits(precip.volume, config.DistanceUnit)}${config.DistanceUnit == "metric" ? _("mm") : _("in")}`;
         }
+        return precipitationText;
+    }
+    GeneratePrecipitationChance(precip, config) {
+        if (!precip)
+            return "";
+        let precipitationText = "";
         if (!!precip.chance) {
             precipitationText = (NotEmpty(precipitationText)) ? (precipitationText + ", ") : "";
             precipitationText += (Math.round(precip.chance).toString() + "%");
@@ -16327,9 +16333,9 @@ class UIHourlyForecasts {
             logger_Logger.Debug("Height requests of Hourly box Items: " + index);
             const hourHeight = ui.Hour.get_preferred_height(-1)[1];
             const iconHeight = ui.Icon.get_preferred_height(-1)[1];
-            const summaryHeight = ui.Summary.get_preferred_height(-1)[1];
+            const summaryHeight = ui.PrecipVolume.get_preferred_height(-1)[1];
             const temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
-            const precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
+            const precipitationHeight = ui.PrecipPercent.get_preferred_height(-1)[1];
             if (precipitationHeight == null || temperatureHeight == null ||
                 hourHeight == null || iconHeight == null || summaryHeight == null)
                 continue;

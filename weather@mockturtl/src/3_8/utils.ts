@@ -380,7 +380,7 @@ export function MetreToUserUnits(m: number, distanceUnit: DistanceUnits): number
 }
 
 export function MillimeterToUserUnits(mm: number, distanceUnit: DistanceUnits): number {
-	if (distanceUnit == "metric") return Math.round(mm * 100) / 100;
+	if (distanceUnit == "metric") return Math.round(mm * 10) / 10;
 	return Math.round(mm * 0.03937 * 100) / 100;
 }
 
