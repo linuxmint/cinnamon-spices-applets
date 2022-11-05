@@ -158,6 +158,7 @@ export class UIHourlyForecasts {
 			ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
 			ui.Temperature.text = TempToUserConfig(hour.temp, config) ?? "";
 			ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
+			ui.Summary.text = hour.condition.main;
 			ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation, config);
 			ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
 		}
@@ -333,6 +334,7 @@ export class UIHourlyForecasts {
 					icon_name: APPLET_ICON,
 					style_class: "hourly-icon"
 				}),
+				Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
 				PrecipPercent: new Label({ text: " ", style_class: "hourly-data" }),
 				PrecipVolume: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
 				Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
@@ -341,6 +343,7 @@ export class UIHourlyForecasts {
 			this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
 			box.add_child(this.hourlyForecasts[index].Hour);
 			box.add_child(this.hourlyForecasts[index].Icon);
+			box.add_child(this.hourlyForecasts[index].Summary);
 			box.add_child(this.hourlyForecasts[index].Temperature);
 			if (this.app.Provider?.supportHourlyPrecipChance)
 				box.add_child(this.hourlyForecasts[index].PrecipPercent);
@@ -424,6 +427,7 @@ export class UIHourlyForecasts {
 interface HourlyForecastUI {
 	Icon: imports.gi.St.Icon,
 	Hour: imports.gi.St.Label,
+	Summary: imports.gi.St.Label,
 	PrecipVolume: imports.gi.St.Label,
 	Temperature: imports.gi.St.Label,
 	PrecipPercent: imports.gi.St.Label

@@ -16179,6 +16179,7 @@ class UIHourlyForecasts {
             ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
             ui.Temperature.text = (_a = TempToUserConfig(hour.temp, config)) !== null && _a !== void 0 ? _a : "";
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
+            ui.Summary.text = hour.condition.main;
             ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation, config);
             ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
         }
@@ -16311,6 +16312,7 @@ class UIHourlyForecasts {
                     icon_name: APPLET_ICON,
                     style_class: "hourly-icon"
                 }),
+                Summary: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
                 PrecipPercent: new uiHourlyForecasts_Label({ text: " ", style_class: "hourly-data" }),
                 PrecipVolume: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
                 Temperature: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
@@ -16318,6 +16320,7 @@ class UIHourlyForecasts {
             this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
             box.add_child(this.hourlyForecasts[index].Hour);
             box.add_child(this.hourlyForecasts[index].Icon);
+            box.add_child(this.hourlyForecasts[index].Summary);
             box.add_child(this.hourlyForecasts[index].Temperature);
             if ((_a = this.app.Provider) === null || _a === void 0 ? void 0 : _a.supportHourlyPrecipChance)
                 box.add_child(this.hourlyForecasts[index].PrecipPercent);
