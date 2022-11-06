@@ -40,6 +40,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
+  "addOnAppletMovedCallback": () => (/* binding */ addOnAppletMovedCallback),
   "main": () => (/* binding */ main)
 });
 
@@ -2754,7 +2755,8 @@ function createMpvHandler() {
         settingsObject.lastVolume = lastVolume;
     }
     function deactivateAllListener() {
-        dbus.disconnectSignal(nameOwnerSignalId);
+        if (nameOwnerSignalId)
+            dbus === null || dbus === void 0 ? void 0 : dbus.disconnectSignal(nameOwnerSignalId);
         if (mediaPropsListenerId)
             mediaProps === null || mediaProps === void 0 ? void 0 : mediaProps.disconnectSignal(mediaPropsListenerId);
         if (seekListenerId)
@@ -4044,8 +4046,8 @@ function initPolyfills() {
 ;// CONCATENATED MODULE: ./src/lib/AppletContainer.ts
 const { Applet, AllowedLayout } = imports.ui.applet;
 const { EventType } = imports.gi.Clutter;
-function createAppletContainer(args) {
-    const { onClick, onScroll, onMiddleClick, onMoved, onRemoved, onRightClick } = args;
+function createAppletContainer(props) {
+    const { onClick, onScroll, onMiddleClick, onAppletMovedCallbacks, onRemoved, onRightClick } = props;
     const applet = new Applet(__meta.orientation, __meta.panel.height, __meta.instanceId);
     let appletReloaded = false;
     applet.on_applet_clicked = () => {
@@ -4061,7 +4063,7 @@ function createAppletContainer(args) {
         appletReloaded = true;
     };
     applet.on_applet_removed_from_panel = function () {
-        appletReloaded ? onMoved() : onRemoved();
+        appletReloaded ? onAppletMovedCallbacks.forEach((cb) => cb()) : onRemoved();
         appletReloaded = false;
     };
     applet.actor.connect("event", (actor, event) => {
@@ -4076,6 +4078,12 @@ function createAppletContainer(args) {
     applet.actor.connect("scroll-event", (actor, event) => {
         onScroll(event.get_scroll_direction());
         return false;
+    });
+    // this is a workaround to ensure that the Applet is still clickable after the applet has dropped 
+    global.settings.connect("changed::panel-edit-mode", () => {
+        const inhibitDragging = !global.settings.get_boolean("panel-edit-mode");
+        // @ts-ignore
+        applet['_draggable'].inhibit = inhibitDragging;
     });
     return applet;
 }
@@ -4172,7 +4180,7 @@ function notifyError(prefix, errMessage, options) {
 
 ;// CONCATENATED MODULE: ./src/services/youtubeDownload/YoutubeDl.ts
 const { spawnCommandLineAsyncIO } = imports.misc.util;
-function downloadWithYoutubeDl(props) {
+function downloadWithYouTubeDl(props) {
     const { downloadDir, title, onFinished, onSuccess, onError } = props;
     let hasBeenCancelled = false;
     // ytsearch option found here https://askubuntu.com/a/731511/1013434 (not given in the youtube-dl docs ...)
@@ -4202,7 +4210,7 @@ function downloadWithYoutubeDl(props) {
 
 ;// CONCATENATED MODULE: ./src/services/youtubeDownload/YtDlp.ts
 const { spawnCommandLineAsyncIO: YtDlp_spawnCommandLineAsyncIO } = imports.misc.util;
-// TODO: there are some redudances with downloadWithYoutubeDl.
+// TODO: there are some redudances with downloadWithYouTubeDl.
 function downloadWithYtDlp(props) {
     const { downloadDir, title, onFinished, onSuccess, onError } = props;
     let hasBeenCancelled = false;
@@ -4238,9 +4246,9 @@ function downloadWithYtDlp(props) {
 const { spawnCommandLine: YoutubeDownloadManager_spawnCommandLine } = imports.misc.util;
 const { get_home_dir: YoutubeDownloadManager_get_home_dir, dir_make_tmp, DateTime } = imports.gi.GLib;
 const { File, FileCopyFlags, FileQueryInfoFlags } = imports.gi.Gio;
-const notifyYoutubeDownloadFailed = (props) => {
+const notifyYouTubeDownloadFailed = (props) => {
     const { youtubeCli, errorMessage } = props;
-    notifyError(`Couldn't download Song from Youtube due to an Error. Make Sure you have the newest version of ${youtubeCli} installed. 
+    notifyError(`Couldn't download Song from YouTube due to an Error. Make Sure you have the newest version of ${youtubeCli} installed. 
     \n<b>Important:</b> Don't use apt for the installation but follow the installation instruction given on the Radio Applet Site in the Cinnamon Store instead`, errorMessage, {
         additionalBtns: [
             {
@@ -4250,7 +4258,7 @@ const notifyYoutubeDownloadFailed = (props) => {
         ],
     });
 };
-const notifyYoutubeDownloadStarted = (title) => {
+const notifyYouTubeDownloadStarted = (title) => {
     notify(`Downloading ${title} ...`, {
         buttons: [
             {
@@ -4260,7 +4268,7 @@ const notifyYoutubeDownloadStarted = (title) => {
         ],
     });
 };
-const notifyYoutubeDownloadFinished = (props) => {
+const notifyYouTubeDownloadFinished = (props) => {
     const { downloadPath, fileAlreadyExist = false } = props;
     notify(fileAlreadyExist
         ? "Downloaded Song not saved as a file with the same name already exists"
@@ -4277,7 +4285,7 @@ const notifyYoutubeDownloadFinished = (props) => {
 };
 let downloadProcesses = [];
 const downloadingSongsChangedListener = [];
-function downloadSongFromYoutube(title) {
+function downloadSongFromYouTube(title) {
     const downloadDir = configs.settingsObject.musicDownloadDir;
     const youtubeCli = configs.settingsObject.youtubeCli;
     const music_dir_absolut = downloadDir.charAt(0) === "~"
@@ -4295,7 +4303,7 @@ function downloadSongFromYoutube(title) {
         title,
         downloadDir: tmpDirPath,
         onError: (errorMessage, downloadCommand) => {
-            notifyYoutubeDownloadFailed({
+            notifyYouTubeDownloadFailed({
                 youtubeCli,
                 errorMessage: `The following error occured at youtube download attempt: ${errorMessage}. The used download Command was: ${downloadCommand}`,
             });
@@ -4312,7 +4320,7 @@ function downloadSongFromYoutube(title) {
                     onFileMoved: (props) => {
                         const { fileAlreadyExist, targetFilePath } = props;
                         updateFileModifiedTime(targetFilePath);
-                        notifyYoutubeDownloadFinished({
+                        notifyYouTubeDownloadFinished({
                             downloadPath: targetFilePath,
                             fileAlreadyExist,
                         });
@@ -4321,7 +4329,7 @@ function downloadSongFromYoutube(title) {
             }
             catch (error) {
                 const errorMessage = error instanceof imports.gi.GLib.Error ? error.message : error;
-                notifyYoutubeDownloadFailed({
+                notifyYouTubeDownloadFailed({
                     youtubeCli,
                     errorMessage: `Failed to copy download from tmp dir. The following error occurred: ${errorMessage}`,
                 });
@@ -4329,9 +4337,9 @@ function downloadSongFromYoutube(title) {
         },
     };
     const { cancel } = youtubeCli === "youtube-dl"
-        ? downloadWithYoutubeDl(downloadProps)
+        ? downloadWithYouTubeDl(downloadProps)
         : downloadWithYtDlp(downloadProps);
-    notifyYoutubeDownloadStarted(title);
+    notifyYouTubeDownloadStarted(title);
     downloadProcesses.push({ songTitle: title, cancelDownload: cancel });
     downloadingSongsChangedListener.forEach((listener) => listener(downloadProcesses));
 }
@@ -4391,6 +4399,7 @@ function addDownloadingSongsChangeListener(callback) {
 
 
 
+
 const { PanelItemTooltip } = imports.ui.tooltips;
 const { markup_escape_text } = imports.gi.GLib;
 function createRadioAppletTooltip(args) {
@@ -4399,6 +4408,8 @@ function createRadioAppletTooltip(args) {
     tooltip['_tooltip'].set_style("text-align: left;");
     const setRefreshTooltip = () => {
         var _a;
+        // @ts-ignore
+        tooltip.orientation = __meta.orientation;
         if (mpvHandler.getPlaybackStatus() === 'Stopped') {
             tooltip.set_markup(DEFAULT_TOOLTIP_TXT);
             return;
@@ -4429,7 +4440,8 @@ function createRadioAppletTooltip(args) {
         mpvHandler.addPlaybackStatusChangeHandler,
         mpvHandler.addTitleChangeHandler,
         mpvHandler.addChannelChangeHandler,
-        addDownloadingSongsChangeListener
+        addDownloadingSongsChangeListener,
+        addOnAppletMovedCallback
     ].forEach(cb => cb(setRefreshTooltip));
     setRefreshTooltip();
     return tooltip;
@@ -4571,20 +4583,6 @@ function createPopupMenu(props) {
     box.connect('key-press-event', (actor, event) => {
         event.get_key_symbol() === KEY_Escape && close();
         return false;
-    });
-    launcher.connect('queue-relayout', () => {
-        if (!box.visible)
-            return;
-        setTimeout(() => {
-            setLayout();
-        }, 0);
-    });
-    bin.connect('queue-relayout', () => {
-        if (!box.visible)
-            return;
-        setTimeout(() => {
-            setLayout();
-        }, 0);
     });
     function setLayout() {
         const freeSpace = calculateFreeSpace();
@@ -5417,7 +5415,7 @@ function createDownloadButton() {
         const { currentTitleIsDownloading, currentTitle } = getState();
         if (!currentTitle)
             return; // this should actually never happe
-        currentTitleIsDownloading ? cancelDownload(currentTitle) : downloadSongFromYoutube(currentTitle);
+        currentTitleIsDownloading ? cancelDownload(currentTitle) : downloadSongFromYouTube(currentTitle);
     };
     const downloadButton = createControlBtn({
         onClick: handleBtnClicked
@@ -5425,7 +5423,7 @@ function createDownloadButton() {
     const setRefreshBtn = () => {
         const { currentTitle, currentTitleIsDownloading } = getState();
         const iconName = currentTitleIsDownloading ? CANCEL_ICON_NAME : DOWNLOAD_ICON_NAME;
-        const tooltipTxt = currentTitleIsDownloading ? `Cancel downloading ${currentTitle}` : "Download current song from Youtube";
+        const tooltipTxt = currentTitleIsDownloading ? `Cancel downloading ${currentTitle}` : "Download current song from YouTube";
         downloadButton.icon.set_icon_name(iconName);
         downloadButton.tooltip.set_text(tooltipTxt);
     };
@@ -5553,7 +5551,7 @@ function downloadMrisPluginInteractive() {
 ;// CONCATENATED MODULE: ./src/ui/RadioApplet/YoutubeDownloadIcon.ts
 
 
-function createYoutubeDownloadIcon() {
+function createYouTubeDownloadIcon() {
     const icon = createAppletIcon({
         icon_name: 'edit-download',
         visible: false
@@ -5737,22 +5735,24 @@ function createRadioContextMenu(args) {
 
 
 const { ScrollDirection: RadioAppletContainer_ScrollDirection } = imports.gi.Clutter;
-function createRadioAppletContainer() {
+let appletContainer;
+const getRadioAppletContainer = (props) => {
+    if (appletContainer) {
+        global.logWarning('radioAppletContainer already initiallized');
+        return appletContainer;
+    }
+    appletContainer = createRadioAppletContainer(props);
+    return appletContainer;
+};
+const createRadioAppletContainer = (props) => {
     let installationInProgress = false;
-    const appletContainer = createAppletContainer({
-        onMiddleClick: () => mpvHandler.togglePlayPause(),
-        onMoved: () => mpvHandler.deactivateAllListener(),
-        onRemoved: handleAppletRemoved,
-        onClick: handleClick,
-        onRightClick: () => {
+    const appletContainer = createAppletContainer(Object.assign({ onMiddleClick: () => mpvHandler.togglePlayPause(), onRemoved: handleAppletRemoved, onClick: handleClick, onRightClick: () => {
             radioPopupMenu === null || radioPopupMenu === void 0 ? void 0 : radioPopupMenu.close();
             contextMenu === null || contextMenu === void 0 ? void 0 : contextMenu.toggle();
-        },
-        onScroll: handleScroll,
-    });
+        }, onScroll: handleScroll }, props));
     [
         createRadioAppletIcon(),
-        createYoutubeDownloadIcon(),
+        createYouTubeDownloadIcon(),
         createRadioAppletLabel(),
     ].forEach((widget) => {
         appletContainer.actor.add_child(widget);
@@ -5797,19 +5797,24 @@ function createRadioAppletContainer() {
         }
     }
     return appletContainer;
-}
+};
 
 ;// CONCATENATED MODULE: ./src/index.ts
 
 
 
 
+const onAppletMovedCallbacks = [];
+const addOnAppletMovedCallback = (cb) => {
+    onAppletMovedCallbacks.push(cb);
+};
+// The function defintion must use the word "function" (not const!) as otherwilse the error: "radioApplet.main is not a constructor" is thrown
 function main() {
     // order must be retained!
     initPolyfills();
     initConfig();
     initMpvHandler();
-    return createRadioAppletContainer();
+    return getRadioAppletContainer({ onAppletMovedCallbacks });
 }
 
 radioApplet = __webpack_exports__;

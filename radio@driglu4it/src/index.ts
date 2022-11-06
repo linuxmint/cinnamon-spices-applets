@@ -1,7 +1,7 @@
 import { initConfig } from './services/Config';
 import { initMpvHandler } from './services/mpv/MpvHandler';
 import { initPolyfills } from './polyfill';
-import { createRadioAppletContainer } from './ui/RadioApplet/RadioAppletContainer';
+import {  getRadioAppletContainer } from './ui/RadioApplet/RadioAppletContainer';
 
 declare global {
     // added during build (see webpack.config.js)
@@ -13,7 +13,14 @@ declare global {
     }
 }
 
+ 
+const onAppletMovedCallbacks: Array<() => void> = []
 
+export const addOnAppletMovedCallback = (cb: () => void) => {
+    onAppletMovedCallbacks.push(cb)
+}
+
+// The function defintion must use the word "function" (not const!) as otherwilse the error: "radioApplet.main is not a constructor" is thrown
 export function main(): imports.ui.applet.Applet {
 
     // order must be retained!
@@ -21,6 +28,6 @@ export function main(): imports.ui.applet.Applet {
     initConfig()
     initMpvHandler()
 
-    return createRadioAppletContainer()
+    return getRadioAppletContainer({ onAppletMovedCallbacks });
 
 }

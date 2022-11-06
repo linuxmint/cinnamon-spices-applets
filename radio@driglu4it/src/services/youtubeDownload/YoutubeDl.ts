@@ -1,12 +1,12 @@
 import {
-  YoutubeDownloadServiceProps,
-  YoutubeDownloadServiceReturnType,
+  YouTubeDownloadServiceProps,
+  YouTubeDownloadServiceReturnType,
 } from "./YoutubeDownloadManager";
 const { spawnCommandLineAsyncIO } = imports.misc.util;
 
-export function downloadWithYoutubeDl(
-  props: YoutubeDownloadServiceProps
-): YoutubeDownloadServiceReturnType {
+export function downloadWithYouTubeDl(
+  props: YouTubeDownloadServiceProps
+): YouTubeDownloadServiceReturnType {
   const { downloadDir, title, onFinished, onSuccess, onError } = props;
 
   let hasBeenCancelled = false;

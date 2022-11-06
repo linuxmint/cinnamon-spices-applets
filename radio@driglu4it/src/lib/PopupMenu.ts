@@ -1,3 +1,4 @@
+import { constant } from "lodash"
 import { ChangeHandler } from "../types"
 
 const { BoxLayout, Bin, Side } = imports.gi.St
@@ -53,22 +54,6 @@ export function createPopupMenu(props: PopupMenuProps) {
     box.connect('key-press-event', (actor, event) => {
         event.get_key_symbol() === KEY_Escape && close()
         return false
-    })
-
-    launcher.connect('queue-relayout', () => {
-        if (!box.visible) return
-
-        setTimeout(() => {
-            setLayout()
-        }, 0);
-    })
-
-    bin.connect('queue-relayout', () => {
-        if (!box.visible) return
-
-        setTimeout(() => {
-            setLayout()
-        }, 0);
     })
 
     function setLayout() {

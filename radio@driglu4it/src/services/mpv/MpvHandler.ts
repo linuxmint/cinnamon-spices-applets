@@ -123,7 +123,7 @@ function createMpvHandler() {
     }
 
     function deactivateAllListener(): void {
-        dbus.disconnectSignal(nameOwnerSignalId)
+        if (nameOwnerSignalId) dbus?.disconnectSignal(nameOwnerSignalId)
         if (mediaPropsListenerId) mediaProps?.disconnectSignal(mediaPropsListenerId)
         if (seekListenerId) mediaServerPlayer?.disconnectSignal(seekListenerId)
     }
