@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-18 11:06+0200\n"
-"PO-Revision-Date: 2022-04-18 11:07+0200\n"
+"PO-Revision-Date: 2022-11-06 19:22+0100\n"
 "Last-Translator: MCHilli\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -164,7 +164,7 @@ msgstr "Benachrichtigungen anzeigen"
 
 #. settings-schema.json->notification-enabled->tooltip
 msgid "Show notification on application launch"
-msgstr "Zeigt beim starten der Anwendung eine Benachrichtigung"
+msgstr "Zeigt beim Starten der Anwendung eine Benachrichtigung"
 
 #. settings-schema.json->notification-text->description
 msgid "Notification Text"
@@ -188,7 +188,7 @@ msgstr "Feste Menübreite"
 
 #. settings-schema.json->fixed-menu-width->tooltip
 msgid "Based on the largest submenu item, to prevent menu width flickering"
-msgstr "Basierend auf dem längsten Untermenüeintrag, um das flackern der Menübreite zu verhindern"
+msgstr "Basierend auf dem längsten Untermenüeintrag, um das Flackern der Menübreite zu verhindern"
 
 #. settings-schema.json->visible-app-icons->description
 msgid "Show Application Icons"
@@ -204,7 +204,7 @@ msgstr "Symbolische Anwendungssymbole nutzen"
 
 #. settings-schema.json->use-symbolic-icons->tooltip
 msgid "Use Symbolic Application Icons, where it's possible"
-msgstr "Nutze Symbolische Anwendungssymbole, wo es möglich ist"
+msgstr "Nutze symbolische Anwendungssymbole, wo es möglich ist"
 
 #. settings-schema.json->app-icon-size->description
 msgid "Application Icon Size"
