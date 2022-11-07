@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-20 23:55+0200\n"
-"PO-Revision-Date: 2017-09-20 23:59+0200\n"
+"PO-Revision-Date: 2022-11-06 22:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: applet.js:152
@@ -27,8 +27,8 @@ msgid ""
 "You appear to be missing some of the required programs for 'bumblebee' to "
 "switch graphics processors using NVIDIA Optimus."
 msgstr ""
-"Es fehlen einige der für »bumblebee« notwendigen Programme um "
-"Grafikprozessoren mit NVIDIA-Optimus zu wechseln."
+"Es fehlen einige der für »bumblebee« notwendigen Programme, damit "
+"Grafikprozessoren NVIDIA-Optimus nutzen können."
 
 #: applet.js:152
 msgid "Please read the help file."
@@ -126,7 +126,7 @@ msgstr "Befehl-String für Programm 1"
 
 #. bumblebee@pdcurtis->settings-schema.json->head->description
 msgid "General Settings for the nVidia Monitoring Applet"
-msgstr "Allgemeine Einstellungen für das nVidia-Monitoring-Applet"
+msgstr "Allgemeine Einstellungen für das NVIDIA-Monitoring-Applet"
 
 #. bumblebee@pdcurtis->settings-schema.json->commandString4->description
 msgid "Command String for Program 4"
@@ -207,8 +207,8 @@ msgid ""
 "support functions including starting selected programs with optirun or "
 "primusrun"
 msgstr ""
-"Zeigt den Status von Bumblebee und die NVIDIA-Grafikprozessor-Temperatur an "
-"mit zugehörigen Unterstützungsfunktionen, einschließlich der Möglichkeit "
+"Zeigt den Status von Bumblebee und die NVIDIA-Grafikprozessor-Temperatur an, "
+"mit zugehörigen Unterstützungsfunktionen, einschließlich der Möglichkeit, "
 "ausgewählte Programme mit »optirun« oder »primusrun« zu starten"
 
 #. bumblebee@pdcurtis->metadata.json->name
