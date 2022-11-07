@@ -3,7 +3,7 @@ import { Config } from "../config";
 import { APPLET_ICON, ELLIPSIS } from "../consts";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
-import { HourlyForecastData, Precipitation } from "../types";
+import { HourlyForecastData, Precipitation, WeatherData } from "../types";
 import { GetHoursMinutes, TempToUserConfig, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, OnSameDay } from "../utils";
 
 const { PolicyType } = imports.gi.Gtk;
@@ -77,7 +77,13 @@ export class UIHourlyForecasts {
 		// Only add_actor works with ScrollView for some reason, not add_child
 		// and only BoxLayout results in drawn stuff inside the ScrollView.
 		// (Only BoxLayout and Viewport implements St.Scrollable needed inside a ScrollView)
-		this.actor.add_actor(this.container)
+		this.actor.add_actor(this.container);
+
+		this.app.config.ShortHourlyTimeChanged.Subscribe(this.app.AfterRefresh(this.OnShortHourlyTimeChanged));
+	}
+
+	private OnShortHourlyTimeChanged = (config: Config, shortTime: boolean, data: WeatherData) => {
+		this.Display(data.hourlyForecasts, config, config.Timezone);
 	}
 
 	/**
