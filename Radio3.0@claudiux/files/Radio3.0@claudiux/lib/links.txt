@@ -1,0 +1,19 @@
+http://yp.shoutcast.com/sbin/tunein-station.xspf?id=
+Ajouter l'id de la radio pour télécharger le fichier xspf.
+
+https://directory.shoutcast.com/Genre?name=Alternative
+
+https://phantomjs.org/page-automation.html
+
+phantomjs shoutcast-list.js > extrait.html
+
+phantomjs shoutcast-list.js Alternative | egrep -v TypeError | tr "," ";" > Alternative.csv
+
+
+http://wiki.shoutcast.com/wiki/SHOUTcast_Developer
+
+http://wiki.shoutcast.com/wiki/SHOUTcast_API_License_Agreement
+
+http://wiki.shoutcast.com/wiki/SHOUTcast_Radio_Directory_API#Get_Stations_by_Genre
+
+https://directory.shoutcast.com/Genre?name=Alternative

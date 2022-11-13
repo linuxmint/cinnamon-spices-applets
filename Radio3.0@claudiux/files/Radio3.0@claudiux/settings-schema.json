@@ -1,0 +1,1602 @@
+{
+  "layoutradio": {
+    "type": "layout",
+    "pages": [
+      "pageStations",
+      "pageSearch",
+      "pageImport",
+      "pageMenu",
+      "pageBehavior",
+      "pageNetwork",
+      "pageRecording",
+      "pageYT",
+      "pageScheduling"
+    ],
+    "pageStations": {
+      "type": "page",
+      "title": "Radios",
+      "sections": [
+        "sectionStationsList",
+        "sectionStationsMove",
+        "sectionStationsSaveRestore",
+        "sectionStationsUpdate"
+      ]
+    },
+    "pageImport": {
+      "type": "page",
+      "title": "Import",
+      "sections": [
+        "sectionImportShoutcast",
+        "sectionImportFile",
+        "sectionImportList"
+      ]
+    },
+    "pageSearch": {
+      "type": "page",
+      "title": "Search",
+      "sections": [
+        "sectionSearchOptions",
+        "sectionSearchResults"
+      ]
+    },
+    "pageMenu": {
+      "type": "page",
+      "title": "Menu",
+      "sections": [
+        "sectionMenuMenu",
+        "sectionMenuPrivacy",
+        "sectionMenuContextual"
+      ]
+    },
+    "pageBehavior": {
+      "type": "page",
+      "title": "Behavior",
+      "sections": [
+        "sectionBehaviorStartUp",
+        "sectionBehaviorVolumeStep",
+        "sectionBehaviorTooltip",
+        "sectionBehaviorNotifications",
+        "sectionBehaviorBitrate",
+        "sectionBehaviorSymbolicIconColor"
+      ]
+    },
+    "pageRecording": {
+      "type": "page",
+      "title": "Recording",
+      "sections": [
+        "sectionRecordingRecordings",
+        "sectionRecordingLimits",
+        "sectionRecordingIcon"
+      ]
+    },
+    "pageYT": {
+      "type": "page",
+      "title": "YT",
+      "sections": [
+        "sectionYTFormat",
+        "sectionYTIcon",
+        "sectionYTExtract"
+      ]
+    },
+    "pageScheduling": {
+      "type": "page",
+      "title": "Scheduling",
+      "sections": [
+        "sectionRecordingScheduleARecording",
+        "sectionRecordingUnableToScheduleARecording",
+        "sectionRecordingScheduledRecordings"
+      ]
+    },
+    "pageNetwork": {
+      "type": "page",
+      "title": "Network",
+      "sections": [
+        "sectionNetworkQuality",
+        "sectionNetworkMonitoring",
+        "sectionNetworkProxy",
+        "sectionNetworkDatabase"
+      ]
+    },
+    "sectionStationsList": {
+      "type": "section",
+      "title": "Stations and Categories on the menu",
+      "keys": [
+        "stations-help",
+        "radios",
+        "stations-list-play-button"
+      ]
+    },
+    "sectionStationsMove": {
+      "type": "section",
+      "title": "Moving selected stations",
+      "keys": [
+        "category-to-move",
+        "button-moving",
+        "button_go_to_category"
+      ]
+    },
+    "sectionStationsSaveRestore": {
+      "type": "section",
+      "title": "Save and Restore",
+      "keys": [
+        "button-save",
+        "button-restore",
+        "button_open_folder"
+      ]
+    },
+    "sectionStationsUpdate": {
+      "type": "section",
+      "title": "Update this station list",
+      "keys": [
+        "button-update-help",
+        "button-update",
+        "scale-update"
+      ]
+    },
+    "sectionImportShoutcast": {
+      "type": "section",
+      "title": "Get files on Shoutcast to import here",
+      "keys": [
+        "import-shoutcast-help",
+        "import-shoutcast-button"
+      ]
+    },
+    "sectionImportFile": {
+      "type": "section",
+      "title": "File to import",
+      "keys": [
+        "import-help",
+        "import-file-button"
+      ]
+    },
+    "sectionImportList": {
+      "type": "section",
+      "title": "File contents",
+      "keys": [
+        "import-list",
+        "import-list-play-button",
+        "import-list-button",
+        "import-remove-from-list-button",
+        "import-select-all",
+        "import-unselect-all"
+      ]
+    },
+    "sectionSearchOptions": {
+      "type": "section",
+      "title": "Search for Radio Stations",
+      "keys": [
+        "search-help",
+        "search-name",
+        "search-country",
+        "search-tag",
+        "search-codec",
+        "search-minimalBitrate",
+        "search-order",
+        "search-limit",
+        "search-page",
+        "search-reset-button",
+        "search-button"
+      ]
+    },
+    "sectionSearchResults": {
+      "type": "section",
+      "title": "Search results",
+      "keys": [
+        "search-list-page-label",
+        "search-list",
+        "search-list-play-button",
+        "search-button",
+        "search-list-button",
+        "search-remove-from-list-button",
+        "search-select-all",
+        "search-unselect-all"
+      ]
+    },
+    "sectionBehaviorStartUp": {
+      "type": "section",
+      "title": "Start-up",
+      "keys": [
+        "switch-on-last-station-at-start-up",
+        "volume-at-startup"
+      ]
+    },
+    "sectionBehaviorVolumeStep": {
+      "type": "section",
+      "title": "Volume step",
+      "keys": [
+        "volume-step"
+      ]
+    },
+    "sectionBehaviorTooltip": {
+      "type": "section",
+      "title": "Show Help",
+      "keys": [
+        "show-help-in-tooltip",
+        "show-help-in-tabs"
+      ]
+    },
+    "sectionMenuMenu": {
+      "type": "section",
+      "title": "Menu",
+      "keys": [
+        "show-title-and-version",
+        "recent-number",
+        "show-by-category",
+        "show-system-items"
+      ]
+    },
+    "sectionMenuPrivacy": {
+      "type": "section",
+      "title": "Privacy",
+      "keys": [
+        "reset-recents",
+        "button-reset-recents"
+      ]
+    },
+    "sectionMenuContextual": {
+      "type": "section",
+      "title": "Contextual Menu",
+      "keys": [
+        "show-reload"
+      ]
+    },
+    "sectionBehaviorNotifications": {
+      "type": "section",
+      "title": "Notifications",
+      "keys": [
+        "notif-station-change",
+        "notif-song-change",
+        "notif-song-duration"
+      ]
+    },
+    "sectionBehaviorBitrate": {
+      "type": "section",
+      "title": "Codec and Bitrate",
+      "keys": [
+        "show-codec",
+        "show-bitrate"
+      ]
+    },
+    "sectionBehaviorSymbolicIconColor": {
+      "type": "section",
+      "title": "Symbolic Icon Color",
+      "keys": [
+        "color-on",
+        "color-off",
+        "color-recording"
+      ]
+    },
+    "sectionNetworkQuality": {
+      "type": "section",
+      "title": "Quality",
+      "keys": [
+        "network-quality"
+      ]
+    },
+    "sectionNetworkMonitoring": {
+      "type": "section",
+      "title": "Monitoring",
+      "keys": [
+        "network-monitoring"
+      ]
+    },
+    "sectionNetworkProxy": {
+      "type": "section",
+      "title": "Proxy",
+      "keys": [
+        "http-proxy",
+        "apply-http-proxy"
+      ]
+    },
+    "sectionNetworkDatabase": {
+      "type": "section",
+      "title": "Database Info",
+      "keys": [
+        "database-url"
+      ]
+    },
+    "sectionRecordingRecordings": {
+      "type": "section",
+      "title": "Recordings",
+      "keys": [
+        "recording-format",
+        "recording-ends-auto"
+      ]
+    },
+    "sectionRecordingLimits": {
+      "type": "section",
+      "title": "Preservation of hard disk space",
+      "keys": [
+        "limits-hd-space-left-label",
+        "limits-hd-size-prefixes",
+        "limits-hd-value"
+      ]
+    },
+    "sectionRecordingIcon": {
+      "type": "section",
+      "title": "Icon",
+      "keys": [
+        "highlight-icon-while-background-recording"
+      ]
+    },
+    "sectionYTFormat": {
+      "type": "section",
+      "title": "Recordings",
+      "keys": [
+        "recording-format",
+        "yt-cookies-from"
+      ]
+    },
+    "sectionYTIcon": {
+      "type": "section",
+      "title": "Icon",
+      "keys": [
+        "show-yt-progress",
+        "yt-progress-interval"
+      ]
+    },
+    "sectionYTExtract": {
+      "type": "section",
+      "title": "Extract soundtrack from YouTube video",
+      "keys": [
+        "recordings-extract-url",
+        "recordings-paste-button",
+        "recordings-yesno-playlist",
+        "recordings-subdirectory",
+        "recordings-extract-button",
+        "recordings-extract-update"
+      ]
+    },
+    "sectionRecordingScheduleARecording": {
+      "type": "section",
+      "title": "Schedule a background recording",
+      "keys": [
+        "sched-radio",
+        "sched-begin-date",
+        "sched-begin-time",
+        "sched-duration",
+        "sched-button"
+      ]
+    },
+    "sectionRecordingUnableToScheduleARecording": {
+      "type": "section",
+      "title": "Unable to schedule a background recording",
+      "keys": [
+        "sched-alert-no-space"
+      ],
+      "dependency": "!scheduling-allowed"
+    },
+    "sectionRecordingScheduledRecordings": {
+      "type": "section",
+      "title": "Scheduled recordings",
+      "keys": [
+        "sched-recordings",
+        "sched-rmbutton"
+      ]
+    }
+  },
+  "show-help-in-tabs": {
+    "type": "switch",
+    "description": "Show help labels in each tab of this Settings window",
+    "default": true,
+    "tooltip": "You can uncheck this option when you are familiar with all of these settings."
+  },
+  "stations-help": {
+    "type": "textview",
+    "default": "",
+    "description": "Help",
+    "height": 230,
+    "dependency": "show-help-in-tabs"
+  },
+  "radios": {
+    "type": "list",
+    "description": "List of stations",
+    "height": 396,
+    "show-buttons": true,
+    "reorderable": true,
+    "columns": [
+      {
+        "id": "inc",
+        "title": "Menu",
+        "type": "boolean",
+        "default": true,
+        "align": 0.5
+      },
+      {
+        "id": "play",
+        "title": "♪/➟",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "name",
+        "title": "Station or Category",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "bitrate",
+        "title": "Bitrate\n(kbps)",
+        "type": "string",
+        "default": "",
+        "align": 0.5
+      },
+      {
+        "id": "codec",
+        "title": "Codec",
+        "type": "string",
+        "default": "",
+        "align": 0.5
+      },
+      {
+        "id": "url",
+        "title": "Streaming URL (empty for a category)",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "uuid",
+        "title": "Unique identifier",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "homepage",
+        "title": "Home page",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "tags",
+        "title": "Tags",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "default": [
+
+    ]
+  },
+  "stations-list-play-button": {
+    "type": "button",
+    "description": "♪ Play the next station to test",
+    "callback": "on_button_radios_play_clicked"
+  },
+  "category-to-move": {
+    "type": "combobox",
+    "description": "Category to which to move the selected stations:",
+    "default": "",
+    "options": {
+      "(Undefined)": ""
+    }
+  },
+  "button-moving": {
+    "type": "button",
+    "description": "➟ Move selected stations to this category",
+    "callback": "on_button_radios_moving_clicked",
+    "dependency": "category-to-move!="
+  },
+  "button_go_to_category": {
+    "type": "button",
+    "description": "Go to this category",
+    "callback": "on_button_radios_go_to_category_clicked",
+    "dependency": "category-to-move!="
+  },
+  "button-show-all": {
+    "type": "button",
+    "description": "Show all stations and categories in the menu",
+    "callback": "on_button_radios_show_all_clicked"
+  },
+  "button-hide-all": {
+    "type": "button",
+    "description": "Hide all stations and categories (so the menu becomes empty)",
+    "callback": "on_button_radios_hide_all_clicked"
+  },
+  "button-save": {
+    "type": "button",
+    "description": "Save this list of stations",
+    "callback": "on_button_radios_save_clicked"
+  },
+  "button-restore": {
+    "type": "button",
+    "description": "Restore a list of stations",
+    "callback": "on_button_radios_restore_clicked"
+  },
+  "button_open_folder": {
+    "type": "button",
+    "description": "Open the folder containing these lists",
+    "callback": "on_button_radios_open_folder_clicked"
+  },
+  "button-update-help": {
+    "type": "textview",
+    "default": "",
+    "description": "Help",
+    "height": 100,
+    "dependency": "show-help-in-tabs"
+  },
+  "button-update": {
+    "type": "button",
+    "description": "Update my station list with the Radio Database data",
+    "callback": "on_button_radios_update_clicked"
+  },
+  "scale-update": {
+    "type": "scale",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "default": 0,
+    "description": "%",
+    "dependency": "show-scale-update"
+  },
+  "show-scale-update": {
+    "type": "generic",
+    "default": false
+  },
+  "import-shoutcast-help": {
+    "type": "textview",
+    "default": "",
+    "description": "Help",
+    "height": 100,
+    "dependency": "show-help-in-tabs"
+  },
+  "import-shoutcast-button": {
+    "type": "button",
+    "description": "Open the Shoutcast directory",
+    "callback": "on_button_import_shoutcast_clicked"
+  },
+  "import-help": {
+    "type": "textview",
+    "default": "",
+    "description": "Help",
+    "height": 100,
+    "dependency": "show-help-in-tabs"
+  },
+  "import-file-button": {
+    "type": "button",
+    "description": "Import a .csv, .m3u, .pls, .xspf or .json file",
+    "callback": "on_button_import_file_clicked"
+  },
+  "import-list": {
+    "type": "list",
+    "description": "Radios",
+    "height": 396,
+    "show-buttons": false,
+    "reorderable": true,
+    "columns": [
+      {
+        "id": "inc",
+        "title": "Select",
+        "type": "boolean",
+        "align": 0.5
+      },
+      {
+        "id": "play",
+        "title": "♪",
+        "type": "boolean",
+        "align": 0.5
+      },
+      {
+        "id": "name",
+        "title": "Title",
+        "type": "string"
+      },
+      {
+        "id": "bitrate",
+        "title": "Bitrate\n(kbps)",
+        "type": "string",
+        "default": "",
+        "align": 0.5
+      },
+      {
+        "id": "codec",
+        "title": "Codec",
+        "type": "string",
+        "default": "",
+        "align": 0.5
+      },
+      {
+        "id": "url",
+        "title": "Streaming URL",
+        "type": "string"
+      }
+    ],
+    "default": [
+
+    ]
+  },
+  "import-list-play-button": {
+    "type": "button",
+    "description": "♪ Play the next station to test",
+    "callback": "on_button_import_play_clicked"
+  },
+  "import-list-button": {
+    "type": "button",
+    "description": "Import the selected stations into my own list",
+    "callback": "on_button_import_list_clicked"
+  },
+  "import-remove-from-list-button": {
+    "type": "button",
+    "description": "Remove selected items from this list",
+    "callback": "on_button_import_remove_clicked"
+  },
+  "import-select-all": {
+    "type": "button",
+    "description": "Select all items",
+    "callback": "on_button_import_select_all_clicked"
+  },
+  "import-unselect-all": {
+    "type": "button",
+    "description": "Unselect all items",
+    "callback": "on_button_import_unselect_all_clicked"
+  },
+  "import-dir": {
+    "type": "generic",
+    "default": ""
+  },
+  "search-list": {
+    "type": "list",
+    "description": "Radios",
+    "height": 396,
+    "show-buttons": false,
+    "reorderable": true,
+    "columns": [
+      {
+        "id": "inc",
+        "title": "Select",
+        "type": "boolean",
+        "align": 0.5
+      },
+      {
+        "id": "play",
+        "title": "♪",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "name",
+        "title": "Station",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "bitrate",
+        "title": "Bitrate\n(kbps)",
+        "type": "string",
+        "default": "",
+        "align": 0.5
+      },
+      {
+        "id": "codec",
+        "title": "Codec",
+        "type": "string",
+        "default": "",
+        "align": 0.5
+      },
+      {
+        "id": "countrycode",
+        "title": "Country\nCode",
+        "type": "string",
+        "align": 0.5
+      },
+      {
+        "id": "tags",
+        "title": "Tags",
+        "type": "string"
+      },
+      {
+        "id": "url",
+        "title": "Streaming URL",
+        "type": "string"
+      },
+      {
+        "id": "country",
+        "title": "Country",
+        "type": "string"
+      },
+      {
+        "id": "uuid",
+        "title": "Unique identifier",
+        "type": "string"
+      },
+      {
+        "id": "homepage",
+        "title": "Home page",
+        "type": "string"
+      }
+    ],
+    "default": [
+
+    ]
+  },
+  "search-list-page-label": {
+    "type": "textview",
+    "description": "Page:",
+    "value": "0",
+    "height": 25
+  },
+  "search-list-button": {
+    "type": "button",
+    "description": "Import the selected stations into my own list",
+    "callback": "on_button_search_list_clicked"
+  },
+  "search-list-play-button": {
+    "type": "button",
+    "description": "♪ Play the next station to test",
+    "callback": "on_button_search_play_clicked"
+  },
+  "search-remove-from-list-button": {
+    "type": "button",
+    "description": "Remove selected items from this list",
+    "callback": "on_button_search_remove_clicked"
+  },
+  "search-select-all": {
+    "type": "button",
+    "description": "Select all items",
+    "callback": "on_button_search_select_all_clicked"
+  },
+  "search-unselect-all": {
+    "type": "button",
+    "description": "Unselect all items",
+    "callback": "on_button_search_unselect_all_clicked"
+  },
+  "switch-on-last-station-at-start-up": {
+    "type": "switch",
+    "default": false,
+    "description": "Turn on the radio when Cinnamon starts up",
+    "tooltip": "The selected radio will be the last you listened to, even if you stopped it.\n\nVPN users: By checking this, the radio broadcast could use your VPN link in the event that this one is active before the start of this applet."
+  },
+  "volume-at-startup": {
+    "type": "combobox",
+    "description": "Volume level starting a new radio (%)",
+    "default": -1,
+    "options": {
+      "(Undefined)": -1,
+      "0": 0,
+      "10": 10,
+      "15": 15,
+      "20": 20,
+      "25": 25,
+      "30": 30,
+      "35": 35,
+      "40": 40,
+      "45": 45,
+      "50": 50,
+      "55": 55,
+      "60": 60,
+      "65": 65,
+      "70": 70,
+      "75": 75,
+      "80": 80,
+      "85": 85,
+      "90": 90,
+      "95": 95,
+      "100": 100
+    },
+    "tooltip": "If set, then this will change the volume level starting a new radio, in percentage of the general volume level.\nDefault is (Undefined): The volume level remains unchanged.\n\nPlease note that you can change the volume level scrolling on this applet icon, or using the slider in the context menu."
+  },
+  "volume-step": {
+    "type": "combobox",
+    "description": "Volume step scrolling on icon",
+    "default": 5,
+    "options": {
+      "±0%": 0,
+      "±1%": 1,
+      "±2%": 2,
+      "±3%": 3,
+      "±4%": 4,
+      "±5%": 5
+    },
+    "tooltip": "By how much increase or decrease the volume using the mouse scroll wheel on the icon."
+  },
+  "show-title-and-version": {
+    "type": "switch",
+    "default": true,
+    "description": "Show the name and the version of this applet in the menu"
+  },
+  "recent-number": {
+    "type": "combobox",
+    "description": "Number of Recently Played Stations in menu",
+    "default": 5,
+    "options": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9,
+      "10": 10
+    },
+    "tooltip": "How many recently listened stations do you want to display in the menu?"
+  },
+  "reset-recents": {
+    "type": "switch",
+    "default": false,
+    "description": "Empty your Recently Played Stations list at startup"
+  },
+  "button-reset-recents": {
+    "type": "button",
+    "description": "Empty your Recently Played Stations list now",
+    "callback": "empty_recents"
+  },
+  "show-by-category": {
+    "type": "generic",
+    "default": false
+  },
+  "show-system-items": {
+    "type": "switch",
+    "default": true,
+    "description": "Show system items in the menu",
+    "tooltip": "Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
+  },
+  "show-reload": {
+    "type": "switch",
+    "default": false,
+    "description": "Show the 'Reload this applet' item in the contextual menu",
+    "tooltip": "For developers only"
+  },
+  "show-help-in-tooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Show help for mouse actions in the tooltip",
+    "tooltip": "You can uncheck this option when you are familiar with all mouse roles."
+  },
+  "notif-station-change": {
+    "type": "switch",
+    "default": true,
+    "description": "Change of radio"
+  },
+  "notif-song-change": {
+    "type": "switch",
+    "default": true,
+    "description": "Change of song or program",
+    "tooltip": "Please note that some radios do not notify you of a song or program change."
+  },
+  "notif-song-duration": {
+    "type": "spinbutton",
+    "default": 8,
+    "units": "seconds",
+    "min": 1,
+    "max": 20,
+    "step": 1,
+    "dependency": "notif-song-change",
+    "description": "Duration of a song or program change notification"
+  },
+  "notif-buttons-allowed": {
+    "type": "switch",
+    "default": true,
+    "description": "Show in notifications the buttons to start and stop recordings",
+    "tooltip": "Please note that this will have no effect if you do not wish to be notified of a song or program change."
+  },
+  "show-codec": {
+    "type": "switch",
+    "default": true,
+    "description": "Show codec",
+    "tooltip": ""
+  },
+  "show-bitrate": {
+    "type": "switch",
+    "default": true,
+    "description": "Show bit rate",
+    "tooltip": "Unit: kbps (kilobit per second).\nThe higher this bit rate, the better the sound quality of the stream."
+  },
+  "color-on": {
+    "type": "colorchooser",
+    "default": "rgb(83,199,160)",
+    "description": "Color of the symbolic icon while the radio is on"
+  },
+  "color-off": {
+    "type": "colorchooser",
+    "default": "rgb(240,240,240)",
+    "description": "Color of the symbolic icon while the radio is off"
+  },
+  "color-recording": {
+    "type": "colorchooser",
+    "default": "rgb(204,0,0)",
+    "description": "Color of the symbolic icon while recording"
+  },
+  "network-quality": {
+    "type": "combobox",
+    "default": "high",
+    "description": "Network Quality",
+    "options": {
+      "High": "high",
+      "Low": "low"
+    },
+    "tooltip": "High Quality: The recordings you make while listening to the radio will double the bit rate usually required to just listen to the radio. Thus, the recordings will not be disturbed by extraneous sounds or by a change in the volume of the radio.\n\nLow Quality: These recordings come directly from the sound card, which relieves the network but risks polluting them with extraneous sounds (system sounds for example). The volume of the radio will be set to 100% in order to obtain the best possible quality."
+  },
+  "network-monitoring": {
+    "type": "switch",
+    "default": false,
+    "description": "Monitor the network",
+    "tooltip": "Whether or not to restart the radio when the network becomes active again after an interruption.\n\nVPN users: By checking this, the radio broadcast may use your VPN link."
+  },
+  "http-proxy": {
+    "type": "entry",
+    "expand-width": true,
+    "default": "",
+    "description": "HTTP Proxy",
+    "tooltip": "Format: http://[user:pass@]URL[:port]\nDefault: empty.\nIf empty, the environment variables http_proxy and ALL_PROXY will be used if present.\nIf set, this proxy will not be used for https requests."
+  },
+  "apply-http-proxy": {
+    "type": "button",
+    "callback": "set_MPV_ALIAS",
+    "description": "Apply HTTP Proxy"
+  },
+  "database-url": {
+    "type": "textview",
+    "description": "Database URL",
+    "default": "",
+    "height": 25
+  },
+  "recording-format": {
+    "type": "combobox",
+    "description": "Recording format",
+    "default": "mp3",
+    "options": {
+      "FLAC": "flac",
+      "MP3": "mp3",
+      "OGG": "ogg",
+      "RAW": "raw",
+      "WAV": "wav"
+    }
+  },
+  "recording-ends-auto": {
+    "type": "combobox",
+    "description": "Way to stop recording",
+    "default": true,
+    "options": {
+      "automatically, when the current song ends": true,
+      "manually; thus, several recordings can follow one another": false
+    },
+    "tooltip": "Please note that this choice will have no effect on any current recording, but on subsequent ones."
+  },
+  "limits-hd-space-left-label": {
+    "type": "textview",
+    "description": "Space remaining on disk when opening this window:",
+    "default": "",
+    "height": 25
+  },
+  "limits-hd-size-prefixes": {
+    "type": "combobox",
+    "description": "Disk space unit as defined in Nemo's display preferences (File size prefixes)",
+    "default": "base-10",
+    "options": {
+      "GB (decimal)": "base-10",
+      "GB (decimal long)": "base-10-full",
+      "GiB (binary)": "base-2",
+      "GiB (binary long)": "base-2-full"
+    },
+    "tooltip": "Changing this also changes Nemo's file size prefixes."
+  },
+  "limits-hd-value": {
+    "type": "scale",
+    "default": 5,
+    "min": 0,
+    "max": 1024,
+    "step": 1,
+    "units": "Units: As defined above",
+    "show-value": true,
+    "description": "Space to be left free on the hard disk"
+  },
+  "highlight-icon-while-background-recording": {
+    "type": "switch",
+    "default": true,
+    "description": "Highlight this applet icon during background recording"
+  },
+  "yt-cookies-from": {
+    "type": "combobox",
+    "default": "",
+    "description": "Use cookies from",
+    "options": {
+      "(None)": "",
+      "Brave": "brave",
+      "Chrome": "chrome",
+      "Chromium": "chromium",
+      "Chromium (basictext)": "chromium+basictext",
+      "Chromium (gnomekeyring)": "chromium+gnomekeyring",
+      "Chromium (kwallet)": "chromium+kwallet",
+      "Firefox": "firefox",
+      "Opera": "opera",
+      "Vivaldi": "vivaldi"
+    },
+    "tooltip": "Cookies are used by YouTube to determine which videos you may watch. For Chromium, you can select the method (in parentheses) you chose to save cookies."
+  },
+  "show-yt-progress": {
+    "type": "switch",
+    "default": true,
+    "description": "Display, under the icon, the progress of downloads from YT."
+  },
+  "yt-progress-interval": {
+    "type": "combobox",
+    "default": 0,
+    "description": "Progression interval (ms)",
+    "options": {
+      "Depending on network quality": 0,
+      "50": 50,
+      "100": 100,
+      "150": 150,
+      "200": 200,
+      "300": 300,
+      "400": 400,
+      "500": 500,
+      "600": 600,
+      "750": 750,
+      "1000": 1000,
+      "2000": 2000,
+      "3000": 3000
+    }
+  },
+  "recordings-allowed": {
+    "type": "generic",
+    "default": true
+  },
+  "recordings-extract-url": {
+    "type": "entry",
+    "expand-width": true,
+    "default": "",
+    "description": "YouTube video link"
+  },
+  "recordings-paste-button": {
+    "type": "button",
+    "description": "Paste above the YouTube link you copied",
+    "callback": "on_button_paste_clicked"
+  },
+  "recordings-yesno-playlist": {
+    "type": "combobox",
+    "default": " --no-playlist",
+    "description": "In case of playlist",
+    "options": {
+      "Extract single soundtrack": " --no-playlist",
+      "Extract whole playlist": " --yes-playlist"
+    }
+  },
+  "recordings-subdirectory": {
+    "type": "entry",
+    "expand-width": true,
+    "default": "",
+    "description": "Record in subdirectory",
+    "tooltip": "(without leading or trailing slash)"
+  },
+  "recordings-extract-button": {
+    "type": "button",
+    "description": "Extract soundtrack",
+    "callback": "on_button_extract_clicked"
+  },
+  "recordings-extract-update": {
+    "type": "scale",
+    "min": 0.0,
+    "max": 100.0,
+    "step": 0.1,
+    "default": 0.0,
+    "description": "%",
+    "dependency": "show-recordings-extract-update"
+  },
+  "show-recordings-extract-update": {
+    "type": "generic",
+    "default": false
+  },
+  "sched-radio": {
+    "type": "combobox",
+    "description": "Radio",
+    "default": "",
+    "options": {
+      "(Undefined)": ""
+    },
+    "dependency": "scheduling-allowed"
+  },
+  "sched-begin-date": {
+    "type": "datechooser",
+    "description": "Date",
+    "default": {
+      "d": 1,
+      "m": 1,
+      "y": 2021
+    },
+    "dependency": "sched-radio!="
+  },
+  "sched-begin-time": {
+    "type": "timechooser",
+    "description": "Time",
+    "default": {
+      "h": 12,
+      "m": 0,
+      "s": 0
+    },
+    "tooltip": "Seconds will be ignored.",
+    "dependency": "sched-radio!="
+  },
+  "sched-duration": {
+    "type": "timechooser",
+    "description": "Duration",
+    "default": {
+      "h": 0,
+      "m": 0,
+      "s": 0
+    },
+    "tooltip": "Seconds will be ignored.",
+    "dependency": "sched-radio!="
+  },
+  "sched-button": {
+    "type": "button",
+    "description": "Schedule this recording",
+    "callback": "on_button_sched_clicked",
+    "dependency": "sched-radio!="
+  },
+  "sched-alert-no-space": {
+    "type": "label",
+    "description": "You are running out of disk space. See in the Recording tab."
+  },
+  "sched-recordings": {
+    "type": "list",
+    "description": "Scheduled recordings",
+    "height": 300,
+    "columns": [
+      {
+        "id": "rm",
+        "title": "Remove?",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "id": "inprogress",
+        "title": "In progress",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "id": "action",
+        "title": "Action",
+        "type": "string"
+      },
+      {
+        "id": "date",
+        "title": "Date",
+        "type": "string",
+        "align": 0.5
+      },
+      {
+        "id": "station",
+        "title": "Station",
+        "type": "string"
+      },
+      {
+        "id": "uuid",
+        "title": "Identifier",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "default": [
+
+    ],
+    "tooltip": "Do not modify anything in this list, except in the \"Remove?\" column",
+    "show-buttons": false
+  },
+  "search-help": {
+    "type": "textview",
+    "default": "",
+    "description": "Help",
+    "height": 180,
+    "dependency": "show-help-in-tabs"
+  },
+  "search-name": {
+    "type": "entry",
+    "default": "",
+    "description": "Station Name",
+    "tooltip": "OPTIONAL. Name (or part of the name) of the radio station.",
+    "expand-width": true
+  },
+  "search-country": {
+    "type": "combobox",
+    "description": "Country",
+    "default": "",
+    "options": {
+      "(Undefined)": "",
+      "(My Country)": "MyCountry",
+      "Afghanistan - AF": "AF",
+      "Åland Islands - AX": "AX",
+      "Albania - AL": "AL",
+      "Algeria - DZ": "DZ",
+      "American Samoa - AS": "AS",
+      "Andorra - AD": "AD",
+      "Angola - AO": "AO",
+      "Anguilla - AI": "AI",
+      "Antarctica - AQ": "AQ",
+      "Antigua And Barbuda - AG": "AG",
+      "Argentina - AR": "AR",
+      "Armenia - AM": "AM",
+      "Aruba - AW": "AW",
+      "Australia - AU": "AU",
+      "Austria - AT": "AT",
+      "Azerbaijan - AZ": "AZ",
+      "Bahamas - BS": "BS",
+      "Bahrain - BH": "BH",
+      "Bangladesh - BD": "BD",
+      "Barbados - BB": "BB",
+      "Belarus - BY": "BY",
+      "Belgium - BE": "BE",
+      "Belize - BZ": "BZ",
+      "Benin - BJ": "BJ",
+      "Bermuda - BM": "BM",
+      "Bhutan - BT": "BT",
+      "Bolivia (Plurinational State Of) - BO": "BO",
+      "Bonaire (Sint Eustatius And Saba) - BQ": "BQ",
+      "Bosnia And Herzegovina - BA": "BA",
+      "Botswana - BW": "BW",
+      "Bouvet Island - BV": "BV",
+      "Brazil - BR": "BR",
+      "British Indian Ocean Territory - IO": "IO",
+      "Brunei Darussalam - BN": "BN",
+      "Bulgaria - BG": "BG",
+      "Burkina Faso - BF": "BF",
+      "Burundi - BI": "BI",
+      "Cambodia - KH": "KH",
+      "Cameroon - CM": "CM",
+      "Canada - CA": "CA",
+      "Cape Verde - CV": "CV",
+      "Cayman Islands - KY": "KY",
+      "Central African Republic - CF": "CF",
+      "Chad - TD": "TD",
+      "Chile - CL": "CL",
+      "China - CN": "CN",
+      "Christmas Island - CX": "CX",
+      "Cocos (Keeling) Islands - CC": "CC",
+      "Colombia - CO": "CO",
+      "Comoros - KM": "KM",
+      "Congo - CG": "CG",
+      "Congo (The Democratic Republic Of The) - CD": "CD",
+      "Cook Islands - CK": "CK",
+      "Costa Rica - CR": "CR",
+      "Côte D'Ivoire - CI": "CI",
+      "Croatia - HR": "HR",
+      "Cuba - CU": "CU",
+      "Curaçao - CW": "CW",
+      "Cyprus - CY": "CY",
+      "Czech Republic - CZ": "CZ",
+      "Denmark - DK": "DK",
+      "Djibouti - DJ": "DJ",
+      "Dominica - DM": "DM",
+      "Dominican Republic - DO": "DO",
+      "Ecuador - EC": "EC",
+      "Egypt - EG": "EG",
+      "El Salvador - SV": "SV",
+      "Equatorial Guinea - GQ": "GQ",
+      "Eritrea - ER": "ER",
+      "Estonia - EE": "EE",
+      "Ethiopia - ET": "ET",
+      "Falkland Islands (Malvinas) - FK": "FK",
+      "Faroe Islands - FO": "FO",
+      "Fiji - FJ": "FJ",
+      "Finland - FI": "FI",
+      "France - FR": "FR",
+      "French Guiana - GF": "GF",
+      "French Polynesia - PF": "PF",
+      "French Southern Territories - TF": "TF",
+      "Gabon - GA": "GA",
+      "Gambia - GM": "GM",
+      "Georgia - GE": "GE",
+      "Germany - DE": "DE",
+      "Ghana - GH": "GH",
+      "Gibraltar - GI": "GI",
+      "Greece - GR": "GR",
+      "Greenland - GL": "GL",
+      "Grenada - GD": "GD",
+      "Guadeloupe - GP": "GP",
+      "Guam - GU": "GU",
+      "Guatemala - GT": "GT",
+      "Guernsey - GG": "GG",
+      "Guinea - GN": "GN",
+      "Guinea-Bissau - GW": "GW",
+      "Guyana - GY": "GY",
+      "Haiti - HT": "HT",
+      "Heard Island And Mcdonald Islands - HM": "HM",
+      "Holy See (Vatican City State) - VA": "VA",
+      "Honduras - HN": "HN",
+      "Hong Kong - HK": "HK",
+      "Hungary - HU": "HU",
+      "Iceland - IS": "IS",
+      "India - IN": "IN",
+      "Indonesia - ID": "ID",
+      "Iran (Islamic Republic Of) - IR": "IR",
+      "Iraq - IQ": "IQ",
+      "Ireland - IE": "IE",
+      "Isle Of Man - IM": "IM",
+      "Israel - IL": "IL",
+      "Italy - IT": "IT",
+      "Jamaica - JM": "JM",
+      "Japan - JP": "JP",
+      "Jersey - JE": "JE",
+      "Jordan - JO": "JO",
+      "Kazakhstan - KZ": "KZ",
+      "Kenya - KE": "KE",
+      "Kiribati - KI": "KI",
+      "Korea (Democratic People'S Republic Of) - KP": "KP",
+      "Korea (Republic Of) - KR": "KR",
+      "Kuwait - KW": "KW",
+      "Kyrgyzstan - KG": "KG",
+      "Lao People'S Democratic Republic - LA": "LA",
+      "Latvia - LV": "LV",
+      "Lebanon - LB": "LB",
+      "Lesotho - LS": "LS",
+      "Liberia - LR": "LR",
+      "Libya - LY": "LY",
+      "Liechtenstein - LI": "LI",
+      "Lithuania - LT": "LT",
+      "Luxembourg - LU": "LU",
+      "Macao - MO": "MO",
+      "Macedonia (The Former Yugoslav Republic Of) - MK": "MK",
+      "Madagascar - MG": "MG",
+      "Malawi - MW": "MW",
+      "Malaysia - MY": "MY",
+      "Maldives - MV": "MV",
+      "Mali - ML": "ML",
+      "Malta - MT": "MT",
+      "Marshall Islands - MH": "MH",
+      "Martinique - MQ": "MQ",
+      "Mauritania - MR": "MR",
+      "Mauritius - MU": "MU",
+      "Mayotte - YT": "YT",
+      "Mexico - MX": "MX",
+      "Micronesia (Federated States Of) - FM": "FM",
+      "Moldova (Republic Of) - MD": "MD",
+      "Monaco - MC": "MC",
+      "Mongolia - MN": "MN",
+      "Montenegro - ME": "ME",
+      "Montserrat - MS": "MS",
+      "Morocco - MA": "MA",
+      "Mozambique - MZ": "MZ",
+      "Myanmar - MM": "MM",
+      "Namibia - NA": "NA",
+      "Nauru - NR": "NR",
+      "Nepal - NP": "NP",
+      "Netherlands - NL": "NL",
+      "New Caledonia - NC": "NC",
+      "New Zealand - NZ": "NZ",
+      "Nicaragua - NI": "NI",
+      "Niger - NE": "NE",
+      "Nigeria - NG": "NG",
+      "Niue - NU": "NU",
+      "Norfolk Island - NF": "NF",
+      "Northern Mariana Islands - MP": "MP",
+      "Norway - NO": "NO",
+      "Oman - OM": "OM",
+      "Pakistan - PK": "PK",
+      "Palau - PW": "PW",
+      "Palestine (State Of) - PS": "PS",
+      "Panama - PA": "PA",
+      "Papua New Guinea - PG": "PG",
+      "Paraguay - PY": "PY",
+      "Peru - PE": "PE",
+      "Philippines - PH": "PH",
+      "Pitcairn - PN": "PN",
+      "Poland - PL": "PL",
+      "Portugal - PT": "PT",
+      "Puerto Rico - PR": "PR",
+      "Qatar - QA": "QA",
+      "Réunion - RE": "RE",
+      "Romania - RO": "RO",
+      "Russian Federation - RU": "RU",
+      "Rwanda - RW": "RW",
+      "Saint Barthélemy - BL": "BL",
+      "Saint Helena (Ascension And Tristan Da Cunha) - SH": "SH",
+      "Saint Kitts And Nevis - KN": "KN",
+      "Saint Lucia - LC": "LC",
+      "Saint Martin (French Part) - MF": "MF",
+      "Saint Pierre And Miquelon - PM": "PM",
+      "Saint Vincent And The Grenadines - VC": "VC",
+      "Samoa - WS": "WS",
+      "San Marino - SM": "SM",
+      "Sao Tome And Principe - ST": "ST",
+      "Saudi Arabia - SA": "SA",
+      "Senegal - SN": "SN",
+      "Serbia - RS": "RS",
+      "Seychelles - SC": "SC",
+      "Sierra Leone - SL": "SL",
+      "Singapore - SG": "SG",
+      "Sint Maarten (Dutch Part) - SX": "SX",
+      "Slovakia - SK": "SK",
+      "Slovenia - SI": "SI",
+      "Solomon Islands - SB": "SB",
+      "Somalia - SO": "SO",
+      "South Africa - ZA": "ZA",
+      "South Georgia And The South Sandwich Islands - GS": "GS",
+      "South Sudan - SS": "SS",
+      "Spain - ES": "ES",
+      "Sri Lanka - LK": "LK",
+      "Sudan - SD": "SD",
+      "Suriname - SR": "SR",
+      "Svalbard And Jan Mayen - SJ": "SJ",
+      "Swaziland - SZ": "SZ",
+      "Sweden - SE": "SE",
+      "Switzerland - CH": "CH",
+      "Syrian Arab Republic - SY": "SY",
+      "Taiwan (Province Of China) - TW": "TW",
+      "Tajikistan - TJ": "TJ",
+      "Tanzania (United Republic Of) - TZ": "TZ",
+      "Thailand - TH": "TH",
+      "Timor-Leste - TL": "TL",
+      "Togo - TG": "TG",
+      "Tokelau - TK": "TK",
+      "Tonga - TO": "TO",
+      "Trinidad And Tobago - TT": "TT",
+      "Tunisia - TN": "TN",
+      "Turkey - TR": "TR",
+      "Turkmenistan - TM": "TM",
+      "Turks And Caicos Islands - TC": "TC",
+      "Tuvalu - TV": "TV",
+      "Uganda - UG": "UG",
+      "Ukraine - UA": "UA",
+      "United Arab Emirates - AE": "AE",
+      "United Kingdom - GB": "GB",
+      "United States - US": "US",
+      "United States Minor Outlying Islands - UM": "UM",
+      "Uruguay - UY": "UY",
+      "Uzbekistan - UZ": "UZ",
+      "Vanuatu - VU": "VU",
+      "Venezuela (Bolivarian Republic Of) - VE": "VE",
+      "Viet Nam - VN": "VN",
+      "Virgin Islands (British) - VG": "VG",
+      "Virgin Islands (U.S.) - VI": "VI",
+      "Wallis And Futuna - WF": "WF",
+      "Western Sahara - EH": "EH",
+      "Yemen - YE": "YE",
+      "Zambia - ZM": "ZM",
+      "Zimbabwe - ZW": "ZW"
+    },
+    "tooltip": "OPTIONAL. Choose a country."
+  },
+  "search-tag": {
+    "type": "entry",
+    "default": "",
+    "description": "Tag",
+    "tooltip": "OPTIONAL. Only one word, as blues or jazz or rock or talk or...",
+    "expand-width": true
+  },
+  "search-codec": {
+    "type": "combobox",
+    "description": "Codec",
+    "default": "",
+    "options": {
+      "(Undefined)": "",
+      "MP3": "MP3",
+      "AAC": "AAC",
+      "AAC+": "AAC+",
+      "FLAC": "FLAC",
+      "OGG": "OGG",
+      "FLV": "FLV",
+      "AAC,H.264": "AAC,H.264",
+      "AAC+,H.264": "AAC+,H.264",
+      "MP3,H.264": "MP3,H.264",
+      "Unknown": "UNKNOWN",
+      "Unknown,H.264": "UNKNOWN,H.264"
+    },
+    "tooltip": "OPTIONAL. Choose a codec."
+  },
+  "search-minimalBitrate": {
+    "type": "combobox",
+    "description": "Minimal Bitrate",
+    "default": 0,
+    "options": {
+      "0": 0,
+      "32": 32,
+      "48": 48,
+      "64": 64,
+      "96": 96,
+      "128": 128,
+      "192": 192,
+      "256": 256,
+      "320": 320,
+      "512": 512,
+      "640": 640
+    },
+    "tooltip": "OPTIONAL. Choose a minimal bitrate (in kbps)."
+  },
+  "search-order": {
+    "type": "combobox",
+    "description": "Order",
+    "default": "",
+    "options": {
+      "(Undefined)": "",
+      "name": "name",
+      "url": "url",
+      "tags": "tags",
+      "country": "country",
+      "state": "state",
+      "language": "language",
+      "votes": "votes",
+      "codec": "codec",
+      "bitrate": "bitrate",
+      "last check-time": "lastchecktime",
+      "click timestamp": "clicktimestamp",
+      "click count": "clickcount",
+      "click trend": "clicktrend",
+      "change timestamp": "changetimestamp",
+      "random": "random"
+    },
+    "tooltip": "OPTIONAL. Name of the attribute the result list will be sorted by."
+  },
+  "search-limit": {
+    "type": "combobox",
+    "description": "Limit",
+    "default": 15,
+    "options": {
+      "5": 5,
+      "10": 10,
+      "15": 15,
+      "20": 20,
+      "25": 25,
+      "30": 30,
+      "40": 40,
+      "50": 50,
+      "100": 100
+    },
+    "tooltip": "Maximum number of results per page."
+  },
+  "search-page": {
+    "type": "spinbutton",
+    "description": "Next page number",
+    "default": 1,
+    "min": 1,
+    "max": 20000,
+    "step": 1
+  },
+  "search-reset-button": {
+    "type": "button",
+    "description": "Reset",
+    "callback": "on_button_search_reset_clicked"
+  },
+  "search-button": {
+    "type": "button",
+    "description": "Search...",
+    "callback": "on_button_search_clicked"
+  },
+  "sched-rmbutton": {
+    "type": "button",
+    "description": "Remove selected items",
+    "callback": "on_button_sched_remove_clicked"
+  },
+  "last-radio-listened-to": {
+    "type": "generic",
+    "default": ""
+  },
+  "storedRadios": {
+    "type": "generic",
+    "default": [
+
+    ]
+  },
+  "recentRadios": {
+    "type": "generic",
+    "default": [
+
+    ]
+  },
+  "default-color": {
+    "type": "generic",
+    "default": "white"
+  },
+  "volume-percentage": {
+    "type": "generic",
+    "default": 100
+  },
+  "clicks": {
+    "type": "generic",
+    "default": {
+
+    }
+  },
+  "name_found": {
+    "type": "generic",
+    "default": ""
+  },
+  "scheduling-allowed": {
+    "type": "generic",
+    "default": true
+  }
+}
