@@ -1,0 +1,245 @@
+.sensors-label {
+    background: transparent;
+    margin: 1px, 1px, 1px, 1px;
+    padding: 0 2px;
+    border: 1px;
+    border-radius: 5px, 5px, 5px, 5px;
+    border-color: rgba(127,127,127,0.5);
+    text-align: center;
+    vertical-align: middle;
+    font-family: monospace;
+}
+
+.sensors-high {
+    background: DarkOrange;
+    margin: 1px, 1px, 1px, 1px;
+    padding: 0 2px;
+    border: 1px;
+    border-radius: 5px, 5px, 5px, 5px;
+    border-color: rgba(255,141,0,0.5);
+    text-align: center;
+    vertical-align: middle;
+    font-family: monospace;
+}
+
+.sensors-critical {
+    background: FireBrick;
+    margin: 1px, 1px, 1px, 1px;
+    padding: 0 2px;
+    border: 1px;
+    border-radius: 5px, 5px, 5px, 5px;
+    border-color: rgba(194,34,34,0.5);
+    text-align: center;
+    vertical-align: middle;
+    font-family: monospace;
+}
+
+.sensors-label-noborder {
+    background: transparent;
+    margin: 1px, 1px, 1px, 1px;
+    padding: 0 2px;
+    border: 0;
+    text-align: center;
+    vertical-align: middle;
+    font-family: monospace;
+}
+
+.sensors-high-noborder {
+    background: DarkOrange;
+    margin: 1px, 1px, 1px, 1px;
+    padding: 0 2px;
+    border: 0;
+    text-align: center;
+    vertical-align: middle;
+    font-family: monospace;
+}
+
+.sensors-critical-noborder {
+    background: FireBrick;
+    margin: 1px, 1px, 1px, 1px;
+    padding: 0 2px;
+    border: 0;
+    text-align: center;
+    vertical-align: middle;
+    font-family: monospace;
+}
+
+.sensors-size80 {
+    font-size: 80%;
+}
+
+.sensors-size81 {
+    font-size: 81%;
+}
+
+.sensors-size82 {
+    font-size: 82%;
+}
+
+.sensors-size83 {
+    font-size: 83%;
+}
+
+.sensors-size84 {
+    font-size: 84%;
+}
+
+.sensors-size85 {
+    font-size: 85%;
+}
+
+.sensors-size86 {
+    font-size: 86%;
+}
+
+.sensors-size87 {
+    font-size: 87%;
+}
+
+.sensors-size88 {
+    font-size: 88%;
+}
+
+.sensors-size89 {
+    font-size: 89%;
+}
+
+.sensors-size90 {
+    font-size: 90%;
+}
+
+.sensors-size91 {
+    font-size: 91%;
+}
+
+.sensors-size92 {
+    font-size: 92%;
+}
+
+.sensors-size93 {
+    font-size: 93%;
+}
+
+.sensors-size94 {
+    font-size: 94%;
+}
+
+.sensors-size95 {
+    font-size: 95%;
+}
+
+.sensors-size96 {
+    font-size: 96%;
+}
+
+.sensors-size97 {
+    font-size: 97%;
+}
+
+.sensors-size98 {
+    font-size: 98%;
+}
+
+.sensors-size99 {
+    font-size: 99%;
+}
+
+.sensors-size100 {
+    font-size: 100%;
+}
+
+.sensors-size101 {
+    font-size: 101%;
+}
+
+.sensors-size102 {
+    font-size: 102%;
+}
+
+.sensors-size103 {
+    font-size: 103%;
+}
+
+.sensors-size104 {
+    font-size: 104%;
+}
+
+.sensors-size105 {
+    font-size: 105%;
+}
+
+.sensors-size106 {
+    font-size: 106%;
+}
+
+.sensors-size107 {
+    font-size: 107%;
+}
+
+.sensors-size108 {
+    font-size: 108%;
+}
+
+.sensors-size109 {
+    font-size: 109%;
+}
+
+.sensors-size110 {
+    font-size: 110%;
+}
+
+.sensors-size111 {
+    font-size: 111%;
+}
+
+.sensors-size112 {
+    font-size: 112%;
+}
+
+.sensors-size113 {
+    font-size: 113%;
+}
+
+.sensors-size114 {
+    font-size: 114%;
+}
+
+.sensors-size115 {
+    font-size: 115%;
+}
+
+.sensors-size116 {
+    font-size: 116%;
+}
+
+.sensors-size117 {
+    font-size: 117%;
+}
+
+.sensors-size118 {
+    font-size: 118%;
+}
+
+.sensors-size119 {
+    font-size: 119%;
+}
+
+.sensors-size120 {
+    font-size: 120%;
+}
+
+.sensors-colorwhite {
+    color: white;
+}
+
+.sensors-colorblack {
+    color: black;
+}
+
+.sensors-colorgrey {
+    color: grey;
+}
+
+.sensors-colorlightgrey {
+    color: "#D3D3D3";
+}
