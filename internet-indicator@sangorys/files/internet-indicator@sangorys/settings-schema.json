@@ -12,7 +12,7 @@
   
   "update-interval-when-internet": {
     "type": "spinbutton",
-    "default": 3,
+    "default": 5,
     "min": 1,
     "max": 3600,
     "step": 1,
