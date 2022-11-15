@@ -4584,6 +4584,20 @@ function createPopupMenu(props) {
         event.get_key_symbol() === KEY_Escape && close();
         return false;
     });
+    launcher.connect('queue-relayout', () => {
+        if (!box.visible)
+            return;
+        setTimeout(() => {
+            setLayout();
+        }, 0);
+    });
+    bin.connect('queue-relayout', () => {
+        if (!box.visible)
+            return;
+        setTimeout(() => {
+            setLayout();
+        }, 0);
+    });
     function setLayout() {
         const freeSpace = calculateFreeSpace();
         const maxHeight = calculateMaxHeight(freeSpace);
