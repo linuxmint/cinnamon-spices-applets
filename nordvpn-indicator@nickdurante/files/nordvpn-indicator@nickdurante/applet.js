@@ -85,7 +85,7 @@ NordVPNApplet.prototype = {
 
 	},
 
-    _run_cmd: function(command) {
+    _run_cmd: function() {
       try {
         let proc = Gio.Subprocess.new(
           ['nordvpn', 'status'],
