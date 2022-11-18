@@ -4,6 +4,7 @@ const Mainloop = imports.mainloop;
 const Lang = imports.lang;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const UUID = "nordvpn-indicator@nickdurante";
@@ -86,16 +87,33 @@ NordVPNApplet.prototype = {
 
     _run_cmd: function(command) {
       try {
-        let [result, stdout, stderr] = GLib.spawn_command_line_sync(command);
-        if (stdout != null) {
-          return stdout.toString();
-        }
+        let proc = Gio.Subprocess.new(
+          ['nordvpn', 'status'],
+          Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+        );
+  
+        return new Promise((resolve, reject) => {
+          proc.communicate_utf8_async(null, null, (proc, res) => {
+            try {
+              let [, stdout, stderr] = proc.communicate_utf8_finish(res);
+              let status = proc.get_exit_status();
+  
+              if (status !== 0) {
+                throw new Gio.IOErrorEnum({
+                  code: Gio.io_error_from_errno(status),
+                  message: stderr ? stderr.trim() : GLib.strerror(status)
+                });
+              }
+              resolve(stdout.trim());
+            } catch (e) {
+              reject(e);
+            }
+          });
+        });
       }
       catch (e) {
         global.logError(e);
       }
-
-      return "";
     },
 
     _new_freq: function(){
@@ -107,25 +125,30 @@ NordVPNApplet.prototype = {
     },
 
     _get_status: function(){
-        let status = this._run_cmd("nordvpn status");
-        let regex = /Status: ([a-zA-Z]+)/i;
-        let reg_result = status.match(regex);
-        let result;
-        if (reg_result !=null){
-          result=reg_result[1]
-        }
+      let promise_return = this._run_cmd();
+      promise_return.then((value) => {
         let outString;
-        if (result === "Connected"){
-            this.connected = true;
-            outString = "ON";
-        }else if (result === "Disconnected"){
-            this.connected = false;
-            outString = "OFF";
-        }else{
-            this.connected = false,
+        let result;
+        let regex = /Status: ([a-zA-Z]+)/i;
+        try {
+          result = regex.exec(value)[1];
+        }
+        catch (e) {
+          global.logError(e);
+        }
+        if (result === "Connected") {
+          this.connected = true;
+          outString = "ON";
+        } else if (result === "Disconnected") {
+          this.connected = false;
+          outString = "OFF";
+        } else {
+          this.connected = false,
             outString = "..."
         }
         this.set_applet_label(outString);
+      })
+      promise_return.catch((e) => { global.logError(e);; })
     },
 
     _update_loop: function () {
