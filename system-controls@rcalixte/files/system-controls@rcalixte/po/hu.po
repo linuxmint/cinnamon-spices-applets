@@ -57,7 +57,7 @@ msgstr ""
 "Egy egyszerű rendszervezérlő kisalkalmazás a Cinnamon újraindításához, a "
 "képernyő zárolásához, a felhasználóváltáshoz, a bejelentkezéshez, a "
 "felfüggesztéshez, a hibernáláshoz, az újraindításhoz vagy a számítógép "
-"kikapcsolásához."
+"kikapcsolásához"
 
 #. metadata.json->name
 msgid "System Controls Applet"
