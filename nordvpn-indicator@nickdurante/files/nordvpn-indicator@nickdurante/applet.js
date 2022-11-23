@@ -149,7 +149,7 @@ NordVPNApplet.prototype = {
       }
       this.set_applet_label(outString);
     })
-    promise_return.catch((e) => { global.logError(e); this.set_applet_label("Error"); })
+    promise_return.catch((e) => { global.logError(e); this.set_applet_label("..."); })
 
   },
 
