@@ -1,4 +1,5 @@
 const Soup = imports.gi.Soup;
+const ByteArray = imports.byteArray;
 const St = imports.gi.St;
 
 const Applet = imports.ui.applet;
@@ -171,13 +172,24 @@ class SpicesNotifier extends Applet.TextIconApplet {
 		/* The question mark at the end is a hack to force the server to not
 		   send us a very old cached version of the json file. */
 		let msg = Soup.Message.new('GET', `${SPICES_URL}/json/${type}.json?`);
-		session.queue_message(msg, (session, message) => {
-			if (message.status_code === 200 && iteration === this.iteration) {
-				let xlets = JSON.parse(message.response_body.data);
-				this.save_xlet_cache(type, xlets);
-				this.on_xlets_loaded(type, xlets);
-			}
-		});
+        if (Soup.MAJOR_VERSION === 2) {
+            session.queue_message(msg, (session, message) => {
+                if (message.status_code === 200 && iteration === this.iteration) {
+                    let xlets = JSON.parse(message.response_body.data);
+                    this.save_xlet_cache(type, xlets);
+                    this.on_xlets_loaded(type, xlets);
+                }
+            });
+        } else { //version 3
+            session.send_and_read_async(msg, Soup.MessagePriority.NORMAL, null, (session, message) => {
+                if (msg.get_status() === 200 && iteration === this.iteration) {
+                    const bytes = session.send_and_read_finish(message);
+                    let xlets = JSON.parse(ByteArray.toString(bytes.get_data()));
+                    this.save_xlet_cache(type, xlets);
+                    this.on_xlets_loaded(type, xlets);
+                }
+            });
+        }
 	}
 
 	save_xlet_cache(type, xlets) {
@@ -206,23 +218,37 @@ class SpicesNotifier extends Applet.TextIconApplet {
 			return;
 		}
 
+        const process_result = result => {
+            result = COMMENTS_REGEX.exec(result);
+            if (result && result[1]) {
+                let count = parseInt(result[1]);
+                this.set_comments_cache(xlet, count, read);
+                item.update_comment_count(count - read);
+            } else {
+                item.actor.hide();
+                global.logWarning(xlet.name + ": This xlet is cached in the "
+                        + "xlet.json file but doesn't actually exist in the "
+                        + "Spices now OR the Cinnamon Spices changed the ID "
+                        + "(please report if there are 0 items)");
+            }
+        };
+        
 		let msg = Soup.Message.new('GET', xlet.page);
-		session.queue_message(msg, (session, message) => {
-			if (message.status_code === 200) {
-				let result = COMMENTS_REGEX.exec(message.response_body.data);
-				if (result && result[1]) {
-					let count = parseInt(result[1]);
-					this.set_comments_cache(xlet, count, read);
-					item.update_comment_count(count - read);
-				} else {
-					item.actor.hide();
-					global.logWarning(xlet.name + ": This xlet is cached in the "
-							+ "xlet.json file but doesn't actually exist in the "
-							+ "Spices now OR the Cinnamon Spices changed the ID "
-							+ "(please report if there are 0 items)");
-				}
-			}
-		});
+        if (Soup.MAJOR_VERSION === 2) {
+            session.queue_message(msg, (session, message) => {
+                if (message.status_code === 200) {
+                    process_result(message.response_body.data);
+                }
+            });
+        } else { //version 3
+            session.send_and_read_async(msg, Soup.MessagePriority.NORMAL, null, (session, message) => {
+                if (msg.get_status() === 200) {
+                    const bytes = session.send_and_read_finish(message);
+                    process_result(ByteArray.toString(bytes.get_data()));
+                }
+            });
+            
+        }
 	}
 
 	set_comments_cache(xlet, count, read) {

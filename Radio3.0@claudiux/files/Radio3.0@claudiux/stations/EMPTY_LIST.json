@@ -1,0 +1,24 @@
+[
+    {
+        "inc": true,
+        "play": false,
+        "name": "Blues (Example of Category)",
+        "codec": "",
+        "bitrate": "",
+        "url": "",
+        "uuid": "",
+        "homepage": "",
+        "tags": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Blues Radio (Example of Radio)",
+        "codec": "MP3",
+        "bitrate": "192",
+        "url": "https://i4.streams.ovh:8352/stream",
+        "uuid": "",
+        "homepage": "https://bluesradio.gr/",
+        "tags": "blues"
+    }
+]

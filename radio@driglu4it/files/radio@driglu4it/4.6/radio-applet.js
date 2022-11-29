@@ -40,6 +40,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
+  "addOnAppletMovedCallback": () => (/* binding */ addOnAppletMovedCallback),
   "main": () => (/* binding */ main)
 });
 
@@ -2676,8 +2677,13 @@ const { getDBusProperties, getDBus, getDBusProxyWithOwner } = imports.misc.inter
 const { spawnCommandLine } = imports.misc.util;
 // see https://lazka.github.io/pgi-docs/Cvc-1.0/index.html
 const { MixerControl } = imports.gi.Cvc;
+// TODO: this is not really right as the mpvHandler is initally undefined but it is much easier that way..
 let mpvHandler;
 const initMpvHandler = () => {
+    if (mpvHandler) {
+        global.logWarning('mpvHandler already initiallized');
+        return;
+    }
     mpvHandler = createMpvHandler();
 };
 function createMpvHandler() {
@@ -2749,7 +2755,8 @@ function createMpvHandler() {
         settingsObject.lastVolume = lastVolume;
     }
     function deactivateAllListener() {
-        dbus.disconnectSignal(nameOwnerSignalId);
+        if (nameOwnerSignalId)
+            dbus === null || dbus === void 0 ? void 0 : dbus.disconnectSignal(nameOwnerSignalId);
         if (mediaPropsListenerId)
             mediaProps === null || mediaProps === void 0 ? void 0 : mediaProps.disconnectSignal(mediaPropsListenerId);
         if (seekListenerId)
@@ -4039,8 +4046,8 @@ function initPolyfills() {
 ;// CONCATENATED MODULE: ./src/lib/AppletContainer.ts
 const { Applet, AllowedLayout } = imports.ui.applet;
 const { EventType } = imports.gi.Clutter;
-function createAppletContainer(args) {
-    const { onClick, onScroll, onMiddleClick, onMoved, onRemoved, onRightClick } = args;
+function createAppletContainer(props) {
+    const { onClick, onScroll, onMiddleClick, onAppletMovedCallbacks, onRemoved, onRightClick } = props;
     const applet = new Applet(__meta.orientation, __meta.panel.height, __meta.instanceId);
     let appletReloaded = false;
     applet.on_applet_clicked = () => {
@@ -4056,10 +4063,10 @@ function createAppletContainer(args) {
         appletReloaded = true;
     };
     applet.on_applet_removed_from_panel = function () {
-        appletReloaded ? onMoved() : onRemoved();
+        appletReloaded ? onAppletMovedCallbacks.forEach((cb) => cb()) : onRemoved();
         appletReloaded = false;
     };
-    applet.actor.connect('event', (actor, event) => {
+    applet.actor.connect("event", (actor, event) => {
         if (event.type() !== EventType.BUTTON_PRESS)
             return false;
         if (event.get_button() === 3) {
@@ -4068,9 +4075,15 @@ function createAppletContainer(args) {
         }
         return false;
     });
-    applet.actor.connect('scroll-event', (actor, event) => {
+    applet.actor.connect("scroll-event", (actor, event) => {
         onScroll(event.get_scroll_direction());
         return false;
+    });
+    // this is a workaround to ensure that the Applet is still clickable after the applet has dropped 
+    global.settings.connect("changed::panel-edit-mode", () => {
+        const inhibitDragging = !global.settings.get_boolean("panel-edit-mode");
+        // @ts-ignore
+        applet['_draggable'].inhibit = inhibitDragging;
     });
     return applet;
 }
@@ -4167,11 +4180,11 @@ function notifyError(prefix, errMessage, options) {
 
 ;// CONCATENATED MODULE: ./src/services/youtubeDownload/YoutubeDl.ts
 const { spawnCommandLineAsyncIO } = imports.misc.util;
-function downloadWithYoutubeDl(props) {
+function downloadWithYouTubeDl(props) {
     const { downloadDir, title, onFinished, onSuccess, onError } = props;
     let hasBeenCancelled = false;
     // ytsearch option found here https://askubuntu.com/a/731511/1013434 (not given in the youtube-dl docs ...)
-    const downloadCommand = `youtube-dl --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\\"')}" --add-metadata --embed-thumbnail`;
+    const downloadCommand = `youtube-dl --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\"')}" --add-metadata --embed-thumbnail`;
     const process = spawnCommandLineAsyncIO(downloadCommand, (stdout, stderr) => {
         onFinished();
         if (hasBeenCancelled) {
@@ -4179,12 +4192,7 @@ function downloadWithYoutubeDl(props) {
             return;
         }
         if (stdout) {
-            const downloadPath = getDownloadPath(stdout);
-            if (!downloadPath) {
-                onError('downloadPath could not be determined from stdout. Most likely the download has failed', downloadCommand);
-                return;
-            }
-            onSuccess(downloadPath);
+            onSuccess();
             return;
         }
         if (stderr) {
@@ -4199,21 +4207,14 @@ function downloadWithYoutubeDl(props) {
     }
     return { cancel };
 }
-function getDownloadPath(stdout) {
-    var _a;
-    const arrayOfLines = stdout.match(/[^\r\n]+/g);
-    // there is only one line in stdout which gives the path of the downloaded mp3. This start with [ffmpeg] Destination ...
-    const searchString = '[ffmpeg] Destination: ';
-    return (_a = arrayOfLines === null || arrayOfLines === void 0 ? void 0 : arrayOfLines.find(line => line.includes(searchString))) === null || _a === void 0 ? void 0 : _a.split(searchString)[1];
-}
 
 ;// CONCATENATED MODULE: ./src/services/youtubeDownload/YtDlp.ts
 const { spawnCommandLineAsyncIO: YtDlp_spawnCommandLineAsyncIO } = imports.misc.util;
-// TODO: there are some redudances with downloadWithYoutubeDl.
+// TODO: there are some redudances with downloadWithYouTubeDl.
 function downloadWithYtDlp(props) {
     const { downloadDir, title, onFinished, onSuccess, onError } = props;
     let hasBeenCancelled = false;
-    const downloadCommand = `yt-dlp --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\\"')}" --add-metadata --embed-thumbnail`;
+    const downloadCommand = `yt-dlp --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\"')}" --add-metadata --embed-thumbnail`;
     const process = YtDlp_spawnCommandLineAsyncIO(downloadCommand, (stdout, stderr) => {
         onFinished();
         if (hasBeenCancelled) {
@@ -4221,12 +4222,7 @@ function downloadWithYtDlp(props) {
             return;
         }
         if (stdout) {
-            const downloadPath = YtDlp_getDownloadPath(stdout);
-            if (!downloadPath) {
-                onError('downloadPath could not be determined from stdout. Most likely the download has failed', downloadCommand);
-                return;
-            }
-            onSuccess(downloadPath);
+            onSuccess();
             return;
         }
         if (stderr) {
@@ -4240,12 +4236,6 @@ function downloadWithYtDlp(props) {
     }
     return { cancel };
 }
-function YtDlp_getDownloadPath(stdout) {
-    var _a;
-    const arrayOfLines = stdout.match(/[^\r\n]+/g);
-    const searchString = '[ExtractAudio] Destination: ';
-    return (_a = arrayOfLines === null || arrayOfLines === void 0 ? void 0 : arrayOfLines.find(line => line.includes(searchString))) === null || _a === void 0 ? void 0 : _a.split(searchString)[1];
-}
 
 ;// CONCATENATED MODULE: ./src/services/youtubeDownload/YoutubeDownloadManager.ts
 
@@ -4254,96 +4244,126 @@ function YtDlp_getDownloadPath(stdout) {
 
 
 const { spawnCommandLine: YoutubeDownloadManager_spawnCommandLine } = imports.misc.util;
-const { get_tmp_dir, get_home_dir: YoutubeDownloadManager_get_home_dir } = imports.gi.GLib;
-const { File, FileCopyFlags } = imports.gi.Gio;
-const notifyYoutubeDownloadFailed = (props) => {
+const { get_home_dir: YoutubeDownloadManager_get_home_dir, dir_make_tmp, DateTime } = imports.gi.GLib;
+const { File, FileCopyFlags, FileQueryInfoFlags } = imports.gi.Gio;
+const notifyYouTubeDownloadFailed = (props) => {
     const { youtubeCli, errorMessage } = props;
-    notifyError(`Couldn't download Song from Youtube due to an Error. Make Sure you have the newest version of ${youtubeCli} installed. 
+    notifyError(`Couldn't download Song from YouTube due to an Error. Make Sure you have the newest version of ${youtubeCli} installed. 
     \n<b>Important:</b> Don't use apt for the installation but follow the installation instruction given on the Radio Applet Site in the Cinnamon Store instead`, errorMessage, {
         additionalBtns: [
             {
-                text: 'View Installation Instruction',
-                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open ${APPLET_SITE} `)
-            }
-        ]
+                text: "View Installation Instruction",
+                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open ${APPLET_SITE} `),
+            },
+        ],
     });
 };
-const notifyYoutubeDownloadStarted = (title) => {
+const notifyYouTubeDownloadStarted = (title) => {
     notify(`Downloading ${title} ...`, {
         buttons: [
             {
-                text: 'Cancel',
-                onClick: () => cancelDownload(title)
-            }
-        ]
+                text: "Cancel",
+                onClick: () => cancelDownload(title),
+            },
+        ],
     });
 };
-const notifyYoutubeDownloadFinished = (props) => {
+const notifyYouTubeDownloadFinished = (props) => {
     const { downloadPath, fileAlreadyExist = false } = props;
-    notify(fileAlreadyExist ?
-        'Downloaded Song not saved as a file with the same name already exists' :
-        `Download finished. File saved to ${downloadPath}`, {
+    notify(fileAlreadyExist
+        ? "Downloaded Song not saved as a file with the same name already exists"
+        : `Download finished. File saved to ${downloadPath}`, {
         isMarkup: true,
         transient: false,
         buttons: [
             {
-                text: 'Play',
-                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open '${downloadPath}'`)
-            }
-        ]
+                text: "Play",
+                onClick: () => YoutubeDownloadManager_spawnCommandLine(`xdg-open '${downloadPath}'`),
+            },
+        ],
     });
 };
 let downloadProcesses = [];
 const downloadingSongsChangedListener = [];
-function downloadSongFromYoutube(title) {
+function downloadSongFromYouTube(title) {
     const downloadDir = configs.settingsObject.musicDownloadDir;
     const youtubeCli = configs.settingsObject.youtubeCli;
-    const music_dir_absolut = downloadDir.charAt(0) === '~' ?
-        downloadDir.replace('~', YoutubeDownloadManager_get_home_dir()) : downloadDir;
+    const music_dir_absolut = downloadDir.charAt(0) === "~"
+        ? downloadDir.replace("~", YoutubeDownloadManager_get_home_dir())
+        : downloadDir;
     if (!title)
         return;
-    const sameSongIsDownloading = downloadProcesses.find(process => {
+    const sameSongIsDownloading = downloadProcesses.find((process) => {
         return process.songTitle === title;
     });
     if (sameSongIsDownloading)
         return;
+    const tmpDirPath = dir_make_tmp(null);
     const downloadProps = {
         title,
-        downloadDir: get_tmp_dir(),
+        downloadDir: tmpDirPath,
         onError: (errorMessage, downloadCommand) => {
-            notifyYoutubeDownloadFailed({ youtubeCli, errorMessage: `The following error occured at youtube download attempt: ${errorMessage}. The used download Command was: ${downloadCommand}` });
+            notifyYouTubeDownloadFailed({
+                youtubeCli,
+                errorMessage: `The following error occured at youtube download attempt: ${errorMessage}. The used download Command was: ${downloadCommand}`,
+            });
         },
         onFinished: () => {
-            downloadProcesses = downloadProcesses.filter(downloadingSong => downloadingSong.songTitle !== title);
-            downloadingSongsChangedListener.forEach(listener => listener(downloadProcesses));
+            downloadProcesses = downloadProcesses.filter((downloadingSong) => downloadingSong.songTitle !== title);
+            downloadingSongsChangedListener.forEach((listener) => listener(downloadProcesses));
         },
-        onSuccess: (downloadPath) => {
-            const tmpFile = File.new_for_path(downloadPath);
-            const fileName = tmpFile.get_basename();
-            const targetPath = `${music_dir_absolut}/${fileName}`;
-            const targetFile = File.parse_name(targetPath);
-            if (targetFile.query_exists(null)) {
-                notifyYoutubeDownloadFinished({ downloadPath: targetPath, fileAlreadyExist: true });
-                return;
-            }
+        onSuccess: () => {
             try {
-                // @ts-ignore
-                tmpFile.move(File.parse_name(targetPath), FileCopyFlags.BACKUP, null, null);
-                notifyYoutubeDownloadFinished({ downloadPath: targetPath });
+                moveFileFromTmpDir({
+                    targetDirPath: music_dir_absolut,
+                    tmpDirPath,
+                    onFileMoved: (props) => {
+                        const { fileAlreadyExist, targetFilePath } = props;
+                        updateFileModifiedTime(targetFilePath);
+                        notifyYouTubeDownloadFinished({
+                            downloadPath: targetFilePath,
+                            fileAlreadyExist,
+                        });
+                    },
+                });
             }
             catch (error) {
-                const errorMessage = error instanceof imports.gi.GLib.Error ? error.message : 'Unknown Error Type';
-                notifyYoutubeDownloadFailed({ youtubeCli, errorMessage: `Failed to copy download from tmp dir. The following error occurred: ${errorMessage}` });
+                const errorMessage = error instanceof imports.gi.GLib.Error ? error.message : error;
+                notifyYouTubeDownloadFailed({
+                    youtubeCli,
+                    errorMessage: `Failed to copy download from tmp dir. The following error occurred: ${errorMessage}`,
+                });
             }
-        }
+        },
     };
-    const { cancel } = youtubeCli === 'youtube-dl' ?
-        downloadWithYoutubeDl(downloadProps) :
-        downloadWithYtDlp(downloadProps);
-    notifyYoutubeDownloadStarted(title);
+    const { cancel } = youtubeCli === "youtube-dl"
+        ? downloadWithYouTubeDl(downloadProps)
+        : downloadWithYtDlp(downloadProps);
+    notifyYouTubeDownloadStarted(title);
     downloadProcesses.push({ songTitle: title, cancelDownload: cancel });
-    downloadingSongsChangedListener.forEach(listener => listener(downloadProcesses));
+    downloadingSongsChangedListener.forEach((listener) => listener(downloadProcesses));
 }
+const moveFileFromTmpDir = (props) => {
+    var _a;
+    const { tmpDirPath, targetDirPath, onFileMoved } = props;
+    const fileName = (_a = File.new_for_path(tmpDirPath)
+        .enumerate_children("standard::*", FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null)
+        .next_file(null)) === null || _a === void 0 ? void 0 : _a.get_name();
+    if (!fileName) {
+        throw new Error(`filename couldn't be determined`);
+    }
+    const tmpFilePath = `${tmpDirPath}/${fileName}`;
+    const tmpFile = File.new_for_path(tmpFilePath);
+    const targetFilePath = `${targetDirPath}/${fileName}`;
+    const targetFile = File.parse_name(targetFilePath);
+    if (targetFile.query_exists(null)) {
+        onFileMoved({ targetFilePath, fileAlreadyExist: true });
+        return;
+    }
+    // @ts-ignore
+    tmpFile.move(File.parse_name(targetFilePath), FileCopyFlags.BACKUP, null, null);
+    onFileMoved({ targetFilePath, fileAlreadyExist: false });
+};
 const getCurrentDownloadingSongs = () => {
     return downloadProcesses.map((downloadingSong) => downloadingSong.songTitle);
 };
@@ -4355,11 +4375,28 @@ const cancelDownload = (songTitle) => {
     }
     downloadProcess.cancelDownload();
 };
+/** for some reasons the downloaded files have by default a weird modified time stamp (this is neither the time the file has been created locally nor any metadata about the song), which makes it hard (impossible?) to sort the songs by last recently added.  */
+const updateFileModifiedTime = (filePath) => {
+    YoutubeDownloadManager_spawnCommandLine(`touch ${filePath
+        .replaceAll("'", "\\'")
+        .replaceAll(" ", "\\ ")
+        .replaceAll('"', '\\"')}`);
+    // TODO: this would be better but for some reasons it doesn't work:
+    // const file = File.new_for_path(filePath);
+    // const fileInfo = file.query_info(
+    //   "standard::*",
+    //   FileQueryInfoFlags.NOFOLLOW_SYMLINKS,
+    //   null
+    // );
+    // const now = DateTime.new_now_local();
+    // fileInfo.set_modification_date_time(now);
+};
 function addDownloadingSongsChangeListener(callback) {
     downloadingSongsChangedListener.push(callback);
 }
 
 ;// CONCATENATED MODULE: ./src/ui/RadioApplet/RadioAppletTooltip.ts
+
 
 
 
@@ -4371,6 +4408,8 @@ function createRadioAppletTooltip(args) {
     tooltip['_tooltip'].set_style("text-align: left;");
     const setRefreshTooltip = () => {
         var _a;
+        // @ts-ignore
+        tooltip.orientation = __meta.orientation;
         if (mpvHandler.getPlaybackStatus() === 'Stopped') {
             tooltip.set_markup(DEFAULT_TOOLTIP_TXT);
             return;
@@ -4401,7 +4440,8 @@ function createRadioAppletTooltip(args) {
         mpvHandler.addPlaybackStatusChangeHandler,
         mpvHandler.addTitleChangeHandler,
         mpvHandler.addChannelChangeHandler,
-        addDownloadingSongsChangeListener
+        addDownloadingSongsChangeListener,
+        addOnAppletMovedCallback
     ].forEach(cb => cb(setRefreshTooltip));
     setRefreshTooltip();
     return tooltip;
@@ -4409,6 +4449,7 @@ function createRadioAppletTooltip(args) {
 
 ;// CONCATENATED MODULE: ./src/lib/AppletIcon.ts
 const { Icon: AppletIcon_Icon, IconType: AppletIcon_IconType } = imports.gi.St;
+// @ts-ignore
 const { Point } = imports.gi.Clutter;
 function createAppletIcon(props) {
     const icon_type = (props === null || props === void 0 ? void 0 : props.icon_type) || AppletIcon_IconType.SYMBOLIC;
@@ -4417,13 +4458,15 @@ function createAppletIcon(props) {
         return panel.getPanelZoneIconSize(__meta.locationLabel, icon_type);
     }
     function getStyleClass() {
-        return icon_type === AppletIcon_IconType.SYMBOLIC ? 'system-status-icon' : 'applet-icon';
+        return icon_type === AppletIcon_IconType.SYMBOLIC
+            ? "system-status-icon"
+            : "applet-icon";
     }
     const icon = new AppletIcon_Icon(Object.assign({ icon_type, style_class: getStyleClass(), icon_size: getIconSize(), pivot_point: new Point({ x: 0.5, y: 0.5 }) }, props));
-    panel.connect('icon-size-changed', () => {
+    panel.connect("icon-size-changed", () => {
         icon.set_icon_size(getIconSize());
     });
-    icon.connect('notify::icon-type', () => {
+    icon.connect("notify::icon-type", () => {
         icon.style_class = getStyleClass();
     });
     return icon;
@@ -4522,8 +4565,9 @@ const { uiGroup, layoutManager, panelManager, pushModal, popModal } = imports.ui
 const { KEY_Escape } = imports.gi.Clutter;
 const { util_get_transformed_allocation } = imports.gi.Cinnamon;
 const { PanelLoc } = imports.ui.popupMenu;
-function createPopupMenu(args) {
-    const { launcher } = args;
+const onPopupMenuClosedHandlers = [];
+function createPopupMenu(props) {
+    const { launcher } = props;
     const box = new BoxLayout({
         style_class: 'popup-menu-content',
         vertical: true,
@@ -4635,6 +4679,7 @@ function createPopupMenu(args) {
         box.hide();
         launcher.remove_style_pseudo_class('checked');
         popModal(box);
+        onPopupMenuClosedHandlers.forEach((handler) => handler());
     }
     function handleClick(actor, event) {
         if (!box.visible) {
@@ -4645,6 +4690,10 @@ function createPopupMenu(args) {
         const appletClicked = launcher.contains(clickedActor);
         (!binClicked && !appletClicked) && close();
     }
+    const addPopupMenuCloseHandler = (changeHandler) => {
+        onPopupMenuClosedHandlers.push(changeHandler);
+    };
+    box.addPopupMenuCloseHandler = addPopupMenuCloseHandler;
     box.toggle = toggle;
     // TODO: remove close
     box.close = close;
@@ -4690,14 +4739,19 @@ function createSeparatorMenuItem() {
 
 ;// CONCATENATED MODULE: ./src/lib/ActivWidget.ts
 const { KEY_space, KEY_KP_Enter, KEY_Return } = imports.gi.Clutter;
+/**  */
 function createActivWidget(args) {
     const { widget, onActivated } = args;
     // TODO: understand can_focus
     widget.can_focus = true;
     widget.reactive = true;
     widget.track_hover = true;
-    widget.connect('button-release-event', () => {
-        onActivated === null || onActivated === void 0 ? void 0 : onActivated();
+    widget.connect('button-release-event', (_, event) => {
+        const button = event.get_button();
+        // only if it is not a right click
+        if (button !== 3) {
+            onActivated === null || onActivated === void 0 ? void 0 : onActivated();
+        }
         return false;
     });
     // TODO: This is needed because some themes (at least Adapta-Nokto but maybe also others) don't provide style for the hover pseudo class. But it would be much easier to once (and on theme changes) programmatically set the hover pseudo class equal to the active pseudo class when the hover class isn't provided by the theme. 
@@ -4726,21 +4780,22 @@ function limitString(text, maxCharNumber) {
 
 
 const { Icon: SimpleMenuItem_Icon, IconType: SimpleMenuItem_IconType, Label: SimpleMenuItem_Label, BoxLayout: SimpleMenuItem_BoxLayout } = imports.gi.St;
+// @ts-ignore
 const { Point: SimpleMenuItem_Point } = imports.gi.Clutter;
 function createSimpleMenuItem(args) {
-    const { text: initialText = '', maxCharNumber, iconName, onActivated } = args;
+    const { text: initialText = "", maxCharNumber, iconName, onActivated, onRightClick } = args;
     const icon = new SimpleMenuItem_Icon({
         icon_type: SimpleMenuItem_IconType.SYMBOLIC,
-        style_class: 'popup-menu-icon',
+        style_class: "popup-menu-icon",
         pivot_point: new SimpleMenuItem_Point({ x: 0.5, y: 0.5 }),
-        icon_name: iconName || '',
-        visible: !!iconName
+        icon_name: iconName || "",
+        visible: !!iconName,
     });
     const label = new SimpleMenuItem_Label({
-        text: maxCharNumber ? limitString(initialText, maxCharNumber) : initialText
+        text: maxCharNumber ? limitString(initialText, maxCharNumber) : initialText,
     });
     const container = new SimpleMenuItem_BoxLayout({
-        style_class: 'popup-menu-item'
+        style_class: "popup-menu-item",
     });
     container.add_child(icon);
     container.add_child(label);
@@ -4761,9 +4816,20 @@ function createSimpleMenuItem(args) {
         actor: container,
         setIconName,
         setText,
-        getIcon: () => icon
+        getIcon: () => icon,
     };
-    onActivated && createActivWidget({ widget: container, onActivated: () => onActivated(menuItem) });
+    container.connect('button-press-event', (_, event) => {
+        const button = event.get_button();
+        if (button === 3) {
+            onRightClick === null || onRightClick === void 0 ? void 0 : onRightClick(menuItem);
+        }
+        return false;
+    });
+    onActivated &&
+        createActivWidget({
+            widget: container,
+            onActivated: () => onActivated(menuItem),
+        });
     return menuItem;
 }
 
@@ -4801,9 +4867,9 @@ function createInfoSection() {
 
 ;// CONCATENATED MODULE: ./src/lib/Slider.ts
 const { DrawingArea: Slider_DrawingArea } = imports.gi.St;
-const { cairo_set_source_color, grab_pointer, ungrab_pointer } = imports.gi.Clutter;
+const { cairo_set_source_color } = imports.gi.Clutter;
 function createSlider(args) {
-    const style_class = 'popup-slider-menu-item';
+    const style_class = "popup-slider-menu-item";
     const { initialValue, onValueChanged } = args;
     let value;
     if (initialValue != null)
@@ -4811,23 +4877,23 @@ function createSlider(args) {
     const drawing = new Slider_DrawingArea({
         style_class,
         reactive: true,
-        x_expand: true
+        x_expand: true,
     });
-    drawing.connect('repaint', () => {
+    drawing.connect("repaint", () => {
         const cr = drawing.get_context();
         const themeNode = drawing.get_theme_node();
         const [width, height] = drawing.get_surface_size();
-        const handleRadius = themeNode.get_length('-slider-handle-radius');
-        const sliderHeight = themeNode.get_length('-slider-height');
-        const sliderBorderWidth = themeNode.get_length('-slider-border-width');
+        const handleRadius = themeNode.get_length("-slider-handle-radius");
+        const sliderHeight = themeNode.get_length("-slider-height");
+        const sliderBorderWidth = themeNode.get_length("-slider-border-width");
         const sliderBorderRadius = Math.min(width, sliderHeight) / 2;
-        const sliderBorderColor = themeNode.get_color('-slider-border-color');
-        const sliderColor = themeNode.get_color('-slider-background-color');
-        const sliderActiveBorderColor = themeNode.get_color('-slider-active-border-color');
-        const sliderActiveColor = themeNode.get_color('-slider-active-background-color');
+        const sliderBorderColor = themeNode.get_color("-slider-border-color");
+        const sliderColor = themeNode.get_color("-slider-background-color");
+        const sliderActiveBorderColor = themeNode.get_color("-slider-active-border-color");
+        const sliderActiveColor = themeNode.get_color("-slider-active-background-color");
         const TAU = Math.PI * 2;
         const handleX = handleRadius + (width - 2 * handleRadius) * value;
-        cr.arc(sliderBorderRadius + sliderBorderWidth, height / 2, sliderBorderRadius, TAU * 1 / 4, TAU * 3 / 4);
+        cr.arc(sliderBorderRadius + sliderBorderWidth, height / 2, sliderBorderRadius, (TAU * 1) / 4, (TAU * 3) / 4);
         cr.lineTo(handleX, (height - sliderHeight) / 2);
         cr.lineTo(handleX, (height + sliderHeight) / 2);
         cr.lineTo(sliderBorderRadius + sliderBorderWidth, (height + sliderHeight) / 2);
@@ -4836,7 +4902,7 @@ function createSlider(args) {
         cairo_set_source_color(cr, sliderActiveBorderColor);
         cr.setLineWidth(sliderBorderWidth);
         cr.stroke();
-        cr.arc(width - sliderBorderRadius - sliderBorderWidth, height / 2, sliderBorderRadius, TAU * 3 / 4, TAU * 1 / 4);
+        cr.arc(width - sliderBorderRadius - sliderBorderWidth, height / 2, sliderBorderRadius, (TAU * 3) / 4, (TAU * 1) / 4);
         cr.lineTo(handleX, (height + sliderHeight) / 2);
         cr.lineTo(handleX, (height - sliderHeight) / 2);
         cr.lineTo(width - sliderBorderRadius - sliderBorderWidth, (height - sliderHeight) / 2);
@@ -4852,16 +4918,16 @@ function createSlider(args) {
         cr.fill();
         cr.$dispose();
     });
-    drawing.connect('button-press-event', (actor, event) => {
-        grab_pointer(drawing);
-        const motionId = drawing.connect('motion-event', (actor, event) => {
+    drawing.connect("button-press-event", (actor, event) => {
+        event.get_device().grab(drawing);
+        const motionId = drawing.connect("motion-event", (actor, event) => {
             moveHandle(event);
             return false;
         });
-        const buttonReleaseId = drawing.connect('button-release-event', () => {
+        const buttonReleaseId = drawing.connect("button-release-event", (actor, event) => {
             drawing.disconnect(buttonReleaseId);
             drawing.disconnect(motionId);
-            ungrab_pointer();
+            event.get_device().ungrab();
             return false;
         });
         moveHandle(event);
@@ -4872,7 +4938,9 @@ function createSlider(args) {
         const [sliderX, sliderY] = drawing.get_transformed_position();
         const relX = absX - (sliderX || 0);
         const width = drawing.width;
-        const handleRadius = drawing.get_theme_node().get_length('-slider-handle-radius');
+        const handleRadius = drawing
+            .get_theme_node()
+            .get_length("-slider-handle-radius");
         const newValue = (relX - handleRadius) / (width - 2 * handleRadius);
         const newValueLimitToMinMax = limitToMinMax(newValue);
         setValue(newValueLimitToMinMax);
@@ -4895,7 +4963,7 @@ function createSlider(args) {
     return {
         actor: drawing,
         setValue,
-        getValue
+        getValue,
     };
 }
 
@@ -4966,45 +5034,50 @@ const { BoxLayout: VolumeSlider_BoxLayout, Icon: VolumeSlider_Icon, IconType: Vo
 const { Tooltip } = imports.ui.tooltips;
 const { KEY_Right, KEY_Left, ScrollDirection } = imports.gi.Clutter;
 function createVolumeSlider() {
-    const { getVolume, setVolume, addVolumeChangeHandler, addPlaybackStatusChangeHandler } = mpvHandler;
+    const { getVolume, setVolume, addVolumeChangeHandler, addPlaybackStatusChangeHandler, } = mpvHandler;
     const container = new VolumeSlider_BoxLayout({
         style_class: POPUP_MENU_ITEM_CLASS,
     });
     createActivWidget({
-        widget: container
+        widget: container,
     });
     const slider = createSlider({
-        onValueChanged: (newValue) => setVolume(newValue * 100)
+        onValueChanged: (newValue) => setVolume(newValue * 100),
     });
     const tooltip = new Tooltip(slider.actor, null);
     const icon = new VolumeSlider_Icon({
         icon_type: VolumeSlider_IconType.SYMBOLIC,
         style_class: POPUP_ICON_CLASS,
-        reactive: true
+        reactive: true,
     });
-    [icon, slider.actor].forEach(widget => {
+    [icon, slider.actor].forEach((widget) => {
         container.add_child(widget);
     });
-    container.connect('key-press-event', (actor, event) => {
+    container.connect("key-press-event", (actor, event) => {
         const key = event.get_key_symbol();
         if (key === KEY_Right || key === KEY_Left) {
-            const direction = (key === KEY_Right) ? 'increase' : 'decrease';
+            const direction = key === KEY_Right ? "increase" : "decrease";
             handleDeltaChange(direction);
         }
         return false;
     });
-    container.connect('scroll-event', (actor, event) => {
+    container.connect("scroll-event", (actor, event) => {
         const scrollDirection = event.get_scroll_direction();
-        const direction = (scrollDirection === ScrollDirection.UP) ? 'increase' : 'decrease';
-        handleDeltaChange(direction);
+        if (scrollDirection === ScrollDirection.UP) {
+            handleDeltaChange("increase");
+            return false;
+        }
+        if (scrollDirection === ScrollDirection.DOWN) {
+            handleDeltaChange("decrease");
+        }
         return false;
     });
-    icon.connect('button-press-event', () => {
+    icon.connect("button-press-event", () => {
         slider.setValue(0);
         return false;
     });
     function handleDeltaChange(direction) {
-        const delta = (direction === 'increase') ? VOLUME_DELTA : -VOLUME_DELTA;
+        const delta = direction === "increase" ? VOLUME_DELTA : -VOLUME_DELTA;
         const newValue = slider.getValue() + delta / 100;
         slider.setValue(newValue);
     }
@@ -5016,7 +5089,7 @@ function createVolumeSlider() {
             icon.set_icon_name(getVolumeIcon({ volume }));
         }
     };
-    [addVolumeChangeHandler, addPlaybackStatusChangeHandler].forEach(cb => cb(setRefreshVolumeSlider));
+    [addVolumeChangeHandler, addPlaybackStatusChangeHandler].forEach((cb) => cb(setRefreshVolumeSlider));
     setRefreshVolumeSlider();
     return container;
 }
@@ -5024,41 +5097,42 @@ function createVolumeSlider() {
 ;// CONCATENATED MODULE: ./src/lib/PopupSubMenu.ts
 
 const { BoxLayout: PopupSubMenu_BoxLayout, Label: PopupSubMenu_Label, Icon: PopupSubMenu_Icon, ScrollView } = imports.gi.St;
+// @ts-ignore
 const { ActorAlign: PopupSubMenu_ActorAlign, Point: PopupSubMenu_Point } = imports.gi.Clutter;
 const { PolicyType } = imports.gi.Gtk;
 function createSubMenu(args) {
     const { text } = args;
     const container = new PopupSubMenu_BoxLayout({
-        vertical: true
+        vertical: true,
     });
     const label = new PopupSubMenu_Label({
-        text
+        text,
     });
     const triangle = new PopupSubMenu_Icon({
-        style_class: 'popup-menu-arrow',
-        icon_name: 'pan-end',
+        style_class: "popup-menu-arrow",
+        icon_name: "pan-end",
         rotation_angle_z: 90,
         x_expand: true,
         x_align: PopupSubMenu_ActorAlign.END,
         pivot_point: new PopupSubMenu_Point({ x: 0.5, y: 0.5 }),
-        important: true // without this, it looks ugly on Mint-X Themes
+        important: true, // without this, it looks ugly on Mint-X Themes
     });
     const toggle = new PopupSubMenu_BoxLayout({
-        style_class: 'popup-menu-item popup-submenu-menu-item'
+        style_class: "popup-menu-item popup-submenu-menu-item",
     });
     createActivWidget({
         widget: toggle,
-        onActivated: toggleScrollbox
+        onActivated: toggleScrollbox,
     });
-    [label, triangle].forEach(widget => toggle.add_child(widget));
+    [label, triangle].forEach((widget) => toggle.add_child(widget));
     container.add_child(toggle);
     const scrollbox = new ScrollView({
-        style_class: 'popup-sub-menu',
+        style_class: "popup-sub-menu",
         vscrollbar_policy: PolicyType.AUTOMATIC,
-        hscrollbar_policy: PolicyType.NEVER
+        hscrollbar_policy: PolicyType.NEVER,
     });
     const box = new PopupSubMenu_BoxLayout({
-        vertical: true
+        vertical: true,
     });
     function toggleScrollbox() {
         scrollbox.visible ? closeMenu() : openMenu();
@@ -5073,7 +5147,7 @@ function createSubMenu(args) {
     }
     // add_child is recommended but doesn't work: https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/3172
     scrollbox.add_actor(box);
-    [toggle, scrollbox].forEach(widget => container.add_child(widget));
+    [toggle, scrollbox].forEach((widget) => container.add_child(widget));
     return {
         /** the container which should be used to add it as child to a parent Actor */
         actor: container,
@@ -5086,42 +5160,86 @@ function createSubMenu(args) {
 
 
 
-function createChannelMenuItem(args) {
-    const { channelName, onActivated, playbackStatus } = args;
-    const playbackIconMap = new Map([
-        ["Playing", PLAY_ICON_NAME],
-        ["Paused", PAUSE_ICON_NAME],
-        ["Loading", LOADING_ICON_NAME],
-        ["Stopped", null]
-    ]);
-    const iconMenuItem = createSimpleMenuItem({
+const { BoxLayout: ChannelMenuItem_BoxLayout } = imports.gi.St;
+const playbackIconMap = new Map([
+    ["Playing", PLAY_ICON_NAME],
+    ["Paused", PAUSE_ICON_NAME],
+    ["Loading", LOADING_ICON_NAME],
+    ["Stopped", null]
+]);
+const createMainMenuItem = (props) => {
+    const { channelName, onActivated, onRightClick, initialPlaybackStatus } = props;
+    const mainMenuItem = createSimpleMenuItem({
         maxCharNumber: MAX_STRING_LENGTH,
         text: channelName,
-        onActivated: () => {
-            onActivated(channelName);
-        }
+        onActivated,
+        onRightClick
     });
-    const { startResumeRotation, stopRotation } = createRotateAnimation(iconMenuItem.getIcon());
-    function setPlaybackStatus(playbackStatus) {
+    const { startResumeRotation, stopRotation } = createRotateAnimation(mainMenuItem.getIcon());
+    const setPlaybackStatus = (playbackStatus) => {
         const iconName = playbackIconMap.get(playbackStatus);
         playbackStatus === 'Loading' ? startResumeRotation() : stopRotation();
-        iconMenuItem.setIconName(iconName);
-    }
-    playbackStatus && setPlaybackStatus(playbackStatus);
-    return {
-        setPlaybackStatus,
-        actor: iconMenuItem.actor,
-        getChannelName: () => channelName
+        mainMenuItem.setIconName(iconName);
     };
-}
+    initialPlaybackStatus && setPlaybackStatus(initialPlaybackStatus);
+    return {
+        actor: mainMenuItem.actor,
+        setPlaybackStatus
+    };
+};
+const createChannelMenuItem = (props) => {
+    const { channelName, onActivated, initialPlaybackStatus, onRemoveClick, onContextMenuOpened } = props;
+    const removeChannelItem = createSimpleMenuItem({
+        text: 'Remove Channel',
+        onActivated: onRemoveClick,
+        iconName: 'edit-delete',
+    });
+    const contextMenuContainer = new ChannelMenuItem_BoxLayout({
+        vertical: true,
+        style: `padding-left:20px;`
+    });
+    contextMenuContainer.add_child(removeChannelItem.actor);
+    const menuItemContainer = new ChannelMenuItem_BoxLayout({ vertical: true });
+    const getContextMenuOpen = () => menuItemContainer.get_child_at_index(1) === contextMenuContainer;
+    const handleMainMenuItemRightClicked = () => {
+        const contextMenuOpen = getContextMenuOpen();
+        if (contextMenuOpen) {
+            closeContextMenu();
+            return;
+        }
+        onContextMenuOpened();
+        menuItemContainer.add_child(contextMenuContainer);
+    };
+    const closeContextMenu = () => {
+        const contextMenuOpen = getContextMenuOpen();
+        if (contextMenuOpen) {
+            menuItemContainer.remove_child(contextMenuContainer);
+        }
+    };
+    const mainMenuItem = createMainMenuItem({
+        channelName,
+        onActivated: () => onActivated(),
+        onRightClick: handleMainMenuItemRightClicked,
+        initialPlaybackStatus
+    });
+    menuItemContainer.add_child(mainMenuItem.actor);
+    return {
+        setPlaybackStatus: mainMenuItem.setPlaybackStatus,
+        actor: menuItemContainer,
+        getChannelName: () => channelName,
+        closeContextMenu
+    };
+};
 
 ;// CONCATENATED MODULE: ./src/ui/RadioPopupMenu/ChannelList.ts
 
 
 
 
+
+const { BoxLayout: ChannelList_BoxLayout } = imports.gi.St;
 function createChannelList() {
-    const { getPlaybackStatus, getCurrentChannelName: getCurrentChannel, addChannelChangeHandler, addPlaybackStatusChangeHandler, setUrl } = mpvHandler;
+    const { getPlaybackStatus, getCurrentChannelName: getCurrentChannel, addChannelChangeHandler, addPlaybackStatusChangeHandler, setUrl } = mpvHandler || {};
     const { addStationsListChangeHandler, settingsObject } = configs;
     const subMenu = createSubMenu({ text: 'My Stations' });
     const getUserStationNames = () => {
@@ -5133,22 +5251,42 @@ function createChannelList() {
             throw new Error(`couldn't find a url for the provided name. That should not have happened :-/`);
         return channel.url;
     };
+    const handleChannelRemoveClicked = (channelName) => {
+        const previousStations = configs.settingsObject.userStations;
+        configs.settingsObject.userStations = previousStations.filter((cnl) => cnl.name !== channelName);
+    };
     // the channelItems are saved here to the map as well as to the container as on the container only the reduced name are shown. Theoretically it therefore couldn't be differentiated between two long channel names with the same first 30 (or so) characters   
     let channelItems = [];
-    function setRefreshList(names) {
+    const closeAllChannelContextMenus = (props) => {
+        const { exceptionChannelName } = props || {};
+        channelItems.forEach((channelItem) => {
+            if (channelItem.getChannelName() !== exceptionChannelName) {
+                channelItem.closeContextMenu();
+            }
+        });
+    };
+    const setRefreshList = (names) => {
         channelItems = [];
         subMenu.box.destroy_all_children();
-        names.forEach(name => {
+        names.forEach((name, index) => {
             const channelPlaybackstatus = (name === getCurrentChannel()) ? getPlaybackStatus() : 'Stopped';
+            // TODO: addd this to createChannelMenuItem
+            const channelItemContainer = new ChannelList_BoxLayout({ vertical: true });
             const channelItem = createChannelMenuItem({
                 channelName: name,
-                onActivated: () => setUrl(findUrl(name)),
-                playbackStatus: channelPlaybackstatus
+                onActivated: () => {
+                    closeAllChannelContextMenus();
+                    setUrl(findUrl(name));
+                },
+                initialPlaybackStatus: channelPlaybackstatus,
+                onRemoveClick: () => handleChannelRemoveClicked(name),
+                onContextMenuOpened: () => closeAllChannelContextMenus({ exceptionChannelName: name })
             });
+            channelItemContainer.add_child(channelItem.actor);
             channelItems.push(channelItem);
-            subMenu.box.add_child(channelItem.actor);
+            subMenu.box.add_child(channelItemContainer);
         });
-    }
+    };
     function updateChannel(name) {
         channelItems.forEach(item => {
             item.getChannelName() === name ? item.setPlaybackStatus(getPlaybackStatus()) : item.setPlaybackStatus('Stopped');
@@ -5161,9 +5299,10 @@ function createChannelList() {
         currentChannel === null || currentChannel === void 0 ? void 0 : currentChannel.setPlaybackStatus(playbackStatus);
     }
     setRefreshList(getUserStationNames());
-    addChannelChangeHandler((newChannel) => updateChannel(newChannel));
+    addChannelChangeHandler === null || addChannelChangeHandler === void 0 ? void 0 : addChannelChangeHandler((newChannel) => updateChannel(newChannel));
     addPlaybackStatusChangeHandler((newStatus) => updatePlaybackStatus(newStatus));
     addStationsListChangeHandler(() => setRefreshList(getUserStationNames()));
+    radioPopupMenu.addPopupMenuCloseHandler(() => closeAllChannelContextMenus());
     return subMenu.actor;
 }
 
@@ -5290,7 +5429,7 @@ function createDownloadButton() {
         const { currentTitleIsDownloading, currentTitle } = getState();
         if (!currentTitle)
             return; // this should actually never happe
-        currentTitleIsDownloading ? cancelDownload(currentTitle) : downloadSongFromYoutube(currentTitle);
+        currentTitleIsDownloading ? cancelDownload(currentTitle) : downloadSongFromYouTube(currentTitle);
     };
     const downloadButton = createControlBtn({
         onClick: handleBtnClicked
@@ -5298,7 +5437,7 @@ function createDownloadButton() {
     const setRefreshBtn = () => {
         const { currentTitle, currentTitleIsDownloading } = getState();
         const iconName = currentTitleIsDownloading ? CANCEL_ICON_NAME : DOWNLOAD_ICON_NAME;
-        const tooltipTxt = currentTitleIsDownloading ? `Cancel downloading ${currentTitle}` : "Download current song from Youtube";
+        const tooltipTxt = currentTitleIsDownloading ? `Cancel downloading ${currentTitle}` : "Download current song from YouTube";
         downloadButton.icon.set_icon_name(iconName);
         downloadButton.tooltip.set_text(tooltipTxt);
     };
@@ -5338,10 +5477,15 @@ const createMediaControlToolbar = () => {
 
 
 const { BoxLayout: RadioPopupMenu_BoxLayout } = imports.gi.St;
-function createRadioPopupMenu(props) {
+let radioPopupMenu;
+const initRadioPopupMenu = (props) => {
+    if (radioPopupMenu) {
+        global.logWarning('radioPopupMenu already initiallized');
+        return;
+    }
     const { launcher, } = props;
     const { getPlaybackStatus, addPlaybackStatusChangeHandler } = mpvHandler;
-    const popupMenu = createPopupMenu({ launcher });
+    radioPopupMenu = createPopupMenu({ launcher });
     const radioActiveSection = new RadioPopupMenu_BoxLayout({
         vertical: true,
         visible: getPlaybackStatus() !== 'Stopped'
@@ -5350,13 +5494,12 @@ function createRadioPopupMenu(props) {
         radioActiveSection.add_child(createSeparatorMenuItem());
         radioActiveSection.add_child(widget);
     });
-    popupMenu.add_child(createChannelList());
-    popupMenu.add_child(radioActiveSection);
+    radioPopupMenu.add_child(createChannelList());
+    radioPopupMenu.add_child(radioActiveSection);
     addPlaybackStatusChangeHandler((newValue) => {
         radioActiveSection.visible = newValue !== 'Stopped';
     });
-    return popupMenu;
-}
+};
 
 ;// CONCATENATED MODULE: ./src/functions/promiseHelpers.ts
 const { spawnCommandLineAsyncIO: promiseHelpers_spawnCommandLineAsyncIO } = imports.misc.util;
@@ -5422,7 +5565,7 @@ function downloadMrisPluginInteractive() {
 ;// CONCATENATED MODULE: ./src/ui/RadioApplet/YoutubeDownloadIcon.ts
 
 
-function createYoutubeDownloadIcon() {
+function createYouTubeDownloadIcon() {
     const icon = createAppletIcon({
         icon_name: 'edit-download',
         visible: false
@@ -5606,35 +5749,48 @@ function createRadioContextMenu(args) {
 
 
 const { ScrollDirection: RadioAppletContainer_ScrollDirection } = imports.gi.Clutter;
-function createRadioAppletContainer() {
+let appletContainer;
+const getRadioAppletContainer = (props) => {
+    if (appletContainer) {
+        global.logWarning('radioAppletContainer already initiallized');
+        return appletContainer;
+    }
+    appletContainer = createRadioAppletContainer(props);
+    return appletContainer;
+};
+const createRadioAppletContainer = (props) => {
     let installationInProgress = false;
-    const appletContainer = createAppletContainer({
-        onMiddleClick: () => mpvHandler.togglePlayPause(),
-        onMoved: () => mpvHandler.deactivateAllListener(),
-        onRemoved: handleAppletRemoved,
-        onClick: handleClick,
-        onRightClick: () => {
-            popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.close();
+    const appletContainer = createAppletContainer(Object.assign({ onMiddleClick: () => mpvHandler.togglePlayPause(), onRemoved: handleAppletRemoved, onClick: handleClick, onRightClick: () => {
+            radioPopupMenu === null || radioPopupMenu === void 0 ? void 0 : radioPopupMenu.close();
             contextMenu === null || contextMenu === void 0 ? void 0 : contextMenu.toggle();
-        },
-        onScroll: handleScroll
-    });
-    [createRadioAppletIcon(), createYoutubeDownloadIcon(), createRadioAppletLabel()].forEach(widget => {
+        }, onScroll: handleScroll }, props));
+    [
+        createRadioAppletIcon(),
+        createYouTubeDownloadIcon(),
+        createRadioAppletLabel(),
+    ].forEach((widget) => {
         appletContainer.actor.add_child(widget);
     });
     const tooltip = createRadioAppletTooltip({ appletContainer });
-    const popupMenu = createRadioPopupMenu({ launcher: appletContainer.actor });
-    const contextMenu = createRadioContextMenu({ launcher: appletContainer.actor });
-    popupMenu.connect('notify::visible', () => {
-        popupMenu.visible && tooltip.hide();
+    initRadioPopupMenu({ launcher: appletContainer.actor });
+    const contextMenu = createRadioContextMenu({
+        launcher: appletContainer.actor,
+    });
+    radioPopupMenu.connect("notify::visible", () => {
+        radioPopupMenu.visible && tooltip.hide();
     });
     function handleAppletRemoved() {
         mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.deactivateAllListener();
         mpvHandler === null || mpvHandler === void 0 ? void 0 : mpvHandler.stop();
     }
     function handleScroll(scrollDirection) {
-        const volumeChange = scrollDirection === RadioAppletContainer_ScrollDirection.UP ? VOLUME_DELTA : -VOLUME_DELTA;
-        mpvHandler.increaseDecreaseVolume(volumeChange);
+        if (scrollDirection === RadioAppletContainer_ScrollDirection.UP) {
+            mpvHandler.increaseDecreaseVolume(VOLUME_DELTA);
+            return;
+        }
+        if (scrollDirection === RadioAppletContainer_ScrollDirection.DOWN) {
+            mpvHandler.increaseDecreaseVolume(-VOLUME_DELTA);
+        }
     }
     async function handleClick() {
         contextMenu === null || contextMenu === void 0 ? void 0 : contextMenu.close();
@@ -5643,7 +5799,7 @@ function createRadioAppletContainer() {
         try {
             installationInProgress = true;
             await installMpvWithMpris();
-            popupMenu === null || popupMenu === void 0 ? void 0 : popupMenu.toggle();
+            radioPopupMenu === null || radioPopupMenu === void 0 ? void 0 : radioPopupMenu.toggle();
         }
         catch (error) {
             const notificationText = `Couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin is located at ${MPRIS_PLUGIN_PATH} and correctly compiled for your environment. Refer to ${APPLET_SITE} (section Known Issues)`;
@@ -5655,19 +5811,24 @@ function createRadioAppletContainer() {
         }
     }
     return appletContainer;
-}
+};
 
 ;// CONCATENATED MODULE: ./src/index.ts
 
 
 
 
+const onAppletMovedCallbacks = [];
+const addOnAppletMovedCallback = (cb) => {
+    onAppletMovedCallbacks.push(cb);
+};
+// The function defintion must use the word "function" (not const!) as otherwilse the error: "radioApplet.main is not a constructor" is thrown
 function main() {
     // order must be retained!
     initPolyfills();
     initConfig();
     initMpvHandler();
-    return createRadioAppletContainer();
+    return getRadioAppletContainer({ onAppletMovedCallbacks });
 }
 
 radioApplet = __webpack_exports__;

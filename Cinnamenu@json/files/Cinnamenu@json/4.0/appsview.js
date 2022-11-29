@@ -364,10 +364,10 @@ class Subheading {
         this.subheadingText = subheadingText;
         this.clickAction = clickAction;
         this.signals = new SignalManager(null);
-        this.subheading = new St.Label({ text: subheadingText, x_expand: true, reactive: true});
+        this.subheading = new St.Label({ text: subheadingText, x_expand: true, reactive: true,
+                                            accessible_role: Atk.Role.HEADING});
         const subheadingStyleClass = clickAction?'menu-applications-subheading-clickable':'menu-applications-subheading';
-        this.subheadingBox = new St.BoxLayout({ style_class: subheadingStyleClass,
-                                                accessible_role: Atk.Role.MENU_ITEM});
+        this.subheadingBox = new St.BoxLayout({ style_class: subheadingStyleClass });
         this.subheadingBox.add(this.subheading, { });
 
         if (this.clickAction) {

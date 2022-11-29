@@ -332,7 +332,7 @@ msgstr ""
 msgid "Show favorites on sidebar"
 msgstr "הצגת מועדפים בסרגל־הצד"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "הצגת יישום מועדף וסמלי קובץ בסרגל־הצד"
 
 msgid "Show bookmarks and places"
