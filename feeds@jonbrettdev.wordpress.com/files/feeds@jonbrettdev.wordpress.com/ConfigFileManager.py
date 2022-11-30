@@ -39,7 +39,7 @@ DEFAULT_FEEDS = '''
                 {
                     "id": "",
                     "title": "",
-                    "url": "http://fxfeeds.mozilla.com/en-US/firefox/headlines.xml",
+                    "url": "https://blog.linuxmint.com/?feed=rss2",
                     "enabled": true,
                     "notify": true,
                     "interval": 5,                    
@@ -48,7 +48,7 @@ DEFAULT_FEEDS = '''
                 },                {
                     "id": "",
                     "title": "",
-                    "url": "http://www.linuxmint.com/planet/rss20.xml",
+                    "url": "https://itsfoss.com/feed/",
                     "enabled": true,
                     "notify": true,
                     "interval": 5,
@@ -57,7 +57,7 @@ DEFAULT_FEEDS = '''
                 },                {
                     "id": "",
                     "title": "",
-                    "url": "http://segfault.linuxmint.com/feed/",
+                    "url": "https://distrowatch.com/news/dw.xml",
                     "enabled": true,
                     "notify": true,
                     "interval": 5,
