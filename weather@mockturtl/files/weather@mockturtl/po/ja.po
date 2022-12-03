@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gnome-shell-extension-weather 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-04 08:45+0000\n"
-"PO-Revision-Date: 2022-11-30 11:39+0900\n"
+"PO-Revision-Date: 2022-12-03 22:47+0900\n"
 "Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
 "Language-Team: Japanese <takeshi.aihana@gmail.com>\n"
 "Language: ja\n"
@@ -29,15 +29,15 @@ msgstr ""
 #: 3.8/weather-applet.js:16988 3.8/weather-applet.js:16989
 #: 3.8/weather-applet.js:16990 3.8/weather-applet.js:16991
 msgid "Service Error"
-msgstr ""
+msgstr "サービスエラー"
 
 #: 3.0/applet.js:168 3.8/weather-applet.js:16979
 msgid "Incorrect API Key"
-msgstr ""
+msgstr "不正なAPIキー"
 
 #: 3.0/applet.js:170 3.8/weather-applet.js:16981
 msgid "Incorrect Location Format"
-msgstr ""
+msgstr "不正な位置情報書式"
 
 #: 3.0/applet.js:172 3.8/weather-applet.js:16983
 msgid "Key Blocked"
@@ -49,11 +49,11 @@ msgstr ""
 
 #: 3.0/applet.js:175 3.8/weather-applet.js:16986
 msgid "No Api Key"
-msgstr ""
+msgstr "APIキーがありません"
 
 #: 3.0/applet.js:176 3.8/weather-applet.js:16987
 msgid "No Location"
-msgstr ""
+msgstr "位置情報がありません"
 
 #: 3.0/applet.js:181 3.8/weather-applet.js:16992
 msgid "Missing Packages"
@@ -61,13 +61,11 @@ msgstr ""
 
 #: 3.0/applet.js:182 3.8/weather-applet.js:16993
 msgid "Location not covered"
-msgstr ""
+msgstr "サポート外の地点"
 
 #: 3.0/applet.js:193 3.0/applet.js:378 3.8/weather-applet.js:9309
-#, fuzzy
-#| msgid "Weather"
 msgid "Weather Applet"
-msgstr "天気"
+msgstr "天気アプレット"
 
 #: 3.0/applet.js:217 3.8/weather-applet.js:17312
 msgid "..."
@@ -122,7 +120,7 @@ msgstr ""
 
 #: 3.0/applet.js:1108 3.8/weather-applet.js:16392
 msgid "Powered by"
-msgstr ""
+msgstr "提供："
 
 #: 3.0/applet.js:1113
 msgid "from you"
@@ -130,22 +128,22 @@ msgstr ""
 
 #: 3.0/applet.js:1132 3.8/weather-applet.js:16313
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:10273
 #: 3.8/weather-applet.js:16313
 msgid "in"
-msgstr ""
+msgstr "in"
 
 #: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:9911
 #: 3.8/weather-applet.js:16470
 msgid "mi"
-msgstr ""
+msgstr "mi"
 
 #: 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:9912
 #: 3.8/weather-applet.js:16471
 msgid "km"
-msgstr ""
+msgstr "km"
 
 #: 3.0/applet.js:1227 3.8/weather-applet.js:16650
 msgid "Loading current weather ..."
@@ -160,39 +158,31 @@ msgid "Loading ..."
 msgstr "読み込み中 ..."
 
 #: 3.0/applet.js:1329 3.8/weather-applet.js:15673
-#, fuzzy
-#| msgid "Temperature:"
 msgid "Temperature"
-msgstr "気温:"
+msgstr "気温"
 
 #: 3.0/applet.js:1330 3.8/weather-applet.js:15674
-#, fuzzy
-#| msgid "Humidity:"
 msgid "Humidity"
-msgstr "湿度:"
+msgstr "湿度"
 
 #: 3.0/applet.js:1331 3.8/weather-applet.js:15675
-#, fuzzy
-#| msgid "Pressure:"
 msgid "Pressure"
-msgstr "気圧:"
+msgstr "気圧"
 
 #: 3.0/applet.js:1332 3.8/weather-applet.js:12143 3.8/weather-applet.js:12150
 #: 3.8/weather-applet.js:12151 3.8/weather-applet.js:12157
 #: 3.8/weather-applet.js:14103 3.8/weather-applet.js:14104
 #: 3.8/weather-applet.js:15524
-#, fuzzy
-#| msgid "Wind:"
 msgid "Wind"
-msgstr "風速:"
+msgstr "風向・風速"
 
 #: 3.0/applet.js:1639 3.8/weather-applet.js:14935
 msgid "Make sure you entered a location or use Automatic location instead"
-msgstr ""
+msgstr "位置情報を入力するか位置の自動取得を有効にしてください"
 
 #: 3.0/applet.js:1877 3.8/weather-applet.js:9555
 msgid "Could not find location based on address, please check if it's right"
-msgstr ""
+msgstr "住所による位置情報の取得に失敗しました。入力を確認してください"
 
 #: 3.0/applet.js:1901 3.8/weather-applet.js:9576
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
@@ -258,7 +248,7 @@ msgstr ""
 #: 3.8/weather-applet.js:12551 3.8/weather-applet.js:12913
 #: 3.8/weather-applet.js:14272
 msgid "Feels Like"
-msgstr ""
+msgstr "体感温度"
 
 #: 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
 #: 3.8/weather-applet.js:10398
@@ -293,10 +283,8 @@ msgstr ""
 #: 3.8/weather-applet.js:11289 3.8/weather-applet.js:11296
 #: 3.8/weather-applet.js:11303 3.8/weather-applet.js:12186
 #: 3.8/weather-applet.js:13079
-#, fuzzy
-#| msgid "Heavy snow"
 msgid "Heavy rain"
-msgstr "大雪"
+msgstr "大雨"
 
 #: 3.0/climacell.js:266 3.0/climacell.js:267 3.0/met_norway.js:483
 #: 3.0/met_norway.js:484 3.0/met_norway.js:490 3.0/us_weather.js:484
@@ -313,7 +301,7 @@ msgstr "大雪"
 #: 3.8/weather-applet.js:14075 3.8/weather-applet.js:14076
 #: 3.8/weather-applet.js:14438 3.8/weather-applet.js:14439
 msgid "Rain"
-msgstr ""
+msgstr "雨"
 
 #: 3.0/climacell.js:273 3.0/climacell.js:274 3.0/met_norway.js:392
 #: 3.0/met_norway.js:393 3.0/met_norway.js:399 3.0/met_norway.js:406
@@ -325,10 +313,8 @@ msgstr ""
 #: 3.8/weather-applet.js:11373 3.8/weather-applet.js:11380
 #: 3.8/weather-applet.js:11387 3.8/weather-applet.js:12179
 #: 3.8/weather-applet.js:13081
-#, fuzzy
-#| msgid "Freezing rain"
 msgid "Light rain"
-msgstr "着氷性の雨"
+msgstr "小雨"
 
 #: 3.0/climacell.js:280 3.8/weather-applet.js:12242 3.8/weather-applet.js:13055
 #, fuzzy
@@ -420,10 +406,8 @@ msgstr "雪"
 #: 3.8/weather-applet.js:11429 3.8/weather-applet.js:11436
 #: 3.8/weather-applet.js:11443 3.8/weather-applet.js:12207
 #: 3.8/weather-applet.js:13099
-#, fuzzy
-#| msgid "Light snow showers"
 msgid "Light snow"
-msgstr "弱いにわか雪"
+msgstr "小雪"
 
 #: 3.0/climacell.js:357 3.0/climacell.js:358 3.8/weather-applet.js:12199
 #: 3.8/weather-applet.js:12200 3.8/weather-applet.js:14445
@@ -460,8 +444,6 @@ msgstr ""
 #: 3.8/weather-applet.js:13045 3.8/weather-applet.js:14047
 #: 3.8/weather-applet.js:14048 3.8/weather-applet.js:14494
 #: 3.8/weather-applet.js:14495
-#, fuzzy
-#| msgid "Foggy"
 msgid "Fog"
 msgstr "霧"
 
@@ -578,16 +560,12 @@ msgid ""
 msgstr ""
 
 #: 3.0/met_norway.js:131 3.8/weather-applet.js:11106
-#, fuzzy
-#| msgid "Cloudy"
 msgid "Cloudiness"
-msgstr "曇り"
+msgstr "雲量"
 
 #: 3.0/met_norway.js:280 3.0/met_norway.js:281 3.0/openWeatherMap.js:412
 #: 3.8/weather-applet.js:10945 3.8/weather-applet.js:11254
 #: 3.8/weather-applet.js:11255
-#, fuzzy
-#| msgid "Clear"
 msgid "Clear sky"
 msgstr "快晴"
 
@@ -655,10 +633,8 @@ msgid "Light rain and thunder"
 msgstr ""
 
 #: 3.0/met_norway.js:407 3.8/weather-applet.js:11381
-#, fuzzy
-#| msgid "Light snow showers"
 msgid "Light rain showers"
-msgstr "弱いにわか雪"
+msgstr "弱いにわか雨"
 
 #: 3.0/met_norway.js:414 3.8/weather-applet.js:11388
 #, fuzzy
@@ -714,10 +690,8 @@ msgstr ""
 #: 3.8/weather-applet.js:11472 3.8/weather-applet.js:11478
 #: 3.8/weather-applet.js:12753 3.8/weather-applet.js:13077
 #: 3.8/weather-applet.js:13381 3.8/weather-applet.js:13387
-#, fuzzy
-#| msgid "Snow showers"
 msgid "Rain showers"
-msgstr "にわか雪"
+msgstr "にわか雨"
 
 #: 3.0/met_norway.js:505 3.8/weather-applet.js:11479
 msgid "Rain showers and thunder"
@@ -782,7 +756,7 @@ msgstr ""
 
 #: 3.0/met_uk.js:316 3.8/weather-applet.js:9836
 msgid "Visibility"
-msgstr ""
+msgstr "視程"
 
 #: 3.0/met_uk.js:340 3.0/openWeatherMap.js:190 3.0/us_weather.js:334
 #: 3.0/weatherbit.js:212 3.8/weather-applet.js:9864 3.8/weather-applet.js:10722
@@ -799,27 +773,27 @@ msgstr ""
 
 #: 3.0/met_uk.js:408
 msgid "Very poor - Less than"
-msgstr ""
+msgstr "非常に悪い ― <"
 
 #: 3.0/met_uk.js:410
 msgid "Poor - Between"
-msgstr ""
+msgstr "悪い ― "
 
 #: 3.0/met_uk.js:412
 msgid "Moderate - Between"
-msgstr ""
+msgstr "普通 ― "
 
 #: 3.0/met_uk.js:414
 msgid "Good - Between"
-msgstr ""
+msgstr "良い ― "
 
 #: 3.0/met_uk.js:416
 msgid "Very good - Between"
-msgstr ""
+msgstr "非常に良い ― "
 
 #: 3.0/met_uk.js:417
 msgid "Excellent - More than"
-msgstr ""
+msgstr "絶好調 ― >"
 
 #: 3.0/met_uk.js:561 3.0/met_uk.js:562 3.0/openWeatherMap.js:401
 #: 3.8/weather-applet.js:10056 3.8/weather-applet.js:10057
@@ -833,14 +807,12 @@ msgstr ""
 #: 3.8/weather-applet.js:12647 3.8/weather-applet.js:12681
 #: 3.8/weather-applet.js:13111
 msgid "Overcast"
-msgstr ""
+msgstr "どんよりした空"
 
 #: 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/weather-applet.js:10085
 #: 3.8/weather-applet.js:10092
-#, fuzzy
-#| msgid "Light snow showers"
 msgid "Light rain shower"
-msgstr "弱いにわか雪"
+msgstr "弱いにわか雨"
 
 #: 3.0/met_uk.js:603 3.0/met_uk.js:604 3.0/openWeatherMap.js:373
 #: 3.0/yahoo.js:445 3.8/weather-applet.js:10098 3.8/weather-applet.js:10099
@@ -883,8 +855,6 @@ msgstr "にわか雪"
 
 #: 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/weather-applet.js:10176
 #: 3.8/weather-applet.js:10183
-#, fuzzy
-#| msgid "Light snow showers"
 msgid "Light snow shower"
 msgstr "弱いにわか雪"
 
@@ -992,8 +962,6 @@ msgid "Light intensity drizzle rain"
 msgstr ""
 
 #: 3.0/openWeatherMap.js:376 3.8/weather-applet.js:10909
-#, fuzzy
-#| msgid "Drizzle"
 msgid "Drizzle rain"
 msgstr "霧雨"
 
@@ -1024,7 +992,7 @@ msgstr ""
 
 #: 3.0/openWeatherMap.js:383 3.8/weather-applet.js:10916
 msgid "Heavy intensity rain"
-msgstr ""
+msgstr "大雨"
 
 #: 3.0/openWeatherMap.js:384 3.8/weather-applet.js:10917
 msgid "Very heavy rain"
@@ -1078,8 +1046,6 @@ msgid "Rain and snow"
 msgstr "雨と雪"
 
 #: 3.0/openWeatherMap.js:398 3.8/weather-applet.js:10931
-#, fuzzy
-#| msgid "Light snow showers"
 msgid "Light shower snow"
 msgstr "弱いにわか雪"
 
@@ -1147,8 +1113,6 @@ msgid "Sky is clear"
 msgstr ""
 
 #: 3.0/openWeatherMap.js:414 3.8/weather-applet.js:10947
-#, fuzzy
-#| msgid "Cloudy"
 msgid "Clouds"
 msgstr "曇り"
 
@@ -1160,18 +1124,16 @@ msgid "Few clouds"
 msgstr ""
 
 #: 3.0/openWeatherMap.js:416 3.8/weather-applet.js:10949
-#, fuzzy
-#| msgid "Scattered showers"
 msgid "Scattered clouds"
-msgstr "ところによりにわか雨"
+msgstr "ちぎれ雲"
 
 #: 3.0/openWeatherMap.js:417 3.8/weather-applet.js:10950
 msgid "Broken clouds"
-msgstr ""
+msgstr "ちぎれ雲"
 
 #: 3.0/openWeatherMap.js:418 3.8/weather-applet.js:10951
 msgid "Overcast clouds"
-msgstr ""
+msgstr "一面の曇り空"
 
 #: 3.0/us_weather.js:120
 msgid "Could not get forecast for your area"
@@ -1226,12 +1188,12 @@ msgstr "着氷性の雨"
 #: 3.8/weather-applet.js:12776 3.8/weather-applet.js:14374
 #: 3.8/weather-applet.js:14375
 msgid "Hurricane"
-msgstr "ハリケーン"
+msgstr "風力12"
 
 #: 3.0/us_weather.js:571 3.0/utils.js:331 3.8/weather-applet.js:8710
 #: 3.8/weather-applet.js:12782
 msgid "Storm"
-msgstr ""
+msgstr "風力10"
 
 #: 3.0/us_weather.js:572 3.8/weather-applet.js:12783
 msgid "Tropical storm"
@@ -1252,15 +1214,15 @@ msgstr "寒冷"
 #: 3.8/weather-applet.js:12824 3.8/weather-applet.js:12825
 #: 3.8/weather-applet.js:14655 3.8/weather-applet.js:14656
 msgid "Blizzard"
-msgstr ""
+msgstr "大吹雪"
 
 #: 3.0/utils.js:146 3.8/weather-applet.js:8588
 msgid "Today"
-msgstr ""
+msgstr "今日"
 
 #: 3.0/utils.js:148 3.8/weather-applet.js:8590
 msgid "Tomorrow"
-msgstr ""
+msgstr "明日"
 
 #: 3.0/utils.js:204
 msgid "Sunday"
@@ -1292,47 +1254,47 @@ msgstr "土曜日"
 
 #: 3.0/utils.js:301 3.8/weather-applet.js:8680
 msgid "Calm"
-msgstr ""
+msgstr "風力0"
 
 #: 3.0/utils.js:304 3.8/weather-applet.js:8683
 msgid "Light air"
-msgstr ""
+msgstr "風力1"
 
 #: 3.0/utils.js:307 3.8/weather-applet.js:8686
 msgid "Light breeze"
-msgstr ""
+msgstr "風力2"
 
 #: 3.0/utils.js:310 3.8/weather-applet.js:8689
 msgid "Gentle breeze"
-msgstr ""
+msgstr "風力3"
 
 #: 3.0/utils.js:313 3.8/weather-applet.js:8692
 msgid "Moderate breeze"
-msgstr ""
+msgstr "風力4"
 
 #: 3.0/utils.js:316 3.8/weather-applet.js:8695
 msgid "Fresh breeze"
-msgstr ""
+msgstr "風力5"
 
 #: 3.0/utils.js:319 3.8/weather-applet.js:8698
 msgid "Strong breeze"
-msgstr ""
+msgstr "風力6"
 
 #: 3.0/utils.js:322 3.8/weather-applet.js:8701
 msgid "Near gale"
-msgstr ""
+msgstr "風力7"
 
 #: 3.0/utils.js:325 3.8/weather-applet.js:8704
 msgid "Gale"
-msgstr ""
+msgstr "風力8"
 
 #: 3.0/utils.js:328 3.8/weather-applet.js:8707
 msgid "Strong gale"
-msgstr ""
+msgstr "風力9"
 
 #: 3.0/utils.js:334 3.8/weather-applet.js:8713
 msgid "Violent storm"
-msgstr ""
+msgstr "風力11"
 
 #: 3.0/utils.js:429 3.8/weather-applet.js:8863
 msgid "N"
@@ -1463,14 +1425,10 @@ msgid "Snow Flurries"
 msgstr "にわか雪"
 
 #: 3.0/yahoo.js:450
-#, fuzzy
-#| msgid "Light snow showers"
 msgid "Light Snow Showers"
 msgstr "弱いにわか雪"
 
 #: 3.0/yahoo.js:451 3.8/weather-applet.js:14459 3.8/weather-applet.js:14460
-#, fuzzy
-#| msgid "Blowing snow"
 msgid "Blowing Snow"
 msgstr "吹雪"
 
@@ -1539,10 +1497,8 @@ msgid "Scattered Showers"
 msgstr "ところによりにわか雨"
 
 #: 3.0/yahoo.js:474 3.8/weather-applet.js:14634 3.8/weather-applet.js:14635
-#, fuzzy
-#| msgid "Heavy snow"
 msgid "Heavy Rain"
-msgstr "大雪"
+msgstr "大雨"
 
 #: 3.0/yahoo.js:475 3.8/weather-applet.js:14641 3.8/weather-applet.js:14642
 #: 3.8/weather-applet.js:14669 3.8/weather-applet.js:14670
@@ -1552,8 +1508,6 @@ msgid "Scattered Snow Showers"
 msgstr "ところによりにわか雪"
 
 #: 3.0/yahoo.js:476 3.8/weather-applet.js:14648 3.8/weather-applet.js:14649
-#, fuzzy
-#| msgid "Heavy snow"
 msgid "Heavy Snow"
 msgstr "大雪"
 
@@ -1584,7 +1538,7 @@ msgstr ""
 #. 3.0->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:9616
 msgid "Met Office UK"
-msgstr ""
+msgstr "Met Office UK"
 
 #: 3.8/weather-applet.js:9718
 msgid ""
@@ -1636,7 +1590,7 @@ msgstr ""
 
 #: 3.8/weather-applet.js:10258
 msgid "DarkSky"
-msgstr ""
+msgstr "DarkSky"
 
 #: 3.8/weather-applet.js:10308
 msgid "This API has ceased to function, please use another one."
@@ -1645,26 +1599,24 @@ msgstr ""
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:10569
-#, fuzzy
 #| msgid "Weather"
 msgid "OpenWeatherMap"
-msgstr "天気"
+msgstr "OpenWeatherMap"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:11015
 msgid "MET Norway"
-msgstr ""
+msgstr "MET Norway"
 
 #: 3.8/weather-applet.js:11558
-#, fuzzy
 #| msgid "Weather"
 msgid "WeatherBit"
-msgstr "天気"
+msgstr "WeatherBit"
 
 #: 3.8/weather-applet.js:11981
 msgid "Tomorrow.io"
-msgstr ""
+msgstr "Tomorrow.io"
 
 #: 3.8/weather-applet.js:12144
 msgid "Light wind"
@@ -1675,10 +1627,9 @@ msgid "Strong wind"
 msgstr ""
 
 #: 3.8/weather-applet.js:12305
-#, fuzzy
 #| msgid "Weather"
 msgid "US Weather"
-msgstr "天気"
+msgstr "US Weather"
 
 #: 3.8/weather-applet.js:12856
 msgid "Visual Crossing"
@@ -1706,7 +1657,7 @@ msgstr ""
 
 #: 3.8/weather-applet.js:13043
 msgid "Dust Storm"
-msgstr ""
+msgstr "砂嵐"
 
 #: 3.8/weather-applet.js:13047
 #, fuzzy
@@ -1790,7 +1741,7 @@ msgstr ""
 
 #: 3.8/weather-applet.js:13107
 msgid "Diamond dust"
-msgstr ""
+msgstr "ダイアモンドダスト"
 
 #: 3.8/weather-applet.js:13113
 #, fuzzy
@@ -1800,12 +1751,12 @@ msgstr "ところにより曇り"
 
 #: 3.8/weather-applet.js:13135
 msgid "Please make sure you entered the API key correctly"
-msgstr ""
+msgstr "正しいAPIキーを入力してください"
 
 #. 3.8->settings-schema.json->dataService->options
 #: 3.8/weather-applet.js:13151
 msgid "DMI Denmark"
-msgstr ""
+msgstr "DMI Denmark"
 
 #: 3.8/weather-applet.js:13292 3.8/weather-applet.js:13293
 #: 3.8/weather-applet.js:13429 3.8/weather-applet.js:13430
@@ -1845,22 +1796,21 @@ msgid "Heavy mixed rain and snow"
 msgstr "雨と雪"
 
 #: 3.8/weather-applet.js:13499
-#, fuzzy
 #| msgid "Weather"
 msgid "AccuWeather"
-msgstr "天気"
+msgstr "AccuWeather"
 
 #: 3.8/weather-applet.js:13841
 msgid "Deutscher Wetterdienst"
-msgstr ""
+msgstr "Deutscher Wetterdienst"
 
 #: 3.8/weather-applet.js:13852
 msgid "Please select a different provider or location"
-msgstr ""
+msgstr "別のプロバイダまたは位置情報を選んでください"
 
 #: 3.8/weather-applet.js:14149
 msgid "Weather Underground"
-msgstr ""
+msgstr "Weather Underground"
 
 #: 3.8/weather-applet.js:14338
 msgid "The API key you provided is invalid."
@@ -1920,7 +1870,7 @@ msgstr ""
 
 #: 3.8/weather-applet.js:15676
 msgid "Dew Point"
-msgstr ""
+msgstr "露点"
 
 #: 3.8/weather-applet.js:15748
 msgid "Precipitation will end in {precipEnd} minutes"
@@ -1940,7 +1890,7 @@ msgstr ""
 
 #: 3.8/weather-applet.js:16399 3.8/weather-applet.js:17147
 msgid "As of {lastUpdatedTime}"
-msgstr ""
+msgstr "{lastUpdatedTime}現在"
 
 #: 3.8/weather-applet.js:16405
 msgid "{distance} {distanceUnit} from you"
@@ -1960,19 +1910,19 @@ msgstr ""
 
 #: 3.8/weather-applet.js:16965
 msgid "Debug Information saved successfully"
-msgstr ""
+msgstr "デバッグ情報が保存されました"
 
 #: 3.8/weather-applet.js:16965
 msgid "Saved to {filePath}"
-msgstr ""
+msgstr "保存先: {filePath}"
 
 #: 3.8/weather-applet.js:17106
 msgid "This provider requires an API key to operate"
-msgstr ""
+msgstr "このサービスプロバイダはAPIキーが必要です"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
-msgstr ""
+msgstr "ファイルに保存"
 
 #: 3.8/LogSaver.py:29
 msgid "Select a destination"
@@ -1994,7 +1944,7 @@ msgstr ""
 #. 3.0->settings-schema.json->keybinding->description
 #. 3.8->settings-schema.json->keybinding->description
 msgid "Set the keybinding to call the menu"
-msgstr ""
+msgstr "メニューを開くキーバインドを登録"
 
 #. 3.0->settings-schema.json->descriptions->description
 msgid "Weather service information"
@@ -2013,22 +1963,22 @@ msgstr ""
 #. 3.0->settings-schema.json->providerSettings->description
 #. 3.8->settings-schema.json->provider-options->title
 msgid "Weather Provider Options"
-msgstr ""
+msgstr "サービスプロバイダ オプション"
 
 #. 3.0->settings-schema.json->dataService->description
 #. 3.8->settings-schema.json->dataService->description
 msgid "Data service"
-msgstr ""
+msgstr "データサービス"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
 msgid "DarkSky (key needed)"
-msgstr ""
+msgstr "DarkSky（要APIキー）"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
 msgid "Weatherbit (key needed)"
-msgstr ""
+msgstr "Weatherbit（要APIキー）"
 
 #. 3.0->settings-schema.json->dataService->options
 msgid "Yahoo"
@@ -2036,12 +1986,12 @@ msgstr ""
 
 #. 3.0->settings-schema.json->dataService->options
 msgid "Climacell (key needed)"
-msgstr ""
+msgstr "Climacell（要APIキー）"
 
 #. 3.0->settings-schema.json->apiKey->description
 #. 3.8->settings-schema.json->apiKey->description
 msgid "API Key"
-msgstr ""
+msgstr "APIキー"
 
 #. 3.0->settings-schema.json->apiKey->tooltip
 #. 3.8->settings-schema.json->apiKey->tooltip
@@ -2051,7 +2001,7 @@ msgstr ""
 #. 3.0->settings-schema.json->manualLocation->description
 #. 3.8->settings-schema.json->manualLocation->description
 msgid "Manual Location"
-msgstr ""
+msgstr "手動で設定"
 
 #. 3.0->settings-schema.json->manualLocation->tooltip
 #. 3.8->settings-schema.json->manualLocation->tooltip
@@ -2100,10 +2050,8 @@ msgstr ""
 
 #. 3.0->settings-schema.json->forecastHours->description
 #. 3.8->settings-schema.json->forecastHours->description
-#, fuzzy
-#| msgid "Forecast length"
 msgid "Hourly Forecast length"
-msgstr "天気予報の表示日数"
+msgstr "天気予報の表示時間数"
 
 #. 3.0->settings-schema.json->unitSettings->description
 msgid "Units"
@@ -2121,21 +2069,17 @@ msgstr "気温の単位"
 #. 3.8->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->distanceUnit->options
 msgid "Automatic"
-msgstr ""
+msgstr "自動"
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
-#, fuzzy
-#| msgid "celsius"
 msgid "Celsius"
-msgstr "摂氏"
+msgstr "摂氏（℃）"
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
-#, fuzzy
-#| msgid "fahrenheit"
 msgid "Fahrenheit"
-msgstr "華氏"
+msgstr "華氏（℉）"
 
 #. 3.0->settings-schema.json->temperatureUnit->tooltip
 #. 3.0->settings-schema.json->distanceUnit->tooltip
@@ -2154,12 +2098,12 @@ msgstr "風速の単位"
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "kph"
-msgstr "k/h"
+msgstr "km/h"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "mph"
-msgstr "m/h"
+msgstr "mi/h"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
@@ -2174,7 +2118,7 @@ msgstr "ノット"
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "Beaufort"
-msgstr ""
+msgstr "風力階級"
 
 #. 3.0->settings-schema.json->pressureUnit->description
 #. 3.8->settings-schema.json->pressureUnit->description
@@ -2183,20 +2127,18 @@ msgstr "気圧の単位"
 
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
-#, fuzzy
-#| msgid "Pa"
 msgid "hPa"
-msgstr "Pa"
+msgstr "hPa"
 
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "in Hg"
-msgstr "in Hg"
+msgstr "inHg"
 
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "mm Hg"
-msgstr "mm Hg"
+msgstr "mmHg"
 
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
@@ -2221,17 +2163,17 @@ msgstr "Pa"
 #. 3.0->settings-schema.json->distanceUnit->description
 #. 3.8->settings-schema.json->distanceUnit->description
 msgid "Distance unit"
-msgstr ""
+msgstr "距離の単位"
 
 #. 3.0->settings-schema.json->distanceUnit->options
 #. 3.8->settings-schema.json->distanceUnit->options
 msgid "Metric"
-msgstr ""
+msgstr "メートル法"
 
 #. 3.0->settings-schema.json->distanceUnit->options
 #. 3.8->settings-schema.json->distanceUnit->options
 msgid "Imperial"
-msgstr ""
+msgstr "ヤードポンド法"
 
 #. 3.0->settings-schema.json->panelSettings->description
 msgid "Panel options"
@@ -2254,10 +2196,8 @@ msgstr ""
 
 #. 3.0->settings-schema.json->tempTextOverride->description
 #. 3.8->settings-schema.json->tempTextOverride->description
-#, fuzzy
-#| msgid "Override location label"
 msgid "Override label on panel"
-msgstr "場所ラベルの書換"
+msgstr "パネルラベルを上書き"
 
 #. 3.0->settings-schema.json->tempTextOverride->tooltip
 msgid ""
@@ -2276,17 +2216,17 @@ msgstr ""
 #. 3.0->settings-schema.json->useCustomAppletIcons->description
 #. 3.8->settings-schema.json->useCustomAppletIcons->description
 msgid "Use custom icons on the panel"
-msgstr ""
+msgstr "パネルでオリジナルアイコンを使う"
 
 #. 3.0->settings-schema.json->displaySettings->description
 #. 3.8->settings-schema.json->presentation-section->title
 msgid "Presentation"
-msgstr ""
+msgstr "表示"
 
 #. 3.0->settings-schema.json->verticalOrientation->description
 #. 3.8->settings-schema.json->verticalOrientation->description
 msgid "Show forecast vertically"
-msgstr ""
+msgstr "予報を縦に表示"
 
 #. 3.0->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right"
@@ -2295,22 +2235,22 @@ msgstr ""
 #. 3.0->settings-schema.json->forecastColumns->units
 #. 3.8->settings-schema.json->forecastColumns->units
 msgid "columns"
-msgstr ""
+msgstr "列数"
 
 #. 3.0->settings-schema.json->forecastColumns->description
 #. 3.8->settings-schema.json->forecastColumns->description
 msgid "Maximum number of columns for forecast"
-msgstr ""
+msgstr "予報表示の最大列数"
 
 #. 3.0->settings-schema.json->forecastRows->units
 #. 3.8->settings-schema.json->forecastRows->units
 msgid "rows"
-msgstr ""
+msgstr "行数"
 
 #. 3.0->settings-schema.json->forecastRows->description
 #. 3.8->settings-schema.json->forecastRows->description
 msgid "Maximum number of rows for forecast"
-msgstr ""
+msgstr "予報表示の最大行数"
 
 #. 3.0->settings-schema.json->showSunrise->description
 #. 3.8->settings-schema.json->showSunrise->description
@@ -2325,7 +2265,7 @@ msgstr "24時間表示"
 #. 3.0->settings-schema.json->shortHourlyTime->description
 #. 3.8->settings-schema.json->shortHourlyTime->description
 msgid "Only display hours for hourly forecast time"
-msgstr ""
+msgstr "毎時の予報では分を省略"
 
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
 #. 3.8->settings-schema.json->shortHourlyTime->tooltip
@@ -2334,10 +2274,8 @@ msgstr ""
 
 #. 3.0->settings-schema.json->showForecastDates->description
 #. 3.8->settings-schema.json->showForecastDates->description
-#, fuzzy
-#| msgid "Display time in 24 hour format"
 msgid "Display date for daily forecasts"
-msgstr "24時間表示"
+msgstr "予報に日付を表示"
 
 #. 3.0->settings-schema.json->showForecastDates->tooltip
 #. 3.8->settings-schema.json->showForecastDates->tooltip
@@ -2347,40 +2285,32 @@ msgstr ""
 #. 3.0->settings-schema.json->temperatureHighFirst->description
 #. 3.8->settings-schema.json->temperatureHighFirst->description
 msgid "Show high temperature first in forecast"
-msgstr ""
+msgstr "最高気温を前に表示"
 
 #. 3.0->settings-schema.json->tempRussianStyle->description
 #. 3.8->settings-schema.json->tempRussianStyle->description
-#, fuzzy
-#| msgid "Temperature unit"
 msgid "Show temperature Russian style"
-msgstr "気温の単位"
+msgstr "ロシア式で気温を表示"
 
 #. 3.0->settings-schema.json->locationLabelOverride->description
 #. 3.8->settings-schema.json->locationLabelOverride->description
 msgid "Override location label"
-msgstr "場所ラベルの書換"
+msgstr "位置ラベルを上書き"
 
 #. 3.0->settings-schema.json->conditionSettings->description
 #. 3.8->settings-schema.json->weather-conditions->title
-#, fuzzy
-#| msgid "Translate condition"
 msgid "Weather conditions"
-msgstr "状態を日本語で表示"
+msgstr "天気の状態"
 
 #. 3.0->settings-schema.json->translateCondition->description
 #. 3.8->settings-schema.json->translateCondition->description
-#, fuzzy
-#| msgid "Translate condition"
 msgid "Translate conditions"
 msgstr "状態を日本語で表示"
 
 #. 3.0->settings-schema.json->shortConditions->description
 #. 3.8->settings-schema.json->shortConditions->description
-#, fuzzy
-#| msgid "Translate condition"
 msgid "Less verbose conditions"
-msgstr "状態を日本語で表示"
+msgstr "大まかな状態を表示"
 
 #. 3.0->settings-schema.json->iconSettings->description
 #. 3.8->settings-schema.json->icons->title
@@ -2389,68 +2319,66 @@ msgstr ""
 
 #. 3.0->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons in the applet"
-msgstr ""
+msgstr "アプレットでシンボリックアイコンを使う"
 
 #. 3.0->settings-schema.json->useCustomMenuIcons->description
 #. 3.8->settings-schema.json->useCustomMenuIcons->description
 msgid "Use custom icons in the popup menu"
-msgstr ""
+msgstr "ポップアップメニューでオリジナルアイコンを使う"
 
 #. 3.8->settings-schema.json->locations-page->title
 #. 3.8->settings-schema.json->location->description
 msgid "Location"
-msgstr ""
+msgstr "位置情報"
 
 #. 3.8->settings-schema.json->units-page->title
 msgid "Other options"
-msgstr ""
+msgstr "その他"
 
 #. 3.8->settings-schema.json->info-section->title
 msgid "Help"
-msgstr ""
+msgstr "ヘルプ"
 
 #. 3.8->settings-schema.json->location-section->title
 msgid "Location settings"
-msgstr ""
+msgstr "位置情報設定"
 
 #. 3.8->settings-schema.json->location-store->title
 msgid "Saved Locations"
-msgstr ""
+msgstr "保存された位置情報"
 
 #. 3.8->settings-schema.json->panel-options->title
 msgid "Panel (Taskbar)"
-msgstr ""
+msgstr "パネル（タスクバー）"
 
 #. 3.8->settings-schema.json->presentation->title
 msgid "Popup menu"
-msgstr ""
+msgstr "ポップアップメニュー"
 
 #. 3.8->settings-schema.json->units-section->title
 msgid "Other Units"
-msgstr ""
+msgstr "その他の単位"
 
 #. 3.8->settings-schema.json->temp-unit-section->title
-#, fuzzy
-#| msgid "Temperature unit"
 msgid "Temperature Unit"
 msgstr "気温の単位"
 
 #. 3.8->settings-schema.json->keybindings->title
 msgid "Keybindings"
-msgstr ""
+msgstr "キーバインド"
 
 #. 3.8->settings-schema.json->more-info->title
 msgid "More about the Weather applet"
-msgstr ""
+msgstr "天気アプレットの詳細"
 
 #. 3.8->settings-schema.json->submit-issue->title
 msgid "Report an issue"
-msgstr ""
+msgstr "問題を報告"
 
 #. 3.8->settings-schema.json->debug-options->title
 #. 3.8->settings-schema.json->logLevel->options
 msgid "Debug"
-msgstr ""
+msgstr "デバッグ"
 
 #. 3.8->settings-schema.json->dataService->tooltip
 msgid ""
@@ -2463,31 +2391,31 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Deutscher Wetterdienst (Germany only)"
-msgstr ""
+msgstr "Deutscher Wetterdienst（ドイツ限定）"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (UK only)"
-msgstr ""
+msgstr "Met Office UK（英国限定）"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "US National Weather (US only)"
-msgstr ""
+msgstr "US National Weather（米国限定）"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Visual Crossing (key needed)"
-msgstr ""
+msgstr "Visual Crossing（要APIキー）"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Tomorrow.io (key needed)"
-msgstr ""
+msgstr "Tomorrow.io（要APIキー）"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "AccuWeather (key needed)"
-msgstr ""
+msgstr "AccuWeather（要APIキー）"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Weather Underground (key needed)"
-msgstr ""
+msgstr "Weather Underground（要APIキー）"
 
 #. 3.8->settings-schema.json->location->tooltip
 msgid ""
@@ -2499,10 +2427,8 @@ msgid ""
 msgstr ""
 
 #. 3.8->settings-schema.json->saveLocation->description
-#, fuzzy
-#| msgid "Override location label"
 msgid "Save current location to storage"
-msgstr "場所ラベルの書換"
+msgstr "現在の位置情報を保存"
 
 #. 3.8->settings-schema.json->saveLocation->tooltip
 msgid ""
@@ -2512,7 +2438,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
-msgstr ""
+msgstr "Cinnamon Spicesウェブサイトの天気アプレット"
 
 #. 3.8->settings-schema.json->refreshInterval->tooltip
 msgid ""
@@ -2535,7 +2461,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->immediatePrecip->description
 msgid "Enable minutely precipitation forecast"
-msgstr ""
+msgstr "毎分の降水量予報を有効化"
 
 #. 3.8->settings-schema.json->immediatePrecip->tooltip
 msgid ""
@@ -2546,7 +2472,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
-msgstr ""
+msgstr "両方の単位を併記"
 
 #. 3.8->settings-schema.json->tempTextOverride->tooltip
 msgid ""
@@ -2558,7 +2484,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->description
 msgid "Always show Hourly Weather"
-msgstr ""
+msgstr "毎時の予報を常に表示"
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->tooltip
 msgid ""
@@ -2582,31 +2508,31 @@ msgstr ""
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Latitude"
-msgstr ""
+msgstr "緯度"
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Longitude"
-msgstr ""
+msgstr "経度"
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "City"
-msgstr ""
+msgstr "都市"
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Country"
-msgstr ""
+msgstr "国"
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Timezone"
-msgstr ""
+msgstr "タイムゾーン"
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Search entry"
-msgstr ""
+msgstr "検索エントリ"
 
 #. 3.8->settings-schema.json->displayWindAsText->description
 msgid "Display wind direction as text"
-msgstr ""
+msgstr "風向を文字で表示"
 
 #. 3.8->settings-schema.json->displayWindAsText->tooltip
 msgid "Like SE, N instead of direction icons."
@@ -2618,7 +2544,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
-msgstr ""
+msgstr "アプレット全体でシンボリックアイコンを使う"
 
 #. 3.8->settings-schema.json->more-info-label->description
 msgid ""
@@ -2627,10 +2553,14 @@ msgid ""
 "clicking the button below. Here you can ask questions etc in the comment "
 "section by logging in with your Github account."
 msgstr ""
+"アプレットの詳細については、以下のボタンをクリックして、Spicesウェブサイトで"
+"既知の問題、トラブルシューティング、変更履歴などの情報を確認してください。"
+"Githubのアカウントでログインすると、コメント欄で質問などをすることができま"
+"す。"
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
-msgstr ""
+msgstr "イシューを作成"
 
 #. 3.8->settings-schema.json->submitIssue->tooltip
 msgid ""
@@ -2641,7 +2571,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->maintainer->description
 msgid "Current maintainer: Gr3q"
-msgstr ""
+msgstr "現在のメンテナ: Gr3q"
 
 #. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
@@ -2655,6 +2585,14 @@ msgid ""
 "the issue is about. Logs with Debug level (which can be saved to a file "
 "below) are also appreciated."
 msgstr ""
+"このアプレットに問題点が見つかった場合は、下のボタンをクリックしてGithubアカ"
+"ウントでログインし、レポートを作成してください。\n"
+"\n"
+"報告前に、その問題がまだIssuesで報告されていないことを確認し、イシューの説明"
+"文に記入した内容を確認してください。何が問題なのかを誰もが簡単に理解できるよ"
+"うに、イシュータイトル欄にアプレット名とともに短い説明を忘れずに追加してくだ"
+"さい。デバッグ レベルのログ（下のボタンでファイルに保存可能）もあると助かりま"
+"す。"
 
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
@@ -2668,7 +2606,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->logLevel->description
 msgid "Log Level"
-msgstr ""
+msgstr "ログレベル"
 
 #. 3.8->settings-schema.json->logLevel->tooltip
 msgid ""
@@ -2679,11 +2617,11 @@ msgstr ""
 
 #. 3.8->settings-schema.json->logLevel->options
 msgid "Verbose"
-msgstr ""
+msgstr "詳細"
 
 #. 3.8->settings-schema.json->fileSelect->description
 msgid "Click Save to save debug information to a file"
-msgstr ""
+msgstr "クリックしてデバッグ情報をファイルに保存"
 
 #. 3.8->settings-schema.json->fileSelect->tooltip
 msgid ""
