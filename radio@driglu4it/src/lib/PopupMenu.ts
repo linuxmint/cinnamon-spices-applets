@@ -1,11 +1,15 @@
+import { constant } from "lodash"
+import { ChangeHandler } from "../types"
+
 const { BoxLayout, Bin, Side } = imports.gi.St
 const { uiGroup, layoutManager, panelManager, pushModal, popModal } = imports.ui.main
 const { KEY_Escape } = imports.gi.Clutter
 const { util_get_transformed_allocation } = imports.gi.Cinnamon
 const { PanelLoc } = imports.ui.popupMenu
 
-export interface PopupMenuArguments {
+export interface PopupMenuProps {
     launcher: imports.gi.St.Widget,
+    onClosed?: () => void
 }
 
 // the space on the monitor which is free for the popup menu, i.e. the monitor minus the panels.
@@ -16,19 +20,21 @@ interface FreeSpaceBox {
     right: number
 }
 
-interface PopupMenu extends imports.gi.St.BoxLayout {
+export interface PopupMenu extends imports.gi.St.BoxLayout {
     /** toggles the visibility of the popupMenu */
     toggle: () => void
     /** close the popupmenu and relase the grabbed keys. Use this instead of hide! */
     close: () => void
+    addPopupMenuCloseHandler: (ChangeHandler: ChangeHandler<void>) => void
 }
 
+const onPopupMenuClosedHandlers: ChangeHandler<void>[] = []
 
-export function createPopupMenu(args: PopupMenuArguments) {
+export function createPopupMenu(props: PopupMenuProps) {
 
     const {
         launcher
-    } = args
+    } = props
 
     const box = new BoxLayout({
         style_class: 'popup-menu-content',
@@ -65,6 +71,7 @@ export function createPopupMenu(args: PopupMenuArguments) {
             setLayout()
         }, 0);
     })
+
 
     function setLayout() {
 
@@ -176,6 +183,8 @@ export function createPopupMenu(args: PopupMenuArguments) {
         box.hide()
         launcher.remove_style_pseudo_class('checked')
         popModal(box)
+        onPopupMenuClosedHandlers.forEach((handler) => handler())
+
     }
 
     function handleClick(actor: imports.gi.Clutter.Stage, event: imports.gi.Clutter.Event) {
@@ -192,6 +201,12 @@ export function createPopupMenu(args: PopupMenuArguments) {
         (!binClicked && !appletClicked) && close()
     }
 
+    const addPopupMenuCloseHandler = (changeHandler: ChangeHandler<void>) => {
+        onPopupMenuClosedHandlers.push(changeHandler)
+    }
+
+
+    (box as PopupMenu).addPopupMenuCloseHandler = addPopupMenuCloseHandler;
     (box as PopupMenu).toggle = toggle;
     // TODO: remove close
     (box as PopupMenu).close = close

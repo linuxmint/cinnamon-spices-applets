@@ -214,12 +214,16 @@ class Sidebar {
                         }
                         this.appThis.menu.close(); }));
         //----add favorite apps and favorite files to this.items[]
-        if (this.appThis.settings.addFavorites) {
+        if (this.appThis.settings.sidebarFavorites === 1 //Apps only
+                    || this.appThis.settings.sidebarFavorites === 3) { // Apps and files
             this.appThis.listFavoriteApps().forEach(fav => {
                 this.items.push(new SidebarButton( this.appThis,
                                 fav.create_icon_texture(this.appThis.settings.sidebarIconSize),
                                         fav, fav.name, fav.description, null));
             });
+        }
+        if (this.appThis.settings.sidebarFavorites === 2 //Files only
+                    || this.appThis.settings.sidebarFavorites === 3) { // Apps and files
             this.appThis.listFavoriteFiles().forEach(fav => {
                 let gicon = getThumbnail_gicon(fav.uri, fav.mimeType) || fav.gicon;
                 this.items.push(new SidebarButton( this.appThis,

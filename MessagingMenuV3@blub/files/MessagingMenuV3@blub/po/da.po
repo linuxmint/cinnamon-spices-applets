@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-01 13:39+0200\n"
-"PO-Revision-Date: 2017-07-01 13:40+0200\n"
+"POT-Creation-Date: 2021-02-18 00:57+0100\n"
+"PO-Revision-Date: 2022-10-25 18:41+0200\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:181
+#: applet.js:182
 msgid "Compose New Message..."
-msgstr "Skriv ny besked ..."
+msgstr "Skriv ny besked …"
 
-#: applet.js:183
+#: applet.js:184
 msgid "Contacts"
 msgstr "Kontakter"
 
-#. MessagingMenuV3@blub->metadata.json->description
-msgid "Messaging Menu applet now compatible with Cinnamon 2.4"
-msgstr "Panelprogrammet Beskedmenu nu kompatibel med Cinnamon 2.4"
+#. metadata.json->name
+msgid "Messaging Menu"
+msgstr "Beskedmenu"
 
-#. MessagingMenuV3@blub->metadata.json->name
-msgid "Messaging Menu V3"
-msgstr "Beskedmenu V3"
+#. metadata.json->description
+msgid "Messaging Menu applet"
+msgstr "Panelprogram med menu til beskeder"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-16 02:20+0000\n"
-"PO-Revision-Date: 2022-05-07 14:13+0200\n"
+"POT-Creation-Date: 2022-09-29 19:16+0100\n"
+"PO-Revision-Date: 2022-10-16 06:47+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 msgid "Type to search..."
 msgstr "Skriv för att söka..."
@@ -206,6 +206,33 @@ msgstr "Flytta till papperskorgen"
 
 msgid "Error while moving file to trash:"
 msgstr "Kunde inte flytta filen till papperskorgen:"
+
+msgid "Smileys & Emotion"
+msgstr "Smileys & känslor"
+
+msgid "People & Body"
+msgstr "Folk & kropp"
+
+msgid "Animals & Nature"
+msgstr "Djur & natur"
+
+msgid "Food & Drink"
+msgstr "Mat & dryck"
+
+msgid "Travel & Places"
+msgstr "Resor & platser"
+
+msgid "Activities"
+msgstr "Aktiviteter"
+
+msgid "Objects"
+msgstr "Objekt"
+
+msgid "Symbols"
+msgstr "Symboler"
+
+msgid "Flags"
+msgstr "Flaggor"
 
 msgid ""
 "This menu item is not associated to any package. Do you want to remove it "
@@ -452,21 +479,6 @@ msgstr "Programmens visningsläge"
 msgid "View applications as list or grid"
 msgstr "Visa programmen i list eller ikonvy"
 
-msgid "Application description placement"
-msgstr "Programbeskrivningens placering"
-
-msgid "Tooltips"
-msgstr "Knappbeskrivning"
-
-msgid "Under titles"
-msgstr "Under titeln"
-
-msgid "None"
-msgstr "Ingen"
-
-msgid "Choose where to show application descriptions"
-msgstr "Välj var programbeskrivningarna skall visas"
-
 msgid "Sidebar location"
 msgstr "Sidofältets plats"
 
@@ -485,18 +497,42 @@ msgstr "Höger"
 msgid "Choose where to show the sidebar"
 msgstr "Välj var sidofältet skall visas"
 
+msgid "Show favorites on sidebar"
+msgstr "Visa favoriter i sidofältet"
+
+msgid "None"
+msgstr "Ingen"
+
+msgid "Apps only"
+msgstr "Endast program"
+
+msgid "Files only"
+msgstr "Endast filer"
+
+msgid "Apps and files"
+msgstr "Program och filer"
+
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Visa favoritprogram och filikoner i sidofältet"
+
+msgid "Application description placement"
+msgstr "Programbeskrivningens placering"
+
+msgid "Tooltips"
+msgstr "Knappbeskrivning"
+
+msgid "Under titles"
+msgstr "Under titeln"
+
+msgid "Choose where to show application descriptions"
+msgstr "Välj var programbeskrivningarna skall visas"
+
 msgid ""
 "\n"
 "Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 "\n"
 "Info / Tips: Dra i menykanten för att ändra menystorlek.\n"
-
-msgid "Show favorites on sidebar"
-msgstr "Visa favoriter i sidofältet"
-
-msgid "Show your favorite app and file icons on the sidebar"
-msgstr "Visa ikoner för favoritprogram och filer i sdofältet"
 
 msgid "Show recent items"
 msgstr "Visa tidigare objekt"
@@ -515,6 +551,12 @@ msgstr "Visa hemmappen"
 
 msgid "Show home folder category in the menu"
 msgstr "Visa kategori för hemmappen i menyn"
+
+msgid "Show emoji category"
+msgstr "Visa emoji-kategori"
+
+msgid "Show emoji category in the menu"
+msgstr "Visa emoji-kategori i menyn"
 
 msgid "Last used category"
 msgstr "Senast använda kategori"
@@ -539,6 +581,16 @@ msgstr "Webbsökalternativ"
 
 msgid "Show an internet search option in search results"
 msgstr "Visa ett internetsökalternativ i sökresultat"
+
+msgid "Web search suggestions"
+msgstr "Webbsökförslag"
+
+msgid ""
+"With web search option, also show search suggestions. (Note: This uses "
+"Google's search API)"
+msgstr ""
+"Visa även sökförslag, med webbsökningsalternativen. (OBS! Detta använder "
+"Googles sök-API)"
 
 msgid "Search home folder"
 msgstr "Sök i hemmappen"

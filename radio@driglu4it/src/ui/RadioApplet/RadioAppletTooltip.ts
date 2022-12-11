@@ -1,3 +1,4 @@
+import { addOnAppletMovedCallback } from "../.."
 import { DEFAULT_TOOLTIP_TXT } from "../../consts"
 import { mpvHandler } from "../../services/mpv/MpvHandler"
 import { addDownloadingSongsChangeListener, getCurrentDownloadingSongs } from "../../services/youtubeDownload/YoutubeDownloadManager"
@@ -16,9 +17,13 @@ export function createRadioAppletTooltip(args: Arguments) {
     } = args
 
     const tooltip = new PanelItemTooltip(appletContainer, undefined, __meta.orientation)
+    
     tooltip['_tooltip'].set_style("text-align: left;")
 
     const setRefreshTooltip = () => {
+
+        // @ts-ignore
+        tooltip.orientation = __meta.orientation
 
         if (mpvHandler.getPlaybackStatus() === 'Stopped') {
             tooltip.set_markup(DEFAULT_TOOLTIP_TXT)
@@ -55,7 +60,8 @@ export function createRadioAppletTooltip(args: Arguments) {
         mpvHandler.addPlaybackStatusChangeHandler,
         mpvHandler.addTitleChangeHandler,
         mpvHandler.addChannelChangeHandler,
-        addDownloadingSongsChangeListener
+        addDownloadingSongsChangeListener, 
+        addOnAppletMovedCallback
     ].forEach(cb => cb(setRefreshTooltip))
 
     setRefreshTooltip()

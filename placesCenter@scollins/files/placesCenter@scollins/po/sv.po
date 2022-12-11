@@ -1,60 +1,64 @@
 # Swedish translation for placesCenter@scollins.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2019.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: placesCenter@scollins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-19 21:13-0700\n"
-"PO-Revision-Date: 2019-03-02 14:35+0100\n"
+"POT-Creation-Date: 2021-02-24 20:57+0100\n"
+"PO-Revision-Date: 2022-10-29 15:32+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
 
-#: applet.js:178
+#: applet.js:148
+msgid "(Right click to open folder)"
+msgstr "(Högerklicka för att öppna mapp)"
+
+#: applet.js:170
 msgid "Places"
 msgstr "Platser"
 
-#: applet.js:291
+#: applet.js:284
 msgid "Search Home Folder"
 msgstr "Sök i hemkatalogen"
 
-#: applet.js:305
+#: applet.js:307
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#: applet.js:314
+#: applet.js:316
 msgid "Search File System"
 msgstr "Sök i filsystemet"
 
-#: applet.js:330
+#: applet.js:341
 msgid "RECENT DOCUMENTS"
 msgstr "TIDIGARE DOKUMENT"
 
-#: applet.js:344
+#: applet.js:355
 msgid "Clear"
 msgstr "Rensa"
 
-#: applet.js:388
+#: applet.js:398
 msgid "Computer"
 msgstr "Dator"
 
-#: applet.js:394
+#: applet.js:404
 msgid "File System"
 msgstr "Filsystem"
 
-#: applet.js:410
+#: applet.js:420
 msgid "Network"
 msgstr "Nätverk"
 
-#: applet.js:513
+#: applet.js:560
 msgid "Trash"
 msgstr "Papperskorg"
 
@@ -116,7 +120,7 @@ msgstr "Söker: "
 
 #: search.py:220
 msgid "Error: insufficient permissions to read folder "
-msgstr "Fel: Otillräckliga rättigheter för att läsa mappen"
+msgstr "Fel: Otillräckliga rättigheter för att läsa mappen "
 
 #: search.py:252
 msgid "Search Completed"
@@ -127,8 +131,36 @@ msgid "Skipping"
 msgstr "Undantar"
 
 #: search.py:259
-msgid " - direcotry already searched"
-msgstr " - mappen redan genomsökt"
+msgid " - directory already searched"
+msgstr "  - mappen redan genomsökt"
+
+#. metadata.json->name
+msgid "Places Center"
+msgstr "Platscentral"
+
+#. metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr "Erbjuder en lättläst layout för att nå dina lagringsplatser"
+
+#. metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr ""
+"Platscentralen är ett funktionsrikt, plattformsöverskridande panelprogram "
+"för Cinnamon som erbjuder enkel åtkomst till alla dina mest använda "
+"lagringsmappar. Bidra gärna till utvecklingen genom \"pull requests\", "
+"felrapporter och funktionsönskemål, i mitt GitHub-förråd."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Author"
+
+#. metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr "kehugter - Lade till konfigurerbart mushjulsklick"
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -257,37 +289,41 @@ msgstr "Visa nätverk"
 msgid "Show recent documents"
 msgstr "Visa tidigare dokument"
 
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "All Recent Documents"
+msgstr "Alla tidigare dokument"
+
 #. settings-schema.json->recentSizeLimit->description
 msgid "Number to show"
 msgstr "Antal att visa"
 
-#. metadata.json->name
-msgid "Places Center"
-msgstr "Platscentral"
-
-#. metadata.json->description
-msgid "Provides an easy-to-read layout to access your places"
-msgstr "Erbjuder en lättläst layout för att nå dina lagringsplatser"
-
-#. metadata.json->comments
-msgid ""
-"Places Center is a feature-rich, cross-platform Cinnamon applet that "
-"provides easy access to all of your most-used places. Feel free to "
-"contribute by submitting pull requests, bug reports and feature requests to "
-"my github repo."
-msgstr ""
-"Platscentralen är ett funktionsrikt, plattformsöverskridande panelprogram "
-"för Cinnamon som erbjuder enkel åtkomst till alla dina mest använda "
-"lagringsmappar. Bidra gärna till utvecklingen genom \"pull requests\", "
-"felrapporter och funktionsönskemål, i mitt GitHub-förråd."
-
-#. metadata.json->contributors
-msgid "Stephen Collins - Author"
-msgstr "Stephen Collins - Author"
-
-#. metadata.json->contributors
-msgid "kehugter - Added configurability to middle click"
-msgstr "kehugter - Lade till konfigurerbart mushjulsklick"
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr "Sekretess"
 
 #~ msgid "General Settings"
 #~ msgstr "Allmänna inställningar"
@@ -303,9 +339,6 @@ msgstr "kehugter - Lade till konfigurerbart mushjulsklick"
 #~ "Lista över uri-/filsökvägar att inkludera. Posterna kan separeras med "
 #~ "antingen kommatecken eller med ny rad. Du kan ange namnet som skall "
 #~ "visas, genom att lägga till :AnpassatNamn efter platsen."
-
-#~ msgid "Recent Documents"
-#~ msgstr "Tidigare dokument"
 
 #~ msgid "User Section"
 #~ msgstr "Användarsektion"

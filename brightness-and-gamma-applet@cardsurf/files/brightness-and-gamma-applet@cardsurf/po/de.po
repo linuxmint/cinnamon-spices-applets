@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-01 14:00+0800\n"
-"PO-Revision-Date: 2021-02-17 09:50+0100\n"
+"PO-Revision-Date: 2022-11-06 22:09+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -134,7 +134,7 @@ msgstr "Ein Symbol, das in der Leiste angezeigt wird"
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->save_every->description
 msgid "Save every"
-msgstr "Speichern alle"
+msgstr "Alle speichern"
 
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->save_every->tooltip
@@ -149,12 +149,12 @@ msgstr "Sekunden"
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->update_scroll->description
 msgid "Adjust brightness scroll"
-msgstr "Helligkeit durch Scrollen regulieren"
+msgstr "Helligkeit durch scrollen regulieren"
 
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->update_scroll->tooltip
 msgid "Allows to adjust a brightness value on a mouse scroll"
-msgstr "Ermöglicht das Ändern des Helligkeitswertes durch Scrollen mit der Maus"
+msgstr "Ermöglicht das Ändern des Helligkeitswertes durch scrollen mit der Maus"
 
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->scroll_step->description
@@ -199,7 +199,7 @@ msgstr "Werte beim Applet-Start anwenden"
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->apply_every->description
 msgid "Apply every"
-msgstr "Anwenden alle"
+msgstr "Alle anwenden"
 
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->apply_every->tooltip

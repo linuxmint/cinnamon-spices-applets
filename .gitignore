@@ -4,3 +4,6 @@
 node_modules/
 /.idea/
 package-lock.json
+*.7z
+internet-indicator@sangorys/files/internet-indicator@sangorys/icons/no-internet2.jpg
+internet-indicator@sangorys/files/internet-indicator@sangorys/icons/wifi-icon-off.png

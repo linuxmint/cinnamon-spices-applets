@@ -7,117 +7,97 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-28 04:35+0100\n"
-"PO-Revision-Date: 2022-06-03 15:23+0200\n"
+"POT-Creation-Date: 2022-12-08 22:29-0500\n"
+"PO-Revision-Date: 2022-12-08 22:32-0500\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
 
-#: applet.js:124 3.2/applet.js:164
+#: 5.4/applet.js:135 3.2/applet.js:135
+msgid "--%"
+msgstr "--%"
+
+#: 5.4/applet.js:136 3.2/applet.js:136
+msgid "Waiting"
+msgstr "In attesa"
+
+#: 5.4/applet.js:160 3.2/applet.js:165
 msgid "Some Dependencies not Installed"
 msgstr "Alcune Dipendenze non sono Installate"
 
-#: applet.js:124
+#: 5.4/applet.js:160
 msgid ""
-"Both 'sox' and 'zenity' are required for this applet to have all its "
-"facilities including notifications and audible alerts .\n"
+"Both 'sox' and 'zenity' are required for this applet to have all of its "
+"functionality including notifications and audible alerts .\n"
 "\n"
-"Please read the help file on how to install them."
+"Please view the README for help on installing them."
 msgstr ""
 "Sia 'sox' che 'zenity' sono richiesti da questa applet per avere tutte le "
 "sue funzionalità comprese le notifiche e gli avvisi acustici.\n"
 "\n"
 "Leggi il file di aiuto per scoprire come installarli."
 
-#: applet.js:132 3.2/applet.js:197
+#: 5.4/applet.js:170 3.2/applet.js:198
 msgid "Battery Monitor Applet"
 msgstr "Applet Monitoraggio Batteria"
 
-#: applet.js:132
+#: 5.4/applet.js:170
 msgid ""
-"A User Defined Sound File has been Specified for low Battery\n"
+"A user-defined sound file has been specified for Low Battery.\n"
 "\n"
-"Please ensure the volume is set sensibly in public places\n"
-"especially if a long loud file is specifed\n"
+"Please ensure the volume is set sensibly in public places,\n"
+"especially if a long or loud file is specified.\n"
 msgstr ""
 "È stato specificato un File Audio Definito dall'Utente per la Batteria "
-"scarica\n"
+"Scarica\n"
 "\n"
 "Assicurati che il volume sia impostato in modo ragionevole nei luoghi "
 "pubblici\n"
 "soprattutto se viene specificato un audio lungo e ad alto volume\n"
 
-#: applet.js:163
-msgid " "
-msgstr ""
-
-#: applet.js:164 3.2/applet.js:137
-msgid "Waiting"
-msgstr "In attesa"
-
-#: applet.js:230 3.2/applet.js:296
+#: 5.4/applet.js:243 3.2/applet.js:297
 msgid "Open Power Statistics"
 msgstr "Apri Statistiche Energetiche"
 
-#: applet.js:236 3.2/applet.js:302
+#: 5.4/applet.js:249 3.2/applet.js:303
 msgid "Open System Monitor"
 msgstr "Apri Monitor di Sistema"
 
-#: applet.js:245 3.2/applet.js:311
-msgid "Housekeeping and System Sub Menu"
+#: 5.4/applet.js:258
+msgid "Housekeeping and System Submenu"
 msgstr "Sottomenù Pulizia e Sistema"
 
-#: applet.js:248 3.2/applet.js:314
+#: 5.4/applet.js:261 3.2/applet.js:315
 msgid "View the Changelog"
 msgstr "Vedi il Changelog"
 
-#: applet.js:254 3.2/applet.js:320
-msgid "Open the Help file"
-msgstr "Apri il file Aiuto"
+#: 5.4/applet.js:267
+msgid "Open the README"
+msgstr ""
 
-#: applet.js:260 3.2/applet.js:326
-msgid "Open stylesheet.css  (Advanced Function)"
-msgstr "Apri stylesheet.css  (Funzionalità Avanzate)"
+#: 5.4/applet.js:273 3.2/applet.js:327
+msgid "Open stylesheet.css (Advanced Function)"
+msgstr "Apri stylesheet.css (Funzionalità Avanzate)"
 
 #. metadata.json->name
-#: applet.js:276 3.2/applet.js:342
-msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
-msgstr "Batteria  Applet con Monitoraggio e Spegnimento (BAMS)"
+#: 5.4/applet.js:289 3.2/applet.js:343
+msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
+msgstr "Batteria Applet con Monitoraggio e Spegnimento (BAMS)"
 
-#: applet.js:281 3.2/applet.js:347
+#: 5.4/applet.js:294 3.2/applet.js:348
 msgid "Waiting for battery information"
 msgstr "In attesa di informazioni sulla batteria"
 
-#: applet.js:343 3.2/applet.js:427
-msgid "Battery Low - turn off or connect to mains"
+#: 5.4/applet.js:372
+msgid "Battery Low - turn off or connect to power supply"
 msgstr "Batteria Scarica - spegnere o collegare alla rete elettrica"
 
-#: applet.js:350 3.2/applet.js:435
-msgid "Battery Monitor Applet Alert"
-msgstr "Avviso Applet Monitoraggio Batteria"
-
-#: applet.js:350 3.2/applet.js:435
-msgid ""
-"The Battery Level has fallen to your alert level\n"
-"\n"
-"either reconnect to a power source,\n"
-"\n"
-"close down your work and suspend or shutdown the machine\n"
-"\n"
-msgstr ""
-"Il livello della batteria è sceso al livello di avviso\n"
-"\n"
-"riconnettersi a una fonte di alimentazione\n"
-"\n"
-"o termina il tuo lavoro e sospendi o spegni la macchina\n"
-"\n"
-
-#: applet.js:352 3.2/applet.js:437
+#: 5.4/applet.js:377 3.2/applet.js:433
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -133,40 +113,36 @@ msgstr ""
 "o termina il tuo lavoro e sospendi o spegni la macchina\n"
 "\n"
 
-#: applet.js:368 3.2/applet.js:453
-msgid "Battery Critical will Suspend unless connected to mains"
+#: 5.4/applet.js:392
+msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Batteria Critica causerà la Sospensione se non collegata alla rete elettrica"
 
-#: applet.js:383 3.2/applet.js:468
+#: 5.4/applet.js:409 3.2/applet.js:464
 msgid "Charge:"
 msgstr "Carica:"
 
-#: applet.js:383 3.2/applet.js:468
+#: 5.4/applet.js:409 3.2/applet.js:464
 msgid "Alert:"
 msgstr "Avviso:"
 
-#: applet.js:383 3.2/applet.js:468
+#: 5.4/applet.js:409 3.2/applet.js:464
 msgid "Suspend:"
 msgstr "Sospensione:"
 
-#: applet.js:441 3.2/applet.js:516
+#: 5.4/applet.js:457 3.2/applet.js:512
 msgid "Percentage Charge:"
 msgstr "Livello Carica:"
 
-#: applet.js:441 3.2/applet.js:516
+#: 5.4/applet.js:457 3.2/applet.js:512
 msgid "Alert at:"
 msgstr "Avviso al:"
 
-#: applet.js:441 3.2/applet.js:516
+#: 5.4/applet.js:457 3.2/applet.js:512
 msgid "Suspend at:"
 msgstr "Sospendi al:"
 
-#: 3.2/applet.js:136
-msgid "--%"
-msgstr "--%"
-
-#: 3.2/applet.js:164
+#: 3.2/applet.js:165
 msgid ""
 "'upower', 'sox' and 'zenity' are required for this applet to have all its "
 "facilities including notifications and audible alerts .\n"
@@ -178,7 +154,7 @@ msgstr ""
 "\n"
 "Leggi il file di aiuto per scoprire come installarli."
 
-#: 3.2/applet.js:197
+#: 3.2/applet.js:198
 msgid ""
 "A User Defined Sound File has been Specified for Low Battery\n"
 "\n"
@@ -192,29 +168,63 @@ msgstr ""
 "pubblici\n"
 "soprattutto se viene specificato un audio lungo e ad alto volume\n"
 
+#: 3.2/applet.js:312
+msgid "Housekeeping and System Sub Menu"
+msgstr "Sottomenù Pulizia e Sistema"
+
+#: 3.2/applet.js:321
+msgid "Open the Help file"
+msgstr "Apri il file Aiuto"
+
+#: 3.2/applet.js:423
+msgid "Battery Low - turn off or connect to mains"
+msgstr "Batteria Scarica - spegnere o collegare alla rete elettrica"
+
+#: 3.2/applet.js:431
+msgid "Battery Monitor Applet Alert"
+msgstr "Avviso Applet Monitoraggio Batteria"
+
+#: 3.2/applet.js:431
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+"either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"Il livello della batteria è sceso al livello di avviso\n"
+"\n"
+"riconnettersi a una fonte di alimentazione\n"
+"\n"
+"o termina il tuo lavoro e sospendi o spegni la macchina\n"
+"\n"
+
+#: 3.2/applet.js:449
+msgid "Battery Critical will Suspend unless connected to mains"
+msgstr ""
+"Batteria Critica causerà la Sospensione se non collegata alla rete elettrica"
+
 #. metadata.json->description
 msgid "Displays Charge as Percentage and allows Alerts and Actions"
 msgstr ""
 "Visualizza la Carica come Percentuale e consente di utilizzare Avvisi e "
 "Azioni"
 
-#. settings-schema.json->head->description
-#. 3.2->settings-schema.json->head->description
-msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
+#. 5.4->settings-schema.json->head->description
+msgid "General Settings"
 msgstr ""
-"Impostazioni Generali per l'Applet Batteria con Monitoraggio e Spegnimento"
 
-#. settings-schema.json->refreshInterval-spinner->units
+#. 5.4->settings-schema.json->refreshInterval-spinner->units
 #. 3.2->settings-schema.json->refreshInterval-spinner->units
 msgid "seconds"
 msgstr "secondi"
 
-#. settings-schema.json->refreshInterval-spinner->description
-#. 3.2->settings-schema.json->refreshInterval-spinner->description
-msgid "Refresh Interval for Display:"
-msgstr "Intervallo di Aggiornamento per la Visualizzazione:"
+#. 5.4->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display"
+msgstr "Intervallo di Aggiornamento per la Visualizzazione"
 
-#. settings-schema.json->refreshInterval-spinner->tooltip
+#. 5.4->settings-schema.json->refreshInterval-spinner->tooltip
 #. 3.2->settings-schema.json->refreshInterval-spinner->tooltip
 msgid ""
 "Increase or decrease this spinner value to change the refresh interval - use "
@@ -224,12 +234,12 @@ msgstr ""
 "aggiornamento: usa un aggiornamento lento se hai una macchina lenta. Questo "
 "regola anche la velocità del flash."
 
-#. settings-schema.json->alertPercentage->description
+#. 5.4->settings-schema.json->alertPercentage->description
 #. 3.2->settings-schema.json->alertPercentage->description
 msgid "Percentage Battery Charge at which Alert Displayed"
 msgstr "Percentuale di Carica della Batteria a cui viene Visualizzato l'Avviso"
 
-#. settings-schema.json->alertPercentage->tooltip
+#. 5.4->settings-schema.json->alertPercentage->tooltip
 #. 3.2->settings-schema.json->alertPercentage->tooltip
 msgid ""
 "Percentage of Battery Charge at which Orange Warning Background is displayed "
@@ -239,43 +249,43 @@ msgstr ""
 "Sfondo di Avviso Arancione - Viene anche mostrato e può essere regolato nel "
 "menù di scelta rapida dell'Applet"
 
-#. settings-schema.json->head1->description
+#. 5.4->settings-schema.json->head1->description
 #. 3.2->settings-schema.json->head1->description
 msgid "Display Mode"
 msgstr "Modalità di Visualizzazione"
 
-#. settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
 msgid ""
 "Classic - Battery Percentage with extended messages for horizontal panel"
 msgstr ""
 "Classica - Percentuale Batteria con messaggi estesi sul pannello orizzontale"
 
-#. settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
 msgid "Classic Plus - Classic with addition of Battery Icon"
 msgstr "Classica Plus - Classica con aggiunta dell'Icona Batteria"
 
-#. settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
 msgid "Compact - Battery Percentage without extended messages"
 msgstr "Compatta - Percentuale Batteria senza messaggi estesi"
 
-#. settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
-msgid "Compact Plus - Compact  with addition of Battery Icon"
-msgstr "Compatta Plus - Compatto  con l'aggiunta dell'Icona Batteria"
+msgid "Compact Plus - Compact with addition of Battery Icon"
+msgstr "Compatta Plus - Compatto con l'aggiunta dell'Icona Batteria"
 
-#. settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
 msgid "Icon Only on coloured background indicating status"
 msgstr "Solo Icona su sfondo colorato che indica lo stato"
 
-#. settings-schema.json->displayType->description
-msgid "Type of Display"
-msgstr "Tipo di Visualizzazione"
+#. 5.4->settings-schema.json->displayType->description
+msgid "Toolbar Display Type"
+msgstr ""
 
-#. settings-schema.json->displayType->tooltip
+#. 5.4->settings-schema.json->displayType->tooltip
 #. 3.2->settings-schema.json->displayType->tooltip
 msgid ""
 "This feature offers the Classic (original) display with optional battery "
@@ -286,19 +296,129 @@ msgstr ""
 "della batteria opzionale e alcune visualizzazioni più compatte adatte per un "
 "pannello verticale (Compatta/Compatta Plus e Solo Icona)"
 
-#. 3.2->settings-schema.json->displayType->description
-msgid "Type of Display in Toolbar"
-msgstr "Tipo di Visualizzazione nella Toolbar"
-
+#. 5.4->settings-schema.json->head2->description
 #. 3.2->settings-schema.json->head2->description
 msgid "Battery Low Alert Settings"
 msgstr "Impostazioni Avviso Batteria Scarica"
 
+#. 5.4->settings-schema.json->useBatteryLowSound->description
 #. 3.2->settings-schema.json->useBatteryLowSound->description
 msgid "Provide audible alerts when Battery Low and at Shutdown Level"
 msgstr ""
 "Fornire avvisi acustici quando la Batteria è Scarica e al Livello di "
 "Spegnimento"
+
+#. 5.4->settings-schema.json->useBatteryLowSound->tooltip
+msgid ""
+"Must have `sox` installed. Limited number of sound file types supported (."
+"oga and .wav)"
+msgstr ""
+"Devi avere Sox installato. Numero limitato di tipi di file audio supportati "
+"(.oga e .wav)"
+
+#. 5.4->settings-schema.json->chooseBatteryLowSound->description
+#. 3.2->settings-schema.json->chooseBatteryLowSound->description
+msgid ""
+"Allow choice of audible alert file when Battery Low and at Shutdown Level"
+msgstr ""
+"Consenti la scelta del file di avviso acustico quando la Batteria è Scarica "
+"e al Livello di Spegnimento"
+
+#. 5.4->settings-schema.json->chooseBatteryLowSound->tooltip
+msgid ""
+"Must have `sox` installed. Limited number of sound file types supported in "
+"versions < 4.2"
+msgstr ""
+"Devi avere Sox installato. Numero limitato di tipi di file audio supportati "
+"nelle versioni < 4.2"
+
+#. 5.4->settings-schema.json->batteryLowSound->description
+#. 3.2->settings-schema.json->batteryLowSound->description
+msgid "Choose sound file to use when Battery is Low"
+msgstr "Scegli il file audio da utilizzare quando la Batteria è Scarica"
+
+#. 5.4->settings-schema.json->batteryLowSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places, especially if a "
+"long or loud file is specified"
+msgstr ""
+"Assicurati che il volume sia impostato in modo ragionevole nei luoghi "
+"pubblici, specialmente se è specificato un audio lungo e ad alto volume"
+
+#. 5.4->settings-schema.json->batteryShutdownSound->description
+msgid "Sound file to use when Battery is at Shutdown Level"
+msgstr ""
+"Scegli il file audio da utilizzare quando la Batteria è al Livello di "
+"Spegnimento"
+
+#. 5.4->settings-schema.json->batteryShutdownSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places - do not specify a "
+"long or loud file at Shutdown"
+msgstr ""
+"Assicurati che il volume sia impostato in modo ragionevole nei luoghi "
+"pubblici - non specificare un audio lungo e ad alto volume allo Spegnimento"
+
+#. 5.4->settings-schema.json->notifyBatteryLowSound->description
+msgid ""
+"Provide notification when user specified sound file is in use (Recommended)"
+msgstr ""
+"Fornisci una notifica quando il file audio specificato dall'utente è in uso "
+"- Consigliato"
+
+#. 5.4->settings-schema.json->notifyBatteryLowSound->tooltip
+msgid "To remind that the volume may need to be set sensibly in public places"
+msgstr ""
+"Per ricordare agli utenti che potrebbe essere necessario impostare il volume "
+"in modo ragionevole nei luoghi pubblici"
+
+#. 5.4->settings-schema.json->head3->description
+#. 3.2->settings-schema.json->head3->description
+msgid "Household Tasks"
+msgstr "Compiti Domestici"
+
+#. 5.4->settings-schema.json->deleteTempraryFiles->description
+msgid "Delete temporary files after upgrade to applet version 1.4"
+msgstr "Elimina i file temporanei dopo l'aggiornamento alla versione 1.4"
+
+#. 5.4->settings-schema.json->deleteTempraryFiles->tooltip
+msgid ""
+"Applet versions prior to 1.4 used temporary files in the home directory. "
+"These are not needed anymore and can be deleted."
+msgstr ""
+"Le versioni precedenti alla 1.4 utilizzavano file temporanei nella directory "
+"home. Questi non sono più necessari e possono essere eliminati."
+
+#. 5.4->settings-schema.json->head4->description
+msgid "Advanced"
+msgstr ""
+
+#. 5.4->settings-schema.json->customBatteryPath->description
+msgid ""
+"Path to battery capacity directory (device path)"
+msgstr ""
+
+#. 5.4->settings-schema.json->customBatteryPath->tooltip
+msgid ""
+"Choose your own power_supply object e.g. for monitoring your secondary "
+"battery.\n"
+"\n"
+"Default:\n"
+"/sys/class/power_supply/BAT0"
+msgstr ""
+
+#. 3.2->settings-schema.json->head->description
+msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
+msgstr ""
+"Impostazioni Generali per l'Applet Batteria con Monitoraggio e Spegnimento"
+
+#. 3.2->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Intervallo di Aggiornamento per la Visualizzazione:"
+
+#. 3.2->settings-schema.json->displayType->description
+msgid "Type of Display in Toolbar"
+msgstr "Tipo di Visualizzazione nella Toolbar"
 
 #. 3.2->settings-schema.json->useBatteryLowSound->tooltip
 msgid ""
@@ -308,13 +428,6 @@ msgstr ""
 "Devi avere Sox installato. Numero limitato di tipi di file audio supportati "
 "(.oga e .wav)"
 
-#. 3.2->settings-schema.json->chooseBatteryLowSound->description
-msgid ""
-"Allow choice of audible alert file when Battery Low and at Shutdown Level"
-msgstr ""
-"Consenti la scelta del file di avviso acustico quando la Batteria è Scarica "
-"e al Livello di Spegnimento"
-
 #. 3.2->settings-schema.json->chooseBatteryLowSound->tooltip
 msgid ""
 "Must have Sox installed. Limited number of sound file types supported in "
@@ -322,10 +435,6 @@ msgid ""
 msgstr ""
 "Devi avere Sox installato. Numero limitato di tipi di file audio supportati "
 "nelle versioni < 4.2"
-
-#. 3.2->settings-schema.json->batteryLowSound->description
-msgid "Choose sound file to use when Battery is Low"
-msgstr "Scegli il file audio da utilizzare quando la Batteria è Scarica"
 
 #. 3.2->settings-schema.json->batteryLowSound->tooltip
 msgid ""
@@ -363,10 +472,6 @@ msgstr ""
 "Per ricordare agli utenti che potrebbe essere necessario impostare il volume "
 "in modo ragionevole nei luoghi pubblici"
 
-#. 3.2->settings-schema.json->head3->description
-msgid "Household Tasks"
-msgstr "Compiti Domestici"
-
 #. 3.2->settings-schema.json->deleteTempraryFiles->description
 msgid "Delete temporary files after upgrade to version 1.4"
 msgstr "Elimina i file temporanei dopo l'aggiornamento alla versione 1.4"
@@ -378,6 +483,25 @@ msgid ""
 msgstr ""
 "Le versioni precedenti alla 1.4 utilizzavano file temporanei nella directory "
 "home. Questi non sono più necessari e possono essere eliminati."
+
+#~ msgid ""
+#~ "A User Defined Sound File has been Specified for low Battery\n"
+#~ "\n"
+#~ "Please ensure the volume is set sensibly in public places\n"
+#~ "especially if a long loud file is specifed\n"
+#~ msgstr ""
+#~ "È stato specificato un File Audio Definito dall'Utente per la Batteria "
+#~ "scarica\n"
+#~ "\n"
+#~ "Assicurati che il volume sia impostato in modo ragionevole nei luoghi "
+#~ "pubblici\n"
+#~ "soprattutto se viene specificato un audio lungo e ad alto volume\n"
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "Type of Display"
+#~ msgstr "Tipo di Visualizzazione"
 
 #~ msgid "Ok"
 #~ msgstr "Ok"

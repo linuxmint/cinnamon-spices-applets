@@ -61,7 +61,9 @@ margin to override*/
 
 .menu-applications-subheading {
     font-weight: bold;
-    font-size: 90%;
+    font-size: 100%;
+    padding-top: 0.3em;
+    padding-left: 0.3em;
     /*text-align: center;*//*known bug: causes label to jump about when resizing menu*/
 }
 

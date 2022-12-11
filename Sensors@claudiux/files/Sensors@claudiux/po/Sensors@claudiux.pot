@@ -1,14 +1,14 @@
-# Sensors@claudiux
-# Copyright (C) 2020 claudiux aka Claude Clerc
-# This file is distributed under the same license as the Sensors@claudiux package.
-# claudiux <claude.clerc@gmail.com>, 2020.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-24 00:44+0200\n"
+"POT-Creation-Date: 2022-11-13 19:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,107 +17,158 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: checkDependencies.js:279
+#. metadata.json->name
+#: applet.js:90
+msgid "Sensors Monitor"
+msgstr ""
+
+#: applet.js:389 applet.js:440
+msgid "high:"
+msgstr ""
+
+#: applet.js:389 applet.js:391 applet.js:440 applet.js:442 applet.js:475
+msgid "n/a"
+msgstr ""
+
+#: applet.js:391 applet.js:442
+msgid "crit:"
+msgstr ""
+
+#: applet.js:475
+msgid "min:"
+msgstr ""
+
+#: applet.js:506
+msgid "max:"
+msgstr ""
+
+#: applet.js:534
+msgid "No intrusion detected"
+msgstr ""
+
+#: applet.js:534
+msgid "INTRUSION DETECTED!"
+msgstr ""
+
+#: applet.js:554
+msgid "Must be configured!"
+msgstr ""
+
+#: applet.js:808
+msgid "Settings"
+msgstr ""
+
+#: applet.js:808
+msgid ":"
+msgstr ""
+
+#. settings-schema.json->page_General->title
+#: applet.js:815
+msgid "⚙ General"
+msgstr ""
+
+#: applet.js:825
+msgid "🌡 Temperature sensors"
+msgstr ""
+
+#: applet.js:835
+msgid "🤂 Fan sensors"
+msgstr ""
+
+#: applet.js:845
+msgid "🗲 Voltage sensors"
+msgstr ""
+
+#: applet.js:855
+msgid "⮿ Intrusion sensors"
+msgstr ""
+
+#. settings-schema.json->xsensors->description
+#: applet.js:866
+msgid "Run xsensors"
+msgstr ""
+
+#: applet.js:877
+msgid "Reload this applet"
+msgstr ""
+
+#: applet.js:1165
+#, javascript-format
+msgid "Are you sure you want to remove '%s'?"
+msgstr ""
+
+#: lib/checkDependencies.js:281
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr ""
 
-#: checkDependencies.js:280
+#: lib/checkDependencies.js:282
 msgid "All dependencies are installed"
 msgstr ""
 
-#: checkDependencies.js:305
+#: lib/checkDependencies.js:307
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 
-#: checkDependencies.js:306
+#: lib/checkDependencies.js:308
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 
-#: checkDependencies.js:307
+#: lib/checkDependencies.js:309
 msgid "Some dependencies are not installed!"
 msgstr ""
 
-#. metadata.json->name
-#: applet.js:83
-msgid "Sensors Monitor"
-msgstr ""
-
-#: applet.js:352
-msgid "high:"
-msgstr ""
-
-#: applet.js:352 applet.js:354 applet.js:379
-msgid "n/a"
-msgstr ""
-
-#: applet.js:354
-msgid "crit:"
-msgstr ""
-
-#: applet.js:379
-msgid "min:"
-msgstr ""
-
-#: applet.js:403
-msgid "max:"
-msgstr ""
-
-#: applet.js:425
-msgid "No intrusion detected"
-msgstr ""
-
-#: applet.js:425
-msgid "INTRUSION DETECTED!"
-msgstr ""
-
-#: applet.js:437
-msgid "Must be configured!"
-msgstr ""
-
-#: applet.js:589
-msgid "Settings"
-msgstr ""
-
-#: applet.js:589
-msgid ":"
-msgstr ""
-
-#. settings-schema.json->page_General->title
-#: applet.js:596
-msgid "⚙ General"
-msgstr ""
-
-#: applet.js:606
-msgid "🌡 Temperature sensors"
-msgstr ""
-
-#: applet.js:616
-msgid "🤂 Fan sensors"
-msgstr ""
-
-#: applet.js:626
-msgid "🗲 Voltage sensors"
-msgstr ""
-
-#: applet.js:636
-msgid "⮿ Intrusion sensors"
-msgstr ""
-
-#. settings-schema.json->xsensors->description
-#: applet.js:647
-msgid "Run xsensors"
-msgstr ""
-
-#: applet.js:658
-msgid "Reload this applet"
-msgstr ""
-
-#: applet.js:914
+#: lib/util.js:243
 #, javascript-format
-msgid "Are you sure you want to remove '%s'?"
+msgid "Execution of '%s' failed:"
+msgstr ""
+
+#: scripts/xs.py:206
+msgid "Previous instance"
+msgstr ""
+
+#: scripts/xs.py:210
+msgid "Next instance"
+msgstr ""
+
+#: scripts/xs.py:219
+msgid "More options"
+msgstr ""
+
+#: scripts/xs.py:225
+msgid "Import from a file"
+msgstr ""
+
+#: scripts/xs.py:230
+msgid "Export to a file"
+msgstr ""
+
+#: scripts/xs.py:235
+msgid "Reset to defaults"
+msgstr ""
+
+#: scripts/xs.py:244
+#, python-format
+msgid "Reload %s"
+msgstr ""
+
+#: scripts/xs.py:425
+#, python-format
+msgid "Settings for %s"
+msgstr ""
+
+#: scripts/xs.py:517
+msgid "Select or enter file to export to"
+msgstr ""
+
+#: scripts/xs.py:525 scripts/xs.py:546
+msgid "JSON files"
+msgstr ""
+
+#: scripts/xs.py:539
+msgid "Select a JSON file to import"
 msgstr ""
 
 #. metadata.json->description
@@ -159,6 +210,10 @@ msgstr ""
 msgid "Remove from panels certain applets that also use sensors"
 msgstr ""
 
+#. settings-schema.json->section_tempHddtemp->title
+msgid "hddtemp is for now only usable by root"
+msgstr ""
+
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
 #. settings-schema.json->section_voltDisplay->title
@@ -168,6 +223,10 @@ msgstr ""
 
 #. settings-schema.json->section_tempSensors->title
 msgid "Temperature sensors"
+msgstr ""
+
+#. settings-schema.json->section_tempDisks->title
+msgid "Temperature scripts"
 msgstr ""
 
 #. settings-schema.json->section_fanSensors->title
@@ -260,6 +319,26 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr ""
 
+#. settings-schema.json->char_color->options
+msgid "White"
+msgstr ""
+
+#. settings-schema.json->char_color->options
+msgid "Black"
+msgstr ""
+
+#. settings-schema.json->char_color->options
+msgid "Grey"
+msgstr ""
+
+#. settings-schema.json->char_color->options
+msgid "Light Grey"
+msgstr ""
+
+#. settings-schema.json->char_color->description
+msgid "Text Color"
+msgstr ""
+
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
 msgstr ""
@@ -302,6 +381,10 @@ msgstr ""
 msgid "Whether or not to display in menu the action: Restart this applet."
 msgstr ""
 
+#. settings-schema.json->make_hddtemp_usable_by_user->description
+msgid "Make hddtemp usable by user"
+msgstr ""
+
 #. settings-schema.json->show_temp->description
 #. settings-schema.json->show_fan->description
 #. settings-schema.json->show_volt->description
@@ -316,6 +399,21 @@ msgstr ""
 msgid ""
 "Whether or not to display the values of the sensors selected in the list "
 "below."
+msgstr ""
+
+#. settings-schema.json->show_temp_name->description
+#. settings-schema.json->show_fan_name->description
+#. settings-schema.json->show_volt_name->description
+#. settings-schema.json->show_intrusion_name->description
+msgid "Display the 'Shown name' of each of these selected sensors"
+msgstr ""
+
+#. settings-schema.json->show_temp_name->tooltip
+#. settings-schema.json->show_fan_name->tooltip
+#. settings-schema.json->show_volt_name->tooltip
+msgid ""
+"Whether or not to display into this applet label the 'Shown name' of the "
+"sensors selected in the list below. Without effect in vertical panels."
 msgstr ""
 
 #. settings-schema.json->strictly_positive_temp->description
@@ -379,10 +477,11 @@ msgstr ""
 #. settings-schema.json->intrusion_sensors->columns->title
 msgid ""
 "Sensor name\n"
-"(Do not change this!)"
+"(Do not modify!)"
 msgstr ""
 
 #. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
@@ -392,6 +491,7 @@ msgid ""
 msgstr ""
 
 #. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
@@ -401,6 +501,7 @@ msgid ""
 msgstr ""
 
 #. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
@@ -414,6 +515,28 @@ msgstr ""
 msgid ""
 "Double-click on a line to change Shown name.\n"
 "To reset a Shown name, copy/paste the Sensor name."
+msgstr ""
+
+#. settings-schema.json->btn_renew_disks_list->description
+msgid "Renew the list of known disks"
+msgstr ""
+
+#. settings-schema.json->temp_disks->columns->title
+msgid "Disk name"
+msgstr ""
+
+#. settings-schema.json->temp_disks->columns->title
+msgid "High °C"
+msgstr ""
+
+#. settings-schema.json->temp_disks->columns->title
+msgid "Critical °C"
+msgstr ""
+
+#. settings-schema.json->temp_disks->tooltip
+msgid ""
+"Disk name: The name of the disk, as returned by the 'lsblk' command. Please see help.\n"
+"High and Critical values: Cf. technical manual of your disk."
 msgstr ""
 
 #. settings-schema.json->fan_unit->description
@@ -434,6 +557,12 @@ msgstr ""
 
 #. settings-schema.json->volt_unit->options
 msgid "mV only"
+msgstr ""
+
+#. settings-schema.json->show_intrusion_name->tooltip
+msgid ""
+" Whether or not to display into this applet label the 'Shown name' of the "
+"sensors selected in the list below. Without effect in vertical panels."
 msgstr ""
 
 #. settings-schema.json->strictly_positive_intrusion->description

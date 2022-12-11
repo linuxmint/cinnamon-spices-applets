@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-16 02:20+0000\n"
-"PO-Revision-Date: 2022-06-03 16:31+0200\n"
+"POT-Creation-Date: 2022-07-02 02:42+0100\n"
+"PO-Revision-Date: 2022-09-12 10:03+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Project-Style: gnome\n"
 
 msgid "Type to search..."
@@ -206,6 +206,33 @@ msgstr "Sposta nel cestino"
 msgid "Error while moving file to trash:"
 msgstr "Errore durante lo spostamento nel cestino:"
 
+msgid "Smileys & Emotion"
+msgstr "Smiley & Emotion"
+
+msgid "People & Body"
+msgstr "Persone & Corpo"
+
+msgid "Animals & Nature"
+msgstr "Animali & Natura"
+
+msgid "Food & Drink"
+msgstr "Cibi & Bevande"
+
+msgid "Travel & Places"
+msgstr "Viaggi & Luoghi"
+
+msgid "Activities"
+msgstr "Attività"
+
+msgid "Objects"
+msgstr "Oggetti"
+
+msgid "Symbols"
+msgstr "Simboli"
+
+msgid "Flags"
+msgstr "Bandiere"
+
 msgid ""
 "This menu item is not associated to any package. Do you want to remove it "
 "from the menu anyway?"
@@ -219,12 +246,10 @@ msgstr "I seguenti pacchetti saranno rimossi:"
 msgid "Packages to be removed"
 msgstr "Pacchetti da rimuovere"
 
-#, python-format
 msgid "Cannot remove package %s as it is required by other packages."
 msgstr ""
 "Impossibile rimuovere il pacchetto %s poiché è richiesto da altri pacchetti."
 
-#, python-format
 msgid "Package %s is a dependency of the following packages:"
 msgstr "Il pacchetto %s è una dipendenza dei seguenti pacchetti:"
 
@@ -453,21 +478,6 @@ msgstr "Modalità di visualizzazione delle applicazioni"
 msgid "View applications as list or grid"
 msgstr "Visualizza applicazioni come elenco o griglia"
 
-msgid "Application description placement"
-msgstr "Posizionamento della descrizione dell'applicazione"
-
-msgid "Tooltips"
-msgstr "Suggerimenti"
-
-msgid "Under titles"
-msgstr "Sotto i titoli"
-
-msgid "None"
-msgstr "Nessuno"
-
-msgid "Choose where to show application descriptions"
-msgstr "Scegli se mostrare o meno la descrizione delle applicazioni"
-
 msgid "Sidebar location"
 msgstr "Posizionamento barra laterale"
 
@@ -486,6 +496,27 @@ msgstr "Destra"
 msgid "Choose where to show the sidebar"
 msgstr "Scegli se mostrare o meno la barra laterale"
 
+msgid "Show favorites on sidebar"
+msgstr "Mostra preferiti sulla barra laterale"
+
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Mostra le icone delle tue app e file preferiti sulla barra laterale"
+
+msgid "Application description placement"
+msgstr "Posizionamento della descrizione dell'applicazione"
+
+msgid "Tooltips"
+msgstr "Suggerimenti"
+
+msgid "Under titles"
+msgstr "Sotto i titoli"
+
+msgid "None"
+msgstr "Nessuno"
+
+msgid "Choose where to show application descriptions"
+msgstr "Scegli se mostrare o meno la descrizione delle applicazioni"
+
 msgid ""
 "\n"
 "Info/tip: Drag on the menu edge to change the menu size.\n"
@@ -493,12 +524,6 @@ msgstr ""
 "\n"
 "Info/suggerimento: trascina sul bordo del menù per modificarne le "
 "dimensioni.\n"
-
-msgid "Show favorites on sidebar"
-msgstr "Mostra preferiti sulla barra laterale"
-
-msgid "Show your favorite app and file icons on the sidebar"
-msgstr "Mostra le icone delle tue app e file preferiti sulla barra laterale"
 
 msgid "Show recent items"
 msgstr "Mostra elementi recenti"
@@ -517,6 +542,12 @@ msgstr "Mostra cartella home"
 
 msgid "Show home folder category in the menu"
 msgstr "Mostra la categoria cartella home nel menù"
+
+msgid "Show emoji category"
+msgstr "Mostra la categoria delle emoji"
+
+msgid "Show emoji category in the menu"
+msgstr "Mostra la categoria emoji nel menù"
 
 msgid "Last used category"
 msgstr "Ultima categoria utilizzata"
@@ -542,6 +573,16 @@ msgstr "Opzione di ricerca sul web"
 
 msgid "Show an internet search option in search results"
 msgstr "Mostra un'opzione di ricerca su Internet nei risultati di ricerca"
+
+msgid "Web search suggestions"
+msgstr "Suggerimenti ricerca web"
+
+msgid ""
+"With web search option, also show search suggestions. (Note: This uses "
+"Google's search API)"
+msgstr ""
+"Mostra anche dei suggerimenti con l'opzione ricerca web. (Nota: Questo "
+"utilizzerà le API di Google Search)"
 
 msgid "Search home folder"
 msgstr "Ricerca cartella home"
@@ -597,7 +638,7 @@ msgstr ""
 "\n"
 "Nota: alcune opzioni di ricerca possono ancora essere utilizzate anche se "
 "non le hai abilitate qui anteponendo il termine di ricerca.\n"
-"Ad esempio: per cercare un'emoji, digita \"e cuore\" per trovare gli emoji "
+"Ad esempio: per cercare un'emoji, digita \"e heart\" per trovare gli emoji "
 "del cuore. Allo stesso modo, usa i prefissi 'f' per la ricerca di file, 'h' "
 "per la cronologia web e 'b' per la ricerca di segnalibri web.\n"
 
@@ -629,8 +670,8 @@ msgid ""
 "Use a tile style for the application buttons (Note: may not work on some "
 "themes)"
 msgstr ""
-"Usa uno stile a piastrelle per i pulsanti dell'applicazione (Nota: potrebbe non "
-"funzionare su alcuni temi)"
+"Usa uno stile a piastrelle per i pulsanti dell'applicazione (Nota: potrebbe "
+"non funzionare su alcuni temi)"
 
 #~ msgid "Please provide your password to uninstall this application"
 #~ msgstr "Digita la password per disinstallare questa applicazione"

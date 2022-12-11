@@ -5,17 +5,18 @@ const { Icon, IconType, Label, BoxLayout } = imports.gi.St;
 // @ts-ignore
 const { Point } = imports.gi.Clutter;
 
-type SimpleMenuItem = ReturnType<typeof createSimpleMenuItem>;
+export type SimpleMenuItem = ReturnType<typeof createSimpleMenuItem>;
 
 export interface SimpleMenuItemArguments {
   text?: string | undefined;
   iconName?: string;
   onActivated?: (self: SimpleMenuItem) => void;
   maxCharNumber?: number;
+  onRightClick?: (self: SimpleMenuItem) => void
 }
 
 export function createSimpleMenuItem(args: SimpleMenuItemArguments) {
-  const { text: initialText = "", maxCharNumber, iconName, onActivated } = args;
+  const { text: initialText = "", maxCharNumber, iconName, onActivated, onRightClick } = args;
 
   const icon = new Icon({
     icon_type: IconType.SYMBOLIC,
@@ -58,6 +59,17 @@ export function createSimpleMenuItem(args: SimpleMenuItemArguments) {
     setText,
     getIcon: () => icon,
   };
+
+
+  container.connect('button-press-event', (_, event) => {
+    const button = event.get_button()
+
+    if (button === 3) {
+      onRightClick?.(menuItem)
+    }
+
+    return false
+  })
 
   onActivated &&
     createActivWidget({

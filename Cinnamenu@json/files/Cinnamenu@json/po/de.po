@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 02:42+0100\n"
-"PO-Revision-Date: 2022-08-06 22:16+0200\n"
+"POT-Creation-Date: 2022-09-29 19:16+0100\n"
+"PO-Revision-Date: 2022-10-11 19:30+0200\n"
 "Last-Translator: erwn16 <elmar_wein@web.de>\n"
 "Language-Team: de\n"
 "Language: de\n"
@@ -246,9 +246,11 @@ msgstr "Folgende Pakete werden entfernt:"
 msgid "Packages to be removed"
 msgstr "Zu entfernende Pakete"
 
+#, python-format
 msgid "Cannot remove package %s as it is required by other packages."
 msgstr "Kann Paket %s wegen Beziehungen zu anderen Paketen nicht entfernen."
 
+#, python-format
 msgid "Package %s is a dependency of the following packages:"
 msgstr "Zwischen Paket %s und folgenden Paketen bestehen Abhängigkeiten:"
 
@@ -501,7 +503,19 @@ msgstr ""
 msgid "Show favorites on sidebar"
 msgstr "Favoriten in der Seitenleiste anzeigen"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "None"
+msgstr "Keine"
+
+msgid "Apps only"
+msgstr "Apps"
+
+msgid "Files only"
+msgstr "Dateien"
+
+msgid "Apps and files"
+msgstr "Apps und Dateien"
+
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "Favoriten in der Seitenleiste anzeigen"
 
 msgid "Application description placement"
@@ -512,9 +526,6 @@ msgstr "Tool-Tipps"
 
 msgid "Under titles"
 msgstr "Unterm App-Namen"
-
-msgid "None"
-msgstr "Keine"
 
 msgid "Choose where to show application descriptions"
 msgstr "Festlegen, wo die Beschreibungen der Apps angezeigt werden"

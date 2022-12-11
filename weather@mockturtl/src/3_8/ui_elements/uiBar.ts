@@ -85,6 +85,8 @@ export class UIBar {
 
 		if (!shouldShowToggle || config._alwaysShowHourlyWeather)
 			this.HideHourlyToggle();
+		else
+			this.ShowHourlyToggle();
 		return true;
 	}
 
@@ -154,8 +156,11 @@ export class UIBar {
 	}
 
 	private HideHourlyToggle() {
-		if (this.hourlyButton != null)
-			this.hourlyButton.actor.child = null;
+		this.hourlyButton?.actor.hide();
+	}
+
+	private ShowHourlyToggle() {
+		this.hourlyButton?.actor.show();
 	}
 
 }

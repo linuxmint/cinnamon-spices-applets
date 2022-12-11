@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.2.10
+
+* Add more granular control for setting changes
+* Fixes [#4505](https://github.com/linuxmint/cinnamon-spices-applets/issues/4505)
+
+## 3.2.9
+* Add support for Soup v3
+
 ## 3.2.8
 
 * Resolve [#4426](https://github.com/linuxmint/cinnamon-spices-applets/issues/4426) - Add Weather Underground as a provider

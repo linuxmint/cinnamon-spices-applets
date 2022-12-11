@@ -1,6 +1,7 @@
 const Applet = imports.ui.applet;
 const AppletManager = imports.ui.appletManager;
 const Soup = imports.gi.Soup;
+const ByteArray = imports.byteArray;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Tweener = imports.ui.tweener;
@@ -21,8 +22,12 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
-        this.menuBtnChangeBack = new PopupMenu.PopupMenuItem('Change background');
-        this.menuBtnSavePic = new PopupMenu.PopupMenuItem('Save current picture');
+        this.paused = false;
+        this.menuSwtchPaused = new PopupMenu.PopupSwitchMenuItem('Pause all change triggers', this.paused);
+        this.menuSwtchPaused.connect('toggled', imports.lang.bind(this, this._toggle_paused));
+        this.menu.addMenuItem(this.menuSwtchPaused);
+        this.menuBtnChangeBack = new PopupMenu.PopupMenuItem('Change background now');
+        this.menuBtnSavePic = new PopupMenu.PopupMenuItem('Save current background');
         this.menuBtnChangeBack.connect('activate', imports.lang.bind(this, this._change_background));
         this.menuBtnSavePic.connect('activate', imports.lang.bind(this, this._store_background));
         this.menu.addMenuItem(this.menuBtnChangeBack);
@@ -49,8 +54,12 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
 
         this.set_applet_icon_name("applet");
         this._applet_icon.set_pivot_point(0.5, 0.5);
-        this.httpAsyncSession = new Soup.SessionAsync();
-        Soup.Session.prototype.add_feature.call(this.httpAsyncSession, new Soup.ProxyResolverDefault());
+        if (Soup.MAJOR_VERSION == 2) {
+            this.httpAsyncSession = new Soup.SessionAsync();
+            Soup.Session.prototype.add_feature.call(this.httpAsyncSession, new Soup.ProxyResolverDefault());
+        } else { //version 3
+            this.httpAsyncSession = new Soup.Session();
+        }
         this.swapChainSwapped = false;
         
         const defaultSavePath = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES) + '/';
@@ -70,7 +79,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
     }
 
     _timeout_update() {
-        if(this.change_ontime)
+        if(this.change_ontime && !this.paused)
             this._timeout_enable();
         else
             this._timeout_disable();
@@ -85,6 +94,11 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
     _timeout_enable() {
         this._timeout_disable();
         this._timeout = imports.mainloop.timeout_add_seconds(this.change_time * 60, imports.lang.bind(this, this._auto_change_background));
+    }
+
+    _toggle_paused() {
+        this.paused = !this.paused;
+        this._timeout_update();
     }
 
     _set_icon_rotation(newValue, seconds) {
@@ -148,73 +162,100 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         } else if(this.image_source == 'bing') {
             log('Downloading bing metadata');
             let request = Soup.Message.new('GET', 'https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mbl=1');
-            this.httpAsyncSession.queue_message(request, function(http, msg) {
-                if (msg.status_code === 200) {
-                    let jsonData = JSON.parse(msg.response_body.data).images[0];
-                    that._update_tooltip(jsonData.title + ' - ' + jsonData.copyright);
-                    that._download_image('https://www.bing.com' + jsonData.url).then(defaultEnd).catch(errorEnd);
-                } else
-                    errorEnd('Could not download bing metadata (' + msg.status_code + ')!');
-            });
+            if (Soup.MAJOR_VERSION === 2) {
+                this.httpAsyncSession.queue_message(request, function(http, msg) {
+                    if (msg.status_code === 200) {
+                        let jsonData = JSON.parse(msg.response_body.data).images[0];
+                        that._update_tooltip(jsonData.title + ' - ' + jsonData.copyright);
+                        that._download_image('https://www.bing.com' + jsonData.url).then(defaultEnd).catch(errorEnd);
+                    } else
+                        errorEnd('Could not download bing metadata (' + msg.status_code + ')!');
+                });
+            } else {
+                this.httpAsyncSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, function(http, msg) {
+                    if (request.get_status() === 200) {
+                        const bytes = that.httpAsyncSession.send_and_read_finish(msg);
+                        let jsonData = JSON.parse(ByteArray.toString(bytes.get_data())).images[0];
+                        that._update_tooltip(jsonData.title + ' - ' + jsonData.copyright);
+                        that._download_image('https://www.bing.com' + jsonData.url).then(defaultEnd).catch(errorEnd);
+                    } else
+                        errorEnd('Could not download bing metadata (' + msg.status_code + ')!');
+                });
+            }
         } else if(this.image_source == 'himawari') {
             log('Downloading himawari metadata');
             //Download metadata and read latest timestamp
-            let request = Soup.Message.new('GET', 'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/latest.json');
-            this.httpAsyncSession.queue_message(request, function(http, msg) {
-                if (msg.status_code !== 200)
-                    errorEnd('Could not download himawari metadata (' + msg.status_code + ')!');
-                else {
-                    let latestDate = new Date(JSON.parse(request.response_body.data).date);
-                    let zoomLvl = that.image_res_himawari;
-                    let tileNames = Array();
-                    var tileId = 0;
+            function process_result(data) {
+                let latestDate = new Date(JSON.parse(data).date);
+                let zoomLvl = that.image_res_himawari;
+                let tileNames = Array();
+                var tileId = 0;
 
-                    function downloadTiles() {
-                        //Download the tile and call ourself again
-                        let y = tileId % zoomLvl;
-                        let x = Math.floor(tileId / zoomLvl);
-                        let tileName = appletPath + '/tile_' + x + '_' + y + '.png';
-                        tileNames.push(tileName);
-                        tileId++;
-                        that.set_applet_label(Math.floor(tileId / (zoomLvl * zoomLvl) * 100) + '%');
-                        that._download_image('https://himawari8-dl.nict.go.jp/himawari8/img/D531106/' +
-                            zoomLvl + 'd/550/' + latestDate.getFullYear() + '/' + ('0' + (latestDate.getMonth() + 1)).slice(-2) + 
-                            '/' + ('0' + latestDate.getDate()).slice(-2) + '/' + ('0' + latestDate.getHours()).slice(-2) +
-                            ('0' + latestDate.getMinutes()).slice(-2) + ('0' + latestDate.getSeconds()).slice(-2) + '_' +
-                            y + '_' + x + '.png', tileName)
-                        .then(function() {
-                            //tileId == zoomLvl * zoomLvl -> we have all tiles -> proceed
-                            if(tileId == zoomLvl * zoomLvl) {
-                                //Trigger imagemagick to merge the tiles
-                                let cmd = ['montage'];
-                                Array.prototype.push.apply(cmd, tileNames);
-                                cmd.push('-geometry', '550x550+0+0');
-                                cmd.push('-tile', zoomLvl + 'x' + zoomLvl);
-                                cmd.push(that._get_swap_chain_image_next());
-                                that._run_cmd(cmd).then(function() {
-                                    //Cleanup the tiles from buffer
-                                    let rmCmd = ['rm', '-f'];
-                                    Array.prototype.push.apply(rmCmd, tileNames);
-                                    that._run_cmd(rmCmd);
+                function downloadTiles() {
+                    //Download the tile and call ourself again
+                    let y = tileId % zoomLvl;
+                    let x = Math.floor(tileId / zoomLvl);
+                    let tileName = appletPath + '/tile_' + x + '_' + y + '.png';
+                    tileNames.push(tileName);
+                    tileId++;
+                    that.set_applet_label(Math.floor(tileId / (zoomLvl * zoomLvl) * 100) + '%');
+                    that._download_image('https://himawari8-dl.nict.go.jp/himawari8/img/D531106/' +
+                        zoomLvl + 'd/550/' + latestDate.getFullYear() + '/' + ('0' + (latestDate.getMonth() + 1)).slice(-2) + 
+                        '/' + ('0' + latestDate.getDate()).slice(-2) + '/' + ('0' + latestDate.getHours()).slice(-2) +
+                        ('0' + latestDate.getMinutes()).slice(-2) + ('0' + latestDate.getSeconds()).slice(-2) + '_' +
+                        y + '_' + x + '.png', tileName)
+                    .then(function() {
+                        //tileId == zoomLvl * zoomLvl -> we have all tiles -> proceed
+                        if(tileId == zoomLvl * zoomLvl) {
+                            //Trigger imagemagick to merge the tiles
+                            let cmd = ['montage'];
+                            Array.prototype.push.apply(cmd, tileNames);
+                            cmd.push('-geometry', '550x550+0+0');
+                            cmd.push('-tile', zoomLvl + 'x' + zoomLvl);
+                            cmd.push(that._get_swap_chain_image_next());
+                            that._run_cmd(cmd).then(function() {
+                                //Cleanup the tiles from buffer
+                                let rmCmd = ['rm', '-f'];
+                                Array.prototype.push.apply(rmCmd, tileNames);
+                                that._run_cmd(rmCmd);
 
-                                    //And update the tooltip
-                                    that._update_tooltip('The Earth by Himawari 8 from ' + latestDate.toISOString());
+                                //And update the tooltip
+                                that._update_tooltip('The Earth by Himawari 8 from ' + latestDate.toISOString());
 
-                                    //Remove the progress label
-                                    that.set_applet_label('');
+                                //Remove the progress label
+                                that.set_applet_label('');
 
-                                    //And apply new image
-                                    defaultEnd();
-                                });
-                            } else {
-                                //Not? Recall!
-                                downloadTiles();
-                            }
-                        }).catch(errorEnd);
-                    }
-                    downloadTiles();
+                                //And apply new image
+                                defaultEnd();
+                            });
+                        } else {
+                            //Not? Recall!
+                            downloadTiles();
+                        }
+                    }).catch(errorEnd);
                 }
-            });
+                downloadTiles();
+            }
+            
+            let request = Soup.Message.new('GET', 'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/latest.json');
+            if (Soup.MAJOR_VERSION === 2) {
+                this.httpAsyncSession.queue_message(request, function(http, msg) {
+                    if (msg.status_code !== 200)
+                        errorEnd('Could not download himawari metadata (' + msg.status_code + ')!');
+                    else {
+                        process_result(request.response_body.data);
+                    }
+                });
+            } else { //version 3
+                this.httpAsyncSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, function(http, msg) {
+                    if (request.get_status() !== 200)
+                        errorEnd('Could not download himawari metadata (' + request.get_status() + ')!');
+                    else {
+                        const bytes = that.httpAsyncSession.send_and_read_finish(msg);
+                        process_result(ByteArray.toString(bytes.get_data()));
+                    }
+                });
+            }
         } else if(this.image_source == 'unsplash') {
             let resStr = 'featured';
             if(this.image_res_manual)
@@ -314,19 +355,34 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         let request = Soup.Message.new('GET', uri);
         let that = this;
 
-        request.connect('got_chunk', function(message, chunk) {
-            if (message.status_code === 200)
-                fStream.write(chunk.get_data(), null);
-        });
-
-        return new Promise(function(resolve, reject) {
-            that.httpAsyncSession.queue_message(request, function(http, msg) {
-                fStream.close(null);
-                if (msg.status_code !== 200)
-                    reject('Could not download image (' + msg.status_code + ')!');
-                resolve();
+        if (Soup.MAJOR_VERSION === 2) {
+            request.connect('got_chunk', function(message, chunk) {
+                if (message.status_code === 200)
+                    fStream.write(chunk.get_data(), null);
             });
-        });
+
+            return new Promise(function(resolve, reject) {
+                that.httpAsyncSession.queue_message(request, function(http, msg) {
+                    fStream.close(null);
+                    if (msg.status_code !== 200)
+                        reject('Could not download image (' + msg.status_code + ')!');
+                    resolve();
+                });
+            });
+        } else { //version 3
+            return new Promise(function(resolve, reject) {
+                that.httpAsyncSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, function(http, msg) {
+                    if (request.get_status() === 200) {
+                        const bytes = that.httpAsyncSession.send_and_read_finish(msg);
+                        fStream.write(bytes.get_data(), null);
+                    }
+                    fStream.close(null);
+                    if (request.get_status() !== 200)
+                        reject('Could not download image (' + request.get_status() + ')!');
+                    resolve();
+                });
+            });
+        }
     }
 
     _update_tooltip(more = null) {

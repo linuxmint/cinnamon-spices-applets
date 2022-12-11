@@ -1,15 +1,15 @@
 # Dutch translation for Cinnamenu
 # Copyright (C) 2019
 # This file is distributed under the same license as the Cinnamenu package.
-# Pjotr <pjotrvertaalt@gmail.com>, 2013-2019.
+# Pjotr <pjotrvertaalt@gmail.com>, 2013-2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-16 02:20+0000\n"
-"PO-Revision-Date: 2022-05-28 04:46+0100\n"
-"Last-Translator: Google translate; Pjotr <pjotrvertaalt@gmail.com>\n"
+"POT-Creation-Date: 2022-09-29 19:16+0100\n"
+"PO-Revision-Date: 2022-10-14 12:36+0200\n"
+"Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: nl\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgid "Favorite apps"
 msgstr "Favoriete toepassingen"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "Voor bladwijzers van Firefox en Midori is het pakket gir1.2-gda-5.0 vereist"
+msgstr "Voor bladwijzers van Firefox en Midori is het pakket gir1.2-gda-5.0 vereist."
 
 msgid "Clear List"
 msgstr "Lijst wissen"
@@ -93,13 +93,13 @@ msgid "Add to desktop"
 msgstr "Toevoegen aan bureaublad"
 
 msgid "Remove from favorites"
-msgstr "Verwijder van favorieten"
+msgstr "Verwijderen uit favorieten"
 
 msgid "Add to favorites"
 msgstr "Toevoegen aan favorieten"
 
 msgid "Uninstall"
-msgstr "DeÃ¯nstalleren"
+msgstr "Deïnstalleren"
 
 msgid "Home"
 msgstr "Persoonlijke map"
@@ -114,7 +114,7 @@ msgid "Find files..."
 msgstr "Bestanden zoeken..."
 
 msgid "Please wait..."
-msgstr "Even geduld aub..."
+msgstr "Even geduld a.u.b..."
 
 msgid "Applications"
 msgstr "Toepassingen"
@@ -123,7 +123,7 @@ msgid "Documents"
 msgstr "Documenten"
 
 msgid "Videos"
-msgstr "Videos"
+msgstr "Video's"
 
 msgid "Images"
 msgstr "Afbeeldingen"
@@ -132,13 +132,13 @@ msgid "Music"
 msgstr "Muziek"
 
 msgid "No recent Items"
-msgstr "Geen recente items"
+msgstr "Geen recente elementen"
 
 msgid "Click to copy"
 msgstr "Klik om te kopiëren"
 
 msgid "Applications and files"
-msgstr "Applicaties en bestanden"
+msgstr "Toepassingen en bestanden"
 
 msgid "Other search results"
 msgstr "Andere zoekresultaten"
@@ -150,22 +150,22 @@ msgid "Browser bookmarks"
 msgstr "Browserbladwijzers"
 
 msgid "Emoji"
-msgstr "Emoji"
+msgstr "Emotiepictogram"
 
 msgid "Trash"
-msgstr "Afval"
+msgstr "Prullenbak"
 
 msgid "Error while opening file:"
 msgstr "Fout bij openen bestand:"
 
 msgid "Too many entries - showing first 1000 entries only"
-msgstr "Te veel inzendingen - alleen de eerste 1000 inzendingen"
+msgstr "Te veel elementen - toont alleen de eerste 1000 elementen"
 
 msgid "Favorites"
 msgstr "Favorieten"
 
 msgid "Recent"
-msgstr "recente"
+msgstr "Recent"
 
 msgid "Home folder"
 msgstr "Thuismap"
@@ -189,16 +189,16 @@ msgid "dark skin tone"
 msgstr "donkere huidskleur"
 
 msgid "This file is no longer available"
-msgstr "dit bestand is niet langer beschikbaar"
+msgstr "Dit bestand is niet langer beschikbaar"
 
 msgid "Open with"
-msgstr "openen met"
+msgstr "Openen met"
 
 msgid "Other application..."
 msgstr "Andere toepassing..."
 
 msgid "Open containing folder"
-msgstr "Map met daarin openen"
+msgstr "Map die het bevat openen"
 
 msgid "Move to trash"
 msgstr "Verplaatsen naar prullenbak"
@@ -206,8 +206,39 @@ msgstr "Verplaatsen naar prullenbak"
 msgid "Error while moving file to trash:"
 msgstr "Fout bij het verplaatsen van het bestand naar de prullenbak:"
 
-msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
-msgstr "Dit menu-item is niet gekoppeld aan een pakket. Wil je het toch uit het menu verwijderen?"
+msgid "Smileys & Emotion"
+msgstr "Lachebekjes en emoties"
+
+msgid "People & Body"
+msgstr "Mensen en lichaam"
+
+msgid "Animals & Nature"
+msgstr "Dieren en natuur"
+
+msgid "Food & Drink"
+msgstr "Eten en drinken"
+
+msgid "Travel & Places"
+msgstr "Reizen en mooie plekken"
+
+msgid "Activities"
+msgstr "Activiteiten"
+
+msgid "Objects"
+msgstr "Dingen"
+
+msgid "Symbols"
+msgstr "Symbolen"
+
+msgid "Flags"
+msgstr "Vlaggen"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it from the "
+"menu anyway?"
+msgstr ""
+"Dit menu-element is niet gekoppeld aan een pakket. Wilt u het toch uit het menu "
+"verwijderen?"
 
 msgid "The following packages will be removed:"
 msgstr "De volgende pakketten worden verwijderd:"
@@ -217,11 +248,11 @@ msgstr "Pakketten die moeten worden verwijderd"
 
 #, python-format
 msgid "Cannot remove package %s as it is required by other packages."
-msgstr "Kan pakket %s niet verwijderen omdat dit vereist is door andere pakketten."
+msgstr "Kan pakket %s niet verwijderen omdat dit nodig is voor andere pakketten."
 
 #, python-format
 msgid "Package %s is a dependency of the following packages:"
-msgstr "Pakket %s is afhankelijk van de volgende pakketten:"
+msgstr "Pakket %s is een afhankelijkheid van de volgende pakketten:"
 
 msgid "Open"
 msgstr "Open"
@@ -230,10 +261,10 @@ msgid "Search"
 msgstr "Zoeken"
 
 msgid "Start in"
-msgstr "Start in"
+msgstr "Begin in"
 
 msgid "Select a folder"
-msgstr "Selecteer een map"
+msgstr "Kies een map"
 
 msgid "Follow symlinks"
 msgstr "Symlinks volgen"
@@ -242,10 +273,10 @@ msgid "Search hidden"
 msgstr "Zoek verborgen"
 
 msgid "Use regular expressions"
-msgstr "Gebruik reguliere expressies"
+msgstr "Gebruik reguliere uitdrukkingen"
 
 msgid "Stop"
-msgstr "Hou op"
+msgstr "Houd op"
 
 msgid "File"
 msgstr "Bestand"
@@ -272,13 +303,16 @@ msgid "Skipping"
 msgstr "Overslaan"
 
 msgid " - directory already searched"
-msgstr " - directory al doorzocht"
+msgstr " - map al doorzocht"
 
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-msgid "A flexible menu with grid or list layout options, file browser and emoji search."
-msgstr "Een flexibel menu met opties voor raster- of lijstlay-out, bestandsbrowser en zoeken naar emoji's."
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr ""
+"Een flexibel menu met opties voor raster- of lijstvormgeving, bestandbeheerder en "
+"zoeken naar emotiepictogrammen."
 
 msgid "Behavior"
 msgstr "Gedrag"
@@ -317,25 +351,25 @@ msgid "Use a custom icon"
 msgstr "Een aangepast pictogram gebruiken"
 
 msgid "Use a custom icon in the panel"
-msgstr "Een aangepast pictogram gebruiken"
+msgstr "Een aangepast pictogram gebruiken in de werkbalk"
 
 msgid "Panel icon"
-msgstr "Paneelpictogram"
+msgstr "Werkbalkpictogram"
 
 msgid "Panel text"
-msgstr "Paneeltekst"
+msgstr "Werkbalktekst"
 
 msgid "Text to show beside the panel icon"
-msgstr "Tekst die naast het paneelpictogram moet worden weergegeven"
+msgstr "Tekst die naast het werkbalkpictogram moet worden weergegeven"
 
 msgid "Category icon size (pixels)"
-msgstr "Grootte categoriepictogram (pixels)"
+msgstr "Grootte categoriepictogram (beeldpunten)"
 
 msgid "Applications list icon size (pixels)"
-msgstr "Pictogramgrootte van de lijst met toepassingen (pixels)"
+msgstr "Pictogramgrootte van de lijst met toepassingen (beeldpunten)"
 
 msgid "Applications grid icon size (pixels)"
-msgstr "Grootte van het rasterpictogram van toepassingen (pixels)"
+msgstr "Pictogramgrootte van het toepassingenraster (beeldpunten)"
 
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Sneltoets voor openen en sluiten van het menu"
@@ -359,13 +393,13 @@ msgid "Animate the menu on open and close"
 msgstr "Menu-animaties inschakelen voor openen en sluiten"
 
 msgid "Activate categories on click"
-msgstr "CategorieÃ«n activeren bij klikken"
+msgstr "Categorieën activeren bij klikken"
 
 msgid "Activate categories on click instead of on hover"
-msgstr "CategorieÃ«n activeren bij klikken"
+msgstr "Categorieën activeren bij klikken in plaats van bij zweven"
 
 msgid "Enable autoscrolling"
-msgstr "Schakel automatisch scrollen in"
+msgstr "Schakel automatisch schuiven in"
 
 msgid "Enable autoscrolling in application list"
 msgstr "Automatisch schuiven in toepassingenlijst inschakelen"
@@ -387,7 +421,7 @@ msgid "Enable search providers"
 msgstr "Zoekdiensten inschakelen"
 
 msgid "Include search provider results in searches"
-msgstr "Zoekresultaten van zoekmachines opnemen in zoekopdrachten"
+msgstr "Zoekresultaten van zoekdiensten opnemen in zoekopdrachten"
 
 msgid "Example Search Providers"
 msgstr "Voorbeeld van zoekdiensten"
@@ -414,7 +448,7 @@ msgid "Show bookmarks and places"
 msgstr "Bladwijzers en locaties tonen"
 
 msgid "Show bookmarks and places category in the menu"
-msgstr "Toon bladwijzers en plaatsen categorie in het menu"
+msgstr "Toon categorie voor bladwijzers en plaatsen in het menu"
 
 msgid "Show application icons"
 msgstr "Toepassingspictogrammen tonen"
@@ -435,7 +469,7 @@ msgid "Use a custom menu height"
 msgstr "Een aangepaste menuhoogte gebruiken"
 
 msgid "Custom menu height (pixels)"
-msgstr "Aangepaste menuhoogte (pixels)"
+msgstr "Aangepaste menuhoogte (beeldpunten)"
 
 msgid "Applications view mode"
 msgstr "Toepassingsweergavemodus"
@@ -443,38 +477,53 @@ msgstr "Toepassingsweergavemodus"
 msgid "View applications as list or grid"
 msgstr "Bekijk applicaties als lijst of raster"
 
-msgid "Application description placement"
-msgstr "Plaatsing van applicatiebeschrijving"
-
-msgid "Tooltips"
-msgstr "Tooltips"
-
-msgid "Under titles"
-msgstr "Onder titels"
-
-msgid "None"
-msgstr "Geen"
-
-msgid "Choose where to show application descriptions"
-msgstr "Kies waar applicatiebeschrijvingen moeten worden weergegeven"
-
 msgid "Sidebar location"
 msgstr "Locatie zijbalk"
 
 msgid "Top"
-msgstr "Top"
+msgstr "Bovenaan"
 
 msgid "Bottom"
-msgstr "Bodem"
+msgstr "Onderaan"
 
 msgid "Left"
 msgstr "Links"
 
 msgid "Right"
-msgstr "Rechtsaf"
+msgstr "Rechts"
 
 msgid "Choose where to show the sidebar"
 msgstr "Kies waar u de zijbalk wilt weergeven"
+
+msgid "Show favorites on sidebar"
+msgstr "Favorieten weergeven in zijbalk"
+
+msgid "None"
+msgstr "Geen"
+
+msgid "Apps only"
+msgstr "Alleen toepassingen"
+
+msgid "Files only"
+msgstr "Alleen bestanden"
+
+msgid "Apps and files"
+msgstr "Toepassingen en bestanden"
+
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Toon uw favoriete toepassings- en bestandspictogrammen in de zijbalk"
+
+msgid "Application description placement"
+msgstr "Plaatsing van toepassingsbeschrijving"
+
+msgid "Tooltips"
+msgstr "Zweeftips"
+
+msgid "Under titles"
+msgstr "Onder titels"
+
+msgid "Choose where to show application descriptions"
+msgstr "Kies waar toepassingsbeschrijvingen moeten worden weergegeven"
 
 msgid ""
 "\n"
@@ -483,35 +532,35 @@ msgstr ""
 "\n"
 "Info/tip: Sleep op de menurand om de menugrootte te wijzigen.\n"
 
-msgid "Show favorites on sidebar"
-msgstr "Favorieten weergeven in zijbalk"
-
-msgid "Show your favorite app and file icons on the sidebar"
-msgstr "Toon uw favoriete app- en bestandspictogrammen in de zijbalk"
-
 msgid "Show recent items"
-msgstr "Toon recente items"
+msgstr "Toon recente elementen"
 
 msgid "Show recent items category in the menu"
-msgstr "Toon recente items categorie in het menu"
+msgstr "Toon de categorie recente elementen in het menu"
 
 msgid "Show favorite apps category"
-msgstr "Categorie favoriete apps weergeven"
+msgstr "Toon de categorie favoriete toepassingen"
 
 msgid "Show your favorite apps category in the menu"
-msgstr "Toon je favoriete apps-categorie in het menu"
+msgstr "Toon uw favoriete toepassingencategorie in het menu"
 
 msgid "Show home folder"
 msgstr "Thuismap tonen"
 
 msgid "Show home folder category in the menu"
-msgstr "Toon thuismap categorie in het menu"
+msgstr "Toon thuismapcategorie in het menu"
+
+msgid "Show emoji category"
+msgstr "Toon emotiepictogramcategorie"
+
+msgid "Show emoji category in the menu"
+msgstr "Toon emotiepictogramcategorie in het menu"
 
 msgid "Last used category"
 msgstr "Laatst gebruikte categorie"
 
 msgid "Autoscroll the application list on mouse hover"
-msgstr "Automatisch scrollen door de applicatielijst bij muisaanwijzer"
+msgstr "Automatisch schuiven door de toepassingenlijst bij erboven zweven met de muis"
 
 msgid "Show hidden files"
 msgstr "Toon verborgen bestanden"
@@ -520,19 +569,29 @@ msgid "Show hidden files in folder view"
 msgstr "Verborgen bestanden weergeven in mapweergave"
 
 msgid "Emoji search"
-msgstr "Emoji zoeken"
+msgstr "Emotiepictogrammen doorzoeken"
 
 msgid "Show emojis in search results"
-msgstr "Emoji's weergeven in zoekresultaten"
+msgstr "Emotiepictogrammen weergeven in zoekresultaten"
 
 msgid "Web search option"
 msgstr "Optie voor zoeken op internet"
 
 msgid "Show an internet search option in search results"
-msgstr "Toon een internetzoekoptie in zoekresultaten"
+msgstr "Toon een webzoekoptie in zoekresultaten"
+
+msgid "Web search suggestions"
+msgstr "Webzoeksuggesties"
+
+msgid ""
+"With web search option, also show search suggestions. (Note: This uses Google's "
+"search API)"
+msgstr ""
+"Met webzoekoptie, toont ook zoeksuggesties (let op: dit gebruikt de zoek-API van "
+"Google)."
 
 msgid "Search home folder"
-msgstr "Zoek thuismap"
+msgstr "Zoeken in thuismap"
 
 msgid "When searching, also search my home folder for files"
 msgstr "Zoek bij het zoeken ook in mijn thuismap naar bestanden"
@@ -541,24 +600,32 @@ msgid "Web history search"
 msgstr "Zoeken in webgeschiedenis"
 
 msgid ""
-"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, "
+"Vivaldi, Brave)\n"
 "Note: Firefox history is not currently supported."
 msgstr ""
-"Zoek bij het zoeken ook in de geschiedenis van mijn browser (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Zoek bij het zoeken ook in de geschiedenis van mijn browser (Google Chrome, "
+"Chromium, Opera, Vivaldi, Brave)\n"
 "Opmerking: Firefox-geschiedenis wordt momenteel niet ondersteund."
 
 msgid "Web bookmarks search"
 msgstr "Zoeken naar webbladwijzers"
 
 msgid ""
-"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, "
+"Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 "
+"(Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based "
+"distributions) and restart your computer."
 msgstr ""
-"Zoek bij het zoeken ook in de webbladwijzers van mijn browser (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Opmerking: om Firefox-bladwijzers te zoeken, moet u pakket gir1.2-gda-5.0 (Debian-gebaseerde distributies incl. Ubuntu) installeren & Linux Mint) of verpak libgda (op Arch gebaseerde distributies) en start uw computer opnieuw op."
+"Zoek bij het zoeken ook in de webbladwijzers van mijn browser (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Opmerking: om Firefox-bladwijzers te zoeken, moet u het pakket gir1.2-gda-5.0 "
+"installeren (Debian-gebaseerde distributies incl. Ubuntu en Linux Mint) of het "
+"paskket libgda (Arch-gebaseerde distributies) en uw computer herstarten."
 
 msgid "Wikipedia search"
-msgstr "Wikipedia zoeken"
+msgstr "Wikipedia doorzoeken"
 
 msgid "Show some Wikipedia results"
 msgstr "Enkele Wikipedia-resultaten weergeven"
@@ -568,27 +635,34 @@ msgstr "Wikipedia-taal"
 
 msgid ""
 "\n"
-"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
-"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+"Note: Some search options can still be used even if you have not enabled them here "
+"by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, "
+"use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks "
+"search.\n"
 msgstr ""
 "\n"
-"Opmerking: sommige zoekopties kunnen nog steeds worden gebruikt, zelfs als je ze hier niet hebt ingeschakeld door je zoekterm voor te voegen.\n"
-"Bijvoorbeeld: om naar een emoji te zoeken, typ je 'e heart' om hartemoji's te vinden. Gebruik op dezelfde manier de voorvoegsels 'f' voor het zoeken naar bestanden, 'h' voor webgeschiedenis en 'b' voor het zoeken naar webbladwijzers.\n"
+"Opmerking: sommige zoekopties kunnen nog steeds worden gebruikt, zelfs als u hen "
+"hier niet hebt ingeschakeld door uw zoekterm voor te voegen.\n"
+"Bijvoorbeeld: om naar een emotiepictogram te zoeken, tikt u 'e heart' om "
+"hartemotiepictogrammen te vinden. Gebruik op dezelfde manier de voorvoegsels 'f' "
+"voor het zoeken naar bestanden, 'h' voor webgeschiedenis en 'b' voor het zoeken "
+"naar webbladwijzers.\n"
 
 msgid "Use a custom icon size"
-msgstr "Gebruik een aangepast pictogramformaat"
+msgstr "Gebruik een aangepaste pictogramgrootte"
 
 msgid "Use a custom size for the panel icon"
-msgstr "Gebruik een aangepast formaat voor het paneelpictogram"
+msgstr "Gebruik een aangepaste grootte voor het werkbalkpictogram"
 
 msgid "Panel icon size (pixels)"
-msgstr "Grootte paneelpictogram (pixels)"
+msgstr "Grootte werkbalkpictogram (beeldpunten)"
 
 msgid "Choose a custom size for the panel icon"
-msgstr "Kies een aangepast formaat voor het paneelpictogram"
+msgstr "Kies een aangepaste grootte voor het werkbalkpictogram"
 
 msgid "Sidebar icon size (pixels)"
-msgstr "Grootte van zijbalkpictogram (pixels)"
+msgstr "Grootte van zijbalkpictogram (beeldpunten)"
 
 msgid "Use sidebar box style"
 msgstr "Zijbalkstijl gebruiken"
@@ -597,7 +671,10 @@ msgid "Use a sidebar box style"
 msgstr "Een zijbalkstijl gebruiken"
 
 msgid "Use tile style"
-msgstr "Gebruik tegelstijl"
+msgstr "Tegelstijl gebruiken"
 
-msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
-msgstr "Gebruik een tegelstijl voor de applicatieknoppen (Opmerking: werkt mogelijk niet op sommige thema's)"
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr ""
+"Gebruik een tegelstijl voor de toepassingsknoppen (Opmerking: werkt mogelijk niet "
+"bij sommige thema's)"
