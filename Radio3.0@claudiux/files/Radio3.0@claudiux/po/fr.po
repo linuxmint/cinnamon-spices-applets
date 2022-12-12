@@ -1,0 +1,2904 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Radio3.0@claudiux\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-03 23:02+0200\n"
+"PO-Revision-Date: 2022-10-03 23:03+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: applet.js:345
+msgid "This is your own list of Categories and Radio Stations."
+msgstr "Ceci est votre propre liste de Catégories et de Stations de radio."
+
+#: applet.js:346
+msgid "You can add more using the [+] button."
+msgstr "Vous pouvez en ajouter grâce au bouton [+]."
+
+#: applet.js:347
+msgid "For a category, fill in only its name; leave the other fields empty."
+msgstr ""
+"Pour une catégorie, ne renseignez que son nom ; laissez vides les autres "
+"champs."
+
+#: applet.js:348
+msgid "For a radio station, enter only its name and its streaming URL."
+msgstr "Pour une radio, ne renseignez que son nom et son URL de streaming."
+
+#: applet.js:349
+msgid ""
+"You can order the rows by dragging and dropping or by using the buttons and "
+"tools below the list."
+msgstr ""
+"Vous pouvez ordonner les lignes par glisser-déplacer ou à l'aide des boutons "
+"et outils situé en-dessous de la liste."
+
+#: applet.js:350
+msgid ""
+"The buttons on the right below the list allow you to navigate page by page "
+"or category by category."
+msgstr ""
+"Les boutons situés à droite sous la liste vous permettent d'y naviguer page "
+"par page ou catégorie par catégorie."
+
+#: applet.js:351
+msgid ""
+"To search for one of your stations, click on the list and start writing its "
+"name."
+msgstr ""
+"Pour rechercher une de vos stations, cliquez sur la liste et commencez à "
+"écrire son nom."
+
+#: applet.js:352
+msgid ""
+"To easily add stations to your list, use the following 2 tabs: Search and "
+"Import."
+msgstr ""
+"Pour ajouter facilement des stations à votre liste, utilisez les 2 onglets "
+"suivants : Rechercher et Importer."
+
+#: applet.js:353
+msgid "Check its 'Menu' box to display a station or category in the menu."
+msgstr ""
+"Cochez sa case 'Menu' pour afficher une station ou catégorie dans le menu."
+
+#: applet.js:354
+msgid ""
+"Check its '♪/➟' box to listen to the station or move it to another category "
+"using the tools below the list."
+msgstr ""
+"Cochez sa case '♪/➟' pour écouter la station ou la déplacer vers une autre "
+"catégorie à l'aide des outils situés en-dessous de la liste."
+
+#: applet.js:356
+msgid "You can have your list of stations checked by internet databases."
+msgstr ""
+"Vous pouvez faire vérifier votre liste de stations par des bases de données "
+"internet."
+
+#: applet.js:357
+msgid ""
+"Any station recognized by one of these databases will receive a Universal "
+"Unique Identifier (UUID) provided by this database."
+msgstr ""
+"Toute station reconnue par une de ces bases de données recevra un Universel "
+"et Unique Identifiant (UUID) fourni par cette base de données."
+
+#: applet.js:358
+msgid ""
+"So, if a streaming URL was changed, a next check would update it and you can "
+"continue to listen to the affected station."
+msgstr ""
+"Ainsi, si une URL de streaming était modifiée, une prochaine vérification la "
+"mettrait à jour et vous pourrez continuer à écouter la station concernée."
+
+#: applet.js:360
+msgid ""
+"Here you can search for other stations in a free radio database accessible "
+"via the Internet."
+msgstr ""
+"Ici, vous pouvez rechercher d'autres stations dans une base de données de "
+"stations radio, libre et gratuite, accessible via Internet."
+
+#: applet.js:361
+msgid ""
+"Fill in at least a few fields of the form below then click on the "
+"'Search ...' button."
+msgstr ""
+"Remplissez au moins quelques champs du formulaire ci-dessous puis cliquez "
+"sur le bouton 'Rechercher...'."
+
+#: applet.js:362
+msgid ""
+"Each time this button is clicked, a new results page is displayed in the "
+"second part of this page, where you can test certain stations and include "
+"them in the menu."
+msgstr ""
+"A chaque clic sur ce bouton, une nouvelle page de résultats s'affiche dans "
+"la deuxième partie de cette page, où vous pouvez tester certaines stations "
+"et les inclure dans le menu."
+
+#: applet.js:363
+msgid ""
+"A station already in your menu will only appear in search results if its "
+"streaming URL has changed."
+msgstr ""
+"Une station déjà présente dans votre menu n'apparaîtra dans les résultats de "
+"recherche que si son URL de diffusion a changé."
+
+#: applet.js:364
+msgid ""
+"When no new page appears, it means that all results matching your search "
+"criteria have been displayed."
+msgstr ""
+"Lorsque plus aucune nouvelle page n'apparaît, cela signifie que tous les "
+"résultats correspondant à vos critères de recherche ont été affichés."
+
+#: applet.js:366
+msgid ""
+"You can import a file containing the name and streaming URL of at least one "
+"radio station."
+msgstr ""
+"Vous pouvez importer un fichier contenant le nom et l'URL de diffusion d'au "
+"moins une station de radio."
+
+#: applet.js:367
+msgid ""
+"These radio stations are displayed in the list below. You can test them by "
+"checking their ♪ box."
+msgstr ""
+"Ces stations de radio sont affichées dans la liste ci-dessous. Vous pouvez "
+"les tester en cochant leur case ♪."
+
+#: applet.js:368
+msgid "Then manage this list with the buttons at the bottom of this tab."
+msgstr "Gérez ensuite cette liste avec les boutons en bas de cet onglet."
+
+#: applet.js:370
+msgid ""
+"In the Shoutcast directory, click the download button to the left of the "
+"station name."
+msgstr ""
+"Dans le répertoire Shoutcast, cliquez sur le bouton de téléchargement à "
+"gauche du nom de la station."
+
+#: applet.js:371
+msgid ""
+"Select the open format (.XSPF) and save the file giving it the same name as "
+"the station."
+msgstr ""
+"Sélectionnez le format ouvert (.XSPF) et enregistrez le fichier en lui "
+"donnant le même nom que la station."
+
+#: applet.js:372
+msgid "This file can then be imported here."
+msgstr "Ce fichier peut ensuite être importé ici."
+
+#: applet.js:374
+#, javascript-format
+msgid "%s bytes = %s GB = %s GiB"
+msgstr "%s octets = %s Go = %s Gio"
+
+#. settings-schema.json->category-to-move->options
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->sched-radio->options
+#. settings-schema.json->search-country->options
+#. settings-schema.json->search-codec->options
+#. settings-schema.json->search-order->options
+#: applet.js:535 applet.js:549 applet.js:3982 applet.js:3994
+msgid "(Undefined)"
+msgstr "(Indéfini)"
+
+#: applet.js:864 applet.js:1357 applet.js:1694
+msgid "Stop"
+msgstr "Arrêt"
+
+#: applet.js:1349
+msgid "Start"
+msgstr "Marche"
+
+#: applet.js:1563 applet.js:1592 applet.js:1632
+msgid "Middle-Click: Stop Recording"
+msgstr "Clic-molette : Arrêter l'enregistrement"
+
+#: applet.js:1588 applet.js:1620 applet.js:1627
+#, javascript-format
+msgid "Volume: %s"
+msgstr "Volume: %s"
+
+#: applet.js:1594 applet.js:1634
+msgid "Middle-click: ON/OFF"
+msgstr "Clic-molette : Marche/Arrêt"
+
+#: applet.js:1596 applet.js:1636
+msgid "Click: Select another station"
+msgstr "Clic : Choisir une autre station"
+
+#: applet.js:1607
+msgid "Click to select a station"
+msgstr "Cliquer pour choisir une autre station"
+
+#: applet.js:1638
+msgid "Scroll wheel: volume change"
+msgstr "Roule-molette : Modifier le volume"
+
+#: applet.js:1670 applet.js:1946 applet.js:3655
+msgid "Configure..."
+msgstr "Configurer..."
+
+#: applet.js:1674 applet.js:1938
+msgid "Search for new stations..."
+msgstr "Rechercher de nouvelles stations..."
+
+#: applet.js:1680 applet.js:1950 applet.js:3692
+msgid "Sound Settings"
+msgstr "Paramètres du son"
+
+#: applet.js:1743
+msgid "Watch on YT"
+msgstr "Voir sur YT"
+
+#: applet.js:1750
+msgid "Try to download it from YT (unsafe)"
+msgstr "Essayer de télécharger depuis YT (peu sûr)"
+
+#: applet.js:1769
+msgid "Recently Played Stations:"
+msgstr "Stations récemment écoutées :"
+
+#: applet.js:1805
+msgid "Visit the home page of this station"
+msgstr "Visiter le site web de cette station"
+
+#: applet.js:1876
+msgid "My Radio Stations"
+msgstr "Mes stations de radio"
+
+#: applet.js:2058
+msgid "Downloading..."
+msgstr "Téléchargement..."
+
+#: applet.js:2060
+msgid "Stop downloading"
+msgstr "Arrêter ce téléchargement"
+
+#: applet.js:2168
+msgid "Download complete"
+msgstr "Enregistrement terminé"
+
+#: applet.js:2170 applet.js:2179 applet.js:3481 applet.js:3490 applet.js:3499
+#: applet.js:3744
+msgid "Open the recordings folder"
+msgstr "Ouvrir le dossier des enregistrements"
+
+#: applet.js:2177 applet.js:3478 applet.js:3488 applet.js:3497
+msgid "An error seems to have occurred during recording!"
+msgstr "Une erreur semble survenue pendant l'enregistrement !"
+
+#: applet.js:2178 applet.js:3480 applet.js:3489 applet.js:3498
+msgid "Please check this record."
+msgstr "Veuillez vérifier cet enregistrement."
+
+#: applet.js:2279 applet.js:2313
+msgid "Record from now"
+msgstr "Enregistrer à partir de maintenant"
+
+#: applet.js:2297 applet.js:3888
+msgid "Stop Current Recording"
+msgstr "Arrêter l'enregistrement actuel"
+
+#: applet.js:2407
+#, javascript-format
+msgid "Playing %s%s"
+msgstr "À l'écoute de %s%s"
+
+#: applet.js:2454
+msgid "Radio OFF"
+msgstr "Radio éteinte"
+
+#: applet.js:2582
+msgid "Unable to record anything!"
+msgstr "Impossible d'enregistrer !"
+
+#: applet.js:2582 applet.js:3764
+msgid "Insufficient space"
+msgstr "Espace insuffisant"
+
+#: applet.js:2582
+msgid "The limit you set has been reached."
+msgstr "La limite que vous avez fixée a été atteinte."
+
+#: applet.js:2984
+msgid "Nothing to save."
+msgstr "Rien à sauvegarder."
+
+#: applet.js:2997
+msgid "List of saved radio stations"
+msgstr "Liste des stations sauvegardées"
+
+#: applet.js:3015
+msgid "This will replace all current radio stations."
+msgstr "Cela va remplacer toutes vos stations actuelles."
+
+#: applet.js:3016
+msgid "Are you sure you want to continue?"
+msgstr "Êtes-vous sûr(e) de vouloir continuer ?"
+
+#: applet.js:3076 applet.js:3169
+msgid "Update in progress"
+msgstr "Mise à jour en cours"
+
+#: applet.js:3076 applet.js:3169
+msgid "It may take a while ... Please wait."
+msgstr "Cela peut prendre du temps... Merci de patienter."
+
+#: applet.js:3164 applet.js:3244
+msgid "Update completed successfully"
+msgstr "Mise à jour effectuée avec succès"
+
+#: applet.js:3358 applet.js:3414
+msgid "ERROR: Invalid YT video URL!"
+msgstr "ERREUR : URL de la vidéo YT invalide !"
+
+#: applet.js:3383
+msgid "Unable to extract a single soundtrack"
+msgstr "Impossible d'extraire une seule bande son"
+
+#: applet.js:3383
+msgid "Maybe it's a playlist?"
+msgstr "S'agit-il d'une playlist ?"
+
+#: applet.js:3416
+msgid "Close"
+msgstr "Fermer"
+
+#: applet.js:3636
+msgid "About..."
+msgstr "À propos..."
+
+#: applet.js:3668
+msgid "Schedule a background record..."
+msgstr "Planifier un enregistrement en arrière-plan..."
+
+#: applet.js:3680
+msgid "Extract soundtrack from YouTube video..."
+msgstr "Extraire la bande son d'une vidéo YouTube..."
+
+#: applet.js:3701
+msgid "Pulse Effects"
+msgstr "Pulse Effects"
+
+#: applet.js:3710
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Supprimer '%s'"
+
+#: applet.js:3723
+msgid "Radio ON at startup"
+msgstr "Allumer la radio au démarrage"
+
+#: applet.js:3761
+msgid "(auto)"
+msgstr "(auto)"
+
+#: applet.js:3761
+msgid "(manual)"
+msgstr "(manuel)"
+
+#: applet.js:3764 applet.js:3937
+msgid "Stop Recording"
+msgstr "Arrêter l'enregistrement"
+
+#: applet.js:3764
+msgid "Start Recording"
+msgstr "Démarrer l'enregistrement"
+
+#: applet.js:3785
+msgid "Reload this applet"
+msgstr "Recharger cette applet"
+
+#: applet.js:3804
+msgid "Cancel downloads from YT"
+msgstr "Abandon des téléchargements depuis YT"
+
+#: applet.js:3938
+msgid "Close without stopping recording"
+msgstr "Fermer sans arrêter l'enregistrement"
+
+#: applet.js:4144
+#, javascript-format
+msgid "Starting recording from %s:%s to %s:%s"
+msgstr "Démarrage de l'enregistrement de %s:%s à %s:%s"
+
+#: applet.js:4156
+msgid "Recording completed"
+msgstr "Enregistrement terminé"
+
+#: applet.js:4250
+msgid "This will import a new file containing radio stations."
+msgstr "Cela va importer un nouveau fichier contenant des stations de radio."
+
+#: applet.js:4251
+msgid "Do you want to continue?"
+msgstr "Voulez-vous continuer ?"
+
+#: applet.js:4322
+msgid "No new radio in your list."
+msgstr "Aucune nouvelle radio dans votre liste."
+
+#: applet.js:4324
+msgid "One more radio in your list."
+msgstr "Une radio de plus dans votre liste."
+
+#: applet.js:4326
+#, javascript-format
+msgid "%s more radios in your list."
+msgstr "%s radios de plus dans votre liste."
+
+#: applet.js:4529
+msgid "There are no new stations to add to the Radio3.0 applet menu"
+msgstr ""
+"Il n'y a aucune nouvelle station à ajouter au menu de l'applet Radio3.0"
+
+#: applet.js:4531
+msgid "A new station has been added to the Radio3.0 applet menu"
+msgstr "Une nouvelle station a été ajoutée au menu de l'applet Radio3.0"
+
+#: applet.js:4533
+#, javascript-format
+msgid "%s new stations have been added to the Radio3.0 applet menu"
+msgstr "%s  nouvelles stations ont été ajoutées au menu de l'applet Radio3.0"
+
+#: applet.js:4734
+#, javascript-format
+msgid "%s kbps"
+msgstr "%s kbit/s"
+
+#: lib/checkDependencies.js:315
+#, javascript-format
+msgid "The applet %s is fully functional."
+msgstr "L'applet %s est pleinement fonctionnelle."
+
+#: lib/checkDependencies.js:316
+msgid "All dependencies are installed"
+msgstr "Toutes les dépendances ont été installées"
+
+#: lib/checkDependencies.js:341
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Vous semblez ne pas disposer des programmes requis pour bénéficier de toutes "
+"les fonctionnalités de cette applet."
+
+#: lib/checkDependencies.js:342
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr "Veuillez exécuter, dans le terminal qui s'est ouvert, les commandes :"
+
+#: lib/checkDependencies.js:343
+msgid "Some dependencies are not installed!"
+msgstr "Certaines dépendances ne sont pas installées !"
+
+#: lib/checkTranslations.js:110
+msgid "To finalize the translation installation, please restart Cinnamon"
+msgstr ""
+"Pour finaliser l'installation de la traduction, veuillez redémarrer Cinnamon"
+
+#: xs/xlet-settings.py:214
+msgid "Previous instance"
+msgstr "Instance précédente"
+
+#: xs/xlet-settings.py:218
+msgid "Next instance"
+msgstr "Instance suivante"
+
+#: xs/xlet-settings.py:227
+msgid "More options"
+msgstr "Plus d'options"
+
+#: xs/xlet-settings.py:233
+msgid "Import from a file"
+msgstr "Importer depuis un fichier"
+
+#: xs/xlet-settings.py:238
+msgid "Export to a file"
+msgstr "Exporter dans un fichier"
+
+#: xs/xlet-settings.py:243
+msgid "Reset to defaults"
+msgstr "Rétablir les valeurs par défaut"
+
+#: xs/xlet-settings.py:252
+#, python-format
+msgid "Reload %s"
+msgstr "Recharger %s"
+
+#: xs/xlet-settings.py:438
+#, python-format
+msgid "Settings for %s"
+msgstr "Configuration de %s"
+
+#: xs/xlet-settings.py:530
+msgid "Select or enter file to export to"
+msgstr "Choisir ou entrer le nom du fichier vers lequel exporter"
+
+#: xs/xlet-settings.py:538 xs/xlet-settings.py:559
+msgid "JSON files"
+msgstr "Fichiers JSON"
+
+#: xs/xlet-settings.py:552
+msgid "Select a JSON file to import"
+msgstr "Choisir un fichier JSON à importer"
+
+#: xs/bin/R3TreeListWidgets.py:278 xs/bin/R3TreeListWidgets.py:501
+msgid "Add new entry"
+msgstr "Ajouter une nouvelle ligne"
+
+#: xs/bin/R3TreeListWidgets.py:282
+msgid "Remove selected entry"
+msgstr "Supprimer la ligne surlignée"
+
+#: xs/bin/R3TreeListWidgets.py:287
+msgid "Edit selected entry"
+msgstr "Modifier la ligne surlignée"
+
+#: xs/bin/R3TreeListWidgets.py:292
+msgid "Unselect the selected row"
+msgstr "Ne surligner aucune ligne"
+
+#: xs/bin/R3TreeListWidgets.py:297
+msgid "Move selected entry up"
+msgstr "Monter d'un cran la ligne surlignée"
+
+#: xs/bin/R3TreeListWidgets.py:302
+msgid "Move selected entry down"
+msgstr "Descendre d'un cran la ligne surlignée"
+
+#: xs/bin/R3TreeListWidgets.py:325
+msgid "Go to bottom"
+msgstr "Tout en bas"
+
+#: xs/bin/R3TreeListWidgets.py:331
+msgid "Go to next page"
+msgstr "Page suivante"
+
+#: xs/bin/R3TreeListWidgets.py:337
+msgid "Go to previous page"
+msgstr "Page précédente"
+
+#: xs/bin/R3TreeListWidgets.py:342
+msgid "Go to top"
+msgstr "Tout en haut"
+
+#: xs/bin/R3TreeListWidgets.py:356
+msgid "Go to next category"
+msgstr "Catégorie suivante"
+
+#: xs/bin/R3TreeListWidgets.py:366
+msgid "Go to previous category"
+msgstr "Catégorie précédente"
+
+#: xs/bin/R3TreeListWidgets.py:503
+msgid "Edit entry"
+msgstr "Modification"
+
+#. metadata.json->description
+msgid "The Ultimate Internet Radio Receiver & Recorder for Cinnamon"
+msgstr "L'Ultime Récepteur et Enregistreur de Radios Internet pour Cinnamon"
+
+#. metadata.json->name
+msgid "Radio3.0"
+msgstr "Radio3.0"
+
+#. settings-schema.json->pageStations->title
+#. settings-schema.json->import-list->description
+#. settings-schema.json->search-list->description
+msgid "Radios"
+msgstr "Radios"
+
+#. settings-schema.json->pageImport->title
+msgid "Import"
+msgstr "Importer"
+
+#. settings-schema.json->pageSearch->title
+msgid "Search"
+msgstr "Rechercher"
+
+#. settings-schema.json->pageMenu->title
+#. settings-schema.json->sectionMenuMenu->title
+#. settings-schema.json->radios->columns->title
+msgid "Menu"
+msgstr "Menu"
+
+#. settings-schema.json->pageBehavior->title
+msgid "Behavior"
+msgstr "Comportement"
+
+#. settings-schema.json->pageRecording->title
+msgid "Recording"
+msgstr "Enregistrement"
+
+#. settings-schema.json->pageYT->title
+msgid "YT"
+msgstr "YT"
+
+#. settings-schema.json->pageScheduling->title
+msgid "Scheduling"
+msgstr "Planification"
+
+#. settings-schema.json->pageNetwork->title
+msgid "Network"
+msgstr "Réseau"
+
+#. settings-schema.json->sectionStationsList->title
+msgid "Stations and Categories on the menu"
+msgstr "Stations et Catégories au menu"
+
+#. settings-schema.json->sectionStationsMove->title
+msgid "Moving selected stations"
+msgstr "Déplacement des stations choisies"
+
+#. settings-schema.json->sectionStationsSaveRestore->title
+msgid "Save and Restore"
+msgstr "Sauvegarde et Restauration"
+
+#. settings-schema.json->sectionStationsUpdate->title
+msgid "Update this station list"
+msgstr "Mettre à jour cette liste de stations"
+
+#. settings-schema.json->sectionImportShoutcast->title
+msgid "Get files on Shoutcast to import here"
+msgstr "Obtenir sur Shoutcast des fichiers à importer ici"
+
+#. settings-schema.json->sectionImportFile->title
+msgid "File to import"
+msgstr "Fichier à importer"
+
+#. settings-schema.json->sectionImportList->title
+msgid "File contents"
+msgstr "Contenu du fichier"
+
+#. settings-schema.json->sectionSearchOptions->title
+msgid "Search for Radio Stations"
+msgstr "Recherche de nouvelles stations"
+
+#. settings-schema.json->sectionSearchResults->title
+msgid "Search results"
+msgstr "Résultats de la recherche"
+
+#. settings-schema.json->sectionBehaviorStartUp->title
+msgid "Start-up"
+msgstr "Démarrage"
+
+#. settings-schema.json->sectionBehaviorVolumeStep->title
+msgid "Volume step"
+msgstr "Pas du volume"
+
+#. settings-schema.json->sectionBehaviorTooltip->title
+msgid "Show Help"
+msgstr "Afficher l'aide"
+
+#. settings-schema.json->sectionMenuPrivacy->title
+msgid "Privacy"
+msgstr "Confidentialité"
+
+#. settings-schema.json->sectionMenuContextual->title
+msgid "Contextual Menu"
+msgstr "Menu contextuel"
+
+#. settings-schema.json->sectionBehaviorNotifications->title
+msgid "Notifications"
+msgstr "Notifications"
+
+#. settings-schema.json->sectionBehaviorBitrate->title
+msgid "Codec and Bitrate"
+msgstr "Codec et Bitrate"
+
+#. settings-schema.json->sectionBehaviorSymbolicIconColor->title
+msgid "Symbolic Icon Color"
+msgstr "Couleur de l'icône symbolique"
+
+#. settings-schema.json->sectionNetworkQuality->title
+msgid "Quality"
+msgstr "Qualité"
+
+#. settings-schema.json->sectionNetworkMonitoring->title
+msgid "Monitoring"
+msgstr "Surveillance"
+
+#. settings-schema.json->sectionNetworkProxy->title
+msgid "Proxy"
+msgstr "Proxy"
+
+#. settings-schema.json->sectionNetworkDatabase->title
+msgid "Database Info"
+msgstr "Info Base de données"
+
+#. settings-schema.json->sectionRecordingRecordings->title
+#. settings-schema.json->sectionYTFormat->title
+msgid "Recordings"
+msgstr "Enregistrements"
+
+#. settings-schema.json->sectionRecordingLimits->title
+msgid "Preservation of hard disk space"
+msgstr "Préservation d'espace libre sur le disque"
+
+#. settings-schema.json->sectionRecordingIcon->title
+#. settings-schema.json->sectionYTIcon->title
+msgid "Icon"
+msgstr "Icône"
+
+#. settings-schema.json->sectionYTExtract->title
+msgid "Extract soundtrack from YouTube video"
+msgstr "Extraire la bande son d'une vidéo YouTube"
+
+#. settings-schema.json->sectionRecordingScheduleARecording->title
+msgid "Schedule a background recording"
+msgstr "Planifier un enregistrement en arrière-plan"
+
+#. settings-schema.json->sectionRecordingUnableToScheduleARecording->title
+msgid "Unable to schedule a background recording"
+msgstr "Impossible de planifier un enregistrement en arrière-plan"
+
+#. settings-schema.json->sectionRecordingScheduledRecordings->title
+#. settings-schema.json->sched-recordings->description
+msgid "Scheduled recordings"
+msgstr "Enregistrements planifiés"
+
+#. settings-schema.json->show-help-in-tabs->description
+msgid "Show help labels in each tab of this Settings window"
+msgstr ""
+"Afficher les textes d'aide dans chacun des onglets de cette fenêtre de "
+"configuration"
+
+#. settings-schema.json->show-help-in-tabs->tooltip
+msgid ""
+"You can uncheck this option when you are familiar with all of these settings."
+msgstr ""
+"Vous pouvez décocher cette case une fois familiarisé avec tous ces "
+"paramètres."
+
+#. settings-schema.json->stations-help->description
+#. settings-schema.json->button-update-help->description
+#. settings-schema.json->import-shoutcast-help->description
+#. settings-schema.json->import-help->description
+#. settings-schema.json->search-help->description
+msgid "Help"
+msgstr "Aide"
+
+#. settings-schema.json->radios->description
+msgid "List of stations"
+msgstr "Liste des stations"
+
+#. settings-schema.json->radios->columns->title
+msgid "♪/➟"
+msgstr "♪/➟"
+
+#. settings-schema.json->radios->columns->title
+msgid "Station or Category"
+msgstr "Station ou Catégorie"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid ""
+"Bitrate\n"
+"(kbps)"
+msgstr ""
+"Bitrate\n"
+"(kbit/s)"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->search-codec->description
+msgid "Codec"
+msgstr "Codec"
+
+#. settings-schema.json->radios->columns->title
+msgid "Streaming URL (empty for a category)"
+msgstr "URL de streaming (vide pour une catégorie)"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Unique identifier"
+msgstr "Identifiant unique"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Home page"
+msgstr "Site web"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Tags"
+msgstr "Mots-clés"
+
+#. settings-schema.json->stations-list-play-button->description
+#. settings-schema.json->import-list-play-button->description
+#. settings-schema.json->search-list-play-button->description
+msgid "♪ Play the next station to test"
+msgstr "♪ Écouter la prochaine station à tester"
+
+#. settings-schema.json->category-to-move->description
+msgid "Category to which to move the selected stations:"
+msgstr "Catégorie vers laquelle déplacer les stations choisies :"
+
+#. settings-schema.json->button-moving->description
+msgid "➟ Move selected stations to this category"
+msgstr "➟ Déplacer les stations choisies vers cette catégorie"
+
+#. settings-schema.json->button_go_to_category->description
+msgid "Go to this category"
+msgstr "Se rendre à cette catégorie"
+
+#. settings-schema.json->button-show-all->description
+msgid "Show all stations and categories in the menu"
+msgstr "Afficher toutes les stations et catégories dans le menu"
+
+#. settings-schema.json->button-hide-all->description
+msgid "Hide all stations and categories (so the menu becomes empty)"
+msgstr "Cacher toutes les stations et catégories (ainsi le menu devient vide)"
+
+#. settings-schema.json->button-save->description
+msgid "Save this list of stations"
+msgstr "Sauvegarder cette liste de stations"
+
+#. settings-schema.json->button-restore->description
+msgid "Restore a list of stations"
+msgstr "Restaurer une liste de stations"
+
+#. settings-schema.json->button_open_folder->description
+msgid "Open the folder containing these lists"
+msgstr "Ouvrir le dossier contenant ces listes"
+
+#. settings-schema.json->button-update->description
+msgid "Update my station list with the Radio Database data"
+msgstr "Mettre à jour ma liste de stations à l'aide de la base de données"
+
+#. settings-schema.json->scale-update->description
+#. settings-schema.json->recordings-extract-update->description
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->import-shoutcast-button->description
+msgid "Open the Shoutcast directory"
+msgstr "Ouvrir le répertoire de Shoutcast"
+
+#. settings-schema.json->import-file-button->description
+msgid "Import a .csv, .m3u, .pls, .xspf or .json file"
+msgstr "Importer un fichier .csv, .m3u, .pls, .xspf ou .json"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Select"
+msgstr "Choisir"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "♪"
+msgstr "♪"
+
+#. settings-schema.json->import-list->columns->title
+msgid "Title"
+msgstr "Titre"
+
+#. settings-schema.json->import-list->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Streaming URL"
+msgstr "URL de streaming"
+
+#. settings-schema.json->import-list-button->description
+#. settings-schema.json->search-list-button->description
+msgid "Import the selected stations into my own list"
+msgstr "Importer dans ma liste les stations sélectionnées"
+
+#. settings-schema.json->import-remove-from-list-button->description
+#. settings-schema.json->search-remove-from-list-button->description
+msgid "Remove selected items from this list"
+msgstr "Supprimer de cette liste les stations sélectionnées"
+
+#. settings-schema.json->import-select-all->description
+#. settings-schema.json->search-select-all->description
+msgid "Select all items"
+msgstr "Tout sélectionner"
+
+#. settings-schema.json->import-unselect-all->description
+#. settings-schema.json->search-unselect-all->description
+msgid "Unselect all items"
+msgstr "Tout dé-sélectionner"
+
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Station"
+msgstr "Station"
+
+#. settings-schema.json->search-list->columns->title
+msgid ""
+"Country\n"
+"Code"
+msgstr ""
+"Code du\n"
+"Pays"
+
+#. settings-schema.json->search-list->columns->title
+#. settings-schema.json->search-country->description
+msgid "Country"
+msgstr "Pays"
+
+#. settings-schema.json->search-list-page-label->description
+msgid "Page:"
+msgstr "Page :"
+
+#. settings-schema.json->switch-on-last-station-at-start-up->description
+msgid "Turn on the radio when Cinnamon starts up"
+msgstr "Allumer la radio dès le démarrage de Cinnamon"
+
+#. settings-schema.json->switch-on-last-station-at-start-up->tooltip
+msgid ""
+"The selected radio will be the last you listened to, even if you stopped "
+"it.\n"
+"\n"
+"VPN users: By checking this, the radio broadcast could use your VPN link in "
+"the event that this one is active before the start of this applet."
+msgstr ""
+"La radio allumée sera la dernière écoutée, même si vous l'aviez arrêtée.\n"
+"\n"
+"Utilisateurs de VPN : En cochant cette case, la diffusion radio pourra "
+"utiliser votre lien VPN dans le cas où celui-ci serait actif avant le "
+"démarrage de cette applet."
+
+#. settings-schema.json->volume-at-startup->description
+msgid "Volume level starting a new radio (%)"
+msgstr "Niveau de volume au démarrage d'une nouvelle radio (%)"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-minimalBitrate->options
+msgid "0"
+msgstr "0"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-limit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "35"
+msgstr "35"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->search-limit->options
+msgid "40"
+msgstr "40"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "45"
+msgstr "45"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->yt-progress-interval->options
+#. settings-schema.json->search-limit->options
+msgid "50"
+msgstr "50"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "55"
+msgstr "55"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "60"
+msgstr "60"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "65"
+msgstr "65"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "70"
+msgstr "70"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "75"
+msgstr "75"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "80"
+msgstr "80"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "85"
+msgstr "85"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "90"
+msgstr "90"
+
+#. settings-schema.json->volume-at-startup->options
+msgid "95"
+msgstr "95"
+
+#. settings-schema.json->volume-at-startup->options
+#. settings-schema.json->yt-progress-interval->options
+#. settings-schema.json->search-limit->options
+msgid "100"
+msgstr "100"
+
+#. settings-schema.json->volume-at-startup->tooltip
+msgid ""
+"If set, then this will change the volume level starting a new radio, in "
+"percentage of the general volume level.\n"
+"Default is (Undefined): The volume level remains unchanged.\n"
+"\n"
+"Please note that you can change the volume level scrolling on this applet "
+"icon, or using the slider in the context menu."
+msgstr ""
+"Si ce volume est défini, cela changera le niveau de volume à partir d'une "
+"nouvelle radio, en pourcentage du niveau de volume général.\n"
+"\n"
+"\n"
+"La valeur par défaut est (Indéfini) : le niveau de volume reste alors "
+"inchangé.\n"
+"\n"
+"\n"
+"Veuillez noter que vous pouvez modifier le niveau de volume en roulant la "
+"molette sur l'icône de Radio3.0, ou en déplaçant le curseur situé dans le "
+"menu contextuel."
+
+#. settings-schema.json->volume-step->description
+msgid "Volume step scrolling on icon"
+msgstr "Pas du volume en roulant la molette sur l'icône"
+
+#. settings-schema.json->volume-step->options
+msgid "±0%"
+msgstr "±0%"
+
+#. settings-schema.json->volume-step->options
+msgid "±1%"
+msgstr "±1%"
+
+#. settings-schema.json->volume-step->options
+msgid "±2%"
+msgstr "±2%"
+
+#. settings-schema.json->volume-step->options
+msgid "±3%"
+msgstr "±3%"
+
+#. settings-schema.json->volume-step->options
+msgid "±4%"
+msgstr "±4%"
+
+#. settings-schema.json->volume-step->options
+msgid "±5%"
+msgstr "±5%"
+
+#. settings-schema.json->volume-step->tooltip
+msgid ""
+"By how much increase or decrease the volume using the mouse scroll wheel on "
+"the icon."
+msgstr ""
+"De combien augmenter ou diminuer le volume en utilisant la molette de la "
+"souris sur l'icône."
+
+#. settings-schema.json->show-title-and-version->description
+msgid "Show the name and the version of this applet in the menu"
+msgstr "Afficher en en-tête du menu le nom et la version de cette applet"
+
+#. settings-schema.json->recent-number->description
+msgid "Number of Recently Played Stations in menu"
+msgstr "Nombre de \"Stations récemment écoutées\" dans le menu"
+
+#. settings-schema.json->recent-number->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->recent-number->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->recent-number->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->recent-number->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->recent-number->options
+#. settings-schema.json->search-limit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->recent-number->options
+msgid "6"
+msgstr "6"
+
+#. settings-schema.json->recent-number->options
+msgid "7"
+msgstr "7"
+
+#. settings-schema.json->recent-number->options
+msgid "8"
+msgstr "8"
+
+#. settings-schema.json->recent-number->options
+msgid "9"
+msgstr "9"
+
+#. settings-schema.json->recent-number->tooltip
+msgid "How many recently listened stations do you want to display in the menu?"
+msgstr "Combien de \"Stations récemment écoutées\" dans le menu ?"
+
+#. settings-schema.json->reset-recents->description
+msgid "Empty your Recently Played Stations list at startup"
+msgstr "Vider au démarrage votre liste des \"Stations récemment écoutées\""
+
+#. settings-schema.json->button-reset-recents->description
+msgid "Empty your Recently Played Stations list now"
+msgstr "Vider maintenant votre liste des \"Stations récemment écoutées\""
+
+#. settings-schema.json->show-system-items->description
+msgid "Show system items in the menu"
+msgstr "Afficher les éléments du système dans le menu"
+
+#. settings-schema.json->show-system-items->tooltip
+msgid ""
+"Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
+msgstr ""
+"Voulez-vous que \"Configurer...\" et \"Paramètres du son\" apparaissent dans "
+"le menu ?"
+
+#. settings-schema.json->show-reload->description
+msgid "Show the 'Reload this applet' item in the contextual menu"
+msgstr "Afficher l'élément \"Recharger cette applet\" dans le menu contextuel"
+
+#. settings-schema.json->show-reload->tooltip
+msgid "For developers only"
+msgstr "Pour développeurs seulement"
+
+#. settings-schema.json->show-help-in-tooltip->description
+msgid "Show help for mouse actions in the tooltip"
+msgstr "Afficher dans l'info-bulle l'aide concernant les actions de la souris"
+
+#. settings-schema.json->show-help-in-tooltip->tooltip
+msgid "You can uncheck this option when you are familiar with all mouse roles."
+msgstr ""
+"Vous pouvez décocher cette case une fois familiarisé avec toutes les actions "
+"que l'on peut réaliser avec la souris."
+
+#. settings-schema.json->notif-station-change->description
+msgid "Change of radio"
+msgstr "Changement de station"
+
+#. settings-schema.json->notif-song-change->description
+msgid "Change of song or program"
+msgstr "Changement de chanson ou de programme à la radio"
+
+#. settings-schema.json->notif-song-change->tooltip
+msgid ""
+"Please note that some radios do not notify you of a song or program change."
+msgstr ""
+"Veuillez noter que certaines radios n'informent pas d'un changement de "
+"chanson ou de programme."
+
+#. settings-schema.json->notif-song-duration->units
+msgid "seconds"
+msgstr "secondes"
+
+#. settings-schema.json->notif-song-duration->description
+msgid "Duration of a song or program change notification"
+msgstr "Durée d'une notification de changement de chanson ou de programme"
+
+#. settings-schema.json->notif-buttons-allowed->description
+msgid "Show in notifications the buttons to start and stop recordings"
+msgstr ""
+"Afficher dans les notifications les boutons pour démarrer et arrêter les "
+"enregistrements"
+
+#. settings-schema.json->notif-buttons-allowed->tooltip
+msgid ""
+"Please note that this will have no effect if you do not wish to be notified "
+"of a song or program change."
+msgstr ""
+"Veuillez noter que cela n'aura aucun effet si vous ne souhaitez pas être "
+"averti d'un changement de morceau ou de programme."
+
+#. settings-schema.json->show-codec->description
+msgid "Show codec"
+msgstr "Afficher le codec"
+
+#. settings-schema.json->show-bitrate->description
+msgid "Show bit rate"
+msgstr "Afficher le bitrate"
+
+#. settings-schema.json->show-bitrate->tooltip
+msgid ""
+"Unit: kbps (kilobit per second).\n"
+"The higher this bit rate, the better the sound quality of the stream."
+msgstr ""
+"Unité : kbit/s (kilobit par seconde).\n"
+"Plus ce bitrate est élevé, meilleure est la qualité sonore du flux."
+
+#. settings-schema.json->color-on->description
+msgid "Color of the symbolic icon while the radio is on"
+msgstr "Couleur de l'icône symbolique lorsque la radio est allumée"
+
+#. settings-schema.json->color-off->description
+msgid "Color of the symbolic icon while the radio is off"
+msgstr "Couleur de l'icône symbolique lorsque la radio est éteinte"
+
+#. settings-schema.json->color-recording->description
+msgid "Color of the symbolic icon while recording"
+msgstr "Couleur de l'icône symbolique lors d'un enregistrement"
+
+#. settings-schema.json->network-quality->description
+msgid "Network Quality"
+msgstr "Qualité du réseau"
+
+#. settings-schema.json->network-quality->options
+msgid "High"
+msgstr "Haute"
+
+#. settings-schema.json->network-quality->options
+msgid "Low"
+msgstr "Basse"
+
+#. settings-schema.json->network-quality->tooltip
+msgid ""
+"High Quality: The recordings you make while listening to the radio will "
+"double the bit rate usually required to just listen to the radio. Thus, the "
+"recordings will not be disturbed by extraneous sounds or by a change in the "
+"volume of the radio.\n"
+"\n"
+"Low Quality: These recordings come directly from the sound card, which "
+"relieves the network but risks polluting them with extraneous sounds (system "
+"sounds for example). The volume of the radio will be set to 100% in order to "
+"obtain the best possible quality."
+msgstr ""
+"Haute Qualité : les enregistrements que vous faites tout en écoutant la "
+"radio doublent le débit habituellement requis pour simplement écouter la "
+"radio. Ainsi, les enregistrements ne seront pas perturbés par des sons "
+"parasites ou par un changement de volume de la radio.\n"
+"\n"
+"Basse Qualité : Ces enregistrements proviennent directement de la carte son, "
+"ce qui soulage le réseau mais risque de les polluer avec des sons parasites "
+"(sons système par exemple). Le volume de la radio sera réglé à 100% afin "
+"d'obtenir la meilleure qualité possible."
+
+#. settings-schema.json->network-monitoring->description
+msgid "Monitor the network"
+msgstr "Surveillance du réseau"
+
+#. settings-schema.json->network-monitoring->tooltip
+msgid ""
+"Whether or not to restart the radio when the network becomes active again "
+"after an interruption.\n"
+"\n"
+"VPN users: By checking this, the radio broadcast may use your VPN link."
+msgstr ""
+"Faut-il ou pas redémarrer la radio lorsque le réseau redevient actif après "
+"une interruption ? Si oui, cochez cette case.\n"
+"\n"
+"Utilisateurs VPN : En cochant cette case, la diffusion radio peut utiliser "
+"votre lien VPN."
+
+#. settings-schema.json->http-proxy->description
+msgid "HTTP Proxy"
+msgstr "Proxy HTTP"
+
+#. settings-schema.json->http-proxy->tooltip
+msgid ""
+"Format: http://[user:pass@]URL[:port]\n"
+"Default: empty.\n"
+"If empty, the environment variables http_proxy and ALL_PROXY will be used if "
+"present.\n"
+"If set, this proxy will not be used for https requests."
+msgstr ""
+"Format: http://[utilisateur:motdepasse@]URL[:port]\n"
+"Valeur par défaut: vide.\n"
+"Si ce champ est vide (ce qui est conseillé), les variables d'environnement "
+"http_proxy et ALL_PROXY seront utilisées si elles sont présentes.\n"
+"S'il est défini, ce proxy ne pourra pas être utilisé pour les requêtes https "
+"- ce qui vous privera de l'accès au flux de très nombreuses stations."
+
+#. settings-schema.json->apply-http-proxy->description
+msgid "Apply HTTP Proxy"
+msgstr "Appliquer ce Proxy HTTP"
+
+#. settings-schema.json->database-url->description
+msgid "Database URL"
+msgstr "URL de la base de données"
+
+#. settings-schema.json->recording-format->description
+msgid "Recording format"
+msgstr "Format d'enregistrement"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "FLAC"
+msgstr "FLAC"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "MP3"
+msgstr "MP3"
+
+#. settings-schema.json->recording-format->options
+#. settings-schema.json->search-codec->options
+msgid "OGG"
+msgstr "OGG"
+
+#. settings-schema.json->recording-format->options
+msgid "RAW"
+msgstr "RAW"
+
+#. settings-schema.json->recording-format->options
+msgid "WAV"
+msgstr "WAV"
+
+#. settings-schema.json->recording-ends-auto->description
+msgid "Way to stop recording"
+msgstr "Façon dont un enregistrement s'arrête"
+
+#. settings-schema.json->recording-ends-auto->options
+msgid "automatically, when the current song ends"
+msgstr "automatiquement, quand la chanson ou l'émission courante s'arrête"
+
+#. settings-schema.json->recording-ends-auto->options
+msgid "manually; thus, several recordings can follow one another"
+msgstr ""
+"manuellement; attention, plusieurs enregistrements peuvent se succéder à "
+"votre insu"
+
+#. settings-schema.json->recording-ends-auto->tooltip
+msgid ""
+"Please note that this choice will have no effect on any current recording, "
+"but on subsequent ones."
+msgstr ""
+"Veuillez noter que ce choix n'aura aucun effet sur l'éventuel enregistrement "
+"en cours, mais en aura sur les suivants."
+
+#. settings-schema.json->limits-hd-space-left-label->description
+msgid "Space remaining on disk when opening this window:"
+msgstr "Espace restant sur le disque à l'ouverture de cette fenêtre :"
+
+#. settings-schema.json->limits-hd-size-prefixes->description
+msgid ""
+"Disk space unit as defined in Nemo's display preferences (File size prefixes)"
+msgstr ""
+"Unité d'espace disque telle que définie dans les préférences d'affichage de "
+"Nemo (Préfixes de taille de fichier)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GB (decimal)"
+msgstr "Go (décimal)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GB (decimal long)"
+msgstr "Go (décimal long)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GiB (binary)"
+msgstr "Gio (binaire)"
+
+#. settings-schema.json->limits-hd-size-prefixes->options
+msgid "GiB (binary long)"
+msgstr "Gio (binaire long)"
+
+#. settings-schema.json->limits-hd-size-prefixes->tooltip
+msgid "Changing this also changes Nemo's file size prefixes."
+msgstr ""
+"Changer cela modifie également les préfixes de taille de fichier de Nemo."
+
+#. settings-schema.json->limits-hd-value->units
+msgid "Units: As defined above"
+msgstr "Unité : celle définie ci-dessus"
+
+#. settings-schema.json->limits-hd-value->description
+msgid "Space to be left free on the hard disk"
+msgstr "Espace qui doit rester libre sur le disque"
+
+#. settings-schema.json->highlight-icon-while-background-
+#. recording->description
+msgid "Highlight this applet icon during background recording"
+msgstr ""
+"Mettre en surbrillance l'icône durant un enregistrement en arrière-plan"
+
+#. settings-schema.json->yt-cookies-from->description
+msgid "Use cookies from"
+msgstr "Utiliser les cookies de"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "(None)"
+msgstr "(Aucun)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Brave"
+msgstr "Brave"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chrome"
+msgstr "Chrome"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium"
+msgstr "Chromium"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (basictext)"
+msgstr "Chromium (basictext)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (gnomekeyring)"
+msgstr "Chromium (gnomekeyring)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Chromium (kwallet)"
+msgstr "Chromium (kwallet)"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Firefox"
+msgstr "Firefox"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Opera"
+msgstr "Opera"
+
+#. settings-schema.json->yt-cookies-from->options
+msgid "Vivaldi"
+msgstr "Vivaldi"
+
+#. settings-schema.json->yt-cookies-from->tooltip
+msgid ""
+"Cookies are used by YouTube to determine which videos you may watch. For "
+"Chromium, you can select the method (in parentheses) you chose to save "
+"cookies."
+msgstr ""
+"Les cookies sont utilisés par YouTube pour déterminer quelles vidéos vous "
+"pouvez regarder. Pour Chromium, vous pouvez sélectionner la méthode (entre "
+"parenthèses) que vous avez choisie pour enregistrer les cookies."
+
+#. settings-schema.json->show-yt-progress->description
+msgid "Display, under the icon, the progress of downloads from YT."
+msgstr "Afficher sous l'icône la progression des téléchargements depuis YT."
+
+#. settings-schema.json->yt-progress-interval->description
+msgid "Progression interval (ms)"
+msgstr "Intervalle de progression (ms)"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "Depending on network quality"
+msgstr "Selon la qualité du réseau"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "150"
+msgstr "150"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "200"
+msgstr "200"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "300"
+msgstr "300"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "400"
+msgstr "400"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "500"
+msgstr "500"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "600"
+msgstr "600"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "750"
+msgstr "750"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "1000"
+msgstr "1000"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "2000"
+msgstr "2000"
+
+#. settings-schema.json->yt-progress-interval->options
+msgid "3000"
+msgstr "3000"
+
+#. settings-schema.json->recordings-extract-url->description
+msgid "YouTube video link"
+msgstr "Lien de la vidéo YouTube"
+
+#. settings-schema.json->recordings-paste-button->description
+msgid "Paste above the YouTube link you copied"
+msgstr "Coller ci-dessus le lien YouTube que vous avez copié"
+
+#. settings-schema.json->recordings-yesno-playlist->description
+msgid "In case of playlist"
+msgstr "En cas de playlist"
+
+#. settings-schema.json->recordings-yesno-playlist->options
+msgid "Extract single soundtrack"
+msgstr "Extraire une seule bande son"
+
+#. settings-schema.json->recordings-yesno-playlist->options
+msgid "Extract whole playlist"
+msgstr "Extraire toute la playlist"
+
+#. settings-schema.json->recordings-subdirectory->description
+msgid "Record in subdirectory"
+msgstr "Enregistrer dans le sous-dossier"
+
+#. settings-schema.json->recordings-subdirectory->tooltip
+msgid "(without leading or trailing slash)"
+msgstr "(sans slash, ni au début, ni à la fin)"
+
+#. settings-schema.json->recordings-extract-button->description
+msgid "Extract soundtrack"
+msgstr "Extraire la bande son"
+
+#. settings-schema.json->sched-radio->description
+msgid "Radio"
+msgstr "Radio"
+
+#. settings-schema.json->sched-begin-date->description
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Date"
+msgstr "Date"
+
+#. settings-schema.json->sched-begin-time->description
+msgid "Time"
+msgstr "Heure"
+
+#. settings-schema.json->sched-begin-time->tooltip
+#. settings-schema.json->sched-duration->tooltip
+msgid "Seconds will be ignored."
+msgstr "Les secondes seront ignorées."
+
+#. settings-schema.json->sched-duration->description
+msgid "Duration"
+msgstr "Durée"
+
+#. settings-schema.json->sched-button->description
+msgid "Schedule this recording"
+msgstr "Planifier cet enregistrement en arrière-plan"
+
+#. settings-schema.json->sched-alert-no-space->description
+msgid "You are running out of disk space. See in the Recording tab."
+msgstr "L'espace disque est devenu insuffisant (cf. onglet Enregistrement)."
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Remove?"
+msgstr "Supprimer ?"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "In progress"
+msgstr "En cours"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Action"
+msgstr "Action"
+
+#. settings-schema.json->sched-recordings->columns->title
+msgid "Identifier"
+msgstr "Identifiant"
+
+#. settings-schema.json->sched-recordings->tooltip
+msgid "Do not modify anything in this list, except in the \"Remove?\" column"
+msgstr ""
+"Ne rien modifier dans cette liste, sauf dans la colonne \"Supprimer ?\""
+
+#. settings-schema.json->search-name->description
+msgid "Station Name"
+msgstr "Nom de la station"
+
+#. settings-schema.json->search-name->tooltip
+msgid "OPTIONAL. Name (or part of the name) of the radio station."
+msgstr "OPTIONNEL. Nom (ou partie du nom) de la station de radio."
+
+#. settings-schema.json->search-country->options
+msgid "(My Country)"
+msgstr "(Mon pays)"
+
+#. settings-schema.json->search-country->options
+msgid "Afghanistan - AF"
+msgstr "Afghanistan - AF"
+
+#. settings-schema.json->search-country->options
+msgid "Åland Islands - AX"
+msgstr "Aland (Îles) - AX"
+
+#. settings-schema.json->search-country->options
+msgid "Albania - AL"
+msgstr "Albanie - AL"
+
+#. settings-schema.json->search-country->options
+msgid "Algeria - DZ"
+msgstr "Algérie - DZ"
+
+#. settings-schema.json->search-country->options
+msgid "American Samoa - AS"
+msgstr "Samoa américaines - AS"
+
+#. settings-schema.json->search-country->options
+msgid "Andorra - AD"
+msgstr "Andorre - AD"
+
+#. settings-schema.json->search-country->options
+msgid "Angola - AO"
+msgstr "Angola - AO"
+
+#. settings-schema.json->search-country->options
+msgid "Anguilla - AI"
+msgstr "Anguilla - AI"
+
+#. settings-schema.json->search-country->options
+msgid "Antarctica - AQ"
+msgstr "Antarctique - AQ"
+
+#. settings-schema.json->search-country->options
+msgid "Antigua And Barbuda - AG"
+msgstr "Antigua-et-Barbuda - AG"
+
+#. settings-schema.json->search-country->options
+msgid "Argentina - AR"
+msgstr "Argentine - AR"
+
+#. settings-schema.json->search-country->options
+msgid "Armenia - AM"
+msgstr "Arménie - AM"
+
+#. settings-schema.json->search-country->options
+msgid "Aruba - AW"
+msgstr "Aruba - AW"
+
+#. settings-schema.json->search-country->options
+msgid "Australia - AU"
+msgstr "Australie - AU"
+
+#. settings-schema.json->search-country->options
+msgid "Austria - AT"
+msgstr "Autriche - AT"
+
+#. settings-schema.json->search-country->options
+msgid "Azerbaijan - AZ"
+msgstr "Azerbaïdjan - AZ"
+
+#. settings-schema.json->search-country->options
+msgid "Bahamas - BS"
+msgstr "Bahamas - BS"
+
+#. settings-schema.json->search-country->options
+msgid "Bahrain - BH"
+msgstr "Bahreïn - BH"
+
+#. settings-schema.json->search-country->options
+msgid "Bangladesh - BD"
+msgstr "Bangladesh - BD"
+
+#. settings-schema.json->search-country->options
+msgid "Barbados - BB"
+msgstr "Barbade - BB"
+
+#. settings-schema.json->search-country->options
+msgid "Belarus - BY"
+msgstr "Biélorussie - Bélarus - BY"
+
+#. settings-schema.json->search-country->options
+msgid "Belgium - BE"
+msgstr "Belgique - BE"
+
+#. settings-schema.json->search-country->options
+msgid "Belize - BZ"
+msgstr "Belize - BZ"
+
+#. settings-schema.json->search-country->options
+msgid "Benin - BJ"
+msgstr "Bénin - BJ"
+
+#. settings-schema.json->search-country->options
+msgid "Bermuda - BM"
+msgstr "Bermudes - BM"
+
+#. settings-schema.json->search-country->options
+msgid "Bhutan - BT"
+msgstr "Bhoutan - BT"
+
+#. settings-schema.json->search-country->options
+msgid "Bolivia (Plurinational State Of) - BO"
+msgstr "Bolivie (État plurinational de) - BO"
+
+#. settings-schema.json->search-country->options
+msgid "Bonaire (Sint Eustatius And Saba) - BQ"
+msgstr "Pays-Bas caribéens (Îles BES) - BQ"
+
+#. settings-schema.json->search-country->options
+msgid "Bosnia And Herzegovina - BA"
+msgstr "Bosnie-Herzégovine - BA"
+
+#. settings-schema.json->search-country->options
+msgid "Botswana - BW"
+msgstr "Botswana - BW"
+
+#. settings-schema.json->search-country->options
+msgid "Bouvet Island - BV"
+msgstr "Bouvet (Île) - BV"
+
+#. settings-schema.json->search-country->options
+msgid "Brazil - BR"
+msgstr "Brésil - BR"
+
+#. settings-schema.json->search-country->options
+msgid "British Indian Ocean Territory - IO"
+msgstr "Territoire britannique de l'océan Indien- IO"
+
+#. settings-schema.json->search-country->options
+msgid "Brunei Darussalam - BN"
+msgstr "Brunéi Darussalam - BN"
+
+#. settings-schema.json->search-country->options
+msgid "Bulgaria - BG"
+msgstr "Bulgarie - BG"
+
+#. settings-schema.json->search-country->options
+msgid "Burkina Faso - BF"
+msgstr "Burkina Faso - BF"
+
+#. settings-schema.json->search-country->options
+msgid "Burundi - BI"
+msgstr "Burundi - BI"
+
+#. settings-schema.json->search-country->options
+msgid "Cambodia - KH"
+msgstr "Cambodge - KH"
+
+#. settings-schema.json->search-country->options
+msgid "Cameroon - CM"
+msgstr "Cameroun - CM"
+
+#. settings-schema.json->search-country->options
+msgid "Canada - CA"
+msgstr "Canada - CA"
+
+#. settings-schema.json->search-country->options
+msgid "Cape Verde - CV"
+msgstr "Cap Vert - CV"
+
+#. settings-schema.json->search-country->options
+msgid "Cayman Islands - KY"
+msgstr "Caïman (Îles) - KY"
+
+#. settings-schema.json->search-country->options
+msgid "Central African Republic - CF"
+msgstr "Centrafrique (RCA) - CF"
+
+#. settings-schema.json->search-country->options
+msgid "Chad - TD"
+msgstr "Tchad - TD"
+
+#. settings-schema.json->search-country->options
+msgid "Chile - CL"
+msgstr "Chili - CL"
+
+#. settings-schema.json->search-country->options
+msgid "China - CN"
+msgstr "Chine - CN"
+
+#. settings-schema.json->search-country->options
+msgid "Christmas Island - CX"
+msgstr "Île Christmas (Kiribati) - CX"
+
+#. settings-schema.json->search-country->options
+msgid "Cocos (Keeling) Islands - CC"
+msgstr "Îles Cocos (Keeling) - CC"
+
+#. settings-schema.json->search-country->options
+msgid "Colombia - CO"
+msgstr "Colombie - CO"
+
+#. settings-schema.json->search-country->options
+msgid "Comoros - KM"
+msgstr "Comores - KM"
+
+#. settings-schema.json->search-country->options
+msgid "Congo - CG"
+msgstr "Congo - CG"
+
+#. settings-schema.json->search-country->options
+msgid "Congo (The Democratic Republic Of The) - CD"
+msgstr "Congo (République Démocratique du) - CD"
+
+#. settings-schema.json->search-country->options
+msgid "Cook Islands - CK"
+msgstr "Îles Cook - CK"
+
+#. settings-schema.json->search-country->options
+msgid "Costa Rica - CR"
+msgstr "Costa Rica - CR"
+
+#. settings-schema.json->search-country->options
+msgid "Côte D'Ivoire - CI"
+msgstr "Côte D'Ivoire - CI"
+
+#. settings-schema.json->search-country->options
+msgid "Croatia - HR"
+msgstr "Croatie - HR"
+
+#. settings-schema.json->search-country->options
+msgid "Cuba - CU"
+msgstr "Cuba - CU"
+
+#. settings-schema.json->search-country->options
+msgid "Curaçao - CW"
+msgstr "Curaçao - CW"
+
+#. settings-schema.json->search-country->options
+msgid "Cyprus - CY"
+msgstr "Chypre - CY"
+
+#. settings-schema.json->search-country->options
+msgid "Czech Republic - CZ"
+msgstr "Tchéquie (République tchèque) - CZ"
+
+#. settings-schema.json->search-country->options
+msgid "Denmark - DK"
+msgstr "Danemark - DK"
+
+#. settings-schema.json->search-country->options
+msgid "Djibouti - DJ"
+msgstr "Djibouti - DJ"
+
+#. settings-schema.json->search-country->options
+msgid "Dominica - DM"
+msgstr "Dominique - DM"
+
+#. settings-schema.json->search-country->options
+msgid "Dominican Republic - DO"
+msgstr "République Dominicaine - DO"
+
+#. settings-schema.json->search-country->options
+msgid "Ecuador - EC"
+msgstr "Équateur - EC"
+
+#. settings-schema.json->search-country->options
+msgid "Egypt - EG"
+msgstr "Égypte - EG"
+
+#. settings-schema.json->search-country->options
+msgid "El Salvador - SV"
+msgstr "El Salvador - SV"
+
+#. settings-schema.json->search-country->options
+msgid "Equatorial Guinea - GQ"
+msgstr "Guinée équatoriale - GQ"
+
+#. settings-schema.json->search-country->options
+msgid "Eritrea - ER"
+msgstr "Érythrée - ER"
+
+#. settings-schema.json->search-country->options
+msgid "Estonia - EE"
+msgstr "Estonie - EE"
+
+#. settings-schema.json->search-country->options
+msgid "Ethiopia - ET"
+msgstr "Éthiopie - ET"
+
+#. settings-schema.json->search-country->options
+msgid "Falkland Islands (Malvinas) - FK"
+msgstr "Îles Falkland (Malvines) - FK"
+
+#. settings-schema.json->search-country->options
+msgid "Faroe Islands - FO"
+msgstr "Îles Féroé - FO"
+
+#. settings-schema.json->search-country->options
+msgid "Fiji - FJ"
+msgstr "Fidji - FJ"
+
+#. settings-schema.json->search-country->options
+msgid "Finland - FI"
+msgstr "Finlande - FI"
+
+#. settings-schema.json->search-country->options
+msgid "France - FR"
+msgstr "France - FR"
+
+#. settings-schema.json->search-country->options
+msgid "French Guiana - GF"
+msgstr "Guyane (France) - GF"
+
+#. settings-schema.json->search-country->options
+msgid "French Polynesia - PF"
+msgstr "Polynésie française - PF"
+
+#. settings-schema.json->search-country->options
+msgid "French Southern Territories - TF"
+msgstr "Terres australes et antarctiques françaises - TF"
+
+#. settings-schema.json->search-country->options
+msgid "Gabon - GA"
+msgstr "Gabon - GA"
+
+#. settings-schema.json->search-country->options
+msgid "Gambia - GM"
+msgstr "Gambie - GM"
+
+#. settings-schema.json->search-country->options
+msgid "Georgia - GE"
+msgstr "Géorgie - GE"
+
+#. settings-schema.json->search-country->options
+msgid "Germany - DE"
+msgstr "Allemagne - DE"
+
+#. settings-schema.json->search-country->options
+msgid "Ghana - GH"
+msgstr "Ghana - GH"
+
+#. settings-schema.json->search-country->options
+msgid "Gibraltar - GI"
+msgstr "Gibraltar - GI"
+
+#. settings-schema.json->search-country->options
+msgid "Greece - GR"
+msgstr "Grèce - GR"
+
+#. settings-schema.json->search-country->options
+msgid "Greenland - GL"
+msgstr "Groenland - GL"
+
+#. settings-schema.json->search-country->options
+msgid "Grenada - GD"
+msgstr "Grenade - GD"
+
+#. settings-schema.json->search-country->options
+msgid "Guadeloupe - GP"
+msgstr "Guadeloupe - GP"
+
+#. settings-schema.json->search-country->options
+msgid "Guam - GU"
+msgstr "Guam - GU"
+
+#. settings-schema.json->search-country->options
+msgid "Guatemala - GT"
+msgstr "Guatemala - GT"
+
+#. settings-schema.json->search-country->options
+msgid "Guernsey - GG"
+msgstr "Guernesey - GG"
+
+#. settings-schema.json->search-country->options
+msgid "Guinea - GN"
+msgstr "Guinée - GN"
+
+#. settings-schema.json->search-country->options
+msgid "Guinea-Bissau - GW"
+msgstr "Guinée-Bissau - GW"
+
+#. settings-schema.json->search-country->options
+msgid "Guyana - GY"
+msgstr "Guyana (République coopérative du) - GY"
+
+#. settings-schema.json->search-country->options
+msgid "Haiti - HT"
+msgstr "Haïti - HT"
+
+#. settings-schema.json->search-country->options
+msgid "Heard Island And Mcdonald Islands - HM"
+msgstr "Îles Heard-et-MacDonald - HM"
+
+#. settings-schema.json->search-country->options
+msgid "Holy See (Vatican City State) - VA"
+msgstr "Vatican (Saint-Siège - Cité-État du) - VA"
+
+#. settings-schema.json->search-country->options
+msgid "Honduras - HN"
+msgstr "Honduras - HN"
+
+#. settings-schema.json->search-country->options
+msgid "Hong Kong - HK"
+msgstr "Hong Kong - HK"
+
+#. settings-schema.json->search-country->options
+msgid "Hungary - HU"
+msgstr "Hongrie - HU"
+
+#. settings-schema.json->search-country->options
+msgid "Iceland - IS"
+msgstr "Islande - IS"
+
+#. settings-schema.json->search-country->options
+msgid "India - IN"
+msgstr "Inde - IN"
+
+#. settings-schema.json->search-country->options
+msgid "Indonesia - ID"
+msgstr "Indonésie - ID"
+
+#. settings-schema.json->search-country->options
+msgid "Iran (Islamic Republic Of) - IR"
+msgstr "Iran (République Islamique d') - IR"
+
+#. settings-schema.json->search-country->options
+msgid "Iraq - IQ"
+msgstr "Irak - IQ"
+
+#. settings-schema.json->search-country->options
+msgid "Ireland - IE"
+msgstr "Irlande - IE"
+
+#. settings-schema.json->search-country->options
+msgid "Isle Of Man - IM"
+msgstr "Île de Man - IM"
+
+#. settings-schema.json->search-country->options
+msgid "Israel - IL"
+msgstr "Israël - IL"
+
+#. settings-schema.json->search-country->options
+msgid "Italy - IT"
+msgstr "Italie- IT"
+
+#. settings-schema.json->search-country->options
+msgid "Jamaica - JM"
+msgstr "Jamaïque - JM"
+
+#. settings-schema.json->search-country->options
+msgid "Japan - JP"
+msgstr "Japon - JP"
+
+#. settings-schema.json->search-country->options
+msgid "Jersey - JE"
+msgstr "Jersey - JE"
+
+#. settings-schema.json->search-country->options
+msgid "Jordan - JO"
+msgstr "Jordanie - JO"
+
+#. settings-schema.json->search-country->options
+msgid "Kazakhstan - KZ"
+msgstr "Kazakhstan - KZ"
+
+#. settings-schema.json->search-country->options
+msgid "Kenya - KE"
+msgstr "Kenya - KE"
+
+#. settings-schema.json->search-country->options
+msgid "Kiribati - KI"
+msgstr "Kiribati - KI"
+
+#. settings-schema.json->search-country->options
+msgid "Korea (Democratic People'S Republic Of) - KP"
+msgstr "Corée du Nord - KP"
+
+#. settings-schema.json->search-country->options
+msgid "Korea (Republic Of) - KR"
+msgstr "Corée du Sud - KR"
+
+#. settings-schema.json->search-country->options
+msgid "Kuwait - KW"
+msgstr "Koweït - KW"
+
+#. settings-schema.json->search-country->options
+msgid "Kyrgyzstan - KG"
+msgstr "Kirghizstan - KG"
+
+#. settings-schema.json->search-country->options
+msgid "Lao People'S Democratic Republic - LA"
+msgstr "Laos - LA"
+
+#. settings-schema.json->search-country->options
+msgid "Latvia - LV"
+msgstr "Lettonie - LV"
+
+#. settings-schema.json->search-country->options
+msgid "Lebanon - LB"
+msgstr "Lebanon - LB"
+
+#. settings-schema.json->search-country->options
+msgid "Lesotho - LS"
+msgstr "Lesotho - LS"
+
+#. settings-schema.json->search-country->options
+msgid "Liberia - LR"
+msgstr "Liberia - LR"
+
+#. settings-schema.json->search-country->options
+msgid "Libya - LY"
+msgstr "Libye - LY"
+
+#. settings-schema.json->search-country->options
+msgid "Liechtenstein - LI"
+msgstr "Liechtenstein - LI"
+
+#. settings-schema.json->search-country->options
+msgid "Lithuania - LT"
+msgstr "Lituanie - LT"
+
+#. settings-schema.json->search-country->options
+msgid "Luxembourg - LU"
+msgstr "Luxembourg - LU"
+
+#. settings-schema.json->search-country->options
+msgid "Macao - MO"
+msgstr "Macao - MO"
+
+#. settings-schema.json->search-country->options
+msgid "Macedonia (The Former Yugoslav Republic Of) - MK"
+msgstr "Macédoine (Ex-République yougoslave de) - MK"
+
+#. settings-schema.json->search-country->options
+msgid "Madagascar - MG"
+msgstr "Madagascar - MG"
+
+#. settings-schema.json->search-country->options
+msgid "Malawi - MW"
+msgstr "Malawi - MW"
+
+#. settings-schema.json->search-country->options
+msgid "Malaysia - MY"
+msgstr "Malaisie - MY"
+
+#. settings-schema.json->search-country->options
+msgid "Maldives - MV"
+msgstr "Maldives - MV"
+
+#. settings-schema.json->search-country->options
+msgid "Mali - ML"
+msgstr "Mali - ML"
+
+#. settings-schema.json->search-country->options
+msgid "Malta - MT"
+msgstr "Malte - MT"
+
+#. settings-schema.json->search-country->options
+msgid "Marshall Islands - MH"
+msgstr "Îles Marshall - MH"
+
+#. settings-schema.json->search-country->options
+msgid "Martinique - MQ"
+msgstr "Martinique - MQ"
+
+#. settings-schema.json->search-country->options
+msgid "Mauritania - MR"
+msgstr "Mauritanie - MR"
+
+#. settings-schema.json->search-country->options
+msgid "Mauritius - MU"
+msgstr "Île Maurice - MU"
+
+#. settings-schema.json->search-country->options
+msgid "Mayotte - YT"
+msgstr "Mayotte - YT"
+
+#. settings-schema.json->search-country->options
+msgid "Mexico - MX"
+msgstr "Mexique - MX"
+
+#. settings-schema.json->search-country->options
+msgid "Micronesia (Federated States Of) - FM"
+msgstr "Micronésie (États fédérés de) - FM"
+
+#. settings-schema.json->search-country->options
+msgid "Moldova (Republic Of) - MD"
+msgstr "Moldavie (République de) - MD"
+
+#. settings-schema.json->search-country->options
+msgid "Monaco - MC"
+msgstr "Monaco - MC"
+
+#. settings-schema.json->search-country->options
+msgid "Mongolia - MN"
+msgstr "Mongolie - MN"
+
+#. settings-schema.json->search-country->options
+msgid "Montenegro - ME"
+msgstr "Monténégro - ME"
+
+#. settings-schema.json->search-country->options
+msgid "Montserrat - MS"
+msgstr "Montserrat - MS"
+
+#. settings-schema.json->search-country->options
+msgid "Morocco - MA"
+msgstr "Maroc - MA"
+
+#. settings-schema.json->search-country->options
+msgid "Mozambique - MZ"
+msgstr "Mozambique - MZ"
+
+#. settings-schema.json->search-country->options
+msgid "Myanmar - MM"
+msgstr "Myanmar - MM"
+
+#. settings-schema.json->search-country->options
+msgid "Namibia - NA"
+msgstr "Namibie - NA"
+
+#. settings-schema.json->search-country->options
+msgid "Nauru - NR"
+msgstr "Nauru - NR"
+
+#. settings-schema.json->search-country->options
+msgid "Nepal - NP"
+msgstr "Népal - NP"
+
+#. settings-schema.json->search-country->options
+msgid "Netherlands - NL"
+msgstr "Pays-Bas - NL"
+
+#. settings-schema.json->search-country->options
+msgid "New Caledonia - NC"
+msgstr "Nouvelle Calédonie - NC"
+
+#. settings-schema.json->search-country->options
+msgid "New Zealand - NZ"
+msgstr "Nouvelle Zélande - NZ"
+
+#. settings-schema.json->search-country->options
+msgid "Nicaragua - NI"
+msgstr "Nicaragua - NI"
+
+#. settings-schema.json->search-country->options
+msgid "Niger - NE"
+msgstr "Niger - NE"
+
+#. settings-schema.json->search-country->options
+msgid "Nigeria - NG"
+msgstr "Nigeria - NG"
+
+#. settings-schema.json->search-country->options
+msgid "Niue - NU"
+msgstr "Niue - NU"
+
+#. settings-schema.json->search-country->options
+msgid "Norfolk Island - NF"
+msgstr "Île Norfolk- NF"
+
+#. settings-schema.json->search-country->options
+msgid "Northern Mariana Islands - MP"
+msgstr "Îles Mariannes du Nord - MP"
+
+#. settings-schema.json->search-country->options
+msgid "Norway - NO"
+msgstr "Norvège - NO"
+
+#. settings-schema.json->search-country->options
+msgid "Oman - OM"
+msgstr "Oman - OM"
+
+#. settings-schema.json->search-country->options
+msgid "Pakistan - PK"
+msgstr "Pakistan - PK"
+
+#. settings-schema.json->search-country->options
+msgid "Palau - PW"
+msgstr "Palau - PW"
+
+#. settings-schema.json->search-country->options
+msgid "Palestine (State Of) - PS"
+msgstr "Palestine (État de) - PS"
+
+#. settings-schema.json->search-country->options
+msgid "Panama - PA"
+msgstr "Panama - PA"
+
+#. settings-schema.json->search-country->options
+msgid "Papua New Guinea - PG"
+msgstr "Papouasie-Nouvelle-Guinée - PG"
+
+#. settings-schema.json->search-country->options
+msgid "Paraguay - PY"
+msgstr "Paraguay - PY"
+
+#. settings-schema.json->search-country->options
+msgid "Peru - PE"
+msgstr "Pérou - PE"
+
+#. settings-schema.json->search-country->options
+msgid "Philippines - PH"
+msgstr "Philippines - PH"
+
+#. settings-schema.json->search-country->options
+msgid "Pitcairn - PN"
+msgstr "Pitcairn - PN"
+
+#. settings-schema.json->search-country->options
+msgid "Poland - PL"
+msgstr "Pologne - PL"
+
+#. settings-schema.json->search-country->options
+msgid "Portugal - PT"
+msgstr "Portugal - PT"
+
+#. settings-schema.json->search-country->options
+msgid "Puerto Rico - PR"
+msgstr "Puerto Rico - PR"
+
+#. settings-schema.json->search-country->options
+msgid "Qatar - QA"
+msgstr "Qatar - QA"
+
+#. settings-schema.json->search-country->options
+msgid "Réunion - RE"
+msgstr "La Réunion (Île de) - RE"
+
+#. settings-schema.json->search-country->options
+msgid "Romania - RO"
+msgstr "Roumanie - RO"
+
+#. settings-schema.json->search-country->options
+msgid "Russian Federation - RU"
+msgstr "Russie (Fédération de) - RU"
+
+#. settings-schema.json->search-country->options
+msgid "Rwanda - RW"
+msgstr "Rwanda - RW"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Barthélemy - BL"
+msgstr "Saint Barthélemy - BL"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Helena (Ascension And Tristan Da Cunha) - SH"
+msgstr "Sainte-Hélène - SH"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Kitts And Nevis - KN"
+msgstr "Saint-Christophe-et-Niévès - KN"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Lucia - LC"
+msgstr "Sainte-Lucie - LC"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Martin (French Part) - MF"
+msgstr "Saint-Martin (France) - MF"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Pierre And Miquelon - PM"
+msgstr "Saint-Pierre-et-Miquelon - PM"
+
+#. settings-schema.json->search-country->options
+msgid "Saint Vincent And The Grenadines - VC"
+msgstr "Saint-Vincent-et-les-Grenadines - VC"
+
+#. settings-schema.json->search-country->options
+msgid "Samoa - WS"
+msgstr "Samoa - WS"
+
+#. settings-schema.json->search-country->options
+msgid "San Marino - SM"
+msgstr "Saint-Marin - SM"
+
+#. settings-schema.json->search-country->options
+msgid "Sao Tome And Principe - ST"
+msgstr "Saint-Thomas-et-l'île du Prince - ST"
+
+#. settings-schema.json->search-country->options
+msgid "Saudi Arabia - SA"
+msgstr "Arabie saoudite - SA"
+
+#. settings-schema.json->search-country->options
+msgid "Senegal - SN"
+msgstr "Sénégal - SN"
+
+#. settings-schema.json->search-country->options
+msgid "Serbia - RS"
+msgstr "Serbie - RS"
+
+#. settings-schema.json->search-country->options
+msgid "Seychelles - SC"
+msgstr "Seychelles - SC"
+
+#. settings-schema.json->search-country->options
+msgid "Sierra Leone - SL"
+msgstr "Sierra Leone - SL"
+
+#. settings-schema.json->search-country->options
+msgid "Singapore - SG"
+msgstr "Singapour - SG"
+
+#. settings-schema.json->search-country->options
+msgid "Sint Maarten (Dutch Part) - SX"
+msgstr "Saint-Martin (Allemagne) - SX"
+
+#. settings-schema.json->search-country->options
+msgid "Slovakia - SK"
+msgstr "Slovaquie - SK"
+
+#. settings-schema.json->search-country->options
+msgid "Slovenia - SI"
+msgstr "Slovénie - SI"
+
+#. settings-schema.json->search-country->options
+msgid "Solomon Islands - SB"
+msgstr "Îles Salomon- SB"
+
+#. settings-schema.json->search-country->options
+msgid "Somalia - SO"
+msgstr "Somalie - SO"
+
+#. settings-schema.json->search-country->options
+msgid "South Africa - ZA"
+msgstr "Afrique-du-Sud - ZA"
+
+#. settings-schema.json->search-country->options
+msgid "South Georgia And The South Sandwich Islands - GS"
+msgstr "Géorgie du Sud-et-les îles Sandwich du Sud - GS"
+
+#. settings-schema.json->search-country->options
+msgid "South Sudan - SS"
+msgstr "Sud Soudan - SS"
+
+#. settings-schema.json->search-country->options
+msgid "Spain - ES"
+msgstr "Espagne - ES"
+
+#. settings-schema.json->search-country->options
+msgid "Sri Lanka - LK"
+msgstr "Sri Lanka - LK"
+
+#. settings-schema.json->search-country->options
+msgid "Sudan - SD"
+msgstr "Soudan - SD"
+
+#. settings-schema.json->search-country->options
+msgid "Suriname - SR"
+msgstr "Suriname - SR"
+
+#. settings-schema.json->search-country->options
+msgid "Svalbard And Jan Mayen - SJ"
+msgstr "Svalbard et Jan Mayen - SJ"
+
+#. settings-schema.json->search-country->options
+msgid "Swaziland - SZ"
+msgstr "Eswatini (Swaziland) - SZ"
+
+#. settings-schema.json->search-country->options
+msgid "Sweden - SE"
+msgstr "Suède - SE"
+
+#. settings-schema.json->search-country->options
+msgid "Switzerland - CH"
+msgstr "Suisse - CH"
+
+#. settings-schema.json->search-country->options
+msgid "Syrian Arab Republic - SY"
+msgstr "Syrie - SY"
+
+#. settings-schema.json->search-country->options
+msgid "Taiwan (Province Of China) - TW"
+msgstr "Taïwan (Province de Chine) - TW"
+
+#. settings-schema.json->search-country->options
+msgid "Tajikistan - TJ"
+msgstr "Tadjikistan - TJ"
+
+#. settings-schema.json->search-country->options
+msgid "Tanzania (United Republic Of) - TZ"
+msgstr "Tanzanie - TZ"
+
+#. settings-schema.json->search-country->options
+msgid "Thailand - TH"
+msgstr "Thaïlande - TH"
+
+#. settings-schema.json->search-country->options
+msgid "Timor-Leste - TL"
+msgstr "Timor-Leste - TL"
+
+#. settings-schema.json->search-country->options
+msgid "Togo - TG"
+msgstr "Togo - TG"
+
+#. settings-schema.json->search-country->options
+msgid "Tokelau - TK"
+msgstr "Tokelau - TK"
+
+#. settings-schema.json->search-country->options
+msgid "Tonga - TO"
+msgstr "Tonga - TO"
+
+#. settings-schema.json->search-country->options
+msgid "Trinidad And Tobago - TT"
+msgstr "Trinité-et-Tobago - TT"
+
+#. settings-schema.json->search-country->options
+msgid "Tunisia - TN"
+msgstr "Tunisie - TN"
+
+#. settings-schema.json->search-country->options
+msgid "Turkey - TR"
+msgstr "Turquie - TR"
+
+#. settings-schema.json->search-country->options
+msgid "Turkmenistan - TM"
+msgstr "Turkménistan - TM"
+
+#. settings-schema.json->search-country->options
+msgid "Turks And Caicos Islands - TC"
+msgstr "Îles Turques-et-Caïques - TC"
+
+#. settings-schema.json->search-country->options
+msgid "Tuvalu - TV"
+msgstr "Tuvalu - TV"
+
+#. settings-schema.json->search-country->options
+msgid "Uganda - UG"
+msgstr "Ouganda - UG"
+
+#. settings-schema.json->search-country->options
+msgid "Ukraine - UA"
+msgstr "Ukraine - UA"
+
+#. settings-schema.json->search-country->options
+msgid "United Arab Emirates - AE"
+msgstr "Émirats Arabes Unis - AE"
+
+#. settings-schema.json->search-country->options
+msgid "United Kingdom - GB"
+msgstr "Royaume-Uni - GB"
+
+#. settings-schema.json->search-country->options
+msgid "United States - US"
+msgstr "États-Unis - US"
+
+#. settings-schema.json->search-country->options
+msgid "United States Minor Outlying Islands - UM"
+msgstr "Îles mineures éloignées des États-Unis - UM"
+
+#. settings-schema.json->search-country->options
+msgid "Uruguay - UY"
+msgstr "Uruguay - UY"
+
+#. settings-schema.json->search-country->options
+msgid "Uzbekistan - UZ"
+msgstr "Ouzbékistan - UZ"
+
+#. settings-schema.json->search-country->options
+msgid "Vanuatu - VU"
+msgstr "Vanuatu - VU"
+
+#. settings-schema.json->search-country->options
+msgid "Venezuela (Bolivarian Republic Of) - VE"
+msgstr "Venezuela (République Bolivarienne du) - VE"
+
+#. settings-schema.json->search-country->options
+msgid "Viet Nam - VN"
+msgstr "Vietnam - VN"
+
+#. settings-schema.json->search-country->options
+msgid "Virgin Islands (British) - VG"
+msgstr "Îles Vierges (GB) - VG"
+
+#. settings-schema.json->search-country->options
+msgid "Virgin Islands (U.S.) - VI"
+msgstr "Îles Vierges (US) - VI"
+
+#. settings-schema.json->search-country->options
+msgid "Wallis And Futuna - WF"
+msgstr "Wallis-et-Futuna - WF"
+
+#. settings-schema.json->search-country->options
+msgid "Western Sahara - EH"
+msgstr "Sahara de l'Ouest - EH"
+
+#. settings-schema.json->search-country->options
+msgid "Yemen - YE"
+msgstr "Yémen - YE"
+
+#. settings-schema.json->search-country->options
+msgid "Zambia - ZM"
+msgstr "Zambie - ZM"
+
+#. settings-schema.json->search-country->options
+msgid "Zimbabwe - ZW"
+msgstr "Zimbabwe - ZW"
+
+#. settings-schema.json->search-country->tooltip
+msgid "OPTIONAL. Choose a country."
+msgstr "OPTIONNEL. Choix d'un pays."
+
+#. settings-schema.json->search-tag->description
+msgid "Tag"
+msgstr "Mot-clé"
+
+#. settings-schema.json->search-tag->tooltip
+msgid "OPTIONAL. Only one word, as blues or jazz or rock or talk or..."
+msgstr "OPTIONNEL. Un seul mot, comme blues ou jazz ou rock ou news ou..."
+
+#. settings-schema.json->search-codec->options
+msgid "AAC"
+msgstr "AAC"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC+"
+msgstr "AAC+"
+
+#. settings-schema.json->search-codec->options
+msgid "FLV"
+msgstr "FLV"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC,H.264"
+msgstr "AAC,H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "AAC+,H.264"
+msgstr "AAC+,H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "MP3,H.264"
+msgstr "MP3,H.264"
+
+#. settings-schema.json->search-codec->options
+msgid "Unknown"
+msgstr "Inconnu"
+
+#. settings-schema.json->search-codec->options
+msgid "Unknown,H.264"
+msgstr "Inconnu,H.264"
+
+#. settings-schema.json->search-codec->tooltip
+msgid "OPTIONAL. Choose a codec."
+msgstr "OPTIONNEL. Choix du codec."
+
+#. settings-schema.json->search-minimalBitrate->description
+msgid "Minimal Bitrate"
+msgstr "Bitrate minimum"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "32"
+msgstr "32"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "48"
+msgstr "48"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "64"
+msgstr "64"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "96"
+msgstr "96"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "128"
+msgstr "128"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "192"
+msgstr "192"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "256"
+msgstr "256"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "320"
+msgstr "320"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "512"
+msgstr "512"
+
+#. settings-schema.json->search-minimalBitrate->options
+msgid "640"
+msgstr "640"
+
+#. settings-schema.json->search-minimalBitrate->tooltip
+msgid "OPTIONAL. Choose a minimal bitrate (in kbps)."
+msgstr "OPTIONNEL. Choix du bitrate minimal (en kbit/s)"
+
+#. settings-schema.json->search-order->description
+msgid "Order"
+msgstr "Ordre"
+
+#. settings-schema.json->search-order->options
+msgid "name"
+msgstr "nom"
+
+#. settings-schema.json->search-order->options
+msgid "url"
+msgstr "url"
+
+#. settings-schema.json->search-order->options
+msgid "tags"
+msgstr "mots-clés"
+
+#. settings-schema.json->search-order->options
+msgid "country"
+msgstr "pays"
+
+#. settings-schema.json->search-order->options
+msgid "state"
+msgstr "état"
+
+#. settings-schema.json->search-order->options
+msgid "language"
+msgstr "langue"
+
+#. settings-schema.json->search-order->options
+msgid "votes"
+msgstr "votes"
+
+#. settings-schema.json->search-order->options
+msgid "codec"
+msgstr "codec"
+
+#. settings-schema.json->search-order->options
+msgid "bitrate"
+msgstr "bitrate"
+
+#. settings-schema.json->search-order->options
+msgid "last check-time"
+msgstr "vérification récente"
+
+#. settings-schema.json->search-order->options
+msgid "click timestamp"
+msgstr "récemment écoutée"
+
+#. settings-schema.json->search-order->options
+msgid "click count"
+msgstr "nombre d'écoutes"
+
+#. settings-schema.json->search-order->options
+msgid "click trend"
+msgstr "tendance"
+
+#. settings-schema.json->search-order->options
+msgid "change timestamp"
+msgstr "modification récente"
+
+#. settings-schema.json->search-order->options
+msgid "random"
+msgstr "au hasard"
+
+#. settings-schema.json->search-order->tooltip
+msgid "OPTIONAL. Name of the attribute the result list will be sorted by."
+msgstr ""
+"OPTIONNEL. Nom de l'attribut selon lequel la liste des résultats sera triée."
+
+#. settings-schema.json->search-limit->description
+msgid "Limit"
+msgstr "Limite"
+
+#. settings-schema.json->search-limit->tooltip
+msgid "Maximum number of results per page."
+msgstr "Nombre maximal de résultats par page."
+
+#. settings-schema.json->search-page->description
+msgid "Next page number"
+msgstr "N° de la page suivante"
+
+#. settings-schema.json->search-reset-button->description
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#. settings-schema.json->search-button->description
+msgid "Search..."
+msgstr "Rechercher..."
+
+#. settings-schema.json->sched-rmbutton->description
+msgid "Remove selected items"
+msgstr "Supprimer de cette liste les stations sélectionnées"
+
+#~ msgid "Search for other stations in the Radio Database."
+#~ msgstr "Chercher d'autres stations dans la base de données."
+
+#~ msgid "Unable to download from YT"
+#~ msgstr "Impossible de télécharger ceci depuis YT"
+
+#~ msgid "Consent"
+#~ msgstr "Consentement"
+
+#~ msgid "Type"
+#~ msgstr "Type"
+
+#~ msgid "Symbolic Icon"
+#~ msgstr "Icône symbolique"
+
+#~ msgid "Full Color Icon"
+#~ msgstr "Icône en couleurs"
+
+#~ msgid "Allow to record songs or programs"
+#~ msgstr "Permettre d'enregistrer des chansons ou des programmes"
+
+#~ msgid "Recordings are not allowed. See in the Recording tab."
+#~ msgstr ""
+#~ "Les enregistrements ne sont pas autorisés (cf. onglet Enregistrement)."
+
+#~ msgid "Extract soundtrack from a YT video..."
+#~ msgstr "Extraire la bande sonore d'une vidéo YouTube..."
+
+#~ msgid "Record this!"
+#~ msgstr "Enregistrer ça !"
+
+#~ msgid "Find Radio Station"
+#~ msgstr "Trouver une station"
+
+#~ msgid "Add to My Stations"
+#~ msgstr "Ajouter à ma liste de stations"
+
+#~ msgid "Poor"
+#~ msgstr "Faible"
+
+#~ msgid ""
+#~ "If the category you just created does not appear in the drop-down list, "
+#~ "press the button above."
+#~ msgstr ""
+#~ "Si la catégorie que vous venez de créer n'apparaît pas dans la liste "
+#~ "déroulante, pressez le bouton ci-dessus."
+
+#~ msgid "This window will disappear and reappear updated after two seconds."
+#~ msgstr ""
+#~ "Cette fenêtre disparaîtra pour réapparaître actualisée au bout de deux "
+#~ "secondes."
+
+#~ msgid "Update the Category and Station lists"
+#~ msgstr "Mettre à jour les listes de Catégories et de Stations"
+
+#~ msgid "Frequency of checks"
+#~ msgstr "Fréquence des vérifications"
+
+#~ msgid "12"
+#~ msgstr "12"
+
+#~ msgid "24"
+#~ msgstr "24"
+
+#~ msgid "0: disable all checks"
+#~ msgstr "0 : désactive toutes les vérifications"
+
+#~ msgid "The value above is the number of checks"
+#~ msgstr "La valeur ci-dessus est le nombre de vérifications"
+
+#~ msgid "per hour"
+#~ msgstr "par heure"
+
+#~ msgid "per day"
+#~ msgstr "par jour"
+
+#~ msgid "Import the selected items into my radio list"
+#~ msgstr "Importer dans ma liste les stations sélectionnées"

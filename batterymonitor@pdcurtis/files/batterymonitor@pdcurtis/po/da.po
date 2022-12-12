@@ -7,115 +7,95 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-28 04:35+0100\n"
-"PO-Revision-Date: 2020-12-15 15:58+0100\n"
+"POT-Creation-Date: 2022-12-08 22:29-0500\n"
+"PO-Revision-Date: 2022-12-08 22:33-0500\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
 
-#: applet.js:124 3.2/applet.js:164
+#: 5.4/applet.js:135 3.2/applet.js:135
+msgid "--%"
+msgstr "--%"
+
+#: 5.4/applet.js:136 3.2/applet.js:136
+msgid "Waiting"
+msgstr "Venter"
+
+#: 5.4/applet.js:160 3.2/applet.js:165
 msgid "Some Dependencies not Installed"
 msgstr "Nogle afhængigheder er ikke installerede"
 
-#: applet.js:124
+#: 5.4/applet.js:160
 msgid ""
-"Both 'sox' and 'zenity' are required for this applet to have all its "
-"facilities including notifications and audible alerts .\n"
+"Both 'sox' and 'zenity' are required for this applet to have all of its "
+"functionality including notifications and audible alerts .\n"
 "\n"
-"Please read the help file on how to install them."
+"Please view the README for help on installing them."
 msgstr ""
 "Både “sox” og “zenity” er nødvendige for at dette panelprogram har alle "
 "funktioner inklusive underretninger og hørbare advarsler.\n"
 "\n"
 "Læs hjælpefilen for information om, hvordan de installeres."
 
-#: applet.js:132 3.2/applet.js:197
+#: 5.4/applet.js:170 3.2/applet.js:198
 msgid "Battery Monitor Applet"
 msgstr "Batteriovervågning"
 
-#: applet.js:132
+#: 5.4/applet.js:170
 msgid ""
-"A User Defined Sound File has been Specified for low Battery\n"
+"A user-defined sound file has been specified for Low Battery.\n"
 "\n"
-"Please ensure the volume is set sensibly in public places\n"
-"especially if a long loud file is specifed\n"
+"Please ensure the volume is set sensibly in public places,\n"
+"especially if a long or loud file is specified.\n"
 msgstr ""
 "En brugerdefineret lydfil er blevet angivet for lavt batteri\n"
 "\n"
 "Sikr dig, at lydstyrken er fornuftigt indstillet på offentlige steder,\n"
-"især hvis en lang, højlydt fil er angivet\n"
+"især hvis en lang, høj fil er angivet\n"
 
-#: applet.js:163
-msgid " "
-msgstr " "
-
-#: applet.js:164 3.2/applet.js:137
-msgid "Waiting"
-msgstr "Venter"
-
-#: applet.js:230 3.2/applet.js:296
+#: 5.4/applet.js:243 3.2/applet.js:297
 msgid "Open Power Statistics"
 msgstr "Åbn strømstatistik"
 
-#: applet.js:236 3.2/applet.js:302
+#: 5.4/applet.js:249 3.2/applet.js:303
 msgid "Open System Monitor"
 msgstr "Åbn systemovervågning"
 
-#: applet.js:245 3.2/applet.js:311
-msgid "Housekeeping and System Sub Menu"
+#: 5.4/applet.js:258
+msgid "Housekeeping and System Submenu"
 msgstr "Vedligehold og systemundermenu"
 
-#: applet.js:248 3.2/applet.js:314
+#: 5.4/applet.js:261 3.2/applet.js:315
 msgid "View the Changelog"
 msgstr "Vis ændringsloggen"
 
-#: applet.js:254 3.2/applet.js:320
-msgid "Open the Help file"
-msgstr "Åbn hjælpfilen"
+#: 5.4/applet.js:267
+msgid "Open the README"
+msgstr ""
 
-#: applet.js:260 3.2/applet.js:326
-msgid "Open stylesheet.css  (Advanced Function)"
-msgstr "Åbn stylesheet.css  (Avanceret funktion)"
+#: 5.4/applet.js:273 3.2/applet.js:327
+msgid "Open stylesheet.css (Advanced Function)"
+msgstr "Åbn stylesheet.css (Avanceret funktion)"
 
 #. metadata.json->name
-#: applet.js:276 3.2/applet.js:342
-msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
+#: 5.4/applet.js:289 3.2/applet.js:343
+msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Batteriovervågning og nedlukning"
 
-#: applet.js:281 3.2/applet.js:347
+#: 5.4/applet.js:294 3.2/applet.js:348
 msgid "Waiting for battery information"
 msgstr "Venter på information om batteriet"
 
-#: applet.js:343 3.2/applet.js:427
-msgid "Battery Low - turn off or connect to mains"
+#: 5.4/applet.js:372
+msgid "Battery Low - turn off or connect to power supply"
 msgstr "Lavt batteriniveau - sluk eller sæt strømstikket i"
 
-#: applet.js:350 3.2/applet.js:435
-msgid "Battery Monitor Applet Alert"
-msgstr "Batteriovervågning — Advarsel"
-
-#: applet.js:350 3.2/applet.js:435
-msgid ""
-"The Battery Level has fallen to your alert level\n"
-"\n"
-"either reconnect to a power source,\n"
-"\n"
-"close down your work and suspend or shutdown the machine\n"
-"\n"
-msgstr ""
-"Batteriniveauet er faldet til dit advarselsniveau\n"
-"\n"
-" tilslut strømmen eller stop dit arbejde\n"
-"\n"
-"og sluk computeren eller sæt den i hviletilstand\n"
-"\n"
-
-#: applet.js:352 3.2/applet.js:437
+#: 5.4/applet.js:377 3.2/applet.js:433
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -131,41 +111,37 @@ msgstr ""
 "og sluk computeren eller sæt den i hviletilstand\n"
 "\n"
 
-#: applet.js:368 3.2/applet.js:453
-msgid "Battery Critical will Suspend unless connected to mains"
+#: 5.4/applet.js:392
+msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Ved kritisk batteriniveau aktiveres hviletilstand, med mindre strømforsyning "
 "er tilsluttet"
 
-#: applet.js:383 3.2/applet.js:468
+#: 5.4/applet.js:409 3.2/applet.js:464
 msgid "Charge:"
 msgstr "Batteriniveau:"
 
-#: applet.js:383 3.2/applet.js:468
+#: 5.4/applet.js:409 3.2/applet.js:464
 msgid "Alert:"
 msgstr "Advarsel:"
 
-#: applet.js:383 3.2/applet.js:468
+#: 5.4/applet.js:409 3.2/applet.js:464
 msgid "Suspend:"
 msgstr "Hviletilstand:"
 
-#: applet.js:441 3.2/applet.js:516
+#: 5.4/applet.js:457 3.2/applet.js:512
 msgid "Percentage Charge:"
 msgstr "Procent opladt:"
 
-#: applet.js:441 3.2/applet.js:516
+#: 5.4/applet.js:457 3.2/applet.js:512
 msgid "Alert at:"
 msgstr "Advarsel ved:"
 
-#: applet.js:441 3.2/applet.js:516
+#: 5.4/applet.js:457 3.2/applet.js:512
 msgid "Suspend at:"
 msgstr "Sæt i hviletilstand ved:"
 
-#: 3.2/applet.js:136
-msgid "--%"
-msgstr "--%"
-
-#: 3.2/applet.js:164
+#: 3.2/applet.js:165
 msgid ""
 "'upower', 'sox' and 'zenity' are required for this applet to have all its "
 "facilities including notifications and audible alerts .\n"
@@ -177,7 +153,7 @@ msgstr ""
 "\n"
 "Læs hjælpefilen for information om, hvordan de installeres."
 
-#: 3.2/applet.js:197
+#: 3.2/applet.js:198
 msgid ""
 "A User Defined Sound File has been Specified for Low Battery\n"
 "\n"
@@ -189,26 +165,62 @@ msgstr ""
 "Sikr dig, at lydstyrken er fornuftigt indstillet på offentlige steder,\n"
 "især hvis en lang, høj fil er angivet\n"
 
+#: 3.2/applet.js:312
+msgid "Housekeeping and System Sub Menu"
+msgstr "Vedligehold og systemundermenu"
+
+#: 3.2/applet.js:321
+msgid "Open the Help file"
+msgstr "Åbn hjælpfilen"
+
+#: 3.2/applet.js:423
+msgid "Battery Low - turn off or connect to mains"
+msgstr "Lavt batteriniveau - sluk eller sæt strømstikket i"
+
+#: 3.2/applet.js:431
+msgid "Battery Monitor Applet Alert"
+msgstr "Batteriovervågning — Advarsel"
+
+#: 3.2/applet.js:431
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+"either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"Batteriniveauet er faldet til dit advarselsniveau\n"
+"\n"
+" tilslut strømmen eller stop dit arbejde\n"
+"\n"
+"og sluk computeren eller sæt den i hviletilstand\n"
+"\n"
+
+#: 3.2/applet.js:449
+msgid "Battery Critical will Suspend unless connected to mains"
+msgstr ""
+"Ved kritisk batteriniveau aktiveres hviletilstand, med mindre strømforsyning "
+"er tilsluttet"
+
 #. metadata.json->description
 msgid "Displays Charge as Percentage and allows Alerts and Actions"
 msgstr "Viser opladningsniveau som procent og tillader advarsler og handlinger"
 
-#. settings-schema.json->head->description
-#. 3.2->settings-schema.json->head->description
-msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
-msgstr "Generelle indstillinger for Batteriovervågning og nedlukning"
+#. 5.4->settings-schema.json->head->description
+msgid "General Settings"
+msgstr ""
 
-#. settings-schema.json->refreshInterval-spinner->units
+#. 5.4->settings-schema.json->refreshInterval-spinner->units
 #. 3.2->settings-schema.json->refreshInterval-spinner->units
 msgid "seconds"
 msgstr "sekunder"
 
-#. settings-schema.json->refreshInterval-spinner->description
-#. 3.2->settings-schema.json->refreshInterval-spinner->description
-msgid "Refresh Interval for Display:"
-msgstr "Opdateringsinterval for visning:"
+#. 5.4->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display"
+msgstr "Opdateringsinterval for visning"
 
-#. settings-schema.json->refreshInterval-spinner->tooltip
+#. 5.4->settings-schema.json->refreshInterval-spinner->tooltip
 #. 3.2->settings-schema.json->refreshInterval-spinner->tooltip
 msgid ""
 "Increase or decrease this spinner value to change the refresh interval - use "
@@ -218,12 +230,12 @@ msgstr ""
 "et langt interval, hvis din maskine er langsom. Dette styrer også "
 "blinkhastigheden."
 
-#. settings-schema.json->alertPercentage->description
+#. 5.4->settings-schema.json->alertPercentage->description
 #. 3.2->settings-schema.json->alertPercentage->description
 msgid "Percentage Battery Charge at which Alert Displayed"
 msgstr "Procent batteriniveau ved hvilken advarsler vises"
 
-#. settings-schema.json->alertPercentage->tooltip
+#. 5.4->settings-schema.json->alertPercentage->tooltip
 #. 3.2->settings-schema.json->alertPercentage->tooltip
 msgid ""
 "Percentage of Battery Charge at which Orange Warning Background is displayed "
@@ -232,42 +244,42 @@ msgstr ""
 "Procent batteriniveau ved hvilken den orange advarselsbaggrund vises. Den "
 "vises også og kan ændres i panelprogrammets genvejsmenu"
 
-#. settings-schema.json->head1->description
+#. 5.4->settings-schema.json->head1->description
 #. 3.2->settings-schema.json->head1->description
 msgid "Display Mode"
 msgstr "Visningstilstand"
 
-#. settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
 msgid ""
 "Classic - Battery Percentage with extended messages for horizontal panel"
 msgstr "Klassisk - Batteriprocent med udvidede beskeder til vandret panel"
 
-#. settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
 msgid "Classic Plus - Classic with addition of Battery Icon"
 msgstr "Klassisk plus - Klassisk med batteriikon"
 
-#. settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
 msgid "Compact - Battery Percentage without extended messages"
 msgstr "Kompakt - Batteriprocent uden udvidede beskeder"
 
-#. settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
-msgid "Compact Plus - Compact  with addition of Battery Icon"
+msgid "Compact Plus - Compact with addition of Battery Icon"
 msgstr "Kompakt plus - Kompakt med batteriikon"
 
-#. settings-schema.json->displayType->options
+#. 5.4->settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
 msgid "Icon Only on coloured background indicating status"
 msgstr "Kun ikon på farvet baggrund som indikerer status"
 
-#. settings-schema.json->displayType->description
-msgid "Type of Display"
-msgstr "Visningstype"
+#. 5.4->settings-schema.json->displayType->description
+msgid "Toolbar Display Type"
+msgstr ""
 
-#. settings-schema.json->displayType->tooltip
+#. 5.4->settings-schema.json->displayType->tooltip
 #. 3.2->settings-schema.json->displayType->tooltip
 msgid ""
 "This feature offers the Classic (original) display with optional battery "
@@ -278,17 +290,120 @@ msgstr ""
 "batteriikon og nogle mere kompakte visninger egnede til et lodret panel "
 "(Kompact, Kompakt plus og Kun ikon)"
 
-#. 3.2->settings-schema.json->displayType->description
-msgid "Type of Display in Toolbar"
-msgstr "Visningstype i værktøjslinjen"
-
+#. 5.4->settings-schema.json->head2->description
 #. 3.2->settings-schema.json->head2->description
 msgid "Battery Low Alert Settings"
 msgstr "Indstillinger for advarsel ved lavt batteriniveau"
 
+#. 5.4->settings-schema.json->useBatteryLowSound->description
 #. 3.2->settings-schema.json->useBatteryLowSound->description
 msgid "Provide audible alerts when Battery Low and at Shutdown Level"
 msgstr "Giv lyd, når batteriniveauet er lavt og ved nedlukningsniveau"
+
+#. 5.4->settings-schema.json->useBatteryLowSound->tooltip
+msgid ""
+"Must have `sox` installed. Limited number of sound file types supported (."
+"oga and .wav)"
+msgstr ""
+"Sox skal være installeret. Begrænset antal lydfiler understøttes (.oga og ."
+"wav)"
+
+#. 5.4->settings-schema.json->chooseBatteryLowSound->description
+#. 3.2->settings-schema.json->chooseBatteryLowSound->description
+msgid ""
+"Allow choice of audible alert file when Battery Low and at Shutdown Level"
+msgstr "Tillad valg af lydfil til lavt batteriniveauet og nedlukningsniveau"
+
+#. 5.4->settings-schema.json->chooseBatteryLowSound->tooltip
+msgid ""
+"Must have `sox` installed. Limited number of sound file types supported in "
+"versions < 4.2"
+msgstr ""
+"Sox skal være installeret. Begrænset antal lydfiler understøttes i versioner "
+"før 4.2"
+
+#. 5.4->settings-schema.json->batteryLowSound->description
+#. 3.2->settings-schema.json->batteryLowSound->description
+msgid "Choose sound file to use when Battery is Low"
+msgstr "Vælg lydfil til brug ved lavt batteriniveau"
+
+#. 5.4->settings-schema.json->batteryLowSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places, especially if a "
+"long or loud file is specified"
+msgstr ""
+"Sikr dig, at lydstyrken er fornuftigt indstillet på offentlige steder, især "
+"hvis en lang, høj fil er angivet"
+
+#. 5.4->settings-schema.json->batteryShutdownSound->description
+msgid "Sound file to use when Battery is at Shutdown Level"
+msgstr "Vælg lydfil til brug når batteriet har nået nedlukningsniveau"
+
+#. 5.4->settings-schema.json->batteryShutdownSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places - do not specify a "
+"long or loud file at Shutdown"
+msgstr ""
+"Sikr dig, at lydstyrken er fornuftigt indstillet på offentlige steder. Angiv "
+"ikke en lang, høj fil ved nedlukning"
+
+#. 5.4->settings-schema.json->notifyBatteryLowSound->description
+msgid ""
+"Provide notification when user specified sound file is in use (Recommended)"
+msgstr "Underret når brugerdefineret lydfil er i brug - anbefalet"
+
+#. 5.4->settings-schema.json->notifyBatteryLowSound->tooltip
+msgid "To remind that the volume may need to be set sensibly in public places"
+msgstr ""
+"For at minde brugere om at lydstyrken skal indstilles fornuftigt på "
+"offentlige steder"
+
+#. 5.4->settings-schema.json->head3->description
+#. 3.2->settings-schema.json->head3->description
+msgid "Household Tasks"
+msgstr "Husholdningsopgaver"
+
+#. 5.4->settings-schema.json->deleteTempraryFiles->description
+msgid "Delete temporary files after upgrade to applet version 1.4"
+msgstr "Slet midlertidige filer efter opgradering til version 1.4"
+
+#. 5.4->settings-schema.json->deleteTempraryFiles->tooltip
+msgid ""
+"Applet versions prior to 1.4 used temporary files in the home directory. "
+"These are not needed anymore and can be deleted."
+msgstr ""
+"Versioner før 1.4 brugte midlertidige filer i Hjem-mappen. Disse bruges ikke "
+"mere og kan slettes."
+
+#. 5.4->settings-schema.json->head4->description
+msgid "Advanced"
+msgstr ""
+
+#. 5.4->settings-schema.json->customBatteryPath->description
+msgid ""
+"Path to battery capacity directory (device path)"
+msgstr ""
+
+#. 5.4->settings-schema.json->customBatteryPath->tooltip
+msgid ""
+"Choose your own power_supply object e.g. for monitoring your secondary "
+"battery.\n"
+"\n"
+"Default:\n"
+"/sys/class/power_supply/BAT0"
+msgstr ""
+
+#. 3.2->settings-schema.json->head->description
+msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
+msgstr "Generelle indstillinger for Batteriovervågning og nedlukning"
+
+#. 3.2->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Opdateringsinterval for visning:"
+
+#. 3.2->settings-schema.json->displayType->description
+msgid "Type of Display in Toolbar"
+msgstr "Visningstype i værktøjslinjen"
 
 #. 3.2->settings-schema.json->useBatteryLowSound->tooltip
 msgid ""
@@ -298,11 +413,6 @@ msgstr ""
 "Sox skal være installeret. Begrænset antal lydfiler understøttes (.oga og ."
 "wav)"
 
-#. 3.2->settings-schema.json->chooseBatteryLowSound->description
-msgid ""
-"Allow choice of audible alert file when Battery Low and at Shutdown Level"
-msgstr "Tillad valg af lydfil til lavt batteriniveauet og nedlukningsniveau"
-
 #. 3.2->settings-schema.json->chooseBatteryLowSound->tooltip
 msgid ""
 "Must have Sox installed. Limited number of sound file types supported in "
@@ -310,10 +420,6 @@ msgid ""
 msgstr ""
 "Sox skal være installeret. Begrænset antal lydfiler understøttes i versioner "
 "før 4.2"
-
-#. 3.2->settings-schema.json->batteryLowSound->description
-msgid "Choose sound file to use when Battery is Low"
-msgstr "Vælg lydfil til brug ved lavt batteriniveau"
 
 #. 3.2->settings-schema.json->batteryLowSound->tooltip
 msgid ""
@@ -347,10 +453,6 @@ msgstr ""
 "For at minde brugere om at lydstyrken skal indstilles fornuftigt på "
 "offentlige steder"
 
-#. 3.2->settings-schema.json->head3->description
-msgid "Household Tasks"
-msgstr "Husholdningsopgaver"
-
 #. 3.2->settings-schema.json->deleteTempraryFiles->description
 msgid "Delete temporary files after upgrade to version 1.4"
 msgstr "Slet midlertidige filer efter opgradering til version 1.4"
@@ -362,3 +464,20 @@ msgid ""
 msgstr ""
 "Versioner før 1.4 brugte midlertidige filer i Hjem-mappen. Disse bruges ikke "
 "mere og kan slettes."
+
+#~ msgid ""
+#~ "A User Defined Sound File has been Specified for low Battery\n"
+#~ "\n"
+#~ "Please ensure the volume is set sensibly in public places\n"
+#~ "especially if a long loud file is specifed\n"
+#~ msgstr ""
+#~ "En brugerdefineret lydfil er blevet angivet for lavt batteri\n"
+#~ "\n"
+#~ "Sikr dig, at lydstyrken er fornuftigt indstillet på offentlige steder,\n"
+#~ "især hvis en lang, højlydt fil er angivet\n"
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "Type of Display"
+#~ msgstr "Visningstype"

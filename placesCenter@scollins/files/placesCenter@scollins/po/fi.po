@@ -1,0 +1,325 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-24 20:57+0100\n"
+"PO-Revision-Date: 2022-11-23 12:29+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi\n"
+
+#: applet.js:148
+msgid "(Right click to open folder)"
+msgstr "(hiiren oikea avaa kansion)"
+
+#: applet.js:170
+msgid "Places"
+msgstr "Sijainnit"
+
+#: applet.js:284
+msgid "Search Home Folder"
+msgstr "Haku Koti kansiosta"
+
+#: applet.js:307
+msgid "SYSTEM"
+msgstr "SYSTEM"
+
+#: applet.js:316
+msgid "Search File System"
+msgstr "Haku järjestelmästä"
+
+#: applet.js:341
+msgid "RECENT DOCUMENTS"
+msgstr "VIIMEAIKAISET"
+
+#: applet.js:355
+msgid "Clear"
+msgstr "Tyhjennä"
+
+#: applet.js:398
+msgid "Computer"
+msgstr "Tietokone"
+
+#: applet.js:404
+msgid "File System"
+msgstr "Tiedostojärjestelmä"
+
+#: applet.js:420
+msgid "Network"
+msgstr "Verkko"
+
+#: applet.js:560
+msgid "Trash"
+msgstr "Roskakori"
+
+#: search.py:43
+msgid "Open..."
+msgstr "Avaa..."
+
+#: search.py:48
+msgid "Open Containing Folder..."
+msgstr "Avaa sisällön kansio..."
+
+#: search.py:85
+msgid "Search"
+msgstr "Haku"
+
+#: search.py:106
+msgid "Start in"
+msgstr "Alkaen"
+
+#: search.py:107
+msgid "Select a folder"
+msgstr "Valitse kansio"
+
+#: search.py:113
+msgid "Follow symlinks"
+msgstr "Seuraa symlinkkejä"
+
+#: search.py:117
+msgid "Search hidden"
+msgstr "Hae piilotetut"
+
+#: search.py:121
+msgid "Use regular expressions"
+msgstr "Käytä säännöllisiä lauseita"
+
+#: search.py:125
+msgid "Stop"
+msgstr "Pysäytä"
+
+#: search.py:140
+msgid "File"
+msgstr "Tiedosto"
+
+#: search.py:156
+msgid "Path"
+msgstr "Polku"
+
+#: search.py:184
+msgid "Searching..."
+msgstr "Hakee..."
+
+#: search.py:198 search.py:199
+msgid "Search Stopped"
+msgstr "Haku pysäytetty"
+
+#: search.py:215
+msgid "Searching: "
+msgstr "Haku: "
+
+#: search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Virhe: oikeudet kansion lukemiseen ei riitä "
+
+#: search.py:252
+msgid "Search Completed"
+msgstr "Haku valmis"
+
+#: search.py:259
+msgid "Skipping"
+msgstr "Ohitus"
+
+#: search.py:259
+msgid " - directory already searched"
+msgstr " - hakemisto on jo haettu"
+
+#. metadata.json->name
+msgid "Places Center"
+msgstr "Places Center"
+
+#. metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr "Tarjoaa helposti luettavan asettelun, jolla pääset kasoihin ja hakuun"
+
+#. metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr ""
+"Places Center on Cinnamon sovelma, joka tarjoaa helpon pääsyn kaikkiin "
+"eniten käytettyihin tiedostoihin ja kohteisiin. Voit osallistua kehitykseen "
+"tai lähettää virheraportteja tai pyytää ominaisuuksia minun github-repossa."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Tekijä - Stephen Collins"
+
+#. metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr "kehugter - Lisätty konfigurointi hiiren keskipainikkeeseen"
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr "Yleistä"
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr "Käyttäjä"
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr "Järjestelmä"
+
+#. settings-schema.json->recentPage->title
+#. settings-schema.json->recentSection->title
+msgid "Recent documents"
+msgstr "Viimeaikaiset asiakirjat"
+
+#. settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "Paneelin asetukset"
+
+#. settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "Valikon asetukset"
+
+#. settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Käyttä valinnat"
+
+#. settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Järjestelmä valinnat"
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Paneelin kuvake"
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "Hyväksyy kuvakkeen nimen tai polun (tukee symbolisia kuvakkeita)"
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Paneelin teksti"
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Valikon pikanäppäin"
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Valikon kuvakkeen koko"
+
+#. settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Avaa keskipainikkeella"
+
+#. settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Jätä tyhjäksi - pois käytöstä"
+
+#. settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Näytä työpöytä"
+
+#. settings-schema.json->userCustomPlaces->description
+#. settings-schema.json->systemCustomPlaces->description
+msgid "Custom places"
+msgstr "Mukautetut paikat - kirjoita polku"
+
+#. settings-schema.json->userCustomPlaces->tooltip
+#. settings-schema.json->systemCustomPlaces->tooltip
+msgid ""
+"List of uris/file paths to be included. Entries may be separated by either a "
+"comma(,) or by a new-line. You can set the name to be displayed by adding :"
+"customName after the location. You can likewise set an icon name by adding :"
+"iconName after the custom name."
+msgstr ""
+"Luettelo url tai polku. Merkintä voidaan erottaa joko pilkulla (,) tai "
+"uudella rivillä. Voit asettaa näytettävän nimen lisäämällä :customName "
+"sijainnin perään. Voit myös asettaa kuvakkeelle nimen lisäämällä nimen "
+"perään :iconName."
+
+#. settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Näytä roskakori"
+
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Ei koskaan"
+
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Aina"
+
+#. settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Kun ei ole tyhjä"
+
+#. settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Näytä tietokone"
+
+#. settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Näytä järjestelmä"
+
+#. settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Näytä asemat"
+
+#. settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Näytä vain liitetyt asemat"
+
+#. settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Näytä verkko"
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Näytä viimeisimmät asiakirjat"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "All Recent Documents"
+msgstr "Kaikki viimeisimmät asiakirjat"
+
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Näytettävä määrä"
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr "Yksityisyys"

@@ -1,3 +1,4 @@
+import { constant } from "lodash"
 import { ChangeHandler } from "../types"
 
 const { BoxLayout, Bin, Side } = imports.gi.St
@@ -70,6 +71,7 @@ export function createPopupMenu(props: PopupMenuProps) {
             setLayout()
         }, 0);
     })
+
 
     function setLayout() {
 

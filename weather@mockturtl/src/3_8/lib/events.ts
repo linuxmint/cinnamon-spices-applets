@@ -9,6 +9,20 @@ interface IEvent<TSender, TArgs> {
 }
 
 export class Event<TSender, TArgs> implements IEvent<TSender, TArgs> {
+
+	private static eventStore: Event<any, any>[] = [];
+
+	/** Safe Unsubscription of all callbacks, Should be used on Applet removal. */
+	public static DisconnectAll() {
+		for (const event of this.eventStore) {
+			event.UnSubscribeAll();
+		}
+	}
+
+	public constructor() {
+		Event.eventStore.push(this);
+	}
+
 	private subscribers: Array<(sender: TSender, args: TArgs) => void> = [];
 
 	public Subscribe(fn: (sender: TSender, args: TArgs) => void): void {

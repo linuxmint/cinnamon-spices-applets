@@ -6,17 +6,18 @@
 //----------------------------------------------------------------------
 
 import { DateTime } from "luxon";
-import { Config, ServiceClassMapping } from "./config";
+import { Config, ServiceClassMapping, Services } from "./config";
 import { WeatherLoop } from "./loop";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
 import { UI } from "./ui";
-import { AwareDateString, CapitalizeFirstLetter, CompassDirectionText, ExtraFieldToUserUnits, GenerateLocationText, MPStoUserUnits, NotEmpty, PercentToLocale, PressToUserUnits, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
+import { AwareDateString, CapitalizeFirstLetter, CompassDirectionText, delay, ExtraFieldToUserUnits, GenerateLocationText, MPStoUserUnits, NotEmpty, PercentToLocale, PressToUserUnits, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
 import { HttpLib, HttpError, Method, HTTPParams, HTTPHeaders, ErrorResponse, Response } from "./lib/httpLib";
 import { Logger } from "./lib/logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { CloseStream, OverwriteAndGetIOStream, WriteAsync } from "./lib/io_lib";
 import { NotificationService } from "./lib/notification_service";
 import { SpawnProcess } from "./lib/commandRunner";
+import { Event } from "./lib/events";
 
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
@@ -26,11 +27,28 @@ const { File, NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 
 export class WeatherApplet extends TextIconApplet {
 	private readonly loop: WeatherLoop;
-	private lock = false;
-	private refreshTriggeredWhileLocked = false;
+	private refreshing: Promise<void> | null = null;
+	private unlockFunc: (() => void) | null = null;
+	private manualRefreshTriggeredWhileLocked = false;
+
+	private currentWeatherInfo: WeatherData | null = null;
+	public get CurrentData(): WeatherData | null {
+		return this.currentWeatherInfo;
+	}
+
+	public get Refreshing(): Promise<void> {
+		if (this.refreshing == null)
+			return Promise.resolve();
+
+		return this.refreshing;
+	}
 
 	/** Chosen API */
 	private provider?: WeatherProvider;
+
+	public get Provider(): WeatherProvider | undefined {
+		return this.provider;
+	}
 
 	private orientation: imports.gi.St.Side;
 	public get Orientation() {
@@ -50,7 +68,6 @@ export class WeatherApplet extends TextIconApplet {
 	public encounteredError: boolean = false;
 
 	private online: boolean | null = null;
-	private currentWeatherInfo: WeatherData | null = null;
 
 	public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
 		super(orientation, panelHeight, instanceId);
@@ -76,10 +93,63 @@ export class WeatherApplet extends TextIconApplet {
 		this.loop.Start();
 		this.OnNetworkConnectivityChanged();
 		NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
+		// We need a full rebuild and refresh for these
+		this.config.DataServiceChanged.Subscribe(() => this.RefreshAndRebuild());
+
+		// We need a full rebuild without refresh for these
+		this.config.VerticalOrientationChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+		this.config.ForecastColumnsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+		this.config.ForecastRowsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+		this.config.UseCustomAppletIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+		this.config.UseCustomMenuIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+		this.config.UseSymbolicIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+		this.config.ForecastHoursChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
+
+		// We need a full refresh for these
+		this.config.ApiKeyChanged.Subscribe(() => this.Refresh());
+		// We change how we process data when this is changed
+		this.config.ShortConditionsChanged.Subscribe(() => this.Refresh());
+		// Some translations come from the API we need a refresh
+		this.config.TranslateConditionChanged.Subscribe(() => this.Refresh());
+		this.config.ManualLocationChanged.Subscribe(() => this.Refresh());
+
+		// Misc Triggers
+		this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Resume());
+
+		// Panel
+		this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
+		this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
+
+		// Redisplay
+		this.config.TemperatureUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+		this.config.TempRussianStyleChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+		this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+		this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+		this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
 	}
 
 	public Locked(): boolean {
-		return this.lock;
+		return this.refreshing != null;
+	}
+
+	private async Lock(): Promise<void> {
+		if (this.refreshing != null)
+			await this.refreshing;
+
+		this.refreshing = new Promise<void>((resolve, reject) => {
+			this.unlockFunc = resolve;
+		});
+	}
+
+	private Unlock(): void {
+		this.unlockFunc?.();
+		this.unlockFunc = null;
+		this.refreshing = null;
+		if (this.manualRefreshTriggeredWhileLocked) {
+			Logger.Info("Refreshing triggered by config change while refreshing, starting now...");
+			this.manualRefreshTriggeredWhileLocked = false;
+			this.RefreshAndRebuild();
+		}
 	}
 
 	private OnNetworkConnectivityChanged = () => {
@@ -103,30 +173,50 @@ export class WeatherApplet extends TextIconApplet {
 		}
 	}
 
+	private onSettingNeedsRebuild = (conf: Config, changedData: any, data: WeatherData) => {
+		if (this.Provider == null)
+			return;
+
+		this.ui.Rebuild(conf);
+		this.DisplayWeather(data);
+		this.ui.Display(data, conf, this.Provider);
+	}
+
+	private OnSettingNeedRedisplay = (conf: Config, changedData: any, data: WeatherData) => {
+		if (this.Provider == null)
+			return;
+
+		this.DisplayWeather(data);
+		this.ui.Display(data, conf, this.Provider);
+	}
+
 	/**
 	 * @returns Queues a refresh if if refresh was triggered while locked.
 	 */
 	public RefreshAndRebuild(this: WeatherApplet, loc?: LocationData | null): void {
-		this.loop.Resume();
-		if (this.Locked()) {
-			this.refreshTriggeredWhileLocked = true;
-			return;
-		}
 		this.RefreshWeather(true, loc);
 	};
+
+	public Refresh(this: WeatherApplet, loc: LocationData | null = null, rebuild: boolean = false, ): void {
+		this.RefreshWeather(rebuild, loc);
+	}
 
 	/**
 	 * Main function pulling and refreshing data
 	 * @param rebuild 
 	 */
-	public async RefreshWeather(this: WeatherApplet, rebuild: boolean, location?: LocationData | null): Promise<RefreshState> {
+	public async RefreshWeather(this: WeatherApplet, rebuild: boolean, location: LocationData | null = null, manual: boolean = true): Promise<RefreshState> {
 		try {
-			if (this.lock) {
+			if (this.Locked()) {
 				Logger.Info("Refreshing in progress, refresh skipped.");
+				if (manual) { // Config change or user requested refresh
+					this.manualRefreshTriggeredWhileLocked = true;
+					this.loop.Resume();
+				}
 				return RefreshState.Locked;
 			}
 
-			this.lock = true;
+			await this.Lock();
 			this.encounteredError = false;
 
 			if (!location) {
@@ -173,10 +263,10 @@ export class WeatherApplet extends TextIconApplet {
 				this.Unlock();
 				return RefreshState.Failure;
 			}
+			this.currentWeatherInfo = weatherInfo;
 
 			Logger.Info("Weather Information refreshed");
 			this.loop.ResetErrorCount();
-			this.currentWeatherInfo = weatherInfo;
 			this.Unlock();
 			return RefreshState.Success;
 		}
@@ -239,8 +329,8 @@ export class WeatherApplet extends TextIconApplet {
 		}
 
 		// Overriding temperature panel label
-		if (NotEmpty(this.config._tempTextOverride)) {
-			label = this.config._tempTextOverride
+		if (NotEmpty(this.config._panelTextOverride)) {
+			label = this.config._panelTextOverride
 				.replace(/{t}/g, TempToUserConfig(temperature, this.config, false) ?? "")
 				.replace(/{u}/g, UnitToUnicode(this.config.TemperatureUnit))
 				.replace(/{c}/g, mainCondition)
@@ -446,6 +536,23 @@ The contents of the file saved from the applet help page goes here
 		NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", {filePath: this.config._selectedLogPath}));
 	}
 
+	
+	/**
+	 * Callback wrapper for events, awaits until a refresh is done and ensures complete
+	 * weather data is provided.
+	 * @param callback 
+	 * @returns 
+	 */
+	public AfterRefresh = <T, TT>(callback: (owner: T, data: TT, weatherData: WeatherData) => void | Promise<void>): ((owner: T, data: TT) => Promise<void>) => {
+		return async (owner, data) => {
+			await this.Refreshing;
+			const weatherData = this.CurrentData;
+			if (weatherData == null)
+				return;
+			callback(owner, data, weatherData); 
+		}
+	}
+
 	// -------------------------------------------------------------------
 	// Applet Overrides, do not delete
 
@@ -457,6 +564,8 @@ The contents of the file saved from the applet help page goes here
 	public override on_applet_removed_from_panel(deleteConfig: any) {
 		Logger.Info("Removing applet instance...")
 		this.loop.Stop();
+		this.config.Destroy();
+		Event.DisconnectAll();
 	}
 
 	public override on_applet_clicked(event: any): boolean {
@@ -480,16 +589,6 @@ The contents of the file saved from the applet help page goes here
 		this.set_applet_icon_name(APPLET_ICON);
 		this.set_applet_label(_("..."));
 		this.set_applet_tooltip(_("Click to open"));
-	}
-
-	private Unlock(): void {
-		this.lock = false;
-		if (this.refreshTriggeredWhileLocked) {
-			Logger.Info("Refreshing triggered by config change while refreshing, starting now...");
-			this.refreshTriggeredWhileLocked = false;
-			this.RefreshAndRebuild();
-		}
-
 	}
 
 	/** Into right-click context menu */

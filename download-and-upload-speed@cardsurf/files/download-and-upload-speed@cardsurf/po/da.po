@@ -7,95 +7,93 @@ msgid ""
 msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 23:31+0100\n"
-"PO-Revision-Date: 2021-02-16 11:31+0100\n"
+"POT-Creation-Date: 2021-02-27 00:05+0100\n"
+"PO-Revision-Date: 2022-10-26 18:50+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:427
-#, fuzzy
-#| msgid "Network interface"
+#: applet.js:437
 msgid "Network interfaces"
-msgstr "Netværksgrænseflade"
+msgstr "Netværksgrænseflader"
 
-#: applet.js:496
+#: applet.js:506
 msgid "Total data start"
 msgstr "Total datastart"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:503
+#: applet.js:513
 msgid "Launch of applet"
 msgstr "Opstart af panelprogrammet"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:504
+#: applet.js:514
 msgid "Today"
 msgstr "I dag"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:505
+#: applet.js:515
 msgid "Yesterday"
 msgstr "I går"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:506
+#: applet.js:516
 msgid "3 days ago"
 msgstr "3 dage siden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:507
+#: applet.js:517
 msgid "5 days ago"
 msgstr "5 dage siden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:508
+#: applet.js:518
 msgid "7 days ago"
 msgstr "7 dage siden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:509
+#: applet.js:519
 msgid "10 days ago"
 msgstr "10 dage siden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:510
+#: applet.js:520
 msgid "14 days ago"
 msgstr "14 dage siden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:511
+#: applet.js:521
 msgid "30 days ago"
 msgstr "30 dage siden"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:512
+#: applet.js:522
 msgid "Custom date"
 msgstr "Tilpasset dato"
 
 #. settings-schema.json->gui_start->description
-#: applet.js:549
+#: applet.js:559
 msgid "Gui"
 msgstr "Grafisk brugergrænseflade"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:549
+#: applet.js:559
 msgid "Compact"
 msgstr "Kompakt"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:549
+#: applet.js:559
 msgid "Large"
 msgstr "Stor"
 
-#: applet.js:815
+#: applet.js:825
 msgid "b"
-msgstr ""
+msgstr "b"
 
 #: appletGui.js:470
 msgid "Total download:"
@@ -165,13 +163,15 @@ msgstr "Hvor ofte download- og uploadhastighed skal beregnes"
 
 #. settings-schema.json->update_available_interfaces_every->description
 msgid "Update available interfaces every"
-msgstr ""
+msgstr "Opdatér tilgængelige grænseflader efter"
 
 #. settings-schema.json->update_available_interfaces_every->tooltip
 msgid ""
 "How often to update list of available network interfaces. 0 means list of "
 "available network interfaces is not updated periodically."
 msgstr ""
+"Hvor tit listen over tilgængelige netværksgrænseflader skal opdateres. 0 "
+"betyder, at listen ikke opdateres regelmæssigt."
 
 #. settings-schema.json->gui_speed_type->description
 msgid "Type"
@@ -183,23 +183,19 @@ msgstr "Grafisk brugergrænseflade"
 
 #. settings-schema.json->gui_value_order->description
 msgid "Value order"
-msgstr ""
+msgstr "Rækkefølge"
 
 #. settings-schema.json->gui_value_order->options
-#, fuzzy
-#| msgid "Download icon"
 msgid "Download first"
-msgstr "Downloadikon"
+msgstr "Download først"
 
 #. settings-schema.json->gui_value_order->options
-#, fuzzy
-#| msgid "Upload icon"
 msgid "Upload first"
-msgstr "Uploadikon"
+msgstr "Upload først"
 
 #. settings-schema.json->gui_value_order->tooltip
 msgid "An order of values shown in the panel and in the hover popup"
-msgstr ""
+msgstr "Rækkefølgen som den vises i panelet og i pop op'en"
 
 #. settings-schema.json->decimal_places->description
 msgid "Decimal places"
@@ -242,16 +238,30 @@ msgid "Download icon"
 msgstr "Downloadikon"
 
 #. settings-schema.json->gui_received_icon_filename->tooltip
-msgid "An icon displayed next to download speed in the panel"
-msgstr "Ikonet som vises ved siden af downloadhastigheden i panelet"
+msgid ""
+"An icon displayed next to download speed in the panel.\n"
+"To display a symbolic icon make sure its name ends with '-symbolic.svg'."
+msgstr ""
+"Et ikon vises ved siden af downloadhastigheden i panelet.\n"
+"For at få vist et symbolsk ikon, skal du sørge for, at dets navn slutter med "
+"\"-symbolic.svg\"."
 
 #. settings-schema.json->gui_sent_icon_filename->description
 msgid "Upload icon"
 msgstr "Uploadikon"
 
 #. settings-schema.json->gui_sent_icon_filename->tooltip
-msgid "An icon displayed next to upload speed in the panel"
-msgstr "Ikonet som vises ved siden af uploadhastigheden i panelet"
+msgid ""
+"An icon displayed next to upload speed in the panel.\n"
+"To display a symbolic icon make sure its name ends with '-symbolic.svg'."
+msgstr ""
+"Et ikon vises ved siden af uploadhastigheden i panelet.\n"
+"For at få vist et symbolsk ikon, skal du sørge for, at dets navn slutter med "
+"\"-symbolic.svg\"."
+
+#. settings-schema.json->gui_symbolic_icon->description
+msgid "Show a default set of symbolic icons"
+msgstr "Vis et standardsæt med symbolske ikoner"
 
 #. settings-schema.json->hover_popup_text_css->description
 msgid "Popup text CSS"
@@ -271,30 +281,24 @@ msgstr "CSS-stil anvendt på tallene i pop op-meddelelsen"
 
 #. settings-schema.json->minimum_bytes_received_to_display->units
 #. settings-schema.json->minimum_bytes_sent_to_display->units
-#, fuzzy
-#| msgid "Bytes"
 msgid "bytes"
-msgstr "Byte"
+msgstr "byte"
 
 #. settings-schema.json->minimum_bytes_received_to_display->description
 msgid "Minimum displayed download value"
-msgstr ""
+msgstr "Mindste viste værdi for download"
 
 #. settings-schema.json->minimum_bytes_received_to_display->tooltip
-#, fuzzy
-#| msgid "An icon displayed next to upload speed in the panel"
 msgid "A minimum download value to display in the panel"
-msgstr "Ikonet som vises ved siden af uploadhastigheden i panelet"
+msgstr "Mindste viste værdi for download som vises i panelet"
 
 #. settings-schema.json->minimum_bytes_sent_to_display->description
 msgid "Minimum displayed upload value"
-msgstr ""
+msgstr "Mindste viste værdi for upload"
 
 #. settings-schema.json->minimum_bytes_sent_to_display->tooltip
-#, fuzzy
-#| msgid "An icon displayed next to upload speed in the panel"
 msgid "A minimum upload value to display in the panel"
-msgstr "Ikonet som vises ved siden af uploadhastigheden i panelet"
+msgstr "Mindste viste værdi for upload som vises i panelet"
 
 #. settings-schema.json->total_data_start->description
 msgid "Total data"
@@ -423,6 +427,3 @@ msgstr "Kommando "
 #. settings-schema.json->list_connections_command->tooltip
 msgid "A command used to list current Internet connections"
 msgstr "En kommando til at vise aktuelle internetforbindelser"
-
-#~ msgid "Settings for download-and-upload-speed@cardsurf"
-#~ msgstr "Indstillinger for download-and-upload-speed@cardsurf"

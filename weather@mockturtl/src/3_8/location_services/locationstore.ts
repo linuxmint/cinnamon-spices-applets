@@ -69,7 +69,7 @@ export class LocationStore {
 
 		if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
 			Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.")
-			this.app.RefreshAndRebuild()
+			this.app.Refresh();
 		}
 		this.InvokeStorageChanged();
 	}
