@@ -307,6 +307,7 @@ MyApplet.prototype = {
         this.enabled = this.redshiftSwitch.state;
         this.updateTooltip();
         // Stop redshift before launch another instance
+        Util.spawnCommandLine('redshift -r -x');
         Util.killall('redshift');
         if (this.enabled) {
             // Icon on
@@ -314,24 +315,24 @@ MyApplet.prototype = {
                 this.set_applet_icon_symbolic_path(ICON_SUNSET);
 
                 if (this.latitude && this.longitude) {
-                    Util.spawnCommandLine('redshift -l ' + this.latitude + ':' + this.longitude
+                    Util.spawnCommandLine('redshift -r -l ' + this.latitude + ':' + this.longitude
                         + ' -t ' + this.dayColor + ':' + this.nightColor
                         + ' -b ' + (this.redshiftDayBrightness / 100) + ':' + (this.redshiftNightBrightness / 100));
                 } else {
-                    Util.spawnCommandLine('redshift -l geoclue2' + ' -t ' + this.dayColor + ':' + this.nightColor
+                    Util.spawnCommandLine('redshift -r -l geoclue2' + ' -t ' + this.dayColor + ':' + this.nightColor
                         + ' -b ' + (this.redshiftDayBrightness / 100) + ':' + (this.redshiftNightBrightness / 100));
                 }
             } else {
                 this.set_applet_icon_symbolic_path(ICON_ON);
 
-                Util.spawnCommandLine('redshift -O ' + this.dayColor + ' -b ' + (this.redshiftDayBrightness / 100));
+                Util.spawnCommandLine('redshift -r -O ' + this.dayColor + ' -b ' + (this.redshiftDayBrightness / 100));
             }
         } else {
             // Icon off
             this.set_applet_icon_symbolic_path(ICON_OFF);
 
             // reset Redshift configuration
-            Util.spawnCommandLine('redshift -x');
+            Util.spawnCommandLine('redshift -r -x');
         }
     },
 
