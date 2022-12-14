@@ -16267,18 +16267,16 @@ class UIHourlyForecasts {
             const ui = this.hourlyForecasts[index];
             const hourWidth = ui.Hour.get_preferred_width(-1)[1];
             const iconWidth = ui.Icon.get_preferred_width(-1)[1];
-            let summaryWidth = ui.PrecipVolume.get_preferred_width(-1)[1];
+            let percipVolumeWidth = ui.PrecipVolume.get_preferred_width(-1)[1];
+            const percipChanceWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
+            let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
             const temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
-            let precipitationWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
+            const precipitationWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
             if (precipitationWidth == null || temperatureWidth == null ||
-                hourWidth == null || iconWidth == null || summaryWidth == null)
+                hourWidth == null || iconWidth == null || summaryWidth == null ||
+                percipVolumeWidth == null || percipChanceWidth == null)
                 continue;
-            if (precipitationWidth > iconWidth || summaryWidth > iconWidth) {
-                if (precipitationWidth > summaryWidth)
-                    precipitationWidth += 10;
-                else
-                    summaryWidth += 10;
-            }
+            summaryWidth = Math.min(summaryWidth, 70);
             if (requiredWidth < hourWidth)
                 requiredWidth = hourWidth;
             if (requiredWidth < iconWidth)
@@ -16320,7 +16318,7 @@ class UIHourlyForecasts {
             this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
             box.add_child(this.hourlyForecasts[index].Hour);
             box.add_child(this.hourlyForecasts[index].Icon);
-            box.add_child(this.hourlyForecasts[index].Summary);
+            box.add(this.hourlyForecasts[index].Summary, { expand: true, x_fill: true });
             box.add_child(this.hourlyForecasts[index].Temperature);
             if ((_a = this.app.Provider) === null || _a === void 0 ? void 0 : _a.supportHourlyPrecipChance)
                 box.add_child(this.hourlyForecasts[index].PrecipPercent);
