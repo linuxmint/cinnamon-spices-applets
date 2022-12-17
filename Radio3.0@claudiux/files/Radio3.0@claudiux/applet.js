@@ -240,7 +240,8 @@ const APPLET_ICON = APPLET_DIR + "/icons/icon.svg";
 const ANIMATED_ICON = APPLET_DIR + "/icons/animated-symbolic.svg";
 
 const USER_MUSIC_DIR = get_user_special_dir(UserDirectory.DIRECTORY_MUSIC);
-const RADIO30_MUSIC_DIR = USER_MUSIC_DIR + "/" + APPNAME;
+const DEFAULT_RADIO30_MUSIC_DIR = USER_MUSIC_DIR + "/" + APPNAME;
+var RADIO30_MUSIC_DIR = USER_MUSIC_DIR + "/" + APPNAME;
 
 const USER_DOWNLOAD_DIR = get_user_special_dir(UserDirectory.DIRECTORY_DOWNLOAD);
 
@@ -782,9 +783,12 @@ WebRadioReceiverAndRecorder.prototype = {
     // Ensure right permissions and structure:
     spawnCommandLineAsync("bash -c 'cd "+ SCRIPTS_DIR + " && chmod 755 *.sh *.py'");
     spawnCommandLineAsync("bash -c 'cd "+ SCRIPTS_DIR + " && chmod 700 *.lua'");
-    mkdir_with_parents(RADIO30_MUSIC_DIR, 0o755);
-    mkdir_with_parents(RADIO_LISTS_DIR, 0o755);
-    mkdir_with_parents(JOBS_DIR, 0o755);
+    if (!file_test(RADIO30_MUSIC_DIR, FileTest.EXISTS))
+      mkdir_with_parents(RADIO30_MUSIC_DIR, 0o755);
+    if (!file_test(RADIO_LISTS_DIR, FileTest.EXISTS))
+      mkdir_with_parents(RADIO_LISTS_DIR, 0o755);
+    if (!file_test(JOBS_DIR, FileTest.EXISTS))
+      mkdir_with_parents(JOBS_DIR, 0o755);
     spawnCommandLineAsync("bash -c 'cp -a "+ APPLET_DIR +"/stations/Radio3.0_*.json "+ RADIO_LISTS_DIR +"/'");
     if (!file_test(DOT_CONFIG_DIR +"/icon.svg", FileTest.EXISTS)) {
       spawnCommandLineAsync("bash -c 'cp -a "+ APPLET_ICON +" "+ DOT_CONFIG_DIR +"/'")
@@ -879,6 +883,8 @@ WebRadioReceiverAndRecorder.prototype = {
     this.set_MPV_ALIAS();
     this.get_user_settings();
 
+    this.on_rec_path_changed();
+
     this.tabNumberOfScheduling = 1*userSettings["layoutradio"]["pages"].indexOf("pageScheduling");
     this.tabNumberOfSearch = 1*userSettings["layoutradio"]["pages"].indexOf("pageSearch");
     this.tabNumberOfRecording = 1*userSettings["layoutradio"]["pages"].indexOf("pageRecording");
@@ -961,6 +967,7 @@ WebRadioReceiverAndRecorder.prototype = {
   get_user_settings: function() {
     //log("get_user_settings");
 
+    this.settings.bind("dont-check-dependencies", "dont_check_dependencies");
     this.settings.bind("recentRadios", "recentRadios");
     this.settings.bind("volume-step", "volume_step");
     this.settings.bind("volume-at-startup", "volume_at_startup");
@@ -976,6 +983,7 @@ WebRadioReceiverAndRecorder.prototype = {
     this.settings.bind("import-list", "import_list");
     this.settings.bind("import-dir", "import_dir");
 
+    this.settings.bind("recording-path", "recording_path", this.on_rec_path_changed.bind(this));
     this.settings.bind("recording-format", "rec_format");
     this.settings.bind("recording-ends-auto", "recording_ends_auto");
 
@@ -1015,6 +1023,26 @@ WebRadioReceiverAndRecorder.prototype = {
 
     // Help TextViews:
     this.populate_help_textviews()
+  },
+
+  on_rec_path_changed: function() {
+    log("on_rec_path_changed");
+    let recording_path = this.settings.getValue("recording-path");
+    if (  recording_path.length !== 0 &&
+          recording_path !== "file://"+RADIO30_MUSIC_DIR) {
+      RADIO30_MUSIC_DIR = recording_path.slice("file://".length, recording_path.length);
+      this.rec_folder = "file://" + RADIO30_MUSIC_DIR;
+      log("Changes was made!!!");
+    }
+    log("RADIO30_MUSIC_DIR: "+RADIO30_MUSIC_DIR);
+    log("this.rec_folder: "+this.rec_folder);
+  },
+
+  set_rec_path_to_default: function() {
+    RADIO30_MUSIC_DIR = DEFAULT_RADIO30_MUSIC_DIR;
+    this.rec_folder = "file://" + RADIO30_MUSIC_DIR;
+    //~ this.settings.setValue("recording-path", this.rec_folder);
+    this.recording_path = ""+this.rec_folder;
   },
 
   set_folders_icon: async function() {
@@ -2955,8 +2983,8 @@ WebRadioReceiverAndRecorder.prototype = {
 
     // Check about dependencies:
     this.checkDepInterval = undefined;
-    if (this.dependencies.areDepMet()) {
-      // All dependencies are installed.
+    if (this.dependencies.areDepMet() || this.dont_check_dependencies) {
+      // (Consider) All dependencies are installed.
 
       // Install or update translations, if any:
       if (!are_translations_installed()) install_translations();
@@ -2970,7 +2998,8 @@ WebRadioReceiverAndRecorder.prototype = {
     } else {
       // Some dependencies are missing. Suggest to the user to install them.
       this.appletRunning = false;
-      this.checkDepInterval = setInterval(() => this.dependencies.check_dependencies(), 10000);
+      if (!this.dont_check_dependencies)
+        this.checkDepInterval = setInterval(() => this.dependencies.check_dependencies(), 10000);
     }
   },
 
