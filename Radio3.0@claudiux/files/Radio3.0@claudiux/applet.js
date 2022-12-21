@@ -238,6 +238,7 @@ const DB_SERVERS_FILE = HOME_DIR + "/.cinnamon/configs/" + UUID + "/server-list.
 const XS_PATH = "%s/xs/xlet-settings.py".format(APPLET_DIR, );
 const APPLET_ICON = APPLET_DIR + "/icons/icon.svg";
 const ANIMATED_ICON = APPLET_DIR + "/icons/animated-symbolic.svg";
+const MANUAL_HTML = APPLET_DIR + "/help/MANUAL.html";
 
 const USER_MUSIC_DIR = get_user_special_dir(UserDirectory.DIRECTORY_MUSIC);
 const DEFAULT_RADIO30_MUSIC_DIR = USER_MUSIC_DIR + "/" + APPNAME;
@@ -3731,6 +3732,17 @@ WebRadioReceiverAndRecorder.prototype = {
       this._applet_context_menu.addMenuItem(this.context_menu_item_about);
     }
 
+    // Manual...
+    if (this.context_menu_item_manual == null) {
+      this.context_menu_item_manual = new PopupIconMenuItem(_("Manual..."),
+        "help-faq", //"gtk-help",
+        IconType.SYMBOLIC);
+      this.context_menu_item_manual.connect('activate', Lang.bind(this, this.openManual));
+    }
+    if (items.indexOf(this.context_menu_item_manual) == -1) {
+      this._applet_context_menu.addMenuItem(this.context_menu_item_manual);
+    }
+
     // Separator
     if (this.context_menu_separator == null && this._applet_context_menu.numMenuItems > 0) {
       this.context_menu_separator = new PopupSeparatorMenuItem();
@@ -4135,6 +4147,10 @@ WebRadioReceiverAndRecorder.prototype = {
   _set_settings_options_from_sched: function() {
     this.settingsTab = this.tabNumberOfScheduling;
     this._set_settings_options()
+  },
+
+  openManual: function() {
+    spawnCommandLineAsync('xdg-open "%s"'.format(MANUAL_HTML))
   },
 
   configureApplet: function(tab=0, maximize_vertically=true) {

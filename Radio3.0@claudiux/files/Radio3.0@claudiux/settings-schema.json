@@ -945,7 +945,7 @@
   },
   "recording-path": {
     "type": "filechooser",
-    "description": "Path to the folder containing your future recordings",
+    "description": "Path to the folder that will contain your future recordings",
     "select-dir": true,
     "default": ""
   },
