@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-08 22:29-0500\n"
-"PO-Revision-Date: 2022-12-08 22:32-0500\n"
+"PO-Revision-Date: 2022-12-27 11:15-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -78,7 +78,7 @@ msgstr "Ver el registro de cambios"
 
 #: 5.4/applet.js:267
 msgid "Open the README"
-msgstr ""
+msgstr "Abrir archivo README"
 
 #: 5.4/applet.js:273 3.2/applet.js:327
 msgid "Open stylesheet.css (Advanced Function)"
@@ -214,7 +214,7 @@ msgstr ""
 
 #. 5.4->settings-schema.json->head->description
 msgid "General Settings"
-msgstr ""
+msgstr "Configuración general"
 
 #. 5.4->settings-schema.json->refreshInterval-spinner->units
 #. 3.2->settings-schema.json->refreshInterval-spinner->units
@@ -285,7 +285,7 @@ msgstr "Sólo icono sobre fondo de color que indica el estado"
 
 #. 5.4->settings-schema.json->displayType->description
 msgid "Toolbar Display Type"
-msgstr ""
+msgstr "Tipo de visualización de la barra de herramientas"
 
 #. 5.4->settings-schema.json->displayType->tooltip
 #. 3.2->settings-schema.json->displayType->tooltip
@@ -396,12 +396,11 @@ msgstr ""
 
 #. 5.4->settings-schema.json->head4->description
 msgid "Advanced"
-msgstr ""
+msgstr "Avanzado"
 
 #. 5.4->settings-schema.json->customBatteryPath->description
-msgid ""
-"Path to battery capacity directory (device path)"
-msgstr ""
+msgid "Path to battery capacity directory (device path)"
+msgstr "Ruta al directorio de capacidad de la batería (ruta del dispositivo)"
 
 #. 5.4->settings-schema.json->customBatteryPath->tooltip
 msgid ""
@@ -411,6 +410,11 @@ msgid ""
 "Default:\n"
 "/sys/class/power_supply/BAT0"
 msgstr ""
+"Elija su propio objeto power_supply, por ejemplo, para controlar su batería "
+"secundaria.\n"
+"\n"
+"Por defecto:\n"
+"/sys/class/suministro_de_energía/BAT0"
 
 #. 3.2->settings-schema.json->head->description
 msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
