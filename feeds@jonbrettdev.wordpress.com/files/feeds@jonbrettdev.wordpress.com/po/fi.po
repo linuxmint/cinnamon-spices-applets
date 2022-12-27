@@ -1,0 +1,322 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-21 19:10+0100\n"
+"PO-Revision-Date: 2022-11-30 16:17+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi\n"
+
+#: feedreader.js:151
+msgid "Invalid feed url"
+msgstr "Virheellinen syötteen osoite"
+
+#: feedreader.js:227
+msgid " unread items!"
+msgstr " lukemattomia!"
+
+#: feedreader.js:362 feedreader.js:375
+msgid "Loading feed"
+msgstr "Ladataan syötettä"
+
+#: applet.js:106
+msgid "Feed reader"
+msgstr "Syötteen lukija"
+
+#: applet.js:141
+#, javascript-format
+msgid "Please install the '%s' package."
+msgstr "Asenna paketti \"%s\"."
+
+#: applet.js:221
+msgid "Mark all read"
+msgstr "Merkitse kaikki luetuiksi"
+
+#: applet.js:232
+msgid "Reload"
+msgstr "Lataa uudelleen"
+
+#: applet.js:241
+msgid "Manage feeds"
+msgstr "Hallinnoi syötteitä"
+
+#: applet.js:252
+msgid "Settings"
+msgstr "Asetukset"
+
+#: applet.js:337
+msgid "No unread feeds"
+msgstr "Ei lukemattomia syötteitä"
+
+#: applet.js:566
+msgid "Feeds"
+msgstr "Syötteet"
+
+#: applet.js:718
+msgid "Right Click to open feed: \n"
+msgstr "Napsauta hiiren oikea avataksesi syötteen:\n"
+
+#: applet.js:775
+msgid "Mark All Posts Read"
+msgstr "Merkitse kaikki viestit luetuiksi"
+
+#: applet.js:782
+msgid "Mark Next "
+msgstr "Merkitse seuraava "
+
+#: applet.js:782
+msgid " Posts Read"
+msgstr " viestiä luetuksi"
+
+#: applet.js:788
+msgid "Update feed URL"
+msgstr "Päivitä syötteen osoite"
+
+#: applet.js:847 applet.js:863
+msgid "Published: "
+msgstr "Julkaistu: "
+
+#: applet.js:926
+msgid "Mark Post Read"
+msgstr "Merkitse viesti luetuksi"
+
+#: applet.js:958
+msgid "d) "
+msgstr "pv) "
+
+#: applet.js:960
+msgid "h) "
+msgstr "t) "
+
+#: applet.js:962
+msgid "(<1h) "
+msgstr "(<1t) "
+
+#: manage_feeds.py:53
+msgid "Manage your feeds"
+msgstr "Hallinnoi sinun syötteitä"
+
+#: manage_feeds.py:88
+msgid "Instance Name:"
+msgstr "Instanssin nimi:"
+
+#: manage_feeds.py:92
+msgid "Add/remove feed list"
+msgstr "Lisää/poista syötelista"
+
+#: manage_feeds.py:113
+msgid "Enable"
+msgstr "Käytä"
+
+#: manage_feeds.py:120
+msgid "Url"
+msgstr "Verkko-osoite"
+
+#: manage_feeds.py:127
+msgid "Custom title"
+msgstr "Mukautettu nimi"
+
+#: manage_feeds.py:133
+msgid "Notify"
+msgstr "Ilmoitus"
+
+#: manage_feeds.py:139
+msgid "Show Read"
+msgstr "Näytä"
+
+#: manage_feeds.py:146
+msgid "Interval"
+msgstr "Aikaväli"
+
+#: manage_feeds.py:154
+msgid "Show Image"
+msgstr "Näytä kuva"
+
+#: manage_feeds.py:200
+msgid "Import"
+msgstr "Tuo"
+
+#: manage_feeds.py:204
+msgid "_Import OPML"
+msgstr "_Tuo OPML"
+
+#: manage_feeds.py:205
+msgid "Import feeds from OPML file"
+msgstr "Tuo syötteitä OPML-tiedostosta"
+
+#: manage_feeds.py:211
+msgid "_Import Feeds File"
+msgstr "_Tuo syöte tiedostosta"
+
+#: manage_feeds.py:212
+msgid "Import feeds from file"
+msgstr "Tuo syötteitä tiedostosta"
+
+#: manage_feeds.py:218
+msgid "Export"
+msgstr "Vie"
+
+#: manage_feeds.py:222
+msgid "_Export Feeds File"
+msgstr "_Vie syötetiedosto"
+
+#: manage_feeds.py:223
+msgid "Export feeds to file"
+msgstr "Vie syötteet tiedostoon"
+
+#: manage_feeds.py:229
+msgid "Options"
+msgstr "Valinnat"
+
+#: manage_feeds.py:233
+msgid "_Toggle Hidden Fields"
+msgstr "_Vaihda piilotetut kentät"
+
+#: manage_feeds.py:234
+msgid "Show or Hide hidden fields"
+msgstr "Näytä tai piilota piilotetut kentät"
+
+#: manage_feeds.py:251
+msgid "Changes will be discarded, continue?"
+msgstr "Muutokset hylätään, jatkatko?"
+
+#: manage_feeds.py:252
+msgid "Are you sure?"
+msgstr "Oletko varma?"
+
+#: manage_feeds.py:260
+msgid "New Instance (List) Name"
+msgstr "Uuden instanssin (listan) nimi"
+
+#: manage_feeds.py:262
+msgid "Add New Instance (List)"
+msgstr "Lisää uusi instanssi (lista)"
+
+#: manage_feeds.py:335
+msgid "Failed to save config file"
+msgstr "Määrityksen tallennus epäonnistui"
+
+#: manage_feeds.py:345
+msgid "Choose a OPML feed file"
+msgstr "Valitse OPML-syötetiedosto"
+
+#: manage_feeds.py:346
+msgid "OPML files"
+msgstr "OPML-tiedostot"
+
+#: manage_feeds.py:349
+msgid "Choose a feed file"
+msgstr "Valitse syötetiedosto"
+
+#: manage_feeds.py:350 manage_feeds.py:411
+msgid "Text files"
+msgstr "Tekstitiedostot"
+
+#: manage_feeds.py:367 manage_feeds.py:416
+msgid "All files"
+msgstr "Kaikki tiedostot"
+
+#: manage_feeds.py:384
+msgid "file imported"
+msgstr "tiedosto tuotu"
+
+#: manage_feeds.py:385
+#, python-format
+msgid "Imported %d feeds"
+msgstr "Tuotu %d syötettä"
+
+#: manage_feeds.py:393
+msgid "Failed to import file"
+msgstr "Tiedoston tuonti epäonnistui"
+
+#: manage_feeds.py:400
+msgid "Save a feed file"
+msgstr "Tallenna syötetiedosto"
+
+#: manage_feeds.py:429
+#, python-format
+msgid "Unable to export file, exception: %s"
+msgstr "Tiedostoa ei voi viedä, poikkeus: %s"
+
+#: manage_feeds.py:433
+msgid "Unable to export file"
+msgstr "Tiedostoa ei voi viedä"
+
+#. metadata.json->description
+msgid "Displays RSS news feeds"
+msgstr "Näyttää valitsemasi RSS-syötteet"
+
+#. metadata.json->name
+msgid "Feeds Reader"
+msgstr "Feeds Reader"
+
+#. settings-schema.json->heading1->description
+msgid "Feed URLs"
+msgstr "Syötteen osoitteet"
+
+#. settings-schema.json->manage_feeds_button->description
+msgid "Manage Feeds..."
+msgstr "Hallinnoi syötteitä..."
+
+#. settings-schema.json->manage_feeds_button->tooltip
+msgid "Launch the feed management app to add/remove/edit feeds"
+msgstr "Hallintasovellus syötteiden lisäämiseksi/poistamiseksi/muokkaamiseksi"
+
+#. settings-schema.json->max_items->units
+msgid "feeds"
+msgstr "Syötteet"
+
+#. settings-schema.json->max_items->description
+msgid "Maximum number of items"
+msgstr "Kohteiden suurin määrä"
+
+#. settings-schema.json->max_items->tooltip
+msgid "Maximum number of items to display for this feed"
+msgstr "Syötteessä näytettävien nimikkeiden enimmäismäärä"
+
+#. settings-schema.json->refresh_interval->units
+msgid "minutes"
+msgstr "minuuttia"
+
+#. settings-schema.json->refresh_interval->description
+msgid "Update interval"
+msgstr "Päivitysväli"
+
+#. settings-schema.json->refresh_interval->tooltip
+msgid "Interval between checking for new items"
+msgstr "Uusien kohteiden tarkistusväli"
+
+#. settings-schema.json->notifications_enabled->description
+msgid "Show notifications for new items"
+msgstr "Näytä ilmoitus uusista kohteista"
+
+#. settings-schema.json->notifications_enabled->tooltip
+msgid "If checked a popup notification will be displayed for new items"
+msgstr "Jos valittuna, uusista kohteista näytetään ilmoitus"
+
+#. settings-schema.json->enable-verbose-logging->description
+msgid "Check this to enable debug logging in Looking Glass"
+msgstr "Valitse ottaaksesi virheenkorjauksen kirjaus käyttöön Looking Glassissa"
+
+#. settings-schema.json->enable-verbose-logging->tooltip
+msgid "Checking this will enable debug level logging"
+msgstr "Tämän valinta ottaa lokin käyttöön virheenkorjaukseen"
+
+#. settings-schema.json->instance_name->description
+msgid "Feed Instance Name"
+msgstr "Syötteen instanssin nimi"
+
+#. settings-schema.json->instance_name->tooltip
+msgid "Do not change, this is modified by the Manage Feeds window."
+msgstr "Älä muuta, tämä on muokattu hallintaikkunassa."
