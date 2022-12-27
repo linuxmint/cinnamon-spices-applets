@@ -1,6 +1,7 @@
 #!/bin/bash
 UUID="Radio3.0@claudiux"
-RCONFIGDIR="$HOME/.cinnamon/configs/$UUID"
+#~ RCONFIGDIR="$HOME/.cinnamon/configs/$UUID"
+RCONFIGDIR="$HOME/.local/share/cinnamon/applets/$UUID/radiodb"
 DBSERVERJSON="$RCONFIGDIR/server-list.json"
 
 # To avoid the risk of obtaining a truncated file because of a process

@@ -8,7 +8,6 @@ import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('XApp', '1.0')
 
-
 import os
 import sys
 from setproctitle import setproctitle
@@ -16,6 +15,7 @@ import gettext
 import json
 import importlib.util
 import traceback
+from pathlib import Path
 
 from gi.repository import Gtk, Gio, XApp
 import config
@@ -291,9 +291,12 @@ class MainWindow(object):
 
     def load_instances(self):
         self.instance_info = []
-        path = "%s/.cinnamon/configs/%s" % (home, self.uuid)
+        old_path = Path("%s/.cinnamon/configs/%s" % (home, self.uuid))
+        path = Path("%s/.config/cinnamon/spices/%s" % (home, self.uuid))
         instances = 0
-        dir_items = sorted(os.listdir(path))
+        new_items = os.listdir(path) if path.exists() else []
+        old_items = os.listdir(old_path) if old_path.exists() else []
+        dir_items = sorted(new_items + old_items)
         try:
             multi_instance = int(self.xlet_meta["max-instances"]) != 1
         except (KeyError, ValueError):
@@ -325,7 +328,7 @@ class MainWindow(object):
                 if not instance_exists:
                     continue
 
-            settings = JSONSettingsHandler(os.path.join(path, item), self.notify_dbus)
+            settings = JSONSettingsHandler(os.path.join(path if item in new_items else old_path, item), self.notify_dbus)
             settings.instance_id = instance_id
             instance_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
             self.instance_stack.add_named(instance_box, instance_id)

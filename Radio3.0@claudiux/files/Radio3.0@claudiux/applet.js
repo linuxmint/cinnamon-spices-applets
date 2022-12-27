@@ -224,6 +224,23 @@ function getImageAtScale(imageFileName, width, height) {
   return actor;
 }
 
+function versionCompare(left, right) {
+  if (typeof left + typeof right != 'stringstring')
+    return false;
+  var a = left.split('.'),
+      b = right.split('.'),
+      i = 0,
+      len = Math.max(a.length, b.length);
+  for (; i < len; i++) {
+    if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
+      return 1;
+    } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
+      return -1;
+    }
+  }
+  return 0;
+}
+
 const APPNAME = "Radio3.0";
 const UUID = APPNAME + "@claudiux";
 
@@ -233,8 +250,16 @@ const RUNTIME_DIR = get_user_runtime_dir();
 const DOT_CONFIG_DIR = HOME_DIR + "/.config/" + APPNAME;
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
-const RADIO30_CONFIG_FILE = HOME_DIR + "/.cinnamon/configs/" + UUID + "/" + UUID + ".json";
-const DB_SERVERS_FILE = HOME_DIR + "/.cinnamon/configs/" + UUID + "/server-list.json";
+const RADIO30_OLD_CONFIG_FILE = HOME_DIR + "/.cinnamon/configs/" + UUID + "/" + UUID + ".json";
+const RADIO30_NEW_CONFIG_FILE = HOME_DIR + "/.config/cinnamon/spices/" + UUID + "/" + UUID + ".json";
+var RADIO30_CONFIG_FILE = "" + RADIO30_OLD_CONFIG_FILE;
+if (  versionCompare(getenv("CINNAMON_VERSION"), "5.6") >= 0 &&
+      !file_test(RADIO30_OLD_CONFIG_FILE, FileTest.EXISTS) ) {
+  RADIO30_CONFIG_FILE = "" + RADIO30_NEW_CONFIG_FILE;
+}
+const RADIO30_SETTINGS_SCHEMA = APPLET_DIR + "/settings-schema.json";
+//~ const DB_SERVERS_FILE = HOME_DIR + "/.cinnamon/configs/" + UUID + "/server-list.json";
+const DB_SERVERS_FILE = APPLET_DIR + "/radiodb/server-list.json";
 const XS_PATH = "%s/xs/xlet-settings.py".format(APPLET_DIR, );
 const APPLET_ICON = APPLET_DIR + "/icons/icon.svg";
 const ANIMATED_ICON = APPLET_DIR + "/icons/animated-symbolic.svg";
@@ -880,6 +905,11 @@ WebRadioReceiverAndRecorder.prototype = {
 
     // User's settings:
     this.settings = new R3AppletSettings(this, UUID, this.instanceId);
+    //~ if (file_test(RADIO30_NEW_CONFIG_FILE, FileTest.EXISTS) && !file_test(RADIO30_CONFIG_FILE, FileTest.EXISTS)) {
+		//~ spawnCommandLineAsync('bash -c "mkdir -p ~/.cinnamon/configs/Radio3.0@claudiux ; cd ~/.cinnamon/configs/Radio3.0@claudiux ; ln %s"'.format(RADIO30_NEW_CONFIG_FILE));
+	//~ }
+
+    
     let userSettings = JSON.parse(to_string(file_get_contents(RADIO30_CONFIG_FILE)[1]));
     this.set_MPV_ALIAS();
     this.get_user_settings();
