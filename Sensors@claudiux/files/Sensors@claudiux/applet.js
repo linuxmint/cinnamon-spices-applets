@@ -780,7 +780,7 @@ class SensorsApplet extends Applet.TextApplet {
 
     this.set_applet_label(_appletLabel);
 
-    log("_actor_style: "+_actor_style, true);
+    //~ log("_actor_style: "+_actor_style, true);
     this.actor.set_style_class_name(_actor_style);
     this._applet_label.set_style_class_name("tcolor"+this.char_color);
 
