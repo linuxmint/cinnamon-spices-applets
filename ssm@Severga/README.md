@@ -3,10 +3,13 @@ This is a simplified Cinnamon applet that provides information about system load
 ## Requirements
 This applet requires:
 
-> gtop system monitoring library package;
-> 'lm-sensors' package (for CPU temperature monitoring);
-> NetworkManager;
-> gnome-system-monitor (is opened on click).
+1) gtop system monitoring library package;
+
+2) 'lm-sensors' package (for CPU temperature monitoring);
+
+3) NetworkManager;
+
+4) gnome-system-monitor (is opened on click).
 
 ## Installation
 Download and enable via Cinnamon Settings.
