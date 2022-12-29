@@ -1,7 +1,7 @@
 {
   "uuid": "kdecapplet@joejoetv",
-  "name": "KDEConnect Applet",
-  "description": "Applet for interacting with Devices connected via KDE COnnect.",
+  "name": "KDE Connect Applet",
+  "description": "Applet for interacting with devices connected via KDE Connect.",
   "comments": "Requires 'zenity' for some features.",
   "version": "1.1.1"
 }
