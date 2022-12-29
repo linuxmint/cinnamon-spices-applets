@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-29 19:25+0100\n"
+"PO-Revision-Date: 2022-12-29 19:26+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:43
+msgid "Applet"
+msgstr "Applet"
+
+#: applet.js:44
+msgid "Desklet"
+msgstr "Desklet"
+
+#: applet.js:45
+msgid "Extension"
+msgstr "Extension"
+
+#: applet.js:48
+msgid "Applets"
+msgstr "Applets"
+
+#: applet.js:49
+msgid "Desklets"
+msgstr "Desklets"
+
+#: applet.js:50
+msgid "Extensions"
+msgstr "Extensions"
+
+#: applet.js:162
+msgid "Show .xsession-errors"
+msgstr "Afficher .xsession-errors"
+
+#: applet.js:173
+msgid "Restart Cinnamon"
+msgstr "Redémarrer Cinnamon"
+
+#: applet.js:184
+msgid "--- Reload Spices ---"
+msgstr "--- Relancer des Spices ---"
+
+#: applet.js:190
+msgid "Reload Applet:"
+msgstr "Relancer cette Applet :"
+
+#: applet.js:204
+msgid "Reload Desklet:"
+msgstr "Relancer cette Desklet :"
+
+#: applet.js:218
+msgid "Reload Extension:"
+msgstr "Relancer cette Extension :"
+
+#: applet.js:232
+msgid "--- View Code ---"
+msgstr "--- Code Source ---"
+
+#: applet.js:238
+msgid "View Applet Code for:"
+msgstr "Consulter le code de l'Applet :"
+
+#: applet.js:252
+msgid "View Desklet Code for:"
+msgstr "Consulter le code de la Desklet :"
+
+#: applet.js:266
+msgid "View Extension Code for:"
+msgstr "Consulter le code de l'Extension :"
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr "Xsession"
+
+#. metadata.json->description
+msgid ""
+"Allows you to restart or open the source code of Spices (applets, desklets, "
+"extensions), display in real-time the contents of your .xsession-errors file "
+"and restart Cinnamon."
+msgstr ""
+"Permet de redémarrer ou d'ouvrir le code source de Spices (applets, "
+"desklets, extensions), d'afficher en temps réel le contenu de votre fichier ."
+"xsession-errors et de redémarrer Cinnamon."
+
+#~ msgid " "
+#~ msgstr " "
