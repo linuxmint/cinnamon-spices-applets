@@ -1,0 +1,93 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-29 19:25+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:43
+msgid "Applet"
+msgstr ""
+
+#: applet.js:44
+msgid "Desklet"
+msgstr ""
+
+#: applet.js:45
+msgid "Extension"
+msgstr ""
+
+#: applet.js:48
+msgid "Applets"
+msgstr ""
+
+#: applet.js:49
+msgid "Desklets"
+msgstr ""
+
+#: applet.js:50
+msgid "Extensions"
+msgstr ""
+
+#: applet.js:162
+msgid "Show .xsession-errors"
+msgstr ""
+
+#: applet.js:173
+msgid "Restart Cinnamon"
+msgstr ""
+
+#: applet.js:184
+msgid "--- Reload Spices ---"
+msgstr ""
+
+#: applet.js:190
+msgid "Reload Applet:"
+msgstr ""
+
+#: applet.js:204
+msgid "Reload Desklet:"
+msgstr ""
+
+#: applet.js:218
+msgid "Reload Extension:"
+msgstr ""
+
+#: applet.js:232
+msgid "--- View Code ---"
+msgstr ""
+
+#: applet.js:238
+msgid "View Applet Code for:"
+msgstr ""
+
+#: applet.js:252
+msgid "View Desklet Code for:"
+msgstr ""
+
+#: applet.js:266
+msgid "View Extension Code for:"
+msgstr ""
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Allows you to restart or open the source code of Spices (applets, desklets, "
+"extensions), display in real-time the contents of your .xsession-errors file"
+" and restart Cinnamon."
+msgstr ""
