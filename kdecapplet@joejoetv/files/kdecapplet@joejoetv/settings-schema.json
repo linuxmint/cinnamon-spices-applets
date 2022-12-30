@@ -1,0 +1,81 @@
+{
+    "layout2": {
+        "type": "layout",
+        "pages": ["general-page", "modules-page"],
+        "general-page": {
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "contextmenu-section",
+                "panel-section",
+                "appearance-section"
+            ]
+        },
+        "modules-page": {
+            "type": "page",
+            "title": "Modules",
+            "sections": [
+                
+            ]
+        },
+        "contextmenu-section": {
+            "type": "section",
+            "title": "Context Menu",
+            "keys": [
+                "showownid",
+                "showkdecver"
+            ]
+        },
+        "panel-section": {
+            "type": "section",
+            "title": "Panel",
+            "keys": [
+                "shownumdevices"
+            ]
+        },
+        "appearance-section": {
+            "type": "section",
+            "title": "Appearance",
+            "keys": [
+                "icontype",
+                "usecustomicon",
+                "customicon"
+            ]
+        }
+    },
+    "showownid": {
+        "type": "switch",
+        "description": "Show ID of this device in the context menu",
+        "default": true
+    },
+    "showkdecver": {
+        "type": "switch",
+        "description": "Show the KDE Connect version in the context menu",
+        "default": true
+    },
+    "shownumdevices": {
+        "type": "switch",
+        "description": "Show the number of connected devices next to the icon",
+        "default": true
+    },
+    "icontype": {
+        "type": "combobox",
+        "description": "Icon type",
+        "options": {
+            "Symbolic": "SYMBOLIC",
+            "Color": "COLOR"
+        },
+        "default": "COLOR"
+    },
+    "usecustomicon": {
+        "type": "switch",
+        "description": "Use custom icon",
+        "default": false
+    },
+    "customicon": {
+        "type": "iconfilechooser",
+        "description": "Custom icon to use",
+        "default": "kdeconnect",
+        "dependency": "usecustomicon"
+    }
+}

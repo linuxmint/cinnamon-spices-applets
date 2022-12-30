@@ -1,14 +1,15 @@
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
-const Util = imports.misc.util;
+const Extension = imports.ui.extension;
+const Settings = imports.ui.settings;
+const PopupMenu = imports.ui.popupMenu;
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
-const Lang = imports.lang;
-const PopupMenu = imports.ui.popupMenu;
-const FileDialog = imports.misc.fileDialog;
 const GLib = imports.gi.GLib;
+const Util = imports.misc.util;
+const FileDialog = imports.misc.fileDialog;
+const Lang = imports.lang;
 const Gettext = imports.gettext;
-const Extension = imports.ui.extension;
 
 const UUID = "kdecapplet@joejoetv";
 
@@ -39,6 +40,81 @@ const FreedesktopDBusInterface = '\
     </interface> \
 </node>';
 const FreedesktopDBusProxy = Gio.DBusProxy.makeProxyWrapper(FreedesktopDBusInterface);
+
+const QCoreApplicationInterface = '\
+<node> \
+    <interface name="org.qtproject.Qt.QCoreApplication"> \
+        <property name="applicationVersion" type="s" access="readwrite" />\
+    </interface> \
+</node>';
+const QCoreApplicationProxy = Gio.DBusProxy.makeProxyWrapper(QCoreApplicationInterface);
+
+const KDEConnectDaemonInterface = '\
+<node> \
+    <interface name="org.kde.kdeconnect.daemon"> \
+        <signal name="deviceAdded"> \
+            <arg name="id" type="s" direction="out" /> \
+        </signal> \
+        <signal name="deviceRemoved"> \
+            <arg name="id" type="s" direction="out" /> \
+        </signal> \
+        <signal name="deviceVisibilityChanged"> \
+            <arg name="id" type="s" direction="out" /> \
+            <arg name="isVisible" type="b" direction="out" /> \
+        </signal> \
+        <signal name="deviceListChanged"> \
+        </signal> \
+        <signal name="announcedNameChanged"> \
+            <arg name="announcedName" type="s" direction="out" /> \
+        </signal> \
+        <method name="forceOnNetworkChange"> \
+        </method> \
+        <method name="announcedName"> \
+            <arg type="s" direction="out" /> \
+        </method> \
+        <method name="devices"> \
+            <arg type="as" direction="out" /> \
+            <arg name="onlyReachable" type="b" direction="in" /> \
+            <arg name="onlyPaired" type="b" direction="in" /> \
+        </method> \
+        <method name="devices"> \
+            <arg type="as" direction="out" /> \
+            <arg name="onlyReachable" type="b" direction="in" /> \
+        </method> \
+        <method name="devices"> \
+            <arg type="as" direction="out" /> \
+        </method> \
+        <method name="deviceNames"> \
+            <arg type="a{ss}" direction="out" /> \
+            <arg name="onlyReachable" type="b" direction="in" /> \
+            <arg name="onlyPaired" type="b" direction="in" /> \
+        </method> \
+        <method name="deviceNames"> \
+            <arg type="a{ss}" direction="out" /> \
+            <arg name="onlyReachable" type="b" direction="in" /> \
+        </method> \
+        <method name="deviceNames"> \
+            <arg type="a{ss}" direction="out" /> \
+        </method> \
+        <method name="deviceIdByName"> \
+            <arg type="s" direction="out" /> \
+            <arg name="name" type="s" direction="in" /> \
+        </method> \
+        <method name="openConfiguration"> \
+            <arg name="deviceId" type="s" direction="in" /> \
+            <arg name="pluginId" type="s" direction="in" /> \
+        </method> \
+        <method name="openConfiguration"> \
+            <arg name="deviceId" type="s" direction="in" /> \
+        </method> \
+        <method name="openConfiguration"> \
+        </method> \
+        <method name="selfId"> \
+            <arg type="s" direction="out" /> \
+        </method> \
+    </interface> \
+</node>';
+const KDEConnectDaemonProxy = Gio.DBusProxy.makeProxyWrapper(KDEConnectDaemonInterface);
 
 // l10n support
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
@@ -124,6 +200,8 @@ class KDEConnectApplet extends Applet.TextIconApplet {
 
         this.metadata = metadata;
 
+        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+
         // Map of device ID's to Device Object 
         this.devices = {}
 
@@ -131,6 +209,13 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         // - versionLevel: Level corresponding to KDE Connect version differences, 0 is lowest supported version(1.3)
         // - zenitySupported: Flag if zenity is installed
         this.compatMode = {versionLevel: 0, zenitySupported: false};
+
+        // Check if zenity is installed
+        this.compatMode.zenitySupported = this.checkZenity();
+
+        if (this.compatMode.zenitySupported == false) {
+            this.warn(_("Zenity is not available, some features might not be (fully) available!"))
+        }
 
         // Create menu manager and popup menu
         this.popupMenu = new Applet.AppletPopupMenu(this, orientation);
@@ -208,18 +293,46 @@ class KDEConnectApplet extends Applet.TextIconApplet {
     }
 
     enterAvailableState() {
-        // We only want to enter if we're not already in the state
-        if (this.kdeconnectAvailable == false) {
-            // Set Flag
-            this.kdeconnectAvailable = true;
-                
-            
-            this.info("Entered Available State!");
+        // This should only be called when entering for the first time or when we were previously in the unavailable state
+        // Set Flag
+        this.kdeconnectAvailable = true;
+        
+        // Get KDE Connect version
+        try {
+            let qtCoreProxy = new QCoreApplicationProxy(Gio.DBus.session, KDEConnectDBusName, "/MainApplication");
+            let versionArray = qtCoreProxy.applicationVersion.split(".");
+            this.compatMode.versionLevel = this.getVersionLevel(versionArray);
+        } catch (error) {
+            this.error("Error while getting KDE Connect version: " + error);
+            this.warn("Resorting to default version compat level(1.3)");
         }
+
+        try {
+            this.kdecProxy = new KDEConnectDaemonProxy(Gio.DBus.session, KDEConnectDBusName, "/modules/kdeconnect");
+
+            // TODO: Impelent first update logic
+            // TODO: Think about if the signals should be connected after or before the first content update
+
+            // Connect Signals
+            this._onAnnouncedNameChanged = this.kdecProxy.connectSignal("announcedNameChanged", this.onAnnouncedNameChanged.bind(this));
+            this._onDeviceListChanged = this.kdecProxy.connectSignal("deviceListChanged", this.onDeviceListChanged.bind(this));
+
+
+        } catch (error) {
+            this.error("Error while communicating with the KDE Connect DBus service: " + error);
+        }
+        
+        
+        this.info("Entered Available State!");
 
     }
 
-    updateMenu() {
+    getVersionLevel(versionArray) {
+        //TODO: Implement
+        return 0;
+    }
+
+    updateContent() {
 
     }
     
@@ -243,14 +356,50 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         }
     }
 
+    onAnnouncedNameChanged(proxy, sender, [name]) {
+        this.info("AnnouncedNameChanged: "+name);
+        //TODO: Implement
+    }
+
+    onDeviceListChanged(proxy, sender) {
+        this.info("DeviceListChanged");
+        //TODO: Implement
+    }
+
     on_applet_removed_from_panel() {
         // Bravo Six, Going Dark
 
-        // TODO: Disconnect other signals
+        // TODO: Disconnect more callbacks and stuff
+
+        if (typeof this.kdecProxy !== "undefined") {
+            if (this._onAnnouncedNameChanged) {
+                this.kdecProxy.disconnectSignal(this._onAnnouncedNameChanged)
+            }
+            if (this._onDeviceListChanged) {
+                this.kdecProxy.disconnectSignal(this._onDeviceListChanged)
+            }
+        }
 
         // Disconnect signal callback for NameAcquired
         if (typeof this._onNameOwnerChanged !== "undefined" && typeof this.dbusProxy !== "undefined") {
             this.dbusProxy.disconnectSignal(this._onNameOwnerChanged);
+        }
+    }
+
+    checkZenity() {
+        try {
+            let [success, stdout] = GLib.spawn_command_line_sync("zenity --version");
+
+            if (success && stdout) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (error) {
+            this.error(error);
+            return false;
         }
     }
 }
