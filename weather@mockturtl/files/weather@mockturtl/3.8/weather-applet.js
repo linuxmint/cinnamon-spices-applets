@@ -16566,16 +16566,15 @@ class UIHourlyForecasts {
             const ui = this.hourlyForecasts[index];
             const hourWidth = ui.Hour.get_preferred_width(-1)[1];
             const iconWidth = ui.Icon.get_preferred_width(-1)[1];
-            let percipVolumeWidth = ui.PrecipVolume.get_preferred_width(-1)[1];
+            const percipVolumeWidth = ui.PrecipVolume.get_preferred_width(-1)[1];
             const percipChanceWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
-            let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
+            const summaryWidth = ui.Summary.get_preferred_width(-1)[1];
             const temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
             const precipitationWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
             if (precipitationWidth == null || temperatureWidth == null ||
                 hourWidth == null || iconWidth == null || summaryWidth == null ||
                 percipVolumeWidth == null || percipChanceWidth == null)
                 continue;
-            summaryWidth = Math.min(summaryWidth, 70);
             if (requiredWidth < hourWidth)
                 requiredWidth = hourWidth;
             if (requiredWidth < iconWidth)
