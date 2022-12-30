@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.2.12
+
+* Minor style changes
+* Make "Location Label Override" behavior identical to Panel label override.
+* Try to make hourly weather elements slimmer by putting precipitation change and volume in different rows
+* Update luxon and suncalc
+
 ## 3.2.11
 
 * Fix issue where refresh loop wouldn't ever resume after a single configuration error  
