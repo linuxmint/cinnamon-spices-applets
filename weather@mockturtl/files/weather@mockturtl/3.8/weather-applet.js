@@ -8839,6 +8839,7 @@ function GenerateLocationText(weather, config) {
 }
 function InjectValues(text, weather, config) {
     var _a, _b, _c, _d, _e, _f, _g, _h;
+    const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
     return text.replace(/{t}/g, (_a = TempToUserConfig(weather.temperature, config, false)) !== null && _a !== void 0 ? _a : "")
         .replace(/{u}/g, UnitToUnicode(config.TemperatureUnit))
         .replace(/{c}/g, weather.condition.main)
@@ -8853,7 +8854,8 @@ function InjectValues(text, weather, config) {
         .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
         .replace(/{city}/g, (_e = weather.location.city) !== null && _e !== void 0 ? _e : "")
         .replace(/{country}/g, (_f = weather.location.country) !== null && _f !== void 0 ? _f : "")
-        .replace(/{search_entry}/g, (_h = (_g = config.CurrentLocation) === null || _g === void 0 ? void 0 : _g.entryText) !== null && _h !== void 0 ? _h : "");
+        .replace(/{search_entry}/g, (_h = (_g = config.CurrentLocation) === null || _g === void 0 ? void 0 : _g.entryText) !== null && _h !== void 0 ? _h : "")
+        .replace(/{last_updated}/g, lastUpdatedTime);
 }
 function CapitalizeFirstLetter(description) {
     if ((description == undefined || description == null)) {
@@ -15149,6 +15151,7 @@ class Config {
         this.ShowBothTempUnitsChanged = new Event();
         this.DisplayWindAsTextChanged = new Event();
         this.AlwaysShowHourlyWeatherChanged = new Event();
+        this.TooltipTextOverrideChanged = new Event();
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.textColorStyle = null;
@@ -15550,6 +15553,10 @@ const Keys = {
     ALWAYS_SHOW_HOURLY: {
         key: "alwaysShowHourlyWeather",
         prop: "AlwaysShowHourlyWeather"
+    },
+    TOOLTIP_TEXT_OVERRIDE: {
+        key: "tooltipTextOverride",
+        prop: "TooltipTextOverride"
     }
 };
 
@@ -17384,6 +17391,7 @@ class WeatherApplet extends TextIconApplet {
         this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+        this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
     }
     get CurrentData() {
         return this.currentWeatherInfo;
@@ -17495,9 +17503,7 @@ class WeatherApplet extends TextIconApplet {
         }
     }
     DisplayWeather(weather) {
-        const location = GenerateLocationText(weather, this.config);
-        const lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
-        this.SetAppletTooltip(`${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`);
+        this.SetAppletTooltip(weather, this.config, this.config._tooltipTextOverride);
         this.DisplayWeatherOnLabel(weather);
         this.SetAppletIcon(weather.condition.icons, weather.condition.customIcon);
         return true;
@@ -17530,7 +17536,13 @@ class WeatherApplet extends TextIconApplet {
             label = InjectValues(this.config._panelTextOverride, weather, this.config);
         this.SetAppletLabel(label);
     }
-    SetAppletTooltip(msg) {
+    SetAppletTooltip(weather, config, override) {
+        const location = GenerateLocationText(weather, this.config);
+        const lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
+        let msg = `${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`;
+        if (NotEmpty(override)) {
+            msg = InjectValues(override, weather, config);
+        }
         this.set_applet_tooltip(msg);
     }
     SetAppletIcon(iconNames, customIcon) {

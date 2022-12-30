@@ -126,6 +126,8 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
 		this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
 		this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+
+		this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
 	}
 
 	public Locked(): boolean {
@@ -285,10 +287,7 @@ export class WeatherApplet extends TextIconApplet {
 
 	/** Displays weather info in applet's panel */
 	private DisplayWeather(weather: WeatherData): boolean {
-		const location = GenerateLocationText(weather, this.config);
-
-		const lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
-		this.SetAppletTooltip(`${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`);
+		this.SetAppletTooltip(weather, this.config, this.config._tooltipTextOverride);
 		this.DisplayWeatherOnLabel(weather);
 		this.SetAppletIcon(weather.condition.icons, weather.condition.customIcon);
 		return true;
@@ -336,7 +335,14 @@ export class WeatherApplet extends TextIconApplet {
 		this.SetAppletLabel(label);
 	}
 
-	private SetAppletTooltip(msg: string) {
+	private SetAppletTooltip(weather: WeatherData, config: Config, override: string) {
+		const location = GenerateLocationText(weather, this.config);
+		const lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
+		let msg = `${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`;
+
+		if (NotEmpty(override)) {
+			msg = InjectValues(override, weather, config);
+		}
 		this.set_applet_tooltip(msg);
 	}
 

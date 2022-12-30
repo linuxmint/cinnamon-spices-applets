@@ -129,6 +129,7 @@ export class Config {
 	public readonly _logLevel!: LogLevel;
 	public readonly _selectedLogPath!: string;
 	public readonly _panelTextOverride!: string;
+	public readonly _tooltipTextOverride!: string;
 
 	public readonly DataServiceChanged = new Event<Config, Services>();
 	public readonly ApiKeyChanged = new Event<Config, string>();
@@ -164,6 +165,7 @@ export class Config {
 	public readonly ShowBothTempUnitsChanged = new Event<Config, boolean>();
 	public readonly DisplayWindAsTextChanged = new Event<Config, boolean>();
 	public readonly AlwaysShowHourlyWeatherChanged = new Event<Config, boolean>();
+	public readonly TooltipTextOverrideChanged = new Event<Config, string>();
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
@@ -687,6 +689,10 @@ export class Config {
 	ALWAYS_SHOW_HOURLY: {
 		key: "alwaysShowHourlyWeather",
 		prop: "AlwaysShowHourlyWeather"
+	},
+	TOOLTIP_TEXT_OVERRIDE: {
+		key: "tooltipTextOverride",
+		prop: "TooltipTextOverride"
 	}
 } as const
 

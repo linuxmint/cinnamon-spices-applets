@@ -93,7 +93,8 @@
 			"keys": [
 				"showTextInPanel",
 				"showCommentInPanel",
-				"tempTextOverride"
+				"tempTextOverride",
+				"tooltipTextOverride"
 			]
 		},
 		"presentation": {
@@ -337,6 +338,12 @@
 		"default": "",
 		"description": "Override label on panel",
 		"tooltip": "Some of the available values are: {c} is condition, {t} is temperature and {u} is unit.\nCan be used if label does not fit on vertical panel, among other smart things."
+	},
+	"tooltipTextOverride": {
+		"type": "entry",
+		"default": "",
+		"description": "Override tooltip on panel",
+		"tooltip": "Has the same behavior and available values as 'Override label on panel'."
 	},
 	"useCustomAppletIcons": {
 		"type": "checkbox",

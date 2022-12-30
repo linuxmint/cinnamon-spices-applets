@@ -57,6 +57,7 @@ export function GenerateLocationText(weather: WeatherData, config: Config) {
 }
 
 export function InjectValues(text: string, weather: WeatherData, config: Config): string {
+	const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
 	return text.replace(/{t}/g, TempToUserConfig(weather.temperature, config, false) ?? "")
 			   .replace(/{u}/g, UnitToUnicode(config.TemperatureUnit))
 			   .replace(/{c}/g, weather.condition.main)
@@ -71,7 +72,8 @@ export function InjectValues(text: string, weather: WeatherData, config: Config)
 			   .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
 			   .replace(/{city}/g, weather.location.city ?? "")
 			   .replace(/{country}/g, weather.location.country ?? "")
-			   .replace(/{search_entry}/g, config.CurrentLocation?.entryText ?? "");
+			   .replace(/{search_entry}/g, config.CurrentLocation?.entryText ?? "")
+			   .replace(/{last_updated}/g, lastUpdatedTime);
 }
 
 export function CapitalizeFirstLetter(description: string): string {
