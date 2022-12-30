@@ -1,0 +1,103 @@
+{
+    "head": {
+        "type": "header",
+        "description": "General Settings"
+    },
+    "refreshInterval-spinner": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 1,
+        "max": 300,
+        "step": 1,
+        "units": "seconds",
+        "description": "Refresh Interval for Display",
+        "tooltip": "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine. This also governs the flash speed."
+    },
+    "alertPercentage": {
+        "type": "scale",
+        "default": 25,
+        "min": 10,
+        "max": 40,
+        "step": 1,
+        "description": "Percentage Battery Charge at which Alert Displayed",
+        "tooltip": "Percentage of Battery Charge at which Orange Warning Background is displayed - It is also shown and can be adjusted in the Applet left click menu"
+    },
+    "head1": {
+        "type": "header",
+        "description": "Display Mode"
+    },
+    "displayType": {
+        "type": "combobox",
+        "default": "classic",
+        "options": {
+            "Classic - Battery Percentage with extended messages for horizontal panel": "classic",
+            "Classic Plus - Classic with addition of Battery Icon": "classicPlus",
+            "Compact - Battery Percentage without extended messages": "compact",
+            "Compact Plus - Compact with addition of Battery Icon": "compactPlus",
+            "Icon Only on coloured background indicating status": "icon"
+        },
+        "description": "Toolbar Display Type",
+        "tooltip": "This feature offers the Classic (original) display with optional battery icon and some more compact displays suitable for a vertical panel (CompactCompact Plus and Icon Only)"
+    },
+    "head2": {
+        "type": "header",
+        "description": "Battery Low Alert Settings"
+    },
+    "useBatteryLowSound": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Provide audible alerts when Battery Low and at Shutdown Level",
+        "tooltip": "Must have `sox` installed. Limited number of sound file types supported (.oga and .wav)"
+    },
+    "chooseBatteryLowSound": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Allow choice of audible alert file when Battery Low and at Shutdown Level",
+        "tooltip": "Must have `sox` installed. Limited number of sound file types supported in versions < 4.2"
+    },
+    "batteryLowSound": {
+        "type": "soundfilechooser",
+        "default": "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga",
+        "dependency": "chooseBatteryLowSound",
+        "description": "Choose sound file to use when Battery is Low",
+        "tooltip": "Please ensure the volume is set sensibly in public places, especially if a long or loud file is specified",
+        "event-sounds": false
+    },
+    "batteryShutdownSound": {
+        "type": "soundfilechooser",
+        "default": "/usr/share/sounds/freedesktop/stereo/complete.oga",
+        "dependency": "chooseBatteryLowSound",
+        "description": "Sound file to use when Battery is at Shutdown Level",
+        "tooltip": "Please ensure the volume is set sensibly in public places - do not specify a long or loud file at Shutdown",
+        "event-sounds": false
+    },
+    "notifyBatteryLowSound": {
+        "type": "checkbox",
+        "default": true,
+        "dependency": "chooseBatteryLowSound",
+        "description": "Provide notification when user specified sound file is in use (Recommended)",
+        "tooltip": "To remind that the volume may need to be set sensibly in public places"
+    },
+    "head3": {
+        "type": "header",
+        "description": "Household Tasks"
+    },
+    "deleteTempraryFiles": {
+        "type": "button",
+        "description": "Delete temporary files after upgrade to applet version 1.4",
+        "callback": "deleteTemporaryFiles",
+        "tooltip": "Applet versions prior to 1.4 used temporary files in the home directory. These are not needed anymore and can be deleted."
+    },
+    "head4": {
+        "type": "header",
+        "description": "Advanced"
+    },
+    "customBatteryPath": {
+        "default": "",
+        "type": "filechooser",
+        "description": "Path to battery capacity directory (device path)",
+        "tooltip": "Choose your own power_supply object e.g. for monitoring your secondary battery.\n\nDefault:\n/sys/class/power_supply/BAT0",
+        "allow-none": true,
+        "select-dir": true
+    }
+}

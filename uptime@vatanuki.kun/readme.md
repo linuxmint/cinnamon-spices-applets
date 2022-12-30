@@ -16,11 +16,22 @@ The code for this applet can be found under uptime@vatanuki.kun here : [cinnamon
   * **%M** for number of minutes with leading zero (if less than ten)
 * You can add a volentary prefix, for example : **Uptime :** 4 days and 3 hours
 * You can choose a minimal mode, where only the icon will be shown in your panel, and the time will be presented (as choosen above) in a tooltip.
+* You can show or hide the icon (in non-minimal mode)
 * You can style the text (in non-minimal mode) with CSS
 
-### Example
+### Examples
 
-![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/uptime%40vatanuki.kun/screenshot-suggestion.png)
+![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/uptime%40vatanuki.kun/screenshot.png)
+
+![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/uptime%40vatanuki.kun/screenshot2.png)
+
+![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/uptime%40vatanuki.kun/screenshot3.png)
+
+![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/uptime%40vatanuki.kun/screenshot4.png)
+
+![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/uptime%40vatanuki.kun/screenshot5.png)
+
+![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/uptime%40vatanuki.kun/screenshot_old.png)
 
 ### Contributing
 

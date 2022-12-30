@@ -1,9 +1,28 @@
 {
     "max-instances": "1",
     "description": "Displays Charge as Percentage and allows Alerts and Actions",
-    "name": "Battery  Applet with Monitoring and Shutdown (BAMS)",
-    "version": "1.4.1",
+    "name": "Battery Applet with Monitoring and Shutdown (BAMS)",
+    "version": "1.5.0",
     "uuid": "batterymonitor@pdcurtis",
     "multiversion": true,
-    "cinnamon-version": ["2.2","2.4","2.6","2.8","3.0","3.2","3.4","3.6","3.8","4.0","4.2","4.4","4.6","4.8","5.0","5.2"]
+    "cinnamon-version": [
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8",
+        "3.0",
+        "3.2",
+        "3.4",
+        "3.6",
+        "3.8",
+        "4.0",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.0",
+        "5.2",
+        "5.4",
+        "5.6"
+    ]
 }

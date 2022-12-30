@@ -1,0 +1,23 @@
+{
+
+  "update-interval-when-no-internet": {
+    "type": "spinbutton",
+    "default": 3,
+    "min": 1,
+    "max": 3600,
+    "step": 1,
+    "units": "s",
+    "description": "Update interval when no internet connection"
+  },
+  
+  "update-interval-when-internet": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 1,
+    "max": 3600,
+    "step": 1,
+    "units": "s",
+    "description": "Update interval when internet is detected"
+  }
+  
+}

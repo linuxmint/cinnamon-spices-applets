@@ -1,0 +1,8 @@
+{
+  "description": "The Ultimate Internet Radio Receiver & Recorder for Cinnamon",
+  "max-instances": 1,
+  "version": "1.0.0",
+  "uuid": "Radio3.0@claudiux",
+  "name": "Radio3.0",
+  "author": "claudiux"
+}
