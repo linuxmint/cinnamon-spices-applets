@@ -50,10 +50,28 @@ export function GenerateLocationText(weather: WeatherData, config: Config) {
 
 	// Overriding Location
 	if (NotEmpty(config._locationLabelOverride)) {
-		location = config._locationLabelOverride;
+		location = InjectValues(config._locationLabelOverride, weather, config);
 	}
 
 	return location;
+}
+
+export function InjectValues(text: string, weather: WeatherData, config: Config): string {
+	return text.replace(/{t}/g, TempToUserConfig(weather.temperature, config, false) ?? "")
+			   .replace(/{u}/g, UnitToUnicode(config.TemperatureUnit))
+			   .replace(/{c}/g, weather.condition.main)
+			   .replace(/{c_long}/g, weather.condition.description)
+			   .replace(/{dew_point}/g, TempToUserConfig(weather.dewPoint, config, false) ?? "")
+			   .replace(/{humidity}/g, weather.humidity?.toString() ?? "")
+			   .replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "")
+			   .replace(/{pressure_unit}/g, config._pressureUnit)
+			   .replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "")
+			   .replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
+			   .replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "")
+			   .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
+			   .replace(/{city}/g, weather.location.city ?? "")
+			   .replace(/{country}/g, weather.location.country ?? "")
+			   .replace(/{search_entry}/g, config.CurrentLocation?.entryText ?? "");
 }
 
 export function CapitalizeFirstLetter(description: string): string {

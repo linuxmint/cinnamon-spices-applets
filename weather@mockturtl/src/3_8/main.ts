@@ -10,7 +10,7 @@ import { Config, ServiceClassMapping, Services } from "./config";
 import { WeatherLoop } from "./loop";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
 import { UI } from "./ui";
-import { AwareDateString, CapitalizeFirstLetter, CompassDirectionText, delay, ExtraFieldToUserUnits, GenerateLocationText, MPStoUserUnits, NotEmpty, PercentToLocale, PressToUserUnits, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
+import { AwareDateString, CapitalizeFirstLetter, CompassDirectionText, delay, ExtraFieldToUserUnits, GenerateLocationText, InjectValues, MPStoUserUnits, NotEmpty, PercentToLocale, PressToUserUnits, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
 import { HttpLib, HttpError, Method, HTTPParams, HTTPHeaders, ErrorResponse, Response } from "./lib/httpLib";
 import { Logger } from "./lib/logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
@@ -330,24 +330,8 @@ export class WeatherApplet extends TextIconApplet {
 		}
 
 		// Overriding temperature panel label
-		if (NotEmpty(this.config._panelTextOverride)) {
-			label = this.config._panelTextOverride
-				.replace(/{t}/g, TempToUserConfig(temperature, this.config, false) ?? "")
-				.replace(/{u}/g, UnitToUnicode(this.config.TemperatureUnit))
-				.replace(/{c}/g, mainCondition)
-				.replace(/{c_long}/g, weather.condition.description)
-				.replace(/{dew_point}/g, TempToUserConfig(weather.dewPoint, this.config, false) ?? "")
-				.replace(/{humidity}/g, weather.humidity?.toString() ?? "")
-				.replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, this.config._pressureUnit).toString() : "")
-				.replace(/{pressure_unit}/g, this.config._pressureUnit)
-				.replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, this.config) : "")
-				.replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
-				.replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, this.config.WindSpeedUnit) : "")
-				.replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
-				.replace(/{city}/g, weather.location.city ?? "")
-				.replace(/{country}/g, weather.location.country ?? "")
-				.replace(/{search_entry}/g, this.config.CurrentLocation?.entryText ?? "");
-		}
+		if (NotEmpty(this.config._panelTextOverride))
+			label = InjectValues(this.config._panelTextOverride, weather, this.config);
 
 		this.SetAppletLabel(label);
 	}

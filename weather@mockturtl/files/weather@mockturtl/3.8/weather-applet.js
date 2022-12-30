@@ -8833,9 +8833,27 @@ function GenerateLocationText(weather, config) {
         location = Math.round(weather.coord.lat * 10000) / 10000 + ", " + Math.round(weather.coord.lon * 10000) / 10000;
     }
     if (NotEmpty(config._locationLabelOverride)) {
-        location = config._locationLabelOverride;
+        location = InjectValues(config._locationLabelOverride, weather, config);
     }
     return location;
+}
+function InjectValues(text, weather, config) {
+    var _a, _b, _c, _d, _e, _f, _g, _h;
+    return text.replace(/{t}/g, (_a = TempToUserConfig(weather.temperature, config, false)) !== null && _a !== void 0 ? _a : "")
+        .replace(/{u}/g, UnitToUnicode(config.TemperatureUnit))
+        .replace(/{c}/g, weather.condition.main)
+        .replace(/{c_long}/g, weather.condition.description)
+        .replace(/{dew_point}/g, (_b = TempToUserConfig(weather.dewPoint, config, false)) !== null && _b !== void 0 ? _b : "")
+        .replace(/{humidity}/g, (_d = (_c = weather.humidity) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : "")
+        .replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "")
+        .replace(/{pressure_unit}/g, config._pressureUnit)
+        .replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "")
+        .replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
+        .replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "")
+        .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
+        .replace(/{city}/g, (_e = weather.location.city) !== null && _e !== void 0 ? _e : "")
+        .replace(/{country}/g, (_f = weather.location.country) !== null && _f !== void 0 ? _f : "")
+        .replace(/{search_entry}/g, (_h = (_g = config.CurrentLocation) === null || _g === void 0 ? void 0 : _g.entryText) !== null && _h !== void 0 ? _h : "");
 }
 function CapitalizeFirstLetter(description) {
     if ((description == undefined || description == null)) {
@@ -17483,7 +17501,7 @@ class WeatherApplet extends TextIconApplet {
         return true;
     }
     DisplayWeatherOnLabel(weather) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+        var _a;
         const temperature = weather.temperature;
         const mainCondition = CapitalizeFirstLetter(weather.condition.main);
         let label = "";
@@ -17506,24 +17524,8 @@ class WeatherApplet extends TextIconApplet {
                 }
             }
         }
-        if (NotEmpty(this.config._panelTextOverride)) {
-            label = this.config._panelTextOverride
-                .replace(/{t}/g, (_b = TempToUserConfig(temperature, this.config, false)) !== null && _b !== void 0 ? _b : "")
-                .replace(/{u}/g, UnitToUnicode(this.config.TemperatureUnit))
-                .replace(/{c}/g, mainCondition)
-                .replace(/{c_long}/g, weather.condition.description)
-                .replace(/{dew_point}/g, (_c = TempToUserConfig(weather.dewPoint, this.config, false)) !== null && _c !== void 0 ? _c : "")
-                .replace(/{humidity}/g, (_e = (_d = weather.humidity) === null || _d === void 0 ? void 0 : _d.toString()) !== null && _e !== void 0 ? _e : "")
-                .replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, this.config._pressureUnit).toString() : "")
-                .replace(/{pressure_unit}/g, this.config._pressureUnit)
-                .replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, this.config) : "")
-                .replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
-                .replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, this.config.WindSpeedUnit) : "")
-                .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
-                .replace(/{city}/g, (_f = weather.location.city) !== null && _f !== void 0 ? _f : "")
-                .replace(/{country}/g, (_g = weather.location.country) !== null && _g !== void 0 ? _g : "")
-                .replace(/{search_entry}/g, (_j = (_h = this.config.CurrentLocation) === null || _h === void 0 ? void 0 : _h.entryText) !== null && _j !== void 0 ? _j : "");
-        }
+        if (NotEmpty(this.config._panelTextOverride))
+            label = InjectValues(this.config._panelTextOverride, weather, this.config);
         this.SetAppletLabel(label);
     }
     SetAppletTooltip(msg) {
