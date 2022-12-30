@@ -228,7 +228,7 @@ export class CurrentWeather {
 
 		const box = new BoxLayout();
 		box.add(this.previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
-		box.add(this.location, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
+		box.add(this.location, { x_fill: false, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
 		box.add(this.nextLocationButton.actor, { x_fill: false, x_align: Align.END, y_align: Align.MIDDLE, expand: false });
 		return box;
 	}

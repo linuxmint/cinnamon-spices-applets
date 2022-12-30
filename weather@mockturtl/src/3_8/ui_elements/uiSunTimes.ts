@@ -44,14 +44,14 @@ export class SunTimesUI {
         const sunsetIcon = new Icon({
             icon_name: "sunset-symbolic",
             icon_type: IconType.SYMBOLIC,
-            icon_size: 25,
+            icon_size: 24,
             style: textColorStyle
         });
 
         const sunriseIcon = new Icon({
             icon_name: "sunrise-symbolic",
             icon_type: IconType.SYMBOLIC,
-            icon_size: 25,
+            icon_size: 24,
             style: textColorStyle
         });
 
