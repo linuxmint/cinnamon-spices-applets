@@ -16704,7 +16704,7 @@ class UIHourlyForecasts {
 
 
 
-const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button } = imports.gi.St;
+const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button, Side: uiBar_Side } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
 const STYLE_BAR = 'bottombar';
 class UIBar {
@@ -16722,13 +16722,15 @@ class UIBar {
     }
     SwitchButtonToShow() {
         var _a;
+        const icon = this.app.Orientation == uiBar_Side.BOTTOM ? "custom-up-arrow-symbolic" : "custom-down-arrow-symbolic";
         if (!!((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child))
-            this.hourlyButton.actor.child.icon_name = "custom-down-arrow-symbolic";
+            this.hourlyButton.actor.child.icon_name = icon;
     }
     SwitchButtonToHide() {
         var _a;
+        const icon = this.app.Orientation == uiBar_Side.BOTTOM ? "custom-down-arrow-symbolic" : "custom-up-arrow-symbolic";
         if (!!((_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.child))
-            this.hourlyButton.actor.child.icon_name = "custom-up-arrow-symbolic";
+            this.hourlyButton.actor.child.icon_name = icon;
     }
     DisplayErrorMessage(msg) {
         if (this._timestamp == null)
@@ -16790,7 +16792,7 @@ class UIBar {
             child: new uiBar_Icon({
                 icon_type: uiBar_IconType.SYMBOLIC,
                 icon_size: config.CurrentFontSize + 3,
-                icon_name: "custom-down-arrow-symbolic",
+                icon_name: this.app.Orientation == uiBar_Side.BOTTOM ? "custom-up-arrow-symbolic" : "custom-down-arrow-symbolic",
                 style: "margin: 2px 5px;"
             }),
         });
