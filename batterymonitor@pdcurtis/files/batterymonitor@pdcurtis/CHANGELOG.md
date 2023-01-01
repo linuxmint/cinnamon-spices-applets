@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.5.1
+ * Improved the logic for determining the default kernel path (some systems default to BAT1 instead of BAT0)
+   - Fixes "-- Warning" permanent message and removes the need for manual configuration in the single battery condition to address it
+
 ### 1.5.0
  * Switched from `upower` to the power status module provided by the kernel at /sys/class/power_supply/BAT0
    (`upower` updates on a two minute interval while the kernel module updates live and the applet supports smaller increments, increasing the overall accuracy of the applet.)

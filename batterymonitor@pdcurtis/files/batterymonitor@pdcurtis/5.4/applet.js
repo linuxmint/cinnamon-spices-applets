@@ -14,6 +14,7 @@ const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu; // Needed for menus
 const Lang = imports.lang; // Needed for menus
 const GLib = imports.gi.GLib; // Needed for starting programs and translations
+const Gio = imports.gi.Gio; // Needed for path/file checks
 const Mainloop = imports.mainloop; // Needed for timer update loop
 const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in Alert
 const Gettext = imports.gettext; // Needed for translations
@@ -102,7 +103,6 @@ MyApplet.prototype = {
             this.changelog = metadata.path + "/../CHANGELOG.md";
             this.helpfile = metadata.path + "/../README.md";
             this.cssfile = metadata.path + "/stylesheet.css";
-            this.batteryPath = "/sys/class/power_supply/BAT0";
             this.battery100 = metadata.path + "/icons/battery-100.png";
             this.battery080 = metadata.path + "/icons/battery-080.png";
             this.battery060 = metadata.path + "/icons/battery-060.png";
@@ -115,6 +115,19 @@ MyApplet.prototype = {
             this.batteryCharging040 = metadata.path + "/icons/battery-charging-040.png";
             this.batteryChargingCaution = metadata.path + "/icons/battery-charging-caution.png";
             this.batteryChargingLow = metadata.path + "/icons/battery-charging-low.png";
+
+            // Determine best default battery path if possible
+            let batteryBasePath = "/sys/class/power_supply";
+            let batteryObjectDir, batteryCapacityFile, batteryStatusFile;
+            for (let i = 0; i < 10; i++) {
+                batteryObjectDir = "BAT" + i.toString();
+                this.batteryPath = batteryBasePath + '/' + batteryObjectDir;
+                batteryCapacityFile = Gio.File.new_for_path(this.batteryPath + '/capacity');
+                batteryStatusFile = Gio.File.new_for_path(this.batteryPath + '/status');
+                if (batteryCapacityFile.query_exists(null) && batteryStatusFile.query_exists(null)) {
+                    break;
+                }
+            }
 
             // Set initial value
             this.set_applet_icon_path(this.batteryCharging100);

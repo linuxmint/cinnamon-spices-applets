@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-08 22:29-0500\n"
-"PO-Revision-Date: 2022-12-08 22:33-0500\n"
+"POT-Creation-Date: 2022-12-27 19:21-0500\n"
+"PO-Revision-Date: 2022-12-29 13:38-0500\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1.1\n"
 
-#: 5.4/applet.js:135 3.2/applet.js:135
+#: 5.4/applet.js:139 3.2/applet.js:135
 msgid "--%"
 msgstr "--%"
 
-#: 5.4/applet.js:136 3.2/applet.js:136
+#: 5.4/applet.js:140 3.2/applet.js:136
 msgid "Waiting"
 msgstr "Venter"
 
-#: 5.4/applet.js:160 3.2/applet.js:165
+#: 5.4/applet.js:164 3.2/applet.js:165
 msgid "Some Dependencies not Installed"
 msgstr "Nogle afhængigheder er ikke installerede"
 
-#: 5.4/applet.js:160
+#: 5.4/applet.js:164
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
 "functionality including notifications and audible alerts .\n"
@@ -42,11 +42,11 @@ msgstr ""
 "\n"
 "Læs hjælpefilen for information om, hvordan de installeres."
 
-#: 5.4/applet.js:170 3.2/applet.js:198
+#: 5.4/applet.js:174 3.2/applet.js:198
 msgid "Battery Monitor Applet"
 msgstr "Batteriovervågning"
 
-#: 5.4/applet.js:170
+#: 5.4/applet.js:174
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -58,44 +58,44 @@ msgstr ""
 "Sikr dig, at lydstyrken er fornuftigt indstillet på offentlige steder,\n"
 "især hvis en lang, høj fil er angivet\n"
 
-#: 5.4/applet.js:243 3.2/applet.js:297
+#: 5.4/applet.js:247 3.2/applet.js:297
 msgid "Open Power Statistics"
 msgstr "Åbn strømstatistik"
 
-#: 5.4/applet.js:249 3.2/applet.js:303
+#: 5.4/applet.js:253 3.2/applet.js:303
 msgid "Open System Monitor"
 msgstr "Åbn systemovervågning"
 
-#: 5.4/applet.js:258
+#: 5.4/applet.js:262
 msgid "Housekeeping and System Submenu"
 msgstr "Vedligehold og systemundermenu"
 
-#: 5.4/applet.js:261 3.2/applet.js:315
+#: 5.4/applet.js:265 3.2/applet.js:315
 msgid "View the Changelog"
 msgstr "Vis ændringsloggen"
 
-#: 5.4/applet.js:267
+#: 5.4/applet.js:271
 msgid "Open the README"
 msgstr ""
 
-#: 5.4/applet.js:273 3.2/applet.js:327
+#: 5.4/applet.js:277 3.2/applet.js:327
 msgid "Open stylesheet.css (Advanced Function)"
 msgstr "Åbn stylesheet.css (Avanceret funktion)"
 
 #. metadata.json->name
-#: 5.4/applet.js:289 3.2/applet.js:343
+#: 5.4/applet.js:293 3.2/applet.js:343
 msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Batteriovervågning og nedlukning"
 
-#: 5.4/applet.js:294 3.2/applet.js:348
+#: 5.4/applet.js:298 3.2/applet.js:348
 msgid "Waiting for battery information"
 msgstr "Venter på information om batteriet"
 
-#: 5.4/applet.js:372
+#: 5.4/applet.js:389
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Lavt batteriniveau - sluk eller sæt strømstikket i"
 
-#: 5.4/applet.js:377 3.2/applet.js:433
+#: 5.4/applet.js:394 3.2/applet.js:433
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -111,33 +111,33 @@ msgstr ""
 "og sluk computeren eller sæt den i hviletilstand\n"
 "\n"
 
-#: 5.4/applet.js:392
+#: 5.4/applet.js:409
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Ved kritisk batteriniveau aktiveres hviletilstand, med mindre strømforsyning "
 "er tilsluttet"
 
-#: 5.4/applet.js:409 3.2/applet.js:464
+#: 5.4/applet.js:426 3.2/applet.js:464
 msgid "Charge:"
 msgstr "Batteriniveau:"
 
-#: 5.4/applet.js:409 3.2/applet.js:464
+#: 5.4/applet.js:426 3.2/applet.js:464
 msgid "Alert:"
 msgstr "Advarsel:"
 
-#: 5.4/applet.js:409 3.2/applet.js:464
+#: 5.4/applet.js:426 3.2/applet.js:464
 msgid "Suspend:"
 msgstr "Hviletilstand:"
 
-#: 5.4/applet.js:457 3.2/applet.js:512
+#: 5.4/applet.js:474 3.2/applet.js:512
 msgid "Percentage Charge:"
 msgstr "Procent opladt:"
 
-#: 5.4/applet.js:457 3.2/applet.js:512
+#: 5.4/applet.js:474 3.2/applet.js:512
 msgid "Alert at:"
 msgstr "Advarsel ved:"
 
-#: 5.4/applet.js:457 3.2/applet.js:512
+#: 5.4/applet.js:474 3.2/applet.js:512
 msgid "Suspend at:"
 msgstr "Sæt i hviletilstand ved:"
 
@@ -380,8 +380,7 @@ msgid "Advanced"
 msgstr ""
 
 #. 5.4->settings-schema.json->customBatteryPath->description
-msgid ""
-"Path to battery capacity directory (device path)"
+msgid "Path to battery capacity directory (device path)"
 msgstr ""
 
 #. 5.4->settings-schema.json->customBatteryPath->tooltip
