@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2.11
+
+* Fix issue where refresh loop wouldn't ever resume after a single configuration error  
+
 ## 3.2.10
 
 * Add more granular control for setting changes

@@ -17087,6 +17087,7 @@ class WeatherApplet extends TextIconApplet {
             }
             await this.Lock();
             this.encounteredError = false;
+            this.loop.Resume();
             if (!location) {
                 location = await this.config.EnsureLocation();
                 if (!location) {
