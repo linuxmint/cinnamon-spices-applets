@@ -18,6 +18,7 @@ const {TextIconApplet, AllowedLayout, AppletPopupMenu} = imports.ui.applet;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
 const {addTween} = imports.ui.tweener;
+//const {AppletSettings} = imports.ui.settings;
 
 const {PopupResizeHandler} = require('./resizer');
 const {AppletSettings} = require('./settings');
@@ -63,12 +64,11 @@ class CinnamenuApplet extends TextIconApplet {
         this._applet_context_menu.addMenuItem(searchFilesMenuItem);
         searchFilesMenuItem.connect('activate', () => {
                             Util.spawnCommandLine(__meta.path + '/search.py ' + GLib.get_home_dir()); });
-        this.resizer = new PopupResizeHandler(  this, this.menu.actor,
-                                                400, this._getScreenWorkArea().width,
-                                                300, this._getScreenWorkArea().height,
-                                                (w,h) => this.onBoxResized(w,h),
-                                                () => this.settings.customMenuWidth,
-                                                () => this.settings.customMenuHeight);
+        this.resizer = new PopupResizeHandler(  this.menu.actor,
+                                                () => this.orientation,
+                                                (w,h) => this.onMenuResized(w,h),
+                                                () => this.settings.customMenuWidth * global.ui_scale,
+                                                () => this.settings.customMenuHeight * global.ui_scale);
         //this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY,
         //                                                            () => this._onEnableRecentsChange());
         this.signals.connect(Main.themeManager, 'theme-set', () => {this._updateIconAndLabel();
@@ -224,12 +224,6 @@ class CinnamenuApplet extends TextIconApplet {
         } else {
             adjustment.set_value(value);
         }
-    }
-
-    _getScreenWorkArea() {
-        const monitor = Main.layoutManager.currentMonitor;
-        const ws = global.screen.get_active_workspace();
-        return ws.get_work_area_for_monitor(monitor.index);
     }
 
 //----------------TextIconApplet callbacks---------
@@ -495,24 +489,26 @@ class CinnamenuApplet extends TextIconApplet {
         return true;
     }
 
-    onBoxResized(userWidth, userHeight){
-        this.updateMenuSize(userWidth, userHeight);
+    onMenuResized(userWidth, userHeight){
+        this.setMenuSize(userWidth, userHeight);
         //when resizing, no adjustments to app buttons are needed for list view
         if (this.settings.applicationsViewMode === ApplicationsViewModeGRID) {
             this.appsView.resizeGrid();
         }
     }
 
-    updateMenuSize(newWidth = null, newHeight = null) {
-        if (!newHeight) {//newHeight is only supplied when risizing
-            newHeight = this.settings.customMenuHeight;
-        }
+    updateMenuSize() {
+        this.setMenuSize(this.settings.customMenuWidth * global.ui_scale,
+                        this.settings.customMenuHeight * global.ui_scale);
+    }
 
+    setMenuSize(newWidth, newHeight) {
         //----------height--------
         //Note: the stored menu height value is middlePane + bottomPane which is smaller than the
         //menu's actual height. CategoriesView and sidebar height are not automatically
         //set because ScrollBox.set_policy Gtk.PolicyType.NEVER pushes other items off the menu
-        const appsHeight = newHeight - this.bottomPane.height;
+        let appsHeight = newHeight - this.bottomPane.height;
+        appsHeight = Math.max(appsHeight, 200);//set minimum height
 
         //---set middlePane actors to appsHeight
         this.appsView.applicationsScrollBox.height = appsHeight;
@@ -533,10 +529,6 @@ class CinnamenuApplet extends TextIconApplet {
         //include the outer menuBox padding, margin, etc. appsView width is not set automatically
         //because I don't know how to determine it's available width in order to calculate number
         //of columns to use in Clutter.GridLayout
-
-        if (!newWidth) {//newWidth is only supplied when risizing
-            newWidth = this.settings.customMenuWidth;
-        }
 
         //find minimum width for categoriesView + sidebar (if present)
         let leftSideWidth = this.categoriesView.groupCategoriesWorkspacesScrollBox.width;
@@ -567,8 +559,8 @@ class CinnamenuApplet extends TextIconApplet {
 
         //Don't change settings while resizing to avoid excessive disk writes.
         if (!this.resizer.resizingInProgress) {
-            this.settings.customMenuHeight = newHeight;
-            this.settings.customMenuWidth = menuWidth;
+            this.settings.customMenuHeight = newHeight / global.ui_scale;
+            this.settings.customMenuWidth = menuWidth / global.ui_scale;
         }
     }
 
