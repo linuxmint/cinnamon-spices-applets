@@ -1,5 +1,5 @@
 {
-  "layout": {
+  "layoutsensors": {
     "type": "layout",
     "pages": [
       "page_General",
@@ -23,7 +23,8 @@
       "sections": [
         "section_tempDisplay",
         "section_tempOptions",
-        "section_tempSensors"
+        "section_tempSensors",
+        "section_tempDisks"
       ]
     },
     "page_Fans": {
@@ -60,6 +61,7 @@
         "interval",
         "keep_size",
         "char_size",
+        "char_color",
         "remove_border",
         "remove_icons",
         "bold_values",
@@ -83,11 +85,20 @@
         "remove_temperatureATfevimu"
       ]
     },
+    "section_tempHddtemp": {
+      "type": "section",
+      "title": "hddtemp is for now only usable by root",
+      "keys": [
+        "make_hddtemp_usable_by_user"
+      ],
+      "dependency": "!hddtemp_is_user_accessible"
+    },
     "section_tempDisplay": {
       "type": "section",
       "title": "Display",
       "keys": [
-        "show_temp"
+        "show_temp",
+        "show_temp_name"
       ]
     },
     "section_tempOptions": {
@@ -111,11 +122,21 @@
         "update_display"
       ]
     },
+    "section_tempDisks": {
+      "type": "section",
+      "title": "Temperature scripts",
+      "keys": [
+      "btn_renew_disks_list",
+        "temp_disks",
+        "update_display"
+      ]
+    },
     "section_fanDisplay": {
       "type": "section",
       "title": "Display",
       "keys": [
-        "show_fan"
+        "show_fan",
+        "show_fan_name"
       ]
     },
     "section_fanOptions": {
@@ -140,7 +161,8 @@
       "type": "section",
       "title": "Display",
       "keys": [
-        "show_volt"
+        "show_volt",
+        "show_volt_name"
       ]
     },
     "section_voltOptions": {
@@ -165,7 +187,8 @@
       "type": "section",
       "title": "Display",
       "keys": [
-        "show_intrusion"
+        "show_intrusion",
+        "show_intrusion_name"
       ]
     },
     "section_intrusionOptions": {
@@ -225,6 +248,18 @@
     "step": 1,
     "description": "Character size (% of standard size)"
   },
+  "char_color": {
+    "type": "combobox",
+    "default": "default",
+    "options": {
+      "Default": "default",
+      "White": "white",
+      "Black": "black",
+      "Grey": "grey",
+      "Light Grey": "lightgrey"
+    },
+    "description": "Text Color"
+  },
   "remove_border": {
     "type": "switch",
     "default": false,
@@ -257,11 +292,23 @@
     "description": "Show in menu the action: Restart this applet",
     "tooltip": "Whether or not to display in menu the action: Restart this applet."
   },
+  "make_hddtemp_usable_by_user": {
+    "type": "button",
+    "description": "Make hddtemp usable by user",
+    "callback": "_on_hddtemp_button_pressed"
+  },
   "show_temp": {
     "type": "switch",
     "default": false,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
+  },
+  "show_temp_name": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the 'Shown name' of each of these selected sensors",
+    "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
+    "dependency": "show_temp"
   },
   "strictly_positive_temp": {
     "type": "switch",
@@ -310,7 +357,7 @@
     "columns": [
       {
         "id": "sensor",
-        "title": "Sensor name\n(Do not change this!)",
+        "title": "Sensor name\n(Do not modify!)",
         "type": "string"
       },
       {
@@ -335,7 +382,64 @@
 
     ],
     "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor name.",
-    "show-buttons": false
+    "show-buttons": true
+  },
+  "btn_renew_disks_list": {
+    "type": "button",
+    "description": "Renew the list of known disks",
+    "callback": "populate_temp_disks_in_settings"
+  },
+  "temp_disks": {
+    "type": "list",
+    "columns": [
+      {
+        "id": "disk",
+        "title": "Disk name",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "show_in_panel",
+        "title": "Show\nin panel",
+        "align": 0.5,
+        "type": "boolean"
+      },
+      {
+        "id": "show_in_tooltip",
+        "title": "Show\nin tooltip",
+        "align": 0.5,
+        "type": "boolean"
+      },
+      {
+        "id": "shown_name",
+        "title": "Shown name",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "high",
+        "title": "High °C",
+        "type": "integer",
+        "align": 0.5,
+        "min": 0,
+        "max": 127,
+        "default": 69
+      },
+      {
+        "id": "crit",
+        "title": "Critical °C",
+        "type": "integer",
+        "align": 0.5,
+        "min": 0,
+        "max": 127,
+        "default": 75
+      }
+    ],
+    "default": [
+
+    ],
+    "tooltip": "Disk name: The name of the disk, as returned by the 'lsblk' command. Please see help.\nHigh and Critical values: Cf. technical manual of your disk.",
+    "show-buttons": true
   },
   "numberOfTempSensors": {
     "type": "generic",
@@ -346,6 +450,13 @@
     "default": false,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
+  },
+  "show_fan_name": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the 'Shown name' of each of these selected sensors",
+    "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
+    "dependency": "show_fan"
   },
   "strictly_positive_fan": {
     "type": "switch",
@@ -374,7 +485,7 @@
     "columns": [
       {
         "id": "sensor",
-        "title": "Sensor name\n(Do not change this!)",
+        "title": "Sensor name\n(Do not modify!)",
         "type": "string"
       },
       {
@@ -411,6 +522,13 @@
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
+  "show_volt_name": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the 'Shown name' of each of these selected sensors",
+    "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
+    "dependency": "show_volt"
+  },
   "strictly_positive_volt": {
     "type": "switch",
     "default": false,
@@ -443,7 +561,7 @@
     "columns": [
       {
         "id": "sensor",
-        "title": "Sensor name\n(Do not change this!)",
+        "title": "Sensor name\n(Do not modify!)",
         "type": "string"
       },
       {
@@ -480,6 +598,13 @@
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
   },
+  "show_intrusion_name": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the 'Shown name' of each of these selected sensors",
+    "tooltip": " Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
+    "dependency": "show_intrusion"
+  },
   "strictly_positive_intrusion": {
     "type": "switch",
     "default": false,
@@ -496,7 +621,7 @@
     "columns": [
       {
         "id": "sensor",
-        "title": "Sensor name\n(Do not change this!)",
+        "title": "Sensor name\n(Do not modify!)",
         "type": "string"
       },
       {
@@ -541,7 +666,7 @@
   "update_display": {
     "type": "button",
     "description": "Update display",
-    "callback": "updateUI"
+    "callback": "updateUI_from_settings"
   },
   "custom_names": {
     "type": "generic",
@@ -557,5 +682,13 @@
     "type": "button",
     "description": "Remove from panel the temperature@fevimu applet",
     "callback": "_on_remove_temperatureATfevimu_from_panels"
+  },
+  "hddtemp_is_user_accessible": {
+    "type": "generic",
+    "default": false
+  },
+  "sensors_version": {
+    "type": "generic",
+    "default": "3.5.0"
   }
 }
