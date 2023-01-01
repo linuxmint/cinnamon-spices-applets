@@ -123,7 +123,7 @@ MyApplet.prototype = {
             });
 
 	    this.menu.addAction(_("Start up Applications"), function(event) {
-                Util.spawnCommandLine("gnome-session-properties");
+                Util.spawnCommandLine("cinnamon-settings startup");
             });
 
             this.menu.addAction(_("Cinnamon Settings"), function(event) {
