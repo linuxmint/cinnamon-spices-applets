@@ -8,14 +8,25 @@
             "sections": [
                 "contextmenu-section",
                 "panel-section",
-                "appearance-section"
+                "appearance-section",
+                "other-section"
             ]
         },
         "modules-page": {
             "type": "page",
             "title": "Modules",
             "sections": [
-                
+                "battery-module-section",
+                "deviceinfo-module-section",
+                "connectivity-module-section",
+                "mpris-module-section",
+                "findmyphone-module-section",
+                "requestphoto-module-section",
+                "ping-module-section",
+                "share-module-section",
+                "sftp-module-section",
+                "sms-module-section",
+                "telephony-module-section"
             ]
         },
         "contextmenu-section": {
@@ -38,10 +49,106 @@
             "type": "section",
             "title": "Appearance",
             "keys": [
+                "tooltipdevicecount",
                 "icontype",
                 "usecustomicon",
-                "customicon",
-                "expandfirst"
+                "customicon"
+            ]
+        },
+        "other-section": {
+            "type": "section",
+            "title": "Other",
+            "keys": [
+                "expandfirst",
+                "openconfiguration"
+            ]
+        },
+        "battery-module-section": {
+            "type": "section",
+            "title": "Battery Info Module",
+            "keys": [
+                "battery-module-description",
+                "battery-module-enabled"
+            ]
+        },
+        "deviceinfo-module-section": {
+            "type": "section",
+            "title": "Device Info Module",
+            "keys": [
+                "deviceinfo-module-description",
+                "deviceinfo-module-enabled"
+            ]
+        },
+        "connectivity-module-section": {
+            "type": "section",
+            "title": "Connectivity Info Module",
+            "keys": [
+                "connectivity-module-description",
+                "connectivity-module-enabled"
+            ]
+        },
+        "mpris-module-section": {
+            "type": "section",
+            "title": "MPRIS Info Module",
+            "keys": [
+                "mpris-module-description",
+                "mpris-module-enabled"
+            ]
+        },
+        "findmyphone-module-section": {
+            "type": "section",
+            "title": "FindMyPhone Action Module",
+            "keys": [
+                "findmyphone-module-description",
+                "findmyphone-module-enabled"
+            ]
+        },
+        "requestphoto-module-section": {
+            "type": "section",
+            "title": "Request-Photo Action Module",
+            "keys": [
+                "requestphoto-module-description",
+                "requestphoto-module-enabled"
+            ]
+        },
+        "ping-module-section": {
+            "type": "section",
+            "title": "Ping Action Module",
+            "keys": [
+                "ping-module-description",
+                "ping-module-enabled"
+            ]
+        },
+        "share-module-section": {
+            "type": "section",
+            "title": "Share Action Module",
+            "keys": [
+                "share-module-description",
+                "share-module-enabled"
+            ]
+        },
+        "sftp-module-section": {
+            "type": "section",
+            "title": "SFTP Action Module",
+            "keys": [
+                "sftp-module-description",
+                "sftp-module-enabled"
+            ]
+        },
+        "sms-module-section": {
+            "type": "section",
+            "title": "SMS Action Module",
+            "keys": [
+                "sms-module-description",
+                "sms-module-enabled"
+            ]
+        },
+        "telephony-module-section": {
+            "type": "section",
+            "title": "Telephony Passive Module",
+            "keys": [
+                "telephony-module-description",
+                "telephony-module-enabled"
             ]
         }
     },
@@ -92,6 +199,126 @@
     "expandfirst": {
         "type": "switch",
         "description": "Expand the device submenu if there is only 1 device",
+        "default": true
+    },
+    "openconfiguration": {
+        "type": "button",
+        "description": "Open KDE Connect Configuration",
+        "callback": "openKDECConfiguration"
+    },
+    "tooltipdevicecount": {
+        "type": "switch",
+        "description": "Show the device count in the tooltip of the applet",
+        "default": true
+    },
+
+    "battery-module-description": {
+        "type": "label",
+        "description": "Shows the current battery charge and charging status of the device"
+    },
+    "battery-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "deviceinfo-module-description": {
+        "type": "label",
+        "description": "Shows the device icon along with its ID"
+    },
+    "deviceinfo-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "connectivity-module-description": {
+        "type": "label",
+        "description": "Shows the current connectivity status and network type of the device"
+    },
+    "connectivity-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "mpris-module-description": {
+        "type": "label",
+        "description": "Shows the current media player and playback on the device aswell as volume of the device"
+    },
+    "mpris-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "findmyphone-module-description": {
+        "type": "label",
+        "description": "Lets you make the device ring, so you can find it, if you have misplaced it"
+    },
+    "findmyphone-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "requestphoto-module-description": {
+        "type": "label",
+        "description": "Lets you request a photo from the remote device and save it on this device"
+    },
+    "requestphoto-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "ping-module-description": {
+        "type": "label",
+        "description": "Lets you ping the the device to make sure it's connected"
+    },
+    "ping-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "share-module-description": {
+        "type": "label",
+        "description": "Lets you share URLs, files or text to the device"
+    },
+    "share-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "sftp-module-description": {
+        "type": "label",
+        "description": "Lets you remotely browse the storage selected on the device"
+    },
+    "sftp-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "sms-module-description": {
+        "type": "label",
+        "description": "Lets you remotely send SMS messages from the device"
+    },
+    "sms-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "telephony-module-description": {
+        "type": "label",
+        "description": "Changes the panel icon of the applet, if the device is currently receiving a call"
+    },
+    "telephony-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
         "default": true
     }
 }

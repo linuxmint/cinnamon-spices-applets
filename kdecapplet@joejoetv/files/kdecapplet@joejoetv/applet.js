@@ -21,6 +21,33 @@ const UUID = "kdecapplet@joejoetv";
 
 const KDEConnectDBusName = "org.kde.kdeconnect";
 //const KDEConnectDBusName = "org.mpris.MediaPlayer2.youtube-music";
+const SUPPORTED_MODULES = [
+    "battery",
+    "deviceinfo",
+    "connectivity",
+    "mpris",
+    "findmyphone",
+    "requestphoto",
+    "ping",
+    "share",
+    "sftp",
+    "sms",
+    "telephony"
+]
+
+const ADDITIONAL_MODULE_SETTING = {
+    "battery": [],
+    "deviceinfo": [],
+    "connectivity": [],
+    "mpris": [],
+    "findmyphone": [],
+    "requestphoto": [],
+    "ping": [],
+    "share": [],
+    "sftp": [],
+    "sms": [],
+    "telephony": []
+}
 
 // Applet imports
 const Modules = require("./js/modules.js");
@@ -250,7 +277,7 @@ class Device {
     }
 
     warn(msg) {
-        this.applet.earn("(" + this.id + ") " + msg);
+        this.applet.warn("(" + this.id + ") " + msg);
     }
 
     error(msg) {
@@ -259,6 +286,10 @@ class Device {
 
     getApplet() {
         return this.applet;
+    }
+    
+    getID() {
+        return this.id;
     }
 
     onPluginsChanged(proxy, sender) {
@@ -313,7 +344,7 @@ class Device {
         }
     }
 
-    clearModules() {
+    removeAllModules() {
         var props = Object.getOwnPropertyNames(this.modules);
         for (let i = 0; i < props.length; i++) {
             const moduleID = props[i];
@@ -357,7 +388,6 @@ class Device {
 
 
 class KDEConnectApplet extends Applet.TextIconApplet {
-
     info(msg) {
         global.log("["+this.metadata.uuid+"] "+msg);
     }
@@ -379,7 +409,10 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         Main.messageTray.add(this.notificationSource);
 
         // Object housing the bindings to the applet settings
-        this.options = {}
+        this.options = {};
+
+        // Object housing module settings
+        this.options.modules = {};
 
         // String representing the KDE Connect version
         this.KDEConnectVersionString = "";
@@ -398,9 +431,8 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         this.settings.bind("usecustomicon", "useCustomIcon", this.onPanelSettingsChanged.bind(this), "useCustomIcon");
         this.settings.bind("customicon", "customIcon", this.onPanelSettingsChanged.bind(this), "customIcon");
 
-        //this.settings.connect("changed::showownid", Lang.bind(this, this.rebuildContextMenu));
-
-        this.info("showOwnID setting: "+this.options.showOwnID);
+        // Register Module Settings Callbacks
+        this.registerModuleSettings(SUPPORTED_MODULES, ADDITIONAL_MODULE_SETTING);
 
         // Map of device ID's to Device Object 
         this.devices = {}
@@ -477,6 +509,25 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         }
     }
 
+    registerModuleSettings(modules, additionalSettings) {
+        modules.forEach(moduleID => {
+            this.options.modules[moduleID] = {};
+            this.settings.bindWithObject(this.options.modules[moduleID], moduleID+"-module-enabled", "enabled", this.onModuleSettingsChanged.bind(this), moduleID);
+
+            // Register any additional settings to also call onModuleSettingsChanged,
+            // since we need to rebuild the context manu anyway and the user shouldn't have the popup menu open when changing settings
+            if (additionalSettings[moduleID]) {
+                additionalSettings[moduleID].forEach(setting => {
+                    this.settings.bindWithObject(this.options.modules[moduleID], moduleID+"-module-"+setting, setting, this.onModuleSettingsChanged.bind(this), moduleID);
+                });
+            }
+        });
+    }
+
+    onModuleSettingsChanged(moduleID) {
+        // TODO: Implement
+    }
+
     // Gets called by a device, if it's data changed
     onDeviceDataChanged() {
         this.info("Device Data Changed!")
@@ -546,8 +597,6 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 this.kdecProxy = new KDEConnectDaemonProxy(Gio.DBus.session, KDEConnectDBusName, "/modules/kdeconnect");
 
                 this.ownIDString = this.kdecProxy.selfIdSync()[0];
-
-                this.info("TEST1");
 
                 // Build Context Menu
                 this.rebuildContextMenu();
@@ -625,13 +674,20 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         return 0;
     }
 
+    getModuleSettings(moduleID) {
+        if (this.options.modules[moduleID]) {
+            return this.options.modules[moduleID];
+        } else {
+            this.error("No option entry found for module with ID '{moduleID}'!".replace("{moduleID}", moduleID));
+            return undefined;
+        }
+    }
+
     rebuildPopupMenu() {
 
     }
 
     rebuildContextMenu() {
-        this.info("TEST2");
-
         // Menu Item showing the KDE Connect version
         if (this.options.showKDEConnectVersion == true) {
             let kdecVersionMenuItem = new PopupMenu.PopupMenuItem(_("KDE Connect Version: ${version}").replace("${version}", this.KDEConnectVersionString));
@@ -639,12 +695,9 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             this._applet_context_menu.addMenuItem(kdecVersionMenuItem);
         }
 
-        this.info("TEST3")
-
         // Menu Item showing the ID of this device
         if (this.options.showOwnID == true) {
             let ownIDMenuItem = new PopupMenu.PopupMenuItem(_("Own ID: ${own_id}").replace("${own_id}", this.ownIDString));
-            this.info("TEST4")
             ownIDMenuItem._signals.connect(ownIDMenuItem, "activate", function(menuItem, keepMenu) {
                 copyAndNotify(this.notificationSource, this.ownIDString, _("Own ID"));
             }, this);
