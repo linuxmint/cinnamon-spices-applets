@@ -4,6 +4,7 @@ const Extension = imports.ui.extension;
 const Settings = imports.ui.settings;
 const PopupMenu = imports.ui.popupMenu;
 const MessageTray = imports.ui.messageTray;
+const Tooltips = imports.ui.tooltips;
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
@@ -169,16 +170,37 @@ function _(str) {
     return str;
 }
 
-function copyAndNotify(text, typestring) {
-    let clipboard = St.Clipboard.get_default();
-    clipboard.set_text(St.ClipboardType.CLIPBOARD, text);
-    Main.notify(_("Copied {typestring} to the clipboard".replace("{typestring}", typestring)));
-
-    //let noti = new MessageTray.Notification()
+function copyAndNotify(notificationSource, text, typestring) {
+    try {
+        let clipboard = St.Clipboard.get_default();
+        clipboard.set_text(St.ClipboardType.CLIPBOARD, text);
+    
+        let notification = new MessageTray.Notification(notificationSource, "KDE Connect Applet", _("Copied {typestring} to the clipboard").replace("{typestring}", typestring));
+        notification.setTransient(true);
+        notificationSource.notify(notification);
+    } catch (error) {
+        global.logError("[Notification] Error while sending notification: " + error);
+    }
 }
 
-class KDECAppletNotificationSource extends MessageTray.Source {
+class AppletNotificationSource extends MessageTray.Source {
+    constructor(appletName) {
+        super(appletName);
 
+        this._setSummaryIcon(this.createNotificationIcon());
+    }
+
+    createNotificationIcon() {
+        return new St.Icon({
+            icon_name: "kdeconnect",
+            icon_type: St.IconType.APPLICATION,
+            icon_size: this.ICON_SIZE
+        });
+    }
+
+    open() {
+        this.destroy();
+    }
 }
 
 class Device {
@@ -353,6 +375,9 @@ class KDEConnectApplet extends Applet.TextIconApplet {
 
         this.metadata = metadata;
 
+        this.notificationSource = new AppletNotificationSource(this.metadata.name);
+        Main.messageTray.add(this.notificationSource);
+
         // Object housing the bindings to the applet settings
         this.options = {}
 
@@ -441,7 +466,8 @@ class KDEConnectApplet extends Applet.TextIconApplet {
     }
 
     on_applet_clicked() {
-        this.popupMenu.toggle();
+        // TODO: Remove if populated
+        //this.popupMenu.toggle();
     }
 
     removeAllDevices() {
@@ -620,13 +646,32 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             let ownIDMenuItem = new PopupMenu.PopupMenuItem(_("Own ID: ${own_id}").replace("${own_id}", this.ownIDString));
             this.info("TEST4")
             ownIDMenuItem._signals.connect(ownIDMenuItem, "activate", function(menuItem, keepMenu) {
-                copyAndNotify(this.ownIDString, _("Own ID"))
+                copyAndNotify(this.notificationSource, this.ownIDString, _("Own ID"));
             }, this);
+            let ownIDMenuItemTooltip = new Tooltips.Tooltip(ownIDMenuItem.actor, _("Click to copy ID"));
             this._applet_context_menu.addMenuItem(ownIDMenuItem);
-
-
         }
+
+        // Menu Item for opening the KDE Connect configuration
+        let configureMenuItem = new PopupMenu.PopupIconMenuItem(_("Configure KDE Connect"), "preferences-other", St.IconType.SYMBOLIC, {});
+        configureMenuItem._signals.connect(configureMenuItem, "activate", this.openKDECConfiguration.bind(this));
+        let configureMenuItemTooltip = new Tooltips.Tooltip(configureMenuItem.actor, _("Click to open KDE Connect Configuration"));
+        this._applet_context_menu.addMenuItem(configureMenuItem);
+        
+        
         this.info("Rebuild Context Menu called")
+    }
+
+    openKDECConfiguration() {
+        try {
+            if (this.kdecProxy) {
+                this.kdecProxy.openConfigurationRemote(Lang.bind(this, function() {
+                    this.info("Opened KDE Connect Configuration")
+                }));
+            }
+        } catch (error) {
+            this.error("Error while opening KDE Connect configuration: " + error);
+        }
     }
 
 
