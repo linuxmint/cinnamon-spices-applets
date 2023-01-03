@@ -30,7 +30,8 @@
             "type": "section",
             "title": "Panel",
             "keys": [
-                "shownumdevices"
+                "shownumdevices",
+                "tooltipmode"
             ]
         },
         "appearance-section": {
@@ -39,7 +40,8 @@
             "keys": [
                 "icontype",
                 "usecustomicon",
-                "customicon"
+                "customicon",
+                "expandfirst"
             ]
         }
     },
@@ -77,5 +79,19 @@
         "description": "Custom icon to use",
         "default": "kdeconnect",
         "dependency": "usecustomicon"
+    },
+    "tooltipmode": {
+        "type": "combobox",
+        "description": "What should the tooltip of the applet show?",
+        "options": {
+            "Device Count": "DEVICECOUNT",
+            "Applet Name": "APPLETNAME"
+        },
+        "default": "DEVICECOUNT"
+    },
+    "expandfirst": {
+        "type": "switch",
+        "description": "Expand the device submenu if there is only 1 device",
+        "default": true
     }
 }
