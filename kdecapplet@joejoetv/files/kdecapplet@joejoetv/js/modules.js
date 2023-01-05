@@ -1,14 +1,15 @@
 const PopupMenu = imports.ui.popupMenu;
 const MessageTray = imports.ui.messageTray;
 const Tooltips = imports.ui.tooltips;
+const SignalManager = imports.misc.signalManager;
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Gettext = imports.gettext;
 
-const AppletUtils = require("./utils.js");
-const Dialogs = require("./dialogs.js");
+const AppletUtils = require("./js/commonUtils.js");
+const Dialogs = require("./js/dialogs.js");
 
 const UUID = "kdecapplet@joejoetv";
 const KDEConnectDBusName = "org.kde.kdeconnect";
@@ -43,10 +44,14 @@ function _(str) {
 
 // Module base class
 class KDECModule {
-    constructor(id, requiredKDECModules, device, compatMode) {
+
+    static requiredKDECModules = [];
+
+    constructor(id, device, compatMode) {
         // Have to be set by subclass
         this.id = id;
-        this.requiredKDECModules = requiredKDECModules;
+
+        this._signals = new SignalManager.SignalManager(null);
 
         this.device = device;
         this.compatMode = compatMode;
@@ -76,8 +81,8 @@ class KDECModule {
         return this.requiredKDECModules;
     }
 
-    remove() {
-        // Do nothing in base class
+    destroy() {
+        this._signals.disconnectAllSignals();
     }
 
     getMenuItems() {
@@ -86,8 +91,11 @@ class KDECModule {
 }
 
 class BatteryModule extends KDECModule {
+
+    static requiredKDECModules = ["kdeconnect_battery"];
+
     constructor(device, compatMode) {
-        super("battery", ["kdeconnect_battery"], device, compatMode);
+        super("battery", device, compatMode);
 
         this.charge = 0;
         this.isCharging = false;
@@ -137,7 +145,8 @@ class BatteryModule extends KDECModule {
         this.batteryMenuItem.setIconSymbolicName(this._getBatteryIconName());
     }
 
-    remove() {
+    destroy() {
+        super.destroy();
         if (this.batteryProxy && this._onRefreshed) {
             this.batteryProxy.disconnectSignal(this._onRefreshed);
         }
@@ -146,4 +155,94 @@ class BatteryModule extends KDECModule {
     getMenuItems() {
         return [this.batteryMenuItem];
     }
+}
+
+class DeviceInfoModule extends KDECModule {
+
+    static requiredKDECModules = [];
+
+    constructor(device, compatMode) {
+        super("device", device, compatMode);
+
+        try {
+            this._signals.connect(this.device, "type-changed",)
+        } catch (error) {
+            this.error("Error while connecting to battery interface: "+error);
+        }
+
+        // Create Menu Item
+        this.deviceInfoMenuItem = new PopupMenu.PopupIconMenuItem(_("ID: ") + this.device.getID(), this._getTypeIconName(), St.IconType.SYMBOLIC, {reactive: false});
+        
+        // Copy ID, when clicked
+        this._signals.connect(this.deviceInfoMenuItem, "activate", function(menuItem, keepMenu) {
+            CommonUtils.copyAndNotify(this.device.getApplet().notificationSource, this.device.getID(), _("Device ID"));
+        }, this);
+
+        // Show tooltip on hovering
+        let copyIDTooltip = new Tooltips.Tooltip(this.deviceInfoMenuItem.actor, _("Click to copy ID"));
+    }
+
+    _getTypeIconName() {
+        switch(this.device.getType()) {
+            case "desktop":
+                return "computer-symbolic";
+            case "laptop":
+                return "laptop-symbolic";
+            case "smartphone":
+                return "smartphone-symbolic";
+            case "tablet":
+                return "tablet-symbolic";
+            case "tv":
+                return "tv-symbolic";
+            default:
+                return "dialog-question-symbolic";
+        }
+    }
+
+    onTypeChanged() {
+        this.deviceInfoMenuItem.setIconSymbolicName(this._getTypeIconName());
+    }
+
+    getMenuItems() {
+        return [this.deviceInfoMenuItem];
+    }
+}
+
+
+const SUPPORTED_MODULES = [
+    "battery",
+    "deviceinfo",
+    "connectivity",
+    "mpris",
+    "findmyphone",
+    "requestphoto",
+    "ping",
+    "share",
+    "sftp",
+    "sms",
+    "telephony"
+];
+
+const ADDITIONAL_MODULE_SETTING = {
+    "battery": [],
+    "deviceinfo": [],
+    "connectivity": [],
+    "mpris": [],
+    "findmyphone": [],
+    "requestphoto": [],
+    "ping": [],
+    "share": [],
+    "sftp": [],
+    "sms": [],
+    "telephony": []
+};
+
+let moduleClasses = {
+    "battery": BatteryModule,
+    "deviceinfo": DeviceInfoModule
+}
+
+let additionalSettings = {
+    "battery": [],
+    "deviceinfo": []
 }

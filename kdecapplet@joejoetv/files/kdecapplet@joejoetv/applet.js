@@ -10,6 +10,7 @@ const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
 const FileDialog = imports.misc.fileDialog;
+const SignalManager = imports.misc.signalManager;
 const Lang = imports.lang;
 const Gettext = imports.gettext;
 const Signals = imports.signals;
@@ -21,6 +22,7 @@ const UUID = "kdecapplet@joejoetv";
 
 const KDEConnectDBusName = "org.kde.kdeconnect";
 //const KDEConnectDBusName = "org.mpris.MediaPlayer2.youtube-music";
+
 const SUPPORTED_MODULES = [
     "battery",
     "deviceinfo",
@@ -33,7 +35,7 @@ const SUPPORTED_MODULES = [
     "sftp",
     "sms",
     "telephony"
-]
+];
 
 const ADDITIONAL_MODULE_SETTING = {
     "battery": [],
@@ -47,11 +49,11 @@ const ADDITIONAL_MODULE_SETTING = {
     "sftp": [],
     "sms": [],
     "telephony": []
-}
+};
 
 // Applet imports
 const Modules = require("./js/modules.js");
-const AppletUtils = require("./js/utils.js");
+const CommonUtils = require("./js/commonUtils.js");
 const Dialogs = require("./js/dialogs.js");
 
 // DBus Interfaces/Proxies
@@ -197,44 +199,14 @@ function _(str) {
     return str;
 }
 
-function copyAndNotify(notificationSource, text, typestring) {
-    try {
-        let clipboard = St.Clipboard.get_default();
-        clipboard.set_text(St.ClipboardType.CLIPBOARD, text);
-    
-        let notification = new MessageTray.Notification(notificationSource, "KDE Connect Applet", _("Copied {typestring} to the clipboard").replace("{typestring}", typestring));
-        notification.setTransient(true);
-        notificationSource.notify(notification);
-    } catch (error) {
-        global.logError("[Notification] Error while sending notification: " + error);
-    }
-}
-
-class AppletNotificationSource extends MessageTray.Source {
-    constructor(appletName) {
-        super(appletName);
-
-        this._setSummaryIcon(this.createNotificationIcon());
-    }
-
-    createNotificationIcon() {
-        return new St.Icon({
-            icon_name: "kdeconnect",
-            icon_type: St.IconType.APPLICATION,
-            icon_size: this.ICON_SIZE
-        });
-    }
-
-    open() {
-        this.destroy();
-    }
-}
-
 class Device {
-    constructor(applet, id, name) {
+    constructor(applet, id, name, compatMode) {
         this.applet = applet;
         this.id = id;
         this.name = name;
+        this.compatMode = compatMode;
+
+        this._signals = new SignalManager.SignalManager(null);
 
         // Default values
         this.type = "none"
@@ -292,6 +264,18 @@ class Device {
         return this.id;
     }
 
+    getType() {
+        return this.type;
+    }
+
+    getPlugins() {
+        return this.plugins;
+    }
+
+    getReachableStatus() {
+        return this.isReachable;
+    }
+
     onPluginsChanged(proxy, sender) {
         //DEBUG
         this.info("Plugins Changed!");
@@ -302,6 +286,8 @@ class Device {
 
                 // TODO: Replace with signals (MAYBE)
                 this.applet.onDeviceDataChanged();
+
+                this.emit("plugins-changed");
             } catch (error) {
                 this.error("Error while updating list of loaded plugins!");
             }
@@ -315,6 +301,8 @@ class Device {
         this.isReachable = isReachable;
 
         this.applet.onDeviceDataChanged();
+
+        this.emit("reachable-changed");
     }
 
     onTypeChanged(proxy, sender, [type]) {
@@ -324,6 +312,8 @@ class Device {
         this.type = type;
 
         this.applet.onDeviceDataChanged();
+
+        this.emit("type-changed");
     }
 
     onNameChanged(proxy, sender, [name]) {
@@ -333,11 +323,32 @@ class Device {
         this.name = name;
 
         this.applet.onDeviceDataChanged();
+
+        this.emit("name-changed");
+    }
+
+    createModules(supportedModules) {
+        let moduleoptions = this.applet.options.modules;
+
+        this.info("Creating Modules...");
+
+        supportedModules.forEach(moduleID => {
+            if (moduleoptions[moduleID].enabled == true) {
+                let moduleClass = Modules.moduleClasses[moduleID];
+
+                if (moduleClass.requiredKDECModules.every(plugin => this.plugins.includes(plugin))) {
+                    this.addModule(new moduleClass(this, this.compatMode));
+                    this.info("Added Module '" + moduleID + "'");
+                } else {
+                    this.info("Not all plugins present for module " + moduleID);
+                }
+            }
+        });
     }
 
     addModule(module) {
-        if (this.modules[module.moduleID] == undefined) {
-            this.modules[module.moduleID] = module;
+        if (!(this.modules[module.getID()])) {
+            this.modules[module.getID()] = module;
             return true;
         } else {
             return false;
@@ -366,7 +377,7 @@ class Device {
     }
 
     remove() {
-        this.clearModules();
+        this.removeAllModules();
 
         // Disconnect Signals
         if (typeof this.deviceProxy !== "undefined") {
@@ -385,6 +396,7 @@ class Device {
         }
     }
 }
+Signals.addSignalMethods(Device.prototype);
 
 
 class KDEConnectApplet extends Applet.TextIconApplet {
@@ -405,7 +417,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
 
         this.metadata = metadata;
 
-        this.notificationSource = new AppletNotificationSource(this.metadata.name);
+        this.notificationSource = new CommonUtils.AppletNotificationSource(this.metadata.name);
         Main.messageTray.add(this.notificationSource);
 
         // Object housing the bindings to the applet settings
@@ -494,6 +506,12 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             } catch (error) {
                 this.error("Error while registering callback for NameOwnerChanged signal: " + error);
             }
+        }
+
+        try {
+            let test = new Modules.modules["battery"]();
+        } catch (error) {
+            this.info("suusususu!");
         }
     }
 
@@ -608,6 +626,14 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 // Get Devices
                 this.devices = this.getDeviceList();
 
+                // TODO: Remove
+                let devArr = Object.keys(this.devices);
+                if (devArr.length > 0) {
+                    this.devices[devArr[0]].createModules(["battery"]);
+                } else {
+                    this.warn("NO DEVICES!")
+                }
+
                 // Update Panel features
                 this.updatePanel();
 
@@ -699,7 +725,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         if (this.options.showOwnID == true) {
             let ownIDMenuItem = new PopupMenu.PopupMenuItem(_("Own ID: ${own_id}").replace("${own_id}", this.ownIDString));
             ownIDMenuItem._signals.connect(ownIDMenuItem, "activate", function(menuItem, keepMenu) {
-                copyAndNotify(this.notificationSource, this.ownIDString, _("Own ID"));
+                CommonUtils.copyAndNotify(this.notificationSource, this.ownIDString, _("Own ID"));
             }, this);
             let ownIDMenuItemTooltip = new Tooltips.Tooltip(ownIDMenuItem.actor, _("Click to copy ID"));
             this._applet_context_menu.addMenuItem(ownIDMenuItem);
