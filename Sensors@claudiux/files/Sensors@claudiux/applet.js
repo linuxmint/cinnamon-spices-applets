@@ -774,9 +774,16 @@ class SensorsApplet extends Applet.TextApplet {
       while (_appletLabel.includes("\n\n")) {
         _appletLabel = _appletLabel.replace(/\n\n/g, "\n");
       }
+      //~ log("_appletLabel777: '"+_appletLabel+"'", true);
+      //~ log("Last character: '"+_appletLabel.slice(-1)+"'", true);
+      if (_appletLabel.slice(-1) === '│') {
+        //~ log("_appletLabel780 ends with '│'.", true);
+        _appletLabel = _appletLabel.slice(0, -1)
+      }
+      //~ log("_appletLabel783: '"+_appletLabel+"'", true);
     }
 
-    //~ log("_appletLabel768: '"+_appletLabel+"'", true);
+
 
     this.set_applet_label(_appletLabel);
 
