@@ -1,6 +1,10 @@
 const MessageTray = imports.ui.messageTray;
 const St = imports.gi.St;
 
+// Common constants
+const UUID = "kdecapplet@joejoetv";
+const KDECONNECT_DBUS_NAME = "org.kde.kdeconnect";
+
 function copyAndNotify(notificationSource, text, typestring) {
     try {
         let clipboard = St.Clipboard.get_default();
