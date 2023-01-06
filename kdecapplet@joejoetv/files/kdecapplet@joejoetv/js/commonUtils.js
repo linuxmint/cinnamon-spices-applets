@@ -5,6 +5,11 @@ const St = imports.gi.St;
 const UUID = "kdecapplet@joejoetv";
 const KDECONNECT_DBUS_NAME = "org.kde.kdeconnect";
 
+const DefaultIcons = {
+    "SYMBOLIC": "kdeconnect-tray",
+    "COLOR": "kdeconnect"
+}
+
 function copyAndNotify(notificationSource, text, typestring) {
     try {
         let clipboard = St.Clipboard.get_default();

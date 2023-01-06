@@ -147,7 +147,7 @@ const KDEConnectDeviceInterface = '\
 const KDEConnectDeviceProxy = Gio.DBusProxy.makeProxyWrapper(KDEConnectDeviceInterface);
 
 // l10n support
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(CommonUtils.UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 /*
 function _(str) {
@@ -185,7 +185,7 @@ class Device {
 
         // Create Device Proxy and get first values from DBus
         try {
-            this.deviceProxy = new KDEConnectDeviceProxy(Gio.DBus.session, KDEConnectDBusName, "/modules/kdeconnect/devices/"+this.id);
+            this.deviceProxy = new KDEConnectDeviceProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.id);
 
             // Get device parameters
             this.type = this.deviceProxy.type;
@@ -538,7 +538,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         this.settings.bind("customicon", "customIcon", this.onPanelSettingsChanged.bind(this), "customIcon");
 
         // Register Module Settings Callbacks
-        this.registerModuleSettings(Object.keys(Modules.moduleClasses), Modules.additionalSettings);
+        this.registerModuleSettings(Modules.modules, Modules.additionalSettings);
 
         /**
          * Initialize Applet content
@@ -553,11 +553,33 @@ class KDEConnectApplet extends Applet.TextIconApplet {
 
         // Menu Section for items added to the context menu of the applet
         this.contextMenuSection = new PopupMenu.PopupMenuSection();
-
+        this._applet_context_menu.addMenuItem(this.contextMenuSection);
 
         // Set basic options
 	    this.setAllowedLayout(Applet.AllowedLayout.BOTH);
-        this.set_applet_icon_name("kdeconnect");
+        this.info("Icon Type is "+this.options.iconType+", setting icon name to: "+CommonUtils.DefaultIcons[this.options.iconType]);
+        
+        // Set correct icon type and name
+        if (this.options.useCustomIcon == false) {
+            // Use default icon
+            if (this.options.iconType == "COLOR") {
+                this.set_applet_icon_name(CommonUtils.DefaultIcons[this.options.iconType]);
+            } else if (this.options.iconType == "SYMBOLIC") {
+                this.set_applet_icon_symbolic_name(CommonUtils.DefaultIcons[this.options.iconType]);
+            } else {
+                this.error("Somehow, the icon type is not recognized: '"+this.options.iconType+"'")
+            }
+        } else {
+            // Use custom icon
+            if (this.options.iconType == "COLOR") {
+                this.set_applet_icon_name(this.options.customIcon);
+            } else if (this.options.iconType == "SYMBOLIC") {
+                this.set_applet_icon_symbolic_name(this.options.customIcon);
+            } else {
+                this.error("Somehow, the icon type is not recognized: '"+this.options.iconType+"'")
+            }
+        }
+        
         this.hide_applet_label(true);
 
 
@@ -566,7 +588,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         
         try {
             this.dbusProxy = new FreedesktopDBusProxy(Gio.DBus.session, "org.freedesktop.DBus", "/org/freedesktop/DBus");
-            foundKDEConnect = this.dbusProxy.NameHasOwnerSync(KDEConnectDBusName)[0];
+            foundKDEConnect = this.dbusProxy.NameHasOwnerSync(CommonUtils.KDECONNECT_DBUS_NAME)[0];
         } catch (error) {
             this.error("Error while checking if KDE Connect DBus service exists on the session bus: " + error);
         }
@@ -636,13 +658,10 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         // Bravo Six, Going Dark
 
         this._signals.disconnectAllSignals();
-
         this.removeAllDevices();
-
         this.settings.finalize();
 
-        // TODO: Disconnect more callbacks and stuff
-
+        // Disconnect DBus signal Callbacks
         if (typeof this.kdecProxy !== "undefined") {
             if (this._onAnnouncedNameChanged) {
                 this.kdecProxy.disconnectSignal(this._onAnnouncedNameChanged)
@@ -652,7 +671,6 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             }
         }
 
-        // Disconnect signal callback for NameOwnerChanged
         if (typeof this._onNameOwnerChanged !== "undefined" && typeof this.dbusProxy !== "undefined") {
             this.dbusProxy.disconnectSignal(this._onNameOwnerChanged);
         }
@@ -674,7 +692,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             
             // Get KDE Connect version
             try {
-                let qtCoreProxy = new QCoreApplicationProxy(Gio.DBus.session, KDEConnectDBusName, "/MainApplication");
+                let qtCoreProxy = new QCoreApplicationProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/MainApplication");
                 let kdecVersion = qtCoreProxy.applicationVersion;
                 this.KDEConnectVersionString = kdecVersion;
                 this.compatMode.versionLevel = this.getVersionLevel(kdecVersion.split("."));
@@ -682,54 +700,43 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 this.error("Error while getting KDE Connect version: " + error);
                 this.warn("Resorting to default version compat level(1.3)");
             }
-    
+
             try {
-                this.kdecProxy = new KDEConnectDaemonProxy(Gio.DBus.session, KDEConnectDBusName, "/modules/kdeconnect");
+                this.kdecProxy = new KDEConnectDaemonProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect");
 
                 this.ownIDString = this.kdecProxy.selfIdSync()[0];
+            } catch (error) {
+                this.error("Error while creating or communicating the KDE Connect proxy: "+error);
+            }
 
-                // Build Context Menu
-                this.rebuildContextMenu();
+            // Build Context Menu
+            this.rebuildContextMenu();
 
-                // This is maybe not needed, but I'm doing it anyway
-                // Remove all devices and disconnect signals, etc.
-                this.removeAllDevices();
+            // This is maybe not needed, but I'm doing it anyway
+            // Remove all devices and disconnect signals, etc.
+            this.removeAllDevices();
 
-                // Get Devices
-                this.devices = this.getDeviceMap();
-                
-                /*
-                // TODO: Remove
-                try {
-                    let devArr = Object.keys(this.devices);
-                    if (devArr.length > 0) {
-                        this.devices[devArr[0]].createModules(Object.keys(Modules.modules));
-                    } else {
-                        this.warn("NO DEVICES!")
-                    }
-                } catch (error) {
-                    this.error("TEST: "+error);
-                }
-                */
+            // Get Device Map from KDE Connect proxy
+            this.devices = this.getDeviceMap();
 
-                // Update Panel features
-                this.updatePanel();
+            // TODO: Create Modules
 
-                // Build main popout menu
-                this.rebuildPopupMenu();
-    
-                // TODO: Impelent first update logic
-                // TODO: Think about if the signals should be connected after or before the first content update
-    
-                // Connect Signals
+            // Updated Panel information
+            this.updatePanel();
+
+            // Show applet label
+            this.hide_applet_label(false);
+
+            // Build main popout menu
+            this.rebuildPopupMenu();
+
+            // Connect signals for changes
+            try {
                 this._onAnnouncedNameChanged = this.kdecProxy.connectSignal("announcedNameChanged", this.onAnnouncedNameChanged.bind(this));
                 this._onDeviceListChanged = this.kdecProxy.connectSignal("deviceListChanged", this.onDeviceListChanged.bind(this));
-    
-    
             } catch (error) {
-                this.error("Error while communicating with the KDE Connect DBus service: " + error);
+                this.error("Error while connecting DBus signal callbacks for KDE Connect: "+error);
             }
-            
             
             this.info("Entered Available State!");
         } else {
@@ -758,15 +765,19 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 }
             }
     
-            /// Empty menus
+            // Clear menus
     
             this.popupMenu.close();
+
             // Since KDE Connect is now unavailable, remove all devices from list and with them, disconnect signals, etc.
             this.removeAllDevices();
             this.popupMenu.removeAll();
     
-            // Close and clear context menu
             this.contextMenuSection.removeAll();
+
+
+            // Hide applet label
+            this.hide_applet_label(true);
     
             // Add menu item to tell the user, that KDE Connect is currently unavailable to the applet
             let kdecNotFoundMenuItem = new PopupMenu.PopupMenuItem(_("KDE Connect not available!"), {reactive: false});
@@ -811,19 +822,15 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             ownIDMenuItem._signals.connect(ownIDMenuItem, "activate", function(menuItem, keepMenu) {
                 CommonUtils.copyAndNotify(this.notificationSource, this.ownIDString, _("Own ID"));
             }, this);
-            //let ownIDMenuItemTooltip = new Tooltips.Tooltip(ownIDMenuItem.actor, _("Click to copy ID"));
-            //this._signals.connect(ownIDMenuItem.actor, "notify::allocation", function(openState) {
-            //    global.logWarning("ALLOCATION EVENT");
-            //}, this);
+            let ownIDMenuItemTooltip = new Tooltips.Tooltip(ownIDMenuItem.actor, _("Click to copy ID"));
             this.contextMenuSection.addMenuItem(ownIDMenuItem);
         }
 
         // Menu Item for opening the KDE Connect configuration
         let configureMenuItem = new PopupMenu.PopupIconMenuItem(_("Configure KDE Connect"), "preferences-other", St.IconType.SYMBOLIC, {});
         configureMenuItem._signals.connect(configureMenuItem, "activate", this.openKDECConfiguration.bind(this));
-        //let configureMenuItemTooltip = new Tooltips.Tooltip(configureMenuItem.actor, _("Click to open KDE Connect Configuration"));
+        let configureMenuItemTooltip = new Tooltips.Tooltip(configureMenuItem.actor, _("Click to open KDE Connect Configuration"));
         this.contextMenuSection.addMenuItem(configureMenuItem);
-        
         
         this.info("Rebuild Context Menu called")
     }
@@ -832,6 +839,26 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      * Updates the panel information such as icon, tooltip and label
      */
     updatePanel() {
+        // Update Applet Icon
+        if (this.options.useCustomIcon == false) {
+            // Use default icon
+            if (this.options.iconType == "COLOR") {
+                this.set_applet_icon_name(CommonUtils.DefaultIcons[this.options.iconType]);
+            } else if (this.options.iconType == "SYMBOLIC") {
+                this.set_applet_icon_symbolic_name(CommonUtils.DefaultIcons[this.options.iconType]);
+            } else {
+                this.error("Somehow, the icon type is not recognized: '"+this.options.iconType+"'")
+            }
+        } else {
+            // Use custom icon
+            if (this.options.iconType == "COLOR") {
+                this.set_applet_icon_name(this.options.customIcon);
+            } else if (this.options.iconType == "SYMBOLIC") {
+                this.set_applet_icon_symbolic_name(this.options.customIcon);
+            } else {
+                this.error("Somehow, the icon type is not recognized: '"+this.options.iconType+"'")
+            }
+        }
     }
 
     /**
@@ -880,7 +907,6 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      * @param {string} option - The option that changed
      */
     onPanelSettingsChanged(value, option) {
-        this.warn("onPanelSettingsChanged called");
         if (option == "customIcon" && this.options.useCustomIcon != true) {
             return;
         }
@@ -901,7 +927,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      * @param {string} new_owner - THe new owner of the DBus name
      */
     onNameOwnerChanged(proxy, sender, [name, old_owner, new_owner]) {
-        if (name == KDEConnectDBusName) {
+        if (name == CommonUtils.KDECONNECT_DBUS_NAME) {
             this.info("NameOwnerAcquired: "+name+" | "+old_owner+" -> "+new_owner);
             if (new_owner != "") {
                 // Found KDE Connect DBus service
@@ -938,7 +964,6 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      * @param {*} sender 
      */
     onDeviceListChanged(proxy, sender) {
-        this.warn("onDeviceListChanged called");
         this.info("DeviceListChanged");
         //TODO: Implement
     }
@@ -967,7 +992,12 @@ class KDEConnectApplet extends Applet.TextIconApplet {
 
         deviceIDs.forEach(deviceID => {
             this.info("New Device " + deviceNames[deviceID] + " with ID " + deviceID);
-            deviceMap[deviceID] = new Device(this, deviceID, deviceNames[deviceID]);
+            let newDevice = new Device(this, deviceID, deviceNames[deviceID]);
+
+            // Bind signal to onDeviceDataChanged function of the applet
+            newDevice._signals.connect(newDevice, "plugins-changed", this.onDeviceDataChanged, this);
+
+            deviceMap[deviceID] = newDevice;
         });
 
         return deviceMap;
