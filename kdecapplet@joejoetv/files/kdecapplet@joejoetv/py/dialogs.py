@@ -17,6 +17,12 @@ class IllegalArgumentError(ValueError):
 
 APPLET_DIR = path.split(path.dirname(path.normpath(__file__)))[0]
 
+# Exit codes
+EC_OK = 0
+EC_CANCEL = 10
+EC_ARGERROR = 2
+EC_ERROR = 1
+
 # Fallback UUID of applet
 UUID = "kdecapplet@joejoetv"
 
@@ -223,10 +229,10 @@ if __name__ == "__main__":
                 print(json.dumps(filechooserdialog.get_filenames()))
                 
                 filechooserdialog.destroy()
-                sys.exit(os.EX_OK)
+                sys.exit(EC_OK)
             else:
                 filechooserdialog.destroy()
-                sys.exit(os.EX_TEMPFAIL)
+                sys.exit(EC_CANCEL)
         elif sys.argv[1] == "sendurl":
             urldialog = SendURLDialog(sys.argv[2])
             
@@ -236,10 +242,10 @@ if __name__ == "__main__":
                 print(json.dumps(urldialog.get_url_text()))
                 
                 urldialog.destroy()
-                sys.exit(os.EX_OK)
+                sys.exit(EC_OK)
             else:
                 urldialog.destroy()
-                sys.exit(os.EX_TEMPFAIL)
+                sys.exit(EC_CANCEL)
         elif sys.argv[1] == "sendsms":
             smsdialog = SendSMSDialog(sys.argv[2])
             
@@ -256,10 +262,10 @@ if __name__ == "__main__":
                 print(json.dumps(returnObject))
                 
                 smsdialog.destroy()
-                sys.exit(os.EX_OK)
+                sys.exit(EC_OK)
             else:
                 smsdialog.destroy()
-                sys.exit(os.EX_TEMPFAIL)
+                sys.exit(EC_CANCEL)
         elif sys.argv[1] == "sendtext":
             textdialog = SendTextDialog(sys.argv[2])
             
@@ -271,10 +277,10 @@ if __name__ == "__main__":
                 print(json.dumps(textdialog.get_text()))
                 
                 textdialog.destroy()
-                sys.exit(os.EX_OK)
+                sys.exit(EC_OK)
             else:
                 textdialog.destroy()
-                sys.exit(os.EX_TEMPFAIL)
+                sys.exit(EC_CANCEL)
         elif sys.argv[1] == "receivephoto":
             deviceName = sys.argv[2]
     
@@ -297,15 +303,15 @@ if __name__ == "__main__":
                 print(json.dumps(filechooserdialog.get_filename()))
                 
                 filechooserdialog.destroy()
-                sys.exit(os.EX_OK)
+                sys.exit(EC_OK)
             else:
                 filechooserdialog.destroy()
-                sys.exit(os.EX_TEMPFAIL)
+                sys.exit(EC_CANCEL)
         else:
             print("Unknown dialog type!", file=sys.stderr)
-            sys.exit(os.EX_USAGE)
+            sys.exit(EC_ARGERROR)
     else:
         print("Not enough arguments!", file=sys.stderr)
-        sys.exit(os.EX_USAGE)
+        sys.exit(EC_ARGERROR)
     
     
