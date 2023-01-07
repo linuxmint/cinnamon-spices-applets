@@ -104,8 +104,7 @@ class NewTooltip {
         });
         this.tooltip.show_on_set_parent = false;
         Main.uiGroup.add_actor(this.tooltip);
-        this.tooltip.set_text(this.text);
-        this.tooltip.get_clutter_text().set_use_markup(true);
+        this.tooltip.get_clutter_text().set_markup(this.text);
         this.tooltip.set_style('text-align: left;');
 
         let tooltipWidth = this.tooltip.get_allocation_box().x2 - this.tooltip.get_allocation_box().x1;

@@ -25,15 +25,13 @@ class CategoryButton {
                                                                 accessible_role: Atk.Role.MENU_ITEM});
 
         //----icon
-        if (icon_name) {
-            if (icon_name === 'emoji-grinning-face') {
-                this.icon = new St.Label({ style: 'color: white; font-size: ' +
+        if (this.id.startsWith('emoji:')) {
+            this.icon = new St.Label({ style: 'color: white; font-size: ' +
                                     (Math.round(this.appThis.settings.categoryIconSize * 0.85)) + 'px;'});
-                this.icon.get_clutter_text().set_markup('🌷');
-            } else {
-                this.icon = new St.Icon({   icon_name: icon_name, icon_type: St.IconType.FULLCOLOR,
+            this.icon.get_clutter_text().set_text('🌷');
+        } else if (icon_name) {
+            this.icon = new St.Icon({   icon_name: icon_name, icon_type: St.IconType.FULLCOLOR,
                                             icon_size: this.appThis.settings.categoryIconSize});
-            }
         } else {
             this.icon = new St.Icon({   gicon: gicon, icon_type: St.IconType.FULLCOLOR,
                                         icon_size: this.appThis.settings.categoryIconSize});
@@ -328,7 +326,7 @@ class CategoriesView {
             [this.appThis.recentsEnabled, 'recents', _('Recent'), 'document-open-recent'],
             [this.appThis.settings.showFavAppsCategory, 'favorite_apps', _('Favorite apps'), 'emblem-favorite'],
             [this.appThis.settings.showHomeFolder, homeDir,_('Home folder'), 'user-home'],
-            [this.appThis.settings.showEmojiCategory, 'emoji:', _('Emoji'), 'emoji-grinning-face']
+            [this.appThis.settings.showEmojiCategory, 'emoji:', _('Emoji'), '']
         ].forEach(param => {
                 if (param[0]) {
                     let button = this.buttons.find(button => button.id === param[1]);

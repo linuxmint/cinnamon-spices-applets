@@ -4,6 +4,7 @@ const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Atk = imports.gi.Atk;
 const Main = imports.ui.main;
+const Util = imports.misc.util;
 const {SignalManager} = imports.misc.signalManager;
 const {AppState} = imports.gi.Cinnamon;
 const {EllipsizeMode} = imports.gi.Pango;
@@ -36,7 +37,7 @@ class AppButton {
         } else if (this.app.emoji) {//emoji search result
             this.icon = new St.Label({ style: 'color: white; font-size: ' +
                                             (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
-            this.icon.get_clutter_text().set_markup(this.app.emoji);
+            this.icon.get_clutter_text().set_text(this.app.emoji);
         } else if (this.app.isApplication) {//isApplication
             this.icon = this.app.create_icon_texture(this.appThis.getAppIconSize());
         } else if (this.app.iconFactory) {//isPlace
@@ -316,6 +317,19 @@ class AppButton {
             this.app.activate(this.app);
             this.appThis.menu.close();
         }
+    }
+
+    activateAsRoot() {
+        if (this.app.isApplication) {
+            if (this.app.newAppShouldHighlight) {
+                this.app.newAppShouldHighlight = false;
+                this._setAppHighlightClass();
+            }
+            this.appThis.recentApps.add(this.app.id);
+            const command = 'gksu ' + this.app.get_app_info().get_executable();
+            Util.spawnCommandLine(command);
+            this.appThis.menu.close();
+        } 
     }
 
     _onRunningStateChanged() {

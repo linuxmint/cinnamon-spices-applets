@@ -800,11 +800,11 @@ class CinnamenuApplet extends TextIconApplet {
                 }
             }
         };
-
+        
         switch (true) {
         case (symbol === Clutter.KEY_KP_Enter || symbol === Clutter.KP_Enter ||
                                             symbol === Clutter.KEY_Return) && ctrlKey:
-        case (symbol === Clutter.KEY_Menu) && noModifiers:
+        case symbol === Clutter.KEY_Menu && noModifiers:
             if (this.contextMenu.isOpen) {
                 this.contextMenu.close();
             } else if (focusedAppItemExists) {
@@ -827,19 +827,44 @@ class CinnamenuApplet extends TextIconApplet {
                 categoryButtons[focusedCategoryIndex].selectCategory();
             }
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.KEY_Up && noModifiers):
+        case (symbol === Clutter.KEY_KP_Enter || symbol === Clutter.KP_Enter ||
+                                        symbol === Clutter.KEY_Return) && altKey:
+            if (focusedAppItemExists && appButtons[focusedAppItemIndex].app.isApplication) {
+                const desktop_file_path = appButtons[focusedAppItemIndex].app.desktop_file_path;
+                Util.spawn(['cinnamon-desktop-editor', '-mlauncher', '-o' + desktop_file_path]);
+                this.menu.close();
+                return Clutter.EVENT_STOP;
+            }
+            return Clutter.EVENT_PROPAGATE
+        case symbol === Clutter.unicode_to_keysym("d".charCodeAt(0)) && ctrlKey:
+            if (focusedAppItemExists && appButtons[focusedAppItemIndex].app.isApplication) {
+                const desktop_file_path = appButtons[focusedAppItemIndex].app.desktop_file_path;
+                Util.spawn(['xdg-open', desktop_file_path]);
+                this.menu.close();
+                return Clutter.EVENT_STOP;
+            }
+            return Clutter.EVENT_PROPAGATE
+        case (symbol === Clutter.KEY_KP_Enter || symbol === Clutter.KP_Enter ||
+                                                symbol === Clutter.KEY_Return) && shiftKey:
+            if (focusedAppItemExists && appButtons[focusedAppItemIndex].app.isApplication) {
+                appButtons[focusedAppItemIndex].activateAsRoot();
+                this.menu.close();
+                return Clutter.EVENT_STOP;
+            }
+            return Clutter.EVENT_PROPAGATE
+        case symbol === Clutter.KEY_Up && noModifiers:
             leaveCurrentlyFocusedItem();
             upNavigation();
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.KEY_Down && noModifiers):
+        case symbol === Clutter.KEY_Down && noModifiers:
             leaveCurrentlyFocusedItem();
             downNavigation();
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.KEY_Right && noModifiers):
+        case symbol === Clutter.KEY_Right && noModifiers:
             leaveCurrentlyFocusedItem();
             rightNavigation();
             return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
-        case (symbol === Clutter.KEY_Left && noModifiers):
+        case symbol === Clutter.KEY_Left && noModifiers:
             leaveCurrentlyFocusedItem();
             leftNavigation();
             return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
@@ -879,7 +904,7 @@ class CinnamenuApplet extends TextIconApplet {
                 this.menu.close();
             }
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.KEY_Page_Up && noModifiers):
+        case symbol === Clutter.KEY_Page_Up && noModifiers:
             leaveCurrentlyFocusedItem();
             if (focusedAppItemExists) {
                 appButtons[0].handleEnter();
@@ -889,7 +914,7 @@ class CinnamenuApplet extends TextIconApplet {
                 categoryButtons[0].handleEnter();
             }
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.KEY_Page_Down && noModifiers):
+        case symbol === Clutter.KEY_Page_Down && noModifiers:
             leaveCurrentlyFocusedItem();
             if (focusedAppItemExists) {
                 appButtons[appButtons.length - 1].handleEnter();
@@ -1600,6 +1625,7 @@ class CinnamenuApplet extends TextIconApplet {
  *  .score
  *  .nameWithSearchMarkup
  *  .descriptionWithSearchMarkup
+ *  .desktop_file_path
  *  .isApplication
  *  .isPlace
  *  .isRecentFile
@@ -1965,6 +1991,7 @@ class Apps {//This obj provides the .app objects for all the applications catego
                         app.description = app.get_description();
                         app.isApplication = true;
                         app.id = app.get_id();
+                        app.desktop_file_path = entry.get_desktop_file_path();
                     }
                     if (this.knownApps.indexOf(id) < 0) {//unknown app
                         if (!this.newInstance) {
