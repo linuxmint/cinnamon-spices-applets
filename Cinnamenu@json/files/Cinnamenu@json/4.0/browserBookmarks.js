@@ -26,6 +26,7 @@ const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
 const Cinnamon = imports.gi.Cinnamon;
 const Util = imports.misc.util;
+const {getChromiumProfileDirs} = require('./utils');
 
 let Gda = null;
 try {
@@ -165,13 +166,13 @@ function readFirefoxProfiles() {
     return [];
 }
 
-const readChromiumBookmarksFile = function(path, subfolder, appInfo) {
+const readChromiumBookmarksFile = function(path, appInfo) {
 
     return new Promise(function(resolve, reject) {
         const foundBookmarks = [];
 
         const bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev(
-                                        [GLib.get_user_config_dir(), ...path, subfolder, 'Bookmarks']));
+                                        [GLib.get_user_config_dir(), ...path, 'Bookmarks']));
         if (!bookmarksFile.query_exists(null)) {
             resolve([]);
             return;
@@ -208,7 +209,7 @@ const readChromiumBookmarksFile = function(path, subfolder, appInfo) {
                 recurseBookmarks(children);
             }
 
-            const faviconsFile = GLib.build_filenamev([GLib.get_user_config_dir(), ...path, subfolder, 'Favicons']);
+            const faviconsFile = GLib.build_filenamev([GLib.get_user_config_dir(), ...path, 'Favicons']);
             const domains = [];
             foundBookmarks.forEach( bookmark => {
                 domains.push(bookmark.domain);
@@ -229,53 +230,20 @@ const readChromiumBookmarksFile = function(path, subfolder, appInfo) {
     });
 };
 
-const readChromiumBookmarks = function(path, wmClass) {
-
-    return new Promise(function(resolve, reject) {
-        const appSystem = Cinnamon.AppSystem.get_default();
-        let foundBookmarks = [];
-
-        const foundApps = appSystem.lookup_desktop_wmclass(wmClass);
-        if (!foundApps || foundApps.length === 0) {
-            resolve([]);
-            return;
-        }
-
-        const appInfo = foundApps.get_app_info();
-
-        Promise.all([
-            readChromiumBookmarksFile(path, '', appInfo),
-            readChromiumBookmarksFile(path, 'Default', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 1', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 2', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 3', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 4', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 5', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 6', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 7', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 8', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 9', appInfo),
-        ]).then((results) => {
-            results.forEach( result => foundBookmarks = foundBookmarks.concat(result));
-            resolve(foundBookmarks);
-        });
-    });
-};
-
 //=====================
 
 class BookmarksManager {
     constructor() {
         this.bookmarks = [];
+        const promises = [];
 
-        Promise.all([
-            readChromiumBookmarks(['chromium'], 'chromium'),
-            readChromiumBookmarks(['google-chrome'], 'google-chrome'),
-            readChromiumBookmarks(['opera'], 'opera'),
-            readChromiumBookmarks(['vivaldi'], 'vivaldi-stable'),
-            readChromiumBookmarks(['BraveSoftware', 'Brave-Browser'], 'brave-browser'),
-            readChromiumBookmarks(['microsoft-edge'], 'microsoft-edge')
-        ]).then((results) => {
+        getChromiumProfileDirs().forEach( profilePath => {
+            const path = profilePath[0];
+            const appInfo = profilePath[1];
+
+            promises.push(readChromiumBookmarksFile(path, appInfo));
+        });
+        Promise.all(promises).then((results) => {
             results.forEach( result => this.bookmarks = this.bookmarks.concat(result));
 
             this.bookmarks = this.bookmarks.concat(readFirefoxProfiles());

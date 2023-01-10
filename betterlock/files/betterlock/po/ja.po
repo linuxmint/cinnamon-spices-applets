@@ -1,0 +1,69 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-15 21:34+0200\n"
+"PO-Revision-Date: 2022-11-30 09:56+0900\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: ja\n"
+
+msgid "Scr Lock"
+msgstr "Scroll Lock"
+
+msgid "Num Lock"
+msgstr "Num Lock"
+
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+msgid "Lock Keys"
+msgstr "ロックキー"
+
+msgid "Scr lock on"
+msgstr "Scroll Lock オン"
+
+msgid "Scr lock off"
+msgstr "Scroll Lock オフ"
+
+msgid "Num lock on"
+msgstr "Num Lock オン"
+
+msgid "Num lock off"
+msgstr "Num Lock オフ"
+
+msgid "Caps lock on"
+msgstr "Caps Lock オン"
+
+msgid "Caps lock off"
+msgstr "Caps Lock オフ"
+
+msgid "Show notifications"
+msgstr "通知を表示"
+
+msgid "Show caps lock indicator"
+msgstr "Caps Lockインジケータを使用"
+
+msgid "Show num lock indicator"
+msgstr "Num Lockインジケータを使用"
+
+msgid "Show scr lock indicator"
+msgstr "Scroll Lockインジケータを使用"
+
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification "
+"when these change."
+msgstr "Caps・Num・Scroll Lockキーのオン・オフを表示し、変更時に通知"
+
+msgid "Lock keys indicator with notifications"
+msgstr "通知付きキーボードインジケータ betterlock"

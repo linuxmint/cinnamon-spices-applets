@@ -139,7 +139,7 @@ msgid "Click to copy"
 msgstr "Cliquer pour copier"
 
 msgid "Applications and files"
-msgstr "Candidatures et fichiers"
+msgstr "Applications et fichiers"
 
 msgid "Other search results"
 msgstr "Autres résultats de recherche"
@@ -154,7 +154,7 @@ msgid "Emoji"
 msgstr "Émoji"
 
 msgid "Trash"
-msgstr "Déchets"
+msgstr "Corbeille"
 
 msgid "Error while opening file:"
 msgstr "Erreur lors de l'ouverture du fichier :"
@@ -489,7 +489,7 @@ msgstr "Afficher les favoris dans la barre latérale"
 
 #, fuzzy
 #| msgid "Show your favorite app icons next to the session buttons"
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "Affiche les icônes de vos applications favorites à côté des boutons de session"
 
 msgid "Show recent items"

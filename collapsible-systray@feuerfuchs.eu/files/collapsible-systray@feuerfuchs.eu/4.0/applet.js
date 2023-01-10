@@ -381,6 +381,7 @@ class CollapsibleSystrayApplet extends CinnamonSystray.CinnamonSystrayApplet {
                 let icons  = this.hiddenIconsContainer.get_children();
                 for (let i = icons.length - 1; i >= 0; --i) {
                     icons[i].csDisable();
+                    icons[i].hide();
                 }
 
                 this._animating = false;
@@ -460,6 +461,7 @@ class CollapsibleSystrayApplet extends CinnamonSystray.CinnamonSystrayApplet {
 
             this.hiddenIconsContainer.get_children().forEach(function(icon, index) {
                 icon.csEnable();
+                icon.show();
             });
 
             if (animate) {
@@ -545,8 +547,10 @@ class CollapsibleSystrayApplet extends CinnamonSystray.CinnamonSystrayApplet {
                     if (state) {
                         actor.csEnable();
                         actor.csEnableAfter();
+                        actor.show();
                     } else {
                         actor.csDisable();
+                        actor.hide();
                     }
                 }
             }));
@@ -797,7 +801,8 @@ class CollapsibleSystrayApplet extends CinnamonSystray.CinnamonSystrayApplet {
 
         iconWrap.connect('button-press-event', Lang.bind(this, function(actor, e) { return true; }));
         iconWrap.connect('button-release-event', Lang.bind(this, function(actor, e) {
-            icon.click(e);
+            let ret = icon.handle_event(Clutter.EventType.BUTTON_PRESS, e);
+            return ret;
         }));
 
         icon.connect('destroy', Lang.bind(this, function() {
@@ -863,7 +868,8 @@ class CollapsibleSystrayApplet extends CinnamonSystray.CinnamonSystrayApplet {
 
                 iconWrap.connect('button-press-event', Lang.bind(this, function(actor, e) { return true; }));
                 iconWrap.connect('button-release-event', Lang.bind(this, function(actor, e) {
-                    icon.click(e);
+                    let ret = icon.handle_event(Clutter.EventType.BUTTON_PRESS, e);
+                    return ret;
                 }));
 
                 iconActor.connect('destroy', Lang.bind(this, function() {

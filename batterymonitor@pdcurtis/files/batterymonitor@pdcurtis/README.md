@@ -27,7 +27,7 @@ The applet normally shows the percentage charge on a coloured background which i
 
   * When the Alert level is reached a modal alert is put up which can not be missed as no input can be made until it is cleared and short fixed audible alert is also given. For Cinnamon versions earlier than 2.6 an critical alert is used instead as modal alerts are not available. The default alert sound is short and high pitched.
   * The audible alert sound file can be specified in the Applet Settings rather than use a preset system file when used with Cinnamon 3.2 and higher. Mine lasts for 30 seconds and can be heard throughout the house so is not ideal for libraries - thanks to Brandon at http://soundbible.com/1911-Mandatory-Evacuation.html and used under Attribution 3.0 Licence. A brief warning is displayed whenever the applet starts if user specified files are in use te remind users of potential consequences of long loud files. The warning can be inhibited but this is not recommended.
-    * **note1:** The file must be an .oga with mime type audio/x-vorbis+ogg - the mime type is crucial to it being recognised. You can convert any audio file (.mp3, .wav, etc) into this format by using any number of different free on-line conversion tools.  When doing the conversion, you must be sure to select Ogg(Vorbis) as the Codec to be used during the conversion process.  If your conversion was successful, it will be possible to preview the sound with the arrow button attached to the BAMS file selection dialog box.
+    * **note1:** The file must be an .oga with mime type audio/x-vorbis+ogg - the mime type is crucial to it being recognised. You can convert any audio file (.mp3, .wav, etc) into this format by using any number of different free on-line conversion tools. When doing the conversion, you must be sure to select Ogg(Vorbis) as the Codec to be used during the conversion process. If your conversion was successful, it will be possible to preview the sound with the arrow button attached to the BAMS file selection dialog box.
     * **note2:** There cannot be any spaces in the filename.
   * When the Shutdown level is reached an alert box is put up with options of an immediate suspend or cancel - if nothing is done it suspends 30 seconds latter. If cancelled (or the machine is turned back on without the battery being on charge) the alert and shutdown sequence is restarted after the battery has dropped another 1%. The alert box is accompanied by an audible alert which can be specified in Settings with Cinnamon 3.2 and higher. This should be a short sound just to alert one if using the machine as it cannot be cancelled and could continue when the machine is reactivated.
 
@@ -40,7 +40,7 @@ Version 1.3.0 introduced support for vertical panels and has extra display modes
   * Classic - Battery Percentage with an extended message in the panel as above (only for horizontal panels)
   * Classic Plus - Classic with addition of a Battery Icon (only for horizontal panels)
   * Compact - Battery Percentage without an extended message, just the background changes (suitable for vertical panels)
-  * Compact Plus - Compact  with addition of Battery Icon (suitable for vertical panels)
+  * Compact Plus - Compact with addition of Battery Icon (suitable for vertical panels)
   * Battery Icon Only - retains the coloured background showing status (suitable for vertical panels)
 
 If a Classic mode is used on a vertical panel the extended message is not shown which allows it to be used in a vertical panel in the default 'Classic' configuration.
@@ -57,7 +57,7 @@ Although comments and suggestions are always welcome any contributions which are
 
 ## Requirements:
 
-Cinnamon Version 2.2 or higher which is available for all the Mint versions which are still supported - currently back to Mint 17.0 LTS. Cinnamon 2.6 or higher is required to support Modal Alerts. The latest versions been tested up to Cinnamon 3.8 and no changes are expected for 4.0.
+Cinnamon Version 2.2 or higher which is available for all the Mint versions which are still supported - currently back to Mint 17.0 LTS. Cinnamon 2.6 or higher is required to support Modal Alerts. The latest versions have been tested up to Cinnamon 5.6.
 
 For full facilities including notifications and audible alerts the ```zenity sox``` and ```libsox-fmt-mp3``` libraries must be installed. They can be installed wih the Synaptic Package Manager or using the following terminal command:
 

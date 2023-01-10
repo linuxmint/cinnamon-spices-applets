@@ -1,0 +1,468 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux v2.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-29 23:44+0200\n"
+"PO-Revision-Date: 2022-11-30 10:35+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: 4.6/applet.js:73 2.8/applet.js:65 3.4/applet.js:65 4.4/applet.js:72
+msgid "Playing"
+msgstr "Toistetaan"
+
+#: 4.6/applet.js:74 2.8/applet.js:66 3.4/applet.js:66 4.4/applet.js:73
+msgid "Paused"
+msgstr "Tauko"
+
+#: 4.6/applet.js:75 2.8/applet.js:67 3.4/applet.js:67 4.4/applet.js:74
+msgid "Stopped"
+msgstr "Pysäytetty"
+
+#: 4.6/applet.js:558 2.8/applet.js:495 3.4/applet.js:500 4.4/applet.js:557
+msgid "Open Player"
+msgstr "Avaa soitin"
+
+#: 4.6/applet.js:571 2.8/applet.js:508 3.4/applet.js:513 4.4/applet.js:570
+msgid "Quit Player"
+msgstr "Lopeta soitin"
+
+#: 4.6/applet.js:592 4.6/applet.js:719 4.6/applet.js:723 2.8/applet.js:529
+#: 2.8/applet.js:761 2.8/applet.js:765 3.4/applet.js:534 3.4/applet.js:766
+#: 3.4/applet.js:770 4.4/applet.js:591 4.4/applet.js:723 4.4/applet.js:727
+msgid "Unknown Artist"
+msgstr "Tuntematon esittäjä"
+
+#: 4.6/applet.js:593 4.6/applet.js:730 2.8/applet.js:530 2.8/applet.js:772
+#: 3.4/applet.js:535 3.4/applet.js:777 4.4/applet.js:592 4.4/applet.js:734
+msgid "Unknown Album"
+msgstr "Tuntematon albumi"
+
+#: 4.6/applet.js:594 4.6/applet.js:735 2.8/applet.js:531 2.8/applet.js:777
+#: 3.4/applet.js:536 3.4/applet.js:782 4.4/applet.js:593 4.4/applet.js:739
+msgid "Unknown Title"
+msgstr "Tuntematon nimi"
+
+#: 4.6/applet.js:616 2.8/applet.js:552 3.4/applet.js:557 4.4/applet.js:615
+msgid "Previous"
+msgstr "Edellinen"
+
+#: 4.6/applet.js:619 4.6/applet.js:790 4.6/applet.js:796 2.8/applet.js:555
+#: 2.8/applet.js:837 2.8/applet.js:843 3.4/applet.js:560 3.4/applet.js:842
+#: 3.4/applet.js:848 4.4/applet.js:618 4.4/applet.js:794 4.4/applet.js:800
+msgid "Play"
+msgstr "Toista"
+
+#: 4.6/applet.js:622 2.8/applet.js:558 3.4/applet.js:563 4.4/applet.js:621
+msgid "Stop"
+msgstr "Pysäytä"
+
+#: 4.6/applet.js:625 2.8/applet.js:561 3.4/applet.js:566 4.4/applet.js:624
+msgid "Next"
+msgstr "Seuraava"
+
+#: 4.6/applet.js:635 4.6/applet.js:822 2.8/applet.js:572 2.8/applet.js:867
+#: 3.4/applet.js:577 3.4/applet.js:872 4.4/applet.js:634 4.4/applet.js:824
+msgid "Consecutive Playing"
+msgstr "Jatkuva toisto"
+
+#: 4.6/applet.js:638 4.6/applet.js:838 2.8/applet.js:579 2.8/applet.js:881
+#: 3.4/applet.js:584 3.4/applet.js:886 4.4/applet.js:641 4.4/applet.js:838
+msgid "No Shuffle"
+msgstr "Ei sekoitusta"
+
+#: 4.6/applet.js:784 2.8/applet.js:831 3.4/applet.js:836 4.4/applet.js:788
+msgid "Pause"
+msgstr "Tauko"
+
+#: 4.6/applet.js:824 2.8/applet.js:869 3.4/applet.js:874 4.4/applet.js:826
+msgid "Repeat Single"
+msgstr "Toista kappaletta"
+
+#: 4.6/applet.js:826 2.8/applet.js:871 3.4/applet.js:876 4.4/applet.js:828
+msgid "Repeat All"
+msgstr "Toista kaikki"
+
+#: 4.6/applet.js:838 2.8/applet.js:881 3.4/applet.js:886 4.4/applet.js:838
+msgid "Shuffle"
+msgstr "Sekoitus"
+
+#: 4.6/applet.js:1027 2.8/applet.js:1262 3.4/applet.js:1184 4.4/applet.js:1019
+msgid "Mute output"
+msgstr "Vaimenna ääni"
+
+#: 4.6/applet.js:1028 2.8/applet.js:1263 3.4/applet.js:1185 4.4/applet.js:1020
+msgid "Mute input"
+msgstr "Vaimenna mikrofoni"
+
+#: 4.6/applet.js:1034 2.8/applet.js:1269 3.4/applet.js:1191 4.4/applet.js:1026
+msgid "Applications"
+msgstr "Sovellukset"
+
+#: 4.6/applet.js:1035 2.8/applet.js:1270 3.4/applet.js:1192 4.4/applet.js:1027
+msgid "Output device"
+msgstr "Toistolaite"
+
+#: 4.6/applet.js:1042 2.8/applet.js:1277 3.4/applet.js:1199 4.4/applet.js:1034
+msgid "Microphone"
+msgstr "Mikrofoni"
+
+#: 4.6/applet.js:1044 2.8/applet.js:1280 3.4/applet.js:1202 4.4/applet.js:1036
+msgid "Input device"
+msgstr "Sisääntulon laite"
+
+#: 4.6/applet.js:1409 2.8/applet.js:1644 3.4/applet.js:1571 4.4/applet.js:1397
+msgid "Launch player"
+msgstr "Käynnistä soitin"
+
+#: 4.6/applet.js:1414 2.8/applet.js:1639 3.4/applet.js:1566 4.4/applet.js:1392
+msgid "Choose player controls"
+msgstr "Valitse soittimen säätimet"
+
+#: 4.6/applet.js:1420 4.6/applet.js:1515 2.8/applet.js:1650 2.8/applet.js:1735
+#: 3.4/applet.js:1577 3.4/applet.js:1662 4.4/applet.js:1403 4.4/applet.js:1497
+msgid "Volume"
+msgstr "Voimakkuus"
+
+#. 4.6->settings-schema.json->section3->description
+#. 3.4->settings-schema.json->section3->description
+#. 4.4->settings-schema.json->section3->description
+#: 4.6/applet.js:1426 2.8/applet.js:1657 3.4/applet.js:1584 4.4/applet.js:1409
+msgid "Sound Settings"
+msgstr "Ääniasetukset"
+
+#. metadata.json->name
+msgid "Sound 150%"
+msgstr "Sound 150%"
+
+#. metadata.json->description
+msgid ""
+"An applet, based on the Cinnamon one, to control sound (up to 150% of "
+"nominal volume) and music"
+msgstr ""
+"Cinnamon one perustuva sovelma äänen ja musiikin ohjaamiseen (tehostus "
+"voimakkuudelle jopa 150%)"
+
+#. 4.6->settings-schema.json->section1->description
+#. 3.4->settings-schema.json->section1->description
+#. 4.4->settings-schema.json->section1->description
+msgid "Menu"
+msgstr "Valikko"
+
+#. 4.6->settings-schema.json->playerControl->description
+#. 2.8->settings-schema.json->playerControl->description
+#. 3.4->settings-schema.json->playerControl->description
+#. 4.4->settings-schema.json->playerControl->description
+msgid "Control Players"
+msgstr "Hallitse soittimia"
+
+#. 4.6->settings-schema.json->extendedPlayerControl->description
+#. 2.8->settings-schema.json->extendedPlayerControl->description
+#. 3.4->settings-schema.json->extendedPlayerControl->description
+#. 4.4->settings-schema.json->extendedPlayerControl->description
+msgid "Show Loop and Shuffle controls"
+msgstr "Näytä jatkuvan toiston ja sekoituksen säätimet"
+
+#. 4.6->settings-schema.json->keyOpen->description
+msgid "Show menu"
+msgstr "Näytä valikko"
+
+#. 4.6->settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the sound applet menu."
+msgstr "Aseta pikanäppäin näyttämään äänisovelman valikko."
+
+#. 4.6->settings-schema.json->section2->description
+#. 3.4->settings-schema.json->section2->description
+#. 4.4->settings-schema.json->section2->description
+msgid "Panel"
+msgstr "Paneeli"
+
+#. 4.6->settings-schema.json->showtrack->description
+#. 2.8->settings-schema.json->showtrack->description
+#. 3.4->settings-schema.json->showtrack->description
+#. 4.4->settings-schema.json->showtrack->description
+msgid "Show song information on the panel"
+msgstr "Näytä kappaleen tiedot paneelissa"
+
+#. 4.6->settings-schema.json->truncatetext->units
+#. 2.8->settings-schema.json->truncatetext->units
+#. 3.4->settings-schema.json->truncatetext->units
+#. 4.4->settings-schema.json->truncatetext->units
+msgid "characters"
+msgstr "merkkiä"
+
+#. 4.6->settings-schema.json->truncatetext->description
+#. 2.8->settings-schema.json->truncatetext->description
+#. 3.4->settings-schema.json->truncatetext->description
+#. 4.4->settings-schema.json->truncatetext->description
+msgid "Limit song information to"
+msgstr "Rajoita kappaleen tiedot"
+
+#. 4.6->settings-schema.json->middleClickAction->options
+#. 2.8->settings-schema.json->middleClickAction->options
+#. 3.4->settings-schema.json->middleClickAction->options
+#. 4.4->settings-schema.json->middleClickAction->options
+msgid "Toggle Mute"
+msgstr "Kytke vaimennus"
+
+#. 4.6->settings-schema.json->middleClickAction->options
+#. 4.4->settings-schema.json->middleClickAction->options
+msgid "Toggle Mute output"
+msgstr "Vaimenna ulostulo"
+
+#. 4.6->settings-schema.json->middleClickAction->options
+#. 4.4->settings-schema.json->middleClickAction->options
+msgid "Toggle Mute input"
+msgstr "Vaimenna sisääntulo"
+
+#. 4.6->settings-schema.json->middleClickAction->options
+#. 2.8->settings-schema.json->middleClickAction->options
+#. 3.4->settings-schema.json->middleClickAction->options
+#. 4.4->settings-schema.json->middleClickAction->options
+msgid "Toggle Play / Pause"
+msgstr "Vaihda toisto/tauko"
+
+#. 4.6->settings-schema.json->middleClickAction->description
+#. 2.8->settings-schema.json->middleClickAction->description
+#. 3.4->settings-schema.json->middleClickAction->description
+#. 4.4->settings-schema.json->middleClickAction->description
+msgid "Action on middle click"
+msgstr "Keskipainikkeen toiminta"
+
+#. 4.6->settings-schema.json->horizontalScroll->description
+#. 4.4->settings-schema.json->horizontalScroll->description
+msgid "Use horizontal scrolling to move between tracks"
+msgstr "Vaihda kappaleita vaakavierittämällä"
+
+#. 4.6->settings-schema.json->showalbum->description
+#. 2.8->settings-schema.json->showalbum->description
+#. 3.4->settings-schema.json->showalbum->description
+#. 4.4->settings-schema.json->showalbum->description
+msgid "Show album art as icon"
+msgstr "Näytä albumin kannet kuvakkeena"
+
+#. 4.6->settings-schema.json->keepAlbumAspectRatio->description
+#. 4.4->settings-schema.json->keepAlbumAspectRatio->description
+msgid "Keep album art aspect ratio"
+msgstr "Säilytä albumin kannen kuvasuhde"
+
+#. 4.6->settings-schema.json->hideSystray->description
+#. 2.8->settings-schema.json->hideSystray->description
+#. 3.4->settings-schema.json->hideSystray->description
+#. 4.4->settings-schema.json->hideSystray->description
+msgid "Hide system tray icons for compatible players"
+msgstr "Piilota yhteensopivien soitinten ilmoitusalueen kuvakkeet"
+
+#. 4.6->settings-schema.json->setAmplification->description
+#. 2.8->settings-schema.json->percentMaxVol->description
+#. 3.4->settings-schema.json->percentMaxVol->description
+#. 4.4->settings-schema.json->setAmplification->description
+msgid "Maximum volume control"
+msgstr "Suurinman voimakkuuden säätö"
+
+#. 4.6->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
+msgid "6%"
+msgstr "6%"
+
+#. 4.6->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
+msgid "5%"
+msgstr "5%"
+
+#. 4.6->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
+msgid "4%"
+msgstr "4%"
+
+#. 4.6->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
+msgid "3%"
+msgstr "3%"
+
+#. 4.6->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
+msgid "2%"
+msgstr "2%"
+
+#. 4.6->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
+msgid "1%"
+msgstr "1%"
+
+#. 4.6->settings-schema.json->stepVolume->tooltip
+#. 2.8->settings-schema.json->stepVolume->tooltip
+#. 3.4->settings-schema.json->stepVolume->tooltip
+#. 4.4->settings-schema.json->stepVolume->tooltip
+msgid "% of nominal volume"
+msgstr "% normaalista voimakkuudesta"
+
+#. 4.6->settings-schema.json->stepVolume->description
+#. 2.8->settings-schema.json->stepVolume->description
+#. 3.4->settings-schema.json->stepVolume->description
+#. 4.4->settings-schema.json->stepVolume->description
+msgid "+/-"
+msgstr "+/-"
+
+#. 4.6->settings-schema.json->magneticOn->description
+#. 3.4->settings-schema.json->magneticOn->description
+#. 4.4->settings-schema.json->magneticOn->description
+msgid "Magnetize the 'Volume 100%' mark"
+msgstr "Magnetoi \"Voimakkuus 100%\" merkki"
+
+#. 4.6->settings-schema.json->magneticOn->tooltip
+#. 3.4->settings-schema.json->magneticOn->tooltip
+#. 4.4->settings-schema.json->magneticOn->tooltip
+msgid ""
+"When checked, the 'Volume 100%' mark becomes magnetic: the volume is "
+"automatically set to 100% when the distance between the volume value and "
+"100% is lesser than a half-step."
+msgstr ""
+"Kun valittuna, \"Voimakkuus 100%\" merkintä muuttuu magneettiseksi: "
+"voimakkuus asetetaan automaattisesti 100%:iin, kun voimakkuuden arvon ja "
+"100%:n välinen etäisyys on puoliaskelta pienempi."
+
+#. 4.6->settings-schema.json->adaptColor->description
+#. 2.8->settings-schema.json->adaptColor->description
+#. 3.4->settings-schema.json->adaptColor->description
+#. 4.4->settings-schema.json->adaptColor->description
+msgid "Adjust the color of the icon to the volume"
+msgstr "Säädä kuvakkeen väri voimakkuuden mukaan"
+
+#. 4.6->settings-schema.json->adaptColor->tooltip
+#. 2.8->settings-schema.json->adaptColor->tooltip
+#. 3.4->settings-schema.json->adaptColor->tooltip
+#. 4.4->settings-schema.json->adaptColor->tooltip
+msgid "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red."
+msgstr "Keltainen 101% - 115%; oranssi 116% - 130%; punainen yli 130%."
+
+#. 2.8->settings-schema.json->percentMaxVol->options
+#. 3.4->settings-schema.json->percentMaxVol->options
+msgid "150%"
+msgstr "150%"
+
+#. 2.8->settings-schema.json->percentMaxVol->options
+#. 3.4->settings-schema.json->percentMaxVol->options
+msgid "140%"
+msgstr "140%"
+
+#. 2.8->settings-schema.json->percentMaxVol->options
+#. 3.4->settings-schema.json->percentMaxVol->options
+msgid "130%"
+msgstr "130%"
+
+#. 2.8->settings-schema.json->percentMaxVol->options
+#. 3.4->settings-schema.json->percentMaxVol->options
+msgid "120%"
+msgstr "120%"
+
+#. 2.8->settings-schema.json->percentMaxVol->options
+#. 3.4->settings-schema.json->percentMaxVol->options
+msgid "110%"
+msgstr "110%"
+
+#. 2.8->settings-schema.json->percentMaxVol->options
+#. 3.4->settings-schema.json->percentMaxVol->options
+msgid "100%"
+msgstr "100%"
+
+#. 2.8->settings-schema.json->percentMaxVol->options
+#. 3.4->settings-schema.json->percentMaxVol->options
+msgid "90%"
+msgstr "90%"
+
+#. 2.8->settings-schema.json->percentMaxVol->options
+#. 3.4->settings-schema.json->percentMaxVol->options
+msgid "80%"
+msgstr "80%"
+
+#. 2.8->settings-schema.json->percentMaxVol->options
+#. 3.4->settings-schema.json->percentMaxVol->options
+msgid "70%"
+msgstr "70%"
+
+#. 2.8->settings-schema.json->percentMaxVol->options
+#. 3.4->settings-schema.json->percentMaxVol->options
+msgid "60%"
+msgstr "60%"
+
+#. 2.8->settings-schema.json->percentMaxVol->options
+#. 3.4->settings-schema.json->percentMaxVol->options
+msgid "50%"
+msgstr "50%"
+
+#. 2.8->settings-schema.json->percentMaxVol->options
+#. 3.4->settings-schema.json->percentMaxVol->options
+msgid "40%"
+msgstr "40%"
+
+#. 2.8->settings-schema.json->percentMaxVol->options
+#. 3.4->settings-schema.json->percentMaxVol->options
+msgid "30%"
+msgstr "30%"
+
+#. 2.8->settings-schema.json->percentMaxVol->tooltip
+#. 3.4->settings-schema.json->percentMaxVol->tooltip
+msgid ""
+"You can try to increase the volume of your sound card up to 150% of its "
+"nominal value. Use with caution. You can also set a value less than 100%, "
+"for example on a child's computer."
+msgstr ""
+"Voit lisätä äänikorttisi äänen voimakkuutta jopa 150% sen normaalista "
+"arvosta. Käytä varoen. Voit myös asettaa arvon alle 100% esimerkiksi lapsen "
+"tietokoneelle."
+
+#. 2.8->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+msgid "10%"
+msgstr "10%"
+
+#. 2.8->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+msgid "9%"
+msgstr "9%"
+
+#. 2.8->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+msgid "8%"
+msgstr "8%"
+
+#. 2.8->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+msgid "7%"
+msgstr "7%"
+
+#. 3.4->settings-schema.json->alwaysShowInput->description
+msgid "Always show input controls"
+msgstr "Näytä aina sisääntulon säätimet"
+
+#. 3.4->settings-schema.json->alwaysShowInput->tooltip
+msgid ""
+"When checked, input volume and source controls are always shown, even if no "
+"application is currently recording sound."
+msgstr ""
+"Kun valittuna, sisääntulon voimakkuuden ja laitteen säätimet näkyvät aina, "
+"vaikka mikään sovellus ei tällä hetkellä tallenna ääntä."

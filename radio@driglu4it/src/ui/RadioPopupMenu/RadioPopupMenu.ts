@@ -1,16 +1,23 @@
-import { createPopupMenu } from "../../lib/PopupMenu"
+import { createPopupMenu, PopupMenu } from "../../lib/PopupMenu"
 import { createSeparatorMenuItem } from "../../lib/PopupSeperator"
 import { mpvHandler } from "../../services/mpv/MpvHandler"
+import { ChangeHandler } from "../../types"
 import { createInfoSection } from "../InfoSection"
 import { createSeeker } from "../Seeker"
 import { createVolumeSlider } from "../VolumeSlider"
 import { createChannelList } from "./ChannelList"
 import { createMediaControlToolbar } from "./MediaControlToolbar/MediaControlToolbar"
-import { createUpdateStationsMenuItem } from "./UpdateStationsMenuItem"
 
 const { BoxLayout } = imports.gi.St
 
-export function createRadioPopupMenu(props: { launcher: imports.gi.St.BoxLayout }) {
+export let radioPopupMenu: PopupMenu
+
+export const initRadioPopupMenu = (props: { launcher: imports.gi.St.BoxLayout }) => {
+    if (radioPopupMenu) {
+        global.logWarning('radioPopupMenu already initiallized')
+        return
+    }
+
     const {
         launcher,
     } = props
@@ -20,7 +27,7 @@ export function createRadioPopupMenu(props: { launcher: imports.gi.St.BoxLayout 
         addPlaybackStatusChangeHandler
     } = mpvHandler
 
-    const popupMenu = createPopupMenu({ launcher })
+    radioPopupMenu = createPopupMenu({ launcher })
 
     const radioActiveSection = new BoxLayout({
         vertical: true,
@@ -32,12 +39,10 @@ export function createRadioPopupMenu(props: { launcher: imports.gi.St.BoxLayout 
         radioActiveSection.add_child(widget)
     })
 
-    popupMenu.add_child(createChannelList())
-    popupMenu.add_child(radioActiveSection)
+    radioPopupMenu.add_child(createChannelList())
+    radioPopupMenu.add_child(radioActiveSection)
 
     addPlaybackStatusChangeHandler((newValue) => {
         radioActiveSection.visible = newValue !== 'Stopped'
     })
-
-    return popupMenu
 }

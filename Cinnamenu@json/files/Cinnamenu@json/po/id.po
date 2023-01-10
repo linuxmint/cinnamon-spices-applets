@@ -486,7 +486,7 @@ msgstr ""
 msgid "Show favorites on sidebar"
 msgstr "Tampilkan favorit di bilah sisi"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "Tampilkan ikon aplikasi dan file favorit Anda di bilah sisi"
 
 msgid "Show recent items"

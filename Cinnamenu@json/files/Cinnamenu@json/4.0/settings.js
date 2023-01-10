@@ -412,10 +412,30 @@ class AppletSettings {
     }
 
     _ensureSettingsFiles() {
-        let configPath = [GLib.get_home_dir(), ".cinnamon", "configs", this.uuid].join("/");
-        let configDir = Gio.file_new_for_path(configPath);
-        if (!configDir.query_exists(null)) configDir.make_directory_with_parents(null);
-        this.file = configDir.get_child(this.instanceId + ".json");
+        const cinnamonVersion = GLib.getenv('CINNAMON_VERSION').split('.');
+        const majorVersion = parseInt(cinnamonVersion[0]);
+        const minorVersion = parseInt(cinnamonVersion[1]);
+        if (majorVersion > 5 || majorVersion == 5 && minorVersion >= 6) { //5.6 or later
+            let configPath = [GLib.get_user_config_dir(), "cinnamon", "spices", this.uuid].join("/");
+            let configDir = Gio.file_new_for_path(configPath);
+            if (!configDir.query_exists(null)) configDir.make_directory_with_parents(null);
+
+            let configFile = configDir.get_child(this.instanceId + ".json")
+
+            let oldConfigDir = Gio.file_new_for_path([GLib.get_home_dir(), ".cinnamon", "configs", this.uuid].join("/"));
+            let oldConfigFile = oldConfigDir.get_child(this.instanceId + ".json");
+
+            // We only use the config under the old path if it's the only one for backwards compatibility
+            if (oldConfigFile.query_exists(null) && !configFile.query_exists(null))
+                this.file = oldConfigFile;
+            else 
+                this.file = configFile;
+        } else {
+            let configPath = [GLib.get_home_dir(), ".cinnamon", "configs", this.uuid].join("/");
+            let configDir = Gio.file_new_for_path(configPath);
+            if (!configDir.query_exists(null)) configDir.make_directory_with_parents(null);
+            this.file = configDir.get_child(this.instanceId + ".json");
+        }
 
         // If the settings have already been installed previously we need to check if the schema
         // has changed and if so, do an upgrade

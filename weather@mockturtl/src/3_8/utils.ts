@@ -541,16 +541,26 @@ export function ShadeHexColor(color: string, percent: number): string {
  * @param locale Linux locale string
  */
 export function ConstructJsLocale(locale: string): string | null {
-	let jsLocale: string | null = locale.split(".")[0];
+	if (locale == null)
+		return null;
+
+	// we only need lan_country section of locale, if we have space, @ or . we need to remove everything after
+	const jsLocale: string = locale.split(/[.\s@]/)[0].trim();
 	const tmp: string[] = jsLocale.split("_");
-	jsLocale = "";
+
+	let result: string = "";
+	// Add back country code if we have it
 	for (const [i, item] of tmp.entries()) {
-		if (i != 0) jsLocale += "-";
-		jsLocale += item.toLowerCase();
+		if (i != 0) 
+			result += "-";
+		result += item.toLowerCase();
 	}
 
-	if (locale == "c" || locale == null) jsLocale = null;
-	return jsLocale;
+	// Ignore C
+	if (result == "c") 
+		return null;
+
+	return result;
 }
 
 /**

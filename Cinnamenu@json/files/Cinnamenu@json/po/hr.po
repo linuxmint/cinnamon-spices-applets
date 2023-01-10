@@ -497,7 +497,7 @@ msgstr ""
 msgid "Show favorites on sidebar"
 msgstr "Prikaži omiljene na bočnoj traci"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "Prikažite svoje omiljene aplikacije i ikone datoteka na bočnoj traci"
 
 msgid "Show recent items"

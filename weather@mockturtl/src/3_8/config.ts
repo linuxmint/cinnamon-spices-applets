@@ -12,7 +12,7 @@ import { MetUk } from "./providers/met_uk";
 import { BaseProvider } from "./providers/BaseProvider";
 import { DarkSky } from "./providers/darkSky";
 import { OpenWeatherMap } from "./providers/openWeatherMap";
-import { MetNorway } from "./providers/met_norway";
+import { MetNorway } from "./providers/met_norway/provider";
 import { Weatherbit } from "./providers/weatherbit";
 import { ClimacellV4 } from "./providers/climacellV4";
 import { USWeather } from "./providers/us_weather";
@@ -20,6 +20,8 @@ import { VisualCrossing } from "./providers/visualcrossing";
 import { DanishMI } from "./providers/danishMI";
 import { AccuWeather } from "./providers/accuWeather";
 import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
+import { WeatherUnderground } from "./providers/weatherUnderground";
+import { Event } from "./lib/events";
 
 const { get_home_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -51,7 +53,8 @@ export type Services =
 	"Visual Crossing" |
 	"DanishMI" |
 	"AccuWeather" |
-	"DeutscherWetterdienst";
+	"DeutscherWetterdienst" |
+	"WeatherUnderground";
 
 export const ServiceClassMapping: ServiceClassMappingType = {
 	"DarkSky": (app) => new DarkSky(app),
@@ -64,45 +67,8 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	"Visual Crossing": (app) => new VisualCrossing(app),
 	"DanishMI": (app) => new DanishMI(app),
 	"AccuWeather": (app) => new AccuWeather(app),
-	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app)
-}
-
-/**
- * Keys matching the ones in settings-schema.json
- */
-const Keys = {
-	DATA_SERVICE: "dataService",
-	API_KEY: "apiKey",
-	TEMPERATURE_UNIT_KEY: "temperatureUnit",
-	TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
-	WIND_SPEED_UNIT: "windSpeedUnit",
-	DISTANCE_UNIT: "distanceUnit",
-	CITY: "locationLabelOverride",
-	TRANSLATE_CONDITION: "translateCondition",
-	VERTICAL_ORIENTATION: "verticalOrientation",
-	SHOW_TEXT_IN_PANEL: "showTextInPanel",
-	//TEMP_TEXT_OVERRIDE: "tempTextOverride",
-	SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
-	SHOW_SUNRISE: "showSunrise",
-	SHOW_24HOURS: "show24Hours",
-	FORECAST_DAYS: "forecastDays",
-	FORECAST_HOURS: "forecastHours",
-	FORECAST_COLS: "forecastColumns",
-	FORECAST_ROWS: "forecastRows",
-	REFRESH_INTERVAL: "refreshInterval",
-	PRESSURE_UNIT: "pressureUnit",
-	SHORT_CONDITIONS: "shortConditions",
-	MANUAL_LOCATION: "manualLocation",
-	USE_CUSTOM_APPLET_ICONS: 'useCustomAppletIcons',
-	USE_CUSTOM_MENU_ICONS: "useCustomMenuIcons",
-	RUSSIAN_STYLE: "tempRussianStyle",
-	SHORT_HOURLY_TIME: "shortHourlyTime",
-	SHOW_FORECAST_DATES: "showForecastDates",
-	WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
-	IMMEDIATE_PRECIP: "immediatePrecip",
-	SHOW_BOTH_TEMP: "showBothTempUnits",
-	DISPLAY_WIND_DIR_AS_TEXT: "displayWindAsText",
-	ALWAYS_SHOW_HOURLY: "alwaysShowHourlyWeather"
+	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
+	"WeatherUnderground": (app) => new WeatherUnderground(app)
 }
 
 export class Config {
@@ -110,12 +76,12 @@ export class Config {
 	/** Default is celsius */
 	private readonly fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
 	/** Default kph, gb added to mph keys  */
-	private readonly windSpeedUnitLocales: WindSpeedLocalePrefs = {
+	private readonly windSpeedUnitLocales: Record<string, WeatherWindSpeedUnits> = {
 		"fi kr no pl ru se": "m/s",
 		"us gb": "mph"
 	}
 	/** Default metric */
-	private readonly distanceUnitLocales: DistanceUnitLocalePrefs = {
+	private readonly distanceUnitLocales: Record<string, DistanceUnits> = {
 		"us gb": "imperial"
 	}
 
@@ -152,7 +118,6 @@ export class Config {
 	public readonly _locationLabelOverride!: string;
 	public readonly _useCustomAppletIcons!: boolean;
 	public readonly _useCustomMenuIcons!: boolean;
-	public readonly _tempTextOverride!: string;
 	public readonly _tempRussianStyle!: boolean;
 	public readonly _shortHourlyTime!: boolean;
 	public readonly _showForecastDates!: boolean;
@@ -163,6 +128,42 @@ export class Config {
 	public readonly _alwaysShowHourlyWeather!: boolean;
 	public readonly _logLevel!: LogLevel;
 	public readonly _selectedLogPath!: string;
+	public readonly _panelTextOverride!: string;
+
+	public readonly DataServiceChanged = new Event<Config, Services>();
+	public readonly ApiKeyChanged = new Event<Config, string>();
+	public readonly TemperatureUnitChanged = new Event<Config, WeatherUnits>();
+	public readonly TemperatureHighFirstChanged = new Event<Config, boolean>();
+	public readonly WindSpeedUnitChanged = new Event<Config, WeatherWindSpeedUnits>();
+	public readonly DistanceUnitChanged = new Event<Config, DistanceUnits>();
+	public readonly LocationLabelOverrideChanged = new Event<Config, string>();
+	public readonly TranslateConditionChanged = new Event<Config, boolean>();
+	/**
+	 * true is vertical, false is horizontal
+	 */
+	public readonly VerticalOrientationChanged = new Event<Config, boolean>();
+	public readonly ShowTextInPanelChanged = new Event<Config, boolean>();
+	public readonly ShowCommentInPanelChanged = new Event<Config, boolean>();
+	public readonly ShowSunriseChanged = new Event<Config, boolean>();
+	public readonly Show24HoursChanged = new Event<Config, boolean>();
+	public readonly ForecastDaysChanged = new Event<Config, number>();
+	public readonly ForecastHoursChanged = new Event<Config, number>();
+	public readonly ForecastColumnsChanged = new Event<Config, number>();
+	public readonly ForecastRowsChanged = new Event<Config, number>();
+	public readonly RefreshIntervalChanged = new Event<Config, number>();
+	public readonly PressureUnitChanged = new Event<Config, WeatherPressureUnits>();
+	public readonly ShortConditionsChanged = new Event<Config, boolean>();
+	public readonly ManualLocationChanged = new Event<Config, boolean>();
+	public readonly UseCustomAppletIconsChanged = new Event<Config, boolean>();
+	public readonly UseCustomMenuIconsChanged = new Event<Config, boolean>();
+	public readonly TempRussianStyleChanged = new Event<Config, boolean>();
+	public readonly ShortHourlyTimeChanged = new Event<Config, boolean>();
+	public readonly ShowForecastDatesChanged = new Event<Config, boolean>();
+	public readonly UseSymbolicIconsChanged = new Event<Config, boolean>();
+	public readonly ImmediatePrecipChanged = new Event<Config, boolean>();
+	public readonly ShowBothTempUnitsChanged = new Event<Config, boolean>();
+	public readonly DisplayWindAsTextChanged = new Event<Config, boolean>();
+	public readonly AlwaysShowHourlyWeatherChanged = new Event<Config, boolean>();
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
@@ -170,7 +171,7 @@ export class Config {
 
 	private settings: imports.ui.settings.AppletSettings;
 	private app: WeatherApplet;
-	private countryCode: string | null;
+	public readonly countryCode: string | null;
 	public textColorStyle: string | null = null;
 
 	private timezone: string | undefined = undefined;
@@ -197,52 +198,19 @@ export class Config {
 
 	constructor(app: WeatherApplet, instanceID: number) {
 		this.app = app;
+		this.settings = new AppletSettings(this, UUID, instanceID);
+		// Bind as early as possible so that we can update the log level asap
+		this.BindSettings();
+		this.onLogLevelUpdated();
 		this.currentLocale = ConstructJsLocale(get_language_names()[0]);
-		Logger.Debug("System locale is " + this.currentLocale);
-
+		Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
+		this.countryCode = this.GetCountryCode(this.currentLocale);
 		this.autoLocProvider = new IpApi(app); // IP location lookup
 		this.geoLocationService = new GeoLocation(app);
-		this.countryCode = this.GetCountryCode(this.currentLocale);
-		this.settings = new AppletSettings(this, UUID, instanceID);
 		this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });
 		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
 		this.currentFontSize = this.GetCurrentFontSize();
-		this.BindSettings();
 		this.LocStore = new LocationStore(this.app, this);
-		this.onLogLevelUpdated();
-	}
-
-	/** Attaches settings to functions */
-	private BindSettings() {
-		let k: keyof typeof Keys;
-		for (k in Keys) {
-			const key = Keys[k];
-			const keyProp = "_" + key;
-			this.settings.bindProperty(BindingDirection.IN,
-				key, keyProp, this.OnSettingChanged, null);
-		}
-
-		// Settings what need special care
-		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
-
-		this.settings.bind("tempTextOverride", "_" + "tempTextOverride",
-			this.app.RefreshLabel)
-
-		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
-
-		this.settings.bindProperty(BindingDirection.IN, "keybinding",
-			"keybinding", this.OnKeySettingsUpdated, null);
-
-		this.settings.bindProperty(BindingDirection.IN, "logLevel",
-			"_logLevel", this.onLogLevelUpdated, null);
-
-		this.settings.bind("selectedLogPath",
-			"_selectedLogPath", this.app.saveLog);
-
-		keybindingManager.addHotKey(
-			UUID, this.keybinding, () => this.app.on_applet_clicked(null));
 	}
 
 	public get CurrentFontSize(): number {
@@ -406,6 +374,44 @@ export class Config {
 		}
 	}
 
+	/** Attaches settings to functions */
+	private BindSettings() {
+		let key: keyof typeof Keys;
+		for (key in Keys) {
+			if (Object.prototype.hasOwnProperty.call(Keys, key)) {
+				const element = Keys[key];
+				this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+					element.key, 
+					("_" + element.key),
+					() => this[`${element.prop}Changed`].Invoke(this, this[`_${element.key}` as never]),
+					null
+				);
+			}
+		}
+
+		// Settings what need special care
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), this.OnLocationChanged, null);
+
+		this.settings.bind("tempTextOverride", "_" + "panelTextOverride",
+			this.app.RefreshLabel)
+
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), this.OnLocationStoreChanged, null);
+
+		this.settings.bindProperty(BindingDirection.IN, "keybinding",
+			"keybinding", this.OnKeySettingsUpdated, null);
+
+		this.settings.bindProperty(BindingDirection.IN, "logLevel",
+			"_logLevel", this.onLogLevelUpdated, null);
+
+		this.settings.bind("selectedLogPath",
+			"_selectedLogPath", this.app.saveLog);
+
+		keybindingManager.addHotKey(
+			UUID, this.keybinding, () => this.app.on_applet_clicked(null));
+	}
+
 	// UTILS
 
 	private InjectLocationToConfig(loc: LocationData, switchToManual: boolean = false) {
@@ -413,7 +419,7 @@ export class Config {
 		const text = (loc.entryText + ""); // Only values can be injected into settings and not references, so we add empty string to it.
 		this.SetLocation(text);
 		this.currentLocation = loc;
-		if (switchToManual == true) this.settings.setValue(Keys.MANUAL_LOCATION, true);
+		if (switchToManual == true) this.settings.setValue(Keys.MANUAL_LOCATION.key, true);
 	}
 
 	private OnKeySettingsUpdated = (): void => {
@@ -450,11 +456,7 @@ export class Config {
 	private DoneTypingLocation() {
 		Logger.Debug("User has finished typing, beginning refresh");
 		this.doneTypingLocation = null;
-		this.app.RefreshAndRebuild();
-	}
-
-	private OnSettingChanged = () => {
-		this.app.RefreshAndRebuild();
+		this.app.Refresh();
 	}
 
 	private SetLocation(value: string) {
@@ -552,14 +554,141 @@ export class Config {
 
 		return conf;
 	}
+
+	public Destroy() {
+		this.settings.finalize?.();
+	}
 }
 
-interface WindSpeedLocalePrefs {
-	[key: string]: WeatherWindSpeedUnits;
-}
-interface DistanceUnitLocalePrefs {
-	[key: string]: DistanceUnits;
-}
+/**
+ * Keys matching the ones in settings-schema.json
+ */
+ const Keys = {
+	DATA_SERVICE: {
+		key: "dataService",
+		prop: "DataService"
+	},
+	API_KEY: {
+		key: "apiKey",
+		prop: "ApiKey"
+	},
+	TEMPERATURE_UNIT_KEY: {
+		key: "temperatureUnit",
+		prop: "TemperatureUnit"
+	},
+	TEMPERATURE_HIGH_FIRST: {
+		key: "temperatureHighFirst",
+		prop: "TemperatureHighFirst"
+	},
+	WIND_SPEED_UNIT: {
+		key: "windSpeedUnit",
+		prop: "WindSpeedUnit"
+	},
+	DISTANCE_UNIT: {
+		key: "distanceUnit",
+		prop: "DistanceUnit"
+	},
+	LOCATION_LABEL_OVERRIDE: {
+		key: "locationLabelOverride",
+		prop: "LocationLabelOverride"
+	},
+	TRANSLATE_CONDITION: {
+		key: "translateCondition",
+		prop: "TranslateCondition"
+	},
+	VERTICAL_ORIENTATION: {
+		key: "verticalOrientation",
+		prop: "VerticalOrientation"
+	},
+	SHOW_TEXT_IN_PANEL: {
+		key: "showTextInPanel",
+		prop: "ShowTextInPanel"
+	},
+	SHOW_COMMENT_IN_PANEL: {
+		key: "showCommentInPanel",
+		prop: "ShowCommentInPanel"
+	},
+	SHOW_SUNRISE: {
+		key: "showSunrise",
+		prop: "ShowSunrise"
+	},
+	SHOW_24HOURS: {
+		key: "show24Hours",
+		prop: "Show24Hours"
+	},
+	FORECAST_DAYS: {
+		key: "forecastDays",
+		prop: "ForecastDays"
+	},
+	FORECAST_HOURS: {
+		key: "forecastHours",
+		prop: "ForecastHours"
+	},
+	FORECAST_COLS: {
+		key: "forecastColumns",
+		prop: "ForecastColumns"
+	},
+	FORECAST_ROWS: {
+		key: "forecastRows",
+		prop: "ForecastRows"
+	},
+	REFRESH_INTERVAL: {
+		key: "refreshInterval",
+		prop: "RefreshInterval"
+	},
+	PRESSURE_UNIT: {
+		key: "pressureUnit",
+		prop: "PressureUnit"
+	},
+	SHORT_CONDITIONS: {
+		key: "shortConditions",
+		prop: "ShortConditions"
+	},
+	MANUAL_LOCATION: {
+		key: "manualLocation",
+		prop: "ManualLocation"
+	},
+	USE_CUSTOM_APPLET_ICONS: {
+		key: 'useCustomAppletIcons',
+		prop: 'UseCustomAppletIcons'
+	},
+	USE_CUSTOM_MENU_ICONS: {
+		key: "useCustomMenuIcons",
+		prop: "UseCustomMenuIcons"
+	},
+	RUSSIAN_STYLE: {
+		key: "tempRussianStyle",
+		prop: "TempRussianStyle"
+	},
+	SHORT_HOURLY_TIME: {
+		key: "shortHourlyTime",
+		prop: "ShortHourlyTime"
+	},
+	SHOW_FORECAST_DATES: {
+		key: "showForecastDates",
+		prop: "ShowForecastDates"
+	},
+	WEATHER_USE_SYMBOLIC_ICONS_KEY: {
+		key: 'useSymbolicIcons',
+		prop: 'UseSymbolicIcons'
+	},
+	IMMEDIATE_PRECIP: {
+		key: "immediatePrecip",
+		prop: "ImmediatePrecip"
+	},
+	SHOW_BOTH_TEMP: {
+		key: "showBothTempUnits",
+		prop: "ShowBothTempUnits"
+	},
+	DISPLAY_WIND_DIR_AS_TEXT: {
+		key: "displayWindAsText",
+		prop: "DisplayWindAsText"
+	},
+	ALWAYS_SHOW_HOURLY: {
+		key: "alwaysShowHourlyWeather",
+		prop: "AlwaysShowHourlyWeather"
+	}
+} as const
 
 type ServiceClassMappingType = {
 	[key in Services]: (app: WeatherApplet) => BaseProvider;

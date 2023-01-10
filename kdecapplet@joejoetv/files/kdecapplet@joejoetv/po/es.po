@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-20 13:38+0200\n"
+"PO-Revision-Date: 2022-12-24 21:57-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: applet.js:281 applet.js:484 applet.js:524
+msgid "Send SMS"
+msgstr "Enviar SMS"
+
+#: applet.js:281
+msgid "Send"
+msgstr "Enviar"
+
+#: applet.js:281
+msgid "Enter Phone Number and Message to Send."
+msgstr "Ingrese el número de teléfono y el mensaje para enviar."
+
+#: applet.js:281
+msgid "Phone Number"
+msgstr "Número de teléfono"
+
+#: applet.js:281
+msgid "Message"
+msgstr "Mensaje"
+
+#: applet.js:282 applet.js:570
+msgid "Share URL"
+msgstr "Compartir URL"
+
+#: applet.js:282
+msgid "Share"
+msgstr "Compartir"
+
+#: applet.js:282
+msgid "Enter URL to Share."
+msgstr "Introduzca la URL para compartir."
+
+#: applet.js:282
+msgid "URL"
+msgstr "URL"
+
+#: applet.js:347
+msgid "KDE Connect Version"
+msgstr "Version de KDE Connect"
+
+#: applet.js:350
+msgid "Configure KDEConnect"
+msgstr "Configurar KDE Connect"
+
+#: applet.js:358 applet.js:361
+msgid "KDEConnect is not running!"
+msgstr "¡KDE Connect no está funcionando!"
+
+#: applet.js:363
+msgid "Reload Applet"
+msgstr "Recargar Applet"
+
+#: applet.js:397 applet.js:400
+msgid "No reachable paired devices!"
+msgstr "¡No hay dispositivos emparejados accesibles!"
+
+#: applet.js:405
+msgid "Devices"
+msgstr "Dispositivos"
+
+#: applet.js:408
+msgid "Device"
+msgstr "Dispositivo"
+
+#: applet.js:431
+msgid "ID"
+msgstr "ID"
+
+#: applet.js:435
+msgid "Copied Device ID to the clipboard"
+msgstr "ID de dispositivo copiado en el portapapeles"
+
+#: applet.js:470
+msgid "Send Ping"
+msgstr "Enviar Ping"
+
+#: applet.js:496 applet.js:536
+msgid "Sent SMS to ${phonenumber}"
+msgstr "SMS enviado a ${phonenumber}"
+
+#: applet.js:514
+msgid "Launch SMS App"
+msgstr "Iniciar la aplicación SMS"
+
+#: applet.js:554
+msgid "Share File"
+msgstr "Compartir archivo"
+
+#: applet.js:561
+msgid "Shared file with ${name}"
+msgstr "Archivo compartido con ${name}"
+
+#: applet.js:580
+msgid "Shared URL with ${name}"
+msgstr "URL compartida con ${name}"
+
+#: applet.js:602 applet.js:749
+msgid "Mount and Browse"
+msgstr "Montar y navegar"
+
+#: applet.js:623
+msgid "The Device couldn't be mounted!"
+msgstr "¡No se ha podido montar el dispositivo!"
+
+#: applet.js:629
+msgid "Unmount"
+msgstr "Desmontar"
+
+#: applet.js:638 applet.js:744
+msgid "Browse"
+msgstr "Navegar"
+
+#: applet.js:658
+msgid "Find My Device"
+msgstr "Buscar mi dispositivo"
+
+#: applet.js:673
+msgid "Request Photo"
+msgstr "Solicitar fotografía"
+
+#: applet.js:680
+msgid "Requested photo from ${name}"
+msgstr "Fotografía solicitada a ${name}"
+
+#: applet.js:754
+msgid "Photo received"
+msgstr "Fotografía recibida"
+
+#. metadata.json->name
+msgid "KDEConnect Applet"
+msgstr "Applet para KDE Connect"
+
+#. metadata.json->description
+msgid "Applet for interacting with Devices connected via KDE COnnect."
+msgstr "Applet para interactuar con dispositivos conectados a través de KDE Connect."
+
+#. metadata.json->comments
+msgid "Requires 'zenity' for some features."
+msgstr "Requiere 'zenity' para algunas funciones."

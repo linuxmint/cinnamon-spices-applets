@@ -45,7 +45,7 @@
         "imagesource": {
             "type": "section",
             "title": "Source",
-            "keys": ["image-source", "source-supports-info", "install-warn-imagemagick", "install-warn-cutycapt", "image-uri"]
+            "keys": ["image-source", "source-supports-info", "install-warn-imagemagick", "install-warn-cutycapt", "source-warn-unsplash", "image-uri"]
         },
         "imageresbing": {
             "type": "section",
@@ -196,6 +196,11 @@
         "type" : "label",
         "description" : "This feature uses the command 'montage' from the package 'imagemagick'. Please make sure this package or command is installed.",
         "dependency" : "image-source=himawari"
+    },
+    "source-warn-unsplash" : {
+        "type" : "label",
+        "description" : "This source is known to cause trouble, especially during times of high demand. Please be patient and try again later if you experience problems. More information can be found at: https://status.unsplash.com/",
+        "dependency" : "image-source=unsplash"
     },
     "image-res-manual" : {
         "type" : "switch",

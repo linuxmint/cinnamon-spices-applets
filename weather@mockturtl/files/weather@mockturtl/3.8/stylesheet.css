@@ -29,6 +29,8 @@
     height: 0;
     width: 0;
     display: none;
+    margin: 0;
+    padding: 0;
 }
 
 .weather-current-icon {

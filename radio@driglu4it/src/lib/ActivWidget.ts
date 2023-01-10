@@ -6,7 +6,7 @@ export interface Arguments {
     widget: imports.gi.St.Widget
 }
 
-
+/**  */
 export function createActivWidget(args: Arguments) {
 
     const {
@@ -20,8 +20,15 @@ export function createActivWidget(args: Arguments) {
     widget.reactive = true
     widget.track_hover = true
 
-    widget.connect('button-release-event', () => { 
-        onActivated?.()
+    widget.connect('button-release-event', (_, event) => {
+
+        const button = event.get_button()
+
+        // only if it is not a right click
+        if (button !== 3) {
+            onActivated?.()
+        }
+
         return false
     })
 
@@ -39,7 +46,7 @@ export function createActivWidget(args: Arguments) {
 
         if (relevantKeys.includes(symbol) && widget.hover)
             onActivated?.()
-        
+
         return false
     })
 }

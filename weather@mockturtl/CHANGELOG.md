@@ -1,5 +1,30 @@
 # Changelog
 
+## 3.2.11
+
+* Fix issue where refresh loop wouldn't ever resume after a single configuration error  
+
+## 3.2.10
+
+* Add more granular control for setting changes
+* Fixes [#4505](https://github.com/linuxmint/cinnamon-spices-applets/issues/4505)
+
+## 3.2.9
+* Add support for Soup v3
+
+## 3.2.8
+
+* Resolve [#4426](https://github.com/linuxmint/cinnamon-spices-applets/issues/4426) - Add Weather Underground as a provider
+
+## 3.2.7
+
+* Fix [#4390](https://github.com/linuxmint/cinnamon-spices-applets/issues/4390) - Make sure applet works with not configured Locale
+
+## 3.2.6
+
+* Fix [#4387](https://github.com/linuxmint/cinnamon-spices-applets/issues/4387)
+* also add some more location-related entries into the applet label override
+
 ## 3.2.5
 
 * Fix [#4378](https://github.com/linuxmint/cinnamon-spices-applets/issues/4378) - Add DWD as a weather provider

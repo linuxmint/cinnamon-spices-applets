@@ -32,28 +32,30 @@ You can also save locations what you entered manually and switch between them in
 | **Tomorrow.io**            | Yes           | 15                    | 108                    | Previously known as Climacell    |
 | **DarkSky**                | Yes           | 8                     | 168                    | Signups closed, will end Q2 2023 |
 | **AccuWeather**            | Yes           | 5***                  | 12                     | Limited free calls               |
+| **Weather Underground**    | Yes           | 5                     | 0                      | --                               |
 
 ### OpenWeatherMap
 
-Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with headquaters in London UK. [OpenWeatherMap Website](https://openweathermap.org/). Read more about the service [here](https://en.wikipedia.org/wiki/OpenWeatherMap).
+Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with headquarters in London UK. [OpenWeatherMap Website](https://openweathermap.org/). Read more about the service [here](https://en.wikipedia.org/wiki/OpenWeatherMap).
 
 * This is the default provider that works out of the box. Big Thanks to them supporting free open source projects, like this!
 
 ### MET Norway
 
-Free meteorological data and forecasts from the Norwegian Meteorological Institute founded in 1866. [MET Norway Website](https://www.met.no/en). Read more about the institure [here](https://en.wikipedia.org/wiki/Norwegian_Meteorological_Institute).
+Free meteorological data and forecasts from the Norwegian Meteorological Institute founded in 1866. [MET Norway Website](https://www.met.no/en). Read more about the institute [here](https://en.wikipedia.org/wiki/Norwegian_Meteorological_Institute).
 
-* Current weather is shown for the next hour, and the daily forecasts are generated from 6 hour forecasts, so there is a possibility that they are inaccurate sometimes.
+* It doesn't support minutely precipitation and current weather is shown for the next hour outside Norway.
+* and the daily forecasts are generated from 6 hour forecasts, so there is a possibility that they are inaccurate sometimes.
 
 ### DMI Denmark
 
-The Danish Meteorological Institute formed in 1872 and makes weather forecasts and observations for Denmark, Greenland, and the Faroe Islands. [DMI Denmark Website](https://www.dmi.dk) Read more about the institure [here](https://en.wikipedia.org/wiki/Danish_Meteorological_Institute).
+The Danish Meteorological Institute formed in 1872 and makes weather forecasts and observations for Denmark, Greenland, and the Faroe Islands. [DMI Denmark Website](https://www.dmi.dk) Read more about the institute [here](https://en.wikipedia.org/wiki/Danish_Meteorological_Institute).
 
 * The service is global with open weather data.
 
 ### Deutscher Wetterdienst
 
-German National Weather Provider. [Deutsche Wetterdienst Website](https://www.dwd.de/DE/Home/home_node.html). Read more about the institure [here](https://en.wikipedia.org/wiki/Deutscher_Wetterdienst).
+German National Weather Provider. [Deutsche Wetterdienst Website](https://www.dwd.de/DE/Home/home_node.html). Read more about the institute [here](https://en.wikipedia.org/wiki/Deutscher_Wetterdienst).
 
 * Only covers Germany.
 
@@ -119,6 +121,13 @@ Online Service from company AccuWeather Inc, founded in 1962 with headquarters i
 
 * API keys can be obtained [here](https://developer.accuweather.com/user/register). Register, then you must add a new App. When it's created Click on the App and the key will be displayed.
 
+### Weather Underground
+
+Weather Underground is a privately owned, web-based weather information company. It provides weather observations and forecasts in a large number of locations around the world. It was founded by Jeff Masters in 1995 with headquarters in Ann Arbor United States. [Weather Underground website](https://www.wunderground.com/). Read more about the service [here](https://en.wikipedia.org/wiki/Weather_Underground_(weather_service)).
+
+- Weather Underground is a global community of people connecting data from environmental sensors like weather stations (250.000) and air quality monitors so they can provide the rich, hyperlocal data you need.
+- You need an API key. If you don't have a weather station to share data with WU, you can't have an API key. However, you can add a Raspberry Pi as a device for the weather station choice when [registering](https://www.wunderground.com/signup), even if you don't have one, and it will get you the API key.
+
 ## Usage of "Override label on panel" setting
 
 The setting allows you to make the applet display basically anything in the form of text in the panel. In addition, it exposes a number of values for you to use as you like, these will be replaced with actual data values. The full text-to-value mapping can be found below.
@@ -137,6 +146,9 @@ The setting allows you to make the applet display basically anything in the form
 | `{extra_name}`    | API specific value's name                                 |
 | `{wind_speed}`    | Wind speed with unit                                      |
 | `{wind_dir}`      | Wind direction in text format (NW, etc)                   |
+| `{city}`          | City name shown in the popup                              |
+| `{country}`       | Country name shown in the popup                           |
+| `{search_entry}`  | Search entry text in manual location (or location store)  |
 
 ## Versions
 

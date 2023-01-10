@@ -23,8 +23,8 @@ CSRemovableSwitchMenuItem.prototype = {
         this.deleteButton = new St.Button({ child: iconDelete });
         this.deleteButton.connect('clicked', Lang.bind(this, this.remove));
 
+        this._statusBin.remove_child(this._switch.actor);
         this.removeActor(this._statusBin);
-        this._statusBin.destroy();
 
         this._statusBin = new St.BoxLayout({
             vertical: false,
