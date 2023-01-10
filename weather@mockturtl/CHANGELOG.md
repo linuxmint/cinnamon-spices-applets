@@ -7,6 +7,7 @@
 * Add option to override tooltip label for applet
 * Try to make hourly weather elements slimmer by putting precipitation change and volume in different rows
 * Update luxon and suncalc
+* Update README
 
 ## 3.2.11
 
