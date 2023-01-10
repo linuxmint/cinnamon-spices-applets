@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-13 19:06+0100\n"
-"PO-Revision-Date: 2022-11-13 19:11+0100\n"
+"POT-Creation-Date: 2022-12-28 00:20+0100\n"
+"PO-Revision-Date: 2022-12-28 00:21+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -55,45 +55,45 @@ msgstr "INTRUSION DÉTECTÉE !"
 msgid "Must be configured!"
 msgstr "Doit être configuré !"
 
-#: applet.js:808
+#: applet.js:811
 msgid "Settings"
 msgstr "Paramètres"
 
-#: applet.js:808
+#: applet.js:811
 msgid ":"
 msgstr " :"
 
 #. settings-schema.json->page_General->title
-#: applet.js:815
+#: applet.js:818
 msgid "⚙ General"
 msgstr "⚙ Général"
 
-#: applet.js:825
+#: applet.js:828
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Capteurs de température"
 
-#: applet.js:835
+#: applet.js:838
 msgid "🤂 Fan sensors"
 msgstr "🤂 Capteurs de ventilateur"
 
-#: applet.js:845
+#: applet.js:848
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Capteurs de tension"
 
-#: applet.js:855
+#: applet.js:858
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Capteurs d'intrusion"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:866
+#: applet.js:869
 msgid "Run xsensors"
 msgstr "Lancer xsensors"
 
-#: applet.js:877
+#: applet.js:880
 msgid "Reload this applet"
 msgstr "Recharger cette applet"
 
-#: applet.js:1165
+#: applet.js:1168
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Êtes-vous sûr de vouloir enlever \"%s\" ?"
@@ -330,6 +330,10 @@ msgstr ""
 #. settings-schema.json->char_size->description
 msgid "Character size (% of standard size)"
 msgstr "Taille des caractères (% de la taille standard)"
+
+#. settings-schema.json->char_color->options
+msgid "Default"
+msgstr "Par défaut"
 
 #. settings-schema.json->char_color->options
 msgid "White"
