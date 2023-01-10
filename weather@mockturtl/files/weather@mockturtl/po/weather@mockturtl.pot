@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-30 14:19+0000\n"
+"POT-Creation-Date: 2022-12-31 07:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2322,7 +2322,8 @@ msgid "Override tooltip on panel"
 msgstr ""
 
 #. 3.8->settings-schema.json->tooltipTextOverride->tooltip
-msgid "has the same behavior as 'Override label on panel'."
+msgid ""
+"Has the same behavior and available values as 'Override label on panel'."
 msgstr ""
 
 #. 3.8->settings-schema.json->alwaysShowHourlyWeather->description
