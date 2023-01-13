@@ -166,17 +166,6 @@ function readFirefoxProfiles() {
     return [];
 }
 
-const getWebDomain = (url) => {
-                if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                    return null;
-                }
-                const slashAfterDomainPos = url.indexOf('/', url.indexOf('://') + 3);
-                if (slashAfterDomainPos === -1) {//not found
-                    return null;
-                }
-                return url.slice(0, slashAfterDomainPos);
-            };
-
 const readChromiumBookmarksFile = function(path, appInfo) {
 
     return new Promise(function(resolve, reject) {
@@ -249,7 +238,6 @@ const readChromiumBookmarksFile = function(path, appInfo) {
             const domainsJSON = JSON.stringify(Array.from(domains));
 
             Util.spawn_async([__meta.path + '/getFavicons.py', faviconsFile, domainsJSON], (results) => {
-                //global.log("\nResults:" + results+"\n");
                 results = JSON.parse(results);
                 foundBookmarks.forEach( bookmark => {
                     if (bookmark.domain in results) {
