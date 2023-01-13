@@ -2023,10 +2023,10 @@ class Apps {//This obj provides the .app objects for all the applications catego
             return [];
         }
 
-        const res = this.listApplications('all');
-        const _res = [];
-        res.forEach(app => {
+        const res = [];
+        this.listApplications('all').forEach(app => {
             const keywords = app.get_keywords() || '';
+            //get and clean up the app ids.
             let id = app.id.replace('.desktop', '');
             const idLastDot = id.lastIndexOf('.');
             if (idLastDot >= 0) {
@@ -2045,15 +2045,15 @@ class Apps {//This obj provides the .app objects for all the applications catego
                 app.score = bestMatchScore;
                 app.nameWithSearchMarkup = match1.result;
                 app.descriptionWithSearchMarkup = match2.result;
-                _res.push(app);
+                res.push(app);
             }
         });
 
-        return _res;
+        return res;
     }
 }
 
-class RecentApps {// simple class to remember the last 4 used apps which are shown in the "recent" category
+class RecentApps {// simple class to remember the last 20 used apps which are shown in the "recent" category
     constructor(appThis) {
         this.appThis = appThis;
     }
