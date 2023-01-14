@@ -1,5 +1,6 @@
 const MessageTray = imports.ui.messageTray;
 const PopupMenu = imports.ui.popupMenu;
+const Tooltips = imports.ui.tooltips;
 const Util = imports.misc.util;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
@@ -128,6 +129,11 @@ class MenuItemIconButton {
             track_hover: true, hover: true, reactive: true, can_focus: true, x_expand: false, margin_right: 0});
 
         this._icon = new St.Icon({style_class: 'popup-menu-icon',icon_name: iconName, icon_type: iconType});
+
+        this.tooltip = new Tooltips.Tooltip(this.actor, "");
+
+        // Hide tooltip by default
+        this.tooltip.preventShow = true;
 
         this._signals = new SignalManager.SignalManager(null);
 
@@ -269,6 +275,8 @@ class MenuItemIconButton {
         this.emit("destroy");
 
         this._signals.disconnectAllSignals();
+
+        this.tooltip.destroy();
         this.actor.destroy();
         this._icon.destroy();
     }
@@ -293,8 +301,14 @@ class PopupButtonIconMenuItem extends PopupMenu.PopupBaseMenuItem {
         this.label = new St.Label({text: text});
         this._icon = new St.Icon({style_class: 'popup-menu-icon', icon_name: iconName, icon_type: iconType});
         this._buttonBin = new St.Bin({x_align: St.Align.END});
-        this._button = new MenuItemIconButton(buttonIconName, buttonIconType);
+        this.button = new MenuItemIconButton(buttonIconName, buttonIconType);
         
+        this.tooltip = new Tooltips.Tooltip(this.actor, "");
+
+        // Hide tooltip by default
+        this.tooltip.preventShow = true;
+
+
         // Add Actors to Menu Item
         this.addActor(this._icon, {span: 0});
         this.addActor(this.label);
@@ -302,9 +316,9 @@ class PopupButtonIconMenuItem extends PopupMenu.PopupBaseMenuItem {
         
         this.actor.label_actor = this.label;
 
-        this._buttonBin.child = this._button.actor;
+        this._buttonBin.child = this.button.actor;
 
-        this._signals.connect(this._button, "hover-changed", Lang.bind(this, this._onButtonHoverChanged));
+        this._signals.connect(this.button, "hover-changed", Lang.bind(this, this._onButtonHoverChanged));
 
         // Override style of menu item actor, so the menu item isn't too high
         this.actor.add_style_class_name("kdec-popup-button-menu-item");
@@ -316,8 +330,14 @@ class PopupButtonIconMenuItem extends PopupMenu.PopupBaseMenuItem {
         utilInfo("Button Hover Changed: "+buttonHover, "PopupButtonIconMenuItem");
         if (buttonHover == true) {
             this.setActive(false);
+
+            // Hide tooltip and prevent it showing, when hovering over button
+            this.tooltip.hide();
+            this.tooltip.preventShow = true;
         } else {
             this.setActive(this.actor.hover);
+
+            this.tooltip.preventShow = false;
         }
     }
 
@@ -326,7 +346,7 @@ class PopupButtonIconMenuItem extends PopupMenu.PopupBaseMenuItem {
      */
 
     _onButtonReleaseEvent(actor, event) {
-        if (this._button.active == false) {
+        if (this.button.active == false) {
             this.activate(event, false);
             utilInfo("Activate!", "PopupButtonIconMenuItem");
             return true;
@@ -354,11 +374,11 @@ class PopupButtonIconMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
 
     setButtonIconSymbolicName (iconName) {
-        this._button.setIconSymbolicName(iconName);
+        this.button.setIconSymbolicName(iconName);
     }
     
     setButtonIconName (iconName) {
-        this._button.setIconName(iconName);
+        this.button.setIconName(iconName);
     }
 
     onButtonClicked(sender, mouseButton) {
