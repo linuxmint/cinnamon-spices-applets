@@ -21,6 +21,10 @@ const DefaultIcons = {
     "SYMBOLIC": "kdeconnect-tray",
     "COLOR": "kdeconnect"
 }
+var ActivateType = {
+    ITEM: 0,
+    BUTTON: 1
+}
 
 function utilInfo(msg, name) {
     global.log("[" + UUID + "] (" + name + ") " + msg);
@@ -232,12 +236,17 @@ class MenuItemIconButton {
             this._icon.change_style_pseudo_class("disabled", !enabled);
             this.actor.set_track_hover(enabled);
             this.actor.set_reactive(enabled);
+            this.tooltip.preventShow = !enabled;
 
             if (enabled == false) {
                 this.actor.set_hover(false);
                 this.setHover(false);
                 this.setActive(false);
+
+                this.tooltip.hide();
             }
+
+            this.emit("enabled-changed", enabled);
         }
     }
 
@@ -319,6 +328,7 @@ class PopupButtonIconMenuItem extends PopupMenu.PopupBaseMenuItem {
         this._buttonBin.child = this.button.actor;
 
         this._signals.connect(this.button, "hover-changed", Lang.bind(this, this._onButtonHoverChanged));
+        this._signals.connect(this.button, "activate", Lang.bind(this, this._onButtonActivate));
 
         // Override style of menu item actor, so the menu item isn't too high
         this.actor.add_style_class_name("kdec-popup-button-menu-item");
@@ -341,13 +351,17 @@ class PopupButtonIconMenuItem extends PopupMenu.PopupBaseMenuItem {
         }
     }
 
+    _onButtonActivate(button, event) {
+        this.activate(event, false, ActivateType.BUTTON);
+    }
+
     /**
      * Function overrides
      */
 
     _onButtonReleaseEvent(actor, event) {
         if (this.button.active == false) {
-            this.activate(event, false);
+            this.activate(event, true, ActivateType.ITEM);
             utilInfo("Activate!", "PopupButtonIconMenuItem");
             return true;
         }
@@ -381,11 +395,8 @@ class PopupButtonIconMenuItem extends PopupMenu.PopupBaseMenuItem {
         this.button.setIconName(iconName);
     }
 
-    onButtonClicked(sender, mouseButton) {
-
-    }
-
-    activate(event) {
-        super.activate(event, true);
+    activate(event, keepMenu, activationType) {
+        utilInfo("Custom Menu Item activated with type: " + activationType);
+        this.emit('activate', event, keepMenu, activationType);
     }
 }
