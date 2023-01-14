@@ -1,0 +1,19 @@
+StBin.kdec-popup-button-menu-item-button  {
+    padding: 0 3px;
+    margin: 0;
+    border-radius: 2px;
+}
+
+
+StIcon.kdec-popup-button-menu-item-button-icon {
+
+}
+
+StIcon.kdec-popup-button-menu-item-button-icon:disabled {
+    color: #9f9f9f;
+}
+
+CinnamonGenericContainer.kdec-popup-button-menu-item {
+    padding-top: .3em;
+    padding-bottom: .3em;
+}
