@@ -695,17 +695,18 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         
         this.hide_applet_label(true);
 
-
-        // Check if KDE Connect is already running using DBus
-        let foundKDEConnect = false;
-        
         try {
             this.dbusProxy = new FreedesktopDBusProxy(Gio.DBus.session, "org.freedesktop.DBus", "/org/freedesktop/DBus");
-            foundKDEConnect = this.dbusProxy.NameHasOwnerSync(CommonUtils.KDECONNECT_DBUS_NAME)[0];
+            this.dbusProxy.NameHasOwnerRemote(CommonUtils.KDECONNECT_DBUS_NAME, this._onNameOwnerFound.bind(this));
         } catch (error) {
-            this.error("Error while checking if KDE Connect DBus service exists on the session bus: " + error, CommonUtils.LogLevel.MINIMAL);
+            this.error("Error while creating DBus proxy: " + error, CommonUtils.LogLevel.MINIMAL);
         }
+    }
 
+    /**
+     * Function to finish initialization, so it doesn't all happen in the constructor
+     */
+    _onNameOwnerFound([foundKDEConnect], errorObject) {
         if (foundKDEConnect == true) {
             this.info("Found KDE Connect DBus service!", CommonUtils.LogLevel.VERBOSE);
 
@@ -729,6 +730,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             }
         }
 
+        this.info(this.metadata.name + " v"+this.metadata.version + " loaded!", CommonUtils.LogLevel.NORMAL);
         this.info("Hello there!", CommonUtils.LogLevel.NORMAL);
     }
 
