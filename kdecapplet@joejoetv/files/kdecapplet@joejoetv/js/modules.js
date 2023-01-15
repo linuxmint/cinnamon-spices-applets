@@ -168,10 +168,14 @@ var ModuleType = {
     PASSIVE: 2
 }
 
-// Module base class
+/**
+ * Module base class
+ */
 class KDECModule {
 
+    // KDE Connect plugins required to be loaded, that the applet is created
     static REQUIRED_KDEC_PLUGINS = [];
+
     static MODULE_ID = "";
 
     constructor(id, type, device, compatMode) {
@@ -190,60 +194,72 @@ class KDECModule {
         this.options = applet.getModuleOptions(this.id);
     }
 
-    info(msg) {
-        this.device.info("[" + this.id + "] " + msg);
+    /**
+     * Logging functions
+     */
+
+    /**
+     * Uses the parent device to print an info message to the log
+     * @param {string} msg - The message to log
+     * @param {CommonUtils.LogLevel} level - The level to log the message at
+     */
+    info(msg, level) {
+        this.device.info("<" + this.id + "> " + msg, level);
     }
 
-    warn(msg) {
-        this.device.warn("[" + this.id + "] " + msg);
+    /**
+     * Uses the parent device to print an warning message to the log
+     * @param {string} msg - The message to log
+     * @param {CommonUtils.LogLevel} level - The level to log the message at
+     */
+    warn(msg, level) {
+        this.device.warn("<" + this.id + "> " + msg, level);
     }
 
-    error(msg) {
-        this.device.error("[" + this.id + "] " + msg);
+    /**
+     * Uses the parent device to print an error message to the log
+     * @param {string} msg - The message to log
+     * @param {CommonUtils.LogLevel} level - The level to log the message at
+     */
+    error(msg, level) {
+        this.device.error("<" + this.id + "> " + msg, level);
     }
 
+    /**
+     * @returns The ID of the module
+     */
     getID() {
         return this.id;
     }
 
+    /**
+     * @returns The type of the module
+     */
     getType() {
         return this.type;
     }
 
     destroy() {
+        this.info("Destroy called!", CommonUtils.LogLevel.VERBOSE);
         this._signals.disconnectAllSignals();
-        this.info("D E S T R O Y !");
     }
 
+    /**
+     * NOTE: Always returns `null` for this base class
+     * @returns A `PopupMenu.PopupMenuItem` created by the module, if present. If not, `null`
+     */
     getMenuItem() {
         return null;
     }
 }
 
-/* Module Class Template
+/**
+ * Modules
+ */
 
-class Module extends KDECModule {
-
-    static REQUIRED_KDEC_PLUGINS = [];
-    static MODULE_ID = "";
-
-    constructor(device, compatMode) {
-        super(Module.MODULE_ID, ModuleType.INFO, device, compatMode);
-
-        // TODO: Implement
-    }
-
-    destroy() {
-        super.destroy();
-    }
-
-    getMenuItem() {
-        return [];
-    }
-}
-
-*/
-
+/**
+ * Module for displaying battery information of the device
+ */
 class BatteryModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_battery"];
@@ -261,11 +277,9 @@ class BatteryModule extends KDECModule {
             this.charge = this.batteryProxy.charge;
             this.isCharging = this.batteryProxy.isCharging;
 
-            this.warn("RAW CHARGE: "+this.charge);
-
             this._onRefreshed = this.batteryProxy.connectSignal("refreshed", this.onRefreshed.bind(this));
         } catch (error) {
-            this.error("Error while connecting to 'battery' DBus interface: "+error);
+            this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
 
         // Create Menu Item
@@ -303,14 +317,13 @@ class BatteryModule extends KDECModule {
         this.charge = charge;
         this.isCharging = isCharging;
 
-        this.warn("RAW CHARGE: "+this.charge);
-
         this.batteryMenuItem.label.set_text(this._getLabelText());
         this.batteryMenuItem.setIconSymbolicName(this._getBatteryIconName());
     }
 
     destroy() {
         super.destroy();
+
         if (this.batteryProxy && this._onRefreshed) {
             this.batteryProxy.disconnectSignal(this._onRefreshed);
         }
@@ -321,6 +334,9 @@ class BatteryModule extends KDECModule {
     }
 }
 
+/**
+ * Module for displaying general information about the device
+ */
 class DeviceInfoModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = [];
@@ -332,7 +348,7 @@ class DeviceInfoModule extends KDECModule {
         try {
             this._signals.connect(this.device, "type-changed",this.onTypeChanged.bind(this));
         } catch (error) {
-            this.error("Error while connecting 'type-changed' signal: "+error);
+            this.error("Error while connecting 'type-changed' signal: "+error, CommonUtils.LogLevel.MINIMAL);
         }
 
         // Create Menu Item
@@ -373,6 +389,9 @@ class DeviceInfoModule extends KDECModule {
     }
 }
 
+/**
+ * Module for displaying mobile connectivity information of the device
+ */
 class ConnectivityModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_connectivity_report"];
@@ -392,7 +411,7 @@ class ConnectivityModule extends KDECModule {
 
             this._onRefreshed = this.connectivityProxy.connectSignal("refreshed", this.onRefreshed.bind(this));
         } catch (error) {
-            this.error("Error while connecting to 'connectivity_report' DBus interface: "+error);
+            this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
 
         // Create Menu Item
@@ -479,6 +498,10 @@ class ConnectivityModule extends KDECModule {
         return this.connectivityMenuItem;
     }
 }
+
+/**
+ * Module that enables letting the device ring, so one can find it if misplaced
+ */
 class FindMyPhoneModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_findmyphone"];
@@ -490,7 +513,7 @@ class FindMyPhoneModule extends KDECModule {
         try {
             this.findMyPhoneProxy = new DeviceFindMyPhoneProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/findmyphone");
         } catch (error) {
-            this.error("Error while connecting to 'findmyphone' DBus interface: "+error);
+            this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
 
         // Create Menu Item
@@ -503,7 +526,7 @@ class FindMyPhoneModule extends KDECModule {
         try {
             this.findMyPhoneProxy.ringSync();
         } catch (error) {
-            this.error("Error sending ring command: "+error);
+            this.error("Error calling 'ring' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
         }
     }
 
@@ -512,6 +535,9 @@ class FindMyPhoneModule extends KDECModule {
     }
 }
 
+/**
+ * Module that allows requesting a photo from the device and save it directly to this device
+ */
 class RequestPhotoModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_photo"];
@@ -525,7 +551,7 @@ class RequestPhotoModule extends KDECModule {
 
             this._onPhotoReceived = this.requestPhotoProxy.connectSignal("photoReceived", this.onPhotoReceived.bind(this));
         } catch (error) {
-            this.error("Error while connecting to 'connectivity_report' DBus interface: "+error);
+            this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
 
         // Create Menu Item
@@ -535,7 +561,7 @@ class RequestPhotoModule extends KDECModule {
             try {
                 Dialogs.openReceivePhotoDialog(this.device.getApplet().metadata, this.device.getName(), this.requestPhotoCallback.bind(this));
             } catch (error) {
-                global.logError("Error while opening Dialog: "+error);
+                this.error("Error while opening photo request dialog: "+error, CommonUtils.LogLevel.MINIMAL);
             }
         }, this);
     }
@@ -555,10 +581,10 @@ class RequestPhotoModule extends KDECModule {
                 try {
                     this.requestPhotoProxy.requestPhotoSync(filepath);
                 } catch (error) {
-                    this.error("Error while sending photo request to DBus service: "+error);
+                    this.error("Error while calling 'requestPhoto' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
                 }
             } else {
-                this.error("Save Path doesn't exist or isn't a directory!");
+                this.error("Save Path doesn't exist or isn't a directory: "+filepath, CommonUtils.LogLevel.MINIMAL);
             }
         }
     }
@@ -569,26 +595,26 @@ class RequestPhotoModule extends KDECModule {
                 try {
                     this.requestPhotoProxy.requestPhotoSync(filename);
                 } catch (error) {
-                    this.error("Error while sending photo request to DBus service: "+error);
+                    this.error("Error while calling 'requestPhoto' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
                 }
                 break;
 
             case Dialogs.DialogStatus.CANCEL:
-                this.info("Dialog for selecting photo save location was canceled.");
+                this.info("Dialog for selecting photo save location was canceled.", CommonUtils.LogLevel.INFO);
                 break;
         
             default:
                 // Error
-                this.error("Error while opening photo save location dialog: "+stderr);
+                this.error("Photo request dialog returned error: "+stderr, CommonUtils.LogLevel.MINIMAL);
                 break;
         }
     }
 
     onPhotoReceived(proxy, sender, [fileName]) {
-        this.info("Received Photo from device: "+fileName);
+        this.info("Received Photo from device: "+fileName, CommonUtils.LogLevel.INFO);
 
         let notificationSource = this.device.getApplet().notificationSource;
-        let notification = new MessageTray.Notification(notificationSource, "KDE Connect Applet", _("Photo received from '{deviceName}'\nClick to open in default application").replace("{deviceName}", this.device.getName()));
+        let notification = new MessageTray.Notification(notificationSource, _("Photo received from '{deviceName}'").replace("{deviceName}", this.device.getName()), fileName+"\n"+_("Click to open in default application"));
         notification.setTransient(true);
         this._signals.connect(notification, "clicked", function() {
             CommonUtils.openURL("file://"+fileName);
@@ -598,6 +624,7 @@ class RequestPhotoModule extends KDECModule {
 
     destroy() {
         super.destroy();
+
         if (this.requestPhotoProxy && this._onPhotoReceived) {
             this.requestPhotoProxy.disconnectSignal(this._onPhotoReceived);
         }
@@ -608,6 +635,9 @@ class RequestPhotoModule extends KDECModule {
     }
 }
 
+/**
+ * Module that enables sending a ping message to the device
+ */
 class PingModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_ping"];
@@ -619,7 +649,7 @@ class PingModule extends KDECModule {
         try {
             this.pingProxy = new DevicePingProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/ping");
         } catch (error) {
-            this.error("Error while creating DBus proxy: "+error);
+            this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
 
         // Create Menu Item
@@ -633,18 +663,18 @@ class PingModule extends KDECModule {
             try {
                 this.pingProxy.sendPingSync(this.options.customMessage);
             } catch (error) {
-                this.error("Error while sending ping: "+error);
+                this.error("Error while sending ping message: "+error, CommonUtils.LogLevel.MINIMAL);
             }
         } else {
             try {
                 this.pingProxy.sendPingSync(_("Ping!"));
             } catch (error) {
-                this.error("Error while sending ping: "+error);
+                this.error("Error while sending ping message: "+error, CommonUtils.LogLevel.MINIMAL);
             }
         }
 
         let notificationSource = this.device.getApplet().notificationSource;
-        let notification = new MessageTray.Notification(notificationSource, "KDE Connect Applet", _("Sent ping to device '{deviceName}'").replace("{deviceName}", this.device.getName()));
+        let notification = new MessageTray.Notification(notificationSource, _("Sent ping to device '{deviceName}'").replace("{deviceName}", this.device.getName()));
         notification.setTransient(true);
         notificationSource.notify(notification);
     }
@@ -654,6 +684,9 @@ class PingModule extends KDECModule {
     }
 }
 
+/**
+ * Module that allows sharing different kind of media(URLs, Text, File(s)) to the device
+ */
 class ShareModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_share"];
@@ -667,7 +700,7 @@ class ShareModule extends KDECModule {
 
             this._onShareReceived = this.shareProxy.connectSignal("shareReceived", this.onShareReceived.bind(this));
         } catch (error) {
-            this.error("Error while connecting to 'share' DBus interface: "+error);
+            this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
 
         if (this.options.useSubMenu == true) {
@@ -715,17 +748,17 @@ class ShareModule extends KDECModule {
                 try {
                     this.shareProxy.shareUrlSync(urlText);
                 } catch (error) {
-                    this.error("Error while sending url: "+error);
+                    this.error("Error while calling 'shareUrl' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
                 }
                 break;
 
             case Dialogs.DialogStatus.CANCEL:
-                this.info("Dialog for entering URL to send was canceled.");
+                this.info("Dialog for entering URL to send was canceled.", CommonUtils.LogLevel.INFO);
                 break;
         
             default:
                 // Error
-                this.error("Error while opening URL dialog: "+stderr);
+                this.error("Dialog for entering URL to send returned error: "+stderr, CommonUtils.LogLevel.MINIMAL);
                 break;
         }
     }
@@ -736,17 +769,17 @@ class ShareModule extends KDECModule {
                 try {
                     this.shareProxy.shareTextSync(text);
                 } catch (error) {
-                    this.error("Error while sending text: "+error);
+                    this.error("Error while calling 'shareText' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
                 }
                 break;
 
             case Dialogs.DialogStatus.CANCEL:
-                this.info("Dialog for entering text to send was canceled.");
+                this.info("Dialog for entering text to send was canceled.", CommonUtils.LogLevel.INFO);
                 break;
         
             default:
                 // Error
-                this.error("Error while opening text dialog: "+stderr);
+                this.error("Error while opening dialog for entering text to send: "+stderr, CommonUtils.LogLevel.MINIMAL);
                 break;
         }
     }
@@ -761,28 +794,36 @@ class ShareModule extends KDECModule {
                 try {
                     this.shareProxy.shareUrlsSync(filenameArray);
                 } catch (error) {
-                    this.error("Error while sending files: "+error);
+                    this.error("Error while calling 'shareUrls' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
                 }
                 break;
 
             case Dialogs.DialogStatus.CANCEL:
-                this.info("Dialog for selecting files to send was canceled.");
+                this.info("Dialog for selecting files to send was canceled.", CommonUtils.LogLevel.INFO);
                 break;
         
             default:
                 // Error
-                this.error("Error while opening file chooser dialog: "+stderr);
+                this.error("Error while opening dialog for selecting files to send: "+stderr, CommonUtils.LogLevel.MINIMAL);
                 break;
         }
     }
 
     onShareReceived(proxy, sender, [url]) {
-        this.info("Received Share from device: "+url);
-        // TODO: Implement
+        this.info("Received Share from device: "+url, CommonUtils.LogLevel.INFO);
+
+        let notificationSource = this.device.getApplet().notificationSource;
+        let notification = new MessageTray.Notification(notificationSource, _("Share received from '{deviceName}'").replace("{deviceName}", this.device.getName()), url+"\n"+_("Click to open in default application"));
+        notification.setTransient(true);
+        this._signals.connect(notification, "clicked", function() {
+            CommonUtils.openURL(url);
+        })
+        notificationSource.notify(notification);
     }
 
     destroy() {
         super.destroy();
+
         if (this.shareProxy && this._onShareReceived) {
             this.shareProxy.disconnectSignal(this._onShareReceived);
         }
@@ -793,6 +834,9 @@ class ShareModule extends KDECModule {
     }
 }
 
+/**
+ * Module that allows controlling the mounting/unmounting of the remote directories set up on the device
+ */
 class SFTPModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_sftp"];
@@ -816,7 +860,7 @@ class SFTPModule extends KDECModule {
             this._onMounted = this.sftpProxy.connectSignal("mounted", this.onMounted.bind(this));
             this._onUnmounted = this.sftpProxy.connectSignal("unmounted", this.onUnmounted.bind(this));
         } catch (error) {
-            this.error("Error while connecting to 'sftp' DBus interface: "+error);
+            this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
 
         // Create Menu Item
@@ -863,13 +907,13 @@ class SFTPModule extends KDECModule {
             try {
                 this.sftpProxy.unmountSync();
             } catch (error) {
-                this.error("Error while unmounting: "+error);
+                this.error("Error while calling 'unmount' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
             }
         } else {
             try {
                 this.sftpProxy.mountSync();
             } catch (error) {
-                this.error("Error while mounting: "+error);
+                this.error("Error while calling 'mount' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
             }
         }
     }
@@ -884,7 +928,7 @@ class SFTPModule extends KDECModule {
             this.mountPoint = this.sftpProxy.mountPointSync()[0];
 
         } catch (error) {
-            this.error("Error while getting information about mount: "+error);
+            this.error("Error while getting mount point: "+error, CommonUtils.LogLevel.MINIMAL);
         }
     }
 
@@ -898,11 +942,11 @@ class SFTPModule extends KDECModule {
             let mountError = this.sftpProxy.getMountErrorSync()[0];
 
             if (mountError != "") {
-                this.error("Error while mounting: "+mountError);
+                this.error("Error while mounting: "+mountError, CommonUtils.LogLevel.MINIMAL);
             }
 
         } catch (error) {
-            this.error("Error while getting information about mount: "+error);
+            this.error("Error while getting error information about mount: "+error, CommonUtils.LogLevel.MINIMAL);
         }
     }
 
@@ -931,6 +975,9 @@ class SFTPModule extends KDECModule {
     }
 }
 
+/**
+ * Module that allows sending SMS messages using the device and opening the KDE Connect SMS application
+ */
 class SMSModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_sms"];
@@ -942,7 +989,7 @@ class SMSModule extends KDECModule {
         try {
             this.smsProxy = new DeviceSMSProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/sms");
         } catch (error) {
-            this.error("Error while connecting to 'sms' DBus interface: "+error);
+            this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
 
         if (this.options.useSubMenu == true) {
@@ -977,7 +1024,7 @@ class SMSModule extends KDECModule {
         try {
             this.smsProxy.launchAppSync();
         } catch (error) {
-            this.error("Error while launching KDE Connect SMS App: "+error);
+            this.error("Error while launching KDE Connect SMS App: "+error, CommonUtils.LogLevel.MINIMAL);
         }
     }
 
@@ -992,23 +1039,23 @@ class SMSModule extends KDECModule {
 
                         this.smsProxy.sendSmsSync([addressVariant], SMSObject["message"], []);
 
-                        this.info("Sent SMS to '" + phoneNumber.toString() + "' with message: "+SMSObject["message"].toString());
+                        this.info("Sent SMS to '" + phoneNumber.toString() + "' with message: "+SMSObject["message"].toString(), CommonUtils.LogLevel.INFO);
                     } catch (error) {
                         this.error("Error while sending SMS: "+error);
                     }
 
                 } else {
-                    this.error("Got malformed response from dialog. Either 'phone_number' or 'message' is missing!");
+                    this.error("Got malformed response from dialog. Either 'phone_number' or 'message' is missing!", CommonUtils.LogLevel.MINIMAL);
                 }
                 break;
 
             case Dialogs.DialogStatus.CANCEL:
-                this.info("Dialog for entering SMS to send was canceled.");
+                this.info("Dialog for entering SMS to send was canceled.", CommonUtils.LogLevel.INFO);
                 break;
         
             default:
                 // Error
-                this.error("Error while opening SMS dialog: "+stderr);
+                this.error("SMS dialog reported error: "+stderr, CommonUtils.LogLevel.MINIMAL);
                 break;
         }
     }
@@ -1069,8 +1116,6 @@ moduleClasses[SMSModule.MODULE_ID] = SMSModule;
 // Register additional settings
 
 let additionalSettings = {}
-
-// TODO: actually add aditional settings
 
 additionalSettings[BatteryModule.MODULE_ID] = [];
 additionalSettings[DeviceInfoModule.MODULE_ID] = [];

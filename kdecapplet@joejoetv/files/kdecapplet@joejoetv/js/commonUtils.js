@@ -16,6 +16,7 @@ const SignalManager = imports.misc.signalManager;
 // Common constants
 const UUID = "kdecapplet@joejoetv";
 const KDECONNECT_DBUS_NAME = "org.kde.kdeconnect";
+const APPLET_NAME = "KDE Connect Applet"
 
 const DefaultIcons = {
     "SYMBOLIC": "kdeconnect-tray",
@@ -26,18 +27,119 @@ var ActivateType = {
     BUTTON: 1
 }
 
-function utilInfo(msg, name) {
-    global.log("[" + UUID + "] (" + name + ") " + msg);
+var LogLevel = {
+    DEBUG: 0,
+    VERBOSE: 1,
+    INFO: 2,
+    NORMAL: 3,
+    MINIMAL: 4
 }
 
-function utilWarn(msg, name) {
-    global.log("[" + UUID + "] (" + name + ") " + msg);
+function logLevelName(level) {
+    switch (level) {
+        case LogLevel.DEBUG:
+            return "DEBUG";
+        case LogLevel.VERBOSE:
+            return "VERBOSE";
+        case LogLevel.INFO:
+            return "INFO";
+        case LogLevel.NORMAL:
+            return "NORMAL";
+        default:
+            return "";
+    }
 }
 
-function utilError(msg, name) {
-    global.log("[" + UUID + "] (" + name + ") " + msg);
+// Log leve lfor whole applet
+const LOG_LEVEL = LogLevel.INFO;
+
+/**
+ * General logging functions with log level support
+ */
+
+/**
+ * Common logging function
+ * @param {string} msg - The message to log as 'info'
+ * @param {LogLevel} level - The level to log the message at
+ */
+function logInfo(msg, level) {
+    if (level >= LOG_LEVEL) {
+        global.log("["+UUID+"/"+logLevelName(level)+"] "+msg);
+    }
 }
 
+/**
+ * Common logging function
+ * @param {string} msg - The message to log as 'warning'
+ * @param {LogLevel} level - The level to log the message at
+ */
+function logWarn(msg, level) {
+    if (level >= LOG_LEVEL) {
+        global.logWarning("["+UUID+"/"+logLevelName(level)+"] "+msg);
+    }
+}
+
+/**
+ * Common logging function
+ * @param {string} msg - The message to log as 'error'
+ * @param {LogLevel} level - The level to log the message at
+ */
+function logError(msg, level) {
+    if (level >= LOG_LEVEL) {
+        global.logError("["+UUID+"/"+logLevelName(level)+"] "+msg);
+    }
+}
+
+
+/**
+ * Logging functions for utility functions
+ */
+
+/**
+ * Logging function for utility stuff.
+ * Takes a name representing the function, class or similar, that called it.
+ * @param {string} msg - The message to log as 'info'
+ * @param {LogLevel} level - The level to log the message at
+ * @param {string} name - The name to use in the log message
+ */
+function utilInfo(msg, level, name) {
+    logInfo("("+name+") "+msg, level);
+}
+
+/**
+ * Logging function for utility stuff.
+ * Takes a name representing the function, class or similar, that called it.
+ * @param {string} msg - The message to log as 'warning'
+ * @param {LogLevel} level - The level to log the message at
+ * @param {string} name - The name to use in the log message
+ */
+function utilWarn(msg, level, name) {
+    logWarn("("+name+") "+msg, level);
+}
+
+/**
+ * Logging function for utility stuff.
+ * Takes a name representing the function, class or similar, that called it.
+ * @param {string} msg - The message to log as 'error'
+ * @param {LogLevel} level - The level to log the message at
+ * @param {string} name - The name to use in the log message
+ */
+function utilError(msg, level, name) {
+    logError("("+name+") "+msg, level);
+}
+
+/**
+ * Utility functions and classes
+ */
+
+/**
+ * Checks the filesystem for an available name with the basename of `filename`
+ * in the directory `directory` and adds increasing numbers to the end until an available name is found
+ * @param {string} directory - The directorx to check for the filename
+ * @param {string} filename - The base filename to check against
+ * @param {string} extension - The extension of the file to check
+ * @returns An available filename with the base name of `filename` or `null`, if the directory doesn't exist
+ */
 function getAvailableFilename(directory, filename, extension) {
     let dirPath = GLib.build_filenamev([directory]);
     let dirFile = Gio.File.new_for_path(dirPath);
@@ -54,7 +156,7 @@ function getAvailableFilename(directory, filename, extension) {
         if (file.query_file_type(Gio.FileQueryInfoFlags.NONE, null) == Gio.FileType.UNKNOWN) {
             // Filename is free
 
-            utilInfo("File path directly free: "+filePath, "getAvailableFilename");
+            utilInfo("File with name of 'filename' is free: "+filePath, LogLevel.DEBUG, "getAvailableFilename");
 
             return filePath
         } else {
@@ -73,7 +175,8 @@ function getAvailableFilename(directory, filename, extension) {
 
                     // Failsafe if counter is too large to be realistically viable
                     if (counter > 1000000) {
-                        utilWarn("Aborted checking for filename. Why do you have over 1000000 files with the same base name?", "getAvailableFilename");
+                        utilWarn("Aborted checking for free filename after trying 1000000 filename additions. Why do you have over 1000000 files with the same base name?", LogLevel.NORMAL, "getAvailableFilename");
+
                         return null;
                     }
 
@@ -85,31 +188,52 @@ function getAvailableFilename(directory, filename, extension) {
         }
 
     } else {
-        // File doesn't exists or is a different type
+        // Directory doesn't exists or is a different type
+
+        utilWarn("File path to check filename in, doesn't exist or isn't a directory", LogLevel.INFO, "getAvailableFilename");
+
         return null;
     }
 }
 
+/**
+ * Opens `url` in the default program registered to open it
+ * @param {string} url 
+ */
 function openURL(url) {
     Util.spawnCommandLine('xdg-open "'+url+'"');
 }
 
+/**
+ * Copies `text` to the clipboard and sends a notification informing the user that `typestring` was copied to the clipboard
+ * @param {MessageTray.Source} notificationSource - The notification source to use for the notification
+ * @param {string} text - The text to copy
+ * @param {string} typestring - A string representing what was copied to the clipboard
+ */
 function copyAndNotify(notificationSource, text, typestring) {
     try {
         let clipboard = St.Clipboard.get_default();
         clipboard.set_text(St.ClipboardType.CLIPBOARD, text);
     
-        let notification = new MessageTray.Notification(notificationSource, "KDE Connect Applet", _("Copied {typestring} to the clipboard").replace("{typestring}", typestring));
+        let notification = new MessageTray.Notification(notificationSource, APPLET_NAME, _("Copied {typestring} to the clipboard").replace("{typestring}", typestring));
         notification.setTransient(true);
         notificationSource.notify(notification);
     } catch (error) {
-        utilError("[Notification] Error while sending notification: " + error, "copyAndNotify");
+        utilError("Error while sending notification for copied text: "+error, LogLevel.NORMAL, "copyAndNotify");
     }
 }
 
+/**
+ * Notification Source for the applet
+ */
 class AppletNotificationSource extends MessageTray.Source {
     constructor(appletName) {
-        super(appletName);
+        // TODO: Remove
+        if (appletName) {
+            utilWarn("Remove dat parameter m8!", LogLevel.NORMAL, "AppletNotificationSource");
+        }
+
+        super(APPLET_NAME);
 
         this._setSummaryIcon(this.createNotificationIcon());
     }
@@ -127,6 +251,9 @@ class AppletNotificationSource extends MessageTray.Source {
     }
 }
 
+/**
+ * Button to add to a Popup-Menu Item with an icon
+ */
 class MenuItemIconButton {
     constructor(iconName, iconType) {
         this.actor = new St.Bin({style_class: 'notification-button',
@@ -176,8 +303,6 @@ class MenuItemIconButton {
         this.actor.change_style_pseudo_class("active", this.active);
         this.actor.change_style_pseudo_class("focus", false);
         this.actor.sync_hover();
-
-        utilInfo("Style: "+this.actor.get_style_class_name(), "MenuItemIconButton");
     }
 
     /**
@@ -200,6 +325,8 @@ class MenuItemIconButton {
 
     _onKeyPressEvent(actor, event) {
         let symbol = event.get_key_symbol();
+
+        utilInfo("Key pressed: "+symbol, LogLevel.DEBUG, "MenuItemIconButton");
 
         if (symbol === Clutter.KEY_space ||
             symbol === Clutter.KEY_Return ||
@@ -244,7 +371,12 @@ class MenuItemIconButton {
                 this.setActive(false);
 
                 this.tooltip.hide();
+
+                utilInfo("Disabled!", LogLevel.VERBOSE, "MenuItemIconButton");
+            } else {
+                utilInfo("Enabled!", LogLevel.VERBOSE, "MenuItemIconButton");
             }
+
 
             this.emit("enabled-changed", enabled);
         }
@@ -253,7 +385,7 @@ class MenuItemIconButton {
     activate(event) {
         if (this.enabled == true) {
             this.emit("activate", event);
-            utilInfo("Activate!", "MenuItemIconButton");
+            utilInfo("Activated!", LogLevel.VERBOSE, "MenuItemIconButton");
         }
     }
 
@@ -263,7 +395,8 @@ class MenuItemIconButton {
             this.actor.change_style_pseudo_class("active", active);
 
             this.emit("active-changed", active);
-            utilInfo("Active Changed: "+active, "MenuItemIconButton");
+
+            utilInfo("'active' changed! New value: "+active, LogLevel.VERBOSE, "MenuItemIconButton");
         }
     }
 
@@ -275,19 +408,15 @@ class MenuItemIconButton {
 
             this.emit("hover-changed", hover);
 
-            utilInfo("Hover Changed: "+hover, "MenuItemIconButton");
+            utilInfo("'hover' changed! New value: "+hover, LogLevel.VERBOSE, "MenuItemIconButton");
         }
     }
 
     destroy() {
-        utilInfo("Destroy", "MenuItemIconButton");
+        utilInfo("Destroy called!", LogLevel.VERBOSE, "MenuItemIconButton");
         this.emit("destroy");
 
         this._signals.disconnectAllSignals();
-
-        this.tooltip.destroy();
-        this.actor.destroy();
-        this._icon.destroy();
     }
 
     setIconSymbolicName (iconName) {
@@ -337,7 +466,7 @@ class PopupButtonIconMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
     
     _onButtonHoverChanged(button, buttonHover) {
-        utilInfo("Button Hover Changed: "+buttonHover, "PopupButtonIconMenuItem");
+        utilInfo("'hover' of button changed! New value: "+buttonHover, LogLevel.VERBOSE, "PopupButtonIconMenuItem");
         if (buttonHover == true) {
             this.setActive(false);
 
@@ -362,15 +491,14 @@ class PopupButtonIconMenuItem extends PopupMenu.PopupBaseMenuItem {
     _onButtonReleaseEvent(actor, event) {
         if (this.button.active == false) {
             this.activate(event, true, ActivateType.ITEM);
-            utilInfo("Activate!", "PopupButtonIconMenuItem");
             return true;
         }
         return false;
     }
 
     _onHoverChanged(actor) {
+        utilInfo("'hover' changed! New value: "+actor.hover, LogLevel.VERBOSE, "PopupButtonIconMenuItem");
         this.setActive(actor.hover);
-        utilInfo("Hover Changed: "+actor.hover, "PopupButtonIconMenuItem");
     }
 
     /**
@@ -396,7 +524,7 @@ class PopupButtonIconMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
 
     activate(event, keepMenu, activationType) {
-        utilInfo("Custom Menu Item activated with type: " + activationType);
+        utilInfo("Activated! Type: "+activationType, LogLevel.VERBOSE, "PopupButtonIconMenuItem");
         this.emit('activate', event, keepMenu, activationType);
     }
 }
