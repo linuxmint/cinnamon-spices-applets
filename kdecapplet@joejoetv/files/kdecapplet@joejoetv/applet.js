@@ -182,6 +182,7 @@ class Device {
         this.type = "none"
         this.plugins = [];
         this.isReachable = false;
+        this.statusIconName = ""
 
         // Create Device Proxy and get first values from DBus
         try {
@@ -191,6 +192,7 @@ class Device {
             this.type = this.deviceProxy.type;
             this.isReachable = this.deviceProxy.isReachable;
             this.plugins = this.deviceProxy.loadedPluginsSync()[0];
+            this.statusIconName = this.deviceProxy.statusIconName;
         } catch (error) {
             this.error("Error while getting device parameters. Falling back to default parameters!");
         }
@@ -203,6 +205,7 @@ class Device {
                 this._onReachableChanged = this.deviceProxy.connectSignal("reachableChanged", this.onReachableChanged.bind(this));
                 this._onTypeChanged = this.deviceProxy.connectSignal("typeChanged", this.onTypeChanged.bind(this));
                 this._onNameChanged = this.deviceProxy.connectSignal("nameChanged", this.onNameChanged.bind(this));
+                this._onStatusIconNameChanged = this.deviceProxy.connectSignal("statusIconNameChanged", this.onStatusIconNameChanged.bind(this));
             } catch (error) {
                 this.error("Error while connecting callbacks for changing of device parameters!");
             }
@@ -268,6 +271,13 @@ class Device {
     }
 
     /**
+     * @returns The name of the device
+     */
+    getName() {
+        return this.name;
+    }
+
+    /**
      * @returns The list of KDE Connect plugins supported by the device
      */
     getPlugins() {
@@ -279,6 +289,13 @@ class Device {
      */
     getReachableStatus() {
         return this.isReachable;
+    }
+    
+    /**
+     * @returns The current status icon name
+     */
+    getStatusIconName() {
+        return this.statusIconName;
     }
 
     /**
@@ -350,7 +367,33 @@ class Device {
 
         this.name = name;
 
+        // Change text of menu item, if it exists
+        if (this.menuItem) {
+            this.menuItem.label.set_text(self.name);
+        }
+
         this.emit("name-changed");
+    }
+
+    /**
+     * Callback for the DBus 'statusIconNameChanged' signal
+     * @param {Gio.DBusProxy} proxy 
+     * @param {*} sender 
+     */
+    onStatusIconNameChanged(proxy, sender) {
+        this.info("Status Icon Name Changed!");
+
+        if (this.deviceProxy) {
+            this.statusIconName = this.deviceProxy.statusIconName;
+
+            // Change icon name of the menu item icon, if it exists
+            if (this.menuItemIcon) {
+                this.menuItemIcon.set_icon_name(this.statusIconName);
+                this.menuItemIcon.set_icon_type(St.IconType.SYMBOLIC);
+            }
+
+            this.emit("statusiconname-changed");
+        }
     }
     
     /**
@@ -399,8 +442,10 @@ class Device {
      * @param {string} moduleID - The ID of the module to remove
      */
     removeModule(moduleID) {
-        this.modules[moduleID].destroy();
-        delete this.modules[moduleID];   
+        if (this.modules[moduleID]) {
+            this.modules[moduleID].destroy();
+            delete this.modules[moduleID];   
+        }
     }
 
     /**
@@ -451,6 +496,60 @@ class Device {
         });
         
         return moduleList;
+    }
+
+    getMenuItem() {
+        // Destroy old menu item, if it exists
+        if (this.menuItem) {
+            this.menuItem.destroy();
+        }
+
+        if (this.menuItemIcon) {
+            this.menuItemIcon.destroy();
+        }
+
+        // Create new menu item based on rechable state
+        if (this.isReachable == true) {
+            // Create normal menu item with sub menu
+            this.menuItem = new PopupMenu.PopupSubMenuMenuItem(this.name);
+
+            // Workaround to add icon, because Cinnamon didn't like me making a PopupMenu class in another file
+            this.menuItemIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: this.statusIconName, icon_type: St.IconType.SYMBOLIC});
+            this.menuItem.addActor(this.menuItemIcon, {span: 0, position: 0});
+
+            // Add info modules
+            let infoModules = this.getModulesByType(Modules.ModuleType.INFO);
+
+            infoModules.forEach(infoModule => {
+                this.warn(infoModule.getID());
+                this.menuItem.menu.addMenuItem(infoModule.getMenuItem());
+            });
+
+            // If there is at least 1 info modules, add seperator
+            if (infoModules.length > 0) {
+                this.menuItem.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            }
+
+            // Add action modules
+            let actionModules = this.getModulesByType(Modules.ModuleType.ACTION);
+
+            actionModules.forEach(actionModule => {
+                this.menuItem.menu.addMenuItem(actionModule.getMenuItem());
+            });
+
+            // If no modules are selected/available, add menu item informing user
+            if ((infoModules.length + actionModules.length) == 0) {
+                let noModulesInfoItem = new PopupMenu.PopupMenuItem(_("No Modules available"));
+                noModulesInfoItem.actor.add_style_pseudo_class("insensitive");
+                this.menuItem.menu.addMenuItem(noModulesInfoItem);
+            }
+        } else {
+            // Create inactive menu item
+            this.menuItem = new PopupMenu.PopupIconMenuItem(this.name, this.statusIconName, St.IconType.SYMBOLIC, {reactive: false});
+            this.menuItem.actor.add_style_pseudo_class("insensitive");
+        }
+
+        return this.menuItem;
     }
 
     /**
@@ -536,6 +635,8 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         this.settings.bind("icontype", "iconType", this.onPanelSettingsChanged.bind(this), "iconType");
         this.settings.bind("usecustomicon", "useCustomIcon", this.onPanelSettingsChanged.bind(this), "useCustomIcon");
         this.settings.bind("customicon", "customIcon", this.onPanelSettingsChanged.bind(this), "customIcon");
+        this.settings.bind("expandfirst", "expandFirst", function() {});
+        this.settings.bind("tooltipdevicecount", "tooltipDeviceCount", this.onPanelSettingsChanged.bind(this), "tooltipDeviceCount");
 
         // Register Module Settings Callbacks
         this.registerModuleSettings(Modules.modules, Modules.additionalSettings);
@@ -650,8 +751,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      */
 
     on_applet_clicked() {
-        // TODO: Remove if populated
-        //this.popupMenu.toggle();
+        this.popupMenu.toggle();
     }
 
     on_applet_removed_from_panel() {
@@ -719,13 +819,13 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             // Get Device Map from KDE Connect proxy
             this.devices = this.getDeviceMap();
 
-            // TODO: Create Modules
-
             // Updated Panel information
             this.updatePanel();
 
-            // Show applet label
-            this.hide_applet_label(false);
+            // Create modules for each device
+            for (let [deviceID, device] of Object.entries(this.devices)) {
+                device.createModules(Modules.modules)
+            }
 
             // Build main popout menu
             this.rebuildPopupMenu();
@@ -800,7 +900,18 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      * Clears and then rebuilds the main popup menu
      */
     rebuildPopupMenu() {
+        // Remove all previous items from popup menu
+        this.popupMenu.removeAll();
 
+        // Get new menu items from device objects
+        for (let [deviceID, device] of Object.entries(this.devices)) {
+            let deviceMenuItem = device.getMenuItem();
+            if (device.getReachableStatus() == false) {
+                this.popupMenu.addMenuItem(deviceMenuItem, 0);
+            } else {
+                this.popupMenu.addMenuItem(deviceMenuItem);
+            }
+        }
     }
 
     /**
@@ -811,14 +922,14 @@ class KDEConnectApplet extends Applet.TextIconApplet {
 
         // Menu Item showing the KDE Connect version
         if (this.options.showKDEConnectVersion == true) {
-            let kdecVersionMenuItem = new PopupMenu.PopupMenuItem(_("KDE Connect Version: ${version}").replace("${version}", this.KDEConnectVersionString));
+            let kdecVersionMenuItem = new PopupMenu.PopupIconMenuItem(_("KDE Connect Version: ${version}").replace("${version}", this.KDEConnectVersionString), "help-info-symbolic", St.IconType.SYMBOLIC);
             kdecVersionMenuItem.actor.add_style_pseudo_class("insensitive");
             this.contextMenuSection.addMenuItem(kdecVersionMenuItem);
         }
 
         // Menu Item showing the ID of this device
         if (this.options.showOwnID == true) {
-            let ownIDMenuItem = new PopupMenu.PopupMenuItem(_("Own ID: ${own_id}").replace("${own_id}", this.ownIDString));
+            let ownIDMenuItem = new PopupMenu.PopupIconMenuItem(_("Own ID: ${own_id}").replace("${own_id}", this.ownIDString), "tag-symbolic", St.IconType.SYMBOLIC);
             ownIDMenuItem._signals.connect(ownIDMenuItem, "activate", function(menuItem, keepMenu) {
                 CommonUtils.copyAndNotify(this.notificationSource, this.ownIDString, _("Own ID"));
             }, this);
@@ -859,6 +970,37 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 this.error("Somehow, the icon type is not recognized: '"+this.options.iconType+"'")
             }
         }
+
+        // Get number of rechable devices
+        let deviceCount = 0;
+
+        for (let [deviceID, device] of Object.entries(this.devices)) {
+            if (device.getReachableStatus() == true) {
+                deviceCount += 1;
+            }
+        }
+
+        // Set Tooltip
+        if (this.options.tooltipDeviceCount == true) {
+
+            if (deviceCount == 0) {
+                this.set_applet_tooltip("KDE Connect Applet\n"+_("No Devices"));
+            } else if (deviceCount == 1) {
+                this.set_applet_tooltip("KDE Connect Applet\n"+_("1 Device"));
+            } else {
+                this.set_applet_tooltip("KDE Connect Applet\n"+_("{deviceCount} Devices").replace("{deviceCount}", deviceCount));
+            }
+        } else {
+            this.set_applet_tooltip("KDE Connect Applet");
+        }
+
+        // Set Label
+        if (this.options.showDeviceCount == true) {
+            this.hide_applet_label(false);
+            this.set_applet_label(deviceCount.toString());
+        } else {
+            this.hide_applet_label(true);
+        }
     }
 
     /**
@@ -866,11 +1008,25 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      */
 
     /**
-     * Callback that gets called, if the data of a device changes
+     * Callback that gets called, if the plugins of a device change
      */
-    onDeviceDataChanged() {
-        this.info("Device Data Changed!")
-        // TODO: Implement
+    onDevicePluginsChanged() {
+        // Plugins of a device changed, we need to recreate the modules and rebuilt the popup menu
+
+        for (let [deviceID, device] of Object.entries(this.devices)) {
+            device.removeAllModules();
+            device.createModules(Modules.modules)
+        }
+
+        this.rebuildPopupMenu();
+    }
+
+    /**
+     * Callback that gets called, if the reachable state of a device change
+     */
+    onDeviceReachableChanged() {
+        // Reachable state of a device changed, we need to rebuilt the popup menu
+        this.rebuildPopupMenu();
     }
 
     /**
@@ -898,7 +1054,14 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      * @param {string} moduleID - The ID of the module
      */
     onModuleSettingsChanged(value, option, moduleID) {
-        //TODO: Implement
+        // Settings for a module changed, for simplicity, we simply recreate the modules and rebuilt the popup menu
+
+        for (let [deviceID, device] of Object.entries(this.devices)) {
+            device.removeAllModules();
+            device.createModules(Modules.modules)
+        }
+
+        this.rebuildPopupMenu();
     }
 
     /**
@@ -964,8 +1127,24 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      * @param {*} sender 
      */
     onDeviceListChanged(proxy, sender) {
-        this.info("DeviceListChanged");
-        //TODO: Implement
+        // Device List changed, we need to recreate the internal device list
+
+        // Remove all devices and disconnect signals, etc.
+        this.removeAllDevices();
+
+        // Get Device Map from KDE Connect proxy
+        this.devices = this.getDeviceMap();
+
+        // Updated Panel information
+        this.updatePanel();
+
+        // Create modules for each device
+        for (let [deviceID, device] of Object.entries(this.devices)) {
+            device.createModules(Modules.modules)
+        }
+
+        // Build main popout menu
+        this.rebuildPopupMenu();
     }
 
     /**
@@ -995,7 +1174,8 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             let newDevice = new Device(this, deviceID, deviceNames[deviceID]);
 
             // Bind signal to onDeviceDataChanged function of the applet
-            newDevice._signals.connect(newDevice, "plugins-changed", this.onDeviceDataChanged, this);
+            newDevice._signals.connect(newDevice, "plugins-changed", this.onDevicePluginsChanged, this);
+            newDevice._signals.connect(newDevice, "reachable-changed", this.onDeviceReachableChanged, this);
 
             deviceMap[deviceID] = newDevice;
         });

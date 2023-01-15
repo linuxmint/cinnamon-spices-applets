@@ -82,10 +82,10 @@ class SendURLDialog(Gtk.Dialog):
 class PhoneNumberEntry(Gtk.Entry):
     def __init__(self):
         super().__init__()
-        self.connect("changed", self.on_changed)
+        self.connect("notify::text", self.on_text_changed)
         self.set_input_purpose(Gtk.InputPurpose.PHONE)
     
-    def on_changed(self, *args):
+    def on_text_changed(self, *args):
         # Remove leading and following spaces
         text = re.sub(" +", " ", self.get_text())
         # Remove unwanted characters

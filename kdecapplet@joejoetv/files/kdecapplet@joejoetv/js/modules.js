@@ -237,7 +237,7 @@ class Module extends KDECModule {
         super.destroy();
     }
 
-    getMenuItems() {
+    getMenuItem() {
         return [];
     }
 }
@@ -261,6 +261,8 @@ class BatteryModule extends KDECModule {
             this.charge = this.batteryProxy.charge;
             this.isCharging = this.batteryProxy.isCharging;
 
+            this.warn("RAW CHARGE: "+this.charge);
+
             this._onRefreshed = this.batteryProxy.connectSignal("refreshed", this.onRefreshed.bind(this));
         } catch (error) {
             this.error("Error while connecting to 'battery' DBus interface: "+error);
@@ -271,30 +273,37 @@ class BatteryModule extends KDECModule {
     }
 
     _getBatteryIconName() {
-        let chargeLevel = (this.charge % 10)*10
-
-        if (this.isCharging) {
-            if (chargeLevel == 100) {
-                return "battery-level-" + chargeLevel  + "-charged-symbolic"
+        if (this.charge >= 0 && this.charge <= 100) {
+            let chargeLevel = Math.floor(this.charge / 10) * 10;
+    
+            if (this.isCharging) {
+                if (chargeLevel == 100) {
+    
+                    return "battery-level-" + chargeLevel.toString()  + "-charged-symbolic";
+                } else {
+                    return "battery-level-" + chargeLevel.toString()  + "-charging-symbolic";
+                }
             } else {
-                return "battery-level-" + chargeLevel  + "-charging-symbolic"
+                return "battery-level-" + chargeLevel + "-symbolic";
             }
         } else {
-            return "battery-level-" + chargeLevel + "-symbolic"
+            return "battery-missing-symbolic";
         }
     }
 
     _getLabelText() {
         if (this.isCharging) {
-            return this.charge + "% (" + _("Charging") + ")";
+            return this.charge.toString() + "% (" + _("Charging") + ")";
         } else {
-            return this.charge + "%"
+            return this.charge.toString() + "%"
         }
     }
 
-    onRefreshed(isCharging, charge) {
+    onRefreshed(proxy, sender, [isCharging, charge]) {
         this.charge = charge;
         this.isCharging = isCharging;
+
+        this.warn("RAW CHARGE: "+this.charge);
 
         this.batteryMenuItem.label.set_text(this._getLabelText());
         this.batteryMenuItem.setIconSymbolicName(this._getBatteryIconName());
@@ -327,7 +336,7 @@ class DeviceInfoModule extends KDECModule {
         }
 
         // Create Menu Item
-        this.deviceInfoMenuItem = new PopupMenu.PopupIconMenuItem(_("ID: ") + this.device.getID(), this._getTypeIconName(), St.IconType.SYMBOLIC, {reactive: false});
+        this.deviceInfoMenuItem = new PopupMenu.PopupIconMenuItem(_("ID: ") + this.device.getID(), this._getTypeIconName(), St.IconType.SYMBOLIC);
         
         // Copy ID, when clicked
         this._signals.connect(this.deviceInfoMenuItem, "activate", function(menuItem, keepMenu) {
@@ -435,7 +444,7 @@ class ConnectivityModule extends KDECModule {
                 break;
         }
 
-        if (this.options.showNetworkType == true) {
+        if (this.options.showNetworkType == true && this.signalStrength > 0) {
             let networkText = ""
     
             if (this.networkType == "Unknown") {
@@ -451,7 +460,7 @@ class ConnectivityModule extends KDECModule {
 
     }
 
-    onRefreshed(networkType, networkStrength) {
+    onRefreshed(proxy, sender, [networkType, networkStrength]) {
         this.networkType = networkType;
         this.signalStrength = networkStrength;
 
@@ -498,7 +507,7 @@ class FindMyPhoneModule extends KDECModule {
         }
     }
 
-    getMenuItems() {
+    getMenuItem() {
         return this.findMyPhoneMenuItem;
     }
 }
@@ -523,7 +532,11 @@ class RequestPhotoModule extends KDECModule {
         this.requestPhotoMenuItem = new PopupMenu.PopupIconMenuItem(_("Request Photo"), "camera-photo-symbolic", St.IconType.SYMBOLIC, {});
         let requestPhotoMenuItemTooltip = new Tooltips.Tooltip(this.requestPhotoMenuItem.actor, _("Click to request a photo from the device"));
         this._signals.connect(this.requestPhotoMenuItem, "activate", function() {
-            Dialogs.openReceivePhotoDialog(this.device.getApplet().metadata, this.device.getName(), this.requestPhotoCallback.bind(this));
+            try {
+                Dialogs.openReceivePhotoDialog(this.device.getApplet().metadata, this.device.getName(), this.requestPhotoCallback.bind(this));
+            } catch (error) {
+                global.logError("Error while opening Dialog: "+error);
+            }
         }, this);
     }
 
@@ -571,7 +584,7 @@ class RequestPhotoModule extends KDECModule {
         }
     }
 
-    onPhotoReceived(fileName) {
+    onPhotoReceived(proxy, sender, [fileName]) {
         this.info("Received Photo from device: "+fileName);
 
         let notificationSource = this.device.getApplet().notificationSource;
@@ -590,7 +603,7 @@ class RequestPhotoModule extends KDECModule {
         }
     }
 
-    getMenuItems() {
+    getMenuItem() {
         return this.requestPhotoMenuItem;
     }
 }
@@ -610,7 +623,7 @@ class PingModule extends KDECModule {
         }
 
         // Create Menu Item
-        this.pingMenuItem = new PopupMenu.PopupIconMenuItem(_("Ping Device"), "", St.IconType.SYMBOLIC, {});
+        this.pingMenuItem = new PopupMenu.PopupIconMenuItem(_("Ping Device"), "network-transmit-symbolic", St.IconType.SYMBOLIC, {});
         let pingMenuItemTooltip = new Tooltips.Tooltip(this.pingMenuItem.actor, _("Click to send a ping to the device"));
         this._signals.connect(this.pingMenuItem, "activate", this.ping.bind(this));
     }
@@ -624,7 +637,7 @@ class PingModule extends KDECModule {
             }
         } else {
             try {
-                this.pingProxy.sendPingSync();
+                this.pingProxy.sendPingSync(_("Ping!"));
             } catch (error) {
                 this.error("Error while sending ping: "+error);
             }
@@ -674,6 +687,7 @@ class ShareModule extends KDECModule {
             this._signals.connect(this.sendURLMenuItem, "activate", function() {
                 Dialogs.openSendURLDialog(this.device.getApplet().metadata, this.device.getName(), this.sendURLCallback.bind(this));
             }, this);
+            this.menuItemContainer.menu.addMenuItem(this.sendURLMenuItem);
         }
 
         if (this.options.enableSendText == true) {
@@ -682,6 +696,7 @@ class ShareModule extends KDECModule {
             this._signals.connect(this.sendTextMenuItem, "activate", function() {
                 Dialogs.openSendTextDialog(this.device.getApplet().metadata, this.device.getName(), this.sendTextCallback.bind(this));
             }, this);
+            this.menuItemContainer.menu.addMenuItem(this.sendTextMenuItem);
         }
 
         if (this.options.enableSendFiles == true) {
@@ -690,6 +705,7 @@ class ShareModule extends KDECModule {
             this._signals.connect(this.sendFilesMenuItem, "activate", function() {
                 Dialogs.openSendFilesDialog(this.device.getApplet().metadata, this.device.getName(), this.sendFilesCallback.bind(this));
             }, this);
+            this.menuItemContainer.menu.addMenuItem(this.sendFilesMenuItem);
         }
     }
 
@@ -760,8 +776,9 @@ class ShareModule extends KDECModule {
         }
     }
 
-    onShareReceived(url) {
+    onShareReceived(proxy, sender, [url]) {
         this.info("Received Share from device: "+url);
+        // TODO: Implement
     }
 
     destroy() {
@@ -793,7 +810,7 @@ class SFTPModule extends KDECModule {
             this.mounted = this.sftpProxy.isMountedSync()[0];
 
             if (this.mounted == true) {
-                this.mountPoint = this.sftpProxy.mountPoint()[0];
+                this.mountPoint = this.sftpProxy.mountPointSync()[0];
             }
 
             this._onMounted = this.sftpProxy.connectSignal("mounted", this.onMounted.bind(this));
@@ -803,7 +820,7 @@ class SFTPModule extends KDECModule {
         }
 
         // Create Menu Item
-        this.sftpMenuItem = new CommonUtils.PopupButtonIconMenuItem(this._getLabelText(), "folder-network", St.IconType.SYMBOLIC, "folder-symbolic", St.IconType.SYMBOLIC);
+        this.sftpMenuItem = new CommonUtils.PopupButtonIconMenuItem(this._getLabelText(), "network-server-symbolic", St.IconType.SYMBOLIC, "folder-symbolic", St.IconType.SYMBOLIC);
         
         // Set text for menu item tooltip and enable it
         this.sftpMenuItem.tooltip.set_text(this._getItemTooltipText());
@@ -827,9 +844,9 @@ class SFTPModule extends KDECModule {
 
     _getLabelText() {
         if (this.mounted == true) {
-            return _("Mount");
-        } else {
             return _("Unmount");
+        } else {
+            return _("Mount");
         }
     }
 
@@ -857,28 +874,28 @@ class SFTPModule extends KDECModule {
         }
     }
 
-    onMounted() {
+    onMounted(proxy, sender) {
         this.mounted = true;
         this.sftpMenuItem.label.set_text(this._getLabelText());
         this.sftpMenuItem.tooltip.set_text(this._getItemTooltipText());
         this.sftpMenuItem.button.setEnabled(true);
         
         try {
-            this.mountPoint = this.sftpProxy.mountPoint()[0];
+            this.mountPoint = this.sftpProxy.mountPointSync()[0];
 
         } catch (error) {
             this.error("Error while getting information about mount: "+error);
         }
     }
 
-    onUnmounted() {
+    onUnmounted(proxy, sender) {
         this.mounted = false;
         this.sftpMenuItem.label.set_text(this._getLabelText());
         this.sftpMenuItem.tooltip.set_text(this._getItemTooltipText());
         this.sftpMenuItem.button.setEnabled(false);
 
         try {
-            let mountError = this.sftpProxy.getMountError()[0];
+            let mountError = this.sftpProxy.getMountErrorSync()[0];
 
             if (mountError != "") {
                 this.error("Error while mounting: "+mountError);
@@ -909,7 +926,7 @@ class SFTPModule extends KDECModule {
         }
     }
 
-    getMenuItems() {
+    getMenuItem() {
         return this.sftpMenuItem;
     }
 }
@@ -943,6 +960,7 @@ class SMSModule extends KDECModule {
             this.launchSMSAppMenuItem = new PopupMenu.PopupIconMenuItem(_("Launch SMS App"), "dialog-messages", St.IconType.SYMBOLIC, {});
             let launchSMSAppMenuItemTooltip = new Tooltips.Tooltip(this.launchSMSAppMenuItem.actor, _("Click to open the KDE Connect SMS App"));
             this._signals.connect(this.launchSMSAppMenuItem, "activate", this.launchSMSApp.bind(this));
+            this.menuItemContainer.menu.addMenuItem(this.launchSMSAppMenuItem);
         }
 
         if (this.options.enableSendSMS== true) {
@@ -951,6 +969,7 @@ class SMSModule extends KDECModule {
             this._signals.connect(this.sendSMSMenuItem, "activate", function() {
                 Dialogs.openSendSMSDialog(this.device.getApplet().metadata, this.device.getName(), this.sendSMSCallback.bind(this));
             }, this);
+            this.menuItemContainer.menu.addMenuItem(this.sendSMSMenuItem);
         }
     }
 
@@ -966,12 +985,14 @@ class SMSModule extends KDECModule {
         switch (status) {
             case Dialogs.DialogStatus.SUCCESS:
                 if (SMSObject["phone_number"] && SMSObject["message"]) {
-                    try {
-                        let addressVariant = new GLib.Variant('s', SMSObject["phone_number"]);
-                        let addressListVariant = new GLib.Variant('av', [addressVariant])
-                        let attachmentURLsVariant = new GLib.Variant('av', []);
+                    let phoneNumber = SMSObject["phone_number"].replace(" ", "");
 
-                        this.smsProxy.sendSMSSync(addressListVariant, SMSObject["message"], attachmentURLsVariant);
+                    try {
+                        let addressVariant = new GLib.Variant('(s)', [phoneNumber]);
+
+                        this.smsProxy.sendSmsSync([addressVariant], SMSObject["message"], []);
+
+                        this.info("Sent SMS to '" + phoneNumber.toString() + "' with message: "+SMSObject["message"].toString());
                     } catch (error) {
                         this.error("Error while sending SMS: "+error);
                     }

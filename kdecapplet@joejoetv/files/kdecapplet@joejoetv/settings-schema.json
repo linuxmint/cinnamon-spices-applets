@@ -42,14 +42,13 @@
             "title": "Panel",
             "keys": [
                 "shownumdevices",
-                "tooltipmode"
+                "tooltipdevicecount"
             ]
         },
         "appearance-section": {
             "type": "section",
             "title": "Appearance",
             "keys": [
-                "tooltipdevicecount",
                 "icontype",
                 "usecustomicon",
                 "customicon"
@@ -63,6 +62,7 @@
                 "openconfiguration"
             ]
         },
+
         "battery-module-section": {
             "type": "section",
             "title": "Battery Info Module",
@@ -84,7 +84,8 @@
             "title": "Connectivity Info Module",
             "keys": [
                 "connectivity-module-description",
-                "connectivity-module-enabled"
+                "connectivity-module-enabled",
+                "connectivity-module-showNetworkType"
             ]
         },
         "mpris-module-section": {
@@ -108,7 +109,9 @@
             "title": "Request-Photo Action Module",
             "keys": [
                 "requestphoto-module-description",
-                "requestphoto-module-enabled"
+                "requestphoto-module-enabled",
+                "requestphoto-module-saveToDir",
+                "requestphoto-module-saveDirectory"
             ]
         },
         "ping-module-section": {
@@ -116,7 +119,9 @@
             "title": "Ping Action Module",
             "keys": [
                 "ping-module-description",
-                "ping-module-enabled"
+                "ping-module-enabled",
+                "ping-module-useCustomMessage",
+                "ping-module-customMessage"
             ]
         },
         "share-module-section": {
@@ -124,7 +129,11 @@
             "title": "Share Action Module",
             "keys": [
                 "share-module-description",
-                "share-module-enabled"
+                "share-module-enabled",
+                "share-module-useSubMenu",
+                "share-module-enableSendURL",
+                "share-module-enableSendText",
+                "share-module-enableSendFiles"
             ]
         },
         "sftp-module-section": {
@@ -140,7 +149,10 @@
             "title": "SMS Action Module",
             "keys": [
                 "sms-module-description",
-                "sms-module-enabled"
+                "sms-module-enabled",
+                "sms-module-useSubMenu",
+                "sms-module-enableSendSMS",
+                "sms-module-enableLaunchSMSApp"
             ]
         },
         "telephony-module-section": {
@@ -187,15 +199,6 @@
         "default": "kdeconnect",
         "dependency": "usecustomicon"
     },
-    "tooltipmode": {
-        "type": "combobox",
-        "description": "What should the tooltip of the applet show?",
-        "options": {
-            "Device Count": "DEVICECOUNT",
-            "Applet Name": "APPLETNAME"
-        },
-        "default": "DEVICECOUNT"
-    },
     "expandfirst": {
         "type": "switch",
         "description": "Expand the device submenu if there is only 1 device",
@@ -241,6 +244,11 @@
         "description": "Module enabled",
         "default": true
     },
+    "connectivity-module-showNetworkType": {
+        "type": "switch",
+        "description": "Show the mobile network type",
+        "default": true
+    },
 
     "mpris-module-description": {
         "type": "label",
@@ -271,6 +279,18 @@
         "description": "Module enabled",
         "default": true
     },
+    "requestphoto-module-saveToDir": {
+        "type": "switch",
+        "description": "Save received photos directly to directory",
+        "default": false
+    },
+    "requestphoto-module-saveDirectory": {
+        "type": "filechooser",
+        "description": "The directory to save received photos to",
+        "default": "",
+        "select-dir": true,
+        "dependency": "requestphoto-module-saveToDir"
+    },
 
     "ping-module-description": {
         "type": "label",
@@ -281,6 +301,17 @@
         "description": "Module enabled",
         "default": true
     },
+    "ping-module-useCustomMessage": {
+        "type": "switch",
+        "description": "Use custom message for ping",
+        "default": false
+    },
+    "ping-module-customMessage": {
+        "type": "entry",
+        "description": "Custom message",
+        "default": "Ping!",
+        "dependency": "ping-module-useCustomMessage"
+    },
 
     "share-module-description": {
         "type": "label",
@@ -289,6 +320,26 @@
     "share-module-enabled": {
         "type": "switch",
         "description": "Module enabled",
+        "default": true
+    },
+    "share-module-useSubMenu": {
+        "type": "switch",
+        "description": "Show menu items in sub menu",
+        "default": true
+    },
+    "share-module-enableSendURL": {
+        "type": "switch",
+        "description": "Enable the menu item to send a URL",
+        "default": true
+    },
+    "share-module-enableSendText": {
+        "type": "switch",
+        "description": "Enable the menu item to send some text",
+        "default": true
+    },
+    "share-module-enableSendFiles": {
+        "type": "switch",
+        "description": "Enable the menu item to send file(s)",
         "default": true
     },
 
@@ -309,6 +360,21 @@
     "sms-module-enabled": {
         "type": "switch",
         "description": "Module enabled",
+        "default": true
+    },
+    "sms-module-useSubMenu": {
+        "type": "switch",
+        "description": "Show menu items in sub menu",
+        "default": true
+    },
+    "sms-module-enableSendSMS": {
+        "type": "switch",
+        "description": "Enable the menu item to send an SMS message",
+        "default": true
+    },
+    "sms-module-enableLaunchSMSApp": {
+        "type": "switch",
+        "description": "Enable the menu item to launch the KDE Connect SMS app",
         "default": true
     },
 
