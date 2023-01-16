@@ -73,6 +73,7 @@ export class WeatherApplet extends TextIconApplet {
 		super(orientation, panelHeight, instanceId);
 		this.metadata = metadata;
 		this.AppletDir = metadata.path;
+		this.orientation = orientation;
 		Logger.Debug("Applet created with instanceID " + instanceId);
 		Logger.Debug("AppletDir is: " + this.AppletDir);
 
@@ -83,8 +84,6 @@ export class WeatherApplet extends TextIconApplet {
 		this.ui = new UI(this, orientation);
 		this.ui.Rebuild(this.config);
 		this.loop = new WeatherLoop(this, instanceId);
-
-		this.orientation = orientation;
 		try {
 			this.setAllowedLayout(AllowedLayout.BOTH);
 		} catch (e) {
