@@ -11,14 +11,14 @@ const {EllipsizeMode} = imports.gi.Pango;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 
 const {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible} = require('./utils');
-const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
+const ApplicationsViewMode = Object.freeze({LIST: 0, GRID: 1});
 const DescriptionPlacementTOOLTIP = 1, DescriptionPlacementUNDER = 2, DescriptionPlacementNONE = 3;
 
 class AppButton {
     constructor(appThis, app) {
         this.appThis = appThis;
         this.app = app;
-        const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
+        const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST;
         this.signals = new SignalManager(null);
 
         //----------ICON---------------------------------------------
@@ -241,7 +241,7 @@ class AppButton {
             let [x, y] = this.actor.get_transformed_position();
             let {width, height} = this.actor;
             let center_x = false; //should tooltip x pos. be centered on x
-            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+            if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                 x += 175 * global.ui_scale;
                 y += height + 8 * global.ui_scale;
             } else {//grid view
@@ -333,7 +333,7 @@ class AppButton {
     }
 
     _onRunningStateChanged() {
-        if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+        if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
             if (this.app.isApplication && this.app.state !== AppState.STOPPED) {
                 this.appRunningIndicator.show();
             } else {
@@ -481,7 +481,7 @@ class AppsView {
             }
 
             const subheading = new Subheading(this.appThis, subheadingText, clickAction);
-            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+            if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                 this.applicationsListBox.add(subheading.subheadingBox);
             } else {
                 const gridLayout = this.applicationsGridBox.layout_manager;
@@ -501,7 +501,7 @@ class AppsView {
                 appButton = new AppButton(this.appThis, app);
                 this.buttonStore.push(appButton);
             }
-            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+            if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                 this.applicationsListBox.add_actor(appButton.actor);
             } else {
                 const gridLayout = this.applicationsGridBox.layout_manager;
@@ -519,7 +519,7 @@ class AppsView {
     }
 
     populate_finish() {
-        if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+        if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
             this.applicationsListBox.show();
         } else {
             this.applicationsGridBox.show();
@@ -622,7 +622,7 @@ class AppsView {
     }
 
     getActiveContainer() {
-        return this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST ?
+        return this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST ?
                                                 this.applicationsListBox : this.applicationsGridBox;
     }
 

@@ -287,37 +287,15 @@ class CategoriesView {
         }
         newButtons.push(button);
 
-        const dirs = [];
-        const iter = this.appThis.appSystem.get_tree().get_root_directory().iter();
-        let nextType;
-        while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
-            if (nextType === CMenu.TreeItemType.DIRECTORY) {
-                dirs.push(iter.get_directory());
+        this.appThis.apps.getDirs().forEach(dir => {                
+            const dirId = dir.get_menu_id();
+            let button = this.buttons.find(button => button.id === dirId);
+            if (!button) {
+                button = new CategoryButton(this.appThis, dirId, dir.get_name(), null, dir.get_icon());
             }
-        }
-        dirs.sort((a, b) => {
-                        const prefCats = ['ADMINISTRATION', 'PREFERENCES'];
-                        const prefIdA = prefCats.indexOf(a.get_menu_id().toUpperCase());
-                        const prefIdB = prefCats.indexOf(b.get_menu_id().toUpperCase());
-                        if (prefIdA < 0 && prefIdB >= 0) return -1;
-                        if (prefIdA >= 0 && prefIdB < 0) return 1;
-                        return a.get_name().localeCompare(b.get_name(), undefined,
-                                                          {sensitivity: "base", ignorePunctuation: true});
-                    });
-        dirs.forEach(dir => {
-                if (!dir.get_is_nodisplay()) {
-                    const dirId = dir.get_menu_id();
-                    const categoryApps = this.appThis.apps.listApplications(dirId);
-                    if (categoryApps.length > 0) {
-                        let button = this.buttons.find(button => button.id === dirId);
-                        if (!button) {
-                            button = new CategoryButton(this.appThis, dirId, dir.get_name(), null, dir.get_icon());
-                        }
-                        const newAppIndex = categoryApps.findIndex(app => !!app.newAppShouldHighlight);
-                        button.setHighlight(newAppIndex >= 0);//highlight category if it contains a new app
-                        newButtons.push(button);
-                    }
-                } });
+            button.setHighlight(this.appThis.apps.dirHasNewApp(dirId));//highlight category if it contains a new app
+            newButtons.push(button);
+        });
 
         const enableFavFiles = XApp.Favorites && XApp.Favorites.get_default().get_favorites(null).length > 0;
         const homeDir = GLib.get_home_dir();

@@ -62,8 +62,6 @@ def get_favicons(sqlite_file, domains_list):
 
 if __name__ == "__main__":
     if len(sys.argv) > 2:
-        #f = open('/home/fred/pout.txt','a')
-        #f.write('pout>' + str(sys.argv) + '\n\n')
         sqlite_file = sys.argv[1]
         domains_json = sys.argv[2]
         domains_list = json.loads(domains_json)
