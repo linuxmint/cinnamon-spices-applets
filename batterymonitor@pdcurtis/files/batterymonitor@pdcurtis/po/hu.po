@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-27 19:21-0500\n"
-"PO-Revision-Date: 2022-12-29 13:39-0500\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"PO-Revision-Date: 2023-01-16 20:14+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: 5.4/applet.js:139 3.2/applet.js:135
 msgid "--%"
@@ -78,7 +78,7 @@ msgstr "Változásnapló megtekintése"
 
 #: 5.4/applet.js:271
 msgid "Open the README"
-msgstr ""
+msgstr "README fájl megnyitása"
 
 #: 5.4/applet.js:277 3.2/applet.js:327
 msgid "Open stylesheet.css (Advanced Function)"
@@ -221,7 +221,7 @@ msgstr ""
 
 #. 5.4->settings-schema.json->head->description
 msgid "General Settings"
-msgstr ""
+msgstr "Általános beállítások"
 
 #. 5.4->settings-schema.json->refreshInterval-spinner->units
 #. 3.2->settings-schema.json->refreshInterval-spinner->units
@@ -293,7 +293,7 @@ msgstr "Csak Ikon az állapotot jelző színes háttérrel"
 
 #. 5.4->settings-schema.json->displayType->description
 msgid "Toolbar Display Type"
-msgstr ""
+msgstr "Eszköztár megjelenítés típusa"
 
 #. 5.4->settings-schema.json->displayType->tooltip
 #. 3.2->settings-schema.json->displayType->tooltip
@@ -401,11 +401,11 @@ msgstr ""
 
 #. 5.4->settings-schema.json->head4->description
 msgid "Advanced"
-msgstr ""
+msgstr "Speciális"
 
 #. 5.4->settings-schema.json->customBatteryPath->description
 msgid "Path to battery capacity directory (device path)"
-msgstr ""
+msgstr "Elérési út az akkumulátor kapacitás mappához (eszköz elérési út)"
 
 #. 5.4->settings-schema.json->customBatteryPath->tooltip
 msgid ""
@@ -415,6 +415,11 @@ msgid ""
 "Default:\n"
 "/sys/class/power_supply/BAT0"
 msgstr ""
+"Válassza ki az energia ellátás objektumát – például a másodlagos akkumulátor "
+"megfigyeléséhez.\n"
+"\n"
+"Alapértelmezés:\n"
+"/sys/class/power_supply/BAT0"
 
 #. 3.2->settings-schema.json->head->description
 msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
