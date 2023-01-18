@@ -402,8 +402,7 @@ export class MetUk extends BaseProvider {
 		let result = this.GetLatestObservation(observations[0]?.SiteRep?.DV?.Location?.Period, DateTime.utc().setZone(loc.timeZone), loc);
 		if (observations.length == 1) 
 			return result;
-		for (let index = 0; index < observations.length; index++) {
-			const observation = observations[index];
+		for (const [index, observation] of observations.entries()) {
 			if (observation?.SiteRep?.DV?.Location?.Period == null) 
 				continue;
 			const nextObservation = this.GetLatestObservation(observation.SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
@@ -464,7 +463,9 @@ export class MetUk extends BaseProvider {
 	 * @param day 
 	 */
 	private GetLatestObservation(observations: Period[], day: DateTime, loc: LocationData): ObservationPayload | null {
-		if (observations == null) return null;
+		global.log(observations)
+		if (observations == null) 
+			return null;
 		for (const element of observations) {
 			const date = DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone });
 			if (!OnSameDay(date, day)) continue;
