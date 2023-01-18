@@ -115,7 +115,7 @@ export const fahrenheitCountries = [
 
 /**
  * Default kph, gb added to mph keys because it's not in the unicode DB
- * 
+ *
  * Info partially from https://github.com/unicode-org/cldr/blob/release-38-1/common/supplemental/units.xml
  * and https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
  */
@@ -167,8 +167,8 @@ export const windSpeedUnitLocales: Partial<Record<WeatherWindSpeedUnits, string[
     ]
 };
 
-/** Default metric 
- * 
+/** Default metric
+ *
  * Info partially from https://github.com/unicode-org/cldr/blob/release-38-1/common/supplemental/units.xml
  * and https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 */

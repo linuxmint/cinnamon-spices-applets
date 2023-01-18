@@ -146,7 +146,7 @@ export class WeatherUnderground extends BaseProvider {
     private GetObservations = async (stations: NearbyStation[], forecast: ForecastPayload, loc: LocationData): Promise<ObservationInternalData> => {
         const observationData: ObservationData[] = (await Promise.all(stations.map(v => this.GetObservation(v.stationId)))).filter(v => v != null) as ObservationData[];
         const tz = loc.timeZone;
-        
+
         const result: ObservationInternalData = {
             wind: {
                 speed: null,
@@ -161,7 +161,7 @@ export class WeatherUnderground extends BaseProvider {
         for (const observations of observationData) {
             const station = stations.find(v => v.stationId == observations.stationID)!;
             if (result.date == null && observations.obsTimeUtc != null)
-                result.date = DateTime.fromISO(observations.obsTimeUtc).setZone(tz); 
+                result.date = DateTime.fromISO(observations.obsTimeUtc).setZone(tz);
             if (result.location.city == null && observations.neighborhood != null)
                 result.location.city = observations.neighborhood;
             if (result.location.country == null && observations.country != null)
@@ -171,13 +171,13 @@ export class WeatherUnderground extends BaseProvider {
             if (result.temperature == null && observations.metric_si.temp)
                 result.temperature = CelsiusToKelvin(observations.metric_si.temp);
             if (result.pressure == null)
-                result.pressure = observations.metric_si.pressure; 
+                result.pressure = observations.metric_si.pressure;
             if (result.humidity == null)
-                result.humidity = observations.humidity; 
+                result.humidity = observations.humidity;
             if (result.wind.speed == null)
-                result.wind.speed = observations.metric_si.windSpeed; 
+                result.wind.speed = observations.metric_si.windSpeed;
             if (result.wind.degree == null)
-                result.wind.degree = observations.winddir; 
+                result.wind.degree = observations.winddir;
             if (result.dewPoint == null)
                 result.dewPoint = CelsiusToKelvin(observations.metric_si.dewpt);
             if (result.extra_field?.value == null && observations.metric_si.windChill != null) {
@@ -206,13 +206,13 @@ export class WeatherUnderground extends BaseProvider {
 
         if (result.date == null)
             // TODO use real timestamp from somewhere....
-            result.date = DateTime.now().setZone(tz); 
+            result.date = DateTime.now().setZone(tz);
         if (result.temperature == null)
             result.temperature = this.ToKelvin(forecast.daypart[0].temperature[dayPartIndex]);
         if (result.humidity == null)
-            result.humidity = forecast.daypart[0].relativeHumidity[dayPartIndex]; 
+            result.humidity = forecast.daypart[0].relativeHumidity[dayPartIndex];
         if (result.wind.speed == null)
-            result.wind.speed = forecast.daypart[0].windSpeed[dayPartIndex]; 
+            result.wind.speed = forecast.daypart[0].windSpeed[dayPartIndex];
         if (result.wind.degree == null)
             result.wind.degree = forecast.daypart[0].windDirection[dayPartIndex];
         if (result.condition == null) {
@@ -832,13 +832,13 @@ interface DayPartData {
     snowRange: (string | null)[];
     /** Feels Like can move from the Heat Index and Wind Chill areas somewhat commonly.  It would occur when the temperature spans across 65 F, where Heat Index is used above that value and Wind Chill is used below that value. */
     temperature: number[];
-    /** An apparent temperature.  It represents what the air temperature “feels like” on exposed human skin due to the combined effect of warm temperatures and high humidity. 
-     * Above 65°F, it is set = to the temperature. 
+    /** An apparent temperature.  It represents what the air temperature “feels like” on exposed human skin due to the combined effect of warm temperatures and high humidity.
+     * Above 65°F, it is set = to the temperature.
      * Units - Expressed in fahrenheit when units=e, expressed in celsius when units=m, s, or h.
      */
     temperatureHeatIndex: number[];
     /** An apparent temperature. It represents what the air temperature “feels like” on exposed human skin due to the combined effect of the cold temperatures and wind speed.
-     * Below  65°F, it is set = to the temperature. 
+     * Below  65°F, it is set = to the temperature.
      * Units - Expressed in fahrenheit when units=e, expressed in celsius when units=m, s, or h.
      */
     temperatureWindChill: number[];
@@ -893,5 +893,5 @@ interface NearbyStation {
 }
 
 
-type ObservationInternalData = Partial<Omit<WeatherData, "forecasts" | "hourlyForecast" | "location" | "coord" | "wind" | "sunrise" | "date" | "sunset">> & 
-                       Pick<WeatherData, "wind" | "date" | "sunrise" | "sunset" | "location">; 
+type ObservationInternalData = Partial<Omit<WeatherData, "forecasts" | "hourlyForecast" | "location" | "coord" | "wind" | "sunrise" | "date" | "sunset">> &
+                       Pick<WeatherData, "wind" | "date" | "sunrise" | "sunset" | "location">;

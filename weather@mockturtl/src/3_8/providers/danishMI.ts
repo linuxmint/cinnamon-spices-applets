@@ -346,7 +346,7 @@ export class DanishMI extends BaseProvider {
 
 	/**
 	 * Expands the locations to about 10km box
-	 * @param loc 
+	 * @param loc
 	 */
 	private GetLocationBoundingBox(loc: LocationData) {
 		this.observationParams.west = loc.lon + 0.075;
@@ -377,7 +377,7 @@ export class DanishMI extends BaseProvider {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param str example 20210207130000 or 20210214 or '803' or '1704',
 	 */
 	private DateStringToDate(str: string): Date {

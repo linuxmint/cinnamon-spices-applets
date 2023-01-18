@@ -4,7 +4,7 @@ import { RefreshState } from "./types";
 import { delay, Guid } from "./utils";
 
 /** Stores applet instance's ID's globally,
- * Checked to make sure that instance is 
+ * Checked to make sure that instance is
  * running for one applet ID
  */
 var weatherAppletGUIDs: GUIDStore = {};
@@ -74,7 +74,7 @@ export class WeatherLoop {
 				Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
 					+ ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
 					+ " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
-				// loop can skip 1 cycle if needed 
+				// loop can skip 1 cycle if needed
 				const state = await this.app.RefreshWeather(false, null, false);
 				if (state == RefreshState.Error) Logger.Info("App is currently refreshing, refresh skipped in main loop");
 				if (state == RefreshState.Success || RefreshState.Locked) this.lastUpdated = new Date();
@@ -146,9 +146,9 @@ export class WeatherLoop {
 	/**
 	 * On timezone changes for the system it can occur that the lastUpdated timestamp
 	 * moves to the future (when switching back an hour on DST boundary).
-	 * 
+	 *
 	 * In that case we invalidate the timestamp because it's not trustworthy.
-	 * Keeping it would mean there is a chance we don't update for an hour or more. 
+	 * Keeping it would mean there is a chance we don't update for an hour or more.
 	 */
 	private ValidateLastUpdateTime(): void {
 		// System time was probably changed back, reset lastUpdated value

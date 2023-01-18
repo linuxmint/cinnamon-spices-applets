@@ -61,7 +61,7 @@ export class WeatherApplet extends TextIconApplet {
 	public readonly config: Config;
 	public readonly ui: UI;
 
-	private readonly metadata: any; 
+	private readonly metadata: any;
 
 	/** Used for error handling, first error calls flips it
 	 * to prevents displaying other errors in the current loop.
@@ -205,7 +205,7 @@ export class WeatherApplet extends TextIconApplet {
 
 	/**
 	 * Main function pulling and refreshing data
-	 * @param rebuild 
+	 * @param rebuild
 	 */
 	public async RefreshWeather(this: WeatherApplet, rebuild: boolean, location: LocationData | null = null, manual: boolean = true): Promise<RefreshState> {
 		try {
@@ -517,22 +517,22 @@ The contents of the file saved from the applet help page goes here
 		const appletLogFile = File.new_for_path(this.config._selectedLogPath);
 		const stream = await OverwriteAndGetIOStream(appletLogFile);
 		await WriteAsync(stream.get_output_stream(), logLines.join("\n"));
-		
+
 		if (settings != null) {
 			await WriteAsync(stream.get_output_stream(), "\n\n------------------- SETTINGS JSON -----------------\n\n");
 			await WriteAsync(stream.get_output_stream(), JSON.stringify(settings, null, 2));
 		}
-		
+
 		await CloseStream(stream.get_output_stream());
 		NotificationService.Instance.Send(_("Debug Information saved successfully"), _("Saved to {filePath}", {filePath: this.config._selectedLogPath}));
 	}
 
-	
+
 	/**
 	 * Callback wrapper for events, awaits until a refresh is done and ensures complete
 	 * weather data is provided.
-	 * @param callback 
-	 * @returns 
+	 * @param callback
+	 * @returns
 	 */
 	public AfterRefresh = <T, TT>(callback: (owner: T, data: TT, weatherData: WeatherData) => void | Promise<void>): ((owner: T, data: TT) => Promise<void>) => {
 		return async (owner, data) => {
@@ -540,7 +540,7 @@ The contents of the file saved from the applet help page goes here
 			const weatherData = this.CurrentData;
 			if (weatherData == null)
 				return;
-			callback(owner, data, weatherData); 
+			callback(owner, data, weatherData);
 		}
 	}
 
@@ -591,7 +591,7 @@ The contents of the file saved from the applet help page goes here
 
 	/**
 	 * Handles general errors from HTTPLib
-	 * @param error 
+	 * @param error
 	 */
 	private HandleHTTPError(error: HttpError): void {
 		const appletError: AppletError = {

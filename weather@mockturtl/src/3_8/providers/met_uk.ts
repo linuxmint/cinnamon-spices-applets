@@ -152,8 +152,8 @@ export class MetUk extends BaseProvider {
 	// A function as a function parameter 2 levels deep does not know
 	// about the top level object information, has to pass it in as a parameter
 	/**
-	 * 
-	 * @param baseUrl 
+	 *
+	 * @param baseUrl
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
 	private async GetData(query: string, ParseFunction: (json: any, loc: LocationData) => WeatherData | ForecastData[] | HourlyForecastData[] | null, loc: LocationData) {
@@ -176,7 +176,7 @@ export class MetUk extends BaseProvider {
 		}
 		let dataIndex: number = -1;
 		for (const [index, element] of json.entries()) {
-			if (element.SiteRep.DV.Location == null) 
+			if (element.SiteRep.DV.Location == null)
 				continue;
 			dataIndex = index;
 			break;
@@ -194,8 +194,8 @@ export class MetUk extends BaseProvider {
 		}
 
 		const times = (getTimes as correctGetTimes)(
-			new Date(), parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat), 
-			parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon), 
+			new Date(), parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat),
+			parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon),
 			parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.elevation)
 		);
 		try {
@@ -402,18 +402,18 @@ export class MetUk extends BaseProvider {
 	 * @param observations sorted by distance of location, ascending
 	 */
 	private MeshObservations(observations: METPayload<true>[], loc: LocationData): ObservationPayload | null {
-		if (!observations) 
+		if (!observations)
 			return null;
-		if (observations.length == 0) 
+		if (observations.length == 0)
 			return null;
 		// Sometimes Location property is missing
 		const firstPeriod = observations[0]?.SiteRep?.DV?.Location?.Period ?? [];
 		let result = this.GetLatestObservation(Array.isArray(firstPeriod) ? firstPeriod : [firstPeriod], DateTime.utc().setZone(loc.timeZone), loc);
-		if (observations.length == 1) 
+		if (observations.length == 1)
 			return result;
 
 		for (const [index, observation] of observations.entries()) {
-			if (observation?.SiteRep?.DV?.Location?.Period == null) 
+			if (observation?.SiteRep?.DV?.Location?.Period == null)
 				continue;
 
 			// Not an array, fix it
@@ -474,11 +474,11 @@ export class MetUk extends BaseProvider {
 
 	/**
 	 * Obtains the latest observation from the data of past 24-hour observation periods
-	 * @param observations 
-	 * @param day 
+	 * @param observations
+	 * @param day
 	 */
 	private GetLatestObservation(observations: Period[], day: DateTime, loc: LocationData): ObservationPayload | null {
-		if (observations == null) 
+		if (observations == null)
 			return null;
 
 		for (const element of observations) {
@@ -493,7 +493,7 @@ export class MetUk extends BaseProvider {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param date Example "2020-06-22Z"
 	 */
 	private PartialToISOString(date: string): string {
@@ -765,7 +765,7 @@ interface WeatherSite {
 
 
 /**
- * If true it's Observation Payload. 
+ * If true it's Observation Payload.
  */
 interface METPayload<T extends boolean = false> {
 	SiteRep: {

@@ -34,7 +34,7 @@ export class SunTimesUI {
     }
 
     public Rebuild(config: Config, textColorStyle: string): imports.gi.St.Bin {
-        // Bin is used here to horizontally center BoxLayout inside BoxLayout, normal add() function does not work here 
+        // Bin is used here to horizontally center BoxLayout inside BoxLayout, normal add() function does not work here
         const sunBin = new Bin();
         this.sunriseLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
         this.sunsetLabel = new Label({ text: ELLIPSIS, style: textColorStyle })

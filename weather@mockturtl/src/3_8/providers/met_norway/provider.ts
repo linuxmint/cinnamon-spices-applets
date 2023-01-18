@@ -53,7 +53,7 @@ export class MetNorway extends BaseProvider {
 						const element = nowcast.properties.timeseries[i];
 						const next = nowcast.properties.timeseries[i+1];
 						// Next element is already in the past, skip this one
-						if (next != null && DateTime.fromISO(next.time).diffNow().milliseconds < 0) 
+						if (next != null && DateTime.fromISO(next.time).diffNow().milliseconds < 0)
 							continue;
 
 						if (element.data.instant.details.precipitation_rate > 0 && immediate.start == -1) {

@@ -252,7 +252,7 @@ export class Config {
 	 * @returns Units, automatic is already resolved here
 	 */
 	public get DistanceUnit(): DistanceUnits {
-		if (this._distanceUnit == "automatic") 
+		if (this._distanceUnit == "automatic")
 			return this.GetLocaleDistanceUnit(this.UserTimezone);
 		return this._distanceUnit;
 	}
@@ -299,9 +299,9 @@ export class Config {
 		return (!key || key == "");
 	};
 
-	/** 
+	/**
 	 * @returns LocationData null if failed to obtain
-	 * coordinates. Automatic mode looks up data through ip-api, 
+	 * coordinates. Automatic mode looks up data through ip-api,
 	 * else it returns coordinates if it was entered. If text was entered,
 	 * it looks up coordinates via geolocation api
 	 */
@@ -383,7 +383,7 @@ export class Config {
 			if (Object.prototype.hasOwnProperty.call(Keys, key)) {
 				const element = Keys[key];
 				this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-					element.key, 
+					element.key,
 					("_" + element.key),
 					() => this[`${element.prop}Changed`].Invoke(this, this[`_${element.key}` as never]),
 					null
@@ -470,30 +470,30 @@ export class Config {
 	}
 
 	private GetLocaleTemperateUnit(code: string | null): Exclude<WeatherUnits, "automatic"> {
-		if (code == null || !fahrenheitCountries.includes(code)) 
+		if (code == null || !fahrenheitCountries.includes(code))
 			return "celsius";
 		return "fahrenheit";
 	}
 
 	private GetLocaleWindSpeedUnit(code: string | null): WeatherWindSpeedUnits {
-		if (code == null) 
+		if (code == null)
 			return "kph";
 
 		let key: WeatherWindSpeedUnits;
 		for (key in windSpeedUnitLocales) {
-			if (windSpeedUnitLocales[key]?.includes(code)) 
+			if (windSpeedUnitLocales[key]?.includes(code))
 				return key;
 		}
 		return "kph";
 	}
 
 	private GetLocaleDistanceUnit(code: string | null): DistanceUnits {
-		if (code == null) 
+		if (code == null)
 			return "metric";
 
 		let key: DistanceUnits;
 		for (key in distanceUnitLocales) {
-			if (distanceUnitLocales[key]?.includes(code)) 
+			if (distanceUnitLocales[key]?.includes(code))
 				return key;
 		}
 		return "metric";

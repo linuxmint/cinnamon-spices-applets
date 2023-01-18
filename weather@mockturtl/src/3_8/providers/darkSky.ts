@@ -33,7 +33,7 @@ export class DarkSky extends BaseProvider {
 	private remainingQuota: number | null = null;
 	public get remainingCalls(): number | null {
 		// Disable this for now, this feature is only really useful for AccuWeather
-		// TODO: when a better place is found for this value add this back 
+		// TODO: when a better place is found for this value add this back
 		return null;
 		//return this.remainingQuota;
 	};
@@ -195,7 +195,7 @@ export class DarkSky extends BaseProvider {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param message Soup Message object
 	 * @returns null if custom error checking does not find anything
 	 */

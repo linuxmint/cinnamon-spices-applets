@@ -37,13 +37,13 @@ export class UIBar {
 
 	public SwitchButtonToShow() {
 		const icon: CustomIcons = this.app.Orientation == Side.BOTTOM ? "custom-up-arrow-symbolic" : "custom-down-arrow-symbolic";
-		if (!!this.hourlyButton?.actor.child) 
+		if (!!this.hourlyButton?.actor.child)
 			(this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = icon;
 	}
 
 	public SwitchButtonToHide() {
 		const icon: CustomIcons = this.app.Orientation == Side.BOTTOM ? "custom-down-arrow-symbolic" : "custom-up-arrow-symbolic";
-		if (!!this.hourlyButton?.actor.child) 
+		if (!!this.hourlyButton?.actor.child)
 			(this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = icon;
 	}
 
@@ -150,8 +150,8 @@ export class UIBar {
 	}
 
 	/**
-	 * 
-	 * @param unit 
+	 *
+	 * @param unit
 	 * @return km or mi, based on unit
 	 */
 	private BigDistanceUnitFor(unit: DistanceUnits) {

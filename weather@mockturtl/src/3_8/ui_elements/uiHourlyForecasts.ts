@@ -19,7 +19,7 @@ export class UIHourlyForecasts {
 	private hourlyForecasts: HourlyForecastUI[] = [];
 	private hourlyContainers: imports.gi.St.BoxLayout[] = [];
 
-	/** 
+	/**
 	 * Stores the dates for each displayed hour, so we can scroll to them later.
 	 * Populated in the Display function.
 	 */
@@ -61,9 +61,9 @@ export class UIHourlyForecasts {
 		this.actor.connect("scroll-event", (owner, event) => {
 			const adjustment = hScroll.get_adjustment();
 			const direction = event.get_scroll_direction();
-			const newVal = adjustment.get_value() + 
+			const newVal = adjustment.get_value() +
 				(direction === ScrollDirection.UP ? -adjustment.step_increment : adjustment.step_increment);
-			
+
 			if (global.settings.get_boolean("desktop-effects-on-menus"))
 				addTween(adjustment, { value: newVal, time: 0.25});
 			else
@@ -88,9 +88,9 @@ export class UIHourlyForecasts {
 
 	/**
 	 * Make sure to call this after the hourly weather was shown at least once,
-	 * otherwise the calculation will not be accurate! 
+	 * otherwise the calculation will not be accurate!
 	 *
-	 * @param date 
+	 * @param date
 	 */
 	public DateToScrollIndex(date: DateTime): number | null {
 		if (this.hourlyForecastDates == null)
@@ -292,7 +292,7 @@ export class UIHourlyForecasts {
 			const temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
 			const precipitationWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
 
-			if (precipitationWidth == null || temperatureWidth == null || 
+			if (precipitationWidth == null || temperatureWidth == null ||
 				hourWidth == null || iconWidth == null || summaryWidth == null ||
 				percipVolumeWidth == null || percipChanceWidth == null)
 				continue;
@@ -358,9 +358,9 @@ export class UIHourlyForecasts {
 	// DisplayUtils
 
 	/**
-	 * 
-	 * @param precip 
-	 * @returns Always returns text 
+	 *
+	 * @param precip
+	 * @returns Always returns text
 	 */
 	private GeneratePrecipitationVolume(precip: Precipitation | undefined, config: Config): string {
 		if (!precip) return "";
@@ -400,7 +400,7 @@ export class UIHourlyForecasts {
 			const temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
 			const precipitationHeight = ui.PrecipPercent.get_preferred_height(-1)[1];
 
-			if (precipitationHeight == null || temperatureHeight == null || 
+			if (precipitationHeight == null || temperatureHeight == null ||
 				hourHeight == null || iconHeight == null || summaryHeight == null)
 				continue;
 

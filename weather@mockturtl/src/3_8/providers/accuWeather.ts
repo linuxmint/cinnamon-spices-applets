@@ -37,7 +37,7 @@ export class AccuWeather extends BaseProvider {
             url+= "10day/";
         else
             url+= "10day/";
-        
+
         return url;
     }
 
@@ -87,7 +87,7 @@ export class AccuWeather extends BaseProvider {
             parseInt(hourly.ResponseHeaders["RateLimit-Remaining"])
         );
 
-        // Base 
+        // Base
         this.SetTier(parseInt(current.ResponseHeaders["RateLimit-Limit"]));
         return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
     }
@@ -773,7 +773,7 @@ interface DailyForecast {
     Link: string;
 }
 
-interface HourlyPayloadShort extends Pick<HourlyPayload, 
+interface HourlyPayloadShort extends Pick<HourlyPayload,
     "DateTime" |
     "EpochTime" |
     "WeatherIcon" |
