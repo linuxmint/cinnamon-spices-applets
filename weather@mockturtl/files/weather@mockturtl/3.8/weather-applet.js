@@ -10066,18 +10066,19 @@ class MetUk extends BaseProvider {
         this.observationSites = [];
         this.MAX_STATION_DIST = 50000;
         this.ParseForecast = (json, loc) => {
-            var _a, _b;
+            var _a, _b, _c, _d, _e;
             const forecasts = [];
             try {
-                for (const element of Array.isArray(json.SiteRep.DV.Location.Period) ? json.SiteRep.DV.Location.Period : [json.SiteRep.DV.Location.Period]) {
+                const period = (_c = (_b = (_a = json.SiteRep.DV) === null || _a === void 0 ? void 0 : _a.Location) === null || _b === void 0 ? void 0 : _b.Period) !== null && _c !== void 0 ? _c : [];
+                for (const element of Array.isArray(period) ? period : [period]) {
                     if (!Array.isArray(element.Rep))
                         continue;
                     const day = element.Rep[0];
                     const night = element.Rep[1];
                     const forecast = {
                         date: DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone }),
-                        temp_min: CelsiusToKelvin(parseFloat((_a = night.Nm) !== null && _a !== void 0 ? _a : "0")),
-                        temp_max: CelsiusToKelvin(parseFloat((_b = day.Dm) !== null && _b !== void 0 ? _b : "0")),
+                        temp_min: CelsiusToKelvin(parseFloat((_d = night.Nm) !== null && _d !== void 0 ? _d : "0")),
+                        temp_max: CelsiusToKelvin(parseFloat((_e = day.Dm) !== null && _e !== void 0 ? _e : "0")),
                         condition: this.ResolveCondition(day.W),
                     };
                     forecasts.push(forecast);
@@ -10224,6 +10225,7 @@ class MetUk extends BaseProvider {
             dataIndex = index;
             break;
         }
+        const filteredJson = json;
         if (dataIndex == -1) {
             this.app.ShowError({
                 detail: "no api response",
@@ -10233,12 +10235,12 @@ class MetUk extends BaseProvider {
             });
             return null;
         }
-        const times = (0,suncalc.getTimes)(new Date(), parseFloat(json[dataIndex].SiteRep.DV.Location.lat), parseFloat(json[dataIndex].SiteRep.DV.Location.lon), parseFloat(json[dataIndex].SiteRep.DV.Location.elevation));
+        const times = (0,suncalc.getTimes)(new Date(), parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat), parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon), parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.elevation));
         try {
             const weather = {
                 coord: {
-                    lat: parseFloat(json[dataIndex].SiteRep.DV.Location.lat),
-                    lon: parseFloat(json[dataIndex].SiteRep.DV.Location.lon)
+                    lat: parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat),
+                    lon: parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon)
                 },
                 location: {
                     city: undefined,
@@ -10357,17 +10359,17 @@ class MetUk extends BaseProvider {
         return observations;
     }
     MeshObservations(observations, loc) {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         if (!observations)
             return null;
         if (observations.length == 0)
             return null;
-        const firstPeriod = (_d = (_c = (_b = (_a = observations[0]) === null || _a === void 0 ? void 0 : _a.SiteRep) === null || _b === void 0 ? void 0 : _b.DV) === null || _c === void 0 ? void 0 : _c.Location) === null || _d === void 0 ? void 0 : _d.Period;
+        const firstPeriod = (_e = (_d = (_c = (_b = (_a = observations[0]) === null || _a === void 0 ? void 0 : _a.SiteRep) === null || _b === void 0 ? void 0 : _b.DV) === null || _c === void 0 ? void 0 : _c.Location) === null || _d === void 0 ? void 0 : _d.Period) !== null && _e !== void 0 ? _e : [];
         let result = this.GetLatestObservation(Array.isArray(firstPeriod) ? firstPeriod : [firstPeriod], DateTime.utc().setZone(loc.timeZone), loc);
         if (observations.length == 1)
             return result;
         for (const [index, observation] of observations.entries()) {
-            if (((_g = (_f = (_e = observation === null || observation === void 0 ? void 0 : observation.SiteRep) === null || _e === void 0 ? void 0 : _e.DV) === null || _f === void 0 ? void 0 : _f.Location) === null || _g === void 0 ? void 0 : _g.Period) == null)
+            if (((_h = (_g = (_f = observation === null || observation === void 0 ? void 0 : observation.SiteRep) === null || _f === void 0 ? void 0 : _f.DV) === null || _g === void 0 ? void 0 : _g.Location) === null || _h === void 0 ? void 0 : _h.Period) == null)
                 continue;
             if (!Array.isArray(observation.SiteRep.DV.Location.Period))
                 observation.SiteRep.DV.Location.Period = [observation.SiteRep.DV.Location.Period];
@@ -10419,7 +10421,6 @@ class MetUk extends BaseProvider {
     GetLatestObservation(observations, day, loc) {
         if (observations == null)
             return null;
-        global.log(observations);
         for (const element of observations) {
             const date = DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone });
             if (!OnSameDay(date, day))

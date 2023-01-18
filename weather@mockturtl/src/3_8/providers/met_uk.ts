@@ -136,10 +136,10 @@ export class MetUk extends BaseProvider {
 	}
 
 	private async GetObservationData(observationSites: WeatherSite[]) {
-		const observations: METPayload[] = [];
+		const observations: METPayload<true>[] = [];
 		for (const element of observationSites) {
 			Logger.Debug("Getting observation data from station: " + element.id);
-			const payload = await this.app.LoadJsonAsync<METPayload>(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
+			const payload = await this.app.LoadJsonAsync<METPayload<true>>(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
 			if (!!payload)
 				observations.push(payload);
 			else {
@@ -169,17 +169,20 @@ export class MetUk extends BaseProvider {
 		return ParseFunction(json, loc);
 	};
 
-	private ParseCurrent(json: METPayload[], loc: LocationData): WeatherData | null {
+	private ParseCurrent(json: METPayload<true>[], loc: LocationData): WeatherData | null {
 		const observation = this.MeshObservations(json, loc);
 		if (!observation) {
 			return null;
 		}
 		let dataIndex: number = -1;
 		for (const [index, element] of json.entries()) {
-			if (element.SiteRep.DV.Location == null) continue;
+			if (element.SiteRep.DV.Location == null) 
+				continue;
 			dataIndex = index;
 			break;
 		}
+		const filteredJson = json as any as METPayload<false>[];
+
 		if (dataIndex == -1) {
 			this.app.ShowError({
 				detail: "no api response",
@@ -190,12 +193,16 @@ export class MetUk extends BaseProvider {
 			return null;
 		}
 
-		const times = (getTimes as correctGetTimes)(new Date(), parseFloat(json[dataIndex].SiteRep.DV.Location.lat), parseFloat(json[dataIndex].SiteRep.DV.Location.lon), parseFloat(json[dataIndex].SiteRep.DV.Location.elevation));
+		const times = (getTimes as correctGetTimes)(
+			new Date(), parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat), 
+			parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon), 
+			parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.elevation)
+		);
 		try {
 			const weather: WeatherData = {
 				coord: {
-					lat: parseFloat(json[dataIndex].SiteRep.DV.Location.lat),
-					lon: parseFloat(json[dataIndex].SiteRep.DV.Location.lon)
+					lat: parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lat),
+					lon: parseFloat(filteredJson[dataIndex].SiteRep.DV.Location.lon)
 				},
 				location: {
 					city: undefined,
@@ -264,7 +271,8 @@ export class MetUk extends BaseProvider {
 	private ParseForecast = (json: METPayload, loc: LocationData): ForecastData[] | null => {
 		const forecasts: ForecastData[] = [];
 		try {
-			for (const element of Array.isArray(json.SiteRep.DV.Location.Period) ? json.SiteRep.DV.Location.Period : [json.SiteRep.DV.Location.Period]) {
+			const period = json.SiteRep.DV?.Location?.Period ?? [];
+			for (const element of Array.isArray(period) ? period : [period]) {
 				if (!Array.isArray(element.Rep))
 					continue;
 
@@ -393,13 +401,13 @@ export class MetUk extends BaseProvider {
 	 * Mesh observation data if some values are missing
 	 * @param observations sorted by distance of location, ascending
 	 */
-	private MeshObservations(observations: METPayload[], loc: LocationData): ObservationPayload | null {
+	private MeshObservations(observations: METPayload<true>[], loc: LocationData): ObservationPayload | null {
 		if (!observations) 
 			return null;
 		if (observations.length == 0) 
 			return null;
 		// Sometimes Location property is missing
-		const firstPeriod = observations[0]?.SiteRep?.DV?.Location?.Period;
+		const firstPeriod = observations[0]?.SiteRep?.DV?.Location?.Period ?? [];
 		let result = this.GetLatestObservation(Array.isArray(firstPeriod) ? firstPeriod : [firstPeriod], DateTime.utc().setZone(loc.timeZone), loc);
 		if (observations.length == 1) 
 			return result;
@@ -472,7 +480,7 @@ export class MetUk extends BaseProvider {
 	private GetLatestObservation(observations: Period[], day: DateTime, loc: LocationData): ObservationPayload | null {
 		if (observations == null) 
 			return null;
-		global.log(observations)
+
 		for (const element of observations) {
 			const date = DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone });
 			if (!OnSameDay(date, day)) continue;
@@ -755,7 +763,11 @@ interface WeatherSite {
 	dist: number;
 }
 
-interface METPayload {
+
+/**
+ * If true it's Observation Payload. 
+ */
+interface METPayload<T extends boolean = false> {
 	SiteRep: {
 		Wx: {
 			Param: any[];
@@ -763,18 +775,20 @@ interface METPayload {
 		DV: {
 			dataDate: string;
 			type: string;
-			Location: {
-				i: string;
-				lat: string;
-				lon: string;
-				name: string;
-				country: string;
-				continent: string;
-				elevation: string;
-				Period: Period[] | Period
-			}
+			Location: T extends false ? LocationPayload : LocationPayload | undefined
 		}
 	}
+}
+
+interface LocationPayload {
+	i: string;
+	lat: string;
+	lon: string;
+	name: string;
+	country: string;
+	continent: string;
+	elevation: string;
+	Period: Period[] | Period
 }
 
 interface Period {
