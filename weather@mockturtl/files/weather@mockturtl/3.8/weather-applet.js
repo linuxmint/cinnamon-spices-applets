@@ -15298,7 +15298,13 @@ class Config {
         this.LocStore = new LocationStore(this.app, this);
     }
     get UserTimezone() {
-        return TimeZone.new_local().get_identifier();
+        const timezone = TimeZone.new_local();
+        if (timezone.get_identifier == null) {
+            global.log(DateTime.now().zoneName);
+            return DateTime.now().zoneName;
+        }
+        else
+            return TimeZone.new_local().get_identifier();
     }
     get Timezone() {
         return this.timezone;

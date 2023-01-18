@@ -164,7 +164,13 @@ export class Config {
 	public textColorStyle: string | null = null;
 
 	public get UserTimezone(): string {
-		return TimeZone.new_local().get_identifier();
+		const timezone = TimeZone.new_local();
+		if (timezone.get_identifier == null) {
+			global.log( DateTime.now().zoneName)
+			return DateTime.now().zoneName;
+		}
+		else
+			return TimeZone.new_local().get_identifier();
 	}
 
 	private timezone: string | undefined = undefined;
