@@ -3,7 +3,7 @@ import { IpApi } from "./location_services/ipApi";
 import { LocationData, WeatherProvider } from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/logger";
-import { LogLevel, UUID } from "./consts";
+import { distanceUnitLocales, fahrenheitCountries, LogLevel, UUID, windSpeedUnitLocales } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
 import { DateTime } from "luxon";
@@ -29,7 +29,7 @@ const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType } = imports.gi.St;
-const { get_language_names } = imports.gi.GLib;
+const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings } = imports.gi.Gio;
 
 /** Units Used in Options. Change Options list if You change this! */
@@ -72,19 +72,6 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 }
 
 export class Config {
-	// Info partially from https://github.com/unicode-org/cldr/blob/release-38-1/common/supplemental/units.xml
-	/** Default is celsius */
-	private readonly fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
-	/** Default kph, gb added to mph keys  */
-	private readonly windSpeedUnitLocales: Record<string, WeatherWindSpeedUnits> = {
-		"fi kr no pl ru se": "m/s",
-		"us gb": "mph"
-	}
-	/** Default metric */
-	private readonly distanceUnitLocales: Record<string, DistanceUnits> = {
-		"us gb": "imperial"
-	}
-
 	private readonly WEATHER_LOCATION = "location";
 	private readonly WEATHER_LOCATION_LIST = "locationList";
 	// Settings variables to bind to
@@ -176,8 +163,15 @@ export class Config {
 	public readonly countryCode: string | null;
 	public textColorStyle: string | null = null;
 
+	public get UserTimezone(): string {
+		return TimeZone.new_local().get_identifier();
+	}
+
 	private timezone: string | undefined = undefined;
 
+	/**
+	 * Selected location's timezone
+	 */
 	public get Timezone() {
 		return this.timezone;
 	}
@@ -236,7 +230,7 @@ export class Config {
 	 */
 	public get TemperatureUnit(): Exclude<WeatherUnits, "automatic"> {
 		if (this._temperatureUnit == "automatic")
-			return this.GetLocaleTemperateUnit(this.countryCode);
+			return this.GetLocaleTemperateUnit(this.UserTimezone);
 		return this._temperatureUnit;
 	}
 
@@ -245,7 +239,7 @@ export class Config {
 	 */
 	public get WindSpeedUnit(): WeatherWindSpeedUnits {
 		if (this._windSpeedUnit == "automatic")
-			return this.GetLocaleWindSpeedUnit(this.countryCode);
+			return this.GetLocaleWindSpeedUnit(this.UserTimezone);
 		return this._windSpeedUnit;
 	}
 
@@ -253,7 +247,8 @@ export class Config {
 	 * @returns Units, automatic is already resolved here
 	 */
 	public get DistanceUnit(): DistanceUnits {
-		if (this._distanceUnit == "automatic") return this.GetLocaleDistanceUnit(this.countryCode);
+		if (this._distanceUnit == "automatic") 
+			return this.GetLocaleDistanceUnit(this.UserTimezone);
 		return this._distanceUnit;
 	}
 
@@ -470,24 +465,31 @@ export class Config {
 	}
 
 	private GetLocaleTemperateUnit(code: string | null): Exclude<WeatherUnits, "automatic"> {
-		if (code == null || !this.fahrenheitCountries.includes(code)) return "celsius";
+		if (code == null || !fahrenheitCountries.includes(code)) 
+			return "celsius";
 		return "fahrenheit";
 	}
 
 	private GetLocaleWindSpeedUnit(code: string | null): WeatherWindSpeedUnits {
-		if (code == null) return "kph";
+		if (code == null) 
+			return "kph";
 
-		for (const key in this.windSpeedUnitLocales) {
-			if (key.includes(code)) return this.windSpeedUnitLocales[key];
+		let key: WeatherWindSpeedUnits;
+		for (key in windSpeedUnitLocales) {
+			if (windSpeedUnitLocales[key]?.includes(code)) 
+				return key;
 		}
 		return "kph";
 	}
 
 	private GetLocaleDistanceUnit(code: string | null): DistanceUnits {
-		if (code == null) return "metric";
+		if (code == null) 
+			return "metric";
 
-		for (const key in this.distanceUnitLocales) {
-			if (key.includes(code)) return this.distanceUnitLocales[key];
+		let key: DistanceUnits;
+		for (key in distanceUnitLocales) {
+			if (distanceUnitLocales[key]?.includes(code)) 
+				return key;
 		}
 		return "metric";
 	}

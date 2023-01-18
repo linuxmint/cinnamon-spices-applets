@@ -24,6 +24,7 @@ const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
 const { File, NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
+const { TimeZone } = imports.gi.GLib;
 
 export class WeatherApplet extends TextIconApplet {
 	private readonly loop: WeatherLoop;

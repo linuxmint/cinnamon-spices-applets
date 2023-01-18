@@ -388,6 +388,120 @@ const ELLIPSIS = '...';
 const EN_DASH = '\u2013';
 const FORWARD_SLASH = '\u002F';
 const STYLE_HIDDEN = "weather-hidden";
+const US_TIMEZONES = [
+    "America/Adak",
+    "America/Anchorage",
+    "America/Atka",
+    "America/Boise",
+    "America/Chicago",
+    "America/Denver",
+    "America/Detroit",
+    "America/Fort_Wayne",
+    "America/Indiana/Indianapolis",
+    "America/Indiana/Knox",
+    "America/Indiana/Marengo",
+    "America/Indiana/Petersburg",
+    "America/Indiana/Tell_City",
+    "America/Indiana/Vevay",
+    "America/Indiana/Vincennes",
+    "America/Indiana/Winamac",
+    "America/Indianapolis",
+    "America/Juneau",
+    "America/Kentucky/Louisville",
+    "America/Kentucky/Monticello",
+    "America/Knox_IN",
+    "America/Los_Angeles",
+    "America/Louisville",
+    "America/Menominee",
+    "America/Metlakatla",
+    "America/New_York",
+    "America/Nome",
+    "America/North_Dakota/Beulah",
+    "America/North_Dakota/Center",
+    "America/North_Dakota/New_Salem",
+    "America/Phoenix",
+    "America/Shiprock",
+    "America/Sitka",
+    "America/Yakutat",
+    "Navajo",
+    "Pacific/Honolulu",
+    "US/Alaska",
+    "US/Aleutian",
+    "US/Arizona",
+    "US/Central",
+    "US/East-Indiana",
+    "US/Eastern",
+    "US/Hawaii",
+    "US/Indiana-Starke",
+    "US/Michigan",
+    "US/Mountain",
+    "US/Pacific",
+];
+const GB_TIMEZONES = [
+    "Europe/Belfast",
+    "Europe/London",
+];
+const fahrenheitCountries = [
+    "America/Belize",
+    "America/Cayman",
+    "Pacific/Chuuk",
+    "Pacific/Kosrae",
+    "Pacific/Pohnpei",
+    "Pacific/Ponape",
+    "Pacific/Truk",
+    "Pacific/Yap",
+    "Africa/Monrovia",
+    "Pacific/Kwajalein",
+    "Pacific/Majuro",
+    "Pacific/Palau",
+    "America/Nassau",
+    ...US_TIMEZONES
+];
+const windSpeedUnitLocales = {
+    "m/s": [
+        "Europe/Helsinki",
+        "Asia/Seoul",
+        "Europe/Oslo",
+        "Europe/Warsaw",
+        "Asia/Anadyr",
+        "Asia/Barnaul",
+        "Asia/Chita",
+        "Asia/Irkutsk",
+        "Asia/Kamchatka",
+        "Asia/Khandyga",
+        "Asia/Krasnoyarsk",
+        "Asia/Magadan",
+        "Asia/Novokuznetsk",
+        "Asia/Novosibirsk",
+        "Asia/Omsk",
+        "Asia/Sakhalin",
+        "Asia/Srednekolymsk",
+        "Asia/Tomsk",
+        "Asia/Ust-Nera",
+        "Asia/Vladivostok",
+        "Asia/Yakutsk",
+        "Asia/Yekaterinburg",
+        "Europe/Astrakhan",
+        "Europe/Kaliningrad",
+        "Europe/Kirov",
+        "Europe/Moscow",
+        "Europe/Samara",
+        "Europe/Saratov",
+        "Europe/Ulyanovsk",
+        "Europe/Volgograd",
+        "Europe/Stockholm",
+    ],
+    "mph": [
+        ...GB_TIMEZONES,
+        ...US_TIMEZONES
+    ]
+};
+const distanceUnitLocales = {
+    "imperial": [
+        ...GB_TIMEZONES,
+        ...US_TIMEZONES
+    ]
+};
 
 ;// CONCATENATED MODULE: ./node_modules/luxon/src/errors.js
 // these aren't really private, but nor are they really useful to document
@@ -15092,7 +15206,7 @@ const { AppletSettings, BindingDirection } = imports.ui.settings;
 const config_Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType: config_IconType } = imports.gi.St;
-const { get_language_names } = imports.gi.GLib;
+const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings: config_Settings } = imports.gi.Gio;
 const ServiceClassMapping = {
     "DarkSky": (app) => new DarkSky(app),
@@ -15110,14 +15224,6 @@ const ServiceClassMapping = {
 };
 class Config {
     constructor(app, instanceID) {
-        this.fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
-        this.windSpeedUnitLocales = {
-            "fi kr no pl ru se": "m/s",
-            "us gb": "mph"
-        };
-        this.distanceUnitLocales = {
-            "us gb": "imperial"
-        };
         this.WEATHER_LOCATION = "location";
         this.WEATHER_LOCATION_LIST = "locationList";
         this.DataServiceChanged = new Event();
@@ -15191,6 +15297,9 @@ class Config {
         this.currentFontSize = this.GetCurrentFontSize();
         this.LocStore = new LocationStore(this.app, this);
     }
+    get UserTimezone() {
+        return TimeZone.new_local().get_identifier();
+    }
     get Timezone() {
         return this.timezone;
     }
@@ -15213,17 +15322,17 @@ class Config {
     }
     get TemperatureUnit() {
         if (this._temperatureUnit == "automatic")
-            return this.GetLocaleTemperateUnit(this.countryCode);
+            return this.GetLocaleTemperateUnit(this.UserTimezone);
         return this._temperatureUnit;
     }
     get WindSpeedUnit() {
         if (this._windSpeedUnit == "automatic")
-            return this.GetLocaleWindSpeedUnit(this.countryCode);
+            return this.GetLocaleWindSpeedUnit(this.UserTimezone);
         return this._windSpeedUnit;
     }
     get DistanceUnit() {
         if (this._distanceUnit == "automatic")
-            return this.GetLocaleDistanceUnit(this.countryCode);
+            return this.GetLocaleDistanceUnit(this.UserTimezone);
         return this._distanceUnit;
     }
     get IconType() {
@@ -15354,25 +15463,29 @@ class Config {
         this.settings.setValue(this.WEATHER_LOCATION_LIST, list);
     }
     GetLocaleTemperateUnit(code) {
-        if (code == null || !this.fahrenheitCountries.includes(code))
+        if (code == null || !fahrenheitCountries.includes(code))
             return "celsius";
         return "fahrenheit";
     }
     GetLocaleWindSpeedUnit(code) {
+        var _a;
         if (code == null)
             return "kph";
-        for (const key in this.windSpeedUnitLocales) {
-            if (key.includes(code))
-                return this.windSpeedUnitLocales[key];
+        let key;
+        for (key in windSpeedUnitLocales) {
+            if ((_a = windSpeedUnitLocales[key]) === null || _a === void 0 ? void 0 : _a.includes(code))
+                return key;
         }
         return "kph";
     }
     GetLocaleDistanceUnit(code) {
+        var _a;
         if (code == null)
             return "metric";
-        for (const key in this.distanceUnitLocales) {
-            if (key.includes(code))
-                return this.distanceUnitLocales[key];
+        let key;
+        for (key in distanceUnitLocales) {
+            if ((_a = distanceUnitLocales[key]) === null || _a === void 0 ? void 0 : _a.includes(code))
+                return key;
         }
         return "metric";
     }
@@ -17243,6 +17356,7 @@ const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
 const { File: main_File, NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
+const { TimeZone: main_TimeZone } = imports.gi.GLib;
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -17353,6 +17467,7 @@ class WeatherApplet extends TextIconApplet {
         };
         this.metadata = metadata;
         this.AppletDir = metadata.path;
+        this.orientation = orientation;
         logger_Logger.Debug("Applet created with instanceID " + instanceId);
         logger_Logger.Debug("AppletDir is: " + this.AppletDir);
         this.SetAppletOnPanel();
@@ -17362,7 +17477,6 @@ class WeatherApplet extends TextIconApplet {
         this.ui = new UI(this, orientation);
         this.ui.Rebuild(this.config);
         this.loop = new WeatherLoop(this, instanceId);
-        this.orientation = orientation;
         try {
             this.setAllowedLayout(AllowedLayout.BOTH);
         }
