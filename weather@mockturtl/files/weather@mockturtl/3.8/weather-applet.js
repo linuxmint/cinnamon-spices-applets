@@ -10419,6 +10419,7 @@ class MetUk extends BaseProvider {
     GetLatestObservation(observations, day, loc) {
         if (observations == null)
             return null;
+        global.log(observations);
         for (const element of observations) {
             const date = DateTime.fromISO(this.PartialToISOString(element.value), { zone: loc.timeZone });
             if (!OnSameDay(date, day))
