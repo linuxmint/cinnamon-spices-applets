@@ -10069,7 +10069,7 @@ class MetUk extends BaseProvider {
             var _a, _b;
             const forecasts = [];
             try {
-                for (const element of json.SiteRep.DV.Location.Period) {
+                for (const element of Array.isArray(json.SiteRep.DV.Location.Period) ? json.SiteRep.DV.Location.Period : [json.SiteRep.DV.Location.Period]) {
                     if (!Array.isArray(element.Rep))
                         continue;
                     const day = element.Rep[0];
@@ -10094,7 +10094,7 @@ class MetUk extends BaseProvider {
         this.ParseHourlyForecast = (json, loc) => {
             const forecasts = [];
             try {
-                for (const day of json.SiteRep.DV.Location.Period) {
+                for (const day of Array.isArray(json.SiteRep.DV.Location.Period) ? json.SiteRep.DV.Location.Period : [json.SiteRep.DV.Location.Period]) {
                     const date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
                     if (!Array.isArray(day.Rep))
                         continue;
@@ -10362,12 +10362,15 @@ class MetUk extends BaseProvider {
             return null;
         if (observations.length == 0)
             return null;
-        let result = this.GetLatestObservation((_d = (_c = (_b = (_a = observations[0]) === null || _a === void 0 ? void 0 : _a.SiteRep) === null || _b === void 0 ? void 0 : _b.DV) === null || _c === void 0 ? void 0 : _c.Location) === null || _d === void 0 ? void 0 : _d.Period, DateTime.utc().setZone(loc.timeZone), loc);
+        const firstPeriod = (_d = (_c = (_b = (_a = observations[0]) === null || _a === void 0 ? void 0 : _a.SiteRep) === null || _b === void 0 ? void 0 : _b.DV) === null || _c === void 0 ? void 0 : _c.Location) === null || _d === void 0 ? void 0 : _d.Period;
+        let result = this.GetLatestObservation(Array.isArray(firstPeriod) ? firstPeriod : [firstPeriod], DateTime.utc().setZone(loc.timeZone), loc);
         if (observations.length == 1)
             return result;
         for (const [index, observation] of observations.entries()) {
             if (((_g = (_f = (_e = observation === null || observation === void 0 ? void 0 : observation.SiteRep) === null || _e === void 0 ? void 0 : _e.DV) === null || _f === void 0 ? void 0 : _f.Location) === null || _g === void 0 ? void 0 : _g.Period) == null)
                 continue;
+            if (!Array.isArray(observation.SiteRep.DV.Location.Period))
+                observation.SiteRep.DV.Location.Period = [observation.SiteRep.DV.Location.Period];
             const nextObservation = this.GetLatestObservation(observation.SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
             if (result == null)
                 result = nextObservation;
@@ -10414,7 +10417,6 @@ class MetUk extends BaseProvider {
         return result;
     }
     GetLatestObservation(observations, day, loc) {
-        global.log(observations);
         if (observations == null)
             return null;
         for (const element of observations) {

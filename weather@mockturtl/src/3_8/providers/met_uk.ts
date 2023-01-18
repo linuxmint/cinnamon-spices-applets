@@ -264,7 +264,7 @@ export class MetUk extends BaseProvider {
 	private ParseForecast = (json: METPayload, loc: LocationData): ForecastData[] | null => {
 		const forecasts: ForecastData[] = [];
 		try {
-			for (const element of json.SiteRep.DV.Location.Period) {
+			for (const element of Array.isArray(json.SiteRep.DV.Location.Period) ? json.SiteRep.DV.Location.Period : [json.SiteRep.DV.Location.Period]) {
 				if (!Array.isArray(element.Rep))
 					continue;
 
@@ -292,7 +292,7 @@ export class MetUk extends BaseProvider {
 	private ParseHourlyForecast = (json: METPayload, loc: LocationData): HourlyForecastData[] | null => {
 		const forecasts: HourlyForecastData[] = [];
 		try {
-			for (const day of json.SiteRep.DV.Location.Period) {
+			for (const day of Array.isArray(json.SiteRep.DV.Location.Period) ? json.SiteRep.DV.Location.Period : [json.SiteRep.DV.Location.Period]) {
 				const date = DateTime.fromISO(this.PartialToISOString(day.value), { zone: loc.timeZone });
 				if (!Array.isArray(day.Rep))
 					continue;
@@ -399,12 +399,19 @@ export class MetUk extends BaseProvider {
 		if (observations.length == 0) 
 			return null;
 		// Sometimes Location property is missing
-		let result = this.GetLatestObservation(observations[0]?.SiteRep?.DV?.Location?.Period, DateTime.utc().setZone(loc.timeZone), loc);
+		const firstPeriod = observations[0]?.SiteRep?.DV?.Location?.Period;
+		let result = this.GetLatestObservation(Array.isArray(firstPeriod) ? firstPeriod : [firstPeriod], DateTime.utc().setZone(loc.timeZone), loc);
 		if (observations.length == 1) 
 			return result;
+
 		for (const [index, observation] of observations.entries()) {
 			if (observation?.SiteRep?.DV?.Location?.Period == null) 
 				continue;
+
+			// Not an array, fix it
+			if (!Array.isArray(observation.SiteRep.DV.Location.Period))
+				observation.SiteRep.DV.Location.Period = [observation.SiteRep.DV.Location.Period]
+
 			const nextObservation = this.GetLatestObservation(observation.SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
 			if (result == null)
 				result = nextObservation;
@@ -463,7 +470,6 @@ export class MetUk extends BaseProvider {
 	 * @param day 
 	 */
 	private GetLatestObservation(observations: Period[], day: DateTime, loc: LocationData): ObservationPayload | null {
-		global.log(observations)
 		if (observations == null) 
 			return null;
 		for (const element of observations) {
@@ -764,7 +770,7 @@ interface METPayload {
 				country: string;
 				continent: string;
 				elevation: string;
-				Period: Period[]
+				Period: Period[] | Period
 			}
 		}
 	}
