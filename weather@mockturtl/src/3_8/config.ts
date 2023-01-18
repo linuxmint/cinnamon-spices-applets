@@ -165,10 +165,9 @@ export class Config {
 
 	public get UserTimezone(): string {
 		const timezone = TimeZone.new_local();
-		if (timezone.get_identifier == null) {
-			global.log( DateTime.now().zoneName)
+		// does not exist on 3.8, use DateTime
+		if (timezone.get_identifier == null)
 			return DateTime.now().zoneName;
-		}
 		else
 			return TimeZone.new_local().get_identifier();
 	}
