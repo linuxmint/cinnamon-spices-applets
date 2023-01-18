@@ -75,16 +75,6 @@ class AppButton {
         clutterText.set_markup(markup);
         clutterText.ellipsize = EllipsizeMode.END;
 
-        //--------app running indicator--------------
-        this.appRunningIndicator = new St.Widget({
-                style: isListView ?
-                'width: 2px; height: 12px; background-color: ' + this.appThis.getThemeForegroundColor() +
-                                                    '; margin: 0px; border: 1px; border-radius: 10px;' :
-                'width: 32px; height: 2px; background-color: ' + this.appThis.getThemeForegroundColor() +
-                                                    '; margin: 0px; border: 1px; border-radius: 10px;',
-                x_expand: false,
-                y_expand: false});
-
         //-------------actor---------------------
         this.actor = new St.BoxLayout({ vertical: !isListView, reactive: true,
                                             accessible_role: Atk.Role.MENU_ITEM});
@@ -98,8 +88,6 @@ class AppButton {
                                         x_align: isListView ? St.Align.START : St.Align.MIDDLE,
                                         y_align: St.Align.MIDDLE});
         }
-        this.actor.add(this.appRunningIndicator, {  x_fill: false, y_fill: false,
-                                        x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
         this.actor.add(this.label, {
                                 x_fill: false, y_fill: false,
                                 x_align: isListView ? St.Align.START : St.Align.MIDDLE,
@@ -141,12 +129,6 @@ class AppButton {
             this.signals.connect(this.draggable, 'drag-begin', () => hideTooltipIfVisible());
             //this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this._onDragCancelled(...args));
             this.signals.connect(this.draggable, 'drag-end', () => this._resetAllAppsOpacity());
-        }
-
-        //----running state
-        this._onRunningStateChanged();
-        if (this.app.isApplication) {
-            this.signals.connect(this.app, 'notify::state', (...args) => this._onRunningStateChanged(...args));
         }
 
         //this.signals.connect(this.actor, 'button-press-event', (...args) => this.handleButtonPress(...args));
@@ -332,23 +314,6 @@ class AppButton {
         } 
     }
 
-    _onRunningStateChanged() {
-        if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
-            if (this.app.isApplication && this.app.state !== AppState.STOPPED) {
-                this.appRunningIndicator.show();
-            } else {
-                this.appRunningIndicator.hide();
-            }
-        } else {
-            if (this.app.isApplication && this.app.state !== AppState.STOPPED) {
-                this.appRunningIndicator.opacity = 255;
-            } else {
-                this.appRunningIndicator.opacity = 0;
-            }
-        }
-        return true;
-    }
-
     openContextMenu(e) {
         this._setButtonSelected();
         hideTooltipIfVisible();
@@ -363,7 +328,6 @@ class AppButton {
         this.signals.disconnectAllSignals();
         hideTooltipIfVisible();
 
-        this.appRunningIndicator.destroy();
         this.label.destroy();
         if (this.icon) {
             this.icon.destroy();
