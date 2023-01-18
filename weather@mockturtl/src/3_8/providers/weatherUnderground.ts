@@ -587,7 +587,7 @@ export class WeatherUnderground extends BaseProvider {
             case 45:
                 return {
                     customIcon: "night-alt-showers-symbolic",
-                    icons: ["weather-showers-scattered-night", "weather-rain", "weather-freezing-rain"],
+                    icons: ["weather-showers-scattered-night", "weather-showers-scattered", "weather-rain", "weather-freezing-rain"],
                     main: _("Scattered Showers"),
                     description: _("Scattered Showers"),
                 };

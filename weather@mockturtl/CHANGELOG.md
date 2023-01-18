@@ -8,7 +8,8 @@
 * Try to make hourly weather elements slimmer by putting precipitation change and volume in different rows
 * Update luxon and suncalc
 * Update README
-* Use user's timezone for automatic unit inference
+* Use user's timezone for automatic unit inference, Fixes [#4644](https://github.com/linuxmint/cinnamon-spices-applets/issues/4644)
+* Fixes [#4628](https://github.com/linuxmint/cinnamon-spices-applets/issues/4628)
 
 ## 3.2.11
 
