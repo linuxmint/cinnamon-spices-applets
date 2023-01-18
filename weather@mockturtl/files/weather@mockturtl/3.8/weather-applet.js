@@ -10365,8 +10365,8 @@ class MetUk extends BaseProvider {
         let result = this.GetLatestObservation((_d = (_c = (_b = (_a = observations[0]) === null || _a === void 0 ? void 0 : _a.SiteRep) === null || _b === void 0 ? void 0 : _b.DV) === null || _c === void 0 ? void 0 : _c.Location) === null || _d === void 0 ? void 0 : _d.Period, DateTime.utc().setZone(loc.timeZone), loc);
         if (observations.length == 1)
             return result;
-        global.log(observations);
-        for (const [index, observation] of observations.entries()) {
+        for (let index = 0; index < observations.length; index++) {
+            const observation = observations[index];
             if (((_g = (_f = (_e = observation === null || observation === void 0 ? void 0 : observation.SiteRep) === null || _e === void 0 ? void 0 : _e.DV) === null || _f === void 0 ? void 0 : _f.Location) === null || _g === void 0 ? void 0 : _g.Period) == null)
                 continue;
             const nextObservation = this.GetLatestObservation(observation.SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);

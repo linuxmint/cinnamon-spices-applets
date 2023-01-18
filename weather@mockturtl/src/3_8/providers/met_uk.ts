@@ -394,16 +394,18 @@ export class MetUk extends BaseProvider {
 	 * @param observations sorted by distance of location, ascending
 	 */
 	private MeshObservations(observations: METPayload[], loc: LocationData): ObservationPayload | null {
-		if (!observations) return null;
-		if (observations.length == 0) return null;
+		if (!observations) 
+			return null;
+		if (observations.length == 0) 
+			return null;
 		// Sometimes Location property is missing
 		let result = this.GetLatestObservation(observations[0]?.SiteRep?.DV?.Location?.Period, DateTime.utc().setZone(loc.timeZone), loc);
-		if (observations.length == 1) return result;
-		// for (let index = 0; index < observations.length; index++) {
-		// 	const observation = observations[index];
-		global.log(observations)
-		for (const [index, observation] of observations.entries()) {
-			if (observation?.SiteRep?.DV?.Location?.Period == null) continue;
+		if (observations.length == 1) 
+			return result;
+		for (let index = 0; index < observations.length; index++) {
+			const observation = observations[index];
+			if (observation?.SiteRep?.DV?.Location?.Period == null) 
+				continue;
 			const nextObservation = this.GetLatestObservation(observation.SiteRep.DV.Location.Period, DateTime.utc().setZone(loc.timeZone), loc);
 			if (result == null)
 				result = nextObservation;
