@@ -8,6 +8,7 @@
 * Try to make hourly weather elements slimmer by putting precipitation change and volume in different rows
 * Update luxon and suncalc
 * Update README
+* Use user's timezone for automatic unit inference
 
 ## 3.2.11
 
