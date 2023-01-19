@@ -512,6 +512,7 @@ The contents of the file saved from the applet help page goes here
 			if (e instanceof Error) {
 				NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
 			}
+			return;
 		}
 
 		const appletLogFile = File.new_for_path(this.config._selectedLogPath);

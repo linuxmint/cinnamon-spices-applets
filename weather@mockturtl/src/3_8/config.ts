@@ -23,7 +23,7 @@ import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
 import { WeatherUnderground } from "./providers/weatherUnderground";
 import { Event } from "./lib/events";
 
-const { get_home_dir } = imports.gi.GLib;
+const { get_home_dir, get_user_data_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
@@ -529,14 +529,20 @@ export class Config {
 
 	public async GetAppletConfigJson(): Promise<Record<string, any>> {
 		const home = get_home_dir() ?? "~";
-		const configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
-		const configFile = File.new_for_path(configFilePath);
+		let configFilePath = `${get_user_data_dir()}/cinnamon/spices/weather@mockturtl/${this.app.instance_id}.json`;
+		const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+		let configFile = File.new_for_path(configFilePath);
+		const oldConfigFile = File.new_for_path(oldConfigFilePath);
 
 		// Check if file exists
 		if (!await FileExists(configFile)) {
-			throw new Error(
-				_("Could not retrieve config, file was not found under path\n {configFilePath}", { configFilePath: configFilePath })
-			);
+			configFile = oldConfigFile;
+			configFilePath = oldConfigFilePath;
+			if (!await FileExists(configFile)) {
+				throw new Error(
+					_("Could not retrieve config, file was not found under paths\n {configFilePath}", { configFilePath: `${configFilePath}\n${oldConfigFilePath}` })
+				);
+			}
 		}
 
 		// Load file contents

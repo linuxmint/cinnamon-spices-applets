@@ -9564,7 +9564,7 @@ async function CloseStream(stream) {
 
 
 const { File } = imports.gi.Gio;
-const { get_home_dir } = imports.gi.GLib;
+const { get_home_dir, get_environ } = imports.gi.GLib;
 const LogLevelSeverity = {
     always: 0,
     critical: 1,
@@ -9619,7 +9619,13 @@ class Log {
             logFilePath += ".cinnamon/glass.log";
         }
         else {
-            logFilePath += ".xsession-errors";
+            const errFileEnv = get_environ().find(x => x.includes("ERRFILE"));
+            if (!errFileEnv) {
+                logFilePath += ".xsession-errors";
+            }
+            else {
+                logFilePath = errFileEnv.replace("ERRFILE=", "");
+            }
         }
         const logFile = File.new_for_path(logFilePath);
         if (!await FileExists(logFile)) {
@@ -15205,7 +15211,7 @@ class WeatherUnderground extends BaseProvider {
 
 
 
-const { get_home_dir: config_get_home_dir } = imports.gi.GLib;
+const { get_home_dir: config_get_home_dir, get_user_data_dir } = imports.gi.GLib;
 const { File: config_File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const config_Lang = imports.lang;
@@ -15524,10 +15530,16 @@ class Config {
     async GetAppletConfigJson() {
         var _a, _b, _c, _d, _e;
         const home = (_a = config_get_home_dir()) !== null && _a !== void 0 ? _a : "~";
-        const configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
-        const configFile = config_File.new_for_path(configFilePath);
+        let configFilePath = `${get_user_data_dir()}/cinnamon/spices/weather@mockturtl/${this.app.instance_id}.json`;
+        const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+        let configFile = config_File.new_for_path(configFilePath);
+        const oldConfigFile = config_File.new_for_path(oldConfigFilePath);
         if (!await FileExists(configFile)) {
-            throw new Error(_("Could not retrieve config, file was not found under path\n {configFilePath}", { configFilePath: configFilePath }));
+            configFile = oldConfigFile;
+            configFilePath = oldConfigFilePath;
+            if (!await FileExists(configFile)) {
+                throw new Error(_("Could not retrieve config, file was not found under paths\n {configFilePath}", { configFilePath: `${configFilePath}\n${oldConfigFilePath}` }));
+            }
         }
         const confString = await LoadContents(configFile);
         if (confString == null) {
@@ -17435,6 +17447,7 @@ class WeatherApplet extends TextIconApplet {
                 if (e instanceof Error) {
                     NotificationService.Instance.Send(_("Error Saving Debug Information"), e.message);
                 }
+                return;
             }
             const appletLogFile = main_File.new_for_path(this.config._selectedLogPath);
             const stream = await OverwriteAndGetIOStream(appletLogFile);
