@@ -10,7 +10,8 @@
 * Update README
 * Use user's timezone for automatic unit inference, Fixes [#4644](https://github.com/linuxmint/cinnamon-spices-applets/issues/4644)
 * Fixes [#4628](https://github.com/linuxmint/cinnamon-spices-applets/issues/4628)
-* Fix MET UK crash when observation stations return a single object instead of an array for it's observation 
+* Fix MET UK crash when observation stations return a single object instead of an array for it's observation
+* Add support for saving config from new path and respect ENV variable for xsession-errors
 
 ## 3.2.11
 
