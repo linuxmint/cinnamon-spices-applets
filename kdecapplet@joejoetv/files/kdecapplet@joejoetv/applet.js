@@ -507,57 +507,57 @@ class Device {
     }
 
     rebuildMenuItem() {
-        // Destroy old menu item, if it exists
-        if (this.menuItem) {
-            this.menuItem.destroy();
-        }
+        try {            
+            // Note:    At first, I destroyed the old menu item and the old icon here,
+            //          but if I do that, cinnamon sometimes throws a fit and glitches out thw whole monitor and throws errors in the log,
+            //          so I am just not going to do that
 
-        if (this.menuItemIcon) {
-            this.menuItemIcon.destroy();
-        }
+            // Create new menu item based on rechable state
+            if (this.isReachable == true) {
 
-        // Create new menu item based on rechable state
-        if (this.isReachable == true) {
-            // Create normal menu item with sub menu
-            this.menuItem = new PopupMenu.PopupSubMenuMenuItem(this.name);
-
-            // Workaround to add icon, because Cinnamon didn't like me making a PopupMenu class in another file
-            this.menuItemIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: this.statusIconName, icon_type: St.IconType.SYMBOLIC});
-            this.menuItem.addActor(this.menuItemIcon, {span: 0, position: 0});
-
-            // Add info modules
-            let infoModules = this.getModulesByType(Modules.ModuleType.INFO);
-
-            infoModules.forEach(infoModule => {
-                this.warn(infoModule.getID());
-                this.menuItem.menu.addMenuItem(infoModule.getMenuItem());
-            });
-
-            // If there is at least 1 info modules, add seperator
-            if (infoModules.length > 0) {
-                this.menuItem.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+                // Create normal menu item with sub menu
+                this.menuItem = new PopupMenu.PopupSubMenuMenuItem(this.name);
+    
+                // Workaround to add icon, because Cinnamon didn't like me making a PopupMenu class in another file
+                this.menuItemIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: this.statusIconName, icon_type: St.IconType.SYMBOLIC});
+                this.menuItem.addActor(this.menuItemIcon, {span: 0, position: 0});
+    
+                // Add info modules
+                let infoModules = this.getModulesByType(Modules.ModuleType.INFO);
+    
+                infoModules.forEach(infoModule => {
+                    this.warn(infoModule.getID());
+                    this.menuItem.menu.addMenuItem(infoModule.getMenuItem());
+                });
+    
+                // If there is at least 1 info modules, add seperator
+                if (infoModules.length > 0) {
+                    this.menuItem.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+                }
+    
+                // Add action modules
+                let actionModules = this.getModulesByType(Modules.ModuleType.ACTION);
+    
+                actionModules.forEach(actionModule => {
+                    this.menuItem.menu.addMenuItem(actionModule.getMenuItem());
+                });
+    
+                // If no modules are selected/available, add menu item informing user
+                if ((infoModules.length + actionModules.length) == 0) {
+                    let noModulesInfoItem = new PopupMenu.PopupMenuItem(_("No Modules available"));
+                    noModulesInfoItem.actor.add_style_pseudo_class("insensitive");
+                    this.menuItem.menu.addMenuItem(noModulesInfoItem);
+                }
+            } else {
+                // Create inactive menu item
+                this.menuItem = new PopupMenu.PopupIconMenuItem(this.name, this.statusIconName, St.IconType.SYMBOLIC, {reactive: false});
+                this.menuItem.actor.add_style_pseudo_class("insensitive");
             }
-
-            // Add action modules
-            let actionModules = this.getModulesByType(Modules.ModuleType.ACTION);
-
-            actionModules.forEach(actionModule => {
-                this.menuItem.menu.addMenuItem(actionModule.getMenuItem());
-            });
-
-            // If no modules are selected/available, add menu item informing user
-            if ((infoModules.length + actionModules.length) == 0) {
-                let noModulesInfoItem = new PopupMenu.PopupMenuItem(_("No Modules available"));
-                noModulesInfoItem.actor.add_style_pseudo_class("insensitive");
-                this.menuItem.menu.addMenuItem(noModulesInfoItem);
-            }
-        } else {
-            // Create inactive menu item
-            this.menuItem = new PopupMenu.PopupIconMenuItem(this.name, this.statusIconName, St.IconType.SYMBOLIC, {reactive: false});
-            this.menuItem.actor.add_style_pseudo_class("insensitive");
+    
+            return this.menuItem;
+        } catch (error) {
+            this.error("Error while rebuilding menu item: "+error, CommonUtils.LogLevel.MINIMAL);
         }
-
-        return this.menuItem;
     }
 
     /**
@@ -794,7 +794,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
     }
 
     on_applet_removed_from_panel() {
-        this.info("That's all, folks!", CommonUtils.LogLevel.NORMAL);
+        this.info("Goodbye cruel world!", CommonUtils.LogLevel.NORMAL);
 
         this._signals.disconnectAllSignals();
         this.removeAllDevices();
@@ -940,20 +940,23 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      * Clears and then rebuilds the main popup menu
      */
     rebuildPopupMenu() {
-        this.info("Rebuilding Popup Menu...", CommonUtils.LogLevel.DEBUG);
-
-        // Remove all previous items from popup menu
-        this.popupMenu.removeAll();
-
-        // Get new menu items from device objects
-        for (let [deviceID, device] of Object.entries(this.devices)) {
-            device.rebuildMenuItem();
-            let deviceMenuItem = device.getMenuItem();
-            if (device.getReachableStatus() == false) {
-                this.popupMenu.addMenuItem(deviceMenuItem, 0);
-            } else {
-                this.popupMenu.addMenuItem(deviceMenuItem);
+        try {
+            // Remove all previous items from popup menu
+            this.popupMenu.removeAll();
+    
+            // Get new menu items from device objects
+            for (let [deviceID, device] of Object.entries(this.devices)) {
+                device.rebuildMenuItem();
+                let deviceMenuItem = device.getMenuItem();
+                if (device.getReachableStatus() == false) {
+                    this.popupMenu.addMenuItem(deviceMenuItem, 0);
+                } else {
+                    this.popupMenu.addMenuItem(deviceMenuItem);
+                }
             }
+            
+        } catch (error) {
+            this.error("Error while rebuilding popup menu: "+error, CommonUtils.LogLevel.MINIMAL);
         }
     }
 
@@ -965,6 +968,36 @@ class KDEConnectApplet extends Applet.TextIconApplet {
 
         // Remove all previously present items from context menu section
         this.contextMenuSection.removeAll();
+
+        // DEBUG: Debug/Test menu items
+        try {
+            if (CommonUtils.DEBUG_FEATURES == true) {
+                // Debug Menu Items
+                let debugMenuItemParent = new PopupMenu.PopupSubMenuMenuItem("Debug Stuff, don't touch!");
+                
+                let debugIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: 'tools-symbolic', icon_type: St.IconType.SYMBOLIC});
+                debugMenuItemParent.addActor(debugIcon, {span: 0, position: 0});
+        
+                // Manually reload device list
+                let debugMenuitem1 = new PopupMenu.PopupMenuItem("Manually reload device list");
+                debugMenuitem1._signals.connect(debugMenuitem1, "activate", Lang.bind(this, function() {
+                    this.onDeviceListChanged();
+                }));
+                debugMenuItemParent.menu.addMenuItem(debugMenuitem1);
+    
+                // Manually reload module settings list
+                let debugMenuItem2 = new PopupMenu.PopupMenuItem("Manually reload module settings");
+                debugMenuItem2._signals.connect(debugMenuItem2, "activate", Lang.bind(this, function() {
+                    this.onModuleSettingsChanged();
+                }));
+                debugMenuItemParent.menu.addMenuItem(debugMenuItem2);
+        
+                this.contextMenuSection.addMenuItem(debugMenuItemParent);
+
+            }
+        } catch (error) {
+            this.error("Error while creating debug menu items: "+error, CommonUtils.LogLevel.MINIMAL);
+        }
 
         // Menu Item showing the KDE Connect version
         if (this.options.showKDEConnectVersion == true) {
@@ -1114,8 +1147,10 @@ class KDEConnectApplet extends Applet.TextIconApplet {
 
         for (let [deviceID, device] of Object.entries(this.devices)) {
             device.removeAllModules();
-            device.createModules(Modules.modules)
+            device.createModules(Modules.modules);
         }
+
+        this.info("After recreating devices!", CommonUtils.LogLevel.DEBUG);
 
         this.rebuildPopupMenu();
     }
@@ -1230,7 +1265,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         }
 
         deviceIDs.forEach(deviceID => {
-            let newDevice = new Device(this, deviceID, deviceNames[deviceID]);
+            let newDevice = new Device(this, deviceID, deviceNames[deviceID], this.compatMode);
 
             // Bind signal to onDeviceDataChanged function of the applet
             newDevice._signals.connect(newDevice, "plugins-changed", this.onDevicePluginsChanged, this);

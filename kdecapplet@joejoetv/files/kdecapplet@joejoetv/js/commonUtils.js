@@ -50,8 +50,11 @@ function logLevelName(level) {
     }
 }
 
-// Log leve lfor whole applet
-const LOG_LEVEL = LogLevel.INFO;
+// Log level for whole applet
+const LOG_LEVEL = LogLevel.DEBUG;
+
+// Flag to enable debug features
+const DEBUG_FEATURES = true;
 
 /**
  * General logging functions with log level support
@@ -273,9 +276,6 @@ class MenuItemIconButton {
 
         this._icon.add_style_class_name("kdec-popup-button-menu-item-button-icon");
 
-        this.actor.ensure_style();
-        this._icon.ensure_style();
-
         this.actor.child = this._icon;
 
         // Variable to track hover state
@@ -437,32 +437,30 @@ class PopupButtonIconMenuItem extends PopupMenu.PopupBaseMenuItem {
 
         // Create actors
         this.label = new St.Label({text: text});
+        
+        this.actor.label_actor = this.label;
+
         this._icon = new St.Icon({style_class: 'popup-menu-icon', icon_name: iconName, icon_type: iconType});
-        this._buttonBin = new St.Bin({x_align: St.Align.END});
         this.button = new MenuItemIconButton(buttonIconName, buttonIconType);
         
+        // Add Actors to Menu Item
+        this.addActor(this._icon, {span: 0});
+        this.addActor(this.label);
+
+        this._buttonBin = new St.Bin({x_align: St.Align.END});
+        this.addActor(this._buttonBin, {expand: true, span: -1, align: St.Align.END});
+        this._buttonBin.child = this.button.actor;
+
         this.tooltip = new Tooltips.Tooltip(this.actor, "");
 
         // Hide tooltip by default
         this.tooltip.preventShow = true;
-
-
-        // Add Actors to Menu Item
-        this.addActor(this._icon, {span: 0});
-        this.addActor(this.label);
-        this.addActor(this._buttonBin, {expand: true, span: -1, align: St.Align.END});
-        
-        this.actor.label_actor = this.label;
-
-        this._buttonBin.child = this.button.actor;
 
         this._signals.connect(this.button, "hover-changed", Lang.bind(this, this._onButtonHoverChanged));
         this._signals.connect(this.button, "activate", Lang.bind(this, this._onButtonActivate));
 
         // Override style of menu item actor, so the menu item isn't too high
         this.actor.add_style_class_name("kdec-popup-button-menu-item");
-
-        this.actor.ensure_style();
     }
     
     _onButtonHoverChanged(button, buttonHover) {

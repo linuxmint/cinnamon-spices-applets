@@ -7,9 +7,29 @@ const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Gettext = imports.gettext;
+const Signals = imports.signals;
 
 const CommonUtils = require("./js/commonUtils.js");
 const Dialogs = require("./js/dialogs.js");
+
+const DeviceOldBatteryInterface = '\
+<node> \
+    <interface name="org.kde.kdeconnect.device.battery"> \
+        <signal name="stateChanged"> \
+            <arg name="charging" type="b" direction="out" /> \
+        </signal> \
+        <signal name="chargeChanged"> \
+            <arg name="charge" type="i" direction="out" /> \
+        </signal> \
+        <method name="charge"> \
+            <arg type="i" direction="out" /> \
+        </method> \
+        <method name="isCharging"> \
+            <arg type="b" direction="out" /> \
+        </method> \
+    </interface> \
+</node>';
+const DeviceOldBatteryProxy = Gio.DBusProxy.makeProxyWrapper(DeviceOldBatteryInterface);
 
 const DeviceBatteryInterface = '\
 <node> \
@@ -23,6 +43,127 @@ const DeviceBatteryInterface = '\
     </interface> \
 </node>';
 const DeviceBatteryProxy = Gio.DBusProxy.makeProxyWrapper(DeviceBatteryInterface);
+
+
+/**
+ * Utility classes for modules
+ */
+
+/**
+ * Class for translating different the battery functionality dbus interface from different versions to a common one
+ */
+class BatteryUniversalProxy {
+    constructor(deviceID, compatMode) {
+
+        this.compatMode = compatMode
+
+        try {
+            switch (this.compatMode.versionLevel) {
+                case 0: // Version 1.3
+                case 1: // Version 1.4
+                    this.proxy = new DeviceOldBatteryProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+deviceID);
+                    this._onChargeChanged = this.proxy.connectSignal("chargeChanged", this.onChargeChanged.bind(this));
+                    this._onStateChanged = this.proxy.connectSignal("stateChanged", this.onStateChanged.bind(this));
+                    break;
+
+                default: // 21.12.3 / Newer Versions
+                    this.proxy = new DeviceBatteryProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+deviceID+"/battery");
+                    this._onRefreshed = this.proxy.connectSignal("refreshed", this.onRefreshed.bind(this));
+                    break;
+            }
+        } catch (error) {
+            CommonUtils.utilError("Error while creating DBus proxy for the battery module"+error, CommonUtils.LogLevel.MINIMAL, "BatteryUniversalProxy");
+        }
+    }
+
+    getCharge() {
+        switch (this.compatMode.versionLevel) {
+            case 0:
+            case 1:
+                let charge = -1;
+
+                try {
+                    charge = this.proxy.chargeSync()[0];
+                } catch (error) {
+                    CommonUtils.utilError("Error while getting charge from DBus service: "+error, CommonUtils.LogLevel.MINIMAL, "BatteryUniversalProxy");
+                }
+
+                return charge;
+
+            default:
+                return this.proxy.charge;
+        }
+    }
+
+    getChargingState() {
+        switch (this.compatMode.versionLevel) {
+            case 0:
+            case 1:
+                let isCharging = false;
+
+                try {
+                    isCharging = this.proxy.isChargingSync()[0];
+                } catch (error) {
+                    CommonUtils.utilError("Error while getting charging state from DBus service: "+error, CommonUtils.LogLevel.MINIMAL, "BatteryUniversalProxy");
+                }
+
+                return isCharging;
+
+            default:
+                return this.proxy.isCharging;
+        }
+    }
+
+    /**
+     * Callbacks for old interface
+     */
+
+    onStateChanged(proxy, sender, [isCharging]) {
+        let charge = this.getCharge();
+
+        this.emit("refreshed", isCharging, charge);
+    }
+
+    onChargeChanged(proxy, sender, [charge]) {
+        let isCharging = this.getChargingState();
+
+        this.emit("refreshed", isCharging, charge);
+    }
+
+    /**
+     * Callbacks for new interface
+     */
+
+    onRefreshed(proxy, sender, [isCharging, charge]) {
+        CommonUtils.utilInfo("Refresh! charge: "+charge+" isCharging:"+isCharging, CommonUtils.LogLevel.DEBUG, "BatteryUniversalProxy");
+        this.emit("refreshed", isCharging, charge);
+    }
+
+    destroy() {
+        if (this.proxy) {
+            switch (this.compatMode.versionLevel) {
+                case 0:
+                case 1:
+                    if (this._onChargeChanged) {
+                        this.proxy.disconnectSignal(this._onChargeChanged);
+                    }
+
+                    if (this._onStateChanged) {
+                        this.proxy.disconnectSignal(this._onStateChanged);
+                    }
+                    
+                default:
+                    if (this._onRefreshed) {
+                        this.proxy.disconnectSignal(this._onRefreshed);
+                    }
+                    break;
+            }
+        }
+    }
+}
+Signals.addSignalMethods(BatteryUniversalProxy.prototype);
+
+
 
 const DeviceConnectivityInterface = '\
 <node> \
@@ -272,12 +413,12 @@ class BatteryModule extends KDECModule {
         this.isCharging = false;
 
         try {
-            this.batteryProxy = new DeviceBatteryProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/battery");
+            this.batteryProxy = new BatteryUniversalProxy(this.device.getID(), this.compatMode);
             
-            this.charge = this.batteryProxy.charge;
-            this.isCharging = this.batteryProxy.isCharging;
+            this.charge = this.batteryProxy.getCharge();
+            this.isCharging = this.batteryProxy.getChargingState();
 
-            this._onRefreshed = this.batteryProxy.connectSignal("refreshed", this.onRefreshed.bind(this));
+            this._signals.connect(this.batteryProxy, "refreshed",this.onRefreshed.bind(this));
         } catch (error) {
             this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
@@ -306,27 +447,23 @@ class BatteryModule extends KDECModule {
     }
 
     _getLabelText() {
-        if (this.isCharging) {
-            return this.charge.toString() + "% (" + _("Charging") + ")";
+        if (this.charge >= 0 && this.charge <= 100) {
+            if (this.isCharging) {
+                return this.charge.toString() + "% (" + _("Charging") + ")";
+            } else {
+                return this.charge.toString() + "%"
+            }
         } else {
-            return this.charge.toString() + "%"
+            return "?";
         }
     }
 
-    onRefreshed(proxy, sender, [isCharging, charge]) {
+    onRefreshed(sender, isCharging, charge) {
         this.charge = charge;
         this.isCharging = isCharging;
 
         this.batteryMenuItem.label.set_text(this._getLabelText());
         this.batteryMenuItem.setIconSymbolicName(this._getBatteryIconName());
-    }
-
-    destroy() {
-        super.destroy();
-
-        if (this.batteryProxy && this._onRefreshed) {
-            this.batteryProxy.disconnectSignal(this._onRefreshed);
-        }
     }
 
     getMenuItem() {
@@ -489,6 +626,7 @@ class ConnectivityModule extends KDECModule {
 
     destroy() {
         super.destroy();
+
         if (this.connectivityProxy && this._onRefreshed) {
             this.connectivityProxy.disconnectSignal(this._onRefreshed);
         }
@@ -720,7 +858,7 @@ class ShareModule extends KDECModule {
             this._signals.connect(this.sendURLMenuItem, "activate", function() {
                 Dialogs.openSendURLDialog(this.device.getApplet().metadata, this.device.getName(), this.sendURLCallback.bind(this));
             }, this);
-            this.menuItemContainer.menu.addMenuItem(this.sendURLMenuItem);
+            this._addMenuItem(this.sendURLMenuItem);
         }
 
         if (this.options.enableSendText == true) {
@@ -729,7 +867,7 @@ class ShareModule extends KDECModule {
             this._signals.connect(this.sendTextMenuItem, "activate", function() {
                 Dialogs.openSendTextDialog(this.device.getApplet().metadata, this.device.getName(), this.sendTextCallback.bind(this));
             }, this);
-            this.menuItemContainer.menu.addMenuItem(this.sendTextMenuItem);
+            this._addMenuItem(this.sendTextMenuItem);
         }
 
         if (this.options.enableSendFiles == true) {
@@ -738,7 +876,15 @@ class ShareModule extends KDECModule {
             this._signals.connect(this.sendFilesMenuItem, "activate", function() {
                 Dialogs.openSendFilesDialog(this.device.getApplet().metadata, this.device.getName(), this.sendFilesCallback.bind(this));
             }, this);
-            this.menuItemContainer.menu.addMenuItem(this.sendFilesMenuItem);
+            this._addMenuItem(this.sendFilesMenuItem);
+        }
+    }
+
+    _addMenuItem(menuItem) {
+        if (this.options.useSubMenu == true) {
+            this.menuItemContainer.menu.addMenuItem(menuItem)
+        } else {
+            this.menuItemContainer.addMenuItem(menuItem)
         }
     }
 
@@ -960,6 +1106,7 @@ class SFTPModule extends KDECModule {
 
     destroy() {
         super.destroy();
+
         if (this.sftpProxy) {
             if (this._onMounted) {
                 this.sftpProxy.disconnectSignal(this._onMounted);
@@ -1007,7 +1154,7 @@ class SMSModule extends KDECModule {
             this.launchSMSAppMenuItem = new PopupMenu.PopupIconMenuItem(_("Launch SMS App"), "dialog-messages", St.IconType.SYMBOLIC, {});
             let launchSMSAppMenuItemTooltip = new Tooltips.Tooltip(this.launchSMSAppMenuItem.actor, _("Click to open the KDE Connect SMS App"));
             this._signals.connect(this.launchSMSAppMenuItem, "activate", this.launchSMSApp.bind(this));
-            this.menuItemContainer.menu.addMenuItem(this.launchSMSAppMenuItem);
+            this._addMenuItem(this.launchSMSAppMenuItem);
         }
 
         if (this.options.enableSendSMS== true) {
@@ -1016,7 +1163,15 @@ class SMSModule extends KDECModule {
             this._signals.connect(this.sendSMSMenuItem, "activate", function() {
                 Dialogs.openSendSMSDialog(this.device.getApplet().metadata, this.device.getName(), this.sendSMSCallback.bind(this));
             }, this);
-            this.menuItemContainer.menu.addMenuItem(this.sendSMSMenuItem);
+            this._addMenuItem(this.sendSMSMenuItem);
+        }
+    }
+
+    _addMenuItem(menuItem) {
+        if (this.options.useSubMenu == true) {
+            this.menuItemContainer.menu.addMenuItem(menuItem)
+        } else {
+            this.menuItemContainer.addMenuItem(menuItem)
         }
     }
 
