@@ -140,6 +140,9 @@ class BatteryUniversalProxy {
     }
 
     destroy() {
+        // Emit desctory signal to inform other classes
+        this.emit("destroy");
+
         if (this.proxy) {
             switch (this.compatMode.versionLevel) {
                 case 0:
@@ -158,12 +161,13 @@ class BatteryUniversalProxy {
                     }
                     break;
             }
+
+            // Delete reference
+            this.proxy = null
         }
     }
 }
 Signals.addSignalMethods(BatteryUniversalProxy.prototype);
-
-
 
 const DeviceConnectivityInterface = '\
 <node> \
@@ -290,17 +294,10 @@ const DeviceSMSProxy = Gio.DBusProxy.makeProxyWrapper(DeviceSMSInterface);
 // l10n support
 Gettext.bindtextdomain(CommonUtils.UUID, GLib.get_home_dir() + "/.local/share/locale");
 
-/*
 function _(str) {
     return Gettext.dgettext(CommonUtils.UUID, str);
 }
-*/
 
-// DEBUG
-// TODO: Remove
-function _(str) {
-    return str;
-}
 
 // Type of the Module, specifies if and where it its menu items are added
 var ModuleType = {
@@ -330,9 +327,18 @@ class KDECModule {
         this.device = device;
         this.compatMode = compatMode;
 
+        // To be overwritten in derivative class
+        /// Menu Item to add to the popup menu
+        this.menuItem = null;
+        /// Proxy used to get data that the module needs(e.g. DBus proxy, wrapper proxy, etc.)
+        this.proxy = null;
+
         // Get settings for module for convenience
-        let applet = this.device.getApplet();
-        this.options = applet.getModuleOptions(this.id);
+        this.options = this.device.getApplet().getModuleOptions(this.id);
+
+        this._initValues();
+        this._createProxy();
+        this._createMenuItem();
     }
 
     /**
@@ -380,19 +386,91 @@ class KDECModule {
         return this.type;
     }
 
-    destroy() {
-        this.info("Destroy called!", CommonUtils.LogLevel.VERBOSE);
-        this._signals.disconnectAllSignals();
+    /**
+     * Initializes default values
+     */
+    _initValues() {
+        // Placeholder for derivative classes
     }
 
     /**
-     * NOTE: Always returns `null` for this base class
-     * @returns A `PopupMenu.PopupMenuItem` created by the module, if present. If not, `null`
+     * Creates and connects to the proxy
+     */
+    _createProxy() {
+        // Placeholder for derivative classes
+    }
+
+    /**
+     * Destroys other objects used in/with the menu item
+     */
+    _destroyMenuItemContent() {
+        // Placeholder for derivative classes
+    }
+
+    /**
+     * Destroys the menu item and related objects and sets it to `null`
+     */
+    destroyMenuItem() {
+        if (this.menuItem !== null) {
+            this._destroyMenuItemContent();
+
+            this.menuItem.destroy();
+            this.menuItem = null;
+        }
+    }
+
+    _createMenuItem() {
+        // Placeholder for derivative classes
+    }
+
+    /**
+     * Creates the menu item and returns the new menu item
+     * @returns The newly created menu item
+     */
+    createMenuItem() {
+        this._createMenuItem();
+        return this.getMenuItem();
+    }
+
+    /**
+     * Destroys and then recreates the menu item
+     * @returns The recreated menu item
+     */
+    recreateMenuItem() {
+        this.destroyMenuItem();
+        return this.createMenuItem();
+    }
+
+    /**
+     * Destroys other objects, etc. related to the module object, like connected signals from the proxy
+     */
+    _destroyContent() {
+        // Placeholder for derivative classes
+        this.proxy = null;
+    }
+
+    /**
+     * Destroys the Module object and all related object
+     */
+    destroy() {
+        // Emit desctory signal to inform other classes
+        this.emit("destroy");
+
+        this.info("Destroy called!", CommonUtils.LogLevel.VERBOSE);
+        this._signals.disconnectAllSignals();
+
+        this._destroyContent();
+        this.destroyMenuItem();
+    }
+
+    /**
+     * Return the menu item of the module or `null` 
      */
     getMenuItem() {
-        return null;
+        return this.menuItem;
     }
 }
+Signals.addSignalMethods(KDECModule.prototype);
 
 /**
  * Modules
@@ -408,23 +486,25 @@ class BatteryModule extends KDECModule {
 
     constructor(device, compatMode) {
         super(BatteryModule.MODULE_ID, ModuleType.INFO, device, compatMode);
+    }
 
+    _initValues() {
+        // Default values
         this.charge = 0;
         this.isCharging = false;
+    }
 
+    _createProxy() {
         try {
-            this.batteryProxy = new BatteryUniversalProxy(this.device.getID(), this.compatMode);
+            this.proxy = new BatteryUniversalProxy(this.device.getID(), this.compatMode);
             
-            this.charge = this.batteryProxy.getCharge();
-            this.isCharging = this.batteryProxy.getChargingState();
+            this.charge = this.proxy.getCharge();
+            this.isCharging = this.proxy.getChargingState();
 
-            this._signals.connect(this.batteryProxy, "refreshed",this.onRefreshed.bind(this));
+            this._signals.connect(this.proxy, "refreshed",this._onRefreshed.bind(this));
         } catch (error) {
             this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
-
-        // Create Menu Item
-        this.batteryMenuItem = new PopupMenu.PopupIconMenuItem(this._getLabelText(), this._getBatteryIconName(), St.IconType.SYMBOLIC, {reactive: false});
     }
 
     _getBatteryIconName() {
@@ -458,16 +538,22 @@ class BatteryModule extends KDECModule {
         }
     }
 
-    onRefreshed(sender, isCharging, charge) {
+    _onRefreshed(sender, isCharging, charge) {
         this.charge = charge;
         this.isCharging = isCharging;
 
-        this.batteryMenuItem.label.set_text(this._getLabelText());
-        this.batteryMenuItem.setIconSymbolicName(this._getBatteryIconName());
+        if (this.menuItem !== null) {
+            this.menuItem.label.set_text(this._getLabelText());
+            this.menuItem.setIconSymbolicName(this._getBatteryIconName());
+        }
     }
 
-    getMenuItem() {
-        return this.batteryMenuItem;
+    _createMenuItem() {
+        this.menuItem = new PopupMenu.PopupIconMenuItem(this._getLabelText(), this._getBatteryIconName(), St.IconType.SYMBOLIC, {reactive: false});
+    }
+
+    _destroyContent() {
+        this.proxy.destroy();
     }
 }
 
@@ -481,23 +567,27 @@ class DeviceInfoModule extends KDECModule {
 
     constructor(device, compatMode) {
         super(DeviceInfoModule.MODULE_ID, ModuleType.INFO, device, compatMode);
+    }
 
+    _initValues() {
+        // Default values
+        this.deviceType = "unknown";
+    }
+    
+    _createProxy() {
         try {
-            this._signals.connect(this.device, "type-changed",this.onTypeChanged.bind(this));
+            this._signals.connect(this.device, "type-changed",this._onTypeChanged.bind(this));
         } catch (error) {
             this.error("Error while connecting 'type-changed' signal: "+error, CommonUtils.LogLevel.MINIMAL);
         }
+    }
 
-        // Create Menu Item
-        this.deviceInfoMenuItem = new PopupMenu.PopupIconMenuItem(_("ID: ") + this.device.getID(), this._getTypeIconName(), St.IconType.SYMBOLIC);
-        
-        // Copy ID, when clicked
-        this._signals.connect(this.deviceInfoMenuItem, "activate", function(menuItem, keepMenu) {
-            CommonUtils.copyAndNotify(this.device.getApplet().notificationSource, this.device.getID(), _("Device ID"));
-        }, this);
+    _onTypeChanged(deviceType) {
+        this.deviceType = deviceType;
 
-        // Show tooltip on hovering
-        let copyIDTooltip = new Tooltips.Tooltip(this.deviceInfoMenuItem.actor, _("Click to copy ID"));
+        if (this.menuItem !== null) {
+            this.menuItem.setIconSymbolicName(this._getTypeIconName());
+        }
     }
 
     _getTypeIconName() {
@@ -517,12 +607,17 @@ class DeviceInfoModule extends KDECModule {
         }
     }
 
-    onTypeChanged() {
-        this.deviceInfoMenuItem.setIconSymbolicName(this._getTypeIconName());
-    }
+    _createMenuItem() {
+        // Create Menu Item
+        this.menuItem = new PopupMenu.PopupIconMenuItem(_("ID: ") + this.device.getID(), this._getTypeIconName(), St.IconType.SYMBOLIC);
+        
+        // Copy ID, when clicked
+        this.menuItem._signals.connect(this.menuItem, "activate", function(menuItem, keepMenu) {
+            CommonUtils.copyAndNotify(this.device.getApplet().notificationSource, this.device.getID(), _("Device ID"));
+        }, this);
 
-    getMenuItem() {
-        return this.deviceInfoMenuItem;
+        // Show tooltip on hovering
+        this.copyIDTooltip = new Tooltips.Tooltip(this.menuItem.actor, _("Click to copy ID"));
     }
 }
 
@@ -536,23 +631,35 @@ class ConnectivityModule extends KDECModule {
 
     constructor(device, compatMode) {
         super(ConnectivityModule.MODULE_ID, ModuleType.INFO, device, compatMode);
+    }
 
+    _initValues() {
+        // Default values
         this.signalStrength = 0;
         this.networkType = "";
+    }
 
+    _createProxy() {
         try {
-            this.connectivityProxy = new DeviceConnectivityProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/connectivity_report");
+            this.proxy = new DeviceConnectivityProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/connectivity_report");
             
-            this.signalStrength = this.connectivityProxy.cellularNetworkStrength;
-            this.networkType = this.connectivityProxy.cellularNetworkType;
+            this.signalStrength = this.proxy.cellularNetworkStrength;
+            this.networkType = this.proxy.cellularNetworkType;
 
-            this._onRefreshed = this.connectivityProxy.connectSignal("refreshed", this.onRefreshed.bind(this));
+            this._onRefreshed = this.proxy.connectSignal("refreshed", this.onRefreshed.bind(this));
         } catch (error) {
             this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
+    }
 
-        // Create Menu Item
-        this.connectivityMenuItem = new PopupMenu.PopupIconMenuItem(this._getLabelText(), this._getConnectivityIconName(), St.IconType.SYMBOLIC, {reactive: false});
+    onRefreshed(proxy, sender, [networkType, networkStrength]) {
+        this.networkType = networkType;
+        this.signalStrength = networkStrength;
+
+        if (this.menuItem !== null) {
+            this.menuItem.label.set_text(this._getLabelText());
+            this.menuItem.setIconSymbolicName(this._getConnectivityIconName());
+        }
     }
 
     _getConnectivityIconName() {
@@ -613,27 +720,16 @@ class ConnectivityModule extends KDECModule {
         } else {
             return signalStrengthText;
         }
-
     }
 
-    onRefreshed(proxy, sender, [networkType, networkStrength]) {
-        this.networkType = networkType;
-        this.signalStrength = networkStrength;
-
-        this.connectivityMenuItem.label.set_text(this._getLabelText());
-        this.connectivityMenuItem.setIconSymbolicName(this._getConnectivityIconName());
+    _createMenuItem() {
+        this.menuItem = new PopupMenu.PopupIconMenuItem(this._getLabelText(), this._getConnectivityIconName(), St.IconType.SYMBOLIC, {reactive: false});
     }
 
-    destroy() {
-        super.destroy();
-
-        if (this.connectivityProxy && this._onRefreshed) {
-            this.connectivityProxy.disconnectSignal(this._onRefreshed);
+    _destroyContent() {
+        if (this.proxy && this._onRefreshed) {
+            this.proxy.disconnectSignal(this._onRefreshed);
         }
-    }
-
-    getMenuItem() {
-        return this.connectivityMenuItem;
     }
 }
 
@@ -647,29 +743,29 @@ class FindMyPhoneModule extends KDECModule {
 
     constructor(device, compatMode) {
         super(FindMyPhoneModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
+    }
 
+    _createProxy() {
         try {
-            this.findMyPhoneProxy = new DeviceFindMyPhoneProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/findmyphone");
+            this.proxy = new DeviceFindMyPhoneProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/findmyphone");
         } catch (error) {
             this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
-
-        // Create Menu Item
-        this.findMyPhoneMenuItem = new PopupMenu.PopupIconMenuItem(_("Ring device"), "audio-volume-high-symbolic", St.IconType.SYMBOLIC, {});
-        let findMyPhoneMenuItemTooltip = new Tooltips.Tooltip(this.findMyPhoneMenuItem.actor, _("Click to ring the device"));
-        this._signals.connect(this.findMyPhoneMenuItem, "activate", this.ringDevice.bind(this));
     }
-    
+
     ringDevice() {
         try {
-            this.findMyPhoneProxy.ringSync();
+            this.proxy.ringSync();
         } catch (error) {
             this.error("Error calling 'ring' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
         }
     }
 
-    getMenuItem() {
-        return this.findMyPhoneMenuItem;
+    _createMenuItem() {
+        this.menuItem = new PopupMenu.PopupIconMenuItem(_("Ring device"), "audio-volume-high-symbolic", St.IconType.SYMBOLIC, {});
+        this.menuItemTooltip = new Tooltips.Tooltip(this.menuItem.actor, _("Click to ring the device"));
+
+        this.menuItem._signals.connect(this.menuItem, "activate", this.ringDevice.bind(this));
     }
 }
 
@@ -683,25 +779,16 @@ class RequestPhotoModule extends KDECModule {
 
     constructor(device, compatMode) {
         super(RequestPhotoModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
+    }
 
+    _createProxy() {
         try {
-            this.requestPhotoProxy = new DeviceRequestPhotoProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/photo");
+            this.proxy = new DeviceRequestPhotoProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/photo");
 
-            this._onPhotoReceived = this.requestPhotoProxy.connectSignal("photoReceived", this.onPhotoReceived.bind(this));
+            this._onPhotoReceived = this.proxy.connectSignal("photoReceived", this.onPhotoReceived.bind(this));
         } catch (error) {
             this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
-
-        // Create Menu Item
-        this.requestPhotoMenuItem = new PopupMenu.PopupIconMenuItem(_("Request Photo"), "camera-photo-symbolic", St.IconType.SYMBOLIC, {});
-        let requestPhotoMenuItemTooltip = new Tooltips.Tooltip(this.requestPhotoMenuItem.actor, _("Click to request a photo from the device"));
-        this._signals.connect(this.requestPhotoMenuItem, "activate", function() {
-            try {
-                Dialogs.openReceivePhotoDialog(this.device.getApplet().metadata, this.device.getName(), this.requestPhotoCallback.bind(this));
-            } catch (error) {
-                this.error("Error while opening photo request dialog: "+error, CommonUtils.LogLevel.MINIMAL);
-            }
-        }, this);
     }
 
     requestPhoto() {
@@ -717,7 +804,7 @@ class RequestPhotoModule extends KDECModule {
 
             if (filepath !== null) {
                 try {
-                    this.requestPhotoProxy.requestPhotoSync(filepath);
+                    this.proxy.requestPhotoSync(filepath);
                 } catch (error) {
                     this.error("Error while calling 'requestPhoto' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
                 }
@@ -731,7 +818,7 @@ class RequestPhotoModule extends KDECModule {
         switch (status) {
             case Dialogs.DialogStatus.SUCCESS:
                 try {
-                    this.requestPhotoProxy.requestPhotoSync(filename);
+                    this.proxy.requestPhotoSync(filename);
                 } catch (error) {
                     this.error("Error while calling 'requestPhoto' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
                 }
@@ -760,16 +847,23 @@ class RequestPhotoModule extends KDECModule {
         notificationSource.notify(notification);
     }
 
-    destroy() {
-        super.destroy();
+    _createMenuItem() {
+        this.menuItem = new PopupMenu.PopupIconMenuItem(_("Request Photo"), "camera-photo-symbolic", St.IconType.SYMBOLIC, {});
+        this.menuItemTooltip = new Tooltips.Tooltip(this.menuItem.actor, _("Click to request a photo from the device"));
 
-        if (this.requestPhotoProxy && this._onPhotoReceived) {
-            this.requestPhotoProxy.disconnectSignal(this._onPhotoReceived);
-        }
+        this.menuItem._signals.connect(this.menuItem, "activate", function() {
+            try {
+                Dialogs.openReceivePhotoDialog(this.device.getApplet().metadata, this.device.getName(), this.requestPhotoCallback.bind(this));
+            } catch (error) {
+                this.error("Error while opening photo request dialog: "+error, CommonUtils.LogLevel.MINIMAL);
+            }
+        }, this);
     }
 
-    getMenuItem() {
-        return this.requestPhotoMenuItem;
+    _destroyContent() {
+        if (this.proxy && this._onPhotoReceived) {
+            this.proxy.disconnectSignal(this._onPhotoReceived);
+        }
     }
 }
 
@@ -783,29 +877,26 @@ class PingModule extends KDECModule {
 
     constructor(device, compatMode) {
         super(PingModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
+    }
 
+    _createProxy() {
         try {
-            this.pingProxy = new DevicePingProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/ping");
+            this.proxy = new DevicePingProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/ping");
         } catch (error) {
             this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
-
-        // Create Menu Item
-        this.pingMenuItem = new PopupMenu.PopupIconMenuItem(_("Ping Device"), "network-transmit-symbolic", St.IconType.SYMBOLIC, {});
-        let pingMenuItemTooltip = new Tooltips.Tooltip(this.pingMenuItem.actor, _("Click to send a ping to the device"));
-        this._signals.connect(this.pingMenuItem, "activate", this.ping.bind(this));
     }
 
     ping() {
         if (this.options.useCustomMessage == true) {
             try {
-                this.pingProxy.sendPingSync(this.options.customMessage);
+                this.proxy.sendPingSync(this.options.customMessage);
             } catch (error) {
                 this.error("Error while sending ping message: "+error, CommonUtils.LogLevel.MINIMAL);
             }
         } else {
             try {
-                this.pingProxy.sendPingSync(_("Ping!"));
+                this.proxy.sendPingSync(_("Ping!"));
             } catch (error) {
                 this.error("Error while sending ping message: "+error, CommonUtils.LogLevel.MINIMAL);
             }
@@ -817,8 +908,11 @@ class PingModule extends KDECModule {
         notificationSource.notify(notification);
     }
 
-    getMenuItem() {
-        return this.pingMenuItem;
+    _createMenuItem() {
+        this.menuItem = new PopupMenu.PopupIconMenuItem(_("Ping Device"), "network-transmit-symbolic", St.IconType.SYMBOLIC, {});
+        this.menuItemTooltip = new Tooltips.Tooltip(this.menuItem.actor, _("Click to send a ping to the device"));
+
+        this.menuItem._signals.connect(this.menuItem, "activate", this.ping.bind(this));
     }
 }
 
@@ -832,59 +926,15 @@ class ShareModule extends KDECModule {
 
     constructor(device, compatMode) {
         super(ShareModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
-
-        try {
-            this.shareProxy = new DeviceShareProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/share");
-
-            this._onShareReceived = this.shareProxy.connectSignal("shareReceived", this.onShareReceived.bind(this));
-        } catch (error) {
-            this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
-        }
-
-        if (this.options.useSubMenu == true) {
-            this.menuItemContainer = new PopupMenu.PopupSubMenuMenuItem(_("Share"));
-
-            // Workaround to add icon, because Cinnamon didn't like me making a PopupMenu class in another file
-            let menuIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: "send-to-symbolic", icon_type: St.IconType.SYMBOLIC});
-            this.menuItemContainer.addActor(menuIcon, {span: 0, position: 0});
-        } else {
-            this.menuItemContainer = new PopupMenu.PopupMenuSection();
-        }
-
-        // Create Menu Items
-        if (this.options.enableSendURL == true) {
-            this.sendURLMenuItem = new PopupMenu.PopupIconMenuItem(_("Send URL"), "link-symbolic", St.IconType.SYMBOLIC, {});
-            let sendURLMenuItemTooltip = new Tooltips.Tooltip(this.sendURLMenuItem.actor, _("Click to send a URL to the device"));
-            this._signals.connect(this.sendURLMenuItem, "activate", function() {
-                Dialogs.openSendURLDialog(this.device.getApplet().metadata, this.device.getName(), this.sendURLCallback.bind(this));
-            }, this);
-            this._addMenuItem(this.sendURLMenuItem);
-        }
-
-        if (this.options.enableSendText == true) {
-            this.sendTextMenuItem = new PopupMenu.PopupIconMenuItem(_("Send Text"), "tool-text-symbolic", St.IconType.SYMBOLIC, {});
-            let sendTextMenuItemTooltip = new Tooltips.Tooltip(this.sendTextMenuItem.actor, _("Click to send text to the device"));
-            this._signals.connect(this.sendTextMenuItem, "activate", function() {
-                Dialogs.openSendTextDialog(this.device.getApplet().metadata, this.device.getName(), this.sendTextCallback.bind(this));
-            }, this);
-            this._addMenuItem(this.sendTextMenuItem);
-        }
-
-        if (this.options.enableSendFiles == true) {
-            this.sendFilesMenuItem = new PopupMenu.PopupIconMenuItem(_("Send File(s)"), "emblem-documents-symbolic", St.IconType.SYMBOLIC, {});
-            let sendFilesMenuItemTooltip = new Tooltips.Tooltip(this.sendFilesMenuItem.actor, _("Click to send file(s) to the device"));
-            this._signals.connect(this.sendFilesMenuItem, "activate", function() {
-                Dialogs.openSendFilesDialog(this.device.getApplet().metadata, this.device.getName(), this.sendFilesCallback.bind(this));
-            }, this);
-            this._addMenuItem(this.sendFilesMenuItem);
-        }
     }
 
-    _addMenuItem(menuItem) {
-        if (this.options.useSubMenu == true) {
-            this.menuItemContainer.menu.addMenuItem(menuItem)
-        } else {
-            this.menuItemContainer.addMenuItem(menuItem)
+    _createProxy() {
+        try {
+            this.proxy = new DeviceShareProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/share");
+
+            this._onShareReceived = this.proxy.connectSignal("shareReceived", this.onShareReceived.bind(this));
+        } catch (error) {
+            this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
     }
 
@@ -892,7 +942,7 @@ class ShareModule extends KDECModule {
         switch (status) {
             case Dialogs.DialogStatus.SUCCESS:
                 try {
-                    this.shareProxy.shareUrlSync(urlText);
+                    this.proxy.shareUrlSync(urlText);
                 } catch (error) {
                     this.error("Error while calling 'shareUrl' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
                 }
@@ -913,7 +963,7 @@ class ShareModule extends KDECModule {
         switch (status) {
             case Dialogs.DialogStatus.SUCCESS:
                 try {
-                    this.shareProxy.shareTextSync(text);
+                    this.proxy.shareTextSync(text);
                 } catch (error) {
                     this.error("Error while calling 'shareText' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
                 }
@@ -938,7 +988,7 @@ class ShareModule extends KDECModule {
                 });
 
                 try {
-                    this.shareProxy.shareUrlsSync(filenameArray);
+                    this.proxy.shareUrlsSync(filenameArray);
                 } catch (error) {
                     this.error("Error while calling 'shareUrls' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
                 }
@@ -967,16 +1017,72 @@ class ShareModule extends KDECModule {
         notificationSource.notify(notification);
     }
 
-    destroy() {
-        super.destroy();
+    _destroyMenuItemContent() {
+        this.sendURLMenuItem.destroy();
+        this.sendURLMenuItem = null;
 
-        if (this.shareProxy && this._onShareReceived) {
-            this.shareProxy.disconnectSignal(this._onShareReceived);
+        this.sendTextMenuItem.destroy();
+        this.sendTextMenuItem = null;
+
+        this.sendFilesMenuItem.destroy();
+        this.sendFilesMenuItem = null;
+    }
+
+    _addMenuItem(menuItem) {
+        if (this.options.useSubMenu == true) {
+            this.menuItem.menu.addMenuItem(menuItem)
+        } else {
+            this.menuItem.addMenuItem(menuItem)
         }
     }
 
-    getMenuItem() {
-        return this.menuItemContainer;
+    _createMenuItem() {
+        if (this.options.useSubMenu == true) {
+            this.menuItem = new PopupMenu.PopupSubMenuMenuItem(_("Share"));
+
+            // Workaround to add icon, because Cinnamon didn't like me making a PopupMenu class in another file
+            this.menuIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: "send-to-symbolic", icon_type: St.IconType.SYMBOLIC});
+            this.menuItem.addActor(this.menuIcon, {span: 0, position: 0});
+        } else {
+            this.menuItem = new PopupMenu.PopupMenuSection();
+        }
+
+        // Create Menu Items
+        if (this.options.enableSendURL == true) {
+            this.sendURLMenuItem = new PopupMenu.PopupIconMenuItem(_("Send URL"), "link-symbolic", St.IconType.SYMBOLIC, {});
+            this.sendURLMenuItemTooltip = new Tooltips.Tooltip(this.sendURLMenuItem.actor, _("Click to send a URL to the device"));
+
+            this.sendURLMenuItem._signals.connect(this.sendURLMenuItem, "activate", function() {
+                Dialogs.openSendURLDialog(this.device.getApplet().metadata, this.device.getName(), this.sendURLCallback.bind(this));
+            }, this);
+            this._addMenuItem(this.sendURLMenuItem);
+        }
+
+        if (this.options.enableSendText == true) {
+            this.sendTextMenuItem = new PopupMenu.PopupIconMenuItem(_("Send Text"), "tool-text-symbolic", St.IconType.SYMBOLIC, {});
+            this.sendTextMenuItemTooltip = new Tooltips.Tooltip(this.sendTextMenuItem.actor, _("Click to send text to the device"));
+
+            this.sendTextMenuItem._signals.connect(this.sendTextMenuItem, "activate", function() {
+                Dialogs.openSendTextDialog(this.device.getApplet().metadata, this.device.getName(), this.sendTextCallback.bind(this));
+            }, this);
+            this._addMenuItem(this.sendTextMenuItem);
+        }
+
+        if (this.options.enableSendFiles == true) {
+            this.sendFilesMenuItem = new PopupMenu.PopupIconMenuItem(_("Send File(s)"), "emblem-documents-symbolic", St.IconType.SYMBOLIC, {});
+            this.sendFilesMenuItemTooltip = new Tooltips.Tooltip(this.sendFilesMenuItem.actor, _("Click to send file(s) to the device"));
+
+            this.sendFilesMenuItem._signals.connect(this.sendFilesMenuItem, "activate", function() {
+                Dialogs.openSendFilesDialog(this.device.getApplet().metadata, this.device.getName(), this.sendFilesCallback.bind(this));
+            }, this);
+            this._addMenuItem(this.sendFilesMenuItem);
+        }
+    }
+
+    _destroyContent() {
+        if (this.proxy && this._onShareReceived) {
+            this.proxy.disconnectSignal(this._onShareReceived);
+        }
     }
 }
 
@@ -988,48 +1094,31 @@ class SFTPModule extends KDECModule {
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_sftp"];
     static MODULE_ID = "sftp";
 
-    constructor(device, compatMode) {
+    constructor(device, compatMode) {        
         super(SFTPModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
+    }
 
+    _initValues() {
+        // Default values
         this.mounted = false;
         this.mountPoint = "";
+    }
 
+    _createProxy() {
         try {
-            this.sftpProxy = new DeviceSFTPProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/sftp");
+            this.proxy = new DeviceSFTPProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/sftp");
 
-            this.mounted = this.sftpProxy.isMountedSync()[0];
+            this.mounted = this.proxy.isMountedSync()[0];
 
             if (this.mounted == true) {
-                this.mountPoint = this.sftpProxy.mountPointSync()[0];
+                this.mountPoint = this.proxy.mountPointSync()[0];
             }
 
-            this._onMounted = this.sftpProxy.connectSignal("mounted", this.onMounted.bind(this));
-            this._onUnmounted = this.sftpProxy.connectSignal("unmounted", this.onUnmounted.bind(this));
+            this._onMounted = this.proxy.connectSignal("mounted", this.onMounted.bind(this));
+            this._onUnmounted = this.proxy.connectSignal("unmounted", this.onUnmounted.bind(this));
         } catch (error) {
             this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
-
-        // Create Menu Item
-        this.sftpMenuItem = new CommonUtils.PopupButtonIconMenuItem(this._getLabelText(), "network-server-symbolic", St.IconType.SYMBOLIC, "folder-symbolic", St.IconType.SYMBOLIC);
-        
-        // Set text for menu item tooltip and enable it
-        this.sftpMenuItem.tooltip.set_text(this._getItemTooltipText());
-        this.sftpMenuItem.tooltip.preventShow = false;
-
-        // set text for button tooltip and enable it
-        this.sftpMenuItem.button.tooltip.set_text(_("Click to browse files"));
-        this.sftpMenuItem.button.tooltip.preventShow = false;
-
-        // Disable or enable button based upon read mounted state
-        this.sftpMenuItem.button.setEnabled(this.mounted);
-
-        this._signals.connect(this.sftpMenuItem, "activate", Lang.bind(this, function(menuItem, event, keepMenu, activationType) {
-            if (activationType == CommonUtils.ActivateType.ITEM) {
-                this.mountOrUnmount();
-            } else if (activationType == CommonUtils.ActivateType.BUTTON) {
-                this.startBrowsing();
-            }
-        }));
     }
 
     _getLabelText() {
@@ -1051,13 +1140,13 @@ class SFTPModule extends KDECModule {
     mountOrUnmount() {
         if (this.mounted == true) {
             try {
-                this.sftpProxy.unmountSync();
+                this.proxy.unmountSync();
             } catch (error) {
                 this.error("Error while calling 'unmount' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
             }
         } else {
             try {
-                this.sftpProxy.mountSync();
+                this.proxy.mountSync();
             } catch (error) {
                 this.error("Error while calling 'mount' DBus method: "+error, CommonUtils.LogLevel.MINIMAL);
             }
@@ -1066,13 +1155,15 @@ class SFTPModule extends KDECModule {
 
     onMounted(proxy, sender) {
         this.mounted = true;
-        this.sftpMenuItem.label.set_text(this._getLabelText());
-        this.sftpMenuItem.tooltip.set_text(this._getItemTooltipText());
-        this.sftpMenuItem.button.setEnabled(true);
+
+        if (this.menuItem !== null) {
+            this.menuItem.label.set_text(this._getLabelText());
+            this.menuItem.tooltip.set_text(this._getItemTooltipText());
+            this.menuItem.button.setEnabled(true);
+        }
         
         try {
-            this.mountPoint = this.sftpProxy.mountPointSync()[0];
-
+            this.mountPoint = this.proxy.mountPointSync()[0];
         } catch (error) {
             this.error("Error while getting mount point: "+error, CommonUtils.LogLevel.MINIMAL);
         }
@@ -1080,17 +1171,19 @@ class SFTPModule extends KDECModule {
 
     onUnmounted(proxy, sender) {
         this.mounted = false;
-        this.sftpMenuItem.label.set_text(this._getLabelText());
-        this.sftpMenuItem.tooltip.set_text(this._getItemTooltipText());
-        this.sftpMenuItem.button.setEnabled(false);
+
+        if (this.menuItem !== null) {
+            this.menuItem.label.set_text(this._getLabelText());
+            this.menuItem.tooltip.set_text(this._getItemTooltipText());
+            this.menuItem.button.setEnabled(false);
+        }
 
         try {
-            let mountError = this.sftpProxy.getMountErrorSync()[0];
+            let mountError = this.proxy.getMountErrorSync()[0];
 
             if (mountError != "") {
                 this.error("Error while mounting: "+mountError, CommonUtils.LogLevel.MINIMAL);
             }
-
         } catch (error) {
             this.error("Error while getting error information about mount: "+error, CommonUtils.LogLevel.MINIMAL);
         }
@@ -1104,21 +1197,39 @@ class SFTPModule extends KDECModule {
         }
     }
 
-    destroy() {
-        super.destroy();
+    _createMenuItem() {
+        // Create Menu Item
+        this.menuItem = new CommonUtils.PopupButtonIconMenuItem(this._getLabelText(), "network-server-symbolic", St.IconType.SYMBOLIC, "folder-symbolic", St.IconType.SYMBOLIC);
+        
+        // Set text for menu item tooltip and enable it
+        this.menuItem.tooltip.set_text(this._getItemTooltipText());
+        this.menuItem.tooltip.preventShow = false;
 
-        if (this.sftpProxy) {
-            if (this._onMounted) {
-                this.sftpProxy.disconnectSignal(this._onMounted);
+        // set text for button tooltip and enable it
+        this.menuItem.button.tooltip.set_text(_("Click to browse files"));
+        this.menuItem.button.tooltip.preventShow = false;
+
+        // Disable or enable button based upon read mounted state
+        this.menuItem.button.setEnabled(this.mounted);
+
+        this.menuItem._signals.connect(this.menuItem, "activate", Lang.bind(this, function(menuItem, event, keepMenu, activationType) {
+            if (activationType == CommonUtils.ActivateType.ITEM) {
+                this.mountOrUnmount();
+            } else if (activationType == CommonUtils.ActivateType.BUTTON) {
+                this.startBrowsing();
             }
-            if (this._onUnmounted) {
-                this.sftpProxy.disconnectSignal(this._onUnmounted);
-            }
-        }
+        }));
     }
 
-    getMenuItem() {
-        return this.sftpMenuItem;
+    _destroyContent() {
+        if (this.proxy) {
+            if (this._onMounted) {
+                this.proxy.disconnectSignal(this._onMounted);
+            }
+            if (this._onUnmounted) {
+                this.proxy.disconnectSignal(this._onUnmounted);
+            }
+        }
     }
 }
 
@@ -1132,52 +1243,27 @@ class SMSModule extends KDECModule {
 
     constructor(device, compatMode) {
         super(SMSModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
+    }
 
+    _createProxy() {
         try {
-            this.smsProxy = new DeviceSMSProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/sms");
+            this.proxy = new DeviceSMSProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/sms");
         } catch (error) {
             this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
-        }
-
-        if (this.options.useSubMenu == true) {
-            this.menuItemContainer = new PopupMenu.PopupSubMenuMenuItem(_("SMS"));
-
-            // Workaround to add icon, because Cinnamon didn't like me making a PopupMenu class in another file
-            let menuIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: "dialog-messages", icon_type: St.IconType.SYMBOLIC});
-            this.menuItemContainer.addActor(menuIcon, {span: 0, position: 0});
-        } else {
-            this.menuItemContainer = new PopupMenu.PopupMenuSection();
-        }
-
-        // Create Menu Items
-        if (this.options.enableLaunchSMSApp == true) {
-            this.launchSMSAppMenuItem = new PopupMenu.PopupIconMenuItem(_("Launch SMS App"), "dialog-messages", St.IconType.SYMBOLIC, {});
-            let launchSMSAppMenuItemTooltip = new Tooltips.Tooltip(this.launchSMSAppMenuItem.actor, _("Click to open the KDE Connect SMS App"));
-            this._signals.connect(this.launchSMSAppMenuItem, "activate", this.launchSMSApp.bind(this));
-            this._addMenuItem(this.launchSMSAppMenuItem);
-        }
-
-        if (this.options.enableSendSMS== true) {
-            this.sendSMSMenuItem = new PopupMenu.PopupIconMenuItem(_("Send SMS"), "chat-message-new-symbolic", St.IconType.SYMBOLIC, {});
-            let sendSMSMenuItemTooltip = new Tooltips.Tooltip(this.sendSMSMenuItem.actor, _("Click to send text to the device"));
-            this._signals.connect(this.sendSMSMenuItem, "activate", function() {
-                Dialogs.openSendSMSDialog(this.device.getApplet().metadata, this.device.getName(), this.sendSMSCallback.bind(this));
-            }, this);
-            this._addMenuItem(this.sendSMSMenuItem);
         }
     }
 
     _addMenuItem(menuItem) {
         if (this.options.useSubMenu == true) {
-            this.menuItemContainer.menu.addMenuItem(menuItem)
+            this.menuItem.menu.addMenuItem(menuItem)
         } else {
-            this.menuItemContainer.addMenuItem(menuItem)
+            this.menuItem.addMenuItem(menuItem)
         }
     }
 
     launchSMSApp() {
         try {
-            this.smsProxy.launchAppSync();
+            this.proxy.launchAppSync();
         } catch (error) {
             this.error("Error while launching KDE Connect SMS App: "+error, CommonUtils.LogLevel.MINIMAL);
         }
@@ -1192,7 +1278,7 @@ class SMSModule extends KDECModule {
                     try {
                         let addressVariant = new GLib.Variant('(s)', [phoneNumber]);
 
-                        this.smsProxy.sendSmsSync([addressVariant], SMSObject["message"], []);
+                        this.proxy.sendSmsSync([addressVariant], SMSObject["message"], []);
 
                         this.info("Sent SMS to '" + phoneNumber.toString() + "' with message: "+SMSObject["message"].toString(), CommonUtils.LogLevel.INFO);
                     } catch (error) {
@@ -1215,45 +1301,47 @@ class SMSModule extends KDECModule {
         }
     }
 
-    getMenuItem() {
-        return this.menuItemContainer;
+    _destroyMenuItemContent() {
+        this.launchSMSAppMenuItem.destroy();
+        this.launchSMSAppMenuItem = null;
+
+        this.sendSMSMenuItem.destroy();
+        this.sendSMSMenuItem = null;
+    }
+
+    _createMenuItem() {
+        if (this.options.useSubMenu == true) {
+            this.menuItem = new PopupMenu.PopupSubMenuMenuItem(_("SMS"));
+
+            // Workaround to add icon, because Cinnamon didn't like me making a PopupMenu class in another file
+            let menuIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: "dialog-messages", icon_type: St.IconType.SYMBOLIC});
+            this.menuItem.addActor(menuIcon, {span: 0, position: 0});
+        } else {
+            this.menuItem = new PopupMenu.PopupMenuSection();
+        }
+
+        // Create Menu Items
+        if (this.options.enableLaunchSMSApp == true) {
+            this.launchSMSAppMenuItem = new PopupMenu.PopupIconMenuItem(_("Launch SMS App"), "dialog-messages", St.IconType.SYMBOLIC, {});
+            this.launchSMSAppMenuItemTooltip = new Tooltips.Tooltip(this.launchSMSAppMenuItem.actor, _("Click to open the KDE Connect SMS App"));
+
+            this.launchSMSAppMenuItem._signals.connect(this.launchSMSAppMenuItem, "activate", this.launchSMSApp.bind(this));
+            this._addMenuItem(this.launchSMSAppMenuItem);
+        }
+
+        if (this.options.enableSendSMS== true) {
+            this.sendSMSMenuItem = new PopupMenu.PopupIconMenuItem(_("Send SMS"), "chat-message-new-symbolic", St.IconType.SYMBOLIC, {});
+            this.sendSMSMenuItemTooltip = new Tooltips.Tooltip(this.sendSMSMenuItem.actor, _("Click to send text to the device"));
+
+            this.sendSMSMenuItem._signals.connect(this.sendSMSMenuItem, "activate", function() {
+                Dialogs.openSendSMSDialog(this.device.getApplet().metadata, this.device.getName(), this.sendSMSCallback.bind(this));
+            }, this);
+            this._addMenuItem(this.sendSMSMenuItem);
+        }
     }
 }
 
-
-
-
-
-
-/*
-const SUPPORTED_MODULES = [
-    "battery",
-    "deviceinfo",
-    "connectivity",
-    "mpris",
-    "findmyphone",
-    "requestphoto",
-    "ping",
-    "share",
-    "sftp",
-    "sms",
-    "telephony"
-];
-
-const ADDITIONAL_MODULE_SETTING = {
-    "battery": [],
-    "deviceinfo": [],
-    "connectivity": [],
-    "mpris": [],
-    "findmyphone": [],
-    "requestphoto": [],
-    "ping": [],
-    "share": [],
-    "sftp": [],
-    "sms": [],
-    "telephony": []
-};
-*/
+// TODO: Maybe add telephony module
 
 // Register module classes
 let moduleClasses = {}

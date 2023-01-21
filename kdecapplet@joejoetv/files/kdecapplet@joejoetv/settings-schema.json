@@ -19,14 +19,12 @@
                 "battery-module-section",
                 "deviceinfo-module-section",
                 "connectivity-module-section",
-                "mpris-module-section",
                 "findmyphone-module-section",
                 "requestphoto-module-section",
                 "ping-module-section",
                 "share-module-section",
                 "sftp-module-section",
-                "sms-module-section",
-                "telephony-module-section"
+                "sms-module-section"
             ]
         },
         "contextmenu-section": {
@@ -88,14 +86,6 @@
                 "connectivity-module-showNetworkType"
             ]
         },
-        "mpris-module-section": {
-            "type": "section",
-            "title": "MPRIS Info Module",
-            "keys": [
-                "mpris-module-description",
-                "mpris-module-enabled"
-            ]
-        },
         "findmyphone-module-section": {
             "type": "section",
             "title": "FindMyPhone Action Module",
@@ -153,14 +143,6 @@
                 "sms-module-useSubMenu",
                 "sms-module-enableSendSMS",
                 "sms-module-enableLaunchSMSApp"
-            ]
-        },
-        "telephony-module-section": {
-            "type": "section",
-            "title": "Telephony Passive Module",
-            "keys": [
-                "telephony-module-description",
-                "telephony-module-enabled"
             ]
         }
     },
@@ -247,16 +229,6 @@
     "connectivity-module-showNetworkType": {
         "type": "switch",
         "description": "Show the mobile network type",
-        "default": true
-    },
-
-    "mpris-module-description": {
-        "type": "label",
-        "description": "Shows the current media player and playback on the device aswell as volume of the device"
-    },
-    "mpris-module-enabled": {
-        "type": "switch",
-        "description": "Module enabled",
         "default": true
     },
 
@@ -375,16 +347,6 @@
     "sms-module-enableLaunchSMSApp": {
         "type": "switch",
         "description": "Enable the menu item to launch the KDE Connect SMS app",
-        "default": true
-    },
-
-    "telephony-module-description": {
-        "type": "label",
-        "description": "Changes the panel icon of the applet, if the device is currently receiving a call"
-    },
-    "telephony-module-enabled": {
-        "type": "switch",
-        "description": "Module enabled",
         "default": true
     }
 }
