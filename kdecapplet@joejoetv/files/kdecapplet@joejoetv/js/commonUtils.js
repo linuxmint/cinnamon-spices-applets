@@ -67,7 +67,7 @@ const DEBUG_FEATURES = true;
  */
 function logInfo(msg, level) {
     if (Object.values(LogLevel).includes(level) == false) {
-        global.logError("["+UUID+"] "+"Invalid log level: '"+level+"'");
+        global.logError("["+UUID+"] "+"Invalid log level: '"+level+"' (Message: '"+msg+"')");
     } else if (level >= LOG_LEVEL) {
         global.log("["+UUID+"/"+logLevelName(level)+"] "+msg);
     }
@@ -80,7 +80,7 @@ function logInfo(msg, level) {
  */
 function logWarn(msg, level) {
     if (Object.values(LogLevel).includes(level) == false) {
-        global.logError("["+UUID+"] "+"Invalid log level: '"+level+"'");
+        global.logError("["+UUID+"] "+"Invalid log level: '"+level+"' (Message: '"+msg+"')");
     } else if (level >= LOG_LEVEL) {
         global.logWarning("["+UUID+"/"+logLevelName(level)+"] "+msg);
     }
@@ -93,7 +93,7 @@ function logWarn(msg, level) {
  */
 function logError(msg, level) {
     if (Object.values(LogLevel).includes(level) == false) {
-        global.logError("["+UUID+"] "+"Invalid log level: '"+level+"'");
+        global.logError("["+UUID+"] "+"Invalid log level: '"+level+"' (Message: '"+msg+"')");
     } else if (level >= LOG_LEVEL) {
         global.logError("["+UUID+"/"+logLevelName(level)+"] "+msg);
     }

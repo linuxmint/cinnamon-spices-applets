@@ -544,7 +544,6 @@ class Device {
             let infoModules = this.getModulesByType(Modules.ModuleType.INFO);
 
             infoModules.forEach(infoModule => {
-                this.warn(infoModule.getID());
                 this.menuItem.menu.addMenuItem(infoModule.getMenuItem());
             });
 
@@ -576,7 +575,10 @@ class Device {
     destroyMenuItem() {
         try {
             if (this.menuItem !== null) {
-                this.menuItem.menu.removeAll();
+                if (this.isReachable == true) {
+                    this.menuItem.menu.removeAll();
+                }
+                
                 this.menuItem.destroy();
                 this.menuItem = null;
             }
@@ -1032,28 +1034,54 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 let debugIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: 'tools-symbolic', icon_type: St.IconType.SYMBOLIC});
                 debugMenuItemParent.addActor(debugIcon, {span: 0, position: 0});
         
-                // Manually reload device list
-                let debugMenuitem1 = new PopupMenu.PopupMenuItem("Manually reload device list");
+                // Simulate plugins changed signal
+                let debugMenuitem1 = new PopupMenu.PopupMenuItem("Manually call 'onDevicePluginsChanged'");
                 debugMenuitem1._signals.connect(debugMenuitem1, "activate", Lang.bind(this, function() {
-                    this.onDeviceListChanged();
+                    this.onDevicePluginsChanged();
                 }));
                 debugMenuItemParent.menu.addMenuItem(debugMenuitem1);
     
-                // Manually reload module settings list
-                let debugMenuItem2 = new PopupMenu.PopupMenuItem("Manually reload module settings");
+                // Simulate rechable status changed signal
+                let debugMenuItem2 = new PopupMenu.PopupMenuItem("Manually call 'onDeviceReachableChanged'");
                 debugMenuItem2._signals.connect(debugMenuItem2, "activate", Lang.bind(this, function() {
-                    this.onModuleSettingsChanged();
+                    this.onDeviceReachableChanged();
                 }));
                 debugMenuItemParent.menu.addMenuItem(debugMenuItem2);
 
-                // Destroy menu item present in context menu
-                let debugMenuItem3 = new PopupMenu.PopupMenuItem("Destroy kdec version menu item in context menu");
+                // Simulate context menu settings changed signal
+                let debugMenuItem3 = new PopupMenu.PopupMenuItem("Manually call 'onContextMenuSettingsChanged'");
                 debugMenuItem3._signals.connect(debugMenuItem3, "activate", Lang.bind(this, function() {
-                    if (this.kdecVersionMenuItem) {
-                        this.kdecVersionMenuItem.destroy();
-                    }
+                    this.onContextMenuSettingsChanged();
                 }));
                 debugMenuItemParent.menu.addMenuItem(debugMenuItem3);
+
+                // Simulate pupup menu settings changed signal
+                let debugMenuItem4 = new PopupMenu.PopupMenuItem("Manually call 'onPopupMenuSettingsChanged'");
+                debugMenuItem4._signals.connect(debugMenuItem4, "activate", Lang.bind(this, function() {
+                    this.onPopupMenuSettingsChanged();
+                }));
+                debugMenuItemParent.menu.addMenuItem(debugMenuItem4);
+
+                // Simulate module settings changed signal
+                let debugMenuItem5 = new PopupMenu.PopupMenuItem("Manually call 'onModuleSettingsChanged'");
+                debugMenuItem5._signals.connect(debugMenuItem5, "activate", Lang.bind(this, function() {
+                    this.onPopupMenuSettingsChanged();
+                }));
+                debugMenuItemParent.menu.addMenuItem(debugMenuItem5);
+
+                // Simulate panel settings changed signal
+                let debugMenuItem6 = new PopupMenu.PopupMenuItem("Manually call 'onPanelSettingsChanged'");
+                debugMenuItem6._signals.connect(debugMenuItem6, "activate", Lang.bind(this, function() {
+                    this.onPopupMenuSettingsChanged();
+                }));
+                debugMenuItemParent.menu.addMenuItem(debugMenuItem6);
+
+                // Simulate device list changed signal
+                let debugMenuItem7 = new PopupMenu.PopupMenuItem("Manually call 'onDeviceListChanged'");
+                debugMenuItem7._signals.connect(debugMenuItem7, "activate", Lang.bind(this, function() {
+                    this.onPopupMenuSettingsChanged();
+                }));
+                debugMenuItemParent.menu.addMenuItem(debugMenuItem7);
         
                 this.contextMenuSection.addMenuItem(debugMenuItemParent);
 
