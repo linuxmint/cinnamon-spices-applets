@@ -237,11 +237,6 @@ function copyAndNotify(notificationSource, text, typestring) {
  */
 class AppletNotificationSource extends MessageTray.Source {
     constructor(appletName) {
-        // TODO: Remove
-        if (appletName) {
-            utilWarn("Remove dat parameter m8!", LogLevel.NORMAL, "AppletNotificationSource");
-        }
-
         super(APPLET_NAME);
 
         this._setSummaryIcon(this.createNotificationIcon());

@@ -148,17 +148,17 @@
     },
     "showownid": {
         "type": "switch",
-        "description": "Show ID of this device in the context menu",
+        "description": "Show own ID in the context menu of the applet",
         "default": true
     },
     "showkdecver": {
         "type": "switch",
-        "description": "Show the KDE Connect version in the context menu",
+        "description": "Show KDE Connect version in the context menu of the applet",
         "default": true
     },
     "shownumdevices": {
         "type": "switch",
-        "description": "Show the number of connected devices next to the icon",
+        "description": "Show the number of connected devices next to the icon in the panel",
         "default": true
     },
     "icontype": {
@@ -183,7 +183,7 @@
     },
     "expandfirst": {
         "type": "switch",
-        "description": "Expand the device submenu if there is only 1 device",
+        "description": "Expand the first device sub menu",
         "default": true
     },
     "openconfiguration": {

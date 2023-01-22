@@ -1065,21 +1065,21 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 // Simulate module settings changed signal
                 let debugMenuItem5 = new PopupMenu.PopupMenuItem("Manually call 'onModuleSettingsChanged'");
                 debugMenuItem5._signals.connect(debugMenuItem5, "activate", Lang.bind(this, function() {
-                    this.onPopupMenuSettingsChanged();
+                    this.onModuleSettingsChanged();
                 }));
                 debugMenuItemParent.menu.addMenuItem(debugMenuItem5);
 
                 // Simulate panel settings changed signal
                 let debugMenuItem6 = new PopupMenu.PopupMenuItem("Manually call 'onPanelSettingsChanged'");
                 debugMenuItem6._signals.connect(debugMenuItem6, "activate", Lang.bind(this, function() {
-                    this.onPopupMenuSettingsChanged();
+                    this.onPanelSettingsChanged();
                 }));
                 debugMenuItemParent.menu.addMenuItem(debugMenuItem6);
 
                 // Simulate device list changed signal
                 let debugMenuItem7 = new PopupMenu.PopupMenuItem("Manually call 'onDeviceListChanged'");
                 debugMenuItem7._signals.connect(debugMenuItem7, "activate", Lang.bind(this, function() {
-                    this.onPopupMenuSettingsChanged();
+                    this.onDeviceListChanged();
                 }));
                 debugMenuItemParent.menu.addMenuItem(debugMenuItem7);
         

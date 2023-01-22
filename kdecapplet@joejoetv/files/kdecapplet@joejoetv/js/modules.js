@@ -50,7 +50,7 @@ const DeviceBatteryProxy = Gio.DBusProxy.makeProxyWrapper(DeviceBatteryInterface
  */
 
 /**
- * Class for translating different the battery functionality dbus interface from different versions to a common one
+ * Class for translating different dbus interfaces for the battery module to one common interface
  */
 class BatteryUniversalProxy {
     constructor(deviceID, compatMode) {
@@ -290,6 +290,115 @@ const DeviceSMSInterface = '\
     </interface> \
 </node>';
 const DeviceSMSProxy = Gio.DBusProxy.makeProxyWrapper(DeviceSMSInterface);
+
+
+const DeviceOldTelephonyInterface = '\
+<node> \
+    <interface name="org.kde.kdeconnect.device.telephony"> \
+        <method name="sendSms"> \
+            <arg name="phoneNumber" type="s" direction="in"/> \
+            <arg name="messageBody" type="s" direction="in"/> \
+        </method> \
+    </interface> \
+</node>';
+const DeviceOldTelephonyProxy = Gio.DBusProxy.makeProxyWrapper(DeviceOldTelephonyInterface);
+
+const DeviceOldSMSInterface = '\
+<node> \
+    <interface name="org.kde.kdeconnect.device.sms"> \
+        <method name="launchApp"> \
+        </method> \
+        <method name="requestAllConversations"> \
+        </method> \
+        <method name="sendSms"> \
+            <arg name="phoneNumber" type="s" direction="in"/> \
+            <arg name="messageBody" type="s" direction="in"/> \
+        </method> \
+    </interface> \
+</node>';
+const DeviceOldSMSProxy = Gio.DBusProxy.makeProxyWrapper(DeviceOldSMSInterface);
+
+/**
+ * Class for translating different dbus interfaces for the sms module to one common interface
+ */
+class SMSUniversalProxy {
+    constructor(deviceID, compatMode) {
+
+        this.compatMode = compatMode
+
+        try {
+            switch (this.compatMode.versionLevel) {
+                case 0: // Version 1.3
+                    this.proxy = new DeviceOldTelephonyProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+deviceID+"/telephony");
+                    break;
+                case 1: // Version 1.4
+                    this.proxy = new DeviceOldSMSProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+deviceID+"/sms");
+                    break;
+
+                default: // 21.12.3 / Newer Versions
+                    this.proxy = new DeviceSMSProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+deviceID+"/sms");
+                    break;
+            }
+        } catch (error) {
+            CommonUtils.utilError("Error while creating DBus proxy for the battery module"+error, CommonUtils.LogLevel.MINIMAL, "SMSUniversalProxy");
+        }
+    }
+
+    getAppSupported() {
+        if (this.compatMode.versionLevel == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    launchApp() {
+        try {
+            switch (this.compatMode.versionLevel) {
+                case 0: // Version 1.3, Launching App is not supported
+                    CommonUtils.utilWarn("Tried launching the SMS app with a KDE Connect version, that doesn't support it!", CommonUtils.LogLevel.NORMAL, "SMSUniversalProxy")
+                    return false;
+                default: // Version 1.4 and up
+                    this.proxy.launchAppSync();
+                    return true;
+            }
+        } catch (error) {
+            CommonUtils.utilError("Error while launching KDE Connect SMS App: "+error, CommonUtils.LogLevel.MINIMAL, "SMSUniversalProxy");
+            return false;
+        }
+    }
+
+    sendSMS(phoneNumber, message) {
+        try {
+            switch (this.compatMode.versionLevel) {
+                case 0: // Version 1.3
+                case 1: // Version 1.4
+                    this.proxy.sendSmsSync(phoneNumber, message);
+                    return true;
+            
+                default: // Newer versions
+                    let addressVariant = new GLib.Variant('(s)', [phoneNumber]);
+    
+                    this.proxy.sendSmsSync([addressVariant], message, []);
+                    return true;
+            }
+        } catch (error) {
+            CommonUtils.utilError("Error while sending SMS: "+error, CommonUtils.LogLevel.MINIMAL, "SMSUniversalProxy");
+            return false;
+        }
+    }
+
+    destroy() {
+        // Emit desctory signal to inform other classes
+        this.emit("destroy");
+
+        if (this.proxy) {
+            // Delete reference
+            this.proxy = null
+        }
+    }
+}
+Signals.addSignalMethods(SMSUniversalProxy.prototype);
 
 // l10n support
 Gettext.bindtextdomain(CommonUtils.UUID, GLib.get_home_dir() + "/.local/share/locale");
@@ -1018,14 +1127,20 @@ class ShareModule extends KDECModule {
     }
 
     _destroyMenuItemContent() {
-        this.sendURLMenuItem.destroy();
-        this.sendURLMenuItem = null;
+        if (this.sendURLMenuItem) {
+            this.sendURLMenuItem.destroy();
+            this.sendURLMenuItem = null;
+        }
 
-        this.sendTextMenuItem.destroy();
-        this.sendTextMenuItem = null;
+        if (this.sendTextMenuItem) {
+            this.sendTextMenuItem.destroy();
+            this.sendTextMenuItem = null;
+        }
 
-        this.sendFilesMenuItem.destroy();
-        this.sendFilesMenuItem = null;
+        if (this.sendFilesMenuItem) {
+            this.sendFilesMenuItem.destroy();
+            this.sendFilesMenuItem = null;
+        }
     }
 
     _addMenuItem(menuItem) {
@@ -1247,7 +1362,8 @@ class SMSModule extends KDECModule {
 
     _createProxy() {
         try {
-            this.proxy = new DeviceSMSProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/sms");
+            //this.proxy = new DeviceSMSProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/modules/kdeconnect/devices/"+this.device.getID()+"/sms");
+            this.proxy = new SMSUniversalProxy(this.device.getID(), this.compatMode);
         } catch (error) {
             this.error("Error while connecting to the DBus interface, using default values: "+error, CommonUtils.LogLevel.MINIMAL);
         }
@@ -1262,11 +1378,7 @@ class SMSModule extends KDECModule {
     }
 
     launchSMSApp() {
-        try {
-            this.proxy.launchAppSync();
-        } catch (error) {
-            this.error("Error while launching KDE Connect SMS App: "+error, CommonUtils.LogLevel.MINIMAL);
-        }
+        let successs = this.proxy.launchApp();
     }
 
     sendSMSCallback(status, SMSObject, stderr) {
@@ -1275,16 +1387,11 @@ class SMSModule extends KDECModule {
                 if (SMSObject["phone_number"] && SMSObject["message"]) {
                     let phoneNumber = SMSObject["phone_number"].replace(" ", "");
 
-                    try {
-                        let addressVariant = new GLib.Variant('(s)', [phoneNumber]);
+                    let success = this.proxy.sendSMS(phoneNumber, SMSObject["message"]);
 
-                        this.proxy.sendSmsSync([addressVariant], SMSObject["message"], []);
-
+                    if (success == true) {
                         this.info("Sent SMS to '" + phoneNumber.toString() + "' with message: "+SMSObject["message"].toString(), CommonUtils.LogLevel.INFO);
-                    } catch (error) {
-                        this.error("Error while sending SMS: "+error);
                     }
-
                 } else {
                     this.error("Got malformed response from dialog. Either 'phone_number' or 'message' is missing!", CommonUtils.LogLevel.MINIMAL);
                 }
@@ -1302,11 +1409,15 @@ class SMSModule extends KDECModule {
     }
 
     _destroyMenuItemContent() {
-        this.launchSMSAppMenuItem.destroy();
-        this.launchSMSAppMenuItem = null;
+        if (this.launchSMSAppMenuItem) {
+            this.launchSMSAppMenuItem.destroy();
+            this.launchSMSAppMenuItem = null;
+        }
 
-        this.sendSMSMenuItem.destroy();
-        this.sendSMSMenuItem = null;
+        if (this.launchSMSAppMenuItem) {
+            this.sendSMSMenuItem.destroy();
+            this.sendSMSMenuItem = null;
+        }
     }
 
     _createMenuItem() {
@@ -1321,7 +1432,7 @@ class SMSModule extends KDECModule {
         }
 
         // Create Menu Items
-        if (this.options.enableLaunchSMSApp == true) {
+        if (this.options.enableLaunchSMSApp == true && this.proxy.getAppSupported() == true) {
             this.launchSMSAppMenuItem = new PopupMenu.PopupIconMenuItem(_("Launch SMS App"), "dialog-messages", St.IconType.SYMBOLIC, {});
             this.launchSMSAppMenuItemTooltip = new Tooltips.Tooltip(this.launchSMSAppMenuItem.actor, _("Click to open the KDE Connect SMS App"));
 
@@ -1329,7 +1440,7 @@ class SMSModule extends KDECModule {
             this._addMenuItem(this.launchSMSAppMenuItem);
         }
 
-        if (this.options.enableSendSMS== true) {
+        if (this.options.enableSendSMS == true) {
             this.sendSMSMenuItem = new PopupMenu.PopupIconMenuItem(_("Send SMS"), "chat-message-new-symbolic", St.IconType.SYMBOLIC, {});
             this.sendSMSMenuItemTooltip = new Tooltips.Tooltip(this.sendSMSMenuItem.actor, _("Click to send text to the device"));
 
@@ -1337,6 +1448,12 @@ class SMSModule extends KDECModule {
                 Dialogs.openSendSMSDialog(this.device.getApplet().metadata, this.device.getName(), this.sendSMSCallback.bind(this));
             }, this);
             this._addMenuItem(this.sendSMSMenuItem);
+        }
+    }
+
+    _destroyContent() {
+        if (this.proxy) {
+            this.proxy.destroy();
         }
     }
 }
