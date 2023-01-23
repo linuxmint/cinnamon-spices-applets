@@ -9,7 +9,7 @@ const Main = imports.ui.main;
 const {SignalManager} = imports.misc.signalManager;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 
-const {_} = require('./utils');
+const {_, log} = require('./utils');
 
 class CategoryButton {
     constructor(appThis, category_id, category_name, icon_name, gicon) {
@@ -105,58 +105,24 @@ class CategoryButton {
 
     setButtonStyleNormal() {
         this.actor.set_style_class_name('menu-category-button');
-        this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
-        this.icon.set_opacity(255);
+        this.icon.set_opacity(255);//undo changes made in _setButtonStyleGreyed()
     }
 
     setButtonStyleSelected() {
         this.actor.set_style_class_name('menu-category-button-selected');
-        this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
-    }
-
-    _setButtonStyleHover() {
-        this.actor.set_style_class_name('menu-category-button-hover');
-        //Also use menu-category-button-selected as menu-category-button-hover not defined in most themes
-        this.actor.add_style_class_name('menu-category-button-selected');
-
-        //-----some style tweaks for menu-category-button-hover class.-----
-        let themePath = Main.getThemeStylesheet();
-        if (!themePath) themePath = 'Cinnamon default';
-        [
-        ['/Mint-Y',             'background-color: #d8d8d8; color: black;'],//Mint-Y & Mint-Y-<color> (red)
-        ['/Mint-Y-Dark',        'background-color: #404040;'],//Mint-Y-Dark & Mint-Y-Dark-<color> (light grey)
-        ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],//(normal)
-        ['/Mint-X-',            'background-color: #d4d4d4; color: black; border-image: none;'],//Mint-X-<color>
-        ['/Mint-X-Dark',        ''],//undo previous '/Mint-X-' changes for '/Mint-X-Dark' //(light grey)
-        ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],//normal
-        ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); ' +   //normal
-                                                    'background-gradient-end: rgba(255,255,255,0.03);'],
-        ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],//Manjaro (normal)
-        ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],//Manjaro default
-        ['/Dracula',            'background-color: #2d2f3d'],
-        ['/Matcha-',            'background-color: white;'],//other Matcha- and Matcha-light- themes
-        ['/Matcha-dark-aliz',   'background-color: #2d2d2d;'],
-        ['/Matcha-dark-azul',   'background-color: #2a2d36;'],
-        ['/Matcha-dark-sea',    'background-color: #273136;'],
-        ['/Matcha-dark-cold',   'background-color: #282b33;'],
-        //Yaru are ubuntu cinnamon themes:
-        ['/Yaru-Cinnamon-Light/','background-color: #d8d8d8; color: black;'],
-        ['/Yaru-Cinnamon-Dark/','background-color: #404040;']
-        ].forEach(fix => {
-            if (themePath.includes(fix[0])) {
-                this.actor.set_style(fix[1]);
-            }
-        });
     }
 
     _setButtonStyleGreyed() {
         this.actor.set_style_class_name('menu-category-button-greyed');
-        this.actor.set_style(null);//undo fixes that may have been applied in _setButtonStyleHover();
-
-        let icon_opacity = this.icon.get_theme_node().get_double('opacity');
-        icon_opacity = Math.min(Math.max(0, icon_opacity), 1);
-        if (icon_opacity) { // Don't set opacity to 0 if not defined
-            this.icon.set_opacity(icon_opacity * 255);
+        
+        const icon_opacity = this.icon.get_theme_node().lookup_double('opacity', true);
+        if (icon_opacity[0]) {
+            const opacity = Math.min(Math.max(0, icon_opacity[1]), 1);
+            if (opacity) { // Don't set opacity to 0 if not defined
+                this.icon.set_opacity(opacity * 255);
+            }
+        } else { //emoji
+            this.icon.set_opacity(0.5 * 255);
         }
     }
 
@@ -182,7 +148,7 @@ class CategoryButton {
             return Clutter.EVENT_STOP;
         }
         if (this.appThis.settings.categoryClick) {
-            this._setButtonStyleHover();
+            this.actor.add_style_pseudo_class('hover');
         } else {
             this.selectCategory();
         }
@@ -195,12 +161,8 @@ class CategoryButton {
         }
         this.has_focus = false;
 
-        //If this category is the this.appThis.currentCategory then we leave this button with
-        //menu-category-button-selected style even though key or mouse focus is moving elsewhere so
-        //that the current category is always indicated.
-        if (this.appThis.currentCategory !== this.id && this.id !== 'emoji:' ||
-                        this.id === 'emoji:' && !this.appThis.currentCategory.startsWith('emoji:')) {
-            this.setButtonStyleNormal(); //i.e. remove hover style
+        if (this.actor.has_style_pseudo_class('hover')) {
+            this.actor.remove_style_pseudo_class('hover');
         }
     }
 

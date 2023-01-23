@@ -83,6 +83,7 @@ class AppButton {
             this.actor.set_style('padding-left: 0px; padding-right: 0px;');
             this.setGridButtonWidth();
         }
+
         if (this.icon && this.appThis.getAppIconSize() > 0) {
             this.actor.add(this.icon, { x_fill: false, y_fill: false,
                                         x_align: isListView ? St.Align.START : St.Align.MIDDLE,
@@ -477,6 +478,18 @@ class AppsView {
                 if (this.column > this.getGridValues().columns - 1) {
                     this.column = 0;
                     this.rownum++;
+                }
+
+                //set minimum top & bottom padding for appbuttons as theme node is designed for list view.
+                const buttonTopPadding = appButton.actor.get_theme_node().get_padding(St.Side.TOP);
+                const buttonBottomPadding = appButton.actor.get_theme_node().get_padding(St.Side.BOTTOM);
+                
+                const MIN_PADDING = 8;
+                if (buttonTopPadding < MIN_PADDING) {
+                    appButton.actor.style += `padding-top: ${MIN_PADDING}px; `;
+                }
+                if (buttonBottomPadding < MIN_PADDING) {
+                    appButton.actor.style += `padding-bottom: ${MIN_PADDING}px; `;
                 }
             }
         });

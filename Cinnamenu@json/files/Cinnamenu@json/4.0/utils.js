@@ -23,6 +23,10 @@ const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+|_|&|\\)|\S+?(\s|$|-|=|
 const graphemeBaseChars = s => //decompose and remove discritics.
                 s.normalize('NFKD').replace(/[\u0300-\u036f]/g, "");
 
+const log = (...args) => {
+    global.log('[Cinnamenu@json]', ...args);
+}
+
 //===========================================================
 
 const getThumbnail_gicon = (uri, mimeType) => {
@@ -243,6 +247,7 @@ const getChromiumProfileDirs = function() {
 module.exports = {  _,
                     wordWrap,
                     graphemeBaseChars,
+                    log,
                     getThumbnail_gicon,
                     showTooltip,
                     hideTooltipIfVisible,

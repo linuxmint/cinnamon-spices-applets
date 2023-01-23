@@ -22,7 +22,7 @@ const {addTween} = imports.ui.tweener;
 
 const {PopupResizeHandler} = require('./resizer');
 const {AppletSettings} = require('./settings');
-const {_, graphemeBaseChars, searchStr} = require('./utils');
+const {_, graphemeBaseChars, log, searchStr} = require('./utils');
 const {ContextMenu} = require('./contextmenu');
 const {AppsView} = require('./appsview');
 const {CategoriesView} = require('./categoriesview');
@@ -408,7 +408,9 @@ class CinnamenuApplet extends TextIconApplet {
         // invocation.
         if (!this.lastRenderTime) this.lastRenderTime = 0;
         const now = Date.now();
-        if ((now - this.lastRenderTime) <= 250) return;
+        if ((now - this.lastRenderTime) <= 250) {
+            return;
+        }
         this.lastRenderTime = now;
 
         this._destroyDisplayed();
@@ -517,13 +519,14 @@ class CinnamenuApplet extends TextIconApplet {
 
         //find sidebarOuterBox vertical padding
         const themeNode = this.sidebar.sidebarOuterBox.get_theme_node();
-        const topAndBottomPadding = themeNode.lookup_length('padding-top', true)[1] +
-                                            themeNode.lookup_length('padding-bottom', true)[1];
-        let padding = Math.max(themeNode.lookup_length('padding', true)[1] * 2, topAndBottomPadding);
-
+        const verticalPadding = Math.max(   themeNode.get_length('padding-top') +
+                                            themeNode.get_length('padding-bottom'),
+                                            themeNode.get_length('padding') * 2);
+                
         //set sidebarScrollBox height
-        this.sidebar.sidebarScrollBox.set_height(-1);
-        this.sidebar.sidebarScrollBox.set_height(Math.min(appsHeight - padding, this.sidebar.sidebarScrollBox.height));
+        this.sidebar.sidebarScrollBox.set_height(-1);//undo previous set_height()
+        this.sidebar.sidebarScrollBox.set_height(Math.min(appsHeight - verticalPadding,
+                                                            this.sidebar.sidebarScrollBox.height));
 
         //------------width-------------
         //Note: the stored menu width value is less than the menu's actual width because it doesn't
@@ -1573,8 +1576,8 @@ class CinnamenuApplet extends TextIconApplet {
         //When sidebar is not on the left, limit excessive mainBox left padding + categoriesBox left
         //padding to 20px by subtracting the difference from categoriesBox left padding.
         if (sidebarPlacement !== SidebarPlacement.LEFT) {
-            const catLpadding = this.categoriesView.categoriesBox.get_theme_node().get_padding(3);
-            const mainBoxLpadding = this.mainBox.get_theme_node().get_padding(3);
+            const catLpadding = this.categoriesView.categoriesBox.get_theme_node().get_padding(St.Side.LEFT);
+            const mainBoxLpadding = this.mainBox.get_theme_node().get_padding(St.Side.LEFT);
             const excessPadding = Math.max(catLpadding + mainBoxLpadding - 20, 0);//=total padding > 20px
             if (excessPadding > 0) {
                 this.categoriesView.categoriesBox.style = `padding-left: ${
@@ -2130,15 +2133,15 @@ class SearchView {
                                         this.appThis.settings.sidebarPlacement === SidebarPlacement.LEFT) {
             //set left padding of searchBox to match right padding
             const searchBoxNode = this.searchBox.get_theme_node();
-            const searchBoxPaddingRight = searchBoxNode.get_padding(1);
+            const searchBoxPaddingRight = searchBoxNode.get_padding(St.Side.RIGHT);
             this.searchBox.style += `padding-left: ${searchBoxPaddingRight}px; `;
 
             //deal with uneven searchBox margins and uneven mainBox paddings by setting searchBox margins.
-            const searchBoxRightMargin = searchBoxNode.get_margin(3);
+            const searchBoxMarginLeft = searchBoxNode.get_margin(St.Side.LEFT);
             const mainBoxNode = this.appThis.mainBox.get_theme_node();
-            const mainBoxPaddingRight = mainBoxNode.get_padding(1);
-            const mainBoxPaddingLeft = mainBoxNode.get_padding(3);
-            const newMargin = Math.max(searchBoxRightMargin, mainBoxPaddingRight, mainBoxPaddingLeft);
+            const mainBoxPaddingRight = mainBoxNode.get_padding(St.Side.RIGHT);
+            const mainBoxPaddingLeft = mainBoxNode.get_padding(St.Side.LEFT);
+            const newMargin = Math.max(searchBoxMarginLeft, mainBoxPaddingRight, mainBoxPaddingLeft);
             this.searchBox.style += `margin-left: ${newMargin - mainBoxPaddingLeft}px; ` +
                                                 `margin-right: ${newMargin - mainBoxPaddingRight}px; `;
         }

@@ -65,8 +65,6 @@ class ContextMenuItem extends PopupBaseMenuItem {
     }
 }
 
-const Cinnamon = imports.gi.Cinnamon;
-
 class ContextMenu {
     constructor(appThis) {
         this.appThis = appThis;
