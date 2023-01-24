@@ -1,7 +1,9 @@
 {
-  "version": 1.5,
+  "version": "1.5.2",
   "uuid": "c-eyes@anaximeno",
   "name": "Cinnamon Eyes",
-  "description": "An eye on the panel that follows the movement of your mouse",
-  "url": "https://github.com/anaximeno/c-eyes"
+  "multiverion": true,
+  "description": "An eye on the panel that follows the movement of your cursor",
+  "url": "https://github.com/anaximeno/c-eyes",
+  "cinnamon-version": ["5.4", "5.6"]
 }
