@@ -352,6 +352,7 @@ class Eye extends Applet.Applet {
         const margin = 2 * this.eye_margin;
         this.area.set_width(EYE_AREA_WIDTH + margin);
         this.area.set_height(EYE_AREA_HEIGHT + margin);
+        this.area.queue_repaint();
     }
 
     setMouseCircleActive(enabled) {
