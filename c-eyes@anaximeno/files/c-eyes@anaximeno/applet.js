@@ -19,13 +19,13 @@
 
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
-const Panel = imports.ui.panel;
 const Settings = imports.ui.settings;
 
 const Mainloop = imports.mainloop;
 
-const { Atspi, Clutter, GLib, GObject, Gio, St } = imports.gi;
+const { Atspi, Clutter, GLib, Gio, St } = imports.gi;
 
+const { debounce } = require("./helper.js");
 
 const EYE_AREA_WIDTH = 34;
 const EYE_AREA_HEIGHT = 16;
@@ -58,14 +58,14 @@ class Eye extends Applet.Applet {
             Settings.BindingDirection.IN,
             "eye-repaint-interval",
             "eye_repaint_interval",
-            (e) => this.setActive(true)
+            debounce((e) => this.setActive(true), 400),
         );
 
         this.settings.bindProperty(
             Settings.BindingDirection.IN,
             "mouse-circle-repaint-interval",
             "mouse_circle_repaint_interval",
-            (e) => this.setMouseCircleActive(null)
+            debounce((e) => this.setMouseCircleActive(null), 400),
         );
 
         this.settings.bindProperty(
@@ -189,13 +189,18 @@ class Eye extends Applet.Applet {
         this.setMouseCirclePropertyUpdate();
 
         this._file_mem_cache = {};
-
         this._last_mouse_x_pos = undefined;
         this._last_mouse_y_pos = undefined;
     }
 
     on_applet_removed_from_panel(deleteConfig) {
         this.destroy();
+    }
+
+    on_applet_reloaded(deleteConfig) {
+        this._file_mem_cache = {};
+        this._last_mouse_x_pos = undefined;
+        this._last_mouse_y_pos = undefined;
     }
 
     on_applet_clicked(event) {

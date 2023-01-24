@@ -99,9 +99,9 @@
 	},
 	"eye-repaint-interval": {
 		"type": "spinbutton",
-		"default": 100,
+		"default": 90,
 		"min": 5,
-		"max": 500,
+		"max": 200,
 		"step": 5,
 		"description": "Eye Repaint Interval"
 	},
@@ -132,7 +132,7 @@
 	"mouse-circle-opacity": {
 		"type": "spinbutton",
 		"description": "Mouse Circle Opacity",
-		"default": 200,
+		"default": 180,
 		"min": 0,
 		"max": 255,
 		"step": 5
