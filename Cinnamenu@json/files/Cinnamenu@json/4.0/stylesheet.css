@@ -41,8 +41,12 @@ margin to override*/
 
 .menu-category-button-greyed {}
 
-.menu-category-button-hover {} /*and .menu-category-button-selected. Used when
-"activate categories on click" option is set.*/
+.menu-category-button:hover {  /*Only used when "activate categories on click" option is set.*/
+    background-color: rgba(128,128,128,0.2);
+    border-image: none;
+}
+
+/*.menu-category-button-hover {} No longer used. Use .menu-category-button:hover instead.*/
 
 .menu-category-button:highlighted, /*Used to highlight category containing newly installed apps.*/
 .menu-category-button-selected:highlighted {
@@ -73,9 +77,13 @@ margin to override*/
     /*text-align: center;*//*known bug: causes label to jump about when resizing menu*/
 }
 
-.menu-application-button {} /*(Note: in grid view, .menu-application-button l&r padding are set to 0px)*/
+.menu-application-button {} /*Note: in grid view mode, .menu-application-button l&r padding are
+                              set to 0px in the applet and also in grid view mode, top & bottom
+                              padding are set to minimum of 8px.*/
 
-.menu-application-button-label {}
+.menu-application-button-label {
+   
+}
 
 .menu-application-button-selected {}
 
