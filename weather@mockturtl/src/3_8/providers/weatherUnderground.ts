@@ -559,7 +559,7 @@ export class WeatherUnderground extends BaseProvider {
             case 40:
                 return {
                     customIcon: "rain-symbolic",
-                    icons: ["weather-rain", "weather-freezing-rain"],
+                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers", "weather-showers-scattered"],
                     main: _("Heavy Rain"),
                     description: _("Heavy Rain"),
                 };
