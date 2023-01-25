@@ -58,19 +58,19 @@ class Eye extends Applet.Applet {
 		this.settings.bind(
 			"eye-repaint-interval",
 			"eye_repaint_interval",
-			debounce((e) => this.setActive(true), 400)
+			debounce((e) => this.setActive(true), 200)
 		);
 
 		this.settings.bind(
 			"mouse-circle-repaint-interval",
 			"mouse_circle_repaint_interval",
-			debounce((e) => this.setMouseCircleActive(null), 400)
+			debounce((e) => this.setMouseCircleActive(null), 200)
 		);
 
 		this.settings.bind(
 			"fade-timeout",
 			"fade_timeout",
-			this.on_property_updated
+			debounce((e) => this.on_property_updated(e), 200),
 		);
 
 		this.settings.bind(
@@ -88,24 +88,24 @@ class Eye extends Applet.Applet {
 		this.settings.bind(
 			"eye-line-width",
 			"eye_line_width",
-			this.on_property_updated
+			debounce((e) => this.on_property_updated(e), 200),
 		);
 
 		this.settings.bind(
 			"eye-margin",
 			"eye_margin",
-			this.on_property_updated
+			debounce((e) => this.on_property_updated(e), 200),
 		);
 
 		this.settings.bind(
 			"mouse-circle-size",
 			"mouse_circle_size",
-			this.on_property_updated
+			debounce((e) => this.on_property_updated(e), 200),
 		);
 
 		this.settings.bind(
 			"mouse-circle-enable",
-			"mouse_circle_always",
+			"mouse_circle_enable",
 			this.on_mouse_click_enable_updated
 		);
 
@@ -160,7 +160,7 @@ class Eye extends Applet.Applet {
 		this.settings.bind(
 			"mouse-circle-opacity",
 			"mouse_circle_opacity",
-			this.on_property_updated
+			debounce((e) => this.on_property_updated(e), 200),
 		);
 	}
 
@@ -211,8 +211,11 @@ class Eye extends Applet.Applet {
 	}
 
 	on_mouse_click_enable_updated(event) {
-		this.setMouseCircleActive(this.mouse_circle_enable);
+		if (this.mouse_circle_enable === false)
+			this.mouse_circle_show = false;
+		this.setMouseCircleActive(this.mouse_circle_show);
 		this.on_property_updated(event);
+		this.area.queue_repaint();
 	}
 
 	destroy() {
@@ -308,8 +311,10 @@ class Eye extends Applet.Applet {
 					transition: "easeOutQuad",
 					onComplete: function () {
 						Main.uiGroup.remove_child(actor);
-						actor.destroy;
+
+						actor.destroy();
 						actor = null;
+
 						if (self.mouse_pointer) {
 							self.mouse_pointer.gicon = self._get_mouse_circle_icon(self.data_dir, self.mouse_circle_mode, 'default', self.mouse_circle_color);
 						}
