@@ -1,0 +1,96 @@
+{
+    "common_label": {
+        "type": "header",
+        "description": "Common"
+    },
+	"refresh": {
+		"type": "spinbutton",
+		"default": 2,
+		"min": 1,
+		"max": 5,
+		"step": 1,
+		"description": "Sections info refresh rate (seconds)",
+		"tooltip": "CPUs, memory, network info refresh rate"
+	},
+    "cpu_label": {
+        "type": "header",
+        "description": "CPUs and memory sections"
+    },
+	"size": {
+		"type": "spinbutton",
+		"default": 40,
+		"min": 0,
+		"max": 1000,
+		"step": 1,
+		"description": "CPUs and memory panel sections widths (px)",
+		"tooltip": "CPUs and memory panel sections widths"
+	},
+	"temp_refresh": {
+		"type": "spinbutton",
+		"default": 5,
+		"min": 2,
+		"max": 10,
+		"step": 1,
+		"description": "CPUs temperature refresh rate (seconds)",
+		"tooltip": "CPUs temperature refresh rate"
+	},
+	"cold_temp": {
+		"type": "spinbutton",
+		"default": 45,
+		"min": 0,
+		"max": 100,
+		"step": 1,
+		"description": "CPU cold temperature (°C)",
+		"tooltip": "CPUs' temperature below which they are regarded as cold (for color representation in the panel)"
+	},
+	"color_cold": {
+		"type": "colorchooser",
+		"default": "#FFF38D",
+		"description": "Color for CPU cold temperature"
+	},
+	"hot_temp": {
+		"type": "spinbutton",
+		"default": 70,
+		"min": 0,
+		"max": 200,
+		"step": 1,
+		"description": "CPU hot temperature (°C)",
+		"tooltip": "CPUs' temperature above which they are regarded as hot (for color representation in the panel)"
+	},
+	"color_hot": {
+		"type": "colorchooser",
+		"default": "#FF0000",
+		"description": "Color for CPU hot temperature"
+	},
+    "sensors_cmd": {
+        "type" : "entry",
+        "default" : "/usr/bin/sensors",
+        "description" : "Command to start 'sensors'",
+		"tooltip": "Command to start 'sensors'. Use 'which sensors' command to find it. Install 'lmsensors' package, if not found"
+    },
+    "net_label": {
+        "type": "header",
+        "description": "Network section"
+    },
+	"net_size": {
+		"type": "spinbutton",
+		"default": 40,
+		"min": 0,
+		"max": 1000,
+		"step": 1,
+		"description": "Network panel section width (px)",
+		"tooltip": "Network panel section width"
+	},
+    "net_style": {
+        "type" : "entry",
+        "default" : "text-align: left; margin-left: 5px; font-size: 8pt;",
+        "description" : "Network panel section style",
+		"tooltip": "Network panel section HTML style (e.g.: text-align: left; margin-left: 5px; font-size: 8pt;)"
+    },
+   "net_black_list": {
+        "type" : "entry",
+        "default" : "lo",
+        "description" : "Network interfaces blacklist",
+		"tooltip": "Semicolon-separated network interfaces list not to consider for counting traffic"
+    }
+}
