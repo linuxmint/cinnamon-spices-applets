@@ -70,7 +70,7 @@ class Eye extends Applet.Applet {
 		this.settings.bind(
 			"fade-timeout",
 			"fade_timeout",
-			debounce((e) => this.on_property_updated(e), 200),
+			debounce((e) => this.on_property_updated(e), 200)
 		);
 
 		this.settings.bind(
@@ -88,19 +88,19 @@ class Eye extends Applet.Applet {
 		this.settings.bind(
 			"eye-line-width",
 			"eye_line_width",
-			debounce((e) => this.on_property_updated(e), 200),
+			debounce((e) => this.on_property_updated(e), 200)
 		);
 
 		this.settings.bind(
 			"eye-margin",
 			"eye_margin",
-			debounce((e) => this.on_property_updated(e), 200),
+			debounce((e) => this.on_property_updated(e), 200)
 		);
 
 		this.settings.bind(
 			"mouse-circle-size",
 			"mouse_circle_size",
-			debounce((e) => this.on_property_updated(e), 200),
+			debounce((e) => this.on_property_updated(e), 200)
 		);
 
 		this.settings.bind(
@@ -160,7 +160,7 @@ class Eye extends Applet.Applet {
 		this.settings.bind(
 			"mouse-circle-opacity",
 			"mouse_circle_opacity",
-			debounce((e) => this.on_property_updated(e), 200),
+			debounce((e) => this.on_property_updated(e), 200)
 		);
 	}
 
