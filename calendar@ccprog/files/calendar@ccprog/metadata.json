@@ -3,6 +3,6 @@
     "name": "Calendar with public Holidays",
     "description": "Calendar applet with public holiday data provided by Enrico service",
     "max-instances": -1,
-    "version": "1.2.1",
+    "version": "1.2.2",
     "multiversion": true
 }
