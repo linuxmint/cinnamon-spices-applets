@@ -1,12 +1,7 @@
 # Cinnamon Eyes
 
 An extension that adds an eye to the panel bar that follows your cursor.
-Currently, it is being developed at [anaximeno/c-eyes](https://github.com/anaximeno/c-eyes),
-and mantained by [Anaxímeno Brito](https://github.com/anaximeno).
-
-## Notes
-
-The menu of the panel will not show up with a right click on the panel if the eye click animation is active, in that case, the best solution is to click in the eye and deactivate the click animation. This only happens to the panel menu, and not on the panel items' menu.
+Currently, it is being maintained at [anaximeno/c-eyes](https://github.com/anaximeno/c-eyes).
 
 ### Contributors
 

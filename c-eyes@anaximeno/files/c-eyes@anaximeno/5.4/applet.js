@@ -105,13 +105,13 @@ class Eye extends Applet.Applet {
 		this.settings.bind(
 			"mouse-circle-enable",
 			"mouse_circle_enable",
-			this.on_mouse_click_enable_updated
+			this.on_mouse_circle_enable_updated
 		);
 
 		this.settings.bind(
 			"mouse-circle-always",
 			"mouse_circle_always",
-			this.on_property_updated
+			this.on_mouse_circle_enable_updated
 		);
 
 		this.settings.bind(
@@ -209,7 +209,7 @@ class Eye extends Applet.Applet {
 		this.setEyePropertyUpdate();
 	}
 
-	on_mouse_click_enable_updated(event) {
+	on_mouse_circle_enable_updated(event) {
 		if (this.mouse_circle_enable === false)
 			this.mouse_circle_show = false;
 		this.setMouseCircleActive(this.mouse_circle_show);
@@ -279,63 +279,64 @@ class Eye extends Applet.Applet {
 		return true;
 	}
 
-	_mouseCircleClick(event) {
-		let clickAnimation = function (self, click_type, color) {
-			let [mouse_x, mouse_y, mask] = global.get_pointer();
-			let actor_scale = self.mouse_circle_size > 20 ? 1.5 : 3;
+	_clickAnimation(click_type, color) {
+		let [mouse_x, mouse_y, mask] = global.get_pointer();
+		let actor_scale = this.mouse_circle_size > 20 ? 1.5 : 3;
 
-			let icon = self._get_mouse_circle_icon(self.data_dir, self.mouse_circle_mode, click_type, color);
+		let icon = this._get_mouse_circle_icon(this.data_dir, this.mouse_circle_mode, click_type, color);
 
-			if (self.mouse_pointer) {
-				self.mouse_pointer.gicon = icon;
-			}
+		if (this.mouse_pointer) {
+			this.mouse_pointer.gicon = icon;
+		}
 
-			let actor = new St.Icon({
-				x: mouse_x - (self.mouse_circle_size / 2),
-				y: mouse_y - (self.mouse_circle_size / 2),
-				reactive: false,
-				can_focus: false,
-				track_hover: false,
-				icon_size: self.mouse_circle_size,
-				opacity: self.mouse_circle_opacity,
-				gicon: icon
-			});
+		let actor = new St.Icon({
+			x: mouse_x - (this.mouse_circle_size / 2),
+			y: mouse_y - (this.mouse_circle_size / 2),
+			reactive: false,
+			can_focus: false,
+			track_hover: false,
+			icon_size: this.mouse_circle_size,
+			opacity: this.mouse_circle_opacity,
+			gicon: icon
+		});
 
-			Main.uiGroup.add_child(actor);
+		Main.uiGroup.add_child(actor);
 
-			actor.ease({
-				x: mouse_x - (self.mouse_circle_size * actor_scale / 2),
-				y: mouse_y - (self.mouse_circle_size * actor_scale / 2),
-				scale_x: actor_scale,
-				scale_y: actor_scale,
-				opacity: 0,
-				duration: self.fade_timeout,
-				mode: Clutter.AnimationMode.EASE_OUT_QUAD,
-				onComplete: function () {
-					Main.uiGroup.remove_child(actor);
+		actor.ease({
+			x: mouse_x - (this.mouse_circle_size * actor_scale / 2),
+			y: mouse_y - (this.mouse_circle_size * actor_scale / 2),
+			scale_x: actor_scale,
+			scale_y: actor_scale,
+			opacity: 0,
+			duration: this.fade_timeout,
+			mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+			onComplete: function () {
+				Main.uiGroup.remove_child(actor);
 
-					actor.destroy();
-					actor = null;
+				actor.destroy();
+				actor = null;
 
-					if (self.mouse_pointer) {
-						self.mouse_pointer.gicon = self._get_mouse_circle_icon(self.data_dir, self.mouse_circle_mode, 'default', self.mouse_circle_color);
-					}
+				if (this.mouse_pointer) {
+					this.mouse_pointer.gicon = this._get_mouse_circle_icon(
+						this.data_dir, this.mouse_circle_mode, 'default', this.mouse_circle_color);
 				}
-			});
-		};
+			}
+		});
+	}
 
+	_mouseCircleClick(event) {
 		switch (event.type) {
 			case 'mouse:button:1p':
 				if (this.mouse_circle_left_click_enable)
-					clickAnimation(this, 'left_click', this.mouse_circle_left_click_color);
+					this._clickAnimation('left_click', this.mouse_circle_left_click_color);
 				break;
 			case 'mouse:button:2p':
 				if (this.mouse_circle_middle_click_enable)
-					clickAnimation(this, 'middle_click', this.mouse_circle_middle_click_color);
+					this._clickAnimation('middle_click', this.mouse_circle_middle_click_color);
 				break;
 			case 'mouse:button:3p':
 				if (this.mouse_circle_right_click_enable)
-					clickAnimation(this, 'right_click', this.mouse_circle_right_click_color);
+					this._clickAnimation('right_click', this.mouse_circle_right_click_color);
 				break;
 		}
 	}
@@ -376,16 +377,20 @@ class Eye extends Applet.Applet {
 				this.mouse_circle_repaint_interval, this._mouseCircleTimeout.bind(this)
 			);
 
-			this.mouse_pointer = new St.Icon({
-				reactive: false,
-				can_focus: false,
-				track_hover: false,
-				icon_size: this.mouse_circle_size,
-				opacity: this.mouse_circle_opacity,
-				gicon: this._get_mouse_circle_icon(this.data_dir, this.mouse_circle_mode, 'default', this.mouse_circle_color),
-			});
+			if (this.mouse_circle_always) {
+				this.mouse_pointer = new St.Icon({
+					reactive: false,
+					can_focus: false,
+					track_hover: false,
+					icon_size: this.mouse_circle_size,
+					opacity: this.mouse_circle_opacity,
+					gicon: this._get_mouse_circle_icon(
+						this.data_dir, this.mouse_circle_mode, 'default', this.mouse_circle_color
+					),
+				});
 
-			Main.uiGroup.add_child(this.mouse_pointer);
+				Main.uiGroup.add_child(this.mouse_pointer);
+			}
 
 			this.setMouseCirclePropertyUpdate();
 			this._mouseCircleTimeout();

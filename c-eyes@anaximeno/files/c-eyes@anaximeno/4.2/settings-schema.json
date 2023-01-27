@@ -122,9 +122,9 @@
 		"dependency": "mouse-circle-enable"
 	},
 	"mouse-circle-always": {
-		"type": "checkbox",
-		"default": false,
-		"description": "Mouse Circle Always"
+		"type": "generic",
+		"description": "Mouse Circle Always",
+		"value": false
 	},
 	"mouse-circle-left-click-enable": {
 		"type": "checkbox",
