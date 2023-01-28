@@ -183,7 +183,7 @@
     },
     "expandfirst": {
         "type": "switch",
-        "description": "Expand the first device sub menu",
+        "description": "Expand the first device sub menu automatically",
         "default": true
     },
     "openconfiguration": {

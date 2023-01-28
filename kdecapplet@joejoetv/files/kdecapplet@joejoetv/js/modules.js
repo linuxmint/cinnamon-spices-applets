@@ -57,6 +57,8 @@ class BatteryUniversalProxy {
 
         this.compatMode = compatMode
 
+        CommonUtils.utilInfo("Creating new Object of proxy class", CommonUtils.LogLevel.DEBUG, "BatteryUniversalProxy");
+
         try {
             switch (this.compatMode.versionLevel) {
                 case 0: // Version 1.3
@@ -718,7 +720,7 @@ class DeviceInfoModule extends KDECModule {
 
     _createMenuItem() {
         // Create Menu Item
-        this.menuItem = new PopupMenu.PopupIconMenuItem(_("ID: ") + this.device.getID(), this._getTypeIconName(), St.IconType.SYMBOLIC);
+        this.menuItem = new PopupMenu.PopupIconMenuItem(_("ID: {id}").replace("{id}", this.device.getID().toString()), this._getTypeIconName(), St.IconType.SYMBOLIC);
         
         // Copy ID, when clicked
         this.menuItem._signals.connect(this.menuItem, "activate", function(menuItem, keepMenu) {

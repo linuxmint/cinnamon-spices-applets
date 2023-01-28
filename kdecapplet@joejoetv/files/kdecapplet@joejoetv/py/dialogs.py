@@ -257,8 +257,6 @@ if __name__ == "__main__":
             }
             
             if response == Gtk.ResponseType.OK:
-                #bytemessage = bytes(smsdialog.get_message_text(), "utf-8")
-                #print('"' + smsdialog.get_phone_number_text() + '"|"' + GLib.base64_encode(bytemessage) + '"')
                 print(json.dumps(returnObject))
                 
                 smsdialog.destroy()
@@ -272,8 +270,6 @@ if __name__ == "__main__":
             response = textdialog.run()
             
             if response == Gtk.ResponseType.OK:
-                #bytemessage = bytes(textdialog.get_text(), "utf-8")
-                #print('"' + GLib.base64_encode(bytemessage) + '"')
                 print(json.dumps(textdialog.get_text()))
                 
                 textdialog.destroy()
@@ -299,7 +295,6 @@ if __name__ == "__main__":
             response = filechooserdialog.run()
             
             if response == Gtk.ResponseType.ACCEPT:
-                #print('"' + filechooserdialog.get_filename() + '"')
                 print(json.dumps(filechooserdialog.get_filename()))
                 
                 filechooserdialog.destroy()

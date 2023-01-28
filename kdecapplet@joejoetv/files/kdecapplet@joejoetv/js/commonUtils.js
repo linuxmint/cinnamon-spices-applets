@@ -35,26 +35,20 @@ var LogLevel = {
     MINIMAL: 4
 }
 
-function logLevelName(level) {
-    switch (level) {
-        case LogLevel.DEBUG:
-            return "DEBUG";
-        case LogLevel.VERBOSE:
-            return "VERBOSE";
-        case LogLevel.INFO:
-            return "INFO";
-        case LogLevel.NORMAL:
-            return "NORMAL";
-        default:
-            return "";
-    }
-}
+// lookup table for log level representant string
+var logLevelNames = {};
+
+logLevelNames[LogLevel.DEBUG] = "DEBUG";
+logLevelNames[LogLevel.VERBOSE] = "VERBOSE";
+logLevelNames[LogLevel.INFO] = "INFO";
+logLevelNames[LogLevel.NORMAL] = "NORMAL";
+logLevelNames[LogLevel.MINIMAL] = "MINIMAL";
 
 // Log level for whole applet
-const LOG_LEVEL = LogLevel.DEBUG;
+const LOG_LEVEL = LogLevel.INFO;
 
 // Flag to enable debug features
-const DEBUG_FEATURES = true;
+const DEBUG_FEATURES = false;
 
 /**
  * General logging functions with log level support
@@ -69,7 +63,7 @@ function logInfo(msg, level) {
     if (Object.values(LogLevel).includes(level) == false) {
         global.logError("["+UUID+"] "+"Invalid log level: '"+level+"' (Message: '"+msg+"')");
     } else if (level >= LOG_LEVEL) {
-        global.log("["+UUID+"/"+logLevelName(level)+"] "+msg);
+        global.log("["+UUID+"/"+logLevelNames[level]+"] "+msg);
     }
 }
 
@@ -82,7 +76,7 @@ function logWarn(msg, level) {
     if (Object.values(LogLevel).includes(level) == false) {
         global.logError("["+UUID+"] "+"Invalid log level: '"+level+"' (Message: '"+msg+"')");
     } else if (level >= LOG_LEVEL) {
-        global.logWarning("["+UUID+"/"+logLevelName(level)+"] "+msg);
+        global.logWarning("["+UUID+"/"+logLevelNames[level]+"] "+msg);
     }
 }
 
@@ -95,7 +89,7 @@ function logError(msg, level) {
     if (Object.values(LogLevel).includes(level) == false) {
         global.logError("["+UUID+"] "+"Invalid log level: '"+level+"' (Message: '"+msg+"')");
     } else if (level >= LOG_LEVEL) {
-        global.logError("["+UUID+"/"+logLevelName(level)+"] "+msg);
+        global.logError("["+UUID+"/"+logLevelNames[level]+"] "+msg);
     }
 }
 
@@ -403,7 +397,6 @@ class MenuItemIconButton {
 
     setHover(hover) {
         if (hover != this.hover && this.enabled == true) {
-            utilInfo("Set Hover: "+hover, "MenuItemIconButton");
             this.hover = hover;
             this.actor.change_style_pseudo_class("hover", hover);
 

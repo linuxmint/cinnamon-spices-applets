@@ -12,6 +12,7 @@ const SignalManager = imports.misc.signalManager;
 const Lang = imports.lang;
 const Gettext = imports.gettext;
 const Signals = imports.signals;
+const Extension = imports.ui.extension;
 
 // Applet imports
 const Modules = require("./js/modules.js");
@@ -441,11 +442,15 @@ class Device {
         if (this.isReachable == true) {
             let moduleOptions = this.applet.options.modules;
 
+            this.info("Loaded Device Plugins: "+this.plugins.toString(), CommonUtils.LogLevel.DEBUG);
+
             this.info("Creating Modules:", CommonUtils.LogLevel.VERBOSE);
 
             this.supportedModules.forEach(moduleID => {
                 if (moduleOptions[moduleID].enabled == true) {
                     let moduleClass = Modules.moduleClasses[moduleID];
+
+                    this.info("Required Plugins for module '"+moduleID+"': "+moduleClass.REQUIRED_KDEC_PLUGINS.toString(), CommonUtils.LogLevel.DEBUG);
 
                     if (moduleClass.REQUIRED_KDEC_PLUGINS.every(plugin => this.plugins.includes(plugin))) {
                         try {
@@ -651,6 +656,10 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         // Signal Manager to store signal connections and disconnect all of them, when the applet is unloaded
         this._signals = new SignalManager.SignalManager(null);
 
+        // Tracking values for available conditions
+        this.serviceOnBus = false;
+        this.validVersion = false;
+
         /**
          * Define object variables and default values
          */
@@ -761,6 +770,8 @@ class KDEConnectApplet extends Applet.TextIconApplet {
     
             if (foundKDEConnect == true) {
                 this.info("Found KDE Connect DBus service!", CommonUtils.LogLevel.VERBOSE);
+                
+                this.serviceOnBus = true;
     
                 // KDE Connect DBus service is available
     
@@ -769,6 +780,8 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             } else {
                 this.warn("KDE Connect DBus service not found on session bus!", CommonUtils.LogLevel.NORMAL);
     
+                this.serviceOnBus = true;
+
                 // KDE Connect DBus service is not available
     
                 // Enter Unavailable state and add infor for user
@@ -859,10 +872,10 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         // Disconnect DBus signal Callbacks
         if (typeof this.kdecProxy !== "undefined") {
             if (this._onAnnouncedNameChanged) {
-                this.kdecProxy.disconnectSignal(this._onAnnouncedNameChanged)
+                this.kdecProxy.disconnectSignal(this._onAnnouncedNameChanged);
             }
             if (this._onDeviceListChanged) {
-                this.kdecProxy.disconnectSignal(this._onDeviceListChanged)
+                this.kdecProxy.disconnectSignal(this._onDeviceListChanged);
             }
         }
 
@@ -889,6 +902,18 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             try {
                 let qtCoreProxy = new QCoreApplicationProxy(Gio.DBus.session, CommonUtils.KDECONNECT_DBUS_NAME, "/MainApplication");
                 let kdecVersion = qtCoreProxy.applicationVersion;
+
+                if (kdecVersion == null) {
+                    // The KDE Connect version is null, so it isn't properly initialized (yet)
+                    this.validVersion = false;
+
+                    // Go into unavailable state
+                    this.enterUnavailableState();
+                    return;
+                }
+
+                this.validVersion = true;
+
                 this.KDEConnectVersionString = kdecVersion;
                 this.compatMode.versionLevel = this.getVersionLevel(kdecVersion.split("."));
                 this.info("Compatability level: "+this.compatMode.versionLevel, CommonUtils.LogLevel.INFO);
@@ -973,13 +998,34 @@ class KDEConnectApplet extends Applet.TextIconApplet {
 
             // Hide applet label
             this.hide_applet_label(true);
+
+            if (this.serviceOnBus == false) {
+                // Add menu item to tell the user, that KDE Connect is currently unavailable to the applet
+                let kdecNotFoundMenuItem = new PopupMenu.PopupMenuItem(_("KDE Connect not available"), {reactive: false});
+                kdecNotFoundMenuItem.actor.add_style_pseudo_class('insensitive');
+                this.popupMenu.addMenuItem(kdecNotFoundMenuItem);
+                this.set_applet_tooltip(_("KDE Connect not available, make sure it's installed and running."), false);
+                this.set_applet_label("");
+
+                // Reload Applet button
+                let reloadAppletMenuItem = new PopupMenu.PopupIconMenuItem(_("Reload Applet"), "view-refresh-symbolic", St.IconType.SYMBOLIC);
+                reloadAppletMenuItem._signals.connect(reloadAppletMenuItem, "activate", this.reloadApplet.bind(this));
+                this.contextMenuSection.addMenuItem(reloadAppletMenuItem);
+            } else if (this.validVersion == false) {
+                // Add menu item to tell the user, that KDE Connect is currently unavailable to the applet
+                let kdecVersionInvalidMenuItem = new PopupMenu.PopupMenuItem(_("Invalid KDE Connect version returned!"), {reactive: false});
+                let kdecVersionInvalidMenuItemTooltip = new Tooltips.Tooltip(kdecVersionInvalidMenuItem.actor, _("The KDE Connect DBus service returned an invalid version, please try reloading the Applet!"));
+                kdecVersionInvalidMenuItem.actor.add_style_pseudo_class('insensitive');
+                this.popupMenu.addMenuItem(kdecVersionInvalidMenuItem);
+                this.set_applet_tooltip(_("The KDE Connect DBus service returned an invalid version, please try reloading the Applet!"), false);
+                this.set_applet_label("");
+
+                // Reload Applet button
+                let reloadAppletMenuItem = new PopupMenu.PopupIconMenuItem(_("Reload Applet"), "view-refresh-symbolic", St.IconType.SYMBOLIC);
+                reloadAppletMenuItem._signals.connect(reloadAppletMenuItem, "activate", this.reloadApplet.bind(this));
+                this.popupMenu.addMenuItem(reloadAppletMenuItem);
+            }
     
-            // Add menu item to tell the user, that KDE Connect is currently unavailable to the applet
-            let kdecNotFoundMenuItem = new PopupMenu.PopupMenuItem(_("KDE Connect not available"), {reactive: false});
-            kdecNotFoundMenuItem.actor.add_style_pseudo_class('insensitive');
-            this.popupMenu.addMenuItem(kdecNotFoundMenuItem);
-            this.set_applet_tooltip(_("KDE Connect not available, make sure it's installed and running."), false);
-            this.set_applet_label("");
     
             this.info("Enterted Unavailable State!", CommonUtils.LogLevel.VERBOSE);
         } else {
@@ -992,23 +1038,38 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      */
 
     /**
-     * Clears and then rebuilds the main popup menu
+     * Rebuilds the main popup menu, but doesn't clear it beforehand
      */
     rebuildPopupMenu() {
         try {
+            // If there is at least one  device
+            let noDevices = true;
     
             // Get new menu items from device objects
             for (let [deviceID, device] of Object.entries(this.devices)) {
                 device.rebuildMenuItem();
+                noDevices = false;
             }
 
-            for (let [deviceID, device] of Object.entries(this.devices)) {
-                let deviceMenuItem = device.getMenuItem();
-                if (device.getReachableStatus() == false) {
-                    this.popupMenu.addMenuItem(deviceMenuItem, 0);
-                } else {
-                    this.popupMenu.addMenuItem(deviceMenuItem);
+            // Remove leftover menu items from e.g. unavailable state
+            this.popupMenu.removeAll();
+
+            if (noDevices == false) {
+                for (let [deviceID, device] of Object.entries(this.devices)) {
+                    let deviceMenuItem = device.getMenuItem();
+                    if (device.getReachableStatus() == false) {
+                        this.info("Device with ID '"+deviceID+"' is not reachable, adding at the top", CommonUtils.LogLevel.VERBOSE);
+                        this.popupMenu.addMenuItem(deviceMenuItem, 0);
+                    } else {
+                        this.info("Device with ID '"+deviceID+"' is reachable, adding normally", CommonUtils.LogLevel.VERBOSE);
+                        this.popupMenu.addMenuItem(deviceMenuItem);
+                    }
                 }
+            } else {
+                // We don't have any devices to show, so we add a placeholder menu item
+                let noDevicesMenuItem = new PopupMenu.PopupMenuItem(_("No connected Devices!")+"\n"+_("Add them in the KDE Connect settings"), {reactive: false});
+                noDevicesMenuItem.actor.add_style_pseudo_class('insensitive');
+                this.popupMenu.addMenuItem(noDevicesMenuItem);
             }
             
         } catch (error) {
@@ -1037,42 +1098,66 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 // Simulate plugins changed signal
                 let debugMenuitem1 = new PopupMenu.PopupMenuItem("Manually call 'onDevicePluginsChanged'");
                 debugMenuitem1._signals.connect(debugMenuitem1, "activate", Lang.bind(this, function() {
-                    this.onDevicePluginsChanged();
+                    try {
+                        this.onDevicePluginsChanged();
+                    } catch (error) {
+                        this.error("Error in debug button callback: "+error);
+                    }
                 }));
                 debugMenuItemParent.menu.addMenuItem(debugMenuitem1);
     
                 // Simulate rechable status changed signal
                 let debugMenuItem2 = new PopupMenu.PopupMenuItem("Manually call 'onDeviceReachableChanged'");
                 debugMenuItem2._signals.connect(debugMenuItem2, "activate", Lang.bind(this, function() {
-                    this.onDeviceReachableChanged();
+                    try {
+                        this.onDeviceReachableChanged();
+                    } catch (error) {
+                        this.error("Error in debug button callback: "+error);
+                    }
                 }));
                 debugMenuItemParent.menu.addMenuItem(debugMenuItem2);
 
                 // Simulate context menu settings changed signal
                 let debugMenuItem3 = new PopupMenu.PopupMenuItem("Manually call 'onContextMenuSettingsChanged'");
                 debugMenuItem3._signals.connect(debugMenuItem3, "activate", Lang.bind(this, function() {
-                    this.onContextMenuSettingsChanged();
+                    try {
+                        this.onContextMenuSettingsChanged();
+                    } catch (error) {
+                        this.error("Rrror in debug button callback: "+error);
+                    }
                 }));
                 debugMenuItemParent.menu.addMenuItem(debugMenuItem3);
 
                 // Simulate pupup menu settings changed signal
                 let debugMenuItem4 = new PopupMenu.PopupMenuItem("Manually call 'onPopupMenuSettingsChanged'");
                 debugMenuItem4._signals.connect(debugMenuItem4, "activate", Lang.bind(this, function() {
-                    this.onPopupMenuSettingsChanged();
+                    try {
+                        this.onPopupMenuSettingsChanged();
+                    } catch (error) {
+                        this.error("Error in debug button callback: "+error);
+                    }
                 }));
                 debugMenuItemParent.menu.addMenuItem(debugMenuItem4);
 
                 // Simulate module settings changed signal
                 let debugMenuItem5 = new PopupMenu.PopupMenuItem("Manually call 'onModuleSettingsChanged'");
                 debugMenuItem5._signals.connect(debugMenuItem5, "activate", Lang.bind(this, function() {
-                    this.onModuleSettingsChanged();
+                    try {
+                        this.onModuleSettingsChanged();
+                    } catch (error) {
+                        this.error("Error in debug button callback: "+error);
+                    }
                 }));
                 debugMenuItemParent.menu.addMenuItem(debugMenuItem5);
 
                 // Simulate panel settings changed signal
                 let debugMenuItem6 = new PopupMenu.PopupMenuItem("Manually call 'onPanelSettingsChanged'");
                 debugMenuItem6._signals.connect(debugMenuItem6, "activate", Lang.bind(this, function() {
-                    this.onPanelSettingsChanged();
+                    try {
+                        this.onPanelSettingsChanged();
+                    } catch (error) {
+                        this.error("Error in debug button callback: "+error);
+                    }
                 }));
                 debugMenuItemParent.menu.addMenuItem(debugMenuItem6);
 
@@ -1106,6 +1191,11 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             let ownIDMenuItemTooltip = new Tooltips.Tooltip(ownIDMenuItem.actor, _("Click to copy own ID"));
             this.contextMenuSection.addMenuItem(ownIDMenuItem);
         }
+
+        // Reload Applet button
+        let reloadAppletMenuItem = new PopupMenu.PopupIconMenuItem(_("Reload Applet"), "view-refresh-symbolic", St.IconType.SYMBOLIC);
+        reloadAppletMenuItem._signals.connect(reloadAppletMenuItem, "activate", this.reloadApplet.bind(this));
+        this.contextMenuSection.addMenuItem(reloadAppletMenuItem);
 
         // Menu Item for opening the KDE Connect configuration
         let configureMenuItem = new PopupMenu.PopupIconMenuItem(_("Configure KDE Connect"), "preferences-other", St.IconType.SYMBOLIC, {});
@@ -1154,11 +1244,11 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         if (this.options.tooltipDeviceCount == true) {
 
             if (deviceCount == 0) {
-                this.set_applet_tooltip(this.metadata.name+"\n"+_("No Devices"));
+                this.set_applet_tooltip(this.metadata.name+"\n"+_("No available devices"));
             } else if (deviceCount == 1) {
-                this.set_applet_tooltip(this.metadata.name+"\n"+_("1 Device"));
+                this.set_applet_tooltip(this.metadata.name+"\n"+_("{deviceCount} available device").replace("{deviceCount}", 1));
             } else {
-                this.set_applet_tooltip(this.metadata.name+"\n"+_("{deviceCount} Devices").replace("{deviceCount}", deviceCount));
+                this.set_applet_tooltip(this.metadata.name+"\n"+_("{deviceCount} available devices").replace("{deviceCount}", deviceCount));
             }
         } else {
             this.set_applet_tooltip(this.metadata.name);
@@ -1282,12 +1372,16 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 // Found KDE Connect DBus service
     
                 this.info("KDE Connect DBus service found on session bus!", CommonUtils.LogLevel.VERBOSE);
+
+                this.serviceOnBus = true;
     
                 // Enter Available State
                 this.enterAvailableState();
             } else if (old_owner != "" && new_owner == "") {
                 // KDE Connect DBus service unregistered from DBus
                 this.warn("KDE Connect DBus service unregistered from session bus!", CommonUtils.LogLevel.VERBOSE);
+
+                this.serviceOnBus = false;
 
                 // Enter Unavailable State
                 this.enterUnavailableState();
@@ -1444,6 +1538,23 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             }
         } catch (error) {
             this.error("Error while opening KDE Connect configuration: " + error, CommonUtils.LogLevel.MINIMAL);
+        }
+    }
+    
+    /**
+     * Reloads the Applet
+     */
+    reloadApplet() {
+        this.info("Reloading Applet!", CommonUtils.LogLevel.INFO);
+
+        if (this.popupMenu) {
+            this.popupMenu.close();
+        }
+
+        try {
+            Extension.reloadExtension(this.metadata["uuid"], Extension.Type.APPLET);
+        } catch (error) {
+            this.error("Error while reloading extension: "+error, CommonUtils.LogLevel.MINIMAL);
         }
     }
 }
