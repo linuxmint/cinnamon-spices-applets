@@ -45,7 +45,7 @@ logLevelNames[LogLevel.NORMAL] = "NORMAL";
 logLevelNames[LogLevel.MINIMAL] = "MINIMAL";
 
 // Log level for whole applet
-const LOG_LEVEL = LogLevel.INFO;
+const LOG_LEVEL = LogLevel.NORMAL;
 
 // Flag to enable debug features
 const DEBUG_FEATURES = false;
