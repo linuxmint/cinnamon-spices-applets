@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-29 02:33+0100\n"
-"PO-Revision-Date: 2023-01-29 02:33+0100\n"
+"POT-Creation-Date: 2023-01-29 13:56+0100\n"
+"PO-Revision-Date: 2023-01-29 13:57+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -337,7 +337,7 @@ msgstr ""
 "mehr"
 
 #. metadata.json->contributors
-msgid "Johannes Schöneberger - Author"
+msgid "Johannes Schoeneberger - Author"
 msgstr "Johannes Schöneberger - Autor"
 
 #. metadata.json->contributors
