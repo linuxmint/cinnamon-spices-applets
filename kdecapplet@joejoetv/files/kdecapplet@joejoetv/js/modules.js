@@ -708,7 +708,7 @@ class DeviceInfoModule extends KDECModule {
             case "laptop":
                 return "laptop-symbolic";
             case "smartphone":
-                return "smartphone-symbolic";
+                return "phone-symbolic";
             case "tablet":
                 return "tablet-symbolic";
             case "tv":
@@ -1178,7 +1178,7 @@ class ShareModule extends KDECModule {
         }
 
         if (this.options.enableSendText == true) {
-            this.sendTextMenuItem = new PopupMenu.PopupIconMenuItem(_("Send Text"), "tool-text-symbolic", St.IconType.SYMBOLIC, {});
+            this.sendTextMenuItem = new PopupMenu.PopupIconMenuItem(_("Send Text"), "text-field", St.IconType.SYMBOLIC, {});
             this.sendTextMenuItemTooltip = new Tooltips.Tooltip(this.sendTextMenuItem.actor, _("Click to send text to the device"));
 
             this.sendTextMenuItem._signals.connect(this.sendTextMenuItem, "activate", function() {
