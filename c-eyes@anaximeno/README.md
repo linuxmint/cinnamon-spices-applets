@@ -20,5 +20,6 @@ Currently, it is being maintained at [anaximeno/c-eyes](https://github.com/anaxi
 #### Relevant Documentation for Contribution
 
 * http://smasue.github.io/gnome-shell-tw
+* https://github.com/optimisme/gjs-examples
 * https://projects.linuxmint.com/reference/git/cinnamon-tutorials/xlet-settings-ref.html
 * https://projects.linuxmint.com/reference/git/cinnamon-tutorials/xlet-settings.html
