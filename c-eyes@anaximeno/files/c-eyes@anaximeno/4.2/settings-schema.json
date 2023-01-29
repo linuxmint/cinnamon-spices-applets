@@ -197,21 +197,21 @@
 	},
 	"mouse-middle-click-color": {
 		"type": "colorchooser",
-		"default": "#0c75de",
+		"default": "#40BEBF",
 		"description": "Mouse Middle Click Color",
 		"dependency": "mouse-middle-click-enable"
 	},
 	"mouse-right-click-color": {
 		"type": "colorchooser",
-		"default": "#0c75de",
+		"default": "#4077BF",
 		"description": "Mouse Right Click Color",
 		"dependency": "mouse-right-click-enable"
 	},
 	"mouse-click-opacity": {
 		"type": "spinbutton",
 		"description": "Mouse Click Opacity",
-		"default": 180,
-		"min": 0,
+		"default": 255,
+		"min": 5,
 		"max": 255,
 		"step": 5
 	}
