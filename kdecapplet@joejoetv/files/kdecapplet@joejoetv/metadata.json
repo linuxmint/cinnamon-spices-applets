@@ -5,5 +5,5 @@
   "comments": "KDE Connect Applet makes it easy to use the various features provided by KDE Connect to interact with connected devices, like sending files, sending SMS messages, browsing the storage of the device and more",
   "website": "https://github.com/linuxmint/cinnamon-spices-applets/tree/master/kdecapplet@joejoetv",
   "version": "2.0.0",
-  "contributors": "Johannes Schoeneberger - Autor,Severga - Inspiration for the Applet"
+  "contributors": "Johannes Schoeneberger - Author,Severga - Inspiration for the Applet"
 }
