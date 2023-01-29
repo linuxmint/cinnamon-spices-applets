@@ -1536,10 +1536,17 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      */
     openKDECConfiguration() {
         try {
-            if (this.kdecProxy) {
-                this.kdecProxy.openConfigurationRemote(Lang.bind(this, function() {
-                    this.info("Opened KDE Connect Configuration!", CommonUtils.LogLevel.INFO)
+            if (this.compatMode.versionLevel > 1) {
+                if (this.kdecProxy) {
+                    this.kdecProxy.openConfigurationRemote(Lang.bind(this, function() {
+                        this.info("Opened KDE Connect Configuration!", CommonUtils.LogLevel.INFO);
+                    }));
+                }
+            } else {
+                Util.spawnCommandLineAsync("kcmshell5 kcm_kdeconnect", null, Lang.bind(this, function() {
+                    this.error("Error while opening KDE Connect Configuration!", CommonUtils.LogLevel.MINIMAL);
                 }));
+                this.info("Opening KDE Connect Configuration...", CommonUtils.LogLevel.INFO);
             }
         } catch (error) {
             this.error("Error while opening KDE Connect configuration: " + error, CommonUtils.LogLevel.MINIMAL);
