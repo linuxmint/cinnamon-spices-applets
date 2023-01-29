@@ -543,7 +543,9 @@ class Device {
 
             // Workaround to add icon, because Cinnamon didn't like me making a PopupMenu class in another file
             this.menuItemIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: this.statusIconName, icon_type: St.IconType.SYMBOLIC});
-            this.menuItem.addActor(this.menuItemIcon, {span: 0, position: 0});
+            
+            //this.menuItem.addActor(this.menuItemIcon, {span: 0, position: 0});
+            CommonUtils.addActorAtPos(this.menuItem, this.menuItemIcon, {span: 0, position: 0});
 
             // Add info modules
             let infoModules = this.getModulesByType(Modules.ModuleType.INFO);
@@ -1093,7 +1095,9 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 let debugMenuItemParent = new PopupMenu.PopupSubMenuMenuItem(_("Debug Stuff, don't touch!"));
                 
                 let debugIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: 'tools-symbolic', icon_type: St.IconType.SYMBOLIC});
-                debugMenuItemParent.addActor(debugIcon, {span: 0, position: 0});
+                
+                //debugMenuItemParent.addActor(debugIcon, {span: 0, position: 0});
+                CommonUtils.addActorAtPos(debugMenuItemParent, debugIcon, {span: 0, position: 0});
         
                 // Simulate plugins changed signal
                 let debugMenuitem1 = new PopupMenu.PopupMenuItem("Manually call 'onDevicePluginsChanged'");
@@ -1469,7 +1473,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 if (versionArray[1] == 3) {
                     // Version 1.3
                     return 0;
-                } else if (versionArray > 3) {
+                } else if (versionArray[1] > 3) {
                     // Version >= 1.4
                     return 1;
                 }
@@ -1478,6 +1482,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 return 2;
             }
         }
+
         // Default Compatability Level
         return 0;
     }

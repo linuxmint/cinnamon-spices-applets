@@ -13,6 +13,8 @@ const Signals = imports.signals;
 
 const SignalManager = imports.misc.signalManager;
 
+const Params = imports.misc.params;
+
 // Common constants
 const UUID = "kdecapplet@joejoetv";
 const KDECONNECT_DBUS_NAME = "org.kde.kdeconnect";
@@ -519,4 +521,23 @@ class PopupButtonIconMenuItem extends PopupMenu.PopupBaseMenuItem {
         utilInfo("Activated! Type: "+activationType, LogLevel.VERBOSE, "PopupButtonIconMenuItem");
         this.emit('activate', event, keepMenu, activationType);
     }
+}
+
+/**
+ * Method emulating the addActor method of PopupMenu.PopupBaseMenuItem available in cinnamon 5.4.1 and up,
+ * which added the ability to specify the position and align parameters
+ * 
+ * @param {PopupMenu.PopupBaseMenuItem} menuItem - The menu item to add the child to
+ * @param {Clutter.Actor} child - The child actor to add
+ * @param {object} params - Parameters for how to add the actor
+ */
+function addActorAtPos(menuItem, child, params) {
+    params = Params.parse(params, { span: 1,
+                                    expand: false,
+                                    align: St.Align.START,
+                                    position: -1 });
+    params.actor = child;
+    menuItem._children.splice(params.position >= 0 ? params.position : Number.MAX_SAFE_INTEGER, 0, params);
+    menuItem._signals.connect(menuItem.actor, 'destroy', menuItem._removeChild.bind(menuItem, child));
+    menuItem.actor.insert_child_at_index(child, params.position);
 }

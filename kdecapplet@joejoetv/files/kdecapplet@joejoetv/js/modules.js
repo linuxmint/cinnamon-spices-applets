@@ -1159,7 +1159,9 @@ class ShareModule extends KDECModule {
 
             // Workaround to add icon, because Cinnamon didn't like me making a PopupMenu class in another file
             this.menuIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: "send-to-symbolic", icon_type: St.IconType.SYMBOLIC});
-            this.menuItem.addActor(this.menuIcon, {span: 0, position: 0});
+            
+            //this.menuItem.addActor(this.menuIcon, {span: 0, position: 0});
+            CommonUtils.addActorAtPos(this.menuItem, this.menuIcon, {span: 0, position: 0});
         } else {
             this.menuItem = new PopupMenu.PopupMenuSection();
         }
@@ -1428,7 +1430,9 @@ class SMSModule extends KDECModule {
 
             // Workaround to add icon, because Cinnamon didn't like me making a PopupMenu class in another file
             let menuIcon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: "dialog-messages", icon_type: St.IconType.SYMBOLIC});
-            this.menuItem.addActor(menuIcon, {span: 0, position: 0});
+            
+            //this.menuItem.addActor(menuIcon, {span: 0, position: 0});
+            CommonUtils.addActorAtPos(this.menuItem, menuIcon, {span: 0, position: 0});
         } else {
             this.menuItem = new PopupMenu.PopupMenuSection();
         }
