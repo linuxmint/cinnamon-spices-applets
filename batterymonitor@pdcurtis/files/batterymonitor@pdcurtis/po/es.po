@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-08 22:29-0500\n"
-"PO-Revision-Date: 2022-12-08 22:32-0500\n"
+"POT-Creation-Date: 2022-12-27 19:21-0500\n"
+"PO-Revision-Date: 2022-12-29 13:38-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1.1\n"
 
-#: 5.4/applet.js:135 3.2/applet.js:135
+#: 5.4/applet.js:139 3.2/applet.js:135
 msgid "--%"
 msgstr "--%"
 
-#: 5.4/applet.js:136 3.2/applet.js:136
+#: 5.4/applet.js:140 3.2/applet.js:136
 msgid "Waiting"
 msgstr "Esperando"
 
-#: 5.4/applet.js:160 3.2/applet.js:165
+#: 5.4/applet.js:164 3.2/applet.js:165
 msgid "Some Dependencies not Installed"
 msgstr "Algunas dependencias no están instaladas"
 
-#: 5.4/applet.js:160
+#: 5.4/applet.js:164
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
 "functionality including notifications and audible alerts .\n"
@@ -42,11 +42,11 @@ msgstr ""
 "\n"
 "Por favor, lea el archivo de ayuda sobre cómo instalarlos."
 
-#: 5.4/applet.js:170 3.2/applet.js:198
+#: 5.4/applet.js:174 3.2/applet.js:198
 msgid "Battery Monitor Applet"
 msgstr "Applet de monitoreo de la batería"
 
-#: 5.4/applet.js:170
+#: 5.4/applet.js:174
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -60,44 +60,44 @@ msgstr ""
 "lugares públicos\n"
 "especialmente si se especifica un archivo de sonido largo\n"
 
-#: 5.4/applet.js:243 3.2/applet.js:297
+#: 5.4/applet.js:247 3.2/applet.js:297
 msgid "Open Power Statistics"
 msgstr "Abrir estadísticas de energía"
 
-#: 5.4/applet.js:249 3.2/applet.js:303
+#: 5.4/applet.js:253 3.2/applet.js:303
 msgid "Open System Monitor"
 msgstr "Abrir monitor del sistema"
 
-#: 5.4/applet.js:258
+#: 5.4/applet.js:262
 msgid "Housekeeping and System Submenu"
 msgstr "Submenú de Mantenimiento y Sistema"
 
-#: 5.4/applet.js:261 3.2/applet.js:315
+#: 5.4/applet.js:265 3.2/applet.js:315
 msgid "View the Changelog"
 msgstr "Ver el registro de cambios"
 
-#: 5.4/applet.js:267
+#: 5.4/applet.js:271
 msgid "Open the README"
-msgstr ""
+msgstr "Abrir archivo README"
 
-#: 5.4/applet.js:273 3.2/applet.js:327
+#: 5.4/applet.js:277 3.2/applet.js:327
 msgid "Open stylesheet.css (Advanced Function)"
 msgstr "Abrir stylesheet.css (Función avanzada)"
 
 #. metadata.json->name
-#: 5.4/applet.js:289 3.2/applet.js:343
+#: 5.4/applet.js:293 3.2/applet.js:343
 msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Applet de batería con monitorización y apagado (BAMS)"
 
-#: 5.4/applet.js:294 3.2/applet.js:348
+#: 5.4/applet.js:298 3.2/applet.js:348
 msgid "Waiting for battery information"
 msgstr "A la espera de información sobre la batería"
 
-#: 5.4/applet.js:372
+#: 5.4/applet.js:389
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Batería baja - apague o conecte a la red eléctrica"
 
-#: 5.4/applet.js:377 3.2/applet.js:433
+#: 5.4/applet.js:394 3.2/applet.js:433
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -113,33 +113,33 @@ msgstr ""
 "cierre su trabajo y suspenda o apague la máquina\n"
 "\n"
 
-#: 5.4/applet.js:392
+#: 5.4/applet.js:409
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Nivel de batería crítica se sSuspenderá a menos que se conecte a la red "
 "eléctrica"
 
-#: 5.4/applet.js:409 3.2/applet.js:464
+#: 5.4/applet.js:426 3.2/applet.js:464
 msgid "Charge:"
 msgstr "Carga:"
 
-#: 5.4/applet.js:409 3.2/applet.js:464
+#: 5.4/applet.js:426 3.2/applet.js:464
 msgid "Alert:"
 msgstr "Alerta:"
 
-#: 5.4/applet.js:409 3.2/applet.js:464
+#: 5.4/applet.js:426 3.2/applet.js:464
 msgid "Suspend:"
 msgstr "Suspender:"
 
-#: 5.4/applet.js:457 3.2/applet.js:512
+#: 5.4/applet.js:474 3.2/applet.js:512
 msgid "Percentage Charge:"
 msgstr "Porcentaje de carga:"
 
-#: 5.4/applet.js:457 3.2/applet.js:512
+#: 5.4/applet.js:474 3.2/applet.js:512
 msgid "Alert at:"
 msgstr "Alertar en:"
 
-#: 5.4/applet.js:457 3.2/applet.js:512
+#: 5.4/applet.js:474 3.2/applet.js:512
 msgid "Suspend at:"
 msgstr "Suspender en:"
 
@@ -214,7 +214,7 @@ msgstr ""
 
 #. 5.4->settings-schema.json->head->description
 msgid "General Settings"
-msgstr ""
+msgstr "Configuración general"
 
 #. 5.4->settings-schema.json->refreshInterval-spinner->units
 #. 3.2->settings-schema.json->refreshInterval-spinner->units
@@ -285,7 +285,7 @@ msgstr "Sólo icono sobre fondo de color que indica el estado"
 
 #. 5.4->settings-schema.json->displayType->description
 msgid "Toolbar Display Type"
-msgstr ""
+msgstr "Tipo de visualización de la barra de herramientas"
 
 #. 5.4->settings-schema.json->displayType->tooltip
 #. 3.2->settings-schema.json->displayType->tooltip
@@ -396,12 +396,11 @@ msgstr ""
 
 #. 5.4->settings-schema.json->head4->description
 msgid "Advanced"
-msgstr ""
+msgstr "Avanzado"
 
 #. 5.4->settings-schema.json->customBatteryPath->description
-msgid ""
-"Path to battery capacity directory (device path)"
-msgstr ""
+msgid "Path to battery capacity directory (device path)"
+msgstr "Ruta al directorio de capacidad de la batería (ruta del dispositivo)"
 
 #. 5.4->settings-schema.json->customBatteryPath->tooltip
 msgid ""
@@ -411,6 +410,11 @@ msgid ""
 "Default:\n"
 "/sys/class/power_supply/BAT0"
 msgstr ""
+"Elija su propio objeto power_supply, por ejemplo, para controlar su batería "
+"secundaria.\n"
+"\n"
+"Por defecto:\n"
+"/sys/class/suministro_de_energía/BAT0"
 
 #. 3.2->settings-schema.json->head->description
 msgid "General Settings for the Battery Applet with Monitoring and Shutdown"

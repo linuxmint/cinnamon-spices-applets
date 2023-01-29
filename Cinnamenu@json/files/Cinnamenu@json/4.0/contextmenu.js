@@ -64,7 +64,7 @@ class ContextMenuItem extends PopupBaseMenuItem {
         PopupBaseMenuItem.prototype.destroy.call(this);
     }
 }
-const Cinnamon = imports.gi.Cinnamon;
+
 class ContextMenu {
     constructor(appThis) {
         this.appThis = appThis;
@@ -134,8 +134,8 @@ class ContextMenu {
         this.isOpen = true;
         this.appThis.resizer.inhibit_resizing = true;
 
-        const contextMenuWidth = this.menu.actor.width;
-        const contextMenuHeight = this.menu.actor.height;
+        //const contextMenuWidth = this.menu.actor.width;
+        //const contextMenuHeight = this.menu.actor.height;
 
         const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
         let mx, my;

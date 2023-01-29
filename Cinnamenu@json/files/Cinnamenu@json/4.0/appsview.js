@@ -4,20 +4,21 @@ const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Atk = imports.gi.Atk;
 const Main = imports.ui.main;
+const Util = imports.misc.util;
 const {SignalManager} = imports.misc.signalManager;
 const {AppState} = imports.gi.Cinnamon;
 const {EllipsizeMode} = imports.gi.Pango;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 
 const {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible} = require('./utils');
-const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
+const ApplicationsViewMode = Object.freeze({LIST: 0, GRID: 1});
 const DescriptionPlacementTOOLTIP = 1, DescriptionPlacementUNDER = 2, DescriptionPlacementNONE = 3;
 
 class AppButton {
     constructor(appThis, app) {
         this.appThis = appThis;
         this.app = app;
-        const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
+        const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST;
         this.signals = new SignalManager(null);
 
         //----------ICON---------------------------------------------
@@ -36,7 +37,7 @@ class AppButton {
         } else if (this.app.emoji) {//emoji search result
             this.icon = new St.Label({ style: 'color: white; font-size: ' +
                                             (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
-            this.icon.get_clutter_text().set_markup(this.app.emoji);
+            this.icon.get_clutter_text().set_text(this.app.emoji);
         } else if (this.app.isApplication) {//isApplication
             this.icon = this.app.create_icon_texture(this.appThis.getAppIconSize());
         } else if (this.app.iconFactory) {//isPlace
@@ -74,16 +75,6 @@ class AppButton {
         clutterText.set_markup(markup);
         clutterText.ellipsize = EllipsizeMode.END;
 
-        //--------app running indicator--------------
-        this.appRunningIndicator = new St.Widget({
-                style: isListView ?
-                'width: 2px; height: 12px; background-color: ' + this.appThis.getThemeForegroundColor() +
-                                                    '; margin: 0px; border: 1px; border-radius: 10px;' :
-                'width: 32px; height: 2px; background-color: ' + this.appThis.getThemeForegroundColor() +
-                                                    '; margin: 0px; border: 1px; border-radius: 10px;',
-                x_expand: false,
-                y_expand: false});
-
         //-------------actor---------------------
         this.actor = new St.BoxLayout({ vertical: !isListView, reactive: true,
                                             accessible_role: Atk.Role.MENU_ITEM});
@@ -92,13 +83,12 @@ class AppButton {
             this.actor.set_style('padding-left: 0px; padding-right: 0px;');
             this.setGridButtonWidth();
         }
+
         if (this.icon && this.appThis.getAppIconSize() > 0) {
             this.actor.add(this.icon, { x_fill: false, y_fill: false,
                                         x_align: isListView ? St.Align.START : St.Align.MIDDLE,
                                         y_align: St.Align.MIDDLE});
         }
-        this.actor.add(this.appRunningIndicator, {  x_fill: false, y_fill: false,
-                                        x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
         this.actor.add(this.label, {
                                 x_fill: false, y_fill: false,
                                 x_align: isListView ? St.Align.START : St.Align.MIDDLE,
@@ -140,12 +130,6 @@ class AppButton {
             this.signals.connect(this.draggable, 'drag-begin', () => hideTooltipIfVisible());
             //this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this._onDragCancelled(...args));
             this.signals.connect(this.draggable, 'drag-end', () => this._resetAllAppsOpacity());
-        }
-
-        //----running state
-        this._onRunningStateChanged();
-        if (this.app.isApplication) {
-            this.signals.connect(this.app, 'notify::state', (...args) => this._onRunningStateChanged(...args));
         }
 
         //this.signals.connect(this.actor, 'button-press-event', (...args) => this.handleButtonPress(...args));
@@ -240,7 +224,7 @@ class AppButton {
             let [x, y] = this.actor.get_transformed_position();
             let {width, height} = this.actor;
             let center_x = false; //should tooltip x pos. be centered on x
-            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+            if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                 x += 175 * global.ui_scale;
                 y += height + 8 * global.ui_scale;
             } else {//grid view
@@ -318,21 +302,17 @@ class AppButton {
         }
     }
 
-    _onRunningStateChanged() {
-        if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-            if (this.app.isApplication && this.app.state !== AppState.STOPPED) {
-                this.appRunningIndicator.show();
-            } else {
-                this.appRunningIndicator.hide();
+    activateAsRoot() {
+        if (this.app.isApplication) {
+            if (this.app.newAppShouldHighlight) {
+                this.app.newAppShouldHighlight = false;
+                this._setAppHighlightClass();
             }
-        } else {
-            if (this.app.isApplication && this.app.state !== AppState.STOPPED) {
-                this.appRunningIndicator.opacity = 255;
-            } else {
-                this.appRunningIndicator.opacity = 0;
-            }
-        }
-        return true;
+            this.appThis.recentApps.add(this.app.id);
+            const command = 'gksu ' + this.app.get_app_info().get_executable();
+            Util.spawnCommandLine(command);
+            this.appThis.menu.close();
+        } 
     }
 
     openContextMenu(e) {
@@ -349,7 +329,6 @@ class AppButton {
         this.signals.disconnectAllSignals();
         hideTooltipIfVisible();
 
-        this.appRunningIndicator.destroy();
         this.label.destroy();
         if (this.icon) {
             this.icon.destroy();
@@ -467,7 +446,7 @@ class AppsView {
             }
 
             const subheading = new Subheading(this.appThis, subheadingText, clickAction);
-            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+            if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                 this.applicationsListBox.add(subheading.subheadingBox);
             } else {
                 const gridLayout = this.applicationsGridBox.layout_manager;
@@ -487,7 +466,7 @@ class AppsView {
                 appButton = new AppButton(this.appThis, app);
                 this.buttonStore.push(appButton);
             }
-            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+            if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                 this.applicationsListBox.add_actor(appButton.actor);
             } else {
                 const gridLayout = this.applicationsGridBox.layout_manager;
@@ -500,12 +479,24 @@ class AppsView {
                     this.column = 0;
                     this.rownum++;
                 }
+
+                //set minimum top & bottom padding for appbuttons as theme node is designed for list view.
+                const buttonTopPadding = appButton.actor.get_theme_node().get_padding(St.Side.TOP);
+                const buttonBottomPadding = appButton.actor.get_theme_node().get_padding(St.Side.BOTTOM);
+                
+                const MIN_PADDING = 8;
+                if (buttonTopPadding < MIN_PADDING) {
+                    appButton.actor.style += `padding-top: ${MIN_PADDING}px; `;
+                }
+                if (buttonBottomPadding < MIN_PADDING) {
+                    appButton.actor.style += `padding-bottom: ${MIN_PADDING}px; `;
+                }
             }
         });
     }
 
     populate_finish() {
-        if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+        if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
             this.applicationsListBox.show();
         } else {
             this.applicationsGridBox.show();
@@ -608,7 +599,7 @@ class AppsView {
     }
 
     getActiveContainer() {
-        return this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST ?
+        return this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST ?
                                                 this.applicationsListBox : this.applicationsGridBox;
     }
 
