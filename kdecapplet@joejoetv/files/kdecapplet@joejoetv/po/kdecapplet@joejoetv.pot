@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-28 23:28+0100\n"
+"POT-Creation-Date: 2023-01-29 02:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,81 +17,81 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:570
+#: applet.js:571
 msgid "No Modules available"
 msgstr ""
 
-#: applet.js:1005
+#: applet.js:1006
 msgid "KDE Connect not available"
 msgstr ""
 
-#: applet.js:1008
+#: applet.js:1009
 msgid "KDE Connect not available, make sure it's installed and running."
 msgstr ""
 
-#: applet.js:1012 applet.js:1025 applet.js:1197
+#: applet.js:1013 applet.js:1026 applet.js:1200
 msgid "Reload Applet"
 msgstr ""
 
-#: applet.js:1017
+#: applet.js:1018
 msgid "Invalid KDE Connect version returned!"
 msgstr ""
 
-#: applet.js:1018 applet.js:1021
+#: applet.js:1019 applet.js:1022
 msgid ""
 "The KDE Connect DBus service returned an invalid version, please try "
 "reloading the Applet!"
 msgstr ""
 
-#: applet.js:1071
+#: applet.js:1072
 msgid "No connected Devices!"
 msgstr ""
 
-#: applet.js:1071
+#: applet.js:1072
 msgid "Add them in the KDE Connect settings"
 msgstr ""
 
-#: applet.js:1094
+#: applet.js:1095
 msgid "Debug Stuff, don't touch!"
 msgstr ""
 
-#: applet.js:1181
+#: applet.js:1184
 msgid "KDE Connect Version: {version}"
 msgstr ""
 
-#: applet.js:1188
+#: applet.js:1191
 msgid "Own ID: {own_id}"
 msgstr ""
 
-#: applet.js:1190
+#: applet.js:1193
 msgid "own ID"
 msgstr ""
 
-#: applet.js:1192
+#: applet.js:1195
 msgid "Click to copy own ID"
 msgstr ""
 
-#: applet.js:1202
+#: applet.js:1205
 msgid "Configure KDE Connect"
 msgstr ""
 
-#: applet.js:1204
+#: applet.js:1207
 msgid "Click to open KDE Connect Configuration"
 msgstr ""
 
-#: applet.js:1248
+#: applet.js:1251
 msgid "No available devices"
 msgstr ""
 
-#: applet.js:1250
+#: applet.js:1253
 msgid "{deviceCount} available device"
 msgstr ""
 
-#: applet.js:1252
+#: applet.js:1255
 msgid "{deviceCount} available devices"
 msgstr ""
 
-#: js/commonUtils.js:229
+#: js/commonUtils.js:223
 msgid "Copied {typestring} to the clipboard"
 msgstr ""
 
@@ -183,63 +183,63 @@ msgstr ""
 msgid "Share"
 msgstr ""
 
-#: js/modules.js:1169
+#: js/modules.js:1171
 msgid "Send URL"
 msgstr ""
 
-#: js/modules.js:1170
+#: js/modules.js:1172
 msgid "Click to send a URL to the device"
 msgstr ""
 
-#: js/modules.js:1179
+#: js/modules.js:1181
 msgid "Send Text"
 msgstr ""
 
-#: js/modules.js:1180 js/modules.js:1447
+#: js/modules.js:1182 js/modules.js:1451
 msgid "Click to send text to the device"
 msgstr ""
 
-#: js/modules.js:1189
+#: js/modules.js:1191
 msgid "Send File(s)"
 msgstr ""
 
-#: js/modules.js:1190
+#: js/modules.js:1192
 msgid "Click to send file(s) to the device"
 msgstr ""
 
-#: js/modules.js:1243
+#: js/modules.js:1245
 msgid "Unmount"
 msgstr ""
 
-#: js/modules.js:1245
+#: js/modules.js:1247
 msgid "Mount"
 msgstr ""
 
-#: js/modules.js:1251
+#: js/modules.js:1253
 msgid "Click to unmount"
 msgstr ""
 
-#: js/modules.js:1253
+#: js/modules.js:1255
 msgid "Click to mount"
 msgstr ""
 
-#: js/modules.js:1326
+#: js/modules.js:1328
 msgid "Click to browse files"
 msgstr ""
 
-#: js/modules.js:1427
+#: js/modules.js:1429
 msgid "SMS"
 msgstr ""
 
-#: js/modules.js:1438
+#: js/modules.js:1442
 msgid "Launch SMS App"
 msgstr ""
 
-#: js/modules.js:1439
+#: js/modules.js:1443
 msgid "Click to open the KDE Connect SMS App"
 msgstr ""
 
-#: js/modules.js:1446
+#: js/modules.js:1450
 msgid "Send SMS"
 msgstr ""
 
@@ -314,7 +314,22 @@ msgid "KDE Connect Applet"
 msgstr ""
 
 #. metadata.json->description
-msgid "Applet for interacting with devices connected via KDE Connect."
+msgid "Enables interacting with devices connected via KDE Connect"
+msgstr ""
+
+#. metadata.json->comments
+msgid ""
+"KDE Connect Applet makes it easy to use the various features provided by KDE"
+" Connect to interact with connected devices, like sending files, sending SMS"
+" messages, browsing the storage of the device and more"
+msgstr ""
+
+#. metadata.json->contributors
+msgid "Johannes Schöneberger - Author"
+msgstr ""
+
+#. metadata.json->contributors
+msgid "Severga - Inspiration for the Applet"
 msgstr ""
 
 #. settings-schema.json->general-page->title

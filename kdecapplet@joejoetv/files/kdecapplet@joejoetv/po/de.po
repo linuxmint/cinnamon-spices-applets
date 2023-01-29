@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-28 23:28+0100\n"
-"PO-Revision-Date: 2023-01-29 00:05+0100\n"
+"POT-Creation-Date: 2023-01-29 02:33+0100\n"
+"PO-Revision-Date: 2023-01-29 02:33+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,85 +18,85 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:570
+#: applet.js:571
 msgid "No Modules available"
 msgstr "Keine Module verfügbar"
 
-#: applet.js:1005
+#: applet.js:1006
 msgid "KDE Connect not available"
 msgstr "KDE Connect ist nicht verfügbar"
 
-#: applet.js:1008
+#: applet.js:1009
 msgid "KDE Connect not available, make sure it's installed and running."
 msgstr ""
 "KDE Connect ist nicht verfügbar, stelle sicher, das es installiert ist und "
 "ausgeführt wird"
 
-#: applet.js:1012 applet.js:1025 applet.js:1197
+#: applet.js:1013 applet.js:1026 applet.js:1200
 msgid "Reload Applet"
 msgstr "Applet neuladen"
 
-#: applet.js:1017
+#: applet.js:1018
 msgid "Invalid KDE Connect version returned!"
 msgstr "Ungültige KDE Connect Version erhalten!"
 
-#: applet.js:1018 applet.js:1021
+#: applet.js:1019 applet.js:1022
 msgid ""
 "The KDE Connect DBus service returned an invalid version, please try "
 "reloading the Applet!"
 msgstr ""
-"Der KDE Connect DBus Dienst hat eine ungültige Version zurückgegeben, "
-"bitte versuche, das Applet neu zu laden"
+"Der KDE Connect DBus Dienst hat eine ungültige Version zurückgegeben, bitte "
+"versuche, das Applet neu zu laden"
 
-#: applet.js:1071
+#: applet.js:1072
 msgid "No connected Devices!"
 msgstr "Keine verbundenen Geräte!"
 
-#: applet.js:1071
+#: applet.js:1072
 msgid "Add them in the KDE Connect settings"
 msgstr "Füge sie in den KDE Connect Einstellungen hinzu"
 
-#: applet.js:1094
+#: applet.js:1095
 msgid "Debug Stuff, don't touch!"
 msgstr "Debug Zeug, nicht anfassen!"
 
-#: applet.js:1181
+#: applet.js:1184
 msgid "KDE Connect Version: {version}"
 msgstr "KDE Connect Version: {version}"
 
-#: applet.js:1188
+#: applet.js:1191
 msgid "Own ID: {own_id}"
 msgstr "Eigene ID: {own_id}"
 
-#: applet.js:1190
+#: applet.js:1193
 msgid "own ID"
 msgstr "Eigene ID"
 
-#: applet.js:1192
+#: applet.js:1195
 msgid "Click to copy own ID"
 msgstr "Klicken, um eigene ID zu kopieren"
 
-#: applet.js:1202
+#: applet.js:1205
 msgid "Configure KDE Connect"
 msgstr "KDE Connect konfigurieren"
 
-#: applet.js:1204
+#: applet.js:1207
 msgid "Click to open KDE Connect Configuration"
 msgstr "Klicken, um die KDE Connect Einstellungen zu öffnen"
 
-#: applet.js:1248
+#: applet.js:1251
 msgid "No available devices"
 msgstr "Keine verfügbaren Geräte"
 
-#: applet.js:1250
+#: applet.js:1253
 msgid "{deviceCount} available device"
 msgstr "{deviceCount} verfügbares Gerät"
 
-#: applet.js:1252
+#: applet.js:1255
 msgid "{deviceCount} available devices"
 msgstr "{deviceCount} verfügbare Geräte"
 
-#: js/commonUtils.js:229
+#: js/commonUtils.js:223
 msgid "Copied {typestring} to the clipboard"
 msgstr "{typestring} in die Zwischenablage kopiert"
 
@@ -188,63 +188,63 @@ msgstr "Freigabe von '{deviceName}' empfangen"
 msgid "Share"
 msgstr "Teilen"
 
-#: js/modules.js:1169
+#: js/modules.js:1171
 msgid "Send URL"
 msgstr "Teile URL"
 
-#: js/modules.js:1170
+#: js/modules.js:1172
 msgid "Click to send a URL to the device"
 msgstr "Klicken, um eine URL an das Gerät zu senden"
 
-#: js/modules.js:1179
+#: js/modules.js:1181
 msgid "Send Text"
 msgstr "Teile Text"
 
-#: js/modules.js:1180 js/modules.js:1447
+#: js/modules.js:1182 js/modules.js:1451
 msgid "Click to send text to the device"
 msgstr "Klicken, um Text an das Gerät zu senden"
 
-#: js/modules.js:1189
+#: js/modules.js:1191
 msgid "Send File(s)"
 msgstr "Teile Datei(en)"
 
-#: js/modules.js:1190
+#: js/modules.js:1192
 msgid "Click to send file(s) to the device"
 msgstr "Klicken, um Datei(en) an das Gerät zu senden"
 
-#: js/modules.js:1243
+#: js/modules.js:1245
 msgid "Unmount"
 msgstr "Aushängen"
 
-#: js/modules.js:1245
+#: js/modules.js:1247
 msgid "Mount"
 msgstr "Einhängen"
 
-#: js/modules.js:1251
+#: js/modules.js:1253
 msgid "Click to unmount"
 msgstr "Klicken zum aushängen"
 
-#: js/modules.js:1253
+#: js/modules.js:1255
 msgid "Click to mount"
 msgstr "Klicken zum einhängen"
 
-#: js/modules.js:1326
+#: js/modules.js:1328
 msgid "Click to browse files"
 msgstr "Klicken, um Dateien zu durchsuchen"
 
-#: js/modules.js:1427
+#: js/modules.js:1429
 msgid "SMS"
 msgstr "SMS"
 
-#: js/modules.js:1438
+#: js/modules.js:1442
 msgid "Launch SMS App"
 msgstr "SMS Anwendung starten"
 
-#: js/modules.js:1439
+#: js/modules.js:1443
 msgid "Click to open the KDE Connect SMS App"
 msgstr "Klicken, um KDE Connect SMS Anwendung zu starten"
 
-#: js/modules.js:1446
+#: js/modules.js:1450
 msgid "Send SMS"
 msgstr "SMS senden"
 
@@ -320,10 +320,29 @@ msgid "KDE Connect Applet"
 msgstr "KDE Connect Applet"
 
 #. metadata.json->description
-msgid "Applet for interacting with devices connected via KDE Connect."
+msgid "Enables interacting with devices connected via KDE Connect"
 msgstr ""
-"Ein Applet, um mit Geräten, die via KDE Connect verbunden sind, zu "
+"Ermöglicht es, mit Geräten, die via KDE Connect verbunden sind, zu "
 "interagieren"
+
+#. metadata.json->comments
+msgid ""
+"KDE Connect Applet makes it easy to use the various features provided by KDE "
+"Connect to interact with connected devices, like sending files, sending SMS "
+"messages, browsing the storage of the device and more"
+msgstr ""
+"Das KDE Connect Applet macht es einfach, verschiedene Funktionen, die von "
+"KDE Connect bereitgestellt werden, zu benutzen, wie das Senden von Dateien, "
+"das Senden von SMS Nachrichten, das Durchsuchen des Speichers des Geräts und "
+"mehr"
+
+#. metadata.json->contributors
+msgid "Johannes Schöneberger - Author"
+msgstr "Johannes Schöneberger - Autor"
+
+#. metadata.json->contributors
+msgid "Severga - Inspiration for the Applet"
+msgstr "Severga - Inspiration für das Applet"
 
 #. settings-schema.json->general-page->title
 msgid "General"
@@ -395,8 +414,7 @@ msgstr "KDE Connect Version im Kontextmenü des Applets anzeigen"
 
 #. settings-schema.json->shownumdevices->description
 msgid "Show the number of connected devices next to the icon in the panel"
-msgstr ""
-"Anzahl an verfügbaren Geräten neben dem Symbol in der Leiste anzeigen"
+msgstr "Anzahl an verfügbaren Geräten neben dem Symbol in der Leiste anzeigen"
 
 #. settings-schema.json->icontype->description
 msgid "Icon type"
@@ -452,8 +470,7 @@ msgstr "Zeigt das Symbol des Gerätes und dessen ID an"
 
 #. settings-schema.json->connectivity-module-description->description
 msgid "Shows the current connectivity status and network type of the device"
-msgstr ""
-"Zeigt die momentane Empfangsstärke und den Netzwerktyp des Gerätes an"
+msgstr "Zeigt die momentane Empfangsstärke und den Netzwerktyp des Gerätes an"
 
 #. settings-schema.json->connectivity-module-showNetworkType->description
 msgid "Show the mobile network type"
@@ -483,8 +500,8 @@ msgstr "Das Verzeichnis, in dem die Fotos gespeichert werden sollen"
 #. settings-schema.json->ping-module-description->description
 msgid "Lets you ping the the device to make sure it's connected"
 msgstr ""
-"Ermöglicht es, dem Gerät eine Ping-Nachricht zu senden, um die Verbindung "
-"zu dem Gerät zu testen"
+"Ermöglicht es, dem Gerät eine Ping-Nachricht zu senden, um die Verbindung zu "
+"dem Gerät zu testen"
 
 #. settings-schema.json->ping-module-useCustomMessage->description
 msgid "Use custom message for ping"
