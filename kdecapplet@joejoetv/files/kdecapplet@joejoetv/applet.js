@@ -909,6 +909,8 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                     // The KDE Connect version is null, so it isn't properly initialized (yet)
                     this.validVersion = false;
 
+                    this.warn("Invalid KDE Connect version returned, please try reloading the Applet and/or restarting KDE Connect! Returned version: "+kdecVersion, CommonUtils.LogLevel.NORMAL);
+
                     // Go into unavailable state
                     this.enterUnavailableState();
                     return;
@@ -918,7 +920,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
 
                 this.KDEConnectVersionString = kdecVersion;
                 this.compatMode.versionLevel = this.getVersionLevel(kdecVersion.split("."));
-                this.info("Compatability level: "+this.compatMode.versionLevel, CommonUtils.LogLevel.INFO);
+                this.info("Compatability level: "+this.compatMode.versionLevel, CommonUtils.LogLevel.NORMAL);
             } catch (error) {
                 this.error("Error while getting KDE Connect version: " + error, CommonUtils.LogLevel.MINIMAL);
                 this.warn("Resorting to default version compat level(v1.3)", CommonUtils.LogLevel.NORMAL);

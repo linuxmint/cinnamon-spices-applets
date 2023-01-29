@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-29 13:56+0100\n"
-"PO-Revision-Date: 2023-01-29 13:57+0100\n"
+"POT-Creation-Date: 2023-01-29 14:21+0100\n"
+"PO-Revision-Date: 2023-01-29 14:21+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -22,25 +22,25 @@ msgstr ""
 msgid "No Modules available"
 msgstr "Keine Module verfügbar"
 
-#: applet.js:1006
+#: applet.js:1008
 msgid "KDE Connect not available"
 msgstr "KDE Connect ist nicht verfügbar"
 
-#: applet.js:1009
+#: applet.js:1011
 msgid "KDE Connect not available, make sure it's installed and running."
 msgstr ""
 "KDE Connect ist nicht verfügbar, stelle sicher, das es installiert ist und "
 "ausgeführt wird"
 
-#: applet.js:1013 applet.js:1026 applet.js:1200
+#: applet.js:1015 applet.js:1028 applet.js:1202
 msgid "Reload Applet"
 msgstr "Applet neuladen"
 
-#: applet.js:1018
+#: applet.js:1020
 msgid "Invalid KDE Connect version returned!"
 msgstr "Ungültige KDE Connect Version erhalten!"
 
-#: applet.js:1019 applet.js:1022
+#: applet.js:1021 applet.js:1024
 msgid ""
 "The KDE Connect DBus service returned an invalid version, please try "
 "reloading the Applet!"
@@ -48,51 +48,51 @@ msgstr ""
 "Der KDE Connect DBus Dienst hat eine ungültige Version zurückgegeben, bitte "
 "versuche, das Applet neu zu laden"
 
-#: applet.js:1072
+#: applet.js:1074
 msgid "No connected Devices!"
 msgstr "Keine verbundenen Geräte!"
 
-#: applet.js:1072
+#: applet.js:1074
 msgid "Add them in the KDE Connect settings"
 msgstr "Füge sie in den KDE Connect Einstellungen hinzu"
 
-#: applet.js:1095
+#: applet.js:1097
 msgid "Debug Stuff, don't touch!"
 msgstr "Debug Zeug, nicht anfassen!"
 
-#: applet.js:1184
+#: applet.js:1186
 msgid "KDE Connect Version: {version}"
 msgstr "KDE Connect Version: {version}"
 
-#: applet.js:1191
+#: applet.js:1193
 msgid "Own ID: {own_id}"
 msgstr "Eigene ID: {own_id}"
 
-#: applet.js:1193
+#: applet.js:1195
 msgid "own ID"
 msgstr "Eigene ID"
 
-#: applet.js:1195
+#: applet.js:1197
 msgid "Click to copy own ID"
 msgstr "Klicken, um eigene ID zu kopieren"
 
-#: applet.js:1205
+#: applet.js:1207
 msgid "Configure KDE Connect"
 msgstr "KDE Connect konfigurieren"
 
-#: applet.js:1207
+#: applet.js:1209
 msgid "Click to open KDE Connect Configuration"
 msgstr "Klicken, um die KDE Connect Einstellungen zu öffnen"
 
-#: applet.js:1251
+#: applet.js:1253
 msgid "No available devices"
 msgstr "Keine verfügbaren Geräte"
 
-#: applet.js:1253
+#: applet.js:1255
 msgid "{deviceCount} available device"
 msgstr "{deviceCount} verfügbares Gerät"
 
-#: applet.js:1255
+#: applet.js:1257
 msgid "{deviceCount} available devices"
 msgstr "{deviceCount} verfügbare Geräte"
 
