@@ -2610,40 +2610,34 @@ const createConfig = () => {
 };
 
 ;// CONCATENATED MODULE: ./src/consts.ts
-var __rest = (undefined && undefined.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
-const { get_home_dir } = imports.gi.GLib;
-const APPLET_SITE = 'https://cinnamon-spices.linuxmint.com/applets/view/297';
-const DEFAULT_TOOLTIP_TXT = 'Radio++';
-const CONFIG_DIR = `${get_home_dir()}/.cinnamon/configs/${__meta.uuid}`;
-const MPRIS_PLUGIN_PATH = CONFIG_DIR + '/.mpris.so';
+const { get_home_dir, get_user_config_dir, get_user_cache_dir } = imports.gi.GLib;
+const { File } = imports.gi.Gio;
+const APPLET_SITE = "https://cinnamon-spices.linuxmint.com/applets/view/297";
+const APPLET_CACHE_DIR_PATH = `${get_user_cache_dir()}/${__meta.uuid}`;
+const MPRIS_PLUGIN_PATH = (() => {
+    const maybePath = [
+        `${get_home_dir()}/.cinnamon/configs/${__meta.uuid}/.mpris.so`,
+    ].find((path) => File.new_for_path(path).query_exists(null));
+    return maybePath || `${APPLET_CACHE_DIR_PATH}/.mpris.so`;
+})();
 const MPRIS_PLUGIN_URL = "https://github.com/hoyon/mpv-mpris/releases/download/0.5/mpris.so";
 const MEDIA_PLAYER_2_NAME = "org.mpris.MediaPlayer2";
 const MEDIA_PLAYER_2_PLAYER_NAME = "org.mpris.MediaPlayer2.Player";
 const MEDIA_PLAYER_2_PATH = "/org/mpris/MediaPlayer2";
 const MPV_MPRIS_BUS_NAME = `${MEDIA_PLAYER_2_NAME}.mpv`;
-const MPV_CVC_NAME = 'mpv Media Player';
+const MPV_CVC_NAME = "mpv Media Player";
 const MAX_STRING_LENGTH = 40;
 /** in percent */
 const MAX_VOLUME = 100; // see https://github.com/linuxmint/cinnamon-spices-applets/issues/3402#issuecomment-756430754 for an explanation of this value
 /** in percent */
 const VOLUME_DELTA = 5;
-// STYLE CLASSES 
-const POPUP_ICON_CLASS = 'popup-menu-icon';
-const POPUP_MENU_ITEM_CLASS = 'popup-menu-item';
+// STYLE CLASSES
+const POPUP_ICON_CLASS = "popup-menu-icon";
+const POPUP_MENU_ITEM_CLASS = "popup-menu-item";
 // ICONS
 function getVolumeIcon(args) {
     const { volume } = args;
-    const VOLUME_ICON_PREFIX = 'audio-volume';
+    const VOLUME_ICON_PREFIX = "audio-volume";
     const VOLUME_ICONS = [
         { max: 0, name: `${VOLUME_ICON_PREFIX}-muted` },
         { max: 33, name: `${VOLUME_ICON_PREFIX}-low` },
@@ -2651,24 +2645,23 @@ function getVolumeIcon(args) {
         { max: 100, name: `${VOLUME_ICON_PREFIX}-high` },
     ];
     if (volume < 0 || volume > 100)
-        throw new RangeError('volume should be between 0 and 100');
-    const index = VOLUME_ICONS.findIndex((_a) => {
-        var { max } = _a, rest = __rest(_a, ["max"]);
+        throw new RangeError("volume should be between 0 and 100");
+    const index = VOLUME_ICONS.findIndex(({ max }) => {
         return volume <= max;
     });
     return VOLUME_ICONS[index].name;
 }
-const RADIO_SYMBOLIC_ICON_NAME = 'radioapplet';
-const PLAYBACK_ICON_PREFIX = 'media-playback';
+const RADIO_SYMBOLIC_ICON_NAME = "radioapplet";
+const PLAYBACK_ICON_PREFIX = "media-playback";
 const PLAY_ICON_NAME = `${PLAYBACK_ICON_PREFIX}-start`;
 const PAUSE_ICON_NAME = `${PLAYBACK_ICON_PREFIX}-pause`;
 const STOP_ICON_NAME = `${PLAYBACK_ICON_PREFIX}-stop`;
-const PREVIOUS_ICON_NAME = 'media-skip-backward';
-const SONG_INFO_ICON_NAME = 'audio-x-generic';
-const COPY_ICON_NAME = 'edit-copy';
-const DOWNLOAD_ICON_NAME = 'south-arrow-weather-symbolic';
-const LOADING_ICON_NAME = 'view-refresh-symbolic';
-const CANCEL_ICON_NAME = 'dialog-cancel';
+const PREVIOUS_ICON_NAME = "media-skip-backward";
+const SONG_INFO_ICON_NAME = "audio-x-generic";
+const COPY_ICON_NAME = "edit-copy";
+const DOWNLOAD_ICON_NAME = "south-arrow-weather-symbolic";
+const LOADING_ICON_NAME = "view-refresh-symbolic";
+const CANCEL_ICON_NAME = "dialog-cancel";
 
 ;// CONCATENATED MODULE: ./src/services/mpv/MpvHandler.ts
 
@@ -4245,7 +4238,7 @@ function downloadWithYtDlp(props) {
 
 const { spawnCommandLine: YoutubeDownloadManager_spawnCommandLine } = imports.misc.util;
 const { get_home_dir: YoutubeDownloadManager_get_home_dir, dir_make_tmp, DateTime } = imports.gi.GLib;
-const { File, FileCopyFlags, FileQueryInfoFlags } = imports.gi.Gio;
+const { File: YoutubeDownloadManager_File, FileCopyFlags, FileQueryInfoFlags } = imports.gi.Gio;
 const notifyYouTubeDownloadFailed = (props) => {
     const { youtubeCli, errorMessage } = props;
     notifyError(`Couldn't download Song from YouTube due to an Error. Make Sure you have the newest version of ${youtubeCli} installed. 
@@ -4346,22 +4339,22 @@ function downloadSongFromYouTube(title) {
 const moveFileFromTmpDir = (props) => {
     var _a;
     const { tmpDirPath, targetDirPath, onFileMoved } = props;
-    const fileName = (_a = File.new_for_path(tmpDirPath)
+    const fileName = (_a = YoutubeDownloadManager_File.new_for_path(tmpDirPath)
         .enumerate_children("standard::*", FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null)
         .next_file(null)) === null || _a === void 0 ? void 0 : _a.get_name();
     if (!fileName) {
         throw new Error(`filename couldn't be determined`);
     }
     const tmpFilePath = `${tmpDirPath}/${fileName}`;
-    const tmpFile = File.new_for_path(tmpFilePath);
+    const tmpFile = YoutubeDownloadManager_File.new_for_path(tmpFilePath);
     const targetFilePath = `${targetDirPath}/${fileName}`;
-    const targetFile = File.parse_name(targetFilePath);
+    const targetFile = YoutubeDownloadManager_File.parse_name(targetFilePath);
     if (targetFile.query_exists(null)) {
         onFileMoved({ targetFilePath, fileAlreadyExist: true });
         return;
     }
     // @ts-ignore
-    tmpFile.move(File.parse_name(targetFilePath), FileCopyFlags.BACKUP, null, null);
+    tmpFile.move(YoutubeDownloadManager_File.parse_name(targetFilePath), FileCopyFlags.BACKUP, null, null);
     onFileMoved({ targetFilePath, fileAlreadyExist: false });
 };
 const getCurrentDownloadingSongs = () => {
@@ -4399,7 +4392,6 @@ function addDownloadingSongsChangeListener(callback) {
 
 
 
-
 const { PanelItemTooltip } = imports.ui.tooltips;
 const { markup_escape_text } = imports.gi.GLib;
 function createRadioAppletTooltip(args) {
@@ -4411,7 +4403,7 @@ function createRadioAppletTooltip(args) {
         // @ts-ignore
         tooltip.orientation = __meta.orientation;
         if (mpvHandler.getPlaybackStatus() === 'Stopped') {
-            tooltip.set_markup(DEFAULT_TOOLTIP_TXT);
+            tooltip.set_markup("Radio++");
             return;
         }
         const lines = [
@@ -5818,12 +5810,20 @@ const createRadioAppletContainer = (props) => {
 
 
 
+
+const { new_for_path } = imports.gi.Gio.File;
 const onAppletMovedCallbacks = [];
+const createCacheDir = () => {
+    const dir = new_for_path(APPLET_CACHE_DIR_PATH);
+    if (!dir.query_exists(null))
+        dir.make_directory_with_parents(null);
+};
 const addOnAppletMovedCallback = (cb) => {
     onAppletMovedCallbacks.push(cb);
 };
 // The function defintion must use the word "function" (not const!) as otherwilse the error: "radioApplet.main is not a constructor" is thrown
 function main() {
+    createCacheDir();
     // order must be retained!
     initPolyfills();
     initConfig();

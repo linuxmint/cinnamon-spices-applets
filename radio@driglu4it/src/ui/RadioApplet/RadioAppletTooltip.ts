@@ -1,5 +1,4 @@
 import { addOnAppletMovedCallback } from "../.."
-import { DEFAULT_TOOLTIP_TXT } from "../../consts"
 import { mpvHandler } from "../../services/mpv/MpvHandler"
 import { addDownloadingSongsChangeListener, getCurrentDownloadingSongs } from "../../services/youtubeDownload/YoutubeDownloadManager"
 
@@ -26,7 +25,7 @@ export function createRadioAppletTooltip(args: Arguments) {
         tooltip.orientation = __meta.orientation
 
         if (mpvHandler.getPlaybackStatus() === 'Stopped') {
-            tooltip.set_markup(DEFAULT_TOOLTIP_TXT)
+            tooltip.set_markup("Radio++")
             return
         }
 

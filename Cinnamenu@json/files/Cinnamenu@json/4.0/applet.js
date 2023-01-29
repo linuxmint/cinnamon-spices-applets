@@ -18,10 +18,11 @@ const {TextIconApplet, AllowedLayout, AppletPopupMenu} = imports.ui.applet;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
 const {addTween} = imports.ui.tweener;
+//const {AppletSettings} = imports.ui.settings;
 
 const {PopupResizeHandler} = require('./resizer');
 const {AppletSettings} = require('./settings');
-const {_, graphemeBaseChars, searchStr} = require('./utils');
+const {_, graphemeBaseChars, log, searchStr} = require('./utils');
 const {ContextMenu} = require('./contextmenu');
 const {AppsView} = require('./appsview');
 const {CategoriesView} = require('./categoriesview');
@@ -32,10 +33,10 @@ const {searchBrowserHistory} = require('./browserHistory');
 const {EMOJI, EMOJI_CATEGORIES} = require('./emoji');
 const {searchSuggestions} = require('./suggestions');
 const EMOJI_CODE = 0, EMOJI_NAME = 1, EMOJI_KEYWORDS = 2;
-const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
+const ApplicationsViewMode = Object.freeze({LIST: 0, GRID: 1});
 //const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const SEARCH_THRESHOLD = 0.45;
-const SidebarPlacement = Object.freeze({ TOP: 0, BOTTOM: 1, LEFT: 2, RIGHT: 3});
+const SidebarPlacement = Object.freeze({TOP: 0, BOTTOM: 1, LEFT: 2, RIGHT: 3});
 
 class CinnamenuApplet extends TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -63,12 +64,11 @@ class CinnamenuApplet extends TextIconApplet {
         this._applet_context_menu.addMenuItem(searchFilesMenuItem);
         searchFilesMenuItem.connect('activate', () => {
                             Util.spawnCommandLine(__meta.path + '/search.py ' + GLib.get_home_dir()); });
-        this.resizer = new PopupResizeHandler(  this, this.menu.actor,
-                                                400, this._getScreenWorkArea().width,
-                                                300, this._getScreenWorkArea().height,
-                                                (w,h) => this.onBoxResized(w,h),
-                                                () => this.settings.customMenuWidth,
-                                                () => this.settings.customMenuHeight);
+        this.resizer = new PopupResizeHandler(  this.menu.actor,
+                                                () => this.orientation,
+                                                (w,h) => this.onMenuResized(w,h),
+                                                () => this.settings.customMenuWidth * global.ui_scale,
+                                                () => this.settings.customMenuHeight * global.ui_scale);
         //this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY,
         //                                                            () => this._onEnableRecentsChange());
         this.signals.connect(Main.themeManager, 'theme-set', () => {this._updateIconAndLabel();
@@ -87,7 +87,7 @@ class CinnamenuApplet extends TextIconApplet {
                         } });
         this.signals.connect(this.menu, 'open-state-changed', (...args) => this._onOpenStateToggled(...args));
         //this.signals.connect(global, 'scale-changed', () => this._refresh() );
-        this.apps = new Apps(this);
+        this.apps = new Apps(this.appSystem);
         //this.session = new SessionManager();
         this.screenSaverProxy = new ScreenSaverProxy();
         this.initSettings();
@@ -164,7 +164,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     getAppIconSize() {
-        if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+        if (this.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
             return this.settings.appsListIconSize;
         } else {
             return this.settings.appsGridIconSize;
@@ -224,12 +224,6 @@ class CinnamenuApplet extends TextIconApplet {
         } else {
             adjustment.set_value(value);
         }
-    }
-
-    _getScreenWorkArea() {
-        const monitor = Main.layoutManager.currentMonitor;
-        const ws = global.screen.get_active_workspace();
-        return ws.get_work_area_for_monitor(monitor.index);
     }
 
 //----------------TextIconApplet callbacks---------
@@ -414,8 +408,11 @@ class CinnamenuApplet extends TextIconApplet {
         // invocation.
         if (!this.lastRenderTime) this.lastRenderTime = 0;
         const now = Date.now();
-        if ((now - this.lastRenderTime) <= 250) return;
+        if ((now - this.lastRenderTime) <= 250) {
+            return;
+        }
         this.lastRenderTime = now;
+
         this._destroyDisplayed();
         this.menu.removeAll();
         if (this.currentCategory === 'places' && !this.settings.showPlaces ||
@@ -495,24 +492,26 @@ class CinnamenuApplet extends TextIconApplet {
         return true;
     }
 
-    onBoxResized(userWidth, userHeight){
-        this.updateMenuSize(userWidth, userHeight);
+    onMenuResized(userWidth, userHeight){
+        this.setMenuSize(userWidth, userHeight);
         //when resizing, no adjustments to app buttons are needed for list view
-        if (this.settings.applicationsViewMode === ApplicationsViewModeGRID) {
+        if (this.settings.applicationsViewMode === ApplicationsViewMode.GRID) {
             this.appsView.resizeGrid();
         }
     }
 
-    updateMenuSize(newWidth = null, newHeight = null) {
-        if (!newHeight) {//newHeight is only supplied when risizing
-            newHeight = this.settings.customMenuHeight;
-        }
+    updateMenuSize() {
+        this.setMenuSize(this.settings.customMenuWidth * global.ui_scale,
+                        this.settings.customMenuHeight * global.ui_scale);
+    }
 
+    setMenuSize(newWidth, newHeight) {
         //----------height--------
         //Note: the stored menu height value is middlePane + bottomPane which is smaller than the
         //menu's actual height. CategoriesView and sidebar height are not automatically
         //set because ScrollBox.set_policy Gtk.PolicyType.NEVER pushes other items off the menu
-        const appsHeight = newHeight - this.bottomPane.height;
+        let appsHeight = newHeight - this.bottomPane.height;
+        appsHeight = Math.max(appsHeight, 200);//set minimum height
 
         //---set middlePane actors to appsHeight
         this.appsView.applicationsScrollBox.height = appsHeight;
@@ -520,23 +519,20 @@ class CinnamenuApplet extends TextIconApplet {
 
         //find sidebarOuterBox vertical padding
         const themeNode = this.sidebar.sidebarOuterBox.get_theme_node();
-        const topAndBottomPadding = themeNode.lookup_length('padding-top', true)[1] +
-                                            themeNode.lookup_length('padding-bottom', true)[1];
-        let padding = Math.max(themeNode.lookup_length('padding', true)[1] * 2, topAndBottomPadding);
-
+        const verticalPadding = Math.max(   themeNode.get_length('padding-top') +
+                                            themeNode.get_length('padding-bottom'),
+                                            themeNode.get_length('padding') * 2);
+                
         //set sidebarScrollBox height
-        this.sidebar.sidebarScrollBox.set_height(-1);
-        this.sidebar.sidebarScrollBox.set_height(Math.min(appsHeight - padding, this.sidebar.sidebarScrollBox.height));
+        this.sidebar.sidebarScrollBox.set_height(-1);//undo previous set_height()
+        this.sidebar.sidebarScrollBox.set_height(Math.min(appsHeight - verticalPadding,
+                                                            this.sidebar.sidebarScrollBox.height));
 
         //------------width-------------
         //Note: the stored menu width value is less than the menu's actual width because it doesn't
         //include the outer menuBox padding, margin, etc. appsView width is not set automatically
         //because I don't know how to determine it's available width in order to calculate number
         //of columns to use in Clutter.GridLayout
-
-        if (!newWidth) {//newWidth is only supplied when risizing
-            newWidth = this.settings.customMenuWidth;
-        }
 
         //find minimum width for categoriesView + sidebar (if present)
         let leftSideWidth = this.categoriesView.groupCategoriesWorkspacesScrollBox.width;
@@ -567,8 +563,8 @@ class CinnamenuApplet extends TextIconApplet {
 
         //Don't change settings while resizing to avoid excessive disk writes.
         if (!this.resizer.resizingInProgress) {
-            this.settings.customMenuHeight = newHeight;
-            this.settings.customMenuWidth = menuWidth;
+            this.settings.customMenuHeight = newHeight / global.ui_scale;
+            this.settings.customMenuWidth = menuWidth / global.ui_scale;
         }
     }
 
@@ -671,7 +667,7 @@ class CinnamenuApplet extends TextIconApplet {
             if (focusedContextMenuItemExists) {
                 contextMenuChildren[focusedContextMenuItemIndex].handleEnter();//effectively ignore
             } else if (focusedAppItemExists) {
-                if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+                if (this.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                     categoryButtons[currentlyActiveCategoryIndex].handleEnter();
                 } else {
                     if (focusedAppItemIndex > 0) {
@@ -696,7 +692,7 @@ class CinnamenuApplet extends TextIconApplet {
             if (focusedContextMenuItemExists) {
                 contextMenuChildren[focusedContextMenuItemIndex].handleEnter();//Ignore
             } else if (focusedAppItemExists) {
-                if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+                if (this.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                     appButtons[focusedAppItemIndex].handleEnter();//ignore
                 } else {
                     if (appButtons[focusedAppItemIndex + 1]) {
@@ -729,7 +725,7 @@ class CinnamenuApplet extends TextIconApplet {
                 }
                 contextMenuChildren[nextContextMenuItem].handleEnter();
             } else if (focusedAppItemExists) {
-                if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+                if (this.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                     if (appButtons[focusedAppItemIndex + 1]) {
                         appButtons[focusedAppItemIndex + 1].handleEnter();
                     } else {
@@ -775,7 +771,7 @@ class CinnamenuApplet extends TextIconApplet {
                 }
                 contextMenuChildren[previousContextMenuItem].handleEnter();
             } else if (focusedAppItemExists) {
-                if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+                if (this.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                     if (focusedAppItemIndex > 0) {
                         appButtons[focusedAppItemIndex - 1].handleEnter();
                     } else {
@@ -808,11 +804,11 @@ class CinnamenuApplet extends TextIconApplet {
                 }
             }
         };
-
+        
         switch (true) {
         case (symbol === Clutter.KEY_KP_Enter || symbol === Clutter.KP_Enter ||
                                             symbol === Clutter.KEY_Return) && ctrlKey:
-        case (symbol === Clutter.KEY_Menu) && noModifiers:
+        case symbol === Clutter.KEY_Menu && noModifiers:
             if (this.contextMenu.isOpen) {
                 this.contextMenu.close();
             } else if (focusedAppItemExists) {
@@ -835,19 +831,44 @@ class CinnamenuApplet extends TextIconApplet {
                 categoryButtons[focusedCategoryIndex].selectCategory();
             }
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.KEY_Up && noModifiers):
+        case (symbol === Clutter.KEY_KP_Enter || symbol === Clutter.KP_Enter ||
+                                        symbol === Clutter.KEY_Return) && altKey:
+            if (focusedAppItemExists && appButtons[focusedAppItemIndex].app.isApplication) {
+                const desktop_file_path = appButtons[focusedAppItemIndex].app.desktop_file_path;
+                Util.spawn(['cinnamon-desktop-editor', '-mlauncher', '-o' + desktop_file_path]);
+                this.menu.close();
+                return Clutter.EVENT_STOP;
+            }
+            return Clutter.EVENT_PROPAGATE
+        case symbol === Clutter.unicode_to_keysym("d".charCodeAt(0)) && ctrlKey:
+            if (focusedAppItemExists && appButtons[focusedAppItemIndex].app.isApplication) {
+                const desktop_file_path = appButtons[focusedAppItemIndex].app.desktop_file_path;
+                Util.spawn(['xdg-open', desktop_file_path]);
+                this.menu.close();
+                return Clutter.EVENT_STOP;
+            }
+            return Clutter.EVENT_PROPAGATE
+        case (symbol === Clutter.KEY_KP_Enter || symbol === Clutter.KP_Enter ||
+                                                symbol === Clutter.KEY_Return) && shiftKey:
+            if (focusedAppItemExists && appButtons[focusedAppItemIndex].app.isApplication) {
+                appButtons[focusedAppItemIndex].activateAsRoot();
+                this.menu.close();
+                return Clutter.EVENT_STOP;
+            }
+            return Clutter.EVENT_PROPAGATE
+        case symbol === Clutter.KEY_Up && noModifiers:
             leaveCurrentlyFocusedItem();
             upNavigation();
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.KEY_Down && noModifiers):
+        case symbol === Clutter.KEY_Down && noModifiers:
             leaveCurrentlyFocusedItem();
             downNavigation();
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.KEY_Right && noModifiers):
+        case symbol === Clutter.KEY_Right && noModifiers:
             leaveCurrentlyFocusedItem();
             rightNavigation();
             return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
-        case (symbol === Clutter.KEY_Left && noModifiers):
+        case symbol === Clutter.KEY_Left && noModifiers:
             leaveCurrentlyFocusedItem();
             leftNavigation();
             return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
@@ -887,7 +908,7 @@ class CinnamenuApplet extends TextIconApplet {
                 this.menu.close();
             }
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.KEY_Page_Up && noModifiers):
+        case symbol === Clutter.KEY_Page_Up && noModifiers:
             leaveCurrentlyFocusedItem();
             if (focusedAppItemExists) {
                 appButtons[0].handleEnter();
@@ -897,7 +918,7 @@ class CinnamenuApplet extends TextIconApplet {
                 categoryButtons[0].handleEnter();
             }
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.KEY_Page_Down && noModifiers):
+        case symbol === Clutter.KEY_Page_Down && noModifiers:
             leaveCurrentlyFocusedItem();
             if (focusedAppItemExists) {
                 appButtons[appButtons.length - 1].handleEnter();
@@ -929,7 +950,7 @@ class CinnamenuApplet extends TextIconApplet {
             //adjust number of items according to number of columns in grid view to make
             //best use of available space.
             let maxRecentItems = 4;
-            if (this.settings.applicationsViewMode === ApplicationsViewModeGRID) {
+            if (this.settings.applicationsViewMode === ApplicationsViewMode.GRID) {
                 const columns = this.appsView.getGridValues().columns;
                 maxItems = Math.ceil(6 / columns) * columns;
                 maxRecentItems = Math.max(maxRecentItems, columns);
@@ -1555,8 +1576,8 @@ class CinnamenuApplet extends TextIconApplet {
         //When sidebar is not on the left, limit excessive mainBox left padding + categoriesBox left
         //padding to 20px by subtracting the difference from categoriesBox left padding.
         if (sidebarPlacement !== SidebarPlacement.LEFT) {
-            const catLpadding = this.categoriesView.categoriesBox.get_theme_node().get_padding(3);
-            const mainBoxLpadding = this.mainBox.get_theme_node().get_padding(3);
+            const catLpadding = this.categoriesView.categoriesBox.get_theme_node().get_padding(St.Side.LEFT);
+            const mainBoxLpadding = this.mainBox.get_theme_node().get_padding(St.Side.LEFT);
             const excessPadding = Math.max(catLpadding + mainBoxLpadding - 20, 0);//=total padding > 20px
             if (excessPadding > 0) {
                 this.categoriesView.categoriesBox.style = `padding-left: ${
@@ -1566,7 +1587,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         this.sidebar.populate();
 
-        if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+        if (this.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
             this.appsView.applicationsGridBox.hide();
             this.appsView.applicationsListBox.show();
         } else {
@@ -1608,6 +1629,7 @@ class CinnamenuApplet extends TextIconApplet {
  *  .score
  *  .nameWithSearchMarkup
  *  .descriptionWithSearchMarkup
+ *  .desktop_file_path
  *  .isApplication
  *  .isPlace
  *  .isRecentFile
@@ -1900,9 +1922,10 @@ class CinnamenuApplet extends TextIconApplet {
 }
 
 class Apps {//This obj provides the .app objects for all the applications categories
-    constructor(appThis) {
-        this.appThis = appThis;
+    constructor(appSystem) {
+        this.appSystem = appSystem;
         this.appsByCategory = {};
+        this.dirs = [];
         this.knownApps = [];
         this.newInstance = true;
         this.appsNeedRefresh = true;
@@ -1915,23 +1938,35 @@ class Apps {//This obj provides the .app objects for all the applications catego
     _initAppCategories() {
         const apps_sort = arr => arr.sort((a, b) => a.name.localeCompare(b.name, undefined,
                                                     {sensitivity: "base", ignorePunctuation: true}));
-        const dirs = [];
-        const iter = this.appThis.appSystem.get_tree().get_root_directory().iter();
+        this.dirs = [];
+        const iter = this.appSystem.get_tree().get_root_directory().iter();
         let nextType;
         while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
             if (nextType === CMenu.TreeItemType.DIRECTORY) {
-                dirs.push(iter.get_directory());
+                const dir = iter.get_directory();
+                if (dir.get_is_nodisplay()) {
+                    continue;
+                }
+                const dirId = dir.get_menu_id();
+                const foundApps = this._loadDirectory(dir);
+                if (foundApps.length > 0) {
+                    apps_sort(foundApps);
+                    this.appsByCategory[dirId] = foundApps;
+                    this.dirs.push(dir);
+                }
             }
         }
 
-        dirs.forEach(dir => {
-            if (!dir.get_is_nodisplay()) {
-                const dirId = dir.get_menu_id();
-                this.appsByCategory[dirId] = [];
-                this._loadAppCategories(dir, null, dirId);
-                apps_sort(this.appsByCategory[dirId]);
-            }
+        this.dirs.sort((a, b) => {
+            const prefCats = ['ADMINISTRATION', 'PREFERENCES'];
+            const prefIdA = prefCats.indexOf(a.get_menu_id().toUpperCase());
+            const prefIdB = prefCats.indexOf(b.get_menu_id().toUpperCase());
+            if (prefIdA < 0 && prefIdB >= 0) return -1;
+            if (prefIdA >= 0 && prefIdB < 0) return 1;
+            return a.get_name().localeCompare(b.get_name(), undefined,
+                                              {sensitivity: "base", ignorePunctuation: true});
         });
+
         //create "All applications" category
         let all = [];
         Object.keys(this.appsByCategory).forEach(key => {
@@ -1945,50 +1980,54 @@ class Apps {//This obj provides the .app objects for all the applications catego
         this.newInstance = false;
     }
 
-    _loadAppCategories(dir, rootDir, dirId) {
+    _loadDirectory(dir) {
+        let foundApps = [];
         const iter = dir.iter();
         let nextType;
         while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
             if (nextType === CMenu.TreeItemType.ENTRY) {
                 const entry = iter.get_entry();
-                const appInfo = entry.get_app_info();
-                if (appInfo && !appInfo.get_nodisplay()) {
-                    const id = entry.get_desktop_file_id();
-                    const app = this.appThis.appSystem.lookup_app(id);
-                    let found = false;
-                    if (rootDir && typeof rootDir.get_menu_id === 'function') {
-                        const rootDirId = rootDir.get_menu_id();
-                        if (rootDirId) {
-                            this.appsByCategory[rootDirId].push(app);
-                            found = true;
-                        }
-                    } else {
-                        if (dirId) {
-                            this.appsByCategory[dirId].push(app);
-                            found = true;
-                        }
+                const id = entry.get_desktop_file_id();
+                const app = this.appSystem.lookup_app(id);
+                if  (!app || (app && app.get_nodisplay())) {
+                    continue;
+                }
+
+                foundApps.push(app);
+                app.name = app.get_name();
+                app.description = app.get_description();
+                app.isApplication = true;
+                app.id = id;
+                app.desktop_file_path = entry.get_desktop_file_path();
+
+                if (this.knownApps.indexOf(id) < 0) {//unknown app
+                    if (!this.newInstance) {
+                        app.newAppShouldHighlight = true;
                     }
-                    if (found) {
-                        app.name = app.get_name();
-                        app.description = app.get_description();
-                        app.isApplication = true;
-                        app.id = app.get_id();
-                    }
-                    if (this.knownApps.indexOf(id) < 0) {//unknown app
-                        if (!this.newInstance) {
-                            app.newAppShouldHighlight = true;
-                        }
-                        this.knownApps.push(id);
-                    }
+                    this.knownApps.push(id);
                 }
             } else if (nextType === CMenu.TreeItemType.DIRECTORY) {
-                if (rootDir) {
-                    this._loadAppCategories(iter.get_directory(), rootDir, null);
-                } else {
-                    this._loadAppCategories(iter.get_directory(), dir, dirId);
+                const subDir = iter.get_directory();
+                if (!subDir.get_is_nodisplay()) {
+                    foundApps = foundApps.concat(this._loadDirectory(subDir));
                 }
             }
         }
+        return foundApps;
+    }
+
+    getDirs() {
+        if (this.appsNeedRefresh) {
+            this._initAppCategories();
+        }
+
+        return this.dirs;
+    }
+
+    dirHasNewApp(dirId) {
+        const apps = this.listApplications(dirId);
+        const newAppIndex = apps.findIndex(app => !!app.newAppShouldHighlight);
+        return (newAppIndex >= 0);
     }
 
     listApplications(categoryMenuId) {
@@ -2004,10 +2043,10 @@ class Apps {//This obj provides the .app objects for all the applications catego
             return [];
         }
 
-        const res = this.listApplications('all');
-        const _res = [];
-        res.forEach(app => {
+        const res = [];
+        this.listApplications('all').forEach(app => {
             const keywords = app.get_keywords() || '';
+            //get and clean up the app ids.
             let id = app.id.replace('.desktop', '');
             const idLastDot = id.lastIndexOf('.');
             if (idLastDot >= 0) {
@@ -2026,15 +2065,15 @@ class Apps {//This obj provides the .app objects for all the applications catego
                 app.score = bestMatchScore;
                 app.nameWithSearchMarkup = match1.result;
                 app.descriptionWithSearchMarkup = match2.result;
-                _res.push(app);
+                res.push(app);
             }
         });
 
-        return _res;
+        return res;
     }
 }
 
-class RecentApps {// simple class to remember the last 4 used apps which are shown in the "recent" category
+class RecentApps {// simple class to remember the last 20 used apps which are shown in the "recent" category
     constructor(appThis) {
         this.appThis = appThis;
     }
@@ -2094,15 +2133,15 @@ class SearchView {
                                         this.appThis.settings.sidebarPlacement === SidebarPlacement.LEFT) {
             //set left padding of searchBox to match right padding
             const searchBoxNode = this.searchBox.get_theme_node();
-            const searchBoxPaddingRight = searchBoxNode.get_padding(1);
+            const searchBoxPaddingRight = searchBoxNode.get_padding(St.Side.RIGHT);
             this.searchBox.style += `padding-left: ${searchBoxPaddingRight}px; `;
 
             //deal with uneven searchBox margins and uneven mainBox paddings by setting searchBox margins.
-            const searchBoxRightMargin = searchBoxNode.get_margin(3);
+            const searchBoxMarginLeft = searchBoxNode.get_margin(St.Side.LEFT);
             const mainBoxNode = this.appThis.mainBox.get_theme_node();
-            const mainBoxPaddingRight = mainBoxNode.get_padding(1);
-            const mainBoxPaddingLeft = mainBoxNode.get_padding(3);
-            const newMargin = Math.max(searchBoxRightMargin, mainBoxPaddingRight, mainBoxPaddingLeft);
+            const mainBoxPaddingRight = mainBoxNode.get_padding(St.Side.RIGHT);
+            const mainBoxPaddingLeft = mainBoxNode.get_padding(St.Side.LEFT);
+            const newMargin = Math.max(searchBoxMarginLeft, mainBoxPaddingRight, mainBoxPaddingLeft);
             this.searchBox.style += `margin-left: ${newMargin - mainBoxPaddingLeft}px; ` +
                                                 `margin-right: ${newMargin - mainBoxPaddingRight}px; `;
         }

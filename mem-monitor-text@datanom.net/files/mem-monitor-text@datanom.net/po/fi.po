@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-01 23:59+0200\n"
+"PO-Revision-Date: 2022-12-02 00:09+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi\n"
+
+#: applet.js:36
+msgid "Open System Monitor"
+msgstr "Avaa järjestelmän valvonta"
+
+#: applet.js:87
+msgid "Click to open Gnome system monitor"
+msgstr "Napsauta järjestelmän valvonta auki"
+
+#. metadata.json->name
+msgid "Simple Memory Monitor"
+msgstr "Simple Memory Monitor"
+
+#. metadata.json->description
+msgid "A simple applet that displays the memory usage."
+msgstr "Sovelma, joka näyttää tietokoneen muistinkäytön."
+
+#. settings-schema.json->mem-label->description
+msgid "Text:"
+msgstr "Teksti:"
+
+#. settings-schema.json->mem-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "Kirjoita teksti, joka näkyy paneelissa muistimäärän vieressä."
+
+#. settings-schema.json->warning-usage->description
+msgid "Warning Level:"
+msgstr "Varoitustaso:"
+
+#. settings-schema.json->warning-usage->tooltip
+msgid ""
+"Percentage at which the text starts blinking to warn the user. Set at 100 to "
+"deactivate."
+msgstr ""
+"Prosenttiosuus, jolloin teksti alkaa vilkkua varoittaakseen käyttäjää. Arvo "
+"100, poistaa sen käytöstä."
