@@ -8,7 +8,7 @@ const ByteArray = imports.byteArray;
 
 /**
  * NOT WORKING, fileInfo completely empty atm
- * @param file 
+ * @param file
  */
 export async function GetFileInfo(file: imports.gi.Gio.File): Promise<imports.gi.Gio.FileInfo> {
 	return new Promise((resolve, reject) => {
@@ -37,7 +37,7 @@ export async function FileExists(file: imports.gi.Gio.File, dictionary: boolean 
 
 /**
  * Loads contents of a file. Can throw Gio.IOErrorEnum exception. (e.g file does not exist)
- * @param file 
+ * @param file
  */
 export async function LoadContents(file: imports.gi.Gio.File): Promise<string | null> {
 	return new Promise((resolve, reject) => {

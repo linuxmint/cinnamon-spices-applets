@@ -19,7 +19,7 @@ export class UIHourlyForecasts {
 	private hourlyForecasts: HourlyForecastUI[] = [];
 	private hourlyContainers: imports.gi.St.BoxLayout[] = [];
 
-	/** 
+	/**
 	 * Stores the dates for each displayed hour, so we can scroll to them later.
 	 * Populated in the Display function.
 	 */
@@ -61,9 +61,9 @@ export class UIHourlyForecasts {
 		this.actor.connect("scroll-event", (owner, event) => {
 			const adjustment = hScroll.get_adjustment();
 			const direction = event.get_scroll_direction();
-			const newVal = adjustment.get_value() + 
+			const newVal = adjustment.get_value() +
 				(direction === ScrollDirection.UP ? -adjustment.step_increment : adjustment.step_increment);
-			
+
 			if (global.settings.get_boolean("desktop-effects-on-menus"))
 				addTween(adjustment, { value: newVal, time: 0.25});
 			else
@@ -88,9 +88,9 @@ export class UIHourlyForecasts {
 
 	/**
 	 * Make sure to call this after the hourly weather was shown at least once,
-	 * otherwise the calculation will not be accurate! 
+	 * otherwise the calculation will not be accurate!
 	 *
-	 * @param date 
+	 * @param date
 	 */
 	public DateToScrollIndex(date: DateTime): number | null {
 		if (this.hourlyForecastDates == null)
@@ -159,7 +159,8 @@ export class UIHourlyForecasts {
 			ui.Temperature.text = TempToUserConfig(hour.temp, config) ?? "";
 			ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
 			ui.Summary.text = hour.condition.main;
-			ui.Precipitation.text = this.GeneratePrecipitationText(hour.precipitation, config);
+			ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation, config);
+			ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
 		}
 
 		this.AdjustHourlyBoxItemWidth();
@@ -285,22 +286,17 @@ export class UIHourlyForecasts {
 			const ui = this.hourlyForecasts[index];
 			const hourWidth = ui.Hour.get_preferred_width(-1)[1];
 			const iconWidth = ui.Icon.get_preferred_width(-1)[1];
-			let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
+			const percipVolumeWidth = ui.PrecipVolume.get_preferred_width(-1)[1];
+			const percipChanceWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
+			const summaryWidth = ui.Summary.get_preferred_width(-1)[1];
 			const temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
-			let precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
+			const precipitationWidth = ui.PrecipPercent.get_preferred_width(-1)[1];
 
-			if (precipitationWidth == null || temperatureWidth == null || 
-				hourWidth == null || iconWidth == null || summaryWidth == null)
+			if (precipitationWidth == null || temperatureWidth == null ||
+				hourWidth == null || iconWidth == null || summaryWidth == null ||
+				percipVolumeWidth == null || percipChanceWidth == null)
 				continue;
 
-			// If text is bigger than icon we add some artificial padding
-			// so text doesn't look too close
-			if (precipitationWidth > iconWidth || summaryWidth > iconWidth) {
-				if (precipitationWidth > summaryWidth)
-					precipitationWidth += 10;
-				else
-					summaryWidth += 10;
-			}
 			if (requiredWidth < hourWidth) requiredWidth = hourWidth;
 			if (requiredWidth < iconWidth) requiredWidth = iconWidth;
 			if (requiredWidth < summaryWidth) requiredWidth = summaryWidth;
@@ -333,17 +329,21 @@ export class UIHourlyForecasts {
 					icon_name: APPLET_ICON,
 					style_class: "hourly-icon"
 				}),
-				Precipitation: new Label({ text: " ", style_class: "hourly-data" }),
 				Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
+				PrecipPercent: new Label({ text: " ", style_class: "hourly-data" }),
+				PrecipVolume: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
 				Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
 			})
 
-			this.hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
+			this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
 			box.add_child(this.hourlyForecasts[index].Hour);
 			box.add_child(this.hourlyForecasts[index].Icon);
-			box.add_child(this.hourlyForecasts[index].Summary);
+			box.add(this.hourlyForecasts[index].Summary, {expand: true, x_fill: true});
 			box.add_child(this.hourlyForecasts[index].Temperature);
-			box.add_child(this.hourlyForecasts[index].Precipitation);
+			if (this.app.Provider?.supportHourlyPrecipChance)
+				box.add_child(this.hourlyForecasts[index].PrecipPercent);
+			if (this.app.Provider?.supportHourlyPrecipVolume)
+				box.add_child(this.hourlyForecasts[index].PrecipVolume);
 
 			this.container.add(box, {
 				x_fill: true,
@@ -358,17 +358,25 @@ export class UIHourlyForecasts {
 	// DisplayUtils
 
 	/**
-	 * 
-	 * @param precip 
-	 * @returns Always returns text 
+	 *
+	 * @param precip
+	 * @returns Always returns text
 	 */
-	private GeneratePrecipitationText(precip: Precipitation | undefined, config: Config): string {
+	private GeneratePrecipitationVolume(precip: Precipitation | undefined, config: Config): string {
 		if (!precip) return "";
 
 		let precipitationText = "";
 		if (!!precip.volume && precip.volume > 0) {
-			precipitationText = MillimeterToUserUnits(precip.volume, config.DistanceUnit) + " " + ((config.DistanceUnit == "metric") ? _("mm") : _("in"));
+			precipitationText = `${MillimeterToUserUnits(precip.volume, config.DistanceUnit)}${config.DistanceUnit == "metric" ? _("mm") : _("in")}`;
 		}
+
+		return precipitationText;
+	}
+
+	private GeneratePrecipitationChance(precip: Precipitation | undefined, config: Config): string {
+		if (!precip) return "";
+
+		let precipitationText = "";
 		if (!!precip.chance) {
 			precipitationText = (NotEmpty(precipitationText)) ? (precipitationText + ", ") : "";
 			precipitationText += (Math.round(precip.chance).toString() + "%")
@@ -388,11 +396,11 @@ export class UIHourlyForecasts {
 			Logger.Debug("Height requests of Hourly box Items: " + index);
 			const hourHeight = ui.Hour.get_preferred_height(-1)[1];
 			const iconHeight = ui.Icon.get_preferred_height(-1)[1];
-			const summaryHeight = ui.Summary.get_preferred_height(-1)[1];
+			const summaryHeight = ui.PrecipVolume.get_preferred_height(-1)[1];
 			const temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
-			const precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
+			const precipitationHeight = ui.PrecipPercent.get_preferred_height(-1)[1];
 
-			if (precipitationHeight == null || temperatureHeight == null || 
+			if (precipitationHeight == null || temperatureHeight == null ||
 				hourHeight == null || iconHeight == null || summaryHeight == null)
 				continue;
 
@@ -415,6 +423,7 @@ interface HourlyForecastUI {
 	Icon: imports.gi.St.Icon,
 	Hour: imports.gi.St.Label,
 	Summary: imports.gi.St.Label,
+	PrecipVolume: imports.gi.St.Label,
 	Temperature: imports.gi.St.Label,
-	Precipitation: imports.gi.St.Label
+	PrecipPercent: imports.gi.St.Label
 }

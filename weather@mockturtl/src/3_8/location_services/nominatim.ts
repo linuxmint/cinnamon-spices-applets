@@ -19,7 +19,7 @@ export class GeoLocation {
 
 	/**
 	 * Finds location and rebuilds entryText so it can be looked up again
-	 * @param searchText 
+	 * @param searchText
 	 */
 	public async GetLocation(searchText: string): Promise<LocationData | null> {
 		try {
@@ -66,10 +66,10 @@ export class GeoLocation {
 	}
 
 	/**
-	 * Nominatim doesn't return any result if the State district is included in the search 
+	 * Nominatim doesn't return any result if the State district is included in the search
 	 * in specific case, we have to build it from the address details omitting specific
 	 * keys
-	 * @param locationData 
+	 * @param locationData
 	 */
 	private BuildEntryText(locationData: any): string {
 		if (locationData.address == null) return locationData.display_name;

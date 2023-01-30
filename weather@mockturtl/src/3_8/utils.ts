@@ -36,7 +36,7 @@ export function UnitToUnicode(unit: Exclude<WeatherUnits, "automatic">): string 
 	//return unit == "fahrenheit" ? '\u2109' : '\u2103';
 	// Use the not dedicated characters, it exists in more fonts fixing some alignment issues with
 	// fallbacks
-	return unit == "fahrenheit" ? '°F' : '°C';	
+	return unit == "fahrenheit" ? '°F' : '°C';
 }
 
 /** Generates text for the LocationButton on to of the popup menu and tooltip */
@@ -50,10 +50,30 @@ export function GenerateLocationText(weather: WeatherData, config: Config) {
 
 	// Overriding Location
 	if (NotEmpty(config._locationLabelOverride)) {
-		location = config._locationLabelOverride;
+		location = InjectValues(config._locationLabelOverride, weather, config);
 	}
 
 	return location;
+}
+
+export function InjectValues(text: string, weather: WeatherData, config: Config): string {
+	const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
+	return text.replace(/{t}/g, TempToUserConfig(weather.temperature, config, false) ?? "")
+			   .replace(/{u}/g, UnitToUnicode(config.TemperatureUnit))
+			   .replace(/{c}/g, weather.condition.main)
+			   .replace(/{c_long}/g, weather.condition.description)
+			   .replace(/{dew_point}/g, TempToUserConfig(weather.dewPoint, config, false) ?? "")
+			   .replace(/{humidity}/g, weather.humidity?.toString() ?? "")
+			   .replace(/{pressure}/g, weather.pressure != null ? PressToUserUnits(weather.pressure, config._pressureUnit).toString() : "")
+			   .replace(/{pressure_unit}/g, config._pressureUnit)
+			   .replace(/{extra_value}/g, weather.extra_field ? ExtraFieldToUserUnits(weather.extra_field, config) : "")
+			   .replace(/{extra_name}/g, weather.extra_field ? weather.extra_field.name : "")
+			   .replace(/{wind_speed}/g, weather.wind.speed != null ? MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit) : "")
+			   .replace(/{wind_dir}/g, weather.wind.degree != null ? CompassDirectionText(weather.wind.degree) : "")
+			   .replace(/{city}/g, weather.location.city ?? "")
+			   .replace(/{country}/g, weather.location.country ?? "")
+			   .replace(/{search_entry}/g, config.CurrentLocation?.entryText ?? "")
+			   .replace(/{last_updated}/g, lastUpdatedTime);
 }
 
 export function CapitalizeFirstLetter(description: string): string {
@@ -165,8 +185,8 @@ export function AwareDateString(date: DateTime, locale: string | null, hours24Fo
 	return date.toLocaleString(params);
 }
 /**
- * 
- * @param date 
+ *
+ * @param date
  * @returns number in format HHMM, can be compared directly
  */
 export function MilitaryTime(date: DateTime): number {
@@ -352,8 +372,8 @@ function KelvinToFahrenheit(k: number): number {
 
 /**
  * Converts from hpa to use's chose unit
- * @param hpa 
- * @param units 
+ * @param hpa
+ * @param units
  */
 export function PressToUserUnits(hpa: number, units: WeatherPressureUnits): number {
 	switch (units) {
@@ -380,7 +400,7 @@ export function MetreToUserUnits(m: number, distanceUnit: DistanceUnits): number
 }
 
 export function MillimeterToUserUnits(mm: number, distanceUnit: DistanceUnits): number {
-	if (distanceUnit == "metric") return Math.round(mm * 100) / 100;
+	if (distanceUnit == "metric") return Math.round(mm * 10) / 10;
 	return Math.round(mm * 0.03937 * 100) / 100;
 }
 
@@ -469,7 +489,7 @@ export function CompassDirectionText(deg: number): string {
 /**
  * Checks if a date is inside between sunrise and sunset.
  * @param sunTimes sunrise and sunset is used
- * @param date 
+ * @param date
  */
 export function IsNight(sunTimes: SunTime, date?: DateTime): boolean {
 	if (!sunTimes) return false;
@@ -551,13 +571,13 @@ export function ConstructJsLocale(locale: string): string | null {
 	let result: string = "";
 	// Add back country code if we have it
 	for (const [i, item] of tmp.entries()) {
-		if (i != 0) 
+		if (i != 0)
 			result += "-";
 		result += item.toLowerCase();
 	}
 
 	// Ignore C
-	if (result == "c") 
+	if (result == "c")
 		return null;
 
 	return result;
@@ -565,10 +585,10 @@ export function ConstructJsLocale(locale: string): string | null {
 
 /**
  * https://www.movable-type.co.uk/scripts/latlong.html
- * @param lat1 
- * @param lon1 
- * @param lat2 
- * @param lon2 
+ * @param lat1
+ * @param lon1
+ * @param lat2
+ * @param lon2
  * @returns distance in metres
  */
 export function GetDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
@@ -613,7 +633,7 @@ interface CompareVersionOptions {
  * @param v1 The first version to be compared.
  * @param v2 The second version to be compared.
  * @param options Optional flags that affect comparison behavior:
- * @returns 
+ * @returns
  *   - 0 if the versions are equal
  *   - a negative integer iff v1 < v2
  *   - a positive integer iff v1 > v2
