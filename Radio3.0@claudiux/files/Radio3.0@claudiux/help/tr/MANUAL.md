@@ -321,7 +321,7 @@ Kayıtlarınızı değiştirmek için Audacity gibi harici bir program kullanabi
 
 Ayarlara menüden veya bağlamsal menüden _Yapılandır..._ seçeneği kullanılarak erişilebilir.
 
-!.[Settings Tabs][sshot_settings_tabs]{ width=600px }
+![Settings Tabs][sshot_settings_tabs]{ width=600px }
 
 Radio3.0 Ayarlarında 9 sekme vardır:
 
@@ -336,7 +336,7 @@ Radio3.0 Ayarlarında 9 sekme vardır:
 <a name="RadiosTabStations"></a>
 #### Menüdeki İstasyonlar ve Kategoriler
 
-!.[Radios Settings Screenshot][sshot_radios_tab1]{ width=670px }
+![Radios Settings Screenshot][sshot_radios_tab1]{ width=670px }
 
 Bu, radyo istasyonları listesi örneğidir.
 
@@ -348,7 +348,7 @@ Her Kategori veya İstasyon,**sürükle ve bırak** yöntemiyle taşınabilir.
 
 Bu listenin altında, sol kısım listenin içeriğini değiştirmek için **araçları** içerir:
 
-  * ![Plus button][plus_button] bir Kategori (yalnızca adını girin) veya İstasyon (en azından adını ve akış URL'sini girin) **eklemek** için. Eklenen öğe listenin en üstündedir.
+  * ![Plus button][plus_button] bir Kategori **eklemek** için (yalnızca adını girin) veya İstasyon (en azından adını ve akış URL'sini girin) . Eklenen öğe listenin en üstündedir.
 
   * ![Minus button][minus_button] seçili öğeyi **kaldırmak** için. (Üzerine tıklayarak bir öğe seçersiniz.)
 
@@ -374,12 +374,12 @@ Sağ kısım, listenizi keşfetmek için araçlar içerir:
 
   * ![Next Category button][nextcat_button] **sonraki Kategoriye** (veya sağdan sola yazan okuyucular için **önceki Kategoriye**) gitmek için.
 
-!.[Sub-menu My Radio Stations][sshot_menu_myradiostations]{ width=350px }
+![Sub-menu My Radio Stations][sshot_menu_myradiostations]{ width=350px }
 
 <a name="RadiosTabMoving"></a>
 #### Seçilen istasyonları/kategoriyi taşıma
 
-!.[Radios Settings Screenshot 2][sshot_radios_tab2]{ width=670px }
+![Radios Settings Screenshot 2][sshot_radios_tab2]{ width=670px }
 
 Belirli öğelerin kategorisini değiştirmek için **♪/➟** kutularını işaretleyerek seçin, açılır listeden kategoriyi seçin ve "Seçili istasyonları bu kategoriye taşı" düğmesine tıklayın.
 
@@ -390,7 +390,7 @@ Sonucu görmek ve herhangi bir ayar yapmak için "Bu kategoriye git"e tıklayın
 <a name="RadiosTabSaveRestore"></a>
 #### Kaydet ve geri yükle
 
-!.[Radios Settings Screenshot 3][sshot_radios_tab1]{ width=670px }
+![Radios Settings Screenshot 3][sshot_radios_tab3]{ width=670px }
 
 **Kaydet** Düzenlemeden veya güncellemeden önce istasyon listenizi kaydedin (yedekleyin). Bu, istasyonlarınızın ve kategorilerinizin tüm ayrıntılarını içeren bir .json dosyası oluşturur. Bu .json dosyasının adı, yedeklemenin tarihini ve saatini tanımlar; örnek: Radios_2022-02-21_22-23-55.json 21 Şubat 2022 saat 22:23:55'te oluşturuldu.
 
@@ -401,7 +401,7 @@ Bu listeleri içeren klasörü açarak yönetebilirsiniz. Özellikle, bunları i
 <a name="RadiosTabUpdate"></a>
 #### Radyo Veritabanını kullanarak listenizi güncelleyin
 
-!.[Radios Settings Screenshot 4][sshot_radios_tab4]{ width=670px }
+![Radios Settings Screenshot 4][sshot_radios_tab4]{ width=670px }
 
 **İstasyon listemi Radyo Veritabanı verileriyle güncelle** düğmesinin amacı, radyolarınızın boş alanlarını mümkün olduğunca doldurmaktır.
 
@@ -427,7 +427,7 @@ Bu sekmeye, menüdeki _Yeni istasyon ara_ seçeneğiyle doğrudan erişilebilir.
 <a name="SearchTabForm"></a>
 #### Arama Formu
 
-!.[Search Form Screenshot][sshot_search_tab1]{ width=670px }
+![Search Form Screenshot][sshot_search_tab1]{ width=670px }
 
 Bu formun en az birkaç alanını doldurup ardından 'Ara ...' düğmesine tıklayarak, İnternet üzerinden erişilebilen ücretsiz bir radyo veri tabanındaki diğer istasyonları arayabilirsiniz.
 
