@@ -1,282 +1,322 @@
-Radio3.0 - Klavuz
-Yazar: Claudiux (@claudiux Github'da)
-Son revizyon tarihi: 19 Aralık 2022
-Genel bakış
+<!-- Required extensions: sane_lists, headerid(level=4) -->
+# Radio3.0 - Klavuzu
+
+## Yazar: Claudiux  (@claudiux Github'da)
+
+### Son revizyon tarihi: 19 Aralık 2022
+
+***
+
+## Genel bakış
+
 Radio3.0 Cinnamon için İnternet Radyo Alıcısı & Kaydedicisidir.
+
 
 Radio3.0 ile şunları yapabilirsiniz:
 
-Her türlü radyo akışını dinleyin (MP3, AAC, AAC+, OGG, FLAC, FLV...)
+  * Her türlü radyo akışını dinleyin (MP3, AAC, AAC+, OGG, FLAC, FLV...)
 
-Genel ses seviyesinden bağımsız olarak radyonun ses seviyesini değiştirin.
+  * Genel ses seviyesinden bağımsız olarak radyonun ses seviyesini değiştirin.
 
-On binlerce radyo istasyonunu referans alan bir internet veritabanında araştırma yapın.
+  * On binlerce radyo istasyonunu referans alan bir internet veritabanında araştırma yapın.
 
-SHOUTcast gibi internet dizinlerinden alınan radyo istasyonu akışlarının URL'sini içeren dosyaları içe aktarın.
+  * SHOUTcast gibi internet dizinlerinden alınan radyo istasyonu akışlarının URL'sini içeren dosyaları içe aktarın.
 
-Bu uygulamanın menüsünden erişilebilen favori radyo istasyonları listenizi oluşturun.
+  * Bu uygulamanın menüsünden erişilebilen favori radyo istasyonları listenizi oluşturun.
 
-Favori radyolar listenizi yönetin: listenizdeki her bir radyoyu ekleyin, taşıyın, kaldırın, değiştirin.
+  * Favori radyolar listenizi yönetin: listenizdeki her bir radyoyu ekleyin, taşıyın, kaldırın, değiştirin.
 
-Kategoriler oluşturun ve kendinize en sevdiğiniz radyoları sıralayın.
+  * Kategoriler oluşturun ve kendinize en sevdiğiniz radyoları sıralayın.
 
-Tüm radyo listelerini kaydedin ve geri yükleyin.
+  * Tüm radyo listelerini kaydedin ve geri yükleyin.
 
-Şarkıları veya programları dinlerken kaydedin.
+  * Şarkıları veya programları dinlerken kaydedin.
 
-Arka plan kayıtlarını planlayın.
+  * Arka plan kayıtlarını planlayın.
 
-O anda çalan şarkıyı YouTube'dan kaydetmeyi deneyin. (Güvenli değil; başka bir şarkı kaydedilebilir.)
+  * O anda çalan şarkıyı YouTube'dan kaydetmeyi deneyin. (Güvenli değil; başka bir şarkı kaydedilebilir.)
 
-Çalınan şarkıyla ilgili YouTube'daki videoları izleyin.
+  * Çalınan şarkıyla ilgili YouTube'daki videoları izleyin.
 
-Bir YouTube videosunun müziğini çıkarın.
+  * Bir YouTube videosunun müziğini çıkarın.
 
-Harika bir ses deneyimi için Pulse Effects'i (kuruluysa) başlatın ve kullanın.
+  * Harika bir ses deneyimi için Pulse Effects'i (kuruluysa) başlatın ve kullanın.
 
-Screenshots of Menu and Contextual menu
+![Screenshots of Menu and Contextual menu][screenshot]{ width=660px }
+
+***
+
+<a name="TOC"></a>
+## İçindekiler
+
+  1. [Bağımlılıklar](#Dependencies)
+
+  1. [Bağımlılıkların elle kurulumu](#DepManualInstall)  
+      1. [Linux Mint, Ubuntu, Debian](#DepMint)  
+      1. [Arch](#DepArch)  
+      1. [Fedora](#DepFedora)  
+
+  1. [Radio3.0 uygulaması nasıl kurulur?](#InstallApplet)  
+
+  1. [Radio3.0 uygulama simgesi nereye yerleştirilir?](#WhereToPlace)
+
+  1. [Radio3.0 uygulamasını kullanma](#UsingApplet)  
+      1. [Radyo istasyonlarını listeme nasıl ekleyebilirim?](#HowToAdd)  
+      1. [Radyo dinleme](#ListenRadio) 
+      1. [En son dinlenen radyoyu dinle](#ListenLastRadio) 
+      1. [Cinnamon başlangıcında en son dinlediğiniz radyoyu dinleyin](#ListenAtStartup) 
+      1. [Radyoyu durdur](#StopRadio)  
+      1. [Radyo akışının sesini ayarlayın](#SetVolume)  
+      1. [Radyolarımın listesini yönet](#ManageRadios1)
+      1. [Şarkı veya radyo programı kaydetme](#RecordingSong) 
+      1. [Bir YouTube videosunun müziğini çıkarın](#RecordYTSoundtrack)
+      1. [Kayıtlarımı içeren klasörü aç](#OpenRecFolder)  
+      1. [Kayıtlarımı değiştir](#ModifyRecords)  
+ 
+  1. [Ayarlar](#Settings) 
+      1. [Radyolar](#RadiosTab) 
+        * [Menüdeki İstasyonlar ve Kategoriler](#RadiosTabStations) 
+        * [Seçilen istasyonları/kategoriyi taşıma](#RadiosTabMoving)
+        * [Kaydet ve geri yükle](#RadiosTabSaveRestore)  
+        * [Radyo Veritabanını kullanarak listenizi güncelleyin](#RadiosTabUpdate)
+      2. [Arama](#SearchTab)  
+        * [Arama Formu](#SearchTabForm) 
+        * [Arama Sonuçları](#SearchTabResults) 
+      3. [İçe aktarma](#ImportTab)
+      4. [Menü](#MenuTab) 
+      5. [Ağ](#NetworkTab)
+      6. [Davranış](#BehaviorTab) 
+      7. [Kayıt](#RecordingTab)
+      8. [YT](#YTTab)
+      9. [planlama](#SchedulingTab) 
+      
+  1. [İsteğe bağlı: PulseEffects'i yükleyin](#PulseEffects)
 
 
-İçindekiler
-Bağımlılıklar
+  + [Ek](#Annex)
+  
+***
+<a name="Dependencies"></a>
+## Bağımlılıklar
 
-Bağımlılıkların elle kurulumu
-
-Linux Mint, Ubuntu, Debian
-Arch
-Fedora
-Radio3.0 uygulaması nasıl kurulur?
-
-Radio3.0 uygulama simgesi nereye yerleştirilir?
-
-Radio3.0 uygulamasını kullanma
-
-Radyo istasyonlarını listeme nasıl ekleyebilirim?
-Radyo dinleme
-En son dinlenen radyoyu dinle
-Cinnamon başlangıcında en son dinlediğiniz radyoyu dinleyin
-Radyoyu durdur
-Radyo akışının sesini ayarlayın
-Radyolarımın listesini yönet
-Şarkı veya radyo programı kaydetme
-Bir YouTube videosunun müziğini çıkarın
-Kayıtlarımı içeren klasörü aç
-Kayıtlarımı değiştir
-Ayarlar
-
-Radyolar
-Menüdeki İstasyonlar ve Kategoriler
-Seçilen istasyonları/kategoriyi taşıma
-Kaydet ve geri yükle
-Radyo Veritabanını kullanarak listenizi güncelleyin
-Arama
-Arama Formu
-Arama Sonuçları
-İçe aktarma
-Menü
-Ağ
-Davranış
-Kayıt
-YT
-planlama
-İsteğe bağlı: PulseEffects'i yükleyin
-
-Ek
-
-Bağımlılıklar
 Radio3.0'ın kullanım alanları:
 
-mpv radyo akışlarını oynatmak için (verimli bir Medya Oynatıcı).
+  * _mpv_ radyo akışlarını oynatmak için (verimli bir Medya Oynatıcı).
 
-sox radyo akışını veya daha doğrusu ses kartınızdan çıkan sesi bir dosyaya kaydetmek için (Ses Değişimi).
+  * _sox_ radyo akışını veya daha doğrusu ses kartınızdan çıkan sesi bir dosyaya kaydetmek için (Ses Değişimi).
 
-pacmd (PulseAudio Komutu) bir pulseaudio aracıdır.
+  * _pacmd_ (PulseAudio Komutu) bir _pulseaudio_ aracıdır.
 
-at kayıtları planlamak için.
+  * _at_ kayıtları planlamak için.
 
-libnotify-bin bildirimleri görüntülemek için.
+  * _libnotify-bin_ bildirimleri görüntülemek için.
 
-youtube-dl veya yt-dlp (youtube-dl 'den daha hızlı) YOUTUBE'dan video indirmek için.
+  * _youtube-dl_ veya _yt-dlp_ (_youtube-dl_ 'den daha hızlı) YOUTUBE'dan video indirmek için.
 
-ffmpeg ve ffmpegthumbnailer Film müziğini indirilen videodan çıkarmak için.
+  * _ffmpeg_ ve _ffmpegthumbnailer_ Film müziğini indirilen videodan çıkarmak için.
 
-python3-polib varsa çevirileri yüklemek için.
+  * _python3-polib_ varsa çevirileri yüklemek için.
 
-python3-brotli yt-dlp için gerekli.
+  * _python3-brotli_ _yt-dlp_ için gerekli.
 
 Bu araçları ve kitaplıkları içeren paketler önceden kurulu değilse, Radio3.0'ı ilk kez kullanırken bunları kurmanız istenir.
 
 Birkaç ses efektini kullanmak için (yankı vb.) Pulse Effects de yükleyebilirsiniz, ancak bu isteğe bağlıdır.
 
-İçindekiler Tablosuna Dön
+.[İçindekiler Tablosuna Dön](#TOC)
 
+<a name="DepManualInstall"></a>
+## Bağımlılıkların elle kurulumu
 
-Bağımlılıkların elle kurulumu
+<a name="DepMint"></a>
+### Linux Mint, Ubuntu, Debian
 
-Linux Mint, Ubuntu, Debian
-sudo apt update
+`sudo apt update`
 
-sudo apt install mpv libmpv1 libmpv-dev sox libsox-fmt-all pulseaudio pulseaudio-utils at libnotify-bin youtube-dl ffmpeg ffmpegthumbnailer python3-polib python3-brotli
+`sudo apt install mpv libmpv1 libmpv-dev sox libsox-fmt-all pulseaudio pulseaudio-utils at libnotify-bin youtube-dl ffmpeg ffmpegthumbnailer python3-polib python3-brotli`
 
 İsteğe bağlı:
 
-sudo apt install pulseeffects
+`sudo apt install pulseeffects`
 
+<a name="DepArch"></a>
+### Arch
 
-Arch
-sudo pacman -Syu mpv sox pulseaudio at libnotify youtube-dl ffmpeg ffmpegthumbnailer python-brotli
+`sudo pacman -Syu mpv sox pulseaudio at libnotify youtube-dl ffmpeg ffmpegthumbnailer python-brotli`
 
-yay -S python-polib
+`yay -S python-polib`
 
 To install Yay on in Arch Linux and other Arch-based systems, run the following commands one by one:
 
-sudo pacman -S --needed git base-devel
+`sudo pacman -S --needed git base-devel`
 
-git clone https://aur.archlinux.org/yay.git
+`git clone https://aur.archlinux.org/yay.git`
 
-cd yay
+`cd yay`
 
-makepkg -si
+`makepkg -si`
 
+<a name="DepFedora"></a>
+### Fedora
 
-Fedora
-sudo dnf install mpv sox pulseaudio at libnotify yt-dlp ffmpeg gstreamer1-libav python3-brotli python3-polib
+`sudo dnf install mpv sox pulseaudio at libnotify yt-dlp ffmpeg gstreamer1-libav python3-brotli python3-polib`
 
-İçindekiler Tablosuna Dön
+.[İçindekiler Tablosuna Dön](#TOC)
 
-yt-dlp'nin en son sürümü nasıl kurulur?
-yt-dlp Radio3.0 tarafından YouTube'dan video indirmek için kullanılır.
+***
+## yt-dlp'nin en son sürümü nasıl kurulur?
+_yt-dlp_  **Radio3.0** tarafından YouTube'dan video indirmek için kullanılır.
 
-yt-dlp 'nin en son sürümü hataları düzeltir ve özellikle yaş sınırlaması nedeniyle sizi video indirme hakkından mahrum bırakmamak için tarayıcınızın çerezlerini daha iyi hesaba katar.
+_yt-dlp_ 'nin en son sürümü hataları düzeltir ve özellikle yaş sınırlaması nedeniyle sizi video indirme hakkından mahrum bırakmamak için tarayıcınızın çerezlerini daha iyi hesaba katar.
 
 En son sürümünü nasıl yükleyeceğiniz aşağıda açıklanmıştır:
 
-Tüm bağımlılıklarını da yüklediğinden, dağıtımınızın paket havuzlarında bulunan yt-dlp sürümünü yükleyerek başlayın. Örneğin: sudo apt install yt-dlp
-Bu yeni sürümü içerecek $HOME/bin dizinini oluşturun: mkdir -p $HOME/bin
-Linux için en son sürümü https://github.com/yt-dlp/yt-dlp/releases/latest adresinden indirin ve az önce oluşturduğunuz $HOME/bin dizinine kaydedin.
-Çalıştırılabilir yapın: chmod +x $HOME/bin/yt-dlp
-Oturumunuzdan çıkış yapın.
-Giriş yapın. Artık $HOME/bin dizininizdeki herhangi bir komut dosyası, sisteminizde aynı ada sahip diğer tüm komut dizilerinden önceliklidir.
+  1. Tüm bağımlılıklarını da yüklediğinden, dağıtımınızın paket havuzlarında bulunan _yt-dlp_ sürümünü yükleyerek başlayın. Örneğin: sudo apt install yt-dlp
+  1. Bu yeni sürümü içerecek $HOME/bin dizinini oluşturun: mkdir -p $HOME/bin
+  1. Linux için en son sürümü [https://github.com/yt-dlp/yt-dlp/releases/latest](https://github.com/yt-dlp/yt-dlp/releases/latest) adresinden indirin ve az önce oluşturduğunuz `$HOME/bin` dizinine kaydedin.
+  1. Çalıştırılabilir yapın: `chmod +x $HOME/bin/yt-dlp`
+  1. Oturumunuzdan çıkış yapın.
+  1. Giriş yapın. Artık `$HOME/bin` dizininizdeki herhangi bir komut dosyası, sisteminizde aynı ada sahip diğer tüm komut dizilerinden önceliklidir.
 
-Radio3.0 uygulaması nasıl kurulur?
-Radio3.0 - Installing applet and dependencies
+***
 
+<a name="InstallApplet"></a>
+## Radio3.0 uygulaması nasıl kurulur?
+
+![Radio3.0 - Uygulamayı ve bağımlılıkları yükleme](https://claudeclerc.fr/downloads/Radio3.0/Radio3.0-Install.gif)
+
+<a name="InstallAppletCS"></a>
 
 Bir panele sağ tıklayın -> Uygulamacıklar -> İndirme sekmesi: Radio3.0'ı İndirin. Ardından Yönet sekmesini açın ve panele Radio3.0'ı ekleyin.
 
+<a name="WhereToPlace"></a>
+## Radio3.0 uygulama simgesi nereye yerleştirilir?
 
-Radio3.0 uygulama simgesi nereye yerleştirilir?
-En iyi yer Ses uygulamasının yanındadır. Böylece Ses uygulaması ile genel ses seviyesini, Radio3.0 uygulaması ile radyo sesini kolayca kontrol edebilirsiniz..
+En iyi yer _Ses_ uygulamasının yanındadır. Böylece Ses uygulaması ile genel _ses_ seviyesini, Radio3.0 uygulaması ile radyo sesini kolayca kontrol edebilirsiniz..
 
 (Uygulamaları taşımak için panelin bağlamsal menüsündeki "Panel düzenleme modu"nu kullanın. Simgeleri sürükleyip bırakın. Uygulama simgeleriniz doğru yerdeyken bu "Panel düzenleme modundan" çıkın.)
 
-İçindekiler Tablosuna Dön
+.[İçindekiler Tablosuna Dön](#TOC)
 
+***
 
-Radio3.0 uygulamasını kullanma
+<a name="UsingApplet"></a>
+## Radio3.0 uygulamasını kullanma
+
 Bu uygulamanın bir menüsü (sol tıklama) ve bir bağlamsal menüsü (sağ tıklama) vardır.
 
 Bazı eylemler, simge üzerinde orta tıklama veya kaydırma kullanılarak yapılabilir.
 
-
-Radyo istasyonlarını listeme nasıl ekleyebilirim?
+<a name="HowToAdd"></a>
+## Radyo istasyonlarını listeme nasıl ekleyebilirim?
 Listenize en az bir radyo istasyonu eklemenin dört yolu vardır.
 
-Menüde "Yeni istasyon ara..." seçeneğini seçin. (Ayrıca bağlamsal menüdeki "Yapılandır..." seçeneğini kullanabilir ve ardından "Ara" sekmesini seçebilirsiniz.) On binlerce referans içeren internet veritabanını sorgulamak için formu kullanın.
+  1. Menüde "Yeni istasyon ara..." seçeneğini seçin. (Ayrıca bağlamsal menüdeki "Yapılandır..." seçeneğini kullanabilir ve ardından "Ara" sekmesini seçebilirsiniz.) On binlerce referans içeren internet veritabanını sorgulamak için formu kullanın.
 
-"İçe Aktar" sekmesini kullanarak (içerik menüsündeki aynı "Yapılandır..." seçeneğiyle) radyo istasyonu verilerini içeren dosyaları içe aktarabilirsiniz.
+  1. "İçe Aktar" sekmesini kullanarak (içerik menüsündeki aynı "Yapılandır..." seçeneğiyle) radyo istasyonu verilerini içeren dosyaları içe aktarabilirsiniz.
 
-Akış URL'sini biliyorsanız, bir radyo istasyonunu doğrudan listenize ekleyebilirsiniz. Listeniz "Radyolar" sekmesindedir ("Yapılandır..." seçeneğini seçtiğinizde açılan ilk sekme). Bir radyo istasyonu eklemek için [+] düğmesini kullanın. Yalnızca "Ad" ve "Akış URL'si" alanları gereklidir; diğerleri isteğe bağlıdır. Radyo durdurulduktan sonra "Codek" ve "Bit hızı" alanları otomatik olarak doldurulacaktır.
+  1. Akış URL'sini biliyorsanız, bir radyo istasyonunu doğrudan listenize ekleyebilirsiniz. Listeniz "Radyolar" sekmesindedir ("Yapılandır..." seçeneğini seçtiğinizde açılan ilk sekme). Bir radyo istasyonu eklemek için [+] düğmesini kullanın. Yalnızca "Ad" ve "Akış URL'si" alanları gereklidir; diğerleri isteğe bağlıdır. Radyo durdurulduktan sonra "Codek" ve "Bit hızı" alanları otomatik olarak doldurulacaktır.
 
-Bu uygulama ayarlarının ilk sekmesinde bulunan düğmeyi kullanarak Radio3.0_EXAMPLES.json listesini geri yükleyin. Dikkat edin, istasyon listeniz bununla değiştirilecek; bunu yapmadan önce kendi istasyon listenizi kaydetmeyi düşünün!
+  1. Bu uygulama ayarlarının ilk sekmesinde bulunan düğmeyi kullanarak Radio3.0_EXAMPLES.json listesini geri yükleyin. Dikkat edin, istasyon listeniz bununla değiştirilecek; bunu yapmadan önce kendi istasyon listenizi kaydetmeyi düşünün!
 
 Bu sekmelerin her biri, kullanımıyla ilgili bazı açıklamalar içerir. Bunlar, "Davranış" sekmesindeki uygun kutucuğun işareti kaldırılarak atlanabilir.
 
+<a name="ListenRadio"></a>
+## Radyo dinle
 
-Radyo dinle
-Radio3.0 menüsünü açın (simgesine tıklayarak).
+  * Radio3.0 menüsünü açın (simgesine tıklayarak).
 
-"Tüm radyolarım" alt menüsünü açın..
+  * "Tüm radyolarım" alt menüsünü açın..
 
-Bir radyo istasyonu seçin ve birkaç saniye bekleyin. Bekleme süresi, sizi yayın sunucusundan ayıran mesafeye ve bu yayının kalitesine bağlıdır.
+  * Bir radyo istasyonu seçin ve birkaç saniye bekleyin. Bekleme süresi, sizi yayın sunucusundan ayıran mesafeye ve bu yayının kalitesine bağlıdır.
 
-Lütfen en son seçilen radyo istasyonlarının, hızlı erişim sağlamak için menünün Son Çalınan İstasyonlar bölümünde göründüğünü unutmayın.
+Lütfen en son seçilen radyo istasyonlarının, hızlı erişim sağlamak için menünün *Son Çalınan İstasyonlar* bölümünde göründüğünü unutmayın.
 
 Bir radyo dinlerken sembolik simgenin rengi değişir (varsayılan olarak yeşil; başka bir renk seçebilirsiniz).
 
+<a name="ListenLastRadio"></a>
+### Son dinlenen radyo istasyonunu aç
 
-Dinlenen son radyo istasyonunu aç
 Hiçbir radyo çalmıyorken simgeye orta tıklayın.
 
 (Başka bir yol: Menünün Son Çalınan İstasyonlar bölümündeki ilk radyoya tıklayın.)
 
+<a name="ListenAtStartup"></a>
+### Cinnamon başlangıcında dinlediğiniz son radyoyu çalın
 
-Cinnamon başlangıcında dinlediğiniz son radyoyu çalın
 Bağlamsal menüde "Başlangıçta Radyo AÇIK" seçeneğini işaretleyin.
 
+<a name="StopRadio"></a>
+### Radyoyu durdur
 
-Radyoyu durdur
 Radyoyu durdurmanın iki yolu vardır:
 
-Menüde Durdur'u seçerek.
+  * Menüde *Durdur*'u seçerek.
 
-Simgeye orta tıklama (yani fare tekerleği ile tıklama) yapma.
+  * Simgeye orta tıklama (yani fare tekerleği ile tıklama) yapma.
 
 Radyo KAPALI iken, sembolik renk varsayılandır (varsayılan olarak gri; başka bir renk seçebilirsiniz).
 
+<a name="SetVolume"></a>
+### Radyo akışının sesini ayarlayın
 
-Radyo akışının sesini ayarlayın
 Simge üzerinde yukarı veya aşağı kaydırmak, mevcut radyo akışının ses seviyesini ayarlar.
 
 Bağlamsal menüde ses kaydırıcısını kullanmak aynı etkiye sahiptir.
 
-Lütfen bu eylemlerin genel ses düzeyi üzerinde herhangi bir etkisinin olmadığını unutmayın; genel ses düzeyini ayarlamak için Ses uygulamasının simgesini kullanın.
+Lütfen bu eylemlerin genel ses düzeyi üzerinde herhangi bir etkisinin olmadığını unutmayın; genel ses düzeyini ayarlamak için _Ses_ uygulamasının simgesini kullanın.
 
+<a name="ManageRadios1"></a>
+### Radyolarımın listesini yönet
 
-Radyolarımın listesini yönet
-Ayarlara erişmek için menüde veya bağlamsal menüde Yapılandır... öğesini seçin (aşağıya bakın).
+Ayarlara erişmek için menüde veya bağlamsal menüde *Yapılandır*... öğesini seçin (aşağıya [bakın](#RadiosTab)).
 
+<a name="RecordingSong"></a>
+### Bir şarkı veya radyo programı kaydedin
 
-Bir şarkı veya radyo programı kaydedin
-Durum: Bu uygulamanın ayarlarındaki Kayıtlar sekmesinin Onay bölümündeki kutuyu işaretleyin.
+<u>Durum</u>: Bu uygulamanın ayarlarındaki Kayıtlar sekmesinin Onay bölümündeki kutuyu işaretleyin.
 
-İlk yol: Bağlamsal menüde Kaydı Başlat'ı seçin.
+<u>İlk yol</u>: Bağlamsal menüde _Kaydı Başlat_'ı seçin.
 
-İkinci yol: Ekranda görünürken bildirimin Şu andan itibaren kaydet düğmesini tıklayın. Fareyi bu düğmenin üzerine getirmek, bildirim kaybolmadan şarkının başlamasını beklemenizi sağlar. Bildirim siz bu düğmeyi tıklayamadan kaybolursa, içerik menüsünden Kaydı Başlat seçeneğini kullanmanız gerekir.
+<u>İkinci yol</u>: Ekranda görünürken bildirimin _Şu andan itibaren kaydet_ düğmesini tıklayın. Fareyi bu düğmenin üzerine getirmek, bildirim kaybolmadan şarkının başlamasını beklemenizi sağlar. Bildirim siz bu düğmeyi tıklayamadan kaybolursa, içerik menüsünden Kaydı Başlat seçeneğini kullanmanız gerekir.
 
 Bu ikinci yol, akışınızın şarkının veya şovun adını verme yeteneğine bağlıdır..
 
 Kayıt sırasında sembolik simgenin rengi değişir (varsayılan olarak kırmızıdır; başka bir renk seçebilirsiniz)
 
-Lütfen aklınızda bulundurun:
+<u>Lütfen aklınızda bulundurun</u>:
 
-Radyo akışı şarkının veya programın adını verirse, kayıt bu şarkının veya programın sonunda otomatik olarak duracaktır. Yayında duyurulan reklam aralarına dikkat!
+  * Radyo akışı şarkının veya programın adını verirse, kayıt bu şarkının veya programın sonunda otomatik olarak duracaktır. Yayında duyurulan reklam aralarına dikkat!
 
-Aksi takdirde kaydı kendiniz durdurmanız gerekir (bağlamsal menüyü kullanarak).
+  * Aksi takdirde kaydı kendiniz durdurmanız gerekir (bağlamsal menüyü kullanarak).
 
-Kayıt tıklama anında başlar; daha önce başlatmak mümkün değildir. Çok az sayıda istasyon bir sonraki şarkıyı birkaç saniye önceden duyurur.
+  * Kayıt tıklama anında başlar; daha önce başlatmak mümkün değildir. Çok az sayıda istasyon bir sonraki şarkıyı birkaç saniye önceden duyurur.
 
-Önbellek boşalırken devam ettiği için kayıt genellikle şarkı bittikten birkaç saniye sonra sona erer.
+  * Önbellek boşalırken devam ettiği için kayıt genellikle şarkı bittikten birkaç saniye sonra sona erer.
 
-
-Film müziğini YouTube videosundan çıkarın
+<a name="RecordYTSoundtrack"></a>
+### Film müziğini YouTube videosundan çıkarın
 Bağlamsal menüde: Film müziğini YouTube videosundan çıkarın...
 
 Ardından, yeni açılan pencerenin en altına gidin, YouTube videosunun URL'sini uygun alana yapıştırın ve "Müzik parçasını çıkar" seçeneğini tıklayın.
 
+<a name="OpenRecFolder"></a>
+### Kayıtlarımı içeren klasörü aç
 
-Kayıtlarımı içeren klasörü aç
 Bağlamsal menüde: Kayıtlar Klasörünü açın.
 
-
-Kayıtlarımı değiştir
+<a name="ModifyRecords"></a>
+### Kayıtlarımı değiştir
 Kayıtlarınızı değiştirmek için Audacity gibi harici bir program kullanabilirsiniz.
 
-İçindekiler Tablosuna Dön
+.[İçindekiler Tablosuna Dön](#TOC)
 
+***
 
-Ayarlar
-Ayarlara menüden veya bağlamsal menüden Yapılandır... seçeneği kullanılarak erişilebilir.
+<a name="Settings"></a>
+## Ayarlar
+
+Ayarlara menüden veya bağlamsal menüden _Yapılandır..._ seçeneği kullanılarak erişilebilir.
 
 Settings Tabs
 
