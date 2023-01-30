@@ -300,6 +300,8 @@ Bağlamsal menüde: Film müziğini YouTube videosundan çıkarın...
 
 Ardından, yeni açılan pencerenin en altına gidin, YouTube videosunun URL'sini uygun alana yapıştırın ve "Müzik parçasını çıkar" seçeneğini tıklayın.
 
+
+
 <a name="OpenRecFolder"></a>
 ### Kayıtlarımı içeren klasörü aç
 
@@ -307,6 +309,7 @@ Bağlamsal menüde: Kayıtlar Klasörünü açın.
 
 <a name="ModifyRecords"></a>
 ### Kayıtlarımı değiştir
+
 Kayıtlarınızı değiştirmek için Audacity gibi harici bir program kullanabilirsiniz.
 
 .[İçindekiler Tablosuna Dön](#TOC)
@@ -318,60 +321,65 @@ Kayıtlarınızı değiştirmek için Audacity gibi harici bir program kullanabi
 
 Ayarlara menüden veya bağlamsal menüden _Yapılandır..._ seçeneği kullanılarak erişilebilir.
 
-Settings Tabs
+!.[Settings Tabs][sshot_settings_tabs]{ width=600px }
 
 Radio3.0 Ayarlarında 9 sekme vardır:
 
-Radyolar	Ara	İçe aktar	Menü	Davranış	Ağ	Kayıt	YT	Planlama
-İçindekiler Tablosuna Dön
+| [Radyolar](#RadiosTab) | [Ara](#SearchTab) | [İçe aktar](#ImportTab)| [Menü](#MenuTab)| [Davranış](#BehaviorTab)| [Ağ](#NetworkTab)| [Kayıt](#RecordingTab)| [YT](#YTTab)| [Planlama](#SchedulingTab)|
+|----------------------|----------------------|---------------------|-----------------|-------------------------|-----------------------|---------------------------|--------------|-----------------------------|
 
+.[İçindekiler Tablosuna Dön](#TOC)
 
-Radyolar
+<a name="RadiosTab"></a>
+### Radyolar
 
-Menüdeki İstasyonlar ve Kategoriler
-Radios Settings Screenshot
+<a name="RadiosTabStations"></a>
+### Menüdeki İstasyonlar ve Kategoriler
+
+!.[Radios Settings Screenshot][sshot_radios_tab1]{ width=670px }
 
 Bu, radyo istasyonları listesi örneğidir.
 
-Üç Kategori görünür: Hard Rock & Metal, Reggae ve Techno / Dance. Akış URL'leri boş..
+Üç Kategori görünür: **Hard Rock & Metal**, **Reggae** ve **Techno / Dance** Akış URL'leri boş..
 
-Diğerleri radyo istasyonlarıdır. Menü kutusu işaretli olanlar bu uygulamanın menüsünde görünür (Radyo İstasyonlarım alt menüsünde; aşağıya bakın). ♪/➟ kutusu işaretli olanlar, ♪ Test etmek için sonraki istasyonu çal düğmesi kullanılarak hemen (birbiri ardına) çalınabilir.
+Diğerleri radyo istasyonlarıdır. **Menü** kutusu işaretli olanlar bu uygulamanın menüsünde görünür (Radyo İstasyonlarım alt menüsünde; aşağıya bakın). **♪/➟** kutusu işaretli olanlar, **♪ Test etmek için sonraki istasyonu çal** düğmesi kullanılarak hemen (birbiri ardına) çalınabilir.
 
-Her Kategori veya İstasyon,sürükle ve bırak yöntemiyle taşınabilir.
+Her Kategori veya İstasyon,**sürükle ve bırak** yöntemiyle taşınabilir.
 
-Bu listenin altında, sol kısım listenin içeriğini değiştirmek için araçları içerir:
+Bu listenin altında, sol kısım listenin içeriğini değiştirmek için **araçları** içerir:
 
-Plus button bir Kategori (yalnızca adını girin) veya İstasyon (en azından adını ve akış URL'sini girin) eklemek için. Eklenen öğe listenin en üstündedir.
+  * ![Plus button][plus_button] bir Kategori (yalnızca adını girin) veya İstasyon (en azından adını ve akış URL'sini girin) **eklemek** için. Eklenen öğe listenin en üstündedir.
 
-Minus button seçili öğeyi kaldırmak için. (Üzerine tıklayarak bir öğe seçersiniz.)
+  * ![Minus button][minus_button] seçili öğeyi **kaldırmak** için. (Üzerine tıklayarak bir öğe seçersiniz.)
 
-Pencil button seçili öğeyi düzenlemek için.
+  * ![Pencil button][pencil_button] seçili öğeyi **düzenlemek** için.
 
-Unchecked button herhangi bir öğenin seçimini kaldırmak için.
+  * ![Unchecked button][unchecked_button] herhangi bir öğenin **seçimini kaldırmak** için.
 
-Move up button seçili öğeyi yukarı taşımak için.
+  * ![Move up button][moveup_button] seçili öğeyi **yukarı taşımak** için.
 
-Move down button seçili öğeyi aşağı taşımak için.
+  * ![Move down button][movedown_button] seçili öğeyi **aşağı taşımak** için.
 
 Sağ kısım, listenizi keşfetmek için araçlar içerir:
 
-Top button listenizin başına gitmek için.
+  * ![Top button][top_button] listenizin **başına** gitmek için.
 
-Move up button önceki sayfaya gitmek için.
+  * ![Move up button][moveup_button] **önceki sayfaya** gitmek için.
 
-Move down button sonraki sayfaya gitmek için.
+  * ![Move down button][movedown_button] **sonraki sayfaya** gitmek için.
 
-Bottom button listenizin en altına gitmek için.
+  * ![Bottom button][bottom_button] listenizin **en altına** gitmek için.
 
-Previous Category button önceki Kategoriye (veya sağdan sola yazan okuyucular için sonraki Kategoriye) gitmek için.
+  * ![Previous Category button][prevcat_button] **önceki Kategoriye** (veya sağdan sola yazan okuyucular için **sonraki Kategoriye**) gitmek için.
 
-Next Category button sonraki Kategoriye (veya sağdan sola yazan okuyucular için önceki Kategoriye) gitmek için.
+  * ![Next Category button][nextcat_button] **sonraki Kategoriye** (veya sağdan sola yazan okuyucular için **önceki Kategoriye**) gitmek için.
 
-Sub-menu My Radio Stations
+!.[Sub-menu My Radio Stations][sshot_menu_myradiostations]{ width=350px }
 
+<a name="RadiosTabMoving"></a>
+### Seçilen istasyonları/kategoriyi taşıma
 
-Seçilen istasyonları/kategoriyi taşıma
-Radios Settings Screenshot 2
+!.[Radios Settings Screenshot 2][sshot_radios_tab2]{ width=670px }
 
 Belirli öğelerin kategorisini değiştirmek için ♪/➟ kutularını işaretleyerek seçin, açılır listeden kategoriyi seçin ve "Seçili istasyonları bu kategoriye taşı" düğmesine tıklayın.
 
