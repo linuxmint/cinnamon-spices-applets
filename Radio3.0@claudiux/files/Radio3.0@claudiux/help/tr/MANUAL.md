@@ -146,7 +146,7 @@ Birkaç ses efektini kullanmak için (yankı vb.) Pulse Effects de yükleyebilir
 
 `yay -S python-polib`
 
-To install Yay on in Arch Linux and other Arch-based systems, run the following commands one by one:
+Yay'ı Arch Linux ve diğer Arch tabanlı sistemlere yüklemek için aşağıdaki komutları tek tek çalıştırın:
 
 `sudo pacman -S --needed git base-devel`
 
@@ -449,64 +449,69 @@ Bu sonuçları elde etmek için, arama formu sıfırlandı ve ardından aşağı
   - Etiket: metal
   - Kodlayıcı: AAC
   - Emir: bit hızı
+  
+![Search Results Screenshot][sshot_search_tab2]{ width=700px }
 
-!.[Search Results Screenshot][sshot_search_tab2]{ width=700px }
+'TheBlast.fm'i test etmek için **♪** kutusunu işaretleyin ve ardından **♪ Test edilecek sonraki istasyonu çal** düğmesini tıklayın. Lütfen unutmayın: Bir radyo istasyonunu test etmek, onu bu uygulama menüsünde "Son Çalınan İstasyonlar"a ekler, ancak istasyon listenize eklemez.
 
-'TheBlast.fm'i test etmek için ♪ kutusunu işaretleyin ve ardından ♪ Test edilecek sonraki istasyonu çal düğmesini tıklayın. Lütfen unutmayın: Bir radyo istasyonunu test etmek, onu bu uygulama menüsünde "Son Çalınan İstasyonlar"a ekler, ancak istasyon listenize eklemez.
+Bu istasyonlardan bir veya daha fazlasını kendi listenizin en üstüne almak için **Seç** kutularını işaretleyin ve **Seçili istasyonları kendi listeme aktar**'ı tıklayın. Ardından, Radyolar sekmesini kullanarak listenizi yönetin.
 
-Bu istasyonlardan bir veya daha fazlasını kendi listenizin en üstüne almak için Seç kutularını işaretleyin ve Seçili istasyonları kendi listeme aktar'ı tıklayın. Ardından, Radyolar sekmesini kullanarak listenizi yönetin.
+**Seç** kutularını işaretleyip **Kaldır...** düğmesini tıklayarak bu arama sonuçlarından satırları kaldırabilirsiniz. Bu eylem, veritabanının içeriğini etkilemez.
 
-Seç kutularını işaretleyip Kaldır... düğmesini tıklayarak bu arama sonuçlarından satırları kaldırabilirsiniz. Bu eylem, veritabanının içeriğini etkilemez.
+**Tüm öğeleri seç** ve **Tüm öğelerin seçimini kaldır** düğmeleri, **Seç** kutularını etkiler.
 
-Tüm öğeleri seç ve Tüm öğelerin seçimini kaldır düğmeleri, Seç kutularını etkiler.
+**<u>Warning</u>**: *Bu uygulamanın yazarı, bir aramadan sonra görüntülenen sonuçlardan sorumlu değildir ve veritabanlarının içeriğini kontrol etmez. Radyo istasyonları sizi rahatsız eden mesajlar veya ideolojiler yayınlıyorsa, lütfen sahiplerine veya yayın yaptıkları eyalete/ülkeye şikayet edin.*
 
-Uyarı: Bu uygulamanın yazarı, bir aramadan sonra görüntülenen sonuçlardan sorumlu değildir ve veritabanlarının içeriğini kontrol etmez. Radyo istasyonları sizi rahatsız eden mesajlar veya ideolojiler yayınlıyorsa, lütfen sahiplerine veya yayın yaptıkları eyalete/ülkeye şikayet edin.
+.[Tüm Sekmeler](#Settings)
 
-Tüm Sekmeler
+<a name="ImportTab"></a>
+### İçe aktar
+Bu sekme, özellikle [Shoutcast][shoutcast] dizinindekiler olmak üzere M3U, PLS veya XSPF formatındaki dosyalardan radyo istasyonlarını içe aktarmanıza olanak tanır.
 
+#### Buraya içe aktarmak için Shoutcast'teki dosyaları alın
 
-İçe aktar
-Bu sekme, özellikle Shoutcast dizinindekiler olmak üzere M3U, PLS veya XSPF formatındaki dosyalardan radyo istasyonlarını içe aktarmanıza olanak tanır.
-
-Buraya içe aktarmak için Shoutcast'teki dosyaları alın
-Import Settings Screenshot 1
+![Import Settings Screenshot 1][sshot_import_tab1]
 
 Bu düğme, tarayıcınızda Shoutcast dizinini açar.
 
-Shoutcast Baroque
+![Shoutcast Baroque][shoutcast_baroque]
 
 Yukarıdaki örnekte, bir radyo istasyonunun XSPF dosyasına nasıl erişileceğini görüyoruz. Bu dosyayı, .xspf uzantısını koruyarak radyonun adını vererek kaydedin.
 
-Shoutcast Save
+![Shoutcast Save][shoutcast_save]
 
+<a name="FileToImport"></a>
+#### İçe aktarılacak dosya
 
-İçe aktarılacak dosya
-Import Settings Screenshot 2
+![Import Settings Screenshot 2][sshot_import_tab2]
 
 Bu düğme, radyo istasyonları verilerini içeren bir dosyayı içe aktarmanızı sağlar.
 
-Farklı içe aktarılabilir dosya biçimlerinin açıklaması Ek 1'de verilmiştir.
+Farklı içe aktarılabilir dosya biçimlerinin açıklaması .[Ek 1'].(#Annex1).de verilmiştir.
 
-All Tabs
+[Tüm Sekmeler](#Settings)
 
+<a name="MenuTab"></a>
+### Menü
 
-Menu
-Menu Settings Screenshot
+![Menu Settings Screenshot][sshot_menu_tab]
 
 Bu sekme, bu uygulama menüsünde belirli öğelerin görüntülenip görüntülenmeyeceğini seçmenizi sağlar:
 
-Bu uygulamanın adı ve sürümü, örneğin: Radio3.0 v1.0.0.
-Son Oynatılan İstasyonların sayısı. 0 değeri, bu listenin görüntülenmesini devre dışı bırakır.
-Yapılandır... ve Ses Ayarları gibi sistem öğeleri (zaten bağlamsal menüdedir).
+  + Bu uygulamanın adı ve sürümü, örneğin: Radio3.0 v1.0.0.
+  + Son Oynatılan İstasyonların sayısı. 0 değeri, bu listenin görüntülenmesini devre dışı bırakır.
+  + Yapılandır... ve Ses Ayarları gibi sistem öğeleri (zaten bağlamsal menüdedir).
+  
 Gizlilik: Son Çalınan İstasyonlar listenizi başlangıçta veya şimdi boşaltmak istiyorsanız, kutuyu işaretleyin veya düğmesine tıklayın.
 
 Yalnızca geliştiriciler için kullanışlıdır: Bağlamsal menüde Bu uygulamayı yeniden yükle öğesinin görüntülenip görüntülenmeyeceği.
 
-Tüm Sekmeler
+[Tüm Sekmeler](#Settings)
 
+<a name="BehaviorTab"></a>
+### Davranış
 
-Davranış
-Behavior1 Settings Screenshot
+![Behavior1 Settings Screenshot][sshot_behavior1_settings]{ width=700px }
 
 Cinnamon başladığında radyoyu aç: İşaretlendiğinde, dinlenen son istasyon Cinnamon başladığında çalınacaktır.
 
@@ -514,47 +519,50 @@ Yeni bir radyo başlatmak için ses seviyesi: Bu sesi seçin. Sesi son değerind
 
 Bağımlılıkları kontrol etme: Tüm bağımlılıklar kurulu olduğunda veya belirli bağımlılıklar kullanışsız olduğunda (çünkü alternatifleriniz var) bu kutuyu işaretleyin.
 
-Behavior2 Settings Screenshot
+![Behavior2 Settings Screenshot][sshot_behavior2_settings]{ width=700px }
 
 Simge üzerinde kayan ses düzeyi adımı: Bu adımı seçin. %0, simge üzerinde kaydırılan ses değişikliğini devre dışı bırakır.
 
-Behavior3 Settings Screenshot
+![Behavior3 Settings Screenshot][sshot_behavior3_settings]{ width=700px }
 
 Görüntülemek istediğiniz yardımı seçin.
 
-Behavior4 Settings Screenshot
+![Behavior4 Settings Screenshot][sshot_behavior4_settings]{ width=700px }
 
 Hangi bildirimleri görüntülemek istediğinizi seçin; ayrıca ikinci tür bildirimin süresi.
 
-Behavior5 Settings Screenshot
+![Behavior5 Settings Screenshot][sshot_behavior5_settings]{ width=700px }
 
 Menü ve bildirimlerde Kodec ve Bit Hızının gösterilip gösterilmeyeceği.
 
-Behavior6 Settings Screenshot
+![Behavior6 Settings Screenshot][sshot_behavior6_settings]{ width=700px }
 
 Radyo açıkken, radyo kapalıyken ve kayıt sırasında sembolik simgenin rengini seçin.
 
-Tüm Sekmeler
+.[Tüm Sekmeler](#Settings)
 
+<a name="NetworkTab"></a>
+### Ağ
 
-Ağ
-Network Settings Screenshot
+![Network Settings Screenshot][sshot_network_settings]{ width=700px }
 
 Ağ Kalitesi:
 
-Yüksek: Kayıtlar, en iyi kaliteyi garanti eden akışın bir kopyasından yapılacaktır.
-Düşük: Bant genişliğinizden tasarruf etmek için, ses çıkışınızdan kayıtlar yapılır; ancak bazı sesler kayıtlarınızı kirletebilir.
+  * Yüksek: Kayıtlar, en iyi kaliteyi garanti eden akışın bir kopyasından yapılacaktır.
+  * Düşük: Bant genişliğinizden tasarruf etmek için, ses çıkışınızdan kayıtlar yapılır; ancak bazı sesler kayıtlarınızı kirletebilir.
+  * 
 Ağı izle: İşaretlendiğinde, ağ değiştirildikten sonra çalınan istasyon devam edecektir (VPN, Wifi...)
 
-Proxy: Varsayılan olarak boştur. Biçim: http://[kullanıcı:pass@]URL[:bağlantı noktası]. Boşsa, http_proxy ve ALL_PROXY ortam değişkenleri varsa kullanılacaktır. Ayarlanırsa, bu proxy https istekleri için kullanılmaz.
+Proxy: Varsayılan olarak boştur. Biçim: http://[kullanıcı:pass@]URL[:bağlantı noktası]. Boşsa, *http_proxy* ve *ALL_PROXY* ortam değişkenleri varsa kullanılacaktır. Ayarlanırsa, bu proxy https istekleri için kullanılmaz.
 
 Veritabanı Bilgisi (salt okunur): Gerçekte kullanılan radyo veritabanının URL'si.
 
-All Tabs
+.[Tüm Sekmeler](#Settings)
 
+<a name="RecordingTab"></a>
+### Kayıt
 
-Kayıt
-Recording Settings Screenshot
+![Recording Settings Screenshot][sshot_recording_settings]{ width=700px }
 
 Gelecekteki kayıtlarınızı içerecek klasörün yolu: Bu klasörü seçin.
 
@@ -564,34 +572,38 @@ Kayıt formatı: FLAC, MP3 (varsayılan), OGG, RAW veya WAV.
 
 Kaydı durdurmanın yolu (lütfen bu seçimin herhangi bir mevcut kayıt üzerinde etkisi olmayacağını, ancak sonraki kayıtlar üzerinde etkili olacağını unutmayın.):
 
-otomatik olarak, mevcut şarkı bittiğinde: yalnızca akış geçerli şarkının adını içeriyorsa doğru çalışır.
-elle; bu şekilde, birkaç kayıt birbirini takip edebilir: kendiniz tüm kaydı durdurmalısınız.
-Tüm Sekmeler
+  * otomatik olarak, mevcut şarkı bittiğinde: yalnızca akış geçerli şarkının adını içeriyorsa doğru çalışır.
+  * elle; bu şekilde, birkaç kayıt birbirini takip edebilir: kendiniz tüm kaydı durdurmalısınız.
+  
+.[Tüm Sekmeler](#Settings)
+
+<a name="YTTab"></a>
+### YT
+Bu sekmeye, içerik menüsündeki Bir _YouTube videosundan film müziği çıkar..._ seçeneği aracılığıyla doğrudan erişilebilir.
 
 
-YT
-Bu sekmeye, içerik menüsündeki Bir YouTube videosundan film müziği çıkar... seçeneği aracılığıyla doğrudan erişilebilir.
-
-YT Settings Screenshot
+![YT Settings Screenshot][sshot_yt_settings]{ width=700px }
 
 Kayıt formatı: FLAC, MP3, OGG, RAW ve WAV mevcut formatlardır. MP3 (192 kbps) varsayılan olarak seçilidir.
 
 Şuradaki çerezleri kullan: YouTube'u ziyaret etmek için genellikle kullandığınız tarayıcıyı seçin.
 
-Film müziğini YouTube videosundan çıkarın: YouTube'u ziyaret ederek bir video (veya oynatma listesi) bağlantısını sağ tıklayın ve Bağlantıyı kopyala'yı seçin. Ardından, Kopyaladığınız YouTube bağlantısının üzerine yapıştır düğmesini tıklayın. YouTube video bağlantısı görünür. v= içeriyorsa, bu tek videonun film müziğini çıkarabilirsiniz. list= içeriyorsa, oynatma listesindeki her bir videodan film müziğini çıkarabilirsiniz. Bu müzikleri, adını belirttiğiniz bir alt dizine kaydetmeye de karar verebilirsiniz. Müzik parçasını çıkar düğmesi işlemi çalıştırır:
+Film müziğini YouTube videosundan çıkarın: YouTube'u ziyaret ederek bir video (veya oynatma listesi) bağlantısını sağ tıklayın ve _Bağlantıyı kopyala_'yı seçin. Ardından, _Kopyaladığınız YouTube bağlantısının üzerine yapıştır_ düğmesini tıklayın. _YouTube video bağlantısı_ görünür. **v=** içeriyorsa, bu tek videonun film müziğini çıkarabilirsiniz. **list=** içeriyorsa, oynatma listesindeki her bir videodan film müziğini çıkarabilirsiniz. Bu müzikleri, adını belirttiğiniz bir alt dizine kaydetmeye de karar verebilirsiniz. _Müzik parçasını çıkar_ düğmesi işlemi çalıştırır:
 
-Videoyu indirin.
-Film müziği ve resmi ayıklayın. Dosyayı yukarıda seçilen Kayıt biçiminde oluşturmak için bunları kullanın.
-Videoyu kaldır.
-(Oynatma listesindeki her video için tekrarlayın.)
-Bu dosyaları içeren dizini açmanıza izin veren bildirim gönder.
-Tüm Sekmeler
+  * Videoyu indirin.
+  * Film müziği ve resmi ayıklayın. Dosyayı yukarıda seçilen Kayıt biçiminde oluşturmak için bunları kullanın.
+  * Videoyu kaldır.
+  * (Oynatma listesindeki her video için tekrarlayın.)
+  * Bu dosyaları içeren dizini açmanıza izin veren bildirim gönder.
+  
+.[Tüm Sekmeler](#Settings)
 
+<a name="SchedulingTab"></a>
+### Planlama
 
-Planlama
-Bu sekmeye, içerik menüsündeki Arkaplan kaydı planla... seçeneği aracılığıyla doğrudan erişilebilir.
+Bu sekmeye, içerik menüsündeki _Arkaplan kaydı planla..._ seçeneği aracılığıyla doğrudan erişilebilir.
 
-Scheduling Settings1 Screenshot
+![Scheduling Settings1 Screenshot][sshot_sched1_settings]{ width=700px }
 
 Programlamak istediğiniz kaydın radyosunu, tarihini, saatini ve süresini seçin ve ardından düğmesine tıklayın.
 
@@ -599,100 +611,164 @@ Kaydın gerçekleşmesi için Cinnamon oturumunuzun açık olması gerekmez; ama
 
 Her kaydın başlangıcı ve bitişi size bildirilecektir.
 
-Programlanmış kayıtların listesi aşağıdaki listede görünür. Kaldırılsın mı? kutusunu işaretleyerek ve Seçili öğeleri kaldır düğmesini tıklayarak bunlardan herhangi birini iptal edebilirsiniz.
+Programlanmış kayıtların listesi aşağıdaki listede görünür. _Kaldırılsın mı?_ kutusunu işaretleyerek ve _Seçili öğeleri kaldır_ düğmesini tıklayarak bunlardan herhangi birini iptal edebilirsiniz.
 
-Scheduling Settings2 Screenshot
+![Scheduling Settings2 Screenshot][sshot_sched2_settings]{ width=700px }
 
-Tüm Sekmeler
+.[Tüm Sekmeler](#Settings)
 
+<a name="PulseEffects"></a>
+### İsteğe bağlı: PulseEffects'i yükleyin
+*PulseEffects* sistem çapında gelişmiş bir ekolayzırdır 
+*PulseAudio*. Çalışan tüm uygulamalara sistem çapında efektler uygulayabilir 
+veya seçili uygulamalar.
 
-İsteğe bağlı: PulseEffects'i yükleyin
-PulseEffects, sistem çapında gelişmiş bir ekolayzırdır PulseAudio. Çalışan tüm uygulamalara sistem çapında efektler uygulayabilir veya seçili uygulamalar.
-
-apt install libpulse-mainloop-glib0 libpulse0 libpulsedsp pulseaudio-equalizer pulseaudio-module-bluetooth pulseaudio-utils pulseaudio pavumeter pavucontrol paprefs gstreamer1.0-adapter-pulseeffects gstreamer1.0-autogain-pulseeffects gstreamer1.0-crystalizer-pulseeffects gstreamer1.0-convolver-pulseeffects pulseeffects
+`apt install libpulse-mainloop-glib0 libpulse0 libpulsedsp pulseaudio-equalizer pulseaudio-module-bluetooth pulseaudio-utils pulseaudio pavumeter pavucontrol paprefs gstreamer1.0-adapter-pulseeffects gstreamer1.0-autogain-pulseeffects gstreamer1.0-crystalizer-pulseeffects gstreamer1.0-convolver-pulseeffects pulseeffects`
 
 Kurulduktan sonra PulseEffects'e Radio3.0 uygulamasının bağlamsal menüsünden erişilebilir.
 
-İçindekiler Tablosuna Dön
+.[İçindekiler Tablosuna Dön](#TOC)
 
+***
 
-Ek
+<a name="Annex"></a>
+## Ek
 
-Ek 1: İçe aktarılabilir dosya biçimlerinin açıklaması
-Bir .csv dosyasının içeriği (örnek):
-INC;NAME;URL
-true;Radio BluesFlac;https://streams.radiomast.io/radioblues-flac
-true;Digital Impulse - Blues;http://5.39.71.159:8990/stream
+<a name="Annex1"></a>
+### Ek 1: İçe aktarılabilir dosya biçimlerinin açıklaması
+
+#### Bir .csv dosyasının içeriği (örnek):
+
+`INC;NAME;URL`  
+`true;Radio BluesFlac;https://streams.radiomast.io/radioblues-flac`  
+`true;Digital Impulse - Blues;http://5.39.71.159:8990/stream`  
 
 Her satır, onu üç alana ayıran tam olarak iki noktalı virgül içermelidir.
 
 İlk satır, aşağıdaki alanlarda bulunan alanları tanımlar.
-INC alanı bir boole içerir. Değeri (true veya false) içe aktarma için önemli değildir, ancak mevcut olması gerekir.
+INC alanı bir boole içerir. Değeri (*true* veya *false*) içe aktarma için önemli değildir, ancak mevcut olması gerekir.
 NAME alanı, radyo istasyonunun adını içerir. Noktalı virgül içermemelidir.
 URL alanı, bu istasyonun akışının URL'sini içerir.
 
-Bir .m3u dosyasının içeriği (örnek):
-#EXTM3U
-#EXTINF:-1,1.FM - Otto's Baroque Music (www.1.fm)
-http://185.33.21.111:80/baroque_64
-#EXTINF:-1,1.FM - Otto's Baroque Music (www.1.fm)
-http://185.33.21.111:80/baroque_mobile_aac
-#EXTINF:-1,1.FM - Otto's Baroque Music (www.1.fm)
-http://185.33.21.111:80/baroque_128
-...v.b...
+#### Bir .m3u dosyasının içeriği (örnek):
 
-İlk satır #EXTM3U olmalıdır.
+`#EXTM3U`  
+`#EXTINF:-1,1.FM - Otto's Baroque Music (www.1.fm)`  
+`http://185.33.21.111:80/baroque_64`  
+`#EXTINF:-1,1.FM - Otto's Baroque Music (www.1.fm)`  
+`http://185.33.21.111:80/baroque_mobile_aac`  
+`#EXTINF:-1,1.FM - Otto's Baroque Music (www.1.fm)`  
+`http://185.33.21.111:80/baroque_128`  
+`...vb...`  
+
+İlk satır `#EXTM3U` olmalıdır.
 Ardından, her istasyon bir çift satırla tanımlanır. "#EXTINF:-1" ile başlayan ve istasyon adıyla biten bir ilk satır. Akış URL'sini içeren ikinci bir satır.
 
-Not: #EXTINF:'den sonraki -1, parçanın süresinin bilinmediği anlamına gelir, bu bir radyo yayını için normaldir.
+Not: `#EXTINF:`'den sonraki -1, parçanın süresinin bilinmediği anlamına gelir, bu bir radyo yayını için normaldir.
 
-Bir .xpfs dosyasının içeriği (örnek):
-<?xml version="1.0" encoding="utf-8"?><playlist version="1" xmlns="http://xspf.org/ns/0/"><title>1.FM - Otto's Baroque Music (www.1.fm)</title><trackList><track><location>http://185.33.21.111:80/baroque_128</location><title>1.FM - Otto's Baroque Music (www.1.fm)</title></track><track><location>http://185.33.21.111:80/baroque_64</location><title>1.FM - Otto's Baroque Music (www.1.fm)</title></track>...other tracks...</trackList></playlist>
+#### Bir .xpfs dosyasının içeriği (örnek):
+
+    <?xml version="1.0" encoding="utf-8"?><playlist version="1" xmlns="http://xspf.org/ns/0/"><title>1.FM - Otto's Baroque Music (www.1.fm)</title><trackList><track><location>http://185.33.21.111:80/baroque_128</location><title>1.FM - Otto's Baroque Music (www.1.fm)</title></track><track><location>http://185.33.21.111:80/baroque_64</location><title>1.FM - Otto's Baroque Music (www.1.fm)</title></track>...other tracks...</trackList></playlist>
+    
 Tüm veriler tek bir satıra kaydedilir. Burada daha anlaşılır bir şekilde sunulmuştur:
 
-<?xml version="1.0" encoding="utf-8"?>
-<playlist version="1" xmlns="http://xspf.org/ns/0/">
-    <title>1.FM - Otto's Baroque Music (www.1.fm)</title>
-    <trackList>
+    <?xml version="1.0" encoding="utf-8"?>
+    <playlist version="1" xmlns="http://xspf.org/ns/0/">
+        <title>1.FM - Otto's Baroque Music (www.1.fm)</title>
+        <trackList>
+            
+            <track>
+                <location>http://185.33.21.111:80/baroque_128</location>
+                <title>1.FM - Otto's Baroque Music (www.1.fm)</title>
+            </track>
+            
+            <track>
+                <location>http://185.33.21.111:80/baroque_64</location>
+                <title>1.FM - Otto's Baroque Music (www.1.fm)</title>
+            </track>
+            
+            ...other tracks...
+        </trackList>
+    </playlist>
 
-        <track>
-            <location>http://185.33.21.111:80/baroque_128</location>
-            <title>1.FM - Otto's Baroque Music (www.1.fm)</title>
-        </track>
-
-        <track>
-            <location>http://185.33.21.111:80/baroque_64</location>
-            <title>1.FM - Otto's Baroque Music (www.1.fm)</title>
-        </track>
-
-        ...diğer parçalar...
-    </trackList>
-</playlist>
 İlk satır, XML sürümünü ve kullanılan karakter kodlamasını açıklar. XPFS biçimindeki tüm dosyalar bununla başlar.
 
-Oynatma listesi, <playlist> ve </playlist> işaretlemeleri arasında tanımlanır.
+Oynatma listesi, `<playlist>` ve `</playlist>` işaretlemeleri arasında tanımlanır.
 
-İlk başlık (<title> ile </title> arasında), oynatma listesininkidir. (Bu durumda radyonun adıdır.)
+İlk *başlık* (`<title>` ile `</title>` arasında), oynatma listesininkidir. (Bu durumda radyonun adıdır.)
 
-Parça listesi, <tracklist> ve </tracklist> işaretlemeleri arasında bulunur.
+Parça listesi, `<tracklist>` ve `<tracklist>` işaretlemeleri arasında bulunur.
 
-Her parça, bu sırayla bir konum - yani akışın URL'si - ve burada daha açık olabilecek bir başlık içerir. akışın bit hızını ve biçimini belirterek.
+Her *parça*, bu sırayla bir *konum* - yani akışın URL'si - ve burada daha açık olabilecek bir *başlık* içerir. akışın bit hızını ve biçimini belirterek.
 
-Bir .pls dosyasının içeriği (örnek):
-[playlist]
-numberofentries=8
-File1=http://185.33.21.111:80/baroque_mobile_aac
-Title1=1.FM - Otto's Baroque Music (www.1.fm)
-Length1=-1
-File2=http://185.33.21.111:80/baroque_64
-Title2=1.FM - Otto's Baroque Music (www.1.fm)
-Length2=-1
-...6 diğer girdiler...
-Bir .pls dosyası, yalnızca [playlist] içeren bir satırla başlar.
+#### Bir .pls dosyasının içeriği (örnek):
+    [playlist]
+    numberofentries=8
+    File1=http://185.33.21.111:80/baroque_mobile_aac
+    Title1=1.FM - Otto's Baroque Music (www.1.fm)
+    Length1=-1
+    File2=http://185.33.21.111:80/baroque_64
+    Title2=1.FM - Otto's Baroque Music (www.1.fm)
+    Length2=-1
+    ...6 diğer girdiler...
+
+Bir `.pls` dosyası, yalnızca `[playlist]` içeren bir satırla başlar.
 İkinci satır, bu dosyanın 1'den 8'e kadar numaralandırılmış 8 giriş içerdiğini gösterir.
 
 Her giriş, birbirini izleyen 3 satırlık bir dizi ile tanımlanır. Her birinin rolü kolayca anlaşılabilir.
 
-"İçe aktarılacak dosya" bölümüne dönün
+.["İçe aktarılacak dosya" bölümüne dönün](#FileToImport)
 
-^
+[^](#)
+
+
+[screenshot]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/screenshot.png
+[sshot_settings_tabs]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_Settings_All_Tabs.png
+[sshot_radios_tab1]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RadiosTab_1.png
+[sshot_radios_tab2]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RadiosTab_2.png
+[sshot_radios_tab3]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RadiosTab_3.png
+[sshot_radios_tab4]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RadiosTab_4.png
+[plus_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_list_add_button.png
+[minus_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_list_remove_button.png
+[pencil_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_list_edit_button.png
+[unchecked_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_checkbox_symbolic_button.png
+[moveup_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_up_button.png
+[movedown_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_down_button.png
+[top_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_top_button.png
+[bottom_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_bottom_button.png
+[prevcat_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_previous_button.png
+[nextcat_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_next_button.png
+[sshot_menu_myradiostations]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_Menu_MyRadioStations.png  "My Radio Stations"
+
+[sshot_search_tab1]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_SearchTab_1.png
+[sshot_search_tab2]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_SearchTab_2.png
+
+[sshot_import_tab1]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_ImportTab_1.png
+[sshot_import_tab2]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_ImportTab_2.png
+
+[sshot_menu_tab]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_MenuTab.png
+
+[sshot_behavior1_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior1-StartUp.png
+
+[sshot_behavior2_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior2-VolumeStep.png
+
+[sshot_behavior3_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior3-ShowHelp.png
+
+[sshot_behavior4_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior4-Notifications.png
+
+[sshot_behavior5_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior5-CodecAndBitrate.png
+
+[sshot_behavior6_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior6-SymbolicIconColor.png
+
+[sshot_recording_settings]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RecordingSettings.png
+[sshot_network_settings]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_NetworkSettings.png
+
+[sshot_yt_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_YT_Tab.png
+
+[sshot_sched1_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_SchedulingTab_1.png
+
+[sshot_sched2_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_SchedulingTab_2.png
+
+[shoutcast]: https://directory.shoutcast.com/
+[shoutcast_baroque]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Shcst1.png
+[shoutcast_save]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Shcst2.png
