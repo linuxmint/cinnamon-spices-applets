@@ -334,7 +334,7 @@ Radio3.0 Ayarlarında 9 sekme vardır:
 ### Radyolar
 
 <a name="RadiosTabStations"></a>
-### Menüdeki İstasyonlar ve Kategoriler
+#### Menüdeki İstasyonlar ve Kategoriler
 
 !.[Radios Settings Screenshot][sshot_radios_tab1]{ width=670px }
 
@@ -377,31 +377,33 @@ Sağ kısım, listenizi keşfetmek için araçlar içerir:
 !.[Sub-menu My Radio Stations][sshot_menu_myradiostations]{ width=350px }
 
 <a name="RadiosTabMoving"></a>
-### Seçilen istasyonları/kategoriyi taşıma
+#### Seçilen istasyonları/kategoriyi taşıma
 
 !.[Radios Settings Screenshot 2][sshot_radios_tab2]{ width=670px }
 
-Belirli öğelerin kategorisini değiştirmek için ♪/➟ kutularını işaretleyerek seçin, açılır listeden kategoriyi seçin ve "Seçili istasyonları bu kategoriye taşı" düğmesine tıklayın.
+Belirli öğelerin kategorisini değiştirmek için **♪/➟** kutularını işaretleyerek seçin, açılır listeden kategoriyi seçin ve "Seçili istasyonları bu kategoriye taşı" düğmesine tıklayın.
 
 Sonucu görmek ve herhangi bir ayar yapmak için "Bu kategoriye git"e tıklayın.
 
 İpucu: Geçici bir kategori oluşturabilir ve onu doğru yere taşıyabilir, ardından seçili öğeleri silmeden önce o kategoriye taşıyabilirsiniz.
 
+<a name="RadiosTabSaveRestore"></a>
+#### Kaydet ve geri yükle
 
-Kaydet ve geri yükle
-Radios Settings Screenshot 3
+!.[Radios Settings Screenshot 3][sshot_radios_tab1]{ width=670px }
 
-Düzenlemeden veya güncellemeden önce istasyon listenizi kaydedin (yedekleyin). Bu, istasyonlarınızın ve kategorilerinizin tüm ayrıntılarını içeren bir .json dosyası oluşturur. Bu .json dosyasının adı, yedeklemenin tarihini ve saatini tanımlar; örnek: Radios_2022-02-21_22-23-55.json 21 Şubat 2022 saat 22:23:55'te oluşturuldu.
+**Kaydet** Düzenlemeden veya güncellemeden önce istasyon listenizi kaydedin (yedekleyin). Bu, istasyonlarınızın ve kategorilerinizin tüm ayrıntılarını içeren bir .json dosyası oluşturur. Bu .json dosyasının adı, yedeklemenin tarihini ve saatini tanımlar; örnek: Radios_2022-02-21_22-23-55.json 21 Şubat 2022 saat 22:23:55'te oluşturuldu.
 
-Önceden kaydedilmiş bir istasyon listesini geri yükleyin. Dikkat: Listeniz tamamen geri yüklenen listeyle değiştirilecektir.
+**Geri yükle** Önceden kaydedilmiş bir istasyon listesini geri yükleyin. Dikkat: Listeniz tamamen geri yüklenen listeyle değiştirilecektir.
 
 Bu listeleri içeren klasörü açarak yönetebilirsiniz. Özellikle, bunları istediğiniz zaman yeniden adlandırabilirsiniz.
 
+<a name="RadiosTabUpdate"></a>
+#### Radyo Veritabanını kullanarak listenizi güncelleyin
 
-Radyo Veritabanını kullanarak listenizi güncelleyin
-Radios Settings Screenshot 4
+!.[Radios Settings Screenshot 4][sshot_radios_tab4]{ width=670px }
 
-İstasyon listemi Radyo Veritabanı verileriyle güncelle düğmesinin amacı, radyolarınızın boş alanlarını mümkün olduğunca doldurmaktır.
+**İstasyon listemi Radyo Veritabanı verileriyle güncelle** düğmesinin amacı, radyolarınızın boş alanlarını mümkün olduğunca doldurmaktır.
 
 Danışılan veri tabanı, bir istasyon için bildirdiğiniz akış URL'sini içeriyorsa, bu istasyona bir UUID (Evrensel Benzersiz Tanımlayıcı) atanacaktır.
 
@@ -411,19 +413,21 @@ Güncelleme bir istasyona verdiğiniz adı değiştirmez.
 
 Notlar:
 
-Veritabanından (Arama sekmesi) bir istasyon gelirse, zaten bir UUID'si vardır.
+  * Veritabanından (Arama sekmesi) bir istasyon gelirse, zaten bir UUID'si vardır.
 
-Başka bir kaynaktan geliyorsa veritabanı tarafından bilinmiyor olabilir; daha sonra bir UUID atanmaz.
+  * Başka bir kaynaktan geliyorsa veritabanı tarafından bilinmiyor olabilir; daha sonra bir UUID atanmaz.
 
-Tüm Sekmeler
+.[Tüm Sekmeler](#Settings)
 
+<a name="SearchTab"></a>
+### Arama
 
-Arama
-Bu sekmeye, menüdeki Yeni istasyon ara seçeneğiyle doğrudan erişilebilir.
+Bu sekmeye, menüdeki _Yeni istasyon ara_ seçeneğiyle doğrudan erişilebilir.
 
+<a name="SearchTabForm"></a>
+#### Arama Formu
 
-Arama Formu
-Search Form Screenshot
+!.[Search Form Screenshot][sshot_search_tab1]{ width=670px }
 
 Bu formun en az birkaç alanını doldurup ardından 'Ara ...' düğmesine tıklayarak, İnternet üzerinden erişilebilen ücretsiz bir radyo veri tabanındaki diğer istasyonları arayabilirsiniz.
 
@@ -437,14 +441,16 @@ Kriterlerinizden en az birini değiştirirseniz, 'Sonraki sayfa numarası' alan�
 
 Her zamanki gibi, 'Sıfırla' düğmesi bu formdaki her alanı varsayılan değerine sıfırlar
 
+<a name="SearchTabResults"></a>
+#### Arama sonuçları
 
-Arama sonuçları
 Bu sonuçları elde etmek için, arama formu sıfırlandı ve ardından aşağıdakilerle dolduruldu:
 
-Etiket: metal
-Kodlayıcı: AAC
-Emir: bit hızı
-Search Results Screenshot
+  - Etiket: metal
+  - Kodlayıcı: AAC
+  - Emir: bit hızı
+
+!.[Search Results Screenshot][sshot_search_tab2]{ width=700px }
 
 'TheBlast.fm'i test etmek için ♪ kutusunu işaretleyin ve ardından ♪ Test edilecek sonraki istasyonu çal düğmesini tıklayın. Lütfen unutmayın: Bir radyo istasyonunu test etmek, onu bu uygulama menüsünde "Son Çalınan İstasyonlar"a ekler, ancak istasyon listenize eklemez.
 
