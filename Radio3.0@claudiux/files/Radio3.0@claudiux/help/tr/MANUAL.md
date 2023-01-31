@@ -722,12 +722,12 @@ Her giriş, birbirini izleyen 3 satırlık bir dizi ile tanımlanır. Her birini
 [^](#)
 
 
-[screenshot]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/screenshot.png
-[sshot_settings_tabs]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_Settings_All_Tabs.png
-[sshot_radios_tab1]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RadiosTab_1.png
-[sshot_radios_tab2]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RadiosTab_2.png
-[sshot_radios_tab3]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RadiosTab_3.png
-[sshot_radios_tab4]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RadiosTab_4.png
+[screenshot]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/screenshot.png
+[sshot_settings_tabs]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_Settings_All_Tabs.png
+[sshot_radios_tab1]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_RadiosTab_1.png
+[sshot_radios_tab2]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_RadiosTab_2.png
+[sshot_radios_tab3]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_RadiosTab_3.png
+[sshot_radios_tab4]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_RadiosTab_4.png
 [plus_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_list_add_button.png
 [minus_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_list_remove_button.png
 [pencil_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_list_edit_button.png
@@ -738,36 +738,36 @@ Her giriş, birbirini izleyen 3 satırlık bir dizi ile tanımlanır. Her birini
 [bottom_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_bottom_button.png
 [prevcat_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_previous_button.png
 [nextcat_button]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_next_button.png
-[sshot_menu_myradiostations]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_Menu_MyRadioStations.png  "My Radio Stations"
+[sshot_menu_myradiostations]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_Menu_MyRadioStations.png  "My Radio Stations"
 
-[sshot_search_tab1]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_SearchTab_1.png
-[sshot_search_tab2]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_SearchTab_2.png
+[sshot_search_tab1]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_SearchTab_1.png
+[sshot_search_tab2]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_SearchTab_2.png
 
-[sshot_import_tab1]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_ImportTab_1.png
-[sshot_import_tab2]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_ImportTab_2.png
+[sshot_import_tab1]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_ImportTab_1.png
+[sshot_import_tab2]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_ImportTab_2.png
 
-[sshot_menu_tab]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_MenuTab.png
+[sshot_menu_tab]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_MenuTab.png
 
-[sshot_behavior1_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior1-StartUp.png
+[sshot_behavior1_settings]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_Behavior1-StartUp.png
 
-[sshot_behavior2_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior2-VolumeStep.png
+[sshot_behavior2_settings]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_Behavior2-VolumeStep.png
 
-[sshot_behavior3_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior3-ShowHelp.png
+[sshot_behavior3_settings]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_Behavior3-ShowHelp.png
 
-[sshot_behavior4_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior4-Notifications.png
+[sshot_behavior4_settings]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_Behavior4-Notifications.png
 
-[sshot_behavior5_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior5-CodecAndBitrate.png
+[sshot_behavior5_settings]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_Behavior5-CodecAndBitrate.png
 
-[sshot_behavior6_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior6-SymbolicIconColor.png
+[sshot_behavior6_settings]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_Behavior6-SymbolicIconColor.png
 
-[sshot_recording_settings]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RecordingSettings.png
-[sshot_network_settings]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_NetworkSettings.png
+[sshot_recording_settings]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_RecordingSettings.png
+[sshot_network_settings]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_NetworkSettings.png
 
-[sshot_yt_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_YT_Tab.png
+[sshot_yt_settings]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_YT_Tab.png
 
-[sshot_sched1_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_SchedulingTab_1.png
+[sshot_sched1_settings]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_SchedulingTab_1.png
 
-[sshot_sched2_settings]: https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_SchedulingTab_2.png
+[sshot_sched2_settings]: https://github.com/claudiux/docs/blob/master/Radio3.0/screenshotsTR/Radio30_SchedulingTab_2.png
 
 [shoutcast]: https://directory.shoutcast.com/
 [shoutcast_baroque]: https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Shcst1.png
