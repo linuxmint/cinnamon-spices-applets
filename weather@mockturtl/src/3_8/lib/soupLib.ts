@@ -95,9 +95,9 @@ class Soup2 implements SoupLib {
 
     /**
 	 * Send a http request
-	 * @param url 
-	 * @param params 
-	 * @param method 
+	 * @param url
+	 * @param params
+	 * @param method
 	 */
 	public async Send(url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method: Method = "GET"): Promise<SoupResponse | null> {
 		// Add params to url

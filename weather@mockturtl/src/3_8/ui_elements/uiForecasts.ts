@@ -73,7 +73,7 @@ export class UIForecasts {
 	/** Injects data from forecasts array into popupMenu */
 	public Display(weather: WeatherData, config: Config): boolean {
 		try {
-			if (!weather.forecasts) 
+			if (!weather.forecasts)
 				return false;
 
 			if (this.forecasts.length > weather.forecasts.length)

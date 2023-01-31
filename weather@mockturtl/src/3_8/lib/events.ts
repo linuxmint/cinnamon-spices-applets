@@ -33,7 +33,7 @@ export class Event<TSender, TArgs> implements IEvent<TSender, TArgs> {
 	 * If you use this, you HAVE to make sure it's the same function
 	 * what you passed in. this means you have to save the arrow or the Lang.bind
 	 * function and Subscribe/Unsubscribe that.
-	 * 
+	 *
 	 * If you create them on the fly you won't be able to unsubscribe from them.
 	 */
 	public Unsubscribe(fn: (sender: TSender, args: TArgs) => void): void {

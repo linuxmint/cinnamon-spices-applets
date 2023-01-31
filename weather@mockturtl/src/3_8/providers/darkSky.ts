@@ -27,11 +27,13 @@ export class DarkSky extends BaseProvider {
 	public readonly website = "https://darksky.net/poweredby/";
 	public readonly maxHourlyForecastSupport = 168;
 	public readonly needsApiKey = true;
+	public readonly supportHourlyPrecipChance = true;
+	public readonly supportHourlyPrecipVolume = true;
 
 	private remainingQuota: number | null = null;
 	public get remainingCalls(): number | null {
 		// Disable this for now, this feature is only really useful for AccuWeather
-		// TODO: when a better place is found for this value add this back 
+		// TODO: when a better place is found for this value add this back
 		return null;
 		//return this.remainingQuota;
 	};
@@ -193,7 +195,7 @@ export class DarkSky extends BaseProvider {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param message Soup Message object
 	 * @returns null if custom error checking does not find anything
 	 */

@@ -11,6 +11,8 @@ export abstract class BaseProvider implements WeatherProvider {
     public abstract readonly maxHourlyForecastSupport: number;
     public abstract readonly website: string;
     public abstract readonly remainingCalls: number | null;
+    public abstract readonly supportHourlyPrecipChance: boolean;
+    public abstract readonly supportHourlyPrecipVolume: boolean;
 
     protected readonly app: WeatherApplet;
 
