@@ -178,6 +178,10 @@ class Eye extends Applet.Applet {
 		this.data_dir = this._initDataDir();
 		this.img_dir = `${metadata.path}/../circle`;
 
+		if (!Gio.File.new_for_path(this.img_dir).query_exists(null)) {
+			this.img_dir = `${GLib.get_home_dir()}/.local/share/cinnamon/applets/${this.metadata.uuid}/circle`;
+		}
+
 		this.area = new St.DrawingArea();
 		this.actor.add(this.area);
 
