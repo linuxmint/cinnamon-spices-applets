@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-04 08:45+0000\n"
-"PO-Revision-Date: 2023-02-03 18:37+0300\n"
+"PO-Revision-Date: 2023-02-03 18:53+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: be\n"
@@ -1733,16 +1733,20 @@ msgid ""
 "Could not retrieve config, file was not found under path\n"
 " {configFilePath}"
 msgstr ""
+"Немагчыма атрымаць налады, файл ня знойдзены па шляху\n"
+" {configFilePath}"
 
 #: 3.8/weather-applet.js:15068
 msgid ""
 "Could not get contents of config file under path\n"
 " {configFilePath}"
 msgstr ""
+"Немагчыма атрымаць зьмест файлу наладаў па шляху\n"
+" {configFilePath}"
 
 #: 3.8/weather-applet.js:15676
 msgid "Dew Point"
-msgstr ""
+msgstr "Кропка расы"
 
 #: 3.8/weather-applet.js:15748
 msgid "Precipitation will end in {precipEnd} minutes"
@@ -1758,7 +1762,7 @@ msgstr "Ападкі пачнуцца на працягу {precipStart} хвіл
 
 #: 3.8/weather-applet.js:15961
 msgid "Forecast parsing failed, see logs for more details."
-msgstr ""
+msgstr "Памылка загрузкі прагнозу, глядзіце логі, каб даведацца падрабязьней"
 
 #: 3.8/weather-applet.js:16399 3.8/weather-applet.js:17147
 msgid "As of {lastUpdatedTime}"
@@ -1778,15 +1782,15 @@ msgstr "Лакацыя: {stationArea}"
 
 #: 3.8/weather-applet.js:16944 3.8/weather-applet.js:16954
 msgid "Error Saving Debug Information"
-msgstr ""
+msgstr "Памылка захаваньня інфармацыі пра адладку"
 
 #: 3.8/weather-applet.js:16965
 msgid "Debug Information saved successfully"
-msgstr ""
+msgstr "Інфармацыя пра адладку пасьпяхова захаваная"
 
 #: 3.8/weather-applet.js:16965
 msgid "Saved to {filePath}"
-msgstr ""
+msgstr "Захавана у {filePath}"
 
 #: 3.8/weather-applet.js:17106
 msgid "This provider requires an API key to operate"
