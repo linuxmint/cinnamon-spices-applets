@@ -90,6 +90,9 @@ class LGS extends Applet.TextIconApplet {
         // Applet label on panel
         this.set_label();
 
+        let _tooltip = _("Middle-click: \n") + _("Show .xsession-errors");
+        this.set_applet_tooltip(_tooltip);
+
         this.applet_running = true;
     }; // End of constructor
 
@@ -283,6 +286,10 @@ class LGS extends Applet.TextIconApplet {
         // inhibit the update timer when applet removed from panel
         this.applet_running = false;
     };
+
+    on_applet_middle_clicked(event) {
+        Util.spawnCommandLineAsync("bash -c '"+WATCHXSE_SCRIPT+"'")
+    }
 } // End of class LGS
 
 function main(metadata, orientation, panelHeight, instance_id) {
