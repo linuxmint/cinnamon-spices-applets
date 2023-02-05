@@ -293,6 +293,10 @@ class Eye extends Applet.Applet {
 
 		Tweener.addTween(actor,
 			{
+				x: mouse_x - (this.mouse_click_image_size * actor_scale / 2),
+				y: mouse_y - (this.mouse_click_image_size * actor_scale / 2),
+				scale_x: actor_scale,
+				scale_y: actor_scale,
 				opacity: 0,
 				time: this.fade_timeout / 1000,
 				transition: "easeOutQuad",
