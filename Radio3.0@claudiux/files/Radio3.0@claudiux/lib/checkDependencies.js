@@ -88,7 +88,7 @@ var DEPENDENCIES = {
   ],
   "debian": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
-    ["", "/usr/share/doc/libmpv1/copyright", "libmpv1"],
+    ["", "/usr/lib/x86_64-linux-gnu/libmpv.so", "libmpv?"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
     ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],

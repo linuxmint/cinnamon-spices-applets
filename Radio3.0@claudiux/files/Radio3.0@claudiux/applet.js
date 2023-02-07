@@ -59,6 +59,7 @@ const {
 
 const {
   get_home_dir,
+  get_language_names,
   get_user_name,
   get_user_runtime_dir,
   get_user_special_dir,
@@ -197,14 +198,6 @@ const {
 } = require("./lib/checkTranslations");
 
 //~ const {
-  //~ stations_help_text,
-  //~ button_update_help_text,
-  //~ search_help_text,
-  //~ import_help_text,
-  //~ import_shoutcast_help_text
-//~ } = require("./help/help-text");
-
-//~ const {
   //~ Shoutcast
 //~ } = require("./lib/shoutcast");
 
@@ -250,6 +243,7 @@ const RUNTIME_DIR = get_user_runtime_dir();
 const DOT_CONFIG_DIR = HOME_DIR + "/.config/" + APPNAME;
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
+const HELP_DIR = APPLET_DIR + "/help";
 const RADIO30_OLD_CONFIG_FILE = HOME_DIR + "/.cinnamon/configs/" + UUID + "/" + UUID + ".json";
 const RADIO30_NEW_CONFIG_FILE = HOME_DIR + "/.config/cinnamon/spices/" + UUID + "/" + UUID + ".json";
 var RADIO30_CONFIG_FILE = "" + RADIO30_OLD_CONFIG_FILE;
@@ -263,7 +257,7 @@ const DB_SERVERS_FILE = APPLET_DIR + "/radiodb/server-list.json";
 const XS_PATH = "%s/xs/xlet-settings.py".format(APPLET_DIR, );
 const APPLET_ICON = APPLET_DIR + "/icons/icon.svg";
 const ANIMATED_ICON = APPLET_DIR + "/icons/animated-symbolic.svg";
-const MANUAL_HTML = APPLET_DIR + "/help/MANUAL.html";
+var MANUAL_HTML = HELP_DIR + "/MANUAL.html";
 
 const USER_MUSIC_DIR = get_user_special_dir(UserDirectory.DIRECTORY_MUSIC);
 const DEFAULT_RADIO30_MUSIC_DIR = USER_MUSIC_DIR + "/" + APPNAME;
@@ -359,14 +353,41 @@ function set_nemo_size_prefixes(value='base-10') {
 
 //var title_obj = {};
 
+function ENGLISH() {
+  let _english = file_new_for_path(APPLET_DIR + "/ENGLISH");
+  return _english.query_exists(null);
+};
+
 bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
 function _(str) {
+  if (ENGLISH()) return str;
   let customTranslation = dgettext(UUID, str);
   if(customTranslation != str) {
     return customTranslation;
   }
   return gettext(str);
 }
+
+/**
+ * get_user_language()
+ * Returns the language of the user.
+ */
+function get_user_language() {
+  log("get_language_names(): "+get_language_names(), true);
+  let _language;
+  try {
+    _language = ""+get_language_names()[0].split("_")[0];
+  } catch(e) {
+    // Unable to detect language. Return English by default.
+    _language = "en";
+  }
+  return _language;
+}
+
+//~ log("_language: " + get_user_language(), true);
+
+if (file_test(HELP_DIR+"/"+get_user_language()+"/MANUAL.html", FileTest.EXISTS))
+  MANUAL_HTML = HELP_DIR+"/"+get_user_language()+"/MANUAL.html";
 
 let stations_help_text = _("This is your own list of Categories and Radio Stations.")+"\n"+
 _("You can add more using the [+] button.")+"\n"+
@@ -906,10 +927,10 @@ WebRadioReceiverAndRecorder.prototype = {
     // User's settings:
     this.settings = new R3AppletSettings(this, UUID, this.instanceId);
     //~ if (file_test(RADIO30_NEW_CONFIG_FILE, FileTest.EXISTS) && !file_test(RADIO30_CONFIG_FILE, FileTest.EXISTS)) {
-		//~ spawnCommandLineAsync('bash -c "mkdir -p ~/.cinnamon/configs/Radio3.0@claudiux ; cd ~/.cinnamon/configs/Radio3.0@claudiux ; ln %s"'.format(RADIO30_NEW_CONFIG_FILE));
-	//~ }
+    //~ spawnCommandLineAsync('bash -c "mkdir -p ~/.cinnamon/configs/Radio3.0@claudiux ; cd ~/.cinnamon/configs/Radio3.0@claudiux ; ln %s"'.format(RADIO30_NEW_CONFIG_FILE));
+  //~ }
 
-    
+
     let userSettings = JSON.parse(to_string(file_get_contents(RADIO30_CONFIG_FILE)[1]));
     this.set_MPV_ALIAS();
     this.get_user_settings();
@@ -1922,16 +1943,45 @@ WebRadioReceiverAndRecorder.prototype = {
       }
       this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
+      // --- Begin Test (under development)
+      //~ let subMenuMyCategories = new RadioPopupSubMenuMenuItem(
+        //~ _("My Categories") + "  (%s)".format(""+(this.number_of_categories))
+      //~ );
+
+      //~ for (let radio of this.radios) {
+        //~ let title = ""+radio.name;
+        //~ let url = ""+radio.url;
+        //~ let isCategory = (url.length === 0);
+
+        //~ if (isCategory) {
+          //~ subMenuMyCategories.menu.addAction(title, () => {});
+        //~ }
+      //~ }
+
+      //~ this.menu.addMenuItem(subMenuMyCategories);
+      //~ subMenuMyCategories.menu._needsScrollbar = function() {
+        //~ return true;
+      //~ };
+      // --- End Test
+
+      this.show_by_category = false; // Forced to false; true doesn't work for now.
+
       if (this.show_by_category) {
         // MY CATEGORIES
         //let allCategoriesMenu = new RadioPopupSubMenuMenuItem(_("My Categories") + "  (%s)".format(""+(this.number_of_categories)));
-        let allCategoriesMenu = new PopupMenuSection(null);
+        let allCategoriesMenu = new RadioPopupSubMenuMenuItem(_("My Categories") + "  (%s)".format(""+(this.number_of_categories)));
+        //let allCategoriesMenu = new PopupMenuItem(_("My Categories") + "  (%s)".format(""+(this.number_of_categories)));
+        //let allCategoriesMenu = new PopupMenuSection(null);
         //~ allCategoriesMenu._needsScrollbar = function() {
-          //~ return false;
+          //~ return true;
+        //~ };
+        //~ allCategoriesMenu.close = function(animate) {
+          //~ return true;
         //~ };
         //~ allCategoriesMenu.actor.set_style_class_name('menu-context-menu');
         //allCategoriesMenu.connect('open-state-changed', Lang.bind(this, this._contextMenuOpenStateChanged));
-        this.menu.addMenuItem(allCategoriesMenu);
+        //~ allCategoriesMenu.connect('open-state-changed', () => {});
+
 
         //~ this.menuCategories = [null];
         var indexOfLastCategory = null;
@@ -1940,33 +1990,43 @@ WebRadioReceiverAndRecorder.prototype = {
           //~ global.log("lastCategory is null: "+(lastCategory == null));
           let title = ""+this.radios[i].name;
           let id = ""+this.radios[i].url;
-          let isCategory = id.length === 0;
+          let isCategory = (id.length === 0);
 
           if (isCategory) {
-            this.menuItems[i] = new RadioPopupSubMenuMenuItem(title, false);
-            //allCategoriesMenu.menu.addMenuItem(this.menuItems[i]);
-            allCategoriesMenu.addMenuItem(this.menuItems[i]);
-            this.menuItems[i].connect('open-event', Lang.bind(this, function() {
-              this.menuItems[i].menu.isOpen = false ;
-              this.menuItems[i].menu.open(true)
-            }));
-            indexOfLastCategory = 0 + i;
+            log("Category: "+title, true);
+            //~ this.menuItems[i] = new PopupSubMenuMenuItem(title);
+            this.menuItems.push( new PopupSubMenuMenuItem(title) );
+            allCategoriesMenu.menu.addMenuItem(this.menuItems[-1]);
+
+            //~ this.menuItems[i].connect('open-event', Lang.bind(this, function() {
+              //~ //this.menuItems[i].menu.isOpen = false ;
+              //~ this.menuItems[i].menu.open(true);
+              //~ log(title + " open-event: " + this.menuItems[i].menu.isOpen, true)
+            //~ }));
+            //~ this.menuItems[i].connect('open-state-changed', Lang.bind(this, function() {
+              //~ log(title + " open-state-changed: " + this.menuItems[i].menu.isOpen, true)
+            //~ }));
+
+            //~ indexOfLastCategory = 0 + i;
+            indexOfLastCategory = this.menuItems.length - 1;
           } else {
             if (this.radios[i] != null && this.radios[i].inc === true) {
-              this.menuItems[i] = new PopupMenuItem(title, { reactive: true });
+              log(" Station: "+title, true);
+              //~ this.menuItems[i] = new PopupMenuItem(title, { reactive: true });
+              this.menuItems.push( new PopupMenuItem(title, { reactive: true }) );
               if (indexOfLastCategory != null) {
-                this.menuItems[indexOfLastCategory].menu.addMenuItem(this.menuItems[i]);
-                //this.menuItems[indexOfLastCategory].menu.open(true);
-                this.menuItems[i].connect('activate', () => {
-                  if (change_tooltip) {
-                    this.set_radio_tooltip_to_default_one();
-                  }
+                this.menuItems[-1].connect('activate', () => {
 
                   this.stop_mpv_radio(false);
                   this.start_mpv_radio(id);
 
                   this.menu.close();
+                  if (change_tooltip) {
+                    this.set_radio_tooltip_to_default_one();
+                  }
                 });
+                this.menuItems[indexOfLastCategory].menu.addMenuItem(this.menuItems[-1]);
+                //this.menuItems[indexOfLastCategory].menu.open(true);
               } else {
                 //allCategoriesMenu.menu.addMenuItem(this.menuItems[i]);
               }
@@ -1974,7 +2034,7 @@ WebRadioReceiverAndRecorder.prototype = {
           }
           i++
         }
-
+        this.menu.addMenuItem(allCategoriesMenu);
       } else {
         // MY RADIO STATIONS:
         //~ let allRadiosMenu = new RadioPopupSubMenuMenuItem(_("My Radio Stations") + "  (%s)".format(""+(this.radios.length - this.number_of_categories)));
