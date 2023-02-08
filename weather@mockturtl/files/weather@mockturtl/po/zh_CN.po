@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: 3.2.12\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-24 09:42+0000\n"
-"PO-Revision-Date: 2023-02-07 18:28+0800\n"
+"PO-Revision-Date: 2023-02-08 08:55+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: Chinese (simplified)\n"
 "Language: zh_CN\n"
@@ -254,7 +254,7 @@ msgstr "从位置存储中加载数据失败，请查看日志以了解更多信
 #: 3.8/weather-applet.js:13009 3.8/weather-applet.js:13373
 #: 3.8/weather-applet.js:14740
 msgid "Feels Like"
-msgstr "似乎"
+msgstr "体感"
 
 #: 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
 #: 3.8/weather-applet.js:10846
