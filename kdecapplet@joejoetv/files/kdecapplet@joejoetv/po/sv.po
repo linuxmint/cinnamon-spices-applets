@@ -1,0 +1,159 @@
+## Swedish translation for kdecapplet@joejoetv.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-20 13:38+0200\n"
+"PO-Revision-Date: 2023-02-08 11:45+0100\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: applet.js:281 applet.js:484 applet.js:524
+msgid "Send SMS"
+msgstr "Skicka SMS"
+
+#: applet.js:281
+msgid "Send"
+msgstr "Skicka"
+
+#: applet.js:281
+msgid "Enter Phone Number and Message to Send."
+msgstr "Ange telefonnummer och meddelande att skicka."
+
+#: applet.js:281
+msgid "Phone Number"
+msgstr "Telefonnummer"
+
+#: applet.js:281
+msgid "Message"
+msgstr "Meddelande"
+
+#: applet.js:282 applet.js:570
+msgid "Share URL"
+msgstr "Dela URL"
+
+#: applet.js:282
+msgid "Share"
+msgstr "Dela"
+
+#: applet.js:282
+msgid "Enter URL to Share."
+msgstr "Ange URL att dela."
+
+#: applet.js:282
+msgid "URL"
+msgstr "URL"
+
+#: applet.js:347
+msgid "KDE Connect Version"
+msgstr "KDE Connect Version"
+
+#: applet.js:350
+msgid "Configure KDEConnect"
+msgstr "Konfigurera KDE Connect"
+
+#: applet.js:358 applet.js:361
+msgid "KDEConnect is not running!"
+msgstr "KDE Connect körs inte!"
+
+#: applet.js:363
+msgid "Reload Applet"
+msgstr "Uppdatera panelprogrammet"
+
+#: applet.js:397 applet.js:400
+msgid "No reachable paired devices!"
+msgstr "Inga parkopplade enheter kan nås!"
+
+#: applet.js:405
+msgid "Devices"
+msgstr "Enheter"
+
+#: applet.js:408
+msgid "Device"
+msgstr "Enhet"
+
+#: applet.js:431
+msgid "ID"
+msgstr "ID"
+
+#: applet.js:435
+msgid "Copied Device ID to the clipboard"
+msgstr "Kopierade enhets-ID till urklipp"
+
+#: applet.js:470
+msgid "Send Ping"
+msgstr "Sänd Ping"
+
+#: applet.js:496 applet.js:536
+msgid "Sent SMS to ${phonenumber}"
+msgstr "Skicka SMS till ${phonenumber}"
+
+#: applet.js:514
+msgid "Launch SMS App"
+msgstr "Starta SMS-appen"
+
+#: applet.js:554
+msgid "Share File"
+msgstr "Dela fil"
+
+#: applet.js:561
+msgid "Shared file with ${name}"
+msgstr "Delade fil med ${name}"
+
+#: applet.js:580
+msgid "Shared URL with ${name}"
+msgstr "Delade URL med ${name}"
+
+#: applet.js:602 applet.js:749
+msgid "Mount and Browse"
+msgstr "Montera och bläddra"
+
+#: applet.js:623
+msgid "The Device couldn't be mounted!"
+msgstr "Enheten kunde inte monteras!"
+
+#: applet.js:629
+msgid "Unmount"
+msgstr "Avmontera"
+
+#: applet.js:638 applet.js:744
+msgid "Browse"
+msgstr "Bläddra"
+
+#: applet.js:658
+msgid "Find My Device"
+msgstr "Hitta min enhet"
+
+#: applet.js:673
+msgid "Request Photo"
+msgstr "Begär bild"
+
+#: applet.js:680
+msgid "Requested photo from ${name}"
+msgstr "Begärde bild från ${name}"
+
+#: applet.js:754
+msgid "Photo received"
+msgstr "Bild mottagen"
+
+#. metadata.json->name
+msgid "KDEConnect Applet"
+msgstr "KDE Connect panelprogram"
+
+#. metadata.json->description
+msgid "Applet for interacting with Devices connected via KDE COnnect."
+msgstr "Panelprogram för interaktion med enheter, anslutna via KDE Connect."
+
+#. metadata.json->comments
+msgid "Requires 'zenity' for some features."
+msgstr "Kräver \"zenity\" för vissa funktioner."
