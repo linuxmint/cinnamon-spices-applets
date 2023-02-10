@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-04 20:17+1000\n"
+"PO-Revision-Date: 2023-02-10 22:34+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: applet.js:132
+msgid "OctoPussy: OctoPrint manager."
+msgstr "OctoPussy：OctoPrint 管理器。"
+
+#: applet.js:205
+msgid "Settings"
+msgstr "设置"
+
+#: applet.js:278 applet.js:351
+msgid "Time lapsed: "
+msgstr "用时："
+
+#: applet.js:282 applet.js:352
+msgid "Estimated: "
+msgstr "预计："
+
+#: applet.js:292 applet.js:353
+msgid "Total time: "
+msgstr "总时间："
+
+#: applet.js:355
+msgid "Pause current print"
+msgstr "暂停当前打印"
+
+#: applet.js:356
+msgid "Continue current print"
+msgstr "继续当前打印"
+
+#: applet.js:358
+msgid "Change filament"
+msgstr "更换耗材"
+
+#: applet.js:359
+msgid "Camera monitor"
+msgstr "监视摄像头"
+
+#: applet.js:360
+msgid "Open OctoPrint web"
+msgstr "打开 OctoPrint 网页"
+
+#: applet.js:362
+msgid "Restart OctoPrint"
+msgstr "重启 OctoPrint"
+
+#: applet.js:363
+msgid "Shutdown OctoPrint"
+msgstr "关闭 OctoPrint"
+
+#: applet.js:364
+msgid "Configure..."
+msgstr "配置…"
+
+#. settings-schema.json->octoprintUrl->description
+#. settings-schema.json->octoprintUrl->tooltip
+msgid "OctoPrint API Address"
+msgstr "OctoPrint API 地址"
+
+#. settings-schema.json->octoprintApiKey->description
+msgid "OctoPrint API Key. Get an API key from the OctoPrint site settings."
+msgstr "OctoPrint API密钥。从 OctoPrint 网站设置中获取一个 API 密钥。"
+
+#. settings-schema.json->octoprintInterval->units
+msgid "seconds"
+msgstr "秒"
+
+#. settings-schema.json->octoprintInterval->description
+msgid "Refresh Interval:"
+msgstr "刷新间隔："
+
+#. settings-schema.json->octoprintInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"增大或减小这个值来更改刷新间隔 - 如果您有一台较慢的机器请使用较低的刷新频率"
+
+#. settings-schema.json->octoprintVideoCommand->description
+msgid "Video command to use when showing the webcam. Defaults to vlc."
+msgstr "显示网络摄像头时要使用的命令，默认为 vlc。"
+
+#. metadata.json->description
+msgid "An applet to manage OctoPrint."
+msgstr "一个用于管理 OctoPrint 的小程序。"
+
+#. metadata.json->name
+msgid "OctoPrint manager"
+msgstr "OctoPrint 管理器"
