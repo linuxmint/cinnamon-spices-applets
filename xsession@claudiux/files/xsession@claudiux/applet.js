@@ -10,6 +10,8 @@ const {
   reloadExtension,
   Type
 } = imports.ui.extension; //Extension
+const { restartCinnamon } = imports.ui.main; // Main
+
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu; // ++ Needed for menus
 
@@ -178,7 +180,7 @@ class LGS extends Applet.TextIconApplet {
         });
         itemReloadCinnamon.connect(
             "activate",
-            () => global.reexec_self()
+            () => restartCinnamon(true)
         );
 
         this.menu.addMenuItem(itemReloadCinnamon);
