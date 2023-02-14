@@ -27,6 +27,8 @@ export class USWeather extends BaseProvider {
 	public readonly maxHourlyForecastSupport = 156;
 	public readonly needsApiKey = false;
 	public readonly remainingCalls: number | null = null;
+	public readonly supportHourlyPrecipChance = false;
+	public readonly supportHourlyPrecipVolume = false;
 
 	private sitesUrl = "https://api.weather.gov/points/";
 
@@ -94,7 +96,7 @@ export class USWeather extends BaseProvider {
 
 	/**
 	 * Handles App errors internally
-	 * @param loc 
+	 * @param loc
 	 */
 	private async GetGridData(loc: LocationData): Promise<GridPayload | null> {
 		// Handling out of country errors in callback
@@ -104,7 +106,7 @@ export class USWeather extends BaseProvider {
 
 	/**
 	 * Handles app errors internally
-	 * @param stationListUrl 
+	 * @param stationListUrl
 	 */
 	private async GetStationData(stationListUrl: string): Promise<StationPayload[] | undefined> {
 		const stations = await this.app.LoadJsonAsync<StationsPayload>(stationListUrl);
@@ -134,7 +136,7 @@ export class USWeather extends BaseProvider {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param message Soup Message object
 	 */
 	private OnObtainingGridData = (message: ErrorResponse<{title: string}>): boolean => {
@@ -154,9 +156,9 @@ export class USWeather extends BaseProvider {
 	}
 
 	/**
-	 * Observation data is a bit spotty, so we mesh 
+	 * Observation data is a bit spotty, so we mesh
 	 * station data
-	 * @param observations 
+	 * @param observations
 	 */
 	private MeshObservationData(observations: ObservationPayload[]): ObservationPayload | null {
 		if (observations.length < 1) return null;
@@ -218,8 +220,8 @@ export class USWeather extends BaseProvider {
 	}
 
 	/**
-	 * 
-	 * @param json 
+	 *
+	 * @param json
 	 * @param hourly can be null
 	 */
 	private ParseCurrent(json: ObservationPayload[], hourly: ForecastsPayload, loc: LocationData): WeatherData | null {
@@ -400,8 +402,8 @@ export class USWeather extends BaseProvider {
 
 	/**
 	 * https://api.weather.gov/icons
-	 * @param icon 
-	 * @param isNight 
+	 * @param icon
+	 * @param isNight
 	 */
 	private ResolveCondition(icon: string, isNight: boolean = false): Condition {
 		if (icon == null)

@@ -16,6 +16,8 @@ export class MetNorway extends BaseProvider {
 	public readonly maxHourlyForecastSupport = 48;
 	public readonly needsApiKey = false;
 	public readonly remainingCalls: number | null = null;
+	public readonly supportHourlyPrecipChance = false;
+	public readonly supportHourlyPrecipVolume = true;
 
 	private baseUrl = "https://api.met.no/weatherapi";
 
@@ -51,7 +53,7 @@ export class MetNorway extends BaseProvider {
 						const element = nowcast.properties.timeseries[i];
 						const next = nowcast.properties.timeseries[i+1];
 						// Next element is already in the past, skip this one
-						if (next != null && DateTime.fromISO(next.time).diffNow().milliseconds < 0) 
+						if (next != null && DateTime.fromISO(next.time).diffNow().milliseconds < 0)
 							continue;
 
 						if (element.data.instant.details.precipitation_rate > 0 && immediate.start == -1) {
@@ -325,14 +327,14 @@ export class MetNorway extends BaseProvider {
 					customIcon: "rain-symbolic",
 					main: _("Heavy rain"),
 					description: _("Heavy rain"),
-					icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
+					icons: ["weather-rain", "weather-showers", "weather-freezing-rain"]
 				}
 			case "heavyrainandthunder":
 				return {
 					customIcon: "thunderstorm-symbolic",
 					main: _("Heavy rain"),
 					description: _("Heavy rain and thunder"),
-					icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
+					icons: ["weather-rain", "weather-showers", "weather-freezing-rain"]
 				}
 			case "heavyrainshowers":
 				return {
@@ -353,21 +355,21 @@ export class MetNorway extends BaseProvider {
 					customIcon: "sleet-symbolic",
 					main: _("Heavy sleet"),
 					description: _("Heavy sleet"),
-					icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
+					icons: ["weather-freezing-rain", "weather-showers", "weather-rain"]
 				}
 			case "heavysleetandthunder":
 				return {
 					customIcon: "sleet-storm-symbolic",
 					main: _("Heavy sleet"),
 					description: _("Heavy sleet and thunder"),
-					icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
+					icons: ["weather-freezing-rain", "weather-showers", "weather-rain"]
 				}
 			case "heavysleetshowers":
 				return {
 					customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
 					main: _("Heavy sleet"),
 					description: _("Heavy sleet showers"),
-					icons: ["weather-showers", "weather-showers-scattered", "weather-freezing-rain"]
+					icons: ["weather-freezing-rain", "weather-showers", "weather-showers-scattered"]
 
 				}
 			case "heavysleetshowersandthunder":
@@ -375,7 +377,7 @@ export class MetNorway extends BaseProvider {
 					customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
 					main: _("Heavy sleet"),
 					description: _("Heavy sleet showers and thunder"),
-					icons: ["weather-showers", "weather-showers-scattered", "weather-freezing-rain"]
+					icons: ["weather-freezing-rain", "weather-showers", "weather-showers-scattered"]
 
 				}
 			case "heavysnow":
@@ -510,14 +512,14 @@ export class MetNorway extends BaseProvider {
 					customIcon: "rain-symbolic",
 					main: _("Rain"),
 					description: _("Rain"),
-					icons: ["weather-rain", "weather-freezing-rain", "weather-showers-scattered"]
+					icons: ["weather-rain", "weather-showers-scattered", "weather-showers"]
 				}
 			case "rainandthunder":
 				return {
 					customIcon: "thunderstorm-symbolic",
 					main: _("Rain"),
 					description: _("Rain and thunder"),
-					icons: ["weather-storm", "weather-rain", "weather-freezing-rain", "weather-showers-scattered"]
+					icons: ["weather-storm", "weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-showers"]
 				}
 			case "rainshowers":
 				return {

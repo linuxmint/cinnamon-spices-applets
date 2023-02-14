@@ -7,32 +7,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-28 16:00+0800\n"
-"PO-Revision-Date: 2017-04-28 16:01+0800\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2020-05-09 12:25+0200\n"
+"PO-Revision-Date: 2023-02-09 20:45+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-#: QR.js:78
-msgid "QR generated."
-msgstr "QR码已生成。"
+"X-Generator: Poedit 3.2.2\n"
 
 #: QRLib.js:682
 msgid "Invalid or unsupported mode."
-msgstr "模式无效或不支持。"
+msgstr "无效或不支持的模式。"
 
 #: QRLib.js:686
 msgid "Invalid data format."
-msgstr "数据格式无效。"
+msgstr "无效的数据格式。"
 
 #: QRLib.js:688
 msgid "Invalid ECC level."
-msgstr "ECC级别无效。"
+msgstr "无效的纠错能力等级。"
 
 #: QRLib.js:694
 msgid "Too much data."
@@ -46,22 +42,31 @@ msgstr "版本无效。"
 msgid "Invalid mask."
 msgstr "掩码无效。"
 
+#: QR.js:80 applet.js:194
+msgid "QR generated"
+msgstr "二维码已生成"
+
 #: applet.js:63
 msgid "Create QR code from clipboard"
-msgstr "从剪贴板创建QR码"
+msgstr "从剪贴板生成二维码"
 
-#: applet.js:135
+#: applet.js:75
+#, javascript-format
+msgid "Save QR code as SVG in '~/%s'"
+msgstr "以 SVG 格式保存二维码到 ~/%s"
+
+#: applet.js:158
 msgid "Scan QR Code"
-msgstr "扫描QR码"
+msgstr "扫描二维码"
 
-#: applet.js:155
+#: applet.js:183 applet.js:197
 msgid "No QR code scanned."
-msgstr "没有扫描到QR码。"
+msgstr "没有扫描到二维码。"
 
-#. clipboard-qr@wrouesnel->metadata.json->description
-msgid "Create QR codes from clipboard content"
-msgstr "从剪贴板内容创建QR码"
-
-#. clipboard-qr@wrouesnel->metadata.json->name
+#. metadata.json->name
 msgid "Clipboard QR code applet"
-msgstr "剪贴板QR码小程序"
+msgstr "剪切板二维码小程序"
+
+#. metadata.json->description
+msgid "Create QR codes from clipboard content"
+msgstr "从剪切板生成二维码"
