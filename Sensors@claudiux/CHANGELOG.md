@@ -1,8 +1,11 @@
+### v2.0.3~20230205
+  * Better integration with Fedora - Fixes #4672
+
 ### v2.0.2~20230105
   * Minor bug fix: remove useless trailing separator.
 
-### v2.0.1~20221118
-  * Minor bug fixes.
+### v2.0.1~20221228
+  * Bugfixes (changing text color)
 
 ### v2.0.0~20221113
   * Can now read disk temperature.
