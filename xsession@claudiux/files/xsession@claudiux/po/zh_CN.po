@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-29 19:25+0100\n"
+"PO-Revision-Date: 2023-02-07 21:33+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: applet.js:43
+msgid "Applet"
+msgstr "小程序"
+
+#: applet.js:44
+msgid "Desklet"
+msgstr "桌面小工具"
+
+#: applet.js:45
+msgid "Extension"
+msgstr "扩展"
+
+#: applet.js:48
+msgid "Applets"
+msgstr "小程序"
+
+#: applet.js:49
+msgid "Desklets"
+msgstr "桌面小工具"
+
+#: applet.js:50
+msgid "Extensions"
+msgstr "扩展"
+
+#: applet.js:162
+msgid "Show .xsession-errors"
+msgstr "显示 .xsession-errors"
+
+#: applet.js:173
+msgid "Restart Cinnamon"
+msgstr "重新启动 Cinnamon"
+
+#: applet.js:184
+msgid "--- Reload Spices ---"
+msgstr "--- 重新加载 Spices ---"
+
+#: applet.js:190
+msgid "Reload Applet:"
+msgstr "重新加载小程序："
+
+#: applet.js:204
+msgid "Reload Desklet:"
+msgstr "重新加载桌面小工具："
+
+#: applet.js:218
+msgid "Reload Extension:"
+msgstr "重新加载扩展："
+
+#: applet.js:232
+msgid "--- View Code ---"
+msgstr "--- 查看代码 ---"
+
+#: applet.js:238
+msgid "View Applet Code for:"
+msgstr "查看小程序的代码："
+
+#: applet.js:252
+msgid "View Desklet Code for:"
+msgstr "查看桌面小工具的代码："
+
+#: applet.js:266
+msgid "View Extension Code for:"
+msgstr "查看扩展的代码："
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr "Xsession"
+
+#. metadata.json->description
+msgid ""
+"Allows you to restart or open the source code of Spices (applets, desklets, "
+"extensions), display in real-time the contents of your .xsession-errors file "
+"and restart Cinnamon."
+msgstr ""
+"允许你重启 Spices (小程序、桌面小工具、扩展) ，打开它们的源代码，实时显示 ."
+"xsession-errors 文件的内容，以及重启 Cinnamon。"

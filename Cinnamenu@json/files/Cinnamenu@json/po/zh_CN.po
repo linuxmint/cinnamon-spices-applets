@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-16 02:20+0000\n"
-"PO-Revision-Date: 2022-05-26 15:51+0100\n"
-"Last-Translator: Google translate\n"
+"POT-Creation-Date: 2022-09-29 19:16+0100\n"
+"PO-Revision-Date: 2023-02-04 18:34+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgid "Type to search..."
 msgstr "键入以搜索..."
 
 msgid "Initializing"
-msgstr "初始化"
+msgstr "正在初始化"
 
 msgid "No description available"
 msgstr "没有可用的描述"
@@ -43,7 +43,7 @@ msgid "Favorite apps"
 msgstr "收藏夹应用程序"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "Firefox和Midori书签所需的gir1.2-gda-5.0包。"
+msgstr "Firefox 和 Midori 书签所需的 gir1.2-gda-5.0 包。"
 
 msgid "Clear List"
 msgstr "清除列表"
@@ -85,7 +85,7 @@ msgid "Shutdown the computer"
 msgstr "关闭计算机"
 
 msgid "Run with NVIDIA GPU"
-msgstr "使用NVIDIA GPU运行"
+msgstr "使用 NVIDIA GPU 运行"
 
 msgid "Add to panel"
 msgstr "添加到面板"
@@ -118,7 +118,7 @@ msgid "Please wait..."
 msgstr "请稍等..."
 
 msgid "Applications"
-msgstr "应用"
+msgstr "应用程序"
 
 msgid "Documents"
 msgstr "文件"
@@ -136,7 +136,7 @@ msgid "No recent Items"
 msgstr "没有最近的项目"
 
 msgid "Click to copy"
-msgstr "点击复制"
+msgstr "单击复制"
 
 msgid "Applications and files"
 msgstr "应用程序和文件"
@@ -154,7 +154,7 @@ msgid "Emoji"
 msgstr "表情符号"
 
 msgid "Trash"
-msgstr "垃圾"
+msgstr "回收站"
 
 msgid "Error while opening file:"
 msgstr "打开文件时出错："
@@ -169,7 +169,7 @@ msgid "Recent"
 msgstr "最近的"
 
 msgid "Home folder"
-msgstr "主文件夹"
+msgstr "主目录"
 
 msgid "Reset category order"
 msgstr "重置类别顺序"
@@ -178,43 +178,72 @@ msgid "light skin tone"
 msgstr "浅肤色"
 
 msgid "medium-light skin tone"
-msgstr "中浅肤色"
+msgstr "较浅肤色"
 
 msgid "medium skin tone"
 msgstr "中等肤色"
 
 msgid "medium-dark skin tone"
-msgstr "中深肤色"
+msgstr "较深肤色"
 
 msgid "dark skin tone"
-msgstr "深色肤色"
+msgstr "深肤色"
 
 msgid "This file is no longer available"
 msgstr "此文件不再可用"
 
 msgid "Open with"
-msgstr "打开用"
+msgstr "打开方式"
 
 msgid "Other application..."
-msgstr "其他应用..."
+msgstr "其他应用程序..."
 
 msgid "Open containing folder"
-msgstr "打开包含文件夹"
+msgstr "打开文件位置"
 
 msgid "Move to trash"
-msgstr "移到废纸篓"
+msgstr "移到回收站"
 
 msgid "Error while moving file to trash:"
-msgstr "将文件移动到垃圾箱时出错："
+msgstr "将文件移动到回收站时出错："
 
-msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
-msgstr "此菜单项不与任何包关联。是否仍要将其从菜单中删除？"
+msgid "Smileys & Emotion"
+msgstr "笑脸 & 表情"
+
+msgid "People & Body"
+msgstr "人 & 身体"
+
+msgid "Animals & Nature"
+msgstr "动物 & 自然"
+
+msgid "Food & Drink"
+msgstr "食物 & 饮料"
+
+msgid "Travel & Places"
+msgstr "旅游 & 场所"
+
+msgid "Activities"
+msgstr "活动"
+
+msgid "Objects"
+msgstr "物体"
+
+msgid "Symbols"
+msgstr "符号"
+
+msgid "Flags"
+msgstr "旗帜"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr "此菜单项不与任何软件包关联。是否要将其从菜单中删除？"
 
 msgid "The following packages will be removed:"
 msgstr "以下软件包将被删除："
 
 msgid "Packages to be removed"
-msgstr "要删除的包"
+msgstr "要删除的软件包"
 
 #, python-format
 msgid "Cannot remove package %s as it is required by other packages."
@@ -231,49 +260,49 @@ msgid "Search"
 msgstr "搜索"
 
 msgid "Start in"
-msgstr ""
+msgstr "开始于"
 
 msgid "Select a folder"
-msgstr ""
+msgstr "选择文件夹"
 
 msgid "Follow symlinks"
-msgstr ""
+msgstr "沿符号链接"
 
 msgid "Search hidden"
-msgstr "搜索隐藏"
+msgstr "搜索隐藏文件"
 
 msgid "Use regular expressions"
-msgstr ""
+msgstr "使用正则表达式"
 
 msgid "Stop"
-msgstr ""
+msgstr "停止"
 
 msgid "File"
-msgstr ""
+msgstr "文件"
 
 msgid "Path"
-msgstr ""
+msgstr "路径"
 
 msgid "Searching..."
-msgstr ""
+msgstr "正在搜索..."
 
 msgid "Search Stopped"
-msgstr ""
+msgstr "搜索停止"
 
 msgid "Searching: "
-msgstr ""
+msgstr "正在搜索："
 
 msgid "Error: insufficient permissions to read folder "
-msgstr ""
+msgstr "错误：没有足够的权限读取文件夹"
 
 msgid "Search Completed"
-msgstr ""
+msgstr "搜索完成"
 
 msgid "Skipping"
-msgstr ""
+msgstr "跳过"
 
 msgid " - directory already searched"
-msgstr ""
+msgstr " - 已搜索目录"
 
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
@@ -309,7 +338,7 @@ msgid "Content"
 msgstr "内容"
 
 msgid "Recent files settings"
-msgstr "最近的文件设置"
+msgstr "最近文件设置"
 
 msgid "Open the menu editor"
 msgstr "打开菜单编辑器"
@@ -360,10 +389,10 @@ msgid "Animate the menu on open and close"
 msgstr "允许打开和关闭菜单的动画"
 
 msgid "Activate categories on click"
-msgstr "点击激活类别"
+msgstr "单击激活类别"
 
 msgid "Activate categories on click instead of on hover"
-msgstr "点击激活类别"
+msgstr "单击而不是悬停时激活类别"
 
 msgid "Enable autoscrolling"
 msgstr "启用自动滚动"
@@ -379,19 +408,19 @@ msgid ""
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
 "在菜单中显示浏览器的网络书签。\n"
-"注意：安装包 gir1.2-gda-5.0 以阅读 Firefox 书签。"
+"注意：安装软件包 gir1.2-gda-5.0 以读取 Firefox 书签。"
 
 msgid "Enable searching of open windows"
 msgstr "启用搜索打开的窗口"
 
 msgid "Enable search providers"
-msgstr "启用搜索提供商"
+msgstr "启用搜索提供者"
 
 msgid "Include search provider results in searches"
-msgstr "在搜索中包含搜索提供程序结果"
+msgstr "在搜索中包含提供者搜索结果"
 
 msgid "Example Search Providers"
-msgstr "示例搜索提供程序"
+msgstr "搜索提供者示例"
 
 msgid "Open menu on category:"
 msgstr "打开类别菜单："
@@ -403,7 +432,7 @@ msgid "Grid"
 msgstr "网格"
 
 msgid "Always open the menu with this category selected"
-msgstr "始终打开选择此类别的菜单"
+msgstr "打开菜单时始终选择此类别"
 
 msgid "columns"
 msgstr "列"
@@ -415,7 +444,7 @@ msgid "Show bookmarks and places"
 msgstr "显示书签和位置"
 
 msgid "Show bookmarks and places category in the menu"
-msgstr "显示书签和位置"
+msgstr "在类别列表中显示书签和位置"
 
 msgid "Show application icons"
 msgstr "显示应用程序图标"
@@ -424,13 +453,13 @@ msgid "Show category icons"
 msgstr "显示类别图标"
 
 msgid "Show application descriptions under titles"
-msgstr "在标题下显示应用程序描述"
+msgstr "在标题下方显示应用程序描述"
 
 msgid "Show tooltips"
-msgstr "显示工具提示"
+msgstr "显示提示框"
 
 msgid "Tooltip delay"
-msgstr "工具提示延迟"
+msgstr "提示框延迟"
 
 msgid "Use a custom menu height"
 msgstr "使用自定义菜单高度"
@@ -439,74 +468,89 @@ msgid "Custom menu height (pixels)"
 msgstr "自定义菜单高度（像素）"
 
 msgid "Applications view mode"
-msgstr "应用程序查看模式"
+msgstr "应用程序视图模式"
 
 msgid "View applications as list or grid"
 msgstr "以列表或网格查看应用程序"
-
-msgid "Application description placement"
-msgstr "应用说明放置"
-
-msgid "Tooltips"
-msgstr "工具提示"
-
-msgid "Under titles"
-msgstr "在标题下"
-
-msgid "None"
-msgstr "没有"
-
-msgid "Choose where to show application descriptions"
-msgstr "选择显示应用程序描述的位置"
 
 msgid "Sidebar location"
 msgstr "侧边栏位置"
 
 msgid "Top"
-msgstr "最佳"
+msgstr "顶部"
 
 msgid "Bottom"
 msgstr "底部"
 
 msgid "Left"
-msgstr "剩下"
+msgstr "左侧"
 
 msgid "Right"
-msgstr "对"
+msgstr "右侧"
 
 msgid "Choose where to show the sidebar"
 msgstr "选择显示侧边栏的位置"
+
+msgid "Show favorites on sidebar"
+msgstr "在侧边栏显示收藏夹"
+
+msgid "None"
+msgstr "无"
+
+msgid "Apps only"
+msgstr "仅应用程序"
+
+msgid "Files only"
+msgstr "仅文件"
+
+msgid "Apps and files"
+msgstr "应用程序与文件"
+
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "在侧边栏显示你喜欢的应用程序和文件图标"
+
+msgid "Application description placement"
+msgstr "应用程序描述位置"
+
+msgid "Tooltips"
+msgstr "提示框"
+
+msgid "Under titles"
+msgstr "标题下方"
+
+msgid "Choose where to show application descriptions"
+msgstr "选择显示应用程序描述的位置"
 
 msgid ""
 "\n"
 "Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 "\n"
-"信息/提示：拖动菜单边缘以更改菜单大小。\n"
-
-msgid "Show favorites on sidebar"
-msgstr "在侧边栏显示收藏夹"
-
-msgid "Show your favorite apps and file icons on the sidebar"
-msgstr "在侧边栏显示您最喜欢的应用程序和文件图标"
+"提示：拖动菜单边缘以更改菜单大小。\n"
 
 msgid "Show recent items"
 msgstr "显示最近的项目"
 
 msgid "Show recent items category in the menu"
-msgstr "在菜单中显示最近的项目类别"
+msgstr "在菜单中显示类别：最近的项目"
 
 msgid "Show favorite apps category"
-msgstr "显示最喜欢的应用类别"
+msgstr "显示收藏夹应用程序"
 
 msgid "Show your favorite apps category in the menu"
-msgstr "在菜单中显示您最喜欢的应用类别"
+msgstr "在菜单中显示类别：收藏的应用程序"
 
 msgid "Show home folder"
-msgstr "显示主文件夹"
+msgstr "显示主目录"
 
 msgid "Show home folder category in the menu"
-msgstr "在菜单中显示主文件夹类别"
+msgstr "在菜单中显示类别：主目录"
+
+msgid "Show emoji category"
+msgstr "显示表情符号"
+
+msgid "Show emoji category in the menu"
+msgstr "在菜单中显示类别：表情符号"
 
 msgid "Last used category"
 msgstr "上次使用的类别"
@@ -530,13 +574,21 @@ msgid "Web search option"
 msgstr "网络搜索选项"
 
 msgid "Show an internet search option in search results"
-msgstr "在搜索结果中显示 Internet 搜索选项"
+msgstr "在搜索结果中显示互联网搜索选项"
+
+msgid "Web search suggestions"
+msgstr "网络搜索建议"
+
+msgid ""
+"With web search option, also show search suggestions. (Note: This uses "
+"Google's search API)"
+msgstr "显示带有网络搜索建议的选项（注意：这需要使用谷歌搜索 API）"
 
 msgid "Search home folder"
-msgstr "搜索主文件夹"
+msgstr "搜索主目录"
 
 msgid "When searching, also search my home folder for files"
-msgstr "搜索时，还要在我的主文件夹中搜索文件"
+msgstr "搜索时，还要在我的主目录中搜索文件"
 
 msgid "Web history search"
 msgstr "网络历史搜索"
@@ -557,8 +609,8 @@ msgid ""
 "Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions "
 "inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
 msgstr ""
-"搜索时，还要搜索我的浏览器的网络书签（Google Chrome、Firefox、Chromium、Opera、Vivaldi、Brave）\n"
-"注意：要搜索 Firefox 书签，您需要安装包 gir1.2-gda-5.0（基于 Debian 的发行版 inc。Ubuntu & Linux Mint）或打包 "
+"搜索时，还要搜索我的浏览器书签（Google Chrome、Firefox、Chromium、Opera、Vivaldi、Brave）\n"
+"注意：要搜索 Firefox 书签，需要安装软件包 gir1.2-gda-5.0（基于 Debian 的发行版，例如 Ubuntu 和 Linux Mint）或 "
 "libgda（基于 Arch 的发行版）并重新启动计算机。"
 
 msgid "Wikipedia search"
@@ -572,15 +624,12 @@ msgstr "维基百科语言"
 
 msgid ""
 "\n"
-"Note: Some search options can still be used even if you have not enabled them here by prefixing your search "
-"term.\n"
-"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file "
-"search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
 msgstr ""
 "\n"
-"注意：即使您没有在此处通过为搜索词添加前缀启用某些搜索选项，它们仍然可以使用。\n"
-"例如：要搜索表情符号，请键入“e heart”以查找心形表情符号。同样，使用前缀“f ”进行文件搜索，使用前缀“h ”搜索网络历"
-"史记录，使用前缀“b ”搜索网络书签。\n"
+"注意：即使没有在这里启用某些搜索选项，也可以通过给搜索词添加前缀来使用它们。\n"
+"例如：要搜索表情符号，输入“e heart”可以找到心形表情符号。同样，使用前缀“f ”进行文件搜索，“h ”进行网络历史搜索，“b ”进行网络书签搜索。\n"
 
 msgid "Use a custom icon size"
 msgstr "使用自定义图标大小"
@@ -598,13 +647,15 @@ msgid "Sidebar icon size (pixels)"
 msgstr "侧边栏图标大小（像素）"
 
 msgid "Use sidebar box style"
-msgstr "使用侧边栏框样式"
+msgstr "使用侧边栏边框样式"
 
 msgid "Use a sidebar box style"
-msgstr "使用侧边栏框样式"
+msgstr "为侧边栏添加一个边框"
 
 msgid "Use tile style"
 msgstr "使用平铺样式"
 
-msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
 msgstr "为应用程序按钮使用平铺样式（注意：可能不适用于某些主题）"
