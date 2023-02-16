@@ -1,0 +1,7 @@
+{
+	"uuid": "timer@Severga",
+	"name": "Timer",
+	"description": "A timer applet",
+	"hide-configuration": false,
+	"max-instances": -1
+}
