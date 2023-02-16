@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-16 23:46+0100\n"
-"PO-Revision-Date: 2023-02-17 00:08+0100\n"
+"PO-Revision-Date: 2023-02-17 00:17+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -24,7 +24,7 @@ msgstr "Envoyer un SMS"
 
 #: applet.js:281
 msgid "Send"
-msgstr "Envoyé"
+msgstr "Envoyer"
 
 #: applet.js:281
 msgid "Enter Phone Number and Message to Send."
