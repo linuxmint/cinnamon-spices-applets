@@ -1,3 +1,7 @@
+### v6.4.0~20230217
+  * Avoid to be blocked by the spices server.
+  * Add 5.6 branch.
+
 ### v6.3.1~20201026
   * Adapting SpicesUpdate@claudiux to [cinnamon/9664](https://github.com/linuxmint/cinnamon/pull/9664#event-3912970920).
 

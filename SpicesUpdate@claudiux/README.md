@@ -255,5 +255,5 @@ The solution exists!
 
 [checked]: https://github.com/linuxmint/mint-themes/raw/master/src/Mint-Y/gtk-3.0/assets/radio-checked%402.png
 [unchecked]: https://github.com/linuxmint/mint-themes/raw/master/src/Mint-Y/gtk-3.0/assets/radio-unchecked.png
-[download]: https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?2f90db31-b2e5-43f2-8901-184592a88285
+[download]: https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?a509d76e-7bb1-4de3-8063-f4615f8accbf
 
