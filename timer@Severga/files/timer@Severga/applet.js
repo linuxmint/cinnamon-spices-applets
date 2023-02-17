@@ -372,8 +372,8 @@ TimerApplet.prototype = {
   on_applet_clicked: function(event) {
     this._remove_flashTimeout();
     this.actor.set_style("");
-    if (this.openSubmenu == _("Quick setup")) this.quickMenuItem.menu.open();
-    else if (this.openSubmenu == _("Precise setup")) this.preciseMenuItem.menu.open();
+    if (this.openSubmenu == "Quick setup") this.quickMenuItem.menu.open();
+    else if (this.openSubmenu == "Precise setup") this.preciseMenuItem.menu.open();
     else this.presetsMenuItem.menu.open();
     this.menu.toggle();
   },
