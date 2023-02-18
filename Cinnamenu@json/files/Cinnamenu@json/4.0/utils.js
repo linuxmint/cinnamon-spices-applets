@@ -8,6 +8,7 @@ const Main = imports.ui.main;
 const ByteArray = imports.byteArray;
 const Cinnamon = imports.gi.Cinnamon;
 const {escapeRegExp} = imports.misc.util;
+const {addTween} = imports.ui.tweener;
 Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + '/.local/share/locale');
 
 function _(str) {
@@ -243,6 +244,52 @@ const getChromiumProfileDirs = function() {
     return folders;
 };
 
+var scrollToButton = (button, enableAnimation) => {
+    let scrollBox = button.actor.get_parent();
+    let i = 0;
+    while (!(scrollBox instanceof St.ScrollView)) {
+        i++;
+        if (i > 10 || !scrollBox) {
+            global.logWarning('Cinnamenu: Unable to find scrollbox for' + button.actor.toString());
+            return false;
+        }
+        scrollBox = scrollBox.get_parent();
+    }
+
+    const adjustment = scrollBox.vscroll.adjustment;
+    let [value, lower, upper, stepIncrement, pageIncrement, pageSize] = adjustment.get_values();
+
+    let offset = 0;
+    const vfade = scrollBox.get_effect('fade');//this always seems to return null?
+    if (vfade) {
+        offset = vfade.vfade_offset;
+    }
+
+    const box = button.actor.get_allocation_box();
+    const y1 = box.y1, y2 = box.y2;
+    const PADDING_ALLOWANCE = 20; //In case button parent(s) have padding meaning y1 won't go to 0
+    if (y1 < value + offset) {
+        if (y1 < PADDING_ALLOWANCE) {
+            value = 0;
+        } else {
+            value = Math.max(0, y1 - offset);
+        }
+    } else if (y2 > value + pageSize - offset) {
+        if (y2 > upper - offset - PADDING_ALLOWANCE) {
+            value = upper - pageSize;
+        } else {
+            value = Math.min(upper, y2 + offset - pageSize);
+        }
+    } else {
+        return false;
+    }
+
+    if (enableAnimation) {
+        addTween(adjustment, {value: value, time: 0.1, transition: 'easeOutQuad'});
+    } else {
+        adjustment.set_value(value);
+    }
+}
 
 module.exports = {  _,
                     wordWrap,
@@ -252,5 +299,6 @@ module.exports = {  _,
                     showTooltip,
                     hideTooltipIfVisible,
                     searchStr,
-                    getChromiumProfileDirs
+                    getChromiumProfileDirs,
+                    scrollToButton
                  };
