@@ -265,6 +265,7 @@ var RADIO30_MUSIC_DIR = USER_MUSIC_DIR + "/" + APPNAME;
 
 const USER_DOWNLOAD_DIR = get_user_special_dir(UserDirectory.DIRECTORY_DOWNLOAD);
 
+const YTDLP_UPDATE_BASH_SCRIPT = SCRIPTS_DIR + "/update-yt-dlp.sh";
 const MPV_BITRATE_BASH_SCRIPT = SCRIPTS_DIR + "/mpvWatchBitrate.sh";
 const MPV_TITLE_BASH_SCRIPT = SCRIPTS_DIR + "/mpvWatchTitle.sh";
 const MPV_LUA_SCRIPT = SCRIPTS_DIR + "/mpvWatchTitle.lua";
@@ -373,7 +374,7 @@ function _(str) {
  * Returns the language of the user.
  */
 function get_user_language() {
-  log("get_language_names(): "+get_language_names(), true);
+  log("get_language_names(): "+get_language_names());
   let _language;
   try {
     _language = ""+get_language_names()[0].split("_")[0];
@@ -872,6 +873,9 @@ WebRadioReceiverAndRecorder.prototype = {
     // To check dependencies:
     this.dependencies = new Dependencies();
     this.depCount = 0;
+
+    // yt-dlp updated?
+    this.ytdlp_updated = false;
 
     // To get json data from radiodb:
     this.http = new HttpLib();
@@ -3089,8 +3093,33 @@ WebRadioReceiverAndRecorder.prototype = {
     } else {
       // Some dependencies are missing. Suggest to the user to install them.
       this.appletRunning = false;
-      if (!this.dont_check_dependencies)
+      if (!this.dont_check_dependencies) {
         this.checkDepInterval = setInterval(() => this.dependencies.check_dependencies(), 10000);
+      }
+    }
+
+    if (!this.ytdlp_updated) {
+      log("Updating yt-dlp.");
+      this.checkDepInterval = setInterval(
+        () => {
+          spawnCommandLineAsyncIO(
+            YTDLP_UPDATE_BASH_SCRIPT,
+            Lang.bind(this, (out, err, exitCode) => {
+              if (exitCode === 0) {
+                this.ytdlp_updated = true;
+              } else {
+                let icon = new Icon({
+                  icon_name: 'webradioreceiver',
+                  icon_type: IconType.SYMBOLIC,
+                  icon_size: 32
+                });
+                criticalNotify(_("Please Log Out then Log In"), _("to finalize yt-dlp update"), icon)
+              }
+            })
+          )
+        },
+        60000
+      );
     }
   },
 
