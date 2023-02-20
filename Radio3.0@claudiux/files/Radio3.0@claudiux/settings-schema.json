@@ -45,7 +45,8 @@
       "sections": [
         "sectionMenuMenu",
         "sectionMenuPrivacy",
-        "sectionMenuContextual"
+        "sectionMenuContextual",
+        "sectionMenuShortcuts"
       ]
     },
     "pageBehavior": {
@@ -239,6 +240,15 @@
       "title": "Contextual Menu",
       "keys": [
         "show-reload"
+      ]
+    },
+    "sectionMenuShortcuts": {
+      "type": "section",
+      "title": "Keyboard shortcuts",
+      "keys": [
+        "shortcut-volume-up",
+        "shortcut-volume-down",
+        "shortcut-volume-cut"
       ]
     },
     "sectionBehaviorNotifications": {
@@ -848,6 +858,21 @@
     "default": false,
     "description": "Show the 'Reload this applet' item in the contextual menu",
     "tooltip": "For developers only"
+  },
+  "shortcut-volume-up": {
+    "type": "keybinding",
+    "description": "Increase Volume",
+    "default": ""
+  },
+  "shortcut-volume-down": {
+    "type": "keybinding",
+    "description": "Decrease Volume",
+    "default": ""
+  },
+  "shortcut-volume-cut": {
+    "type": "keybinding",
+    "description": "Mute",
+    "default": ""
   },
   "show-help-in-tooltip": {
     "type": "switch",
