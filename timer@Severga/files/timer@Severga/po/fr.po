@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-17 13:45+0100\n"
-"PO-Revision-Date: 2023-02-17 14:00+0100\n"
+"PO-Revision-Date: 2023-02-25 18:07+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -30,7 +30,7 @@ msgstr "Dans :  00:00:00"
 #: applet.js:83 applet.js:224 applet.js:249 applet.js:266 applet.js:316
 #: applet.js:464 applet.js:496
 msgid "At:  --:--:--"
-msgstr "À :  --:--:--"
+msgstr "   À :  --:--:--"
 
 #: applet.js:86
 msgid "Turn off computer on timer"
@@ -85,7 +85,7 @@ msgstr "Régler l'heure (demain)"
 
 #: applet.js:252
 msgid "Set period"
-msgstr "Définir la période"
+msgstr "Définir la durée"
 
 #: applet.js:268
 msgid "Add preset"
@@ -116,7 +116,7 @@ msgstr "Dans :  "
 
 #: applet.js:460 applet.js:484
 msgid "At:  "
-msgstr "À :  "
+msgstr "   À :  "
 
 #: applet.js:486
 msgid "Turn off in "
