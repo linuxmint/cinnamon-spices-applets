@@ -62,6 +62,7 @@ const DEPENDENCIES = {
 var DEPENDENCIES = {
   "default": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
+    ["wget", "/usr/bin/wget", "wget"],
     ["", "/usr/share/doc/libmpv1/copyright", "libmpv1"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
@@ -77,6 +78,7 @@ var DEPENDENCIES = {
   ],
   "arch": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
+    ["wget", "/usr/bin/wget", "wget"],
     ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
     ["at", "/usr/bin/at", "at"],
@@ -88,6 +90,7 @@ var DEPENDENCIES = {
   ],
   "debian": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
+    ["wget", "/usr/bin/wget", "wget"],
     ["", "/usr/lib/x86_64-linux-gnu/libmpv.so", "libmpv?"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
@@ -103,6 +106,7 @@ var DEPENDENCIES = {
   ],
   "fedora": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
+    ["wget", "/usr/bin/wget", "wget"],
     ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
     ["at", "/usr/bin/at", "at"],

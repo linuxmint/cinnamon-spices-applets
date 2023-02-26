@@ -161,7 +161,8 @@ const {
 } = imports.gi.Cogl; //Cogl
 
 const {
-  notificationDaemon
+  notificationDaemon,
+  keybindingManager
 } = imports.ui.main; // Main
 
 const Cvc = imports.gi.Cvc; //Cvc
@@ -265,6 +266,7 @@ var RADIO30_MUSIC_DIR = USER_MUSIC_DIR + "/" + APPNAME;
 
 const USER_DOWNLOAD_DIR = get_user_special_dir(UserDirectory.DIRECTORY_DOWNLOAD);
 
+const YTDLP_UPDATE_BASH_SCRIPT = SCRIPTS_DIR + "/update-yt-dlp.sh";
 const MPV_BITRATE_BASH_SCRIPT = SCRIPTS_DIR + "/mpvWatchBitrate.sh";
 const MPV_TITLE_BASH_SCRIPT = SCRIPTS_DIR + "/mpvWatchTitle.sh";
 const MPV_LUA_SCRIPT = SCRIPTS_DIR + "/mpvWatchTitle.lua";
@@ -373,7 +375,7 @@ function _(str) {
  * Returns the language of the user.
  */
 function get_user_language() {
-  log("get_language_names(): "+get_language_names(), true);
+  log("get_language_names(): "+get_language_names());
   let _language;
   try {
     _language = ""+get_language_names()[0].split("_")[0];
@@ -873,6 +875,9 @@ WebRadioReceiverAndRecorder.prototype = {
     this.dependencies = new Dependencies();
     this.depCount = 0;
 
+    // yt-dlp updated?
+    this.ytdlp_updated = false;
+
     // To get json data from radiodb:
     this.http = new HttpLib();
 
@@ -1010,6 +1015,9 @@ WebRadioReceiverAndRecorder.prototype = {
     // Connect signals:
     this._connect_signals();
 
+    // Shortcuts:
+    this.onShortcutChanged();
+
     //title_obj.watch('prop', function(value){
       //this._on_mpv_title_changed();
       ////global.log('wow!',value);
@@ -1061,6 +1069,9 @@ WebRadioReceiverAndRecorder.prototype = {
 
     // Menu:
     this.settings.bind("show-by-category", "show_by_category");
+    this.settings.bind("shortcut-volume-up", "shortcutVolUp", this.onShortcutChanged.bind(this));
+    this.settings.bind("shortcut-volume-down", "shortcutVolDown", this.onShortcutChanged.bind(this));
+    this.settings.bind("shortcut-volume-cut", "shortcutVolCut", this.onShortcutChanged.bind(this));
 
     //Scheduling:
     this.settings.bind("sched-recordings", "sched_recordings");
@@ -1075,6 +1086,52 @@ WebRadioReceiverAndRecorder.prototype = {
 
     // Help TextViews:
     this.populate_help_textviews()
+  },
+
+  onShortcutChanged: function() {
+    keybindingManager.addHotKey("shortcutVolUp", this.shortcutVolUp, (event) => {
+      //~ log("Volume Up", true);
+      let step = this.volume_step;
+      let percentage = this.percentage;
+      this.percentage = Math.min(100, percentage + step);
+      let value = this.percentage / 100;
+      if (this.context_menu_item_slider != null) {
+        this.context_menu_item_slider.slider._value = value;
+        this.context_menu_item_slider.slider._slider.queue_repaint();
+        this.context_menu_item_slider.slider.emit('value-changed', value);
+      }
+    });
+    keybindingManager.addHotKey("shortcutVolDown", this.shortcutVolDown, (event) => {
+      //~ log("Volume Down", true);
+      let step = this.volume_step;
+      let percentage = this.percentage;
+      this.percentage = Math.max(0, percentage - step);
+      let value = this.percentage / 100;
+      if (this.context_menu_item_slider != null) {
+        this.context_menu_item_slider.slider._value = value;
+        this.context_menu_item_slider.slider._slider.queue_repaint();
+        this.context_menu_item_slider.slider.emit('value-changed', value);
+      }
+    });
+    keybindingManager.addHotKey("shortcutVolCut", this.shortcutVolCut, (event) => {
+      //~ log("Volume Cut", true);
+
+      if (this.context_menu_item_slider != null) {
+        let volume_at_startup = this.get_volume_at_startup();
+
+        if (volume_at_startup <= 0) volume_at_startup = 50;
+
+        let value = 0;
+        let old_value = this.context_menu_item_slider.slider._value;
+
+        if (old_value !== 0) this.old_percentage = 100 * old_value;
+        else value = (this.old_percentage) ? this.old_percentage / 100 : volume_at_startup / 100;
+
+        this.context_menu_item_slider.slider._value = value;
+        this.context_menu_item_slider.slider._slider.queue_repaint();
+        this.context_menu_item_slider.slider.emit('value-changed', value);
+      }
+    });
   },
 
   on_rec_path_changed: function() {
@@ -3089,8 +3146,33 @@ WebRadioReceiverAndRecorder.prototype = {
     } else {
       // Some dependencies are missing. Suggest to the user to install them.
       this.appletRunning = false;
-      if (!this.dont_check_dependencies)
+      if (!this.dont_check_dependencies) {
         this.checkDepInterval = setInterval(() => this.dependencies.check_dependencies(), 10000);
+      }
+    }
+
+    if (!this.ytdlp_updated) {
+      log("Updating yt-dlp.");
+      this.checkDepInterval = setInterval(
+        () => {
+          spawnCommandLineAsyncIO(
+            YTDLP_UPDATE_BASH_SCRIPT,
+            Lang.bind(this, (out, err, exitCode) => {
+              if (exitCode === 0) {
+                this.ytdlp_updated = true;
+              } else {
+                let icon = new Icon({
+                  icon_name: 'webradioreceiver',
+                  icon_type: IconType.SYMBOLIC,
+                  icon_size: 32
+                });
+                criticalNotify(_("Please Log Out then Log In"), _("to finalize yt-dlp update"), icon)
+              }
+            })
+          )
+        },
+        60000
+      );
     }
   },
 
@@ -3121,6 +3203,11 @@ WebRadioReceiverAndRecorder.prototype = {
     this.unmonitor_jobs_dir();
     this.unmonitor_mpv_title();
     this.unmonitor_rec_folder();
+
+    // Remove shortcuts:
+    keybindingManager.removeHotKey("shortcutVolUp");
+    keybindingManager.removeHotKey("shortcutVolDown");
+    keybindingManager.removeHotKey("shortcutVolCut");
 
     // Finalize settings:
     this.settings.finalize();
