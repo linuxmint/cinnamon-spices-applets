@@ -1,0 +1,352 @@
+{
+    "layout2": {
+        "type": "layout",
+        "pages": ["general-page", "modules-page"],
+        "general-page": {
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "contextmenu-section",
+                "panel-section",
+                "appearance-section",
+                "other-section"
+            ]
+        },
+        "modules-page": {
+            "type": "page",
+            "title": "Modules",
+            "sections": [
+                "battery-module-section",
+                "deviceinfo-module-section",
+                "connectivity-module-section",
+                "findmyphone-module-section",
+                "requestphoto-module-section",
+                "ping-module-section",
+                "share-module-section",
+                "sftp-module-section",
+                "sms-module-section"
+            ]
+        },
+        "contextmenu-section": {
+            "type": "section",
+            "title": "Context Menu",
+            "keys": [
+                "showownid",
+                "showkdecver"
+            ]
+        },
+        "panel-section": {
+            "type": "section",
+            "title": "Panel",
+            "keys": [
+                "shownumdevices",
+                "tooltipdevicecount"
+            ]
+        },
+        "appearance-section": {
+            "type": "section",
+            "title": "Appearance",
+            "keys": [
+                "icontype",
+                "usecustomicon",
+                "customicon"
+            ]
+        },
+        "other-section": {
+            "type": "section",
+            "title": "Other",
+            "keys": [
+                "expandfirst",
+                "openconfiguration"
+            ]
+        },
+
+        "battery-module-section": {
+            "type": "section",
+            "title": "Battery Info Module",
+            "keys": [
+                "battery-module-description",
+                "battery-module-enabled"
+            ]
+        },
+        "deviceinfo-module-section": {
+            "type": "section",
+            "title": "Device Info Module",
+            "keys": [
+                "deviceinfo-module-description",
+                "deviceinfo-module-enabled"
+            ]
+        },
+        "connectivity-module-section": {
+            "type": "section",
+            "title": "Connectivity Info Module",
+            "keys": [
+                "connectivity-module-description",
+                "connectivity-module-enabled",
+                "connectivity-module-showNetworkType"
+            ]
+        },
+        "findmyphone-module-section": {
+            "type": "section",
+            "title": "FindMyPhone Action Module",
+            "keys": [
+                "findmyphone-module-description",
+                "findmyphone-module-enabled"
+            ]
+        },
+        "requestphoto-module-section": {
+            "type": "section",
+            "title": "Request-Photo Action Module",
+            "keys": [
+                "requestphoto-module-description",
+                "requestphoto-module-enabled",
+                "requestphoto-module-saveToDir",
+                "requestphoto-module-saveDirectory"
+            ]
+        },
+        "ping-module-section": {
+            "type": "section",
+            "title": "Ping Action Module",
+            "keys": [
+                "ping-module-description",
+                "ping-module-enabled",
+                "ping-module-useCustomMessage",
+                "ping-module-customMessage"
+            ]
+        },
+        "share-module-section": {
+            "type": "section",
+            "title": "Share Action Module",
+            "keys": [
+                "share-module-description",
+                "share-module-enabled",
+                "share-module-useSubMenu",
+                "share-module-enableSendURL",
+                "share-module-enableSendText",
+                "share-module-enableSendFiles"
+            ]
+        },
+        "sftp-module-section": {
+            "type": "section",
+            "title": "SFTP Action Module",
+            "keys": [
+                "sftp-module-description",
+                "sftp-module-enabled"
+            ]
+        },
+        "sms-module-section": {
+            "type": "section",
+            "title": "SMS Action Module",
+            "keys": [
+                "sms-module-description",
+                "sms-module-enabled",
+                "sms-module-useSubMenu",
+                "sms-module-enableSendSMS",
+                "sms-module-enableLaunchSMSApp"
+            ]
+        }
+    },
+    "showownid": {
+        "type": "switch",
+        "description": "Show own ID in the context menu of the applet",
+        "default": true
+    },
+    "showkdecver": {
+        "type": "switch",
+        "description": "Show KDE Connect version in the context menu of the applet",
+        "default": true
+    },
+    "shownumdevices": {
+        "type": "switch",
+        "description": "Show the number of connected devices next to the icon in the panel",
+        "default": true
+    },
+    "icontype": {
+        "type": "combobox",
+        "description": "Icon type",
+        "options": {
+            "Symbolic": "SYMBOLIC",
+            "Color": "COLOR"
+        },
+        "default": "COLOR"
+    },
+    "usecustomicon": {
+        "type": "switch",
+        "description": "Use custom icon",
+        "default": false
+    },
+    "customicon": {
+        "type": "iconfilechooser",
+        "description": "Custom icon to use",
+        "default": "kdeconnect",
+        "dependency": "usecustomicon"
+    },
+    "expandfirst": {
+        "type": "switch",
+        "description": "Expand the first device sub menu automatically",
+        "default": true
+    },
+    "openconfiguration": {
+        "type": "button",
+        "description": "Open KDE Connect Configuration",
+        "callback": "openKDECConfiguration"
+    },
+    "tooltipdevicecount": {
+        "type": "switch",
+        "description": "Show the device count in the tooltip of the applet",
+        "default": true
+    },
+
+    "battery-module-description": {
+        "type": "label",
+        "description": "Shows the current battery charge and charging status of the device"
+    },
+    "battery-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "deviceinfo-module-description": {
+        "type": "label",
+        "description": "Shows the device icon along with its ID"
+    },
+    "deviceinfo-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "connectivity-module-description": {
+        "type": "label",
+        "description": "Shows the current connectivity status and network type of the device"
+    },
+    "connectivity-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+    "connectivity-module-showNetworkType": {
+        "type": "switch",
+        "description": "Show the mobile network type",
+        "default": true
+    },
+
+    "findmyphone-module-description": {
+        "type": "label",
+        "description": "Lets you make the device ring, so you can find it, if you have misplaced it"
+    },
+    "findmyphone-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "requestphoto-module-description": {
+        "type": "label",
+        "description": "Lets you request a photo from the remote device and save it on this device"
+    },
+    "requestphoto-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+    "requestphoto-module-saveToDir": {
+        "type": "switch",
+        "description": "Save received photos directly to directory",
+        "default": false
+    },
+    "requestphoto-module-saveDirectory": {
+        "type": "filechooser",
+        "description": "The directory to save received photos to",
+        "default": "",
+        "select-dir": true,
+        "dependency": "requestphoto-module-saveToDir"
+    },
+
+    "ping-module-description": {
+        "type": "label",
+        "description": "Lets you ping the the device to make sure it's connected"
+    },
+    "ping-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+    "ping-module-useCustomMessage": {
+        "type": "switch",
+        "description": "Use custom message for ping",
+        "default": false
+    },
+    "ping-module-customMessage": {
+        "type": "entry",
+        "description": "Custom message",
+        "default": "Ping!",
+        "dependency": "ping-module-useCustomMessage"
+    },
+
+    "share-module-description": {
+        "type": "label",
+        "description": "Lets you share URLs, files or text to the device"
+    },
+    "share-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+    "share-module-useSubMenu": {
+        "type": "switch",
+        "description": "Show menu items in sub menu",
+        "default": true
+    },
+    "share-module-enableSendURL": {
+        "type": "switch",
+        "description": "Enable the menu item to send a URL",
+        "default": true
+    },
+    "share-module-enableSendText": {
+        "type": "switch",
+        "description": "Enable the menu item to send some text",
+        "default": true
+    },
+    "share-module-enableSendFiles": {
+        "type": "switch",
+        "description": "Enable the menu item to send file(s)",
+        "default": true
+    },
+
+    "sftp-module-description": {
+        "type": "label",
+        "description": "Lets you remotely browse the storage selected on the device"
+    },
+    "sftp-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+
+    "sms-module-description": {
+        "type": "label",
+        "description": "Lets you remotely send SMS messages from the device"
+    },
+    "sms-module-enabled": {
+        "type": "switch",
+        "description": "Module enabled",
+        "default": true
+    },
+    "sms-module-useSubMenu": {
+        "type": "switch",
+        "description": "Show menu items in sub menu",
+        "default": true
+    },
+    "sms-module-enableSendSMS": {
+        "type": "switch",
+        "description": "Enable the menu item to send an SMS message",
+        "default": true
+    },
+    "sms-module-enableLaunchSMSApp": {
+        "type": "switch",
+        "description": "Enable the menu item to launch the KDE Connect SMS app",
+        "default": true
+    }
+}
