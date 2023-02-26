@@ -1,15 +1,13 @@
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const Atk = imports.gi.Atk;
-const CMenu = imports.gi.CMenu;
 const Clutter = imports.gi.Clutter;
 const XApp = imports.gi.XApp;
 const St = imports.gi.St;
-const Main = imports.ui.main;
 const {SignalManager} = imports.misc.signalManager;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 
-const {_, log} = require('./utils');
+const {_, log, scrollToButton} = require('./utils');
 
 class CategoryButton {
     constructor(appThis, category_id, category_name, icon_name, gicon) {
@@ -47,48 +45,52 @@ class CategoryButton {
 
         //---dnd
         this.actor._delegate = {
-                handleDragOver: (source) => {
-                        if (!source.isDraggableCategory || source.id === this.id || this.appThis.searchActive) {
-                            return DragMotionResult.NO_DROP;
-                        }
-                        this._resetAllCategoriesOpacity();
-                        this.actor.set_opacity(50);
-                        return DragMotionResult.MOVE_DROP; },
-                acceptDrop: (source) => {
-                        if (!source.isDraggableCategory || source.id === this.id || this.appThis.searchActive) {
-                            this._resetAllCategoriesOpacity();
-                            return DragMotionResult.NO_DROP;
-                        }
-                        //move category to new position
-                        let categories = this.appThis.settings.categories.slice();
-                        const oldIndex = categories.indexOf(source.id);
-                        const newIndex = categories.indexOf(this.id);
-                        categories.splice(oldIndex, 1);
-                        categories.splice(newIndex, 0, source.id);
-                        this.appThis.settings.categories = categories;
-                        this._resetAllCategoriesOpacity();
-                        this.appThis.categoriesView.update();
-                        this.appThis.setActiveCategory(this.appThis.currentCategory);
-                        return true; },
-                getDragActorSource: () => this.actor,
-                _getDragActor: () => new Clutter.Clone({source: this.actor}),
-                getDragActor: () => new Clutter.Clone({source: this.icon}),
-                isDraggableCategory: true,
-                id: this.id };
-
+            handleDragOver: (source) => {
+                if (!source.isDraggableCategory || source.id === this.id || this.appThis.searchActive) {
+                    return DragMotionResult.NO_DROP;
+                }
+                this.appThis.display.categoriesView.resetAllCategoriesOpacity();
+                this.actor.set_opacity(50);
+                return DragMotionResult.MOVE_DROP;
+            },
+            acceptDrop: (source) => {
+                if (!source.isDraggableCategory || source.id === this.id || this.appThis.searchActive) {
+                    this.appThis.display.categoriesView.resetAllCategoriesOpacity();
+                    return DragMotionResult.NO_DROP;
+                }
+                //move category to new position
+                let categories = this.appThis.settings.categories.slice();
+                const oldIndex = categories.indexOf(source.id);
+                const newIndex = categories.indexOf(this.id);
+                categories.splice(oldIndex, 1);
+                categories.splice(newIndex, 0, source.id);
+                this.appThis.settings.categories = categories;
+                this.appThis.display.categoriesView.resetAllCategoriesOpacity();
+                this.appThis.display.categoriesView.update();
+                this.appThis.setActiveCategory(this.appThis.currentCategory);
+                return true;
+            },
+            getDragActorSource: () => this.actor,
+            _getDragActor: () => new Clutter.Clone({source: this.actor}),
+            getDragActor: () => new Clutter.Clone({source: this.icon}),
+            isDraggableCategory: true,
+            id: this.id
+        };
         this.draggable = makeDraggable(this.actor);
 
         // Connect signals
         this.signals.connect(this.draggable, 'drag-begin', () => this.actor.set_opacity(51));
         this.signals.connect(this.draggable, 'drag-cancelled', () => this.actor.set_opacity(255));
-        this.signals.connect(this.draggable, 'drag-end', () => this._resetAllCategoriesOpacity());
+        this.signals.connect(this.draggable, 'drag-end', () =>
+                                this.appThis.display.categoriesView.resetAllCategoriesOpacity());
 
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         //Allow motion-event to trigger handleEnter because previous enter-event may have been
-        //invalidated by this.appThis.badAngle === true when this is no longer the case.
+        //invalidated by this.appThis.display.badAngle === true when this is no longer the case.
         this.signals.connect(this.actor, 'motion-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
-        this.signals.connect(this.actor, 'button-release-event', (...args) => this._handleButtonRelease(...args));
+        this.signals.connect(this.actor, 'button-release-event', (...args) =>
+                                                        this._handleButtonRelease(...args));
     }
 
     setHighlight(on) {
@@ -132,22 +134,28 @@ class CategoryButton {
 
     handleEnter(actor, event) {
         //this method handles enter-event, motion-event and keypress
-        if (this.has_focus || this.disabled || this.appThis.contextMenu.isOpen ||
-                            this.appThis.badAngle && event && !this.appThis.settings.categoryClick) {
+        if (this.has_focus || this.disabled || this.appThis.display.contextMenu.isOpen) {
             return Clutter.EVENT_PROPAGATE;
         }
-        if (event) {//mouse
-            this.appThis.clearFocusedActors();
-        } else {//keypress
-            this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);
+        //When "activate categories on click" is off, don't enter this button if mouse is moving
+        //quickly towards appviews, i.e. badAngle === true.
+        if (event && !this.appThis.settings.categoryClick && this.appThis.display.badAngle) {
+            return Clutter.EVENT_PROPAGATE;
         }
 
-        this.has_focus = true;
+        if (event) {//mouse
+            this.appThis.display.clearFocusedActors();
+        } else {//keypress
+            scrollToButton(this, this.appThis.settings.enableAnimation);
+        }
+
         if (this.id === this.appThis.currentCategory || //No need to select category as already selected
                             this.id === 'emoji:' && this.appThis.currentCategory.startsWith('emoji:')) {
             return Clutter.EVENT_STOP;
         }
         if (this.appThis.settings.categoryClick) {
+            this.appThis.display.categoriesView.allButtonsRemoveFocus();
+            this.has_focus = true;
             this.actor.add_style_pseudo_class('hover');
         } else {
             this.selectCategory();
@@ -156,19 +164,19 @@ class CategoryButton {
     }
 
     handleLeave(actor, event) {
-        if (this.disabled || this.appThis.contextMenu.isOpen) {
+        if (this.disabled || this.appThis.display.contextMenu.isOpen) {
             return false;
         }
-        this.has_focus = false;
 
+        this.has_focus = false;
         if (this.actor.has_style_pseudo_class('hover')) {
             this.actor.remove_style_pseudo_class('hover');
         }
     }
 
     _handleButtonRelease(actor, event) {
-        if (this.appThis.contextMenu.isOpen) {
-            this.appThis.contextMenu.close();
+        if (this.appThis.display.contextMenu.isOpen) {
+            this.appThis.display.contextMenu.close();
             return Clutter.EVENT_STOP;
         }
         if (this.disabled) {
@@ -176,10 +184,10 @@ class CategoryButton {
         }
 
         const button = event.get_button();
-        if (button === 1 && this.appThis.settings.categoryClick) {
+        if (button === Clutter.BUTTON_PRIMARY && this.appThis.settings.categoryClick) {
             this.selectCategory();
             return Clutter.EVENT_STOP;
-        } else if (button === 3) {
+        } else if (button === Clutter.BUTTON_SECONDARY) {
             if (this.actor.has_style_class_name('menu-category-button-hover')) {
                 //Remove focus from this category button before opening it's context menu.
                 //Todo: Ideally this button should retain focus style to indicate the button the
@@ -192,7 +200,7 @@ class CategoryButton {
     }
 
     openContextMenu(e) {
-        this.appThis.contextMenu.open(this.id, e, this.actor, true);
+        this.appThis.display.contextMenu.open(this.id, e, this.actor, true);
     }
 
     disable() {
@@ -204,10 +212,6 @@ class CategoryButton {
     enable() {
         this.setButtonStyleNormal();
         this.disabled = false;
-    }
-
-    _resetAllCategoriesOpacity() {
-        this.appThis.categoriesView.buttons.forEach(button => button.actor.set_opacity(255));
     }
 
     destroy() {
@@ -228,10 +232,12 @@ class CategoriesView {
         this.buttons = [];
 
         this.categoriesBox = new St.BoxLayout({ style_class: 'menu-categories-box', vertical: true });
-        this.groupCategoriesWorkspacesWrapper = new St.BoxLayout({/*style: 'max-width: 185px;',*/ vertical: true });
+        this.groupCategoriesWorkspacesWrapper =
+                                new St.BoxLayout({/*style: 'max-width: 185px;',*/ vertical: true });
         this.groupCategoriesWorkspacesWrapper.add(this.categoriesBox, { });
 
-        this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({ style_class: 'vfade menu-categories-scrollbox' });
+        this.groupCategoriesWorkspacesScrollBox =
+                                new St.ScrollView({ style_class: 'vfade menu-categories-scrollbox' });
         this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);
         this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
         this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
@@ -255,7 +261,8 @@ class CategoriesView {
             if (!button) {
                 button = new CategoryButton(this.appThis, dirId, dir.get_name(), null, dir.get_icon());
             }
-            button.setHighlight(this.appThis.apps.dirHasNewApp(dirId));//highlight category if it contains a new app
+            //highlight category if it contains a new app
+            button.setHighlight(this.appThis.apps.dirHasNewApp(dirId));
             newButtons.push(button);
         });
 
@@ -310,6 +317,14 @@ class CategoriesView {
                     } else {
                         categoryButton.setButtonStyleNormal();
                     } });
+    }
+
+    allButtonsRemoveFocus() {
+        this.buttons.forEach(button => button.handleLeave());
+    }
+
+    resetAllCategoriesOpacity() {
+        this.buttons.forEach(button => button.actor.set_opacity(255));
     }
 
     destroy() {

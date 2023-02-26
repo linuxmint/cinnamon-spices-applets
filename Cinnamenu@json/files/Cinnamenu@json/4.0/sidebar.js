@@ -8,8 +8,14 @@ const Main = imports.ui.main;
 const {SignalManager} = imports.misc.signalManager;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 
-const {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible} = require('./utils');
+const { _,
+        wordWrap,
+        getThumbnail_gicon,
+        showTooltip,
+        hideTooltipIfVisible,
+        scrollToButton} = require('./utils');
 const SidebarPlacement = Object.freeze({ TOP: 0, BOTTOM: 1, LEFT: 2, RIGHT: 3});
+const DescriptionPlacement = Object.freeze({TOOLTIP: 0, UNDER: 1, NONE: 2});
 
 class SidebarButton {
     constructor(appThis, icon, app, name, description, callback) {
@@ -23,7 +29,7 @@ class SidebarButton {
         this.actor = new St.BoxLayout({ style_class: 'menu-favorites-button',
                                         reactive: true,
                                         accessible_role: Atk.Role.MENU_ITEM });
-        //this.actor.set_style_class_name('menu-favorites-button');
+
         this.has_focus = false;
         if (icon) {
             this.icon = icon;
@@ -57,28 +63,30 @@ class SidebarButton {
 
             this.draggable = makeDraggable(this.actor);
             this.signals.connect(this.draggable, 'drag-begin', () => hideTooltipIfVisible());
-            //this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this._onDragCancelled(...args));
+            //this.signals.connect(this.draggable, 'drag-cancelled',
+            //                                    (...args) => this._onDragCancelled(...args));
             //this.signals.connect(this.draggable, 'drag-end', (...args) => this._onDragEnd(...args));
         }
 
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
-        this.signals.connect(this.actor, 'button-release-event', (...args) => this._handleButtonRelease(...args));
+        this.signals.connect(this.actor, 'button-release-event',
+                                                (...args) => this._handleButtonRelease(...args));
     }
 
     _handleButtonRelease(actor, e) {
-        if (this.appThis.contextMenu.isOpen) {
-            this.appThis.contextMenu.close();
-            this.appThis.clearFocusedActors();
+        if (this.appThis.display.contextMenu.isOpen) {
+            this.appThis.display.contextMenu.close();
+            this.appThis.display.clearFocusedActors();
             this.handleEnter();
             return Clutter.EVENT_STOP;
         }
 
         const button = e.get_button();
-        if (button === 1) {//left click
+        if (button === Clutter.BUTTON_PRIMARY) {
             this.activate();
             return Clutter.EVENT_STOP;
-        } else if (button === 3) {//right click
+        } else if (button === Clutter.BUTTON_SECONDARY) {
             if (this.app != null) {
                 this.openContextMenu(e);
             }
@@ -107,24 +115,27 @@ class SidebarButton {
 
     openContextMenu(e) {
         hideTooltipIfVisible();
-        this.appThis.contextMenu.open(this.app, e, this.actor);
+        this.appThis.display.contextMenu.open(this.app, e, this.actor);
     }
 
     handleEnter(actor, event) {
-        if (this.appThis.contextMenu.isOpen) {
+        if (this.appThis.display.contextMenu.isOpen) {
             return true;
         }
 
         if (event) {//mouse event
-            this.appThis.clearFocusedActors();
+            this.appThis.display.clearFocusedActors();
         } else {//key nav
-            this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);
+            scrollToButton(this, this.appThis.settings.enableAnimation);
         }
 
         this.has_focus = true;
         this.actor.add_style_pseudo_class('hover');
 
         //show tooltip
+        if (this.appThis.settings.descriptionPlacement === DescriptionPlacement.NONE) {
+            return Clutter.EVENT_STOP;
+        }  
         let [x, y] = this.actor.get_transformed_position();
         x += this.actor.width + 2 * global.ui_scale;
         y += this.actor.height + 6 * global.ui_scale;
@@ -134,11 +145,11 @@ class SidebarButton {
         }
         text = text.replace(/&/g, '&amp;');
         showTooltip(this.actor, x, y, false /*don't center tooltip on x*/, text);
-        return true;
+        return Clutter.EVENT_STOP;
     }
 
     handleLeave() {
-        if (this.appThis.contextMenu.isOpen) {
+        if (this.appThis.display.contextMenu.isOpen) {
             return true;
         }
         this.has_focus = false;
@@ -159,13 +170,15 @@ class SidebarButton {
 
 //Creates the sidebar. Creates SidebarButtons and populates the sidebar.
 class Sidebar {
-    constructor (appThis, sidebarPlacement) {
+    constructor (appThis) {
         this.appThis = appThis;
         this.items = [];
         this.innerBox = new St.BoxLayout({
-                        vertical: (sidebarPlacement === SidebarPlacement.LEFT || sidebarPlacement === SidebarPlacement.RIGHT) });
+                        vertical: (this.appThis.settings.sidebarPlacement === SidebarPlacement.LEFT
+                        || this.appThis.settings.sidebarPlacement === SidebarPlacement.RIGHT) });
 
-        //Cinnamox themes draw a border at the bottom of sidebarScrollBox so remove menu-favorites-scrollbox class.
+        // Cinnamox themes draw a border at the bottom of sidebarScrollBox so
+        // remove menu-favorites-scrollbox class.
         let themePath = Main.getThemeStylesheet();
         if (!themePath) themePath = '';
         const scroll_style = themePath.includes('Cinnamox') ? 'vfade' : 'vfade menu-favorites-scrollbox';
@@ -186,33 +199,54 @@ class Sidebar {
         this.innerBox.remove_all_children();
         this.items.forEach(item => item.destroy());
         this.items = [];
-        //----add sidebar buttons to this.items[]
+        //----add session buttons to this.items[]
         const newSidebarIcon = (iconName) => {
-            return new St.Icon( { icon_name: iconName, icon_size: this.appThis.settings.sidebarIconSize,
-                          icon_type: this.appThis.settings.sidebarIconSize <= 24 ? St.IconType.SYMBOLIC :
-                                                                                    St.IconType.FULLCOLOR });
+            return new St.Icon({
+                    icon_name: iconName,
+                    icon_size: this.appThis.settings.sidebarIconSize,
+                    icon_type: this.appThis.settings.sidebarIconSize <= 24 ?
+                                                St.IconType.SYMBOLIC : St.IconType.FULLCOLOR });
         };
-        this.items.push(new SidebarButton( this.appThis, newSidebarIcon('system-shutdown'), null, _('Quit'),
-                    _('Shutdown the computer'), () => { Util.spawnCommandLine('cinnamon-session-quit --power-off');
-                                                                this.appThis.menu.close(); } ));
-        this.items.push(new SidebarButton( this.appThis, newSidebarIcon('system-log-out'), null, _('Logout'),
-                                    _('Leave the session'), () => { Util.spawnCommandLine('cinnamon-session-quit');
-                                                                        this.appThis.menu.close(); } ));
-        this.items.push(new SidebarButton( this.appThis, newSidebarIcon('system-lock-screen'), null, _('Lock screen'),
-                    _('Lock the screen'), () => {
-                        const screensaver_settings = new Gio.Settings({
-                                                    schema_id: 'org.cinnamon.desktop.screensaver' });
-                        const screensaver_dialog = Gio.file_new_for_path('/usr/bin/cinnamon-screensaver-command');
-                        if (screensaver_dialog.query_exists(null)) {
-                            if (screensaver_settings.get_boolean('ask-for-away-message')) {
-                                Util.spawnCommandLine('cinnamon-screensaver-lock-dialog');
-                            } else {
-                                Util.spawnCommandLine('cinnamon-screensaver-command --lock');//
-                            }
-                        } else {
-                            this.screenSaverProxy.LockRemote('');
-                        }
-                        this.appThis.menu.close(); }));
+        this.items.push(new SidebarButton(
+                    this.appThis,
+                    newSidebarIcon('system-shutdown'),
+                    null,
+                    _('Quit'),
+                    _('Shutdown the computer'),
+                    () => {
+                        Util.spawnCommandLine('cinnamon-session-quit --power-off');
+                        this.appThis.menu.close();
+                    }));
+        this.items.push(new SidebarButton(
+                    this.appThis, newSidebarIcon('system-log-out'),
+                    null,
+                    _('Logout'),
+                    _('Leave the session'),
+                    () => {
+                        Util.spawnCommandLine('cinnamon-session-quit');
+                        this.appThis.menu.close();
+                    }));
+        this.items.push(new SidebarButton(
+            this.appThis,
+            newSidebarIcon('system-lock-screen'),
+            null, _('Lock screen'),
+            _('Lock the screen'),
+            () => {
+                const screensaver_settings = new Gio.Settings({
+                                            schema_id: 'org.cinnamon.desktop.screensaver' });
+                const screensaver_dialog = Gio.file_new_for_path('/usr/bin/cinnamon-screensaver-command');
+                if (screensaver_dialog.query_exists(null)) {
+                    if (screensaver_settings.get_boolean('ask-for-away-message')) {
+                        Util.spawnCommandLine('cinnamon-screensaver-lock-dialog');
+                    } else {
+                        Util.spawnCommandLine('cinnamon-screensaver-command --lock');//
+                    }
+                } else {
+                    this.screenSaverProxy.LockRemote('');
+                }
+                this.appThis.menu.close();
+            }
+        ));
         //----add favorite apps and favorite files to this.items[]
         if (this.appThis.settings.sidebarFavorites === 1 //Apps only
                     || this.appThis.settings.sidebarFavorites === 3) { // Apps and files
@@ -227,13 +261,13 @@ class Sidebar {
             this.appThis.listFavoriteFiles().forEach(fav => {
                 let gicon = getThumbnail_gicon(fav.uri, fav.mimeType) || fav.gicon;
                 this.items.push(new SidebarButton( this.appThis,
-                                new St.Icon({ gicon: gicon, icon_size: this.appThis.settings.sidebarIconSize}),
-                                fav, fav.name, fav.description, null));
+                        new St.Icon({ gicon: gicon, icon_size: this.appThis.settings.sidebarIconSize}),
+                        fav, fav.name, fav.description, null));
             });
         }
         //----change order of all items depending on buttons placement
         const reverseOrder = this.appThis.settings.sidebarPlacement === SidebarPlacement.LEFT ||
-                                                this.appThis.settings.sidebarPlacement === SidebarPlacement.RIGHT;
+                                    this.appThis.settings.sidebarPlacement === SidebarPlacement.RIGHT;
         if (reverseOrder) {
             this.items.reverse();
         }
@@ -244,7 +278,7 @@ class Sidebar {
                 this._addSeparator();
             }
             this.innerBox.add(this.items[i].actor, { x_fill: false, y_fill: false,
-                                                        x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
+                                                x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
         }
 
         return;
@@ -252,10 +286,14 @@ class Sidebar {
 
     scrollToQuitButton() {
         //Scroll to quit button so that it's visible when the menu is opened.
-        this.appThis.scrollToButton(this.items[this.items.length - 1], false);
+        scrollToButton(this.items[this.items.length - 1], false);
     }
 
     _addSeparator() {
+        const getThemeForegroundColor = () => {
+            return this.appThis.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
+        }
+
         this.innerBox.add(this.separator, { x_fill: false, y_fill: false, x_align: St.Align.MIDDLE,
                                                                                 y_align: St.Align.MIDDLE });
         let width = this.appThis.settings.sidebarIconSize + 8;
@@ -265,7 +303,7 @@ class Sidebar {
             [width, height] = [height, width];
         }
         this.separator.style = `width: ${width}px; height: ${height}px; background-color: ${
-                    this.appThis.getThemeForegroundColor()}; margin: 1px; border: 0px; border-radius: 10px; `;
+                    getThemeForegroundColor()}; margin: 1px; border: 0px; border-radius: 10px; `;
         this.separator.set_opacity(35);
     }
 
