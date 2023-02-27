@@ -1,0 +1,46 @@
+INC;NAME;URL
+true;France;
+true;France Culture;http://direct.franceculture.fr/live/franceculture-midfi.mp3
+true;France Info;http://direct.franceinfo.fr/live/franceinfo-midfi.mp3
+true;France Inter;http://direct.franceinter.fr/live/franceinter-midfi.mp3
+true;Mouv;http://direct.mouv.fr/live/mouv-midfi.mp3
+true;Mouv' Xtra;http://direct.mouv.fr/live/mouvxtra-midfi.mp3
+true;France Bleu Vaucluse;http://direct.francebleu.fr/live/fbvaucluse-midfi.mp3
+true;Fip;http://direct.fipradio.fr/live/fip-midfi.mp3
+true;Fip autour du groove;http://direct.fipradio.fr/live/fip-webradio3.mp3
+true;Fip autour du rock;http://direct.fipradio.fr/live/fip-webradio1.mp3
+true;Fip Tout nouveau, tout Fip;http://direct.fipradio.fr/live/fip-webradio5.mp3
+true;100 Pour Cent France;https://streamingv2.shoutcast.com/100-Pour-Cent-France
+false;Sud Radio;http://start-sud.ice.infomaniak.ch/start-sud-high.mp3
+true;International;
+true;RFI;http://live02.rfi.fr/rfimonde-96k.mp3
+true;RTSuisse 1ere;http://stream.srg-ssr.ch/m/la-1ere/mp3_128
+true;BBC4;http://open.live.bbc.co.uk/mediaselector/5/redir/version/2.0/mediaset/http-icy-mp3-a-stream/proto/http/vpid/bbc_radio_fourlw
+true;Jazz;
+true;Jazz Radio;http://jazzradio.ice.infomaniak.ch/jazzradio-high.mp3
+true;TSF Jazz;http://tsfjazz.ice.infomaniak.ch/tsfjazz-high.mp3
+true;Groove;http://jazz-wr08.ice.infomaniak.ch/jazz-wr08-128.mp3
+true;Funk France;http://listen.radionomy.com/FUNK-FRANCE
+true;Blues;
+true;Blues Radio;http://95.217.68.35:8352/stream
+true;Digital Impulse - Blues;http://5.39.71.159:8990/stream
+true;DI Radio Digital Impulse;http://yp.shoutcast.com/sbin/tunein-station.pls?id=611334
+true;Reggae;
+true;Sensimedia Roots Reggae;http://144.217.129.213:9878/stream
+true;Techno / Dance;
+false;RTS Avignon;http://stream.rtsfm.com/rts-avignon
+false;R Campus Avignon;http://airtime.radiocampusavignon.fr:8000/live
+true;Radio Stand By;http://188.165.206.81:8010/stream
+true;Dimensione Mix;http://igor.torontocast.com:1770/stream
+true;Radio 2.0 - Bergamo HD;http://vps.radioduepuntozero.it/stream.mp3
+true;The Big 80s Station;http://158.69.114.190:8065/stream
+true;Big Hits Radio;http://172.93.237.106:8155/live
+true;Ubuntu FM;http://listen.shoutcast.com/ubuntufm
+true;Celtique;
+true;Highlander Radio;http://jenny.torontocast.com:8094/Stream-HD
+true;Éclectique;
+true;GotRadio - Soundtracks;http://gr01.cdnstream.com:8060/
+true;Classical;
+true;WQXR;http://stream.wqxr.org/wqxr
+true;Nature;
+true;Bird song;http://tx.sharp-stream.com/http_live.php?i=rspb.mp3

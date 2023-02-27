@@ -24,6 +24,9 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
+const Cinnamon = imports.gi.Cinnamon;
+const Util = imports.misc.util;
+const {getChromiumProfileDirs} = require('./utils');
 
 let Gda = null;
 try {
@@ -102,21 +105,20 @@ const readFirefoxBookmarks = function(appInfo, profileDir) {
         bookmarks.push({
             app: appInfo,
             name: name.replace(/\//g, '|'),
-            score: 0,
-            uri
+            uri: uri
         });
     }
     return bookmarks;
 };
 
-function readFirefoxProfiles(appSystem) {
+function readFirefoxProfiles() {
     if (!Gda) return [];
 
     let profilesFile, profileDir, bookmarksFile;
-    let foundApps = appSystem.lookup_desktop_wmclass('firefox');
+    let foundApps = Cinnamon.AppSystem.get_default().lookup_desktop_wmclass('firefox');
     let appInfo = foundApps.get_app_info();
     let firefoxDir = GLib.build_filenamev([GLib.get_home_dir(), '.mozilla', 'firefox']);
-    if (!foundApps || foundApps.length === 0 || !Gda) {
+    if (!foundApps || foundApps.length === 0) {
         return [];
     }
 
@@ -164,93 +166,133 @@ function readFirefoxProfiles(appSystem) {
     return [];
 }
 
-const readChromiumBookmarks = function(bookmarks, path, wmClass, appSystem) {
-    let appInfo, bookmarksFile;
+const readChromiumBookmarksFile = function(path, appInfo) {
 
-    let foundApps = appSystem.lookup_desktop_wmclass(path[0]);
     return new Promise(function(resolve, reject) {
-        if (!foundApps || foundApps.length === 0) {
-            foundApps = appSystem.lookup_desktop_wmclass(wmClass);
-            if (!foundApps || foundApps.length === 0) {
-                resolve(bookmarks);
-            }
-        }
-
-        appInfo = foundApps.get_app_info();
-
-        bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev([GLib.get_user_config_dir(), ...path]));
-
+        const bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev(
+                                        [GLib.get_user_config_dir(), ...path, 'Bookmarks']));
         if (!bookmarksFile.query_exists(null)) {
-            resolve(bookmarks);
+            resolve([]);
+            return;
         }
 
         readJSONAsync(bookmarksFile).then(function(jsonResult) {
+            const foundBookmarks = [];
+
             if (!jsonResult.hasOwnProperty('roots')) {
-                resolve(bookmarks);
+                resolve([]);
+                return;
             }
 
-            let recurseBookmarks = (children, cont)=>{
-                for (let i = 0, len = children.length; i < len; i++) {
-                    if (children[i].type == 'url') {
-                        bookmarks.push({
-                            app: appInfo,
-                            name: children[i].name,
-                            score: 0,
-                            uri: children[i].url
-                        });
-                    } else if (children[i].hasOwnProperty('children')) {
-                        recurseBookmarks(children[i].children);
-                    }
+            const getWebDomain = function(url) { // returns the first part of web url. e.g. "http://google.com" otherwise null.
+                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                    return null;
                 }
+                const slashAfterDomainPos = url.indexOf('/', url.indexOf('://') + 3);
+                if (slashAfterDomainPos === -1) {//not found
+                    return null;
+                }
+                const domain = url.slice(0, slashAfterDomainPos);
+                if (domain.length < 9 || domain.indexOf('.') === -1) {
+                    return null;
+                }
+                return domain;
+            };
+
+            const recurseBookmarks = (children, cont) => {
+                children.forEach( child => {
+                    if (child.type == 'url') {
+                        const domain = getWebDomain(child.url);
+                        if (domain) {
+                            foundBookmarks.push({
+                                app: appInfo,
+                                name: child.name,
+                                uri: child.url,
+                                domain: domain
+                            });
+                        }
+                    } else if (child.hasOwnProperty('children')) {
+                        recurseBookmarks(child.children);
+                    }
+                });
             };
 
             for (let bookmarkLocation in jsonResult.roots) {
-                let children = jsonResult.roots[bookmarkLocation].children;
+                const children = jsonResult.roots[bookmarkLocation].children;
                 if (children === undefined) {
                     continue;
                 }
                 recurseBookmarks(children);
             }
-            resolve(bookmarks);
-        }).catch(() => resolve(bookmarks));
+
+            if (foundBookmarks.length === 0) {
+                resolve([]);
+                return;
+            }
+
+            const faviconsFile = GLib.build_filenamev([GLib.get_user_config_dir(), ...path, 'Favicons']);
+            const domains = new Set();
+            foundBookmarks.forEach( bookmark => {
+                domains.add(bookmark.domain);
+            });
+            const domainsJSON = JSON.stringify(Array.from(domains));
+
+            Util.spawn_async([__meta.path + '/getFavicons.py', faviconsFile, domainsJSON], (results) => {
+                results = JSON.parse(results);
+                foundBookmarks.forEach( bookmark => {
+                    if (bookmark.domain in results) {
+                        bookmark.icon_filename = results[bookmark.domain];
+                    }
+                });
+
+                resolve(foundBookmarks);
+            });
+        });
     });
 };
 
 //=====================
 
 class BookmarksManager {
-    constructor(appSystem) {
-        let bookmarks = [];
-        Promise.all([
-            readChromiumBookmarks(bookmarks, ['chromium', 'Default', 'Bookmarks'], 'chromium-browser', appSystem),
-            readChromiumBookmarks(bookmarks, ['google-chrome', 'Default', 'Bookmarks'], 'google-chrome', appSystem)
-            //reading opera bookmarks seems to no longer work
-            //readChromiumBookmarks(bookmarks, ['.config', 'opera', 'Bookmarks'], 'opera', appSystem)
-        ]).then(() => {
-            bookmarks = bookmarks.concat(readFirefoxProfiles(appSystem));
+    constructor() {
+        this.bookmarks = [];
+        const promises = [];
 
-            for (let i = 0, len = bookmarks.length; i < len; i++) {
-                bookmarks[i].gicon = bookmarks[i].app.get_icon();
-                //bookmarks[i].mime = null;
-                bookmarks[i].description = bookmarks[i].uri;
-                bookmarks[i].isWebBookmark = true;
-            }
+        getChromiumProfileDirs().forEach( profilePath => {
+            const path = profilePath[0];
+            const appInfo = profilePath[1];
+
+            promises.push(readChromiumBookmarksFile(path, appInfo));
+        });
+        Promise.all(promises).then((results) => {
+            results.forEach( result => this.bookmarks = this.bookmarks.concat(result));
+
+            this.bookmarks = this.bookmarks.concat(readFirefoxProfiles());
+
+            this.bookmarks.forEach( bookmark => {
+                if (!bookmark.icon_filename){
+                    bookmark.gicon = bookmark.app.get_icon();
+                }
+                let desc = bookmark.uri;
+                if (desc.length > 150) {
+                    desc = desc.slice(0, 150) + ' ...';
+                }
+                bookmark.description = desc;
+                bookmark.isSearchResult = true;
+                bookmark.activate = () => Util.spawn(['xdg-open', bookmark.uri]);
+                //bookmark.activate = () => bookmak.app.launch_uris([bookmark.uri], null);
+            });
 
             // Create a unique list of bookmarks across all browsers.
             const bm = {};
-            for (let i = 0, len = bookmarks.length; i < len; i++ ) {
-                bm[bookmarks[i].uri] = bookmarks[i];
-            }
-            const bmKeys = Object.keys(bm);
-            this.state = [];
-            for (let i = 0; i < bmKeys.length; i++ ) {
-                if (bm[bmKeys[i]]) {
-                    this.state.push(bm[bmKeys[i]]);
-                }
-            }
-            this.state.sort( (a, b) => { return (a.name.toUpperCase() > b.name.toUpperCase()) ?
-                                            1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;  });
-        }).catch((e) => global.log(e.message, e.stack));
+            this.bookmarks.forEach( bookmark => bm[bookmark.uri] = bookmark );
+            this.bookmarks = [];
+            Object.keys(bm).forEach( key => this.bookmarks.push(bm[key]) );
+
+            this.bookmarks.sort( (a, b) => { return (a.name.toUpperCase() > b.name.toUpperCase()) ?
+                                                1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;  });
+
+        }).catch((e) => global.logError(e.message, e.stack));
     }
 }
 

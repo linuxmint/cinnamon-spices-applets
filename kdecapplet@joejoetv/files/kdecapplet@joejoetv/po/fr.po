@@ -1,0 +1,473 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-16 23:46+0100\n"
+"PO-Revision-Date: 2023-02-17 00:17+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:281 applet.js:484 applet.js:524
+msgid "Send SMS"
+msgstr "Envoyer un SMS"
+
+#: applet.js:281
+msgid "Send"
+msgstr "Envoyer"
+
+#: applet.js:281
+msgid "Enter Phone Number and Message to Send."
+msgstr "Saisir le n° de téléphone et le message à envoyer."
+
+#: applet.js:281
+msgid "Phone Number"
+msgstr "N° de téléphone"
+
+#: applet.js:281
+msgid "Message"
+msgstr "Message"
+
+#: applet.js:282 applet.js:570
+msgid "Share URL"
+msgstr "Partage d'URL"
+
+#: applet.js:282
+msgid "Share"
+msgstr "Partage"
+
+#: applet.js:282
+msgid "Enter URL to Share."
+msgstr "Saisir l'URL à partager."
+
+#: applet.js:282
+msgid "URL"
+msgstr "URL"
+
+#: applet.js:347
+msgid "KDE Connect Version"
+msgstr "Version de KDE Connect"
+
+#: applet.js:350
+msgid "Configure KDEConnect"
+msgstr "Configurer KDE Connect"
+
+#: applet.js:358 applet.js:361
+msgid "KDEConnect is not running!"
+msgstr "KDEConnect n'est pas démarré !"
+
+#: applet.js:363
+msgid "Reload Applet"
+msgstr "Relancer cette applet"
+
+#: applet.js:397 applet.js:400
+msgid "No reachable paired devices!"
+msgstr "Aucun appareil détecté !"
+
+#: applet.js:405
+msgid "Devices"
+msgstr "Appareils"
+
+#: applet.js:408
+msgid "Device"
+msgstr "Appareil"
+
+#: applet.js:431
+msgid "ID"
+msgstr "ID"
+
+#: applet.js:435
+msgid "Copied Device ID to the clipboard"
+msgstr "ID de l'appareil copié dans le presse-papier"
+
+#: applet.js:470
+msgid "Send Ping"
+msgstr "Envoyer un ping"
+
+#: applet.js:496 applet.js:536
+msgid "Sent SMS to ${phonenumber}"
+msgstr "SMS envoyé au ${phonenumber}"
+
+#: applet.js:514
+msgid "Launch SMS App"
+msgstr "Lancer l'application SMS"
+
+#: applet.js:554
+msgid "Share File"
+msgstr "Partage de fichier"
+
+#: applet.js:561
+msgid "Shared file with ${name}"
+msgstr "Fichier partagé avec ${name}"
+
+#: applet.js:580
+msgid "Shared URL with ${name}"
+msgstr "URL partagée avec ${name}"
+
+#: applet.js:602 applet.js:749
+msgid "Mount and Browse"
+msgstr "Monter et parcourir"
+
+#: applet.js:623
+msgid "The Device couldn't be mounted!"
+msgstr "L'appareil ne peut pas être monté !"
+
+#: applet.js:629
+msgid "Unmount"
+msgstr "Démonter"
+
+#: applet.js:638 applet.js:744
+msgid "Browse"
+msgstr "Parcourir les fichiers"
+
+#: applet.js:658
+msgid "Find My Device"
+msgstr "Trouver mon appareil"
+
+#: applet.js:673
+msgid "Request Photo"
+msgstr "Demander une photo"
+
+#: applet.js:680
+msgid "Requested photo from ${name}"
+msgstr "Photo demandée depuis ${name}"
+
+#: applet.js:754
+msgid "Photo received"
+msgstr "Photo reçue"
+
+#. metadata.json->name
+msgid "KDEConnect Applet"
+msgstr "Applet KDE Connect"
+
+#. metadata.json->description
+msgid "Applet for interacting with Devices connected via KDE COnnect."
+msgstr "Permet d'interagir avec les appareils connectés via KDE Connect"
+
+#. metadata.json->comments
+msgid "Requires 'zenity' for some features."
+msgstr "Nécessite \"zenity\" pour certaines fonctionnalités."
+
+#~ msgid "No Modules available"
+#~ msgstr "Aucun Module disponible"
+
+#~ msgid "KDE Connect not available, make sure it's installed and running."
+#~ msgstr "KDE Connect n'est pas disponible, assurez-vous qu'il est installé et en cours d'exécution."
+
+#~ msgid "Invalid KDE Connect version returned!"
+#~ msgstr "Version invalide de KDE Connect renvoyée !"
+
+#~ msgid "The KDE Connect DBus service returned an invalid version, please try reloading the Applet!"
+#~ msgstr "Le service KDE Connect DBus a renvoyé une version invalide, veuillez essayer de recharger l'applet !"
+
+#~ msgid "No connected Devices!"
+#~ msgstr "Aucun appareil connecté !"
+
+#~ msgid "Add them in the KDE Connect settings"
+#~ msgstr "Les ajouter dans les paramètres de KDE Connect"
+
+#~ msgid "Debug Stuff, don't touch!"
+#~ msgstr "Remplissage auto pour vérification, ne rien modifier !"
+
+#~ msgid "Own ID: {own_id}"
+#~ msgstr "ID personnel : {own_id}"
+
+#~ msgid "own ID"
+#~ msgstr "ID personnel"
+
+#~ msgid "Click to copy own ID"
+#~ msgstr "Cliquez pour copier votre propre ID"
+
+#~ msgid "Click to open KDE Connect Configuration"
+#~ msgstr "Clic pour ouvrir la configuration de KDE Connect"
+
+#~ msgid "{deviceCount} available device"
+#~ msgstr "{deviceCount} appareil disponible"
+
+#~ msgid "{deviceCount} available devices"
+#~ msgstr "{deviceCount} appareils disponibles"
+
+#~ msgid "Charging"
+#~ msgstr "Chargement"
+
+#~ msgid "ID: {id}"
+#~ msgstr "ID: {id}"
+
+#~ msgid "Click to copy ID"
+#~ msgstr "Cliquer pour copier l'ID"
+
+#~ msgid "No Signal"
+#~ msgstr "Aucun signal"
+
+#~ msgid "Low"
+#~ msgstr "Bas"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
+#~ msgid "Good"
+#~ msgstr "Bon"
+
+#~ msgid "Excellent"
+#~ msgstr "Excellent"
+
+#~ msgid "Unknown"
+#~ msgstr "Inconnu"
+
+#~ msgid "Ring device"
+#~ msgstr "Faire sonner l'appareil"
+
+#~ msgid "Click to ring the device"
+#~ msgstr "Clic pour faire sonner l'appareil"
+
+#~ msgid "Photo received from '{deviceName}'"
+#~ msgstr "Photo reçue depuis \"{deviceName}\""
+
+#~ msgid "Click to open in default application"
+#~ msgstr "Clic pour ouvrir dans l'application par défaut"
+
+#~ msgid "Click to request a photo from the device"
+#~ msgstr "Cliquez pour demander une photo à partir de l'appareil"
+
+#~ msgid "Ping!"
+#~ msgstr "Ping !"
+
+#~ msgid "Sent ping to device '{deviceName}'"
+#~ msgstr "Ping envoyé  à \"{device_name}\""
+
+#~ msgid "Click to send a ping to the device"
+#~ msgstr "Clic pour envoyer un ping à l'appareil"
+
+#~ msgid "Share received from '{deviceName}'"
+#~ msgstr "Partage reçu depuis \"{deviceName}\""
+
+#~ msgid "Send URL"
+#~ msgstr "Envoyer une URL"
+
+#~ msgid "Click to send a URL to the device"
+#~ msgstr "Clic pour envoyer une URL à l'appareil"
+
+#~ msgid "Send Text"
+#~ msgstr "Envoyer du texte"
+
+#~ msgid "Click to send text to the device"
+#~ msgstr "Clic pour envoyer un texte à l'appareil"
+
+#~ msgid "Send File(s)"
+#~ msgstr "Envoyer le ou les fichiers"
+
+#~ msgid "Click to send file(s) to the device"
+#~ msgstr "Clic pour envoyer des fichiers à l'appareil"
+
+#~ msgid "Mount"
+#~ msgstr "Monter"
+
+#~ msgid "Click to unmount"
+#~ msgstr "Clic pour démonter"
+
+#~ msgid "Click to mount"
+#~ msgstr "Clic pour monter"
+
+#~ msgid "Click to browse files"
+#~ msgstr "Clic pour parcourir les fichiers"
+
+#~ msgid "SMS"
+#~ msgstr "SMS"
+
+#~ msgid "Click to open the KDE Connect SMS App"
+#~ msgstr "Clic pour ouvrir l'application SMS de KDE Connect"
+
+#~ msgid "Cancel"
+#~ msgstr "Abandon"
+
+#, python-brace-format
+#~ msgid "Enter a URL to send to '{device_name}'"
+#~ msgstr "Entrer l'URL à envoyer à '{device_name}'"
+
+#, python-brace-format
+#~ msgid "Send SMS using '{device_name}'"
+#~ msgstr "Envoyer un SMS avec \"{device_name}\""
+
+#~ msgid "Phone Number:"
+#~ msgstr "N° de téléphone :"
+
+#, python-brace-format
+#~ msgid "Send text to '{device_name}'"
+#~ msgstr "Envoyer le texte à \"{device_name}\""
+
+#~ msgid "Text to send:"
+#~ msgstr "Texte à envoyer :"
+
+#, python-brace-format
+#~ msgid "Select files to send to '{deviceName}'"
+#~ msgstr "Choisir les fichiers à envoyer à \"{deviceName}\""
+
+#, python-brace-format
+#~ msgid "Select where to save photo received from '{deviceName}'"
+#~ msgstr "Sélectionner où enregistrer la photo reçue de \"{deviceName}\""
+
+#~ msgid "photo.jpg"
+#~ msgstr "photo.jpg"
+
+#~ msgid "JPEG Photo"
+#~ msgstr "Photo JPEG"
+
+#~ msgid "KDE Connect Applet makes it easy to use the various features provided by KDE Connect to interact with connected devices, like sending files, sending SMS messages, browsing the storage of the device and more"
+#~ msgstr "L'applet KDE Connect facilite l'utilisation des différentes fonctionnalités fournies par KDE Connect pour interagir avec les appareils connectés, comme l'envoi de fichiers, l'envoi de messages SMS, la navigation dans le stockage de l'appareil, etc"
+
+#~ msgid "Johannes Schoeneberger - Author"
+#~ msgstr "Johannes Schoeneberger - Auteur"
+
+#~ msgid "Severga - Inspiration for the Applet"
+#~ msgstr "Severga - Inspiration pour l'Applet"
+
+#~ msgid "General"
+#~ msgstr "Général"
+
+#~ msgid "Modules"
+#~ msgstr "Modules"
+
+#~ msgid "Context Menu"
+#~ msgstr "Menu contextuel"
+
+#~ msgid "Panel"
+#~ msgstr "Panneau"
+
+#~ msgid "Appearance"
+#~ msgstr "Apparence"
+
+#~ msgid "Other"
+#~ msgstr "Autre"
+
+#~ msgid "Battery Info Module"
+#~ msgstr "Module d'info Batterie"
+
+#~ msgid "Device Info Module"
+#~ msgstr "Module d'info de l'appareil"
+
+#~ msgid "Connectivity Info Module"
+#~ msgstr "Module d'info Connectivité"
+
+#~ msgid "FindMyPhone Action Module"
+#~ msgstr "Module d'action Localiser mon téléphone"
+
+#~ msgid "Request-Photo Action Module"
+#~ msgstr "Module d'action Demander une photo"
+
+#~ msgid "Ping Action Module"
+#~ msgstr "Ping Module Action"
+
+#~ msgid "Share Action Module"
+#~ msgstr "Module d'action Partage"
+
+#~ msgid "SFTP Action Module"
+#~ msgstr "Module d'action SFTP"
+
+#~ msgid "SMS Action Module"
+#~ msgstr "Module d'action SMS"
+
+#~ msgid "Show own ID in the context menu of the applet"
+#~ msgstr "Afficher l'ID personnel dans le menu contextuel de l'applet"
+
+#~ msgid "Show KDE Connect version in the context menu of the applet"
+#~ msgstr "Afficher la version de KDE Connect dans le menu contextuel de l'applet"
+
+#~ msgid "Show the number of connected devices next to the icon in the panel"
+#~ msgstr "Afficher le nombre d'appareils connectés à côté de l'icône dans le panneau"
+
+#~ msgid "Icon type"
+#~ msgstr "Type d'icône"
+
+#~ msgid "Symbolic"
+#~ msgstr "Symbolique"
+
+#~ msgid "Color"
+#~ msgstr "Couleur"
+
+#~ msgid "Use custom icon"
+#~ msgstr "Utiliser une icône personnalisée"
+
+#~ msgid "Custom icon to use"
+#~ msgstr "Icône personnalisée à utiliser"
+
+#~ msgid "Expand the first device sub menu automatically"
+#~ msgstr "Développer automatiquement le premier sous-menu de l'appareil"
+
+#~ msgid "Open KDE Connect Configuration"
+#~ msgstr "Ouvrir la configuration de KDE Connect"
+
+#~ msgid "Show the device count in the tooltip of the applet"
+#~ msgstr "Afficher le nombre d'appareils dans l'info-bulle de l'applet"
+
+#~ msgid "Shows the current battery charge and charging status of the device"
+#~ msgstr "Affiche la charge actuelle de la batterie et l'état de charge de l'appareil"
+
+#~ msgid "Module enabled"
+#~ msgstr "Module activé"
+
+#~ msgid "Shows the device icon along with its ID"
+#~ msgstr "Affiche l'icône de l'appareil avec son ID"
+
+#~ msgid "Shows the current connectivity status and network type of the device"
+#~ msgstr "Affiche l'état actuel de la connectivité et le type de réseau de l'appareil"
+
+#~ msgid "Show the mobile network type"
+#~ msgstr "Afficher le type de réseau mobile"
+
+#~ msgid "Lets you make the device ring, so you can find it, if you have misplaced it"
+#~ msgstr "Permet de faire sonner l'appareil afin de pouvoir le retrouver si vous l'avez égaré"
+
+#~ msgid "Lets you request a photo from the remote device and save it on this device"
+#~ msgstr "Vous permet de demander une photo à partir de l'ordinateur et de l'enregistrer sur l'appareil"
+
+#~ msgid "Save received photos directly to directory"
+#~ msgstr "Enregistrer les photos reçues directement dans le répertoire"
+
+#~ msgid "The directory to save received photos to"
+#~ msgstr "Répertoire dans lequel enregistrer les photos reçues"
+
+#~ msgid "Lets you ping the the device to make sure it's connected"
+#~ msgstr "Vous permet de pinguer l'appareil pour vous assurer qu'il est bien connecté"
+
+#~ msgid "Use custom message for ping"
+#~ msgstr "Utiliser un message personnalisé pour pinguer"
+
+#~ msgid "Custom message"
+#~ msgstr "Message personnalisé"
+
+#~ msgid "Lets you share URLs, files or text to the device"
+#~ msgstr "Vous permet de partager des URL, des fichiers ou du texte avec l'appareil"
+
+#~ msgid "Show menu items in sub menu"
+#~ msgstr "Afficher les éléments de menu dans le sous-menu"
+
+#~ msgid "Enable the menu item to send a URL"
+#~ msgstr "Activer l'élément de menu pour envoyer une URL"
+
+#~ msgid "Enable the menu item to send some text"
+#~ msgstr "Activer l'élément de menu pour envoyer du texte"
+
+#~ msgid "Enable the menu item to send file(s)"
+#~ msgstr "Activer l'élément de menu pour envoyer des fichiers"
+
+#~ msgid "Lets you remotely browse the storage selected on the device"
+#~ msgstr "Vous permet de parcourir à distance le stockage sélectionné sur l'appareil"
+
+#~ msgid "Lets you remotely send SMS messages from the device"
+#~ msgstr "Permet d'envoyer des SMS à distance, comme s'ils provenaient de l'appareil"
+
+#~ msgid "Enable the menu item to send an SMS message"
+#~ msgstr "Activer l'élément de menu pour envoyer un SMS"
+
+#~ msgid "Enable the menu item to launch the KDE Connect SMS app"
+#~ msgstr "Activer l'élément de menu pour lancer l'application KDE Connect SMS"

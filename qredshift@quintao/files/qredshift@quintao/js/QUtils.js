@@ -17,14 +17,101 @@ const Tweener = imports.ui.tweener;
 const CheckBox = imports.ui.checkBox;
 const RadioButton = imports.ui.radioButton;
 
+const ByteArray = imports.byteArray;
+const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
 
 const PopupMenu = imports.ui.popupMenu;
 
+
 /** @exports QUtils.lerp */
-function lerp(nvalue, target, t){
-    nvalue = (nvalue + (target - nvalue) * t);
-    return parseInt(nvalue);
+function lerp(if_t_zero, if_t_one, t) {
+    return (if_t_zero + (if_t_one - if_t_zero) * t);
+}
+
+/**
+ * @exports QUtils.byte_array_to_string
+ * @param {Number[]} data
+ * @return {string}
+ */
+function byte_array_to_string(data) {
+    if (ByteArray.hasOwnProperty("toString")) {
+        return "" + ByteArray.toString(data);
+    }
+    return "" + data;
+}
+
+/**
+ * @param {string} command
+ * @return {{success: boolean, stdout: string, stderr: string, exit_status: number}}
+ * @exports QUtils.spawn_command_line_sync_string_response
+ */
+function spawn_command_line_sync_string_response(command) {
+    let [success, standard_output, standard_error, exit_status] = GLib.spawn_command_line_sync(command);
+    
+    return {
+        success: success,
+        stdout: byte_array_to_string(standard_output),
+        stderr: byte_array_to_string(standard_error),
+        exit_status: exit_status
+    };
+}
+
+/**
+ * @callback async_callback
+ * @param {string} out - An integer.
+ */
+/**
+ * @param {string} command
+ * @param {async_callback} callback
+ * @return {{success: boolean, stdout: string, stderr: string, exit_status: number}}
+ * @exports QUtils.spawn_command_line_async_string_response
+ */
+function spawn_command_line_async_string_response(command, callback) {
+    let parsed = GLib.shell_parse_argv(command)[1];
+    
+    Util.spawn_async(parsed, (out) => {
+        callback(out);
+    });
+}
+
+/**
+ * @exports QUtils.show_notification
+ */
+function show_notification(title, message, icon_name) {
+    if (!global.gio_application) {
+        global.gio_application = new Gio.Application({application_id: "qredshift@quintao"});
+        global.gio_application.register(null);
+    }
+    
+    var not = new Gio.Notification();
+    not.set_title(title);
+    not.set_body(message);
+    var Icon = new Gio.ThemedIcon({name: icon_name});
+    not.set_icon(Icon);
+    
+    global.gio_application.send_notification(null, not);
+}
+
+/**
+ * @exports QUtils.show_error_notification
+ */
+function show_error_notification(message) {
+    this.show_notification('QRedshift', message, 'dialog-error');
+}
+
+/**
+ * @exports QUtils.show_warning_notification
+ */
+function show_warning_notification(message) {
+    this.show_notification('QRedshift', message, 'dialog-warning');
+}
+
+/**
+ * @exports QUtils.show_info_notification
+ */
+function show_info_notification(message) {
+    this.show_notification('QRedshift', message, 'dialog-information');
 }
 
 
@@ -39,10 +126,11 @@ function qLOG(msg, ...data) {
         data.forEach(value => {
             tmp.push(formatLogArgument(value));
         });
+        
         str += tmp.join(', ');
         // str += formatLogArgument(data);
     } else {
-        str = JSON.stringify(msg, null, 4)
+        str = JSON.stringify(msg, null, 4);
     }
     
     // global.logWarning(str);
@@ -52,6 +140,7 @@ function qLOG(msg, ...data) {
     
     
     function formatLogArgument(arg = '', recursion = 0, depth = 4) {
+        // global.logWarning(typeof arg);
         const GObject = imports.gi.GObject;
         // Make sure falsey values are clearly indicated.
         if (arg === null) {
@@ -61,17 +150,20 @@ function qLOG(msg, ...data) {
             // Ensure strings are distinguishable.
         } else if (typeof arg === 'string' && recursion > 0) {
             arg = '\'' + arg + '\'';
+        } else if (['boolean', 'number'].includes(typeof arg)) {
+            arg = '' + arg;
         }
         // Check if we reached the depth threshold
         if (recursion + 1 > depth) {
             try {
                 arg = JSON.stringify(arg);
             } catch (e) {
-                arg = arg.toString();
+                arg = byte_array_to_string(arg);
             }
             return arg;
         }
         let isGObject = arg instanceof GObject.Object;
+        
         let space = '';
         for (let i = 0; i < recursion + 1; i++) {
             space += '    ';
@@ -82,7 +174,7 @@ function qLOG(msg, ...data) {
             if (isGObject) {
                 arg = Util.getGObjectPropertyValues(arg);
                 if (Object.keys(arg).length === 0) {
-                    return arg.toString();
+                    return byte_array_to_string(arg);
                 }
             }
             let array = isArray ? arg : Object.keys(arg);
@@ -107,7 +199,7 @@ function qLOG(msg, ...data) {
             }
             arg = array.join('\n');
         } else if (typeof arg !== 'string' || isGObject) {
-            arg = arg.toString();
+            arg = byte_array_to_string(arg);
         }
         return arg;
     }
@@ -209,6 +301,11 @@ class QIcon {
     activate(event, keepMenu) {
         this.emit('activate', event, keepMenu);
     }
+    
+    destroy() {
+    
+    }
+    
 }
 
 Signals.addSignalMethods(QIcon.prototype);
@@ -226,51 +323,78 @@ class QPopupItem extends PopupMenu.PopupBaseMenuItem {
         super({reactive, activate, sensitive, hover, focusOnHover, style_class});
         
         if (style_class && replace_class) this.actor.style_class = style_class;
+        
     }
 }
 
 
 /** @exports QUtils.QPopupHeader */
 class QPopupHeader extends QPopupItem {
-    constructor({label = '', sub_label = '', status = '', iconPath, iconName = 'quintao',  iconSize = 32}) {
+    texts = {
+        label: "",
+        sub_label: "",
+        status: "",
+    };
+    
+    constructor({label = '', sub_label = '', status = '', iconPath, iconName = 'quintao', iconSize = 32}) {
         super({reactive: false});
         
-        if(iconPath){
+        if (iconPath) {
             this._icon = new QIcon({icon_size: iconSize, icon_path: iconPath});
         } else {
             this._icon = new QIcon({icon_size: iconSize, icon_name: iconName});
         }
-        
-        this.addActor(this._icon.stIcon, {span: 0, expand: false});
+        this.texts.label = label;
+        this.texts.sub_label = sub_label;
+        this.texts.status = status;
         
         this._label = new St.Label({text: label});
-        this.addActor(this._label, {span: 0, expand: false});
         this._label.add_style_class_name('q-text-bigger');
         this._label.add_style_class_name('q-text-bold');
         
         this._sub_label = new St.Label({text: sub_label});
         this._sub_label.add_style_class_name('q-text-smaller');
-        this.addActor(this._sub_label, {span: 0, expand: false});
-        // this._sub_label.add_style_class_name('q-text-bold');
         
+        this._status_text = new St.Label({text: status});
+        this._status_text.add_style_class_name('q-text-smaller');
+        this._status_text.add_style_class_name('q-header-status');
         
-        this._statusText = new St.Label({text: status});
-        this._statusText.add_style_class_name('q-text-smaller');
-        this.addActor(this._statusText, {span: -1, expand: false, align: St.Align.END});
-        // this._statusText.set_style('font-size:90%;');
+        this.base_style = this.actor.style_class;
+        
+        this._set_actors();
         
     }
+    
+    _set_actors() {
+        this.addActor(this._icon.actor, {span: 0, expand: false});
+        this.addActor(this._label, {span: 0, expand: false});
+        this.addActor(this._sub_label, {span: 0, expand: false});
+        this.addActor(this._status_text, {span: -1, expand: false, align: St.Align.END});
+    }
+    
+    
+    // _onStyleChanged(actor) {
+    //     super._onStyleChanged(actor);
+    // }
     
     setLabel(text = '') {
         this._label.set_text(text);
     }
     
+    setSubLabel(text = '') {
+        this._sub_label.set_text(text);
+    }
+    
     setStatus(text = '') {
-        this._statusText.set_text(text);
+        this._status_text.set_text(text);
     }
     
     setIconSize(size) {
-        this._icon.iconSize = size
+        this._icon.iconSize = size;
+    }
+    
+    destroy() {
+        super.destroy();
     }
     
 }
@@ -481,10 +605,7 @@ class QPopupSlider extends QPopupItem {
         this._dragging = true;
         
         
-        // FIXME: we should only grab the specific device that originated
-        // the event, but for some weird reason events are still delivered
-        // outside the slider if using clutter_grab_pointer_for_device
-        Clutter.grab_pointer(this.slider);
+        event.get_device().grab(this.slider);
         this._signals.connect(this.slider, 'button-release-event', this._endDragging.bind(this));
         this._signals.connect(this.slider, 'motion-event', this._motionEvent.bind(this));
         
@@ -493,12 +614,12 @@ class QPopupSlider extends QPopupItem {
         this._moveHandle(absX, absY);
     }
     
-    _endDragging() {
+    _endDragging(actor, event) {
         if (this._dragging) {
             this._signals.disconnect('button-release-event', this.slider);
             this._signals.disconnect('motion-event', this.slider);
             
-            Clutter.ungrab_pointer();
+            event.get_device().ungrab(this.slider);
             this._dragging = false;
             
             this.emit('drag-end');

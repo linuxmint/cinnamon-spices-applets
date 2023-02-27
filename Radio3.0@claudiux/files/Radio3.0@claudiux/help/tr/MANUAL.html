@@ -1,0 +1,632 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>MANUAL</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<!-- Required extensions: sane_lists, headerid(level=4) -->
+<h1>Radio3.0 - Klavuz</h1>
+<h2>Yazar: Claudiux (@claudiux Github'da)</h2>
+<h3>Son revizyon tarihi: 19 Aralık 2022</h3>
+<hr>
+<h2>Genel bakış</h2>
+<p>Radio3.0  </em> Cinnamon için <em>İnternet Radyo Alıcısı &amp; Kaydedicisidir.</p>
+<p>Radio3.0 ile şunları yapabilirsiniz:</p>
+<ul>
+<li>
+<p>Her türlü radyo akışını dinleyin (MP3, AAC, AAC+, OGG, FLAC, FLV...)</p>
+</li>
+<li>
+<p>Genel ses seviyesinden bağımsız olarak radyonun ses seviyesini değiştirin.</p>
+</li>
+<li>
+<p>On binlerce radyo istasyonunu referans alan bir internet veritabanında araştırma yapın.</p>
+</li>
+<li>
+<p>SHOUTcast gibi internet dizinlerinden alınan radyo istasyonu akışlarının URL'sini içeren dosyaları içe aktarın.</p>
+</li>
+<li>
+<p>Bu uygulamanın menüsünden erişilebilen favori radyo istasyonları listenizi oluşturun.</p>
+</li>
+<li>
+<p>Favori radyolar listenizi yönetin: listenizdeki her bir radyoyu ekleyin, taşıyın, kaldırın, değiştirin.</p>
+</li>
+<li>
+<p>Kategoriler oluşturun ve kendinize en sevdiğiniz radyoları sıralayın.</p>
+</li>
+<li>
+<p>Tüm radyo listelerini kaydedin ve geri yükleyin.</p>
+</li>
+<li>
+<p>Şarkıları veya programları dinlerken kaydedin.</p>
+</li>
+<li>
+<p>Arka plan kayıtlarını planlayın.</p>
+</li>
+<li>
+<p>O anda çalan şarkıyı YouTube'dan kaydetmeyi deneyin. (Güvenli değil; başka bir şarkı kaydedilebilir.)</p>
+</li>
+<li>
+<p>Çalınan şarkıyla ilgili YouTube'daki videoları izleyin.</p>
+</li>
+<li>
+<p>Bir YouTube videosunun müziğini çıkarın.</p>
+</li>
+<li>
+<p>Harika bir ses deneyimi için <em>Pulse Effects</em>'i (kuruluysa) başlatın ve kullanın.</p>
+</li>
+</ul>
+<p><img alt="Screenshots of Menu and Contextual menu" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/screenshot.png" width="660px"></p>
+<hr>
+<p><a name="TOC"></a></p>
+<h2>İçindekiler</h2>
+<ol>
+<li>
+<p><a href="#Dependencies">Bağımlılıklar</a></p>
+</li>
+<li>
+<p><a href="#DepManualInstall">Bağımlılıkların elle kurulumu</a>  </p>
+<ol>
+<li><a href="#DepMint">Linux Mint, Ubuntu, Debian</a>  </li>
+<li><a href="#DepArch">Arch</a>  </li>
+<li><a href="#DepFedora">Fedora</a>  </li>
+</ol>
+</li>
+<li>
+<p><a href="#InstallApplet">Radio3.0 uygulaması nasıl kurulur?</a>  </p>
+</li>
+<li>
+<p><a href="#WhereToPlace">Radio3.0 uygulama simgesi nereye yerleştirilir?</a></p>
+</li>
+<li>
+<p><a href="#UsingApplet">Radio3.0 uygulamasını kullanma</a>  </p>
+<ol>
+<li><a href="#HowToAdd">Radyo istasyonlarını listeme nasıl ekleyebilirim?</a>  </li>
+<li><a href="#ListenRadio">Radyo dinleme</a>  </li>
+<li><a href="#ListenLastRadio">En son dinlenen radyoyu dinle</a>  </li>
+<li><a href="#ListenAtStartup">Cinnamon başlangıcında en son dinlediğiniz radyoyu dinleyin</a>  </li>
+<li><a href="#StopRadio">Radyoyu durdur</a>  </li>
+<li><a href="#SetVolume">Radyo akışının sesini ayarlayın</a>  </li>
+<li><a href="#ManageRadios1">Radyolarımın listesini yönet</a>  </li>
+<li><a href="#RecordingSong">Şarkı veya radyo programı kaydetme</a>  </li>
+<li><a href="#RecordYTSoundtrack">Bir YouTube videosunun müziğini çıkarın</a></li>
+<li><a href="#OpenRecFolder">Kayıtlarımı içeren klasörü aç</a>  </li>
+<li><a href="#ModifyRecords">Kayıtlarımı değiştir</a>  </li>
+</ol>
+</li>
+<li>
+<p><a href="#Settings">Ayarlar</a>  </p>
+<ol>
+<li><a href="#RadiosTab">Radyolar</a>  <ul>
+<li><a href="#RadiosTabStations">Menüdeki İstasyonlar ve Kategoriler</a>  </li>
+<li><a href="#RadiosTabMoving">Seçilen istasyonları/kategoriyi taşıma</a>  </li>
+<li><a href="#RadiosTabSaveRestore">Kaydet ve geri yükle</a>  </li>
+<li><a href="#RadiosTabUpdate">Radyo Veritabanını kullanarak listenizi güncelleyin</a>  </li>
+</ul>
+</li>
+<li><a href="#SearchTab">Arama</a>  <ul>
+<li><a href="#SearchTabForm">Arama Formu</a>  </li>
+<li><a href="#SearchTabResults">Arama Sonuçları</a>  </li>
+</ul>
+</li>
+<li><a href="#ImportTab">İçe aktarma</a>  </li>
+<li><a href="#MenuTab">Menü</a>  </li>
+<li><a href="#NetworkTab">Ağ</a>  </li>
+<li><a href="#BehaviorTab">Davranış</a>  </li>
+<li><a href="#RecordingTab">Kayıt</a>  </li>
+<li><a href="#YTTab">YT</a></li>
+<li><a href="#SchedulingTab">planlama</a>  </li>
+</ol>
+</li>
+<li>
+<p><a href="#PulseEffects">İsteğe bağlı: PulseEffects'i yükleyin</a></p>
+</li>
+</ol>
+<ul>
+<li><a href="#Annex">Ek</a></li>
+</ul>
+<hr>
+<p><a name="Dependencies"></a></p>
+<h2>Bağımlılıklar</h2>
+<p>Radio3.0'ın kullanım alanları:</p>
+<ul>
+<li>
+<p><em>mpv</em> radyo akışlarını oynatmak için (verimli bir Medya Oynatıcı).</p>
+</li>
+<li>
+<p><em>sox</em> radyo akışını veya daha doğrusu ses kartınızdan çıkan sesi bir dosyaya kaydetmek için (Ses Değişimi).</p>
+</li>
+<li>
+<p><em>pacmd</em> (PulseAudio Komutu) bir <em>pulseaudio</em> aracıdır.</p>
+</li>
+<li>
+<p><em>at</em> kayıtları planlamak için.</p>
+</li>
+<li>
+<p><em>libnotify-bin</em> bildirimleri görüntülemek için.</p>
+</li>
+<li>
+<p><em>youtube-dl</em> veya <em>yt-dlp</em> (<em>youtube-dl</em> 'den daha hızlı) YOUTUBE'dan video indirmek için.</p>
+</li>
+<li>
+<p><em>ffmpeg</em> ve <em>ffmpegthumbnailer</em> Film müziğini indirilen videodan çıkarmak için.</p>
+</li>
+<li>
+<p><em>python3-polib</em> varsa çevirileri yüklemek için.</p>
+</li>
+<li>
+<p><em>python3-brotli</em> <em>yt-dlp</em> için gerekli.</p>
+</li>
+</ul>
+<p>Bu araçları ve kitaplıkları içeren paketler önceden kurulu değilse, Radio3.0'ı ilk kez kullanırken bunları kurmanız istenir.</p>
+<p>Birkaç ses efektini kullanmak için (yankı vb.) <em>Pulse Effects</em> de yükleyebilirsiniz, ancak bu isteğe bağlıdır.</p>
+<p><a href="#TOC">İçindekiler Tablosuna Dön</a></p>
+<p><a name="DepManualInstall"></a></p>
+<h2>Bağımlılıkların elle kurulumu</h2>
+<p><a name="DepMint"></a></p>
+<h3>Linux Mint, Ubuntu, Debian</h3>
+<p><code>sudo apt update</code></p>
+<p><code>sudo apt install mpv libmpv1 libmpv-dev sox libsox-fmt-all pulseaudio pulseaudio-utils at libnotify-bin youtube-dl ffmpeg ffmpegthumbnailer python3-polib python3-brotli</code></p>
+<p>İsteğe bağlı:</p>
+<p><code>sudo apt install pulseeffects</code></p>
+<p><a name="DepArch"></a></p>
+<h3>Arch</h3>
+<p><code>sudo pacman -Syu mpv sox pulseaudio at libnotify youtube-dl ffmpeg ffmpegthumbnailer python-brotli</code></p>
+<p><code>yay -S python-polib</code></p>
+<p>To install Yay on in Arch Linux and other Arch-based systems, run the following commands one by one:</p>
+<p><code>sudo pacman -S --needed git base-devel</code></p>
+<p><code>git clone https://aur.archlinux.org/yay.git</code></p>
+<p><code>cd yay</code></p>
+<p><code>makepkg -si</code></p>
+<p><a name="DepFedora"></a></p>
+<h3>Fedora</h3>
+<p><code>sudo dnf install mpv sox pulseaudio at libnotify yt-dlp ffmpeg gstreamer1-libav python3-brotli python3-polib</code></p>
+<p><a href="#TOC">İçindekiler Tablosuna Dön</a></p>
+<hr>
+<h2>yt-dlp'nin en son sürümü nasıl kurulur?</h2>
+<p><em>yt-dlp</em>  <strong>Radio3.0</strong> tarafından YouTube'dan video indirmek için kullanılır.</p>
+<p><em>yt-dlp</em> 'nin en son sürümü hataları düzeltir ve özellikle yaş sınırlaması nedeniyle sizi video indirme hakkından mahrum bırakmamak için tarayıcınızın çerezlerini daha iyi hesaba katar.</p>
+<p>En son sürümünü nasıl yükleyeceğiniz aşağıda açıklanmıştır:</p>
+<ol>
+<li>Tüm bağımlılıklarını da yüklediğinden, dağıtımınızın paket havuzlarında bulunan <em>yt-dlp</em> sürümünü yükleyerek başlayın. Örneğin: <code>sudo apt install yt-dlp</code></li>
+<li>Bu yeni sürümü içerecek <code>$HOME/bin</code> dizinini oluşturun: <code>mkdir -p $HOME/bin</code></li>
+<li>Linux için en son sürümü <a href="https://github.com/yt-dlp/yt-dlp/releases/latest">https://github.com/yt-dlp/yt-dlp/releases/latest</a> adresinden indirin ve az önce oluşturduğunuz <code>$HOME/bin</code> dizinine kaydedin.</li>
+<li>Çalıştırılabilir yapın: <code>chmod +x $HOME/bin/yt-dlp</code></li>
+<li>Oturumunuzdan çıkış yapın.</li>
+<li>Giriş yapın. Artık <code>$HOME/bin</code> dizininizdeki herhangi bir komut dosyası, sisteminizde aynı ada sahip diğer tüm komut dizilerinden önceliklidir.</li>
+</ol>
+<hr>
+<p><a name="InstallApplet"></a></p>
+<h2>Radio3.0 uygulaması nasıl kurulur?</h2>
+<p><img alt="Radio3.0 - Installing applet and dependencies" src="https://claudeclerc.fr/downloads/Radio3.0/Radio3.0-Install.gif"></p>
+<p><a name="InstallAppletCS"></a></p>
+<p>Bir panele sağ tıklayın -&gt; Uygulamacıklar -&gt; İndirme sekmesi: Radio3.0'ı İndirin. Ardından Yönet sekmesini açın ve panele Radio3.0'ı ekleyin.</p>
+<p><a name="WhereToPlace"></a></p>
+<h2>Radio3.0 uygulama simgesi nereye yerleştirilir?</h2>
+<p>En iyi yer <em>Ses</em> uygulamasının yanındadır. Böylece <em>Ses</em> uygulaması ile genel ses seviyesini, Radio3.0 uygulaması ile radyo sesini kolayca kontrol edebilirsiniz..</p>
+<p>(Uygulamaları taşımak için panelin bağlamsal menüsündeki "Panel düzenleme modu"nu kullanın. Simgeleri sürükleyip bırakın. Uygulama simgeleriniz doğru yerdeyken bu "Panel düzenleme modundan" çıkın.)</p>
+<p><a href="#TOC">İçindekiler Tablosuna Dön</a></p>
+<hr>
+<p><a name="UsingApplet"></a></p>
+<h2>Radio3.0 uygulamasını kullanma</h2>
+<p>Bu uygulamanın bir menüsü (sol tıklama) ve bir bağlamsal menüsü (sağ tıklama) vardır.</p>
+<p>Bazı eylemler, simge üzerinde orta tıklama veya kaydırma kullanılarak yapılabilir.</p>
+<p><a name="HowToAdd"></a></p>
+<h3>Radyo istasyonlarını listeme nasıl ekleyebilirim?</h3>
+<p>Listenize en az bir radyo istasyonu eklemenin dört yolu vardır.</p>
+<ol>
+<li>
+<p>Menüde "Yeni istasyon ara..." seçeneğini seçin. (Ayrıca bağlamsal menüdeki "Yapılandır..." seçeneğini kullanabilir ve ardından "Ara" sekmesini seçebilirsiniz.) On binlerce referans içeren internet veritabanını sorgulamak için formu kullanın.</p>
+</li>
+<li>
+<p>"İçe Aktar" sekmesini kullanarak (içerik menüsündeki aynı "Yapılandır..." seçeneğiyle) radyo istasyonu verilerini içeren dosyaları içe aktarabilirsiniz.</p>
+</li>
+<li>
+<p>Akış URL'sini biliyorsanız, bir radyo istasyonunu doğrudan listenize ekleyebilirsiniz. Listeniz "Radyolar" sekmesindedir ("Yapılandır..." seçeneğini seçtiğinizde açılan ilk sekme). Bir radyo istasyonu eklemek için <code>[+]</code> düğmesini kullanın. Yalnızca "Ad" ve "Akış URL'si" alanları gereklidir; diğerleri isteğe bağlıdır. Radyo durdurulduktan sonra "Codek" ve "Bit hızı" alanları otomatik olarak doldurulacaktır.</p>
+</li>
+<li>
+<p>Bu uygulama ayarlarının ilk sekmesinde bulunan düğmeyi kullanarak Radio3.0_EXAMPLES.json listesini geri yükleyin. Dikkat edin, istasyon listeniz bununla değiştirilecek; bunu yapmadan önce kendi istasyon listenizi kaydetmeyi düşünün!</p>
+</li>
+</ol>
+<p>Bu sekmelerin her biri, kullanımıyla ilgili bazı açıklamalar içerir. Bunlar, "Davranış" sekmesindeki uygun kutucuğun işareti kaldırılarak atlanabilir.</p>
+<p><a name="ListenRadio"></a></p>
+<h3>Radyo dinle</h3>
+<ul>
+<li>
+<p>Radio3.0 menüsünü açın (simgesine tıklayarak).</p>
+</li>
+<li>
+<p>"Tüm radyolarım" alt menüsünü açın..</p>
+</li>
+<li>
+<p>Bir radyo istasyonu seçin ve birkaç saniye bekleyin. Bekleme süresi, sizi yayın sunucusundan ayıran mesafeye ve bu yayının kalitesine bağlıdır.</p>
+</li>
+</ul>
+<p>Lütfen en son seçilen radyo istasyonlarının, hızlı erişim sağlamak için menünün <em>Son Çalınan İstasyonlar</em> bölümünde göründüğünü unutmayın.</p>
+<p>Bir radyo dinlerken sembolik simgenin rengi değişir (varsayılan olarak yeşil; başka bir renk seçebilirsiniz).</p>
+<p><a name="ListenLastRadio"></a></p>
+<h3>Dinlenen son radyo istasyonunu aç</h3>
+<p>Hiçbir radyo çalmıyorken simgeye orta tıklayın.</p>
+<p>(Başka bir yol: Menünün <em>Son Çalınan İstasyonlar</em> bölümündeki ilk radyoya tıklayın.)</p>
+<p><a name="ListenAtStartup"></a></p>
+<h3>Cinnamon başlangıcında dinlediğiniz son radyoyu çalın</h3>
+<p>Bağlamsal menüde "Başlangıçta Radyo AÇIK" seçeneğini işaretleyin.</p>
+<p><a name="StopRadio"></a></p>
+<h3>Radyoyu durdur</h3>
+<p>Radyoyu durdurmanın iki yolu vardır:</p>
+<ul>
+<li>
+<p>Menüde <em>Durdur</em>'u seçerek.</p>
+</li>
+<li>
+<p>Simgeye orta tıklama (yani fare tekerleği ile tıklama) yapma.</p>
+</li>
+</ul>
+<p>Radyo KAPALI iken, sembolik renk varsayılandır (varsayılan olarak gri; başka bir renk seçebilirsiniz).</p>
+<p><a name="SetVolume"></a></p>
+<h3>Radyo akışının sesini ayarlayın</h3>
+<p>Simge üzerinde yukarı veya aşağı kaydırmak, mevcut radyo akışının ses seviyesini ayarlar.</p>
+<p>Bağlamsal menüde ses kaydırıcısını kullanmak aynı etkiye sahiptir.</p>
+<p>Lütfen bu eylemlerin genel ses düzeyi üzerinde herhangi bir etkisinin olmadığını unutmayın; genel ses düzeyini ayarlamak için <em>Ses</em> uygulamasının simgesini kullanın.</p>
+<p><a name="ManageRadios1"></a></p>
+<h3>Radyolarımın listesini yönet</h3>
+<p>Ayarlara erişmek için menüde veya bağlamsal menüde <em>Yapılandır...</em> öğesini seçin (aşağıya <a href="#RadiosTab">bakın</a>).</p>
+<p><a name="RecordingSong"></a></p>
+<h3>Bir şarkı veya radyo programı kaydedin</h3>
+<p><u>Durum</u>: Bu uygulamanın ayarlarındaki Kayıtlar sekmesinin Onay bölümündeki kutuyu işaretleyin.</p>
+<p><u>İlk yol</u>: Bağlamsal menüde <em>Kaydı Başlat</em>'ı seçin.</p>
+<p><u>İkinci yol</u>: Ekranda görünürken bildirimin <em>Şu andan itibaren kaydet</em> düğmesini tıklayın. Fareyi bu düğmenin üzerine getirmek, bildirim kaybolmadan şarkının başlamasını beklemenizi sağlar. Bildirim siz bu düğmeyi tıklayamadan kaybolursa, içerik menüsünden <em>Kaydı Başlat</em> seçeneğini kullanmanız gerekir.</p>
+<p>Bu ikinci yol, akışınızın şarkının veya şovun adını verme yeteneğine bağlıdır..</p>
+<p>Kayıt sırasında sembolik simgenin rengi değişir (varsayılan olarak kırmızıdır; başka bir renk seçebilirsiniz)</p>
+<p><u>Lütfen aklınızda bulundurun</u>:</p>
+<ul>
+<li>
+<p>Radyo akışı şarkının veya programın adını verirse, kayıt bu şarkının veya programın sonunda otomatik olarak duracaktır. Yayında duyurulan reklam aralarına dikkat!</p>
+</li>
+<li>
+<p>Aksi takdirde kaydı kendiniz durdurmanız gerekir (bağlamsal menüyü kullanarak).</p>
+</li>
+<li>
+<p>Kayıt tıklama anında başlar; daha önce başlatmak mümkün değildir. Çok az sayıda istasyon bir sonraki şarkıyı birkaç saniye önceden duyurur.</p>
+</li>
+<li>
+<p>Önbellek boşalırken devam ettiği için kayıt genellikle şarkı bittikten birkaç saniye sonra sona erer.</p>
+</li>
+</ul>
+<p><a name="RecordYTSoundtrack"></a></p>
+<h3>Film müziğini YouTube videosundan çıkarın</h3>
+<p>Bağlamsal menüde: Film müziğini YouTube videosundan çıkarın...</p>
+<p>Ardından, yeni açılan pencerenin en altına gidin, YouTube videosunun URL'sini uygun alana yapıştırın ve "Müzik parçasını çıkar" seçeneğini tıklayın.</p>
+<p><a name="OpenRecFolder"></a></p>
+<h3>Kayıtlarımı içeren klasörü aç</h3>
+<p>Bağlamsal menüde: Kayıtlar Klasörünü açın.</p>
+<p><a name="ModifyRecords"></a></p>
+<h3>Kayıtlarımı değiştir</h3>
+<p>Kayıtlarınızı değiştirmek için Audacity gibi harici bir program kullanabilirsiniz.</p>
+<p><a href="#TOC">İçindekiler Tablosuna Dön</a></p>
+<hr>
+<p><a name="Settings"></a></p>
+<h2>Ayarlar</h2>
+<p>Ayarlara menüden veya bağlamsal menüden <em>Yapılandır...</em> seçeneği kullanılarak erişilebilir.</p>
+<p><img alt="Settings Tabs" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/Radio30_Settings_All_Tabs.png" width="600px"></p>
+<p>Radio3.0 Ayarlarında 9 sekme vardır:</p>
+<table>
+<thead>
+<tr>
+<th><a href="#RadiosTab">Radyolar</a></th>
+<th><a href="#SearchTab">Ara</a></th>
+<th><a href="#ImportTab">İçe aktar</a></th>
+<th><a href="#MenuTab">Menü</a></th>
+<th><a href="#BehaviorTab">Davranış</a></th>
+<th><a href="#NetworkTab">Ağ</a></th>
+<th><a href="#RecordingTab">Kayıt</a></th>
+<th><a href="#YTTab">YT</a></th>
+<th><a href="#SchedulingTab">Planlama</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a href="#TOC">İçindekiler Tablosuna Dön</a></p>
+<p><a name="RadiosTab"></a></p>
+<h3>Radyolar</h3>
+<p><a name="RadiosTabStations"></a></p>
+<h4>Menüdeki İstasyonlar ve Kategoriler</h4>
+<p><img alt="Radios Settings Screenshot" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/Radio30_RadiosTab_1.png" width="670px"></p>
+<p>Bu, radyo istasyonları listesi örneğidir.</p>
+<p>Üç Kategori görünür: <strong>Hard Rock &amp; Metal</strong>, <strong>Reggae</strong> ve <strong>Techno / Dance</strong>. Akış URL'leri boş..</p>
+<p>Diğerleri radyo istasyonlarıdır. <strong>Menü</strong> kutusu işaretli olanlar bu uygulamanın menüsünde görünür (Radyo İstasyonlarım alt menüsünde; aşağıya bakın). <strong>♪/➟</strong> kutusu işaretli olanlar, <strong>♪ Test etmek için sonraki istasyonu çal</strong> düğmesi kullanılarak hemen (birbiri ardına) çalınabilir.</p>
+<p>Her Kategori veya İstasyon,<strong>sürükle ve bırak</strong> yöntemiyle taşınabilir.</p>
+<p>Bu listenin altında, sol kısım listenin içeriğini değiştirmek için <strong>araçları</strong> içerir:</p>
+<ul>
+<li>
+<p><img alt="Plus button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_list_add_button.png"> bir Kategori (yalnızca adını girin) veya İstasyon (en azından adını ve akış URL'sini girin) <strong>eklemek</strong> için. Eklenen öğe listenin en üstündedir.</p>
+</li>
+<li>
+<p><img alt="Minus button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_list_remove_button.png"> seçili öğeyi <strong>kaldırmak</strong> için. (Üzerine tıklayarak bir öğe seçersiniz.)</p>
+</li>
+<li>
+<p><img alt="Pencil button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_list_edit_button.png"> seçili öğeyi <strong>düzenlemek</strong> için.</p>
+</li>
+<li>
+<p><img alt="Unchecked button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_checkbox_symbolic_button.png"> herhangi bir öğenin <strong>seçimini kaldırmak</strong> için.</p>
+</li>
+<li>
+<p><img alt="Move up button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_up_button.png"> seçili öğeyi <strong>yukarı taşımak</strong> için.</p>
+</li>
+<li>
+<p><img alt="Move down button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_down_button.png"> seçili öğeyi <strong>aşağı taşımak</strong> için.</p>
+</li>
+</ul>
+<p>Sağ kısım, listenizi keşfetmek için araçlar içerir:</p>
+<ul>
+<li>
+<p><img alt="Top button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_top_button.png"> listenizin <strong>başına</strong> gitmek için.</p>
+</li>
+<li>
+<p><img alt="Move up button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_up_button.png"> <strong>önceki sayfaya</strong> gitmek için.</p>
+</li>
+<li>
+<p><img alt="Move down button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_down_button.png"> <strong>sonraki sayfaya</strong> gitmek için.</p>
+</li>
+<li>
+<p><img alt="Bottom button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_bottom_button.png"> listenizin <strong>en altına</strong> gitmek için.</p>
+</li>
+<li>
+<p><img alt="Previous Category button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_previous_button.png"> <strong>önceki Kategoriye</strong> (veya sağdan sola yazan okuyucular için <strong>sonraki Kategoriye</strong>) gitmek için.</p>
+</li>
+<li>
+<p><img alt="Next Category button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_next_button.png"> <strong>sonraki Kategoriye</strong> (veya sağdan sola yazan okuyucular için <strong>önceki Kategoriye</strong>) gitmek için.</p>
+</li>
+</ul>
+<p><img alt="Sub-menu My Radio Stations" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/Radio30_Menu_MyRadioStations.png" title="My Radio Stations" width="350px"></p>
+<p><a name="RadiosTabMoving"></a></p>
+<h4>Seçilen istasyonları/kategoriyi taşıma</h4>
+<p><img alt="Radios Settings Screenshot 2" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/Radio30_RadiosTab_2.png" width="670px"></p>
+<p>Belirli öğelerin kategorisini değiştirmek için <strong>♪/➟</strong> kutularını işaretleyerek seçin, açılır listeden kategoriyi seçin ve "Seçili istasyonları bu kategoriye taşı" düğmesine tıklayın.</p>
+<p>Sonucu görmek ve herhangi bir ayar yapmak için "Bu kategoriye git"e tıklayın.</p>
+<p>İpucu: Geçici bir kategori oluşturabilir ve onu doğru yere taşıyabilir, ardından seçili öğeleri silmeden önce o kategoriye taşıyabilirsiniz.</p>
+<p><a name="RadiosTabSaveRestore"></a></p>
+<h4>Kaydet ve geri yükle</h4>
+<p><img alt="Radios Settings Screenshot 3" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/Radio30_RadiosTab_3.png" width="670px"></p>
+<p>Düzenlemeden veya güncellemeden önce istasyon listenizi <strong>kaydedin</strong> (yedekleyin). Bu, istasyonlarınızın ve kategorilerinizin tüm ayrıntılarını içeren bir <code>.json</code> dosyası oluşturur. Bu <code>.json</code> dosyasının adı, yedeklemenin tarihini ve saatini tanımlar; örnek: <code>Radios_2022-02-21_22-23-55.json</code> 21 Şubat 2022 saat 22:23:55'te oluşturuldu.</p>
+<p>Önceden kaydedilmiş bir istasyon listesini <strong>geri yükleyin</strong>. Dikkat: Listeniz tamamen geri yüklenen listeyle değiştirilecektir.</p>
+<p>Bu listeleri içeren klasörü açarak yönetebilirsiniz. Özellikle, bunları istediğiniz zaman yeniden adlandırabilirsiniz.</p>
+<p><a name="RadiosTabUpdate"></a></p>
+<h4>Radyo Veritabanını kullanarak listenizi güncelleyin</h4>
+<p><img alt="Radios Settings Screenshot 4" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/Radio30_RadiosTab_4.png" width="670px"></p>
+<p><strong>İstasyon listemi Radyo Veritabanı verileriyle güncelle</strong> düğmesinin amacı, radyolarınızın boş alanlarını mümkün olduğunca doldurmaktır.</p>
+<p>Danışılan veri tabanı, bir istasyon için bildirdiğiniz akış URL'sini içeriyorsa, bu istasyona bir UUID (Evrensel Benzersiz Tanımlayıcı) atanacaktır.</p>
+<p>İstasyonlarınızdan birine artık ulaşılamıyorsa, listenizi güncellemeyi deneyin. Bu istasyonun yayın URL'si değişmiş olabilir ve bir UUID'si varsa yeni URL'si ona atanabilir.</p>
+<p>Güncelleme bir istasyona verdiğiniz adı değiştirmez.</p>
+<p>Notlar:</p>
+<ul>
+<li>
+<p>Veritabanından (Arama sekmesi) bir istasyon gelirse, zaten bir UUID'si vardır.</p>
+</li>
+<li>
+<p>Başka bir kaynaktan geliyorsa veritabanı tarafından bilinmiyor olabilir; daha sonra bir UUID atanmaz.</p>
+</li>
+</ul>
+<p><a href="#Settings">Tüm Sekmeler</a></p>
+<p><a name="SearchTab"></a></p>
+<h3>Arama</h3>
+<p>Bu sekmeye, menüdeki <em>Yeni istasyon ara</em> seçeneğiyle doğrudan erişilebilir.</p>
+<p><a name="SearchTabForm"></a></p>
+<h4>Arama Formu</h4>
+<p><img alt="Search Form Screenshot" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/Radio30_SearchTab_1.png" width="670px"></p>
+<p>Bu formun en az birkaç alanını doldurup ardından 'Ara ...' düğmesine tıklayarak, İnternet üzerinden erişilebilen ücretsiz bir radyo veri tabanındaki diğer istasyonları arayabilirsiniz.</p>
+<p>'Ara ...' düğmesine her tıklandığında, bu sekmenin ikinci bölümünde belirli istasyonları test edebileceğiniz ve menüye dahil edebileceğiniz yeni bir sonuç sayfası görüntülenir.</p>
+<p>Zaten menünüzde bulunan bir istasyon, yalnızca akış URL'si değiştiyse arama sonuçlarında görünür.</p>
+<p>Yeni bir sayfanın görünmemesi, arama kriterlerinize uyan tüm sonuçların görüntülendiği anlamına gelir.</p>
+<p>Kriterlerinizden en az birini değiştirirseniz, 'Sonraki sayfa numarası' alanını 1 olarak ayarlamayı unutmayın.</p>
+<p>Her zamanki gibi, 'Sıfırla' düğmesi bu formdaki her alanı varsayılan değerine sıfırlar</p>
+<p><a name="SearchTabResults"></a></p>
+<h4>Arama sonuçları</h4>
+<p>Bu sonuçları elde etmek için, arama formu sıfırlandı ve ardından aşağıdakilerle dolduruldu:</p>
+<ul>
+<li>Etiket: metal</li>
+<li>Kodlayıcı: AAC</li>
+<li>Emir: bit hızı</li>
+</ul>
+<p><img alt="Search Results Screenshot" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/Radio30_SearchTab_2.png" width="700px"></p>
+<p>'TheBlast.fm'i test etmek için <strong>♪</strong> kutusunu işaretleyin ve ardından <strong>♪ Test edilecek sonraki istasyonu çal</strong> düğmesini tıklayın. Lütfen unutmayın: Bir radyo istasyonunu test etmek, onu bu uygulama menüsünde "Son Çalınan İstasyonlar"a ekler, ancak istasyon listenize eklemez.</p>
+<p>Bu istasyonlardan bir veya daha fazlasını kendi listenizin en üstüne almak için <strong>Seç</strong> kutularını işaretleyin ve <strong>Seçili istasyonları kendi listeme aktar</strong>'ı tıklayın. Ardından, Radyolar sekmesini kullanarak listenizi yönetin.</p>
+<p><strong>Seç</strong> kutularını işaretleyip <strong>Kaldır...</strong> düğmesini tıklayarak bu arama sonuçlarından satırları kaldırabilirsiniz. Bu eylem, veritabanının içeriğini etkilemez.</p>
+<p><strong>Tüm öğeleri seç</strong> ve <strong>Tüm öğelerin seçimini kaldır</strong> düğmeleri, <strong>Seç</strong> kutularını etkiler.</p>
+<p><strong><u>Uyarı</u></strong>: <em>Bu uygulamanın yazarı, bir aramadan sonra görüntülenen sonuçlardan sorumlu değildir ve veritabanlarının içeriğini kontrol etmez. Radyo istasyonları sizi rahatsız eden mesajlar veya ideolojiler yayınlıyorsa, lütfen sahiplerine veya yayın yaptıkları eyalete/ülkeye şikayet edin.</em></p>
+<p><a href="#Settings">Tüm Sekmeler</a></p>
+<p><a name="ImportTab"></a></p>
+<h3>İçe aktar</h3>
+<p>Bu sekme, özellikle <a href="https://directory.shoutcast.com/">Shoutcast</a> dizinindekiler olmak üzere M3U, PLS veya XSPF formatındaki dosyalardan radyo istasyonlarını içe aktarmanıza olanak tanır.</p>
+<h4>Buraya içe aktarmak için Shoutcast'teki dosyaları alın</h4>
+<p><img alt="Import Settings Screenshot 1" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/Radio30_ImportTab_1.png"></p>
+<p>Bu düğme, tarayıcınızda Shoutcast dizinini açar.</p>
+<p><img alt="Shoutcast Baroque" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Shcst1.png"></p>
+<p>Yukarıdaki örnekte, bir radyo istasyonunun XSPF dosyasına nasıl erişileceğini görüyoruz. Bu dosyayı, .xspf uzantısını koruyarak radyonun adını vererek kaydedin.</p>
+<p><img alt="Shoutcast Save" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Shcst2.png"></p>
+<p><a name="FileToImport"></a></p>
+<h4>İçe aktarılacak dosya</h4>
+<p><img alt="Import Settings Screenshot 2" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/Radio30_ImportTab_2.png"></p>
+<p>Bu düğme, radyo istasyonları verilerini içeren bir dosyayı içe aktarmanızı sağlar.</p>
+<p>Farklı içe aktarılabilir dosya biçimlerinin açıklaması <a href="#Annex1">Ek 1</a>'de verilmiştir.</p>
+<p><a href="#Settings">All Tabs</a></p>
+<p><a name="MenuTab"></a></p>
+<h3>Menu</h3>
+<p><img alt="Menu Settings Screenshot" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/Radio30_MenuTab.png"></p>
+<p>Bu sekme, bu uygulama menüsünde belirli öğelerin görüntülenip görüntülenmeyeceğini seçmenizi sağlar:</p>
+<ul>
+<li>Bu uygulamanın adı ve sürümü, örneğin: Radio3.0 v1.0.0.</li>
+<li><em>Son Oynatılan İstasyonların</em> sayısı. 0 değeri, bu listenin görüntülenmesini devre dışı bırakır.</li>
+<li><em>Yapılandır...</em> ve <em>Ses Ayarları</em> gibi sistem öğeleri (zaten bağlamsal menüdedir).</li>
+</ul>
+<p>Gizlilik: Son Çalınan İstasyonlar listenizi başlangıçta veya şimdi boşaltmak istiyorsanız, kutuyu işaretleyin veya düğmesine tıklayın.</p>
+<p>Yalnızca geliştiriciler için kullanışlıdır: Bağlamsal menüde <em>Bu uygulamayı yeniden yükle</em> öğesinin görüntülenip görüntülenmeyeceği.</p>
+<p><a href="#Settings">Tüm Sekmeler</a></p>
+<p><a name="BehaviorTab"></a></p>
+<h3>Davranış</h3>
+<p><img alt="Behavior1 Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshotsTR/Radio30_Behavior1-StartUp.png" width="700px"></p>
+<p>Cinnamon başladığında radyoyu aç: İşaretlendiğinde, dinlenen son istasyon Cinnamon başladığında çalınacaktır.</p>
+<p>Yeni bir radyo başlatmak için ses seviyesi: Bu sesi seçin. Sesi son değerinde bırakmak için '(Tanımsız)' olarak ayarlayın.</p>
+<p>Bağımlılıkları kontrol etme: Tüm bağımlılıklar kurulu olduğunda veya belirli bağımlılıklar kullanışsız olduğunda (çünkü alternatifleriniz var) bu kutuyu işaretleyin.</p>
+<p><img alt="Behavior2 Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshotsTR/Radio30_Behavior2-VolumeStep.png" width="700px"></p>
+<p>Simge üzerinde kayan ses düzeyi adımı: Bu adımı seçin. %0, simge üzerinde kaydırılan ses değişikliğini devre dışı bırakır.</p>
+<p><img alt="Behavior3 Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshotsTR/Radio30_Behavior3-ShowHelp.png" width="700px"></p>
+<p>Görüntülemek istediğiniz yardımı seçin.</p>
+<p><img alt="Behavior4 Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshotsTR/Radio30_Behavior4-Notifications.png" width="700px"></p>
+<p>Hangi bildirimleri görüntülemek istediğinizi seçin; ayrıca ikinci tür bildirimin süresi.</p>
+<p><img alt="Behavior5 Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshotsTR/Radio30_Behavior5-CodecAndBitrate.png" width="700px"></p>
+<p>Menü ve bildirimlerde Kodec ve Bit Hızının gösterilip gösterilmeyeceği.</p>
+<p><img alt="Behavior6 Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshotsTR/Radio30_Behavior6-SymbolicIconColor.png" width="700px"></p>
+<p>Radyo açıkken, radyo kapalıyken ve kayıt sırasında sembolik simgenin rengini seçin.</p>
+<p><a href="#Settings">Tüm Sekmeler</a></p>
+<p><a name="NetworkTab"></a></p>
+<h3>Ağ</h3>
+<p><img alt="Network Settings Screenshot" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/Radio30_NetworkSettings.png" width="700px"></p>
+<p>Ağ Kalitesi:</p>
+<ul>
+<li>Yüksek: Kayıtlar, en iyi kaliteyi garanti eden akışın bir kopyasından yapılacaktır.</li>
+<li>Düşük: Bant genişliğinizden tasarruf etmek için, ses çıkışınızdan kayıtlar yapılır; ancak bazı sesler kayıtlarınızı kirletebilir.</li>
+</ul>
+<p>Ağı izle: İşaretlendiğinde, ağ değiştirildikten sonra çalınan istasyon devam edecektir (VPN, Wifi...)</p>
+<p>Proxy: Varsayılan olarak boştur. Biçim: http://[kullanıcı:pass@]URL[:bağlantı noktası]. Boşsa, <em>http_proxy</em> ve <em>ALL_PROXY</em> ortam değişkenleri varsa kullanılacaktır. Ayarlanırsa, bu proxy https istekleri için kullanılmaz.</p>
+<p>Veritabanı Bilgisi (salt okunur): Gerçekte kullanılan radyo veritabanının URL'si.</p>
+<p><a href="#Settings">All Tabs</a></p>
+<p><a name="RecordingTab"></a></p>
+<h3>Kayıt</h3>
+<p><img alt="Recording Settings Screenshot" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshotsTR/Radio30_RecordingSettings.png" width="700px"></p>
+<p>Gelecekteki kayıtlarınızı içerecek klasörün yolu: Bu klasörü seçin.</p>
+<p>Bu yolu varsayılan olarak <code>~/Music/Radio3.0</code> olarak ayarlayın. (<em>Müzik</em> yerelleştirilmiştir.)</p>
+<p>Kayıt formatı: FLAC, MP3 (varsayılan), OGG, RAW veya WAV.</p>
+<p>Kaydı durdurmanın yolu (lütfen bu seçimin herhangi bir mevcut kayıt üzerinde etkisi olmayacağını, ancak sonraki kayıtlar üzerinde etkili olacağını unutmayın.):</p>
+<ul>
+<li>otomatik olarak, mevcut şarkı bittiğinde: yalnızca akış geçerli şarkının adını içeriyorsa doğru çalışır.</li>
+<li>elle; bu şekilde, birkaç kayıt birbirini takip edebilir: kendiniz tüm kaydı durdurmalısınız.</li>
+</ul>
+<p><a href="#Settings">Tüm Sekmeler</a></p>
+<p><a name="YTTab"></a></p>
+<h3>YT</h3>
+<p>Bu sekmeye, içerik menüsündeki <em>Bir YouTube videosundan film müziği çıkar...</em> seçeneği aracılığıyla doğrudan erişilebilir.</p>
+<p><img alt="YT Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshotsTR/Radio30_YT_Tab.png" width="700px"></p>
+<p>Kayıt formatı: FLAC, MP3, OGG, RAW ve WAV mevcut formatlardır. MP3 (192 kbps) varsayılan olarak seçilidir.</p>
+<p>Şuradaki çerezleri kullan: YouTube'u ziyaret etmek için genellikle kullandığınız tarayıcıyı seçin.</p>
+<p>Film müziğini YouTube videosundan çıkarın: YouTube'u ziyaret ederek bir video (veya oynatma listesi) bağlantısını sağ tıklayın ve <em>Bağlantıyı kopyala</em>'yı seçin. Ardından, <em>Kopyaladığınız YouTube bağlantısının üzerine yapıştır</em> düğmesini tıklayın. <em>YouTube video bağlantısı</em> görünür. <strong>v=</strong> içeriyorsa, bu tek videonun film müziğini çıkarabilirsiniz. <strong>list=</strong> içeriyorsa, oynatma listesindeki her bir videodan film müziğini çıkarabilirsiniz. Bu müzikleri, adını belirttiğiniz bir alt dizine kaydetmeye de karar verebilirsiniz. <em>Müzik parçasını çıkar</em> düğmesi işlemi çalıştırır:</p>
+<ul>
+<li>Videoyu indirin.</li>
+<li>Film müziği ve resmi ayıklayın. Dosyayı yukarıda seçilen <em>Kayıt biçiminde</em> oluşturmak için bunları kullanın.</li>
+<li>Videoyu kaldır.</li>
+<li>(Oynatma listesindeki her video için tekrarlayın.)</li>
+<li>Bu dosyaları içeren dizini açmanıza izin veren bildirim gönder.</li>
+</ul>
+<p><a href="#Settings">Tüm Sekmeler</a></p>
+<p><a name="SchedulingTab"></a></p>
+<h3>Planlama</h3>
+<p>Bu sekmeye, içerik menüsündeki <em>Arkaplan kaydı planla...</em> seçeneği aracılığıyla doğrudan erişilebilir.</p>
+<p><img alt="Scheduling Settings1 Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshotsTR/Radio30_SchedulingTab_1.png" width="700px"></p>
+<p>Programlamak istediğiniz kaydın radyosunu, tarihini, saatini ve süresini seçin ve ardından düğmesine tıklayın.</p>
+<p>Kaydın gerçekleşmesi için Cinnamon oturumunuzun açık olması gerekmez; ama tabii ki bilgisayarınız açık olmalı.</p>
+<p>Her kaydın başlangıcı ve bitişi size bildirilecektir.</p>
+<p>Programlanmış kayıtların listesi aşağıdaki listede görünür. <em>Kaldırılsın mı?</em> kutusunu işaretleyerek ve <em>Seçili öğeleri kaldır</em> düğmesini tıklayarak bunlardan herhangi birini iptal edebilirsiniz.</p>
+<p><img alt="Scheduling Settings2 Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshotsTR/Radio30_SchedulingTab_2.png" width="700px"></p>
+<p><a href="#Settings">Tüm Sekmeler</a></p>
+<p><a name="PulseEffects"></a></p>
+<h2>İsteğe bağlı: PulseEffects'i yükleyin</h2>
+<p><em>PulseEffects</em>, sistem çapında gelişmiş bir ekolayzırdır
+<em>PulseAudio</em>. Çalışan tüm uygulamalara sistem çapında efektler uygulayabilir
+veya seçili uygulamalar.</p>
+<p><code>apt install libpulse-mainloop-glib0 libpulse0 libpulsedsp pulseaudio-equalizer pulseaudio-module-bluetooth pulseaudio-utils pulseaudio pavumeter pavucontrol paprefs gstreamer1.0-adapter-pulseeffects gstreamer1.0-autogain-pulseeffects gstreamer1.0-crystalizer-pulseeffects gstreamer1.0-convolver-pulseeffects pulseeffects</code></p>
+<p>Kurulduktan sonra PulseEffects'e Radio3.0 uygulamasının bağlamsal menüsünden erişilebilir.</p>
+<p><a href="#TOC">İçindekiler Tablosuna Dön</a></p>
+<hr>
+<p><a name="Annex"></a></p>
+<h2>Ek</h2>
+<p><a name="Annex1"></a></p>
+<h3>Ek 1: İçe aktarılabilir dosya biçimlerinin açıklaması</h3>
+<h4>Bir <code>.csv</code> dosyasının içeriği (örnek):</h4>
+<p><code>INC;NAME;URL</code><br>
+<code>true;Radio BluesFlac;https://streams.radiomast.io/radioblues-flac</code><br>
+<code>true;Digital Impulse - Blues;http://5.39.71.159:8990/stream</code>  </p>
+<p>Her satır, onu üç alana ayıran tam olarak iki noktalı virgül içermelidir.</p>
+<p>İlk satır, aşağıdaki alanlarda bulunan alanları tanımlar.<br>
+INC alanı bir boole içerir. Değeri (<em>true</em> veya <em>false</em>) içe aktarma için önemli değildir, ancak mevcut olması gerekir.<br>
+NAME alanı, radyo istasyonunun adını içerir. Noktalı virgül içermemelidir.<br>
+URL alanı, bu istasyonun akışının URL'sini içerir.</p>
+<h4>Bir <code>.m3u</code> dosyasının içeriği (örnek):</h4>
+<p><code>#EXTM3U</code><br>
+<code>#EXTINF:-1,1.FM - Otto's Baroque Music (www.1.fm)</code><br>
+<code>http://185.33.21.111:80/baroque_64</code><br>
+<code>#EXTINF:-1,1.FM - Otto's Baroque Music (www.1.fm)</code><br>
+<code>http://185.33.21.111:80/baroque_mobile_aac</code><br>
+<code>#EXTINF:-1,1.FM - Otto's Baroque Music (www.1.fm)</code><br>
+<code>http://185.33.21.111:80/baroque_128</code><br>
+<code>...v.b...</code>  </p>
+<p>İlk satır <code>#EXTM3U</code> olmalıdır.<br>
+Ardından, her istasyon bir çift satırla tanımlanır. "#EXTINF:-1" ile başlayan ve istasyon adıyla biten bir ilk satır. Akış URL'sini içeren ikinci bir satır.</p>
+<p>Not: <code>#EXTINF:</code>'den sonraki <code>-1</code>, parçanın süresinin bilinmediği anlamına gelir, bu bir radyo yayını için normaldir.</p>
+<h4>Bir <code>.xpfs</code> dosyasının içeriği (örnek):</h4>
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;playlist version="1" xmlns="http://xspf.org/ns/0/"&gt;&lt;title&gt;1.FM - Otto's Baroque Music (www.1.fm)&lt;/title&gt;&lt;trackList&gt;&lt;track&gt;&lt;location&gt;http://185.33.21.111:80/baroque_128&lt;/location&gt;&lt;title&gt;1.FM - Otto's Baroque Music (www.1.fm)&lt;/title&gt;&lt;/track&gt;&lt;track&gt;&lt;location&gt;http://185.33.21.111:80/baroque_64&lt;/location&gt;&lt;title&gt;1.FM - Otto's Baroque Music (www.1.fm)&lt;/title&gt;&lt;/track&gt;...other tracks...&lt;/trackList&gt;&lt;/playlist&gt;
+</code></pre>
+<p>Tüm veriler tek bir satıra kaydedilir. Burada daha anlaşılır bir şekilde sunulmuştur:</p>
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;playlist version="1" xmlns="http://xspf.org/ns/0/"&gt;
+    &lt;title&gt;1.FM - Otto's Baroque Music (www.1.fm)&lt;/title&gt;
+    &lt;trackList&gt;
+
+        &lt;track&gt;
+            &lt;location&gt;http://185.33.21.111:80/baroque_128&lt;/location&gt;
+            &lt;title&gt;1.FM - Otto's Baroque Music (www.1.fm)&lt;/title&gt;
+        &lt;/track&gt;
+
+        &lt;track&gt;
+            &lt;location&gt;http://185.33.21.111:80/baroque_64&lt;/location&gt;
+            &lt;title&gt;1.FM - Otto's Baroque Music (www.1.fm)&lt;/title&gt;
+        &lt;/track&gt;
+
+        ...diğer parçalar...
+    &lt;/trackList&gt;
+&lt;/playlist&gt;
+</code></pre>
+<p>İlk satır, XML sürümünü ve kullanılan karakter kodlamasını açıklar. XPFS biçimindeki tüm dosyalar bununla başlar.</p>
+<p>Oynatma listesi, <code>&lt;playlist&gt;</code> ve <code>&lt;/playlist&gt;</code> işaretlemeleri arasında tanımlanır.</p>
+<p>İlk <em>başlık</em> (<code>&lt;title&gt;</code> ile <code>&lt;/title&gt;</code> arasında), oynatma listesininkidir. (Bu durumda radyonun adıdır.)</p>
+<p>Parça listesi, <code>&lt;tracklist&gt;</code> ve <code>&lt;/tracklist&gt;</code> işaretlemeleri arasında bulunur.</p>
+<p>Her <em>parça</em>, bu sırayla bir <em>konum</em> - yani akışın URL'si - ve burada daha açık olabilecek bir <em>başlık</em> içerir. akışın bit hızını ve biçimini belirterek.</p>
+<h4>Bir <code>.pls</code> dosyasının içeriği (örnek):</h4>
+<pre><code>[playlist]
+numberofentries=8
+File1=http://185.33.21.111:80/baroque_mobile_aac
+Title1=1.FM - Otto's Baroque Music (www.1.fm)
+Length1=-1
+File2=http://185.33.21.111:80/baroque_64
+Title2=1.FM - Otto's Baroque Music (www.1.fm)
+Length2=-1
+...6 diğer girdiler...
+</code></pre>
+<p>Bir <code>.pls</code> dosyası, yalnızca <code>[playlist]</code> içeren bir satırla başlar.<br>
+İkinci satır, bu dosyanın 1'den 8'e kadar numaralandırılmış 8 giriş içerdiğini gösterir.</p>
+<p>Her giriş, birbirini izleyen 3 satırlık bir dizi ile tanımlanır. Her birinin rolü kolayca anlaşılabilir.</p>
+<p><a href="#FileToImport">"İçe aktarılacak dosya" bölümüne dönün</a></p>
+<p><a href="#">^</a></p>
+
+</body>
+</html>

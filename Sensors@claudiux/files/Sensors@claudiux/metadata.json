@@ -2,7 +2,7 @@
     "uuid": "Sensors@claudiux",
     "name": "Sensors Monitor",
     "description": "Displays the values of many computer sensors concerning Temperatures (CPU - GPU - Power Supply), Fan Speed, Voltages, Intrusions. Notifies you with color changes when a value reaches or exceeds its limit.",
-    "version": "1.5.0",
+    "version": "2.0.3",
     "max-instances": 1,
     "cinnamon-version": ["3.8", "4.0", "4.2", "4.4", "4.6", "4.8"]
 }

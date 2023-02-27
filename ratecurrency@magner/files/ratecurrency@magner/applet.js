@@ -10,6 +10,7 @@ const Gio = imports.gi.Gio; // files
 const Util = imports.misc.util; // button to go to the site (command line)
 const MainLoop = imports.mainloop; // for timer update loop
 const Soup = imports.gi.Soup; // http connection
+const ByteArray = imports.byteArray;
 
 // User variables
 const UUID = 'ratecurrency@magner';
@@ -46,8 +47,13 @@ const notify = modules.notifications.notify;
 const fiatImageDirectory = '/images/fiat_money/';
 const coinImageDirectory = '/images/coins/';
 
-const httpSession = new Soup.SessionAsync();
-Soup.Session.prototype.add_feature.call(httpSession, new Soup.ProxyResolverDefault());
+let httpSession;
+if (Soup.MAJOR_VERSION == 2) {
+    httpSession = new Soup.SessionAsync();
+    Soup.Session.prototype.add_feature.call(httpSession, new Soup.ProxyResolverDefault());
+} else { //version 3
+    httpSession = new Soup.Session();
+}
 
 class RateCurrencyApplet extends Applet.TextIconApplet {
   constructor(metadata, orientation, panel_height, instance_id) {
@@ -162,40 +168,63 @@ class RateCurrencyApplet extends Applet.TextIconApplet {
       return;
     }
 
+    const onConnectionFailed = () => {
+      this.connectionError('error');
+
+      this.connectionCounter += 1;
+
+      // second chance to connect if there was a server error
+      if (this.connectionCounter === 1) {
+        if (this.timeoutID) {
+          MainLoop.source_remove(this.timeoutID);
+          this.timeoutID = 0;
+        }
+
+        this.connectionError('reconnect');
+
+        this.timeoutID = MainLoop.timeout_add_seconds(3, Lang.bind(this, this.updateLabel));
+      }
+    };
+    
     const connection = Soup.Message.new('GET', url);
 
     if (this.cryptoConnect && key) {
-      connection.request_headers.append('X-CMC_PRO_API_KEY', key);
+      if (Soup.MAJOR_VERSION == 2) {
+        connection.request_headers.append('X-CMC_PRO_API_KEY', key);
+      } else { //version 3
+        connection.get_request_headers().append('X-CMC_PRO_API_KEY', key);
+      }
     }
 
-    httpSession.queue_message(connection, (session, response) => {
-      if (response.status_code !== Soup.KnownStatusCode.OK) {
-        this.connectionError('error');
+    if (Soup.MAJOR_VERSION == 2) {
+      httpSession.queue_message(connection, (session, response) => {
+        if (response.status_code !== Soup.KnownStatusCode.OK) {
+          global.logError(`Error during download: response code ${response.status_code}: ${response.reason_phrase} - ${response.response_body.data}`);
+          onConnectionFailed();
 
-        global.logError(`Error during download: response code ${response.status_code}: ${response.reason_phrase} - ${response.response_body.data}`);
-
-        this.connectionCounter += 1;
-
-        // second chance to connect if there was a server error
-        if (this.connectionCounter === 1) {
-          if (this.timeoutID) {
-            MainLoop.source_remove(this.timeoutID);
-            this.timeoutID = 0;
-          }
-
-          this.connectionError('reconnect');
-
-          this.timeoutID = MainLoop.timeout_add_seconds(3, Lang.bind(this, this.updateLabel));
+          return;
         }
 
-        return;
-      }
+        this.connectionCounter = 0;
 
-      this.connectionCounter = 0;
+        const { data } = response.response_body;
+        Lang.bind(this, callback)(data);
+      });
+    } else { //version 3
+      httpSession.send_and_read_async(connection, Soup.MessagePriority.NORMAL, null, (session, response) => {
+        if (connection.get_status() !== Soup.Status.OK) {
+          global.logError(`Error during download: response code ${connection.get_status()}: ${connection.get_reason_phrase()}`);
+          onConnectionFailed();
 
-      const { data } = response.response_body;
-      Lang.bind(this, callback)(data);
-    });
+          return;
+        }
+
+        this.connectionCounter = 0;
+
+        const bytes = httpSession.send_and_read_finish(response);
+        Lang.bind(this, callback)(ByteArray.toString(bytes.get_data()));
+      });
+    }
   }
 
   // server selection

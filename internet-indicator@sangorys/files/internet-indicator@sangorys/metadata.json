@@ -1,0 +1,6 @@
+{
+    "uuid": "internet-indicator@sangorys",
+    "name": "Internet connection Indicator",
+    "description": "Check your Internet connection (usefull to check if you are connected to Internet through a wifi hotspot. For instance when you are in a train)",
+    "max-instances": "-1"
+}

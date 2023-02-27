@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-26 18:09+0000\n"
-"PO-Revision-Date: 2019-12-26 18:19+0000\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2022-06-03 17:13+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: English <tanktarta@gmail.com>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: applet.js:209
@@ -23,14 +23,10 @@ msgid "Type to search..."
 msgstr "Digita per cercare ..."
 
 #: applet.js:302
-#, fuzzy
-#| msgid "Gnote stopped working"
 msgid "Gnote stopped working!"
-msgstr "Gnote ha smesso di funzionare"
+msgstr "Gnote ha smesso di funzionare!"
 
 #: applet.js:305
-#, fuzzy
-#| msgid "Gnote isn't running. Do you have it installed?"
 msgid "Gnote isn't running! Do you have it installed?"
 msgstr "Gnote non è in esecuzione. L'hai installato?"
 
@@ -48,14 +44,12 @@ msgid "GNote DBus service not found. Is GNote installed?"
 msgstr "Servizio GNote DBus non trovato. GNote è installato?"
 
 #: applet.js:425
-#, fuzzy
-#| msgid "Click to see error."
 msgid "Click to see error!"
-msgstr "Clicca per vedere l'errore."
+msgstr "Clicca per vedere l'errore!"
 
 #: applet.js:427
 msgid "Error: "
-msgstr "Errore:"
+msgstr "Errore: "
 
 #: applet.js:428
 msgid "Retry"

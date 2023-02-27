@@ -77,8 +77,10 @@ GPasteHistoryItem.prototype = {
         this._index = index;
 
         if (index != -1) {
-            this._applet.client.get_element(index, Lang.bind(this, function(client, result) {
-                this.label.set_text(client.get_element_finish(result).replace(/[\t\n\r]/g, ''));
+            this._applet.client.get_element_at_index(index, Lang.bind(this, function (client, result) {
+                let item = client.get_element_at_index_finish(result);
+                this._uuid = item.get_uuid();
+                this.label.set_text(item.get_value().replace(/[\t\n\r]/g, ''));
             }));
 
             this.actor.show();
@@ -89,10 +91,21 @@ GPasteHistoryItem.prototype = {
     },
 
     /*
+     * Refresh history item's content
+     */
+    refresh: function() {
+            this._applet.client.get_element_at_index(this._index, Lang.bind(this, function(client, result) {
+                let item = client.get_element_at_index_finish(result);
+                this._uuid = item.get_uuid();
+                this.label.set_text(item.get_value().replace(/[\t\n\r]/g, ''));
+            }));
+        },
+    
+    /*
      * Remove history item
      */
     remove: function() {
-        this._applet.client.delete(this._index, null);
+        this._applet.client.delete(this._uuid, null);
     },
 
     //
@@ -114,7 +127,7 @@ GPasteHistoryItem.prototype = {
      * Select history item
      */
     activate: function(event) {
-        this._applet.client.select(this._index, null);
+        this._applet.client.select(this._uuid, null);
         this._applet.menu.toggle();
     }
 };

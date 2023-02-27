@@ -40,7 +40,7 @@
  },
  "width": {
     "type": "scale",
-    "default" : 1,
+    "default" : 2,
     "min" : 1,
     "max" : 10,
     "step" : 1,
@@ -58,9 +58,19 @@
     "description" : "Border width",
     "tooltip" : "Select the border width"
  },
+  "margin": {
+    "type": "scale",
+    "default" : 0,
+    "min" : 0,
+    "max" : 10,
+    "step" : 1,
+    "units" : "pixels",
+    "description" : "Margin",
+    "tooltip" : "Select the margin"
+ },
   "custom-color":{
     "type" : "switch",
-    "default" : "false",
+    "default" : false,
     "description" : "Customize the applet colors",
     "tooltip" : "When this option is disabled, the applet will try to find the theme color"
  },

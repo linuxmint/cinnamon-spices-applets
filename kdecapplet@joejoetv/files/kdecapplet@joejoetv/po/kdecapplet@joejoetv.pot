@@ -1,0 +1,532 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-29 14:21+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:571
+msgid "No Modules available"
+msgstr ""
+
+#: applet.js:1008
+msgid "KDE Connect not available"
+msgstr ""
+
+#: applet.js:1011
+msgid "KDE Connect not available, make sure it's installed and running."
+msgstr ""
+
+#: applet.js:1015 applet.js:1028 applet.js:1202
+msgid "Reload Applet"
+msgstr ""
+
+#: applet.js:1020
+msgid "Invalid KDE Connect version returned!"
+msgstr ""
+
+#: applet.js:1021 applet.js:1024
+msgid ""
+"The KDE Connect DBus service returned an invalid version, please try "
+"reloading the Applet!"
+msgstr ""
+
+#: applet.js:1074
+msgid "No connected Devices!"
+msgstr ""
+
+#: applet.js:1074
+msgid "Add them in the KDE Connect settings"
+msgstr ""
+
+#: applet.js:1097
+msgid "Debug Stuff, don't touch!"
+msgstr ""
+
+#: applet.js:1186
+msgid "KDE Connect Version: {version}"
+msgstr ""
+
+#: applet.js:1193
+msgid "Own ID: {own_id}"
+msgstr ""
+
+#: applet.js:1195
+msgid "own ID"
+msgstr ""
+
+#: applet.js:1197
+msgid "Click to copy own ID"
+msgstr ""
+
+#: applet.js:1207
+msgid "Configure KDE Connect"
+msgstr ""
+
+#: applet.js:1209
+msgid "Click to open KDE Connect Configuration"
+msgstr ""
+
+#: applet.js:1253
+msgid "No available devices"
+msgstr ""
+
+#: applet.js:1255
+msgid "{deviceCount} available device"
+msgstr ""
+
+#: applet.js:1257
+msgid "{deviceCount} available devices"
+msgstr ""
+
+#: js/commonUtils.js:223
+msgid "Copied {typestring} to the clipboard"
+msgstr ""
+
+#: js/modules.js:643
+msgid "Charging"
+msgstr ""
+
+#: js/modules.js:723
+msgid "ID: {id}"
+msgstr ""
+
+#: js/modules.js:727
+msgid "Device ID"
+msgstr ""
+
+#: js/modules.js:731
+msgid "Click to copy ID"
+msgstr ""
+
+#: js/modules.js:801
+msgid "No Signal"
+msgstr ""
+
+#: js/modules.js:804
+msgid "Low"
+msgstr ""
+
+#: js/modules.js:807
+msgid "Ok"
+msgstr ""
+
+#: js/modules.js:810
+msgid "Good"
+msgstr ""
+
+#: js/modules.js:813
+msgid "Excellent"
+msgstr ""
+
+#: js/modules.js:825
+msgid "Unknown"
+msgstr ""
+
+#: js/modules.js:876
+msgid "Ring device"
+msgstr ""
+
+#: js/modules.js:877
+msgid "Click to ring the device"
+msgstr ""
+
+#: js/modules.js:953
+msgid "Photo received from '{deviceName}'"
+msgstr ""
+
+#: js/modules.js:953 js/modules.js:1123
+msgid "Click to open in default application"
+msgstr ""
+
+#: js/modules.js:962
+msgid "Request Photo"
+msgstr ""
+
+#: js/modules.js:963
+msgid "Click to request a photo from the device"
+msgstr ""
+
+#: js/modules.js:1010
+msgid "Ping!"
+msgstr ""
+
+#: js/modules.js:1017
+msgid "Sent ping to device '{deviceName}'"
+msgstr ""
+
+#: js/modules.js:1023
+msgid "Ping Device"
+msgstr ""
+
+#: js/modules.js:1024
+msgid "Click to send a ping to the device"
+msgstr ""
+
+#: js/modules.js:1123
+msgid "Share received from '{deviceName}'"
+msgstr ""
+
+#: js/modules.js:1158
+msgid "Share"
+msgstr ""
+
+#: js/modules.js:1171
+msgid "Send URL"
+msgstr ""
+
+#: js/modules.js:1172
+msgid "Click to send a URL to the device"
+msgstr ""
+
+#: js/modules.js:1181
+msgid "Send Text"
+msgstr ""
+
+#: js/modules.js:1182 js/modules.js:1451
+msgid "Click to send text to the device"
+msgstr ""
+
+#: js/modules.js:1191
+msgid "Send File(s)"
+msgstr ""
+
+#: js/modules.js:1192
+msgid "Click to send file(s) to the device"
+msgstr ""
+
+#: js/modules.js:1245
+msgid "Unmount"
+msgstr ""
+
+#: js/modules.js:1247
+msgid "Mount"
+msgstr ""
+
+#: js/modules.js:1253
+msgid "Click to unmount"
+msgstr ""
+
+#: js/modules.js:1255
+msgid "Click to mount"
+msgstr ""
+
+#: js/modules.js:1328
+msgid "Click to browse files"
+msgstr ""
+
+#: js/modules.js:1429
+msgid "SMS"
+msgstr ""
+
+#: js/modules.js:1442
+msgid "Launch SMS App"
+msgstr ""
+
+#: js/modules.js:1443
+msgid "Click to open the KDE Connect SMS App"
+msgstr ""
+
+#: js/modules.js:1450
+msgid "Send SMS"
+msgstr ""
+
+#: py/dialogs.py:40
+#, python-brace-format
+msgid "Send URL to '{device_name}'"
+msgstr ""
+
+#: py/dialogs.py:47 py/dialogs.py:103 py/dialogs.py:166
+msgid "Cancel"
+msgstr ""
+
+#: py/dialogs.py:50 py/dialogs.py:106 py/dialogs.py:169
+msgid "Send"
+msgstr ""
+
+#: py/dialogs.py:57
+#, python-brace-format
+msgid "Enter a URL to send to '{device_name}'"
+msgstr ""
+
+#: py/dialogs.py:61
+msgid "URL"
+msgstr ""
+
+#: py/dialogs.py:96
+#, python-brace-format
+msgid "Send SMS using '{device_name}'"
+msgstr ""
+
+#: py/dialogs.py:113
+msgid "Phone Number:"
+msgstr ""
+
+#: py/dialogs.py:117
+msgid "Phone Number"
+msgstr ""
+
+#: py/dialogs.py:119
+msgid "Message:"
+msgstr ""
+
+#: py/dialogs.py:159
+#, python-brace-format
+msgid "Send text to '{device_name}'"
+msgstr ""
+
+#: py/dialogs.py:176
+msgid "Text to send:"
+msgstr ""
+
+#: py/dialogs.py:222
+#, python-brace-format
+msgid "Select files to send to '{deviceName}'"
+msgstr ""
+
+#: py/dialogs.py:283
+#, python-brace-format
+msgid "Select where to save photo received from '{deviceName}'"
+msgstr ""
+
+#: py/dialogs.py:287
+msgid "photo.jpg"
+msgstr ""
+
+#: py/dialogs.py:290
+msgid "JPEG Photo"
+msgstr ""
+
+#. metadata.json->name
+msgid "KDE Connect Applet"
+msgstr ""
+
+#. metadata.json->description
+msgid "Enables interacting with devices connected via KDE Connect"
+msgstr ""
+
+#. metadata.json->comments
+msgid ""
+"KDE Connect Applet makes it easy to use the various features provided by KDE"
+" Connect to interact with connected devices, like sending files, sending SMS"
+" messages, browsing the storage of the device and more"
+msgstr ""
+
+#. metadata.json->contributors
+msgid "Johannes Schoeneberger - Author"
+msgstr ""
+
+#. metadata.json->contributors
+msgid "Severga - Inspiration for the Applet"
+msgstr ""
+
+#. settings-schema.json->general-page->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->modules-page->title
+msgid "Modules"
+msgstr ""
+
+#. settings-schema.json->contextmenu-section->title
+msgid "Context Menu"
+msgstr ""
+
+#. settings-schema.json->panel-section->title
+msgid "Panel"
+msgstr ""
+
+#. settings-schema.json->appearance-section->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->other-section->title
+msgid "Other"
+msgstr ""
+
+#. settings-schema.json->battery-module-section->title
+msgid "Battery Info Module"
+msgstr ""
+
+#. settings-schema.json->deviceinfo-module-section->title
+msgid "Device Info Module"
+msgstr ""
+
+#. settings-schema.json->connectivity-module-section->title
+msgid "Connectivity Info Module"
+msgstr ""
+
+#. settings-schema.json->findmyphone-module-section->title
+msgid "FindMyPhone Action Module"
+msgstr ""
+
+#. settings-schema.json->requestphoto-module-section->title
+msgid "Request-Photo Action Module"
+msgstr ""
+
+#. settings-schema.json->ping-module-section->title
+msgid "Ping Action Module"
+msgstr ""
+
+#. settings-schema.json->share-module-section->title
+msgid "Share Action Module"
+msgstr ""
+
+#. settings-schema.json->sftp-module-section->title
+msgid "SFTP Action Module"
+msgstr ""
+
+#. settings-schema.json->sms-module-section->title
+msgid "SMS Action Module"
+msgstr ""
+
+#. settings-schema.json->showownid->description
+msgid "Show own ID in the context menu of the applet"
+msgstr ""
+
+#. settings-schema.json->showkdecver->description
+msgid "Show KDE Connect version in the context menu of the applet"
+msgstr ""
+
+#. settings-schema.json->shownumdevices->description
+msgid "Show the number of connected devices next to the icon in the panel"
+msgstr ""
+
+#. settings-schema.json->icontype->description
+msgid "Icon type"
+msgstr ""
+
+#. settings-schema.json->icontype->options
+msgid "Symbolic"
+msgstr ""
+
+#. settings-schema.json->icontype->options
+msgid "Color"
+msgstr ""
+
+#. settings-schema.json->usecustomicon->description
+msgid "Use custom icon"
+msgstr ""
+
+#. settings-schema.json->customicon->description
+msgid "Custom icon to use"
+msgstr ""
+
+#. settings-schema.json->expandfirst->description
+msgid "Expand the first device sub menu automatically"
+msgstr ""
+
+#. settings-schema.json->openconfiguration->description
+msgid "Open KDE Connect Configuration"
+msgstr ""
+
+#. settings-schema.json->tooltipdevicecount->description
+msgid "Show the device count in the tooltip of the applet"
+msgstr ""
+
+#. settings-schema.json->battery-module-description->description
+msgid "Shows the current battery charge and charging status of the device"
+msgstr ""
+
+#. settings-schema.json->battery-module-enabled->description
+#. settings-schema.json->deviceinfo-module-enabled->description
+#. settings-schema.json->connectivity-module-enabled->description
+#. settings-schema.json->findmyphone-module-enabled->description
+#. settings-schema.json->requestphoto-module-enabled->description
+#. settings-schema.json->ping-module-enabled->description
+#. settings-schema.json->share-module-enabled->description
+#. settings-schema.json->sftp-module-enabled->description
+#. settings-schema.json->sms-module-enabled->description
+msgid "Module enabled"
+msgstr ""
+
+#. settings-schema.json->deviceinfo-module-description->description
+msgid "Shows the device icon along with its ID"
+msgstr ""
+
+#. settings-schema.json->connectivity-module-description->description
+msgid "Shows the current connectivity status and network type of the device"
+msgstr ""
+
+#. settings-schema.json->connectivity-module-showNetworkType->description
+msgid "Show the mobile network type"
+msgstr ""
+
+#. settings-schema.json->findmyphone-module-description->description
+msgid ""
+"Lets you make the device ring, so you can find it, if you have misplaced it"
+msgstr ""
+
+#. settings-schema.json->requestphoto-module-description->description
+msgid ""
+"Lets you request a photo from the remote device and save it on this device"
+msgstr ""
+
+#. settings-schema.json->requestphoto-module-saveToDir->description
+msgid "Save received photos directly to directory"
+msgstr ""
+
+#. settings-schema.json->requestphoto-module-saveDirectory->description
+msgid "The directory to save received photos to"
+msgstr ""
+
+#. settings-schema.json->ping-module-description->description
+msgid "Lets you ping the the device to make sure it's connected"
+msgstr ""
+
+#. settings-schema.json->ping-module-useCustomMessage->description
+msgid "Use custom message for ping"
+msgstr ""
+
+#. settings-schema.json->ping-module-customMessage->description
+msgid "Custom message"
+msgstr ""
+
+#. settings-schema.json->share-module-description->description
+msgid "Lets you share URLs, files or text to the device"
+msgstr ""
+
+#. settings-schema.json->share-module-useSubMenu->description
+#. settings-schema.json->sms-module-useSubMenu->description
+msgid "Show menu items in sub menu"
+msgstr ""
+
+#. settings-schema.json->share-module-enableSendURL->description
+msgid "Enable the menu item to send a URL"
+msgstr ""
+
+#. settings-schema.json->share-module-enableSendText->description
+msgid "Enable the menu item to send some text"
+msgstr ""
+
+#. settings-schema.json->share-module-enableSendFiles->description
+msgid "Enable the menu item to send file(s)"
+msgstr ""
+
+#. settings-schema.json->sftp-module-description->description
+msgid "Lets you remotely browse the storage selected on the device"
+msgstr ""
+
+#. settings-schema.json->sms-module-description->description
+msgid "Lets you remotely send SMS messages from the device"
+msgstr ""
+
+#. settings-schema.json->sms-module-enableSendSMS->description
+msgid "Enable the menu item to send an SMS message"
+msgstr ""
+
+#. settings-schema.json->sms-module-enableLaunchSMSApp->description
+msgid "Enable the menu item to launch the KDE Connect SMS app"
+msgstr ""

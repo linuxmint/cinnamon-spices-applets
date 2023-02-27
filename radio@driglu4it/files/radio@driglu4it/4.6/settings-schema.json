@@ -51,6 +51,7 @@
 			"keys": [
 				"icon-type",
 				"color-on",
+				"color-paused",
 				"channel-on-panel"
 			]
 		},
@@ -64,8 +65,9 @@
 		},
 		"youtube-section": {
 			"type": "section",
-			"title": "Youtube Download",
+			"title": "YouTube Download",
 			"keys": [
+				"youtube-download-cli",
 				"music-download-dir-select"
 			]
 		}
@@ -93,28 +95,30 @@
 		],
 		"default": [
 			{
-				"name": "Chillout",
-				"url": "http://ic7.101.ru:8000/c15_3",
+				"name": "Smooth Chill",
+				"url": "https://media-ssl.musicradio.com/ChillMP3",
 				"inc": true
 			},
 			{
 				"name": "Austrian Rock Radio",
 				"url": "http://live.antenne.at/arr",
 				"inc": true
+			},{
+				"name": "Rádio KIKS Rock", 
+				"url": "https://stream.radiokiks.sk/kiks_rock.mp3", 
+				"inc": true
+			},
+			{
+				"name": "Radio BOB", 
+				"url": "http://live6.infonetmedia.si/Europa05", 
+				"inc": true
+			},
+			{
+				"name": "Deep House Radio",
+				"url": "http://62.210.105.16:7000/stream",
+				"inc": true
 			}
 		]
-	},
-	"streamurl-button": {
-		"type": "button",
-		"description": "Open radio stream URL search engine",
-		"callback": "on_streamurl_button_pressed",
-		"tooltip": "Opens a website, which helps you to determine radio stream URLs."
-	},
-	"radiolist-button": {
-		"type": "button",
-		"description": "Show URL-list of radio stations",
-		"callback": "on_radiolist_button_pressed",
-		"tooltip": "Opens a website, which lists URLs of radio stations."
 	},
 	"icon-type": {
 		"type": "combobox",
@@ -128,9 +132,15 @@
 	},
 	"color-on": {
 		"type": "colorchooser",
-		"default": "#73d216",
+		"default": "#27ae60",
 		"dependency": "icon-type=SYMBOLIC",
 		"description": "Color of symbolic icon when playing a radio station"
+	},
+	"color-paused": {
+		"type": "colorchooser",
+		"default": "#9fe1e7",
+		"dependency": "icon-type=SYMBOLIC",
+		"description": "Color of symbolic icon while a radio station is paused"
 	},
 	"channel-on-panel": {
 		"type": "checkbox",
@@ -160,19 +170,28 @@
 	"last-url": {
 		"type": "generic",
 		"value": null,
-		"dfault": null
+		"default": null
+	},
+	"youtube-download-cli": {
+		"type": "combobox", 
+		"description": "YouTube Download CLI tool", 
+		"tooltip": "The CLI tool used to download songs from YouTube", 
+		"default": "youtube-dl",
+		"options": {
+			"yt-dlp": "yt-dlp", 
+			"youtube-dl": "youtube-dl"
+		}
 	},
 	"music-download-dir-select": {
 		"type": "filechooser",
 		"description": "Download directory",
-		"tooltip": "Songs downloaded from Youtube will be saved to this directory. This feature can be found in the right-click-menu of the applet",
+		"tooltip": "Songs downloaded from YouTube will be saved to this directory.",
 		"default": "~/Music/Radio",
 		"select-dir": true
 	},
 	"radio-search-widget": {
 		"type": "custom",
 		"file": "RadioSearchWidget.py",
-		"widget": "RadioSearchWidget",
-		"description": "Try out this custom widget!"
+		"widget": "RadioSearchWidget"
 	}
 }

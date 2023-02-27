@@ -47,7 +47,8 @@
 			"title": "Help",
 			"sections": [
 				"more-info",
-				"submit-issue"
+				"submit-issue",
+				"debug-options"
 			]
 		},
 		"location-section": {
@@ -92,7 +93,8 @@
 			"keys": [
 				"showTextInPanel",
 				"showCommentInPanel",
-				"tempTextOverride"
+				"tempTextOverride",
+				"tooltipTextOverride"
 			]
 		},
 		"presentation": {
@@ -102,6 +104,7 @@
 				"verticalOrientation",
 				"forecastColumns",
 				"forecastRows",
+				"alwaysShowHourlyWeather",
 				"showSunrise",
 				"show24Hours",
 				"showForecastDates",
@@ -161,6 +164,14 @@
 				"submitIssue",
 				"maintainer"
 			]
+		},
+		"debug-options": {
+			"type": "section",
+			"title": "Debug",
+			"keys": [
+				"logLevel",
+				"fileSelect"
+			]
 		}
 	},
 	"keybinding": {
@@ -176,15 +187,16 @@
 		"options": {
 			"OpenWeatherMap": "OpenWeatherMap",
 			"MET Norway": "MetNorway",
-			"Yahoo": "Yahoo",
 			"DMI Denmark": "DanishMI",
+			"Deutscher Wetterdienst (Germany only)": "DeutscherWetterdienst",
 			"Met Office UK (UK only)": "Met Office UK",
 			"US National Weather (US only)": "US Weather",
 			"Visual Crossing (key needed)": "Visual Crossing",
 			"Weatherbit (key needed)": "Weatherbit",
-			"ClimacellV4 (key needed)": "ClimacellV4",
+			"Tomorrow.io (key needed)": "Tomorrow.io",
 			"DarkSky (key needed)": "DarkSky",
-			"ClimacellV3 (key needed)": "Climacell"
+			"AccuWeather (key needed)": "AccuWeather",
+			"Weather Underground (key needed)": "WeatherUnderground"
 		}
 	},
 	"apiKey": {
@@ -238,7 +250,7 @@
 		"units": "days",
 		"step": 1,
 		"description": "Forecast length",
-		"tooltip": "Maximum number of days that can be displayed, maximum rows and columns setting in the Presentation tab will affect the final number."
+		"tooltip": "Maximum number of days that can be displayed, available number of data, maximum rows and columns setting in the Presentation tab will affect the final number."
 	},
 	"forecastHours": {
 		"type": "spinbutton",
@@ -247,13 +259,14 @@
 		"max": 168,
 		"units": "hours",
 		"step": 1,
-		"description": "Hourly Forecast length"
+		"description": "Hourly Forecast length",
+		"tooltip": "Maximum number of hours that can be displayed, available numbers of data will affect the final number."
 	},
 	"immediatePrecip": {
 		"type": "checkbox",
 		"default": false,
 		"description": "Enable minutely precipitation forecast",
-		"tooltip": "If you'd like to use this make sure you use your exact coordinates/address as location to help its accuracy. Currently implemented with OpenWeatherMap only."
+		"tooltip": "If you'd like to use this make sure you use your exact coordinates/address as location to help its accuracy. Currently implemented with OpenWeatherMap and MET Norway only."
 	},
 	"temperatureUnit": {
 		"type": "radiogroup",
@@ -316,7 +329,7 @@
 	},
 	"showCommentInPanel": {
 		"type": "checkbox",
-		"default": true,
+		"default": false,
 		"description": "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel",
 		"tooltip": "Only works with horizontal panels"
 	},
@@ -324,13 +337,25 @@
 		"type": "entry",
 		"default": "",
 		"description": "Override label on panel",
-		"tooltip": "Available values are: {c} is condition, {t} is temperature and {u} is unit.\nCan be used if label does not fit on vertical panel, among other smart things."
+		"tooltip": "Some of the available values are: {c} is condition, {t} is temperature and {u} is unit.\nCan be used if label does not fit on vertical panel, among other smart things."
+	},
+	"tooltipTextOverride": {
+		"type": "entry",
+		"default": "",
+		"description": "Override tooltip on panel",
+		"tooltip": "Has the same behavior and available values as 'Override label on panel'."
 	},
 	"useCustomAppletIcons": {
 		"type": "checkbox",
 		"default": false,
 		"tooltip": "Iconset is weather-icons by Erik Flowers",
 		"description": "Use custom icons on the panel"
+	},
+	"alwaysShowHourlyWeather": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Always show Hourly Weather",
+		"tooltip": "Hide/Show button will be hidden and Hourly weather will be permanently visible."
 	},
 	"verticalOrientation": {
 		"type": "checkbox",
@@ -340,7 +365,7 @@
 	},
 	"forecastColumns": {
 		"type": "spinbutton",
-		"default": 5,
+		"default": 4,
 		"min": 1,
 		"max": 16,
 		"units": "columns",
@@ -484,10 +509,34 @@
 	},
 	"issue-reporting-explanation": {
 		"type": "label",
-		"description": "If you find an issue with this applet please make a report by clicking on the button below and login in with your Github account. Before you start writing please make sure that the issue is not already submitted in the issues section. Don't forget to write weather@mockturtl in the top Title field to make it easier for everyone to know that the issue is about the weather applet (the form is for all Cinnamon applets)."
+		"description": "If you find an issue with this applet please make a report by clicking on the button below and login in with your Github account.\n\nBefore you start writing please make sure that the issue is not already submitted in the issues section and review your prefilled details in the issue description. Don't forget to add a short description in the top Title field next to the applet's name to make it easier for everyone to know what the issue is about. Logs with Debug level (which can be saved to a file below) are also appreciated."
 	},
 	"loc-info": {
 		"type": "label",
 		"description": "Your location in most cases work automatically but you can enter it manually by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}. The search algorithm is very flexible with the format. After 3 seconds without typing the address you entered is replaced automatically for validating your choice."
-	}
+	},
+	"logLevel": {
+		"type": "combobox",
+		"default": "info",
+		"description": "Log Level",
+		"tooltip": "Info is the regular logging, Debug is debug, and Verbose also logs network request payloads. Changing this will only be effective on future logs. Only change it you are instructed or you know what you are doing.",
+		"options": {
+			"Info": "info",
+			"Debug": "debug",
+			"Verbose": "verbose"
+		}
+	},
+	"fileSelect" : {
+        "type" : "custom",
+        "file" : "LogSaver.py",
+        "widget" : "FileSaver",
+        "description" : "Click Save to save debug information to a file",
+		"tooltip": "This includes logs for the applet and the current settings with your API key redacted."
+    },
+	"selectedLogPath" : {
+        "type": "entry",
+		"default": "",
+		"description": "Selected path to save Logs",
+		"value": ""
+    }
 }

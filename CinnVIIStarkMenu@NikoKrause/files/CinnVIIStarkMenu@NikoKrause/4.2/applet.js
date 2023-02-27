@@ -378,7 +378,7 @@ class ApplicationContextMenuItem extends PopupMenu.PopupBaseMenuItem {
                 break;
             case "add_to_desktop":
                 let file = Gio.file_new_for_path(this._appButton.app.get_app_info().get_filename());
-                let destFile = Gio.file_new_for_path(USER_DESKTOP_PATH+"/"+this._appButton.app.get_id());
+                let destFile = Gio.file_new_for_path(USER_DESKTOP_PATH+"/"+file.get_basename());
                 try{
                     file.copy(destFile, 0, null, function(){});
                     FileUtils.changeModeGFile(destFile, 755);
@@ -1080,6 +1080,9 @@ class TextBoxItem extends AppPopupSubMenuMenuItem {
                 icon_type: St.IconType.FULLCOLOR,
             });
 
+            if (this.icon.search("-symbolic") != -1)
+                this.name_icon.icon_type = St.IconType.SYMBOLIC
+
             let iconFileName = this.icon;
             let iconFile = Gio.file_new_for_path(iconFileName);
             let icon;
@@ -1312,13 +1315,9 @@ HoverIcon.prototype = {
                 let iconFile = Gio.file_new_for_path(iconFileName);
                 let icon;
                 if (iconFile.query_exists(null)) {
-                    icon = new Gio.FileIcon({
-                        file: iconFile
-                    });
+                    icon = new Gio.FileIcon({file: iconFile});
                 } else {
-                    icon = new Gio.ThemedIcon({
-                        name: 'avatar-default'
-                    });
+                    icon = new Gio.ThemedIcon({name: 'avatar-default'});
                 }
                 this._userIcon.set_gicon(icon);
                 this.icon.hide();
@@ -1329,6 +1328,11 @@ HoverIcon.prototype = {
 
     _refresh: function(icon) {
         this._userIcon.hide();
+
+        if (icon.search("-symbolic") != -1)
+            this.icon.icon_type = St.IconType.SYMBOLIC
+        else
+            this.icon.icon_type = St.IconType.FULLCOLOR
 
         let iconFileName = icon;
         let iconFile = Gio.file_new_for_path(iconFileName);
@@ -3282,8 +3286,8 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                                                     type: 'recent-clear',
                                                     styleClass: 'menu-application-button' });
             button.addIcon(APPLICATION_ICON_SIZE, 'edit-clear', null, true);
-            button.addLabel("", 'menu-application-button-label');
-            button.label.clutter_text.set_markup(`<b>${button.name}</b>`);
+            button.addLabel(button.name, 'menu-application-button-label');
+            button.label.set_style('font-weight: bold;');
             button.activate = () => {
                 this.menu.close();
                 (new Gtk.RecentManager()).purge_items();

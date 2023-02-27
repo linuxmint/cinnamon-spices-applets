@@ -1,4 +1,12 @@
+import { DateTime } from "luxon";
+import { GetTimesResult } from "suncalc";
 import { Services } from "./config";
+
+export type correctGetTimes = (date: Date, latitude: number, longitude: number, height?: number) => GetTimesResult;
+export interface SunTime {
+	sunrise: DateTime;
+	sunset: DateTime;
+}
 
 /**
  * A WeatherProvider must implement this interface.
@@ -10,8 +18,11 @@ export interface WeatherProvider {
 	readonly maxForecastSupport: number;
 	readonly maxHourlyForecastSupport: number;
 	readonly website: string;
+	readonly remainingCalls: number | null;
+	readonly supportHourlyPrecipChance: boolean;
+    readonly supportHourlyPrecipVolume: boolean;
 
-	GetWeather(loc: LocationData): Promise<WeatherData>;
+	GetWeather(loc: LocationData): Promise<WeatherData | null>;
 }
 
 export const enum RefreshState {
@@ -22,96 +33,114 @@ export const enum RefreshState {
 }
 
 export interface WeatherData {
-	date: Date;
+	date: DateTime;
 	coord: {
 		lat: number,
 		lon: number,
 	};
 	location: {
-		city?: string,
-		country?: string,
-		timeZone?: string,
-		url: string,
-		/** in metres */
-		distanceFrom?: number,
-		tzOffset?: number
+		city?: string | undefined,
+		country?: string | undefined,
+		timeZone?: string | undefined,
+		url?: string | undefined,
+		tzOffset?: number | undefined
 	},
+	stationInfo?: {
+		/** in metres */
+		distanceFrom: number | undefined,
+		name?: string | undefined,
+		lat?: number,
+		lon?: number,
+		area?: string
+	} | undefined,
 	/** preferably in UTC */
-	sunrise: Date,
+	sunrise: DateTime | null,
 	/** preferably in UTC */
-	sunset: Date,
+	sunset: DateTime | null,
 	wind: {
 		/** Meter/sec */
-		speed: number,
+		speed: number | null,
 		/** Meteorological Degrees */
-		degree: number,
+		degree: number | null,
 	};
 	/** In Kelvin */
-	temperature: number;
+	temperature: number | null;
 	/** In hPa */
-	pressure: number;
+	pressure: number | null;
 	/** In percent */
-	humidity: number;
+	humidity: number | null;
+	/** In kelvin */
+	dewPoint: number | null;
 	condition: Condition
 	forecasts: ForecastData[];
-	hourlyForecasts?: HourlyForecastData[]
-	extra_field?: APIUniqueField;
+	hourlyForecasts?: HourlyForecastData[] | undefined
+	extra_field?: APIUniqueField | undefined;
 	immediatePrecipitation?: ImmediatePrecipitation;
 }
 
 
-export interface APIUniqueField {
-	name: string,
-	/**
-	 * Refer to the type 
-	 */
-	value: any,
-	type: ExtraField
+export type APIUniqueField = NumberAPIUniqueField | StringAPIUniqueField;
+
+interface BaseAPIUniqueField {
+	name: string;
+	type: ExtraField;
 }
 
-/** 
+interface NumberAPIUniqueField extends BaseAPIUniqueField {
+	value: number;
+	type: Extract<ExtraField, "temperature" | "percent">
+}
+
+interface StringAPIUniqueField extends BaseAPIUniqueField {
+	value: string;
+	type: Extract<ExtraField, "string">
+}
+
+
+/**
  * percent: value is a number from 0-100 (or more)
- * 
+ *
  * temperature: value is number in Kelvin
- * 
+ *
  * string:  is a string
 */
 type ExtraField = "percent" | "temperature" | "string";
 
 export interface ForecastData {
 	/** Set to 12:00 if possible */
-	date: Date,
+	date: DateTime,
 	/** Kelvin */
-	temp_min: number,
+	temp_min: number | null,
 	/** Kelvin */
-	temp_max: number,
+	temp_max: number | null,
 	condition: Condition
 }
 
 export type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
 export interface HourlyForecastData {
 	/** Set to 12:00 if possible */
-	date: Date;
+	date: DateTime;
 	/** Kelvin */
-	temp: number;
+	temp: number | null;
 	condition: Condition;
-	precipitation?: Precipitation;
+	precipitation?: Precipitation | undefined;
 }
 
 export interface Precipitation {
 	type: PrecipitationType,
 	/** in mm */
-	volume?: number,
+	volume?: number | undefined,
 	/** % */
-	chance?: number
+	chance?: number | undefined
 }
 
 type LocationSource = "ip-api" | "address-search" | "manual";
 export interface LocationData {
 	lat: number;
 	lon: number;
-	city: string;
-	country: string;
+	city?: string | undefined;
+	country?: string | undefined;
+	/** Always set, if not available system tz is provided */
 	timeZone: string;
 	entryText: string;
 }
@@ -127,7 +156,7 @@ export interface AppletError {
 }
 
 /** hard will not force a refresh and cleans the applet ui.
- * 
+ *
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 export type ErrorSeverity = "hard" | "soft" | "silent";
@@ -146,13 +175,13 @@ export interface Condition {
 	/** Long Description */
 	description: string,
 	/** GTK icon name, descending from most fit to least fit.
-	 * needs mutiple in case one/some of them are not available
+	 * needs multiple in case one/some of them are not available
 	 */
 	icons: BuiltinIcons[],
 	customIcon: CustomIcons
 }
 
-/** Immediate precipitation for the next hour, currenlty only OpenWeatherMap uses it.
+/** Immediate precipitation for the next hour, currently only OpenWeatherMap uses it.
  */
 export interface ImmediatePrecipitation {
 	/** Precipitation in * minutes */

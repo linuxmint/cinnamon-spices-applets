@@ -1,0 +1,648 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-29 19:16+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Type to search..."
+msgstr ""
+
+msgid "Initializing"
+msgstr ""
+
+msgid "No description available"
+msgstr ""
+
+msgid "All applications"
+msgstr ""
+
+msgid "Places"
+msgstr ""
+
+msgid "Recent files"
+msgstr ""
+
+msgid "Bookmarks"
+msgstr ""
+
+msgid "Favorite apps"
+msgstr ""
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr ""
+
+msgid "Clear List"
+msgstr ""
+
+msgid "No recent files"
+msgstr ""
+
+msgid "Account details"
+msgstr ""
+
+msgid "Grid View"
+msgstr ""
+
+msgid "List View"
+msgstr ""
+
+msgid "Switch to grid view"
+msgstr ""
+
+msgid "Switch to list view"
+msgstr ""
+
+msgid "Lock screen"
+msgstr ""
+
+msgid "Lock the screen"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Leave the session"
+msgstr ""
+
+msgid "Quit"
+msgstr ""
+
+msgid "Shutdown the computer"
+msgstr ""
+
+msgid "Run with NVIDIA GPU"
+msgstr ""
+
+msgid "Add to panel"
+msgstr ""
+
+msgid "Add to desktop"
+msgstr ""
+
+msgid "Remove from favorites"
+msgstr ""
+
+msgid "Add to favorites"
+msgstr ""
+
+msgid "Uninstall"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Computer"
+msgstr ""
+
+msgid "Browse network"
+msgstr ""
+
+msgid "Find files..."
+msgstr ""
+
+msgid "Please wait..."
+msgstr ""
+
+msgid "Applications"
+msgstr ""
+
+msgid "Documents"
+msgstr ""
+
+msgid "Videos"
+msgstr ""
+
+msgid "Images"
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
+msgid "No recent Items"
+msgstr ""
+
+msgid "Click to copy"
+msgstr ""
+
+msgid "Applications and files"
+msgstr ""
+
+msgid "Other search results"
+msgstr ""
+
+msgid "Browser history"
+msgstr ""
+
+msgid "Browser bookmarks"
+msgstr ""
+
+msgid "Emoji"
+msgstr ""
+
+msgid "Trash"
+msgstr ""
+
+msgid "Error while opening file:"
+msgstr ""
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr ""
+
+msgid "Favorites"
+msgstr ""
+
+msgid "Recent"
+msgstr ""
+
+msgid "Home folder"
+msgstr ""
+
+msgid "Reset category order"
+msgstr ""
+
+msgid "light skin tone"
+msgstr ""
+
+msgid "medium-light skin tone"
+msgstr ""
+
+msgid "medium skin tone"
+msgstr ""
+
+msgid "medium-dark skin tone"
+msgstr ""
+
+msgid "dark skin tone"
+msgstr ""
+
+msgid "This file is no longer available"
+msgstr ""
+
+msgid "Open with"
+msgstr ""
+
+msgid "Other application..."
+msgstr ""
+
+msgid "Open containing folder"
+msgstr ""
+
+msgid "Move to trash"
+msgstr ""
+
+msgid "Error while moving file to trash:"
+msgstr ""
+
+msgid "Smileys & Emotion"
+msgstr ""
+
+msgid "People & Body"
+msgstr ""
+
+msgid "Animals & Nature"
+msgstr ""
+
+msgid "Food & Drink"
+msgstr ""
+
+msgid "Travel & Places"
+msgstr ""
+
+msgid "Activities"
+msgstr ""
+
+msgid "Objects"
+msgstr ""
+
+msgid "Symbols"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+
+msgid "The following packages will be removed:"
+msgstr ""
+
+msgid "Packages to be removed"
+msgstr ""
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr ""
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr ""
+
+msgid "Open"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Start in"
+msgstr ""
+
+msgid "Select a folder"
+msgstr ""
+
+msgid "Follow symlinks"
+msgstr ""
+
+msgid "Search hidden"
+msgstr ""
+
+msgid "Use regular expressions"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Path"
+msgstr ""
+
+msgid "Searching..."
+msgstr ""
+
+msgid "Search Stopped"
+msgstr ""
+
+msgid "Searching: "
+msgstr ""
+
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+msgid "Search Completed"
+msgstr ""
+
+msgid "Skipping"
+msgstr ""
+
+msgid " - directory already searched"
+msgstr ""
+
+msgid "Cinnamenu"
+msgstr ""
+
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+
+msgid "Behavior"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
+
+msgid "Layout and Content"
+msgstr ""
+
+msgid "Search Providers"
+msgstr ""
+
+msgid "No search provider extensions found"
+msgstr ""
+
+msgid "Panel"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid "Layout"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Recent files settings"
+msgstr ""
+
+msgid "Open the menu editor"
+msgstr ""
+
+msgid "Use a custom icon"
+msgstr ""
+
+msgid "Use a custom icon in the panel"
+msgstr ""
+
+msgid "Panel icon"
+msgstr ""
+
+msgid "Panel text"
+msgstr ""
+
+msgid "Text to show beside the panel icon"
+msgstr ""
+
+msgid "Category icon size (pixels)"
+msgstr ""
+
+msgid "Applications list icon size (pixels)"
+msgstr ""
+
+msgid "Applications grid icon size (pixels)"
+msgstr ""
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr ""
+
+msgid "Open menu on hover"
+msgstr ""
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr ""
+
+msgid "milliseconds"
+msgstr ""
+
+msgid "Menu hover delay"
+msgstr ""
+
+msgid "Use menu animations"
+msgstr ""
+
+msgid "Animate the menu on open and close"
+msgstr ""
+
+msgid "Activate categories on click"
+msgstr ""
+
+msgid "Activate categories on click instead of on hover"
+msgstr ""
+
+msgid "Enable autoscrolling"
+msgstr ""
+
+msgid "Enable autoscrolling in application list"
+msgstr ""
+
+msgid "Show web bookmarks"
+msgstr ""
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+
+msgid "Enable searching of open windows"
+msgstr ""
+
+msgid "Enable search providers"
+msgstr ""
+
+msgid "Include search provider results in searches"
+msgstr ""
+
+msgid "Example Search Providers"
+msgstr ""
+
+msgid "Open menu on category:"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+msgid "Grid"
+msgstr ""
+
+msgid "Always open the menu with this category selected"
+msgstr ""
+
+msgid "columns"
+msgstr ""
+
+msgid "Number of columns in apps grid"
+msgstr ""
+
+msgid "Show bookmarks and places"
+msgstr ""
+
+msgid "Show bookmarks and places category in the menu"
+msgstr ""
+
+msgid "Show application icons"
+msgstr ""
+
+msgid "Show category icons"
+msgstr ""
+
+msgid "Show application descriptions under titles"
+msgstr ""
+
+msgid "Show tooltips"
+msgstr ""
+
+msgid "Tooltip delay"
+msgstr ""
+
+msgid "Use a custom menu height"
+msgstr ""
+
+msgid "Custom menu height (pixels)"
+msgstr ""
+
+msgid "Applications view mode"
+msgstr ""
+
+msgid "View applications as list or grid"
+msgstr ""
+
+msgid "Sidebar location"
+msgstr ""
+
+msgid "Top"
+msgstr ""
+
+msgid "Bottom"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+msgid "Choose where to show the sidebar"
+msgstr ""
+
+msgid "Show favorites on sidebar"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Apps only"
+msgstr ""
+
+msgid "Files only"
+msgstr ""
+
+msgid "Apps and files"
+msgstr ""
+
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr ""
+
+msgid "Application description placement"
+msgstr ""
+
+msgid "Tooltips"
+msgstr ""
+
+msgid "Under titles"
+msgstr ""
+
+msgid "Choose where to show application descriptions"
+msgstr ""
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+
+msgid "Show recent items"
+msgstr ""
+
+msgid "Show recent items category in the menu"
+msgstr ""
+
+msgid "Show favorite apps category"
+msgstr ""
+
+msgid "Show your favorite apps category in the menu"
+msgstr ""
+
+msgid "Show home folder"
+msgstr ""
+
+msgid "Show home folder category in the menu"
+msgstr ""
+
+msgid "Show emoji category"
+msgstr ""
+
+msgid "Show emoji category in the menu"
+msgstr ""
+
+msgid "Last used category"
+msgstr ""
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr ""
+
+msgid "Show hidden files"
+msgstr ""
+
+msgid "Show hidden files in folder view"
+msgstr ""
+
+msgid "Emoji search"
+msgstr ""
+
+msgid "Show emojis in search results"
+msgstr ""
+
+msgid "Web search option"
+msgstr ""
+
+msgid "Show an internet search option in search results"
+msgstr ""
+
+msgid "Web search suggestions"
+msgstr ""
+
+msgid ""
+"With web search option, also show search suggestions. (Note: This uses "
+"Google's search API)"
+msgstr ""
+
+msgid "Search home folder"
+msgstr ""
+
+msgid "When searching, also search my home folder for files"
+msgstr ""
+
+msgid "Web history search"
+msgstr ""
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+
+msgid "Web bookmarks search"
+msgstr ""
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+
+msgid "Wikipedia search"
+msgstr ""
+
+msgid "Show some Wikipedia results"
+msgstr ""
+
+msgid "Wikipedia language"
+msgstr ""
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+
+msgid "Use a custom icon size"
+msgstr ""
+
+msgid "Use a custom size for the panel icon"
+msgstr ""
+
+msgid "Panel icon size (pixels)"
+msgstr ""
+
+msgid "Choose a custom size for the panel icon"
+msgstr ""
+
+msgid "Sidebar icon size (pixels)"
+msgstr ""
+
+msgid "Use sidebar box style"
+msgstr ""
+
+msgid "Use a sidebar box style"
+msgstr ""
+
+msgid "Use tile style"
+msgstr ""
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""

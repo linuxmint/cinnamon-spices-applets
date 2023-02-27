@@ -1,78 +1,102 @@
-const { PopupSliderMenuItem } = imports.ui.popupMenu;
-const St = imports.gi.St;
+import { createActivWidget } from "../lib/ActivWidget";
+import { createSlider } from "../lib/Slider";
+import {
+  getVolumeIcon,
+  POPUP_ICON_CLASS,
+  POPUP_MENU_ITEM_CLASS,
+  VOLUME_DELTA,
+} from "../consts";
+import { mpvHandler } from "../services/mpv/MpvHandler";
+
+const { BoxLayout, Icon, IconType } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
+const { KEY_Right, KEY_Left, ScrollDirection } = imports.gi.Clutter;
 
-interface Arguments {
-    onValueChanged: { (volume: number): void }
-}
+export function createVolumeSlider() {
+  const {
+    getVolume,
+    setVolume,
+    addVolumeChangeHandler,
+    addPlaybackStatusChangeHandler,
+  } = mpvHandler;
 
+  const container = new BoxLayout({
+    style_class: POPUP_MENU_ITEM_CLASS,
+  });
 
-export class VolumeSlider extends PopupSliderMenuItem {
+  createActivWidget({
+    widget: container,
+  });
 
-    private tooltip: imports.ui.tooltips.Tooltip
-    private onValueChanged: { (volume: number): void }
-    private volumeIcon: imports.gi.St.Icon
+  const slider = createSlider({
+    onValueChanged: (newValue) => setVolume(newValue * 100),
+  });
 
-    private volumeIcons = [
-        { max: 0, iconSuffix: "muted" },
-        { max: 33, iconSuffix: "low" },
-        { max: 66, iconSuffix: "medium" },
-        { max: 100, iconSuffix: "high" },
-    ]
+  const tooltip = new Tooltip(slider.actor, null);
 
+  const icon = new Icon({
+    icon_type: IconType.SYMBOLIC,
+    style_class: POPUP_ICON_CLASS,
+    reactive: true,
+  });
 
-    constructor(args: Arguments) {
-        super(0);
+  [icon, slider.actor].forEach((widget) => {
+    container.add_child(widget);
+  });
 
-        const {
-            onValueChanged
-        } = args
+  container.connect("key-press-event", (actor, event) => {
+    const key = event.get_key_symbol();
 
-        this.onValueChanged = onValueChanged
-        this.tooltip = new Tooltip(this.actor, `Volume: ${this.value} %`)
-
-        this.volumeIcon = new St.Icon({ icon_name: this.volumeIconName, icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
-
-
-        this.removeActor(this._slider);
-        this.addActor(this.volumeIcon, { span: 0 })
-        this.addActor(this._slider, { span: -1, expand: true });
-        this.connect('value-changed', () => this.handleValueChanged())
-
+    if (key === KEY_Right || key === KEY_Left) {
+      const direction = key === KEY_Right ? "increase" : "decrease";
+      handleDeltaChange(direction);
     }
 
-    public handleValueChanged() {
-        this.onValueChanged(this.value)
+    return false;
+  });
 
-        // strictly speaking this is wrong as it is not listened to the volume interface (i.e. the mpvHandler) but who cares?
-        this.refreshSlider()
-        this.tooltip.show()
+  container.connect("scroll-event", (actor, event) => {
+    const scrollDirection = event.get_scroll_direction();
+
+    if (scrollDirection === ScrollDirection.UP) {
+      handleDeltaChange("increase");
+      return false;
     }
 
-    public get value() {
-        return Math.round(super.value * 100)
+    if (scrollDirection === ScrollDirection.DOWN) {
+      handleDeltaChange("decrease");
     }
 
-    public set value(newVolume: number) {
-        super.setValue(newVolume / 100)
-        this.refreshSlider()
-    }
+    return false;
+  });
 
-    private refreshSlider() {
-        this.volumeIcon.icon_name = this.volumeIconName
-        this.tooltip.set_text(`Volume: ${this.value} %`)
-    }
+  icon.connect("button-press-event", () => {
+    slider.setValue(0);
 
-    private get volumeIconName() {
-        const index = this.volumeIcons.findIndex(({ max, ...rest }, index) =>
-            this.value <= max
-        )
+    return false;
+  });
 
-        return `audio-volume-${this.volumeIcons[index].iconSuffix}`
-    }
+  function handleDeltaChange(direction: "increase" | "decrease") {
+    const delta = direction === "increase" ? VOLUME_DELTA : -VOLUME_DELTA;
+    const newValue = slider.getValue() + delta / 100;
+    slider.setValue(newValue);
+  }
 
-    public destroy() {
-        super.destroy()
-        this.tooltip.hide()
+  const setRefreshVolumeSlider = () => {
+    const volume = getVolume();
+
+    if (volume != null) {
+      tooltip.set_text(`Volume: ${volume.toString()} %`);
+      slider.setValue(volume / 100, true);
+      icon.set_icon_name(getVolumeIcon({ volume }));
     }
+  };
+
+  [addVolumeChangeHandler, addPlaybackStatusChangeHandler].forEach((cb) =>
+    cb(setRefreshVolumeSlider)
+  );
+
+  setRefreshVolumeSlider();
+
+  return container;
 }

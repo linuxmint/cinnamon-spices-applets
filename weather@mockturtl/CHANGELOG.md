@@ -1,5 +1,158 @@
 # Changelog
 
+## 3.2.12
+
+* Minor style changes
+* Make "Location Label Override" behavior identical to Panel label override.
+* Add option to override tooltip label for applet
+* Try to make hourly weather elements slimmer by putting precipitation change and volume in different rows
+* Update luxon and suncalc
+* Update README
+* Use user's timezone for automatic unit inference, Fixes [#4644](https://github.com/linuxmint/cinnamon-spices-applets/issues/4644)
+* Fixes [#4628](https://github.com/linuxmint/cinnamon-spices-applets/issues/4628)
+* Fix MET UK crash when observation stations return a single object instead of an array for it's observation
+* Add support for saving config from new path and respect ENV variable for xsession-errors
+
+## 3.2.11
+
+* Fix issue where refresh loop wouldn't ever resume after a single configuration error  
+
+## 3.2.10
+
+* Add more granular control for setting changes
+* Fixes [#4505](https://github.com/linuxmint/cinnamon-spices-applets/issues/4505)
+
+## 3.2.9
+* Add support for Soup v3
+
+## 3.2.8
+
+* Resolve [#4426](https://github.com/linuxmint/cinnamon-spices-applets/issues/4426) - Add Weather Underground as a provider
+
+## 3.2.7
+
+* Fix [#4390](https://github.com/linuxmint/cinnamon-spices-applets/issues/4390) - Make sure applet works with not configured Locale
+
+## 3.2.6
+
+* Fix [#4387](https://github.com/linuxmint/cinnamon-spices-applets/issues/4387)
+* also add some more location-related entries into the applet label override
+
+## 3.2.5
+
+* Fix [#4378](https://github.com/linuxmint/cinnamon-spices-applets/issues/4378) - Add DWD as a weather provider
+
+## 3.2.4
+
+* Fix issue on Cinnamon versions where `is_finalized` is not injected into GObject
+
+## 3.2.3
+
+* Fix [#4306](https://github.com/linuxmint/cinnamon-spices-applets/issues/4306)
+
+## 3.2.2
+
+* Fix [#4292](https://github.com/linuxmint/cinnamon-spices-applets/issues/4292)
+* Fix [#4285](https://github.com/linuxmint/cinnamon-spices-applets/issues/4285)
+
+## 3.2.1
+
+* Fix [#4255](https://github.com/linuxmint/cinnamon-spices-applets/issues/4255)
+* Redact more things when generating logs
+
+## 3.2.0
+
+* Add requested AccuWeather as a provider
+* Add ability to display remaining number of calls in the UI (where applicable)
+* Fix issue where the applet would display more hourly boxes than available data
+* Improve HttpLib flexibility and type checking
+* Add better support for "Override label on panel" setting
+
+## 3.1.9
+
+* Fixes [#4184](https://github.com/linuxmint/cinnamon-spices-applets/issues/4184) - missing space in .pot file
+* Fixes [#4127](https://github.com/linuxmint/cinnamon-spices-applets/issues/4127) - Text is at an abnormal height
+* Fix issue in WeatherBit provider where it would break if it tries to parse a date with January for month
+* Various minor syntax improvements (usage of consts and for-of loops)
+* Use mapping for getting provider classes instead of a big switch statement
+
+## 3.1.8
+
+* Fixes [#4136](https://github.com/linuxmint/cinnamon-spices-applets/issues/4136) - Fix custom widget not applying translations
+* Fixes [#4147](https://github.com/linuxmint/cinnamon-spices-applets/issues/4147)
+
+## 3.1.7
+
+* Switch to stricter typechecking
+* Resolves [#4096](https://github.com/linuxmint/cinnamon-spices-applets/issues/4096) - Change old translated string to new version
+* Resolves [#3916](https://github.com/linuxmint/cinnamon-spices-applets/issues/3916)
+* Applet now detects if network is down and pauses/resumes accordingly
+
+## 3.1.6
+
+* Support changing logging level from settings
+* Support saving logs specific to the applet into file along with the applet's settings
+* Pre-fill the Github issue form on opening a new issue from the applet
+* Update with new declarations
+
+## 3.1.5
+
+* Add Fixes to README by @jorgenqv
+* Resolves [#3975](https://github.com/linuxmint/cinnamon-spices-applets/issues/3975) Add option to make hourly weather always visible #3975
+* Resolves [#3976](https://github.com/linuxmint/cinnamon-spices-applets/issues/3976) Add dew point as a metric #3976
+
+## 3.1.4
+
+* Update translations file
+* Make sure translation generation is not missed again, now included as a build step
+* Add VSCode workspace
+
+## 3.1.3
+
+* Update DarkSky API cutoff date
+* Update TS declarations
+* Resolved [#3926](https://github.com/linuxmint/cinnamon-spices-applets/issues/3926) Change Climacell naming to Tomorrow.io
+* Update screenshot
+
+## 3.1.2
+
+* Do not minify code so .pot files can be generated without missing strings.
+* Add strict Typescript typechecking
+
+## 3.1.1
+
+* Fix issue where applet wouldn't run on Linux Mint 19-19.3, where libraries targeting higher than es2017 would be included.
+* Remove Climacell V3 from Readme
+
+## 3.1.0
+
+* Migrate to Webpack
+* Improve error logging
+* Use SunCalc from npm so it can receive updates
+* Use Luxon for Dates with timezones (finally) so Local timezone and requested location timezone's mismatch can be handled much better
+* Fix US Weather logic on deciding where to start processing daily forecasts from. For real this time? [#3806](https://github.com/linuxmint/cinnamon-spices-applets/issues/3806)
+* Hopefully it will fix [#3817](https://github.com/linuxmint/cinnamon-spices-applets/issues/3817) by the better TZ handling.
+* Remove Climacell V3 as it has reached it's end of life
+
+## 3.0.10
+
+* Fixes [#3815](https://github.com/linuxmint/cinnamon-spices-applets/issues/3815)
+
+## 3.0.9
+
+* Fixes [#3806](https://github.com/linuxmint/cinnamon-spices-applets/issues/3806)
+* Update applet to new declarations
+* Remove yahoo weather
+
+## 3.0.8
+
+* Fixes [#3787](https://github.com/linuxmint/cinnamon-spices-applets/issues/3787)
+
+## 3.0.7
+
+* Resolves [#3783](https://github.com/linuxmint/cinnamon-spices-applets/issues/3783)
+* Fixes wrong filename for declaration file (global.ts -> global.d.ts) causing all kinds of issues
+
 ## 3.0.6
 
 * Resolves [#3694](https://github.com/linuxmint/cinnamon-spices-applets/issues/3694)
@@ -24,7 +177,7 @@
 * Add minutely precipitation under current condition, when there is any (and the setting is on)
 * Add more tooltips to settings
 * OpenWeatherMap can also display Precipitation chance if there is no volume specified
-* Autoformat 3.8 and new declaration files
+* Auto-format 3.8 and new declaration files
 * Fixes [#3637](https://github.com/linuxmint/cinnamon-spices-applets/issues/3637)
 
 ## 3.0.3
@@ -61,7 +214,7 @@
 
 * Fix wind icon color when non-symbolic icons used in the applet
 
-* Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and doesn't accept new signups.
+* Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and doesn't accept new sign-ups.
 
 * Make network and DNS related errors soft errors again
 
@@ -163,7 +316,7 @@ Fixes:
 
 * Custom icons changed to fit their bounding boxes
 
-* Make Daily forecasts tileable
+* Make Daily forecasts tile-able
 
 * Fix [#2892](https://github.com/linuxmint/cinnamon-spices-applets/issues/2892), buttons adhere to current theme
 
@@ -295,8 +448,8 @@ General changes:
 
 Fixes:
 
-* !!! the panel was not rebuilding at the correct time on refresh (I 
-  honestly don't know how the app was working before at all), now 
+* !!! the panel was not rebuilding at the correct time on refresh (I
+  honestly don't know how the app was working before at all), now
   rebuilding is part of the data refresh function.
 * Applet was crashing when there was no internet (Debug line was outside try/catch)
 * Big performance increase in version 3.4, plus DarkSky support
@@ -331,8 +484,8 @@ New stuff:
 
 ## 2.1.3
 
-* Multiversion fix. Everything below 3.8 should use the previous 
-  version now (3.6 version moved to the root folder), because it does not 
+* Multiversion fix. Everything below 3.8 should use the previous
+  version now (3.6 version moved to the root folder), because it does not
   even work with version 3.2 at the moment.
 * Small addition for DarkSky condition processing for shorter conditions.
 
@@ -348,15 +501,15 @@ New stuff:
 * Fixed bug when Cinnamon froze when the taskbar was manipulated when the applet was enabled on it.
 * DarkSky was Getting the Forecast day names from sunrise time, fixed
 * Humidity is rounded now.
-* Location element is a button again, opens Data services webpages 
-  with more weather, or it can trigger a refresh if there was an error 
+* Location element is a button again, opens Data services webpages
+  with more weather, or it can trigger a refresh if there was an error
   (there is no need anymore, but still).
 
 ## 2.1.1
 
 * Openweathermap no longer requires key
-* Forcing main loop to refresh when Weather update fails (it was not 
-  updating for a whole refresh interval when we had a successful update 
+* Forcing main loop to refresh when Weather update fails (it was not
+  updating for a whole refresh interval when we had a successful update
   then the settings was changed right after and update failed)
 * Using Regex against Location setting
 * DarkSky error messages are displayed properly to the users now
@@ -369,8 +522,8 @@ New stuff:
 
 * Fixed issue where sunset/sunrise displayed twice
 * Forecast compiling uses timezone calculation to separate forecasts to the correct days now
-* Fixed issue where days were displayed incorrectly, now are 
-  calculated displayed with timezone offset (was bad with people near the 
+* Fixed issue where days were displayed incorrectly, now are
+  calculated displayed with timezone offset (was bad with people near the
   day boundary i guess)
 * using HTTPS to call OpenWeather
 

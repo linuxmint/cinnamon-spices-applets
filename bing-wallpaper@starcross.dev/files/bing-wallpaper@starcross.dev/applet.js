@@ -1,5 +1,6 @@
 const Applet = imports.ui.applet;
 const Soup = imports.gi.Soup;
+const ByteArray = imports.byteArray;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop;
@@ -7,8 +8,13 @@ const Lang = imports.lang;
 
 const logging = false;
 
-const _httpSession = new Soup.SessionAsync();
-Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+let _httpSession;
+if (Soup.MAJOR_VERSION == 2) {
+    _httpSession = new Soup.SessionAsync();
+    Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+} else { //version 3
+    _httpSession = new Soup.Session();
+}
 
 const bingHost = 'https://www.bing.com';
 const bingRequestPath = '/HPImageArchive.aspx?format=js&idx=0&n=1&mbl=1';
@@ -133,31 +139,48 @@ BingWallpaperApplet.prototype = {
     },
 
     _downloadMetaData: function () {
+        const process_result = data => {
+            
+            // Write to meta data file
+            let gFile = Gio.file_new_for_path(this.metaDataPath);
+            let fStream = gFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
+            let toWrite  = data.length;
+            while (toWrite > 0)
+                toWrite -= fStream.write(data, null);
+            fStream.close(null);
+
+            const json = JSON.parse(data);
+            this.imageData = json.images[0];
+            this.set_applet_tooltip(this.imageData.copyright);
+            log(`Got image url from download: ${this.imageData.url}`);
+
+            this._downloadImage();
+
+        };
+            
         // Retrieve json metadata, either from local file or remote
         let request = Soup.Message.new('GET', `${bingHost}${bingRequestPath}`);
-        _httpSession.queue_message(request, (_httpSession, message) => {
-            if (message.status_code === 200) {
-
-                // Write to meta data file
-                let gFile = Gio.file_new_for_path(this.metaDataPath);
-                let fStream = gFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
-                let toWrite  = message.response_body.data.length;
-                while (toWrite > 0)
-                    toWrite -= fStream.write(message.response_body.data, null);
-                fStream.close(null);
-
-                const json = JSON.parse(message.response_body.data);
-                this.imageData = json.images[0];
-                this.set_applet_tooltip(this.imageData.copyright);
-                log(`Got image url from download: ${this.imageData.url}`);
-
-                this._downloadImage();
-
-            } else {
-                log(`Failed to acquire image metadata (${message.status_code})`);
-                this._setTimeout(60)  // Try again
-            }
-        });
+        if (Soup.MAJOR_VERSION === 2) {
+            _httpSession.queue_message(request, (_httpSession, message) => {
+                if (message.status_code === 200) {
+                    process_result(message.response_body.data);
+                } else {
+                    log(`Failed to acquire image metadata (${message.status_code})`);
+                    this._setTimeout(60)  // Try again
+                }
+                
+            });
+        } else { //version 3
+            _httpSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (_httpSession, message) => {
+                if (request.get_status() === 200) {
+                    const bytes = _httpSession.send_and_read_finish(message);
+                    process_result(ByteArray.toString(bytes.get_data()));
+                } else {
+                    log(`Failed to acquire image metadata (${request.get_status()})`);
+                    this._setTimeout(60)  // Try again
+                }
+            });
+        }
     },
 
     _downloadImage: function () {
@@ -174,25 +197,43 @@ BingWallpaperApplet.prototype = {
         // create an http message
         let request = Soup.Message.new('GET', urlUHD);
 
-        // got_chunk event
-        request.connect('got_chunk', function (message, chunk) {
-            if (message.status_code === 200) { // only save the data we want, not content of 301 redirect page
-                fStream.write(chunk.get_data(), null);
-            }
-        });
+        if (Soup.MAJOR_VERSION === 2) {
+            // got_chunk event
+            request.connect('got_chunk', function (message, chunk) {
+                if (message.status_code === 200) { // only save the data we want, not content of 301 redirect page
+                    fStream.write(chunk.get_data(), null);
+                }
+            });
 
-        // queue the http request
-        _httpSession.queue_message(request, (httpSession, message) => {
-            // request completed
-            fStream.close(null);
-            if (message.status_code === 200) {
-                log('Download successful');
-                this._setBackground();
-            } else {
-                log("Couldn't fetch image from " + urlUHD);
-                this._setTimeout(60)  // Try again
-            }
-        });
+            // queue the http request
+            _httpSession.queue_message(request, (httpSession, message) => {
+                // request completed
+                fStream.close(null);
+                if (message.status_code === 200) {
+                    log('Download successful');
+                    this._setBackground();
+                } else {
+                    log("Couldn't fetch image from " + urlUHD);
+                    this._setTimeout(60)  // Try again
+                }
+            });
+        } else { //version 3
+            _httpSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (httpSession, message) => {
+                if (request.get_status() === 200) {
+                    const bytes = _httpSession.send_and_read_finish(message);
+                    if (bytes && bytes.get_size() > 0) {
+                        fStream.write(bytes.get_data(), null);
+                    }
+                    // request completed
+                    fStream.close(null);
+                    log('Download successful');
+                    this._setBackground();
+                } else {
+                    log("Couldn't fetch image from " + urlUHD);
+                    this._setTimeout(60)  // Try again
+                }
+            });
+        }
     },
 
     _setBackground: function () {

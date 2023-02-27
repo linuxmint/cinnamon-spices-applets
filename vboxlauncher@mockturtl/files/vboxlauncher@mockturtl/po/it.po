@@ -7,36 +7,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-28 00:34+0100\n"
-"PO-Revision-Date: 2019-10-17 21:19+0200\n"
+"POT-Creation-Date: 2019-11-17 16:33+0100\n"
+"PO-Revision-Date: 2022-06-03 21:29+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 
-#: applet.js:81
+#: applet.js:87
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: applet.js:127
+#: applet.js:119
+msgid "Display"
+msgstr "Visualizzazione"
+
+#: applet.js:120
+msgid "Headless"
+msgstr "Headless"
+
+#: applet.js:141
 msgid "ERROR. No compatible virtual machine programs found."
 msgstr "ERRORE. Nessun programma di macchina virtuale compatibile trovato."
 
-#: applet.js:197
+#: applet.js:236
 msgid "Update list"
 msgstr "Aggiorna elenco"
 
-#. vboxlauncher@mockturtl->settings-schema.json->autoUpdate->description
-msgid "Auto update (slow)"
-msgstr "Auto aggiornamento (lento)"
-
-#. vboxlauncher@mockturtl->metadata.json->name
+#. metadata.json->name
 msgid "Vbox Launcher"
 msgstr "Vbox Launcher"
 
-#. vboxlauncher@mockturtl->metadata.json->description
+#. metadata.json->description
 msgid "An applet to launch virtual machines."
 msgstr "Un'applet per l'avvio di macchine virtuali."
+
+#. settings-schema.json->autoUpdate->description
+msgid "Auto update (slow)"
+msgstr "Auto aggiornamento (lento)"

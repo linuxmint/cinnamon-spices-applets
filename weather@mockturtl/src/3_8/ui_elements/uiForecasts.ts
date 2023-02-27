@@ -1,14 +1,15 @@
-import { Config } from "config";
-import { APPLET_ICON } from "consts";
-import { Event } from "lib/events";
-import { Log } from "lib/logger";
-import { WeatherApplet } from "main";
-import { WeatherData } from "types";
-import { _, GetDayName, WeatherIconSafely, OnSameDay, TempRangeToUserConfig } from "utils";
-import { WeatherButton } from "ui_elements/weatherbutton";
+import { Config } from "../config";
+import { APPLET_ICON } from "../consts";
+import { Event } from "../lib/events";
+import { Logger } from "../lib/logger";
+import { WeatherApplet } from "../main";
+import { WeatherData } from "../types";
+import { _, GetDayName, WeatherIconSafely, OnSameDay, TempRangeToUserConfig } from "../utils";
+import { WeatherButton } from "../ui_elements/weatherbutton";
+import { DateTime } from "luxon";
 
 const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
-const { GridLayout } = imports.gi.Clutter;
+const { GridLayout, Orientation } = imports.gi.Clutter;
 
 // stylesheet.css
 const STYLE_FORECAST_ICON = 'weather-forecast-icon'
@@ -22,17 +23,18 @@ const STYLE_FORECAST = 'forecast'
 
 export class UIForecasts {
 	public actor: imports.gi.St.Bin;
-	private forecasts: ForecastUI[];
-	private grid: imports.gi.Clutter.GridLayout;
+	// TODO: Assert these properly
+	private forecasts!: ForecastUI[];
+	private grid!: imports.gi.Clutter.GridLayout;
 
 	private app: WeatherApplet;
 
-	public DayClicked: Event<WeatherButton, Date> = new Event();
-	public DayHovered: Event<WeatherButton, Date> = new Event();
+	public DayClicked: Event<WeatherButton, DateTime> = new Event();
+	public DayHovered: Event<WeatherButton, DateTime> = new Event();
 
-	// Callbacks with bound context, which has constant signature for event subsciption/unsubscription
-	public DayClickedCallback: (sender: WeatherButton, event: imports.gi.Clutter.Event) => void;
-	public DayHoveredCallback: (sender: WeatherButton, event: imports.gi.Clutter.Event) => void;
+	// Callbacks with bound context, which has constant signature for event Subscription/unSubscription
+	public DayClickedCallback: (sender: WeatherButton, event: imports.gi.Clutter.CrossingEvent | null) => void;
+	public DayHoveredCallback: (sender: WeatherButton, event: imports.gi.Clutter.CrossingEvent) => void;
 
 	constructor(app: WeatherApplet) {
 		this.app = app;
@@ -40,34 +42,53 @@ export class UIForecasts {
 
 		this.DayClickedCallback = (s, e) => this.OnDayClicked(s, e);
 		this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
+		this.app.config.ShowForecastDatesChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
+		this.app.config.TemperatureHighFirstChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
+		this.app.config.ForecastDaysChanged.Subscribe(this.app.AfterRefresh(this.OnForecastDaysChanged));
+	}
+
+	private OnConfigChanged = async (config: Config, showForecastDates: boolean, data: WeatherData) => {
+		this.Display(data, config);
+	}
+
+	private OnForecastDaysChanged = async (config: Config, forecastDays: number, data: WeatherData) => {
+		if (config.textColorStyle == null)
+			return;
+		this.Rebuild(config, config.textColorStyle);
+		this.Display(data, config);
 	}
 
 	public UpdateIconType(iconType: imports.gi.St.IconType): void {
 		if (!this.forecasts)
 			return;
 
-		for (let i = 0; i < this.forecasts.length; i++) {
-			if (!this.forecasts[i]?.Icon)
+		for (const forecast of this.forecasts) {
+			if (!forecast?.Icon)
 				continue;
 
-			this.forecasts[i].Icon.icon_type = iconType;
+			forecast.Icon.icon_type = iconType;
 		}
 	}
 
 	/** Injects data from forecasts array into popupMenu */
 	public Display(weather: WeatherData, config: Config): boolean {
 		try {
-			if (!weather.forecasts) return false;
-			let len = Math.min(this.forecasts.length, weather.forecasts.length);
+			if (!weather.forecasts)
+				return false;
+
+			if (this.forecasts.length > weather.forecasts.length)
+				this.Rebuild(this.app.config, this.app.config.textColorStyle!, weather.forecasts.length);
+
+			const len = Math.min(this.forecasts.length, weather.forecasts.length);
 			for (let i = 0; i < len; i++) {
-				let forecastData = weather.forecasts[i];
-				let forecastUi = this.forecasts[i];
+				const forecastData = weather.forecasts[i];
+				const forecastUi = this.forecasts[i];
 
 				// Weather Condition
-				let comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
+				const comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
 
 				// Day Names
-				let dayName: string = GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
+				const dayName: string = GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
 				forecastUi.Day.actor.label = dayName;
 
 				forecastUi.Day.Hovered.Unsubscribe(this.DayHoveredCallback);
@@ -75,13 +96,16 @@ export class UIForecasts {
 
 				// Enable and subscribe to buttons what has hourly weathers
 				let hasHourlyWeather: boolean = false;
-				for (let index = 0; index < this.app.GetMaxHourlyForecasts(); index++) {
-					const element = weather.hourlyForecasts[index];
-					if (!element)
-						break;
-					if (OnSameDay(element.date, forecastData.date, config)) {
-						hasHourlyWeather = true;
-						break;
+
+				if (weather.hourlyForecasts != null) {
+					for (let index = 0; index < this.app.GetMaxHourlyForecasts(); index++) {
+						const element = weather.hourlyForecasts[index];
+						if (!element)
+							break;
+						if (OnSameDay(element.date, forecastData.date)) {
+							hasHourlyWeather = true;
+							break;
+						}
 					}
 				}
 
@@ -106,31 +130,32 @@ export class UIForecasts {
 			this.app.ShowError({
 				type: "hard",
 				detail: "unknown",
-				message: "Forecast parsing failed: " + e.toString(),
+				message: _("Forecast parsing failed, see logs for more details."),
 				userError: false
 			})
-			Log.Instance.Error("DisplayForecastError " + e);
+			if (e instanceof Error)
+				Logger.Error("DisplayForecastError: " + e, e);
 			return false;
 		}
 	};
 
-	public Rebuild(config: Config, textColorStyle: string): void {
+	public Rebuild(config: Config, textColorStyle: string, availableHours: number | null = null): void {
 		this.Destroy();
 
 		this.forecasts = [];
 		this.grid = new GridLayout({
-			orientation: config._verticalOrientation
+			orientation: config._verticalOrientation ? Orientation.VERTICAL : Orientation.VERTICAL
 		});
 		this.grid.set_column_homogeneous(true);
 
-		let table = new Widget({
+		const table = new Widget({
 			layout_manager: this.grid,
 			style_class: STYLE_FORECAST_CONTAINER
 		});
 
 		this.actor.set_child(table);
 
-		let maxDays = this.app.GetMaxForecastDays();
+		const maxDays = availableHours ?? this.app.GetMaxForecastDays();
 		// User settings
 		let maxRow = config._forecastRows;
 		let maxCol = config._forecastColumns;
@@ -144,7 +169,7 @@ export class UIForecasts {
 		let curCol = 0;
 
 		for (let i = 0; i < maxDays; i++) {
-			let forecastWeather: ForecastUI = {} as ForecastUI;
+			const forecastWeather: ForecastUI = {} as ForecastUI;
 
 			// proceed to next row
 			if (curCol >= maxCol) {
@@ -183,15 +208,15 @@ export class UIForecasts {
 				style_class: STYLE_FORECAST_TEMPERATURE
 			});
 
-			let by = new BoxLayout({
+			const by = new BoxLayout({
 				vertical: true,
 				style_class: STYLE_FORECAST_DATABOX
 			});
 			by.add(forecastWeather.Day.actor, { x_align: imports.gi.St.Align.START, expand: false, x_fill: false });
 			by.add_actor(forecastWeather.Summary);
-			by.add_actor(forecastWeather.Temperature);
+			by.add(forecastWeather.Temperature, {expand: true, x_fill: true});
 
-			let bb = new BoxLayout({
+			const bb = new BoxLayout({
 				style_class: STYLE_FORECAST_BOX
 			});
 
@@ -217,14 +242,14 @@ export class UIForecasts {
 			this.actor.get_child().destroy()
 	}
 
-	private OnDayHovered(sender: WeatherButton, event: imports.gi.Clutter.Event): void {
-		Log.Instance.Debug("Day Hovered: " + (sender.ID as Date).toDateString());
-		this.DayHovered.Invoke(sender, sender.ID as Date);
+	private OnDayHovered(sender: WeatherButton, event: imports.gi.Clutter.CrossingEvent): void {
+		Logger.Debug("Day Hovered: " + (sender.ID as DateTime).toJSDate().toDateString());
+		this.DayHovered.Invoke(sender, sender.ID as DateTime);
 	}
 
-	private OnDayClicked(sender: WeatherButton, event: imports.gi.Clutter.Event): void {
-		Log.Instance.Debug("Day Clicked: " + (sender.ID as Date).toDateString());
-		this.DayClicked.Invoke(sender, sender.ID as Date);
+	private OnDayClicked(sender: WeatherButton, event: imports.gi.Clutter.CrossingEvent | null): void {
+		Logger.Debug("Day Clicked: " + (sender.ID as DateTime).toJSDate().toDateString());
+		this.DayClicked.Invoke(sender, sender.ID as DateTime);
 	}
 }
 

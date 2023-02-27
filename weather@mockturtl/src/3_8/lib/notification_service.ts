@@ -1,10 +1,10 @@
-import { _ } from "utils";
+import { _ } from "../utils";
 
 const { messageTray } = imports.ui.main;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 
 export class NotificationService {
-	private static instance: NotificationService = null;
+	private static instance: NotificationService;
 	/** Single instance of log */
 	public static get Instance() {
 		if (this.instance == null)
@@ -21,7 +21,7 @@ export class NotificationService {
 	}
 
 	public Send(title: string, message: string, transient?: boolean) {
-		let notification = new Notification(this.MessageSource, this.Title + ": " + title, message);
+		const notification = new Notification(this.MessageSource, this.Title + ": " + title, message);
 		if (transient) notification.setTransient((!transient) ? false : true);
 		this.MessageSource.notify(notification);
 	}

@@ -9,4 +9,6 @@ declare namespace imports.ui.themeManager {
 
 		private _changeTheme(): void;
 	}
+
+	export type ThemeManagerSignals = 'theme-set';
 }

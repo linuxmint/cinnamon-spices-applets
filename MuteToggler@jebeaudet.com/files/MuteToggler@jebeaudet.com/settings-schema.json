@@ -1,0 +1,8 @@
+{
+    "keybinding": {
+        "type": "keybinding",
+        "description": "Set the keybinding for toggling microphone mute",
+        "default": "unassigned",
+        "indent": true
+    }
+}

@@ -18,62 +18,54 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: hu\n"
 
-#: applet.js:97
+msgid "Scr Lock"
+msgstr "Scr Lock"
+
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: applet.js:103
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: applet.js:142
 msgid "Lock Keys"
 msgstr "Zárógombok"
 
-#: applet.js:190
+msgid "Scr lock on"
+msgstr "Scr Lock be"
+
+msgid "Scr lock off"
+msgstr "Scr Lock ki"
+
 msgid "Num lock on"
 msgstr "Num Lock be"
 
-#: applet.js:193
 msgid "Num lock off"
 msgstr "Num Lock ki"
 
-#: applet.js:201
 msgid "Caps lock on"
 msgstr "Caps Lock be"
 
-#: applet.js:204
 msgid "Caps lock off"
 msgstr "Caps Lock ki"
 
-#. betterlock->settings-schema.json->show-notifications->description
 msgid "Show notifications"
 msgstr "Értesítések mutatása"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Num Lock only"
-msgstr "Csak Num Lock"
+msgid "Show caps lock indicator"
+msgstr "Caps lock jelző megjelenítése"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Caps Lock only"
-msgstr "Csak Caps Lock"
+msgid "Show num lock indicator"
+msgstr "Num lock jelző megjelenítése"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Num Lock and Caps Lock"
-msgstr "Num Lock és Caps Lock"
+msgid "Show scr lock indicator"
+msgstr "Scr zár jelzőjének megjelenítése"
 
-#. betterlock->settings-schema.json->indicator-type->description
-msgid "Choose which indicator to show"
-msgstr "Válassza ki a megjeleníteni kívánt mutatót"
-
-#. betterlock->metadata.json->description
 msgid ""
-"Shows whether caps lock/num lock is on, and displays a notification when "
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification when "
 "these change."
 msgstr ""
-"Megmutatja, hogy a Caps Lock / Num Lock be van-e kapcsolva, és "
-"értesítést jelenít meg, ha ezek változnak."
+"Megmutatja, hogy a caps lock/num lock/scr lock be van-e kapcsolva, és értesítést "
+"jelenít meg, ha ezek megváltoznak."
 
-#. betterlock->metadata.json->name
-msgid "Num Lock/Caps Lock indicator with notifications"
-msgstr "Num Lock / Caps Lock jelző értesítésekkel"
+msgid "Lock keys indicator with notifications"
+msgstr "Lezárási gombok jelzője értesítésekkel"

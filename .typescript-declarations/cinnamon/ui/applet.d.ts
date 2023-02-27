@@ -12,7 +12,7 @@ declare namespace imports.ui.applet {
 	 * @short_description: Deprecated. Use #PopupMenu.PopupIconMenuItem instead.
 	 */
 	export class MenuItem extends ui.popupMenu.PopupIconMenuItem {
-		constructor(label: string, icon: string, callback: Function);
+		constructor(label: string, icon: string, callback: (owner: MenuItem, event: gi.Clutter.Event, keepMenu: boolean) => void);
 	}
 
 	/**
@@ -21,7 +21,7 @@ declare namespace imports.ui.applet {
 	* A context menu (right-click menu) to be used by an applet
 	*/
 	export class AppletContextMenu extends popupMenu.PopupMenu {
-		constructor(launcher: any, orientation: gi.St.Side);
+		constructor(launcher: Applet, orientation: gi.St.Side);
 
 		private _onOpenStateChanged(menu: popupMenu.PopupMenuBase, open: boolean, sourceActor: gi.St.Widget): void;
 	}
@@ -38,10 +38,24 @@ declare namespace imports.ui.applet {
 		 * @param launcher The applet that contains the context menu
 		 * @param orinentation The orientation of the applet
 		 */
-		constructor(launcher: any, orinentation: gi.St.Side);
+		constructor(launcher: Applet, orinentation: gi.St.Side);
 
-		private _onOrientationChanged(a: any, orientation: gi.St.Side): void;
+		private _onOrientationChanged(a: Applet, orientation: gi.St.Side): void;
 		private _onOpenStateChanged(menu: popupMenu.PopupMenuBase, open: boolean, sourceActor: gi.St.Widget): void;
+	}
+
+	interface AppletMetadata {
+		uuid: string;
+		name: string;
+		description: string;
+		"max-instances"?: number;
+		version?: string;
+		multiversion?: boolean;
+		"cinnamon-version"?: string[];
+		state?: number;
+		path: string;
+		error?: string;
+		force_loaded: boolean;
 	}
 
 	/**
@@ -56,34 +70,37 @@ declare namespace imports.ui.applet {
 		public readonly instance_id: number;
 		/** The panel object containing the applet. This is set by
 		* appletManager *after* the applet is loaded. */
-		public readonly panel: panel.Panel;
+		public readonly panel: panel.Panel | null;
 
 		/** UUID of the applet. This is set by appletManager *after*
 		* the applet is loaded. */
-		private _uuid: string;
+		protected _uuid: string;
 		/** Panel sector containing the applet. This is
 		* set by appletManager *after* the applet is loaded. */
-		private _panelLocation: gi.St.BoxLayout;
+		protected _panelLocation: gi.St.BoxLayout;
 		/** The metadata of the applet. This is set by appletManager
 		* *after* the applet is loaded. */
-		private _meta: any;
+		protected _meta: AppletMetadata;
 		/** The order of the applet within a panel location This is set
 		* by appletManager *after* the applet is loaded. */
-		private _order: number;
+		protected _order: number;
 		/** The draggable object of the applet */
-		private _draggable: dnd.Draggable;
+		protected _draggable: dnd.Draggable;
 		/** The tooltip of the applet */
-		private _applet_tooltip: tooltips.PanelItemTooltip;
+		protected _applet_tooltip: tooltips.PanelItemTooltip;
 		/** The menu manager of the applet */
-		public readonly _menuManager: popupMenu.PopupMenuManager;
+		protected readonly _menuManager: popupMenu.PopupMenuManager;
 		/** The context menu of the applet */
-		public readonly _applet_context_menu: AppletContextMenu;
+		protected readonly _applet_context_menu: AppletContextMenu;
 		/** Text of the tooltip */
-		private _applet_tooltip_text: string;
+		protected _applet_tooltip_text: string;
 		/** The allowed layout of the applet. This
 		 * determines the type of panel an applet is allowed in. By default this is set
 		 * to Applet.AllowedLayout.HORIZONTAL */
-		private _allowedLayout: AllowedLayout;
+		protected _allowedLayout: AllowedLayout;
+
+		/** orientation of the panel the applet is on */
+		protected _orientation: gi.St.Side
 
 		/**
 		 * 
@@ -101,19 +118,19 @@ declare namespace imports.ui.applet {
 		public getDragActorSource(): gi.St.BoxLayout;
 
 
-		private _addStyleClass(className: string): void;
+		protected _addStyleClass(className: string): void;
 
-		private _getPanelInfo(instance_id: number): void;
+		protected _getPanelInfo(instance_id: number): void;
 
-		private _setAppletReactivity(): void;
+		protected _setAppletReactivity(): void;
 
-		private _onDragBegin(): void;
+		protected _onDragBegin(): void;
 
-		private _onDragEnd();
+		protected _onDragEnd(): void;
 
-		private _onDragCancelled(): void;
+		protected _onDragCancelled(): void;
 
-		private _onButtonPressEvent(actor: gi.St.Widget, event: any): boolean;
+		protected _onButtonPressEvent(actor: gi.St.Widget, event: imports.gi.Clutter.Event): boolean;
 
 		/**
 		 * Sets the tooltip of the applet
@@ -134,16 +151,23 @@ declare namespace imports.ui.applet {
 		 *
 		 * This is meant to be overridden in individual applets.
 		 * @param event the event object
+		 * 
+		 *	returns %TRUE if the event has been handled by the actor,
+		 *  or %FALSE to continue the emission. 
+		 * 
 		 */
-		public on_applet_clicked(event: gi.Clutter.Event): any;
+		public on_applet_clicked(event: gi.Clutter.Event): boolean;
 
 		/**
 		 * This function is called when the applet is clicked with the middle mouse button.
 		 *
 		 * This is meant to be overridden in individual applets.
 		 * @param event the event object
+		 * 
+		 *  returns %TRUE if the event has been handled by the actor,
+		 *  or %FALSE to continue the emission. 
 		 */
-		public on_applet_middle_clicked(event: gi.Clutter.Event): any;
+		public on_applet_middle_clicked(event: gi.Clutter.Event): boolean;
 
 		/**
 		 * This function is called when an applet *of the same uuid* is added or
@@ -156,7 +180,7 @@ declare namespace imports.ui.applet {
 		 * This is meant to be overridden in individual applets
 		 * @param instance the instance that was changed
 		 */
-		public on_applet_instances_changed(instance?: Applet): any;
+		public on_applet_instances_changed(instance?: Applet): void;
 
 		private on_applet_added_to_panel_internal(userEnabled: boolean): boolean | void;
 
@@ -166,7 +190,7 @@ declare namespace imports.ui.applet {
 		 * This is meant to be overridden in individual applets.
 		 * @param userEnabled 
 		 */
-		public on_applet_added_to_panel(userEnabled: boolean): any;
+		public on_applet_added_to_panel(userEnabled: boolean): void;
 
 		/**
 		 * This function is called by appletManager when the applet is removed from the panel.
@@ -174,7 +198,7 @@ declare namespace imports.ui.applet {
 		 * This is meant to be overridden in individual applets.
 		 * @param deleteConfig 
 		 */
-		public on_applet_removed_from_panel(deleteConfig: any): any;
+		public on_applet_removed_from_panel(deleteConfig: boolean): void;
 
 		/**
 		 * This function is called by appletManager when the applet is reloaded.
@@ -182,10 +206,10 @@ declare namespace imports.ui.applet {
 		 * This is meant to be overridden in individual applets.
 		 * @param deleteConfig 
 		 */
-		public on_applet_reloaded(deleteConfig: any): any;
+		public on_applet_reloaded(deleteConfig?: boolean): void;
 
 		// should only be called by appletManager
-		private _onAppletRemovedFromPanel(deleteConfig: any): void;
+		private _onAppletRemovedFromPanel(deleteConfig: boolean): void;
 
 		/**
 		 * Sets the orientation of the St.BoxLayout.
@@ -221,7 +245,7 @@ declare namespace imports.ui.applet {
 		 * This is meant to be overridden in individual applets.
 		 * @param orientation new orientation of the applet
 		 */
-		public on_orientation_changed(orientation: gi.St.Side): any;
+		public on_orientation_changed(orientation: gi.St.Side): void;
 
 		public getPanelIconSize(iconType: gi.St.IconType): number;
 
@@ -235,7 +259,7 @@ declare namespace imports.ui.applet {
 		 *
 		 * This is meant to be overridden in individual applets.
 		 */
-		protected on_panel_height_changed(): any;
+		protected on_panel_height_changed(): void;
 
 		private on_panel_icon_size_changed_internal(): void;
 
@@ -246,9 +270,9 @@ declare namespace imports.ui.applet {
 		 * This is meant to be overridden in individual applets.
 		 * @param size new icon size
 		 */
-		public on_panel_icon_size_changed(size: number): any;
+		public on_panel_icon_size_changed(size: number): void;
 
-		public confirmRemoveApplet(event: any): void;
+		public confirmRemoveApplet(event: imports.gi.Clutter.Event): void;
 
 		public finalizeContextMenu(): void;
 
@@ -271,12 +295,15 @@ declare namespace imports.ui.applet {
 		public get _panelHeight(): number;
 
 		public get _scaleMode(): boolean;
+
+		public connect(event: 'orientation-changed', cb: (actor: this, orientation: imports.gi.St.Side) => void): number
 	}
 
 	/** Applet with icon */
 	export class IconApplet extends Applet {
 		/** Actor of the icon */
-		private _applet_icon: gi.St.Icon;
+		protected _applet_icon: gi.St.Icon;
+		protected _applet_icon_box: gi.St.Bin;
 
 		/**
 		 * 

@@ -1,0 +1,659 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-08 00:13+0100\n"
+"PO-Revision-Date: 2022-11-29 18:13+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi\n"
+
+#: 4.2/applet.js:370 4.2/applet.js:1072
+msgid "Deactivate vpnLookOut"
+msgstr "Sulje vpnLookOut käytöstä"
+
+#: 4.2/applet.js:386 3.8/applet.js:355
+msgid "TRUE"
+msgstr "TOSI"
+
+#: 4.2/applet.js:387 3.8/applet.js:356
+msgid "FALSE"
+msgstr "VÄÄRÄ"
+
+#: 4.2/applet.js:417 3.8/applet.js:395 2.8/applet.js:214
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features including notifications and audible alerts."
+msgstr ""
+"Sinulta puuttuu joitain ohjelmia, joita tämä sovelma tarvitsee ja se saa "
+"kaikki ominaisuudet mukaan lukien ilmoitukset ja äänihälytykset."
+
+#: 4.2/applet.js:417 3.8/applet.js:395 2.8/applet.js:214
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr "Suorita asennus terminaalissa seuraavalla komennolla:"
+
+#: 4.2/applet.js:418 3.8/applet.js:396 2.8/applet.js:215
+msgid "Some dependencies are not installed!"
+msgstr "Joitakin riippuvuuksia ei ole asennettu!"
+
+#: 4.2/applet.js:445 4.2/applet.js:1075 4.2/applet.js:1084
+msgid "vpnLookOut deactivated"
+msgstr "vpnLookOut suljettu"
+
+#: 4.2/applet.js:445 4.2/applet.js:1084
+msgid "or Middle-Click to activate"
+msgstr "tai aktivoi se painamalla keskipainiketta"
+
+#: 4.2/applet.js:447 3.8/applet.js:422 2.8/applet.js:241
+msgid "Waiting"
+msgstr "Odottaa"
+
+#: 4.2/applet.js:822 3.8/applet.js:773
+msgid "Switching to: "
+msgstr "Vaihto: "
+
+#. metadata.json->name
+#: 4.2/applet.js:867 4.2/applet.js:942 3.8/applet.js:818 3.8/applet.js:893
+#: 2.8/applet.js:588 2.8/applet.js:655
+msgid "VPN Look-Out Applet"
+msgstr "VPN Look-Out Applet"
+
+#: 4.2/applet.js:873 4.2/applet.js:950 3.8/applet.js:824 3.8/applet.js:899
+#: 2.8/applet.js:594 2.8/applet.js:661
+msgid "Waiting for VPN interface information"
+msgstr "Odotetaan VPN-liittymän tietoja"
+
+#: 4.2/applet.js:883 4.2/applet.js:962 3.8/applet.js:834 3.8/applet.js:909
+#: 2.8/applet.js:624 2.8/applet.js:703
+msgid "Connection ON/OFF"
+msgstr "Yhteys ON/OFF"
+
+#. 4.2->settings-schema.json->connectAtStartup->description
+#. 3.8->settings-schema.json->connectAtStartup->description
+#. 2.8->settings-schema.json->connectAtStartup->description
+#: 4.2/applet.js:896 4.2/applet.js:1000 3.8/applet.js:847 3.8/applet.js:947
+#: 2.8/applet.js:603 2.8/applet.js:682
+msgid "Connect to VPN as this applet starts."
+msgstr "Yhdistä VPN kun sovelma käynnistyy."
+
+#. 4.2->settings-schema.json->reconnect->description
+#. 3.8->settings-schema.json->reconnect->description
+#. 2.8->settings-schema.json->reconnect->description
+#: 4.2/applet.js:901 4.2/applet.js:1005 3.8/applet.js:852 3.8/applet.js:952
+#: 2.8/applet.js:608 2.8/applet.js:687
+msgid "Try to reconnect to VPN when it shuts down incidentally."
+msgstr "Muodosta VPN uudelleen kun se katkeaa."
+
+#: 4.2/applet.js:921 3.8/applet.js:872 2.8/applet.js:637
+msgid "Help..."
+msgstr "Apua..."
+
+#: 4.2/applet.js:950
+msgid "vpnLookOut is deactivated"
+msgstr "vpnLookOut on pois käytöstä"
+
+#: 4.2/applet.js:973 3.8/applet.js:920 2.8/applet.js:715
+msgid "Connections"
+msgstr "Yhteydet"
+
+#. 4.2->settings-schema.json->Torrentpolicy->title
+#. 3.8->settings-schema.json->Torrentpolicy->title
+#: 4.2/applet.js:1026 3.8/applet.js:972
+msgid "VPN-related Apps Manager"
+msgstr "Sovelluksien hallinta (VPN)"
+
+#: 4.2/applet.js:1033 3.8/applet.js:979
+msgid "View Activity Logs"
+msgstr "Näytä toimintalokit"
+
+#: 4.2/applet.js:1057 3.8/applet.js:993 2.8/applet.js:669
+msgid "Network Settings"
+msgstr "Verkkoasetukset"
+
+#: 4.2/applet.js:1061 3.8/applet.js:997 2.8/applet.js:673
+msgid "Network Connections"
+msgstr "Verkkoyhteydet"
+
+#: 4.2/applet.js:1072
+msgid "Activate vpnLookOut"
+msgstr "Aktivoi vpnLookOut"
+
+#: 4.2/applet.js:1086
+msgid "vpnLookOut reactivated"
+msgstr "vpnLookOut aktivoitu"
+
+#: 4.2/applet.js:1149 3.8/applet.js:1060
+msgid "or Middle-Click to disconnect"
+msgstr "tai katkaise yhteys painamalla keskipainiketta"
+
+#: 4.2/applet.js:1163 3.8/applet.js:1074 2.8/applet.js:793
+msgid "Connected"
+msgstr "Yhdistetty"
+
+#: 4.2/applet.js:1182 3.8/applet.js:1091
+msgid "Started by vpnLookOut: "
+msgstr "Aloitti vpnLookOut: "
+
+#: 4.2/applet.js:1194 3.8/applet.js:1099 2.8/applet.js:800
+msgid "Disconnected"
+msgstr "Yhteys katkaistu"
+
+#: 4.2/applet.js:1212 3.8/applet.js:1117
+msgid "Blocked by vpnLookOut: "
+msgstr "Estänyt vpnLookOut: "
+
+#: 4.2/applet.js:1230 4.2/applet.js:1236 3.8/applet.js:1135 3.8/applet.js:1141
+msgid "or Middle-Click to connect"
+msgstr "tai muodosta yhteys painamalla keskipainiketta"
+
+#: 4.2/applet.js:1262 3.8/applet.js:1167
+msgid "Stopped by vpnLookOut: "
+msgstr "Pysäytti vpnLookOut: "
+
+#: 4.2/applet.js:1280 4.2/applet.js:1282 4.2/applet.js:1285 4.2/applet.js:1286
+#: 3.8/applet.js:1181 3.8/applet.js:1183 3.8/applet.js:1186 3.8/applet.js:1187
+#: 2.8/applet.js:832 2.8/applet.js:836 2.8/applet.js:837
+msgid "VPN:"
+msgstr "VPN:"
+
+#: 4.2/applet.js:1317 3.8/applet.js:1214 2.8/applet.js:860
+msgid "is fully functional."
+msgstr "on täysin toimiva."
+
+#: 4.2/applet.js:1318 3.8/applet.js:1215 2.8/applet.js:861
+msgid "All dependencies are installed"
+msgstr "Kaikki riippuvuudet on asennettu"
+
+#. 2.8->settings-schema.json->stopTransmission->description
+#: 2.8/applet.js:613 2.8/applet.js:692
+msgid "Shut down properly Transmission as soon as VPN falls."
+msgstr "Sammuta lähetys kunnolla heti, kun VPN putoaa."
+
+#. 2.8->settings-schema.json->restartTransmission->description
+#: 2.8/applet.js:617 2.8/applet.js:696
+msgid "Try to restart Transmission as soon as VPN restarts."
+msgstr "Yritä aloittaa lähetys uudelleen heti, kun VPN käynnistyy uudelleen."
+
+#: 2.8/applet.js:771 2.8/applet.js:773
+msgid "Click to disconnect from VPN"
+msgstr "Katkaise VPN napsauttamalla"
+
+#: 2.8/applet.js:802 2.8/applet.js:804
+msgid "Click to connect to VPN"
+msgstr "Napsauta muodostaaksesi yhteys VPN-verkkoon"
+
+#. metadata.json->description
+msgid ""
+"A Cinnamon applet that watches over the VPN link, displays its status, "
+"allows to connect at start-up to the last VPN used, allows to reconnect the "
+"VPN link if it incidentally drops, and can stop or restart VPN-related apps "
+"according to the state of the VPN."
+msgstr ""
+"Cinnamon sovelma, joka tarkkailee VPN-linkkiä, näyttää sen tilan, yhteyden "
+"muodostaminen käynnistyksen yhteydessä viimeksi käytettyyn VPN-verkkoon. VPN-"
+"linkin yhdistäminen uudelleen, jos yhteys katkeaa sekä pysäyttää tai "
+"käynnistää VPN-sovellukset uudelleen."
+
+#. 4.2->settings-schema.json->Alerts->title
+#. 3.8->settings-schema.json->Alerts->title
+#. 2.8->settings-schema.json->Alerts->title
+msgid "Notifications"
+msgstr "Ilmoitukset"
+
+#. 4.2->settings-schema.json->VPNpolicy->title
+#. 4.2->settings-schema.json->sectionV1->title
+#. 3.8->settings-schema.json->VPNpolicy->title
+#. 3.8->settings-schema.json->section1->title
+#. 2.8->settings-schema.json->VPNpolicy->title
+#. 2.8->settings-schema.json->section1->title
+msgid "VPN"
+msgstr "VPN"
+
+#. 4.2->settings-schema.json->Shortcut->title
+#. 3.8->settings-schema.json->Shortcut->title
+#. 2.8->settings-schema.json->Shortcut->title
+msgid "Keyboard shortcuts"
+msgstr "Pikanäppäimet"
+
+#. 4.2->settings-schema.json->sectionA1->title
+#. 3.8->settings-schema.json->section2->title
+#. 2.8->settings-schema.json->section2->title
+msgid "Display"
+msgstr "Näyttö"
+
+#. 4.2->settings-schema.json->sectionA2->title
+#. 3.8->settings-schema.json->section3->title
+#. 2.8->settings-schema.json->section3->title
+msgid "Sound Alert"
+msgstr "Äänihälytys"
+
+#. 4.2->settings-schema.json->sectionS1->title
+#. 3.8->settings-schema.json->section5->title
+#. 2.8->settings-schema.json->section5->title
+msgid "Shortcuts"
+msgstr "Pikanäppäimet"
+
+#. 4.2->settings-schema.json->sectionT1->title
+#. 3.8->settings-schema.json->section6->title
+msgid "Settings"
+msgstr "Asetukset"
+
+#. 4.2->settings-schema.json->sectionT2->title
+#. 3.8->settings-schema.json->section7->title
+msgid "Managed Apps"
+msgstr "Hallitut sovellukset"
+
+#. 4.2->settings-schema.json->sectionV2->title
+#. 3.8->settings-schema.json->section8->title
+msgid "Activity Logs"
+msgstr "Toimintalokit"
+
+#. 4.2->settings-schema.json->vpnInterface->description
+#. 3.8->settings-schema.json->vpnInterface->description
+#. 2.8->settings-schema.json->vpnInterface->description
+msgid "VPN Network Interface"
+msgstr "VPN-verkkoliittymä"
+
+#. 4.2->settings-schema.json->vpnInterface->tooltip
+#. 3.8->settings-schema.json->vpnInterface->tooltip
+#. 2.8->settings-schema.json->vpnInterface->tooltip
+msgid ""
+"You should be able to leave this field empty. This applet will try to detect "
+"this."
+msgstr ""
+"Sinun pitäisi jättämään tämä kenttä tyhjäksi. Sovelma yrittää havaita tämän."
+
+#. 4.2->settings-schema.json->vpnName->description
+#. 3.8->settings-schema.json->vpnName->description
+#. 2.8->settings-schema.json->vpnName->description
+msgid "VPN Name"
+msgstr "VPN nimi"
+
+#. 4.2->settings-schema.json->vpnName->tooltip
+#. 3.8->settings-schema.json->vpnName->tooltip
+#. 2.8->settings-schema.json->vpnName->tooltip
+msgid ""
+"This information is automatically changed when connecting to a VPN.\n"
+"It therefore contains the name of the last VPN to which you connected."
+msgstr ""
+"Tiedot muuttuvat automaattisesti, kun muodostetaan yhteys VPN-\n"
+"verkkoon. Siksi se sisältää viimeisimmän VPN:n nimen, johon liityit."
+
+#. 4.2->settings-schema.json->connectAtStartup->tooltip
+#. 3.8->settings-schema.json->connectAtStartup->tooltip
+#. 2.8->settings-schema.json->connectAtStartup->tooltip
+msgid ""
+"Checking this allows this applet to try to connect to the last VPN at start-"
+"up."
+msgstr ""
+"Valinta antaa sovelman yrittää yhteyttä viimeiseen VPN:ään käynnistyksen "
+"yhteydessä."
+
+#. 4.2->settings-schema.json->deactivateAtStartup->description
+msgid "Deactivate this applet at startup"
+msgstr "Poista sovelma käytöstä käynnistyksen yhteydessä"
+
+#. 4.2->settings-schema.json->deactivateAtStartup->tooltip
+msgid ""
+"When this option is checked, this applet starts in 'deactivated' state, "
+"saving resources but not monitoring anything. You can activate it from its "
+"menu."
+msgstr ""
+"Kun vaihtoehto on valittuna, tämä sovelma käynnistyy \"suljettuna\" säästäen "
+"resursseja, mutta ei valvo mitään. Voit aktivoida sen valikosta."
+
+#. 4.2->settings-schema.json->reconnect->tooltip
+#. 3.8->settings-schema.json->reconnect->tooltip
+#. 2.8->settings-schema.json->reconnect->tooltip
+msgid ""
+"Checking this allows this applet to try to reconnect to VPN when it shuts "
+"down incidentally."
+msgstr ""
+"Kun valittuna, tämä sovelma voi yrittää yhteyttä uudelleen VPN:ään, kun se "
+"sammuu vahingossa."
+
+#. 4.2->settings-schema.json->respectUserRequest->description
+#. 3.8->settings-schema.json->respectUserRequest->description
+msgid ""
+"Do not try to reconnect automatically if the VPN has been disconnected by "
+"the user."
+msgstr ""
+"Älä yritä muodostaa yhteyttä automaattisesti, jos käyttäjä on katkaissut VPN-"
+"yhteyden."
+
+#. 4.2->settings-schema.json->respectUserRequest->tooltip
+#. 3.8->settings-schema.json->respectUserRequest->tooltip
+msgid ""
+"If, by this applet only, the user disconnects the VPN, then no automatic "
+"reconnection will be tried."
+msgstr ""
+"Jos käyttäjä katkaisee yhteyden vain tämän sovelman avulla, automaattista "
+"VPN yhteyttä ei yritetä."
+
+#. 4.2->settings-schema.json->refreshInterval-spinner->units
+#. 3.8->settings-schema.json->refreshInterval-spinner->units
+#. 2.8->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "sekuntia"
+
+#. 4.2->settings-schema.json->refreshInterval-spinner->description
+#. 3.8->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh interval:"
+msgstr "Päivitysväli:"
+
+#. 4.2->settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.8->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Time interval, in seconds, between two verifications of VPN link status. A "
+"low value increases security but causes more activity. Choose a value that "
+"is greater as your computer is slow."
+msgstr ""
+"Aikaväli sekunteina kahden VPN-linkin tarkistuksen välillä. Pieni arvo lisää "
+"turvallisuutta, mutta lisää aktiivisuutta. Valitse suurempi arvo, jos "
+"tietokoneesi on hidas."
+
+#. 4.2->settings-schema.json->displayType->options
+#. 3.8->settings-schema.json->displayType->options
+#. 2.8->settings-schema.json->displayType->options
+msgid "Classic - Icon and Text"
+msgstr "Klassinen - kuvake ja teksti"
+
+#. 4.2->settings-schema.json->displayType->options
+#. 3.8->settings-schema.json->displayType->options
+#. 2.8->settings-schema.json->displayType->options
+msgid "Compact - Icon Only"
+msgstr "Tiivis - vain kuvake"
+
+#. 4.2->settings-schema.json->displayType->description
+#. 3.8->settings-schema.json->displayType->description
+#. 2.8->settings-schema.json->displayType->description
+msgid "Type of Display"
+msgstr "Näyttäminen"
+
+#. 4.2->settings-schema.json->displayType->tooltip
+#. 3.8->settings-schema.json->displayType->tooltip
+#. 2.8->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (default) display with icon and text, and "
+"compact display (Icon Only)."
+msgstr ""
+"Tämä tarjoaa klassisen (oletus) näyttämisen kuvakkeella ja tekstillä sekä "
+"tiiviin näyttämisen (vain kuvake)."
+
+#. 4.2->settings-schema.json->use_symbolic_icons->description
+msgid "Use Symbolic Icons"
+msgstr "Käytä symbolisia kuvakkeita"
+
+#. 4.2->settings-schema.json->use_symbolic_icons->tooltip
+msgid ""
+"Select this option if you prefer Symbolic icons instead of Full Color icons."
+msgstr ""
+"Valitse vaihtoehto, jos haluat mieluummin symbolisia kuvakkeita täysväristen "
+"kuvakkeiden sijaan."
+
+#. 4.2->settings-schema.json->useSoundAlert->description
+#. 3.8->settings-schema.json->useSoundAlert->description
+msgid "Emit an audible alert when VPN shuts down."
+msgstr "Lähetä äänihälytys, kun VPN katkeaa."
+
+#. 4.2->settings-schema.json->useSoundAlert->tooltip
+#. 3.8->settings-schema.json->useSoundAlert->tooltip
+msgid ""
+"Checking this allows this applet to emit an audible alert when VPN shuts "
+"down."
+msgstr ""
+"Kun tämä on valittuna, sovelma lähettää äänihälytyksen, kun VPN katkeaa."
+
+#. 4.2->settings-schema.json->useSoundAlertAtBeginning->description
+#. 3.8->settings-schema.json->useSoundAlertAtBeginning->description
+msgid "Emit this audible alert when this Applet starts, if VPN is down."
+msgstr "Lähetä tämä äänihälytys, kun sovelma käynnistyy, jos VPN alhaalla."
+
+#. 4.2->settings-schema.json->useSoundAlertAtBeginning->tooltip
+#. 3.8->settings-schema.json->useSoundAlertAtBeginning->tooltip
+msgid ""
+"Check this if you want to emit this audible alert when this Applet starts, "
+"if VPN is down."
+msgstr ""
+"Valitse, jos haluat lähettää tämän äänihälytyksen, kun sovelma käynnistyy, "
+"jos VPN alhaalla."
+
+#. 4.2->settings-schema.json->keybinding->description
+#. 3.8->settings-schema.json->keybinding->description
+#. 2.8->settings-schema.json->keybinding->description
+msgid "Set the keybinding here to activate/deactivate the last used VPN."
+msgstr ""
+"Aseta näppäinyhdistelmä aktivointi/sulkeminen viimeksi käytettyyn VPN:n."
+
+#. 4.2->settings-schema.json->manageClients->description
+#. 3.8->settings-schema.json->manageClients->description
+msgid "Manage VPN-related Apps"
+msgstr "Hallinnoi VPN:ään liittyviä sovelluksia"
+
+#. 4.2->settings-schema.json->manageClients->tooltip
+#. 3.8->settings-schema.json->manageClients->tooltip
+msgid ""
+"This option allows this applet to manage the VPN-related applications you "
+"listed above."
+msgstr ""
+"Tämä vaihtoehto sallii sovelman hallita yllä lueteltuja VPN-sovelluksia."
+
+#. 4.2->settings-schema.json->clientsList->description
+#. 3.8->settings-schema.json->clientsList->description
+msgid "Managed applications"
+msgstr "Hallitut sovellukset"
+
+#. 4.2->settings-schema.json->clientsList->tooltip
+#. 3.8->settings-schema.json->clientsList->tooltip
+msgid ""
+"Name: What you want.\n"
+"Command: The command to run the application, without its path.\n"
+"Restart: Set to TRUE if you want to restart this application as soon as the "
+"VPN link becomes active again.\n"
+"Shutdown: Set to TRUE if you want to close the application as soon as the "
+"VPN link is stopped.\n"
+"VPN only: Set to TRUE if you want to quickly stop this application if it is "
+"started while the VPN is idle."
+msgstr ""
+"Nimi: Mitä haluat.\n"
+"Komento: Komento käynnistää sovelluksen ilman polkua.\n"
+"Käynnistä: Aseta arvoksi TOSI, jos haluat käynnistää sovelluksen uudelleen "
+"heti, kun VPN-linkki aktivoituu uudelleen.\n"
+"Sammuta: Aseta arvoon TOSI, jos haluat sulkea sovelluksen heti, kun VPN-"
+"linkki pysäytetään.\n"
+"Vain VPN: Aseta arvoon TOSI, jos haluat pysäyttää sovelluksen nopeasti, jos "
+"se käynnistetään VPN:n ollessa käyttämättömänä."
+
+#. 4.2->settings-schema.json->clientsList->columns->title
+#. 3.8->settings-schema.json->clientsList->columns->title
+msgid "Name"
+msgstr "Nimi"
+
+#. 4.2->settings-schema.json->clientsList->columns->title
+#. 3.8->settings-schema.json->clientsList->columns->title
+msgid "Command"
+msgstr "Komento"
+
+#. 4.2->settings-schema.json->clientsList->columns->title
+#. 3.8->settings-schema.json->clientsList->columns->title
+msgid "Restart"
+msgstr "Käynnistä"
+
+#. 4.2->settings-schema.json->clientsList->columns->title
+#. 3.8->settings-schema.json->clientsList->columns->title
+msgid "Shut down"
+msgstr "Sammuta"
+
+#. 4.2->settings-schema.json->clientsList->columns->title
+#. 3.8->settings-schema.json->clientsList->columns->title
+msgid "VPN only"
+msgstr "Vain VPN"
+
+#. 4.2->settings-schema.json->doLogActivity->description
+#. 3.8->settings-schema.json->doLogActivity->description
+msgid "Log the VPN status changes and the VPN-related Apps status changes"
+msgstr "Kirjaa lokiin VPN-tilan muutokset ja VPN-sovellusten tilan muutokset"
+
+#. 4.2->settings-schema.json->doLogActivity->tooltip
+#. 3.8->settings-schema.json->doLogActivity->tooltip
+msgid ""
+"This option allows this applet to log the VPN status changes and the VPN-"
+"related applications status changes.\n"
+"You will can display the log file to make diagnostics."
+msgstr ""
+"Tämä aihtoehto sallii sovelman kirjata VPN-tilan muutokset ja VPN-"
+"sovellusten tilan muutokset.\n"
+"Voit näyttää lokitiedoston diagnostiikkaa varten."
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "1"
+msgstr "1"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "2"
+msgstr "2"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "3"
+msgstr "3"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "4"
+msgstr "4"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "5"
+msgstr "5"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "6"
+msgstr "6"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "7"
+msgstr "7"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "8"
+msgstr "8"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "9"
+msgstr "9"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "10"
+msgstr "10"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "15"
+msgstr "15"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "20"
+msgstr "20"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "30"
+msgstr "30"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "45"
+msgstr "45"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "60"
+msgstr "60"
+
+#. 4.2->settings-schema.json->logLifetime->options
+#. 3.8->settings-schema.json->logLifetime->options
+msgid "90"
+msgstr "90"
+
+#. 4.2->settings-schema.json->logLifetime->description
+#. 3.8->settings-schema.json->logLifetime->description
+msgid "Lifetime (days)"
+msgstr "Käyttöikä (päiviä)"
+
+#. 4.2->settings-schema.json->logLifetime->tooltip
+#. 3.8->settings-schema.json->logLifetime->tooltip
+msgid "Lifetime of a record in the log file, in days."
+msgstr "Tietueen käyttöikä lokitiedostossa päivinä."
+
+#. 2.8->settings-schema.json->section4->title
+msgid "Transmission"
+msgstr "Transmission"
+
+#. 2.8->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Näyttämisen päivitysväli:"
+
+#. 2.8->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh (ie high value) if you have a slow machine."
+msgstr ""
+"Suurenna tai pienennä tätä spinner-arvoa muuttaaksesi virkistysväliä - käytä "
+"hidasta päivitystä (eli korkeaa arvoa), jos koneessasi on hidas."
+
+#. 2.8->settings-schema.json->useSoundAlert->description
+msgid "Emit a sound alert when VPN shuts down."
+msgstr "Lähetä äänihälytys, kun VPN sammuu."
+
+#. 2.8->settings-schema.json->useSoundAlert->tooltip
+msgid ""
+"Checking this allows this applet to emit a sound alert when VPN shuts down."
+msgstr "Kun tämä on valittuna, sovelma antaa äänihälytyksen, kun VPN sammuu."
+
+#. 2.8->settings-schema.json->useSoundAlertAtBeginning->description
+msgid "Emit this sound alert when this Applet starts, if VPN is down."
+msgstr "Lähetä tämä äänihälytys, kun sovelma käynnistyy, jos VPN alhaalla."
+
+#. 2.8->settings-schema.json->useSoundAlertAtBeginning->tooltip
+msgid ""
+"Check this if you want to emit this sound alert when this Applet starts, if "
+"VPN is down."
+msgstr ""
+"Valitse, jos haluat lähettää tämän äänihälytyksen, kun sovelma käynnistyy, "
+"jos VPN sammunut."
+
+#. 2.8->settings-schema.json->stopTransmission->tooltip
+msgid ""
+"Checking this allows this applet to shut down Transmission (if it's running) "
+"as soon as VPN falls."
+msgstr ""
+"Valinta sallii tämän sovelman sulkea lähetyksen (jos se on käynnissä) heti, "
+"kun VPN kaatuu."
+
+#. 2.8->settings-schema.json->restartTransmission->tooltip
+msgid ""
+"Checking this allows this applet to restart Transmission (if it was stopped "
+"by this applet) as soon as VPN restarts."
+msgstr ""
+"Tämän valitseminen sallii sovelman käynnistää lähetyksen heti uudelleen (jos "
+"tämä sovelma pysäytti sen), kun VPN käynnistyy uudelleen."

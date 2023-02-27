@@ -1,5 +1,6 @@
 const Applet = imports.ui.applet;
 
+
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
@@ -14,7 +15,9 @@ const Signals = imports.signals;
 const Gettext = imports.gettext;
 const UUID = "qredshift@quintao";
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+const HOME = GLib.get_home_dir();
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
@@ -23,6 +26,8 @@ function _(str) {
 
 global.DEBUG = true;
 
+
+/** @type QUtils */
 const QUtils = require('./js/QUtils.js');
 
 const qLOG = QUtils.qLOG;
@@ -49,6 +54,21 @@ const S_ICON_ON = "redshift-status-on-symbolic";
 
 class QRedshift extends Applet.TextIconApplet {
     
+    /** @type QUtils.QPopupHeader | null */
+    redshift_config_menu_item = null;
+    /** @type QUtils.QPopupHeader | null */
+    redshift_info_menu_item = null;
+    
+    _current_temp = 0;
+    
+    get current_temp() {
+        return this._current_temp;
+    }
+    
+    set current_temp(current_temp) {
+        this._current_temp = parseInt(current_temp);
+    }
+    
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
         this.metadata = metadata;
@@ -57,7 +77,9 @@ class QRedshift extends Applet.TextIconApplet {
             redshift_version: 0,
             enabled: true,
             autoUpdate: false,
-            autoUpdateInterval: 30,
+            autoUpdateInterval: 20,
+            smoothTransition: true,
+            transitionDuration: 10, // In minutes
             adjustmentMethod: 'randr',
             labelScrollAction: 'disabled',
             iconLabel: false,
@@ -86,12 +108,12 @@ class QRedshift extends Applet.TextIconApplet {
                 h: 0,
                 m: 0
             },
-            nightTemp: 6500,
+            nightTemp: 3500,
             nightBrightness: 1,
             
             locationLatitude: '0',
             locationLongitude: '0',
-            period: '-'
+            period: '----------'
         };
         
         this.time = {
@@ -103,7 +125,7 @@ class QRedshift extends Applet.TextIconApplet {
                 h: 0,
                 m: 0
             },
-        }
+        };
         
         // Bind Settings
         this.settings = new Settings.AppletSettings(this.opt, metadata.uuid, instance_id);
@@ -134,6 +156,8 @@ class QRedshift extends Applet.TextIconApplet {
         this.settings.bind('gammaMix', 'gammaMix', this.onSettChange.bind(this));
         
         this.settings.bind('enabledNight', 'enabledNight', this.onSettChange.bind(this));
+        this.settings.bind('smoothTransition', 'smoothTransition', this.onSettChange.bind(this));
+        this.settings.bind('transitionDuration', 'transitionDuration', this.onSettChange.bind(this));
         this.settings.bind('manualNightTime', 'manualNightTime', this.onSettChange.bind(this));
         this.settings.bind('nightTemp', 'nightTemp', this.onSettChange.bind(this));
         this.settings.bind('nightBrightness', 'nightBrightness', this.onSettChange.bind(this));
@@ -202,12 +226,19 @@ class QRedshift extends Applet.TextIconApplet {
         this.createPopup();
         
         this.appMenu = this.menu;
+        this.current_temp = this.opt.dayTemp;
         
         // Reload BTN
         let reload_btn = new PopupMenu.PopupIconMenuItem(_("Reload Applet"), 'view-refresh-symbolic', QIcon.SYMBOLIC, {hover: true});
         reload_btn.connect('activate', this.reloadApplet.bind(this));
         this._applet_context_menu.addMenuItem(reload_btn);
         // this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        
+        // if (global.DEBUG) {
+        //     let generate_pot_btn = new PopupMenu.PopupIconMenuItem(_("Generate .POT file"), 'preferences-desktop-locale-symbolic', QIcon.SYMBOLIC, {hover: true});
+        //     generate_pot_btn.connect('activate', this.makePotFile.bind(this));
+        //     this._applet_context_menu.addMenuItem(generate_pot_btn);
+        // }
         
         let recompile_btn = new PopupMenu.PopupIconMenuItem(_("Recompile Translations"), 'preferences-desktop-locale-symbolic', QIcon.SYMBOLIC, {hover: true});
         recompile_btn.connect('activate', this.recompileTranslations.bind(this));
@@ -256,7 +287,7 @@ class QRedshift extends Applet.TextIconApplet {
         this.timeout_info = false;
         
         // --- Async Loading ---
-        this.verifyVersion(() => {
+        this.verify_version(() => {
             this.menu = this._applet_context_menu;
             
             this.timeout_info = Mainloop.timeout_add_seconds(1, () => {
@@ -267,16 +298,16 @@ class QRedshift extends Applet.TextIconApplet {
             }, null);
             
         }, (success) => {
-            Mainloop.source_remove(this.timeout_info)
+            Mainloop.source_remove(this.timeout_info);
             // Set Menu
             this.menu = this.appMenu;
             
             // Disable Redshift
-            this.disableRedshiftService();
+            this.disable_redshift_service();
             
-            // Load Informations
-            this.setAdjustmentMethods(false);
-            this.setLocation(false);
+            // Load Information
+            this.set_adjustment_methods(false);
+            this.set_location(false);
             
             this.doUpdate();
             
@@ -284,15 +315,27 @@ class QRedshift extends Applet.TextIconApplet {
         
     }
     
+    /**
+     * @typedef {{period: ('day'|'night'|'transition_to_day'|'transition_to_night'), is_night: boolean, percent: number}} check_period_return
+     */
+    /**
+     * @return {check_period_return}
+     */
     check_period() {
         let date = new Date();
-        let d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), 0);
+        let d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
         
         let date_s = new Date(d.getFullYear(), d.getMonth(), d.getDate(), this.time.nightStart.h, this.time.nightStart.m, 0);
         let date_e = new Date(d.getFullYear(), d.getMonth(), d.getDate(), this.time.nightEnd.h, this.time.nightEnd.m, 0);
         
+        let date_st = new Date(date_s.getTime() + this.opt.transitionDuration * 60000);
+        let date_et = new Date(date_e.getTime() + this.opt.transitionDuration * 60000);
+        
+        
         let night = false;
-        let percent = 1;
+        let percent = 0.0;
+        let period = '';
+        let debug = {};
         
         if (date_s <= date_e) {
             night = d >= date_s && d <= date_e;
@@ -301,13 +344,46 @@ class QRedshift extends Applet.TextIconApplet {
         } else {
             night = d < date_e;
         }
-        if (d.getTime() == date_s.getTime()) {
-            percent = date.getSeconds() / 60;
-        } else if (d.getTime() == date_e.getTime()) {
-            percent = date.getSeconds() / 60;
-        }
         
-        return {'period': night ? 'night' : 'day', 'is_night': night, 'percent': percent};
+        if (this.opt.smoothTransition) {
+            function rule_of_three(partial, total) {
+                return partial * 100 / total / 100;
+            }
+            
+            
+            if (night) {
+                percent = rule_of_three(d.getTime() - date_s.getTime(), date_st.getTime() - date_s.getTime());
+            } else {
+                percent = rule_of_three(d.getTime() - date_e.getTime(), date_et.getTime() - date_e.getTime());
+            }
+            percent = 1 - percent;
+            
+            debug = {
+                d: d.toLocaleTimeString('pt-br'),
+                date_s: date_s.toLocaleTimeString('pt-br'),
+                date_st: date_st.toLocaleTimeString('pt-br'),
+                date_e: date_e.toLocaleTimeString('pt-br'),
+                date_et: date_et.toLocaleTimeString('pt-br'),
+                percent: percent
+            };
+            
+            if (percent > 1.0) percent = 0;
+            else if (percent < 0) percent = 0;
+            
+            if (night) {
+                period = 'night';
+                period = (percent > 0 && percent < 1) ? 'transition_to_night' : 'night';
+            } else {
+                period = 'day';
+                period = (percent > 0 && percent < 1) ? 'transition_to_day' : 'day';
+            }
+            
+        }
+        let response = {'period': period, 'is_night': night, 'percent': percent, 'debug': debug};
+        
+        // qLOG('check_period', response);
+        
+        return response;
     }
     
     setIcon() {
@@ -329,7 +405,7 @@ class QRedshift extends Applet.TextIconApplet {
     }
     
     
-    verifyVersion(before = false, success = false) {
+    verify_version(before = false, success = false) {
         if (before) before();
         
         try {
@@ -346,16 +422,16 @@ class QRedshift extends Applet.TextIconApplet {
         
     }
     
-    disableRedshiftService() {
+    disable_redshift_service() {
         Util.spawn_async(GLib.shell_parse_argv("systemctl is-enabled --user redshift")[1], (out) => {
-            if (out.toString().trim() === 'enabled') {
+            if (QUtils.byte_array_to_string(out).trim() === 'enabled') {
                 Util.spawnCommandLine('systemctl mask --user redshift');
                 qLOG('QRedshift', 'Disabling Service');
             }
         });
         
         Util.spawn_async(GLib.shell_parse_argv("systemctl is-active --user redshift")[1], (out) => {
-            if (out.toString().trim() === 'active') {
+            if (QUtils.byte_array_to_string(out).trim() === 'active') {
                 Util.spawnCommandLine('systemctl stop --user redshift');
                 qLOG('QRedshift', 'Stopping Service');
             }
@@ -363,17 +439,53 @@ class QRedshift extends Applet.TextIconApplet {
         
     }
     
-    checkLocalConfig() {
-        try {
-            let home = GLib.get_home_dir();
-            let exists = GLib.file_test(home + '/.config/redshift.conf', 16);
-            return exists;
-        } catch (e) {
-            return true;
-        }
+    check_local_config() {
+        let path = "/.config/redshift.conf";
+        Util.spawnCommandLineAsync("cat " + HOME + path, (out) => {
+            if (this.redshift_config_menu_item == null) {
+                this.redshift_config_menu_item = new QPopupHeader({
+                    label: "~/.config/redshift.conf",
+                    sub_label: _("should be removed."),
+                    iconName: "dialog-warning", //dialog-warning-symbolic
+                    iconSize: 16
+                });
+                this.menu.addMenuItem(this.redshift_config_menu_item, 2);
+            }
+        }, (out) => {
+            if (this.redshift_config_menu_item !== null) {
+                this.redshift_config_menu_item.destroy();
+                this.redshift_config_menu_item = null;
+            }
+        });
+        
     }
     
-    setAdjustmentMethods(force = false) {
+    check_redshift_gtk() {
+        let cmd = "which redshift-gtk";
+        Util.spawnCommandLineAsync(cmd, (out) => {
+            if (this.redshift_info_menu_item == null) {
+                this.redshift_info_menu_item = new QPopupHeader({
+                    label: "redshift-gtk",
+                    sub_label: _("should be removed."),
+                    iconName: "dialog-warning", //dialog-warning-symbolic
+                    iconSize: 16
+                });
+                this.menu.addMenuItem(this.redshift_info_menu_item, 2);
+            }
+        }, (out) => {
+            if (this.redshift_info_menu_item !== null) {
+                this.redshift_info_menu_item.destroy();
+                this.redshift_info_menu_item = null;
+            }
+        });
+    }
+    
+    check_conflicts() {
+        this.check_local_config();
+        this.check_redshift_gtk();
+    }
+    
+    set_adjustment_methods(force = false) {
         let methods = this.settings.getOptions('adjustmentMethod');
         if (!methods.needload && !force) return;
         
@@ -389,7 +501,7 @@ class QRedshift extends Applet.TextIconApplet {
         
     }
     
-    setLocation(force = true) {
+    set_location(force = true) {
         let remoteEnable = this.settings.getValue('locationRemote');
         
         if (this.opt.locationLatitude != "0" && this.opt.locationLongitude != "0" && !force && !remoteEnable) return;
@@ -411,7 +523,7 @@ class QRedshift extends Applet.TextIconApplet {
             this.timeout = undefined;
         }
         
-        if (this.opt.enabled && this.opt.autoUpdate) {
+        if (this.opt.enabled && this.opt.autoUpdate && this.opt.enabledNight) {
             this.timeout = Mainloop.timeout_add_seconds(this.opt.autoUpdateInterval, this.doUpdate.bind(this), null);
             // qLOG('auto update', this.opt.autoUpdateInterval);
         }
@@ -461,8 +573,10 @@ class QRedshift extends Applet.TextIconApplet {
     }
     
     
-    onSettChange() {
+    onSettChange(value) {
         // qLOG('SETTINGS CHANGED', arguments);
+        // qLOG('SETTINGS CHANGED', value);
+        // qLOG('smoothTransition', this.opt.smoothTransition)
         
         this.enabledAuto.setToggleState(this.opt.autoUpdate);
         
@@ -499,27 +613,16 @@ class QRedshift extends Applet.TextIconApplet {
             iconPath: this.metadata.path + '/icon.png'
         });
         this.menu.addMenuItem(this.headerIcon);
+        
+        
+        
+        
+        // if (this.check_redshift_gtk()) {
+        qLOG('QRedshift', 'redshift-gtk should be removed');
+        
+        
+        
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        
-        
-        if (this.checkLocalConfig()) {
-            qLOG('QRedshift', '~/.config/redshift.conf should be removed');
-            
-            let info = new QPopupHeader({
-                label: "~/.config/redshift.conf",
-                sub_label: _("may conflict with this applet, it is highly recommended removing it."),
-                iconName: "dialog-warning", //dialog-warning-symbolic
-                iconSize: 16
-            })
-            this.menu.addMenuItem(info);
-            
-            
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-            
-        }
-        
-        
-        
         
         
         // region -- DAY Settings --
@@ -552,9 +655,8 @@ class QRedshift extends Applet.TextIconApplet {
             actor._setValueEmit('100');
         });
         this.menu.addMenuItem(this.db_Slider);
-        // endregion
         
-        // gamma
+        // Gamma
         this.gm_Slider = new QPopupSlider({
             label: _("Gamma:"), unit: '',
             value: this.opt.gammaMix, min: 0.5, max: 5, step: 0.01
@@ -647,8 +749,8 @@ class QRedshift extends Applet.TextIconApplet {
         this.bottomBar.addOnLeft(this.enabledLabel);
         // endregion
     }
-
-//region -- ON Slider Changes --
+    
+    //region -- ON Slider Changes --
     
     autoUpdateChange(switcher, value) {
         this.opt.autoUpdate = value;
@@ -697,8 +799,8 @@ class QRedshift extends Applet.TextIconApplet {
         this.opt.nightBrightness = value;
         this.doUpdate();
     }
-
-//endregion
+    
+    //endregion
     
     
     on_applet_added_to_panel() {
@@ -707,6 +809,7 @@ class QRedshift extends Applet.TextIconApplet {
     
     
     on_applet_clicked(event) {
+        this.check_conflicts();
         this.menu.toggle();
     }
     
@@ -731,39 +834,50 @@ class QRedshift extends Applet.TextIconApplet {
     }
     
     
-    doCommand(command) {
-        // qLOG('QRedshift CMD',  command);
-        if (!this.running) {
-            this.running = true;
-            Util.spawn_async(GLib.shell_parse_argv(command)[1], (out) => {
-                let period = out.match(/Period:.+/g);
-                if (period && period[0]) {
-                    this.opt.period = period[0].split(':')[1].trim();
-                }
-                // qLOG('QRedshift Command', command);
-                // qLOG('QRedshift Period', this.opt.period);
-                // this.setIcon();
-                this.updateTooltip();
-                this.setInfo();
-                this.running = false;
-            });
-        }
-        this.setIcon();
-    }
-    
-    doCommandSync(command) {
+    // doCommand(command) {
+    //     // qLOG('QRedshift CMD',  command);
+    //     if (!this.running) {
+    //         this.running = true;
+    //         Util.spawn_async(GLib.shell_parse_argv(command)[1], (out) => {
+    //             let period = out.match(/Period:.+/g);
+    //             if (period && period[0]) {
+    //                 this.opt.period = period[0].split(':')[1].trim();
+    //             }
+    //             // qLOG('QRedshift Command', command);
+    //             // qLOG('QRedshift Period', this.opt.period);
+    //             // this.setIcon();
+    //             this.updateTooltip();
+    //             this.setInfo();
+    //             this.running = false;
+    //         });
+    //     }
+    //     this.setIcon();
+    // }
+    /**
+     *
+     * @param {string} command
+     * @param {check_period_return | null} prd
+     */
+    doCommandSync(command, prd) {
         // qLOG('QRedshift CMD',  command);
         
         let [success, out] = GLib.spawn_command_line_sync(command);
         if (!success || out == null) return;
-        let resp = out.toString();
+        let resp = QUtils.byte_array_to_string(out);
         
-        let period = resp.match(/Period:.+/g);
-        if (period && period[0]) {
-            this.opt.period = period[0].split(':')[1].trim();
-        }
-        this.updateTooltip();
-        this.setInfo();
+        try {
+            let resp_array = resp.trim().split('\n');
+            
+            let period = resp_array[resp_array.length - 3].match(/.*:\s*(.+)$/)[1];
+            let temp = resp_array[resp_array.length - 2].match(/\d+/)[0];
+            
+            this.opt.period = period;
+            this.current_temp = temp;
+            
+        } catch (e) {}
+        
+        this.updateTooltip(prd);
+        this.setInfo(prd);
         this.setIcon();
     }
     
@@ -779,62 +893,78 @@ class QRedshift extends Applet.TextIconApplet {
             if (this.opt.adjustmentMethod) cmd += `-m ${this.opt.adjustmentMethod} `;
             
             if (this.opt.locationLatitude && this.opt.locationLongitude) {
-                cmd += `-l ${this.opt.locationLatitude}:${this.opt.locationLongitude} `
+                cmd += `-l ${this.opt.locationLatitude}:${this.opt.locationLongitude} `;
             }
             
+            let temp;
+            let prd = null;
             if (this.opt.enabledNight) {
                 if (this.opt.manualNightTime) {
-                    let prd = this.check_period();
+                    prd = this.check_period();
                     if (prd.is_night) {
-                        let temp = lerp(this.opt.dayTemp, this.opt.nightTemp, prd.percent);
+                        temp = lerp(this.opt.nightTemp, this.opt.dayTemp, prd.percent);
                         cmd += `-t ${temp}:${temp} `;
                         cmd += `-b ${this.opt.nightBrightness / 100}:${this.opt.nightBrightness / 100} `;
                     } else {
-                        let temp = lerp(this.opt.nightTemp, this.opt.dayTemp, prd.percent);
+                        temp = lerp(this.opt.dayTemp, this.opt.nightTemp, prd.percent);
                         cmd += `-t ${temp}:${temp} `;
                         cmd += `-b ${this.opt.dayBrightness / 100}:${this.opt.dayBrightness / 100} `;
                     }
+                    // qLOG('Temp', temp, `Period: ${prd.period}, Percent: ${prd.percent}`);
                 } else {
+                    temp = this.opt.dayTemp;
                     cmd += `-t ${this.opt.dayTemp}:${this.opt.nightTemp} `;
                     cmd += `-b ${this.opt.dayBrightness / 100}:${this.opt.nightBrightness / 100} `;
                 }
             } else {
+                temp = this.opt.dayTemp;
                 cmd += `-t ${this.opt.dayTemp}:${this.opt.dayTemp} `;
                 cmd += `-b ${this.opt.dayBrightness / 100}:${this.opt.dayBrightness / 100} `;
             }
             
+            this.current_temp = temp;
+            
             if (this.opt.gammaMix) cmd += `-g ${this.opt.gammaMix} `;
             
-            // Util.spawnCommandLine(cmd);
             this.set_applet_icon_symbolic_path(this.metadata.path + ICON_ON);
-            this.doCommandSync(cmd);
+            this.doCommandSync(cmd, prd);
             
         } else {
-            // if(this.opt.period !== '' ){
             Util.spawnCommandLine(`redshift -x`);
             this.set_applet_icon_symbolic_path(this.metadata.path + ICON_OFF);
             this.opt.period = '-';
             
-            // }
-            this.updateTooltip();
-            this.setInfo();
+            this.updateTooltip(null);
+            this.setInfo(null);
             this.setIcon();
         }
         
     }
     
-    setInfo() {
+    /**
+     * @param {check_period_return | null} prd
+     */
+    setInfo(prd) {
         let period = this.opt.period + "";
         
-        if (this.opt.enabled && this.opt.manualNightTime) {
-            if (this.check_period().is_night) period = _("Night");
-            else period = _("Day");
+        if (this.opt.enabled && this.opt.enabledNight && this.opt.manualNightTime && prd !== null) {
+            if (prd.period == 'transition_to_day') period = _("Transition to day");
+            else if (prd.period == 'transition_to_night') period = _("Transition to night");
+            else if (prd.period == 'night') period = _("Night");
+            else if (prd.period == 'day') period = _("Day");
+            // else if (prd.is_night) period = _("Night");
+            // else period = _("Day");
         }
         
-        this.headerIcon.setStatus(period + "");
+        if (this.opt.enabledNight)
+            this.headerIcon.setStatus(period + "");
+        else this.headerIcon.setStatus("-");
     }
     
-    updateTooltip() {
+    /**
+     * @param {check_period_return | null} prd
+     */
+    updateTooltip(prd) {
         let tooltiptext = `${this.metadata.name}: ${this.opt.enabled ? _("On") : _("Off")}`;
         // let labeltext = `${this.metadata.name}`;
         let labeltext = _("Off");
@@ -842,9 +972,11 @@ class QRedshift extends Applet.TextIconApplet {
         if (this.opt.enabled) {
             tooltiptext += '\n';
             let period = this.opt.period;
-            if (this.opt.manualNightTime) {
-                if (this.check_period().is_night) period = _("Night");
-                else period = _("Day");
+            if (this.opt.manualNightTime && prd != null) {
+                if (prd.period == 'transition_to_day') period = _("Transition to day");
+                else if (prd.period == 'transition_to_night') period = _("Transition to night");
+                else if (prd.period == 'night') period = _("Night");
+                else if (prd.period == 'day') period = _("Day");
             }
             tooltiptext += `${period}\n\n`;
             
@@ -864,11 +996,11 @@ class QRedshift extends Applet.TextIconApplet {
             
         }
         if (this.opt.enabledNight && this.opt.manualNightTime && this.check_period().is_night) {
-            labeltext = `${this.opt.nightTemp}k - ${this.opt.nightBrightness}% - `;
+            labeltext = `${this.current_temp}k - ${this.opt.nightBrightness}% - `;
         } else if (this.opt.enabledNight && !this.opt.manualNightTime && this.opt.period.toLowerCase().startsWith("n")) {
-            labeltext = `${this.opt.nightTemp}k - ${this.opt.nightBrightness}% - `;
+            labeltext = `${this.current_temp}k - ${this.opt.nightBrightness}% - `;
         } else {
-            labeltext = `${this.opt.dayTemp}k - ${this.opt.dayBrightness}% - `;
+            labeltext = `${this.current_temp}k - ${this.opt.dayBrightness}% - `;
         }
         labeltext += `${this.opt.gammaMix.toFixed(2)}`;
         
@@ -879,14 +1011,39 @@ class QRedshift extends Applet.TextIconApplet {
         if (!this.opt.enabled && !this.opt.iconLabelAlways) this.hideLabel();
     }
     
+    makePotFile() {
+        let cmd = `cinnamon-xlet-makepot ${this.metadata.path}`;
+        let resp = QUtils.spawn_command_line_sync_string_response(cmd);
+        if (resp.success && resp.stdout) {
+            if (resp.stdout.match(/polib/)) {
+                QUtils.show_error_notification(resp.stdout);
+            } else {
+                QUtils.show_info_notification(resp.stdout);
+            }
+        }
+    }
     
     // Cinnamon should be restarted after this.
     recompileTranslations() {
+        // Remove installed translations
         let cmd = `cinnamon-xlet-makepot -r ${this.metadata.path}`;
-        Util.spawnCommandLine(cmd);
+        let resp = QUtils.spawn_command_line_sync_string_response(cmd);
+        let success = true;
+        if (resp.success && resp.stdout) {
+            if (resp.stdout.match(/polib/)) {
+                success = false;
+                QUtils.show_error_notification(resp.stdout);
+            }
+        }
         
-        cmd = `cinnamon-xlet-makepot -i ${this.metadata.path}`;
-        Util.spawnCommandLine(cmd);
+        if (success) {
+            // Reinistall translations
+            cmd = `cinnamon-xlet-makepot -i ${this.metadata.path}`;
+            resp = QUtils.spawn_command_line_sync_string_response(cmd);
+            if (resp.success && resp.stdout) {
+                QUtils.show_info_notification(resp.stdout);
+            }
+        }
     }
     
     reloadApplet() {

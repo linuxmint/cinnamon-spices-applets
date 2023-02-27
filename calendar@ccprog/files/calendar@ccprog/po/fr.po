@@ -1,9 +1,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: calendar@ccprog 1.1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 15:40+0100\n"
+"POT-Creation-Date: 2022-06-30 17:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: \n"
@@ -14,21 +14,70 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: applet.js:65
-msgid "Date and Time Settings"
+#: applet.js:21
+msgid "%B %-e, %Y"
 msgstr ""
+
+#: applet.js:22 eventView.js:26
+msgid "%A, %B %-e, %Y"
+msgstr ""
+
+#: applet.js:131
+msgid "Date and Time Settings"
+msgstr "Paramètres date et heure"
+
+#: eventView.js:65
+msgid "Starting in a few minutes"
+msgstr "Commence dans quelques minutes"
+
+#: eventView.js:69
+#, javascript-format
+msgid "Starting in %d minutes"
+msgstr "Commence dans %d minutes"
+
+#: eventView.js:79
+msgid "This evening"
+msgstr "Cet après-midi"
+
+#: eventView.js:82
+msgid "Starting later today"
+msgstr "Commence plus tard aujourd'hui"
+
+#: eventView.js:85
+#, javascript-format
+msgid "In %d hour"
+msgid_plural "In %d hours"
+msgstr[0] "Dans %d heure"
+msgstr[1] "Dans %d heures"
+
+#: eventView.js:664
+msgid "No Events"
+msgstr "Aucun évènement"
+
+#: eventView.js:925
+msgid "In progress"
+msgstr "En cours"
+
+#: eventView.js:946
+msgid "All day"
+msgstr "Journée entière"
+
+#: eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
+msgid "Today"
+msgstr "Aujourd'hui"
 
 #: settings_widgets.py:95
 msgid "Add new entry"
-msgstr ""
+msgstr "Ajouter une nouvelle entrée"
 
 #: settings_widgets.py:99
 msgid "Edit entry"
-msgstr ""
+msgstr "Modifier l'entrée sélectionnée"
 
 #. settings-schema.json->region_aus->description
 #. settings-schema.json->region_can->description
 #. settings-schema.json->region_deu->description
+#. settings-schema.json->region_esp->description
 #. settings-schema.json->region_nzl->description
 #. settings-schema.json->region_svk->description
 #. settings-schema.json->region_che->description
@@ -40,7 +89,7 @@ msgstr "Région"
 
 #: settings_widgets.py:123
 msgid "City"
-msgstr ""
+msgstr "Ville"
 
 #. metadata.json->name
 msgid "Calendar with public Holidays"
@@ -54,7 +103,7 @@ msgstr ""
 
 #. settings-schema.json->page1->title
 msgid "Calendar"
-msgstr ""
+msgstr "Calendrier"
 
 #. settings-schema.json->page2->title
 #. settings-schema.json->worldclocks->description
@@ -63,7 +112,7 @@ msgstr "Horloges mondiales"
 
 #. settings-schema.json->section1->title
 msgid "Display"
-msgstr ""
+msgstr "Affichage"
 
 #. settings-schema.json->section2->title
 msgid "Get Public Holidays for"
@@ -71,19 +120,29 @@ msgstr "Obtenez les jours fériés pour"
 
 #. settings-schema.json->section3->title
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Raccourcis clavier"
 
 #. settings-schema.json->section4->title
 msgid "Show World Times"
 msgstr "Afficher les heures mondiales"
 
+#. settings-schema.json->show-events->description
+msgid "Show calendar events"
+msgstr "Afficher les évènements de calendrier"
+
+#. settings-schema.json->show-events->tooltip
+msgid "Check this to display events in the calendar."
+msgstr ""
+"Activez cette option pour afficher les évênements dans le calendrier."
+
 #. settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"
-msgstr ""
+msgstr "Afficher les numéros de semaine dans le calendrier"
 
 #. settings-schema.json->show-week-numbers->tooltip
 msgid "Check this to show week numbers in the calendar."
 msgstr ""
+"Cochez cette case pour afficher les numéros de semaine dans le calendrier."
 
 #. settings-schema.json->weekend-length->description
 msgid "Mark as weekend days"
@@ -104,28 +163,31 @@ msgstr "Deux jours"
 
 #. settings-schema.json->use-custom-format->description
 msgid "Use a custom date format"
-msgstr ""
+msgstr "Utiliser un format de date personnalisé"
 
 #. settings-schema.json->use-custom-format->tooltip
 msgid ""
 "Check this to define a custom format for the date in the calendar applet."
 msgstr ""
+"Cochez cette case pour définir votre propre format de date dans la barre des "
+"tâches."
 
 #. settings-schema.json->custom-format->description
 msgid "Date format"
-msgstr ""
+msgstr "Format de date"
 
 #. settings-schema.json->custom-format->tooltip
 msgid "Set your custom format here."
-msgstr ""
+msgstr "Spécifiez votre format ici."
 
 #. settings-schema.json->format-button->description
 msgid "Show information on date format syntax"
-msgstr ""
+msgstr "Afficher des indications sur la syntaxe du format de date"
 
 #. settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
 msgstr ""
+"Cliquez sur ce bouton pour en savoir plus sur la syntaxe des formats de date."
 
 #. settings-schema.json->country->description
 msgid "Country"
@@ -150,6 +212,10 @@ msgstr "Belgique"
 #. settings-schema.json->country->options
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnie-Herzégovine"
+
+#. settings-schema.json->country->options
+msgid "Belarus"
+msgstr "Biélorussie"
 
 #. settings-schema.json->country->options
 msgid "Brazil"
@@ -186,6 +252,10 @@ msgstr "Danemark"
 #. settings-schema.json->country->options
 msgid "Estonia"
 msgstr "Estonie"
+
+#. settings-schema.json->country->options
+msgid "Spain"
+msgstr "Espagne"
 
 #. settings-schema.json->country->options
 msgid "Finland"
@@ -325,7 +395,7 @@ msgstr "Suisse"
 
 #. settings-schema.json->country->options
 msgid "Turkey"
-msgstr ""
+msgstr "Turquie"
 
 #. settings-schema.json->country->options
 msgid "Ukraine"
@@ -486,6 +556,82 @@ msgstr "Schleswig-Holstein"
 #. settings-schema.json->region_deu->options
 msgid "Thüringen"
 msgstr "Thuringe"
+
+#. settings-schema.json->region_esp->options
+msgid "Andalucía"
+msgstr "Andalousie"
+
+#. settings-schema.json->region_esp->options
+msgid "Aragón"
+msgstr "Aragon"
+
+#. settings-schema.json->region_esp->options
+msgid "Asturias"
+msgstr "Asturies"
+
+#. settings-schema.json->region_esp->options
+msgid "Canarias"
+msgstr "Îles Canaries"
+
+#. settings-schema.json->region_esp->options
+msgid "Cantabria"
+msgstr "Cantabrie"
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla y León"
+msgstr "Castille-et-León"
+
+#. settings-schema.json->region_esp->options
+msgid "Castilla-La Mancha"
+msgstr "Castille-La Manche"
+
+#. settings-schema.json->region_esp->options
+msgid "Cataluña"
+msgstr "Catalogne"
+
+#. settings-schema.json->region_esp->options
+msgid "Ceuta"
+msgstr "Ceuta"
+
+#. settings-schema.json->region_esp->options
+msgid "Extremadura"
+msgstr "Estrémadure"
+
+#. settings-schema.json->region_esp->options
+msgid "Galicia"
+msgstr "Galice"
+
+#. settings-schema.json->region_esp->options
+msgid "Islas Baleares"
+msgstr "Îles Baléares"
+
+#. settings-schema.json->region_esp->options
+msgid "La Rioja"
+msgstr "La Rioja"
+
+#. settings-schema.json->region_esp->options
+msgid "Madrid"
+msgstr "Madrid"
+
+#. settings-schema.json->region_esp->options
+msgid "Melilla"
+msgstr "Melilla"
+
+#. settings-schema.json->region_esp->options
+msgid "Murcia"
+msgstr "Murcie"
+
+#. settings-schema.json->region_esp->options
+msgid "Navarra"
+msgstr "Navarre"
+
+#. settings-schema.json->region_esp->options
+msgid "País Vasco"
+msgstr "Pays Basque"
+
+#. settings-schema.json->region_esp->options
+msgid "Valencia"
+msgstr "Valence"
 
 #. settings-schema.json->region_nzl->options
 msgid "Auckland"
@@ -913,11 +1059,11 @@ msgstr "Wyoming"
 
 #. settings-schema.json->keyOpen->description
 msgid "Show calendar"
-msgstr ""
+msgstr "Afficher l'agenda"
 
 #. settings-schema.json->keyOpen->tooltip
 msgid "Set keybinding(s) to show the calendar."
-msgstr ""
+msgstr "Définir les raccourcis clavier pour afficher l'agenda."
 
 #. settings-schema.json->worldclocks->columns->title
 msgid "Display name"

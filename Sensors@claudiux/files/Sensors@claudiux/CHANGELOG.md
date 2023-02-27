@@ -1,3 +1,15 @@
+### v2.0.3~20230205
+  * Better integration with Fedora - Fixes #4672
+
+### v2.0.2~20230105
+  * Minor bug fix: remove useless trailing separator 
+
+### v2.0.1~20221228
+  * Bugfixes (changing text color)
+
+### v2.0.0~20221113
+  * Can now read disk temperature.
+
 ### v1.4.0~20201006
   * Add script `xs.py` for compatibility with Cinnamon 3.8 and 4.0.
   * Rewritten function `versionCompare` (in `constants.js`).

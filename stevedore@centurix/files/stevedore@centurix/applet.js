@@ -11,6 +11,7 @@ const Lang = imports.lang;
 const ModalDialog = imports.ui.modalDialog;
 const Clutter = imports.gi.Clutter;
 const Soup = imports.gi.Soup;
+const ByteArray = imports.byteArray;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 
@@ -21,6 +22,15 @@ if (typeof require !== 'undefined') {
 } else {
     Docker = imports.ui.appletManager.applets[UUID].docker;
 }
+
+let _httpSession;
+if (Soup.MAJOR_VERSION == 2) {
+    _httpSession = new Soup.SessionAsync();
+    Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+} else { //version 3
+    _httpSession = new Soup.Session();
+}
+
 const APPLET_PATH = global.userdatadir + "/applets/" + UUID;
 const ICON = APPLET_PATH + "/icons/icon.png";
 const ICON_MISSING = APPLET_PATH + "/icons/missing.png";
@@ -415,17 +425,29 @@ NewImageDialog.prototype = {
             });
             this._imageResults.add(temp_note, {row: 0, col: 0});
             let params = {};
-            let _httpSession = new Soup.Session();
+            
             let message = Soup.Message.new('GET', 'https://store.docker.com/api/content/v1/products/search?source=community&q=' + search_terms);
-
-            _httpSession.queue_message(message, Lang.bind(this,
-                function (_httpSession, message) {
-                    if (message.status_code !== 200)
-                        return;
-                    let json = JSON.parse(message.response_body.data);
-                    callback(json);
-                }
-            ));
+            
+            if (Soup.MAJOR_VERSION == 2) {
+                _httpSession.queue_message(message, Lang.bind(this,
+                    function (_httpSession, message) {
+                        if (message.status_code !== 200)
+                            return;
+                        let json = JSON.parse(message.response_body.data);
+                        callback(json);
+                    }
+                ));
+            } else { // version 3
+                _httpSession.send_and_read_async(message, Soup.MessagePriority.NORMAL, null, Lang.bind(this,
+                    function (_httpSession, response) {
+                        if (message.get_status() !== 200)
+                            return;
+                        const bytes = _httpSession.send_and_read_finish(response);
+                        let json = JSON.parse(ByteArray.toString(bytes.get_data()));
+                        callback(json);
+                    }
+                ));
+            }
         } catch(e) {
             global.log(e);
         }
