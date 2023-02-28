@@ -67,7 +67,6 @@ class EditDialog():
         self.dialog.set_title(APP_NAME)
         self.dialog.set_keep_above(True)
         self.dialog.set_position(Gtk.WindowPosition.MOUSE)
-        self.dialog.set_default_size(500, -1)
         self.dialog.show_all()
 
     def run(self):
