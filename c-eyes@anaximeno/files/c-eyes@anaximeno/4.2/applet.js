@@ -233,7 +233,7 @@ class Eye extends Applet.Applet {
 		this.click_debounced = (new Debouncer()).debounce(this._clickAnimation.bind(this), CLICK_DEBOUNCE_INTERVAL);
 
 		this.setActive(true);
-		this.setMouseCirclePropertyUpdate();
+		this.setMouseCirclePropertyUpdate(false);
 		this.setMouseCircleActive(this.mouse_click_show);
 		this.updateTooltip();
 	}
@@ -259,7 +259,7 @@ class Eye extends Applet.Applet {
 
 	on_property_updated(event, opts = { mouse_property_update: true, eye_property_update: true }) {
 		if (opts.mouse_property_update || true) /* Update by default */
-			this.setMouseCirclePropertyUpdate();
+			this.setMouseCirclePropertyUpdate(true);
 		if (opts.eye_property_update || true) /* Update by default */
 			this.setEyePropertyUpdate();
 		this.updateTooltip();
@@ -319,10 +319,10 @@ class Eye extends Applet.Applet {
 		}
 	}
 
-	setMouseCirclePropertyUpdate() {
-		this._mouseCircleCreateDataIcon('left_click', this.mouse_left_click_color);
-		this._mouseCircleCreateDataIcon('right_click', this.mouse_right_click_color);
-		this._mouseCircleCreateDataIcon('middle_click', this.mouse_middle_click_color);
+	setMouseCirclePropertyUpdate(checkCache = true) {
+		this._mouseCircleCreateDataIcon('left_click', this.mouse_left_click_color, checkCache);
+		this._mouseCircleCreateDataIcon('right_click', this.mouse_right_click_color, checkCache);
+		this._mouseCircleCreateDataIcon('middle_click', this.mouse_middle_click_color, checkCache);
 	}
 
 	setEyePropertyUpdate() {
@@ -340,7 +340,7 @@ class Eye extends Applet.Applet {
 		this._mouseListener.deregister('mouse');
 
 		if (enabled) {
-			this.setMouseCirclePropertyUpdate();
+			this.setMouseCirclePropertyUpdate(true);
 			this._mouseListener.register('mouse');
 		}
 	}
@@ -355,8 +355,8 @@ class Eye extends Applet.Applet {
 		}
 	}
 
-	_mouseCircleCreateDataIcon(name, color) {
-		if (this._getIconCached(this.data_dir, this.mouse_click_mode, name, color))
+	_mouseCircleCreateDataIcon(name, color, checkCache) {
+		if (checkCache && this._getIconCached(this.data_dir, this.mouse_click_mode, name, color))
 			return;
 
 		let source = Gio.File.new_for_path(`${this.img_dir}/${this.mouse_click_mode}.svg`);

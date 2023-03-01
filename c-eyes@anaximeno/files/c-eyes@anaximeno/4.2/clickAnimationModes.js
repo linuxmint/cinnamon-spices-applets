@@ -112,8 +112,8 @@ class BounceBackClickAnimationMode extends ClickAnimationMode {
         let actor = new St.Icon({
             x: mouse_x,
             y: mouse_y,
-            scale_x: 0.1,
-            scale_y: 0.1,
+            scale_x: 0,
+            scale_y: 0,
             reactive: false,
             can_focus: false,
             track_hover: false,
