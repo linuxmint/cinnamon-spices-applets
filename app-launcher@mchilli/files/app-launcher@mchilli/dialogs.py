@@ -2,11 +2,12 @@
 
 import gi
 gi.require_version("Gtk", "3.0")
+gi.require_version("Gdk", "3.0")
 gi.require_version('XApp', '1.0')
 
 import os
 import configparser
-from gi.repository import Gio, Gtk, GLib, XApp
+from gi.repository import Gio, Gtk, Gdk, GLib, XApp
 
 UUID = 'app-launcher@mchilli'
 APP_NAME = "App Launcher"
@@ -93,6 +94,7 @@ class EditDialog():
         return None
 
     def on_size_allocate(self, widget, rect):
+        widget.disconnect_by_func(self.on_size_allocate)
         hints = Gdk.Geometry()
         hints.max_width = widget.get_screen().get_width()
         hints.max_height = rect.height
