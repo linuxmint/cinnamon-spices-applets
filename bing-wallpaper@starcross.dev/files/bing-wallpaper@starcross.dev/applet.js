@@ -194,14 +194,17 @@ BingWallpaperApplet.prototype = {
         // open the file
         let fStream = gFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
 
-        // create an http message
+        // create a http message
         let request = Soup.Message.new('GET', urlUHD);
+
+        // keep track of total bytes written
+        let bytesTotal = 0;
 
         if (Soup.MAJOR_VERSION === 2) {
             // got_chunk event
             request.connect('got_chunk', function (message, chunk) {
                 if (message.status_code === 200) { // only save the data we want, not content of 301 redirect page
-                    fStream.write(chunk.get_data(), null);
+                    bytesTotal += fStream.write(chunk.get_data(), null);
                 }
             });
 
@@ -209,11 +212,12 @@ BingWallpaperApplet.prototype = {
             _httpSession.queue_message(request, (httpSession, message) => {
                 // request completed
                 fStream.close(null);
-                if (message.status_code === 200) {
-                    log('Download successful');
+                const contentLength = message.response_headers.get_content_length();
+                if (message.status_code === 200 && contentLength === bytesTotal)  {
                     this._setBackground();
                 } else {
                     log("Couldn't fetch image from " + urlUHD);
+                    gFile.delete(null);
                     this._setTimeout(60)  // Try again
                 }
             });
