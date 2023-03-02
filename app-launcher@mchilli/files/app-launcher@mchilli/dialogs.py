@@ -92,6 +92,13 @@ class EditDialog():
         self.dialog.destroy()
         return None
 
+    def on_size_allocate(self, widget, rect):
+        hints = Gdk.Geometry()
+        hints.max_width = widget.get_screen().get_width()
+        hints.max_height = rect.height
+        mask = Gdk.WindowHints.MAX_SIZE
+        widget.set_geometry_hints(None, hints, mask)
+
     def open_filechooser(self, *args):
         filechooser = Gtk.FileChooserDialog(
             title=APP_NAME, 
