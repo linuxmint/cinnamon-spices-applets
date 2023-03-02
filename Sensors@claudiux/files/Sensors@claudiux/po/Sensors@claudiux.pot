@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-28 00:20+0100\n"
+"POT-Creation-Date: 2023-02-26 12:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,45 +54,45 @@ msgstr ""
 msgid "Must be configured!"
 msgstr ""
 
-#: applet.js:811
+#: applet.js:818
 msgid "Settings"
 msgstr ""
 
-#: applet.js:811
+#: applet.js:818
 msgid ":"
 msgstr ""
 
 #. settings-schema.json->page_General->title
-#: applet.js:818
+#: applet.js:825
 msgid "⚙ General"
 msgstr ""
 
-#: applet.js:828
+#: applet.js:835
 msgid "🌡 Temperature sensors"
 msgstr ""
 
-#: applet.js:838
+#: applet.js:845
 msgid "🤂 Fan sensors"
 msgstr ""
 
-#: applet.js:848
+#: applet.js:855
 msgid "🗲 Voltage sensors"
 msgstr ""
 
-#: applet.js:858
+#: applet.js:865
 msgid "⮿ Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#: applet.js:869
+#: applet.js:876
 msgid "Run xsensors"
 msgstr ""
 
-#: applet.js:880
+#: applet.js:887
 msgid "Reload this applet"
 msgstr ""
 
-#: applet.js:1168
+#: applet.js:1175
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
