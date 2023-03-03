@@ -10,7 +10,7 @@ class PopupResizeHandler {
     constructor( actor, get_orientation, resized_callback, get_user_width, get_user_height) {
         this.actor = actor;
         this.get_orientation = get_orientation;
-        this.callback = resized_callback;
+        this.resized_callback = resized_callback;
         this.get_user_width = get_user_width;
         this.get_user_height = get_user_height;
 
@@ -39,7 +39,7 @@ class PopupResizeHandler {
         if (this.inhibit_resizing || this.no_edges_draggable)
             return false;
 
-        if (event.get_button() != 1)
+        if (event.get_button() != Clutter.BUTTON_PRIMARY)
             return false;
 
         //---Start drag------
@@ -94,7 +94,7 @@ class PopupResizeHandler {
         this.drag_start_size = null;
         this.resizingInProgress = false;
         //update position again while this.resizingInProgress === false so that applet can update settings
-        this.callback(this.last_new_user_width, this.last_new_user_height);
+        this.resized_callback(this.new_user_width, this.new_user_height);
     }
 
     _onEvent(actor, event) {
@@ -145,12 +145,12 @@ class PopupResizeHandler {
         
         if (this.actor.height > this.workAreaHeight) {
             const overHeight = this.actor.height - this.workAreaHeight;
-            this.callback(this.get_user_width(), this.get_user_height() - overHeight);
+            this.resized_callback(this.get_user_width(), this.get_user_height() - overHeight);
             return Clutter.EVENT_PROPAGATE;
         }
         if (this.actor.width > this.workAreaWidth) {
             const overWidth = this.actor.width - this.workAreaWidth;
-            this.callback(this.get_user_width() - overWidth, this.get_user_height());
+            this.resized_callback(this.get_user_width() - overWidth, this.get_user_height());
             return Clutter.EVENT_PROPAGATE;
         }
 
@@ -214,12 +214,10 @@ class PopupResizeHandler {
             delta_height = new_height - start_h;
         }
 
-        const new_user_width = this.init_user_width + delta_width;
-        const new_user_height = this.init_user_height + delta_height;
-        this.callback(new_user_width, new_user_height);
-        this.last_new_user_width = new_user_width;
-        this.last_new_user_height = new_user_height;
-
+        this.new_user_width = this.init_user_width + delta_width;
+        this.new_user_height = this.init_user_height + delta_height;
+        this.resized_callback(this.new_user_width, this.new_user_height);
+        
         return true;
     }
 

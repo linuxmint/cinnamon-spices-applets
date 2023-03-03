@@ -56,6 +56,8 @@ With Radio3.0 you can:
       1. [Arch](#DepArch)  
       1. [Fedora](#DepFedora)  
 
+  1. [How to install the latest version of yt-dlp?](#InstallYtdlp)
+
   1. [How to install the Radio3.0 applet?](#InstallApplet)  
 
   1. [Where to place the Radio3.0 applet icon?](#WhereToPlace)
@@ -164,7 +166,10 @@ To install Yay on in Arch Linux and other Arch-based systems, run the following 
 [Return to Table Of Contents](#TOC)
 
 ***
+<a name="InstallYtdlp"></a>
 ## How to install the latest version of yt-dlp?
+Please note that from version 1.0.3, Radio3.0 automatically installs and updates _yr-dlp_ in your `~/bin/` directory.
+
 _yt-dlp_ is used by **Radio3.0** to download videos from YouTube.
 
 The latest version of _yt-dlp_ fixes bugs and in particular takes better account of your browser's cookies so as not to deprive you of the right to download videos for age limit reasons.

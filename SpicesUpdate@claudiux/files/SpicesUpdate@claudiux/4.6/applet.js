@@ -1,17 +1,86 @@
 /* Spices Update (SpicesUpdate@claudiux) */
-const Applet = imports.ui.applet;
-const Settings = imports.ui.settings;
-const St = imports.gi.St;
-const Clutter = imports.gi.Clutter;
-const GdkPixbuf = imports.gi.GdkPixbuf;
-const Cogl = imports.gi.Cogl;
-const PopupMenu = imports.ui.popupMenu;
+const {
+    IconApplet,
+    AllowedLayout,
+    AppletPopupMenu
+} = imports.ui.applet; //Applet
+
+const {
+    AppletSettings
+} = imports.ui.settings; //Settings
+
+const {
+    Icon,
+    IconType,
+    BoxLayout,
+    Align,
+    Label,
+    TextureCache,
+    Side,
+    Widget,
+    TextDirection
+} = imports.gi.St; //St
+
+const {
+    Image,
+    Actor,
+    Color,
+    RotateAxis
+} = imports.gi.Clutter; //Clutter
+
+const {
+    Pixbuf
+} = imports.gi.GdkPixbuf; //GdkPixbuf
+
+const {
+    PixelFormat
+} = imports.gi.Cogl; //Cogl
+
+const {
+    PopupMenuManager,
+    PopupMenuItem,
+    PopupSeparatorMenuItem,
+    PopupIndicatorMenuItem,
+    PopupIconMenuItem,
+    PopupSubMenuMenuItem
+} = imports.ui.popupMenu; //PopupMenu
+
 const Lang = imports.lang;
-const GLib = imports.gi.GLib;
-const Gio = imports.gi.Gio;
-const Gtk = imports.gi.Gtk;
-const Gdk = imports.gi.Gdk;
-const Mainloop = imports.mainloop;
+
+const {
+    LogLevelFlags,
+    getenv,
+    get_language_names,
+    filename_to_uri,
+    find_program_in_path,
+    mkdir_with_parents,
+    file_set_contents,
+    file_get_contents,
+    uuid_string_random,
+    markup_escape_text
+} = imports.gi.GLib; //GLib
+
+const {
+    network_monitor_get_default,
+    file_new_for_path,
+    icon_new_for_string,
+    FileQueryInfoFlags,
+    FileType,
+    Settings,
+    FileCreateFlags
+} = imports.gi.Gio; //Gio
+
+const Gtk = imports.gi.Gtk; //  /!\ Gtk.Label != St.Label
+
+const {
+    Display
+} = imports.gi.Gdk; // Gdk
+
+const {
+    source_remove,
+    timeout_add_seconds
+} = imports.mainloop; //Mainloop
+
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 const Util = imports.misc.util;
@@ -67,16 +136,16 @@ Util.spawnCommandLine("/bin/sh -c '%s/witness-debian.sh'".format(SCRIPTS_DIR));
 
 
 function getImageAtScale(imageFileName, width, height) {
-    let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(imageFileName, width, height);
-    let image = new Clutter.Image();
+    let pixBuf = Pixbuf.new_from_file_at_size(imageFileName, width, height);
+    let image = new Image();
     image.set_data(
         pixBuf.get_pixels(),
-        pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
+        pixBuf.get_has_alpha() ? PixelFormat.RGBA_8888 : PixelFormat.RGBA_888,
         width, height,
         pixBuf.get_rowstride()
     );
 
-    let actor = new Clutter.Actor({width: width, height: height});
+    let actor = new Actor({width: width, height: height});
     actor.set_content(image);
 
     return actor;
@@ -86,7 +155,7 @@ function getImageAtScale(imageFileName, width, height) {
 function SU_setup_logging(quiet = false, verbose = false) {
     if (quiet) {
         // quiet mode
-        hidden_levels = GLib.LogLevelFlags.LEVEL_MESSAGE | GLib.LogLevelFlags.LEVEL_INFO | GLib.LogLevelFlags.LEVEL_DEBUG | GLib.LogLevelFlags.LEVEL_WARNING;
+        hidden_levels = LogLevelFlags.LEVEL_MESSAGE | LogLevelFlags.LEVEL_INFO | LogLevelFlags.LEVEL_DEBUG | LogLevelFlags.LEVEL_WARNING;
 
     } else if (verbose) {
         // verbose mode
@@ -98,7 +167,7 @@ function SU_setup_logging(quiet = false, verbose = false) {
 }
 
 let SpicesUpdate_Notification;
-if (versionCompare( GLib.getenv('CINNAMON_VERSION') ,"4.6.0" ) < 0 ) {
+if (versionCompare( getenv('CINNAMON_VERSION') ,"4.6.0" ) < 0 ) {
     SpicesUpdate_Notification = require("./notifications_upto_44");
 } else {
     SpicesUpdate_Notification = require("./notifications_from_46");
@@ -135,12 +204,12 @@ function criticalNotify(msg, details, icon, button=[]) {
 /**
  * Class SpicesUpdate
  */
-class SpicesUpdate extends Applet.IconApplet {
+class SpicesUpdate extends IconApplet {
 
     constructor (metadata, orientation, panelHeight, instance_id) {
         super(orientation, panelHeight, instance_id);
         this.instanceId = instance_id.toString();
-        this.setAllowedLayout(Applet.AllowedLayout.BOTH); // Can be used on horizontal or vertical panels.
+        this.setAllowedLayout(AllowedLayout.BOTH); // Can be used on horizontal or vertical panels.
         this.set_applet_icon_symbolic_name("spices-update");
         this.default_tooltip = "%s %s".format(_("Spices Update"), metadata.version);
         this.tooltip_contents = "<b>" + this.default_tooltip + "</b>" + "\n%s".format(_("Middle-Click to Refresh"));
@@ -250,8 +319,8 @@ class SpicesUpdate extends Applet.IconApplet {
         if (!this.dependenciesMet) this.refreshInterval = 5;
 
         // ++ Set up Left Click Menu
-        this.menuManager = new PopupMenu.PopupMenuManager(this);
-        this.menu = new Applet.AppletPopupMenu(this, orientation);
+        this.menuManager = new PopupMenuManager(this);
+        this.menu = new AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
         // Badge
@@ -265,7 +334,7 @@ class SpicesUpdate extends Applet.IconApplet {
     }
 
     get_SU_settings() {
-        this.settings = new Settings.AppletSettings(this, UUID, this.instance_id);
+        this.settings = new AppletSettings(this, UUID, this.instance_id);
 
         // Setting the this.refreshInterval value:
         this.settings.bind(
@@ -286,9 +355,9 @@ class SpicesUpdate extends Applet.IconApplet {
                 this.settings.setValue("check_new_%s".format(t), false);
             }
             this.settings.setValue("first_time", false);
-            let icon = new St.Icon({
+            let icon = new Icon({
                 icon_name: "spices-update",
-                icon_type: St.IconType.SYMBOLIC,
+                icon_type: IconType.SYMBOLIC,
                 icon_size: 32 });
             criticalNotify(
                 _("Spices Update has just been installed or upgraded"),
@@ -498,7 +567,7 @@ class SpicesUpdate extends Applet.IconApplet {
 
         this.netMonitors = [];
         try {
-            this.netMonitor = Gio.network_monitor_get_default();
+            this.netMonitor = network_monitor_get_default();
             let netMonitorId = this.netMonitor.connect(
                 'network-changed',
                 (monitor, network_available) => this._on_network_changed()
@@ -518,22 +587,22 @@ class SpicesUpdate extends Applet.IconApplet {
      * Badge
      */
     badge_font_size() {
-        return Math.max(11, Math.round(this.getPanelIconSize(St.IconType.SYMBOLIC) / 3))
+        return Math.max(11, Math.round(this.getPanelIconSize(IconType.SYMBOLIC) / 3))
     }
 
     horizontal_anchor_x() {
-        return this.getPanelIconSize(St.IconType.SYMBOLIC) + 8
+        return this.getPanelIconSize(IconType.SYMBOLIC) + 8
     }
 
     horizontal_anchor_y() {
-        let iconSize = this.getPanelIconSize(St.IconType.SYMBOLIC);
+        let iconSize = this.getPanelIconSize(IconType.SYMBOLIC);
         let fontSize = this.badge_font_size();
 
         return fontSize - (iconSize + Math.round((this.panel.height - iconSize) /2))
     }
 
     vertical_anchor_x() {
-        return -Math.round((this.panel.height - this.getPanelIconSize(St.IconType.SYMBOLIC)) /2)
+        return -Math.round((this.panel.height - this.getPanelIconSize(IconType.SYMBOLIC)) /2)
     }
 
     vertical_anchor_y() {
@@ -543,20 +612,20 @@ class SpicesUpdate extends Applet.IconApplet {
     define_badge() {
         let fontSize = this.badge_font_size();
         let badgeSize = (fontSize + 1) * global.ui_scale;
-        let iconSize = this.getPanelIconSize(St.IconType.SYMBOLIC);
+        let iconSize = this.getPanelIconSize(IconType.SYMBOLIC);
 
         if (this.badge) this.actor.remove_child(this.badge);
-        this.badge = new St.BoxLayout({
+        this.badge = new BoxLayout({
             style_class: "SU-badge",
             important: true,
             width: badgeSize,
             height: badgeSize,
-            x_align: St.Align.MIDDLE,
-            y_align: St.Align.MIDDLE,
+            x_align: Align.MIDDLE,
+            y_align: Align.MIDDLE,
             show_on_set_parent: false,
             style: "margin: 0;",
         });
-        this.numberLabel = new St.Label({
+        this.numberLabel = new Label({
             style: "font-size: %spx; padding: 0px; color: %s; text-shadow: black 1px 1px 3px;".format(fontSize.toString(), this.defaultColor),
             important: true,
             text: "",
@@ -565,8 +634,8 @@ class SpicesUpdate extends Applet.IconApplet {
         });
         this.numberLabel.clutter_text.ellipsize = false;
         this.badge.add(this.numberLabel, {
-            x_align: St.Align.MIDDLE,
-            y_align: St.Align.MIDDLE,
+            x_align: Align.MIDDLE,
+            y_align: Align.MIDDLE,
             anchor_x: -1,
             anchor_y: -1 + (global.ui_scale > 1 ? 3 : 0),
         });
@@ -589,7 +658,7 @@ class SpicesUpdate extends Applet.IconApplet {
     get_user_language() {
         let _language;
         try {
-            _language = GLib.get_language_names().toString().split(",")[0].toString();
+            _language = get_language_names().toString().split(",")[0].toString();
         } catch(e) {
             // Unable to detect language. Return English by default.
             _language = "en";
@@ -604,20 +673,20 @@ class SpicesUpdate extends Applet.IconApplet {
      */
     //~ get_translated_help_file() {
         //~ let default_file_name = HELP_DIR + "/en/README.html";
-        //~ let help_file = Gio.file_new_for_path(default_file_name);
+        //~ let help_file = file_new_for_path(default_file_name);
         //~ let language = "";
         //~ let lang = "";
         //~ if (!help_file.query_exists(null)) {
             //~ return null;
         //~ }
         //~ try {
-            //~ language = GLib.get_language_names().toString().split(",")[0].toString();
+            //~ language = get_language_names().toString().split(",")[0].toString();
         //~ } catch(e) {
             //~ // Unable to detect language. Return English help file by default.
             //~ return default_file_name;
         //~ }
         //~ let file_name = "%s/%s/README.html".format(HELP_DIR, language);
-        //~ help_file = Gio.file_new_for_path(file_name);
+        //~ help_file = file_new_for_path(file_name);
         //~ if (help_file.query_exists(null)) {
             //~ return file_name;
         //~ } else {
@@ -627,7 +696,7 @@ class SpicesUpdate extends Applet.IconApplet {
                 //~ return default_file_name;
             //~ } else {
                 //~ file_name = "%s/%s/README.html".format(HELP_DIR, lang);
-                //~ help_file = Gio.file_new_for_path(file_name);
+                //~ help_file = file_new_for_path(file_name);
                 //~ if (help_file.query_exists(null)) {
                     //~ return file_name;
                 //~ } else {
@@ -642,8 +711,8 @@ class SpicesUpdate extends Applet.IconApplet {
         let source = new MessageTray.SystemNotificationSource();
         if (Main.messageTray) {
             Main.messageTray.add(source);
-            let gicon = Gio.icon_new_for_string(APPLET_DIR + "/icon.png");
-            let icon = new St.Icon({ gicon: gicon, "icon-size": 32});
+            let gicon = icon_new_for_string(APPLET_DIR + "/icon.png");
+            let icon = new Icon({ gicon: gicon, "icon-size": 32});
             let notification = new MessageTray.Notification(source, _("Spices Update"), message, {icon: icon, bodyMarkup: true});
             notification.setTransient(false);
             notification.setResident(true);
@@ -661,8 +730,8 @@ class SpicesUpdate extends Applet.IconApplet {
         let source = new MessageTray.SystemNotificationSource();
         if (Main.messageTray) {
             Main.messageTray.add(source);
-            let gicon = Gio.icon_new_for_string(APPLET_DIR + "/icon.png");
-            let icon = new St.Icon({ gicon: gicon, "icon-size": 32});
+            let gicon = icon_new_for_string(APPLET_DIR + "/icon.png");
+            let icon = new Icon({ gicon: gicon, "icon-size": 32});
             let notification = new SU_Notification(source, _("Spices Update"), message, {icon: icon, bodyMarkup: true});
             notification.setTransient(false);
             notification.setResident(true);
@@ -670,16 +739,16 @@ class SpicesUpdate extends Applet.IconApplet {
             //notification._scrollArea["vscrollbar_policy"] = Gtk.PolicyType.NEVER; // EXTERNAL ? (GLib >= 3.16)
             //notification._scrollArea["vscrollbar_policy"] = Gtk.PolicyType.EXTERNAL;
             //notification._scrollArea.enable_mouse_scrolling = true;
-            let img_uri = GLib.filename_to_uri("%s/cs-%s.png".format(ICONS_DIR, type.toString()), null);
+            let img_uri = filename_to_uri("%s/cs-%s.png".format(ICONS_DIR, type.toString()), null);
             if (uuid !== null) {
                 let uri= CACHE_DIR + "/" + this._get_singular_type(type) + "/" + uuid + ".png";
-                let file = Gio.file_new_for_path(uri);
+                let file = file_new_for_path(uri);
                 if (file.query_exists(null)) {
-                    img_uri = GLib.filename_to_uri(uri, null);
+                    img_uri = filename_to_uri(uri, null);
                 }
             }
             let img_size = Math.round(notification.IMAGE_SIZE/2);
-            let image = St.TextureCache.get_default().load_uri_async(img_uri, img_size, img_size);
+            let image = TextureCache.get_default().load_uri_async(img_uri, img_size, img_size);
             notification.setImage(image);
 
             notification.setUseActionIcons(this.general_type_notif === "iconic");
@@ -773,7 +842,7 @@ class SpicesUpdate extends Applet.IconApplet {
 
     on_orientation_changed (orientation) {
         this.orientation = orientation;
-        this.isHorizontal = !(this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
+        this.isHorizontal = !(this.orientation == Side.LEFT || this.orientation == Side.RIGHT);
         this._set_main_label();
         // End of on_orientation_changed
     }
@@ -820,13 +889,14 @@ class SpicesUpdate extends Applet.IconApplet {
     }
 
     on_frequency_changed() {
-        if (this.loopId) {
-            Mainloop.source_remove(this.loopId);
+        if (this.loopId > 0) {
+            source_remove(this.loopId);
+            this.loopId = 0;
         }
-        this.loopId = 0;
+
         let coeff = QUICK() ? 120 : 3600;
         this.refreshInterval = coeff * this.general_frequency;
-        this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
+        this.loopId = timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
         // End of on_frequency_changed
     }
 
@@ -851,7 +921,7 @@ class SpicesUpdate extends Applet.IconApplet {
 
         // All xlets
         for (let type of TYPES) {
-            let _dir_xlets = Gio.file_new_for_path(DIR_MAP[type]);
+            let _dir_xlets = file_new_for_path(DIR_MAP[type]);
             let isEmpty = this._is_empty_local_dir(type);
             if (!_dir_xlets.query_exists(null) || isEmpty) {
                 this.check[type].set_value(false);
@@ -924,20 +994,20 @@ class SpicesUpdate extends Applet.IconApplet {
 
     on_tooltip_max_width_screen_percentage_changed() {
         let _screen;
-        if (Gdk.Display.get_default().get_default_screen)
-            _screen = Gdk.Display.get_default().get_default_screen(); // Glib >= 3.20
+        if (Display.get_default().get_default_screen)
+            _screen = Display.get_default().get_default_screen(); // Glib >= 3.20
         else
-            _screen = Gdk.Display.get_default().get_screen(0); // 2.2 <= Glib < 3.20
+            _screen = Display.get_default().get_screen(0); // 2.2 <= Glib < 3.20
 
         this.tooltip_max_width = Math.round(_screen.get_width() * this.tooltip_max_width_screen_percentage / 100);
     }
 
     _is_empty_local_dir(type) {
-        let dir = Gio.file_new_for_path(DIR_MAP[type]);
+        let dir = file_new_for_path(DIR_MAP[type]);
         let isEmpty = true;
         let info;
         if (dir.query_exists(null)) {
-            let children = dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+            let children = dir.enumerate_children("standard::name,standard::type", FileQueryInfoFlags.NONE, null);
             if ((info = children.next_file(null)) != null) {
                 isEmpty = false;
             }
@@ -1010,7 +1080,7 @@ class SpicesUpdate extends Applet.IconApplet {
             let unprotectedSpices_length = unprotectedSpices.length;
             for (var i=0; i < unprotectedSpices_length; i++) {
                 let a = unprotectedSpices[i];
-                let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
+                let d = file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
                 if (d.query_exists(null)) {
                     this.unprotectedDico[type][a["name"]] = a["isunprotected"];
                     let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
@@ -1030,15 +1100,15 @@ class SpicesUpdate extends Applet.IconApplet {
             }
 
             // Are there new applets installed? If there are, then push them in this.unprotected_applets:
-            let dir = Gio.file_new_for_path(DIR_MAP[type]);
+            let dir = file_new_for_path(DIR_MAP[type]);
             if (dir.query_exists(null)) {
-                let children = dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+                let children = dir.enumerate_children("standard::name,standard::type", FileQueryInfoFlags.NONE, null);
                 let info, file_type;
                 var name;
 
                 while ((info = children.next_file(null)) != null) {
                     file_type = info.get_file_type();
-                    if (file_type == Gio.FileType.DIRECTORY) {
+                    if (file_type == FileType.DIRECTORY) {
                         name = info.get_name().toString();
                         if (this.unprotectedDico[type][name] === undefined) {
                             this.unprotectedList[type].push({"name": name, "isunprotected": true, "requestnewdownload": false});
@@ -1106,15 +1176,15 @@ class SpicesUpdate extends Applet.IconApplet {
 
     are_dependencies_installed() {
         let _fonts_installed = (
-            Gio.file_new_for_path("/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf").query_exists(null) ||
-            Gio.file_new_for_path("/usr/share/fonts/TTF/Symbola.ttf").query_exists(null) ||
-            Gio.file_new_for_path("/usr/share/fonts/gdouros-symbola/Symbola.ttf").query_exists(null) ||
-            Gio.file_new_for_path("%s/.local/share/fonts/Symbola_Hinted.ttf".format(HOME_DIR)).query_exists(null) ||
-            Gio.file_new_for_path("%s/.local/share/fonts/Symbola.ttf".format(HOME_DIR)).query_exists(null) ||
-            Gio.file_new_for_path("%s/.local/share/fonts/Symbola.otf".format(HOME_DIR)).query_exists(null)
+            file_new_for_path("/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf").query_exists(null) ||
+            file_new_for_path("/usr/share/fonts/TTF/Symbola.ttf").query_exists(null) ||
+            file_new_for_path("/usr/share/fonts/gdouros-symbola/Symbola.ttf").query_exists(null) ||
+            file_new_for_path("%s/.local/share/fonts/Symbola_Hinted.ttf".format(HOME_DIR)).query_exists(null) ||
+            file_new_for_path("%s/.local/share/fonts/Symbola.ttf".format(HOME_DIR)).query_exists(null) ||
+            file_new_for_path("%s/.local/share/fonts/Symbola.otf".format(HOME_DIR)).query_exists(null)
         )
         if (!_fonts_installed) {
-            let _ArchlinuxWitnessFile = Gio.file_new_for_path("/etc/arch-release");
+            let _ArchlinuxWitnessFile = file_new_for_path("/etc/arch-release");
             let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
             if (_isArchlinux) {
                 Util.spawnCommandLineAsync("/bin/sh -c \"%s/install_symbola_on_Arch.sh\"".format(SCRIPTS_DIR), null, null);
@@ -1122,7 +1192,7 @@ class SpicesUpdate extends Applet.IconApplet {
             }
         }
         this.fonts_installed = _fonts_installed;
-        //this.notifysend_installed = GLib.find_program_in_path("notify-send");
+        //this.notifysend_installed = find_program_in_path("notify-send");
         //return (this.fonts_installed && this.notifysend_installed);
         return (this.fonts_installed);
         // End of are_dependencies_installed
@@ -1134,8 +1204,8 @@ class SpicesUpdate extends Applet.IconApplet {
         var t;
         let _terminals_length = _terminals.length;
         for (t=0; t < _terminals_length ; t++) {
-            if (GLib.find_program_in_path(_terminals[t])) {
-                term_found = GLib.find_program_in_path(_terminals[t]);
+            if (find_program_in_path(_terminals[t])) {
+                term_found = find_program_in_path(_terminals[t]);
                 break
             }
         }
@@ -1162,19 +1232,19 @@ class SpicesUpdate extends Applet.IconApplet {
             // Reload this applet with dependencies installed
             Extension.reloadExtension(UUID, Extension.Type.APPLET);
         } else if (!this.are_dependencies_installed() && this.notification === null) {
-            let icon = new St.Icon({
+            let icon = new Icon({
                 icon_name: "error",
-                icon_type: St.IconType.FULLCOLOR,
+                icon_type: IconType.FULLCOLOR,
                 icon_size: 36 });
             // Got a terminal used on this system:
             let terminal = this.get_terminal();
             // apturl is it present?
-            let _is_apturl_present = GLib.find_program_in_path("apturl");
+            let _is_apturl_present = find_program_in_path("apturl");
             // Detects the distrib in use and make adapted message and notification:
-            let _isFedora = GLib.find_program_in_path("dnf");
-            let _ArchlinuxWitnessFile = Gio.file_new_for_path("/etc/arch-release");
+            let _isFedora = find_program_in_path("dnf");
+            let _ArchlinuxWitnessFile = file_new_for_path("/etc/arch-release");
             let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
-            let _DebianWitnessFile = Gio.file_new_for_path("/tmp/DEBIAN");
+            let _DebianWitnessFile = file_new_for_path("/tmp/DEBIAN");
             let _isDebian = _DebianWitnessFile.query_exists(null);
             let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : _isDebian ? "apt update" : "sudo apt update";
             let _and = _isArchlinux ? "" : " \\\\&\\\\& ";
@@ -1204,16 +1274,16 @@ class SpicesUpdate extends Applet.IconApplet {
 
     _load_cache(type) {
         let jsonFileName = CACHE_MAP[type];
-        let jsonFile = Gio.file_new_for_path(jsonFileName);
+        let jsonFile = file_new_for_path(jsonFileName);
         if (!jsonFile.query_exists(null)) {
             let jsonDirName = CACHE_DIR + "/" + this._get_singular_type(type);
-            GLib.mkdir_with_parents(jsonDirName, 0o755);
-            GLib.file_set_contents(jsonFileName,"{}");
+            mkdir_with_parents(jsonDirName, 0o755);
+            file_set_contents(jsonFileName,"{}");
         }
         if (jsonFile.query_exists(null)) {
             this.oldCache[type] = this.cache[type];
-            //this.cache[type] = GLib.file_get_contents(jsonFileName).toString().substr(5);
-            this.cache[type] = GLib.file_get_contents(jsonFileName)[1].toString();
+            //this.cache[type] = file_get_contents(jsonFileName).toString().substr(5);
+            this.cache[type] = file_get_contents(jsonFileName)[1].toString();
         } else {
             this.cache[type] = "{}"
         }
@@ -1222,14 +1292,14 @@ class SpicesUpdate extends Applet.IconApplet {
 
 
     download_cache(type, force = false) {
-        let jsonFile = Gio.file_new_for_path(CACHE_MAP[type]);
+        let jsonFile = file_new_for_path(CACHE_MAP[type]);
 
         //Should we renew the cache?
         let is_to_download = false;
 
         if (jsonFile.query_exists(null)) {
-            let jsonModifTime = jsonFile.query_info("time::modified", Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
-            let currentTime = Math.round(new Date().getTime()/1000.0); // GLib.date_time_new_local();
+            let jsonModifTime = jsonFile.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+            let currentTime = Math.round(new Date().getTime()/1000.0);
             if (currentTime - jsonModifTime > Math.round(this.refreshInterval/2)) {
                 // the cache is too old
                 is_to_download = true
@@ -1237,13 +1307,13 @@ class SpicesUpdate extends Applet.IconApplet {
         } else {
             // the cache doesn't exist
             let jsonDirName = CACHE_DIR + "/" + this._get_singular_type(type);
-            GLib.mkdir_with_parents(jsonDirName, 0o755);
+            mkdir_with_parents(jsonDirName, 0o755);
             is_to_download = true
         }
 
         if (is_to_download === true || this.forceRefresh === true || force === true) {
             // replace local json cache file by the remote one
-            let message = Soup.Message.new("GET", URL_MAP[type] + GLib.uuid_string_random());
+            let message = Soup.Message.new("GET", URL_MAP[type] + uuid_string_random());
             this._httpSession.queue_message(message, Lang.bind(this, this._on_response_download_cache, type, force));
             this.testblink[type]=null;
         }
@@ -1254,15 +1324,15 @@ class SpicesUpdate extends Applet.IconApplet {
         this.cinnamon_server_is_down = message.status_code !== Soup.KnownStatusCode.OK;
         if (!this.cinnamon_server_is_down) {
             let data = message.response_body.data.toString();
-            GLib.file_set_contents(CACHE_MAP[type], data); // Records the new cache in the right place.
+            file_set_contents(CACHE_MAP[type], data); // Records the new cache in the right place.
             this._load_cache(type);
-            let jsonFile = Gio.file_new_for_path(CACHE_MAP[type]);
+            let jsonFile = file_new_for_path(CACHE_MAP[type]);
             if (jsonFile.query_exists(null)) {
-                let jsonModifTime = jsonFile.query_info("time::modified", Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+                let jsonModifTime = jsonFile.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
                 let _settings_schema = "org.cinnamon";
                 if (type === "themes") _settings_schema = "org.cinnamon.theme";
                 let _settings_key = "%s-cache-updated".format(this._get_singular_type(type));
-                let _interface_settings = new Gio.Settings({ schema_id: _settings_schema });
+                let _interface_settings = new Settings({ schema_id: _settings_schema });
                 _interface_settings.set_int(_settings_key, jsonModifTime);
                 if (force && this.get_new_spices(type, true)) {
                     this._forget_new_spices(type);
@@ -1328,11 +1398,11 @@ class SpicesUpdate extends Applet.IconApplet {
     }
 
     _rewrite_metadataFile(fileName, lastEdited) {
-        let metadataFile = Gio.file_new_for_path(fileName);
+        let metadataFile = file_new_for_path(fileName);
         let metadataData;
         if (metadataFile.query_exists(null)) {
-            //metadataData = GLib.file_get_contents(fileName).toString().substr(5);
-            metadataData = GLib.file_get_contents(fileName)[1].toString();
+            //metadataData =file_get_contents(fileName).toString().substr(5);
+            metadataData =file_get_contents(fileName)[1].toString();
         } else {
             metadataData = "{}";
         }
@@ -1342,7 +1412,7 @@ class SpicesUpdate extends Applet.IconApplet {
         if (newData["last-edited"] === undefined || newData["last-edited"] !== lastEdited) {
             newData["last-edited"] = lastEdited;
             let message = JSON.stringify(newData, null, 2);
-            GLib.file_set_contents(fileName, message);
+            file_set_contents(fileName, message);
         }
         // End of _rewrite_metadataFile
     }
@@ -1351,21 +1421,21 @@ class SpicesUpdate extends Applet.IconApplet {
         var lastEdited = null;
         let metadataParser = new Json.Parser();
         let metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
-        let metadataFile = Gio.file_new_for_path(metadataFileName);
+        let metadataFile = file_new_for_path(metadataFileName);
         let dirName = DIR_MAP[type] + "/" + uuid;
-        let dir = Gio.file_new_for_path(dirName);
+        let dir = file_new_for_path(dirName);
         let most_recent;
 
         // For some themes, the metadata.json file is in the subfolder /cinnamon:
         if (type.toString() === "themes" && !metadataFile.query_exists(null)) {
             metadataFileName = DIR_MAP[type] + "/" + uuid + "/cinnamon/metadata.json";
-            metadataFile = Gio.file_new_for_path(metadataFileName);
+            metadataFile = file_new_for_path(metadataFileName);
         }
 
         if (metadataFile.query_exists(null)) {
             // substr(5) is needed to remove the 'true,' at begin:
-            //let metadataData = GLib.file_get_contents(metadataFileName).toString().substr(5);
-            let metadataData = GLib.file_get_contents(metadataFileName)[1].toString();
+            //let metadataData =file_get_contents(metadataFileName).toString().substr(5);
+            let metadataData =file_get_contents(metadataFileName)[1].toString();
             if (metadataData !== null) {
                 metadataParser.load_from_data(metadataData, -1);
                 let node = metadataParser.get_root();
@@ -1379,7 +1449,7 @@ class SpicesUpdate extends Applet.IconApplet {
                         most_recent = this._most_recent_file_in(dir);
                         // Set the last-edited member's value to the last modification time of the most_recent file, in epoch format.
                         if (most_recent !== null) {
-                            lastEdited = most_recent.query_info("time::modified", Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+                            lastEdited = most_recent.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
                             this.get_date_of_nearest_commit(type, uuid, lastEdited, metadataFileName);
                         }
                     }
@@ -1392,24 +1462,24 @@ class SpicesUpdate extends Applet.IconApplet {
 
     _most_recent_file_in(dir) {
         if (dir.query_exists(null)) {
-            var latest_time = dir.query_info("time::modified", Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+            var latest_time = dir.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
             var latest_file = dir;
-            let children = dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+            let children = dir.enumerate_children("standard::name,standard::type", FileQueryInfoFlags.NONE, null);
             let info, file_type;
             let file, file_time;
             while ((info = children.next_file(null)) != null) {
                 file = children.get_child(info);
                 if (file.get_basename() === "metadata.json") continue; // ignore metadata.json file
 
-                file_time = file.query_info("time::modified", Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+                file_time = file.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
                 if (file_time > latest_time) {
                     latest_time = file_time;
                     latest_file = file;
                 }
                 file_type = info.get_file_type();
-                if (file_type == Gio.FileType.DIRECTORY) {
+                if (file_type == FileType.DIRECTORY) {
                     file = this._most_recent_file_in(file);
-                    file_time = file.query_info("time::modified", Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+                    file_time = file.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
                     if (file_time > latest_time) {
                         latest_time = file_time;
                         latest_file = file;
@@ -1453,8 +1523,8 @@ class SpicesUpdate extends Applet.IconApplet {
         var total_size = 0;
         var bytes_so_far = 0;
 
-        let file = Gio.file_new_for_path(target);
-        let fstream = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
+        let file = file_new_for_path(target);
+        let fstream = file.replace(null, false, FileCreateFlags.NONE, null);
 
         // Create an http message
         var request = Soup.Message.new("GET", url);
@@ -1624,14 +1694,14 @@ class SpicesUpdate extends Applet.IconApplet {
         if (!this.is_to_check_for_new(type) && !force) return false;
         var known_spices = [];
         let uuids = this.get_uuids_from_cache(type);
-        let png_dir = Gio.file_new_for_path(HOME_DIR + "/.cinnamon/spices.cache/%s".format(this._get_singular_type(type)));
+        let png_dir = file_new_for_path(HOME_DIR + "/.cinnamon/spices.cache/%s".format(this._get_singular_type(type)));
         if (png_dir.query_exists(null)) {
-            let children = png_dir.enumerate_children("standard::name,standard::type", Gio.FileQueryInfoFlags.NONE, null);
+            let children = png_dir.enumerate_children("standard::name,standard::type", FileQueryInfoFlags.NONE, null);
             let info;
             var name;
             while ((info = children.next_file(null)) != null) {
                 name = info.get_name().toString();
-                if (info.get_file_type() === Gio.FileType.REGULAR && name.substr(name.length - 4, name.length - 1) === ".png") {
+                if (info.get_file_type() === FileType.REGULAR && name.substr(name.length - 4, name.length - 1) === ".png") {
                     known_spices.push(name.substr(0, name.length - 4))
                 }
             }
@@ -1647,7 +1717,7 @@ class SpicesUpdate extends Applet.IconApplet {
     monitor_png_directory(type) {
         if (this.monitorsPngId[type] === 0) {
             let pngDirName = HOME_DIR + "/.cinnamon/spices.cache/%s".format(this._get_singular_type(type));
-            let pngDir = Gio.file_new_for_path(pngDirName);
+            let pngDir = file_new_for_path(pngDirName);
 
             if (pngDir.query_exists(null)) {
                 try {
@@ -1671,12 +1741,12 @@ class SpicesUpdate extends Applet.IconApplet {
     monitor_metadatajson(type, uuid) {
         if (this.alreadyMonitored.indexOf(uuid) > -1) return;
         let metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
-        let metadataFile = Gio.file_new_for_path(metadataFileName);
+        let metadataFile = file_new_for_path(metadataFileName);
 
         // For some themes, the metadata.json file is in the subfolder /cinnamon:
         if (type.toString() === "themes" && !metadataFile.query_exists(null)) {
             metadataFileName = DIR_MAP[type] + "/" + uuid + "/cinnamon/metadata.json";
-            metadataFile = Gio.file_new_for_path(metadataFileName);
+            metadataFile = file_new_for_path(metadataFileName);
         }
 
         if (metadataFile.query_exists(null)) {
@@ -1715,7 +1785,7 @@ class SpicesUpdate extends Applet.IconApplet {
         if (type.toString() === "themes") {
             _SETTINGS_SCHEMA = "org.cinnamon.theme";
             _SETTINGS_KEY = "name";
-            _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+            _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
             enabled = _interface_settings.get_string(_SETTINGS_KEY);
             listEnabled.push(enabled);
             return listEnabled
@@ -1723,7 +1793,7 @@ class SpicesUpdate extends Applet.IconApplet {
 
         _SETTINGS_SCHEMA = "org.cinnamon";
         _SETTINGS_KEY = "enabled-%s".format(type.toString());
-        _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+        _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
 
         enabled = _interface_settings.get_strv(_SETTINGS_KEY);
         let xlet_uuid;
@@ -1751,18 +1821,18 @@ class SpicesUpdate extends Applet.IconApplet {
         this.menu.removeAll();
 
         // Head
-        this.menuitemHead1 = new PopupMenu.PopupMenuItem(this.default_tooltip, {
+        this.menuitemHead1 = new PopupMenuItem(this.default_tooltip, {
             reactive: false
         });
         this.menu.addMenuItem(this.menuitemHead1);
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
         if (this.dependenciesMet) {
             // Refresh button
-            this.refreshButton = new PopupMenu.PopupIconMenuItem(_("Refresh"), "emblem-synchronizing-symbolic", St.IconType.SYMBOLIC);
+            this.refreshButton = new PopupIconMenuItem(_("Refresh"), "emblem-synchronizing-symbolic", IconType.SYMBOLIC);
             this.refreshButton.connect("activate", (event) => this._on_refresh_pressed("makeMenu"));
             this.menu.addMenuItem(this.refreshButton);
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            this.menu.addMenuItem(new PopupSeparatorMenuItem());
         }
 
         // Status of each type of Spices:
@@ -1774,7 +1844,7 @@ class SpicesUpdate extends Applet.IconApplet {
             ts = _(capitalize(t.toString()));
             if (this.nb_in_menu[t] - this.new_Spices[t].length > 0) ts += "   %s %s".format(char_update, (this.nb_in_menu[t] - this.new_Spices[t].length).toString());
             if (this.new_Spices[t].length > 0) ts += "   %s %s".format(char_new, (this.new_Spices[t].length).toString());
-            this.spicesMenuItems[t] = new PopupMenu.PopupIndicatorMenuItem(ts);
+            this.spicesMenuItems[t] = new PopupIndicatorMenuItem(ts);
             this.spicesMenuItems[t].connect("activate", (event) => {
                 Util.spawnCommandLine("%s %s -t %s -s %s".format(CS_PATH, t.toString(), TAB, SORT));
             });
@@ -1783,22 +1853,22 @@ class SpicesUpdate extends Applet.IconApplet {
         }
         // button Forget
         if (this.nb_to_watch > 0) {
-            let _forget_button = new PopupMenu.PopupIconMenuItem(_("Forget new Spices") + " -\u2604-", "emblem-ok", St.IconType.SYMBOLIC);
+            let _forget_button = new PopupIconMenuItem(_("Forget new Spices") + " -\u2604-", "emblem-ok", IconType.SYMBOLIC);
             _forget_button.connect("activate", (event) => this._on_forget_new_spices_pressed());
             this.menu.addMenuItem(_forget_button);
         }
         // button Download
         if ((this.nb_to_update + this.nb_to_watch) > 0) {
-            let _download_tabs_button = new PopupMenu.PopupIconMenuItem(_("Open useful Cinnamon Settings"), "su-update-available", St.IconType.SYMBOLIC);
+            let _download_tabs_button = new PopupIconMenuItem(_("Open useful Cinnamon Settings"), "su-update-available", IconType.SYMBOLIC);
             _download_tabs_button.connect("activate", (event) => this.open_each_download_tab());
             this.menu.addMenuItem(_download_tabs_button);
         }
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
         // sub-menu Configure
-        let _configure = new PopupMenu.PopupSubMenuMenuItem(_("Configure"));
+        let _configure = new PopupSubMenuMenuItem(_("Configure"));
         this.menu.addMenuItem(_configure);
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this.menu.addMenuItem(new PopupSeparatorMenuItem());
         let _configureOptions = [_("General"), _("Applets"), _("Desklets"), _("Extensions"), _("Themes")];
         let _iconNames = ["su-general", "su-applets", "su-desklets", "su-extensions", "su-themes"];
         let _options = [];
@@ -1806,14 +1876,14 @@ class SpicesUpdate extends Applet.IconApplet {
         for (let i=0; i < _configureOptions_length ; i++) {
             let _optionTitle = _configureOptions[i];
             let _icon = _iconNames[i];
-            _options[i] = new PopupMenu.PopupIconMenuItem(_optionTitle, _icon, St.IconType.SYMBOLIC);
+            _options[i] = new PopupIconMenuItem(_optionTitle, _icon, IconType.SYMBOLIC);
             _options[i].connect("activate", (event) => Util.spawnCommandLine("/usr/bin/xlet-settings applet %s -i %s -t %s".format(UUID, this.instanceId, i.toString())));
             _configure.menu.addMenuItem(_options[i])
         }
 
         // button Reload this applet
         if (DEBUG() || RELOAD()) {
-            let _reload_button = new PopupMenu.PopupIconMenuItem("Reload this applet", "edit-redo", St.IconType.SYMBOLIC);
+            let _reload_button = new PopupIconMenuItem("Reload this applet", "edit-redo", IconType.SYMBOLIC);
             _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed())
             this.menu.addMenuItem(_reload_button);
         }
@@ -1822,10 +1892,10 @@ class SpicesUpdate extends Applet.IconApplet {
 
 
         // Help
-        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
         // button Help...
-        this.help_button = new PopupMenu.PopupIconMenuItem(_("Help", "cinnamon-control-center") + "...", "folder-documents-symbolic", St.IconType.SYMBOLIC);
+        this.help_button = new PopupIconMenuItem(_("Help", "cinnamon-control-center") + "...", "folder-documents-symbolic", IconType.SYMBOLIC);
         this.help_button.connect("activate", (event) => {
                 let _language = this.get_user_language();
                 if (_language.startsWith("en")) {
@@ -1872,7 +1942,7 @@ class SpicesUpdate extends Applet.IconApplet {
 
         if (!this.isLooping) {
             if (this.loopId > 0) {
-                Mainloop.source_remove(this.loopId);
+                source_remove(this.loopId);
             }
             this.loopId = 0;
             this.refreshInterval = QUICK() ? 120 * this.general_frequency : 3600 * this.general_frequency;
@@ -1886,7 +1956,7 @@ class SpicesUpdate extends Applet.IconApplet {
         // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
         this.applet_running = false;
         if (this.loopId > 0) {
-            Mainloop.source_remove(this.loopId);
+            source_remove(this.loopId);
         }
         this.loopId = 0;
         var monitor, Id;
@@ -1919,13 +1989,13 @@ class SpicesUpdate extends Applet.IconApplet {
             return ret;
         } catch (e) {
             logError(e);
-            return GLib.markup_escape_text(text, -1);
+            return markup_escape_text(text, -1);
         }
         // End of _clean_str
     }
 
     darken_color(str_color) {
-        let c = Clutter.Color.from_string(str_color)[1];
+        let c = Color.from_string(str_color)[1];
         let lc = c.darken();
         return lc.to_string().substr(0,7);
         // End of darken_color
@@ -1963,16 +2033,16 @@ class SpicesUpdate extends Applet.IconApplet {
 
     icon_rotate() {
         this.angle = Math.round(this.angle + 3) % 360;
-        let size = Math.round(this.getPanelIconSize(St.IconType.SYMBOLIC)); // * global.ui_scale);
+        let size = Math.round(this.getPanelIconSize(IconType.SYMBOLIC)); // * global.ui_scale);
         this.img_icon = getImageAtScale(this.img_path, size, size);
         this.img_icon.set_pivot_point(0.5, 0.5);
-        this.img_icon.set_rotation_angle(Clutter.RotateAxis.Z_AXIS, this.angle);
+        this.img_icon.set_rotation_angle(RotateAxis.Z_AXIS, this.angle);
         this._applet_icon_box.set_child(this.img_icon);
         if (this.isHorizontal === true)
             this._applet_icon_box.set_fill(true, false);
         else
             this._applet_icon_box.set_fill(false, true);
-        this._applet_icon_box.set_alignment(St.Align.MIDDLE,St.Align.MIDDLE);
+        this._applet_icon_box.set_alignment(Align.MIDDLE,Align.MIDDLE);
         // End of icon_rotate
     }
 
@@ -2066,16 +2136,22 @@ class SpicesUpdate extends Applet.IconApplet {
 
     // This is the loop run at general_frequency rate to call updateUI() to update the display in the applet and tooltip
     updateLoop() {
-        if (this.isLooping) {
+        if (this.isLooping === true) {
             log("ONE MORE LOOP requested, but already looping");
-            return;
+            this.isLooping = false;
+
+            //this.loopId = timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
+            //return false;
+
+            return true;
         }
         log("ONE MORE LOOP!");
         this.isLooping = true;
         if (this.loopId > 0) {
-            Mainloop.source_remove(this.loopId);
+            source_remove(this.loopId);
+            this.loopId = 0;
         }
-        this.loopId = 0;
+
         this.check_dependencies();
 
         this.iteration = (this.iteration + 1) % 10;
@@ -2188,17 +2264,21 @@ class SpicesUpdate extends Applet.IconApplet {
             this._set_main_label();
         }
 
-        this.isLooping = false;
+        //this.isLooping = false;
         if (this.applet_running === true && (this.loopId === 0 || this.new_loop_requested === true)) {
             this.do_rotation = false;
             if (this.new_loop_requested === true) {
                 this.new_loop_requested = false;
                 this.refreshInterval = 12; // 12 seconds
             }
-            // One more loop !
-            this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
+            //// One more loop !
+            //this.loopId = timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
         }
-        return true
+
+        this.isLooping = false;
+        // One more loop !
+        this.loopId = timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
+        return false
         // End of updateLoop
     }
 
@@ -2268,17 +2348,17 @@ class SpicesUpdate extends Applet.IconApplet {
         this.isLooping = false;
         this.new_loop_requested = false;
 
-        if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
+        if (Widget.get_default_direction() === TextDirection.RTL) {
             this._applet_tooltip._tooltip.set_style("text-align: right;");
         } else {
             this._applet_tooltip._tooltip.set_style("text-align: left;");
         }
 
         let _screen;
-        if (Gdk.Display.get_default().get_default_screen)
-            _screen = Gdk.Display.get_default().get_default_screen(); // Glib >= 3.20
+        if (Display.get_default().get_default_screen)
+            _screen = Display.get_default().get_default_screen(); // Glib >= 3.20
         else
-            _screen = Gdk.Display.get_default().get_screen(0); // 2.2 <= Glib < 3.20
+            _screen = Display.get_default().get_screen(0); // 2.2 <= Glib < 3.20
 
         this.tooltip_max_width = Math.round(_screen.get_width() * this.tooltip_max_width_screen_percentage / 100);
 
@@ -2309,7 +2389,7 @@ class SpicesUpdate extends Applet.IconApplet {
         // remove all bindings and disconnect all signals (if any) to avoid errors.
         this.applet_running = false;
         if (this.loopId > 0) {
-            Mainloop.source_remove(this.loopId);
+            source_remove(this.loopId);
         }
         this.loopId = 0;
 

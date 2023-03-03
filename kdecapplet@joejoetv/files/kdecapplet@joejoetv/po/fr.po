@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-29 14:21+0100\n"
-"PO-Revision-Date: 2023-02-12 15:39+0100\n"
+"PO-Revision-Date: 2023-02-27 15:09+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -259,7 +259,7 @@ msgstr "Abandon"
 
 #: py/dialogs.py:50 py/dialogs.py:106 py/dialogs.py:169
 msgid "Send"
-msgstr "Envoyé"
+msgstr "Envoyer"
 
 #: py/dialogs.py:57
 #, python-brace-format
@@ -550,3 +550,57 @@ msgstr "Activer l'élément de menu pour envoyer un SMS"
 #. settings-schema.json->sms-module-enableLaunchSMSApp->description
 msgid "Enable the menu item to launch the KDE Connect SMS app"
 msgstr "Activer l'élément de menu pour lancer l'application KDE Connect SMS"
+
+#~ msgid "Enter Phone Number and Message to Send."
+#~ msgstr "Saisir le n° de téléphone et le message à envoyer."
+
+#~ msgid "Share URL"
+#~ msgstr "Partage d'URL"
+
+#~ msgid "Enter URL to Share."
+#~ msgstr "Saisir l'URL à partager."
+
+#~ msgid "No reachable paired devices!"
+#~ msgstr "Aucun appareil détecté !"
+
+#~ msgid "Devices"
+#~ msgstr "Appareils"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Send Ping"
+#~ msgstr "Envoyer un ping"
+
+#~ msgid "Sent SMS to ${phonenumber}"
+#~ msgstr "SMS envoyé au ${phonenumber}"
+
+#~ msgid "Share File"
+#~ msgstr "Partage de fichier"
+
+#~ msgid "Shared file with ${name}"
+#~ msgstr "Fichier partagé avec ${name}"
+
+#~ msgid "Shared URL with ${name}"
+#~ msgstr "URL partagée avec ${name}"
+
+#~ msgid "Mount and Browse"
+#~ msgstr "Monter et parcourir"
+
+#~ msgid "The Device couldn't be mounted!"
+#~ msgstr "L'appareil ne peut pas être monté !"
+
+#~ msgid "Browse"
+#~ msgstr "Parcourir les fichiers"
+
+#~ msgid "Find My Device"
+#~ msgstr "Trouver mon appareil"
+
+#~ msgid "Requested photo from ${name}"
+#~ msgstr "Photo demandée depuis ${name}"
+
+#~ msgid "Photo received"
+#~ msgstr "Photo reçue"
+
+#~ msgid "Requires 'zenity' for some features."
+#~ msgstr "Nécessite \"zenity\" pour certaines fonctionnalités."

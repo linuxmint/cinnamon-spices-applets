@@ -98,7 +98,7 @@ MyApplet.prototype = {
             this.menu.addMenuItem(this.troubleshootItem);
 
   	    this.menu.addAction(_("Screenshot"), function(event) {
-                Util.spawnCommandLine("gnome-screenshot -a");
+                Util.spawnCommandLine("gnome-screenshot -i");
             });
 
 	     this.menu.addAction(_("Terminal"), function(event) {
