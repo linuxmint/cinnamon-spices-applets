@@ -427,6 +427,8 @@ class KDECModule {
 
     static MODULE_ID = "";
 
+    static DISPLAY_NAME = "Module";
+
     constructor(id, type, device, compatMode) {
         // Have to be set by subclass
         this.id = id;
@@ -594,6 +596,7 @@ class BatteryModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_battery"];
     static MODULE_ID = "battery";
+    static DISPLAY_NAME = "Battery Module";
 
     constructor(device, compatMode) {
         super(BatteryModule.MODULE_ID, ModuleType.INFO, device, compatMode);
@@ -675,6 +678,7 @@ class DeviceInfoModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = [];
     static MODULE_ID = "deviceinfo";
+    static DISPLAY_NAME = "Device Info Module";
 
     constructor(device, compatMode) {
         super(DeviceInfoModule.MODULE_ID, ModuleType.INFO, device, compatMode);
@@ -739,6 +743,7 @@ class ConnectivityModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_connectivity_report"];
     static MODULE_ID = "connectivity";
+    static DISPLAY_NAME = "Connectivity Module";
 
     constructor(device, compatMode) {
         super(ConnectivityModule.MODULE_ID, ModuleType.INFO, device, compatMode);
@@ -851,6 +856,7 @@ class FindMyPhoneModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_findmyphone"];
     static MODULE_ID = "findmyphone";
+    static DISPLAY_NAME = "FindMyPhone Module";
 
     constructor(device, compatMode) {
         super(FindMyPhoneModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
@@ -887,6 +893,7 @@ class RequestPhotoModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_photo"];
     static MODULE_ID = "requestphoto";
+    static DISPLAY_NAME = "Request Photo Module";
 
     constructor(device, compatMode) {
         super(RequestPhotoModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
@@ -985,6 +992,7 @@ class PingModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_ping"];
     static MODULE_ID = "ping";
+    static DISPLAY_NAME = "Ping Module";
 
     constructor(device, compatMode) {
         super(PingModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
@@ -1034,6 +1042,7 @@ class ShareModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_share"];
     static MODULE_ID = "share";
+    static DISPLAY_NAME = "Share Module";
 
     constructor(device, compatMode) {
         super(ShareModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
@@ -1212,6 +1221,7 @@ class SFTPModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_sftp"];
     static MODULE_ID = "sftp";
+    static DISPLAY_NAME = "SFTP Module";
 
     constructor(device, compatMode) {        
         super(SFTPModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
@@ -1359,6 +1369,7 @@ class SMSModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_sms"];
     static MODULE_ID = "sms";
+    static DISPLAY_NAME = "SMS Module";
 
     constructor(device, compatMode) {
         super(SMSModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
@@ -1495,3 +1506,18 @@ additionalSettings[SMSModule.MODULE_ID] = ["useSubMenu", "enableSendSMS", "enabl
 
 // Create array of module IDs
 let modules = Object.keys(moduleClasses);
+
+let infoModules = [
+    BatteryModule.MODULE_ID,
+    DeviceInfoModule.MODULE_ID,
+    ConnectivityModule.MODULE_ID
+]
+
+let actionModules = [
+    FindMyPhoneModule.MODULE_ID,
+    RequestPhotoModule.MODULE_ID,
+    PingModule.MODULE_ID,
+    ShareModule.MODULE_ID,
+    SFTPModule.MODULE_ID,
+    SMSModule.MODULE_ID
+]
