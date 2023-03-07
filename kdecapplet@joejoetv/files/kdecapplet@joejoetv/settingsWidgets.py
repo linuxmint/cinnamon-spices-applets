@@ -59,6 +59,8 @@ ALIGNMENT_MAP = {
 '''
     Settings Widget that displays a list that can be reordered, but not modified anyway else
 '''
+# NOTE: The "storage" key is used to get the settings entry to store the actualy data,
+# NOTE: because the "custom" settings type can't currently be used to bind in JS code
 class OrderList(SettingsWidget):
     def __init__(self, info, key, settings):
         SettingsWidget.__init__(self)
@@ -68,6 +70,9 @@ class OrderList(SettingsWidget):
         
         # Get column structure from info
         self.columns = self.info["columns"]
+        
+        # Gett settings key for storig actual settings data
+        self.storage = self.info["storage"]
         
         # Flag to stop saving settings, when loading them
         self.dontModify = False
@@ -167,7 +172,8 @@ class OrderList(SettingsWidget):
         # Use "row-deleted" signal, as it is the only one signalled at the right time AFAIK
         self.store.connect("row-deleted", self.on_row_deleted)
         
-        self.settings.listen(self.key, self.valid_backup_restore)
+        #self.settings.listen(self.key, self.valid_backup_restore)
+        self.settings.listen(self.storage, self.valid_backup_restore)
     
     ## Callbacks
     
@@ -200,7 +206,8 @@ class OrderList(SettingsWidget):
         
         self.store.clear()
         
-        self.stored_entries = self.settings.get_value(self.key)
+        #self.stored_entries = self.settings.get_value(self.key)
+        self.stored_entries = self.settings.get_value(self.storage)
         
         for entry in self.stored_entries:
             entry_value_list = [entry]
@@ -237,7 +244,8 @@ class OrderList(SettingsWidget):
         
         self.store.foreach(get_row_data, self.stored_entries)
         
-        self.settings.set_value(self.key, self.stored_entries)
+        #self.settings.set_value(self.key, self.stored_entries)
+        self.settings.set_value(self.storage, self.stored_entries)
         
         self.update_button_sensitivity()
         

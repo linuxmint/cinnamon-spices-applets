@@ -52,6 +52,7 @@
         },
         "section_kdecsettings": {
             "type": "section",
+            "title": "",
             "keys": [
                 "button_open-kdec-settings"
             ]
@@ -218,7 +219,8 @@
                 "title": "Name",
                 "type": "text",
                 "align": "left",
-                "id": "name"
+                "id": "name",
+                "translate": false
             },
             {
                 "title": "Expand?",
@@ -230,10 +232,18 @@
                 "title": "UUID",
                 "type": "text",
                 "align": "left",
-                "id": "uuid"
+                "id": "uuid",
+                "translate": false
             }
         ],
-        "default": []
+        "default": [],
+        "storage": "generic_device-order"
+    },
+
+    "generic_device-order": {
+        "type": "generic",
+        "default": [],
+        "comment": "Data storage for 'orderlist_device-order'"
     },
 
     "oderlist_info-modules": {
@@ -251,16 +261,24 @@
                 "title": "Name",
                 "type": "text",
                 "align": "left",
-                "id": "name"
+                "id": "name",
+                "translate": false
             },
             {
                 "title": "ID",
                 "type": "text",
                 "align": "left",
-                "id": "id"
+                "id": "id",
+                "translate": false
             }
         ],
-        "default": []
+        "default": [],
+        "storage": "generic_info-modules"
+    },
+    "generic_info-modules": {
+        "type": "generic",
+        "default": [],
+        "comment": "Data storage for 'oderlist_info-modules'"
     },
     "oderlist_action-modules": {
         "type": "custom",
@@ -277,16 +295,24 @@
                 "title": "Name",
                 "type": "text",
                 "align": "left",
-                "id": "name"
+                "id": "name",
+                "translate": false
             },
             {
                 "title": "ID",
                 "type": "text",
                 "align": "left",
-                "id": "id"
+                "id": "id",
+                "translate": false
             }
         ],
-        "default": []
+        "default": [],
+        "storage": "generic_action-modules"
+    },
+    "generic_action-modules": {
+        "type": "generic",
+        "default": [],
+        "comment": "Data storage for 'oderlist_action-modules'"
     },
 
     "module_battery_description": {
@@ -328,7 +354,7 @@
         "description": "The directory to save received photos to",
         "default": "",
         "select-dir": true,
-        "dependency": "requestphoto-module-saveToDir"
+        "dependency": "module_requestphoto_saveToDir"
     },
 
     "module_ping_description": {
