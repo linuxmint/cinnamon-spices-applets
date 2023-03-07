@@ -1368,6 +1368,22 @@ class KDEConnectApplet extends Applet.TextIconApplet {
     }
 
     /**
+     * Callback that gets called, if the name of a device change
+     */
+    onDeviceNameChanged() {
+        this.info("Name of a device changed!", CommonUtils.LogLevel.DEBUG);
+
+        // Update settings order list
+        this.doOrderCallback = false;
+
+        // Clean settings device list, we don't(shouldn't) need to regenerate the order array,
+        // as we only have a name change, so the cleaning procedure will only update the name in the settings
+        this.cleanDeviceOrder();
+
+        this.doOrderCallback = true;
+    }
+
+    /**
      * Callback that gets called, when a setting related to the context menu changes
      * @param {*} value - The new value
      * @param {string} option - The option that changed
@@ -1681,6 +1697,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             // Bind signal to onDeviceDataChanged function of the applet
             newDevice._signals.connect(newDevice, "plugins-changed", this.onDevicePluginsChanged, this);
             newDevice._signals.connect(newDevice, "reachable-changed", this.onDeviceReachableChanged, this);
+            newDevice._signals.connect(newDevice, "name-changed", this.onDeviceNameChanged, this);
 
             deviceMap[deviceID] = newDevice;
         });
