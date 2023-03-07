@@ -74,6 +74,11 @@ class OrderList(SettingsWidget):
         # Gett settings key for storig actual settings data
         self.storage = self.info["storage"]
         
+        if ("size" in self.info):
+            self.size = self.info["size"]
+        else:
+            self.size = 150
+        
         # Flag to stop saving settings, when loading them
         self.dontModify = False
         
@@ -95,7 +100,7 @@ class OrderList(SettingsWidget):
 
         # Make tree view scrollable, if it gets too big
         self.scrollbox = Gtk.ScrolledWindow()
-        self.scrollbox.set_size_request(-1, 150)
+        self.scrollbox.set_size_request(-1, self.size)
         self.scrollbox.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         self.pack_start(self.scrollbox, True, True, 0)
         self.scrollbox.add(self.tree_view)
@@ -214,7 +219,7 @@ class OrderList(SettingsWidget):
             
             for i, col in enumerate(self.columns):
                 if col["id"] in entry:
-                    if col["type"] == "text" and col["translate"] == True:
+                    if col["type"] == "text" and ("translate" in col and col["translate"] == True):
                         entry_value_list.append(_(entry[col["id"]]))
                     else:
                         entry_value_list.append(entry[col["id"]])
@@ -233,7 +238,7 @@ class OrderList(SettingsWidget):
             item = {}
             
             for i, col in enumerate(self.columns):
-                if col["type"] == "text" and col["translate"] == True:
+                if col["type"] == "text" and ("translate" in col and col["translate"] == True):
                     item[col["id"]] = store[treeiter][0][col["id"]]
                 else:
                     item[col["id"]] = store[treeiter][i+1]

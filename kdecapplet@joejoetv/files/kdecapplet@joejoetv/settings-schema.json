@@ -219,8 +219,7 @@
                 "title": "Name",
                 "type": "text",
                 "align": "left",
-                "id": "name",
-                "translate": false
+                "id": "name"
             },
             {
                 "title": "Expand?",
@@ -232,12 +231,12 @@
                 "title": "UUID",
                 "type": "text",
                 "align": "left",
-                "id": "uuid",
-                "translate": false
+                "id": "uuid"
             }
         ],
         "default": [],
-        "storage": "generic_device-order"
+        "storage": "generic_device-order",
+        "size": 200
     },
 
     "generic_device-order": {
@@ -261,19 +260,18 @@
                 "title": "Name",
                 "type": "text",
                 "align": "left",
-                "id": "name",
-                "translate": false
+                "id": "name"
             },
             {
                 "title": "ID",
                 "type": "text",
                 "align": "left",
-                "id": "id",
-                "translate": false
+                "id": "id"
             }
         ],
         "default": [],
-        "storage": "generic_info-modules"
+        "storage": "generic_info-modules",
+        "size": 100
     },
     "generic_info-modules": {
         "type": "generic",
@@ -295,19 +293,18 @@
                 "title": "Name",
                 "type": "text",
                 "align": "left",
-                "id": "name",
-                "translate": false
+                "id": "name"
             },
             {
                 "title": "ID",
                 "type": "text",
                 "align": "left",
-                "id": "id",
-                "translate": false
+                "id": "id"
             }
         ],
         "default": [],
-        "storage": "generic_action-modules"
+        "storage": "generic_action-modules",
+        "size": 200
     },
     "generic_action-modules": {
         "type": "generic",
