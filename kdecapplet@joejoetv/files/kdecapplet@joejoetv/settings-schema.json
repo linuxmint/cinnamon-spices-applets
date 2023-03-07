@@ -89,7 +89,7 @@
         },
         "section_module_deviceinfo": {
             "type": "section",
-            "title": "Device Info Module",
+            "title": "Device-Info Info Module",
             "keys": [
                 "module_deviceinfo_description"
             ]
@@ -222,7 +222,7 @@
                 "id": "name"
             },
             {
-                "title": "Expand?",
+                "title": "Expand",
                 "type": "boolean",
                 "align": "center",
                 "id": "expand"
@@ -260,7 +260,8 @@
                 "title": "Name",
                 "type": "text",
                 "align": "left",
-                "id": "name"
+                "id": "name",
+                "translate": true
             },
             {
                 "title": "ID",
@@ -309,7 +310,8 @@
                 "title": "Name",
                 "type": "text",
                 "align": "left",
-                "id": "name"
+                "id": "name",
+                "translate": true
             },
             {
                 "title": "ID",

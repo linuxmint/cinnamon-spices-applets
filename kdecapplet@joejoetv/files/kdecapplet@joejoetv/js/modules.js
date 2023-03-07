@@ -688,7 +688,7 @@ class DeviceInfoModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = [];
     static MODULE_ID = "deviceinfo";
-    static DISPLAY_NAME = "Device Info Module";
+    static DISPLAY_NAME = "Device-Info Module";
     static ADDITIONAL_SETTINGS = [];
     static TYPE = ModuleType.INFO;
 
