@@ -275,7 +275,23 @@
     },
     "generic_info-modules": {
         "type": "generic",
-        "default": [],
+        "default": [
+            {
+                "enabled": true,
+                "name": "Battery Module",
+                "id": "battery"
+            },
+            {
+                "enabled": true,
+                "name": "Device Info Module",
+                "id": "deviceinfo"
+            },
+            {
+                "enabled": true,
+                "name": "Connectivity Module",
+                "id": "connectivity"
+            }
+        ],
         "comment": "Data storage for 'oderlist_info-modules'"
     },
     "oderlist_action-modules": {
@@ -308,7 +324,38 @@
     },
     "generic_action-modules": {
         "type": "generic",
-        "default": [],
+        "default": [
+            {
+                "enabled": true,
+                "name": "FindMyPhone Module",
+                "id": "findmyphone"
+            },
+            {
+                "enabled": true,
+                "name": "Request Photo Module",
+                "id": "requestphoto"
+            },
+            {
+                "enabled": true,
+                "name": "Ping Module",
+                "id": "ping"
+            },
+            {
+                "enabled": true,
+                "name": "Share Module",
+                "id": "share"
+            },
+            {
+                "enabled": true,
+                "name": "SFTP Module",
+                "id": "sftp"
+            },
+            {
+                "enabled": true,
+                "name": "SMS Module",
+                "id": "sms"
+            }
+        ],
         "comment": "Data storage for 'oderlist_action-modules'"
     },
 

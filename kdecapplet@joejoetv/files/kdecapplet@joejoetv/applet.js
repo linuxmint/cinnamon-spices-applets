@@ -160,12 +160,12 @@ function _(str) {
  * @short_description Device class representing a KDE Connect device
  */
 class Device {
-    constructor(applet, id, name, compatMode, supportedModules) {
+    constructor(applet, id, name, compatMode, moduleOrders) {
         this.applet = applet;
         this.id = id;
         this.name = name;
         this.compatMode = compatMode;
-        this.supportedModules = supportedModules;
+        this.moduleOrders = moduleOrders;
 
         /**
          * Signal Manager for easy management of signals,
@@ -213,7 +213,7 @@ class Device {
         this.menuItemIcon = null;
 
         try {
-            this.createModules(this.supportedModules);
+            this.createModules();
             this.createMenuItem();
             
         } catch (error) {
@@ -434,8 +434,7 @@ class Device {
     }
 
     /**
-     * Creates modules based on @param supportedModules
-     * @param {list} - supportedModules List of modules to try adding
+     * Creates modules
      */
     createModules() {
         // Only create modules, if device is reachable
@@ -446,7 +445,9 @@ class Device {
 
             this.info("Creating Modules:", CommonUtils.LogLevel.VERBOSE);
 
-            this.supportedModules.forEach(moduleID => {
+            let supportedModules = this.moduleOrders[Modules.ModuleType.INFO].concat(this.moduleOrders[Modules.ModuleType.ACTION]);
+
+            supportedModules.forEach(moduleID => {
                 if (moduleOptions[moduleID].enabled == true) {
                     let moduleClass = Modules.moduleClasses[moduleID];
 
@@ -519,12 +520,10 @@ class Device {
      * @returns A list of devices, whose type matches the passed type
      */
     getModulesByType(type) {
-        // TODO: Add function to return filtered modules by given order(extra parameter)
-
         let moduleList = [];
 
         // Loop over supported modules array, so the modules are in correct order
-        Modules.modules.forEach(moduleID => {
+        this.moduleOrders[type].forEach(moduleID => {
             if (this.modules[moduleID]) {
                 let module = this.modules[moduleID];
 
@@ -885,24 +884,29 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      */
 
     on_applet_clicked() {
-        // First, get reachable device count and bottom menu item
-        let deviceCount = 0;
-        let bottomDevice = null;
+        let unavailableDevices = []
+        let availableDevices = []
 
-        for (let [deviceID, device] of Object.entries(this.devices)) {
-            if (device.getReachableStatus() == true) {
-                deviceCount += 1;
-                bottomDevice = device;
+        this.deviceOrder.forEach(element => {
+            if (this.devices[element["id"]].getReachableStatus() == true) {
+                availableDevices.push(element["id"]);
+            } else {
+                unavailableDevices.push(element["id"]);
             }
-        }
+        });
 
-        // If only 1 device is present or there are more and the setting is true, open the bottom reachable device menu
-        if (deviceCount == 1) {
-            bottomDevice.getMenuItem().menu.open(false);
-        } else if (deviceCount > 1) {
-            if (this.options.expandFirst == true) {
-                bottomDevice.getMenuItem().menu.open(false);
-            }
+        if (availableDevices.length == 1 && this.options.expandOnlyDevice == true) {
+            let device = this.devices[availableDevices[0]];
+
+            device.getMenuItem().menu.open(false);
+        } else {
+            this.deviceOrder.forEach(element => {
+                let device = this.devices[element["id"]];
+    
+                if (element["expand"] == true && device.getReachableStatus() == true) {
+                    device.getMenuItem().menu.open(false);
+                }
+            });
         }
 
         this.popupMenu.toggle();
@@ -1111,24 +1115,35 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             // Remove leftover menu items from e.g. unavailable state
             this.popupMenu.removeAll();
 
-            if (noDevices == false) {
-                for (let [deviceID, device] of Object.entries(this.devices)) {
-                    let deviceMenuItem = device.getMenuItem();
-                    if (device.getReachableStatus() == false) {
-                        this.info("Device with ID '"+deviceID+"' is not reachable, adding at the top", CommonUtils.LogLevel.VERBOSE);
-                        this.popupMenu.addMenuItem(deviceMenuItem, 0);
-                    } else {
-                        this.info("Device with ID '"+deviceID+"' is reachable, adding normally", CommonUtils.LogLevel.VERBOSE);
-                        this.popupMenu.addMenuItem(deviceMenuItem);
-                    }
-                }
-            } else {
+            if (noDevices == true) {
                 // We don't have any devices to show, so we add a placeholder menu item
                 let noDevicesMenuItem = new PopupMenu.PopupMenuItem(_("No connected Devices!")+"\n"+_("Add them in the KDE Connect settings"), {reactive: false});
                 noDevicesMenuItem.actor.add_style_pseudo_class('insensitive');
                 this.popupMenu.addMenuItem(noDevicesMenuItem);
+                return;
             }
-            
+
+            let unavailableDevices = []
+            let availableDevices = []
+
+            this.deviceOrder.forEach(element => {
+                this.info("Checking device with ID '"+element["id"]+"'...", CommonUtils.LogLevel.DEBUG);
+                if (this.devices[element["id"]].getReachableStatus() == true) {
+                    availableDevices.push(element["id"]);
+                } else {
+                    unavailableDevices.push(element["id"]);
+                }
+            });
+
+            unavailableDevices.forEach(deviceID => {
+                this.info("Device with ID '"+deviceID+"' is not reachable.", CommonUtils.LogLevel.VERBOSE);
+                this.popupMenu.addMenuItem(this.devices[deviceID].getMenuItem());
+            });
+
+            availableDevices.forEach(deviceID => {
+                this.info("Device with ID '"+deviceID+"' is reachable.", CommonUtils.LogLevel.VERBOSE);
+                this.popupMenu.addMenuItem(this.devices[deviceID].getMenuItem());
+            });
         } catch (error) {
             this.error("Error while rebuilding popup menu: "+error, CommonUtils.LogLevel.MINIMAL);
         }
@@ -1661,7 +1676,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         }
 
         deviceIDs.forEach(deviceID => {
-            let newDevice = new Device(this, deviceID, deviceNames[deviceID], this.compatMode, Modules.modules);
+            let newDevice = new Device(this, deviceID, deviceNames[deviceID], this.compatMode, this.moduleOrders);
 
             // Bind signal to onDeviceDataChanged function of the applet
             newDevice._signals.connect(newDevice, "plugins-changed", this.onDevicePluginsChanged, this);
