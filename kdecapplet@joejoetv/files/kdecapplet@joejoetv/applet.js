@@ -1530,7 +1530,6 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      */
     onAnnouncedNameChanged(proxy, sender, [name]) {
         this.info("AnnouncedNameChanged Signal: "+name, CommonUtils.LogLevel.DEBUG);
-        //TODO: Implement
     }
     
     /**
@@ -1760,8 +1759,6 @@ class KDEConnectApplet extends Applet.TextIconApplet {
     registerModuleSettings(modules) {
         modules.forEach(moduleID => {
             this.options.modules[moduleID] = {};
-            // TODO: Remove
-            //this.settings.bindWithObject(this.options.modules[moduleID], moduleID+"-module-enabled", "enabled", this.onModuleSettingsChanged.bind(this), moduleID);
 
             // Register any additional settings to also call onModuleSettingsChanged,
             // since we need to rebuild the context manu anyway and the user shouldn't have the popup menu open when changing settings

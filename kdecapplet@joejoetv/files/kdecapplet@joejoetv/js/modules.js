@@ -1501,8 +1501,6 @@ class SMSModule extends KDECModule {
     }
 }
 
-// TODO: Maybe add telephony module
-
 // Register module classes
 let moduleClasses = {}
 
