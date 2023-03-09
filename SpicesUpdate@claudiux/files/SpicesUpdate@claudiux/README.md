@@ -8,7 +8,7 @@ In order to be sure to download the latest version of Spices Update, use
 
 Usable with all versions of Cinnamon since v2.8.
 
-Fully supported by the author, in continuous development and in continuous use on several machines, working with ** Linux Mint **, ** Fedora **, ** Archlinux ** or ** Debian 10 **.
+Fully supported by the author, in continuous development and in continuous use on several machines, working with ** Linux Mint **, ** Fedora **, ** Archlinux **, ** openSUSE Tumbleweed ** or ** Debian 10 **.
 
 
 ## Summary
