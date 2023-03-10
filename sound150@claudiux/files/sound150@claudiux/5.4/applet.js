@@ -1148,6 +1148,8 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     _setKeybinding() {
         Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
+        Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => this._volumeChange(Clutter.ScrollDirection.UP));
+        Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => this._volumeChange(Clutter.ScrollDirection.DOWN));
     }
 
     _on_sound_settings_change() {
@@ -1172,6 +1174,8 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_applet_removed_from_panel() {
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
+        Main.keybindingManager.removeHotKey("raise-volume-" + this.instance_id);
+        Main.keybindingManager.removeHotKey("lower-volume-" + this.instance_id);
         if (this.hideSystray)
             this.unregisterSystrayIcons();
         if (this._iconTimeoutId) {
@@ -1225,6 +1229,10 @@ class Sound150Applet extends Applet.TextIconApplet {
             return Clutter.EVENT_PROPAGATE;
         }
 
+        this._volumeChange(direction);
+    }
+
+    _volumeChange(direction) {
         let currentVolume = this._output.volume;
         let volumeChange = false;
         let player = this._players[this._activePlayer];
@@ -1265,7 +1273,14 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (volumeChange) {
             this._output.push_volume();
             this._notifyVolumeChange(this._output);
+            this.setAppletTooltip();
             this._applet_tooltip.show();
+            var intervalId = null;
+            intervalId = Util.setInterval(() => {
+                this._applet_tooltip.hide();
+                Util.clearInterval(intervalId);
+                return false
+            }, 5000);
         } else {
             this._applet_tooltip.hide();
         }
