@@ -33,6 +33,8 @@ export class WeatherUnderground extends BaseProvider {
     private readonly locationCache: Record<string, NearbyStation[]> = {};
 
     private get currentUnit(): UnitType {
+        if (this.app.config.TemperatureUnit == "fahrenheit")
+            return "e";
         if (this.app.config.countryCode == null)
             return "m";
         else
@@ -184,10 +186,10 @@ export class WeatherUnderground extends BaseProvider {
                 result.extra_field = {
                     name: _("Feels Like"),
                     type: "temperature",
-                    value: this.ToKelvin(observations.metric_si.windChill)
+                    value: CelsiusToKelvin(observations.metric_si.windChill)
                 }
             }
-                result.dewPoint = CelsiusToKelvin(observations.metric_si.dewpt);
+
             if (result.stationInfo == null) {
                 result.stationInfo = {
                     name: station.stationName,
