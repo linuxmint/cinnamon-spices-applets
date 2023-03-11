@@ -10,13 +10,27 @@ const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
+const GLib = imports.gi.GLib; // Needed for translations
+const Gettext = imports.gettext; // Needed for translations
+
+const HOME_DIR = GLib.get_home_dir();
+// l10n support
+Gettext.bindtextdomain(AppletUUID, HOME_DIR + "/.local/share/locale");
+Gettext.bindtextdomain("cinnamon-control-center", "/usr/share/locale");
+
+// Localisation/translation support
+function _(str, uuid=AppletUUID) {
+	var customTrans = Gettext.dgettext(uuid, str);
+	if (customTrans !== str && customTrans !== "") return customTrans;
+	return Gettext.gettext(str);
+}
 
 let GTop, failed = false;
 try {
 	GTop = imports.gi.GTop;
 }
 catch (e) {
-	global.logError("Required GTop package missing!");
+	global.logError(_("Required GTop package missing!"));
 	failed = true;
 }
 
@@ -40,12 +54,12 @@ SSMApplet.prototype = {
 		this.setAllowedLayout(Applet.AllowedLayout.HORIZONTAL);
 		if (failed) {
 			this.errorLabel = new St.Label();
-			this.errorLabel.set_text("Error!");
+			this.errorLabel.set_text(_("Error!"));
 			this.actor.add(this.errorLabel, { x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE, y_fill: false });
-			this._applet_tooltip.set_text("Required GTop package missing!");
+			this._applet_tooltip.set_text(_("Required GTop package missing!"));
 		} else {
 			this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace; font-size: 9pt');
-			this._applet_context_menu.addMenuItem(new Applet.MenuItem("Clear Cache", "user-trash", () => {
+			this._applet_context_menu.addMenuItem(new Applet.MenuItem(_("Clear Cache"), "user-trash", () => {
 				let [success, argv] = GLib.shell_parse_argv("pkexec sh -c 'echo 1 >/proc/sys/vm/drop_caches'");
 				let flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD;
 				let [result, pid] = GLib.spawn_async(null, argv, null, flags, null);
@@ -139,13 +153,13 @@ SSMApplet.prototype = {
 		let shortInfo, shortInfo2, longInfo, tooltip;
 		[shortInfo, longInfo] = this.cpuDataProvider.data();
 		this.cpuLabel.set_text(shortInfo);
-		tooltip = "<b>CPUs</b>   " + (this.sensorsFailed || this.currentTemp == -283 ? "" : "(<i>" + this.currentTemp + "°C max</i>)") + "\n" + longInfo + "\n\n";
+		tooltip = "<b>" + _("CPUs") + "</b>   " + (this.sensorsFailed || this.currentTemp == -283 ? "" : "(<i>" + this.currentTemp + "°C max</i>)") + "\n" + longInfo + "\n\n";
 		[shortInfo, longInfo] = this.memDataProvider.data();
 		this.memLabel.set_text(shortInfo);
-		tooltip += "<b>Memory</b> (<i>" + (this.memDataProvider.memSize / 1000000000).toFixed(1) + "GB" + (this.memDataProvider.swapSize ? "; " + (this.memDataProvider.swapSize / 1000000000).toFixed(1) + "GB swap" : "") + "</i>)\n" + longInfo +"\n\n";
+		tooltip += "<b>" + _("Memory") + "</b> (<i>" + (this.memDataProvider.memSize / 1000000000).toFixed(1) + _("GB") + (this.memDataProvider.swapSize ? "; " + (this.memDataProvider.swapSize / 1000000000).toFixed(1) + _("GB swap") : "") + "</i>)\n" + longInfo +"\n\n";
 		[shortInfo, shortInfo2, longInfo] = this.netDataProvider.data(this._netBlackList);
 		this.netLabel.set_text("↑" + shortInfo + "\n↓" + shortInfo2);
-		tooltip += "<b>Network</b>" + longInfo;
+		tooltip += "<b>" + _("Network") + "</b>" + longInfo;
 		this._applet_tooltip.set_markup(tooltip);
 		let coldColor = Clutter.Color.from_string(this.coldColor); if (coldColor[0]) coldColor = coldColor[1];
 		let hotColor = Clutter.Color.from_string(this.hotColor); if (hotColor[0]) hotColor = hotColor[1];
@@ -299,7 +313,7 @@ MultiCPUDataProvider.prototype = {
 		let overall = 0, longInfo = "";
 		for (let i = 0; i < this.CPUCount; i++) {
 			overall += this.currentReadings[i];
-			longInfo += " ".repeat(longInfoTab) + "Core " + (i + 1) + ": " + align((this.currentReadings[i] * 100).toFixed(1), longInfoSize) + "%" + (i < this.CPUCount - 1 ? "\n" : "");
+			longInfo += " ".repeat(longInfoTab) + _("Core ") + (i + 1) + ": " + align((this.currentReadings[i] * 100).toFixed(1), longInfoSize) + "%" + (i < this.CPUCount - 1 ? "\n" : "");
 		}
 		return [(overall / this.CPUCount * 100).toFixed(0) + "%", longInfo];
 	}
@@ -344,13 +358,13 @@ MemDataProvider.prototype = {
 	data: function(longInfoTab = 2, longInfoSize = 5) {
 		this._fetch_data();
 		let overall = this.currentReadings[0] + this.currentReadings[1] + this.currentReadings[2];
-		let longInfo =	" ".repeat(longInfoTab) + "Used:   " + align((this.currentReadings[0] * 100).toFixed(1), longInfoSize) + "%\n" +
-						" ".repeat(longInfoTab) + "Cache:  " + align((this.currentReadings[1] * 100).toFixed(1), longInfoSize) + "%\n" +
-						" ".repeat(longInfoTab) + "Buffer: " + align((this.currentReadings[2] * 100).toFixed(1), longInfoSize) + /*"%\n" +
-						" ".repeat(longInfoTab) + "Free:   " + align((this.currentReadings[3] * 100).toFixed(1), longInfoSize) + */"%";
+		let longInfo =	" ".repeat(longInfoTab) + _("Used:   ") + align((this.currentReadings[0] * 100).toFixed(1), longInfoSize) + "%\n" +
+						" ".repeat(longInfoTab) + _("Cache:  ") + align((this.currentReadings[1] * 100).toFixed(1), longInfoSize) + "%\n" +
+						" ".repeat(longInfoTab) + _("Buffer: ") + align((this.currentReadings[2] * 100).toFixed(1), longInfoSize) + /*"%\n" +
+						" ".repeat(longInfoTab) + _("Free:   ") + align((this.currentReadings[3] * 100).toFixed(1), longInfoSize) + */"%";
 		if (this.swapSize) {
 			longInfo += "\n" +
-						" ".repeat(longInfoTab) + "Swap:   " + align((this.currentReadings[4] * 100).toFixed(1), longInfoSize) + "%";
+						" ".repeat(longInfoTab) + _("Swap:   ") + align((this.currentReadings[4] * 100).toFixed(1), longInfoSize) + "%";
 		}
 		return [(overall * 100).toFixed(0) + "%", longInfo];
 	}
@@ -420,18 +434,18 @@ NetDataProvider.prototype = {
 				if (blackList[j] == this.currentReadings[i].id.trim()) continue idsLoop;
 			}
 			longInfo += "\n<i>'" + this.currentReadings[i].id + "'</i>";
-			longInfo += "\n" + " ".repeat(longInfoTab) + "Up:      " + align(this.format(this.currentReadings[i].upSpeed), longInfoSize) + "B/s";
-			longInfo += "\n" + " ".repeat(longInfoTab) + "Down:    " + align(this.format(this.currentReadings[i].downSpeed), longInfoSize) + "B/s";
-			longInfo += "\n" + " ".repeat(longInfoTab) + "Data:    " + align(this.format(this.currentReadings[i].up + this.currentReadings[i].down), longInfoSize) + "B";
+			longInfo += "\n" + " ".repeat(longInfoTab) + _("Up:      ") + align(this.format(this.currentReadings[i].upSpeed), longInfoSize) + _("B/s");
+			longInfo += "\n" + " ".repeat(longInfoTab) + _("Down:    ") + align(this.format(this.currentReadings[i].downSpeed), longInfoSize) + _("B/s");
+			longInfo += "\n" + " ".repeat(longInfoTab) + _("Data:    ") + align(this.format(this.currentReadings[i].up + this.currentReadings[i].down), longInfoSize) + _("B");
 			overallUpSpeed += this.currentReadings[i].upSpeed;
 			overallDownSpeed += this.currentReadings[i].downSpeed;
 		}
-		if (longInfo == "") longInfo = "\n(<i>no interfaces to show</i>)";
+		if (longInfo == "") longInfo = "\n(<i>" + _("no interfaces to show") + "</i>)";
 		return [this.format(overallUpSpeed), this.format(overallDownSpeed), longInfo];
 	},
 	
 	format: function(value) {
-		const pref = [" ", "k", "M", "G", "T"];
+		const pref = [" ", _("k"), _("M"), _("G"), _("T")];
 		let i = 0;
 		while (i < 4 && value >= 10) {
 			value /= 1000;
