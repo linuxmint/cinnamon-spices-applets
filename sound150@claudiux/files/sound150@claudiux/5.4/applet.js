@@ -1147,7 +1147,11 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _setKeybinding() {
+        Main.keybindingManager.removeHotKey("media-keys-4");
+        Main.keybindingManager.removeHotKey("media-keys-2");
+
         Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
+
         Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => this._volumeChange(Clutter.ScrollDirection.UP));
         Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => this._volumeChange(Clutter.ScrollDirection.DOWN));
     }
@@ -1174,8 +1178,10 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_applet_removed_from_panel() {
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
+
         Main.keybindingManager.removeHotKey("raise-volume-" + this.instance_id);
         Main.keybindingManager.removeHotKey("lower-volume-" + this.instance_id);
+
         if (this.hideSystray)
             this.unregisterSystrayIcons();
         if (this._iconTimeoutId) {
