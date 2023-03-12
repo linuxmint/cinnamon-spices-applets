@@ -52,6 +52,14 @@ function GPasteFallbackApplet(orientation, panel_height, instance_id) {
     this._init(orientation, panel_height, instance_id);
 }
 
+//
+// Debug logging
+// ------------------------------------------------------------------------------------------------------
+function debugLog(...args) {
+   // Un-comment the line blow to enable debug logging
+   // global.log(...args);
+}
+
 GPasteFallbackApplet.prototype = {
     __proto__: Applet.TextApplet.prototype,
 
@@ -486,7 +494,7 @@ GPasteApplet.prototype = {
      * The history has changed
      */
     _onClientUpdate: function(client, action, target, position) {
-        global.log("[" + uuid + "] Client event: _onClientUpdate");
+        debugLog("[" + uuid + "] Client event: _onClientUpdate");
 
         switch (target) {
             case GPaste.UpdateTarget.ALL:
@@ -510,7 +518,7 @@ GPasteApplet.prototype = {
      * GPaste returned the list of histories
      */
     _onClientHistoriesListed: function(client, result) {
-        global.log("[" + uuid + "] Client event: _onClientHistoriesListed");
+        debugLog("[" + uuid + "] Client event: _onClientHistoriesListed");
 
         const histories = this._client.list_histories_finish(result);
 
@@ -537,7 +545,7 @@ GPasteApplet.prototype = {
      * A history was deleted
      */
     _onClientDeleteHistory: function(client, name) {
-        global.log("[" + uuid + "] Client event: _onClientDeleteHistory");
+        debugLog("[" + uuid + "] Client event: _onClientDeleteHistory");
 
         for (let n in this._historyListItems) {
             if (n == name) {
@@ -551,7 +559,7 @@ GPasteApplet.prototype = {
      * Show menu
      */
     _onClientShowHistory: function() {
-        global.log("[" + uuid + "] Client event: _onClientShowHistory");
+        debugLog("[" + uuid + "] Client event: _onClientShowHistory");
 
         this.menu.open();
     },
@@ -560,7 +568,7 @@ GPasteApplet.prototype = {
      *
      */
     _onClientSwitchHistory: function() {
-        global.log("[" + uuid + "] Client event: _onClientSwitchHistory");
+        debugLog("[" + uuid + "] Client event: _onClientSwitchHistory");
 
         this._client.list_histories(Lang.bind(this, this._onClientHistoriesListed));
 
@@ -580,7 +588,7 @@ GPasteApplet.prototype = {
      * GPaste's tracking status has changed
      */
     _onClientTracking: function(client, state) {
-        global.log("[" + uuid + "] Client event: _onClientTracking");
+        debugLog("[" + uuid + "] Client event: _onClientTracking");
 
         this.mitemTrack.setToggleState(state);
     },
@@ -593,7 +601,7 @@ GPasteApplet.prototype = {
      * Applet has been removed, disconnect signal handlers
      */
     on_applet_removed_from_panel: function() {
-        global.log("GPaste applet was removed from panel");
+        debugLog("GPaste applet was removed from panel");
 
         this._signalManager.disconnectAllSignals();
     },

@@ -1,0 +1,35 @@
+#: display name of module battery
+msgid "Battery Module"
+msgstr ""
+
+#: display name of module deviceinfo
+msgid "Device-Info Module"
+msgstr ""
+
+#: display name of module connectivity
+msgid "Connectivity Module"
+msgstr ""
+
+#: display name of module findmyphone
+msgid "FindMyPhone Module"
+msgstr ""
+
+#: display name of module requestphoto
+msgid "Request Photo Module"
+msgstr ""
+
+#: display name of module ping
+msgid "Ping Module"
+msgstr ""
+
+#: display name of module share
+msgid "Share Module"
+msgstr ""
+
+#: display name of module sftp
+msgid "SFTP Module"
+msgstr ""
+
+#: display name of module sms
+msgid "SMS Module"
+msgstr ""
