@@ -425,7 +425,17 @@ class KDECModule {
     // KDE Connect plugins required to be loaded, that the applet is created
     static REQUIRED_KDEC_PLUGINS = [];
 
+    // ID that identifies the module
     static MODULE_ID = "";
+
+    // Display name to display in settings
+    static DISPLAY_NAME = "Module";
+
+    // Array of additional settings keys to bind
+    static ADDITIONAL_SETTINGS = [];
+
+    // Type of the module (ModuleType)
+    static TYPE = ModuleType.PASSIVE;
 
     constructor(id, type, device, compatMode) {
         // Have to be set by subclass
@@ -594,9 +604,12 @@ class BatteryModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_battery"];
     static MODULE_ID = "battery";
+    static DISPLAY_NAME = "Battery Module";
+    static ADDITIONAL_SETTINGS = [];
+    static TYPE = ModuleType.INFO;
 
     constructor(device, compatMode) {
-        super(BatteryModule.MODULE_ID, ModuleType.INFO, device, compatMode);
+        super(BatteryModule.MODULE_ID, BatteryModule.TYPE, device, compatMode);
     }
 
     _initValues() {
@@ -675,9 +688,12 @@ class DeviceInfoModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = [];
     static MODULE_ID = "deviceinfo";
+    static DISPLAY_NAME = "Device-Info Module";
+    static ADDITIONAL_SETTINGS = [];
+    static TYPE = ModuleType.INFO;
 
     constructor(device, compatMode) {
-        super(DeviceInfoModule.MODULE_ID, ModuleType.INFO, device, compatMode);
+        super(DeviceInfoModule.MODULE_ID, DeviceInfoModule.TYPE, device, compatMode);
     }
 
     _initValues() {
@@ -739,9 +755,12 @@ class ConnectivityModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_connectivity_report"];
     static MODULE_ID = "connectivity";
+    static DISPLAY_NAME = "Connectivity Module";
+    static ADDITIONAL_SETTINGS = ["showNetworkType"];
+    static TYPE = ModuleType.INFO;
 
     constructor(device, compatMode) {
-        super(ConnectivityModule.MODULE_ID, ModuleType.INFO, device, compatMode);
+        super(ConnectivityModule.MODULE_ID, ConnectivityModule.TYPE, device, compatMode);
     }
 
     _initValues() {
@@ -851,9 +870,12 @@ class FindMyPhoneModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_findmyphone"];
     static MODULE_ID = "findmyphone";
+    static DISPLAY_NAME = "FindMyPhone Module";
+    static ADDITIONAL_SETTINGS = [];
+    static TYPE = ModuleType.ACTION;
 
     constructor(device, compatMode) {
-        super(FindMyPhoneModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
+        super(FindMyPhoneModule.MODULE_ID, FindMyPhoneModule.TYPE, device, compatMode);
     }
 
     _createProxy() {
@@ -887,9 +909,12 @@ class RequestPhotoModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_photo"];
     static MODULE_ID = "requestphoto";
+    static DISPLAY_NAME = "Request Photo Module";
+    static ADDITIONAL_SETTINGS = ["saveToDir", "saveDirectory"];
+    static TYPE = ModuleType.ACTION;
 
     constructor(device, compatMode) {
-        super(RequestPhotoModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
+        super(RequestPhotoModule.MODULE_ID, RequestPhotoModule.TYPE, device, compatMode);
     }
 
     _createProxy() {
@@ -985,9 +1010,12 @@ class PingModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_ping"];
     static MODULE_ID = "ping";
+    static DISPLAY_NAME = "Ping Module";
+    static ADDITIONAL_SETTINGS = ["useCustomMessage", "customMessage"];
+    static TYPE = ModuleType.ACTION;
 
     constructor(device, compatMode) {
-        super(PingModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
+        super(PingModule.MODULE_ID, PingModule.TYPE, device, compatMode);
     }
 
     _createProxy() {
@@ -1034,9 +1062,12 @@ class ShareModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_share"];
     static MODULE_ID = "share";
+    static DISPLAY_NAME = "Share Module";
+    static ADDITIONAL_SETTINGS = ["useSubMenu", "enableSendURL", "enableSendText", "enableSendFiles"];
+    static TYPE = ModuleType.ACTION;
 
     constructor(device, compatMode) {
-        super(ShareModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
+        super(ShareModule.MODULE_ID, ShareModule.TYPE, device, compatMode);
     }
 
     _createProxy() {
@@ -1212,9 +1243,12 @@ class SFTPModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_sftp"];
     static MODULE_ID = "sftp";
+    static DISPLAY_NAME = "SFTP Module";
+    static ADDITIONAL_SETTINGS = [];
+    static TYPE = ModuleType.ACTION;
 
     constructor(device, compatMode) {        
-        super(SFTPModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
+        super(SFTPModule.MODULE_ID, SFTPModule.TYPE, device, compatMode);
     }
 
     _initValues() {
@@ -1359,9 +1393,12 @@ class SMSModule extends KDECModule {
 
     static REQUIRED_KDEC_PLUGINS = ["kdeconnect_sms"];
     static MODULE_ID = "sms";
+    static DISPLAY_NAME = "SMS Module";
+    static ADDITIONAL_SETTINGS = ["useSubMenu", "enableSendSMS", "enableLaunchSMSApp"];
+    static TYPE = ModuleType.ACTION;
 
     constructor(device, compatMode) {
-        super(SMSModule.MODULE_ID, ModuleType.ACTION, device, compatMode);
+        super(SMSModule.MODULE_ID, SMSModule.TYPE, device, compatMode);
     }
 
     _createProxy() {
@@ -1464,8 +1501,6 @@ class SMSModule extends KDECModule {
     }
 }
 
-// TODO: Maybe add telephony module
-
 // Register module classes
 let moduleClasses = {}
 
@@ -1479,19 +1514,24 @@ moduleClasses[ShareModule.MODULE_ID] = ShareModule;
 moduleClasses[SFTPModule.MODULE_ID] = SFTPModule;
 moduleClasses[SMSModule.MODULE_ID] = SMSModule;
 
-// Register additional settings
-
-let additionalSettings = {}
-
-additionalSettings[BatteryModule.MODULE_ID] = [];
-additionalSettings[DeviceInfoModule.MODULE_ID] = [];
-additionalSettings[ConnectivityModule.MODULE_ID] = ["showNetworkType"];
-additionalSettings[FindMyPhoneModule.MODULE_ID] = [];
-additionalSettings[RequestPhotoModule.MODULE_ID] = ["saveToDir", "saveDirectory"];
-additionalSettings[PingModule.MODULE_ID] = ["useCustomMessage", "customMessage"];
-additionalSettings[ShareModule.MODULE_ID] = ["useSubMenu", "enableSendURL", "enableSendText", "enableSendFiles"];
-additionalSettings[SFTPModule.MODULE_ID] = [];
-additionalSettings[SMSModule.MODULE_ID] = ["useSubMenu", "enableSendSMS", "enableLaunchSMSApp"];
-
-// Create array of module IDs
+// Create array of supported module IDs
+// NOTE: Not necessarily sorted correctly
 let modules = Object.keys(moduleClasses);
+
+/**
+ * Return the subarray of "modules", which fit the type
+ * @param {ModuleType} moduleType - The ModuleType to filter
+ */
+function modulesByType(moduleType) {
+    let filteredModules = [];
+
+    CommonUtils.utilInfo("ModuleType: "+moduleType.toString(), CommonUtils.LogLevel.VERBOSE, "modulesByType");
+
+    modules.forEach(moduleID => {
+        if (moduleClasses[moduleID].TYPE == moduleType) {
+            filteredModules.push(moduleID);
+        }
+    });
+
+    return filteredModules;
+}
