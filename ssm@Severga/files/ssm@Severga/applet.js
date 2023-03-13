@@ -10,7 +10,6 @@ const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
-const GLib = imports.gi.GLib; // Needed for translations
 const Gettext = imports.gettext; // Needed for translations
 
 const HOME_DIR = GLib.get_home_dir();
