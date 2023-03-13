@@ -1147,7 +1147,13 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _setKeybinding() {
+        Main.keybindingManager.removeHotKey("media-keys-4");
+        Main.keybindingManager.removeHotKey("media-keys-2");
+
         Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
+
+        Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => this._volumeChange(Clutter.ScrollDirection.UP));
+        Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => this._volumeChange(Clutter.ScrollDirection.DOWN));
     }
 
     _on_sound_settings_change() {
@@ -1172,6 +1178,10 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_applet_removed_from_panel() {
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
+
+        Main.keybindingManager.removeHotKey("raise-volume-" + this.instance_id);
+        Main.keybindingManager.removeHotKey("lower-volume-" + this.instance_id);
+
         if (this.hideSystray)
             this.unregisterSystrayIcons();
         if (this._iconTimeoutId) {
@@ -1225,6 +1235,10 @@ class Sound150Applet extends Applet.TextIconApplet {
             return Clutter.EVENT_PROPAGATE;
         }
 
+        this._volumeChange(direction);
+    }
+
+    _volumeChange(direction) {
         let currentVolume = this._output.volume;
         let volumeChange = false;
         let player = this._players[this._activePlayer];
@@ -1265,7 +1279,23 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (volumeChange) {
             this._output.push_volume();
             this._notifyVolumeChange(this._output);
+            this.setAppletTooltip();
             this._applet_tooltip.show();
+            let volume = this.volume.slice(0, -1);
+            let icon_name = "audio-volume";
+            if (volume <1) icon_name += "-muted";
+            else if (volume < 33) icon_name += "-low";
+            else if (volume < 67) icon_name += "-medium";
+            else icon_name += "-high";
+            icon_name += "-symbolic";
+            let icon = Gio.Icon.new_for_string(icon_name);
+            Main.osdWindowManager.show(-1, icon, volume, null);
+            var intervalId = null;
+            intervalId = Util.setInterval(() => {
+                this._applet_tooltip.hide();
+                Util.clearInterval(intervalId);
+                return false
+            }, 5000);
         } else {
             this._applet_tooltip.hide();
         }
