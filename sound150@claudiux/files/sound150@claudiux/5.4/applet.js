@@ -1281,6 +1281,15 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._notifyVolumeChange(this._output);
             this.setAppletTooltip();
             this._applet_tooltip.show();
+            let volume = this.volume.slice(0, -1);
+            let icon_name = "audio-volume";
+            if (volume <1) icon_name += "-muted";
+            else if (volume < 33) icon_name += "-low";
+            else if (volume < 67) icon_name += "-medium";
+            else icon_name += "-high";
+            icon_name += "-symbolic";
+            let icon = Gio.Icon.new_for_string(icon_name);
+            Main.osdWindowManager.show(-1, icon, volume, null);
             var intervalId = null;
             intervalId = Util.setInterval(() => {
                 this._applet_tooltip.hide();
