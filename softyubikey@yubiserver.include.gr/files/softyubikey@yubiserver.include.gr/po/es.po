@@ -24,7 +24,7 @@ msgstr "Haga clic aquí para crear una OTP"
 
 #: applet.js:63
 msgid "Configure your SoftYubikey"
-msgstr "Configura tu SoftYubikey"
+msgstr "Configure su SoftYubikey"
 
 #. softyubikey@yubiserver.include.gr->metadata.json->description
 msgid "Click on the applet to create a OTP"
