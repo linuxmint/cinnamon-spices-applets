@@ -3,7 +3,7 @@
   "name": "Spices Update",
   "max-instances": "1",
   "hide-configuration": false,
-  "version": "6.3.1",
+  "version": "6.4.1",
   "description": "Warns you when installed Spices (applets, desklets, extensions, themes) require an update or new Spices are available.",
   "multiversion": true,
   "cinnamon-version": [
@@ -16,6 +16,11 @@
     "4.0",
     "4.2",
     "4.4",
-    "4.6"
+    "4.6",
+    "4.8",
+    "5.0",
+    "5.2",
+    "5.4",
+    "5.6"
   ]
 }

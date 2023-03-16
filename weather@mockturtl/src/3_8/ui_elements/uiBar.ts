@@ -8,7 +8,7 @@ import { _, AwareDateString, MetreToUserUnits } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { DateTime } from "luxon";
 
-const { BoxLayout, IconType, Label, Icon, Align, Button } = imports.gi.St;
+const { BoxLayout, IconType, Label, Icon, Align, Button, Side } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
 
 const STYLE_BAR = 'bottombar'
@@ -36,11 +36,15 @@ export class UIBar {
 	}
 
 	public SwitchButtonToShow() {
-		if (!!this.hourlyButton?.actor.child) (this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = "custom-down-arrow-symbolic";
+		const icon: CustomIcons = this.app.Orientation == Side.BOTTOM ? "custom-up-arrow-symbolic" : "custom-down-arrow-symbolic";
+		if (!!this.hourlyButton?.actor.child)
+			(this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = icon;
 	}
 
 	public SwitchButtonToHide() {
-		if (!!this.hourlyButton?.actor.child) (this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = "custom-up-arrow-symbolic";
+		const icon: CustomIcons = this.app.Orientation == Side.BOTTOM ? "custom-down-arrow-symbolic" : "custom-up-arrow-symbolic";
+		if (!!this.hourlyButton?.actor.child)
+			(this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = icon;
 	}
 
 	public DisplayErrorMessage(msg: string) {
@@ -115,7 +119,7 @@ export class UIBar {
 				icon_type: IconType.SYMBOLIC,
 				// always want it a bit bigger due to the icons's horizontal nature
 				icon_size: config.CurrentFontSize + 3,
-				icon_name: "custom-down-arrow-symbolic" as CustomIcons,
+				icon_name: this.app.Orientation == Side.BOTTOM ? "custom-up-arrow-symbolic" as CustomIcons : "custom-down-arrow-symbolic" as CustomIcons,
 				style: "margin: 2px 5px;"
 			}),
 		});
@@ -146,8 +150,8 @@ export class UIBar {
 	}
 
 	/**
-	 * 
-	 * @param unit 
+	 *
+	 * @param unit
 	 * @return km or mi, based on unit
 	 */
 	private BigDistanceUnitFor(unit: DistanceUnits) {

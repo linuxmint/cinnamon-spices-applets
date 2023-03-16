@@ -1,3 +1,8 @@
+###1.2.2
+- Thanks to Kimmo Kujansuu for the finnish translation
+- fredcw added support for libsup 3
+- Support for Kosovo holidays
+
 ### 1.2.1
 - move to multiversion setup. This ensures event manager is only started
   on Cinnamon 5.2+.

@@ -15,6 +15,8 @@ export class DeutscherWetterdienst extends BaseProvider {
     public maxHourlyForecastSupport: number = 240;
     public website: string = "https://www.dwd.de/DE/Home/home_node.html";
     public remainingCalls: number | null = null;
+    public readonly supportHourlyPrecipChance = false;
+	public readonly supportHourlyPrecipVolume = true;
 
     private readonly baseUrl: string = "https://api.brightsky.dev/";
 
@@ -66,7 +68,7 @@ export class DeutscherWetterdienst extends BaseProvider {
 
     private ParseForecast(current: CurrentWeatherPayload, forecast: HourlyForecastPayload, loc: LocationData): ForecastData[] {
         const result: ForecastData[] = [];
-        // Now normalized to the current hour 
+        // Now normalized to the current hour
         const days = this.SplitToDays(forecast, loc);
 
         for (const day of days) {
@@ -87,7 +89,7 @@ export class DeutscherWetterdienst extends BaseProvider {
                     tempMin = Math.min(tempMin, hour.temperature);
                 }
             }
-            
+
             // a day had 0 items or no temperature data, we have to break of otherwise we will have inconsistent data on display
             if (time == null || tempMin == Infinity || tempMax == -Infinity)
                 break;
@@ -165,7 +167,7 @@ export class DeutscherWetterdienst extends BaseProvider {
                 severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]!++;
         }
 
-        const conditionsToCount = Object.keys(severeWeathers).length > 0 ? severeWeathers : regularWeather; 
+        const conditionsToCount = Object.keys(severeWeathers).length > 0 ? severeWeathers : regularWeather;
 
         const mostFrequentCondition = Object.entries(conditionsToCount).reduce((p, c) => p[1] > c[1] ? p : c)[0] as Icon;
         return this.IconToInfo(mostFrequentCondition);
@@ -301,7 +303,7 @@ export class DeutscherWetterdienst extends BaseProvider {
                     icons: ["weather-windy", "weather-breeze"],
                     customIcon: "windy-symbolic"
                 }
-            default: 
+            default:
                 return {
                     main: _("Unknown"),
                     description: _("Unknown"),
@@ -356,7 +358,7 @@ interface CurrentWeatherInfo {
     /** ISO 8601-formatted timestamp of this weather record/forecast */
     timestamp: string;
     /** Bright Sky source ID for this record */
-    source_id: number; 
+    source_id: number;
     /** Total cloud cover at timestamp */
     cloud_cover: number | null;
     /** Current weather conditions. Unlike the numerical parameters, this field is not taken as-is from the raw data (because it does not exist), but is calculated from different fields in the raw data as a best effort. Not all values are available for all source types. */

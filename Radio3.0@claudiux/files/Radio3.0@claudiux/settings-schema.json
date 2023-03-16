@@ -45,7 +45,8 @@
       "sections": [
         "sectionMenuMenu",
         "sectionMenuPrivacy",
-        "sectionMenuContextual"
+        "sectionMenuContextual",
+        "sectionMenuShortcuts"
       ]
     },
     "pageBehavior": {
@@ -197,7 +198,8 @@
       "title": "Start-up",
       "keys": [
         "switch-on-last-station-at-start-up",
-        "volume-at-startup"
+        "volume-at-startup",
+        "dont-check-dependencies"
       ]
     },
     "sectionBehaviorVolumeStep": {
@@ -238,6 +240,15 @@
       "title": "Contextual Menu",
       "keys": [
         "show-reload"
+      ]
+    },
+    "sectionMenuShortcuts": {
+      "type": "section",
+      "title": "Keyboard shortcuts",
+      "keys": [
+        "shortcut-volume-up",
+        "shortcut-volume-down",
+        "shortcut-volume-cut"
       ]
     },
     "sectionBehaviorNotifications": {
@@ -299,6 +310,8 @@
       "type": "section",
       "title": "Recordings",
       "keys": [
+        "recording-path",
+        "button-rec-path-to-default",
         "recording-format",
         "recording-ends-auto"
       ]
@@ -342,6 +355,7 @@
         "recordings-extract-url",
         "recordings-paste-button",
         "recordings-yesno-playlist",
+        "recordings-keep-video",
         "recordings-subdirectory",
         "recordings-extract-button",
         "recordings-extract-update"
@@ -714,6 +728,7 @@
     "type": "textview",
     "description": "Page:",
     "value": "0",
+    "default": "0",
     "height": 25
   },
   "search-list-button": {
@@ -775,6 +790,11 @@
       "100": 100
     },
     "tooltip": "If set, then this will change the volume level starting a new radio, in percentage of the general volume level.\nDefault is (Undefined): The volume level remains unchanged.\n\nPlease note that you can change the volume level scrolling on this applet icon, or using the slider in the context menu."
+  },
+  "dont-check-dependencies": {
+    "type": "switch",
+    "description": "Do not check about dependencies",
+    "default": false
   },
   "volume-step": {
     "type": "combobox",
@@ -839,6 +859,21 @@
     "default": false,
     "description": "Show the 'Reload this applet' item in the contextual menu",
     "tooltip": "For developers only"
+  },
+  "shortcut-volume-up": {
+    "type": "keybinding",
+    "description": "Increase Volume",
+    "default": ""
+  },
+  "shortcut-volume-down": {
+    "type": "keybinding",
+    "description": "Decrease Volume",
+    "default": ""
+  },
+  "shortcut-volume-cut": {
+    "type": "keybinding",
+    "description": "Mute",
+    "default": ""
   },
   "show-help-in-tooltip": {
     "type": "switch",
@@ -934,6 +969,17 @@
     "default": "",
     "height": 25
   },
+  "recording-path": {
+    "type": "filechooser",
+    "description": "Path to the folder that will contain your future recordings",
+    "select-dir": true,
+    "default": ""
+  },
+  "button-rec-path-to-default": {
+    "type": "button",
+    "description": "Set this path to default one",
+    "callback": "set_rec_path_to_default"
+  },
   "recording-format": {
     "type": "combobox",
     "description": "Recording format",
@@ -976,7 +1022,7 @@
   },
   "limits-hd-value": {
     "type": "scale",
-    "default": 5,
+    "default": 1,
     "min": 0,
     "max": 1024,
     "step": 1,
@@ -1055,6 +1101,12 @@
       "Extract single soundtrack": " --no-playlist",
       "Extract whole playlist": " --yes-playlist"
     }
+  },
+  "recordings-keep-video": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep video (slower)",
+    "tooltip": "Whether or not to keep the intermediate video file on disk after post-processing"
   },
   "recordings-subdirectory": {
     "type": "entry",

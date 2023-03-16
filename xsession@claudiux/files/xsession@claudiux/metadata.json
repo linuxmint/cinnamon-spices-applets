@@ -1,0 +1,9 @@
+{
+    "uuid": "xsession@claudiux",
+    "name": "Xsession",
+    "max-instances": "1",
+    "hide-configuration": true,
+    "version": "1.0.1",
+    "description": "Allows you to restart or open the source code of Spices (applets, desklets, extensions), display in real-time the contents of your .xsession-errors file and restart Cinnamon.",
+    "author": "claudiux"
+}

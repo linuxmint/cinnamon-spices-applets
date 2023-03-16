@@ -19,6 +19,8 @@ export interface WeatherProvider {
 	readonly maxHourlyForecastSupport: number;
 	readonly website: string;
 	readonly remainingCalls: number | null;
+	readonly supportHourlyPrecipChance: boolean;
+    readonly supportHourlyPrecipVolume: boolean;
 
 	GetWeather(loc: LocationData): Promise<WeatherData | null>;
 }
@@ -95,11 +97,11 @@ interface StringAPIUniqueField extends BaseAPIUniqueField {
 }
 
 
-/** 
+/**
  * percent: value is a number from 0-100 (or more)
- * 
+ *
  * temperature: value is number in Kelvin
- * 
+ *
  * string:  is a string
 */
 type ExtraField = "percent" | "temperature" | "string";
@@ -154,7 +156,7 @@ export interface AppletError {
 }
 
 /** hard will not force a refresh and cleans the applet ui.
- * 
+ *
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 export type ErrorSeverity = "hard" | "soft" | "silent";

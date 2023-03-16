@@ -63,7 +63,7 @@ class SystemControlsApplet extends Applet.TextIconApplet {
         this._contentSection = new PopupMenu.PopupMenuSection();
         this.menu.addMenuItem(this._contentSection);
 
-        let item = new PopupMenu.PopupIconMenuItem(_("Restart Cinnamon"), "system-run", St.IconType.SYMBOLIC);
+        let item = new PopupMenu.PopupIconMenuItem(_("Restart Cinnamon"), "cinnamon-symbolic", St.IconType.SYMBOLIC);
         item.connect('activate', Lang.bind(this, function () {
             global.reexec_self();
         }));

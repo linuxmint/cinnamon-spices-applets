@@ -4,35 +4,44 @@ Adaptation of Gnome Shell's [weather extension](https://github.com/simon04/gnome
 
 cinnamon-weather uses [Semantic Versioning](http://semver.org/).  For the current version number, see `metadata.json`.  
 
+## Versions
+
+Versions are automatically selected based on you Cinnamon's version.
+
+- [Cinnamon](https://github.com/linuxmint/Cinnamon) **3.0+ is End-of-Life, won't receive more updates**
+- [Cinnamon](https://github.com/linuxmint/Cinnamon) 3.8+ is the currently supported version.
+
 ----
 
-## Setup
+## Configuration
 
-**The applet obtains the location automatically, see below what the weather providers offer and how to obtain API keys if your chosen weather provider needs one.**
+Right-click to access `cinnamon-settings` -> *Applets -> Configure*.
 
-In **Manual Location** mode the applet either accepts:
+### Location
+
+The applet obtains the location automatically. If the automatic location not adequate for you, you can use the **Manual Location** mode where the applet either accepts:
 
 * **Coordinates** in Latitude, Longitude format (e.g. 37.77,122.41). You can use [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates in from there.
-* or an **Address** (it can be just a city and country, it is pretty flexible). After 3 seconds, the applet will replace what you entered with the full address what it finds so you can verify if it's correct. You can also get your exact address to enter from [OpenStreetMap's Nominatim search](https://nominatim.openstreetmap.org/), that's what the applet uses as well.
+* or an **Address** (it can be just a city and country, it is pretty flexible). After 3 seconds, the applet will replace the text that you entered with the full address it finds so you can verify if it's correct. You can also get your exact address to enter from [OpenStreetMap's Nominatim search](https://nominatim.openstreetmap.org/), the service the applet uses.
 
 You can also save locations what you entered manually and switch between them in the applet *(arrows will appear on both sides of the location in the applet if you have more than two saved)*. 
 
-## Weather providers to choose from
+### Weather providers to choose from
 
-| Weather Providers          | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Other information                |
-| -------------------------- | ------------- | --------------------- | ---------------------- | -------------------------------- |
-| **OpenWeatherMap**         | No            | 8                     | 48                     | Default provider                 |
-| **MET Norway**             | No            | 10                    | 48                     | --                               |
-| **DMI Denmark**            | No            | 10                    | 48                     | --                               |
-| **Deutscher Wetterdienst** | No            | 10                    | 240                    | --                               |
-| **Met Office UK**          | No            | 5                     | 36                     | --                               |
-| **US National Weather**    | No            | 7                     | 156                    | --                               |
-| **WeatherBit**             | Yes           | 16                    | 0**                    | --                               |
-| **Visual Crossing**        | Yes           | 15                    | 336                    | --                               |
-| **Tomorrow.io**            | Yes           | 15                    | 108                    | Previously known as Climacell    |
-| **DarkSky**                | Yes           | 8                     | 168                    | Signups closed, will end Q2 2023 |
-| **AccuWeather**            | Yes           | 5***                  | 12                     | Limited free calls               |
-| **Weather Underground**    | Yes           | 5                     | 0                      | --                               |
+| Weather Providers          | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Immediate Forecast | Other information                |
+| -------------------------- | ------------- | --------------------- | ---------------------- | ------------------ | -------------------------------- |
+| **OpenWeatherMap**         | No            | 8                     | 48                     | Yes                | Default provider                 |
+| **MET Norway**             | No            | 10                    | 48                     | Depends            | --                               |
+| **DMI Denmark**            | No            | 10                    | 48                     | No                 | --                               |
+| **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | --                               |
+| **Met Office UK**          | No            | 5                     | 36                     | No                 | --                               |
+| **US National Weather**    | No            | 7                     | 156                    | No                 | --                               |
+| **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | --                               |
+| **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | --                               |
+| **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | Previously known as Climacell    |
+| **DarkSky**                | Yes           | 8                     | 168                    | No                 | Signups closed, will end Q2 2023 |
+| **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | Limited free calls               |
+| **Weather Underground**    | Yes           | 5                     | 0                      | No                 | --                               |
 
 ### OpenWeatherMap
 
@@ -44,8 +53,9 @@ Worldwide Online Weather service by OpenWeather Ltd founded in 2012 with headqua
 
 Free meteorological data and forecasts from the Norwegian Meteorological Institute founded in 1866. [MET Norway Website](https://www.met.no/en). Read more about the institute [here](https://en.wikipedia.org/wiki/Norwegian_Meteorological_Institute).
 
-* It doesn't support minutely precipitation and current weather is shown for the next hour outside Norway.
-* and the daily forecasts are generated from 6 hour forecasts, so there is a possibility that they are inaccurate sometimes.
+* Nowcast (Immediate precipitation and granular observations) is not available outside Norway. In that case, observations are shown for the next hour.
+
+* Daily forecasts are generated from 6 hour forecasts (for every hour), so there is a possibility that they are inaccurate sometimes.
 
 ### DMI Denmark
 
@@ -57,15 +67,15 @@ The Danish Meteorological Institute formed in 1872 and makes weather forecasts a
 
 German National Weather Provider. [Deutsche Wetterdienst Website](https://www.dwd.de/DE/Home/home_node.html). Read more about the institute [here](https://en.wikipedia.org/wiki/Deutscher_Wetterdienst).
 
-* Only covers Germany.
+* **Only covers Germany**.
 
 ### Met Office UK
 
 The Meteorological Office, abbreviated as the Met Office, is the UK's national weather service founded in 1854. [Met Office UK Website](https://www.metoffice.gov.uk/). Read more about the agency [here](https://en.wikipedia.org/wiki/Met_Office).
 
-* Sometimes it takes like 5-10 seconds to obtain weather, please be patient when it loads up the first time.
+* **Only covers the UK.**
 
-* Only covers the UK
+* Sometimes it takes like 5-10 seconds to obtain weather, please be patient when it loads up the first time.
 
 * It uses the nearest forecast site and observation sites in an 50km area, it displays an error if it does not find any. Please open a new issue if this happens and you live in the UK! (There are much less observation sites than forecast sites.)
 
@@ -73,9 +83,9 @@ The Meteorological Office, abbreviated as the Met Office, is the UK's national w
 
 The National Weather Service in the USA is a federal government agency formed in 1861. [US National Weather Website](https://www.weather.gov/). Read more about the agency [here](https://en.wikipedia.org/wiki/National_Weather_Service).
 
-* Sometimes it takes 10-15 seconds to obtain weather, please be patient when it loads up the first time.
+* **Only covers the US**
 
-* Only covers the US
+* Sometimes it takes 10-15 seconds to obtain weather, please be patient when it loads up the first time.
 
 * Observations are quite spotty so it combines multiple observation stations if needed in a 50km area.
 
@@ -125,12 +135,15 @@ Online Service from company AccuWeather Inc, founded in 1962 with headquarters i
 
 Weather Underground is a privately owned, web-based weather information company. It provides weather observations and forecasts in a large number of locations around the world. It was founded by Jeff Masters in 1995 with headquarters in Ann Arbor United States. [Weather Underground website](https://www.wunderground.com/). Read more about the service [here](https://en.wikipedia.org/wiki/Weather_Underground_(weather_service)).
 
+
+- Only allows 1500 calls a day, so 15min refresh cycle is recommended.
 - Weather Underground is a global community of people connecting data from environmental sensors like weather stations (250.000) and air quality monitors so they can provide the rich, hyperlocal data you need.
 - You need an API key. If you don't have a weather station to share data with WU, you can't have an API key. However, you can add a Raspberry Pi as a device for the weather station choice when [registering](https://www.wunderground.com/signup), even if you don't have one, and it will get you the API key.
+- Disclaimer: Observations don't provide weather conditions so the forecast one for the day is used.
 
-## Usage of "Override label on panel" setting
+### Usage of "Override label on panel", "Override location label" and "Override tooltip on panel" setting
 
-The setting allows you to make the applet display basically anything in the form of text in the panel. In addition, it exposes a number of values for you to use as you like, these will be replaced with actual data values. The full text-to-value mapping can be found below.
+The setting allows you to make the applet display basically anything in the form of text in the panel (and other places). In addition, it exposes a number of values for you to use as you like, these will be replaced with actual data values. The full text-to-value mapping can be found below.
 
 | Text to enter     | Mapped value                                              |
 | ----------------- | --------------------------------------------------------- |
@@ -149,21 +162,7 @@ The setting allows you to make the applet display basically anything in the form
 | `{city}`          | City name shown in the popup                              |
 | `{country}`       | Country name shown in the popup                           |
 | `{search_entry}`  | Search entry text in manual location (or location store)  |
-
-## Versions
-
-*Versions are automatically selected based on you Cinnamon's version*
-
-* [Cinnamon](https://github.com/linuxmint/Cinnamon) 3.0+ **NOW EOL, won't receive more updates**
-* [Cinnamon](https://github.com/linuxmint/Cinnamon) 3.8+
-
-## Configuration
-
-Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
-
-## Mailing list
-
-http://groups.google.com/group/cinnamon-weather
+| `{last_updated}`  | Formatted last updated time                               |
 
 ## Future Plans
 

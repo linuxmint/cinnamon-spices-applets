@@ -1,5 +1,22 @@
 # Changelog
 
+## 3.2.12
+
+* Minor style changes
+* Make "Location Label Override" behavior identical to Panel label override.
+* Add option to override tooltip label for applet
+* Try to make hourly weather elements slimmer by putting precipitation change and volume in different rows
+* Update luxon and suncalc
+* Update README
+* Use user's timezone for automatic unit inference, Fixes [#4644](https://github.com/linuxmint/cinnamon-spices-applets/issues/4644)
+* Fixes [#4628](https://github.com/linuxmint/cinnamon-spices-applets/issues/4628)
+* Fix MET UK crash when observation stations return a single object instead of an array for it's observation
+* Add support for saving config from new path and respect ENV variable for xsession-errors
+
+## 3.2.11
+
+* Fix issue where refresh loop wouldn't ever resume after a single configuration error  
+
 ## 3.2.10
 
 * Add more granular control for setting changes

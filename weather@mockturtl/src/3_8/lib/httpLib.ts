@@ -13,7 +13,7 @@ export class HttpLib {
 	}
 
 	/**
-	 * Handles obtaining JSON over http. 
+	 * Handles obtaining JSON over http.
 	 */
 	public async LoadJsonAsync<T, E = any>(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<T, E>> {
 		const response = await this.LoadAsync(url, params, headers, method);
@@ -41,7 +41,7 @@ export class HttpLib {
 	}
 
 	/**
-	 * Handles obtaining data over http. 
+	 * Handles obtaining data over http.
 	 */
 	public async LoadAsync<E = any>(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<string | null, E>> {
 		const message = await soupLib.Send(url, params, headers, method);
@@ -149,9 +149,9 @@ export interface HttpError {
 
 // 	/**
 // 	 * Send a http request
-// 	 * @param url 
-// 	 * @param params 
-// 	 * @param method 
+// 	 * @param url
+// 	 * @param params
+// 	 * @param method
 // 	 */
 // 	 public async Send(url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method: Method = "GET"): Promise<SoupResponse | null> {
 // 		// Add params to url

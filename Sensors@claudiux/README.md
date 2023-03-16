@@ -37,22 +37,15 @@ _**Sensors@claudiux** helps you to install these packages, if any._
 
 ## Install
 
-### From Spices Update (recommended)
-This method is recommended to be sure to obtain the latest version of this applet.
+### From Cinnamon Settings (recommended)
+Just go to `System Settings > Applets` then
 
-  1. Install [the Spices Update applet][spicesupdate] on a panel of your Cinnamon desktop.
-  2. Select **Applets** in the menu of Spices Update.
-  3. In the just opened window, in Download tab, search this applet with the keyword **Sensors** and download it.
-  4. Go to the _Manage_ tab of the same window, click on this applet then add it to Cinnamon.
-  5. Open the settings of this applet and configure it as you want.
+  1. In the just opened window, in Download tab, search this applet with the keyword **Sensors** and download it.
+  2. Go to the _Manage_ tab of the same window, click on this applet then add it to Cinnamon.
+  3. Open the settings of this applet and configure it as you want.
 
 ### From the Cinnamon Spices website
-[Download the package][download] containing the latest version of this applet and extract the contents into `~/.local/share/cinnamon/applets`. Then go to `System Settings > Applets` and run the 4-5 steps above.
-
-### From the Cinnamon settings
-Just go to `System Settings > Applets` then, in the Download tab, run the 3-5 steps above.
-
-Please note that using this method you are not sure that you are getting the latest version of this applet.
+[Download the package][download] containing the latest version of this applet and extract the contents into `~/.local/share/cinnamon/applets`. Then go to `System Settings > Applets` and run the 2-3 steps above.
 
 ## Settings
 
@@ -67,6 +60,22 @@ There are five tabs in settings:
 All these tabs are directly accessible from the menu of this applet.
 
 ## FAQ
+
+### How to display the temperature of each of my disks?
+
+#### Internal disks
+Try to load the __drivetemp__ module:
+
+  sudo modprobe drivetemp
+
+If that give you a valid result running _sensors_, add __drivetemp__ into the list of modules to load at startup of your computer:
+
+  echo "drivetemp" | sudo tee -a /etc/modules
+
+#### External disks (on USB port)
+  echo "%sudo ALL = NOPASSWD: /usr/sbin/smartctl" | sudo tee /etc/sudoers.d/smartctl
+
+Then log out and log in your session.
 
 ### My PC has several temperature sensors and their values ​​are different. Why and which one to choose?
 
@@ -106,7 +115,7 @@ There are different reasons:
   1. The kernel modules driving these sensors are not started. Beware of too recent hardware / motherboard.
   2. The module is successfully started but it returns a zero value and you have checked the _Show only strictly positive values_ box. Example: Your computer is fanless, so no fan is present to send data to the fan sensor.
   3. Your sensor is wrong or not connected.
-  4. Your `/etc/sensors3.conf` file (or any .conf file in `/etc/sensors.d`) must be configured for your chip. Search if a [configuration file][lmsensorsconfigs] already exists.
+  4. Your `/etc/sensors3.conf` file (or any .conf file in `/etc/sensors.d`) must be configured for your chip. Search if a [configuration file][lmsensorsconfigs] already exists. Once config file is installed, reboot the computer.
 
 ### Some values seem to be wrong
 
@@ -165,4 +174,4 @@ Claudiux ([@claudiux][claudiux])
 [lmsensors]: https://github.com/lm-sensors/lm-sensors
 [lmsensorsconfigs]: https://github.com/lm-sensors/lm-sensors/tree/master/configs
 [spicesupdate]: https://cinnamon-spices.linuxmint.com/applets/view/309
-[download]: https://cinnamon-spices.linuxmint.com/files/applets/Sensors@claudiux.zip?09b2757f-1aa2-4e64-8013-f59d7a50886b
+[download]: https://cinnamon-spices.linuxmint.com/files/applets/Sensors@claudiux.zip?0c1b4606-e68e-4d11-ae4e-c1373acd749b

@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-08 22:29-0500\n"
-"PO-Revision-Date: 2022-12-08 22:32-0500\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"POT-Creation-Date: 2022-12-27 19:21-0500\n"
+"PO-Revision-Date: 2023-01-16 20:14+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: 5.4/applet.js:135 3.2/applet.js:135
+#: 5.4/applet.js:139 3.2/applet.js:135
 msgid "--%"
 msgstr "--%"
 
-#: 5.4/applet.js:136 3.2/applet.js:136
+#: 5.4/applet.js:140 3.2/applet.js:136
 msgid "Waiting"
 msgstr "Várakozik"
 
-#: 5.4/applet.js:160 3.2/applet.js:165
+#: 5.4/applet.js:164 3.2/applet.js:165
 msgid "Some Dependencies not Installed"
 msgstr "Néhány függőség nincs telepítve"
 
-#: 5.4/applet.js:160
+#: 5.4/applet.js:164
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
 "functionality including notifications and audible alerts .\n"
@@ -42,11 +42,11 @@ msgstr ""
 "\n"
 "Kérjük, olvassa el a súgófájlt a telepítésükhöz."
 
-#: 5.4/applet.js:170 3.2/applet.js:198
+#: 5.4/applet.js:174 3.2/applet.js:198
 msgid "Battery Monitor Applet"
 msgstr "Akkumulátor Figyelő Kisalkalmazás"
 
-#: 5.4/applet.js:170
+#: 5.4/applet.js:174
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -60,46 +60,46 @@ msgstr ""
 "be\n"
 "különösen, ha hosszú hangos fájlt választott ki\n"
 
-#: 5.4/applet.js:243 3.2/applet.js:297
+#: 5.4/applet.js:247 3.2/applet.js:297
 msgid "Open Power Statistics"
 msgstr "Energiastatisztika megjelenítése"
 
-#: 5.4/applet.js:249 3.2/applet.js:303
+#: 5.4/applet.js:253 3.2/applet.js:303
 msgid "Open System Monitor"
 msgstr "Rendszer Figyelő megjelenítése"
 
-#: 5.4/applet.js:258
+#: 5.4/applet.js:262
 msgid "Housekeeping and System Submenu"
 msgstr "Karbantartás és Rendszer Almenü"
 
-#: 5.4/applet.js:261 3.2/applet.js:315
+#: 5.4/applet.js:265 3.2/applet.js:315
 msgid "View the Changelog"
 msgstr "Változásnapló megtekintése"
 
-#: 5.4/applet.js:267
+#: 5.4/applet.js:271
 msgid "Open the README"
-msgstr ""
+msgstr "README fájl megnyitása"
 
-#: 5.4/applet.js:273 3.2/applet.js:327
+#: 5.4/applet.js:277 3.2/applet.js:327
 msgid "Open stylesheet.css (Advanced Function)"
 msgstr "Stylesheet.css fájl megnyitása (haladó funkció)"
 
 #. metadata.json->name
-#: 5.4/applet.js:289 3.2/applet.js:343
+#: 5.4/applet.js:293 3.2/applet.js:343
 msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Akkumulátor Kisalkalmazás figyelés és kikapcsolás funkcióval (BAMS)"
 
-#: 5.4/applet.js:294 3.2/applet.js:348
+#: 5.4/applet.js:298 3.2/applet.js:348
 msgid "Waiting for battery information"
 msgstr "Várakozás az akkumulátor információra"
 
-#: 5.4/applet.js:372
+#: 5.4/applet.js:389
 msgid "Battery Low - turn off or connect to power supply"
 msgstr ""
 "Akkumulátor töltöttség alacsony - kapcsolja ki vagy csatlakoztassa az "
 "elektromos hálózathoz"
 
-#: 5.4/applet.js:377 3.2/applet.js:433
+#: 5.4/applet.js:394 3.2/applet.js:433
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -115,33 +115,33 @@ msgstr ""
 "fejezze be a munkáját, és függessze fel vagy állítsa le a gépet\n"
 "\n"
 
-#: 5.4/applet.js:392
+#: 5.4/applet.js:409
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Akkumulátor kritikus szinten, a rendszer fel lesz függesztve, hacsak nem "
 "csatlakozik az elektromos hálózathoz"
 
-#: 5.4/applet.js:409 3.2/applet.js:464
+#: 5.4/applet.js:426 3.2/applet.js:464
 msgid "Charge:"
 msgstr "Töltés:"
 
-#: 5.4/applet.js:409 3.2/applet.js:464
+#: 5.4/applet.js:426 3.2/applet.js:464
 msgid "Alert:"
 msgstr "Riasztás:"
 
-#: 5.4/applet.js:409 3.2/applet.js:464
+#: 5.4/applet.js:426 3.2/applet.js:464
 msgid "Suspend:"
 msgstr "Felfüggesztés:"
 
-#: 5.4/applet.js:457 3.2/applet.js:512
+#: 5.4/applet.js:474 3.2/applet.js:512
 msgid "Percentage Charge:"
 msgstr "Százalékos töltöttség:"
 
-#: 5.4/applet.js:457 3.2/applet.js:512
+#: 5.4/applet.js:474 3.2/applet.js:512
 msgid "Alert at:"
 msgstr "Riasztás ekkor:"
 
-#: 5.4/applet.js:457 3.2/applet.js:512
+#: 5.4/applet.js:474 3.2/applet.js:512
 msgid "Suspend at:"
 msgstr "Felfüggesztés ekkor:"
 
@@ -221,7 +221,7 @@ msgstr ""
 
 #. 5.4->settings-schema.json->head->description
 msgid "General Settings"
-msgstr ""
+msgstr "Általános beállítások"
 
 #. 5.4->settings-schema.json->refreshInterval-spinner->units
 #. 3.2->settings-schema.json->refreshInterval-spinner->units
@@ -293,7 +293,7 @@ msgstr "Csak Ikon az állapotot jelző színes háttérrel"
 
 #. 5.4->settings-schema.json->displayType->description
 msgid "Toolbar Display Type"
-msgstr ""
+msgstr "Eszköztár megjelenítés típusa"
 
 #. 5.4->settings-schema.json->displayType->tooltip
 #. 3.2->settings-schema.json->displayType->tooltip
@@ -401,12 +401,11 @@ msgstr ""
 
 #. 5.4->settings-schema.json->head4->description
 msgid "Advanced"
-msgstr ""
+msgstr "Speciális"
 
 #. 5.4->settings-schema.json->customBatteryPath->description
-msgid ""
-"Path to battery capacity directory (device path)"
-msgstr ""
+msgid "Path to battery capacity directory (device path)"
+msgstr "Elérési út az akkumulátor kapacitás mappához (eszköz elérési út)"
 
 #. 5.4->settings-schema.json->customBatteryPath->tooltip
 msgid ""
@@ -416,6 +415,11 @@ msgid ""
 "Default:\n"
 "/sys/class/power_supply/BAT0"
 msgstr ""
+"Válassza ki az energia ellátás objektumát – például a másodlagos akkumulátor "
+"megfigyeléséhez.\n"
+"\n"
+"Alapértelmezés:\n"
+"/sys/class/power_supply/BAT0"
 
 #. 3.2->settings-schema.json->head->description
 msgid "General Settings for the Battery Applet with Monitoring and Shutdown"

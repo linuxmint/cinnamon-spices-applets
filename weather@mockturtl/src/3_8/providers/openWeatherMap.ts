@@ -28,6 +28,8 @@ export class OpenWeatherMap extends BaseProvider {
 	public readonly maxHourlyForecastSupport = 48;
 	public readonly needsApiKey = false;
 	public readonly remainingCalls: number | null = null;
+	public readonly supportHourlyPrecipChance = true;
+	public readonly supportHourlyPrecipVolume = true;
 
 	private supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
 		"fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
@@ -60,7 +62,7 @@ export class OpenWeatherMap extends BaseProvider {
 		// We store the newly gotten ID if we got it
 		if (cachedID == null && idPayload?.id != null)
 			IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
-		
+
 		if (!json)
 			return null;
 
@@ -294,9 +296,9 @@ export class OpenWeatherMap extends BaseProvider {
 
 	private ResolveIcon(icon: string): BuiltinIcons[] {
 		// https://openweathermap.org/weather-conditions
-		/* fallback icons are: weather-clear-night 
-		weather-clear weather-few-clouds-night weather-few-clouds 
-		weather-fog weather-overcast weather-severe-alert weather-showers 
+		/* fallback icons are: weather-clear-night
+		weather-clear weather-few-clouds-night weather-few-clouds
+		weather-fog weather-overcast weather-severe-alert weather-showers
 		weather-showers-scattered weather-snow weather-storm */
 		switch (icon) {
 			case "10d":
@@ -436,7 +438,7 @@ interface OWMPayload {
 	minutely?: MinutelyPayload[];
 	hourly: HourlyPayload[];
 	daily: DailyPayload[];
-	alerts?: AlertPayload[] 
+	alerts?: AlertPayload[]
 }
 
 interface CurrentPayload {
@@ -527,7 +529,7 @@ interface DailyPayload {
 	moon_phase: number;
 	temp: {
 		/** Morning temperature. Kelvin. */
-		morn: number; 
+		morn: number;
 		/** Day temperature. Kelvin */
 		day: number;
 		/** Evening temperature. Kelvin */
@@ -541,7 +543,7 @@ interface DailyPayload {
 	}
 	feels_like: {
 		/** Morning temperature. Kelvin. */
-		morn: number; 
+		morn: number;
 		/** Day temperature. Kelvin */
 		day: number;
 		/** Evening temperature. Kelvin */
@@ -628,7 +630,7 @@ const openWeatherMapConditionLibrary = [
 	_("Shower rain"),
 	_("Heavy intensity shower rain"),
 	_("Ragged shower rain"),
-	// Group 6xx: Snow 
+	// Group 6xx: Snow
 	_("Light snow"),
 	_("Snow"),
 	_("Heavy snow"),
@@ -639,7 +641,7 @@ const openWeatherMapConditionLibrary = [
 	_("Light shower snow"),
 	_("Shower snow"),
 	_("Heavy shower snow"),
-	// Group 7xx: Atmosphere 
+	// Group 7xx: Atmosphere
 	_("Mist"),
 	_("Smoke"),
 	_("Haze"),
@@ -650,7 +652,7 @@ const openWeatherMapConditionLibrary = [
 	_("Volcanic ash"),
 	_("Squalls"),
 	_("Tornado"),
-	// Group 800: Clear 
+	// Group 800: Clear
 	_("Clear"),
 	_("Clear sky"),
 	_("Sky is clear"),

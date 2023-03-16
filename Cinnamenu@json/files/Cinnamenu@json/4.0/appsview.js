@@ -4,20 +4,26 @@ const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Atk = imports.gi.Atk;
 const Main = imports.ui.main;
+const Util = imports.misc.util;
 const {SignalManager} = imports.misc.signalManager;
-const {AppState} = imports.gi.Cinnamon;
 const {EllipsizeMode} = imports.gi.Pango;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 
-const {_, wordWrap, getThumbnail_gicon, showTooltip, hideTooltipIfVisible} = require('./utils');
-const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
-const DescriptionPlacementTOOLTIP = 1, DescriptionPlacementUNDER = 2, DescriptionPlacementNONE = 3;
+const { _,
+        wordWrap,
+        log,
+        getThumbnail_gicon,
+        showTooltip,
+        hideTooltipIfVisible,
+        scrollToButton} = require('./utils');
+const ApplicationsViewMode = Object.freeze({LIST: 0, GRID: 1});
+const DescriptionPlacement = Object.freeze({TOOLTIP: 0, UNDER: 1, NONE: 2});
 
 class AppButton {
     constructor(appThis, app) {
         this.appThis = appThis;
         this.app = app;
-        const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
+        const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST;
         this.signals = new SignalManager(null);
 
         //----------ICON---------------------------------------------
@@ -36,7 +42,7 @@ class AppButton {
         } else if (this.app.emoji) {//emoji search result
             this.icon = new St.Label({ style: 'color: white; font-size: ' +
                                             (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
-            this.icon.get_clutter_text().set_markup(this.app.emoji);
+            this.icon.get_clutter_text().set_text(this.app.emoji);
         } else if (this.app.isApplication) {//isApplication
             this.icon = this.app.create_icon_texture(this.appThis.getAppIconSize());
         } else if (this.app.iconFactory) {//isPlace
@@ -52,7 +58,7 @@ class AppButton {
         //--------Label------------------------------------
         this.label = new St.Label({ style_class: 'menu-application-button-label' });
         //.menu-application-button-label{} in themes are designed for list view and may have uneven
-        //padding, so in grid view make padding symmetrical and center text
+        //l/r padding, so in grid view make padding symmetrical and center text
         let labelStyle = '';
         if (!isListView) {
             labelStyle = 'padding-right: 2px; padding-left: 2px; text-align: center; ';
@@ -66,23 +72,13 @@ class AppButton {
         let description = this.app.description ?
                             this.app.description.replace(/&/g, '&amp;').replace(/</g, '&lt;') : '';
         let markup = '<span>' + name + '</span>';
-        if (this.appThis.settings.descriptionPlacement === DescriptionPlacementUNDER && description) {
+        if (this.appThis.settings.descriptionPlacement === DescriptionPlacement.UNDER && description) {
             description = description.replace(/\n/g, ' ');//remove formatting intended for tooltip
             markup += '\n<span size="small">' + description + '</span>';
         }
         const clutterText = this.label.get_clutter_text();
         clutterText.set_markup(markup);
         clutterText.ellipsize = EllipsizeMode.END;
-
-        //--------app running indicator--------------
-        this.appRunningIndicator = new St.Widget({
-                style: isListView ?
-                'width: 2px; height: 12px; background-color: ' + this.appThis.getThemeForegroundColor() +
-                                                    '; margin: 0px; border: 1px; border-radius: 10px;' :
-                'width: 32px; height: 2px; background-color: ' + this.appThis.getThemeForegroundColor() +
-                                                    '; margin: 0px; border: 1px; border-radius: 10px;',
-                x_expand: false,
-                y_expand: false});
 
         //-------------actor---------------------
         this.actor = new St.BoxLayout({ vertical: !isListView, reactive: true,
@@ -92,13 +88,12 @@ class AppButton {
             this.actor.set_style('padding-left: 0px; padding-right: 0px;');
             this.setGridButtonWidth();
         }
+
         if (this.icon && this.appThis.getAppIconSize() > 0) {
             this.actor.add(this.icon, { x_fill: false, y_fill: false,
                                         x_align: isListView ? St.Align.START : St.Align.MIDDLE,
                                         y_align: St.Align.MIDDLE});
         }
-        this.actor.add(this.appRunningIndicator, {  x_fill: false, y_fill: false,
-                                        x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
         this.actor.add(this.label, {
                                 x_fill: false, y_fill: false,
                                 x_align: isListView ? St.Align.START : St.Align.MIDDLE,
@@ -109,43 +104,37 @@ class AppButton {
         //----------dnd--------------
         if (this.app.isApplication) {
             this.actor._delegate = {
-                    handleDragOver: (source) => {
-                            if (source.isDraggableApp && source.id !== this.app.id &&
-                                                            this.appThis.currentCategory === 'favorite_apps') {
-                                this._resetAllAppsOpacity();
-                                this.actor.set_opacity(40);
-                                return DragMotionResult.MOVE_DROP;
-                            }
-                            return DragMotionResult.NO_DROP; },
-                    handleDragOut: () => {  this.actor.set_opacity(255); },
-                    acceptDrop: (source) => {
-                            if (source.isDraggableApp && source.id !== this.app.id &&
-                                                            this.appThis.currentCategory === 'favorite_apps') {
-                                this.actor.set_opacity(255);
-                                this.appThis.addFavoriteAppToPos(source.id, this.app.id);
-                                return true;
-                            } else {
-                                this.actor.set_opacity(255);
-                                return DragMotionResult.NO_DROP;
-                            } },
-                    getDragActorSource: () => this.actor,
-                    _getDragActor: () => new Clutter.Clone({source: this.actor}),
-                    getDragActor: () => new Clutter.Clone({source: this.icon}),
-                    id: this.app.id,
-                    get_app_id: () => this.app.id, //used when eg. dragging to panel launcher
-                    isDraggableApp: true
+                handleDragOver: (source) => {
+                        if (source.isDraggableApp && source.id !== this.app.id &&
+                                                        this.appThis.currentCategory === 'favorite_apps') {
+                            this._resetAllAppsOpacity();
+                            this.actor.set_opacity(40);
+                            return DragMotionResult.MOVE_DROP;
+                        }
+                        return DragMotionResult.NO_DROP; },
+                handleDragOut: () => {  this.actor.set_opacity(255); },
+                acceptDrop: (source) => {
+                        if (source.isDraggableApp && source.id !== this.app.id &&
+                                                        this.appThis.currentCategory === 'favorite_apps') {
+                            this.actor.set_opacity(255);
+                            this.appThis.addFavoriteAppToPos(source.id, this.app.id);
+                            return true;
+                        } else {
+                            this.actor.set_opacity(255);
+                            return DragMotionResult.NO_DROP;
+                        } },
+                getDragActorSource: () => this.actor,
+                _getDragActor: () => new Clutter.Clone({source: this.actor}),
+                getDragActor: () => new Clutter.Clone({source: this.icon}),
+                id: this.app.id,
+                get_app_id: () => this.app.id, //used when eg. dragging to panel launcher
+                isDraggableApp: true
             };
 
             this.draggable = makeDraggable(this.actor);
             this.signals.connect(this.draggable, 'drag-begin', () => hideTooltipIfVisible());
             //this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this._onDragCancelled(...args));
             this.signals.connect(this.draggable, 'drag-end', () => this._resetAllAppsOpacity());
-        }
-
-        //----running state
-        this._onRunningStateChanged();
-        if (this.app.isApplication) {
-            this.signals.connect(this.app, 'notify::state', (...args) => this._onRunningStateChanged(...args));
         }
 
         //this.signals.connect(this.actor, 'button-press-event', (...args) => this.handleButtonPress(...args));
@@ -157,12 +146,18 @@ class AppButton {
     _setButtonNormal() {
         this.has_focus = false;
         this.actor.set_style_class_name('menu-application-button');
+        if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.GRID) {
+            this.actor.add_style_class_name('menu-application-gridbutton');
+        }
         this._addTileStyle();
     }
 
     _setButtonSelected() {
         this.has_focus = true;
         this.actor.set_style_class_name('menu-application-button-selected');
+        if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.GRID) {
+            this.actor.add_style_class_name('menu-application-gridbutton-selected');
+        }
         this._addTileStyle();
     }
 
@@ -181,10 +176,14 @@ class AppButton {
                     col.green += amt;
                     col.blue += amt;
                     return col; };
+        const getThemeBackgroundColor = () => {
+            return this.appThis.menu.actor.get_theme_node().get_background_color();
+        }
+
         //const opaqueify = (col) => { //make color 1/3 more opaque
         //            col.alpha = Math.floor((col.alpha + col.alpha + 255) / 3);
         //            return col; };
-        const bgColor = this.appThis.getThemeBackgroundColor();
+        const bgColor = getThemeBackgroundColor();
         if (bgColor.to_string().startsWith('#000000')) {
             bgColor.red = 20;
             bgColor.green = 20;
@@ -210,51 +209,52 @@ class AppButton {
     }
 
     setGridButtonWidth() {
-        this.actor.width = this.appThis.appsView.getGridValues().columnWidth;
+        this.actor.width = this.appThis.display.appsView.getGridValues().columnWidth;
     }
 
     handleEnter(actor, event) {
-        if (this.appThis.contextMenu.isOpen ) {
-            return false;
+        if (this.appThis.display.contextMenu.isOpen ) {
+            return Clutter.EVENT_PROPAGATE;
         }
 
         if (event) {//mouse
-            this.appThis.clearFocusedActors();
+            this.appThis.display.clearFocusedActors();
         } else {//keyboard navigation
-            this.appThis.scrollToButton(this, this.appThis.settings.enableAnimation);
+            scrollToButton(this, this.appThis.settings.enableAnimation);
         }
         this._setButtonSelected();
 
         //------show tooltip
-        if (this.appThis.settings.descriptionPlacement === DescriptionPlacementTOOLTIP) {
-            const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
-            let tooltipMarkup = '<span>' + wordWrap((this.app.nameWithSearchMarkup &&
-                                            SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.appThis.searchActive) ?
-                                            this.app.nameWithSearchMarkup : this.app.name) + '</span>';
-            if (this.app.description) {
-                tooltipMarkup += '\n<span size="small">' + wordWrap((this.app.descriptionWithSearchMarkup &&
-                                    SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.appThis.searchActive) ?
-                                    this.app.descriptionWithSearchMarkup : this.app.description) + '</span>';
-            }
-            tooltipMarkup = tooltipMarkup.replace(/&/g, '&amp;');
-            let [x, y] = this.actor.get_transformed_position();
-            let {width, height} = this.actor;
-            let center_x = false; //should tooltip x pos. be centered on x
-            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-                x += 175 * global.ui_scale;
-                y += height + 8 * global.ui_scale;
-            } else {//grid view
-                x += Math.floor(width / 2);
-                y += height + 8 * global.ui_scale;
-                center_x = true;
-            }
-            showTooltip(this.actor, x, y, center_x, tooltipMarkup);
+        if (this.appThis.settings.descriptionPlacement != DescriptionPlacement.TOOLTIP) {
+            return Clutter.EVENT_STOP;
+        }  
+        const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
+        let tooltipMarkup = '<span>' + wordWrap((this.app.nameWithSearchMarkup &&
+                                        SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.appThis.searchActive) ?
+                                        this.app.nameWithSearchMarkup : this.app.name) + '</span>';
+        if (this.app.description) {
+            tooltipMarkup += '\n<span size="small">' + wordWrap((this.app.descriptionWithSearchMarkup &&
+                                SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.appThis.searchActive) ?
+                                this.app.descriptionWithSearchMarkup : this.app.description) + '</span>';
         }
-        return false;
+        tooltipMarkup = tooltipMarkup.replace(/&/g, '&amp;');
+        let [x, y] = this.actor.get_transformed_position();
+        let {width, height} = this.actor;
+        let center_x = false; //should tooltip x pos. be centered on x
+        if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
+            x += 175 * global.ui_scale;
+            y += height + 8 * global.ui_scale;
+        } else {//grid view
+            x += Math.floor(width / 2);
+            y += height + 8 * global.ui_scale;
+            center_x = true;
+        }
+        showTooltip(this.actor, x, y, center_x, tooltipMarkup);
+        return Clutter.EVENT_STOP;
     }
 
     handleLeave(actor, event) {
-        if (this.appThis.contextMenu.isOpen) {
+        if (this.appThis.display.contextMenu.isOpen) {
             return false;
         }
         this._setButtonNormal();
@@ -263,17 +263,17 @@ class AppButton {
 
     _handleButtonRelease(actor, e) {
         const button = e.get_button();
-        if (button === 1) {//left click
-            if (this.appThis.contextMenu.isOpen) {
-                this.appThis.clearFocusedActors();
+        if (button === Clutter.BUTTON_PRIMARY) {
+            if (this.appThis.display.contextMenu.isOpen) {
+                this.appThis.display.clearFocusedActors();
                 this.handleEnter();
             } else {
                 this.activate(e);
             }
             return Clutter.EVENT_STOP;
-        } else if (button === 3) {//right click
-            if (this.appThis.contextMenu.isOpen) {
-                this.appThis.clearFocusedActors();
+        } else if (button === Clutter.BUTTON_SECONDARY) {
+            if (this.appThis.display.contextMenu.isOpen) {
+                this.appThis.display.clearFocusedActors();
                 this.handleEnter();
                 return Clutter.EVENT_STOP;
             } else {
@@ -318,38 +318,34 @@ class AppButton {
         }
     }
 
-    _onRunningStateChanged() {
-        if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-            if (this.app.isApplication && this.app.state !== AppState.STOPPED) {
-                this.appRunningIndicator.show();
-            } else {
-                this.appRunningIndicator.hide();
+    activateAsRoot() {
+        if (this.app.isApplication) {
+            if (this.app.newAppShouldHighlight) {
+                this.app.newAppShouldHighlight = false;
+                this._setAppHighlightClass();
             }
-        } else {
-            if (this.app.isApplication && this.app.state !== AppState.STOPPED) {
-                this.appRunningIndicator.opacity = 255;
-            } else {
-                this.appRunningIndicator.opacity = 0;
-            }
-        }
-        return true;
+            this.appThis.recentApps.add(this.app.id);
+            const command = 'gksu ' + this.app.get_app_info().get_executable();
+            Util.spawnCommandLine(command);
+            this.appThis.menu.close();
+        } 
     }
 
     openContextMenu(e) {
         this._setButtonSelected();
         hideTooltipIfVisible();
-        this.appThis.contextMenu.open(this.app, e, this.actor);
+        this.appThis.display.contextMenu.open(this.app, e, this.actor);
     }
 
     _resetAllAppsOpacity() {
-        this.appThis.appsView.getActiveContainer().get_children().forEach( child => child.set_opacity(255) );
+        this.appThis.display.appsView.getActiveContainer().get_children().forEach(
+                                                                child => child.set_opacity(255));
     }
 
     destroy() {
         this.signals.disconnectAllSignals();
         hideTooltipIfVisible();
 
-        this.appRunningIndicator.destroy();
         this.label.destroy();
         if (this.icon) {
             this.icon.destroy();
@@ -366,21 +362,22 @@ class Subheading {
         this.signals = new SignalManager(null);
         this.subheading = new St.Label({ text: subheadingText, x_expand: true, reactive: true,
                                             accessible_role: Atk.Role.HEADING});
-        const subheadingStyleClass = clickAction?'menu-applications-subheading-clickable':'menu-applications-subheading';
+        const subheadingStyleClass =
+                clickAction?'menu-applications-subheading-clickable':'menu-applications-subheading';
         this.subheadingBox = new St.BoxLayout({ style_class: subheadingStyleClass });
         this.subheadingBox.add(this.subheading, { });
 
         if (this.clickAction) {
             this.signals.connect(this.subheading, 'button-press-event', (...args) =>
-                                                                    this._handleButtonPress(...args));
+                                                                this._handleButtonPress(...args));
         }
     }
 
     _handleButtonPress(actor, e) {
         const button = e.get_button();
-        if (button === 1) {//left click
-            if (this.appThis.contextMenu.isOpen) {
-                this.appThis.contextMenu.close();
+        if (button === Clutter.BUTTON_PRIMARY) {
+            if (this.appThis.display.contextMenu.isOpen) {
+                this.appThis.display.contextMenu.close();
                 return Clutter.EVENT_STOP;
             }
             if (this.clickAction) {
@@ -398,9 +395,11 @@ class Subheading {
     }
 }
 
-/*Creates and populates the main applications view. Takes .app objects and creates AppButton objs with
- *.app as a property. this.buttonStore[] array is used to store AppButton objs for later reuse
- *otherwise new AppButton's would need to be created each time a category is clicked on.*/
+/* Creates and populates the main applications view. Method populate_add() takes an array of app
+ * objects and creates AppButton objs with .app as a property. These AppButton objs are then stored
+ * in this.buttonStore[] array for later reuse otherwise new AppButton's would need to be created
+ * each time a category is clicked on. Only the .actor property of the AppButton is used to populate
+ * the actual GridLayout*/
 class AppsView {
     constructor(appThis) {
         this.appThis = appThis;
@@ -459,15 +458,15 @@ class AppsView {
         this.subheadings = [];
     }
 
-    populate_add(appList, subheadingText = null, clickAction = null) {
+    populate_add(appList, subheadingText = null, subheadingClickAction = null) {
         if (subheadingText) {
             if (this.column !== 0) {
                 this.column = 0;
                 this.rownum++;
             }
 
-            const subheading = new Subheading(this.appThis, subheadingText, clickAction);
-            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+            const subheading = new Subheading(this.appThis, subheadingText, subheadingClickAction);
+            if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                 this.applicationsListBox.add(subheading.subheadingBox);
             } else {
                 const gridLayout = this.applicationsGridBox.layout_manager;
@@ -487,7 +486,7 @@ class AppsView {
                 appButton = new AppButton(this.appThis, app);
                 this.buttonStore.push(appButton);
             }
-            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+            if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                 this.applicationsListBox.add_actor(appButton.actor);
             } else {
                 const gridLayout = this.applicationsGridBox.layout_manager;
@@ -500,12 +499,24 @@ class AppsView {
                     this.column = 0;
                     this.rownum++;
                 }
+
+                //set minimum top & bottom padding for appbuttons as theme node is designed for list view.
+                const buttonTopPadding = appButton.actor.get_theme_node().get_padding(St.Side.TOP);
+                const buttonBottomPadding = appButton.actor.get_theme_node().get_padding(St.Side.BOTTOM);
+                
+                const MIN_PADDING = 8;
+                if (buttonTopPadding < MIN_PADDING) {
+                    appButton.actor.style += `padding-top: ${MIN_PADDING}px; `;
+                }
+                if (buttonBottomPadding < MIN_PADDING) {
+                    appButton.actor.style += `padding-bottom: ${MIN_PADDING}px; `;
+                }
             }
         });
     }
 
     populate_finish() {
-        if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+        if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
             this.applicationsListBox.show();
         } else {
             this.applicationsGridBox.show();
@@ -519,7 +530,7 @@ class AppsView {
         //return selects top result.
         const buttons = this.getActiveButtons();
         if (buttons[0] && !buttons[0].has_focus) {
-            this.appThis.clearFocusedActors();
+            this.appThis.display.clearFocusedActors();
             buttons[0].handleEnter();
         }
     }
@@ -576,7 +587,7 @@ class AppsView {
         const minColumnWidth = Math.max(140, this.appThis.settings.appsGridIconSize * 1.2);
         const columns = Math.floor(appsBoxWidth / (minColumnWidth * global.ui_scale));
         const columnWidth = Math.floor(appsBoxWidth / columns);
-
+        
         return {columnWidth: columnWidth, columns: columns};
     }
 
@@ -608,8 +619,8 @@ class AppsView {
     }
 
     getActiveContainer() {
-        return this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST ?
-                                                this.applicationsListBox : this.applicationsGridBox;
+        return this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST ?
+                                        this.applicationsListBox : this.applicationsGridBox;
     }
 
     buttonStoreCleanup() {

@@ -41,8 +41,13 @@ margin to override*/
 
 .menu-category-button-greyed {}
 
-.menu-category-button-hover {} /*and .menu-category-button-selected. Used when
-"activate categories on click" option is set.*/
+.menu-category-button:hover {  /*Only used when "activate categories on click" option is set.*/
+    background-color: rgba(128,128,128,0.2);
+    border-radius: 4px;
+    border-image: none;
+}
+
+/*.menu-category-button-hover {} No longer used. Use .menu-category-button:hover instead.*/
 
 .menu-category-button:highlighted, /*Used to highlight category containing newly installed apps.*/
 .menu-category-button-selected:highlighted {
@@ -73,11 +78,19 @@ margin to override*/
     /*text-align: center;*//*known bug: causes label to jump about when resizing menu*/
 }
 
-.menu-application-button {} /*(Note: in grid view, .menu-application-button l&r padding are set to 0px)*/
+.menu-application-button {} /*Note: in grid view mode, .menu-application-button l&r padding are
+                              set to 0px in the applet and also in grid view mode, top & bottom
+                              padding are set to minimum of 8px.*/
 
-.menu-application-button-label {}
+.menu-application-gridbutton {}
+
+.menu-application-button-label {
+   
+}
 
 .menu-application-button-selected {}
+
+.menu-application-gridbutton-selected {}
 
 .menu-application-button:highlighted, /*Used to highlight newly installed apps in list or grid view.*/
 .menu-application-button-selected:highlighted {
@@ -90,3 +103,11 @@ margin to override*/
 /*---whole menu-----------------------------
 .cinnamenu (and .menu-background)
 (.menu)*/
+
+/*
+Note: You can make a style to apply to Cinnamenu applet but not other menu applets by
+preceeding the class with ".cinnamenu ". Example:
+.cinnamenu .menu-application-button {
+    //this style will only apply to Cinnamenu applet.
+}
+*/
