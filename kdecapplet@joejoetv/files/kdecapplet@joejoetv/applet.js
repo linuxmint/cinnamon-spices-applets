@@ -160,12 +160,12 @@ function _(str) {
  * @short_description Device class representing a KDE Connect device
  */
 class Device {
-    constructor(applet, id, name, compatMode, supportedModules) {
+    constructor(applet, id, name, compatMode, moduleOrders) {
         this.applet = applet;
         this.id = id;
         this.name = name;
         this.compatMode = compatMode;
-        this.supportedModules = supportedModules;
+        this.moduleOrders = moduleOrders;
 
         /**
          * Signal Manager for easy management of signals,
@@ -213,7 +213,7 @@ class Device {
         this.menuItemIcon = null;
 
         try {
-            this.createModules(this.supportedModules);
+            this.createModules();
             this.createMenuItem();
             
         } catch (error) {
@@ -434,8 +434,7 @@ class Device {
     }
 
     /**
-     * Creates modules based on @param supportedModules
-     * @param {list} - supportedModules List of modules to try adding
+     * Creates modules
      */
     createModules() {
         // Only create modules, if device is reachable
@@ -446,7 +445,9 @@ class Device {
 
             this.info("Creating Modules:", CommonUtils.LogLevel.VERBOSE);
 
-            this.supportedModules.forEach(moduleID => {
+            let supportedModules = this.moduleOrders[Modules.ModuleType.INFO].concat(this.moduleOrders[Modules.ModuleType.ACTION]);
+
+            supportedModules.forEach(moduleID => {
                 if (moduleOptions[moduleID].enabled == true) {
                     let moduleClass = Modules.moduleClasses[moduleID];
 
@@ -464,6 +465,8 @@ class Device {
                     } else {
                         this.info(" - '"+moduleID+"': Not all KDE Connect plugins present", CommonUtils.LogLevel.VERBOSE);
                     }
+                } else {
+                    this.info(" - '"+moduleID+"': Module disabled", CommonUtils.LogLevel.VERBOSE);
                 }
             });
         } else {
@@ -520,7 +523,7 @@ class Device {
         let moduleList = [];
 
         // Loop over supported modules array, so the modules are in correct order
-        Modules.modules.forEach(moduleID => {
+        this.moduleOrders[type].forEach(moduleID => {
             if (this.modules[moduleID]) {
                 let module = this.modules[moduleID];
 
@@ -669,6 +672,20 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         // Map of device ID's to Device Object 
         this.devices = {}
 
+        // Array that store an ordered list of IDs
+        this.deviceOrder = []
+        this.moduleOrders = {}
+        this.moduleOrders[Modules.ModuleType.INFO] = []
+        this.moduleOrders[Modules.ModuleType.ACTION] = []
+
+        // Wether to run the callbacls for the settings order lists
+        this.doOrderCallback = false;
+
+        this.orderValueCache = {}
+        this.orderValueCache["deviceOrder"] = []
+        this.orderValueCache["infoModules"] = []
+        this.orderValueCache["actionModules"] = []
+
         // Comaptability Mode
         // - versionLevel: Level corresponding to KDE Connect version differences, 0 is lowest supported version(1.3)
         this.compatMode = {
@@ -700,17 +717,43 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         this.settings = new Settings.AppletSettings(this.options, metadata.uuid, instance_id);
 
         // Bind settings
-        this.settings.bind("showownid", "showOwnID", this.onContextMenuSettingsChanged.bind(this), "showOwnID");
-        this.settings.bind("showkdecver", "showKDEConnectVersion", this.onContextMenuSettingsChanged.bind(this), "showKDEConnectVersion");
-        this.settings.bind("shownumdevices", "showDeviceCount", this.onPanelSettingsChanged.bind(this), "showDeviceCount");
-        this.settings.bind("icontype", "iconType", this.onPanelSettingsChanged.bind(this), "iconType");
-        this.settings.bind("usecustomicon", "useCustomIcon", this.onPanelSettingsChanged.bind(this), "useCustomIcon");
-        this.settings.bind("customicon", "customIcon", this.onPanelSettingsChanged.bind(this), "customIcon");
-        this.settings.bind("expandfirst", "expandFirst", function() {});
-        this.settings.bind("tooltipdevicecount", "tooltipDeviceCount", this.onPanelSettingsChanged.bind(this), "tooltipDeviceCount");
+        this.settings.bind("switch_show-own-id", "showOwnID", this.onContextMenuSettingsChanged.bind(this), "showOwnID");
+        this.settings.bind("switch_show-kdec-version", "showKDEConnectVersion", this.onContextMenuSettingsChanged.bind(this), "showKDEConnectVersion");
+        this.settings.bind("switch_show-device-count", "showDeviceCount", this.onPanelSettingsChanged.bind(this), "showDeviceCount");
+        this.settings.bind("switch_show-device-count-tooltip", "tooltipDeviceCount", this.onPanelSettingsChanged.bind(this), "tooltipDeviceCount");
+        this.settings.bind("combobox_icon-type", "iconType", this.onPanelSettingsChanged.bind(this), "iconType");
+        this.settings.bind("switch_use-custom-icon", "useCustomIcon", this.onPanelSettingsChanged.bind(this), "useCustomIcon");
+        this.settings.bind("icon_custom-icon", "customIcon", this.onPanelSettingsChanged.bind(this), "customIcon");
+        this.settings.bind("switch_expand-only-device", "expandOnlyDevice", function() {});
+
+        this.settings.bind("generic_device-order", "deviceOrder", this.onDeviceOrderChanged.bind(this), "deviceOrder");
+        this.settings.bind("generic_info-modules", "infoModules", this.onModulesOrderChanged.bind(this), "infoModules");
+        this.settings.bind("generic_action-modules", "actionModules", this.onModulesOrderChanged.bind(this), "actionModules");
+        
+        this.doOrderCallback = false;
+
+        // Cleans moudules settings OrderLists
+        this.options.infoModules = this.cleanModuleList(this.options.infoModules, Modules.modulesByType(Modules.ModuleType.INFO));
+        this.options.actionModules = this.cleanModuleList(this.options.actionModules, Modules.modulesByType(Modules.ModuleType.ACTION));
+        
+        this.updateModuleOrderArrays();
+
+        this.orderValueCache["deviceOrder"] = this.options.deviceOrder
+        this.orderValueCache["infoModules"] = this.options.infoModules
+        this.orderValueCache["actionModules"] = this.options.actionModules
+
+        this.doOrderCallback = true;
 
         // Register Module Settings Callbacks
-        this.registerModuleSettings(Modules.modules, Modules.additionalSettings);
+        this.registerModuleSettings(Modules.modules);
+
+        this.options.infoModules.forEach(entry => {
+            this.options.modules[entry["id"]].enabled = entry["enabled"]
+        });
+
+        this.options.actionModules.forEach(entry => {
+            this.options.modules[entry["id"]].enabled = entry["enabled"]
+        });
 
         /**
          * Initialize Applet content
@@ -841,24 +884,29 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      */
 
     on_applet_clicked() {
-        // First, get reachable device count and bottom menu item
-        let deviceCount = 0;
-        let bottomDevice = null;
+        let unavailableDevices = []
+        let availableDevices = []
 
-        for (let [deviceID, device] of Object.entries(this.devices)) {
-            if (device.getReachableStatus() == true) {
-                deviceCount += 1;
-                bottomDevice = device;
+        this.deviceOrder.forEach(element => {
+            if (this.devices[element["id"]].getReachableStatus() == true) {
+                availableDevices.push(element["id"]);
+            } else {
+                unavailableDevices.push(element["id"]);
             }
-        }
+        });
 
-        // If only 1 device is present or there are more and the setting is true, open the bottom reachable device menu
-        if (deviceCount == 1) {
-            bottomDevice.getMenuItem().menu.open(false);
-        } else if (deviceCount > 1) {
-            if (this.options.expandFirst == true) {
-                bottomDevice.getMenuItem().menu.open(false);
-            }
+        if (availableDevices.length == 1 && this.options.expandOnlyDevice == true) {
+            let device = this.devices[availableDevices[0]];
+
+            device.getMenuItem().menu.open(false);
+        } else {
+            this.deviceOrder.forEach(element => {
+                let device = this.devices[element["id"]];
+    
+                if (element["expand"] == true && device.getReachableStatus() == true) {
+                    device.getMenuItem().menu.open(false);
+                }
+            });
         }
 
         this.popupMenu.toggle();
@@ -948,6 +996,13 @@ class KDEConnectApplet extends Applet.TextIconApplet {
                 this.error("Error while building device list: "+error, CommonUtils.LogLevel.MINIMAL)
             }
 
+            this.doOrderCallback = false;
+
+            this.cleanDeviceOrder();
+            this.updateDevicesOrderArray();
+
+            this.doOrderCallback = true;
+
             // Updated Panel information
             this.updatePanel();
 
@@ -978,6 +1033,8 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         if (this.kdeconnectAvailable != false) {
             // We're entering the unavailable state, so set flag to false
             this.kdeconnectAvailable = false;
+
+            this.doOrderCallback = false;
 
             // Disconnect global signals if present
             if (typeof this.kdecProxy !== "undefined") {
@@ -1046,7 +1103,7 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      */
     rebuildPopupMenu() {
         try {
-            // If there is at least one  device
+            // If there is at least one device
             let noDevices = true;
     
             // Get new menu items from device objects
@@ -1058,24 +1115,35 @@ class KDEConnectApplet extends Applet.TextIconApplet {
             // Remove leftover menu items from e.g. unavailable state
             this.popupMenu.removeAll();
 
-            if (noDevices == false) {
-                for (let [deviceID, device] of Object.entries(this.devices)) {
-                    let deviceMenuItem = device.getMenuItem();
-                    if (device.getReachableStatus() == false) {
-                        this.info("Device with ID '"+deviceID+"' is not reachable, adding at the top", CommonUtils.LogLevel.VERBOSE);
-                        this.popupMenu.addMenuItem(deviceMenuItem, 0);
-                    } else {
-                        this.info("Device with ID '"+deviceID+"' is reachable, adding normally", CommonUtils.LogLevel.VERBOSE);
-                        this.popupMenu.addMenuItem(deviceMenuItem);
-                    }
-                }
-            } else {
+            if (noDevices == true) {
                 // We don't have any devices to show, so we add a placeholder menu item
                 let noDevicesMenuItem = new PopupMenu.PopupMenuItem(_("No connected Devices!")+"\n"+_("Add them in the KDE Connect settings"), {reactive: false});
                 noDevicesMenuItem.actor.add_style_pseudo_class('insensitive');
                 this.popupMenu.addMenuItem(noDevicesMenuItem);
+                return;
             }
-            
+
+            let unavailableDevices = []
+            let availableDevices = []
+
+            this.deviceOrder.forEach(element => {
+                this.info("Checking device with ID '"+element["id"]+"'...", CommonUtils.LogLevel.DEBUG);
+                if (this.devices[element["id"]].getReachableStatus() == true) {
+                    availableDevices.push(element["id"]);
+                } else {
+                    unavailableDevices.push(element["id"]);
+                }
+            });
+
+            unavailableDevices.forEach(deviceID => {
+                this.info("Device with ID '"+deviceID+"' is not reachable.", CommonUtils.LogLevel.VERBOSE);
+                this.popupMenu.addMenuItem(this.devices[deviceID].getMenuItem());
+            });
+
+            availableDevices.forEach(deviceID => {
+                this.info("Device with ID '"+deviceID+"' is reachable.", CommonUtils.LogLevel.VERBOSE);
+                this.popupMenu.addMenuItem(this.devices[deviceID].getMenuItem());
+            });
         } catch (error) {
             this.error("Error while rebuilding popup menu: "+error, CommonUtils.LogLevel.MINIMAL);
         }
@@ -1300,6 +1368,22 @@ class KDEConnectApplet extends Applet.TextIconApplet {
     }
 
     /**
+     * Callback that gets called, if the name of a device change
+     */
+    onDeviceNameChanged() {
+        this.info("Name of a device changed!", CommonUtils.LogLevel.DEBUG);
+
+        // Update settings order list
+        this.doOrderCallback = false;
+
+        // Clean settings device list, we don't(shouldn't) need to regenerate the order array,
+        // as we only have a name change, so the cleaning procedure will only update the name in the settings
+        this.cleanDeviceOrder();
+
+        this.doOrderCallback = true;
+    }
+
+    /**
      * Callback that gets called, when a setting related to the context menu changes
      * @param {*} value - The new value
      * @param {string} option - The option that changed
@@ -1356,6 +1440,48 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         this.updatePanel();
     }
 
+    onModulesOrderChanged(new_value, optionName) {
+        if (this.doOrderCallback == true && (JSON.stringify(new_value) !== JSON.stringify(this.orderValueCache[optionName]))) {
+            this.info("Module Order '"+optionName+"' has changed, updating everything...", CommonUtils.LogLevel.VERBOSE);
+
+            // Update cache
+            this.orderValueCache[optionName] = new_value;
+
+            // Update enabled state from the list widgets
+            this.options.infoModules.forEach(entry => {
+                this.options.modules[entry["id"]].enabled = entry["enabled"]
+            });
+    
+            this.options.actionModules.forEach(entry => {
+                this.options.modules[entry["id"]].enabled = entry["enabled"]
+            });
+    
+            // Update order arrays, since the order of the modules could have changed
+            this.updateModuleOrderArrays();
+
+            this.info("Info Module Order Array: "+JSON.stringify(this.moduleOrders[Modules.ModuleType.INFO]), CommonUtils.LogLevel.DEBUG);
+
+            // Since the enabled state may have changed, we need to call the onModuleSettingsChanged callback, so the modules get recreated
+            this.onModuleSettingsChanged();
+        }
+    }
+
+    onDeviceOrderChanged(new_value, optionName) {
+        if (this.doOrderCallback == true && (JSON.stringify(new_value) !== JSON.stringify(this.orderValueCache[optionName]))) {
+            this.info("Device Order has changed, updating everything...", CommonUtils.LogLevel.VERBOSE);
+
+            // Update cache
+            this.orderValueCache[optionName] = new_value;
+
+            this.updateDevicesOrderArray();
+
+            this.info("Device Order Array: "+JSON.stringify(this.deviceOrder), CommonUtils.LogLevel.DEBUG);
+    
+            // Update popup menu, since the order of devices could have chaanged, so the order of menu items need to be changed
+            this.rebuildPopupMenu();
+        }
+    }
+
     /**
      * DBus Signal Callbacks
      */
@@ -1404,7 +1530,6 @@ class KDEConnectApplet extends Applet.TextIconApplet {
      */
     onAnnouncedNameChanged(proxy, sender, [name]) {
         this.info("AnnouncedNameChanged Signal: "+name, CommonUtils.LogLevel.DEBUG);
-        //TODO: Implement
     }
     
     /**
@@ -1423,6 +1548,14 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         // Get Device Map from KDE Connect proxy
         this.devices = this.getDeviceMap();
 
+        this.doOrderCallback = false;
+
+        // Clean settings device list and regenerate order array
+        this.cleanDeviceOrder();
+        this.updateDevicesOrderArray();
+
+        this.doOrderCallback = true;
+
         // Updated Panel information
         this.updatePanel();
 
@@ -1433,6 +1566,111 @@ class KDEConnectApplet extends Applet.TextIconApplet {
     /**
      * Other functions
      */
+
+    /**
+     * Cleans a specified OrderList of Modules from unwated modules and adds missing ones at the end with default values
+     * @param {object[]} settingsList 
+     * @param {string[]} modulesList 
+     * @returns The cleaned settingsList
+     */
+    cleanModuleList(settingsList, modulesList) {
+        let cleanedSettingsList = []
+        let containsModule = {}
+
+        // Initialize the contains flag to false for all module IDs
+        modulesList.forEach(moduleID => {
+            containsModule[moduleID] = false;
+        });
+
+        // Remove all unwanted modules
+        settingsList.forEach(entry => {
+            if (modulesList.includes(entry["id"])) {
+                // The module is valid, so we keep it
+                entry["name"] = Modules.moduleClasses[entry["id"]].DISPLAY_NAME
+                cleanedSettingsList.push(entry);
+                containsModule[entry["id"]] = true;
+            }
+        });
+
+        // Add missing modules
+        modulesList.forEach(moduleID => {
+            if (containsModule[moduleID] == false) {
+                this.info("Dsiplay Name for "+moduleID+": "+Modules.moduleClasses[moduleID].DISPLAY_NAME, CommonUtils.LogLevel.VERBOSE);
+                let entry = {
+                    "enabled": true,
+                    "id": moduleID,
+                    "name": Modules.moduleClasses[moduleID].DISPLAY_NAME
+                };
+
+                cleanedSettingsList.push(entry);
+            }
+        });
+
+        return cleanedSettingsList;
+    }
+
+    /**
+     * Cleans the settings OrderList by removing unknown devices, adding missing ones and updating the names
+     */
+    cleanDeviceOrder() {
+        let cleanedDeviceSettingsList = [];
+        let containsDevice = {};
+
+        let deviceIDs = Object.keys(this.devices);
+
+        // Initialize the contains flag to false for all module IDs
+        deviceIDs.forEach(deviceID => {
+            containsDevice[deviceID] = false;
+        });
+
+        // Filter out bad devices
+        this.options.deviceOrder.forEach(entry => {
+            if (deviceIDs.includes(entry["uuid"]) == true) {
+                entry["name"] = this.devices[entry["uuid"]].getName()
+                cleanedDeviceSettingsList.push(entry);
+                containsDevice[entry["uuid"]] = true;
+            }
+        });
+
+        // Add missing devices with default values
+        deviceIDs.forEach(deviceID => {
+            if (containsDevice[deviceID] == false) {
+                let entry = {
+                    "expand": false,
+                    "uuid": deviceID,
+                    "name": this.devices[deviceID].getName()
+                };
+
+                cleanedDeviceSettingsList.push(entry);
+            }
+        });
+
+        this.options.deviceOrder = cleanedDeviceSettingsList;
+    }
+
+    updateModuleOrderArrays() {
+        this.moduleOrders[Modules.ModuleType.INFO] = []
+        this.moduleOrders[Modules.ModuleType.ACTION] = []
+
+        this.options.infoModules.forEach(entry => {
+            this.moduleOrders[Modules.ModuleType.INFO].push(entry["id"])
+        });
+
+        this.options.actionModules.forEach(entry => {
+            this.moduleOrders[Modules.ModuleType.ACTION].push(entry["id"])
+        });
+    }
+
+    updateDevicesOrderArray() {
+        this.deviceOrder = []
+
+        this.options.deviceOrder.forEach(entry => {
+            this.deviceOrder.push({
+                "expand": entry["expand"],
+                "id": entry["uuid"]
+            })
+        });
+    }
 
     /**
      * Gets the list of device ID'S and names from the KDE Connect DBus service and creates Device objects accordingly.
@@ -1453,11 +1691,12 @@ class KDEConnectApplet extends Applet.TextIconApplet {
         }
 
         deviceIDs.forEach(deviceID => {
-            let newDevice = new Device(this, deviceID, deviceNames[deviceID], this.compatMode, Modules.modules);
+            let newDevice = new Device(this, deviceID, deviceNames[deviceID], this.compatMode, this.moduleOrders);
 
             // Bind signal to onDeviceDataChanged function of the applet
             newDevice._signals.connect(newDevice, "plugins-changed", this.onDevicePluginsChanged, this);
             newDevice._signals.connect(newDevice, "reachable-changed", this.onDeviceReachableChanged, this);
+            newDevice._signals.connect(newDevice, "name-changed", this.onDeviceNameChanged, this);
 
             deviceMap[deviceID] = newDevice;
         });
@@ -1516,19 +1755,17 @@ class KDEConnectApplet extends Applet.TextIconApplet {
     /**
      * Registers and binds settings for the provided modules
      * @param {string[]} modules - A list of module ID's to register settings for
-     * @param {string{}[]} additionalSettings - A map of module ID's to string lists containing additional settings keys
      */
-    registerModuleSettings(modules, additionalSettings) {
+    registerModuleSettings(modules) {
         modules.forEach(moduleID => {
             this.options.modules[moduleID] = {};
-            this.settings.bindWithObject(this.options.modules[moduleID], moduleID+"-module-enabled", "enabled", this.onModuleSettingsChanged.bind(this), moduleID);
 
             // Register any additional settings to also call onModuleSettingsChanged,
             // since we need to rebuild the context manu anyway and the user shouldn't have the popup menu open when changing settings
-            if (additionalSettings[moduleID]) {
-                additionalSettings[moduleID].forEach(setting => {
-                    this.settings.bindWithObject(this.options.modules[moduleID], moduleID+"-module-"+setting, setting, this.onModuleSettingsChanged.bind(this), moduleID);
-                });
+            if (Modules.moduleClasses[moduleID].ADDITIONAL_SETTINGS) {
+                Modules.moduleClasses[moduleID].ADDITIONAL_SETTINGS.forEach(key => {
+                    this.settings.bindWithObject(this.options.modules[moduleID], "module_"+moduleID+"_"+key, key, this.onModuleSettingsChanged.bind(this), moduleID);
+                })
             }
         });
     }

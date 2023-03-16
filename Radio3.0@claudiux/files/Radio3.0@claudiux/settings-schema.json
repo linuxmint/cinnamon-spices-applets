@@ -355,6 +355,7 @@
         "recordings-extract-url",
         "recordings-paste-button",
         "recordings-yesno-playlist",
+        "recordings-keep-video",
         "recordings-subdirectory",
         "recordings-extract-button",
         "recordings-extract-update"
@@ -1100,6 +1101,12 @@
       "Extract single soundtrack": " --no-playlist",
       "Extract whole playlist": " --yes-playlist"
     }
+  },
+  "recordings-keep-video": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep video (slower)",
+    "tooltip": "Whether or not to keep the intermediate video file on disk after post-processing"
   },
   "recordings-subdirectory": {
     "type": "entry",

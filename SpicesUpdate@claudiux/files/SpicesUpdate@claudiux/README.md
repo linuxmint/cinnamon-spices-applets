@@ -8,7 +8,7 @@ In order to be sure to download the latest version of Spices Update, use
 
 Usable with all versions of Cinnamon since v2.8.
 
-Fully supported by the author, in continuous development and in continuous use on several machines, working with ** Linux Mint **, ** Fedora **, ** Archlinux ** or ** Debian 10 **.
+Fully supported by the author, in continuous development and in continuous use on several machines, working with ** Linux Mint **, ** Fedora **, ** Archlinux **, ** openSUSE Tumbleweed ** or ** Debian 10 **.
 
 
 ## Summary
@@ -61,6 +61,7 @@ So you should not have to run any of the commands listed below.
 | Arch |`yay -S ttf-symbola` _or_ `pamac build ttf-symbola`| `sudo pacman -Syu libnotify`|
 |Linux Mint, Ubuntu|`sudo apt install fonts-symbola`|`sudo apt install libnotify-bin`|
 |Debian (with root rights)|`apt install fonts-symbola`|`apt install libnotify-bin`|
+|openSUSE|`sudo yast2 --install gdouros-symbola-fonts`|`sudo yast2 --install libnotify-tools`|
 
 **(*) Useless for Spices Update version 6.0.0 and more.**
 
