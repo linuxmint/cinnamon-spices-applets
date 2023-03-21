@@ -111,7 +111,7 @@ MyApplet.prototype = {
 		if (q == 0) {
 			this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("No reachable paired devices"), {reactive: false}));
 			this.set_applet_label("");
-			this.set_applet_tooltip(_"No reachable paired devices"));
+			this.set_applet_tooltip(_("No reachable paired devices"));
 		}
 		else {
 			for (let i = 0; i < q; i++) {
