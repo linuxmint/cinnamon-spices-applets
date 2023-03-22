@@ -27,6 +27,10 @@ ConfigSettings.prototype = {
     this.configFile = 'prefs.json';
     this.readSettings();
   },
+  getThickness: function() {
+    this.readSettings();
+    return this._prefs.thickness;
+  },
   getCPUColorList: function() {
     return this._prefs.cpu.colors;
   },
@@ -155,6 +159,7 @@ ConfigSettings.prototype = {
     // Default Settings for preferences in case we cannot find ours
     this._prefs = {
       labelsOn: true,
+      thickness: 1,
       refreshRate: 1000,
       labelColor: [0.9333333333333333, 0.9333333333333333, 0.9254901960784314, 1],
       backgroundColor: [1, 1, 1, 0.1],
