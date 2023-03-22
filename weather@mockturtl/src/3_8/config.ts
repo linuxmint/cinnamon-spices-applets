@@ -1,5 +1,4 @@
 import { WeatherApplet } from "./main";
-import { IpApi } from "./location_services/ipApi";
 import { LocationData, WeatherProvider } from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/logger";
@@ -22,6 +21,8 @@ import { AccuWeather } from "./providers/accuWeather";
 import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
 import { WeatherUnderground } from "./providers/weatherUnderground";
 import { Event } from "./lib/events";
+import { GeoIP } from "./location_services/geoip_services/base";
+import { GeoJS } from "./location_services/geoip_services/geojs.io";
 
 const { get_home_dir, get_user_data_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -187,7 +188,7 @@ export class Config {
 		this.timezone = value;
 	}
 
-	private readonly autoLocProvider: IpApi
+	private readonly autoLocProvider: GeoIP;
 	private readonly geoLocationService: GeoLocation;
 
 	/** Stores and retrieves manual locations */
@@ -206,7 +207,7 @@ export class Config {
 		this.currentLocale = ConstructJsLocale(get_language_names()[0]);
 		Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
 		this.countryCode = this.GetCountryCode(this.currentLocale);
-		this.autoLocProvider = new IpApi(app); // IP location lookup
+		this.autoLocProvider = new GeoJS(app); // IP location lookup
 		this.geoLocationService = new GeoLocation(app);
 		this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });
 		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());

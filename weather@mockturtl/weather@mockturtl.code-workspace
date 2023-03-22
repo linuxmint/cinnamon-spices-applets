@@ -127,7 +127,8 @@
     ],
     "cSpell.words": [
       "deallocated"
-    ]
+    ],
+    "typescript.tsdk": "weather/node_modules/typescript/lib"
   },
   "tasks": {
     "version": "2.0.0",

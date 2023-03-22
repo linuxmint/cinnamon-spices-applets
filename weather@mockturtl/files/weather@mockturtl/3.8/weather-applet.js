@@ -9655,64 +9655,16 @@ class Log {
 }
 const logger_Logger = new Log();
 
-;// CONCATENATED MODULE: ./src/3_8/location_services/ipApi.ts
-
-
-class IpApi {
-    constructor(_app) {
-        this.query = "http://ip-api.com/json/?fields=status,message,country,countryCode,city,lat,lon,timezone,mobile,query";
-        this.app = _app;
-    }
-    async GetLocation() {
-        const json = await this.app.LoadJsonAsync(this.query);
-        if (!json) {
-            return null;
-        }
-        if (json.status != "success") {
-            this.HandleErrorResponse(json);
-            return null;
-        }
-        return this.ParseInformation(json);
-    }
-    ;
-    ParseInformation(json) {
-        try {
-            const result = {
-                lat: json.lat,
-                lon: json.lon,
-                city: json.city,
-                country: json.country,
-                timeZone: json.timezone,
-                entryText: json.lat + "," + json.lon,
-            };
-            logger_Logger.Debug("Location obtained:" + json.lat + "," + json.lon);
-            return result;
-        }
-        catch (e) {
-            logger_Logger.Error("ip-api parsing error: " + e);
-            this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
-            return null;
-        }
-    }
-    ;
-    HandleErrorResponse(json) {
-        this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
-        logger_Logger.Error("ip-api responds with Error: " + json.reason);
-    }
-    ;
-}
-;
-
 ;// CONCATENATED MODULE: ./src/3_8/lib/events.ts
 class Event {
-    constructor() {
-        this.subscribers = [];
-        Event.eventStore.push(this);
-    }
     static DisconnectAll() {
         for (const event of this.eventStore) {
             event.UnSubscribeAll();
         }
+    }
+    constructor() {
+        this.subscribers = [];
+        Event.eventStore.push(this);
     }
     Subscribe(fn) {
         this.subscribers.push(fn);
@@ -9739,20 +9691,21 @@ class Event {
 }
 Event.eventStore = [];
 
+
 ;// CONCATENATED MODULE: ./src/3_8/lib/notification_service.ts
 
 const { messageTray } = imports.ui.main;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 class NotificationService {
-    constructor() {
-        this.Title = _("Weather Applet");
-        this.MessageSource = new SystemNotificationSource(this.Title);
-        messageTray.add(this.MessageSource);
-    }
     static get Instance() {
         if (this.instance == null)
             this.instance = new NotificationService();
         return this.instance;
+    }
+    constructor() {
+        this.Title = _("Weather Applet");
+        this.MessageSource = new SystemNotificationSource(this.Title);
+        messageTray.add(this.MessageSource);
     }
     Send(title, message, transient) {
         const notification = new Notification(this.MessageSource, this.Title + ": " + title, message);
@@ -10699,6 +10652,10 @@ class MetUk extends BaseProvider {
 
 const Lang = imports.lang;
 class DarkSky extends BaseProvider {
+    get remainingCalls() {
+        return null;
+    }
+    ;
     constructor(_app) {
         super(_app);
         this.prettyName = _("DarkSky");
@@ -10744,10 +10701,6 @@ class DarkSky extends BaseProvider {
             return true;
         };
     }
-    get remainingCalls() {
-        return null;
-    }
-    ;
     async GetWeather(loc) {
         if (DateTime.fromObject({ year: 2023, month: 3, day: 31 }).diffNow().milliseconds < 0) {
             this.app.ShowError({
@@ -11751,7 +11704,7 @@ class MetNorway extends BaseProvider {
                 };
             case "heavyrainshowersandthunder":
                 return {
-                    customIcon: (IsNight) ? "night-alt-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
+                    customIcon: (isNight) ? "night-alt-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
                     main: _("Heavy rain"),
                     description: _("Heavy rain showers and thunder"),
                     icons: ["weather-showers", "weather-showers-scattered"]
@@ -11779,7 +11732,7 @@ class MetNorway extends BaseProvider {
                 };
             case "heavysleetshowersandthunder":
                 return {
-                    customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+                    customIcon: (isNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
                     main: _("Heavy sleet"),
                     description: _("Heavy sleet showers and thunder"),
                     icons: ["weather-freezing-rain", "weather-showers", "weather-showers-scattered"]
@@ -11856,14 +11809,14 @@ class MetNorway extends BaseProvider {
                 };
             case "lightsleetshowers":
                 return {
-                    customIcon: (IsNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
+                    customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
                     main: _("Light sleet"),
                     description: _("Light sleet showers"),
                     icons: ["weather-freezing-rain", "weather-showers"]
                 };
             case "lightssleetshowersandthunder":
                 return {
-                    customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+                    customIcon: (isNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
                     main: _("Light sleet"),
                     description: _("Light sleet showers and thunder"),
                     icons: ["weather-freezing-rain", "weather-showers"]
@@ -12005,6 +11958,10 @@ class MetNorway extends BaseProvider {
 
 
 class Weatherbit extends BaseProvider {
+    get remainingCalls() {
+        return null;
+    }
+    ;
     constructor(_app) {
         super(_app);
         this.prettyName = _("WeatherBit");
@@ -12135,10 +12092,6 @@ class Weatherbit extends BaseProvider {
             }
         };
     }
-    get remainingCalls() {
-        return null;
-    }
-    ;
     async GetWeather(loc) {
         const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
         let hourlyPromise = null;
@@ -13110,28 +13063,28 @@ class USWeather extends BaseProvider {
                 return {
                     main: _("Clear"),
                     description: _("Clear and windy"),
-                    customIcon: (IsNight) ? "night-alt-wind-symbolic" : "day-windy-symbolic",
+                    customIcon: (isNight) ? "night-alt-wind-symbolic" : "day-windy-symbolic",
                     icons: (isNight) ? ["weather-clear-night"] : ["weather-clear"]
                 };
             case "wind_few":
                 return {
                     main: _("Few clouds"),
                     description: _("Few clouds and windy"),
-                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
+                    customIcon: (isNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
                 };
             case "wind_sct":
                 return {
                     main: _("Partly cloudy"),
                     description: _("Partly cloudy and windy"),
-                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
+                    customIcon: (isNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
                 };
             case "wind_bkn":
                 return {
                     main: _("Mostly cloudy"),
                     description: _("Mostly cloudy and windy"),
-                    customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
+                    customIcon: (isNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
                 };
             case "wind_ovc":
@@ -13955,46 +13908,6 @@ class DanishMI extends BaseProvider {
 
 
 class AccuWeather extends BaseProvider {
-    constructor(app) {
-        super(app);
-        this.needsApiKey = true;
-        this.prettyName = _("AccuWeather");
-        this.name = "AccuWeather";
-        this.maxForecastSupport = 12;
-        this.maxHourlyForecastSupport = 120;
-        this.website = "https://www.accuweather.com/";
-        this.supportHourlyPrecipChance = true;
-        this.supportHourlyPrecipVolume = true;
-        this.remainingQuota = null;
-        this.tier = "free";
-        this.baseUrl = "http://dataservice.accuweather.com/";
-        this.locSearchUrl = this.baseUrl + "locations/v1/cities/geoposition/search";
-        this.currentConditionUrl = this.baseUrl + "currentconditions/v1/";
-        this.locationCache = {};
-        this.HandleErrors = (e) => {
-            switch (e.ErrorData.code) {
-                case 400:
-                    this.app.ShowError({
-                        type: "hard",
-                        detail: "bad api response"
-                    });
-                    return true;
-                case 401:
-                    this.app.ShowError({
-                        type: "hard",
-                        detail: "bad key",
-                    });
-                    return true;
-                case 403:
-                    this.app.ShowError({
-                        type: "hard",
-                        detail: "key blocked",
-                    });
-                    return true;
-            }
-            return false;
-        };
-    }
     get remainingCalls() {
         return this.remainingQuota == null ? null : Math.floor(this.remainingQuota / 3);
     }
@@ -14042,6 +13955,46 @@ class AccuWeather extends BaseProvider {
         this.remainingQuota = Math.min(parseInt(current.ResponseHeaders["RateLimit-Remaining"]), parseInt(forecast.ResponseHeaders["RateLimit-Remaining"]), parseInt(hourly.ResponseHeaders["RateLimit-Remaining"]));
         this.SetTier(parseInt(current.ResponseHeaders["RateLimit-Limit"]));
         return this.ParseWeather(current.Data[0], forecast.Data, hourly.Data, location);
+    }
+    constructor(app) {
+        super(app);
+        this.needsApiKey = true;
+        this.prettyName = _("AccuWeather");
+        this.name = "AccuWeather";
+        this.maxForecastSupport = 12;
+        this.maxHourlyForecastSupport = 120;
+        this.website = "https://www.accuweather.com/";
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
+        this.remainingQuota = null;
+        this.tier = "free";
+        this.baseUrl = "http://dataservice.accuweather.com/";
+        this.locSearchUrl = this.baseUrl + "locations/v1/cities/geoposition/search";
+        this.currentConditionUrl = this.baseUrl + "currentconditions/v1/";
+        this.locationCache = {};
+        this.HandleErrors = (e) => {
+            switch (e.ErrorData.code) {
+                case 400:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "bad api response"
+                    });
+                    return true;
+                case 401:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "bad key",
+                    });
+                    return true;
+                case 403:
+                    this.app.ShowError({
+                        type: "hard",
+                        detail: "key blocked",
+                    });
+                    return true;
+            }
+            return false;
+        };
     }
     SetTier(limit) {
         if (limit > 1800000)
@@ -15190,6 +15143,55 @@ class WeatherUnderground extends BaseProvider {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geojs.io.ts
+
+
+class GeoJS {
+    constructor(_app) {
+        this.query = "https://get.geojs.io/v1/ip/geo.json";
+        this.app = _app;
+    }
+    async GetLocation() {
+        const json = await this.app.LoadJsonAsync(this.query);
+        if (!json) {
+            return null;
+        }
+        return this.ParseInformation(json);
+    }
+    ;
+    ParseInformation(json) {
+        try {
+            const lat = parseFloat(json.latitude);
+            const lon = parseFloat(json.longitude);
+            if (Number.isNaN(lat) || Number.isNaN(lon)) {
+                this.HandleErrorResponse(json);
+                return null;
+            }
+            const result = {
+                lat: lat,
+                lon: lon,
+                city: json.city,
+                country: json.country,
+                timeZone: json.timezone,
+                entryText: lat + "," + lon,
+            };
+            logger_Logger.Debug("Location obtained:" + lat + "," + lon);
+            return result;
+        }
+        catch (e) {
+            logger_Logger.Error("ip-api parsing error: " + e);
+            this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
+            return null;
+        }
+    }
+    ;
+    HandleErrorResponse(json) {
+        this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
+        logger_Logger.Error("ip-api responds with Error: " + json.reason);
+    }
+    ;
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
 
 
@@ -15235,6 +15237,21 @@ const ServiceClassMapping = {
     "WeatherUnderground": (app) => new WeatherUnderground(app)
 };
 class Config {
+    get UserTimezone() {
+        const timezone = TimeZone.new_local();
+        if (timezone.get_identifier == null)
+            return DateTime.now().zoneName;
+        else
+            return TimeZone.new_local().get_identifier();
+    }
+    get Timezone() {
+        return this.timezone;
+    }
+    set Timezone(value) {
+        if (!value || value == "")
+            value = undefined;
+        this.timezone = value;
+    }
     constructor(app, instanceID) {
         this.WEATHER_LOCATION = "location";
         this.WEATHER_LOCATION_LIST = "locationList";
@@ -15302,27 +15319,12 @@ class Config {
         this.currentLocale = ConstructJsLocale(get_language_names()[0]);
         logger_Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
         this.countryCode = this.GetCountryCode(this.currentLocale);
-        this.autoLocProvider = new IpApi(app);
+        this.autoLocProvider = new GeoJS(app);
         this.geoLocationService = new GeoLocation(app);
         this.InterfaceSettings = new config_Settings({ schema: "org.cinnamon.desktop.interface" });
         this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
         this.currentFontSize = this.GetCurrentFontSize();
         this.LocStore = new LocationStore(this.app, this);
-    }
-    get UserTimezone() {
-        const timezone = TimeZone.new_local();
-        if (timezone.get_identifier == null)
-            return DateTime.now().zoneName;
-        else
-            return TimeZone.new_local().get_identifier();
-    }
-    get Timezone() {
-        return this.timezone;
-    }
-    set Timezone(value) {
-        if (!value || value == "")
-            value = undefined;
-        this.timezone = value;
     }
     get CurrentFontSize() {
         return this.currentFontSize;
@@ -15921,18 +15923,18 @@ class WeatherButton {
 const { Bin, BoxLayout, IconType: uiSunTimes_IconType, Label, Icon, Align } = imports.gi.St;
 const STYLE_ASTRONOMY = 'weather-current-astronomy';
 class SunTimesUI {
+    get actor() {
+        return this._actor;
+    }
+    get config() {
+        return this.app.config;
+    }
     constructor(app) {
         this.OnConfigChanged = async (config, showSunrise, data) => {
             this.Display(data.sunrise, data.sunset, data.location.timeZone);
         };
         this.app = app;
         this.config.ShowSunriseChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
-    }
-    get actor() {
-        return this._actor;
-    }
-    get config() {
-        return this.app.config;
     }
     Rebuild(config, textColorStyle) {
         const sunBin = new Bin();
@@ -16543,6 +16545,12 @@ const { ScrollDirection } = imports.gi.Clutter;
 const { addTween } = imports.ui.tweener;
 const { BoxLayout: uiHourlyForecasts_BoxLayout, Side, Label: uiHourlyForecasts_Label, ScrollView, Icon: uiHourlyForecasts_Icon, Align: uiHourlyForecasts_Align } = imports.gi.St;
 class UIHourlyForecasts {
+    get Toggled() {
+        return this.hourlyToggled;
+    }
+    get CurrentScrollIndex() {
+        return this.actor.get_hscroll_bar().get_adjustment().get_value();
+    }
     constructor(app, menu) {
         this.hourlyForecasts = [];
         this.hourlyContainers = [];
@@ -16581,12 +16589,6 @@ class UIHourlyForecasts {
         this.container = new uiHourlyForecasts_BoxLayout({ style_class: "hourly-box" });
         this.actor.add_actor(this.container);
         this.app.config.ShortHourlyTimeChanged.Subscribe(this.app.AfterRefresh(this.OnShortHourlyTimeChanged));
-    }
-    get Toggled() {
-        return this.hourlyToggled;
-    }
-    get CurrentScrollIndex() {
-        return this.actor.get_hscroll_bar().get_adjustment().get_value();
     }
     DateToScrollIndex(date) {
         if (this.hourlyForecastDates == null)
@@ -16850,6 +16852,9 @@ const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label
 const { Tooltip } = imports.ui.tooltips;
 const STYLE_BAR = 'bottombar';
 class UIBar {
+    get Actor() {
+        return this.actor;
+    }
     constructor(app) {
         this.ToggleClicked = new Event();
         this.providerCreditButton = null;
@@ -16858,9 +16863,6 @@ class UIBar {
         this.timestampTooltip = null;
         this.app = app;
         this.actor = new uiBar_BoxLayout({ vertical: false, style_class: STYLE_BAR });
-    }
-    get Actor() {
-        return this.actor;
     }
     SwitchButtonToShow() {
         var _a;
@@ -16977,12 +16979,12 @@ class UIBar {
 ;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiSeparator.ts
 const { PopupSeparatorMenuItem } = imports.ui.popupMenu;
 class UISeparator {
+    get Actor() {
+        return this.actor.actor;
+    }
     constructor() {
         this.actor = new PopupSeparatorMenuItem();
         this.actor.actor.remove_style_class_name("popup-menu-item");
-    }
-    get Actor() {
-        return this.actor.actor;
     }
     Show() {
         this.actor.actor.show();
@@ -17380,6 +17382,20 @@ const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
 const { File: main_File, NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 const { TimeZone: main_TimeZone } = imports.gi.GLib;
 class WeatherApplet extends TextIconApplet {
+    get CurrentData() {
+        return this.currentWeatherInfo;
+    }
+    get Refreshing() {
+        if (this.refreshing == null)
+            return Promise.resolve();
+        return this.refreshing;
+    }
+    get Provider() {
+        return this.provider;
+    }
+    get Orientation() {
+        return this.orientation;
+    }
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
         this.refreshing = null;
@@ -17529,20 +17545,6 @@ class WeatherApplet extends TextIconApplet {
         this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
-    }
-    get CurrentData() {
-        return this.currentWeatherInfo;
-    }
-    get Refreshing() {
-        if (this.refreshing == null)
-            return Promise.resolve();
-        return this.refreshing;
-    }
-    get Provider() {
-        return this.provider;
-    }
-    get Orientation() {
-        return this.orientation;
     }
     Locked() {
         return this.refreshing != null;

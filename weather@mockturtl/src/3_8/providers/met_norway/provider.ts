@@ -345,7 +345,7 @@ export class MetNorway extends BaseProvider {
 				}
 			case "heavyrainshowersandthunder":
 				return {
-					customIcon: (IsNight) ? "night-alt-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
+					customIcon: (isNight) ? "night-alt-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
 					main: _("Heavy rain"),
 					description: _("Heavy rain showers and thunder"),
 					icons: ["weather-showers", "weather-showers-scattered"]
@@ -374,7 +374,7 @@ export class MetNorway extends BaseProvider {
 				}
 			case "heavysleetshowersandthunder":
 				return {
-					customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+					customIcon: (isNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
 					main: _("Heavy sleet"),
 					description: _("Heavy sleet showers and thunder"),
 					icons: ["weather-freezing-rain", "weather-showers", "weather-showers-scattered"]
@@ -456,7 +456,7 @@ export class MetNorway extends BaseProvider {
 				}
 			case "lightsleetshowers":
 				return {
-					customIcon: (IsNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
+					customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
 					main: _("Light sleet"),
 					description: _("Light sleet showers"),
 					icons: ["weather-freezing-rain", "weather-showers"]
@@ -464,7 +464,7 @@ export class MetNorway extends BaseProvider {
 				}
 			case "lightssleetshowersandthunder":
 				return {
-					customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+					customIcon: (isNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
 					main: _("Light sleet"),
 					description: _("Light sleet showers and thunder"),
 					icons: ["weather-freezing-rain", "weather-showers"]
