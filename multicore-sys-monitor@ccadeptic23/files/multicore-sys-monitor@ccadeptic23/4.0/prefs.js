@@ -16,6 +16,7 @@ const Gdk = imports.gi.Gdk;
 imports.searchPath.unshift('.');
 var tryFn = imports.utils.tryFn;
 var _ = imports.utils._;
+var to_string = imports.tostring.to_string
 
 const DEFAULT_CONFIG = {
   labelsOn: true,
@@ -692,7 +693,7 @@ Preferences.prototype = {
 };
 
 function getParamNames(func) {
-  let funStr = func.toString();
+  let funStr = to_string(func);
   return funStr.slice(funStr.indexOf('(') + 1, funStr.indexOf(')')).match(/([^\s,]+)/g);
 }
 try {
