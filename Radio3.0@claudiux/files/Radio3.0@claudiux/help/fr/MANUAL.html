@@ -1,0 +1,635 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>MANUAL</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<!-- Required extensions: sane_lists, headerid(level=4) -->
+<h1>Radio3.0 - Manuel</h1>
+<h2>Auteur: Claudiux (@claudiux sur Github)</h2>
+<h3>Date de dernière révision: 19 décembre 2022</h3>
+<hr>
+<h2>Aperçu</h2>
+<p>Radio3.0 est une applet * Récepteur &amp; Enregisteur de Radios Internet * pour Cinnamon.</p>
+<p>Avec Radio3.0 vous pouvez :</p>
+<ul>
+<li>
+<p>Écouter tout type de flux radio (MP3, AAC, AAC+, OGG, FLAC, FLV...)</p>
+</li>
+<li>
+<p>Modifier le volume sonore de la radio, indépendamment du volume sonore général.</p>
+</li>
+<li>
+<p>Effectuer des recherches dans une base de données Internet qui référence des dizaines de milliers de stations de radio.</p>
+</li>
+<li>
+<p>Importer des fichiers contenant l'URL des flux de stations de radio, obtenus à partir d'annuaires Internet tels que SHOUTcast.</p>
+</li>
+<li>
+<p>Créer votre liste de radios préférées, accessible par le menu de cette applet.</p>
+</li>
+<li>
+<p>Gérer votre liste de radios préférées : ajouter, déplacer, supprimer, modifier chaque radio de votre liste.</p>
+</li>
+<li>
+<p>Créer des catégories et trier vous-même vos radios préférées.</p>
+</li>
+<li>
+<p>Enregistrer et restaurer des listes entières de radios.</p>
+</li>
+<li>
+<p>Enregistrer des chansons ou des programmes tout en les écoutant.</p>
+</li>
+<li>
+<p>Planifier des enregistrements en arrière-plan.</p>
+</li>
+<li>
+<p>Essayer d'enregistrer à partir de YouTube la chanson en cours de lecture. (Peu sûr ; une autre chanson peut être enregistrée.)</p>
+</li>
+<li>
+<p>Regarder des vidéos sur YouTube sur la chanson en cours de lecture.</p>
+</li>
+<li>
+<p>Extraire la bande son d'une vidéo YouTube.</p>
+</li>
+<li>
+<p>Lancer et utiliser <em>Pulse Effects</em> (si installé) pour une expérience sonore incroyable.</p>
+</li>
+</ul>
+<p><img alt="Screenshots of Menu and Contextual menu" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/screenshot.png" width="660px"></p>
+<hr>
+<p><a name="TOC"></a></p>
+<h2>Sommaire</h2>
+<ol>
+<li>
+<p><a href="#Dependencies">Dépendances</a></p>
+</li>
+<li>
+<p><a href="#DepManualInstall">Installation manuelle des dépendances</a>  </p>
+<ol>
+<li><a href="#DepMint">Linux Mint, Ubuntu, Debian</a>  </li>
+<li><a href="#DepArch">Arch</a>  </li>
+<li><a href="#DepFedora">Fedora</a>  </li>
+</ol>
+</li>
+<li>
+<p><a href="#InstallYtdlp">Comment installer la dernière version de yt-dlp ?</a></p>
+</li>
+<li>
+<p><a href="#InstallApplet">Comment installer l'applet Radio3.0 ?</a>  </p>
+</li>
+<li>
+<p><a href="#WhereToPlace">Où placer l'icône de l'applet Radio3.0 ?</a></p>
+</li>
+<li>
+<p><a href="#UsingApplet">Utilisation de l'applet Radio3.0</a>  </p>
+<ol>
+<li><a href="#HowToAdd">Comment ajouter des radios à ma liste ?</a>  </li>
+<li><a href="#ListenRadio">Écouter une radio</a>  </li>
+<li><a href="#ListenLastRadio">Écouter la dernière radio écoutée</a>  </li>
+<li><a href="#ListenAtStartup">Écouter au démarrage de Cinnamon la dernière radio écoutée</a>  </li>
+<li><a href="#StopRadio">Arrêter la radio</a>  </li>
+<li><a href="#SetVolume">Régler le volume du flux radio</a>  </li>
+<li><a href="#ManageRadios1">Gérer la liste de mes radios</a>  </li>
+<li><a href="#RecordingSong">Enregistrer une chanson ou une émission de radio</a>  </li>
+<li><a href="#RecordYTSoundtrack">Extraire la bande son d'une vidéo YouTube</a></li>
+<li><a href="#OpenRecFolder">Ouvrir le dossier contenant mes enregistrements</a>  </li>
+<li><a href="#ModifyRecords">Modifier mes enregistrements</a>  </li>
+</ol>
+</li>
+<li>
+<p><a href="#Settings">Paramètres</a>  </p>
+<ol>
+<li><a href="#RadiosTab">Radios</a>  <ul>
+<li><a href="#RadiosTabStations">Stations et Catégories au menu</a>  </li>
+<li><a href="#RadiosTabMoving">Déplacement des stations/catégories sélectionnées</a>  </li>
+<li><a href="#RadiosTabSaveRestore">Enregistrer et restaurer</a>  </li>
+<li><a href="#RadiosTabUpdate">Mettre à jour votre liste à l'aide de la base de données radio</a>  </li>
+</ul>
+</li>
+<li><a href="#SearchTab">Rechercher</a>  <ul>
+<li><a href="#SearchTabForm">Formulaire de recherche</a>  </li>
+<li><a href="#SearchTabResults">Résultats de la recherche</a>  </li>
+</ul>
+</li>
+<li><a href="#ImportTab">Importer</a>  </li>
+<li><a href="#MenuTab">Menu</a>  </li>
+<li><a href="#NetworkTab">Réseau</a>  </li>
+<li><a href="#BehaviorTab">Comportement</a>  </li>
+<li><a href="#RecordingTab">Enregistrement</a>  </li>
+<li><a href="#YTTab">YT</a></li>
+<li><a href="#SchedulingTab">Planification</a>  </li>
+</ol>
+</li>
+<li>
+<p><a href="#PulseEffects">Optionnel: Installer PulseEffects</a></p>
+</li>
+</ol>
+<ul>
+<li><a href="#Annex">Annexe</a></li>
+</ul>
+<hr>
+<p><a name="Dependencies"></a></p>
+<h2>Dépendances</h2>
+<p>Radio3.0 utilise:</p>
+<ul>
+<li>
+<p><em>mpv</em> (un lecteur multimédia efficace) pour lire les flux radio.</p>
+</li>
+<li>
+<p><em>sox</em> (Sound eXchange) pour enregistrer dans un fichier le flux radio, ou plutôt le son sortant de votre carte son.</p>
+</li>
+<li>
+<p><em>pacmd</em> (PulseAudio Command) qui est un outil pour piloter <em>pulseaudio</em>.</p>
+</li>
+<li>
+<p><em>at</em> pour programmer des enregistrements.</p>
+</li>
+<li>
+<p><em>libnotify-bin</em> pour afficher des notifications.</p>
+</li>
+<li>
+<p><em>youtube-dl</em> ou <em>yt-dlp</em> (plus rapide que <em>youtube-dl</em>) pour télécharger des vidéos à partir de YouTube.</p>
+</li>
+<li>
+<p><em>ffmpeg</em> et <em>ffmpegthumbnailer</em> pour extraire la bande son de la vidéo téléchargée.</p>
+</li>
+<li>
+<p><em>python3-polib</em> pour installer les traductions, lorsqu'elles existent.</p>
+</li>
+<li>
+<p><em>python3-brotli</em> dont a besoin <em>yt-dlp</em>.</p>
+</li>
+</ul>
+<p>Si les packages contenant ces outils et bibliothèques ne sont pas déjà installés, vous êtes invité à les installer lors de la première utilisation de Radio3.0.</p>
+<p>Vous pouvez également installer <em>Pulse Effects</em> pour utiliser plusieurs effets sonores (réverbération, etc.), mais cela est facultatif.</p>
+<p><a href="#TOC">Retour à la table des matières</a></p>
+<p><a name="DepManualInstall"></a></p>
+<h2>Installation manuelle des dépendances</h2>
+<p><a name="DepMint"></a></p>
+<h3>Linux Mint, Ubuntu, Debian</h3>
+<p><code>sudo apt update</code></p>
+<p><code>sudo apt install mpv libmpv1 libmpv-dev sox libsox-fmt-all pulseaudio pulseaudio-utils at libnotify-bin youtube-dl ffmpeg ffmpegthumbnailer python3-polib python3-brotli</code></p>
+<p>Éventuellement:</p>
+<p><code>sudo apt install pulseeffects</code></p>
+<p><a name="DepArch"></a></p>
+<h3>Arch</h3>
+<p><code>sudo pacman -Syu mpv sox pulseaudio at libnotify youtube-dl ffmpeg ffmpegthumbnailer python-brotli</code></p>
+<p><code>yay -S python-polib</code></p>
+<p>Pour installer Yay sur Arch Linux et d'autres systèmes basés sur Arch, exécutez les commandes suivantes une par une :</p>
+<p><code>sudo pacman -S --needed git base-devel</code></p>
+<p><code>git clone https://aur.archlinux.org/yay.git</code></p>
+<p><code>cd yay</code></p>
+<p><code>makepkg -si</code></p>
+<p><a name="DepFedora"></a></p>
+<h3>Fedora</h3>
+<p><code>sudo dnf install mpv sox pulseaudio at libnotify yt-dlp ffmpeg gstreamer1-libav python3-brotli python3-polib</code></p>
+<p><a href="#TOC">Retour à la table des matières</a></p>
+<hr>
+<p><a name="InstallYtdlp"></a></p>
+<h2>Comment installer la dernière version de yt-dlp ?</h2>
+<p>Veuillez noter qu'à partir de sa version 1.0.3, Radio3.0 installe et met à jour automatiquement <em>yr-dlp</em> dans votre répertoire <code>~/bin/</code>.</p>
+<p><em>yt-dlp</em> est utilisé par <strong>Radio3.0</strong> pour télécharger des vidéos depuis YouTube.</p>
+<p>La dernière version de <em>yt-dlp</em> corrige des bugs et tient notamment mieux compte des cookies de votre navigateur pour ne pas vous priver du droit de télécharger des vidéos pour des raisons de limite d'âge.</p>
+<p>Voici comment installer sa dernière version :</p>
+<ol>
+<li>Commencer par installer la version de <em>yt-dlp</em> présente dans les dépôts de paquets de votre distribution, car cela installe également toutes ses dépendances. Par example: <code>sudo apt install yt-dlp</code></li>
+<li>Créer le répertoire <code>$HOME/bin</code> qui contiendra cette nouvelle version : <code>mkdir -p $HOME/bin</code></li>
+<li>Télécharger la dernière version pour Linux à partir de <a href="https://github.com/yt-dlp/yt-dlp/releases/latest">https://github.com/yt-dlp/yt-dlp/releases/latest</a> et l'enregistrer dans le répertoire <code>$HOME/bin</code> que vous venez de créer.</li>
+<li>Le rendre exécutable : <code>chmod +x $HOME/bin/yt-dlp</code></li>
+<li>Déconnectez-vous de votre session.</li>
+<li>Connectez-vous. Désormais, tout script de votre répertoire <code>$HOME/bin</code> a priorité sur tout autre script portant le même nom sur votre système.</li>
+</ol>
+<hr>
+<p><a name="InstallApplet"></a></p>
+<h2>Comment installer l'applet Radio3.0 ?</h2>
+<p><img alt="Radio3.0 - Installation de l'applet et des dépendances" src="https://claudeclerc.fr/downloads/Radio3.0/Radio3.0-Install.gif"></p>
+<p><a name="InstallAppletCS"></a></p>
+<p>Clic droit sur un panneau -&gt; Applets -&gt; onglet Télécharger : Télécharger Radio3.0. Ensuite, activer l'onglet Gérer et ajouter Radio3.0 au panneau.</p>
+<p><a name="WhereToPlace"></a></p>
+<h2>Où placer l'icône de l'applet Radio3.0 ?</h2>
+<p>Le meilleur endroit est près de l'applet <em>Son</em>. Vous pouvez donc facilement contrôler le volume général avec l'applet <em>Son</em> et le volume radio avec l'applet Radio3.0.</p>
+<p>(Pour déplacer des applets, utilisez le "Mode d'édition du panneau" dans le menu contextuel d'un panneau. Glissez-déposez les icônes. Quittez ce "Mode d'édition du panneau" lorsque vos icônes d'applet sont à leur place.)</p>
+<p><a href="#TOC">Retour à la table des matières</a></p>
+<hr>
+<p><a name="UsingApplet"></a></p>
+<h2>Utilisation de l'applet Radio3.0</h2>
+<p>Cette applet possède un menu (clic gauche) et un menu contextuel (clic droit).</p>
+<p>Certaines actions peuvent être effectuées à l'aide d'un clic du milieu ou d'un défilement sur l'icône.</p>
+<p><a name="HowToAdd"></a></p>
+<h3>Comment ajouter des radios à ma liste ?</h3>
+<p>Il existe quatre façons d'ajouter au moins une station de radio dans votre liste.</p>
+<ol>
+<li>
+<p>Dans le menu, sélectionnez l'option "Rechercher de nouvelles stations...". (Vous pouvez aussi utiliser l'option "Configurer..." du menu contextuel, puis sélectionner l'onglet "Rechercher".) Utilisez le formulaire pour interroger la base de données internet contenant plusieurs dizaines de milliers de références.</p>
+</li>
+<li>
+<p>Vous pouvez importer des fichiers contenant des données de stations de radio, en utilisant l'onglet "Importer" (avec la même option "Configurer..." du menu contextuel).</p>
+</li>
+<li>
+<p>Vous pouvez directement ajouter une station de radio à votre liste, si vous connaissez son URL de diffusion. Votre liste se trouve dans l'onglet "Radios" (le premier onglet ouvert lorsque vous sélectionnez "Configurer..."). Utilisez le bouton <code>[+]</code> pour ajouter une station de radio. Seuls les champs "Nom" et "URL du flux" sont obligatoires ; les autres sont facultatifs. Les champs "Codec" et "Bitrate" seront automatiquement remplis après l'arrêt de la radio.</p>
+</li>
+<li>
+<p>Restaurer la liste Radio3.0_EXAMPLES.json, en utilisant le bouton situé dans le premier onglet des paramètres de cette applet. Attention, votre liste de stations sera remplacée par celle-ci ; pensez à enregistrer votre propre liste de stations avant de le faire !</p>
+</li>
+</ol>
+<p>Chacun de ces onglets contient des explications sur son utilisation. Ceux-ci peuvent être ignorés en décochant la case appropriée dans l'onglet "Comportement".</p>
+<p><a name="ListenRadio"></a></p>
+<h3>Écouter une radio</h3>
+<ul>
+<li>
+<p>Ouvrez le menu de Radio3.0 (en cliquant sur son icône).</p>
+</li>
+<li>
+<p>Ouvrez le sous-menu "Toutes mes radios".</p>
+</li>
+<li>
+<p>Sélectionnez une station de radio et attendez quelques secondes. Le temps d'attente dépend de la distance qui vous sépare du serveur de flux et de la qualité de ce flux.</p>
+</li>
+</ul>
+<p>Veuillez noter que les dernières stations de radio sélectionnées apparaissent dans la partie * Stations récemment écoutées * du menu pour leur donner un accès rapide.</p>
+<p>Lors de l'écoute d'une radio, la couleur de l'icône symbolique change (vert par défaut ; vous pouvez sélectionner une autre couleur).</p>
+<p><a name="ListenLastRadio"></a></p>
+<h3>Allumer la dernière radio écoutée</h3>
+<p>Lorsqu'aucune radio ne joue, cliquez avec le bouton central sur l'icône.</p>
+<p>(Autre façon : Cliquez sur la première radio dans la section <em>Stations récemment écoutées</em> du menu.)</p>
+<p><a name="ListenAtStartup"></a></p>
+<h3>Jouez au démarrage de Cinnamon la dernière radio que vous avez écoutée</h3>
+<p>Cochez l'option "Radio allumée au démarrage" dans le menu contextuel.</p>
+<p><a name="StopRadio"></a></p>
+<h3>Arrêter la radio</h3>
+<p>Il existe deux manières d'arrêter la radio :</p>
+<ul>
+<li>
+<p>En choisissant <em>Arrêt</em> dans le menu.</p>
+</li>
+<li>
+<p>Faire un clic du milieu (c'est-à-dire cliquer avec la molette de la souris) sur l'icône.</p>
+</li>
+</ul>
+<p>Lorsque la radio est OFF, la couleur du symbolique est celle par défaut (gris par défaut ; vous pouvez sélectionner une autre couleur).</p>
+<p><a name="SetVolume"></a></p>
+<h3>Régler le volume du flux radio</h3>
+<p>Faire rouler la molette de la souris sur l'icône vers le haut ou vers le bas permet de régler le volume du flux radio actuel.</p>
+<p>L'utilisation du curseur de volume dans le menu contextuel a le même effet.</p>
+<p>Veuillez noter que ces actions n'ont aucun effet sur le volume général ; utilisez l'icône de l'applet <em>Son</em> pour régler le volume général.</p>
+<p><a name="ManageRadios1"></a></p>
+<h3>Gérer la liste de mes radios</h3>
+<p>Sélectionnez <em>Configurer...</em> dans le menu ou dans le menu contextuel pour accéder aux réglages (voir <a href="#RadiosTab">ci-dessous</a>).</p>
+<p><a name="RecordingSong"></a></p>
+<h3>Enregistrer une chanson ou une émission de radio</h3>
+<p><u>Condition</u>: Cocher la case dans la section Consentement de l'onglet Enregistrements dans les paramètres de cette applet.</p>
+<p><u>Première façon</u>: Sélectionner <em>Démarrer l'enregistrement</em> dans le menu contextuel.</p>
+<p><u>Seconde façon</u>: Cliquer sur le bouton <em>Enregistrer à partir de maintenant</em> de la notification lorsqu'elle apparaît à l'écran. Passer la souris sur ce bouton vous permet d'attendre le début de la chanson sans que la notification ne disparaisse. Si la notification disparaît avant que vous puissiez cliquer sur ce bouton, vous devrez utiliser l'option <em>Démarrer l'enregistrement</em> du menu contextuel.</p>
+<p>Cette deuxième façon dépend de la capacité de votre flux à donner le titre de la chanson ou de l'émission.</p>
+<p>Pendant l'enregistrement, la couleur de l'icône symbolique change (rouge par défaut ; vous pouvez sélectionner une autre couleur).</p>
+<p><u>Veuillez noter</u>:</p>
+<ul>
+<li>
+<p>Si le flux radio donne le titre de la chanson ou de l'émission, alors l'enregistrement s'arrêtera automatiquement à la fin de cette chanson ou de ce programme. Attention aux pauses publicitaires annoncées dans le stream !</p>
+</li>
+<li>
+<p>Sinon, vous devrez arrêter de vous enregistrer (en utilisant le menu contextuel).</p>
+</li>
+<li>
+<p>L'enregistrement commence au moment du clic ; il n'est pas possible de le démarrer plus tôt. Trop peu de stations annoncent la chanson suivante plusieurs secondes à l'avance.</p>
+</li>
+<li>
+<p>L'enregistrement se termine généralement quelques secondes après la fin du morceau, car il continue pendant que le cache se vide.</p>
+</li>
+</ul>
+<p><a name="RecordYTSoundtrack"></a></p>
+<h3>Extraire la bande son d'une vidéo YouTube</h3>
+<p>Dans le menu contextuel : Extraire la bande son d'une vidéo YouTube...</p>
+<p>Allez ensuite en bas de la fenêtre qui vient de s'afficher, collez l'URL de la vidéo YouTube dans le champ approprié et cliquez sur "Extraire la bande son".</p>
+<p><a name="OpenRecFolder"></a></p>
+<h3>Ouvrir le dossier contenant mes enregistrements</h3>
+<p>Dans le menu contextuel : Ouvrir le dossier des enregistrements.</p>
+<p><a name="ModifyRecords"></a></p>
+<h3>Modifier mes enregistrements</h3>
+<p>Vous pouvez utiliser un programme externe comme Audacity pour modifier vos enregistrements.</p>
+<p><a href="#TOC">Retour à la table des matières</a></p>
+<hr>
+<p><a name="Settings"></a></p>
+<h2>Paramètres</h2>
+<p>Les paramètres sont accessibles depuis le menu ou depuis le menu contextuel à l'aide de l'option <em>Configurer...</em>.</p>
+<p><img alt="Settings Tabs" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_Settings_All_Tabs.png" width="600px"></p>
+<p>Il y a 9 onglets dans les paramètres de Radio3.0 :</p>
+<table>
+<thead>
+<tr>
+<th><a href="#RadiosTab">Radios</a></th>
+<th><a href="#SearchTab">Rechercher</a></th>
+<th><a href="#ImportTab">Importer</a></th>
+<th><a href="#MenuTab">Menu</a></th>
+<th><a href="#BehaviorTab">Comportement</a></th>
+<th><a href="#NetworkTab">Réseau</a></th>
+<th><a href="#RecordingTab">Enregistrement</a></th>
+<th><a href="#YTTab">YT</a></th>
+<th><a href="#SchedulingTab">Planification</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a href="#TOC">Retour à la table des matières</a></p>
+<p><a name="RadiosTab"></a></p>
+<h3>Radios</h3>
+<p><a name="RadiosTabStations"></a></p>
+<h4>Stations et Catégories au menu</h4>
+<p><img alt="Radios Settings Screenshot" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RadiosTab_1.png" width="670px"></p>
+<p>Voici un exemple de liste de stations de radio.</p>
+<p>Trois Catégories sont visibles : <strong>Hard Rock &amp; Metal</strong>, <strong>Reggae</strong> et <strong>Techno / Dance</strong>. Elles ont leur URL de streaming vide.</p>
+<p>Toutes les autres sont des radios. Celles dont la case <strong>Menu</strong> est cochée apparaissent dans le menu de cette applet (dans le sous-menu "Mes stations de radio" ; voir ci-dessous). Celles dont la case <strong>♪/➟</strong> est cochée peuvent être écoutés immédiatement (les uns après les autres) à l'aide du bouton <strong>♪ Écouter la prochaine station à tester</strong>.</p>
+<p>Chaque catégorie ou station peut être déplacée par <strong>glisser-déposer</strong>.</p>
+<p>Sous cette liste, la partie gauche contient des <strong>outils</strong> pour modifier le contenu de la liste :</p>
+<ul>
+<li>
+<p><img alt="Plus button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_list_add_button.png"> pour <strong>ajouter</strong> une Catégorie (renseignez uniquement son nom) ou une Station (renseignez au moins son nom et son URL de diffusion). L'élément ajouté est situé tout en haut de la liste.</p>
+</li>
+<li>
+<p><img alt="Minus button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_list_remove_button.png"> pour <strong>supprimer</strong> l'élément sélectionné. (Vous sélectionnez un élément en cliquant dessus.)</p>
+</li>
+<li>
+<p><img alt="Pencil button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_list_edit_button.png"> pour <strong>modifier</strong> l'élément sélectionné.</p>
+</li>
+<li>
+<p><img alt="Unchecked button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_checkbox_symbolic_button.png"> pour <strong>désélectionner</strong> tout élément.</p>
+</li>
+<li>
+<p><img alt="Move up button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_up_button.png"> pour faire <strong>monter</strong> l'élément sélectionné.</p>
+</li>
+<li>
+<p><img alt="Move down button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_down_button.png"> pour faire <strong>descendre</strong> l'élément sélectionné.</p>
+</li>
+</ul>
+<p>La partie droite contient des outils pour explorer votre liste :</p>
+<ul>
+<li>
+<p><img alt="Top button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_top_button.png"> pour aller <strong>tout en haut</strong> de votre liste.</p>
+</li>
+<li>
+<p><img alt="Move up button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_up_button.png"> pour aller à la <strong>page précédente</strong>.</p>
+</li>
+<li>
+<p><img alt="Move down button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_down_button.png"> pour aller à la <strong>page suivante</strong>.</p>
+</li>
+<li>
+<p><img alt="Bottom button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_bottom_button.png"> pour aller <strong>tout en bas</strong> de votre liste.</p>
+</li>
+<li>
+<p><img alt="Previous Category button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_previous_button.png"> pour accéder à la <strong>catégorie précédente</strong> (ou à la <strong>catégorie suivante</strong> pour les personnes qui lisent de droite à gauche).</p>
+</li>
+<li>
+<p><img alt="Next Category button" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/R3_go_next_button.png"> pour accéder à la <strong>catégorie suivante</strong> (ou à la <strong>catégorie précédente</strong> pour les personnes qui lisent de droite à gauche).</p>
+</li>
+</ul>
+<p><img alt="Sub-menu My Radio Stations" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_Menu_MyRadioStations.png" title="My Radio Stations" width="350px"></p>
+<p><a name="RadiosTabMoving"></a></p>
+<h4>Déplacement des stations/catégories sélectionnées</h4>
+<p><img alt="Radios Settings Screenshot 2" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RadiosTab_2.png" width="670px"></p>
+<p>Pour changer la catégorie de certains éléments, sélectionnez-les en cochant leur case <strong>♪/➟</strong>, choisissez la catégorie dans la liste déroulante et cliquez sur le bouton "Déplacer les stations sélectionnées vers cette catégorie".</p>
+<p>Pour voir le résultat et faire d'éventuels ajustements, cliquez ensuite sur "Se rendre à cette catégorie".</p>
+<p>Conseil : Vous pouvez créer une catégorie temporaire et la déplacer au bon endroit, puis déplacer les éléments sélectionnés vers cette catégorie avant de la supprimer.</p>
+<p><a name="RadiosTabSaveRestore"></a></p>
+<h4>Sauvegarde et restauration</h4>
+<p><img alt="Radios Settings Screenshot 3" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RadiosTab_3.png" width="670px"></p>
+<p><strong>Sauvegarder</strong> votre liste de stations avant de la modifier ou de la mettre à jour. Cela crée un fichier <code>.json</code> contenant tous les détails de vos stations et catégories. Le nom de ce fichier <code>.json</code> décrit la date et l'heure de la sauvegarde ; exemple : <code>Radios_2022-02-21_22-23-55.json</code> a été créé le 21 février 2022 à 22:23:55.</p>
+<p><strong>Restaurer</strong> une liste de stations précédemment enregistrée. Attention : Votre liste sera entièrement remplacée par la liste restaurée.</p>
+<p>En ouvrant le dossier contenant ces listes, vous pouvez les gérer. Vous pouvez notamment les renommer à votre convenance.</p>
+<p><a name="RadiosTabUpdate"></a></p>
+<h4>Mettez à jour votre liste à l'aide de la base de données des radios</h4>
+<p><img alt="Radios Settings Screenshot 4" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RadiosTab_4.png" width="670px"></p>
+<p>Le bouton <strong>Mettre à jour ma liste de stations à l'aide de la base de données</strong> a pour but de compléter au maximum les champs vides de vos radios.</p>
+<p>Si la base de données consultée contient l'URL de streaming que vous avez déclarée pour une station, alors un UUID (Universal Unique IDentifier - Identifiant unique universel) sera attribué à cette station.</p>
+<p>Si l'une de vos stations n'est plus joignable, essayez de mettre à jour votre liste. L'URL de diffusion de cette station peut avoir changé et si elle a un UUID, sa nouvelle URL peut lui être attribuée.</p>
+<p>Une mise à jour ne changera pas le nom que vous avez donné à une station.</p>
+<p>Remarques:</p>
+<ul>
+<li>
+<p>Si une station provient de la base de données (onglet Recherche), elle possède déjà un UUID.</p>
+</li>
+<li>
+<p>Si elle provient d'une autre source, elle peut être inconnue de la base de données ; elle ne se verra alors pas attribuer d'UUID.</p>
+</li>
+</ul>
+<p><a href="#Settings">Tous les onglets</a></p>
+<p><a name="SearchTab"></a></p>
+<h3>Rechercher</h3>
+<p>Cet onglet est directement accessible par l'option <em>Rechercher de nouvelles stations</em> du menu.</p>
+<p><a name="SearchTabForm"></a></p>
+<h4>Formulaire de recherche</h4>
+<p><img alt="Search Form Screenshot" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_SearchTab_1.png" width="670px"></p>
+<p>En remplissant au moins quelques champs de ce formulaire puis en cliquant sur le bouton 'Rechercher...' vous pourrez rechercher d'autres stations dans une base de données radio gratuite accessible via Internet.</p>
+<p>À chaque clic sur le bouton "Rechercher...", une nouvelle page de résultats s'affiche dans la deuxième partie de cet onglet, où vous pouvez tester certaines stations et les inclure dans le menu.</p>
+<p>Une station déjà dans votre menu n'apparaîtra dans les résultats de recherche que si son URL de diffusion a changé.</p>
+<p>Lorsqu'aucune nouvelle page n'apparaît, cela signifie que tous les résultats correspondant à vos critères de recherche ont été affichés.</p>
+<p>Si vous modifiez au moins un de vos critères, pensez à mettre le champ 'N° de page suivante' à 1.</p>
+<p>Comme d'habitude, le bouton "Réinitialiser" réinitialise chaque champ de ce formulaire à sa valeur par défaut.</p>
+<p><a name="SearchTabResults"></a></p>
+<h4>Résultats de la recherche</h4>
+<p>Pour obtenir ces résultats, le formulaire de recherche a été réinitialisé puis rempli avec :</p>
+<ul>
+<li>Tag: metal</li>
+<li>Codec: AAC</li>
+<li>Order: bitrate</li>
+</ul>
+<p><img alt="Search Results Screenshot" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_SearchTab_2.png" width="700px"></p>
+<p>Pour tester 'TheBlast.fm', cochez sa case <strong>♪</strong> puis cliquez sur le bouton <strong>♪ Jouer la prochaine station à tester</strong>. Remarque : le test d'une station de radio l'ajoute aux « Stations récemment diffusées » dans ce menu d'applet, mais ne l'ajoute pas à votre liste de stations.</p>
+<p>Pour importer en haut de votre propre liste une ou plusieurs de ces stations, cochez leur case <strong>Sélectionner</strong> et cliquez sur le bouton <strong>Importer les stations sélectionnées dans ma propre liste</strong>. Ensuite, gérez votre liste à l'aide de l'onglet Radios.</p>
+<p>Vous pouvez supprimer des lignes de ces résultats de recherche en cochant leur case <strong>Sélectionner</strong> puis en cliquant sur le bouton <strong>Supprimer...</strong>. Cette action n'affecte pas le contenu de la base de données.</p>
+<p>Les boutons <strong>Sélectionner tous les éléments</strong> et <strong>Désélectionner tous les éléments</strong> agissent sur les cases <strong>Sélectionner</strong>.</p>
+<p><strong><u>Avertissement</u></strong> : <em>L'auteur de cette applet n'est pas responsable des résultats affichés après une recherche et ne contrôle pas le contenu des bases de données. Si les stations de radio diffusent des messages ou des idéologies qui vous dérangent, veuillez porter plainte auprès de leurs propriétaires ou de l'État/pays à partir duquel elles diffusent.</em></p>
+<p><a href="#Settings">Tous les onglets</a></p>
+<p><a name="ImportTab"></a></p>
+<h3>Importer</h3>
+<p>Cet onglet permet d'importer des radios à partir de fichiers au format M3U, PLS ou XSPF, notamment ceux du répertoire <a href="https://directory.shoutcast.com/">Shoutcast</a>.</p>
+<h4>Obtenir sur Shoutcast des fichiers à importer ici</h4>
+<p><img alt="Import Settings Screenshot 1" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_ImportTab_1.png"></p>
+<p>Ce bouton ouvre le répertoire Shoutcast dans votre navigateur.</p>
+<p><img alt="Shoutcast Baroque" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Shcst1.png"></p>
+<p>Dans l'exemple ci-dessus, nous voyons comment accéder au fichier XSPF d'une radio. Enregistrez ce fichier en lui donnant le nom de la radio, tout en gardant son extension .xspf.</p>
+<p><img alt="Shoutcast Save" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Shcst2.png"></p>
+<p><a name="FileToImport"></a></p>
+<h4>Fichier à importer</h4>
+<p><img alt="Import Settings Screenshot 2" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_ImportTab_2.png"></p>
+<p>Ce bouton vous permet d'importer un fichier contenant des données de stations de radio.</p>
+<p>La description des différents formats de fichiers importables est donnée dans l'<a href="#Annex1">Annexe 1</a>.</p>
+<p><a href="#Settings">Tous les onglets</a></p>
+<p><a name="MenuTab"></a></p>
+<h3>Menu</h3>
+<p><img alt="Menu Settings Screenshot" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_MenuTab.png"></p>
+<p>This tab allows you to choose whether or not to display certain items in the this applet menu:</p>
+<ul>
+<li>The name and version of this applet, like: Radio3.0 v1.0.0.</li>
+<li>The number of <em>Recently Played Stations</em>. A value of 0 disables the display of this list.</li>
+<li>System items, like <em>Configure...</em> and <em>Sound Settings</em> (which are already in the contextual menu).</li>
+</ul>
+<p>Privacy: If you want to empty your Recently Played Stations list at startup or now, check the box or click on the button.</p>
+<p>Useful only for developers: Whether or not to display the <em>Reload this applet</em> item in the contextual menu.</p>
+<p><a href="#Settings">Tous les onglets</a></p>
+<p><a name="BehaviorTab"></a></p>
+<h3>Behavior</h3>
+<p><img alt="Behavior1 Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior1-StartUp.png" width="700px"></p>
+<p>Turn on the radio when Cinnamon starts up: When checked, the last station listened to will be played at Cinnamon start up.</p>
+<p>Volume level starting a new radio: Choose this volume. Set it to '(Undefined)' to leave the volume at its last value.</p>
+<p>Do not check about dependencies: Check this box when all dependencies are already installed, or when certain dependencies are useless (because you have alternatives).</p>
+<p><img alt="Behavior2 Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior2-VolumeStep.png" width="700px"></p>
+<p>Volume step scrolling on icon: Choose this step. 0% deactivate volume change scrolling on icon.</p>
+<p><img alt="Behavior3 Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior3-ShowHelp.png" width="700px"></p>
+<p>Choose the help you want to display.</p>
+<p><img alt="Behavior4 Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior4-Notifications.png" width="700px"></p>
+<p>Choose which notifications you want to display; also the duration of the second kind of notification.</p>
+<p><img alt="Behavior5 Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior5-CodecAndBitrate.png" width="700px"></p>
+<p>Whether or not to show Codec and Bit Rate in menu and notifications.</p>
+<p><img alt="Behavior6 Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_Behavior6-SymbolicIconColor.png" width="700px"></p>
+<p>Choose the color of the symbolic icon when the radio is on, when the radio is off and during recording.</p>
+<p><a href="#Settings">Tous les onglets</a></p>
+<p><a name="NetworkTab"></a></p>
+<h3>Network</h3>
+<p><img alt="Network Settings Screenshot" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_NetworkSettings.png" width="700px"></p>
+<p>Network Quality:</p>
+<ul>
+<li>High: The recordings will be made from a copy of the stream, which guarantees optimal quality.</li>
+<li>Low: To save your bandwidth, recordings will be made from your audio output; but some sounds can pollute your recordings.</li>
+</ul>
+<p>Monitor the network: When checked, the station played will continue after changing the network (VPN, Wifi...)</p>
+<p>Proxy: Empty by default. Format: http://[user:pass@]URL[:port]. If empty, the environment variables <em>http_proxy</em> and <em>ALL_PROXY</em> will be used if present. If set, this proxy will not be used for https requests.</p>
+<p>Database Info (read only): The URL of the radio database actually used.</p>
+<p><a href="#Settings">Tous les onglets</a></p>
+<p><a name="RecordingTab"></a></p>
+<h3>Recording</h3>
+<p><img alt="Recording Settings Screenshot" src="https://github.com/claudiux/docs/raw/master/Radio3.0/screenshots/Radio30_RecordingSettings.png" width="700px"></p>
+<p>Path to the folder that will contain your future recordings: Choose this folder.</p>
+<p>Set this path to default one, which is <code>~/Music/Radio3.0</code>. (<em>Music</em> is localized.)</p>
+<p>Recording format: FLAC, MP3 (default), OGG, RAW or WAV.</p>
+<p>Way to stop recording (please note that this choice will have no effect on any current recording, but on subsequent ones.):</p>
+<ul>
+<li>automatically, when the current song ends: works correctly only if the stream contains the title of the current song.</li>
+<li>manually; thus, several recordings can follow one another: you must stop yourself all recording.</li>
+</ul>
+<p><a href="#Settings">Tous les onglets</a></p>
+<p><a name="YTTab"></a></p>
+<h3>YT</h3>
+<p>This tab is directly accessible via the <em>Extract soundtrack from a YouTube video...</em> option in the contextual menu.</p>
+<p><img alt="YT Settings Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_YT_Tab.png" width="700px"></p>
+<p>Recording format: FLAC, MP3, OGG, RAW and WAV are available formats. MP3 (192 kbps) is selected by default.</p>
+<p>Use cookies from: Select the browser you usually use to visit YouTube.</p>
+<p>Extract soundtrack from YouTube video: Visiting YouTube, right-click on a video (or playlist) link and select <em>Copy link</em>. Then click on the <em>Paste above the YouTube link you copied</em> button. The <em>YouTube video link</em> appears. If it contains <strong>v=</strong> then you can extract the soundtrack of this single video. If it contains <strong>list=</strong> then you can extract the soundtrack from each video of the playlist. You can also decide to save these soundtracks in a sub-directory whose name you specify. The <em>Extract soundtrack</em> button runs the process:</p>
+<ul>
+<li>Download the video.</li>
+<li>Extract soundtrack and picture. Use them to create the file in <em>Recording format</em> selected above.</li>
+<li>Remove video.</li>
+<li>(Repeat for each video in the playlist.)</li>
+<li>Send notification allowing you to open the directory containing these files.</li>
+</ul>
+<p><a href="#Settings">Tous les onglets</a></p>
+<p><a name="SchedulingTab"></a></p>
+<h3>Planification</h3>
+<p>Cet onglet est directement accessible via l'option <em>Planifier un enregistrement en arrière-plan...</em> du menu contextuel.</p>
+<p><img alt="Scheduling Settings1 Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_SchedulingTab_1.png" width="700px"></p>
+<p>Sélectionnez la radio, la date, l'heure et la durée de l'enregistrement que vous souhaitez programmer, puis cliquez sur le bouton .</p>
+<p>Votre session Cinnamon n'a pas besoin d'être ouverte pour que l'enregistrement se produise ; mais votre ordinateur doit être allumé, bien sûr.</p>
+<p>Vous serez notifié du début et de la fin de chaque enregistrement.</p>
+<p>La liste des enregistrements programmés apparaît dans la liste ci-dessous. Vous pouvez annuler n'importe lequel d'entre eux en cochant la case <em>Supprimer ?</em> et en cliquant sur le bouton <em>Supprimer les éléments sélectionnés</em>.</p>
+<p><img alt="Scheduling Settings2 Screenshot" src="https://raw.githubusercontent.com/claudiux/docs/master/Radio3.0/screenshots/Radio30_SchedulingTab_2.png" width="700px"></p>
+<p><a href="#Settings">Tous les onglets</a></p>
+<p><a name="PulseEffects"></a></p>
+<h2>Facultatif : installer PulseEffects</h2>
+<p><em>PulseEffects</em> est un égaliseur avancé qui fonctionne avec <em>PulseAudio</em>. Il peut appliquer des effets à toutes les applications en cours d'exécution ou des applications sélectionnées.</p>
+<p><code>apt install libpulse-mainloop-glib0 libpulse0 libpulsedsp pulseaudio-equalizer pulseaudio-module-bluetooth pulseaudio-utils pulseaudio pavumeter pavucontrol paprefs gstreamer1.0-adapter-pulseeffects gstreamer1.0-autogain-pulseeffects gstreamer1.0-crystalizer-pulseeffects gstreamer1.0-convolver-pulseeffects pulseeffects</code></p>
+<p>Une fois installé, PulseEffects est accessible depuis le menu contextuel de l'applet Radio3.0.</p>
+<p><a href="#TOC">Retour à la table des matières</a></p>
+<hr>
+<p><a name="Annex"></a></p>
+<h2>Annex</h2>
+<p><a name="Annex1"></a></p>
+<h3>Annexe 1: Description des formats de fichiers importables</h3>
+<h4>Contenu d'un fichier <code>.csv</code> (exemple):</h4>
+<p><code>INC;NAME;URL</code><br>
+<code>true;Radio BluesFlac;https://streams.radiomast.io/radioblues-flac</code><br>
+<code>true;Digital Impulse - Blues;http://5.39.71.159:8990/stream</code>  </p>
+<p>Chaque ligne doit contenir exactement deux points-virgules, ce qui la divise en trois champs.</p>
+<p>La première ligne décrit les champs qui se trouvent dans les suivantes.</p>
+<p>Le champ INC contient un booléen. Sa valeur (<em>true</em> ou <em>false</em>) n'a pas d'importance pour l'importation, mais elle doit être présente.</p>
+<p>Le champ NAME contient le nom de la station de radio. Il ne doit pas contenir de point-virgule.</p>
+<p>Le champ URL contient l'URL du flux de cette station.</p>
+<h4>Contenu d'un fichier <code>.m3u</code> (exemple):</h4>
+<p><code>#EXTM3U</code><br>
+<code>#EXTINF:-1,1.FM - Otto's Baroque Music (www.1.fm)</code><br>
+<code>http://185.33.21.111:80/baroque_64</code><br>
+<code>#EXTINF:-1,1.FM - Otto's Baroque Music (www.1.fm)</code><br>
+<code>http://185.33.21.111:80/baroque_mobile_aac</code><br>
+<code>#EXTINF:-1,1.FM - Otto's Baroque Music (www.1.fm)</code><br>
+<code>http://185.33.21.111:80/baroque_128</code><br>
+<code>...etc...</code>  </p>
+<p>La première ligne doit être <code>#EXTM3U</code>.</p>
+<p>Ensuite, chaque station est décrite par une paire de lignes. Une première ligne commençant par "#EXTINF:-1" et se terminant par le nom de la station ; une seconde ligne contenant l'URL du flux.</p>
+<p>Remarque : Le <code>-1</code> après <code>#EXTINF:</code> signifie que la durée de la piste est inconnue, ce qui est normal pour un flux radio.</p>
+<h4>Contenu d'un fichier <code>.xpfs</code> (exemple):</h4>
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;playlist version="1" xmlns="http://xspf.org/ns/0/"&gt;&lt;title&gt;1.FM - Otto's Baroque Music (www.1.fm)&lt;/title&gt;&lt;trackList&gt;&lt;track&gt;&lt;location&gt;http://185.33.21.111:80/baroque_128&lt;/location&gt;&lt;title&gt;1.FM - Otto's Baroque Music (www.1.fm)&lt;/title&gt;&lt;/track&gt;&lt;track&gt;&lt;location&gt;http://185.33.21.111:80/baroque_64&lt;/location&gt;&lt;title&gt;1.FM - Otto's Baroque Music (www.1.fm)&lt;/title&gt;&lt;/track&gt;...other tracks...&lt;/trackList&gt;&lt;/playlist&gt;
+</code></pre>
+<p>Toutes les données sont enregistrées sur une seule ligne. Les voici présentées de manière plus compréhensible :</p>
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;playlist version="1" xmlns="http://xspf.org/ns/0/"&gt;
+    &lt;title&gt;1.FM - Otto's Baroque Music (www.1.fm)&lt;/title&gt;
+    &lt;trackList&gt;
+
+        &lt;track&gt;
+            &lt;location&gt;http://185.33.21.111:80/baroque_128&lt;/location&gt;
+            &lt;title&gt;1.FM - Otto's Baroque Music (www.1.fm)&lt;/title&gt;
+        &lt;/track&gt;
+
+        &lt;track&gt;
+            &lt;location&gt;http://185.33.21.111:80/baroque_64&lt;/location&gt;
+            &lt;title&gt;1.FM - Otto's Baroque Music (www.1.fm)&lt;/title&gt;
+        &lt;/track&gt;
+
+        ...other tracks...
+    &lt;/trackList&gt;
+&lt;/playlist&gt;
+</code></pre>
+<p>La première ligne décrit la version de XML et le codage de caractères utilisé. Tous les fichiers au format XPFS commencent par ceci.</p>
+<p>La liste de lecture est décrite entre les balises <code>&lt;playlist&gt;</code> et <code>&lt;/playlist&gt;</code>.</p>
+<p>Le premier <em>titre</em> (entre <code>&lt;title&gt;</code> et <code>&lt;/title&gt;</code>) est celui de la playlist. (Dans ce cas, il s'agit du nom de la radio.)</p>
+<p>La liste des pistes est située entre les balises <code>&lt;tracklist&gt;</code> et <code>&lt;/tracklist&gt;</code>.</p>
+<p>Chaque <em>piste</em> contient, dans cet ordre, un <em>emplacement</em> - c'est-à-dire l'URL du flux - et un <em>titre</em>, qui aurait pu être plus explicite ici en indiquant le débit et le format du flux.</p>
+<h4>Contenu d'un fichier <code>.pls</code> (exemple) :</h4>
+<pre><code>[playlist]
+numberofentries=8
+File1=http://185.33.21.111:80/baroque_mobile_aac
+Title1=1.FM - Otto's Baroque Music (www.1.fm)
+Length1=-1
+File2=http://185.33.21.111:80/baroque_64
+Title2=1.FM - Otto's Baroque Music (www.1.fm)
+Length2=-1
+...6 other entries...
+</code></pre>
+<p>Un fichier <code>.pls</code> commence par une ligne contenant uniquement <code>[playlist]</code>.
+La deuxième ligne indique que ce fichier contient 8 entrées numérotées de 1 à 8.</p>
+<p>Chaque entrée est décrite par un ensemble de 3 lignes successives. Le rôle de chacun d'eux est facilement compréhensible.</p>
+<p><a href="#FileToImport">Retour à la section "Fichier à importer"</a></p>
+<p><a href="#">^</a></p>
+
+</body>
+</html>

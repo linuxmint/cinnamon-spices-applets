@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-06 00:46+0800\n"
+"POT-Creation-Date: 2020-05-01 13:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,11 +21,11 @@ msgstr ""
 msgid "Click here to kill a window"
 msgstr ""
 
-#. force-quit@cinnamon.org->metadata.json->description
-msgid ""
-"Click on the applet to launch xkill and force any window to quit immediately"
+#. metadata.json->name
+msgid "Force Quit"
 msgstr ""
 
-#. force-quit@cinnamon.org->metadata.json->name
-msgid "Force Quit"
+#. metadata.json->description
+msgid ""
+"Click on the applet to launch xkill and force any window to quit immediately"
 msgstr ""

@@ -1,0 +1,67 @@
+# System Controls Applet
+# Copyright (C) 2022
+# Rick Calixte <10281587+rcalixte@users.noreply.github.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-09 14:39-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: applet.js:29
+msgid "System Controls"
+msgstr "Controles del sistema"
+
+#: applet.js:66
+msgid "Restart Cinnamon"
+msgstr "Reiniciar Cinnamon"
+
+#: applet.js:74
+msgid "Lock Screen"
+msgstr "Bloquear pantalla"
+
+#: applet.js:96 applet.js:105 applet.js:113
+msgid "Switch User"
+msgstr "Cambiar de usuario"
+
+#: applet.js:122
+msgid "Log Out"
+msgstr "Cerrar sesión"
+
+#: applet.js:130
+msgid "Suspend"
+msgstr "Suspender"
+
+#: applet.js:136
+msgid "Hibernate"
+msgstr "Hibernar"
+
+#: applet.js:144
+msgid "Restart"
+msgstr "Reiniciar"
+
+#: applet.js:150
+msgid "Power Off"
+msgstr "Apagar"
+
+#. metadata.json->description
+msgid ""
+"A simple system controls applet to restart Cinnamon, lock the screen, switch "
+"users, log off, suspend, hibernate, reboot, or power off the computer"
+msgstr ""
+"Un sencillo applet de control del sistema para reiniciar Cinnamon, bloquear "
+"la pantalla, cambiar de usuario, cerrar sesión, suspender, hibernar, "
+"reiniciar o apagar el ordenador"
+
+#. metadata.json->name
+msgid "System Controls Applet"
+msgstr "Applet de controles del sistema"

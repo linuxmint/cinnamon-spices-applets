@@ -7,7 +7,6 @@
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
 const Gettext = imports.gettext;
-const _ = Gettext.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
@@ -107,7 +106,7 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation);
 
         try {
-            this.set_applet_icon_name("help-about");
+            this.set_applet_icon_symbolic_name("help-about-symbolic");
             this.set_applet_tooltip(_("Custom Applications Menu"));
 
             // watch settings file for changes
@@ -244,17 +243,17 @@ MyApplet.prototype = {
     },
 
     _createContextMenu: function() {
-        this.edit_menu_item = new Applet.MenuItem(_("Edit"), Gtk.STOCK_EDIT, function() {
+        this.edit_menu_item = new Applet.MenuItem(_("Edit"), "document-edit-symbolic", function() {
             Main.Util.spawnCommandLine("xdg-open " + SettingsFile);
         });
         this._applet_context_menu.addMenuItem(this.edit_menu_item);
 
-        this.help_menu_item = new Applet.MenuItem(_("Help"), Gtk.STOCK_HELP, function() {
-            Main.Util.spawnCommandLine("xdg-open " + AppletDirectory + "/README.txt");
+        this.help_menu_item = new Applet.MenuItem(_("Help"), "help-faq-symbolic", function() {
+            Main.Util.spawnCommandLine("xdg-open " + AppletDirectory + "/README.md");
         });
         this._applet_context_menu.addMenuItem(this.help_menu_item);
 
-        this.about_menu_item = new Applet.MenuItem(_("About"), Gtk.STOCK_ABOUT,  function() {
+        this.about_menu_item = new Applet.MenuItem(_("About"), "dialog-information-symbolic",  function() {
             Main.Util.spawnCommandLine("xdg-open " + AppletDirectory + "/ABOUT.txt");
         });
         this._applet_context_menu.addMenuItem(this.about_menu_item);

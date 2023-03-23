@@ -1,0 +1,8 @@
+# Get infos on blocks (json format):
+lsblk -J
+
+# To get temperature (°C) from hard disk:
+sudo smartctl -A /dev/sda | grep 'Temperature_Cel' | awk '{print $10}'
+
+# Get cpu frequency (Hz):
+cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq

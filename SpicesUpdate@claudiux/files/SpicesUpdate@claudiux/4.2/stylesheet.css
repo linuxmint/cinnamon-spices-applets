@@ -12,3 +12,6 @@
     background-color: #000000;
     margin: 0px;
 }
+.SU-notification-applet-container {
+    max-height: 500px;
+}

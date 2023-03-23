@@ -32,7 +32,7 @@ msgid "Pomodori %d, set %d running"
 msgstr "Pomodori %d, set %d körs"
 
 #: applet.js:442
-msgid "Let's go to work !"
+msgid "Let's go to work!"
 msgstr "Börja arbeta!"
 
 #: applet.js:456

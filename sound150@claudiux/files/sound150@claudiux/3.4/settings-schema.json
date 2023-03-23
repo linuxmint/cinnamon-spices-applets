@@ -60,6 +60,12 @@
         "description" : "Hide system tray icons for compatible players",
         "default": true
     },
+    "alwaysShowInput": {
+        "type": "switch",
+        "description": "Always show input controls",
+        "tooltip": "When checked, input volume and source controls are always shown, even if no application is currently recording sound.",
+        "default": false
+    },
     "section3": {
         "type": "section",
         "description" : "Sound Settings"

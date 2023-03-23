@@ -6,7 +6,10 @@
         "CPU",
         "MEM",
         "NET_IN",
-        "NET_OUT"
+        "NET_OUT",
+        "DISK_READ",
+        "DISK_WRITE",
+        "BAT"
       ],
       "General": {
         "type": "page",
@@ -45,11 +48,33 @@
           "NET_OUT_settings"
         ]
       },
+      "DISK_READ": {
+        "type": "page",
+        "title": "DISK (read)",
+        "sections": [
+          "DISK_READ_settings"
+        ]
+      },
+      "DISK_WRITE": {
+        "type": "page",
+        "title": "DISK (write)",
+        "sections": [
+          "DISK_WRITE_settings"
+        ]
+      },
+      "BAT": {
+        "type": "page",
+        "title": "BAT (battery)",
+        "sections": [
+          "BAT_settings"
+        ]
+      },
       "general_settings": {
         "type": "section",
         "title": "General settings",
         "keys": [
-          "frequency"
+          "frequency",
+          "graph_line_mode"
         ]
       },
       "theme_settings": {
@@ -126,6 +151,41 @@
           "netout_linlog",
           "netout_show_detail_label"
         ]
+      },
+      "DISK_READ_settings": {
+        "type": "section",
+        "title": "DISK (read) settings",
+        "keys": [
+          "diskread_enable_graph",
+          "diskread_size",
+          "diskread_device_name",
+          "diskread_use_custom_label",
+          "diskread_custom_label",
+          "diskread_show_detail_label"
+        ]
+      },
+      "DISK_WRITE_settings": {
+        "type": "section",
+        "title": "DISK (write) settings",
+        "keys": [
+          "diskwrite_enable_graph",
+          "diskwrite_size",
+          "diskwrite_device_name",
+          "diskwrite_use_custom_label",
+          "diskwrite_custom_label",
+          "diskwrite_show_detail_label"
+        ]
+      },
+      "BAT_settings": {
+        "type": "section",
+        "title": "BAT (battery) settings",
+        "keys": [
+          "bat_enable_graph",
+          "bat_size",
+          "bat_use_custom_label",
+          "bat_custom_label",
+          "bat_show_detail_label"
+        ]
       }
     },
     "frequency": {
@@ -142,6 +202,17 @@
         },
         "description": "Update frequency (seconds)",
         "tooltip": "The amount of time (in seconds) between the graph updates."
+    },
+    "graph_line_mode": {
+      "type": "combobox",
+      "default": "lines",
+      "options": {
+          "Don't draw grid lines" : "no",
+          "Draw graph over grid lines" : "graph",
+          "Draw grid lines over graph" : "lines"
+      },
+      "description": "Grid lines",
+      "tooltip": "How to draw the graph grid lines."
     },
     "theme": {
         "type": "combobox",
@@ -474,5 +545,133 @@
         "description": "Show details",
         "tooltip": "Show or hide the NET (out) usage label",
         "dependency": "netout_enable_graph"
-    }
+    },
+    "diskread_enable_graph": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show DISK (read) graph",
+      "tooltip": "Show or hide the DISK (read) graph. Shows usage of the drive specified below."
+    },
+    "diskread_size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 500,
+        "step": 1,
+        "units" : "",
+        "description": "Horizontal panel width or vertical panel height.",
+        "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+        "dependency": "diskread_enable_graph"
+    },
+    "diskread_device_name": {
+      "type": "combobox",
+      "default": "none",
+      "options": {"Select a device": "none"},
+      "description": "Set the device to monitor for the DISK (read) graph.",
+      "tooltip": "Set the device to monitor for the DISK (read) graph.",
+      "dependency": "diskread_enable_graph"
+    },
+    "diskread_use_custom_label": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use custom graph label.",
+        "tooltip": "Choose your own label for the DISK (read) graph.",
+        "dependency": "diskread_enable_graph"
+    },
+    "diskread_custom_label": {
+        "type": "entry",
+        "default": "DISK (read)",
+        "description": "Set the custom label for the DISK (read) graph.",
+        "dependency": "diskread_enable_graph"
+    },
+    "diskread_show_detail_label": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show details.",
+        "tooltip": "Show or hide the DISK (read) usage label.",
+        "dependency": "diskread_enable_graph"
+    },
+    "diskwrite_enable_graph": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show DISK (write) graph.",
+      "tooltip": "Show or hide the DISK (write) graph. Shows usage of the drive specified below."
+    },
+    "diskwrite_size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 500,
+        "step": 1,
+        "units" : "",
+        "description": "Horizontal panel width or vertical panel height.",
+        "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+        "dependency": "diskwrite_enable_graph"
+    },
+    "diskwrite_device_name": {
+      "type": "combobox",
+      "default": "none",
+      "options": {"Select a device": "none"},
+      "description": "Set the device to monitor for the DISK (write) graph.",
+      "tooltip": "Set the device to monitor for the DISK (write) graph.",
+      "dependency": "diskwrite_enable_graph"
+    },
+    "diskwrite_use_custom_label": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use custom graph label.",
+        "tooltip": "Choose your own label for the DISK (write) graph.",
+        "dependency": "diskwrite_enable_graph"
+    },
+    "diskwrite_custom_label": {
+        "type": "entry",
+        "default": "DISK (write)",
+        "description": "Set the custom label for the DISK (write) graph.",
+        "dependency": "diskwrite_enable_graph"
+    },
+    "diskwrite_show_detail_label": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show details.",
+        "tooltip": "Show or hide the DISK (write) usage label.",
+        "dependency": "diskwrite_enable_graph"
+    },
+    "bat_enable_graph": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show BAT (battery) graph.",
+      "tooltip": "Show or hide the BAT (battery) graph. Shows battery level."
+    },
+    "bat_size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 500,
+        "step": 1,
+        "units" : "",
+        "description": "Horizontal panel width or vertical panel height.",
+        "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+        "dependency": "bat_enable_graph"
+    },
+    "bat_use_custom_label": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use custom graph label.",
+        "tooltip": "Choose your own label for the BAT (battery) graph.",
+        "dependency": "bat_enable_graph"
+    },
+    "bat_custom_label": {
+        "type": "entry",
+        "default": "BAT",
+        "description": "Set the custom label for the BAT (battery) graph.",
+        "dependency": "bat_enable_graph"
+    },
+    "bat_show_detail_label": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show details.",
+        "tooltip": "Show or hide the BAT (battery) detail label.",
+        "dependency": "bat_enable_graph"
+    }    
+
 }

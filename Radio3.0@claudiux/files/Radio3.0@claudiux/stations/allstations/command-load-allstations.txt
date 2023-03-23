@@ -1,0 +1,1 @@
+wget -O allstations.json https://de1.api.radio-browser.info/json/stations

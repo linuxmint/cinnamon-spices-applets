@@ -21,9 +21,14 @@ const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const GUdev = imports.gi.GUdev;
+const ByteArray = imports.byteArray;
 
 const AppletDir = imports.ui.appletManager.appletMeta['clipboard-qr@wrouesnel'].path;
 imports.ui.searchPath.unshift(AppletDir);
+
+const PicturesDir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES);
+const PicturesName = PicturesDir.substring(PicturesDir.lastIndexOf('/') + 1);
+
 const QRLib = imports.ui.QR;
 
 const QRReaderHelper = 'clipboard-qr.py';
@@ -57,7 +62,7 @@ MyApplet.prototype = {
             this.menu = new Applet.AppletPopupMenu(this, orientation);
             this.menuManager.addMenu(this.menu);
             this.set_applet_tooltip(_("Create QR code from clipboard"));
-            this.set_applet_icon_symbolic_name('qr-symbolic');
+            this.set_applet_icon_symbolic_name('qrcode');
 
             // The QR code error string
             this._errorString = new PopupMenu.PopupMenuItem('', { reactive: false });
@@ -66,6 +71,11 @@ MyApplet.prototype = {
             // The QR code main window
             this._maincontainer = new St.BoxLayout({ style_class: 'qrappletqrcode' });
             this.menu.addActor(this._maincontainer);
+
+            // Add button to create qr-code.svg file
+            this.saveMenuItem = new PopupMenu.PopupIconMenuItem(_("Save QR code as SVG in '~/%s'").format(PicturesName), "document-save", St.IconType.SYMBOLIC);
+            this.menu.addMenuItem(this.saveMenuItem);
+            this.saveMenuItem.connect('activate', Lang.bind(this, this._onSaveMenuItemClicked));
 
             // Add a separator
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -90,12 +100,23 @@ MyApplet.prototype = {
         }
     },
 
+    _onSaveMenuItemClicked: function () {
+        let date = new Date();
+        let month = ((date.getMonth()+1)<10?'0':'') + (date.getMonth()+1);
+        let day = (date.getDate()<10?'0':'') + date.getDate();
+        let hour = (date.getHours()<10?'0':'') + date.getHours();
+        let minute = (date.getMinutes()<10?'0':'') + date.getMinutes();
+        let second = (date.getSeconds()<10?'0':'') + date.getSeconds();
+        let dateString = date.getFullYear() + "-" + month + "-" + day + "-" + hour + minute + second;
+        this._qr._create_svg(dateString);
+    },
+
     _launch_qr_reader: function (camera_path) {
         try {
             if (this._qrprocess == null) {
                 // Spawn the python helper
                 this._qrprocess = Gio.Subprocess.new(
-                    ["/usr/bin/python", GLib.build_filenamev([AppletDir,QRReaderHelper]), camera_path],
+                    ["/usr/bin/python3", GLib.build_filenamev([AppletDir,QRReaderHelper]), camera_path],
                     Gio.SubprocessFlags.STDOUT_PIPE);
                 // Read from stdout
                 let streamOut = this._qrprocess.get_stdout_pipe();
@@ -107,8 +128,10 @@ MyApplet.prototype = {
                     cinn_ver = cinn_ver.substring(0, cinn_ver.lastIndexOf("."))
                     if (parseFloat(cinn_ver) <= 3.4) {
                         clipboard.set_text(data.get_data().toString());
-                    } else {
+                    } else if (parseFloat(cinn_ver) <= 4.6) {
                         clipboard.set_text(St.ClipboardType.CLIPBOARD, data.get_data().toString());
+                    } else {
+                        clipboard.set_text(St.ClipboardType.CLIPBOARD, ByteArray.toString(data.get_data()));
                     }
                 }));
 
@@ -135,7 +158,7 @@ MyApplet.prototype = {
             let devfile = camera_devices[n].get_device_file ();
             let description = camera_devices[n].get_property('ID_V4L_PRODUCT');
 
-            let menuItem = new PopupMenu.PopupMenuItem(_("Scan QR Code") + ' (' + description +')');
+            let menuItem = new PopupMenu.PopupIconMenuItem(_("Scan QR Code") + ' (' + description +')', "qrcode-scan", St.IconType.SYMBOLIC);
 
             menuItem.connect('activate', Lang.bind(this, function (menuItem, event) {
                 this._launch_qr_reader(devfile);
@@ -165,11 +188,14 @@ MyApplet.prototype = {
                 this.menu.toggle();
             }));
         } else {
+            this.saveMenuItem.actor.hide();
             clipboard.get_text(St.ClipboardType.CLIPBOARD, Lang.bind(this,
             function(clipboard, text) {
                 this._qr.set_text(text);
                 try {
                     this._errorString.label.text = this._qr.error;
+                    if (this._qr.error == _("QR generated"))
+                        this.saveMenuItem.actor.show();
                 } catch (e) {
                     this._errorString.label.text = _("No QR code scanned.");
                 }

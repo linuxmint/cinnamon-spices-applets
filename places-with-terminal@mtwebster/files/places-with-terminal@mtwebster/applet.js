@@ -172,7 +172,7 @@ MyApplet.prototype = {
 
 			this.menu.addMenuItem(this.filesystemItem);
 			this.filesystemItem.connect('activate', function(actor, event) {
-                            Main.Util.spawnCommandLine("gksudo xdg-open /");
+                            Main.Util.spawnCommandLine("xdg-open /");
 			});
 
 			// Separator

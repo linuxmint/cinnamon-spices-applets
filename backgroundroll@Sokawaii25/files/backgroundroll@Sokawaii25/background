@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#functions
+usage() {
+	echo "Usage incorrect. Syntaxe :"
+	echo "	background.sh previous : remet le fond d'écran précédent"
+	echo "	background.sh roll : change le fond d'écran"
+}
+
+RandomBackground() {
+	images=( $(ls) )
+	image=${images[$RANDOM%${#images[*]}]}
+	echo `gsettings get org.cinnamon.desktop.background picture-uri` > ~/.previousBackground
+	gsettings set org.cinnamon.desktop.background picture-uri "file://$PWD/$image"
+}
+
+PreviousBackground() {
+	gsettings set org.cinnamon.desktop.background picture-uri "$previous"
+}
+
+#where to operate
+cd ~/Images/backgrounds/
+
+#variables
+IFS='
+'
+previous=`cat ~/.previousBackground`
+
+#main
+case $1 in
+	previous) PreviousBackground ;;
+	roll) RandomBackground ;;
+	*) usage ;;
+esac
+
+#background.sh
+#background.sh RandomBackground
+#background.sh PreviousBackground
+#

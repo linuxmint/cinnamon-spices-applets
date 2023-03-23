@@ -213,7 +213,7 @@ HamsterBox.prototype = {
 
         // ignore deletions
         let ignoreKeys = [Clutter.BackSpace, Clutter.Delete, Clutter.Escape]
-        for each (var key in ignoreKeys) {
+        for (var key of ignoreKeys) {
             if (symbol == key)
                 return;
         }
@@ -229,7 +229,7 @@ HamsterBox.prototype = {
             activitytext = this._textEntry.get_text().substring(0, atIndex);
             let categorytext = text.substring(atIndex+1);
             let allCategories = this._getCategories();
-            for each (var cat in allCategories) {
+            for (var cat of allCategories) {
                 let completion = cat[1];
                 if (completion.toLowerCase().substring(0, categorytext.length) == categorytext) {
                     this.prevText = text;
@@ -247,7 +247,7 @@ HamsterBox.prototype = {
 
         // activity completion
         let allActivities = this._getActivities();
-        for each (var rec in allActivities) {
+        for (var rec of allActivities) {
             let completion = rec[0];
             if (rec[1].length > 0)
                 completion += "@" + rec[1];
@@ -408,7 +408,7 @@ HamsterApplet.prototype = {
         activities.destroy_all_children(); // remove previous entries
 
         var i = 0;
-        for each (fact in facts.reverse()) {
+        for (fact of facts.reverse()) {
             let label;
 
             label = new St.Label({style_class: 'popup-menu-item'});
@@ -491,14 +491,14 @@ HamsterApplet.prototype = {
 
         let byCategory = {};
         let categories = [];
-        for each (fact in facts) {
+        for (fact of facts) {
             byCategory[fact.category] = (byCategory[fact.category] || 0) + fact.delta;
             if (categories.indexOf(fact.category) == -1)
                 categories.push(fact.category);
         }
 
         let label = "";
-        for each (var category in categories) {
+        for (var category of categories) {
             label += category + ": " + Stuff.formatDurationHours(byCategory[category]) +  ", ";
         }
         label = label.slice(0, label.length - 2); // strip trailing comma

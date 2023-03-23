@@ -33,7 +33,7 @@ An option in settings allows you to don't display colors.
 ## Usage
 
  * In the settings (accessed by right-clicking on the icon), the ***Maximum volume control*** option sets the percentage of
-nominal volume you want to limit the maximum volume. Possible values are between 30% and 150%.
+nominal volume you want to limit the maximum volume. Possible values are between 30% and 150%. From Cinnamon 4.4, Cinnamon Settings are used to set this value.
 
 ![sound_150-settings](https://github.com/claudiux/docs/raw/master/sound150/images/sound-settings.png)
 
@@ -50,11 +50,9 @@ On the computer of a child, reduce the maximum volume possible to take care of h
 
 ## Cinnamon versions
 
-Tested successfully on Cinnamon v2.8 to v3.6 (Linux Mint 17.3 to 18.3).
+Tested successfully on Cinnamon v2.8 to v4.6 (Linux Mint 17.3 to 20).
 
-Seems to be ready for Cinnamon 3.8 (LinuxMint 19). Thanks to @jaszhix !
-
-Does not work on Cinnamon prior to v2.8 (Linux Mint 17 to 17.2).
+Does not work on Cinnamon prior to v2.8 (Linux Mint prior to 17.3).
 
 ## Themes
 
@@ -75,10 +73,24 @@ Tested on themes :
  * Zukitwo-Cinnamon
 
 ## Translations
+
 The **Sound 150%** applet is designed to allow translations of some messages (initially in English). A .pot template file is available, you can use it with software such as poedit to translate these messages.
 
 The installation of the available languages is done automatically.
 
-Languages already available: English, French, Spanish, Italian, Russian (thanks to @sem5959!) and Danish (thanks to @Alan01!).
+| Language | Code | Authors |
+|---:|:---:|:---|
+|Danish|da|[Alan01](https://github.com/Alan01)|
+|Spanish|es|[claudiux](https://github.com/claudiux)|
+|French|fr|[claudiux](https://github.com/claudiux)|
+|Italian|it|[claudiux](https://github.com/claudiux), [Dragone2](https://github.com/Dragone2)|
+|Russian|ru|@sem5959|
+|Swedish|sv|[eson57](https://github.com/eson57)|
+
+Many thanks to all of these Authors!
 
 Any new translation is welcome.
+
+## Contributors
+
+Many thanks to [Rodrigo-Barros](https://github.com/Rodrigo-Barros) for his patch allowing to show the Spotify-player album art!

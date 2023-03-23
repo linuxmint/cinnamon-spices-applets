@@ -1,0 +1,225 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-08 19:56+0300\n"
+"PO-Revision-Date: 2023-03-13 10:43+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: applet.js:33 applet.js:59
+msgid "Required GTop package missing!"
+msgstr "所需的 GTop 软件包丢失！"
+
+#: applet.js:57
+msgid "Error!"
+msgstr "错误！"
+
+#: applet.js:62
+msgid "Clear Cache"
+msgstr "清除缓存"
+
+#: applet.js:156
+msgid "CPUs"
+msgstr "CPU"
+
+#: applet.js:159
+msgid "Memory"
+msgstr "内存"
+
+#: applet.js:159
+msgid "GB"
+msgstr "GB"
+
+#: applet.js:159
+msgid "GB swap"
+msgstr "GB 交换空间"
+
+#: applet.js:162
+msgid "Network"
+msgstr "网络"
+
+#: applet.js:316
+msgid "Core "
+msgstr "核心"
+
+#: applet.js:361
+msgid "Used:   "
+msgstr "使用："
+
+#: applet.js:362
+msgid "Cache:  "
+msgstr "缓存："
+
+#: applet.js:363
+msgid "Buffer: "
+msgstr "缓冲："
+
+#: applet.js:367
+msgid "Swap:   "
+msgstr "交换："
+
+#: applet.js:437
+msgid "Up:      "
+msgstr "上传："
+
+#: applet.js:437 applet.js:438
+msgid "B/s"
+msgstr "B/s"
+
+#: applet.js:438
+msgid "Down:    "
+msgstr "下载："
+
+#: applet.js:439
+msgid "Data:    "
+msgstr "数据："
+
+#: applet.js:439
+msgid "B"
+msgstr "B"
+
+#: applet.js:443
+msgid "no interfaces to show"
+msgstr "不显示接口"
+
+#: applet.js:448
+msgid "k"
+msgstr "k"
+
+#: applet.js:448
+msgid "M"
+msgstr "M"
+
+#: applet.js:448
+msgid "G"
+msgstr "G"
+
+#: applet.js:448
+msgid "T"
+msgstr "T"
+
+#. metadata.json->name
+msgid "Simplified System Monitor"
+msgstr "简单的系统监控"
+
+#. metadata.json->description
+msgid "Applet to show system load and state"
+msgstr "显示系统负载和状态的小程序"
+
+#. settings-schema.json->common_label->description
+msgid "Common"
+msgstr "常规"
+
+#. settings-schema.json->refresh->description
+msgid "Sections info refresh rate (seconds)"
+msgstr "信息刷新频率 (秒)"
+
+#. settings-schema.json->refresh->tooltip
+msgid "CPUs, memory, network info refresh rate"
+msgstr "CPU、内存、网络信息刷新频率"
+
+#. settings-schema.json->cpu_label->description
+msgid "CPUs and memory sections"
+msgstr "CPU 和内存部分"
+
+#. settings-schema.json->size->description
+msgid "CPUs and memory panel sections widths (px)"
+msgstr "CPU 和内存部分面板的宽度 (px)"
+
+#. settings-schema.json->size->tooltip
+msgid "CPUs and memory panel sections widths"
+msgstr "CPU 和内存部分面板的宽度"
+
+#. settings-schema.json->temp_refresh->description
+msgid "CPUs temperature refresh rate (seconds)"
+msgstr "CPU 温度刷新频率 (秒)"
+
+#. settings-schema.json->temp_refresh->tooltip
+msgid "CPUs temperature refresh rate"
+msgstr "CPU 温度刷新频率"
+
+#. settings-schema.json->cold_temp->description
+msgid "CPU cold temperature (°C)"
+msgstr "CPU 温度低值 (℃)"
+
+#. settings-schema.json->cold_temp->tooltip
+msgid ""
+"CPUs' temperature below which they are regarded as cold (for color "
+"representation in the panel)"
+msgstr "低于此温度的 CPU 被认为是冷的 (用于面板中的显示颜色)"
+
+#. settings-schema.json->color_cold->description
+msgid "Color for CPU cold temperature"
+msgstr "用于表示 CPU 温度低的颜色"
+
+#. settings-schema.json->hot_temp->description
+msgid "CPU hot temperature (°C)"
+msgstr "CPU 温度高值 (℃)"
+
+#. settings-schema.json->hot_temp->tooltip
+msgid ""
+"CPUs' temperature above which they are regarded as hot (for color "
+"representation in the panel)"
+msgstr "高于此温度的 CPU 被认为是热的 (用于面板中的显示颜色)"
+
+#. settings-schema.json->color_hot->description
+msgid "Color for CPU hot temperature"
+msgstr "用于表示 CPU 温度高的颜色"
+
+#. settings-schema.json->sensors_cmd->description
+msgid "Command to start 'sensors'"
+msgstr "启动 “sensors” 的命令"
+
+#. settings-schema.json->sensors_cmd->tooltip
+msgid ""
+"Command to start 'sensors'. Use 'which sensors' command to find it. Install "
+"'lmsensors' package, if not found"
+msgstr ""
+"启动 “sensors” 的命令，使用 “which sensors” 命令来找到它。如果没有找到的话，"
+"安装 “lmsensors” 软件包"
+
+#. settings-schema.json->net_label->description
+msgid "Network section"
+msgstr "网络部分"
+
+#. settings-schema.json->net_size->description
+msgid "Network panel section width (px)"
+msgstr "网络部分面板宽度 (px)"
+
+#. settings-schema.json->net_size->tooltip
+msgid "Network panel section width"
+msgstr "网络部分面板宽度"
+
+#. settings-schema.json->net_style->description
+msgid "Network panel section style"
+msgstr "网络部分板块样式"
+
+#. settings-schema.json->net_style->tooltip
+msgid ""
+"Network panel section HTML style (e.g.: text-align: left; margin-left: 5px; "
+"font-size: 8pt;)"
+msgstr ""
+"网络部分面板的 HTML 样式 (例如：text-align: left; margin-left: 5px; font-"
+"size: 8pt;)"
+
+#. settings-schema.json->net_black_list->description
+msgid "Network interfaces blacklist"
+msgstr "网络接口黑名单"
+
+#. settings-schema.json->net_black_list->tooltip
+msgid ""
+"Semicolon-separated network interfaces list not to consider for counting "
+"traffic"
+msgstr "以分号分隔的网络接口列表，不考虑用于计算流量"

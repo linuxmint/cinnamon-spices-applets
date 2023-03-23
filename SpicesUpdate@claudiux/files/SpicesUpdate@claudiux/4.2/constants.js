@@ -21,6 +21,17 @@ function DEBUG() {
   return _debug.query_exists(null);
 };
 
+/**
+ * RELOAD:
+ * Returns whether or not the RELOAD file is present in this applet directory ($ touch RELOAD)
+ * Used to show the 'Reload this applet' button in menu.
+ */
+
+function RELOAD() {
+  let _reload = Gio.file_new_for_path("%s/RELOAD".format(APPLET_DIR));
+  return _reload.query_exists(null);
+};
+
 const DOWNLOAD_TIME = 10;
 
 let sort = "date";
@@ -28,6 +39,7 @@ if (versionCompare( GLib.getenv('CINNAMON_VERSION') ,"4.2.4" ) >= 0 ) {
   sort = "update";
 }
 
+const TAB = "1";
 const SORT = sort;
 
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
@@ -45,7 +57,7 @@ const CONFIG_DIR = HOME_DIR + "/.cinnamon/configs";
 const SU_CONFIG_DIR = CONFIG_DIR + "/" + UUID;
 const CACHE_DIR = HOME_DIR + "/.cinnamon/spices.cache";
 
-const TYPES = ['applets', 'desklets', 'extensions', 'themes'];
+const TYPES = ["applets", "desklets", "extensions", "themes"];
 
 const URL_MAP = {
   'applets': URL_SPICES_HOME + "/json/applets.json?",
@@ -83,11 +95,13 @@ Gettext.bindtextdomain("cinnamon-control-center", "/usr/share/locale");
 function _(str, uuid=UUID) {
   var customTrans = Gettext.dgettext(uuid, str);
   if (customTrans !== str && customTrans !== "") return customTrans;
+  customTrans = Gettext.dgettext("cinnamon", str);
+  if (customTrans !== str && customTrans !== "") return customTrans;
   return Gettext.gettext(str);
 }
 
 const capitalize = (s) => {
-  if (typeof s !== 'string') return '';
+  if (typeof s !== "string") return "";
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
@@ -99,7 +113,7 @@ const capitalize = (s) => {
  * logError("Any error message") log the error message regardless of the DEBUG() return.
  */
 function log(message, alwaysLog=false) {
-  if (DEBUG() || alwaysLog) global.log("\n[" + UUID + "]: " + message + "\n");
+  if (DEBUG() || alwaysLog) global.log("\n[" + UUID + "] " + GLib.DateTime.new_now_local().format("%X") + ": " + message + "\n");
 }
 
 function logError(error) {
@@ -167,10 +181,12 @@ module.exports = {
   DIR_MAP,
   DCONFCACHEUPDATED,
   DOWNLOAD_TIME,
+  TAB,
   SORT,
   _,
   EXP1, EXP2, EXP3,
   DEBUG,
+  RELOAD,
   capitalize,
   log,
   logError

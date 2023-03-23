@@ -1,0 +1,58 @@
+{
+  "head": {
+    "type": "header",
+    "description": "General Settings for the Nighscout Applet"
+  },
+  "refreshInterval": {
+    "type": "spinbutton",
+    "default": 2,
+    "min": 1,
+    "max": 10,
+    "step": 0.5,
+    "units": "minutes",
+    "description": "Refresh Interval for your Nightscout applet:",
+    "tooltip": "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine."
+  },
+  "head1": {
+    "type": "header",
+    "description": "Nightscout host"
+  },
+  "host": {
+    "type": "entry",
+    "default": "http://example.com",
+    "description": "Nighscout host (including http(s))",
+    "tooltip": "A host where your CGM information gonna be queried"
+  },
+  "head2": {
+    "type": "header",
+    "description": "Various settings"
+  },
+  "showMissing": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show missing readings",
+    "tooltip": "Add information about missing readings in the text"
+  },
+  "showMissingInterval": {
+    "type": "spinbutton",
+    "default": 15,
+    "min": 10,
+    "max": 40,
+    "step": 5,
+    "units": "minutes",
+    "description": "When start to show missing readings alert",
+    "tooltip": "Time which is taken to decide when to show alert of missing readings. Will apply only if above checkbox is enabled"
+  },
+  "showiob": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show IoB",
+    "tooltip": "Enable/disable IoB (insulin on board) in the text"
+  },
+  "usemmol": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Use mmol/l",
+    "tooltip": "Use mmol/l instead of mg/dl"
+  }
+}

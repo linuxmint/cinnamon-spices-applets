@@ -56,159 +56,158 @@ MyApplet.prototype = {
             this.AbecedarioASLItem = new PopupMenu.PopupSubMenuMenuItem(_("Alphabet"));
 
             //Item 1 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter A"), () => {
-            //Main.notify(_("A - ASL", "Letra A en ASL"));
-            Main.notify(_("A - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " A", () => {
+            Main.notify("A - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2460'], null);
             });
 
             //Item 2 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter B"), () => {
-            Main.notify(_("B - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " B", () => {
+            Main.notify("B - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2461'], null);
             });
 
             //Item 3 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter C"), () => {
-            Main.notify(_("C - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " C", () => {
+            Main.notify("C - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2462'], null);
             });
 
             //Item 4 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter D"), () => {
-            Main.notify(_("D - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " D", () => {
+            Main.notify("D - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2463'], null);
             });
 
             //Item 5 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter E"), () => {
-            Main.notify(_("E - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " E", () => {
+            Main.notify("E - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2464'], null);
             });
 
             //Item 6 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter F"), () => {
-            Main.notify(_("F - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " F", () => {
+            Main.notify("F - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2465'], null);
             });
 
             //Item 7 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter G"), () => {
-            Main.notify(_("G - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " G", () => {
+            Main.notify("G - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2466'], null);
             });
 
             //Item 8 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter H"), () => {
-            Main.notify(_("H - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " H", () => {
+            Main.notify("H - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2467'], null);
             });
 
             //Item 9 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter I"), () => {
-            Main.notify(_("I - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " I", () => {
+            Main.notify("I - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2468'], null);
             });
 
             //Item 10 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter J"), () => {
-            Main.notify(_("J - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " J", () => {
+            Main.notify("J - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2469'], null);
             });
 
             //Item 11 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter K"), () => {
-            Main.notify(_("K - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " K", () => {
+            Main.notify("K - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2470'], null);
             });
 
             //Item 12 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter L"), () => {
-            Main.notify(_("L - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " L", () => {
+            Main.notify("L - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2471'], null);
             });
 
             //Item 13 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter M"), () => {
-            Main.notify(_("M - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " M", () => {
+            Main.notify("M - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2472'], null);
             });
 
             //Item 14 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter N"), () => {
-            Main.notify(_("N - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " N", () => {
+            Main.notify("N - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2473'], null);
             });
 
             //Item 15 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter O"), () => {
-            Main.notify(_("O - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " O", () => {
+            Main.notify("O - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2474'], null);
             });
 
             //Item 16 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter P"), () => {
-            Main.notify(_("P - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " P", () => {
+            Main.notify("P - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2475'], null);
             });
 
             //Item 17 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter Q"), () => {
-            Main.notify(_("Q - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " Q", () => {
+            Main.notify("Q - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2476'], null);
             });
 
             //Item 18 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter R"), () => {
-            Main.notify(_("R - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " R", () => {
+            Main.notify("R - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2477'], null);
             });
 
             //Item 19 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter S"), () => {
-            Main.notify(_("S - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " S", () => {
+            Main.notify("S - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2478'], null);
             });
 
             //Item 20 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter T"), () => {
-            Main.notify(_("T - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " T", () => {
+            Main.notify("T - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2479'], null);
             });
 
             //Item 21 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter U"), () => {
-            Main.notify(_("U - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " U", () => {
+            Main.notify("U - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2480'], null);
             });
 
             //Item 22 Submenu 11
-            this.AbecedarioASLItem.menu.addAction(_("Letter V"), () => {
-            Main.notify(_("V - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " V", () => {
+            Main.notify("V - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2481'], null);
             });
 
             //Item 23 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter W"), () => {
-            Main.notify(_("W - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " W", () => {
+            Main.notify("W - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2482'], null);
             });
 
             //Item 24 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter X"), () => {
-            Main.notify(_("X - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " X", () => {
+            Main.notify("X - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2483'], null);
             });
 
             //Item 25 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter Y"), () => {
-            Main.notify(_("Y - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " Y", () => {
+            Main.notify("Y - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2484'], null);
             });
 
             //Item 26 Submenu 1
-            this.AbecedarioASLItem.menu.addAction(_("Letter Z"), () => {
-            Main.notify(_("Z - ASL"));
+            this.AbecedarioASLItem.menu.addAction(_("Letter") + " Z", () => {
+            Main.notify("Z - " + _("ASL"));
             Util.spawn_async(["xdg-open", website + 'word/search/index.php?id=2485'], null);
             });
 
@@ -318,7 +317,7 @@ MyApplet.prototype = {
 
             //Access this website to check more vocabulary
             let websiteASL = new PopupMenu.PopupIconMenuItem(
-                "Check more vocabulary",
+                _("Check more vocabulary"),
                 "starred",
                 St.IconType.SYMBOLIC
                 );

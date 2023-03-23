@@ -29,6 +29,7 @@ const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
+const GUdev = imports.gi.GUdev;
 const Settings = imports.ui.settings;
 const UUID = "hwmonitor@sylfurd";
 
@@ -96,6 +97,7 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         // General settings
         this.settings.bind("frequency", "frequency", this.settingsChanged);
+        this.settings.bind("graph_line_mode", "graph_line_mode", this.settingsChanged);
         
         this.settings.bind("theme", "theme", this.settingsChanged);
         this.settings.bind("border_color", "border_color", this.settingsChanged);
@@ -141,17 +143,36 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings.bind("netout_custom_label", "netout_custom_label", this.settingsChanged);
         this.settings.bind("netout_linlog", "netout_linlog", this.settingsChanged);
         this.settings.bind("netout_show_detail_label", "netout_show_detail_label", this.settingsChanged);
-        
+        // DISK (read) settings
+        this.settings.bind("diskread_enable_graph", "diskread_enable_graph", this.settingsChanged);
+        this.settings.bind("diskread_size", "diskread_size", this.settingsChanged);
+        this.settings.bind("diskread_device_name", "diskread_device_name", this.settingsChanged);
+        this.settings.bind("diskread_use_custom_label", "diskread_use_custom_label", this.settingsChanged);
+        this.settings.bind("diskread_custom_label", "diskread_custom_label", this.settingsChanged);
+        this.settings.bind("diskread_show_detail_label", "diskread_show_detail_label", this.settingsChanged);
+        // DISK (write) settings
+        this.settings.bind("diskwrite_enable_graph", "diskwrite_enable_graph", this.settingsChanged);
+        this.settings.bind("diskwrite_size", "diskwrite_size", this.settingsChanged);
+        this.settings.bind("diskwrite_device_name", "diskwrite_device_name", this.settingsChanged);
+        this.settings.bind("diskwrite_use_custom_label", "diskwrite_use_custom_label", this.settingsChanged);
+        this.settings.bind("diskwrite_custom_label", "diskwrite_custom_label", this.settingsChanged);
+        this.settings.bind("diskwrite_show_detail_label", "diskwrite_show_detail_label", this.settingsChanged);
+        // BAT (battery) settings
+        this.settings.bind("bat_enable_graph", "bat_enable_graph", this.settingsChanged);
+        this.settings.bind("bat_size", "bat_size", this.settingsChanged);
+        this.settings.bind("bat_use_custom_label", "bat_use_custom_label", this.settingsChanged);
+        this.settings.bind("bat_custom_label", "bat_custom_label", this.settingsChanged);
+        this.settings.bind("bat_show_detail_label", "bat_show_detail_label", this.settingsChanged);
+
         this.createThemeObject();
-
         this.createAppletArea();
-
         this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
         this.addUpdateLoop(this.frequency);
-
     },
 
     createAppletArea: function(){
+        this.getAvailableDisks();
+
         this.graphs = [];
         if (this.isHorizontal)
             this.appletArea = new Support.AppletArea(this, this.isHorizontal,0, this.panel_height);
@@ -205,7 +226,43 @@ GraphicalHWMonitorApplet.prototype = {
             let netOutProvider =  new Providers.NetDataProvider(this.frequency, false, this.netout_linlog, this.netout_speed);
             this.graphs.push(new Graph.Graph(netOutProvider, netOutGraphArea, this.theme_object, this.netout_show_detail_label));
         }    
+                
+        // Add DISK READ Graph
+        if (this.diskread_enable_graph) {
+            let diskReadGraphArea = null;
+            if (this.isHorizontal)
+                diskReadGraphArea = this.appletArea.addGraph(this.diskread_size, this.panel_height);
+            else
+                diskReadGraphArea = this.appletArea.addGraph(this.panel_height, this.diskread_size);
 
+            let diskReadProvider =  new Providers.DiskDataProvider(this.frequency, this.diskread_size, true, this.diskread_device_name);
+            this.graphs.push(new Graph.Graph(diskReadProvider, diskReadGraphArea, this.theme_object, this.diskread_show_detail_label));
+        }    
+                
+        // Add DISK WRITE Graph
+        if (this.diskwrite_enable_graph) { 
+            let diskWriteGraphArea = null;
+            if (this.isHorizontal)
+                diskWriteGraphArea = this.appletArea.addGraph(this.diskwrite_size, this.panel_height);
+            else
+                diskWriteGraphArea = this.appletArea.addGraph(this.panel_height, this.diskwrite_size);
+
+            let diskWriteProvider =  new Providers.DiskDataProvider(this.frequency, this.diskwrite_size, false, this.diskwrite_device_name);
+            this.graphs.push(new Graph.Graph(diskWriteProvider, diskWriteGraphArea, this.theme_object, this.diskwrite_show_detail_label));
+        }    
+
+        // Add BAT Graph
+        if (this.bat_enable_graph) { 
+            let batGraphArea = null;
+            if (this.isHorizontal)
+                batGraphArea = this.appletArea.addGraph(this.bat_size, this.panel_height);
+            else
+                batGraphArea = this.appletArea.addGraph(this.panel_height, this.bat_size);
+
+            let batProvider =  new Providers.BatteryProvider();
+            this.graphs.push(new Graph.Graph(batProvider, batGraphArea, this.theme_object, this.bat_show_detail_label));
+        }    
+        
         this.appletArea.createDrawingArea();
 
         this.appletArea.drawingArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));        
@@ -269,7 +326,8 @@ GraphicalHWMonitorApplet.prototype = {
     },
 
     update: function() {
-        Mainloop.idle_add_full(Mainloop.PRIORITY_LOW, () => this._update());
+        this._update();
+
         return this.shouldUpdate;
     },
 
@@ -300,7 +358,7 @@ GraphicalHWMonitorApplet.prototype = {
     },
 
     // Called when the settings have changed
-    settingsChanged: function () {        
+    settingsChanged: function () {
         this.restartGHW();
     },
 
@@ -314,10 +372,53 @@ GraphicalHWMonitorApplet.prototype = {
         return colors;
     },
 
+    // Queries the system for available block devices which the user may select from
+    getAvailableDisks: function() {
+        let devices_options = {};
+        let block_devices = new GUdev.Client().query_by_subsystem("block");
+        
+        for (var n = 0; n < block_devices.length; n++) {
+            let options_labels = [];
+
+            let name = block_devices[n].get_name();
+            options_labels.push(name);
+
+            let format = new Providers.Tools();
+            let capacity = format.formatBytes(block_devices[n].get_sysfs_attr("size") * 512);
+            options_labels.push(`[${capacity}]`);
+            
+            let id_fs_label = block_devices[n].get_property("ID_FS_LABEL");
+            options_labels.length < 3 && id_fs_label != null ? options_labels.push(id_fs_label.toString()) : {};
+
+            let id_model = block_devices[n].get_property("ID_MODEL");
+            options_labels.length < 3 && id_model != null ? options_labels.push(id_model.toString()) : {};
+
+            let dm_name = block_devices[n].get_property("DM_NAME");
+            options_labels.length < 3 && dm_name != null ? options_labels.push(dm_name.toString()) : {};
+
+            devices_options[options_labels.join("   ")] = name.trim();
+        }
+        // filter and sort into new object
+        let ordered_devices_options = {};
+        Object.keys(devices_options).filter(x => !x.includes("loop")).sort().forEach(function(key) {
+            ordered_devices_options[key] = devices_options[key];
+        });
+
+        this.settings.setOptions("diskread_device_name", ordered_devices_options);
+        this.settings.setOptions("diskwrite_device_name", ordered_devices_options);
+
+        if (this.diskread_device_name == "none" || this.diskwrite_device_name == "none") {
+            
+            this.diskread_device_name = ordered_devices_options[Object.keys(ordered_devices_options)[0]];
+            this.diskwrite_device_name = ordered_devices_options[Object.keys(ordered_devices_options)[0]];
+        }
+    },
+
     // Creates an object containing the users selected theme settings
     createThemeObject: function() {
         this.theme_object = new Object();
         this.theme_object.theme = this.theme;
+        this.theme_object.graph_line_mode = this.graph_line_mode;
         this.theme_object.border_colors = this.getColors(this.border_color);
         this.theme_object.background_colors1 = this.getColors(this.background_color1);
         this.theme_object.background_colors2 = this.getColors(this.background_color2);
@@ -340,6 +441,12 @@ GraphicalHWMonitorApplet.prototype = {
         this.theme_object.netin_custom_label = this.netin_custom_label;
         this.theme_object.netout_use_custom_label = this.netout_use_custom_label;
         this.theme_object.netout_custom_label = this.netout_custom_label;
+        this.theme_object.diskread_use_custom_label = this.diskread_use_custom_label;
+        this.theme_object.diskread_custom_label = this.diskread_custom_label;
+        this.theme_object.diskwrite_use_custom_label = this.diskwrite_use_custom_label;
+        this.theme_object.diskwrite_custom_label = this.diskwrite_custom_label;
+        this.theme_object.bat_use_custom_label = this.bat_use_custom_label;
+        this.theme_object.bat_custom_label = this.bat_custom_label;
     },
 
     restartGHW: function() {
@@ -347,7 +454,7 @@ GraphicalHWMonitorApplet.prototype = {
         this.createThemeObject();
         this.removeUpdateLoop();
         this.addUpdateLoop(this.frequency);
-        this.updateAppletArea();        
+        this.updateAppletArea();
     },
 
     _runSysMon: function() {

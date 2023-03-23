@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "lib": ["es2017"],
+        "noImplicitAny": true,
+        "removeComments": true,
+        "sourceMap": false,
+    },
+    "exclude": [
+        "files",
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}

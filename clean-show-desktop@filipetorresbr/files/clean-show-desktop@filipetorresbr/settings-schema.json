@@ -1,0 +1,105 @@
+{
+ "head" : {
+    "type" : "header",
+    "description" : "Settings"
+ },
+ "peek-at-desktop" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Peek at the desktop on hover",
+    "tooltip": "Peek at the desktop when hovering the applet"
+ },
+  "peek-blur" : {
+    "type" : "switch",
+    "default" : true,
+    "dependency" : "peek-at-desktop",
+    "description" : "Blur effect",
+    "tooltip" : "Blur windows when peeking at the desktop"
+ },
+ "peek-delay" : {
+    "type": "spinbutton",
+    "default" : 400,
+    "min" : 0,
+    "max" : 1000,
+    "step" : 50,
+    "units" : "milliseconds",
+    "dependency" : "peek-at-desktop",
+    "indent" : false,
+    "description": "Hover delay",
+    "tooltip": "Delay before Peek shows desktop"
+ },
+ "peek-opacity": {
+    "type": "scale",
+    "default" : 10,
+    "min" : 0,
+    "max" : 255,
+    "step" : 10,
+    "dependency" : "peek-at-desktop",
+    "description" : "Window opacity",
+    "tooltip" : "Change the opacity of windows when peeking at the desktop"
+ },
+ "width": {
+    "type": "scale",
+    "default" : 2,
+    "min" : 1,
+    "max" : 10,
+    "step" : 1,
+    "units" : "pixels",
+    "description" : "Applet size",
+    "tooltip" : "Adjust this to increase or decrease the width of this applet"
+ },
+  "border-width": {
+    "type": "scale",
+    "default" : 1,
+    "min" : 0,
+    "max" : 5,
+    "step" : 1,
+    "units" : "pixels",
+    "description" : "Border width",
+    "tooltip" : "Select the border width"
+ },
+  "margin": {
+    "type": "scale",
+    "default" : 0,
+    "min" : 0,
+    "max" : 10,
+    "step" : 1,
+    "units" : "pixels",
+    "description" : "Margin",
+    "tooltip" : "Select the margin"
+ },
+  "custom-color":{
+    "type" : "switch",
+    "default" : false,
+    "description" : "Customize the applet colors",
+    "tooltip" : "When this option is disabled, the applet will try to find the theme color"
+ },
+ "background": {
+    "type": "colorchooser",
+    "dependency" : "custom-color",
+    "default" : "rgba(000 , 000 , 000 , 0)",
+    "description" : "Fill color",
+    "tooltip" : "Select a fill color"
+ },
+ "border": {
+    "type": "colorchooser",
+    "dependency" : "custom-color",
+    "default" : "rgb(255,255,255)",
+    "description" : "Border color",
+    "tooltip" : "Select a border color"
+ },
+ "on-hover-background": {
+    "type": "colorchooser",
+    "dependency" : "custom-color",
+    "default" : "rgb(255,255,255)",
+    "description" : "Fill color on mouse hover",
+    "tooltip" : "Change the fill color when mouse hover"
+ },
+ "on-hover-border": {
+    "type": "colorchooser",
+    "dependency" : "custom-color",
+    "default" : "rgb(255,255,255)",
+    "description" : "Border color on mouse hover",
+    "tooltip" : "Change the Border color when mouse hover"
+ }
+}

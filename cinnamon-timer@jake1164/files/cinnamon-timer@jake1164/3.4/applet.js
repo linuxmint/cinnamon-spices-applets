@@ -42,13 +42,14 @@ MyApplet.prototype = {
     _init: function (orientation, panel_height, instance_id) {
         Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
         try {
-            
+
             if (this.versionCompare(GLib.getenv('CINNAMON_VERSION'), "3.2") >= 0) {
                 this.setAllowedLayout(Applet.AllowedLayout.BOTH);
             }
             this._init_settings();
             this.on_orientation_changed(orientation);
             this.timerDuration = 0;
+            this.timerDurationLoop = 0;
             this.timerStopped = true;
             this.alarmOn = false;
             this.state = false;
@@ -64,7 +65,7 @@ MyApplet.prototype = {
                 this.doTick();
             }
             this.doUpdateUI();
-            
+
         }
         catch (e) {
             global.logError(e);
@@ -178,7 +179,9 @@ MyApplet.prototype = {
         this.MessagePromptOn = this.settings.getValue("message-prompt-enable");
         this.ShowMenuOn = this.settings.getValue("display-menu-enable");
         this.SoundPath = this.settings.getValue("sound-file");
+        this.SoundVolume = this.settings.getValue("sound-volume");
         this.MessageStr = this.settings.getValue("display-message");
+        this.AutoLoopPromptOn = this.settings.getValue("auto-loop-enable");
         this.on_orientation_changed(this._orientation);
     },
     on_applet_clicked: function (event) {
@@ -250,7 +253,7 @@ MyApplet.prototype = {
                 if (preset < 1)
                     continue;
                 let label = "";
-                if (preset_times[i].label) {                    
+                if (preset_times[i].label) {
                     label = preset_times[i].label;
                 } else {
                     let hr = Math.floor(preset / 3600);
@@ -308,6 +311,7 @@ MyApplet.prototype = {
         this.timerStopped = false;
         this.alarm_start = this.getCurrentTime();
         this.alarm_end = this.alarm_start + this.timerDuration * 1000;
+        this.timerDurationLoop = this.timerDuration;
 
         this.doTick();
         this.doUpdateUI();
@@ -371,7 +375,7 @@ MyApplet.prototype = {
             applet_label += durationShortStr;
         if (this.alarmtime_display_enable)
             applet_label += " " + alarmtimeStr;
-        
+
         this.timerMenuItem.label.text = durationLongStr + " " + alarmtimeExpectedStr;
         this.set_applet_tooltip(_("Timer") + ":" + " " + durationShortStr + " " + alarmtimeStr);
 
@@ -398,7 +402,7 @@ MyApplet.prototype = {
         }
         if (this.SoundPromptOn) {
             try {
-                Util.spawnCommandLine("play " + this.SoundPath);
+                Util.spawnCommandLine("play -v " + this.SoundVolume/100 + " " + this.SoundPath);
             }
             catch (e) {
                 // spawnCommandLine does not actually throw exception when a sound fails to play
@@ -414,6 +418,11 @@ MyApplet.prototype = {
         if (this.ConfirmPromptOn) {
             this.confirm = new ConfirmDialog(message, Lang.bind(this, this.doClearAlarm));
             this.confirm.open();
+        }
+
+        if (this.AutoLoopPromptOn) {
+            this.timerDuration = this.timerDurationLoop;
+            this.doStartTimer();
         }
     },
 

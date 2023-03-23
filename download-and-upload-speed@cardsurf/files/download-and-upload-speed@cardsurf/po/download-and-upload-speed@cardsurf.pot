@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 23:31+0100\n"
+"POT-Creation-Date: 2021-02-27 00:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,80 +17,80 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:427
+#: applet.js:437
 msgid "Network interfaces"
 msgstr ""
 
-#: applet.js:496
+#: applet.js:506
 msgid "Total data start"
 msgstr ""
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:503
+#: applet.js:513
 msgid "Launch of applet"
 msgstr ""
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:504
+#: applet.js:514
 msgid "Today"
 msgstr ""
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:505
+#: applet.js:515
 msgid "Yesterday"
 msgstr ""
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:506
+#: applet.js:516
 msgid "3 days ago"
 msgstr ""
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:507
+#: applet.js:517
 msgid "5 days ago"
 msgstr ""
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:508
+#: applet.js:518
 msgid "7 days ago"
 msgstr ""
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:509
+#: applet.js:519
 msgid "10 days ago"
 msgstr ""
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:510
+#: applet.js:520
 msgid "14 days ago"
 msgstr ""
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:511
+#: applet.js:521
 msgid "30 days ago"
 msgstr ""
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:512
+#: applet.js:522
 msgid "Custom date"
 msgstr ""
 
 #. settings-schema.json->gui_start->description
-#: applet.js:549
+#: applet.js:559
 msgid "Gui"
 msgstr ""
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:549
+#: applet.js:559
 msgid "Compact"
 msgstr ""
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:549
+#: applet.js:559
 msgid "Large"
 msgstr ""
 
-#: applet.js:815
+#: applet.js:825
 msgid "b"
 msgstr ""
 
@@ -235,7 +235,9 @@ msgid "Download icon"
 msgstr ""
 
 #. settings-schema.json->gui_received_icon_filename->tooltip
-msgid "An icon displayed next to download speed in the panel"
+msgid ""
+"An icon displayed next to download speed in the panel.\n"
+"To display a symbolic icon make sure its name ends with '-symbolic.svg'."
 msgstr ""
 
 #. settings-schema.json->gui_sent_icon_filename->description
@@ -243,7 +245,13 @@ msgid "Upload icon"
 msgstr ""
 
 #. settings-schema.json->gui_sent_icon_filename->tooltip
-msgid "An icon displayed next to upload speed in the panel"
+msgid ""
+"An icon displayed next to upload speed in the panel.\n"
+"To display a symbolic icon make sure its name ends with '-symbolic.svg'."
+msgstr ""
+
+#. settings-schema.json->gui_symbolic_icon->description
+msgid "Show a default set of symbolic icons"
 msgstr ""
 
 #. settings-schema.json->hover_popup_text_css->description

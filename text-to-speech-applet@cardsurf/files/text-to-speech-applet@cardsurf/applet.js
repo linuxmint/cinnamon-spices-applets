@@ -45,7 +45,7 @@ MyApplet.prototype = {
 
         this.panel_height = panel_height;
         this.orientation = orientation;
-        this.python_name = "python";
+        this.python_name = "python3";
         this.tts_engine_name = "espeak";
         this.start_stop_keybind_id = uuid + instance_id + "start-stop";
         this.pause_resume_keybind_id = uuid + instance_id + "pause-resume";
@@ -409,6 +409,7 @@ MyApplet.prototype = {
         this.set_gui_paused();
     },
 
+    // Override
     on_applet_clicked: function(event) {
         let is_paused = this.is_voice_process_paused();
         if(is_paused) {

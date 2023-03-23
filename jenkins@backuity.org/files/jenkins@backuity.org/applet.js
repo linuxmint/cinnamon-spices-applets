@@ -186,11 +186,12 @@ MyApplet.prototype = {
                     }
                 }
                 let success = applet.countSuccesses(filteredJobs);
-                let failure = filteredJobs.length - success;
+                let disabled = applet.countDisabled(filteredJobs);
+                let failure = (filteredJobs.length - success) - disabled;
 
                 applet.updateAppletLabel(failure, success);
 
-                if (success < filteredJobs.length) {
+                if (success + disabled < filteredJobs.length) {
                     applet.set_applet_icon_name('jenkins-red');
                 } else {
                     applet.set_applet_icon_name('jenkins-green');
@@ -202,7 +203,7 @@ MyApplet.prototype = {
             } catch(error) {
                 applet.set_applet_icon_name('jenkins-grey');
                 applet.set_applet_label('!');
-                global.logError(error.message)
+                global.logError(error.message);
                 applet.menu.addMenuItem(new PopupMenu.PopupMenuItem(error.message));
             }
         })
@@ -224,9 +225,10 @@ MyApplet.prototype = {
 
             let color = job.get_string_member('color');
             let success = this.helpers().isColorSuccess(color);
+            let grey = this.helpers().isColorDisabled(color);
             let jobName = job.get_string_member('name');
 
-            if (success) {
+            if (success || grey) {
                 this.lastCheckJobSuccess[jobName] = true;
                 continue;
             }
@@ -247,6 +249,17 @@ MyApplet.prototype = {
             }
         }
         return success;
+    }
+    
+    , countDisabled: function(jobs) {
+        let disabled = 0;
+        for (let i = 0; i < jobs.length; i ++) {
+            let color = jobs[i].get_object().get_string_member('color');
+            if (this.helpers().isColorDisabled(color)) {
+                disabled += 1;
+            }
+        }
+        return disabled;
     }
 
     , helpers: function() {
@@ -361,7 +374,7 @@ Helpers.prototype = {
     },
 
     isColorDisabled: function (color) {
-        return color == 'disabled' || color == 'disabled_anime';
+        return color == 'disabled' || color == 'disabled_anime' || color == null;
     },
 
     isColorAborted: function (color) {

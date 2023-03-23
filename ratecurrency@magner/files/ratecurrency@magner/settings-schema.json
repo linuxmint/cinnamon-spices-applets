@@ -1,424 +1,424 @@
 {
-	"layout": {
-		"type": "layout",
-		"pages": [
-			"general",
-			"graph",
-			"alert"
-		],
-
-		"general": {
-			"type": "page",
-			"title": "General",
-			"sections": [
-				"cfgFiat",
-				"selectCoin",
-				"cfgCoin",
-				"cfgDisplay"
-			]
-		},
-
-		"graph": {
-			"type": "page",
-			"title": "Graph",
-			"sections": [
-				"cfgGraph",
-				"graphOption"
-			]
-		},
-
-		"alert": {
-			"type": "page",
-			"title": "Alerts",
-			"sections": [
-				"cfgAlerts",
-				"alertOption"
-			]
-		},
-
-		"cfgFiat": {
-			"type": "section",
-			"title": "",
-			"keys": ["country"]
-		},
-
-		"selectCoin": {
-			"type": "section",
-			"title": "",
-			"keys": ["select-coin"]
-		},
-
-		"cfgCoin": {
-			"type": "section",
-			"title": "Cryptocurrency options",
-			"dependency": "select-coin",
-			"keys": [
-				"apiKey",
-				"website",
-				"coin",
-				"ApiInterval"
-			]
-		},
-
-		"cfgDisplay": {
-			"type": "section",
-			"title": "Display options",
-			"keys": [
-				"currency",
-				"display",
-				"show-icon",
-				"show-name"
-			]
-		},
-
-		"cfgGraph": {
-			"type": "section",
-			"title": "",
-			"keys": ["graph-On"]
-		},
-
-		"graphOption": {
-			"type": "section",
-			"title": "Graph options",
-			"keys": [
-				"graphDuration",
-				"graphColor"
-			]
-		},
-
-		"cfgAlerts": {
-			"type": "section",
-			"title": "",
-			"keys": ["alert-On"]
-		},
-
-		"alertOption": {
-			"type": "section",
-			"title": "Alerts options",
-			"keys": [
-				"alertAbove",
-				"alertBelow",
-				"alertType"
-			]
-		}
-
-	},
-
-
-	"country": {
-		"type": "radiogroup",
-		"default": "EU",
-		"description": "Choosing a server for fiat currency",
-		"tooltip": "Affects the load data fiat currency quotes",
-		"options": {
-			"European Union": "EU",
-			"Russian Federation": "RU"
-		}
-	},
-
-	"select-coin": {
-		"type": "checkbox",
-		"default": false,
-		"description": "Display cryptocurrency quotes instead of fiat currency"
-	},
-
-	"apiKey": {
-		"type": "entry",
-		"default": "",
-		"description": "Your CoinMarketCap API Key",
-		"tooltip": "If you don`t have one you can get it for free at https://pro.coinmarketcap.com"
-	},
-
-	"website": {
-		"type": "button",
-		"description": "Go to CoinMarketCap website",
-		"callback": "_visit_website",
-		"tooltip": "Click this button to visit the website",
-		"indent": true
-	},
-
-	"coin": {
-		"type": "combobox",
-		"default": "1",
-		"description": "Select base currency (coin)",
-		"tooltip": "For which coin to display a quote?",
-		"options": {
-			"0x (ZRX)": "1896",
-			"ABBC Coin (ABBC)": "3437",
-			"aelf (ELF)": "2299",
-			"Aeternity (AE)": "1700",
-			"Aion (AION)": "2062",
-			"Algorand (ALGO)": "4030",
-			"Aragon (ANT)": "1680",
-			"Ardor (ARDR)": "1320",
-			"Ark (ARK)": "1586",
-			"Augur (REP)": "1104",
-			"Aurora (AOA)": "2874",
-			"BHPCoin (BHP)": "3020",
-			"Bancor (BNT)": "1727",
-			"Basic Attention Token (BAT)": "1697",
-			"Beam (BEAM)": "3702",
-			"Binance Coin (BNB)": "1839",
-			"BitCapitalVendor (BCV)": "3066",
-			"BitShares (BTS)": "463",
-			"BitTorrent (BTT)": "3718",
-			"Bitcoin (BTC)": "1",
-			"Bitcoin Cash (BCH)": "1831",
-			"Bitcoin Diamond (BCD)": "2222",
-			"Bitcoin Gold (BTG)": "2083",
-			"Bitcoin SV (BSV)": "3602",
-			"Blackmoon (BMC)": "1976",
-			"Bread (BRD)": "2306",
-			"Bytecoin (BCN)": "372",
-			"Bytom (BTM)": "1866",
-			"Cardano (ADA)": "2010",
-			"Centrality (CENNZ)": "2585",
-			"Chainlink (LINK)": "1975",
-			"Civic (CVC)": "1816",
-			"Cosmos (ATOM)": "3794",
-			"Crypterium (CRPT)": "2447",
-			"Crypto.com Coin (CRO)": "3635",
-			"Dai (DAI)": "2308",
-			"Dash (DASH)": "131",
-			"Decentraland (MANA)": "1966",
-			"Decred (DCR)": "1168",
-			"Dentacoin (DCN)": "1876",
-			"DigiByte (DGB)": "109",
-			"Digitex Futures (DGTX)": "2772",
-			"DigixDAO (DGD)": "1229",
-			"Dogecoin (DOGE)": "74",
-			"Dragon Coins (DRG)": "2593",
-			"DxChain Token (DX)": "3139",
-			"EDUCare (EKT)": "2453",
-			"EOS (EOS)": "1765",
-			"Elastos (ELA)": "2492",
-			"Electroneum (ETN)": "2137",
-			"Energi (NRG)": "3218",
-			"Enigma (ENG)": "2044",
-			"Enjin Coin (ENJ)": "2130",
-			"Ethereum (ETH)": "1027",
-			"Ethereum Classic (ETC)": "1321",
-			"Factom (FCT)": "1087",
-			"Fantom (FTM)": "3513",
-			"Fetch (FET)": "3773",
-			"FunFair (FUN)": "1757",
-			"GXChain (GXC)": "1750",
-			"Golem (GNT)": "1455",
-			"Grin (GRIN)": "3709",
-			"HedgeTrade (HEDG)": "3662",
-			"Holo (HOT)": "2682",
-			"Horizen (ZEN)": "1698",
-			"Huobi Token (HT)": "2502",
-			"HyperCash (HC)": "1903",
-			"ICON (ICX)": "2099",
-			"iExec RLC (RLC)": "1637",
-			"IOST (IOST)": "2405",
-			"IOTA (MIOTA)": "1720",
-			"IoTeX (IOTX)": "2777",
-			"Jewel (JWL)": "3791",
-			"Komodo (KMD)": "1521",
-			"KuCoin Shares (KCS)": "2087",
-			"Kyber Network (KNC)": "1982",
-			"LINA (LINA)": "3083",
-			"Lambda (LAMB)": "3657",
-			"Lisk (LSK)": "1214",
-			"Litecoin (LTC)": "2",
-			"Loom Network (LOOM)": "2588",
-			"Loopring (LRC)": "1934",
-			"MCO (MCO)": "1776",
-			"MaidSafeCoin (MAID)": "291",
-			"Maker (MKR)": "1518",
-			"Matic Network (MATIC)": "3890",
-			"Metaverse ETP (ETP)": "1703",
-			"Moeda Loyalty Points (MDA)": "1954",
-			"MonaCoin (MONA)": "213",
-			"Monero (XMR)": "328",
-			"NEM (XEM)": "873",
-			"NEO (NEO)": "1376",
-			"NULS (NULS)": "2092",
-			"Nano (NANO)": "1567",
-			"Nash Exchange (NEX)": "3829",
-			"Nebulas (NAS)": "1908",
-			"Newton (NEW)": "3871",
-			"Nexo (NEXO)": "2694",
-			"ODEM (ODE)": "2631",
-			"OmiseGO (OMG)": "1808",
-			"Ontology (ONT)": "2566",
-			"Orbs (ORBS)": "3835",
-			"Paxos Standard (PAX)": "3330",
-			"Populous (PPT)": "1789",
-			"Power Ledger (POWR)": "2132",
-			"Project Pai (PAI)": "2900",
-			"Pundi X (NPXS)": "2603",
-			"QASH (QASH)": "2213",
-			"Qtum (QTUM)": "1684",
-			"Quant (QNT)": "3155",
-			"RIF Token (RIF)": "3701",
-			"Ravencoin (RVN)": "2577",
-			"ReddCoin (RDD)": "118",
-			"Ren (REN)": "2539",
-			"Revain (R)": "2135",
-			"SOLVE (SOLVE)": "3724",
-			"STASIS EURO (EURS)": "2989",
-			"Santiment Network Token (SAN)": "1807",
-			"Seele (SEELE)": "2830",
-			"Siacoin (SC)": "1042",
-			"Status (SNT)": "1759",
-			"Steem (STEEM)": "1230",
-			"Stellar (XLM)": "512",
-			"Stratis (STRAT)": "1343",
-			"Swipe (SXP)": "4279",
-			"Synthetix Network Token (SNX)": "2586",
-			"THETA (THETA)": "2416",
-			"TRON (TRX)": "1958",
-			"Tether (USDT)": "825",
-			"Tezos (XTZ)": "2011",
-			"Tierion (TNT)": "1923",
-			"TomoChain (TOMO)": "2570",
-			"TrueUSD (TUSD)": "2563",
-			"UNUS SED LEO (LEO)": "3957",
-			"USD Coin (USDC)": "3408",
-			"V Systems (VSYS)": "3704",
-			"VeChain (VET)": "3077",
-			"Verge (XVG)": "693",
-			"WAX (WAXP)": "2300",
-			"WINk (WIN)": "4206",
-			"Waltonchain (WTC)": "1925",
-			"Wanchain (WAN)": "2606",
-			"Waves (WAVES)": "1274",
-			"WaykiChain (WICC)": "2346",
-			"XMax (XMX)": "2859",
-			"XRP (XRP)": "52",
-			"ZB (ZB)": "3351",
-			"Zcash (ZEC)": "1437",
-			"Zcoin (XZC)": "1414",
-			"Zilliqa (ZIL)": "2469"
-		}
-	},
-
-	"ApiInterval": {
-		"type": "combobox",
-		"default": 30,
-		"description": "Select update interval (using API credits)",
-		"tooltip": "Determines how often to receive new data. Each update is one credit. For a free basic plan, an interval of 30+ minutes is recommended",
-		"options": {
-			"5 minutes": 5,
-			"15 minutes": 15,
-			"30 minutes": 30,
-			"45 minutes": 45,
-			"1 hour": 60,
-			"2 hours": 120,
-			"4 hours": 240
-		}
-	},
-
-	"currency": {
-		"type": "combobox",
-		"default": "USD",
-		"description": "Select quote currency",
-		"tooltip": "In which currency to show quote information",
-		"options": {
-			"Australian dollar (AUD)": "AUD",
-			"Brazilian real (BRL)": "BRL",
-			"Bulgarian lev (BGN)": "BGN",
-			"Canadian dollar (CAD)": "CAD",
-			"Chinese yuan renminbi (CNY)": "CNY",
-			"Czech koruna (CZK)": "CZK",
-			"Danish krone (DKK)": "DKK",
-			"Euro (EUR)": "EUR",
-			"Hong Kong dollar (HKD)": "HKD",
-			"Hungarian forint (HUF)": "HUF",
-			"Indian rupee (INR)": "INR",
-			"Japanese yen (JPY)": "JPY",
-			"Norwegian krone (NOK)": "NOK",
-			"Polish zloty (PLN)": "PLN",
-			"Pound sterling (GBP)": "GBP",
-			"Romanian leu (RON)": "RON",
-			"Russian rouble (RUB)": "RUB",
-			"Singapore dollar (SGD)": "SGD",
-			"South African rand (ZAR)": "ZAR",
-			"South Korean won (KRW)": "KRW",
-			"Swedish krona (SEK)": "SEK",
-			"Swiss franc (CHF)": "CHF",
-			"Turkish lira (TRY)": "TRY",
-			"US dollar (USD)": "USD"
-		}
-	},
-
-	"display": {
-		"type": "radiogroup",
-		"default": "money",
-		"description": "Display type quotes",
-		"options": {
-			"Money (e.g. 8,261.20 $)": "money",
-			"Delta (e.g. -0.426 $)": "delta",
-			"Percent (e.g. 0.26%)": "percent"
-		}
-	},
-
-	"show-icon": {
-		"type": "checkbox",
-		"default": true,
-		"description": "Show icon"
-	},
-
-	"show-name": {
-		"type": "checkbox",
-		"default": false,
-		"description": "Show currency name"
-	},
-
-
-	"graph-On": {
-		"type": "checkbox",
-		"default": false,
-		"description": "Show currency history on graph"
-	},
-
-	"graphDuration": {
-		"type": "spinbutton",
-		"default": 30,
-		"min": 1,
-		"max": 2000,
-		"step": 1,
-		"description": "Duration history (in days)"
-	},
-
-	"graphColor": {
-		"type": "colorchooser",
-		"default": "#64cbff",
-		"description": "Color"
-	},
-
-
-	"alert-On": {
-		"type": "checkbox",
-		"default": false,
-		"description": "Enable alerts"
-	},
-
-	"alertAbove": {
-		"type": "entry",
-		"default": "",
-		"description": "Maximum value",
-		"tooltip": "Alert is triggered when the current value is higher than this value"
-	},
-
-	"alertBelow": {
-		"type": "entry",
-		"default": "",
-		"description": "Minimum value",
-		"tooltip": "Alert is triggered when the current value is lower than this value"
-	},
-
-	"alertType": {
-		"type": "radiogroup",
-		"default": "percentage",
-		"description": "Unit",
-		"options": {
-			"Percentages": "percentage",
-			"Money": "money"
-		}
-	}
-
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "general",
+      "graph",
+      "alert"
+    ],
+    
+    "general": {
+      "type": "page",
+      "title": "General",
+      "sections": [
+        "cfgFiat",
+        "selectCoin",
+        "cfgCoin",
+        "cfgDisplay"
+      ]
+    },
+    
+    "graph": {
+      "type": "page",
+      "title": "Graph",
+      "sections": [
+        "cfgGraph",
+        "graphOption"
+      ]
+    },
+    
+    "alert": {
+      "type": "page",
+      "title": "Alerts",
+      "sections": [
+        "cfgAlerts",
+        "alertOption"
+      ]
+    },
+    
+    "cfgFiat": {
+      "type": "section",
+      "title": "",
+      "keys": ["country"]
+    },
+    
+    "selectCoin": {
+      "type": "section",
+      "title": "",
+      "keys": ["select-coin"]
+    },
+    
+    "cfgCoin": {
+      "type": "section",
+      "title": "Cryptocurrency options",
+      "dependency": "select-coin",
+      "keys": [
+        "apiKey",
+        "website",
+        "coin",
+        "ApiInterval"
+      ]
+    },
+    
+    "cfgDisplay": {
+      "type": "section",
+      "title": "Display options",
+      "keys": [
+        "currency",
+        "display",
+        "show-icon",
+        "show-name"
+      ]
+    },
+    
+    "cfgGraph": {
+      "type": "section",
+      "title": "",
+      "keys": ["graph-On"]
+    },
+    
+    "graphOption": {
+      "type": "section",
+      "title": "Graph options",
+      "keys": [
+        "graphDuration",
+        "graphColor"
+      ]
+    },
+    
+    "cfgAlerts": {
+      "type": "section",
+      "title": "",
+      "keys": ["alert-On"]
+    },
+    
+    "alertOption": {
+      "type": "section",
+      "title": "Alerts options",
+      "keys": [
+        "alertAbove",
+        "alertBelow",
+        "alertType"
+      ]
+    }
+    
+  },
+  
+  
+  "country": {
+    "type": "radiogroup",
+    "default": "EU",
+    "description": "Choosing a server for fiat currency",
+    "tooltip": "Affects the load data fiat currency quotes",
+    "options": {
+      "European Union": "EU",
+      "Russian Federation": "RU"
+    }
+  },
+  
+  "select-coin": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Display cryptocurrency quotes instead of fiat currency"
+  },
+  
+  "apiKey": {
+    "type": "entry",
+    "default": "",
+    "description": "Your CoinMarketCap API Key",
+    "tooltip": "If you don`t have one you can get it for free at https://pro.coinmarketcap.com"
+  },
+  
+  "website": {
+    "type": "button",
+    "description": "Go to CoinMarketCap website",
+    "callback": "visitWebsite",
+    "tooltip": "Click this button to visit the website",
+    "indent": true
+  },
+  
+  "coin": {
+    "type": "combobox",
+    "default": "1",
+    "description": "Select base currency (coin)",
+    "tooltip": "For which coin to display a quote?",
+    "options": {
+      "0x (ZRX)": "1896",
+      "1inch (1INCH)": "8104",
+      "ABBC Coin (ABBC)": "3437",
+      "Aave (AAVE)": "7278",
+      "Algorand (ALGO)": "4030",
+      "Alpha Finance Lab (ALPHA)": "7232",
+      "Ampleforth (AMPL)": "4056",
+      "Aragon (ANT)": "1680",
+      "Arweave (AR)": "5632",
+      "Augur (REP)": "1104",
+      "Avalanche (AVAX)": "5805",
+      "Balancer (BAL)": "5728",
+      "Bancor (BNT)": "1727",
+      "Band Protocol (BAND)": "4679",
+      "Basic Attention Token (BAT)": "1697",
+      "Binance Coin (BNB)": "1839",
+      "Binance USD (BUSD)": "4687",
+      "BitShares (BTS)": "463",
+      "BitTorrent (BTT)": "3718",
+      "Bitcoin (BTC)": "1",
+      "Bitcoin BEP2 (BTCB)": "4023",
+      "Bitcoin Cash (BCH)": "1831",
+      "Bitcoin Diamond (BCD)": "2222",
+      "Bitcoin Gold (BTG)": "2083",
+      "Bitcoin SV (BSV)": "3602",
+      "Cardano (ADA)": "2010",
+      "Celo (CELO)": "5567",
+      "Celsius (CEL)": "2700",
+      "Chainlink (LINK)": "1975",
+      "Chiliz (CHZ)": "4066",
+      "Civic (CVC)": "1816",
+      "Compound (COMP)": "5692",
+      "Cosmos (ATOM)": "3794",
+      "Crypto.com Coin (CRO)": "3635",
+      "Curve DAO Token (CRV)": "6538",
+      "CyberVein (CVT)": "2642",
+      "Dai (DAI)": "4943",
+      "Dash (DASH)": "131",
+      "Decentraland (MANA)": "1966",
+      "Decred (DCR)": "1168",
+      "DigiByte (DGB)": "109",
+      "Dogecoin (DOGE)": "74",
+      "EOS (EOS)": "1765",
+      "Elrond (EGLD)": "6892",
+      "Energy Web Token (EWT)": "5268",
+      "Enjin Coin (ENJ)": "2130",
+      "Ethereum (ETH)": "1027",
+      "Ethereum Classic (ETC)": "1321",
+      "FTX Token (FTT)": "4195",
+      "Fantom (FTM)": "3513",
+      "Fetch.ai (FET)": "3773",
+      "Filecoin (FIL)": "2280",
+      "Flow (Dapper Labs) (FLOW)": "4558",
+      "FunFair (FUN)": "1757",
+      "Gnosis (GNO)": "1659",
+      "Golem (GLM)": "1455",
+      "HUSD (HUSD)": "4779",
+      "Hedera Hashgraph (HBAR)": "4642",
+      "HedgeTrade (HEDG)": "3662",
+      "Helium (HNT)": "5665",
+      "Holo (HOT)": "2682",
+      "Horizen (ZEN)": "1698",
+      "Huobi Token (HT)": "2502",
+      "ICON (ICX)": "2099",
+      "IOST (IOST)": "2405",
+      "IOTA (MIOTA)": "1720",
+      "Injective Protocol (INJ)": "7226",
+      "IoTeX (IOTX)": "2777",
+      "Kava.io (KAVA)": "4846",
+      "KuCoin Token (KCS)": "2087",
+      "Kusama (KSM)": "5034",
+      "Kyber Network (KNC)": "1982",
+      "Lisk (LSK)": "1214",
+      "Litecoin (LTC)": "2",
+      "Loopring (LRC)": "1934",
+      "MaidSafeCoin (MAID)": "291",
+      "Mainframe (MFT)": "2896",
+      "Maker (MKR)": "1518",
+      "Matic Network (MATIC)": "3890",
+      "MonaCoin (MONA)": "213",
+      "Monero (XMR)": "328",
+      "Morpheus.Network (MRPH)": "2763",
+      "NEAR Protocol (NEAR)": "6535",
+      "NEM (XEM)": "873",
+      "Nano (NANO)": "1567",
+      "Neo (NEO)": "1376",
+      "Nervos Network (CKB)": "4948",
+      "Nexo (NEXO)": "2694",
+      "NuCypher (NU)": "4761",
+      "Numeraire (NMR)": "1732",
+      "OKB (OKB)": "3897",
+      "OMG Network (OMG)": "1808",
+      "Ocean Protocol (OCEAN)": "3911",
+      "Ontology (ONT)": "2566",
+      "Orchid (OXT)": "5026",
+      "PAX Gold (PAXG)": "4705",
+      "PancakeSwap (CAKE)": "7186",
+      "Paxos Standard (PAX)": "3330",
+      "Polkadot (DOT)": "6636",
+      "Pundi X (NPXS)": "2603",
+      "Qtum (QTUM)": "1684",
+      "Quant (QNT)": "3155",
+      "RSK Infrastructure Framework (RIF)": "3701",
+      "Ravencoin (RVN)": "2577",
+      "Ren (REN)": "2539",
+      "Reserve Rights (RSR)": "3964",
+      "Revain (REV)": "2135",
+      "Serum (SRM)": "6187",
+      "Siacoin (SC)": "1042",
+      "Solana (SOL)": "5426",
+      "Stacks (STX)": "4847",
+      "Status (SNT)": "1759",
+      "Stellar (XLM)": "512",
+      "Storj (STORJ)": "1772",
+      "SushiSwap (SUSHI)": "6758",
+      "Swipe (SXP)": "4279",
+      "SwissBorg (CHSB)": "2499",
+      "Synthetix (SNX)": "2586",
+      "THETA (THETA)": "2416",
+      "THORChain (RUNE)": "4157",
+      "TRON (TRX)": "1958",
+      "Telcoin (TEL)": "2394",
+      "Terra (LUNA)": "4172",
+      "TerraUSD (UST)": "7129",
+      "Tether (USDT)": "825",
+      "Tezos (XTZ)": "2011",
+      "The Graph (GRT)": "6719",
+      "Theta Fuel (TFUEL)": "3822",
+      "TomoChain (TOMO)": "2570",
+      "TrueUSD (TUSD)": "2563",
+      "UMA (UMA)": "5617",
+      "UNUS SED LEO (LEO)": "3957",
+      "USD Coin (USDC)": "3408",
+      "Unibright (UBT)": "2758",
+      "Uniswap (UNI)": "7083",
+      "Utrust (UTK)": "2320",
+      "VeChain (VET)": "3077",
+      "Venus (XVS)": "7288",
+      "Verge (XVG)": "693",
+      "Voyager Token (VGX)": "1817",
+      "Waves (WAVES)": "1274",
+      "Wrapped Bitcoin (WBTC)": "3717",
+      "XRP (XRP)": "52",
+      "ZB Token (ZB)": "3351",
+      "Zcash (ZEC)": "1437",
+      "Zilliqa (ZIL)": "2469",
+      "district0x (DNT)": "1856",
+      "iExec RLC (RLC)": "1637",
+      "renBTC (RENBTC)": "5777",
+      "yearn.finance (YFI)": "5864"
+    }
+  },
+  
+  "ApiInterval": {
+    "type": "combobox",
+    "default": 30,
+    "description": "Select update interval (using API credits)",
+    "tooltip": "Determines how often to receive new data. Each update is one credit. For a free basic plan, an interval of 30+ minutes is recommended",
+    "options": {
+      "5 minutes": 5,
+      "15 minutes": 15,
+      "30 minutes": 30,
+      "45 minutes": 45,
+      "1 hour": 60,
+      "2 hours": 120,
+      "4 hours": 240
+    }
+  },
+  
+  "currency": {
+    "type": "combobox",
+    "default": "USD",
+    "description": "Select quote currency",
+    "tooltip": "In which currency to show quote information",
+    "options": {
+      "Australian dollar (AUD)": "AUD",
+      "Brazilian real (BRL)": "BRL",
+      "Bulgarian lev (BGN)": "BGN",
+      "Canadian dollar (CAD)": "CAD",
+      "Chinese yuan renminbi (CNY)": "CNY",
+      "Czech koruna (CZK)": "CZK",
+      "Danish krone (DKK)": "DKK",
+      "Euro (EUR)": "EUR",
+      "Hong Kong dollar (HKD)": "HKD",
+      "Hungarian forint (HUF)": "HUF",
+      "Indian rupee (INR)": "INR",
+      "Japanese yen (JPY)": "JPY",
+      "Norwegian krone (NOK)": "NOK",
+      "Polish zloty (PLN)": "PLN",
+      "Pound sterling (GBP)": "GBP",
+      "Romanian leu (RON)": "RON",
+      "Russian rouble (RUB)": "RUB",
+      "Singapore dollar (SGD)": "SGD",
+      "South African rand (ZAR)": "ZAR",
+      "South Korean won (KRW)": "KRW",
+      "Swedish krona (SEK)": "SEK",
+      "Swiss franc (CHF)": "CHF",
+      "Turkish lira (TRY)": "TRY",
+      "US dollar (USD)": "USD"
+    }
+  },
+  
+  "display": {
+    "type": "radiogroup",
+    "default": "money",
+    "description": "Display type quotes",
+    "options": {
+      "Money (e.g. 8,261.20 $)": "money",
+      "Delta (e.g. -0.426 $)": "delta",
+      "Percent (e.g. 0.26%)": "percent"
+    }
+  },
+  
+  "show-icon": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show icon"
+  },
+  
+  "show-name": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Show currency name"
+  },
+  
+  
+  "graph-On": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Show currency history on graph"
+  },
+  
+  "graphDuration": {
+    "type": "spinbutton",
+    "default": 30,
+    "min": 1,
+    "max": 2000,
+    "step": 1,
+    "description": "Duration history (in days)"
+  },
+  
+  "graphColor": {
+    "type": "colorchooser",
+    "default": "#64cbff",
+    "description": "Color"
+  },
+  
+  
+  "alert-On": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable alerts"
+  },
+  
+  "alertAbove": {
+    "type": "entry",
+    "default": "",
+    "description": "Maximum value",
+    "tooltip": "Alert is triggered when the current value is higher than this value"
+  },
+  
+  "alertBelow": {
+    "type": "entry",
+    "default": "",
+    "description": "Minimum value",
+    "tooltip": "Alert is triggered when the current value is lower than this value"
+  },
+  
+  "alertType": {
+    "type": "radiogroup",
+    "default": "percentage",
+    "description": "Unit",
+    "options": {
+      "Percentages": "percentage",
+      "Money": "money"
+    }
+  }
+  
 }

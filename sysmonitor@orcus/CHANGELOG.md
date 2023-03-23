@@ -1,3 +1,6 @@
+### 1.6.5
+* Fixed crash in network provider when glibtop failed to retrieve network interface list and a fallback method was used
+
 ### 1.6.4
 * Fixed memory leak
 * Applet now uses one drawing area for all graphs, it should reduce drawing overhead

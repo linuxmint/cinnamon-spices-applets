@@ -1,0 +1,36 @@
+{
+  "brightness-default-label-1": {
+    "type": "entry",
+    "default": "Default brightness",
+    "description": "\"Default brightness 1\" button label",
+    "tooltip": "For example \"Daily Brightness\""
+  },
+  "brightness-default-value-1": {
+    "type": "spinbutton",
+    "indent": true,
+    "description": "\"Default brightness 1\" value",
+    "tooltip": "Set the brightness level that will be applied when the \"Default brightness 1\" button is clicked",
+    "default": 50,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%"
+  },
+  "brightness-default-label-2": {
+    "type": "entry",
+    "default": "Default brightness",
+    "description": "\"Default brightness 2\" button label",
+    "tooltip": "For example \"Night Brightness\""
+  },
+  "brightness-default-value-2": {
+    "type": "spinbutton",
+    "indent": true,
+    "description": "\"Default brightness 2\" value",
+    "tooltip": "Set the brightness level that will be applied when the \"Default brightness 2\" button is clicked",
+    "default": 50,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "%"
+  }
+}

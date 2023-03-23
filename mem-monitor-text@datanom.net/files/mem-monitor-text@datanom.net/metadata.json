@@ -1,6 +1,5 @@
 {
  "uuid": "mem-monitor-text@datanom.net",
  "name": "Simple Memory Monitor",
- "description": "A simple applet that displays the memory usage.",
- "icon": "utilities-system-monitor"
+ "description": "A simple applet that displays the memory usage."
 }

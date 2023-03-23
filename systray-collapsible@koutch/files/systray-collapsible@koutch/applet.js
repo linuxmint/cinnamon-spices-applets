@@ -552,7 +552,7 @@ MyApplet.prototype = {
         if (this.tray_button._isAdded)
             this._setTray_button_icons();
 
-        for (i = 0; i< this.icons_hide_by_user.length; i++){
+        for (let i = 0; i< this.icons_hide_by_user.length; i++){
             if ( this.actual_hidden_role.indexOf(this.icons_hide_by_user[i]) != -1 )
                 this._hide_icon(this.icons_hide_by_user[i]);
         }
@@ -566,7 +566,7 @@ MyApplet.prototype = {
         let hidden_icons_displayed = []; /// a part of hidden icons might be displayed (e.g. when new hidden icon is added)
         let children = this.actor.get_children();
         ///@koutch set switch state of displayed icons
-        for (i = children.length - 1; i >= 0; i--){ /// from children.length - 1 to 0 to keep icons order
+        for (let i = children.length - 1; i >= 0; i--){ /// from children.length - 1 to 0 to keep icons order
             if (children[i]._role != 'tray_icon'){
                 let switch_state = true;
                 if (this.icons_hide_by_user.indexOf(children[i]._role) != -1 ) {
@@ -586,7 +586,7 @@ MyApplet.prototype = {
         ///@koutch set switch state of hidden icons
         this._previous_icon_menu = new PopupMenu.PopupSubMenuMenuItem(_("Previous") + " " + _("Icons"), {expend:false }); /// to group inactive icons
 
-        for (i = this.icons_hide_by_user.length - 1; i >= 0; i--){ /// from this.icons_hide_by_user.length - 1 to 0 to keep icons order
+        for (let i = this.icons_hide_by_user.length - 1; i >= 0; i--){ /// from this.icons_hide_by_user.length - 1 to 0 to keep icons order
             if ( hidden_icons_displayed.indexOf(this.icons_hide_by_user[i]) == -1 ){ /// hidden_icons_displayed has been list befor
                 if ( this.actual_hidden_role.indexOf(this.icons_hide_by_user[i]) != -1) { /// icon is hidden but active
                     let switch_item = new PopupMenu.PopupSwitchMenuItem(this.icons_hide_by_user[i], false);

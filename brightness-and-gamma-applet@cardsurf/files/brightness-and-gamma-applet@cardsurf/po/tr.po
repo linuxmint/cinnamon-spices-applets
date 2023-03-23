@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-19 18:45+0300\n"
-"PO-Revision-Date: 2017-06-19 18:59+0300\n"
-"Language-Team: Linux Mint Türkiye\n"
+"POT-Creation-Date: 2017-05-01 14:00+0800\n"
+"PO-Revision-Date: 2020-12-07 16:45+0300\n"
+"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: tr\n"
 
 #: applet.js:168
 msgid "The following packages were not found:"
@@ -195,3 +195,23 @@ msgstr "Başlangıçta çalıştır"
 #. schema.json->apply_startup->tooltip
 msgid "Apply values at applet startup"
 msgstr "Değerleri sistem başlangıcında uygular"
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->apply_every->description
+msgid "Apply every"
+msgstr "Herşeyi uygula"
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->apply_every->tooltip
+msgid "How often to apply values. 0 means that values are not applied periodically."
+msgstr "Değerlerin ne sıklıkla uygulanacağı. 0, değeri periyodik olarak uygulanmadığı anlamına gelir."
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->apply_asynchronously->description
+msgid "Apply asynchronously"
+msgstr "Eşzamansız olarak uygulayın"
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->apply_asynchronously->tooltip
+msgid "Apply values in a background process"
+msgstr "Değerleri arka planda uygula"

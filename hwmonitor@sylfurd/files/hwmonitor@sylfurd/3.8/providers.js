@@ -1,5 +1,7 @@
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
+const GLib = imports.gi.GLib;
+const GUdev = imports.gi.GUdev;
 
 //
 // Initialize GTop
@@ -34,29 +36,36 @@ class CpuDataProvider {
     }
 
     getData() {
-        GTop.glibtop_get_cpu(this.gtop);
+        try {
+            GTop.glibtop_get_cpu(this.gtop);
 
-        this.current = this.gtop.idle;
+            this.current = this.gtop.idle;
 
-        let delta = this.gtop.total - this.last_total;
-        
-        // Sometimes after suspend we get weird values here
-        // which results in the graph being flat. This fixes
-        // that.
-        if (delta < -50000) {
-            delta = this.last_delta;
-        }
-
-        if (delta > 0) {
-            this.usage = (this.current - this.last) / delta;
-            this.last = this.current;
-            this.last_total = this.gtop.total;
-            this.last_delta = delta;
-        }
-
-        this.text = ((1-this.usage) * 100).toFixed(1) + "%";
+            let delta = this.gtop.total - this.last_total;
             
-        return 1 - this.usage;
+            // Sometimes after suspend we get weird values here
+            // which results in the graph being flat. This fixes
+            // that.
+            if (delta < -50000) {
+                delta = this.last_delta;
+            }
+
+            if (delta > 0) {
+                this.usage = (this.current - this.last) / delta;
+                this.last = this.current;
+                this.last_total = this.gtop.total;
+                this.last_delta = delta;
+            }
+
+            this.text = ((1-this.usage) * 100).toFixed(1) + "%";
+                
+            let tools = new Tools();            
+            return tools.limit(1 - this.usage, 0, 1);
+        } catch (e) {
+            global.logError(e);
+            this.text = "0 %";
+            return 0;
+        }
     }
 }
 
@@ -69,11 +78,17 @@ class MemDataProvider {
     }
 
     getData() {
-        GTop.glibtop_get_mem(this.gtopMem);
+        try {
+            GTop.glibtop_get_mem(this.gtopMem);
 
-        let format = new Tools();
-        this.text = format.formatBytes(this.gtopMem.user); 
-        return  this.gtopMem.user / this.gtopMem.total;
+            let format = new Tools();
+            this.text = format.formatBytes(this.gtopMem.user); 
+            return format.limit(this.gtopMem.user / this.gtopMem.total,0,1);
+        } catch (e) {
+            global.logError(e);
+            this.text = "0 B";
+            return 0;
+        }
     }
 }
 
@@ -108,6 +123,7 @@ class NetDataProvider {
             this.devices = [];
             let d = Gio.File.new_for_path("/sys/class/net");
             let en = d.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
+            let info;
             while ((info = en.next_file(null)))
                 this.devices.push(info.get_name())
         }
@@ -190,6 +206,118 @@ class NetDataProvider {
         return tools.limit(Math.log10(value)/Math.log10(max), 0, 1);
     }
 };
+
+// Class responsible for getting DISK (read/write) data
+class DiskDataProvider {
+	constructor(frequency, sample_size, type_read, device_name) {
+        if (type_read) {
+            this.name = _("DISK (read)");
+            this.type = "DISKREAD";
+        } else {
+            this.name = _("DISK (write)");
+            this.type = "DISKWRITE";
+        }
+        this.frequency = frequency;
+        this.type_read = type_read;
+        this.device_name = device_name;
+        this.sample_size = sample_size;
+        this.sample_history = [];
+
+        [this.read_last, this.written_last] = this.getDiskLoad();
+    }
+
+    getData() {
+        try {
+            let [read, written] = this.getDiskLoad();
+            let read_delta = (read - this.read_last) / this.frequency;
+            let written_delta = (written - this.written_last) / this.frequency;
+            this.read_last = read;
+            this.written_last = written;
+            let format = new Tools();
+            
+            this.max_speed = Math.max(...this.sample_history);
+
+            if (this.type_read) {
+                this.text = format.formatBytes(read_delta);
+                this.data = this.getLinearValue(read_delta, this.max_speed);
+                this.updateSampleHistory(read_delta);
+                return this.data;
+            }
+            else {
+                this.text = format.formatBytes(written_delta);
+                this.data = this.getLinearValue(written_delta, this.max_speed);
+                this.updateSampleHistory(written_delta);
+                return this.data;
+            }
+        }
+        catch (e) {
+            global.logError("Exception in getData():" + e.message);
+        }
+    }
+
+    getDiskLoad() {
+        try {
+            let device = new GUdev.Client().query_by_subsystem_and_name("block", this.device_name);
+            let stats_data = device.get_sysfs_attr_as_strv("stat");
+            let read = stats_data[2] * 512;
+            let written = stats_data[6] * 512;
+            return [read, written];
+        }
+        catch (e) {
+            global.logError("Exception in getDiskLoad(): " + e.message);
+        }
+    }
+
+    getLinearValue(value, max) {
+        if (max<=1 || value<=0)
+            return 0;
+
+        let tools = new Tools();
+        return tools.limit(value/max, 0, 1);
+    }
+
+    updateSampleHistory(delta) {
+        if (this.sample_history.length >= this.sample_size) {
+            this.sample_history.shift();
+        }
+        this.sample_history.push(delta);
+    }
+}
+
+// Class responsible for getting BAT (battery) data
+class BatteryProvider {
+	constructor() {
+        this.name = _("BAT");
+        this.type = "BAT";
+    }
+
+    getData() {
+        try {
+            var percent = 0;
+            var path = '/sys/class/power_supply/BAT0';
+            if ( GLib.file_test(path, GLib.FileTest.IS_DIR) ) {
+                // People, we have a power!!!
+
+                path = path + '/capacity';
+                let [success, array_chars] = GLib.file_get_contents(path);
+                if(!success) {
+                    global.logError("HWMONITOR : Failed to read battery status from file : " + path)
+                } else {
+                    let string = array_chars.toString().trim();
+                    percent = parseInt(string) / 100;    
+                }
+            }
+            this.text = ((percent)*100).toFixed(0) + "%";   // Set detailed text
+            let tools = new Tools();
+            return tools.limit(percent, 0, 1);              // Return percentage
+        }
+        catch (e) {
+            global.logError(e);
+            this.text = "0 %";
+            return 0;
+        }
+    }
+}
 
 class Tools {
     //https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-25 12:48+0800\n"
+"POT-Creation-Date: 2021-02-18 00:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:181
+#: applet.js:182
 msgid "Compose New Message..."
 msgstr ""
 
-#: applet.js:183
+#: applet.js:184
 msgid "Contacts"
 msgstr ""
 
-#. MessagingMenuV3@blub->metadata.json->description
-msgid "Messaging Menu applet now compatible with Cinnamon 2.4"
+#. metadata.json->name
+msgid "Messaging Menu"
 msgstr ""
 
-#. MessagingMenuV3@blub->metadata.json->name
-msgid "Messaging Menu V3"
+#. metadata.json->description
+msgid "Messaging Menu applet"
 msgstr ""

@@ -38,12 +38,16 @@ Graph.prototype = {
         this.drawBackground(cr);
 
         // Draw graph grid lines
-        this.drawGraphLines(cr);
+        if (this.theme.graph_line_mode=="graph")
+            this.drawGraphLines(cr);
 
         // Draw data points
         this.drawDataPoints(cr);
 
-        // Draw label
+        if (this.theme.graph_line_mode=="lines")
+            this.drawGraphLines(cr);
+
+            // Draw label
         this.drawLabel(cr);
 
         // Draw detail label
@@ -161,42 +165,50 @@ Graph.prototype = {
         let pattern = new Cairo.LinearGradient(0, this.graph.inner.top, 0, this.graph.inner.top + this.graph.inner.height);
         cr.setSource(pattern);
         if (this.theme.theme_data=="user")
-            pattern.addColorStopRGBA(0, this.theme.graph_color4[0], this.theme.graph_color4[1], this.theme.graph_color4[2], 1);
+            pattern.addColorStopRGBA(this.r(0), this.theme.graph_color4[0], this.theme.graph_color4[1], this.theme.graph_color4[2], 1);
         else if (this.theme.theme_data=="default")
-            pattern.addColorStopRGBA(0, 1, 0, 0, 1);
+            pattern.addColorStopRGBA(this.r(0), 1, 0, 0, 1);
         else if (this.theme.theme_data=="blue")
-            pattern.addColorStopRGBA(0, 0.730, 0.741, 0.714, 1);
+            pattern.addColorStopRGBA(this.r(0), 0.730, 0.741, 0.714, 1);
         else if (this.theme.theme_data=="gray")
-            pattern.addColorStopRGBA(0, 0.730, 0.741, 0.714, 1);
+            pattern.addColorStopRGBA(this.r(0), 0.730, 0.741, 0.714, 1);
 
         if (this.theme.theme_data=="user")
-            pattern.addColorStopRGBA(this.theme.graph_offset3, this.theme.graph_color3[0], this.theme.graph_color3[1], this.theme.graph_color3[2], 1);
+            pattern.addColorStopRGBA(this.r(this.theme.graph_offset3), this.theme.graph_color3[0], this.theme.graph_color3[1], this.theme.graph_color3[2], 1);
         else if (this.theme.theme_data=="default")
-            pattern.addColorStopRGBA(0.5, 1, 1, 0.2, 1);
+            pattern.addColorStopRGBA(this.r(0.5), 1, 1, 0.2, 1);
         else if (this.theme.theme_data=="blue")
-            pattern.addColorStopRGBA(0.3, 0.447, 0.624, 0.812, 1);
+            pattern.addColorStopRGBA(this.r(0.3), 0.447, 0.624, 0.812, 1);
         else if (this.theme.theme_data=="gray")
-            pattern.addColorStopRGBA(0.3, 0.533, 0.544, 0.521, 1);
+            pattern.addColorStopRGBA(this.r(0.3), 0.533, 0.544, 0.521, 1);
 
         if (this.theme.theme_data=="user")
-            pattern.addColorStopRGBA(this.theme.graph_offset2, this.theme.graph_color2[0], this.theme.graph_color2[1], this.theme.graph_color2[2], 1);
+            pattern.addColorStopRGBA(this.r(this.theme.graph_offset2), this.theme.graph_color2[0], this.theme.graph_color2[1], this.theme.graph_color2[2], 1);
         else if (this.theme.theme_data=="default")
-            pattern.addColorStopRGBA(0.7, 0.4, 1, 0.3, 1);
+            pattern.addColorStopRGBA(this.r(0.7), 0.4, 1, 0.3, 1);
         else if (this.theme.theme_data=="blue")
-            pattern.addColorStopRGBA(0.52, 0.204, 0.396, 0.643, 1);
+            pattern.addColorStopRGBA(this.r(0.52), 0.204, 0.396, 0.643, 1);
         else if (this.theme.theme_data=="gray")
-            pattern.addColorStopRGBA(0.52, 0.33, 0.34, 0.326, 1);
+            pattern.addColorStopRGBA(this.r(0.52), 0.33, 0.34, 0.326, 1);
 
         if (this.theme.theme_data=="user")
-            pattern.addColorStopRGBA(1, this.theme.graph_color1[0], this.theme.graph_color1[1], this.theme.graph_color1[2], 1);        
+            pattern.addColorStopRGBA(this.r(1), this.theme.graph_color1[0], this.theme.graph_color1[1], this.theme.graph_color1[2], 1);        
         else if (this.theme.theme_data=="default")
-            pattern.addColorStopRGBA(1, 0.2, 0.7, 1, 1);
+            pattern.addColorStopRGBA(this.r(1), 0.2, 0.7, 1, 1);
         else if (this.theme.theme_data=="blue")
-            pattern.addColorStopRGBA(0, 0.125, 0.29, 0.529, 1);
+            pattern.addColorStopRGBA(this.r(0), 0.125, 0.29, 0.529, 1);
         else if (this.theme.theme_data=="gray")
-            pattern.addColorStopRGBA(1, 0.18, 0.204, 0.212, 1);
+            pattern.addColorStopRGBA(this.r(1), 0.18, 0.204, 0.212, 1);
 
         cr.fill();
+    },
+
+    // Reverse the value for BAT graph
+    r: function(value) {
+        if (this.provider.type=="BAT") {
+            return 1-value;
+        }
+        return value;
     },
 
     // Draw the text label on the graph
@@ -221,6 +233,12 @@ Graph.prototype = {
             cr.showText(this.theme.netin_custom_label);
         else if (this.theme.netout_use_custom_label && this.provider.type == "NETOUT")
             cr.showText(this.theme.netout_custom_label);
+        else if (this.theme.diskread_use_custom_label && this.provider.type == "DISKREAD")
+            cr.showText(this.theme.diskread_custom_label);
+        else if (this.theme.diskwrite_use_custom_label && this.provider.type == "DISKWRITE")
+            cr.showText(this.theme.diskwrite_custom_label);
+        else if (this.theme.bat_use_custom_label && this.provider.type == "BAT")
+            cr.showText(this.theme.bat_custom_label);
         else
             cr.showText(this.provider.name);
 
@@ -243,6 +261,12 @@ Graph.prototype = {
             cr.showText(this.theme.netin_custom_label);
         else if (this.theme.netout_use_custom_label && this.provider.type == "NETOUT")
             cr.showText(this.theme.netout_custom_label);
+        else if (this.theme.diskread_use_custom_label && this.provider.type == "DISKREAD")
+            cr.showText(this.theme.diskread_custom_label);
+        else if (this.theme.diskwrite_use_custom_label && this.provider.type == "DISKWRITE")
+            cr.showText(this.theme.diskwrite_custom_label);
+        else if (this.theme.bat_use_custom_label && this.provider.type == "BAT")
+            cr.showText(this.theme.bat_custom_label);
         else
             cr.showText(this.provider.name);
     },

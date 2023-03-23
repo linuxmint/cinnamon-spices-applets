@@ -53,6 +53,8 @@ CPUTemperatureApplet.prototype = {
     this.settings.bindProperty(Settings.BindingDirection.IN, 'only-integer-part', 'onlyIntegerPart', () => this.on_settings_changed(), null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'show-unit', 'showUnit', () => this.on_settings_changed(), null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'show-unit-letter', 'showUnitLetter', () => this.on_settings_changed(), null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'show-label-prefix', 'showLabelPrefix', () => this.on_settings_changed(), null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'label-prefix', 'labelPrefix', () => this.on_settings_changed(), null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval');
     this.settings.bindProperty(Settings.BindingDirection.IN, 'change-color', 'changeColor', () => this.on_settings_changed(), null);
     this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, 'only-colors', 'onlyColors', () => this.on_settings_changed(), null);
@@ -253,6 +255,10 @@ CPUTemperatureApplet.prototype = {
           items.push(_('Critical Temperature') + ': ' + this._formatTemp(tempInfo.crit));
         }
       }
+    }
+
+    if (this.state.showLabelPrefix) {
+      this.title = "%s %s".format(this.state.labelPrefix, this.title);
     }
 
     if (this._applet_label.text !== this.title) {

@@ -122,7 +122,7 @@ FeedReader.prototype = {
 
         let path = DataPath + '/' + this.id;
         // Let the python script grab the items and load them using an async method
-        Util.spawn_async(['python', AppletPath + '/loadItems.py', path], Lang.bind(this, this.load_items));
+        Util.spawn_async(['python3', AppletPath + '/loadItems.py', path], Lang.bind(this, this.load_items));
     },
 
     get_url: function() {
@@ -131,7 +131,7 @@ FeedReader.prototype = {
 
     download_feed: function() {
         this.logger.debug("FeedReader.get");
-        Util.spawn_async(['python', AppletPath + '/getFeed.py', this.url], Lang.bind(this, this.process_feed));
+        Util.spawn_async(['python3', AppletPath + '/getFeed.py', this.url], Lang.bind(this, this.process_feed));
     },
 
     process_feed: function(response) {

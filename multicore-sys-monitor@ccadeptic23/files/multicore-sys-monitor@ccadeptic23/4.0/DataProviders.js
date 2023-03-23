@@ -28,8 +28,14 @@ const formatBytes = (bytes, decimals=2)=>{
   let k = 1000;
   let dm = decimals + 1 || 3;
   let sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-  let i = Math.min(Math.max(0, Math.floor(Math.log(bytes) / Math.log(k))), 8); 
-  let value = (bytes / Math.pow(k, i)).toPrecision(dm).toString();
+  let i = Math.min(Math.max(0, Math.floor(Math.log(bytes) / Math.log(k))), 8);
+  let value;
+  if (isNaN(i)) {
+    i = 0;
+    value = "0";
+  } else {
+    value = (bytes / Math.pow(k, i)).toPrecision(dm).toString();
+  }
   let parts = value.split('.');
   let dec_part = (parts.length === 2) ? '.' + parts[1].toString().padEnd(2, '0') : '.00';
   return parts[0].padStart(spaces/2 - 1) + dec_part.padEnd(spaces/2 - 1) + sizes[i].padStart(3, ' ') + rate;

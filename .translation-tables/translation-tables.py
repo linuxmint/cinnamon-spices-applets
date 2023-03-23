@@ -92,7 +92,7 @@ def str2html_href(link, text):
 
 def value2html_progress_image(percentage):
     """ Creates a HTML code snippet, which links to a progress bar image to a given percentage. """
-    return '<img src="http://progressed.io/bar/' + percentage + '" alt="' + percentage + '%" />'
+    return '<img src="https://progress-bar.dev/' + percentage + '" alt="' + percentage + '%" />'
 
 def progress(untranslated, translated):
     """ Calculates percentage for translation progress. """
@@ -112,17 +112,19 @@ def check_hidden_dirs():
     Creates hidden dirs `po` and `tables` if they don't exist,
     else removes deleted spices in those dirs.
     """
-    try:
-        os.makedirs(HIDDEN_PO_DIR)
+
+    if not os.path.isdir(TABLES_DIR):
         os.makedirs(TABLES_DIR)
-    except OSError:
-        #% remove tables for deleted spices
-        if os.path.isdir(HIDDEN_PO_DIR):
-            for uuid in os.listdir(HIDDEN_PO_DIR):
-                if not os.path.isdir(os.path.join(REPO_FOLDER, uuid)):
-                    shutil.rmtree(os.path.join(HIDDEN_PO_DIR, uuid))
-                    if os.path.isfile(os.path.join(TABLES_DIR, uuid + '.md')):
-                        os.remove(os.path.join(TABLES_DIR, uuid + '.md'))
+
+    #% remove tables for deleted spices
+    if os.path.isdir(HIDDEN_PO_DIR):
+        for uuid in os.listdir(HIDDEN_PO_DIR):
+            if not os.path.isdir(os.path.join(REPO_FOLDER, uuid)):
+                shutil.rmtree(os.path.join(HIDDEN_PO_DIR, uuid))
+                if os.path.isfile(os.path.join(TABLES_DIR, uuid + '.md')):
+                    os.remove(os.path.join(TABLES_DIR, uuid + '.md'))
+    else:
+        os.makedirs(HIDDEN_PO_DIR)
 
 def populate_translation_matrix():
     """ POPULATE TRANSLATION MATRIX """
@@ -134,8 +136,9 @@ def populate_translation_matrix():
     #% for UUID
     for uuid in os.listdir(REPO_FOLDER):
         #% show progressbar in terminal
-        prog_iter += 1
-        terminal_progressbar_update(prog_iter, prog_total)
+        if len(sys.argv) != 2 or sys.argv[1] != "--quiet":
+            prog_iter += 1
+            terminal_progressbar_update(prog_iter, prog_total)
 
         #% ignore files and hidden dirs
         if uuid.startswith('.') or not os.path.isdir(os.path.join(REPO_FOLDER, uuid)):
@@ -151,6 +154,10 @@ def populate_translation_matrix():
         for file in os.listdir(spices_po_dir):
             if file.endswith(".pot"):
                 pot_file_path = os.path.join(spices_po_dir, file)
+
+        if pot_file_path == None:
+            print("No potfile found for %s, skipping it." % uuid)
+            continue
 
         #% count number of translatable Strings in pot file
         pot_length = int(os.popen('grep "^msgid " ' + pot_file_path + ' | wc -l').read()) - 1

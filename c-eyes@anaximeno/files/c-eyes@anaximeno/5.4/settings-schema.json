@@ -1,0 +1,245 @@
+{
+	"layout": {
+		"type": "layout",
+		"pages": [
+			"eye",
+			"effects"
+		],
+		"eye": {
+			"type": "page",
+			"title": "Eye",
+			"sections": [
+				"eye-generic",
+				"eye-colors"
+			]
+		},
+		"effects": {
+			"type": "page",
+			"title": "Effects",
+			"sections": [
+				"click-generic",
+				"click-events",
+				"click-colors"
+			]
+		},
+		"eye-generic": {
+			"type": "section",
+			"title": "General",
+			"keys": [
+				"eye-mode",
+				"eye-line-width",
+				"eye-margin",
+				"eye-repaint-interval",
+				"deactivate-on-fullscreen",
+				"eye-activate-by-default"
+			]
+		},
+		"eye-colors": {
+			"type": "section",
+			"title": "Colors",
+			"keys": [
+				"eye-clicked-color",
+				"iris-clicked-color",
+				"pupil-clicked-color"
+			]
+		},
+		"click-generic": {
+			"type": "section",
+			"title": "General",
+			"keys": [
+				"mouse-click-enable",
+				"mouse-click-mode",
+				"mouse-click-image-size",
+				"click-animation-mode"
+			]
+		},
+		"click-events": {
+			"type": "section",
+			"title": "Events",
+			"keys": [
+				"mouse-left-click-enable",
+				"mouse-middle-click-enable",
+				"mouse-right-click-enable",
+				"fade-timeout"
+			],
+			"dependency": "mouse-click-enable"
+		},
+		"click-colors": {
+			"type": "section",
+			"title": "Colors",
+			"keys": [
+				"mouse-left-click-color",
+				"mouse-middle-click-color",
+				"mouse-right-click-color",
+				"mouse-click-opacity"
+			],
+			"dependency": "mouse-click-enable"
+		}
+	},
+	"eye-mode": {
+		"type": "combobox",
+		"default": "lids",
+		"description": "Mode",
+		"options": {
+			"Lids": "lids",
+			"Lids Filled": "lids-fill",
+			"Bulb": "bulb",
+			"Bulb Filled": "bulb-fill"
+		}
+	},
+	"eye-line-width": {
+		"type": "spinbutton",
+		"description": "Line Width",
+		"default": 2,
+		"min": 1,
+		"max": 5,
+		"step": 1,
+		"units": "px"
+	},
+	"eye-margin": {
+		"type": "spinbutton",
+		"default": 4,
+		"min": 1,
+		"max": 10,
+		"step": 1,
+		"units": "px",
+		"description": "Margin Size"
+	},
+	"eye-repaint-interval": {
+		"type": "spinbutton",
+		"default": 60,
+		"min": 5,
+		"max": 200,
+		"step": 5,
+		"units": "ms",
+		"description": "Repaint Interval"
+	},
+	"eye-activate-by-default": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Start Activated"
+	},
+	"deactivate-on-fullscreen": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Deactivate On Fullscreen"
+	},
+	"eye-clicked-color": {
+		"type": "colorchooser",
+		"default": "#0c75de",
+		"description": "Activated Base Color"
+	},
+	"iris-clicked-color": {
+		"type": "colorchooser",
+		"default": "#4077BF",
+		"description": "Activated Iris Color"
+	},
+	"pupil-clicked-color": {
+		"type": "colorchooser",
+		"default": "#40BEBF",
+		"description": "Activated Pupil Color"
+	},
+	"mouse-click-enable": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Enable Effects"
+	},
+	"mouse-click-mode": {
+		"type": "combobox",
+		"default": 1,
+		"description": "Icon Mode",
+		"options": {
+			"Simple": 1,
+			"Trigun": 2,
+			"Nublo": 3,
+			"Risco": 4,
+			"Wolf": 5,
+			"Pincel": 6,
+			"Claw": 7,
+			"Metropoli": 8,
+			"Flowey": 9,
+			"Kusco": 10,
+			"Ouroboros": 11,
+			"Helix": 12,
+			"Direction": 13,
+			"Spinks": 14,
+			"Thatch": 15,
+			"Cotton": 16,
+			"Circle": 17,
+			"Gear": 18
+		},
+		"dependency": "mouse-click-enable"
+	},
+	"mouse-click-image-size": {
+		"type": "spinbutton",
+		"default": 60,
+		"min": 20,
+		"max": 120,
+		"step": 5,
+		"units": "px",
+		"description": "Icon Size",
+		"dependency": "mouse-click-enable"
+	},
+	"click-animation-mode": {
+		"type": "combobox",
+		"default": "blink",
+		"description": "Click Animation Mode",
+		"options": {
+			"Blink": "blink",
+			"Bounce Back": "bounce-back",
+			"Retract": "retract",
+			"Expand": "expand"
+		},
+		"dependency": "mouse-click-enable"
+	},
+	"mouse-left-click-enable": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Enable Left Click"
+	},
+	"mouse-middle-click-enable": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Enable Middle Click"
+	},
+	"mouse-right-click-enable": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Enable Right Click"
+	},
+	"fade-timeout": {
+		"type": "spinbutton",
+		"default": 400,
+		"min": 100,
+		"max": 5000,
+		"step": 100,
+		"units": "ms",
+		"description": "Fade Timeout"
+	},
+	"mouse-left-click-color": {
+		"type": "colorchooser",
+		"default": "#0c75de",
+		"description": "Left Click Color",
+		"dependency": "mouse-left-click-enable"
+	},
+	"mouse-middle-click-color": {
+		"type": "colorchooser",
+		"default": "#40BEBF",
+		"description": "Middle Click Color",
+		"dependency": "mouse-middle-click-enable"
+	},
+	"mouse-right-click-color": {
+		"type": "colorchooser",
+		"default": "#4077BF",
+		"description": "Right Click Color",
+		"dependency": "mouse-right-click-enable"
+	},
+	"mouse-click-opacity": {
+		"type": "spinbutton",
+		"description": "General Opacity",
+		"default": 255,
+		"min": 5,
+		"max": 255,
+		"step": 5
+	}
+}

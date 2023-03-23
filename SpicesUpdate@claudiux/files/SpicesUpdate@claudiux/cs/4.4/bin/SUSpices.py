@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 try:
+    import gettext
     from gi.repository import GLib
     import tempfile
     import os
@@ -12,6 +13,9 @@ try:
 except Exception as detail:
     print(detail)
     sys.exit(1)
+
+# i18n
+gettext.install("cinnamon", "/usr/share/locale", names=["ngettext"])
 
 from http.client import HTTPSConnection
 from urllib.parse import urlparse

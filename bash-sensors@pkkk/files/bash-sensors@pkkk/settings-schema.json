@@ -32,7 +32,7 @@
 		"type": "entry",
 		"default": "echo 'hello, cinnamon!'",
 		"description": "Command 1",
-		"tooltip": "first line of output (use \f for more lines)"
+		"tooltip": "first line of output (use \\f for more lines)"
 	},
 	"enableScript2": {
 		"type": "checkbox",
@@ -90,5 +90,14 @@
 		"type": "checkbox",
 		"default": true,
 		"description": "Display output of menu command"
+	},
+	"head5": {
+		"type": "header",
+		"description": "Command on start-up"
+	},
+	"startupScript": {
+		"type": "entry",
+		"default": "",
+		"description": "Command run at start-up"
 	}
 }

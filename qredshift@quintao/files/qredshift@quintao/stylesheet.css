@@ -53,3 +53,8 @@
 .q-text-smaller {
     font-size: 0.9em;
 }
+
+
+.hide {
+    height: 40px;
+}

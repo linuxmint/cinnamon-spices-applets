@@ -1,3 +1,75 @@
+### v6.4.1~20230309
+  * Now compatible with openSUSE.
+
+### v6.4.0~20230217
+  * Avoid to be blocked by the spices server.
+  * Add 5.6 branch.
+
+### v6.3.1~20201026
+  * Adapting SpicesUpdate@claudiux to [cinnamon/9664](https://github.com/linuxmint/cinnamon/pull/9664#event-3912970920).
+
+### v6.3.0~20201022
+  * Tooltip content: Now filtered and formatted. Some information is displayed in bold, others in italics.
+  * Settings (General tab): Possibility to define a maximum width for the content of the tooltip (in % of the screen width).
+  * Badge: Size and location changed. Now the size of this applet remains constant, with or without its badge.
+  * Network monitoring: Now continue to check for updates even if network has changed (VPN).
+  * Some optimizations.
+
+### v6.2.0~20201012
+  * Improvements (for Cinnamon 4.6 only):
+    * Settings: Changing the position of the Refresh button. Remove the buttons below the lists (for future Cinnamon).
+    * Tooltip: Some information is displayed in bold.
+    * Notifications: Some information is displayed in bold.
+    * Animation: Adding linear effect.
+
+### v6.1.0~20201011
+  * Fix issue #3253
+
+### v6.1.0~20201010
+  * For Cinnamon 4.6 only:
+    * Now detects when the Cinnamon server is down.
+    * Bug fixes.
+    * No longer displays "Spices Update" or "SpU" next to or below the icon.
+
+### v6.0.2~20200811
+  * Remove all notifications when reloading this applet.
+  * Menu shows the "reload this applet" option when a RELOAD file exists at the root of this applet.
+
+### v6.0.1~20200806
+
+"Weight" reduction of this applet: the `Symbola` font is no longer included in its package; it was only used for Arch and the `install_symbola_on_Arch.sh` script was modified to download it if needed.
+
+### v6.0.0~20200729
+
+Many improvements, only for Cinnamon 4.2 and following.
+
+  * Spices Update automatically adapts the verification or not of each type of Spices (for example: it does not check the themes if no theme is installed; it checks them as soon as at least one theme is installed). However, the user is always free to decide, in settings, what should be done.
+
+  * Checking for new Spices is now disabled by default.
+
+  * New option in General Settings: "Show the 'Update All' button in notifications" (with buttons). For example, clicking on this button in a notification for available Themes updates:
+    1. opens the Download tab of System Settings about Themes,
+    2. refreshes the cache about Themes,
+    3. downloads and install all latest updates for your Themes.
+    4. When all updates are made, just close yourself this System Settings window.
+
+  * New button 'Forget' in notifications about new Spices.
+  * The applet icon now rotates during the entire refresh process.
+  * Displays a notification asking the user to check the applet settings, if this is the first installation of this version of Spices Updates. This notification only appears once.
+  * Better management of notifications. Spices Update does not use notify-send anymore.
+  * Help button (in menu) shows in the browser by default an approximate translation of the web page: https://cinnamon-spices.linuxmint.com/applets/view/309
+
+### v5.4.2~20200615
+  * Bug fixes
+
+### v5.4.1~20200613
+  * Code cleanup
+  * Now displays the badge showing the number of updates only after all checks have been completed.
+
+### v5.4.0~20200608
+  * Now compatible with Cinnamon 4.6.
+  * Fixes #2927, #2972, #3020.
+
 ### v5.3.0~20200209
   * Cinnamon 4.2 & 4.4: Direct access from the Spices Update menu to each tab of settings (General, Applets, Desklets, Extensions, Themes) via the Configure sub menu.
 

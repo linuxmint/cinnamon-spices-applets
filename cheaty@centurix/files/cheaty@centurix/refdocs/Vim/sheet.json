@@ -1,0 +1,201 @@
+{
+	"name": "Vim",
+	"description": "Vim Cheatsheet",
+	"author": "Gabisonfire",
+	"email": "gabisonfire@gmail.com",
+	"repository": "https://github.com/Gabisonfire",
+	"version": "1.0",
+	"sections": {
+		"Global": {
+			"open help for keyword": {
+				"description": "open help for keyword",
+				"code": ":h[elp] keyword"
+			},
+			"save file as": {
+				"description": "save file as",
+				"code": ":sav[eas] file"
+            },
+            "close current pane": {
+				"description": "close current pane",
+				"code": ":clo[se]"
+            },
+            "open a terminal window": {
+				"description": "open a terminal window",
+				"code": ":ter[minal]"
+            },
+            "open man page for word under the cursor": {
+				"description": "open man page for word under the cursor",
+				"code": "K"
+            }
+		},
+		"Editing": {            
+			"replace a single character": {
+				"description": "replace a single character",
+				"code": "r"
+			},
+			"join line below to the current one with one space in between": {
+				"description": "join line below to the current one with one space in between",
+				"code": "J"
+            },
+            "join line below to the current one without space in between": {
+				"description": "join line below to the current one without space in between",
+				"code": "gJ"
+            },
+            "change (replace) entire line": {
+				"description": "change (replace) entire line",
+				"code": "cc or S"
+            },
+            "change (replace) to the end of the line": {
+				"description": "change (replace) to the end of the line",
+				"code": "C"
+            },
+            "delete character and substitute text": {
+				"description": "delete character and substitute text",
+				"code": "s"
+            },
+            "undo": {
+				"description": "undor",
+				"code": "u"
+            },
+            "restore (undo) last changed line": {
+				"description": "restore (undo) last changed line",
+				"code": "U"
+            },
+            "redo": {
+				"description": "redo",
+				"code": "Ctrl + r"
+            },
+            "repeat last command": {
+				"description": "repeat last command",
+				"code": "."
+            }
+        },
+        "Cut and paste": {
+            "yank (copy) a line": {
+				"description": "yank (copy) a line",
+				"code": "yy"
+            },
+            "yank (copy) current word": {
+				"description": "yank (copy) current word",
+				"code": "yw"
+            },
+            "yank (copy) to end of line": {
+				"description": "yank (copy) to end of line",
+				"code": "y$"            },
+            "put (paste) the clipboard": {
+				"description": "put (paste) the clipboard",
+				"code": "after cursor-> p, before cursor-> P"
+            },
+            "delete (cut) a line": {
+				"description": "delete (cut) a line",
+				"code": "dd"
+            },
+            "delete (cut) current word": {
+				"description": "delete (cut) current word",
+				"code": "dw"
+            },
+            "delete (cut) to the end of the line": {
+				"description": "delete (cut) to the end of the line",
+				"code": "D"
+            },
+            "delete (cut) character": {
+				"description": "delete (cut) character",
+				"code": "x"
+            }
+        },
+        "Indentation": {
+            "indent/deindent line one shiftwidth": {
+				"description": "indent/deindent line one shiftwidth",
+				"code": ">> and <<"
+            },
+            "indent a block with () or {} (cursor on brace)": {
+				"description": "indent a block with () or {} (cursor on brace)",
+				"code": ">%"
+            },
+            "indent inner block with ()": {
+				"description": "indent inner block with ()",
+				"code": ">ib"
+            },
+            "indent a block with <> tags": {
+				"description": "indent a block with <> tags",
+				"code": ">at"
+            },
+            "re-indent entire buffer": {
+				"description": "re-indent entire buffer",
+				"code": "gg=G"
+            },
+            "paste and adjust indent to current line": {
+				"description": "paste and adjust indent to current line",
+				"code": "]p"
+            }
+        },
+        "Cursor Movement": {
+            "move to top of screen": {
+				"description": "move to top of screen",
+				"code": "H"
+            },
+            "move to middle of screen": {
+				"description": "move to middle of screen",
+				"code": "M"
+            },
+            "move to bottom of screen": {
+				"description": "move to bottom of screen",
+				"code": "L"
+            },
+            "jump forwards to the start of a word": {
+				"description": "jump forwards to the start of a word",
+				"code": "w"
+            },
+            "jump forwards to the end of a word": {
+				"description": "jump forwards to the end of a word",
+				"code": "e"
+            },
+            "jump backwards to the start of a word": {
+				"description": "jump backwards to the start of a word",
+				"code": "b"
+            },
+            "jump to the start of the line": {
+				"description": "jump to the start of the line",
+				"code": "0"
+            },
+            "jump to the first non-blank character of the line": {
+				"description": "jump to the first non-blank character of the line",
+				"code": "^"
+            },
+            "jump to the end of the line": {
+				"description": "jump to the end of the line",
+				"code": "$"
+            },
+            "go to the first line of the document": {
+				"description": "go to the first line of the document",
+				"code": "gg"
+            },
+            "go to the last line of the document": {
+				"description": "go to the last line of the document",
+				"code": "G"
+            },
+            "jump to next occurrence of character x": {
+				"description": "jump to next occurrence of character x",
+				"code": "fx"
+            },
+            "repeat previous f, t, F or T movement": {
+				"description": "repeat previous f, t, F or T movement",
+				"code": ";"
+            },
+            "repeat previous f, t, F or T movement, backwards": {
+				"description": "repeat previous f, t, F or T movement, backwards",
+				"code": ","
+            },
+            "jump to next/previous paragraph": {
+				"description": "jump to next/previous paragraph",
+				"code": "} and {"
+            }
+		},
+		"Exiting": {
+            "Save and quit": {
+				"description": "Save and quit",
+				"code": "ZZ"
+			}
+		}
+	}
+}

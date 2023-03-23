@@ -4,7 +4,7 @@ It is a fork of ```localip@mrieracrespi``` but it offers a way to select what IP
 
 With this applet you will be able to display your IPs according to some filters.
 
-![display](../../screenshot.png)
+![display](./screenshot.png)
 
 As you can see, you are able to specify the refresh interval.
 You can also choose if you want IPv4, IPv6 (or both) and you can list the interfaces the applet should use to ind the IPs.

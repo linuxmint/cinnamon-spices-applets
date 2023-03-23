@@ -6,7 +6,7 @@ This handy applet uses the python-zbar library to fully support scanning QR code
 
 You will need to
 ```
-sudo apt-get install python-zbar
+sudo apt-get install python3-zbar
 ```
 for scanning functionality to work but that's ALL you'll need to do.
 

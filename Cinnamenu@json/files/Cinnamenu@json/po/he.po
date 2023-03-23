@@ -1,0 +1,569 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-26 13:29+0200\n"
+"PO-Revision-Date: 2022-01-29 11:35+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: Avi Markovitz <avi.markovitz@gmail.com>\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
+"2 : 3);\n"
+"Language: he\n"
+
+msgid "Initializing"
+msgstr "איתחול"
+
+msgid "Find files..."
+msgstr "חיפוש קבצים..."
+
+msgid "Please wait..."
+msgstr "נא להמתין..."
+
+msgid "No recent Items"
+msgstr "אין פריטים אחרונים"
+
+msgid "Click to copy"
+msgstr "הקשה להעתקה"
+
+msgid "Clear List"
+msgstr "ניקוי רשימה"
+
+msgid "Trash"
+msgstr "סל־המחזור"
+
+msgid "All applications"
+msgstr "כול היישומונים"
+
+msgid "Favorites"
+msgstr "מועדפים"
+
+msgid "Places"
+msgstr "מקומות"
+
+msgid "Recent"
+msgstr "אחרונים"
+
+msgid "Favorite apps"
+msgstr "יישומונים מועדפים"
+
+msgid "Home folder"
+msgstr "תיקיית הבית"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "רשומות רבות מדי – הצגת 1,000 הרשומות הראשונות"
+
+msgid "Quit"
+msgstr "יציאה"
+
+msgid "Shutdown the computer"
+msgstr "כיבוי מחשב זה"
+
+msgid "Logout"
+msgstr "התנתקות"
+
+msgid "Leave the session"
+msgstr "עזיבת אדגם"
+
+msgid "Lock screen"
+msgstr "נעילת צג"
+
+msgid "Lock the screen"
+msgstr "נעילת הצג"
+
+msgid "Reset category order"
+msgstr "שיצוב סדר סוגי־אב"
+
+msgid "light skin tone"
+msgstr "גוון מעטפת בהיר"
+
+msgid "medium-light skin tone"
+msgstr "גוון מעטפת בהיר למחצה"
+
+msgid "medium skin tone"
+msgstr "גוון מעטפת בינוני"
+
+msgid "medium-dark skin tone"
+msgstr "גוון מעטפת כהה למחצה"
+
+msgid "dark skin tone"
+msgstr "גוון מעטפת כהה"
+
+msgid "Run with NVIDIA GPU"
+msgstr "הרצה באמצעות NVIDIA GPU"
+
+msgid "Add to panel"
+msgstr "הוספה ללוחית"
+
+msgid "Add to desktop"
+msgstr "הוספה לשולחן העבודה"
+
+msgid "Remove from favorites"
+msgstr "הסרה מהמועדפים"
+
+msgid "Add to favorites"
+msgstr "הוספה למועדפים"
+
+msgid "Uninstall"
+msgstr "הסרת התקנה"
+
+msgid "This file is no longer available"
+msgstr "הקובץ אינו זמין עוד"
+
+msgid "Open with"
+msgstr "פתיחה באמצעות"
+
+msgid "Other application..."
+msgstr "יישום אחר..."
+
+msgid "Open containing folder"
+msgstr "פתח תיקיה מכילה"
+
+msgid "Move to trash"
+msgstr "העברה לסל־המיחזור"
+
+msgid "Error while moving file to trash:"
+msgstr "שגיאה בעת העברת קובץ לסל־המיחזור:"
+
+msgid "Error while opening file:"
+msgstr "שגיאה בעת פתיחת קובץ:"
+
+msgid "Type to search..."
+msgstr "לחיפוש, נא להקליד..."
+
+msgid "No description available"
+msgstr "תיאור לא זמין"
+
+msgid "Recent files"
+msgstr "קבצים אחרונים"
+
+msgid "Bookmarks"
+msgstr "סימניות"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "לסימניות פיירפוקס ומידורי, נדרשת חבלית gir1.2-gda-5.0."
+
+msgid "No recent files"
+msgstr "אין קבצים אחרונים"
+
+msgid "Account details"
+msgstr "פרטי חשבון"
+
+msgid "Grid View"
+msgstr "מצג שבכה"
+
+msgid "List View"
+msgstr "מצג רצימה"
+
+msgid "Switch to grid view"
+msgstr "החלפה למצג שְׂבָכָה"
+
+msgid "Switch to list view"
+msgstr "החלפה למצג רשימה"
+
+msgid "Home"
+msgstr "בית"
+
+msgid "Computer"
+msgstr "מחשב"
+
+msgid "Browse network"
+msgstr "דפדוף ברשת"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr "פריט התפריט אינו משויך לחבילה כול שהיא. האם להסירו מהתפריט?"
+
+msgid "The following packages will be removed:"
+msgstr "החבילות הבאות יוסרו:"
+
+msgid "Packages to be removed"
+msgstr "חבילות להסרה"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "לא ניתן להסיר את חבילת %s מאחר נדרשת עבור חבילה אחרת."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "חבילה %s תלויה בחבילות הבאות:"
+
+msgid "Open"
+msgstr "פתיחה"
+
+msgid "Search"
+msgstr "חיפוש"
+
+msgid "Start in"
+msgstr "התחלה ב־"
+
+msgid "Select a folder"
+msgstr "בחירת מחיצה"
+
+msgid "Follow symlinks"
+msgstr "עקיבה אחר קישורים סימליים"
+
+msgid "Search hidden"
+msgstr "חיפוש מוסתר"
+
+msgid "Use regular expressions"
+msgstr "שימוש בביטוים רגילים"
+
+msgid "Stop"
+msgstr "עצירה"
+
+msgid "File"
+msgstr "קובץ"
+
+msgid "Path"
+msgstr "נתיב"
+
+msgid "Searching..."
+msgstr "חיפוש…"
+
+msgid "Search Stopped"
+msgstr "חיפוש עצר"
+
+msgid "Searching: "
+msgstr "חיפוש: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "שגיאה: אין הרשאות מספקות לקריאת תיקייה "
+
+msgid "Search Completed"
+msgstr "החיפוש הושלם"
+
+msgid "Skipping"
+msgstr "דילוג"
+
+msgid " - directory already searched"
+msgstr " - המחיצה נסרקה כבר"
+
+msgid "Cinnamenu"
+msgstr "סינמנו"
+
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr "תפריט גמיש, בפריסת שבכה או רשימה, דפדפן קבצים וחיפוש סמלונים."
+
+msgid "Layout and Content"
+msgstr "פריסה ותוכן"
+
+msgid "Behavior"
+msgstr "התנהגות"
+
+msgid "Appearance"
+msgstr "חזות"
+
+msgid "Layout"
+msgstr "פריסה"
+
+msgid "Content"
+msgstr "תוכן"
+
+msgid "Panel"
+msgstr "לוחית"
+
+msgid "Menu"
+msgstr "תפריט"
+
+msgid "Applications view mode"
+msgstr "מצב מצג יישומונים"
+
+msgid "List"
+msgstr "רשימה"
+
+msgid "Grid"
+msgstr "שְׂבָכָה"
+
+msgid "View applications as list or grid"
+msgstr "מצג יישומונים כרשימה או שבכה"
+
+msgid "Application description placement"
+msgstr "מיקום תיאור יישומון"
+
+msgid "Tooltips"
+msgstr "רמז־צץ"
+
+msgid "Under titles"
+msgstr "בתחתית הכותרת"
+
+msgid "None"
+msgstr "ללא"
+
+msgid "Choose where to show application descriptions"
+msgstr "נא לבחור היכן להציג את תיאורי היישומונים"
+
+msgid "Sidebar location"
+msgstr "מיקום סרגל צד"
+
+msgid "Top"
+msgstr "מעלה"
+
+msgid "Bottom"
+msgstr "מטה"
+
+msgid "Left"
+msgstr "שמאלה"
+
+msgid "Right"
+msgstr "ימינה"
+
+msgid "Choose where to show the sidebar"
+msgstr "נא לבחור היכן להציג את סרגל־הצד"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"מידע/עצה: לשינוי גודל התפריט, נא לגרור את קצוותיו.\n"
+
+msgid "Show favorites on sidebar"
+msgstr "הצגת מועדפים בסרגל־הצד"
+
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "הצגת יישום מועדף וסמלי קובץ בסרגל־הצד"
+
+msgid "Show bookmarks and places"
+msgstr "הצגת סימניות ומקומות"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "הצגת סימניות וסוג־אב מקומות בתפריט"
+
+msgid "Show recent items"
+msgstr "הצגת פריטים אחרונים"
+
+msgid "Show recent items category in the menu"
+msgstr "הצגת סוג־אב 'פריטים אחרונים' בתפריט"
+
+msgid "Show favorite apps category"
+msgstr "הצגת סוג־אב יישומונים מועדפים"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "הצגת סוג־אב 'יישומונים מועדפים' בתפריט"
+
+msgid "Show home folder"
+msgstr "הצגת תיקיית הבית"
+
+msgid "Show home folder category in the menu"
+msgstr "הצגת סוג־אב 'תקיית הבית' בתפריט"
+
+msgid "Open the menu editor"
+msgstr "פתיחת עורך התפריט"
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "קיצור מקלדת לפתיחת וסגירת התפריט"
+
+msgid "Open menu on hover"
+msgstr "פתיחת התפריט בעת ריחוף"
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "פתיחת התפריט עם מעבר סמן העכבר מעל לסמל החלונית"
+
+msgid "milliseconds"
+msgstr "מילי־שניות"
+
+msgid "Menu hover delay"
+msgstr "השהיית ריחוף-מעל תפריט"
+
+msgid "Use menu animations"
+msgstr "שימוש בהנפשות תפריט"
+
+msgid "Animate the menu on open and close"
+msgstr "הנפשת התפריט בפתיחתו וסגירתו"
+
+msgid "Activate categories on click"
+msgstr "שפעול סוג־אב בעת הקשה"
+
+msgid "Activate categories on click instead of on hover"
+msgstr "שפעול סוגי־אב בעת הקשה במקום בריחוף מעל"
+
+msgid "Open menu on category:"
+msgstr "פתיחת תפריט בוסג־אב:"
+
+msgid "Always open the menu with this category selected"
+msgstr "לפתוח את התפריט תמיד בסוג־אב זה"
+
+msgid "Last used category"
+msgstr "סוג־אב אחרון בשימוש"
+
+msgid "Enable autoscrolling"
+msgstr "אפשור אוטומטי"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "גלילה אוטומטית של רשימת היישומונים בעת ריחוף עכבר"
+
+msgid "Show hidden files"
+msgstr "הצגת קבצים מוסתרים"
+
+msgid "Show hidden files in folder view"
+msgstr "הצגת קבצים מוסתרים, במצג תיקייה"
+
+msgid "Emoji search"
+msgstr "חיפוש סִמְלוֹן"
+
+msgid "Show emojis in search results"
+msgstr "הצגת סמלונים בתוצאות חיפוש"
+
+msgid "Web search option"
+msgstr "אפשרות חיפוש מרשתת"
+
+msgid "Show an internet search option in search results"
+msgstr "הצגת אפשרות חיפוש מרשתת בתוצאות החיפוש"
+
+msgid "Search home folder"
+msgstr "חיפוש תיקיית הבית"
+
+msgid "When searching, also search my home folder for files"
+msgstr "בעת חיפוש, לחפש קבצים  גם ב'תיקיית הבית'"
+
+msgid "Web bookmarks search"
+msgstr "חיפוש בסימניות רשת"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"בעת חיפוש, לחפש גם בסימניות המרשתת של הדפדפן שלי (גוגל כרום, פיירפוקס, "
+"כרומיום, אופרה, ויולדי, ברייב)\n"
+"הערה: לחיפוש בסימניות פיירפוקס, נדרש להתקין את חבילת gir1.2-gda-5.0 "
+"(הפצות מבוססות דביאן, לרבות, אובונטו ולינוקס מינט) או את חבילת libgda "
+"(הפצות מבוססות ארק לינוקס) ולאתחל את המחשב."
+
+msgid "Wikipedia search"
+msgstr "חיפוש בויקיפדיה"
+
+msgid "Show some Wikipedia results"
+msgstr "הצגת תוצאות ויקיפדיה"
+
+msgid "Wikipedia language"
+msgstr "שפת ויקיפדיה"
+
+msgid "Use a custom icon"
+msgstr "שימוש בסמל מותאמים אישית"
+
+msgid "Use a custom icon in the panel"
+msgstr "שימוש בסמל מותאמים אישית, בלוחית"
+
+msgid "Panel icon"
+msgstr "סמל לוחית"
+
+msgid "Use a custom icon size"
+msgstr "שימוש בגודל סמל מותאמים אישית"
+
+msgid "Use a custom size for the panel icon"
+msgstr "שימוש בגודל מותאמים אישית לסמל הלוחית"
+
+msgid "Panel icon size (pixels)"
+msgstr "גודל סמל לוחית (פיקסלים)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "בחירת גודל מותאמים אישית לסמל הלוחית"
+
+msgid "Panel text"
+msgstr "מלל לוחית"
+
+msgid "Text to show beside the panel icon"
+msgstr "מלל להצגה לצד סמל הלוחית"
+
+msgid "Category icon size (pixels)"
+msgstr "גודל סמל סוג־אב (פיקסלים)"
+
+msgid "Applications list icon size (pixels)"
+msgstr "גודל סמל רשימת יישומונים (פיקסלים)"
+
+msgid "Applications grid icon size (pixels)"
+msgstr "גודל סמל שבכת יישומונים (פיקסלים)"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "גודל סמל סרגל־צד (פיקסלים)"
+
+msgid "Use sidebar box style"
+msgstr "שימוש בסרגל־צד בסגנון קופסא"
+
+msgid "Use a sidebar box style"
+msgstr "שימוש בסרגל־צד בסגנון קופסא"
+
+msgid "Use tile style"
+msgstr "שימוש בסגנון אריח"
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"שימוש בסגנון אריח בלחצני היישום (הערה: עלול שלא לפעל בערכות־נושא מסוימות)"
+
+msgid "Search Providers"
+msgstr "ספקי־חיפוש"
+
+msgid "No search provider extensions found"
+msgstr "לא נמצאו הרחבות ספק־חיפוש"
+
+msgid "Recent files settings"
+msgstr "הגדרות קבצים אחרונים"
+
+msgid "Enable autoscrolling in application list"
+msgstr "אפשור גלילה אוטומטית ברשימת היישומונים"
+
+msgid "Show web bookmarks"
+msgstr "הצגת סימניות רשת"
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"הצגת סימניות דפדפן המרשתת בתפריט.\n"
+"הערה: נא להתקין את החבילת gir1.2-gda-5.0 לקריאת סימניות פיירפוקס."
+
+msgid "Enable searching of open windows"
+msgstr "אפשור חיפוש חלונות פתוחים"
+
+msgid "Enable search providers"
+msgstr "אפשור ספקי־חיפוש"
+
+msgid "Include search provider results in searches"
+msgstr "הכללת תוצאות ספקי־חיפוש בחיפושים"
+
+msgid "Example Search Providers"
+msgstr "דוגמת ספקי־חיפוש"
+
+msgid "columns"
+msgstr "עמודות"
+
+msgid "Number of columns in apps grid"
+msgstr "מספר עמודות בשבכת היישומונים"
+
+msgid "Show application icons"
+msgstr "הצגת סמלי יישומונים"
+
+msgid "Show category icons"
+msgstr "הצגת סמלי סוגי־אב"
+
+msgid "Show application descriptions under titles"
+msgstr "הצגת תיאור יישומון מתחת לכותרת"
+
+msgid "Show tooltips"
+msgstr "הצגת רמז־צץ"
+
+msgid "Tooltip delay"
+msgstr "השהיית רמז־צץ"
+
+msgid "Use a custom menu height"
+msgstr "שימוש בגובה תפריט מותאם אישית"
+
+msgid "Custom menu height (pixels)"
+msgstr "גובה תפריט מותאם אישית (פיקסלים)"

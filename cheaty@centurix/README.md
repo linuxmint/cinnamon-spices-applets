@@ -10,7 +10,7 @@ when the menu item is clicked.
 
 ### What's here at the moment? ###
 
-Currently, there are 5 cheatsheets that come with Cheaty: Git, Twitter Bootstrap, Markdown, HTTP Status Codes and SQL.
+Currently available cheatsheets bundled with Cheaty: Regex, Docker, Git, Twitter Bootstrap, Markdown, HTTP Status Codes, Bash, Tmux, Vim and SQL.
 
 ### Can I add my own cheat sheet or maybe contribute cheat sheets to this applet? ###
 

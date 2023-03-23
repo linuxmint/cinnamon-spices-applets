@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-23 19:47+0200\n"
+"POT-Creation-Date: 2021-05-03 19:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,7 +56,7 @@ msgstr ""
 #: applet.js:186
 msgid ""
 "Failed accessing WireGuard configs directory, please make sure it is accessible\n"
-"sudo chmod o+r /etc/wireguard"
+"sudo chmod o+r /etc/wireguard or sudo setfacl -m u:$username:rx /etc/wireguard"
 msgstr ""
 
 #: applet.js:219

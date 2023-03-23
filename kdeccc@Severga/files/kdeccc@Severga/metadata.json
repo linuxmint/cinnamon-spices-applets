@@ -1,0 +1,6 @@
+{
+    "uuid": "kdeccc@Severga",
+    "name": "KDE Connect Control Center",
+    "description": "Applet to provide access to some KDE Connect functionality",
+    "hide-configuration": true
+}

@@ -26,4 +26,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## API Usage
 
-Using [CryptoCompare](https://www.cryptocompare.com) api with one lookup per 5 seconds 
+Using [CryptoCompare](https://www.cryptocompare.com) api with one lookup per 5 minutes 

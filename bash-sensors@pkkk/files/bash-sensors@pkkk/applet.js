@@ -43,7 +43,13 @@ MyApplet.prototype = {
             this.wait_for_label_cmd = [false, false];
             this.wait_for_icon_cmd = false;
             this.wait_for_tooltip_cmd = false;
+            this.wait_for_startup_cmd = false;
             this.labels = ['', '',]
+
+            if (this.startupScript && this.startupScript.trim()) {
+                this.wait_for_startup_cmd = true;
+                Util.spawn_async([this.shell, '-c', this.startupScript], Lang.bind(this, this.update_started));
+            }
             this.autoupdate();
 
             item.addActor(this.menuLabel);
@@ -125,6 +131,10 @@ MyApplet.prototype = {
         this.wait_for_tooltip_cmd = false;
     },
 
+    update_started: function (cmd_output) {
+        this.wait_for_startup_cmd = false;
+    },
+
     update: function () {
         if (this.dynamicTooltip) {
             if (!this.wait_for_tooltip_cmd) {
@@ -160,7 +170,11 @@ MyApplet.prototype = {
     },
 
     autoupdate: function () {
+        // Wait for startup command to finish
+        if (!this.wait_for_startup_cmd) {
         this.update();
+        }
+
         if (this.refreshInterval) {
             Mainloop.timeout_add_seconds(this.refreshInterval, Lang.bind(this, this.autoupdate));
         }
@@ -171,7 +185,8 @@ MyApplet.prototype = {
                          "script1", "enableScript2", "script2",
                          "dynamicIcon", "iconScript",
                          "dynamicTooltip", "tooltipScript",
-                         "menuScript", "menuScriptDisplay"]) {
+                         "menuScript", "menuScriptDisplay",
+                         "startupScript"]) {
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 str,
                 str,

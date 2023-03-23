@@ -1,0 +1,694 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-29 19:16+0100\n"
+"PO-Revision-Date: 2022-11-29 13:56-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+msgid "Type to search..."
+msgstr "Escriba para buscar..."
+
+msgid "Initializing"
+msgstr "Inicializando"
+
+msgid "No description available"
+msgstr "Descripción no disponible"
+
+msgid "All applications"
+msgstr "Todas las aplicaciones"
+
+msgid "Places"
+msgstr "Lugares"
+
+msgid "Recent files"
+msgstr "Archivos recientes"
+
+msgid "Bookmarks"
+msgstr "Marcadores"
+
+msgid "Favorite apps"
+msgstr "Aplicaciones favoritas"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr ""
+"el paquete gir1.2-gda-5.0 es necesario para los marcadores de Firefox y "
+"Midori."
+
+msgid "Clear List"
+msgstr "Vaciar lista"
+
+msgid "No recent files"
+msgstr "No hay archivos recientes"
+
+msgid "Account details"
+msgstr "Detalles de la cuenta"
+
+msgid "Grid View"
+msgstr "Vista de cuadrícula"
+
+msgid "List View"
+msgstr "Vista de lista"
+
+msgid "Switch to grid view"
+msgstr "Cambiar a la vista de cuadrícula"
+
+msgid "Switch to list view"
+msgstr "Cambiar a la vista de lista"
+
+msgid "Lock screen"
+msgstr "Bloquear pantalla"
+
+msgid "Lock the screen"
+msgstr "Bloquea la pantalla"
+
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+msgid "Leave the session"
+msgstr "Cierra la sesión"
+
+msgid "Quit"
+msgstr "Apagar"
+
+msgid "Shutdown the computer"
+msgstr "Apaga el ordenador"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Ejecutar con la GPU de NVIDIA"
+
+msgid "Add to panel"
+msgstr "Añadir al panel"
+
+msgid "Add to desktop"
+msgstr "Añadir al escritorio"
+
+msgid "Remove from favorites"
+msgstr "Quitar de favoritos"
+
+msgid "Add to favorites"
+msgstr "Añadir a favoritos"
+
+msgid "Uninstall"
+msgstr "Desinstalar"
+
+msgid "Home"
+msgstr "Carpeta personal"
+
+msgid "Computer"
+msgstr "PC"
+
+msgid "Browse network"
+msgstr "Buscar en la red"
+
+msgid "Find files..."
+msgstr "Buscar archivos..."
+
+msgid "Please wait..."
+msgstr "Por favor espere..."
+
+msgid "Applications"
+msgstr "Aplicaciones"
+
+msgid "Documents"
+msgstr "Documentos"
+
+msgid "Videos"
+msgstr "Videos"
+
+msgid "Images"
+msgstr "Imágenes"
+
+msgid "Music"
+msgstr "Música"
+
+msgid "No recent Items"
+msgstr "No hay elementos recientes"
+
+msgid "Click to copy"
+msgstr "Haga clic para copiar"
+
+msgid "Applications and files"
+msgstr "Aplicaciones y archivos"
+
+msgid "Other search results"
+msgstr "Otros resultados de búsqueda"
+
+msgid "Browser history"
+msgstr "Historial del navegador"
+
+msgid "Browser bookmarks"
+msgstr "Marcadores del navegador"
+
+msgid "Emoji"
+msgstr "Emoticones"
+
+msgid "Trash"
+msgstr "Papelera"
+
+msgid "Error while opening file:"
+msgstr "Error al abrir el archivo:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Demasiadas entradas: solo se muestran las primeras 1000 entradas"
+
+msgid "Favorites"
+msgstr "Favoritos"
+
+msgid "Recent"
+msgstr "Reciente"
+
+msgid "Home folder"
+msgstr "Directorio de inicio"
+
+msgid "Reset category order"
+msgstr "Restablecer orden de categoría"
+
+msgid "light skin tone"
+msgstr "tono de piel claro"
+
+msgid "medium-light skin tone"
+msgstr "tono de piel medio-claro"
+
+msgid "medium skin tone"
+msgstr "tono de piel medio"
+
+msgid "medium-dark skin tone"
+msgstr "tono de piel medio-oscuro"
+
+msgid "dark skin tone"
+msgstr "tono de piel oscuro"
+
+msgid "This file is no longer available"
+msgstr "Este archivo no está disponible"
+
+msgid "Open with"
+msgstr "Abrir con"
+
+msgid "Other application..."
+msgstr "Otra aplicación..."
+
+msgid "Open containing folder"
+msgstr "Abrir la carpeta que lo contiene"
+
+msgid "Move to trash"
+msgstr "Mover a la papelera"
+
+msgid "Error while moving file to trash:"
+msgstr "Error al mover el archivo a la papelera:"
+
+msgid "Smileys & Emotion"
+msgstr "Sonrisas y emociones"
+
+msgid "People & Body"
+msgstr "Gente y cuerpo"
+
+msgid "Animals & Nature"
+msgstr "Animales y Naturaleza"
+
+msgid "Food & Drink"
+msgstr "Comida y bebida"
+
+msgid "Travel & Places"
+msgstr "Viajes y lugares"
+
+msgid "Activities"
+msgstr "Actividades"
+
+msgid "Objects"
+msgstr "Objetos"
+
+msgid "Symbols"
+msgstr "Símbolos"
+
+msgid "Flags"
+msgstr "Banderas"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Este elemento del menú no está asociado a ningún paquete. ¿Quiere "
+"eliminarlo del menú de todos modos?"
+
+msgid "The following packages will be removed:"
+msgstr "Se eliminarán los siguientes paquetes:"
+
+msgid "Packages to be removed"
+msgstr "Paquetes a eliminar"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr ""
+"No se puede eliminar el paquete %s ya que es requerido por otro paquete."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "El paquete %s es una dependencia de los siguientes paquetes:"
+
+msgid "Open"
+msgstr "Abrir"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Start in"
+msgstr "Empezar en"
+
+msgid "Select a folder"
+msgstr "Seleccionar una carpeta"
+
+msgid "Follow symlinks"
+msgstr "Seguir enlaces simbólicos"
+
+msgid "Search hidden"
+msgstr "Buscar archivos ocultos"
+
+msgid "Use regular expressions"
+msgstr "Usar expresiones regulares"
+
+msgid "Stop"
+msgstr "Detener"
+
+msgid "File"
+msgstr "Archivo"
+
+msgid "Path"
+msgstr "Ruta"
+
+msgid "Searching..."
+msgstr "Buscando..."
+
+msgid "Search Stopped"
+msgstr "Búsqueda detenida"
+
+msgid "Searching: "
+msgstr "Buscando: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Error: permisos insuficientes para leer la carpeta "
+
+msgid "Search Completed"
+msgstr "Búsqueda completada"
+
+msgid "Skipping"
+msgstr "Saltar"
+
+msgid " - directory already searched"
+msgstr " - directorio ya buscado"
+
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Un menú flexible con opciones de diseño de cuadrícula o lista, navegador "
+"de archivos y búsqueda de emoticones."
+
+msgid "Behavior"
+msgstr "Comportamiento"
+
+msgid "Appearance"
+msgstr "Apariencia"
+
+msgid "Layout and Content"
+msgstr "Disposición y contenido"
+
+msgid "Search Providers"
+msgstr "Proveedores de búsqueda"
+
+msgid "No search provider extensions found"
+msgstr "No se encontró ninguna extensión de proveedores de búsqueda"
+
+msgid "Panel"
+msgstr "Panel"
+
+msgid "Menu"
+msgstr "Menú"
+
+msgid "Layout"
+msgstr "Disposición"
+
+msgid "Content"
+msgstr "Contenido"
+
+msgid "Recent files settings"
+msgstr "Configuraciones de archivos recientes"
+
+msgid "Open the menu editor"
+msgstr "Abrir el editor del menú"
+
+msgid "Use a custom icon"
+msgstr "Usar ícono personalizado"
+
+msgid "Use a custom icon in the panel"
+msgstr "Utilice un ícono personalizado en el panel"
+
+msgid "Panel icon"
+msgstr "Icono del panel"
+
+msgid "Panel text"
+msgstr "Texto del panel"
+
+msgid "Text to show beside the panel icon"
+msgstr "Texto para mostrar al lado del ícono del panel"
+
+msgid "Category icon size (pixels)"
+msgstr "Tamaño de los íconos de las categorías (pixeles)"
+
+msgid "Applications list icon size (pixels)"
+msgstr "Tamaño de ícono de las aplicaciones de la lista (pixeles)"
+
+msgid "Applications grid icon size (pixels)"
+msgstr "Tamaño de ícono de las aplicaciones de la cuadrícula (pixeles)"
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Atajo de teclado para abrir y cerrar el menú"
+
+msgid "Open menu on hover"
+msgstr "Abrir menú al pasar el mouse por encima"
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Abre el menú cuando muevo el mouse sobre el ícono del panel"
+
+msgid "milliseconds"
+msgstr "milisegundos"
+
+msgid "Menu hover delay"
+msgstr "Tiempo de espera"
+
+msgid "Use menu animations"
+msgstr "Usar animaciones en el menú"
+
+msgid "Animate the menu on open and close"
+msgstr "Anima el menú al abrir y cerrar"
+
+msgid "Activate categories on click"
+msgstr "Activar categorías con un click"
+
+msgid "Activate categories on click instead of on hover"
+msgstr ""
+"Activa las categorías al hacer clic en lugar de al pasar el ratón por "
+"encima"
+
+msgid "Enable autoscrolling"
+msgstr "Habilitar desplazamiento automático"
+
+msgid "Enable autoscrolling in application list"
+msgstr "Activar desplazamiento automático en la lista de aplicaciones"
+
+msgid "Show web bookmarks"
+msgstr "Mostrar marcadores web"
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Muestra los marcadores web de tu navegador en el menú.\n"
+"Nota: Instale el paquete gir1.2-gda-5.0 para leer los marcadores de "
+"Firefox."
+
+msgid "Enable searching of open windows"
+msgstr "Activar la búsqueda de ventanas abiertas"
+
+msgid "Enable search providers"
+msgstr "Activar proveedores de búsqueda"
+
+msgid "Include search provider results in searches"
+msgstr ""
+"Elige si los resultados de los proveedores de búsqueda aparecerán listados "
+"en las búsquedas"
+
+msgid "Example Search Providers"
+msgstr "Ejemplo de proveedor de búsqueda"
+
+msgid "Open menu on category:"
+msgstr "Abrir menú en categoría:"
+
+msgid "List"
+msgstr "Lista"
+
+msgid "Grid"
+msgstr "Cuadrícula"
+
+msgid "Always open the menu with this category selected"
+msgstr "Abre siempre el menú con esta categoría seleccionada"
+
+msgid "columns"
+msgstr "columnas"
+
+msgid "Number of columns in apps grid"
+msgstr "Número de columnas en la cuadrícula de aplicaciones"
+
+msgid "Show bookmarks and places"
+msgstr "Mostrar lugares y marcadores"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "Muestra marcadores y la categoría de lugares en el menú"
+
+msgid "Show application icons"
+msgstr "Mostrar los íconos de las aplicaciones"
+
+msgid "Show category icons"
+msgstr "Mostrar íconos de las categorías"
+
+msgid "Show application descriptions under titles"
+msgstr "Mostrar descripción de las aplicaciones debajo del título"
+
+msgid "Show tooltips"
+msgstr "Mostrar consejos"
+
+msgid "Tooltip delay"
+msgstr "Retraso del cosejo"
+
+msgid "Use a custom menu height"
+msgstr "Usar altura del menú personalizada"
+
+msgid "Custom menu height (pixels)"
+msgstr "Altura del menú personalizada (pixeles)"
+
+msgid "Applications view mode"
+msgstr "Modo de vista de aplicaciones"
+
+msgid "View applications as list or grid"
+msgstr "Ver aplicaciones como lista o cuadrícula"
+
+msgid "Sidebar location"
+msgstr "Ubicación de la barra lateral"
+
+msgid "Top"
+msgstr "En la parte superior"
+
+msgid "Bottom"
+msgstr "En la parte inferior"
+
+msgid "Left"
+msgstr "Izquierda"
+
+msgid "Right"
+msgstr "Derecha"
+
+msgid "Choose where to show the sidebar"
+msgstr "Elija dónde mostrar la barra lateral"
+
+msgid "Show favorites on sidebar"
+msgstr "Mostrar categoría de aplicaciones favoritas en el menú"
+
+msgid "None"
+msgstr "No mostrar"
+
+msgid "Apps only"
+msgstr "Sólo aplicaciones"
+
+msgid "Files only"
+msgstr "Sólo archivos"
+
+msgid "Apps and files"
+msgstr "Aplicaciones y archivos"
+
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Muestra sus aplicaciones favoritas en el menú"
+
+msgid "Application description placement"
+msgstr "Manera de mostrar la descripción de la aplicación"
+
+msgid "Tooltips"
+msgstr "Al pasar el mouse sobre la aplicación"
+
+msgid "Under titles"
+msgstr "Bajo títulos"
+
+msgid "Choose where to show application descriptions"
+msgstr "Elija dónde mostrar las descripciones de las aplicaciones"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"Información/sugerencia: arrastre en el borde del menú para cambiar el "
+"tamaño del menú.\n"
+
+msgid "Show recent items"
+msgstr "Mostrar elementos recientes"
+
+msgid "Show recent items category in the menu"
+msgstr "Muestra la categoría de elementos recientes en el menú"
+
+msgid "Show favorite apps category"
+msgstr "Mostrar la categoría de aplicaciones favoritas"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Muestra la categoría de aplicaciones favoritas en el menú"
+
+msgid "Show home folder"
+msgstr "Mostrar carpeta de inicio"
+
+msgid "Show home folder category in the menu"
+msgstr "Muestra la categoría de carpeta de inicio en el menú"
+
+msgid "Show emoji category"
+msgstr "Mostrar categoría de emoticones"
+
+msgid "Show emoji category in the menu"
+msgstr "Mostrar categoría de emoticones en el menú"
+
+msgid "Last used category"
+msgstr "Última categoría utilizada"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Activa el desplazamiento automático en la lista de aplicaciones"
+
+msgid "Show hidden files"
+msgstr "Mostrar archivos ocultos"
+
+msgid "Show hidden files in folder view"
+msgstr "Muestra los archivos ocultos en la vista de carpeta"
+
+msgid "Emoji search"
+msgstr "Habilitar la búsqueda de emoticones"
+
+msgid "Show emojis in search results"
+msgstr "Muestra emoticones en los resultados de búsqueda"
+
+msgid "Web search option"
+msgstr "Opción de búsqueda web"
+
+msgid "Show an internet search option in search results"
+msgstr ""
+"Muestra una opción de búsqueda en Internet en los resultados de búsqueda"
+
+msgid "Web search suggestions"
+msgstr "Sugerencias de búsqueda en Internet"
+
+msgid ""
+"With web search option, also show search suggestions. (Note: This uses "
+"Google's search API)"
+msgstr ""
+"Con la opción de búsqueda en la web, también muestra sugerencias de "
+"búsqueda. (Nota: Esto utiliza la API de búsqueda de Google)"
+
+msgid "Search home folder"
+msgstr "Buscar carpeta de inicio"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Al buscar, también busque archivos en la carpeta de inicio"
+
+msgid "Web history search"
+msgstr "Búsqueda de historial web"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Al buscar, busque también en el historial de mi navegador (Google Chrome, "
+"Chromium, Opera, Vivaldi, Brave)\n"
+"Nota: el historial de Firefox no es compatible actualmente."
+
+msgid "Web bookmarks search"
+msgstr "Búsqueda de marcadores web"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Al realizar una búsqueda, también busque en los marcadores web de mi "
+"navegador (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Nota: Para buscar los marcadores de Firefox necesitará instalar el paquete "
+"gir1.2-gda-5.0 (distribuciones basadas en Debian, incluyendo Ubuntu y "
+"Linux Mint) o el paquete libgda (distribuciones basadas en Arch) y "
+"reiniciar su ordenador."
+
+msgid "Wikipedia search"
+msgstr "Búsqueda en Wikipedia"
+
+msgid "Show some Wikipedia results"
+msgstr "Muestra algunos resultados de Wikipedia"
+
+msgid "Wikipedia language"
+msgstr "Idioma de Wikipedia"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Nota: Algunas opciones de búsqueda aún se pueden usar incluso si no las ha "
+"habilitado aquí agregando un prefijo a su término de búsqueda.\n"
+"Por ejemplo: para buscar un emoticones, escriba 'e heart' para buscar "
+"emojis de corazón. Del mismo modo, use los prefijos 'f' para la búsqueda "
+"de archivos, 'h' para el historial web y 'b' para la búsqueda de "
+"marcadores web.\n"
+
+msgid "Use a custom icon size"
+msgstr "Utilice un tamaño de ícono personalizado"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Utilice un tamaño personalizado para el ícono del panel"
+
+msgid "Panel icon size (pixels)"
+msgstr "Tamaño del ícono del panel (pixeles)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Elija un tamaño personalizado para el ícono del panel"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Tamaño del ícono de la barra lateral (pixeles)"
+
+msgid "Use sidebar box style"
+msgstr "Usar estilo de cuadro de botones de sesión"
+
+msgid "Use a sidebar box style"
+msgstr "Utilice un estilo de cuadro de botones de sesión"
+
+msgid "Use tile style"
+msgstr "Usar estilo de mosaico"
+
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Utilice un estilo de mosaico para los botones de la aplicación (Nota: "
+"puede que no funcione en algunos temas)"

@@ -1,6 +1,5 @@
 {
  "uuid": "ScreenLocker@tuuxx",
  "name": "Screen locker",
- "description": "Click to lock the screen immediately",
- "icon": "lock"
+ "description": "Click to lock the screen immediately"
 }

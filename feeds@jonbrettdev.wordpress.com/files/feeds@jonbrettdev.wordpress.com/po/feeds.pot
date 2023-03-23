@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-05 01:50+0800\n"
+"POT-Creation-Date: 2020-11-21 19:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,79 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:103
-msgid "Feed reader"
-msgstr ""
-
-#: applet.js:196
-msgid "Mark all read"
-msgstr ""
-
-#: applet.js:207
-msgid "Reload"
-msgstr ""
-
-#: applet.js:216
-msgid "Manage feeds"
-msgstr ""
-
-#: applet.js:227
-msgid "Settings"
-msgstr ""
-
-#: applet.js:313
-msgid "No unread feeds"
-msgstr ""
-
-#: applet.js:541
-msgid "Feeds"
-msgstr ""
-
-#: applet.js:693
-msgid "Right Click to open feed: \n"
-msgstr ""
-
-#: applet.js:750
-msgid "Mark All Posts Read"
-msgstr ""
-
-#: applet.js:757
-msgid "Mark Next "
-msgstr ""
-
-#: applet.js:757
-msgid " Posts Read"
-msgstr ""
-
-#: applet.js:763
-msgid "Update feed URL"
-msgstr ""
-
-#: applet.js:822 applet.js:838
-msgid "Published: "
-msgstr ""
-
-#: applet.js:901
-msgid "Mark Post Read"
-msgstr ""
-
-#: applet.js:933
-msgid "d) "
-msgstr ""
-
-#: applet.js:935
-msgid "h) "
-msgstr ""
-
-#: applet.js:937
-msgid "(<1h) "
-msgstr ""
-
 #: feedreader.js:151
 msgid "Invalid feed url"
 msgstr ""
 
-#: feedreader.js:220
+#: feedreader.js:227
 msgid " unread items!"
 msgstr ""
 
@@ -97,231 +29,293 @@ msgstr ""
 msgid "Loading feed"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->metadata.json->description
-msgid "Displays RSS news feeds"
+#: applet.js:106
+msgid "Feed reader"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->metadata.json->name
-msgid "Feeds Reader"
+#: applet.js:141
+#, javascript-format
+msgid "Please install the '%s' package."
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->manage_feeds_button->description
-msgid "Manage Feeds..."
+#: applet.js:221
+msgid "Mark all read"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->manage_feeds_button->tooltip
-msgid "Launch the feed management app to add/remove/edit feeds"
+#: applet.js:232
+msgid "Reload"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->notifications_enabled->description
-msgid "Show notifications for new items"
+#: applet.js:241
+msgid "Manage feeds"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->notifications_enabled->tooltip
-msgid "If checked a popup notification will be displayed for new items"
+#: applet.js:252
+msgid "Settings"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->max_items->description
-msgid "Maximum number of items"
+#: applet.js:337
+msgid "No unread feeds"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-schema.json->max_items->tooltip
-msgid "Maximum number of items to display for this feed"
+#: applet.js:566
+msgid "Feeds"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-schema.json->max_items->units
-msgid "feeds"
+#: applet.js:718
+msgid "Right Click to open feed: \n"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->instance_name->description
-msgid "Feed Instance Name"
+#: applet.js:775
+msgid "Mark All Posts Read"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->instance_name->tooltip
-msgid "Do not change, this is modified by the Manage Feeds window."
+#: applet.js:782
+msgid "Mark Next "
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->heading1->description
-msgid "Feed URLs"
+#: applet.js:782
+msgid " Posts Read"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-schema.json->enable-verbose-
-#. logging->description
-msgid "Check this to enable debug logging in Looking Glass"
+#: applet.js:788
+msgid "Update feed URL"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-schema.json->enable-verbose-
-#. logging->tooltip
-msgid "Checking this will enable debug level logging"
+#: applet.js:847 applet.js:863
+msgid "Published: "
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->refresh_interval->description
-msgid "Update interval"
+#: applet.js:926
+msgid "Mark Post Read"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->refresh_interval->tooltip
-msgid "Interval between checking for new items"
+#: applet.js:958
+msgid "d) "
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->refresh_interval->units
-msgid "minutes"
+#: applet.js:960
+msgid "h) "
 msgstr ""
 
-#. manage_feeds.py:54
+#: applet.js:962
+msgid "(<1h) "
+msgstr ""
+
+#: manage_feeds.py:53
 msgid "Manage your feeds"
 msgstr ""
 
-#. manage_feeds.py:89
+#: manage_feeds.py:88
 msgid "Instance Name:"
 msgstr ""
 
-#. manage_feeds.py:93
+#: manage_feeds.py:92
 msgid "Add/remove feed list"
 msgstr ""
 
-#. manage_feeds.py:114
+#: manage_feeds.py:113
 msgid "Enable"
 msgstr ""
 
-#. manage_feeds.py:121
+#: manage_feeds.py:120
 msgid "Url"
 msgstr ""
 
-#. manage_feeds.py:128
+#: manage_feeds.py:127
 msgid "Custom title"
 msgstr ""
 
-#. manage_feeds.py:134
+#: manage_feeds.py:133
 msgid "Notify"
 msgstr ""
 
-#. manage_feeds.py:140
+#: manage_feeds.py:139
 msgid "Show Read"
 msgstr ""
 
-#. manage_feeds.py:147
+#: manage_feeds.py:146
 msgid "Interval"
 msgstr ""
 
-#. manage_feeds.py:155
+#: manage_feeds.py:154
 msgid "Show Image"
 msgstr ""
 
-#. manage_feeds.py:201
+#: manage_feeds.py:200
 msgid "Import"
 msgstr ""
 
-#. manage_feeds.py:205
+#: manage_feeds.py:204
 msgid "_Import OPML"
 msgstr ""
 
-#. manage_feeds.py:206
+#: manage_feeds.py:205
 msgid "Import feeds from OPML file"
 msgstr ""
 
-#. manage_feeds.py:212
+#: manage_feeds.py:211
 msgid "_Import Feeds File"
 msgstr ""
 
-#. manage_feeds.py:213
+#: manage_feeds.py:212
 msgid "Import feeds from file"
 msgstr ""
 
-#. manage_feeds.py:219
+#: manage_feeds.py:218
 msgid "Export"
 msgstr ""
 
-#. manage_feeds.py:223
+#: manage_feeds.py:222
 msgid "_Export Feeds File"
 msgstr ""
 
-#. manage_feeds.py:224
+#: manage_feeds.py:223
 msgid "Export feeds to file"
 msgstr ""
 
-#. manage_feeds.py:230
+#: manage_feeds.py:229
 msgid "Options"
 msgstr ""
 
-#. manage_feeds.py:234
+#: manage_feeds.py:233
 msgid "_Toggle Hidden Fields"
 msgstr ""
 
-#. manage_feeds.py:235
+#: manage_feeds.py:234
 msgid "Show or Hide hidden fields"
 msgstr ""
 
-#. manage_feeds.py:252
+#: manage_feeds.py:251
 msgid "Changes will be discarded, continue?"
 msgstr ""
 
-#. manage_feeds.py:253
+#: manage_feeds.py:252
 msgid "Are you sure?"
 msgstr ""
 
-#. manage_feeds.py:261
+#: manage_feeds.py:260
 msgid "New Instance (List) Name"
 msgstr ""
 
-#. manage_feeds.py:263
+#: manage_feeds.py:262
 msgid "Add New Instance (List)"
 msgstr ""
 
-#. manage_feeds.py:336
+#: manage_feeds.py:335
 msgid "Failed to save config file"
 msgstr ""
 
-#. manage_feeds.py:346
+#: manage_feeds.py:345
 msgid "Choose a OPML feed file"
 msgstr ""
 
-#. manage_feeds.py:347
+#: manage_feeds.py:346
 msgid "OPML files"
 msgstr ""
 
-#. manage_feeds.py:350
+#: manage_feeds.py:349
 msgid "Choose a feed file"
 msgstr ""
 
-#. manage_feeds.py:351 manage_feeds.py:412
+#: manage_feeds.py:350 manage_feeds.py:411
 msgid "Text files"
 msgstr ""
 
-#. manage_feeds.py:368 manage_feeds.py:417
+#: manage_feeds.py:367 manage_feeds.py:416
 msgid "All files"
 msgstr ""
 
-#. manage_feeds.py:385
+#: manage_feeds.py:384
 msgid "file imported"
 msgstr ""
 
-#. manage_feeds.py:386
+#: manage_feeds.py:385
+#, python-format
 msgid "Imported %d feeds"
 msgstr ""
 
-#. manage_feeds.py:394
+#: manage_feeds.py:393
 msgid "Failed to import file"
 msgstr ""
 
-#. manage_feeds.py:401
+#: manage_feeds.py:400
 msgid "Save a feed file"
 msgstr ""
 
-#. manage_feeds.py:430
+#: manage_feeds.py:429
+#, python-format
 msgid "Unable to export file, exception: %s"
 msgstr ""
 
-#. manage_feeds.py:434
+#: manage_feeds.py:433
 msgid "Unable to export file"
+msgstr ""
+
+#. metadata.json->description
+msgid "Displays RSS news feeds"
+msgstr ""
+
+#. metadata.json->name
+msgid "Feeds Reader"
+msgstr ""
+
+#. settings-schema.json->heading1->description
+msgid "Feed URLs"
+msgstr ""
+
+#. settings-schema.json->manage_feeds_button->description
+msgid "Manage Feeds..."
+msgstr ""
+
+#. settings-schema.json->manage_feeds_button->tooltip
+msgid "Launch the feed management app to add/remove/edit feeds"
+msgstr ""
+
+#. settings-schema.json->max_items->units
+msgid "feeds"
+msgstr ""
+
+#. settings-schema.json->max_items->description
+msgid "Maximum number of items"
+msgstr ""
+
+#. settings-schema.json->max_items->tooltip
+msgid "Maximum number of items to display for this feed"
+msgstr ""
+
+#. settings-schema.json->refresh_interval->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->refresh_interval->description
+msgid "Update interval"
+msgstr ""
+
+#. settings-schema.json->refresh_interval->tooltip
+msgid "Interval between checking for new items"
+msgstr ""
+
+#. settings-schema.json->notifications_enabled->description
+msgid "Show notifications for new items"
+msgstr ""
+
+#. settings-schema.json->notifications_enabled->tooltip
+msgid "If checked a popup notification will be displayed for new items"
+msgstr ""
+
+#. settings-schema.json->enable-verbose-logging->description
+msgid "Check this to enable debug logging in Looking Glass"
+msgstr ""
+
+#. settings-schema.json->enable-verbose-logging->tooltip
+msgid "Checking this will enable debug level logging"
+msgstr ""
+
+#. settings-schema.json->instance_name->description
+msgid "Feed Instance Name"
+msgstr ""
+
+#. settings-schema.json->instance_name->tooltip
+msgid "Do not change, this is modified by the Manage Feeds window."
 msgstr ""

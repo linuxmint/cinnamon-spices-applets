@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-17 14:29+0100\n"
-"PO-Revision-Date: 2016-03-17 14:29+0100\n"
+"PO-Revision-Date: 2021-02-16 11:23+0100\n"
 "Last-Translator: Peter Hoffmann <Hoffmann.P@gmx.net>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
 
 #: applet.js:77
 msgid "Checking status"

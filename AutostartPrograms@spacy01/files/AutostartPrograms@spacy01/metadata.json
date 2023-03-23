@@ -1,6 +1,5 @@
 {
  "uuid": "AutostartPrograms@spacy01",
  "name": "Autostart programs",
- "description": "Click here to add or remove programs to start with the session.",
- "icon": "gnome-session"
+ "description": "Click here to add or remove programs to start with the session."
 }

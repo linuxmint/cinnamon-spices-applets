@@ -112,7 +112,7 @@ MyApplet.prototype = {
             if (this.runAsRoot == true) command = "pkexec -u tor " + command; // If "run as root" enabled in applet settings add to aforementioned command "pkexec -u tor " to run as tor user
 
             try {
-                [result, pid] = GLib.spawn_async(null, this.parse_command(command), null, FLAGS, null); // Run tor from location settings
+                let [result, pid] = GLib.spawn_async(null, this.parse_command(command), null, FLAGS, null); // Run tor from location settings
                 GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, Lang.bind(this, this.on_closed)); // Run Tor and function on_closed
                 this.pid = pid; // Set pid as global variable
 

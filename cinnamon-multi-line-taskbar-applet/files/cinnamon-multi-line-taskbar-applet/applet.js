@@ -835,7 +835,18 @@ MyApplet.prototype = {
             global.logError(e);
         }
     },
-    
+
+    on_applet_added_to_panel: function() {
+        let nWorkspaces = global.screen.get_n_workspaces();
+        for ( let wsIdx=0 ; wsIdx < nWorkspaces ; wsIdx++ ) {
+            let ws = global.screen.get_workspace_by_index(wsIdx);
+            let windows = ws.list_windows();
+            for ( let idx=0 ; idx < windows.length ; idx++ ) {
+                this._windowAdded(ws, windows[idx]);
+            }
+        }
+    },
+
     on_applet_clicked: function(event) {
             
     },

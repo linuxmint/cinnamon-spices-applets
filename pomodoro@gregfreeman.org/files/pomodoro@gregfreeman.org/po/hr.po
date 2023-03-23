@@ -33,8 +33,8 @@ msgid "Pomodori %d, set %d running"
 msgstr "Pomodoro %d, zadatak %d je pokrenut"
 
 #: applet.js:442
-msgid "Let's go to work !"
-msgstr "Idemo raditi !"
+msgid "Let's go to work!"
+msgstr "Idemo raditi!"
 
 #: applet.js:456
 msgid "Take a short break"

@@ -86,6 +86,7 @@ MyApplet.prototype = {
         this.data_limit = 0;
         this.gui_text_css = "";
         this.gui_received_icon_filename = "";
+        this.gui_symbolic_icon = false;
         this.gui_sent_icon_filename = "";
         this.hover_popup_text_css = "";
         this.hover_popup_numbers_css = "";
@@ -184,6 +185,7 @@ MyApplet.prototype = {
                         [Settings.BindingDirection.IN, "gui_text_css", this.on_gui_css_changed],
                         [Settings.BindingDirection.IN, "gui_received_icon_filename", this.on_gui_icon_changed],
                         [Settings.BindingDirection.IN, "gui_sent_icon_filename", this.on_gui_icon_changed],
+                        [Settings.BindingDirection.IN, "gui_symbolic_icon", this.on_gui_icon_style_change],
                         [Settings.BindingDirection.IN, "hover_popup_text_css", this.on_hover_popup_css_changed],
                         [Settings.BindingDirection.IN, "hover_popup_numbers_css", this.on_hover_popup_css_changed],
                         [Settings.BindingDirection.BIDIRECTIONAL, "gui_speed_type", this.on_gui_speed_type_changed],
@@ -293,8 +295,16 @@ MyApplet.prototype = {
     },
 
     on_gui_icon_changed: function () {
-        this.gui_speed.set_reveived_icon(this.gui_received_icon_filename);
-        this.gui_speed.set_sent_icon(this.gui_sent_icon_filename);
+        this.gui_speed.set_reveived_icon(this.get_icon_path(this.gui_received_icon_filename, "arrow-pointing-down-symbolic.svg"));
+        this.gui_speed.set_sent_icon(this.get_icon_path(this.gui_sent_icon_filename, "arrow-up-symbolic.svg"));
+    },
+
+    get_icon_path: function(icon_path, symbolic_icon_name) {
+        return (this.gui_symbolic_icon) ? "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/" + symbolic_icon_name : icon_path;
+    },
+
+    on_gui_icon_style_change: function() {
+        this.on_gui_icon_changed();
     },
 
     on_gui_css_changed: function () {

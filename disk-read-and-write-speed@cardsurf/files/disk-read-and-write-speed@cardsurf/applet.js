@@ -6,18 +6,20 @@ const Settings = imports.ui.settings;
 const Mainloop = imports.mainloop;
 
 const uuid = "disk-read-and-write-speed@cardsurf";
-let AppletConstants, ShellUtils, Files, AppletGui;
+let AppletConstants, ShellUtils, Files, AppletGui, Compatibility;
 if (typeof require !== 'undefined') {
     AppletConstants = require('./appletConstants');
     ShellUtils = require('./shellUtils');
     Files = require('./files');
     AppletGui = require('./appletGui');
+    Compatibility = require('./compatibility');
 } else {
     const AppletDirectory = imports.ui.appletManager.applets[uuid];
     AppletConstants = AppletDirectory.appletConstants;
     ShellUtils = AppletDirectory.shellUtils;
     Files = AppletDirectory.files;
     AppletGui = AppletDirectory.appletGui;
+    Compatibility = AppletDirectory.compatibility;
 }
 
 
@@ -70,6 +72,7 @@ MyApplet.prototype = {
 
         this.orientation = orientation;
         this.is_running = true;
+        this.cinnamon_version_adapter = new Compatibility.CinnamonVersionAdapter();
 
         this.major_number_index = 0;
         this.minor_number_index = 1;
@@ -105,8 +108,9 @@ MyApplet.prototype = {
         this.newlines_regex = new RegExp("\\n+");
         this.numbers_comma_regex = new RegExp("(\\s*\\d+)(,\\s*\\d+)*");
         this.numbers_regex = new RegExp("\\d+", "g");
-        this.alphanumeric_end_regex = new RegExp("[a-zA-Z0-9]+$");
+        this.non_whitespace_end_regex = new RegExp("[^\\s]+$");
         this.letter_regex = new RegExp("[a-zA-Z]+");
+        this.non_whitespace_regex = new RegExp("[^\\s]+");
 
         this.filepath_partitions = "/proc/partitions";
         this.filepath_diskstats = "/proc/diskstats";
@@ -352,8 +356,8 @@ MyApplet.prototype = {
         string = string.trim();
         let lines = string.split(this.newlines_regex);
         for(let i = 1; i < lines.length; ++i) {
-            let disk_name = lines[i].match(this.alphanumeric_end_regex).toString();
-            disk_names.push(disk_name);
+            let disk_name_match = lines[i].match(this.non_whitespace_end_regex);
+            this.add_string_if_match_found(disk_names, disk_name_match);
         }
         return disk_names;
     },
@@ -366,11 +370,20 @@ MyApplet.prototype = {
     read_string: function (file, default_string) {
         try {
             let array_bytes = file.read_chars();
-            let string = array_bytes.length > 0 ? array_bytes.toString() : default_string.toString();
+            let string = array_bytes.length > 0 ?
+                this.cinnamon_version_adapter.byte_array_to_string(array_bytes) :
+                default_string.toString();
             return string;
         }
         catch(exception) {
             return default_string;
+        }
+    },
+
+    add_string_if_match_found: function (array, match_result) {
+        if(match_result != null) {
+            var str = match_result.toString();
+            array.push(str);
         }
     },
 
@@ -384,24 +397,50 @@ MyApplet.prototype = {
     },
 
     read_sectors_size: function (disk_name) {
-        let device = disk_name.match(this.letter_regex).toString();
-        let filepath_sector_size = "/sys/block/" + device + "/queue/hw_sector_size";
-        let file_sectors_size = new Files.File(filepath_sector_size);
-        let string = file_sectors_size.exists() ? this.read_number(file_sectors_size, this.default_sector_size) :
-                                                  this.default_sector_size;
-        return string;
+        let sector_size = -1;
+        sector_size = this.read_sector_size_letter(sector_size, disk_name);
+        sector_size = this.read_sector_size_non_whitespace(sector_size, disk_name);
+        let number = sector_size >= 0 ? sector_size : this.default_sector_size;
+        return number;
+    },
+
+    read_sector_size_letter: function (sector_size, disk_name) {
+        var match_result = disk_name.match(this.letter_regex);
+        sector_size = this.read_sector_size(sector_size, match_result);
+        return sector_size;
+    },
+
+    read_sector_size: function (sector_size, match_result) {
+        if(sector_size < 0 && match_result != null) {
+            let device = match_result.toString();
+            let filepath_sector_size = "/sys/block/" + device + "/queue/hw_sector_size";
+            let file_sectors_size = new Files.File(filepath_sector_size);
+            let exists = file_sectors_size.exists();
+            if(exists) {
+                sector_size = this.read_number(file_sectors_size, -1);
+            }
+        }
+        return sector_size;
     },
 
     read_number: function (file, default_number) {
         try {
             let array_bytes = file.read_chars();
-            let string = array_bytes.length > 0 ? array_bytes.toString() : default_number.toString();
+            let string = array_bytes.length > 0 ?
+                this.cinnamon_version_adapter.byte_array_to_string(array_bytes) :
+                default_number.toString();
             let number = parseInt(string);
             return number;
         }
         catch(exception) {
             return default_number;
         }
+    },
+
+    read_sector_size_non_whitespace: function (sector_size, disk_name) {
+        var match_result = disk_name.match(this.non_whitespace_regex);
+        sector_size = this.read_sector_size(sector_size, match_result);
+        return sector_size;
     },
 
     _init_disk_name: function () {

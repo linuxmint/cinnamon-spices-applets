@@ -35,6 +35,7 @@
       "title": "Tips",
       "keys": [
         "textTips",
+        "textHelp",
         "textInfo"
       ]
     },
@@ -48,7 +49,8 @@
         "autoUpdateInterval",
         "adjustmentMethod",
         "labelScrollAction",
-        "iconLabel"
+        "iconLabel",
+        "symbolicIcon"
       ]
     },
     
@@ -66,7 +68,14 @@
       "type": "section",
       "title": "Night Settings",
       "keys": [
-        "enabledNight", "nightTemp", "nightBrightness"
+        "enabledNight",
+        "manualNightTime",
+        "smoothTransition",
+        "transitionDuration",
+        "nightTimeStart",
+        "nightTimeEnd",
+        "nightTemp",
+        "nightBrightness"
       ]
     },
     
@@ -74,7 +83,13 @@
       "type": "section",
       "title": "Key Bindings",
       "keys": [
-        "keyToggle"
+        "keyToggle",
+        "keyBrightnessUp",
+        "keyBrightnessDown",
+        "keyTempUp",
+        "keyTempDown",
+        "keyGammaUp",
+        "keyGammaDown"
       ]
     },
     
@@ -94,17 +109,18 @@
   },
   "autoUpdate": {
     "type": "checkbox",
-    "default": false,
+    "dependency": "enabledNight=true",
+    "default": true,
     "description": "Auto Update",
     "tooltip": "Continuously adjust color temperature"
   },
   "autoUpdateInterval": {
     "type": "spinbutton",
-    "dependency": "autoUpdate=true",
-    "default": 30,
-    "min": 5,
+    "dependency": "enabledNight=true",
+    "default": 5,
+    "min": 3,
     "max": 1800,
-    "units": "Sec.",
+    "units": "Seconds",
     "step": 1,
     "description": "Update interval"
   },
@@ -134,23 +150,64 @@
   },
   "iconLabel": {
     "type": "checkbox",
-    "default": false,
+    "default": true,
     "description": "Show Label"
   },
-  
-  "keyToggle" : {
-    "type" : "keybinding",
-    "description" : "On/Off",
-    "default" : "<Control>End"
+  "symbolicIcon": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use symbolic icon"
   },
   
+  "keyToggle": {
+    "type": "keybinding",
+    "description": "On/Off",
+    "default": ""
+  },
+  
+  "keyBrightnessUp": {
+    "type": "keybinding",
+    "description": "Increase brightness level",
+    "default": ""
+  },
+  
+  "keyBrightnessDown": {
+    "type": "keybinding",
+    "description": "Decrease brightness level",
+    "default": ""
+  },
+
+  "keyTempUp": {
+    "type": "keybinding",
+    "description": "Increase temperature level",
+    "default": ""
+  },
+  
+  "keyTempDown": {
+    "type": "keybinding",
+    "description": "Decrease temperature level",
+    "default": ""
+  },
+  
+  "keyGammaUp": {
+    "type": "keybinding",
+    "description": "Increase gamma level",
+    "default": ""
+  },
+  
+  "keyGammaDown": {
+    "type": "keybinding",
+    "description": "Decrease gamma level",
+    "default": ""
+  },
+
   "dayTemp": {
     "type": "spinbutton",
     "default": 5900,
     "min": 1000,
-    "max": 9000,
+    "max": 12000,
     "units": "K",
-    "step": 1,
+    "step": 5,
     "description": "Temperature"
   },
   "dayBrightness": {
@@ -165,7 +222,7 @@
   "gammaMix": {
     "type": "spinbutton",
     "default": 1,
-    "min": 1,
+    "min": 0.5,
     "max": 5,
     "units": "",
     "step": 0.01,
@@ -177,6 +234,48 @@
     "default": false,
     "description": "Night Enabled"
   },
+  "smoothTransition": {
+    "type": "checkbox",
+    "dependency": "enabledNight=true",
+    "default": true,
+    "description": "Smooth transition between day and night"
+  },
+  "transitionDuration": {
+    "type": "spinbutton",
+    "dependency": "enabledNight=true",
+    "default": 10,
+    "min": 5,
+    "max": 60,
+    "units": "Minutes",
+    "step": 1,
+    "description": "Transition Duration"
+  },
+  "manualNightTime": {
+    "type": "checkbox",
+    "dependency": "enabledNight=true",
+    "default": true,
+    "description": "Use Manual Night Time"
+  },
+  "nightTimeStart" : {
+    "type" : "timechooser",
+    "dependency": "manualNightTime=true",
+    "description" : "Choose Start Time",
+    "default" : {
+      "h" : 20,
+      "m" : 0,
+      "s" : 0
+    }
+  },
+  "nightTimeEnd" : {
+    "type" : "timechooser",
+    "dependency": "manualNightTime=true",
+    "description" : "Choose End Time",
+    "default" : {
+      "h" : 6,
+      "m" : 0,
+      "s" : 0
+    }
+  },
   "nightTemp": {
     "type": "spinbutton",
     "dependency": "enabledNight=true",
@@ -184,7 +283,7 @@
     "min": 1000,
     "max": 9000,
     "units": "K",
-    "step": 1,
+    "step": 5,
     "description": "Temperature"
   },
   "nightBrightness": {
@@ -229,9 +328,12 @@
     "type": "label",
     "description": "* Right-click the sliders to reset the default (neutral) value."
   },
+  "textHelp": {
+    "type": "label",
+    "description": "When update to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\nYou will lost all your configs."
+  },
   "textInfo": {
     "type": "label",
     "description": "If you like and use this applet take the time to visit it's page on Cinnamon Spices and give it a star. You only need a github account to do this."
   }
-  
 }

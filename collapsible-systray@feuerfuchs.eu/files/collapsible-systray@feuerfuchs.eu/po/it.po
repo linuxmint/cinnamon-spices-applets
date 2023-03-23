@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-26 13:12+0200\n"
-"PO-Revision-Date: 2019-10-16 22:50+0200\n"
+"PO-Revision-Date: 2022-06-03 15:53+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #: applet.js:143
 msgid "Active applications"
@@ -42,8 +42,7 @@ msgid "Collapsible Systray"
 msgstr "Collapsible Systray"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->description
-msgid ""
-"A replacement for the abandoned System Tray Collapsible Cinnamon applet"
+msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
 msgstr ""
 "Un sostituto dell'applet di Cinnamon System Tray Collapsible abbandonata"
 
@@ -134,8 +133,7 @@ msgstr ""
 #. support->tooltip
 msgid "Disable if you have issues with icons not updating themselves."
 msgstr ""
-"Disabilita se riscontri problemi con le icone che non si aggiornano da "
-"sole."
+"Disabilita se riscontri problemi con le icone che non si aggiornano da sole."
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->vertical-expand-
 #. icon-name->description
@@ -179,8 +177,7 @@ msgstr "Collasso alla rimozione del mouse"
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->no-hover-for-tray-
 #. icons->description
 msgid "Disable hover effect for tray icons"
-msgstr ""
-"Disabilita l'effetto hover per le icone della barra delle applicazioni"
+msgstr "Disabilita l'effetto hover per le icone della barra delle applicazioni"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->no-hover-for-tray-
 #. icons->tooltip

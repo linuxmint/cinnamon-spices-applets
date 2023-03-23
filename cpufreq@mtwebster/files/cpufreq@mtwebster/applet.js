@@ -170,7 +170,7 @@ Panel_Indicator.prototype = {
         };
 
         this._onChange();
-        this.cur_changed_id = this._parent.connect('cur-changed', () => this._onChange);
+        this.cur_changed_id = this._parent.connect('cur-changed', Lang.bind(this, this._onChange));
     },
 
     _draw: function() {

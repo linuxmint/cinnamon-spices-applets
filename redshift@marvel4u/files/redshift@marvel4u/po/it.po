@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-12 12:05+0200\n"
-"PO-Revision-Date: 2019-10-16 23:00+0200\n"
+"PO-Revision-Date: 2022-06-03 18:34+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #. redshift@marvel4u->settings-schema.json->brightness->description
 #: applet.js:59 applet.js:224
@@ -107,11 +107,10 @@ msgid "If not entered Redshift would use GeoClue2 provider"
 msgstr "Se non inserito, Redshift utilizzerà il provider GeoClue2"
 
 #. redshift@marvel4u->settings-schema.json->changeOnNight->description
-msgid ""
-"Change temperature colour and Redshift brightness between day and night"
+msgid "Change temperature colour and Redshift brightness between day and night"
 msgstr ""
-"Cambia il colore della temperatura e la luminosità di Redshift tra il "
-"giorno e la notte"
+"Cambia il colore della temperatura e la luminosità di Redshift tra il giorno "
+"e la notte"
 
 #. redshift@marvel4u->settings-schema.json->dayColour->description
 msgid "Redshift Day colour temperature"

@@ -1,7 +1,7 @@
 This is a Cinnamon applet that intends to partially resemble the Windows 7 taskbar
 
 ## Requirements
-This applet requires Cinnamon 3.2
+This applet requires at least Cinnamon 3.2 (not for new features anymore). Best supported is Cinnamon 4.0 and newer
 
 ## Installation
 Download and enable via cinnamon settings.

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-01 14:00+0800\n"
-"PO-Revision-Date: 2019-10-22 19:45+0200\n"
+"PO-Revision-Date: 2022-06-03 15:49+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it\n"
 
 #: applet.js:168
 msgid "The following packages were not found:"
@@ -154,7 +154,8 @@ msgstr "Regola lo scorrimento della luminosità"
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->update_scroll->tooltip
 msgid "Allows to adjust a brightness value on a mouse scroll"
-msgstr "Permette di regolare un valore di luminosità con uno scorrimento del mouse"
+msgstr ""
+"Permette di regolare un valore di luminosità con uno scorrimento del mouse"
 
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->scroll_step->description
@@ -164,7 +165,9 @@ msgstr "Passo di scorrimento"
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->scroll_step->tooltip
 msgid "A percentage of a brightness value to adjust on a mouse scroll"
-msgstr "Una percentuale di un valore di luminosità da regolare con uno scorrimento del mouse"
+msgstr ""
+"Una percentuale di un valore di luminosità da regolare con uno scorrimento "
+"del mouse"
 
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->options_type->description
@@ -203,8 +206,11 @@ msgstr "Applica ogni"
 
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->apply_every->tooltip
-msgid "How often to apply values. 0 means that values are not applied periodically."
-msgstr "Con quale frequenza applicare i valori. 0 significa che i valori non vengono applicati periodicamente."
+msgid ""
+"How often to apply values. 0 means that values are not applied periodically."
+msgstr ""
+"Con quale frequenza applicare i valori. 0 significa che i valori non vengono "
+"applicati periodicamente."
 
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->apply_asynchronously->description

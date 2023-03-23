@@ -1,0 +1,6 @@
+{
+  "uuid": "ddcci-monitor-control@andr35",
+  "name": "DDC/CI Monitor Brightness",
+  "version": "1.0.0",
+  "description": "Adjust external monitor brightness and contrast"
+}

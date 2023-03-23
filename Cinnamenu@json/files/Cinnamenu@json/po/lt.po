@@ -1,0 +1,598 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Google translate\n"
+"Language-Team: \n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Type to search..."
+msgstr "Įveskite paiešką ..."
+
+msgid "Initializing"
+msgstr "Inicijavimas"
+
+msgid "No description available"
+msgstr "Aprašo nėra"
+
+msgid "All applications"
+msgstr "Visos programos"
+
+msgid "Places"
+msgstr "Vietos"
+
+msgid "Recent files"
+msgstr "Naujausi failai"
+
+msgid "Bookmarks"
+msgstr "Žymos"
+
+msgid "Favorite apps"
+msgstr "Mėgstamiausios programos"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "reikalingas„ gir1.2-gda-5.0 “paketas„ Firefox “ir„ Midori “žymėms."
+
+msgid "Clear List"
+msgstr "Išvalyti sąrašą"
+
+msgid "No recent files"
+msgstr "Nėra naujausių failų"
+
+msgid "Account details"
+msgstr "Sąskaitos duomenys"
+
+msgid "Grid View"
+msgstr "Tinklelis"
+
+msgid "List View"
+msgstr "Sąrašo vaizdas"
+
+msgid "Switch to grid view"
+msgstr "Perjungti į tinklelio rodinį"
+
+msgid "Switch to list view"
+msgstr "Perjungti į sąrašo rodinį"
+
+msgid "Lock screen"
+msgstr "Užrakinti ekraną"
+
+msgid "Lock the screen"
+msgstr "Užrakinti ekraną"
+
+msgid "Logout"
+msgstr "Atsijungti"
+
+msgid "Leave the session"
+msgstr "Palikti sesiją"
+
+msgid "Quit"
+msgstr "Baigti"
+
+msgid "Shutdown the computer"
+msgstr "Išjungti kompiuterį"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Vykdyti su NVIDIA GPU"
+
+msgid "Add to panel"
+msgstr "Pridėti prie skydelio"
+
+msgid "Add to desktop"
+msgstr "Pridėti prie darbalaukio"
+
+msgid "Remove from favorites"
+msgstr "Pašalinti iš mėgstamiausių"
+
+msgid "Add to favorites"
+msgstr "Įtraukti į adresyną"
+
+msgid "Uninstall"
+msgstr "Pašalinti"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Computer"
+msgstr "Computer"
+
+msgid "Browse network"
+msgstr "Naršyti tinklą"
+
+msgid "Find files..."
+msgstr "Rasti failus..."
+
+msgid "Please wait..."
+msgstr "Prašome palaukti ..."
+
+msgid "Applications"
+msgstr "Programos"
+
+msgid "Documents"
+msgstr "Dokumentai"
+
+msgid "Videos"
+msgstr "Vaizdo įrašai"
+
+msgid "Images"
+msgstr "Vaizdai"
+
+msgid "Music"
+msgstr "Muzika"
+
+msgid "No recent Items"
+msgstr "Nėra naujausių elementų"
+
+msgid "Click to copy"
+msgstr "Spustelėkite norėdami nukopijuoti"
+
+msgid "Applications and files"
+msgstr "Programos ir failai"
+
+msgid "Other search results"
+msgstr "Kiti paieškos rezultatai"
+
+msgid "Browser history"
+msgstr "Naršyklės istorija"
+
+msgid "Browser bookmarks"
+msgstr "Naršyklės žymės"
+
+msgid "Emoji"
+msgstr "Jaustukai"
+
+msgid "Trash"
+msgstr "Šiukšliadėžė"
+
+msgid "Error while opening file:"
+msgstr "Klaida atidarant failą:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Per daug įrašų – rodomi tik pirmieji 1000 įrašų"
+
+msgid "Favorites"
+msgstr "Mėgstamiausi"
+
+msgid "Recent"
+msgstr "Neseniai"
+
+msgid "Home folder"
+msgstr "Namų aplankas"
+
+msgid "Reset category order"
+msgstr "Iš naujo nustatyti kategorijos užsakymą"
+
+msgid "light skin tone"
+msgstr "šviesus odos tonas"
+
+msgid "medium-light skin tone"
+msgstr "vidutinio šviesumo odos atspalvis"
+
+msgid "medium skin tone"
+msgstr "vidutinio odos tono"
+
+msgid "medium-dark skin tone"
+msgstr "vidutinio tamsumo odos atspalvis"
+
+msgid "dark skin tone"
+msgstr "tamsus odos tonas"
+
+msgid "This file is no longer available"
+msgstr "Šis failas nebepasiekiamas"
+
+msgid "Open with"
+msgstr "Atidaryti naudojant"
+
+msgid "Other application..."
+msgstr "Kita programa..."
+
+msgid "Open containing folder"
+msgstr "Atidarykite aplanką, kuriame yra"
+
+msgid "Move to trash"
+msgstr "Išmesti"
+
+msgid "Error while moving file to trash:"
+msgstr "Klaida perkeliant failą į šiukšliadėžę:"
+
+msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
+msgstr "Šis meniu elementas nesusietas su jokiu paketu. Ar vis tiek norite jį pašalinti iš meniu?"
+
+msgid "The following packages will be removed:"
+msgstr "Bus pašalinti šie paketai:"
+
+msgid "Packages to be removed"
+msgstr "Paketai, kuriuos reikia pašalinti"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Nepavyko pašalinti paketo %s, nes to reikalauja kiti paketai."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Paketas %s yra šių paketų priklausomybė:"
+
+msgid "Open"
+msgstr "Atviras"
+
+msgid "Search"
+msgstr "Paieška"
+
+msgid "Start in"
+msgstr "Pradėti"
+
+msgid "Select a folder"
+msgstr "Pasirinkite aplanką"
+
+msgid "Follow symlinks"
+msgstr "Sekite simbolius"
+
+msgid "Search hidden"
+msgstr "Ieškoti paslėpta"
+
+msgid "Use regular expressions"
+msgstr "Naudokite reguliariąsias išraiškas"
+
+msgid "Stop"
+msgstr "Sustabdyti"
+
+msgid "File"
+msgstr "Failas"
+
+msgid "Path"
+msgstr "Kelias"
+
+msgid "Searching..."
+msgstr "Ieškoma..."
+
+msgid "Search Stopped"
+msgstr "Paieška sustabdyta"
+
+msgid "Searching: "
+msgstr "Ieškoma: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Klaida: nepakanka leidimų skaityti aplanką "
+
+msgid "Search Completed"
+msgstr "Paieška baigta"
+
+msgid "Skipping"
+msgstr "Praleidimas"
+
+msgid " - directory already searched"
+msgstr " - katalogas jau ieškomas"
+
+msgid "Cinnamenu"
+msgstr "Cinamenu"
+
+msgid "A flexible menu with grid or list layout options, file browser and emoji search."
+msgstr "Lankstus meniu su tinklelio arba sąrašo išdėstymo parinktimis, failų naršykle ir jaustukų paieška."
+
+msgid "Behavior"
+msgstr "Elgesys"
+
+msgid "Appearance"
+msgstr "Išvaizda"
+
+msgid "Layout and Content"
+msgstr "Išdėstymas ir turinys"
+
+msgid "Search Providers"
+msgstr "Paieškos teikėjai"
+
+msgid "No search provider extensions found"
+msgstr "Nerasta paieškos paslaugų teikėjo plėtinių"
+
+msgid "Panel"
+msgstr "Skydas"
+
+msgid "Menu"
+msgstr "Meniu"
+
+msgid "Layout"
+msgstr "Maketas"
+
+msgid "Content"
+msgstr "Turinys"
+
+msgid "Recent files settings"
+msgstr "Naujausių failų nustatymai"
+
+msgid "Open the menu editor"
+msgstr "Atidaryti meniu rengyklę"
+
+msgid "Use a custom icon"
+msgstr "Naudoti pasirinktinę piktogramą"
+
+msgid "Use a custom icon in the panel"
+msgstr "Naudoti pasirinktinę piktogramą"
+
+msgid "Panel icon"
+msgstr "Skydelio piktograma"
+
+msgid "Panel text"
+msgstr "Skydelio tekstas"
+
+msgid "Text to show beside the panel icon"
+msgstr "Tekstas, rodomas šalia skydelio piktogramos"
+
+msgid "Category icon size (pixels)"
+msgstr "Kategorijos piktogramos dydis (pikselių)"
+
+msgid "Applications list icon size (pixels)"
+msgstr "Programų sąrašo piktogramos dydis (pikselių)"
+
+msgid "Applications grid icon size (pixels)"
+msgstr "Programų tinklelio piktogramos dydis ((pikselių)"
+
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Spartusis klavišas meniu atidarymui ir uždarymui"
+
+msgid "Open menu on hover"
+msgstr "Atidarykite meniu užveskite pelės žymeklį"
+
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Atidarykite meniu perkeldami pelę virš jo"
+
+msgid "milliseconds"
+msgstr "milisekundės"
+
+msgid "Menu hover delay"
+msgstr "Meniu užvedimo atidėjimas"
+
+msgid "Use menu animations"
+msgstr "Naudoti meniu animaciją"
+
+msgid "Animate the menu on open and close"
+msgstr "Leisti meniu animuoti atidarant ir uždarant"
+
+msgid "Activate categories on click"
+msgstr "Suaktyvinkite kategorijas spustelėdami"
+
+msgid "Activate categories on click instead of on hover"
+msgstr "Suaktyvinkite kategorijas spustelėdami"
+
+msgid "Enable autoscrolling"
+msgstr "Įgalinti automatinį slinkimą"
+
+msgid "Enable autoscrolling in application list"
+msgstr "Įgalinti automatinį slinktį programų sąraše"
+
+msgid "Show web bookmarks"
+msgstr "Rodyti žiniatinklio žymes"
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Meniu rodykite naršyklės žiniatinklio žymes.\n"
+"Pastaba: įdiekite paketą gir1.2-gda-5.0, kad skaitytumėte „Firefox“ žymes."
+
+msgid "Enable searching of open windows"
+msgstr "Įgalinti paiešką atidarytuose languose"
+
+msgid "Enable search providers"
+msgstr "Įgalinti paieškos teikėjus"
+
+msgid "Include search provider results in searches"
+msgstr "Pasirinkite, ar paieškos teikėjo rezultatai yra indeksuojami ieškant meniu"
+
+msgid "Example Search Providers"
+msgstr "Paieškos teikėjų pavyzdys"
+
+msgid "Open menu on category:"
+msgstr "Atidaryti meniu kategorijoje:"
+
+msgid "List"
+msgstr "Sąrašas"
+
+msgid "Grid"
+msgstr "Tinklelis"
+
+msgid "Always open the menu with this category selected"
+msgstr "Visada atidarykite meniu pasirinkę šią kategoriją"
+
+msgid "columns"
+msgstr "stulpeliai"
+
+msgid "Number of columns in apps grid"
+msgstr "Stulpelių skaičius programų tinklelyje"
+
+msgid "Show bookmarks and places"
+msgstr "Rodyti žymas ir vietas"
+
+msgid "Show bookmarks and places category in the menu"
+msgstr "Rodyti žymių ir vietų kategoriją meniu"
+
+msgid "Show application icons"
+msgstr "Rodyti programos piktogramas"
+
+msgid "Show category icons"
+msgstr "Rodyti kategorijos piktogramas"
+
+msgid "Show application descriptions under titles"
+msgstr "Rodyti programų aprašus su pavadinimais"
+
+msgid "Show tooltips"
+msgstr "Rodyti patarimus"
+
+msgid "Tooltip delay"
+msgstr "Patarimo patarimas"
+
+msgid "Use a custom menu height"
+msgstr "Naudoti pasirinktinio meniu aukštį"
+
+msgid "Custom menu height (pixels)"
+msgstr "Pasirinktinio meniu aukštis (pikselių)"
+
+msgid "Applications view mode"
+msgstr "Programų peržiūros režimas"
+
+msgid "View applications as list or grid"
+msgstr "Žiūrėti programas kaip sąrašą arba tinklelį"
+
+msgid "Application description placement"
+msgstr "Programos aprašymo vieta"
+
+msgid "Tooltips"
+msgstr "Patarimai"
+
+msgid "Under titles"
+msgstr "Po pavadinimais"
+
+msgid "None"
+msgstr "Nėra"
+
+msgid "Choose where to show application descriptions"
+msgstr "Pasirinkite, kur norite rodyti programų aprašus"
+
+msgid "Sidebar location"
+msgstr "Šoninės juostos vieta"
+
+msgid "Top"
+msgstr "viršuje"
+
+msgid "Bottom"
+msgstr "Apačia"
+
+msgid "Left"
+msgstr "Kairė"
+
+msgid "Right"
+msgstr "į dešinę"
+
+msgid "Choose where to show the sidebar"
+msgstr "Pasirinkite, kur rodyti šoninę juostą"
+
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"Informacija / patarimas: vilkite meniu kraštą, kad pakeistumėte meniu dydį.\n"
+
+msgid "Show favorites on sidebar"
+msgstr "Rodyti mėgstamiausius šoninėje juostoje"
+
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Rodyti mėgstamų programų ir failų piktogramas šoninėje juostoje"
+
+msgid "Show recent items"
+msgstr "Rodyti naujausius elementus"
+
+msgid "Show recent items category in the menu"
+msgstr "Rodyti naujausių elementų kategoriją meniu"
+
+msgid "Show favorite apps category"
+msgstr "Rodyti mėgstamiausių programų kategoriją"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Meniu parodykite mėgstamų programų kategoriją"
+
+msgid "Show home folder"
+msgstr "Rodyti namų aplanką"
+
+msgid "Show home folder category in the menu"
+msgstr "Rodyti namų aplanko kategoriją meniu"
+
+msgid "Last used category"
+msgstr "Paskutinį kartą naudota kategorija"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Užvedus pelės žymeklį automatiškai slinkite programų sąrašą"
+
+msgid "Show hidden files"
+msgstr "Rodyti paslėptus failus"
+
+msgid "Show hidden files in folder view"
+msgstr "Rodyti paslėptus failus aplanko rodinyje"
+
+msgid "Emoji search"
+msgstr "Jaustukų paieška"
+
+msgid "Show emojis in search results"
+msgstr "Rodyti jaustukus paieškos rezultatuose"
+
+msgid "Web search option"
+msgstr "Interneto paieškos parinktis"
+
+msgid "Show an internet search option in search results"
+msgstr "Rodyti paieškos internete parinktį paieškos rezultatuose"
+
+msgid "Search home folder"
+msgstr "Ieškokite namų aplanko"
+
+msgid "When searching, also search my home folder for files"
+msgstr "Ieškodami taip pat ieškokite failų mano namų aplanke"
+
+msgid "Web history search"
+msgstr "Interneto istorijos paieška"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Ieškodami taip pat ieškokite mano naršyklės istorijoje („Google Chrome“, „Chromium“, „Opera“, „Vivaldi“, „Brave“)\n"
+"Pastaba: „Firefox“ istorija šiuo metu nepalaikoma."
+
+msgid "Web bookmarks search"
+msgstr "Žiniatinklio žymių paieška"
+
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Ieškodami taip pat ieškokite mano naršyklės žiniatinklio žymių („Google Chrome“, „Firefox“, „Chromium“, „Opera“, „Vivaldi“, „Brave“)\n"
+"Pastaba: Norėdami ieškoti „Firefox“ žymių, turėsite įdiegti paketą gir1.2-gda-5.0 („Debian“ pagrįsti platinimai, įskaitant „Ubuntu“). & Linux Mint) arba paketą libgda (Arch pagrįsti platinimai) ir paleiskite kompiuterį iš naujo."
+
+msgid "Wikipedia search"
+msgstr "Vikipedijos paieška"
+
+msgid "Show some Wikipedia results"
+msgstr "Rodyti kai kuriuos Vikipedijos rezultatus"
+
+msgid "Wikipedia language"
+msgstr "Vikipedijos kalba"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Pastaba: kai kurios paieškos parinktys vis tiek gali būti naudojamos, net jei jų čia neįjungėte įvesdami paieškos termino priešdėlį.\n"
+"Pavyzdžiui: norėdami ieškoti jaustuko, įveskite „e heart“, kad rastumėte širdelės jaustukus. Taip pat naudokite priešdėlius „f“ failų paieškai, „h“ žiniatinklio istorijai ir „b“ žiniatinklio žymių paieškai.\n"
+
+msgid "Use a custom icon size"
+msgstr "Naudokite tinkintą piktogramos dydį"
+
+msgid "Use a custom size for the panel icon"
+msgstr "Naudokite pasirinktinį skydelio piktogramos dydį"
+
+msgid "Panel icon size (pixels)"
+msgstr "Skydelio piktogramos dydis (pikseliais)"
+
+msgid "Choose a custom size for the panel icon"
+msgstr "Pasirinkite tinkintą skydelio piktogramos dydį"
+
+msgid "Sidebar icon size (pixels)"
+msgstr "Šoninės juostos piktogramos dydis (pikseliais)"
+
+msgid "Use sidebar box style"
+msgstr "Naudokite šoninės juostos dėžutės stilių"
+
+msgid "Use a sidebar box style"
+msgstr "Naudokite šoninės juostos dėžutės stilių"
+
+msgid "Use tile style"
+msgstr "Naudokite plytelių stilių"
+
+msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
+msgstr "Naudokite programos mygtukų plytelių stilių (Pastaba: kai kurios temos gali neveikti)"
