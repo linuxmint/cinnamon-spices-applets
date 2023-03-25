@@ -16,9 +16,11 @@ const Gdk = imports.gi.Gdk;
 imports.searchPath.unshift('.');
 var tryFn = imports.utils.tryFn;
 var _ = imports.utils._;
+var to_string = imports.tostring.to_string
 
 const DEFAULT_CONFIG = {
   labelsOn: true,
+  thickness: 1,
   refreshRate: 1000,
   labelColor: [0.9333333333333333, 0.9333333333333333, 0.9254901960784314, 1],
   backgroundColor: [1, 1, 1, 0.1],
@@ -130,6 +132,26 @@ Preferences.prototype = {
       1, // padding
       Gtk.PackType.START // pack_type
     );
+
+
+    this.thicknessScale = Gtk.Scale.new_with_range(
+      Gtk.Orientation.HORIZONTAL,
+      1,
+      5,
+      1
+    );
+    this.thicknessScale.set_value_pos(Gtk.PositionType.RIGHT);
+    this.thicknessScale.width_request = 300;
+    let box100 = this.builder.get_object('box100');
+    box100.add(this.thicknessScale);
+    box100.set_child_packing(
+      this.thicknessScale, // child
+      false, // expand
+      true, // fill
+      1, // padding
+      Gtk.PackType.START // pack_type
+    );
+
     this.load();
     print(JSON.stringify(this.config)); //print default settings again for the monitoring process
 
@@ -147,6 +169,13 @@ Preferences.prototype = {
     this.setColor('backgroundColorButton', this.config.backgroundColor);
     this.builder.get_object('backgroundColorButton').connect(
       'color-set',
+      Lang.bind(this, function() {
+        this.save();
+      })
+    );
+    this.thicknessScale.set_value(this.config.thickness);
+    this.thicknessScale.connect(
+      'value-changed',
       Lang.bind(this, function() {
         this.save();
       })
@@ -555,6 +584,7 @@ Preferences.prototype = {
   },
 
   save: function() {
+    this.config.thickness = this.thicknessScale.get_value();
     this.config.refreshRate = this.refreshRateScale.get_value();
     this.config.labelColor = this.getColorByName('labelColorButton');
     this.config.backgroundColor = this.getColorByName('backgroundColorButton');
@@ -663,7 +693,7 @@ Preferences.prototype = {
 };
 
 function getParamNames(func) {
-  let funStr = func.toString();
+  let funStr = to_string(func);
   return funStr.slice(funStr.indexOf('(') + 1, funStr.indexOf(')')).match(/([^\s,]+)/g);
 }
 try {

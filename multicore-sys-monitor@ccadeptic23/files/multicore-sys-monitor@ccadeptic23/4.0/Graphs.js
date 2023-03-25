@@ -1,5 +1,25 @@
 const Pango = imports.gi.Pango;
 const PangoCairo = imports.gi.PangoCairo;
+const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
+
+const UUID = "multicore-sys-monitor@ccadeptic23";
+
+let dotCinnamonFilePath = GLib.get_home_dir() + '/.cinnamon/configs';
+let configFilePath;
+if (Gio.file_new_for_path(dotCinnamonFilePath).query_exists(null))
+  configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + UUID;
+else
+  configFilePath = GLib.get_home_dir() + '/.config/cinnamon/spices/' + UUID;
+
+
+let ConfigSettings;
+if (typeof require !== 'undefined') {
+  ConfigSettings = require('./ConfigSettings').ConfigSettings;
+} else {
+  const AppletDir = imports.ui.appletManager.applets[UUID];
+  ConfigSettings = AppletDir.ConfigSettings.ConfigSettings;
+}
 
 function GraphVBars(area) {
   this._init(area);
@@ -190,6 +210,7 @@ GraphLineChart.prototype = {
     this.maxValue = 1.0;
     this.maxValueLoc = null;
     this.minMaxValue = 1.0;
+    this.configSettings = new ConfigSettings(configFilePath);
   },
 
   refreshData: function(currentReadings, providerName) {
@@ -297,7 +318,7 @@ GraphLineChart.prototype = {
       let b = colorsList[datapointnum][2];
       let a = colorsList[datapointnum][3];
       areaContext.setSourceRGBA(r, g, b, a);
-      areaContext.setLineWidth(1);
+      areaContext.setLineWidth(this.configSettings.getThickness());
 
       areaContext.setLineJoin(1); //rounded
       for (let j = 1; j < this.dataPointsList.length; j++) {

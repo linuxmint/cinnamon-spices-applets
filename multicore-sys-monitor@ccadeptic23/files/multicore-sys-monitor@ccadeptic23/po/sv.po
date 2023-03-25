@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-27 11:22-0500\n"
+"POT-Creation-Date: 2023-03-22 23:02+0100\n"
 "PO-Revision-Date: 2019-02-09 16:12+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -22,14 +22,17 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: po\n"
 
 #: ../3.0/prefsui.glade.h:1 ../3.2/prefsui.glade.h:1 ../3.4/prefsui.glade.h:1
+#: ../4.0/prefsui.glade.h:1
 msgid "Multi-Core System Monitor Preferences"
 msgstr "Inställningar för övervakare av flerkärniga system"
 
 #: ../3.0/prefsui.glade.h:2 ../3.2/prefsui.glade.h:2 ../3.4/prefsui.glade.h:2
+#: ../4.0/prefsui.glade.h:2
 msgid "Labels"
 msgstr "Etiketter"
 
 #: ../3.0/prefsui.glade.h:3 ../3.2/prefsui.glade.h:3 ../3.4/prefsui.glade.h:3
+#: ../4.0/prefsui.glade.h:3
 msgid "Refresh Rate (ms)"
 msgstr "Uppdateringsfrekvens (ms)"
 
@@ -38,108 +41,114 @@ msgid "Height"
 msgstr "Höjd"
 
 #: ../3.0/prefsui.glade.h:5 ../3.2/prefsui.glade.h:6 ../3.4/prefsui.glade.h:5
+#: ../4.0/prefsui.glade.h:6
 msgid "Background Color"
 msgstr "Bakgrundsfärg"
 
 #: ../3.0/prefsui.glade.h:6 ../3.2/prefsui.glade.h:7 ../3.4/prefsui.glade.h:6
+#: ../4.0/prefsui.glade.h:7
 msgid "General"
 msgstr "Allmänt"
 
 #: ../3.0/prefsui.glade.h:7 ../3.2/prefsui.glade.h:8 ../3.4/prefsui.glade.h:7
-#: ../3.0/prefs.js:279 ../3.0/prefs.js:393 ../3.2/prefs.js:283
-#: ../3.2/prefs.js:398 ../3.4/prefs.js:327 ../3.4/prefs.js:463
+#: ../4.0/prefsui.glade.h:8 ../3.0/prefs.js:279 ../3.0/prefs.js:393
+#: ../3.2/prefs.js:283 ../3.2/prefs.js:398 ../3.4/prefs.js:327
+#: ../3.4/prefs.js:463 ../4.0/prefs.js:355 ../4.0/prefs.js:491
 msgid "Enable"
 msgstr "Aktivera"
 
 #: ../3.0/prefsui.glade.h:8 ../3.2/prefsui.glade.h:9 ../3.4/prefsui.glade.h:8
+#: ../4.0/prefsui.glade.h:9
 msgid "Width"
 msgstr "Bredd"
 
 #: ../3.0/prefsui.glade.h:9 ../3.2/prefsui.glade.h:10 ../3.4/prefsui.glade.h:9
+#: ../4.0/prefsui.glade.h:10
 msgid "Colors"
 msgstr "Färger"
 
 #: ../3.0/prefsui.glade.h:10 ../3.2/prefsui.glade.h:11
-#: ../3.4/prefsui.glade.h:10 ../3.0/DataProviders.js:97
-#: ../3.0/DataProviders.js:104 ../3.0/prefs.js:183 ../3.2/DataProviders.js:97
-#: ../3.2/DataProviders.js:104 ../3.2/prefs.js:187 ../3.4/DataProviders.js:55
-#: ../3.4/prefs.js:195
+#: ../3.4/prefsui.glade.h:10 ../4.0/prefsui.glade.h:11
+#: ../3.0/DataProviders.js:107 ../3.0/prefs.js:183 ../3.2/DataProviders.js:107
+#: ../3.2/prefs.js:187 ../3.4/DataProviders.js:58 ../3.4/prefs.js:195
+#: ../4.0/DataProviders.js:54 ../4.0/prefs.js:223
 msgid "CPU"
 msgstr "CPU"
 
 #: ../3.0/prefsui.glade.h:11 ../3.2/prefsui.glade.h:12
-#: ../3.4/prefsui.glade.h:11
+#: ../3.4/prefsui.glade.h:11 ../4.0/prefsui.glade.h:12
 msgid "Usedup"
 msgstr "Använt"
 
 #: ../3.0/prefsui.glade.h:12 ../3.2/prefsui.glade.h:13
-#: ../3.4/prefsui.glade.h:12
+#: ../3.4/prefsui.glade.h:12 ../4.0/prefsui.glade.h:13
 msgid "Cached"
 msgstr "Cache-lagrat"
 
 #: ../3.0/prefsui.glade.h:13 ../3.2/prefsui.glade.h:14
-#: ../3.4/prefsui.glade.h:13
+#: ../3.4/prefsui.glade.h:13 ../4.0/prefsui.glade.h:14
 msgid "Buffer"
 msgstr "Buffert"
 
 #: ../3.0/prefsui.glade.h:14 ../3.2/prefsui.glade.h:15
-#: ../3.4/prefsui.glade.h:14
+#: ../3.4/prefsui.glade.h:14 ../4.0/prefsui.glade.h:15
 msgid "Free"
 msgstr "Ledigt"
 
 #: ../3.0/prefsui.glade.h:15 ../3.2/prefsui.glade.h:16
-#: ../3.4/prefsui.glade.h:15 ../3.0/DataProviders.js:187
-#: ../3.2/DataProviders.js:187 ../3.4/DataProviders.js:192
+#: ../3.4/prefsui.glade.h:15 ../4.0/prefsui.glade.h:16
+#: ../3.0/DataProviders.js:200 ../3.2/DataProviders.js:200
+#: ../3.4/DataProviders.js:195 ../4.0/DataProviders.js:191
 msgid "Swap"
 msgstr "Växlingsutrymme"
 
 #: ../3.0/prefsui.glade.h:16 ../3.2/prefsui.glade.h:17
-#: ../3.4/prefsui.glade.h:16
+#: ../3.4/prefsui.glade.h:16 ../4.0/prefsui.glade.h:17
 msgid "Memory"
 msgstr "Minne"
 
 #: ../3.0/prefsui.glade.h:17 ../3.2/prefsui.glade.h:18
-#: ../3.4/prefsui.glade.h:17
+#: ../3.4/prefsui.glade.h:17 ../4.0/prefsui.glade.h:18
 msgid "Scaling"
 msgstr "Skalning"
 
 #: ../3.0/prefsui.glade.h:18 ../3.2/prefsui.glade.h:19
-#: ../3.4/prefsui.glade.h:18
+#: ../3.4/prefsui.glade.h:18 ../4.0/prefsui.glade.h:19
 msgid "Auto Scale"
 msgstr "Automatisk skalning"
 
 #: ../3.0/prefsui.glade.h:19 ../3.2/prefsui.glade.h:20
-#: ../3.4/prefsui.glade.h:19
+#: ../3.4/prefsui.glade.h:19 ../4.0/prefsui.glade.h:20
 msgid "Logarithmic"
 msgstr "Logaritmisk"
 
 #: ../3.0/prefsui.glade.h:20 ../3.2/prefsui.glade.h:21
-#: ../3.4/prefsui.glade.h:20
+#: ../3.4/prefsui.glade.h:20 ../4.0/prefsui.glade.h:21
 msgid "Devices"
 msgstr "Enheter"
 
 #: ../3.0/prefsui.glade.h:21 ../3.2/prefsui.glade.h:22
-#: ../3.4/prefsui.glade.h:21
+#: ../3.4/prefsui.glade.h:21 ../4.0/prefsui.glade.h:22
 msgid "Network"
 msgstr "Nätverk"
 
 #: ../3.0/prefsui.glade.h:22 ../3.2/prefsui.glade.h:23
-#: ../3.4/prefsui.glade.h:22
+#: ../3.4/prefsui.glade.h:22 ../4.0/prefsui.glade.h:23
 msgid "Disk IO"
 msgstr "Disk I/O"
 
 #: ../3.0/prefsui.glade.h:23 ../3.2/prefsui.glade.h:24
-#: ../3.4/prefsui.glade.h:23
+#: ../3.4/prefsui.glade.h:23 ../4.0/prefsui.glade.h:24
 msgid "Scaling Description"
 msgstr "Skalningsbeskrivning"
 
 #: ../3.0/prefsui.glade.h:24 ../3.2/prefsui.glade.h:25
-#: ../3.4/prefsui.glade.h:24
+#: ../3.4/prefsui.glade.h:24 ../4.0/prefsui.glade.h:25
 msgid "Close"
 msgstr "Stäng"
 
 #: ../3.0/prefsui.glade.h:25 ../3.2/prefsui.glade.h:26
-#: ../3.4/prefsui.glade.h:25
+#: ../3.4/prefsui.glade.h:25 ../4.0/prefsui.glade.h:26
 msgid ""
 "Auto Scaling:\n"
 "\tThis will scale the line graph by the largest reading within the\n"
@@ -147,8 +156,7 @@ msgid ""
 "\tthe next largest becomes the new value by which the readings\n"
 "\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
 "\tHowever, it also means that if there is a large reading small readings\n"
-"\tmay become indistinguishable from 0. And if there are only small "
-"readings\n"
+"\tmay become indistinguishable from 0. And if there are only small readings\n"
 "\tthen slightly larger readings may appear larger than they should.\n"
 "\tIf not enabled the largest value used will be the largest reading since\n"
 "\tcinnamon was started.\n"
@@ -161,8 +169,7 @@ msgstr ""
 "Automatisk skalning:\n"
 "\tDetta kommer att skala linjediagrammet efter det högsta "
 "avläsningsvärdet, \n"
-"\tinom det visade området. När det högsta värdet inte längre visas, "
-"skalas \n"
+"\tinom det visade området. När det högsta värdet inte längre visas, skalas \n"
 "\tdiagrammet efter det näst högsta. Detta tillåter \"Zoomning\" för "
 "detaljerad \n"
 "\tvisning i diagrammet. Det innebär också att om det finns ett högt värde, "
@@ -170,8 +177,7 @@ msgstr ""
 "\tsmå avläsningar bli omöjliga att skilja från 0, och om det endast finns "
 "låga \n"
 "\tvärden kan något större avläsningar förefalla större än de borde. \n"
-"\tVid inaktivering, kommer den högsta avläsningen sedan Cinnamon "
-"startades \n"
+"\tVid inaktivering, kommer den högsta avläsningen sedan Cinnamon startades \n"
 "\tatt vara det högsta värde som används.\n"
 "\n"
 "Logaritmisk skalning:\n"
@@ -180,128 +186,148 @@ msgstr ""
 "de \n"
 "\tinte dominerar de mindre avläsningarna."
 
-#: ../3.2/prefsui.glade.h:5 ../3.4/prefsui.glade.h:4
+#: ../3.2/prefsui.glade.h:5 ../3.4/prefsui.glade.h:4 ../4.0/prefsui.glade.h:5
 msgid "Label Color"
 msgstr "Etikettfärg"
 
-#: ../3.0/DataProviders.js:103 ../3.2/DataProviders.js:103
-#: ../3.4/DataProviders.js:123
+#: ../4.0/prefsui.glade.h:4
+msgid "Curves thickness"
+msgstr ""
+
+#: ../3.0/DataProviders.js:113 ../3.2/DataProviders.js:113
+#: ../3.4/DataProviders.js:126 ../4.0/DataProviders.js:122
 msgid "------------- CPU ------------"
 msgstr "--------------CPU-------------"
 
-#: ../3.0/DataProviders.js:144 ../3.2/DataProviders.js:144
-#: ../3.4/DataProviders.js:138
+#: ../3.0/DataProviders.js:117 ../3.2/DataProviders.js:117
+#: ../3.4/DataProviders.js:129 ../4.0/DataProviders.js:125
+msgid "Core"
+msgstr "Kärna"
+
+#: ../3.0/DataProviders.js:157 ../3.2/DataProviders.js:157
+#: ../3.4/DataProviders.js:141 ../4.0/DataProviders.js:137
 msgid "MEM"
 msgstr "MINNE"
 
-#: ../3.0/DataProviders.js:150 ../3.2/DataProviders.js:150
-#: ../3.4/DataProviders.js:158
+#: ../3.0/DataProviders.js:163 ../3.2/DataProviders.js:163
+#: ../3.4/DataProviders.js:161 ../4.0/DataProviders.js:157
 msgid "----------- Memory -----------"
 msgstr "----------- Minne ------------"
 
-#: ../3.0/DataProviders.js:151 ../3.2/DataProviders.js:151
+#: ../3.0/DataProviders.js:164 ../3.2/DataProviders.js:164
 msgid "Usedup:"
 msgstr "Förbrukat:"
 
-#: ../3.0/DataProviders.js:152 ../3.2/DataProviders.js:152
-#: ../3.4/DataProviders.js:159
+#: ../3.0/DataProviders.js:165 ../3.2/DataProviders.js:165
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
 msgid "Cached:"
 msgstr "Cache-lagrat:"
 
-#: ../3.0/DataProviders.js:153 ../3.2/DataProviders.js:153
-#: ../3.4/DataProviders.js:159
+#: ../3.0/DataProviders.js:166 ../3.2/DataProviders.js:166
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
 msgid "Buffer:"
 msgstr "Buffert:"
 
-#: ../3.0/DataProviders.js:154 ../3.2/DataProviders.js:154
-#: ../3.4/DataProviders.js:159
+#: ../3.0/DataProviders.js:167 ../3.2/DataProviders.js:167
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
 msgid "Free:"
 msgstr "Ledigt:"
 
-#: ../3.0/DataProviders.js:181 ../3.2/DataProviders.js:181
-#: ../3.4/DataProviders.js:173
+#: ../3.0/DataProviders.js:194 ../3.2/DataProviders.js:194
+#: ../3.4/DataProviders.js:176 ../4.0/DataProviders.js:172
 msgid "SWAP"
 msgstr "VÄXLING"
 
-#: ../3.0/DataProviders.js:186 ../3.2/DataProviders.js:186
-#: ../3.4/DataProviders.js:191
+#: ../3.0/DataProviders.js:199 ../3.2/DataProviders.js:199
+#: ../3.4/DataProviders.js:194 ../4.0/DataProviders.js:190
 msgid "------------ Swap ------------"
 msgstr "-------Växlingsutrymme--------"
 
-#: ../3.0/DataProviders.js:251 ../3.2/DataProviders.js:251
-#: ../3.4/DataProviders.js:202
+#: ../3.0/DataProviders.js:264 ../3.2/DataProviders.js:264
+#: ../3.4/DataProviders.js:205 ../4.0/DataProviders.js:201
 msgid "NET"
 msgstr "NÄT"
 
-#: ../3.0/DataProviders.js:292 ../3.2/DataProviders.js:292
-#: ../3.4/DataProviders.js:286
+#: ../3.0/DataProviders.js:305 ../3.2/DataProviders.js:305
+#: ../3.4/DataProviders.js:289 ../4.0/DataProviders.js:284
 msgid "---------- Networks ----------"
 msgstr "-----------Nätverk------------"
 
-#: ../3.0/DataProviders.js:294 ../3.2/DataProviders.js:294
-#: ../3.4/DataProviders.js:297
+#: ../3.0/DataProviders.js:308 ../3.2/DataProviders.js:308
+#: ../3.4/DataProviders.js:300 ../4.0/DataProviders.js:295
 msgid "Down:"
 msgstr "Ner:"
 
-#: ../3.0/DataProviders.js:294 ../3.2/DataProviders.js:294
-#: ../3.4/DataProviders.js:298
-msgid "Up:"
-msgstr "Upp:"
-
-#: ../3.0/DataProviders.js:295 ../3.2/DataProviders.js:295
+#: ../3.0/DataProviders.js:308 ../3.0/DataProviders.js:309
+#: ../3.2/DataProviders.js:308 ../3.2/DataProviders.js:309
 msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
-#: ../3.0/DataProviders.js:368 ../3.2/DataProviders.js:368
-#: ../3.4/DataProviders.js:314
+#: ../3.0/DataProviders.js:309 ../3.2/DataProviders.js:309
+#: ../3.4/DataProviders.js:301 ../4.0/DataProviders.js:296
+msgid "Up:"
+msgstr "Upp:"
+
+#: ../3.0/DataProviders.js:382 ../3.2/DataProviders.js:382
+#: ../3.4/DataProviders.js:317 ../4.0/DataProviders.js:312
 msgid "DISK"
 msgstr "DISK"
 
-#: ../3.0/DataProviders.js:394 ../3.2/DataProviders.js:394
-#: ../3.4/DataProviders.js:375
+#: ../3.0/DataProviders.js:408 ../3.2/DataProviders.js:408
+#: ../3.4/DataProviders.js:378 ../4.0/DataProviders.js:373
 msgid "------------ Disks -----------"
 msgstr "------------Diskar------------"
 
-#: ../3.0/DataProviders.js:396 ../3.2/DataProviders.js:396
-#: ../3.4/DataProviders.js:383
+#: ../3.0/DataProviders.js:411 ../3.2/DataProviders.js:411
+#: ../3.4/DataProviders.js:386 ../4.0/DataProviders.js:381
 msgid "Read:"
 msgstr "Läs:"
 
-#: ../3.0/DataProviders.js:396 ../3.2/DataProviders.js:396
-#: ../3.4/DataProviders.js:384
-msgid "Write:"
-msgstr "Skriv:"
-
-#: ../3.0/DataProviders.js:397 ../3.2/DataProviders.js:397
+#: ../3.0/DataProviders.js:411 ../3.0/DataProviders.js:412
+#: ../3.2/DataProviders.js:411 ../3.2/DataProviders.js:412
 msgid "(MiB/s)"
 msgstr "(MiB/s)"
+
+#: ../3.0/DataProviders.js:412 ../3.2/DataProviders.js:412
+#: ../3.4/DataProviders.js:387 ../4.0/DataProviders.js:382
+msgid "Write:"
+msgstr "Skriv:"
 
 #: ../3.0/ErrorApplet.js:28 ../3.0/ErrorApplet.js:34 ../3.2/ErrorApplet.js:28
 #: ../3.2/ErrorApplet.js:34
 msgid "Multi-Core System Monitor Error."
 msgstr "Fel i övervakaren för flerkärniga system."
 
-#: ../3.0/applet.js:132 ../3.2/applet.js:129 ../3.4/applet.js:254
+#: ../3.0/applet.js:141 ../3.2/applet.js:139 ../3.4/applet.js:264
+#: ../4.0/applet.js:268
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: ../3.0/applet.js:313 ../3.2/applet.js:324
+#: ../3.0/applet.js:323 ../3.2/applet.js:334
 msgid "Please install \"gir1.2-gtop-2.0\" package."
 msgstr "Installera paketet \"gir1.2-gtop-2.0\"."
 
+#: ../3.0/applet.js:328 ../3.2/applet.js:339
+msgid "Reload this applet"
+msgstr ""
+
 #: ../3.0/prefs.js:290 ../3.2/prefs.js:294 ../3.4/prefs.js:338
+#: ../4.0/prefs.js:366
 msgid "Down"
 msgstr "Ner"
 
 #: ../3.0/prefs.js:298 ../3.2/prefs.js:302 ../3.4/prefs.js:346
+#: ../4.0/prefs.js:374
 msgid "Up"
 msgstr "Upp"
 
 #: ../3.0/prefs.js:406 ../3.2/prefs.js:414 ../3.4/prefs.js:479
+#: ../4.0/prefs.js:507
 msgid "Read"
 msgstr "Läs"
 
 #: ../3.0/prefs.js:414 ../3.2/prefs.js:423 ../3.4/prefs.js:488
+#: ../4.0/prefs.js:516
 msgid "Write"
 msgstr "Skriv"
 
@@ -309,23 +335,19 @@ msgstr "Skriv"
 msgid "Error while saving file:"
 msgstr "Kunde inte spara filen:"
 
-#: ../3.4/DataProviders.js:46
+#: ../3.4/DataProviders.js:49 ../4.0/DataProviders.js:45
 msgid "/s"
 msgstr "/s"
 
-#: ../3.4/DataProviders.js:126
-msgid "Core"
-msgstr "Kärna"
-
-#: ../3.4/DataProviders.js:159
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
 msgid "Used:"
 msgstr "Använt:"
 
-#: ../3.4/applet.js:60
+#: ../3.4/applet.js:60 ../4.0/applet.js:59
 msgid "Dependency missing"
 msgstr "Saknat beroende"
 
-#: ../3.4/applet.js:62
+#: ../3.4/applet.js:62 ../4.0/applet.js:61
 msgid ""
 "Please install the GTop package\n"
 "\tUbuntu / Mint: gir1.2-gtop-2.0\n"
