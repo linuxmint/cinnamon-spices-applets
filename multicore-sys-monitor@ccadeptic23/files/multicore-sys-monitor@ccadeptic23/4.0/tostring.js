@@ -1,16 +1,8 @@
-const Gio = imports.gi.Gio;
-const ByteArray = imports.byteArray;
-
-const to_string = function(data) {
-  //~ if (ByteArray.hasOwnProperty("toString")) {
-    //~ return ""+ByteArray.toString(data);
-  //~ } else {
-    //~ return ""+data;
-  //~ }
+var to_string = function(data) {
   return ""+stringFromUTF8Array(data);
 }
 
-const stringFromUTF8Array = function(data) {
+var stringFromUTF8Array = function(data) {
   const extraByteMap = [ 1, 1, 1, 1, 2, 2, 3, 0 ];
   var count = data.length;
   var str = "";
