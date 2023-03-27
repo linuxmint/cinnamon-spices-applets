@@ -5,6 +5,8 @@ const PopupMenu = imports.ui.popupMenu;
 const Cvc = imports.gi.Cvc;
 const Slider = imports.ui.slider;
 const Tooltips = imports.ui.tooltips;
+const Gio = imports.gi.Gio;
+const Main = imports.ui.main;
 const {
   get_home_dir,
   file_test,
@@ -127,6 +129,11 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 
         if(this.stream.is_muted !== muted)
             this.stream.change_is_muted(muted);
+
+        if (this.applet.volume_show_osd) {
+            let icon = Gio.Icon.new_for_string("webradioreceiver-symbolic");
+            Main.osdWindowManager.show(-1, icon, this.applet.percentage, null);
+        }
 
         //~ if(!this._dragging)
             //~ this.applet._notifyVolumeChange(this.stream);

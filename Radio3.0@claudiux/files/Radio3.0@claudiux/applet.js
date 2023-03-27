@@ -1088,6 +1088,7 @@ WebRadioReceiverAndRecorder.prototype = {
     this.settings.bind("show-reload", "show_reload");
     this.settings.bind("show-bitrate", "show_bitrate", (...args) => this.set_show_bitrate(...args));
     this.settings.bind("show-codec", "show_codec");
+    this.settings.bind("volume-show-osd", "volume_show_osd");
 
     this.settings.bind("import-list", "import_list");
     this.settings.bind("import-dir", "import_dir");
