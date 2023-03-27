@@ -40,18 +40,7 @@ export class PirateWeather extends BaseProvider {
 	//  Functions
 	//--------------------------------------------------------
 	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
-		if (DateTime.fromObject({year: 2023, month: 3, day: 31}).diffNow().milliseconds < 0) {
-			this.app.ShowError(
-				{
-					type: "hard",
-					detail: "no api response",
-					message: _("This API has ceased to function, please use another one.")
-				}
-			)
-			return null;
-		}
 		const query = this.ConstructQuery(loc);
-		if (query == "" && query == null) return null;
 
 		const response = await this.app.LoadJsonAsyncWithDetails<PirateWeatherPayload>(query, {}, this.HandleError);
 		if (!response.Success)
@@ -147,27 +136,15 @@ export class PirateWeather extends BaseProvider {
 		}
 		catch (e) {
 			if (e instanceof Error)
-				Logger.Error("DarkSky payload parsing error: " + e, e)
-			this.app.ShowError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
+				Logger.Error("Pirate Weather payload parsing error: " + e, e)
+			this.app.ShowError({ type: "soft", detail: "unusual payload", service: "pirate_weather", message: _("Failed to Process Weather Info") });
 			return null;
 		}
 	};
 
-	private ConvertToAPILocale(systemLocale: string | null) {
-		if (systemLocale == null)
-			return "en";
-
-		if (systemLocale == "zh-tw") {
-			return systemLocale;
-		}
-		const lang = systemLocale.split("-")[0];
-		return lang;
-	}
-
 	private ConstructQuery(loc: LocationData): string {
 		this.SetQueryUnit();
 		let query = this.query + this.app.config.ApiKey + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
-		const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
 		return query;
 	}
 
@@ -182,7 +159,7 @@ export class PirateWeather extends BaseProvider {
 				type: "hard",
 				userError: true,
 				detail: "bad key",
-				service: "darksky",
+				service: "pirate_weather",
 				message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
 			});
 			return false;
@@ -192,7 +169,7 @@ export class PirateWeather extends BaseProvider {
 				type: "hard",
 				userError: true,
 				detail: "no key",
-				service: "darksky",
+				service: "pirate_weather",
 				message: _("Please Make sure you\nentered the API key that you have from DarkSky")
 			});
 			return false;
