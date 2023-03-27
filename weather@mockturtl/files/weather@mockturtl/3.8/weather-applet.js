@@ -15192,7 +15192,255 @@ class GeoJS {
     ;
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/pirate_weather/pirateWeather.ts
+
+
+
+
+class PirateWeather extends BaseProvider {
+    get remainingCalls() {
+        return null;
+    }
+    ;
+    constructor(_app) {
+        super(_app);
+        this.prettyName = _("Pirate Weather");
+        this.name = "PirateWeather";
+        this.maxForecastSupport = 7;
+        this.website = "http://pirateweather.net/en/latest/";
+        this.maxHourlyForecastSupport = 168;
+        this.needsApiKey = true;
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
+        this.remainingQuota = null;
+        this.query = "https://api.pirateweather.net/forecast/";
+        this.unit = "si";
+        this.HandleError = (message) => {
+            if (message.ErrorData.code == 403) {
+                this.app.ShowError({
+                    type: "hard",
+                    userError: true,
+                    detail: "bad key",
+                    service: "darksky",
+                    message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+                });
+                return false;
+            }
+            else if (message.ErrorData.code == 401) {
+                this.app.ShowError({
+                    type: "hard",
+                    userError: true,
+                    detail: "no key",
+                    service: "darksky",
+                    message: _("Please Make sure you\nentered the API key that you have from DarkSky")
+                });
+                return false;
+            }
+            return true;
+        };
+    }
+    async GetWeather(loc) {
+        if (DateTime.fromObject({ year: 2023, month: 3, day: 31 }).diffNow().milliseconds < 0) {
+            this.app.ShowError({
+                type: "hard",
+                detail: "no api response",
+                message: _("This API has ceased to function, please use another one.")
+            });
+            return null;
+        }
+        const query = this.ConstructQuery(loc);
+        if (query == "" && query == null)
+            return null;
+        const response = await this.app.LoadJsonAsyncWithDetails(query, {}, this.HandleError);
+        if (!response.Success)
+            return null;
+        return this.ParseWeather(response.Data);
+    }
+    ;
+    ParseWeather(json) {
+        try {
+            const sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
+            const sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
+            const result = {
+                date: DateTime.fromSeconds(json.currently.time, { zone: json.timezone }),
+                coord: {
+                    lat: json.latitude,
+                    lon: json.longitude
+                },
+                location: {
+                    url: "https://merrysky.net/forecast/" + json.latitude + "," + json.longitude,
+                    timeZone: json.timezone,
+                },
+                sunrise: sunrise,
+                sunset: sunset,
+                wind: {
+                    speed: this.ToMPS(json.currently.windSpeed),
+                    degree: json.currently.windBearing
+                },
+                temperature: this.ToKelvin(json.currently.temperature),
+                pressure: json.currently.pressure,
+                humidity: json.currently.humidity * 100,
+                dewPoint: this.ToKelvin(json.currently.dewPoint),
+                condition: {
+                    main: json.currently.summary,
+                    description: json.currently.summary,
+                    icons: this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }),
+                    customIcon: this.ResolveCustomIcon(json.currently.icon)
+                },
+                extra_field: {
+                    name: _("Feels Like"),
+                    value: this.ToKelvin(json.currently.apparentTemperature),
+                    type: "temperature"
+                },
+                forecasts: [],
+                hourlyForecasts: []
+            };
+            for (const day of json.daily.data) {
+                const forecast = {
+                    date: DateTime.fromSeconds(day.time, { zone: json.timezone }),
+                    temp_min: this.ToKelvin(day.temperatureLow),
+                    temp_max: this.ToKelvin(day.temperatureHigh),
+                    condition: {
+                        main: day.summary,
+                        description: day.summary,
+                        icons: this.ResolveIcon(day.icon),
+                        customIcon: this.ResolveCustomIcon(day.icon)
+                    },
+                };
+                forecast.date = forecast.date.set({ hour: 12 });
+                result.forecasts.push(forecast);
+            }
+            for (const hour of json.hourly.data) {
+                const forecast = {
+                    date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
+                    temp: this.ToKelvin(hour.temperature),
+                    condition: {
+                        main: hour.summary,
+                        description: hour.summary,
+                        icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, DateTime.fromSeconds(hour.time, { zone: json.timezone })),
+                        customIcon: this.ResolveCustomIcon(hour.icon)
+                    },
+                    precipitation: {
+                        type: hour.precipType,
+                        volume: hour.precipProbability,
+                        chance: hour.precipProbability * 100
+                    }
+                };
+                result.hourlyForecasts.push(forecast);
+            }
+            return result;
+        }
+        catch (e) {
+            if (e instanceof Error)
+                logger_Logger.Error("DarkSky payload parsing error: " + e, e);
+            this.app.ShowError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
+            return null;
+        }
+    }
+    ;
+    ConvertToAPILocale(systemLocale) {
+        if (systemLocale == null)
+            return "en";
+        if (systemLocale == "zh-tw") {
+            return systemLocale;
+        }
+        const lang = systemLocale.split("-")[0];
+        return lang;
+    }
+    ConstructQuery(loc) {
+        this.SetQueryUnit();
+        let query = this.query + this.app.config.ApiKey + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
+        const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
+        return query;
+    }
+    ResolveIcon(icon, sunTimes, date) {
+        switch (icon) {
+            case "rain":
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
+            case "snow":
+                return ["weather-snow"];
+            case "sleet":
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
+            case "fog":
+                return ["weather-fog"];
+            case "wind":
+                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"];
+            case "cloudy":
+                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-overcast", "weather-clouds", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"];
+            case "partly-cloudy-night":
+                return ["weather-few-clouds-night"];
+            case "partly-cloudy-day":
+                return ["weather-few-clouds"];
+            case "clear-night":
+                return ["weather-clear-night"];
+            case "clear-day":
+                return ["weather-clear"];
+            default:
+                return ["weather-severe-alert"];
+        }
+    }
+    ;
+    ResolveCustomIcon(icon) {
+        switch (icon) {
+            case "rain":
+                return "rain-symbolic";
+            case "snow":
+                return "snow-symbolic";
+            case "fog":
+                return "fog-symbolic";
+            case "cloudy":
+                return "cloudy-symbolic";
+            case "partly-cloudy-night":
+                return "night-alt-cloudy-symbolic";
+            case "partly-cloudy-day":
+                return "day-cloudy-symbolic";
+            case "clear-night":
+                return "night-clear-symbolic";
+            case "clear-day":
+                return "day-sunny-symbolic";
+            case "wind":
+                return "strong-wind-symbolic";
+            default:
+                return "cloud-refresh-symbolic";
+        }
+    }
+    SetQueryUnit() {
+        if (this.app.config.TemperatureUnit == "celsius") {
+            if (this.app.config.WindSpeedUnit == "kph" || this.app.config.WindSpeedUnit == "m/s") {
+                this.unit = 'si';
+            }
+            else {
+                this.unit = 'uk2';
+            }
+        }
+        else {
+            this.unit = 'us';
+        }
+    }
+    ;
+    ToKelvin(temp) {
+        if (this.unit == 'us') {
+            return FahrenheitToKelvin(temp);
+        }
+        else {
+            return CelsiusToKelvin(temp);
+        }
+    }
+    ;
+    ToMPS(speed) {
+        if (this.unit == 'si') {
+            return speed;
+        }
+        else {
+            return MPHtoMPS(speed);
+        }
+    }
+    ;
+}
+;
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
 
 
 
@@ -15234,7 +15482,8 @@ const ServiceClassMapping = {
     "DanishMI": (app) => new DanishMI(app),
     "AccuWeather": (app) => new AccuWeather(app),
     "DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
-    "WeatherUnderground": (app) => new WeatherUnderground(app)
+    "WeatherUnderground": (app) => new WeatherUnderground(app),
+    "PirateWeather": (app) => new PirateWeather(app)
 };
 class Config {
     get UserTimezone() {

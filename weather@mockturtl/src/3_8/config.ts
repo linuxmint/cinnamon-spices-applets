@@ -23,6 +23,7 @@ import { WeatherUnderground } from "./providers/weatherUnderground";
 import { Event } from "./lib/events";
 import { GeoIP } from "./location_services/geoip_services/base";
 import { GeoJS } from "./location_services/geoip_services/geojs.io";
+import { PirateWeather } from "./providers/pirate_weather/pirateWeather";
 
 const { get_home_dir, get_user_data_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -55,7 +56,8 @@ export type Services =
 	"DanishMI" |
 	"AccuWeather" |
 	"DeutscherWetterdienst" |
-	"WeatherUnderground";
+	"WeatherUnderground" |
+	"PirateWeather";
 
 export const ServiceClassMapping: ServiceClassMappingType = {
 	"DarkSky": (app) => new DarkSky(app),
@@ -69,7 +71,8 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	"DanishMI": (app) => new DanishMI(app),
 	"AccuWeather": (app) => new AccuWeather(app),
 	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
-	"WeatherUnderground": (app) => new WeatherUnderground(app)
+	"WeatherUnderground": (app) => new WeatherUnderground(app),
+	"PirateWeather": (app) => new PirateWeather(app)
 }
 
 export class Config {
@@ -708,7 +711,7 @@ export class Config {
 		key: "tooltipTextOverride",
 		prop: "TooltipTextOverride"
 	}
-} as const
+} as const;
 
 type ServiceClassMappingType = {
 	[key in Services]: (app: WeatherApplet) => BaseProvider;
