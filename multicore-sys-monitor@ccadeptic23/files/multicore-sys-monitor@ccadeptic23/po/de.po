@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-26 16:01+0200\n"
+"POT-Creation-Date: 2023-03-28 15:11+0200\n"
 "PO-Revision-Date: 2017-09-17 23:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -50,7 +50,7 @@ msgstr "Allgemein"
 #: ../3.0/prefsui.glade.h:7 ../3.2/prefsui.glade.h:8 ../3.4/prefsui.glade.h:7
 #: ../4.0/prefsui.glade.h:8 ../3.0/prefs.js:279 ../3.0/prefs.js:393
 #: ../3.2/prefs.js:283 ../3.2/prefs.js:398 ../3.4/prefs.js:327
-#: ../3.4/prefs.js:463 ../4.0/prefs.js:459 ../4.0/prefs.js:595
+#: ../3.4/prefs.js:463 ../4.0/prefs.js:483 ../4.0/prefs.js:619
 msgid "Enable"
 msgstr "Aktivieren"
 
@@ -60,87 +60,87 @@ msgid "Width"
 msgstr "Breite"
 
 #: ../3.0/prefsui.glade.h:9 ../3.2/prefsui.glade.h:10 ../3.4/prefsui.glade.h:9
-#: ../4.0/prefsui.glade.h:11
+#: ../4.0/prefsui.glade.h:12
 msgid "Colors"
 msgstr "Farben"
 
 #: ../3.0/prefsui.glade.h:10 ../3.2/prefsui.glade.h:11
-#: ../3.4/prefsui.glade.h:10 ../4.0/prefsui.glade.h:15
+#: ../3.4/prefsui.glade.h:10 ../4.0/prefsui.glade.h:16
 #: ../3.0/DataProviders.js:107 ../3.0/prefs.js:183 ../3.2/DataProviders.js:107
 #: ../3.2/prefs.js:187 ../3.4/DataProviders.js:58 ../3.4/prefs.js:195
-#: ../4.0/DataProviders.js:54 ../4.0/prefs.js:279
+#: ../4.0/DataProviders.js:54 ../4.0/prefs.js:303
 msgid "CPU"
 msgstr "CPU"
 
 #: ../3.0/prefsui.glade.h:11 ../3.2/prefsui.glade.h:12
-#: ../3.4/prefsui.glade.h:11 ../4.0/prefsui.glade.h:16
+#: ../3.4/prefsui.glade.h:11 ../4.0/prefsui.glade.h:17
 msgid "Usedup"
 msgstr "Benutzt"
 
 #: ../3.0/prefsui.glade.h:12 ../3.2/prefsui.glade.h:13
-#: ../3.4/prefsui.glade.h:12 ../4.0/prefsui.glade.h:17
+#: ../3.4/prefsui.glade.h:12 ../4.0/prefsui.glade.h:18
 msgid "Cached"
 msgstr "Cache"
 
 #: ../3.0/prefsui.glade.h:13 ../3.2/prefsui.glade.h:14
-#: ../3.4/prefsui.glade.h:13 ../4.0/prefsui.glade.h:18
+#: ../3.4/prefsui.glade.h:13 ../4.0/prefsui.glade.h:19
 msgid "Buffer"
 msgstr "Buffer"
 
 #: ../3.0/prefsui.glade.h:14 ../3.2/prefsui.glade.h:15
-#: ../3.4/prefsui.glade.h:14 ../4.0/prefsui.glade.h:19
+#: ../3.4/prefsui.glade.h:14 ../4.0/prefsui.glade.h:20
 msgid "Free"
 msgstr "Frei"
 
 #: ../3.0/prefsui.glade.h:15 ../3.2/prefsui.glade.h:16
-#: ../3.4/prefsui.glade.h:15 ../4.0/prefsui.glade.h:20
+#: ../3.4/prefsui.glade.h:15 ../4.0/prefsui.glade.h:21
 #: ../3.0/DataProviders.js:200 ../3.2/DataProviders.js:200
 #: ../3.4/DataProviders.js:195 ../4.0/DataProviders.js:191
 msgid "Swap"
 msgstr "Swap"
 
 #: ../3.0/prefsui.glade.h:16 ../3.2/prefsui.glade.h:17
-#: ../3.4/prefsui.glade.h:16 ../4.0/prefsui.glade.h:21
+#: ../3.4/prefsui.glade.h:16 ../4.0/prefsui.glade.h:22
 msgid "Memory"
 msgstr "Speicher"
 
 #: ../3.0/prefsui.glade.h:17 ../3.2/prefsui.glade.h:18
-#: ../3.4/prefsui.glade.h:17 ../4.0/prefsui.glade.h:22
+#: ../3.4/prefsui.glade.h:17 ../4.0/prefsui.glade.h:23
 msgid "Scaling"
 msgstr "Skalierung"
 
 #: ../3.0/prefsui.glade.h:18 ../3.2/prefsui.glade.h:19
-#: ../3.4/prefsui.glade.h:18 ../4.0/prefsui.glade.h:23
+#: ../3.4/prefsui.glade.h:18 ../4.0/prefsui.glade.h:24
 msgid "Auto Scale"
 msgstr "Automatisch"
 
 #: ../3.0/prefsui.glade.h:19 ../3.2/prefsui.glade.h:20
-#: ../3.4/prefsui.glade.h:19 ../4.0/prefsui.glade.h:24
+#: ../3.4/prefsui.glade.h:19 ../4.0/prefsui.glade.h:25
 msgid "Logarithmic"
 msgstr "Logarithmisch"
 
 #: ../3.0/prefsui.glade.h:20 ../3.2/prefsui.glade.h:21
-#: ../3.4/prefsui.glade.h:20 ../4.0/prefsui.glade.h:25
+#: ../3.4/prefsui.glade.h:20 ../4.0/prefsui.glade.h:26
 msgid "Devices"
 msgstr "Geräte"
 
 #: ../3.0/prefsui.glade.h:21 ../3.2/prefsui.glade.h:22
-#: ../3.4/prefsui.glade.h:21 ../4.0/prefsui.glade.h:26
+#: ../3.4/prefsui.glade.h:21 ../4.0/prefsui.glade.h:27
 msgid "Network"
 msgstr "Netzwerk"
 
 #: ../3.0/prefsui.glade.h:22 ../3.2/prefsui.glade.h:23
-#: ../3.4/prefsui.glade.h:22 ../4.0/prefsui.glade.h:27
+#: ../3.4/prefsui.glade.h:22 ../4.0/prefsui.glade.h:28
 msgid "Disk IO"
 msgstr "Festplatte IO"
 
 #: ../3.0/prefsui.glade.h:23 ../3.2/prefsui.glade.h:24
-#: ../3.4/prefsui.glade.h:23 ../4.0/prefsui.glade.h:28
+#: ../3.4/prefsui.glade.h:23 ../4.0/prefsui.glade.h:29
 msgid "Scaling Description"
 msgstr "Beschreibung der Skalierungen"
 
 #: ../3.0/prefsui.glade.h:24 ../3.2/prefsui.glade.h:25
-#: ../3.4/prefsui.glade.h:24 ../4.0/prefsui.glade.h:29
+#: ../3.4/prefsui.glade.h:24 ../4.0/prefsui.glade.h:30
 msgid "Close"
 msgstr "Schließen"
 
@@ -193,16 +193,20 @@ msgstr ""
 msgid "Color by activity level"
 msgstr ""
 
-#: ../4.0/prefsui.glade.h:12
+#: ../4.0/prefsui.glade.h:11
+msgid "Use automatic colors"
+msgstr ""
+
+#: ../4.0/prefsui.glade.h:13
 msgid "by CPU:"
 msgstr ""
 
-#: ../4.0/prefsui.glade.h:14
+#: ../4.0/prefsui.glade.h:15
 #, no-c-format
 msgid "by activity level (in %):"
 msgstr ""
 
-#: ../4.0/prefsui.glade.h:30
+#: ../4.0/prefsui.glade.h:31
 #, fuzzy
 msgid ""
 "Auto Scaling:\n"
@@ -358,22 +362,22 @@ msgid "Reload this applet"
 msgstr ""
 
 #: ../3.0/prefs.js:290 ../3.2/prefs.js:294 ../3.4/prefs.js:338
-#: ../4.0/prefs.js:470
+#: ../4.0/prefs.js:494
 msgid "Down"
 msgstr "Download"
 
 #: ../3.0/prefs.js:298 ../3.2/prefs.js:302 ../3.4/prefs.js:346
-#: ../4.0/prefs.js:478
+#: ../4.0/prefs.js:502
 msgid "Up"
 msgstr "Upload"
 
 #: ../3.0/prefs.js:406 ../3.2/prefs.js:414 ../3.4/prefs.js:479
-#: ../4.0/prefs.js:611
+#: ../4.0/prefs.js:635
 msgid "Read"
 msgstr "Lesen"
 
 #: ../3.0/prefs.js:414 ../3.2/prefs.js:423 ../3.4/prefs.js:488
-#: ../4.0/prefs.js:620
+#: ../4.0/prefs.js:644
 msgid "Write"
 msgstr "Schreiben"
 
@@ -402,23 +406,23 @@ msgid ""
 "to use "
 msgstr ""
 
-#: ../4.0/prefs.js:311
+#: ../4.0/prefs.js:335
 msgid "00-20"
 msgstr ""
 
-#: ../4.0/prefs.js:311
+#: ../4.0/prefs.js:335
 msgid "20-40"
 msgstr ""
 
-#: ../4.0/prefs.js:311
+#: ../4.0/prefs.js:335
 msgid "40-60"
 msgstr ""
 
-#: ../4.0/prefs.js:311
+#: ../4.0/prefs.js:335
 msgid "60-80"
 msgstr ""
 
-#: ../4.0/prefs.js:311
+#: ../4.0/prefs.js:335
 msgid "80-100"
 msgstr ""
 
