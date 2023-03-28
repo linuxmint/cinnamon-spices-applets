@@ -2033,7 +2033,7 @@ WebRadioReceiverAndRecorder.prototype = {
         //trackInfo.add_actor(songButtons);
         //~ songBox.set_child(song_toolbar);
 
-        this.menu.addMenuItem(songBox);
+        //this.menu.addMenuItem(songBox);
 
         this.menu.addMenuItem(new PopupSeparatorMenuItem());
       }
