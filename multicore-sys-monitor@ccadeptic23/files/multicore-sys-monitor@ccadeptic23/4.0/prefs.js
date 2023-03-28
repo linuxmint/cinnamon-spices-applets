@@ -28,6 +28,7 @@ const DEFAULT_CONFIG = {
     enabled: true,
     width: 40,
     byActivity: false,
+    useProgressiveColors: false,
     colors: [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]],
     colorsByActivity: [
      [
@@ -241,11 +242,17 @@ Preferences.prototype = {
 
     if (this.config.cpu.byActivity == undefined)
       this.config.cpu.byActivity = DEFAULT_CONFIG.cpu.byActivity;
+    if (this.config.cpu.useProgressiveColors == undefined)
+      this.config.cpu.useProgressiveColors = DEFAULT_CONFIG.cpu.useProgressiveColors;
+
     this.builder.get_object('cpuByActivitySwitch').set_active(this.config.cpu.byActivity);
     //~ this.builder.get_object('cpuColorChoicesBox').set_visible(!this.config.cpu.byActivity);
     this.builder.get_object('cpuColorChoicesBox').set_sensitive(!this.config.cpu.byActivity);
     //~ this.builder.get_object('cpuColorByActivityChoicesBox').set_visible(this.config.cpu.byActivity);
-    this.builder.get_object('cpuColorByActivityChoicesBox').set_sensitive(this.config.cpu.byActivity);
+    this.builder.get_object('cpuColorByActivityChoicesBox').set_sensitive(this.config.cpu.byActivity && !this.config.cpu.useProgressiveColors);
+    this.builder.get_object('cpuNaturalColorsSwitch').set_active(this.config.cpu.useProgressiveColors);
+    this.builder.get_object('cpuNaturalColorsSwitch').set_sensitive(this.config.cpu.byActivity);
+
     this.builder.get_object('cpuByActivitySwitch').connect(
       'notify::active',
       Lang.bind(this, function() {
@@ -254,7 +261,24 @@ Preferences.prototype = {
         //~ this.builder.get_object('cpuColorChoicesBox').set_visible(!isEnabled);
         //~ this.builder.get_object('cpuColorByActivityChoicesBox').set_visible(isEnabled);
         this.builder.get_object('cpuColorChoicesBox').set_sensitive(!isEnabled);
-        this.builder.get_object('cpuColorByActivityChoicesBox').set_sensitive(isEnabled);
+        this.builder.get_object('cpuColorByActivityChoicesBox').set_sensitive(isEnabled && !this.config.cpu.useProgressiveColors);
+        this.builder.get_object('cpuNaturalColorsSwitch').set_active(this.config.cpu.useProgressiveColors);
+        this.builder.get_object('cpuNaturalColorsSwitch').set_sensitive(isEnabled);
+        //~ this.builder.get_object('cpuColorsLabel1').set_visible(!isEnabled);
+        this.save();
+      })
+    );
+    this.builder.get_object('cpuNaturalColorsSwitch').connect(
+      'notify::active',
+      Lang.bind(this, function() {
+        let isEnabled = this.builder.get_object('cpuNaturalColorsSwitch').get_active();
+        this.config.cpu.useProgressiveColors = isEnabled;
+        //~ this.builder.get_object('cpuColorChoicesBox').set_visible(!isEnabled);
+        //~ this.builder.get_object('cpuColorByActivityChoicesBox').set_visible(isEnabled);
+        this.builder.get_object('cpuColorChoicesBox').set_sensitive(!this.config.cpu.byActivity);
+        this.builder.get_object('cpuColorByActivityChoicesBox').set_sensitive(!isEnabled);
+        //~ this.builder.get_object('cpuNaturalColorsSwitch').set_active(this.config.cpu.useProgressiveColors);
+        //~ this.builder.get_object('cpuNaturalColorsSwitch').set_sensitive(isEnabled);
         //~ this.builder.get_object('cpuColorsLabel1').set_visible(!isEnabled);
         this.save();
       })
@@ -345,7 +369,7 @@ Preferences.prototype = {
     }
     //~ this.cpuColorSelectionBox.set_visible(this.builder.get_object('cpuByActivitySwitch').get_active());
     this.builder.get_object('cpuColorChoicesBox').set_sensitive(!this.config.cpu.byActivity);
-    this.builder.get_object('cpuColorByActivityChoicesBox').set_sensitive(this.config.cpu.byActivity);
+    this.builder.get_object('cpuColorByActivityChoicesBox').set_sensitive(this.config.cpu.byActivity && !this.config.cpu.useProgressiveColors);
 
     //Memory Stuff
     this.builder.get_object('memEnableSwitch').set_active(this.config.mem.enabled);
@@ -703,6 +727,8 @@ Preferences.prototype = {
     for (let i = 0; i < 5; i++) {
       this.config.cpu.colorsByActivity[i] = this.getColorByObject(this.cpuByActivityButtonList[i]);
     }
+    this.config.cpu.useProgressiveColors = this.builder.get_object('cpuNaturalColorsSwitch').get_active();
+
 
     //MEM Settings
     this.config.mem.enabled = this.builder.get_object('memEnableSwitch').get_active();

@@ -12,6 +12,45 @@ if (Gio.file_new_for_path(dotCinnamonFilePath).query_exists(null))
 else
   configFilePath = GLib.get_home_dir() + '/.config/cinnamon/spices/' + UUID;
 
+function pc2RGB(percentage) {
+  // https://fr.wikipedia.org/wiki/Teinte_Saturation_Valeur
+  const s = 1.0, v = 1.0, a = 1;
+  let t = 240.0*(1.0-percentage);
+  let t_i = parseInt((t/60) % 6);
+  let f = t/60 - t_i;
+  let l = 0; // l = v*(1-s)
+  let m = v*(1-f*s);
+  let n = v*(1-(1-f)*s);
+  let r, g, b;
+
+  if (t_i === 0) {
+    r = v;
+    g = n;
+    b = l;
+  } else if (t_i === 1) {
+    r = m;
+    g = v;
+    b = l;
+  } else if (t_i === 2) {
+    r = l;
+    g = v;
+    b = n;
+  } else if (t_i === 3) {
+    r = l;
+    g = m;
+    b = v;
+  } else if (t_i === 4) {
+    r = n;
+    g = l;
+    b = v;
+  } else {
+    r = v;
+    g = l;
+    b = m;
+  }
+  //global.log(""+percentage+": "+r+", "+g+", "+b);
+  return [r, g, b, a]
+}
 
 let ConfigSettings;
 if (typeof require !== 'undefined') {
@@ -51,6 +90,8 @@ GraphVBars.prototype = {
 
       let r=255, g=255, b=255, a=255;
 
+      let use_natural_colors = this.configSettings.getUseProgressiveColors();
+
       if (!this.configSettings.getByActivity()) {
         //use this to select cpu from our colorlist, its incase we have more cpus than colors
         //This shouldnt happen but just incase
@@ -60,36 +101,40 @@ GraphVBars.prototype = {
         b = colorsList[cpunum][2];
         a = colorsList[cpunum][3];
       } else {
-        if (currentR >= 0.8) {
-          //~ g = 0; b = 0
-          r = colorsList[4][0];
-          g = colorsList[4][1];
-          b = colorsList[4][2];
-          a = colorsList[4][3];
-        } else if (currentR >= 0.6) {
-          //~ g = 127; b = 0
-          r = colorsList[3][0];
-          g = colorsList[3][1];
-          b = colorsList[3][2];
-          a = colorsList[3][3];
-        } else if (currentR >= 0.4) {
-          //~ b = 0
-          r = colorsList[2][0];
-          g = colorsList[2][1];
-          b = colorsList[2][2];
-          a = colorsList[2][3];
-        } else if (currentR >= 0.2) {
-          //~ r = 0 ; b = 0
-          r = colorsList[1][0];
-          g = colorsList[1][1];
-          b = colorsList[1][2];
-          a = colorsList[1][3];
+        if (use_natural_colors) {
+          [r, g, b, a] = pc2RGB(currentR)
         } else {
-          //~ r = 0 ; g = 0
-          r = colorsList[0][0];
-          g = colorsList[0][1];
-          b = colorsList[0][2];
-          a = colorsList[0][3];
+          if (currentR >= 0.8) {
+            //~ g = 0; b = 0
+            r = colorsList[4][0];
+            g = colorsList[4][1];
+            b = colorsList[4][2];
+            a = colorsList[4][3];
+          } else if (currentR >= 0.6) {
+            //~ g = 127; b = 0
+            r = colorsList[3][0];
+            g = colorsList[3][1];
+            b = colorsList[3][2];
+            a = colorsList[3][3];
+          } else if (currentR >= 0.4) {
+            //~ b = 0
+            r = colorsList[2][0];
+            g = colorsList[2][1];
+            b = colorsList[2][2];
+            a = colorsList[2][3];
+          } else if (currentR >= 0.2) {
+            //~ r = 0 ; b = 0
+            r = colorsList[1][0];
+            g = colorsList[1][1];
+            b = colorsList[1][2];
+            a = colorsList[1][3];
+          } else {
+            //~ r = 0 ; g = 0
+            r = colorsList[0][0];
+            g = colorsList[0][1];
+            b = colorsList[0][2];
+            a = colorsList[0][3];
+          }
         }
       }
       areaContext.setSourceRGBA(r, g, b, a);

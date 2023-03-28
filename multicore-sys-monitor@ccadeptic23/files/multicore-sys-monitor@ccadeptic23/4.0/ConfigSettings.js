@@ -27,6 +27,10 @@ ConfigSettings.prototype = {
     this.configFile = 'prefs.json';
     this.readSettings();
   },
+  getUseProgressiveColors: function() {
+    this.readSettings();
+    return this._prefs.cpu.useProgressiveColors;
+  },
   getByActivity: function() {
     this.readSettings();
     return this._prefs.cpu.byActivity;

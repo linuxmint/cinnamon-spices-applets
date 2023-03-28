@@ -451,6 +451,33 @@
                             <property name="position">3.7</property>
                           </packing>
                         </child>
+                        <child>
+                          <object class="GtkLabel" id="cpuColorNaturalLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_left">10</property>
+                            <property name="margin_right">10</property>
+                            <property name="label" translatable="yes">Use automatic colors</property>
+                            <property name="xalign">0</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">3.5</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSwitch" id="cpuNaturalColorsSwitch">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="valign">center</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">3.8</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
