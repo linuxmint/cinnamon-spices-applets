@@ -9,7 +9,6 @@ import { DateTime } from "luxon";
 import { FileExists, LoadContents } from "./lib/io_lib";
 import { MetUk } from "./providers/met_uk";
 import { BaseProvider } from "./providers/BaseProvider";
-import { DarkSky } from "./providers/darkSky";
 import { OpenWeatherMap } from "./providers/openWeatherMap";
 import { MetNorway } from "./providers/met_norway/provider";
 import { Weatherbit } from "./providers/weatherbit";
@@ -46,7 +45,6 @@ export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
 /** Change settings-schema if you change this */
 export type Services =
 	"OpenWeatherMap" |
-	"DarkSky" |
 	"MetNorway" |
 	"Weatherbit" |
 	"Tomorrow.io" |
@@ -60,7 +58,6 @@ export type Services =
 	"PirateWeather";
 
 export const ServiceClassMapping: ServiceClassMappingType = {
-	"DarkSky": (app) => new DarkSky(app),
 	"OpenWeatherMap": (app) => new OpenWeatherMap(app),
 	"MetNorway": (app) => new MetNorway(app),
 	"Weatherbit": (app) => new Weatherbit(app),

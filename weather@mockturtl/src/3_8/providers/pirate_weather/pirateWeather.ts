@@ -154,7 +154,7 @@ export class PirateWeather extends BaseProvider {
 	 * @returns null if custom error checking does not find anything
 	 */
 	private HandleError = (message: ErrorResponse): boolean => {
-		if (message.ErrorData.code == 403) { // DarkSky returns auth error on the http level when key is wrong
+		if (message.ErrorData.code == 403) {
 			this.app.ShowError({
 				type: "hard",
 				userError: true,
@@ -164,7 +164,7 @@ export class PirateWeather extends BaseProvider {
 			});
 			return false;
 		}
-		else if (message.ErrorData.code == 401) { // DarkSky returns auth error on the http level when key is wrong
+		else if (message.ErrorData.code == 401) {
 			this.app.ShowError({
 				type: "hard",
 				userError: true,

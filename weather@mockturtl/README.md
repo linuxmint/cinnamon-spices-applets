@@ -39,7 +39,6 @@ You can also save locations what you entered manually and switch between them in
 | **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | --                               |
 | **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | --                               |
 | **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | Previously known as Climacell    |
-| **DarkSky**                | Yes           | 8                     | 168                    | No                 | Signups closed, will end Q2 2023 |
 | **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | Limited free calls               |
 | **Weather Underground**    | Yes           | 5                     | 0                      | No                 | --                               |
 
@@ -114,12 +113,6 @@ Meteorological data from American weather technology company with headquarters i
 * Please note that old ClimacellV4 keys are not working anymore. You need to re-register and get a new key.
 
 * API key can be obtained [here](https://app.tomorrow.io/signup?planid=5fa4047f4acee993fbd7399d&vid=153ef940-c389-41d4-847e-d83d632059d0). Register and the API key will be shown in the [Develpment section](https://app.tomorrow.io/development/keys). Free plan comes with 1000 free calls per day.
-
-### DarkSky
-
-Online Service started by The Dark Sky Company founded 2012 in the US that specializes in weather forecasting and visualization. [DarkSky Website](https://darksky.net/). [DarkSky was acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/) in 2020. Read more about the company in the early days [archived here](https://web.archive.org/web/20191011010948/https://darksky.net/about).
-
-* The service does not allow new signups and will continue to function until [March 31st, 2023](https://blog.darksky.net/).
 
 ### AccuWeather
 
