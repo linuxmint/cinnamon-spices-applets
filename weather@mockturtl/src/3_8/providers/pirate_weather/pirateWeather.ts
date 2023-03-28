@@ -1,7 +1,7 @@
 import { ErrorResponse, HttpError } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
 import { WeatherApplet } from "../../main";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime } from "../../types";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime, ImmediatePrecipitation } from "../../types";
 import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
@@ -40,18 +40,25 @@ export class PirateWeather extends BaseProvider {
 	//  Functions
 	//--------------------------------------------------------
 	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
-		const query = this.ConstructQuery(loc);
+		const unit = this.GetQueryUnit();
 
-		const response = await this.app.LoadJsonAsyncWithDetails<PirateWeatherPayload>(query, {}, this.HandleError);
+		const response = await this.app.LoadJsonAsyncWithDetails<PirateWeatherPayload>(
+			`${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`,
+			{
+				units: this.GetQueryUnit()
+			},
+			this.HandleError
+		);
+
 		if (!response.Success)
 			return null;
 
 		// this.remainingQuota = Math.max(1000 - parseInt(response.ResponseHeaders["X-Forecast-API-Calls"]), 0);
-		return this.ParseWeather(response.Data);
+		return this.ParseWeather(response.Data, unit);
 	};
 
 
-	private ParseWeather(json: PirateWeatherPayload): WeatherData | null {
+	private ParseWeather(json: PirateWeatherPayload, unit: PirateWeatherQueryUnits): WeatherData | null {
 		try {
 			const sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
 			const sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
@@ -68,13 +75,13 @@ export class PirateWeather extends BaseProvider {
 				sunrise: sunrise,
 				sunset: sunset,
 				wind: {
-					speed: this.ToMPS(json.currently.windSpeed),
+					speed: this.ToMPS(json.currently.windSpeed, unit),
 					degree: json.currently.windBearing
 				},
-				temperature: this.ToKelvin(json.currently.temperature),
+				temperature: this.ToKelvin(json.currently.temperature, unit),
 				pressure: json.currently.pressure,
 				humidity: json.currently.humidity * 100,
-				dewPoint: this.ToKelvin(json.currently.dewPoint),
+				dewPoint: this.ToKelvin(json.currently.dewPoint, unit),
 				condition: {
 					main: json.currently.summary,
 					description: json.currently.summary,
@@ -83,19 +90,19 @@ export class PirateWeather extends BaseProvider {
 				},
 				extra_field: {
 					name: _("Feels Like"),
-					value: this.ToKelvin(json.currently.apparentTemperature),
+					value: this.ToKelvin(json.currently.apparentTemperature, unit),
 					type: "temperature"
 				},
 				forecasts: [],
-				hourlyForecasts: []
+				hourlyForecasts: [],
 			}
 
 			// Forecast
 			for (const day of json.daily.data) {
 				const forecast: ForecastData = {
 					date: DateTime.fromSeconds(day.time, { zone: json.timezone }),
-					temp_min: this.ToKelvin(day.temperatureLow),
-					temp_max: this.ToKelvin(day.temperatureHigh),
+					temp_min: this.ToKelvin(day.temperatureLow, unit),
+					temp_max: this.ToKelvin(day.temperatureHigh, unit),
 					condition: {
 						main: day.summary,
 						description: day.summary,
@@ -115,7 +122,7 @@ export class PirateWeather extends BaseProvider {
 			for (const hour of json.hourly.data) {
 				const forecast: HourlyForecastData = {
 					date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
-					temp: this.ToKelvin(hour.temperature),
+					temp: this.ToKelvin(hour.temperature, unit),
 					condition: {
 						main: hour.summary,
 						description: hour.summary,
@@ -132,6 +139,27 @@ export class PirateWeather extends BaseProvider {
 				// never null here
 				result.hourlyForecasts!.push(forecast);
 			}
+
+			if (json.minutely != null) {
+				const immediate: ImmediatePrecipitation = {
+					start: -1,
+					end: -1
+				}
+
+				for (const [index, element] of json.minutely.data.entries()) {
+					if (element.precipProbability > 0 && immediate.start == -1) {
+						immediate.start = index;
+						continue
+					}
+					else if (element.precipProbability == 0 && immediate.start != -1) {
+						immediate.end = index;
+						break
+					}
+				}
+
+				result.immediatePrecipitation = immediate;
+			}
+
 			return result;
 		}
 		catch (e) {
@@ -141,12 +169,6 @@ export class PirateWeather extends BaseProvider {
 			return null;
 		}
 	};
-
-	private ConstructQuery(loc: LocationData): string {
-		this.SetQueryUnit();
-		let query = this.query + this.app.config.ApiKey + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
-		return query;
-	}
 
 	/**
 	 *
@@ -231,22 +253,22 @@ export class PirateWeather extends BaseProvider {
 		}
 	}
 
-	private SetQueryUnit(): void {
+	private GetQueryUnit(): PirateWeatherQueryUnits {
 		if (this.app.config.TemperatureUnit == "celsius") {
 			if (this.app.config.WindSpeedUnit == "kph" || this.app.config.WindSpeedUnit == "m/s") {
-				this.unit = 'si';
+				return 'si';
 			}
 			else {
-				this.unit = 'uk2';
+				return 'uk2';
 			}
 		}
 		else {
-			this.unit = 'us';
+			return 'us';
 		}
 	};
 
-	private ToKelvin(temp: number): number {
-		if (this.unit == 'us') {
+	private ToKelvin(temp: number, unit: PirateWeatherQueryUnits): number {
+		if (unit == 'us') {
 			return FahrenheitToKelvin(temp);
 		}
 		else {
@@ -255,8 +277,8 @@ export class PirateWeather extends BaseProvider {
 
 	};
 
-	private ToMPS(speed: number): number {
-		if (this.unit == 'si') {
+	private ToMPS(speed: number, unit: PirateWeatherQueryUnits): number {
+		if (unit == 'si') {
 			return speed;
 		}
 		else {

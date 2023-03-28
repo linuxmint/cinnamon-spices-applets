@@ -14927,14 +14927,16 @@ class PirateWeather extends BaseProvider {
         };
     }
     async GetWeather(loc) {
-        const query = this.ConstructQuery(loc);
-        const response = await this.app.LoadJsonAsyncWithDetails(query, {}, this.HandleError);
+        const unit = this.GetQueryUnit();
+        const response = await this.app.LoadJsonAsyncWithDetails(`${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`, {
+            units: this.GetQueryUnit()
+        }, this.HandleError);
         if (!response.Success)
             return null;
-        return this.ParseWeather(response.Data);
+        return this.ParseWeather(response.Data, unit);
     }
     ;
-    ParseWeather(json) {
+    ParseWeather(json, unit) {
         try {
             const sunrise = DateTime.fromSeconds(json.daily.data[0].sunriseTime, { zone: json.timezone });
             const sunset = DateTime.fromSeconds(json.daily.data[0].sunsetTime, { zone: json.timezone });
@@ -14951,13 +14953,13 @@ class PirateWeather extends BaseProvider {
                 sunrise: sunrise,
                 sunset: sunset,
                 wind: {
-                    speed: this.ToMPS(json.currently.windSpeed),
+                    speed: this.ToMPS(json.currently.windSpeed, unit),
                     degree: json.currently.windBearing
                 },
-                temperature: this.ToKelvin(json.currently.temperature),
+                temperature: this.ToKelvin(json.currently.temperature, unit),
                 pressure: json.currently.pressure,
                 humidity: json.currently.humidity * 100,
-                dewPoint: this.ToKelvin(json.currently.dewPoint),
+                dewPoint: this.ToKelvin(json.currently.dewPoint, unit),
                 condition: {
                     main: json.currently.summary,
                     description: json.currently.summary,
@@ -14966,17 +14968,17 @@ class PirateWeather extends BaseProvider {
                 },
                 extra_field: {
                     name: _("Feels Like"),
-                    value: this.ToKelvin(json.currently.apparentTemperature),
+                    value: this.ToKelvin(json.currently.apparentTemperature, unit),
                     type: "temperature"
                 },
                 forecasts: [],
-                hourlyForecasts: []
+                hourlyForecasts: [],
             };
             for (const day of json.daily.data) {
                 const forecast = {
                     date: DateTime.fromSeconds(day.time, { zone: json.timezone }),
-                    temp_min: this.ToKelvin(day.temperatureLow),
-                    temp_max: this.ToKelvin(day.temperatureHigh),
+                    temp_min: this.ToKelvin(day.temperatureLow, unit),
+                    temp_max: this.ToKelvin(day.temperatureHigh, unit),
                     condition: {
                         main: day.summary,
                         description: day.summary,
@@ -14990,7 +14992,7 @@ class PirateWeather extends BaseProvider {
             for (const hour of json.hourly.data) {
                 const forecast = {
                     date: DateTime.fromSeconds(hour.time, { zone: json.timezone }),
-                    temp: this.ToKelvin(hour.temperature),
+                    temp: this.ToKelvin(hour.temperature, unit),
                     condition: {
                         main: hour.summary,
                         description: hour.summary,
@@ -15005,6 +15007,23 @@ class PirateWeather extends BaseProvider {
                 };
                 result.hourlyForecasts.push(forecast);
             }
+            if (json.minutely != null) {
+                const immediate = {
+                    start: -1,
+                    end: -1
+                };
+                for (const [index, element] of json.minutely.data.entries()) {
+                    if (element.precipProbability > 0 && immediate.start == -1) {
+                        immediate.start = index;
+                        continue;
+                    }
+                    else if (element.precipProbability == 0 && immediate.start != -1) {
+                        immediate.end = index;
+                        break;
+                    }
+                }
+                result.immediatePrecipitation = immediate;
+            }
             return result;
         }
         catch (e) {
@@ -15015,11 +15034,6 @@ class PirateWeather extends BaseProvider {
         }
     }
     ;
-    ConstructQuery(loc) {
-        this.SetQueryUnit();
-        let query = this.query + this.app.config.ApiKey + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
-        return query;
-    }
     ResolveIcon(icon, sunTimes, date) {
         switch (icon) {
             case "rain":
@@ -15071,22 +15085,22 @@ class PirateWeather extends BaseProvider {
                 return "cloud-refresh-symbolic";
         }
     }
-    SetQueryUnit() {
+    GetQueryUnit() {
         if (this.app.config.TemperatureUnit == "celsius") {
             if (this.app.config.WindSpeedUnit == "kph" || this.app.config.WindSpeedUnit == "m/s") {
-                this.unit = 'si';
+                return 'si';
             }
             else {
-                this.unit = 'uk2';
+                return 'uk2';
             }
         }
         else {
-            this.unit = 'us';
+            return 'us';
         }
     }
     ;
-    ToKelvin(temp) {
-        if (this.unit == 'us') {
+    ToKelvin(temp, unit) {
+        if (unit == 'us') {
             return FahrenheitToKelvin(temp);
         }
         else {
@@ -15094,8 +15108,8 @@ class PirateWeather extends BaseProvider {
         }
     }
     ;
-    ToMPS(speed) {
-        if (this.unit == 'si') {
+    ToMPS(speed, unit) {
+        if (unit == 'si') {
             return speed;
         }
         else {
