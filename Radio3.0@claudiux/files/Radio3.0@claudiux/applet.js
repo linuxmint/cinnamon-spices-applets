@@ -1167,6 +1167,8 @@ WebRadioReceiverAndRecorder.prototype = {
       //~ log("Volume Cut", true);
 
       if (this.context_menu_item_slider != null) {
+        //this.context_menu_item_slider.stream.change_is_muted(!this.context_menu_item_slider.stream.is_muted);
+
         let volume_at_startup = this.get_volume_at_startup();
 
         if (volume_at_startup <= 0) volume_at_startup = 50;
@@ -1174,9 +1176,10 @@ WebRadioReceiverAndRecorder.prototype = {
         let value = 0;
         let old_value = this.context_menu_item_slider.slider._value;
 
-        if (old_value !== 0) this.old_percentage = 100 * old_value;
+        if (old_value !== 0) this.old_percentage = parseInt(old_value * 100);
         else value = (this.old_percentage) ? this.old_percentage / 100 : volume_at_startup / 100;
 
+        this.percentage = parseInt(value * 100);
         this.context_menu_item_slider.slider._value = value;
         this.context_menu_item_slider.slider._slider.queue_repaint();
         this.context_menu_item_slider.slider.emit('value-changed', value);

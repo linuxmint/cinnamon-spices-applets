@@ -131,7 +131,8 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             this.stream.change_is_muted(muted);
 
         if (this.applet.volume_show_osd) {
-            let icon = Gio.Icon.new_for_string("webradioreceiver-symbolic");
+            let iconName = this._volumeToIcon(1.0*this.applet.percentage/100, "webradioreceiver-")+"-symbolic";
+            let icon = Gio.Icon.new_for_string(iconName);
             Main.osdWindowManager.show(-1, icon, this.applet.percentage, null);
         }
 
@@ -225,7 +226,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         //this.emit("values-changed", this.percentage);
     }
 
-    _volumeToIcon(value) {
+    _volumeToIcon(value, basename="audio-volume-") {
         log("VolumeSlider: _volumeToIcon");
         let icon;
         if(value < 0.005) {
@@ -239,7 +240,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             else
                 icon = "high";
         }
-        return "audio-volume-" + icon;
+        return basename + icon;
     }
 }
 
