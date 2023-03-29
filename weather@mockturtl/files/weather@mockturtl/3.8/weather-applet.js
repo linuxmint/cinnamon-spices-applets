@@ -16483,6 +16483,7 @@ class UIHourlyForecasts {
         this.hourlyForecasts = [];
         this.hourlyContainers = [];
         this.hourlyToggled = false;
+        this.availableWidth = null;
         this.OnShortHourlyTimeChanged = (config, shortTime, data) => {
             this.Display(data.hourlyForecasts, config, config.Timezone);
         };
@@ -16579,18 +16580,14 @@ class UIHourlyForecasts {
         const hscroll = this.actor.get_hscroll_bar();
         hscroll.get_adjustment().set_value(0);
     }
-    async Show(animate = true) {
+    async Show(width, animate = true) {
         this.actor.show();
         this.actor.hide();
-        this.AdjustHourlyBoxItemWidth();
-        const [minWidth, naturalWidth] = this.actor.get_preferred_width(-1);
-        if (minWidth == null)
-            return;
-        const [minHeight, naturalHeight] = this.actor.get_preferred_height(minWidth);
+        this.AdjustHourlyBoxItemWidth(width);
+        const [minHeight, naturalHeight] = this.actor.get_preferred_height(width);
         if (naturalHeight == null)
             return;
         logger_Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
-        this.actor.set_width(minWidth);
         this.actor.show();
         this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
         this.hourlyToggled = true;
@@ -16642,11 +16639,24 @@ class UIHourlyForecasts {
             }
         });
     }
-    AdjustHourlyBoxItemWidth() {
+    AdjustHourlyBoxItemWidth(availableWidth) {
+        var _a;
         const requiredWidth = this.GetHourlyBoxItemWidth();
         for (const element of this.hourlyContainers) {
             element.set_width(requiredWidth);
         }
+        availableWidth !== null && availableWidth !== void 0 ? availableWidth : (availableWidth = (_a = this.availableWidth) !== null && _a !== void 0 ? _a : undefined);
+        if (availableWidth != null) {
+            if (availableWidth - 20 >= this.hourlyContainers.length * requiredWidth) {
+                this.actor.hscrollbar_policy = PolicyType.NEVER;
+            }
+            else {
+                this.actor.hscrollbar_policy = PolicyType.AUTOMATIC;
+            }
+            this.actor.set_width(availableWidth);
+            this.availableWidth = availableWidth;
+        }
+        return requiredWidth;
     }
     GetHourlyBoxItemWidth() {
         let requiredWidth = 0;
@@ -17092,7 +17102,7 @@ class UI {
     async ShowHourlyWeather(animate = true) {
         this.HourlySeparator.Show();
         this.Bar.SwitchButtonToHide();
-        await this.HourlyWeather.Show(animate);
+        await this.HourlyWeather.Show(this.menu.actor.width, animate);
     }
     async HideHourlyWeather(animate = true) {
         if (this.App.config._alwaysShowHourlyWeather) {

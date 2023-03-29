@@ -272,7 +272,7 @@ export class UI {
 	private async ShowHourlyWeather(animate: boolean = true): Promise<void> {
 		this.HourlySeparator.Show();
 		this.Bar.SwitchButtonToHide();
-		await this.HourlyWeather.Show(animate);
+		await this.HourlyWeather.Show(this.menu.actor.width, animate);
 	}
 
 	private async HideHourlyWeather(animate: boolean = true): Promise<void> {

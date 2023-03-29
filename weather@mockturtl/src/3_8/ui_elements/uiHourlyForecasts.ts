@@ -26,6 +26,7 @@ export class UIHourlyForecasts {
 	private hourlyForecastDates?: DateTime[];
 
 	private hourlyToggled: boolean = false;
+	private availableWidth: number | null = null;
 
 	public get Toggled() {
 		return this.hourlyToggled;
@@ -173,26 +174,20 @@ export class UIHourlyForecasts {
 		hscroll.get_adjustment().set_value(0);
 	}
 
-	public async Show(animate: boolean = true): Promise<void> {
+	public async Show(width: number, animate: boolean = true): Promise<void> {
 		// In some cases the preferred height is not calculated
 		// properly for the first time, so we work around by opening and closing it once
 		this.actor.show();
 		this.actor.hide();
 
-		this.AdjustHourlyBoxItemWidth();
+		this.AdjustHourlyBoxItemWidth(width);
 
-		const [minWidth, naturalWidth] = this.actor.get_preferred_width(-1);
-
-		if (minWidth == null)
-			return;
-
-		const [minHeight, naturalHeight] = this.actor.get_preferred_height(minWidth);
+		const [minHeight, naturalHeight] = this.actor.get_preferred_height(width);
 
 		if (naturalHeight == null)
 			return;
 
 		Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
-		this.actor.set_width(minWidth);
 		this.actor.show();
 		// When the scrollView is shown without animation and there is not enough vertical space
 		// (or cinnamon does not think there is enough), the text gets superimposed on top of
@@ -266,12 +261,28 @@ export class UIHourlyForecasts {
 	/** Sets the correct width for the hourly boxes, make
 	 * sure to call this whn the hourly ScrollView is shown
 	 */
-	private AdjustHourlyBoxItemWidth(): void {
+	private AdjustHourlyBoxItemWidth(availableWidth?: number): number {
 		const requiredWidth = this.GetHourlyBoxItemWidth();
 
 		for (const element of this.hourlyContainers) {
 			element.set_width(requiredWidth);
 		}
+
+		availableWidth ??= this.availableWidth ?? undefined;
+
+		if (availableWidth != null) {
+			if (availableWidth - 20 >= this.hourlyContainers.length * requiredWidth) {
+				this.actor.hscrollbar_policy = PolicyType.NEVER;
+			}
+			else {
+				this.actor.hscrollbar_policy = PolicyType.AUTOMATIC;
+			}
+			this.actor.set_width(availableWidth);
+
+			this.availableWidth = availableWidth;
+		}
+
+		return requiredWidth;
 	}
 
 	/**
