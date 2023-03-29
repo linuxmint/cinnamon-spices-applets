@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-27 19:21-0500\n"
-"PO-Revision-Date: 2022-12-29 13:37-0500\n"
+"PO-Revision-Date: 2023-03-29 16:13+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: 5.4/applet.js:139 3.2/applet.js:135
 msgid "--%"
@@ -78,7 +78,7 @@ msgstr "Vedi il Changelog"
 
 #: 5.4/applet.js:271
 msgid "Open the README"
-msgstr ""
+msgstr "Apri il README"
 
 #: 5.4/applet.js:277 3.2/applet.js:327
 msgid "Open stylesheet.css (Advanced Function)"
@@ -213,7 +213,7 @@ msgstr ""
 
 #. 5.4->settings-schema.json->head->description
 msgid "General Settings"
-msgstr ""
+msgstr "Impostazioni Generali"
 
 #. 5.4->settings-schema.json->refreshInterval-spinner->units
 #. 3.2->settings-schema.json->refreshInterval-spinner->units
@@ -283,7 +283,7 @@ msgstr "Solo Icona su sfondo colorato che indica lo stato"
 
 #. 5.4->settings-schema.json->displayType->description
 msgid "Toolbar Display Type"
-msgstr ""
+msgstr "Tipo di Visualizzazione Toolbar"
 
 #. 5.4->settings-schema.json->displayType->tooltip
 #. 3.2->settings-schema.json->displayType->tooltip
@@ -391,11 +391,13 @@ msgstr ""
 
 #. 5.4->settings-schema.json->head4->description
 msgid "Advanced"
-msgstr ""
+msgstr "Avanzate"
 
 #. 5.4->settings-schema.json->customBatteryPath->description
 msgid "Path to battery capacity directory (device path)"
 msgstr ""
+"Percorso della directory della capacità della batteria (percorso del "
+"dispositivo)"
 
 #. 5.4->settings-schema.json->customBatteryPath->tooltip
 msgid ""
@@ -405,6 +407,11 @@ msgid ""
 "Default:\n"
 "/sys/class/power_supply/BAT0"
 msgstr ""
+"Scegli il tuo oggetto power_supply, ad es. per monitorare la batteria "
+"secondaria.\n"
+"\n"
+"Predefinito:\n"
+"/sys/class/power_supply/BAT0"
 
 #. 3.2->settings-schema.json->head->description
 msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
