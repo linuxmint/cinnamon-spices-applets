@@ -56,7 +56,7 @@ msgstr "Core "
 
 #: applet.js:361
 msgid "Used:   "
-msgstr "Usati:   "
+msgstr "Usati:  "
 
 #: applet.js:362
 msgid "Cache:  "
