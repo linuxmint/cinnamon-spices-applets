@@ -30,7 +30,7 @@ msgstr "Tra:  00:00:00"
 #: applet.js:83 applet.js:224 applet.js:249 applet.js:266 applet.js:316
 #: applet.js:464 applet.js:496
 msgid "At:  --:--:--"
-msgstr "Alle:  --:--:--"
+msgstr "Alle: --:--:--"
 
 #: applet.js:86
 msgid "Turn off computer on timer"
@@ -116,7 +116,7 @@ msgstr "Tra:  "
 
 #: applet.js:460 applet.js:484
 msgid "At:  "
-msgstr "Alle:  "
+msgstr "Alle: "
 
 #: applet.js:486
 msgid "Turn off in "
