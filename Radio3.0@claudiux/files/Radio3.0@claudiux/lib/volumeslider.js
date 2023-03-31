@@ -223,7 +223,6 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 
         // send data to applet
         this.emit("values-changed", iconName, this.percentage);
-        //this.emit("values-changed", this.percentage);
     }
 
     _volumeToIcon(value, basename="audio-volume-") {

@@ -1176,10 +1176,13 @@ WebRadioReceiverAndRecorder.prototype = {
         let value = 0;
         let old_value = this.context_menu_item_slider.slider._value;
 
-        if (old_value !== 0) this.old_percentage = parseInt(old_value * 100);
+        if (old_value !== 0) this.old_percentage = Math.round(old_value * 100);
         else value = (this.old_percentage) ? this.old_percentage / 100 : volume_at_startup / 100;
 
-        this.percentage = parseInt(value * 100);
+        //~ log("value: "+value, true);
+        //~ log("old_value: "+old_value, true);
+
+        //this.percentage = Math.round(value * 100);
         this.context_menu_item_slider.slider._value = value;
         this.context_menu_item_slider.slider._slider.queue_repaint();
         this.context_menu_item_slider.slider.emit('value-changed', value);
