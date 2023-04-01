@@ -420,6 +420,73 @@
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkBox" id="cpuColorTypeBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_top">3</property>
+                        <child>
+                          <object class="GtkLabel" id="cpuColorTypeLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_left">10</property>
+                            <property name="margin_right">10</property>
+                            <property name="label" translatable="yes">Color by activity level</property>
+                            <property name="xalign">0</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">3.5</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSwitch" id="cpuByActivitySwitch">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="valign">center</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">3.7</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="cpuColorNaturalLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_left">10</property>
+                            <property name="margin_right">10</property>
+                            <property name="label" translatable="yes">Use automatic colors</property>
+                            <property name="xalign">0</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">3.5</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSwitch" id="cpuNaturalColorsSwitch">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="valign">center</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">3.8</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="padding">4</property>
+                        <property name="position">2.9</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkLabel" id="cpuColorsLabel1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -430,7 +497,21 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
-                        <property name="position">3</property>
+                        <property name="position">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="cpuColorsLabel2">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_left">10</property>
+                        <property name="label" translatable="yes">by CPU:</property>
+                        <property name="xalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">5</property>
                       </packing>
                     </child>
                     <child>
@@ -446,7 +527,37 @@
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="padding">10</property>
-                        <property name="position">4</property>
+                        <property name="position">6</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="cpuColorsLabel3">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_left">10</property>
+                        <property name="label" translatable="yes">by activity level (in %):</property>
+                        <property name="xalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">7</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="cpuColorByActivityChoicesBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="padding">10</property>
+                        <property name="position">8</property>
                       </packing>
                     </child>
                   </object>
@@ -1627,20 +1738,20 @@
             <property name="margin_top">5</property>
             <property name="margin_bottom">10</property>
             <property name="label" translatable="yes">Auto Scaling:
-	This will scale the line graph by the largest reading within the
-	displayed area. Once the largest reading is no longer displayed
-	the next largest becomes the new value by which the readings
-	are scaled. This lets the plot "zoom" to show details of the graph.
-	However, it also means that if there is a large reading small readings
-	may become indistinguishable from 0. And if there are only small readings
-	then slightly larger readings may appear larger than they should.
-	If not enabled the largest value used will be the largest reading since
-	cinnamon was started.
+    This will scale the line graph by the largest reading within the
+    displayed area. Once the largest reading is no longer displayed
+    the next largest becomes the new value by which the readings
+    are scaled. This lets the plot "zoom" to show details of the graph.
+    However, it also means that if there is a large reading small readings
+    may become indistinguishable from 0. And if there are only small readings
+    then slightly larger readings may appear larger than they should.
+    If not enabled the largest value used will be the largest reading since
+    cinnamon was started.
 
 Logarithmic Scaling:
-	This transforms the readings so that they are displayed using a
-	logarithmic scale. If you are not familiar basically, it reduces the
-	large values so that they dont dominate the smaller readings.</property>
+    This transforms the readings so that they are displayed using a
+    logarithmic scale. If you are not familiar basically, it reduces the
+    large values so that they dont dominate the smaller readings.</property>
             <property name="ellipsize">middle</property>
             <property name="lines">5</property>
           </object>

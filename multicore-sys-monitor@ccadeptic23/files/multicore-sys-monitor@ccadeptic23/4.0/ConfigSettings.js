@@ -27,11 +27,21 @@ ConfigSettings.prototype = {
     this.configFile = 'prefs.json';
     this.readSettings();
   },
+  getUseProgressiveColors: function() {
+    this.readSettings();
+    return this._prefs.cpu.useProgressiveColors;
+  },
+  getByActivity: function() {
+    this.readSettings();
+    return this._prefs.cpu.byActivity;
+  },
   getThickness: function() {
     this.readSettings();
     return this._prefs.thickness;
   },
   getCPUColorList: function() {
+    if (this.getByActivity())
+      return this._prefs.cpu.colorsByActivity;
     return this._prefs.cpu.colors;
   },
   getMEMColorList: function() {

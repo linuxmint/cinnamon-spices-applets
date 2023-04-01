@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 23:02+0100\n"
+"POT-Creation-Date: 2023-03-28 15:11+0200\n"
 "PO-Revision-Date: 2018-11-05 14:58+0300\n"
 "Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
 "Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
@@ -50,7 +50,7 @@ msgstr "Genel"
 #: ../3.0/prefsui.glade.h:7 ../3.2/prefsui.glade.h:8 ../3.4/prefsui.glade.h:7
 #: ../4.0/prefsui.glade.h:8 ../3.0/prefs.js:279 ../3.0/prefs.js:393
 #: ../3.2/prefs.js:283 ../3.2/prefs.js:398 ../3.4/prefs.js:327
-#: ../3.4/prefs.js:463 ../4.0/prefs.js:355 ../4.0/prefs.js:491
+#: ../3.4/prefs.js:463 ../4.0/prefs.js:483 ../4.0/prefs.js:619
 msgid "Enable"
 msgstr "Etkin"
 
@@ -60,92 +60,92 @@ msgid "Width"
 msgstr "Genişlik"
 
 #: ../3.0/prefsui.glade.h:9 ../3.2/prefsui.glade.h:10 ../3.4/prefsui.glade.h:9
-#: ../4.0/prefsui.glade.h:10
+#: ../4.0/prefsui.glade.h:12
 msgid "Colors"
 msgstr "Renkler"
 
 #: ../3.0/prefsui.glade.h:10 ../3.2/prefsui.glade.h:11
-#: ../3.4/prefsui.glade.h:10 ../4.0/prefsui.glade.h:11
+#: ../3.4/prefsui.glade.h:10 ../4.0/prefsui.glade.h:16
 #: ../3.0/DataProviders.js:107 ../3.0/prefs.js:183 ../3.2/DataProviders.js:107
 #: ../3.2/prefs.js:187 ../3.4/DataProviders.js:58 ../3.4/prefs.js:195
-#: ../4.0/DataProviders.js:54 ../4.0/prefs.js:223
+#: ../4.0/DataProviders.js:54 ../4.0/prefs.js:303
 msgid "CPU"
 msgstr "CPU"
 
 #: ../3.0/prefsui.glade.h:11 ../3.2/prefsui.glade.h:12
-#: ../3.4/prefsui.glade.h:11 ../4.0/prefsui.glade.h:12
+#: ../3.4/prefsui.glade.h:11 ../4.0/prefsui.glade.h:17
 msgid "Usedup"
 msgstr "Kullanılan"
 
 #: ../3.0/prefsui.glade.h:12 ../3.2/prefsui.glade.h:13
-#: ../3.4/prefsui.glade.h:12 ../4.0/prefsui.glade.h:13
+#: ../3.4/prefsui.glade.h:12 ../4.0/prefsui.glade.h:18
 msgid "Cached"
 msgstr "Önbellek"
 
 #: ../3.0/prefsui.glade.h:13 ../3.2/prefsui.glade.h:14
-#: ../3.4/prefsui.glade.h:13 ../4.0/prefsui.glade.h:14
+#: ../3.4/prefsui.glade.h:13 ../4.0/prefsui.glade.h:19
 msgid "Buffer"
 msgstr "Tampon"
 
 #: ../3.0/prefsui.glade.h:14 ../3.2/prefsui.glade.h:15
-#: ../3.4/prefsui.glade.h:14 ../4.0/prefsui.glade.h:15
+#: ../3.4/prefsui.glade.h:14 ../4.0/prefsui.glade.h:20
 msgid "Free"
 msgstr "Boş"
 
 #: ../3.0/prefsui.glade.h:15 ../3.2/prefsui.glade.h:16
-#: ../3.4/prefsui.glade.h:15 ../4.0/prefsui.glade.h:16
+#: ../3.4/prefsui.glade.h:15 ../4.0/prefsui.glade.h:21
 #: ../3.0/DataProviders.js:200 ../3.2/DataProviders.js:200
 #: ../3.4/DataProviders.js:195 ../4.0/DataProviders.js:191
 msgid "Swap"
 msgstr "Takas"
 
 #: ../3.0/prefsui.glade.h:16 ../3.2/prefsui.glade.h:17
-#: ../3.4/prefsui.glade.h:16 ../4.0/prefsui.glade.h:17
+#: ../3.4/prefsui.glade.h:16 ../4.0/prefsui.glade.h:22
 msgid "Memory"
 msgstr "Hafıza"
 
 #: ../3.0/prefsui.glade.h:17 ../3.2/prefsui.glade.h:18
-#: ../3.4/prefsui.glade.h:17 ../4.0/prefsui.glade.h:18
+#: ../3.4/prefsui.glade.h:17 ../4.0/prefsui.glade.h:23
 msgid "Scaling"
 msgstr "Ölçekleme"
 
 #: ../3.0/prefsui.glade.h:18 ../3.2/prefsui.glade.h:19
-#: ../3.4/prefsui.glade.h:18 ../4.0/prefsui.glade.h:19
+#: ../3.4/prefsui.glade.h:18 ../4.0/prefsui.glade.h:24
 msgid "Auto Scale"
 msgstr "Otomatik Ölçek"
 
 #: ../3.0/prefsui.glade.h:19 ../3.2/prefsui.glade.h:20
-#: ../3.4/prefsui.glade.h:19 ../4.0/prefsui.glade.h:20
+#: ../3.4/prefsui.glade.h:19 ../4.0/prefsui.glade.h:25
 msgid "Logarithmic"
 msgstr "Logaritmik"
 
 #: ../3.0/prefsui.glade.h:20 ../3.2/prefsui.glade.h:21
-#: ../3.4/prefsui.glade.h:20 ../4.0/prefsui.glade.h:21
+#: ../3.4/prefsui.glade.h:20 ../4.0/prefsui.glade.h:26
 msgid "Devices"
 msgstr "Aygıtlar"
 
 #: ../3.0/prefsui.glade.h:21 ../3.2/prefsui.glade.h:22
-#: ../3.4/prefsui.glade.h:21 ../4.0/prefsui.glade.h:22
+#: ../3.4/prefsui.glade.h:21 ../4.0/prefsui.glade.h:27
 msgid "Network"
 msgstr "Ağ"
 
 #: ../3.0/prefsui.glade.h:22 ../3.2/prefsui.glade.h:23
-#: ../3.4/prefsui.glade.h:22 ../4.0/prefsui.glade.h:23
+#: ../3.4/prefsui.glade.h:22 ../4.0/prefsui.glade.h:28
 msgid "Disk IO"
 msgstr "Disk GÇ"
 
 #: ../3.0/prefsui.glade.h:23 ../3.2/prefsui.glade.h:24
-#: ../3.4/prefsui.glade.h:23 ../4.0/prefsui.glade.h:24
+#: ../3.4/prefsui.glade.h:23 ../4.0/prefsui.glade.h:29
 msgid "Scaling Description"
 msgstr "Ölçekleme Açıklaması"
 
 #: ../3.0/prefsui.glade.h:24 ../3.2/prefsui.glade.h:25
-#: ../3.4/prefsui.glade.h:24 ../4.0/prefsui.glade.h:25
+#: ../3.4/prefsui.glade.h:24 ../4.0/prefsui.glade.h:30
 msgid "Close"
 msgstr "Kapat"
 
 #: ../3.0/prefsui.glade.h:25 ../3.2/prefsui.glade.h:26
-#: ../3.4/prefsui.glade.h:25 ../4.0/prefsui.glade.h:26
+#: ../3.4/prefsui.glade.h:25
 msgid ""
 "Auto Scaling:\n"
 "\tThis will scale the line graph by the largest reading within the\n"
@@ -186,6 +186,59 @@ msgstr "Etiket Rengi"
 #: ../4.0/prefsui.glade.h:4
 msgid "Curves thickness"
 msgstr ""
+
+#: ../4.0/prefsui.glade.h:10
+msgid "Color by activity level"
+msgstr ""
+
+#: ../4.0/prefsui.glade.h:11
+msgid "Use automatic colors"
+msgstr ""
+
+#: ../4.0/prefsui.glade.h:13
+msgid "by CPU:"
+msgstr ""
+
+#: ../4.0/prefsui.glade.h:15
+#, no-c-format
+msgid "by activity level (in %):"
+msgstr ""
+
+#: ../4.0/prefsui.glade.h:31
+#, fuzzy
+msgid ""
+"Auto Scaling:\n"
+"    This will scale the line graph by the largest reading within the\n"
+"    displayed area. Once the largest reading is no longer displayed\n"
+"    the next largest becomes the new value by which the readings\n"
+"    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"    However, it also means that if there is a large reading small readings\n"
+"    may become indistinguishable from 0. And if there are only small "
+"readings\n"
+"    then slightly larger readings may appear larger than they should.\n"
+"    If not enabled the largest value used will be the largest reading since\n"
+"    cinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"    This transforms the readings so that they are displayed using a\n"
+"    logarithmic scale. If you are not familiar basically, it reduces the\n"
+"    large values so that they dont dominate the smaller readings."
+msgstr ""
+"Otomatik Ölçekleme:\n"
+"\tBu, çizgi grafiğini görüntülenen alandaki en büyük okuma değeri ile \n"
+"\tölçeklendirir. En büyük okuma artık görüntülenmediğinde, bir sonraki\n"
+"\ten büyük okuma değeri ölçeklendirme için yeni değer olur. Bu, grafiğin\n"
+"\tayrıntılarını göstermek için \"yakınlaştırma\" grafiğini sağlar. \n"
+"\tBununla birlikte, aynı zamanda büyük bir okuma değeri varsa, küçük \n"
+"\tokumaların 0'dan ayırt edilemeyeceği anlamına gelir. Ve eğer sadece \n"
+"\tküçük okumalar varsa, biraz daha büyük okumalar olması gerekenden \n"
+"\tdaha büyük görünebilir. Eğer etkin değilse, en büyük değer \n"
+"\tCinnamon'un başlamasından sonraki en büyük okuma olacaktır.\n"
+"\n"
+"Logaritmik Ölçekleme:\n"
+"\tBu, okuma değerlerini logaritmik bir ölçek kullanılarak görüntülenecek \n"
+"\tşekle dönüştürür. Temel olarak aşina değilseniz, daha küçük okumalara \n"
+"\thakim olmayacak şekilde genişlik değerlerini azaltır."
 
 #: ../3.0/DataProviders.js:113 ../3.2/DataProviders.js:113
 #: ../3.4/DataProviders.js:126 ../4.0/DataProviders.js:122
@@ -305,22 +358,22 @@ msgid "Reload this applet"
 msgstr ""
 
 #: ../3.0/prefs.js:290 ../3.2/prefs.js:294 ../3.4/prefs.js:338
-#: ../4.0/prefs.js:366
+#: ../4.0/prefs.js:494
 msgid "Down"
 msgstr "İndirme"
 
 #: ../3.0/prefs.js:298 ../3.2/prefs.js:302 ../3.4/prefs.js:346
-#: ../4.0/prefs.js:374
+#: ../4.0/prefs.js:502
 msgid "Up"
 msgstr "Gönderme"
 
 #: ../3.0/prefs.js:406 ../3.2/prefs.js:414 ../3.4/prefs.js:479
-#: ../4.0/prefs.js:507
+#: ../4.0/prefs.js:635
 msgid "Read"
 msgstr "Okuma"
 
 #: ../3.0/prefs.js:414 ../3.2/prefs.js:423 ../3.4/prefs.js:488
-#: ../4.0/prefs.js:516
+#: ../4.0/prefs.js:644
 msgid "Write"
 msgstr "Yazma"
 
@@ -353,3 +406,23 @@ msgstr ""
 "\tFedora: libgtop2-devel\n"
 "\tArch: libgtop\n"
 "yükleyin "
+
+#: ../4.0/prefs.js:335
+msgid "00-20"
+msgstr ""
+
+#: ../4.0/prefs.js:335
+msgid "20-40"
+msgstr ""
+
+#: ../4.0/prefs.js:335
+msgid "40-60"
+msgstr ""
+
+#: ../4.0/prefs.js:335
+msgid "60-80"
+msgstr ""
+
+#: ../4.0/prefs.js:335
+msgid "80-100"
+msgstr ""
