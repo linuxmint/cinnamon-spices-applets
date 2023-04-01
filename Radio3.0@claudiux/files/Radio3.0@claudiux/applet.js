@@ -1088,6 +1088,7 @@ WebRadioReceiverAndRecorder.prototype = {
     this.settings.bind("show-reload", "show_reload");
     this.settings.bind("show-bitrate", "show_bitrate", (...args) => this.set_show_bitrate(...args));
     this.settings.bind("show-codec", "show_codec");
+    this.settings.bind("volume-show-osd", "volume_show_osd");
 
     this.settings.bind("import-list", "import_list");
     this.settings.bind("import-dir", "import_dir");
@@ -1166,6 +1167,8 @@ WebRadioReceiverAndRecorder.prototype = {
       //~ log("Volume Cut", true);
 
       if (this.context_menu_item_slider != null) {
+        //this.context_menu_item_slider.stream.change_is_muted(!this.context_menu_item_slider.stream.is_muted);
+
         let volume_at_startup = this.get_volume_at_startup();
 
         if (volume_at_startup <= 0) volume_at_startup = 50;
@@ -1173,9 +1176,13 @@ WebRadioReceiverAndRecorder.prototype = {
         let value = 0;
         let old_value = this.context_menu_item_slider.slider._value;
 
-        if (old_value !== 0) this.old_percentage = 100 * old_value;
+        if (old_value !== 0) this.old_percentage = Math.round(old_value * 100);
         else value = (this.old_percentage) ? this.old_percentage / 100 : volume_at_startup / 100;
 
+        //~ log("value: "+value, true);
+        //~ log("old_value: "+old_value, true);
+
+        //this.percentage = Math.round(value * 100);
         this.context_menu_item_slider.slider._value = value;
         this.context_menu_item_slider.slider._slider.queue_repaint();
         this.context_menu_item_slider.slider.emit('value-changed', value);
@@ -2032,7 +2039,7 @@ WebRadioReceiverAndRecorder.prototype = {
         //trackInfo.add_actor(songButtons);
         //~ songBox.set_child(song_toolbar);
 
-        this.menu.addMenuItem(songBox);
+        //this.menu.addMenuItem(songBox);
 
         this.menu.addMenuItem(new PopupSeparatorMenuItem());
       }

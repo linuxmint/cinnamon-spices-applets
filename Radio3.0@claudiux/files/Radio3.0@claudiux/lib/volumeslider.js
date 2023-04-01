@@ -5,6 +5,8 @@ const PopupMenu = imports.ui.popupMenu;
 const Cvc = imports.gi.Cvc;
 const Slider = imports.ui.slider;
 const Tooltips = imports.ui.tooltips;
+const Gio = imports.gi.Gio;
+const Main = imports.ui.main;
 const {
   get_home_dir,
   file_test,
@@ -128,6 +130,12 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         if(this.stream.is_muted !== muted)
             this.stream.change_is_muted(muted);
 
+        if (this.applet.volume_show_osd) {
+            let iconName = this._volumeToIcon(1.0*this.applet.percentage/100, "webradioreceiver-")+"-symbolic";
+            let icon = Gio.Icon.new_for_string(iconName);
+            Main.osdWindowManager.show(-1, icon, this.applet.percentage, null);
+        }
+
         //~ if(!this._dragging)
             //~ this.applet._notifyVolumeChange(this.stream);
     }
@@ -215,10 +223,9 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 
         // send data to applet
         this.emit("values-changed", iconName, this.percentage);
-        //this.emit("values-changed", this.percentage);
     }
 
-    _volumeToIcon(value) {
+    _volumeToIcon(value, basename="audio-volume-") {
         log("VolumeSlider: _volumeToIcon");
         let icon;
         if(value < 0.005) {
@@ -232,7 +239,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             else
                 icon = "high";
         }
-        return "audio-volume-" + icon;
+        return basename + icon;
     }
 }
 
