@@ -29,9 +29,10 @@ const { EyeModeFactory } = require("./eyeModes.js");
 const { ClickAnimationModeFactory } = require("./clickAnimationModes.js");
 const { Debouncer } = require("./helper.js");
 
-const EYE_AREA_WIDTH = 34;
-const EYE_AREA_HEIGHT = 16;
 const CLICK_DEBOUNCE_INTERVAL = 2;
+
+const EYE_AREA_WIDTH = 28;
+const EYE_AREA_HEIGHT = 16;
 
 // NOTE: must keep in sync with metadata.uuid
 const UUID = "c-eyes@anaximeno";
@@ -49,7 +50,7 @@ function _(text) {
 }
 
 class Eye extends Applet.Applet {
-	_getIconCached(dir, mode, click_type, color) {
+	_get_icon_cached(dir, mode, click_type, color) {
 		let key = `${dir}${mode}${click_type}${color}`;
 		let path = `${dir}/icons/${mode}_${click_type}_${color}.svg`;
 
@@ -63,7 +64,7 @@ class Eye extends Applet.Applet {
 		}
 	}
 
-	_initDataDir() {
+	_init_data_dir() {
 		let data_dir = `${GLib.get_user_cache_dir()}/${this.metadata.uuid}`;
 
 		if (GLib.mkdir_with_parents(`${data_dir}/icons`, 0o777) < 0)
@@ -72,134 +73,127 @@ class Eye extends Applet.Applet {
 		return data_dir;
 	}
 
-	_setupSettings(uuid, instanceId) {
-		let settingsDebouncer = new Debouncer();
+	_setup_settings(uuid, instanceId) {
 		this.settings = new Settings.AppletSettings(this, uuid, instanceId);
+		const settingsDebouncer = new Debouncer();
 
-		this.settings.bind(
-			"eye-repaint-interval",
-			"eye_repaint_interval",
-			settingsDebouncer.debounce((e) => this.setActive(true), 400)
-		);
+		const _settings = [
+			{
+				key: "eye-repaint-interval",
+				value: "eye_repaint_interval",
+				cb: settingsDebouncer.debounce((e) => this.set_active(true), 400),
+			},
+			{
+				key: "fade-timeout",
+				value: "fade_timeout",
+				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 400),
+			},
+			{
+				key: "eye-mode",
+				value: "eye_mode",
+				cb: this.on_property_updated,
+			},
+			{
+				key: "mouse-click-mode",
+				value: "mouse_click_mode",
+				cb: this.on_property_updated,
+			},
+			{
+				key: "eye-line-width",
+				value: "eye_line_width",
+				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 400),
+			},
+			{
+				key: "eye-margin",
+				value: "eye_margin",
+				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 400),
+			},
+			{
+				key: "eye-clicked-color",
+				value: "eye_clicked_color",
+				cb: this.on_property_updated,
+			},
+			{
+				key: "iris-clicked-color",
+				value: "iris_clicked_color",
+				cb: this.on_property_updated,
+			},
+			{
+				key: "pupil-clicked-color",
+				value: "pupil_clicked_color",
+				cb: this.on_property_updated,
+			},
+			{
+				key: "mouse-click-image-size",
+				value: "mouse_click_image_size",
+				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 400),
+			},
+			{
+				key: "mouse-click-enable",
+				value: "mouse_click_enable",
+				cb: this.on_mouse_click_enable_updated,
+			},
+			{
+				key: "mouse-left-click-enable",
+				value: "mouse_left_click_enable",
+				cb: this.on_property_updated,
+			},
+			{
+				key: "mouse-right-click-enable",
+				value: "mouse_right_click_enable",
+				cb: this.on_property_updated,
+			},
+			{
+				key: "mouse-middle-click-enable",
+				value: "mouse_middle_click_enable",
+				cb: this.on_property_updated,
+			},
+			{
+				key: "mouse-left-click-color",
+				value: "mouse_left_click_color",
+				cb: this.on_property_updated,
+			},
+			{
+				key: "mouse-middle-click-color",
+				value: "mouse_middle_click_color",
+				cb: this.on_property_updated,
+			},
+			{
+				key: "mouse-right-click-color",
+				value: "mouse_right_click_color",
+				cb: this.on_property_updated,
+			},
+			{
+				key: "mouse-click-opacity",
+				value: "mouse_click_opacity",
+				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 400),
+			},
+			{
+				key: "click-animation-mode",
+				value: "click_animation_mode",
+				cb: null,
+			},
+			{
+				key: "eye-activate-by-default",
+				value: "eye_activate_by_default",
+				cb: this.on_eye_activated_by_default_updated,
+			},
+			{
+				key: "deactivate-on-fullscreen",
+				value: "deactivate_on_fullscreen",
+				cb: null,
+			},
+			{
+				key: "eye-vertical-padding",
+				value: "eye_vertical_padding",
+				cb: settingsDebouncer.debounce(
+					(e) => this.on_property_updated(e,
+						{ eye_property_update: true, mouse_property_update: false })),
+			},
+		];
 
-		this.settings.bind(
-			"fade-timeout",
-			"fade_timeout",
-			settingsDebouncer.debounce((e) => this.on_property_updated(e), 400)
-		);
-
-		this.settings.bind(
-			"eye-mode",
-			"eye_mode",
-			this.on_property_updated
-		);
-
-		this.settings.bind(
-			"mouse-click-mode",
-			"mouse_click_mode",
-			this.on_property_updated
-		);
-
-		this.settings.bind(
-			"eye-line-width",
-			"eye_line_width",
-			settingsDebouncer.debounce((e) => this.on_property_updated(e), 400)
-		);
-
-		this.settings.bind(
-			"eye-margin",
-			"eye_margin",
-			settingsDebouncer.debounce((e) => this.on_property_updated(e), 400)
-		);
-
-		this.settings.bind(
-			"eye-clicked-color",
-			"eye_clicked_color",
-			this.on_property_updated
-		);
-
-		this.settings.bind(
-			"iris-clicked-color",
-			"iris_clicked_color",
-			this.on_property_updated
-		);
-
-		this.settings.bind(
-			"pupil-clicked-color",
-			"pupil_clicked_color",
-			this.on_property_updated
-		);
-
-		this.settings.bind(
-			"mouse-click-image-size",
-			"mouse_click_image_size",
-			settingsDebouncer.debounce((e) => this.on_property_updated(e), 400)
-		);
-
-		this.settings.bind(
-			"mouse-click-enable",
-			"mouse_click_enable",
-			this.on_mouse_click_enable_updated
-		);
-
-		this.settings.bind(
-			"mouse-left-click-enable",
-			"mouse_left_click_enable",
-			this.on_property_updated
-		);
-
-		this.settings.bind(
-			"mouse-right-click-enable",
-			"mouse_right_click_enable",
-			this.on_property_updated
-		);
-
-		this.settings.bind(
-			"mouse-middle-click-enable",
-			"mouse_middle_click_enable",
-			this.on_property_updated
-		);
-
-		this.settings.bind(
-			"mouse-left-click-color",
-			"mouse_left_click_color",
-			this.on_property_updated
-		);
-
-		this.settings.bind(
-			"mouse-middle-click-color",
-			"mouse_middle_click_color",
-			this.on_property_updated
-		);
-
-		this.settings.bind(
-			"mouse-right-click-color",
-			"mouse_right_click_color",
-			this.on_property_updated
-		);
-
-		this.settings.bind(
-			"mouse-click-opacity",
-			"mouse_click_opacity",
-			settingsDebouncer.debounce((e) => this.on_property_updated(e), 400)
-		);
-
-		this.settings.bind(
-			"click-animation-mode",
-			"click_animation_mode",
-			null,
-		);
-
-		this.settings.bind(
-			"eye-activate-by-default",
-			"eye_activate_by_default",
-			this.on_eye_activated_by_default_updated
-		);
-
-		this.settings.bind(
-			"deactivate-on-fullscreen",
-			"deactivate_on_fullscreen",
-			null,
+		_settings.forEach(
+			s => this.settings.bind(s.key, s.value, s.cb ? (...args) => s.cb.call(this, ...args) : null)
 		);
 	}
 
@@ -207,10 +201,10 @@ class Eye extends Applet.Applet {
 		super(orientation, panelHeight, instanceId);
 
 		this.setAllowedLayout(Applet.AllowedLayout.BOTH);
-		this._setupSettings(metadata.uuid, instanceId);
+		this._setup_settings(metadata.uuid, instanceId);
 
 		this.metadata = metadata;
-		this.data_dir = this._initDataDir();
+		this.data_dir = this._init_data_dir();
 		this.img_dir = `${metadata.path}/../circle`;
 
 		if (!Gio.File.new_for_path(this.img_dir).query_exists(null)) {
@@ -232,10 +226,10 @@ class Eye extends Applet.Applet {
 
 		this.click_debounced = (new Debouncer()).debounce(this._clickAnimation.bind(this), CLICK_DEBOUNCE_INTERVAL);
 
-		this.setActive(true);
-		this.setMouseCirclePropertyUpdate(false);
-		this.setMouseCircleActive(this.mouse_click_show);
-		this.updateTooltip();
+		this.set_active(true);
+		this.set_mouse_circle_property_update(false);
+		this.set_mouse_circle_enable(this.mouse_click_show);
+		this._update_tooltip();
 	}
 
 	get mouse_click_show() {
@@ -250,24 +244,24 @@ class Eye extends Applet.Applet {
 		this.eye_activated = !this.eye_activated;
 
 		if (this.mouse_click_enable) {
-			this.setMouseCircleActive(this.mouse_click_show);
+			this.set_mouse_circle_enable(this.mouse_click_show);
 		}
 
 		this.area.queue_repaint();
-		this.updateTooltip();
+		this._update_tooltip();
 	}
 
 	on_property_updated(event, opts = { mouse_property_update: true, eye_property_update: true }) {
-		if (opts.mouse_property_update || true) /* Update by default */
-			this.setMouseCirclePropertyUpdate(true);
-		if (opts.eye_property_update || true) /* Update by default */
+		if (opts.mouse_property_update)
+			this.set_mouse_circle_property_update(true);
+		if (opts.eye_property_update)
 			this.setEyePropertyUpdate();
-		this.updateTooltip();
+		this._update_tooltip();
 	}
 
 	on_mouse_click_enable_updated(event) {
 		this.on_property_updated(event);
-		this.setMouseCircleActive(this.mouse_click_show);
+		this.set_mouse_circle_enable(this.mouse_click_show);
 		this.area.queue_repaint();
 	}
 
@@ -276,7 +270,7 @@ class Eye extends Applet.Applet {
 
 		if (this.eye_activate_by_default) {
 			this.eye_activated = this.eye_activate_by_default;
-			this.setMouseCircleActive(this.mouse_click_show);
+			this.set_mouse_circle_enable(this.mouse_click_show);
 			this.area.queue_repaint();
 		}
 	}
@@ -285,20 +279,20 @@ class Eye extends Applet.Applet {
 		if (this.deactivate_on_fullscreen) {
 			let monitor = global.screen.get_current_monitor();
 			let inFullscreen = global.screen.get_monitor_in_fullscreen(monitor);
-			this.setActive(!inFullscreen);
-			this.setMouseCircleActive(!inFullscreen && this.mouse_click_show);
+			this.set_mouse_circle_enable(!inFullscreen && this.mouse_click_show);
+			this.set_active(!inFullscreen);
 		}
 	}
 
 	destroy() {
 		this.signals.disconnectAllSignals();
-		this.setMouseCircleActive(false);
-		this.setActive(false);
+		this.set_mouse_circle_enable(false);
+		this.set_active(false);
 		this.area.destroy();
 		this.settings.finalize();
 	}
 
-	setActive(enabled) {
+	set_active(enabled) {
 		this.setEyePropertyUpdate();
 
 		if (this._eye_update_handler) {
@@ -319,20 +313,19 @@ class Eye extends Applet.Applet {
 		}
 	}
 
-	setMouseCirclePropertyUpdate(checkCache = true) {
-		this._mouseCircleCreateDataIcon('left_click', this.mouse_left_click_color, checkCache);
-		this._mouseCircleCreateDataIcon('right_click', this.mouse_right_click_color, checkCache);
-		this._mouseCircleCreateDataIcon('middle_click', this.mouse_middle_click_color, checkCache);
+	set_mouse_circle_property_update(checkCache = true) {
+		this._mouse_circle_create_data_icon('left_click', this.mouse_left_click_color, checkCache);
+		this._mouse_circle_create_data_icon('right_click', this.mouse_right_click_color, checkCache);
+		this._mouse_circle_create_data_icon('middle_click', this.mouse_middle_click_color, checkCache);
 	}
 
 	setEyePropertyUpdate() {
-		const margin = 2 * this.eye_margin;
-		this.area.set_width(EYE_AREA_WIDTH + margin);
-		this.area.set_height(EYE_AREA_HEIGHT + margin);
+		this.area.set_width(EYE_AREA_WIDTH + 2 * this.eye_margin);
+		this.area.set_height(EYE_AREA_HEIGHT);
 		this.area.queue_repaint();
 	}
 
-	setMouseCircleActive(enabled) {
+	set_mouse_circle_enable(enabled) {
 		if (enabled == null) {
 			enabled = this.mouse_click_show;
 		}
@@ -340,12 +333,12 @@ class Eye extends Applet.Applet {
 		this._mouseListener.deregister('mouse');
 
 		if (enabled) {
-			this.setMouseCirclePropertyUpdate(true);
+			this.set_mouse_circle_property_update(true);
 			this._mouseListener.register('mouse');
 		}
 	}
 
-	updateTooltip() {
+	_update_tooltip() {
 		let complement = this.mouse_click_enable ? _("effects enabled") : _("effects disabled");
 
 		if (this.eye_activated) {
@@ -355,8 +348,8 @@ class Eye extends Applet.Applet {
 		}
 	}
 
-	_mouseCircleCreateDataIcon(name, color, checkCache) {
-		if (checkCache && this._getIconCached(this.data_dir, this.mouse_click_mode, name, color))
+	_mouse_circle_create_data_icon(name, color, checkCache) {
+		if (checkCache && this._get_icon_cached(this.data_dir, this.mouse_click_mode, name, color))
 			return;
 
 		let source = Gio.File.new_for_path(`${this.img_dir}/${this.mouse_click_mode}.svg`);
@@ -368,14 +361,16 @@ class Eye extends Applet.Applet {
 
 		// Save content to cache dir
 		let dest = Gio.File.new_for_path(`${this.data_dir}/icons/${this.mouse_click_mode}_${name}_${color}.svg`);
+
 		if (!dest.query_exists(null)) {
 			dest.create(Gio.FileCreateFlags.NONE, null);
 		}
+
 		let [r_success, tag] = dest.replace_contents(contents, null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
 	}
 
 	_clickAnimation(clickType, color) {
-		let icon = this._getIconCached(this.data_dir, this.mouse_click_mode, clickType, color);
+		let icon = this._get_icon_cached(this.data_dir, this.mouse_click_mode, clickType, color);
 
 		if (icon) {
 			let options = {
@@ -398,7 +393,8 @@ class Eye extends Applet.Applet {
 			iris_color: foreground_color,
 			pupil_color: foreground_color,
 			line_width: this.eye_line_width,
-			is_eye_active: this.eye_activated
+			is_eye_active: this.eye_activated,
+			padding: this.eye_vertical_padding,
 		};
 
 		if (this.eye_activated) {
