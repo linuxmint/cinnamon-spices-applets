@@ -160,7 +160,7 @@ export interface AppletError {
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 export type ErrorSeverity = "hard" | "soft" | "silent";
-export type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk" | "us-weather";
+export type ApiService = "ipapi" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk" | "us-weather" | "pirate_weather";
 export type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
 	"location not found" | "no network response" | "no api response" | "location not covered" |
 	"bad api response - non json" | "bad api response" | "no response body" |

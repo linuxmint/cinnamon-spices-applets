@@ -28,20 +28,20 @@ You can also save locations what you entered manually and switch between them in
 
 ### Weather providers to choose from
 
-| Weather Providers          | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Immediate Forecast | Other information                |
-| -------------------------- | ------------- | --------------------- | ---------------------- | ------------------ | -------------------------------- |
-| **OpenWeatherMap**         | No            | 8                     | 48                     | Yes                | Default provider                 |
-| **MET Norway**             | No            | 10                    | 48                     | Depends            | --                               |
-| **DMI Denmark**            | No            | 10                    | 48                     | No                 | --                               |
-| **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | --                               |
-| **Met Office UK**          | No            | 5                     | 36                     | No                 | --                               |
-| **US National Weather**    | No            | 7                     | 156                    | No                 | --                               |
-| **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | --                               |
-| **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | --                               |
-| **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | Previously known as Climacell    |
-| **DarkSky**                | Yes           | 8                     | 168                    | No                 | Signups closed, will end Q2 2023 |
-| **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | Limited free calls               |
-| **Weather Underground**    | Yes           | 5                     | 0                      | No                 | --                               |
+| Weather Providers          | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Immediate Forecast | Other information             |
+| -------------------------- | ------------- | --------------------- | ---------------------- | ------------------ | ----------------------------- |
+| **OpenWeatherMap**         | No            | 8                     | 48                     | Yes                | Default provider              |
+| **MET Norway**             | No            | 10                    | 48                     | Depends            | --                            |
+| **DMI Denmark**            | No            | 10                    | 48                     | No                 | --                            |
+| **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | --                            |
+| **Met Office UK**          | No            | 5                     | 36                     | No                 | --                            |
+| **US National Weather**    | No            | 7                     | 156                    | No                 | --                            |
+| **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | --                            |
+| **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | --                            |
+| **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | Previously known as Climacell |
+| **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | Limited free calls            |
+| **Weather Underground**    | Yes           | 5                     | 0                      | No                 | --                            |
+| **Pirate Weather**         | Yes           | 7                     | 168                    | Yes                |                               |
 
 ### OpenWeatherMap
 
@@ -115,12 +115,6 @@ Meteorological data from American weather technology company with headquarters i
 
 * API key can be obtained [here](https://app.tomorrow.io/signup?planid=5fa4047f4acee993fbd7399d&vid=153ef940-c389-41d4-847e-d83d632059d0). Register and the API key will be shown in the [Develpment section](https://app.tomorrow.io/development/keys). Free plan comes with 1000 free calls per day.
 
-### DarkSky
-
-Online Service started by The Dark Sky Company founded 2012 in the US that specializes in weather forecasting and visualization. [DarkSky Website](https://darksky.net/). [DarkSky was acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/) in 2020. Read more about the company in the early days [archived here](https://web.archive.org/web/20191011010948/https://darksky.net/about).
-
-* The service does not allow new signups and will continue to function until [March 31st, 2023](https://blog.darksky.net/).
-
 ### AccuWeather
 
 Online Service from company AccuWeather Inc, founded in 1962 with headquarters in the US, provides a global weather source. [AccuWeather Website](https://www.accuweather.com/). Read more about the company [here](https://en.wikipedia.org/wiki/AccuWeather)
@@ -135,11 +129,16 @@ Online Service from company AccuWeather Inc, founded in 1962 with headquarters i
 
 Weather Underground is a privately owned, web-based weather information company. It provides weather observations and forecasts in a large number of locations around the world. It was founded by Jeff Masters in 1995 with headquarters in Ann Arbor United States. [Weather Underground website](https://www.wunderground.com/). Read more about the service [here](https://en.wikipedia.org/wiki/Weather_Underground_(weather_service)).
 
-
 - Only allows 1500 calls a day, so 15min refresh cycle is recommended.
 - Weather Underground is a global community of people connecting data from environmental sensors like weather stations (250.000) and air quality monitors so they can provide the rich, hyperlocal data you need.
 - You need an API key. If you don't have a weather station to share data with WU, you can't have an API key. However, you can add a Raspberry Pi as a device for the weather station choice when [registering](https://www.wunderground.com/signup), even if you don't have one, and it will get you the API key.
 - Disclaimer: Observations don't provide weather conditions so the forecast one for the day is used.
+
+### Pirate Weather
+
+Direct replacement to DarkSky. Run by one guy, it's also open source. If you like the accuracy of the data or you want to keep the project going, subscribe to a paid plan. 10000 calls free. You can get an API key [here](https://pirate-weather.apiable.io/products/weather-data).
+
+You can read about the project [here](http://pirateweather.net/en/latest/).
 
 ### Usage of "Override label on panel", "Override location label" and "Override tooltip on panel" setting
 

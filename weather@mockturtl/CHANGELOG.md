@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.2.13
+
+* Add Pirate Weather as a provider
+* Remove DarkSky
+* Fix [#4716](https://github.com/linuxmint/cinnamon-spices-applets/issues/4716)
+* Fix [#4719](https://github.com/linuxmint/cinnamon-spices-applets/issues/4719)
+* Fix [#4762](https://github.com/linuxmint/cinnamon-spices-applets/issues/4762)
+* Fix [#4765](https://github.com/linuxmint/cinnamon-spices-applets/issues/4765)
+
 ## 3.2.12
 
 * Minor style changes
