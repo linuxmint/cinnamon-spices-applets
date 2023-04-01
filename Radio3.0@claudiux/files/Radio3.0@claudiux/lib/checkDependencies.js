@@ -54,6 +54,9 @@ const DEPENDENCIES = {
   ],
   "fedora": [
     ["sox", "/usr/bin/sox",  "sox"]
+  ],
+  "openSUSE": [
+    ["sox", "/usr/bin/sox",  "sox"]
   ]
 }
 
@@ -116,6 +119,18 @@ var DEPENDENCIES = {
     ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
     ["", "/usr/lib64/gstreamer-1.0/libgstlibav.so", "gstreamer1-libav"],
     ["", "/usr/share/licenses/python3-polib/LICENSE", "python3-polib"]
+  ],
+  "openSUSE": [
+    ["mpv", "/usr/bin/mpv",  "mpv"],
+    ["wget", "/usr/bin/wget", "wget"],
+    ["sox", "/usr/bin/sox",  "sox"],
+    ["at", "/usr/bin/at", "at"],
+    ["notify-send", "/usr/bin/notify-send", "libnotify"],
+    ["ffmpeg", "/usr/bin/ffmpeg", "ffmpeg"],
+    ["", "/usr/share/licenses/brotli/LICENSE", "brotli"],
+    ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
+    ["", "/usr/lib64/gstreamer-1.0/libgstlibav.so", "gstreamer-plugins-libav"],
+    ["", "/usr/share/licenses/python310-polib/LICENSE", "python3-polib"]
   ]
 }
 
@@ -139,14 +154,16 @@ const UPDATE = {
   "default": "sudo apt-get update",
   "arch": "sudo pacman -Syu",
   "debian": "apt-get update",
-  "fedora": "sudo dnf update"
+  "fedora": "sudo dnf update",
+  "openSUSE": ""
 }
 
 const INSTALL = {
   "default": "sudo apt-get install",
   "arch": "sudo pacman -S",
   "debian": "apt-get install",
-  "fedora": "sudo dnf install"
+  "fedora": "sudo dnf install",
+  "openSUSE": "sudo zypper --non-interactive install"
 }
 
 const HOME_DIR = GLib.get_home_dir();
@@ -224,6 +241,10 @@ function isDebian() {
   return DISTRO() === 'debian'
 } // End of isDebian
 
+function isOpenSUSE() {
+  return GLib.find_program_in_path("zypper")
+}
+
 function is_apturl_present() {
   return GLib.find_program_in_path("apturl")
 } // End of is_apturl_present
@@ -240,6 +261,8 @@ function get_distro() {
         return "arch";
       } else if (isFedora()) {
         return "fedora";
+      } else if (isOpenSUSE()) {
+        return "openSUSE"
       }
       return "default"; // linuxmint or ubuntu
   }
@@ -332,12 +355,15 @@ Dependencies.prototype = {
       let _isFedora = isFedora();
       let _isArchlinux = isArchLinux();
       let _isDebian = isDebian();
+      let _isOpenSUSE = isOpenSUSE();
       //let _apt_update = _isFedora ? "sudo dnf update" : _isArchlinux ? "" : _isDebian ? "apt update" : "sudo apt update";
       let distro = get_distro();
       let _apt_update = UPDATE[distro];
       let _install = INSTALL[distro];
       let _pkg_to_install = get_pkg_to_install();
       let _and = " \\\\&\\\\& ";
+      if (_apt_update.length === 0)
+        _and = "";
       let _apt_install = "%s %s".format(_install, _pkg_to_install.join(" "));
       //var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : _isDebian ? "apt install libnotify-bin fonts-symbola" : "sudo apt install libnotify-bin fonts-symbola";
       let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
