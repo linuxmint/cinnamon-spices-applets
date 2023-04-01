@@ -206,7 +206,8 @@
       "type": "section",
       "title": "Volume step",
       "keys": [
-        "volume-step"
+        "volume-step",
+        "volume-show-osd"
       ]
     },
     "sectionBehaviorTooltip": {
@@ -809,6 +810,12 @@
       "±5%": 5
     },
     "tooltip": "By how much increase or decrease the volume using the mouse scroll wheel on the icon."
+  },
+  "volume-show-osd": {
+    "type": "switch",
+    "default": true,
+    "description": "Show OSD while changing volume",
+    "tooltip": "Should OSD (On-Screen Display) be displayed when changing volume?"
   },
   "show-title-and-version": {
     "type": "switch",
