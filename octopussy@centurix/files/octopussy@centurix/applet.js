@@ -337,7 +337,7 @@ OctoPussy.prototype = {
 				let toolNumber = parseInt(key.slice(-1), 10) + 1;
 				if (key == "bed") {
 					status += "[🛏" + this.printerStatus["temperature"][key]["actual"] + "°]";
-				} else {
+				} else if (toolNumber) {
 					status += "[🠷" + SUPERSCRIPT.substr(toolNumber, 1) + " " + this.printerStatus["temperature"][key]["actual"] + "°]";
 				}
 			}
