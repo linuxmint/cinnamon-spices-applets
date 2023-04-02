@@ -180,7 +180,7 @@ class LGS extends Applet.TextIconApplet {
         });
         itemReloadCinnamon.connect(
             "activate",
-            () => restartCinnamon(true)
+            () => { this.menu.close(); restartCinnamon(true) }
         );
 
         this.menu.addMenuItem(itemReloadCinnamon);
