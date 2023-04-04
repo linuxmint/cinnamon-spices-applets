@@ -1,0 +1,244 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-25 22:26+0100\n"
+"PO-Revision-Date: 2023-04-04 22:03+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: Zuyderzee2000 <zuyderzee@protonmail.com>\n"
+"Language: nl\n"
+
+#: applet.js:394
+msgid "Pomodoro started"
+msgstr "Pomodoro gestart"
+
+#: applet.js:437 applet.js:737
+msgid "Waiting to start"
+msgstr "Wachten op start"
+
+#: applet.js:455
+#, javascript-format
+msgid "Pomodori %d, set %d running"
+msgstr "Pomodori %d, set %d loopt"
+
+#: applet.js:462
+msgid "Let's go to work!"
+msgstr "Aan het werk!"
+
+#: applet.js:477
+msgid "Take a short break"
+msgstr "Neem een korte pauze"
+
+#: applet.js:478
+msgid "Short break running"
+msgstr "Korte pauze loopt"
+
+#: applet.js:497
+msgid "Take a long break"
+msgstr "Neem een lange pauze"
+
+#: applet.js:499
+msgid "Long break running"
+msgstr "Lange pauze loopt"
+
+#: applet.js:533
+msgid "Pomodoro ended"
+msgstr "Pomodoro afgelopen"
+
+#: applet.js:665
+msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
+msgstr "https://nl.wikipedia.org/wiki/Pomodorotechniek"
+
+#. metadata.json->name
+#: applet.js:837
+msgid "Pomodoro Timer"
+msgstr "Pomodorotimer"
+
+#: applet.js:848
+msgid "Completed"
+msgstr "Voltooid"
+
+#: applet.js:861
+msgid "Reset Timer"
+msgstr "Timer resetten"
+
+#: applet.js:873
+msgid "Reset Counts and Timer"
+msgstr "Aantal en timer resetten"
+
+#: applet.js:886
+msgid "What is this?"
+msgstr "Wat is dit?"
+
+#: applet.js:943
+msgid "None"
+msgstr "Geen"
+
+#: applet.js:973
+msgid "Switch Off Pomodoro"
+msgstr "Pomodoro uitzetten"
+
+#: applet.js:979
+msgid "Start a new Pomodoro"
+msgstr "Nieuwe Pomodoro starten"
+
+#: applet.js:985
+msgid "Hide"
+msgstr "Verbergen"
+
+#: applet.js:997
+msgid "Pomodoro set finished, you deserve a break!"
+msgstr "Pomodoroset afgelopen, u verdient een pauze!"
+
+#: applet.js:1005
+msgid "Your break is over, start another pomodoro!"
+msgstr "Uw pauze is voorbij, begin een nieuwe pomodoro!"
+
+#: applet.js:1010
+#, javascript-format
+msgid "A new pomodoro begins in %s."
+msgstr "Een nieuwe pomodoro begint in %s."
+
+#: applet.js:1021
+#, javascript-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minuut"
+msgstr[1] "%d minuten"
+
+#: applet.js:1022
+#, javascript-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d seconde"
+msgstr[1] "%d seconden"
+
+#: applet.js:1024
+#, javascript-format
+msgid "%s and %s"
+msgstr "%s en %s"
+
+#: applet.js:1048
+msgid "Continue Current Pomodoro"
+msgstr "Huidige Pomodoro voortzetten"
+
+#: applet.js:1054
+msgid "Pause Pomodoro"
+msgstr "Pomodoro pauzeren"
+
+#: applet.js:1065
+msgid "Short break finished, ready to continue?"
+msgstr "Korte pauze afgelopen, klaar om verder te gaan?"
+
+#. settings-schema.json->head_durations->description
+msgid "Durations (minutes)"
+msgstr "Tijdsduren (minuten)"
+
+#. settings-schema.json->pomodoro_duration->description
+msgid "Pomodoro Duration:"
+msgstr "Duur Pomodoro:"
+
+#. settings-schema.json->short_break_duration->description
+msgid "Short Break Duration:"
+msgstr "Duur Korte Pauze:"
+
+#. settings-schema.json->long_break_duration->description
+msgid "Long Break Duration:"
+msgstr "Duur Lange Pauze:"
+
+#. settings-schema.json->pomodori_number->description
+msgid "Number of pomodori before long break:"
+msgstr "Aantal pomodori voor lange pauze:"
+
+#. settings-schema.json->head_options->description
+msgid "Options"
+msgstr "Opties"
+
+#. settings-schema.json->show_dialog_messages->description
+msgid "Show Dialog Messages"
+msgstr "Dialoogberichten tonen"
+
+#. settings-schema.json->auto_start_after_short_break_ends->description
+msgid "Auto start after a short break ends"
+msgstr "Automatisch starten na afloop korte pauze"
+
+#. settings-schema.json->auto_start_after_break_ends->description
+msgid "Auto start a new pomodoro after a break ends"
+msgstr "Automatisch nieuwe pomodoro starten na afloop pauze"
+
+#. settings-schema.json->display_icon->description
+msgid "Display the pomodoro icon in the applet panel"
+msgstr "Het pomodoroicoon in de werkbalk tonen"
+
+#. settings-schema.json->use_symbolic_icon->description
+msgid "Use a symbolic icon in the applet panel"
+msgstr "Een symboolicoon in de werkbalk tonen"
+
+#. settings-schema.json->show_timer->description
+msgid "Show the pomodoro timer in the applet panel"
+msgstr "Pomodorotimer in de werkbalk tonen"
+
+#. settings-schema.json->head_sounds->description
+msgid "Sounds"
+msgstr "Geluiden"
+
+#. settings-schema.json->sox-info->description
+msgid "Please install 'sox' and restart Cinnamon to use the sound feature!"
+msgstr "Installeer 'sox' en herstart Cinnamon om de geluidsfunctie te gebruiken!"
+
+#. settings-schema.json->timer_sound->description
+msgid "Play Timer Sound"
+msgstr "Timergeluid afspelen"
+
+#. settings-schema.json->timer_sound_file->description
+msgid "Timer Sound File"
+msgstr "Bestand voor timergeluid"
+
+#. settings-schema.json->timer_sound_volume->description
+#. settings-schema.json->break_sound_volume->description
+#. settings-schema.json->warn_sound_volume->description
+#. settings-schema.json->start_sound_volume->description
+msgid "Sound volume:"
+msgstr "Geluidsvolume:"
+
+#. settings-schema.json->break_sound->description
+msgid "Play Break Sound"
+msgstr "Pauzegeluid afspelen"
+
+#. settings-schema.json->break_sound_file->description
+msgid "Break Sound File"
+msgstr "Bestand voor pauzegeluid"
+
+#. settings-schema.json->warn_sound->description
+msgid "Play Warn Sound"
+msgstr "Waarschuwingsgeluid afspelen"
+
+#. settings-schema.json->warn_sound_delay->description
+msgid "Warn Delay (in secs):"
+msgstr "Tijd resterend tot waarschuwing (in seconden)"
+
+#. settings-schema.json->warn_sound_file->description
+msgid "Warn Sound File"
+msgstr "Bestand voor waarschuwingsgeluid"
+
+#. settings-schema.json->start_sound->description
+msgid "Play Start Sound"
+msgstr "Startgeluid afspelen"
+
+#. settings-schema.json->start_sound_file->description
+msgid "Start Sound File"
+msgstr "Bestand voor startgeluid"
+
+#. metadata.json->description
+msgid "Great tool for boosted productivity!"
+msgstr "Geweldig middel voor verhoogde productiviteit!"
