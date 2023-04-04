@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-02 02:42+0100\n"
-"PO-Revision-Date: 2022-09-12 10:03+0200\n"
+"POT-Creation-Date: 2022-09-29 19:16+0100\n"
+"PO-Revision-Date: 2023-03-29 14:21+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -246,10 +246,12 @@ msgstr "I seguenti pacchetti saranno rimossi:"
 msgid "Packages to be removed"
 msgstr "Pacchetti da rimuovere"
 
+#, python-format
 msgid "Cannot remove package %s as it is required by other packages."
 msgstr ""
 "Impossibile rimuovere il pacchetto %s poiché è richiesto da altri pacchetti."
 
+#, python-format
 msgid "Package %s is a dependency of the following packages:"
 msgstr "Il pacchetto %s è una dipendenza dei seguenti pacchetti:"
 
@@ -499,6 +501,18 @@ msgstr "Scegli se mostrare o meno la barra laterale"
 msgid "Show favorites on sidebar"
 msgstr "Mostra preferiti sulla barra laterale"
 
+msgid "None"
+msgstr "Nessuno"
+
+msgid "Apps only"
+msgstr "Solo applicazioni"
+
+msgid "Files only"
+msgstr "Solo file"
+
+msgid "Apps and files"
+msgstr "Applicazioni e file"
+
 msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "Mostra le icone delle tue app e file preferiti sulla barra laterale"
 
@@ -510,9 +524,6 @@ msgstr "Suggerimenti"
 
 msgid "Under titles"
 msgstr "Sotto i titoli"
-
-msgid "None"
-msgstr "Nessuno"
 
 msgid "Choose where to show application descriptions"
 msgstr "Scegli se mostrare o meno la descrizione delle applicazioni"

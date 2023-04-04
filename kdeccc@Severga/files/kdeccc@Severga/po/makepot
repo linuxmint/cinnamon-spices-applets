@@ -1,0 +1,112 @@
+#!/bin/bash
+UUID="kdeccc@Severga"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+cd $SCRIPT_DIR
+cd ..
+
+if [ "$1" = "$UUID" ]; then
+  shift
+fi
+
+function usage {
+    echo "Usage:"
+    echo ""
+    echo "$SCRIPT_DIR/makepot ARGUMENT [-i | -r | -h]"
+    echo ""
+    echo "Examples:"
+    echo ""
+    echo "$SCRIPT_DIR/makepot"
+    echo "$SCRIPT_DIR/makepot -i"
+    echo ""
+    echo "Options:"
+    echo ""
+    echo "-i, --install - Compiles and installs any .po files contained in a spices po folder."
+    echo "                Use this option to test your translations locally before uploading"
+    echo "                to Spices."
+    echo ""
+    echo "-r, --remove - The opposite of install, removes translations from the store."
+    echo ""
+    echo "-h, --help - Shows the usage of this script."
+    echo ""
+}
+
+function makePotFile {
+  cd $SCRIPT_DIR
+  cd ..
+
+
+  # generate .pot with default parameters
+  if [ -d po ]; then
+      potName=$(echo -n $(ls po | grep "\.pot")) # get name of .pot file
+      if [ "$potName" == "" ]; then
+          potName="$UUID.pot"
+          #touch po/$potName
+      fi;
+  else
+      mkdir po
+      potName="$UUID.pot"
+      #touch po/$potName
+  fi
+  if [ -f "po/$potName" ]; then
+      if [ $1 !=  "doNotUpdatePotFiles" ]; then
+          echo "------------------------------------------------------------------------------------------------------"
+          echo "$UUID: cinnamon-json-makepot --js po/$potName (update)"
+          echo "------------------------------------------------------------------------------------------------------"
+          cinnamon-json-makepot --js po/$potName
+          echo ""
+      fi
+  else
+      if [ $1 == "createNewPotFile" ]; then
+          if [ ! -d po ]; then
+              mkdir po
+          fi
+          echo "------------------------------------------------------------------------------------------------------"
+          echo "$UUID: cinnamon-json-makepot --js po/$UUID.pot (new file)"
+          echo "------------------------------------------------------------------------------------------------------"
+          cinnamon-json-makepot --js po/$UUID.pot
+          echo ""
+      elif [ $1 == "doNotUpdatePotFiles" ]; then
+          echo "$UUID: has no .pot file"
+      fi
+  fi
+
+}
+
+#cinnamon-json-makepot --js po/$UUID.pot
+
+if [ $# -eq 1 ]; then
+    # print help
+    if [ $1 == "-h" ] || [  $1 == "--help" ]; then
+        usage
+        exit 0
+    fi
+fi
+
+
+if [ $# -eq 1 ]; then
+    # install/remove .po files
+    if [ $1 == "-i" ] || [ $1 == "--install" ] || [ $1 == "-r" ] || [ $1 == "--remove" ]; then
+        # change directory to UUID/files/UUID
+        cd $SCRIPT_DIR
+        cd ../..
+        cinnamon-xlet-makepot $1 $UUID/
+        exit
+    else
+        echo "Available options: --install | -i, --remove | -r"
+        echo "More infos:"
+        echo ""
+        echo "./makepot --help"
+        exit 1
+    fi
+fi
+
+# update .pot file of given xlet UUID
+if [ $# -eq 0 ]; then
+    makePotFile createNewPotFile
+else
+    usage
+    exit 1
+fi
+
+

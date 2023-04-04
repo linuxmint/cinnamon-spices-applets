@@ -36,30 +36,32 @@ class ClickAnimationMode {
 
 class ExpansionClickAnimationMode extends ClickAnimationMode {
     animateClick(icon, options) {
-        let actor_scale = options.icon_size > 20 ? 1.5 : 3;
-        let [mouse_x, mouse_y, _] = global.get_pointer();
+        const actor_scale = options.icon_size > 20 ? 1.15 : 3;
+        const [mouse_x, mouse_y, mask] = global.get_pointer();
 
         let actor = new St.Icon({
-            x: mouse_x - (options.icon_size / 2),
-            y: mouse_y - (options.icon_size / 2),
+            x: mouse_x,
+            y: mouse_y,
+            scale_x: 0,
+            scale_y: 0,
             reactive: false,
             can_focus: false,
             track_hover: false,
             icon_size: options.icon_size,
             opacity: options.opacity,
-            gicon: icon
+            gicon: icon,
         });
 
         Main.uiGroup.add_child(actor);
 
         actor.ease({
-            opacity: 0,
+            opacity: options.opacity * 0.08,
             x: mouse_x - (options.icon_size * actor_scale / 2),
             y: mouse_y - (options.icon_size * actor_scale / 2),
             scale_x: actor_scale,
             scale_y: actor_scale,
             duration: options.timeout,
-            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+            mode: Clutter.AnimationMode.EASE_OUT_SINE,
             onComplete: () => {
                 Main.uiGroup.remove_child(actor);
                 actor.destroy();
@@ -71,7 +73,7 @@ class ExpansionClickAnimationMode extends ClickAnimationMode {
 
 class RetractionClickAnimationMode extends ClickAnimationMode {
     animateClick(icon, options) {
-        let [mouse_x, mouse_y, _] = global.get_pointer();
+        const [mouse_x, mouse_y, mask] = global.get_pointer();
 
         let actor = new St.Icon({
             x: mouse_x - (options.icon_size / 2),
@@ -81,19 +83,19 @@ class RetractionClickAnimationMode extends ClickAnimationMode {
             track_hover: false,
             icon_size: options.icon_size,
             opacity: options.opacity,
-            gicon: icon
+            gicon: icon,
         });
 
         Main.uiGroup.add_child(actor);
 
         actor.ease({
-            opacity: 0,
+            opacity: options.opacity * 0.1,
             x: mouse_x,
             y: mouse_y,
             scale_x: 0,
             scale_y: 0,
             duration: options.timeout,
-            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+            mode: Clutter.AnimationMode.EASE_OUT_SINE,
             onComplete: () => {
                 Main.uiGroup.remove_child(actor);
                 actor.destroy();
@@ -105,7 +107,7 @@ class RetractionClickAnimationMode extends ClickAnimationMode {
 
 class BounceBackClickAnimationMode extends ClickAnimationMode {
     animateClick(icon, options) {
-        let [mouse_x, mouse_y, mask] = global.get_pointer();
+        const [mouse_x, mouse_y, mask] = global.get_pointer();
 
         let actor = new St.Icon({
             x: mouse_x,
@@ -116,8 +118,8 @@ class BounceBackClickAnimationMode extends ClickAnimationMode {
             can_focus: false,
             track_hover: false,
             icon_size: options.icon_size,
-            opacity: 0,
-            gicon: icon
+            opacity: options.opacity * 0.1,
+            gicon: icon,
         });
 
         Main.uiGroup.add_child(actor);
@@ -128,8 +130,8 @@ class BounceBackClickAnimationMode extends ClickAnimationMode {
             scale_x: 1,
             scale_y: 1,
             opacity: options.opacity,
-            duration: (options.timeout - 50) / 2,
-            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+            duration: options.timeout * 0.4,
+            mode: Clutter.AnimationMode.EASE_IN_OUT_CUBIC,
             onComplete: () => {
                 actor.ease({
                     opacity: 0,
@@ -137,8 +139,8 @@ class BounceBackClickAnimationMode extends ClickAnimationMode {
                     y: mouse_y,
                     scale_x: 0,
                     scale_y: 0,
-                    duration: (options.timeout + 50) / 2,
-                    mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+                    duration: options.timeout * 0.6,
+                    mode: Clutter.AnimationMode.EASE_IN_OUT_CUBIC,
                     onComplete: () => {
                         Main.uiGroup.remove_child(actor);
                         actor.destroy();
@@ -152,7 +154,7 @@ class BounceBackClickAnimationMode extends ClickAnimationMode {
 
 class BlinkClickAnimationMode extends ClickAnimationMode {
     animateClick(icon, options = {}) {
-        let [mouse_x, mouse_y, mask] = global.get_pointer();
+        const [mouse_x, mouse_y, mask] = global.get_pointer();
 
         let actor = new St.Icon({
             x: mouse_x - (options.icon_size / 2),
@@ -168,9 +170,9 @@ class BlinkClickAnimationMode extends ClickAnimationMode {
         Main.uiGroup.add_child(actor);
 
         actor.ease({
-            opacity: 0,
+            opacity: options.opacity * 0.1,
             duration: options.timeout,
-            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+            mode: Clutter.AnimationMode.EASE_IN_OUT_CUBIC,
             onComplete: () => {
                 Main.uiGroup.remove_child(actor);
                 actor.destroy();

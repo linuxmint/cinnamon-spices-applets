@@ -1,0 +1,2 @@
+/usr/bin/cinnamon-spice-updater --update applet
+/usr/bin/cinnamon-spice-updater -h

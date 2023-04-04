@@ -162,7 +162,12 @@ MyApplet.prototype = {
     this.childProcessHandler = null;
     this.metadata = metadata;
     this.panelHeight = panel_height;
-    this.configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + metadata.uuid;
+
+    let dotCinnamonFilePath = GLib.get_home_dir() + '/.cinnamon/configs';
+    if (Gio.file_new_for_path(dotCinnamonFilePath).query_exists(null))
+      this.configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + metadata.uuid;
+    else
+      this.configFilePath = GLib.get_home_dir() + '/.config/cinnamon/spices/' + metadata.uuid;
     this.shouldUpdate = true;
 
     let configFile = Gio.file_new_for_path(this.configFilePath);

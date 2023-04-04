@@ -115,6 +115,7 @@ const {
 const {
   Icon,
   IconType,
+  Button,
   Widget,
   ScrollView,
   Align,
@@ -125,6 +126,10 @@ const {
   Clipboard,
   ClipboardType
 } = imports.gi.St; //St
+
+const {
+  Tooltip
+} = imports.ui.tooltips; // Tooltips
 
 const {
   Urgency,
@@ -724,6 +729,50 @@ const messageTray = new RadioMessageTray();
 const source = new RadioNotificationSource("Radio3.0");
 messageTray.add(source);
 
+class R3Button {
+    constructor(icon, tooltip, callback, small = false) {
+        this.actor = new Bin();
+
+        this.button = new Button({
+          reactive: true,
+          can_focus: true,
+          style_class: "popup-menu-item",
+          style: "height:20px; width:20px; padding:10px!important"
+        });
+        this.button.connect('clicked', callback);
+
+        if (small)
+            this.button.add_style_pseudo_class("small");
+
+        this.icon = new Icon({
+            icon_type: IconType.SYMBOLIC,
+            icon_name: icon
+        });
+        this.button.set_child(this.icon);
+        this.actor.add_actor(this.button);
+
+        this.tooltip = new Tooltip(this.button, tooltip);
+    }
+
+    getActor() {
+        return this.actor;
+    }
+
+    setData(icon, tooltip) {
+        this.icon.icon_name = icon;
+        this.tooltip.set_text(tooltip);
+    }
+
+    setActive(status) {
+        this.button.change_style_pseudo_class("active", status);
+    }
+
+    setEnabled(status) {
+        this.button.change_style_pseudo_class("insensitive", !status);
+        this.button.can_focus = status;
+        this.button.reactive = status;
+    }
+}
 
 class TitleSeparatorMenuItem extends PopupBaseMenuItem {
   constructor(title, icon_name, reactive=false) {
@@ -1039,6 +1088,7 @@ WebRadioReceiverAndRecorder.prototype = {
     this.settings.bind("show-reload", "show_reload");
     this.settings.bind("show-bitrate", "show_bitrate", (...args) => this.set_show_bitrate(...args));
     this.settings.bind("show-codec", "show_codec");
+    this.settings.bind("volume-show-osd", "volume_show_osd");
 
     this.settings.bind("import-list", "import_list");
     this.settings.bind("import-dir", "import_dir");
@@ -1117,6 +1167,8 @@ WebRadioReceiverAndRecorder.prototype = {
       //~ log("Volume Cut", true);
 
       if (this.context_menu_item_slider != null) {
+        //this.context_menu_item_slider.stream.change_is_muted(!this.context_menu_item_slider.stream.is_muted);
+
         let volume_at_startup = this.get_volume_at_startup();
 
         if (volume_at_startup <= 0) volume_at_startup = 50;
@@ -1124,9 +1176,13 @@ WebRadioReceiverAndRecorder.prototype = {
         let value = 0;
         let old_value = this.context_menu_item_slider.slider._value;
 
-        if (old_value !== 0) this.old_percentage = 100 * old_value;
+        if (old_value !== 0) this.old_percentage = Math.round(old_value * 100);
         else value = (this.old_percentage) ? this.old_percentage / 100 : volume_at_startup / 100;
 
+        //~ log("value: "+value, true);
+        //~ log("old_value: "+old_value, true);
+
+        //this.percentage = Math.round(value * 100);
         this.context_menu_item_slider.slider._value = value;
         this.context_menu_item_slider.slider._slider.queue_repaint();
         this.context_menu_item_slider.slider.emit('value-changed', value);
@@ -1943,6 +1999,48 @@ WebRadioReceiverAndRecorder.prototype = {
             yt_dl_item = null
           }
         }
+
+        let trackInfo = new BoxLayout({ style_class: 'sound-player-overlay', important: true, vertical: true });
+        let songBox = new PopupMenuSection();
+
+        let song_toolbar = new BoxLayout(
+          { style_class: "sound-player", important: true, vertical: true, style: 'padding: 10px;',  x_align: Align.MIDDLE}
+          //~ {
+            //~ style: 'padding: 10px;',
+            //~ x_align: Align.MIDDLE
+          //~ }
+        );
+
+        songBox.addActor(song_toolbar, { expand: true });
+
+        let songButtons = new Bin({ x_align: Align.MIDDLE });
+
+        let brainzBtn = new R3Button(
+          "audio-x-generic",
+          _("Infos on: %s").format(title),
+          Lang.bind(this, function() {
+            spawnCommandLineAsync("xdg-open " + brainz_link)
+          }),
+          false
+        );
+
+        let watchOnYT = new R3Button(
+          "media-playback-start",
+          _("Watch on YT"),
+          Lang.bind(this, function() {
+            spawnCommandLineAsync("xdg-open " + yt_watch_link);
+          }),
+          false
+        );
+
+        song_toolbar.add_actor(songButtons);
+        songButtons.add_actor(brainzBtn.getActor());
+        songButtons.add_actor(watchOnYT.getActor());
+        //trackInfo.add_actor(songButtons);
+        //~ songBox.set_child(song_toolbar);
+
+        //this.menu.addMenuItem(songBox);
+
         this.menu.addMenuItem(new PopupSeparatorMenuItem());
       }
 
@@ -3779,7 +3877,9 @@ WebRadioReceiverAndRecorder.prototype = {
 
       if (!dir.includes(`%(channel)s`)) mkdir_with_parents(""+dir, 0o755);
 
-      let output_options = `%s --output "%s/`.format(ytdl_program,
+      let keep_video = this.settings.getValue("recordings-keep-video") ? " -k" : "";
+
+      let output_options = `%s%s --output "%s/`.format(ytdl_program, keep_video,
         dir)+`%(title)s`+`.%(ext)s"`;
 
       let yes_no_playlist = " --no-playlist";
@@ -3789,7 +3889,7 @@ WebRadioReceiverAndRecorder.prototype = {
         if (yes_no_playlist != " --no-playlist") {
           //~ output_options = `%s -i -c -w --compat-options no-youtube-unavailable-videos --output "%s/`.format(ytdl_program,
             //~ dir)+`%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"`;
-          output_options = `%s -i -c -w --output "%s/`.format(ytdl_program,
+          output_options = `%s%s -i -c -w --output "%s/`.format(ytdl_program, keep_video,
             dir)+`%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"`;
         }
       }

@@ -39,6 +39,37 @@ function _(str) {
   return Gettext.dgettext(UUID, str);
 }
 
+const to_string = function(data) {
+  return ""+stringFromUTF8Array(data);
+}
+
+const stringFromUTF8Array = function(data) {
+  const extraByteMap = [ 1, 1, 1, 1, 2, 2, 3, 0 ];
+  var count = data.length;
+  var str = "";
+  for (var index = 0;index < count;)
+  {
+    var ch = data[index++];
+    if (ch & 0x80)
+    {
+      var extra = extraByteMap[(ch >> 3) & 0x07];
+      if (!(ch & 0x40) || !extra || ((index + extra) > count))
+        return null;
+      ch = ch & (0x3F >> extra);
+      for (;extra > 0;extra -= 1)
+      {
+        var chx = data[index++];
+        if ((chx & 0xC0) != 0x80)
+          return null;
+        ch = (ch << 6) | (chx & 0x3F);
+      }
+    }
+    str += String.fromCharCode(ch);
+  }
+  return str;
+}
+
+
 function MyApplet(metadata, orientation, panelHeight, instanceId) {
   this.settings = new Settings.AppletSettings(this, UUID, instanceId)
   this._init(orientation, panelHeight, instanceId)
@@ -52,7 +83,7 @@ MyApplet.prototype = {
 
     try {
       this.set_applet_icon_name(ICON)
-      
+
       this.menuManager = new PopupMenu.PopupMenuManager(this)
       this.menu = new Applet.AppletPopupMenu(this, orientation)
       this.menuManager.addMenu(this.menu)
@@ -68,7 +99,7 @@ MyApplet.prototype = {
       global.logError(UUID + "::_init: " + e)
     }
   }
-  
+
   // configuration via context menu is automatically provided in Cinnamon 2.0+
 , settingsApiCheck: function() {
     const Config = imports.misc.config
@@ -93,7 +124,7 @@ MyApplet.prototype = {
 // determine which VM programs are installed
 , checkPrograms: function() {
     for (let i = 0; i < PROGRAMS.length; i++) {
-      let p = PROGRAMS[i] 
+      let p = PROGRAMS[i]
       INSTALLED_PROGRAMS[p] = false
       try {
         let [res, list, err, status] = GLib.spawn_command_line_sync("which " + p)
@@ -151,7 +182,7 @@ MyApplet.prototype = {
 
 , vboxMajorVersion: function() {
   let [res, list, err, status] = GLib.spawn_command_line_sync(CMD_VBOX_VERSION)
-  return parseInt(list.toString()[0])
+  return parseInt(to_string(list)[0])
 }
 
 // add menu items for all Virtualbox images
@@ -162,8 +193,8 @@ MyApplet.prototype = {
     let [res, list, err, status] = GLib.spawn_command_line_sync(CMD_VBOX_LIST)
     let [resrun, listrun, errrun, statusrun] = GLib.spawn_command_line_sync(CMD_VBOX_LIST_RUN)
     if (list.length != 0) {
-      let machines = list.toString().split("\n")
-      let machinesrun = listrun.toString().split("\n")
+      let machines = to_string(list).split("\n")
+      let machinesrun = to_string(listrun).split("\n")
       //global.log(machines);
       //global.log(machinesrun);
       for (let i = 0; i < machines.length; i++) {
@@ -207,7 +238,7 @@ MyApplet.prototype = {
     let [res, list, err, status] = GLib.spawn_command_line_sync(CMD_VMPLAYER_LIST)
     //global.log(UUID + "#parseVmplayerImages: list=" + list)
     if (list.length != 0) {
-      let paths = list.toString().split("\n")
+      let paths = to_string(list).split("\n")
       paths = paths.slice(0, paths.length - 1) // chomp final \n
       //global.log("\t" + paths.length + " paths: " + paths)
       for (let i = 0; i < paths.length; i++) {
@@ -248,7 +279,7 @@ MyApplet.prototype = {
     }
     this.addUpdater()
   }
-  
+
 ,  startVboxImage: function(id) {
     let cmd = this.vboxMajorVersion() >= 6 ? CMD_VBOX6_VM : CMD_VBOX_VM
     Util.spawnCommandLine(cmd + id)
@@ -277,13 +308,13 @@ MyApplet.prototype = {
     }
     this.menu.toggle()
   }
-  
+
 ,  onSwitchAutoUpdate: function() {
     if (!this[AUTOUPDATE]) {
       this.updateMenu() // Needed to make update button reappear if setting switched to off
     }
   }
-  
+
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {

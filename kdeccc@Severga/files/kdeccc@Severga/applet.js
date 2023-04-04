@@ -1,9 +1,25 @@
 // KDE Connect Control Center Applet
 
+const AppletUUID = "kdeccc@Severga";
+
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Lang = imports.lang;
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib; // Needed for translations
+const Gettext = imports.gettext; // Needed for translations
+
+const HOME_DIR = GLib.get_home_dir();
+// l10n support
+Gettext.bindtextdomain(AppletUUID, HOME_DIR + "/.local/share/locale");
+Gettext.bindtextdomain("cinnamon-control-center", "/usr/share/locale");
+
+// Localisation/translation support
+function _(str, uuid=AppletUUID) {
+	var customTrans = Gettext.dgettext(uuid, str);
+	if (customTrans !== str && customTrans !== "") return customTrans;
+	return Gettext.gettext(str);
+}
 
 const kdecProxy = Gio.DBusProxy.makeProxyWrapper("\
 	<node name='/modules/kdeconnect'>\
@@ -31,7 +47,7 @@ function MyApplet(orientation, panel_height, instance_id) {
 MyApplet.prototype = {
 	__proto__: Applet.TextIconApplet.prototype,
 	
-	_init: function(orientation, panel_height, instance_id) {        
+	_init: function(orientation, panel_height, instance_id) {
 		Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 		
 		try {
@@ -42,7 +58,7 @@ MyApplet.prototype = {
 			global.logError(e);
 		}
 		this.set_applet_icon_symbolic_name("phone-symbolic");
-		this._applet_context_menu.addCommandlineAction("Configure KDE Connect", "kcmshell5 kcm_kdeconnect");
+		this._applet_context_menu.addCommandlineAction(_("Configure KDE Connect"), "kcmshell5 kcm_kdeconnect");
 		this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 		this.menuManager = new PopupMenu.PopupMenuManager(this);
 		this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -93,9 +109,9 @@ MyApplet.prototype = {
 		}
 		let q = deviceId.length;
 		if (q == 0) {
-			this.menu.addMenuItem(new PopupMenu.PopupMenuItem("No reachable paired devices", {reactive: false}));
+			this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("No reachable paired devices"), {reactive: false}));
 			this.set_applet_label("");
-			this.set_applet_tooltip("No reachable paired devices");
+			this.set_applet_tooltip(_("No reachable paired devices"));
 		}
 		else {
 			for (let i = 0; i < q; i++) {
@@ -104,24 +120,24 @@ MyApplet.prototype = {
 				let deviceMenuItem = new PopupMenu.PopupSubMenuMenuItem(deviceName[id]);
 				this.menu.addMenuItem(deviceMenuItem);
 				if (q == 1) this.openDeviceMenu = deviceMenuItem.menu;
-				deviceMenuItem.menu.addMenuItem(new PopupMenu.PopupMenuItem("Id:  " + id, {reactive: false}));
-				deviceMenuItem.menu.addCommandlineAction("    Send Ping to", "kdeconnect-cli --ping -d " + id);
-				deviceMenuItem.menu.addCommandlineAction("    Force to Ring", "kdeconnect-cli --ring -d " + id);
-				deviceMenuItem.menu.addAction("    Send File to...", function() {
+				deviceMenuItem.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("Id:  ") + id, {reactive: false}));
+				deviceMenuItem.menu.addCommandlineAction(_("    Send Ping to"), "kdeconnect-cli --ping -d " + id);
+				deviceMenuItem.menu.addCommandlineAction(_("    Force to Ring"), "kdeconnect-cli --ring -d " + id);
+				deviceMenuItem.menu.addAction(_("    Send File to..."), function() {
 					imports.misc.fileDialog.open(function(selection) {
-						imports.misc.util.spawnCommandLine("kdeconnect-cli --share '" + (selection.charAt(selection.length-1) == "\n" ? selection.substring(0, selection.length-1) : selection) + "' -d " + id);
+						if (selection != "") imports.misc.util.spawnCommandLine("kdeconnect-cli --share '" + (selection.charAt(selection.length-1) == "\n" ? selection.substring(0, selection.length-1) : selection) + "' -d " + id);
 					}, {});
 				}.bind(this.pDeviceId[i]));
-				deviceMenuItem.menu.addAction("    Send SMS via...", function() {
+				deviceMenuItem.menu.addAction(_("    Send SMS via..."), function() {
 					let dlg = new imports.ui.modalDialog.ModalDialog();
 					let St = imports.gi.St;
-					dlg.contentLayout.add(new St.Label({text: "Enter the phone number of your SMS's addressee:"}));
+					dlg.contentLayout.add(new St.Label({text: _("Enter the phone number of your SMS's addressee:")}));
 					let phnEntry = new St.Entry({text: "+71234567890", opacity: 100});
 					dlg.contentLayout.add(phnEntry);
-					dlg.contentLayout.add(new St.Label({text: "Enter the text of your SMS:"}));
-					let txtEntry = new St.Entry({text: "...message body...", opacity: 100});
+					dlg.contentLayout.add(new St.Label({text: _("Enter the text of your SMS:")}));
+					let txtEntry = new St.Entry({text: _("...message body..."), opacity: 100});
 					dlg.contentLayout.add(txtEntry);
-					dlg.contentLayout.add(new St.Label({text: "Press \"" + _("Yes") + "\" if you ready to send your SMS, or \"" + _("Cancel") + "\" to avoid sending."}));
+					dlg.contentLayout.add(new St.Label({text: _("Press <") + _("Yes") + _("> if you are ready to send your SMS, or <") + _("Cancel") + _("> to avoid sending.")}));
 					dlg.setInitialKeyFocus(phnEntry);
 					dlg.setButtons([
 						{
@@ -140,7 +156,7 @@ MyApplet.prototype = {
 					]);
 					dlg.open();
 				}.bind(this.pDeviceId[i]));
-				deviceMenuItem.menu.addAction("    Mount and Explore", function() {
+				deviceMenuItem.menu.addAction(_("    Mount and Explore"), function() {
 					let kdecDevProxy = Gio.DBusProxy.makeProxyWrapper("\
 						<node name='/modules/kdeconnect/devices/" + id + "/sftp'>\
 							<interface name='org.kde.kdeconnect.device.sftp'>\
@@ -164,7 +180,7 @@ MyApplet.prototype = {
 					}
 					if (mountPoint != "") imports.misc.util.spawnCommandLine("nemo '" + mountPoint + "'");
 				}.bind(this.pDeviceId[i]));
-				deviceMenuItem.menu.addAction("    Unmount", function() {
+				deviceMenuItem.menu.addAction(_("    Unmount"), function() {
 					let kdecDevProxy = Gio.DBusProxy.makeProxyWrapper("\
 						<node name='/modules/kdeconnect/devices/" + id + "/sftp'>\
 							<interface name='org.kde.kdeconnect.device.sftp'>\
@@ -184,7 +200,7 @@ MyApplet.prototype = {
 				}.bind(this.pDeviceId[i]));
 			}
 			this.set_applet_label(String(q));
-			this.set_applet_tooltip("Reachable paired devices: " + q);
+			this.set_applet_tooltip(_("Reachable paired devices: ") + q);
 		}
 	}
 } // End MyApplet
@@ -192,3 +208,4 @@ MyApplet.prototype = {
 function main(metadata, orientation, panel_height, instance_id) {  
 	return new MyApplet(orientation, panel_height, instance_id);
 }
+

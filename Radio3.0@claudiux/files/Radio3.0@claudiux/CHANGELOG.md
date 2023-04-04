@@ -1,3 +1,9 @@
+### v1.2.0~20230328
+  * Adds ability to show OSD while changing volume.
+
+### v1.1.0~20230307
+  * Adds ability to keep YT video.
+
 ### v1.0.3~20230220
   * Now checks if the yt-dlp program is well present in ~/bin, and loads the latest version.
 

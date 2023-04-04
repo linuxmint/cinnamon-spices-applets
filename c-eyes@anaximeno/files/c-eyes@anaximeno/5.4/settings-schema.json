@@ -29,6 +29,7 @@
 				"eye-mode",
 				"eye-line-width",
 				"eye-margin",
+				"eye-vertical-padding",
 				"eye-repaint-interval",
 				"deactivate-on-fullscreen",
 				"eye-activate-by-default"
@@ -98,12 +99,21 @@
 	},
 	"eye-margin": {
 		"type": "spinbutton",
-		"default": 4,
-		"min": 1,
+		"default": 6,
+		"min": 0,
 		"max": 10,
 		"step": 1,
 		"units": "px",
-		"description": "Margin Size"
+		"description": "Horizontal Margin"
+	},
+	"eye-vertical-padding": {
+		"type": "spinbutton",
+		"default": 2,
+		"min": 0,
+		"max": 10,
+		"step": 1,
+		"units": "px",
+		"description": "Vertical Padding"
 	},
 	"eye-repaint-interval": {
 		"type": "spinbutton",
@@ -212,7 +222,7 @@
 		"default": 400,
 		"min": 100,
 		"max": 5000,
-		"step": 100,
+		"step": 50,
 		"units": "ms",
 		"description": "Fade Timeout"
 	},
