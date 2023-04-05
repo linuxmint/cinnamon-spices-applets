@@ -49,7 +49,6 @@ function logError(error) {
  */
 class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
     constructor(applet, stream, tooltip, app_icon = null) {
-        //log("VolumeSlider: Constructor");
         super(0);
         this.applet = applet;
 
@@ -226,7 +225,8 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
     }
 
     _volumeToIcon(value, basename="audio-volume-") {
-        log("VolumeSlider: _volumeToIcon");
+        //~ log("VolumeSlider: _volumeToIcon", true);
+        //~ log("value: "+value, true);
         let icon;
         if(value < 0.005) {
             icon = "muted";
