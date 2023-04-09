@@ -206,7 +206,8 @@
 	"deactivate-effects-on-fullscreen": {
 		"type": "checkbox",
 		"default": false,
-		"description": "Deactivate On Fullscreen"
+		"description": "Deactivate On Fullscreen",
+		"dependency": "mouse-click-enable"
 	},
 	"mouse-left-click-enable": {
 		"type": "checkbox",

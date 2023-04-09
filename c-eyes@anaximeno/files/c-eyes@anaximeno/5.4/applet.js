@@ -440,7 +440,7 @@ class Eye extends Applet.Applet {
 			options.pupil_color = ok ? color : options.pupil_color;
 		}
 
-		EyeModeFactory.createEyeMode(this, this.eye_mode).drawEye(area, options);
+		EyeModeFactory.createEyeMode(this.eye_mode).drawEye(area, options);
 	}
 
 	_mouse_click_event(event) {
