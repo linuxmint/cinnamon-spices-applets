@@ -228,15 +228,13 @@ export class UI {
 		this.HourlySeparator.Hide();
 
 		// Add everything to the PopupMenu
-		const mainBox = new BoxLayout({ vertical: true })
-		mainBox.add_actor(this.CurrentWeather.actor)
-		mainBox.add_actor(this.HourlySeparator.Actor);
-		mainBox.add_actor(this.HourlyWeather.actor);
-		mainBox.add_actor(this.ForecastSeparator.Actor);
-		mainBox.add_actor(this.FutureWeather.actor);
-		mainBox.add_actor(this.BarSeparator.Actor);
-		mainBox.add_actor(this.Bar.Actor);
-		this.menu.addActor(mainBox);
+		this.menu.addActor(this.CurrentWeather.actor)
+		this.menu.addActor(this.HourlySeparator.Actor);
+		this.menu.addActor(this.HourlyWeather.actor);
+		this.menu.addActor(this.ForecastSeparator.Actor);
+		this.menu.addActor(this.FutureWeather.actor);
+		this.menu.addActor(this.BarSeparator.Actor);
+		this.menu.addActor(this.Bar.Actor);
 	}
 
 	/** Destroys UI first then shows initial UI */
@@ -244,7 +242,7 @@ export class UI {
 		this.CurrentWeather.Destroy();
 		this.FutureWeather.Destroy();
 		this.Bar.Destroy()
-		this.CurrentWeather.actor.set_child(new Label({
+		this.CurrentWeather.actor.add_actor(new Label({
 			text: _('Loading current weather ...')
 		}))
 		this.FutureWeather.actor.set_child(new Label({

@@ -12679,7 +12679,6 @@ class USWeather extends BaseProvider {
             else
                 counter = 0;
             if (counter > 1) {
-                global.log("3 elements");
                 return true;
             }
         }
@@ -12696,7 +12695,6 @@ class USWeather extends BaseProvider {
             const curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
             if (!OnSameDay(today, curDate))
                 continue;
-            global.log(index);
             return index;
         }
         return -1;
@@ -15848,7 +15846,8 @@ class WeatherButton {
 ;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiSunTimes.ts
 
 
-const { Bin, BoxLayout, IconType: uiSunTimes_IconType, Label, Icon, Align } = imports.gi.St;
+const { BoxLayout, IconType: uiSunTimes_IconType, Label, Icon, Align } = imports.gi.St;
+const { ActorAlign } = imports.gi.Clutter;
 const STYLE_ASTRONOMY = 'weather-current-astronomy';
 class SunTimesUI {
     get actor() {
@@ -15865,7 +15864,6 @@ class SunTimesUI {
         this.config.ShowSunriseChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
     }
     Rebuild(config, textColorStyle) {
-        const sunBin = new Bin();
         this.sunriseLabel = new Label({ text: ELLIPSIS, style: textColorStyle });
         this.sunsetLabel = new Label({ text: ELLIPSIS, style: textColorStyle });
         const sunriseBox = new BoxLayout();
@@ -15882,10 +15880,10 @@ class SunTimesUI {
             icon_size: 24,
             style: textColorStyle
         });
-        sunriseBox.add_actor(sunriseIcon);
-        sunsetBox.add_actor(sunsetIcon);
+        sunriseBox.add(sunriseIcon);
+        sunsetBox.add(sunsetIcon);
         const textOptions = {
-            x_fill: false,
+            x_fill: true,
             x_align: Align.START,
             y_align: Align.MIDDLE,
             y_fill: false,
@@ -15894,13 +15892,17 @@ class SunTimesUI {
         sunriseBox.add(this.sunriseLabel, textOptions);
         sunsetBox.add(this.sunsetLabel, textOptions);
         const spacer = new Label({ text: BLANK });
-        const sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
+        const sunBox = new BoxLayout({
+            style_class: STYLE_ASTRONOMY,
+            x_align: ActorAlign.CENTER,
+            x_expand: true,
+            y_expand: true,
+        });
         sunBox.add_actor(sunriseBox);
         sunBox.add_actor(spacer);
         sunBox.add_actor(sunsetBox);
-        sunBin.set_child(sunBox);
-        this._actor = sunBin;
-        return sunBin;
+        this._actor = sunBox;
+        return sunBox;
     }
     Display(sunrise, sunset, tz) {
         if (!this.app.config._showSunrise || sunrise == null || sunset == null) {
@@ -15917,6 +15919,7 @@ class SunTimesUI {
 
 
 const { BoxLayout: windBox_BoxLayout, IconType: windBox_IconType, Label: windBox_Label, Icon: windBox_Icon, Align: windBox_Align } = imports.gi.St;
+const { ActorAlign: windBox_ActorAlign } = imports.gi.Clutter;
 class WindBox {
     constructor(app) {
         this.OnConfigChanged = (config, unit, data) => {
@@ -15943,7 +15946,7 @@ class WindBox {
         const iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
         const iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
         const iconSize = Math.round(config.CurrentFontSize * 0.8);
-        this.labelText = new windBox_Label({ text: ELLIPSIS });
+        this.labelText = new windBox_Label({ text: ELLIPSIS, x_expand: true, x_align: windBox_ActorAlign.FILL });
         this.windDirectionIcon = new windBox_Icon({
             icon_type: windBox_IconType.SYMBOLIC,
             icon_name: APPLET_ICON,
@@ -15952,7 +15955,7 @@ class WindBox {
         });
         if (!config._displayWindAsText)
             windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: windBox_Align.MIDDLE, y_align: windBox_Align.MIDDLE, expand: false });
-        windBox.add(this.labelText);
+        windBox.add_actor(this.labelText);
         return windBox;
     }
     Display(windSpeed, windDegree) {
@@ -15985,8 +15988,9 @@ class WindBox {
 
 
 
-const { Bin: uiCurrentWeather_Bin, BoxLayout: uiCurrentWeather_BoxLayout, IconType: uiCurrentWeather_IconType, Label: uiCurrentWeather_Label, Icon: uiCurrentWeather_Icon, Align: uiCurrentWeather_Align } = imports.gi.St;
+const { Bin, BoxLayout: uiCurrentWeather_BoxLayout, IconType: uiCurrentWeather_IconType, Label: uiCurrentWeather_Label, Icon: uiCurrentWeather_Icon, Align: uiCurrentWeather_Align } = imports.gi.St;
 const uiCurrentWeather_Lang = imports.lang;
+const { ActorAlign: uiCurrentWeather_ActorAlign } = imports.gi.Clutter;
 const STYLE_SUMMARYBOX = 'weather-current-summarybox';
 const STYLE_SUMMARY = 'weather-current-summary';
 const STYLE_DATABOX = 'weather-current-databox';
@@ -16003,8 +16007,13 @@ class CurrentWeather {
             this.SetLocation(location, data.location.url);
         };
         this.app = app;
-        this.actor = new uiCurrentWeather_Bin();
-        this.actor.style_class = STYLE_CURRENT;
+        this.actor = new uiCurrentWeather_BoxLayout({
+            x_expand: true,
+            y_expand: true,
+            style_class: STYLE_ICONBOX,
+            x_align: uiCurrentWeather_ActorAlign.FILL,
+            y_align: uiCurrentWeather_ActorAlign.FILL
+        });
         this.sunTimesUI = new SunTimesUI(app);
         this.windBox = new WindBox(app);
         this.app.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a));
@@ -16043,8 +16052,7 @@ class CurrentWeather {
         this.weatherIcon.icon_type = iconType;
     }
     Destroy() {
-        if (this.actor.get_child() != null)
-            this.actor.get_child().destroy();
+        this.actor.destroy_all_children();
     }
     Rebuild(config, textColorStyle) {
         this.Destroy();
@@ -16054,20 +16062,18 @@ class CurrentWeather {
             icon_name: APPLET_ICON,
             style_class: STYLE_ICON
         });
-        const box = new uiCurrentWeather_BoxLayout({ style_class: STYLE_ICONBOX });
-        box.add_actor(this.weatherIcon);
-        box.add_actor(this.BuildMiddleColumn(config, textColorStyle));
-        box.add_actor(this.BuildRightColumn(textColorStyle, config));
-        this.actor.set_child(box);
+        this.actor.add_actor(this.weatherIcon);
+        this.actor.add(this.BuildMiddleColumn(config, textColorStyle));
+        this.actor.add_actor(this.BuildRightColumn(textColorStyle, config));
     }
     ;
     BuildMiddleColumn(config, textColorStyle) {
         this.weatherSummary = new uiCurrentWeather_Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
         const middleColumn = new uiCurrentWeather_BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
-        middleColumn.add_actor(this.BuildLocationSection());
+        middleColumn.add(this.BuildLocationSection());
         middleColumn.add(this.weatherSummary, { expand: true, x_align: uiCurrentWeather_Align.MIDDLE, y_align: uiCurrentWeather_Align.MIDDLE, x_fill: false, y_fill: false });
         this.immediatePrecipitationLabel = new uiCurrentWeather_Label({ style_class: "weather-immediate-precipitation" });
-        this.immediatePrecipitationBox = new uiCurrentWeather_Bin();
+        this.immediatePrecipitationBox = new uiCurrentWeather_BoxLayout({ x_align: uiCurrentWeather_ActorAlign.CENTER });
         this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel);
         this.immediatePrecipitationBox.hide();
         middleColumn.add_actor(this.immediatePrecipitationBox);
@@ -16090,7 +16096,7 @@ class CurrentWeather {
         this.apiUniqueCaption = new uiCurrentWeather_Label({ text: '', style: textColorStyle });
         const [windCaption, windLabel] = this.windBox.Rebuild(config, textColorStyle);
         const rb_captions = new uiCurrentWeather_BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
-        const rb_values = new uiCurrentWeather_BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
+        const rb_values = new uiCurrentWeather_BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES, x_expand: true, x_align: uiCurrentWeather_ActorAlign.FILL });
         rb_captions.add_actor(this.temperatureCaption);
         rb_captions.add_actor(this.humidityCaption);
         rb_captions.add_actor(this.pressureCaption);
@@ -16103,13 +16109,13 @@ class CurrentWeather {
         rb_values.add_actor(windLabel);
         rb_values.add_actor(this.dewPointLabel);
         rb_values.add_actor(this.apiUniqueLabel);
-        const rightColumn = new uiCurrentWeather_BoxLayout({ style_class: STYLE_DATABOX });
+        const rightColumn = new uiCurrentWeather_BoxLayout({ style_class: STYLE_DATABOX, x_align: uiCurrentWeather_ActorAlign.FILL, x_expand: true });
         rightColumn.add_actor(rb_captions);
         rightColumn.add_actor(rb_values);
         return rightColumn;
     }
     BuildLocationSection() {
-        this.locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), });
+        this.locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), x_expand: true, x_align: uiCurrentWeather_Align.MIDDLE });
         this.location = this.locationButton.actor;
         this.location.connect(SIGNAL_CLICKED, () => {
             if (this.app.encounteredError)
@@ -16143,7 +16149,7 @@ class CurrentWeather {
         this.previousLocationButton.actor.connect(SIGNAL_CLICKED, uiCurrentWeather_Lang.bind(this, this.PreviousLocationClicked));
         const box = new uiCurrentWeather_BoxLayout();
         box.add(this.previousLocationButton.actor, { x_fill: false, x_align: uiCurrentWeather_Align.START, y_align: uiCurrentWeather_Align.MIDDLE, expand: false });
-        box.add(this.location, { x_fill: false, x_align: uiCurrentWeather_Align.MIDDLE, y_align: uiCurrentWeather_Align.MIDDLE, expand: true });
+        box.add(this.location, { x_fill: true, expand: true });
         box.add(this.nextLocationButton.actor, { x_fill: false, x_align: uiCurrentWeather_Align.END, y_align: uiCurrentWeather_Align.MIDDLE, expand: false });
         return box;
     }
@@ -16198,7 +16204,7 @@ class CurrentWeather {
         const temp = TempToUserConfig(dewPoint, this.app.config);
         this.dewPointCaption.remove_style_class_name(STYLE_HIDDEN);
         this.dewPointLabel.remove_style_class_name(STYLE_HIDDEN);
-        this.dewPointLabel.text = temp;
+        this.dewPointLabel.set_text(temp);
     }
     SetWeatherIcon(iconNames, customIconName) {
         if (this.app.config._useCustomMenuIcons) {
@@ -16480,6 +16486,7 @@ class UIHourlyForecasts {
         return this.actor.get_hscroll_bar().get_adjustment().get_value();
     }
     constructor(app, menu) {
+        this.tempGraphHeight = 45;
         this.hourlyForecasts = [];
         this.hourlyForecastData = [];
         this.hourlyContainers = [];
@@ -16555,7 +16562,6 @@ class UIHourlyForecasts {
         }
     }
     Display(forecasts, config, tz) {
-        var _a, _b, _c;
         if (!forecasts || !this.hourlyForecasts)
             return true;
         if (this.hourlyForecasts.length > forecasts.length) {
@@ -16574,13 +16580,6 @@ class UIHourlyForecasts {
             ui.Temperature.text = temp ? `${temp}°` : "";
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
             ui.Summary.text = hour.condition.main;
-            global.log((_a = hour.precipitation) === null || _a === void 0 ? void 0 : _a.chance);
-            if (((_c = (_b = hour.precipitation) === null || _b === void 0 ? void 0 : _b.chance) !== null && _c !== void 0 ? _c : 0) >= 40) {
-                ui.Icon.style = "color: #0055ff";
-            }
-            else {
-                ui.Icon.style = "";
-            }
             ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation, config);
             ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
         }
@@ -16727,7 +16726,7 @@ class UIHourlyForecasts {
                 Summary: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
                 PrecipPercent: new uiHourlyForecasts_Label({ text: " ", style_class: "hourly-data" }),
                 PrecipVolume: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
-                Temperature: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
+                Temperature: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-top: ${this.tempGraphHeight}px` })
             });
             this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
             box.add_child(this.hourlyForecasts[index].Hour);
@@ -16755,17 +16754,19 @@ class UIHourlyForecasts {
             const totalHeight = this.hourlyContainers[0].height;
             const itemWidth = this.hourlyContainers[0].width;
             const totalWidth = this.hourlyContainers.length * itemWidth;
+            const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() + this.hourlyForecasts[0].Icon.get_height();
+            const tempPadding = 6;
             ctx.setLineWidth(3);
-            ctx.setSourceRGBA(1, 0, 0, 0.5);
-            const tension = 0.5;
+            ctx.setSourceRGBA(1, 1, 1, 0.5);
             let points = [];
             let precipitation = [];
             for (let i = 0; i < this.hourlyContainers.length; i++) {
                 const data = this.hourlyForecastData[i];
+                const items = this.hourlyForecasts[i];
                 if (data.temp == null)
                     continue;
-                const ratio = ((data.temp - minTemp) / (maxTemp - minTemp)) * (totalHeight / 2);
-                const height = (totalHeight / 2) - ratio;
+                const ratio = ((data.temp - minTemp) / (maxTemp - minTemp)) * (this.tempGraphHeight - (tempPadding * 2));
+                const height = this.tempGraphHeight - tempPadding - ratio + tempHeightOffset;
                 const midX = itemWidth * i + (itemWidth / 2);
                 const midY = (totalHeight / 2);
                 points.push({ x: midX, y: height });
@@ -17122,21 +17123,19 @@ class UI {
         this.HourlySeparator = new UISeparator();
         this.BarSeparator = new UISeparator();
         this.HourlySeparator.Hide();
-        const mainBox = new ui_BoxLayout({ vertical: true });
-        mainBox.add_actor(this.CurrentWeather.actor);
-        mainBox.add_actor(this.HourlySeparator.Actor);
-        mainBox.add_actor(this.HourlyWeather.actor);
-        mainBox.add_actor(this.ForecastSeparator.Actor);
-        mainBox.add_actor(this.FutureWeather.actor);
-        mainBox.add_actor(this.BarSeparator.Actor);
-        mainBox.add_actor(this.Bar.Actor);
-        this.menu.addActor(mainBox);
+        this.menu.addActor(this.CurrentWeather.actor);
+        this.menu.addActor(this.HourlySeparator.Actor);
+        this.menu.addActor(this.HourlyWeather.actor);
+        this.menu.addActor(this.ForecastSeparator.Actor);
+        this.menu.addActor(this.FutureWeather.actor);
+        this.menu.addActor(this.BarSeparator.Actor);
+        this.menu.addActor(this.Bar.Actor);
     }
     ShowLoadingUi() {
         this.CurrentWeather.Destroy();
         this.FutureWeather.Destroy();
         this.Bar.Destroy();
-        this.CurrentWeather.actor.set_child(new ui_Label({
+        this.CurrentWeather.actor.add_actor(new ui_Label({
             text: _('Loading current weather ...')
         }));
         this.FutureWeather.actor.set_child(new ui_Label({

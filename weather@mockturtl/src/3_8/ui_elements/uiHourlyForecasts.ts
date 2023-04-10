@@ -13,6 +13,7 @@ const { BoxLayout, Side, Label, ScrollView, Icon, Align } = imports.gi.St;
 
 export class UIHourlyForecasts {
 	private app: WeatherApplet;
+	private readonly tempGraphHeight = 45;
 	// Hourly Weather
 	public actor: imports.gi.St.ScrollView;
 	private container: imports.gi.St.BoxLayout;
@@ -165,13 +166,6 @@ export class UIHourlyForecasts {
 			ui.Temperature.text = temp ? `${temp}°` : "";
 			ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
 			ui.Summary.text = hour.condition.main;
-			global.log(hour.precipitation?.chance)
-			if ((hour.precipitation?.chance ?? 0) >= 40) {
-				ui.Icon.style = "color: #0055ff";
-			}
-			else {
-				ui.Icon.style = "";
-			}
 			ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation, config);
 			ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
 		}
@@ -346,7 +340,7 @@ export class UIHourlyForecasts {
 
 		grid.attach(canvas, 1, 1, 1, 1);
 		const parent = new BoxLayout();
-		grid.attach(parent, 1,1,1,1);
+		grid.attach(parent, 1, 1, 1, 1);
 
 		this.container.add(actor, {expand: true, x_fill: true, y_fill: true});
 
@@ -366,7 +360,7 @@ export class UIHourlyForecasts {
 				Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
 				PrecipPercent: new Label({ text: " ", style_class: "hourly-data" }),
 				PrecipVolume: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
-				Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
+				Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-top: ${this.tempGraphHeight}px`})
 			})
 
 			this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
@@ -397,25 +391,27 @@ export class UIHourlyForecasts {
 			const maxTemp: number = this.hourlyForecastData.map(x => x.temp).reduce((p, c) => Math.max(p ?? 0, c ?? 0)) as number;
 			const minTemp: number = this.hourlyForecastData.map(x => x.temp).reduce((p, c) => Math.min(p ?? 0, c ?? 0)) as number;
 			const totalHeight = this.hourlyContainers[0].height;
+			// global.log(totalHeight)
 			const itemWidth = this.hourlyContainers[0].width;
 			const totalWidth = this.hourlyContainers.length * itemWidth;
+			const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() + this.hourlyForecasts[0].Icon.get_height();
+			const tempPadding = 6;
 
 			ctx.setLineWidth(3);
-			ctx.setSourceRGBA(1,0,0,0.5);
-
-			const tension = 0.5;
+			ctx.setSourceRGBA(1,1,1,0.5);
 
 			let points: Array<{x: number, y: number}> = [];
 			let precipitation: number[] = []
 			for (let i = 0; i < this.hourlyContainers.length; i++) {
 				const data = this.hourlyForecastData[i];
+				const items = this.hourlyForecasts[i];
 
 				if (data.temp == null)
 					continue;
 
-				const ratio = ((data.temp - minTemp) / (maxTemp - minTemp)) * (totalHeight / 2);
+				const ratio = ((data.temp - minTemp) / (maxTemp - minTemp)) * (this.tempGraphHeight - (tempPadding * 2));
 
-				const height = (totalHeight / 2) - ratio;
+				const height = this.tempGraphHeight - tempPadding - ratio + tempHeightOffset;
 
 				const midX = itemWidth * i + (itemWidth/2);
 				const midY = (totalHeight / 2);

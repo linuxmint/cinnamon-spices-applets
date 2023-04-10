@@ -304,7 +304,6 @@ export class USWeather extends BaseProvider {
 				counter = 0;
 
 			if (counter > 1) {
-				global.log("3 elements")
 				return true;
 			}
 		}
@@ -323,7 +322,6 @@ export class USWeather extends BaseProvider {
 			const curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
 			if (!OnSameDay(today, curDate))
 				continue;
-			global.log(index)
 			return index;
 		}
 
