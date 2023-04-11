@@ -23,43 +23,6 @@ const DEFAULT_VERTICAL_PADDING = 0.1;
 
 class EyeMode {
     /**
-     * Create a new instance of the eye mode
-     * @param {Eye} eye An instance of the class eye
-     */
-    constructor(eye) {
-        this.eye = eye;
-    }
-
-    /**
-     * Get the position of the area of the eye on the panel
-     * @returns [area_x, area_y]
-     */
-    areaPos() {
-        let area_x = 0;
-        let area_y = 0;
-
-        let obj = this.eye.area;
-
-        do {
-            let tx = 0;
-            let ty = 0;
-
-            try {
-                [tx, ty] = obj.get_position();
-            } catch (e) {
-                //
-            }
-
-            area_x += tx;
-            area_y += ty;
-
-            obj = obj.get_parent();
-        } while (obj);
-
-        return [area_x, area_y];
-    }
-
-    /**
      * Draws the eye on the panel
      * @param {St.DrawingArea} area The area on repaint
      * @param {Object} options Drawing options
@@ -73,7 +36,7 @@ class EyelidMode extends EyeMode {
     drawEye(area, options) {
         let [mouse_x, mouse_y, mask] = global.get_pointer();
         let [area_width, area_height] = area.get_surface_size();
-        let [area_x, area_y] = this.areaPos();
+        let [area_x, area_y] = [options.area_x, options.area_y];
 
         const padding = options.padding || DEFAULT_VERTICAL_PADDING;
 
@@ -169,7 +132,7 @@ class EyelidFillMode extends EyeMode {
     drawEye(area, options) {
         let [mouse_x, mouse_y, mask] = global.get_pointer();
         let [area_width, area_height] = area.get_surface_size();
-        let [area_x, area_y] = this.areaPos();
+        let [area_x, area_y] = [options.area_x, options.area_y];
 
         const padding = options.padding || DEFAULT_VERTICAL_PADDING;
 
@@ -268,7 +231,7 @@ class BulbMode extends EyeMode {
     drawEye(area, options) {
         let [mouse_x, mouse_y, mask] = global.get_pointer();
         let [area_width, area_height] = area.get_surface_size();
-        let [area_x, area_y] = this.areaPos();
+        let [area_x, area_y] = [options.area_x, options.area_y];
 
         const padding = options.padding || DEFAULT_VERTICAL_PADDING;
 
@@ -339,7 +302,7 @@ class BulbFillMode extends EyeMode {
     drawEye(area, options) {
         let [mouse_x, mouse_y, mask] = global.get_pointer();
         let [area_width, area_height] = area.get_surface_size();
-        let [area_x, area_y] = this.areaPos();
+        let [area_x, area_y] = [options.area_x, options.area_y];
 
         const padding = options.padding || DEFAULT_VERTICAL_PADDING;
 
@@ -411,21 +374,20 @@ class BulbFillMode extends EyeMode {
 class EyeModeFactory {
     /**
      * Returns an eye mode depending on the given name
-     * @param {Eye} eye An instance of the class eye
      * @param {String} mode Eye mode name to create
      * @returns EyeMode subclass
      */
-    static createEyeMode(eye, mode) {
+    static createEyeMode(mode) {
         switch (mode) {
             case "bulb":
-                return new BulbMode(eye);
+                return new BulbMode();
             case "bulb-fill":
-                return new BulbFillMode(eye);
+                return new BulbFillMode();
             case "lids-fill":
-                return new EyelidFillMode(eye);
+                return new EyelidFillMode();
             case "lids":
             default:
-                return new EyelidMode(eye);
+                return new EyelidMode();
         }
     }
 }
