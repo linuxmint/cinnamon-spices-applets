@@ -214,6 +214,7 @@ class LGS extends Applet.TextIconApplet {
                 reactive: true
             });
             s.connect("activate", function() {
+                this.menu.close();
                 reloadExtension(desklet, Type.DESKLET)
             });
             this.subMenuReloadDesklets.menu.addMenuItem(s)
