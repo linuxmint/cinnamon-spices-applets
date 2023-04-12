@@ -51,7 +51,8 @@
 				"mouse-click-enable",
 				"mouse-click-mode",
 				"mouse-click-image-size",
-				"click-animation-mode"
+				"click-animation-mode",
+				"deactivate-effects-on-fullscreen"
 			]
 		},
 		"click-events": {
@@ -117,7 +118,7 @@
 	},
 	"eye-repaint-interval": {
 		"type": "spinbutton",
-		"default": 60,
+		"default": 55,
 		"min": 5,
 		"max": 200,
 		"step": 5,
@@ -131,7 +132,7 @@
 	},
 	"deactivate-on-fullscreen": {
 		"type": "checkbox",
-		"default": false,
+		"default": true,
 		"description": "Deactivate On Fullscreen"
 	},
 	"eye-clicked-color": {
@@ -200,6 +201,12 @@
 			"Retract": "retract",
 			"Expand": "expand"
 		},
+		"dependency": "mouse-click-enable"
+	},
+	"deactivate-effects-on-fullscreen": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Deactivate On Fullscreen",
 		"dependency": "mouse-click-enable"
 	},
 	"mouse-left-click-enable": {
