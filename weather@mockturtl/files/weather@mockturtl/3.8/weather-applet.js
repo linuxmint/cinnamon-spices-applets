@@ -13299,7 +13299,7 @@ class DanishMI extends BaseProvider {
             city: forecasts.city,
             country: forecasts.country,
             timeZone: undefined,
-            url: `https://www.dmi.dk/lokation/show/${forecasts.country}/${forecasts.id}`
+            url: `https://www.dmi.dk/lokation/show/${forecasts.country}/${forecasts.id}/${forecasts.city}`
         };
         result.coord = {
             lon: forecasts.longitude,
