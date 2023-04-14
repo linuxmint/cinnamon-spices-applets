@@ -10,5 +10,18 @@
 		"description": "Show Cheaty popup menu",
 		"default": "<Super>m",
 		"tooltip" : "Set keybinding(s) to show the Cheaty popup menu."
-	}
+	},
+    "cheatsheets" : {
+        "type" : "list",
+        "description" : "Cheat sheet selector",
+        "columns" : [
+            {"id": "enabled", "title": "Enabled", "type": "boolean"},
+            {"id": "name", "title": "Name", "type": "string"},
+            {"id": "description", "title": "Description", "type": "string", "default": ""},
+            {"id": "author", "title": "Author", "type": "string", "default": ""}
+        ],
+		"height": 400,
+        "default" : [],
+		"show-buttons": false
+    }
 }
