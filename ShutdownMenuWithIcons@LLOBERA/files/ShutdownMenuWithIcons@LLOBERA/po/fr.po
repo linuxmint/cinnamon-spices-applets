@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-20 18:44+0800\n"
-"PO-Revision-Date: 2023-04-14 17:17+0200\n"
+"PO-Revision-Date: 2023-04-14 17:19+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -161,7 +161,7 @@ msgstr "Ajouter la mise en veille hybride au menu"
 
 #. ShutdownMenuWithIcons@LLOBERA->settings-schema.json->quit_icon->description
 msgid "The quit icon "
-msgstr "L'icône d'extinction"
+msgstr "L'icône d'extinction "
 
 #. ShutdownMenuWithIcons@LLOBERA->settings-schema.json->hibernate->description
 msgid "Add hibernate to the menu"
@@ -170,26 +170,26 @@ msgstr "Ajouter l'hybernation au menu"
 #. ShutdownMenuWithIcons@LLOBERA->settings-
 #. schema.json->screen_lock_cmd->description
 msgid "The screen lock command "
-msgstr "La commande pour verrouiller l'écran"
+msgstr "La commande pour verrouiller l'écran "
 
 #. ShutdownMenuWithIcons@LLOBERA->settings-
 #. schema.json->hybrid_sleep_icon->description
 msgid "The hybrid sleep icon "
-msgstr "L'icône de mise en veille hybride"
+msgstr "L'icône de mise en veille hybride "
 
 #. ShutdownMenuWithIcons@LLOBERA->settings-schema.json->quit_cmd->description
 msgid "The quit command "
-msgstr "La commande pour éteindre"
+msgstr "La commande pour éteindre "
 
 #. ShutdownMenuWithIcons@LLOBERA->settings-
 #. schema.json->restart_icon->description
 msgid "The restart icon "
-msgstr "L'icône de redémarrage"
+msgstr "L'icône de redémarrage "
 
 #. ShutdownMenuWithIcons@LLOBERA->settings-
 #. schema.json->screen_lock_icon->description
 msgid "The screen lock icon "
-msgstr "L'icône de verrouillage de l'écran"
+msgstr "L'icône de verrouillage de l'écran "
 
 #. ShutdownMenuWithIcons@LLOBERA->settings-schema.json->restart->description
 msgid "Add restart to the menu"
