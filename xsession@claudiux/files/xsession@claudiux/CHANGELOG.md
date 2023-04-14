@@ -1,3 +1,6 @@
+### v1.0.2~20230412
+  * Close menu before restarting Cinnamon
+
 ### v1.0.1~20230213
   * Middle-click on icon shows ~/.xsession-errors.
   * Shows OSD while Cinnamon is restarting.
