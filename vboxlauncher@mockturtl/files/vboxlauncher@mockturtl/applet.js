@@ -30,6 +30,8 @@ const SIGNAL_ACTIVATE = "activate"
 
 const KEY_UPDATE = "autoUpdate"
 const AUTOUPDATE = "_" + KEY_UPDATE
+const KEY_SHOWHEADLESS = "showHeadlessMode"
+const SHOWHEADLESS = "_" + KEY_SHOWHEADLESS
 
 // l10n/translation support
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
@@ -89,6 +91,9 @@ MyApplet.prototype = {
 
       this.settings.bindProperty(Settings.BindingDirection.IN, KEY_UPDATE, AUTOUPDATE,
                                  this.onSwitchAutoUpdate, null)
+
+      this.settings.bindProperty(Settings.BindingDirection.IN, KEY_SHOWHEADLESS, SHOWHEADLESS,
+                                 this.onSwitchShowHeadless, null)
 
       this.settingsApiCheck()
       this.checkPrograms()
@@ -216,10 +221,17 @@ MyApplet.prototype = {
       name = (name+"   \uE226");
     }
     let id = info[1].replace('}', '')
-    this.addLauncher(name,
-      Lang.bind(this, function() { this.startVboxImage(id) }),
-      Lang.bind(this, function() { this.startVboxImageHeadless(id) })
-    )
+    if (this[SHOWHEADLESS]) {
+      this.addLauncher(name,
+        Lang.bind(this, function() { this.startVboxImage(id) }),
+        Lang.bind(this, function() { this.startVboxImageHeadless(id) })
+      )
+    } else {
+      this.addLauncher(name,
+        Lang.bind(this, function() { this.startVboxImage(id) }),
+        null
+      )
+    }
   }
 
 // add menu items for all VMWare Player images
@@ -309,6 +321,9 @@ MyApplet.prototype = {
     if (!this[AUTOUPDATE]) {
       this.updateMenu() // Needed to make update button reappear if setting switched to off
     }
+  }
+,  onSwitchShowHeadless: function() {
+    this.updateMenu() // Whether or not to show headless modes
   }
 
 }
