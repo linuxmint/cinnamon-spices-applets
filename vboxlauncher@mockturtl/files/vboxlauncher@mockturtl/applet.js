@@ -14,7 +14,6 @@ const CMD_VBOX = "virtualbox"
 const CMD_VBOXMANAGE = "vboxmanage"
 
 const CMD_VBOX_VM = CMD_VBOXMANAGE + " startvm "
-const CMD_VBOX6_VM = CMD_VBOXMANAGE + " startvm "
 const CMD_VBOX_LIST = CMD_VBOXMANAGE + " list vms"
 const CMD_VBOX_LIST_RUN = CMD_VBOXMANAGE + " list runningvms"
 const CMD_VBOX_VERSION = CMD_VBOXMANAGE + " -v"
@@ -31,6 +30,8 @@ const SIGNAL_ACTIVATE = "activate"
 
 const KEY_UPDATE = "autoUpdate"
 const AUTOUPDATE = "_" + KEY_UPDATE
+const KEY_SHOWHEADLESS = "showHeadlessMode"
+const SHOWHEADLESS = "_" + KEY_SHOWHEADLESS
 
 // l10n/translation support
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
@@ -91,6 +92,9 @@ MyApplet.prototype = {
       this.settings.bindProperty(Settings.BindingDirection.IN, KEY_UPDATE, AUTOUPDATE,
                                  this.onSwitchAutoUpdate, null)
 
+      this.settings.bindProperty(Settings.BindingDirection.IN, KEY_SHOWHEADLESS, SHOWHEADLESS,
+                                 this.onSwitchShowHeadless, null)
+
       this.settingsApiCheck()
       this.checkPrograms()
       this.updateMenu()
@@ -125,16 +129,7 @@ MyApplet.prototype = {
 , checkPrograms: function() {
     for (let i = 0; i < PROGRAMS.length; i++) {
       let p = PROGRAMS[i]
-      INSTALLED_PROGRAMS[p] = false
-      try {
-        let [res, list, err, status] = GLib.spawn_command_line_sync("which " + p)
-        //global.log(UUID + "::checkPrograms: " + [res, list, err, status])
-        if (parseInt(status) == 0)
-          INSTALLED_PROGRAMS[p] = true
-        //global.log(UUID + "::checkPrograms: system has `" + p + "`? " + INSTALLED_PROGRAMS[p])
-      } catch(e) {
-        global.logError(UUID + "::checkPrograms: " + e)
-      }
+      INSTALLED_PROGRAMS[p] = GLib.find_program_in_path(""+p) != null;
     }
   }
 
@@ -180,37 +175,41 @@ MyApplet.prototype = {
     return 1
   }
 
-, vboxMajorVersion: function() {
-  let [res, list, err, status] = GLib.spawn_command_line_sync(CMD_VBOX_VERSION)
-  return parseInt(to_string(list)[0])
-}
-
 // add menu items for all Virtualbox images
 , parseVboxImages: function(out) {
     if (!this.isInstalled(CMD_VBOX))
       return
 
-    let [res, list, err, status] = GLib.spawn_command_line_sync(CMD_VBOX_LIST)
-    let [resrun, listrun, errrun, statusrun] = GLib.spawn_command_line_sync(CMD_VBOX_LIST_RUN)
-    if (list.length != 0) {
-      let machines = to_string(list).split("\n")
-      let machinesrun = to_string(listrun).split("\n")
-      //global.log(machines);
-      //global.log(machinesrun);
-      for (let i = 0; i < machines.length; i++) {
-        let machine = machines[i]
-        if (machine == "") continue
-        for (let j = 0; j < machinesrun.length; j++) {
-            let machinerun = machinesrun[j]
-            if (machinerun == "") continue
-            if (machine == machinerun) {
-                VBOX_ISRUNNING = "1";
+    var machines = []
+    var machinesrun = []
+
+    Util.spawnCommandLineAsyncIO(CMD_VBOX_LIST, Lang.bind(this, (list, err, status) => {
+      if (list.length != 0) {
+        machines = list.split("\n")
+        //global.log("machines: "+ list)
+        Util.spawnCommandLineAsyncIO(CMD_VBOX_LIST_RUN, Lang.bind(this, (listrun, errrun, statusrun) => {
+          //if (listrun.length != 0) {
+            machinesrun = listrun.split("\n")
+            //global.log("machinesrun: "+ listrun)
+            if (machines.length != 0) {
+              for (let i = 0; i < machines.length; i++) {
+                let machine = machines[i]
+                if (machine.length === 0) continue
+                for (let j = 0; j < machinesrun.length; j++) {
+                  let machinerun = machinesrun[j]
+                  if (machinerun.length === 0) continue
+                  if (machine == machinerun) {
+                      VBOX_ISRUNNING = "1";
+                  }
+                }
+                this.addVboxImage(machine);
+                VBOX_ISRUNNING = "0"
+              }
             }
-        }
-        this.addVboxImage(machine);
-        VBOX_ISRUNNING = "0"
+          //}
+        }))
       }
-    }
+    }))
   }
 
 , addVboxImage: function(instance) {
@@ -222,10 +221,17 @@ MyApplet.prototype = {
       name = (name+"   \uE226");
     }
     let id = info[1].replace('}', '')
-    this.addLauncher(name,
-      Lang.bind(this, function() { this.startVboxImage(id) }),
-      Lang.bind(this, function() { this.startVboxImageHeadless(id) })
-    )
+    if (this[SHOWHEADLESS]) {
+      this.addLauncher(name,
+        Lang.bind(this, function() { this.startVboxImage(id) }),
+        Lang.bind(this, function() { this.startVboxImageHeadless(id) })
+      )
+    } else {
+      this.addLauncher(name,
+        Lang.bind(this, function() { this.startVboxImage(id) }),
+        null
+      )
+    }
   }
 
 // add menu items for all VMWare Player images
@@ -235,18 +241,18 @@ MyApplet.prototype = {
 
     this.addSeparator()
 
-    let [res, list, err, status] = GLib.spawn_command_line_sync(CMD_VMPLAYER_LIST)
-    //global.log(UUID + "#parseVmplayerImages: list=" + list)
-    if (list.length != 0) {
-      let paths = to_string(list).split("\n")
-      paths = paths.slice(0, paths.length - 1) // chomp final \n
-      //global.log("\t" + paths.length + " paths: " + paths)
-      for (let i = 0; i < paths.length; i++) {
-        let path = paths[i]
-        if (path == "") continue
-        this.addVmplayerImage(path)
+    Util.spawnCommandLineAsyncIO(CMD_VMPLAYER_LIST, Lang.bind(this, (list, err, status) => {
+      if (list.length != 0) {
+        let paths = to_string(list).split("\n")
+        paths = paths.slice(0, paths.length - 1) // chomp final \n
+        //global.log("\t" + paths.length + " paths: " + paths)
+        for (let i = 0; i < paths.length; i++) {
+          let path = paths[i]
+          if (path == "") continue
+          this.addVmplayerImage(path)
+        }
       }
-    }
+    }))
   }
 
 , addVmplayerImage: function(path) {
@@ -281,25 +287,27 @@ MyApplet.prototype = {
   }
 
 ,  startVboxImage: function(id) {
-    let cmd = this.vboxMajorVersion() >= 6 ? CMD_VBOX6_VM : CMD_VBOX_VM
-    Util.spawnCommandLine(cmd + id)
+    //~ let cmd = this.vboxMajorVersion() >= 6 ? CMD_VBOX6_VM : CMD_VBOX_VM
+    //~ Util.spawnCommandLine(cmd + id)
+    Util.spawnCommandLineAsync(CMD_VBOX_VM + id)
   }
 
 ,  startVboxImageHeadless: function(id) {
-    let cmd = this.vboxMajorVersion() >= 6 ? CMD_VBOX6_VM : CMD_VBOX_VM
-    Util.spawnCommandLine(cmd + id + " --type headless")
+    //~ let cmd = this.vboxMajorVersion() >= 6 ? CMD_VBOX6_VM : CMD_VBOX_VM
+    //~ Util.spawnCommandLine(cmd + id + " --type headless")
+    Util.spawnCommandLineAsync(CMD_VBOX_VM + id + " --type headless")
   }
 
 ,  startVbox: function() {
-    Util.spawnCommandLine(CMD_VBOX)
+    Util.spawnCommandLineAsync(CMD_VBOX)
   }
 
 ,  startVmplayer: function() {
-    Util.spawnCommandLine(CMD_VMPLAYER)
+    Util.spawnCommandLineAsync(CMD_VMPLAYER)
   }
 
 ,  startVmplayerImage: function(path) {
-    Util.spawnCommandLine(CMD_VMPLAYER + " '" + path + "' ")
+    Util.spawnCommandLineAsync(CMD_VMPLAYER + " '" + path + "' ")
   }
 
 ,  on_applet_clicked: function(event) {
@@ -313,6 +321,9 @@ MyApplet.prototype = {
     if (!this[AUTOUPDATE]) {
       this.updateMenu() // Needed to make update button reappear if setting switched to off
     }
+  }
+,  onSwitchShowHeadless: function() {
+    this.updateMenu() // Whether or not to show headless modes
   }
 
 }
