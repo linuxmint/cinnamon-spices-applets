@@ -4,13 +4,13 @@
 # Daniel Miranda <dmiranda@gmail.com>, 2011.
 # Jorge B. Adad <jorgebadad@gmail.com>, 2021.
 # Fúlvio Alves <fga.fulvio@gmail.com>, 2022.
-#
+# Cássio Louzada Rizzi <clrizzi@gmail.com, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: weather@mockturtl 2.6.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-05 09:30+0000\n"
-"PO-Revision-Date: 2022-01-14 21:27-0300\n"
+"PO-Revision-Date: 2023-04-14 18:10-0300\n"
 "Last-Translator: Fúlvio Alves <fga.fulvio@gmail.com>\n"
 "Language-Team: Português <jorgebadad@gmail.com>\n"
 "Language: pt_BR\n"
