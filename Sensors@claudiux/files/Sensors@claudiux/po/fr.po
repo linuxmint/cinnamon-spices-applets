@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-28 00:20+0100\n"
-"PO-Revision-Date: 2022-12-28 00:21+0100\n"
+"POT-Creation-Date: 2023-04-20 15:16+0200\n"
+"PO-Revision-Date: 2023-04-20 15:41+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -23,91 +23,91 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Moniteur de Capteurs"
 
-#: applet.js:389 applet.js:440
+#: applet.js:389 applet.js:441
 msgid "high:"
 msgstr "élevée :"
 
-#: applet.js:389 applet.js:391 applet.js:440 applet.js:442 applet.js:475
+#: applet.js:389 applet.js:391 applet.js:441 applet.js:443 applet.js:481
 msgid "n/a"
 msgstr "n/a"
 
-#: applet.js:391 applet.js:442
+#: applet.js:391 applet.js:443
 msgid "crit:"
 msgstr "critique :"
 
-#: applet.js:475
+#: applet.js:481 applet.js:524
 msgid "min:"
 msgstr "min :"
 
-#: applet.js:506
+#: applet.js:526
 msgid "max:"
 msgstr "max :"
 
-#: applet.js:534
+#: applet.js:554
 msgid "No intrusion detected"
 msgstr "Aucune intrusion détectée"
 
-#: applet.js:534
+#: applet.js:554
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSION DÉTECTÉE !"
 
-#: applet.js:554
+#: applet.js:574
 msgid "Must be configured!"
 msgstr "Doit être configuré !"
 
-#: applet.js:811
+#: applet.js:845
 msgid "Settings"
 msgstr "Paramètres"
 
-#: applet.js:811
+#: applet.js:845
 msgid ":"
 msgstr " :"
 
 #. settings-schema.json->page_General->title
-#: applet.js:818
+#: applet.js:852
 msgid "⚙ General"
 msgstr "⚙ Général"
 
-#: applet.js:828
+#: applet.js:862
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Capteurs de température"
 
-#: applet.js:838
+#: applet.js:872
 msgid "🤂 Fan sensors"
 msgstr "🤂 Capteurs de ventilateur"
 
-#: applet.js:848
+#: applet.js:882
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Capteurs de tension"
 
-#: applet.js:858
+#: applet.js:892
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Capteurs d'intrusion"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:869
+#: applet.js:903
 msgid "Run xsensors"
 msgstr "Lancer xsensors"
 
-#: applet.js:880
+#: applet.js:914
 msgid "Reload this applet"
 msgstr "Recharger cette applet"
 
-#: applet.js:1168
+#: applet.js:1206
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Êtes-vous sûr de vouloir enlever \"%s\" ?"
 
-#: lib/checkDependencies.js:281
+#: lib/checkDependencies.js:300
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "L'applet %s est pleinement fonctionnelle."
 
-#: lib/checkDependencies.js:282
+#: lib/checkDependencies.js:301
 msgid "All dependencies are installed"
 msgstr "Toutes les dépendances sont installées"
 
-#: lib/checkDependencies.js:307
+#: lib/checkDependencies.js:329
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -115,11 +115,11 @@ msgstr ""
 "Vous semblez ne pas disposer des programmes requis pour bénéficier de toutes "
 "les fonctionnalités de cette applet."
 
-#: lib/checkDependencies.js:308
+#: lib/checkDependencies.js:330
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Veuillez exécuter, dans le terminal qui s'est ouvert, les commandes :"
 
-#: lib/checkDependencies.js:309
+#: lib/checkDependencies.js:331
 msgid "Some dependencies are not installed!"
 msgstr "Certaines dépendances ne sont pas installées !"
 
@@ -234,8 +234,8 @@ msgid "Temperature sensors"
 msgstr "Capteurs de température"
 
 #. settings-schema.json->section_tempDisks->title
-msgid "Temperature scripts"
-msgstr "Scripts de température"
+msgid "Disk temperature sensors"
+msgstr "Capteurs de température des disques"
 
 #. settings-schema.json->section_fanSensors->title
 msgid "Fan sensors"
@@ -533,23 +533,56 @@ msgstr ""
 "  l'info-bulle"
 
 #. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+msgid "Shown name"
+msgstr ""
+"Nom\n"
+"affiché"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid ""
+"High\n"
+"(°C)"
+msgstr ""
+"Élevée\n"
+"(°C)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid ""
+"Critical\n"
+"(°C)"
+msgstr ""
+"Critique\n"
+"(°C)"
+
+#. settings-schema.json->temp_sensors->columns->title
 #. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
-#. settings-schema.json->intrusion_sensors->columns->title
-msgid "Shown name"
-msgstr "Nom affiché"
+msgid "Formula"
+msgstr "Formule"
 
 #. settings-schema.json->temp_sensors->tooltip
-#. settings-schema.json->fan_sensors->tooltip
-#. settings-schema.json->volt_sensors->tooltip
-#. settings-schema.json->intrusion_sensors->tooltip
 msgid ""
-"Double-click on a line to change Shown name.\n"
-"To reset a Shown name, copy/paste the Sensor name."
+"Double-click on a line to change 'Shown name', 'High', 'Critical' or "
+"'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'High' and 'Critical' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
 msgstr ""
-"Double-clic sur une ligne pour modifier le Nom affiché.\n"
-"Pour annuler le Nom affiché, y copier/coller le Nom du capteur."
+"Double-cliquez sur une ligne pour modifier 'Nom affiché', 'Élevée', "
+"'Critique' ou 'Formule'.\n"
+"Pour réinitialiser un 'Nom affiché', copiez/collez le 'Nom du capteur'.\n"
+"'Élevée' et 'Critique' (facultatifs) doivent être des nombres valides.\n"
+"'Formule' (facultatif) :\n"
+"   Utilisez $ comme valeur renvoyée par le capteur.\n"
+"   Vous pouvez utiliser les 4 opérations (+-*/) et les parenthèses.\n"
+"   Exemple : $*1.1+0.5"
 
 #. settings-schema.json->btn_renew_disks_list->description
 msgid "Renew the list of known disks"
@@ -560,12 +593,14 @@ msgid "Disk name"
 msgstr "Nom du disque"
 
 #. settings-schema.json->temp_disks->columns->title
-msgid "High °C"
-msgstr "Élevée °C"
-
-#. settings-schema.json->temp_disks->columns->title
-msgid "Critical °C"
-msgstr "Critique °C"
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid ""
+"Shown\n"
+"name"
+msgstr ""
+"Nom\n"
+"affiché"
 
 #. settings-schema.json->temp_disks->tooltip
 msgid ""
@@ -581,6 +616,33 @@ msgstr ""
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
 msgstr "Abréviation de \"Rotations par minute\""
+
+#. settings-schema.json->fan_sensors->columns->title
+msgid ""
+"Min\n"
+"(rpm)"
+msgstr ""
+"Min\n"
+"(rpm)"
+
+#. settings-schema.json->fan_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' (optional) must be valid number.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Double-cliquez sur une ligne pour modifier 'Nom affiché', 'Min' ou "
+"'Formule'.\n"
+"Pour réinitialiser un 'Nom affiché', copiez/collez le 'Nom du capteur'.\n"
+"'Min' (facultatif) doit être un nombre valide.\n"
+"'Formule' (facultatif) :\n"
+"   Utilisez $ comme valeur renvoyée par le capteur.\n"
+"   Vous pouvez utiliser les 4 opérations (+-*/) et les parenthèses.\n"
+"   Exemple : $*1.1+0.5"
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -598,6 +660,41 @@ msgstr "V seulement"
 msgid "mV only"
 msgstr "mV seulement"
 
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Min\n"
+"(V)"
+msgstr ""
+"Min\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Max\n"
+"(V)"
+msgstr ""
+"Max\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min', 'Max' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' and 'Max' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Double-cliquez sur une ligne pour modifier 'Nom affiché', 'Min', 'Max' ou "
+"'Formule'.\n"
+"Pour réinitialiser un 'Nom affiché', copiez/collez le 'Nom du capteur'.\n"
+"'Min' et 'Max' (facultatifs) doivent être des nombres valides.\n"
+"'Formule' (facultatif) :\n"
+"   Utilisez $ comme valeur renvoyée par le capteur.\n"
+"   Vous pouvez utiliser les 4 opérations (+-*/) et les parenthèses.\n"
+"   Exemple : $*1.1+0.5"
+
 #. settings-schema.json->show_intrusion_name->tooltip
 msgid ""
 " Whether or not to display into this applet label the 'Shown name' of the "
@@ -611,6 +708,14 @@ msgstr ""
 msgid "Show in the panel only when an intrusion was detected"
 msgstr ""
 "Afficher dans le panneau uniquement lorsqu'une intrusion a été détectée"
+
+#. settings-schema.json->intrusion_sensors->tooltip
+msgid ""
+"Double-click on a line to change Shown name.\n"
+"To reset a Shown name, copy/paste the Sensor name."
+msgstr ""
+"Double-clic sur une ligne pour modifier le Nom affiché.\n"
+"Pour annuler le Nom affiché, y copier/coller le Nom du capteur."
 
 #. settings-schema.json->report->description
 msgid "Example of sensor values from this computer"
@@ -627,6 +732,9 @@ msgstr "Mettre à jour l'affichage"
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Retirer du panneau l'applet temperature@fevimu"
+
+#~ msgid "Temperature scripts"
+#~ msgstr "Scripts de température"
 
 #~ msgid "Sensors"
 #~ msgstr "Capteurs"
