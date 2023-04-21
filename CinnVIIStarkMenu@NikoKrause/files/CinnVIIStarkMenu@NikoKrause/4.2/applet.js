@@ -85,7 +85,6 @@ class VisibleChildIterator {
         this.container = container;
         this.reloadVisible();
     }
-
     reloadVisible() {
         this.array = this.container.get_focus_chain()
         .filter(x => !(x._delegate instanceof PopupMenu.PopupSeparatorMenuItem));
@@ -219,7 +218,8 @@ class SimpleMenuItem {
         if (this.activate &&
             (symbol === Clutter.KEY_space ||
              symbol === Clutter.KEY_Return ||
-             symbol === Clutter.KP_Enter)) {
+             symbol === Clutter.KP_Enter ||
+             symbol === Clutter.KEY_KP_Enter)) {
             this.activate();
             return Clutter.EVENT_STOP;
         }
@@ -1846,7 +1846,8 @@ class Menu extends Applet.AppletPopupMenu {
     }
 
     _onKeyPressEvent(actor, event) {
-        if (event.get_key_symbol() == Clutter.Escape) {
+        const key_symbol = event.get_key_symbol();
+        if (key_symbol === Clutter.Escape || key_symbol === Clutter.KEY_Escape) {
             this.close(false);
             return true;
         }
@@ -2523,8 +2524,8 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     }
 
     _navigateContextMenu(button, symbol, ctrlKey) {
-        if (symbol === Clutter.KEY_Menu || symbol === Clutter.Escape ||
-            (ctrlKey && (symbol === Clutter.KEY_Return || symbol === Clutter.KP_Enter))) {
+        if (symbol === Clutter.KEY_Menu || symbol === Clutter.Escape || symbol === Clutter.KEY_Escape ||
+            (ctrlKey && (symbol === Clutter.KEY_Return || symbol === Clutter.KP_Enter || symbol === Clutter.KEY_KP_Enter))) {
             this.toggleContextMenu(button);
             return;
         }
@@ -2554,7 +2555,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         }
 
         if (!this._activeContextMenuItem) {
-            if (symbol === Clutter.KEY_Return || symbol === Clutter.KP_Enter) {
+            if (symbol === Clutter.KEY_Return || symbol === Clutter.KP_Enter || symbol === Clutter.KEY_KP_Enter) {
                 button.activate();
             } else {
                 this._activeContextMenuItem = menuItems[goUp ? menuItemsLength - 1 : minIndex];
@@ -2562,7 +2563,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             }
             return;
         } else if (this._activeContextMenuItem &&
-            (symbol === Clutter.KEY_Return || symbol === Clutter.KP_Enter)) {
+            (symbol === Clutter.KEY_Return || symbol === Clutter.KP_Enter || symbol === Clutter.KEY_KP_Enter)) {
             this._activeContextMenuItem.activate();
             this._activeContextMenuItem = null;
             return;
@@ -2619,10 +2620,12 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                 case Clutter.KEY_Down:
                 case Clutter.KEY_Return:
                 case Clutter.KP_Enter:
+                case Clutter.KEY_KP_Enter:
                 case Clutter.KEY_Menu:
                 case Clutter.KEY_Page_Up:
                 case Clutter.KEY_Page_Down:
                 case Clutter.Escape:
+                case Clutter.KEY_Escape:
                     this._navigateContextMenu(this._activeContextMenuParent, symbol, ctrlKey);
                     break;
                 case Clutter.KEY_Right:
@@ -2889,7 +2892,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                 return false;
             index = item_actor.get_parent()._vis_iter.getAbsoluteIndexOfChild(item_actor);
         } else {
-            if ((this._activeContainer && this._activeContainer !== this.categoriesBox) && (symbol === Clutter.KEY_Return || symbol === Clutter.KP_Enter)) {
+            if ((this._activeContainer && this._activeContainer !== this.categoriesBox) && (symbol === Clutter.KEY_Return || symbol === Clutter.KP_Enter || symbol === Clutter.KEY_KP_Enter)) {
                 if (!ctrlKey) {
                     item_actor = this._activeContainer.get_child_at_index(this._selectedItemIndex);
                     item_actor._delegate.activate();
@@ -2935,13 +2938,13 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                 appFavorites.moveFavoriteToPos(id, favPos/2);
                 item_actor = this.favoritesBox.get_child_at_index(favPos);
             } else if (this.searchFilesystem && (this._fileFolderAccessActive || symbol === Clutter.slash)) {
-                if (symbol === Clutter.Return || symbol === Clutter.KP_Enter) {
+                if (symbol === Clutter.Return || symbol === Clutter.KP_Enter || symbol === Clutter.KEY_KP_Enter) {
                     if (this._run(this.searchEntry.get_text())) {
                         this.menu.close();
                     }
                     return true;
                 }
-                if (symbol === Clutter.Escape) {
+                if (symbol === Clutter.Escape || symbol === Clutter.KEY_Escape) {
                     this.searchEntry.set_text('');
                     this._fileFolderAccessActive = false;
                 }
