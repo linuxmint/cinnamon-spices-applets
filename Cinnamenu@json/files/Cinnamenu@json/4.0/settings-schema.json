@@ -311,7 +311,8 @@
             "Ecosia":8,
             "AOL":9,
             "Startpage":10,
-            "Brave":11
+            "Brave":11,
+            "Qwant":12
         },
         "tooltip":"Show an internet search option in search results"
     },
@@ -481,6 +482,7 @@
                 "start-here-debian",
                 "start-here-fedora",
                 "start-here-linux-mint",
+                "start-here-opensuse",
                 "start-here-ubuntu"
             ]
         }],

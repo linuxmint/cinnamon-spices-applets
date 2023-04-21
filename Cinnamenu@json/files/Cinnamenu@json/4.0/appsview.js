@@ -98,7 +98,7 @@ class AppButton {
                                 x_fill: false, y_fill: false,
                                 x_align: isListView ? St.Align.START : St.Align.MIDDLE,
                                 y_align: St.Align.MIDDLE});
-        this._setButtonNormal();
+        this._setButtonStyleNormal();
         this._setAppHighlightClass();
 
         //----------dnd--------------
@@ -143,7 +143,7 @@ class AppButton {
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
     }
 
-    _setButtonNormal() {
+    _setButtonStyleNormal() {
         this.has_focus = false;
         this.actor.set_style_class_name('menu-application-button');
         if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.GRID) {
@@ -152,7 +152,7 @@ class AppButton {
         this._addTileStyle();
     }
 
-    _setButtonSelected() {
+    _setButtonStyleSelected() {
         this.has_focus = true;
         this.actor.set_style_class_name('menu-application-button-selected');
         if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.GRID) {
@@ -222,7 +222,7 @@ class AppButton {
         } else {//keyboard navigation
             scrollToButton(this, this.appThis.settings.enableAnimation);
         }
-        this._setButtonSelected();
+        this._setButtonStyleSelected();
 
         //------show tooltip
         if (this.appThis.settings.descriptionPlacement != DescriptionPlacement.TOOLTIP) {
@@ -257,7 +257,7 @@ class AppButton {
         if (this.appThis.display.contextMenu.isOpen) {
             return false;
         }
-        this._setButtonNormal();
+        this._setButtonStyleNormal();
         hideTooltipIfVisible();
     }
 
@@ -332,7 +332,7 @@ class AppButton {
     }
 
     openContextMenu(e) {
-        this._setButtonSelected();
+        this._setButtonStyleSelected();
         hideTooltipIfVisible();
         this.appThis.display.contextMenu.open(this.app, e, this.actor);
     }

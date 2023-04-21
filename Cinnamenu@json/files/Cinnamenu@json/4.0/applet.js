@@ -1020,7 +1020,7 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.settings.webSearchOption != 0) {//0==none
             const iconName = ['google_icon.png', 'bing_icon.png', 'search.png', 'yahoo_icon.png',
                             'search.png', 'duckgo_icon.png', 'ask.png', 'ecosia.png', 'search.png',
-                            'startpage.png', 'brave.png'][this.settings.webSearchOption - 1];
+                            'startpage.png', 'brave.png', 'qwant.png'][this.settings.webSearchOption - 1];
             const url = [   'https://google.com/search?q=',
                             'https://www.bing.com/search?q=',
                             'https://www.baidu.com/s?wd=',
@@ -1031,10 +1031,8 @@ class CinnamenuApplet extends TextIconApplet {
                             'https://www.ecosia.org/search?q=',
                             'https://search.aol.co.uk/aol/search?q=',
                             'https://www.startpage.com/search/?q=',
-                            'https://search.brave.com/search?q='][this.settings.webSearchOption - 1];
-            const engine = ['Google', 'Bing', 'Baidu', 'Yahoo', 'Yandex', 'DuckDuckGo', 'Ask',
-                            'Ecosia', 'AOL', 'Startpage', 'Brave'][this.settings.webSearchOption - 1];
-
+                            'https://search.brave.com/search?q=',
+                            'https://www.qwant.com/?q='][this.settings.webSearchOption - 1];
             const gicon = new Gio.FileIcon(
                                 {file: Gio.file_new_for_path(__meta.path + '/../icons/' + iconName)});
 

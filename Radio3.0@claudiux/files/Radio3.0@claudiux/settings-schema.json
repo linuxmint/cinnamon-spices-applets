@@ -249,7 +249,10 @@
       "keys": [
         "shortcut-volume-up",
         "shortcut-volume-down",
-        "shortcut-volume-cut"
+        "shortcut-volume-cut",
+        "shortcut-radio-on-off",
+        "shortcut-next-recent-radio",
+        "shortcut-previous-recent-radio"
       ]
     },
     "sectionBehaviorNotifications": {
@@ -880,6 +883,23 @@
   "shortcut-volume-cut": {
     "type": "keybinding",
     "description": "Mute",
+    "default": ""
+  },
+  "shortcut-radio-on-off": {
+    "type": "keybinding",
+    "description": "Radio ON/OFF",
+    "default": ""
+  },
+  "shortcut-next-recent-radio": {
+    "type": "keybinding",
+    "description": "Next station",
+    "tooltip": "Next station recently listened to",
+    "default": ""
+  },
+  "shortcut-previous-recent-radio": {
+    "type": "keybinding",
+    "description": "Previous station",
+    "tooltip": "Previous station recently listened to",
     "default": ""
   },
   "show-help-in-tooltip": {

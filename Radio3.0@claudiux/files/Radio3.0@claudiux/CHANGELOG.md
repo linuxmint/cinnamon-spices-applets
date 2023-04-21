@@ -1,3 +1,6 @@
+### v1.2.1~20230401
+  * Now compatible with OpenSUSE.
+
 ### v1.2.0~20230328
   * Adds ability to show OSD while changing volume.
 

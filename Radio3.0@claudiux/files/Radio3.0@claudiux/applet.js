@@ -1122,6 +1122,9 @@ WebRadioReceiverAndRecorder.prototype = {
     this.settings.bind("shortcut-volume-up", "shortcutVolUp", this.onShortcutChanged.bind(this));
     this.settings.bind("shortcut-volume-down", "shortcutVolDown", this.onShortcutChanged.bind(this));
     this.settings.bind("shortcut-volume-cut", "shortcutVolCut", this.onShortcutChanged.bind(this));
+    this.settings.bind("shortcut-radio-on-off", "shortcutOnOff", this.onShortcutChanged.bind(this));
+    this.settings.bind("shortcut-next-recent-radio", "shortcutNext", this.onShortcutChanged.bind(this));
+    this.settings.bind("shortcut-previous-recent-radio", "shortcutPrevious", this.onShortcutChanged.bind(this));
 
     //Scheduling:
     this.settings.bind("sched-recordings", "sched_recordings");
@@ -1188,6 +1191,22 @@ WebRadioReceiverAndRecorder.prototype = {
         this.context_menu_item_slider.slider.emit('value-changed', value);
       }
     });
+    keybindingManager.addHotKey("shortcutOnOff", this.shortcutOnOff, (event) => {
+      this.on_applet_middle_clicked(event);
+    });
+    keybindingManager.addHotKey("shortcutNext", this.shortcutNext, (event) => {
+      if (this.recentRadios.length < 2) return;
+      let next_radio = this.recentRadios[this.recent_number - 1];
+      this.stop_mpv_radio(false);
+      this.start_mpv_radio(next_radio);
+    });
+    keybindingManager.addHotKey("shortcutPrevious", this.shortcutPrevious, (event) => {
+      if (this.recentRadios.length < 2) return;
+      let prev_radio = this.recentRadios[1];
+      this.stop_mpv_radio(false);
+      this.start_mpv_radio(prev_radio);
+    });
+
   },
 
   on_rec_path_changed: function() {
@@ -1197,7 +1216,6 @@ WebRadioReceiverAndRecorder.prototype = {
           recording_path !== "file://"+RADIO30_MUSIC_DIR) {
       RADIO30_MUSIC_DIR = recording_path.slice("file://".length, recording_path.length);
       this.rec_folder = "file://" + RADIO30_MUSIC_DIR;
-      log("Changes was made!!!");
     }
     log("RADIO30_MUSIC_DIR: "+RADIO30_MUSIC_DIR);
     log("this.rec_folder: "+this.rec_folder);
@@ -3306,6 +3324,9 @@ WebRadioReceiverAndRecorder.prototype = {
     keybindingManager.removeHotKey("shortcutVolUp");
     keybindingManager.removeHotKey("shortcutVolDown");
     keybindingManager.removeHotKey("shortcutVolCut");
+    keybindingManager.removeHotKey("shortcutOnOff");
+    keybindingManager.removeHotKey("shortcutNext");
+    keybindingManager.removeHotKey("shortcutPrevious");
 
     // Finalize settings:
     this.settings.finalize();
