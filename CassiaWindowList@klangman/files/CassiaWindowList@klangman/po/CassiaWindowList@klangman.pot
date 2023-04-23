@@ -1,0 +1,1029 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-23 18:14-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 4.0/applet.js:1917
+msgid "Applet Preferences"
+msgstr ""
+
+#: 4.0/applet.js:1921
+msgid "About..."
+msgstr ""
+
+#: 4.0/applet.js:1925
+msgid "Configure..."
+msgstr ""
+
+#: 4.0/applet.js:1929
+#, javascript-format
+msgid "Remove '%s'"
+msgstr ""
+
+#: 4.0/applet.js:1931
+msgid "Do you really want to remove this instance of CassiaWindowList?"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#: 4.0/applet.js:1940
+msgid "Open new window"
+msgstr ""
+
+#: 4.0/applet.js:1946
+msgid "Pin to this workspace"
+msgstr ""
+
+#: 4.0/applet.js:1962
+msgid "Pin to other workspaces"
+msgstr ""
+
+#: 4.0/applet.js:2000 4.0/applet.js:2173
+msgid "Add new Hotkey for"
+msgstr ""
+
+#: 4.0/applet.js:2014
+msgid "Recent files"
+msgstr ""
+
+#: 4.0/applet.js:2038
+msgid "Places"
+msgstr ""
+
+#: 4.0/applet.js:2080
+msgid "Only on this workspace"
+msgstr ""
+
+#: 4.0/applet.js:2082
+msgid "Visible on all workspaces"
+msgstr ""
+
+#: 4.0/applet.js:2083
+msgid "Move to another workspace"
+msgstr ""
+
+#: 4.0/applet.js:2102
+msgid "Move to another monitor"
+msgstr ""
+
+#: 4.0/applet.js:2110
+msgid "Monitor"
+msgstr ""
+
+#: 4.0/applet.js:2138
+msgid "unassigned"
+msgstr ""
+
+#: 4.0/applet.js:2149 4.0/applet.js:2170
+msgid "Assign window to a hotkey"
+msgstr ""
+
+#: 4.0/applet.js:2193
+msgid "Change application label contents"
+msgstr ""
+
+#: 4.0/applet.js:2196
+msgid "Remove custom setting"
+msgstr ""
+
+#: 4.0/applet.js:2203
+msgid "Use window title"
+msgstr ""
+
+#: 4.0/applet.js:2210
+msgid "Use application name"
+msgstr ""
+
+#: 4.0/applet.js:2217
+msgid "No label"
+msgstr ""
+
+#: 4.0/applet.js:2228
+msgid "Ungroup windows"
+msgstr ""
+
+#: 4.0/applet.js:2239
+msgid "Group windows"
+msgstr ""
+
+#: 4.0/applet.js:2249
+msgid "Automatic grouping/ungrouping"
+msgstr ""
+
+#: 4.0/applet.js:2278
+msgid "Restore"
+msgstr ""
+
+#: 4.0/applet.js:2282
+msgid "Minimize"
+msgstr ""
+
+#: 4.0/applet.js:2288
+msgid "Unmaximize"
+msgstr ""
+
+#: 4.0/applet.js:2295
+msgid "Close others"
+msgstr ""
+
+#: 4.0/applet.js:2306
+msgid "Close all"
+msgstr ""
+
+#: 4.0/applet.js:2315
+msgid "Close"
+msgstr ""
+
+#: SetupWizard.py:162
+msgid "Exit"
+msgstr ""
+
+#: SetupWizard.py:184
+msgid "Next"
+msgstr ""
+
+#: SetupWizard.py:243
+msgid "Backup file already exist. Do you want to overwrite it?"
+msgstr ""
+
+#. metadata.json->name
+msgid "Cassia Window List"
+msgstr ""
+
+#. metadata.json->description
+msgid "A window list based on CobiWindowList with some additional features"
+msgstr ""
+
+#. 4.0->settings-schema.json->caption-page->title
+msgid "Labels"
+msgstr ""
+
+#. 4.0->settings-schema.json->general-page->title
+msgid "General"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-page->title
+msgid "Thumbnails"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-page->title
+msgid "Hotkeys"
+msgstr ""
+
+#. 4.0->settings-schema.json->advanced-page->title
+msgid "Advanced"
+msgstr ""
+
+#. 4.0->settings-schema.json->caption-settings->title
+msgid "Window list button label settings"
+msgstr ""
+
+#. 4.0->settings-schema.json->caption-number-settings->title
+msgid "Application groups number label settings"
+msgstr ""
+
+#. 4.0->settings-schema.json->general-settings->title
+msgid "General window list settings"
+msgstr ""
+
+#. 4.0->settings-schema.json->general-mouse->title
+msgid "Window list mouse settings"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-settings->title
+msgid "Thumbnails menu settings"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-mouse-section->title
+msgid "Thumbnails menu mouse settings"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-settings->title
+msgid "Hotkey settings"
+msgstr ""
+
+#. 4.0->settings-schema.json->adv-mouse-settings->title
+#. 4.0->settings-schema.json->adv-mouse-list->description
+msgid "Ctrl/Shift + mouse button actions"
+msgstr ""
+
+#. 4.0->settings-schema.json->caption-type->options
+msgid "Application name"
+msgstr ""
+
+#. 4.0->settings-schema.json->caption-type->options
+msgid "Window title"
+msgstr ""
+
+#. 4.0->settings-schema.json->caption-type->description
+msgid "Label contents"
+msgstr ""
+
+#. 4.0->settings-schema.json->caption-type->tooltip
+msgid "What the content of the label will be"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 4.0->settings-schema.json->display-number->options
+msgid "Never"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 4.0->settings-schema.json->display-number->options
+msgid "Always"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for-pined->options
+msgid "Focused"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-caption-for->options
+msgid "One per application pool"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-caption-for->description
+msgid "Display labels for generic window list buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-caption-for->tooltip
+msgid ""
+"Never: No windows get labels\n"
+"Always: All windows get labels\n"
+"Focused: The window with focus will have a label\n"
+"One per application pool: Only one label for a set of adjacent application "
+"windows"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-caption-for-pined->options
+msgid "Running"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-caption-for-pined->description
+msgid "Display labels for pinned buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-caption-for-pined->tooltip
+msgid ""
+"Never: No pinned windows will have a label\n"
+"Always: All pinned windows will have labels\n"
+"Running: Only pinned window that are running will have a label\n"
+"Focused: Only the pinned window with focus will have a label"
+msgstr ""
+
+#. 4.0->settings-schema.json->hide-caption-for-minimized->description
+msgid "Hide labels for minimized buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->hide-caption-for-minimized->tooltip
+msgid ""
+"For groups/pools the label will still show unless all application windows "
+"are minimized"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-indicators->options
+msgid "None"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-indicators->options
+msgid "Minimized windows"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-indicators->options
+msgid "Pinned applications"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-indicators->options
+msgid "Minimized and pinned"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-indicators->options
+#. 4.0->settings-schema.json->group-windows->options
+msgid "Automatic"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-indicators->description
+msgid "Display status indicators"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-indicators->tooltip
+msgid ""
+"Choose if the minimized and the pinned indicator characters will be "
+"prepended to button label text. Buttons without a text label will not "
+"reserve as much space.\n"
+"Automatic: The minimized and pinned indicators will only show when space is "
+"not constrained."
+msgstr ""
+
+#. 4.0->settings-schema.json->trailing-pinned-behaviour->description
+msgid "Add new window buttons ahead of trailing pinned buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->trailing-pinned-behaviour->tooltip
+msgid ""
+"When enabled, new windows will be added to the left of any pinned buttons "
+"currently placed on the right of the window list, effectively this allows "
+"you to keep pinned buttons at the end of the window list"
+msgstr ""
+
+#. 4.0->settings-schema.json->label-width->units
+msgid "pixels"
+msgstr ""
+
+#. 4.0->settings-schema.json->label-width->description
+msgid "Label width"
+msgstr ""
+
+#. 4.0->settings-schema.json->label-width->tooltip
+msgid "This defines the width of the label section of a window list button"
+msgstr ""
+
+#. 4.0->settings-schema.json->label-animation->description
+msgid "Animate label"
+msgstr ""
+
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr ""
+
+#. 4.0->settings-schema.json->label-animation-time->description
+msgid "Label animation time"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-number->options
+msgid "2 or more windows"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-number->description
+msgid "Display number"
+msgstr ""
+
+#. 4.0->settings-schema.json->number-style->options
+msgid "Icon overlay"
+msgstr ""
+
+#. 4.0->settings-schema.json->number-style->options
+msgid "Label prepend"
+msgstr ""
+
+#. 4.0->settings-schema.json->number-style->description
+msgid "Number style"
+msgstr ""
+
+#. 4.0->settings-schema.json->number-style->tooltip
+msgid ""
+"Controls how the number of windows in a grouped button is presented. When on "
+"a vertical panel, the \"label prepend\" option is not possible so \"icon "
+"overlay\" will be used instead"
+msgstr ""
+
+#. 4.0->settings-schema.json->group-windows->options
+msgid "Grouped"
+msgstr ""
+
+#. 4.0->settings-schema.json->group-windows->options
+msgid "Pooled"
+msgstr ""
+
+#. 4.0->settings-schema.json->group-windows->options
+msgid "One to one"
+msgstr ""
+
+#. 4.0->settings-schema.json->group-windows->options
+msgid "Launcher"
+msgstr ""
+
+#. 4.0->settings-schema.json->group-windows->description
+msgid "Window list behavior style"
+msgstr ""
+
+#. 4.0->settings-schema.json->group-windows->tooltip
+msgid ""
+"Grouped: All windows for an application are managed by one button,\n"
+"Pooled: All window list buttons for an application are pooled side by side,\n"
+"Automatic: Windows are pooled, and then grouped when space is limited,\n"
+"One to one: Each window gets their own button with no forced ordering,\n"
+"Launcher: Only pinned button are shown, behaves like a panel launcher."
+msgstr ""
+
+#. 4.0->settings-schema.json->display-pinned->description
+msgid "Allow pinning of window list buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->description
+msgid "Only show windows on the same monitor"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->tooltip
+msgid ""
+"If enabled, this applet instance only manages windows\n"
+"that are displayed on the same monitor"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-tooltips->description
+msgid "Show tooltips for window list buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-tooltips->tooltip
+msgid ""
+"Enable to show tooltips using window title or application name when hovering "
+"over window list buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->hide-panel-apps->description
+msgid ""
+"Hide window buttons of pinned buttons on other CassiaWindowList instances"
+msgstr ""
+
+#. 4.0->settings-schema.json->hide-panel-apps->tooltip
+msgid ""
+"When enabled, windows for applications with pinned buttons on other "
+"instances of the CassiaWindowList applet will not show up in this window list"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-show-on-hover->description
+msgid "Show on hover"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-show-on-hover->tooltip
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"hovering"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-previews->description
+msgid "Show window thumbnails in the popup window list menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->show-previews->tooltip
+msgid ""
+"If enabled, the popup menu will show window thumbnails,\n"
+"otherwise the menu will only show window titles\n"
+"(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr ""
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Extra large"
+msgstr ""
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Large"
+msgstr ""
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Medium"
+msgstr ""
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Small"
+msgstr ""
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+msgid "Extra small"
+msgstr ""
+
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->description
+msgid "Default thumbnail window size"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-timeout-show->description
+msgid "Hover time before showing menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-timeout-show->tooltip
+msgid ""
+"The waiting time before the thumbnail menu appears when hovering over a "
+"button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-timeout-hide->description
+msgid "Time before closing after pointer leaves the menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-timeout-hide->tooltip
+msgid ""
+"The waiting time for the thumbnail menu to close when leaving a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+msgid "Close thumbnail menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Close window"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Minimize/Restore"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Maximize/Restore"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Group/Ungroup windows"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to workspace 1"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to workspace 2"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to workspace 3"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to workspace 4"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Visible on this/all workspaces"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to monitor 1"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to monitor 2"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to monitor 3"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to monitor 4"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to current/next monitor"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Do nothing"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->description
+msgid "Thumbnail window middle button action"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-back-click->description
+msgid "Thumbnail window back button action"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-forward-click->description
+msgid "Thumbnail window forward button action"
+msgstr ""
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+msgid "Restore/Minimize most recent window"
+msgstr ""
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+msgid "Restore then cycle windows"
+msgstr ""
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+msgid "Show thumbnail menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->description
+msgid "Left button action for grouped buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->tooltip
+msgid ""
+"Action taken when using the left mouse button on a window list entry for a "
+"group of windows"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Thumbnail menu toggle"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Thumbnail menu hold"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Restore most recent application window"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->description
+msgid "Middle button action"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn2->tooltip
+msgid "Action taken when using the middle mouse button on window list entries"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn8->description
+msgid "Back button action"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn8->tooltip
+msgid "Action taken when using the back mouse button on window list entries"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn9->description
+msgid "Forward button action"
+msgstr ""
+
+#. 4.0->settings-schema.json->mouse-action-btn9->tooltip
+msgid "Action taken when using the forward mouse button on window list entries"
+msgstr ""
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+msgid "Off"
+msgstr ""
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+msgid "On (temporary)"
+msgstr ""
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+msgid "On (global default)"
+msgstr ""
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+msgid "On (application default)"
+msgstr ""
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->description
+msgid "Adjust the thumbnail window sizes using the scroll-wheel"
+msgstr ""
+
+#. 4.0->settings-schema.json->wheel-adjusts-preview-size->tooltip
+msgid ""
+"If enabled, the size of thumbnail windows will respond to the mouse scroll-"
+"wheel. The new size can have a temporary effect or persist on a global or "
+"per application basis"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-bindings->description
+msgid "Hotkey binding available for assignment to a window"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 4.0->settings-schema.json->adv-mouse-list->columns->title
+msgid "Enabled"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-bindings->columns->title
+msgid "Cycle application windows"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-bindings->columns->title
+msgid "Key sequence"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-bindings->columns->title
+msgid "Description"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-bindings->tooltip
+msgid ""
+"Define a list of hotkeys used to bring to the foreground specific windows."
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-minimize->description
+msgid "Minimize window when hotkey target is already in focus"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-minimize->tooltip
+msgid ""
+"If enabled and application cycling is not enabled or there is only one "
+"window for the application, windows will be minimized if the window is "
+"already in focus"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-new->description
+msgid "Open a new window when the application is not running"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-new->tooltip
+msgid ""
+"Start a new window if no window is attached to a hotkey and the hotkey "
+"description is an exact match for the application name of a pinned button or "
+"a desktop file name"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-help->description
+msgid ""
+"Hotkeys can be assigned to a window in two ways:\n"
+"1. Manual:  Use the \"Assign window to a hotkey\" item in a button context "
+"menu.\n"
+"2. Automatic:  Enter a \"Description\" matching an application name or "
+"desktop file. For example: \"Google Chrome\" or \"firefox.desktop\"\n"
+"\n"
+"Note: 1) If a hotkey is not working, it's possible that a key combination is "
+"already assigned elsewhere. 2) If you remove or rearrange any hotkeys, "
+"manual window assignments may need to be reassigned"
+msgstr ""
+
+#. 4.0->settings-schema.json->adv-mouse-list->columns->title
+msgid "Key and mouse button"
+msgstr ""
+
+#. 4.0->settings-schema.json->adv-mouse-list->columns->title
+msgid "Mouse click context"
+msgstr ""
+
+#. 4.0->settings-schema.json->adv-mouse-list->columns->title
+msgid "Action to perform"
+msgstr ""
+
+#. 4.0->settings-schema.json->adv-mouse-list->tooltip
+msgid ""
+"Define a set of mouse button actions when the Ctrl or Shift keys are pressed."
+msgstr ""
+
+#. 4.0->settings-schema.json->adv-mouse-help->description
+msgid ""
+"Note: The above list contents are frequently incorrectly displayed due to "
+"what I suspect is a Cinnamon bug. The values displayed in the edit dialog "
+"box are the correct values and the ones that will take effect. I will be "
+"looking into the cause of this issue at some point."
+msgstr ""
+
+#. 4.0->settings-schema.json->backup-file-name->description
+msgid "Settings backup name"
+msgstr ""
+
+#. 4.0->settings-schema.json->backup-file-name->tooltip
+msgid ""
+"If a name is entered here, the configuration of this applet instance will be "
+"backed up under that name. Backups will be listed in the Setup Wizard "
+"restore page when adding a new instance of CassiaWindowList to a panel."
+msgstr ""
+
+#: SetupWizard.ui:7
+msgid "CassiaWindowList Basic Setup Wizard"
+msgstr ""
+
+#: SetupWizard.ui:78
+msgid "Welcome to CassiaWindowList"
+msgstr ""
+
+#: SetupWizard.ui:95
+msgid "How would you like this applet instance to behave?"
+msgstr ""
+
+#: SetupWizard.ui:105
+msgid ""
+"Window List (Task bar)\n"
+"Panel buttons for all running windows."
+msgstr ""
+
+#: SetupWizard.ui:125
+msgid ""
+"Panel Launcher (Quick launcher)\n"
+"Panel button only appear when you add items\n"
+"to the panel, no labels are shown, only icons."
+msgstr ""
+
+#: SetupWizard.ui:146
+msgid ""
+"Restore configuration from an automatic\n"
+"backup"
+msgstr ""
+
+#: SetupWizard.ui:178
+msgid "How do you want your Window List to operate?"
+msgstr ""
+
+#: SetupWizard.ui:192
+msgid ""
+"Basic  -  Quick window access\n"
+"Every window gets it's own window list button.\n"
+"Button labels are window titles."
+msgstr ""
+
+#: SetupWizard.ui:213
+msgid ""
+"Grouping  -  Very compact\n"
+"One window list button per application.\n"
+"Thumbnail menus to select specific window.\n"
+"Button labels are window titles."
+msgstr ""
+
+#: SetupWizard.ui:236
+msgid ""
+"Pooling  -  Quick access & compact\n"
+"Every window gets it's own window list button.\n"
+"Application buttons are pooled togeather.\n"
+"One button label per application pool.\n"
+"Button labels are application names."
+msgstr ""
+
+#: SetupWizard.ui:273
+msgid "Just a few more options to consider"
+msgstr ""
+
+#: SetupWizard.ui:287
+msgid "No Labels (icons only)"
+msgstr ""
+
+#: SetupWizard.ui:305
+msgid "No minimized window indicator character"
+msgstr ""
+
+#: SetupWizard.ui:323
+msgid "No Thumbnail window menu on mouse hover"
+msgstr ""
+
+#: SetupWizard.ui:354
+msgid "Notes about the Panel Launcher behaviour"
+msgstr ""
+
+#: SetupWizard.ui:370
+msgid ""
+"Unlike most Panel Launcher applets, this launcher\n"
+"keeps tack of running windows and will activate\n"
+"existing windows rather then launching new ones.\n"
+"\n"
+"You can launch additional windows by clicking the\n"
+"'Back' mouse button or Ctrl+Left mouse button \n"
+"(by default).\n"
+"\n"
+"It also uses Thumbnail menus to show a list of all\n"
+"open windows. In general it works like \"pinned\"\n"
+"buttons on a window list rather then a basic\n"
+"launcher"
+msgstr ""
+
+#: SetupWizard.ui:408
+msgid "All done!"
+msgstr ""
+
+#: SetupWizard.ui:424
+msgid ""
+"There are many more options and features to explorer\n"
+"in the applet configurator and the window list button\n"
+"context menu, for example:\n"
+"\n"
+" • Hot-keys to launch / activate a specific window.\n"
+" • Customizable mouse button actions.\n"
+" • Customizable Ctrl/Shift + mouse button actions.\n"
+" • Application specific grouping and label settings.\n"
+" • Thumbnail window zooming using the scroll-wheel.\n"
+" • Automatic application grouping when space is limited.\n"
+" • And much more."
+msgstr ""
+
+#: SetupWizard.ui:445
+msgid "Exit and launch the applet configurator now"
+msgstr ""
+
+#: SetupWizard.ui:474
+msgid "Select a backup configuration to restore?"
+msgstr ""
+
+#: SetupWizard.ui:517
+msgid "Configuration Backup?"
+msgstr ""
+
+#: SetupWizard.ui:533
+msgid ""
+"If you would like to maintain an automatic backup\n"
+"of this applet configuration then select or enter a\n"
+"backup file description below. All current and future\n"
+"configuration changes will be saved to this backup:"
+msgstr ""
+
+#: SetupWizard.ui:553
+msgid "MainWindowList"
+msgstr ""
+
+#: SetupWizard.ui:554
+msgid "MainPanelLauncher"
+msgstr ""
+
+#: SetupWizard.ui:555
+msgid "Monitor1WindowList"
+msgstr ""
+
+#: SetupWizard.ui:556
+msgid "Monitor2WindowList"
+msgstr ""
+
+#: SetupWizard.ui:557
+msgid "Monitor1PanelLauncher"
+msgstr ""
+
+#: SetupWizard.ui:558
+msgid "Monitor2PanelLauncher"
+msgstr ""
