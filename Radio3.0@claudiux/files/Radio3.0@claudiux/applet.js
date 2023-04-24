@@ -207,6 +207,14 @@ const {
   //~ Shoutcast
 //~ } = require("./lib/shoutcast");
 
+function _get_system_natural_scroll() {
+  let _SETTINGS_SCHEMA='org.cinnamon.desktop.peripherals.mouse';
+  let _SETTINGS_KEY = 'natural-scroll';
+  let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+  let ret = _interface_settings.get_boolean(_SETTINGS_KEY);
+  return ret
+}
+
 function getImageAtScale(imageFileName, width, height) {
   let pixBuf = Pixbuf.new_from_file_at_size(imageFileName, width, height);
   let image = new Image();
@@ -3148,14 +3156,15 @@ WebRadioReceiverAndRecorder.prototype = {
 
   _onScrollEvent: function(actor, event) {
     //log("_onScrollEvent");
+    let invert = _get_system_natural_scroll();
     if (!this.context_menu_item_slider) {
       let direction = event.get_scroll_direction();
       let step = this.volume_step;
       let percentage = this.percentage;
-      if (direction == ScrollDirection.DOWN) {
+      if ((direction == ScrollDirection.DOWN && !invert) || (direction == ScrollDirection.UP && invert)) {
         this.percentage = Math.max(0, percentage - step);
       }
-      else if (direction == ScrollDirection.UP) {
+      else if ((direction == ScrollDirection.UP && !invert) || (direction == ScrollDirection.DOWN && invert)) {
         this.percentage = Math.min(100, percentage + step);
       }
       this.change_volume_in_radio_tooltip();
