@@ -210,7 +210,7 @@ const {
 function _get_system_natural_scroll() {
   let _SETTINGS_SCHEMA='org.cinnamon.desktop.peripherals.mouse';
   let _SETTINGS_KEY = 'natural-scroll';
-  let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+  let _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
   let ret = _interface_settings.get_boolean(_SETTINGS_KEY);
   return ret
 }
