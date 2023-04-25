@@ -580,9 +580,8 @@ msgid "Web search suggestions"
 msgstr "网络搜索建议"
 
 msgid ""
-"With web search option, also show search suggestions. (Note: This uses "
-"Google's search API)"
-msgstr "显示带有网络搜索建议的选项（注意：这需要使用谷歌搜索 API）"
+"With web search option, also show search suggestions. (Note: Search suggestions are provided by DuckDuckGo)"
+msgstr "显示带有网络搜索建议的选项（Note: Search suggestions are provided by DuckDuckGo）"
 
 msgid "Search home folder"
 msgstr "搜索主目录"

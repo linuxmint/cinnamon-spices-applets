@@ -577,8 +577,7 @@ msgid "Web search suggestions"
 msgstr ""
 
 msgid ""
-"With web search option, also show search suggestions. (Note: This uses "
-"Google's search API)"
+"With web search option, also show search suggestions. (Note: Search suggestions are provided by DuckDuckGo)"
 msgstr ""
 
 msgid "Search home folder"

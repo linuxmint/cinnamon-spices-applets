@@ -586,11 +586,10 @@ msgid "Web search suggestions"
 msgstr "Webbsökförslag"
 
 msgid ""
-"With web search option, also show search suggestions. (Note: This uses "
-"Google's search API)"
+"With web search option, also show search suggestions. (Note: Search suggestions are provided by DuckDuckGo)"
 msgstr ""
 "Visa även sökförslag, med webbsökningsalternativen. (OBS! Detta använder "
-"Googles sök-API)"
+"DuckDuckGos sök-API)"
 
 msgid "Search home folder"
 msgstr "Sök i hemmappen"

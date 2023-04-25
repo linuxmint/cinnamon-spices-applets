@@ -590,9 +590,8 @@ msgid "Web search suggestions"
 msgstr "Vorschläge der Web-Suche"
 
 msgid ""
-"With web search option, also show search suggestions. (Note: This uses "
-"Google's search API)"
-msgstr "Bei der Web-Suche auch Vorschläge der Google-Suchmaschine anzeigen"
+"With web search option, also show search suggestions. (Note: Search suggestions are provided by DuckDuckGo)"
+msgstr "Bei der Web-Suche auch Vorschläge der DuckDuckGo-Suchmaschine anzeigen"
 
 msgid "Search home folder"
 msgstr "Im persönlichen Ordner suchen"

@@ -589,11 +589,10 @@ msgid "Web search suggestions"
 msgstr "Keresés a világhálón javaslatok"
 
 msgid ""
-"With web search option, also show search suggestions. (Note: This uses "
-"Google's search API)"
+"With web search option, also show search suggestions. (Note: Search suggestions are provided by DuckDuckGo)"
 msgstr ""
 "Keresés a világhálón megjeleníti a keresési javaslatokat. (Megjegyzés: A "
-"Google keresési API-t használja)"
+"DuckDuckGo keresési API-t használja)"
 
 msgid "Search home folder"
 msgstr "Keresés a Saját mappában"
