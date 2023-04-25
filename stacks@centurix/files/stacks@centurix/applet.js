@@ -247,15 +247,8 @@ Stacks.prototype = {
 		this._msgsrc.notify(notification);
 	},
 
-	openBrowser: function(url) {
-		let matches = (new RegExp('\\("(.*?)"\\)')).exec(url);
-		if (matches && matches.length > 0) {
-			Main.Util.spawnCommandLine("xdg-open http://" + matches[1]);
-		}
-	},
-
 	openDockerComposeInstructions: function() {
-		this.openBrowser("https://docs.docker.com/compose/install/");
+		Main.Util.spawnCommandLine("xdg-open https://docs.docker.com/compose/install/");
 	},
 
 	dockerComposeToggle: function(event) {
