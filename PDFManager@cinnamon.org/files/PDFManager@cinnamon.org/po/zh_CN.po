@@ -2,122 +2,126 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-30 21:18+0100\n"
+"POT-Creation-Date: 2021-01-13 00:55+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Mickael Albertus <mickael.albertus@gmail.com>\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: applet.js:51
 msgid "Manage your PDF"
-msgstr ""
+msgstr "管理您的 PDF"
 
-#: applet.js:71
+#: applet.js:70
 msgid "Merge PDF"
-msgstr "合并PDF"
+msgstr "合并 PDF"
 
-#: applet.js:76 pdf-manager.py:153
+#: applet.js:75 pdf-manager.py:157
 msgid "Extract PDF"
-msgstr "提取PDF"
+msgstr "提取 PDF"
 
-#: applet.js:83
+#: applet.js:82
 msgid "Reduce size of PDF"
-msgstr "减小PDF的大小"
+msgstr "减小 PDF 的大小"
 
-#: applet.js:90
+#: applet.js:89
 msgid "Rotate left PDF"
-msgstr "向左旋转PDF"
+msgstr "向左旋转 PDF"
 
-#: applet.js:95
+#: applet.js:94
 msgid "Rotate right PDF"
-msgstr "向右旋转PDF"
+msgstr "向右旋转 PDF"
 
-#: applet.js:100
+#: applet.js:99
 msgid "Flip vertically PDF"
-msgstr "垂直翻转PDF"
+msgstr "垂直翻转 PDF"
 
-#: applet.js:105
-msgid "Install PDFManager's tools"
-msgstr "安装PDF管理器的工具"
-
-#: applet.js:115
+#: applet.js:107
 msgid "Open Document Viewer"
 msgstr "打开文档查看器"
 
-#: applet.js:122
+#: applet.js:114
 msgid "Open Evince"
-msgstr ""
+msgstr "打开 Evince"
 
-#: applet.js:129
+#: applet.js:121
 msgid "Open PDF Mod"
-msgstr "打开PDF模组"
+msgstr "打开 PDF 模组"
 
-#: applet.js:136
+#: applet.js:128
 msgid "Open PDF Editor"
-msgstr "打开PDF编辑器"
+msgstr "打开 PDF 编辑器"
 
-#: pdf-manager.py:28
+#: pdf-manager.py:33
 msgid "Installation of PDF Toolkit necessary"
-msgstr ""
+msgstr "安装必要的 PDF 工具包"
 
-#: pdf-manager.py:30
+#: pdf-manager.py:35
 msgid ""
 "Do you want to install PDF toolkit? Your operations will be performed after "
 "the installation."
-msgstr ""
+msgstr "您想安装 PDF 工具包吗？您的操作将在安装后执行。"
 
-#: pdf-manager.py:32
+#: pdf-manager.py:37
 msgid ""
 "Installation failed. Do you want to try again? Your operations will be "
 "performed after the installation."
-msgstr ""
+msgstr "安装失败。您想再试一次吗？您的操作将在安装后执行。"
 
-#: pdf-manager.py:42 pdf-manager.py:84 pdf-manager.py:137 pdf-manager.py:198
-#: pdf-manager.py:218 pdf-manager.py:239
+#: pdf-manager.py:47 pdf-manager.py:88 pdf-manager.py:140 pdf-manager.py:205
+#: pdf-manager.py:225 pdf-manager.py:246
 msgid "Select your PDF..."
-msgstr "选择您的PDF..."
+msgstr "选择您的 PDF..."
 
-#: pdf-manager.py:51 pdf-manager.py:93 pdf-manager.py:145 pdf-manager.py:207
-#: pdf-manager.py:227 pdf-manager.py:248
+#: pdf-manager.py:55 pdf-manager.py:96 pdf-manager.py:147 pdf-manager.py:213
+#: pdf-manager.py:233 pdf-manager.py:254
 msgid "PDF Files"
-msgstr "PDF文件"
+msgstr "PDF 文件"
 
-#: pdf-manager.py:63
+#: pdf-manager.py:67
 msgid "Reducing PDF"
-msgstr ""
+msgstr "减少 PDF"
 
-#: pdf-manager.py:65
+#: pdf-manager.py:69
 msgid "Your PDF are reducing... Don't manipulate selected files!"
-msgstr ""
+msgstr "您的 PDF 正在减少... 不要对选定的文件进行操作！"
 
-#: pdf-manager.py:103 pdf-manager.py:176
+#: pdf-manager.py:106 pdf-manager.py:184
 msgid "Save as..."
 msgstr "另存为..."
 
-#: pdf-manager.py:158
+#: pdf-manager.py:162
 msgid "Extract following pages (example: 1-10 15-17):"
-msgstr ""
+msgstr "提取以下页面 (例如：1-10 15-17)："
 
-#: pdf-manager.py:159
+#: pdf-manager.py:164
 msgid "Extract even pages"
-msgstr ""
+msgstr "提取偶数页"
 
-#: pdf-manager.py:160
+#: pdf-manager.py:166
 msgid "Extract odd pages"
-msgstr ""
+msgstr "提取奇数页"
+
+#. metadata.json->name
+msgid "PDFManager"
+msgstr "PDF 管理器"
+
+#. metadata.json->description
+msgid "A handy applet for manipulating PDF"
+msgstr "一个用于处理 PDF 的便捷小程序"
+
+#~ msgid "Install PDFManager's tools"
+#~ msgstr "安装PDF管理器的工具"
 
 #~ msgid "Click here to manage your PDF"
 #~ msgstr "点击此处管理您的PDF"
 
 #~ msgid "Manager of PDF"
-#~ msgstr "PDF管理器"
-
-#~ msgid "PDFManager"
 #~ msgstr "PDF管理器"
 
 #~ msgid "Pages to extract"

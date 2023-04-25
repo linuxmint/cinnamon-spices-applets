@@ -15,6 +15,8 @@ export class VisualCrossing extends BaseProvider {
 	readonly website: string = "https://weather.visualcrossing.com/";
 	readonly needsApiKey: boolean = true;
 	public readonly remainingCalls: number | null = null;
+	public readonly supportHourlyPrecipChance = true;
+	public readonly supportHourlyPrecipVolume = true;
 
 	private url: string = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
 	private params: HTTPParams = {

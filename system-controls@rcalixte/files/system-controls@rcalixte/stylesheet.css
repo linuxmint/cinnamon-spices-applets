@@ -1,0 +1,13 @@
+.controls-box {
+     padding: .4em 1.75em;
+     spacing: .4em;
+}
+ .controls-icon {
+     border-radius: .25em;
+     border: 2px solid #a5a5a5;
+}
+ .controls-label {
+     color: #fff;
+     font-size: 1em;
+     margin: .4em;
+}

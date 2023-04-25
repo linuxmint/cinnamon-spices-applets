@@ -1,0 +1,6 @@
+mpv --no-video --input-ipc-server=/tmp/mpvsocket http://95.217.68.35:8352/stream
+
+mpv --list-properties
+
+echo '{ "command": ["get_property", "media-title"] }' | socat - /tmp/mpvsocket
+echo '{ "command": ["get_property", "audio-bitrate"] }' | socat - /tmp/mpvsocket | jq ".data"

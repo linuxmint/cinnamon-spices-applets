@@ -84,6 +84,8 @@ if __name__ == "__main__":
                     item_info['pubDate'] = item['pubDate']
                 elif "published" in item:
                     item_info['pubDate'] = item['published']
+                elif "date" in item:
+                    item_info['pubDate'] = item['date']
                 else:
                     item_info['pubDate'] = None
 

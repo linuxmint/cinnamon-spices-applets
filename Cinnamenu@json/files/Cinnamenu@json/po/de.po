@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-16 02:20+0000\n"
-"PO-Revision-Date: 2022-03-23 19:56+0100\n"
+"POT-Creation-Date: 2022-09-29 19:16+0100\n"
+"PO-Revision-Date: 2022-10-11 19:30+0200\n"
 "Last-Translator: erwn16 <elmar_wein@web.de>\n"
 "Language-Team: de\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 msgid "Type to search..."
 msgstr "Suchbegriff eingeben …"
@@ -42,7 +42,7 @@ msgid "Favorite apps"
 msgstr "Bevorzugte Apps"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "Paket gir1.2-gda-5.0 für Firefox- und Midori-Lesezeichen erforderlich."
+msgstr "Paket gir1.2-gda-5.0 für Firefox- und Midori-Lesezeichen erforderlich"
 
 msgid "Clear List"
 msgstr "Liste leeren"
@@ -206,11 +206,39 @@ msgstr "In den Papierkorb verschieben"
 msgid "Error while moving file to trash:"
 msgstr "Fehler beim Verschieben der Datei in den Papierkorb:"
 
+msgid "Smileys & Emotion"
+msgstr "Smileys & Emotionen"
+
+msgid "People & Body"
+msgstr "Menschen & Gesten"
+
+msgid "Animals & Nature"
+msgstr "Tiere & Natur"
+
+msgid "Food & Drink"
+msgstr "Essen & Trinken"
+
+msgid "Travel & Places"
+msgstr "Reisen & Orte"
+
+msgid "Activities"
+msgstr "Aktivitäten"
+
+msgid "Objects"
+msgstr "Objekte"
+
+msgid "Symbols"
+msgstr "Symbole"
+
+msgid "Flags"
+msgstr "Flaggen"
+
 msgid ""
 "This menu item is not associated to any package. Do you want to remove it "
 "from the menu anyway?"
 msgstr ""
-"Dieser Menüeintrag ist keinem Paket zugeordnet. Möchten Sie ihn entfernen?"
+"Diesem Menüeintrag ist keine App, Paket oder Datei zugeordnet. Möchten Sie "
+"ihn entfernen?"
 
 msgid "The following packages will be removed:"
 msgstr "Folgende Pakete werden entfernt:"
@@ -266,7 +294,7 @@ msgid "Searching: "
 msgstr "Suche: "
 
 msgid "Error: insufficient permissions to read folder "
-msgstr "Fehler: unzureichende Berechtigungen zum Lesen des Ordners "
+msgstr "Fehler: keine Berechtigungen zum Lesen des Ordners "
 
 msgid "Search Completed"
 msgstr "Suche abgeschlossen"
@@ -285,7 +313,7 @@ msgid ""
 "search."
 msgstr ""
 "Ein flexibles Menü mit zahlreichen Formatierungsoptionen, Datei-Browser, "
-"Zugang zu Suchmaschinen sowie Suche unter ähnlichen Begriffen."
+"Zugang zu Suchmaschinen und Emoji-Suche."
 
 msgid "Behavior"
 msgstr "Verhalten"
@@ -336,13 +364,13 @@ msgid "Text to show beside the panel icon"
 msgstr "Text neben dem Symbol von Cinnamenu"
 
 msgid "Category icon size (pixels)"
-msgstr "Symbolgröße für die Kategorien (Pixel)"
+msgstr "Symbolgröße (Pixel) für die Kategorien"
 
 msgid "Applications list icon size (pixels)"
-msgstr "Symbolgröße bei Anzeige der Apps in einer Liste (Pixel)"
+msgstr "Symbolgröße (Pixel) bei Anzeige der Apps in einer Liste"
 
 msgid "Applications grid icon size (pixels)"
-msgstr "Symbolgröße bei Anzeige der Apps in einem Raster (Pixel)"
+msgstr "Symbolgröße (Pixel) bei Anzeige der Apps in einem Raster"
 
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Tastenkombination zum Öffnen und Schließen des Menüs"
@@ -390,7 +418,7 @@ msgstr ""
 "anzuzeigen."
 
 msgid "Enable searching of open windows"
-msgstr "Suche in offenen Fenstern ermöglichen"
+msgstr "Suche nach offenen Fenstern ermöglichen"
 
 msgid "Enable search providers"
 msgstr "Suchmaschinen anzeigen"
@@ -417,7 +445,7 @@ msgid "columns"
 msgstr "Spalten"
 
 msgid "Number of columns in apps grid"
-msgstr "Anzahl an Spalten bei Anzeige der Apps in einem Raster"
+msgstr "Spaltenanzahl bei Anzeige der Apps in einem Raster"
 
 msgid "Show bookmarks and places"
 msgstr "Kategorie »Orte« anzeigen"
@@ -452,21 +480,6 @@ msgstr "Art der Anzeige für App-Symbole"
 msgid "View applications as list or grid"
 msgstr "App-Symbole in einer Liste oder einem Raster anzeigen"
 
-msgid "Application description placement"
-msgstr "Platzierung der App-Beschreibungen"
-
-msgid "Tooltips"
-msgstr "Tool-Tipps"
-
-msgid "Under titles"
-msgstr "Unterm App-Namen"
-
-msgid "None"
-msgstr "Keine"
-
-msgid "Choose where to show application descriptions"
-msgstr "Festlegen, wo die Beschreibungen der Apps angezeigt werden"
-
 msgid "Sidebar location"
 msgstr "Anordnung der Seitenleiste"
 
@@ -487,18 +500,42 @@ msgstr ""
 "Position, an der die Sitzungsschaltflächen (Bildschirm sperren/Abmelden/"
 "Beenden) angezeigt werden"
 
+msgid "Show favorites on sidebar"
+msgstr "Favoriten in der Seitenleiste anzeigen"
+
+msgid "None"
+msgstr "Keine"
+
+msgid "Apps only"
+msgstr "Apps"
+
+msgid "Files only"
+msgstr "Dateien"
+
+msgid "Apps and files"
+msgstr "Apps und Dateien"
+
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Favoriten in der Seitenleiste anzeigen"
+
+msgid "Application description placement"
+msgstr "Platzierung der App-Beschreibungen"
+
+msgid "Tooltips"
+msgstr "Tool-Tipps"
+
+msgid "Under titles"
+msgstr "Unterm App-Namen"
+
+msgid "Choose where to show application descriptions"
+msgstr "Festlegen, wo die Beschreibungen der Apps angezeigt werden"
+
 msgid ""
 "\n"
 "Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 "\n"
 "Info/Tipp: Am Menürand ziehen, um die Größe des Menüs zu ändern.\n"
-
-msgid "Show favorites on sidebar"
-msgstr "Favoriten zur Seitenleiste hinzufügen"
-
-msgid "Show your favorite app and file icons on the sidebar"
-msgstr "Favoriten in der Seitenleiste anzeigen"
 
 msgid "Show recent items"
 msgstr "Kategorie »Kürzlich« anzeigen"
@@ -519,8 +556,14 @@ msgstr "Kategorie »Persönlicher Ordner« anzeigen"
 msgid "Show home folder category in the menu"
 msgstr "Kategorie »Persönlicher Ordner« im Menü anzeigen"
 
+msgid "Show emoji category"
+msgstr "Kategorie »Emoji« anzeigen"
+
+msgid "Show emoji category in the menu"
+msgstr "Kategorie »Emoji« im Menü anzeigen"
+
 msgid "Last used category"
-msgstr "Vorherige Kategorie"
+msgstr "Zuletzt genutzte Kategorie"
 
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Automatischen Bildlauf im Bereich mit den Apps aktivieren"
@@ -542,6 +585,14 @@ msgstr "Suchmaschine für Web-Suche auswählen"
 
 msgid "Show an internet search option in search results"
 msgstr "Ergebnisse der Internet-Suche zu Suchergebnissen hinzufügen"
+
+msgid "Web search suggestions"
+msgstr "Vorschläge der Web-Suche"
+
+msgid ""
+"With web search option, also show search suggestions. (Note: This uses "
+"Google's search API)"
+msgstr "Bei der Web-Suche auch Vorschläge der Google-Suchmaschine anzeigen"
 
 msgid "Search home folder"
 msgstr "Im persönlichen Ordner suchen"

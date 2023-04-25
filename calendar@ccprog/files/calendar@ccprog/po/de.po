@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: calendar@ccprog VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-06-30 17:27+0200\n"
-"PO-Revision-Date: 2021-02-27 15:40+0100\n"
+"PO-Revision-Date: 2022-11-02 22:13+0100\n"
 "Last-Translator: Claus Colloseus <ccprog@gmx.de>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -16,11 +16,11 @@ msgstr ""
 
 #: applet.js:21
 msgid "%B %-e, %Y"
-msgstr ""
+msgstr "%B %-e, %Y"
 
 #: applet.js:22 eventView.js:26
 msgid "%A, %B %-e, %Y"
-msgstr ""
+msgstr "%A, %B %-e, %Y"
 
 #: applet.js:131
 msgid "Date and Time Settings"
@@ -237,7 +237,7 @@ msgstr "Kolumbien"
 
 #. settings-schema.json->country->options
 msgid "Croatia"
-msgstr "Kroatioen"
+msgstr "Kroatien"
 
 #. settings-schema.json->country->options
 msgid "Czech Republic"
@@ -345,7 +345,7 @@ msgstr "Peru"
 
 #. settings-schema.json->country->options
 msgid "Philippines"
-msgstr "Philippienen"
+msgstr "Philippinen"
 
 #. settings-schema.json->country->options
 msgid "Poland"
@@ -405,11 +405,11 @@ msgstr "Vereinigtes Königreich"
 
 #. settings-schema.json->country->options
 msgid "United States of America"
-msgstr "Vereinigte Staten von Amerika"
+msgstr "Vereinigte Staaten von Amerika"
 
 #. settings-schema.json->region_aus->options
 msgid "Australian Capital Territory"
-msgstr "Australian Capital Territory"
+msgstr "Australisches Hauptstadt-Territorium"
 
 #. settings-schema.json->region_aus->options
 msgid "Queensland"
@@ -417,15 +417,15 @@ msgstr "Queensland"
 
 #. settings-schema.json->region_aus->options
 msgid "New South Wales"
-msgstr "New South Wales"
+msgstr "Neu-Süd-Wales"
 
 #. settings-schema.json->region_aus->options
 msgid "Northern Territory"
-msgstr "Northern Territory"
+msgstr "Nördliches Territorium"
 
 #. settings-schema.json->region_aus->options
 msgid "South Australia"
-msgstr "South Australia"
+msgstr "Südaustralien"
 
 #. settings-schema.json->region_aus->options
 msgid "Tasmania"
@@ -437,7 +437,7 @@ msgstr "Victoria"
 
 #. settings-schema.json->region_aus->options
 msgid "Western Australia"
-msgstr "Western Australia"
+msgstr "Westaustralien"
 
 #. settings-schema.json->region_can->options
 msgid "Alberta"
@@ -477,7 +477,7 @@ msgstr "Ontario"
 
 #. settings-schema.json->region_can->options
 msgid "Prince Edward Island"
-msgstr "Prince Edward Island"
+msgstr "Prinz-Edward-Insel"
 
 #. settings-schema.json->region_can->options
 msgid "Quebec"

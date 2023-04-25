@@ -7,78 +7,149 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-26 04:16-0500\n"
-"PO-Revision-Date: 2017-04-19 12:12+0800\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2020-05-15 23:44+0200\n"
+"PO-Revision-Date: 2023-02-07 21:03+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
 
-#: applet.js:55
+#: applet.js:80 applet.js:159
+msgid "Temperature"
+msgstr "温度"
+
+#: applet.js:148
 msgid "Error"
 msgstr "错误"
 
-#: applet.js:56
+#: applet.js:149
 msgid ""
 "Run sensors-detect as root. If it doesn't help, click here to report with "
 "your sensors output!"
 msgstr ""
-"以root身份运行sensors-detect。如果没有帮助，点击这里报告您的传感器输出！"
+"请以 root 权限运行 sensors-detect。如果这不起作用，点击这里报告您的传感器"
+"输出！"
 
-#: applet.js:58
+#: applet.js:151
 msgid "Warning"
 msgstr "警告"
 
-#: applet.js:59
+#: applet.js:152
 msgid ""
 "Please install lm_sensors. If it doesn't help, click here to report with "
 "your sensors output!"
-msgstr "请安装lm_sensors。如果没有帮助，点击这里报告您的传感器输出！"
+msgstr "请安装 lm_sensors。如果这不起作用，点击这里报告您的传感器输出！"
 
-#: applet.js:62 applet.js:89
-msgid "Temperature"
-msgstr "温度"
+#: applet.js:224
+msgid "Thresholds Info"
+msgstr "阈值信息"
 
-#: applet.js:144
+#: applet.js:225
+msgid "High Temp"
+msgstr "较高温度"
+
+#: applet.js:226
+msgid "Crit. Temp"
+msgstr "危险温度"
+
+#: applet.js:237
 msgid "Critical"
-msgstr ""
+msgstr "危险"
 
-#: applet.js:146
+#: applet.js:240
 msgid "High"
-msgstr ""
+msgstr "较高"
 
-#: applet.js:156
+#: applet.js:253
 msgid "Current Temperature"
 msgstr "当前温度"
 
-#: applet.js:158
+#: applet.js:255
 msgid "Critical Temperature"
-msgstr "临界温度"
+msgstr "危险温度"
 
 #. metadata.json->name
 msgid "CPU Temperature Indicator"
-msgstr "CPU温度指示器"
+msgstr "CPU 温度指示器"
 
 #. metadata.json->description
 msgid "Shows CPU Temperature"
-msgstr "显示CPU温度"
+msgstr "显示 CPU 温度"
 
 #. settings-schema.json->use-fahrenheit->description
 msgid "Show temperature in Fahrenheit"
-msgstr ""
+msgstr "以华氏度显示温度"
 
 #. settings-schema.json->only-integer-part->description
 msgid "Use integer values for temperature"
-msgstr ""
+msgstr "使用整数值来表示温度"
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr "显示单位"
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Whether or not show the unit after the temperature value."
+msgstr "是否在温度值后显示单位。"
+
+#. settings-schema.json->show-unit-letter->description
+msgid "Show unit letter"
+msgstr "显示单位字母"
+
+#. settings-schema.json->show-unit-letter->tooltip
+msgid "Whether or not show the unit letter (C or F)."
+msgstr "是否显示温度单位字母 (C 或 F)。"
+
+#. settings-schema.json->show-label-prefix->description
+msgid "Show label prefix"
+msgstr "显示标签前缀"
+
+#. settings-schema.json->show-label-prefix->tooltip
+msgid "Whether or not to add a label before the temperature value."
+msgstr "是否在温度值前添加一个标签。"
+
+#. settings-schema.json->label-prefix->description
+msgid "Label prefix"
+msgstr "标签前缀"
+
+#. settings-schema.json->label-prefix->tooltip
+msgid "The label to be shown before the temperature value."
+msgstr "在温度值之前显示的标签。"
 
 #. settings-schema.json->interval->units
 msgid "ms"
-msgstr ""
+msgstr "毫秒"
 
 #. settings-schema.json->interval->description
 msgid "Update interval"
+msgstr "更新间隔"
+
+#. settings-schema.json->change-color->description
+msgid "Change color when the temperature becomes High or Critical"
+msgstr "当温度较高或危险时，改变颜色"
+
+#. settings-schema.json->change-color->tooltip
+msgid ""
+"Selecting this option, this applet becomes\n"
+" orange when the High Temperature Threshold is reached,\n"
+" red when the Critical Temperature Threshold is reached."
 msgstr ""
+"选择此选项，\n"
+"在达到较高温度阈值时小程序变为橙色，\n"
+"在达到危险温度阈值时小程序变为红色。"
+
+#. settings-schema.json->only-colors->description
+msgid "Only use colors to alert me"
+msgstr "只用颜色来提醒我"
+
+#. settings-schema.json->only-colors->tooltip
+msgid ""
+"Select this option to not display text alerts in horizontal panels.\n"
+"(No text alert is ever displayed on vertical panels.)"
+msgstr ""
+"选择这个选项可以不在水平面板上显示文字提示。\n"
+"(无论是否选择该选项，垂直面板上都不显示文字提示)"

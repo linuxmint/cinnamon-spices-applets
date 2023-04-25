@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### v3.0.0~20230310
+  * Rebase and update for cinnamon 5.4 (thanks to @rcalixte).
+  * Overwrite existing binding of AudioRaiseVolume and AudioLowerVolume keysym. (Fixes [issue #9919](https://github.com/linuxmint/cinnamon/issues/9919))
+
 ### v2.0.0~20200731
   * New code for Cinnamon 4.4 (Mint 19.3) and Cinnamon 4.6 (Mint 20).
   * During volume slider dragging, a tooltip containing the value of the volume percentage is shown.

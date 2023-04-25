@@ -7,27 +7,107 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-24 00:44+0200\n"
-"PO-Revision-Date: 2022-06-03 18:19+0200\n"
+"POT-Creation-Date: 2023-02-26 12:42+0100\n"
+"PO-Revision-Date: 2023-03-29 16:11+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: checkDependencies.js:279
+#. metadata.json->name
+#: applet.js:90
+msgid "Sensors Monitor"
+msgstr "Monitoraggio Sensori"
+
+#: applet.js:389 applet.js:440
+msgid "high:"
+msgstr "alto:"
+
+#: applet.js:389 applet.js:391 applet.js:440 applet.js:442 applet.js:475
+msgid "n/a"
+msgstr "n/d"
+
+#: applet.js:391 applet.js:442
+msgid "crit:"
+msgstr "crit:"
+
+#: applet.js:475
+msgid "min:"
+msgstr "min:"
+
+#: applet.js:506
+msgid "max:"
+msgstr "max:"
+
+#: applet.js:534
+msgid "No intrusion detected"
+msgstr "Nessuna intrusione rilevata"
+
+#: applet.js:534
+msgid "INTRUSION DETECTED!"
+msgstr "INTRUSIONE RILEVATA!"
+
+#: applet.js:554
+msgid "Must be configured!"
+msgstr "Deve essere configurato!"
+
+#: applet.js:818
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: applet.js:818
+msgid ":"
+msgstr ":"
+
+#. settings-schema.json->page_General->title
+#: applet.js:825
+msgid "⚙ General"
+msgstr "⚙ Generale"
+
+#: applet.js:835
+msgid "🌡 Temperature sensors"
+msgstr "🌡 Sensori di temperatura"
+
+#: applet.js:845
+msgid "🤂 Fan sensors"
+msgstr "🤂 Sensori delle ventole"
+
+#: applet.js:855
+msgid "🗲 Voltage sensors"
+msgstr "🗲 Sensori di tensione"
+
+#: applet.js:865
+msgid "⮿ Intrusion sensors"
+msgstr "⮿ Sensori di intrusione"
+
+#. settings-schema.json->xsensors->description
+#: applet.js:876
+msgid "Run xsensors"
+msgstr "Esegui xsensors"
+
+#: applet.js:887
+msgid "Reload this applet"
+msgstr "Ricarica questa applet"
+
+#: applet.js:1175
+#, javascript-format
+msgid "Are you sure you want to remove '%s'?"
+msgstr "Rimuovere '%s'?"
+
+#: lib/checkDependencies.js:281
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "L'applet %s è totalmente funzionante."
 
-#: checkDependencies.js:280
+#: lib/checkDependencies.js:282
 msgid "All dependencies are installed"
 msgstr "Tutte le dipendenze sono installate"
 
-#: checkDependencies.js:305
+#: lib/checkDependencies.js:307
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -35,93 +115,64 @@ msgstr ""
 "Sembra che manchino alcuni dei programmi necessari affinché questa applet "
 "abbia tutte le sue funzionalità."
 
-#: checkDependencies.js:306
+#: lib/checkDependencies.js:308
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Si prega di eseguire, nel terminale appena aperto, i comandi:"
 
-#: checkDependencies.js:307
+#: lib/checkDependencies.js:309
 msgid "Some dependencies are not installed!"
 msgstr "Alcune dipendenze non sono installate!"
 
-#. metadata.json->name
-#: applet.js:83
-msgid "Sensors Monitor"
-msgstr "Monitoraggio Sensori"
-
-#: applet.js:352
-msgid "high:"
-msgstr "alto:"
-
-#: applet.js:352 applet.js:354 applet.js:379
-msgid "n/a"
-msgstr "n/d"
-
-#: applet.js:354
-msgid "crit:"
-msgstr "crit:"
-
-#: applet.js:379
-msgid "min:"
-msgstr "min:"
-
-#: applet.js:403
-msgid "max:"
-msgstr "max:"
-
-#: applet.js:425
-msgid "No intrusion detected"
-msgstr "Nessuna intrusione rilevata"
-
-#: applet.js:425
-msgid "INTRUSION DETECTED!"
-msgstr "INTRUSIONE RILEVATA!"
-
-#: applet.js:437
-msgid "Must be configured!"
-msgstr "Deve essere configurato!"
-
-#: applet.js:589
-msgid "Settings"
-msgstr "Impostazioni"
-
-#: applet.js:589
-msgid ":"
-msgstr ":"
-
-#. settings-schema.json->page_General->title
-#: applet.js:596
-msgid "⚙ General"
-msgstr "⚙ Generale"
-
-#: applet.js:606
-msgid "🌡 Temperature sensors"
-msgstr "🌡 Sensori di temperatura"
-
-#: applet.js:616
-msgid "🤂 Fan sensors"
-msgstr "🤂 Sensori delle ventole"
-
-#: applet.js:626
-msgid "🗲 Voltage sensors"
-msgstr "🗲 Sensori di tensione"
-
-#: applet.js:636
-msgid "⮿ Intrusion sensors"
-msgstr "⮿ Sensori di intrusione"
-
-#. settings-schema.json->xsensors->description
-#: applet.js:647
-msgid "Run xsensors"
-msgstr "Esegui xsensors"
-
-#: applet.js:658
-msgid "Reload this applet"
-msgstr "Ricarica questa applet"
-
-#: applet.js:914
+#: lib/util.js:243
 #, javascript-format
-msgid "Are you sure you want to remove '%s'?"
-msgstr "Rimuovere '%s'?"
+msgid "Execution of '%s' failed:"
+msgstr "Esecuzione di '%s' fallita:"
+
+#: scripts/xs.py:206
+msgid "Previous instance"
+msgstr "Istanza precedente"
+
+#: scripts/xs.py:210
+msgid "Next instance"
+msgstr "Istanza successiva"
+
+#: scripts/xs.py:219
+msgid "More options"
+msgstr "Più opzioni"
+
+#: scripts/xs.py:225
+msgid "Import from a file"
+msgstr "Importa da un file"
+
+#: scripts/xs.py:230
+msgid "Export to a file"
+msgstr "Esporta su file"
+
+#: scripts/xs.py:235
+msgid "Reset to defaults"
+msgstr "Ripristina le impostazioni predefinite"
+
+#: scripts/xs.py:244
+#, python-format
+msgid "Reload %s"
+msgstr "Ricarica %s"
+
+#: scripts/xs.py:425
+#, python-format
+msgid "Settings for %s"
+msgstr "Impostazioni di %s"
+
+#: scripts/xs.py:517
+msgid "Select or enter file to export to"
+msgstr "Seleziona o inserisci il file in cui esportare"
+
+#: scripts/xs.py:525 scripts/xs.py:546
+msgid "JSON files"
+msgstr "File JSON"
+
+#: scripts/xs.py:539
+msgid "Select a JSON file to import"
+msgstr "Seleziona un file JSON da importare"
 
 #. metadata.json->description
 msgid ""
@@ -165,6 +216,10 @@ msgstr "Valori dei sensori"
 msgid "Remove from panels certain applets that also use sensors"
 msgstr "Rimuove dal pannello certe applet che potrebbero utilizzare i sensori"
 
+#. settings-schema.json->section_tempHddtemp->title
+msgid "hddtemp is for now only usable by root"
+msgstr "hddtemp è attualmente utilizzabile solo da root"
+
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
 #. settings-schema.json->section_voltDisplay->title
@@ -175,6 +230,10 @@ msgstr "Visualizzazione"
 #. settings-schema.json->section_tempSensors->title
 msgid "Temperature sensors"
 msgstr "Sensori di temperatura"
+
+#. settings-schema.json->section_tempDisks->title
+msgid "Temperature scripts"
+msgstr "Script di temperatura"
 
 #. settings-schema.json->section_fanSensors->title
 msgid "Fan sensors"
@@ -271,6 +330,30 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Dimensione carattere (% della dimensione standard)"
 
+#. settings-schema.json->char_color->options
+msgid "Default"
+msgstr "Predefinito"
+
+#. settings-schema.json->char_color->options
+msgid "White"
+msgstr "Bianco"
+
+#. settings-schema.json->char_color->options
+msgid "Black"
+msgstr "Nero"
+
+#. settings-schema.json->char_color->options
+msgid "Grey"
+msgstr "Grigio"
+
+#. settings-schema.json->char_color->options
+msgid "Light Grey"
+msgstr "Grigio Chiaro"
+
+#. settings-schema.json->char_color->description
+msgid "Text Color"
+msgstr "Colore del testo"
+
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
 msgstr "Rimuovi la linea di confine"
@@ -315,6 +398,10 @@ msgstr "Mostra nel menù l'azione: Riavvia questa applet"
 msgid "Whether or not to display in menu the action: Restart this applet."
 msgstr "Mostra nel menu l'azione: Riavvia questa applet."
 
+#. settings-schema.json->make_hddtemp_usable_by_user->description
+msgid "Make hddtemp usable by user"
+msgstr "Rendi hddtemp utilizzabile dall'utente"
+
 #. settings-schema.json->show_temp->description
 #. settings-schema.json->show_fan->description
 #. settings-schema.json->show_volt->description
@@ -332,6 +419,25 @@ msgid ""
 msgstr ""
 "Se visualizzare o meno i valori dei sensori selezionati nell'elenco "
 "sottostante."
+
+#. settings-schema.json->show_temp_name->description
+#. settings-schema.json->show_fan_name->description
+#. settings-schema.json->show_volt_name->description
+#. settings-schema.json->show_intrusion_name->description
+msgid "Display the 'Shown name' of each of these selected sensors"
+msgstr ""
+"Visualizza il 'Nome visualizzato' di ciascuno di questi sensori selezionati"
+
+#. settings-schema.json->show_temp_name->tooltip
+#. settings-schema.json->show_fan_name->tooltip
+#. settings-schema.json->show_volt_name->tooltip
+msgid ""
+"Whether or not to display into this applet label the 'Shown name' of the "
+"sensors selected in the list below. Without effect in vertical panels."
+msgstr ""
+"Scegli se visualizzare o meno in questa etichetta dell'applet il 'Nome "
+"visualizzato' dei sensori selezionati nell'elenco sottostante. Senza effetto "
+"nei pannelli verticali."
 
 #. settings-schema.json->strictly_positive_temp->description
 #. settings-schema.json->strictly_positive_fan->description
@@ -396,12 +502,13 @@ msgstr "Rinnovare l'elenco dei sensori"
 #. settings-schema.json->intrusion_sensors->columns->title
 msgid ""
 "Sensor name\n"
-"(Do not change this!)"
+"(Do not modify!)"
 msgstr ""
 "Nome dei sensori\n"
 "(Non modificare questo!)"
 
 #. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
@@ -413,6 +520,7 @@ msgstr ""
 "sul pannello"
 
 #. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
@@ -424,6 +532,7 @@ msgstr ""
 "nel tooltip"
 
 #. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
@@ -440,6 +549,32 @@ msgid ""
 msgstr ""
 "Fare doppio clic su una riga per modificare il nome mostrato.\n"
 "Per ripristinare un nome mostrato, copiare/incollare il nome del sensore."
+
+#. settings-schema.json->btn_renew_disks_list->description
+msgid "Renew the list of known disks"
+msgstr "Rinnovare l'elenco dei dischi conosciuti"
+
+#. settings-schema.json->temp_disks->columns->title
+msgid "Disk name"
+msgstr "Nome disco"
+
+#. settings-schema.json->temp_disks->columns->title
+msgid "High °C"
+msgstr "°C Alti"
+
+#. settings-schema.json->temp_disks->columns->title
+msgid "Critical °C"
+msgstr "°C Critici"
+
+#. settings-schema.json->temp_disks->tooltip
+msgid ""
+"Disk name: The name of the disk, as returned by the 'lsblk' command. Please "
+"see help.\n"
+"High and Critical values: Cf. technical manual of your disk."
+msgstr ""
+"Nome disco: il nome del disco, come restituito dal comando 'lsblk'. Si prega "
+"di consultare l'aiuto.\n"
+"Valori alti e critici: cfr. manuale tecnico del disco."
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
@@ -459,7 +594,16 @@ msgstr "Solo V"
 
 #. settings-schema.json->volt_unit->options
 msgid "mV only"
-msgstr "Solo mV"
+msgstr "solo mV"
+
+#. settings-schema.json->show_intrusion_name->tooltip
+msgid ""
+" Whether or not to display into this applet label the 'Shown name' of the "
+"sensors selected in the list below. Without effect in vertical panels."
+msgstr ""
+" Se visualizzare o meno in questa etichetta dell'applet il 'Nome "
+"visualizzato' dei sensori selezionati nell'elenco sottostante. Senza effetto "
+"nei pannelli verticali."
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"

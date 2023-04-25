@@ -1,0 +1,59 @@
+.vpn-transient {
+  color: TRANSITION_COLOR_RGB;
+  background: transparent;
+  margin: 2px, 1px, 1px, 1px;
+  padding: 0 2px;
+  border: 1px;
+  border-radius: 5px, 5px, 5px, 5px;
+  border-color: TRANSITION_COLOR_RGBA;
+  font-size: 95%;
+}
+
+.vpn-deactivated {
+  color: TRANSITION_COLOR_RGB;
+  background: transparent;
+  margin: 2px, 1px, 1px, 1px;
+  padding: 0 2px;
+  border: 1px;
+  border-radius: 5px, 5px, 5px, 5px;
+  border-color: TRANSITION_COLOR_RGBA;
+  font-size: 95%;
+}
+
+.vpn-on {
+  color: CONNECTED_COLOR_RGB;
+  background: transparent;
+  margin: 2px, 1px, 1px, 1px;
+  padding: 0 2px;
+  border: 1px;
+  border-radius: 5px, 5px, 5px, 5px;
+  border-color: CONNECTED_COLOR_RGBA;
+  font-size: 95%;
+}
+
+.vpn-off {
+  color: DISCONNECTED_COLOR_RGB;
+  background: transparent;
+  margin: 2px, 1px, 1px, 1px;
+  padding: 0 2px;
+  border: 1px;
+  border-radius: 5px, 5px, 5px, 5px;
+  border-color: DISCONNECTED_COLOR_RGBA;
+  font-size: 95%;
+}
+
+.vpn-flag-label {
+    z-index: 99;
+    text-shadow: black 1px 0px 2px;
+    font-size: 14px;
+    color:#fff;
+    /*background-color: #000000;*/
+    padding: 0px;
+    border-radius: 256px;
+}
+.vpn-badge {
+    /*border-radius: 256px;*/
+    /*background-color: #000000;*/
+    margin: 0px;
+    padding: 0px;
+}

@@ -1,7 +1,8 @@
 This applet is a fork of Cinnamon's own calender. It adds the capability to mark
 public holidays in the calender panel in addition to the weekend days. Like the
 World Clock calendar, it has the capability to display additional time zones.
-The capability to display events is identical to the Cinnamon calendar.
+The capability to display events is identical to the Cinnamon calendar (for Cinnamon
+version 5.2+).
 
 Choose the Country and region for which to show the public holidays in the applet
 "Calendar" settings page. Add timezones to display in the applet "World Clocks"

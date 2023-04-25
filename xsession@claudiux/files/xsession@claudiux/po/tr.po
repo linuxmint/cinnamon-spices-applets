@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Serkan ÖNDER <serkanonder@outlook.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-29 19:25+0100\n"
+"PO-Revision-Date: 2023-01-31 11:51+0300\n"
+"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:43
+msgid "Applet"
+msgstr "Uygulamacık"
+
+#: applet.js:44
+msgid "Desklet"
+msgstr "Masaüstü Uygulamacığı"
+
+#: applet.js:45
+msgid "Extension"
+msgstr "Eklenti"
+
+#: applet.js:48
+msgid "Applets"
+msgstr "Uygulamacıklar"
+
+#: applet.js:49
+msgid "Desklets"
+msgstr "Masaüstü Uygulamacıkları"
+
+#: applet.js:50
+msgid "Extensions"
+msgstr "Eklentiler"
+
+#: applet.js:162
+msgid "Show .xsession-errors"
+msgstr ".xoturumu-hatalarını göster"
+
+#: applet.js:173
+msgid "Restart Cinnamon"
+msgstr "Cinnamon'u Yeniden Başlat"
+
+#: applet.js:184
+msgid "--- Reload Spices ---"
+msgstr "--- Uygulamacıkları Yeniden Yükle ---"
+
+#: applet.js:190
+msgid "Reload Applet:"
+msgstr "Uygulamayı Yeniden Yükle:"
+
+#: applet.js:204
+msgid "Reload Desklet:"
+msgstr "Masaüstü Uygulamacığını Yeniden Yükle:"
+
+#: applet.js:218
+msgid "Reload Extension:"
+msgstr "Uzantıyı Yeniden Yükle:"
+
+#: applet.js:232
+msgid "--- View Code ---"
+msgstr "--- Kodu Görüntüle ---"
+
+#: applet.js:238
+msgid "View Applet Code for:"
+msgstr "Uygulamacık Kodunu Görüntüle:"
+
+#: applet.js:252
+msgid "View Desklet Code for:"
+msgstr "Masaüstü Uygulamacığı Kodunu Görüntüle:"
+
+#: applet.js:266
+msgid "View Extension Code for:"
+msgstr "Eklenti Kodunu Görüntüle:"
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr "Xoturumu"
+
+#. metadata.json->description
+msgid ""
+"Allows you to restart or open the source code of Spices (applets, desklets, "
+"extensions), display in real-time the contents of your .xsession-errors file "
+"and restart Cinnamon."
+msgstr ""
+"Uygulamacıkların kaynak kodunu (applet'ler, desklet'ler, uzantılar) yeniden "
+"başlatmanıza veya açmanıza, .xoturum-hataları dosyanızın içeriğini gerçek "
+"zamanlı olarak görüntülemenize ve Cinnamon'u yeniden başlatmanıza izin verir."

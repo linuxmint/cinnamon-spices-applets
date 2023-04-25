@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-16 02:20+0000\n"
-"PO-Revision-Date: 2022-05-28 04:26+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2022-09-29 19:16+0100\n"
+"PO-Revision-Date: 2022-11-22 17:50+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 2.3\n"
 
 msgid "Type to search..."
 msgstr "Kirjoita haku..."
@@ -43,7 +43,7 @@ msgid "Favorite apps"
 msgstr "Suosikki sovellukset"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "gir1.2-gda-5.0-paketti vaaditaan Firefox- ja Midori-kirjanmerkkeihin."
+msgstr "gir1.2-gda-5.0-paketti vaaditaan kirjanmerkkeihin Firefox ja Midori."
 
 msgid "Clear List"
 msgstr "Tyhjennä luettelo"
@@ -127,13 +127,13 @@ msgid "Videos"
 msgstr "Videot"
 
 msgid "Images"
-msgstr "kuvat"
+msgstr "Kuvat"
 
 msgid "Music"
 msgstr "Musiikki"
 
 msgid "No recent Items"
-msgstr "Ei viimeaikaisia tuotteita"
+msgstr "Ei viimeaikaisia kohteita"
 
 msgid "Click to copy"
 msgstr "Kopioi napsauttamalla"
@@ -151,7 +151,7 @@ msgid "Browser bookmarks"
 msgstr "Selaimen kirjanmerkit"
 
 msgid "Emoji"
-msgstr "Emoji"
+msgstr "Hymiö"
 
 msgid "Trash"
 msgstr "Roskakori"
@@ -172,7 +172,7 @@ msgid "Home folder"
 msgstr "Koti"
 
 msgid "Reset category order"
-msgstr "Nollaa järjestys"
+msgstr "Nollaa ryhmien järjestys"
 
 msgid "light skin tone"
 msgstr "vaalea ihonsävy"
@@ -207,8 +207,39 @@ msgstr "Siirrä roskakoriin"
 msgid "Error while moving file to trash:"
 msgstr "Virhe siirrettäessä tiedostoa roskakoriin:"
 
-msgid "This menu item is not associated to any package. Do you want to remove it from the menu anyway?"
-msgstr "Tätä valikkokohtaa ei ole liitetty mihinkään pakettiin. Haluatko silti poistaa sen valikosta?"
+msgid "Smileys & Emotion"
+msgstr "Hymiöt ja tunteet"
+
+msgid "People & Body"
+msgstr "Ihmiset & keho"
+
+msgid "Animals & Nature"
+msgstr "Eläimet & luonto"
+
+msgid "Food & Drink"
+msgstr "Ruoka & juoma"
+
+msgid "Travel & Places"
+msgstr "Matkailu ja nähtävyys"
+
+msgid "Activities"
+msgstr "Aktiviteetit"
+
+msgid "Objects"
+msgstr "Esineet"
+
+msgid "Symbols"
+msgstr "Symbolit"
+
+msgid "Flags"
+msgstr "Liput"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Tätä valikkokohtaa ei ole liitetty mihinkään pakettiin. Haluatko silti "
+"poistaa sen valikosta?"
 
 msgid "The following packages will be removed:"
 msgstr "Seuraavat paketit poistetaan:"
@@ -273,13 +304,17 @@ msgid "Skipping"
 msgstr "Ohitus"
 
 msgid " - directory already searched"
-msgstr " - hakemisto jo haettu"
+msgstr " - hakemisto on jo haettu"
 
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-msgid "A flexible menu with grid or list layout options, file browser and emoji search."
-msgstr "Joustava valikko, jossa on ruudukko- tai luetteloasetteluvaihtoehdot, tiedostoselain ja emojihaku."
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Joustava valikko, jossa asetteluna ruudukko tai luettelo, tiedostoselain ja "
+"hymiöhaku."
 
 msgid "Behavior"
 msgstr "Käyttäytyminen"
@@ -318,7 +353,7 @@ msgid "Use a custom icon"
 msgstr "Vaihda kuvake"
 
 msgid "Use a custom icon in the panel"
-msgstr "Käytä paneeliin eri kuvaketta"
+msgstr "Käytä paneelissa eri kuvaketta"
 
 msgid "Panel icon"
 msgstr "Paneelin kuvake"
@@ -330,7 +365,7 @@ msgid "Text to show beside the panel icon"
 msgstr "Kuvakkeen vieressä näkyvä teksti"
 
 msgid "Category icon size (pixels)"
-msgstr "Luokkakuvakkeen koko (pikseliä)"
+msgstr "Ryhmä kuvakkeen koko (pikseliä)"
 
 msgid "Applications list icon size (pixels)"
 msgstr "Sovellusluettelon kuvakkeen koko (pikseliä)"
@@ -378,8 +413,8 @@ msgid ""
 "Show your browser's web bookmarks in the menu.\n"
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
-"Näytä selaimesi web-kirjanmerkit valikossa.\n"
-"Huomaa: Asenna paketti gir1.2-gda-5.0 joka osaa lukea firefox suosikkeja."
+"Näytä selaimesi kirjanmerkit valikossa.\n"
+"Huomaa: Asenna paketti gir1.2-gda-5.0 joka osaa lukea firefox kirjanmerkit."
 
 msgid "Enable searching of open windows"
 msgstr "Ota avoimien ikkunoiden haku käyttöön"
@@ -394,7 +429,7 @@ msgid "Example Search Providers"
 msgstr "Esimerkkejä hakupalvelun tarjoajista"
 
 msgid "Open menu on category:"
-msgstr "Avaa valikko kategoriassa:"
+msgstr "Avaa valikko ryhmästä:"
 
 msgid "List"
 msgstr "Luettelo"
@@ -403,7 +438,7 @@ msgid "Grid"
 msgstr "Ruudukko"
 
 msgid "Always open the menu with this category selected"
-msgstr "Avaa aina valikko tämän luokan ollessa valittuna"
+msgstr "Avaa aina valikko tämän ryhmän ollessa valittuna"
 
 msgid "columns"
 msgstr "sarakkeet"
@@ -415,7 +450,7 @@ msgid "Show bookmarks and places"
 msgstr "Näytä kirjanmerkit ja sijainti"
 
 msgid "Show bookmarks and places category in the menu"
-msgstr "Näytä valikossa kirjanmerkit ja sijainti"
+msgstr "Näytä kirjanmerkit ja sijainti valikossa"
 
 msgid "Show application icons"
 msgstr "Näytä sovellusten kuvakkeet"
@@ -444,21 +479,6 @@ msgstr "Sovellukset näytetään"
 msgid "View applications as list or grid"
 msgstr "Näytä sovellukset luettelona tai ruudukkona"
 
-msgid "Application description placement"
-msgstr "Sovellusten kuvauksen paikka"
-
-msgid "Tooltips"
-msgstr "Työkaluvinkit"
-
-msgid "Under titles"
-msgstr "Otsikkojen alla"
-
-msgid "None"
-msgstr "Ei mitään"
-
-msgid "Choose where to show application descriptions"
-msgstr "Valitse, missä sovellusten kuvaukset näytetään"
-
 msgid "Sidebar location"
 msgstr "Sivupalkin sijainti"
 
@@ -477,39 +497,69 @@ msgstr "Oikea"
 msgid "Choose where to show the sidebar"
 msgstr "Valitse, missä sivupalkki näytetään"
 
+msgid "Show favorites on sidebar"
+msgstr "Näytä suosikit sivupalkissa"
+
+msgid "None"
+msgstr "Ei mitään"
+
+msgid "Apps only"
+msgstr "Vain sovellukset"
+
+msgid "Files only"
+msgstr "Vain tiedostot"
+
+msgid "Apps and files"
+msgstr "Sovellukset ja tiedostot"
+
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Näytä suosikkisovelluksesi ja tiedostokuvakkeet sivupalkissa"
+
+msgid "Application description placement"
+msgstr "Sovellusten kuvauksen paikka"
+
+msgid "Tooltips"
+msgstr "Työkaluvinkit"
+
+msgid "Under titles"
+msgstr "Otsikkojen alla"
+
+msgid "Choose where to show application descriptions"
+msgstr "Valitse, missä sovellusten kuvaukset näytetään"
+
 msgid ""
 "\n"
 "Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 "\n"
-" Vihje/vinkki: Muuta valikon kokoa vetämällä valikon reunaa.\n"
-
-msgid "Show favorites on sidebar"
-msgstr "Näytä suosikit sivupalkissa"
-
-msgid "Show your favorite app and file icons on the sidebar"
-msgstr "Näytä suosikkisovelluksesi ja -tiedostosi kuvakkeet sivupalkissa"
+" Vinkki: Muuta valikon kokoa vetämällä valikon reunasta.\n"
 
 msgid "Show recent items"
 msgstr "Näytä viimeisimmät kohteet"
 
 msgid "Show recent items category in the menu"
-msgstr "Näytä viimeisimpien kohteiden luokka valikossa"
+msgstr "Näytä viimeisimmät kohteet ryhmä valikossa"
 
 msgid "Show favorite apps category"
-msgstr "Näytä suositut sovellukset"
+msgstr "Näytä suositut sovellukset ryhmä"
 
 msgid "Show your favorite apps category in the menu"
-msgstr "Näytä sinun suosikki sovellukset valikossa"
+msgstr "Näytä sinun suosikki sovellukset ryhmä valikossa"
 
 msgid "Show home folder"
 msgstr "Näytä kansio Koti"
 
 msgid "Show home folder category in the menu"
-msgstr "Näytä kansion Koti sisältö valikossa"
+msgstr "Näytä Koti kansio ryhmä valikossa"
+
+msgid "Show emoji category"
+msgstr "Näytä hymiö ryhmä"
+
+msgid "Show emoji category in the menu"
+msgstr "Näytä hymiö ryhmä valikossa"
 
 msgid "Last used category"
-msgstr "Viimeksi käytetty luokka"
+msgstr "Viimeksi käytetty ryhmä"
 
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Vieritä sovelluslistaa automaattisesti hiiren osoittimen kohdalla"
@@ -521,16 +571,26 @@ msgid "Show hidden files in folder view"
 msgstr "Näytä piilotetut tiedostot kansioissa"
 
 msgid "Emoji search"
-msgstr "Emoji-haku"
+msgstr "Hymiöiden haku"
 
 msgid "Show emojis in search results"
-msgstr "Näytä emojit hakutuloksissa"
+msgstr "Näytä hymiöt hakutuloksissa"
 
 msgid "Web search option"
 msgstr "Hakupalvelun vaihtoehdot"
 
 msgid "Show an internet search option in search results"
 msgstr "Näytä hakupalvelun vaihtoehdot hakutuloksissa"
+
+msgid "Web search suggestions"
+msgstr "Verkkohaku"
+
+msgid ""
+"With web search option, also show search suggestions. (Note: This uses "
+"Google's search API)"
+msgstr ""
+"Verkkohaku valinnalla voit näyttää myös hakuehdotuksia (tämä käyttää "
+"Googlen hakusovellusta)"
 
 msgid "Search home folder"
 msgstr "Hae kotikansiosta"
@@ -542,51 +602,65 @@ msgid "Web history search"
 msgstr "Verkkohistorian haku"
 
 msgid ""
-"When searching, also search my browser's history (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
 "Note: Firefox history is not currently supported."
 msgstr ""
-"Kun haet, tee hakuja myös selaimeni historiasta (Google Chrome, Chromium, Opera, Vivaldi, Brave)\n"
+"Kun haet, tee hakuja myös selaimen historiasta (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
 "Huomaa: Firefoxin historiaa ei tueta tällä hetkellä."
 
 msgid "Web bookmarks search"
-msgstr "Verkkokirjanmerkkihaku"
+msgstr "Selaimen kirjanmerkkien haku"
 
 msgid ""
-"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based distributions) and restart your computer."
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
 msgstr ""
-"Kun haet, tee hakuja myös selaimeni verkkokirjanmerkeistä (Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Huomaa: Jotta voit etsiä Firefoxin kirjanmerkkejä, sinun on asennettava paketti gir1.2-gda-5.0 (Debian-pohjaiset jakelut, mukaan lukien Ubuntu & Linux Mint) tai pakkaa libgda (Arch-pohjaiset jakelut) ja käynnistä tietokone uudelleen."
+"Kun haet, tee hakuja myös selaimen kirjanmerkeistä (Google Chrome, Firefox, "
+"Chromium, Opera, Vivaldi, Brave)\n"
+"Huomaa: Jotta voit etsiä Firefoxin kirjanmerkkejä on asennettava paketti "
+"gir1.2-gda-5.0 (Debian-pohjaiset, mukaan lukien Ubuntu & Linux Mint) tai "
+"paketti libgda (Arch jakelut) ja käynnistä tietokone uudelleen."
 
 msgid "Wikipedia search"
 msgstr "Wikipedia haku"
 
 msgid "Show some Wikipedia results"
-msgstr "Näytä joitain Wikipedia-tuloksia"
+msgstr "Näytä joitain tuloksia Wikipediasta"
 
 msgid "Wikipedia language"
 msgstr "Wikipedian kieli"
 
 msgid ""
 "\n"
-"Note: Some search options can still be used even if you have not enabled them here by prefixing your search term.\n"
-"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks search.\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
 msgstr ""
 "\n"
-"Huomaa: Joitakin hakuvaihtoehtoja voidaan silti käyttää, vaikka et olisi ottanut niitä käyttöön tässä etuliiteellä hakutermiäsi.\n"
-"Esimerkiksi: jos haluat etsiä hymiötä, kirjoita e sydän löytääksesi sydänemojit. Käytä samoin etuliitteitä 'f' tiedostohakuun, 'h' verkkohistoriaan ja 'b' verkkokirjanmerkkihakuun.\n"
+"Huomaa: Joitakin hakuja voidaan silti käyttää, vaikka et olisi ottanut "
+"niitä käyttöön hyödyntäen etuliitettä hakemiseen.\n"
+"Esimerkiksi: jos haluat etsiä hymiötä, kirjoita \"e heart\" löytää sydämiä. "
+"Samoin etuliitteitä \"f\" tiedostojen hakuun, \"h\" selainhistoriaan ja \"b"
+"\" kirjanmerkkien hakuun.\n"
 
 msgid "Use a custom icon size"
 msgstr "Mukauta kuvakeen kokoa"
 
 msgid "Use a custom size for the panel icon"
-msgstr "Mukauta kokoa paneelin kuvakkeessa"
+msgstr "Mukauta paneelin kuvakkeiden kokoa"
 
 msgid "Panel icon size (pixels)"
 msgstr "Paneelin kuvakkeen koko (pikseliä)"
 
 msgid "Choose a custom size for the panel icon"
-msgstr "Valitse mukautettu koko paneelin kuvakkeeseen"
+msgstr "Valitse paneelin kuvakkeeseen mukautettu koko"
 
 msgid "Sidebar icon size (pixels)"
 msgstr "Sivupalkin kuvakkeen koko (pikseliä)"
@@ -600,5 +674,9 @@ msgstr "Käytä sivupalkin laatikkotyyliä"
 msgid "Use tile style"
 msgstr "Käytä laatatyyliä"
 
-msgid "Use a tile style for the application buttons (Note: may not work on some themes)"
-msgstr "Käytä sovelluspainikkeissa laatatyyliä (Huomaa: ei ehkä toimi joissain teemoissa)"
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Käytä sovelluspainikkeissa laattamaista tyyliä (ei ehkä toimi kaikissa "
+"teemoissa)"

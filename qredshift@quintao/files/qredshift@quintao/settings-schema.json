@@ -68,7 +68,14 @@
       "type": "section",
       "title": "Night Settings",
       "keys": [
-        "enabledNight", "manualNightTime", "nightTimeStart", "nightTimeEnd", "nightTemp", "nightBrightness"
+        "enabledNight",
+        "manualNightTime",
+        "smoothTransition",
+        "transitionDuration",
+        "nightTimeStart",
+        "nightTimeEnd",
+        "nightTemp",
+        "nightBrightness"
       ]
     },
     
@@ -110,10 +117,10 @@
   "autoUpdateInterval": {
     "type": "spinbutton",
     "dependency": "enabledNight=true",
-    "default": 20,
-    "min": 5,
+    "default": 5,
+    "min": 3,
     "max": 1800,
-    "units": "Sec.",
+    "units": "Seconds",
     "step": 1,
     "description": "Update interval"
   },
@@ -227,6 +234,22 @@
     "default": false,
     "description": "Night Enabled"
   },
+  "smoothTransition": {
+    "type": "checkbox",
+    "dependency": "enabledNight=true",
+    "default": true,
+    "description": "Smooth transition between day and night"
+  },
+  "transitionDuration": {
+    "type": "spinbutton",
+    "dependency": "enabledNight=true",
+    "default": 10,
+    "min": 5,
+    "max": 60,
+    "units": "Minutes",
+    "step": 1,
+    "description": "Transition Duration"
+  },
   "manualNightTime": {
     "type": "checkbox",
     "dependency": "enabledNight=true",
@@ -307,7 +330,7 @@
   },
   "textHelp": {
     "type": "label",
-    "description": "When update to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n You will lost all your configs."
+    "description": "When update to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\nYou will lost all your configs."
   },
   "textInfo": {
     "type": "label",

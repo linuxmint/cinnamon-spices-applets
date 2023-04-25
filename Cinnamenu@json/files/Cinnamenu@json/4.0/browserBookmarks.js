@@ -26,6 +26,7 @@ const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
 const Cinnamon = imports.gi.Cinnamon;
 const Util = imports.misc.util;
+const {getChromiumProfileDirs} = require('./utils');
 
 let Gda = null;
 try {
@@ -165,35 +166,51 @@ function readFirefoxProfiles() {
     return [];
 }
 
-const readChromiumBookmarksFile = function(path, subfolder, appInfo) {
+const readChromiumBookmarksFile = function(path, appInfo) {
 
     return new Promise(function(resolve, reject) {
-        const foundBookmarks = [];
-
         const bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev(
-                                        [GLib.get_user_config_dir(), ...path, subfolder, 'Bookmarks']));
+                                        [GLib.get_user_config_dir(), ...path, 'Bookmarks']));
         if (!bookmarksFile.query_exists(null)) {
             resolve([]);
             return;
         }
 
         readJSONAsync(bookmarksFile).then(function(jsonResult) {
+            const foundBookmarks = [];
+
             if (!jsonResult.hasOwnProperty('roots')) {
                 resolve([]);
                 return;
             }
 
+            const getWebDomain = function(url) { // returns the first part of web url. e.g. "http://google.com" otherwise null.
+                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                    return null;
+                }
+                const slashAfterDomainPos = url.indexOf('/', url.indexOf('://') + 3);
+                if (slashAfterDomainPos === -1) {//not found
+                    return null;
+                }
+                const domain = url.slice(0, slashAfterDomainPos);
+                if (domain.length < 9 || domain.indexOf('.') === -1) {
+                    return null;
+                }
+                return domain;
+            };
+
             const recurseBookmarks = (children, cont) => {
                 children.forEach( child => {
                     if (child.type == 'url') {
-                        const url = child.url;
-                        const domain = url.slice(0, url.indexOf('/', url.indexOf('://') + 3));
-                        foundBookmarks.push({
-                            app: appInfo,
-                            name: child.name,
-                            uri: url,
-                            domain: domain
-                        });
+                        const domain = getWebDomain(child.url);
+                        if (domain) {
+                            foundBookmarks.push({
+                                app: appInfo,
+                                name: child.name,
+                                uri: child.url,
+                                domain: domain
+                            });
+                        }
                     } else if (child.hasOwnProperty('children')) {
                         recurseBookmarks(child.children);
                     }
@@ -208,12 +225,17 @@ const readChromiumBookmarksFile = function(path, subfolder, appInfo) {
                 recurseBookmarks(children);
             }
 
-            const faviconsFile = GLib.build_filenamev([GLib.get_user_config_dir(), ...path, subfolder, 'Favicons']);
-            const domains = [];
+            if (foundBookmarks.length === 0) {
+                resolve([]);
+                return;
+            }
+
+            const faviconsFile = GLib.build_filenamev([GLib.get_user_config_dir(), ...path, 'Favicons']);
+            const domains = new Set();
             foundBookmarks.forEach( bookmark => {
-                domains.push(bookmark.domain);
+                domains.add(bookmark.domain);
             });
-            const domainsJSON = JSON.stringify(domains);
+            const domainsJSON = JSON.stringify(Array.from(domains));
 
             Util.spawn_async([__meta.path + '/getFavicons.py', faviconsFile, domainsJSON], (results) => {
                 results = JSON.parse(results);
@@ -229,53 +251,20 @@ const readChromiumBookmarksFile = function(path, subfolder, appInfo) {
     });
 };
 
-const readChromiumBookmarks = function(path, wmClass) {
-
-    return new Promise(function(resolve, reject) {
-        const appSystem = Cinnamon.AppSystem.get_default();
-        let foundBookmarks = [];
-
-        const foundApps = appSystem.lookup_desktop_wmclass(wmClass);
-        if (!foundApps || foundApps.length === 0) {
-            resolve([]);
-            return;
-        }
-
-        const appInfo = foundApps.get_app_info();
-
-        Promise.all([
-            readChromiumBookmarksFile(path, '', appInfo),
-            readChromiumBookmarksFile(path, 'Default', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 1', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 2', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 3', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 4', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 5', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 6', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 7', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 8', appInfo),
-            readChromiumBookmarksFile(path, 'Profile 9', appInfo),
-        ]).then((results) => {
-            results.forEach( result => foundBookmarks = foundBookmarks.concat(result));
-            resolve(foundBookmarks);
-        });
-    });
-};
-
 //=====================
 
 class BookmarksManager {
     constructor() {
         this.bookmarks = [];
+        const promises = [];
 
-        Promise.all([
-            readChromiumBookmarks(['chromium'], 'chromium'),
-            readChromiumBookmarks(['google-chrome'], 'google-chrome'),
-            readChromiumBookmarks(['opera'], 'opera'),
-            readChromiumBookmarks(['vivaldi'], 'vivaldi-stable'),
-            readChromiumBookmarks(['BraveSoftware', 'Brave-Browser'], 'brave-browser'),
-            readChromiumBookmarks(['microsoft-edge'], 'microsoft-edge')
-        ]).then((results) => {
+        getChromiumProfileDirs().forEach( profilePath => {
+            const path = profilePath[0];
+            const appInfo = profilePath[1];
+
+            promises.push(readChromiumBookmarksFile(path, appInfo));
+        });
+        Promise.all(promises).then((results) => {
             results.forEach( result => this.bookmarks = this.bookmarks.concat(result));
 
             this.bookmarks = this.bookmarks.concat(readFirefoxProfiles());
