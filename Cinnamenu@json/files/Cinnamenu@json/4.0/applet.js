@@ -34,13 +34,14 @@ const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const SEARCH_THRESHOLD = 0.45;
 const SidebarPlacement = Object.freeze({TOP: 0, BOTTOM: 1, LEFT: 2, RIGHT: 3});
 
-/*
+/*This graph shows the classes in which other classes are instantiated.
                                         ┌── class AppsView ───────┬── class AppButton
                                         │                         └── class Subheading
                                         │
                   ┌── class Display ────┼── class CategoriesView ──── class CategoryButton
                   │                     │
-                  │                     ├── class Sidebar ─────────── class SidebarButton
+                  │                     ├── class Sidebar ────────┬── class SidebarButton
+                  │                     │                         └── class Separator
 class             │                     │
 CinnamenuApplet ──┼                     ├── class ContextMenu ─────── class ContextMenuItem
                   │                     │
@@ -791,6 +792,16 @@ class CinnamenuApplet extends TextIconApplet {
         }
     }
 
+    getOptimum(minimumItems) {
+        //adjust number of items according to number of columns in grid view to make
+        //best use of available space.
+        if (this.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
+            return minimumItems;
+        }
+        const columns = this.display.appsView.getGridValues().columns;
+        return Math.ceil(minimumItems / columns) * columns;
+    }
+    
     setActiveCategory(categoryId) {
         // categoryId is one of 4 things: a special category (one of 'places', 'recents',
         // 'favorite_files' or 'favorite_apps'), an application category id, an emoji category
@@ -804,18 +815,11 @@ class CinnamenuApplet extends TextIconApplet {
             this.display.appsView.populate(this.listPlaces());
             break;
         case 'recents':
-            let maxItems = 8;//show 8 items of each type in list view or
-            //adjust number of items according to number of columns in grid view to make
-            //best use of available space.
-            let maxRecentItems = 4;
-            if (this.settings.applicationsViewMode === ApplicationsViewMode.GRID) {
-                const columns = this.display.appsView.getGridValues().columns;
-                maxItems = Math.ceil(6 / columns) * columns;
-                maxRecentItems = Math.max(maxRecentItems, columns);
-            }
-
+            const maxItems = this.getOptimum(6);
+            const maxRecentApps = this.getOptimum(4);
+            
             this.display.appsView.populate_init();
-            const recentApps = this.listRecent_apps(maxRecentItems);
+            const recentApps = this.listRecent_apps(maxRecentApps);
             if (recentApps.length > 0) {
                 this.display.appsView.populate_add(recentApps,_('Applications'));
             }
@@ -1016,7 +1020,7 @@ class CinnamenuApplet extends TextIconApplet {
             calculatorResult = pattern_raw + " = " + ans;
         }
 
-        //---web search option---
+        //---web search option and search suggestions---
         if (this.settings.webSearchOption != 0) {//0==none
             const iconName = ['google_icon.png', 'bing_icon.png', 'search.png', 'yahoo_icon.png',
                             'search.png', 'duckgo_icon.png', 'ask.png', 'ecosia.png', 'search.png',
@@ -1083,9 +1087,7 @@ class CinnamenuApplet extends TextIconApplet {
                         } });
 
             webBookmarksResults.sort((a, b) =>  a.score < b.score);
-            if (webBookmarksResults.length > 12) {
-                webBookmarksResults.length = 12;
-            }
+            webBookmarksResults.length = Math.min(webBookmarksResults.length, this.getOptimum(10));
         }
 
         //---------------------------
@@ -1097,11 +1099,7 @@ class CinnamenuApplet extends TextIconApplet {
             //sort primaryResults[]
             primaryResults.sort((a, b) =>  b.score - a.score);//items with equal score are left in
                                                               //existing order
-            //Limit primaryResults to 10
-            if (primaryResults.length > 10) {
-                primaryResults.length = 10;
-            }
-
+            
             //Remove duplicate primaryResults[]. eg. a fav file, a recent file and a folderfile might all
             //be the same file. Prefer from highest to lowest: isFavoriteFile, isRecentFile, isPlace,
             //isFolderviewFile which is easy because primaryResults[] should already be in this order.
@@ -1119,6 +1117,9 @@ class CinnamenuApplet extends TextIconApplet {
                 }
             }
 
+            //Limit primaryResults to 10
+            primaryResults.length = Math.min(primaryResults.length, this.getOptimum(10));
+
             //Display results
             this.display.appsView.populate_init(calculatorResult);
             if (primaryResults.length > 0) {
@@ -1127,11 +1128,11 @@ class CinnamenuApplet extends TextIconApplet {
             if (otherResults.length > 0) {
                 this.display.appsView.populate_add(otherResults, _('Other search results'));
             }
-            if (webHistoryResults.length > 0) {
-                this.display.appsView.populate_add(webHistoryResults, _('Browser history'));
-            }
             if (webBookmarksResults.length > 0) {
                 this.display.appsView.populate_add(webBookmarksResults, _('Browser bookmarks'));
+            }
+            if (webHistoryResults.length > 0) {
+                this.display.appsView.populate_add(webHistoryResults, _('Browser history'));
             }
             if (emojiResults.length > 0) {
                 this.display.appsView.populate_add(emojiResults, _('Emoji'));
@@ -1155,6 +1156,7 @@ class CinnamenuApplet extends TextIconApplet {
             searchBrowserHistory(hpattern, history => {
                 if (history.length > 0 && this.searchActive && thisSearchId === this.currentSearchId) {
                     webHistoryResults = history;
+                    webHistoryResults.length = Math.min(webHistoryResults.length, this.getOptimum(10));
                     showResults();
                 }
             });

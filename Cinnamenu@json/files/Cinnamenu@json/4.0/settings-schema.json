@@ -318,9 +318,9 @@
     },
     "web-suggestions":{
         "type":"checkbox",
-        "default":true,
+        "default":false,
         "description":"Web search suggestions",
-        "tooltip":"With web search option, also show search suggestions. (Note: This uses Google's search API)"
+        "tooltip":"With web search option, also show search suggestions. (Note: Search suggestions are provided by DuckDuckGo)"
     },
     "enable-home-folder-search":{
         "type":"checkbox",
