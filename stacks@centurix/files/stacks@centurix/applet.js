@@ -6,6 +6,7 @@ const Gtk = imports.gi.Gtk;
 const MessageTray = imports.ui.messageTray;
 const Main = imports.ui.main;
 const St = imports.gi.St;
+const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 let Util, DockerCompose;
@@ -30,16 +31,6 @@ const DOCKER_COMPOSE_PROJECT_FOLDER = "~/docker_projects";
 const DOCKER_COMPOSE_CMD = "docker-compose";
 const DOCKER_CMD = "docker";
 const EDITOR = 'xed';
-
-/**
- * TODO
- * ====
- * 
- * Add configuration for docker-compose storage area
- * List stacks
- * Up/down a stack
- * Edit a docker-compose.yml file using xed
- */
 
 /**
  * L10n support
@@ -72,7 +63,7 @@ Stacks.prototype = {
 			// Use default values until we get proper config
 			this.docker_compose_project_folder = DOCKER_COMPOSE_PROJECT_FOLDER;
 			this.docker_compose_cmd = DOCKER_COMPOSE_CMD;
-			this.docker_compose_cmd = DOCKER_CMD;
+			this.docker_cmd = DOCKER_CMD;
 			this.editor = EDITOR;
 
 			this.createMainMenu(orientation);
@@ -83,9 +74,6 @@ Stacks.prototype = {
 			 * Create and instance of the main docker compose object
 			 */
 			this.docker_compose = new DockerCompose.DockerCompose(this.docker_compose_cmd, this.docker_cmd, this.docker_compose_project_folder);
-
-			// List of event listeners for docker compose
-			this.eventListeners = [];
 
 			this.refreshApplet();
 		} catch (e) {
@@ -201,9 +189,12 @@ Stacks.prototype = {
 	 * Menu item management
 	 ************************************************/
 
-	newIconMenuItem: function(icon, label, callback, options = {}) {
+	newIconMenuItem: function(icon, label, callback, options = {}, docker_compose_file = 0) {
 		try {
 			let newItem = new PopupMenu.PopupIconMenuItem(label, icon, St.IconType.FULLCOLOR, options);
+			if (docker_compose_file) {
+				newItem.docker_compose_file = docker_compose_file;
+			}
 			if (callback) {
 				newItem.connect("activate", Lang.bind(this, callback));
 			}
@@ -273,7 +264,6 @@ Stacks.prototype = {
 			if (event._switch.state) {
 				this.transitionMenu(_("Docker Compose: Bringing Stack up, please wait..."));
 				this.docker_compose.up(event.docker_compose_file);
-				// this.docker_compose.events(event.docker_compose_file);
 				this.notification(_("Bringing Stack up..."));
 				this.refreshApplet();
 				return true;
@@ -287,19 +277,35 @@ Stacks.prototype = {
 		}
 	},
 
-	attachSink: function(event) {
-		global.log(UUID + '::attachSink: Attaching applet to docker-compose event sink ' + event.docker_compose_file)
+	dockerComposeEdit: function(event) {
 		try {
-			this.docker_compose.events(event.docker_compose_file);
-			return true;
-		} catch(e) {
-			global.log(UUID + '::attachSink: ' + e);
+			this.notification(_("Editing docker-compose.yml"));
+			Main.Util.spawnCommandLine(this.editor + " " + event.docker_compose_file);
+		} catch (e) {
+			global.log(UUID + '::dockerComposeLogs: ' + e);
 		}
 	},
 
-	dockerComposeSSH: function() {
-		this.notification(_("Docker Compose SSH Terminal opened"));
-		this.docker_compose.ssh();
+	dockerComposeLogs: function(event) {
+		try {
+			this.notification(_("Opening logs..."));
+			this.docker_compose.logs(event.docker_compose_file).then(logs => {
+				// Dump the log out to a temporary file and call xed
+				let logFile = Gio.File.new_for_path("/tmp/tmplog.txt")
+				if (logFile.query_exists(null))
+					logFile.delete(null);
+
+				let readwrite = logFile.create_readwrite(Gio.FileCreateFlags.NONE, null);
+				let writeFile = readwrite.get_output_stream();
+
+				writeFile.write(logs, null);
+				writeFile.close(null);
+
+				Main.Util.spawnCommandLine(this.editor + " /tmp/tmplog.txt");
+			});
+		} catch (e) {
+			global.log(UUID + '::dockerComposeLogs: ' + e);
+		}
 	},
 
 	refreshApplet: function() {
@@ -311,37 +317,27 @@ Stacks.prototype = {
 		 * Draw the main menu.
 		 * Check for the existance for docker-compose. If it doesn't exist, alert the user and direct them to installation instructions
 		 */
-		global.log("UPDATING APPLET");
 		try {
 			this.docker_compose.available().then(results => {
-				global.log("FOUND A COMMAND");
 				let docker_projects = this.docker_compose.listDockerComposefiles();
 
 				global.log(`${UUID}::${(new Error().stack).split('@')[0]}: Found Docker Compose projects ${docker_projects}`);
 	
 				this.set_applet_icon_path(ICON_UP);
-	
 				this.menu.removeAll();
-	
 				this.stacks = [];
-
-				// Are there any current event listeners?
-				this.eventListeners.forEach((listener) => {
-					this.docker_compose.destroyEventListener(listener);
-				})
 
 				for (let index = 0; index < docker_projects.length; index ++) {
 					let stack = new PopupMenu.PopupSubMenuMenuItem(docker_projects[index]);
-					// For each docker project, add an event listener
-					//let listener = this.docker_compose.createEventListener(docker_projects[index]);
 					this.docker_compose.isUp(docker_projects[index]).then(result => {
 						stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Up", true, this.dockerComposeToggle, docker_projects[index]));
-						stack.menu.addMenuItem(this.newIconMenuItem('utilities-terminal', _('SSH Terminal...'), this.dockerComposeSSH));
+						stack.menu.addMenuItem(this.newIconMenuItem('accessories-text-editor', _('Edit...'), this.dockerComposeEdit, {}, docker_projects[index]));
+						stack.menu.addMenuItem(this.newIconMenuItem('text-x-script', _('Logs...'), this.dockerComposeLogs, {}, docker_projects[index]));
 					}).catch(result => {
 						stack.menu.addMenuItem(this.newSwitchMenuItem(_('Status') + " Down", false, this.dockerComposeToggle, docker_projects[index]));
+						stack.menu.addMenuItem(this.newIconMenuItem('accessories-text-editor', _('Edit...'), this.dockerComposeEdit, {}, docker_projects[index]));
 					})
 	
-					this.eventListeners.push(listener);
 					this.stacks.push(stack);
 					this.menu.addMenuItem(stack);
 				}
@@ -349,10 +345,9 @@ Stacks.prototype = {
 				this.menu.addMenuItem(this.newSeparator());
 				this.menu.addMenuItem(this.newIconMenuItem('view-refresh', _('Refresh this menu'), this.refreshApplet));	
 			}).catch(results => {
-				global.log(`DIDNT FIND A COMMAND: ${results}`);
 				this.set_applet_icon_path(ICON_MISSING);
-				this.set_applet_tooltip(_("Stacks: Docker compose missing or not configured."));
-				this.notification(_("Docker compose missing or not configured."));
+				this.set_applet_tooltip(_("Stacks: Docker compose missing or not configured. Right click to configure."));
+				this.notification(_("Docker compose missing or not configured. Right click to configure."));
 
 				this.menu.removeAll();
 				this.menu.addMenuItem(this.newIconMenuItem('apport', _('Docker-compose not installed'), null, {reactive: false}));
