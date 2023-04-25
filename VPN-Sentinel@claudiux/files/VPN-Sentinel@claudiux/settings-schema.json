@@ -1,0 +1,387 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "Alerts",
+      "VPNpolicy",
+      "CountryFlags",
+      "InternetPolicy"
+    ],
+    "Alerts": {
+      "type": "page",
+      "title": "Notifications",
+      "sections": [
+        "sectionA1",
+        "sectionA2",
+        "sectionA3"
+      ]
+    },
+    "VPNpolicy": {
+      "type": "page",
+      "title": "VPN",
+      "sections": [
+        "sectionV1",
+        "sectionV2",
+        "sectionV3"
+      ]
+    },
+    "CountryFlags": {
+      "type": "page",
+      "title": "Flags",
+      "sections": [
+        "sectionF1"
+      ]
+    },
+    "InternetPolicy": {
+      "type": "page",
+      "title": "Internet Apps Manager",
+      "sections": [
+        "sectionI1",
+        "sectionI2"
+      ]
+    },
+    "sectionA1": {
+      "type": "section",
+      "title": "Flag",
+      "keys": [
+        "showCountryFlag",
+        "labelWhenVPNisOff"
+      ]
+    },
+    "sectionA2": {
+      "type": "section",
+      "title": "Sound Alert",
+      "keys": [
+        "useSoundAlert",
+        "useSoundAlertAtBeginning"
+      ]
+    },
+    "sectionA3": {
+      "type": "section",
+      "title": "Icon colors",
+      "keys": [
+        "connectedColor",
+        "disconnectedColor",
+        "transitionColor",
+        "borderOpacity",
+        "applyColors"
+      ]
+    },
+    "sectionV1": {
+      "type": "section",
+      "title": "Connection Policy",
+      "keys": [
+        "connectAtStartup",
+        "reconnect",
+        "respectUserRequest",
+        "keybinding"
+      ]
+    },
+    "sectionV2": {
+      "type": "section",
+      "title": "Bypass VPN for below domains",
+      "keys": [
+        "bypassList",
+        "applyBypassHelp",
+        "applyBypassListButton"
+      ]
+    },
+    "sectionV3": {
+      "type": "section",
+      "title": "Activity Log",
+      "keys": [
+        "doLogActivity",
+        "logLifetime",
+        "view_activity_log_button",
+        "clear_activity_log_button"
+      ]
+    },
+    "sectionF1": {
+      "type": "section",
+      "title": "Flags",
+      "keys": [
+        "flagListHelp",
+        "flagList",
+        "sortFlagListBy"
+      ]
+    },
+    "sectionI1": {
+      "type": "section",
+      "title": "Settings",
+      "keys": [
+        "manageClients",
+        "showClientsHelp"
+      ]
+    },
+    "sectionI2": {
+      "type": "section",
+      "title": "Managed Apps",
+      "dependency": "manageClients",
+      "keys": [
+        "clientsHelp",
+        "clientsList",
+        "buttonPopulateClientsList"
+      ]
+    }
+  },
+  "lastVpnInterfaceUsed": {
+    "type": "generic",
+    "default": ""
+  },
+  "lastVpnNameUsed": {
+    "type": "generic",
+    "default": ""
+  },
+  "reactivationRequested": {
+    "type": "generic",
+    "default": false
+  },
+  "disconnectedByUser": {
+    "type": "generic",
+    "default": false
+  },
+  "vpnNames": {
+    "type": "generic",
+    "default": []
+  },
+  "showCountryFlag": {
+    "type": "switch",
+    "default": false,
+    "description": "Show the VPN server country flag next to the icon",
+    "tooltip": "If this box is checked, a request is sent to a geolocation server to find out the country where your VPN server is located and its flag is displayed next to the icon of this applet."
+  },
+  "labelWhenVPNisOff": {
+    "type": "combobox",
+    "dependency": "showCountryFlag",
+    "default": "LabelWithFlag",
+    "description": "While VPN is OFF",
+    "options": {
+      "Hide the flag place": "NoLabel",
+      "No flag, but leave its place": "LabelWithoutFlag",
+      "Show my Country's Flag": "LabelWithFlag"
+    }
+  },
+  "useSoundAlert": {
+    "type": "switch",
+    "default": false,
+    "description": "Emit an audible alert when VPN shuts down incidentally"
+  },
+  "useSoundAlertAtBeginning": {
+    "type": "switch",
+    "default": false,
+    "description": "Emit this audible alert when this Applet starts, if VPN is down.",
+    "dependency": "useSoundAlert"
+  },
+  "connectedColor": {
+    "type": "colorchooser",
+    "default": "rgb(83,199,160)",
+    "description": "While VPN is Connected"
+  },
+  "disconnectedColor": {
+    "type": "colorchooser",
+    "default": "rgb(245,121,0)",
+    "description": "While VPN is Disconnected"
+  },
+  "transitionColor": {
+    "type": "colorchooser",
+    "default": "rgb(127,127,127)",
+    "description": "While VPN is in Transition state"
+  },
+  "borderOpacity": {
+    "type": "scale",
+    "default": 0.5,
+    "min": 0.0,
+    "max": 1.0,
+    "step": 0.1,
+    "description": "Border opacity"
+  },
+  "applyColors": {
+    "type": "button",
+    "description": "Apply",
+    "callback": "on_apply_colors"
+  },
+  "connectAtStartup": {
+    "type": "switch",
+    "default": false,
+    "description": "Try to connect to last VPN as soon as VPN Sentinel starts."
+  },
+  "deactivateAtStartup": {
+    "type": "switch",
+    "default": false,
+    "dependency": "connectAtStartup!=true",
+    "description": "Deactivate this applet at startup",
+    "tooltip": "When this option is checked, this applet starts in 'deactivated' state, saving resources but not monitoring anything. You can activate it from its menu."
+  },
+  "reconnect": {
+    "type": "switch",
+    "default": false,
+    "description": "Try to reconnect to VPN when it shuts down incidentally."
+  },
+  "respectUserRequest": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not try to automatically reconnect to VPN when disconnected through VPN Sentinel",
+    "dependency": "reconnect"
+  },
+  "keybinding": {
+    "type": "keybinding",
+    "description": "Set the keybinding here to activate/deactivate the last used VPN.",
+    "default": "<Alt>v::"
+  },
+  "bypassList": {
+    "type": "list",
+    "default": [],
+    "columns": [
+      {
+        "id": "domain",
+        "title": "Domain",
+        "default": "",
+        "type": "string"
+      }
+    ]
+  },
+  "applyBypassHelp": {
+    "type": "label",
+    "description": "Clicking this 'Apply' button will stop and then start your default connection. Thus, all active VPN connections will be closed."
+  },
+  "applyBypassListButton": {
+    "type": "button",
+    "description": "Apply",
+    "callback": "on_applyBypassListButton_clicked"
+  },
+  "doLogActivity": {
+    "type": "switch",
+    "default": false,
+    "description": "Log status changes of VPNs and Internet applications"
+  },
+  "logLifetime": {
+    "type": "combobox",
+    "default": 1,
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9,
+      "10": 10,
+      "15": 15,
+      "20": 20,
+      "30": 30,
+      "45": 45,
+      "60": 60,
+      "90": 90
+    },
+    "description": "Lifetime (days)",
+    "tooltip": "Lifetime of a record in the log file, in days.",
+    "dependency": "doLogActivity"
+  },
+  "view_activity_log_button": {
+    "type": "button",
+    "description": "Open Activity Log",
+    "callback": "on_open_activity_log_requested",
+    "dependency": "doLogActivity"
+  },
+  "clear_activity_log_button": {
+    "type": "button",
+    "description": "Clear Activity Log",
+    "callback": "on_clear_activity_log_requested",
+    "dependency": "doLogActivity"
+  },
+  "flagListHelp": {
+    "type": "label",
+    "description": "This list will be completed automatically.\n\nConfirm the lines with correct data in order to immediately display the flag of the country where the VPN server is located."
+  },
+  "flagList": {
+    "type": "list",
+    "description": "Flag List",
+    "height": 400,
+    "columns": [
+      {
+        "id": "vpnName",
+        "title": "VPN Name",
+        "type": "string"
+      },
+      {
+        "id": "countryCode",
+        "title": "Country Code",
+        "type": "string",
+        "align": 0.5
+      },
+      {
+        "id": "flag",
+        "title": "Flag",
+        "type": "string",
+        "align": 0.5
+      },
+      {
+        "id": "confirmed",
+        "title": "Confirmed",
+        "type": "boolean",
+        "align": 0.5
+      }
+    ],
+    "default": []
+  },
+  "sortFlagListBy": {
+    "type": "combobox",
+    "default": "None",
+    "description": "Sort by",
+    "options": {
+      "None": "None",
+      "VPN Name": "vpnName",
+      "Country Code": "countryCode"
+    }
+  },
+  "manageClients": {
+    "type": "switch",
+    "default": false,
+    "description": "Manage Internet Apps",
+    "tooltip": "This option allows this applet to manage the Internet applications you listed below."
+  },
+  "showClientsHelp": {
+    "type": "switch",
+    "default": true,
+    "dependency": "manageClients",
+    "description": "Show Help"
+  },
+  "clientsHelp": {
+    "type": "label",
+    "dependency": "showClientsHelp",
+    "description": "Name: Application name, as it appears in Menu/Internet.\n\nLaunch: Whether or not to launch this application as soon as the VPN link becomes active.\n\nVPN only: Whether or not to quickly stop this application if it is started while the VPN is idle."
+  },
+  "clientsList": {
+    "type": "list",
+    "description": "Managed applications",
+    "columns": [
+      {
+        "id": "name",
+        "title": "Name",
+        "type": "string"
+      },
+      {
+        "id": "launch",
+        "title": "Launch",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      },
+      {
+        "id": "vpnOnly",
+        "title": "VPN only",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
+      }
+    ],
+    "default": []
+  },
+  "buttonPopulateClientsList": {
+    "type": "button",
+    "description": "Add all Menu/Internet applications",
+    "callback": "on_button_populate_clicked"
+  }
+}

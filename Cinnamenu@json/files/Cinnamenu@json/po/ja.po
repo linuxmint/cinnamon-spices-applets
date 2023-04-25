@@ -481,7 +481,7 @@ msgstr ""
 msgid "Show favorites on sidebar"
 msgstr "サイドバーにお気に入りを表示"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "お気に入りのアプリとファイルのアイコンをサイドバーに表示します"
 
 msgid "Show recent items"

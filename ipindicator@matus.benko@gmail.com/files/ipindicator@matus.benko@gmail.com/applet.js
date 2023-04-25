@@ -3,15 +3,21 @@ const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Gtk = imports.gi.Gtk;
 const Soup = imports.gi.Soup;
-const _httpSession = new Soup.SessionAsync();
+const ByteArray = imports.byteArray;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 
-Soup.Session.prototype.add_feature.call(_httpSession,
-    new Soup.ProxyResolverDefault());
+let _httpSession;
+if (Soup.MAJOR_VERSION == 2) {
+    _httpSession = new Soup.SessionAsync();
+    Soup.Session.prototype.add_feature.call(_httpSession,
+        new Soup.ProxyResolverDefault());
+} else { //version 3
+    _httpSession = new Soup.Session();
+}
 
 const defaultTooltip = _("trying to fetch IP information");
 const noConnectionIcon = "nm-no-connection";
@@ -126,18 +132,32 @@ const IpGateway = {
 
     _get: function (url, callback) {
         Debugger.log(url, 2);
-        const request = new Soup.Message({
-            method: 'GET',
-            uri: new Soup.URI(url)
-        });
-        _httpSession.queue_message(request, function (_httpSession, message) {
-            Debugger.log("Status code: " + message.status_code, 2);
-            if (message.status_code !== 200) {
-                return;
-            }
-            let data = request.response_body.data;
-            callback(data);
-        });
+        
+        if (Soup.MAJOR_VERSION === 2) {
+            const request = new Soup.Message({
+                method: 'GET',
+                uri: new Soup.URI(url)
+            });
+            _httpSession.queue_message(request, function (_httpSession, message) {
+                Debugger.log("Status code: " + message.status_code, 2);
+                if (message.status_code !== 200) {
+                    return;
+                }
+                let data = request.response_body.data;
+                callback(data);
+            });
+        } else { //version 3
+            const request = Soup.Message.new('GET', url);
+            _httpSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, function (_httpSession, message) {
+                Debugger.log("Status code: " + request.get_status(), 2);
+                if (request.get_status() !== 200) {
+                    return;
+                }
+                const bytes = _httpSession.send_and_read_finish(message);
+                let data = ByteArray.toString(bytes.get_data());
+                callback(data);
+            });
+        }
     }
 };
 

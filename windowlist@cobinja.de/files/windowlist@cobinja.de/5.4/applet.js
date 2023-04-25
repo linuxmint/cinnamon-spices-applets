@@ -936,6 +936,7 @@ class CobiAppButton {
     this._signalManager.connect(metaWindow, "notify::gtk-application-id", this._onGtkApplicationChanged, this);
     this._signalManager.connect(metaWindow, "notify::wm-class", this._onWmClassChanged, this);
     this._signalManager.connect(metaWindow, "workspace-changed", this._onWindowWorkspaceChanged, this);
+    this._signalManager.connect(metaWindow, "notify::appears-focused", this._updateFocus, this);
     
     this.actor.add_style_pseudo_class("active");
     this._updateTooltip();
@@ -1648,7 +1649,6 @@ class CobiWorkspace {
     
     this.onOrientationChanged(this._applet.orientation);
     
-    this._signalManager.connect(this._windowTracker, "notify::focus-app", this._updateFocus, this);
     this._signalManager.connect(global.settings, "changed::panel-edit-mode", this._onPanelEditModeChanged, this);
     this._signalManager.connect(this._settings, "changed::pinned-apps", this._updatePinnedApps, this);
     this._signalManager.connect(this._settings, "changed::show-windows-for-current-monitor", this._updateAllWindowsForMonitor, this);
@@ -2016,13 +2016,6 @@ class CobiWorkspace {
       appButton.updateView();
     }
     this.actor.queue_relayout();
-  }
-  
-  _updateFocus() {
-    for (let i = 0; i < this._appButtons.length; i++) {
-      let appButton = this._appButtons[i];
-      appButton._updateFocus();
-    }
   }
   
   handleDragOver(source, actor, x, y, time) {

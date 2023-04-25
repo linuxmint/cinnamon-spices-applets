@@ -1,7 +1,7 @@
 import { createAppletIcon } from "../../lib/AppletIcon";
 import { addDownloadingSongsChangeListener } from "../../services/youtubeDownload/YoutubeDownloadManager";
 
-export function createYoutubeDownloadIcon() {
+export function createYouTubeDownloadIcon() {
 
     const icon = createAppletIcon({
         icon_name: 'edit-download', 

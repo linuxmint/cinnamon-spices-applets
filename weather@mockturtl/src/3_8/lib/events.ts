@@ -9,6 +9,20 @@ interface IEvent<TSender, TArgs> {
 }
 
 export class Event<TSender, TArgs> implements IEvent<TSender, TArgs> {
+
+	private static eventStore: Event<any, any>[] = [];
+
+	/** Safe Unsubscription of all callbacks, Should be used on Applet removal. */
+	public static DisconnectAll() {
+		for (const event of this.eventStore) {
+			event.UnSubscribeAll();
+		}
+	}
+
+	public constructor() {
+		Event.eventStore.push(this);
+	}
+
 	private subscribers: Array<(sender: TSender, args: TArgs) => void> = [];
 
 	public Subscribe(fn: (sender: TSender, args: TArgs) => void): void {
@@ -19,7 +33,7 @@ export class Event<TSender, TArgs> implements IEvent<TSender, TArgs> {
 	 * If you use this, you HAVE to make sure it's the same function
 	 * what you passed in. this means you have to save the arrow or the Lang.bind
 	 * function and Subscribe/Unsubscribe that.
-	 * 
+	 *
 	 * If you create them on the fly you won't be able to unsubscribe from them.
 	 */
 	public Unsubscribe(fn: (sender: TSender, args: TArgs) => void): void {

@@ -1,36 +1,38 @@
-const { Icon, IconType } = imports.gi.St
-const { Point } = imports.gi.Clutter
+const { Icon, IconType } = imports.gi.St;
+// @ts-ignore
+const { Point } = imports.gi.Clutter;
 
+export function createAppletIcon(
+  props?: ConstructorParameters<typeof Icon>[0]
+) {
+  const icon_type = props?.icon_type || IconType.SYMBOLIC;
+  const panel = __meta.panel;
 
-export function createAppletIcon(props?: ConstructorParameters<typeof Icon>[0]) {
+  function getIconSize() {
+    return panel.getPanelZoneIconSize(__meta.locationLabel, icon_type);
+  }
 
-    const icon_type = props?.icon_type || IconType.SYMBOLIC
-    const panel = __meta.panel
+  function getStyleClass() {
+    return icon_type === IconType.SYMBOLIC
+      ? "system-status-icon"
+      : "applet-icon";
+  }
 
-    function getIconSize() {
-        return panel.getPanelZoneIconSize(__meta.locationLabel, icon_type)
-    }
+  const icon = new Icon({
+    icon_type,
+    style_class: getStyleClass(),
+    icon_size: getIconSize(),
+    pivot_point: new Point({ x: 0.5, y: 0.5 }),
+    ...props,
+  });
 
-    function getStyleClass() {
-        return icon_type === IconType.SYMBOLIC ? 'system-status-icon' : 'applet-icon'
-    }
+  panel.connect("icon-size-changed", () => {
+    icon.set_icon_size(getIconSize());
+  });
 
-    const icon = new Icon({
-        icon_type,
-        style_class: getStyleClass(),
-        icon_size: getIconSize(),
-        pivot_point: new Point({ x: 0.5, y: 0.5 }), 
-        ...props
-    })
+  icon.connect("notify::icon-type", () => {
+    icon.style_class = getStyleClass();
+  });
 
-    panel.connect('icon-size-changed', () => {
-        icon.set_icon_size(getIconSize())
-    })
-
-    icon.connect('notify::icon-type', () => {
-        icon.style_class = getStyleClass()
-    })
-
-    return icon
-
+  return icon;
 }

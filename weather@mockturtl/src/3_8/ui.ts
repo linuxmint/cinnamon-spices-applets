@@ -49,7 +49,7 @@ export class UI {
 		this.App = app;
 		this.menuManager = new PopupMenuManager(this.App);
 		this.menu = new AppletPopupMenu(this.App, orientation);
-		// this.menu.setCustomStyleClass and 
+		// this.menu.setCustomStyleClass and
 		//this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
 		// Doesn't do shit, setting class on the box instead.
 		this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
@@ -61,6 +61,13 @@ export class UI {
 		this.BuildPopupMenu();
 		// Subscriptions
 		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this); // on theme change
+		this.App.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged));
+	}
+
+	private OnConfigChanged = (config: Config, confChange: any, data: WeatherData) => {
+		if (this.App.Provider == null)
+			return;
+		this.Display(data, config, this.App.Provider);
 	}
 
 	public Toggle(): void {
@@ -125,9 +132,9 @@ export class UI {
 
 	/**
 	 * Displays weather info in Popup
-	 * @param weather 
-	 * @param config 
-	 * @param provider 
+	 * @param weather
+	 * @param config
+	 * @param provider
 	 */
 	public Display(weather: WeatherData, config: Config, provider: WeatherProvider): boolean {
 		this.CurrentWeather.Display(weather, config);
@@ -146,8 +153,8 @@ export class UI {
 	// Callbacks
 
 	/**
-	 * Resetting flags from Hourly scroll view when theme changed to 
-	 * prevent incorrect height requests, rebuild 
+	 * Resetting flags from Hourly scroll view when theme changed to
+	 * prevent incorrect height requests, rebuild
 	 * when switching between light and dark themes
 	 * to recolor some of the text
 	 */
@@ -164,7 +171,7 @@ export class UI {
 	private async PopupMenuToggled(caller: any, data: any) {
 		// data - true is opened, false is closed
 		if (data == false) {
-			await delay(100); // Closing after popup menu is closed 
+			await delay(100); // Closing after popup menu is closed
 			this.HideHourlyWeather();
 		}
 	}
@@ -173,7 +180,7 @@ export class UI {
 	// Utils
 
 	/**
-	 * 
+	 *
 	 * @param color Background color
 	 */
 	private IsLightTheme(): boolean {
@@ -265,7 +272,7 @@ export class UI {
 	private async ShowHourlyWeather(animate: boolean = true): Promise<void> {
 		this.HourlySeparator.Show();
 		this.Bar.SwitchButtonToHide();
-		await this.HourlyWeather.Show(animate);
+		await this.HourlyWeather.Show(this.menu.actor.width, animate);
 	}
 
 	private async HideHourlyWeather(animate: boolean = true): Promise<void> {

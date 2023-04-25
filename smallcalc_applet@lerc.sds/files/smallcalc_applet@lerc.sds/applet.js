@@ -69,6 +69,7 @@ function makeApplet(orientation, panel_height, applet_id) {
 
     buildLayout();
 
+    let drag_device;
     enableDragging();
 
 
@@ -107,7 +108,9 @@ function makeApplet(orientation, panel_height, applet_id) {
 
         osdBox.connect("button-press-event", function(actor, event) {
             dragging = true;
-            Clutter.grab_pointer(osdBox);
+            drag_device = event.get_device();
+            drag_device.grab(osdBox);
+            
             Main.pushModal(osdBox);
 
             dragStartMousePosition = event.get_coords();
@@ -117,7 +120,7 @@ function makeApplet(orientation, panel_height, applet_id) {
         osdBox.connect("button-release-event", function() {
             dragging = false;
             Main.popModal(osdBox);
-            Clutter.ungrab_pointer();
+            drag_device.ungrab();
 
             layoutBox.textEntryField.grab_key_focus();
         });

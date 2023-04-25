@@ -8,6 +8,8 @@ For more details and feature requests: [Dark Mode in Cinnamon Desktop Environmen
 License: [GPL-v3](https://github.com/linuxedo/cinnamon-dark-mode-applet/blob/main/LICENSE)
 
 ## Changelog
+* Jul 12, 2022
+  - Fix configuration dialog not opening in some circumstances.
 * Apr 12, 2022
   - Fix desklet not working if local folders are missing
 * Nov 21, 2021

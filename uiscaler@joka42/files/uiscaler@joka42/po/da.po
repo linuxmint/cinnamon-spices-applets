@@ -1,0 +1,43 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021 joka42
+# This file is distributed under the same license as the PACKAGE package.
+# joka42 jas_nombre@web.de, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-13 14:24+0100\n"
+"PO-Revision-Date: 2022-10-30 18:54+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:24
+msgid "Scale User Interface with one click"
+msgstr "Skalér brugergrænsefladen med ét klik"
+
+#: applet.js:34
+msgid "Scale 200%"
+msgstr "Skalér 200 %"
+
+#: applet.js:464
+msgid "Scale 125%"
+msgstr "Skalér 125 %"
+
+#: applet.js:50
+msgid "Reset 100%"
+msgstr "Nulstil til 100 %"
+
+#. metadata.json->name
+msgid "UI Scaler"
+msgstr "Brugergrænsefladeskalering"
+
+#. metadata.json->description
+msgid "Switch resolution on-the-fly with HiDPI support"
+msgstr "Ændr opløsning på farten med understøttelse af HiDPI"
