@@ -13,9 +13,11 @@ Requirements
 
 An installed, configured and working docker and/or docker-compose.
 
-The docker group has been added to the current user
+The docker group has been added to the current user:
 
 `sudo usermod -aG docker $USER`
+
+Then re-login as the user for the group changes to take place.
 
 By default, the applet will look for `docker-compose.yml` files in a directory 
 called `docker_projects` in the users home directory. This can be changed in the 
