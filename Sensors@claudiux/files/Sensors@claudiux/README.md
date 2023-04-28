@@ -73,6 +73,9 @@ If that give you a valid result running _sensors_, add __drivetemp__ into the li
   echo "drivetemp" | sudo tee -a /etc/modules
 
 #### External disks (on USB port)
+
+First, run the command:
+
   echo "%sudo ALL = NOPASSWD: /usr/sbin/smartctl" | sudo tee /etc/sudoers.d/smartctl
 
 Then log out and log in your session.
@@ -120,6 +123,8 @@ There are different reasons:
 ### Some values seem to be wrong
 
 Your `/etc/sensors3.conf` file must be configured for your chip. Search if a [configuration file][lmsensorsconfigs] already exists.
+
+Since version 3.0.0 of this applet, you can specify certain limit values and a formula to correct the values returned by a sensor. This is often much simpler than having to modify the `/etc/sensors3.conf` file. The correct values and the formula will be found in the documentation of your chipset.
 
 ### My computer seems to have very few sensors
 

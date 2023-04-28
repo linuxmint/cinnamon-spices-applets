@@ -410,19 +410,20 @@ class SensorsApplet extends Applet.TextApplet {
             _temp = disk["value"];
           Util.spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
             this._temp[_disk_name] = stdout;
-            //~ log("typeof _temp: "+typeof _temp, true);
-
 
             if (typeof this._temp[_disk_name] === "object")
               _temp = to_string(this._temp[_disk_name]);
             else
               _temp = this._temp[_disk_name];
-
-            //~ log(""+_disk_name+": "+_temp+"°C", true);
           }));
           if (!isNaN(_temp)) {
-            let _temp_max = disk["high"];
-            let _temp_crit = disk["crit"];
+            if (disk["user_formula"] && disk["user_formula"].length > 0) {
+              let _user_formula = disk["user_formula"].replace(/\$/g, _temp);
+              _temp = 1.0*eval(_user_formula)
+            }
+
+            let _temp_max = 1*disk["high"];
+            let _temp_crit = 1*disk["crit"];
 
             let _shown_name = "";
             if (this.show_temp_name) _shown_name = disk["shown_name"]+" ";
@@ -467,7 +468,12 @@ class SensorsApplet extends Applet.TextApplet {
               _tooltip +=  (f["show_in_panel"] && this.bold_italics_main_sensors) ?
                 " <i><b>" + name + "</b></i>\n" :
                 " " + name + "\n";
-              let str_value = this._formatted_fan(this.data["fans"][f["sensor"]]["input"]).padStart(10, " ");
+              let _value = 1.0*this.data["fans"][f["sensor"]]["input"];
+              if (f["user_formula"] && f["user_formula"].length > 0) {
+                let _formula_result = f["user_formula"].replace(/\$/g, _value);
+                _value = 1.0*eval(_formula_result)
+              }
+              let str_value = this._formatted_fan(_value).padStart(10, " ");
               _tooltip += (this.bold_values) ?
                 "  <b>" + str_value + "</b>" :
                 "  " + str_value;
@@ -499,11 +505,25 @@ class SensorsApplet extends Applet.TextApplet {
               _tooltip += (v["show_in_panel"] && this.bold_italics_main_sensors) ?
                 " <i><b>" + name + "</b></i>\n" :
                 " " + name + "\n";
-              let str_value = this._formatted_voltage(this.data["voltages"][v["sensor"]]["input"]).padStart(10, " ");
+              let _value = 1.0*this.data["voltages"][v["sensor"]]["input"];
+              if (v["user_formula"] && v["user_formula"].length > 0) {
+                let _formula_result = v["user_formula"].replace(/\$/g, _value);
+                _value = 1.0*eval(_formula_result)
+              }
+              let str_value = this._formatted_voltage(_value).padStart(10, " ");
               _tooltip += (this.bold_values) ?
                 "  <b>" + str_value + "</b>" :
                 "  " + str_value;
-              _tooltip += "  "+ _("max:") + " " + this._formatted_voltage(this._get_max_voltage(this.data["voltages"][v["sensor"]]));
+
+              let _max_defined_by_user = v["max_by_user"];
+              let _min_defined_by_user = v["min_by_user"];
+
+              let _voltage_max = (_max_defined_by_user && _max_defined_by_user.length > 0) ? 1.0*_max_defined_by_user : 1.0*this._get_max_voltage(this.data["voltages"][v["sensor"]]);
+              let _voltage_min = (_min_defined_by_user && _min_defined_by_user.length > 0) ? 1.0*_min_defined_by_user : 1.0*this._get_min_voltage(this.data["voltages"][v["sensor"]]);
+
+              _tooltip += "  "+ _("min:") + " " + this._formatted_voltage(_voltage_min);
+              _tooltip += " ";
+              _tooltip += "  "+ _("max:") + " " + this._formatted_voltage(_voltage_max);
               _tooltip += "\n";
               str_value = null;
               name = null
@@ -592,15 +612,23 @@ class SensorsApplet extends Applet.TextApplet {
       for (let t of this.temp_sensors) {
         if (this.data["temps"][t["sensor"]] !== undefined) {
           if (t["show_in_panel"]) {
-            let _temp = this.data["temps"][t["sensor"]]["input"];
+            let _temp = 1.0*this.data["temps"][t["sensor"]]["input"];
             _shown_name = "";
             if (this.show_temp_name && !vertical) _shown_name = t["shown_name"]+" ";
 
             if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("🌡");
+
+            if (t["user_formula"] && t["user_formula"].length > 0) {
+              let _formula_result = t["user_formula"].replace(/\$/g, _temp);
+              _temp = 1.0*eval(_formula_result)
+            }
+
             this.label_parts.push(_shown_name+this._formatted_temp(_temp, vertical));
 
-            let _temp_max = this._get_max_temp(this.data["temps"][t["sensor"]]);
-            let _temp_crit = this._get_crit_temp(this.data["temps"][t["sensor"]]);
+            let _temp_max = (t["high_by_user"] && t["high_by_user"].length > 0) ?
+              1.0*t["high_by_user"] : 1.0*this._get_max_temp(this.data["temps"][t["sensor"]]);
+            let _temp_crit = (t["crit_by_user"] && t["crit_by_user"].length > 0) ?
+              1.0*t["crit_by_user"] : 1.0*this._get_crit_temp(this.data["temps"][t["sensor"]]);
 
             if (!isNaN(_temp_crit) && _temp_crit > 0 && _temp >= _temp_crit)
               _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
@@ -619,29 +647,25 @@ class SensorsApplet extends Applet.TextApplet {
           if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
           if (disk["value"]) this._temp[_disk_name] = disk["value"];
           let command = "bash -c '"+SCRIPTS_DIR+"/get_disk_temp.sh "+_disk_name+"'";
-          //~ log("command: "+command, true);
           let _temp;
           Util.spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
-            //~ this._temp[_disk_name] = stdout;
             if (exitCode === 0) {
-
-
               if (typeof stdout === "object") {
                 _temp = to_string(stdout);
               } else {
                 _temp = ""+stdout;
               }
 
-              _temp = 0+parseInt(_temp);
+              _temp = 1.0*parseInt(_temp);
+              if (disk["user_formula"] && disk["user_formula"].length > 0) {
+                let _user_formula = disk["user_formula"].replace(/\$/g, _temp);
+                _temp = 1.0*eval(_user_formula)
+              }
+
               this._temp[_disk_name] = _temp;
 
-              //~ log("typeof _temp: "+typeof _temp, true);
-
               if (typeof _temp === "number") {
-                //~ log(_disk_name+": "+this._temp[_disk_name], true);
                 disk["value"] = _temp;
-
-
               }
             }
           }));
@@ -660,10 +684,7 @@ class SensorsApplet extends Applet.TextApplet {
 
           let _label_part = _shown_name+this._formatted_temp(_temp, vertical);
 
-          //~ log("_label_part: "+_label_part, true);
-
           this.label_parts.push(""+_label_part);
-          //~ log("_label_parts.length: "+this.label_parts.length, true);
           nbr_already_shown += 1;
         }
       }
@@ -679,14 +700,20 @@ class SensorsApplet extends Applet.TextApplet {
 
       for (let f of this.fan_sensors) {
         if (f["show_in_panel"]) {
-          let _fan = this.data["fans"][f["sensor"]]["input"];
           _shown_name = "";
           if (this.show_fan_name && !vertical) _shown_name = f["shown_name"]+" ";
+
+          let _fan = 1.0*this.data["fans"][f["sensor"]]["input"];
+          if (f["user_formula"] && f["user_formula"].length > 0) {
+            let _formula_result = f["user_formula"].replace(/\$/g, _fan);
+            _fan = 1.0*eval(_formula_result)
+          }
 
           if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("🤂");
           this.label_parts.push(_shown_name+this._formatted_fan(_fan, vertical));
 
-          let _fan_min = this._get_min_fan(this.data["fans"][f["sensor"]]);
+          let _fan_min = (f["min_by_user"] && f["min_by_user"].length > 0) ?
+            1.0*f["min_by_user"] : 1.0*this._get_min_fan(this.data["fans"][f["sensor"]]);
 
           if (_fan < _fan_min)
             _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
@@ -708,16 +735,26 @@ class SensorsApplet extends Applet.TextApplet {
 
       for (let v of this.volt_sensors) {
         if (v["show_in_panel"]) {
-          let _voltage = this.data["voltages"][v["sensor"]]["input"];
+          let _voltage = 1.0*this.data["voltages"][v["sensor"]]["input"];
           _shown_name = "";
           if (this.show_volt_name && !vertical) _shown_name = v["shown_name"]+" ";
+
+          if (v["user_formula"] && v["user_formula"].length > 0) {
+            let _formula_result = v["user_formula"].replace(/\$/g, _voltage);
+            _voltage = 1.0*eval(_formula_result)
+          }
+          let str_value = this._formatted_voltage(_voltage).padStart(10, " ");
 
           if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("🗲");
           this.label_parts.push(_shown_name+this._formatted_voltage(_voltage, vertical));
 
-          let _voltage_max = this._get_max_voltage(this.data["voltages"][v["sensor"]]);
+          let _max_defined_by_user = v["max_by_user"];
+          let _min_defined_by_user = v["min_by_user"];
 
-          if (_voltage >= _voltage_max)
+          let _voltage_max = (_max_defined_by_user && _max_defined_by_user.length > 0) ? 1.0*_max_defined_by_user : 1.0*this._get_max_voltage(this.data["voltages"][v["sensor"]]);
+          let _voltage_min = (_min_defined_by_user && _min_defined_by_user.length > 0) ? 1.0*_min_defined_by_user : 1.0*this._get_min_voltage(this.data["voltages"][v["sensor"]]);
+
+          if (_voltage >= _voltage_max || _voltage < _voltage_min)
             _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
 
           nbr_already_shown += 1;
@@ -753,16 +790,13 @@ class SensorsApplet extends Applet.TextApplet {
         }
       }
 
-      //~ log("nbr_already_shown: '"+nbr_already_shown+"'", true);
       //~ if (nbr_already_shown === 0) this.label_parts.pop(); // Deletes the useless "" pushed in this.label_parts.
     }
 
     if (this.label_parts.length === 0) {
       _appletLabel = this._get_default_applet_label();
     } else {
-      //~ log("Final _label_parts.length: "+this.label_parts.length, true);
       _appletLabel = this.label_parts.join(sep);
-      //~ log("_appletLabel754: '"+_appletLabel+"'", true);
       if (!this.keep_size) {
         while (_appletLabel.includes("  ")) {
           _appletLabel = _appletLabel.replace(/  /g, " ");
@@ -774,20 +808,13 @@ class SensorsApplet extends Applet.TextApplet {
       while (_appletLabel.includes("\n\n")) {
         _appletLabel = _appletLabel.replace(/\n\n/g, "\n");
       }
-      //~ log("_appletLabel777: '"+_appletLabel+"'", true);
-      //~ log("Last character: '"+_appletLabel.slice(-1)+"'", true);
       if (_appletLabel.slice(-1) === '│') {
-        //~ log("_appletLabel780 ends with '│'.", true);
         _appletLabel = _appletLabel.slice(0, -1)
       }
-      //~ log("_appletLabel783: '"+_appletLabel+"'", true);
     }
-
-
 
     this.set_applet_label(_appletLabel);
 
-    //~ log("_actor_style: "+_actor_style, true);
     this.actor.set_style_class_name(_actor_style);
     this._applet_label.set_style_class_name("tcolor"+this.char_color);
 
@@ -902,10 +929,8 @@ class SensorsApplet extends Applet.TextApplet {
     let _letter = "";
     let ret;
 
-    //let _minimumIntegerDigits = 3;
     if (this.use_fahrenheit) {
       _t = this._toFahrenheit(t);
-      //_minimumIntegerDigits = 3;
     }
 
     //let _lang = GLib.getenv("LANGUAGE").replace("_", "-");
@@ -960,7 +985,6 @@ class SensorsApplet extends Applet.TextApplet {
     } else {
       return 0
     }
-
   }
 
 
@@ -1016,7 +1040,7 @@ class SensorsApplet extends Applet.TextApplet {
         ret += (this.show_volt_unit) ? _sep + "mV" : "";
         break;
       case "both":
-        if (_v < 1) {
+        if (0 < _v < 1) {
           _v = Math.ceil(_v * 1000);
           ret = (new Intl.NumberFormat(_lang, { minimumIntegerDigits: 3 }).format(_v)).toString();
           ret += (this.show_volt_unit) ? _sep + "mV" : "";
@@ -1038,7 +1062,15 @@ class SensorsApplet extends Applet.TextApplet {
     if (dico["max"] !== undefined && !isNaN(dico["max"])) {
       return 1.0 * dico["max"]
     } else {
-      return 10
+      return 127.0
+    }
+  }
+
+  _get_min_voltage(dico) {
+    if (dico["min"] !== undefined && !isNaN(dico["min"])) {
+      return 1.0 * dico["min"]
+    } else {
+      return 0.0
     }
   }
 
@@ -1112,7 +1144,6 @@ class SensorsApplet extends Applet.TextApplet {
 
   on_applet_removed_from_panel() {
     this.on_applet_reloaded();
-
     this.s.finalize();
   }
 

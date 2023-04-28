@@ -220,6 +220,7 @@ function convert_to_json(raw) {
   var new_chip = true;
   var chip = "";
   var feature = "";
+  //~ var subfeature_numbers = {};
   for (let line of lines) {
     if (line.trim() == "") {
       new_chip = true;
@@ -237,6 +238,13 @@ function convert_to_json(raw) {
     }
     if (line.startsWith("  ")) {
       let [subfeature, value] = line.trim().split(": ");
+      //~ let sf_keys = Object.keys(subfeature_numbers);
+      //~ if (sf_keys.indexOf(subfeature) > -1) {
+        //~ subfeature_numbers[subfeature] = subfeature_numbers[subfeature] + 1;
+        //~ subfeature = subfeature + " - " + subfeature_numbers[subfeature];
+      //~ } else {
+        //~ subfeature_numbers[subfeature] = 0
+      //~ }
       ret[chip][feature][subfeature] = (value*1000/1000).toFixed(3);
       continue;
     }
