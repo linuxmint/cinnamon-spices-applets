@@ -1,3 +1,6 @@
+### v1.0.3~20230428
+  * Code cleanup
+
 ### v1.0.2~20230412
   * Close menu before restarting Cinnamon
 

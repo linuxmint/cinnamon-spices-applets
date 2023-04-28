@@ -180,7 +180,10 @@ class LGS extends Applet.TextIconApplet {
         });
         itemReloadCinnamon.connect(
             "activate",
-            () => restartCinnamon(true)
+            () => {
+                this.menu.close();
+                restartCinnamon(true)
+            }
         );
 
         this.menu.addMenuItem(itemReloadCinnamon);
@@ -199,7 +202,8 @@ class LGS extends Applet.TextIconApplet {
             let s =  new PopupMenu.PopupMenuItem(applet, {
                 reactive: true
             });
-            s.connect("activate", function() {
+            s.connect("activate", () => {
+                this.menu.close();
                 reloadExtension(applet, Type.APPLET)
             });
             this.subMenuReloadApplets.menu.addMenuItem(s)
@@ -213,7 +217,7 @@ class LGS extends Applet.TextIconApplet {
             let s =  new PopupMenu.PopupMenuItem(desklet, {
                 reactive: true
             });
-            s.connect("activate", function() {
+            s.connect("activate", () => {
                 this.menu.close();
                 reloadExtension(desklet, Type.DESKLET)
             });
@@ -228,7 +232,8 @@ class LGS extends Applet.TextIconApplet {
             let s =  new PopupMenu.PopupMenuItem(extension, {
                 reactive: true
             });
-            s.connect("activate", function() {
+            s.connect("activate", () => {
+                this.menu.close();
                 reloadExtension(extension, Type.EXTENSION)
             });
             this.subMenuReloadExtensions.menu.addMenuItem(s)
@@ -248,7 +253,8 @@ class LGS extends Applet.TextIconApplet {
             let s =  new PopupMenu.PopupMenuItem(applet, {
                 reactive: true
             });
-            s.connect("activate", function() {
+            s.connect("activate", () => {
+                this.menu.close();
                 Util.spawnCommandLineAsync('bash -c "xdg-open %s/applets/%s/"'.format(SPICES_DIR, applet))
             });
             this.subMenuCodeApplets.menu.addMenuItem(s)
@@ -262,7 +268,8 @@ class LGS extends Applet.TextIconApplet {
             let s =  new PopupMenu.PopupMenuItem(desklet, {
                 reactive: true
             });
-            s.connect("activate", function() {
+            s.connect("activate", () => {
+                this.menu.close();
                 Util.spawnCommandLineAsync('bash -c "xdg-open %s/desklets/%s/"'.format(SPICES_DIR, desklet))
             });
             this.subMenuCodeDesklets.menu.addMenuItem(s)
@@ -276,7 +283,8 @@ class LGS extends Applet.TextIconApplet {
             let s =  new PopupMenu.PopupMenuItem(extension, {
                 reactive: true
             });
-            s.connect("activate", function() {
+            s.connect("activate", () => {
+                this.menu.close();
                 Util.spawnCommandLineAsync('bash -c "xdg-open %s/extensions/%s/"'.format(SPICES_DIR, extension))
             });
             this.subMenuCodeExtensions.menu.addMenuItem(s)
