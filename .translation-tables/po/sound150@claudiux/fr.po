@@ -1,0 +1,551 @@
+# sound150@claudiux Applet POT File.
+# Copyright (C) 2018 Claudiux <claude.clerc@gmail.com>
+# This file is distributed under the same license as the cinnamon package.
+# FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-31 22:37+0200\n"
+"PO-Revision-Date: 2023-01-02 12:48+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: 5.4/applet.js:73 4.4/applet.js:72 4.6/applet.js:73 3.4/applet.js:65
+#: 2.8/applet.js:65
+msgid "Playing"
+msgstr "À l'écoute"
+
+#: 5.4/applet.js:74 4.4/applet.js:73 4.6/applet.js:74 3.4/applet.js:66
+#: 2.8/applet.js:66
+msgid "Paused"
+msgstr "En pause"
+
+#: 5.4/applet.js:75 4.4/applet.js:74 4.6/applet.js:75 3.4/applet.js:67
+#: 2.8/applet.js:67
+msgid "Stopped"
+msgstr "Arrêté"
+
+#: 5.4/applet.js:587 5.4/applet.js:757 5.4/applet.js:760 5.4/applet.js:763
+#: 5.4/applet.js:1404 4.4/applet.js:591 4.4/applet.js:723 4.4/applet.js:727
+#: 4.6/applet.js:592 4.6/applet.js:719 4.6/applet.js:723 3.4/applet.js:534
+#: 3.4/applet.js:766 3.4/applet.js:770 2.8/applet.js:529 2.8/applet.js:761
+#: 2.8/applet.js:765
+msgid "Unknown Artist"
+msgstr "Artiste inconnu"
+
+#: 5.4/applet.js:588 5.4/applet.js:770 4.4/applet.js:592 4.4/applet.js:734
+#: 4.6/applet.js:593 4.6/applet.js:730 3.4/applet.js:535 3.4/applet.js:777
+#: 2.8/applet.js:530 2.8/applet.js:772
+msgid "Unknown Album"
+msgstr "Album inconnu"
+
+#: 5.4/applet.js:589 5.4/applet.js:775 5.4/applet.js:1407 4.4/applet.js:593
+#: 4.4/applet.js:739 4.6/applet.js:594 4.6/applet.js:735 3.4/applet.js:536
+#: 3.4/applet.js:782 2.8/applet.js:531 2.8/applet.js:777
+msgid "Unknown Title"
+msgstr "Titre inconnu"
+
+#: 5.4/applet.js:611 4.4/applet.js:615 4.6/applet.js:616 3.4/applet.js:557
+#: 2.8/applet.js:552
+msgid "Previous"
+msgstr "Précédent"
+
+#: 5.4/applet.js:614 5.4/applet.js:845 5.4/applet.js:851 4.4/applet.js:618
+#: 4.4/applet.js:794 4.4/applet.js:800 4.6/applet.js:619 4.6/applet.js:790
+#: 4.6/applet.js:796 3.4/applet.js:560 3.4/applet.js:842 3.4/applet.js:848
+#: 2.8/applet.js:555 2.8/applet.js:837 2.8/applet.js:843
+msgid "Play"
+msgstr "Écouter"
+
+#: 5.4/applet.js:617 4.4/applet.js:621 4.6/applet.js:622 3.4/applet.js:563
+#: 2.8/applet.js:558
+msgid "Stop"
+msgstr "Arrêt"
+
+#: 5.4/applet.js:620 4.4/applet.js:624 4.6/applet.js:625 3.4/applet.js:566
+#: 2.8/applet.js:561
+msgid "Next"
+msgstr "Suivant"
+
+#: 5.4/applet.js:634 5.4/applet.js:877 4.4/applet.js:634 4.4/applet.js:824
+#: 4.6/applet.js:635 4.6/applet.js:822 3.4/applet.js:577 3.4/applet.js:872
+#: 2.8/applet.js:572 2.8/applet.js:867
+msgid "Consecutive Playing"
+msgstr "Lire à la suite"
+
+#: 5.4/applet.js:637 5.4/applet.js:893 4.4/applet.js:641 4.4/applet.js:838
+#: 4.6/applet.js:638 4.6/applet.js:838 3.4/applet.js:584 3.4/applet.js:886
+#: 2.8/applet.js:579 2.8/applet.js:881
+msgid "No Shuffle"
+msgstr "Pas de mélange"
+
+#: 5.4/applet.js:684 4.4/applet.js:557 4.6/applet.js:558 3.4/applet.js:500
+#: 2.8/applet.js:495
+msgid "Open Player"
+msgstr "Ouvrir le lecteur"
+
+#: 5.4/applet.js:698 4.4/applet.js:570 4.6/applet.js:571 3.4/applet.js:513
+#: 2.8/applet.js:508
+msgid "Quit Player"
+msgstr "Fermer le lecteur"
+
+#: 5.4/applet.js:839 4.4/applet.js:788 4.6/applet.js:784 3.4/applet.js:836
+#: 2.8/applet.js:831
+msgid "Pause"
+msgstr "Pause"
+
+#: 5.4/applet.js:879 4.4/applet.js:826 4.6/applet.js:824 3.4/applet.js:874
+#: 2.8/applet.js:869
+msgid "Repeat Single"
+msgstr "Répéter ce titre"
+
+#: 5.4/applet.js:881 4.4/applet.js:828 4.6/applet.js:826 3.4/applet.js:876
+#: 2.8/applet.js:871
+msgid "Repeat All"
+msgstr "Tout répéter"
+
+#: 5.4/applet.js:893 4.4/applet.js:838 4.6/applet.js:838 3.4/applet.js:886
+#: 2.8/applet.js:881
+msgid "Shuffle"
+msgstr "Mélanger"
+
+#: 5.4/applet.js:1100 4.4/applet.js:1019 4.6/applet.js:1027 3.4/applet.js:1184
+#: 2.8/applet.js:1262
+msgid "Mute output"
+msgstr "Couper le son en sortie"
+
+#: 5.4/applet.js:1101 4.4/applet.js:1020 4.6/applet.js:1028 3.4/applet.js:1185
+#: 2.8/applet.js:1263
+msgid "Mute input"
+msgstr "Couper le son en entrée"
+
+#: 5.4/applet.js:1108 4.4/applet.js:1026 4.6/applet.js:1034 3.4/applet.js:1191
+#: 2.8/applet.js:1269
+msgid "Applications"
+msgstr "Applications"
+
+#: 5.4/applet.js:1109 4.4/applet.js:1027 4.6/applet.js:1035 3.4/applet.js:1192
+#: 2.8/applet.js:1270
+msgid "Output device"
+msgstr "Périphérique de sortie"
+
+#: 5.4/applet.js:1116 4.4/applet.js:1034 4.6/applet.js:1042 3.4/applet.js:1199
+#: 2.8/applet.js:1277
+msgid "Microphone"
+msgstr "Micro"
+
+#: 5.4/applet.js:1118 4.4/applet.js:1036 4.6/applet.js:1044 3.4/applet.js:1202
+#: 2.8/applet.js:1280
+msgid "Input device"
+msgstr "Périphérique d'entrée"
+
+#: 5.4/applet.js:1397 5.4/applet.js:1536 4.4/applet.js:1403 4.4/applet.js:1497
+#: 4.6/applet.js:1420 4.6/applet.js:1515 3.4/applet.js:1577 3.4/applet.js:1662
+#: 2.8/applet.js:1650 2.8/applet.js:1735
+msgid "Volume"
+msgstr "Volume"
+
+#: 5.4/applet.js:1525 4.4/applet.js:1397 4.6/applet.js:1409 3.4/applet.js:1571
+#: 2.8/applet.js:1644
+msgid "Launch player"
+msgstr "Lancer le lecteur"
+
+#: 5.4/applet.js:1530 4.4/applet.js:1392 4.6/applet.js:1414 3.4/applet.js:1566
+#: 2.8/applet.js:1639
+msgid "Choose player controls"
+msgstr "Choisissez les contrôles du lecteur"
+
+#. 5.4->settings-schema.json->section4->description
+#. 4.4->settings-schema.json->section3->description
+#. 4.6->settings-schema.json->section3->description
+#. 3.4->settings-schema.json->section3->description
+#: 5.4/applet.js:1542 4.4/applet.js:1409 4.6/applet.js:1426 3.4/applet.js:1584
+#: 2.8/applet.js:1657
+msgid "Sound Settings"
+msgstr "Paramètres du son"
+
+#. metadata.json->name
+msgid "Sound 150%"
+msgstr "Son 150%"
+
+#. metadata.json->description
+msgid ""
+"An applet, based on the Cinnamon one, to control sound (up to 150% of "
+"nominal volume) and music"
+msgstr ""
+"Une applet, basée sur celle de Cinnamon, pour contrôler le son (jusqu'à 150% "
+"de son volume nominal) et la musique"
+
+#. 5.4->settings-schema.json->section1->description
+#. 4.4->settings-schema.json->section1->description
+#. 4.6->settings-schema.json->section1->description
+#. 3.4->settings-schema.json->section1->description
+msgid "Menu"
+msgstr "Menu"
+
+#. 5.4->settings-schema.json->playerControl->description
+#. 4.4->settings-schema.json->playerControl->description
+#. 4.6->settings-schema.json->playerControl->description
+#. 3.4->settings-schema.json->playerControl->description
+#. 2.8->settings-schema.json->playerControl->description
+msgid "Control Players"
+msgstr "Contrôler les lecteurs"
+
+#. 5.4->settings-schema.json->extendedPlayerControl->description
+#. 4.4->settings-schema.json->extendedPlayerControl->description
+#. 4.6->settings-schema.json->extendedPlayerControl->description
+#. 3.4->settings-schema.json->extendedPlayerControl->description
+#. 2.8->settings-schema.json->extendedPlayerControl->description
+msgid "Show Loop and Shuffle controls"
+msgstr "Afficher les commandes de boucle et de lecture aléatoire"
+
+#. 5.4->settings-schema.json->keyOpen->description
+#. 4.6->settings-schema.json->keyOpen->description
+msgid "Show menu"
+msgstr "Affichage du menu"
+
+#. 5.4->settings-schema.json->keyOpen->tooltip
+#. 4.6->settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the sound applet menu."
+msgstr "Définir le(s) raccourcis-clavier pour ouvrir le menu de cette applet."
+
+#. 5.4->settings-schema.json->section2->description
+#. 4.4->settings-schema.json->section2->description
+#. 4.6->settings-schema.json->section2->description
+#. 3.4->settings-schema.json->section2->description
+msgid "Panel"
+msgstr "Panneau"
+
+#. 5.4->settings-schema.json->showtrack->description
+#. 4.4->settings-schema.json->showtrack->description
+#. 4.6->settings-schema.json->showtrack->description
+#. 3.4->settings-schema.json->showtrack->description
+#. 2.8->settings-schema.json->showtrack->description
+msgid "Show song information on the panel"
+msgstr "Afficher sur le panneau les informations sur la chanson"
+
+#. 5.4->settings-schema.json->truncatetext->units
+#. 4.4->settings-schema.json->truncatetext->units
+#. 4.6->settings-schema.json->truncatetext->units
+#. 3.4->settings-schema.json->truncatetext->units
+#. 2.8->settings-schema.json->truncatetext->units
+msgid "characters"
+msgstr "caractères"
+
+#. 5.4->settings-schema.json->truncatetext->description
+#. 4.4->settings-schema.json->truncatetext->description
+#. 4.6->settings-schema.json->truncatetext->description
+#. 3.4->settings-schema.json->truncatetext->description
+#. 2.8->settings-schema.json->truncatetext->description
+msgid "Limit song information to"
+msgstr "Limiter la taille des infos sur la chanson à"
+
+#. 5.4->settings-schema.json->middleClickAction->options
+#. 4.4->settings-schema.json->middleClickAction->options
+#. 4.6->settings-schema.json->middleClickAction->options
+#. 3.4->settings-schema.json->middleClickAction->options
+#. 2.8->settings-schema.json->middleClickAction->options
+msgid "Toggle Mute"
+msgstr "Basculer en sourdine"
+
+#. 5.4->settings-schema.json->middleClickAction->options
+#. 4.4->settings-schema.json->middleClickAction->options
+#. 4.6->settings-schema.json->middleClickAction->options
+msgid "Toggle Mute output"
+msgstr "Basculer la sortie en sourdine"
+
+#. 5.4->settings-schema.json->middleClickAction->options
+#. 4.4->settings-schema.json->middleClickAction->options
+#. 4.6->settings-schema.json->middleClickAction->options
+msgid "Toggle Mute input"
+msgstr "Basculer l'entrée en sourdine"
+
+#. 5.4->settings-schema.json->middleClickAction->options
+#. 4.4->settings-schema.json->middleClickAction->options
+#. 4.6->settings-schema.json->middleClickAction->options
+#. 3.4->settings-schema.json->middleClickAction->options
+#. 2.8->settings-schema.json->middleClickAction->options
+msgid "Toggle Play / Pause"
+msgstr "Basculer Jouer/Pause"
+
+#. 5.4->settings-schema.json->middleClickAction->description
+#. 4.4->settings-schema.json->middleClickAction->description
+#. 4.6->settings-schema.json->middleClickAction->description
+#. 3.4->settings-schema.json->middleClickAction->description
+#. 2.8->settings-schema.json->middleClickAction->description
+msgid "Action on middle click"
+msgstr "Action du Clic-molette"
+
+#. 5.4->settings-schema.json->horizontalScroll->description
+#. 4.4->settings-schema.json->horizontalScroll->description
+#. 4.6->settings-schema.json->horizontalScroll->description
+msgid "Use horizontal scrolling to move between tracks"
+msgstr "Utiliser le défilement horizontal pour se déplacer entre les pistes"
+
+#. 5.4->settings-schema.json->showalbum->description
+#. 4.4->settings-schema.json->showalbum->description
+#. 4.6->settings-schema.json->showalbum->description
+#. 3.4->settings-schema.json->showalbum->description
+#. 2.8->settings-schema.json->showalbum->description
+msgid "Show album art as icon"
+msgstr "Afficher la pochette de l'album sous forme d'icône"
+
+#. 5.4->settings-schema.json->keepAlbumAspectRatio->description
+#. 4.4->settings-schema.json->keepAlbumAspectRatio->description
+#. 4.6->settings-schema.json->keepAlbumAspectRatio->description
+msgid "Keep album art aspect ratio"
+msgstr "Conserver le rapport hauteur/largeur des pochettes d'album"
+
+#. 5.4->settings-schema.json->hideSystray->description
+#. 4.4->settings-schema.json->hideSystray->description
+#. 4.6->settings-schema.json->hideSystray->description
+#. 3.4->settings-schema.json->hideSystray->description
+#. 2.8->settings-schema.json->hideSystray->description
+msgid "Hide system tray icons for compatible players"
+msgstr ""
+"Masquer les icônes de la barre d'état système pour les lecteurs compatibles"
+
+#. 5.4->settings-schema.json->section3->description
+msgid "Tooltip"
+msgstr "Info-bulle"
+
+#. 5.4->settings-schema.json->tooltipShowVolume->description
+msgid "Show volume in tooltip"
+msgstr "Afficher le volume dans l'info-bulle"
+
+#. 5.4->settings-schema.json->tooltipShowPlayer->description
+msgid "Show player in tooltip"
+msgstr "Afficher le lecteur dans l'info-bulle"
+
+#. 5.4->settings-schema.json->tooltipShowArtistTitle->description
+msgid "Show song artist and title in tooltip"
+msgstr ""
+"Afficher le nom de l'artiste et le titre de la chanson dans l'info-bulle"
+
+#. 5.4->settings-schema.json->setAmplification->description
+#. 4.4->settings-schema.json->setAmplification->description
+#. 4.6->settings-schema.json->setAmplification->description
+#. 3.4->settings-schema.json->percentMaxVol->description
+#. 2.8->settings-schema.json->percentMaxVol->description
+msgid "Maximum volume control"
+msgstr "Contrôle du volume maximum"
+
+#. 5.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
+#. 4.6->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+msgid "6%"
+msgstr "6%"
+
+#. 5.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
+#. 4.6->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+msgid "5%"
+msgstr "5%"
+
+#. 5.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
+#. 4.6->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+msgid "4%"
+msgstr "4%"
+
+#. 5.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
+#. 4.6->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+msgid "3%"
+msgstr "3%"
+
+#. 5.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
+#. 4.6->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+msgid "2%"
+msgstr "2%"
+
+#. 5.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
+#. 4.6->settings-schema.json->stepVolume->options
+#. 3.4->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+msgid "1%"
+msgstr "1%"
+
+#. 5.4->settings-schema.json->stepVolume->tooltip
+#. 4.4->settings-schema.json->stepVolume->tooltip
+#. 4.6->settings-schema.json->stepVolume->tooltip
+#. 3.4->settings-schema.json->stepVolume->tooltip
+#. 2.8->settings-schema.json->stepVolume->tooltip
+msgid "% of nominal volume"
+msgstr "% du volume nominal"
+
+#. 5.4->settings-schema.json->stepVolume->description
+#. 4.4->settings-schema.json->stepVolume->description
+#. 4.6->settings-schema.json->stepVolume->description
+#. 3.4->settings-schema.json->stepVolume->description
+#. 2.8->settings-schema.json->stepVolume->description
+msgid "+/-"
+msgstr "+/-"
+
+#. 5.4->settings-schema.json->magneticOn->description
+#. 4.4->settings-schema.json->magneticOn->description
+#. 4.6->settings-schema.json->magneticOn->description
+#. 3.4->settings-schema.json->magneticOn->description
+msgid "Magnetize the 'Volume 100%' mark"
+msgstr "Rendre magnétique la marque Volume 100%"
+
+#. 5.4->settings-schema.json->magneticOn->tooltip
+#. 4.4->settings-schema.json->magneticOn->tooltip
+#. 4.6->settings-schema.json->magneticOn->tooltip
+#. 3.4->settings-schema.json->magneticOn->tooltip
+msgid ""
+"When checked, the 'Volume 100%' mark becomes magnetic: the volume is "
+"automatically set to 100% when the distance between the volume value and "
+"100% is lesser than a half-step."
+msgstr ""
+"Quand cette case est cochée, la marque Volume 100% devient magnétique : le "
+"volume est automatiquement réglé à 100% quand la distance entre la valeur du "
+"volume et 100% est inférieure à un demi-pas."
+
+#. 5.4->settings-schema.json->adaptColor->description
+#. 4.4->settings-schema.json->adaptColor->description
+#. 4.6->settings-schema.json->adaptColor->description
+#. 3.4->settings-schema.json->adaptColor->description
+#. 2.8->settings-schema.json->adaptColor->description
+msgid "Adjust the color of the icon to the volume"
+msgstr "Ajuster la couleur de l'icone au volume"
+
+#. 5.4->settings-schema.json->adaptColor->tooltip
+#. 4.4->settings-schema.json->adaptColor->tooltip
+#. 4.6->settings-schema.json->adaptColor->tooltip
+#. 3.4->settings-schema.json->adaptColor->tooltip
+#. 2.8->settings-schema.json->adaptColor->tooltip
+msgid "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red."
+msgstr "De 101% a 115%: jaune; de 116% à 130%: orange; au-delà de 130%: rouge."
+
+#. 3.4->settings-schema.json->alwaysShowInput->description
+msgid "Always show input controls"
+msgstr "Toujours afficher les contrôles des entrées audio"
+
+#. 3.4->settings-schema.json->alwaysShowInput->tooltip
+msgid ""
+"When checked, input volume and source controls are always shown, even if no "
+"application is currently recording sound."
+msgstr ""
+"Lorsque cette case est cochée, les commandes de volume d'entrée et de source "
+"sont toujours affichées, même si aucune application n'enregistre "
+"actuellement de son."
+
+#. 3.4->settings-schema.json->percentMaxVol->options
+#. 2.8->settings-schema.json->percentMaxVol->options
+msgid "150%"
+msgstr "150%"
+
+#. 3.4->settings-schema.json->percentMaxVol->options
+#. 2.8->settings-schema.json->percentMaxVol->options
+msgid "140%"
+msgstr "140%"
+
+#. 3.4->settings-schema.json->percentMaxVol->options
+#. 2.8->settings-schema.json->percentMaxVol->options
+msgid "130%"
+msgstr "130%"
+
+#. 3.4->settings-schema.json->percentMaxVol->options
+#. 2.8->settings-schema.json->percentMaxVol->options
+msgid "120%"
+msgstr "120%"
+
+#. 3.4->settings-schema.json->percentMaxVol->options
+#. 2.8->settings-schema.json->percentMaxVol->options
+msgid "110%"
+msgstr "110%"
+
+#. 3.4->settings-schema.json->percentMaxVol->options
+#. 2.8->settings-schema.json->percentMaxVol->options
+msgid "100%"
+msgstr "100%"
+
+#. 3.4->settings-schema.json->percentMaxVol->options
+#. 2.8->settings-schema.json->percentMaxVol->options
+msgid "90%"
+msgstr "90%"
+
+#. 3.4->settings-schema.json->percentMaxVol->options
+#. 2.8->settings-schema.json->percentMaxVol->options
+msgid "80%"
+msgstr "80%"
+
+#. 3.4->settings-schema.json->percentMaxVol->options
+#. 2.8->settings-schema.json->percentMaxVol->options
+msgid "70%"
+msgstr "70%"
+
+#. 3.4->settings-schema.json->percentMaxVol->options
+#. 2.8->settings-schema.json->percentMaxVol->options
+msgid "60%"
+msgstr "60%"
+
+#. 3.4->settings-schema.json->percentMaxVol->options
+#. 2.8->settings-schema.json->percentMaxVol->options
+msgid "50%"
+msgstr "50%"
+
+#. 3.4->settings-schema.json->percentMaxVol->options
+#. 2.8->settings-schema.json->percentMaxVol->options
+msgid "40%"
+msgstr "40%"
+
+#. 3.4->settings-schema.json->percentMaxVol->options
+#. 2.8->settings-schema.json->percentMaxVol->options
+msgid "30%"
+msgstr "30%"
+
+#. 3.4->settings-schema.json->percentMaxVol->tooltip
+#. 2.8->settings-schema.json->percentMaxVol->tooltip
+msgid ""
+"You can try to increase the volume of your sound card up to 150% of its "
+"nominal value. Use with caution. You can also set a value less than 100%, "
+"for example on a child's computer."
+msgstr ""
+"Vous pouvez essayer d'augmenter le volume de votre carte audio jusqu'à 150% "
+"de son volume nominal. Utiliser avec précaution. Vous pouvez aussi fixer une "
+"valeur inférieure à 100%, par exemple sur l'ordinateur d'un enfant."
+
+#. 3.4->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+msgid "10%"
+msgstr "10%"
+
+#. 3.4->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+msgid "9%"
+msgstr "9%"
+
+#. 3.4->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+msgid "8%"
+msgstr "8%"
+
+#. 3.4->settings-schema.json->stepVolume->options
+#. 2.8->settings-schema.json->stepVolume->options
+msgid "7%"
+msgstr "7%"
+
+#~ msgid "Step"
+#~ msgstr "Pas"

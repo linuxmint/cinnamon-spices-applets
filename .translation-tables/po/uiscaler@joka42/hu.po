@@ -1,0 +1,42 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021 joka42
+# This file is distributed under the same license as the PACKAGE package.
+# joka42 jas_nombre@web.de, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-13 14:24+0100\n"
+"PO-Revision-Date: 2022-01-20 21:20+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+
+#: applet.js:24
+msgid "Scale User Interface with one click"
+msgstr "Felhasználói felület méretezése egy kattintással"
+
+#: applet.js:34
+msgid "Scale 200%"
+msgstr "Nagyítás 200%"
+
+#: applet.js:464
+msgid "Scale 125%"
+msgstr "125%"
+
+#: applet.js:50
+msgid "Reset 100%"
+msgstr "Visszaállítás 100%"
+
+#. metadata.json->name
+msgid "UI Scaler"
+msgstr "Felületméretező"
+
+#. metadata.json->description
+msgid "Switch resolution on-the-fly with HiDPI support"
+msgstr "Felbontás menet közbeni váltása HiDPI támogatással"

@@ -1,0 +1,365 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-30 00:45-0300\n"
+"PO-Revision-Date: 2022-09-28 14:32+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:232
+msgid "Reload Applet"
+msgstr "Kisalkalmazás újratöltése"
+
+#: applet.js:243
+msgid "Recompile Translations"
+msgstr "Fordítások újraépítése"
+
+#: applet.js:296
+msgid "REDSHIFT NOT INSTALLED!"
+msgstr "A REDSHIFT NINCS INSTALLÁLVA!"
+
+#: applet.js:297
+msgid "Requires Redshift: sudo apt-get install redshift"
+msgstr ""
+"A Redshift alkalmazást telepítését igényli, amelyet a következő módon "
+"telepítheti fel: „sudo apt-get install redshift”"
+
+#: applet.js:446 applet.js:467
+msgid "should be removed."
+msgstr "szükséges eltávolítani."
+
+#. settings-schema.json->enabled->description
+#: applet.js:629
+msgid "Enabled"
+msgstr "Engedélyezve"
+
+#: applet.js:637 applet.js:682
+msgid "Temp:"
+msgstr "Színhőmérséklet:"
+
+#: applet.js:648 applet.js:693
+msgid "Bright:"
+msgstr "Világosság:"
+
+#: applet.js:659 applet.js:975
+msgid "Gamma:"
+msgstr "Gamma:"
+
+#. settings-schema.json->enabledNight->description
+#: applet.js:674
+msgid "Night Enabled"
+msgstr "Éjszakai üzemmód engedélyezve"
+
+#. settings-schema.json->iconLabel->description
+#: applet.js:736
+msgid "Show Label"
+msgstr "Címke megjelenítése"
+
+#: applet.js:935 applet.js:958
+msgid "Transition to day"
+msgstr "Átmenet nappal"
+
+#: applet.js:936 applet.js:959
+msgid "Transition to night"
+msgstr "Átmenet éjszaka"
+
+#: applet.js:937 applet.js:960
+msgid "Night"
+msgstr "Éjszaka"
+
+#: applet.js:938 applet.js:961
+msgid "Day"
+msgstr "Nappal"
+
+#: applet.js:949
+msgid "On"
+msgstr "Be"
+
+#: applet.js:949 applet.js:951
+msgid "Off"
+msgstr "Ki"
+
+#: applet.js:966
+msgid "Day Temperature"
+msgstr "Napközbeni színhőmérséklet"
+
+#: applet.js:967
+msgid "Day Brightness"
+msgstr "Napközbeni fényerő"
+
+#: applet.js:969
+msgid "Night Temperature"
+msgstr "Éjszakai színhőmérséklet"
+
+#: applet.js:970
+msgid "Night Brightness"
+msgstr "Éjszakai fényerő"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->dayTemp->description
+#. settings-schema.json->nightTemp->description
+#: applet.js:972
+msgid "Temperature"
+msgstr "Hőmérséklet"
+
+#. settings-schema.json->dayBrightness->description
+#. settings-schema.json->nightBrightness->description
+#: applet.js:973
+msgid "Brightness"
+msgstr "Fényerő"
+
+#. metadata.json->name
+msgid "QRedshift"
+msgstr "QRedshift"
+
+#. metadata.json->description
+msgid ""
+"It makes the color of your computer's display adapt to the time of day, warm "
+"at night and like sunlight during the day."
+msgstr ""
+"A számítógép kijelzőjét a napszakhoz igazítja. Az éjszakai meleg színek a "
+"napközbeni napsugárzás fényéhez hasonlítanak."
+
+#. settings-schema.json->panel-options->title
+msgid "Settings"
+msgstr "Beállítások"
+
+#. settings-schema.json->panel-location->title
+msgid "Location"
+msgstr "Hely"
+
+#. settings-schema.json->panel-shortcuts->title
+msgid "Shortcuts"
+msgstr "Gyorsbillentyűk"
+
+#. settings-schema.json->info-section->title
+msgid "Tips"
+msgstr "Tippek"
+
+#. settings-schema.json->opt-section->title
+msgid "Options"
+msgstr "Beállítások"
+
+#. settings-schema.json->day-section->title
+msgid "Day Settings"
+msgstr "Napközbeni beállítások"
+
+#. settings-schema.json->night-section->title
+msgid "Night Settings"
+msgstr "Éjszakai beállítások"
+
+#. settings-schema.json->keybind-section->title
+msgid "Key Bindings"
+msgstr "Billentyűtársítások"
+
+#. settings-schema.json->location-section->title
+msgid "Location Settings"
+msgstr "Földrajzi helyzet beállítások"
+
+#. settings-schema.json->autoUpdate->description
+msgid "Auto Update"
+msgstr "Automatikus frissítés"
+
+#. settings-schema.json->autoUpdate->tooltip
+msgid "Continuously adjust color temperature"
+msgstr "Képernyő színhőmérsékletének folyamatos beállítása"
+
+#. settings-schema.json->autoUpdateInterval->units
+msgid "Seconds"
+msgstr "másodperc"
+
+#. settings-schema.json->autoUpdateInterval->description
+msgid "Update interval"
+msgstr "Frissítési időköz"
+
+#. settings-schema.json->adjustmentMethod->description
+msgid "Adjustment Method"
+msgstr "Illesztési eljárás"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "needload"
+msgstr "needload"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "randr"
+msgstr "randr"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "vidmode"
+msgstr "vidmode"
+
+#. settings-schema.json->adjustmentMethod->tooltip
+msgid "Method to use to set color temperature"
+msgstr "Színhőmérséklet beállításának üzemmódja"
+
+#. settings-schema.json->labelScrollAction->description
+msgid "Icon Scroll Action"
+msgstr "Egérgörgő művelet"
+
+#. settings-schema.json->labelScrollAction->options
+msgid "Disabled"
+msgstr "Tiltva"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->keyToggle->description
+msgid "On/Off"
+msgstr "Be/Ki"
+
+#. settings-schema.json->labelScrollAction->options
+msgid "Bright"
+msgstr "Fényerő"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->gammaMix->description
+msgid "Gamma"
+msgstr "Gamma"
+
+#. settings-schema.json->labelScrollAction->tooltip
+msgid "Action when scroll on applet icon."
+msgstr "Egérgörgő művelet a kisalkalmazás ikonján."
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "Szimbolikus ikon"
+
+#. settings-schema.json->keyBrightnessUp->description
+msgid "Increase brightness level"
+msgstr "Fényerő növelése"
+
+#. settings-schema.json->keyBrightnessDown->description
+msgid "Decrease brightness level"
+msgstr "Fényerő csökkentése"
+
+#. settings-schema.json->keyTempUp->description
+msgid "Increase temperature level"
+msgstr "Színhőmérséklet növelése"
+
+#. settings-schema.json->keyTempDown->description
+msgid "Decrease temperature level"
+msgstr "Színhőmérséklet csökkentése"
+
+#. settings-schema.json->keyGammaUp->description
+msgid "Increase gamma level"
+msgstr "Gamma szint növelése"
+
+#. settings-schema.json->keyGammaDown->description
+msgid "Decrease gamma level"
+msgstr "Gamma szint csökkentése"
+
+#. settings-schema.json->dayTemp->units
+#. settings-schema.json->nightTemp->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayBrightness->units
+#. settings-schema.json->nightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->smoothTransition->description
+msgid "Smooth transition between day and night"
+msgstr "Finom átmenet a nappali és éjszakai beállítás között"
+
+#. settings-schema.json->transitionDuration->units
+msgid "Minutes"
+msgstr "perc"
+
+#. settings-schema.json->transitionDuration->description
+msgid "Transition Duration"
+msgstr "Átmenet hossza"
+
+#. settings-schema.json->manualNightTime->description
+msgid "Use Manual Night Time"
+msgstr "Kézi éjszakai mód használata"
+
+#. settings-schema.json->nightTimeStart->description
+msgid "Choose Start Time"
+msgstr "Kezdési idő"
+
+#. settings-schema.json->nightTimeEnd->description
+msgid "Choose End Time"
+msgstr "Befejezési idő"
+
+#. settings-schema.json->locationRemote->description
+msgid "Remote Location"
+msgstr "Távoli földrajzi helyzet"
+
+#. settings-schema.json->locationRemote->tooltip
+#. settings-schema.json->locationUpdate->tooltip
+msgid "Native geoclue on redshift can make the experience slow."
+msgstr "A natív geoclue használata a redshift alkalmazást lelassíthatja."
+
+#. settings-schema.json->locationUpdate->description
+msgid "Update Location"
+msgstr "Földrajzi helyzet frissítése"
+
+#. settings-schema.json->locationLatitude->description
+msgid "Latitude"
+msgstr "Szélesség"
+
+#. settings-schema.json->locationLongitude->description
+msgid "Longitude"
+msgstr "Hosszúság"
+
+#. settings-schema.json->aboutLocation->description
+msgid ""
+"Native geoclue on redshift can make the experience slow.\n"
+"Using: https://geolocation-db.com/"
+msgstr ""
+"A natív geoclue használata a redshift alkalmazást lelassíthatja.\n"
+"A https://geolocation-db.com/ webhely használatával."
+
+#. settings-schema.json->textTips->description
+msgid "* Right-click the sliders to reset the default (neutral) value."
+msgstr ""
+"* Jobb gombbal kattintva a gördítősávra visszaállítja az alapértelmezett "
+"(semleges) értéket."
+
+#. settings-schema.json->textHelp->description
+msgid ""
+"When update to a new version make sure you reset the configs to default by "
+"deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
+"You will lost all your configs."
+msgstr ""
+"Új verzióra történő frissítéskor, állítsa vissza a beállításokat az "
+"alapértelmezésre, a „/.cinnamon/configs/qredshift@quintao/qredshift@quintao."
+"json” fájl törlésével.\n"
+"Ezzel minden qredshift kisalkalmazás beállítást el fog veszni."
+
+#. settings-schema.json->textInfo->description
+msgid ""
+"If you like and use this applet take the time to visit it's page on Cinnamon "
+"Spices and give it a star. You only need a github account to do this."
+msgstr ""
+"További információkért látogassa meg a Spices webhelyet, amit elérhet az "
+"alábbi gombra kattintva. Itt továbbá megjegyzéseket fűzhet, vagy kérdéseket "
+"tehet fel a kisalkalmazással kapcsolatban a közösségnek a Github fiókjával "
+"bejelentkezve. A webhelyen az ismert hibákról, hibaelhárításról, változási "
+"megjegyzésekről és egyebekről is olvashat."
+
+#~ msgid "may conflict with this applet, it is highly recommended removing it."
+#~ msgstr ""
+#~ "a kisalkalmazás nem működik együtt ezzel a kisalkalmazással, ezért "
+#~ "távolítsa el azt a csomagot."
+
+#~ msgid ""
+#~ "Sets brightness, gamma levels and color temperature with Redshift. This "
+#~ "applet conflicts with redshift-gtk, make sure you remove it."
+#~ msgstr ""
+#~ "Beállítja a fényerő, a gamma szintjeit és a színhőmérsékletet a Redshit "
+#~ "segítségével. Ez a kisalkalmazás nem működik együtt a redshift-gtk "
+#~ "csomaggal, ezért távolítsa el ezt a csomagot."
+
+#~ msgid "Sec."
+#~ msgstr "másodperc"

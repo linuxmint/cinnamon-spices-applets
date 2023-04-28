@@ -1,0 +1,249 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Augusto Bennemann <gutobenn@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-25 22:26+0100\n"
+"PO-Revision-Date: 2021-10-02 21:15-0300\n"
+"Last-Translator: Marcelo Aof\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0\n"
+
+#: applet.js:394
+msgid "Pomodoro started"
+msgstr "A contagem regressiva começou"
+
+#: applet.js:437 applet.js:737
+msgid "Waiting to start"
+msgstr "Aguardando começar"
+
+#: applet.js:455
+#, javascript-format
+msgid "Pomodori %d, set %d running"
+msgstr "Repetição %d, ciclo %d em andamento"
+
+#: applet.js:462
+msgid "Let's go to work!"
+msgstr "Hora de focar!"
+
+#: applet.js:477
+msgid "Take a short break"
+msgstr "Faça um intervalo curto"
+
+#: applet.js:478
+msgid "Short break running"
+msgstr "Intervalo curto em andamento"
+
+#: applet.js:497
+msgid "Take a long break"
+msgstr "Faça um intervalo longo"
+
+#: applet.js:499
+msgid "Long break running"
+msgstr "Intervalo longo em andamento"
+
+#: applet.js:533
+msgid "Pomodoro ended"
+msgstr "A contagem regressiva terminou"
+
+#: applet.js:665
+msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
+msgstr "https://pt.wikipedia.org/wiki/T%C3%A9cnica_pomodoro"
+
+#. metadata.json->name
+#: applet.js:837
+msgid "Pomodoro Timer"
+msgstr "Cronômetro Pomodoro"
+
+#: applet.js:848
+msgid "Completed"
+msgstr "Repetições concluídas:"
+
+#: applet.js:861
+msgid "Reset Timer"
+msgstr "Zerar o cronômetro"
+
+#: applet.js:873
+msgid "Reset Counts and Timer"
+msgstr "Zerar o contador e o cronômetro"
+
+#: applet.js:886
+msgid "What is this?"
+msgstr "O que é isso?"
+
+#: applet.js:943
+msgid "None"
+msgstr "Padrão"
+
+#: applet.js:973
+msgid "Switch Off Pomodoro"
+msgstr "Desligar o cronômetro"
+
+#: applet.js:979
+msgid "Start a new Pomodoro"
+msgstr "Começar uma nova contagem regressiva"
+
+#: applet.js:985
+msgid "Hide"
+msgstr "Esconder"
+
+#: applet.js:997
+msgid "Pomodoro set finished, you deserve a break!"
+msgstr "Contagem regressiva concluída. Você merece um descanso!"
+
+#: applet.js:1005
+msgid "Your break is over, start another pomodoro!"
+msgstr "Seu descanso chegou ao fim. Comece outra contagem regressiva!"
+
+#: applet.js:1010
+#, javascript-format
+msgid "A new pomodoro begins in %s."
+msgstr "Uma nova contagem regressiva começará em %s."
+
+#: applet.js:1021
+#, javascript-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minuto"
+msgstr[1] "%d minutos"
+
+#: applet.js:1022
+#, javascript-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d segundo"
+msgstr[1] "%d segundos"
+
+#: applet.js:1024
+#, javascript-format
+msgid "%s and %s"
+msgstr "%s e %s"
+
+#: applet.js:1048
+msgid "Continue Current Pomodoro"
+msgstr "Continuar a contagem regressiva atual"
+
+#: applet.js:1054
+msgid "Pause Pomodoro"
+msgstr "Pausar a contagem regressiva"
+
+#: applet.js:1065
+msgid "Short break finished, ready to continue?"
+msgstr "O intervalo curto terminou. Está pronto para continuar?"
+
+#. settings-schema.json->head_durations->description
+msgid "Durations (minutes)"
+msgstr "Durações (minutos)"
+
+#. settings-schema.json->pomodoro_duration->description
+msgid "Pomodoro Duration:"
+msgstr "Duração da contagem regressiva:"
+
+#. settings-schema.json->short_break_duration->description
+msgid "Short Break Duration:"
+msgstr "Duração do intervalo curto:"
+
+#. settings-schema.json->long_break_duration->description
+msgid "Long Break Duration:"
+msgstr "Duração do intervalo longo:"
+
+#. settings-schema.json->pomodori_number->description
+msgid "Number of pomodori before long break:"
+msgstr "Número de contagens regressivas antes do intervalo longo:"
+
+#. settings-schema.json->head_options->description
+msgid "Options"
+msgstr "Opções"
+
+#. settings-schema.json->show_dialog_messages->description
+msgid "Show Dialog Messages"
+msgstr "Mostrar pop-ups com mensagens"
+
+#. settings-schema.json->auto_start_after_short_break_ends->description
+msgid "Auto start after a short break ends"
+msgstr "Continuar automaticamente após o término de um intervalo curto"
+
+#. settings-schema.json->auto_start_after_break_ends->description
+msgid "Auto start a new pomodoro after a break ends"
+msgstr ""
+"Começar automaticamente uma nova contagem regressiva após o término da atual"
+
+#. settings-schema.json->display_icon->description
+msgid "Display the pomodoro icon in the applet panel"
+msgstr "Mostrar o ícone do Pomodoro no painel"
+
+#. settings-schema.json->use_symbolic_icon->description
+msgid "Use a symbolic icon in the applet panel"
+msgstr "Usar um ícone monocromático do applet no painel"
+
+#. settings-schema.json->show_timer->description
+msgid "Show the pomodoro timer in the applet panel"
+msgstr "Mostrar o cronômetro do Pomodoro no painel"
+
+#. settings-schema.json->head_sounds->description
+msgid "Sounds"
+msgstr "Sons"
+
+#. settings-schema.json->sox-info->description
+msgid "Please install 'sox' and restart Cinnamon to use the sound feature!"
+msgstr ""
+"Por favor, instale o pacote sox e reinicie o Cinnamon para ouvir sons no "
+"applet!"
+
+#. settings-schema.json->timer_sound->description
+msgid "Play Timer Sound"
+msgstr "Tocar o som da contagem regressiva"
+
+#. settings-schema.json->timer_sound_file->description
+msgid "Timer Sound File"
+msgstr "Som da contagem regressiva"
+
+#. settings-schema.json->timer_sound_volume->description
+#. settings-schema.json->break_sound_volume->description
+#. settings-schema.json->warn_sound_volume->description
+#. settings-schema.json->start_sound_volume->description
+msgid "Sound volume:"
+msgstr "Volume do som:"
+
+#. settings-schema.json->break_sound->description
+msgid "Play Break Sound"
+msgstr "Tocar o som do intervalo"
+
+#. settings-schema.json->break_sound_file->description
+msgid "Break Sound File"
+msgstr "Som do intervalo"
+
+#. settings-schema.json->warn_sound->description
+msgid "Play Warn Sound"
+msgstr "Tocar o som de aviso"
+
+#. settings-schema.json->warn_sound_delay->description
+msgid "Warn Delay (in secs):"
+msgstr "Atraso do aviso (em segundos):"
+
+#. settings-schema.json->warn_sound_file->description
+msgid "Warn Sound File"
+msgstr "Som de aviso"
+
+#. settings-schema.json->start_sound->description
+msgid "Play Start Sound"
+msgstr "Tocar o som do começo da contagem regressiva"
+
+#. settings-schema.json->start_sound_file->description
+msgid "Start Sound File"
+msgstr "Som do começo da contagem regressiva"
+
+#. metadata.json->description
+msgid "Great tool for boosted productivity!"
+msgstr ""
+"Contagens regressivas com intervalos e repetições. Ótima ferramenta para "
+"aumentar a produtividade!"

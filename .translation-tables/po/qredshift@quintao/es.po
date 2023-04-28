@@ -1,0 +1,346 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-30 00:45-0300\n"
+"PO-Revision-Date: 2022-11-26 18:37-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: applet.js:232
+msgid "Reload Applet"
+msgstr "Recargar Applet"
+
+#: applet.js:243
+msgid "Recompile Translations"
+msgstr "Recompilar traducciones"
+
+#: applet.js:296
+msgid "REDSHIFT NOT INSTALLED!"
+msgstr "¡REDHISFT NO ESTÁ INSTALADO!"
+
+#: applet.js:297
+msgid "Requires Redshift: sudo apt-get install redshift"
+msgstr "Requiere Redshift: sudo apt-get install redshift"
+
+#: applet.js:446 applet.js:467
+msgid "should be removed."
+msgstr "debe ser eliminado."
+
+#. settings-schema.json->enabled->description
+#: applet.js:629
+msgid "Enabled"
+msgstr "Habilitado"
+
+#: applet.js:637 applet.js:682
+msgid "Temp:"
+msgstr "Temperatura:"
+
+#: applet.js:648 applet.js:693
+msgid "Bright:"
+msgstr "Brillo:"
+
+#: applet.js:659 applet.js:975
+msgid "Gamma:"
+msgstr "Gamma:"
+
+#. settings-schema.json->enabledNight->description
+#: applet.js:674
+msgid "Night Enabled"
+msgstr "Modo nocturno habilitado"
+
+#. settings-schema.json->iconLabel->description
+#: applet.js:736
+msgid "Show Label"
+msgstr "Mostrar etiqueta"
+
+#: applet.js:935 applet.js:958
+msgid "Transition to day"
+msgstr "Transición al día"
+
+#: applet.js:936 applet.js:959
+msgid "Transition to night"
+msgstr "Transición a la noche"
+
+#: applet.js:937 applet.js:960
+msgid "Night"
+msgstr "Noche"
+
+#: applet.js:938 applet.js:961
+msgid "Day"
+msgstr "Día"
+
+#: applet.js:949
+msgid "On"
+msgstr "Ecendido"
+
+#: applet.js:949 applet.js:951
+msgid "Off"
+msgstr "Apagado"
+
+#: applet.js:966
+msgid "Day Temperature"
+msgstr "Temperatura diurna"
+
+#: applet.js:967
+msgid "Day Brightness"
+msgstr "Brillo diurno"
+
+#: applet.js:969
+msgid "Night Temperature"
+msgstr "Temperatura nocturna"
+
+#: applet.js:970
+msgid "Night Brightness"
+msgstr "Brillo nocturno"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->dayTemp->description
+#. settings-schema.json->nightTemp->description
+#: applet.js:972
+msgid "Temperature"
+msgstr "Temperatura"
+
+#. settings-schema.json->dayBrightness->description
+#. settings-schema.json->nightBrightness->description
+#: applet.js:973
+msgid "Brightness"
+msgstr "Brillo"
+
+#. metadata.json->name
+msgid "QRedshift"
+msgstr "QRedshift"
+
+#. metadata.json->description
+msgid ""
+"It makes the color of your computer's display adapt to the time of day, warm "
+"at night and like sunlight during the day."
+msgstr ""
+"Hace que el color de la pantalla del ordenador se adapte a la hora del día, "
+"cálido por la noche y luz del sol durante el día."
+
+#. settings-schema.json->panel-options->title
+msgid "Settings"
+msgstr "Configuración"
+
+#. settings-schema.json->panel-location->title
+msgid "Location"
+msgstr "Ubicación"
+
+#. settings-schema.json->panel-shortcuts->title
+msgid "Shortcuts"
+msgstr "Atajos"
+
+#. settings-schema.json->info-section->title
+msgid "Tips"
+msgstr "Consejos"
+
+#. settings-schema.json->opt-section->title
+msgid "Options"
+msgstr "Opciones"
+
+#. settings-schema.json->day-section->title
+msgid "Day Settings"
+msgstr "Configuración diurna"
+
+#. settings-schema.json->night-section->title
+msgid "Night Settings"
+msgstr "Configuración nocturna"
+
+#. settings-schema.json->keybind-section->title
+msgid "Key Bindings"
+msgstr "Atajos del teclado"
+
+#. settings-schema.json->location-section->title
+msgid "Location Settings"
+msgstr "Configuración de ubicación"
+
+#. settings-schema.json->autoUpdate->description
+msgid "Auto Update"
+msgstr "Actualización automática"
+
+#. settings-schema.json->autoUpdate->tooltip
+msgid "Continuously adjust color temperature"
+msgstr "Ajuste continuo de la temperatura del color"
+
+#. settings-schema.json->autoUpdateInterval->units
+msgid "Seconds"
+msgstr "Segundos"
+
+#. settings-schema.json->autoUpdateInterval->description
+msgid "Update interval"
+msgstr "Intervalo de actualización"
+
+#. settings-schema.json->adjustmentMethod->description
+msgid "Adjustment Method"
+msgstr "Método de Ajuste"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "needload"
+msgstr "needload"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "randr"
+msgstr "randr"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "vidmode"
+msgstr "vimode"
+
+#. settings-schema.json->adjustmentMethod->tooltip
+msgid "Method to use to set color temperature"
+msgstr "Método para ajustar la temperatura del color"
+
+#. settings-schema.json->labelScrollAction->description
+msgid "Icon Scroll Action"
+msgstr "Acción del icono de desplazamiento"
+
+#. settings-schema.json->labelScrollAction->options
+msgid "Disabled"
+msgstr "Deshabilidato"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->keyToggle->description
+msgid "On/Off"
+msgstr "Encendido/Apagado"
+
+#. settings-schema.json->labelScrollAction->options
+msgid "Bright"
+msgstr "Brillo"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->gammaMix->description
+msgid "Gamma"
+msgstr "Gamma"
+
+#. settings-schema.json->labelScrollAction->tooltip
+msgid "Action when scroll on applet icon."
+msgstr "Acción al desplazarse sobre el icono del applet."
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "Usar iconos simbólicos"
+
+#. settings-schema.json->keyBrightnessUp->description
+msgid "Increase brightness level"
+msgstr "Aumentar el nivel de brillo"
+
+#. settings-schema.json->keyBrightnessDown->description
+msgid "Decrease brightness level"
+msgstr "Disminuir el nivel de brillo"
+
+#. settings-schema.json->keyTempUp->description
+msgid "Increase temperature level"
+msgstr "Aumentar el nivel de temperatura"
+
+#. settings-schema.json->keyTempDown->description
+msgid "Decrease temperature level"
+msgstr "Disminuir el nivel de temperatura"
+
+#. settings-schema.json->keyGammaUp->description
+msgid "Increase gamma level"
+msgstr "Aumentar el nivel de gamma"
+
+#. settings-schema.json->keyGammaDown->description
+msgid "Decrease gamma level"
+msgstr "Disminuir el nivel de gamma"
+
+#. settings-schema.json->dayTemp->units
+#. settings-schema.json->nightTemp->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayBrightness->units
+#. settings-schema.json->nightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->smoothTransition->description
+msgid "Smooth transition between day and night"
+msgstr "Transición suave entre el día y la noche"
+
+#. settings-schema.json->transitionDuration->units
+msgid "Minutes"
+msgstr "Minutos"
+
+#. settings-schema.json->transitionDuration->description
+msgid "Transition Duration"
+msgstr "Duración de la transición"
+
+#. settings-schema.json->manualNightTime->description
+msgid "Use Manual Night Time"
+msgstr "Usar horario nocturno manual"
+
+#. settings-schema.json->nightTimeStart->description
+msgid "Choose Start Time"
+msgstr "Seleccione hora de inicio"
+
+#. settings-schema.json->nightTimeEnd->description
+msgid "Choose End Time"
+msgstr "Seleccione hora de término"
+
+#. settings-schema.json->locationRemote->description
+msgid "Remote Location"
+msgstr "Ubicación remota"
+
+#. settings-schema.json->locationRemote->tooltip
+#. settings-schema.json->locationUpdate->tooltip
+msgid "Native geoclue on redshift can make the experience slow."
+msgstr "Geoclue nativo en redshift puede hacer lenta su experiencia."
+
+#. settings-schema.json->locationUpdate->description
+msgid "Update Location"
+msgstr "Actualizar la ubicación"
+
+#. settings-schema.json->locationLatitude->description
+msgid "Latitude"
+msgstr "Latitud"
+
+#. settings-schema.json->locationLongitude->description
+msgid "Longitude"
+msgstr "Longitud"
+
+#. settings-schema.json->aboutLocation->description
+msgid ""
+"Native geoclue on redshift can make the experience slow.\n"
+"Using: https://geolocation-db.com/"
+msgstr ""
+"Geoclue nativo en redshift puede hacer su experiencia lenta. \n"
+"Utilizando: https://geolocation-db.com/"
+
+#. settings-schema.json->textTips->description
+msgid "* Right-click the sliders to reset the default (neutral) value."
+msgstr ""
+"* Haga clic con el botón derecho en los controles deslizantes para "
+"restablecer el valor predeterminado (neutro)."
+
+#. settings-schema.json->textHelp->description
+msgid ""
+"When update to a new version make sure you reset the configs to default by "
+"deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
+"You will lost all your configs."
+msgstr ""
+"Cuando actualice a una nueva versión, asegúrese de restablecer la "
+"configuración por defecto borrando el archivo ~/.cinnamon/configs/"
+"qredshift@quintao/qredshift@quintao.json.\n"
+" Perderá todas sus configuraciones."
+
+#. settings-schema.json->textInfo->description
+msgid ""
+"If you like and use this applet take the time to visit it's page on Cinnamon "
+"Spices and give it a star. You only need a github account to do this."
+msgstr ""
+"Si te gusta y usas este applet tómate el tiempo de visitar su página en "
+"Cinnamon Spices y dale una estrella. Sólo necesitas una cuenta de github "
+"para hacerlo."

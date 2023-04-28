@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Serkan ÖNDER <serkanonder@outlook.com>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-04 20:17+1000\n"
+"PO-Revision-Date: 2021-12-21 10:33+0300\n"
+"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:132
+msgid "OctoPussy: OctoPrint manager."
+msgstr "OctoPussy: OctoPrint yöneticisi."
+
+#: applet.js:205
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: applet.js:278 applet.js:351
+msgid "Time lapsed: "
+msgstr "Geçen zaman: "
+
+#: applet.js:282 applet.js:352
+msgid "Estimated: "
+msgstr "Tahmini: "
+
+#: applet.js:292 applet.js:353
+msgid "Total time: "
+msgstr "Toplam süre: "
+
+#: applet.js:355
+msgid "Pause current print"
+msgstr "Geçerli baskıyı duraklat"
+
+#: applet.js:356
+msgid "Continue current print"
+msgstr "Geçerli baskıya devam et"
+
+#: applet.js:358
+msgid "Change filament"
+msgstr "Filamenti değiştir"
+
+#: applet.js:359
+msgid "Camera monitor"
+msgstr "Kamera monitörü"
+
+#: applet.js:360
+msgid "Open OctoPrint web"
+msgstr "OctoPrint web'i açın"
+
+#: applet.js:362
+msgid "Restart OctoPrint"
+msgstr "OctoPrint'i yeniden başlatın"
+
+#: applet.js:363
+msgid "Shutdown OctoPrint"
+msgstr "OctoPrint'i kapatın"
+
+#: applet.js:364
+msgid "Configure..."
+msgstr "Yapılandır..."
+
+#. settings-schema.json->octoprintUrl->description
+#. settings-schema.json->octoprintUrl->tooltip
+msgid "OctoPrint API Address"
+msgstr "OctoPrint API Adresi"
+
+#. settings-schema.json->octoprintApiKey->description
+msgid "OctoPrint API Key. Get an API key from the OctoPrint site settings."
+msgstr ""
+"OctoPrint API Anahtarı. OctoPrint site ayarlarından bir API anahtarı alın."
+
+#. settings-schema.json->octoprintInterval->units
+msgid "seconds"
+msgstr "saniye"
+
+#. settings-schema.json->octoprintInterval->description
+msgid "Refresh Interval:"
+msgstr "Yenileme Aralığı:"
+
+#. settings-schema.json->octoprintInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"Yenileme aralığını değiştirmek için bu döndürücü değeri artırın veya azaltın "
+"- yavaş bir makineniz varsa yavaş bir yenileme kullanın"
+
+#. settings-schema.json->octoprintVideoCommand->description
+msgid "Video command to use when showing the webcam. Defaults to vlc."
+msgstr ""
+"Web kamerasını gösterirken kullanılacak video komutu. Varsayılan olarak "
+"vlc'dir."
+
+#. metadata.json->description
+msgid "An applet to manage OctoPrint."
+msgstr "OctoPrint'i yönetmek için bir uygulama."
+
+#. metadata.json->name
+msgid "OctoPrint manager"
+msgstr "OctoPrint yöneticisi"

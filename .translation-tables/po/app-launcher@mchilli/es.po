@@ -1,0 +1,218 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-18 11:06+0200\n"
+"PO-Revision-Date: 2021-11-22 22:44+0100\n"
+"Last-Translator: haggen88\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:102
+msgid "Edit Applications"
+msgstr "Editar aplicaciones"
+
+#: applet.js:694 applet.js:948
+msgid "Delete"
+msgstr "Borrar"
+
+#: applet.js:695 applet.js:949
+msgid "Edit"
+msgstr "Editar"
+
+#: applet.js:696 applet.js:950
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#: dialogs.py:35 widgets.py:35
+msgid "Name"
+msgstr "Nombre"
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:41
+msgid "Group"
+msgstr "Grupo"
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:42 widgets.py:42
+msgid "Command"
+msgstr "Comando"
+
+#: dialogs.py:178
+msgid "The name cannot be empty"
+msgstr "El nombre no puede estar vacío"
+
+#: dialogs.py:183
+msgid "The name is already used"
+msgstr "El nombre ya está siendo utilizado"
+
+#: dialogs.py:190
+msgid "Valid name"
+msgstr "Nombre válido"
+
+#: dialogs.py:196
+msgid "Valid command"
+msgstr "Comando válido"
+
+#: dialogs.py:199
+msgid "The command is not valid"
+msgstr "El comando no es válido"
+
+#: dialogs.py:211
+msgid "Which data should be replaced from *.desktop file?"
+msgstr "¿Qué datos deben reemplazarse del archivo * .desktop?"
+
+#: dialogs.py:256
+msgid "really delete?"
+msgstr "¿realmente lo desea borrar?"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. settings-schema.json->launcher-icon->description
+#: widgets.py:28
+msgid "Icon"
+msgstr "Icono"
+
+#: widgets.py:116
+msgid "Add application"
+msgstr "Añadir aplicación"
+
+#: widgets.py:117
+msgid "Add new entry"
+msgstr "Añadir una nueva entrada"
+
+#: widgets.py:121
+msgid "Add separator"
+msgstr "Añadir un separador"
+
+#: widgets.py:129
+msgid "Remove selected entry"
+msgstr "Eliminar la entrada seleccionada"
+
+#: widgets.py:135
+msgid "Edit selected entry"
+msgstr "Editar la entrada seleccionada"
+
+#: widgets.py:141
+#, fuzzy
+msgid "Duplicate selected entry"
+msgstr "Editar la entrada seleccionada"
+
+#: widgets.py:147
+msgid "Move selected entry up"
+msgstr "Mover la entrada seleccionada hacia arriba"
+
+#: widgets.py:153
+msgid "Move selected entry down"
+msgstr "Mover la entrada seleccionada hacia abajo"
+
+#: widgets.py:316
+msgid "Separator"
+msgstr "Separador"
+
+#. metadata.json->name
+msgid "App Launcher"
+msgstr "Lanzador de aplicaciones"
+
+#. metadata.json->description
+msgid "A simple App Launcher"
+msgstr "Un sencillo lanzador de aplicaciones"
+
+#. settings-schema.json->page-applications->title
+#. settings-schema.json->section-applications->title
+msgid "Applications"
+msgstr "Aplicaciones"
+
+#. settings-schema.json->page-settings->title
+msgid "Settings"
+msgstr "Configuración"
+
+#. settings-schema.json->section-settings-global->title
+msgid "Global Settings"
+msgstr "Configuración global"
+
+#. settings-schema.json->section-settings-applications->title
+msgid "Application Settings"
+msgstr "Configuraciones de la aplicación"
+
+#. settings-schema.json->visible-launcher-label->description
+msgid "Show Label"
+msgstr "Mostrar etiqueta"
+
+#. settings-schema.json->launcher-label->description
+msgid "Label"
+msgstr "Etiqueta"
+
+#. settings-schema.json->custom-launcher-icon->description
+msgid "Custom Icon"
+msgstr "Ícono personalizado"
+
+#. settings-schema.json->notification-enabled->description
+msgid "Show Notifications"
+msgstr "Mostrar notificaciones"
+
+#. settings-schema.json->notification-enabled->tooltip
+msgid "Show notification on application launch"
+msgstr "Mostrar notificación al iniciar la aplicación"
+
+#. settings-schema.json->notification-text->description
+msgid "Notification Text"
+msgstr "Texto de notificación"
+
+#. settings-schema.json->notification-text->tooltip
+msgid "%s will be your application name"
+msgstr "%s será el nombre de su aplicación"
+
+#. settings-schema.json->hotkey-binding->description
+msgid "Show menu"
+msgstr "Mostrar menú"
+
+#. settings-schema.json->hotkey-binding->tooltip
+msgid "Set keybinding(s) to show the menu"
+msgstr "Establecer atajos de teclado para mostrar el menú"
+
+#. settings-schema.json->fixed-menu-width->description
+msgid "Fixed Menu Width"
+msgstr "Ancho fijo del menú"
+
+#. settings-schema.json->fixed-menu-width->tooltip
+msgid "Based on the largest submenu item, to prevent menu width flickering"
+msgstr ""
+"Basado en el elemento más grande del submenú, para evitar que el ancho del "
+"menú parpadee"
+
+#. settings-schema.json->visible-app-icons->description
+msgid "Show Application Icons"
+msgstr "Mostrar iconos de aplicaciones"
+
+#. settings-schema.json->visible-app-icons->tooltip
+msgid "Show Application Icons in Popup-Menu"
+msgstr "Mostrar los iconos de la aplicación en el menú emergente"
+
+#. settings-schema.json->use-symbolic-icons->description
+msgid "Use Symbolic Application Icons"
+msgstr "Utilice iconos de aplicaciones simbólicas"
+
+#. settings-schema.json->use-symbolic-icons->tooltip
+msgid "Use Symbolic Application Icons, where it's possible"
+msgstr "Utilice iconos de aplicaciones simbólicas, siempre que sea posible"
+
+#. settings-schema.json->app-icon-size->description
+msgid "Application Icon Size"
+msgstr "Tamaño del icono de la aplicación"
+
+#. settings-schema.json->app-icon-size->tooltip
+msgid "Set Icon size"
+msgstr "Establecer el tamaño del icono"

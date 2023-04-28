@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-28 00:18+0200\n"
+"PO-Revision-Date: 2022-11-28 02:05-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: applet.js:1815 applet.js:1861
+msgid "Volume: %s%"
+msgstr ""
+
+#: applet.js:2014
+#, javascript-format
+msgid "Infos on: %s"
+msgstr ""
+
+#: applet.js:2121
+msgid "My Categories"
+msgstr ""
+
+#: applet.js:3261
+msgid "Please Log Out then Log In"
+msgstr ""
+
+#: applet.js:3261
+msgid "to finalize yt-dlp update"
+msgstr ""
+
+#: applet.js:4008
+msgid "Manual..."
+msgstr ""
+
+#. settings-schema.json->sectionMenuShortcuts->title
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#. settings-schema.json->dont-check-dependencies->description
+msgid "Do not check about dependencies"
+msgstr ""
+
+#. settings-schema.json->volume-show-osd->description
+msgid "Show OSD while changing volume"
+msgstr ""
+
+#. settings-schema.json->volume-show-osd->tooltip
+msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
+msgstr ""
+
+#. settings-schema.json->shortcut-volume-up->description
+msgid "Increase Volume"
+msgstr ""
+
+#. settings-schema.json->shortcut-volume-down->description
+msgid "Decrease Volume"
+msgstr ""
+
+#. settings-schema.json->shortcut-volume-cut->description
+msgid "Mute"
+msgstr ""
+
+#. settings-schema.json->recording-path->description
+msgid "Path to the folder that will contain your future recordings"
+msgstr ""
+
+#. settings-schema.json->button-rec-path-to-default->description
+msgid "Set this path to default one"
+msgstr ""
+
+#. settings-schema.json->recordings-keep-video->description
+msgid "Keep video (slower)"
+msgstr ""
+
+#. settings-schema.json->recordings-keep-video->tooltip
+msgid ""
+"Whether or not to keep the intermediate video file on disk after post-"
+"processing"
+msgstr ""

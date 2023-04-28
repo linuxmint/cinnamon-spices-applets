@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-11 13:13+0800\n"
+"PO-Revision-Date: 2022-11-26 00:29+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:51
+msgid "Panel Edit mode"
+msgstr "Paneelin muokkaustila"
+
+#: applet.js:57
+msgid "Add applets to the panel"
+msgstr "Lisää sovelmia paneeliin"
+
+#. show-hide-applets@mohammad-sn->metadata.json->description
+msgid ""
+"hide a few applet to have a neater panel, and make them show up again by a "
+"click"
+msgstr ""
+"Piilota osa sovelmista ja näet siistimmän paneelin. Saat ne uudelleen "
+"näkyviin yhdellä napsautuksella"
+
+#. show-hide-applets@mohammad-sn->metadata.json->name
+msgid "Drawer (show/hide applets)"
+msgstr "Drawer (näytä ja piilota paneelin sovelmia)"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->hoveractivateshide->description
+msgid "Hide on hovering again"
+msgstr "Piilota kun osoitat tätä sovelmaa"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->hoveractivateshide->tooltip
+msgid "toggle visibility of applets on mouse hover"
+msgstr "Vaihtaa sovelmien näkyvyyttä osoittamalla hiirellä"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->autohiderstime->description
+msgid "Reshowers' autohide delay: "
+msgstr "Piilotuksen viive uudelleen: "
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->autohiderstime->units
+#. show-hide-applets@mohammad-sn->settings-schema.json->hidetime->units
+msgid "seconds"
+msgstr "sekuntia"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->disablestarttimeautohide->description
+msgid "Disable start time autohide"
+msgstr "Poista käynnistyksessä automaattinen piilotus käytöstä"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->disablestarttimeautohide->tooltip
+msgid "if not in autohide mode"
+msgstr "Jos ei niin piilotustila on automaattinen"
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->head->description
+msgid "Settings for show-hide-applets@mohammad-sn"
+msgstr "Asetukset: show-hide-applets@mohammad-sn"
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->autohide->description
+msgid "Autohide"
+msgstr "Piilota automaattisesti"
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->autohide->tooltip
+msgid ""
+"check if you want to hide applets automatically, unless you should click on "
+"applet to do so"
+msgstr ""
+"Haluatko piilottaa sovelmat automaattisesti? Jos ei niin sovelmaa tulee itse "
+"napsauttaa hiirellä"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->autohiders->description
+msgid "Autohide reshowing applets"
+msgstr "Piilota uudelleen automaattisesti"
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->hovertime->description
+msgid "Hover activates/hides after "
+msgstr "Osoitus aktivoi/piilottaa jälkeen"
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->hovertime->units
+msgid "miliseconds"
+msgstr "millisekuntia"
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->hidetime->description
+msgid "Autohide after "
+msgstr "Piilota automaattisesti jälkeen "
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->hoveractivates->description
+msgid "Activate on hover"
+msgstr "Aktivoi osoittaminen"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->hoveractivates->tooltip
+msgid "show applets on mouse hover"
+msgstr "Näyttää sovelmat osoittamalla hiirellä"

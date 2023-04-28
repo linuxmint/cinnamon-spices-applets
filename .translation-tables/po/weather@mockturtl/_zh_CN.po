@@ -1,0 +1,37 @@
+# Chinese translation for gnome-shell-extension-weather, now weather@mockturtl
+# simon 软件包的简体中文翻译.
+# Copyright (C) 2011
+# This file is distributed under the same license as weather@mockturtl.
+# bill <bill_zt@sina.com>, 2011.
+# giwhub, 2015-2017.
+# Kiat, 2017
+# Echizen Ryoma <echizenryoma.zhang@gmail.com>, 2018.
+# Slinet6056 <slinet6056@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: 3.2.12\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-29 19:42+0100\n"
+"PO-Revision-Date: 2023-02-08 08:55+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: Chinese (simplified)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: 3.8/weather-applet.js:14894
+msgid "Pirate Weather"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Pirate Weather (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->immediatePrecip->tooltip
+msgid ""
+"If you'd like to use this make sure you use your exact coordinates/address "
+"as location to help its accuracy. See Feature map on website on support for "
+"your provider"
+msgstr ""
