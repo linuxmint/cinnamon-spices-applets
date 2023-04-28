@@ -51,8 +51,8 @@ function searchBrowserHistory(pattern, callback) {
 
     Promise.all(promises).then( results => {
         results.forEach( result => history = history.concat(result));
-        if (history.length > 12) {
-            history.length = 12;
+        if (history.length > 20) {
+            history.length = 20;
         }
         callback(history);
     });

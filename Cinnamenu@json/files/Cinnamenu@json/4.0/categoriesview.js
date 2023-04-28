@@ -151,7 +151,7 @@ class CategoryButton {
 
         if (this.id === this.appThis.currentCategory || //No need to select category as already selected
                             this.id === 'emoji:' && this.appThis.currentCategory.startsWith('emoji:')) {
-            return Clutter.EVENT_STOP;
+            return Clutter.EVENT_PROPAGATE;
         }
         if (this.appThis.settings.categoryClick) {
             this.appThis.display.categoriesView.allButtonsRemoveFocus();
@@ -160,7 +160,7 @@ class CategoryButton {
         } else {
             this.selectCategory();
         }
-        return Clutter.EVENT_STOP;
+        return Clutter.EVENT_PROPAGATE;
     }
 
     handleLeave(actor, event) {
