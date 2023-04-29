@@ -1,3 +1,6 @@
+### v1.2.3~20230429
+  * Update lib/checkDependencies.js (bugfix)
+
 ### v1.2.2~20230424
   * Volume scrolling is now in the same direction as Cinnamon.
 
