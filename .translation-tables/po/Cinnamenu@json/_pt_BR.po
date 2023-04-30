@@ -2,14 +2,15 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Fábio Nogueira <fnogueira@gnome.org>, 2015.
+# Cássio Louzada Rizzi <clrizzi@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-29 19:16+0100\n"
-"PO-Revision-Date: 2022-05-27 02:58+0100\n"
-"Last-Translator: Marcelo Aof\n"
+"PO-Revision-Date: 2023-04-30 19:53+0100\n"
+"Last-Translator: Cássio Louzada Rizzi\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -19,51 +20,51 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 msgid "Smileys & Emotion"
-msgstr ""
+msgstr "Emoticons e Emoções"
 
 msgid "People & Body"
-msgstr ""
+msgstr "Pessoas e Corpo"
 
 msgid "Animals & Nature"
-msgstr ""
+msgstr "Animais e Natureza"
 
 msgid "Food & Drink"
-msgstr ""
+msgstr "Comida e Bebida"
 
 msgid "Travel & Places"
-msgstr ""
+msgstr "Viagens e Lugares"
 
 msgid "Activities"
-msgstr ""
+msgstr "Atividades"
 
 msgid "Objects"
-msgstr ""
+msgstr "Objetos"
 
 msgid "Symbols"
-msgstr ""
+msgstr "Símbolos"
 
 msgid "Flags"
-msgstr ""
+msgstr "Bandeiras"
 
 msgid "Apps only"
-msgstr ""
+msgstr "Somente Aplicativos"
 
 msgid "Files only"
-msgstr ""
+msgstr "Somente Arquivos"
 
 msgid "Apps and files"
-msgstr ""
+msgstr "Aplicativos e Arquivos"
 
 msgid "Show emoji category"
-msgstr ""
+msgstr "Mostrar categoria de emojis"
 
 msgid "Show emoji category in the menu"
-msgstr ""
+msgstr "Mostrar categoria de emojis no Menu"
 
 msgid "Web search suggestions"
-msgstr ""
+msgstr "Sugestões de pesquisa na web"
 
 msgid ""
 "With web search option, also show search suggestions. (Note: Search "
 "suggestions are provided by DuckDuckGo)"
-msgstr ""
+msgstr "Com a opção de pesquisa na web, também serão mostradas sugestões de pesquisa. (Nota: As Sugestões de Pesquisa são fornecidas por DuckDuckGo)"
