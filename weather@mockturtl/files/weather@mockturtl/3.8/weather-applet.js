@@ -11094,13 +11094,16 @@ class ClimacellV4 extends BaseProvider {
         const daily = (_d = data.data.timelines.find(x => x.timestep == "1d")) === null || _d === void 0 ? void 0 : _d.intervals;
         if (!current || !daily || !hourly || !((_e = daily[0]) === null || _e === void 0 ? void 0 : _e.values))
             return null;
+        const sunrise = DateTime.fromISO(daily[0].values.sunriseTime, { zone: loc.timeZone });
+        const sunset = DateTime.fromISO(daily[0].values.sunsetTime, { zone: loc.timeZone });
+        const now = DateTime.fromISO(current.startTime, { zone: loc.timeZone });
         const result = {
             coord: {
                 lat: loc.lat,
                 lon: loc.lon
             },
             date: DateTime.fromISO(current.startTime, { zone: loc.timeZone }),
-            condition: this.ResolveCondition(current.values.weatherCode),
+            condition: this.ResolveCondition(current.values.weatherCode, IsNight({ sunrise, sunset }, now)),
             humidity: current.values.humidity,
             pressure: current.values.pressureSurfaceLevel,
             temperature: CelsiusToKelvin(current.values.temperature),
@@ -11109,8 +11112,8 @@ class ClimacellV4 extends BaseProvider {
                 speed: current.values.windSpeed
             },
             dewPoint: CelsiusToKelvin(current.values.dewPoint),
-            sunrise: DateTime.fromISO(daily[0].values.sunriseTime, { zone: loc.timeZone }),
-            sunset: DateTime.fromISO(daily[0].values.sunsetTime, { zone: loc.timeZone }),
+            sunrise,
+            sunset,
             location: {
                 url: "https://www.tomorrow.io/weather"
             },
@@ -11124,20 +11127,22 @@ class ClimacellV4 extends BaseProvider {
         const hours = [];
         const days = [];
         for (const element of daily) {
+            const date = DateTime.fromISO(element.startTime, { zone: loc.timeZone });
             days.push({
-                condition: this.ResolveCondition(element.values.weatherCode),
-                date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
+                condition: this.ResolveCondition(element.values.weatherCode, IsNight({ sunrise, sunset }, date)),
+                date,
                 temp_max: CelsiusToKelvin(element.values.temperatureMax),
                 temp_min: CelsiusToKelvin(element.values.temperatureMin)
             });
         }
         for (const element of hourly) {
+            let date = DateTime.fromISO(element.startTime, { zone: loc.timeZone });
+            date = date.set({ minute: 0, second: 0, millisecond: 0 });
             const hour = {
-                condition: this.ResolveCondition(element.values.weatherCode),
-                date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
+                condition: this.ResolveCondition(element.values.weatherCode, IsNight({ sunrise, sunset }, date)),
+                date,
                 temp: CelsiusToKelvin(element.values.temperature)
             };
-            hour.date = hour.date.set({ minute: 0, second: 0, millisecond: 0 });
             if (element.values.precipitationProbability > 0 && element.values.precipitationIntensity > 0) {
                 hour.precipitation = {
                     chance: element.values.precipitationProbability,
@@ -16564,8 +16569,10 @@ class WeatherApplet extends TextIconApplet {
                 }
             }
             this.EnsureProvider();
-            if (this.provider == null)
+            if (this.provider == null) {
+                this.Unlock();
                 return "fail";
+            }
             if (this.provider.needsApiKey && this.config.NoApiKey()) {
                 logger_Logger.Error("No API Key given");
                 this.ShowError({
@@ -16574,17 +16581,18 @@ class WeatherApplet extends TextIconApplet {
                     detail: "no key",
                     message: _("This provider requires an API key to operate")
                 });
+                this.Unlock();
                 return "fail";
             }
             let weatherInfo = await this.provider.GetWeather(location);
             if (weatherInfo == null) {
-                this.Unlock();
                 logger_Logger.Error("Could not refresh weather, data could not be obtained.");
                 this.ShowError({
                     type: "hard",
                     detail: "no api response",
                     message: "API did not return data"
                 });
+                this.Unlock();
                 return "fail";
             }
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
