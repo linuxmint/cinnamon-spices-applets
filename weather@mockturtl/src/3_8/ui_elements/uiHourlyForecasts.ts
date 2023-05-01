@@ -29,6 +29,7 @@ export class UIHourlyForecasts {
 
 	private hourlyToggled: boolean = false;
 	private availableWidth: number | null = null;
+	private hourlyBoxHorizontalPadding: number = 10;
 
 	public get Toggled() {
 		return this.hourlyToggled;
@@ -38,6 +39,9 @@ export class UIHourlyForecasts {
 	public get CurrentScrollIndex(): number {
 		return this.actor.get_hscroll_bar().get_adjustment().get_value();
 	}
+
+	private onPaintSignal: number | null = null;
+	private canvas: imports.gi.St.DrawingArea | null = null;
 
 	constructor(app: WeatherApplet, menu: imports.ui.applet.AppletPopupMenu) {
 		this.app = app;
@@ -165,7 +169,7 @@ export class UIHourlyForecasts {
 			ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
 			ui.Temperature.text = temp ? `${temp}°` : "";
 			ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
-			ui.Summary.text = hour.condition.main;
+			// ui.Summary.text = hour.condition.main;
 			ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation, config);
 			ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
 		}
@@ -277,7 +281,7 @@ export class UIHourlyForecasts {
 		availableWidth ??= this.availableWidth ?? undefined;
 
 		if (availableWidth != null) {
-			if (availableWidth - 20 >= this.hourlyContainers.length * requiredWidth) {
+			if (availableWidth - (this.hourlyBoxHorizontalPadding * 2) >= this.hourlyContainers.length * requiredWidth) {
 				this.actor.hscrollbar_policy = PolicyType.NEVER;
 			}
 			else {
@@ -325,6 +329,8 @@ export class UIHourlyForecasts {
 
 	public Destroy(): void {
 		this.container.destroy_all_children();
+		if (this.onPaintSignal)
+			this.canvas?.disconnect(this.onPaintSignal);
 	}
 
 	public Rebuild(config: Config, textColorStyle: string, availableHours: number | null = null) {
@@ -336,13 +342,13 @@ export class UIHourlyForecasts {
 		const canvas = new imports.gi.St.DrawingArea()
 
 		const grid = new imports.gi.Clutter.GridLayout();
-		const actor = new imports.gi.Clutter.Actor({ layout_manager: grid });
+		const gridActor = new imports.gi.Clutter.Actor({ layout_manager: grid });
 
 		grid.attach(canvas, 1, 1, 1, 1);
-		const parent = new BoxLayout();
-		grid.attach(parent, 1, 1, 1, 1);
+		const forecastContainer = new BoxLayout();
+		grid.attach(forecastContainer, 1, 1, 1, 1);
 
-		this.container.add(actor, {expand: true, x_fill: true, y_fill: true});
+		this.container.add(gridActor, {expand: true, x_fill: true, y_fill: true});
 
 		for (let index = 0; index < hours; index++) {
 			const box = new BoxLayout({ vertical: true, style_class: "hourly-box-item" });
@@ -358,9 +364,9 @@ export class UIHourlyForecasts {
 					style_class: "hourly-icon"
 				}),
 				Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
-				PrecipPercent: new Label({ text: " ", style_class: "hourly-data" }),
+				PrecipPercent: new Label({ text: " ", style_class: "hourly-data", style: `padding-top: 5px`}),
 				PrecipVolume: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
-				Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-top: ${this.tempGraphHeight}px`})
+				Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-bottom: ${this.tempGraphHeight}px`})
 			})
 
 			this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
@@ -373,7 +379,7 @@ export class UIHourlyForecasts {
 			if (this.app.Provider?.supportHourlyPrecipVolume)
 				box.add_child(this.hourlyForecasts[index].PrecipVolume);
 
-			parent.add(box, {
+			forecastContainer.add(box, {
 				x_fill: true,
 				x_align: Align.MIDDLE,
 				y_align: Align.MIDDLE,
@@ -382,62 +388,70 @@ export class UIHourlyForecasts {
 			});
 		}
 
-		canvas.connect("repaint", (owner) => {
-			if (this.availableWidth == null)
+		this.onPaintSignal = canvas.connect("repaint", this.OnPaint);
+		this.canvas = canvas;
+	}
+
+	private OnPaint = (owner: imports.gi.St.DrawingArea) => {
+		if (this.availableWidth == null)
 				return;
 
-			const ctx = owner.get_context();
+		const ctx = owner.get_context();
 
-			const maxTemp: number = this.hourlyForecastData.map(x => x.temp).reduce((p, c) => Math.max(p ?? 0, c ?? 0)) as number;
-			const minTemp: number = this.hourlyForecastData.map(x => x.temp).reduce((p, c) => Math.min(p ?? 0, c ?? 0)) as number;
-			const totalHeight = this.hourlyContainers[0].height;
-			// global.log(totalHeight)
-			const itemWidth = this.hourlyContainers[0].width;
-			const totalWidth = this.hourlyContainers.length * itemWidth;
-			const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() + this.hourlyForecasts[0].Icon.get_height();
-			const tempPadding = 6;
+		const maxTemp: number = this.hourlyForecastData.map(x => x.temp).reduce((p, c) => Math.max(p ?? 0, c ?? 0)) as number;
+		const minTemp: number = this.hourlyForecastData.map(x => x.temp).reduce((p, c) => Math.min(p ?? 0, c ?? 0)) as number;
+		const totalHeight = this.hourlyContainers[0].height;
+		// global.log(totalHeight)
+		const itemWidth = this.hourlyContainers[0].width;
+		const totalWidth = this.hourlyContainers.length * itemWidth;
+		const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() 
+			+ this.hourlyForecasts[0].Icon.get_height() 
+			+ this.hourlyForecasts[0].Temperature.get_height()
+			- this.tempGraphHeight;
+		const tempPadding = 6;
 
-			ctx.setLineWidth(3);
-			ctx.setSourceRGBA(1,1,1,0.5);
+		const precipVolumeMaxHeight = this.hourlyForecasts[0].PrecipVolume.get_height()
+			+ this.hourlyForecasts[0].PrecipPercent.get_height() - 5; 
 
-			let points: Array<{x: number, y: number}> = [];
-			let precipitation: number[] = []
-			for (let i = 0; i < this.hourlyContainers.length; i++) {
-				const data = this.hourlyForecastData[i];
-				const items = this.hourlyForecasts[i];
+		ctx.setLineWidth(3);
+		ctx.setSourceRGBA(1,1,1,0.5);
 
-				if (data.temp == null)
-					continue;
+		let points: Array<{x: number, y: number}> = [];
+		let precipitation: number[] = []
+		for (let i = 0; i < this.hourlyContainers.length; i++) {
+			const data = this.hourlyForecastData[i];
+			const items = this.hourlyForecasts[i];
 
-				const ratio = ((data.temp - minTemp) / (maxTemp - minTemp)) * (this.tempGraphHeight - (tempPadding * 2));
+			if (data.temp == null)
+				continue;
 
-				const height = this.tempGraphHeight - tempPadding - ratio + tempHeightOffset;
+			const ratio = ((data.temp - minTemp) / (maxTemp - minTemp)) * (this.tempGraphHeight - (tempPadding * 2));
 
-				const midX = itemWidth * i + (itemWidth/2);
-				const midY = (totalHeight / 2);
-				points.push({x: midX, y: height});
-				precipitation.push((data.precipitation?.volume ?? 0) * 20)
-			}
+			const height = this.tempGraphHeight - tempPadding - ratio + tempHeightOffset;
 
-			ctx.moveTo(points[0].x, points[0].y);
-			for (let i = 0; i < points.length; i++) {
-				const p = points[i]
-				ctx.lineTo(p.x, p.y + 2);
-			}
+			const midX = itemWidth * i + (itemWidth/2);
+			const midY = (totalHeight / 2);
+			points.push({x: midX, y: height});
+			precipitation.push((data.precipitation?.volume ?? 0))
+		}
 
-			ctx.stroke();
+		ctx.moveTo(points[0].x, points[0].y);
+		for (let i = 0; i < points.length; i++) {
+			const p = points[i]
+			ctx.lineTo(p.x, p.y + 2);
+		}
 
-			ctx.setSourceRGBA(0,0.5,1,0.5);
-			for (let i = 0; i < precipitation.length; i++) {
-				const element = precipitation[i];
-				const point = points[i];
-				ctx.rectangle(point.x - 5, totalHeight - element, 10, element);
-				ctx.fill();
-			}
-			return true;
-		})
+		ctx.stroke();
 
-
+		ctx.setSourceRGBA(0,0.5,1,0.35);
+		const maxVolume = precipitation.reduce((p, c) => Math.max(p, c), 1);
+		for (let i = 0; i < precipitation.length; i++) {
+			const height = (precipitation[i] / maxVolume) * precipVolumeMaxHeight;
+			const point = points[i];
+			ctx.rectangle(point.x - 5, totalHeight - height, 10, height);
+			ctx.fill();
+		}
+		return true;
 	}
 
 	// DisplayUtils
