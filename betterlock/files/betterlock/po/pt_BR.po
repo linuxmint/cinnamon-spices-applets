@@ -19,13 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Scr Lock"
-msgstr "Ativar Scrool Lock"
+msgstr "Scrool Lock"
 
 msgid "Num Lock"
-msgstr "Ativar Num Lock"
+msgstr "Num Lock"
 
 msgid "Caps Lock"
-msgstr "Ativar CAPS Lock"
+msgstr "CAPS Lock"
 
 msgid "Lock Keys"
 msgstr "Teclas de bloqueio"
