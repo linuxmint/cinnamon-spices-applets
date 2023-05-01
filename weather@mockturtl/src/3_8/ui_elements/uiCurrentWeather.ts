@@ -65,7 +65,7 @@ export class CurrentWeather {
 			x_expand: true,
 			y_expand: true,
 			style_class: STYLE_ICONBOX,
-			x_align: ActorAlign.FILL,
+			x_align: ActorAlign.CENTER,
 			y_align: ActorAlign.FILL
 		});
 
