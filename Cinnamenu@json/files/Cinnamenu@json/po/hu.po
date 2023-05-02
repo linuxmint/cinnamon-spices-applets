@@ -531,10 +531,10 @@ msgstr "Válassza ki, hogy hol jelenjen meg az alkalmazás leírása"
 
 msgid ""
 "\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
+"• Drag on the menu edge to change the menu size."
 msgstr ""
 "\n"
-"Tipp: A menü szélének húzásával megváltoztathatja a menü méretét.\n"
+"• A menü szélének húzásával megváltoztathatja a menü méretét."
 
 msgid "Show recent items"
 msgstr "Legutóbbi elemek megjelenítése"

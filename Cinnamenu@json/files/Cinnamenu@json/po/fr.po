@@ -540,11 +540,10 @@ msgstr "Vous permet de choisir l'emplacement des descriptions des applications"
 
 msgid ""
 "\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
+"• Drag on the menu edge to change the menu size."
 msgstr ""
 "\n"
-"Info/astuce : Faites glisser le bord du menu pour modifier la taille du "
-"menu.\n"
+"• Faites glisser le bord du menu pour modifier la taille du menu."
 
 msgid "Show recent items"
 msgstr "Afficher les éléments récents"

@@ -529,10 +529,10 @@ msgstr "Välj var programbeskrivningarna skall visas"
 
 msgid ""
 "\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
+"• Drag on the menu edge to change the menu size."
 msgstr ""
 "\n"
-"Info / Tips: Dra i menykanten för att ändra menystorlek.\n"
+"• Dra i menykanten för att ändra menystorlek."
 
 msgid "Show recent items"
 msgstr "Visa tidigare objekt"

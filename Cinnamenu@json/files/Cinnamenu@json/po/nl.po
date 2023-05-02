@@ -527,10 +527,10 @@ msgstr "Kies waar toepassingsbeschrijvingen moeten worden weergegeven"
 
 msgid ""
 "\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
+"• Drag on the menu edge to change the menu size."
 msgstr ""
 "\n"
-"Info/tip: Sleep op de menurand om de menugrootte te wijzigen.\n"
+"• Sleep op de menurand om de menugrootte te wijzigen."
 
 msgid "Show recent items"
 msgstr "Toon recente elementen"
