@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-08 19:56+0300\n"
-"PO-Revision-Date: 2023-03-13 15:02+0100\n"
+"PO-Revision-Date: 2023-05-07 19:45+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -131,7 +131,7 @@ msgstr ""
 
 #. settings-schema.json->cpu_label->description
 msgid "CPUs and memory sections"
-msgstr ""
+msgstr "CPU-k és memória"
 
 #. settings-schema.json->size->description
 msgid "CPUs and memory panel sections widths (px)"
@@ -189,7 +189,7 @@ msgstr ""
 
 #. settings-schema.json->net_label->description
 msgid "Network section"
-msgstr ""
+msgstr "Hálózat"
 
 #. settings-schema.json->net_size->description
 msgid "Network panel section width (px)"
@@ -218,3 +218,5 @@ msgid ""
 "Semicolon-separated network interfaces list not to consider for counting "
 "traffic"
 msgstr ""
+"Forgalomszámolásakor figyelmen kívül hagyott pontosvesszővel elválasztott "
+"hálózati interfészek listája"
