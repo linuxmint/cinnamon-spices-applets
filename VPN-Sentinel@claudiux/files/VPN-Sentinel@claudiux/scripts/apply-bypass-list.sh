@@ -1,8 +1,13 @@
 #!/bin/bash
 
+NAME="VPN-Sentinel"
 UUID="VPN-Sentinel@claudiux"
-DOMAINS_FILE="$HOME/.cinnamon/configs/$UUID/domains2bypass.txt"
-RESET_FILE="$HOME/.cinnamon/configs/$UUID/reset-bypass.sh"
+OLD_DOMAINS_FILE="$HOME/.cinnamon/configs/$UUID/domains2bypass.txt"
+DOMAINS_FILE="$HOME/.config/$NAME/domains2bypass.txt"
+OLD_RESET_FILE="$HOME/.cinnamon/configs/$UUID/reset-bypass.sh"
+RESET_FILE="$HOME/.config/$NAME/reset-bypass.sh"
+[ -f $OLD_DOMAINS_FILE ] && mv -u $OLD_DOMAINS_FILE $DOMAINS_FILE
+[ -f $OLD_RESET_FILE ] && mv -u $OLD_RESET_FILE $RESET_FILE
 
 [ -f ${DOMAINS_FILE} ] || exit 1
 
