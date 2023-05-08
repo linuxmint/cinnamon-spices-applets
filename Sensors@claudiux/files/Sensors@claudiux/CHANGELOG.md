@@ -1,3 +1,6 @@
+### v3.0.1~20230429
+  * lib/checkDependencies.js: fixes  #4828
+
 ### v3.0.0~20230420
   * Now users can specify certain limit values and a formula to correct the values returned by a sensor.
 

@@ -529,10 +529,10 @@ msgstr "Valitse, missä sovellusten kuvaukset näytetään"
 
 msgid ""
 "\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
+"• Drag on the menu edge to change the menu size."
 msgstr ""
 "\n"
-" Vinkki: Muuta valikon kokoa vetämällä valikon reunasta.\n"
+"• Muuta valikon kokoa vetämällä valikon reunasta."
 
 msgid "Show recent items"
 msgstr "Näytä viimeisimmät kohteet"

@@ -9,6 +9,7 @@ const Gettext = imports.gettext;
 
 const {to_string} = require("./lib/to-string");
 
+
 // --- To adapt to the applet --- //
 /**
  * UUDI is the Universal Unique IDentifier of the applet using this dependencies management.
@@ -42,6 +43,9 @@ const DEPENDENCIES = {
     ["", "/usr/share/doc/libsox-fmt-mp3/copyright", "libsox-fmt-mp3"]
   ],
   "fedora": [
+    ["sox", "/usr/bin/sox",  "sox"]
+  ],
+  "openSUSE": [
     ["sox", "/usr/bin/sox",  "sox"]
   ]
 }
@@ -84,6 +88,14 @@ const DEPENDENCIES = {
     ["", "/usr/share/fonts/gdouros-symbola/Symbola.ttf", "gdouros-symbola-fonts"],
     ["yad", "/usr/bin/yad", "yad"],
     ["dig", "/usr/bin/dig", "bind-utils"]
+  ],
+  "openSUSE": [
+    ["sox", "/usr/bin/sox",  "sox"],
+    ["nmcli", "/usr/bin/nmcli", "NetworkManager"],
+    ["", "/usr/libexec/nm-openvpn-service", "NetworkManager-openvpn"],
+    ["", "/usr/share/fonts/truetype/Symbola.ttf", "gdouros-symbola-fonts"],
+    ["yad", "/snap/bin/yad", "yad"],
+    ["dig", "/usr/bin/dig", "bind"]
   ]
 }
 
@@ -101,14 +113,16 @@ const UPDATE = {
   "default": "sudo apt-get update",
   "arch": "sudo pacman -Syu",
   "debian": "apt-get update",
-  "fedora": "sudo dnf update"
+  "fedora": "sudo dnf update",
+  "openSUSE": ""
 }
 
 const INSTALL = {
   "default": "sudo apt-get install",
   "arch": "sudo pacman -S",
   "debian": "apt-get install",
-  "fedora": "sudo dnf install"
+  "fedora": "sudo dnf install",
+  "openSUSE": "sudo zypper --non-interactive install"
 }
 
 const HOME_DIR = GLib.get_home_dir();
@@ -118,12 +132,13 @@ const DISTRO = function() {
   let lines = osRelease.split("\n");
   var distro = "";
   for (let line of lines) {
+    line = ""+line;
     if (line.startsWith("ID=")) {
       distro = line.trim().substr(3);
       break;
     }
   }
-  return distro
+  return ""+distro;
 }
 
 /**
@@ -136,7 +151,7 @@ var messageTray = new MessageTray.MessageTray();
 function criticalNotify(msg, details, icon) {
   let source = new MessageTray.SystemNotificationSource();
   messageTray.add(source);
-  let notification = new MessageTray.Notification(source, msg, details, { icon: icon });
+  let notification = new MessageTray.Notification(source, UUID + ": " + msg, details, { icon: icon });
   notification.setTransient(false);
   notification.setUrgency(MessageTray.Urgency.CRITICAL);
   source.notify(notification);
@@ -149,7 +164,7 @@ function get_terminal() {
   var term_found = "";
   var _terminals = ["gnome-terminal", "tilix", "konsole", "guake", "qterminal", "terminator", "uxterm", "xterm"];
   var t;
-  for (t=0; t < _terminals.length ; t++) {
+  for (t=0; t < _terminals.length ; ++t) {
     if (GLib.find_program_in_path(_terminals[t])) {
       term_found = _terminals[t];
       break
@@ -161,15 +176,16 @@ function get_terminal() {
 function get_default_terminal() {
   let _SETTINGS_SCHEMA='org.cinnamon.desktop.default-applications.terminal';
   let _SETTINGS_KEY1 = 'exec'; // Ex: 'gnome-terminal'
-  let _SETTINGS_KEY2 = 'exec-arg'; // Ex: '-x'
+  //let _SETTINGS_KEY2 = 'exec-arg'; // Ex: '-x'
   let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
   let ret1 = _interface_settings.get_string(_SETTINGS_KEY1);
-  let ret2 = _interface_settings.get_string(_SETTINGS_KEY2);
-  if (ret1 == null || ret2 == null) {
+  //let ret2 = _interface_settings.get_string(_SETTINGS_KEY2);
+  if (ret1 == null) {
     ret1 = get_terminal();
-    ret2 = '-e';
+    //ret2 = '-e';
   }
-  return [ret1, ret2]
+  //return [ret1, ret2];
+  return "" + ret1;
 } // End of get_default_terminal
 
 //let term = get_default_terminal();
@@ -187,6 +203,10 @@ function isDebian() {
   return DISTRO() === 'debian'
 } // End of isDebian
 
+function isOpenSUSE() {
+  return GLib.find_program_in_path("zypper")
+}
+
 function is_apturl_present() {
   return GLib.find_program_in_path("apturl")
 } // End of is_apturl_present
@@ -198,11 +218,16 @@ function get_distro() {
     case "arch":
     case "fedora":
       return distro;
+    case "linuxmint":
+    case "ubuntu":
+      return "default";
     default:
       if (isArchLinux()) {
         return "arch";
       } else if (isFedora()) {
         return "fedora";
+      } else if (isOpenSUSE()) {
+        return "openSUSE"
       }
       return "default"; // linuxmint or ubuntu
   }
@@ -275,19 +300,22 @@ Dependencies.prototype = {
         icon_type: St.IconType.FULLCOLOR,
         icon_size: 32 });
       // Got a terminal used on this system:
-      let terminal = get_terminal();
+      let terminal = get_default_terminal();
       // apturl is it present?
       let _is_apturl_present = is_apturl_present();
       // Detects the distrib in use and make adapted message and notification:
       let _isFedora = isFedora();
       let _isArchlinux = isArchLinux();
       let _isDebian = isDebian();
+      let _isOpenSUSE = isOpenSUSE();
       //let _apt_update = _isFedora ? "sudo dnf update" : _isArchlinux ? "" : _isDebian ? "apt update" : "sudo apt update";
       let distro = get_distro();
       let _apt_update = UPDATE[distro];
       let _install = INSTALL[distro];
       let _pkg_to_install = get_pkg_to_install();
       let _and = " \\\\&\\\\& ";
+      if (_apt_update.length === 0)
+        _and = "";
       let _apt_install = "%s %s".format(_install, _pkg_to_install.join(" "));
       //var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : _isDebian ? "apt install libnotify-bin fonts-symbola" : "sudo apt install libnotify-bin fonts-symbola";
       let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
@@ -304,17 +332,11 @@ Dependencies.prototype = {
           }
         }
       } else {
-        Util.spawnCommandLine("apturl apt://%s".format(_pkg_to_install.join(",")));
-        //if (!this.fonts_installed && !this.notifysend_installed)
-          //Util.spawnCommandLine("apturl apt://fonts-symbola,libnotify-bin")
-        //else if (!this.fonts_installed)
-          //Util.spawnCommandLine("apturl apt://fonts-symbola")
-        //else if (!this.notifysend_installed)
-          //Util.spawnCommandLine("apturl apt://libnotify-bin");
+        Util.spawnCommandLine("apturl apt:%s".format(_pkg_to_install.join(",")));
       }
       this.depAreMet = false;
     }
-    return this.depAreMet
+    //return this.depAreMet
   } // End of check_dependencies
 
 } // End of Dependencies.prototype

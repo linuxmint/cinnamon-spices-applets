@@ -532,10 +532,10 @@ msgstr "Festlegen, wo die Beschreibungen der Apps angezeigt werden"
 
 msgid ""
 "\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
+"• Drag on the menu edge to change the menu size."
 msgstr ""
 "\n"
-"Info/Tipp: Am Menürand ziehen, um die Größe des Menüs zu ändern.\n"
+"• Am Menürand ziehen, um die Größe des Menüs zu ändern."
 
 msgid "Show recent items"
 msgstr "Kategorie »Kürzlich« anzeigen"
