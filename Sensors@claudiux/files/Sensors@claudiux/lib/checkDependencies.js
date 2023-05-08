@@ -215,6 +215,9 @@ function get_distro() {
     case "arch":
     case "fedora":
       return distro;
+    case "linuxmint":
+    case "ubuntu":
+      return "default";
     default:
       if (isArchLinux()) {
         return "arch";
