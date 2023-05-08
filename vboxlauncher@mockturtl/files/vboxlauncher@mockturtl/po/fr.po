@@ -7,34 +7,36 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-17 16:33+0100\n"
-"PO-Revision-Date: 2019-11-17 16:51+0100\n"
+"POT-Creation-Date: 2023-04-15 19:46+0200\n"
+"PO-Revision-Date: 2023-04-15 19:51+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:87
+#: applet.js:122
 msgid "Settings"
 msgstr "Paramètres"
 
-#: applet.js:119
+#: applet.js:145
 msgid "Display"
 msgstr "Afficher"
 
-#: applet.js:120
+#: applet.js:146
 msgid "Headless"
 msgstr "Mode Headless (Serveur virtuel à distance)"
 
-#: applet.js:141
+#: applet.js:167
 msgid "ERROR. No compatible virtual machine programs found."
-msgstr "ERREUR. Aucun programme compatible avec le lancement de machine virtuelle n'a été trouvé."
+msgstr ""
+"ERREUR. Aucun programme compatible avec le lancement de machine virtuelle "
+"n'a été trouvé."
 
-#: applet.js:236
+#: applet.js:273
 msgid "Update list"
 msgstr "Mettre à jour la liste"
 
@@ -49,3 +51,9 @@ msgstr "Une applet pour lancer des machines virtuelles."
 #. settings-schema.json->autoUpdate->description
 msgid "Auto update (slow)"
 msgstr "Mise à jour automatique (ralentit l'applet)"
+
+#. settings-schema.json->showHeadlessMode->description
+msgid "Show Headless Mode"
+msgstr ""
+"Afficher le mode Headless (serveur virtuel à distance) des machines "
+"virtuelles"

@@ -1,0 +1,23 @@
+nmcli exits with status 0 if it succeeds, a value greater than 0 is returned if an error occurs.
+
+       0  Success – indicates the operation succeeded.
+
+       1  Unknown or unspecified error.
+
+       2  Invalid user input, wrong nmcli invocation.
+
+       3  Timeout expired (see --wait option).
+
+       4  Connection activation failed.
+
+       5  Connection deactivation failed.
+
+       6  Disconnecting device failed.
+
+       7  Connection deletion failed.
+
+       8  NetworkManager is not running.
+
+       10 Connection, device, or access point does not exist.
+
+       65 When used with --complete-args option, a file name is expected to follow

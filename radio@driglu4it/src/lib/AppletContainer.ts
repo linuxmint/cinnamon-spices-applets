@@ -1,18 +1,18 @@
 const { Applet, AllowedLayout } = imports.ui.applet;
 const { EventType } = imports.gi.Clutter;
 
-interface Arguments {
+export interface CreateAppletContainerProps {
   onClick: () => void;
   onScroll: (scrollDirection: imports.gi.Clutter.ScrollDirection) => void;
   onMiddleClick: () => void;
   onRightClick: () => void;
-  onMoved: () => void;
+  onAppletMovedCallbacks: Array<() => void>;
   onRemoved: () => void;
 }
 
-export function createAppletContainer(args: Arguments) {
-  const { onClick, onScroll, onMiddleClick, onMoved, onRemoved, onRightClick } =
-    args;
+export function createAppletContainer(props: CreateAppletContainerProps) {
+  const { onClick, onScroll, onMiddleClick, onAppletMovedCallbacks, onRemoved, onRightClick } =
+    props;
 
   const applet = new Applet(
     __meta.orientation,
@@ -39,7 +39,7 @@ export function createAppletContainer(args: Arguments) {
   };
 
   applet.on_applet_removed_from_panel = function () {
-    appletReloaded ? onMoved() : onRemoved();
+    appletReloaded ? onAppletMovedCallbacks.forEach((cb) => cb()) : onRemoved();
     appletReloaded = false;
   };
 
@@ -57,6 +57,15 @@ export function createAppletContainer(args: Arguments) {
     onScroll(event.get_scroll_direction());
     return false;
   });
+
+
+  // this is a workaround to ensure that the Applet is still clickable after the applet has dropped 
+  global.settings.connect("changed::panel-edit-mode", () => {
+    const inhibitDragging = !global.settings.get_boolean("panel-edit-mode")
+
+    // @ts-ignore
+    applet['_draggable'].inhibit = inhibitDragging
+  })
 
   return applet;
 }

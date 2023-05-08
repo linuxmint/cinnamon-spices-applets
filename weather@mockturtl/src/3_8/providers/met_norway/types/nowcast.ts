@@ -34,10 +34,10 @@ interface MetNorwayNowcastBasePayload {
 
 export interface MetNorwayNowcastNoCoveragePayload extends MetNorwayNowcastBasePayload {
 	properties: {
-		meta: MetNorwayNowcastBasePayload["properties"]["meta"] & 
+		meta: MetNorwayNowcastBasePayload["properties"]["meta"] &
 		{
 			radar_coverage: "no coverage" | "temporarily unavailable";
-			
+
 		};
 		timeseries: [MetNorwayNowcastFirstData];
 	}
@@ -45,10 +45,10 @@ export interface MetNorwayNowcastNoCoveragePayload extends MetNorwayNowcastBaseP
 
 export interface MetNorwayNowcastCoveragePayload extends MetNorwayNowcastBasePayload {
 	properties: {
-		meta: MetNorwayNowcastBasePayload["properties"]["meta"] & 
+		meta: MetNorwayNowcastBasePayload["properties"]["meta"] &
 		{
 			radar_coverage: "ok";
-			
+
 		};
 		timeseries: [MetNorwayNowcastFirstData & MetNorwayNowcastPrecipData, ...MetNorwayNowcastPrecipData[]];
 	}

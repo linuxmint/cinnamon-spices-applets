@@ -1,4 +1,5 @@
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const XApp = imports.gi.XApp;
@@ -9,7 +10,7 @@ const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine} = imports.misc.util;
 
-const {_} = require('./utils');
+const {_, log} = require('./utils');
 const {MODABLE, MODED} = require('./emoji');
 
 class ContextMenuItem extends PopupBaseMenuItem {
@@ -26,7 +27,7 @@ class ContextMenuItem extends PopupBaseMenuItem {
         this.signals = new SignalManager(null);
         this.action = action;
         if (this.action === null && !insensitive) {//"Open with" item
-            this.actor.style = 'font-weight: bold;';
+            this.actor.add_style_class_name('popup-subtitle-menu-item');
         } else if (insensitive) {//greyed out item
             this.actor.add_style_pseudo_class('insensitive');
         }
@@ -52,7 +53,7 @@ class ContextMenuItem extends PopupBaseMenuItem {
     }
 
     activate(event) {
-        if (!this.action || event && event.get_button() !== 1) {
+        if (!this.action || event && event.get_button() !== Clutter.BUTTON_PRIMARY) {
             return Clutter.EVENT_STOP;
         }
         this.action();
@@ -64,7 +65,7 @@ class ContextMenuItem extends PopupBaseMenuItem {
         PopupBaseMenuItem.prototype.destroy.call(this);
     }
 }
-const Cinnamon = imports.gi.Cinnamon;
+
 class ContextMenu {
     constructor(appThis) {
         this.appThis = appThis;
@@ -72,36 +73,22 @@ class ContextMenu {
         this.menu.actor.hide();
         this.contextMenuBox = new St.BoxLayout({ style_class: '', vertical: true, reactive: true });
         this.contextMenuBox.add_actor(this.menu.actor);
-        //Note: The context menu is not fully model. Instead, it is added to the stage by adding it to
-        //mainBox with it's height set to 0. contextMenuBox is then positioned at mouse coords and above
-        //siblings. The context menu is not fully model because then it would be difficult to close both
-        //the context menu and the applet menu when the user clicks outside of both.
-        this.contextMenuBox.height = 0;
-        this.appThis.mainBox.add(this.contextMenuBox, {expand: false, x_fill: false,
-                                                    x_align: St.Align.START, y_align: St.Align.MIDDLE,});
+        
         this.contextMenuButtons = [];
         this.isOpen = false;
     }
 
-    open(app, e, buttonActor, isACategoryButton = false) {
+    openApp(app, e, buttonActor) {
         //e is used to position context menu at mouse coords. If keypress opens menu then
-        // e is undefined and buttonActor position is used instead.
+        //e is undefined and buttonActor position is used instead.
         this.contextMenuButtons.forEach(button => button.destroy());
         this.contextMenuButtons = [];
 
         //------populate menu
-        if (isACategoryButton) {
-            const addMenuItem = (item) => {
-                this.menu.addMenuItem(item);
-                this.contextMenuButtons.push(item);
-            };
-            addMenuItem( new ContextMenuItem(this.appThis, _('Reset category order'), null,
-                                () => { this.appThis.settings.categories = [];
-                                        this.appThis.categoriesView.update();
-                                        this.close(); } ));
-        } else if (app.isApplication) {
+        if (app.isApplication) {
             this._populateContextMenu_apps(app);
-        } else if (app.isFolderviewFile || app.isFolderviewDirectory || app.isRecentFile || app.isFavoriteFile) {
+        } else if (app.isFolderviewFile || app.isDirectory ||
+                   app.isRecentFile || app.isFavoriteFile) {
             if (!this._populateContextMenu_files(app)) {
                 return;
             }
@@ -129,13 +116,44 @@ class ContextMenu {
         } else {
             return;
         }
+        this._showMenu(e, buttonActor);
+    }
 
-        //----Position and open menu----
+    openCategory(categoryId, e, buttonActor) {
+        //e is used to position context menu at mouse coords. If keypress opens menu then
+        //e is undefined and buttonActor position is used instead.
+        this.contextMenuButtons.forEach(button => button.destroy());
+        this.contextMenuButtons = [];
+
+        //------populate menu
+        const addMenuItem = (item) => {
+            this.menu.addMenuItem(item);
+            this.contextMenuButtons.push(item);
+        };
+        if (categoryId.startsWith('/')) {
+            addMenuItem(new ContextMenuItem(this.appThis, _('Remove category'), 'user-trash',
+                        () => {
+                            this.appThis.removeFolderCategory(categoryId);
+                            this.appThis.display.categoriesView.update();
+                            this.close();
+                        }));
+            this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
+        }
+        addMenuItem(new ContextMenuItem(this.appThis, _('Reset category order'), 'edit-undo-symbolic',
+                            () => { this.appThis.settings.categories = [];
+                                    this.appThis.display.categoriesView.update();
+                                    this.close(); }));
+        
+        this._showMenu(e, buttonActor);
+    }
+
+    _showMenu(e, buttonActor) {
+        //----Position and open context menu----
         this.isOpen = true;
         this.appThis.resizer.inhibit_resizing = true;
 
-        const contextMenuWidth = this.menu.actor.width;
-        const contextMenuHeight = this.menu.actor.height;
+        //const contextMenuWidth = this.menu.actor.width;
+        //const contextMenuHeight = this.menu.actor.height;
 
         const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
         let mx, my;
@@ -152,14 +170,11 @@ class ContextMenu {
         if (my > monitor.y + monitor.height - this.menu.actor.height - 40/*allow for panel*/) {
             my -= this.menu.actor.height;
         }
-        //setting anchor_x & anchor_y sets it relative to it's current position but negative???
+
         let [cx, cy] = this.contextMenuBox.get_transformed_position();
-        cx = Math.round(mx - cx);
-        cy = Math.round(my - cy);
-
-        this.menu.actor.anchor_x = -cx;
-        this.menu.actor.anchor_y = -cy;
-
+        
+        this.menu.actor.set_anchor_point(Math.round(cx - mx), Math.round(cy - my));
+        
         //This context menu doesn't have an St.Side and so produces errors in .xsession-errors.
         //Enable animation here for the sole reason that it spams .xsession-errors less. Can't add an
         //St.Side because in some themes it looks like it should be attached to a panel but isn't.
@@ -199,7 +214,8 @@ class ContextMenu {
                     enabled_applets.push('panel1:right:0:panel-launchers@cinnamon.org:' + new_applet_id);
                     global.settings.set_strv('enabled-applets', enabled_applets);
                 }
-                const launcherApplet = Main.AppletManager.get_role_provider(Main.AppletManager.Roles.PANEL_LAUNCHER);
+                const launcherApplet =
+                            Main.AppletManager.get_role_provider(Main.AppletManager.Roles.PANEL_LAUNCHER);
                 if (launcherApplet) {
                     launcherApplet.acceptNewLauncher(app.id);
                 }
@@ -283,12 +299,13 @@ class ContextMenu {
         if (favs) {//prior to cinnamon 4.8, XApp favorites are not available
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
             const updateAfterFavFileChange = () => {
-                    this.appThis.sidebar.populate();
-                    this.appThis.categoriesView.update();//in case fav files category needs adding/removing
-                    this.appThis.updateMenuSize();
-                    if (this.appThis.currentCategory === 'favorite_files') {
-                        this.appThis.setActiveCategory(this.appThis.currentCategory);
-                    } };
+                this.appThis.display.sidebar.populate();
+                this.appThis.display.categoriesView.update();//in case fav files category needs adding/removing
+                this.appThis.display.updateMenuSize();
+                if (this.appThis.currentCategory === 'favorite_files') {
+                    this.appThis.setActiveCategory(this.appThis.currentCategory);
+                }
+            };
             if (favs.find_by_uri(app.uri)) { //favorite
                 addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
                                                         () => { favs.remove(app.uri);
@@ -296,12 +313,27 @@ class ContextMenu {
                                                                 this.close(); } ));
             } else {
                 addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
-                        () =>   {   favs.add(app.uri);
-                                    //favs list doesn't update synchronously after adding fav so add small
-                                    //delay before updating menu
-                                    Mainloop.timeout_add(100, () => { updateAfterFavFileChange(); });
-                                    this.close();
-                                } ));
+                        () => {
+                            favs.add(app.uri);
+                            //favs list doesn't update synchronously after adding fav so add small
+                            //delay before updating menu
+                            Mainloop.timeout_add(100, () => { updateAfterFavFileChange(); });
+                            this.close();
+                        }));
+            }
+        }
+
+        //Add folder as category
+        if (app.isDirectory) {
+            const path = Gio.file_new_for_uri(app.uri).get_path();
+            if (!this.appThis.getIsFolderCategory(path)) {
+                this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
+                addMenuItem(new ContextMenuItem(this.appThis, _('Add folder as category'), 'list-add',
+                    () => {
+                        this.appThis.addFolderCategory(path);
+                        this.appThis.display.categoriesView.update();
+                        this.close();
+                    }));
             }
         }
 
@@ -309,10 +341,12 @@ class ContextMenu {
         const folder = file.get_parent();
         if (app.isRecentFile || app.isFavoriteFile) { //not a browser folder/file
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
-            addMenuItem( new ContextMenuItem(   this.appThis, _('Open containing folder'), 'go-jump',
-                        () => { const fileBrowser = Gio.AppInfo.get_default_for_type('inode/directory', true);
-                                fileBrowser.launch([folder], null);
-                                this.appThis.menu.close(); } ));
+            addMenuItem(new ContextMenuItem(this.appThis, _('Open containing folder'), 'go-jump',
+                    () => {
+                        const fileBrowser = Gio.AppInfo.get_default_for_type('inode/directory', true);
+                        fileBrowser.launch([folder], null);
+                        this.appThis.menu.close();
+                    }));
         }
 
         //Move to trash
@@ -323,20 +357,34 @@ class ContextMenu {
             const canTrash = fileInfo.get_attribute_boolean('access::can-trash');
             if (canTrash) {
                 addMenuItem( new ContextMenuItem(this.appThis, _('Move to trash'), 'user-trash',
-                            () => { const file = Gio.File.new_for_uri(app.uri);
-                                    try {
-                                        file.trash(null);
-                                    } catch (e) {
-                                        Main.notify(_('Error while moving file to trash:'), e.message);
-                                    }
-                                    this.appThis.setActiveCategory(this.appThis.currentCategory);
-                                    this.close(); } ));
+                            () => {
+                                const file = Gio.File.new_for_uri(app.uri);
+                                try {
+                                    file.trash(null);
+                                } catch (e) {
+                                    Main.notify(_('Error while moving file to trash:'), e.message);
+                                }
+                                this.appThis.setActiveCategory(this.appThis.currentCategory);
+                                this.close();
+                            }));
             } else {//show insensitive item
                 addMenuItem( new ContextMenuItem(this.appThis, _('Move to trash'), 'user-trash',
                                                                             null, true /*insensitive*/));
             }
         }
         return true; //success.
+    }
+
+    getCurrentlyFocusedMenuItem() {
+        if (!this.isOpen) {
+            return -1;
+        }
+        
+        let focusedButton = this.contextMenuButtons.findIndex(button => button.has_focus);
+        if (focusedButton < 0) {
+            focusedButton = 0;
+        }
+        return focusedButton;
     }
 
     close() {

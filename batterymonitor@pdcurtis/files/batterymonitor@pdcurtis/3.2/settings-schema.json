@@ -12,7 +12,7 @@
         "units": "seconds",
         "description": "Refresh Interval for Display:",
         "tooltip": "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine. This also governs the flash speed."
-     },
+    },
     "alertPercentage": {
         "type": "scale",
         "default": 25,
@@ -22,25 +22,23 @@
         "description": "Percentage Battery Charge at which Alert Displayed",
         "tooltip": "Percentage of Battery Charge at which Orange Warning Background is displayed - It is also shown and can be adjusted in the Applet left click menu"
     },
-
     "head1": {
         "type": "header",
         "description": "Display Mode"
     },
-    "displayType" : {
+    "displayType": {
         "type": "combobox",
-        "default" : "classic",
-        "options" : {
-            "Classic - Battery Percentage with extended messages for horizontal panel" : "classic",
-            "Classic Plus - Classic with addition of Battery Icon": "classicPlus" ,
-            "Compact - Battery Percentage without extended messages" : "compact",
-            "Compact Plus - Compact  with addition of Battery Icon" : "compactPlus",
-            "Icon Only on coloured background indicating status" : "icon"
-         },
-        "description" : "Type of Display in Toolbar",
+        "default": "classic",
+        "options": {
+            "Classic - Battery Percentage with extended messages for horizontal panel": "classic",
+            "Classic Plus - Classic with addition of Battery Icon": "classicPlus",
+            "Compact - Battery Percentage without extended messages": "compact",
+            "Compact Plus - Compact with addition of Battery Icon": "compactPlus",
+            "Icon Only on coloured background indicating status": "icon"
+        },
+        "description": "Type of Display in Toolbar",
         "tooltip": "This feature offers the Classic (original) display with optional battery icon and some more compact displays suitable for a vertical panel (CompactCompact Plus and Icon Only)"
-   },
-
+    },
     "head2": {
         "type": "header",
         "description": "Battery Low Alert Settings"
@@ -56,7 +54,6 @@
         "default": false,
         "description": "Allow choice of audible alert file when Battery Low and at Shutdown Level",
         "tooltip": "Must have Sox installed. Limited number of sound file types supported in versions < 4.2"
-
     },
     "batteryLowSound": {
         "type": "soundfilechooser",
@@ -64,12 +61,12 @@
         "dependency": "chooseBatteryLowSound",
         "description": "Choose sound file to use when Battery is Low",
         "tooltip": "Please ensure the volume is set sensibly in public places especially if a long loud file is specifed",
-        "event-sounds": false 
+        "event-sounds": false
     },
     "batteryShutdownSound": {
         "type": "soundfilechooser",
         "default": "/usr/share/sounds/freedesktop/stereo/complete.oga",
-        "dependency": "chooseBatteryLowSound" ,
+        "dependency": "chooseBatteryLowSound",
         "description": "Choose sound file to use when Battery is at Shutdown Level",
         "tooltip": "Please ensure the volume is set sensibly in public places - do not specify a long loud file at Shutdown",
         "event-sounds": false
@@ -81,16 +78,14 @@
         "description": "Provide Notification when user specified sound file is in use - Recommended",
         "tooltip": "To remind users that the volume may need to be set sensibly in public places"
     },
-
     "head3": {
         "type": "header",
         "description": "Household Tasks"
     },
-    "deleteTempraryFiles" : {
-        "type" : "button",
-        "description" : "Delete temporary files after upgrade to version 1.4",
-        "callback" : "deleteTemporaryFiles",
-        "tooltip" : "Versions prior to 1.4 used temporary files in the home directory. These are not needed any more and can be deleted."
+    "deleteTempraryFiles": {
+        "type": "button",
+        "description": "Delete temporary files after upgrade to version 1.4",
+        "callback": "deleteTemporaryFiles",
+        "tooltip": "Versions prior to 1.4 used temporary files in the home directory. These are not needed any more and can be deleted."
     }
 }
-

@@ -5,11 +5,12 @@
             "layout",
             "behaviour",
             "search",
-            "appearance"
+            "appearance",
+            "tips"
         ],
         "layout":{
             "type":"page",
-            "title":"Layout and Content",
+            "title":"Layout",
             "sections":[
                 "menu-layout",
                 "menu-content"
@@ -38,6 +39,13 @@
                 "menu-icons"
             ]
         },
+        "tips":{
+            "type":"page",
+            "title":"Tips",
+            "sections":[
+                "tips-section"
+            ]
+        },
         "menu-layout":{
             "type":"section",
             "title":"Layout",
@@ -45,8 +53,7 @@
                 "applications-view-mode",
                 "sidebar-placement",
                 "sidebar-favorites",
-                "description-placement",
-                "info-box"
+                "description-placement"
             ]
         },
         "menu-content":{
@@ -118,6 +125,15 @@
                 "use-box-style",
                 "use-tile-style"
             ]
+        },
+        "tips-section":{
+            "type":"section",
+            "title":"Tips",
+            "keys":[
+                "info1",
+                "info2",
+                "info3"
+            ]
         }
     },
 
@@ -140,6 +156,10 @@
     "search-start-folder":{
         "type":"generic",
         "default":""
+    },
+    "folder-categories":{
+        "type":"generic",
+        "default":[]
     },
 
     "applications-view-mode":{
@@ -178,18 +198,14 @@
     },
     "description-placement":{
         "type":"combobox",
-        "default":1,
+        "default":0,
         "description":"Application description placement",
         "options":{
-            "Tooltips":1,
-            "Under titles":2,
-            "None":3
+            "Tooltips":0,
+            "Under titles":1,
+            "None":2
         },
         "tooltip":"Choose where to show application descriptions"
-    },
-    "info-box":{
-        "type":"label",
-        "description":"\nInfo/tip: Drag on the menu edge to change the menu size.\n"
     },
 
     "show-places-category":{
@@ -272,8 +288,7 @@
             "Favorite apps":1,
             "Recent":2,
             "Places":3,
-            "All applications":4,
-            "Home folder":5
+            "All applications":4
         }
     },
     "enable-autoscroll":{
@@ -311,15 +326,16 @@
             "Ecosia":8,
             "AOL":9,
             "Startpage":10,
-            "Brave":11
+            "Brave":11,
+            "Qwant":12
         },
         "tooltip":"Show an internet search option in search results"
     },
     "web-suggestions":{
         "type":"checkbox",
-        "default":true,
+        "default":false,
         "description":"Web search suggestions",
-        "tooltip":"With web search option, also show search suggestions. (Note: This uses Google's search API)"
+        "tooltip":"With web search option, also show search suggestions. (Note: Search suggestions are provided by DuckDuckGo)"
     },
     "enable-home-folder-search":{
         "type":"checkbox",
@@ -440,6 +456,53 @@
         "default":"cinnamon-symbolic",
         "description":"Panel icon",
         "dependency":"menu-icon-custom",
+        "icon_categories" : [{
+            "name" : "Linux",
+            "icons" : [
+                "application-menu",
+                "application-menu-symbolic",
+                "cinnamon",
+                "cinnamon-symbolic",
+                "cinnamon-all-applications-symbolic",
+                "distributor-logo",
+                "distributor-logo-garuda",
+                "distributor-logo-garudalinux",
+                "emblem-favorite",
+                "emblem-favorite-symbolic",
+                "gnome-main-menu",
+                "linuxmint-logo",
+                "linuxmint-logo-badge",
+                "linuxmint-logo-badge-symbolic",
+                "linuxmint-logo-filled-badge",
+                "linuxmint-logo-filled-leaf-badge",
+                "linuxmint-logo-filled-leaf",
+                "linuxmint-logo-filled-ring",
+                "linuxmint-logo-leaf-badge",
+                "linuxmint-logo-leaf-badge-symbolic",
+                "linuxmint-logo-leaf",
+                "linuxmint-logo-leaf-symbolic",
+                "linuxmint-logo-neon",
+                "linuxmint-logo-ring",
+                "linuxmint-logo-ring-symbolic",
+                "linuxmint-logo-simple",
+                "linuxmint-logo-simple-symbolic",
+                "manjaro",
+                "manjarolinux",
+                "open-menu",
+                "open-menu-symbolic",
+                "opensuse_menu_icon",
+                "start-here",
+                "start-here-symbolic",
+                "start-here-archlinux",
+                "start-here-debian",
+                "start-here-fedora",
+                "start-here-linux-mint",
+                "start-here-opensuse",
+                "start-here-ubuntu"
+            ]
+        }],
+        "default_category" : "Linux",
+        "default_icon" : "cinnamon-symbolic",
         "tooltip":"Panel icon"
     },
     "menu-icon-size-custom":{
@@ -517,5 +580,18 @@
         "default":false,
         "description":"Use tile style",
         "tooltip":"Use a tile style for the application buttons (Note: may not work on some themes)"
+    },
+
+    "info1":{
+        "type":"label",
+        "description":"\n• Drag on the menu edge to change the menu size."
+    },
+    "info2":{
+        "type":"label",
+        "description":"\n• Drag and drop menu categories to change their order."
+    },
+    "info3":{
+        "type":"label",
+        "description":"\n• Right click on any folder to add it as a menu category.\n"
     }
 }

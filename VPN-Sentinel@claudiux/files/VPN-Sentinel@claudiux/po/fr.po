@@ -1,0 +1,722 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-30 21:56+0200\n"
+"PO-Revision-Date: 2023-03-30 21:57+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. metadata.json->name
+#: applet.js:56
+msgid "VPN Sentinel"
+msgstr "VPN Sentinel"
+
+#: applet.js:68
+msgid "Timestamp"
+msgstr "Timestamp"
+
+#: applet.js:69
+msgid "Date and Time"
+msgstr "Date et Heure"
+
+#: applet.js:70
+msgid "Message"
+msgstr "Message"
+
+#: applet.js:229
+msgid "VPN-Sentinel has just started."
+msgstr "VPN-Sentinel vient de démarrer."
+
+#: applet.js:233
+#, javascript-format
+msgid "Connected to VPN: %s"
+msgstr "Connecté au VPN : %s"
+
+#: applet.js:235
+#, javascript-format
+msgid "Connected to WIREGUARD: %s"
+msgstr "Connecté au WIREGUARD : %s"
+
+#: applet.js:237
+#, javascript-format
+msgid "Connected to: %s"
+msgstr "Connecté à : %s"
+
+#: applet.js:589
+#, javascript-format
+msgid "%s has just been launched."
+msgstr "%s vient d'être lancé."
+
+#: applet.js:645
+#, javascript-format
+msgid "%s has just been stopped."
+msgstr "%s vient d'être arrêté."
+
+#: applet.js:667
+#, javascript-format
+msgid "%s stopped because the VPN link is idle."
+msgstr "%s arrêté pour cause de rupture de lien VPN."
+
+#: applet.js:759
+#, javascript-format
+msgid "Connection lost. Attempt to reconnect to: %s"
+msgstr "Connexion perdue. Tentative de reconnexion à : %s"
+
+#: applet.js:769
+msgid "Connection to: "
+msgstr "Connexion à : "
+
+#: applet.js:776
+msgid "Connected to: "
+msgstr "Connecté à : "
+
+#: applet.js:790
+msgid "Disconnected from: "
+msgstr "Déconnecté de : "
+
+#: applet.js:808
+msgid "Switching to: "
+msgstr "Bascule vers : "
+
+#: applet.js:865 applet.js:890 applet.js:949 applet.js:963
+msgid "(None)"
+msgstr "(Aucun)"
+
+#: applet.js:1058
+msgid "ENABLED"
+msgstr "CONNECTÉ"
+
+#: applet.js:1058
+msgid "DISABLED"
+msgstr "DÉCONNECTÉ"
+
+#: applet.js:1058
+msgid "TRANSIENT"
+msgstr "ÉTAT TRANSITOIRE"
+
+#: applet.js:1076
+msgid "Other active VPN links (select to disable):"
+msgstr "Autres liens VPN actifs (sélectionnez pour désactiver) :"
+
+#: applet.js:1093
+msgid "Connections"
+msgstr "Connexions"
+
+#: applet.js:1119
+msgid "Connect to VPN as soon as this applet starts."
+msgstr "Se connecter au VPN au démarrage de l'applet."
+
+#. settings-schema.json->reconnect->description
+#: applet.js:1127
+msgid "Try to reconnect to VPN when it shuts down incidentally."
+msgstr "Essayer de se reconnecter au VPN lorsqu'il tombe incidemment."
+
+#: applet.js:1136
+msgid "VPN Policy"
+msgstr "Politique VPN"
+
+#. settings-schema.json->InternetPolicy->title
+#: applet.js:1143
+msgid "Internet Apps Manager"
+msgstr "Gestion des Applications Internet"
+
+#: applet.js:1151
+msgid "Open Activity Logs"
+msgstr "Ouvrir le journal d'activité"
+
+#: applet.js:1160
+msgid "Reload Country Flag"
+msgstr "Recharger le drapeau du pays"
+
+#: applet.js:1162
+msgid "Confirm this Country Flag"
+msgstr "Confirmer le drapeau du pays"
+
+#: applet.js:1178
+msgid "Network Settings"
+msgstr "Paramètres réseau"
+
+#: applet.js:1182
+msgid "Network Connections"
+msgstr "Connexions réseau"
+
+#: applet.js:1201
+#, javascript-format
+msgid ""
+"VPN: %s\n"
+" Device: %s\n"
+" Since: %s"
+msgstr ""
+"VPN : %s\n"
+" Interface : %s\n"
+" Depuis : %s"
+
+#: applet.js:1207
+#, javascript-format
+msgid ""
+"WIREGUARD: %s\n"
+" Device: %s\n"
+" Since: %s"
+msgstr ""
+"WIREGUARD : %s\n"
+" Interface : %s\n"
+" Depuis : %s"
+
+#: applet.js:1214
+msgid "Disconnected"
+msgstr "Déconnecté"
+
+#: applet.js:1216
+msgid "Transient"
+msgstr "Transitoire"
+
+#: applet.js:1218
+msgid "Deactivated"
+msgstr "Désactivé"
+
+#: applet.js:1348
+msgid "VPN-Sentinel re-loading requested."
+msgstr "VPN-Sentinel redémarrage demandé."
+
+#: applet.js:1361
+msgid "VPN-Sentinel was stopped."
+msgstr "VPN-Sentinel vient de s'arrêter."
+
+#: applet.js:1365
+#, javascript-format
+msgid "Still connected to VPN: %s"
+msgstr "Toujours connecté au VPN : %s"
+
+#: applet.js:1367
+#, javascript-format
+msgid "Still connected to WIREGUARD: %s"
+msgstr "Toujours connecté au WIREGUARD : %s"
+
+#: applet.js:1369
+#, javascript-format
+msgid "Still connected to: %s"
+msgstr "Toujours connecté à : %s"
+
+#: applet.js:1372
+msgid "No VPN/WIREGUARD link."
+msgstr "Aucun lien VPN/WIREGUARD."
+
+#: applet.js:1374
+msgid "VPN/WIREGUARD Status: Transient."
+msgstr "VPN/WIREGUARD État : Transitoire."
+
+#: lib/checkDependencies.js:267
+#, javascript-format
+msgid "The applet %s is fully functional."
+msgstr "L'applet %s est pleinement fonctionnelle."
+
+#: lib/checkDependencies.js:268
+msgid "All dependencies are installed"
+msgstr "Toutes les dépendances ont été installées"
+
+#: lib/checkDependencies.js:293
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Vous semblez ne pas disposer des programmes requis pour bénéficier de toutes "
+"les fonctionnalités de cette applet."
+
+#: lib/checkDependencies.js:294
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr "Veuillez exécuter, dans le terminal qui s'est ouvert, les commandes :"
+
+#: lib/checkDependencies.js:295
+msgid "Some dependencies are not installed!"
+msgstr "Certaines dépendances ne sont pas installées !"
+
+#. metadata.json->description
+msgid ""
+"VPN Sentinel is a powerful applet that monitors the VPN (or Wireguard) link, "
+"displays its status, can automatically connect to the last used VPN, "
+"reconnect the VPN link in case of unexpected disconnection, and start or "
+"stop certain Internet applications depending on the VPN status."
+msgstr ""
+"VPN Sentinel est une applet puissante qui surveille le lien VPN (ou "
+"Wireguard), affiche son état, peut se connecter automatiquement au dernier "
+"VPN utilisé, reconnecter le lien VPN en cas de déconnexion inattendue, et "
+"démarrer ou arrêter certaines applications Internet en fonction de l'état du "
+"VPN."
+
+#. settings-schema.json->Alerts->title
+msgid "Notifications"
+msgstr "Notifications"
+
+#. settings-schema.json->VPNpolicy->title
+msgid "VPN"
+msgstr "VPN"
+
+#. settings-schema.json->CountryFlags->title
+#. settings-schema.json->sectionF1->title
+msgid "Flags"
+msgstr "Drapeaux"
+
+#. settings-schema.json->sectionA1->title
+#. settings-schema.json->flagList->columns->title
+msgid "Flag"
+msgstr "Drapeau"
+
+#. settings-schema.json->sectionA2->title
+msgid "Sound Alert"
+msgstr "Alerte sonore"
+
+#. settings-schema.json->sectionA3->title
+msgid "Icon colors"
+msgstr "Couleurs de l'icône"
+
+#. settings-schema.json->sectionV1->title
+msgid "Connection Policy"
+msgstr "Politique de connexion"
+
+#. settings-schema.json->sectionV2->title
+msgid "Bypass VPN for below domains"
+msgstr "Contourner le VPN pour les domaines ci-dessous"
+
+#. settings-schema.json->sectionV3->title
+msgid "Activity Log"
+msgstr "Journal d'activité"
+
+#. settings-schema.json->sectionI1->title
+msgid "Settings"
+msgstr "Paramètres"
+
+#. settings-schema.json->sectionI2->title
+msgid "Managed Apps"
+msgstr "Applications gérées"
+
+#. settings-schema.json->showCountryFlag->description
+msgid "Show the VPN server country flag next to the icon"
+msgstr "Afficher à côté de l'icône le drapeau du pays du serveur VPN"
+
+#. settings-schema.json->showCountryFlag->tooltip
+msgid ""
+"If this box is checked, a request is sent to a geolocation server to find "
+"out the country where your VPN server is located and its flag is displayed "
+"next to the icon of this applet."
+msgstr ""
+"Si cette case est cochée, une requête est envoyée à un serveur de "
+"géolocalisation pour connaître le pays où se trouve votre serveur VPN et son "
+"drapeau s'affiche à côté de l'icône de cette applet."
+
+#. settings-schema.json->labelWhenVPNisOff->description
+msgid "While VPN is OFF"
+msgstr "Tant que le VPN est INACTIF"
+
+#. settings-schema.json->labelWhenVPNisOff->options
+msgid "Hide the flag place"
+msgstr "Ne pas afficher l'emplacement du drapeau"
+
+#. settings-schema.json->labelWhenVPNisOff->options
+msgid "No flag, but leave its place"
+msgstr "Aucun drapeau, mais laisser son emplacement"
+
+#. settings-schema.json->labelWhenVPNisOff->options
+msgid "Show my Country's Flag"
+msgstr "Afficher le drapeau de mon pays"
+
+#. settings-schema.json->useSoundAlert->description
+msgid "Emit an audible alert when VPN shuts down incidentally"
+msgstr "Émettre une alerte sonore quand le VPN tombe incidemment"
+
+#. settings-schema.json->useSoundAlertAtBeginning->description
+msgid "Emit this audible alert when this Applet starts, if VPN is down."
+msgstr ""
+"Émettre cette alerte sonore au démarrage de cette applet, si la liaison VPN "
+"n'est pas active."
+
+#. settings-schema.json->connectedColor->description
+msgid "While VPN is Connected"
+msgstr "Tant que le VPN est Connecté"
+
+#. settings-schema.json->disconnectedColor->description
+msgid "While VPN is Disconnected"
+msgstr "Tant que le VPN est Déconnecté"
+
+#. settings-schema.json->transitionColor->description
+msgid "While VPN is in Transition state"
+msgstr "Tant que le VPN est en état Transitoire"
+
+#. settings-schema.json->borderOpacity->description
+msgid "Border opacity"
+msgstr "Opacité du bord"
+
+#. settings-schema.json->applyColors->description
+#. settings-schema.json->applyBypassListButton->description
+msgid "Apply"
+msgstr "Appliquer"
+
+#. settings-schema.json->connectAtStartup->description
+msgid "Try to connect to last VPN as soon as VPN Sentinel starts."
+msgstr "Essayer de se connecter au VPN au démarrage de VPN Sentinel."
+
+#. settings-schema.json->deactivateAtStartup->description
+msgid "Deactivate this applet at startup"
+msgstr "Désactiver cette applet au démarrage"
+
+#. settings-schema.json->deactivateAtStartup->tooltip
+msgid ""
+"When this option is checked, this applet starts in 'deactivated' state, "
+"saving resources but not monitoring anything. You can activate it from its "
+"menu."
+msgstr ""
+"Lorsque cette option est cochée, cette applet démarre dans l'état "
+"'désactivé', économisant des ressources mais ne surveillant plus rien. Vous "
+"pouvez l'activer depuis son menu."
+
+#. settings-schema.json->respectUserRequest->description
+msgid ""
+"Do not try to automatically reconnect to VPN when disconnected through VPN "
+"Sentinel"
+msgstr ""
+"Ne pas essayer de se reconnecter automatiquement quand le VPN a été "
+"déconnecté via VPN Sentinel"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding here to activate/deactivate the last used VPN."
+msgstr ""
+"Définissez ici le raccourci clavier permettant d'activer/désactiver le "
+"dernier VPN utilisé."
+
+#. settings-schema.json->bypassList->columns->title
+msgid "Domain"
+msgstr "Domaine"
+
+#. settings-schema.json->applyBypassHelp->description
+msgid ""
+"Clicking this 'Apply' button will stop and then start your default "
+"connection. Thus, all active VPN connections will be closed."
+msgstr ""
+"Cliquer sur ce bouton 'Appliquer' arrêtera puis démarrera votre connexion "
+"par défaut. Ainsi, toutes les connexions VPN actives seront fermées."
+
+#. settings-schema.json->doLogActivity->description
+msgid "Log status changes of VPNs and Internet applications"
+msgstr ""
+"Journaliser les changements d'état des VPN et des applications Internet"
+
+#. settings-schema.json->logLifetime->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->logLifetime->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->logLifetime->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->logLifetime->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->logLifetime->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->logLifetime->options
+msgid "6"
+msgstr "6"
+
+#. settings-schema.json->logLifetime->options
+msgid "7"
+msgstr "7"
+
+#. settings-schema.json->logLifetime->options
+msgid "8"
+msgstr "8"
+
+#. settings-schema.json->logLifetime->options
+msgid "9"
+msgstr "9"
+
+#. settings-schema.json->logLifetime->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->logLifetime->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->logLifetime->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->logLifetime->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->logLifetime->options
+msgid "45"
+msgstr "45"
+
+#. settings-schema.json->logLifetime->options
+msgid "60"
+msgstr "60"
+
+#. settings-schema.json->logLifetime->options
+msgid "90"
+msgstr "90"
+
+#. settings-schema.json->logLifetime->description
+msgid "Lifetime (days)"
+msgstr "Durée de vie (en jours)"
+
+#. settings-schema.json->logLifetime->tooltip
+msgid "Lifetime of a record in the log file, in days."
+msgstr "Durée de vie, en jours, d'un événement enregistré dans le journal."
+
+#. settings-schema.json->view_activity_log_button->description
+msgid "Open Activity Log"
+msgstr "Ouvrir le journal d'activité"
+
+#. settings-schema.json->clear_activity_log_button->description
+msgid "Clear Activity Log"
+msgstr "Vider le journal d'activité"
+
+#. settings-schema.json->flagListHelp->description
+msgid ""
+"This list will be completed automatically.\n"
+"\n"
+"Confirm the lines with correct data in order to immediately display the flag "
+"of the country where the VPN server is located."
+msgstr ""
+"Cette liste sera complétée automatiquement.\n"
+"\n"
+"Confirmez les lignes contenant des données correctes afin d'afficher "
+"immédiatement le drapeau du pays où se trouve le serveur VPN."
+
+#. settings-schema.json->flagList->description
+msgid "Flag List"
+msgstr "Liste des drapeaux"
+
+#. settings-schema.json->flagList->columns->title
+#. settings-schema.json->sortFlagListBy->options
+msgid "VPN Name"
+msgstr "Nom du VPN"
+
+#. settings-schema.json->flagList->columns->title
+#. settings-schema.json->sortFlagListBy->options
+msgid "Country Code"
+msgstr ""
+"Code du\n"
+"Pays"
+
+#. settings-schema.json->flagList->columns->title
+msgid "Confirmed"
+msgstr "Confirmé"
+
+#. settings-schema.json->sortFlagListBy->description
+msgid "Sort by"
+msgstr "Trier par"
+
+#. settings-schema.json->sortFlagListBy->options
+msgid "None"
+msgstr "Aucun"
+
+#. settings-schema.json->manageClients->description
+msgid "Manage Internet Apps"
+msgstr "Gérer les applications Internet"
+
+#. settings-schema.json->manageClients->tooltip
+msgid ""
+"This option allows this applet to manage the Internet applications you "
+"listed below."
+msgstr ""
+"Cette option permet à cette applet de gérer les applications Internet que "
+"vous aurez énumérées ci-dessous."
+
+#. settings-schema.json->showClientsHelp->description
+msgid "Show Help"
+msgstr "Afficher l'aide"
+
+#. settings-schema.json->clientsHelp->description
+msgid ""
+"Name: Application name, as it appears in Menu/Internet.\n"
+"\n"
+"Launch: Whether or not to launch this application as soon as the VPN link "
+"becomes active.\n"
+"\n"
+"VPN only: Whether or not to quickly stop this application if it is started "
+"while the VPN is idle."
+msgstr ""
+"Nom : nom de l'application, tel qu'il apparaît dans Menu/Internet.\n"
+"\n"
+"Lancer : lancer ou pas cette application dès que le lien VPN devient actif.\n"
+"\n"
+"VPN uniquement : S'il faut ou pas arrêter rapidement cette application si "
+"elle est démarrée alors que le VPN est inactif."
+
+#. settings-schema.json->clientsList->description
+msgid "Managed applications"
+msgstr "Applications gérées"
+
+#. settings-schema.json->clientsList->columns->title
+msgid "Name"
+msgstr "Nom"
+
+#. settings-schema.json->clientsList->columns->title
+msgid "Launch"
+msgstr "Lancer"
+
+#. settings-schema.json->clientsList->columns->title
+msgid "VPN only"
+msgstr "VPN uniquement"
+
+#. settings-schema.json->buttonPopulateClientsList->description
+msgid "Add all Menu/Internet applications"
+msgstr "Ajouter toutes les applications Internet du Menu"
+
+#~ msgid "Quit"
+#~ msgstr "Quitter"
+
+#, javascript-format
+#~ msgid "%s was forced to stop."
+#~ msgstr "%s a été forcé de s'arrêter."
+
+#~ msgid "Force"
+#~ msgstr "Forcer"
+
+#~ msgid "Connection ON/OFF"
+#~ msgstr "Connexion ACTIVÉE/DÉSACTIVÉE"
+
+#~ msgid "Managed Special Apps (java app, appImage ...)"
+#~ msgstr "Applications spéciales gérées (application java, appImage ...)"
+
+#~ msgid ""
+#~ "Checking this allows this applet to try to connect to the last VPN at "
+#~ "start-up."
+#~ msgstr ""
+#~ "Cocher cette case permet à l'applet d'essayer, dès son démarrage, de se "
+#~ "connecter au dernier VPN utilisé."
+
+#~ msgid ""
+#~ "Checking this allows this applet to try to reconnect to VPN when it shuts "
+#~ "down incidentally."
+#~ msgstr ""
+#~ "En cochant cette case, l'applet peut essayer de se reconnecter au VPN "
+#~ "lorsqu'il tombe incidemment."
+
+#~ msgid ""
+#~ "If, by this applet only, the user disconnects the VPN, then no automatic "
+#~ "reconnection will be tried."
+#~ msgstr ""
+#~ "Si, par cette applet seulement, l'utilisateur déconnecte le VPN, alors "
+#~ "aucune reconnexion automatique ne sera tentée."
+
+#~ msgid "seconds"
+#~ msgstr "secondes"
+
+#~ msgid "Refresh interval:"
+#~ msgstr "Intervalle de rafraîchissement :"
+
+#~ msgid ""
+#~ "Time interval, in seconds, between two verifications of VPN link status. "
+#~ "A low value increases security but causes more activity. Choose a value "
+#~ "that is greater as your computer is slow."
+#~ msgstr ""
+#~ "Intervalle de temps, en secondes, entre deux vérifications de l’état de "
+#~ "la liaison VPN. Une valeur faible augmente la sécurité mais génère plus "
+#~ "d'activité. Choisissez une valeur d'autant plus grande que votre "
+#~ "ordinateur est lent."
+
+#~ msgid "Classic - Icon and Text"
+#~ msgstr "Classique - Icône et texte"
+
+#~ msgid "Compact - Icon Only"
+#~ msgstr "Compact - Icône seule"
+
+#~ msgid "Type of Display"
+#~ msgstr "Type d'affichage"
+
+#~ msgid ""
+#~ "This feature offers the Classic (default) display with icon and text, and "
+#~ "compact display (Icon Only)."
+#~ msgstr ""
+#~ "Vous avez le choix entre un affichage classique (par défaut) avec icône "
+#~ "et texte, et un affichage compact où seule l'icône s'affiche."
+
+#~ msgid "Choose whether or not to display the flag when the VPN link is down."
+#~ msgstr ""
+#~ "Choisissez d'afficher ou non le drapeau lorsque la liaison VPN est "
+#~ "interrompue."
+
+#~ msgid ""
+#~ "Checking this allows this applet to emit an audible alert when VPN shuts "
+#~ "down."
+#~ msgstr ""
+#~ "Cocher cette option permet à cette applet d'émettre un son quand le VPN "
+#~ "est tombé."
+
+#~ msgid ""
+#~ "Check this if you want to emit this audible alert when this Applet "
+#~ "starts, if VPN is down."
+#~ msgstr ""
+#~ "Cochez cette case si vous voulez émettre cette alerte sonore dès le "
+#~ "démarrage de cette applet, si la connexion VPN n'est pas active."
+
+#~ msgid ""
+#~ "Launcher: The command to launch the application.\n"
+#~ "\n"
+#~ "Window Title: Must be exact (the title is used to close the app)."
+#~ msgstr ""
+#~ "Lanceur : La commande pour lancer l'application.\n"
+#~ "\n"
+#~ "Titre de fenêtre : Doit être exact (le titre est utilisé pour fermer "
+#~ "l'application)."
+
+#~ msgid "Managed special applications"
+#~ msgstr "Applications spéciales gérées"
+
+#~ msgid "Launcher"
+#~ msgstr "Lanceur"
+
+#~ msgid "Window Title"
+#~ msgstr "Titre de fenêtre"
+
+#~ msgid "Log the VPN status changes and the VPN-related Apps status changes"
+#~ msgstr ""
+#~ "Consigner les changements d'état du VPN et les changements d'état des "
+#~ "applications liées au VPN"
+
+#~ msgid ""
+#~ "This option allows this applet to log the VPN status changes and the VPN-"
+#~ "related applications status changes.\n"
+#~ "You will can display the log file to make diagnostics."
+#~ msgstr ""
+#~ "Cette option permet à cette applet de consigner les changements d'état du "
+#~ "VPN et les changements d'état des applications liées au VPN.\n"
+#~ "Vous pourrez afficher le fichier journal pour effectuer des diagnostics."
+
+#~ msgid "Keyboard shortcuts"
+#~ msgstr "Raccourcis-clavier"
+
+#~ msgid "Shortcuts"
+#~ msgstr "Raccourcis"
+
+#~ msgid ""
+#~ "Send a request to a server to know the country of your VPN IP and replace "
+#~ "the label of this applet with the flag of this country."
+#~ msgstr ""
+#~ "Consulter un serveur afin de connaître le pays de votre serveur VPN et "
+#~ "remplacer l'étiquette de cette applet par le drapeau de ce pays."
+
+#~ msgid "Waiting"
+#~ msgstr "En attente"

@@ -1,0 +1,140 @@
+{
+    "section1": {
+        "type": "section",
+        "description": "Menu"
+    },
+    "playerControl": {
+        "type": "switch",
+        "default": true,
+        "description": "Control Players"
+    },
+    "extendedPlayerControl": {
+        "type": "switch",
+        "default": false,
+        "description": "Show Loop and Shuffle controls",
+        "dependency": "playerControl",
+        "indent": true
+    },
+    "keyOpen": {
+        "type": "keybinding",
+        "description": "Show menu",
+        "default": "<Shift><Super>s",
+        "tooltip": "Set keybinding(s) to show the sound applet menu."
+    },
+    "_knownPlayers": {
+        "type": "generic",
+        "default": [
+            "banshee",
+            "vlc",
+            "rhythmbox"
+        ]
+    },
+    "section2": {
+        "type": "section",
+        "description": "Panel"
+    },
+    "showtrack": {
+        "type": "switch",
+        "default": false,
+        "description": "Show song information on the panel",
+        "dependency": "playerControl"
+    },
+    "truncatetext": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 5,
+        "max": 512,
+        "units": "characters",
+        "step": 1,
+        "description": "Limit song information to",
+        "dependency": "showtrack"
+    },
+    "middleClickAction": {
+        "type": "combobox",
+        "default": "mute",
+        "options": {
+            "Toggle Mute": "mute",
+            "Toggle Mute output": "out_mute",
+            "Toggle Mute input": "in_mute",
+            "Toggle Play / Pause": "player"
+        },
+        "description": "Action on middle click"
+    },
+    "horizontalScroll": {
+        "type": "switch",
+        "default": false,
+        "description": "Use horizontal scrolling to move between tracks",
+        "dependency": "playerControl"
+    },
+    "showalbum": {
+        "type": "switch",
+        "default": false,
+        "description": "Show album art as icon",
+        "dependency": "playerControl"
+    },
+    "keepAlbumAspectRatio": {
+        "type": "switch",
+        "default": true,
+        "description": "Keep album art aspect ratio",
+        "dependency": "playerControl"
+    },
+    "hideSystray": {
+        "type": "switch",
+        "description": "Hide system tray icons for compatible players",
+        "default": true
+    },
+    "section3": {
+        "type": "section",
+        "description": "Tooltip"
+    },
+    "tooltipShowVolume": {
+        "type": "switch",
+        "default": true,
+        "description": "Show volume in tooltip"
+    },
+    "tooltipShowPlayer": {
+        "type": "switch",
+        "default": false,
+        "description": "Show player in tooltip"
+    },
+    "tooltipShowArtistTitle": {
+        "type": "switch",
+        "default": false,
+        "description": "Show song artist and title in tooltip"
+    },
+    "section4": {
+        "type": "section",
+        "description": "Sound Settings"
+    },
+    "setAmplification": {
+        "type": "button",
+        "description": "Maximum volume control",
+        "callback": "_onSetApmlificationPressed"
+    },
+    "stepVolume": {
+        "type": "combobox",
+        "default": 1,
+        "options": {
+            "6%": 6,
+            "5%": 5,
+            "4%": 4,
+            "3%": 3,
+            "2%": 2,
+            "1%": 1
+        },
+        "tooltip": "% of nominal volume",
+        "description": "+/-"
+    },
+    "magneticOn": {
+        "type": "switch",
+        "description": "Magnetize the 'Volume 100%' mark",
+        "tooltip": "When checked, the 'Volume 100%' mark becomes magnetic: the volume is automatically set to 100% when the distance between the volume value and 100% is lesser than a half-step.",
+        "default": true
+    },
+    "adaptColor": {
+        "type": "switch",
+        "description": "Adjust the color of the icon to the volume",
+        "tooltip": "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red.",
+        "default": true
+    }
+}

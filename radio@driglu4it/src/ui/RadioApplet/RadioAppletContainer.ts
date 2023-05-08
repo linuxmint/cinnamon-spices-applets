@@ -1,4 +1,4 @@
-import { createAppletContainer } from "../../lib/AppletContainer";
+import { createAppletContainer, CreateAppletContainerProps } from "../../lib/AppletContainer";
 import { mpvHandler } from "../../services/mpv/MpvHandler";
 import { createRadioAppletLabel } from "./RadioAppletLabel";
 import { createRadioAppletTooltip } from "./RadioAppletTooltip";
@@ -6,18 +6,33 @@ import { createRadioAppletIcon } from "./RadioAppletIcon";
 import { APPLET_SITE, MPRIS_PLUGIN_PATH, VOLUME_DELTA } from "../../consts";
 import { radioPopupMenu, initRadioPopupMenu } from "../RadioPopupMenu/RadioPopupMenu";
 import { installMpvWithMpris } from "../../services/mpv/CheckInstallation";
-import { createYoutubeDownloadIcon } from "./YoutubeDownloadIcon";
+import { createYouTubeDownloadIcon } from "./YoutubeDownloadIcon";
 import { notify } from "../../lib/notify";
 import { createRadioContextMenu } from "../RadioContextMenu";
 
 const { ScrollDirection } = imports.gi.Clutter;
 
-export function createRadioAppletContainer() {
+let appletContainer: ReturnType<typeof createAppletContainer> | undefined
+type CreateRadioAppletContainerProps = Pick<CreateAppletContainerProps, 'onAppletMovedCallbacks'>
+
+export const getRadioAppletContainer = (props: CreateRadioAppletContainerProps) => {
+
+  if (appletContainer) {
+    global.logWarning('radioAppletContainer already initiallized')
+    return appletContainer
+  }
+
+  appletContainer = createRadioAppletContainer(props)
+  return appletContainer
+} 
+
+
+const createRadioAppletContainer = (props: CreateRadioAppletContainerProps) => {
+
   let installationInProgress = false;
 
   const appletContainer = createAppletContainer({
     onMiddleClick: () => mpvHandler.togglePlayPause(),
-    onMoved: () => mpvHandler.deactivateAllListener(),
     onRemoved: handleAppletRemoved,
     onClick: handleClick,
     onRightClick: () => {
@@ -25,11 +40,12 @@ export function createRadioAppletContainer() {
       contextMenu?.toggle();
     },
     onScroll: handleScroll,
+    ...props
   });
 
   [
     createRadioAppletIcon(),
-    createYoutubeDownloadIcon(),
+    createYouTubeDownloadIcon(),
     createRadioAppletLabel(),
   ].forEach((widget) => {
     appletContainer.actor.add_child(widget);

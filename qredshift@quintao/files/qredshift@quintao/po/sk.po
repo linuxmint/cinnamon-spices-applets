@@ -1,0 +1,341 @@
+# Slovak translation of Qredshift applet.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Dušan Kazik <prescott66@gmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-11 18:08+0100\n"
+"PO-Revision-Date: 2023-03-11 20:58+0100\n"
+"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
+"Language-Team: \n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: applet.js:232
+msgid "Reload Applet"
+msgstr "Znovu načítať aplet"
+
+#: applet.js:243
+msgid "Recompile Translations"
+msgstr "Prekompilovať preklady"
+
+#: applet.js:296
+msgid "REDSHIFT NOT INSTALLED!"
+msgstr "PROGRAM REDSHIFT NIE JE NAINŠTALOVANÝ!"
+
+#: applet.js:297
+msgid "Requires Redshift: sudo apt-get install redshift"
+msgstr "Vyžaduje sa program Redshift: sudo apt-get install redshift"
+
+#: applet.js:448 applet.js:469
+msgid "should be removed."
+msgstr "by mal byť odstránený."
+
+#. settings-schema.json->enabled->description
+#: applet.js:631
+msgid "Enabled"
+msgstr "Povolené"
+
+#: applet.js:639 applet.js:684
+msgid "Temp:"
+msgstr "Teplota:"
+
+#: applet.js:650 applet.js:695
+msgid "Bright:"
+msgstr "Jas:"
+
+#: applet.js:661 applet.js:993
+msgid "Gamma:"
+msgstr "Gama:"
+
+#. settings-schema.json->enabledNight->description
+#: applet.js:676
+msgid "Night Enabled"
+msgstr "Nočný režim povolený"
+
+#. settings-schema.json->iconLabel->description
+#: applet.js:738
+msgid "Show Label"
+msgstr "Zobraziť menovku"
+
+#: applet.js:951 applet.js:976
+msgid "Transition to day"
+msgstr "Prechod na deň"
+
+#: applet.js:952 applet.js:977
+msgid "Transition to night"
+msgstr "Prechod na noc"
+
+#: applet.js:953 applet.js:978
+msgid "Night"
+msgstr "Noc"
+
+#: applet.js:954 applet.js:979
+msgid "Day"
+msgstr "Deň"
+
+#: applet.js:968
+msgid "On"
+msgstr "Zapnuté"
+
+#: applet.js:968 applet.js:970
+msgid "Off"
+msgstr "Vypnuté"
+
+#: applet.js:984
+msgid "Day Temperature"
+msgstr "Teplota počas dňa"
+
+#: applet.js:985
+msgid "Day Brightness"
+msgstr "Jas počas dňa"
+
+#: applet.js:987
+msgid "Night Temperature"
+msgstr "Teplota počas noci"
+
+#: applet.js:988
+msgid "Night Brightness"
+msgstr "Jas počas noci"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->dayTemp->description
+#. settings-schema.json->nightTemp->description
+#: applet.js:990
+msgid "Temperature"
+msgstr "Teplota"
+
+#. settings-schema.json->dayBrightness->description
+#. settings-schema.json->nightBrightness->description
+#: applet.js:991
+msgid "Brightness"
+msgstr "Jas"
+
+#. metadata.json->name
+msgid "QRedshift"
+msgstr "QRedshift"
+
+#. metadata.json->description
+msgid ""
+"It makes the color of your computer's display adapt to the time of day, warm "
+"at night and like sunlight during the day."
+msgstr ""
+"Zmení teplotu displeja vášho počítača podľa aktuálneho času, teplú v noci a "
+"chladnú počas dňa."
+
+#. settings-schema.json->panel-options->title
+msgid "Settings"
+msgstr "Nastavenia"
+
+#. settings-schema.json->panel-location->title
+msgid "Location"
+msgstr "Umiestnenie"
+
+#. settings-schema.json->panel-shortcuts->title
+msgid "Shortcuts"
+msgstr "Klávesové skratky"
+
+#. settings-schema.json->info-section->title
+msgid "Tips"
+msgstr "Tipy"
+
+#. settings-schema.json->opt-section->title
+msgid "Options"
+msgstr "Voľby"
+
+#. settings-schema.json->day-section->title
+msgid "Day Settings"
+msgstr "Denné nastavenia"
+
+#. settings-schema.json->night-section->title
+msgid "Night Settings"
+msgstr "Nočné nastavenia"
+
+#. settings-schema.json->keybind-section->title
+msgid "Key Bindings"
+msgstr "Priradenia kláves"
+
+#. settings-schema.json->location-section->title
+msgid "Location Settings"
+msgstr "Nastavenia umiestnenia"
+
+#. settings-schema.json->autoUpdate->description
+msgid "Auto Update"
+msgstr "Automatická aktualizácia"
+
+#. settings-schema.json->autoUpdate->tooltip
+msgid "Continuously adjust color temperature"
+msgstr "Nepretržitá úprava teploty farieb"
+
+#. settings-schema.json->autoUpdateInterval->units
+msgid "Seconds"
+msgstr "Sekundy"
+
+#. settings-schema.json->autoUpdateInterval->description
+msgid "Update interval"
+msgstr "Interval aktualizácie"
+
+#. settings-schema.json->adjustmentMethod->description
+msgid "Adjustment Method"
+msgstr "Spôsob úpravy"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "needload"
+msgstr "needload"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "randr"
+msgstr "randr"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "vidmode"
+msgstr "vidmode"
+
+#. settings-schema.json->adjustmentMethod->tooltip
+msgid "Method to use to set color temperature"
+msgstr "Spôsob, ktorý sa má použiť na nastavenie teploty farieb"
+
+#. settings-schema.json->labelScrollAction->description
+msgid "Icon Scroll Action"
+msgstr "Akcia pre rolovanie ikony"
+
+#. settings-schema.json->labelScrollAction->options
+msgid "Disabled"
+msgstr "Zakázané"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->keyToggle->description
+msgid "On/Off"
+msgstr "Zapnúť/Vypnúť"
+
+#. settings-schema.json->labelScrollAction->options
+msgid "Bright"
+msgstr "Jas"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->gammaMix->description
+msgid "Gamma"
+msgstr "Gama"
+
+#. settings-schema.json->labelScrollAction->tooltip
+msgid "Action when scroll on applet icon."
+msgstr "Akcia pri rolovaní na ikone apletu."
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "Použiť symbolickú ikonu"
+
+#. settings-schema.json->keyBrightnessUp->description
+msgid "Increase brightness level"
+msgstr "Zvýšenie úrovne jasu"
+
+#. settings-schema.json->keyBrightnessDown->description
+msgid "Decrease brightness level"
+msgstr "Zníženie úrovne jasu"
+
+#. settings-schema.json->keyTempUp->description
+msgid "Increase temperature level"
+msgstr "Zvýšenie úrovne teploty"
+
+#. settings-schema.json->keyTempDown->description
+msgid "Decrease temperature level"
+msgstr "Zníženie úrovne teploty"
+
+#. settings-schema.json->keyGammaUp->description
+msgid "Increase gamma level"
+msgstr "Zvýšenie úrovne gamy"
+
+#. settings-schema.json->keyGammaDown->description
+msgid "Decrease gamma level"
+msgstr "Zníženie úrovne gamy"
+
+#. settings-schema.json->dayTemp->units
+#. settings-schema.json->nightTemp->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayBrightness->units
+#. settings-schema.json->nightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->smoothTransition->description
+msgid "Smooth transition between day and night"
+msgstr "Jemný prechod medzi dňom a nocou"
+
+#. settings-schema.json->transitionDuration->units
+msgid "Minutes"
+msgstr "Minúty"
+
+#. settings-schema.json->transitionDuration->description
+msgid "Transition Duration"
+msgstr "Trvanie prechodu"
+
+#. settings-schema.json->manualNightTime->description
+msgid "Use Manual Night Time"
+msgstr "Nastaviť nočný čas ručne"
+
+#. settings-schema.json->nightTimeStart->description
+msgid "Choose Start Time"
+msgstr "Zvoľte čas začiatku"
+
+#. settings-schema.json->nightTimeEnd->description
+msgid "Choose End Time"
+msgstr "Zvoľte čas ukončenia"
+
+#. settings-schema.json->locationRemote->description
+msgid "Remote Location"
+msgstr "Vzdialené umiestnenie"
+
+#. settings-schema.json->locationRemote->tooltip
+#. settings-schema.json->locationUpdate->tooltip
+msgid "Native geoclue on redshift can make the experience slow."
+msgstr ""
+
+#. settings-schema.json->locationUpdate->description
+msgid "Update Location"
+msgstr "Aktualizovať umiestnenie"
+
+#. settings-schema.json->locationLatitude->description
+msgid "Latitude"
+msgstr "Zemepisná šírka"
+
+#. settings-schema.json->locationLongitude->description
+msgid "Longitude"
+msgstr "Zemepisná dĺžka"
+
+#. settings-schema.json->aboutLocation->description
+msgid ""
+"Native geoclue on redshift can make the experience slow.\n"
+"Using: https://geolocation-db.com/"
+msgstr ""
+
+#. settings-schema.json->textTips->description
+msgid "* Right-click the sliders to reset the default (neutral) value."
+msgstr ""
+"* Kliknutím pravým tlačidlom na posúvače obnovíte predvolené (neutrálne) "
+"hodnoty."
+
+#. settings-schema.json->textHelp->description
+msgid ""
+"When update to a new version make sure you reset the configs to default by "
+"deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
+"You will lost all your configs."
+msgstr ""
+"Po aktualizácii na novú verziu sa uistite, že ste obnovili konfigurácie na "
+"predvolené hodnoty, odstránením súboru ~/.cinnamon/configs/qredshift@quintao/"
+"qredshift@quintao.json.\n"
+"Stratíte všetky vaše konfigurácie."
+
+#. settings-schema.json->textInfo->description
+msgid ""
+"If you like and use this applet take the time to visit it's page on Cinnamon "
+"Spices and give it a star. You only need a github account to do this."
+msgstr ""

@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-06 19:08+0000\n"
-"PO-Revision-Date: 2021-02-16 13:12+0200\n"
-"Last-Translator: Sampsa Pirinen <sampsa.pirinen@gmail.com>\n"
+"POT-Creation-Date: 2022-11-04 08:45+0000\n"
+"PO-Revision-Date: 2022-11-17 11:51+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: suomi <>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -23,367 +23,259 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Poedit 2.3\n"
 
-#: 3.0/openWeatherMap.js:129 3.0/weatherbit.js:202 3.0/darkSky.js:143
-#: 3.0/yahoo.js:141 3.0/us_weather.js:322 3.0/climacell.js:163
-#: 3.8/openWeatherMap.js:63 3.8/climacellV4.js:71 3.8/weatherbit.js:98
-#: 3.8/darkSky.js:73 3.8/yahoo.js:73 3.8/us_weather.js:187 3.8/climacell.js:80
-#: 3.8/visualcrossing.js:63
+#: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
+#: 3.8/weather-applet.js:16977
+msgid "Error"
+msgstr "Virhe"
+
+#: 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
+#: 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
+#: 3.8/weather-applet.js:16978 3.8/weather-applet.js:16980
+#: 3.8/weather-applet.js:16982 3.8/weather-applet.js:16985
+#: 3.8/weather-applet.js:16988 3.8/weather-applet.js:16989
+#: 3.8/weather-applet.js:16990 3.8/weather-applet.js:16991
+msgid "Service Error"
+msgstr "Palvelussa virhe"
+
+#: 3.0/applet.js:168 3.8/weather-applet.js:16979
+msgid "Incorrect API Key"
+msgstr "Väärä API avain"
+
+#: 3.0/applet.js:170 3.8/weather-applet.js:16981
+msgid "Incorrect Location Format"
+msgstr "Väärä muoto sijainnissa"
+
+#: 3.0/applet.js:172 3.8/weather-applet.js:16983
+msgid "Key Blocked"
+msgstr "Avain estetty"
+
+#: 3.0/applet.js:173 3.8/weather-applet.js:16984
+msgid "Can't find location"
+msgstr "Sijaintia ei löytynyt"
+
+#: 3.0/applet.js:175 3.8/weather-applet.js:16986
+msgid "No Api Key"
+msgstr "Ei API avainta"
+
+#: 3.0/applet.js:176 3.8/weather-applet.js:16987
+msgid "No Location"
+msgstr "Ei sijaintia"
+
+#: 3.0/applet.js:181 3.8/weather-applet.js:16992
+msgid "Missing Packages"
+msgstr "Puuttuvat paketit"
+
+#: 3.0/applet.js:182 3.8/weather-applet.js:16993
+msgid "Location not covered"
+msgstr "Sijaintia ei löytynyt"
+
+#: 3.0/applet.js:193 3.0/applet.js:378 3.8/weather-applet.js:9309
+msgid "Weather Applet"
+msgstr "Sää"
+
+#: 3.0/applet.js:217 3.8/weather-applet.js:17312
+msgid "..."
+msgstr "..."
+
+#: 3.0/applet.js:218 3.8/weather-applet.js:17313
+msgid "Click to open"
+msgstr "Avaa napsauttamalla"
+
+#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:15699
+#: 3.8/weather-applet.js:17316
+msgid "Refresh"
+msgstr "Päivitä"
+
+#: 3.0/applet.js:272
+msgid "API returned status code between 400 and 500"
+msgstr "API palautti tilakoodin väliltä 400–500"
+
+#: 3.0/applet.js:426 3.0/applet.js:2032 3.0/applet.js:2036 3.0/applet.js:2040
+#: 3.0/applet.js:2049 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
+#: 3.0/applet.js:2083 3.0/applet.js:2131 3.8/weather-applet.js:9475
+#: 3.8/weather-applet.js:9479 3.8/weather-applet.js:9483
+msgid "Location Store"
+msgstr "Sijainti"
+
+#: 3.0/applet.js:426
+msgid "You can't save a location obtained automatically, sorry"
+msgstr "Et voi tallentaa automaattisesti hankittua sijaintia"
+
+#: 3.0/applet.js:601
+msgid "Could not get weather information"
+msgstr "Säätietoja ei voitu saada"
+
+#: 3.0/applet.js:624 3.8/weather-applet.js:17139
+msgid ""
+"Unexpected Error While Refreshing Weather, please see log in Looking Glass"
+msgstr "Odottamaton virhe päivitettäessä säätietoja, katso Looking Glass loki"
+
+#: 3.0/applet.js:670 3.8/weather-applet.js:17394
+msgid ""
+"Could not update weather for a while...\n"
+"are you connected to the internet?"
+msgstr ""
+"Säätietoja ei päivitetty hetkeen...\n"
+"oletko yhteydessä internettiin?"
+
+#: 3.0/applet.js:684
+msgid "Network Error, please check logs in Looking Glass"
+msgstr "Verkko virhe, tarkista Looking Glass loki"
+
+#: 3.0/applet.js:969 3.0/applet.js:1110
+msgid "As of"
+msgstr "Klo"
+
+#: 3.0/applet.js:1108 3.8/weather-applet.js:16392
+msgid "Powered by"
+msgstr "Tiedot toimitti"
+
+#: 3.0/applet.js:1113
+msgid "from you"
+msgstr "sinulta"
+
+#: 3.0/applet.js:1132 3.8/weather-applet.js:16313
+msgid "mm"
+msgstr "mm"
+
+#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:10273
+#: 3.8/weather-applet.js:16313
+msgid "in"
+msgstr "asti"
+
+#: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:9911
+#: 3.8/weather-applet.js:16470
+msgid "mi"
+msgstr "ml"
+
+#: 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:9912
+#: 3.8/weather-applet.js:16471
+msgid "km"
+msgstr "km"
+
+#: 3.0/applet.js:1227 3.8/weather-applet.js:16650
+msgid "Loading current weather ..."
+msgstr "Ladataan säätietoja ..."
+
+#: 3.0/applet.js:1230 3.8/weather-applet.js:16653
+msgid "Loading future weather ..."
+msgstr "Ladataan tulevia säätietoja ..."
+
+#: 3.0/applet.js:1280 3.8/weather-applet.js:15652
+msgid "Loading ..."
+msgstr "Ladataan ..."
+
+#: 3.0/applet.js:1329 3.8/weather-applet.js:15673
+msgid "Temperature"
+msgstr "Lämpötila"
+
+#: 3.0/applet.js:1330 3.8/weather-applet.js:15674
+msgid "Humidity"
+msgstr "Kosteus"
+
+#: 3.0/applet.js:1331 3.8/weather-applet.js:15675
+msgid "Pressure"
+msgstr "Ilmanpaine"
+
+#: 3.0/applet.js:1332 3.8/weather-applet.js:12143 3.8/weather-applet.js:12150
+#: 3.8/weather-applet.js:12151 3.8/weather-applet.js:12157
+#: 3.8/weather-applet.js:14103 3.8/weather-applet.js:14104
+#: 3.8/weather-applet.js:15524
+msgid "Wind"
+msgstr "Tuuli"
+
+#: 3.0/applet.js:1639 3.8/weather-applet.js:14935
+msgid "Make sure you entered a location or use Automatic location instead"
+msgstr "Varmista, että annoit sijainnin tai käytä automaattista sijaintia"
+
+#: 3.0/applet.js:1877 3.8/weather-applet.js:9555
+msgid "Could not find location based on address, please check if it's right"
+msgstr ""
+"Sijaintia ei löytynyt osoitteen perusteella, tarkista että se on oikein"
+
+#: 3.0/applet.js:1901 3.8/weather-applet.js:9576
+msgid "Failed to call Geolocation API, see Looking Glass for errors."
+msgstr "Paikannuksen kutsuminen epäonnistui, katso Looking Glass virheet."
+
+#: 3.0/applet.js:2032 3.0/applet.js:2036 3.8/weather-applet.js:9475
+#: 3.8/weather-applet.js:9479
+msgid "Warning"
+msgstr "Varoitus"
+
+#: 3.0/applet.js:2032 3.8/weather-applet.js:9475
+msgid "You can only save correct locations when the applet is not refreshing"
+msgstr "Voit tallentaa oikeat sijainnit vain, kun sovelma ei ole päivittymässä"
+
+#: 3.0/applet.js:2036 3.8/weather-applet.js:9479
+msgid "You can't save an incorrect location"
+msgstr "Et voi tallentaa virheellistä sijaintia"
+
+#. 3.8->settings-schema.json->logLevel->options
+#: 3.0/applet.js:2040 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
+#: 3.8/weather-applet.js:9483
+msgid "Info"
+msgstr "Perustieto"
+
+#: 3.0/applet.js:2040 3.8/weather-applet.js:9483
+msgid "Location is already saved"
+msgstr "Sijainti on jo tallennettu"
+
+#: 3.0/applet.js:2049 3.0/applet.js:2083
+msgid "Success"
+msgstr "Onnistui"
+
+#: 3.0/applet.js:2049
+msgid "Location is saved to library"
+msgstr "Sijainti on tallennettu luetteloon"
+
+#: 3.0/applet.js:2062
+msgid "You can't remove a location while the applet is refreshing"
+msgstr "Et voi poistaa sijaintia, kun sovelma on päivittymässä"
+
+#: 3.0/applet.js:2066
+msgid "You can't remove an incorrect location"
+msgstr "Et voi poistaa virheellistä sijaintia"
+
+#: 3.0/applet.js:2070
+msgid "Location is not in storage, can't delete"
+msgstr "Sijainti ei ole varastossa, ei voi poistaa"
+
+#: 3.0/applet.js:2083
+msgid "Location is deleted from library"
+msgstr "Sijainti on poistettu luettelosta"
+
+#: 3.0/applet.js:2131
+msgid ""
+"Failed to load in data from location storage, please see the logs for more "
+"information"
+msgstr ""
+"Sijainnin tietojen lataaminen varastosta epäonnistui, katso lisätietoja "
+"lokista"
+
+#: 3.0/climacell.js:163 3.0/darkSky.js:143 3.0/openWeatherMap.js:129
+#: 3.0/us_weather.js:322 3.0/weatherbit.js:202 3.0/yahoo.js:141
+#: 3.8/weather-applet.js:10353 3.8/weather-applet.js:10645
+#: 3.8/weather-applet.js:11608 3.8/weather-applet.js:12046
+#: 3.8/weather-applet.js:12551 3.8/weather-applet.js:12913
+#: 3.8/weather-applet.js:14272
 msgid "Feels Like"
 msgstr "Tuntuu kuin"
 
-#: 3.0/openWeatherMap.js:190 3.0/weatherbit.js:212 3.0/us_weather.js:334
-#: 3.0/met_uk.js:340 3.8/openWeatherMap.js:124 3.8/weatherbit.js:108
-#: 3.8/us_weather.js:199 3.8/met_uk.js:178
-msgid "Failed to Process Current Weather Info"
+#: 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
+#: 3.8/weather-applet.js:10398
+msgid "Failed to Process Weather Info"
 msgstr "Säätietojen käsittely epäonnistui"
 
-#: 3.0/openWeatherMap.js:238 3.8/openWeatherMap.js:175
-msgid "Please make sure Location is in the correct format in the Settings"
-msgstr "Varmista, että asetuksissa sijainti on oikeassa muodossa"
-
-#: 3.0/openWeatherMap.js:242 3.8/openWeatherMap.js:179
-msgid "Make sure you entered the correct key in settings"
-msgstr "Varmista, että annoit asetuksissa oikean avaimen"
-
-#: 3.0/openWeatherMap.js:246 3.0/openWeatherMap.js:266
-#: 3.8/openWeatherMap.js:183 3.8/openWeatherMap.js:208
-msgid ""
-"Location not found, make sure location is available or it is in the correct "
-"format"
-msgstr ""
-"Sijaintia ei löydy. Varmista, että paikkakunta on käytettävissä tai oikein "
-"kirjoitettu"
-
-#: 3.0/openWeatherMap.js:250 3.8/openWeatherMap.js:187
-msgid "If this problem persists, please contact the Author of this applet"
-msgstr "Jos ongelma jatkuu, ota yhteyttä tämän sovelman tekijään"
-
-#: 3.0/openWeatherMap.js:254 3.8/openWeatherMap.js:191
-msgid "Unknown Error, please see the logs in Looking Glass"
-msgstr "Tuntematon virhe, katso Looking Glass -lokit"
-
-#: 3.0/openWeatherMap.js:362 3.8/openWeatherMap.js:306
-msgid "Thunderstorm with light rain"
-msgstr "Ukkosta ja vähän sadetta"
-
-#: 3.0/openWeatherMap.js:363 3.8/openWeatherMap.js:307
-msgid "Thunderstorm with rain"
-msgstr "Ukkosta ja sadetta"
-
-#: 3.0/openWeatherMap.js:364 3.8/openWeatherMap.js:308
-msgid "Thunderstorm with heavy rain"
-msgstr "Ukkosta voimakas sade"
-
-#: 3.0/openWeatherMap.js:365 3.8/openWeatherMap.js:309
-msgid "Light thunderstorm"
-msgstr "Mahdollista ukkosta"
-
-#: 3.0/openWeatherMap.js:366 3.0/us_weather.js:550 3.0/us_weather.js:551
-#: 3.0/climacell.js:364 3.0/climacell.js:365 3.8/openWeatherMap.js:310
-#: 3.8/climacellV4.js:296 3.8/climacellV4.js:297 3.8/us_weather.js:414
-#: 3.8/us_weather.js:415 3.8/climacell.js:269 3.8/climacell.js:270
-#: 3.8/visualcrossing.js:254
-msgid "Thunderstorm"
-msgstr "Ukkosmyrskyjä"
-
-#: 3.0/openWeatherMap.js:367 3.8/openWeatherMap.js:311
-msgid "Heavy thunderstorm"
-msgstr "Voimakkaita ukkosmyrskyjä"
-
-#: 3.0/openWeatherMap.js:368 3.8/openWeatherMap.js:312
-msgid "Ragged thunderstorm"
-msgstr "Yksittäisiä ukkosmyrskyjä"
-
-#: 3.0/openWeatherMap.js:369 3.8/openWeatherMap.js:313
-msgid "Thunderstorm with light drizzle"
-msgstr "Ukkosta vähällä tihkusateella"
-
-#: 3.0/openWeatherMap.js:370 3.8/openWeatherMap.js:314
-msgid "Thunderstorm with drizzle"
-msgstr "Ukkosta tihkusadetta"
-
-#: 3.0/openWeatherMap.js:371 3.8/openWeatherMap.js:315
-msgid "Thunderstorm with heavy drizzle"
-msgstr "Ukkosta voimakkaalla tihkusateella"
-
-#: 3.0/openWeatherMap.js:372 3.8/openWeatherMap.js:316
-msgid "Light intensity drizzle"
-msgstr "Kevyt tihkusade"
-
-#: 3.0/openWeatherMap.js:373 3.0/yahoo.js:445 3.0/met_uk.js:603
-#: 3.0/met_uk.js:604 3.8/openWeatherMap.js:317 3.8/climacellV4.js:191
-#: 3.8/climacellV4.js:192 3.8/climacellV4.js:247 3.8/yahoo.js:393
-#: 3.8/met_uk.js:461 3.8/met_uk.js:462 3.8/visualcrossing.js:184
-msgid "Drizzle"
-msgstr "Tihkusadetta"
-
-#: 3.0/openWeatherMap.js:374 3.8/openWeatherMap.js:318
-msgid "Heavy intensity drizzle"
-msgstr "Voimakkaasti tihkua"
-
-#: 3.0/openWeatherMap.js:375 3.8/openWeatherMap.js:319
-msgid "Light intensity drizzle rain"
-msgstr "Kova sadekuuro"
-
-#: 3.0/openWeatherMap.js:376 3.8/openWeatherMap.js:320
-msgid "Drizzle rain"
-msgstr "Tihkusadetta"
-
-#: 3.0/openWeatherMap.js:377 3.8/openWeatherMap.js:321
-msgid "Heavy intensity drizzle rain"
-msgstr "Voimakkaasti tihkusadetta"
-
-#: 3.0/openWeatherMap.js:378 3.8/openWeatherMap.js:322
-msgid "Shower rain and drizzle"
-msgstr "Sadetta ja tihkusadetta"
-
-#: 3.0/openWeatherMap.js:379 3.8/openWeatherMap.js:323
-msgid "Heavy shower rain and drizzle"
-msgstr "Voimakas sade ja tihkua"
-
-#: 3.0/openWeatherMap.js:380 3.8/openWeatherMap.js:324
-msgid "Shower drizzle"
-msgstr "Tihkusadetta"
-
-#: 3.0/openWeatherMap.js:381 3.0/met_norway.js:392 3.0/met_norway.js:393
-#: 3.0/met_norway.js:399 3.0/met_norway.js:406 3.0/met_norway.js:413
-#: 3.0/met_uk.js:589 3.0/met_uk.js:596 3.0/met_uk.js:610 3.0/met_uk.js:611
-#: 3.0/climacell.js:273 3.0/climacell.js:274 3.8/openWeatherMap.js:325
-#: 3.8/climacellV4.js:206 3.8/met_norway.js:323 3.8/met_norway.js:324
-#: 3.8/met_norway.js:330 3.8/met_norway.js:337 3.8/met_norway.js:344
-#: 3.8/met_uk.js:447 3.8/met_uk.js:454 3.8/met_uk.js:468 3.8/met_uk.js:469
-#: 3.8/climacell.js:178 3.8/climacell.js:179 3.8/visualcrossing.js:232
-msgid "Light rain"
-msgstr "Kevyt sade"
-
-#: 3.0/openWeatherMap.js:382 3.8/openWeatherMap.js:326
-msgid "Moderate rain"
-msgstr "Kova sade"
-
-#: 3.0/openWeatherMap.js:383 3.8/openWeatherMap.js:327
-msgid "Heavy intensity rain"
-msgstr "Voimakas sade"
-
-#: 3.0/openWeatherMap.js:384 3.8/openWeatherMap.js:328
-msgid "Very heavy rain"
-msgstr "Erittäin voimakas sade"
-
-#: 3.0/openWeatherMap.js:385 3.8/openWeatherMap.js:329
-msgid "Extreme rain"
-msgstr "Äärimmäinen sade"
-
-#: 3.0/openWeatherMap.js:386 3.0/us_weather.js:505 3.0/us_weather.js:506
-#: 3.0/us_weather.js:512 3.0/us_weather.js:513 3.0/us_weather.js:519
-#: 3.0/climacell.js:281 3.0/climacell.js:287 3.0/climacell.js:288
-#: 3.0/climacell.js:295 3.8/openWeatherMap.js:330 3.8/climacellV4.js:255
-#: 3.8/us_weather.js:369 3.8/us_weather.js:370 3.8/us_weather.js:376
-#: 3.8/us_weather.js:377 3.8/us_weather.js:383 3.8/climacell.js:186
-#: 3.8/climacell.js:192 3.8/climacell.js:193 3.8/climacell.js:200
-msgid "Freezing rain"
-msgstr "Jäätävää sadetta"
-
-#: 3.0/openWeatherMap.js:387 3.8/openWeatherMap.js:331
-msgid "Light intensity shower rain"
-msgstr "Kevyttä sadetta"
-
-#: 3.0/openWeatherMap.js:388 3.8/openWeatherMap.js:332
-msgid "Shower rain"
-msgstr "Sadekuuroja"
-
-#: 3.0/openWeatherMap.js:389 3.8/openWeatherMap.js:333
-msgid "Heavy intensity shower rain"
-msgstr "Voimakas sade"
-
-#: 3.0/openWeatherMap.js:390 3.8/openWeatherMap.js:334
-msgid "Ragged shower rain"
-msgstr "Hajanainen sade"
-
-#: 3.0/openWeatherMap.js:391 3.0/met_norway.js:448 3.0/met_norway.js:449
-#: 3.0/met_norway.js:455 3.0/met_norway.js:462 3.0/met_norway.js:469
-#: 3.0/met_uk.js:680 3.0/met_uk.js:687 3.0/met_uk.js:694 3.0/met_uk.js:695
-#: 3.0/climacell.js:350 3.0/climacell.js:351 3.8/openWeatherMap.js:335
-#: 3.8/climacellV4.js:234 3.8/met_norway.js:379 3.8/met_norway.js:380
-#: 3.8/met_norway.js:386 3.8/met_norway.js:393 3.8/met_norway.js:400
-#: 3.8/met_uk.js:538 3.8/met_uk.js:545 3.8/met_uk.js:552 3.8/met_uk.js:553
-#: 3.8/visualcrossing.js:250
-msgid "Light snow"
-msgstr "Kevyttä lunta"
-
-#: 3.0/openWeatherMap.js:392 3.0/met_norway.js:539 3.0/met_norway.js:540
-#: 3.0/met_norway.js:546 3.0/yahoo.js:452 3.0/us_weather.js:477
-#: 3.0/us_weather.js:478 3.0/climacell.js:343 3.0/climacell.js:344
-#: 3.8/openWeatherMap.js:336 3.8/climacellV4.js:219 3.8/climacellV4.js:220
-#: 3.8/climacellV4.js:233 3.8/climacellV4.js:240 3.8/met_norway.js:470
-#: 3.8/met_norway.js:471 3.8/met_norway.js:477 3.8/yahoo.js:400
-#: 3.8/us_weather.js:341 3.8/us_weather.js:342 3.8/climacell.js:248
-#: 3.8/climacell.js:249 3.8/visualcrossing.js:242
-msgid "Snow"
-msgstr "Lumisadetta"
-
-#: 3.0/openWeatherMap.js:393 3.0/met_norway.js:364 3.0/met_norway.js:365
-#: 3.0/met_norway.js:371 3.0/met_norway.js:378 3.0/met_norway.js:385
-#: 3.0/met_uk.js:701 3.0/met_uk.js:708 3.0/met_uk.js:715 3.0/met_uk.js:716
-#: 3.0/climacell.js:336 3.0/climacell.js:337 3.8/openWeatherMap.js:337
-#: 3.8/climacellV4.js:241 3.8/met_norway.js:295 3.8/met_norway.js:296
-#: 3.8/met_norway.js:302 3.8/met_norway.js:309 3.8/met_norway.js:316
-#: 3.8/met_uk.js:559 3.8/met_uk.js:566 3.8/met_uk.js:573 3.8/met_uk.js:574
-#: 3.8/climacell.js:241 3.8/climacell.js:242 3.8/visualcrossing.js:248
-msgid "Heavy snow"
-msgstr "Märkää lunta"
-
-#: 3.0/openWeatherMap.js:394 3.0/met_norway.js:511 3.0/met_norway.js:512
-#: 3.0/met_norway.js:518 3.0/met_norway.js:525 3.0/met_norway.js:532
-#: 3.0/yahoo.js:454 3.0/us_weather.js:491 3.0/us_weather.js:492
-#: 3.0/us_weather.js:498 3.0/us_weather.js:499 3.0/us_weather.js:526
-#: 3.0/us_weather.js:527 3.0/met_uk.js:638 3.0/met_uk.js:645 3.0/met_uk.js:652
-#: 3.0/met_uk.js:653 3.8/openWeatherMap.js:338 3.8/met_norway.js:442
-#: 3.8/met_norway.js:443 3.8/met_norway.js:449 3.8/met_norway.js:456
-#: 3.8/met_norway.js:463 3.8/yahoo.js:402 3.8/us_weather.js:355
-#: 3.8/us_weather.js:356 3.8/us_weather.js:362 3.8/us_weather.js:363
-#: 3.8/us_weather.js:390 3.8/us_weather.js:391 3.8/met_uk.js:496
-#: 3.8/met_uk.js:503 3.8/met_uk.js:510 3.8/met_uk.js:511
-msgid "Sleet"
-msgstr "Loskaa"
-
-#: 3.0/openWeatherMap.js:395 3.8/openWeatherMap.js:339
-msgid "Shower sleet"
-msgstr "Jäätävä tihkusade"
-
-#: 3.0/openWeatherMap.js:396 3.8/openWeatherMap.js:340
-msgid "Light rain and snow"
-msgstr "Kevyt räntäsade"
-
-#: 3.0/openWeatherMap.js:397 3.8/openWeatherMap.js:341
-msgid "Rain and snow"
-msgstr "Räntäsadetta"
-
-#: 3.0/openWeatherMap.js:398 3.8/openWeatherMap.js:342
-msgid "Light shower snow"
-msgstr "Kevyt lumisade"
-
-#: 3.0/openWeatherMap.js:399 3.8/openWeatherMap.js:343
-msgid "Shower snow"
-msgstr "Lumisadetta"
-
-#: 3.0/openWeatherMap.js:400 3.8/openWeatherMap.js:344
-msgid "Heavy shower snow"
-msgstr "Märkää lunta"
-
-#: 3.0/openWeatherMap.js:401 3.0/met_uk.js:561 3.0/met_uk.js:562
-#: 3.8/openWeatherMap.js:345 3.8/met_uk.js:419 3.8/met_uk.js:420
-#: 3.8/visualcrossing.js:218
-msgid "Mist"
-msgstr "Sumu"
-
-#: 3.0/openWeatherMap.js:402 3.0/us_weather.js:585 3.0/us_weather.js:586
-#: 3.8/openWeatherMap.js:346 3.8/us_weather.js:449 3.8/us_weather.js:450
-msgid "Smoke"
-msgstr "Savua"
-
-#: 3.0/openWeatherMap.js:403 3.0/yahoo.js:457 3.0/us_weather.js:592
-#: 3.0/us_weather.js:593 3.8/openWeatherMap.js:347 3.8/yahoo.js:405
-#: 3.8/us_weather.js:456 3.8/us_weather.js:457
-msgid "Haze"
-msgstr "Usvaa"
-
-#: 3.0/openWeatherMap.js:404 3.8/openWeatherMap.js:348
-msgid "Sand, dust whirls"
-msgstr "Hiekka, pöly pyörii"
-
-#: 3.0/openWeatherMap.js:405 3.0/met_norway.js:301 3.0/met_norway.js:302
-#: 3.0/us_weather.js:620 3.0/us_weather.js:621 3.0/met_uk.js:568
-#: 3.0/met_uk.js:569 3.0/climacell.js:378 3.0/climacell.js:379
-#: 3.8/openWeatherMap.js:349 3.8/climacellV4.js:156 3.8/climacellV4.js:157
-#: 3.8/climacellV4.js:163 3.8/met_norway.js:232 3.8/met_norway.js:233
-#: 3.8/us_weather.js:484 3.8/us_weather.js:485 3.8/met_uk.js:426
-#: 3.8/met_uk.js:427 3.8/climacell.js:283 3.8/climacell.js:284
-#: 3.8/visualcrossing.js:196
-msgid "Fog"
-msgstr "Sumua"
-
-#: 3.0/openWeatherMap.js:406 3.8/openWeatherMap.js:350
-msgid "Sand"
-msgstr "Hiekka"
-
-#: 3.0/openWeatherMap.js:407 3.0/yahoo.js:455 3.0/us_weather.js:578
-#: 3.0/us_weather.js:579 3.8/openWeatherMap.js:351 3.8/yahoo.js:403
-#: 3.8/us_weather.js:442 3.8/us_weather.js:443
-msgid "Dust"
-msgstr "Pölyä"
-
-#: 3.0/openWeatherMap.js:408 3.8/openWeatherMap.js:352
-msgid "Volcanic ash"
-msgstr "Vulkaaninen tuhka"
-
-#: 3.0/openWeatherMap.js:409 3.8/openWeatherMap.js:353
-#: 3.8/visualcrossing.js:252
-msgid "Squalls"
-msgstr "Tuulenpuuskia"
-
-#: 3.0/openWeatherMap.js:410 3.0/yahoo.js:436 3.0/us_weather.js:557
-#: 3.0/us_weather.js:558 3.8/openWeatherMap.js:354 3.8/yahoo.js:384
-#: 3.8/us_weather.js:421 3.8/us_weather.js:422
-msgid "Tornado"
-msgstr "Tornado"
-
-#: 3.0/openWeatherMap.js:411 3.0/yahoo.js:465 3.0/us_weather.js:407
-#: 3.0/us_weather.js:408 3.0/us_weather.js:442 3.0/met_uk.js:526
-#: 3.0/met_uk.js:527 3.0/climacell.js:413 3.0/climacell.js:414
-#: 3.8/openWeatherMap.js:355 3.8/climacellV4.js:121 3.8/climacellV4.js:122
-#: 3.8/yahoo.js:413 3.8/us_weather.js:271 3.8/us_weather.js:272
-#: 3.8/us_weather.js:306 3.8/met_uk.js:384 3.8/met_uk.js:385
-#: 3.8/climacell.js:318 3.8/climacell.js:319 3.8/visualcrossing.js:266
-msgid "Clear"
-msgstr "Selkeää"
-
-#: 3.0/openWeatherMap.js:412 3.0/met_norway.js:280 3.0/met_norway.js:281
-#: 3.8/openWeatherMap.js:356 3.8/met_norway.js:211 3.8/met_norway.js:212
-msgid "Clear sky"
-msgstr "Selkeä taivas"
-
-#: 3.0/openWeatherMap.js:413 3.8/openWeatherMap.js:357
-msgid "Sky is clear"
-msgstr "Taivas on selkeä"
-
-#: 3.0/openWeatherMap.js:414 3.8/openWeatherMap.js:358
-msgid "Clouds"
-msgstr "Pilvinen"
-
-#: 3.0/openWeatherMap.js:415 3.0/us_weather.js:414 3.0/us_weather.js:415
-#: 3.0/us_weather.js:449 3.8/openWeatherMap.js:359 3.8/us_weather.js:278
-#: 3.8/us_weather.js:279 3.8/us_weather.js:313
-msgid "Few clouds"
-msgstr "Muutamia pilviä"
-
-#: 3.0/openWeatherMap.js:416 3.8/openWeatherMap.js:360
-msgid "Scattered clouds"
-msgstr "Hajanaiset pilvet"
-
-#: 3.0/openWeatherMap.js:417 3.8/openWeatherMap.js:361
-msgid "Broken clouds"
-msgstr "Hajanaisia pilviä"
-
-#: 3.0/openWeatherMap.js:418 3.8/openWeatherMap.js:362
-msgid "Overcast clouds"
-msgstr "Pilvistä"
-
-#: 3.0/weatherbit.js:239 3.0/weatherbit.js:274 3.0/us_weather.js:371
-#: 3.0/met_uk.js:364 3.0/met_uk.js:400 3.8/weatherbit.js:135
-#: 3.8/weatherbit.js:170 3.8/us_weather.js:236 3.8/met_uk.js:202
-#: 3.8/met_uk.js:238
-msgid "Failed to Process Forecast Info"
-msgstr "Forecast tietojen käsittely epäonnistui"
-
-#: 3.0/weatherbit.js:312
+#: 3.0/climacell.js:224
 msgid ""
 "Please enter API key in settings,\n"
-"or get one first on https://www.weatherbit.io/account/create"
+"or get one first on https://developer.climacell.co/sign-up"
 msgstr ""
 "Anna API-avain asetuksissa,\n"
-"tai hanki ne ensin https://www.weatherbit.io/account/create"
+"tai hanki se ensin https://developer.climacell.co/sign-up"
 
-#: 3.0/weatherbit.js:331 3.0/darkSky.js:229 3.0/climacell.js:239
-#: 3.8/weatherbit.js:216 3.8/darkSky.js:147 3.8/climacell.js:143
+#: 3.0/climacell.js:239 3.0/darkSky.js:229 3.0/weatherbit.js:331
+#: 3.8/weather-applet.js:10282 3.8/weather-applet.js:11778
 msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
@@ -391,226 +283,263 @@ msgstr ""
 "Oletko varma että,\n"
 "annoit API-avaimen oikein tai onko tunnuksesi voimassa"
 
-#: 3.0/met_norway.js:131 3.8/met_norway.js:64
-msgid "Cloudiness"
-msgstr "Pilvistä"
+#: 3.0/climacell.js:248 3.8/weather-applet.js:12012
+msgid ""
+"Please Make sure you\n"
+"entered the API key that you have from Climacell"
+msgstr ""
+"Varmista, että antamasi\n"
+"API-avain on peräisin yritykseltä Climacell"
 
-#: 3.0/met_norway.js:287 3.0/met_norway.js:288 3.0/yahoo.js:462
-#: 3.0/met_uk.js:575 3.0/met_uk.js:576 3.0/climacell.js:385
-#: 3.0/climacell.js:386 3.8/climacellV4.js:128 3.8/climacellV4.js:129
-#: 3.8/met_norway.js:218 3.8/met_norway.js:219 3.8/yahoo.js:410
-#: 3.8/met_uk.js:433 3.8/met_uk.js:434 3.8/climacell.js:290
-#: 3.8/climacell.js:291
-msgid "Cloudy"
-msgstr "Pilvinen"
-
-#: 3.0/met_norway.js:294 3.0/met_norway.js:295 3.0/yahoo.js:468
-#: 3.8/met_norway.js:225 3.8/met_norway.js:226 3.8/yahoo.js:416
-msgid "Fair"
-msgstr "Selkeää"
-
-#: 3.0/met_norway.js:308 3.0/met_norway.js:309 3.0/met_norway.js:315
-#: 3.0/met_norway.js:322 3.0/met_norway.js:329 3.0/met_uk.js:617
-#: 3.0/met_uk.js:624 3.0/met_uk.js:631 3.0/met_uk.js:632 3.0/climacell.js:259
-#: 3.0/climacell.js:260 3.8/climacellV4.js:213 3.8/met_norway.js:239
-#: 3.8/met_norway.js:240 3.8/met_norway.js:246 3.8/met_norway.js:253
-#: 3.8/met_norway.js:260 3.8/met_uk.js:475 3.8/met_uk.js:482 3.8/met_uk.js:489
-#: 3.8/met_uk.js:490 3.8/climacell.js:164 3.8/climacell.js:165
-#: 3.8/visualcrossing.js:230
+#: 3.0/climacell.js:259 3.0/climacell.js:260 3.0/met_norway.js:308
+#: 3.0/met_norway.js:309 3.0/met_norway.js:315 3.0/met_norway.js:322
+#: 3.0/met_norway.js:329 3.0/met_uk.js:617 3.0/met_uk.js:624 3.0/met_uk.js:631
+#: 3.0/met_uk.js:632 3.8/weather-applet.js:10112 3.8/weather-applet.js:10119
+#: 3.8/weather-applet.js:10126 3.8/weather-applet.js:10127
+#: 3.8/weather-applet.js:11282 3.8/weather-applet.js:11283
+#: 3.8/weather-applet.js:11289 3.8/weather-applet.js:11296
+#: 3.8/weather-applet.js:11303 3.8/weather-applet.js:12186
+#: 3.8/weather-applet.js:13079
 msgid "Heavy rain"
 msgstr "Erittäin voimakas sade"
 
-#: 3.0/met_norway.js:316 3.8/met_norway.js:247
-msgid "Heavy rain and thunder"
-msgstr "Rankkasade ja ukkonen"
-
-#: 3.0/met_norway.js:323 3.8/met_norway.js:254
-msgid "Heavy rain showers"
-msgstr "Rankkasade"
-
-#: 3.0/met_norway.js:330 3.8/met_norway.js:261
-msgid "Heavy rain showers and thunder"
-msgstr "Rankkasade ja ukkonen"
-
-#: 3.0/met_norway.js:336 3.0/met_norway.js:337 3.0/met_norway.js:343
-#: 3.0/met_norway.js:350 3.0/met_norway.js:357 3.8/met_norway.js:267
-#: 3.8/met_norway.js:268 3.8/met_norway.js:274 3.8/met_norway.js:281
-#: 3.8/met_norway.js:288
-msgid "Heavy sleet"
-msgstr "Märkää lunta"
-
-#: 3.0/met_norway.js:344 3.8/met_norway.js:275
-msgid "Heavy sleet and thunder"
-msgstr "Rankkasateita ja ukkosta"
-
-#: 3.0/met_norway.js:351 3.8/met_norway.js:282
-msgid "Heavy sleet showers"
-msgstr "Rankka lumisade"
-
-#: 3.0/met_norway.js:358 3.8/met_norway.js:289
-msgid "Heavy sleet showers and thunder"
-msgstr "Sadekuuroja ja ukkosta"
-
-#: 3.0/met_norway.js:372 3.8/met_norway.js:303
-msgid "Heavy snow and thunder"
-msgstr "Voimakkaita ukkosmyrskyjä"
-
-#: 3.0/met_norway.js:379 3.8/met_norway.js:310
-msgid "Heavy snow showers"
-msgstr "Märkää lunta"
-
-#: 3.0/met_norway.js:386 3.8/met_norway.js:317
-msgid "Heavy snow showers and thunder"
-msgstr "Voimakas sade ja tihkua"
-
-#: 3.0/met_norway.js:400 3.8/met_norway.js:331
-msgid "Light rain and thunder"
-msgstr "Kevyt räntäsade"
-
-#: 3.0/met_norway.js:407 3.8/met_norway.js:338
-msgid "Light rain showers"
-msgstr "Kevyt räntäsade"
-
-#: 3.0/met_norway.js:414 3.8/met_norway.js:345
-msgid "Light rain showers and thunder"
-msgstr "Kevyt räntäsade"
-
-#: 3.0/met_norway.js:420 3.0/met_norway.js:421 3.0/met_norway.js:427
-#: 3.0/met_norway.js:434 3.0/met_norway.js:441 3.8/met_norway.js:351
-#: 3.8/met_norway.js:352 3.8/met_norway.js:358 3.8/met_norway.js:365
-#: 3.8/met_norway.js:372
-msgid "Light sleet"
-msgstr "Kevyttä lunta"
-
-#: 3.0/met_norway.js:428 3.8/met_norway.js:359
-msgid "Light sleet and thunder"
-msgstr "Mahdollista ukkosta"
-
-#: 3.0/met_norway.js:435 3.8/met_norway.js:366
-msgid "Light sleet showers"
-msgstr "Kevyt lumisade"
-
-#: 3.0/met_norway.js:442 3.8/met_norway.js:373
-msgid "Light sleet showers and thunder"
-msgstr "Kevyttä sadetta"
-
-#: 3.0/met_norway.js:456 3.8/met_norway.js:387
-msgid "Light snow and thunder"
-msgstr "Mahdollista ukkosta"
-
-#: 3.0/met_norway.js:463 3.8/met_norway.js:394
-msgid "Light snow showers"
-msgstr "Kevyt lumisade"
-
-#: 3.0/met_norway.js:470 3.8/met_norway.js:401
-msgid "Light snow showers and thunder"
-msgstr "Kevyt lumisade"
-
-#: 3.0/met_norway.js:476 3.0/met_norway.js:477 3.0/us_weather.js:421
-#: 3.0/us_weather.js:422 3.0/us_weather.js:456 3.0/met_uk.js:540
-#: 3.0/met_uk.js:541 3.0/met_uk.js:547 3.0/met_uk.js:548 3.0/climacell.js:399
-#: 3.0/climacell.js:400 3.8/climacellV4.js:142 3.8/climacellV4.js:143
-#: 3.8/met_norway.js:407 3.8/met_norway.js:408 3.8/us_weather.js:285
-#: 3.8/us_weather.js:286 3.8/us_weather.js:320 3.8/met_uk.js:398
-#: 3.8/met_uk.js:399 3.8/met_uk.js:405 3.8/met_uk.js:406 3.8/climacell.js:304
-#: 3.8/climacell.js:305
-msgid "Partly cloudy"
-msgstr "Puolipilvistä"
-
-#: 3.0/met_norway.js:483 3.0/met_norway.js:484 3.0/met_norway.js:490
-#: 3.0/yahoo.js:448 3.0/us_weather.js:484 3.0/us_weather.js:533
-#: 3.0/us_weather.js:534 3.0/us_weather.js:541 3.0/climacell.js:266
-#: 3.0/climacell.js:267 3.8/climacellV4.js:198 3.8/climacellV4.js:199
-#: 3.8/climacellV4.js:205 3.8/climacellV4.js:212 3.8/climacellV4.js:254
-#: 3.8/climacellV4.js:261 3.8/climacellV4.js:268 3.8/met_norway.js:414
-#: 3.8/met_norway.js:415 3.8/met_norway.js:421 3.8/yahoo.js:396
-#: 3.8/us_weather.js:348 3.8/us_weather.js:397 3.8/us_weather.js:398
-#: 3.8/us_weather.js:405 3.8/climacell.js:171 3.8/climacell.js:172
-#: 3.8/visualcrossing.js:222
+#: 3.0/climacell.js:266 3.0/climacell.js:267 3.0/met_norway.js:483
+#: 3.0/met_norway.js:484 3.0/met_norway.js:490 3.0/us_weather.js:484
+#: 3.0/us_weather.js:533 3.0/us_weather.js:534 3.0/us_weather.js:541
+#: 3.0/yahoo.js:448 3.8/weather-applet.js:11457 3.8/weather-applet.js:11458
+#: 3.8/weather-applet.js:11464 3.8/weather-applet.js:12171
+#: 3.8/weather-applet.js:12172 3.8/weather-applet.js:12178
+#: 3.8/weather-applet.js:12185 3.8/weather-applet.js:12227
+#: 3.8/weather-applet.js:12234 3.8/weather-applet.js:12241
+#: 3.8/weather-applet.js:12695 3.8/weather-applet.js:12744
+#: 3.8/weather-applet.js:12745 3.8/weather-applet.js:12752
+#: 3.8/weather-applet.js:13071 3.8/weather-applet.js:13338
+#: 3.8/weather-applet.js:13339 3.8/weather-applet.js:13380
+#: 3.8/weather-applet.js:14075 3.8/weather-applet.js:14076
+#: 3.8/weather-applet.js:14438 3.8/weather-applet.js:14439
 msgid "Rain"
 msgstr "Sadetta"
 
-#: 3.0/met_norway.js:491 3.8/met_norway.js:422
-msgid "Rain and thunder"
-msgstr "Sadetta ja ukkosta"
+#: 3.0/climacell.js:273 3.0/climacell.js:274 3.0/met_norway.js:392
+#: 3.0/met_norway.js:393 3.0/met_norway.js:399 3.0/met_norway.js:406
+#: 3.0/met_norway.js:413 3.0/met_uk.js:589 3.0/met_uk.js:596 3.0/met_uk.js:610
+#: 3.0/met_uk.js:611 3.0/openWeatherMap.js:381 3.8/weather-applet.js:10084
+#: 3.8/weather-applet.js:10091 3.8/weather-applet.js:10105
+#: 3.8/weather-applet.js:10106 3.8/weather-applet.js:10914
+#: 3.8/weather-applet.js:11366 3.8/weather-applet.js:11367
+#: 3.8/weather-applet.js:11373 3.8/weather-applet.js:11380
+#: 3.8/weather-applet.js:11387 3.8/weather-applet.js:12179
+#: 3.8/weather-applet.js:13081
+msgid "Light rain"
+msgstr "Kevyt sade"
 
-#: 3.0/met_norway.js:497 3.0/met_norway.js:498 3.0/met_norway.js:504
-#: 3.0/us_weather.js:542 3.8/met_norway.js:428 3.8/met_norway.js:429
-#: 3.8/met_norway.js:435 3.8/us_weather.js:406 3.8/visualcrossing.js:228
-msgid "Rain showers"
-msgstr "Sadekuuroja"
+#: 3.0/climacell.js:280 3.8/weather-applet.js:12242 3.8/weather-applet.js:13055
+msgid "Heavy freezing rain"
+msgstr "Kova jäätävä sade"
 
-#: 3.0/met_norway.js:505 3.8/met_norway.js:436
-msgid "Rain showers and thunder"
-msgstr "Sadekuuroja ja ukkosta"
+#: 3.0/climacell.js:281 3.0/climacell.js:287 3.0/climacell.js:288
+#: 3.0/climacell.js:295 3.0/openWeatherMap.js:386 3.0/us_weather.js:505
+#: 3.0/us_weather.js:506 3.0/us_weather.js:512 3.0/us_weather.js:513
+#: 3.0/us_weather.js:519 3.8/weather-applet.js:10919
+#: 3.8/weather-applet.js:12228 3.8/weather-applet.js:12716
+#: 3.8/weather-applet.js:12717 3.8/weather-applet.js:12723
+#: 3.8/weather-applet.js:12724 3.8/weather-applet.js:12730
+msgid "Freezing rain"
+msgstr "Jäätävä sade"
 
-#: 3.0/met_norway.js:519 3.8/met_norway.js:450
-msgid "Sleet and thunder"
-msgstr "Hajanaisia ukkosmyrskyjä"
+#: 3.0/climacell.js:294 3.8/weather-applet.js:12235 3.8/weather-applet.js:13057
+msgid "Light freezing rain"
+msgstr "Kevyt jäätävä sade"
 
-#: 3.0/met_norway.js:526 3.8/met_norway.js:457
-msgid "Sleet showers"
-msgstr "Hajanaisia lumikuuroja"
+#: 3.0/climacell.js:301
+msgid "Light freezing drizzle"
+msgstr "Kevyt jäätävä tihkusade"
 
-#: 3.0/met_norway.js:533 3.8/met_norway.js:464
-msgid "Sleet showers and thunder"
-msgstr "Hajanaisia lumikuuroja"
+#: 3.0/climacell.js:302 3.8/weather-applet.js:12221
+msgid "Freezing drizzle"
+msgstr "Jäätyvä tihkusade"
 
-#: 3.0/met_norway.js:547 3.8/met_norway.js:478
-msgid "Snow and thunder"
+#: 3.0/climacell.js:308 3.0/climacell.js:309 3.8/weather-applet.js:13037
+msgid "Light drizzle"
+msgstr "Kevyt tihkusade"
+
+#: 3.0/climacell.js:315 3.8/weather-applet.js:12256
+msgid "Heavy ice pellets"
+msgstr "Raskaat rakeet"
+
+#: 3.0/climacell.js:316 3.0/climacell.js:322 3.0/climacell.js:323
+#: 3.0/climacell.js:330 3.8/weather-applet.js:12248 3.8/weather-applet.js:12249
+#: 3.8/weather-applet.js:12255 3.8/weather-applet.js:12262
+msgid "Ice pellets"
+msgstr "Rakeita"
+
+#: 3.0/climacell.js:329 3.8/weather-applet.js:12263
+msgid "Light ice pellets"
+msgstr "Kevyet rakeet"
+
+#: 3.0/climacell.js:336 3.0/climacell.js:337 3.0/met_norway.js:364
+#: 3.0/met_norway.js:365 3.0/met_norway.js:371 3.0/met_norway.js:378
+#: 3.0/met_norway.js:385 3.0/met_uk.js:701 3.0/met_uk.js:708 3.0/met_uk.js:715
+#: 3.0/met_uk.js:716 3.0/openWeatherMap.js:393 3.8/weather-applet.js:10196
+#: 3.8/weather-applet.js:10203 3.8/weather-applet.js:10210
+#: 3.8/weather-applet.js:10211 3.8/weather-applet.js:10926
+#: 3.8/weather-applet.js:11338 3.8/weather-applet.js:11339
+#: 3.8/weather-applet.js:11345 3.8/weather-applet.js:11352
+#: 3.8/weather-applet.js:11359 3.8/weather-applet.js:12214
+#: 3.8/weather-applet.js:13097 3.8/weather-applet.js:13415
+msgid "Heavy snow"
+msgstr "Märkää lunta"
+
+#: 3.0/climacell.js:343 3.0/climacell.js:344 3.0/met_norway.js:539
+#: 3.0/met_norway.js:540 3.0/met_norway.js:546 3.0/openWeatherMap.js:392
+#: 3.0/us_weather.js:477 3.0/us_weather.js:478 3.0/yahoo.js:452
+#: 3.8/weather-applet.js:10925 3.8/weather-applet.js:11513
+#: 3.8/weather-applet.js:11514 3.8/weather-applet.js:11520
+#: 3.8/weather-applet.js:12192 3.8/weather-applet.js:12193
+#: 3.8/weather-applet.js:12206 3.8/weather-applet.js:12213
+#: 3.8/weather-applet.js:12688 3.8/weather-applet.js:12689
+#: 3.8/weather-applet.js:13091 3.8/weather-applet.js:13324
+#: 3.8/weather-applet.js:13408 3.8/weather-applet.js:14089
+#: 3.8/weather-applet.js:14090 3.8/weather-applet.js:14466
+#: 3.8/weather-applet.js:14467
+msgid "Snow"
 msgstr "Lumisadetta"
 
-#: 3.0/met_norway.js:553 3.0/met_norway.js:554 3.0/met_norway.js:560
-#: 3.8/met_norway.js:484 3.8/met_norway.js:485 3.8/met_norway.js:491
-#: 3.8/visualcrossing.js:246
-msgid "Snow showers"
-msgstr "Lumisadetta"
+#: 3.0/climacell.js:350 3.0/climacell.js:351 3.0/met_norway.js:448
+#: 3.0/met_norway.js:449 3.0/met_norway.js:455 3.0/met_norway.js:462
+#: 3.0/met_norway.js:469 3.0/met_uk.js:680 3.0/met_uk.js:687 3.0/met_uk.js:694
+#: 3.0/met_uk.js:695 3.0/openWeatherMap.js:391 3.8/weather-applet.js:10175
+#: 3.8/weather-applet.js:10182 3.8/weather-applet.js:10189
+#: 3.8/weather-applet.js:10190 3.8/weather-applet.js:10924
+#: 3.8/weather-applet.js:11422 3.8/weather-applet.js:11423
+#: 3.8/weather-applet.js:11429 3.8/weather-applet.js:11436
+#: 3.8/weather-applet.js:11443 3.8/weather-applet.js:12207
+#: 3.8/weather-applet.js:13099
+msgid "Light snow"
+msgstr "Kevyttä lunta"
 
-#: 3.0/met_norway.js:561 3.8/met_norway.js:492
-msgid "Snow showers and thunder"
-msgstr "Voimaks lumisade"
+#: 3.0/climacell.js:357 3.0/climacell.js:358 3.8/weather-applet.js:12199
+#: 3.8/weather-applet.js:12200 3.8/weather-applet.js:14445
+#: 3.8/weather-applet.js:14446
+msgid "Flurries"
+msgstr "Puuskatuuli"
 
-#: 3.0/met_norway.js:568 3.0/met_norway.js:569 3.0/us_weather.js:627
-#: 3.0/us_weather.js:628 3.0/met_uk.js:519 3.0/met_uk.js:520 3.0/met_uk.js:554
-#: 3.0/met_uk.js:555 3.0/met_uk.js:743 3.0/met_uk.js:744 3.0/climacell.js:421
-#: 3.0/climacell.js:422 3.8/climacellV4.js:113 3.8/climacellV4.js:114
-#: 3.8/met_norway.js:499 3.8/met_norway.js:500 3.8/us_weather.js:491
-#: 3.8/us_weather.js:492 3.8/met_uk.js:377 3.8/met_uk.js:378 3.8/met_uk.js:412
-#: 3.8/met_uk.js:413 3.8/met_uk.js:601 3.8/met_uk.js:602 3.8/climacell.js:326
-#: 3.8/climacell.js:327
+#: 3.0/climacell.js:364 3.0/climacell.js:365 3.0/openWeatherMap.js:366
+#: 3.0/us_weather.js:550 3.0/us_weather.js:551 3.8/weather-applet.js:10899
+#: 3.8/weather-applet.js:12269 3.8/weather-applet.js:12270
+#: 3.8/weather-applet.js:12761 3.8/weather-applet.js:12762
+#: 3.8/weather-applet.js:13103 3.8/weather-applet.js:13422
+#: 3.8/weather-applet.js:13423 3.8/weather-applet.js:14096
+#: 3.8/weather-applet.js:14097
+msgid "Thunderstorm"
+msgstr "Ukkosmyrskyjä"
+
+#: 3.0/climacell.js:371 3.0/climacell.js:372 3.8/weather-applet.js:12137
+msgid "Light fog"
+msgstr "Heikko sumu"
+
+#: 3.0/climacell.js:378 3.0/climacell.js:379 3.0/met_norway.js:301
+#: 3.0/met_norway.js:302 3.0/met_uk.js:568 3.0/met_uk.js:569
+#: 3.0/openWeatherMap.js:405 3.0/us_weather.js:620 3.0/us_weather.js:621
+#: 3.8/weather-applet.js:10063 3.8/weather-applet.js:10064
+#: 3.8/weather-applet.js:10938 3.8/weather-applet.js:11275
+#: 3.8/weather-applet.js:11276 3.8/weather-applet.js:12129
+#: 3.8/weather-applet.js:12130 3.8/weather-applet.js:12136
+#: 3.8/weather-applet.js:12831 3.8/weather-applet.js:12832
+#: 3.8/weather-applet.js:13045 3.8/weather-applet.js:14047
+#: 3.8/weather-applet.js:14048 3.8/weather-applet.js:14494
+#: 3.8/weather-applet.js:14495
+msgid "Fog"
+msgstr "Sumua"
+
+#: 3.0/climacell.js:385 3.0/climacell.js:386 3.0/met_norway.js:287
+#: 3.0/met_norway.js:288 3.0/met_uk.js:575 3.0/met_uk.js:576 3.0/yahoo.js:462
+#: 3.8/weather-applet.js:10070 3.8/weather-applet.js:10071
+#: 3.8/weather-applet.js:11261 3.8/weather-applet.js:11262
+#: 3.8/weather-applet.js:12101 3.8/weather-applet.js:12102
+#: 3.8/weather-applet.js:13317 3.8/weather-applet.js:13318
+#: 3.8/weather-applet.js:14040 3.8/weather-applet.js:14041
+#: 3.8/weather-applet.js:14536 3.8/weather-applet.js:14537
+msgid "Cloudy"
+msgstr "Pilvinen"
+
+#: 3.0/climacell.js:392 3.0/climacell.js:393 3.0/us_weather.js:428
+#: 3.0/us_weather.js:429 3.0/us_weather.js:463 3.8/weather-applet.js:12122
+#: 3.8/weather-applet.js:12123 3.8/weather-applet.js:12639
+#: 3.8/weather-applet.js:12640 3.8/weather-applet.js:12674
+msgid "Mostly cloudy"
+msgstr "Enimmäkseen pilvistä"
+
+#: 3.0/climacell.js:399 3.0/climacell.js:400 3.0/met_norway.js:476
+#: 3.0/met_norway.js:477 3.0/met_uk.js:540 3.0/met_uk.js:541 3.0/met_uk.js:547
+#: 3.0/met_uk.js:548 3.0/us_weather.js:421 3.0/us_weather.js:422
+#: 3.0/us_weather.js:456 3.8/weather-applet.js:10035
+#: 3.8/weather-applet.js:10036 3.8/weather-applet.js:10042
+#: 3.8/weather-applet.js:10043 3.8/weather-applet.js:11450
+#: 3.8/weather-applet.js:11451 3.8/weather-applet.js:12115
+#: 3.8/weather-applet.js:12116 3.8/weather-applet.js:12632
+#: 3.8/weather-applet.js:12633 3.8/weather-applet.js:12667
+#: 3.8/weather-applet.js:13310 3.8/weather-applet.js:13311
+msgid "Partly cloudy"
+msgstr "Puolipilvistä"
+
+#: 3.0/climacell.js:406 3.0/climacell.js:407 3.8/weather-applet.js:12108
+#: 3.8/weather-applet.js:12109
+msgid "Mostly clear"
+msgstr "Enimmäkseen selkeä"
+
+#: 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:526
+#: 3.0/met_uk.js:527 3.0/openWeatherMap.js:411 3.0/us_weather.js:407
+#: 3.0/us_weather.js:408 3.0/us_weather.js:442 3.0/yahoo.js:465
+#: 3.8/weather-applet.js:10021 3.8/weather-applet.js:10022
+#: 3.8/weather-applet.js:10944 3.8/weather-applet.js:12094
+#: 3.8/weather-applet.js:12095 3.8/weather-applet.js:12618
+#: 3.8/weather-applet.js:12619 3.8/weather-applet.js:12653
+#: 3.8/weather-applet.js:13115 3.8/weather-applet.js:13303
+#: 3.8/weather-applet.js:13304 3.8/weather-applet.js:14026
+#: 3.8/weather-applet.js:14027 3.8/weather-applet.js:14033
+#: 3.8/weather-applet.js:14034 3.8/weather-applet.js:14571
+#: 3.8/weather-applet.js:14572
+msgid "Clear"
+msgstr "Selkeää"
+
+#: 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:533
+#: 3.0/met_uk.js:534 3.0/yahoo.js:466 3.8/weather-applet.js:10028
+#: 3.8/weather-applet.js:10029 3.8/weather-applet.js:12094
+#: 3.8/weather-applet.js:12095 3.8/weather-applet.js:14578
+#: 3.8/weather-applet.js:14579
+msgid "Sunny"
+msgstr "Aurinkoista"
+
+#: 3.0/climacell.js:421 3.0/climacell.js:422 3.0/met_norway.js:568
+#: 3.0/met_norway.js:569 3.0/met_uk.js:519 3.0/met_uk.js:520 3.0/met_uk.js:554
+#: 3.0/met_uk.js:555 3.0/met_uk.js:743 3.0/met_uk.js:744 3.0/us_weather.js:627
+#: 3.0/us_weather.js:628 3.8/weather-applet.js:10014
+#: 3.8/weather-applet.js:10015 3.8/weather-applet.js:10049
+#: 3.8/weather-applet.js:10050 3.8/weather-applet.js:10238
+#: 3.8/weather-applet.js:10239 3.8/weather-applet.js:11244
+#: 3.8/weather-applet.js:11245 3.8/weather-applet.js:11542
+#: 3.8/weather-applet.js:11543 3.8/weather-applet.js:12086
+#: 3.8/weather-applet.js:12087 3.8/weather-applet.js:12609
+#: 3.8/weather-applet.js:12610 3.8/weather-applet.js:12838
+#: 3.8/weather-applet.js:12839 3.8/weather-applet.js:13959
+#: 3.8/weather-applet.js:13960 3.8/weather-applet.js:14110
+#: 3.8/weather-applet.js:14111 3.8/weather-applet.js:14682
+#: 3.8/weather-applet.js:14684
 msgid "Unknown"
 msgstr "Tuntematon virhe"
 
-#: 3.0/ipApi.js:89 3.8/ipApi.js:38
-msgid "Could not obtain location"
-msgstr "Sijaintia ei löytynyt"
-
-#: 3.0/ipApi.js:95 3.8/ipApi.js:44
-msgid ""
-"Location Service responded with errors, please see the logs in Looking Glass"
-msgstr "Sijaintipalvelu vastasi virheillä. Katso Looking Glass -lokit"
-
-#: 3.0/darkSky.js:71 3.8/darkSky.js:23
+#: 3.0/darkSky.js:71 3.8/weather-applet.js:10273
 msgid "and"
 msgstr "ja"
 
-#: 3.0/darkSky.js:71 3.8/darkSky.js:23
+#: 3.0/darkSky.js:71 3.8/weather-applet.js:10273
 msgid "until"
 msgstr "saakka"
 
-#: 3.0/darkSky.js:71 3.0/applet.js:1133 3.8/darkSky.js:23
-#: 3.8/uiHourlyForecasts.js:178
-msgid "in"
-msgstr "asti"
-
-#: 3.0/darkSky.js:71 3.8/darkSky.js:23
+#: 3.0/darkSky.js:71 3.8/weather-applet.js:10273
 msgid "Possible"
 msgstr "Mahdollinen"
-
-#: 3.0/darkSky.js:189 3.0/yahoo.js:166 3.0/climacell.js:174 3.8/darkSky.js:119
-#: 3.8/yahoo.js:98 3.8/climacell.js:91
-msgid "Failed to Process Weather Info"
-msgstr "Säätietojen käsittely epäonnistui"
 
 #: 3.0/darkSky.js:211
 msgid ""
@@ -620,271 +549,208 @@ msgstr ""
 "Anna API-avain asetuksissa,\n"
 "tai hanki sellainen ensin https://darksky.net/dev/register"
 
-#: 3.0/darkSky.js:238 3.8/darkSky.js:157
+#: 3.0/darkSky.js:238 3.8/weather-applet.js:10292
 msgid ""
 "Please Make sure you\n"
-"entered the API key what you have from DarkSky"
+"entered the API key that you have from DarkSky"
 msgstr ""
-"Varmista, että sinun\n"
-"antama API-avain on peräisin yritykseltä DarkSky"
+"Varmista, että antamasi\n"
+"API-avain on peräisin yritykseltä DarkSky"
 
-#: 3.0/yahoo.js:78 3.8/yahoo.js:27
-msgid ""
-"Unknown Error happened while calling Yahoo bridge,\n"
-" see Looking Glass log for errors"
-msgstr ""
-"Tapahtui tuntematon virhe kutsuessa Yahoo-siltaa,\n"
-" katso Looking Glass lokin virheet"
-
-#: 3.0/yahoo.js:91 3.8/yahoo.js:25
-msgid ""
-"Yahoo bridge responded in bad format,\n"
-" see Looking Glass log for errors"
-msgstr ""
-"Yahoo-silta vastasi väärässä muodossa,\n"
-" katso Looking Glass lokin virheet"
-
-#: 3.0/yahoo.js:177 3.8/yahoo.js:109
-msgid "Missing package"
-msgstr "Puuttuva paketti"
-
-#: 3.0/yahoo.js:177 3.0/yahoo.js:179
-msgid "Please install '"
-msgstr "Asenna '"
-
-#: 3.0/yahoo.js:177 3.0/yahoo.js:179
-msgid "', then refresh manually."
-msgstr "', päivitä sitten manuaalisesti."
-
-#: 3.0/yahoo.js:182 3.8/yahoo.js:124
-msgid "Could not connect to Yahoo API."
-msgstr "Ei saatu yhteyttä Yahoo API."
-
-#: 3.0/yahoo.js:186 3.8/yahoo.js:133
-msgid ""
-"Unknown error happened while obtaining weather, see Looking Glass logs for "
-"more information"
-msgstr ""
-"Tapahtui tuntematon virhe säätiedoissa, katso Looking Glass lokista "
-"lisätietoja"
-
-#: 3.0/yahoo.js:437 3.8/yahoo.js:385
-msgid "Tropical Storm"
-msgstr "Trooppinen myrsky"
-
-#: 3.0/yahoo.js:438 3.0/us_weather.js:564 3.0/us_weather.js:565
-#: 3.0/utils.js:336 3.8/yahoo.js:386 3.8/us_weather.js:428
-#: 3.8/us_weather.js:429 3.8/utils.js:192
-msgid "Hurricane"
-msgstr "Hurrikaani"
-
-#: 3.0/yahoo.js:439 3.8/yahoo.js:387
-msgid "Severe Thunderstorms"
-msgstr "Hajanaisia ukkosmyrskyjä"
-
-#: 3.0/yahoo.js:440 3.8/yahoo.js:388
-msgid "Thunderstorms"
-msgstr "Ukkosmyrskyjä"
-
-#: 3.0/yahoo.js:441 3.8/yahoo.js:389
-msgid "Mixed Rain and Snow"
-msgstr "Räntäsadetta"
-
-#: 3.0/yahoo.js:442 3.8/yahoo.js:390
-msgid "Mixed Rain and Sleet"
-msgstr "Räntäsadetta ja loskaa"
-
-#: 3.0/yahoo.js:443 3.8/yahoo.js:391
-msgid "Mixed Snow and Sleet"
-msgstr "Lumisadetta ja loskaa"
-
-#: 3.0/yahoo.js:444 3.8/yahoo.js:392
-msgid "Freezing Drizzle"
-msgstr "Jäätävää sadetta"
-
-#: 3.0/yahoo.js:446 3.8/yahoo.js:394
-msgid "Freezing Rain"
-msgstr "Jäätävää sadetta"
-
-#: 3.0/yahoo.js:447 3.8/yahoo.js:395
-msgid "Showers"
-msgstr "Lumisadetta"
-
-#: 3.0/yahoo.js:449 3.8/yahoo.js:397
-msgid "Snow Flurries"
-msgstr "Lumikuuroja"
-
-#: 3.0/yahoo.js:450 3.8/yahoo.js:398
-msgid "Light Snow Showers"
-msgstr "Lumikuuroja"
-
-#: 3.0/yahoo.js:451 3.8/yahoo.js:399
-msgid "Blowing Snow"
-msgstr "Lumipyry"
-
-#: 3.0/yahoo.js:453 3.0/met_uk.js:659 3.0/met_uk.js:666 3.0/met_uk.js:673
-#: 3.0/met_uk.js:674 3.8/yahoo.js:401 3.8/met_uk.js:517 3.8/met_uk.js:524
-#: 3.8/met_uk.js:531 3.8/met_uk.js:532 3.8/visualcrossing.js:260
-msgid "Hail"
-msgstr "Rakeita"
-
-#: 3.0/yahoo.js:456 3.8/yahoo.js:404
-msgid "Foggy"
-msgstr "Sumua"
-
-#: 3.0/yahoo.js:458 3.8/yahoo.js:406
-msgid "Smoky"
-msgstr "Savua"
-
-#: 3.0/yahoo.js:459 3.8/yahoo.js:407
-msgid "Blustery"
-msgstr "Myrskyisä"
-
-#: 3.0/yahoo.js:460 3.8/yahoo.js:408
-msgid "Windy"
-msgstr "Tuulinen"
-
-#: 3.0/yahoo.js:461 3.0/us_weather.js:606 3.0/us_weather.js:607
-#: 3.8/yahoo.js:409 3.8/us_weather.js:470 3.8/us_weather.js:471
-msgid "Cold"
-msgstr "Kylmä"
-
-#: 3.0/yahoo.js:463 3.8/yahoo.js:411
-msgid "Mostly Cloudy"
-msgstr "Pilvipeite rakoilee"
-
-#: 3.0/yahoo.js:464 3.8/yahoo.js:412
-msgid "Partly Cloudy"
-msgstr "Puolipilvistä"
-
-#: 3.0/yahoo.js:466 3.0/met_uk.js:533 3.0/met_uk.js:534 3.0/climacell.js:413
-#: 3.0/climacell.js:414 3.8/climacellV4.js:121 3.8/climacellV4.js:122
-#: 3.8/yahoo.js:414 3.8/met_uk.js:391 3.8/met_uk.js:392 3.8/climacell.js:318
-#: 3.8/climacell.js:319
-msgid "Sunny"
-msgstr "Aurinkoista"
-
-#: 3.0/yahoo.js:467 3.8/yahoo.js:415
-msgid "Mostly Sunny"
-msgstr "Pilvipeite rakoilee"
-
-#: 3.0/yahoo.js:469 3.8/yahoo.js:417
-msgid "Mixed Rain and Hail"
-msgstr "Räntäsadetta ja loskaa"
-
-#: 3.0/yahoo.js:470 3.0/us_weather.js:599 3.0/us_weather.js:600
-#: 3.8/yahoo.js:418 3.8/us_weather.js:463 3.8/us_weather.js:464
-msgid "Hot"
-msgstr "Kuuma"
-
-#: 3.0/yahoo.js:471 3.8/yahoo.js:419
-msgid "Isolated Thunderstorms"
-msgstr "Yksittäisiä ukkoskuuroja"
-
-#: 3.0/yahoo.js:472 3.8/yahoo.js:420
-msgid "Scattered Thunderstorms"
-msgstr "Hajanaisia ukkosmyrskyjä"
-
-#: 3.0/yahoo.js:473 3.8/yahoo.js:421
-msgid "Scattered Showers"
-msgstr "Hajanaisia lumisateita"
-
-#: 3.0/yahoo.js:474 3.8/yahoo.js:422
-msgid "Heavy Rain"
-msgstr "Märkää lunta"
-
-#: 3.0/yahoo.js:475 3.8/yahoo.js:423
-msgid "Scattered Snow Showers"
-msgstr "Hajanaisia lumisateita"
-
-#: 3.0/yahoo.js:476 3.8/yahoo.js:424
-msgid "Heavy Snow"
-msgstr "Märkää lunta"
-
-#: 3.0/yahoo.js:477 3.0/us_weather.js:613 3.0/us_weather.js:614
-#: 3.8/yahoo.js:425 3.8/us_weather.js:477 3.8/us_weather.js:478
-msgid "Blizzard"
-msgstr "Myrsky"
-
-#: 3.0/yahoo.js:478 3.8/yahoo.js:426
-msgid "Not Available"
-msgstr "Ei saatavilla"
-
-#: 3.0/yahoo.js:479 3.8/yahoo.js:427
-msgid "Scattered Thundershowers"
-msgstr "Hajanaisia ukkosmyrskyjä"
-
-#: 3.0/us_weather.js:120
-msgid "Could not get forecast for your area"
+#: 3.0/ipApi.js:89 3.8/weather-applet.js:9254
+msgid "Could not obtain location"
 msgstr "Sijaintia ei löytynyt"
 
-#: 3.0/us_weather.js:151 3.0/us_weather.js:179 3.0/met_uk.js:162
-#: 3.0/met_uk.js:192 3.0/met_uk.js:239
+#: 3.0/ipApi.js:95 3.8/weather-applet.js:9260
+msgid ""
+"Location Service responded with errors, please see the logs in Looking Glass"
+msgstr "Sijaintipalvelu vastasi virheillä. Katso Looking Glass loki"
+
+#: 3.0/met_norway.js:131 3.8/weather-applet.js:11106
+msgid "Cloudiness"
+msgstr "Pilvistä"
+
+#: 3.0/met_norway.js:280 3.0/met_norway.js:281 3.0/openWeatherMap.js:412
+#: 3.8/weather-applet.js:10945 3.8/weather-applet.js:11254
+#: 3.8/weather-applet.js:11255
+msgid "Clear sky"
+msgstr "Selkeä taivas"
+
+#: 3.0/met_norway.js:294 3.0/met_norway.js:295 3.0/yahoo.js:468
+#: 3.8/weather-applet.js:11268 3.8/weather-applet.js:11269
+msgid "Fair"
+msgstr "Selkeää"
+
+#: 3.0/met_norway.js:316 3.8/weather-applet.js:11290
+msgid "Heavy rain and thunder"
+msgstr "Rankkasade ja ukkonen"
+
+#: 3.0/met_norway.js:323 3.8/weather-applet.js:11297
+msgid "Heavy rain showers"
+msgstr "Rankkasade"
+
+#: 3.0/met_norway.js:330 3.8/weather-applet.js:11304
+msgid "Heavy rain showers and thunder"
+msgstr "Rankkasade ja ukkonen"
+
+#: 3.0/met_norway.js:336 3.0/met_norway.js:337 3.0/met_norway.js:343
+#: 3.0/met_norway.js:350 3.0/met_norway.js:357 3.8/weather-applet.js:11310
+#: 3.8/weather-applet.js:11311 3.8/weather-applet.js:11317
+#: 3.8/weather-applet.js:11324 3.8/weather-applet.js:11331
+msgid "Heavy sleet"
+msgstr "Märkää lunta"
+
+#: 3.0/met_norway.js:344 3.8/weather-applet.js:11318
+msgid "Heavy sleet and thunder"
+msgstr "Rankkasateita ja ukkosta"
+
+#: 3.0/met_norway.js:351 3.8/weather-applet.js:11325
+msgid "Heavy sleet showers"
+msgstr "Rankka lumisade"
+
+#: 3.0/met_norway.js:358 3.8/weather-applet.js:11332
+msgid "Heavy sleet showers and thunder"
+msgstr "Sadekuuroja ja ukkosta"
+
+#: 3.0/met_norway.js:372 3.8/weather-applet.js:11346
+msgid "Heavy snow and thunder"
+msgstr "Rankka lumisade ja myrsky"
+
+#: 3.0/met_norway.js:379 3.8/weather-applet.js:11353
+#: 3.8/weather-applet.js:13416
+msgid "Heavy snow showers"
+msgstr "Rankka lumisade"
+
+#: 3.0/met_norway.js:386 3.8/weather-applet.js:11360
+msgid "Heavy snow showers and thunder"
+msgstr "Voimakkaita lumisateita ja myrsky"
+
+#: 3.0/met_norway.js:400 3.8/weather-applet.js:11374
+msgid "Light rain and thunder"
+msgstr "Kevyttä sadetta ja ukkosta"
+
+#: 3.0/met_norway.js:407 3.8/weather-applet.js:11381
+msgid "Light rain showers"
+msgstr "Kevyttä sadetta"
+
+#: 3.0/met_norway.js:414 3.8/weather-applet.js:11388
+msgid "Light rain showers and thunder"
+msgstr "Kevyitä sadekuuroja ja ukkosta"
+
+#: 3.0/met_norway.js:420 3.0/met_norway.js:421 3.0/met_norway.js:427
+#: 3.0/met_norway.js:434 3.0/met_norway.js:441 3.8/weather-applet.js:11394
+#: 3.8/weather-applet.js:11395 3.8/weather-applet.js:11401
+#: 3.8/weather-applet.js:11408 3.8/weather-applet.js:11415
+msgid "Light sleet"
+msgstr "Kevyttä räntäsadetta"
+
+#: 3.0/met_norway.js:428 3.8/weather-applet.js:11402
+msgid "Light sleet and thunder"
+msgstr "Kevyttä räntäsadetta"
+
+#: 3.0/met_norway.js:435 3.8/weather-applet.js:11409
+msgid "Light sleet showers"
+msgstr "Kevyitä räntäsateita"
+
+#: 3.0/met_norway.js:442 3.8/weather-applet.js:11416
+msgid "Light sleet showers and thunder"
+msgstr "Kevyitä räntäsateita"
+
+#: 3.0/met_norway.js:456 3.8/weather-applet.js:11430
+msgid "Light snow and thunder"
+msgstr "Kevyttä lunta"
+
+#: 3.0/met_norway.js:463 3.8/weather-applet.js:11437
+msgid "Light snow showers"
+msgstr "Kevyitä lumisateita"
+
+#: 3.0/met_norway.js:470 3.8/weather-applet.js:11444
+msgid "Light snow showers and thunder"
+msgstr "Kevyt lumisade"
+
+#: 3.0/met_norway.js:491 3.8/weather-applet.js:11465
+msgid "Rain and thunder"
+msgstr "Sadetta ja ukkosta"
+
+#: 3.0/met_norway.js:497 3.0/met_norway.js:498 3.0/met_norway.js:504
+#: 3.0/us_weather.js:542 3.8/weather-applet.js:11471
+#: 3.8/weather-applet.js:11472 3.8/weather-applet.js:11478
+#: 3.8/weather-applet.js:12753 3.8/weather-applet.js:13077
+#: 3.8/weather-applet.js:13381 3.8/weather-applet.js:13387
+msgid "Rain showers"
+msgstr "Sadekuuroja"
+
+#: 3.0/met_norway.js:505 3.8/weather-applet.js:11479
+msgid "Rain showers and thunder"
+msgstr "Sadekuuroja ja ukkosta"
+
+#: 3.0/met_norway.js:511 3.0/met_norway.js:512 3.0/met_norway.js:518
+#: 3.0/met_norway.js:525 3.0/met_norway.js:532 3.0/met_uk.js:638
+#: 3.0/met_uk.js:645 3.0/met_uk.js:652 3.0/met_uk.js:653
+#: 3.0/openWeatherMap.js:394 3.0/us_weather.js:491 3.0/us_weather.js:492
+#: 3.0/us_weather.js:498 3.0/us_weather.js:499 3.0/us_weather.js:526
+#: 3.0/us_weather.js:527 3.0/yahoo.js:454 3.8/weather-applet.js:10133
+#: 3.8/weather-applet.js:10140 3.8/weather-applet.js:10147
+#: 3.8/weather-applet.js:10148 3.8/weather-applet.js:10927
+#: 3.8/weather-applet.js:11485 3.8/weather-applet.js:11486
+#: 3.8/weather-applet.js:11492 3.8/weather-applet.js:11499
+#: 3.8/weather-applet.js:11506 3.8/weather-applet.js:12702
+#: 3.8/weather-applet.js:12703 3.8/weather-applet.js:12709
+#: 3.8/weather-applet.js:12710 3.8/weather-applet.js:12737
+#: 3.8/weather-applet.js:12738 3.8/weather-applet.js:14082
+#: 3.8/weather-applet.js:14083 3.8/weather-applet.js:14480
+#: 3.8/weather-applet.js:14481
+msgid "Sleet"
+msgstr "Räntää"
+
+#: 3.0/met_norway.js:519 3.8/weather-applet.js:11493
+msgid "Sleet and thunder"
+msgstr "Räntää ja myrsky"
+
+#: 3.0/met_norway.js:526 3.8/weather-applet.js:11500
+msgid "Sleet showers"
+msgstr "Räntäkuuroja"
+
+#: 3.0/met_norway.js:533 3.8/weather-applet.js:11507
+msgid "Sleet showers and thunder"
+msgstr "Räntäkuuroja ja myrsky"
+
+#: 3.0/met_norway.js:547 3.8/weather-applet.js:11521
+msgid "Snow and thunder"
+msgstr "Lumimyrsky"
+
+#: 3.0/met_norway.js:553 3.0/met_norway.js:554 3.0/met_norway.js:560
+#: 3.8/weather-applet.js:11527 3.8/weather-applet.js:11528
+#: 3.8/weather-applet.js:11534 3.8/weather-applet.js:13095
+#: 3.8/weather-applet.js:13409
+msgid "Snow showers"
+msgstr "Lumisadetta"
+
+#: 3.0/met_norway.js:561 3.8/weather-applet.js:11535
+msgid "Snow showers and thunder"
+msgstr "Voimaks lumisade"
+
+#: 3.0/met_uk.js:162 3.0/met_uk.js:192 3.0/met_uk.js:239 3.0/us_weather.js:151
+#: 3.0/us_weather.js:179
 msgid "Unexpected response from API"
 msgstr "Odottamaton API:n vastaus"
 
-#: 3.0/us_weather.js:231 3.8/us_weather.js:95
-msgid "Location is outside US, please use a different provider."
-msgstr "Sijainti on USA:n ulkopuolella, käytä toista palvelua."
-
-#: 3.0/us_weather.js:394 3.8/us_weather.js:259
-msgid "Failed to Process Hourly Forecast Info"
-msgstr "Tunnin Forecast käsittely epäonnistui"
-
-#: 3.0/us_weather.js:428 3.0/us_weather.js:429 3.0/us_weather.js:463
-#: 3.0/climacell.js:392 3.0/climacell.js:393 3.8/climacellV4.js:149
-#: 3.8/climacellV4.js:150 3.8/us_weather.js:292 3.8/us_weather.js:293
-#: 3.8/us_weather.js:327 3.8/climacell.js:297 3.8/climacell.js:298
-msgid "Mostly cloudy"
-msgstr "Pilvipeite rakoilee"
-
-#: 3.0/us_weather.js:435 3.0/us_weather.js:436 3.0/us_weather.js:470
-#: 3.0/met_uk.js:582 3.0/met_uk.js:583 3.8/us_weather.js:299
-#: 3.8/us_weather.js:300 3.8/us_weather.js:334 3.8/met_uk.js:440
-#: 3.8/met_uk.js:441 3.8/visualcrossing.js:262
-msgid "Overcast"
-msgstr "Pilvistä"
-
-#: 3.0/us_weather.js:443 3.8/us_weather.js:307
-msgid "Clear and windy"
-msgstr "Selkeä ja tuulinen"
-
-#: 3.0/us_weather.js:450 3.8/us_weather.js:314
-msgid "Few clouds and windy"
-msgstr "Muutamia pilviä"
-
-#: 3.0/us_weather.js:457 3.8/us_weather.js:321
-msgid "Partly cloudy and windy"
-msgstr "Puolipilvistä"
-
-#: 3.0/us_weather.js:464 3.8/us_weather.js:328
-msgid "Mostly cloudy and windy"
-msgstr "Pilvipeite rakoilee"
-
-#: 3.0/us_weather.js:471 3.8/us_weather.js:335
-msgid "Overcast and windy"
-msgstr "Pilvistä"
-
-#: 3.0/us_weather.js:485 3.8/us_weather.js:349
-msgid "Snowy rain"
-msgstr "Sadekuuroja"
-
-#: 3.0/us_weather.js:520 3.8/us_weather.js:384
-msgid "Freezing rain and snow"
-msgstr "Kevyt räntäsade"
-
-#: 3.0/us_weather.js:571 3.0/utils.js:331 3.8/us_weather.js:435
-#: 3.8/utils.js:187
-msgid "Storm"
-msgstr "Myrsky"
-
-#: 3.0/us_weather.js:572 3.8/us_weather.js:436
-msgid "Tropical storm"
-msgstr "Trooppinen myrsky"
-
-#: 3.0/met_uk.js:316 3.8/met_uk.js:154
+#: 3.0/met_uk.js:316 3.8/weather-applet.js:9836
 msgid "Visibility"
 msgstr "Näkyvyys"
+
+#: 3.0/met_uk.js:340 3.0/openWeatherMap.js:190 3.0/us_weather.js:334
+#: 3.0/weatherbit.js:212 3.8/weather-applet.js:9864 3.8/weather-applet.js:10722
+#: 3.8/weather-applet.js:11619 3.8/weather-applet.js:12564
+msgid "Failed to Process Current Weather Info"
+msgstr "Säätietojen käsittely epäonnistui"
+
+#: 3.0/met_uk.js:364 3.0/met_uk.js:400 3.0/us_weather.js:371
+#: 3.0/weatherbit.js:239 3.0/weatherbit.js:274 3.8/weather-applet.js:9655
+#: 3.8/weather-applet.js:9689 3.8/weather-applet.js:11645
+#: 3.8/weather-applet.js:11679 3.8/weather-applet.js:12366
+msgid "Failed to Process Forecast Info"
+msgstr "Forecast tietojen käsittely epäonnistui"
 
 #: 3.0/met_uk.js:408
 msgid "Very poor - Less than"
@@ -910,329 +776,382 @@ msgstr "Todella hyvä - välillä"
 msgid "Excellent - More than"
 msgstr "Erinomainen - enemmän kuin"
 
-#: 3.0/met_uk.js:421 3.0/applet.js:1206 3.8/uiBar.js:94 3.8/met_uk.js:279
-msgid "mi"
-msgstr "ml"
+#: 3.0/met_uk.js:561 3.0/met_uk.js:562 3.0/openWeatherMap.js:401
+#: 3.8/weather-applet.js:10056 3.8/weather-applet.js:10057
+#: 3.8/weather-applet.js:10934 3.8/weather-applet.js:13067
+msgid "Mist"
+msgstr "Sumu"
 
-#: 3.0/met_uk.js:422 3.0/applet.js:1207 3.8/uiBar.js:95 3.8/met_uk.js:280
-msgid "km"
-msgstr "km"
+#: 3.0/met_uk.js:582 3.0/met_uk.js:583 3.0/us_weather.js:435
+#: 3.0/us_weather.js:436 3.0/us_weather.js:470 3.8/weather-applet.js:10077
+#: 3.8/weather-applet.js:10078 3.8/weather-applet.js:12646
+#: 3.8/weather-applet.js:12647 3.8/weather-applet.js:12681
+#: 3.8/weather-applet.js:13111
+msgid "Overcast"
+msgstr "Pilvistä"
 
-#: 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/met_uk.js:448 3.8/met_uk.js:455
+#: 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/weather-applet.js:10085
+#: 3.8/weather-applet.js:10092
 msgid "Light rain shower"
 msgstr "Kevyttä sadetta"
 
-#: 3.0/met_uk.js:618 3.0/met_uk.js:625 3.8/met_uk.js:476 3.8/met_uk.js:483
+#: 3.0/met_uk.js:603 3.0/met_uk.js:604 3.0/openWeatherMap.js:373
+#: 3.0/yahoo.js:445 3.8/weather-applet.js:10098 3.8/weather-applet.js:10099
+#: 3.8/weather-applet.js:10906 3.8/weather-applet.js:12164
+#: 3.8/weather-applet.js:12165 3.8/weather-applet.js:12220
+#: 3.8/weather-applet.js:13033 3.8/weather-applet.js:14417
+#: 3.8/weather-applet.js:14418
+msgid "Drizzle"
+msgstr "Tihkusadetta"
+
+#: 3.0/met_uk.js:618 3.0/met_uk.js:625 3.8/weather-applet.js:10113
+#: 3.8/weather-applet.js:10120
 msgid "Heavy rain shower"
 msgstr "Rankkaa sadetta"
 
-#: 3.0/met_uk.js:639 3.0/met_uk.js:646 3.8/met_uk.js:497 3.8/met_uk.js:504
+#: 3.0/met_uk.js:639 3.0/met_uk.js:646 3.8/weather-applet.js:10134
+#: 3.8/weather-applet.js:10141
 msgid "Sleet shower"
-msgstr "Lumikuuroja"
+msgstr "Räntäkuuroja"
 
-#: 3.0/met_uk.js:660 3.0/met_uk.js:667 3.8/met_uk.js:518 3.8/met_uk.js:525
+#: 3.0/met_uk.js:659 3.0/met_uk.js:666 3.0/met_uk.js:673 3.0/met_uk.js:674
+#: 3.0/yahoo.js:453 3.8/weather-applet.js:10154 3.8/weather-applet.js:10161
+#: 3.8/weather-applet.js:10168 3.8/weather-applet.js:10169
+#: 3.8/weather-applet.js:13109 3.8/weather-applet.js:14054
+#: 3.8/weather-applet.js:14055 3.8/weather-applet.js:14473
+#: 3.8/weather-applet.js:14474
+msgid "Hail"
+msgstr "Rakeita"
+
+#: 3.0/met_uk.js:660 3.0/met_uk.js:667 3.8/weather-applet.js:10155
+#: 3.8/weather-applet.js:10162
 msgid "Hail shower"
 msgstr "Raekuurot"
 
-#: 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/met_uk.js:539 3.8/met_uk.js:546
+#: 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/weather-applet.js:10176
+#: 3.8/weather-applet.js:10183
 msgid "Light snow shower"
 msgstr "Kevyt lumisade"
 
-#: 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/met_uk.js:560 3.8/met_uk.js:567
+#: 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/weather-applet.js:10197
+#: 3.8/weather-applet.js:10204
 msgid "Heavy snow shower"
-msgstr "Märkää lunta"
+msgstr "Kova lumisade"
 
 #: 3.0/met_uk.js:722 3.0/met_uk.js:729 3.0/met_uk.js:736 3.0/met_uk.js:737
-#: 3.8/met_uk.js:580 3.8/met_uk.js:587 3.8/met_uk.js:594 3.8/met_uk.js:595
+#: 3.8/weather-applet.js:10217 3.8/weather-applet.js:10224
+#: 3.8/weather-applet.js:10231 3.8/weather-applet.js:10232
 msgid "Thunder"
 msgstr "Ukkosmyrskyjä"
 
-#: 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/met_uk.js:581 3.8/met_uk.js:588
+#: 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/weather-applet.js:10218
+#: 3.8/weather-applet.js:10225
 msgid "Thunder shower"
 msgstr "Ukkoskuuroja"
 
-#: 3.0/applet.js:167 3.0/applet.js:427 3.0/applet.js:2132 3.8/main.js:31
-msgid "Error"
-msgstr "Virhe"
+#: 3.0/openWeatherMap.js:238 3.8/weather-applet.js:10777
+msgid "Please make sure Location is in the correct format in the Settings"
+msgstr "Varmista, että asetuksissa sijainti on oikeassa muodossa"
 
-#: 3.0/applet.js:168 3.0/applet.js:170 3.0/applet.js:172 3.0/applet.js:175
-#: 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180 3.0/applet.js:181
-#: 3.8/main.js:32 3.8/main.js:34 3.8/main.js:36 3.8/main.js:39 3.8/main.js:42
-#: 3.8/main.js:43 3.8/main.js:44 3.8/main.js:45
-msgid "Service Error"
-msgstr "Palvelussa virhe"
+#: 3.0/openWeatherMap.js:242 3.8/weather-applet.js:10781
+msgid "Make sure you entered the correct key in settings"
+msgstr "Varmista, että annoit asetuksissa oikean avaimen"
 
-#: 3.0/applet.js:169 3.8/main.js:33
-msgid "Incorrect API Key"
-msgstr "Väärä API avain"
-
-#: 3.0/applet.js:171 3.8/main.js:35
-msgid "Incorrect Location Format"
-msgstr "Väärä muoto sijainnissa"
-
-#: 3.0/applet.js:173 3.8/main.js:37
-msgid "Key Blocked"
-msgstr "Avain estetty"
-
-#: 3.0/applet.js:174 3.8/main.js:38
-msgid "Can't find location"
-msgstr "Sijaintia ei löytynyt"
-
-#: 3.0/applet.js:176 3.8/main.js:40
-msgid "No Api Key"
-msgstr "Ei API avainta"
-
-#: 3.0/applet.js:177 3.8/main.js:41
-msgid "No Location"
-msgstr "Ei sijaintia"
-
-#: 3.0/applet.js:182 3.8/main.js:46
-msgid "Missing Packages"
-msgstr "Puuttuvat paketit"
-
-#: 3.0/applet.js:183 3.8/main.js:47
-msgid "Location not covered"
-msgstr "Sijaintia ei löytynyt"
-
-#: 3.0/applet.js:194 3.0/applet.js:379 3.8/notification_service.js:9
-msgid "Weather Applet"
-msgstr "Sää"
-
-#: 3.0/applet.js:218 3.8/main.js:244
-msgid "..."
-msgstr "..."
-
-#: 3.0/applet.js:219 3.8/main.js:245
-msgid "Click to open"
-msgstr "Avaa napsauttamalla"
-
-#: 3.0/applet.js:233 3.0/applet.js:1245 3.8/main.js:256
-#: 3.8/uiCurrentWeather.js:127
-msgid "Refresh"
-msgstr "Päivitä"
-
-#: 3.0/applet.js:273
-msgid "API returned status code between 400 and 500"
-msgstr "API palautti tilakoodin väliltä 400–500"
-
-#: 3.0/applet.js:427 3.0/applet.js:2033 3.0/applet.js:2037 3.0/applet.js:2041
-#: 3.0/applet.js:2050 3.0/applet.js:2063 3.0/applet.js:2067 3.0/applet.js:2071
-#: 3.0/applet.js:2084 3.0/applet.js:2132 3.8/locationstore.js:130
-#: 3.8/locationstore.js:134 3.8/locationstore.js:138
-msgid "Location Store"
-msgstr "Sijainti"
-
-#: 3.0/applet.js:427
-msgid "You can't save a location obtained automatically, sorry"
-msgstr "Et voi tallentaa automaattisesti hankittua sijaintia"
-
-#: 3.0/applet.js:602
-msgid "Could not get weather information"
-msgstr "Säätietoja ei voitu saada"
-
-#: 3.0/applet.js:625 3.8/main.js:128
+#: 3.0/openWeatherMap.js:246 3.0/openWeatherMap.js:266
+#: 3.8/weather-applet.js:10586 3.8/weather-applet.js:10785
 msgid ""
-"Unexpected Error While Refreshing Weather, please see log in Looking Glass"
-msgstr "Odottamaton virhe päivitettäessä säätietoja, katso Looking Glass loki"
-
-#: 3.0/applet.js:671 3.8/main.js:376
-msgid ""
-"Could not update weather for a while...\n"
-"are you connected to the internet?"
+"Location not found, make sure location is available or it is in the correct "
+"format"
 msgstr ""
-"Säätietoja ei päivitetty hetkeen...\n"
-"oletko yhteydessä internettiin?"
+"Sijaintia ei löydy. Varmista, että paikkakunta on käytettävissä tai oikein "
+"kirjoitettu"
 
-#: 3.0/applet.js:685
-msgid "Network Error, please check logs in Looking Glass"
-msgstr "Verkko virhe, tarkista Looking Glass loki"
+#: 3.0/openWeatherMap.js:250 3.8/weather-applet.js:10789
+msgid "If this problem persists, please contact the Author of this applet"
+msgstr "Jos ongelma jatkuu, ota yhteyttä tämän sovelman tekijään"
 
-#: 3.0/applet.js:970 3.0/applet.js:1111
-msgid "As of"
-msgstr "Klo"
+#: 3.0/openWeatherMap.js:254 3.8/weather-applet.js:10793
+msgid "Unknown Error, please see the logs in Looking Glass"
+msgstr "Tuntematon virhe, katso Looking Glass loki"
 
-#: 3.0/applet.js:1109 3.8/uiBar.js:33
-msgid "Powered by"
-msgstr "Tiedot toimitti"
+#: 3.0/openWeatherMap.js:362 3.8/weather-applet.js:10895
+msgid "Thunderstorm with light rain"
+msgstr "Ukkosta ja vähän sadetta"
 
-#: 3.0/applet.js:1114
-msgid "from you"
-msgstr "sinulta"
+#: 3.0/openWeatherMap.js:363 3.8/weather-applet.js:10896
+msgid "Thunderstorm with rain"
+msgstr "Ukkosta ja sadetta"
 
-#: 3.0/applet.js:1133 3.8/uiHourlyForecasts.js:178
-msgid "mm"
-msgstr "mm"
+#: 3.0/openWeatherMap.js:364 3.8/weather-applet.js:10897
+msgid "Thunderstorm with heavy rain"
+msgstr "Ukkosta voimakas sade"
 
-#: 3.0/applet.js:1228 3.8/ui.js:126
-msgid "Loading current weather ..."
-msgstr "Ladataan säätietoja ..."
+#: 3.0/openWeatherMap.js:365 3.8/weather-applet.js:10898
+msgid "Light thunderstorm"
+msgstr "Mahdollista ukkosta"
 
-#: 3.0/applet.js:1231 3.8/ui.js:129
-msgid "Loading future weather ..."
-msgstr "Ladataan tulevia säätietoja ..."
+#: 3.0/openWeatherMap.js:367 3.8/weather-applet.js:10900
+msgid "Heavy thunderstorm"
+msgstr "Voimakkaita ukkosmyrskyjä"
 
-#: 3.0/applet.js:1281 3.8/uiCurrentWeather.js:76
-msgid "Loading ..."
-msgstr "Ladataan ..."
+#: 3.0/openWeatherMap.js:368 3.8/weather-applet.js:10901
+msgid "Ragged thunderstorm"
+msgstr "Yksittäisiä ukkosmyrskyjä"
 
-#: 3.0/applet.js:1330 3.8/uiCurrentWeather.js:95
-msgid "Temperature"
-msgstr "Lämpötila"
+#: 3.0/openWeatherMap.js:369 3.8/weather-applet.js:10902
+msgid "Thunderstorm with light drizzle"
+msgstr "Ukkosta vähällä tihkusateella"
 
-#: 3.0/applet.js:1331 3.8/uiCurrentWeather.js:96
-msgid "Humidity"
-msgstr "Kosteus"
+#: 3.0/openWeatherMap.js:370 3.8/weather-applet.js:10903
+msgid "Thunderstorm with drizzle"
+msgstr "Ukkosta tihkusadetta"
 
-#: 3.0/applet.js:1332 3.8/uiCurrentWeather.js:97
-msgid "Pressure"
-msgstr "Ilmanpaine"
+#: 3.0/openWeatherMap.js:371 3.8/weather-applet.js:10904
+msgid "Thunderstorm with heavy drizzle"
+msgstr "Ukkosta voimakkaalla tihkusateella"
 
-#: 3.0/applet.js:1333 3.8/climacellV4.js:170 3.8/climacellV4.js:177
-#: 3.8/climacellV4.js:178 3.8/climacellV4.js:184 3.8/uiCurrentWeather.js:98
-msgid "Wind"
-msgstr "Tuuli"
-
-#: 3.0/applet.js:1640 3.8/config.js:162
-msgid "Make sure you entered a location or use Automatic location instead"
-msgstr "Varmista, että annoit sijainnin tai käytä automaattista sijaintia"
-
-#: 3.0/applet.js:1878 3.8/nominatim.js:30
-msgid "Could not find location based on address, please check if it's right"
-msgstr ""
-"Sijaintia ei löytynyt osoitteen perusteella, tarkista että se on oikein"
-
-#: 3.0/applet.js:1902 3.8/nominatim.js:51
-msgid "Failed to call Geolocation API, see Looking Glass for errors."
-msgstr "Paikannuksen kutsuminen epäonnistui, katso Looking Glass virheet."
-
-#: 3.0/applet.js:2033 3.0/applet.js:2037 3.8/locationstore.js:130
-#: 3.8/locationstore.js:134
-msgid "Warning"
-msgstr "Varoitus"
-
-#: 3.0/applet.js:2033 3.8/locationstore.js:130
-msgid "You can only save correct locations when the applet is not refreshing"
-msgstr "Voit tallentaa oikeat sijainnit vain, kun sovelma ei ole päivittymässä"
-
-#: 3.0/applet.js:2037 3.8/locationstore.js:134
-msgid "You can't save an incorrect location"
-msgstr "Et voi tallentaa virheellistä sijaintia"
-
-#: 3.0/applet.js:2041 3.0/applet.js:2063 3.0/applet.js:2067 3.0/applet.js:2071
-#: 3.8/locationstore.js:138
-msgid "Info"
-msgstr "Tietoa"
-
-#: 3.0/applet.js:2041 3.8/locationstore.js:138
-msgid "Location is already saved"
-msgstr "Sijainti on jo tallennettu"
-
-#: 3.0/applet.js:2050 3.0/applet.js:2084
-msgid "Success"
-msgstr "Onnistui"
-
-#: 3.0/applet.js:2050
-msgid "Location is saved to library"
-msgstr "Sijainti on tallennettu luetteloon"
-
-#: 3.0/applet.js:2063
-msgid "You can't remove a location while the applet is refreshing"
-msgstr "Et voi poistaa sijaintia, kun sovelma on päivittymässä"
-
-#: 3.0/applet.js:2067
-msgid "You can't remove an incorrect location"
-msgstr "Et voi poistaa virheellistä sijaintia"
-
-#: 3.0/applet.js:2071
-msgid "Location is not in storage, can't delete"
-msgstr "Sijainti ei ole varastossa, ei voi poistaa"
-
-#: 3.0/applet.js:2084
-msgid "Location is deleted from library"
-msgstr "Sijainti on poistettu luettelosta"
-
-#: 3.0/applet.js:2132
-msgid ""
-"Failed to load in data from location storage, please see the logs for more "
-"information"
-msgstr ""
-"Sijainnin tietojen lataaminen varastosta epäonnistui, katso lisätietoja "
-"lokista"
-
-#: 3.0/climacell.js:224
-msgid ""
-"Please enter API key in settings,\n"
-"or get one first on https://developer.climacell.co/sign-up"
-msgstr ""
-"Anna API-avain asetuksissa,\n"
-"tai hanki se ensin https://developer.climacell.co/sign-up"
-
-#: 3.0/climacell.js:248 3.8/climacellV4.js:40 3.8/climacell.js:153
-msgid ""
-"Please Make sure you\n"
-"entered the API key what you have from Climacell"
-msgstr ""
-"Varmista, että sinun\n"
-"antama API-avain on peräisin yritykseltä Climacell"
-
-#: 3.0/climacell.js:280 3.8/climacellV4.js:269 3.8/climacell.js:185
-#: 3.8/visualcrossing.js:206
-msgid "Heavy freezing rain"
-msgstr "Jäätävää sadetta"
-
-#: 3.0/climacell.js:294 3.8/climacellV4.js:262 3.8/climacell.js:199
-#: 3.8/visualcrossing.js:208
-msgid "Light freezing rain"
-msgstr "Jäätävää sadetta"
-
-#: 3.0/climacell.js:301 3.8/climacell.js:206
-msgid "Light freezing drizzle"
-msgstr "Jäätävää tihkusadetta"
-
-#: 3.0/climacell.js:302 3.8/climacellV4.js:248 3.8/climacell.js:207
-msgid "Freezing drizzle"
-msgstr "Jäätyvä tihkusade"
-
-#: 3.0/climacell.js:308 3.0/climacell.js:309 3.8/climacell.js:213
-#: 3.8/climacell.js:214 3.8/visualcrossing.js:188
-msgid "Light drizzle"
+#: 3.0/openWeatherMap.js:372 3.8/weather-applet.js:10905
+msgid "Light intensity drizzle"
 msgstr "Kevyt tihkusade"
 
-#: 3.0/climacell.js:315 3.8/climacellV4.js:283 3.8/climacell.js:220
-msgid "Heavy ice pellets"
-msgstr "Raskaat rakeet"
+#: 3.0/openWeatherMap.js:374 3.8/weather-applet.js:10907
+msgid "Heavy intensity drizzle"
+msgstr "Voimakkaasti tihkua"
 
-#: 3.0/climacell.js:316 3.0/climacell.js:322 3.0/climacell.js:323
-#: 3.0/climacell.js:330 3.8/climacellV4.js:275 3.8/climacellV4.js:276
-#: 3.8/climacellV4.js:282 3.8/climacellV4.js:289 3.8/climacell.js:221
-#: 3.8/climacell.js:227 3.8/climacell.js:228 3.8/climacell.js:235
-msgid "Ice pellets"
-msgstr "Rakeita"
+#: 3.0/openWeatherMap.js:375 3.8/weather-applet.js:10908
+msgid "Light intensity drizzle rain"
+msgstr "Kova sadekuuro"
 
-#: 3.0/climacell.js:329 3.8/climacellV4.js:290 3.8/climacell.js:234
-msgid "Light ice pellets"
-msgstr "Kevyet rakeet"
+#: 3.0/openWeatherMap.js:376 3.8/weather-applet.js:10909
+msgid "Drizzle rain"
+msgstr "Tihkusadetta"
 
-#: 3.0/climacell.js:357 3.0/climacell.js:358 3.8/climacellV4.js:226
-#: 3.8/climacellV4.js:227 3.8/climacell.js:262 3.8/climacell.js:263
-msgid "Flurries"
-msgstr "Puuskatuuli"
+#: 3.0/openWeatherMap.js:377 3.8/weather-applet.js:10910
+msgid "Heavy intensity drizzle rain"
+msgstr "Voimakkaasti tihkusadetta"
 
-#: 3.0/climacell.js:371 3.0/climacell.js:372 3.8/climacellV4.js:164
-#: 3.8/climacell.js:276 3.8/climacell.js:277
-msgid "Light fog"
-msgstr "Heikko sumu"
+#: 3.0/openWeatherMap.js:378 3.8/weather-applet.js:10911
+msgid "Shower rain and drizzle"
+msgstr "Sadetta ja tihkusadetta"
 
-#: 3.0/climacell.js:406 3.0/climacell.js:407 3.8/climacellV4.js:135
-#: 3.8/climacellV4.js:136 3.8/climacell.js:311 3.8/climacell.js:312
-msgid "Mostly clear"
-msgstr "Pilvipeite rakoilee"
+#: 3.0/openWeatherMap.js:379 3.8/weather-applet.js:10912
+msgid "Heavy shower rain and drizzle"
+msgstr "Voimakas sade ja tihkua"
 
-#: 3.0/utils.js:146 3.8/utils.js:84
+#: 3.0/openWeatherMap.js:380 3.8/weather-applet.js:10913
+msgid "Shower drizzle"
+msgstr "Tihkusadetta"
+
+#: 3.0/openWeatherMap.js:382 3.8/weather-applet.js:10915
+#: 3.8/weather-applet.js:13345 3.8/weather-applet.js:13346
+msgid "Moderate rain"
+msgstr "Kova sade"
+
+#: 3.0/openWeatherMap.js:383 3.8/weather-applet.js:10916
+msgid "Heavy intensity rain"
+msgstr "Voimakas sade"
+
+#: 3.0/openWeatherMap.js:384 3.8/weather-applet.js:10917
+msgid "Very heavy rain"
+msgstr "Erittäin voimakas sade"
+
+#: 3.0/openWeatherMap.js:385 3.8/weather-applet.js:10918
+msgid "Extreme rain"
+msgstr "Äärimmäinen sade"
+
+#: 3.0/openWeatherMap.js:387 3.8/weather-applet.js:10920
+msgid "Light intensity shower rain"
+msgstr "Kevyttä sadetta"
+
+#: 3.0/openWeatherMap.js:388 3.8/weather-applet.js:10921
+msgid "Shower rain"
+msgstr "Sadekuuroja"
+
+#: 3.0/openWeatherMap.js:389 3.8/weather-applet.js:10922
+msgid "Heavy intensity shower rain"
+msgstr "Voimakas sade"
+
+#: 3.0/openWeatherMap.js:390 3.8/weather-applet.js:10923
+msgid "Ragged shower rain"
+msgstr "Hajanainen sade"
+
+#: 3.0/openWeatherMap.js:395 3.8/weather-applet.js:10928
+msgid "Shower sleet"
+msgstr "Jäätävä tihkusade"
+
+#: 3.0/openWeatherMap.js:396 3.8/weather-applet.js:10929
+msgid "Light rain and snow"
+msgstr "Kevyttä sadetta ja lunta"
+
+#: 3.0/openWeatherMap.js:397 3.8/weather-applet.js:10930
+#: 3.8/weather-applet.js:13352 3.8/weather-applet.js:13353
+#: 3.8/weather-applet.js:13359 3.8/weather-applet.js:13394
+#: 3.8/weather-applet.js:13401
+msgid "Rain and snow"
+msgstr "Sadetta ja lunta"
+
+#: 3.0/openWeatherMap.js:398 3.8/weather-applet.js:10931
+msgid "Light shower snow"
+msgstr "Kevyt lumisade"
+
+#: 3.0/openWeatherMap.js:399 3.8/weather-applet.js:10932
+msgid "Shower snow"
+msgstr "Lumisadetta"
+
+#: 3.0/openWeatherMap.js:400 3.8/weather-applet.js:10933
+msgid "Heavy shower snow"
+msgstr "Voimakasta lumisadetta"
+
+#: 3.0/openWeatherMap.js:402 3.0/us_weather.js:585 3.0/us_weather.js:586
+#: 3.8/weather-applet.js:10935 3.8/weather-applet.js:12796
+#: 3.8/weather-applet.js:12797 3.8/weather-applet.js:14508
+#: 3.8/weather-applet.js:14509
+msgid "Smoke"
+msgstr "Savua"
+
+#: 3.0/openWeatherMap.js:403 3.0/us_weather.js:592 3.0/us_weather.js:593
+#: 3.0/yahoo.js:457 3.8/weather-applet.js:10936 3.8/weather-applet.js:12803
+#: 3.8/weather-applet.js:12804 3.8/weather-applet.js:14501
+#: 3.8/weather-applet.js:14502
+msgid "Haze"
+msgstr "Usvaa"
+
+#: 3.0/openWeatherMap.js:404 3.8/weather-applet.js:10937
+msgid "Sand, dust whirls"
+msgstr "Hiekka, pölypyörteet"
+
+#: 3.0/openWeatherMap.js:406 3.8/weather-applet.js:10939
+msgid "Sand"
+msgstr "Hiekka"
+
+#: 3.0/openWeatherMap.js:407 3.0/us_weather.js:578 3.0/us_weather.js:579
+#: 3.0/yahoo.js:455 3.8/weather-applet.js:10940 3.8/weather-applet.js:12789
+#: 3.8/weather-applet.js:12790 3.8/weather-applet.js:14487
+#: 3.8/weather-applet.js:14488
+msgid "Dust"
+msgstr "Pölyä"
+
+#: 3.0/openWeatherMap.js:408 3.8/weather-applet.js:10941
+msgid "Volcanic ash"
+msgstr "Vulkaaninen tuhka"
+
+#: 3.0/openWeatherMap.js:409 3.8/weather-applet.js:10942
+#: 3.8/weather-applet.js:13101
+msgid "Squalls"
+msgstr "Tuulenpuuskia"
+
+#: 3.0/openWeatherMap.js:410 3.0/us_weather.js:557 3.0/us_weather.js:558
+#: 3.0/yahoo.js:436 3.8/weather-applet.js:10943 3.8/weather-applet.js:12768
+#: 3.8/weather-applet.js:12769 3.8/weather-applet.js:14360
+#: 3.8/weather-applet.js:14361
+msgid "Tornado"
+msgstr "Tornado"
+
+#: 3.0/openWeatherMap.js:413 3.8/weather-applet.js:10946
+msgid "Sky is clear"
+msgstr "Taivas on selkeä"
+
+#: 3.0/openWeatherMap.js:414 3.8/weather-applet.js:10947
+msgid "Clouds"
+msgstr "Pilvinen"
+
+#: 3.0/openWeatherMap.js:415 3.0/us_weather.js:414 3.0/us_weather.js:415
+#: 3.0/us_weather.js:449 3.8/weather-applet.js:10948
+#: 3.8/weather-applet.js:12625 3.8/weather-applet.js:12626
+#: 3.8/weather-applet.js:12660
+msgid "Few clouds"
+msgstr "Muutamia pilviä"
+
+#: 3.0/openWeatherMap.js:416 3.8/weather-applet.js:10949
+msgid "Scattered clouds"
+msgstr "Hajanaiset pilvet"
+
+#: 3.0/openWeatherMap.js:417 3.8/weather-applet.js:10950
+msgid "Broken clouds"
+msgstr "Hajanaisia pilviä"
+
+#: 3.0/openWeatherMap.js:418 3.8/weather-applet.js:10951
+msgid "Overcast clouds"
+msgstr "Pilvistä"
+
+#: 3.0/us_weather.js:120
+msgid "Could not get forecast for your area"
+msgstr "Alueellesi ei saatu ennustetta"
+
+#: 3.0/us_weather.js:231 3.8/weather-applet.js:12323
+msgid "Location is outside US, please use a different provider."
+msgstr "Sijainti on USA:n ulkopuolella, käytä toista palvelua."
+
+#: 3.0/us_weather.js:394 3.8/weather-applet.js:12387
+msgid "Failed to Process Hourly Forecast Info"
+msgstr "Forecast tuntiennuste epäonnistui"
+
+#: 3.0/us_weather.js:443 3.8/weather-applet.js:12654
+msgid "Clear and windy"
+msgstr "Selkeä ja tuulinen"
+
+#: 3.0/us_weather.js:450 3.8/weather-applet.js:12661
+msgid "Few clouds and windy"
+msgstr "Muutamia pilviä"
+
+#: 3.0/us_weather.js:457 3.8/weather-applet.js:12668
+msgid "Partly cloudy and windy"
+msgstr "Puolipilvistä ja tuulista"
+
+#: 3.0/us_weather.js:464 3.8/weather-applet.js:12675
+msgid "Mostly cloudy and windy"
+msgstr "Enimmäkseen puolipilvistä ja tuulista"
+
+#: 3.0/us_weather.js:471 3.8/weather-applet.js:12682
+msgid "Overcast and windy"
+msgstr "Pilvistä ja tuulista"
+
+#: 3.0/us_weather.js:485 3.8/weather-applet.js:12696
+msgid "Snowy rain"
+msgstr "Luminen sade"
+
+#: 3.0/us_weather.js:520 3.8/weather-applet.js:12731
+msgid "Freezing rain and snow"
+msgstr "Jäätävää sadetta ja lunta"
+
+#: 3.0/us_weather.js:564 3.0/us_weather.js:565 3.0/utils.js:336
+#: 3.0/yahoo.js:438 3.8/weather-applet.js:8715 3.8/weather-applet.js:12775
+#: 3.8/weather-applet.js:12776 3.8/weather-applet.js:14374
+#: 3.8/weather-applet.js:14375
+msgid "Hurricane"
+msgstr "Hurrikaani"
+
+#: 3.0/us_weather.js:571 3.0/utils.js:331 3.8/weather-applet.js:8710
+#: 3.8/weather-applet.js:12782
+msgid "Storm"
+msgstr "Myrsky"
+
+#: 3.0/us_weather.js:572 3.8/weather-applet.js:12783
+msgid "Tropical storm"
+msgstr "Trooppinen myrsky"
+
+#: 3.0/us_weather.js:599 3.0/us_weather.js:600 3.0/yahoo.js:470
+#: 3.8/weather-applet.js:12810 3.8/weather-applet.js:12811
+#: 3.8/weather-applet.js:14606 3.8/weather-applet.js:14607
+msgid "Hot"
+msgstr "Kuuma"
+
+#: 3.0/us_weather.js:606 3.0/us_weather.js:607 3.0/yahoo.js:461
+#: 3.8/weather-applet.js:12817 3.8/weather-applet.js:12818
+msgid "Cold"
+msgstr "Kylmä"
+
+#: 3.0/us_weather.js:613 3.0/us_weather.js:614 3.0/yahoo.js:477
+#: 3.8/weather-applet.js:12824 3.8/weather-applet.js:12825
+#: 3.8/weather-applet.js:14655 3.8/weather-applet.js:14656
+msgid "Blizzard"
+msgstr "Myrsky"
+
+#: 3.0/utils.js:146 3.8/weather-applet.js:8588
 msgid "Today"
 msgstr "Tänään"
 
-#: 3.0/utils.js:148 3.8/utils.js:86
+#: 3.0/utils.js:148 3.8/weather-applet.js:8590
 msgid "Tomorrow"
 msgstr "Huomenna"
 
@@ -1264,249 +1183,633 @@ msgstr "Perjantai"
 msgid "Saturday"
 msgstr "Launtai"
 
-#: 3.0/utils.js:301 3.8/utils.js:157
+#: 3.0/utils.js:301 3.8/weather-applet.js:8680
 msgid "Calm"
 msgstr "Tyyntä"
 
-#: 3.0/utils.js:304 3.8/utils.js:160
+#: 3.0/utils.js:304 3.8/weather-applet.js:8683
 msgid "Light air"
 msgstr "Kevyt tuuli"
 
-#: 3.0/utils.js:307 3.8/utils.js:163
+#: 3.0/utils.js:307 3.8/weather-applet.js:8686
 msgid "Light breeze"
 msgstr "Heikkoa tuulta"
 
-#: 3.0/utils.js:310 3.8/utils.js:166
+#: 3.0/utils.js:310 3.8/weather-applet.js:8689
 msgid "Gentle breeze"
 msgstr "Hento tuulenvire"
 
-#: 3.0/utils.js:313 3.8/utils.js:169
+#: 3.0/utils.js:313 3.8/weather-applet.js:8692
 msgid "Moderate breeze"
 msgstr "Kohtalainen tuuli"
 
-#: 3.0/utils.js:316 3.8/utils.js:172
+#: 3.0/utils.js:316 3.8/weather-applet.js:8695
 msgid "Fresh breeze"
 msgstr "Raikas tuuli"
 
-#: 3.0/utils.js:319 3.8/utils.js:175
+#: 3.0/utils.js:319 3.8/weather-applet.js:8698
 msgid "Strong breeze"
 msgstr "Voimakas tuuli"
 
-#: 3.0/utils.js:322 3.8/utils.js:178
+#: 3.0/utils.js:322 3.8/weather-applet.js:8701
 msgid "Near gale"
 msgstr "Lähellä myrskyä"
 
-#: 3.0/utils.js:325 3.8/utils.js:181
+#: 3.0/utils.js:325 3.8/weather-applet.js:8704
 msgid "Gale"
 msgstr "Navakka tuuli"
 
-#: 3.0/utils.js:328 3.8/utils.js:184
+#: 3.0/utils.js:328 3.8/weather-applet.js:8707
 msgid "Strong gale"
 msgstr "Myrsky"
 
-#: 3.0/utils.js:334 3.8/utils.js:190
+#: 3.0/utils.js:334 3.8/weather-applet.js:8713
 msgid "Violent storm"
 msgstr "Raju myrsky"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8863
 msgid "N"
 msgstr "Pohjoinen"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8863
 msgid "NE"
 msgstr "Koillinen"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8863
 msgid "E"
 msgstr "Itä"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8863
 msgid "SE"
 msgstr "Kaakko"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8863
 msgid "S"
 msgstr "Etelä"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8863
 msgid "SW"
 msgstr "Lounas"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8863
 msgid "W"
 msgstr "Länsi"
 
-#: 3.0/utils.js:429
+#: 3.0/utils.js:429 3.8/weather-applet.js:8863
 msgid "NW"
 msgstr "Luode"
 
-#: 3.8/climacellV4.js:171
-msgid "Light wind"
-msgstr "Kevyt tuuli"
+#: 3.0/weatherbit.js:312
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://www.weatherbit.io/account/create"
+msgstr ""
+"Anna API-avain asetuksissa,\n"
+"hanki ne ensin https://www.weatherbit.io/account/create"
 
-#: 3.8/climacellV4.js:185
-msgid "Strong wind"
-msgstr "Kova tuuli"
+#: 3.0/yahoo.js:78
+msgid ""
+"Unknown Error happened while calling Yahoo bridge,\n"
+" see Looking Glass log for errors"
+msgstr ""
+"Tapahtui tuntematon virhe Yahoo kutsussa,\n"
+" katso lokista Looking Glass virheet"
 
-#: 3.8/weatherbit.js:230
-msgid "API key doesn't provide access to Hourly Weather, skipping"
-msgstr "API-avain ei tarjoa pääsyä tunti ennusteisiin, ohitetaan"
+#: 3.0/yahoo.js:91
+msgid ""
+"Yahoo bridge responded in bad format,\n"
+" see Looking Glass log for errors"
+msgstr ""
+"Yahoo vastasi väärässä muodossa,\n"
+" katso lokista Looking Glass virheet"
 
-#: 3.8/main.js:104
-msgid "This provider requires an API key to operate"
-msgstr "Tämä palvelu vaatii API-avaimen toimiakseen"
+#: 3.0/yahoo.js:177
+msgid "Missing package"
+msgstr "Puuttuva paketti"
 
-#: 3.8/main.js:137 3.8/uiBar.js:36
-msgid "As of {lastUpdatedTime}"
-msgstr "Klo {lastUpdatedTime}"
+#: 3.0/yahoo.js:177 3.0/yahoo.js:179
+msgid "Please install '"
+msgstr "Asenna '"
 
-#: 3.8/uiBar.js:42
-msgid "{distance}{distanceUnit} from you"
-msgstr "{distance}{distanceUnit} sinusta"
+#: 3.0/yahoo.js:177 3.0/yahoo.js:179
+msgid "', then refresh manually."
+msgstr "', päivitä sitten manuaalisesti."
 
-#: 3.8/yahoo.js:109 3.8/yahoo.js:116
-msgid "Please install '{missingPackage}', then refresh manually."
-msgstr "Asenna '{missingPackage}', sitten päivitä manuaalisesti."
+#: 3.0/yahoo.js:182
+msgid "Could not connect to Yahoo API."
+msgstr "Yahoo API ei vastaa."
 
-#: 3.8/met_uk.js:250
+#: 3.0/yahoo.js:186
+msgid ""
+"Unknown error happened while obtaining weather, see Looking Glass logs for "
+"more information"
+msgstr ""
+"Säätiedoissa tapahtui tuntematon virhe, katso lokista Looking Glass "
+"lisätietoja"
+
+#: 3.0/yahoo.js:437 3.8/weather-applet.js:14367 3.8/weather-applet.js:14368
+msgid "Tropical Storm"
+msgstr "Trooppinen myrsky"
+
+#: 3.0/yahoo.js:439
+msgid "Severe Thunderstorms"
+msgstr "Hajanaisia ukkosmyrskyjä"
+
+#: 3.0/yahoo.js:440 3.8/weather-applet.js:14388 3.8/weather-applet.js:14389
+msgid "Thunderstorms"
+msgstr "Ukkosmyrskyjä"
+
+#: 3.0/yahoo.js:441
+msgid "Mixed Rain and Snow"
+msgstr "Räntäsadetta"
+
+#: 3.0/yahoo.js:442
+msgid "Mixed Rain and Sleet"
+msgstr "Räntäsadetta ja loskaa"
+
+#: 3.0/yahoo.js:443
+msgid "Mixed Snow and Sleet"
+msgstr "Lumisadetta ja loskaa"
+
+#: 3.0/yahoo.js:444 3.8/weather-applet.js:14410 3.8/weather-applet.js:14411
+msgid "Freezing Drizzle"
+msgstr "Jäätävää tihkusadetta"
+
+#: 3.0/yahoo.js:446 3.8/weather-applet.js:14424 3.8/weather-applet.js:14425
+msgid "Freezing Rain"
+msgstr "Jäätävää sadetta"
+
+#: 3.0/yahoo.js:447 3.8/weather-applet.js:14431 3.8/weather-applet.js:14432
+msgid "Showers"
+msgstr "Sadetta"
+
+#: 3.0/yahoo.js:449
+msgid "Snow Flurries"
+msgstr "Lumikuuroja"
+
+#: 3.0/yahoo.js:450
+msgid "Light Snow Showers"
+msgstr "Kevyitä lumisateita"
+
+#: 3.0/yahoo.js:451 3.8/weather-applet.js:14459 3.8/weather-applet.js:14460
+msgid "Blowing Snow"
+msgstr "Lumipyry"
+
+#: 3.0/yahoo.js:456 3.8/weather-applet.js:13331 3.8/weather-applet.js:13332
+msgid "Foggy"
+msgstr "Sumua"
+
+#: 3.0/yahoo.js:458
+msgid "Smoky"
+msgstr "Savua"
+
+#: 3.0/yahoo.js:459
+msgid "Blustery"
+msgstr "Myrskyisä"
+
+#: 3.0/yahoo.js:460 3.8/weather-applet.js:14522 3.8/weather-applet.js:14523
+msgid "Windy"
+msgstr "Tuulinen"
+
+#: 3.0/yahoo.js:463 3.8/weather-applet.js:14543 3.8/weather-applet.js:14544
+#: 3.8/weather-applet.js:14550 3.8/weather-applet.js:14551
+msgid "Mostly Cloudy"
+msgstr "Enimmäkseen pilvistä"
+
+#: 3.0/yahoo.js:464 3.8/weather-applet.js:14061 3.8/weather-applet.js:14062
+#: 3.8/weather-applet.js:14068 3.8/weather-applet.js:14069
+#: 3.8/weather-applet.js:14557 3.8/weather-applet.js:14558
+#: 3.8/weather-applet.js:14564 3.8/weather-applet.js:14565
+msgid "Partly Cloudy"
+msgstr "Puolipilvistä"
+
+#: 3.0/yahoo.js:467 3.8/weather-applet.js:14592 3.8/weather-applet.js:14593
+msgid "Mostly Sunny"
+msgstr "Enimmäkseen aurinkoista"
+
+#: 3.0/yahoo.js:469 3.8/weather-applet.js:14599 3.8/weather-applet.js:14600
+msgid "Mixed Rain and Hail"
+msgstr "Sadetta ja rakeita"
+
+#: 3.0/yahoo.js:471 3.8/weather-applet.js:14613 3.8/weather-applet.js:14614
+msgid "Isolated Thunderstorms"
+msgstr "Yksittäisiä ukkoskuuroja"
+
+#: 3.0/yahoo.js:472 3.8/weather-applet.js:14620 3.8/weather-applet.js:14621
+#: 3.8/weather-applet.js:14676 3.8/weather-applet.js:14677
+msgid "Scattered Thunderstorms"
+msgstr "Hajanaisia ukkosmyrskyjä"
+
+#: 3.0/yahoo.js:473 3.8/weather-applet.js:14627 3.8/weather-applet.js:14628
+#: 3.8/weather-applet.js:14662 3.8/weather-applet.js:14663
+msgid "Scattered Showers"
+msgstr "Hajanaisia lumisateita"
+
+#: 3.0/yahoo.js:474 3.8/weather-applet.js:14634 3.8/weather-applet.js:14635
+msgid "Heavy Rain"
+msgstr "Voimakas sade"
+
+#: 3.0/yahoo.js:475 3.8/weather-applet.js:14641 3.8/weather-applet.js:14642
+#: 3.8/weather-applet.js:14669 3.8/weather-applet.js:14670
+msgid "Scattered Snow Showers"
+msgstr "Hajanaisia lumisateita"
+
+#: 3.0/yahoo.js:476 3.8/weather-applet.js:14648 3.8/weather-applet.js:14649
+msgid "Heavy Snow"
+msgstr "Voimakas lumisade"
+
+#: 3.0/yahoo.js:478
+msgid "Not Available"
+msgstr "Ei saatavilla"
+
+#: 3.0/yahoo.js:479
+msgid "Scattered Thundershowers"
+msgstr "Hajanaisia ukkosmyrskyjä"
+
+#: 3.8/weather-applet.js:9193
+msgid ""
+"Could not retrieve logs, log file was not found under path\n"
+" {logFilePath}"
+msgstr ""
+"Lokeja ei voitu noutaa, lokitiedostoa ei löytynyt polusta\n"
+" {logFilePath}"
+
+#: 3.8/weather-applet.js:9197
+msgid ""
+"Could not get contents of log file under path\n"
+" {logFilePath}"
+msgstr ""
+"Polun alla olevan lokitiedoston sisältöä ei voitu hakea\n"
+" {logFilePath}"
+
+#. 3.0->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:9616
+msgid "Met Office UK"
+msgstr "Met Office UK"
+
+#: 3.8/weather-applet.js:9718
+msgid ""
+"MET Office UK only covers the UK, please make sure your location is in the "
+"country"
+msgstr ""
+"MET Office UK kattaa vain Britanian. Varmista, että sijaintisi on tässä "
+"maassa"
+
+#: 3.8/weather-applet.js:9796
+msgid "Data was not found for location"
+msgstr "Sijainnin tietoja ei löytynyt"
+
+#: 3.8/weather-applet.js:9877
 msgid "Very poor"
 msgstr "Hyvin huono"
 
-#: 3.8/met_uk.js:250
+#: 3.8/weather-applet.js:9877
 msgid "Less than {distance} {distanceUnit}"
 msgstr "Vähemmän kuin {distance} {distanceUnit}"
 
-#: 3.8/met_uk.js:254
+#: 3.8/weather-applet.js:9881
 msgid "Excellent"
 msgstr "Erinomainen"
 
-#: 3.8/met_uk.js:254
+#: 3.8/weather-applet.js:9881
 msgid "More than {distance} {distanceUnit}"
 msgstr "Enemmän kuin {distance} {distanceUnit}"
 
-#: 3.8/met_uk.js:259
+#: 3.8/weather-applet.js:9886
 msgid "Poor"
 msgstr "Huono"
 
-#: 3.8/met_uk.js:259 3.8/met_uk.js:264 3.8/met_uk.js:269 3.8/met_uk.js:274
+#: 3.8/weather-applet.js:9886 3.8/weather-applet.js:9891
+#: 3.8/weather-applet.js:9896 3.8/weather-applet.js:9901
+#: 3.8/weather-applet.js:9906
 msgid "Between {smallerDistance}-{biggerDistance} {distanceUnit}"
 msgstr "Välillä {smallerDistance}-{biggerDistance} {distanceUnit}"
 
-#: 3.8/met_uk.js:264
+#: 3.8/weather-applet.js:9891
 msgid "Moderate"
 msgstr "Kohtalainen"
 
-#: 3.8/met_uk.js:269
+#: 3.8/weather-applet.js:9896
 msgid "Good"
 msgstr "Hyvä"
 
-#: 3.8/met_uk.js:274
+#: 3.8/weather-applet.js:9901 3.8/weather-applet.js:9906
 msgid "Very good"
 msgstr "Todella hyvä"
 
-#: 3.8/climacell.js:255 3.8/climacell.js:256
-msgid "Light Snow"
-msgstr "Kevyttä lunta"
+#: 3.8/weather-applet.js:10258
+msgid "DarkSky"
+msgstr "DarkSky"
 
-#: 3.8/visualcrossing.js:182
+#: 3.8/weather-applet.js:10308
+msgid "This API has ceased to function, please use another one."
+msgstr "Tämä API on lakannut toimimasta, käytä toista."
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:10569
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:11015
+msgid "MET Norway"
+msgstr "MET Norway"
+
+#: 3.8/weather-applet.js:11558
+#| msgid "Weather"
+msgid "WeatherBit"
+msgstr "WeatherBit"
+
+#: 3.8/weather-applet.js:11981
+#| msgid "Tomorrow"
+msgid "Tomorrow.io"
+msgstr "Tomorrow.io"
+
+#: 3.8/weather-applet.js:12144
+msgid "Light wind"
+msgstr "Kevyt tuuli"
+
+#: 3.8/weather-applet.js:12158
+msgid "Strong wind"
+msgstr "Kova tuuli"
+
+#: 3.8/weather-applet.js:12305
+#| msgid "Weather"
+msgid "US Weather"
+msgstr "US Weather"
+
+#: 3.8/weather-applet.js:12856
+#| msgid "Visual Crossing (key needed)"
+msgid "Visual Crossing"
+msgstr "Visual Crossing"
+
+#: 3.8/weather-applet.js:13031
 msgid "Blowing or drifting snow"
 msgstr "Puhaltaa tai kinostuvaa lunta"
 
-#: 3.8/visualcrossing.js:186
+#: 3.8/weather-applet.js:13035
 msgid "Heavy drizzle"
 msgstr "Voimakkaasti tihkua"
 
-#: 3.8/visualcrossing.js:190
+#: 3.8/weather-applet.js:13039
 msgid "Heavy drizzle/rain"
-msgstr "Voimakkaasti tihkusadetta"
+msgstr "Voimakas tihkusade"
 
-#: 3.8/visualcrossing.js:192
+#: 3.8/weather-applet.js:13041
 msgid "Light drizzle/rain"
-msgstr "Kova sadekuuro"
+msgstr "Kevyt tihkusade"
 
-#: 3.8/visualcrossing.js:194
-msgid "Duststorm"
-msgstr "Pölyä"
+#: 3.8/weather-applet.js:13043
+msgid "Dust Storm"
+msgstr "Pöly myrsky"
 
-#: 3.8/visualcrossing.js:198
+#: 3.8/weather-applet.js:13047
 msgid "Freezing drizzle/freezing rain"
-msgstr "Jäätävää sadetta"
+msgstr "Jäätävää tihkusadetta"
 
-#: 3.8/visualcrossing.js:200
+#: 3.8/weather-applet.js:13049
 msgid "Heavy freezing drizzle/freezing rain"
-msgstr "Jäätyvää tihkusadetta"
+msgstr "Voimakas jäätävä sade"
 
-#: 3.8/visualcrossing.js:202
+#: 3.8/weather-applet.js:13051
 msgid "Light freezing drizzle/freezing rain"
-msgstr "Jäätyvää kevyttä tihkusadetta"
+msgstr "Kevyt jäätävä sade"
 
-#: 3.8/visualcrossing.js:204
+#: 3.8/weather-applet.js:13053
 msgid "Freezing fog"
 msgstr "Jäätyvä sumu"
 
-#: 3.8/visualcrossing.js:210
+#: 3.8/weather-applet.js:13059
 msgid "Funnel cloud/tornado"
 msgstr "Pyörremyrsky"
 
-#: 3.8/visualcrossing.js:212
+#: 3.8/weather-applet.js:13061
 msgid "Hail showers"
 msgstr "Raekuurot"
 
-#: 3.8/visualcrossing.js:214
+#: 3.8/weather-applet.js:13063
 msgid "Ice"
 msgstr "Jäätä"
 
-#: 3.8/visualcrossing.js:216
+#: 3.8/weather-applet.js:13065
 msgid "Lightning without thunder"
 msgstr "Mahdollista ukkosta"
 
-#: 3.8/visualcrossing.js:220
+#: 3.8/weather-applet.js:13069
 msgid "Precipitation in vicinity"
 msgstr "Sademäärä lähistöllä"
 
-#: 3.8/visualcrossing.js:224
+#: 3.8/weather-applet.js:13073 3.8/weather-applet.js:13360
 msgid "Heavy rain and snow"
 msgstr "Rankka lumisade"
 
-#: 3.8/visualcrossing.js:226
+#: 3.8/weather-applet.js:13075
 msgid "Light rain And snow"
 msgstr "Kevyt lumisade"
 
-#: 3.8/visualcrossing.js:234
+#: 3.8/weather-applet.js:13083
 msgid "Sky coverage decreasing"
 msgstr "Taivas selkenee"
 
-#: 3.8/visualcrossing.js:236
+#: 3.8/weather-applet.js:13085
 msgid "Sky coverage increasing"
 msgstr "Taivas pilvistyy"
 
-#: 3.8/visualcrossing.js:238
+#: 3.8/weather-applet.js:13087
 msgid "Sky unchanged"
 msgstr "Taivas ennallaan"
 
-#: 3.8/visualcrossing.js:240
+#: 3.8/weather-applet.js:13089
 msgid "Smoke or haze"
 msgstr "Savu tai utu"
 
-#: 3.8/visualcrossing.js:244
+#: 3.8/weather-applet.js:13093
 msgid "Snow and rain showers"
 msgstr "Lumi- ja sadekuuroja"
 
-#: 3.8/visualcrossing.js:256
+#: 3.8/weather-applet.js:13105
 msgid "Thunderstorm without precipitation"
-msgstr "Ukkosmyrsky ilman sadetta"
+msgstr "Ukkosta ilman sadetta"
 
-#: 3.8/visualcrossing.js:258
+#: 3.8/weather-applet.js:13107
 msgid "Diamond dust"
 msgstr "Timanttipöly"
 
-#: 3.8/visualcrossing.js:264
+#: 3.8/weather-applet.js:13113
 msgid "Partially cloudy"
 msgstr "Puolipilvistä"
 
-#: 3.8/visualcrossing.js:287
+#: 3.8/weather-applet.js:13135
 msgid "Please make sure you entered the API key correctly"
 msgstr "Oletko varma että, annoit API-avaimen oikein"
+
+#. 3.8->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:13151
+msgid "DMI Denmark"
+msgstr "DMI Denmark"
+
+#: 3.8/weather-applet.js:13292 3.8/weather-applet.js:13293
+#: 3.8/weather-applet.js:13429 3.8/weather-applet.js:13430
+msgid "NOT FOUND"
+msgstr "Ei löydy"
+
+#: 3.8/weather-applet.js:13325
+msgid "Blowing snow"
+msgstr "Puuskittaista lumisadetta"
+
+#: 3.8/weather-applet.js:13366 3.8/weather-applet.js:13367
+msgid "Slight snow"
+msgstr "Heikosti lunta"
+
+#: 3.8/weather-applet.js:13373 3.8/weather-applet.js:13374
+msgid "Moderate snow"
+msgstr "Kohtalaista lunta"
+
+#: 3.8/weather-applet.js:13388
+msgid "Moderate rain showers"
+msgstr "Kohtalaisia sadekuuroja"
+
+#: 3.8/weather-applet.js:13395
+msgid "Mixed rain and snow"
+msgstr "Sadetta ja lunta"
+
+#: 3.8/weather-applet.js:13402
+msgid "Heavy mixed rain and snow"
+msgstr "Voimakasta lunta ja sadetta"
+
+#: 3.8/weather-applet.js:13499
+#| msgid "Weather"
+msgid "AccuWeather"
+msgstr "AccuWeather"
+
+#: 3.8/weather-applet.js:13841
+msgid "Deutscher Wetterdienst"
+msgstr "Deutscher Wetterdienst"
+
+#: 3.8/weather-applet.js:13852
+msgid "Please select a different provider or location"
+msgstr "Valitse toinen palveluntarjoaja tai sijainti"
+
+#: 3.8/weather-applet.js:14149
+#| msgid "Weather Conditions"
+msgid "Weather Underground"
+msgstr "Weather Underground"
+
+#: 3.8/weather-applet.js:14338
+msgid "The API key you provided is invalid."
+msgstr "Antamasi API-avain on virheellinen."
+
+#: 3.8/weather-applet.js:14345
+msgid "The location you provided was not found."
+msgstr "Antamaasi sijaintia ei löytynyt."
+
+#: 3.8/weather-applet.js:14381 3.8/weather-applet.js:14382
+msgid "Strong Storm"
+msgstr "Voimakas myrsky"
+
+#: 3.8/weather-applet.js:14396 3.8/weather-applet.js:14397
+msgid "Rain and Snow"
+msgstr "Sadetta ja lunta"
+
+#: 3.8/weather-applet.js:14403 3.8/weather-applet.js:14404
+msgid "Rain and Sleet"
+msgstr "Sadetta ja räntää"
+
+#: 3.8/weather-applet.js:14452 3.8/weather-applet.js:14453
+msgid "Snow Showers"
+msgstr "Lumisadetta"
+
+#: 3.8/weather-applet.js:14515 3.8/weather-applet.js:14516
+msgid "Breezy"
+msgstr "Tuulinen"
+
+#: 3.8/weather-applet.js:14529 3.8/weather-applet.js:14530
+msgid "Frigid"
+msgstr "Kylmä"
+
+#: 3.8/weather-applet.js:14585 3.8/weather-applet.js:14586
+msgid "Mostly Clear"
+msgstr "Enimmäkseen selkeä"
+
+#: 3.8/weather-applet.js:15064
+msgid ""
+"Could not retrieve config, file was not found under path\n"
+" {configFilePath}"
+msgstr ""
+"Asetuksia ei voitu noutaa, tiedostoa ei löytynyt polusta\n"
+" {configFilePath}"
+
+#: 3.8/weather-applet.js:15068
+msgid ""
+"Could not get contents of config file under path\n"
+" {configFilePath}"
+msgstr ""
+"Polun alaisen asetustiedoston sisältöä ei voitu hakea\n"
+" {configFilePath}"
+
+#: 3.8/weather-applet.js:15676
+msgid "Dew Point"
+msgstr "Kastepiste"
+
+#: 3.8/weather-applet.js:15748
+#| msgid "Precipitation in vicinity"
+msgid "Precipitation will end in {precipEnd} minutes"
+msgstr "Sade loppuu {precipEnd} minuutissa"
+
+#: 3.8/weather-applet.js:15750
+msgid "Precipitation won't end in within an hour"
+msgstr "Sade ei lopu tunnin sisällä"
+
+#: 3.8/weather-applet.js:15753
+msgid "Precipitation will start within {precipStart} minutes"
+msgstr "Sade alkaa {precipStart} minuutissa"
+
+#: 3.8/weather-applet.js:15961
+msgid "Forecast parsing failed, see logs for more details."
+msgstr "Ennusteen tekeminen epäonnistui. Katso lisätietoja lokeista."
+
+#: 3.8/weather-applet.js:16399 3.8/weather-applet.js:17147
+msgid "As of {lastUpdatedTime}"
+msgstr "Klo {lastUpdatedTime}"
+
+#: 3.8/weather-applet.js:16405
+#| msgid "{distance}{distanceUnit} from you"
+msgid "{distance} {distanceUnit} from you"
+msgstr "{distance} {distanceUnit} sinusta"
+
+#: 3.8/weather-applet.js:16409
+msgid "Station Name: {stationName}"
+msgstr "Aseman nimi:: {stationName}"
+
+#: 3.8/weather-applet.js:16412
+msgid "Area: {stationArea}"
+msgstr "Alue: {stationArea}"
+
+#: 3.8/weather-applet.js:16944 3.8/weather-applet.js:16954
+msgid "Error Saving Debug Information"
+msgstr "Virhe virheenkorjaustietojen tallentamisessa"
+
+#: 3.8/weather-applet.js:16965
+msgid "Debug Information saved successfully"
+msgstr "Virheenkorjaustiedot tallennettu"
+
+#: 3.8/weather-applet.js:16965
+msgid "Saved to {filePath}"
+msgstr "Tallennettu {filePath}"
+
+#: 3.8/weather-applet.js:17106
+msgid "This provider requires an API key to operate"
+msgstr "Tämä palvelu vaatii API-avaimen toimiakseen"
+
+#: 3.8/LogSaver.py:16
+msgid "Save to File"
+msgstr "Tallenna tiedostoon"
+
+#: 3.8/LogSaver.py:29
+msgid "Select a destination"
+msgstr "Valitse kohde"
 
 #. metadata.json->name
 #. 3.8->settings-schema.json->providers->title
@@ -1519,12 +1822,12 @@ msgstr "Tarkastele paikallista sääennustetta"
 
 #. 3.0->settings-schema.json->head->description
 msgid "Settings for weather@mockturtl 3.0+"
-msgstr "Asetukset  weather@mockturtl 3.8"
+msgstr "Asetukset  weather@mockturtl 3.0+"
 
 #. 3.0->settings-schema.json->keybinding->description
 #. 3.8->settings-schema.json->keybinding->description
 msgid "Set the keybinding to call the menu"
-msgstr "Aseta pikanäppäin valikkoon"
+msgstr "Aseta pikanäppäin"
 
 #. 3.0->settings-schema.json->descriptions->description
 msgid "Weather service information"
@@ -1532,13 +1835,13 @@ msgstr "Sääpalvelun tiedot"
 
 #. 3.0->settings-schema.json->moreInfo->description
 msgid "Click here for detailed description"
-msgstr "Napsauta tästä yksityiskohtaiseen kuvauksen"
+msgstr "Yksityiskohtainen kuvaus napsauttamalla"
 
 #. 3.0->settings-schema.json->moreInfo->tooltip
 #. 3.0->settings-schema.json->getLocation->tooltip
 #. 3.8->settings-schema.json->getLocation->tooltip
 msgid "Opens webpage guide"
-msgstr "Avaa verkkosivun opas"
+msgstr "Avaa verkkosivun oppaan"
 
 #. 3.0->settings-schema.json->providerSettings->description
 #. 3.8->settings-schema.json->provider-options->title
@@ -1552,18 +1855,8 @@ msgstr "Sääpalvelu"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
-msgid "OpenWeatherMap"
-msgstr "OpenWeatherMap"
-
-#. 3.0->settings-schema.json->dataService->options
-#. 3.8->settings-schema.json->dataService->options
 msgid "DarkSky (key needed)"
 msgstr "DarkSky (avain tarvitaan)"
-
-#. 3.0->settings-schema.json->dataService->options
-#. 3.8->settings-schema.json->dataService->options
-msgid "MET Norway"
-msgstr "MET Norway"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1571,17 +1864,12 @@ msgid "Weatherbit (key needed)"
 msgstr "Weatherbit (avain tarvitaan)"
 
 #. 3.0->settings-schema.json->dataService->options
-#. 3.8->settings-schema.json->dataService->options
 msgid "Yahoo"
 msgstr "Yahoo"
 
 #. 3.0->settings-schema.json->dataService->options
 msgid "Climacell (key needed)"
 msgstr "Climacell (avain tarvitaan)"
-
-#. 3.0->settings-schema.json->dataService->options
-msgid "Met Office UK"
-msgstr "Met Office UK"
 
 #. 3.0->settings-schema.json->apiKey->description
 #. 3.8->settings-schema.json->apiKey->description
@@ -1596,7 +1884,7 @@ msgstr "Kopioi käyttämäsi palvelun tililtä koodi ja liitä se tähän."
 #. 3.0->settings-schema.json->manualLocation->description
 #. 3.8->settings-schema.json->manualLocation->description
 msgid "Manual Location"
-msgstr "Manuaalisesti sijainti, kuten Tampere,FI"
+msgstr "Sijainti manuaalisesti, kuten Tampere,FI"
 
 #. 3.0->settings-schema.json->manualLocation->tooltip
 #. 3.8->settings-schema.json->manualLocation->tooltip
@@ -1653,7 +1941,6 @@ msgid "Hourly Forecast length"
 msgstr "Ennusteen pituus"
 
 #. 3.0->settings-schema.json->unitSettings->description
-#. 3.8->settings-schema.json->units-section->title
 msgid "Units"
 msgstr "Mittayksiköt"
 
@@ -1673,13 +1960,13 @@ msgstr "Automaattinen"
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
-msgid "celsius"
-msgstr "celsius"
+msgid "Celsius"
+msgstr "Celsius"
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
-msgid "fahrenheit"
-msgstr "fahrenheit"
+msgid "Fahrenheit"
+msgstr "Fahrenheit"
 
 #. 3.0->settings-schema.json->temperatureUnit->tooltip
 #. 3.0->settings-schema.json->distanceUnit->tooltip
@@ -1689,12 +1976,12 @@ msgid ""
 "Automatic will try to guess your preference based your current display "
 "language."
 msgstr ""
-"Nykyisen näyttökielen perusteella pyrkii asettamaan arvot automaattisesti."
+"Yrittää arvata valintasi automaattisesti nykyisen näyttökielen perusteella."
 
 #. 3.0->settings-schema.json->windSpeedUnit->description
 #. 3.8->settings-schema.json->windSpeedUnit->description
 msgid "Wind speed unit"
-msgstr "Tuulen nopeuden mittayksikkö"
+msgstr "Tuulen nopeus"
 
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
@@ -1724,7 +2011,7 @@ msgstr "Bofori"
 #. 3.0->settings-schema.json->pressureUnit->description
 #. 3.8->settings-schema.json->pressureUnit->description
 msgid "Atmospheric pressure unit"
-msgstr "Ilmanpaineen yksikkö"
+msgstr "Ilmanpaine"
 
 #. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
@@ -1764,7 +2051,7 @@ msgstr "Pa"
 #. 3.0->settings-schema.json->distanceUnit->description
 #. 3.8->settings-schema.json->distanceUnit->description
 msgid "Distance unit"
-msgstr "Etäisyyden mittayksikkö"
+msgstr "Välimatka"
 
 #. 3.0->settings-schema.json->distanceUnit->options
 #. 3.8->settings-schema.json->distanceUnit->options
@@ -1774,7 +2061,7 @@ msgstr "Metrijärjestelmä"
 #. 3.0->settings-schema.json->distanceUnit->options
 #. 3.8->settings-schema.json->distanceUnit->options
 msgid "Imperial"
-msgstr "Brittiläinen"
+msgstr "Brittiläinen järjestelmä"
 
 #. 3.0->settings-schema.json->panelSettings->description
 msgid "Panel options"
@@ -1801,7 +2088,6 @@ msgid "Override label on panel"
 msgstr "Korvaa paneelin nimi säätiedoilla"
 
 #. 3.0->settings-schema.json->tempTextOverride->tooltip
-#. 3.8->settings-schema.json->tempTextOverride->tooltip
 msgid ""
 "Available values are: {c} is condition, {t} is temperature and {u} is unit.\n"
 "Can be used if label does not fit on vertical panel, among other smart "
@@ -1817,12 +2103,12 @@ msgstr ""
 #. 3.8->settings-schema.json->useCustomAppletIcons->tooltip
 #. 3.8->settings-schema.json->useCustomMenuIcons->tooltip
 msgid "Iconset is weather-icons by Erik Flowers"
-msgstr "Kuvakkeet weather-icons tehnyt Erik Flowers"
+msgstr "Kuvakkeet weather-icons on tehnyt Erik Flowers"
 
 #. 3.0->settings-schema.json->useCustomAppletIcons->description
 #. 3.8->settings-schema.json->useCustomAppletIcons->description
 msgid "Use custom icons on the panel"
-msgstr "Käytä omia kuvakkeita paneelissa"
+msgstr "Käytä mukautettuja kuvakkeita paneelissa"
 
 #. 3.0->settings-schema.json->displaySettings->description
 #. 3.8->settings-schema.json->presentation-section->title
@@ -1861,7 +2147,7 @@ msgstr "Ennusteen rivien enimmäismäärä"
 #. 3.0->settings-schema.json->showSunrise->description
 #. 3.8->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
-msgstr "Näytä auringonousu ja -laskuaika"
+msgstr "Näytä auringonousu ja laskuaika"
 
 #. 3.0->settings-schema.json->show24Hours->description
 #. 3.8->settings-schema.json->show24Hours->description
@@ -1875,8 +2161,8 @@ msgstr "Näytä vain ennusteen täydet tunnit"
 
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
 #. 3.8->settings-schema.json->shortHourlyTime->tooltip
-msgid "Instead of 15:00 or 3 pm it will show up as 15 or 3 pm"
-msgstr "Klo 15:00 tai 3 pm, sen sijaan näyttää 15 tai 3 pm"
+msgid "Instead of 15:00 or 3:00 pm it will show up as 15 or 3 pm"
+msgstr "Klo 15:00 tai 3:00 pm, sen sijaan näkyy 15 tai 3 pm"
 
 #. 3.0->settings-schema.json->showForecastDates->description
 #. 3.8->settings-schema.json->showForecastDates->description
@@ -1891,20 +2177,21 @@ msgstr "Kuten \"Perjantai 15\""
 #. 3.0->settings-schema.json->temperatureHighFirst->description
 #. 3.8->settings-schema.json->temperatureHighFirst->description
 msgid "Show high temperature first in forecast"
-msgstr "Näytä ennusteessa korkeat lämpötilat ensin"
+msgstr "Näytä ennusteessa ylin lämpötila ensin"
 
 #. 3.0->settings-schema.json->tempRussianStyle->description
 #. 3.8->settings-schema.json->tempRussianStyle->description
 msgid "Show temperature Russian style"
-msgstr "Näytä lämpötila Venäjä tyylillä"
+msgstr "Näytä lämpötila venäläiseen tyyliin"
 
 #. 3.0->settings-schema.json->locationLabelOverride->description
 #. 3.8->settings-schema.json->locationLabelOverride->description
 msgid "Override location label"
-msgstr "Korvaa sijaintiotsikko"
+msgstr "Korvaa sijainnin nimi"
 
 #. 3.0->settings-schema.json->conditionSettings->description
-msgid "Weather Conditions"
+#. 3.8->settings-schema.json->weather-conditions->title
+msgid "Weather conditions"
 msgstr "Sääolosuhteet"
 
 #. 3.0->settings-schema.json->translateCondition->description
@@ -1916,11 +2203,6 @@ msgstr "Käännä olosuhteet"
 #. 3.8->settings-schema.json->shortConditions->description
 msgid "Less verbose conditions"
 msgstr "Vähemmän sanallisia olosuhteita"
-
-#. 3.0->settings-schema.json->shortConditions->tooltip
-#. 3.8->settings-schema.json->shortConditions->tooltip
-msgid "Currently only used with DarkSky."
-msgstr "Tällä hetkellä sitä käyttää vain DarkSky."
 
 #. 3.0->settings-schema.json->iconSettings->description
 #. 3.8->settings-schema.json->icons->title
@@ -1934,7 +2216,7 @@ msgstr "Käytä sovelmassa symbolisia kuvakkeita"
 #. 3.0->settings-schema.json->useCustomMenuIcons->description
 #. 3.8->settings-schema.json->useCustomMenuIcons->description
 msgid "Use custom icons in the popup menu"
-msgstr "Käytä omia kuvakkeita ponnahdusvalikossa"
+msgstr "Käytä mukautettuja kuvakkeita ikkunassa"
 
 #. 3.8->settings-schema.json->locations-page->title
 #. 3.8->settings-schema.json->location->description
@@ -1942,8 +2224,8 @@ msgid "Location"
 msgstr "Sijainti"
 
 #. 3.8->settings-schema.json->units-page->title
-msgid "Units, Icons and Keys"
-msgstr "Yksikkö, kuvake ja avain"
+msgid "Other options"
+msgstr "Muut vaihtoehdot"
 
 #. 3.8->settings-schema.json->info-section->title
 msgid "Help"
@@ -1957,10 +2239,6 @@ msgstr "Sijainti"
 msgid "Saved Locations"
 msgstr "Tallennetut sijainnit"
 
-#. 3.8->settings-schema.json->weather-conditions->title
-msgid "Weather conditions"
-msgstr "Sääolosuhteet"
-
 #. 3.8->settings-schema.json->panel-options->title
 msgid "Panel (Taskbar)"
 msgstr "Paneeli (tehtäväpalkki)"
@@ -1969,17 +2247,30 @@ msgstr "Paneeli (tehtäväpalkki)"
 msgid "Popup menu"
 msgstr "Ponnahdusvalikko"
 
+#. 3.8->settings-schema.json->units-section->title
+msgid "Other Units"
+msgstr "Muut mittayksiköt"
+
+#. 3.8->settings-schema.json->temp-unit-section->title
+msgid "Temperature Unit"
+msgstr "Lämpötilan yksikkö"
+
 #. 3.8->settings-schema.json->keybindings->title
 msgid "Keybindings"
 msgstr "Pikanäppäimet"
 
 #. 3.8->settings-schema.json->more-info->title
 msgid "More about the Weather applet"
-msgstr "Lisää tietoja Weather sovelmasta"
+msgstr "Lisätietoja Weather sovelmasta"
 
 #. 3.8->settings-schema.json->submit-issue->title
 msgid "Report an issue"
 msgstr "Raportoi ongelma"
+
+#. 3.8->settings-schema.json->debug-options->title
+#. 3.8->settings-schema.json->logLevel->options
+msgid "Debug"
+msgstr "Virheenkorjaus"
 
 #. 3.8->settings-schema.json->dataService->tooltip
 msgid ""
@@ -1996,16 +2287,8 @@ msgstr ""
 "sivustolla, johon pääset Ohje-välilehden painikkeella."
 
 #. 3.8->settings-schema.json->dataService->options
-msgid "Visual Crossing (key needed)"
-msgstr "Visual Crossing (avain tarvitaan)"
-
-#. 3.8->settings-schema.json->dataService->options
-msgid "ClimacellV4 (key needed)"
-msgstr "ClimacellV4 (avain tarvitaan)"
-
-#. 3.8->settings-schema.json->dataService->options
-msgid "ClimacellV3 (key needed)"
-msgstr "ClimacellV3 (avain tarvitaan)"
+msgid "Deutscher Wetterdienst (Germany only)"
+msgstr "Deutscher Wetterdienst (vain Saksa)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (UK only)"
@@ -2014,6 +2297,22 @@ msgstr "Met Office UK (vain UK)"
 #. 3.8->settings-schema.json->dataService->options
 msgid "US National Weather (US only)"
 msgstr "US National Weather (vain US)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Visual Crossing (key needed)"
+msgstr "Visual Crossing (avain tarvitaan)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Tomorrow.io (key needed)"
+msgstr "Tomorrow.io (avain tarvitaan)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "AccuWeather (key needed)"
+msgstr "AccuWeather (avain tarvitaan)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weather Underground (key needed)"
+msgstr "Weather Underground (avain tarvitaan)"
 
 #. 3.8->settings-schema.json->location->tooltip
 msgid ""
@@ -2035,15 +2334,81 @@ msgstr "Tallenna nykyinen sijainti varastoon"
 
 #. 3.8->settings-schema.json->saveLocation->tooltip
 msgid ""
-"Saves location information to file, so you can switch between them with "
-"buttons in the applet (what will appear if you have more than one)."
+"Saves location information to file so you can switch between them with "
+"buttons in the applet, which will appear if you have more than one."
 msgstr ""
-"Tallentaa sijaintitiedot tiedostoon, joten voit vaihdella niiden välillä "
-"sovelmassa (näkyy, jos sinulla on enemmän kuin yksi)."
+"Tallentaa sijaintitiedot tiedostoon, joten voit vaihdella sovelmassa niiden "
+"välillä. Näkyvissä, jos sinulla on useampi kuin yksi."
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
 msgstr "Weather sovelman Cinnamon Spices verkkosivu"
+
+#. 3.8->settings-schema.json->refreshInterval->tooltip
+msgid ""
+"If you are using a provider with API keys set it to an interval you won't "
+"run out of your quota with."
+msgstr ""
+"Jos käytät palveluntarjoajaa, jolla on API-avaimia, aseta se aikavälille, "
+"jolla kiintiösi ei lopu."
+
+#. 3.8->settings-schema.json->forecastDays->tooltip
+msgid ""
+"Maximum number of days that can be displayed, available number of data, "
+"maximum rows and columns setting in the Presentation tab will affect the "
+"final number."
+msgstr ""
+"Näytettävien päivien enimmäismäärä, käytettävissä olevien tietojen määrä, "
+"välilehden rivien ja sarakkeiden enimmäismäärä vaikuttavat lopulliseen "
+"määrään."
+
+#. 3.8->settings-schema.json->forecastHours->tooltip
+msgid ""
+"Maximum number of hours that can be displayed, available numbers of data "
+"will affect the final number."
+msgstr ""
+"Näytettävien tuntien enimmäismäärä, käytettävissä olevien tietojen määrä "
+"vaikuttaa lopulliseen määrään."
+
+#. 3.8->settings-schema.json->immediatePrecip->description
+msgid "Enable minutely precipitation forecast"
+msgstr "Ota käyttöön hetkellinen sadeennuste"
+
+#. 3.8->settings-schema.json->immediatePrecip->tooltip
+msgid ""
+"If you'd like to use this make sure you use your exact coordinates/address "
+"as location to help its accuracy. Currently implemented with OpenWeatherMap "
+"and MET Norway only."
+msgstr ""
+"Varmista, että käytät tarkkoja koordinaatteja/osoitettasi sijaintina "
+"tarkkuuden parantamiseksi. Käytössä vain OpenWeatherMap ja MET Norway kanssa "
+"tällä hetkellä."
+
+#. 3.8->settings-schema.json->showBothTempUnits->description
+msgid "Show both temperature units at the same time"
+msgstr "Näytä molemmat lämpötilayksiköt samanaikaisesti"
+
+#. 3.8->settings-schema.json->tempTextOverride->tooltip
+msgid ""
+"Some of the available values are: {c} is condition, {t} is temperature and "
+"{u} is unit.\n"
+"Can be used if label does not fit on vertical panel, among other smart "
+"things."
+msgstr ""
+"Käytettävät arvot ovat: {c} on olusuhde, {t} on lämpötila ja {u} on "
+"yksikkö.\n"
+"Käytetään, jos nimi ei mahdu pystysuoraan paneeliin, muiden asioiden lisäksi."
+
+#. 3.8->settings-schema.json->alwaysShowHourlyWeather->description
+msgid "Always show Hourly Weather"
+msgstr "Näytä aina tunnin sää"
+
+#. 3.8->settings-schema.json->alwaysShowHourlyWeather->tooltip
+msgid ""
+"Hide/Show button will be hidden and Hourly weather will be permanently "
+"visible."
+msgstr ""
+"Painike piilota/näytä piilotetaan ja sää tunneittain on pysyvästi näkyvissä."
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
@@ -2052,6 +2417,14 @@ msgstr "Näyttää ennusteet ylhäältä alas vasemmalta oikealle."
 #. 3.8->settings-schema.json->locationList->description
 msgid "Your saved locations"
 msgstr "Tallentamasi sijainnit"
+
+#. 3.8->settings-schema.json->locationList->tooltip
+msgid ""
+"You have to make sure the Search entry field is unique and your Timezone is "
+"in the IANA time zone format (e.g. 'Europe/London')"
+msgstr ""
+"Varmista, että hakukenttä on yksilöllinen ja että aikavyöhykkeesi on IANA-"
+"muodossa (esim. Eurooppa/Lontoo)."
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Latitude"
@@ -2077,9 +2450,17 @@ msgstr "Aikavyöhyke"
 msgid "Search entry"
 msgstr "Hakutulos"
 
+#. 3.8->settings-schema.json->displayWindAsText->description
+msgid "Display wind direction as text"
+msgstr "Näytä tuulen suunta tekstinä"
+
+#. 3.8->settings-schema.json->displayWindAsText->tooltip
+msgid "Like SE, N instead of direction icons."
+msgstr "Kuten Kaakko, Pohjoinen suuntakuvakkeiden sijaan."
+
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
-msgstr "Ei koske omia kuvakkeita, jotka on oletuksena symbolisia"
+msgstr "Ei koske mukautettuja kuvakkeita, jotka on oletuksena symbolisia"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
@@ -2087,15 +2468,15 @@ msgstr "Käytä symbolisia kuvakkeita sovelmassa"
 
 #. 3.8->settings-schema.json->more-info-label->description
 msgid ""
-"For detailed information about the applet please go to the Spices Website by "
-"clicking the button below. You can also comment and ask a questions to the "
-"community at this page by logging in with your Github account. You can also "
-"find information about known issues, troubleshooting, changelog and more."
+"For detailed information about the applet please go to the Spices Website to "
+"find info about known issues, troubleshooting, changelog and more by "
+"clicking the button below. Here you can ask questions etc in the comment "
+"section by logging in with your Github account."
 msgstr ""
-"Lisätietoja sovelmasta Spices -verkkosivulta napsauttamalla alla olevaa "
-"painiketta. Voit myös kommentoida ja esittää yhteisölle kysymyksiä tällä "
-"sivulla. Kirjaudu sisään Github-tunnuksella. Löydät myös tietoa tunnetuista "
-"ongelmista, vianmäärityksestä, muutoslokista ja paljon muusta."
+"Lisätietoja tietoja sovelmasta saat Spices-verkkosivustolta, josta löydät "
+"tietoa tunnetuista ongelmista, vianmäärityksestä, muutoslokista ja muusta "
+"napsauttamalla alla olevaa painiketta. Voit esittää kysymyksiä jne. "
+"kommenttiosiossa kirjautumalla sisään Github-tililläsi."
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
@@ -2118,16 +2499,23 @@ msgstr "Nykyinen kehittäjä: Gr3q"
 #. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
 "If you find an issue with this applet please make a report by clicking on "
-"the button below and login in with your Github account. Don't forget to "
-"write weather@mockturtl in the top Title field to make it easier for "
-"everyone to know that the issue is about the weather applet (the form is for "
-"all Cinnamon applets)."
+"the button below and login in with your Github account.\n"
+"\n"
+"Before you start writing please make sure that the issue is not already "
+"submitted in the issues section and review your prefilled details in the "
+"issue description. Don't forget to add a short description in the top Title "
+"field next to the applet's name to make it easier for everyone to know what "
+"the issue is about. Logs with Debug level (which can be saved to a file "
+"below) are also appreciated."
 msgstr ""
 "Jos löydät ongelman tässä sovelmassa, tee ilmoitus napsauttamalla alla "
-"olevaa painiketta ja kirjaudu sisään Github-tunnuksella. Älä unohda "
-"kirjoittaa weather@mockturtl otsikon ylempään kenttään, jotta kaikkien olisi "
-"helpompi tietää, että kysymys koskee juuri sääsovellusta (lomake on "
-"tarkoitettu kaikille Cinnamon applets ohjelmille)."
+"olevaa painiketta ja kirjaudu sisään Github-tililläsi.\n"
+"\n"
+"Ennen kuin kirjoitat, varmista, ettei ongelmaa ole jo ilmoitettu. Tarkista "
+"esitäytetyt tietosi ongelman kuvauksesta. Älä unohda lisätä lyhyttä kuvausta "
+"ylimpään otsikkoon sovelman nimen viereen, jotta kaikkien on helpompi "
+"tietää, mistä ongelmasta on kyse. Myös Debug-tason lokit (jotka voidaan "
+"tallentaa alla olevaan tiedostoon) ovat arvokkaita."
 
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
@@ -2144,3 +2532,59 @@ msgstr ""
 "{kaupunki/kunta} {postinumero} {maa}. Haussa on hyvin joustavat muodot. Kun "
 "olet kirjoittanut odota 3 sekuntia niin arvot tulevat automaattisesti "
 "valintasi mukaan."
+
+#. 3.8->settings-schema.json->logLevel->description
+msgid "Log Level"
+msgstr "Lokin taso"
+
+#. 3.8->settings-schema.json->logLevel->tooltip
+msgid ""
+"Info is the regular logging, Debug is debug, and Verbose also logs network "
+"request payloads. Changing this will only be effective on future logs. Only "
+"change it you are instructed or you know what you are doing."
+msgstr ""
+"Info on tavallinen loki, Debug on virheloki ja Täydellinen kirjaa myös "
+"verkossa tapahtuneet pyynnöt. Tämän vaihtaminen tulee voimaan vain tulevissa "
+"lokeissa. Vaihda sitä jos sinua neuvotaan niin tekemään tai tiedät mitä olet "
+"tekemässä."
+
+#. 3.8->settings-schema.json->logLevel->options
+msgid "Verbose"
+msgstr "Täydellinen"
+
+#. 3.8->settings-schema.json->fileSelect->description
+msgid "Click Save to save debug information to a file"
+msgstr "Napsauta tallentaaksesi virheenkorjaustiedot tiedostoon"
+
+#. 3.8->settings-schema.json->fileSelect->tooltip
+msgid ""
+"This includes logs for the applet and the current settings with your API key "
+"redacted."
+msgstr ""
+"Tämä sisältää sovelman lokit ja nykyiset asetukset, joissa API-avaimesi on "
+"poistettu."
+
+#. 3.8->settings-schema.json->selectedLogPath->description
+msgid "Selected path to save Logs"
+msgstr "Polku lokien tallentamiseen"
+
+#~ msgid "API key doesn't provide access to Hourly Weather, skipping"
+#~ msgstr "API-avain ei tarjoa pääsyä tunti ennusteisiin, ohitetaan"
+
+#~ msgid "Please install '{missingPackage}', then refresh manually."
+#~ msgstr "Asenna '{missingPackage}', sitten päivitä manuaalisesti."
+
+#~ msgid "Light Snow"
+#~ msgstr "Kevyttä lunta"
+
+#~ msgid "Currently only used with DarkSky."
+#~ msgstr "Tällä hetkellä sitä käyttää vain DarkSky."
+
+#~ msgid "Units, Icons and Keys"
+#~ msgstr "Yksikkö, kuvake ja avain"
+
+#~ msgid "ClimacellV4 (key needed)"
+#~ msgstr "ClimacellV4 (avain tarvitaan)"
+
+#~ msgid "ClimacellV3 (key needed)"
+#~ msgstr "ClimacellV3 (avain tarvitaan)"

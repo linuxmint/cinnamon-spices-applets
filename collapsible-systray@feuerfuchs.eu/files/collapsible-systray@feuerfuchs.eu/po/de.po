@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: collapsible-systray@feuerfuchs.eu 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-26 13:12+0200\n"
-"PO-Revision-Date: 2018-04-26 13:14+0200\n"
+"PO-Revision-Date: 2022-11-02 22:29+0100\n"
 "Last-Translator: Feuerfuchs <git@feuerfuchs.eu>\n"
 "Language-Team: Feuerfuchs\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: applet.js:143
@@ -36,11 +36,11 @@ msgstr "Erweitern"
 
 #: CSCollapseBtn.js:116
 msgid "No icons to hide/reveal"
-msgstr "Kein Symbole zu verstecken/anzeigen"
+msgstr "Keine Symbole zum verstecken/anzeigen"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->name
 msgid "Collapsible Systray"
-msgstr "Collapsible Systray"
+msgstr "Zusammenklappbares Systray"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->description
 msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
@@ -64,7 +64,7 @@ msgstr "Animationsdauer"
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->expand-on-hover-
 #. delay->units
 msgid "milliseconds"
-msgstr ""
+msgstr "Millisekunden"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->collapse-on-leave-
 #. delay->description
@@ -112,7 +112,7 @@ msgstr "Erweitern-Symbol (horizontal)"
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->icon-visibility-
 #. list->description
 msgid "Internal use"
-msgstr ""
+msgstr "Interne Verwendung"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->sort-
 #. icons->description
@@ -128,14 +128,14 @@ msgstr "Wenn inaktiv, dann ist die Reihenfolge willkürlich"
 #. support->description
 msgid "Animation support (disable if icons stop updating)"
 msgstr ""
-"Unterstützung von Animation (deaktivieren wenn Icons sich nicht "
+"Unterstützung von Animation (deaktivieren, wenn Icons sich nicht "
 "aktualisieren)"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->animation-
 #. support->tooltip
 msgid "Disable if you have issues with icons not updating themselves."
 msgstr ""
-"Deaktiviere diese Einstellung falls sich einige Icons nicht mehr "
+"Deaktiviere diese Einstellung, wenn sich einige Icons nicht mehr "
 "aktualisieren."
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->vertical-expand-
@@ -151,7 +151,7 @@ msgstr "Abstand von Tray-Symbolen"
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->tray-icon-
 #. padding->units
 msgid "px"
-msgstr ""
+msgstr "Pixel"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->init-
 #. delay->description
@@ -166,7 +166,7 @@ msgstr ""
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->init-delay->units
 msgid "seconds"
-msgstr ""
+msgstr "Sekunden"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->expand-on-hover-
 #. delay->description
@@ -181,7 +181,7 @@ msgstr "Beim Verlassen verkleinern"
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->no-hover-for-tray-
 #. icons->description
 msgid "Disable hover effect for tray icons"
-msgstr "Hover-Effekt für Tray-icons deaktivieren"
+msgstr "Hover-Effekt für Tray-Symbole deaktivieren"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->no-hover-for-tray-
 #. icons->tooltip
@@ -189,7 +189,7 @@ msgid ""
 "If you have problems with the hover effect or it simply doesn't look good, "
 "you should enable this setting"
 msgstr ""
-"Falls der Hover-Effekt nicht richtig funktioniert oder blöd aussieht "
+"Falls der Hover-Effekt nicht richtig funktioniert oder nicht gut aussieht, "
 "solltest du diese Einstellung aktivieren"
 
 #~ msgid "Horizontal padding of tray icons: "
