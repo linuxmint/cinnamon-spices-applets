@@ -26,18 +26,6 @@ function log(message) {
 function logError(message) {
   global.logError(`[${UUID}]: ${message}`);
 }
-function backtick(command) {
-  try {
-    let [result, stdout, stderr] = GLib.spawn_command_line_sync(command);
-    if (stdout != null) {
-      return stdout.toString();
-    }
-  } catch (e) {
-    logError(e);
-  }
-
-  return "";
-}
 const toHHMMSS = (secs) => {
   const sec_num = parseInt(secs, 10);
   const hours = Math.floor(sec_num / 3600);
@@ -110,11 +98,39 @@ WallpaperSlideshow.prototype = {
       this._removeTimeout();
     } else {
       this.run_wallpaper_script(override);
-      this.buildMenu();
       this._setTimeout(this.wallpaper_timer || 3600);
     }
   },
+  _run_command: function (command = "") {
+    try {
+      const args = command.split(" ");
+      let proc = Gio.Subprocess.new(
+        args,
+        Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+      );
+      proc.communicate_utf8_async(null, null, (proc, res) => {
+        try {
+          let [, stdout, stderr] = proc.communicate_utf8_finish(res);
 
+          // Failure
+          if (!proc.get_successful()) throw new Error(stderr);
+
+          // Success
+          this._lastTimeLabel = "";
+          stdout.split("\n").forEach((output) => {
+            if (output.startsWith("Last changed")) {
+              this._lastTimeLabel = output;
+            }
+          });
+          this.buildMenu();
+        } catch (e) {
+          logError(e);
+        }
+      });
+    } catch (e) {
+      logError(e);
+    }
+  },
   run_wallpaper_script: function (override) {
     const dir = Gio.file_new_for_path(this.wallpaper_path);
     if (dir.query_exists(null) && this.wallpaper_path && this.wallpaper_delay) {
@@ -126,13 +142,7 @@ WallpaperSlideshow.prototype = {
             ? override
             : this.wallpaper_delay
         }`;
-      const outputs = backtick(command);
-      this._lastTimeLabel = "";
-      outputs.split("\n").forEach((output) => {
-        if (output.startsWith("Last changed")) {
-          this._lastTimeLabel = output;
-        }
-      });
+      this._run_command(command);
     }
   },
 
