@@ -529,10 +529,10 @@ msgstr "Vælg hvor beskrivelse af programmet skal vises"
 
 msgid ""
 "\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
+"• Drag on the menu edge to change the menu size."
 msgstr ""
 "\n"
-"Info/tip: Træk i menukanten for at ændre menuens størrelse.\n"
+"• Træk i menukanten for at ændre menuens størrelse."
 
 msgid "Show recent items"
 msgstr "Vis seneste elementer"

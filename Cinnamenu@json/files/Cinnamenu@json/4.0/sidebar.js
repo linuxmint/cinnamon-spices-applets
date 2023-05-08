@@ -116,7 +116,7 @@ class SidebarButton {
 
     openContextMenu(e) {
         hideTooltipIfVisible();
-        this.appThis.display.contextMenu.open(this.app, e, this.actor);
+        this.appThis.display.contextMenu.openApp(this.app, e, this.actor);
     }
 
     handleEnter(actor, event) {

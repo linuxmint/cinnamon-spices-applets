@@ -174,6 +174,19 @@ class CinnamenuApplet extends TextIconApplet {
                 });
             }
         };
+        const onShowHomeFolderChange = () => {
+            const homePath = GLib.get_home_dir();
+            if (this.settings.showHomeFolder) {
+                if (!this.getIsFolderCategory(homePath)) {
+                    this.addFolderCategory(homePath);
+                }
+            } else {
+                if (this.getIsFolderCategory(homePath)) {
+                    this.removeFolderCategory(homePath);
+                }
+            }
+        };
+
         this.settings = {};
         this.settingsObj = new AppletSettings(this.settings, __meta.uuid, this.instance_id);
         [
@@ -182,6 +195,7 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'custom-menu-width',         value: 'customMenuWidth',       cb: null },
         { key: 'recent-apps',               value: 'recentApps',            cb: null },
         { key: 'search-start-folder',       value: 'searchStartFolder',     cb: null },
+        { key: 'folder-categories',         value: 'folderCategories',      cb: null },
 
         { key: 'applications-view-mode',    value: 'applicationsViewMode',  cb: refreshDisplay },
         { key: 'description-placement',     value: 'descriptionPlacement',  cb: refreshDisplay },
@@ -191,7 +205,7 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'show-places-category',      value: 'showPlaces',            cb: null},
         { key: 'show-recents-category',     value: 'showRecents',     cb: this._onEnableRecentsChange },
         { key: 'show-favorite-apps-category', value: 'showFavAppsCategory', cb: null },
-        { key: 'show-home-folder-category', value: 'showHomeFolder',        cb: null},
+        { key: 'show-home-folder-category', value: 'showHomeFolder',        cb: onShowHomeFolderChange},
         { key: 'show-emoji-category',       value: 'showEmojiCategory',     cb: null},
 
         { key: 'overlay-key',               value: 'overlayKey',            cb: updateKeybinding },
@@ -379,6 +393,24 @@ class CinnamenuApplet extends TextIconApplet {
         }
     }
 
+    getIsFolderCategory(path) {
+        const index = this.settings.folderCategories.indexOf(path);
+        return index > -1;
+    }
+
+    addFolderCategory(path) {
+        this.settings.folderCategories.push(path);
+    }
+
+    removeFolderCategory(path) {
+        const folderCategories = this.settings.folderCategories.slice();
+        const index = folderCategories.indexOf(path);
+        if (index != -1) {
+            folderCategories.splice(index, 1);
+        }
+        this.settings.folderCategories = folderCategories;
+    }
+
     _onOpenStateToggled(menu, open) {
         if (global.settings.get_boolean('panel-edit-mode')) {
             return false;
@@ -397,7 +429,6 @@ class CinnamenuApplet extends TextIconApplet {
             if (this.currentCategory === 'places' && !this.settings.showPlaces ||
                     this.currentCategory === 'recents' && !this.recentsEnabled ||
                     this.currentCategory === 'favorite_apps' && !this.settings.showFavAppsCategory ||
-                    this.currentCategory.startsWith('/') && !this.settings.showHomeFolder ||
                     this.currentCategory.startsWith('emoji:') && !this.settings.showEmojiCategory) {
                 this.currentCategory = 'all';
             }
@@ -410,8 +441,6 @@ class CinnamenuApplet extends TextIconApplet {
                 openOnCategory = 'places';
             } else if (this.settings.openOnCategory === 4) {
                 openOnCategory = 'all';
-            } else if (this.settings.openOnCategory === 5 && this.settings.showHomeFolder) {
-                openOnCategory = GLib.get_home_dir();
             }
 
             this.display.updateMenuSize();
@@ -687,8 +716,7 @@ class CinnamenuApplet extends TextIconApplet {
                 categoryButtons[focusedCategoryIndex].selectCategory();
             }
             return Clutter.EVENT_STOP;
-        case (symbol === Clutter.KEY_KP_Enter || symbol === Clutter.KP_Enter ||
-                                        symbol === Clutter.KEY_Return) && altKey:
+        case symbol === Clutter.unicode_to_keysym("p".charCodeAt(0)) && ctrlKey:
             if (focusedAppItemExists && appButtons[focusedAppItemIndex].app.isApplication) {
                 const desktop_file_path = appButtons[focusedAppItemIndex].app.desktop_file_path;
                 Util.spawn(['cinnamon-desktop-editor', '-mlauncher', '-o' + desktop_file_path]);
@@ -1276,6 +1304,7 @@ class CinnamenuApplet extends TextIconApplet {
                                         mimeType: next.get_content_type(),
                                         description: filePath,
                                         isPlace: isDirectory,
+                                        isDirectory: isDirectory,
                                         isFolderviewFile: !isDirectory,
                                         deleteAfterUse: true };
                             if (isDirectory) {
@@ -1386,7 +1415,7 @@ class CinnamenuApplet extends TextIconApplet {
  *  .isClearRecentsButton
  *  .isFavoriteFile             //Nemo favorites
  *  .isFolderviewFile
- *  .isFolderviewDirectory
+ *  .isDirectory
  *  .isBackButton
  *  .isSearchResult
  *  .deleteAfterUse
@@ -1503,6 +1532,8 @@ class CinnamenuApplet extends TextIconApplet {
             place.activate = () => place.launch();//don't pass any params to launch()
             if (place.id.startsWith('bookmark:')) {
                 place.uri = place.id.substr(9);
+                place.mimeType = 'inode/directory';
+                place.isDirectory = true;
             }
             res.push(place);
         });
@@ -1613,7 +1644,7 @@ class CinnamenuApplet extends TextIconApplet {
                             gicon: next.get_icon(),
                             uri: file.get_uri(),
                             mimeType: next.get_content_type(),
-                            isFolderviewDirectory: isDirectory,
+                            isDirectory: isDirectory,
                             description: '',
                             isFolderviewFile: !isDirectory,
                             deleteAfterUse: true });
@@ -1626,11 +1657,11 @@ class CinnamenuApplet extends TextIconApplet {
         }
 
         res.sort((a, b) => {    
-                        if (!a.isFolderviewDirectory && b.isFolderviewDirectory) return 1;
-                        else if (a.isFolderviewDirectory && !b.isFolderviewDirectory) return -1;
-                        else if (a.isFolderviewDirectory && b.isFolderviewDirectory &&
+                        if (!a.isDirectory && b.isDirectory) return 1;
+                        else if (a.isDirectory && !b.isDirectory) return -1;
+                        else if (a.isDirectory && b.isDirectory &&
                                     a.name.startsWith('.') && !b.name.startsWith('.')) return 1;
-                        else if (a.isFolderviewDirectory && b.isFolderviewDirectory &&
+                        else if (a.isDirectory && b.isDirectory &&
                                     !a.name.startsWith('.') && b.name.startsWith('.')) return -1;
                         else {
                             const nameA = a.name.toUpperCase();
