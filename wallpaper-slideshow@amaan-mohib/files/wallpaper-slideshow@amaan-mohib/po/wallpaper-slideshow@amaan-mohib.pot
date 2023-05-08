@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-02 22:59+0530\n"
+"POT-Creation-Date: 2023-05-08 19:11+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,37 +18,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: applet.js:93
+#: applet.js:81
 msgid "Wallpaper Slideshow"
 msgstr ""
 
-#: applet.js:197
+#: applet.js:207
 msgid "The wallpaper path does not exists!"
 msgstr ""
 
 #. settings-schema.json->head_delay->description
-#: applet.js:210
+#: applet.js:220
 msgid "Delay"
 msgstr ""
 
-#: applet.js:228
+#: applet.js:238
 msgid "Open wallpapers directory"
 msgstr ""
 
-#: applet.js:241
+#: applet.js:251
 msgid "Next"
 msgstr ""
 
-#: applet.js:250
+#: applet.js:260
 msgid "Previous"
 msgstr ""
 
 #. settings-schema.json->head_paused->description
-#: applet.js:263
+#: applet.js:273
 msgid "Paused"
 msgstr ""
 
-#: applet.js:277
+#: applet.js:287
 msgid "Preferences"
 msgstr ""
 
