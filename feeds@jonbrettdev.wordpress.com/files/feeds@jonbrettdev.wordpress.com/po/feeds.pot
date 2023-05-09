@@ -8,26 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-21 19:10+0100\n"
+"POT-Creation-Date: 2023-05-09 18:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: feedreader.js:151
-msgid "Invalid feed url"
-msgstr ""
-
-#: feedreader.js:227
-msgid " unread items!"
-msgstr ""
-
-#: feedreader.js:362 feedreader.js:375
-msgid "Loading feed"
-msgstr ""
 
 #: applet.js:106
 msgid "Feed reader"
@@ -100,6 +88,18 @@ msgstr ""
 
 #: applet.js:962
 msgid "(<1h) "
+msgstr ""
+
+#: feedreader.js:151
+msgid "Invalid feed url"
+msgstr ""
+
+#: feedreader.js:227
+msgid " unread items!"
+msgstr ""
+
+#: feedreader.js:362 feedreader.js:375
+msgid "Loading feed"
 msgstr ""
 
 #: manage_feeds.py:53
