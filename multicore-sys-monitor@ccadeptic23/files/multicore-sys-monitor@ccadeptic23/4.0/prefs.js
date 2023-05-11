@@ -152,7 +152,7 @@ Preferences.prototype = {
     this.refreshRateScale = Gtk.Scale.new_with_range(
       Gtk.Orientation.HORIZONTAL,
       500,
-      2000,
+      3000,
       1
     );
     this.refreshRateScale.set_value_pos(Gtk.PositionType.RIGHT);

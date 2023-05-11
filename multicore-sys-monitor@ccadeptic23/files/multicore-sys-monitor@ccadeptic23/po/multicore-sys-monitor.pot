@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-02 19:27+0200\n"
+"POT-Creation-Date: 2023-04-28 16:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -313,7 +313,7 @@ msgid "Multi-Core System Monitor Error."
 msgstr ""
 
 #: ../3.0/applet.js:141 ../3.2/applet.js:139 ../3.4/applet.js:264
-#: ../4.0/applet.js:270
+#: ../4.0/applet.js:275
 msgid "Preferences"
 msgstr ""
 
@@ -357,7 +357,7 @@ msgstr ""
 msgid "Used:"
 msgstr ""
 
-#: ../3.4/applet.js:60 ../4.0/applet.js:59
+#: ../3.4/applet.js:60 ../4.0/applet.js:64
 msgid "Dependency missing"
 msgstr ""
 
@@ -370,7 +370,7 @@ msgid ""
 "to use "
 msgstr ""
 
-#: ../4.0/applet.js:61
+#: ../4.0/applet.js:66
 msgid ""
 "Please install the GTop package\n"
 "\tUbuntu / Mint: gir1.2-gtop-2.0\n"
@@ -378,6 +378,10 @@ msgid ""
 "\tArch: libgtop\n"
 "\topenSUSE: libgtop-devel\n"
 "to use "
+msgstr ""
+
+#: ../4.0/applet.js:277
+msgid "Refresh graphs"
 msgstr ""
 
 #: ../4.0/prefs.js:335
