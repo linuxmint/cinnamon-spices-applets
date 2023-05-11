@@ -1,10 +1,16 @@
 const Applet = imports.ui.applet;
+const ByteArray = imports.byteArray;
 const Mainloop = imports.mainloop; // Needed for timer update loop
 const Soup = imports.gi.Soup;
 const Settings = imports.ui.settings;
 
-const _httpSession = new Soup.SessionAsync();
-Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+var _httpSession;
+if (Soup.MAJOR_VERSION === 2) {
+    _httpSession = new Soup.SessionAsync();
+    Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+} else {
+    _httpSession = new Soup.Session();
+}
 
 function NightscoutApplet(metadata, orientation, panelHeight, instance_id) {
   this._init(metadata, orientation, panelHeight, instance_id);
@@ -22,14 +28,35 @@ const makeHttpRequest = function(method, uri, cb) {
     log(`Making a ${method} request to ${uri}`);
     const request = Soup.Message.new(method, uri);
     request.request_headers.append('accept', 'application/json');
-    _httpSession.queue_message(request, (_httpSession, message) => {
-      if (message.status_code === 200) {
-        cb(resolve, message);
-      } else {
-        log(`Failed to acquire request (${message.status_code})`);
-        reject(`Failed to acquire request (${message.status_code})`);
-      }
-    });
+
+    if (Soup.MAJOR_VERSION === 2) {
+      _httpSession.queue_message(request, (_httpSession, message) => {
+        if (message.status_code === 200) {
+          const responseParsed = JSON.parse(message.response_body.data);
+          cb(resolve, responseParsed);
+        } else {
+          log(`Failed to acquire request (${message.status_code})`);
+          reject(`Failed to acquire request (${message.status_code})`);
+        }
+      });
+    } else {
+      _httpSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (session, response) => {
+        if (request.get_status() === 200) {
+          try {
+            const bytes = _httpSession.send_and_read_finish(response);
+            const responseParsed = JSON.parse(ByteArray.toString(bytes.get_data()));
+            cb(resolve, responseParsed);
+            return;
+          } catch (error) {
+            log(error);
+          }
+
+          log(`Failed to acquire request (${message.status_code})`);
+          reject(`Failed to acquire request (${message.status_code})`);
+        }
+      });
+    }
+
   });
 }
 
@@ -171,24 +198,22 @@ NightscoutApplet.prototype = {
   },
 
   requestCurrentBg() {
-    return makeHttpRequest('GET', `${this.host}/api/v1/entries/current`, (resolve, message) => {
+    return makeHttpRequest('GET', `${this.host}/api/v1/entries/current`, (resolve, response) => {
       let current = {};
-      log('Requested current state' + message.response_body.data);
-      const entries = JSON.parse(message.response_body.data);
-      if(entries.length > 0) {
-        current = entries[0];
+      log('Requested current state' + response);
+      if(response.length > 0) {
+        current = response[0];
       }
       resolve(current)
     });
   },
 
   requestDeviceStatus() {
-    return makeHttpRequest('GET', `${this.host}/api/v1/devicestatus?count=1`, (resolve, message) => {
+    return makeHttpRequest('GET', `${this.host}/api/v1/devicestatus?count=1`, (resolve, response) => {
       let status = {};
-      log('Requested device status' + message.response_body.data);
-      const statuses = JSON.parse(message.response_body.data);
-      if(statuses.length > 0) {
-        status = statuses[0];
+      log('Requested device status' + response);
+      if(response.length > 0) {
+        status = response[0];
       }
       resolve(status);
     });
