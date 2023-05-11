@@ -4,8 +4,15 @@ const Cinnamon = imports.gi.Cinnamon;
 const Mainloop = imports.mainloop;
 const Lang = imports.lang;
 
-const UUID="VPN-Sentinel@claudiux";
-const LOG_FILE_PATH = GLib.get_home_dir() + "/.cinnamon/configs/" + UUID + "/vpn_activity.log";
+const NAME = "VPN-Sentinel";
+const UUID = NAME + "@claudiux";
+const HOME_DIR = GLib.get_home_dir();
+const LOG_DIR = HOME_DIR + "/.config/" + NAME;
+GLib.spawn_command_line_async("bash -c 'mkdir -p "+ LOG_DIR +"'");
+const OLD_LOG_FILE_PATH = HOME_DIR + "/.cinnamon/configs/" + UUID + "/vpn_activity.log";
+const LOG_FILE_PATH = LOG_DIR + "/vpn_activity.log";
+if (GLib.file_test(OLD_LOG_FILE_PATH, GLib.FileTest.EXISTS))
+  GLib.spawn_command_line_async("bash -c 'mv -u " + OLD_LOG_FILE_PATH + " " + LOG_FILE_PATH +"'");
 
 class ActivityLogging {
   constructor(metadata, nbdays=30, active=true) {
