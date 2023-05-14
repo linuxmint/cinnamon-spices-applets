@@ -1,4 +1,5 @@
 // Multi-core System Monitor.
+// Copyright (C) 2023 Claude Clerc <claude.clerc@gmail.com>, @claudiux on Github.
 // Copyright (C) 2017 Jason Hicks <jaszhix@gmail.com>.
 // Copyright (C) 2011-2012 Chace Clark <ccdevelop23@gmail.com>.
 //
@@ -19,6 +20,10 @@ const appSystem = imports.gi.Cinnamon.AppSystem.get_default();
 const Util = imports.misc.util;
 const Main = imports.ui.main;
 const Applet = imports.ui.applet;
+const {
+  reloadExtension,
+  Type
+} = imports.ui.extension; //Extension
 
 const UUID = 'multicore-sys-monitor@ccadeptic23';
 
@@ -269,6 +274,10 @@ mcsm.prototype = {
     // Todo - make this a submenu item
     let preferences_menu_item = new Applet.MenuItem(_('Preferences'), Gtk.STOCK_EDIT, () => this.launchPreferences());
     this._applet_context_menu.addMenuItem(preferences_menu_item);
+    let restart_menu_item = new Applet.MenuItem(_('Refresh graphs'), Gtk.STOCK_REFRESH, () => {
+      reloadExtension(UUID, Type.APPLET)
+    });
+    this._applet_context_menu.addMenuItem(restart_menu_item);
     this.out_reader = null;
   },
   launchPreferences: function() {

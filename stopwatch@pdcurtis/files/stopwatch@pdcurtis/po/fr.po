@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-02 16:14+0100\n"
+"PO-Revision-Date: 2023-05-11 18:28+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:133
+msgid "Start"
+msgstr "Démarrer"
+
+#: applet.js:141
+msgid "Pause"
+msgstr "Pause"
+
+#: applet.js:149
+msgid "Reset counter"
+msgstr "Remettre le compteur à zéro"
+
+#: applet.js:156
+msgid "If paused, continue counting from now"
+msgstr "Si en pause, continuer à compter à partir de maintenant"
+
+#: applet.js:167
+msgid "If paused, continue counting from original start time"
+msgstr "Si en pause, continuer à compter à partir du début"
+
+#: applet.js:179
+msgid "Housekeeping and System Sub Menu"
+msgstr "Sous-menu Ménage et Système"
+
+#: applet.js:182
+msgid "View the Changelog"
+msgstr "Voir le récapitulatif des modifications (Changelog)"
+
+#: applet.js:188
+msgid "Open the Help file"
+msgstr "Ouvrir le fichier d'aide"
+
+#: applet.js:195
+msgid "Open stylesheet.css  (Advanced Function)"
+msgstr "Modifier la feuille de style (pour experts en css)"
+
+#: applet.js:201
+msgid "Open the gnome system monitor (Advanced testing function)"
+msgstr "Ouvrez le moniteur système de Gnome (fonction de test avancée)"
+
+#: applet.js:210
+msgid "Configure..."
+msgstr "Configurer..."
+
+#: applet.js:255
+msgid "days"
+msgstr "jours"
+
+#: applet.js:258
+msgid "hours"
+msgstr "heures"
+
+#: applet.js:313
+msgid "Running for"
+msgstr "En cours d'exécution"
+
+#: applet.js:313
+msgid "Click to Pause"
+msgstr "Cliquer pour mettre en pause"
+
+#: applet.js:323 applet.js:325
+msgid "Paused at"
+msgstr "Mis en pause à"
+
+#: applet.js:323
+msgid "Click to Continue Counting"
+msgstr "Cliquer pour continuer à compter"
+
+#: applet.js:325
+msgid "Click to Reset"
+msgstr "Cliquer pour réinitialiser"
+
+#: applet.js:335
+msgid "Ready - Click to Start"
+msgstr "Prêt - Cliquer pour démarrer"
+
+#. stopwatch@pdcurtis->settings-schema.json->head->description
+msgid "General Settings for the Stopwatch Applet"
+msgstr "Paramètres généraux de l'applet Chronomètre"
+
+#. stopwatch@pdcurtis->settings-schema.json->counterStatus->description
+msgid "Should not be changed"
+msgstr "Ne devrait pas être changé"
+
+#. stopwatch@pdcurtis->settings-schema.json->modeContinueCounting->description
+msgid "Check box to continue counting on clicking applet when paused"
+msgstr ""
+"Case à cocher pour continuer à compter en cliquant sur l'applet quand elle "
+"est en pause"
+
+#. stopwatch@pdcurtis->settings-schema.json->modeContinueCounting->tooltip
+msgid ""
+"Normal sequence on clicking is 'start -> pause -> reset' this changes to "
+"'start -> pause -> continue -> pause -> continue etc'. In this mode one has "
+"to use the Right Click (Context) Menu to reset the counter"
+msgstr ""
+"La séquence normale en cliquant est 'démarrer -> pause -> réinitialiser' "
+"cela change en 'démarrer -> pause -> continuer -> pause -> continuer etc'. "
+"Dans ce mode, il faut utiliser le menu clic droit (contextuel) pour "
+"réinitialiser le compteur"
+
+#. stopwatch@pdcurtis->settings-schema.json->pausedAt->description
+#. stopwatch@pdcurtis->settings-schema.json->startTime->description
+msgid "Must not be changed"
+msgstr "Ne doit pas être changé"
+
+#. stopwatch@pdcurtis->settings-schema.json->counterTitle->description
+msgid "Provide a meaningful title to the counter"
+msgstr "Donnez un titre significatif au compteur"
+
+#. stopwatch@pdcurtis->settings-schema.json->counterTitle->tooltip
+msgid ""
+"This forms the first part of the tooltip and is useful for identification if "
+"you have multiple instances of counters - default is Stopwatch"
+msgstr ""
+"Ceci forme la première partie de l'info-bulle et est utile pour "
+"l'identification si vous avez plusieurs instances de compteurs - la valeur "
+"par défaut est Chronomètre"
+
+#. stopwatch@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Intervalle de rafraîchissement de l'affichage :"
+
+#. stopwatch@pdcurtis->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have multiple active counters and/or a slow machine"
+msgstr ""
+"Augmentez ou diminuez cette valeur pour modifier l'intervalle "
+"d'actualisation - utilisez une actualisation lente si vous avez plusieurs "
+"compteurs actifs et/ou une machine lente"
+
+#. stopwatch@pdcurtis->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "secondes"
+
+#. stopwatch@pdcurtis->metadata.json->description
+msgid ""
+"Allows one to time activities such as the time online with multiple "
+"instances possible"
+msgstr ""
+"Permet de mesurer des activités ponctuelles telles que le temps passé en "
+"ligne (plusieurs instances possibles)"
+
+#. stopwatch@pdcurtis->metadata.json->name
+msgid "Stopwatch for Cinnamon 1.8+"
+msgstr "Chronomètre (Stopwatch) pour Cinnamon"

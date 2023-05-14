@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-29 19:16+0100\n"
-"PO-Revision-Date: 2023-04-14 16:16+0200\n"
+"POT-Creation-Date: 2023-05-01 20:28+0100\n"
+"PO-Revision-Date: 2023-05-09 17:50+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -146,11 +146,11 @@ msgstr "Applications et fichiers"
 msgid "Other search results"
 msgstr "Autres résultats de recherche"
 
-msgid "Browser history"
-msgstr "Historique du navigateur"
-
 msgid "Browser bookmarks"
 msgstr "Signets du navigateur"
+
+msgid "Browser history"
+msgstr "Historique du navigateur"
 
 msgid "Emoji"
 msgstr "Émoji"
@@ -170,12 +170,6 @@ msgstr "Favoris"
 msgid "Recent"
 msgstr "Récents"
 
-msgid "Home folder"
-msgstr "Dossier d'accueil"
-
-msgid "Reset category order"
-msgstr "Restaurer l'ordre initial des catégories"
-
 msgid "light skin tone"
 msgstr "thème clair"
 
@@ -191,6 +185,12 @@ msgstr "thème moyen-foncé"
 msgid "dark skin tone"
 msgstr "teint foncé"
 
+msgid "Remove category"
+msgstr "Supprimer cette catégorie"
+
+msgid "Reset category order"
+msgstr "Restaurer l'ordre initial des catégories"
+
 msgid "This file is no longer available"
 msgstr "Ce fichier n'est plus disponible"
 
@@ -199,6 +199,9 @@ msgstr "Ouvrir avec"
 
 msgid "Other application..."
 msgstr "Autre application..."
+
+msgid "Add folder as category"
+msgstr "Ajouter ce dossier comme catégorie"
 
 msgid "Open containing folder"
 msgstr "Ouvrir le dossier conteneur"
@@ -325,9 +328,6 @@ msgstr "Comportement"
 
 msgid "Appearance"
 msgstr "Apparence"
-
-msgid "Layout and Content"
-msgstr "Mise en page et contenu"
 
 msgid "Search Providers"
 msgstr "Moteurs de Recherche"
@@ -480,6 +480,9 @@ msgstr "Utiliser une hauteur de menu personnalisée"
 msgid "Custom menu height (pixels)"
 msgstr "Hauteur de menu personnalisée (pixels)"
 
+msgid "Tips"
+msgstr "Astuces"
+
 msgid "Applications view mode"
 msgstr "Mode d'affichage des applications"
 
@@ -538,14 +541,6 @@ msgstr "Sous les titres"
 msgid "Choose where to show application descriptions"
 msgstr "Vous permet de choisir l'emplacement des descriptions des applications"
 
-msgid ""
-"\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
-msgstr ""
-"\n"
-"Info/astuce : Faites glisser le bord du menu pour modifier la taille du "
-"menu.\n"
-
 msgid "Show recent items"
 msgstr "Afficher les éléments récents"
 
@@ -599,11 +594,12 @@ msgid "Web search suggestions"
 msgstr "Suggestions de recherche sur le Web"
 
 msgid ""
-"With web search option, also show search suggestions. (Note: This uses "
-"Google's search API)"
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
 msgstr ""
 "Avec l'option de recherche sur le Web, affichez également les suggestions de "
-"recherche. (Remarque : Cela utilise l'API de recherche de Google)"
+"recherche. (Remarque : les suggestions de recherche sont fournies par "
+"DuckDuckGo)"
 
 msgid "Search home folder"
 msgstr "Rechercher dans le dossier de départ"
@@ -698,3 +694,30 @@ msgid ""
 msgstr ""
 "Utilisez un style de mosaïque pour les boutons de l'application (Remarque : "
 "peut ne pas fonctionner sur certains thèmes)"
+
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"• Faites glisser le bord du menu pour modifier la taille du menu."
+
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• Faites glisser les catégories pour modifier leur ordre."
+
+msgid ""
+"\n"
+"• Right click on any folder to add it as a menu category.\n"
+msgstr ""
+"\n"
+"Clic-droit sur un dossier pour en faire une catégorie du menu.\n"
+
+#~ msgid "Home folder"
+#~ msgstr "Dossier d'accueil"
+
+#~ msgid "Layout and Content"
+#~ msgstr "Mise en page et contenu"

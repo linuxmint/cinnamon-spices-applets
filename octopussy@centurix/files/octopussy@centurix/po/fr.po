@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-04 20:17+1000\n"
+"PO-Revision-Date: 2023-05-10 18:58+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:132
+msgid "OctoPussy: OctoPrint manager."
+msgstr "OctoPussy : Gestionnaire d'OctoPrint."
+
+#: applet.js:205
+msgid "Settings"
+msgstr "Paramètres"
+
+#: applet.js:278 applet.js:351
+msgid "Time lapsed: "
+msgstr "Temps écoulé : "
+
+#: applet.js:282 applet.js:352
+msgid "Estimated: "
+msgstr "Estimé : "
+
+#: applet.js:292 applet.js:353
+msgid "Total time: "
+msgstr "Temps total : "
+
+#: applet.js:355
+msgid "Pause current print"
+msgstr "Mettre en pause l'impression en cours"
+
+#: applet.js:356
+msgid "Continue current print"
+msgstr "Poursuivre l'impression en cours"
+
+#: applet.js:358
+msgid "Change filament"
+msgstr "Changer de filament"
+
+#: applet.js:359
+msgid "Camera monitor"
+msgstr "Moniteur de caméra"
+
+#: applet.js:360
+msgid "Open OctoPrint web"
+msgstr "Consulter le site web d'OctoPrint"
+
+#: applet.js:362
+msgid "Restart OctoPrint"
+msgstr "Redémarrer OctoPrint"
+
+#: applet.js:363
+msgid "Shutdown OctoPrint"
+msgstr "Arrêter OctoPrint"
+
+#: applet.js:364
+msgid "Configure..."
+msgstr "Configurer..."
+
+#. settings-schema.json->octoprintUrl->description
+#. settings-schema.json->octoprintUrl->tooltip
+msgid "OctoPrint API Address"
+msgstr "Adresse de l'API OctoPrint"
+
+#. settings-schema.json->octoprintApiKey->description
+msgid "OctoPrint API Key. Get an API key from the OctoPrint site settings."
+msgstr ""
+"Clé de l'API OctoPrint. Obtenez une clé API à partir des paramètres du site "
+"OctoPrint."
+
+#. settings-schema.json->octoprintInterval->units
+msgid "seconds"
+msgstr "secondes"
+
+#. settings-schema.json->octoprintInterval->description
+msgid "Refresh Interval:"
+msgstr "Intervalle de rafraîchissement :"
+
+#. settings-schema.json->octoprintInterval->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"Augmentez ou diminuez cette valeur pour modifier l'intervalle "
+"d'actualisation - utilisez une actualisation lente si vous avez une machine "
+"lente"
+
+#. settings-schema.json->octoprintVideoCommand->description
+msgid "Video command to use when showing the webcam. Defaults to vlc."
+msgstr ""
+"Commande vidéo à utiliser lors de l'affichage de la webcam. Par défaut, vlc."
+
+#. metadata.json->description
+msgid "An applet to manage OctoPrint."
+msgstr "Une applet pour gérer OctoPrint."
+
+#. metadata.json->name
+msgid "OctoPrint manager"
+msgstr "Gestionnaire d'OctoPrint"

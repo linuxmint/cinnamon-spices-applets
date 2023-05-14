@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-29 19:16+0100\n"
-"PO-Revision-Date: 2022-10-11 19:30+0200\n"
+"POT-Creation-Date: 2023-05-01 20:28+0100\n"
+"PO-Revision-Date: 2023-05-08 20:49+0200\n"
 "Last-Translator: erwn16 <elmar_wein@web.de>\n"
 "Language-Team: de\n"
 "Language: de\n"
@@ -143,11 +143,11 @@ msgstr "Apps und Dateien"
 msgid "Other search results"
 msgstr "Andere Suchergebnisse"
 
-msgid "Browser history"
-msgstr "Chronik des Web-Browsers anzeigen"
-
 msgid "Browser bookmarks"
 msgstr "Web-Lesezeichen als Kategorie anzeigen"
+
+msgid "Browser history"
+msgstr "Chronik des Web-Browsers anzeigen"
 
 msgid "Emoji"
 msgstr "Emoji"
@@ -167,12 +167,6 @@ msgstr "Favoriten"
 msgid "Recent"
 msgstr "Kürzlich"
 
-msgid "Home folder"
-msgstr "Persönlicher Ordner"
-
-msgid "Reset category order"
-msgstr "Kategorie-Reihenfolge zurücksetzen"
-
 msgid "light skin tone"
 msgstr "Heller Ton"
 
@@ -188,6 +182,12 @@ msgstr "Mitteldunkler Ton"
 msgid "dark skin tone"
 msgstr "Dunkler Ton"
 
+msgid "Remove category"
+msgstr "Ordner als Menü-Kategorie entfernen"
+
+msgid "Reset category order"
+msgstr "Kategorie-Reihenfolge zurücksetzen"
+
 msgid "This file is no longer available"
 msgstr "Diese Datei ist nicht mehr verfügbar"
 
@@ -196,6 +196,9 @@ msgstr "Öffnen mit"
 
 msgid "Other application..."
 msgstr "Andere App …"
+
+msgid "Add folder as category"
+msgstr "Ordner als Menü-Kategorie hinzufügen"
 
 msgid "Open containing folder"
 msgstr "Übergeordneten Ordner öffnen"
@@ -320,9 +323,6 @@ msgstr "Verhalten"
 
 msgid "Appearance"
 msgstr "Erscheinungsbild"
-
-msgid "Layout and Content"
-msgstr "Layout und Inhalte"
 
 msgid "Search Providers"
 msgstr "Suchmaschinen-Anbieter"
@@ -474,6 +474,9 @@ msgstr "Benutzerdefinierte Menü-Höhe einstellen"
 msgid "Custom menu height (pixels)"
 msgstr "Benutzerdefinierte Menü-Höhe (Pixel)"
 
+msgid "Tips"
+msgstr "Tipps"
+
 msgid "Applications view mode"
 msgstr "Art der Anzeige für App-Symbole"
 
@@ -530,13 +533,6 @@ msgstr "Unterm App-Namen"
 msgid "Choose where to show application descriptions"
 msgstr "Festlegen, wo die Beschreibungen der Apps angezeigt werden"
 
-msgid ""
-"\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
-msgstr ""
-"\n"
-"Info/Tipp: Am Menürand ziehen, um die Größe des Menüs zu ändern.\n"
-
 msgid "Show recent items"
 msgstr "Kategorie »Kürzlich« anzeigen"
 
@@ -590,9 +586,11 @@ msgid "Web search suggestions"
 msgstr "Vorschläge der Web-Suche"
 
 msgid ""
-"With web search option, also show search suggestions. (Note: This uses "
-"Google's search API)"
-msgstr "Bei der Web-Suche auch Vorschläge der Google-Suchmaschine anzeigen"
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+"Bei der Web-Suche auch Vorschläge der Suchmaschine \"DuckDuckGo\" (anonyme "
+"Suche) anzeigen"
 
 msgid "Search home folder"
 msgstr "Im persönlichen Ordner suchen"
@@ -685,3 +683,31 @@ msgid ""
 msgstr ""
 "App-Symbole in Kacheln anzeigen (Hinweis: Kann bei manchen Themen nicht "
 "funktionieren)"
+
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"Am Menürand mit der Maus ziehen, um die Größe des Menüs zu ändern."
+
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"Reihenfolge der Menü-Kategorien durch Ziehen mit der Maus ändern."
+
+msgid ""
+"\n"
+"• Right click on any folder to add it as a menu category.\n"
+msgstr ""
+"\n"
+"Beliebigen Ordner mit Klick auf rechte Maustaste als Menü-Kategorie "
+"festlegen und als Menü-Kategorie entfernen.\n"
+
+#~ msgid "Home folder"
+#~ msgstr "Persönlicher Ordner"
+
+#~ msgid "Layout and Content"
+#~ msgstr "Layout und Inhalte"

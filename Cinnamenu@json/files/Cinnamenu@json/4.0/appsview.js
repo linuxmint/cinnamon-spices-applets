@@ -277,8 +277,9 @@ class AppButton {
                 this.handleEnter();
                 return Clutter.EVENT_STOP;
             } else {
-                if (this.app.isApplication || this.app.isFolderviewFile || this.app.isFolderviewDirectory ||
-                                            this.app.isFavoriteFile || this.app.emoji || this.app.isRecentFile){
+                if (this.app.isApplication || this.app.isFolderviewFile ||
+                    this.app.isDirectory || this.app.isFavoriteFile ||
+                    this.app.emoji || this.app.isRecentFile){
                     this.openContextMenu(e);
                 }
                 return Clutter.EVENT_STOP;
@@ -296,7 +297,7 @@ class AppButton {
             this.appThis.recentApps.add(this.app.id);
             this.app.open_new_window(-1);
             this.appThis.menu.close();
-        } else if (this.app.isFolderviewDirectory || this.app.isBackButton) {
+        } else if (this.app.isDirectory || this.app.isBackButton) {
             this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
             //don't menu.close()
         } else if (this.app.isFolderviewFile || this.app.isRecentFile || this.app.isFavoriteFile) {
@@ -334,7 +335,7 @@ class AppButton {
     openContextMenu(e) {
         this._setButtonStyleSelected();
         hideTooltipIfVisible();
-        this.appThis.display.contextMenu.open(this.app, e, this.actor);
+        this.appThis.display.contextMenu.openApp(this.app, e, this.actor);
     }
 
     _resetAllAppsOpacity() {

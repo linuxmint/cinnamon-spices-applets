@@ -1,0 +1,533 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-30 21:56+0200\n"
+"PO-Revision-Date: 2023-05-06 09:33+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. metadata.json->name
+#: applet.js:56
+msgid "VPN Sentinel"
+msgstr "VPN Sentinel"
+
+#: applet.js:68
+msgid "Timestamp"
+msgstr "Időbélyeg"
+
+#: applet.js:69
+msgid "Date and Time"
+msgstr "Dátum és idő"
+
+#: applet.js:70
+msgid "Message"
+msgstr "Üzenet"
+
+#: applet.js:229
+msgid "VPN-Sentinel has just started."
+msgstr "A VPN-Sentinel elindult."
+
+#: applet.js:233
+#, javascript-format
+msgid "Connected to VPN: %s"
+msgstr "Kapcsolódva a VPN-hez: %s"
+
+#: applet.js:235
+#, javascript-format
+msgid "Connected to WIREGUARD: %s"
+msgstr "Kapcsolódva a WIREGUARD-hoz: %s"
+
+#: applet.js:237
+#, javascript-format
+msgid "Connected to: %s"
+msgstr "Kapcsolódva ehhez: „%s”"
+
+#: applet.js:589
+#, javascript-format
+msgid "%s has just been launched."
+msgstr ""
+
+#: applet.js:645
+#, javascript-format
+msgid "%s has just been stopped."
+msgstr ""
+
+#: applet.js:667
+#, javascript-format
+msgid "%s stopped because the VPN link is idle."
+msgstr ""
+
+#: applet.js:759
+#, javascript-format
+msgid "Connection lost. Attempt to reconnect to: %s"
+msgstr ""
+
+#: applet.js:769
+msgid "Connection to: "
+msgstr ""
+
+#: applet.js:776
+msgid "Connected to: "
+msgstr ""
+
+#: applet.js:790
+msgid "Disconnected from: "
+msgstr ""
+
+#: applet.js:808
+msgid "Switching to: "
+msgstr ""
+
+#: applet.js:865 applet.js:890 applet.js:949 applet.js:963
+msgid "(None)"
+msgstr "(Nincs)"
+
+#: applet.js:1058
+msgid "ENABLED"
+msgstr ""
+
+#: applet.js:1058
+msgid "DISABLED"
+msgstr ""
+
+#: applet.js:1058
+msgid "TRANSIENT"
+msgstr ""
+
+#: applet.js:1076
+msgid "Other active VPN links (select to disable):"
+msgstr ""
+
+#: applet.js:1093
+msgid "Connections"
+msgstr "Kapcsolatok"
+
+#: applet.js:1119
+msgid "Connect to VPN as soon as this applet starts."
+msgstr ""
+
+#. settings-schema.json->reconnect->description
+#: applet.js:1127
+msgid "Try to reconnect to VPN when it shuts down incidentally."
+msgstr ""
+
+#: applet.js:1136
+msgid "VPN Policy"
+msgstr ""
+
+#. settings-schema.json->InternetPolicy->title
+#: applet.js:1143
+msgid "Internet Apps Manager"
+msgstr ""
+
+#: applet.js:1151
+msgid "Open Activity Logs"
+msgstr ""
+
+#: applet.js:1160
+msgid "Reload Country Flag"
+msgstr ""
+
+#: applet.js:1162
+msgid "Confirm this Country Flag"
+msgstr ""
+
+#: applet.js:1178
+msgid "Network Settings"
+msgstr "Hálózati beállítások"
+
+#: applet.js:1182
+msgid "Network Connections"
+msgstr "Hálózati kapcsolatok"
+
+#: applet.js:1201
+#, javascript-format
+msgid ""
+"VPN: %s\n"
+" Device: %s\n"
+" Since: %s"
+msgstr ""
+
+#: applet.js:1207
+#, javascript-format
+msgid ""
+"WIREGUARD: %s\n"
+" Device: %s\n"
+" Since: %s"
+msgstr ""
+
+#: applet.js:1214
+msgid "Disconnected"
+msgstr "Bontva"
+
+#: applet.js:1216
+msgid "Transient"
+msgstr ""
+
+#: applet.js:1218
+msgid "Deactivated"
+msgstr ""
+
+#: applet.js:1348
+msgid "VPN-Sentinel re-loading requested."
+msgstr ""
+
+#: applet.js:1361
+msgid "VPN-Sentinel was stopped."
+msgstr ""
+
+#: applet.js:1365
+#, javascript-format
+msgid "Still connected to VPN: %s"
+msgstr ""
+
+#: applet.js:1367
+#, javascript-format
+msgid "Still connected to WIREGUARD: %s"
+msgstr ""
+
+#: applet.js:1369
+#, javascript-format
+msgid "Still connected to: %s"
+msgstr ""
+
+#: applet.js:1372
+msgid "No VPN/WIREGUARD link."
+msgstr ""
+
+#: applet.js:1374
+msgid "VPN/WIREGUARD Status: Transient."
+msgstr ""
+
+#: lib/checkDependencies.js:267
+#, javascript-format
+msgid "The applet %s is fully functional."
+msgstr "A kisalkalmazás %s teljesen működőképes."
+
+#: lib/checkDependencies.js:268
+msgid "All dependencies are installed"
+msgstr "Minden függőség telepítve van"
+
+#: lib/checkDependencies.js:293
+msgid "You appear to be missing some of the programs required for this applet to have all its features."
+msgstr "Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a kisalkalmazás minden funkcióval rendelkezzen."
+
+#: lib/checkDependencies.js:294
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr "Kérjük, a most megnyitott terminálban hajtsa végre a következő parancsokat:"
+
+#: lib/checkDependencies.js:295
+msgid "Some dependencies are not installed!"
+msgstr "Néhány függőség nincs telepítve!"
+
+#. metadata.json->description
+msgid ""
+"VPN Sentinel is a powerful applet that monitors the VPN (or Wireguard) link, displays its status, can automatically connect "
+"to the last used VPN, reconnect the VPN link in case of unexpected disconnection, and start or stop certain Internet "
+"applications depending on the VPN status."
+msgstr ""
+"A VPN Sentinel egy hatékony kisalkalmazás, amely figyeli a VPN (vagy Wireguard) kapcsolatot, megjeleníti annak állapotát, "
+"automatikusan csatlakozik az utoljára használt VPN-hez, újra létrehozza a VPN kapcsolatot váratlan kapcsolatvesztés esetén, "
+"és elindít vagy leállít bizonyos internetes alkalmazásokat a VPN állapotától függően."
+
+#. settings-schema.json->Alerts->title
+msgid "Notifications"
+msgstr "Értesítések"
+
+#. settings-schema.json->VPNpolicy->title
+msgid "VPN"
+msgstr "VPN"
+
+#. settings-schema.json->CountryFlags->title
+#. settings-schema.json->sectionF1->title
+msgid "Flags"
+msgstr "Jelölők"
+
+#. settings-schema.json->sectionA1->title
+#. settings-schema.json->flagList->columns->title
+msgid "Flag"
+msgstr "Jelölők"
+
+#. settings-schema.json->sectionA2->title
+msgid "Sound Alert"
+msgstr ""
+
+#. settings-schema.json->sectionA3->title
+msgid "Icon colors"
+msgstr ""
+
+#. settings-schema.json->sectionV1->title
+msgid "Connection Policy"
+msgstr ""
+
+#. settings-schema.json->sectionV2->title
+msgid "Bypass VPN for below domains"
+msgstr ""
+
+#. settings-schema.json->sectionV3->title
+msgid "Activity Log"
+msgstr "Tevékenység napló"
+
+#. settings-schema.json->sectionI1->title
+msgid "Settings"
+msgstr "Beállítások"
+
+#. settings-schema.json->sectionI2->title
+msgid "Managed Apps"
+msgstr ""
+
+#. settings-schema.json->showCountryFlag->description
+msgid "Show the VPN server country flag next to the icon"
+msgstr ""
+
+#. settings-schema.json->showCountryFlag->tooltip
+msgid ""
+"If this box is checked, a request is sent to a geolocation server to find out the country where your VPN server is located "
+"and its flag is displayed next to the icon of this applet."
+msgstr ""
+
+#. settings-schema.json->labelWhenVPNisOff->description
+msgid "While VPN is OFF"
+msgstr ""
+
+#. settings-schema.json->labelWhenVPNisOff->options
+msgid "Hide the flag place"
+msgstr ""
+
+#. settings-schema.json->labelWhenVPNisOff->options
+msgid "No flag, but leave its place"
+msgstr ""
+
+#. settings-schema.json->labelWhenVPNisOff->options
+msgid "Show my Country's Flag"
+msgstr ""
+
+#. settings-schema.json->useSoundAlert->description
+msgid "Emit an audible alert when VPN shuts down incidentally"
+msgstr ""
+
+#. settings-schema.json->useSoundAlertAtBeginning->description
+msgid "Emit this audible alert when this Applet starts, if VPN is down."
+msgstr ""
+
+#. settings-schema.json->connectedColor->description
+msgid "While VPN is Connected"
+msgstr ""
+
+#. settings-schema.json->disconnectedColor->description
+msgid "While VPN is Disconnected"
+msgstr ""
+
+#. settings-schema.json->transitionColor->description
+msgid "While VPN is in Transition state"
+msgstr ""
+
+#. settings-schema.json->borderOpacity->description
+msgid "Border opacity"
+msgstr ""
+
+#. settings-schema.json->applyColors->description
+#. settings-schema.json->applyBypassListButton->description
+msgid "Apply"
+msgstr "Alkalmaz"
+
+#. settings-schema.json->connectAtStartup->description
+msgid "Try to connect to last VPN as soon as VPN Sentinel starts."
+msgstr ""
+
+#. settings-schema.json->deactivateAtStartup->description
+msgid "Deactivate this applet at startup"
+msgstr ""
+
+#. settings-schema.json->deactivateAtStartup->tooltip
+msgid ""
+"When this option is checked, this applet starts in 'deactivated' state, saving resources but not monitoring anything. You "
+"can activate it from its menu."
+msgstr ""
+
+#. settings-schema.json->respectUserRequest->description
+msgid "Do not try to automatically reconnect to VPN when disconnected through VPN Sentinel"
+msgstr ""
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding here to activate/deactivate the last used VPN."
+msgstr ""
+
+#. settings-schema.json->bypassList->columns->title
+msgid "Domain"
+msgstr "Tartomány"
+
+#. settings-schema.json->applyBypassHelp->description
+msgid ""
+"Clicking this 'Apply' button will stop and then start your default connection. Thus, all active VPN connections will be "
+"closed."
+msgstr ""
+
+#. settings-schema.json->doLogActivity->description
+msgid "Log status changes of VPNs and Internet applications"
+msgstr ""
+
+#. settings-schema.json->logLifetime->options
+msgid "1"
+msgstr "1"
+
+#. settings-schema.json->logLifetime->options
+msgid "2"
+msgstr "2"
+
+#. settings-schema.json->logLifetime->options
+msgid "3"
+msgstr "3"
+
+#. settings-schema.json->logLifetime->options
+msgid "4"
+msgstr "4"
+
+#. settings-schema.json->logLifetime->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->logLifetime->options
+msgid "6"
+msgstr "6"
+
+#. settings-schema.json->logLifetime->options
+msgid "7"
+msgstr "7"
+
+#. settings-schema.json->logLifetime->options
+msgid "8"
+msgstr "8"
+
+#. settings-schema.json->logLifetime->options
+msgid "9"
+msgstr "9"
+
+#. settings-schema.json->logLifetime->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->logLifetime->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->logLifetime->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->logLifetime->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->logLifetime->options
+msgid "45"
+msgstr "45"
+
+#. settings-schema.json->logLifetime->options
+msgid "60"
+msgstr "60"
+
+#. settings-schema.json->logLifetime->options
+msgid "90"
+msgstr "90"
+
+#. settings-schema.json->logLifetime->description
+msgid "Lifetime (days)"
+msgstr ""
+
+#. settings-schema.json->logLifetime->tooltip
+msgid "Lifetime of a record in the log file, in days."
+msgstr ""
+
+#. settings-schema.json->view_activity_log_button->description
+msgid "Open Activity Log"
+msgstr "Tevékenység napló megnyitása"
+
+#. settings-schema.json->clear_activity_log_button->description
+msgid "Clear Activity Log"
+msgstr "Tevékenység napló törlése"
+
+#. settings-schema.json->flagListHelp->description
+msgid ""
+"This list will be completed automatically.\n"
+"\n"
+"Confirm the lines with correct data in order to immediately display the flag of the country where the VPN server is located."
+msgstr ""
+
+#. settings-schema.json->flagList->description
+msgid "Flag List"
+msgstr ""
+
+#. settings-schema.json->flagList->columns->title
+#. settings-schema.json->sortFlagListBy->options
+msgid "VPN Name"
+msgstr "VPN név"
+
+#. settings-schema.json->flagList->columns->title
+#. settings-schema.json->sortFlagListBy->options
+msgid "Country Code"
+msgstr ""
+
+#. settings-schema.json->flagList->columns->title
+msgid "Confirmed"
+msgstr "Megerősítve"
+
+#. settings-schema.json->sortFlagListBy->description
+msgid "Sort by"
+msgstr "Rendezés"
+
+#. settings-schema.json->sortFlagListBy->options
+msgid "None"
+msgstr "Nincs"
+
+#. settings-schema.json->manageClients->description
+msgid "Manage Internet Apps"
+msgstr ""
+
+#. settings-schema.json->manageClients->tooltip
+msgid "This option allows this applet to manage the Internet applications you listed below."
+msgstr ""
+
+#. settings-schema.json->showClientsHelp->description
+msgid "Show Help"
+msgstr "Súgó megjelenítése"
+
+#. settings-schema.json->clientsHelp->description
+msgid ""
+"Name: Application name, as it appears in Menu/Internet.\n"
+"\n"
+"Launch: Whether or not to launch this application as soon as the VPN link becomes active.\n"
+"\n"
+"VPN only: Whether or not to quickly stop this application if it is started while the VPN is idle."
+msgstr ""
+
+#. settings-schema.json->clientsList->description
+msgid "Managed applications"
+msgstr "Kezelt alkalmazások"
+
+#. settings-schema.json->clientsList->columns->title
+msgid "Name"
+msgstr "Naziv"
+
+#. settings-schema.json->clientsList->columns->title
+msgid "Launch"
+msgstr "Indítás"
+
+#. settings-schema.json->clientsList->columns->title
+msgid "VPN only"
+msgstr "Csak VPN"
+
+#. settings-schema.json->buttonPopulateClientsList->description
+msgid "Add all Menu/Internet applications"
+msgstr ""

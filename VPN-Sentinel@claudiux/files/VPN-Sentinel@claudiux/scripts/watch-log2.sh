@@ -6,8 +6,15 @@ if [ "$#" = "1" ]; then {
     pkill -P $1;
 } fi
 
+APPLETNAME="VPN-Sentinel"
 UUID="VPN-Sentinel@claudiux"
-LOGFILE=$HOME/.cinnamon/configs/$UUID/vpn_activity.log
+OLDLOGFILE=$HOME/.cinnamon/configs/$UUID/vpn_activity.log
+LOGDIR=$HOME/.config/$APPLETNAME
+mkdir -p $LOGDIR
+LOGFILE=$LOGDIR/vpn_activity.log
+
+[ -f $OLDLOGFILE ] && mv -u $OLDLOGFILE $LOGFILE
+
 ICON=$HOME/.local/share/cinnamon/applets/$UUID/icons/vpn-sentinel-symbolic.svg
 TITLE="VPN-Sentinel Log"
 THISPID="$$"

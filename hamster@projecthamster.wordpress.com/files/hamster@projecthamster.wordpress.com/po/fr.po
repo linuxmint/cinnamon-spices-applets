@@ -5,49 +5,66 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hamster-shell-extension\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-17 16:42+0100\n"
-"PO-Revision-Date: 2012-11-13 12:27+0100\n"
-"Last-Translator: Raphaël Doursenaud <rdoursenaud@free.fr>\n"
+"POT-Creation-Date: 2017-02-16 18:44-0500\n"
+"PO-Revision-Date: 2023-05-09 18:57+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: français <>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Gtranslator 2.91.5\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:86
+#: applet.js:98
 msgid "What are you doing?"
 msgstr "Que faîtes vous ?"
 
-#: applet.js:92
+#: applet.js:104
 msgid "Enter activity..."
-msgstr "Entrez l'activité…"
+msgstr "Saisissez l'activité…"
 
-#: applet.js:105
+#: applet.js:120
 msgid "Todays activities"
 msgstr "Activités du jour"
 
-#: applet.js:221
+#: applet.js:287
 msgid "Loading..."
 msgstr "Chargement…"
 
-#: applet.js:245
+#: applet.js:311
 msgid "Show Overview"
-msgstr "Montrer le résumé"
+msgstr "Afficher le résumé"
 
-#: applet.js:250
+#: applet.js:316
 msgid "Stop Tracking"
 msgstr "Arrêter le suivi"
 
-#: applet.js:255
+#: applet.js:321
 msgid "Add Earlier Activity"
 msgstr "Ajouter une activité antérieure"
 
-#: applet.js:261
+#: applet.js:327
 msgid "Tracking Settings"
-msgstr "Préférences"
+msgstr "Préférences de suivi"
 
-#: applet.js:434
+#: applet.js:332
+msgid "Applet Settings"
+msgstr "Paramètres de l'applet"
+
+#: applet.js:514
 msgid "No Activity"
-msgstr "Pas d'activité"
+msgstr "Aucune activité"
+
+#: convenience.js:20
+#, c-format
+msgid "Schema \"%s\" not found."
+msgstr "Schéma \"%s\" non trouvé."
+
+#. hamster@projecthamster.wordpress.com->metadata.json->description
+msgid "Cinnamon applet for project hamster - the GNOME time tracker"
+msgstr "Applet Cinnamon pour le projet Hamster - le suivi du temps de GNOME"
+
+#. hamster@projecthamster.wordpress.com->metadata.json->name
+msgid "Project Hamster Applet"
+msgstr "Applet Project Hamster"

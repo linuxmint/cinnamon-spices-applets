@@ -36,6 +36,7 @@ const {to_string} = require("./lib/to-string");
 /** Constants
  */
 const {
+  NAME,
   UUID,
   HOME_DIR,
   APPLET_DIR,
@@ -43,7 +44,7 @@ const {
   ICONS_DIR,
   IFACES_DIR,
   SOUNDS_DIR,
-  SETTINGS_FILE,
+  SETTINGS_SCHEMA,
   DEFAULT_SYMBOLIC_ICON,
   _,
   DEBUG,
@@ -57,7 +58,12 @@ const TITLE = _("VPN Sentinel");
 
 const DEFAULT_APPLET_LABEL = "     "; // 5 blank characters
 
-const DOMAINS_FILE = "%s/.cinnamon/configs/%s/domains2bypass.txt".format(HOME_DIR, UUID);
+const OLD_DOMAINS_FILE = "%s/.cinnamon/configs/%s/domains2bypass.txt".format(HOME_DIR, UUID);
+
+const DOMAINS_DIR = "%s/.config/%s".format(HOME_DIR, NAME);
+if (!exists(DOMAINS_DIR)) GLib.spawn_command_line_async("bash -c 'mkdir -p "+DOMAINS_DIR+"'");
+const DOMAINS_FILE = DOMAINS_DIR + "/domains2bypass.txt";
+if (exists(OLD_DOMAINS_FILE) && exists(DOMAINS_DIR)) GLib.spawn_command_line_async("bash -c 'mv -u "+OLD_DOMAINS_FILE+ " " + DOMAINS_FILE +"'");
 
 const {
   IpGateway
@@ -130,6 +136,11 @@ class VPNSentinel extends Applet.TextIconApplet {
     Util.spawnCommandLineAsync("bash -c 'cd "+ SCRIPTS_DIR + " && chmod 755 *.sh *.py *.js'");
     Util.spawnCommandLineAsync("bash -c 'cd "+ APPLET_DIR + "/po && chmod 755 makepot'");
 
+    // Menu
+    this.menuManager = new PopupMenu.PopupMenuManager(this);
+    this.menu = new Applet.AppletPopupMenu(this, this.orientation);
+    this.menuManager.addMenu(this.menu);
+
     // Check dependencies
     this.dependencies = new Dependencies();
     this.interval = 0;
@@ -191,21 +202,13 @@ class VPNSentinel extends Applet.TextIconApplet {
     this.sysclassnetMonitor = null;
     this.sysclassnetMonitorId = 0;
 
-    let userSettings = JSON.parse(to_string(GLib.file_get_contents(SETTINGS_FILE)[1]));
-    this.tabNumberOfVPNPolicy = 1*userSettings["layout"]["pages"].indexOf("VPNpolicy");
-    this.tabNumberOfInternetPolicy = 1*userSettings["layout"]["pages"].indexOf("InternetPolicy");
-    this.tabFlags = 1*userSettings["layout"]["pages"].indexOf("CountryFlags");
+    let settingsSchema = JSON.parse(to_string(GLib.file_get_contents(SETTINGS_SCHEMA)[1]));
+    this.tabNumberOfVPNPolicy = 1*settingsSchema["layout"]["pages"].indexOf("VPNpolicy");
+    this.tabNumberOfInternetPolicy = 1*settingsSchema["layout"]["pages"].indexOf("InternetPolicy");
+    this.tabFlags = 1*settingsSchema["layout"]["pages"].indexOf("CountryFlags");
 
     // Keybinding:
     Main.keybindingManager.addHotKey(UUID, this.keybinding, () => this.on_shortcut_used());
-
-    // Set up Left Click Menu:
-    this.menuManager = new PopupMenu.PopupMenuManager(this);
-    this.menu = new Applet.AppletPopupMenu(this, orientation);
-    this.menuManager.addMenu(this.menu);
-    //this.signals = new SignalManager(null);
-    //this.signals.connect(this.menu.actor, 'enter-event', (...args) => this.on_enter(...args));
-    //this.signals.connect(this.menu.actor, 'leave-event', (...args) => this.on_leave(...args));
 
     // System Apps:
     this.appSystem = Cinnamon.AppSystem.get_default();
@@ -239,7 +242,7 @@ class VPNSentinel extends Applet.TextIconApplet {
       this.activityLog.log(message)
     }
 
-    userSettings = null;
+    settingsSchema = null;
 
     // Loop:
     this.knownPids = [];

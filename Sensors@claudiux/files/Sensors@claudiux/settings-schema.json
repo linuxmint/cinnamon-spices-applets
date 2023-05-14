@@ -124,7 +124,7 @@
     },
     "section_tempDisks": {
       "type": "section",
-      "title": "Temperature scripts",
+      "title": "Disk temperature sensors",
       "keys": [
       "btn_renew_disks_list",
         "temp_disks",
@@ -214,7 +214,7 @@
   },
   "interval": {
     "type": "combobox",
-    "default": 1,
+    "default": 10,
     "options": {
       "1": 1,
       "2": 2,
@@ -375,13 +375,33 @@
       {
         "id": "shown_name",
         "title": "Shown name",
+        "align": 0.5,
         "type": "string"
+      },
+      {
+        "id": "high_by_user",
+        "title": "High\n(°C)",
+        "align": 0.5,
+        "type": "string"
+      },
+      {
+        "id": "crit_by_user",
+        "title": "Critical\n(°C)",
+        "align": 0.5,
+        "type": "string"
+      },
+      {
+        "id": "user_formula",
+        "title": "Formula",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
 
     ],
-    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor name.",
+    "tooltip": "Double-click on a line to change 'Shown name', 'High', 'Critical' or 'Formula'.\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\n'High' and 'Critical' (optional) must be valid numbers.\n'Formula' (optional):\n  Use $ as the value returned by the sensor.\n  You can use the 4 operations (+-*/) and parentheses.\n  Example: $*1.1+0.5",
     "show-buttons": true
   },
   "btn_renew_disks_list": {
@@ -412,13 +432,13 @@
       },
       {
         "id": "shown_name",
-        "title": "Shown name",
+        "title": "Shown\nname",
         "type": "string",
         "default": ""
       },
       {
         "id": "high",
-        "title": "High °C",
+        "title": "High\n(°C)",
         "type": "integer",
         "align": 0.5,
         "min": 0,
@@ -427,12 +447,19 @@
       },
       {
         "id": "crit",
-        "title": "Critical °C",
+        "title": "Critical\n(°C)",
         "type": "integer",
         "align": 0.5,
         "min": 0,
         "max": 127,
         "default": 75
+      },
+      {
+        "id": "user_formula",
+        "title": "Formula",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
@@ -503,13 +530,27 @@
       {
         "id": "shown_name",
         "title": "Shown name",
+        "align": 0.5,
         "type": "string"
+      },
+      {
+        "id": "min_by_user",
+        "title": "Min\n(rpm)",
+        "align": 0.5,
+        "type": "string"
+      },
+      {
+        "id": "user_formula",
+        "title": "Formula",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
 
     ],
-    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor name.",
+    "tooltip": "Double-click on a line to change 'Shown name', 'Min' or 'Formula'.\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\n'Min' (optional) must be valid number.\n'Formula' (optional):\n  Use $ as the value returned by the sensor.\n  You can use the 4 operations (+-*/) and parentheses.\n  Example: $*1.1+0.5",
     "show-buttons": false
   },
   "numberOfFanSensors": {
@@ -578,14 +619,33 @@
       },
       {
         "id": "shown_name",
-        "title": "Shown name",
+        "title": "Shown\nname",
         "type": "string"
+      },
+      {
+        "id": "min_by_user",
+        "title": "Min\n(V)",
+        "align": 0.5,
+        "type": "string"
+      },
+      {
+        "id": "max_by_user",
+        "title": "Max\n(V)",
+        "align": 0.5,
+        "type": "string"
+      },
+      {
+        "id": "user_formula",
+        "title": "Formula",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
 
     ],
-    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor name.",
+    "tooltip": "Double-click on a line to change 'Shown name', 'Min', 'Max' or 'Formula'.\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\n'Min' and 'Max' (optional) must be valid numbers.\n'Formula' (optional):\n  Use $ as the value returned by the sensor.\n  You can use the 4 operations (+-*/) and parentheses.\n  Example: $*1.1+0.5",
     "show-buttons": false
   },
   "numberOfVoltageSensors": {
@@ -638,7 +698,7 @@
       },
       {
         "id": "shown_name",
-        "title": "Shown name",
+        "title": "Shown\nname",
         "type": "string"
       }
     ],
