@@ -1,6 +1,7 @@
 ### v1.3.0~20230516
   * Now compatible with Soup 3.
   * Fixes a bug in notifications management.
+  * Fixes a bug in OSD display.
 
 ### v1.2.3~20230429
   * Update lib/checkDependencies.js (bugfix)
