@@ -720,11 +720,20 @@ RadioNotificationSource.prototype = {
   __proto__: SystemNotificationSource.prototype,
   _init: function() {
     SystemNotificationSource.prototype._init.call(this);
+    this.notifications = [];
   },
 
   destroyAllNotifications: function() {
-    for (let i = this.notifications.length - 1; i >= 0; i--)
-      this.notifications[i].destroy();
+    if (this.notifications.length > 0) {
+      for (let i = this.notifications.length - 1; i >= 0; i--) {
+        try {
+          this.notifications[i].destroy();
+        } catch(e) {
+          // Do nothing.
+        }
+      }
+    }
+    this.notifications = [];
 
     this._updateCount();
     //log("All notifications have been destroyed.");
