@@ -658,6 +658,7 @@ class VPNSentinel extends Applet.TextIconApplet {
       this.loopId = 0;
       return false;
     }
+    this.get_vpn_status();
     log("VPN status: "+this.vpnStatus);
     if (this.vpnStatus === "off") {
       this.get_internet_apps();
@@ -907,7 +908,7 @@ class VPNSentinel extends Applet.TextIconApplet {
     )
 
     let _countryCode = countryCode.toUpperCase();
-    //~ log("_countryCode: %s".format(_countryCode));
+    log("_countryCode: %s".format(_countryCode));
 
     if (this.flags[_countryCode] !== undefined) {
       //~ if (this.vpnStatus === "on") {
