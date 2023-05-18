@@ -26,6 +26,11 @@
     "default": ""
   },
 
+  "label-uuids": {
+    "type": "label",
+    "description": "Additional uuid:s"
+  },
+
   "uuids": {
     "type": "list",
     "columns": [
@@ -36,8 +41,7 @@
         "default": ""
       }
     ],
-    "description": "Additional uuid:s",
-    "tooltip": "Additional uuid:s for applets, desklets, extensions and themes you want to follow (separated by semi-colon).",
+    "tooltip": "Additional uuid:s for applets, desklets, extensions and themes you want to follow (add a row for each of them).",
     "default": []
   },
 
