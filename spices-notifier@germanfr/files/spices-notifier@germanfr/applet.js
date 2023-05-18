@@ -1,4 +1,3 @@
-//~ const Soup = imports.gi.Soup;
 const St = imports.gi.St;
 
 const Applet = imports.ui.applet;
@@ -8,7 +7,6 @@ const Settings = imports.ui.settings;
 const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
 
-//~ const session = new Soup.Session();
 const {HttpLib} = require("./lib/httpLib");
 const http = new HttpLib();
 
@@ -186,15 +184,6 @@ class SpicesNotifier extends Applet.TextIconApplet {
     let iteration = this.iteration;
     /* The question mark at the end is a hack to force the server to not
        send us a very old cached version of the json file. */
-    //~ let msg = Soup.Message.new('GET', `${SPICES_URL}/json/${type}.json?`);
-    //~ session.queue_message(msg, (session, message) => {
-      //~ if (message.status_code === 200 && iteration === this.iteration) {
-        //~ let xlets = JSON.parse(message.response_body.data);
-        //~ this.save_xlet_cache(type, xlets);
-        //~ this.on_xlets_loaded(type, xlets);
-      //~ }
-    //~ });
-
     let response = await http.LoadAsync(`${SPICES_URL}/json/${type}.json?`);
     if (!response.Success) {
       logError(`HTTP Error! status : ${response.status}`);
@@ -233,24 +222,6 @@ class SpicesNotifier extends Applet.TextIconApplet {
       item.update_comment_count(count - read);
       return;
     }
-
-    //~ let msg = Soup.Message.new('GET', xlet.page);
-    //~ session.queue_message(msg, (session, message) => {
-      //~ if (message.status_code === 200) {
-        //~ let result = COMMENTS_REGEX.exec(message.response_body.data);
-        //~ if (result && result[1]) {
-          //~ let count = parseInt(result[1]);
-          //~ this.set_comments_cache(xlet, count, read);
-          //~ item.update_comment_count(count - read);
-        //~ } else {
-          //~ item.actor.hide();
-          //~ global.logWarning(xlet.name + ": This xlet is cached in the "
-              //~ + "xlet.json file but doesn't actually exist in the "
-              //~ + "Spices now OR the Cinnamon Spices changed the ID "
-              //~ + "(please report if there are 0 items)");
-        //~ }
-      //~ }
-    //~ });
 
     let response = await http.LoadAsync(xlet.page);
     if (response.Success) {
