@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 19:23+0200\n"
+"POT-Creation-Date: 2023-05-20 13:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:114
+#: applet.js:112
 msgid "Mark all as read"
 msgstr ""
 
-#: applet.js:137
+#: applet.js:135
 msgid "No xlets found, click to reload"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgid "Hide panel icon when there are no unread comments"
 msgstr ""
 
 #. settings-schema.json->label-uuids->description
-msgid "Additional uuid:s"
+msgid "Additional uuid:s:"
 msgstr ""
 
 #. settings-schema.json->uuids->columns->title
