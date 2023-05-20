@@ -28,7 +28,7 @@
 
   "label-uuids": {
     "type": "label",
-    "description": "Additional uuid:s"
+    "description": "Additional uuid:s:"
   },
 
   "uuids": {
