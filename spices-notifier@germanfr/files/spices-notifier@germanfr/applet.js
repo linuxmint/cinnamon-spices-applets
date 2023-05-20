@@ -5,7 +5,7 @@ const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 
 const Mainloop = imports.mainloop;
-const Util = imports.misc.util;
+var Util = imports.misc.util;
 
 const {HttpLib} = require("./lib/httpLib");
 const http = new HttpLib();
