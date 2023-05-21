@@ -29,5 +29,5 @@ Cinnamenu is a full featured alternative to the standard Cinnamon menu with grid
 
 #### Expert features (optional)
  * `Shift-Enter` — Run currently highlighted application as root user.
- * `Alt-Enter` — Open launcher properties dialogue of currently highlighted application.
+ * `ctrl-p` — Open launcher properties dialogue of currently highlighted application.
  * `Ctrl-d` — Open .desktop file of currently highlighted app in default text editor (opens file in user mode.)

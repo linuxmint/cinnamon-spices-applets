@@ -1,3 +1,7 @@
+### v6.4.2~20230413
+  * Minor bugfix.
+
+
 ### v6.4.1~20230309
   * Now compatible with openSUSE.
 

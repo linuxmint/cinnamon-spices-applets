@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-28 15:11+0200\n"
-"PO-Revision-Date: 2021-03-30 23:17+0200\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"POT-Creation-Date: 2023-04-02 19:27+0200\n"
+"PO-Revision-Date: 2023-05-07 19:51+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: ../3.0/prefsui.glade.h:1 ../3.2/prefsui.glade.h:1 ../3.4/prefsui.glade.h:1
 #: ../4.0/prefsui.glade.h:1
@@ -67,7 +67,7 @@ msgstr "Színek"
 #: ../3.4/prefsui.glade.h:10 ../4.0/prefsui.glade.h:16
 #: ../3.0/DataProviders.js:107 ../3.0/prefs.js:183 ../3.2/DataProviders.js:107
 #: ../3.2/prefs.js:187 ../3.4/DataProviders.js:58 ../3.4/prefs.js:195
-#: ../4.0/DataProviders.js:54 ../4.0/prefs.js:303
+#: ../4.0/DataProviders.js:55 ../4.0/prefs.js:303
 msgid "CPU"
 msgstr "CPU"
 
@@ -94,7 +94,7 @@ msgstr "Szabad"
 #: ../3.0/prefsui.glade.h:15 ../3.2/prefsui.glade.h:16
 #: ../3.4/prefsui.glade.h:15 ../4.0/prefsui.glade.h:21
 #: ../3.0/DataProviders.js:200 ../3.2/DataProviders.js:200
-#: ../3.4/DataProviders.js:195 ../4.0/DataProviders.js:191
+#: ../3.4/DataProviders.js:195 ../4.0/DataProviders.js:194
 msgid "Swap"
 msgstr "Cserehely"
 
@@ -190,27 +190,26 @@ msgstr "Címke színe"
 
 #: ../4.0/prefsui.glade.h:4
 msgid "Curves thickness"
-msgstr ""
+msgstr "Görbevastagság"
 
 #: ../4.0/prefsui.glade.h:10
 msgid "Color by activity level"
-msgstr ""
+msgstr "Aktivitás szerinti szín"
 
 #: ../4.0/prefsui.glade.h:11
 msgid "Use automatic colors"
-msgstr ""
+msgstr "Automatikus színek használata"
 
 #: ../4.0/prefsui.glade.h:13
 msgid "by CPU:"
-msgstr ""
+msgstr "CPU:"
 
 #: ../4.0/prefsui.glade.h:15
 #, no-c-format
 msgid "by activity level (in %):"
-msgstr ""
+msgstr "aktivitás szerinti szín (százalékban megadva)"
 
 #: ../4.0/prefsui.glade.h:31
-#, fuzzy
 msgid ""
 "Auto Scaling:\n"
 "    This will scale the line graph by the largest reading within the\n"
@@ -252,22 +251,22 @@ msgstr ""
 "\tígy azok nem nyomják el a kisebb értékeket."
 
 #: ../3.0/DataProviders.js:113 ../3.2/DataProviders.js:113
-#: ../3.4/DataProviders.js:126 ../4.0/DataProviders.js:122
+#: ../3.4/DataProviders.js:126 ../4.0/DataProviders.js:123
 msgid "------------- CPU ------------"
 msgstr "------------- CPU ------------"
 
 #: ../3.0/DataProviders.js:117 ../3.2/DataProviders.js:117
-#: ../3.4/DataProviders.js:129 ../4.0/DataProviders.js:125
+#: ../3.4/DataProviders.js:129 ../4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Mag"
 
 #: ../3.0/DataProviders.js:157 ../3.2/DataProviders.js:157
-#: ../3.4/DataProviders.js:141 ../4.0/DataProviders.js:137
+#: ../3.4/DataProviders.js:141 ../4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MEM"
 
 #: ../3.0/DataProviders.js:163 ../3.2/DataProviders.js:163
-#: ../3.4/DataProviders.js:161 ../4.0/DataProviders.js:157
+#: ../3.4/DataProviders.js:161 ../4.0/DataProviders.js:158
 msgid "----------- Memory -----------"
 msgstr "----------- Memória -----------"
 
@@ -276,42 +275,42 @@ msgid "Usedup:"
 msgstr "Felhasznált:"
 
 #: ../3.0/DataProviders.js:165 ../3.2/DataProviders.js:165
-#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "Gyorsítótárazott:"
 
 #: ../3.0/DataProviders.js:166 ../3.2/DataProviders.js:166
-#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "Puffer:"
 
 #: ../3.0/DataProviders.js:167 ../3.2/DataProviders.js:167
-#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Szabad:"
 
 #: ../3.0/DataProviders.js:194 ../3.2/DataProviders.js:194
-#: ../3.4/DataProviders.js:176 ../4.0/DataProviders.js:172
+#: ../3.4/DataProviders.js:176 ../4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "Cserehely"
 
 #: ../3.0/DataProviders.js:199 ../3.2/DataProviders.js:199
-#: ../3.4/DataProviders.js:194 ../4.0/DataProviders.js:190
+#: ../3.4/DataProviders.js:194 ../4.0/DataProviders.js:193
 msgid "------------ Swap ------------"
 msgstr "------------ Cserehely ------------"
 
 #: ../3.0/DataProviders.js:264 ../3.2/DataProviders.js:264
-#: ../3.4/DataProviders.js:205 ../4.0/DataProviders.js:201
+#: ../3.4/DataProviders.js:205 ../4.0/DataProviders.js:204
 msgid "NET"
 msgstr "NET"
 
 #: ../3.0/DataProviders.js:305 ../3.2/DataProviders.js:305
-#: ../3.4/DataProviders.js:289 ../4.0/DataProviders.js:284
+#: ../3.4/DataProviders.js:289 ../4.0/DataProviders.js:287
 msgid "---------- Networks ----------"
 msgstr "---------- Hálózatok ----------"
 
 #: ../3.0/DataProviders.js:308 ../3.2/DataProviders.js:308
-#: ../3.4/DataProviders.js:300 ../4.0/DataProviders.js:295
+#: ../3.4/DataProviders.js:300 ../4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Le:"
 
@@ -321,22 +320,22 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #: ../3.0/DataProviders.js:309 ../3.2/DataProviders.js:309
-#: ../3.4/DataProviders.js:301 ../4.0/DataProviders.js:296
+#: ../3.4/DataProviders.js:301 ../4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Fel:"
 
 #: ../3.0/DataProviders.js:382 ../3.2/DataProviders.js:382
-#: ../3.4/DataProviders.js:317 ../4.0/DataProviders.js:312
+#: ../3.4/DataProviders.js:317 ../4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "LEMEZ"
 
 #: ../3.0/DataProviders.js:408 ../3.2/DataProviders.js:408
-#: ../3.4/DataProviders.js:378 ../4.0/DataProviders.js:373
+#: ../3.4/DataProviders.js:378 ../4.0/DataProviders.js:376
 msgid "------------ Disks -----------"
 msgstr "------------ Lemezek -----------"
 
 #: ../3.0/DataProviders.js:411 ../3.2/DataProviders.js:411
-#: ../3.4/DataProviders.js:386 ../4.0/DataProviders.js:381
+#: ../3.4/DataProviders.js:386 ../4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Olvasás:"
 
@@ -346,7 +345,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #: ../3.0/DataProviders.js:412 ../3.2/DataProviders.js:412
-#: ../3.4/DataProviders.js:387 ../4.0/DataProviders.js:382
+#: ../3.4/DataProviders.js:387 ../4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Írás:"
 
@@ -356,7 +355,7 @@ msgid "Multi-Core System Monitor Error."
 msgstr "Többmagos rendszerfigyelő hiba."
 
 #: ../3.0/applet.js:141 ../3.2/applet.js:139 ../3.4/applet.js:264
-#: ../4.0/applet.js:268
+#: ../4.0/applet.js:270
 msgid "Preferences"
 msgstr "Beállítások"
 
@@ -366,7 +365,7 @@ msgstr "Kérjük, telepítse a \"gir1.2-gtop-2.0\" csomagot."
 
 #: ../3.0/applet.js:328 ../3.2/applet.js:339
 msgid "Reload this applet"
-msgstr ""
+msgstr "Kisalkalmazás újratöltése"
 
 #: ../3.0/prefs.js:290 ../3.2/prefs.js:294 ../3.4/prefs.js:338
 #: ../4.0/prefs.js:494
@@ -392,11 +391,11 @@ msgstr "Írás"
 msgid "Error while saving file:"
 msgstr "Hiba a fájl mentése közben:"
 
-#: ../3.4/DataProviders.js:49 ../4.0/DataProviders.js:45
+#: ../3.4/DataProviders.js:49 ../4.0/DataProviders.js:47
 msgid "/s"
 msgstr "/s"
 
-#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "Használt:"
 
@@ -404,7 +403,7 @@ msgstr "Használt:"
 msgid "Dependency missing"
 msgstr "Függőség hiányzik"
 
-#: ../3.4/applet.js:62 ../4.0/applet.js:61
+#: ../3.4/applet.js:62
 msgid ""
 "Please install the GTop package\n"
 "\tUbuntu / Mint: gir1.2-gtop-2.0\n"
@@ -418,22 +417,38 @@ msgstr ""
 "\tArch: libgtop\n"
 "a használathoz "
 
+#: ../4.0/applet.js:61
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"to use "
+msgstr ""
+"Telepítse a GTop csomagot:\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"a használathoz "
+
 #: ../4.0/prefs.js:335
 msgid "00-20"
-msgstr ""
+msgstr "00-20"
 
 #: ../4.0/prefs.js:335
 msgid "20-40"
-msgstr ""
+msgstr "20-40"
 
 #: ../4.0/prefs.js:335
 msgid "40-60"
-msgstr ""
+msgstr "40-60"
 
 #: ../4.0/prefs.js:335
 msgid "60-80"
-msgstr ""
+msgstr "60-80"
 
 #: ../4.0/prefs.js:335
 msgid "80-100"
-msgstr ""
+msgstr "80-100"

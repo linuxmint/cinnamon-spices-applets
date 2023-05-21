@@ -26,7 +26,7 @@ const DEFAULT_CONFIG = {
   backgroundColor: [1, 1, 1, 0.1],
   cpu: {
     enabled: true,
-    width: 40,
+    width: 64,
     byActivity: false,
     useProgressiveColors: false,
     colors: [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]],
@@ -65,7 +65,7 @@ const DEFAULT_CONFIG = {
   },
   mem: {
     enabled: true,
-    width: 40,
+    width: 55,
     colors: [[1, 1, 1, 1], [0.6, 0.6, 0.6, 0.8], [0.8, 0.8, 0.8, 0.8], [0.9, 0.9, 0.9, 0.1]],
     swapcolors: [[1, 1, 1, 0.15]]
   },
@@ -73,14 +73,14 @@ const DEFAULT_CONFIG = {
     enabled: true,
     autoscale: true,
     logscale: true,
-    width: 40,
+    width: 64,
     devices: []
   },
   disk: {
     enabled: true,
     autoscale: true,
     logscale: true,
-    width: 40,
+    width: 64,
     devices: [
       {
         id: '/',
@@ -152,7 +152,7 @@ Preferences.prototype = {
     this.refreshRateScale = Gtk.Scale.new_with_range(
       Gtk.Orientation.HORIZONTAL,
       500,
-      2000,
+      3000,
       1
     );
     this.refreshRateScale.set_value_pos(Gtk.PositionType.RIGHT);

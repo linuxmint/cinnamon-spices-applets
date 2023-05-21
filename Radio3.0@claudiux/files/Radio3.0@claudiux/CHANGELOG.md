@@ -1,3 +1,17 @@
+### v1.3.0~20230516
+  * Now compatible with Soup 3.
+  * Fixes a bug in notifications management.
+  * Fixes a bug in OSD display.
+
+### v1.2.3~20230429
+  * Update lib/checkDependencies.js (bugfix)
+
+### v1.2.2~20230424
+  * Volume scrolling is now in the same direction as Cinnamon.
+
+### v1.2.1~20230401
+  * Now compatible with OpenSUSE.
+
 ### v1.2.0~20230328
   * Adds ability to show OSD while changing volume.
 

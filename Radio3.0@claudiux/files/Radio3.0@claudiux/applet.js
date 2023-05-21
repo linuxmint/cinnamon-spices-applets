@@ -207,6 +207,14 @@ const {
   //~ Shoutcast
 //~ } = require("./lib/shoutcast");
 
+function _get_system_natural_scroll() {
+  let _SETTINGS_SCHEMA='org.cinnamon.desktop.peripherals.mouse';
+  let _SETTINGS_KEY = 'natural-scroll';
+  let _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
+  let ret = _interface_settings.get_boolean(_SETTINGS_KEY);
+  return ret
+}
+
 function getImageAtScale(imageFileName, width, height) {
   let pixBuf = Pixbuf.new_from_file_at_size(imageFileName, width, height);
   let image = new Image();
@@ -712,11 +720,20 @@ RadioNotificationSource.prototype = {
   __proto__: SystemNotificationSource.prototype,
   _init: function() {
     SystemNotificationSource.prototype._init.call(this);
+    this.notifications = [];
   },
 
   destroyAllNotifications: function() {
-    for (let i = this.notifications.length - 1; i >= 0; i--)
-      this.notifications[i].destroy();
+    if (this.notifications.length > 0) {
+      for (let i = this.notifications.length - 1; i >= 0; i--) {
+        try {
+          this.notifications[i].destroy();
+        } catch(e) {
+          // Do nothing.
+        }
+      }
+    }
+    this.notifications = [];
 
     this._updateCount();
     //log("All notifications have been destroyed.");
@@ -1122,6 +1139,9 @@ WebRadioReceiverAndRecorder.prototype = {
     this.settings.bind("shortcut-volume-up", "shortcutVolUp", this.onShortcutChanged.bind(this));
     this.settings.bind("shortcut-volume-down", "shortcutVolDown", this.onShortcutChanged.bind(this));
     this.settings.bind("shortcut-volume-cut", "shortcutVolCut", this.onShortcutChanged.bind(this));
+    this.settings.bind("shortcut-radio-on-off", "shortcutOnOff", this.onShortcutChanged.bind(this));
+    this.settings.bind("shortcut-next-recent-radio", "shortcutNext", this.onShortcutChanged.bind(this));
+    this.settings.bind("shortcut-previous-recent-radio", "shortcutPrevious", this.onShortcutChanged.bind(this));
 
     //Scheduling:
     this.settings.bind("sched-recordings", "sched_recordings");
@@ -1188,6 +1208,22 @@ WebRadioReceiverAndRecorder.prototype = {
         this.context_menu_item_slider.slider.emit('value-changed', value);
       }
     });
+    keybindingManager.addHotKey("shortcutOnOff", this.shortcutOnOff, (event) => {
+      this.on_applet_middle_clicked(event);
+    });
+    keybindingManager.addHotKey("shortcutNext", this.shortcutNext, (event) => {
+      if (this.recentRadios.length < 2) return;
+      let next_radio = this.recentRadios[this.recent_number - 1];
+      this.stop_mpv_radio(false);
+      this.start_mpv_radio(next_radio);
+    });
+    keybindingManager.addHotKey("shortcutPrevious", this.shortcutPrevious, (event) => {
+      if (this.recentRadios.length < 2) return;
+      let prev_radio = this.recentRadios[1];
+      this.stop_mpv_radio(false);
+      this.start_mpv_radio(prev_radio);
+    });
+
   },
 
   on_rec_path_changed: function() {
@@ -1197,7 +1233,6 @@ WebRadioReceiverAndRecorder.prototype = {
           recording_path !== "file://"+RADIO30_MUSIC_DIR) {
       RADIO30_MUSIC_DIR = recording_path.slice("file://".length, recording_path.length);
       this.rec_folder = "file://" + RADIO30_MUSIC_DIR;
-      log("Changes was made!!!");
     }
     log("RADIO30_MUSIC_DIR: "+RADIO30_MUSIC_DIR);
     log("this.rec_folder: "+this.rec_folder);
@@ -3130,14 +3165,15 @@ WebRadioReceiverAndRecorder.prototype = {
 
   _onScrollEvent: function(actor, event) {
     //log("_onScrollEvent");
+    let invert = _get_system_natural_scroll();
     if (!this.context_menu_item_slider) {
       let direction = event.get_scroll_direction();
       let step = this.volume_step;
       let percentage = this.percentage;
-      if (direction == ScrollDirection.DOWN) {
+      if ((direction == ScrollDirection.DOWN && !invert) || (direction == ScrollDirection.UP && invert)) {
         this.percentage = Math.max(0, percentage - step);
       }
-      else if (direction == ScrollDirection.UP) {
+      else if ((direction == ScrollDirection.UP && !invert) || (direction == ScrollDirection.DOWN && invert)) {
         this.percentage = Math.min(100, percentage + step);
       }
       this.change_volume_in_radio_tooltip();
@@ -3306,6 +3342,9 @@ WebRadioReceiverAndRecorder.prototype = {
     keybindingManager.removeHotKey("shortcutVolUp");
     keybindingManager.removeHotKey("shortcutVolDown");
     keybindingManager.removeHotKey("shortcutVolCut");
+    keybindingManager.removeHotKey("shortcutOnOff");
+    keybindingManager.removeHotKey("shortcutNext");
+    keybindingManager.removeHotKey("shortcutPrevious");
 
     // Finalize settings:
     this.settings.finalize();

@@ -811,7 +811,7 @@ class SpicesUpdate extends IconApplet {
                                 }
                             } else {
                                 let n = this.notifications_about_updates[type].pop(this.notifications_about_updates[type].indexOf(notification));
-                                n.destroy(3);
+                                if (n) n.destroy(3);
                             }
                             about_updates ? this.old_message[type] = "" : this.old_watch_message[type] = "";
                             this._on_refresh_pressed("notify_with_button");

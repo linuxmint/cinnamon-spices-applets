@@ -1,0 +1,26 @@
+{
+	"dockerComposeProjectFolder": {
+		"type": "entry",
+		"default": "~/docker_projects",
+		"description": "Docker Compose base project folder. This is the base folder for your docker-compose YAML files. This applet will scan through each sub-folder looking for configuration files.",
+		"tooltip": ""
+	},
+	"dockerComposeCmd": {
+		"type": "entry",
+		"default": "docker-compose",
+		"description": "Docker Compose command location or just the command to find one in PATH.",
+		"tooltip": "This is the command that is run to start Docker Compose."
+	},
+	"dockerCmd": {
+		"type": "entry",
+		"default": "docker",
+		"description": "Docker command location or just the command to find one in PATH.",
+		"tooltip": "This is the command that is run to start Docker."
+	},
+	"editor": {
+		"type": "entry",
+		"default": "xed",
+		"description": "Default text editor command.",
+		"tooltip": "This is the default text editor for editing configuration files."
+	}
+}

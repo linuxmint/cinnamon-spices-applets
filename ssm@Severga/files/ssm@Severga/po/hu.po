@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-08 19:56+0300\n"
-"PO-Revision-Date: 2023-03-13 15:02+0100\n"
+"PO-Revision-Date: 2023-05-08 11:14+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: applet.js:33 applet.js:59
 msgid "Required GTop package missing!"
-msgstr ""
+msgstr "Nincsen telepítve a szükséges GTop csomag."
 
 #: applet.js:57
 msgid "Error!"
@@ -91,7 +91,7 @@ msgstr "B"
 
 #: applet.js:443
 msgid "no interfaces to show"
-msgstr ""
+msgstr "nincsenek megjeleníthető csatolók"
 
 #: applet.js:448
 msgid "k"
@@ -111,11 +111,11 @@ msgstr "T"
 
 #. metadata.json->name
 msgid "Simplified System Monitor"
-msgstr ""
+msgstr "Egyszerűsített rendszerfigyelő"
 
 #. metadata.json->description
 msgid "Applet to show system load and state"
-msgstr ""
+msgstr "Kisalkalmazás a rendszer terhelésének és állapotának megjelenítéséhez"
 
 #. settings-schema.json->common_label->description
 msgid "Common"
@@ -123,98 +123,109 @@ msgstr "Általános"
 
 #. settings-schema.json->refresh->description
 msgid "Sections info refresh rate (seconds)"
-msgstr ""
+msgstr "Információszakaszok frissítési gyakorisága (másodpercben megadva)."
 
 #. settings-schema.json->refresh->tooltip
 msgid "CPUs, memory, network info refresh rate"
-msgstr ""
+msgstr "Processzor, memória és hálózati információk frissítési gyakorisága"
 
 #. settings-schema.json->cpu_label->description
 msgid "CPUs and memory sections"
-msgstr ""
+msgstr "CPU-k és memória"
 
 #. settings-schema.json->size->description
 msgid "CPUs and memory panel sections widths (px)"
-msgstr ""
+msgstr "Processzor és memória panelszelvény szélesség (képpont)"
 
 #. settings-schema.json->size->tooltip
 msgid "CPUs and memory panel sections widths"
-msgstr ""
+msgstr "Processzor és memória panelszelvény szélesség"
 
 #. settings-schema.json->temp_refresh->description
 msgid "CPUs temperature refresh rate (seconds)"
-msgstr ""
+msgstr "Processzor, hőmérséklet frissítési gyakorisága (másodpercben megadva)"
 
 #. settings-schema.json->temp_refresh->tooltip
 msgid "CPUs temperature refresh rate"
-msgstr ""
+msgstr "Processzor, hőmérséklet frissítési gyakorisága"
 
 #. settings-schema.json->cold_temp->description
 msgid "CPU cold temperature (°C)"
-msgstr ""
+msgstr "Processzor hideg hőmérséklete (°C)"
 
 #. settings-schema.json->cold_temp->tooltip
 msgid ""
 "CPUs' temperature below which they are regarded as cold (for color "
 "representation in the panel)"
 msgstr ""
+"Processzor hőmérséklete, ami alatt már színnel hidegként vannak jelölve a "
+"panelen:"
 
 #. settings-schema.json->color_cold->description
 msgid "Color for CPU cold temperature"
-msgstr ""
+msgstr "Szín a processzor alacsony hőmérsékletéhez"
 
 #. settings-schema.json->hot_temp->description
 msgid "CPU hot temperature (°C)"
-msgstr ""
+msgstr "Processzor forró hőmérséklete (°C)"
 
 #. settings-schema.json->hot_temp->tooltip
 msgid ""
 "CPUs' temperature above which they are regarded as hot (for color "
 "representation in the panel)"
 msgstr ""
+"Processzor hőmérséklete, ami felett már színnel forróként vannak jelölve a "
+"panelen:"
 
 #. settings-schema.json->color_hot->description
 msgid "Color for CPU hot temperature"
-msgstr ""
+msgstr "Szín a processzor magas hőmérsékletéhez"
 
 #. settings-schema.json->sensors_cmd->description
 msgid "Command to start 'sensors'"
-msgstr ""
+msgstr "Parancs a „sensors” indításához"
 
 #. settings-schema.json->sensors_cmd->tooltip
 msgid ""
 "Command to start 'sensors'. Use 'which sensors' command to find it. Install "
 "'lmsensors' package, if not found"
 msgstr ""
+"Parancs a „sensors” indításához. Az „which sensors” parancs segítségével "
+"lehet megtalálni. Ha nem található a parancs, akkor telepítse az "
+"„lmsensors” csomagot"
 
 #. settings-schema.json->net_label->description
 msgid "Network section"
-msgstr ""
+msgstr "Hálózati szelvény"
 
 #. settings-schema.json->net_size->description
 msgid "Network panel section width (px)"
-msgstr ""
+msgstr "Hálózati panelszelvény szélesség (képpont)"
 
 #. settings-schema.json->net_size->tooltip
 msgid "Network panel section width"
-msgstr ""
+msgstr "Hálózati panelszelvény szélesség"
 
 #. settings-schema.json->net_style->description
 msgid "Network panel section style"
-msgstr ""
+msgstr "Hálózati panelszelvény stílus"
 
 #. settings-schema.json->net_style->tooltip
 msgid ""
 "Network panel section HTML style (e.g.: text-align: left; margin-left: 5px; "
 "font-size: 8pt;)"
 msgstr ""
+"Hálózati panelszelvény HTML stílus (például: text-align: left; margin-left: "
+"5px; font-size: 8pt;)"
 
 #. settings-schema.json->net_black_list->description
 msgid "Network interfaces blacklist"
-msgstr ""
+msgstr "Hálózati csatolók feketelistája"
 
 #. settings-schema.json->net_black_list->tooltip
 msgid ""
 "Semicolon-separated network interfaces list not to consider for counting "
 "traffic"
 msgstr ""
+"Forgalomszámolásakor figyelmen kívül hagyott pontosvesszővel elválasztott "
+"hálózati csatolók listája"
