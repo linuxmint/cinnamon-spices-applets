@@ -1,9 +1,9 @@
 {
   "uuid": "qredshift@quintao",
   "name": "QRedshift",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "It makes the color of your computer's display adapt to the time of day, warm at night and like sunlight during the day.",
   "multiversion": true,
   "max-instances": 1,
-  "cinnamon-version": ["3.8", "4.0", "4.2", "4.3", "4.4", "4.5", "4.6", "4.8", "5.0", "5.2", "5.4"]
+  "cinnamon-version": ["3.8", "4.0", "4.2", "4.3", "4.4", "4.5", "4.6", "4.8", "5.0", "5.2", "5.4", "5.5", "5.6"]
 }
