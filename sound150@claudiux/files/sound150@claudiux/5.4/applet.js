@@ -9,6 +9,11 @@ const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
+const {
+  PixelFormat
+} = imports.gi.Cogl; //Cogl
+const Gdk = imports.gi.Gdk;
+const GdkPixbuf = imports.gi.GdkPixbuf;
 const Cvc = imports.gi.Cvc;
 const Tooltips = imports.ui.tooltips;
 const Main = imports.ui.main;
@@ -910,10 +915,19 @@ class Player extends PopupMenu.PopupMenuSection {
         else {
             this._cover_path = cover_path;
             this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(cover_path, 300, 300, this._on_cover_loaded.bind(this));
-
+            let image = new Clutter.Image();
+            let pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(this._cover_path, 300, 300);
+            image.set_data(
+                pixbuf.get_pixels(),
+                pixbuf.get_has_alpha() ? PixelFormat.RGBA_8888 : PixelFormat.RGBA_888,
+                pixbuf.get_width(),
+                pixbuf.get_height(),
+                pixbuf.get_rowstride()
+            );
+            this.cover = image.get_texture();
             //~ if (this._applet.keepAlbumAspectRatio) {
                 //~ this.cover = new Clutter.Texture({ width: 300, keep_aspect_ratio: true, filter_quality: 2, filename: cover_path });
-            //~ } 
+            //~ }
             //~ else {
                 //~ this.cover = new Clutter.Texture({ width: 300, height: 300, keep_aspect_ratio: false, filter_quality: 2, filename: cover_path });
             //~ }
@@ -926,7 +940,9 @@ class Player extends PopupMenu.PopupMenuSection {
             return;
         }
 
-        this.coverBox.remove_actor(this.cover);
+        try {
+            this.coverBox.remove_actor(this.cover);
+        } catch(e) {}
 
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
         // (and move the player controls as a result).
