@@ -144,7 +144,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.s.bind("bold_values", "bold_values", this.updateUI, null);
     this.s.bind("bold_italics_main_sensors", "bold_italics_main_sensors", this.updateUI, null);
     this.s.bind("restart_in_menu", "restart_in_menu", null, null);
-
+    this.s.bind("separator", "separator", null, null);
 
     if (this._applet_tooltip.set_markup === undefined) {
       this.bold_values = false;
@@ -599,7 +599,7 @@ class SensorsApplet extends Applet.TextApplet {
     var _actor_style = "sensors-label%s sensors-size%s".format(_border_type, this.char_size);
 
     let vertical = (this._orientation == St.Side.LEFT || this._orientation == St.Side.RIGHT);
-    let sep = (vertical) ? "\n" : "│";
+    let sep = (vertical) ? "\n" : this.separator;
     let _shown_name;
     this.label_parts = [];
 
