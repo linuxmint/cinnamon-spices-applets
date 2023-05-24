@@ -43,7 +43,7 @@
 	"div2": {
 		"type": "separator"
 	},
-        "form_click_command": {
+    "form_click_command": {
         "type": "entry",
         "description": "Click Command",
         "default": "",
