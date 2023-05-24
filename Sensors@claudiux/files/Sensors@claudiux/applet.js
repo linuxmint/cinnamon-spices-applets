@@ -139,12 +139,12 @@ class SensorsApplet extends Applet.TextApplet {
     this.s.bind("keep_size", "keep_size", this.updateUI, null);
     this.s.bind("char_size", "char_size", this.updateUI, null);
     this.s.bind("char_color", "char_color", this.updateUI, null);
-    this.s.bind("separator", "separator", this.updateUI, null);
     this.s.bind("remove_border", "remove_border", this.updateUI, null);
     this.s.bind("remove_icons", "remove_icons", this.updateUI, null);
     this.s.bind("bold_values", "bold_values", this.updateUI, null);
     this.s.bind("bold_italics_main_sensors", "bold_italics_main_sensors", this.updateUI, null);
     this.s.bind("restart_in_menu", "restart_in_menu", null, null);
+    this.s.bind("separator", "separator", null, null);
 
     if (this._applet_tooltip.set_markup === undefined) {
       this.bold_values = false;
