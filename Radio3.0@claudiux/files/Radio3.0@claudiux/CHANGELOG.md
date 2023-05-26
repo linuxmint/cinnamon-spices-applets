@@ -1,3 +1,7 @@
+### v1.4.0~20230526
+  * Now able to display the station logo, if it exists. The user can choose to display it or not, in the contextual menu.
+  * Some bugfixes.
+
 ### v1.3.0~20230516
   * Now compatible with Soup 3.
   * Fixes a bug in notifications management.
