@@ -335,7 +335,7 @@ msgstr "DISCO"
 #: ../3.0/DataProviders.js:408 ../3.2/DataProviders.js:408
 #: ../3.4/DataProviders.js:378 ../4.0/DataProviders.js:376
 msgid "------------ Disks -----------"
-msgstr "------------ Discos ----------"
+msgstr "----------- Discos -----------"
 
 #: ../3.0/DataProviders.js:411 ../3.2/DataProviders.js:411
 #: ../3.4/DataProviders.js:386 ../4.0/DataProviders.js:384
