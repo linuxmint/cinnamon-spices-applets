@@ -6,7 +6,7 @@
     },
     "path_to_file": {
         "type": "entry",
-        "default": "~/Documents/todo.txt",
+        "default": "./Documents/todo.txt",
         "description": "The path to the text file. It must already exist."
     },
     "empty_file_message": {
