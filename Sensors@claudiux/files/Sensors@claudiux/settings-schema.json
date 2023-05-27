@@ -265,7 +265,7 @@
     "type": "entry",
     "description": "Separator",
     "default": "|",
-    "tooltip": "The string used to divide values in horizontal orientation."
+    "tooltip": "The string used to separate values in horizontal orientation. Default is '│'."
   },
   "remove_border": {
     "type": "switch",
