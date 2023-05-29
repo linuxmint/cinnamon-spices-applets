@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### v3.1.0~20230520
+  * Fixes a deprecation.
+
 ### v3.0.0~20230310
   * Rebase and update for cinnamon 5.4 (thanks to @rcalixte).
   * Overwrite existing binding of AudioRaiseVolume and AudioLowerVolume keysym. (Fixes [issue #9919](https://github.com/linuxmint/cinnamon/issues/9919))

@@ -9,6 +9,11 @@ const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
+const {
+  PixelFormat
+} = imports.gi.Cogl; //Cogl
+const Gdk = imports.gi.Gdk;
+const GdkPixbuf = imports.gi.GdkPixbuf;
 const Cvc = imports.gi.Cvc;
 const Tooltips = imports.ui.tooltips;
 const Main = imports.ui.main;
@@ -76,7 +81,7 @@ x = _("Stopped");
 
 let VOLUME_ADJUSTMENT_STEP = 0.02; /* Volume adjustment step in % */
 
-const ICON_SIZE = 28;
+const ICON_SIZE = 28*global.ui_scale;
 
 const CINNAMON_DESKTOP_SOUNDS = "org.cinnamon.desktop.sound";
 const MAXIMUM_VOLUME_KEY = "maximum-volume";
@@ -138,15 +143,15 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         this.app_icon = app_icon;
         if (this.app_icon == null) {
             this.iconName = this.isMic ? "microphone-sensitivity-muted" : "audio-volume-muted";
-            this.icon = new St.Icon({ icon_name: this.iconName, icon_type: St.IconType.SYMBOLIC, icon_size: 16 });
+            this.icon = new St.Icon({icon_name: this.iconName, icon_type: St.IconType.SYMBOLIC, icon_size: 16*global.ui_scale});
         }
         else {
-            this.icon = new St.Icon({ icon_name: this.app_icon, icon_type: St.IconType.FULLCOLOR, icon_size: 16 });
+            this.icon = new St.Icon({icon_name: this.app_icon, icon_type: St.IconType.FULLCOLOR, icon_size: 16*global.ui_scale});
         }
 
         this.removeActor(this._slider);
-        this.addActor(this.icon, { span: 0 });
-        this.addActor(this._slider, { span: -1, expand: true });
+        this.addActor(this.icon, {span: 0});
+        this.addActor(this._slider, {span: -1, expand: true});
 
         this.connectWithStream(stream);
     }
@@ -379,14 +384,15 @@ class Seeker extends Slider.Slider {
                 this._timerTicker = 0;
                 this._getPosition();
             }
-            return true;
+            return GLib.SOURCE_CONTINUE;
         }
 
-        return false;
+        this._timeoutId = 0;
+        return GLib.SOURCE_REMOVE;
     }
 
     _updateTimer() {
-        if (this._timeoutId !== 0) {
+        if (this._timeoutId > 0) {
             Mainloop.source_remove(this._timeoutId);
             this._timeoutId = 0;
         }
@@ -449,12 +455,14 @@ class Seeker extends Slider.Slider {
     }
 
     destroy() {
-        if (this._timeoutId != 0) {
+        if (this._timeoutId > 0) {
             Mainloop.source_remove(this._timeoutId);
             this._timeoutId = 0;
         }
-        if (this._seekChangedId)
+        if (this._seekChangedId) {
             this._mediaServerPlayer.disconnectSignal(this._seekChangedId);
+            this._seekChangedId = 0;
+        }
 
         this.disconnectAll();
         this._mediaServerPlayer = null;
@@ -551,7 +559,7 @@ class Player extends PopupMenu.PopupMenuSection {
 
         // Player info
         this._playerBox = new St.BoxLayout();
-        this.playerIcon = new St.Icon({ icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon" });
+        this.playerIcon = new St.Icon({icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon"});
         this.playerLabel = new St.Label({
             y_expand: true, y_align: Clutter.ActorAlign.CENTER,
             x_expand: true, x_align: Clutter.ActorAlign.START
@@ -570,14 +578,14 @@ class Player extends PopupMenu.PopupMenuSection {
         this.vertBox.add_actor(this._playerBox);
 
         // Cover Box (art + track info)
-        this._trackCover = new St.Bin({ x_align: St.Align.MIDDLE });
+        this._trackCover = new St.Bin({x_align: St.Align.MIDDLE});
         this._trackCoverFile = this._trackCoverFileTmp = false;
         this.coverBox = new Clutter.Box();
-        let l = new Clutter.BinLayout({ x_align: Clutter.BinAlignment.FILL, y_align: Clutter.BinAlignment.END });
+        let l = new Clutter.BinLayout({x_align: Clutter.BinAlignment.FILL, y_align: Clutter.BinAlignment.END});
         this.coverBox.set_layout_manager(l);
 
         // Cover art
-        this.cover = new St.Icon({ icon_name: "media-optical", icon_size: 300, icon_type: St.IconType.FULLCOLOR });
+        this.cover = new St.Icon({icon_name: "media-optical", icon_size: 300*global.ui_scale, icon_type: St.IconType.FULLCOLOR});
         this.coverBox.add_actor(this.cover);
 
         this._cover_load_handle = 0;
@@ -587,15 +595,15 @@ class Player extends PopupMenu.PopupMenuSection {
         this._artist = _("Unknown Artist");
         this._album = _("Unknown Album");
         this._title = _("Unknown Title");
-        this.trackInfo = new St.BoxLayout({ style_class: 'sound-player-overlay', important: true, vertical: true });
+        this.trackInfo = new St.BoxLayout({style_class: 'sound-player-overlay', important: true, vertical: true});
         let artistInfo = new St.BoxLayout();
         let artistIcon = new St.Icon({ icon_type: St.IconType.SYMBOLIC, icon_name: "system-users", style_class: 'popup-menu-icon' });
-        this.artistLabel = new St.Label({ text: this._artist });
+        this.artistLabel = new St.Label({text:this._artist});
         artistInfo.add_actor(artistIcon);
         artistInfo.add_actor(this.artistLabel);
         let titleInfo = new St.BoxLayout();
         let titleIcon = new St.Icon({ icon_type: St.IconType.SYMBOLIC, icon_name: "audio-x-generic", style_class: 'popup-menu-icon' });
-        this.titleLabel = new St.Label({ text: this._title });
+        this.titleLabel = new St.Label({text:this._title});
         titleInfo.add_actor(titleIcon);
         titleInfo.add_actor(this.titleLabel);
         this.trackInfo.add_actor(artistInfo);
@@ -606,7 +614,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this.vertBox.add_actor(this._trackCover);
 
         // Playback controls
-        let trackControls = new St.Bin({ x_align: St.Align.MIDDLE });
+        let trackControls = new St.Bin({x_align: St.Align.MIDDLE});
         this._prevButton = new ControlButton("media-skip-backward",
             _("Previous"),
             () => this._mediaServerPlayer.PreviousRemote());
@@ -900,20 +908,29 @@ class Player extends PopupMenu.PopupMenuSection {
     }
 
     _showCover(cover_path) {
-        if (!cover_path || !GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
-            this.cover = new St.Icon({ style_class: 'sound-player-generic-coverart', important: true, icon_name: "media-optical", icon_size: 300, icon_type: St.IconType.FULLCOLOR });
+        if (! cover_path || ! GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
+            this.cover = new St.Icon({style_class: 'sound-player-generic-coverart', important: true, icon_name: "media-optical", icon_size: 300, icon_type: St.IconType.FULLCOLOR});
             cover_path = null;
         }
         else {
             this._cover_path = cover_path;
             this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(cover_path, 300, 300, this._on_cover_loaded.bind(this));
-
-            if (this._applet.keepAlbumAspectRatio) {
-                this.cover = new Clutter.Texture({ width: 300, keep_aspect_ratio: true, filter_quality: 2, filename: cover_path });
-            }
-            else {
-                this.cover = new Clutter.Texture({ width: 300, height: 300, keep_aspect_ratio: false, filter_quality: 2, filename: cover_path });
-            }
+            let image = new Clutter.Image();
+            let pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(this._cover_path, 300, 300);
+            image.set_data(
+                pixbuf.get_pixels(),
+                pixbuf.get_has_alpha() ? PixelFormat.RGBA_8888 : PixelFormat.RGBA_888,
+                pixbuf.get_width(),
+                pixbuf.get_height(),
+                pixbuf.get_rowstride()
+            );
+            this.cover = image.get_texture();
+            //~ if (this._applet.keepAlbumAspectRatio) {
+                //~ this.cover = new Clutter.Texture({ width: 300, keep_aspect_ratio: true, filter_quality: 2, filename: cover_path });
+            //~ }
+            //~ else {
+                //~ this.cover = new Clutter.Texture({ width: 300, height: 300, keep_aspect_ratio: false, filter_quality: 2, filename: cover_path });
+            //~ }
         }
     }
 
@@ -923,11 +940,13 @@ class Player extends PopupMenu.PopupMenuSection {
             return;
         }
 
-        this.coverBox.remove_actor(this.cover);
+        try {
+            this.coverBox.remove_actor(this.cover);
+        } catch(e) {}
 
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
         // (and move the player controls as a result).
-        actor.margin_bottom = 300 - actor.height;
+        actor.margin_bottom = (300 - actor.height)*global.ui_scale;
 
         this.cover = actor;
         this.coverBox.add_actor(this.cover);
@@ -1186,6 +1205,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.unregisterSystrayIcons();
         if (this._iconTimeoutId) {
             Mainloop.source_remove(this._iconTimeoutId);
+            this._iconTimeoutId = 0;
         }
 
         this._dbus.disconnectSignal(this._ownerChangedId);
@@ -1339,7 +1359,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     setIcon(icon, source) {
         if (this._iconTimeoutId) {
             Mainloop.source_remove(this._iconTimeoutId);
-            this._iconTimeoutId = null;
+            this._iconTimeoutId = 0;
         }
 
         // save the icon
@@ -1355,7 +1375,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 // if we have an active player, but are changing the volume, show the output icon and after three seconds change back to the player icon
                 this.set_applet_icon_symbolic_name(this._outputIcon);
                 this._iconTimeoutId = Mainloop.timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
-                    this._iconTimeoutId = null;
+                    this._iconTimeoutId = 0;
                     this.setIcon();
                 });
             } else {
