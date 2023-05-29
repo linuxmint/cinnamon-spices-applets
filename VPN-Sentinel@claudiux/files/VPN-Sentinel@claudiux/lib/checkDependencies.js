@@ -69,7 +69,7 @@ const DEPENDENCIES = {
     ["nmcli", "/usr/bin/nmcli", "networkmanager"],
     ["", "/usr/lib/NetworkManager/libnm-vpn-plugin-openvpn.so", "networkmanager-openvpn"],
     ["yad", "/usr/bin/yad", "yad"],
-    ["dig", "/usr/bin/dig", "bind-tools"]
+    ["dig", "/usr/bin/dig", "bind"]
   ],
   "debian": [
     ["sox", "/usr/bin/sox",  "sox"],
