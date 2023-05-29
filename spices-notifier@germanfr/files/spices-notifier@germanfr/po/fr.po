@@ -7,24 +7,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-10 14:25+0200\n"
-"PO-Revision-Date: 2018-11-18 20:20+0100\n"
+"POT-Creation-Date: 2023-05-20 13:52+0200\n"
+"PO-Revision-Date: 2023-05-20 13:56+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:92
+#: applet.js:112
 msgid "Mark all as read"
 msgstr "Tout marquer comme lu"
 
-#: applet.js:104
+#: applet.js:135
 msgid "No xlets found, click to reload"
 msgstr "Aucune xlet n'a été trouvée, cliquer pour recharger"
+
+#. metadata.json->name
+msgid "Spices notifier"
+msgstr "Spices notifier"
+
+#. metadata.json->description
+msgid "Notifies of comments on the Cinnamon Spices website"
+msgstr ""
+"Informe des nouveaux commentaires apparus sur le site des Cinnamon Spices"
 
 #. settings-schema.json->username->description
 msgid "GitHub user name"
@@ -42,10 +51,18 @@ msgstr "minutes"
 msgid "Hide panel icon when there are no unread comments"
 msgstr "Cacher l'icône tant qu'il n'y a pas de nouveaux commentaires"
 
-#. metadata.json->name
-msgid "Spices notifier"
-msgstr "Spices notifier"
+#. settings-schema.json->label-uuids->description
+msgid "Additional uuid:s:"
+msgstr "UUIDs additionnels :"
 
-#. metadata.json->description
-msgid "Notifies of comments on the Cinnamon Spices website"
-msgstr "Informe des nouveaux commentaires apparus sur le site des Cinnamon Spices"
+#. settings-schema.json->uuids->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->uuids->tooltip
+msgid ""
+"Additional uuid:s for applets, desklets, extensions and themes you want to "
+"follow (add a row for each of them)."
+msgstr ""
+"UUIDs supplémentaires pour les applets, desklets, extensions et thèmes que "
+"vous souhaitez suivre (ajoutez une ligne pour chacun d'eux)."
