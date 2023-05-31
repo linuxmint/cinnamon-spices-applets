@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-17 16:33+0100\n"
-"PO-Revision-Date: 2023-02-09 21:43+0800\n"
+"POT-Creation-Date: 2023-04-15 19:46+0200\n"
+"PO-Revision-Date: 2023-05-31 19:33+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -16,25 +16,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
-#: applet.js:87
+#: applet.js:122
 msgid "Settings"
 msgstr "设置"
 
-#: applet.js:119
+#: applet.js:145
 msgid "Display"
 msgstr "显示"
 
-#: applet.js:120
+#: applet.js:146
 msgid "Headless"
 msgstr "无窗口模式"
 
-#: applet.js:141
+#: applet.js:167
 msgid "ERROR. No compatible virtual machine programs found."
 msgstr "错误。没有找到兼容的虚拟机程序。"
 
-#: applet.js:236
+#: applet.js:273
 msgid "Update list"
 msgstr "更新列表"
 
@@ -48,4 +48,8 @@ msgstr "一个用来启动虚拟机的小程序。"
 
 #. settings-schema.json->autoUpdate->description
 msgid "Auto update (slow)"
-msgstr "自动更新（慢）"
+msgstr "自动更新 (慢)"
+
+#. settings-schema.json->showHeadlessMode->description
+msgid "Show Headless Mode"
+msgstr "显示无窗口模式"
