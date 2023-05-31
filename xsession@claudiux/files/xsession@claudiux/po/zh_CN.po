@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-29 19:25+0100\n"
-"PO-Revision-Date: 2023-02-07 21:33+0800\n"
+"POT-Creation-Date: 2023-02-04 19:37+0100\n"
+"PO-Revision-Date: 2023-05-31 19:41+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: applet.js:43
 msgid "Applet"
@@ -42,43 +42,47 @@ msgstr "桌面小工具"
 msgid "Extensions"
 msgstr "扩展"
 
-#: applet.js:162
+#: applet.js:93
+msgid "Middle-click: \n"
+msgstr "中键点击：\n"
+
+#: applet.js:93 applet.js:165
 msgid "Show .xsession-errors"
 msgstr "显示 .xsession-errors"
 
-#: applet.js:173
+#: applet.js:176
 msgid "Restart Cinnamon"
 msgstr "重新启动 Cinnamon"
 
-#: applet.js:184
+#: applet.js:187
 msgid "--- Reload Spices ---"
 msgstr "--- 重新加载 Spices ---"
 
-#: applet.js:190
+#: applet.js:193
 msgid "Reload Applet:"
 msgstr "重新加载小程序："
 
-#: applet.js:204
+#: applet.js:207
 msgid "Reload Desklet:"
 msgstr "重新加载桌面小工具："
 
-#: applet.js:218
+#: applet.js:221
 msgid "Reload Extension:"
 msgstr "重新加载扩展："
 
-#: applet.js:232
+#: applet.js:235
 msgid "--- View Code ---"
 msgstr "--- 查看代码 ---"
 
-#: applet.js:238
+#: applet.js:241
 msgid "View Applet Code for:"
 msgstr "查看小程序的代码："
 
-#: applet.js:252
+#: applet.js:255
 msgid "View Desklet Code for:"
 msgstr "查看桌面小工具的代码："
 
-#: applet.js:266
+#: applet.js:269
 msgid "View Extension Code for:"
 msgstr "查看扩展的代码："
 
