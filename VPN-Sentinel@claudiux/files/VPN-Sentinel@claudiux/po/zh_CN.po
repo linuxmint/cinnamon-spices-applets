@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-30 21:56+0200\n"
-"PO-Revision-Date: 2023-05-31 18:13+0800\n"
+"PO-Revision-Date: 2023-06-01 17:35+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. metadata.json->name
 #: applet.js:56
 msgid "VPN Sentinel"
-msgstr "VPN 哨兵"
+msgstr "VPN Sentinel"
 
 #: applet.js:68
 msgid "Timestamp"
@@ -36,7 +36,7 @@ msgstr "信息"
 
 #: applet.js:229
 msgid "VPN-Sentinel has just started."
-msgstr "VPN 哨兵已启动。"
+msgstr "VPN-Sentinel 已启动。"
 
 #: applet.js:233
 #, javascript-format
@@ -187,11 +187,11 @@ msgstr "已停用"
 
 #: applet.js:1348
 msgid "VPN-Sentinel re-loading requested."
-msgstr "需要重新加载 VPN 哨兵。"
+msgstr "需要重新加载 VPN-Sentinel。"
 
 #: applet.js:1361
 msgid "VPN-Sentinel was stopped."
-msgstr "VPN 哨兵已停止。"
+msgstr "VPN-Sentinel 已停止。"
 
 #: applet.js:1365
 #, javascript-format
@@ -246,9 +246,9 @@ msgid ""
 "reconnect the VPN link in case of unexpected disconnection, and start or "
 "stop certain Internet applications depending on the VPN status."
 msgstr ""
-"VPN 哨兵是一个功能强大的小程序，它可以监控 VPN (或 Wireguard) 链接，显示其状"
-"态，可以自动连接到最后使用的 VPN，在意外断开时重新连接 VPN，并根据 VPN 状态启"
-"动或停止某些网络应用程序。"
+"VPN Sentinel 是一个功能强大的小程序，它可以监控 VPN (或 Wireguard) 链接，显示"
+"其状态，可以自动连接到最后使用的 VPN，在意外断开时重新连接 VPN，并根据 VPN 状"
+"态启动或停止某些网络应用程序。"
 
 #. settings-schema.json->Alerts->title
 msgid "Notifications"
@@ -356,7 +356,7 @@ msgstr "应用"
 
 #. settings-schema.json->connectAtStartup->description
 msgid "Try to connect to last VPN as soon as VPN Sentinel starts."
-msgstr "当 VPN 哨兵启动时，尝试连接到上次的 VPN。"
+msgstr "当 VPN Sentinel 启动时，尝试连接到上次的 VPN。"
 
 #. settings-schema.json->deactivateAtStartup->description
 msgid "Deactivate this applet at startup"
@@ -369,13 +369,13 @@ msgid ""
 "menu."
 msgstr ""
 "当这个选项被选中时，小程序以 “停用” 状态启动，节省资源但不监控任何东西。您可"
-"以从它的菜单中激活它。"
+"以从其菜单中激活它。"
 
 #. settings-schema.json->respectUserRequest->description
 msgid ""
 "Do not try to automatically reconnect to VPN when disconnected through VPN "
 "Sentinel"
-msgstr "当通过 VPN 哨兵断开连接时，不要尝试自动重新连接到 VPN"
+msgstr "当通过 VPN Sentinel 断开连接时，不要尝试自动重新连接到 VPN"
 
 #. settings-schema.json->keybinding->description
 msgid "Set the keybinding here to activate/deactivate the last used VPN."
