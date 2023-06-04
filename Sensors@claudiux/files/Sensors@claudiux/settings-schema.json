@@ -62,6 +62,7 @@
         "keep_size",
         "char_size",
         "char_color",
+        "separator",
         "remove_border",
         "remove_icons",
         "bold_values",
@@ -259,6 +260,12 @@
       "Light Grey": "lightgrey"
     },
     "description": "Text Color"
+  },
+  "separator": {
+    "type": "entry",
+    "description": "Separator",
+    "default": "|",
+    "tooltip": "The string used to separate values in horizontal orientation. Default is '│'."
   },
   "remove_border": {
     "type": "switch",
