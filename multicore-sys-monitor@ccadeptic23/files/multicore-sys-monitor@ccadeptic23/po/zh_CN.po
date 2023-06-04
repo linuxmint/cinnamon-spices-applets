@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-26 16:01+0200\n"
-"PO-Revision-Date: 2023-03-28 15:37+0800\n"
+"POT-Creation-Date: 2023-04-28 16:14+0200\n"
+"PO-Revision-Date: 2023-05-30 21:22+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: ../3.0/prefsui.glade.h:1 ../3.2/prefsui.glade.h:1 ../3.4/prefsui.glade.h:1
 #: ../4.0/prefsui.glade.h:1
@@ -50,7 +50,7 @@ msgstr "常规"
 #: ../3.0/prefsui.glade.h:7 ../3.2/prefsui.glade.h:8 ../3.4/prefsui.glade.h:7
 #: ../4.0/prefsui.glade.h:8 ../3.0/prefs.js:279 ../3.0/prefs.js:393
 #: ../3.2/prefs.js:283 ../3.2/prefs.js:398 ../3.4/prefs.js:327
-#: ../3.4/prefs.js:463 ../4.0/prefs.js:459 ../4.0/prefs.js:595
+#: ../3.4/prefs.js:463 ../4.0/prefs.js:483 ../4.0/prefs.js:619
 msgid "Enable"
 msgstr "启用"
 
@@ -60,87 +60,87 @@ msgid "Width"
 msgstr "宽度"
 
 #: ../3.0/prefsui.glade.h:9 ../3.2/prefsui.glade.h:10 ../3.4/prefsui.glade.h:9
-#: ../4.0/prefsui.glade.h:11
+#: ../4.0/prefsui.glade.h:12
 msgid "Colors"
 msgstr "颜色"
 
 #: ../3.0/prefsui.glade.h:10 ../3.2/prefsui.glade.h:11
-#: ../3.4/prefsui.glade.h:10 ../4.0/prefsui.glade.h:15
+#: ../3.4/prefsui.glade.h:10 ../4.0/prefsui.glade.h:16
 #: ../3.0/DataProviders.js:107 ../3.0/prefs.js:183 ../3.2/DataProviders.js:107
 #: ../3.2/prefs.js:187 ../3.4/DataProviders.js:58 ../3.4/prefs.js:195
-#: ../4.0/DataProviders.js:54 ../4.0/prefs.js:279
+#: ../4.0/DataProviders.js:55 ../4.0/prefs.js:303
 msgid "CPU"
 msgstr "CPU"
 
 #: ../3.0/prefsui.glade.h:11 ../3.2/prefsui.glade.h:12
-#: ../3.4/prefsui.glade.h:11 ../4.0/prefsui.glade.h:16
+#: ../3.4/prefsui.glade.h:11 ../4.0/prefsui.glade.h:17
 msgid "Usedup"
 msgstr "已使用"
 
 #: ../3.0/prefsui.glade.h:12 ../3.2/prefsui.glade.h:13
-#: ../3.4/prefsui.glade.h:12 ../4.0/prefsui.glade.h:17
+#: ../3.4/prefsui.glade.h:12 ../4.0/prefsui.glade.h:18
 msgid "Cached"
 msgstr "已缓存"
 
 #: ../3.0/prefsui.glade.h:13 ../3.2/prefsui.glade.h:14
-#: ../3.4/prefsui.glade.h:13 ../4.0/prefsui.glade.h:18
+#: ../3.4/prefsui.glade.h:13 ../4.0/prefsui.glade.h:19
 msgid "Buffer"
 msgstr "缓冲"
 
 #: ../3.0/prefsui.glade.h:14 ../3.2/prefsui.glade.h:15
-#: ../3.4/prefsui.glade.h:14 ../4.0/prefsui.glade.h:19
+#: ../3.4/prefsui.glade.h:14 ../4.0/prefsui.glade.h:20
 msgid "Free"
 msgstr "可用"
 
 #: ../3.0/prefsui.glade.h:15 ../3.2/prefsui.glade.h:16
-#: ../3.4/prefsui.glade.h:15 ../4.0/prefsui.glade.h:20
+#: ../3.4/prefsui.glade.h:15 ../4.0/prefsui.glade.h:21
 #: ../3.0/DataProviders.js:200 ../3.2/DataProviders.js:200
-#: ../3.4/DataProviders.js:195 ../4.0/DataProviders.js:191
+#: ../3.4/DataProviders.js:195 ../4.0/DataProviders.js:194
 msgid "Swap"
 msgstr "交换分区"
 
 #: ../3.0/prefsui.glade.h:16 ../3.2/prefsui.glade.h:17
-#: ../3.4/prefsui.glade.h:16 ../4.0/prefsui.glade.h:21
+#: ../3.4/prefsui.glade.h:16 ../4.0/prefsui.glade.h:22
 msgid "Memory"
 msgstr "内存"
 
 #: ../3.0/prefsui.glade.h:17 ../3.2/prefsui.glade.h:18
-#: ../3.4/prefsui.glade.h:17 ../4.0/prefsui.glade.h:22
+#: ../3.4/prefsui.glade.h:17 ../4.0/prefsui.glade.h:23
 msgid "Scaling"
 msgstr "缩放"
 
 #: ../3.0/prefsui.glade.h:18 ../3.2/prefsui.glade.h:19
-#: ../3.4/prefsui.glade.h:18 ../4.0/prefsui.glade.h:23
+#: ../3.4/prefsui.glade.h:18 ../4.0/prefsui.glade.h:24
 msgid "Auto Scale"
 msgstr "自动缩放"
 
 #: ../3.0/prefsui.glade.h:19 ../3.2/prefsui.glade.h:20
-#: ../3.4/prefsui.glade.h:19 ../4.0/prefsui.glade.h:24
+#: ../3.4/prefsui.glade.h:19 ../4.0/prefsui.glade.h:25
 msgid "Logarithmic"
 msgstr "对数"
 
 #: ../3.0/prefsui.glade.h:20 ../3.2/prefsui.glade.h:21
-#: ../3.4/prefsui.glade.h:20 ../4.0/prefsui.glade.h:25
+#: ../3.4/prefsui.glade.h:20 ../4.0/prefsui.glade.h:26
 msgid "Devices"
 msgstr "设备"
 
 #: ../3.0/prefsui.glade.h:21 ../3.2/prefsui.glade.h:22
-#: ../3.4/prefsui.glade.h:21 ../4.0/prefsui.glade.h:26
+#: ../3.4/prefsui.glade.h:21 ../4.0/prefsui.glade.h:27
 msgid "Network"
 msgstr "网络"
 
 #: ../3.0/prefsui.glade.h:22 ../3.2/prefsui.glade.h:23
-#: ../3.4/prefsui.glade.h:22 ../4.0/prefsui.glade.h:27
+#: ../3.4/prefsui.glade.h:22 ../4.0/prefsui.glade.h:28
 msgid "Disk IO"
 msgstr "磁盘 IO"
 
 #: ../3.0/prefsui.glade.h:23 ../3.2/prefsui.glade.h:24
-#: ../3.4/prefsui.glade.h:23 ../4.0/prefsui.glade.h:28
+#: ../3.4/prefsui.glade.h:23 ../4.0/prefsui.glade.h:29
 msgid "Scaling Description"
 msgstr "缩放描述"
 
 #: ../3.0/prefsui.glade.h:24 ../3.2/prefsui.glade.h:25
-#: ../3.4/prefsui.glade.h:24 ../4.0/prefsui.glade.h:29
+#: ../3.4/prefsui.glade.h:24 ../4.0/prefsui.glade.h:30
 msgid "Close"
 msgstr "关闭"
 
@@ -187,16 +187,20 @@ msgstr "曲线厚度"
 msgid "Color by activity level"
 msgstr "按活动水平着色"
 
-#: ../4.0/prefsui.glade.h:12
+#: ../4.0/prefsui.glade.h:11
+msgid "Use automatic colors"
+msgstr "使用自动颜色"
+
+#: ../4.0/prefsui.glade.h:13
 msgid "by CPU:"
 msgstr "按 CPU："
 
-#: ../4.0/prefsui.glade.h:14
+#: ../4.0/prefsui.glade.h:15
 #, no-c-format
 msgid "by activity level (in %):"
 msgstr "按活动水平 (%)："
 
-#: ../4.0/prefsui.glade.h:30
+#: ../4.0/prefsui.glade.h:31
 msgid ""
 "Auto Scaling:\n"
 "    This will scale the line graph by the largest reading within the\n"
@@ -228,22 +232,22 @@ msgstr ""
 "    如果您对此不熟悉，简单来说，它可以减少大数值，使小数值更容易分辨。"
 
 #: ../3.0/DataProviders.js:113 ../3.2/DataProviders.js:113
-#: ../3.4/DataProviders.js:126 ../4.0/DataProviders.js:122
+#: ../3.4/DataProviders.js:126 ../4.0/DataProviders.js:123
 msgid "------------- CPU ------------"
 msgstr "------------- CPU ------------"
 
 #: ../3.0/DataProviders.js:117 ../3.2/DataProviders.js:117
-#: ../3.4/DataProviders.js:129 ../4.0/DataProviders.js:125
+#: ../3.4/DataProviders.js:129 ../4.0/DataProviders.js:126
 msgid "Core"
 msgstr "核心"
 
 #: ../3.0/DataProviders.js:157 ../3.2/DataProviders.js:157
-#: ../3.4/DataProviders.js:141 ../4.0/DataProviders.js:137
+#: ../3.4/DataProviders.js:141 ../4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "内存"
 
 #: ../3.0/DataProviders.js:163 ../3.2/DataProviders.js:163
-#: ../3.4/DataProviders.js:161 ../4.0/DataProviders.js:157
+#: ../3.4/DataProviders.js:161 ../4.0/DataProviders.js:158
 msgid "----------- Memory -----------"
 msgstr "------------- 内存 ------------"
 
@@ -252,42 +256,42 @@ msgid "Usedup:"
 msgstr "已使用："
 
 #: ../3.0/DataProviders.js:165 ../3.2/DataProviders.js:165
-#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "已缓存："
 
 #: ../3.0/DataProviders.js:166 ../3.2/DataProviders.js:166
-#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "缓冲："
 
 #: ../3.0/DataProviders.js:167 ../3.2/DataProviders.js:167
-#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "可用："
 
 #: ../3.0/DataProviders.js:194 ../3.2/DataProviders.js:194
-#: ../3.4/DataProviders.js:176 ../4.0/DataProviders.js:172
+#: ../3.4/DataProviders.js:176 ../4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "交换分区"
 
 #: ../3.0/DataProviders.js:199 ../3.2/DataProviders.js:199
-#: ../3.4/DataProviders.js:194 ../4.0/DataProviders.js:190
+#: ../3.4/DataProviders.js:194 ../4.0/DataProviders.js:193
 msgid "------------ Swap ------------"
 msgstr "----------- 交换分区 ----------"
 
 #: ../3.0/DataProviders.js:264 ../3.2/DataProviders.js:264
-#: ../3.4/DataProviders.js:205 ../4.0/DataProviders.js:201
+#: ../3.4/DataProviders.js:205 ../4.0/DataProviders.js:204
 msgid "NET"
 msgstr "网络"
 
 #: ../3.0/DataProviders.js:305 ../3.2/DataProviders.js:305
-#: ../3.4/DataProviders.js:289 ../4.0/DataProviders.js:284
+#: ../3.4/DataProviders.js:289 ../4.0/DataProviders.js:287
 msgid "---------- Networks ----------"
 msgstr "------------- 网络 ------------"
 
 #: ../3.0/DataProviders.js:308 ../3.2/DataProviders.js:308
-#: ../3.4/DataProviders.js:300 ../4.0/DataProviders.js:295
+#: ../3.4/DataProviders.js:300 ../4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "下行："
 
@@ -297,22 +301,22 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #: ../3.0/DataProviders.js:309 ../3.2/DataProviders.js:309
-#: ../3.4/DataProviders.js:301 ../4.0/DataProviders.js:296
+#: ../3.4/DataProviders.js:301 ../4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "上行："
 
 #: ../3.0/DataProviders.js:382 ../3.2/DataProviders.js:382
-#: ../3.4/DataProviders.js:317 ../4.0/DataProviders.js:312
+#: ../3.4/DataProviders.js:317 ../4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "磁盘"
 
 #: ../3.0/DataProviders.js:408 ../3.2/DataProviders.js:408
-#: ../3.4/DataProviders.js:378 ../4.0/DataProviders.js:373
+#: ../3.4/DataProviders.js:378 ../4.0/DataProviders.js:376
 msgid "------------ Disks -----------"
 msgstr "------------- 磁盘 ------------"
 
 #: ../3.0/DataProviders.js:411 ../3.2/DataProviders.js:411
-#: ../3.4/DataProviders.js:386 ../4.0/DataProviders.js:381
+#: ../3.4/DataProviders.js:386 ../4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "读取："
 
@@ -322,7 +326,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #: ../3.0/DataProviders.js:412 ../3.2/DataProviders.js:412
-#: ../3.4/DataProviders.js:387 ../4.0/DataProviders.js:382
+#: ../3.4/DataProviders.js:387 ../4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "写入："
 
@@ -332,7 +336,7 @@ msgid "Multi-Core System Monitor Error."
 msgstr "多核系统监视器错误。"
 
 #: ../3.0/applet.js:141 ../3.2/applet.js:139 ../3.4/applet.js:264
-#: ../4.0/applet.js:268
+#: ../4.0/applet.js:275
 msgid "Preferences"
 msgstr "首选项"
 
@@ -345,22 +349,22 @@ msgid "Reload this applet"
 msgstr "重新加载这个小程序"
 
 #: ../3.0/prefs.js:290 ../3.2/prefs.js:294 ../3.4/prefs.js:338
-#: ../4.0/prefs.js:470
+#: ../4.0/prefs.js:494
 msgid "Down"
 msgstr "下行"
 
 #: ../3.0/prefs.js:298 ../3.2/prefs.js:302 ../3.4/prefs.js:346
-#: ../4.0/prefs.js:478
+#: ../4.0/prefs.js:502
 msgid "Up"
 msgstr "上行"
 
 #: ../3.0/prefs.js:406 ../3.2/prefs.js:414 ../3.4/prefs.js:479
-#: ../4.0/prefs.js:611
+#: ../4.0/prefs.js:635
 msgid "Read"
 msgstr "读取"
 
 #: ../3.0/prefs.js:414 ../3.2/prefs.js:423 ../3.4/prefs.js:488
-#: ../4.0/prefs.js:620
+#: ../4.0/prefs.js:644
 msgid "Write"
 msgstr "写入"
 
@@ -368,19 +372,19 @@ msgstr "写入"
 msgid "Error while saving file:"
 msgstr "保存文件时出错："
 
-#: ../3.4/DataProviders.js:49 ../4.0/DataProviders.js:45
+#: ../3.4/DataProviders.js:49 ../4.0/DataProviders.js:47
 msgid "/s"
 msgstr "/s"
 
-#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "已使用："
 
-#: ../3.4/applet.js:60 ../4.0/applet.js:59
+#: ../3.4/applet.js:60 ../4.0/applet.js:64
 msgid "Dependency missing"
 msgstr "依赖缺失"
 
-#: ../3.4/applet.js:62 ../4.0/applet.js:61
+#: ../3.4/applet.js:62
 msgid ""
 "Please install the GTop package\n"
 "\tUbuntu / Mint: gir1.2-gtop-2.0\n"
@@ -394,23 +398,43 @@ msgstr ""
 "\tArch: libgtop\n"
 "来使用 "
 
-#: ../4.0/prefs.js:311
+#: ../4.0/applet.js:66
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"to use "
+msgstr ""
+"请安装 GTop 软件包\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"来使用 "
+
+#: ../4.0/applet.js:277
+msgid "Refresh graphs"
+msgstr "刷新图表"
+
+#: ../4.0/prefs.js:335
 msgid "00-20"
 msgstr "00-20"
 
-#: ../4.0/prefs.js:311
+#: ../4.0/prefs.js:335
 msgid "20-40"
 msgstr "20-40"
 
-#: ../4.0/prefs.js:311
+#: ../4.0/prefs.js:335
 msgid "40-60"
 msgstr "40-60"
 
-#: ../4.0/prefs.js:311
+#: ../4.0/prefs.js:335
 msgid "60-80"
 msgstr "60-80"
 
-#: ../4.0/prefs.js:311
+#: ../4.0/prefs.js:335
 msgid "80-100"
 msgstr "80-100"
 
