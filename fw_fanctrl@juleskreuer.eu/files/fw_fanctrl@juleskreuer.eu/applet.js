@@ -12,9 +12,8 @@ const Util = imports.misc.util;
 const UUID = "fw_fanctrl@juleskreuer.eu";
 const APPLET_DIR = imports.ui.appletManager.appletMeta[UUID].path;
 
-const FLAGS = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD;
-
 const STRATEGY = {
+    // Visual Name : ['name of fw-fanctrl strategy', 'icon-name']
     'Lazyest': ['lazyest', 'weather-clear-night'],
     'Lazy': ['lazy', 'weather-clear-night'],
     'Medium': ['medium', 'computer'],
@@ -65,12 +64,18 @@ class FW_CONTROL extends Applet.TextIconApplet {
 
 
     is_theme_dark() {
-        let [success, theme_name] = GLib.spawn_command_line_sync("gsettings get org.cinnamon.theme name");
-        if (!success) {
-            return false
+        try {
+            let [success, theme_name] = GLib.spawn_command_line_sync("gsettings get org.cinnamon.theme name");
+            if (!success) {
+                return false;
+            }
+            theme_name = byte_array_to_string(theme_name)
+            return theme_name.toLowerCase().includes('dark');
+
+        } catch (error) {
+            return false;
         }
-        theme_name = byte_array_to_string(theme_name)
-        return theme_name.toLowerCase().includes('dark');
+
     }
 
     on_applet_clicked() {

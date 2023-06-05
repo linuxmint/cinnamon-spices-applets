@@ -1,6 +1,6 @@
-# Framework FanCTRL - Fan Strategy Control Applet for Cinnamon
+# <img src="files/fw_fanctrl@juleskreuer.eu/icon.png" height=20></img> Framework FanCTRL - Fan Strategy Control Applet for Cinnamon
 
-This applet allows you to control the fan speed strategies of Framework laptops directly from your desktop. It uses [fw-fanctrl](https://github.com/TamtamHero/fw-fanctrl) / framework-ec to select different fan speed strategies. It's a handy tool for managing your laptop's thermal performance / noise.
+[This applet](https://github.com/not-a-feature/fw_fanctrl_applet) allows you to control the fan speed strategies of Framework laptops directly from your desktop. It uses [fw-fanctrl](https://github.com/TamtamHero/fw-fanctrl) / framework-ec to select different fan speed strategies. It's a handy tool for managing your laptop's thermal performance / noise.
 
 ![Screenshot of popup menu](screenshot.png)
 
@@ -17,8 +17,6 @@ This applet allows you to control the fan speed strategies of Framework laptops 
 The applet should now be available in your Applets settings panel. Add it to your panel to start using it.
 
 ### Via Git
-
-Open a terminal.
 
 Clone the git repository:
 
@@ -37,6 +35,19 @@ The applet should now be available in your Applets settings panel. Add it to you
 ## Usage
 
 Once installed, click on the applet icon in your panel to open the menu. The menu displays a list of available fan speed strategies. Click on a strategy to select it. The applet will then use fw-fanctrl to apply the strategy.
+
+## Custom / non-standard strategies
+To add your custom strategy from fw-fanctrl to this applet, edit the `applet.js` located in `~/.local/share/cinnamon/applets/fw_fanctrl@juleskreuer.eu`
+
+The first element of the list must match the strategy name.
+
+     const STRATEGY = {
+        // Visual Name : ['name of fw-fanctrl strategy', 'icon-name']
+        'Lazyest': ['lazyest', 'weather-clear-night'],
+        'Lazy': ['lazy', 'weather-clear-night'],
+        'Aeolus': ['aeolus', 'weather-windy'],
+    };
+
 
 ## Dependencies
 
