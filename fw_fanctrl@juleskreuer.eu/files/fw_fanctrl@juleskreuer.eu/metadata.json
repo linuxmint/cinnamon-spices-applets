@@ -1,0 +1,6 @@
+{
+    "uuid": "fw_fanctrl@juleskreuer.eu",
+    "version": 1.0,
+    "name": "fanCTRL",
+    "description": "Applet to control the fan-speed strategy using FW Fanctrl"
+}
