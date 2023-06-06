@@ -2,7 +2,7 @@
 
 [This applet](https://github.com/not-a-feature/fw_fanctrl_applet) allows you to control the fan speed strategies of Framework laptops directly from your desktop. It uses [fw-fanctrl](https://github.com/TamtamHero/fw-fanctrl) / framework-ec to select different fan speed strategies. It's a handy tool for managing your laptop's thermal performance / noise.
 
-![Screenshot of popup menu](screenshot.png)
+<img src="screenshot.png" width=400></img>
 
 ## Installation
 
@@ -11,7 +11,7 @@
     - Right click on the menu bar.
     - Open "Applets".
     - Click on "Download" tab.
-    - Search for "Framework fanCTRL".
+    - Search for "Framework FanCTRL".
     - Click on the install icon next to the applet name.
 
 The applet should now be available in your Applets settings panel. Add it to your panel to start using it.
@@ -36,17 +36,42 @@ The applet should now be available in your Applets settings panel. Add it to you
 
 Once installed, click on the applet icon in your panel to open the menu. The menu displays a list of available fan speed strategies. Click on a strategy to select it. The applet will then use fw-fanctrl to apply the strategy.
 
+## Toggle visibility of strategies
+You can toggle the visibility of the default strategies in the applet settings.
+It is also possible to change the icon.
+<img src="settings.png" width=200></img>
 ## Custom / non-standard strategies
-To add your custom strategy from fw-fanctrl to this applet, edit the `applet.js` located in `~/.local/share/cinnamon/applets/fw_fanctrl@juleskreuer.eu`
+To add your custom strategy from fw-fanctrl to this applet, edit the `settings-schema.json` located in `~/.local/share/cinnamon/applets/fw_fanctrl@juleskreuer.eu`
 
-The first element of the list must match the strategy name.
+- Replace `<NAME>`by the strategy name found in the fw-fanctrl config.
 
-     const STRATEGY = {
-        // Visual Name : ['name of fw-fanctrl strategy', 'icon-name']
-        'Lazyest': ['lazyest', 'weather-clear-night'],
-        'Lazy': ['lazy', 'weather-clear-night'],
-        'Aeolus': ['aeolus', 'weather-windy'],
-    };
+- Add `<NAME>` to the `strategies` list.
+
+    ```json
+    "strategies" : ["sleep", ..., "<NAME>"],
+    ```
+
+- Add following block after the `strategies` line.
+  Replace `<Label for NAME>` by your desired label:
+
+    ```json
+    "<NAME>-label": {
+        "type": "header",
+        "description": "<Label for NAME>"
+    },
+    "<NAME>": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Visible"
+    },
+    "<NAME>-icon": {
+        "type": "iconfilechooser",
+        "default": "dialog-warning",
+        "description": "Icon for '<Label for NAME>'"
+    },
+    ```
+- Reload the Applet (Hamburger menu top right)
+
 
 
 ## Dependencies

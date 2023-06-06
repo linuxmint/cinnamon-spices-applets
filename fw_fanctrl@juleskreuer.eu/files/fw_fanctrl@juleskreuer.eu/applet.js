@@ -9,23 +9,16 @@ const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
+const AppletSettings = imports.ui.settings;
+
 const UUID = "fw_fanctrl@juleskreuer.eu";
 const APPLET_DIR = imports.ui.appletManager.appletMeta[UUID].path;
-
-const STRATEGY = {
-    // Visual Name : ['name of fw-fanctrl strategy', 'icon-name']
-    'Lazyest': ['lazyest', 'weather-clear-night'],
-    'Lazy': ['lazy', 'weather-clear-night'],
-    'Medium': ['medium', 'computer'],
-    'Agile': ['agile', 'computer'],
-    'Deaf': ['deaf', 'weather-windy'],
-    'Aeolus': ['aeolus', 'weather-windy'],
-};
 
 class FW_CONTROL extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
         this.applet_dir = metadata.path;
+        this.settings = new AppletSettings.AppletSettings(this, UUID, instance_id);
 
         this.set_icon();
         //this.set_applet_icon_symbolic_name('node-segment-curve');
@@ -43,12 +36,30 @@ class FW_CONTROL extends Applet.TextIconApplet {
         this.menu.addMenuItem(titleItem);
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        for (let label in STRATEGY) {
-            let menuItem = new PopupMenu.PopupIconMenuItem(label, STRATEGY[label][1], St.IconType.SYMBOLIC);
-            menuItem.connect('activate', () => {
-                this.activateStrategy(STRATEGY[label][0]);
-            });
-            this.menu.addMenuItem(menuItem);
+        this.buildMenu();
+    }
+
+    buildMenu() {
+        let settingsData = this.settings["settingsData"];
+        for (let label_idx in settingsData["strategies"]) {
+            let label = settingsData["strategies"][label_idx];
+            global.log(label)
+            let active = settingsData[label]["value"]
+            if (active) {
+                let visual_label = settingsData[label + "-label"]["description"]
+                let icon = settingsData[label + "-icon"]["value"]
+                global.log(icon)
+                let menuItem = new PopupMenu.PopupIconMenuItem(
+                     visual_label,
+                     icon,
+                    St.IconType.SYMBOLIC);
+
+                menuItem.connect('activate', () => {
+                    this.activateStrategy(STRATEGY[label][0]);
+                });
+
+                this.menu.addMenuItem(menuItem);
+            }
         }
 
     }
