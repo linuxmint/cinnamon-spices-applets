@@ -48,7 +48,7 @@ To add your custom strategy from fw-fanctrl to this applet, edit the `settings-s
 - Add `<NAME>` to the `strategies` list.
 
     ```json
-    "strategies" : ["sleep", ..., "<NAME>"],
+    "strategies" : ["sleep", "...", "<NAME>"],
     ```
 
 - Add following block after the `strategies` line.

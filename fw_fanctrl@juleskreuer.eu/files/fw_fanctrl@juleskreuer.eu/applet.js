@@ -43,19 +43,18 @@ class FW_CONTROL extends Applet.TextIconApplet {
         let settingsData = this.settings["settingsData"];
         for (let label_idx in settingsData["strategies"]) {
             let label = settingsData["strategies"][label_idx];
-            global.log(label)
+
             let active = settingsData[label]["value"]
             if (active) {
                 let visual_label = settingsData[label + "-label"]["description"]
                 let icon = settingsData[label + "-icon"]["value"]
-                global.log(icon)
                 let menuItem = new PopupMenu.PopupIconMenuItem(
                      visual_label,
                      icon,
                     St.IconType.SYMBOLIC);
 
                 menuItem.connect('activate', () => {
-                    this.activateStrategy(STRATEGY[label][0]);
+                    this.activateStrategy(label);
                 });
 
                 this.menu.addMenuItem(menuItem);
@@ -67,8 +66,6 @@ class FW_CONTROL extends Applet.TextIconApplet {
     set_icon() {
         let icon_name = this.is_theme_dark() ? '/icon_light.png' : '/icon.png';
         let icon_path = APPLET_DIR + icon_name;
-        global.log(icon_path);
-
         this.set_applet_icon_path(icon_path);
     }
 
