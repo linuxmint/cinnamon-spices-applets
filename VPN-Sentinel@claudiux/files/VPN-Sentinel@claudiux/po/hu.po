@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-30 21:56+0200\n"
-"PO-Revision-Date: 2023-05-06 09:33+0200\n"
+"PO-Revision-Date: 2023-06-05 12:00+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -56,12 +56,12 @@ msgstr "Kapcsolódva ehhez: „%s”"
 #: applet.js:589
 #, javascript-format
 msgid "%s has just been launched."
-msgstr ""
+msgstr "%s el lett indítva."
 
 #: applet.js:645
 #, javascript-format
 msgid "%s has just been stopped."
-msgstr ""
+msgstr "%s le lett állítva."
 
 #: applet.js:667
 #, javascript-format
@@ -75,19 +75,19 @@ msgstr ""
 
 #: applet.js:769
 msgid "Connection to: "
-msgstr ""
+msgstr "Kapcsolódás: "
 
 #: applet.js:776
 msgid "Connected to: "
-msgstr ""
+msgstr "Kapcsolódva: "
 
 #: applet.js:790
 msgid "Disconnected from: "
-msgstr ""
+msgstr "Kapcsolat bontva: "
 
 #: applet.js:808
 msgid "Switching to: "
-msgstr ""
+msgstr "Átváltás: "
 
 #: applet.js:865 applet.js:890 applet.js:949 applet.js:963
 msgid "(None)"
@@ -95,15 +95,15 @@ msgstr "(Nincs)"
 
 #: applet.js:1058
 msgid "ENABLED"
-msgstr ""
+msgstr "Engedélyezve"
 
 #: applet.js:1058
 msgid "DISABLED"
-msgstr ""
+msgstr "Letiltva"
 
 #: applet.js:1058
 msgid "TRANSIENT"
-msgstr ""
+msgstr "Átváltás"
 
 #: applet.js:1076
 msgid "Other active VPN links (select to disable):"
@@ -124,16 +124,16 @@ msgstr ""
 
 #: applet.js:1136
 msgid "VPN Policy"
-msgstr ""
+msgstr "VPN házirend"
 
 #. settings-schema.json->InternetPolicy->title
 #: applet.js:1143
 msgid "Internet Apps Manager"
-msgstr ""
+msgstr "Internet-alkamazások kezelője"
 
 #: applet.js:1151
 msgid "Open Activity Logs"
-msgstr ""
+msgstr "Tevékenység napló megnyitása"
 
 #: applet.js:1160
 msgid "Reload Country Flag"
@@ -173,11 +173,11 @@ msgstr "Bontva"
 
 #: applet.js:1216
 msgid "Transient"
-msgstr ""
+msgstr "Átváltás"
 
 #: applet.js:1218
 msgid "Deactivated"
-msgstr ""
+msgstr "Kikapcsolva"
 
 #: applet.js:1348
 msgid "VPN-Sentinel re-loading requested."
@@ -220,12 +220,17 @@ msgid "All dependencies are installed"
 msgstr "Minden függőség telepítve van"
 
 #: lib/checkDependencies.js:293
-msgid "You appear to be missing some of the programs required for this applet to have all its features."
-msgstr "Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a kisalkalmazás minden funkcióval rendelkezzen."
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
+"kisalkalmazás minden funkcióval rendelkezzen."
 
 #: lib/checkDependencies.js:294
 msgid "Please execute, in the just opened terminal, the commands:"
-msgstr "Kérjük, a most megnyitott terminálban hajtsa végre a következő parancsokat:"
+msgstr ""
+"Kérjük, a most megnyitott terminálban hajtsa végre a következő parancsokat:"
 
 #: lib/checkDependencies.js:295
 msgid "Some dependencies are not installed!"
@@ -233,13 +238,16 @@ msgstr "Néhány függőség nincs telepítve!"
 
 #. metadata.json->description
 msgid ""
-"VPN Sentinel is a powerful applet that monitors the VPN (or Wireguard) link, displays its status, can automatically connect "
-"to the last used VPN, reconnect the VPN link in case of unexpected disconnection, and start or stop certain Internet "
-"applications depending on the VPN status."
+"VPN Sentinel is a powerful applet that monitors the VPN (or Wireguard) link, "
+"displays its status, can automatically connect to the last used VPN, "
+"reconnect the VPN link in case of unexpected disconnection, and start or "
+"stop certain Internet applications depending on the VPN status."
 msgstr ""
-"A VPN Sentinel egy hatékony kisalkalmazás, amely figyeli a VPN (vagy Wireguard) kapcsolatot, megjeleníti annak állapotát, "
-"automatikusan csatlakozik az utoljára használt VPN-hez, újra létrehozza a VPN kapcsolatot váratlan kapcsolatvesztés esetén, "
-"és elindít vagy leállít bizonyos internetes alkalmazásokat a VPN állapotától függően."
+"A VPN Sentinel egy hatékony kisalkalmazás, amely figyeli a VPN (vagy "
+"Wireguard) kapcsolatot, megjeleníti annak állapotát, automatikusan "
+"csatlakozik az utoljára használt VPN-hez, újra létrehozza a VPN kapcsolatot "
+"váratlan kapcsolatvesztés esetén, és elindít vagy leállít bizonyos "
+"internetes alkalmazásokat a VPN állapotától függően."
 
 #. settings-schema.json->Alerts->title
 msgid "Notifications"
@@ -265,11 +273,11 @@ msgstr ""
 
 #. settings-schema.json->sectionA3->title
 msgid "Icon colors"
-msgstr ""
+msgstr "Ikonszínek"
 
 #. settings-schema.json->sectionV1->title
 msgid "Connection Policy"
-msgstr ""
+msgstr "Kapcsolódási házirend"
 
 #. settings-schema.json->sectionV2->title
 msgid "Bypass VPN for below domains"
@@ -293,8 +301,9 @@ msgstr ""
 
 #. settings-schema.json->showCountryFlag->tooltip
 msgid ""
-"If this box is checked, a request is sent to a geolocation server to find out the country where your VPN server is located "
-"and its flag is displayed next to the icon of this applet."
+"If this box is checked, a request is sent to a geolocation server to find "
+"out the country where your VPN server is located and its flag is displayed "
+"next to the icon of this applet."
 msgstr ""
 
 #. settings-schema.json->labelWhenVPNisOff->description
@@ -335,7 +344,7 @@ msgstr ""
 
 #. settings-schema.json->borderOpacity->description
 msgid "Border opacity"
-msgstr ""
+msgstr "Szegély átlátszatlanság"
 
 #. settings-schema.json->applyColors->description
 #. settings-schema.json->applyBypassListButton->description
@@ -352,12 +361,15 @@ msgstr ""
 
 #. settings-schema.json->deactivateAtStartup->tooltip
 msgid ""
-"When this option is checked, this applet starts in 'deactivated' state, saving resources but not monitoring anything. You "
-"can activate it from its menu."
+"When this option is checked, this applet starts in 'deactivated' state, "
+"saving resources but not monitoring anything. You can activate it from its "
+"menu."
 msgstr ""
 
 #. settings-schema.json->respectUserRequest->description
-msgid "Do not try to automatically reconnect to VPN when disconnected through VPN Sentinel"
+msgid ""
+"Do not try to automatically reconnect to VPN when disconnected through VPN "
+"Sentinel"
 msgstr ""
 
 #. settings-schema.json->keybinding->description
@@ -370,8 +382,8 @@ msgstr "Tartomány"
 
 #. settings-schema.json->applyBypassHelp->description
 msgid ""
-"Clicking this 'Apply' button will stop and then start your default connection. Thus, all active VPN connections will be "
-"closed."
+"Clicking this 'Apply' button will stop and then start your default "
+"connection. Thus, all active VPN connections will be closed."
 msgstr ""
 
 #. settings-schema.json->doLogActivity->description
@@ -462,7 +474,8 @@ msgstr "Tevékenység napló törlése"
 msgid ""
 "This list will be completed automatically.\n"
 "\n"
-"Confirm the lines with correct data in order to immediately display the flag of the country where the VPN server is located."
+"Confirm the lines with correct data in order to immediately display the flag "
+"of the country where the VPN server is located."
 msgstr ""
 
 #. settings-schema.json->flagList->description
@@ -477,7 +490,7 @@ msgstr "VPN név"
 #. settings-schema.json->flagList->columns->title
 #. settings-schema.json->sortFlagListBy->options
 msgid "Country Code"
-msgstr ""
+msgstr "Országkód"
 
 #. settings-schema.json->flagList->columns->title
 msgid "Confirmed"
@@ -493,10 +506,12 @@ msgstr "Nincs"
 
 #. settings-schema.json->manageClients->description
 msgid "Manage Internet Apps"
-msgstr ""
+msgstr "Internet-alkamazások kezelése"
 
 #. settings-schema.json->manageClients->tooltip
-msgid "This option allows this applet to manage the Internet applications you listed below."
+msgid ""
+"This option allows this applet to manage the Internet applications you "
+"listed below."
 msgstr ""
 
 #. settings-schema.json->showClientsHelp->description
@@ -507,10 +522,19 @@ msgstr "Súgó megjelenítése"
 msgid ""
 "Name: Application name, as it appears in Menu/Internet.\n"
 "\n"
-"Launch: Whether or not to launch this application as soon as the VPN link becomes active.\n"
+"Launch: Whether or not to launch this application as soon as the VPN link "
+"becomes active.\n"
 "\n"
-"VPN only: Whether or not to quickly stop this application if it is started while the VPN is idle."
+"VPN only: Whether or not to quickly stop this application if it is started "
+"while the VPN is idle."
 msgstr ""
+"Név: Az alkalmazás neve, ahogy megjelenik a Menü → Internet almenüben.\n"
+"\n"
+"Indítás: Az alkalmazás automatikus indítása, amint az VPN kapcsolat aktív "
+"lesz.\n"
+"\n"
+"Csak VPN: Az alkalmazás gyors leállítása, ha az VPN inaktív állapotban van, "
+"és csak az VPN használatakor használja."
 
 #. settings-schema.json->clientsList->description
 msgid "Managed applications"
