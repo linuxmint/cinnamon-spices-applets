@@ -1,0 +1,471 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page_general", "page_modules"],
+        
+        "page_general": {
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "section_contextmenu",
+                "section_panel",
+                "section_kdecsettings",
+                "section_devices"
+            ]
+        },
+        "page_modules": {
+            "type": "page",
+            "title": "Modules",
+            "sections": [
+                "section_info-modules",
+                "section_action-modules",
+                "section_module_battery",
+                "section_module_deviceinfo",
+                "section_module_connectivity",
+                "section_module_findmyphone",
+                "section_module_requestphoto",
+                "section_module_ping",
+                "section_module_share",
+                "section_module_sftp",
+                "section_module_sms"
+            ]
+        },
+
+        "section_contextmenu": {
+            "type": "section",
+            "title": "Context Menu",
+            "keys": [
+                "switch_show-own-id",
+                "switch_show-kdec-version"
+            ]
+        },
+        "section_panel": {
+            "type": "section",
+            "title": "Panel",
+            "keys": [
+                "switch_show-device-count",
+                "switch_show-device-count-tooltip",
+                "combobox_icon-type",
+                "switch_use-custom-icon",
+                "icon_custom-icon"
+            ]
+        },
+        "section_kdecsettings": {
+            "type": "section",
+            "title": "",
+            "keys": [
+                "button_open-kdec-settings"
+            ]
+        },
+        "section_devices": {
+            "type": "section",
+            "title": "Devices",
+            "keys": [
+                "switch_expand-only-device",
+                "orderlist_device-order"
+            ]
+        },
+
+        "section_info-modules": {
+            "type": "section",
+            "title": "Info Modules",
+            "keys": [
+                "oderlist_info-modules"
+            ]
+        },
+        "section_action-modules": {
+            "type": "section",
+            "title": "Action Modules",
+            "keys": [
+                "oderlist_action-modules"
+            ]
+        },
+        "section_module_battery": {
+            "type": "section",
+            "title": "Battery Info Module",
+            "keys": [
+                "module_battery_description"
+            ]
+        },
+        "section_module_deviceinfo": {
+            "type": "section",
+            "title": "Device-Info Info Module",
+            "keys": [
+                "module_deviceinfo_description"
+            ]
+        },
+        "section_module_connectivity": {
+            "type": "section",
+            "title": "Connectivity Info Module",
+            "keys": [
+                "module_connectivity_description",
+                "module_connectivity_showNetworkType"
+            ]
+        },
+        "section_module_findmyphone": {
+            "type": "section",
+            "title": "FindMyPhone Action Module",
+            "keys": [
+                "module_findmyphone_description"
+            ]
+        },
+        "section_module_requestphoto": {
+            "type": "section",
+            "title": "Request-Photo Action Module",
+            "keys": [
+                "module_requestphoto_description",
+                "module_requestphoto_saveToDir",
+                "module_requestphoto_saveDirectory"
+            ]
+        },
+        "section_module_ping": {
+            "type": "section",
+            "title": "Ping Action Module",
+            "keys": [
+                "module_ping_description",
+                "module_ping_useCustomMessage",
+                "module_ping_customMessage"
+            ]
+        },
+        "section_module_share": {
+            "type": "section",
+            "title": "Share Action Module",
+            "keys": [
+                "module_share_description",
+                "module_share_useSubMenu",
+                "module_share_enableSendURL",
+                "module_share_enableSendText",
+                "module_share_enableSendFiles"
+            ]
+        },
+        "section_module_sftp": {
+            "type": "section",
+            "title": "SFTP Action Module",
+            "keys": [
+                "module_sftp_description"
+            ]
+        },
+        "section_module_sms": {
+            "type": "section",
+            "title": "SMS Action Module",
+            "keys": [
+                "module_sms_description",
+                "module_sms_useSubMenu",
+                "module_sms_enableSendSMS",
+                "module_sms_enableLaunchSMSApp"
+            ]
+        }
+    },
+
+    "switch_show-own-id": {
+        "type": "switch",
+        "description": "Show own ID in the context menu of the applet",
+        "default": true
+    },
+    "switch_show-kdec-version": {
+        "type": "switch",
+        "description": "Show KDE Connect version in the context menu of the applet",
+        "default": true
+    },
+
+    "switch_show-device-count": {
+        "type": "switch",
+        "description": "Show the number of connected devices next to the icon in the panel",
+        "default": true
+    },
+    "switch_show-device-count-tooltip": {
+        "type": "switch",
+        "description": "Show the device count in the tooltip of the applet",
+        "default": true
+    },
+    "combobox_icon-type": {
+        "type": "combobox",
+        "description": "Icon type",
+        "options": {
+            "Symbolic": "SYMBOLIC",
+            "Color": "COLOR"
+        },
+        "default": "COLOR"
+    },
+    "switch_use-custom-icon": {
+        "type": "switch",
+        "description": "Use custom icon",
+        "default": false
+    },
+    "icon_custom-icon": {
+        "type": "iconfilechooser",
+        "description": "Custom icon to use",
+        "default": "kdeconnect",
+        "dependency": "switch_use-custom-icon"
+    },
+
+    "button_open-kdec-settings": {
+        "type": "button",
+        "description": "Open KDE Connect Configuration",
+        "callback": "openKDECConfiguration"
+    },
+
+    "switch_expand-only-device": {
+        "type": "switch",
+        "description": "Expand the device sub menu automatically, if only one device is available",
+        "default": true
+    },
+    "orderlist_device-order": {
+        "type": "custom",
+        "file": "settingsWidgets.py",
+        "widget": "OrderList",
+        "columns": [
+            {
+                "title": "Name",
+                "type": "text",
+                "align": "left",
+                "id": "name"
+            },
+            {
+                "title": "Expand",
+                "type": "boolean",
+                "align": "center",
+                "id": "expand"
+            },
+            {
+                "title": "UUID",
+                "type": "text",
+                "align": "left",
+                "id": "uuid"
+            }
+        ],
+        "default": [],
+        "storage": "generic_device-order",
+        "size": 200
+    },
+
+    "generic_device-order": {
+        "type": "generic",
+        "default": [],
+        "comment": "Data storage for 'orderlist_device-order'"
+    },
+
+    "oderlist_info-modules": {
+        "type": "custom",
+        "file": "settingsWidgets.py",
+        "widget": "OrderList",
+        "columns": [
+            {
+                "title": "Enabled",
+                "type": "boolean",
+                "align": "center",
+                "id": "enabled"
+            },
+            {
+                "title": "Name",
+                "type": "text",
+                "align": "left",
+                "id": "name",
+                "translate": true
+            },
+            {
+                "title": "ID",
+                "type": "text",
+                "align": "left",
+                "id": "id"
+            }
+        ],
+        "default": [],
+        "storage": "generic_info-modules",
+        "size": 100
+    },
+    "generic_info-modules": {
+        "type": "generic",
+        "default": [
+            {
+                "enabled": true,
+                "name": "Battery Module",
+                "id": "battery"
+            },
+            {
+                "enabled": true,
+                "name": "Device Info Module",
+                "id": "deviceinfo"
+            },
+            {
+                "enabled": true,
+                "name": "Connectivity Module",
+                "id": "connectivity"
+            }
+        ],
+        "comment": "Data storage for 'oderlist_info-modules'"
+    },
+    "oderlist_action-modules": {
+        "type": "custom",
+        "file": "settingsWidgets.py",
+        "widget": "OrderList",
+        "columns": [
+            {
+                "title": "Enabled",
+                "type": "boolean",
+                "align": "center",
+                "id": "enabled"
+            },
+            {
+                "title": "Name",
+                "type": "text",
+                "align": "left",
+                "id": "name",
+                "translate": true
+            },
+            {
+                "title": "ID",
+                "type": "text",
+                "align": "left",
+                "id": "id"
+            }
+        ],
+        "default": [],
+        "storage": "generic_action-modules",
+        "size": 200
+    },
+    "generic_action-modules": {
+        "type": "generic",
+        "default": [
+            {
+                "enabled": true,
+                "name": "FindMyPhone Module",
+                "id": "findmyphone"
+            },
+            {
+                "enabled": true,
+                "name": "Request Photo Module",
+                "id": "requestphoto"
+            },
+            {
+                "enabled": true,
+                "name": "Ping Module",
+                "id": "ping"
+            },
+            {
+                "enabled": true,
+                "name": "Share Module",
+                "id": "share"
+            },
+            {
+                "enabled": true,
+                "name": "SFTP Module",
+                "id": "sftp"
+            },
+            {
+                "enabled": true,
+                "name": "SMS Module",
+                "id": "sms"
+            }
+        ],
+        "comment": "Data storage for 'oderlist_action-modules'"
+    },
+
+    "module_battery_description": {
+        "type": "label",
+        "description": "Shows the current battery charge and charging status of the device"
+    },
+
+    "module_deviceinfo_description": {
+        "type": "label",
+        "description": "Shows the device icon along with its ID"
+    },
+
+    "module_connectivity_description": {
+        "type": "label",
+        "description": "Shows the current connectivity status and network type of the device"
+    },
+    "module_connectivity_showNetworkType": {
+        "type": "switch",
+        "description": "Show the mobile network type",
+        "default": true
+    },
+
+    "module_findmyphone_description": {
+        "type": "label",
+        "description": "Lets you make the device ring, so you can find it, if you have misplaced it"
+    },
+
+    "module_requestphoto_description": {
+        "type": "label",
+        "description": "Lets you request a photo from the remote device and save it on this device"
+    },
+    "module_requestphoto_saveToDir": {
+        "type": "switch",
+        "description": "Save received photos directly to directory",
+        "default": false
+    },
+    "module_requestphoto_saveDirectory": {
+        "type": "filechooser",
+        "description": "The directory to save received photos to",
+        "default": "",
+        "select-dir": true,
+        "dependency": "module_requestphoto_saveToDir"
+    },
+
+    "module_ping_description": {
+        "type": "label",
+        "description": "Lets you ping the the device to make sure it's connected"
+    },
+    "module_ping_useCustomMessage": {
+        "type": "switch",
+        "description": "Use custom message for ping",
+        "default": false
+    },
+    "module_ping_customMessage": {
+        "type": "entry",
+        "description": "Custom message",
+        "default": "Ping!",
+        "dependency": "module_ping_useCustomMessage"
+    },
+
+    "module_share_description": {
+        "type": "label",
+        "description": "Lets you share URLs, files or text to the device"
+    },
+    "module_share_useSubMenu": {
+        "type": "switch",
+        "description": "Show menu items in sub menu",
+        "default": true
+    },
+    "module_share_enableSendURL": {
+        "type": "switch",
+        "description": "Enable the menu item to send a URL",
+        "default": true
+    },
+    "module_share_enableSendText": {
+        "type": "switch",
+        "description": "Enable the menu item to send some text",
+        "default": true
+    },
+    "module_share_enableSendFiles": {
+        "type": "switch",
+        "description": "Enable the menu item to send file(s)",
+        "default": true
+    },
+
+    "module_sftp_description": {
+        "type": "label",
+        "description": "Lets you remotely browse the storage selected on the device"
+    },
+
+    "module_sms_description": {
+        "type": "label",
+        "description": "Lets you remotely send SMS messages from the device"
+    },
+    "module_sms_useSubMenu": {
+        "type": "switch",
+        "description": "Show menu items in sub menu",
+        "default": true
+    },
+    "module_sms_enableSendSMS": {
+        "type": "switch",
+        "description": "Enable the menu item to send an SMS message",
+        "default": true
+    },
+    "module_sms_enableLaunchSMSApp": {
+        "type": "switch",
+        "description": "Enable the menu item to launch the KDE Connect SMS app",
+        "default": true
+    }
+}

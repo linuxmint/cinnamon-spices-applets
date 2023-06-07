@@ -169,8 +169,6 @@ function readFirefoxProfiles() {
 const readChromiumBookmarksFile = function(path, appInfo) {
 
     return new Promise(function(resolve, reject) {
-        const foundBookmarks = [];
-
         const bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev(
                                         [GLib.get_user_config_dir(), ...path, 'Bookmarks']));
         if (!bookmarksFile.query_exists(null)) {
@@ -179,22 +177,40 @@ const readChromiumBookmarksFile = function(path, appInfo) {
         }
 
         readJSONAsync(bookmarksFile).then(function(jsonResult) {
+            const foundBookmarks = [];
+
             if (!jsonResult.hasOwnProperty('roots')) {
                 resolve([]);
                 return;
             }
 
+            const getWebDomain = function(url) { // returns the first part of web url. e.g. "http://google.com" otherwise null.
+                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                    return null;
+                }
+                const slashAfterDomainPos = url.indexOf('/', url.indexOf('://') + 3);
+                if (slashAfterDomainPos === -1) {//not found
+                    return null;
+                }
+                const domain = url.slice(0, slashAfterDomainPos);
+                if (domain.length < 9 || domain.indexOf('.') === -1) {
+                    return null;
+                }
+                return domain;
+            };
+
             const recurseBookmarks = (children, cont) => {
                 children.forEach( child => {
                     if (child.type == 'url') {
-                        const url = child.url;
-                        const domain = url.slice(0, url.indexOf('/', url.indexOf('://') + 3));
-                        foundBookmarks.push({
-                            app: appInfo,
-                            name: child.name,
-                            uri: url,
-                            domain: domain
-                        });
+                        const domain = getWebDomain(child.url);
+                        if (domain) {
+                            foundBookmarks.push({
+                                app: appInfo,
+                                name: child.name,
+                                uri: child.url,
+                                domain: domain
+                            });
+                        }
                     } else if (child.hasOwnProperty('children')) {
                         recurseBookmarks(child.children);
                     }
@@ -209,12 +225,17 @@ const readChromiumBookmarksFile = function(path, appInfo) {
                 recurseBookmarks(children);
             }
 
+            if (foundBookmarks.length === 0) {
+                resolve([]);
+                return;
+            }
+
             const faviconsFile = GLib.build_filenamev([GLib.get_user_config_dir(), ...path, 'Favicons']);
-            const domains = [];
+            const domains = new Set();
             foundBookmarks.forEach( bookmark => {
-                domains.push(bookmark.domain);
+                domains.add(bookmark.domain);
             });
-            const domainsJSON = JSON.stringify(domains);
+            const domainsJSON = JSON.stringify(Array.from(domains));
 
             Util.spawn_async([__meta.path + '/getFavicons.py', faviconsFile, domainsJSON], (results) => {
                 results = JSON.parse(results);

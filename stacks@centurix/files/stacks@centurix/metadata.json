@@ -1,0 +1,6 @@
+{
+    "description": "An applet to manage docker-compose stacks.", 
+    "uuid": "stacks@centurix", 
+    "name": "Docker compose manager", 
+    "version": "0.0.1"
+}

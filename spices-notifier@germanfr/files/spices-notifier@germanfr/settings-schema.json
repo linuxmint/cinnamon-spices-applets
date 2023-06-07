@@ -1,33 +1,57 @@
 {
-	"username": {
-		"type": "entry",
-		"description": "GitHub user name",
-		"default": ""
-	},
+  "username": {
+    "type": "entry",
+    "description": "GitHub user name",
+    "default": ""
+  },
 
-	"update-interval": {
-		"type": "spinbutton",
-		"description": "Update interval",
-		"units": "minutes",
-		"default": 240,
-		"min": 15,
-		"max": 2880,
-		"step": 5
-	},
+  "update-interval": {
+    "type": "spinbutton",
+    "description": "Update interval",
+    "units": "minutes",
+    "default": 240,
+    "min": 15,
+    "max": 2880,
+    "step": 5
+  },
 
-	"show-nonzero-only": {
-		"type": "switch",
-		"description": "Hide panel icon when there are no unread comments",
-		"default": false
-	},
+  "show-nonzero-only": {
+    "type": "switch",
+    "description": "Hide panel icon when there are no unread comments",
+    "default": false
+  },
 
-	"xlets-cache": {
-		"type": "generic",
-		"default": { "applets": {}, "desklets": {}, "extensions": {}, "themes": {}, "timestamp": 0 }
-	},
+  "uuidList": {
+    "type": "generic",
+    "default": ""
+  },
 
-	"comment-cache": {
-		"type": "generic",
-		"default": { "timestamp": 0 }
-	}
+  "label-uuids": {
+    "type": "label",
+    "description": "Additional uuid:s:"
+  },
+
+  "uuids": {
+    "type": "list",
+    "columns": [
+      {
+        "id": "uuid",
+        "title": "UUID",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "tooltip": "Additional uuid:s for applets, desklets, extensions and themes you want to follow (add a row for each of them).",
+    "default": []
+  },
+
+  "xlets-cache": {
+    "type": "generic",
+    "default": { "applets": {}, "desklets": {}, "extensions": {}, "themes": {}, "timestamp": 0 }
+  },
+
+  "comment-cache": {
+    "type": "generic",
+    "default": { "timestamp": 0 }
+  }
 }

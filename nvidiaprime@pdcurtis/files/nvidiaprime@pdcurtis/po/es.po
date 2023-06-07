@@ -1,0 +1,128 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-14 07:13+0100\n"
+"PO-Revision-Date: 2023-05-24 14:55-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: applet.js:123
+msgid "Waiting for nvidia"
+msgstr "Esperando a nvidia"
+
+#: applet.js:183
+msgid "Open Power Statistics"
+msgstr "Abrir Estadísticas de Energía"
+
+#: applet.js:189
+msgid "Open System Monitor"
+msgstr "Abrir Monitor de Sistema"
+
+#: applet.js:207
+msgid "Housekeeping and System Sub Menu"
+msgstr "Submenú de Mantenimiento y Sistema"
+
+#: applet.js:210
+msgid "View the Changelog"
+msgstr "Ver el registro de cambios"
+
+#: applet.js:216
+msgid "Open the Help file"
+msgstr "Abrir el archivo de ayuda"
+
+#: applet.js:258
+msgid "NVidia based GPU is Off"
+msgstr "La GPU basada en NVidia está desactivada"
+
+#: applet.js:281
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "La GPU basada en NVidia está encendida y la temperatura del núcleo es"
+
+#: applet.js:289
+msgid "Err"
+msgstr "Err"
+
+#: applet.js:290
+msgid ""
+"Nvidia Prime is not set up correctly - are the nvidia drivers and nvidia-"
+"prime  installed?"
+msgstr ""
+"Nvidia Prime no está configurado correctamente. ¿Están instalados los "
+"controladores de nvidia y nvidia-prime?"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "Mostrar la temperatura y el icono de la GPU"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->showGpuTemp->tooltip
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
+msgstr ""
+"Disponible en paneles horizontales y verticales. Indicación en grados "
+"centígrados."
+
+#. nvidiaprime@pdcurtis->settings-schema.json->displayExtra->description
+msgid ""
+"Access enhanced functionality through Context Menu - needs Cinnamon Restart"
+msgstr ""
+"Acceso a funciones mejoradas a través del menú contextual: es necesario "
+"reiniciar Cinnamon"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->displayExtra->tooltip
+msgid ""
+"Currently  adds glxspheres64 Graphics Processor Test - VirtualGL needs to be "
+"installed"
+msgstr ""
+"Actualmente añade Prueba de Procesador Gráfico glxspheres64 - VirtualGL "
+"necesita ser instalado"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->head->description
+msgid "General Settings for the nVidia Prime Monitoring Applet"
+msgstr "Configuración general del applet de monitorización nVidia Prime"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Intervalo de actualización:"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"Aumente o disminuya este valor para cambiar el intervalo de actualización: "
+"utilice una actualización lenta si tiene una máquina lenta"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "segundos"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->head2->description
+msgid "Additional Functionality"
+msgstr "Funciones adicionales"
+
+#. nvidiaprime@pdcurtis->metadata.json->description
+msgid ""
+"Displays which Graphics processor is active and nVidia GPU Temperature when "
+"active and in a horizontal panel"
+msgstr ""
+"Muestra qué procesador gráfico está activo y la temperatura de la GPU nVidia "
+"cuando está activa y en un panel horizontal"
+
+#. nvidiaprime@pdcurtis->metadata.json->name
+msgid "nVidia Prime GPU Display"
+msgstr "monitor de GPU nVidia Prime"

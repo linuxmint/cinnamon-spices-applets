@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-08 11:28+0100\n"
-"PO-Revision-Date: 2019-03-15 06:22+0100\n"
+"PO-Revision-Date: 2023-06-05 11:47+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:215 applet.js:376
 msgid "Timer"
@@ -96,10 +96,11 @@ msgstr "Időtartam letelte után értesítés megjelenítése"
 #. settings-schema.json->display-message->description
 #. settings-schema.json->display-message->tooltip
 msgid ""
-"Global message displayed in notification windows unless defined in preset time."
+"Global message displayed in notification windows unless defined in preset "
+"time."
 msgstr ""
-"Értesítési területen megjelenített általános üzenet, amennyiben nem ad meg egyedi "
-"üzenetet."
+"Értesítési területen megjelenített általános üzenet, amennyiben nem ad meg "
+"egyedi üzenetet."
 
 #. settings-schema.json->sound-prompt-enable->description
 #. settings-schema.json->sound-prompt-enable->tooltip
@@ -139,12 +140,13 @@ msgstr "Közeljövőben aktuális értesítések idejének formátuma"
 msgid ""
 "If the alarm time is less than the minutes specified below away,\n"
 "the alarm time can be displayed with more details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format)"
+"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
+"format)"
 msgstr ""
 "Ha az időtartam letelte a percben megadott értéknél kevesebb,\n"
 "akkor az időtartam formátum-megjelenítése részletesebbre állítható be.\n"
-"(további rélszletek: https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-"
-"date-time-format)"
+"(további rélszletek: https://developer.gnome.org/glib/stable/glib-GDateTime."
+"html#g-date-time-format)"
 
 #. settings-schema.json->alarmtime-format-large->description
 msgid "Format used to display alarm time in the not so near future"
@@ -154,12 +156,14 @@ msgstr "Távolabbi jövőben aktuális értesítések idejének formátuma"
 msgid ""
 "If the alarm time is more than the minutes specified below away,\n"
 "the alarm time can be displayed with less details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format)"
+"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
+"format)"
 msgstr ""
 "Ha az időtartam letelte a percben megadott értéknél több,\n"
-"akkor az időtartam formátum-megjelenítése kevésbé részletesebbre állítható be.\n"
-"(további rélszletek: https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-"
-"date-time-format)"
+"akkor az időtartam formátum-megjelenítése kevésbé részletesebbre állítható "
+"be.\n"
+"(további rélszletek: https://developer.gnome.org/glib/stable/glib-GDateTime."
+"html#g-date-time-format)"
 
 #. settings-schema.json->alarmtime-format-switchover->units
 msgid "minutes"
@@ -168,8 +172,8 @@ msgstr "perc"
 #. settings-schema.json->alarmtime-format-switchover->description
 msgid "Time when switching from small to large time format"
 msgstr ""
-"Hátralévő idő az időtartam leteltéig, amikor az időtartam formátum-megjelenítése "
-"kevésbé részletesebbről részletesebbre vált"
+"Hátralévő idő az időtartam leteltéig, amikor az időtartam formátum-"
+"megjelenítése kevésbé részletesebbről részletesebbre vált"
 
 #. settings-schema.json->alarmtime-format-switchover->tooltip
 msgid "Switch over time between the two formats specified above"
@@ -208,3 +212,13 @@ msgstr "Címke"
 #. settings-schema.json->preset_time->columns->title
 msgid "Custom Message (overrides global message)"
 msgstr "Egyéni üzenet használata (az általános üzenet helyett)"
+
+#. settings-schema.json->sound-volume->description
+#. settings-schema.json->sound-volume->tooltip
+msgid "Specify the playback volume"
+msgstr "Hangerő beállítása lejátszáshoz"
+
+#. settings-schema.json->auto-loop-enable->description
+#. settings-schema.json->auto-loop-enable->tooltip
+msgid "Restart the timer automatically when time is elapsed"
+msgstr "Időzítő újrakezdése az időtartam letelte után"

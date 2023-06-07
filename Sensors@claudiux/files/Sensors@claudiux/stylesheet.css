@@ -227,3 +227,23 @@
 .sensors-size120 {
     font-size: 120%;
 }
+
+.tcolorwhite {
+    color: white;
+}
+
+.tcolorblack {
+    color: black;
+}
+
+.tcolorgrey {
+    color: grey;
+}
+
+.tcolorlightgrey {
+    color: "#D3D3D3";
+}
+
+.tcolordefault {
+    color: "#CFD8DC";
+}

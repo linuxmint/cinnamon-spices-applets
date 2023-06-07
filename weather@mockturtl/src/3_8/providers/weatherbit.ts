@@ -25,6 +25,8 @@ export class Weatherbit extends BaseProvider {
 	public readonly website = "https://www.weatherbit.io/";
 	public readonly maxHourlyForecastSupport = 48;
 	public readonly needsApiKey = true;
+	public readonly supportHourlyPrecipChance = true;
+	public readonly supportHourlyPrecipVolume = true;
 
 	public get remainingCalls(): number | null {
 		return null;
@@ -66,8 +68,8 @@ export class Weatherbit extends BaseProvider {
 	// A function as a function parameter 2 levels deep does not know
 	// about the top level object information, has to pass it in as a parameter
 	/**
-	 * 
-	 * @param baseUrl 
+	 *
+	 * @param baseUrl
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
 	private async GetData(baseUrl: string, loc: LocationData, ParseFunction: (json: any) => WeatherData | ForecastData[] | HourlyForecastData[] | null) {
@@ -229,7 +231,7 @@ export class Weatherbit extends BaseProvider {
 	 * Weatherbit does not consider Daylight saving time when returning Dates
 	 * in string format, but we can check if unix timestamp and date string has mismatch
 	 * to figure out if it's an incorrect Date.
-	 * 
+	 *
 	 * @param ts unix timestamp initialized as Date from payload
 	 * @param last_ob_time last refresh time in string format
 	 * @returns the hour difference of incorrect time from correct time
@@ -278,7 +280,7 @@ export class Weatherbit extends BaseProvider {
 	};
 
 	/**
-	* 
+	*
 	* @param message Soup Message object
 	* @returns null if custom error checking does not find anything
 	*/
@@ -296,7 +298,7 @@ export class Weatherbit extends BaseProvider {
 	}
 
 	private HandleHourlyError(message: ErrorResponse): boolean {
-		/// Skip Hourly forecast if it is forbidden (403)            
+		/// Skip Hourly forecast if it is forbidden (403)
 		if (message.ErrorData.code == 403) { // bad key
 			this.hourlyAccess = false;
 			Logger.Info("Hourly forecast is inaccessible, skipping")

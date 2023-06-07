@@ -7,24 +7,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-28 17:17+0800\n"
-"PO-Revision-Date: 2017-07-28 17:25+0800\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2017-09-20 23:55+0200\n"
+"PO-Revision-Date: 2023-02-07 23:18+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: applet.js:152
+msgid "Bumblebee program not installed"
+msgstr "未安装 Bumblebee 程序"
+
+#: applet.js:152
+msgid ""
+"You appear to be missing some of the required programs for 'bumblebee' to "
+"switch graphics processors using NVIDIA Optimus."
+msgstr ""
+"你似乎缺少一些 “bumblebee” 使用 NVIDIA Optimus 切换图形处理器所需要的程序。"
+
+#: applet.js:152
+msgid "Please read the help file."
+msgstr "请阅读帮助文件。"
 
 #: applet.js:172
 msgid "Waiting for Bumblebee"
-msgstr "等待Bumblebee"
+msgstr "等待 Bumblebee"
 
 #: applet.js:232
 msgid "Open nVidia Settings Program"
-msgstr "打开nVidia设置程序"
+msgstr "打开 nVidia 设置程序"
 
 #: applet.js:238
 msgid "Open Power Statistics"
@@ -36,7 +51,7 @@ msgstr "打开系统监视器"
 
 #: applet.js:253
 msgid "Housekeeping and System Sub Menu"
-msgstr "内务处理和系统子菜单"
+msgstr "维护与系统子菜单"
 
 #: applet.js:256
 msgid "View the Changelog"
@@ -48,43 +63,44 @@ msgstr "打开帮助文件"
 
 #: applet.js:278
 msgid "Launch programs using the nVidia Graphics Processor"
-msgstr "使用nVidia图形处理器启动程序"
+msgstr "使用 nVidia 图形处理器启动程序"
 
-#: applet.js:358
+#: applet.js:359
 msgid "NVidia based GPU is Off"
-msgstr "基于NVidia的GPU已关闭"
+msgstr "基于 NVidia 的 GPU 已关闭"
 
-#: applet.js:381
+#: applet.js:384
 msgid "NVidia based GPU is On and Core Temperature is"
-msgstr "基于NVidia的GPU已打开和核心温度是"
+msgstr "基于 NVidia 的 GPU 已打开且核心温度是"
 
-#: applet.js:389
+#: applet.js:392
 msgid "Err"
 msgstr "错误"
 
-#: applet.js:390
+#: applet.js:393
 msgid ""
 "Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
 "drivers installed?"
-msgstr "Bumblebee没有设置正确 - 是否安装了bbswitch、bumblebee和nvidia驱动？"
+msgstr ""
+"Bumblebee 没有正确设置 - 是否安装了 bbswitch、bumblebee 和 nvidia驱动？"
 
 #. bumblebee@pdcurtis->settings-schema.json->showGpuTemp->description
 msgid "Show GPU Temperature as well as icon"
-msgstr "显示GPU温度和图标"
+msgstr "显示 GPU 温度和图标"
 
 #. bumblebee@pdcurtis->settings-schema.json->showGpuTemp->tooltip
 msgid ""
 "Available in Horizontal and Vertical Panels. Display is in Degrees "
 "Centigrade."
-msgstr "可用于水平和垂直面板。以摄氏温度显示。"
+msgstr "可用于水平和垂直面板，以摄氏温度显示。"
 
 #. bumblebee@pdcurtis->settings-schema.json->head2->description
 msgid "Programs settings for Optimus"
-msgstr "Optimus的程序设置"
+msgstr "Optimus 的程序设置"
 
 #. bumblebee@pdcurtis->settings-schema.json->commandString2->description
 msgid "Command String for Program 2"
-msgstr "程序2的命令字符串"
+msgstr "程序 2 的启动命令"
 
 #. bumblebee@pdcurtis->settings-schema.json->commandString2->tooltip
 #. bumblebee@pdcurtis->settings-schema.json->commandString3->tooltip
@@ -94,31 +110,31 @@ msgstr "程序2的命令字符串"
 msgid ""
 "Put the command string to run the program here starting with optirun or "
 "primusrun"
-msgstr "将命令行字符串放到这里运行程序用optirun或primusrun启动"
+msgstr "在这里输入运行程序的命令，以 optirun 或 primusrun 开头"
 
 #. bumblebee@pdcurtis->settings-schema.json->commandString3->description
 msgid "Command String for Program 3"
-msgstr "程序3的命令字符串"
+msgstr "程序 3 的启动命令"
 
 #. bumblebee@pdcurtis->settings-schema.json->commandString1->description
 msgid "Command String for Program 1"
-msgstr "程序1的命令字符串"
+msgstr "程序 1 的启动命令"
 
 #. bumblebee@pdcurtis->settings-schema.json->head->description
 msgid "General Settings for the nVidia Monitoring Applet"
-msgstr "nVidia监视小程序的常规设置"
+msgstr "nVidia 监视小程序的常规设置"
 
 #. bumblebee@pdcurtis->settings-schema.json->commandString4->description
 msgid "Command String for Program 4"
-msgstr "程序4的命令字符串"
+msgstr "程序 4 的启动命令"
 
 #. bumblebee@pdcurtis->settings-schema.json->commandString5->description
 msgid "Command String for Program 5"
-msgstr "程序5的命令字符串"
+msgstr "程序 5 的启动命令"
 
 #. bumblebee@pdcurtis->settings-schema.json->description4->description
 msgid "Display Name of Program 4 to be run using Optimus technology"
-msgstr "显示使用Optimus技术运行的程序4的名称"
+msgstr "使用 Optimus 技术运行的程序 4 的显示名称"
 
 #. bumblebee@pdcurtis->settings-schema.json->description4->tooltip
 #. bumblebee@pdcurtis->settings-schema.json->description5->tooltip
@@ -126,40 +142,40 @@ msgstr "显示使用Optimus技术运行的程序4的名称"
 #. bumblebee@pdcurtis->settings-schema.json->description3->tooltip
 msgid ""
 "Put the name of the program here or none if you do not want it displayed"
-msgstr "将程序名称放到此处，如果您不想显示名称则留空。"
+msgstr "在此输入程序名称，如果您不想显示名称则留空。"
 
 #. bumblebee@pdcurtis->settings-schema.json->description5->description
 msgid "Display Name of Program 5 to be run using Optimus technology"
-msgstr "显示使用Optimus技术运行的程序5的名称"
+msgstr "使用 Optimus 技术运行的程序 5 的显示名称"
 
 #. bumblebee@pdcurtis->settings-schema.json->description2->description
 msgid "Display Name of Program 2 to be run using Optimus technology"
-msgstr "显示使用Optimus技术运行的程序2的名称"
+msgstr "使用 Optimus 技术运行的程序 2 的显示名称"
 
 #. bumblebee@pdcurtis->settings-schema.json->description3->description
 msgid "Display Name of Program 3 to be run using Optimus technology"
-msgstr "显示使用Optimus技术运行的程序3的名称"
+msgstr "使用 Optimus 技术运行的程序 3 的显示名称"
 
 #. bumblebee@pdcurtis->settings-schema.json->description1->description
 msgid "Display Name of Program 1 to be run using Optimus technology"
-msgstr "显示使用Optimus技术运行的程序1的名称"
+msgstr "使用 Optimus 技术运行的程序 1 的显示名称"
 
 #. bumblebee@pdcurtis->settings-schema.json->description1->tooltip
 msgid ""
 "Put the name of the program here or null if you do not want it displayed"
-msgstr "将程序名称放到此处，如果您不想显示名称则不填。"
+msgstr "在此输入程序名称，如果您不想显示名称则留空。"
 
 #. bumblebee@pdcurtis->settings-schema.json->refreshInterval-
 #. spinner->description
 msgid "Refresh Interval for Display:"
-msgstr "刷新显示的间隔："
+msgstr "显示刷新间隔："
 
 #. bumblebee@pdcurtis->settings-schema.json->refreshInterval-spinner->tooltip
 msgid ""
 "Increase or decrease this spinner value to change the refresh interval - use "
 "a slow refresh if you have a slow machine"
 msgstr ""
-"增大或减小这个微调器的值来更改刷新间隔 - 如果您有一台较慢的机器请使用慢速刷新"
+"增大或减小这个值来更改刷新间隔 - 如果您有一台较慢的机器请使用较低的刷新频率"
 
 #. bumblebee@pdcurtis->settings-schema.json->refreshInterval-spinner->units
 msgid "seconds"
@@ -171,12 +187,12 @@ msgid ""
 "support functions including starting selected programs with optirun or "
 "primusrun"
 msgstr ""
-"显示Bumblebee的状态和nVidia GPU温度的相关支持功能，包括启动选择的程序和"
-"optirun或primusrun "
+"显示 Bumblebee 的状态和 nVidia GPU 温度，以及相关的支持功能，包括使用 "
+"optirun 或 primusrun 启动特定的程序"
 
 #. bumblebee@pdcurtis->metadata.json->name
 msgid "Bumblebee Status with NVidia Temperature Display"
-msgstr "Bumblebee状态和NVidia 温度显示"
+msgstr "Bumblebee 状态与 NVidia 温度显示"
 
 #~ msgid "ERROR"
 #~ msgstr "错误"

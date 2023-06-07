@@ -30,8 +30,3 @@ This applet depends on the following packages being installed:
   * cinnamon-screensaver
   * cinnamon-session
   * systemd
-
-CHANGE LOG
-----------
-v1.0:
-  - Initial release.

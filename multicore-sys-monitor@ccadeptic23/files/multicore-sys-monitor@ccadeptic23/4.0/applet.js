@@ -1,4 +1,5 @@
 // Multi-core System Monitor.
+// Copyright (C) 2023 Claude Clerc <claude.clerc@gmail.com>, @claudiux on Github.
 // Copyright (C) 2017 Jason Hicks <jaszhix@gmail.com>.
 // Copyright (C) 2011-2012 Chace Clark <ccdevelop23@gmail.com>.
 //
@@ -19,6 +20,10 @@ const appSystem = imports.gi.Cinnamon.AppSystem.get_default();
 const Util = imports.misc.util;
 const Main = imports.ui.main;
 const Applet = imports.ui.applet;
+const {
+  reloadExtension,
+  Type
+} = imports.ui.extension; //Extension
 
 const UUID = 'multicore-sys-monitor@ccadeptic23';
 
@@ -51,7 +56,7 @@ tryFn(function() {
     gicon: new Gio.FileIcon({
       file: Gio.file_new_for_path(
         GLib.get_home_dir() +
-        '/.local/share/cinnamon/applets/multicore-sys-monitor@ccadeptic23/3.4/icon.png'
+        '/.local/share/cinnamon/applets/multicore-sys-monitor@ccadeptic23/4.0/icon.png'
       )
     })
   });
@@ -62,6 +67,7 @@ tryFn(function() {
       '\tUbuntu / Mint: gir1.2-gtop-2.0\n' +
       '\tFedora: libgtop2-devel\n' +
       '\tArch: libgtop\n' +
+      '\topenSUSE: libgtop-devel\n' +
       'to use ' + UUID
     ), icon);
   gtopFailed = true;
@@ -140,13 +146,13 @@ const properties = [
   {graph: 'diskGraph', provider: 'diskProvider', abbrev: 'Disk'}
 ];
 
-function MyApplet(metadata, orientation, panel_height) {
+function mcsm(metadata, orientation, panel_height) {
   this._init(metadata, orientation, panel_height);
 }
 
 let appletClass = gtopFailed ? 'IconApplet' : 'Applet';
 
-MyApplet.prototype = {
+mcsm.prototype = {
   __proto__: Applet[appletClass].prototype,
 
   _init: function(metadata, orientation, panel_height) {
@@ -162,7 +168,12 @@ MyApplet.prototype = {
     this.childProcessHandler = null;
     this.metadata = metadata;
     this.panelHeight = panel_height;
-    this.configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + metadata.uuid;
+
+    let dotCinnamonFilePath = GLib.get_home_dir() + '/.cinnamon/configs';
+    if (Gio.file_new_for_path(dotCinnamonFilePath).query_exists(null))
+      this.configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + metadata.uuid;
+    else
+      this.configFilePath = GLib.get_home_dir() + '/.config/cinnamon/spices/' + metadata.uuid;
     this.shouldUpdate = true;
 
     let configFile = Gio.file_new_for_path(this.configFilePath);
@@ -245,8 +256,9 @@ MyApplet.prototype = {
 
   on_applet_removed_from_panel: function() {
     if (gtopFailed) return;
-    if (this.loopId) {
+    if (this.loopId > 0) {
       Mainloop.source_remove(this.loopId);
+      this.loopId = 0;
     }
     this.shouldUpdate = false;
     this.graphArea.destroy();
@@ -262,6 +274,10 @@ MyApplet.prototype = {
     // Todo - make this a submenu item
     let preferences_menu_item = new Applet.MenuItem(_('Preferences'), Gtk.STOCK_EDIT, () => this.launchPreferences());
     this._applet_context_menu.addMenuItem(preferences_menu_item);
+    let restart_menu_item = new Applet.MenuItem(_('Refresh graphs'), Gtk.STOCK_REFRESH, () => {
+      reloadExtension(UUID, Type.APPLET)
+    });
+    this._applet_context_menu.addMenuItem(restart_menu_item);
     this.out_reader = null;
   },
   launchPreferences: function() {
@@ -291,8 +307,9 @@ MyApplet.prototype = {
     if (!this.networkProvider) {
       if (this.loopId > 0) {
         Mainloop.source_remove(this.loopId);
+        this.loopId = 0;
       }
-      this.loopId = 0;
+
       return false;
     }
     if (this.childProcessHandler != null) {
@@ -300,7 +317,7 @@ MyApplet.prototype = {
 
       if (currentMessage === 'SAVE') {
         this.configSettings.saveSettings();
-      } else if (currentMessage !== 'SAVE' && currentMessage !== '') {
+      } else if (currentMessage.length !== 0) {
         this.configSettings.updateSettings(currentMessage);
       }
       // Do any required processing when configuration changes
@@ -321,7 +338,7 @@ MyApplet.prototype = {
     }
 
     // Set the Applet Tooltip
-    let appletTooltipString = '';
+    var appletTooltipString = '';
 
     for (let i = 0; i < properties.length; i++) {
       if (properties[i].abbrev !== 'Swap') {
@@ -359,7 +376,7 @@ MyApplet.prototype = {
             areaContext,
             // no label for the backdrop
             false,
-            width,
+            Math.round(width/5),
             this.panelHeight - 2 * global.ui_scale,
             [0, 0, 0, 0],
             // clear background so that it doesn't mess up the other one
@@ -391,5 +408,5 @@ MyApplet.prototype = {
 };
 
 function main(metadata, orientation, panel_height) {
-  return new MyApplet(metadata, orientation, panel_height);
+  return new mcsm(metadata, orientation, panel_height);
 }

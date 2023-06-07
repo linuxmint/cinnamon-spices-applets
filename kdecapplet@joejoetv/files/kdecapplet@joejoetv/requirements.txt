@@ -1,1 +1,2 @@
-zenity>=3.18.1
+kdeconnect>=1.3
+python3

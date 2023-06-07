@@ -59,7 +59,7 @@ export class LocationStore {
 		else if (newIndex == -1)
 			currentlyDisplayedDeleted = true;
 		// currently displayed position's changed
-		// even tho this seems to happen automatically, 
+		// even tho this seems to happen automatically,
 		// probably because I'm using object references somewhere
 		else if (newIndex != currentIndex)
 			this.currentIndex = newIndex
@@ -90,7 +90,7 @@ export class LocationStore {
 
 	/**
 	 * Tries to find a location in storage based on the entryText
-	 * @param entryText 
+	 * @param entryText
 	 */
 	public FindLocation(entryText: string): LocationData | null {
 		for (const location of this.locations) {
@@ -121,7 +121,7 @@ export class LocationStore {
 		return loc;
 	}
 
-	/** Only gets the location, if you want to switch between locations, use 
+	/** Only gets the location, if you want to switch between locations, use
 	 * Config.SwitchToNextLocation function
 	 */
 	public GetNextLocation(currentLoc: LocationData | null): LocationData | null {
@@ -158,7 +158,7 @@ export class LocationStore {
 		}
 	}
 
-	/** Only gets the location, if you want to switch between locations, use 
+	/** Only gets the location, if you want to switch between locations, use
 	 * Config.SwitchToPreviousLocation function
 	 */
 	public GetPreviousLocation(currentLoc: LocationData | null): LocationData | null {
@@ -250,8 +250,8 @@ export class LocationStore {
 
 	/**
 	 * Checks if 2 locations are completely equal
-	 * @param oldLoc 
-	 * @param newLoc 
+	 * @param oldLoc
+	 * @param newLoc
 	 */
 	private IsEqual(oldLoc: LocationData, newLoc: LocationData): boolean {
 		if (oldLoc == null)

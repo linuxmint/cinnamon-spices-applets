@@ -45,7 +45,8 @@
       "sections": [
         "sectionMenuMenu",
         "sectionMenuPrivacy",
-        "sectionMenuContextual"
+        "sectionMenuContextual",
+        "sectionMenuShortcuts"
       ]
     },
     "pageBehavior": {
@@ -197,14 +198,16 @@
       "title": "Start-up",
       "keys": [
         "switch-on-last-station-at-start-up",
-        "volume-at-startup"
+        "volume-at-startup",
+        "dont-check-dependencies"
       ]
     },
     "sectionBehaviorVolumeStep": {
       "type": "section",
       "title": "Volume step",
       "keys": [
-        "volume-step"
+        "volume-step",
+        "volume-show-osd"
       ]
     },
     "sectionBehaviorTooltip": {
@@ -240,6 +243,18 @@
         "show-reload"
       ]
     },
+    "sectionMenuShortcuts": {
+      "type": "section",
+      "title": "Keyboard shortcuts",
+      "keys": [
+        "shortcut-volume-up",
+        "shortcut-volume-down",
+        "shortcut-volume-cut",
+        "shortcut-radio-on-off",
+        "shortcut-next-recent-radio",
+        "shortcut-previous-recent-radio"
+      ]
+    },
     "sectionBehaviorNotifications": {
       "type": "section",
       "title": "Notifications",
@@ -263,7 +278,8 @@
       "keys": [
         "color-on",
         "color-off",
-        "color-recording"
+        "color-recording",
+        "show-favicon"
       ]
     },
     "sectionNetworkQuality": {
@@ -299,6 +315,8 @@
       "type": "section",
       "title": "Recordings",
       "keys": [
+        "recording-path",
+        "button-rec-path-to-default",
         "recording-format",
         "recording-ends-auto"
       ]
@@ -342,6 +360,7 @@
         "recordings-extract-url",
         "recordings-paste-button",
         "recordings-yesno-playlist",
+        "recordings-keep-video",
         "recordings-subdirectory",
         "recordings-extract-button",
         "recordings-extract-update"
@@ -450,6 +469,12 @@
       {
         "id": "tags",
         "title": "Tags",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "favicon",
+        "title": "Favicon",
         "type": "string",
         "default": ""
       }
@@ -704,6 +729,12 @@
         "id": "homepage",
         "title": "Home page",
         "type": "string"
+      },
+      {
+        "id": "favicon",
+        "title": "Favicon",
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
@@ -714,6 +745,7 @@
     "type": "textview",
     "description": "Page:",
     "value": "0",
+    "default": "0",
     "height": 25
   },
   "search-list-button": {
@@ -776,6 +808,11 @@
     },
     "tooltip": "If set, then this will change the volume level starting a new radio, in percentage of the general volume level.\nDefault is (Undefined): The volume level remains unchanged.\n\nPlease note that you can change the volume level scrolling on this applet icon, or using the slider in the context menu."
   },
+  "dont-check-dependencies": {
+    "type": "switch",
+    "description": "Do not check about dependencies",
+    "default": false
+  },
   "volume-step": {
     "type": "combobox",
     "description": "Volume step scrolling on icon",
@@ -789,6 +826,12 @@
       "±5%": 5
     },
     "tooltip": "By how much increase or decrease the volume using the mouse scroll wheel on the icon."
+  },
+  "volume-show-osd": {
+    "type": "switch",
+    "default": true,
+    "description": "Show OSD while changing volume",
+    "tooltip": "Should OSD (On-Screen Display) be displayed when changing volume?"
   },
   "show-title-and-version": {
     "type": "switch",
@@ -839,6 +882,38 @@
     "default": false,
     "description": "Show the 'Reload this applet' item in the contextual menu",
     "tooltip": "For developers only"
+  },
+  "shortcut-volume-up": {
+    "type": "keybinding",
+    "description": "Increase Volume",
+    "default": ""
+  },
+  "shortcut-volume-down": {
+    "type": "keybinding",
+    "description": "Decrease Volume",
+    "default": ""
+  },
+  "shortcut-volume-cut": {
+    "type": "keybinding",
+    "description": "Mute",
+    "default": ""
+  },
+  "shortcut-radio-on-off": {
+    "type": "keybinding",
+    "description": "Radio ON/OFF",
+    "default": ""
+  },
+  "shortcut-next-recent-radio": {
+    "type": "keybinding",
+    "description": "Next station",
+    "tooltip": "Next station recently listened to",
+    "default": ""
+  },
+  "shortcut-previous-recent-radio": {
+    "type": "keybinding",
+    "description": "Previous station",
+    "tooltip": "Previous station recently listened to",
+    "default": ""
   },
   "show-help-in-tooltip": {
     "type": "switch",
@@ -900,6 +975,12 @@
     "default": "rgb(204,0,0)",
     "description": "Color of the symbolic icon while recording"
   },
+  "show-favicon": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the logo of the radio station listened to",
+    "tooltip": "Replace this applet icon with the radio station logo, if it exists."
+  },
   "network-quality": {
     "type": "combobox",
     "default": "high",
@@ -933,6 +1014,17 @@
     "description": "Database URL",
     "default": "",
     "height": 25
+  },
+  "recording-path": {
+    "type": "filechooser",
+    "description": "Path to the folder that will contain your future recordings",
+    "select-dir": true,
+    "default": ""
+  },
+  "button-rec-path-to-default": {
+    "type": "button",
+    "description": "Set this path to default one",
+    "callback": "set_rec_path_to_default"
   },
   "recording-format": {
     "type": "combobox",
@@ -976,7 +1068,7 @@
   },
   "limits-hd-value": {
     "type": "scale",
-    "default": 5,
+    "default": 1,
     "min": 0,
     "max": 1024,
     "step": 1,
@@ -1055,6 +1147,12 @@
       "Extract single soundtrack": " --no-playlist",
       "Extract whole playlist": " --yes-playlist"
     }
+  },
+  "recordings-keep-video": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep video (slower)",
+    "tooltip": "Whether or not to keep the intermediate video file on disk after post-processing"
   },
   "recordings-subdirectory": {
     "type": "entry",

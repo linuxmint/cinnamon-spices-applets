@@ -8,7 +8,7 @@ In order to be sure to download the latest version of Spices Update, use
 
 Usable with all versions of Cinnamon since v2.8.
 
-Fully supported by the author, in continuous development and in continuous use on several machines, working with ** Linux Mint **, ** Fedora **, ** Archlinux ** or ** Debian 10 **.
+Fully supported by the author, in continuous development and in continuous use on several machines, working with ** Linux Mint **, ** Fedora **, ** Archlinux **, ** openSUSE Tumbleweed ** or ** Debian 10 **.
 
 
 ## Summary
@@ -61,6 +61,7 @@ So you should not have to run any of the commands listed below.
 | Arch |`yay -S ttf-symbola` _or_ `pamac build ttf-symbola`| `sudo pacman -Syu libnotify`|
 |Linux Mint, Ubuntu|`sudo apt install fonts-symbola`|`sudo apt install libnotify-bin`|
 |Debian (with root rights)|`apt install fonts-symbola`|`apt install libnotify-bin`|
+|openSUSE|`sudo yast2 --install gdouros-symbola-fonts`|`sudo yast2 --install libnotify-tools`|
 
 **(*) Useless for Spices Update version 6.0.0 and more.**
 
@@ -255,5 +256,5 @@ The solution exists!
 
 [checked]: https://github.com/linuxmint/mint-themes/raw/master/src/Mint-Y/gtk-3.0/assets/radio-checked%402.png
 [unchecked]: https://github.com/linuxmint/mint-themes/raw/master/src/Mint-Y/gtk-3.0/assets/radio-unchecked.png
-[download]: https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?2f90db31-b2e5-43f2-8901-184592a88285
+[download]: https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?a509d76e-7bb1-4de3-8063-f4615f8accbf
 

@@ -3,7 +3,7 @@ import { CompareVersion, _ } from "../utils";
 import { FileExists, LoadContents } from "./io_lib";
 
 const { File } = imports.gi.Gio;
-const { get_home_dir } = imports.gi.GLib;
+const { get_home_dir, get_environ } = imports.gi.GLib;
 
 const LogLevelSeverity: Record<LogLevel, number> = {
 	always: 0,
@@ -74,7 +74,15 @@ class Log {
 			logFilePath += ".cinnamon/glass.log";
 		}
 		else {
-			logFilePath += ".xsession-errors";
+			// XSession Error file location
+			const errFileEnv = get_environ().find(x => x.includes("ERRFILE"));
+			if (!errFileEnv) {
+				logFilePath += ".xsession-errors";
+			}
+			else {
+				logFilePath = errFileEnv.replace("ERRFILE=", "");
+			}
+
 		}
 		const logFile = File.new_for_path(logFilePath);
 

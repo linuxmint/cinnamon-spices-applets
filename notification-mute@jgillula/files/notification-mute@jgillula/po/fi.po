@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-02 00:19+0200\n"
+"PO-Revision-Date: 2022-12-02 00:48+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi\n"
+
+#: applet.js:21
+msgid "Currently preventing notifications"
+msgstr "Tällä hetkellä estetään ilmoitukset"
+
+#: applet.js:22
+msgid "Currently allowing notifications"
+msgstr "Tällä hetkellä sallitaan ilmoitukset"
+
+#: applet.js:92
+msgid "Notification settings"
+msgstr "Ilmoitusten asetukset"
+
+#. metadata.json->name
+msgid "Notification Mute"
+msgstr "Ilmoituksen mykistys"
+
+#. metadata.json->description
+msgid "Click to mute notifications, click again to unmute"
+msgstr "Mykistä ilmoitukset napsauttamalla ja poista mykistys napsauttamalla uudelleen"
+
+#. settings-schema.json->head->description
+msgid "Icons"
+msgstr "Kuvakkeet"
+
+#. settings-schema.json->use-custom-off-icon->description
+msgid "Use a custom icon for when notifications are allowed."
+msgstr "Käytä kuvaketta, kun ilmoitukset ovat sallittuja."
+
+#. settings-schema.json->off-icon->description
+msgid "Notifications allowed icon:"
+msgstr "Ilmoitukset sallittu kuvake:"
+
+#. settings-schema.json->off-icon->tooltip
+#. settings-schema.json->on-icon->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr "Valitse kuvakeen tiedosto tai voit myös kirjoittaa nimen tekstiruutuun"
+
+#. settings-schema.json->use-custom-on-icon->description
+msgid "Use a custom icon for when notifications are muted."
+msgstr "Käytä kuvaketta, kun ilmoitukset ovat sallittu."
+
+#. settings-schema.json->on-icon->description
+msgid "Notifications muted icon:"
+msgstr "Ilmoitukset estetty kuvake:"
+
+#. settings-schema.json->head1->description
+msgid "Keybinding"
+msgstr "Pikanäppäin"
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding for toggling notification mute"
+msgstr "Aseta näppäinyhdistelmä mykistyksen vaihtamiseksi"

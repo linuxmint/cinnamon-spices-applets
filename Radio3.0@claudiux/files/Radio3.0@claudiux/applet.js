@@ -59,6 +59,7 @@ const {
 
 const {
   get_home_dir,
+  get_language_names,
   get_user_name,
   get_user_runtime_dir,
   get_user_special_dir,
@@ -114,6 +115,7 @@ const {
 const {
   Icon,
   IconType,
+  Button,
   Widget,
   ScrollView,
   Align,
@@ -124,6 +126,10 @@ const {
   Clipboard,
   ClipboardType
 } = imports.gi.St; //St
+
+const {
+  Tooltip
+} = imports.ui.tooltips; // Tooltips
 
 const {
   Urgency,
@@ -160,7 +166,8 @@ const {
 } = imports.gi.Cogl; //Cogl
 
 const {
-  notificationDaemon
+  notificationDaemon,
+  keybindingManager
 } = imports.ui.main; // Main
 
 const Cvc = imports.gi.Cvc; //Cvc
@@ -197,16 +204,33 @@ const {
 } = require("./lib/checkTranslations");
 
 //~ const {
-  //~ stations_help_text,
-  //~ button_update_help_text,
-  //~ search_help_text,
-  //~ import_help_text,
-  //~ import_shoutcast_help_text
-//~ } = require("./help/help-text");
-
-//~ const {
   //~ Shoutcast
 //~ } = require("./lib/shoutcast");
+
+const range = (start, stop, step) =>
+      Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
+var validChars = range("A".charCodeAt(0), "Z".charCodeAt(0), 1).map((x) =>
+  String.fromCharCode(x)
+);
+validChars += "," + range("a".charCodeAt(0), "z".charCodeAt(0), 1).map((x) =>
+  String.fromCharCode(x)
+);
+validChars += "," + range("0".charCodeAt(0), "9".charCodeAt(0), 1).map((x) =>
+  String.fromCharCode(x)
+);
+validChars = validChars.replace(/,/g, "");
+validChars = Array.from(validChars);
+//~ global.log("validChars: "+validChars);
+
+
+
+function _get_system_natural_scroll() {
+  let _SETTINGS_SCHEMA='org.cinnamon.desktop.peripherals.mouse';
+  let _SETTINGS_KEY = 'natural-scroll';
+  let _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
+  let ret = _interface_settings.get_boolean(_SETTINGS_KEY);
+  return ret
+}
 
 function getImageAtScale(imageFileName, width, height) {
   let pixBuf = Pixbuf.new_from_file_at_size(imageFileName, width, height);
@@ -224,6 +248,23 @@ function getImageAtScale(imageFileName, width, height) {
   return actor;
 }
 
+function versionCompare(left, right) {
+  if (typeof left + typeof right != 'stringstring')
+    return false;
+  var a = left.split('.'),
+      b = right.split('.'),
+      i = 0,
+      len = Math.max(a.length, b.length);
+  for (; i < len; i++) {
+    if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
+      return 1;
+    } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
+      return -1;
+    }
+  }
+  return 0;
+}
+
 const APPNAME = "Radio3.0";
 const UUID = APPNAME + "@claudiux";
 
@@ -231,19 +272,32 @@ const HOME_DIR = get_home_dir();
 const USER_NAME = get_user_name();
 const RUNTIME_DIR = get_user_runtime_dir();
 const DOT_CONFIG_DIR = HOME_DIR + "/.config/" + APPNAME;
+const COVER_ART_DIR = DOT_CONFIG_DIR + "/cover-art";
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
-const RADIO30_CONFIG_FILE = HOME_DIR + "/.cinnamon/configs/" + UUID + "/" + UUID + ".json";
-const DB_SERVERS_FILE = HOME_DIR + "/.cinnamon/configs/" + UUID + "/server-list.json";
+const HELP_DIR = APPLET_DIR + "/help";
+const RADIO30_OLD_CONFIG_FILE = HOME_DIR + "/.cinnamon/configs/" + UUID + "/" + UUID + ".json";
+const RADIO30_NEW_CONFIG_FILE = HOME_DIR + "/.config/cinnamon/spices/" + UUID + "/" + UUID + ".json";
+var RADIO30_CONFIG_FILE = "" + RADIO30_OLD_CONFIG_FILE;
+if (  versionCompare(getenv("CINNAMON_VERSION"), "5.6") >= 0 &&
+      !file_test(RADIO30_OLD_CONFIG_FILE, FileTest.EXISTS) ) {
+  RADIO30_CONFIG_FILE = "" + RADIO30_NEW_CONFIG_FILE;
+}
+const RADIO30_SETTINGS_SCHEMA = APPLET_DIR + "/settings-schema.json";
+//~ const DB_SERVERS_FILE = HOME_DIR + "/.cinnamon/configs/" + UUID + "/server-list.json";
+const DB_SERVERS_FILE = APPLET_DIR + "/radiodb/server-list.json";
 const XS_PATH = "%s/xs/xlet-settings.py".format(APPLET_DIR, );
 const APPLET_ICON = APPLET_DIR + "/icons/icon.svg";
 const ANIMATED_ICON = APPLET_DIR + "/icons/animated-symbolic.svg";
+var MANUAL_HTML = HELP_DIR + "/MANUAL.html";
 
 const USER_MUSIC_DIR = get_user_special_dir(UserDirectory.DIRECTORY_MUSIC);
-const RADIO30_MUSIC_DIR = USER_MUSIC_DIR + "/" + APPNAME;
+const DEFAULT_RADIO30_MUSIC_DIR = USER_MUSIC_DIR + "/" + APPNAME;
+var RADIO30_MUSIC_DIR = USER_MUSIC_DIR + "/" + APPNAME;
 
 const USER_DOWNLOAD_DIR = get_user_special_dir(UserDirectory.DIRECTORY_DOWNLOAD);
 
+const YTDLP_UPDATE_BASH_SCRIPT = SCRIPTS_DIR + "/update-yt-dlp.sh";
 const MPV_BITRATE_BASH_SCRIPT = SCRIPTS_DIR + "/mpvWatchBitrate.sh";
 const MPV_TITLE_BASH_SCRIPT = SCRIPTS_DIR + "/mpvWatchTitle.sh";
 const MPV_LUA_SCRIPT = SCRIPTS_DIR + "/mpvWatchTitle.lua";
@@ -332,14 +386,41 @@ function set_nemo_size_prefixes(value='base-10') {
 
 //var title_obj = {};
 
+function ENGLISH() {
+  let _english = file_new_for_path(APPLET_DIR + "/ENGLISH");
+  return _english.query_exists(null);
+};
+
 bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
 function _(str) {
+  if (ENGLISH()) return str;
   let customTranslation = dgettext(UUID, str);
   if(customTranslation != str) {
     return customTranslation;
   }
   return gettext(str);
 }
+
+/**
+ * get_user_language()
+ * Returns the language of the user.
+ */
+function get_user_language() {
+  log("get_language_names(): "+get_language_names());
+  let _language;
+  try {
+    _language = ""+get_language_names()[0].split("_")[0];
+  } catch(e) {
+    // Unable to detect language. Return English by default.
+    _language = "en";
+  }
+  return _language;
+}
+
+//~ log("_language: " + get_user_language(), true);
+
+if (file_test(HELP_DIR+"/"+get_user_language()+"/MANUAL.html", FileTest.EXISTS))
+  MANUAL_HTML = HELP_DIR+"/"+get_user_language()+"/MANUAL.html";
 
 let stations_help_text = _("This is your own list of Categories and Radio Stations.")+"\n"+
 _("You can add more using the [+] button.")+"\n"+
@@ -657,11 +738,20 @@ RadioNotificationSource.prototype = {
   __proto__: SystemNotificationSource.prototype,
   _init: function() {
     SystemNotificationSource.prototype._init.call(this);
+    this.notifications = [];
   },
 
   destroyAllNotifications: function() {
-    for (let i = this.notifications.length - 1; i >= 0; i--)
-      this.notifications[i].destroy();
+    if (this.notifications.length > 0) {
+      for (let i = this.notifications.length - 1; i >= 0; i--) {
+        try {
+          this.notifications[i].destroy();
+        } catch(e) {
+          // Do nothing.
+        }
+      }
+    }
+    this.notifications = [];
 
     this._updateCount();
     //log("All notifications have been destroyed.");
@@ -674,6 +764,50 @@ const messageTray = new RadioMessageTray();
 const source = new RadioNotificationSource("Radio3.0");
 messageTray.add(source);
 
+class R3Button {
+    constructor(icon, tooltip, callback, small = false) {
+        this.actor = new Bin();
+
+        this.button = new Button({
+          reactive: true,
+          can_focus: true,
+          style_class: "popup-menu-item",
+          style: "height:20px; width:20px; padding:10px!important"
+        });
+        this.button.connect('clicked', callback);
+
+        if (small)
+            this.button.add_style_pseudo_class("small");
+
+        this.icon = new Icon({
+            icon_type: IconType.SYMBOLIC,
+            icon_name: icon
+        });
+        this.button.set_child(this.icon);
+        this.actor.add_actor(this.button);
+
+        this.tooltip = new Tooltip(this.button, tooltip);
+    }
+
+    getActor() {
+        return this.actor;
+    }
+
+    setData(icon, tooltip) {
+        this.icon.icon_name = icon;
+        this.tooltip.set_text(tooltip);
+    }
+
+    setActive(status) {
+        this.button.change_style_pseudo_class("active", status);
+    }
+
+    setEnabled(status) {
+        this.button.change_style_pseudo_class("insensitive", !status);
+        this.button.can_focus = status;
+        this.button.reactive = status;
+    }
+}
 
 class TitleSeparatorMenuItem extends PopupBaseMenuItem {
   constructor(title, icon_name, reactive=false) {
@@ -760,9 +894,19 @@ WebRadioReceiverAndRecorder.prototype = {
       //~ log("DB_SERVERS_FILE: "+DB_SERVERS_FILE, true);
       if (db_is_accessible) {
         //~ log("Contents: "+to_string(file_get_contents(DB_SERVERS_FILE)[1]), true);
-        let json_servers = JSON.parse((to_string(file_get_contents(DB_SERVERS_FILE)[1])).trim());
-        for (let s of json_servers) {
-          this.DB_SERVERS.push(s["server"]);
+        try {
+          let json_servers = JSON.parse((to_string(file_get_contents(DB_SERVERS_FILE)[1])).trim());
+          for (let s of json_servers) {
+            this.DB_SERVERS.push(s["server"]);
+          }
+        } catch(e) {
+          logError("Can't parse JSON file: "+DB_SERVERS_FILE+". Default values will be used.");
+          this.DB_SERVERS = [
+            "https://api.radiodb.fr",
+            "https://de1.api.radio-browser.info",
+            "https://at1.api.radio-browser.info",
+            "https://nl1.api.radio-browser.info"
+          ];
         }
       }
     } else {
@@ -782,9 +926,14 @@ WebRadioReceiverAndRecorder.prototype = {
     // Ensure right permissions and structure:
     spawnCommandLineAsync("bash -c 'cd "+ SCRIPTS_DIR + " && chmod 755 *.sh *.py'");
     spawnCommandLineAsync("bash -c 'cd "+ SCRIPTS_DIR + " && chmod 700 *.lua'");
-    mkdir_with_parents(RADIO30_MUSIC_DIR, 0o755);
-    mkdir_with_parents(RADIO_LISTS_DIR, 0o755);
-    mkdir_with_parents(JOBS_DIR, 0o755);
+    if (!file_test(RADIO30_MUSIC_DIR, FileTest.EXISTS))
+      mkdir_with_parents(RADIO30_MUSIC_DIR, 0o755);
+    if (!file_test(RADIO_LISTS_DIR, FileTest.EXISTS))
+      mkdir_with_parents(RADIO_LISTS_DIR, 0o755);
+    if (!file_test(JOBS_DIR, FileTest.EXISTS))
+      mkdir_with_parents(JOBS_DIR, 0o755);
+    if (!file_test(COVER_ART_DIR, FileTest.EXISTS))
+      mkdir_with_parents(COVER_ART_DIR, 0o755);
     spawnCommandLineAsync("bash -c 'cp -a "+ APPLET_DIR +"/stations/Radio3.0_*.json "+ RADIO_LISTS_DIR +"/'");
     if (!file_test(DOT_CONFIG_DIR +"/icon.svg", FileTest.EXISTS)) {
       spawnCommandLineAsync("bash -c 'cp -a "+ APPLET_ICON +" "+ DOT_CONFIG_DIR +"/'")
@@ -821,6 +970,9 @@ WebRadioReceiverAndRecorder.prototype = {
     // To check dependencies:
     this.dependencies = new Dependencies();
     this.depCount = 0;
+
+    // yt-dlp updated?
+    this.ytdlp_updated = false;
 
     // To get json data from radiodb:
     this.http = new HttpLib();
@@ -875,9 +1027,16 @@ WebRadioReceiverAndRecorder.prototype = {
 
     // User's settings:
     this.settings = new R3AppletSettings(this, UUID, this.instanceId);
+    //~ if (file_test(RADIO30_NEW_CONFIG_FILE, FileTest.EXISTS) && !file_test(RADIO30_CONFIG_FILE, FileTest.EXISTS)) {
+    //~ spawnCommandLineAsync('bash -c "mkdir -p ~/.cinnamon/configs/Radio3.0@claudiux ; cd ~/.cinnamon/configs/Radio3.0@claudiux ; ln %s"'.format(RADIO30_NEW_CONFIG_FILE));
+  //~ }
+
+
     let userSettings = JSON.parse(to_string(file_get_contents(RADIO30_CONFIG_FILE)[1]));
     this.set_MPV_ALIAS();
     this.get_user_settings();
+
+    this.on_rec_path_changed();
 
     this.tabNumberOfScheduling = 1*userSettings["layoutradio"]["pages"].indexOf("pageScheduling");
     this.tabNumberOfSearch = 1*userSettings["layoutradio"]["pages"].indexOf("pageSearch");
@@ -952,15 +1111,22 @@ WebRadioReceiverAndRecorder.prototype = {
     // Connect signals:
     this._connect_signals();
 
+    // Shortcuts:
+    this.onShortcutChanged();
+
     //title_obj.watch('prop', function(value){
       //this._on_mpv_title_changed();
       ////global.log('wow!',value);
     //});
+    // Tests:
+    //~ this.set_applet_icon_path(HOME_DIR + "/.config/Radio3.0/cover-art/f361b3_786c3987bd404f9f807b4ca7fb4f8337~mv2.jpg");
+    //~ this.set_applet_icon_path("https://static.wixstatic.com/media/f361b3_786c3987bd404f9f807b4ca7fb4f8337~mv2.jpg");
   },
 
   get_user_settings: function() {
     //log("get_user_settings");
 
+    this.settings.bind("dont-check-dependencies", "dont_check_dependencies");
     this.settings.bind("recentRadios", "recentRadios");
     this.settings.bind("volume-step", "volume_step");
     this.settings.bind("volume-at-startup", "volume_at_startup");
@@ -972,10 +1138,12 @@ WebRadioReceiverAndRecorder.prototype = {
     this.settings.bind("show-reload", "show_reload");
     this.settings.bind("show-bitrate", "show_bitrate", (...args) => this.set_show_bitrate(...args));
     this.settings.bind("show-codec", "show_codec");
+    this.settings.bind("volume-show-osd", "volume_show_osd");
 
     this.settings.bind("import-list", "import_list");
     this.settings.bind("import-dir", "import_dir");
 
+    this.settings.bind("recording-path", "recording_path", this.on_rec_path_changed.bind(this));
     this.settings.bind("recording-format", "rec_format");
     this.settings.bind("recording-ends-auto", "recording_ends_auto");
 
@@ -998,9 +1166,16 @@ WebRadioReceiverAndRecorder.prototype = {
     this.settings.bind("color-on", "color_on", this.set_color.bind(this));
     this.settings.bind("color-off", "color_off", this.set_color.bind(this));
     this.settings.bind("color-recording", "color_recording", this.set_color.bind(this));
-
+    this.settings.bind("show-favicon", "show_favicon",
+      this.on_switch_show_favicon.bind(this));
     // Menu:
     this.settings.bind("show-by-category", "show_by_category");
+    this.settings.bind("shortcut-volume-up", "shortcutVolUp", this.onShortcutChanged.bind(this));
+    this.settings.bind("shortcut-volume-down", "shortcutVolDown", this.onShortcutChanged.bind(this));
+    this.settings.bind("shortcut-volume-cut", "shortcutVolCut", this.onShortcutChanged.bind(this));
+    this.settings.bind("shortcut-radio-on-off", "shortcutOnOff", this.onShortcutChanged.bind(this));
+    this.settings.bind("shortcut-next-recent-radio", "shortcutNext", this.onShortcutChanged.bind(this));
+    this.settings.bind("shortcut-previous-recent-radio", "shortcutPrevious", this.onShortcutChanged.bind(this));
 
     //Scheduling:
     this.settings.bind("sched-recordings", "sched_recordings");
@@ -1015,6 +1190,127 @@ WebRadioReceiverAndRecorder.prototype = {
 
     // Help TextViews:
     this.populate_help_textviews()
+  },
+
+  onShortcutChanged: function() {
+    keybindingManager.addHotKey("shortcutVolUp", this.shortcutVolUp, (event) => {
+      //~ log("Volume Up", true);
+      let step = this.volume_step;
+      let percentage = this.percentage;
+      this.percentage = Math.min(100, percentage + step);
+      let value = this.percentage / 100;
+      if (this.context_menu_item_slider != null) {
+        this.context_menu_item_slider.slider._value = value;
+        this.context_menu_item_slider.slider._slider.queue_repaint();
+        this.context_menu_item_slider.slider.emit('value-changed', value);
+      }
+    });
+    keybindingManager.addHotKey("shortcutVolDown", this.shortcutVolDown, (event) => {
+      //~ log("Volume Down", true);
+      let step = this.volume_step;
+      let percentage = this.percentage;
+      this.percentage = Math.max(0, percentage - step);
+      let value = this.percentage / 100;
+      if (this.context_menu_item_slider != null) {
+        this.context_menu_item_slider.slider._value = value;
+        this.context_menu_item_slider.slider._slider.queue_repaint();
+        this.context_menu_item_slider.slider.emit('value-changed', value);
+      }
+    });
+    keybindingManager.addHotKey("shortcutVolCut", this.shortcutVolCut, (event) => {
+      //~ log("Volume Cut", true);
+
+      if (this.context_menu_item_slider != null) {
+        //this.context_menu_item_slider.stream.change_is_muted(!this.context_menu_item_slider.stream.is_muted);
+
+        let volume_at_startup = this.get_volume_at_startup();
+
+        if (volume_at_startup <= 0) volume_at_startup = 50;
+
+        let value = 0;
+        let old_value = this.context_menu_item_slider.slider._value;
+
+        if (old_value !== 0) this.old_percentage = Math.round(old_value * 100);
+        else value = (this.old_percentage) ? this.old_percentage / 100 : volume_at_startup / 100;
+
+        //~ log("value: "+value, true);
+        //~ log("old_value: "+old_value, true);
+
+        //this.percentage = Math.round(value * 100);
+        this.context_menu_item_slider.slider._value = value;
+        this.context_menu_item_slider.slider._slider.queue_repaint();
+        this.context_menu_item_slider.slider.emit('value-changed', value);
+      }
+    });
+    keybindingManager.addHotKey("shortcutOnOff", this.shortcutOnOff, (event) => {
+      this.on_applet_middle_clicked(event);
+    });
+    keybindingManager.addHotKey("shortcutNext", this.shortcutNext, (event) => {
+      if (this.recentRadios.length < 2) return;
+      let next_radio = this.recentRadios[this.recent_number - 1];
+      this.stop_mpv_radio(false);
+      this.start_mpv_radio(next_radio);
+    });
+    keybindingManager.addHotKey("shortcutPrevious", this.shortcutPrevious, (event) => {
+      if (this.recentRadios.length < 2) return;
+      let prev_radio = this.recentRadios[1];
+      this.stop_mpv_radio(false);
+      this.start_mpv_radio(prev_radio);
+    });
+
+  },
+
+  on_rec_path_changed: function() {
+    log("on_rec_path_changed");
+    let recording_path = this.settings.getValue("recording-path");
+    if (  recording_path.length !== 0 &&
+          recording_path !== "file://"+RADIO30_MUSIC_DIR) {
+      RADIO30_MUSIC_DIR = recording_path.slice("file://".length, recording_path.length);
+      this.rec_folder = "file://" + RADIO30_MUSIC_DIR;
+    }
+    log("RADIO30_MUSIC_DIR: "+RADIO30_MUSIC_DIR);
+    log("this.rec_folder: "+this.rec_folder);
+  },
+
+  set_rec_path_to_default: function() {
+    RADIO30_MUSIC_DIR = DEFAULT_RADIO30_MUSIC_DIR;
+    this.rec_folder = "file://" + RADIO30_MUSIC_DIR;
+    //~ this.settings.setValue("recording-path", this.rec_folder);
+    this.recording_path = ""+this.rec_folder;
+  },
+
+  id2str: function(id) {
+    let idarray = Array.from(id);
+    var idstr = "";
+    for (let ch of idarray) {
+      if (validChars.indexOf(ch) >= 0) idstr += ch
+    }
+    //~ idstr = idstr.replace(/,/g, "");
+    //~ log("idstr: "+idstr, true);
+    return idstr;
+  },
+
+  set_applet_icon_from_url: function(url="") {
+    let name = this.id2str(this.get_radio_name(this.radioId));
+    //~ log("name: "+name, true);
+    this.change_symbolic_icon();
+    let png_path = COVER_ART_DIR+"/%s.png".format(name);
+    if (file_test(png_path, FileTest.EXISTS)) {
+      this.set_applet_icon_path(png_path);
+      return
+    }
+    if (!url || url.length === 0) {
+      return
+    }
+    let command = SCRIPTS_DIR+'/download-favicon.sh "'+url+'" "'+name+'.png"';
+    spawnCommandLineAsyncIO(command, Lang.bind(this, (out, err, exitCode) => {
+      //~ log("out: "+out, true);
+      //~ log("err: "+err, true);
+      //~ log("exitCode: "+exitCode, true);
+      if (exitCode === 0) {
+        this.set_applet_icon_path(png_path);
+      }
+    }));
   },
 
   set_folders_icon: async function() {
@@ -1106,10 +1402,11 @@ WebRadioReceiverAndRecorder.prototype = {
       let reg = new RegExp(`rgb[(]([0-9]+),([0-9]+),([0-9]+)[)]`);
       let color = "%s".format(this.settings.getValue("color-on"));
       let [, red, green, blue] = reg.exec(color);
-      let alpha = ""+Math.ceil(2.55 * this.progress);
+      let alpha_value = Math.ceil(2.55 * this.progress);
+      let alpha = ""+alpha_value;
       this.actor.style = "color: rgba(%s,%s,%s,%s)".format(red, green, blue, alpha);
 
-      this.actor.set_opacity(2.55 * this.progress);
+      this.actor.set_opacity(alpha_value);
 
       this.progress = this.progress + 10.0/REFRESH_INTERVAL;
     } else {
@@ -1140,7 +1437,8 @@ WebRadioReceiverAndRecorder.prototype = {
           "codec": ""+station.codec,
           "uuid": station.uuid,
           "homepage": station.homepage,
-          "tags": station.tags
+          "tags": station.tags,
+          "favicon": station.favicon ? station.favicon : ""
         };
       }
     }
@@ -1472,6 +1770,34 @@ WebRadioReceiverAndRecorder.prototype = {
     return name;
   },
 
+  get_radio_favicon: function(id, caller="") {
+    //log("get_radio_homepage: caller: "+caller);
+
+    let radios = this.settings.getValue("radios");
+
+    var favicon = "";
+
+    if (this.radiosHash && this.radiosHash[""+id] != null && this.radiosHash[""+id].inc == true) {
+      return "" + this.radiosHash[""+id].favicon;
+    } else {
+      for (let i = 0, _length = radios.length; i < _length; i++) {
+        if ((id == radios[i].url) && (radios[i].inc)) {
+          favicon = "" + radios[i].favicon;
+          break;
+        }
+      }
+    }
+
+    if (favicon.length === 0) {
+      // Search on Radio Database
+      // FIXME!
+      //this.search_favicon_by_url_on_RDB(id);
+    }
+
+    radios = null;
+    return favicon;
+  },
+
   get_radio_homepage: function(id, caller="") {
     //log("get_radio_homepage: caller: "+caller);
 
@@ -1512,7 +1838,8 @@ WebRadioReceiverAndRecorder.prototype = {
           "bitrate": r.bitrate,
           "homepage": r.homepage,
           "uuid": r.stationuuid,
-          "tags": `${r.tags}`
+          "tags": `${r.tags}`,
+          "favicon": r.favicon ? r.favicon : ""
         };
         return r.name;
       }
@@ -1532,7 +1859,8 @@ WebRadioReceiverAndRecorder.prototype = {
           "bitrate": (!r.bitrate) ? "" : ""+r.bitrate,
           "homepage": (!r.homepage) ? "" : ""+r.homepage,
           "uuid": (!r.stationuuid) ? "" : ""+r.stationuuid,
-          "tags": (!r.tags) ? "" : ""+r.tags // `${r.tags}`
+          "tags": (!r.tags) ? "" : ""+r.tags, // `${r.tags}`
+          "favicon": r.favicon ? r.favicon : ""
         };
         return r.stationuuid;
       }
@@ -1564,7 +1892,8 @@ WebRadioReceiverAndRecorder.prototype = {
           "bitrate": (!r.bitrate) ? "" : ""+r.bitrate,
           "homepage": (!r.homepage) ? "" : ""+r.homepage,
           "uuid": (!r.stationuuid) ? "" : ""+r.stationuuid,
-          "tags": (!r.tags) ? "" : ""+r.tags // `${r.tags}`
+          "tags": (!r.tags) ? "" : ""+r.tags, // `${r.tags}`
+          "favicon": r.favicon ? r.favicon : ""
           }
           try {
             delete this.radiosHash[""+old_url];
@@ -1578,7 +1907,8 @@ WebRadioReceiverAndRecorder.prototype = {
             "bitrate": (!r.bitrate) ? "" : ""+r.bitrate,
             "homepage": (!r.homepage) ? "" : ""+r.homepage,
             "uuid": (!r.stationuuid) ? "" : ""+r.stationuuid,
-            "tags": (!r.tags) ? "" : ""+r.tags // `${r.tags}`
+            "tags": (!r.tags) ? "" : ""+r.tags, // `${r.tags}`
+            "favicon": r.favicon ? r.favicon : ""
           };
         }
         return r.url;
@@ -1688,6 +2018,30 @@ WebRadioReceiverAndRecorder.prototype = {
     this.set_applet_tooltip(this._clean_str(_tooltip), true);
 
     _tooltip = null;
+  },
+
+  icon_or_favicon: function(_id) {
+    let change2symbolic = false;
+    if (this.show_favicon && _id != null) {
+      let favicon = this.get_radio_favicon(_id);
+      if (favicon.length > 0 && favicon.startsWith("http")) {
+        try {
+          this.set_applet_icon_from_url(favicon);
+        } catch(e) {
+          logError("Unable to display the station logo");
+          change2symbolic = true
+        }
+      } else {
+        change2symbolic = true
+      }
+    } else {
+      change2symbolic = true
+    }
+
+    if (change2symbolic) {
+      this.change_symbolic_icon();
+      this.set_color();
+    }
   },
 
   updateUI: function() {
@@ -1806,6 +2160,48 @@ WebRadioReceiverAndRecorder.prototype = {
             yt_dl_item = null
           }
         }
+
+        let trackInfo = new BoxLayout({ style_class: 'sound-player-overlay', important: true, vertical: true });
+        let songBox = new PopupMenuSection();
+
+        let song_toolbar = new BoxLayout(
+          { style_class: "sound-player", important: true, vertical: true, style: 'padding: 10px;',  x_align: Align.MIDDLE}
+          //~ {
+            //~ style: 'padding: 10px;',
+            //~ x_align: Align.MIDDLE
+          //~ }
+        );
+
+        songBox.addActor(song_toolbar, { expand: true });
+
+        let songButtons = new Bin({ x_align: Align.MIDDLE });
+
+        let brainzBtn = new R3Button(
+          "audio-x-generic",
+          _("Infos on: %s").format(title),
+          Lang.bind(this, function() {
+            spawnCommandLineAsync("xdg-open " + brainz_link)
+          }),
+          false
+        );
+
+        let watchOnYT = new R3Button(
+          "media-playback-start",
+          _("Watch on YT"),
+          Lang.bind(this, function() {
+            spawnCommandLineAsync("xdg-open " + yt_watch_link);
+          }),
+          false
+        );
+
+        song_toolbar.add_actor(songButtons);
+        songButtons.add_actor(brainzBtn.getActor());
+        songButtons.add_actor(watchOnYT.getActor());
+        //trackInfo.add_actor(songButtons);
+        //~ songBox.set_child(song_toolbar);
+
+        //this.menu.addMenuItem(songBox);
+
         this.menu.addMenuItem(new PopupSeparatorMenuItem());
       }
 
@@ -1863,16 +2259,45 @@ WebRadioReceiverAndRecorder.prototype = {
       }
       this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
+      // --- Begin Test (under development)
+      //~ let subMenuMyCategories = new RadioPopupSubMenuMenuItem(
+        //~ _("My Categories") + "  (%s)".format(""+(this.number_of_categories))
+      //~ );
+
+      //~ for (let radio of this.radios) {
+        //~ let title = ""+radio.name;
+        //~ let url = ""+radio.url;
+        //~ let isCategory = (url.length === 0);
+
+        //~ if (isCategory) {
+          //~ subMenuMyCategories.menu.addAction(title, () => {});
+        //~ }
+      //~ }
+
+      //~ this.menu.addMenuItem(subMenuMyCategories);
+      //~ subMenuMyCategories.menu._needsScrollbar = function() {
+        //~ return true;
+      //~ };
+      // --- End Test
+
+      this.show_by_category = false; // Forced to false; true doesn't work for now.
+
       if (this.show_by_category) {
         // MY CATEGORIES
         //let allCategoriesMenu = new RadioPopupSubMenuMenuItem(_("My Categories") + "  (%s)".format(""+(this.number_of_categories)));
-        let allCategoriesMenu = new PopupMenuSection(null);
+        let allCategoriesMenu = new RadioPopupSubMenuMenuItem(_("My Categories") + "  (%s)".format(""+(this.number_of_categories)));
+        //let allCategoriesMenu = new PopupMenuItem(_("My Categories") + "  (%s)".format(""+(this.number_of_categories)));
+        //let allCategoriesMenu = new PopupMenuSection(null);
         //~ allCategoriesMenu._needsScrollbar = function() {
-          //~ return false;
+          //~ return true;
+        //~ };
+        //~ allCategoriesMenu.close = function(animate) {
+          //~ return true;
         //~ };
         //~ allCategoriesMenu.actor.set_style_class_name('menu-context-menu');
         //allCategoriesMenu.connect('open-state-changed', Lang.bind(this, this._contextMenuOpenStateChanged));
-        this.menu.addMenuItem(allCategoriesMenu);
+        //~ allCategoriesMenu.connect('open-state-changed', () => {});
+
 
         //~ this.menuCategories = [null];
         var indexOfLastCategory = null;
@@ -1881,33 +2306,43 @@ WebRadioReceiverAndRecorder.prototype = {
           //~ global.log("lastCategory is null: "+(lastCategory == null));
           let title = ""+this.radios[i].name;
           let id = ""+this.radios[i].url;
-          let isCategory = id.length === 0;
+          let isCategory = (id.length === 0);
 
           if (isCategory) {
-            this.menuItems[i] = new RadioPopupSubMenuMenuItem(title, false);
-            //allCategoriesMenu.menu.addMenuItem(this.menuItems[i]);
-            allCategoriesMenu.addMenuItem(this.menuItems[i]);
-            this.menuItems[i].connect('open-event', Lang.bind(this, function() {
-              this.menuItems[i].menu.isOpen = false ;
-              this.menuItems[i].menu.open(true)
-            }));
-            indexOfLastCategory = 0 + i;
+            log("Category: "+title, true);
+            //~ this.menuItems[i] = new PopupSubMenuMenuItem(title);
+            this.menuItems.push( new PopupSubMenuMenuItem(title) );
+            allCategoriesMenu.menu.addMenuItem(this.menuItems[-1]);
+
+            //~ this.menuItems[i].connect('open-event', Lang.bind(this, function() {
+              //~ //this.menuItems[i].menu.isOpen = false ;
+              //~ this.menuItems[i].menu.open(true);
+              //~ log(title + " open-event: " + this.menuItems[i].menu.isOpen, true)
+            //~ }));
+            //~ this.menuItems[i].connect('open-state-changed', Lang.bind(this, function() {
+              //~ log(title + " open-state-changed: " + this.menuItems[i].menu.isOpen, true)
+            //~ }));
+
+            //~ indexOfLastCategory = 0 + i;
+            indexOfLastCategory = this.menuItems.length - 1;
           } else {
             if (this.radios[i] != null && this.radios[i].inc === true) {
-              this.menuItems[i] = new PopupMenuItem(title, { reactive: true });
+              log(" Station: "+title, true);
+              //~ this.menuItems[i] = new PopupMenuItem(title, { reactive: true });
+              this.menuItems.push( new PopupMenuItem(title, { reactive: true }) );
               if (indexOfLastCategory != null) {
-                this.menuItems[indexOfLastCategory].menu.addMenuItem(this.menuItems[i]);
-                //this.menuItems[indexOfLastCategory].menu.open(true);
-                this.menuItems[i].connect('activate', () => {
-                  if (change_tooltip) {
-                    this.set_radio_tooltip_to_default_one();
-                  }
+                this.menuItems[-1].connect('activate', () => {
 
                   this.stop_mpv_radio(false);
                   this.start_mpv_radio(id);
 
                   this.menu.close();
+                  if (change_tooltip) {
+                    this.set_radio_tooltip_to_default_one();
+                  }
                 });
+                this.menuItems[indexOfLastCategory].menu.addMenuItem(this.menuItems[-1]);
+                //this.menuItems[indexOfLastCategory].menu.open(true);
               } else {
                 //allCategoriesMenu.menu.addMenuItem(this.menuItems[i]);
               }
@@ -1915,7 +2350,7 @@ WebRadioReceiverAndRecorder.prototype = {
           }
           i++
         }
-
+        this.menu.addMenuItem(allCategoriesMenu);
       } else {
         // MY RADIO STATIONS:
         //~ let allRadiosMenu = new RadioPopupSubMenuMenuItem(_("My Radio Stations") + "  (%s)".format(""+(this.radios.length - this.number_of_categories)));
@@ -1939,6 +2374,8 @@ WebRadioReceiverAndRecorder.prototype = {
             if (codec.length > 0) elts.unshift(codec);
 
             if (elts.length > 0) elts.unshift(" ─");
+            if (this.show_favicon && this.radios[i].favicon && this.radios[i].favicon.length > 0)
+              elts.push(" *");
 
             title = title + elts.join(" ");
           }
@@ -2440,6 +2877,8 @@ WebRadioReceiverAndRecorder.prototype = {
 
     this.radioId = _id;
 
+    this.icon_or_favicon(_id);
+
     this.progress = 10/REFRESH_INTERVAL;
     this.interval = setInterval(() => this.on_progress_change(), 100);  // 100 ms.
 
@@ -2485,6 +2924,8 @@ WebRadioReceiverAndRecorder.prototype = {
     spawnCommandLine("kill -15 " + pid);
     spawnCommandLine("rm -f %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE));
     file_set_contents(MPV_TITLE_FILE, "");
+
+    this.change_symbolic_icon();
 
     this._disconnect_signals(false);
 
@@ -2856,14 +3297,15 @@ WebRadioReceiverAndRecorder.prototype = {
 
   _onScrollEvent: function(actor, event) {
     //log("_onScrollEvent");
+    let invert = _get_system_natural_scroll();
     if (!this.context_menu_item_slider) {
       let direction = event.get_scroll_direction();
       let step = this.volume_step;
       let percentage = this.percentage;
-      if (direction == ScrollDirection.DOWN) {
+      if ((direction == ScrollDirection.DOWN && !invert) || (direction == ScrollDirection.UP && invert)) {
         this.percentage = Math.max(0, percentage - step);
       }
-      else if (direction == ScrollDirection.UP) {
+      else if ((direction == ScrollDirection.UP && !invert) || (direction == ScrollDirection.DOWN && invert)) {
         this.percentage = Math.min(100, percentage + step);
       }
       this.change_volume_in_radio_tooltip();
@@ -2955,8 +3397,8 @@ WebRadioReceiverAndRecorder.prototype = {
 
     // Check about dependencies:
     this.checkDepInterval = undefined;
-    if (this.dependencies.areDepMet()) {
-      // All dependencies are installed.
+    if (this.dependencies.areDepMet() || this.dont_check_dependencies) {
+      // (Consider) All dependencies are installed.
 
       // Install or update translations, if any:
       if (!are_translations_installed()) install_translations();
@@ -2970,7 +3412,33 @@ WebRadioReceiverAndRecorder.prototype = {
     } else {
       // Some dependencies are missing. Suggest to the user to install them.
       this.appletRunning = false;
-      this.checkDepInterval = setInterval(() => this.dependencies.check_dependencies(), 10000);
+      if (!this.dont_check_dependencies) {
+        this.checkDepInterval = setInterval(() => this.dependencies.check_dependencies(), 10000);
+      }
+    }
+
+    if (!this.ytdlp_updated) {
+      log("Updating yt-dlp.");
+      this.checkDepInterval = setInterval(
+        () => {
+          spawnCommandLineAsyncIO(
+            YTDLP_UPDATE_BASH_SCRIPT,
+            Lang.bind(this, (out, err, exitCode) => {
+              if (exitCode === 0) {
+                this.ytdlp_updated = true;
+              } else {
+                let icon = new Icon({
+                  icon_name: 'webradioreceiver',
+                  icon_type: IconType.SYMBOLIC,
+                  icon_size: 32
+                });
+                criticalNotify(_("Please Log Out then Log In"), _("to finalize yt-dlp update"), icon)
+              }
+            })
+          )
+        },
+        60000
+      );
     }
   },
 
@@ -3001,6 +3469,14 @@ WebRadioReceiverAndRecorder.prototype = {
     this.unmonitor_jobs_dir();
     this.unmonitor_mpv_title();
     this.unmonitor_rec_folder();
+
+    // Remove shortcuts:
+    keybindingManager.removeHotKey("shortcutVolUp");
+    keybindingManager.removeHotKey("shortcutVolDown");
+    keybindingManager.removeHotKey("shortcutVolCut");
+    keybindingManager.removeHotKey("shortcutOnOff");
+    keybindingManager.removeHotKey("shortcutNext");
+    keybindingManager.removeHotKey("shortcutPrevious");
 
     // Finalize settings:
     this.settings.finalize();
@@ -3197,8 +3673,8 @@ WebRadioReceiverAndRecorder.prototype = {
 
           //log(""+station.name+" - tags: "+`${rh.tags}`);
           new_station["tags"] = (`${rh.tags}`.length > 0) ? ""+`${rh.tags}` : "";
+          new_station["favicon"] = rh.favicon ? rh.favicon : ""
         } else {
-          //log("OLD: "+i+"/"+nb_of_urls);
           new_station["inc"] = station.inc;
           new_station["play"] = false;
           new_station["name"] = station.name;
@@ -3207,8 +3683,8 @@ WebRadioReceiverAndRecorder.prototype = {
           new_station["url"] = ""+id;
           new_station["uuid"] = "";
           new_station["homepage"] = (station.homepage && (station.homepage.length > 0)) ? station.homepage : "";
-          //log(""+station.name+" - tags: "+`${station.tags}`);
           new_station["tags"] = "";
+          new_station["favicon"] = (station.favicon && (station.favicon.length > 0)) ? station.favicon : "";
         }
 
         new_stations.push(new_station);
@@ -3279,6 +3755,7 @@ WebRadioReceiverAndRecorder.prototype = {
 
           //log(""+station.name+" - tags: "+`${rh.tags}`);
           new_station["tags"] = (`${rh.tags}`.length > 0) ? ""+`${rh.tags}` : "";
+          new_station["favicon"] = rh.favicon.length > 0 ? ""+rh.favicon : "";
         } else {
           //log("OLD: "+i+"/"+nb_of_urls);
           new_station["inc"] = station.inc;
@@ -3291,6 +3768,7 @@ WebRadioReceiverAndRecorder.prototype = {
           new_station["homepage"] = (station.homepage && (station.homepage.length > 0)) ? station.homepage : "";
           //log(""+station.name+" - tags: "+`${station.tags}`);
           new_station["tags"] = "";
+          new_station["favicon"] = "";
         }
 
         new_stations.push(new_station);
@@ -3326,6 +3804,20 @@ WebRadioReceiverAndRecorder.prototype = {
     if (index > -1 && this.context_menu_item_onAtStartup._switch.state != this.switch_on_last_station_at_start_up) {
       this.context_menu_item_onAtStartup._switch.setToggleState(this.switch_on_last_station_at_start_up);
     }
+  },
+
+  on_switch_show_favicon: function() {
+    //log("on_switch_on_last_station_at_start_up");
+    if (this._applet_context_menu == null || this.context_menu_item_showLogo == null) return;
+
+    let items = this._applet_context_menu._getMenuItems();
+    let index = items.indexOf(this.context_menu_item_showLogo);
+
+    if (index > -1 && this.context_menu_item_showLogo._switch.state != this.show_favicon) {
+      this.context_menu_item_showLogo._switch.setToggleState(this.show_favicon);
+    }
+
+    this.icon_or_favicon(this.radioId);
   },
 
   on_button_radios_moving_clicked: function() {
@@ -3572,7 +4064,9 @@ WebRadioReceiverAndRecorder.prototype = {
 
       if (!dir.includes(`%(channel)s`)) mkdir_with_parents(""+dir, 0o755);
 
-      let output_options = `%s --output "%s/`.format(ytdl_program,
+      let keep_video = this.settings.getValue("recordings-keep-video") ? " -k" : "";
+
+      let output_options = `%s%s --output "%s/`.format(ytdl_program, keep_video,
         dir)+`%(title)s`+`.%(ext)s"`;
 
       let yes_no_playlist = " --no-playlist";
@@ -3582,7 +4076,7 @@ WebRadioReceiverAndRecorder.prototype = {
         if (yes_no_playlist != " --no-playlist") {
           //~ output_options = `%s -i -c -w --compat-options no-youtube-unavailable-videos --output "%s/`.format(ytdl_program,
             //~ dir)+`%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"`;
-          output_options = `%s -i -c -w --output "%s/`.format(ytdl_program,
+          output_options = `%s%s -i -c -w --output "%s/`.format(ytdl_program, keep_video,
             dir)+`%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s"`;
         }
       }
@@ -3702,6 +4196,17 @@ WebRadioReceiverAndRecorder.prototype = {
       this._applet_context_menu.addMenuItem(this.context_menu_item_about);
     }
 
+    // Manual...
+    if (this.context_menu_item_manual == null) {
+      this.context_menu_item_manual = new PopupIconMenuItem(_("Manual..."),
+        "help-faq", //"gtk-help",
+        IconType.SYMBOLIC);
+      this.context_menu_item_manual.connect('activate', Lang.bind(this, this.openManual));
+    }
+    if (items.indexOf(this.context_menu_item_manual) == -1) {
+      this._applet_context_menu.addMenuItem(this.context_menu_item_manual);
+    }
+
     // Separator
     if (this.context_menu_separator == null && this._applet_context_menu.numMenuItems > 0) {
       this.context_menu_separator = new PopupSeparatorMenuItem();
@@ -3790,6 +4295,21 @@ WebRadioReceiverAndRecorder.prototype = {
     if (items.indexOf(this.context_menu_item_onAtStartup) == -1) {
         this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
         this._applet_context_menu.addMenuItem(this.context_menu_item_onAtStartup);
+    }
+
+    // Show Station Logo
+    if (this.context_menu_item_showLogo == null) {
+        this.context_menu_item_showLogo = new PopupSwitchMenuItem(_("Display Station Logo"),
+          this.show_favicon,
+          null);
+        this.context_menu_item_showLogo.connect("toggled", Lang.bind(this, function() {
+          this.show_favicon = !this.show_favicon;
+          this.icon_or_favicon(this.radioId);
+        }));
+    }
+    if (items.indexOf(this.context_menu_item_showLogo) == -1) {
+        this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
+        this._applet_context_menu.addMenuItem(this.context_menu_item_showLogo);
     }
 
     // Open Recordings Folder
@@ -4106,6 +4626,10 @@ WebRadioReceiverAndRecorder.prototype = {
   _set_settings_options_from_sched: function() {
     this.settingsTab = this.tabNumberOfScheduling;
     this._set_settings_options()
+  },
+
+  openManual: function() {
+    spawnCommandLineAsync('xdg-open "%s"'.format(MANUAL_HTML))
   },
 
   configureApplet: function(tab=0, maximize_vertically=true) {
@@ -4532,6 +5056,7 @@ WebRadioReceiverAndRecorder.prototype = {
         row.bitrate = ""+station.bitrate;
         row.codec = ""+station.codec;
         row.tags = ""+station.tags.trim();
+        row.favicon = ""+station.favicon.trim();
         row.countrycode = ""+station.countrycode.trim();
         row.url = url;
         row.country = ""+station.country.trim();
@@ -4578,7 +5103,8 @@ WebRadioReceiverAndRecorder.prototype = {
           "url": ""+ _import.url,
           "uuid": ""+_import.uuid,
           "homepage": ""+_import.homepage,
-          "tags": ""+_import.tags
+          "tags": ""+_import.tags,
+          "favicon": ""+_import.favicon
         });
         urls_already_here.unshift(_import.url);
         count++;

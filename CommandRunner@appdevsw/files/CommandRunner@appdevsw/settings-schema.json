@@ -7,7 +7,7 @@
 		"type": "entry",
 		"description": "Command",
 		"default": "echo  \"Hello $counter$\"",
-		"tooltip": "Command or script or applitaction to run.\ne.g.\n /home/user/myscript.sh\n echo Hello\n\nThe command should print the result to the standard output, which will be displayed on the taskbar.\n\nYou can use predefined parameters:\n $counter$ - number of command executions\n $appletdir$ - applet directory\n\n  e.g. echo \"I was executed $counter$ times\""
+		"tooltip": "Command or script or application to run.\ne.g.\n /home/user/myscript.sh\n echo Hello\n\nThe command should print the result to the standard output, which will be displayed on the taskbar.\n\nYou can use predefined parameters:\n $counter$ - number of command executions\n $appletdir$ - applet directory\n\n  e.g. echo \"I was executed $counter$ times\""
 	},
 	"form_prefix": {
 		"type": "entry",
@@ -43,6 +43,12 @@
 	"div2": {
 		"type": "separator"
 	},
+    "form_click_command": {
+        "type": "entry",
+        "description": "Click Command",
+        "default": "",
+        "tooltip": "Command or script or application to run when left clicking CommandRunner.\ne.g.\n xdg-open https://weather.com\n spd-say 'The weather is nice today!'"
+    },
 	"div3": {
 		"type": "separator"
 	},

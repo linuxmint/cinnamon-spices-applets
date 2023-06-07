@@ -1,16 +1,14 @@
 import { WeatherApplet } from "./main";
-import { IpApi } from "./location_services/ipApi";
 import { LocationData, WeatherProvider } from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/logger";
-import { LogLevel, UUID } from "./consts";
+import { distanceUnitLocales, fahrenheitCountries, LogLevel, UUID, windSpeedUnitLocales } from "./consts";
 import { LocationStore } from "./location_services/locationstore";
 import { GeoLocation } from "./location_services/nominatim";
 import { DateTime } from "luxon";
 import { FileExists, LoadContents } from "./lib/io_lib";
 import { MetUk } from "./providers/met_uk";
 import { BaseProvider } from "./providers/BaseProvider";
-import { DarkSky } from "./providers/darkSky";
 import { OpenWeatherMap } from "./providers/openWeatherMap";
 import { MetNorway } from "./providers/met_norway/provider";
 import { Weatherbit } from "./providers/weatherbit";
@@ -22,14 +20,17 @@ import { AccuWeather } from "./providers/accuWeather";
 import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
 import { WeatherUnderground } from "./providers/weatherUnderground";
 import { Event } from "./lib/events";
+import { GeoIP } from "./location_services/geoip_services/base";
+import { GeoJS } from "./location_services/geoip_services/geojs.io";
+import { PirateWeather } from "./providers/pirate_weather/pirateWeather";
 
-const { get_home_dir } = imports.gi.GLib;
+const { get_home_dir, get_user_data_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType } = imports.gi.St;
-const { get_language_names } = imports.gi.GLib;
+const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings } = imports.gi.Gio;
 
 /** Units Used in Options. Change Options list if You change this! */
@@ -44,7 +45,6 @@ export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
 /** Change settings-schema if you change this */
 export type Services =
 	"OpenWeatherMap" |
-	"DarkSky" |
 	"MetNorway" |
 	"Weatherbit" |
 	"Tomorrow.io" |
@@ -54,10 +54,10 @@ export type Services =
 	"DanishMI" |
 	"AccuWeather" |
 	"DeutscherWetterdienst" |
-	"WeatherUnderground";
+	"WeatherUnderground" |
+	"PirateWeather";
 
 export const ServiceClassMapping: ServiceClassMappingType = {
-	"DarkSky": (app) => new DarkSky(app),
 	"OpenWeatherMap": (app) => new OpenWeatherMap(app),
 	"MetNorway": (app) => new MetNorway(app),
 	"Weatherbit": (app) => new Weatherbit(app),
@@ -68,23 +68,11 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	"DanishMI": (app) => new DanishMI(app),
 	"AccuWeather": (app) => new AccuWeather(app),
 	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
-	"WeatherUnderground": (app) => new WeatherUnderground(app)
+	"WeatherUnderground": (app) => new WeatherUnderground(app),
+	"PirateWeather": (app) => new PirateWeather(app)
 }
 
 export class Config {
-	// Info partially from https://github.com/unicode-org/cldr/blob/release-38-1/common/supplemental/units.xml
-	/** Default is celsius */
-	private readonly fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
-	/** Default kph, gb added to mph keys  */
-	private readonly windSpeedUnitLocales: Record<string, WeatherWindSpeedUnits> = {
-		"fi kr no pl ru se": "m/s",
-		"us gb": "mph"
-	}
-	/** Default metric */
-	private readonly distanceUnitLocales: Record<string, DistanceUnits> = {
-		"us gb": "imperial"
-	}
-
 	private readonly WEATHER_LOCATION = "location";
 	private readonly WEATHER_LOCATION_LIST = "locationList";
 	// Settings variables to bind to
@@ -129,6 +117,7 @@ export class Config {
 	public readonly _logLevel!: LogLevel;
 	public readonly _selectedLogPath!: string;
 	public readonly _panelTextOverride!: string;
+	public readonly _tooltipTextOverride!: string;
 
 	public readonly DataServiceChanged = new Event<Config, Services>();
 	public readonly ApiKeyChanged = new Event<Config, string>();
@@ -164,6 +153,7 @@ export class Config {
 	public readonly ShowBothTempUnitsChanged = new Event<Config, boolean>();
 	public readonly DisplayWindAsTextChanged = new Event<Config, boolean>();
 	public readonly AlwaysShowHourlyWeatherChanged = new Event<Config, boolean>();
+	public readonly TooltipTextOverrideChanged = new Event<Config, string>();
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
@@ -174,8 +164,20 @@ export class Config {
 	public readonly countryCode: string | null;
 	public textColorStyle: string | null = null;
 
+	public get UserTimezone(): string {
+		const timezone = TimeZone.new_local();
+		// does not exist on 3.8, use DateTime
+		if (timezone.get_identifier == null)
+			return DateTime.now().zoneName;
+		else
+			return TimeZone.new_local().get_identifier();
+	}
+
 	private timezone: string | undefined = undefined;
 
+	/**
+	 * Selected location's timezone
+	 */
 	public get Timezone() {
 		return this.timezone;
 	}
@@ -186,7 +188,7 @@ export class Config {
 		this.timezone = value;
 	}
 
-	private readonly autoLocProvider: IpApi
+	private readonly autoLocProvider: GeoIP;
 	private readonly geoLocationService: GeoLocation;
 
 	/** Stores and retrieves manual locations */
@@ -205,7 +207,7 @@ export class Config {
 		this.currentLocale = ConstructJsLocale(get_language_names()[0]);
 		Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
 		this.countryCode = this.GetCountryCode(this.currentLocale);
-		this.autoLocProvider = new IpApi(app); // IP location lookup
+		this.autoLocProvider = new GeoJS(app); // IP location lookup
 		this.geoLocationService = new GeoLocation(app);
 		this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });
 		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
@@ -234,7 +236,7 @@ export class Config {
 	 */
 	public get TemperatureUnit(): Exclude<WeatherUnits, "automatic"> {
 		if (this._temperatureUnit == "automatic")
-			return this.GetLocaleTemperateUnit(this.countryCode);
+			return this.GetLocaleTemperateUnit(this.UserTimezone);
 		return this._temperatureUnit;
 	}
 
@@ -243,7 +245,7 @@ export class Config {
 	 */
 	public get WindSpeedUnit(): WeatherWindSpeedUnits {
 		if (this._windSpeedUnit == "automatic")
-			return this.GetLocaleWindSpeedUnit(this.countryCode);
+			return this.GetLocaleWindSpeedUnit(this.UserTimezone);
 		return this._windSpeedUnit;
 	}
 
@@ -251,7 +253,8 @@ export class Config {
 	 * @returns Units, automatic is already resolved here
 	 */
 	public get DistanceUnit(): DistanceUnits {
-		if (this._distanceUnit == "automatic") return this.GetLocaleDistanceUnit(this.countryCode);
+		if (this._distanceUnit == "automatic")
+			return this.GetLocaleDistanceUnit(this.UserTimezone);
 		return this._distanceUnit;
 	}
 
@@ -297,9 +300,9 @@ export class Config {
 		return (!key || key == "");
 	};
 
-	/** 
+	/**
 	 * @returns LocationData null if failed to obtain
-	 * coordinates. Automatic mode looks up data through ip-api, 
+	 * coordinates. Automatic mode looks up data through ip-api,
 	 * else it returns coordinates if it was entered. If text was entered,
 	 * it looks up coordinates via geolocation api
 	 */
@@ -381,7 +384,7 @@ export class Config {
 			if (Object.prototype.hasOwnProperty.call(Keys, key)) {
 				const element = Keys[key];
 				this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-					element.key, 
+					element.key,
 					("_" + element.key),
 					() => this[`${element.prop}Changed`].Invoke(this, this[`_${element.key}` as never]),
 					null
@@ -468,24 +471,31 @@ export class Config {
 	}
 
 	private GetLocaleTemperateUnit(code: string | null): Exclude<WeatherUnits, "automatic"> {
-		if (code == null || !this.fahrenheitCountries.includes(code)) return "celsius";
+		if (code == null || !fahrenheitCountries.includes(code))
+			return "celsius";
 		return "fahrenheit";
 	}
 
 	private GetLocaleWindSpeedUnit(code: string | null): WeatherWindSpeedUnits {
-		if (code == null) return "kph";
+		if (code == null)
+			return "kph";
 
-		for (const key in this.windSpeedUnitLocales) {
-			if (key.includes(code)) return this.windSpeedUnitLocales[key];
+		let key: WeatherWindSpeedUnits;
+		for (key in windSpeedUnitLocales) {
+			if (windSpeedUnitLocales[key]?.includes(code))
+				return key;
 		}
 		return "kph";
 	}
 
 	private GetLocaleDistanceUnit(code: string | null): DistanceUnits {
-		if (code == null) return "metric";
+		if (code == null)
+			return "metric";
 
-		for (const key in this.distanceUnitLocales) {
-			if (key.includes(code)) return this.distanceUnitLocales[key];
+		let key: DistanceUnits;
+		for (key in distanceUnitLocales) {
+			if (distanceUnitLocales[key]?.includes(code))
+				return key;
 		}
 		return "metric";
 	}
@@ -520,14 +530,20 @@ export class Config {
 
 	public async GetAppletConfigJson(): Promise<Record<string, any>> {
 		const home = get_home_dir() ?? "~";
-		const configFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
-		const configFile = File.new_for_path(configFilePath);
+		let configFilePath = `${get_user_data_dir()}/cinnamon/spices/weather@mockturtl/${this.app.instance_id}.json`;
+		const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
+		let configFile = File.new_for_path(configFilePath);
+		const oldConfigFile = File.new_for_path(oldConfigFilePath);
 
 		// Check if file exists
 		if (!await FileExists(configFile)) {
-			throw new Error(
-				_("Could not retrieve config, file was not found under path\n {configFilePath}", { configFilePath: configFilePath })
-			);
+			configFile = oldConfigFile;
+			configFilePath = oldConfigFilePath;
+			if (!await FileExists(configFile)) {
+				throw new Error(
+					_("Could not retrieve config, file was not found under paths\n {configFilePath}", { configFilePath: `${configFilePath}\n${oldConfigFilePath}` })
+				);
+			}
 		}
 
 		// Load file contents
@@ -687,8 +703,12 @@ export class Config {
 	ALWAYS_SHOW_HOURLY: {
 		key: "alwaysShowHourlyWeather",
 		prop: "AlwaysShowHourlyWeather"
+	},
+	TOOLTIP_TEXT_OVERRIDE: {
+		key: "tooltipTextOverride",
+		prop: "TooltipTextOverride"
 	}
-} as const
+} as const;
 
 type ServiceClassMappingType = {
 	[key in Services]: (app: WeatherApplet) => BaseProvider;

@@ -1,4 +1,5 @@
 const Applet = imports.ui.applet;
+const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
@@ -6,6 +7,14 @@ const PopupMenu = imports.ui.popupMenu;
 const ScreenSaver = imports.misc.screenSaver;
 const St = imports.gi.St;
 const Util = imports.misc.util;
+
+// l10n/translation support
+const UUID = "system-controls@rcalixte";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(str) {
+    return Gettext.dgettext(UUID, str);
+}
 
 class SystemControlsApplet extends Applet.TextIconApplet {
     constructor(orientation, panel_height, instance_id) {
@@ -17,7 +26,7 @@ class SystemControlsApplet extends Applet.TextIconApplet {
 
         this.set_applet_icon_symbolic_name("system-shutdown");
         this.set_applet_label("");
-        this.set_applet_tooltip("System Controls");
+        this.set_applet_tooltip(_("System Controls"));
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -54,7 +63,7 @@ class SystemControlsApplet extends Applet.TextIconApplet {
         this._contentSection = new PopupMenu.PopupMenuSection();
         this.menu.addMenuItem(this._contentSection);
 
-        let item = new PopupMenu.PopupIconMenuItem(_("Restart Cinnamon"), "system-run", St.IconType.SYMBOLIC);
+        let item = new PopupMenu.PopupIconMenuItem(_("Restart Cinnamon"), "cinnamon-symbolic", St.IconType.SYMBOLIC);
         item.connect('activate', Lang.bind(this, function () {
             global.reexec_self();
         }));

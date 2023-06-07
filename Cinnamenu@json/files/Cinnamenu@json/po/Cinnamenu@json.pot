@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-29 19:16+0100\n"
+"POT-Creation-Date: 2023-05-01 20:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -143,10 +143,10 @@ msgstr ""
 msgid "Other search results"
 msgstr ""
 
-msgid "Browser history"
+msgid "Browser bookmarks"
 msgstr ""
 
-msgid "Browser bookmarks"
+msgid "Browser history"
 msgstr ""
 
 msgid "Emoji"
@@ -167,12 +167,6 @@ msgstr ""
 msgid "Recent"
 msgstr ""
 
-msgid "Home folder"
-msgstr ""
-
-msgid "Reset category order"
-msgstr ""
-
 msgid "light skin tone"
 msgstr ""
 
@@ -188,6 +182,12 @@ msgstr ""
 msgid "dark skin tone"
 msgstr ""
 
+msgid "Remove category"
+msgstr ""
+
+msgid "Reset category order"
+msgstr ""
+
 msgid "This file is no longer available"
 msgstr ""
 
@@ -195,6 +195,9 @@ msgid "Open with"
 msgstr ""
 
 msgid "Other application..."
+msgstr ""
+
+msgid "Add folder as category"
 msgstr ""
 
 msgid "Open containing folder"
@@ -315,9 +318,6 @@ msgid "Behavior"
 msgstr ""
 
 msgid "Appearance"
-msgstr ""
-
-msgid "Layout and Content"
 msgstr ""
 
 msgid "Search Providers"
@@ -466,6 +466,9 @@ msgstr ""
 msgid "Custom menu height (pixels)"
 msgstr ""
 
+msgid "Tips"
+msgstr ""
+
 msgid "Applications view mode"
 msgstr ""
 
@@ -520,11 +523,6 @@ msgstr ""
 msgid "Choose where to show application descriptions"
 msgstr ""
 
-msgid ""
-"\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
-msgstr ""
-
 msgid "Show recent items"
 msgstr ""
 
@@ -577,8 +575,8 @@ msgid "Web search suggestions"
 msgstr ""
 
 msgid ""
-"With web search option, also show search suggestions. (Note: This uses "
-"Google's search API)"
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
 msgstr ""
 
 msgid "Search home folder"
@@ -645,4 +643,19 @@ msgstr ""
 msgid ""
 "Use a tile style for the application buttons (Note: may not work on some "
 "themes)"
+msgstr ""
+
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+
+msgid ""
+"\n"
+"• Right click on any folder to add it as a menu category.\n"
 msgstr ""

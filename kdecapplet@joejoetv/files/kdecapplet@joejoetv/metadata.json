@@ -1,7 +1,9 @@
 {
   "uuid": "kdecapplet@joejoetv",
-  "name": "KDEConnect Applet",
-  "description": "Applet for interacting with Devices connected via KDE COnnect.",
-  "comments": "Requires 'zenity' for some features.",
-  "version": "1.1.1"
+  "name": "KDE Connect Applet",
+  "description": "Enables interacting with devices connected via KDE Connect",
+  "comments": "KDE Connect Applet makes it easy to use the various features provided by KDE Connect to interact with connected devices, like sending files, sending SMS messages, browsing the storage of the device and more",
+  "website": "https://github.com/linuxmint/cinnamon-spices-applets/tree/master/kdecapplet@joejoetv",
+  "version": "2.1.0",
+  "contributors": "Johannes Schoeneberger - Author,Severga - Inspiration for the Applet"
 }

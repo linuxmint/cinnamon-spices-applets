@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-03 23:02+0200\n"
-"PO-Revision-Date: 2022-11-23 11:09+0100\n"
+"POT-Creation-Date: 2023-05-26 18:02+0200\n"
+"PO-Revision-Date: 2023-06-05 21:07+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,103 +17,138 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:345
+#: applet.js:425
 msgid "This is your own list of Categories and Radio Stations."
-msgstr ""
+msgstr "Ez az Ön saját kategóriáinak és rádióállomásainak listája."
 
-#: applet.js:346
+#: applet.js:426
 msgid "You can add more using the [+] button."
 msgstr ""
 
-#: applet.js:347
+#: applet.js:427
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr ""
 
-#: applet.js:348
+#: applet.js:428
 msgid "For a radio station, enter only its name and its streaming URL."
 msgstr ""
 
-#: applet.js:349
-msgid "You can order the rows by dragging and dropping or by using the buttons and tools below the list."
+#: applet.js:429
+msgid ""
+"You can order the rows by dragging and dropping or by using the buttons and "
+"tools below the list."
 msgstr ""
 
-#: applet.js:350
-msgid "The buttons on the right below the list allow you to navigate page by page or category by category."
+#: applet.js:430
+msgid ""
+"The buttons on the right below the list allow you to navigate page by page "
+"or category by category."
 msgstr ""
 
-#: applet.js:351
-msgid "To search for one of your stations, click on the list and start writing its name."
+#: applet.js:431
+msgid ""
+"To search for one of your stations, click on the list and start writing its "
+"name."
 msgstr ""
 
-#: applet.js:352
-msgid "To easily add stations to your list, use the following 2 tabs: Search and Import."
+#: applet.js:432
+msgid ""
+"To easily add stations to your list, use the following 2 tabs: Search and "
+"Import."
 msgstr ""
 
-#: applet.js:353
+#: applet.js:433
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr ""
 
-#: applet.js:354
-msgid "Check its '♪/➟' box to listen to the station or move it to another category using the tools below the list."
+#: applet.js:434
+msgid ""
+"Check its '♪/➟' box to listen to the station or move it to another category "
+"using the tools below the list."
 msgstr ""
 
-#: applet.js:356
+#: applet.js:436
 msgid "You can have your list of stations checked by internet databases."
 msgstr ""
 
-#: applet.js:357
-msgid "Any station recognized by one of these databases will receive a Universal Unique Identifier (UUID) provided by this database."
+#: applet.js:437
+msgid ""
+"Any station recognized by one of these databases will receive a Universal "
+"Unique Identifier (UUID) provided by this database."
 msgstr ""
 
-#: applet.js:358
-msgid "So, if a streaming URL was changed, a next check would update it and you can continue to listen to the affected station."
+#: applet.js:438
+msgid ""
+"So, if a streaming URL was changed, a next check would update it and you can "
+"continue to listen to the affected station."
 msgstr ""
 
-#: applet.js:360
-msgid "Here you can search for other stations in a free radio database accessible via the Internet."
+#: applet.js:440
+msgid ""
+"Here you can search for other stations in a free radio database accessible "
+"via the Internet."
 msgstr ""
 
-#: applet.js:361
-msgid "Fill in at least a few fields of the form below then click on the 'Search ...' button."
+#: applet.js:441
+msgid ""
+"Fill in at least a few fields of the form below then click on the "
+"'Search ...' button."
 msgstr ""
 
-#: applet.js:362
-msgid "Each time this button is clicked, a new results page is displayed in the second part of this page, where you can test certain stations and include them in the menu."
+#: applet.js:442
+msgid ""
+"Each time this button is clicked, a new results page is displayed in the "
+"second part of this page, where you can test certain stations and include "
+"them in the menu."
 msgstr ""
 
-#: applet.js:363
-msgid "A station already in your menu will only appear in search results if its streaming URL has changed."
+#: applet.js:443
+msgid ""
+"A station already in your menu will only appear in search results if its "
+"streaming URL has changed."
 msgstr ""
 
-#: applet.js:364
-msgid "When no new page appears, it means that all results matching your search criteria have been displayed."
+#: applet.js:444
+msgid ""
+"When no new page appears, it means that all results matching your search "
+"criteria have been displayed."
 msgstr ""
 
-#: applet.js:366
-msgid "You can import a file containing the name and streaming URL of at least one radio station."
+#: applet.js:446
+msgid ""
+"You can import a file containing the name and streaming URL of at least one "
+"radio station."
+msgstr ""
+"Ön importálhat egy fájlt, amely legalább egy rádióállomás nevét és streaming "
+"URL-jét tartalmazza."
+
+#: applet.js:447
+msgid ""
+"These radio stations are displayed in the list below. You can test them by "
+"checking their ♪ box."
 msgstr ""
 
-#: applet.js:367
-msgid "These radio stations are displayed in the list below. You can test them by checking their ♪ box."
-msgstr ""
-
-#: applet.js:368
+#: applet.js:448
 msgid "Then manage this list with the buttons at the bottom of this tab."
 msgstr ""
 
-#: applet.js:370
-msgid "In the Shoutcast directory, click the download button to the left of the station name."
+#: applet.js:450
+msgid ""
+"In the Shoutcast directory, click the download button to the left of the "
+"station name."
 msgstr ""
 
-#: applet.js:371
-msgid "Select the open format (.XSPF) and save the file giving it the same name as the station."
+#: applet.js:451
+msgid ""
+"Select the open format (.XSPF) and save the file giving it the same name as "
+"the station."
 msgstr ""
 
-#: applet.js:372
+#: applet.js:452
 msgid "This file can then be imported here."
 msgstr ""
 
-#: applet.js:374
+#: applet.js:454
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
 msgstr ""
@@ -124,295 +159,325 @@ msgstr ""
 #. settings-schema.json->search-country->options
 #. settings-schema.json->search-codec->options
 #. settings-schema.json->search-order->options
-#: applet.js:535 applet.js:549 applet.js:3982 applet.js:3994
+#: applet.js:615 applet.js:629 applet.js:4562 applet.js:4574
 msgid "(Undefined)"
-msgstr ""
+msgstr "(Nincs megadva)"
 
-#: applet.js:864 applet.js:1357 applet.js:1694
+#: applet.js:1021 applet.js:1694 applet.js:2094
 msgid "Stop"
 msgstr "Leállítás"
 
-#: applet.js:1349
+#: applet.js:1686
 msgid "Start"
 msgstr "Indulás"
 
-#: applet.js:1563 applet.js:1592 applet.js:1632
+#: applet.js:1932 applet.js:1962 applet.js:2008
 msgid "Middle-Click: Stop Recording"
 msgstr ""
 
-#: applet.js:1588 applet.js:1620 applet.js:1627
-#, javascript-format
-msgid "Volume: %s"
-msgstr ""
+#: applet.js:1958 applet.js:2004
+msgid "Volume: %s%"
+msgstr "Hangerő: %s%"
 
-#: applet.js:1594 applet.js:1634
+#: applet.js:1964 applet.js:2010
 msgid "Middle-click: ON/OFF"
 msgstr ""
 
-#: applet.js:1596 applet.js:1636
+#: applet.js:1966 applet.js:2012
 msgid "Click: Select another station"
 msgstr ""
 
-#: applet.js:1607
+#: applet.js:1979
 msgid "Click to select a station"
 msgstr ""
 
-#: applet.js:1638
+#: applet.js:2014
 msgid "Scroll wheel: volume change"
 msgstr ""
 
-#: applet.js:1670 applet.js:1946 applet.js:3655
+#: applet.js:2070 applet.js:2429 applet.js:4220
 msgid "Configure..."
 msgstr "Beállítások…"
 
-#: applet.js:1674 applet.js:1938
+#: applet.js:2074 applet.js:2421
 msgid "Search for new stations..."
 msgstr ""
 
-#: applet.js:1680 applet.js:1950 applet.js:3692
+#: applet.js:2080 applet.js:2433 applet.js:4257
 msgid "Sound Settings"
 msgstr "Hangbeállítások"
 
-#: applet.js:1743
+#: applet.js:2143 applet.js:2190
 msgid "Watch on YT"
 msgstr ""
 
-#: applet.js:1750
+#: applet.js:2150
 msgid "Try to download it from YT (unsafe)"
 msgstr ""
 
-#: applet.js:1769
+#: applet.js:2181
+#, javascript-format
+msgid "Infos on: %s"
+msgstr ""
+
+#: applet.js:2211
 msgid "Recently Played Stations:"
 msgstr ""
 
-#: applet.js:1805
+#: applet.js:2247
 msgid "Visit the home page of this station"
 msgstr ""
 
-#: applet.js:1876
+#: applet.js:2288
+msgid "My Categories"
+msgstr "Saját kategóriák"
+
+#: applet.js:2357
 msgid "My Radio Stations"
 msgstr ""
 
-#: applet.js:2058
+#: applet.js:2541
 msgid "Downloading..."
-msgstr ""
+msgstr "Letöltés…"
 
-#: applet.js:2060
+#: applet.js:2543
 msgid "Stop downloading"
 msgstr ""
 
-#: applet.js:2168
+#: applet.js:2651
 msgid "Download complete"
 msgstr ""
 
-#: applet.js:2170 applet.js:2179 applet.js:3481 applet.js:3490 applet.js:3499 applet.js:3744
+#: applet.js:2653 applet.js:2662 applet.js:4033 applet.js:4042 applet.js:4051
+#: applet.js:4324
 msgid "Open the recordings folder"
 msgstr ""
 
-#: applet.js:2177 applet.js:3478 applet.js:3488 applet.js:3497
+#: applet.js:2660 applet.js:4030 applet.js:4040 applet.js:4049
 msgid "An error seems to have occurred during recording!"
 msgstr ""
 
-#: applet.js:2178 applet.js:3480 applet.js:3489 applet.js:3498
+#: applet.js:2661 applet.js:4032 applet.js:4041 applet.js:4050
 msgid "Please check this record."
 msgstr ""
 
-#: applet.js:2279 applet.js:2313
+#: applet.js:2762 applet.js:2796
 msgid "Record from now"
 msgstr ""
 
-#: applet.js:2297 applet.js:3888
+#: applet.js:2780 applet.js:4468
 msgid "Stop Current Recording"
 msgstr ""
 
-#: applet.js:2407
+#: applet.js:2892
 #, javascript-format
 msgid "Playing %s%s"
-msgstr ""
+msgstr "Lejátszás: %s%s"
 
-#: applet.js:2454
+#: applet.js:2941
 msgid "Radio OFF"
 msgstr ""
 
-#: applet.js:2582
+#: applet.js:3069
 msgid "Unable to record anything!"
 msgstr ""
 
-#: applet.js:2582 applet.js:3764
+#: applet.js:3069 applet.js:4344
 msgid "Insufficient space"
 msgstr ""
 
-#: applet.js:2582
+#: applet.js:3069
 msgid "The limit you set has been reached."
 msgstr ""
 
-#: applet.js:2984
+#: applet.js:3435
+msgid "Please Log Out then Log In"
+msgstr ""
+
+#: applet.js:3435
+msgid "to finalize yt-dlp update"
+msgstr ""
+
+#: applet.js:3521
 msgid "Nothing to save."
 msgstr ""
 
-#: applet.js:2997
+#: applet.js:3534
 msgid "List of saved radio stations"
 msgstr ""
 
-#: applet.js:3015
+#: applet.js:3552
 msgid "This will replace all current radio stations."
 msgstr ""
 
-#: applet.js:3016
+#: applet.js:3553
 msgid "Are you sure you want to continue?"
 msgstr ""
 
-#: applet.js:3076 applet.js:3169
+#: applet.js:3613 applet.js:3706
 msgid "Update in progress"
 msgstr ""
 
-#: applet.js:3076 applet.js:3169
+#: applet.js:3613 applet.js:3706
 msgid "It may take a while ... Please wait."
 msgstr ""
 
-#: applet.js:3164 applet.js:3244
+#: applet.js:3701 applet.js:3783
 msgid "Update completed successfully"
 msgstr ""
 
-#: applet.js:3358 applet.js:3414
+#: applet.js:3911 applet.js:3967
 msgid "ERROR: Invalid YT video URL!"
 msgstr ""
 
-#: applet.js:3383
+#: applet.js:3936
 msgid "Unable to extract a single soundtrack"
 msgstr ""
 
-#: applet.js:3383
+#: applet.js:3936
 msgid "Maybe it's a playlist?"
 msgstr ""
 
-#: applet.js:3416
+#: applet.js:3969
 msgid "Close"
 msgstr "Bezárás"
 
-#: applet.js:3636
+#: applet.js:4190
 msgid "About..."
 msgstr "Névjegy…"
 
-#: applet.js:3668
+#: applet.js:4201
+msgid "Manual..."
+msgstr "Kézi…"
+
+#: applet.js:4233
 msgid "Schedule a background record..."
 msgstr ""
 
-#: applet.js:3680
+#: applet.js:4245
 msgid "Extract soundtrack from YouTube video..."
 msgstr ""
 
-#: applet.js:3701
+#: applet.js:4266
 msgid "Pulse Effects"
 msgstr ""
 
-#: applet.js:3710
+#: applet.js:4275
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eltávolítás: „%s”"
 
-#: applet.js:3723
+#: applet.js:4288
 msgid "Radio ON at startup"
 msgstr ""
 
-#: applet.js:3761
+#: applet.js:4302
+msgid "Display Station Logo"
+msgstr ""
+
+#: applet.js:4341
 msgid "(auto)"
-msgstr ""
+msgstr "(auto)"
 
-#: applet.js:3761
+#: applet.js:4341
 msgid "(manual)"
-msgstr ""
+msgstr "(kézi)"
 
-#: applet.js:3764 applet.js:3937
+#: applet.js:4344 applet.js:4517
 msgid "Stop Recording"
-msgstr ""
+msgstr "Felvétel leállítása"
 
-#: applet.js:3764
+#: applet.js:4344
 msgid "Start Recording"
-msgstr ""
+msgstr "Felvétel elindítása"
 
-#: applet.js:3785
+#: applet.js:4365
 msgid "Reload this applet"
-msgstr ""
+msgstr "Kisalkalmazás újratöltése"
 
-#: applet.js:3804
+#: applet.js:4384
 msgid "Cancel downloads from YT"
 msgstr ""
 
-#: applet.js:3938
+#: applet.js:4518
 msgid "Close without stopping recording"
 msgstr ""
 
-#: applet.js:4144
+#: applet.js:4728
 #, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
 msgstr ""
 
-#: applet.js:4156
+#: applet.js:4740
 msgid "Recording completed"
 msgstr ""
 
-#: applet.js:4250
+#: applet.js:4834
 msgid "This will import a new file containing radio stations."
 msgstr ""
 
-#: applet.js:4251
+#: applet.js:4835
 msgid "Do you want to continue?"
 msgstr "Szeretné folytatni?"
 
-#: applet.js:4322
+#: applet.js:4906
 msgid "No new radio in your list."
 msgstr ""
 
-#: applet.js:4324
+#: applet.js:4908
 msgid "One more radio in your list."
 msgstr ""
 
-#: applet.js:4326
+#: applet.js:4910
 #, javascript-format
 msgid "%s more radios in your list."
 msgstr ""
 
-#: applet.js:4529
+#: applet.js:5117
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr ""
 
-#: applet.js:4531
+#: applet.js:5119
 msgid "A new station has been added to the Radio3.0 applet menu"
 msgstr ""
 
-#: applet.js:4533
+#: applet.js:5121
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
 msgstr ""
 
-#: applet.js:4734
+#: applet.js:5322
 #, javascript-format
 msgid "%s kbps"
 msgstr ""
 
-#: lib/checkDependencies.js:315
+#: lib/checkDependencies.js:345
 #, javascript-format
 msgid "The applet %s is fully functional."
-msgstr ""
+msgstr "A kisalkalmazás %s teljesen működőképes."
 
-#: lib/checkDependencies.js:316
+#: lib/checkDependencies.js:346
 msgid "All dependencies are installed"
 msgstr "Minden szükséges függőség telepítve"
 
-#: lib/checkDependencies.js:341
-msgid "You appear to be missing some of the programs required for this applet to have all its features."
+#: lib/checkDependencies.js:374
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
 msgstr ""
+"Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
+"kisalkalmazás minden funkcióval rendelkezzen."
 
-#: lib/checkDependencies.js:342
+#: lib/checkDependencies.js:375
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
+"Kérjük, a most megnyitott terminálban hajtsa végre a következő parancsokat:"
 
-#: lib/checkDependencies.js:343
+#: lib/checkDependencies.js:376
 msgid "Some dependencies are not installed!"
-msgstr ""
+msgstr "Néhány függőség nincs telepítve!"
 
-#: lib/checkTranslations.js:110
+#: lib/checkTranslations.js:108
 msgid "To finalize the translation installation, please restart Cinnamon"
 msgstr ""
 
@@ -445,20 +510,20 @@ msgstr "Alapértelmezések visszaállítása"
 msgid "Reload %s"
 msgstr "Újratöltés: %s"
 
-#: xs/xlet-settings.py:438
+#: xs/xlet-settings.py:441
 #, python-format
 msgid "Settings for %s"
 msgstr "Beállítások ehhez: %s"
 
-#: xs/xlet-settings.py:530
+#: xs/xlet-settings.py:533
 msgid "Select or enter file to export to"
 msgstr "Válassza ki vagy írja be az exportálni kívánt fájl nevét"
 
-#: xs/xlet-settings.py:538 xs/xlet-settings.py:559
+#: xs/xlet-settings.py:541 xs/xlet-settings.py:562
 msgid "JSON files"
 msgstr "JSON-fájlok"
 
-#: xs/xlet-settings.py:552
+#: xs/xlet-settings.py:555
 msgid "Select a JSON file to import"
 msgstr "Válassza ki az importálni kívánt JSON-fájlt"
 
@@ -520,7 +585,7 @@ msgstr ""
 
 #. metadata.json->name
 msgid "Radio3.0"
-msgstr ""
+msgstr "Radio3.0"
 
 #. settings-schema.json->pageStations->title
 #. settings-schema.json->import-list->description
@@ -552,7 +617,7 @@ msgstr "Felvétel"
 
 #. settings-schema.json->pageYT->title
 msgid "YT"
-msgstr ""
+msgstr "YT"
 
 #. settings-schema.json->pageScheduling->title
 msgid "Scheduling"
@@ -616,6 +681,10 @@ msgstr "Magánszféra"
 
 #. settings-schema.json->sectionMenuContextual->title
 msgid "Contextual Menu"
+msgstr ""
+
+#. settings-schema.json->sectionMenuShortcuts->title
+msgid "Keyboard shortcuts"
 msgstr ""
 
 #. settings-schema.json->sectionBehaviorNotifications->title
@@ -682,7 +751,8 @@ msgid "Show help labels in each tab of this Settings window"
 msgstr ""
 
 #. settings-schema.json->show-help-in-tabs->tooltip
-msgid "You can uncheck this option when you are familiar with all of these settings."
+msgid ""
+"You can uncheck this option when you are familiar with all of these settings."
 msgstr ""
 
 #. settings-schema.json->stations-help->description
@@ -699,7 +769,7 @@ msgstr "Rádióállomások listája"
 
 #. settings-schema.json->radios->columns->title
 msgid "♪/➟"
-msgstr ""
+msgstr "♪/➟"
 
 #. settings-schema.json->radios->columns->title
 msgid "Station or Category"
@@ -711,7 +781,7 @@ msgstr ""
 msgid ""
 "Bitrate\n"
 "(kbps)"
-msgstr ""
+msgstr "Bitsebesség (kb/s)"
 
 #. settings-schema.json->radios->columns->title
 #. settings-schema.json->import-list->columns->title
@@ -738,6 +808,11 @@ msgstr "Honlap"
 #. settings-schema.json->search-list->columns->title
 msgid "Tags"
 msgstr "Címkék"
+
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Favicon"
+msgstr ""
 
 #. settings-schema.json->stations-list-play-button->description
 #. settings-schema.json->import-list-play-button->description
@@ -784,7 +859,7 @@ msgstr ""
 #. settings-schema.json->scale-update->description
 #. settings-schema.json->recordings-extract-update->description
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #. settings-schema.json->import-shoutcast-button->description
 msgid "Open the Shoutcast directory"
@@ -802,7 +877,7 @@ msgstr "Válasszon"
 #. settings-schema.json->import-list->columns->title
 #. settings-schema.json->search-list->columns->title
 msgid "♪"
-msgstr ""
+msgstr "♪"
 
 #. settings-schema.json->import-list->columns->title
 msgid "Title"
@@ -836,13 +911,15 @@ msgstr ""
 #. settings-schema.json->search-list->columns->title
 #. settings-schema.json->sched-recordings->columns->title
 msgid "Station"
-msgstr ""
+msgstr "Állomás"
 
 #. settings-schema.json->search-list->columns->title
 msgid ""
 "Country\n"
 "Code"
 msgstr ""
+"Ország\n"
+"kód"
 
 #. settings-schema.json->search-list->columns->title
 #. settings-schema.json->search-country->description
@@ -851,7 +928,7 @@ msgstr "Ország"
 
 #. settings-schema.json->search-list-page-label->description
 msgid "Page:"
-msgstr ""
+msgstr "Oldal:"
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
@@ -859,9 +936,11 @@ msgstr ""
 
 #. settings-schema.json->switch-on-last-station-at-start-up->tooltip
 msgid ""
-"The selected radio will be the last you listened to, even if you stopped it.\n"
+"The selected radio will be the last you listened to, even if you stopped "
+"it.\n"
 "\n"
-"VPN users: By checking this, the radio broadcast could use your VPN link in the event that this one is active before the start of this applet."
+"VPN users: By checking this, the radio broadcast could use your VPN link in "
+"the event that this one is active before the start of this applet."
 msgstr ""
 
 #. settings-schema.json->volume-at-startup->description
@@ -963,10 +1042,16 @@ msgstr "100"
 
 #. settings-schema.json->volume-at-startup->tooltip
 msgid ""
-"If set, then this will change the volume level starting a new radio, in percentage of the general volume level.\n"
+"If set, then this will change the volume level starting a new radio, in "
+"percentage of the general volume level.\n"
 "Default is (Undefined): The volume level remains unchanged.\n"
 "\n"
-"Please note that you can change the volume level scrolling on this applet icon, or using the slider in the context menu."
+"Please note that you can change the volume level scrolling on this applet "
+"icon, or using the slider in the context menu."
+msgstr ""
+
+#. settings-schema.json->dont-check-dependencies->description
+msgid "Do not check about dependencies"
 msgstr ""
 
 #. settings-schema.json->volume-step->description
@@ -998,7 +1083,17 @@ msgid "±5%"
 msgstr "±5%"
 
 #. settings-schema.json->volume-step->tooltip
-msgid "By how much increase or decrease the volume using the mouse scroll wheel on the icon."
+msgid ""
+"By how much increase or decrease the volume using the mouse scroll wheel on "
+"the icon."
+msgstr ""
+
+#. settings-schema.json->volume-show-osd->description
+msgid "Show OSD while changing volume"
+msgstr ""
+
+#. settings-schema.json->volume-show-osd->tooltip
+msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
 msgstr ""
 
 #. settings-schema.json->show-title-and-version->description
@@ -1063,7 +1158,8 @@ msgid "Show system items in the menu"
 msgstr ""
 
 #. settings-schema.json->show-system-items->tooltip
-msgid "Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
+msgid ""
+"Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
 msgstr ""
 
 #. settings-schema.json->show-reload->description
@@ -1072,6 +1168,40 @@ msgstr ""
 
 #. settings-schema.json->show-reload->tooltip
 msgid "For developers only"
+msgstr ""
+
+#. settings-schema.json->shortcut-volume-up->description
+msgid "Increase Volume"
+msgstr ""
+
+#. settings-schema.json->shortcut-volume-down->description
+msgid "Decrease Volume"
+msgstr ""
+
+#. settings-schema.json->shortcut-volume-cut->description
+msgid "Mute"
+msgstr ""
+
+#. settings-schema.json->shortcut-radio-on-off->description
+msgid "Radio ON/OFF"
+msgstr ""
+
+#. settings-schema.json->shortcut-next-recent-radio->description
+#| msgid "Next instance"
+msgid "Next station"
+msgstr ""
+
+#. settings-schema.json->shortcut-next-recent-radio->tooltip
+msgid "Next station recently listened to"
+msgstr ""
+
+#. settings-schema.json->shortcut-previous-recent-radio->description
+#| msgid "Previous instance"
+msgid "Previous station"
+msgstr ""
+
+#. settings-schema.json->shortcut-previous-recent-radio->tooltip
+msgid "Previous station recently listened to"
 msgstr ""
 
 #. settings-schema.json->show-help-in-tooltip->description
@@ -1091,7 +1221,8 @@ msgid "Change of song or program"
 msgstr ""
 
 #. settings-schema.json->notif-song-change->tooltip
-msgid "Please note that some radios do not notify you of a song or program change."
+msgid ""
+"Please note that some radios do not notify you of a song or program change."
 msgstr ""
 
 #. settings-schema.json->notif-song-duration->units
@@ -1107,7 +1238,9 @@ msgid "Show in notifications the buttons to start and stop recordings"
 msgstr ""
 
 #. settings-schema.json->notif-buttons-allowed->tooltip
-msgid "Please note that this will have no effect if you do not wish to be notified of a song or program change."
+msgid ""
+"Please note that this will have no effect if you do not wish to be notified "
+"of a song or program change."
 msgstr ""
 
 #. settings-schema.json->show-codec->description
@@ -1136,6 +1269,14 @@ msgstr ""
 msgid "Color of the symbolic icon while recording"
 msgstr ""
 
+#. settings-schema.json->show-favicon->description
+msgid "Display the logo of the radio station listened to"
+msgstr ""
+
+#. settings-schema.json->show-favicon->tooltip
+msgid "Replace this applet icon with the radio station logo, if it exists."
+msgstr ""
+
 #. settings-schema.json->network-quality->description
 msgid "Network Quality"
 msgstr ""
@@ -1150,9 +1291,15 @@ msgstr "Alacsony"
 
 #. settings-schema.json->network-quality->tooltip
 msgid ""
-"High Quality: The recordings you make while listening to the radio will double the bit rate usually required to just listen to the radio. Thus, the recordings will not be disturbed by extraneous sounds or by a change in the volume of the radio.\n"
+"High Quality: The recordings you make while listening to the radio will "
+"double the bit rate usually required to just listen to the radio. Thus, the "
+"recordings will not be disturbed by extraneous sounds or by a change in the "
+"volume of the radio.\n"
 "\n"
-"Low Quality: These recordings come directly from the sound card, which relieves the network but risks polluting them with extraneous sounds (system sounds for example). The volume of the radio will be set to 100% in order to obtain the best possible quality."
+"Low Quality: These recordings come directly from the sound card, which "
+"relieves the network but risks polluting them with extraneous sounds (system "
+"sounds for example). The volume of the radio will be set to 100% in order to "
+"obtain the best possible quality."
 msgstr ""
 
 #. settings-schema.json->network-monitoring->description
@@ -1161,7 +1308,8 @@ msgstr ""
 
 #. settings-schema.json->network-monitoring->tooltip
 msgid ""
-"Whether or not to restart the radio when the network becomes active again after an interruption.\n"
+"Whether or not to restart the radio when the network becomes active again "
+"after an interruption.\n"
 "\n"
 "VPN users: By checking this, the radio broadcast may use your VPN link."
 msgstr ""
@@ -1174,7 +1322,8 @@ msgstr "HTTP Proxy"
 msgid ""
 "Format: http://[user:pass@]URL[:port]\n"
 "Default: empty.\n"
-"If empty, the environment variables http_proxy and ALL_PROXY will be used if present.\n"
+"If empty, the environment variables http_proxy and ALL_PROXY will be used if "
+"present.\n"
 "If set, this proxy will not be used for https requests."
 msgstr ""
 
@@ -1184,6 +1333,15 @@ msgstr ""
 
 #. settings-schema.json->database-url->description
 msgid "Database URL"
+msgstr ""
+
+#. settings-schema.json->recording-path->description
+msgid "Path to the folder that will contain your future recordings"
+msgstr ""
+
+#. settings-schema.json->button-rec-path-to-default->description
+#| msgid "Reset to defaults"
+msgid "Set this path to default one"
 msgstr ""
 
 #. settings-schema.json->recording-format->description
@@ -1226,7 +1384,9 @@ msgid "manually; thus, several recordings can follow one another"
 msgstr ""
 
 #. settings-schema.json->recording-ends-auto->tooltip
-msgid "Please note that this choice will have no effect on any current recording, but on subsequent ones."
+msgid ""
+"Please note that this choice will have no effect on any current recording, "
+"but on subsequent ones."
 msgstr ""
 
 #. settings-schema.json->limits-hd-space-left-label->description
@@ -1234,7 +1394,8 @@ msgid "Space remaining on disk when opening this window:"
 msgstr ""
 
 #. settings-schema.json->limits-hd-size-prefixes->description
-msgid "Disk space unit as defined in Nemo's display preferences (File size prefixes)"
+msgid ""
+"Disk space unit as defined in Nemo's display preferences (File size prefixes)"
 msgstr ""
 
 #. settings-schema.json->limits-hd-size-prefixes->options
@@ -1272,7 +1433,7 @@ msgstr ""
 
 #. settings-schema.json->yt-cookies-from->description
 msgid "Use cookies from"
-msgstr ""
+msgstr "Sütik használata innen"
 
 #. settings-schema.json->yt-cookies-from->options
 msgid "(None)"
@@ -1292,15 +1453,15 @@ msgstr "Chromium"
 
 #. settings-schema.json->yt-cookies-from->options
 msgid "Chromium (basictext)"
-msgstr ""
+msgstr "Chromium (basictext)"
 
 #. settings-schema.json->yt-cookies-from->options
 msgid "Chromium (gnomekeyring)"
-msgstr ""
+msgstr "Chromium (gnomekeyring)"
 
 #. settings-schema.json->yt-cookies-from->options
 msgid "Chromium (kwallet)"
-msgstr ""
+msgstr "Chromium (kwallet)"
 
 #. settings-schema.json->yt-cookies-from->options
 msgid "Firefox"
@@ -1315,7 +1476,10 @@ msgid "Vivaldi"
 msgstr "Vivaldi"
 
 #. settings-schema.json->yt-cookies-from->tooltip
-msgid "Cookies are used by YouTube to determine which videos you may watch. For Chromium, you can select the method (in parentheses) you chose to save cookies."
+msgid ""
+"Cookies are used by YouTube to determine which videos you may watch. For "
+"Chromium, you can select the method (in parentheses) you chose to save "
+"cookies."
 msgstr ""
 
 #. settings-schema.json->show-yt-progress->description
@@ -1390,6 +1554,16 @@ msgstr ""
 msgid "Extract whole playlist"
 msgstr ""
 
+#. settings-schema.json->recordings-keep-video->description
+msgid "Keep video (slower)"
+msgstr ""
+
+#. settings-schema.json->recordings-keep-video->tooltip
+msgid ""
+"Whether or not to keep the intermediate video file on disk after post-"
+"processing"
+msgstr ""
+
 #. settings-schema.json->recordings-subdirectory->description
 msgid "Record in subdirectory"
 msgstr ""
@@ -1400,7 +1574,7 @@ msgstr ""
 
 #. settings-schema.json->recordings-extract-button->description
 msgid "Extract soundtrack"
-msgstr ""
+msgstr "Hangsáv kibontása"
 
 #. settings-schema.json->sched-radio->description
 msgid "Radio"
@@ -1418,7 +1592,7 @@ msgstr "Idő"
 #. settings-schema.json->sched-begin-time->tooltip
 #. settings-schema.json->sched-duration->tooltip
 msgid "Seconds will be ignored."
-msgstr ""
+msgstr "A másodpercek figyelmen kívül lesznek hagyva."
 
 #. settings-schema.json->sched-duration->description
 msgid "Duration"
@@ -1426,7 +1600,7 @@ msgstr "Időtartam"
 
 #. settings-schema.json->sched-button->description
 msgid "Schedule this recording"
-msgstr ""
+msgstr "Felvétel ütemezése"
 
 #. settings-schema.json->sched-alert-no-space->description
 msgid "You are running out of disk space. See in the Recording tab."
@@ -1434,7 +1608,7 @@ msgstr ""
 
 #. settings-schema.json->sched-recordings->columns->title
 msgid "Remove?"
-msgstr ""
+msgstr "El kívánja távolítani?"
 
 #. settings-schema.json->sched-recordings->columns->title
 msgid "In progress"
@@ -1454,7 +1628,7 @@ msgstr ""
 
 #. settings-schema.json->search-name->description
 msgid "Station Name"
-msgstr ""
+msgstr "Állomásnév"
 
 #. settings-schema.json->search-name->tooltip
 msgid "OPTIONAL. Name (or part of the name) of the radio station."
@@ -1462,7 +1636,7 @@ msgstr ""
 
 #. settings-schema.json->search-country->options
 msgid "(My Country)"
-msgstr ""
+msgstr "(Saját országom)"
 
 #. settings-schema.json->search-country->options
 msgid "Afghanistan - AF"
@@ -1478,95 +1652,95 @@ msgstr "Albánia - AL"
 
 #. settings-schema.json->search-country->options
 msgid "Algeria - DZ"
-msgstr ""
+msgstr "Algéria"
 
 #. settings-schema.json->search-country->options
 msgid "American Samoa - AS"
-msgstr ""
+msgstr "Amerikai Szamoa - AS"
 
 #. settings-schema.json->search-country->options
 msgid "Andorra - AD"
-msgstr ""
+msgstr "Andorra - AD"
 
 #. settings-schema.json->search-country->options
 msgid "Angola - AO"
-msgstr ""
+msgstr "Angola - AO"
 
 #. settings-schema.json->search-country->options
 msgid "Anguilla - AI"
-msgstr ""
+msgstr "Anguilla - AI"
 
 #. settings-schema.json->search-country->options
 msgid "Antarctica - AQ"
-msgstr ""
+msgstr "Antarktisz - AQ"
 
 #. settings-schema.json->search-country->options
 msgid "Antigua And Barbuda - AG"
-msgstr ""
+msgstr "Antigua és Barbuda - AG"
 
 #. settings-schema.json->search-country->options
 msgid "Argentina - AR"
-msgstr ""
+msgstr "Argentína - AR"
 
 #. settings-schema.json->search-country->options
 msgid "Armenia - AM"
-msgstr ""
+msgstr "Örményország - AM"
 
 #. settings-schema.json->search-country->options
 msgid "Aruba - AW"
-msgstr ""
+msgstr "Aruba - AW"
 
 #. settings-schema.json->search-country->options
 msgid "Australia - AU"
-msgstr ""
+msgstr "Ausztrália - AU"
 
 #. settings-schema.json->search-country->options
 msgid "Austria - AT"
-msgstr ""
+msgstr "Ausztria - AT"
 
 #. settings-schema.json->search-country->options
 msgid "Azerbaijan - AZ"
-msgstr ""
+msgstr "Azerbajdzsán - AZ"
 
 #. settings-schema.json->search-country->options
 msgid "Bahamas - BS"
-msgstr ""
+msgstr "Bahama-szigetek - BS"
 
 #. settings-schema.json->search-country->options
 msgid "Bahrain - BH"
-msgstr ""
+msgstr "Bahrein - BH"
 
 #. settings-schema.json->search-country->options
 msgid "Bangladesh - BD"
-msgstr ""
+msgstr "Bangladesh - BD"
 
 #. settings-schema.json->search-country->options
 msgid "Barbados - BB"
-msgstr ""
+msgstr "Barbados - BB"
 
 #. settings-schema.json->search-country->options
 msgid "Belarus - BY"
-msgstr ""
+msgstr "Fehéroroszország - BY"
 
 #. settings-schema.json->search-country->options
 msgid "Belgium - BE"
-msgstr ""
+msgstr "Belgium - BE"
 
 #. settings-schema.json->search-country->options
 msgid "Belize - BZ"
-msgstr ""
+msgstr "Belize - BZ"
 
 #. settings-schema.json->search-country->options
 msgid "Benin - BJ"
-msgstr ""
+msgstr "Benin - BJ"
 
 #. settings-schema.json->search-country->options
 msgid "Bermuda - BM"
-msgstr ""
+msgstr "Bermuda - BM"
 
 #. settings-schema.json->search-country->options
 msgid "Bhutan - BT"
-msgstr ""
+msgstr "Bhután - BT"
 
 #. settings-schema.json->search-country->options
 msgid "Bolivia (Plurinational State Of) - BO"
@@ -1578,119 +1752,119 @@ msgstr ""
 
 #. settings-schema.json->search-country->options
 msgid "Bosnia And Herzegovina - BA"
-msgstr ""
+msgstr "Bosznia és Hercegovina - BA"
 
 #. settings-schema.json->search-country->options
 msgid "Botswana - BW"
-msgstr ""
+msgstr "Botswana - BW"
 
 #. settings-schema.json->search-country->options
 msgid "Bouvet Island - BV"
-msgstr ""
+msgstr "Karácsony-sziget - BV"
 
 #. settings-schema.json->search-country->options
 msgid "Brazil - BR"
-msgstr ""
+msgstr "Brazília - BR"
 
 #. settings-schema.json->search-country->options
 msgid "British Indian Ocean Territory - IO"
-msgstr ""
+msgstr "Brit indiai óceáni terület - IO"
 
 #. settings-schema.json->search-country->options
 msgid "Brunei Darussalam - BN"
-msgstr ""
+msgstr "Brunei - BN"
 
 #. settings-schema.json->search-country->options
 msgid "Bulgaria - BG"
-msgstr ""
+msgstr "Bulgária - BG"
 
 #. settings-schema.json->search-country->options
 msgid "Burkina Faso - BF"
-msgstr ""
+msgstr "Burkina Faso - BF"
 
 #. settings-schema.json->search-country->options
 msgid "Burundi - BI"
-msgstr ""
+msgstr "Burundi - BI"
 
 #. settings-schema.json->search-country->options
 msgid "Cambodia - KH"
-msgstr ""
+msgstr "Kambodzsa - KH"
 
 #. settings-schema.json->search-country->options
 msgid "Cameroon - CM"
-msgstr ""
+msgstr "Kamerun - CM"
 
 #. settings-schema.json->search-country->options
 msgid "Canada - CA"
-msgstr ""
+msgstr "Kanada - CA"
 
 #. settings-schema.json->search-country->options
 msgid "Cape Verde - CV"
-msgstr ""
+msgstr "Zöldfoki-szigetek - CV"
 
 #. settings-schema.json->search-country->options
 msgid "Cayman Islands - KY"
-msgstr ""
+msgstr "Kajmán-szigetek - KY"
 
 #. settings-schema.json->search-country->options
 msgid "Central African Republic - CF"
-msgstr ""
+msgstr "Közép-afrikai Köztársaság - CF"
 
 #. settings-schema.json->search-country->options
 msgid "Chad - TD"
-msgstr ""
+msgstr "Csád - TD"
 
 #. settings-schema.json->search-country->options
 msgid "Chile - CL"
-msgstr ""
+msgstr "Chile - CL"
 
 #. settings-schema.json->search-country->options
 msgid "China - CN"
-msgstr ""
+msgstr "Kína - CN"
 
 #. settings-schema.json->search-country->options
 msgid "Christmas Island - CX"
-msgstr ""
+msgstr "Karácsony-sziget - CX"
 
 #. settings-schema.json->search-country->options
 msgid "Cocos (Keeling) Islands - CC"
-msgstr ""
+msgstr "Cocos (Keeling) szigetek - CC"
 
 #. settings-schema.json->search-country->options
 msgid "Colombia - CO"
-msgstr ""
+msgstr "Kolumbia - CO"
 
 #. settings-schema.json->search-country->options
 msgid "Comoros - KM"
-msgstr ""
+msgstr "Comoros - KM"
 
 #. settings-schema.json->search-country->options
 msgid "Congo - CG"
-msgstr ""
+msgstr "Kongói Köztársaság - CG"
 
 #. settings-schema.json->search-country->options
 msgid "Congo (The Democratic Republic Of The) - CD"
-msgstr ""
+msgstr "Kongói Demokratikus Köztársaság - CD"
 
 #. settings-schema.json->search-country->options
 msgid "Cook Islands - CK"
-msgstr ""
+msgstr "Cook-szigetek - CK"
 
 #. settings-schema.json->search-country->options
 msgid "Costa Rica - CR"
-msgstr ""
+msgstr "Costa Rica - CR"
 
 #. settings-schema.json->search-country->options
 msgid "Côte D'Ivoire - CI"
-msgstr ""
+msgstr "Elefántcsontpart - CI"
 
 #. settings-schema.json->search-country->options
 msgid "Croatia - HR"
-msgstr ""
+msgstr "Horvátország - HR"
 
 #. settings-schema.json->search-country->options
 msgid "Cuba - CU"
-msgstr ""
+msgstr "Kuba - CU"
 
 #. settings-schema.json->search-country->options
 msgid "Curaçao - CW"
@@ -1698,155 +1872,155 @@ msgstr ""
 
 #. settings-schema.json->search-country->options
 msgid "Cyprus - CY"
-msgstr ""
+msgstr "Ciprus - CY"
 
 #. settings-schema.json->search-country->options
 msgid "Czech Republic - CZ"
-msgstr ""
+msgstr "Cseh Köztársaság - CZ"
 
 #. settings-schema.json->search-country->options
 msgid "Denmark - DK"
-msgstr ""
+msgstr "Dánia - DK"
 
 #. settings-schema.json->search-country->options
 msgid "Djibouti - DJ"
-msgstr ""
+msgstr "Dzsibuti - DJ"
 
 #. settings-schema.json->search-country->options
 msgid "Dominica - DM"
-msgstr ""
+msgstr "Dominika - DM"
 
 #. settings-schema.json->search-country->options
 msgid "Dominican Republic - DO"
-msgstr ""
+msgstr "Dominikai Köztársaság - DO"
 
 #. settings-schema.json->search-country->options
 msgid "Ecuador - EC"
-msgstr ""
+msgstr "Ecuador - EC"
 
 #. settings-schema.json->search-country->options
 msgid "Egypt - EG"
-msgstr ""
+msgstr "Egyiptom - EG"
 
 #. settings-schema.json->search-country->options
 msgid "El Salvador - SV"
-msgstr ""
+msgstr "El Salvador - SV"
 
 #. settings-schema.json->search-country->options
 msgid "Equatorial Guinea - GQ"
-msgstr ""
+msgstr "Egyenlítői Guinea - GQ"
 
 #. settings-schema.json->search-country->options
 msgid "Eritrea - ER"
-msgstr ""
+msgstr "Eritrea - ER"
 
 #. settings-schema.json->search-country->options
 msgid "Estonia - EE"
-msgstr ""
+msgstr "Észtország - EE"
 
 #. settings-schema.json->search-country->options
 msgid "Ethiopia - ET"
-msgstr ""
+msgstr "Etiópia - ET"
 
 #. settings-schema.json->search-country->options
 msgid "Falkland Islands (Malvinas) - FK"
-msgstr ""
+msgstr "Falkland-szigetek (Malvinas) - FK"
 
 #. settings-schema.json->search-country->options
 msgid "Faroe Islands - FO"
-msgstr ""
+msgstr "Faroe-szigetek - FO"
 
 #. settings-schema.json->search-country->options
 msgid "Fiji - FJ"
-msgstr ""
+msgstr "Fidzsi-szigetek - FJ"
 
 #. settings-schema.json->search-country->options
 msgid "Finland - FI"
-msgstr ""
+msgstr "Finnország - FI"
 
 #. settings-schema.json->search-country->options
 msgid "France - FR"
-msgstr ""
+msgstr "Franciaország - FR"
 
 #. settings-schema.json->search-country->options
 msgid "French Guiana - GF"
-msgstr ""
+msgstr "Francia Guyana - GF"
 
 #. settings-schema.json->search-country->options
 msgid "French Polynesia - PF"
-msgstr ""
+msgstr "Francia Polinézia - PF"
 
 #. settings-schema.json->search-country->options
 msgid "French Southern Territories - TF"
-msgstr ""
+msgstr "Francia Déli Területek - TF"
 
 #. settings-schema.json->search-country->options
 msgid "Gabon - GA"
-msgstr ""
+msgstr "Gabon - GA"
 
 #. settings-schema.json->search-country->options
 msgid "Gambia - GM"
-msgstr ""
+msgstr "Gambia - GM"
 
 #. settings-schema.json->search-country->options
 msgid "Georgia - GE"
-msgstr ""
+msgstr "Georgia - GE"
 
 #. settings-schema.json->search-country->options
 msgid "Germany - DE"
-msgstr ""
+msgstr "Németország - DE"
 
 #. settings-schema.json->search-country->options
 msgid "Ghana - GH"
-msgstr ""
+msgstr "Ghana - GH"
 
 #. settings-schema.json->search-country->options
 msgid "Gibraltar - GI"
-msgstr ""
+msgstr "Gibraltár - GI"
 
 #. settings-schema.json->search-country->options
 msgid "Greece - GR"
-msgstr ""
+msgstr "Görögország - GR"
 
 #. settings-schema.json->search-country->options
 msgid "Greenland - GL"
-msgstr ""
+msgstr "Grönland - GL"
 
 #. settings-schema.json->search-country->options
 msgid "Grenada - GD"
-msgstr ""
+msgstr "Grenada - GD"
 
 #. settings-schema.json->search-country->options
 msgid "Guadeloupe - GP"
-msgstr ""
+msgstr "Guadeloupe - GP"
 
 #. settings-schema.json->search-country->options
 msgid "Guam - GU"
-msgstr ""
+msgstr "Guam - GU"
 
 #. settings-schema.json->search-country->options
 msgid "Guatemala - GT"
-msgstr ""
+msgstr "Guatemala - GT"
 
 #. settings-schema.json->search-country->options
 msgid "Guernsey - GG"
-msgstr ""
+msgstr "Guernsey - GG"
 
 #. settings-schema.json->search-country->options
 msgid "Guinea - GN"
-msgstr ""
+msgstr "Guinea - GN"
 
 #. settings-schema.json->search-country->options
 msgid "Guinea-Bissau - GW"
-msgstr ""
+msgstr "Guinea-Bissau - GW"
 
 #. settings-schema.json->search-country->options
 msgid "Guyana - GY"
-msgstr ""
+msgstr "Guyana - GY"
 
 #. settings-schema.json->search-country->options
 msgid "Haiti - HT"
-msgstr ""
+msgstr "Haiti - HT"
 
 #. settings-schema.json->search-country->options
 msgid "Heard Island And Mcdonald Islands - HM"
@@ -1854,31 +2028,31 @@ msgstr ""
 
 #. settings-schema.json->search-country->options
 msgid "Holy See (Vatican City State) - VA"
-msgstr ""
+msgstr "Vatikán - VA"
 
 #. settings-schema.json->search-country->options
 msgid "Honduras - HN"
-msgstr ""
+msgstr "Honduras - HN"
 
 #. settings-schema.json->search-country->options
 msgid "Hong Kong - HK"
-msgstr ""
+msgstr "Hong Kong - HK"
 
 #. settings-schema.json->search-country->options
 msgid "Hungary - HU"
-msgstr ""
+msgstr "Magyarország - HU"
 
 #. settings-schema.json->search-country->options
 msgid "Iceland - IS"
-msgstr ""
+msgstr "Izland - IS"
 
 #. settings-schema.json->search-country->options
 msgid "India - IN"
-msgstr ""
+msgstr "India - IN"
 
 #. settings-schema.json->search-country->options
 msgid "Indonesia - ID"
-msgstr ""
+msgstr "Indonézia - ID"
 
 #. settings-schema.json->search-country->options
 msgid "Iran (Islamic Republic Of) - IR"
@@ -1886,67 +2060,67 @@ msgstr ""
 
 #. settings-schema.json->search-country->options
 msgid "Iraq - IQ"
-msgstr ""
+msgstr "Irak - IQ"
 
 #. settings-schema.json->search-country->options
 msgid "Ireland - IE"
-msgstr ""
+msgstr "Írország - IE"
 
 #. settings-schema.json->search-country->options
 msgid "Isle Of Man - IM"
-msgstr ""
+msgstr "Man-sziget - IM"
 
 #. settings-schema.json->search-country->options
 msgid "Israel - IL"
-msgstr ""
+msgstr "Izrael - IL"
 
 #. settings-schema.json->search-country->options
 msgid "Italy - IT"
-msgstr ""
+msgstr "Olaszország - IT"
 
 #. settings-schema.json->search-country->options
 msgid "Jamaica - JM"
-msgstr ""
+msgstr "Jamaica - JM"
 
 #. settings-schema.json->search-country->options
 msgid "Japan - JP"
-msgstr ""
+msgstr "Japán - JP"
 
 #. settings-schema.json->search-country->options
 msgid "Jersey - JE"
-msgstr ""
+msgstr "Jersey - JE"
 
 #. settings-schema.json->search-country->options
 msgid "Jordan - JO"
-msgstr ""
+msgstr "Jordánia - JO"
 
 #. settings-schema.json->search-country->options
 msgid "Kazakhstan - KZ"
-msgstr ""
+msgstr "Kazahsztán - KZ"
 
 #. settings-schema.json->search-country->options
 msgid "Kenya - KE"
-msgstr ""
+msgstr "Kenya - KE"
 
 #. settings-schema.json->search-country->options
 msgid "Kiribati - KI"
-msgstr ""
+msgstr "Kiribati - KI"
 
 #. settings-schema.json->search-country->options
 msgid "Korea (Democratic People'S Republic Of) - KP"
-msgstr ""
+msgstr "Dél-Korea - KP"
 
 #. settings-schema.json->search-country->options
 msgid "Korea (Republic Of) - KR"
-msgstr ""
+msgstr "Észak-Korea - KR"
 
 #. settings-schema.json->search-country->options
 msgid "Kuwait - KW"
-msgstr ""
+msgstr "Kuvait - KW"
 
 #. settings-schema.json->search-country->options
 msgid "Kyrgyzstan - KG"
-msgstr ""
+msgstr "Kirgizisztán - KG"
 
 #. settings-schema.json->search-country->options
 msgid "Lao People'S Democratic Republic - LA"
@@ -1954,39 +2128,39 @@ msgstr ""
 
 #. settings-schema.json->search-country->options
 msgid "Latvia - LV"
-msgstr ""
+msgstr "Lettország - LV"
 
 #. settings-schema.json->search-country->options
 msgid "Lebanon - LB"
-msgstr ""
+msgstr "Libanon - LB"
 
 #. settings-schema.json->search-country->options
 msgid "Lesotho - LS"
-msgstr ""
+msgstr "Lesotho - LS"
 
 #. settings-schema.json->search-country->options
 msgid "Liberia - LR"
-msgstr ""
+msgstr "Libéria - LR"
 
 #. settings-schema.json->search-country->options
 msgid "Libya - LY"
-msgstr ""
+msgstr "Líbia - LY"
 
 #. settings-schema.json->search-country->options
 msgid "Liechtenstein - LI"
-msgstr ""
+msgstr "Lichtenstein - LI"
 
 #. settings-schema.json->search-country->options
 msgid "Lithuania - LT"
-msgstr ""
+msgstr "Litvánia - LT"
 
 #. settings-schema.json->search-country->options
 msgid "Luxembourg - LU"
-msgstr ""
+msgstr "Luxembourg - LU"
 
 #. settings-schema.json->search-country->options
 msgid "Macao - MO"
-msgstr ""
+msgstr "Macao - MO"
 
 #. settings-schema.json->search-country->options
 msgid "Macedonia (The Former Yugoslav Republic Of) - MK"
@@ -1994,215 +2168,215 @@ msgstr ""
 
 #. settings-schema.json->search-country->options
 msgid "Madagascar - MG"
-msgstr ""
+msgstr "Madagaszkár - MG"
 
 #. settings-schema.json->search-country->options
 msgid "Malawi - MW"
-msgstr ""
+msgstr "Malawi - MW"
 
 #. settings-schema.json->search-country->options
 msgid "Malaysia - MY"
-msgstr ""
+msgstr "Malajzia - MY"
 
 #. settings-schema.json->search-country->options
 msgid "Maldives - MV"
-msgstr ""
+msgstr "Maldív-szigetek - MV"
 
 #. settings-schema.json->search-country->options
 msgid "Mali - ML"
-msgstr ""
+msgstr "Mali - ML"
 
 #. settings-schema.json->search-country->options
 msgid "Malta - MT"
-msgstr ""
+msgstr "Málta - MT"
 
 #. settings-schema.json->search-country->options
 msgid "Marshall Islands - MH"
-msgstr ""
+msgstr "Marshall-szigetek - MH"
 
 #. settings-schema.json->search-country->options
 msgid "Martinique - MQ"
-msgstr ""
+msgstr "Martinique - MQ"
 
 #. settings-schema.json->search-country->options
 msgid "Mauritania - MR"
-msgstr ""
+msgstr "Mauritania - MR"
 
 #. settings-schema.json->search-country->options
 msgid "Mauritius - MU"
-msgstr ""
+msgstr "Mauritius - MU"
 
 #. settings-schema.json->search-country->options
 msgid "Mayotte - YT"
-msgstr ""
+msgstr "Mayotte - YT"
 
 #. settings-schema.json->search-country->options
 msgid "Mexico - MX"
-msgstr ""
+msgstr "Mexikó - MX"
 
 #. settings-schema.json->search-country->options
 msgid "Micronesia (Federated States Of) - FM"
-msgstr ""
+msgstr "Mikronézia, Államszövetség - FM"
 
 #. settings-schema.json->search-country->options
 msgid "Moldova (Republic Of) - MD"
-msgstr ""
+msgstr "Moldova - MD"
 
 #. settings-schema.json->search-country->options
 msgid "Monaco - MC"
-msgstr ""
+msgstr "Monaco - MC"
 
 #. settings-schema.json->search-country->options
 msgid "Mongolia - MN"
-msgstr ""
+msgstr "Mongólia - MN"
 
 #. settings-schema.json->search-country->options
 msgid "Montenegro - ME"
-msgstr ""
+msgstr "Montenegró - ME"
 
 #. settings-schema.json->search-country->options
 msgid "Montserrat - MS"
-msgstr ""
+msgstr "Montserrat - MS"
 
 #. settings-schema.json->search-country->options
 msgid "Morocco - MA"
-msgstr ""
+msgstr "Marokkó - MA"
 
 #. settings-schema.json->search-country->options
 msgid "Mozambique - MZ"
-msgstr ""
+msgstr "Mozambique - MZ"
 
 #. settings-schema.json->search-country->options
 msgid "Myanmar - MM"
-msgstr ""
+msgstr "Mianmar - MM"
 
 #. settings-schema.json->search-country->options
 msgid "Namibia - NA"
-msgstr ""
+msgstr "Namibia - NA"
 
 #. settings-schema.json->search-country->options
 msgid "Nauru - NR"
-msgstr ""
+msgstr "Nauru - NR"
 
 #. settings-schema.json->search-country->options
 msgid "Nepal - NP"
-msgstr ""
+msgstr "Nepál - NP"
 
 #. settings-schema.json->search-country->options
 msgid "Netherlands - NL"
-msgstr ""
+msgstr "Hollandia - NL"
 
 #. settings-schema.json->search-country->options
 msgid "New Caledonia - NC"
-msgstr ""
+msgstr "Új-Kaledónia - NC"
 
 #. settings-schema.json->search-country->options
 msgid "New Zealand - NZ"
-msgstr ""
+msgstr "Új-Zéland - NZ"
 
 #. settings-schema.json->search-country->options
 msgid "Nicaragua - NI"
-msgstr ""
+msgstr "Nicaragua - NI"
 
 #. settings-schema.json->search-country->options
 msgid "Niger - NE"
-msgstr ""
+msgstr "Niger - NE"
 
 #. settings-schema.json->search-country->options
 msgid "Nigeria - NG"
-msgstr ""
+msgstr "Nigeria - NG"
 
 #. settings-schema.json->search-country->options
 msgid "Niue - NU"
-msgstr ""
+msgstr "Niue - NU"
 
 #. settings-schema.json->search-country->options
 msgid "Norfolk Island - NF"
-msgstr ""
+msgstr "Norfolk-sziget - NF"
 
 #. settings-schema.json->search-country->options
 msgid "Northern Mariana Islands - MP"
-msgstr ""
+msgstr "Északi Mariana-szigetek - MP"
 
 #. settings-schema.json->search-country->options
 msgid "Norway - NO"
-msgstr ""
+msgstr "Norvégia - NO"
 
 #. settings-schema.json->search-country->options
 msgid "Oman - OM"
-msgstr ""
+msgstr "Omán - OM"
 
 #. settings-schema.json->search-country->options
 msgid "Pakistan - PK"
-msgstr ""
+msgstr "Pakisztán - PK"
 
 #. settings-schema.json->search-country->options
 msgid "Palau - PW"
-msgstr ""
+msgstr "Palau - PW"
 
 #. settings-schema.json->search-country->options
 msgid "Palestine (State Of) - PS"
-msgstr ""
+msgstr "Palestine - PS"
 
 #. settings-schema.json->search-country->options
 msgid "Panama - PA"
-msgstr ""
+msgstr "Panama - PA"
 
 #. settings-schema.json->search-country->options
 msgid "Papua New Guinea - PG"
-msgstr ""
+msgstr "Pápua Új-Guinea - PG"
 
 #. settings-schema.json->search-country->options
 msgid "Paraguay - PY"
-msgstr ""
+msgstr "Paraguay - PY"
 
 #. settings-schema.json->search-country->options
 msgid "Peru - PE"
-msgstr ""
+msgstr "Peru - PE"
 
 #. settings-schema.json->search-country->options
 msgid "Philippines - PH"
-msgstr ""
+msgstr "Fülöp-szigetek - PH"
 
 #. settings-schema.json->search-country->options
 msgid "Pitcairn - PN"
-msgstr ""
+msgstr "Pitcairn - PN"
 
 #. settings-schema.json->search-country->options
 msgid "Poland - PL"
-msgstr ""
+msgstr "Lengyelország - PL"
 
 #. settings-schema.json->search-country->options
 msgid "Portugal - PT"
-msgstr ""
+msgstr "Portugália - PT"
 
 #. settings-schema.json->search-country->options
 msgid "Puerto Rico - PR"
-msgstr ""
+msgstr "Puerto Rico - PR"
 
 #. settings-schema.json->search-country->options
 msgid "Qatar - QA"
-msgstr ""
+msgstr "Katar - QA"
 
 #. settings-schema.json->search-country->options
 msgid "Réunion - RE"
-msgstr ""
+msgstr "Réunion - RE"
 
 #. settings-schema.json->search-country->options
 msgid "Romania - RO"
-msgstr ""
+msgstr "Románia - RO"
 
 #. settings-schema.json->search-country->options
 msgid "Russian Federation - RU"
-msgstr ""
+msgstr "Oroszország - RU"
 
 #. settings-schema.json->search-country->options
 msgid "Rwanda - RW"
-msgstr ""
+msgstr "Rwanda - RW"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Barthélemy - BL"
-msgstr ""
+msgstr "Saint Barthélemy - BL"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Helena (Ascension And Tristan Da Cunha) - SH"
@@ -2210,11 +2384,11 @@ msgstr ""
 
 #. settings-schema.json->search-country->options
 msgid "Saint Kitts And Nevis - KN"
-msgstr ""
+msgstr "St. Kitts és Nevis - KN"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Lucia - LC"
-msgstr ""
+msgstr "Saint Lucia - LC"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Martin (French Part) - MF"
@@ -2222,47 +2396,47 @@ msgstr ""
 
 #. settings-schema.json->search-country->options
 msgid "Saint Pierre And Miquelon - PM"
-msgstr ""
+msgstr "Saint Pierre és Miquelon - PM"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Vincent And The Grenadines - VC"
-msgstr ""
+msgstr "Saint Vincent és a Grenadines-szigetek - VC"
 
 #. settings-schema.json->search-country->options
 msgid "Samoa - WS"
-msgstr ""
+msgstr "Szamoa - WS"
 
 #. settings-schema.json->search-country->options
 msgid "San Marino - SM"
-msgstr ""
+msgstr "San Marino - SM"
 
 #. settings-schema.json->search-country->options
 msgid "Sao Tome And Principe - ST"
-msgstr ""
+msgstr "São Tomé és Príncipe - ST"
 
 #. settings-schema.json->search-country->options
 msgid "Saudi Arabia - SA"
-msgstr ""
+msgstr "Szaúd-Arábia - SA"
 
 #. settings-schema.json->search-country->options
 msgid "Senegal - SN"
-msgstr ""
+msgstr "Senegal - SN"
 
 #. settings-schema.json->search-country->options
 msgid "Serbia - RS"
-msgstr ""
+msgstr "Szerbia - RS"
 
 #. settings-schema.json->search-country->options
 msgid "Seychelles - SC"
-msgstr ""
+msgstr "Seychelles - SC"
 
 #. settings-schema.json->search-country->options
 msgid "Sierra Leone - SL"
-msgstr ""
+msgstr "Sierra Leone - SL"
 
 #. settings-schema.json->search-country->options
 msgid "Singapore - SG"
-msgstr ""
+msgstr "Szingapúr - SG"
 
 #. settings-schema.json->search-country->options
 msgid "Sint Maarten (Dutch Part) - SX"
@@ -2270,63 +2444,63 @@ msgstr ""
 
 #. settings-schema.json->search-country->options
 msgid "Slovakia - SK"
-msgstr ""
+msgstr "Szlovákia - SK"
 
 #. settings-schema.json->search-country->options
 msgid "Slovenia - SI"
-msgstr ""
+msgstr "Szlovénia - SI"
 
 #. settings-schema.json->search-country->options
 msgid "Solomon Islands - SB"
-msgstr ""
+msgstr "Salamon-szigetek - SB"
 
 #. settings-schema.json->search-country->options
 msgid "Somalia - SO"
-msgstr ""
+msgstr "Szomália - SO"
 
 #. settings-schema.json->search-country->options
 msgid "South Africa - ZA"
-msgstr ""
+msgstr "Dél-afrikai Köztársaság - ZA"
 
 #. settings-schema.json->search-country->options
 msgid "South Georgia And The South Sandwich Islands - GS"
-msgstr ""
+msgstr "Dél-Georgia és Déli-Sandwich-szigetek - GS"
 
 #. settings-schema.json->search-country->options
 msgid "South Sudan - SS"
-msgstr ""
+msgstr "Dél-Szudán - SS"
 
 #. settings-schema.json->search-country->options
 msgid "Spain - ES"
-msgstr ""
+msgstr "Spanyolország - ES"
 
 #. settings-schema.json->search-country->options
 msgid "Sri Lanka - LK"
-msgstr ""
+msgstr "Sri Lanka - LK"
 
 #. settings-schema.json->search-country->options
 msgid "Sudan - SD"
-msgstr ""
+msgstr "Szudán - SD"
 
 #. settings-schema.json->search-country->options
 msgid "Suriname - SR"
-msgstr ""
+msgstr "Suriname - SR"
 
 #. settings-schema.json->search-country->options
 msgid "Svalbard And Jan Mayen - SJ"
-msgstr ""
+msgstr "Svalbard-szigetek és Jan Mayen-sziget - SJ"
 
 #. settings-schema.json->search-country->options
 msgid "Swaziland - SZ"
-msgstr ""
+msgstr "Swaziland - SZ"
 
 #. settings-schema.json->search-country->options
 msgid "Sweden - SE"
-msgstr ""
+msgstr "Svédország - SE"
 
 #. settings-schema.json->search-country->options
 msgid "Switzerland - CH"
-msgstr ""
+msgstr "Svájc - CH"
 
 #. settings-schema.json->search-country->options
 msgid "Syrian Arab Republic - SY"
@@ -2338,7 +2512,7 @@ msgstr ""
 
 #. settings-schema.json->search-country->options
 msgid "Tajikistan - TJ"
-msgstr ""
+msgstr "Tádzsikisztán - TJ"
 
 #. settings-schema.json->search-country->options
 msgid "Tanzania (United Republic Of) - TZ"
@@ -2346,83 +2520,83 @@ msgstr ""
 
 #. settings-schema.json->search-country->options
 msgid "Thailand - TH"
-msgstr ""
+msgstr "Thaiföld - TH"
 
 #. settings-schema.json->search-country->options
 msgid "Timor-Leste - TL"
-msgstr ""
+msgstr "Kelet-Timor - TL"
 
 #. settings-schema.json->search-country->options
 msgid "Togo - TG"
-msgstr ""
+msgstr "Togo - TG"
 
 #. settings-schema.json->search-country->options
 msgid "Tokelau - TK"
-msgstr ""
+msgstr "Tokelau - TK"
 
 #. settings-schema.json->search-country->options
 msgid "Tonga - TO"
-msgstr ""
+msgstr "Tonga - TO"
 
 #. settings-schema.json->search-country->options
 msgid "Trinidad And Tobago - TT"
-msgstr ""
+msgstr "Trinidad és Tobago - TT"
 
 #. settings-schema.json->search-country->options
 msgid "Tunisia - TN"
-msgstr ""
+msgstr "Tunézia - TN"
 
 #. settings-schema.json->search-country->options
 msgid "Turkey - TR"
-msgstr ""
+msgstr "Törökország - TR"
 
 #. settings-schema.json->search-country->options
 msgid "Turkmenistan - TM"
-msgstr ""
+msgstr "Türkmenisztán - TM"
 
 #. settings-schema.json->search-country->options
 msgid "Turks And Caicos Islands - TC"
-msgstr ""
+msgstr "Turks és Caicos-szigetek - TC"
 
 #. settings-schema.json->search-country->options
 msgid "Tuvalu - TV"
-msgstr ""
+msgstr "Tuvalu - TV"
 
 #. settings-schema.json->search-country->options
 msgid "Uganda - UG"
-msgstr ""
+msgstr "Uganda - UG"
 
 #. settings-schema.json->search-country->options
 msgid "Ukraine - UA"
-msgstr ""
+msgstr "Ukrajna - UA"
 
 #. settings-schema.json->search-country->options
 msgid "United Arab Emirates - AE"
-msgstr ""
+msgstr "Egyesült Arab Emirátusok - AE"
 
 #. settings-schema.json->search-country->options
 msgid "United Kingdom - GB"
-msgstr ""
+msgstr "Egyesült Királyság - GB"
 
 #. settings-schema.json->search-country->options
 msgid "United States - US"
-msgstr ""
+msgstr "Egyesült Államok - US"
 
 #. settings-schema.json->search-country->options
 msgid "United States Minor Outlying Islands - UM"
-msgstr ""
+msgstr "Egyesült Államok külső szigetei - UM"
 
 #. settings-schema.json->search-country->options
 msgid "Uruguay - UY"
-msgstr ""
+msgstr "Uruguay - UY"
 
 #. settings-schema.json->search-country->options
 msgid "Uzbekistan - UZ"
-msgstr ""
+msgstr "Üzbegisztán - UZ"
 
 #. settings-schema.json->search-country->options
 msgid "Vanuatu - VU"
-msgstr ""
+msgstr "Vanuatu - VU"
 
 #. settings-schema.json->search-country->options
 msgid "Venezuela (Bolivarian Republic Of) - VE"
@@ -2430,39 +2604,39 @@ msgstr ""
 
 #. settings-schema.json->search-country->options
 msgid "Viet Nam - VN"
-msgstr ""
+msgstr "Vietnam - VN"
 
 #. settings-schema.json->search-country->options
 msgid "Virgin Islands (British) - VG"
-msgstr ""
+msgstr "Brit Virgin-szigetek - VG"
 
 #. settings-schema.json->search-country->options
 msgid "Virgin Islands (U.S.) - VI"
-msgstr ""
+msgstr "Egyesült Államok Virgin-szigetek - VI"
 
 #. settings-schema.json->search-country->options
 msgid "Wallis And Futuna - WF"
-msgstr ""
+msgstr "Wallis és Futuna - WF"
 
 #. settings-schema.json->search-country->options
 msgid "Western Sahara - EH"
-msgstr ""
+msgstr "Nyugat-Szahara - EH"
 
 #. settings-schema.json->search-country->options
 msgid "Yemen - YE"
-msgstr ""
+msgstr "Jemen - YE"
 
 #. settings-schema.json->search-country->options
 msgid "Zambia - ZM"
-msgstr ""
+msgstr "Zambia - ZM"
 
 #. settings-schema.json->search-country->options
 msgid "Zimbabwe - ZW"
-msgstr ""
+msgstr "Zimbabwe - ZW"
 
 #. settings-schema.json->search-country->tooltip
 msgid "OPTIONAL. Choose a country."
-msgstr ""
+msgstr "(elhagyható) Válasszon egy országot."
 
 #. settings-schema.json->search-tag->description
 msgid "Tag"
@@ -2506,11 +2680,11 @@ msgstr "Ismeretlen,H.264"
 
 #. settings-schema.json->search-codec->tooltip
 msgid "OPTIONAL. Choose a codec."
-msgstr ""
+msgstr "(elhagyható) Válasszon egy kodeket."
 
 #. settings-schema.json->search-minimalBitrate->description
 msgid "Minimal Bitrate"
-msgstr ""
+msgstr "Minimális bitsebesség"
 
 #. settings-schema.json->search-minimalBitrate->options
 msgid "32"
@@ -2558,7 +2732,7 @@ msgstr ""
 
 #. settings-schema.json->search-order->description
 msgid "Order"
-msgstr ""
+msgstr "Sorrend"
 
 #. settings-schema.json->search-order->options
 msgid "name"
@@ -2566,19 +2740,19 @@ msgstr "név"
 
 #. settings-schema.json->search-order->options
 msgid "url"
-msgstr ""
+msgstr "url"
 
 #. settings-schema.json->search-order->options
 msgid "tags"
-msgstr ""
+msgstr "címkék"
 
 #. settings-schema.json->search-order->options
 msgid "country"
-msgstr ""
+msgstr "ország"
 
 #. settings-schema.json->search-order->options
 msgid "state"
-msgstr ""
+msgstr "állapot"
 
 #. settings-schema.json->search-order->options
 msgid "language"
@@ -2590,35 +2764,35 @@ msgstr ""
 
 #. settings-schema.json->search-order->options
 msgid "codec"
-msgstr ""
+msgstr "kodek"
 
 #. settings-schema.json->search-order->options
 msgid "bitrate"
-msgstr ""
+msgstr "bitsebesség"
 
 #. settings-schema.json->search-order->options
 msgid "last check-time"
-msgstr ""
+msgstr "utolsó ellenőrzés időpontja"
 
 #. settings-schema.json->search-order->options
 msgid "click timestamp"
-msgstr ""
+msgstr "kattintson a időbélyeghez"
 
 #. settings-schema.json->search-order->options
 msgid "click count"
-msgstr ""
+msgstr "kattintson a számlálóhoz"
 
 #. settings-schema.json->search-order->options
 msgid "click trend"
-msgstr ""
+msgstr "kattintson a trendhez"
 
 #. settings-schema.json->search-order->options
 msgid "change timestamp"
-msgstr ""
+msgstr "időbélyeg megváltoztatása"
 
 #. settings-schema.json->search-order->options
 msgid "random"
-msgstr ""
+msgstr "véletlenszerű"
 
 #. settings-schema.json->search-order->tooltip
 msgid "OPTIONAL. Name of the attribute the result list will be sorted by."
@@ -2630,11 +2804,11 @@ msgstr "Korlátozás"
 
 #. settings-schema.json->search-limit->tooltip
 msgid "Maximum number of results per page."
-msgstr ""
+msgstr "Keresési találatok maximális száma."
 
 #. settings-schema.json->search-page->description
 msgid "Next page number"
-msgstr ""
+msgstr "Következő oldalszám"
 
 #. settings-schema.json->search-reset-button->description
 msgid "Reset"
@@ -2642,8 +2816,8 @@ msgstr "Visszaállítás"
 
 #. settings-schema.json->search-button->description
 msgid "Search..."
-msgstr ""
+msgstr "Keresés…"
 
 #. settings-schema.json->sched-rmbutton->description
 msgid "Remove selected items"
-msgstr ""
+msgstr "Kiválasztott elemek eltávolítása"
