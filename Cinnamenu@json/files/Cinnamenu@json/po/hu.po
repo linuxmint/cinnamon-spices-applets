@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-29 19:16+0100\n"
-"PO-Revision-Date: 2022-10-11 15:59+0200\n"
+"POT-Creation-Date: 2023-05-01 20:28+0100\n"
+"PO-Revision-Date: 2023-05-08 10:51+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -43,7 +43,7 @@ msgstr "Kedvenc alkalmazások"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr ""
-"A „gir1.2-gda-5.0” csomag szükséges a Firefox és Midori könyvjelzők "
+"a „gir1.2-gda-5.0” csomag szükséges a Firefox és Midori könyvjelzők "
 "megjelenítéséhez."
 
 msgid "Clear List"
@@ -145,11 +145,11 @@ msgstr "Alkalmazások és fájlok"
 msgid "Other search results"
 msgstr "További keresési előzmények"
 
-msgid "Browser history"
-msgstr "Előzmények tallózása"
-
 msgid "Browser bookmarks"
 msgstr "Webhely könyvjelzők"
+
+msgid "Browser history"
+msgstr "Előzmények tallózása"
 
 msgid "Emoji"
 msgstr "Emodzsi"
@@ -169,12 +169,6 @@ msgstr "Kedvencek"
 msgid "Recent"
 msgstr "Friss"
 
-msgid "Home folder"
-msgstr "Saját mappa"
-
-msgid "Reset category order"
-msgstr "Kategória sorrend visszaállítása"
-
 msgid "light skin tone"
 msgstr "világos tónus"
 
@@ -190,6 +184,12 @@ msgstr "közepesen sötét tónus"
 msgid "dark skin tone"
 msgstr "sötét tónus"
 
+msgid "Remove category"
+msgstr "Kategória eltávolítása"
+
+msgid "Reset category order"
+msgstr "Kategória sorrend visszaállítása"
+
 msgid "This file is no longer available"
 msgstr "Ez a fájl már nem létezik"
 
@@ -198,6 +198,9 @@ msgstr "Megnyitás ezzel"
 
 msgid "Other application..."
 msgstr "Egyéb alkalmazás…"
+
+msgid "Add folder as category"
+msgstr "Mappa hozzáadása kategóriaként"
 
 msgid "Open containing folder"
 msgstr "Tartalmazó mappa megnyitása"
@@ -322,9 +325,6 @@ msgstr "Viselkedés"
 
 msgid "Appearance"
 msgstr "Megjelenés"
-
-msgid "Layout and Content"
-msgstr "Elrendezés és tartalom"
 
 msgid "Search Providers"
 msgstr "Keresőszolgáltatók"
@@ -475,6 +475,9 @@ msgstr "Egyedi menü magasság használata"
 msgid "Custom menu height (pixels)"
 msgstr "Egyéni menü magasság (képpontban megadva)"
 
+msgid "Tips"
+msgstr "Tippek"
+
 msgid "Applications view mode"
 msgstr "Alkalmazások nézet mód"
 
@@ -529,13 +532,6 @@ msgstr "Cím alatt"
 msgid "Choose where to show application descriptions"
 msgstr "Válassza ki, hogy hol jelenjen meg az alkalmazás leírása"
 
-msgid ""
-"\n"
-"Info/tip: Drag on the menu edge to change the menu size.\n"
-msgstr ""
-"\n"
-"Tipp: A menü szélének húzásával megváltoztathatja a menü méretét.\n"
-
 msgid "Show recent items"
 msgstr "Legutóbbi elemek megjelenítése"
 
@@ -589,11 +585,11 @@ msgid "Web search suggestions"
 msgstr "Keresés a világhálón javaslatok"
 
 msgid ""
-"With web search option, also show search suggestions. (Note: This uses "
-"Google's search API)"
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
 msgstr ""
 "Keresés a világhálón megjeleníti a keresési javaslatokat. (Megjegyzés: A "
-"Google keresési API-t használja)"
+"DuckDuckGo keresési API-t használja)"
 
 msgid "Search home folder"
 msgstr "Keresés a Saját mappában"
@@ -685,6 +681,34 @@ msgid ""
 msgstr ""
 "Mozaik stílus használata az alkalmazás gombokhoz (megjegyzés: néhány téma "
 "esetén nem működik jól)"
+
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"• A menü szélének húzásával megváltoztathatja a menü méretét."
+
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• A menü kategória húzásával megváltoztathatja a menük sorrendjét."
+
+msgid ""
+"\n"
+"• Right click on any folder to add it as a menu category.\n"
+msgstr ""
+"\n"
+"• Kattintson bármelyik mappán jobb gombbal a menü kategóriaként való "
+"hozzáadásához.\n"
+
+#~ msgid "Home folder"
+#~ msgstr "Saját mappa"
+
+#~ msgid "Layout and Content"
+#~ msgstr "Elrendezés és tartalom"
 
 #~ msgid "Solution:"
 #~ msgstr "Megoldás:"

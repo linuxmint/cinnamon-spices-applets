@@ -1,3 +1,10 @@
+### v6.4.2~20230413
+  * Minor bugfix.
+
+
+### v6.4.1~20230309
+  * Now compatible with openSUSE.
+
 ### v6.4.0~20230217
   * Avoid to be blocked by the spices server.
   * Add 5.6 branch.

@@ -1,67 +1,287 @@
-# Swedish localisation for countdown-timer.
+# Swedish localisation for cinnamon-timer@jake1164.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017, 2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: axos88@countdown-timer\n"
+"Project-Id-Version: cinnamon-timer@jake1164\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-26 09:39+0200\n"
-"PO-Revision-Date: 2017-07-26 09:39+0200\n"
+"POT-Creation-Date: 2019-02-08 11:28+0100\n"
+"PO-Revision-Date: 2023-05-30 08:41+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
-"Language-Team: Svenska Språkfiler\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
 
-#: applet.js:51
-msgid "Okay"
-msgstr "OK"
-
-#: applet.js:97 applet.js:226
+#: applet.js:215 applet.js:376
 msgid "Timer"
 msgstr "Tidur"
 
-#: applet.js:103 applet.js:144 applet.js:224
-msgid "Minutes"
-msgstr "Minuter"
-
-#: applet.js:143 applet.js:224
+#. settings-schema.json->preset_time->columns->title
+#: applet.js:221 applet.js:260 applet.js:353
 msgid "Hours"
 msgstr "Timmar"
 
-#: applet.js:145 applet.js:224
-msgid "Seconds"
-msgstr "Sekunder"
+#. settings-schema.json->preset_time->columns->title
+#: applet.js:221 applet.js:261 applet.js:353
+msgid "Minutes"
+msgstr "Minuter"
 
-#: applet.js:147
-msgid "Reset"
-msgstr "Återställ"
-
-#: applet.js:224
+#: applet.js:221 applet.js:353
 msgid "and"
 msgstr "och"
 
-#: applet.js:302
-msgid "Edit Options"
-msgstr "Redigera alternativ"
+#. settings-schema.json->preset_time->columns->title
+#: applet.js:221 applet.js:262 applet.js:353
+msgid "Seconds"
+msgstr "Sekunder"
 
-#: applet.js:304
-msgid "Restart Cinnamon"
-msgstr "Starta om Cinnamon"
+#: applet.js:238
+msgid "Reset"
+msgstr "Återställ"
 
-#. axos88@countdown-timer->metadata.json->description
-msgid ""
-"A countdown timer app with visual and auditory notifications based on "
-"markbokil's timer-notifications applet"
+#: applet.js:523
+msgid "Okay"
+msgstr "OK"
+
+#: applet.js:541
+msgid "Cinnamon Timer"
+msgstr "Cinnamon tidur"
+
+#. settings-schema.json->page1->title
+msgid "General"
+msgstr "Allmänt"
+
+#. settings-schema.json->page2->title
+msgid "Sounds"
+msgstr "Ljud"
+
+#. settings-schema.json->page3->title
+#. settings-schema.json->section3->title
+#. settings-schema.json->preset_time->description
+msgid "Preset Times"
+msgstr "Förinställda tider"
+
+#. settings-schema.json->page4->title
+#. settings-schema.json->section4->title
+#. settings-schema.json->slider_intervals->description
+msgid "Slider Intervals"
+msgstr "Skjutreglageintervall"
+
+#. settings-schema.json->section1->title
+msgid "General Settings"
+msgstr "Allmänna inställningar"
+
+#. settings-schema.json->section2->title
+msgid "Sound Settings"
+msgstr "Ljudinsatällningar"
+
+#. settings-schema.json->confirm-prompt-enable->description
+msgid "Check this to place a prompt on the window when time has elapsed."
 msgstr ""
-"Ett nedräkningsur med visuell och auditiv avisering, baserad på markbokil's "
-"timer-notifications."
+"Aktivera detta för att placera ett meddelande på skärmen när tiden har gått "
+"ut."
 
-#. axos88@countdown-timer->metadata.json->name
-msgid "Countdown timer with notifications"
-msgstr "Nedräkningsur med avisering"
+#. settings-schema.json->confirm-prompt-enable->tooltip
+msgid "Check this to place a prompt on the window when time has elapsed"
+msgstr ""
+"Aktivera detta för att placera ett meddelande på skärmen när tiden har gått "
+"ut"
+
+#. settings-schema.json->message-prompt-enable->description
+#. settings-schema.json->message-prompt-enable->tooltip
+msgid "Display a notification when time has elapsed"
+msgstr "Visa en systemavisering när tiden har gått ut"
+
+#. settings-schema.json->display-message->description
+#. settings-schema.json->display-message->tooltip
+msgid ""
+"Global message displayed in notification windows unless defined in preset "
+"time."
+msgstr ""
+"Systemövergripande meddelande som visas i meddelandefönster om det inte har "
+"definierats i förinställd tid."
+
+#. settings-schema.json->sound-prompt-enable->description
+#. settings-schema.json->sound-prompt-enable->tooltip
+msgid "Play a sound when time is elapsed"
+msgstr "Spela upp ett ljud när tiden har gått ut"
+
+#. settings-schema.json->sound-file->description
+msgid "Full path and filename of alert sound file"
+msgstr "Fullständig sökväg och filnamn för larmljudfilen"
+
+#. settings-schema.json->sound-volume->description
+#. settings-schema.json->sound-volume->tooltip
+msgid "Specify the playback volume"
+msgstr "Specificera uppspelningsvolym"
+
+#. settings-schema.json->display-menu-enable->description
+#. settings-schema.json->display-menu-enable->tooltip
+msgid "Show the timer menu when time is elapsed"
+msgstr "Visa tidursmenyn när tiden har gått ut"
+
+#. settings-schema.json->duration-display-enable->description
+#. settings-schema.json->duration-display-enable->tooltip
+msgid "Display remaining time in panel"
+msgstr "Visa återstående tid i panelen"
+
+#. settings-schema.json->alarmtime-display-enable->description
+#. settings-schema.json->alarmtime-display-enable->tooltip
+msgid "Display alarm time in panel"
+msgstr "Visa larmtid i panelen"
+
+#. settings-schema.json->alarmtime-format-small->description
+msgid "Format used to display alarm time in the near future"
+msgstr "Format som används för att visa larmtid inom en snar framtid"
+
+#. settings-schema.json->alarmtime-format-small->tooltip
+msgid ""
+"If the alarm time is less than the minutes specified below away,\n"
+"the alarm time can be displayed with more details\n"
+"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
+"format)"
+msgstr ""
+"Om larmtiden är kortare än de minuter som anges nedan,\n"
+"kan larmtiden visas mer detaljerat\n"
+"(se https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
+"format)"
+
+#. settings-schema.json->alarmtime-format-large->description
+msgid "Format used to display alarm time in the not so near future"
+msgstr "Format som används för att visa larmtid inom en inte så nära framtid"
+
+#. settings-schema.json->alarmtime-format-large->tooltip
+msgid ""
+"If the alarm time is more than the minutes specified below away,\n"
+"the alarm time can be displayed with less details\n"
+"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
+"format)"
+msgstr ""
+"Om larmtiden är längre än de minuter som anges nedan,\n"
+"kan larmtiden visas mindre detaljerat\n"
+"(se https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
+"format)"
+
+#. settings-schema.json->alarmtime-format-switchover->units
+msgid "minutes"
+msgstr "minuter"
+
+#. settings-schema.json->alarmtime-format-switchover->description
+msgid "Time when switching from small to large time format"
+msgstr "Tid för omställning från litet till stort tidsformat"
+
+#. settings-schema.json->alarmtime-format-switchover->tooltip
+msgid "Switch over time between the two formats specified above"
+msgstr "Växlingstid mellan de två format som anges ovan"
+
+#. settings-schema.json->auto-loop-enable->description
+#. settings-schema.json->auto-loop-enable->tooltip
+msgid "Restart the timer automatically when time is elapsed"
+msgstr "Starta automatiskt om tiduret när tiden har löpt ut"
+
+#. settings-schema.json->alarm_end->description
+#. settings-schema.json->alarm_end->tooltip
+#. settings-schema.json->alarm_start->description
+#. settings-schema.json->alarm_start->tooltip
+msgid "Do not change, the time the alarm is set to expire"
+msgstr "Ändra inte, tiden larmet är inställt på att gå ut"
+
+#. settings-schema.json->message->description
+#. settings-schema.json->message->tooltip
+msgid "Do not change, message being displayed when the current timer expires"
+msgstr "Ändra inte, meddelandet visas när den aktuella tiden löper ut"
+
+#. settings-schema.json->slider_intervals->columns->title
+msgid "Minimum"
+msgstr "Min."
+
+#. settings-schema.json->slider_intervals->columns->title
+msgid "Maximum"
+msgstr "Max."
+
+#. settings-schema.json->slider_intervals->columns->title
+msgid "Step"
+msgstr "Steg"
+
+#. settings-schema.json->preset_time->columns->title
+msgid "Label"
+msgstr "Etikett"
+
+#. settings-schema.json->preset_time->columns->title
+msgid "Custom Message (overrides global message)"
+msgstr "Anpassat meddelande (åsidosätter systemmeddelande)"
+
+#~ msgid "Timer Notifications"
+#~ msgstr "Tidur med avisering"
+
+#~ msgid "Minutes: 0"
+#~ msgstr "Minuter: 0"
+
+#~ msgid "Time Presets"
+#~ msgstr "Förinställda tider"
+
+#~ msgid "240 Minutes - 4 hrs."
+#~ msgstr "240 Minuter - 4 tim."
+
+#~ msgid "180 Minutes - 3 hrs."
+#~ msgstr "180 Minuter - 3 tim."
+
+#~ msgid "120 Minutes - 2 hrs."
+#~ msgstr "120 Minuter - 2 tim."
+
+#~ msgid "90 Minutes"
+#~ msgstr "90 Minuter"
+
+#~ msgid "60 Minutes"
+#~ msgstr "60 Minuter"
+
+#~ msgid "45 Minutes"
+#~ msgstr "45 Minuter"
+
+#~ msgid "30 Minutes"
+#~ msgstr "30 Minuter"
+
+#~ msgid "20 Minutes"
+#~ msgstr "20 Minuter"
+
+#~ msgid "15 Minutes"
+#~ msgstr "15 Minuter"
+
+#~ msgid "10 Minutes"
+#~ msgstr "10 Minuter"
+
+#~ msgid "3 Minutes"
+#~ msgstr "3 Minuter"
+
+#~ msgid "1 Minute"
+#~ msgstr "1 Minut"
+
+#~ msgid "Minutes: "
+#~ msgstr "Minuter: "
+
+#~ msgid "Timer: "
+#~ msgstr "Tidur: "
+
+#~ msgid " min."
+#~ msgstr " min."
+
+#~ msgid " min. OFF"
+#~ msgstr " min. AV"
+
+#~ msgid "Edit Options"
+#~ msgstr "Redigera alternativ"
+
+#~ msgid "Restart Cinnamon"
+#~ msgstr "Starta om Cinnamon"
+
+#~ msgid "Timer with Notifications"
+#~ msgstr "Tidur med avisering"
+
+#~ msgid "A timer app with visual and auditory notifications."
+#~ msgstr "Ett tidur med visuell och auditiv avisering."

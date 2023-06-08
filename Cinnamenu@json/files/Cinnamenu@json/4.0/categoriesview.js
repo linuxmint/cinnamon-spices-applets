@@ -1,5 +1,6 @@
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 const Atk = imports.gi.Atk;
 const Clutter = imports.gi.Clutter;
 const XApp = imports.gi.XApp;
@@ -39,8 +40,8 @@ class CategoryButton {
         }
 
         //---label
-        category_name = category_name ? category_name : '';//is this needed?
-        this.label = new St.Label({ text: category_name, style_class: 'menu-category-button-label' });
+        this.category_name = category_name ? category_name : '';//is this needed?
+        this.label = new St.Label({text: this.category_name, style_class: 'menu-category-button-label'});
         this.actor.add(this.label, {x_fill: false, y_fill: false, y_align: St.Align.MIDDLE});
 
         //---dnd
@@ -59,7 +60,7 @@ class CategoryButton {
                     return DragMotionResult.NO_DROP;
                 }
                 //move category to new position
-                let categories = this.appThis.settings.categories.slice();
+                const categories = this.appThis.settings.categories.slice();
                 const oldIndex = categories.indexOf(source.id);
                 const newIndex = categories.indexOf(this.id);
                 categories.splice(oldIndex, 1);
@@ -151,7 +152,7 @@ class CategoryButton {
 
         if (this.id === this.appThis.currentCategory || //No need to select category as already selected
                             this.id === 'emoji:' && this.appThis.currentCategory.startsWith('emoji:')) {
-            return Clutter.EVENT_STOP;
+            return Clutter.EVENT_PROPAGATE;
         }
         if (this.appThis.settings.categoryClick) {
             this.appThis.display.categoriesView.allButtonsRemoveFocus();
@@ -160,7 +161,7 @@ class CategoryButton {
         } else {
             this.selectCategory();
         }
-        return Clutter.EVENT_STOP;
+        return Clutter.EVENT_PROPAGATE;
     }
 
     handleLeave(actor, event) {
@@ -200,7 +201,7 @@ class CategoryButton {
     }
 
     openContextMenu(e) {
-        this.appThis.display.contextMenu.open(this.id, e, this.actor, true);
+        this.appThis.display.contextMenu.openCategory(this.id, e, this.actor);
     }
 
     disable() {
@@ -246,15 +247,17 @@ class CategoriesView {
 
     update() {
         //Put all enabled categories into newButtons[] in default order by reusing the
-        //buttons in this.buttons[] or creating new button.
+        //buttons in this.buttons[] or by creating new CategoryButton.
         const newButtons = [];
 
+        //Add 'All applications'
         let button = this.buttons.find(button => button.id === 'all');
         if (!button) {
-            button = new CategoryButton(this.appThis, 'all', _('All applications'), 'computer');
+            button = new CategoryButton(this.appThis, 'all', _('All applications'), 'computer', null);
         }
         newButtons.push(button);
 
+        //Add other app categories
         this.appThis.apps.getDirs().forEach(dir => {                
             const dirId = dir.get_menu_id();
             let button = this.buttons.find(button => button.id === dirId);
@@ -265,30 +268,55 @@ class CategoriesView {
             button.setHighlight(this.appThis.apps.dirHasNewApp(dirId));
             newButtons.push(button);
         });
-
+        
+        //Add special categories
         const enableFavFiles = XApp.Favorites && XApp.Favorites.get_default().get_favorites(null).length > 0;
-        const homeDir = GLib.get_home_dir();
         [   [enableFavFiles, 'favorite_files', _('Favorites'), 'xapp-user-favorites'],
             [this.appThis.settings.showPlaces, 'places', _('Places'), 'folder'],
             [this.appThis.recentsEnabled, 'recents', _('Recent'), 'document-open-recent'],
             [this.appThis.settings.showFavAppsCategory, 'favorite_apps', _('Favorite apps'), 'emblem-favorite'],
-            [this.appThis.settings.showHomeFolder, homeDir,_('Home folder'), 'user-home'],
             [this.appThis.settings.showEmojiCategory, 'emoji:', _('Emoji'), '']
         ].forEach(param => {
                 if (param[0]) {
                     let button = this.buttons.find(button => button.id === param[1]);
                     if (!button) {
-                        button = new CategoryButton(this.appThis, param[1], param[2], param[3]);
+                        button = new CategoryButton(this.appThis, param[1], param[2], param[3], null);
                     }
                     newButtons.push(button);
-                } });
+                }});
+
+        //Add folder categories
+        const folderCategories = this.appThis.settings.folderCategories.slice();
+        folderCategories.forEach((folder, index) => {
+            let button = this.buttons.find(button => button.id === folder);
+            if (button) {
+                newButtons.push(button);
+            } else {
+                const file = Gio.file_new_for_path(folder);
+                try {//In case folder no longer exists.
+                    const fileInfo = file.query_info('standard::icon', Gio.FileQueryInfoFlags.NONE, null);
+                    const gicon = fileInfo.get_icon();
+                    let displayName = file.get_basename();
+                    if (displayName.length > 19) {
+                        displayName = displayName.slice(0,17) + '...';
+                    }
+                    button = new CategoryButton(this.appThis, folder, displayName, null, gicon);
+                    newButtons.push(button);
+                } catch(e) {
+                    log("Error creating folder category: " + folder + " ...skipping.");
+                    //remove this error causing element from the array.
+                    folderCategories.splice(index, 1);
+                }
+            }
+        });
+        this.appThis.settings.folderCategories = folderCategories;
 
         //set user category order to default if none already
         if (this.appThis.settings.categories.length === 0) {
-            this.appThis.settings.categories = newButtons.map( button => button.id);
+            this.appThis.settings.categories = newButtons.map(button => button.id);
         }
 
-        //add new found categories to end of user category order
+        //add new categories to end of user category order if not already included
         newButtons.forEach(newButton => {
             if (this.appThis.settings.categories.indexOf(newButton.id) === -1) {
                 this.appThis.settings.categories.push(newButton.id);
@@ -299,14 +327,17 @@ class CategoriesView {
         this.buttons = [];
         this.appThis.settings.categories.forEach(buttonId => {
             const foundButton = newButtons.find(newButton => newButton.id === buttonId);
-            if (foundButton) {
+            if (foundButton && !this.buttons.find(button => button.id === buttonId)) {
                 this.buttons.push(foundButton);
             }
         });
 
+        //replace user button order to remove unused ids.
+        this.appThis.settings.categories = this.buttons.map(button => button.id);
+
         //populate categoriesBox with buttons
         this.categoriesBox.remove_all_children();
-        this.buttons.forEach((button) => this.categoriesBox.add_actor(button.actor));
+        this.buttons.forEach(button => this.categoriesBox.add_actor(button.actor));
     }
 
     setSelectedCategoryStyle(categoryId) {

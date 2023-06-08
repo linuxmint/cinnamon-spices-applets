@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-28 00:20+0100\n"
-"PO-Revision-Date: 2023-01-16 20:07+0100\n"
+"POT-Creation-Date: 2023-04-20 15:16+0200\n"
+"PO-Revision-Date: 2023-05-07 21:02+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -22,91 +22,91 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Szenzor Figyelő"
 
-#: applet.js:389 applet.js:440
+#: applet.js:389 applet.js:441
 msgid "high:"
 msgstr "magas:"
 
-#: applet.js:389 applet.js:391 applet.js:440 applet.js:442 applet.js:475
+#: applet.js:389 applet.js:391 applet.js:441 applet.js:443 applet.js:481
 msgid "n/a"
 msgstr "n/a"
 
-#: applet.js:391 applet.js:442
+#: applet.js:391 applet.js:443
 msgid "crit:"
 msgstr "krit:"
 
-#: applet.js:475
+#: applet.js:481 applet.js:524
 msgid "min:"
 msgstr "min:"
 
-#: applet.js:506
+#: applet.js:526
 msgid "max:"
 msgstr "max:"
 
-#: applet.js:534
+#: applet.js:554
 msgid "No intrusion detected"
 msgstr "Nem észleltünk behatolást"
 
-#: applet.js:534
+#: applet.js:554
 msgid "INTRUSION DETECTED!"
 msgstr "BEHATOLÁST ÉSZLELTÜNK!"
 
-#: applet.js:554
+#: applet.js:574
 msgid "Must be configured!"
 msgstr "Be kell állítani!"
 
-#: applet.js:811
+#: applet.js:845
 msgid "Settings"
 msgstr "Beállítások"
 
-#: applet.js:811
+#: applet.js:845
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#: applet.js:818
+#: applet.js:852
 msgid "⚙ General"
 msgstr "⚙ Általános"
 
-#: applet.js:828
+#: applet.js:862
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Hőmérséklet szenzorok"
 
-#: applet.js:838
+#: applet.js:872
 msgid "🤂 Fan sensors"
 msgstr "🤂 Ventilátor szenzorok"
 
-#: applet.js:848
+#: applet.js:882
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Feszültség szenzorok"
 
-#: applet.js:858
+#: applet.js:892
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Behatolás szenzorok"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:869
+#: applet.js:903
 msgid "Run xsensors"
 msgstr "Xsensors futtatása"
 
-#: applet.js:880
+#: applet.js:914
 msgid "Reload this applet"
 msgstr "Kisalkalmazás újratöltése"
 
-#: applet.js:1168
+#: applet.js:1206
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Biztosan el akarja távolítani a(z) '%s'-t)"
 
-#: lib/checkDependencies.js:281
+#: lib/checkDependencies.js:300
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "A kisalkalmazás %s teljesen működőképes."
 
-#: lib/checkDependencies.js:282
+#: lib/checkDependencies.js:301
 msgid "All dependencies are installed"
 msgstr "Minden függőség telepítve van"
 
-#: lib/checkDependencies.js:307
+#: lib/checkDependencies.js:329
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -114,12 +114,12 @@ msgstr ""
 "Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
 "kisalkalmazás minden funkcióval rendelkezzen."
 
-#: lib/checkDependencies.js:308
+#: lib/checkDependencies.js:330
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 "Kérjük, a most megnyitott terminálban hajtsa végre a következő parancsokat:"
 
-#: lib/checkDependencies.js:309
+#: lib/checkDependencies.js:331
 msgid "Some dependencies are not installed!"
 msgstr "Néhány függőség nincs telepítve!"
 
@@ -222,7 +222,7 @@ msgstr ""
 #. settings-schema.json->section_tempHddtemp->title
 msgid "hddtemp is for now only usable by root"
 msgstr ""
-"A „hddtemp” alkalmazást kizárólag a rendszergazda felhasználó használhatja"
+"a „hddtemp” alkalmazást kizárólag a rendszergazda felhasználó használhatja"
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -236,8 +236,8 @@ msgid "Temperature sensors"
 msgstr "Hőmérséklet szenzorok"
 
 #. settings-schema.json->section_tempDisks->title
-msgid "Temperature scripts"
-msgstr "Hőmérséklet parancsfájlok"
+msgid "Disk temperature sensors"
+msgstr "Lemez hőmérséklet szenzorok"
 
 #. settings-schema.json->section_fanSensors->title
 msgid "Fan sensors"
@@ -430,7 +430,7 @@ msgstr ""
 #. settings-schema.json->show_volt_name->description
 #. settings-schema.json->show_intrusion_name->description
 msgid "Display the 'Shown name' of each of these selected sensors"
-msgstr "A „Név megjelenítése” elem megjelenítése a kiválasztott szenzorokhoz"
+msgstr "A „Megjelenített név” elem megjelenítése a kiválasztott szenzorokhoz"
 
 #. settings-schema.json->show_temp_name->tooltip
 #. settings-schema.json->show_fan_name->tooltip
@@ -439,8 +439,8 @@ msgid ""
 "Whether or not to display into this applet label the 'Shown name' of the "
 "sensors selected in the list below. Without effect in vertical panels."
 msgstr ""
-"Megjeleníti-e az alábbi listában kiválasztott érzékelőkhöz a „Név "
-"megjelenítése” elemet vagy sem. Nincs hatással a függőleges panelekre."
+"Megjeleníti-e az alábbi listában kiválasztott érzékelőkhöz a „Megjelenített "
+"név” elemet vagy sem. Nincs hatással a függőleges panelekre."
 
 #. settings-schema.json->strictly_positive_temp->description
 #. settings-schema.json->strictly_positive_fan->description
@@ -507,7 +507,7 @@ msgid ""
 "Sensor name\n"
 "(Do not modify!)"
 msgstr ""
-"Szenzor neve\n"
+"Érzékelő neve\n"
 "(Ezt ne változtassa meg!)"
 
 #. settings-schema.json->temp_sensors->columns->title
@@ -535,24 +535,56 @@ msgstr ""
 "az eszköztippekben"
 
 #. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+msgid "Shown name"
+msgstr "Megjelenített név"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid ""
+"High\n"
+"(°C)"
+msgstr ""
+"Magas\n"
+"(°C)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid ""
+"Critical\n"
+"(°C)"
+msgstr ""
+"Kritikus\n"
+"(°C)"
+
+#. settings-schema.json->temp_sensors->columns->title
 #. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
-#. settings-schema.json->intrusion_sensors->columns->title
-msgid "Shown name"
-msgstr "Név megjelenítése"
+msgid "Formula"
+msgstr "Képlet"
 
 #. settings-schema.json->temp_sensors->tooltip
-#. settings-schema.json->fan_sensors->tooltip
-#. settings-schema.json->volt_sensors->tooltip
-#. settings-schema.json->intrusion_sensors->tooltip
 msgid ""
-"Double-click on a line to change Shown name.\n"
-"To reset a Shown name, copy/paste the Sensor name."
+"Double-click on a line to change 'Shown name', 'High', 'Critical' or "
+"'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'High' and 'Critical' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
 msgstr ""
-"Kattintson duplán egy sorra a megjelenített név módosításához.\n"
-"A megjelenített név visszaállításához másolja és illessze be az érzékelő "
-"nevét."
+"Kattints duplán egy sorra a „Megjelenített név”, a „Magas”, a „Kritikus” "
+"vagy a „Képlet” módosításához.\n"
+"A „Megjelenített név” alaphelyzetbe állításához másolja és illessze be az "
+"„Érzékelő neve” értékét.\n"
+"A „Magas” és a „Kritikus” értékeknek megadása nem kötelező, amennyiben "
+"megadja, akkor érvényes számoknak kell lenniük.\n"
+"„Képelt” megadása (nem kötelező):\n"
+" Használja a $ jelet a szenzor által visszaadott érték helyettesítésére.\n"
+" Használhatsz a 4 alapműveletet (+-*/), valamint zárójeleket.\n"
+" Példa: $*1.1+0.5"
 
 #. settings-schema.json->btn_renew_disks_list->description
 msgid "Renew the list of known disks"
@@ -563,12 +595,12 @@ msgid "Disk name"
 msgstr "Lemeznév"
 
 #. settings-schema.json->temp_disks->columns->title
-msgid "High °C"
-msgstr "Magas °C"
-
-#. settings-schema.json->temp_disks->columns->title
-msgid "Critical °C"
-msgstr "Kritikus °C"
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid ""
+"Shown\n"
+"name"
+msgstr "Név megjelenítése"
 
 #. settings-schema.json->temp_disks->tooltip
 msgid ""
@@ -584,6 +616,35 @@ msgstr ""
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
 msgstr "\"Fordulat per perc\" rövidítése"
+
+#. settings-schema.json->fan_sensors->columns->title
+msgid ""
+"Min\n"
+"(rpm)"
+msgstr ""
+"Alacsony\n"
+"(rpm)"
+
+#. settings-schema.json->fan_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' (optional) must be valid number.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Kattints duplán egy sorra a „Megjelenített név”, a „Alacsony” vagy a "
+"„Képlet” módosításához.\n"
+"A „Megjelenített név\" alaphelyzetbe állításához másolja és illessze be az "
+"„Érzékelő neve” értékét.\n"
+"Az „Alacsony” érték megadása nem kötelező, amennyiben megadja, akkor "
+"érvényes számoknak kell lenniük.\n"
+"„Képelt” megadása (nem kötelező):\n"
+" Használja a $ jelet a szenzor által visszaadott érték helyettesítésére.\n"
+" Használhatsz a 4 alapműveletet (+-*/), valamint zárójeleket.\n"
+" Példa: $*1.1+0.5"
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -601,17 +662,63 @@ msgstr "Csak V"
 msgid "mV only"
 msgstr "Csak mV"
 
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Min\n"
+"(V)"
+msgstr ""
+"Alacsony\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Max\n"
+"(V)"
+msgstr ""
+"Magas\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min', 'Max' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' and 'Max' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Kattints duplán egy sorra a „Megjelenített név”, a „Alacsony”, a „Magas” "
+"vagy a „Képlet” módosításához.\n"
+"A „Megjelenített név” alaphelyzetbe állításához másolja és illessze be az "
+"„Érzékelő neve” értékét.\n"
+"Az „Alacsony” és a „Magas” értékeknek megadása nem kötelező, amennyiben "
+"megadja, akkor érvényes számoknak kell lenniük.\n"
+"„Képelt” megadása (nem kötelező):\n"
+" Használja a $ jelet a szenzor által visszaadott érték helyettesítésére.\n"
+" Használhatsz a 4 alapműveletet (+-*/), valamint zárójeleket.\n"
+" Példa: $*1.1+0.5"
+
 #. settings-schema.json->show_intrusion_name->tooltip
 msgid ""
 " Whether or not to display into this applet label the 'Shown name' of the "
 "sensors selected in the list below. Without effect in vertical panels."
 msgstr ""
-" Megjeleníti-e az alábbi listában kiválasztott érzékelőkhöz a „Név "
-"megjelenítése” elemet vagy sem. Nincs hatással a függőleges panelekre."
+" Megjeleníti-e az alábbi listában kiválasztott érzékelőkhöz a „Megjelenített "
+"név” elemet vagy sem. Nincs hatással a függőleges panelekre."
 
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
 msgstr "Csak akkor jelenjen meg a panelen, ha behatolást észleltek"
+
+#. settings-schema.json->intrusion_sensors->tooltip
+msgid ""
+"Double-click on a line to change Shown name.\n"
+"To reset a Shown name, copy/paste the Sensor name."
+msgstr ""
+"Kattintson duplán egy sorra a „Megjelenített név” módosításához.\n"
+"A megjelenített név visszaállításához másolja és illessze be az „Érzékelő "
+"neve” értékét."
 
 #. settings-schema.json->report->description
 msgid "Example of sensor values from this computer"
@@ -628,3 +735,6 @@ msgstr "Megjelenítés frissítése"
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Távolítsa el a panelről a temperature@fevimu kisalkalmazást"
+
+#~ msgid "Temperature scripts"
+#~ msgstr "Hőmérséklet parancsfájlok"

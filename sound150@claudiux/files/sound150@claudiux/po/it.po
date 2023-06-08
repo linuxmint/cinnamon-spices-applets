@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sound150@claudiux v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-31 22:37+0200\n"
-"PO-Revision-Date: 2022-12-26 15:25-0500\n"
+"PO-Revision-Date: 2023-03-29 16:48+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -16,22 +16,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: 5.4/applet.js:73 4.4/applet.js:72 4.6/applet.js:73 3.4/applet.js:65
 #: 2.8/applet.js:65
 msgid "Playing"
-msgstr ""
+msgstr "Riproducendo"
 
 #: 5.4/applet.js:74 4.4/applet.js:73 4.6/applet.js:74 3.4/applet.js:66
 #: 2.8/applet.js:66
 msgid "Paused"
-msgstr ""
+msgstr "In pausa"
 
 #: 5.4/applet.js:75 4.4/applet.js:74 4.6/applet.js:75 3.4/applet.js:67
 #: 2.8/applet.js:67
 msgid "Stopped"
-msgstr ""
+msgstr "Interrotto"
 
 #: 5.4/applet.js:587 5.4/applet.js:757 5.4/applet.js:760 5.4/applet.js:763
 #: 5.4/applet.js:1404 4.4/applet.js:591 4.4/applet.js:723 4.4/applet.js:727
@@ -39,129 +39,129 @@ msgstr ""
 #: 3.4/applet.js:766 3.4/applet.js:770 2.8/applet.js:529 2.8/applet.js:761
 #: 2.8/applet.js:765
 msgid "Unknown Artist"
-msgstr ""
+msgstr "Artista Sconosciuto"
 
 #: 5.4/applet.js:588 5.4/applet.js:770 4.4/applet.js:592 4.4/applet.js:734
 #: 4.6/applet.js:593 4.6/applet.js:730 3.4/applet.js:535 3.4/applet.js:777
 #: 2.8/applet.js:530 2.8/applet.js:772
 msgid "Unknown Album"
-msgstr ""
+msgstr "Album Sconosciuto"
 
 #: 5.4/applet.js:589 5.4/applet.js:775 5.4/applet.js:1407 4.4/applet.js:593
 #: 4.4/applet.js:739 4.6/applet.js:594 4.6/applet.js:735 3.4/applet.js:536
 #: 3.4/applet.js:782 2.8/applet.js:531 2.8/applet.js:777
 msgid "Unknown Title"
-msgstr ""
+msgstr "Titolo Sconosciuto"
 
 #: 5.4/applet.js:611 4.4/applet.js:615 4.6/applet.js:616 3.4/applet.js:557
 #: 2.8/applet.js:552
 msgid "Previous"
-msgstr ""
+msgstr "Precedente"
 
 #: 5.4/applet.js:614 5.4/applet.js:845 5.4/applet.js:851 4.4/applet.js:618
 #: 4.4/applet.js:794 4.4/applet.js:800 4.6/applet.js:619 4.6/applet.js:790
 #: 4.6/applet.js:796 3.4/applet.js:560 3.4/applet.js:842 3.4/applet.js:848
 #: 2.8/applet.js:555 2.8/applet.js:837 2.8/applet.js:843
 msgid "Play"
-msgstr ""
+msgstr "Play"
 
 #: 5.4/applet.js:617 4.4/applet.js:621 4.6/applet.js:622 3.4/applet.js:563
 #: 2.8/applet.js:558
 msgid "Stop"
-msgstr ""
+msgstr "Ferma"
 
 #: 5.4/applet.js:620 4.4/applet.js:624 4.6/applet.js:625 3.4/applet.js:566
 #: 2.8/applet.js:561
 msgid "Next"
-msgstr ""
+msgstr "Successivo"
 
 #: 5.4/applet.js:634 5.4/applet.js:877 4.4/applet.js:634 4.4/applet.js:824
 #: 4.6/applet.js:635 4.6/applet.js:822 3.4/applet.js:577 3.4/applet.js:872
 #: 2.8/applet.js:572 2.8/applet.js:867
 msgid "Consecutive Playing"
-msgstr ""
+msgstr "Riproduzione Consecutiva"
 
 #: 5.4/applet.js:637 5.4/applet.js:893 4.4/applet.js:641 4.4/applet.js:838
 #: 4.6/applet.js:638 4.6/applet.js:838 3.4/applet.js:584 3.4/applet.js:886
 #: 2.8/applet.js:579 2.8/applet.js:881
 msgid "No Shuffle"
-msgstr ""
+msgstr "Non Mescolare"
 
 #: 5.4/applet.js:684 4.4/applet.js:557 4.6/applet.js:558 3.4/applet.js:500
 #: 2.8/applet.js:495
 msgid "Open Player"
-msgstr ""
+msgstr "Apri Player"
 
 #: 5.4/applet.js:698 4.4/applet.js:570 4.6/applet.js:571 3.4/applet.js:513
 #: 2.8/applet.js:508
 msgid "Quit Player"
-msgstr ""
+msgstr "Chiudi Player"
 
 #: 5.4/applet.js:839 4.4/applet.js:788 4.6/applet.js:784 3.4/applet.js:836
 #: 2.8/applet.js:831
 msgid "Pause"
-msgstr ""
+msgstr "Pausa"
 
 #: 5.4/applet.js:879 4.4/applet.js:826 4.6/applet.js:824 3.4/applet.js:874
 #: 2.8/applet.js:869
 msgid "Repeat Single"
-msgstr ""
+msgstr "Ripeti Singolo"
 
 #: 5.4/applet.js:881 4.4/applet.js:828 4.6/applet.js:826 3.4/applet.js:876
 #: 2.8/applet.js:871
 msgid "Repeat All"
-msgstr ""
+msgstr "Ripeti Tutti"
 
 #: 5.4/applet.js:893 4.4/applet.js:838 4.6/applet.js:838 3.4/applet.js:886
 #: 2.8/applet.js:881
 msgid "Shuffle"
-msgstr ""
+msgstr "Mescola"
 
 #: 5.4/applet.js:1100 4.4/applet.js:1019 4.6/applet.js:1027 3.4/applet.js:1184
 #: 2.8/applet.js:1262
 msgid "Mute output"
-msgstr ""
+msgstr "Muta uscita"
 
 #: 5.4/applet.js:1101 4.4/applet.js:1020 4.6/applet.js:1028 3.4/applet.js:1185
 #: 2.8/applet.js:1263
 msgid "Mute input"
-msgstr ""
+msgstr "Muta ingresso"
 
 #: 5.4/applet.js:1108 4.4/applet.js:1026 4.6/applet.js:1034 3.4/applet.js:1191
 #: 2.8/applet.js:1269
 msgid "Applications"
-msgstr ""
+msgstr "Applicazioni"
 
 #: 5.4/applet.js:1109 4.4/applet.js:1027 4.6/applet.js:1035 3.4/applet.js:1192
 #: 2.8/applet.js:1270
 msgid "Output device"
-msgstr ""
+msgstr "Dispositivo di uscita"
 
 #: 5.4/applet.js:1116 4.4/applet.js:1034 4.6/applet.js:1042 3.4/applet.js:1199
 #: 2.8/applet.js:1277
 msgid "Microphone"
-msgstr ""
+msgstr "Microfono"
 
 #: 5.4/applet.js:1118 4.4/applet.js:1036 4.6/applet.js:1044 3.4/applet.js:1202
 #: 2.8/applet.js:1280
 msgid "Input device"
-msgstr ""
+msgstr "Dispositivo di ingresso"
 
 #: 5.4/applet.js:1397 5.4/applet.js:1536 4.4/applet.js:1403 4.4/applet.js:1497
 #: 4.6/applet.js:1420 4.6/applet.js:1515 3.4/applet.js:1577 3.4/applet.js:1662
 #: 2.8/applet.js:1650 2.8/applet.js:1735
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 #: 5.4/applet.js:1525 4.4/applet.js:1397 4.6/applet.js:1409 3.4/applet.js:1571
 #: 2.8/applet.js:1644
 msgid "Launch player"
-msgstr ""
+msgstr "Avvia player"
 
 #: 5.4/applet.js:1530 4.4/applet.js:1392 4.6/applet.js:1414 3.4/applet.js:1566
 #: 2.8/applet.js:1639
 msgid "Choose player controls"
-msgstr ""
+msgstr "Scegli i controlli del player"
 
 #. 5.4->settings-schema.json->section4->description
 #. 4.4->settings-schema.json->section3->description
@@ -170,7 +170,7 @@ msgstr ""
 #: 5.4/applet.js:1542 4.4/applet.js:1409 4.6/applet.js:1426 3.4/applet.js:1584
 #: 2.8/applet.js:1657
 msgid "Sound Settings"
-msgstr ""
+msgstr "Impostazioni del Suono"
 
 #. metadata.json->name
 msgid "Sound 150%"
@@ -189,7 +189,7 @@ msgstr ""
 #. 4.6->settings-schema.json->section1->description
 #. 3.4->settings-schema.json->section1->description
 msgid "Menu"
-msgstr ""
+msgstr "Menù"
 
 #. 5.4->settings-schema.json->playerControl->description
 #. 4.4->settings-schema.json->playerControl->description
@@ -197,7 +197,7 @@ msgstr ""
 #. 3.4->settings-schema.json->playerControl->description
 #. 2.8->settings-schema.json->playerControl->description
 msgid "Control Players"
-msgstr ""
+msgstr "Controlli Player"
 
 #. 5.4->settings-schema.json->extendedPlayerControl->description
 #. 4.4->settings-schema.json->extendedPlayerControl->description
@@ -205,7 +205,7 @@ msgstr ""
 #. 3.4->settings-schema.json->extendedPlayerControl->description
 #. 2.8->settings-schema.json->extendedPlayerControl->description
 msgid "Show Loop and Shuffle controls"
-msgstr ""
+msgstr "Mostra controlli Ripetizione e Mescolamento"
 
 #. 5.4->settings-schema.json->keyOpen->description
 #. 4.6->settings-schema.json->keyOpen->description
@@ -223,7 +223,7 @@ msgstr ""
 #. 4.6->settings-schema.json->section2->description
 #. 3.4->settings-schema.json->section2->description
 msgid "Panel"
-msgstr ""
+msgstr "Pannello"
 
 #. 5.4->settings-schema.json->showtrack->description
 #. 4.4->settings-schema.json->showtrack->description
@@ -231,7 +231,7 @@ msgstr ""
 #. 3.4->settings-schema.json->showtrack->description
 #. 2.8->settings-schema.json->showtrack->description
 msgid "Show song information on the panel"
-msgstr ""
+msgstr "Mostra informazioni brano sul pannello"
 
 #. 5.4->settings-schema.json->truncatetext->units
 #. 4.4->settings-schema.json->truncatetext->units
@@ -239,7 +239,7 @@ msgstr ""
 #. 3.4->settings-schema.json->truncatetext->units
 #. 2.8->settings-schema.json->truncatetext->units
 msgid "characters"
-msgstr ""
+msgstr "caratteri"
 
 #. 5.4->settings-schema.json->truncatetext->description
 #. 4.4->settings-schema.json->truncatetext->description
@@ -247,7 +247,7 @@ msgstr ""
 #. 3.4->settings-schema.json->truncatetext->description
 #. 2.8->settings-schema.json->truncatetext->description
 msgid "Limit song information to"
-msgstr ""
+msgstr "Limita le informazioni sul brano a"
 
 #. 5.4->settings-schema.json->middleClickAction->options
 #. 4.4->settings-schema.json->middleClickAction->options
@@ -255,19 +255,19 @@ msgstr ""
 #. 3.4->settings-schema.json->middleClickAction->options
 #. 2.8->settings-schema.json->middleClickAction->options
 msgid "Toggle Mute"
-msgstr ""
+msgstr "Disattiva Muto"
 
 #. 5.4->settings-schema.json->middleClickAction->options
 #. 4.4->settings-schema.json->middleClickAction->options
 #. 4.6->settings-schema.json->middleClickAction->options
 msgid "Toggle Mute output"
-msgstr ""
+msgstr "Disattiva Muta uscita"
 
 #. 5.4->settings-schema.json->middleClickAction->options
 #. 4.4->settings-schema.json->middleClickAction->options
 #. 4.6->settings-schema.json->middleClickAction->options
 msgid "Toggle Mute input"
-msgstr ""
+msgstr "Disattiva Muta ingresso"
 
 #. 5.4->settings-schema.json->middleClickAction->options
 #. 4.4->settings-schema.json->middleClickAction->options
@@ -275,7 +275,7 @@ msgstr ""
 #. 3.4->settings-schema.json->middleClickAction->options
 #. 2.8->settings-schema.json->middleClickAction->options
 msgid "Toggle Play / Pause"
-msgstr ""
+msgstr "Disattiva Riproduzione / Pausa"
 
 #. 5.4->settings-schema.json->middleClickAction->description
 #. 4.4->settings-schema.json->middleClickAction->description
@@ -283,13 +283,13 @@ msgstr ""
 #. 3.4->settings-schema.json->middleClickAction->description
 #. 2.8->settings-schema.json->middleClickAction->description
 msgid "Action on middle click"
-msgstr ""
+msgstr "Azione al clic centrale"
 
 #. 5.4->settings-schema.json->horizontalScroll->description
 #. 4.4->settings-schema.json->horizontalScroll->description
 #. 4.6->settings-schema.json->horizontalScroll->description
 msgid "Use horizontal scrolling to move between tracks"
-msgstr ""
+msgstr "Usa scrolling orizzontale per spostarti tra i brani"
 
 #. 5.4->settings-schema.json->showalbum->description
 #. 4.4->settings-schema.json->showalbum->description
@@ -297,13 +297,13 @@ msgstr ""
 #. 3.4->settings-schema.json->showalbum->description
 #. 2.8->settings-schema.json->showalbum->description
 msgid "Show album art as icon"
-msgstr ""
+msgstr "Mostra la copertina dell'album come icona"
 
 #. 5.4->settings-schema.json->keepAlbumAspectRatio->description
 #. 4.4->settings-schema.json->keepAlbumAspectRatio->description
 #. 4.6->settings-schema.json->keepAlbumAspectRatio->description
 msgid "Keep album art aspect ratio"
-msgstr ""
+msgstr "Mantieni le proporzioni della copertina dell'album"
 
 #. 5.4->settings-schema.json->hideSystray->description
 #. 4.4->settings-schema.json->hideSystray->description
@@ -311,23 +311,23 @@ msgstr ""
 #. 3.4->settings-schema.json->hideSystray->description
 #. 2.8->settings-schema.json->hideSystray->description
 msgid "Hide system tray icons for compatible players"
-msgstr ""
+msgstr "Nascondi icone nella tray di sistema per i player compatibili"
 
 #. 5.4->settings-schema.json->section3->description
 msgid "Tooltip"
-msgstr ""
+msgstr "Tooltip"
 
 #. 5.4->settings-schema.json->tooltipShowVolume->description
 msgid "Show volume in tooltip"
-msgstr ""
+msgstr "Mostra il volume nel tooltip"
 
 #. 5.4->settings-schema.json->tooltipShowPlayer->description
 msgid "Show player in tooltip"
-msgstr ""
+msgstr "Mostra il player nel tooltip"
 
 #. 5.4->settings-schema.json->tooltipShowArtistTitle->description
 msgid "Show song artist and title in tooltip"
-msgstr ""
+msgstr "Mostra artista e titolo del brano nel tooltip"
 
 #. 5.4->settings-schema.json->setAmplification->description
 #. 4.4->settings-schema.json->setAmplification->description
@@ -440,13 +440,16 @@ msgstr ""
 
 #. 3.4->settings-schema.json->alwaysShowInput->description
 msgid "Always show input controls"
-msgstr ""
+msgstr "Mostra sempre i controlli di input"
 
 #. 3.4->settings-schema.json->alwaysShowInput->tooltip
 msgid ""
 "When checked, input volume and source controls are always shown, even if no "
 "application is currently recording sound."
 msgstr ""
+"Se selezionato, il volume di ingresso e i controlli dell'input vengono "
+"sempre visualizzati, anche se nessuna applicazione sta attualmente "
+"registrando audio."
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options

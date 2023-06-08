@@ -206,7 +206,8 @@
       "type": "section",
       "title": "Volume step",
       "keys": [
-        "volume-step"
+        "volume-step",
+        "volume-show-osd"
       ]
     },
     "sectionBehaviorTooltip": {
@@ -248,7 +249,10 @@
       "keys": [
         "shortcut-volume-up",
         "shortcut-volume-down",
-        "shortcut-volume-cut"
+        "shortcut-volume-cut",
+        "shortcut-radio-on-off",
+        "shortcut-next-recent-radio",
+        "shortcut-previous-recent-radio"
       ]
     },
     "sectionBehaviorNotifications": {
@@ -274,7 +278,8 @@
       "keys": [
         "color-on",
         "color-off",
-        "color-recording"
+        "color-recording",
+        "show-favicon"
       ]
     },
     "sectionNetworkQuality": {
@@ -355,6 +360,7 @@
         "recordings-extract-url",
         "recordings-paste-button",
         "recordings-yesno-playlist",
+        "recordings-keep-video",
         "recordings-subdirectory",
         "recordings-extract-button",
         "recordings-extract-update"
@@ -463,6 +469,12 @@
       {
         "id": "tags",
         "title": "Tags",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "favicon",
+        "title": "Favicon",
         "type": "string",
         "default": ""
       }
@@ -717,6 +729,12 @@
         "id": "homepage",
         "title": "Home page",
         "type": "string"
+      },
+      {
+        "id": "favicon",
+        "title": "Favicon",
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
@@ -809,6 +827,12 @@
     },
     "tooltip": "By how much increase or decrease the volume using the mouse scroll wheel on the icon."
   },
+  "volume-show-osd": {
+    "type": "switch",
+    "default": true,
+    "description": "Show OSD while changing volume",
+    "tooltip": "Should OSD (On-Screen Display) be displayed when changing volume?"
+  },
   "show-title-and-version": {
     "type": "switch",
     "default": true,
@@ -874,6 +898,23 @@
     "description": "Mute",
     "default": ""
   },
+  "shortcut-radio-on-off": {
+    "type": "keybinding",
+    "description": "Radio ON/OFF",
+    "default": ""
+  },
+  "shortcut-next-recent-radio": {
+    "type": "keybinding",
+    "description": "Next station",
+    "tooltip": "Next station recently listened to",
+    "default": ""
+  },
+  "shortcut-previous-recent-radio": {
+    "type": "keybinding",
+    "description": "Previous station",
+    "tooltip": "Previous station recently listened to",
+    "default": ""
+  },
   "show-help-in-tooltip": {
     "type": "switch",
     "default": true,
@@ -933,6 +974,12 @@
     "type": "colorchooser",
     "default": "rgb(204,0,0)",
     "description": "Color of the symbolic icon while recording"
+  },
+  "show-favicon": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the logo of the radio station listened to",
+    "tooltip": "Replace this applet icon with the radio station logo, if it exists."
   },
   "network-quality": {
     "type": "combobox",
@@ -1100,6 +1147,12 @@
       "Extract single soundtrack": " --no-playlist",
       "Extract whole playlist": " --yes-playlist"
     }
+  },
+  "recordings-keep-video": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep video (slower)",
+    "tooltip": "Whether or not to keep the intermediate video file on disk after post-processing"
   },
   "recordings-subdirectory": {
     "type": "entry",

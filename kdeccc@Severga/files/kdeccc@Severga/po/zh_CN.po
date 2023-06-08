@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-07 21:48+0300\n"
+"PO-Revision-Date: 2023-03-16 14:57+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: applet.js:60
+msgid "Configure KDE Connect"
+msgstr "配置 KDE Connect"
+
+#: applet.js:111
+msgid "No reachable paired devices"
+msgstr "没有可连接的已配对设备"
+
+#: applet.js:122
+msgid "Id:  "
+msgstr "Id:  "
+
+#: applet.js:123
+msgid "    Send Ping to"
+msgstr "    发送 Ping 到"
+
+#: applet.js:124
+msgid "    Force to Ring"
+msgstr "    强制响铃"
+
+#: applet.js:125
+msgid "    Send File to..."
+msgstr "    发送文件到..."
+
+#: applet.js:130
+msgid "    Send SMS via..."
+msgstr "    通过...发送短信"
+
+#: applet.js:133
+msgid "Enter the phone number of your SMS's addressee:"
+msgstr "输入短信收件人的电话号码："
+
+#: applet.js:136
+msgid "Enter the text of your SMS:"
+msgstr "输入您的短信内容："
+
+#: applet.js:137
+msgid "...message body..."
+msgstr "...消息正文..."
+
+#: applet.js:139
+msgid "Press <"
+msgstr "按 <"
+
+#: applet.js:139 applet.js:149
+msgid "Yes"
+msgstr "确定"
+
+#: applet.js:139
+msgid "> if you are ready to send your SMS, or <"
+msgstr "> 如果您已经准备好发送您的短信，或者 <"
+
+#: applet.js:139 applet.js:143
+msgid "Cancel"
+msgstr "取消"
+
+#: applet.js:139
+msgid "> to avoid sending."
+msgstr "> 以避免发送。"
+
+#: applet.js:158
+msgid "    Mount and Explore"
+msgstr "    挂载和浏览"
+
+#: applet.js:182
+msgid "    Unmount"
+msgstr "    卸载"
+
+#: applet.js:202
+msgid "Reachable paired devices: "
+msgstr "可连接的已配对设备："
+
+#. metadata.json->name
+msgid "KDE Connect Control Center"
+msgstr "KDE Connect 控制中心"
+
+#. metadata.json->description
+msgid "Applet to provide access to some KDE Connect functionality"
+msgstr "提供访问一些 KDE Connect 功能的小程序"

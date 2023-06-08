@@ -1,0 +1,131 @@
+{
+    "header": {
+        "type": "header",
+        "description": "Framework FanCTRL - Fan Strategy Control Applet for Cinnamon \n\nList of valid strategies:"
+    },
+
+    "strategies" : ["sleep", "lazyest", "lazy", "medium", "agile", "very-agile", "deaf", "aeolus"],
+
+    "sleep-label": {
+        "type": "header",
+        "description": "Sleep"
+    },
+    "sleep": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Visible"
+    },
+    "sleep-icon": {
+        "type": "iconfilechooser",
+        "default": "dialog-warning",
+        "description": "Icon for 'Sleep'"
+    },
+
+
+    "lazyest-label": {
+        "type": "header",
+        "description": "Laziest"
+    },
+    "lazyest": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Visible"
+    },
+    "lazyest-icon": {
+        "type": "iconfilechooser",
+        "default": "weather-clear-night",
+        "description": "Icon for 'Laziest'"
+    },
+
+    "lazy-label": {
+        "type": "header",
+        "description": "Lazy"
+    },
+    "lazy": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Visible"
+    },
+    "lazy-icon": {
+        "type": "iconfilechooser",
+        "default": "weather-clear-night",
+        "description": "Icon for 'Lazy'"
+    },
+
+    "medium-label": {
+        "type": "header",
+        "description": "Medium"
+    },
+
+    "medium": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Visible"
+    },
+    "medium-icon": {
+        "type": "iconfilechooser",
+        "default": "computer",
+        "description": "Icon for 'Medium'"
+    },
+
+    "agile-label": {
+        "type": "header",
+        "description": "Agile"
+    },
+    "agile": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Visible"
+    },
+    "agile-icon": {
+        "type": "iconfilechooser",
+        "default": "computer",
+        "description": "Icon for 'Agile'"
+    },
+
+    "very-agile-label": {
+        "type": "header",
+        "description": "Very Agile"
+    },
+    "very-agile": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Visible"
+    },
+    "very-agile-icon": {
+        "type": "iconfilechooser",
+        "default": "compile",
+        "description": "Icon for 'Very Agile'"
+    },
+
+    "deaf-label": {
+        "type": "header",
+        "description": "Deaf"
+    },
+    "deaf": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Visible"
+    },
+    "deaf-icon": {
+        "type": "iconfilechooser",
+        "default": "weather-windy",
+        "description": "Icon for 'Deaf'"
+    },
+
+    "aeolus-label": {
+        "type": "header",
+        "description": "Aeolus"
+    },
+    "aeolus": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Visible"
+    },
+    "aeolus-icon": {
+        "type": "iconfilechooser",
+        "default": "weather-windy",
+        "description": "Icon for 'Aeolus'"
+    }
+}
+

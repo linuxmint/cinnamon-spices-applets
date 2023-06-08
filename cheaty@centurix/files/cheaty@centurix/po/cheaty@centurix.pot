@@ -8,51 +8,79 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-25 08:50+0800\n"
+"POT-Creation-Date: 2023-04-27 13:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:53
+#: applet.js:87
 msgid "version"
 msgstr ""
 
-#: applet.js:53
+#: applet.js:87
 msgid "Author:"
 msgstr ""
 
-#: applet.js:53
+#: applet.js:87
 msgid "Email:"
 msgstr ""
 
-#: applet.js:53
+#: applet.js:87
 msgid "Repository:"
 msgstr ""
 
-#: applet.js:124
+#: applet.js:157
 msgid "Cheaty: Easy access cheatsheets"
 msgstr ""
 
-#: applet.js:209
+#: applet.js:307
 msgid "Configure..."
 msgstr ""
 
-#: applet.js:223
+#: applet.js:321
 msgid "Code copied to the clipboard"
 msgstr ""
 
-#. cheaty@centurix->metadata.json->description
+#. metadata.json->description
 msgid "An applet to provide quick access to a variety of cheat sheets."
 msgstr ""
 
-#. cheaty@centurix->metadata.json->name
+#. metadata.json->name
 msgid "Cheaty - Cheatsheet keeper"
 msgstr ""
 
-#. cheaty@centurix->settings-schema.json->cheatsheetFolder->description
+#. settings-schema.json->cheatsheetFolder->description
 msgid "cheatsheetFolder"
+msgstr ""
+
+#. settings-schema.json->keyOpen->description
+msgid "Show Cheaty popup menu"
+msgstr ""
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the Cheaty popup menu."
+msgstr ""
+
+#. settings-schema.json->cheatsheets->description
+msgid "Cheat sheet selector"
+msgstr ""
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Enabled"
+msgstr ""
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Description"
+msgstr ""
+
+#. settings-schema.json->cheatsheets->columns->title
+msgid "Author"
 msgstr ""

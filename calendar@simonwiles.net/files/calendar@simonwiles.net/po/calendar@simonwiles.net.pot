@@ -8,106 +8,110 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-20 01:51+0800\n"
+"POT-Creation-Date: 2023-04-26 22:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:27
+#: applet.js:35
 msgid "%l:%M %p"
 msgstr ""
 
-#: applet.js:132
+#: applet.js:143
 msgid "%A %B %e, %Y"
 msgstr ""
 
-#: applet.js:277
+#: applet.js:333
 msgid "Edit World Clocks"
 msgstr ""
 
-#: applet.js:279
+#: applet.js:335
 msgid "Date and Time Settings"
 msgstr ""
 
-#: world_clock_calendar_settings.py:76
+#: world_clock_calendar_settings.py:78
 msgid "Display Name"
 msgstr ""
 
-#: world_clock_calendar_settings.py:88
+#: world_clock_calendar_settings.py:90
 msgid "Timezone"
 msgstr ""
 
-#: world_clock_calendar_settings.py:126
+#: world_clock_calendar_settings.py:128
 msgid "Time format for World Clocks"
 msgstr ""
 
-#: world_clock_calendar_settings.py:135
+#: world_clock_calendar_settings.py:137
 msgid "Browse valid timezone values by country (online)"
 msgstr ""
 
-#: world_clock_calendar_settings.py:214
+#: world_clock_calendar_settings.py:216
 msgid "Coordinated Universal Time"
 msgstr ""
 
-#. calendar@simonwiles.net->metadata.json->name
+#. metadata.json->name
 msgid "World Clock Calendar"
 msgstr ""
 
-#. calendar@simonwiles.net->metadata.json->description
+#. metadata.json->description
 msgid ""
 "Fork of the Cinnamon calendar applet with support for displaying multiple "
 "timezones"
 msgstr ""
 
-#. calendar@simonwiles.net->settings-schema.json->custom-format->description
-msgid "Date format:"
-msgstr ""
-
-#. calendar@simonwiles.net->settings-schema.json->custom-format->tooltip
-msgid "Set your custom format here."
-msgstr ""
-
-#. calendar@simonwiles.net->settings-schema.json->header->description
-msgid "World-Clock Settings"
-msgstr ""
-
-#. calendar@simonwiles.net->settings-schema.json->show-week-
-#. numbers->description
+#. settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"
 msgstr ""
 
-#. calendar@simonwiles.net->settings-schema.json->show-week-numbers->tooltip
+#. settings-schema.json->show-week-numbers->tooltip
 msgid "Check this to show week numbers in the calendar."
 msgstr ""
 
-#. calendar@simonwiles.net->settings-schema.json->worldclock-setup-
-#. button->description
-msgid "Configure World-clocks"
-msgstr ""
-
-#. calendar@simonwiles.net->settings-schema.json->worldclock-setup-
-#. button->tooltip
-msgid "Add, remove and configure additional clocks and format."
-msgstr ""
-
-#. calendar@simonwiles.net->settings-schema.json->format-button->description
-msgid "Show information on date format syntax"
-msgstr ""
-
-#. calendar@simonwiles.net->settings-schema.json->format-button->tooltip
-msgid "Click this button to know more about the syntax for date formats."
-msgstr ""
-
-#. calendar@simonwiles.net->settings-schema.json->use-custom-
-#. format->description
+#. settings-schema.json->use-custom-format->description
 msgid "Use a custom date format"
 msgstr ""
 
-#. calendar@simonwiles.net->settings-schema.json->use-custom-format->tooltip
+#. settings-schema.json->use-custom-format->tooltip
 msgid ""
 "Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+
+#. settings-schema.json->custom-format->description
+msgid "Date format:"
+msgstr ""
+
+#. settings-schema.json->custom-format->tooltip
+msgid "Set your custom format here."
+msgstr ""
+
+#. settings-schema.json->format-button->description
+msgid "Show information on date format syntax"
+msgstr ""
+
+#. settings-schema.json->format-button->tooltip
+msgid "Click this button to know more about the syntax for date formats."
+msgstr ""
+
+#. settings-schema.json->keybindings->description
+msgid "Keybindings"
+msgstr ""
+
+#. settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr ""
+
+#. settings-schema.json->header->description
+msgid "World-Clock Settings"
+msgstr ""
+
+#. settings-schema.json->worldclock-setup-button->description
+msgid "Configure World-clocks"
+msgstr ""
+
+#. settings-schema.json->worldclock-setup-button->tooltip
+msgid "Add, remove and configure additional clocks and format."
 msgstr ""

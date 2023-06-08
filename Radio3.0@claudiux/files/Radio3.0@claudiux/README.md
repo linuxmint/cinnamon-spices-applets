@@ -35,6 +35,12 @@ With Radio3.0 you can:
 
 Details, help and FAQ can be found in the Manual.
 
+## Translations
+
+[Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/Radio3.0%40claudiux.md#)
+
+
+
 
 
 

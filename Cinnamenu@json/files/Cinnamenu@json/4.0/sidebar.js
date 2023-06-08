@@ -13,7 +13,8 @@ const { _,
         getThumbnail_gicon,
         showTooltip,
         hideTooltipIfVisible,
-        scrollToButton} = require('./utils');
+        scrollToButton,
+        log} = require('./utils');
 const SidebarPlacement = Object.freeze({ TOP: 0, BOTTOM: 1, LEFT: 2, RIGHT: 3});
 const DescriptionPlacement = Object.freeze({TOOLTIP: 0, UNDER: 1, NONE: 2});
 
@@ -115,7 +116,7 @@ class SidebarButton {
 
     openContextMenu(e) {
         hideTooltipIfVisible();
-        this.appThis.display.contextMenu.open(this.app, e, this.actor);
+        this.appThis.display.contextMenu.openApp(this.app, e, this.actor);
     }
 
     handleEnter(actor, event) {
@@ -168,6 +169,31 @@ class SidebarButton {
     }
 }
 
+class Separator { //creates a faint line (St.BoxLayout) used to separate items on the sidebar
+    constructor (appThis) {
+        this.appThis = appThis;
+        this.separator = new St.BoxLayout({x_expand: false, y_expand: false});
+
+        const getThemeForegroundColor = () => {
+            return this.appThis.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
+        }
+
+        let width = this.appThis.settings.sidebarIconSize + 8;
+        let height = 2;
+        if (this.appThis.settings.sidebarPlacement === SidebarPlacement.TOP ||
+                                        this.appThis.settings.sidebarPlacement === SidebarPlacement.BOTTOM) {
+            [width, height] = [height, width];
+        }
+        this.separator.style = `width: ${width}px; height: ${height}px; background-color: ${
+                    getThemeForegroundColor()}; margin: 1px; border: 0px; border-radius: 10px; `;
+        this.separator.set_opacity(35);
+    }
+
+    destroy() {
+        this.separator.destroy();
+    }
+}
+
 //Creates the sidebar. Creates SidebarButtons and populates the sidebar.
 class Sidebar {
     constructor (appThis) {
@@ -191,14 +217,22 @@ class Sidebar {
         const style_class = this.appThis.settings.useBoxStyle ? 'menu-favorites-box' : '';
         this.sidebarOuterBox = new St.BoxLayout({style_class: style_class});
         this.sidebarOuterBox.add(this.sidebarScrollBox, { });
-
-        this.separator = new St.BoxLayout({x_expand: false, y_expand: false});
     }
 
     populate () {
         this.innerBox.remove_all_children();
         this.items.forEach(item => item.destroy());
         this.items = [];
+        this.separator1Position = null;
+        this.separator2Position = null;
+        if (this.separator1) {
+            this.separator1.destroy();
+            this.separator1 = null;
+        }
+        if (this.separator2) {
+            this.separator2.destroy();
+            this.separator2 = null;
+        }
         //----add session buttons to this.items[]
         const newSidebarIcon = (iconName) => {
             return new St.Icon({
@@ -247,18 +281,25 @@ class Sidebar {
                 this.appThis.menu.close();
             }
         ));
-        //----add favorite apps and favorite files to this.items[]
+        //----add favorite apps to this.items[]
         if (this.appThis.settings.sidebarFavorites === 1 //Apps only
                     || this.appThis.settings.sidebarFavorites === 3) { // Apps and files
             this.appThis.listFavoriteApps().forEach(fav => {
+                if (!this.separator1Position) {
+                    this.separator1Position = this.items.length;
+                }
                 this.items.push(new SidebarButton( this.appThis,
                                 fav.create_icon_texture(this.appThis.settings.sidebarIconSize),
                                         fav, fav.name, fav.description, null));
             });
         }
+        //----add favorite files to this.items[]
         if (this.appThis.settings.sidebarFavorites === 2 //Files only
                     || this.appThis.settings.sidebarFavorites === 3) { // Apps and files
             this.appThis.listFavoriteFiles().forEach(fav => {
+                if (!this.separator2Position) {
+                    this.separator2Position = this.items.length;
+                }
                 let gicon = getThumbnail_gicon(fav.uri, fav.mimeType) || fav.gicon;
                 this.items.push(new SidebarButton( this.appThis,
                         new St.Icon({ gicon: gicon, icon_size: this.appThis.settings.sidebarIconSize}),
@@ -271,11 +312,29 @@ class Sidebar {
         if (reverseOrder) {
             this.items.reverse();
         }
+        
+        if (this.separator1Position) {
+            this.separator1 = new Separator(this.appThis);
+        }
+        if (this.separator2Position) {
+            this.separator2 = new Separator(this.appThis);
+        }
+        
         //----populate box with items[]
         for (let i = 0; i < this.items.length; i++) {
-            if ((reverseOrder && i == this.items.length - 3 && this.items.length > 3) ||
-                        (!reverseOrder && i === 3 && this.items.length > 3)){
-                this._addSeparator();
+            if (this.separator1Position && 
+                ((reverseOrder && i == this.items.length - this.separator1Position) ||
+                    (!reverseOrder && i === this.separator1Position))){
+                this.innerBox.add(this.separator1.separator, {x_fill: false, y_fill: false,
+                                                              x_align: St.Align.MIDDLE,
+                                                              y_align: St.Align.MIDDLE });
+            }
+            if (this.separator2Position && 
+                ((reverseOrder && i == this.items.length - this.separator2Position) ||
+                    (!reverseOrder && i === this.separator2Position))){
+                this.innerBox.add(this.separator2.separator, {x_fill: false, y_fill: false,
+                                                              x_align: St.Align.MIDDLE,
+                                                              y_align: St.Align.MIDDLE });
             }
             this.innerBox.add(this.items[i].actor, { x_fill: false, y_fill: false,
                                                 x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
@@ -287,24 +346,6 @@ class Sidebar {
     scrollToQuitButton() {
         //Scroll to quit button so that it's visible when the menu is opened.
         scrollToButton(this.items[this.items.length - 1], false);
-    }
-
-    _addSeparator() {
-        const getThemeForegroundColor = () => {
-            return this.appThis.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
-        }
-
-        this.innerBox.add(this.separator, { x_fill: false, y_fill: false, x_align: St.Align.MIDDLE,
-                                                                                y_align: St.Align.MIDDLE });
-        let width = this.appThis.settings.sidebarIconSize + 8;
-        let height = 2;
-        if (this.appThis.settings.sidebarPlacement === SidebarPlacement.TOP ||
-                                        this.appThis.settings.sidebarPlacement === SidebarPlacement.BOTTOM) {
-            [width, height] = [height, width];
-        }
-        this.separator.style = `width: ${width}px; height: ${height}px; background-color: ${
-                    getThemeForegroundColor()}; margin: 1px; border: 0px; border-radius: 10px; `;
-        this.separator.set_opacity(35);
     }
 
     getButtons() {
@@ -321,7 +362,12 @@ class Sidebar {
     destroy() {
         this.items.forEach(item => item.destroy());
         this.items = null;
-        this.separator.destroy();
+        if (this.separator1) {
+            this.separator1.destroy();
+        }
+        if (this.separator2) {
+            this.separator2.destroy();
+        }
         this.innerBox.destroy();
         this.sidebarScrollBox.destroy();
         this.sidebarOuterBox.destroy();

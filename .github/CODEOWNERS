@@ -10,6 +10,7 @@ CustomPlaces@Nicolas01/**                          @Nicolas01
 InternetTimeApplet@stefan/**                       @stefan12O
 Mint-Unsplash-Background@omidmaldar/**             @omidmaldar
 MuteToggler@jebeaudet.com/**                       @jebeaudet
+Radio3.0@claudiux/**                               @claudiux
 SW++@mohammad-sn/**                                @mohammad-sn
 ScreenLocker@tuuxx/**                              @tuuxx
 ScreenShot+RecordDesktop@tech71/**                 @icarter09
@@ -26,11 +27,12 @@ batterypower@joka42/**                             @joka42
 better-backgrounds@simonmicro/**                   @simonmicro
 bible@nodeengineer.com/**                          @nodeengineer
 bing-wallpaper@starcross.dev/**                    @Starcross
+bluetooth-battery@zamszowy/**                      @zamszowy
 bose@tuuxx/**                                      @tuuxx
 brightness-and-gamma-applet@cardsurf/**            @cardsurf
 bumblebee@pdcurtis/**                              @pdcurtis
+c-eyes@anaximeno/**                                @anaximeno
 calc-js@ptandler/**                                @ptandler
-calc@ptandler/**                                   @ptandler
 calendar@ccprog/**                                 @ccprog
 calendar@simonwiles.net/**                         @simonwiles
 cheaty@centurix/**                                 @centurix
@@ -51,8 +53,10 @@ devbar@ludvigbostrom/**                            @ludvigbostrom
 dgs-bpivaty@gmail.com/**                           @bpivaty
 disk-read-and-write-speed@cardsurf/**              @cardsurf
 download-and-upload-speed@cardsurf/**              @cardsurf
+duolingo-helper@nodeengineer.com/**                @nodeengineer
 expressvpn@Hukuta/**                               @Hukuta
 feeds@jonbrettdev.wordpress.com/**                 @jake1164
+gamemode@axel358/**                                @axel358
 github-projects@morgan-design.com/**               @jamesmorgan
 gmail@lauritsriple/**                              @lauritsriple
 gnote@brett-smith/**                               @brett-smith
@@ -62,6 +66,7 @@ graphicsCenter@scollins/**                         @collinss
 healthyeyes@ipolozov/**                            @ipolozov
 hideable-applets@cardsurf/**                       @cardsurf
 hwmonitor@sylfurd/**                               @hultan
+internet-indicator@sangorys/**                     @sangorys
 ioDisk@ctrlesc/**                                  @somboku
 ipindicator@matus.benko@gmail.com/**               @PrimaMateria
 jalalicalendar@mohammad-sn/**                      @mohammad-sn
@@ -71,7 +76,7 @@ kdeccc@Severga/**                                  @Severga
 localipswithsettings@edaubert/**                   @edaubert
 mailnagapplet@ozderya.net/**                       @hyOzd
 mem-monitor-text@datanom.net/**                    @icarter09
-multicore-sys-monitor@ccadeptic23/**               @jaszhix
+multicore-sys-monitor@ccadeptic23/**               @claudiux
 netusagemonitor@pdcurtis/**                        @pdcurtis
 network@brownsr/**                                 @brownsr
 nextslide@yaya-cout/**                             @yaya-cout
@@ -85,6 +90,7 @@ placesCenter@scollins/**                           @collinss
 pomodoro@gregfreeman.org/**                        @gfreeau
 printers@linux-man/**                              @linux-man
 profile-switcher@pixunil/**                        @pixunil
+ptt@thbemme/**                                     @thbemme
 qredshift@quintao/**                               @raphaelquintao
 radio@driglu4it/**                                 @jonath92
 rancher@centurix/**                                @centurix
@@ -96,21 +102,26 @@ rust-menu@jerrywham/**                             @jerrywham
 serviceLauncher@hulygun/**                         @hulygun
 sessionManager@scollins/**                         @collinss
 show-hide-applets@mohammad-sn/**                   @mohammad-sn
+skeuos-remix@benlazhar.com/**                      @nadhir ben lazhar
+sleepTimer@JDatPNW/**                              @JDatPNW
 smallcalc_applet@lerc.sds/**                       @lerc
 sound150@claudiux/**                               @claudiux
 spices-notifier@germanfr/**                        @germanfr
 sshconnect@foobar-beer/**                          @foobar-beer
 sshlauncher@sumo/**                                @sumo
+ssm@Severga/**                                     @Severga
 standardIconNames@jerrywham/**                     @jerrywham
 stevedore@centurix/**                              @centurix
 sticky@scollins/**                                 @collinss
 stopwatch@pdcurtis/**                              @pdcurtis
 sync@szlldm/**                                     @szlldm
 sysmonitor@orcus/**                                @orcuscz
+system-controls@rcalixte/**                        @rcalixte
 system-monitor@spacy01/**                          @spacy01
 temperature@fevimu/**                              @claudiux
 text-to-speech-applet@cardsurf/**                  @cardsurf
 timeout@narutrey/**                                @narutrey
+timer@Severga/**                                   @Severga
 timeshift-spy@nicog60/**                           @nicog60
 tor-button@shatur/**                               @Shatur95
 turn-off-monitor@zablotski/**                      @zablotski
@@ -119,13 +130,16 @@ uiscaler@joka42/**                                 @joka42
 vboxlauncher@mockturtl/**                          @mockturtl
 vnstat@linuxmint.com/**                            @pdcurtis
 vpnLookOut@claudiux/**                             @claudiux
+wakatimedisplay@inventor96/**                      @inventor96
 weather@mockturtl/**                               @Gr3q
 website-notifier@cardsurf/**                       @cardsurf
+window-list@sangorys/**                            @sangorys
 window-list@zeripath.sdf-eu.org/**                 @zeripath
 windowlist@cobinja.de/**                           @Cobinja
 wireguard@nicoulaj.net/**                          @nicoulaj
 workspace-grid@hernejj/**                          @hernejj
 workspace-name@willurd/**                          @willurd
+xsession@claudiux/**                               @claudiux
 
 # The following xlets have no author assigned to them.
 # CommandRunner@appdevsw
@@ -157,7 +171,6 @@ workspace-name@willurd/**                          @willurd
 # pa-equalizer@jschug.com
 # places-bookmarks@dmo60.de
 # places-with-terminal@mtwebster
-# rprego@rprego.com
 # rwall@typicalfoobar
 # screen-inhibit@mtwebster
 # scripts@paucapo.com

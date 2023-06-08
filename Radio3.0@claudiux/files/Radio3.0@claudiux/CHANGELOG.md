@@ -1,3 +1,27 @@
+### v1.4.0~20230526
+  * Now able to display the station logo, if it exists. The user can choose to display it or not, in the contextual menu.
+  * Some bugfixes.
+
+### v1.3.0~20230516
+  * Now compatible with Soup 3.
+  * Fixes a bug in notifications management.
+  * Fixes a bug in OSD display.
+
+### v1.2.3~20230429
+  * Update lib/checkDependencies.js (bugfix)
+
+### v1.2.2~20230424
+  * Volume scrolling is now in the same direction as Cinnamon.
+
+### v1.2.1~20230401
+  * Now compatible with OpenSUSE.
+
+### v1.2.0~20230328
+  * Adds ability to show OSD while changing volume.
+
+### v1.1.0~20230307
+  * Adds ability to keep YT video.
+
 ### v1.0.3~20230220
   * Now checks if the yt-dlp program is well present in ~/bin, and loads the latest version.
 

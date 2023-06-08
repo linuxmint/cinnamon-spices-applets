@@ -193,3 +193,13 @@ msgstr ""
 #. settings-schema.json->preset_time->columns->title
 msgid "Custom Message (overrides global message)"
 msgstr ""
+
+#. settings-schema.json->sound-volume->description
+#. settings-schema.json->sound-volume->tooltip
+msgid "Specify the playback volume"
+msgstr ""
+
+#. settings-schema.json->auto-loop-enable->description
+#. settings-schema.json->auto-loop-enable->tooltip
+msgid "Restart the timer automatically when time is elapsed"
+msgstr ""

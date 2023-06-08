@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-13 14:24+0100\n"
+"POT-Creation-Date: 2023-05-31 19:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,15 @@ msgstr ""
 msgid "Scale 200%"
 msgstr ""
 
-#: applet.js:464
+#: applet.js:38
+msgid "Scale 175%"
+msgstr ""
+
+#: applet.js:42
+msgid "Scale 150%"
+msgstr ""
+
+#: applet.js:46
 msgid "Scale 125%"
 msgstr ""
 
@@ -34,9 +42,9 @@ msgid "Reset 100%"
 msgstr ""
 
 #. metadata.json->name
-msgid "UI Scaler"
+msgid "UI Scaler for HiDPI Screens"
 msgstr ""
 
 #. metadata.json->description
-msgid "Switch resolution on-the-fly with HiDPI support"
+msgid "Scale your UI with one click for HiDPI screens"
 msgstr ""

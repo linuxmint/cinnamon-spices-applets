@@ -29,6 +29,7 @@
 				"eye-mode",
 				"eye-line-width",
 				"eye-margin",
+				"eye-vertical-padding",
 				"eye-repaint-interval",
 				"deactivate-on-fullscreen",
 				"eye-activate-by-default"
@@ -50,7 +51,8 @@
 				"mouse-click-enable",
 				"mouse-click-mode",
 				"mouse-click-image-size",
-				"click-animation-mode"
+				"click-animation-mode",
+				"deactivate-effects-on-fullscreen"
 			]
 		},
 		"click-events": {
@@ -98,16 +100,25 @@
 	},
 	"eye-margin": {
 		"type": "spinbutton",
-		"default": 4,
-		"min": 1,
+		"default": 6,
+		"min": 0,
 		"max": 10,
 		"step": 1,
 		"units": "px",
-		"description": "Margin Size"
+		"description": "Horizontal Margin"
+	},
+	"eye-vertical-padding": {
+		"type": "spinbutton",
+		"default": 2,
+		"min": 0,
+		"max": 10,
+		"step": 1,
+		"units": "px",
+		"description": "Vertical Padding"
 	},
 	"eye-repaint-interval": {
 		"type": "spinbutton",
-		"default": 60,
+		"default": 55,
 		"min": 5,
 		"max": 200,
 		"step": 5,
@@ -121,7 +132,7 @@
 	},
 	"deactivate-on-fullscreen": {
 		"type": "checkbox",
-		"default": false,
+		"default": true,
 		"description": "Deactivate On Fullscreen"
 	},
 	"eye-clicked-color": {
@@ -192,6 +203,12 @@
 		},
 		"dependency": "mouse-click-enable"
 	},
+	"deactivate-effects-on-fullscreen": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Deactivate On Fullscreen",
+		"dependency": "mouse-click-enable"
+	},
 	"mouse-left-click-enable": {
 		"type": "checkbox",
 		"default": true,
@@ -212,7 +229,7 @@
 		"default": 400,
 		"min": 100,
 		"max": 5000,
-		"step": 100,
+		"step": 50,
 		"units": "ms",
 		"description": "Fade Timeout"
 	},

@@ -811,7 +811,7 @@ class SpicesUpdate extends IconApplet {
                                 }
                             } else {
                                 let n = this.notifications_about_updates[type].pop(this.notifications_about_updates[type].indexOf(notification));
-                                n.destroy(3);
+                                if (n) n.destroy(3);
                             }
                             about_updates ? this.old_message[type] = "" : this.old_watch_message[type] = "";
                             this._on_refresh_pressed("notify_with_button");
@@ -982,22 +982,22 @@ class SpicesUpdate extends IconApplet {
     }
 
     on_btn_cs_applets_pressed() {
-        Util.spawnCommandLine("%s applets -t %s -s %s".format(CS_PATH, TAB, SORT));
+        Util.spawnCommandLineAsync("%s applets -t %s -s %s".format(CS_PATH, TAB, SORT));
         // End of on_btn_cs_applets_pressed
     }
 
     on_btn_cs_desklets_pressed() {
-        Util.spawnCommandLine("%s desklets -t %s -s %s".format(CS_PATH, TAB, SORT));
+        Util.spawnCommandLineAsync("%s desklets -t %s -s %s".format(CS_PATH, TAB, SORT));
         // End of on_btn_cs_desklets_pressed
     }
 
     on_btn_cs_extensions_pressed() {
-        Util.spawnCommandLine("%s extensions -t %s -s %s".format(CS_PATH, TAB, SORT));
+        Util.spawnCommandLineAsync("%s extensions -t %s -s %s".format(CS_PATH, TAB, SORT));
         // End of on_btn_cs_extensions_pressed
     }
 
     on_btn_cs_themes_pressed() {
-        Util.spawnCommandLine("%s themes -t %s -s %s".format(CS_PATH, TAB, SORT));
+        Util.spawnCommandLineAsync("%s themes -t %s -s %s".format(CS_PATH, TAB, SORT));
         // End of on_btn_cs_themes_pressed
     }
 
@@ -1184,18 +1184,21 @@ class SpicesUpdate extends IconApplet {
     }
 
     are_dependencies_installed() {
-        let _fonts_installed = (
+        let _fonts_installed = 
             file_new_for_path("/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf").query_exists(null) ||
             file_new_for_path("/usr/share/fonts/TTF/Symbola.ttf").query_exists(null) ||
+            file_new_for_path("/usr/share/fonts/truetype/Symbola.ttf").query_exists(null) ||
             file_new_for_path("/usr/share/fonts/gdouros-symbola/Symbola.ttf").query_exists(null) ||
             file_new_for_path("%s/.local/share/fonts/Symbola_Hinted.ttf".format(HOME_DIR)).query_exists(null) ||
             file_new_for_path("%s/.local/share/fonts/Symbola.ttf".format(HOME_DIR)).query_exists(null) ||
-            file_new_for_path("%s/.local/share/fonts/Symbola.otf".format(HOME_DIR)).query_exists(null)
-        )
+            file_new_for_path("%s/.local/share/fonts/Symbola.otf".format(HOME_DIR)).query_exists(null);
+        
         if (!_fonts_installed) {
             let _ArchlinuxWitnessFile = file_new_for_path("/etc/arch-release");
             let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
-            if (_isArchlinux) {
+            let _openSUSEWitnessFile = file_new_for_path("/usr/share/licenses/openSUSE-release");
+            let _isopenSUSE = _openSUSEWitnessFile.query_exists(null);
+            if (_isArchlinux || _isopenSUSE) {
                 Util.spawnCommandLineAsync("/bin/sh -c \"%s/install_symbola_on_Arch.sh\"".format(SCRIPTS_DIR), null, null);
                 _fonts_installed = true
             }
@@ -1253,12 +1256,14 @@ class SpicesUpdate extends IconApplet {
             let _isFedora = find_program_in_path("dnf");
             let _ArchlinuxWitnessFile = file_new_for_path("/etc/arch-release");
             let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
+            let _openSUSEWitnessFile = file_new_for_path("/usr/share/licenses/openSUSE-release");
+            let _isopenSUSE = _openSUSEWitnessFile.query_exists(null);
             let _DebianWitnessFile = file_new_for_path("/tmp/DEBIAN");
             let _isDebian = _DebianWitnessFile.query_exists(null);
-            let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : _isDebian ? "apt update" : "sudo apt update";
-            let _and = _isArchlinux ? "" : " \\\\&\\\\& ";
+            let _apt_update =  _isFedora ? "sudo dnf update" : (_isArchlinux || _isopenSUSE) ? "" : _isDebian ? "apt update" : "sudo apt update";
+            let _and = (_isArchlinux || _isopenSUSE) ? "" : " \\\\&\\\\& ";
             //var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : _isDebian ? "apt install fonts-symbola" : "sudo apt install fonts-symbola";
-            var _apt_install = _isFedora ? "sudo dnf install gdouros-symbola-fonts" : _isArchlinux ? "" : _isDebian ? "apt install fonts-symbola" : "sudo apt install fonts-symbola";
+            var _apt_install = _isFedora ? "sudo dnf install gdouros-symbola-fonts" : _isArchlinux ? "" : _isDebian ? "apt install fonts-symbola" : _isopenSUSE ? "sudo yast2 --install gdouros-symbola-fonts" : "sudo apt install fonts-symbola";
             let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
             let criticalMessage = _is_apturl_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
             this.notification = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);

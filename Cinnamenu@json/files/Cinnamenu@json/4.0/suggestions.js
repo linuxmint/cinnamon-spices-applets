@@ -1,3 +1,5 @@
+const {log} = require("./utils");
+
 //
 const ByteArray = imports.byteArray;
 
@@ -10,40 +12,58 @@ if (Soup.MAJOR_VERSION == 2) {
     _httpSession = new Soup.Session();
 }
 
-var last_search;
+const GOOGLE = false;
+var message;
 
 function searchSuggestions(pattern, callback) {
 
-    function processResult(session, results, p) {
-        if (p != last_search) {
-            return;
-        }
+    function processResult(session, results) {
         try {
             let resultArray;
             if (Soup.MAJOR_VERSION === 2) {
+                if (!results.response_body.data) { //request cancelled
+                    return;
+                }
                 resultArray = JSON.parse(results.response_body.data.toString());
             } else { //version 3
                 const bytes = _httpSession.send_and_read_finish(results);
                 resultArray = JSON.parse(ByteArray.toString(bytes.get_data()));
             }
-            resultArray[1].length = Math.min(resultArray[1].length, 5);
-            callback(resultArray[1]);
+            if (GOOGLE) {
+                resultArray[1].length = Math.min(resultArray[1].length, 5);
+                callback(resultArray[1]);
+            } else {
+                const results = [];
+                resultArray.forEach( result => {
+                    results.push(result['phrase']);
+                })
+                results.length = Math.min(results.length, 6);
+                callback(results);
+            }
         } catch(e) {
             global.logError(e);
         }
     }
 
-    last_search = pattern;
     try {
-        //const message = Soup.Message.new('GET', 'https://ac.duckduckgo.com/ac/?q=' +
-        //                                                encodeURIComponent(pattern) + '&type=list');
-        const message = Soup.Message.new('GET',
-            'http://suggestqueries.google.com/complete/search?output=firefox&q=' + encodeURIComponent(pattern));
         if (Soup.MAJOR_VERSION === 2) {
-            _httpSession.queue_message(message, (...args) => processResult(...args, pattern));
+            if (message) { //Cancel previous message in case it's still active
+                _httpSession.cancel_message(message, Soup.Status.CANCELLED);
+            }
+        }
+
+        if (GOOGLE) {
+            message = Soup.Message.new('GET',
+                'http://suggestqueries.google.com/complete/search?output=firefox&q=' + encodeURIComponent(pattern));
+        } else {
+            message = Soup.Message.new('GET',
+                'https://ac.duckduckgo.com/ac/?q=' + encodeURIComponent(pattern) + '&t=Cinnamenu');
+        }
+        if (Soup.MAJOR_VERSION === 2) {
+            _httpSession.queue_message(message, (...args) => processResult(...args));
         } else { //version 3
             _httpSession.send_and_read_async(message, Soup.MessagePriority.NORMAL, null,
-                                                        (...args) => processResult(...args, pattern));
+                                                        (...args) => processResult(...args));
         }
     } catch(e) {
         global.logError(e);

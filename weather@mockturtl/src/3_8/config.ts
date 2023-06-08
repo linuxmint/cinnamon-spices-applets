@@ -1,5 +1,4 @@
 import { WeatherApplet } from "./main";
-import { IpApi } from "./location_services/ipApi";
 import { LocationData, WeatherProvider } from "./types";
 import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Logger } from "./lib/logger";
@@ -10,7 +9,6 @@ import { DateTime } from "luxon";
 import { FileExists, LoadContents } from "./lib/io_lib";
 import { MetUk } from "./providers/met_uk";
 import { BaseProvider } from "./providers/BaseProvider";
-import { DarkSky } from "./providers/darkSky";
 import { OpenWeatherMap } from "./providers/openWeatherMap";
 import { MetNorway } from "./providers/met_norway/provider";
 import { Weatherbit } from "./providers/weatherbit";
@@ -22,6 +20,9 @@ import { AccuWeather } from "./providers/accuWeather";
 import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
 import { WeatherUnderground } from "./providers/weatherUnderground";
 import { Event } from "./lib/events";
+import { GeoIP } from "./location_services/geoip_services/base";
+import { GeoJS } from "./location_services/geoip_services/geojs.io";
+import { PirateWeather } from "./providers/pirate_weather/pirateWeather";
 
 const { get_home_dir, get_user_data_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -44,7 +45,6 @@ export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
 /** Change settings-schema if you change this */
 export type Services =
 	"OpenWeatherMap" |
-	"DarkSky" |
 	"MetNorway" |
 	"Weatherbit" |
 	"Tomorrow.io" |
@@ -54,10 +54,10 @@ export type Services =
 	"DanishMI" |
 	"AccuWeather" |
 	"DeutscherWetterdienst" |
-	"WeatherUnderground";
+	"WeatherUnderground" |
+	"PirateWeather";
 
 export const ServiceClassMapping: ServiceClassMappingType = {
-	"DarkSky": (app) => new DarkSky(app),
 	"OpenWeatherMap": (app) => new OpenWeatherMap(app),
 	"MetNorway": (app) => new MetNorway(app),
 	"Weatherbit": (app) => new Weatherbit(app),
@@ -68,7 +68,8 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	"DanishMI": (app) => new DanishMI(app),
 	"AccuWeather": (app) => new AccuWeather(app),
 	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
-	"WeatherUnderground": (app) => new WeatherUnderground(app)
+	"WeatherUnderground": (app) => new WeatherUnderground(app),
+	"PirateWeather": (app) => new PirateWeather(app)
 }
 
 export class Config {
@@ -187,7 +188,7 @@ export class Config {
 		this.timezone = value;
 	}
 
-	private readonly autoLocProvider: IpApi
+	private readonly autoLocProvider: GeoIP;
 	private readonly geoLocationService: GeoLocation;
 
 	/** Stores and retrieves manual locations */
@@ -206,7 +207,7 @@ export class Config {
 		this.currentLocale = ConstructJsLocale(get_language_names()[0]);
 		Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
 		this.countryCode = this.GetCountryCode(this.currentLocale);
-		this.autoLocProvider = new IpApi(app); // IP location lookup
+		this.autoLocProvider = new GeoJS(app); // IP location lookup
 		this.geoLocationService = new GeoLocation(app);
 		this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });
 		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
@@ -707,7 +708,7 @@ export class Config {
 		key: "tooltipTextOverride",
 		prop: "TooltipTextOverride"
 	}
-} as const
+} as const;
 
 type ServiceClassMappingType = {
 	[key in Services]: (app: WeatherApplet) => BaseProvider;
