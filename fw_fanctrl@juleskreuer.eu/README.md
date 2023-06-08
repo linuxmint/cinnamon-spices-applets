@@ -1,17 +1,17 @@
-# <img src="files/fw_fanctrl@juleskreuer.eu/icon.png" height=20></img> Framework FanCTRL - Fan Strategy Control Applet for Cinnamon
+# <img src="https://github.com/not-a-feature/fw_fanctrl_applet/blob/main/files/fw_fanctrl@juleskreuer.eu/icon.png?raw=true" height=20></img> Framework FanCTRL - Fan Strategy Control Applet for Cinnamon
 
-[This applet](https://github.com/not-a-feature/fw_fanctrl_applet) allows you to control the fan speed strategies of Framework laptops directly from your desktop. It uses [fw-fanctrl](https://github.com/TamtamHero/fw-fanctrl) / framework-ec to select different fan speed strategies. It's a handy tool for managing your laptop's thermal performance / noise.
+[This applet](https://github.com/not-a-feature/fw_fanctrl_applet) allows you to control the fan speed strategies of Framework laptops directly from your desktop. It uses [fw-fanctrl](https://github.com/TamtamHero/fw-fanctrl) / framework-ec to select different fan speed strategies.
 
-<img src="screenshot.png" width=400></img>
+<img src="https://github.com/not-a-feature/fw_fanctrl_applet/raw/main/screenshot.png" width=400></img>
 
 ## Installation
-
+Make sure [fw-fanctrl](https://github.com/TamtamHero/fw-fanctrl) is installed.
 ### Via Cinnamon Applet Store
 
     - Right click on the menu bar.
     - Open "Applets".
     - Click on "Download" tab.
-    - Search for "Framework FanCTRL".
+    - Search for "FanCTRL".
     - Click on the install icon next to the applet name.
 
 The applet should now be available in your Applets settings panel. Add it to your panel to start using it.
@@ -26,7 +26,6 @@ Copy the applet to your local Cinnamon applets directory:
 
     cp -r fw_fanctrl_applet/files/* ~/.local/share/cinnamon/applets/
 
-Restart Cinnamon. You can do this by pressing Alt+F2, typing 'r' in the command box that appears, and pressing Enter.
 
 The applet should now be available in your Applets settings panel. Add it to your panel to start using it.
 
@@ -39,11 +38,13 @@ Once installed, click on the applet icon in your panel to open the menu. The men
 ## Toggle visibility of strategies
 You can toggle the visibility of the default strategies in the applet settings.
 It is also possible to change the icon.
-<img src="settings.png" width=200></img>
+
+<img src="https://github.com/not-a-feature/fw_fanctrl_applet/raw/main/settings.png" width=200></img>
+
 ## Custom / non-standard strategies
 To add your custom strategy from fw-fanctrl to this applet, edit the `settings-schema.json` located in `~/.local/share/cinnamon/applets/fw_fanctrl@juleskreuer.eu`
 
-- Replace `<NAME>`by the strategy name found in the fw-fanctrl config.
+- Replace the following `<NAME>` tags by the strategy name found in the fw-fanctrl config.
 
 - Add `<NAME>` to the `strategies` list.
 
