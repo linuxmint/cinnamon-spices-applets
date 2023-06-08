@@ -802,13 +802,17 @@ class SensorsApplet extends Applet.TextApplet {
           _appletLabel = _appletLabel.replace(/  /g, " ");
         }
       }
-      while (_appletLabel.includes("││")) {
-        _appletLabel = _appletLabel.replace(/││/g, "│");
-      }
+
       while (_appletLabel.includes("\n\n")) {
         _appletLabel = _appletLabel.replace(/\n\n/g, "\n");
       }
-      if (_appletLabel.slice(-1) === '│') {
+      let sep_twice = "" + this.separator + this.separator;
+      if (sep_twice.length > 1) {
+        while (_appletLabel.includes(sep_twice)) {
+          _appletLabel = _appletLabel.replace(sep_twice, this.separator);
+        }
+      }
+      while (_appletLabel.slice(-1) === this.separator) {
         _appletLabel = _appletLabel.slice(0, -1)
       }
     }

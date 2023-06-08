@@ -1,3 +1,6 @@
+### v3.0.2~20230607
+  * Fixes #4886 (double-separator bug)
+
 ### v3.0.1~20230429
   * lib/checkDependencies.js: fixes  #4828
 
