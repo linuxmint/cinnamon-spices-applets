@@ -83,9 +83,8 @@ class AppButton {
         //-------------actor---------------------
         this.actor = new St.BoxLayout({ vertical: !isListView, reactive: true,
                                             accessible_role: Atk.Role.MENU_ITEM});
-        //remove l/r padding in grid view to allow maximum space for label
+
         if (!isListView) {
-            this.actor.set_style('padding-left: 0px; padding-right: 0px;');
             this.setGridButtonWidth();
         }
 
@@ -146,18 +145,13 @@ class AppButton {
     _setButtonStyleNormal() {
         this.has_focus = false;
         this.actor.set_style_class_name('menu-application-button');
-        if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.GRID) {
-            this.actor.add_style_class_name('menu-application-gridbutton');
-        }
         this._addTileStyle();
     }
 
     _setButtonStyleSelected() {
         this.has_focus = true;
         this.actor.set_style_class_name('menu-application-button-selected');
-        if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.GRID) {
-            this.actor.add_style_class_name('menu-application-gridbutton-selected');
-        }
+        
         this._addTileStyle();
     }
 
@@ -408,10 +402,13 @@ class AppsView {
         this.appsViewSignals = new SignalManager(null);
 
         this.applicationsListBox = new St.BoxLayout({ vertical: true });
-        this.applicationsGridBox = new Clutter.Actor({ layout_manager: new Clutter.GridLayout() });
+        this.applicationsGridBox = new St.Bin({ style_class: 'menu-applications-grid-box',
+                                                                x_fill: true, y_fill: true });
+        this.applicationsGridLayout = new Clutter.Actor({ layout_manager: new Clutter.GridLayout() });
+        this.applicationsGridBox.set_child(this.applicationsGridLayout);
         this.headerText = new St.Label({ style_class: 'menu-applications-header-text' });
         this.applicationsBoxWrapper = new St.BoxLayout({ style_class: 'menu-applications-inner-box',
-                                                                                            vertical: true});
+                                                                                    vertical: true});
         this.applicationsBoxWrapper.add_style_class_name('menu-applications-box'); //this is to support old themes
 
         this.applicationsBoxWrapper.add(this.headerText, { x_fill: false, x_align: St.Align.MIDDLE });
@@ -470,7 +467,7 @@ class AppsView {
             if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                 this.applicationsListBox.add(subheading.subheadingBox);
             } else {
-                const gridLayout = this.applicationsGridBox.layout_manager;
+                const gridLayout = this.applicationsGridLayout.layout_manager;
                 gridLayout.attach(subheading.subheadingBox, this.column, this.rownum,
                                                                     this.getGridValues().columns, 1);
                 this.rownum++;
@@ -490,7 +487,7 @@ class AppsView {
             if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
                 this.applicationsListBox.add_actor(appButton.actor);
             } else {
-                const gridLayout = this.applicationsGridBox.layout_manager;
+                const gridLayout = this.applicationsGridLayout.layout_manager;
                 appButton.setGridButtonWidth();// In case menu has been resized.
                 gridLayout.attach(appButton.actor, this.column, this.rownum, 1, 1);
                 appButton.actor.layout_column = this.column;//used for key navigation
@@ -542,7 +539,7 @@ class AppsView {
         const newcolumnCount = this.getGridValues().columns;
         if (this.currentGridViewColumnCount === newcolumnCount) {
             //Number of columns are the same so just adjust button widths only.
-            this.applicationsGridBox.get_children().forEach(actor => {
+            this.applicationsGridLayout.get_children().forEach(actor => {
                             if (actor.has_style_class_name('menu-application-button') ||
                                 actor.has_style_class_name('menu-application-button-selected')) {
                                 actor.width = this.getGridValues().columnWidth;
@@ -550,11 +547,11 @@ class AppsView {
                          });
         } else {//Rearrange buttons to fit new number of columns.
             this.applicationsGridBox.hide();//
-            const buttons = this.applicationsGridBox.get_children();
-            this.applicationsGridBox.remove_all_children();
+            const buttons = this.applicationsGridLayout.get_children();
+            this.applicationsGridLayout.remove_all_children();
             let column = 0;
             let rownum = 0;
-            const gridLayout = this.applicationsGridBox.layout_manager;
+            const gridLayout = this.applicationsGridLayout.layout_manager;
             const newColumnWidth = this.getGridValues().columnWidth;
             buttons.forEach(actor => {
                 if (actor.has_style_class_name('menu-application-button') ||
@@ -621,7 +618,7 @@ class AppsView {
 
     getActiveContainer() {
         return this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST ?
-                                        this.applicationsListBox : this.applicationsGridBox;
+                                        this.applicationsListBox : this.applicationsGridLayout;
     }
 
     buttonStoreCleanup() {
@@ -641,6 +638,7 @@ class AppsView {
         this.headerText.destroy();
         this.applicationsListBox.destroy();
         this.applicationsGridBox.destroy();
+        this.applicationsGridLayout.destroy();
         this.applicationsBoxWrapper.destroy();
         this.applicationsScrollBox.destroy();
         this.buttonStore.forEach(button => { if (button) button.destroy(); });
