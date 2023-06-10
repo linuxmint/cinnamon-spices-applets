@@ -1,0 +1,5 @@
+{
+    "description": "Panel based quick todo applet for Cinnamon", 
+    "uuid": "paneldo@beatlink", 
+    "name": "PanelDo"
+}
