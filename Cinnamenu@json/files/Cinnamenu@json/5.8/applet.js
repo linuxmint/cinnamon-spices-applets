@@ -14,13 +14,11 @@ const AppletManager = imports.ui.appletManager; //
 const {ScreenSaverProxy} = imports.misc.screenSaver;
 const {PopupMenuManager, PopupIconMenuItem} = imports.ui.popupMenu;
 const {getAppFavorites} = imports.ui.appFavorites;
-const {TextIconApplet, AllowedLayout, AppletPopupMenu} = imports.ui.applet;
+const {TextIconApplet, AllowedLayout, AppletPopupMenu, PopupResizeHandler} = imports.ui.applet;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
-//const {AppletSettings} = imports.ui.settings;
+const {AppletSettings} = imports.ui.settings;
 
-const {PopupResizeHandler} = require('./resizer');
-const {AppletSettings} = require('./settings');
 const {_, graphemeBaseChars, log, searchStr} = require('./utils');
 const {Display} = require('./display');
 const {BookmarksManager} = require('./browserBookmarks');
@@ -53,6 +51,8 @@ CinnamenuApplet ──┼                     ├── class ContextMenu ──
 
 */
 
+log("5.8>>>>>>>>>>>>>>>>>>>>>>>>>");
+
 class CinnamenuApplet extends TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
@@ -63,8 +63,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.privacy_settings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.privacy'});
         this.appFavorites = getAppFavorites();
         this.currentCategory = 'all';
-        this.gpu_offload_supported = Main.gpu_offload_supported;
-        this.isBumblebeeInstalled = GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS);
         this.recentManagerDefault = Gtk.RecentManager.get_default();
         this.orientation = orientation;
         this.menuManager = new PopupMenuManager(this);
@@ -1589,9 +1587,6 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     listFavoriteFiles() {
-        if (!XApp.Favorites) {
-            return [];
-        }
         const res = [];
         const favorite_infos = XApp.Favorites.get_default().get_favorites(null);
         favorite_infos.forEach(info => {
