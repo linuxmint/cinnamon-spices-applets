@@ -1,0 +1,9 @@
+{
+    "uuid": "CassiaWindowList@klangman",
+    "name": "Cassia Window List",
+    "description": "A window list/panel launchers based on CobiWindowList with some additional features",
+    "max-instances": -1,
+    "multiversion": true,
+    "role": "panellauncher",
+    "author": "klangman"
+}

@@ -5,11 +5,18 @@
  */
 
 const Soup = imports.gi.Soup;
-const _httpSession = new Soup.SessionAsync();
+const {to_string} = require("./lib/to-string");
+
+var _httpSession;
+if (Soup.MAJOR_VERSION === 2) {
+    _httpSession = new Soup.SessionAsync();
+    Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
+} else {
+    _httpSession = new Soup.Session();
+}
+
 _httpSession.timeout=120;
 const GLib = imports.gi.GLib;
-
-Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
 
 const IpGateway = {
   init: function() {
@@ -85,22 +92,22 @@ const IpGateway = {
     });
 
     // Country Code Services.
-    this._countryCodeServices.push({
-      // url: "https://api.ipgeolocationapi.com/geolocate", // Bad responses!
-      //url: "http://ip-api.com/json?fields=country,countryCode,isp,query",
-      url: "https://get.geojs.io/v1/ip/country.json", // Seems to be the best one.
-      parse: function(jsonResponse) {
-        let response = JSON.parse(jsonResponse);
-        return {
-          //countryCode: response.un_locode
-          //countryCode: response.countryCode
-          countryCode: response.country
-        };
-      }
-    });
+    //~ this._countryCodeServices.push({
+      //~ // url: "https://api.ipgeolocationapi.com/geolocate", // Bad responses!
+      //~ //url: "http://ip-api.com/json?fields=country,countryCode,isp,query",
+      //~ url: "https://get.geojs.io/v1/ip/country.json", // Seems to be the best one.
+      //~ parse: function(jsonResponse) {
+        //~ let response = JSON.parse(jsonResponse);
+        //~ return {
+          //~ //countryCode: response.un_locode
+          //~ //countryCode: response.countryCode
+          //~ countryCode: response.country
+        //~ };
+      //~ }
+    //~ });
 
     this._countryCodeServices.push({
-      // url: "https://api.ipgeolocationapi.com/geolocate", // Bad responses!
+      //url: "https://api.ipgeolocationapi.com/geolocate", // Bad responses!
       url: "http://ip-api.com/json?fields=country,countryCode,isp,query",
       //url: "https://get.geojs.io/v1/ip/country.json", // Seems to be the best one.
       parse: function(jsonResponse) {
@@ -175,15 +182,36 @@ const IpGateway = {
   _get: function(url, callback) {
     var request = new Soup.Message({
       method: 'GET',
-      uri: new Soup.URI(url)
+      uri: (Soup.MAJOR_VERSION === 2) ? new Soup.URI(url) : GLib.Uri.parse(url, Soup.HTTP_URI_FLAGS)
     });
-    _httpSession.queue_message(request, function(_httpSession, message) {
-      if (message.status_code !== 200) {
-        return;
-      }
-      let data = request.response_body.data;
-      callback(data);
-    });
+
+    if (Soup.MAJOR_VERSION === 2) {
+      _httpSession.queue_message(request, function(session, message) {
+        if (message.status_code !== 200) {
+          return;
+        }
+        let data = request.response_body.data;
+        callback(data);
+      });
+    } else {
+      _httpSession.send_and_read_async(request, Soup.MessagePriority.NORMAL, null, (session, result) => {
+        let status = request.get_status();
+        //~ global.log("status: "+status);
+        if (status !== 200) {
+          return;
+        }
+        try {
+          let bytes = _httpSession.send_and_read_finish(result);
+          let data = to_string(bytes.get_data());
+          data = JSON.stringify(data.trim(), null, "\t");
+          //~ global.log("data: "+data);
+          callback(JSON.parse(data));
+        } catch (error) {
+            //~ global.log("Erreur: "+error);
+            return;
+        }
+      });
+    }
   }
 }
 

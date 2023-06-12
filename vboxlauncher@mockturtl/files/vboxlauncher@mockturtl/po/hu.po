@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-15 19:46+0200\n"
-"PO-Revision-Date: 2023-05-07 19:38+0200\n"
+"PO-Revision-Date: 2023-05-08 11:24+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -50,7 +50,5 @@ msgid "Auto update (slow)"
 msgstr "Automatikus frissítés (lassú)"
 
 #. settings-schema.json->showHeadlessMode->description
-#, fuzzy
-#| msgid "Headless"
 msgid "Show Headless Mode"
-msgstr "Grafikus felület nélkül"
+msgstr "Grafikus felület nélkül üzemmód megjelenítése"

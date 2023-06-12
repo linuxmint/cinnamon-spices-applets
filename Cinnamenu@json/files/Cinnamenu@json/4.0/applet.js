@@ -174,18 +174,6 @@ class CinnamenuApplet extends TextIconApplet {
                 });
             }
         };
-        const onShowHomeFolderChange = () => {
-            const homePath = GLib.get_home_dir();
-            if (this.settings.showHomeFolder) {
-                if (!this.getIsFolderCategory(homePath)) {
-                    this.addFolderCategory(homePath);
-                }
-            } else {
-                if (this.getIsFolderCategory(homePath)) {
-                    this.removeFolderCategory(homePath);
-                }
-            }
-        };
 
         this.settings = {};
         this.settingsObj = new AppletSettings(this.settings, __meta.uuid, this.instance_id);
@@ -205,7 +193,7 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'show-places-category',      value: 'showPlaces',            cb: null},
         { key: 'show-recents-category',     value: 'showRecents',     cb: this._onEnableRecentsChange },
         { key: 'show-favorite-apps-category', value: 'showFavAppsCategory', cb: null },
-        { key: 'show-home-folder-category', value: 'showHomeFolder',        cb: onShowHomeFolderChange},
+        { key: 'show-home-folder-category', value: 'showHomeFolder',        cb: this._onShowHomeFolderChange},
         { key: 'show-emoji-category',       value: 'showEmojiCategory',     cb: null},
 
         { key: 'overlay-key',               value: 'overlayKey',            cb: updateKeybinding },
@@ -266,6 +254,10 @@ class CinnamenuApplet extends TextIconApplet {
             this.hide_applet_label(false);
         }
         this._updateIconAndLabel();
+    }
+
+    on_applet_added_to_panel() {
+        this._onShowHomeFolderChange();
     }
 
     on_applet_removed_from_panel() {
@@ -373,6 +365,19 @@ class CinnamenuApplet extends TextIconApplet {
             const menuLabel = this.settings.menuLabel.substring(0, 45);
             this.set_applet_label(menuLabel);
             this.set_applet_tooltip(menuLabel);
+        }
+    }
+
+    _onShowHomeFolderChange = () => {
+        const homePath = GLib.get_home_dir();
+        if (this.settings.showHomeFolder) {
+            if (!this.getIsFolderCategory(homePath)) {
+                this.addFolderCategory(homePath);
+            }
+        } else {
+            if (this.getIsFolderCategory(homePath)) {
+                this.removeFolderCategory(homePath);
+            }
         }
     }
 //==================================================================
@@ -1008,31 +1013,38 @@ class CinnamenuApplet extends TextIconApplet {
                 FILE_PREFIX = true;
             }
         }
+
         //=======search providers==========
         //---calculator---
         let calculatorResult = null;
         const replacefn = (match) => {//Replace eg. "sqrt" with "Math.sqrt"
-            if (['E','PI','abs','acos','acosh','asin','asinh','atan','atanh','cbrt','ceil','cos',
-            'cosh','exp','floor','fround','log','max','min','pow','random','round','sign','sin',
-            'sinh','sqrt','tan','tanh','trunc'].includes(match)) {
+            if (['E','LN10','LN2','LOG10E','LOG2E','PI','SQRT1_2','SQRT2','PI','abs',
+                'acos','acosh','asin','asinh','atan','atanh','cbrt','ceil','clz32','cos',
+                'cosh','exp','expm1','floor','fround','hypot','imul','log','log10','log1p',
+                'log2','max','min','pow','random','round','sign','sin','sinh','sqrt',
+                'tan','tanh','trunc'].includes(match)) {
                 return 'Math.' + match;
             } else {
-                validExp = false;
+                //validExp = false;
                 return match;
             }
         };
         let validExp = true;
         let ans = null;
-        const exp = pattern_raw.replace(/([a-zA-Z]+)/g, replacefn);
+        const exp = pattern_raw.replace(/([a-zA-Z0-9_]+)/g, replacefn);
+        
         if (validExp) {
             try {
                 ans = eval(exp);
-            } catch(e) {}
+            } catch(e) {
+                //log(e.message);
+            }
         }
-        if ((typeof ans === 'number' || typeof ans === 'boolean') && ans != pattern_raw ) {
+        if ((typeof ans === 'number' || typeof ans === 'boolean' || typeof ans === 'bigint')
+                                                                    && ans != pattern_raw ) {
             if (!this.calcGIcon) {
                 this.calcGIcon = new Gio.FileIcon(
-                                { file: Gio.file_new_for_path(__meta.path + '/../icons/calc.png')});
+                        { file: Gio.file_new_for_path(__meta.path + '/../icons/calc.png')});
             }
             otherResults.push({
                             isSearchResult: true,

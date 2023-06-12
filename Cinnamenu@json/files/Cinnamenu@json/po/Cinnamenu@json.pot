@@ -657,5 +657,5 @@ msgstr ""
 
 msgid ""
 "\n"
-"• Right click on any folder to add it as a menu category.\n"
+"• Folders can be set up and removed as menu categories by right-clicking on them.\n"
 msgstr ""

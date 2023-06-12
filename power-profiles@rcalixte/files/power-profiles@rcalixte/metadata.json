@@ -1,0 +1,7 @@
+{
+    "description": "An applet to modify the current system power profile as determined by power-profiles-daemon",
+    "uuid": "power-profiles@rcalixte",
+    "name": "Power Profiles",
+    "version": "1.0",
+    "max-instances": -1
+}

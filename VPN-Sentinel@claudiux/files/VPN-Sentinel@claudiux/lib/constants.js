@@ -2,16 +2,18 @@ const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 
-const UUID="VPN-Sentinel@claudiux";
+const NAME = "VPN-Sentinel";
+const UUID = NAME + "@claudiux";
 const HOME_DIR = GLib.get_home_dir();
 const APPLET_DIR = "%s/.local/share/cinnamon/applets/%s".format(HOME_DIR, UUID);
 const SCRIPTS_DIR = "%s/scripts".format(APPLET_DIR);
 const ICONS_DIR = "%s/icons".format(APPLET_DIR);
 const SOUNDS_DIR = "%s/sounds".format(APPLET_DIR);
-let settings_file = "%s/.cinnamon/configs/%s/%s.json".format(HOME_DIR, UUID, UUID);
-if (!GLib.file_test(settings_file, GLib.FileTest.EXISTS))
-  settings_file = "%s/.configs/cinnamon/spices/%s/%s.json".format(HOME_DIR, UUID, UUID);
-const SETTINGS_FILE = ""+settings_file;
+//~ let settings_file = "%s/.cinnamon/configs/%s/%s.json".format(HOME_DIR, UUID, UUID);
+//~ if (!GLib.file_test(settings_file, GLib.FileTest.EXISTS))
+  //~ settings_file = "%s/.configs/cinnamon/spices/%s/%s.json".format(HOME_DIR, UUID, UUID);
+//~ const SETTINGS_FILE = ""+settings_file;
+const SETTINGS_SCHEMA = APPLET_DIR + "/settings-schema.json";
 const IFACES_DIR = "/sys/class/net";
 const DEFAULT_SYMBOLIC_ICON = "vpn-sentinel";
 
@@ -71,6 +73,7 @@ function logError(error) {
 
 
 module.exports = {
+  NAME,
   UUID,
   HOME_DIR,
   APPLET_DIR,
@@ -78,7 +81,7 @@ module.exports = {
   ICONS_DIR,
   IFACES_DIR,
   SOUNDS_DIR,
-  SETTINGS_FILE,
+  SETTINGS_SCHEMA,
   DEFAULT_SYMBOLIC_ICON,
   _,
   exists,
