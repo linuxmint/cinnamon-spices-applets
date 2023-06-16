@@ -24,6 +24,7 @@
         "section_tempDisplay",
         "section_tempOptions",
         "section_tempSensors",
+        "section_tempDisktemp",
         "section_tempDisks"
       ]
     },
@@ -86,13 +87,13 @@
         "remove_temperatureATfevimu"
       ]
     },
-    "section_tempHddtemp": {
+    "section_tempDisktemp": {
       "type": "section",
-      "title": "hddtemp is for now only usable by root",
+      "title": "For the time being, disk temperature can only be read by root.",
       "keys": [
-        "make_hddtemp_usable_by_user"
+        "make_disktemp_readable_by_user"
       ],
-      "dependency": "!hddtemp_is_user_accessible"
+      "dependency": "!disktemp_is_user_readable"
     },
     "section_tempDisplay": {
       "type": "section",
@@ -299,10 +300,10 @@
     "description": "Show in menu the action: Restart this applet",
     "tooltip": "Whether or not to display in menu the action: Restart this applet."
   },
-  "make_hddtemp_usable_by_user": {
+  "make_disktemp_readable_by_user": {
     "type": "button",
-    "description": "Make hddtemp usable by user",
-    "callback": "_on_hddtemp_button_pressed"
+    "description": "Make disk temperature user-readable",
+    "callback": "_on_disktemp_button_pressed"
   },
   "show_temp": {
     "type": "switch",
@@ -750,7 +751,7 @@
     "description": "Remove from panel the temperature@fevimu applet",
     "callback": "_on_remove_temperatureATfevimu_from_panels"
   },
-  "hddtemp_is_user_accessible": {
+  "disktemp_is_user_readable": {
     "type": "generic",
     "default": false
   },
