@@ -220,7 +220,7 @@ class SensorsApplet extends Applet.TextApplet {
       if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:"))
         ret = true;
     }
-    log("is_disktemp_user_readable: "+ret, true);
+    log("is_disktemp_user_readable: "+ret);
     return ret
   }
 
