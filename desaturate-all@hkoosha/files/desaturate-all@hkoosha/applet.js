@@ -21,7 +21,7 @@ MyApplet.prototype = {
     },
 
     _toggleEffect: function() {
-        if (Main.uiGroup.has_effects(this.effect)) {
+        if (Main.uiGroup.has_effects() && Main.uiGroup.get_effects().indexOf(this.effect) > -1) {
             Main.uiGroup.remove_effect(this.effect);
         } else {
             Main.uiGroup.add_effect(this.effect);
