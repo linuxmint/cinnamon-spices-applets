@@ -1171,7 +1171,6 @@ class SensorsApplet extends Applet.TextApplet {
     if (this.dependencies.areDepMet()) {
       // All dependencies are installed. Now, run the loop!:
       this.isLooping = true;
-      this.loopId = 0;
       this.reap_sensors();
     } else {
       // Some dependencies are missing. Suggest to the user to install them.
