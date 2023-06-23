@@ -128,10 +128,11 @@
       "type": "section",
       "title": "Disk temperature sensors",
       "keys": [
-      "btn_renew_disks_list",
+        "btn_renew_disks_list",
         "temp_disks",
         "update_display"
-      ]
+      ],
+      "dependency": "disktemp_is_user_readable"
     },
     "section_fanDisplay": {
       "type": "section",
