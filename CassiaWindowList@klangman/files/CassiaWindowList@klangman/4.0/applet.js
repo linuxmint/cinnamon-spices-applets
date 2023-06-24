@@ -854,16 +854,13 @@ class WindowListButton {
     this._pinned = false;
 
     this.actor = new St.BoxLayout({style_class: "grouped-window-list-item-box",
-                                   track_hover: false,
-                                   can_focus: true,
-                                   reactive: true});
+                                   track_hover: false, can_focus: true, reactive: true});
 
     this._shrukenLabel = false;
     this._minLabelSize = -1;
     this._lableWidth = 0;
     this._label = new St.Label();
-    this._labelBox = new St.Bin({natural_width: 0, min_width: 0,
-                                 x_align: St.Align.START});
+    this._labelBox = new St.Bin({natural_width: 0, min_width: 0, x_align: St.Align.START});
     this._labelBox.add_actor(this._label);
 
     this._tooltip = new Tooltips.PanelItemTooltip(this, this._app.get_name(), this._applet.orientation);
@@ -880,12 +877,8 @@ class WindowListButton {
 
     this._labelNumberBox = new St.BoxLayout();
     this._labelNumberBin = new St.Bin({
-      important: true,
-      style_class: "grouped-window-list-badge",
-      x_align: St.Align.MIDDLE,
-      y_align: St.Align.MIDDLE});
-    this._labelNumber = new St.Label({
-      style_class: "grouped-window-list-number-label"});
+      important: true, style_class: "grouped-window-list-badge", x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE});
+    this._labelNumber = new St.Label({style_class: "grouped-window-list-number-label"});
     this._iconBox.add_actor(this._labelNumberBox);
     this._labelNumberBox.add_actor(this._labelNumberBin);
     this._labelNumberBin.add_actor(this._labelNumber);
@@ -1129,11 +1122,20 @@ class WindowListButton {
     for (let i=0 ; i < hotKeys.length ; i++) {
        if (hotKeys[i].enabled===true && hotKeys[i].keyCombo!==null) {
           if (hotKeyWindows[i] === this._currentWindow || (hotKeys[i].cycle===true && (hotKeys[i].description == this._app.get_name() || hotKeys[i].description == this._app.get_id()))) {
+             // i.e.  "<Alt><Super><e>::" -> "Alt+Super+E"
              let keyString = hotKeys[i].keyCombo.toString();
+             keyString = keyString.replace( /</g, "");
+             keyString = keyString.replace( />/g, "+");
              if (keyString.endsWith("::")) {
                 keyString = keyString.slice(0,-2);
+             }else{
+                let first = keyString.slice(0, keyString.lastIndexOf("::"));
+                let end = first.slice(first.lastIndexOf("+"), first.length)
+                text = text + "\n" + first.slice(0,first.lastIndexOf("+")) + end.toUpperCase();
+                keyString = keyString.slice( keyString.indexOf("::")+2, keyString.length );
              }
-             text = text + "\n" + keyString;
+             let end = keyString.slice(keyString.lastIndexOf("+"), keyString.length)
+             text = text + "\n" + keyString.slice(0,keyString.lastIndexOf("+")) + end.toUpperCase();
           }
        }
     }
@@ -1465,7 +1467,7 @@ class WindowListButton {
   _updateFocus() {
     for (let i = 0; i < this._windows.length; i++) {
       let metaWindow = this._windows[i];
-      if (hasFocus(metaWindow, false) && !metaWindow.minimized) {
+      if (hasFocus(metaWindow, true) && !metaWindow.minimized) {
         this.actor.add_style_pseudo_class("focus");
         this.actor.remove_style_class_name(STYLE_CLASS_ATTENTION_STATE);
         this._currentWindow = metaWindow;
@@ -1685,7 +1687,7 @@ class WindowListButton {
                  window.minimize();
               } else {
                 this.closeThumbnailMenu();
-                Main.activateWindow(window); 
+                Main.activateWindow(window);
               }
            }
            break;
@@ -1982,6 +1984,17 @@ class WindowListButton {
           }));
           item.menu.addMenuItem(ws);
         }
+
+        let pinAll = new PopupMenu.PopupMenuItem(_("Pin to all workspaces"));
+        pinAll.connect("activate", Lang.bind(this,
+           function() {
+              for (let i = 0; i < this._applet._workspaces.length; i++) {
+                 if (i != this._workspace._wsNum || !this._pinned) {
+                    this._applet._workspaces[i].pinAppId(appId);
+                 }
+              }
+           }));
+        item.menu.addMenuItem(pinAll);
         this._contextMenu.addMenuItem(item);
       }
     }
@@ -2449,11 +2462,8 @@ class Workspace {
     this._settings = this._applet._settings;
     this._signalManager = new SignalManager.SignalManager(null);
 
-    this.actor = new St.BoxLayout();
+    this.actor = new St.BoxLayout({ style_class: "window-list-box", track_hover: false, hover: false });
     this.actor._delegate = this;
-    this.actor.set_hover(false);
-    this.actor.set_track_hover(false);
-    this.actor.add_style_class_name("window-list-box");
 
     this.maxSize = this._settings.getValue("label-width"); // The size where buttons start shrinking (estimated until we see shrinking button widths)
     this.autoIndicatorsOff = false;  // Were the indicator characters automatically removed to save space
@@ -2960,6 +2970,17 @@ class Workspace {
     let window = global.display.get_focus_window();
     if (window) {
        let newFocus = this._lookupAppButtonForWindow(window);
+       if (!newFocus) {
+          window.foreach_ancestor(
+             Lang.bind(this, function(ancestor) {
+                newFocus = this._lookupAppButtonForWindow(ancestor);
+                if (newFocus) {
+                   return(false);
+                }
+                return(true);
+             } )
+          );
+       }
        if (newFocus) {
           if (this._currentFocus && newFocus != this._currentFocus) {
              this._currentFocus._updateFocus();
