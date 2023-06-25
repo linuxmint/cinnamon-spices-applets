@@ -94,6 +94,12 @@ margin to override*/
 
 .menu-application-button-label {}
 
+.menu-applications-grid-box .menu-application-button-label {
+    padding-right: 2px;
+    padding-left: 2px;
+    text-align: center;
+}
+
 .menu-application-button-selected {}
 
 .menu-applications-grid-box .menu-application-button-selected {
