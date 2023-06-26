@@ -2,7 +2,7 @@
     "website":       "https://github.com/Feuerfuchs/GPaste-Reloaded-Cinnamon-Applet",
     "uuid":          "gpaste-reloaded@feuerfuchs.eu",
     "max-instances": -1,
-    "description":   "A complete rewrite of the GPaste applet based on the Gnome Shell extension",
+    "description":   "Instantly access and manage your clipboard history.",
     "version":       "2.6",
     "name":          "GPaste Reloaded"
 }
