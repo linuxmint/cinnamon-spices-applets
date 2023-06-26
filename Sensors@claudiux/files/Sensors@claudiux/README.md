@@ -2,7 +2,12 @@
 
 [Download][download]
 
-This applet displays and monitors the values ​​of many computer sensors concerning **Temperatures** (from CPU, GPU, Power Supply), **Fan Speed**, **Voltages**, **Intrusions**.
+This applet displays and monitors the values ​​of many computer sensors concerning
+
+  * **Temperatures** (from CPU, GPU, Power Supply, Disks)
+  * **Fan Speed**
+  * **Voltages**
+  * **Intrusions**.
 
 It notifies you with color changes when a value reaches or exceeds its limit.
 
@@ -26,11 +31,12 @@ Any suggestion to improve this _Sensors@claudiux_ applet is welcome.
 
 ## Dependencies
 
-This applet needs three packages:
+This applet needs 4 packages:
 
   * [_lm-sensors_][lmsensors] to get the sensor values.
   * _xsensors_ to display these values in an independent graphical interface.
   * _fonts-symbola_ that contains some symbols used by this applet.
+  * _smartmontools_ that provides `smartctl` to read disk temperature.
 
 
 _**Sensors@claudiux** helps you to install these packages, if any._
@@ -74,11 +80,20 @@ If that give you a valid result running _sensors_, add __drivetemp__ into the li
 
 #### External disks (on USB port)
 
-First, run the command:
+The _smartmontools_ package must be installed. The command `which smartctl` must return: _/usr/sbin/smartctl_
 
-  echo "%sudo ALL = NOPASSWD: /usr/sbin/smartctl" | sudo tee /etc/sudoers.d/smartctl
+You must be a member of the _sudo_ or _wheel_ group. Verify using the `groups` command.
 
-Then log out and log in your session.
+In the **Temperature** tab of this applet settings, click on the button _Make disk temperature user-readable_ (You'll be asked to enter your password.)
+
+Alternatively, run the commands:
+
+  echo "%sudo ALL = NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT: /usr/sbin/smartctl" | sudo tee "/etc/sudoers.d/smartctl"
+
+  echo "%wheel ALL = NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT: /usr/sbin/smartctl" | sudo tee -a "/etc/sudoers.d/smartctl"
+
+
+Then, log out and log in your session.
 
 ### My PC has several temperature sensors and their values ​​are different. Why and which one to choose?
 
@@ -152,16 +167,9 @@ To avoid this file flooding, please install the [Sanitize ~/.xsession-errors][sa
 
 Any contribution or translation is welcome!
 
-### Available translations and their authors
+### Translations
 
-| Translation | Code | Author (Github account) |
-| ---:|:---:|  --- |
-| Czech | cs | Bohuslav Kotál ([@Fotobob1](https://github.com/Fotobob1)) |
-| Danish | da | Alan Mortensen ([@Alan01](https://github.com/Alan01)) |
-| Dutch | nl | Jurien ([@French77](https://github.com/French77)) |
-| French | fr | claudiux ([@claudiux][claudiux]) |
-| Spanish | es | claudiux ([@claudiux][claudiux]) |
-| Turkish | tr | Serkan Önder ([@serkan-maker](https://github.com/serkan-maker))
+[Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/Sensors%40claudiux.md#)
 
 
 _Thank you very much to all of these translators!_
@@ -179,4 +187,4 @@ Claudiux ([@claudiux][claudiux])
 [lmsensors]: https://github.com/lm-sensors/lm-sensors
 [lmsensorsconfigs]: https://github.com/lm-sensors/lm-sensors/tree/master/configs
 [spicesupdate]: https://cinnamon-spices.linuxmint.com/applets/view/309
-[download]: https://cinnamon-spices.linuxmint.com/files/applets/Sensors@claudiux.zip?0c1b4606-e68e-4d11-ae4e-c1373acd749b
+[download]: https://cinnamon-spices.linuxmint.com/files/applets/Sensors@claudiux.zip?09ba80da-c2b5-4b1a-9edf-bea2b8b11589
