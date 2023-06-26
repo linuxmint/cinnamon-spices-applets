@@ -92,29 +92,29 @@
 	"eye-line-width": {
 		"type": "spinbutton",
 		"description": "Line Width",
-		"default": 2,
+		"default": 2.5,
 		"min": 1,
 		"max": 5,
-		"step": 1,
+		"step": 0.5,
 		"units": "px"
 	},
 	"eye-margin": {
 		"type": "spinbutton",
 		"default": 6,
-		"min": 0,
+		"min": 1,
 		"max": 10,
 		"step": 1,
 		"units": "px",
-		"description": "Horizontal Margin"
+		"description": "Margin"
 	},
 	"eye-vertical-padding": {
 		"type": "spinbutton",
 		"default": 2,
-		"min": 0,
+		"min": 1,
 		"max": 10,
 		"step": 1,
 		"units": "px",
-		"description": "Vertical Padding"
+		"description": "Padding"
 	},
 	"eye-repaint-interval": {
 		"type": "spinbutton",
