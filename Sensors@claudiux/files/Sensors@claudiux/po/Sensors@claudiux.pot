@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-20 15:16+0200\n"
+"POT-Creation-Date: 2023-06-16 17:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,101 +22,101 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr ""
 
-#: applet.js:389 applet.js:441
+#: applet.js:403 applet.js:455
 msgid "high:"
 msgstr ""
 
-#: applet.js:389 applet.js:391 applet.js:441 applet.js:443 applet.js:481
+#: applet.js:403 applet.js:405 applet.js:455 applet.js:457 applet.js:495
 msgid "n/a"
 msgstr ""
 
-#: applet.js:391 applet.js:443
+#: applet.js:405 applet.js:457
 msgid "crit:"
 msgstr ""
 
-#: applet.js:481 applet.js:524
+#: applet.js:495 applet.js:538
 msgid "min:"
 msgstr ""
 
-#: applet.js:526
+#: applet.js:540
 msgid "max:"
 msgstr ""
 
-#: applet.js:554
+#: applet.js:568
 msgid "No intrusion detected"
 msgstr ""
 
-#: applet.js:554
+#: applet.js:568
 msgid "INTRUSION DETECTED!"
 msgstr ""
 
-#: applet.js:574
+#: applet.js:588
 msgid "Must be configured!"
 msgstr ""
 
-#: applet.js:845
+#: applet.js:863
 msgid "Settings"
 msgstr ""
 
-#: applet.js:845
+#: applet.js:863
 msgid ":"
 msgstr ""
 
 #. settings-schema.json->page_General->title
-#: applet.js:852
+#: applet.js:870
 msgid "⚙ General"
 msgstr ""
 
-#: applet.js:862
+#: applet.js:880
 msgid "🌡 Temperature sensors"
 msgstr ""
 
-#: applet.js:872
+#: applet.js:890
 msgid "🤂 Fan sensors"
 msgstr ""
 
-#: applet.js:882
+#: applet.js:900
 msgid "🗲 Voltage sensors"
 msgstr ""
 
-#: applet.js:892
+#: applet.js:910
 msgid "⮿ Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#: applet.js:903
+#: applet.js:921
 msgid "Run xsensors"
 msgstr ""
 
-#: applet.js:914
+#: applet.js:932
 msgid "Reload this applet"
 msgstr ""
 
-#: applet.js:1206
+#: applet.js:1224
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
 
-#: lib/checkDependencies.js:300
+#: lib/checkDependencies.js:303
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr ""
 
-#: lib/checkDependencies.js:301
+#: lib/checkDependencies.js:304
 msgid "All dependencies are installed"
 msgstr ""
 
-#: lib/checkDependencies.js:329
+#: lib/checkDependencies.js:332
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 
-#: lib/checkDependencies.js:330
+#: lib/checkDependencies.js:333
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 
-#: lib/checkDependencies.js:331
+#: lib/checkDependencies.js:334
 msgid "Some dependencies are not installed!"
 msgstr ""
 
@@ -210,8 +210,8 @@ msgstr ""
 msgid "Remove from panels certain applets that also use sensors"
 msgstr ""
 
-#. settings-schema.json->section_tempHddtemp->title
-msgid "hddtemp is for now only usable by root"
+#. settings-schema.json->section_tempDisktemp->title
+msgid "For the time being, disk temperature can only be read by root."
 msgstr ""
 
 #. settings-schema.json->section_tempDisplay->title
@@ -343,6 +343,16 @@ msgstr ""
 msgid "Text Color"
 msgstr ""
 
+#. settings-schema.json->separator->description
+msgid "Separator"
+msgstr ""
+
+#. settings-schema.json->separator->tooltip
+msgid ""
+"The string used to separate values in horizontal orientation. Default is "
+"'│'."
+msgstr ""
+
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
 msgstr ""
@@ -385,8 +395,8 @@ msgstr ""
 msgid "Whether or not to display in menu the action: Restart this applet."
 msgstr ""
 
-#. settings-schema.json->make_hddtemp_usable_by_user->description
-msgid "Make hddtemp usable by user"
+#. settings-schema.json->make_disktemp_readable_by_user->description
+msgid "Make disk temperature user-readable"
 msgstr ""
 
 #. settings-schema.json->show_temp->description

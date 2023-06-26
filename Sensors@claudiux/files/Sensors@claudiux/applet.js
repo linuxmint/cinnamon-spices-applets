@@ -113,7 +113,7 @@ class SensorsApplet extends Applet.TextApplet {
 
     //~ // Permissions on hddtemp:
     //~ this.future_hddtemp_check = Math.ceil(Date.now() / 1000) - 7200;
-    //~ this.check_hddtemp_permissions(true);
+    //~ this.check_disktemp_user_readable(true);
 
     // Sensors Reaper:
     this.reaper = new SensorsReaper(this, this.interval);
@@ -208,6 +208,20 @@ class SensorsApplet extends Applet.TextApplet {
       }
     }
     this.s.setValue("temperatureATfevimu_is_loaded", _temperatureATfevimu_is_loaded);
+    this.s.setValue("disktemp_is_user_readable", this.is_disktemp_user_readable());
+  }
+
+  is_disktemp_user_readable() {
+    var ret = false;
+    const sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
+    const sudoers_smartctl_file = Gio.file_new_for_path(sudoers_smartctl_path);
+    if (sudoers_smartctl_file.query_exists(null)) {
+      let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
+      if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:"))
+        ret = true;
+    }
+    log("is_disktemp_user_readable: "+ret);
+    return ret
   }
 
   reap_sensors() {
@@ -592,7 +606,7 @@ class SensorsApplet extends Applet.TextApplet {
 
     this.isUpdatingUI = true;
 
-    //~ this.check_hddtemp_permissions();
+    //~ this.check_disktemp_user_readable();
 
     var _appletLabel = "";
     let _border_type = (this.remove_border) ? "-noborder" : "";
@@ -1157,7 +1171,6 @@ class SensorsApplet extends Applet.TextApplet {
     if (this.dependencies.areDepMet()) {
       // All dependencies are installed. Now, run the loop!:
       this.isLooping = true;
-      this.loopId = 0;
       this.reap_sensors();
     } else {
       // Some dependencies are missing. Suggest to the user to install them.
@@ -1227,24 +1240,28 @@ class SensorsApplet extends Applet.TextApplet {
     dialog.open();
   }
 
-  //~ _on_hddtemp_button_pressed() {
-    //~ Util.spawnCommandLine("/bin/bash -c '%s/pkexec_make_hddtemp_usable_by_user.sh'".format(SCRIPTS_DIR));
-  //~ }
+  _on_disktemp_button_pressed() {
+    Util.spawnCommandLineAsyncIO(
+      "/bin/bash -c '%s/pkexec_make_smartctl_usable_by_sudoers.sh'".format(SCRIPTS_DIR),
+      Lang.bind(this, (out, err, exitCode) => {
+        this.s.setValue("disktemp_is_user_readable", this.is_disktemp_user_readable());
+    }));
+  }
 
-  //~ check_hddtemp_permissions(force=false) {
+  //~ check_disktemp_user_readable(force=false) {
     //~ let quickly = false;
     //~ let now = 1*Math.ceil(Date.now() / 1000);
-    //~ let old_value = this.s.getValue("hddtemp_is_user_accessible");
+    //~ let old_value = this.s.getValue("disktemp_is_user_readable");
     //~ if (force || now - this.future_hddtemp_check > 0) {
       //~ Util.spawnCommandLineAsyncIO("/bin/bash -c '%s/is_hddtemp_usable_by_user.sh'".format(SCRIPTS_DIR),
                                     //~ (out, err, exitCode) => {
         //~ if (exitCode == 0) {
-          //~ this.s.setValue("hddtemp_is_user_accessible", true);
+          //~ this.s.setValue("disktemp_is_user_readable", true);
           //~ if (!old_value || force) {
               //~ log(_("hddtemp is now executable by any user."), true);
           //~ }
         //~ } else {
-          //~ this.s.setValue("hddtemp_is_user_accessible", false);
+          //~ this.s.setValue("disktemp_is_user_readable", false);
           //~ if (exitCode == 1) {
             //~ logError(_("hddtemp is NOT executable by any user else root."));
             //~ if (!force) {
