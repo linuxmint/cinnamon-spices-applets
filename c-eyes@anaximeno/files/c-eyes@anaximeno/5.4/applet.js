@@ -326,8 +326,8 @@ class Eye extends Applet.Applet {
 	}
 
 	set_eye_property_update() {
-		this.area.set_width(EYE_AREA_WIDTH + 2 * this.eye_margin);
-		this.area.set_height(EYE_AREA_HEIGHT);
+		this.area.set_width((EYE_AREA_WIDTH + 2 * this.eye_margin) * global.ui_scale);
+		this.area.set_height(EYE_AREA_HEIGHT * global.ui_scale);
 		this.area.queue_repaint();
 	}
 
