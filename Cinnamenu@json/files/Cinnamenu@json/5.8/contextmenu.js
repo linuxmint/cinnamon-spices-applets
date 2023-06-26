@@ -243,12 +243,20 @@ class ContextMenu {
                                                 this.close(); } ));
         }
 
-        //uninstall
+        //uninstall Mint only
         if (this.appThis._canUninstallApps) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Uninstall'), 'edit-delete',
                                 () => { spawnCommandLine("/usr/bin/cinnamon-remove-application '" +
                                             app.get_app_info().get_filename() + "'");
                                         this.appThis.menu.close(); } ));
+        }
+
+        //show app info 
+        if (this.appThis._pamacManagerAvailable) {
+            addMenuItem( new ContextMenuItem(this.appThis, _('App Info'), 'dialog-information',
+                        () => { spawnCommandLine("/usr/bin/pamac-manager --details-id=" + app.id);
+                                log(app.id);
+                                this.appThis.menu.close(); } ));
         }
     }
 
