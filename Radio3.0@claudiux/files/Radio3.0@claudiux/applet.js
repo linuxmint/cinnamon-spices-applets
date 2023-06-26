@@ -107,6 +107,7 @@ const {
   FileInfo,
   FileQueryInfoFlags,
   FileType,
+  FileIcon,
   DataInputStream,
   UnixInputStream,
   Settings
@@ -1290,13 +1291,65 @@ WebRadioReceiverAndRecorder.prototype = {
     return idstr;
   },
 
+  /**
+   * set_applet_icon_path:
+   * @icon_path (string): path of the icon
+   *
+   * Sets the icon of the applet to the image file at @icon_path
+   *
+   * The icon will be full color
+   */
+  set_applet_icon_path: function (icon_path) {
+    this._ensureIcon();
+
+    try {
+      let file = file_new_for_path(icon_path);
+      this._applet_icon.set_gicon(new FileIcon({ file: file }));
+      this._applet_icon.set_icon_type(IconType.FULLCOLOR);
+      this._setStyle();
+    } catch (e) {
+      //~ global.log(e);
+    }
+  },
+
+  /**
+   * set_applet_icon_symbolic_path:
+   * @icon_path (string): path of the icon
+   *
+   * Sets the icon of the applet to the image file at @icon_path
+   *
+   * The icon will be symbolic
+   */
+  set_applet_icon_symbolic_path: function(icon_path) {
+    this._ensureIcon();
+
+    try {
+      let file = file_new_for_path(icon_path);
+      this._applet_icon.set_gicon(new FileIcon({ file: file }));
+      this._applet_icon.set_icon_type(IconType.SYMBOLIC);
+      this._setStyle();
+    } catch (e) {
+      //~ global.log(e);
+    }
+  },
+
   set_applet_icon_from_url: function(url="") {
+    //~ if (this._applet_icon && (this._applet_icon instanceof Icon)) {
+      //~ log("HAS ICON", true);
+      //~ this._applet_icon_box.remove_child(this._applet_icon);
+      //~ this._applet_icon.destroy();
+    //~ }
+
     let name = this.id2str(this.get_radio_name(this.radioId));
     //~ log("name: "+name, true);
     this.change_symbolic_icon();
     let png_path = COVER_ART_DIR+"/%s.png".format(name);
     if (file_test(png_path, FileTest.EXISTS)) {
-      this.set_applet_icon_path(png_path);
+      try {
+        this.set_applet_icon_path(png_path);
+      } catch (e) {
+        // Nothing to do.
+      }
       return
     }
     if (!url || url.length === 0) {
@@ -1327,15 +1380,19 @@ WebRadioReceiverAndRecorder.prototype = {
 
     try {
       let config_dir = file_new_for_path(DOT_CONFIG_DIR);
-      // Remove attributes 'metadata::custom-icon' and 'metadata::custom-icon-name':
-      config_dir.set_attribute("metadata::custom-icon", 0, null, 0, null);
-      config_dir.set_attribute("metadata::custom-icon-name", 0, null, 0, null);
+      if ( versionCompare(getenv("CINNAMON_VERSION"), "5.6") <= 0 ) {
+        // Remove attributes 'metadata::custom-icon' and 'metadata::custom-icon-name':
+        config_dir.set_attribute("metadata::custom-icon", 0, null, 0, null);
+        config_dir.set_attribute("metadata::custom-icon-name", 0, null, 0, null);
+    }
       // Set the right attribute:
       config_dir.set_attribute_string(icon_attr, path_to_icon, 0, null);
 
       let radio30_music_dir = file_new_for_path(RADIO30_MUSIC_DIR);
-      radio30_music_dir.set_attribute("metadata::custom-icon", 0, null, 0, null);
-      radio30_music_dir.set_attribute("metadata::custom-icon-name", 0, null, 0, null);
+      if ( versionCompare(getenv("CINNAMON_VERSION"), "5.6") <= 0 ) {
+        radio30_music_dir.set_attribute("metadata::custom-icon", 0, null, 0, null);
+        radio30_music_dir.set_attribute("metadata::custom-icon-name", 0, null, 0, null);
+    }
       radio30_music_dir.set_attribute_string(icon_attr, path_to_icon, 0, null);
     } catch(e) {
       logError(e)
@@ -4194,6 +4251,17 @@ WebRadioReceiverAndRecorder.prototype = {
     }
     if (items.indexOf(this.context_menu_item_about) == -1) {
       this._applet_context_menu.addMenuItem(this.context_menu_item_about);
+    }
+
+    // Web page...
+    if (this.context_menu_item_webpage == null) {
+      this.context_menu_item_webpage = new PopupIconMenuItem(_("Radio3.0 web page..."),
+        "web-browser",
+        IconType.SYMBOLIC);
+      this.context_menu_item_webpage.connect('activate', () => spawnCommandLineAsync("bash -c 'xdg-open https://cinnamon-spices.linuxmint.com/applets/view/360'"));
+    }
+    if (items.indexOf(this.context_menu_item_webpage) == -1) {
+      this._applet_context_menu.addMenuItem(this.context_menu_item_webpage);
     }
 
     // Manual...
