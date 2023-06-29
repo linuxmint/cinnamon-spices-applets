@@ -8,6 +8,20 @@ const Main = imports.ui.main; // ++ Needed for notify()
 const Gettext = imports.gettext;
 
 //const Util = require("./lib/util");
+const {
+  UUID,
+  HOME_DIR,
+  APPLET_DIR,
+  SCRIPTS_DIR,
+  ICONS_DIR,
+  XS_PATH,
+  _,
+  DEBUG,
+  RELOAD,
+  QUICK,
+  log,
+  logError
+} = require("./lib/constants");
 
 const {to_string} = require("./lib/to-string");
 
@@ -16,7 +30,7 @@ const {to_string} = require("./lib/to-string");
 /**
  * UUDI is the Universal Unique IDentifier of the applet using this dependencies management.
  */
-const UUID = "Sensors@claudiux";
+//const UUID = "Sensors@claudiux";
 
 /**
  * NEEDS_FONTS_SYMBOLA must be set to true when the 'symbola' fonts are needed by the applet.
@@ -101,13 +115,13 @@ if (NEEDS_FONTS_SYMBOLA) {
   DEPENDENCIES["openSUSE"].push(["", "/usr/share/fonts/truetype/Symbola.ttf", "gdouros-symbola-fonts"]);
 }
 
-const _ = function(str) {
-  let translation = Gettext.gettext(str);
-  if (translation !== str) {
-    return translation;
-  }
-  return Gettext.dgettext(UUID, str);
-}
+//~ const _ = function(str) {
+  //~ let translation = Gettext.gettext(str);
+  //~ if (translation !== str) {
+    //~ return translation;
+  //~ }
+  //~ return Gettext.dgettext(UUID, str);
+//~ }
 
 const UPDATE = {
   "default": "sudo apt-get update",
@@ -125,7 +139,7 @@ const INSTALL = {
   "openSUSE": "sudo zypper --non-interactive install"
 }
 
-const HOME_DIR = GLib.get_home_dir();
+//const HOME_DIR = GLib.get_home_dir();
 
 const DISTRO = function() {
   let osRelease = to_string(GLib.file_get_contents("/usr/lib/os-release")[1]);

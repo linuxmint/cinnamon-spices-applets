@@ -157,12 +157,6 @@ If you have specific hardware, try to put into the `/etc/sensors.d/` folder (wit
   6. Open a terminal and execute the command: `sensors -j`. (If it does not work, try `sensors -u`.) Copy/paste the output in the text of the issue, also between triple-backquotes.
   7. Describe your problem in as much detail as possible. Thank you.
 
-### Since I installed this applet, my ~/.xsession-errors file is flooded by 'posix_spawn' messages
-
-These messages are simple warnings and appear or not depending on the version of GLib used by the Linux distribution. Thus, they appear in Linux Mint 20, but not in Linux Mint 19.3.
-
-To avoid this file flooding, please install the [Sanitize ~/.xsession-errors][sanitize] Cinnamon extension.
-
 ## Contributing
 
 Any contribution or translation is welcome!

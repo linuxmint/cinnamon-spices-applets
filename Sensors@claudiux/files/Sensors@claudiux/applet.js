@@ -75,6 +75,16 @@ class SensorsApplet extends Applet.TextApplet {
 
     // To be sure that the scripts will be executable:
     Util.spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
+    
+    this.sudo_or_wheel = "none";
+    Util.spawnCommandLineAsyncIO("/bin/bash -c 'groups'", Lang.bind(this, (out, err, exitCode) => {
+      if (exitCode == 0) {
+        let groups = out.trim().split(' ');
+        if (groups.indexOf("wheel") > -1) this.sudo_or_wheel = "wheel";
+        if (groups.indexOf("sudo") > -1) this.sudo_or_wheel = "sudo";
+        log("this.sudo_or_wheel: "+this.sudo_or_wheel, true)
+      }
+    }));
 
     // Detect language for numeric format:
     this.num_lang = this._get_lang();
@@ -216,9 +226,13 @@ class SensorsApplet extends Applet.TextApplet {
     const sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
     const sudoers_smartctl_file = Gio.file_new_for_path(sudoers_smartctl_path);
     if (sudoers_smartctl_file.query_exists(null)) {
-      let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
-      if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:"))
-        ret = true;
+		try {
+	      let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
+	      if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:"))
+	        ret = true;
+	    } catch (e) {
+			ret = false
+		}
     }
     log("is_disktemp_user_readable: "+ret);
     return ret
@@ -1242,7 +1256,7 @@ class SensorsApplet extends Applet.TextApplet {
 
   _on_disktemp_button_pressed() {
     Util.spawnCommandLineAsyncIO(
-      "/bin/bash -c '%s/pkexec_make_smartctl_usable_by_sudoers.sh'".format(SCRIPTS_DIR),
+      "/bin/bash -c '%s/pkexec_make_smartctl_usable_by_sudoers.sh %s'".format(SCRIPTS_DIR, this.sudo_or_wheel),
       Lang.bind(this, (out, err, exitCode) => {
         this.s.setValue("disktemp_is_user_readable", this.is_disktemp_user_readable());
     }));
