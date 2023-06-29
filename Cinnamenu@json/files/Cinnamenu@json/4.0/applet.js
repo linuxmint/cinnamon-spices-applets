@@ -369,7 +369,7 @@ class CinnamenuApplet extends TextIconApplet {
         }
     }
 
-    _onShowHomeFolderChange = () => {
+    _onShowHomeFolderChange() {
         const homePath = GLib.get_home_dir();
         if (this.settings.showHomeFolder) {
             if (!this.getIsFolderCategory(homePath)) {
