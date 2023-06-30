@@ -75,14 +75,13 @@ class SensorsApplet extends Applet.TextApplet {
 
     // To be sure that the scripts will be executable:
     Util.spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
-    
+
     this.sudo_or_wheel = "none";
     Util.spawnCommandLineAsyncIO("/bin/bash -c 'groups'", Lang.bind(this, (out, err, exitCode) => {
       if (exitCode == 0) {
         let groups = out.trim().split(' ');
         if (groups.indexOf("wheel") > -1) this.sudo_or_wheel = "wheel";
         if (groups.indexOf("sudo") > -1) this.sudo_or_wheel = "sudo";
-        log("this.sudo_or_wheel: "+this.sudo_or_wheel, true)
       }
     }));
 
@@ -226,13 +225,13 @@ class SensorsApplet extends Applet.TextApplet {
     const sudoers_smartctl_path = "/etc/sudoers.d/smartctl";
     const sudoers_smartctl_file = Gio.file_new_for_path(sudoers_smartctl_path);
     if (sudoers_smartctl_file.query_exists(null)) {
-		try {
-	      let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
-	      if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:"))
-	        ret = true;
-	    } catch (e) {
-			ret = false
-		}
+    try {
+        let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
+        if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:"))
+          ret = true;
+      } catch (e) {
+      ret = false
+    }
     }
     log("is_disktemp_user_readable: "+ret);
     return ret
@@ -395,8 +394,12 @@ class SensorsApplet extends Applet.TextApplet {
     var _tooltips = [];
 
     // Temperatures:
-    if (this.show_temp && this.temp_sensors.length !== 0
-        && this.data !== undefined && Object.keys(this.data["temps"]).length != 0) {
+    if (this.show_temp
+      && ((this.temp_disks.length > 0)
+         || (this.temp_sensors.length > 0 && this.data !== undefined && Object.keys(this.data["temps"]).length > 0)
+        )
+    ) {
+
       if (this.temp_sensors.length > 0) {
         for (let t of this.temp_sensors) {
           if (this.data["temps"][t["sensor"]] !== undefined) {
@@ -427,53 +430,66 @@ class SensorsApplet extends Applet.TextApplet {
         }
       }
 
-      for (let disk of this.temp_disks) {
-        let _disk_name = disk["disk"].trim();
-        if (disk["show_in_tooltip"]) {
-          let command = "bash -c '"+SCRIPTS_DIR+"/get_disk temp.sh "+_disk_name+"'";
+      if (this.show_temp && this.temp_disks.length > 0) {
+        for (let disk of this.temp_disks) {
+          let _disk_name = disk["disk"].trim();
+          if (disk["show_in_tooltip"]) {
+            log(_disk_name, true);
+            let command = "bash -c '"+SCRIPTS_DIR+"/get_disk_temp.sh "+_disk_name+"'";
 
-          if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
-          let _temp;
-          if (disk["value"])
-            _temp = disk["value"];
-          Util.spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
-            this._temp[_disk_name] = stdout;
+            if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
+            let _temp;
+            if (disk["value"])
+              _temp = disk["value"];
+            Util.spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
+              if (exitCode === 0) {
+                //~ this._temp[_disk_name] = stdout;
 
-            if (typeof this._temp[_disk_name] === "object")
-              _temp = to_string(this._temp[_disk_name]);
-            else
-              _temp = this._temp[_disk_name];
-          }));
-          if (!isNaN(_temp)) {
-            if (disk["user_formula"] && disk["user_formula"].length > 0) {
-              let _user_formula = disk["user_formula"].replace(/\$/g, _temp);
-              _temp = 1.0*eval(_user_formula)
-            }
+                if (typeof stdout === "object")
+                  _temp = to_string(stdout);
+                else
+                  _temp = ""+stdout;
 
-            let _temp_max = 1*disk["high"];
-            let _temp_crit = 1*disk["crit"];
+                _temp = 1.0*parseInt(_temp);
+                this._temp[_disk_name] = _temp;
 
-            let _shown_name = "";
-            if (this.show_temp_name) _shown_name = disk["shown_name"]+" ";
-            else _shown_name = disk["disk"]+" ";
+                if (typeof _temp === "number") {
+                  disk["value"] = _temp;
+                }
+              }
+            }));
+              if (!isNaN(_temp)) {
+                if (disk["user_formula"] && disk["user_formula"].length > 0) {
+                  let _user_formula = disk["user_formula"].replace(/\$/g, _temp);
+                  _temp = 1.0*eval(_user_formula)
+                }
 
-            _tooltip +=  (disk["show_in_panel"] && this.bold_italics_main_sensors) ?
-                " <i><b>" + _shown_name + "</b></i>\n" :
-                " " + _shown_name + "\n";
+                let _temp_max = 1*disk["high"];
+                let _temp_crit = 1*disk["crit"];
 
-            let str_value = this._formatted_temp(_temp).padStart(10, " ");
-            _tooltip += (this.bold_values) ?
-              "  <b>" + str_value + "</b>" :
-              "  " + str_value;
+                let _shown_name = "";
+                if (this.show_temp_name) _shown_name = disk["shown_name"]+" ";
+                else _shown_name = disk["disk"]+" ";
 
-            _tooltip += "  "+ _("high:") + " " + ((_temp_max === 0) ? _("n/a") : this._formatted_temp(_temp_max));
+                _tooltip +=  (disk["show_in_panel"] && this.bold_italics_main_sensors) ?
+                    " <i><b>" + _shown_name + "</b></i>\n" :
+                    " " + _shown_name + "\n";
 
-            _tooltip += "  "+ _("crit:") + " " + ((_temp_crit === 0) ? _("n/a") : this._formatted_temp(_temp_crit));
-            _tooltip += "\n";
-            _temp_crit = null;
-            _temp_max = null;
-            str_value = null;
-            _shown_name = null
+                let str_value = this._formatted_temp(_temp).padStart(10, " ");
+                _tooltip += (this.bold_values) ?
+                  "  <b>" + str_value + "</b>" :
+                  "  " + str_value;
+
+                _tooltip += "  "+ _("high:") + " " + ((_temp_max === 0) ? _("n/a") : this._formatted_temp(_temp_max));
+
+                _tooltip += "  "+ _("crit:") + " " + ((_temp_crit === 0) ? _("n/a") : this._formatted_temp(_temp_crit));
+                _tooltip += "\n";
+                _temp_crit = null;
+                _temp_max = null;
+                str_value = null;
+                _shown_name = null
+              }
+            //~ }));
           }
         }
       }
