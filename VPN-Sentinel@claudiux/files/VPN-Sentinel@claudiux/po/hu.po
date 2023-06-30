@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-30 21:56+0200\n"
-"PO-Revision-Date: 2023-06-05 12:00+0200\n"
+"PO-Revision-Date: 2023-06-30 23:52+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -66,12 +66,12 @@ msgstr "%s le lett állítva."
 #: applet.js:667
 #, javascript-format
 msgid "%s stopped because the VPN link is idle."
-msgstr ""
+msgstr "A(z) %s leállt, mert a VPN kapcsolat inaktív állapotba került."
 
 #: applet.js:759
 #, javascript-format
 msgid "Connection lost. Attempt to reconnect to: %s"
-msgstr ""
+msgstr "A kapcsolat megszakadt. Ismételt csatlakozás: %s"
 
 #: applet.js:769
 msgid "Connection to: "
@@ -137,7 +137,7 @@ msgstr "Tevékenység napló megnyitása"
 
 #: applet.js:1160
 msgid "Reload Country Flag"
-msgstr ""
+msgstr "Országzászló újratöltése"
 
 #: applet.js:1162
 msgid "Confirm this Country Flag"
@@ -185,7 +185,7 @@ msgstr ""
 
 #: applet.js:1361
 msgid "VPN-Sentinel was stopped."
-msgstr ""
+msgstr "VPN-Sentinel leállt."
 
 #: applet.js:1365
 #, javascript-format
@@ -213,7 +213,7 @@ msgstr ""
 #: lib/checkDependencies.js:267
 #, javascript-format
 msgid "The applet %s is fully functional."
-msgstr "A kisalkalmazás %s teljesen működőképes."
+msgstr "A kisalkalmazás (%s) teljesen működőképes."
 
 #: lib/checkDependencies.js:268
 msgid "All dependencies are installed"
@@ -480,7 +480,7 @@ msgstr ""
 
 #. settings-schema.json->flagList->description
 msgid "Flag List"
-msgstr ""
+msgstr "Zászló lista"
 
 #. settings-schema.json->flagList->columns->title
 #. settings-schema.json->sortFlagListBy->options
