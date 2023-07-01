@@ -349,6 +349,49 @@ class SensorsApplet extends Applet.TextApplet {
       this.populate_sensors_in_settings("temps", force);
   }
 
+  read_disk_temps() {
+    //~ var temp_disks = this.temp_disks;
+    if (this.show_temp && this.temp_disks.length > 0) {
+      for (let disk of this.temp_disks) {
+        if (!disk["show_in_tooltip"] && !disk["show_in_panel"]) continue;
+
+        let _disk_name = disk["disk"].trim();
+        //~ log(_disk_name, true);
+        let command = "bash -c '"+SCRIPTS_DIR+"/get_disk_temp.sh "+_disk_name+"'";
+
+        if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
+        let _temp;
+        //~ if (disk["value"])
+          //~ _temp = disk["value"];
+        Util.spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
+          if (exitCode === 0) {
+            //~ this._temp[_disk_name] = stdout;
+
+            if (typeof stdout === "object")
+              _temp = to_string(stdout);
+            else
+              _temp = ""+stdout;
+
+            _temp = 1.0*parseInt(_temp);
+            //~ this._temp[_disk_name] = _temp;
+
+            if (!isNaN(_temp)) {
+              if (disk["user_formula"] && disk["user_formula"].length > 0) {
+                let _user_formula = disk["user_formula"].replace(/\$/g, _temp);
+                _temp = 1.0*eval(_user_formula)
+              }
+            }
+
+            if (typeof _temp === "number") {
+              disk["value"] = _temp;
+              this._temp[_disk_name] = _temp;
+            }
+          }
+        }));
+      }
+    }
+  }
+
   populate_temp_disks_in_settings() {
     let command = SCRIPTS_DIR+"/get_disk_list.sh";
     var temp_disks = this.temp_disks;
@@ -434,35 +477,14 @@ class SensorsApplet extends Applet.TextApplet {
         for (let disk of this.temp_disks) {
           let _disk_name = disk["disk"].trim();
           if (disk["show_in_tooltip"]) {
-            log(_disk_name, true);
-            let command = "bash -c '"+SCRIPTS_DIR+"/get_disk_temp.sh "+_disk_name+"'";
+            //~ log(_disk_name, true);
 
             if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
             let _temp;
             if (disk["value"])
               _temp = disk["value"];
-            Util.spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
-              if (exitCode === 0) {
-                //~ this._temp[_disk_name] = stdout;
 
-                if (typeof stdout === "object")
-                  _temp = to_string(stdout);
-                else
-                  _temp = ""+stdout;
-
-                _temp = 1.0*parseInt(_temp);
-                this._temp[_disk_name] = _temp;
-
-                if (typeof _temp === "number") {
-                  disk["value"] = _temp;
-                }
-              }
-            }));
               if (!isNaN(_temp)) {
-                if (disk["user_formula"] && disk["user_formula"].length > 0) {
-                  let _user_formula = disk["user_formula"].replace(/\$/g, _temp);
-                  _temp = 1.0*eval(_user_formula)
-                }
 
                 let _temp_max = 1*disk["high"];
                 let _temp_crit = 1*disk["crit"];
@@ -492,6 +514,7 @@ class SensorsApplet extends Applet.TextApplet {
             //~ }));
           }
         }
+        this.read_disk_temps()
       }
 
       if (_tooltip.length !== 0) {
@@ -690,29 +713,8 @@ class SensorsApplet extends Applet.TextApplet {
         if (disk["show_in_panel"] && _disk_name.length > 0) {
           if (!this._temp[_disk_name]) this._temp[_disk_name] = "??";
           if (disk["value"]) this._temp[_disk_name] = disk["value"];
-          let command = "bash -c '"+SCRIPTS_DIR+"/get_disk_temp.sh "+_disk_name+"'";
           let _temp;
-          Util.spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
-            if (exitCode === 0) {
-              if (typeof stdout === "object") {
-                _temp = to_string(stdout);
-              } else {
-                _temp = ""+stdout;
-              }
 
-              _temp = 1.0*parseInt(_temp);
-              if (disk["user_formula"] && disk["user_formula"].length > 0) {
-                let _user_formula = disk["user_formula"].replace(/\$/g, _temp);
-                _temp = 1.0*eval(_user_formula)
-              }
-
-              this._temp[_disk_name] = _temp;
-
-              if (typeof _temp === "number") {
-                disk["value"] = _temp;
-              }
-            }
-          }));
           _temp = (disk["value"]) ? disk["value"] : '??';
           if (isNaN(_temp)) continue;
           let _temp_max = disk["high"];
@@ -732,6 +734,7 @@ class SensorsApplet extends Applet.TextApplet {
           nbr_already_shown += 1;
         }
       }
+      this.read_disk_temps()
     }
 
     // Fans:
