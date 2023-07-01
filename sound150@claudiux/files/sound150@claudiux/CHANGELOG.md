@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### v4.0.0~20230701
+  * Fixes alignment error, like the sound Cinnamon applet (Cinnamon 5.8).
+
 ### v3.1.0~20230520
   * Fixes a deprecation.
 
