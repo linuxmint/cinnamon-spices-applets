@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-20 15:16+0200\n"
-"PO-Revision-Date: 2023-04-20 15:41+0200\n"
+"POT-Creation-Date: 2023-06-16 17:17+0200\n"
+"PO-Revision-Date: 2023-06-16 17:20+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -23,91 +23,91 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Moniteur de Capteurs"
 
-#: applet.js:389 applet.js:441
+#: applet.js:403 applet.js:455
 msgid "high:"
 msgstr "élevée :"
 
-#: applet.js:389 applet.js:391 applet.js:441 applet.js:443 applet.js:481
+#: applet.js:403 applet.js:405 applet.js:455 applet.js:457 applet.js:495
 msgid "n/a"
 msgstr "n/a"
 
-#: applet.js:391 applet.js:443
+#: applet.js:405 applet.js:457
 msgid "crit:"
 msgstr "critique :"
 
-#: applet.js:481 applet.js:524
+#: applet.js:495 applet.js:538
 msgid "min:"
 msgstr "min :"
 
-#: applet.js:526
+#: applet.js:540
 msgid "max:"
 msgstr "max :"
 
-#: applet.js:554
+#: applet.js:568
 msgid "No intrusion detected"
 msgstr "Aucune intrusion détectée"
 
-#: applet.js:554
+#: applet.js:568
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSION DÉTECTÉE !"
 
-#: applet.js:574
+#: applet.js:588
 msgid "Must be configured!"
 msgstr "Doit être configuré !"
 
-#: applet.js:845
+#: applet.js:863
 msgid "Settings"
 msgstr "Paramètres"
 
-#: applet.js:845
+#: applet.js:863
 msgid ":"
 msgstr " :"
 
 #. settings-schema.json->page_General->title
-#: applet.js:852
+#: applet.js:870
 msgid "⚙ General"
 msgstr "⚙ Général"
 
-#: applet.js:862
+#: applet.js:880
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Capteurs de température"
 
-#: applet.js:872
+#: applet.js:890
 msgid "🤂 Fan sensors"
 msgstr "🤂 Capteurs de ventilateur"
 
-#: applet.js:882
+#: applet.js:900
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Capteurs de tension"
 
-#: applet.js:892
+#: applet.js:910
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Capteurs d'intrusion"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:903
+#: applet.js:921
 msgid "Run xsensors"
 msgstr "Lancer xsensors"
 
-#: applet.js:914
+#: applet.js:932
 msgid "Reload this applet"
 msgstr "Recharger cette applet"
 
-#: applet.js:1206
+#: applet.js:1224
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Êtes-vous sûr de vouloir enlever \"%s\" ?"
 
-#: lib/checkDependencies.js:300
+#: lib/checkDependencies.js:303
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "L'applet %s est pleinement fonctionnelle."
 
-#: lib/checkDependencies.js:301
+#: lib/checkDependencies.js:304
 msgid "All dependencies are installed"
 msgstr "Toutes les dépendances sont installées"
 
-#: lib/checkDependencies.js:329
+#: lib/checkDependencies.js:332
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -115,11 +115,11 @@ msgstr ""
 "Vous semblez ne pas disposer des programmes requis pour bénéficier de toutes "
 "les fonctionnalités de cette applet."
 
-#: lib/checkDependencies.js:330
+#: lib/checkDependencies.js:333
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Veuillez exécuter, dans le terminal qui s'est ouvert, les commandes :"
 
-#: lib/checkDependencies.js:331
+#: lib/checkDependencies.js:334
 msgid "Some dependencies are not installed!"
 msgstr "Certaines dépendances ne sont pas installées !"
 
@@ -218,9 +218,10 @@ msgid "Remove from panels certain applets that also use sensors"
 msgstr ""
 "Supprimer des panneaux certaines applets qui utilisent également des capteurs"
 
-#. settings-schema.json->section_tempHddtemp->title
-msgid "hddtemp is for now only usable by root"
-msgstr "hddtemp est pour l'instant seulement utilisable par root"
+#. settings-schema.json->section_tempDisktemp->title
+msgid "For the time being, disk temperature can only be read by root."
+msgstr ""
+"Pour l'instant, la température du disque ne peut être lue que par root."
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -355,6 +356,17 @@ msgstr "Gris clair"
 msgid "Text Color"
 msgstr "Couleur du texte"
 
+#. settings-schema.json->separator->description
+msgid "Separator"
+msgstr "Séparateur"
+
+#. settings-schema.json->separator->tooltip
+msgid ""
+"The string used to separate values in horizontal orientation. Default is '│'."
+msgstr ""
+"Chaîne utilisée pour séparer les valeurs dans l'orientation horizontale. La "
+"valeur par défaut est \"│\"."
+
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
 msgstr "Supprimer la bordure"
@@ -400,9 +412,9 @@ msgstr "Afficher dans le menu l'action : Redémarrez cette applet"
 msgid "Whether or not to display in menu the action: Restart this applet."
 msgstr "Afficher ou non dans le menu l'action: Redémarrez cette applet."
 
-#. settings-schema.json->make_hddtemp_usable_by_user->description
-msgid "Make hddtemp usable by user"
-msgstr "Rendre hddtemp utilisable par les utilisateurs"
+#. settings-schema.json->make_disktemp_readable_by_user->description
+msgid "Make disk temperature user-readable"
+msgstr "Rendre la température du disque lisible par l'utilisateur"
 
 #. settings-schema.json->show_temp->description
 #. settings-schema.json->show_fan->description
@@ -732,6 +744,12 @@ msgstr "Mettre à jour l'affichage"
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Retirer du panneau l'applet temperature@fevimu"
+
+#~ msgid "hddtemp is for now only usable by root"
+#~ msgstr "hddtemp est pour l'instant seulement utilisable par root"
+
+#~ msgid "Make hddtemp usable by user"
+#~ msgstr "Rendre hddtemp utilisable par les utilisateurs"
 
 #~ msgid "Temperature scripts"
 #~ msgstr "Scripts de température"

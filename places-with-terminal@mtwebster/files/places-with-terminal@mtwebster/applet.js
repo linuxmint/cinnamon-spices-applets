@@ -2,8 +2,6 @@ const St = imports.gi.St;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const Applet = imports.ui.applet;
-const Clutter = imports.gi.Clutter;
-const Cinnamon = imports.gi.Cinnamon;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
@@ -65,14 +63,6 @@ MyPopupMenuItem.prototype =
                 this.buttonbox.add_actor(button);
                 this.addActor(this.buttonbox);
 			}
-        },
-
-        _onButtonReleaseEvent: function (actor, event)
-        {
-            if ( Cinnamon.get_event_state(event) & Clutter.ModifierType.BUTTON1_MASK ) {
-                this.activate(event);
-            }
-            return true;
         },
 
         _terminal: function () {

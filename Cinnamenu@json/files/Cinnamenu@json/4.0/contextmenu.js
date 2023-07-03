@@ -247,12 +247,20 @@ class ContextMenu {
                                                 this.close(); } ));
         }
 
-        //uninstall
+        //uninstall Mint only
         if (this.appThis._canUninstallApps) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Uninstall'), 'edit-delete',
                                 () => { spawnCommandLine(__meta.path + "/mint-remove-application.py '" +
                                             app.get_app_info().get_filename() + "'");
                                         this.appThis.menu.close(); } ));
+        }
+
+        //show app info 
+        if (this.appThis._pamacManagerAvailable) {
+            addMenuItem( new ContextMenuItem(this.appThis, _('App Info'), 'dialog-information',
+                        () => { spawnCommandLine("/usr/bin/pamac-manager --details-id=" + app.id);
+                                log(app.id);
+                                this.appThis.menu.close(); } ));
         }
     }
 
@@ -297,30 +305,30 @@ class ContextMenu {
         //add/remove favorite
         const favs = XApp.Favorites ? XApp.Favorites.get_default() : null;
         if (favs) {//prior to cinnamon 4.8, XApp favorites are not available
-            this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
-            const updateAfterFavFileChange = () => {
-                this.appThis.display.sidebar.populate();
-                this.appThis.display.categoriesView.update();//in case fav files category needs adding/removing
-                this.appThis.display.updateMenuSize();
-                if (this.appThis.currentCategory === 'favorite_files') {
-                    this.appThis.setActiveCategory(this.appThis.currentCategory);
-                }
-            };
-            if (favs.find_by_uri(app.uri)) { //favorite
-                addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
-                                                        () => { favs.remove(app.uri);
-                                                                updateAfterFavFileChange();
-                                                                this.close(); } ));
-            } else {
-                addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
-                        () => {
-                            favs.add(app.uri);
-                            //favs list doesn't update synchronously after adding fav so add small
-                            //delay before updating menu
-                            Mainloop.timeout_add(100, () => { updateAfterFavFileChange(); });
-                            this.close();
-                        }));
+        this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
+        const updateAfterFavFileChange = () => {
+            this.appThis.display.sidebar.populate();
+            this.appThis.display.categoriesView.update();//in case fav files category needs adding/removing
+            this.appThis.display.updateMenuSize();
+            if (this.appThis.currentCategory === 'favorite_files') {
+                this.appThis.setActiveCategory(this.appThis.currentCategory);
             }
+        };
+        if (favs.find_by_uri(app.uri)) { //favorite
+            addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
+                                                    () => { favs.remove(app.uri);
+                                                            updateAfterFavFileChange();
+                                                            this.close(); } ));
+        } else {
+            addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
+                    () => {
+                        favs.add(app.uri);
+                        //favs list doesn't update synchronously after adding fav so add small
+                        //delay before updating menu
+                        Mainloop.timeout_add(100, () => { updateAfterFavFileChange(); });
+                        this.close();
+                    }));
+        }
         }
 
         //Add folder as category

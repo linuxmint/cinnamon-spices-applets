@@ -75,6 +75,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.appSystem = Cinnamon.AppSystem.get_default();
         this._canUninstallApps = GLib.file_test("/usr/bin/cinnamon-remove-application",
                                                 GLib.FileTest.EXISTS);
+        this._pamacManagerAvailable = GLib.file_test("/usr/bin/pamac-manager", GLib.FileTest.EXISTS);
         const searchFilesMenuItem = new PopupIconMenuItem(_('Find files...'), 'system-search',
                                                                         St.IconType.SYMBOLIC, false);
         this._applet_context_menu.addMenuItem(searchFilesMenuItem);
@@ -368,7 +369,7 @@ class CinnamenuApplet extends TextIconApplet {
         }
     }
 
-    _onShowHomeFolderChange = () => {
+    _onShowHomeFolderChange() {
         const homePath = GLib.get_home_dir();
         if (this.settings.showHomeFolder) {
             if (!this.getIsFolderCategory(homePath)) {
@@ -1025,21 +1026,22 @@ class CinnamenuApplet extends TextIconApplet {
                 'tan','tanh','trunc'].includes(match)) {
                 return 'Math.' + match;
             } else {
-                //validExp = false;
                 return match;
             }
         };
-        let validExp = true;
         let ans = null;
         const exp = pattern_raw.replace(/([a-zA-Z0-9_]+)/g, replacefn);
         
-        if (validExp) {
-            try {
-                ans = eval(exp);
-            } catch(e) {
-                //log(e.message);
+        try {
+            ans = eval(exp);
+        } catch(e) {
+            const r = /[\(\)\+=/\*\.;,]/
+            const probablyMath = r.test(exp);
+            if (probablyMath) {
+                calculatorResult = e.message;
             }
         }
+
         if ((typeof ans === 'number' || typeof ans === 'boolean' || typeof ans === 'bigint')
                                                                     && ans != pattern_raw ) {
             if (!this.calcGIcon) {
@@ -1725,7 +1727,8 @@ class Apps {//This obj provides the .app objects for all the applications catego
         this.dirs = [];
         this.knownApps = [];
         this.newInstance = true;
-        this.appsNeedRefresh = true;
+        this._initAppCategories();
+        this.appsNeedRefresh = false;
     }
 
     installedChanged() {

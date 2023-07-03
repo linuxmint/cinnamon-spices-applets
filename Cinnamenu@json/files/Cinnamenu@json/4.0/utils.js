@@ -21,8 +21,10 @@ function _(str) {
 
 const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+|_|&|\\)|\S+?(\s|$|-|=|\+|_|&|\\)/g ).join('\n');
 
-const graphemeBaseChars = s => //decompose and remove discritics.
-                s.normalize('NFKD').replace(/[\u0300-\u036f]/g, "");
+const graphemeBaseChars = s =>
+//decompose and remove discritics (blocks: Combining Diacritical Marks,
+//Combining Diacritical Marks Extended and Combining Diacritical Marks Supplement)
+            s.normalize('NFKD').replace(/[\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF]/g, "");
 
 const log = (...args) => {
     global.log('[Cinnamenu@json]', ...args);

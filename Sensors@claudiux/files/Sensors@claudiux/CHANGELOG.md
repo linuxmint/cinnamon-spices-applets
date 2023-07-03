@@ -1,3 +1,9 @@
+### v3.1.0~20230630
+  * Fixes issues for Manjaro and Arch Linux.
+
+### v3.0.3~20230615
+  * Fixes #4846 (/var/log/auth.log flooding by sudo)
+
 ### v3.0.2~20230607
   * Fixes #4886 (double-separator bug)
 

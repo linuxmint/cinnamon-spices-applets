@@ -330,8 +330,8 @@ class Eye extends Applet.Applet {
 	}
 
 	set_eye_property_update() {
-		this.area.set_width(EYE_AREA_WIDTH + 2 * this.eye_margin);
-		this.area.set_height(EYE_AREA_HEIGHT);
+		this.area.set_width((EYE_AREA_WIDTH + 2 * this.eye_margin) * global.ui_scale);
+		this.area.set_height(EYE_AREA_HEIGHT * global.ui_scale);
 		this.area.queue_repaint();
 	}
 
@@ -349,13 +349,9 @@ class Eye extends Applet.Applet {
 	}
 
 	update_tooltip() {
+		let tip = this.eye_activated ? _("click to deactivate the eye") : _("click to activate the eye");
 		let complement = this.mouse_click_enable ? _("effects enabled") : _("effects disabled");
-
-		if (this.eye_activated) {
-			this.set_applet_tooltip(_("Click to deactivate") + ` (${complement})`);
-		} else {
-			this.set_applet_tooltip(_("Click to activate") + ` (${complement})`);
-		}
+		this.set_applet_tooltip(`${_('TIP')}: ` + tip + '\n - ' + complement + ' -', true);
 	}
 
 	_mouse_circle_create_data_icon(name, color, checkCache) {
@@ -481,15 +477,15 @@ class Eye extends Applet.Applet {
 		} else if (this._last_mouse_x == undefined || this._last_mouse_y == undefined) {
 			it_should_redraw = true;
 		} else {
-			const dist_from_origin = (x, y) => Math.sqrt(x * x + y * y);
+			const dist = (x, y) => Math.sqrt(x * x + y * y);
 
-			const [ox, oy] = this._eye_area_pos();
-			const [last_x, last_y] = [this._last_mouse_x - ox, this._last_mouse_y - oy];
-			const [current_x, current_y] = [mouse_x - ox, mouse_y - oy];
+			let [ox, oy] = this._eye_area_pos();
+			let [last_x, last_y] = [this._last_mouse_x - ox, this._last_mouse_y - oy];
+			let [current_x, current_y] = [mouse_x - ox, mouse_y - oy];
 
-			const dist_prod = dist_from_origin(last_x, last_y) * dist_from_origin(current_x, current_y);
-			const dot_prod = current_x * last_x + current_y * last_y;
-			const angle = dist_prod > 0 ? Math.acos(dot_prod / dist_prod) : 0;
+			let dist_prod = dist(last_x, last_y) * dist(current_x, current_y);
+			let dot_prod = current_x * last_x + current_y * last_y;
+			let angle = dist_prod > 0 ? Math.acos(dot_prod / dist_prod) : 0;
 
 			it_should_redraw = angle > EYE_REDRAW_ANGLE_THRESHOLD;
 		}

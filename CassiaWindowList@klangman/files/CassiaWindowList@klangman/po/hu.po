@@ -3,40 +3,40 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-24 15:07-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2023-06-30 23:44+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: 4.0/applet.js:1919
 msgid "Applet Preferences"
-msgstr ""
+msgstr "Kisalkalmazás beállítások"
 
 #: 4.0/applet.js:1923
 msgid "About..."
-msgstr ""
+msgstr "Névjegy…"
 
 #: 4.0/applet.js:1927
 msgid "Configure..."
-msgstr ""
+msgstr "Beállítások…"
 
 #: 4.0/applet.js:1931
 #, javascript-format
 msgid "Remove '%s'"
-msgstr ""
+msgstr "Eltávolítás: „%s”"
 
 #: 4.0/applet.js:1933
 msgid "Do you really want to remove this instance of CassiaWindowList?"
-msgstr ""
+msgstr "Valóban el szeretné távolítani ezt a CassiaWindowList ezen példányát?"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -46,15 +46,15 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn9->options
 #: 4.0/applet.js:1942
 msgid "Open new window"
-msgstr ""
+msgstr "Új ablak megnyitása"
 
 #: 4.0/applet.js:1948
 msgid "Pin to this workspace"
-msgstr ""
+msgstr "Erre a munkaterületre rögzítés"
 
 #: 4.0/applet.js:1964
 msgid "Pin to other workspaces"
-msgstr ""
+msgstr "Más munkaterületre rögzítés"
 
 #: 4.0/applet.js:1988
 msgid "Pin to all workspaces"
@@ -66,35 +66,35 @@ msgstr ""
 
 #: 4.0/applet.js:2027
 msgid "Recent files"
-msgstr ""
+msgstr "Nemrég használt fájlok"
 
 #: 4.0/applet.js:2051
 msgid "Places"
-msgstr ""
+msgstr "Helyek"
 
 #: 4.0/applet.js:2093
 msgid "Only on this workspace"
-msgstr ""
+msgstr "Csak ezen a munkaterületen"
 
 #: 4.0/applet.js:2095
 msgid "Visible on all workspaces"
-msgstr ""
+msgstr "Minden munkaterületen látható"
 
 #: 4.0/applet.js:2096
 msgid "Move to another workspace"
-msgstr ""
+msgstr "Áthelyezés másik munkaterületre"
 
 #: 4.0/applet.js:2115
 msgid "Move to another monitor"
-msgstr ""
+msgstr "Áthelyezés a másik kijelzőre"
 
 #: 4.0/applet.js:2123
 msgid "Monitor"
-msgstr ""
+msgstr "Kijelző"
 
 #: 4.0/applet.js:2151
 msgid "unassigned"
-msgstr ""
+msgstr "nincs társítva"
 
 #: 4.0/applet.js:2162 4.0/applet.js:2183
 msgid "Assign window to a hotkey"
@@ -110,15 +110,15 @@ msgstr ""
 
 #: 4.0/applet.js:2216
 msgid "Use window title"
-msgstr ""
+msgstr "Ablakcím használata"
 
 #: 4.0/applet.js:2223
 msgid "Use application name"
-msgstr ""
+msgstr "Alkalmazásnév használata"
 
 #: 4.0/applet.js:2230
 msgid "No label"
-msgstr ""
+msgstr "Nincs címke"
 
 #: 4.0/applet.js:2241
 msgid "Ungroup windows"
@@ -126,7 +126,7 @@ msgstr ""
 
 #: 4.0/applet.js:2252
 msgid "Group windows"
-msgstr ""
+msgstr "Ablakok csoportosítása"
 
 #: 4.0/applet.js:2262
 msgid "Automatic grouping/ungrouping"
@@ -134,35 +134,35 @@ msgstr ""
 
 #: 4.0/applet.js:2291
 msgid "Restore"
-msgstr ""
+msgstr "Visszaállítás"
 
 #: 4.0/applet.js:2295
 msgid "Minimize"
-msgstr ""
+msgstr "Minimalizálás"
 
 #: 4.0/applet.js:2301
 msgid "Unmaximize"
-msgstr ""
+msgstr "Eredeti méret"
 
 #: 4.0/applet.js:2308
 msgid "Close others"
-msgstr ""
+msgstr "Többi bezárása"
 
 #: 4.0/applet.js:2319
 msgid "Close all"
-msgstr ""
+msgstr "Minden bezárása"
 
 #: 4.0/applet.js:2328
 msgid "Close"
-msgstr ""
+msgstr "Bezárás"
 
 #: SetupWizard.py:162
 msgid "Exit"
-msgstr ""
+msgstr "Kilépés"
 
 #: SetupWizard.py:184
 msgid "Next"
-msgstr ""
+msgstr "Következő"
 
 #: SetupWizard.py:243
 msgid "Backup file already exist. Do you want to overwrite it?"
@@ -170,7 +170,7 @@ msgstr ""
 
 #. metadata.json->name
 msgid "Cassia Window List"
-msgstr ""
+msgstr "Cassia Ablaklista"
 
 #. metadata.json->description
 msgid ""
@@ -180,23 +180,23 @@ msgstr ""
 
 #. 4.0->settings-schema.json->caption-page->title
 msgid "Labels"
-msgstr ""
+msgstr "Címkék"
 
 #. 4.0->settings-schema.json->general-page->title
 msgid "General"
-msgstr ""
+msgstr "Általános"
 
 #. 4.0->settings-schema.json->preview-page->title
 msgid "Thumbnails"
-msgstr ""
+msgstr "Előnézetek"
 
 #. 4.0->settings-schema.json->hotkey-page->title
 msgid "Hotkeys"
-msgstr ""
+msgstr "Gyorsbillentyűk"
 
 #. 4.0->settings-schema.json->advanced-page->title
 msgid "Advanced"
-msgstr ""
+msgstr "Speciális"
 
 #. 4.0->settings-schema.json->caption-settings->title
 msgid "Window list button label settings"
@@ -233,11 +233,11 @@ msgstr ""
 
 #. 4.0->settings-schema.json->caption-type->options
 msgid "Application name"
-msgstr ""
+msgstr "Alkalmazásnév"
 
 #. 4.0->settings-schema.json->caption-type->options
 msgid "Window title"
-msgstr ""
+msgstr "Ablakcím"
 
 #. 4.0->settings-schema.json->caption-type->description
 msgid "Label contents"
@@ -251,18 +251,18 @@ msgstr ""
 #. 4.0->settings-schema.json->display-caption-for-pined->options
 #. 4.0->settings-schema.json->display-number->options
 msgid "Never"
-msgstr ""
+msgstr "Soha"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 #. 4.0->settings-schema.json->display-caption-for-pined->options
 #. 4.0->settings-schema.json->display-number->options
 msgid "Always"
-msgstr ""
+msgstr "Mindig"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 #. 4.0->settings-schema.json->display-caption-for-pined->options
 msgid "Focused"
-msgstr ""
+msgstr "Előtérben"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 msgid "One per application pool"
@@ -283,7 +283,7 @@ msgstr ""
 
 #. 4.0->settings-schema.json->display-caption-for-pined->options
 msgid "Running"
-msgstr ""
+msgstr "Folyamatban"
 
 #. 4.0->settings-schema.json->display-caption-for-pined->description
 msgid "Display labels for pinned buttons"
@@ -309,24 +309,24 @@ msgstr ""
 
 #. 4.0->settings-schema.json->display-indicators->options
 msgid "None"
-msgstr ""
+msgstr "Nincs"
 
 #. 4.0->settings-schema.json->display-indicators->options
 msgid "Minimized windows"
-msgstr ""
+msgstr "Minimalizált ablakok"
 
 #. 4.0->settings-schema.json->display-indicators->options
 msgid "Pinned applications"
-msgstr ""
+msgstr "Rögzített alkalmazások"
 
 #. 4.0->settings-schema.json->display-indicators->options
 msgid "Minimized and pinned"
-msgstr ""
+msgstr "Minimalizált és rögzített"
 
 #. 4.0->settings-schema.json->display-indicators->options
 #. 4.0->settings-schema.json->group-windows->options
 msgid "Automatic"
-msgstr ""
+msgstr "Automatikus"
 
 #. 4.0->settings-schema.json->display-indicators->description
 msgid "Display status indicators"
@@ -354,11 +354,11 @@ msgstr ""
 
 #. 4.0->settings-schema.json->label-width->units
 msgid "pixels"
-msgstr ""
+msgstr "képpont"
 
 #. 4.0->settings-schema.json->label-width->description
 msgid "Label width"
-msgstr ""
+msgstr "Címke szélessége"
 
 #. 4.0->settings-schema.json->label-width->tooltip
 msgid "This defines the width of the label section of a window list button"
@@ -366,21 +366,21 @@ msgstr ""
 
 #. 4.0->settings-schema.json->label-animation->description
 msgid "Animate label"
-msgstr ""
+msgstr "Címke animálása"
 
 #. 4.0->settings-schema.json->label-animation-time->units
 #. 4.0->settings-schema.json->preview-timeout-show->units
 #. 4.0->settings-schema.json->preview-timeout-hide->units
 msgid "milliseconds"
-msgstr ""
+msgstr "ezredmásodperc"
 
 #. 4.0->settings-schema.json->label-animation-time->description
 msgid "Label animation time"
-msgstr ""
+msgstr "A címke animációs ideje"
 
 #. 4.0->settings-schema.json->display-number->options
 msgid "2 or more windows"
-msgstr ""
+msgstr "Kettő vagy több ablak"
 
 #. 4.0->settings-schema.json->display-number->description
 msgid "Display number"
@@ -419,7 +419,7 @@ msgstr ""
 
 #. 4.0->settings-schema.json->group-windows->options
 msgid "Launcher"
-msgstr ""
+msgstr "Alkalmazásindító"
 
 #. 4.0->settings-schema.json->group-windows->description
 msgid "Window list behavior style"
@@ -440,13 +440,15 @@ msgstr ""
 
 #. 4.0->settings-schema.json->show-windows-for-current-monitor->description
 msgid "Only show windows on the same monitor"
-msgstr ""
+msgstr "Csak a jelenlegi kijelző ablakainak megjelenítése"
 
 #. 4.0->settings-schema.json->show-windows-for-current-monitor->tooltip
 msgid ""
 "If enabled, this applet instance only manages windows\n"
 "that are displayed on the same monitor"
 msgstr ""
+"Bekapcsolva, a kisalkalmazás kizárólag azokat az ablakokat irányítja,\n"
+"amelyek ugyanazon a kijelzőn lettek megjelenítve"
 
 #. 4.0->settings-schema.json->show-tooltips->description
 msgid "Show tooltips for window list buttons"
@@ -471,13 +473,14 @@ msgstr ""
 
 #. 4.0->settings-schema.json->menu-show-on-hover->description
 msgid "Show on hover"
-msgstr ""
+msgstr "Megjelenítés rámutatásra"
 
 #. 4.0->settings-schema.json->menu-show-on-hover->tooltip
 msgid ""
 "If enabled, a popup menu with a list of current windows will show when "
 "hovering"
 msgstr ""
+"Rámutatásnál egy felugró menüt jelenít meg az aktuális ablakok listájával"
 
 #. 4.0->settings-schema.json->show-previews->description
 msgid "Show window thumbnails in the popup window list menu"
@@ -492,23 +495,23 @@ msgstr ""
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Extra large"
-msgstr ""
+msgstr "Nagyon nagy"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Large"
-msgstr ""
+msgstr "Nagy"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Medium"
-msgstr ""
+msgstr "Közepes"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Small"
-msgstr ""
+msgstr "Kicsi"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Extra small"
-msgstr ""
+msgstr "Nagyon kicsi"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->description
 msgid "Default thumbnail window size"
@@ -548,7 +551,7 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Close window"
-msgstr ""
+msgstr "Ablak bezárása"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -629,7 +632,7 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 1"
-msgstr ""
+msgstr "Áthelyezés az első kijelzőre"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -638,7 +641,7 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 2"
-msgstr ""
+msgstr "Áthelyezés a második kijelzőre"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -647,7 +650,7 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 3"
-msgstr ""
+msgstr "Áthelyezés a harmadik kijelzőre"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -656,7 +659,7 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 4"
-msgstr ""
+msgstr "Áthelyezés a negyedik kijelzőre"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -674,7 +677,7 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Do nothing"
-msgstr ""
+msgstr "Ne tegyen semmit"
 
 #. 4.0->settings-schema.json->preview-middle-click->description
 msgid "Thumbnail window middle button action"
@@ -754,7 +757,7 @@ msgstr ""
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "Off"
-msgstr ""
+msgstr "Ki"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "On (temporary)"
@@ -786,7 +789,7 @@ msgstr ""
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
 msgid "Enabled"
-msgstr ""
+msgstr "Engedélyezve"
 
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
 msgid "Cycle application windows"
@@ -798,7 +801,7 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
 msgid "Description"
-msgstr ""
+msgstr "Leírás"
 
 #. 4.0->settings-schema.json->hotkey-bindings->tooltip
 msgid ""
@@ -882,7 +885,7 @@ msgstr ""
 
 #: SetupWizard.ui:78
 msgid "Welcome to CassiaWindowList"
-msgstr ""
+msgstr "Üdvözöljük az Cassia Ablaklistában"
 
 #: SetupWizard.ui:95
 msgid "How would you like this applet instance to behave?"
@@ -941,7 +944,7 @@ msgstr ""
 
 #: SetupWizard.ui:287
 msgid "No Labels (icons only)"
-msgstr ""
+msgstr "Csak ikonok"
 
 #: SetupWizard.ui:305
 msgid "No minimized window indicator character"
@@ -973,7 +976,7 @@ msgstr ""
 
 #: SetupWizard.ui:408
 msgid "All done!"
-msgstr ""
+msgstr "Minden készen van!"
 
 #: SetupWizard.ui:424
 msgid ""
@@ -1020,11 +1023,11 @@ msgstr ""
 
 #: SetupWizard.ui:555
 msgid "Monitor1WindowList"
-msgstr ""
+msgstr "Monitor1Ablaklista"
 
 #: SetupWizard.ui:556
 msgid "Monitor2WindowList"
-msgstr ""
+msgstr "Monitor2Ablaklista"
 
 #: SetupWizard.ui:557
 msgid "Monitor1PanelLauncher"

@@ -57,16 +57,9 @@ class AppButton {
 
         //--------Label------------------------------------
         this.label = new St.Label({ style_class: 'menu-application-button-label' });
-        //.menu-application-button-label{} in themes are designed for list view and may have uneven
-        //l/r padding, so in grid view make padding symmetrical and center text
-        let labelStyle = '';
-        if (!isListView) {
-            labelStyle = 'padding-right: 2px; padding-left: 2px; text-align: center; ';
-        }
         if (this.app.isClearRecentsButton) {
-            labelStyle += 'font-weight: bold;';
+            this.label.style = 'font-weight: bold;';
         }
-        this.label.style = labelStyle;
         //set label text
         let name = this.app.name.replace(/&/g, '&amp;').replace(/</g, '&lt;');
         let description = this.app.description ?
@@ -98,7 +91,7 @@ class AppButton {
                                 x_align: isListView ? St.Align.START : St.Align.MIDDLE,
                                 y_align: St.Align.MIDDLE});
         this._setButtonStyleNormal();
-        this._setAppHighlightClass();
+        this._setNewAppHighlightClass();
 
         //----------dnd--------------
         if (this.app.isApplication) {
@@ -190,7 +183,7 @@ class AppButton {
         this.actor.set_style(addedStyle);
     }
 
-    _setAppHighlightClass() {
+    _setNewAppHighlightClass() {
         if (this.app.newAppShouldHighlight) {
             if (!this.actor.has_style_pseudo_class('highlighted')) {
                 this.actor.add_style_pseudo_class('highlighted'); //'font-weight: bold;';
@@ -286,15 +279,16 @@ class AppButton {
         if (this.app.isApplication) {
             if (this.app.newAppShouldHighlight) {
                 this.app.newAppShouldHighlight = false;
-                this._setAppHighlightClass();
+                this._setNewAppHighlightClass();
             }
             this.appThis.recentApps.add(this.app.id);
             this.app.open_new_window(-1);
             this.appThis.menu.close();
-        } else if (this.app.isDirectory || this.app.isBackButton) {
+        } else if ((this.app.isDirectory && !this.app.isPlace) || this.app.isBackButton) {
             this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
             //don't menu.close()
-        } else if (this.app.isFolderviewFile || this.app.isRecentFile || this.app.isFavoriteFile) {
+        } else if (this.app.isFolderviewFile || this.app.isRecentFile ||
+                   this.app.isFavoriteFile || (this.app.isDirectory && this.app.isPlace)) {
             try {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
                 this.appThis.menu.close();
@@ -317,7 +311,7 @@ class AppButton {
         if (this.app.isApplication) {
             if (this.app.newAppShouldHighlight) {
                 this.app.newAppShouldHighlight = false;
-                this._setAppHighlightClass();
+                this._setNewAppHighlightClass();
             }
             this.appThis.recentApps.add(this.app.id);
             const command = 'gksu ' + this.app.get_app_info().get_executable();

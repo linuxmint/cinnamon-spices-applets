@@ -4,7 +4,8 @@
     "description": "Provides an easy-to-read layout to access your places",
     "comments": "Places Center is a feature-rich, cross-platform Cinnamon applet that provides easy access to all of your most-used places. Feel free to contribute by submitting pull requests, bug reports and feature requests to my github repo.",
     "website": "https://github.com/linuxmint/cinnamon-spices-applets",
-    "version": "2.1",
-    "contributors": "Stephen Collins - Author,kehugter - Added configurability to middle click",
-    "max-instances": -1
+    "version": "2.2",
+    "contributors": "Stephen Collins - Author,kehugter - Added configurability to middle click,claudiux - Improvements to the 'Recent' section.",
+    "max-instances": -1,
+    "author": "collinss"
 }

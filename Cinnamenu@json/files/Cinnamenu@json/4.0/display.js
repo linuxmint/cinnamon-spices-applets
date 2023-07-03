@@ -16,7 +16,7 @@ class Display {
         const sidebarPlacement = this.appThis.settings.sidebarPlacement;
         this.sidebar = new Sidebar(this.appThis);
 
-        //==================bottomPane================
+        //==================bottomPane (may also be at the top)================
         this.searchView = new SearchView(this.appThis);
         this.displaySignals.connect(this.searchView.searchEntryText, 'text-changed',
                                         (...args) => this.appThis._onSearchTextChanged(...args));

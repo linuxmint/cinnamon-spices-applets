@@ -132,7 +132,8 @@
             "keys":[
                 "info1",
                 "info2",
-                "info3"
+                "info3",
+                "info4"
             ]
         }
     },
@@ -592,6 +593,10 @@
     },
     "info3":{
         "type":"label",
-        "description":"\n• Folders can be set up and removed as menu categories by right-clicking on them.\n"
+        "description":"\n• Folders can be set up and removed as menu categories by right-clicking on them."
+    },
+    "info4":{
+        "type":"label",
+        "description":"\n• Additional key options:\nctrl-p — Open launcher properties dialogue of currently highlighted application.\nctrl-d — Open .desktop file of currently highlighted app in default text editor.\n"
     }
 }
