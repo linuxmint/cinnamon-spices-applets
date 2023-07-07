@@ -1948,6 +1948,9 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this.noRecentDocuments = true;
         this._activeContextMenuParent = null;
         this._activeContextMenuItem = null;
+        this._buttonTimeoutId = null;
+        this._buttonNotEntered = null;
+        this.TRACKING_TIME = 70; //ms
         this._display();
         this._updateMenuLayout();
         this._updateCustomLabels();
@@ -2379,7 +2382,6 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             this._clearAllSelections(false);
             this._scrollToButton(null, this.applicationsScrollBox);
             this._scrollToButton(null, this.categoriesScrollBox);
-            this.destroyVectorBox();
         }
     }
 
@@ -3000,6 +3002,16 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     }
 
     _buttonEnterEvent(button) {
+        this._clearButtonTimeout();
+        if (button instanceof CategoryButton && this.badAngle) {
+            this._buttonNotEntered = button;
+            //badAngle now but check again in a short while
+            this._buttonTimeoutId = setTimeout(() => {
+                            this._updateMouseTracking();
+                            this._buttonEnterEvent(button);
+                        },this.TRACKING_TIME);
+            return;
+        }
         let parent = button.actor.get_parent();
         if (this._activeContainer === this.categoriesBox && parent !== this._activeContainer) {
             this._previousTreeSelectedActor = this._activeActor;
@@ -3035,7 +3047,6 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             button.isHovered = true;
             this._clearPrevCatSelection(button.actor);
             this._select_category(button.categoryId);
-            this.makeVectorBox(button.actor);
         } else {
             this._previousVisibleIndex = parent._vis_iter.getVisibleIndex(button.actor);
 
@@ -3053,7 +3064,10 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     }
 
     _buttonLeaveEvent (button) {
+        this._clearButtonTimeout();
         if (button instanceof CategoryButton) {
+            if (this._buttonNotEntered === button)
+                return;
             if (this._previousTreeSelectedActor === null) {
                 this._previousTreeSelectedActor = button.actor;
             } else {
@@ -3075,6 +3089,13 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                 button.actor.remove_style_pseudo_class("hover");
             else
                 button.actor.set_style_class_name(button.styleClass);
+        }
+    }
+
+    _clearButtonTimeout() {
+        if (this._buttonTimeoutId) {
+            clearTimeout(this._buttonTimeoutId);
+            this._buttonTimeoutId = null;
         }
     }
 
@@ -3103,109 +3124,6 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             }
         } else {
             this.categoriesBox.get_children().forEach(child => child.style_class = "menu-category-button");
-        }
-    }
-
-    /*
-     * The vectorBox overlays the the categoriesBox to aid in navigation from categories to apps
-     * by preventing misselections. It is set to the same size as the categoriesOverlayBox and
-     * categoriesBox.
-     *
-     * The actor is a quadrilateral that we turn into a triangle by setting the A and B vertices to
-     * the same position. The size and origin of the vectorBox are calculated in _getVectorInfo().
-     * Using those properties, the bounding box is sized as (w, h) and the triangle is defined as
-     * follows:
-     *   _____
-     *  |    /|D
-     *  |   / |     AB: (mx, my)
-     *  | A/  |      C: (w, h)
-     *  | B\  |      D: (w, 0)
-     *  |   \ |
-     *  |____\|C
-     */
-
-    _getVectorInfo() {
-        let [mx, my, mask] = global.get_pointer();
-        let [bx, by] = this.categoriesOverlayBox.get_transformed_position();
-        let [bw, bh] = this.categoriesOverlayBox.get_transformed_size();
-
-        let xformed_mx = mx - bx;
-        let xformed_my = my - by;
-
-        if (xformed_mx < 0 || xformed_mx > bw || xformed_my < 0 || xformed_my > bh) {
-            return null;
-        }
-
-        return { mx: xformed_mx,
-                 my: xformed_my,
-                 w: this.categoriesOverlayBox.width,
-                 h: this.categoriesOverlayBox.height };
-    }
-
-    makeVectorBox(actor) {
-        this.destroyVectorBox(actor);
-        let vi = this._getVectorInfo();
-        if (!vi)
-            return;
-
-        if (this.vectorBox) {
-            this.vectorBox.visible = true;
-        } else {
-            this.vectorBox = new St.Polygon({ debug: false,  reactive: true });
-
-            this.categoriesOverlayBox.add_actor(this.vectorBox);
-
-            this.vectorBox.connect("leave-event", Lang.bind(this, this.destroyVectorBox));
-            this.vectorBox.connect("motion-event", Lang.bind(this, this.maybeUpdateVectorBox));
-        }
-
-        Object.assign(this.vectorBox, { width: vi.w,   height:   vi.h,
-                                        ulc_x: vi.mx,  ulc_y:    vi.my,
-                                        llc_x: vi.mx,  llc_y:    vi.my,
-                                        urc_x: vi.w,   urc_y:    0,
-                                        lrc_x: vi.w,   lrc_y:    vi.h });
-
-        this.actor_motion_id = actor.connect("motion-event", Lang.bind(this, this.maybeUpdateVectorBox));
-        this.current_motion_actor = actor;
-    }
-
-    maybeUpdateVectorBox() {
-        if (this.vector_update_loop) {
-            Mainloop.source_remove(this.vector_update_loop);
-            this.vector_update_loop = 0;
-        }
-        this.vector_update_loop = Mainloop.timeout_add(50, Lang.bind(this, this.updateVectorBox));
-    }
-
-    updateVectorBox(actor) {
-        if (!this.current_motion_actor)
-            return;
-        let vi = this._getVectorInfo();
-        if (vi) {
-            this.vectorBox.ulc_x = vi.mx;
-            this.vectorBox.llc_x = vi.mx;
-            this.vectorBox.queue_repaint();
-        } else {
-            this.destroyVectorBox(actor);
-        }
-        this.vector_update_loop = 0;
-        return false;
-    }
-
-    destroyVectorBox(actor) {
-        if (!this.vectorBox)
-            return;
-
-        if (this.vector_update_loop) {
-            Mainloop.source_remove(this.vector_update_loop);
-            this.vector_update_loop = 0;
-        }
-
-        if (this.actor_motion_id > 0 && this.current_motion_actor != null) {
-            this.current_motion_actor.disconnect(this.actor_motion_id);
-            this.actor_motion_id = 0;
-            this.current_motion_actor = null;
-            this.vectorBox.visible = false;
         }
     }
 
@@ -3390,7 +3308,6 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         }
     }
 
-
     _scrollToButton(button, scrollBox = null) {
         if (!scrollBox)
             scrollBox = this.applicationsScrollBox;
@@ -3418,10 +3335,6 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     _display() {
         this._activeContainer = null;
         this._activeActor = null;
-        this.vectorBox = null;
-        this.actor_motion_id = 0;
-        this.vector_update_loop = null;
-        this.current_motion_actor = null;
         let section = new PopupMenu.PopupMenuSection();
         this.menu.addMenuItem(section);
         this._appsBoxWidthResized = false;
@@ -3557,9 +3470,36 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this.categoriesBox._vis_iter = this.catBoxIter;
         this.favBoxIter = new VisibleChildIterator(this.favoritesBox);
         this.favoritesBox._vis_iter = this.favBoxIter;
+
+        //monitor mouse motion to prevent category mis-selection
+        this.categoriesBox.set_reactive(true);
+        this.categoriesBox_motion_id = this.categoriesBox.connect('motion-event',
+                                                    () => this._updateMouseTracking());
+
         Mainloop.idle_add(Lang.bind(this, function() {
             this._clearAllSelections(false);
         }));
+    }
+
+    _updateMouseTracking() {
+        //keep track of mouse motion to prevent misselection of another category button when moving mouse
+        //pointer from selected category button to app button by calculating angle of pointer movement
+        let [x, y] = global.get_pointer();
+        if (!this.mTrack) {
+            this.mTrack = [];
+        }
+        //compare current position with oldest position in last 0.1 seconds.
+        this.mTrack.push({time: Date.now(), x: x, y: y});//push current position onto array
+        //remove positions older than TRACKING_TIME ago
+        while (this.mTrack[0].time + this.TRACKING_TIME < Date.now()) {
+            this.mTrack.shift();
+        }
+        const dx = x - this.mTrack[0].x;
+        const dy = Math.abs(y - this.mTrack[0].y);
+
+        const tan = dx / dy;
+        this.badAngle = tan > 0.3;//if tan = +infinity, badAngle is true.
+                                    //if tan = -infinity or NaN, badAngle is false.
     }
 
     _updateMenuLayout() {
