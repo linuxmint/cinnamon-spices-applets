@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-24 15:07-0400\n"
+"POT-Creation-Date: 2023-07-06 23:13-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,24 +17,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.0/applet.js:1919
+#: 4.0/applet.js:1993
 msgid "Applet Preferences"
 msgstr ""
 
-#: 4.0/applet.js:1923
+#: 4.0/applet.js:1997
 msgid "About..."
 msgstr ""
 
-#: 4.0/applet.js:1927
+#: 4.0/applet.js:2001
 msgid "Configure..."
 msgstr ""
 
-#: 4.0/applet.js:1931
+#: 4.0/applet.js:2005
 #, javascript-format
 msgid "Remove '%s'"
 msgstr ""
 
-#: 4.0/applet.js:1933
+#: 4.0/applet.js:2007
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr ""
 
@@ -44,115 +44,115 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:1942
+#: 4.0/applet.js:2016
 msgid "Open new window"
 msgstr ""
 
-#: 4.0/applet.js:1948
+#: 4.0/applet.js:2022
 msgid "Pin to this workspace"
 msgstr ""
 
-#: 4.0/applet.js:1964
+#: 4.0/applet.js:2060
 msgid "Pin to other workspaces"
 msgstr ""
 
-#: 4.0/applet.js:1988
+#: 4.0/applet.js:2081
 msgid "Pin to all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2013 4.0/applet.js:2186
+#: 4.0/applet.js:2106 4.0/applet.js:2279
 msgid "Add new Hotkey for"
 msgstr ""
 
-#: 4.0/applet.js:2027
+#: 4.0/applet.js:2120
 msgid "Recent files"
 msgstr ""
 
-#: 4.0/applet.js:2051
+#: 4.0/applet.js:2144
 msgid "Places"
 msgstr ""
 
-#: 4.0/applet.js:2093
+#: 4.0/applet.js:2186
 msgid "Only on this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2095
+#: 4.0/applet.js:2188
 msgid "Visible on all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2096
+#: 4.0/applet.js:2189
 msgid "Move to another workspace"
 msgstr ""
 
-#: 4.0/applet.js:2115
+#: 4.0/applet.js:2208
 msgid "Move to another monitor"
 msgstr ""
 
-#: 4.0/applet.js:2123
+#: 4.0/applet.js:2216
 msgid "Monitor"
 msgstr ""
 
-#: 4.0/applet.js:2151
+#: 4.0/applet.js:2244
 msgid "unassigned"
 msgstr ""
 
-#: 4.0/applet.js:2162 4.0/applet.js:2183
+#: 4.0/applet.js:2255 4.0/applet.js:2276
 msgid "Assign window to a hotkey"
 msgstr ""
 
-#: 4.0/applet.js:2206
+#: 4.0/applet.js:2299
 msgid "Change application label contents"
 msgstr ""
 
-#: 4.0/applet.js:2209
+#: 4.0/applet.js:2302
 msgid "Remove custom setting"
 msgstr ""
 
-#: 4.0/applet.js:2216
+#: 4.0/applet.js:2309
 msgid "Use window title"
 msgstr ""
 
-#: 4.0/applet.js:2223
+#: 4.0/applet.js:2316
 msgid "Use application name"
 msgstr ""
 
-#: 4.0/applet.js:2230
+#: 4.0/applet.js:2323
 msgid "No label"
 msgstr ""
 
-#: 4.0/applet.js:2241
-msgid "Ungroup windows"
+#: 4.0/applet.js:2334
+msgid "Ungroup application windows"
 msgstr ""
 
-#: 4.0/applet.js:2252
-msgid "Group windows"
+#: 4.0/applet.js:2345
+msgid "Group application windows"
 msgstr ""
 
-#: 4.0/applet.js:2262
+#: 4.0/applet.js:2355
 msgid "Automatic grouping/ungrouping"
 msgstr ""
 
-#: 4.0/applet.js:2291
+#: 4.0/applet.js:2384
 msgid "Restore"
 msgstr ""
 
-#: 4.0/applet.js:2295
+#: 4.0/applet.js:2388
 msgid "Minimize"
 msgstr ""
 
-#: 4.0/applet.js:2301
+#: 4.0/applet.js:2394
 msgid "Unmaximize"
 msgstr ""
 
-#: 4.0/applet.js:2308
+#: 4.0/applet.js:2401
 msgid "Close others"
 msgstr ""
 
-#: 4.0/applet.js:2319
+#: 4.0/applet.js:2412
 msgid "Close all"
 msgstr ""
 
-#: 4.0/applet.js:2328
+#: 4.0/applet.js:2421
 msgid "Close"
 msgstr ""
 
@@ -514,6 +514,19 @@ msgstr ""
 msgid "Default thumbnail window size"
 msgstr ""
 
+#. 4.0->settings-schema.json->menu-all-windows-of-pool->description
+#. 4.0->settings-schema.json->menu-all-windows-of-auto->description
+msgid "Show thumbnails for all windows of an application pool"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-all-windows-of-pool->tooltip
+#. 4.0->settings-schema.json->menu-all-windows-of-auto->tooltip
+msgid ""
+"If enabled, a popup menu will contain all the application windows in the "
+"application pool rather then just the selected window within the application "
+"pool"
+msgstr ""
+
 #. 4.0->settings-schema.json->preview-timeout-show->description
 msgid "Hover time before showing menu"
 msgstr ""
@@ -619,6 +632,24 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to previous workspace"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to next workspace"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Visible on this/all workspaces"
 msgstr ""
 
@@ -664,7 +695,34 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to previous monitor"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to next monitor"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to current/next monitor"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move titlebar on to screen"
 msgstr ""
 
 #. 4.0->settings-schema.json->preview-middle-click->options
