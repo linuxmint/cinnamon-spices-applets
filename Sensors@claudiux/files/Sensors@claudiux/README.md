@@ -88,9 +88,9 @@ In the **Temperature** tab of this applet settings, click on the button _Make di
 
 Alternatively, run the commands:
 
-  echo "%sudo ALL = NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT: /usr/sbin/smartctl" | sudo tee "/etc/sudoers.d/smartctl"
+  echo "%sudo ALL = NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL: /usr/sbin/smartctl" | sudo tee "/etc/sudoers.d/smartctl"
 
-  echo "%wheel ALL = NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT: /usr/sbin/smartctl" | sudo tee -a "/etc/sudoers.d/smartctl"
+  echo "%wheel ALL = NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL: /usr/sbin/smartctl" | sudo tee -a "/etc/sudoers.d/smartctl"
 
 
 Then, log out and log in your session.
