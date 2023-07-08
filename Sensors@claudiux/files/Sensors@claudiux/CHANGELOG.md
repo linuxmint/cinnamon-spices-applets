@@ -1,3 +1,6 @@
+### v3.1.1~20230708
+  * Fixes #4929
+
 ### v3.1.0~20230630
   * Fixes issues for Manjaro and Arch Linux.
 
