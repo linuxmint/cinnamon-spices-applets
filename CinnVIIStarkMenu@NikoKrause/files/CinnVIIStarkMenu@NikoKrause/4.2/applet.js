@@ -598,10 +598,10 @@ class ApplicationButton extends GenericApplicationButton {
         this.isDraggableApp = true;
 
         this.searchStrings = [
-            Util.latinise(app.get_name().toLowerCase()),
-            app.get_keywords() ? Util.latinise(app.get_keywords().toLowerCase()) : "",
-            app.get_description() ? Util.latinise(app.get_description().toLowerCase()) : "",
-            app.get_id() ? Util.latinise(app.get_id().toLowerCase()) : ""
+            AppUtils.graphemeBaseChars(app.get_name()).toLocaleUpperCase(),
+            app.get_keywords() ? AppUtils.graphemeBaseChars(app.get_keywords()).toLocaleUpperCase() : "",
+            app.get_description() ? AppUtils.graphemeBaseChars(app.get_description()).toLocaleUpperCase() : "",
+            app.get_id() ? AppUtils.graphemeBaseChars(app.get_id()).toLocaleUpperCase() : ""
         ];
 
         this.tooltip = new TooltipCustom(this.actor, this.description, true);
@@ -657,7 +657,7 @@ class WebSearchButton extends SimpleMenuItem {
         this.addLabel(this.name, 'menu-application-button-label');
 
         this.searchStrings = [
-            Util.latinise(this.name.toLowerCase())
+            AppUtils.graphemeBaseChars(this.name).toLocaleUpperCase()
         ];
 
         this.tooltip = new TooltipCustom(this.actor, this.description, true);
@@ -675,7 +675,7 @@ class WebSearchButton extends SimpleMenuItem {
     }
 
     activate() {
-        Main.Util.spawnCommandLine("xdg-open " + this.searchEngineURL + "'" + this.name.replace(/'/g,"%27") + "'");
+        Main.Util.spawnCommandLine("xdg-open " + this.searchEngineURL + encodeURIComponent(this.name));
         this.applet.menu.close();
     }
 }
@@ -750,7 +750,7 @@ class PlaceButton extends SimpleMenuItem {
         this.addLabel(this.name, 'menu-application-button-label');
 
         this.searchStrings = [
-            Util.latinise(place.name.toLowerCase())
+            AppUtils.graphemeBaseChars(place.name).toLocaleUpperCase()
         ];
 
         if (applet.showAppsDescriptionOnButtons) {
@@ -808,7 +808,7 @@ class RecentButton extends SimpleMenuItem {
         this.addLabel(this.name, 'menu-application-button-label');
 
         this.searchStrings = [
-            Util.latinise(recent.name.toLowerCase())
+            AppUtils.graphemeBaseChars(recent.name).toLocaleUpperCase()
         ];
 
         if (applet.showAppsDescriptionOnButtons) {
@@ -2003,13 +2003,13 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     }
 
     _updateShowIcons(container, show) {
-        Util.each(container.get_children(), c => {
+        container.get_children().forEach( c => {
             let b = c._delegate;
             if (!(b instanceof SimpleMenuItem))
                 return;
             if (b.icon)
                 b.icon.visible = show;
-        })
+        });
     }
 
     _updateKeybinding() {
@@ -3195,7 +3195,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         let recents = this.RecentManager._infosByTimestamp.filter(info => !info.name.startsWith("."));
         if (recents.length > 0) {
             this.noRecentDocuments = false;
-            Util.each(recents, (info) => {
+            recents.forEach( info => {
                 let button = new RecentButton(this, info);
                 this._recentButtons.push(button);
                 this.applicationsBox.add_actor(button.actor);
@@ -3260,7 +3260,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         let [apps, dirs] = AppUtils.getApps();
 
         // generate all category buttons from top-level directories
-        Util.each(dirs, (d) => {
+        dirs.forEach( d => {
             let categoryButton = new CategoryButton(this, d.get_menu_id(), d.get_name(), d.get_icon());
             this._categoryButtons.push(categoryButton);
             this.categoriesBox.add_actor(categoryButton.actor);
@@ -3646,7 +3646,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                 this.orderDirty = false;
             }
 
-            Util.each(this.applicationsBox.get_children(), c => {
+            this.applicationsBox.get_children().forEach( c => {
                 let b = c._delegate;
                 if (!(b instanceof SimpleMenuItem))
                     return;
@@ -3662,7 +3662,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         } else {
             this.orderDirty = true;
 
-            Util.each(this.applicationsBox.get_children(), c => {
+            this.applicationsBox.get_children().forEach( c => {
                 let b = c._delegate;
                 if (!(b instanceof SimpleMenuItem))
                     return;
@@ -3698,7 +3698,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this._searchProviderButtons = [];
 
         if (autoCompletes) {
-            Util.each(autoCompletes, item => {
+            autoCompletes.forEach( item => {
                 let button = new TransientButton(this, item);
                 this._transientButtons.push(button);
                 this.applicationsBox.add_actor(button.actor);
@@ -3858,7 +3858,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     }
 
     _doSearch(rawPattern){
-        let pattern = Util.latinise(rawPattern.toLowerCase());
+        let pattern = AppUtils.graphemeBaseChars(rawPattern).toLocaleUpperCase();
 
         this._searchTimeoutId = 0;
         this._activeContainer = null;
