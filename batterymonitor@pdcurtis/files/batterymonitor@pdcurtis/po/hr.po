@@ -7,31 +7,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: batterymonitor@pdcurtis 1.2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-27 19:21-0500\n"
-"PO-Revision-Date: 2022-12-29 13:37-0500\n"
+"POT-Creation-Date: 2023-07-10 22:50-0400\n"
+"PO-Revision-Date: 2023-07-10 22:52-0400\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.1.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.3.1\n"
 
-#: 5.4/applet.js:139 3.2/applet.js:135
+#: 5.4/applet.js:290 3.2/applet.js:135
 msgid "--%"
 msgstr ""
 
-#: 5.4/applet.js:140 3.2/applet.js:136
+#: 5.4/applet.js:291 3.2/applet.js:136
 msgid "Waiting"
 msgstr "Čekanje"
 
-#: 5.4/applet.js:164 3.2/applet.js:165
+#: 5.4/applet.js:317 3.2/applet.js:165
 msgid "Some Dependencies not Installed"
 msgstr ""
 
-#: 5.4/applet.js:164
+#: 5.4/applet.js:317
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
 "functionality including notifications and audible alerts .\n"
@@ -39,11 +39,11 @@ msgid ""
 "Please view the README for help on installing them."
 msgstr ""
 
-#: 5.4/applet.js:174 3.2/applet.js:198
+#: 5.4/applet.js:327 3.2/applet.js:198
 msgid "Battery Monitor Applet"
 msgstr ""
 
-#: 5.4/applet.js:174
+#: 5.4/applet.js:327
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -51,44 +51,35 @@ msgid ""
 "especially if a long or loud file is specified.\n"
 msgstr ""
 
-#: 5.4/applet.js:247 3.2/applet.js:297
+#: 5.4/applet.js:388 3.2/applet.js:297
 msgid "Open Power Statistics"
 msgstr "Otvori energetsku statistiku"
 
-#: 5.4/applet.js:253 3.2/applet.js:303
+#: 5.4/applet.js:394 3.2/applet.js:303
 msgid "Open System Monitor"
 msgstr "Otvori nadgledatelja sustava"
 
-#: 5.4/applet.js:262
+#: 5.4/applet.js:403
 msgid "Housekeeping and System Submenu"
 msgstr "Upravljanje i podizbornici sustava"
 
-#: 5.4/applet.js:265 3.2/applet.js:315
+#: 5.4/applet.js:406 3.2/applet.js:315
 msgid "View the Changelog"
 msgstr "Pogledaj zapis promjena"
 
-#: 5.4/applet.js:271
+#: 5.4/applet.js:412
 msgid "Open the README"
 msgstr ""
 
-#: 5.4/applet.js:277 3.2/applet.js:327
-msgid "Open stylesheet.css (Advanced Function)"
-msgstr "Otvori stylesheet.css (Napredne funkcije)"
-
-#. metadata.json->name
-#: 5.4/applet.js:293 3.2/applet.js:343
-msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
-msgstr "Aplet baterije s nadgledanjem i isključivanjem (BAMS)"
-
-#: 5.4/applet.js:298 3.2/applet.js:348
+#: 5.4/applet.js:428 3.2/applet.js:348
 msgid "Waiting for battery information"
 msgstr "Čekanje informacija baterije"
 
-#: 5.4/applet.js:389
+#: 5.4/applet.js:534
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Slaba baterija- isključite računalo ili priključite napajanje"
 
-#: 5.4/applet.js:394 3.2/applet.js:433
+#: 5.4/applet.js:540 3.2/applet.js:433
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -103,35 +94,45 @@ msgstr ""
 "ili završite s vašim radom i suspendirajte ili isključite računalo\n"
 "\n"
 
-#: 5.4/applet.js:409
+#: 5.4/applet.js:555
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Baterija je kritično računalo će se suspendirati osim ako ne priključite "
 "napajanje"
 
-#: 5.4/applet.js:426 3.2/applet.js:464
-msgid "Charge:"
-msgstr "Punjenje:"
+#: 5.4/applet.js:574
+msgid "Time to Empty:"
+msgstr ""
 
-#: 5.4/applet.js:426 3.2/applet.js:464
+#: 5.4/applet.js:575
+msgid "Time to Full:"
+msgstr ""
+
+#: 5.4/applet.js:578 5.4/applet.js:625
+#, fuzzy
+#| msgid "Percentage Charge:"
+msgid "Current Charge:"
+msgstr "Postotak napunjenosti:"
+
+#: 5.4/applet.js:578 3.2/applet.js:464
 msgid "Alert:"
 msgstr "Upozorenje:"
 
-#: 5.4/applet.js:426 3.2/applet.js:464
+#: 5.4/applet.js:578 3.2/applet.js:464
 msgid "Suspend:"
 msgstr "Suspenzija:"
 
-#: 5.4/applet.js:474 3.2/applet.js:512
-msgid "Percentage Charge:"
-msgstr "Postotak napunjenosti:"
-
-#: 5.4/applet.js:474 3.2/applet.js:512
+#: 5.4/applet.js:625 3.2/applet.js:512
 msgid "Alert at:"
 msgstr "Upozori pri:"
 
-#: 5.4/applet.js:474 3.2/applet.js:512
+#: 5.4/applet.js:625 3.2/applet.js:512
 msgid "Suspend at:"
 msgstr "Suspendiraj pri:"
+
+#: 5.4/applet.js:631
+msgid "The battery level has been recharged to"
+msgstr ""
 
 #: 3.2/applet.js:165
 msgid ""
@@ -156,6 +157,15 @@ msgstr "Upravljanje i podizbornici sustava"
 #: 3.2/applet.js:321
 msgid "Open the Help file"
 msgstr "Otvori datoteku pomoći"
+
+#: 3.2/applet.js:327
+msgid "Open stylesheet.css (Advanced Function)"
+msgstr "Otvori stylesheet.css (Napredne funkcije)"
+
+#. metadata.json->name
+#: 3.2/applet.js:343
+msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
+msgstr "Aplet baterije s nadgledanjem i isključivanjem (BAMS)"
 
 #: 3.2/applet.js:423
 msgid "Battery Low - turn off or connect to mains"
@@ -186,12 +196,67 @@ msgstr ""
 "Baterija je kritično računalo će se suspendirati osim ako ne priključite "
 "napajanje"
 
+#: 3.2/applet.js:464
+msgid "Charge:"
+msgstr "Punjenje:"
+
+#: 3.2/applet.js:512
+msgid "Percentage Charge:"
+msgstr "Postotak napunjenosti:"
+
 #. metadata.json->description
 msgid "Displays Charge as Percentage and allows Alerts and Actions"
 msgstr "Prikazuje napunjenost u postocima i omogućuje upozorenja i radnje"
 
-#. 5.4->settings-schema.json->head->description
+#. 5.4->settings-schema.json->General->title
+msgid "General"
+msgstr ""
+
+#. 5.4->settings-schema.json->Style->title
+msgid "Style"
+msgstr ""
+
+#. 5.4->settings-schema.json->general->title
 msgid "General Settings"
+msgstr ""
+
+#. 5.4->settings-schema.json->display_mode->title
+#, fuzzy
+#| msgid "Display Mode"
+msgid "Display Options"
+msgstr "Način rada zalona"
+
+#. 5.4->settings-schema.json->low_alert->title
+#. 3.2->settings-schema.json->head2->description
+msgid "Battery Low Alert Settings"
+msgstr ""
+
+#. 5.4->settings-schema.json->advanced->title
+msgid "Advanced"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_normal->title
+msgid "Normal"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_discharging->title
+msgid "Discharging"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_alert->title
+msgid "Alert"
+msgstr "Upozorenje"
+
+#. 5.4->settings-schema.json->bam_alert_discharging->title
+msgid "Alert Discharging"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_limit_exceeded->title
+msgid "Limit Exceeded"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_limit_exceeded2->title
+msgid "Limit Exceeded - Critical"
 msgstr ""
 
 #. 5.4->settings-schema.json->refreshInterval-spinner->units
@@ -213,6 +278,17 @@ msgstr ""
 "koristite sporije osvježavanje ako imate sporije računalo. Ovo isto regulira "
 "brzinu bljeskanja."
 
+#. 5.4->settings-schema.json->alertPercentage->units
+#. 5.4->settings-schema.json->recharged_alert_percentage->units
+#. 5.4->settings-schema.json->normal_font_size->units
+#. 5.4->settings-schema.json->discharging_font_size->units
+#. 5.4->settings-schema.json->alert_font_size->units
+#. 5.4->settings-schema.json->alert_discharging_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->units
+msgid "%"
+msgstr ""
+
 #. 5.4->settings-schema.json->alertPercentage->description
 #. 3.2->settings-schema.json->alertPercentage->description
 msgid "Percentage Battery Charge at which Alert Displayed"
@@ -228,55 +304,82 @@ msgstr ""
 "prikazuje - Još je prikazana i može se prilagoditi u izborniku lijevog klika "
 "apleta"
 
-#. 5.4->settings-schema.json->head1->description
-#. 3.2->settings-schema.json->head1->description
-msgid "Display Mode"
-msgstr "Način rada zalona"
+#. 5.4->settings-schema.json->recharged_alert->description
+msgid "Visible Alert when Recharging"
+msgstr ""
+
+#. 5.4->settings-schema.json->recharged_alert->tooltip
+msgid "Provide visible alert when battery is recharged to a certain threshold"
+msgstr ""
+
+#. 5.4->settings-schema.json->recharged_alert_percentage->description
+msgid "Percentage threshold for visible recharged alert"
+msgstr ""
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid ""
-"Classic - Battery Percentage with extended messages for horizontal panel"
-msgstr "Klasično - Postotak baterije s proširenim porukama za vodoravan panel"
+msgid "Classic"
+msgstr "Klasično"
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid "Classic Plus - Classic with addition of Battery Icon"
-msgstr "Klasično plus - Klasično s dodatkom ikone baterije"
+msgid "Classic Plus"
+msgstr "Klasično Plus"
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid "Compact - Battery Percentage without extended messages"
-msgstr "Kompaktno - Postotak baterije bez proširenih poruka"
+msgid "Compact"
+msgstr "Kompaktno"
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid "Compact Plus - Compact with addition of Battery Icon"
-msgstr "Kompaktno plus - Kompaktno s dodatkom ikone baterije"
+msgid "Compact Plus"
+msgstr "Kompaktno Plus"
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid "Icon Only on coloured background indicating status"
-msgstr "Samo ikona na obojenim pozadinama prikazuje stanje"
+msgid "Icon Only"
+msgstr "Samo Ikona"
 
 #. 5.4->settings-schema.json->displayType->description
 msgid "Toolbar Display Type"
-msgstr ""
+msgstr "Način prikaza"
 
 #. 5.4->settings-schema.json->displayType->tooltip
-#. 3.2->settings-schema.json->displayType->tooltip
 msgid ""
-"This feature offers the Classic (original) display with optional battery "
-"icon and some more compact displays suitable for a vertical panel "
-"(CompactCompact Plus and Icon Only)"
+"The following display options are available (including Compact, Compact "
+"Plus, and Icon Only for vertical panels):\n"
+"  Classic: Battery percentage with extended messages for horizontal panel\n"
+"  Classic Plus: Classic with the addition of a battery icon\n"
+"  Compact: Battery percentage without extended messages\n"
+"  Compact Plus: Compact with the addition of a battery icon\n"
+"  Icon Only: The battery icon on a colored background indicating the current "
+"status"
 msgstr ""
-"Ova značajka omogućuje Klasičan (izvoran) prikaz s neobaveznom ikonom "
-"baterije i nešto kompaktnijim prikazom pogodnim za okomiti panel (Kompaktno, "
-"Kompaktno plus i Samo ikone)"
 
-#. 5.4->settings-schema.json->head2->description
-#. 3.2->settings-schema.json->head2->description
-msgid "Battery Low Alert Settings"
+#. 5.4->settings-schema.json->time_remaining_display->description
+msgid "Append estimated time remaining to chosen display type"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_display->tooltip
+msgid ""
+"This will append an estimate to the above option for time remaining based on "
+"the amount of remaining battery power"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->description
+msgid "Append estimated time remaining to toolbar menu"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->tooltip
+msgid ""
+"This will append an estimate to the toolbar menu for time remaining based on "
+"the amount of remaining battery power"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->description
+msgid "Append estimated time remaining to tooltip"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->tooltip
+msgid ""
+"This will append an estimate to the tooltip for time remaining based on the "
+"amount of remaining battery power"
 msgstr ""
 
 #. 5.4->settings-schema.json->useBatteryLowSound->description
@@ -332,25 +435,6 @@ msgstr ""
 msgid "To remind that the volume may need to be set sensibly in public places"
 msgstr ""
 
-#. 5.4->settings-schema.json->head3->description
-#. 3.2->settings-schema.json->head3->description
-msgid "Household Tasks"
-msgstr ""
-
-#. 5.4->settings-schema.json->deleteTempraryFiles->description
-msgid "Delete temporary files after upgrade to applet version 1.4"
-msgstr ""
-
-#. 5.4->settings-schema.json->deleteTempraryFiles->tooltip
-msgid ""
-"Applet versions prior to 1.4 used temporary files in the home directory. "
-"These are not needed anymore and can be deleted."
-msgstr ""
-
-#. 5.4->settings-schema.json->head4->description
-msgid "Advanced"
-msgstr ""
-
 #. 5.4->settings-schema.json->customBatteryPath->description
 msgid "Path to battery capacity directory (device path)"
 msgstr ""
@@ -364,6 +448,48 @@ msgid ""
 "/sys/class/power_supply/BAT0"
 msgstr ""
 
+#. 5.4->settings-schema.json->normal_background_color->description
+#. 5.4->settings-schema.json->discharging_background_color->description
+#. 5.4->settings-schema.json->alert_background_color->description
+#. 5.4->settings-schema.json->alert_discharging_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->description
+msgid "Background Color"
+msgstr ""
+
+#. 5.4->settings-schema.json->normal_background_color->tooltip
+#. 5.4->settings-schema.json->normal_border_color->tooltip
+#. 5.4->settings-schema.json->discharging_background_color->tooltip
+#. 5.4->settings-schema.json->discharging_border_color->tooltip
+#. 5.4->settings-schema.json->alert_background_color->tooltip
+#. 5.4->settings-schema.json->alert_border_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_background_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->tooltip
+msgid "RGB or RGBA"
+msgstr ""
+
+#. 5.4->settings-schema.json->normal_border_color->description
+#. 5.4->settings-schema.json->discharging_border_color->description
+#. 5.4->settings-schema.json->alert_border_color->description
+#. 5.4->settings-schema.json->alert_discharging_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->description
+msgid "Border Color"
+msgstr ""
+
+#. 5.4->settings-schema.json->normal_font_size->description
+#. 5.4->settings-schema.json->discharging_font_size->description
+#. 5.4->settings-schema.json->alert_font_size->description
+#. 5.4->settings-schema.json->alert_discharging_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->description
+msgid "Font Size"
+msgstr ""
+
 #. 3.2->settings-schema.json->head->description
 msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
 msgstr "Opće postavke za aplet baterije s nadgledanjem i isključivanjem"
@@ -372,9 +498,44 @@ msgstr "Opće postavke za aplet baterije s nadgledanjem i isključivanjem"
 msgid "Refresh Interval for Display:"
 msgstr "Razdoblje osvježavanja prikaza:"
 
+#. 3.2->settings-schema.json->head1->description
+msgid "Display Mode"
+msgstr "Način rada zalona"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid ""
+"Classic - Battery Percentage with extended messages for horizontal panel"
+msgstr "Klasično - Postotak baterije s proširenim porukama za vodoravan panel"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Classic Plus - Classic with addition of Battery Icon"
+msgstr "Klasično plus - Klasično s dodatkom ikone baterije"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Compact - Battery Percentage without extended messages"
+msgstr "Kompaktno - Postotak baterije bez proširenih poruka"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Compact Plus - Compact with addition of Battery Icon"
+msgstr "Kompaktno plus - Kompaktno s dodatkom ikone baterije"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Icon Only on coloured background indicating status"
+msgstr "Samo ikona na obojenim pozadinama prikazuje stanje"
+
 #. 3.2->settings-schema.json->displayType->description
 msgid "Type of Display in Toolbar"
 msgstr "Način prikaza"
+
+#. 3.2->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional battery "
+"icon and some more compact displays suitable for a vertical panel "
+"(CompactCompact Plus and Icon Only)"
+msgstr ""
+"Ova značajka omogućuje Klasičan (izvoran) prikaz s neobaveznom ikonom "
+"baterije i nešto kompaktnijim prikazom pogodnim za okomiti panel (Kompaktno, "
+"Kompaktno plus i Samo ikone)"
 
 #. 3.2->settings-schema.json->useBatteryLowSound->tooltip
 msgid ""
@@ -414,6 +575,10 @@ msgid ""
 "To remind users that the volume may need to be set sensibly in public places"
 msgstr ""
 
+#. 3.2->settings-schema.json->head3->description
+msgid "Household Tasks"
+msgstr ""
+
 #. 3.2->settings-schema.json->deleteTempraryFiles->description
 msgid "Delete temporary files after upgrade to version 1.4"
 msgstr ""
@@ -423,22 +588,3 @@ msgid ""
 "Versions prior to 1.4 used temporary files in the home directory. These are "
 "not needed any more and can be deleted."
 msgstr ""
-
-#~ msgid "Type of Display"
-#~ msgstr "Način prikaza"
-
-#~ msgid "Ok"
-#~ msgstr "U redu"
-
-#~ msgid "Wait"
-#~ msgstr "Čekaj"
-
-#~ msgid "Note: Alerts not enabled in Settings"
-#~ msgstr "Napomena: Obavijesti nisu omogućene u postavkama"
-
-#~ msgid ""
-#~ "Increase or decrease this spinner value to change the refresh interval - "
-#~ "use a slow refresh if you have a slow machine"
-#~ msgstr ""
-#~ "Povećajte ili smanjite vrijednost za promjenu razdoblja osvježavanja - "
-#~ "koristite sporije osvježavanje ako imate sporo računalo"

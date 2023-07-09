@@ -1,13 +1,3 @@
-/* This is a basic Battery Applet with Monitoring and Shutdown (BAMS)
-It is not only useful in its own right
-but is also provides a 'tutorial' framework for other more
-complex applets - for example it provides a settings screen
-and a 'standard' right click (context) menu which opens
-the settings panel and a Housekeeping submenu accessing
-changelog and readme files, the gnome system monitor program,
-and the Power monitor in case you want to find out the total
-amount of resources this applet is using at various update rates.
-*/
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings; // Needed if you use Settings Screen
 const St = imports.gi.St;
@@ -22,12 +12,27 @@ const Main = imports.ui.main; // Needed for criticalNotify()
 const ByteArray = imports.byteArray; // Needed for battery value conversions
 
 // l10n/translation support thanks to ideas from @Odyseus, @lestcape and @NikoKrause
-var UUID = "batterymonitor@pdcurtis";
+const UUID = "batterymonitor@pdcurtis";
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
+
+function titleCase(str) {
+    return str.replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+}
+
+const UPowerInterface = `<node>
+  <interface name="org.freedesktop.UPower.Device">
+    <property name="TimeToEmpty" type="x" access="read" />
+    <property name="TimeToFull" type="x" access="read" />
+  </interface>
+</node>`;
+
+const UPowerProxy = Gio.DBusProxy.makeProxyWrapper(UPowerInterface);
 
 function MyApplet(metadata, orientation, panelHeight, instance_id) {
     this._init(metadata, orientation, panelHeight, instance_id);
@@ -38,9 +43,16 @@ MyApplet.prototype = {
 
     _init: function (metadata, orientation, panelHeight, instance_id) {
         Applet.TextIconApplet.prototype._init.call(this, orientation, panelHeight, instance_id);
+        this.instance_id = instance_id;
+        this.metadata = metadata;
+        this.orientation = orientation;
+        this.setupUI();
+    },
+
+    setupUI: function () {
         try {
             // Picks up UUID from metadata for Settings
-            this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+            this.settings = new Settings.AppletSettings(this, UUID, this.instance_id);
 
             this.settings.bindProperty(Settings.BindingDirection.IN, // Setting type
                 "refreshInterval-spinner", // The setting key
@@ -55,8 +67,38 @@ MyApplet.prototype = {
                 null);
 
             this.settings.bindProperty(Settings.BindingDirection.IN,
+                "recharged_alert",
+                "recharged_alert",
+                this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "recharged_alert_percentage",
+                "recharged_alert_percentage",
+                this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
                 "displayType",
                 "displayType",
+                this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "time_remaining_display",
+                "time_remaining_display",
+                this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "time_remaining_toolbar",
+                "time_remaining_toolbar",
+                this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "time_remaining_tooltip",
+                "time_remaining_tooltip",
                 this.on_settings_changed,
                 null);
 
@@ -84,7 +126,6 @@ MyApplet.prototype = {
                 this.on_settings_changed,
                 null);
 
-
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 "notifyBatteryLowSound",
                 "notifyBatteryLowSound",
@@ -96,56 +137,168 @@ MyApplet.prototype = {
                 "customBatteryPath",
                 this.on_settings_changed,
                 null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "normal_background_color",
+                "normal_background_color",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "normal_border_color",
+                "normal_border_color",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "normal_font_size",
+                "normal_font_size",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "discharging_background_color",
+                "discharging_background_color",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "discharging_border_color",
+                "discharging_border_color",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "discharging_font_size",
+                "discharging_font_size",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "alert_background_color",
+                "alert_background_color",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "alert_border_color",
+                "alert_border_color",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "alert_font_size",
+                "alert_font_size",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "alert_discharging_background_color",
+                "alert_discharging_background_color",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "alert_discharging_border_color",
+                "alert_discharging_border_color",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "alert_discharging_font_size",
+                "alert_discharging_font_size",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "limit_exceeded_background_color",
+                "limit_exceeded_background_color",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "limit_exceeded_border_color",
+                "limit_exceeded_border_color",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "limit_exceeded_font_size",
+                "limit_exceeded_font_size",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "limit_exceeded2_background_color",
+                "limit_exceeded2_background_color",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "limit_exceeded2_border_color",
+                "limit_exceeded2_border_color",
+                this.setupUI,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "limit_exceeded2_font_size",
+                "limit_exceeded2_font_size",
+                this.setupUI,
+                null);
+
+            // Define a subprocess launcher
+            this.launcher = new Gio.SubprocessLauncher({
+                flags: (Gio.SubprocessFlags.STDIN_PIPE |
+                    Gio.SubprocessFlags.STDOUT_PIPE |
+                    Gio.Subprocess.STDERR_PIPE)
+            });
 
             // Make metadata values available within applet for context menu.
-
-            this.appletPath = metadata.path;
-            this.changelog = metadata.path + "/../CHANGELOG.md";
-            this.helpfile = metadata.path + "/../README.md";
-            this.cssfile = metadata.path + "/stylesheet.css";
-            this.battery100 = metadata.path + "/icons/battery-100.png";
-            this.battery080 = metadata.path + "/icons/battery-080.png";
-            this.battery060 = metadata.path + "/icons/battery-060.png";
-            this.battery040 = metadata.path + "/icons/battery-040.png";
-            this.batteryCaution = metadata.path + "/icons/battery-caution.png";
-            this.batteryLow = metadata.path + "/icons/battery-low.png";
-            this.batteryCharging100 = metadata.path + "/icons/battery-charging.png";
-            this.batteryCharging080 = metadata.path + "/icons/battery-charging-080.png";
-            this.batteryCharging060 = metadata.path + "/icons/battery-charging-060.png";
-            this.batteryCharging040 = metadata.path + "/icons/battery-charging-040.png";
-            this.batteryChargingCaution = metadata.path + "/icons/battery-charging-caution.png";
-            this.batteryChargingLow = metadata.path + "/icons/battery-charging-low.png";
+            this.appletPath = this.metadata.path;
+            this.changelog = this.metadata.path + "/../CHANGELOG.md";
+            this.helpfile = this.metadata.path + "/../README.md";
+            this.battery100 = this.metadata.path + "/icons/battery-100.png";
+            this.battery080 = this.metadata.path + "/icons/battery-080.png";
+            this.battery060 = this.metadata.path + "/icons/battery-060.png";
+            this.battery040 = this.metadata.path + "/icons/battery-040.png";
+            this.batteryCaution = this.metadata.path + "/icons/battery-caution.png";
+            this.batteryLow = this.metadata.path + "/icons/battery-low.png";
+            this.batteryCharging100 = this.metadata.path + "/icons/battery-charging.png";
+            this.batteryCharging080 = this.metadata.path + "/icons/battery-charging-080.png";
+            this.batteryCharging060 = this.metadata.path + "/icons/battery-charging-060.png";
+            this.batteryCharging040 = this.metadata.path + "/icons/battery-charging-040.png";
+            this.batteryChargingCaution = this.metadata.path + "/icons/battery-charging-caution.png";
+            this.batteryChargingLow = this.metadata.path + "/icons/battery-charging-low.png";
 
             // Determine best default battery path if possible
             let batteryBasePath = "/sys/class/power_supply";
-            let batteryObjectDir, batteryCapacityFile, batteryStatusFile;
+            let batteryCapacityFile, batteryStatusFile;
+
+            this.BUS_NAME = "org.freedesktop.UPower";
             for (let i = 0; i < 10; i++) {
-                batteryObjectDir = "BAT" + i.toString();
-                this.batteryPath = batteryBasePath + '/' + batteryObjectDir;
+                this.batteryObjectDir = "BAT" + i.toString();
+                this.batteryPath = batteryBasePath + '/' + this.batteryObjectDir;
                 batteryCapacityFile = Gio.File.new_for_path(this.batteryPath + '/capacity');
                 batteryStatusFile = Gio.File.new_for_path(this.batteryPath + '/status');
-                if (batteryCapacityFile.query_exists(null) && batteryStatusFile.query_exists(null)) {
+                if (batteryCapacityFile.query_exists(null) && batteryStatusFile.query_exists(null))
                     break;
-                }
             }
 
             // Set initial value
             this.set_applet_icon_path(this.batteryCharging100);
 
-            // l10n/translation support
-            UUID = metadata.uuid;
-            Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
-
             this.set_applet_label(_("--%"));
             this.set_applet_tooltip(_("Waiting"));
 
+            if (this.recharged_alert)
+                this.showRechargedAlert = false; // flag for flashing recharged alert
             this.flashFlag = true; // flag for flashing background
             this.flashFlag2 = true; // flag for second flashing background
             this.lastBatteryPercentage = 50; // Initialise lastBatteryPercentage
             this.batteryStateOld = "invalid";
             this.alertFlag = false; // Flag says alert has been tripped to avoid repeat notifications
 
-            this.on_orientation_changed(orientation); // Initialise for panel orientation
+            this.on_orientation_changed(this.orientation); // Initialise for panel orientation
 
             this.applet_running = true; // Allow applet to be fully stopped when removed from panel
 
@@ -170,24 +323,15 @@ MyApplet.prototype = {
                 this.batteryLowSound = "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga";
                 this.batteryShutdownSound = "/usr/share/sounds/freedesktop/stereo/complete.oga";
             } else {
-                if (this.notifyBatteryLowSound && this.useBatteryLowSound) {
+                if (this.notifyBatteryLowSound && this.useBatteryLowSound)
                     Main.warningNotify(_("Battery Monitor Applet"), _("A user-defined sound file has been specified for Low Battery.\n\nPlease ensure the volume is set sensibly in public places,\nespecially if a long or loud file is specified.\n"));
-                }
                 this.batteryLowSound = this.batteryLowSound1;
                 this.batteryShutdownSound = this.batteryShutdownSound1;
             }
 
-            // Check stylesheet file over-ride location and use
-            this.cssfilePersistent = GLib.get_home_dir() + "/" + UUID + "/stylesheet.css"; // path to stylesheet file placed in user's home folder.
-            if (GLib.file_test(this.cssfilePersistent, GLib.FileTest.EXISTS)) {
-                // Main.warningNotify(_("Battery Applet with Monitoring and Shutdown - Stylesheet persistence active"));
-                // Over-ride code - currently a copy which needs an extra cinnamon restarts after any change
-                GLib.spawn_command_line_async("cp  " + this.cssfilePersistent + " " + metadata.path + "/stylesheet.css");
-            }
-
             // Set up left click menu
             this.menuManager = new PopupMenu.PopupMenuManager(this);
-            this.menu = new Applet.AppletPopupMenu(this, orientation);
+            this.menu = new Applet.AppletPopupMenu(this, this.orientation);
             this.menuManager.addMenu(this.menu);
 
             // Build Context (Right Click) Menu
@@ -202,7 +346,6 @@ MyApplet.prototype = {
         }
     },
 
-
     on_orientation_changed: function (orientation) {
         this.orientation = orientation;
         if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
@@ -214,10 +357,11 @@ MyApplet.prototype = {
         }
     },
 
-
     // Function called when settings are changed
     on_settings_changed: function () {
-        this.slider_demo.setValue((this.alertPercentage - 10) / 30);
+        this.slider.setValue((this.alertPercentage - 10) / 30);
+        if (this.recharged_alert)
+            this.showRechargedAlert = false;
         if (!this.chooseBatteryLowSound) {
             // paths to default sound files
             this.batteryLowSound = "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga";
@@ -228,9 +372,6 @@ MyApplet.prototype = {
         }
         this.updateLoop();
     },
-
-    // Null function called when Generic (internal) Setting changed
-    on_generic_changed: function () { },
 
     on_slider_changed: function (slider, value) {
         this.alertPercentage = (value * 30) + 10; // This is our BIDIRECTIONAL setting - by updating our configuration file will also be updated
@@ -246,13 +387,13 @@ MyApplet.prototype = {
 
             let menuitem2 = new PopupMenu.PopupMenuItem(_("Open Power Statistics"));
             menuitem2.connect('activate', Lang.bind(this, function (event) {
-                GLib.spawn_command_line_async('gnome-power-statistics');
+                this.launcher.spawnv(['gnome-power-statistics']);
             }));
             this._applet_context_menu.addMenuItem(menuitem2);
 
             this.menuitem3 = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
             this.menuitem3.connect('activate', Lang.bind(this, function (event) {
-                GLib.spawn_command_line_async('gnome-system-monitor');
+                this.launcher.spawnv(['gnome-system-monitor']);
             }));
             this._applet_context_menu.addMenuItem(this.menuitem3);
 
@@ -264,21 +405,15 @@ MyApplet.prototype = {
 
             this.subMenuItem1 = new PopupMenu.PopupMenuItem(_("View the Changelog"));
             this.subMenuItem1.connect('activate', Lang.bind(this, function (event) {
-                GLib.spawn_command_line_async(this.textEd + ' ' + this.changelog);
+                this.launcher.spawnv([this.textEd, this.changelog]);
             }));
             this.subMenu1.menu.addMenuItem(this.subMenuItem1); // Note this has subMenu1.menu not subMenu1._applet_context_menu as one might expect
 
             this.subMenuItem2 = new PopupMenu.PopupMenuItem(_("Open the README"));
             this.subMenuItem2.connect('activate', Lang.bind(this, function (event) {
-                GLib.spawn_command_line_async(this.textEd + ' ' + this.helpfile);
+                this.launcher.spawnv([this.textEd, this.helpfile]);
             }));
             this.subMenu1.menu.addMenuItem(this.subMenuItem2);
-
-            this.subMenuItem4 = new PopupMenu.PopupMenuItem(_("Open stylesheet.css (Advanced Function)"));
-            this.subMenuItem4.connect('activate', Lang.bind(this, function (event) {
-                GLib.spawn_command_line_async(this.textEd + ' ' + this.cssfile);
-            }));
-            this.subMenu1.menu.addMenuItem(this.subMenuItem4);
 
         } catch (e) {
             global.logError(e);
@@ -290,19 +425,14 @@ MyApplet.prototype = {
         try {
             this.menu.removeAll();
 
-            this.menuitemHead1 = new PopupMenu.PopupMenuItem(_("Battery Applet with Monitoring and Shutdown (BAMS)"), {
+            this.menuitemInfo1 = new PopupMenu.PopupMenuItem("     " + _("Waiting for battery information"), {
                 reactive: false
             });
-            this.menu.addMenuItem(this.menuitemHead1);
+            this.menu.addMenuItem(this.menuitemInfo1);
 
-            this.menuitemInfo2 = new PopupMenu.PopupMenuItem("     " + _("Waiting for battery information"), {
-                reactive: false
-            });
-            this.menu.addMenuItem(this.menuitemInfo2);
-
-            this.slider_demo = new PopupMenu.PopupSliderMenuItem(0);
-            this.slider_demo.connect("value-changed", Lang.bind(this, this.on_slider_changed));
-            this.menu.addMenuItem(this.slider_demo);
+            this.slider = new PopupMenu.PopupSliderMenuItem(0);
+            this.slider.connect("value-changed", Lang.bind(this, this.on_slider_changed));
+            this.menu.addMenuItem(this.slider);
         } catch (e) {
             global.logError(e);
         }
@@ -312,12 +442,6 @@ MyApplet.prototype = {
     on_applet_clicked: function (event) {
         this.updateLoop();
         this.menu.toggle();
-    },
-
-    // Call-back for the delete temporary files button
-    deleteTemporaryFiles: function () {
-        GLib.spawn_command_line_async('rm --force .batteryPercentage');
-        GLib.spawn_command_line_async('rm --force .batteryState');
     },
 
     // Refresh values from battery
@@ -355,42 +479,64 @@ MyApplet.prototype = {
 
             // Read the battery status
             this.refreshBattery();
-            // now check we have a genuine number otherwise use last value
-            if (!(this.batteryPercentage > 0 && this.batteryPercentage <= 100)) {
-                this.batteryPercentage = this.lastBatteryPercentage;
+
+            // Read the battery time properties if we need to display anywhere
+            if (this.time_remaining_display || this.time_remaining_toolbar || this.time_remaining_tooltip) {
+                this.BUS_PATH = `/org/freedesktop/UPower/devices/battery_${this.batteryObjectDir}`;
+
+                try {
+                    this._upowerProxy = new UPowerProxy(Gio.DBus.system, this.BUS_NAME, this.BUS_PATH);
+                    this._timeToFull = this._upowerProxy.TimeToFull;
+                    this._timeToEmpty = this._upowerProxy.TimeToEmpty;
+                } catch { };
             }
+
+            // now check we have a genuine number otherwise use last value
+            if (!(this.batteryPercentage > 0 && this.batteryPercentage <= 100))
+                this.batteryPercentage = this.lastBatteryPercentage;
             if (this.batteryState.length > 3) {
                 this.batteryStateOld = this.batteryState;
             } else {
                 this.batteryState = this.batteryStateOld;
             }
 
-            this.batteryMessage = " "
+            // Define CSS styles for the applet appearance
+            this._base_style = " margin: 2px, 1px, 0px, 1px; border-radius: 4px, 4px, 1px, 1px;";
+            this._normal = `border: 1px; background-color: ${this.normal_background_color}; border-color: ${this.normal_border_color}; font-size: ${this.normal_font_size}%;${this._base_style}`;
+            this._discharging = `border: 2px; background-color: ${this.discharging_background_color}; border-color: ${this.discharging_border_color}; font-size: ${this.discharging_font_size}%;${this._base_style}`;
+            this._alert = `border: 2px; background-color: ${this.alert_background_color}; border-color: ${this.alert_border_color}; font-size: ${this.alert_font_size}%;${this._base_style}`;
+            this._alert_discharging = `border: 2px; background-color: ${this.alert_discharging_background_color}; border-color: ${this.alert_discharging_border_color}; font-size: ${this.alert_discharging_font_size}%;${this._base_style}`;
+            this._limit_exceeded = `border: 1px; background-color: ${this.limit_exceeded_background_color}; border-color: ${this.limit_exceeded_border_color}; font-size: ${this.limit_exceeded_font_size}%;${this._base_style}`;
+            this._limit_exceeded2 = `border: 1px; background-color: ${this.limit_exceeded2_background_color}; border-color: ${this.limit_exceeded2_border_color}; font-size: ${this.limit_exceeded2_font_size}%;${this._base_style}`;
+
+            this.batteryMessage = " ";
+            let is_discharging = this.batteryState.indexOf("discharg") > -1;
+
             if (Math.floor(this.batteryPercentage) >= Math.floor(this.alertPercentage)) {
-                this.actor.style_class = 'bam-normal';
-                if (this.batteryState.indexOf("discharg") > -1) {
-                    this.actor.style_class = 'bam-discharging';
-                }
+                this.actor.style = this._normal;
+                if (is_discharging)
+                    this.actor.style = this._discharging;
                 this.alertFlag = false;
             }
 
             if (Math.floor(this.batteryPercentage) < Math.floor(this.alertPercentage)) {
                 if (this.flashFlag) {
-                    this.actor.style_class = 'bam-alert';
+                    this.actor.style = this._alert;
                     this.flashFlag = false;
                 } else {
-                    if (this.batteryState.indexOf("discharg") > -1) {
-                        this.actor.style_class = 'bam-alert-discharging';
+                    if (is_discharging) {
+                        this.actor.style = this._alert_discharging;
                         this.flashFlag = true; // Corrected placement
                     }
                 }
 
-                if (this.batteryState.indexOf("discharg") > -1) {
+                if (is_discharging) {
                     this.batteryMessage = _("Battery Low - turn off or connect to power supply") + " ";
                     if (!this.alertFlag) {
                         this.alertFlag = true; // Reset above when out of warning range
                         // Audible alert - type set earlier
-                        if (this.useBatteryLowSound) { GLib.spawn_command_line_async('play ' + this.batteryLowSound) };
+                        if (this.useBatteryLowSound)
+                            this.launcher.spawnv(['play', this.batteryLowSound]);
                         new ModalDialog.NotifyDialog(_("The Battery Level has fallen to your alert level\n\n either reconnect to a power source,\n\nclose down your work and suspend or shutdown the machine\n\n")).open();
                     }
                 }
@@ -398,21 +544,20 @@ MyApplet.prototype = {
 
             if (Math.floor(this.batteryPercentage) < Math.floor(this.alertPercentage) / 1.5) {
                 if (this.flashFlag2) {
-                    this.actor.style_class = 'bam-limit-exceeded2';
+                    this.actor.style = this._limit_exceeded2;
                     this.flashFlag2 = false;
                 } else {
-                    this.actor.style_class = 'bam-limit-exceeded';
+                    this.actor.style = this._limit_exceeded;
                     this.flashFlag2 = true;
                 }
 
-                if (this.batteryState.indexOf("discharg") > -1) {
+                if (is_discharging) {
                     this.batteryMessage = _("Battery Critical - will suspend unless connected to power supply") + " ";
                     if (this.batteryPercentage < this.lastBatteryPercentage) {
                         // Audible alert moved from suspendScript in v32_1.0.0
-                        if (this.useBatteryLowSound) {
-                            GLib.spawn_command_line_async('play ' + this.batteryShutdownSound)
-                        };
-                        GLib.spawn_command_line_async('sh ' + this.appletPath + '/suspendScript');
+                        if (this.useBatteryLowSound)
+                            this.launcher.spawnv(['play', this.batteryShutdownSound]);
+                        this.launcher.spawnv(['sh', `${this.appletPath}/suspendScript`]);
                     }
                 }
             }
@@ -423,26 +568,27 @@ MyApplet.prototype = {
             May be implemented in future version
             */
             // set Tooltip
-            this.set_applet_tooltip(_("Charge:") + " " + this.batteryPercentage + "% (" + this.batteryState + ")\n" + _("Alert:") + " " + Math.floor(this.alertPercentage) + "%\n" + _("Suspend:") + " " + Math.floor(this.alertPercentage / 1.5) + "%");
+
+            this.time_string = this.time_remaining_display || this.time_remaining_tooltip || this.time_remaining_toolbar ?
+                (is_discharging ?
+                    (this._timeToEmpty != 0 ? "\n" + _("Time to Empty:") + " (" + this.timeToString(this._timeToEmpty) + ")" : "") :
+                    (this._timeToFull != 0 ? "\n" + _("Time to Full:") + " (" + this.timeToString(this._timeToFull) + ")" : "")) :
+                "";
+            this.time_tooltip = this.time_remaining_tooltip ? this.time_string : "";
+            this.set_applet_tooltip(_("Current Charge:") + " " + this.batteryPercentage + "% (" + titleCase(this.batteryState) + `)${this.time_tooltip}\n` + _("Alert:") + " " + Math.floor(this.alertPercentage) + "%\n" + _("Suspend:") + " " + Math.floor(this.alertPercentage / 1.5) + "%");
             // Now select icon to display
             if (this.batteryPercentage == 100) {
-                if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.battery100;
-                else this.batteryIcon = this.batteryCharging100;
+                this.batteryIcon = is_discharging ? this.battery100 : this.batteryCharging100;
             } else if (this.batteryPercentage >= 80) {
-                if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.battery080;
-                else this.batteryIcon = this.batteryCharging080;
+                this.batteryIcon = is_discharging ? this.battery080 : this.batteryCharging080;
             } else if (this.batteryPercentage >= 60) {
-                if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.battery060;
-                else this.batteryIcon = this.batteryCharging060;
+                this.batteryIcon = is_discharging ? this.battery060 : this.batteryCharging060;
             } else if (this.batteryPercentage >= Math.floor(this.alertPercentage)) {
-                if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.battery040;
-                else this.batteryIcon = this.batteryCharging040;
+                this.batteryIcon = is_discharging ? this.battery040 : this.batteryCharging040;
             } else if (this.batteryPercentage >= Math.floor(this.alertPercentage / 1.5)) {
-                if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.batteryCaution;
-                else this.batteryIcon = this.batteryChargingCaution;
+                this.batteryIcon = is_discharging ? this.batteryCaution : this.batteryChargingCaution;
             } else {
-                if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.batteryLow;
-                else this.batteryIcon = this.batteryChargingLow;
+                this.batteryIcon = is_discharging ? this.batteryLow : this.batteryChargingLow;
             }
 
             // Choose what to display based on Display Type from settings dropdown
@@ -451,14 +597,18 @@ MyApplet.prototype = {
             } else {
                 this.hide_applet_icon();
             }
-            if (!(this.displayType == "classic" || this.displayType == "classicPlus") || !this.isHorizontal) {
+            if (!(this.displayType == "classic" || this.displayType == "classicPlus") || !this.isHorizontal)
                 this.batteryMessage = "";
-            }
 
+            this.time_display = this.time_remaining_display ?
+                (is_discharging ?
+                    (this._timeToEmpty != 0 ? ` (${this.timeToString(this._timeToEmpty)})` : "") :
+                    (this._timeToFull != 0 ? ` (${this.timeToString(this._timeToFull)})` : "")) :
+                "";
             if (this.batteryPercentage == 100 && !this.isHorizontal) {
-                this.set_applet_label(this.batteryMessage + this.batteryPercentage + "");
+                this.set_applet_label(this.batteryMessage + this.batteryPercentage + `${this.time_display}`);
             } else {
-                this.set_applet_label(this.batteryMessage + this.batteryPercentage + "%");
+                this.set_applet_label(this.batteryMessage + this.batteryPercentage + `%${this.time_display}`);
             }
 
             if (this.displayType == "icon") {
@@ -471,8 +621,18 @@ MyApplet.prototype = {
             }
 
             // Set left click menu item 'label' for slider
-            this.menuitemInfo2.label.text = _("Percentage Charge:") + " " + this.batteryPercentage + "% " + "(" + this.batteryState + ")" + " " + _("Alert at:") + " " + Math.floor(this.alertPercentage) + "% " + _("Suspend at:") + " " + Math.floor(this.alertPercentage / 1.5) + "%";
+            this.time_label = this.time_remaining_toolbar ? this.time_string : "";
+            this.menuitemInfo1.label.text = _("Current Charge:") + " " + this.batteryPercentage + "% " + "(" + titleCase(this.batteryState) + `)${this.time_label}\n` + _("Alert at:") + " " + Math.floor(this.alertPercentage) + "%\n" + _("Suspend at:") + " " + Math.floor(this.alertPercentage / 1.5) + "%";
 
+            // Check if a recharged alert needs to be shown, flip the switch under the right conditions otherwise
+            if (!is_discharging && this.recharged_alert) {
+                if (this.showRechargedAlert && this.recharged_alert_percentage <= this.batteryPercentage) {
+                    this.showRechargedAlert = false;
+                    new ModalDialog.NotifyDialog(_("The battery level has been recharged to") + ` ${this.batteryPercentage}%.`).open();
+                } else if (!this.showRechargedAlert && this.recharged_alert_percentage > this.batteryPercentage) {
+                    this.showRechargedAlert = true;
+                }
+            }
         } catch (e) {
             global.logError(e);
         }
@@ -483,17 +643,26 @@ MyApplet.prototype = {
         // Also inhibit when applet after has been removed from panel
         if (this.applet_running == true) {
             this.updateUI();
-            Mainloop.timeout_add_seconds(this.refreshInterval, Lang.bind(this, this.updateLoop));
+            this.timeout = Mainloop.timeout_add_seconds(this.refreshInterval, Lang.bind(this, this.updateLoop));
         }
     },
 
-    // This finalises the settings when the applet is removed from the panel
+    // This takes an int value of seconds and returns a string formatted with hours and minutes
+    timeToString: function (time_in_seconds) {
+        let totalTime = Math.round(time_in_seconds / 60);
+        let minutes = Math.floor(totalTime % 60);
+        let minutesToString = String(minutes).padStart(2, '0');
+        let hours = Math.floor(totalTime / 60);
+        return `${hours}:${minutesToString}`;
+    },
+
+    // This finalizes the settings when the applet is removed from the panel
     on_applet_removed_from_panel: function () {
         // inhibit the update timer when applet removed from panel
         this.applet_running = false;
+        Mainloop.source_remove(this.timeout);
         this.settings.finalize();
     }
-
 };
 
 function main(metadata, orientation, panelHeight, instance_id) {
