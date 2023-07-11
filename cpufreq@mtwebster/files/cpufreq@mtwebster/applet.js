@@ -286,8 +286,9 @@ CpufreqSelectorBase.prototype = {
         try {
             this.max = rd_nums_frm_file(this.cpufreq_path + '/scaling_max_freq')[0];
             this.min = rd_nums_frm_file(this.cpufreq_path + '/scaling_min_freq')[0];
-            this.upper = this.max * upper_border / 100;
-            this.lower = this.min + (this.max - this.min) * lower_border / 100;
+            this.range = this.max - this.min;
+            this.upper = this.min + this.range * upper_border / 100;
+            this.lower = this.min + this.range * lower_border / 100;
             this.avail_governors = rd_frm_file(this.cpufreq_path + '/scaling_available_governors');
             try {
                 this.avail_freqs = rd_nums_frm_file(this.cpufreq_path + '/scaling_available_frequencies');
