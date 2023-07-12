@@ -13,6 +13,7 @@ const http = new HttpLib();
 
 const UUID = 'spices-notifier@germanfr';
 
+const _TYPES = ['themes', 'applets', 'desklets', 'extensions'];
 const SPICES_URL = 'https://cinnamon-spices.linuxmint.com';
 const HTML_COUNT_ID = 'count';
 const COMMENTS_REGEX = new RegExp(`<[a-z]+ id="${HTML_COUNT_ID}">([0-9]+)</[a-z]+>`);
@@ -175,15 +176,14 @@ class SpicesNotifier extends Applet.TextIconApplet {
     if(this.updateId > 0)
       Mainloop.source_remove(this.updateId);
 
-    this.menu.removeAll();
-    //~ this.iteration++;
+    //~ this.menu.removeAll();
+    this.iteration++;
     // We need this to avoid duplicates on consecutive loads, because it's async
-    const _TYPES = ['themes', 'applets', 'desklets', 'extensions'];
+
     for (let _type of _TYPES) {
       let toId = setTimeout(Lang.bind(this, () => {
         this.get_xlets(_type);
-        return false;
-        //clearTimeout(toId)
+        return false
       }), 1000); // 1 second
     }
 
@@ -281,6 +281,8 @@ class SpicesNotifier extends Applet.TextIconApplet {
     let menuItems = [];
     let username = this.username.toLowerCase();
     let list = this.uuidList.toLowerCase().split(';');
+
+    if (type === _TYPES[0]) this.menu.removeAll();
 
     for(let uuid in xlets) {
       let xlet = xlets[uuid];
