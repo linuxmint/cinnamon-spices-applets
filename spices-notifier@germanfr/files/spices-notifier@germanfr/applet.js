@@ -127,7 +127,13 @@ class SpicesNotifier extends Applet.TextIconApplet {
       counter += 1;
     }
     this.uuidList = uuidList;
-    this.reload()
+    
+    //Cinnamon seems to be triggering this function multiple times even though
+    //uuids haven't changed so only reload when uuids have actually changed.
+    if (this.uuidList != this.previous_uuidList) {
+      this.reload();
+    }
+    this.previous_uuidList = this.uuidList;
   }
 
   on_applet_clicked() {
