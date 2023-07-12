@@ -136,11 +136,9 @@ class SpicesNotifier extends Applet.TextIconApplet {
 
     //Cinnamon seems to be triggering this function multiple times even though
     //uuids haven't changed so only reload when uuids have actually changed.
-    //~ if (this.uuidList != this.previous_uuidList) {
     if (uuidList != this.previous_uuidList) {
       this.reload()
     }
-    //~ this.previous_uuidList = this.uuidList;
     this.previous_uuidList = uuidList;
   }
 
@@ -176,7 +174,6 @@ class SpicesNotifier extends Applet.TextIconApplet {
     if(this.updateId > 0)
       Mainloop.source_remove(this.updateId);
 
-    //~ this.menu.removeAll();
     this.iteration++;
     // We need this to avoid duplicates on consecutive loads, because it's async
 
