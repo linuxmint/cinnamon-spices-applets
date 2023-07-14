@@ -7,5 +7,10 @@
         "type" : "switch",
         "default" : true,
         "description": "Use symbolic icon"
+    },
+    "show-osd" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "Show OSD"
     }
 }
