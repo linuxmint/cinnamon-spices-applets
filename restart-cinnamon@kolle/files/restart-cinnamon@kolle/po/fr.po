@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-08 12:52+0100\n"
-"PO-Revision-Date: 2023-04-26 22:58+0200\n"
+"POT-Creation-Date: 2023-07-14 21:26+0200\n"
+"PO-Revision-Date: 2023-07-14 21:28+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,27 +18,34 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:32
+#: applet.js:35
 msgid "Click here to restart Cinnamon"
 msgstr "Cliquer ici pour redémarrer Cinnamon"
 
-#. restart-cinnamon@kolle->settings-schema.json->header-settings->description
-msgid "General Settings"
-msgstr "Paramètres généraux"
+#. metadata.json->name
+msgid "Restart Cinnamon"
+msgstr "Redémarrer Cinnamon"
 
-#. restart-cinnamon@kolle->settings-schema.json->use-symbolic-
-#. icon->description
-msgid "Use symbolic icon"
-msgstr "Utiliser une icône symbolique"
-
-#. restart-cinnamon@kolle->metadata.json->description
+#. metadata.json->description
 msgid "Click on the applet to restart Cinnamon"
 msgstr "Redémarre Cinnamon en un clic"
 
-#. restart-cinnamon@kolle->metadata.json->contributors
+#. metadata.json->contributors
 msgid "bimsebasse: added symbolic icon"
 msgstr "bimsebasse: added symbolic icon"
 
-#. restart-cinnamon@kolle->metadata.json->name
-msgid "Restart Cinnamon"
-msgstr "Redémarrer Cinnamon"
+#. metadata.json->contributors
+msgid "claudiux: OSD option"
+msgstr "claudiux: option OSD"
+
+#. settings-schema.json->header-settings->description
+msgid "General Settings"
+msgstr "Paramètres généraux"
+
+#. settings-schema.json->use-symbolic-icon->description
+msgid "Use symbolic icon"
+msgstr "Utiliser une icône symbolique"
+
+#. settings-schema.json->show-osd->description
+msgid "Show OSD"
+msgstr "Afficher l'OSD"
