@@ -4,7 +4,7 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
-// const Gio = imports.gi.Gio;
+const Gio = imports.gi.Gio;
 // const Gtk = imports.gi.Gtk;
 // const St = imports.gi.St;
 const Mainloop = imports.mainloop;
@@ -48,7 +48,11 @@ const ICON_ON = "/assets/light-on.svg";
 const S_ICON_OFF = "redshift-status-off-symbolic";
 const S_ICON_ON = "redshift-status-on-symbolic";
 
-
+function isArchLinux() {
+    // All Arch-based distributions have the /etc/arch-release file,
+    // even if it's empty.
+    return Gio.file_new_for_path("/etc/arch-release").query_exists(null)
+}
 
 
 
@@ -291,10 +295,15 @@ class QRedshift extends Applet.TextIconApplet {
             this.menu = this._applet_context_menu;
             
             this.timeout_info = Mainloop.timeout_add_seconds(1, () => {
-                qLOG('Redshift required!');
                 this.setIcon();
                 this.set_applet_label(_("REDSHIFT NOT INSTALLED!"));
-                this.set_applet_tooltip(_("Requires Redshift: sudo apt-get install redshift"));
+                if (isArchLinux()) {
+                    qLOG('Redshift-minimal required!');
+                    this.set_applet_tooltip(_("Requires Redshift: yay -S redshift-minimal"));
+                } else {
+                    qLOG('Redshift required!');
+                    this.set_applet_tooltip(_("Requires Redshift: sudo apt-get install redshift"));
+                }
             }, null);
             
         }, (success) => {
@@ -461,23 +470,32 @@ class QRedshift extends Applet.TextIconApplet {
     }
     
     check_redshift_gtk() {
-        let cmd = "which redshift-gtk";
-        Util.spawnCommandLineAsync(cmd, (out) => {
+        let redshiftgtk_path = GLib.find_program_in_path ("redshift-gtk");
+        if (redshiftgtk_path != null) {
             if (this.redshift_info_menu_item == null) {
-                this.redshift_info_menu_item = new QPopupHeader({
-                    label: "redshift-gtk",
-                    sub_label: _("should be removed."),
-                    iconName: "dialog-warning", //dialog-warning-symbolic
-                    iconSize: 16
-                });
+                if (isArchLinux()) {
+                    this.redshift_info_menu_item = new QPopupHeader({
+                        label: "redshift",
+                        sub_label: _("should be replaced by redshift-minimal"),
+                        iconName: "dialog-warning", //dialog-warning-symbolic
+                        iconSize: 16
+                    });
+                } else {
+                    this.redshift_info_menu_item = new QPopupHeader({
+                        label: "redshift-gtk",
+                        sub_label: _("should be removed."),
+                        iconName: "dialog-warning", //dialog-warning-symbolic
+                        iconSize: 16
+                    });
+                }
                 this.menu.addMenuItem(this.redshift_info_menu_item, 2);
             }
-        }, (out) => {
+        } else {
             if (this.redshift_info_menu_item !== null) {
                 this.redshift_info_menu_item.destroy();
                 this.redshift_info_menu_item = null;
             }
-        });
+        }
     }
     
     check_conflicts() {
@@ -613,15 +631,15 @@ class QRedshift extends Applet.TextIconApplet {
             iconPath: this.metadata.path + '/icon.png'
         });
         this.menu.addMenuItem(this.headerIcon);
-        
-        
-        
-        
-        // if (this.check_redshift_gtk()) {
-        qLOG('QRedshift', 'redshift-gtk should be removed');
-        
-        
-        
+
+
+
+
+        if (this.check_redshift_gtk())
+            qLOG('QRedshift', 'redshift-gtk should be removed');
+
+
+
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         
         
