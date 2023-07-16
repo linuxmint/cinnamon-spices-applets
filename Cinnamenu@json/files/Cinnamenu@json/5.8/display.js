@@ -79,28 +79,9 @@ class Display {
         this.displaySignals.connect(this.mainBox, 'button-release-event',() => this.clearFocusedActors());
 
         //monitor mouse motion to prevent category mis-selection
-        const onMouseMotion = (actor, event) => {
-            //keep track of mouse motion to prevent misselection of another category button when moving mouse
-            //pointer from selected category button to app button by calculating angle of pointer movement
-            let [x, y] = event.get_coords();
-            if (!this.mTrack) {
-                this.mTrack = [];
-            }
-            //compare current position with oldest position in last 0.1 seconds.
-            this.mTrack.push({time: Date.now(), x: x, y: y});//push current position onto array
-            while (this.mTrack[0].time + 100 < Date.now()) {//remove positions older than 0.1 seconds ago
-                this.mTrack.shift();
-            }
-            const dx = x - this.mTrack[0].x;
-            const dy = Math.abs(y - this.mTrack[0].y);
-
-            const tan = dx / dy;
-            this.badAngle = tan > 0.3;//if tan = +infinity, badAngle is true.
-                                      //if tan = -infinity or NaN, badAngle is false.
-        };
         this.categoriesView.categoriesBox.set_reactive(true);
         this.displaySignals.connect(this.categoriesView.categoriesBox, 'motion-event',
-                                                        (...args) => onMouseMotion(...args));
+                                                    () => this.updateMouseTracking());
 
         //When sidebar is not on the left, limit excessive mainBox left padding + categoriesBox left
         //padding to 20px by subtracting the difference from categoriesBox left padding.
@@ -125,6 +106,28 @@ class Display {
         }
 
         this.mainBox.show();
+    }
+
+    updateMouseTracking() {
+        this.TRACKING_TIME = 70; //ms
+        //keep track of mouse motion to prevent misselection of another category button when moving mouse
+        //pointer from selected category button to app button by calculating angle of pointer movement
+        let [x, y] = global.get_pointer();
+        if (!this.mTrack) {
+            this.mTrack = [];
+        }
+        //compare current position with oldest position in last 0.1 seconds.
+        this.mTrack.push({time: Date.now(), x: x, y: y});//push current position onto array
+        //remove positions older than TRACKING_TIME ago
+        while (this.mTrack[0].time + this.TRACKING_TIME < Date.now()) {
+            this.mTrack.shift();
+        }
+        const dx = x - this.mTrack[0].x;
+        const dy = Math.abs(y - this.mTrack[0].y);
+
+        const tan = dx / dy;
+        this.badAngle = tan > 0.3;//if tan = +infinity, badAngle is true.
+                                    //if tan = -infinity or NaN, badAngle is false.
     }
 
     clearFocusedActors() {

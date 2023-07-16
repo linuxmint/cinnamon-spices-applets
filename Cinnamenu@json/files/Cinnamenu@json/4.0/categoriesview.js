@@ -10,6 +10,14 @@ const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 
 const {_, log, scrollToButton} = require('./utils');
 
+let buttonTimeoutId = null;
+function clearButtonTimeout() {
+    if (buttonTimeoutId) {
+        clearTimeout(buttonTimeoutId);
+        buttonTimeoutId = null;
+    }
+}
+
 class CategoryButton {
     constructor(appThis, category_id, category_name, icon_name, gicon) {
         this.appThis = appThis;
@@ -86,9 +94,6 @@ class CategoryButton {
                                 this.appThis.display.categoriesView.resetAllCategoriesOpacity());
 
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
-        //Allow motion-event to trigger handleEnter because previous enter-event may have been
-        //invalidated by this.appThis.display.badAngle === true when this is no longer the case.
-        this.signals.connect(this.actor, 'motion-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
         this.signals.connect(this.actor, 'button-release-event', (...args) =>
                                                         this._handleButtonRelease(...args));
@@ -134,13 +139,19 @@ class CategoryButton {
     }
 
     handleEnter(actor, event) {
-        //this method handles enter-event, motion-event and keypress
+        //this method handles mouse and key events
         if (this.has_focus || this.disabled || this.appThis.display.contextMenu.isOpen) {
             return Clutter.EVENT_PROPAGATE;
         }
         //When "activate categories on click" is off, don't enter this button if mouse is moving
         //quickly towards appviews, i.e. badAngle === true.
         if (event && !this.appThis.settings.categoryClick && this.appThis.display.badAngle) {
+            clearButtonTimeout();
+            //badAngle now but check again in a short while
+            buttonTimeoutId = setTimeout(() => {
+                            this.appThis.display.updateMouseTracking();
+                            this.handleEnter(actor, event);
+                        },this.appThis.display.TRACKING_TIME);
             return Clutter.EVENT_PROPAGATE;
         }
 
@@ -154,6 +165,7 @@ class CategoryButton {
                             this.id === 'emoji:' && this.appThis.currentCategory.startsWith('emoji:')) {
             return Clutter.EVENT_PROPAGATE;
         }
+        clearButtonTimeout();
         if (this.appThis.settings.categoryClick) {
             this.appThis.display.categoriesView.allButtonsRemoveFocus();
             this.has_focus = true;
@@ -173,6 +185,8 @@ class CategoryButton {
         if (this.actor.has_style_pseudo_class('hover')) {
             this.actor.remove_style_pseudo_class('hover');
         }
+
+        clearButtonTimeout();
     }
 
     _handleButtonRelease(actor, event) {

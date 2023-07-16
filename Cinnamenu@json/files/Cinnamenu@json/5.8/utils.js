@@ -207,10 +207,15 @@ const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => 
     }
 };
 
+var chromiumProfileDirs = null;
 const getChromiumProfileDirs = function() {
+    if (chromiumProfileDirs) {
+        return chromiumProfileDirs;
+    }
+
     //Find profile dirs of various chromium based browsers
     const appSystem = Cinnamon.AppSystem.get_default();
-    const folders = [];
+    chromiumProfileDirs = [];
     [
         [['chromium'], 'chromium'],
         [['google-chrome'], 'google-chrome'],
@@ -232,7 +237,7 @@ const getChromiumProfileDirs = function() {
             const bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev(
                                         [GLib.get_user_config_dir(), ...path, subfolder, 'Bookmarks']));
             if (bookmarksFile.query_exists(null)) {
-                folders.push([path.concat(subfolder), appInfo]);
+                chromiumProfileDirs.push([path.concat(subfolder), appInfo]);
             }
         };
 
@@ -243,7 +248,7 @@ const getChromiumProfileDirs = function() {
         }
     });
 
-    return folders;
+    return chromiumProfileDirs;
 };
 
 var scrollToButton = (button, enableAnimation) => {
