@@ -21,6 +21,7 @@ const Settings = imports.ui.settings;
 const Slider = imports.ui.slider;
 const Gettext = imports.gettext; // Needed for translations
 const Extension = imports.ui.extension; // Needed to reload this applet
+const Pango = imports.gi.Pango;
 
 const UUID = "sound150@claudiux";
 const HOME_DIR = GLib.get_home_dir();
@@ -68,6 +69,22 @@ function logError(error) {
     global.logError("[" + UUID + "]: " + error)
 }
 
+// Text wrapper
+const formatTextWrap = (text, maxLineLength) => {
+  const words = text.replace(/[\r\n]+/g, ' ').split(' ');
+  let lineLength = 0;
+
+  // use functional reduce, instead of for loop
+  return words.reduce((result, word) => {
+    if (lineLength + word.length >= maxLineLength) {
+      lineLength = word.length;
+      return result + `\n${word}`; // don't add spaces upfront
+    } else {
+      lineLength += word.length + (result ? 1 : 0);
+      return result ? result + ` ${word}` : `${word}`; // add space only when needed
+    }
+  }, '');
+}
 /* global values */
 let players_without_seek_support = ['spotify', 'totem', 'xplayer', 'gnome-mplayer', 'pithos',
     'smplayer'];
@@ -483,9 +500,11 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
         }
 
         // Trim stream name
-        if (name.length > 20) {
-            name = name.substring(0, 16) + "... ";
-        }
+        //~ if (name.length > 20) {
+            //~ name = name.substring(0, 16) + "... ";
+        //~ }
+        name = formatTextWrap(name, 20);
+        log("StreamMenuSection: name:"+name, true);
 
         // Special cases
         if (name === "Banshee") {
@@ -599,11 +618,17 @@ class Player extends PopupMenu.PopupMenuSection {
         let artistInfo = new St.BoxLayout();
         let artistIcon = new St.Icon({ icon_type: St.IconType.SYMBOLIC, icon_name: "system-users", style_class: 'popup-menu-icon' });
         this.artistLabel = new St.Label({text:this._artist});
+        this.artistLabel.clutterText.line_wrap = true;
+        this.artistLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        this.artistLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
         artistInfo.add_actor(artistIcon);
         artistInfo.add_actor(this.artistLabel);
         let titleInfo = new St.BoxLayout();
         let titleIcon = new St.Icon({ icon_type: St.IconType.SYMBOLIC, icon_name: "audio-x-generic", style_class: 'popup-menu-icon' });
         this.titleLabel = new St.Label({text:this._title});
+        this.titleLabel.clutterText.line_wrap = true;
+        this.titleLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
         titleInfo.add_actor(titleIcon);
         titleInfo.add_actor(this.titleLabel);
         this.trackInfo.add_actor(artistInfo);
@@ -977,7 +1002,8 @@ class MediaPlayerLauncher extends PopupMenu.PopupBaseMenuItem {
         this.label = new St.Label({ text: app.get_name() });
         this.addActor(this.label);
         this._icon = app.create_icon_texture(ICON_SIZE);
-        this.addActor(this._icon, { expand: false });
+        this._icon_bin = new St.Bin({ x_align: St.Align.END, child: this._icon });
+        this.addActor(this._icon_bin, { expand: true, span: -1, align: St.Align.END });
         this.connect("activate", (event) => this._onActivate(event));
     }
 
@@ -1425,11 +1451,13 @@ class Sound150Applet extends Applet.TextIconApplet {
             else {
                 title_text = player._title + ' - ' + player._artist;
             }
-            if (this.truncatetext < title_text.length) {
-                title_text = title_text.substr(0, this.truncatetext) + "...";
-            }
+            //~ if (this.truncatetext < title_text.length) {
+                //~ title_text = title_text.substr(0, this.truncatetext) + "...";
+            //~ }
+            title_text = formatTextWrap(title_text, this.truncatetext);
         }
         this.set_applet_label(title_text);
+        //~ log("setAppletText: title_text:\n"+title_text, true)
     }
 
     setAppletTextIcon(player, icon) {
