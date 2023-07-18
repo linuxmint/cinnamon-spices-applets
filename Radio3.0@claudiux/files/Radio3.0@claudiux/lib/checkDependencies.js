@@ -65,6 +65,7 @@ const DEPENDENCIES = {
 var DEPENDENCIES = {
   "default": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
+    ["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
     ["", "/usr/share/doc/libmpv1/copyright", "libmpv1"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
@@ -81,6 +82,7 @@ var DEPENDENCIES = {
   ],
   "arch": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
+    ["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
     ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
@@ -93,6 +95,7 @@ var DEPENDENCIES = {
   ],
   "debian": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
+    ["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
     ["", "/usr/lib/x86_64-linux-gnu/libmpv.so", "libmpv?"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
@@ -109,6 +112,7 @@ var DEPENDENCIES = {
   ],
   "fedora": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
+    ["", "/usr/lib64/mpv/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
     ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
@@ -122,6 +126,7 @@ var DEPENDENCIES = {
   ],
   "openSUSE": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
+    ["", "/usr/lib64/mpv/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
     ["sox", "/usr/bin/sox",  "sox"],
     ["at", "/usr/bin/at", "at"],

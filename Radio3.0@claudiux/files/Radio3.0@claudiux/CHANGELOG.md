@@ -1,3 +1,5 @@
+### v1.4.2~20230718
+  * Add mpv-mpris to dependencies.
 ### v1.4.1~20230613
   * Minor bugfix for Cinnamon 5.8.
 
