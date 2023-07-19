@@ -1,5 +1,5 @@
 {
-    "description": "Desaturate All",
+    "name": "Desaturate All",
     "uuid": "desaturate-all@hkoosha",
-    "name": "Convert your screen to grayscale."
+    "description": "Convert your screen to grayscale."
 }
