@@ -65,31 +65,20 @@ PowerProfilesApplet.prototype = {
       return;
     }
 
-    this.activeProfile = this._profilesProxy.ActiveProfile;
-    this.performanceDegraded = this._profilesProxy.PerformanceDegraded;
-    this.profiles = this._profilesProxy.Profiles;
-    this.activeProfileHolds = this._profilesProxy.ActiveProfileHolds;
+    this.ActiveProfile = this._profilesProxy.ActiveProfile;
+    this.PerformanceDegraded = this._profilesProxy.PerformanceDegraded;
+    this.Profiles = this._profilesProxy.Profiles;
+    this.ActiveProfileHolds = this._profilesProxy.ActiveProfileHolds;
     this.iconMap = new Map();
-    this.iconMap.set(this.profiles[0].Profile.unpack(), metadata.path + "/../icons/profile-0-symbolic.svg");
-    this.iconMap.set(this.profiles.slice(-1)[0].Profile.unpack(), metadata.path + "/../icons/profile-100-symbolic.svg");
-    if (this.iconMap.size != this.profiles.length)
-      this.iconMap.set(this.profiles[1].Profile.unpack(), metadata.path + "/../icons/profile-50-symbolic.svg");
+    this.iconMap.set(this.Profiles[0].Profile.unpack(), metadata.path + "/../icons/profile-0-symbolic.svg");
+    this.iconMap.set(this.Profiles.slice(-1)[0].Profile.unpack(), metadata.path + "/../icons/profile-100-symbolic.svg");
+    if (this.iconMap.size != this.Profiles.length)
+      this.iconMap.set(this.Profiles[1].Profile.unpack(), metadata.path + "/../icons/profile-50-symbolic.svg");
 
     this._proxyId = this._profilesProxy.connect("g-properties-changed", (proxy, changed, invalidated) => {
       for (let [changedProperty, changedValue] of Object.entries(changed.deepUnpack())) {
-        switch (changedProperty) {
-          case "ActiveProfile":
-            this.activeProfile = changedValue.deepUnpack();
-            break;
-          case "PerformanceDegraded":
-            this.performanceDegraded = changedValue.deepUnpack();
-            break;
-          case "Profiles":
-            this.performanceDegraded = changedValue.deepUnpack();
-            break;
-          case "ActiveProfileHolds":
-            this.activeProfileHolds = changedValue.deepUnpack();
-        }
+        if (["ActiveProfile", "ActiveProfileHolds", "PerformanceDegraded", "Profiles"].includes(changedProperty))
+            this[changedProperty] = changedValue.deepUnpack();
         this._update();
       }
     });
@@ -116,14 +105,14 @@ PowerProfilesApplet.prototype = {
   },
 
   _updateApplet() {
-    this.set_applet_icon_path(this.iconMap.get(this.activeProfile));
+    this.set_applet_icon_path(this.iconMap.get(this.ActiveProfile));
     this.set_applet_label("");
-    this.set_applet_tooltip(_("Current Profile:") + ` ${POWER_PROFILES[this.activeProfile]}`);
+    this.set_applet_tooltip(_("Current Profile:") + ` ${POWER_PROFILES[this.ActiveProfile]}`);
 
     this.menu.addMenuItem(this.contentSection);
 
-    if (this.performanceDegraded) {
-      let perfText = _("Performance Degraded:") + ` ${this.performanceDegraded}`;
+    if (this.PerformanceDegraded) {
+      let perfText = _("Performance Degraded:") + ` ${this.PerformanceDegraded}`;
       let perfItem = new PopupMenu.PopupIconMenuItem(perfText, "dialog-warning-symbolic",
         St.IconType.SYMBOLIC, { reactive: false });
       this.menu.addMenuItem(perfItem);
@@ -131,9 +120,9 @@ PowerProfilesApplet.prototype = {
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     }
 
-    if (this.activeProfileHolds.length > 0) {
-      let holdAppId = this.activeProfileHolds[0].ApplicationId.unpack();
-      let holdReason = this.activeProfileHolds[0].Reason.unpack();
+    if (this.ActiveProfileHolds.length > 0) {
+      let holdAppId = this.ActiveProfileHolds[0].ApplicationId.unpack();
+      let holdReason = this.ActiveProfileHolds[0].Reason.unpack();
       let activeText = _("Active Profile Holds:");
       let activeItem = new PopupMenu.PopupMenuItem(activeText, { reactive: false });
       this.menu.addMenuItem(activeItem);
@@ -146,10 +135,10 @@ PowerProfilesApplet.prototype = {
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     }
 
-    for (let profileNum = 0; profileNum < this.profiles.length; profileNum++) {
-      let profileName = this.profiles[profileNum].Profile.unpack();
+    for (let profileNum = 0; profileNum < this.Profiles.length; profileNum++) {
+      let profileName = this.Profiles[profileNum].Profile.unpack();
       let activeItem;
-      if (profileName == this.activeProfile) {
+      if (profileName == this.ActiveProfile) {
         activeItem = true;
         this.profileIndex = profileNum;
       } else {
@@ -169,7 +158,7 @@ PowerProfilesApplet.prototype = {
 
   _changeProfile(newProfile) {
     this._profilesProxy.ActiveProfile = newProfile;
-    this.activeProfile = this._profilesProxy.ActiveProfile;
+    this.ActiveProfile = this._profilesProxy.ActiveProfile;
   },
 
   _setKeybinding() {
@@ -182,24 +171,24 @@ PowerProfilesApplet.prototype = {
   },
 
   _switchToProfileByIndex(newIndex) {
-    let nextProfile = this.profiles[newIndex].Profile.unpack();
+    let nextProfile = this.Profiles[newIndex].Profile.unpack();
     if (newIndex != this.profileIndex)
       this._changeProfile(nextProfile);
 
     if (this.showOSD)
       Main.osdWindowManager.show(-1,
-        Gio.Icon.new_for_string(this.iconMap.get(this.activeProfile)));
+        Gio.Icon.new_for_string(this.iconMap.get(this.ActiveProfile)));
   },
 
   _previousProfile() {
     let nextIndex = this.profileIndex - 1 < 0 ?
-      (this.cycleProfiles ? this.profiles.length - 1 : this.profileIndex) :
+      (this.cycleProfiles ? this.Profiles.length - 1 : this.profileIndex) :
       this.profileIndex - 1;
     this._switchToProfileByIndex(nextIndex);
   },
 
   _nextProfile() {
-    let nextIndex = this.profileIndex + 1 >= this.profiles.length ?
+    let nextIndex = this.profileIndex + 1 >= this.Profiles.length ?
       (this.cycleProfiles ? 0 : this.profileIndex) :
       this.profileIndex + 1;
     this._switchToProfileByIndex(nextIndex);
