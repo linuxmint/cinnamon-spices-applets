@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### v4.1.1~20230719
+  * Change style of 'sound-player-overlay' with "height: auto;". Thanks to Hilyxx!
+
 ### v4.1.0~20230717
   * Show entire title (wrapped) in player section (opening menu). Look at [discussion 79](]https://github.com/orgs/linuxmint/discussions/79).
 ### v4.0.0~20230701

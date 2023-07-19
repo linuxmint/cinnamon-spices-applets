@@ -504,7 +504,7 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
             //~ name = name.substring(0, 16) + "... ";
         //~ }
         name = formatTextWrap(name, 20);
-        log("StreamMenuSection: name:"+name, true);
+        //~ log("StreamMenuSection: name:"+name, true);
 
         // Special cases
         if (name === "Banshee") {
@@ -513,9 +513,12 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
         else if (name === "Spotify") {
             iconName = "spotify";
         }
-        if (name === "VBox") {
+        else if (name === "VBox") {
             name = "Virtualbox";
             iconName = "virtualbox";
+        }
+        else if (name === "Mpv") {
+            iconName = "mpv"
         }
         else if (iconName === "audio") {
             iconName = "audio-x-generic";
@@ -614,7 +617,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this._artist = _("Unknown Artist");
         this._album = _("Unknown Album");
         this._title = _("Unknown Title");
-        this.trackInfo = new St.BoxLayout({style_class: 'sound-player-overlay', important: true, vertical: true});
+        this.trackInfo = new St.BoxLayout({style_class: 'sound-player-overlay', style: 'height: auto;', important: true, vertical: true});
         let artistInfo = new St.BoxLayout();
         let artistIcon = new St.Icon({ icon_type: St.IconType.SYMBOLIC, icon_name: "system-users", style_class: 'popup-menu-icon' });
         this.artistLabel = new St.Label({text:this._artist});
