@@ -376,7 +376,8 @@
     "options": {
       "Restore/Minimize most recent window": 0,
       "Restore then cycle windows": 1,
-      "Show thumbnail menu": 2
+      "Show thumbnail menu": 2,
+      "Restore or hold for thumbnail menu": 3
     },
     "description": "Left button action for grouped buttons",
     "tooltip": "Action taken when using the left mouse button on a window list entry for a group of windows"

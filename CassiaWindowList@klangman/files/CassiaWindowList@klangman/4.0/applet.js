@@ -194,7 +194,8 @@ const MouseAction = {
 const LeftClickGrouped = {
    Toggle: 0,         // Restore most resent window or minimize if already in focus
    Cycle: 1,          // Restore most recent window or cycle windows if any window is already in focus
-   Thumbnail: 2       // Show the Thumbnail menu of windows
+   Thumbnail: 2,      // Show the Thumbnail menu of windows
+   ToggleAndHold: 3   // Restore or Minimize on click, "hold" style thumbnail meanu on hold
 }
 
 // Possible values for the Pinned label setting
@@ -294,6 +295,35 @@ function resizeActor(actor, time, toWidth, text, button) {
        }
     },
     onCompleteScope: button
+  });
+}
+
+function animatedRemoveAppButton(workspace, time, button) {
+  if (button.closing===true) {
+     return;
+  }
+  let app = button._app;
+  button.closing = true;
+  button._app = null;
+  if (button._shrukenLabel===false){
+    // If we need a different button to have the label then start the animation now
+    // so that it is synchronized with this remove button animation
+    let captionType = button._settings.getValue("display-caption-for");
+    if (captionType == DisplayCaption.One) {
+      let allButtons = workspace._lookupAllAppButtonsForApp(app);
+      if (allButtons.length >= 1) {
+         allButtons[allButtons.length-1]._updateLabel();
+      }
+    }
+  }
+  Tweener.addTween(button._labelBox, {
+    natural_width: 0,
+    time: time * 0.001,
+    transition: "easeInOutQuad",
+    onComplete() {
+       this._removeAppButton(button);
+    },
+    onCompleteScope: workspace
   });
 }
 
@@ -977,6 +1007,12 @@ class WindowListButton {
   }
 
   _onDragBegin() {
+    if (this.holdDelay) {
+       let doIt = GLib.MainContext.default().find_source_by_id(this.holdDelay);
+       if (doIt) {
+          Mainloop.source_remove(this.holdDelay);
+       }
+    }
     this.actor.set_hover(false);
     this._tooltip.hide();
     this._tooltip.preventShow = true;
@@ -1117,6 +1153,8 @@ class WindowListButton {
   }
 
   _updateTooltip() {
+    if (this.closing)
+       return;
     let enableTooltips = this._settings.getValue("show-tooltips");
     let hoverEnabled = this._settings.getValue("menu-show-on-hover");
     if (!enableTooltips || !this._tooltip || (hoverEnabled && this._windows.length > 0)) {
@@ -1382,7 +1420,7 @@ class WindowListButton {
        }
     }
 
-    if (width != this._labelWidth){
+    if (width != this._labelWidth) {
        let animTime = this._settings.getValue("label-animation") ? this._settings.getValue("label-animation-time") : 0;
        resizeActor(this._labelBox, animTime, width, text, this);
        this._labelWidth = width;
@@ -1504,7 +1542,7 @@ class WindowListButton {
     } else if (this._windows.length || this._pinned) {
       this.actor.show();
     } else {
-      this.actor.hide();
+      //this.actor.hide();
     }
   }
 
@@ -1544,9 +1582,19 @@ class WindowListButton {
            this.openThumbnailMenu();
            this._workspace.holdPopup = mouseBtn;
            return true;
+        } else if(action) {
+           return true; // Some action will be taken on release, don't attempt to so anything else here
         }
      }
-     if (mouseBtn == 2) {
+     if (mouseBtn == 1 && this._windows.length > 1 && this._settings.getValue("grouped-mouse-action-btn1") == LeftClickGrouped.ToggleAndHold) {
+        this.holdDelay = Mainloop.timeout_add(350, Lang.bind(this, function() {
+              this.openThumbnailMenu()
+              this._workspace.holdPopup = mouseBtn;
+              this.holdDelay = undefined;
+              this._draggable.fakeRelease();
+           }
+        ));
+     } else if (mouseBtn == 2) {
         let action = this._settings.getValue("mouse-action-btn2");
         if (action == MouseAction.PreviewHold) {
            this.openThumbnailMenu();
@@ -1569,6 +1617,8 @@ class WindowListButton {
 
   // Check if there are mouse action to be taken on button release
   _onButtonRelease(actor, event) {
+    if (this.closing==true )
+       return;
     let mouseBtn = event.get_button();
     // If the Ctrl or Shift key is held, and there is a defined action for that key+button combination then do the specified action
     if (event.has_control_modifier() || event.has_shift_modifier()) {
@@ -1589,7 +1639,16 @@ class WindowListButton {
     if (mouseBtn == 1) {
       if (this._currentWindow) {
         let leftGroupedAction = this._settings.getValue("grouped-mouse-action-btn1");
-        if (this._windows.length == 1 || leftGroupedAction == LeftClickGrouped.Toggle) {
+        if (this._windows.length == 1 || leftGroupedAction == LeftClickGrouped.Toggle || leftGroupedAction == LeftClickGrouped.ToggleAndHold) {
+          if (leftGroupedAction == LeftClickGrouped.ToggleAndHold) {
+             if (this.holdDelay) {
+                let doIt = GLib.MainContext.default().find_source_by_id(this.holdDelay);
+                if (doIt) {
+                   Mainloop.source_remove(this.holdDelay);
+                }
+             }
+             this.closeThumbnailMenu();
+          }
           if (hasFocus(this._currentWindow, false) && !this._currentWindow.minimized) {
             this._currentWindow.minimize();
           } else {
@@ -2669,8 +2728,14 @@ class Workspace {
     if ((groupingType == GroupType.Pooled || groupingType == GroupType.Auto || prepend) && btns && btns.length > 0) {
        // Move the button to the top of the list of buttons for the app
        let children = this.actor.get_children();
-       let actIdx = children.indexOf(btns[0].actor);
-       this.actor.set_child_at_index(appButton.actor, actIdx);
+       if (prepend) {
+          let actIdx = children.indexOf(btns[0].actor);
+         this.actor.set_child_at_index(appButton.actor, actIdx);
+       } else {
+          let actIdx = children.indexOf(btns[btns.length-1].actor)+1;
+          this.actor.set_child_at_index(appButton.actor, actIdx);
+          btns[btns.length-1]._updateLabel();
+       }
     } else if (this._settings.getValue("trailing-pinned-behaviour")===true) {
        // Move the button before any trailing pinned buttons
        let children = this.actor.get_children();
@@ -2691,14 +2756,13 @@ class Workspace {
   }
 
   _removeAppButton(appButton) {
-    let hasLabel = (appButton._shrukenLabel===false);
     let app = appButton._app;
     let index = this._appButtons.indexOf(appButton);
     if (index >= 0) {
        this._appButtons.splice(index, 1);
        appButton.destroy();
     }
-    if (hasLabel){
+    if (app && appButton._shrukenLabel===false){
        // Do we have a new button in a pool that needs a label
        let captionType = this._settings.getValue("display-caption-for");
        if (captionType == DisplayCaption.One) {
@@ -2720,7 +2784,7 @@ class Workspace {
   _lookupAllAppButtonsForApp(app, startIndex) {
     let children = this.actor.get_children().slice(startIndex);
     let btns = children.map(x => x._delegate);
-    return btns.filter(x => { return x instanceof WindowListButton && x._app.get_id() == app.get_id() });
+    return btns.filter(x => { return x instanceof WindowListButton && x._app && x._app.get_id() == app.get_id() });
   }
 
   _lookupAppButtonForApp(app, startIndex) {
@@ -2795,7 +2859,8 @@ class Workspace {
            btnToUpdateLabel._updateLabel();
         }
         if (appButton._windows.length === 0 && (appButton._pinned===false || this._settings.getValue("display-pinned")===false)) {
-           this._removeAppButton(appButton);
+           let animTime = this._settings.getValue("label-animation") ? this._settings.getValue("label-animation-time") : 0;
+           animatedRemoveAppButton(this, animTime, appButton);
         } else {
            // If pinned, look for other windows and move one to this pinned button
            if (appButton._pinned) {
@@ -2805,7 +2870,8 @@ class Workspace {
                  let window = btns[i]._windows[0];
                  btns[i].removeWindow(window);
                  appButton.addWindow(window);
-                 this._removeAppButton(btns[i]);
+                 let animTime = this._settings.getValue("label-animation") ? this._settings.getValue("label-animation-time") : 0;
+                 animatedRemoveAppButton(this, animTime, btns[i]);
               } else if (appButton._windows.length === 0) {
                  this.menuManager.removeMenu(appButton.menu);
               }
@@ -2891,12 +2957,24 @@ class Workspace {
         appButton._minLabelSize = -1; // Must re-calculate
         appButton._updateLabel()
       }
+    } else {
+       // remove pinned buttons because pinning has been disabled
+       let btns = this._appButtons.slice();
+       for (let i = btns.length - 1; i >= 0; i--) {
+         let appButton = btns[i];
+         if (appButton._pinned && appButton._windows.length == 0) {
+           let animTime = this._settings.getValue("label-animation") ? this._settings.getValue("label-animation-time") : 0;
+           animatedRemoveAppButton(this, animTime, appButton);
+         }
+       }
     }
 
+    // Remove buttons that are no longer pinned
     for (let i = this._appButtons.length - 1; i >= 0; i--) {
       let appButton = this._appButtons[i];
-      if ((appButton.getPinnedIndex() < 0) && appButton._windows.length == 0) {
-        this._removeAppButton(appButton);
+      if ((appButton._app && appButton.getPinnedIndex() < 0) && appButton._windows.length == 0) {
+        let animTime = this._settings.getValue("label-animation") ? this._settings.getValue("label-animation-time") : 0;
+        animatedRemoveAppButton(this, animTime, appButton);
       }
     }
   }
@@ -2909,7 +2987,8 @@ class Workspace {
       for (let i = this._appButtons.length - 1; i >= 0; i--) {
         let appButton = this._appButtons[i];
         if (appButton._windows.length == 0) {
-          this._removeAppButton(appButton);
+          let animTime = this._settings.getValue("label-animation") ? this._settings.getValue("label-animation-time") : 0;
+          animatedRemoveAppButton(this, animTime, appButton);
         }
       }
     }
@@ -2985,7 +3064,8 @@ class Workspace {
     appButton._minLabelSize = -1 // Must re-calculate
     appButton.updateView();
     if (appButton._windows.length == 0) {
-      this._removeAppButton(appButton);
+      let animTime = this._settings.getValue("label-animation") ? this._settings.getValue("label-animation-time") : 0;
+      animatedRemoveAppButton(this, animTime, appButton);
     }
     this._updatePinSettings();
   }
@@ -3018,7 +3098,7 @@ class Workspace {
      let appButtons = this._appButtons.slice();
      let apps = [];
      for (let i = 0; i < appButtons.length; i++) {
-        if (apps.indexOf(appButtons[i]._app) == -1) {
+        if (appButtons[i]._app && apps.indexOf(appButtons[i]._app) == -1) {
            let allButtons = this._lookupAllAppButtonsForApp(appButtons[i]._app);
            if (allButtons.length > 1){
               apps.push(appButtons[i]._app);
@@ -3033,9 +3113,11 @@ class Workspace {
   _groupAllApps(grpType) {
      let appButtons = this._appButtons.slice();
      for (let i = 0; i < appButtons.length; i++) {
-        let allButtons = this._lookupAllAppButtonsForApp(appButtons[i]._app);
-        if (allButtons.length > 1){
-           this._groupOneApp(allButtons, grpType);
+        if (appButtons[i]._app) {
+           let allButtons = this._lookupAllAppButtonsForApp(appButtons[i]._app);
+           if (allButtons.length > 1){
+              this._groupOneApp(allButtons, grpType);
+           }
         }
      }
   }
@@ -3282,10 +3364,12 @@ class Workspace {
   getAppWithMostButtons() {
     let mostBtns = undefined;
     for (let idx=this._appButtons.length-1 ; idx >= 0 ; idx--) {
-      let btns = this._lookupAllAppButtonsForApp(this._appButtons[idx]._app);
-      if (btns.length > 1 && btns[0]._grouped != GroupingType.ForcedOff && (mostBtns == undefined || btns.length > mostBtns.length)) {
-        mostBtns = btns;
-      }
+       if (this._appButtons[idx]._app) {
+          let btns = this._lookupAllAppButtonsForApp(this._appButtons[idx]._app);
+          if (btns.length > 1 && btns[0]._grouped != GroupingType.ForcedOff && (mostBtns == undefined || btns.length > mostBtns.length)) {
+            mostBtns = btns;
+          }
+       }
     }
     return mostBtns;
   }
@@ -3389,6 +3473,7 @@ class Workspace {
     // Setup the windows array so that the window list is the same order as it was before the grouping occurred!
     let x = btns[btns.length-1]._windows.shift();
     btns[btns.length-1]._windows.push(x);
+    this._updateFocus();
   }
 
   // Ungroup the windows in the passed in buttons, set the button so it's not grouping, add windows back
@@ -3409,6 +3494,7 @@ class Workspace {
      let lastFocusBtn = button._workspace._lookupAppButtonForWindow(appLastFocus);
      lastFocusBtn.appLastFocus = true;
      button._updateLabel();
+     this._updateFocus();
   }
 
   // Determine if the buttons are being shrunk below the preferred size
@@ -3582,7 +3668,8 @@ class WindowList extends Applet.Applet {
         let ws = this._workspaces[wsIdx];
         for (let btnIdx=0 ; btnIdx < ws._appButtons.length ; btnIdx++) {
            let btn = ws._appButtons[btnIdx];
-           btn._updateTooltip();
+           if (btn.closing!=true)
+              btn._updateTooltip();
         }
      }
   }
@@ -3621,7 +3708,7 @@ class WindowList extends Applet.Applet {
         workspace = this._workspaces[wsIdx];
         for ( let btnIdx=0 ; btnIdx < workspace._appButtons.length ; btnIdx++) {
            let btn = workspace._appButtons[btnIdx];
-           if ((btn._app.get_name() == appName || btn._app.get_id() == appName) && btn._windows.length > 0) {
+           if (btn._windows.length > 0 && (btn._app.get_name() == appName || btn._app.get_id() == appName)) {
               workspace._keyBindingsWindows[keyBindingIdx] = btn._windows[0];
            }
         }

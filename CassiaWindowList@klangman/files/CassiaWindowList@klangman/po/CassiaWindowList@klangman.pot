@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 23:13-0400\n"
+"POT-Creation-Date: 2023-07-17 23:01-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,24 +17,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.0/applet.js:1993
+#: 4.0/applet.js:2052
 msgid "Applet Preferences"
 msgstr ""
 
-#: 4.0/applet.js:1997
+#: 4.0/applet.js:2056
 msgid "About..."
 msgstr ""
 
-#: 4.0/applet.js:2001
+#: 4.0/applet.js:2060
 msgid "Configure..."
 msgstr ""
 
-#: 4.0/applet.js:2005
+#: 4.0/applet.js:2064
 #, javascript-format
 msgid "Remove '%s'"
 msgstr ""
 
-#: 4.0/applet.js:2007
+#: 4.0/applet.js:2066
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr ""
 
@@ -44,115 +44,115 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2016
+#: 4.0/applet.js:2075
 msgid "Open new window"
 msgstr ""
 
-#: 4.0/applet.js:2022
+#: 4.0/applet.js:2081
 msgid "Pin to this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2060
+#: 4.0/applet.js:2119
 msgid "Pin to other workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2081
+#: 4.0/applet.js:2140
 msgid "Pin to all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2106 4.0/applet.js:2279
+#: 4.0/applet.js:2165 4.0/applet.js:2338
 msgid "Add new Hotkey for"
 msgstr ""
 
-#: 4.0/applet.js:2120
+#: 4.0/applet.js:2179
 msgid "Recent files"
 msgstr ""
 
-#: 4.0/applet.js:2144
+#: 4.0/applet.js:2203
 msgid "Places"
 msgstr ""
 
-#: 4.0/applet.js:2186
+#: 4.0/applet.js:2245
 msgid "Only on this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2188
+#: 4.0/applet.js:2247
 msgid "Visible on all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2189
+#: 4.0/applet.js:2248
 msgid "Move to another workspace"
 msgstr ""
 
-#: 4.0/applet.js:2208
+#: 4.0/applet.js:2267
 msgid "Move to another monitor"
 msgstr ""
 
-#: 4.0/applet.js:2216
+#: 4.0/applet.js:2275
 msgid "Monitor"
 msgstr ""
 
-#: 4.0/applet.js:2244
+#: 4.0/applet.js:2303
 msgid "unassigned"
 msgstr ""
 
-#: 4.0/applet.js:2255 4.0/applet.js:2276
+#: 4.0/applet.js:2314 4.0/applet.js:2335
 msgid "Assign window to a hotkey"
 msgstr ""
 
-#: 4.0/applet.js:2299
+#: 4.0/applet.js:2358
 msgid "Change application label contents"
 msgstr ""
 
-#: 4.0/applet.js:2302
+#: 4.0/applet.js:2361
 msgid "Remove custom setting"
 msgstr ""
 
-#: 4.0/applet.js:2309
+#: 4.0/applet.js:2368
 msgid "Use window title"
 msgstr ""
 
-#: 4.0/applet.js:2316
+#: 4.0/applet.js:2375
 msgid "Use application name"
 msgstr ""
 
-#: 4.0/applet.js:2323
+#: 4.0/applet.js:2382
 msgid "No label"
 msgstr ""
 
-#: 4.0/applet.js:2334
+#: 4.0/applet.js:2393
 msgid "Ungroup application windows"
 msgstr ""
 
-#: 4.0/applet.js:2345
+#: 4.0/applet.js:2404
 msgid "Group application windows"
 msgstr ""
 
-#: 4.0/applet.js:2355
+#: 4.0/applet.js:2414
 msgid "Automatic grouping/ungrouping"
 msgstr ""
 
-#: 4.0/applet.js:2384
+#: 4.0/applet.js:2443
 msgid "Restore"
 msgstr ""
 
-#: 4.0/applet.js:2388
+#: 4.0/applet.js:2447
 msgid "Minimize"
 msgstr ""
 
-#: 4.0/applet.js:2394
+#: 4.0/applet.js:2453
 msgid "Unmaximize"
 msgstr ""
 
-#: 4.0/applet.js:2401
+#: 4.0/applet.js:2460
 msgid "Close others"
 msgstr ""
 
-#: 4.0/applet.js:2412
+#: 4.0/applet.js:2471
 msgid "Close all"
 msgstr ""
 
-#: 4.0/applet.js:2421
+#: 4.0/applet.js:2480
 msgid "Close"
 msgstr ""
 
@@ -756,6 +756,10 @@ msgstr ""
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 msgid "Show thumbnail menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+msgid "Restore or hold for thumbnail menu"
 msgstr ""
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->description
