@@ -1803,11 +1803,12 @@ class Apps {//This obj provides the .app objects for all the applications catego
         while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
             if (nextType === CMenu.TreeItemType.ENTRY) {
                 const entry = iter.get_entry();
-                const id = entry.get_desktop_file_id();
-                const app = this.appSystem.lookup_app(id);
-                if  (!app || (app && app.get_nodisplay())) {
+                const appInfo = entry.get_app_info();
+                if (!appInfo || appInfo.get_nodisplay()) {
                     continue;
                 }
+                const id = entry.get_desktop_file_id();
+                const app = this.appSystem.lookup_app(id);
 
                 foundApps.push(app);
                 app.name = app.get_name();
