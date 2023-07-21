@@ -108,6 +108,8 @@
 
 .hourly-icon {
     padding: 5px;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .location-selector {

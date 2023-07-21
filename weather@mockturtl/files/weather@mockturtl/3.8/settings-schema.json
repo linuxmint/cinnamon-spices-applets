@@ -255,10 +255,10 @@
 	"forecastHours": {
 		"type": "spinbutton",
 		"default": 24,
-		"min": 3,
+		"min": 12,
 		"max": 168,
 		"units": "hours",
-		"step": 1,
+		"step": 12,
 		"description": "Hourly Forecast length",
 		"tooltip": "Maximum number of hours that can be displayed, available numbers of data will affect the final number."
 	},

@@ -425,14 +425,14 @@ export class USWeather extends BaseProvider {
 					main: _("Few clouds"),
 					description: _("Few clouds"),
 					customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-					icons: ["weather-clear-night", "weather-severe-alert"]
+					icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
 				}
 			case "sct": // Partly cloudy
 				return {
 					main: _("Partly cloudy"),
 					description: _("Partly cloudy"),
 					customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-					icons: ["weather-clear", "weather-severe-alert"]
+					icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
 				}
 			case "bkn": // Mostly cloudy
 				return {

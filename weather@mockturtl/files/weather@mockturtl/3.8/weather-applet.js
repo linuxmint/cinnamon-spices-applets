@@ -12123,13 +12123,16 @@ class ClimacellV4 extends BaseProvider {
         const daily = (_d = data.data.timelines.find(x => x.timestep == "1d")) === null || _d === void 0 ? void 0 : _d.intervals;
         if (!current || !daily || !hourly || !((_e = daily[0]) === null || _e === void 0 ? void 0 : _e.values))
             return null;
+        const sunrise = DateTime.fromISO(daily[0].values.sunriseTime, { zone: loc.timeZone });
+        const sunset = DateTime.fromISO(daily[0].values.sunsetTime, { zone: loc.timeZone });
+        const now = DateTime.fromISO(current.startTime, { zone: loc.timeZone });
         const result = {
             coord: {
                 lat: loc.lat,
                 lon: loc.lon
             },
             date: DateTime.fromISO(current.startTime, { zone: loc.timeZone }),
-            condition: this.ResolveCondition(current.values.weatherCode),
+            condition: this.ResolveCondition(current.values.weatherCode, IsNight({ sunrise, sunset }, now)),
             humidity: current.values.humidity,
             pressure: current.values.pressureSurfaceLevel,
             temperature: CelsiusToKelvin(current.values.temperature),
@@ -12138,8 +12141,8 @@ class ClimacellV4 extends BaseProvider {
                 speed: current.values.windSpeed
             },
             dewPoint: CelsiusToKelvin(current.values.dewPoint),
-            sunrise: DateTime.fromISO(daily[0].values.sunriseTime, { zone: loc.timeZone }),
-            sunset: DateTime.fromISO(daily[0].values.sunsetTime, { zone: loc.timeZone }),
+            sunrise,
+            sunset,
             location: {
                 url: "https://www.tomorrow.io/weather"
             },
@@ -12153,20 +12156,22 @@ class ClimacellV4 extends BaseProvider {
         const hours = [];
         const days = [];
         for (const element of daily) {
+            const date = DateTime.fromISO(element.startTime, { zone: loc.timeZone });
             days.push({
-                condition: this.ResolveCondition(element.values.weatherCode),
-                date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
+                condition: this.ResolveCondition(element.values.weatherCode, IsNight({ sunrise, sunset }, date)),
+                date,
                 temp_max: CelsiusToKelvin(element.values.temperatureMax),
                 temp_min: CelsiusToKelvin(element.values.temperatureMin)
             });
         }
         for (const element of hourly) {
+            let date = DateTime.fromISO(element.startTime, { zone: loc.timeZone });
+            date = date.set({ minute: 0, second: 0, millisecond: 0 });
             const hour = {
-                condition: this.ResolveCondition(element.values.weatherCode),
-                date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
+                condition: this.ResolveCondition(element.values.weatherCode, IsNight({ sunrise, sunset }, date)),
+                date,
                 temp: CelsiusToKelvin(element.values.temperature)
             };
-            hour.date = hour.date.set({ minute: 0, second: 0, millisecond: 0 });
             if (element.values.precipitationProbability > 0 && element.values.precipitationIntensity > 0) {
                 hour.precipitation = {
                     chance: element.values.precipitationProbability,
@@ -12726,14 +12731,14 @@ class USWeather extends BaseProvider {
                     main: _("Few clouds"),
                     description: _("Few clouds"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icons: ["weather-clear-night", "weather-severe-alert"]
+                    icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
                 };
             case "sct":
                 return {
                     main: _("Partly cloudy"),
                     description: _("Partly cloudy"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icons: ["weather-clear", "weather-severe-alert"]
+                    icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
                 };
             case "bkn":
                 return {
@@ -16017,7 +16022,7 @@ class CurrentWeather {
             x_expand: true,
             y_expand: true,
             style_class: STYLE_ICONBOX,
-            x_align: uiCurrentWeather_ActorAlign.FILL,
+            x_align: uiCurrentWeather_ActorAlign.CENTER,
             y_align: uiCurrentWeather_ActorAlign.FILL
         });
         this.sunTimesUI = new SunTimesUI(app);
@@ -16503,8 +16508,60 @@ class UIHourlyForecasts {
         this.hourlyContainers = [];
         this.hourlyToggled = false;
         this.availableWidth = null;
+        this.hourlyBoxHorizontalPadding = 10;
+        this.onPaintSignal = null;
+        this.canvas = null;
         this.OnShortHourlyTimeChanged = (config, shortTime, data) => {
             this.Display(data.hourlyForecasts, config, config.Timezone);
+        };
+        this.OnPaint = (owner) => {
+            var _a, _b;
+            if (this.availableWidth == null)
+                return;
+            const ctx = owner.get_context();
+            const maxTemp = this.hourlyForecastData.map(x => x.temp).reduce((p, c) => Math.max(p !== null && p !== void 0 ? p : 0, c !== null && c !== void 0 ? c : 0));
+            const minTemp = this.hourlyForecastData.map(x => x.temp).reduce((p, c) => Math.min(p !== null && p !== void 0 ? p : 0, c !== null && c !== void 0 ? c : 0));
+            const maxPrecipVolume = this.hourlyForecastData.map(x => { var _a; return (_a = x.precipitation) === null || _a === void 0 ? void 0 : _a.volume; }).reduce((p, c) => Math.max(p !== null && p !== void 0 ? p : 0, c !== null && c !== void 0 ? c : 0));
+            const totalHeight = this.hourlyContainers[0].height;
+            const itemWidth = this.hourlyContainers[0].width;
+            const totalWidth = this.hourlyContainers.length * itemWidth;
+            const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() + this.hourlyForecasts[0].Icon.get_height();
+            const precipitationHeight = this.hourlyForecasts[0].PrecipPercent.get_height() + this.hourlyForecasts[0].PrecipVolume.get_height();
+            const tempPadding = 6;
+            let points = [];
+            let precipitation = [];
+            for (let i = 0; i < this.hourlyContainers.length; i++) {
+                const data = this.hourlyForecastData[i];
+                const items = this.hourlyForecasts[i];
+                if (data.temp == null)
+                    continue;
+                const ratio = ((data.temp - minTemp) / (maxTemp - minTemp)) * (this.tempGraphHeight - (tempPadding * 2));
+                const height = this.tempGraphHeight - tempPadding - ratio + tempHeightOffset;
+                const midX = itemWidth * i + (itemWidth / 2);
+                const midY = (totalHeight / 2);
+                points.push({ x: midX, y: height });
+                precipitation.push(((_b = (_a = data.precipitation) === null || _a === void 0 ? void 0 : _a.volume) !== null && _b !== void 0 ? _b : 0));
+            }
+            ctx.setLineWidth(3);
+            if (this.app.config.ForegroundColor == null)
+                ctx.setSourceRGBA(1, 1, 1, 0.5);
+            else
+                ctx.setSourceRGBA(this.app.config.ForegroundColor.red, this.app.config.ForegroundColor.green, this.app.config.ForegroundColor.blue, this.app.config.ForegroundColor.alpha);
+            ctx.moveTo(points[0].x, points[0].y);
+            for (let i = 0; i < points.length; i++) {
+                const p = points[i];
+                ctx.lineTo(p.x, p.y + 2);
+            }
+            ctx.stroke();
+            ctx.setSourceRGBA(0, 0.5, 1, 0.5);
+            for (let i = 0; i < precipitation.length; i++) {
+                const element = precipitation[i];
+                const point = points[i];
+                const normalized = precipitationHeight * (element / Math.max(maxPrecipVolume, 2));
+                ctx.rectangle(point.x - this.volumeGraphWidth / 2, totalHeight - normalized, this.volumeGraphWidth, normalized);
+                ctx.fill();
+            }
+            return true;
         };
         this.app = app;
         this.actor = new ScrollView({
@@ -16598,7 +16655,6 @@ class UIHourlyForecasts {
                 ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
             ui.Temperature.text = temp ? `${temp}°` : "";
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
-            ui.Summary.text = hour.condition.main;
             ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation, config);
             ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
         }
@@ -16676,7 +16732,7 @@ class UIHourlyForecasts {
         }
         availableWidth !== null && availableWidth !== void 0 ? availableWidth : (availableWidth = (_a = this.availableWidth) !== null && _a !== void 0 ? _a : undefined);
         if (availableWidth != null) {
-            if (availableWidth - 20 >= this.hourlyContainers.length * requiredWidth) {
+            if (availableWidth - (this.hourlyBoxHorizontalPadding * 2) >= this.hourlyContainers.length * requiredWidth) {
                 this.actor.hscrollbar_policy = PolicyType.NEVER;
             }
             else {
@@ -16716,7 +16772,10 @@ class UIHourlyForecasts {
         return requiredWidth;
     }
     Destroy() {
+        var _a;
         this.container.destroy_all_children();
+        if (this.onPaintSignal)
+            (_a = this.canvas) === null || _a === void 0 ? void 0 : _a.disconnect(this.onPaintSignal);
     }
     Rebuild(config, textColorStyle, availableHours = null) {
         var _a, _b;
@@ -16726,11 +16785,11 @@ class UIHourlyForecasts {
         this.hourlyContainers = [];
         const canvas = new imports.gi.St.DrawingArea();
         const grid = new imports.gi.Clutter.GridLayout();
-        const actor = new imports.gi.Clutter.Actor({ layout_manager: grid });
+        const gridActor = new imports.gi.Clutter.Actor({ layout_manager: grid });
         grid.attach(canvas, 1, 1, 1, 1);
-        const parent = new uiHourlyForecasts_BoxLayout();
-        grid.attach(parent, 1, 1, 1, 1);
-        this.container.add(actor, { expand: true, x_fill: true, y_fill: true });
+        const forecastContainer = new uiHourlyForecasts_BoxLayout();
+        grid.attach(forecastContainer, 1, 1, 1, 1);
+        this.container.add(gridActor, { expand: true, x_fill: true, y_fill: true });
         for (let index = 0; index < hours; index++) {
             const box = new uiHourlyForecasts_BoxLayout({ vertical: true, style_class: "hourly-box-item" });
             this.hourlyContainers.push(box);
@@ -16743,7 +16802,7 @@ class UIHourlyForecasts {
                     style_class: "hourly-icon"
                 }),
                 Summary: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
-                PrecipPercent: new uiHourlyForecasts_Label({ text: " ", style_class: "hourly-data" }),
+                PrecipPercent: new uiHourlyForecasts_Label({ text: " ", style_class: "hourly-data", style: "padding-top: 5px;" }),
                 PrecipVolume: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `font-size: 10px; min-width: ${this.volumeGraphWidth}px;` }),
                 Temperature: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-top: ${this.tempGraphHeight}px` })
             });
@@ -16755,7 +16814,7 @@ class UIHourlyForecasts {
                 box.add_child(this.hourlyForecasts[index].PrecipPercent);
             if ((_b = this.app.Provider) === null || _b === void 0 ? void 0 : _b.supportHourlyPrecipVolume)
                 box.add_child(this.hourlyForecasts[index].PrecipVolume);
-            parent.add(box, {
+            forecastContainer.add(box, {
                 x_fill: true,
                 x_align: uiHourlyForecasts_Align.MIDDLE,
                 y_align: uiHourlyForecasts_Align.MIDDLE,
@@ -16763,59 +16822,8 @@ class UIHourlyForecasts {
                 expand: true
             });
         }
-        if (this.canvasSubscription != null) {
-            canvas.disconnect(this.canvasSubscription);
-            this.canvasSubscription = undefined;
-        }
-        this.canvasSubscription = canvas.connect("repaint", (owner) => {
-            var _a, _b;
-            if (this.availableWidth == null)
-                return;
-            const ctx = owner.get_context();
-            const maxTemp = this.hourlyForecastData.map(x => x.temp).reduce((p, c) => Math.max(p !== null && p !== void 0 ? p : 0, c !== null && c !== void 0 ? c : 0));
-            const minTemp = this.hourlyForecastData.map(x => x.temp).reduce((p, c) => Math.min(p !== null && p !== void 0 ? p : 0, c !== null && c !== void 0 ? c : 0));
-            const maxPrecipVolume = this.hourlyForecastData.map(x => { var _a; return (_a = x.precipitation) === null || _a === void 0 ? void 0 : _a.volume; }).reduce((p, c) => Math.max(p !== null && p !== void 0 ? p : 0, c !== null && c !== void 0 ? c : 0));
-            const totalHeight = this.hourlyContainers[0].height;
-            const itemWidth = this.hourlyContainers[0].width;
-            const totalWidth = this.hourlyContainers.length * itemWidth;
-            const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() + this.hourlyForecasts[0].Icon.get_height();
-            const precipitationHeight = this.hourlyForecasts[0].PrecipPercent.get_height() + this.hourlyForecasts[0].PrecipVolume.get_height();
-            const tempPadding = 6;
-            let points = [];
-            let precipitation = [];
-            for (let i = 0; i < this.hourlyContainers.length; i++) {
-                const data = this.hourlyForecastData[i];
-                const items = this.hourlyForecasts[i];
-                if (data.temp == null)
-                    continue;
-                const ratio = ((data.temp - minTemp) / (maxTemp - minTemp)) * (this.tempGraphHeight - (tempPadding * 2));
-                const height = this.tempGraphHeight - tempPadding - ratio + tempHeightOffset;
-                const midX = itemWidth * i + (itemWidth / 2);
-                const midY = (totalHeight / 2);
-                points.push({ x: midX, y: height });
-                precipitation.push(((_b = (_a = data.precipitation) === null || _a === void 0 ? void 0 : _a.volume) !== null && _b !== void 0 ? _b : 0));
-            }
-            ctx.setLineWidth(3);
-            if (this.app.config.ForegroundColor == null)
-                ctx.setSourceRGBA(1, 1, 1, 0.5);
-            else
-                ctx.setSourceRGBA(this.app.config.ForegroundColor.red, this.app.config.ForegroundColor.green, this.app.config.ForegroundColor.blue, this.app.config.ForegroundColor.alpha);
-            ctx.moveTo(points[0].x, points[0].y);
-            for (let i = 0; i < points.length; i++) {
-                const p = points[i];
-                ctx.lineTo(p.x, p.y + 2);
-            }
-            ctx.stroke();
-            ctx.setSourceRGBA(0, 0.5, 1, 0.5);
-            for (let i = 0; i < precipitation.length; i++) {
-                const element = precipitation[i];
-                const point = points[i];
-                const normalized = precipitationHeight * (element / Math.max(maxPrecipVolume, 2));
-                ctx.rectangle(point.x - this.volumeGraphWidth / 2, totalHeight - normalized, this.volumeGraphWidth, normalized);
-                ctx.fill();
-            }
-            return true;
-        });
+        this.onPaintSignal = canvas.connect("repaint", this.OnPaint);
+        this.canvas = canvas;
     }
     GeneratePrecipitationVolume(precip, config) {
         if (!precip)
@@ -17617,8 +17625,10 @@ class WeatherApplet extends TextIconApplet {
                 }
             }
             this.EnsureProvider();
-            if (this.provider == null)
+            if (this.provider == null) {
+                this.Unlock();
                 return "fail";
+            }
             if (this.provider.needsApiKey && this.config.NoApiKey()) {
                 logger_Logger.Error("No API Key given");
                 this.ShowError({
@@ -17627,17 +17637,18 @@ class WeatherApplet extends TextIconApplet {
                     detail: "no key",
                     message: _("This provider requires an API key to operate")
                 });
+                this.Unlock();
                 return "fail";
             }
             let weatherInfo = await this.provider.GetWeather(location);
             if (weatherInfo == null) {
-                this.Unlock();
                 logger_Logger.Error("Could not refresh weather, data could not be obtained.");
                 this.ShowError({
                     type: "hard",
                     detail: "no api response",
                     message: "API did not return data"
                 });
+                this.Unlock();
                 return "fail";
             }
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
