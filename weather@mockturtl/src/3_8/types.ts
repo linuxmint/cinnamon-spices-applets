@@ -118,7 +118,6 @@ export interface ForecastData {
 
 export type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
 export interface HourlyForecastData {
-	/** Set to 12:00 if possible */
 	date: DateTime;
 	/** Kelvin */
 	temp: number | null;

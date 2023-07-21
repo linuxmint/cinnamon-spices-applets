@@ -8996,9 +8996,10 @@ function NormalizeTimezone(tz) {
         tz = undefined;
     return tz;
 }
-function GetDayName(date, locale, showDate = false, tz) {
+function GetDayName(date, options = {}) {
+    const { locale = null, showDate = false, tz = undefined, short = false, useTodayTomorrow = true } = options;
     const params = {
-        weekday: "long",
+        weekday: short ? "short" : "long",
     };
     params.timeZone = NormalizeTimezone(tz);
     if (showDate) {
@@ -9011,16 +9012,20 @@ function GetDayName(date, locale, showDate = false, tz) {
         tomorrow = tomorrow.setZone(tz);
         date = date.setZone(tz);
     }
-    if (date.hasSame(now, "day") || date.hasSame(tomorrow, "day"))
-        delete params.weekday;
+    if (useTodayTomorrow) {
+        if (date.hasSame(now, "day") || date.hasSame(tomorrow, "day"))
+            delete params.weekday;
+    }
     if (!!locale)
         date = date.setLocale(locale);
     let dateString = date.toLocaleString(params);
     dateString = CapitalizeFirstLetter(dateString);
-    if (date.hasSame(now, "day"))
-        dateString = _("Today");
-    if (date.hasSame(tomorrow, "day"))
-        dateString = _("Tomorrow");
+    if (useTodayTomorrow) {
+        if (date.hasSame(now, "day"))
+            dateString = _("Today");
+        if (date.hasSame(tomorrow, "day"))
+            dateString = _("Tomorrow");
+    }
     return dateString;
 }
 function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
@@ -15216,6 +15221,7 @@ class Config {
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.textColorStyle = null;
+        this.ForegroundColor = null;
         this.timezone = undefined;
         this.OnKeySettingsUpdated = () => {
             if (this.keybinding != null) {
@@ -16342,7 +16348,11 @@ class UIForecasts {
                 const forecastData = weather.forecasts[i];
                 const forecastUi = this.forecasts[i];
                 const comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
-                const dayName = GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
+                const dayName = GetDayName(forecastData.date, {
+                    locale: config.currentLocale,
+                    showDate: config._showForecastDates,
+                    tz: weather.location.timeZone
+                });
                 forecastUi.Day.actor.label = dayName;
                 forecastUi.Day.Hovered.Unsubscribe(this.DayHoveredCallback);
                 forecastUi.Day.Clicked.Unsubscribe(this.DayClickedCallback);
@@ -16487,6 +16497,7 @@ class UIHourlyForecasts {
     }
     constructor(app, menu) {
         this.tempGraphHeight = 45;
+        this.volumeGraphWidth = 20;
         this.hourlyForecasts = [];
         this.hourlyForecastData = [];
         this.hourlyContainers = [];
@@ -16576,7 +16587,15 @@ class UIHourlyForecasts {
             this.hourlyForecastDates.push(hour.date);
             this.hourlyForecastData.push(hour);
             const temp = TempToUserConfig(hour.temp, config, false);
-            ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
+            if (hour.date.hour == 0)
+                ui.Hour.text = GetDayName(hour.date, {
+                    locale: config.currentLocale,
+                    tz: tz,
+                    useTodayTomorrow: false,
+                    short: true
+                });
+            else
+                ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
             ui.Temperature.text = temp ? `${temp}°` : "";
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
             ui.Summary.text = hour.condition.main;
@@ -16725,7 +16744,7 @@ class UIHourlyForecasts {
                 }),
                 Summary: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
                 PrecipPercent: new uiHourlyForecasts_Label({ text: " ", style_class: "hourly-data" }),
-                PrecipVolume: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
+                PrecipVolume: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `font-size: 10px; min-width: ${this.volumeGraphWidth}px;` }),
                 Temperature: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-top: ${this.tempGraphHeight}px` })
             });
             this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);
@@ -16744,20 +16763,24 @@ class UIHourlyForecasts {
                 expand: true
             });
         }
-        canvas.connect("repaint", (owner) => {
+        if (this.canvasSubscription != null) {
+            canvas.disconnect(this.canvasSubscription);
+            this.canvasSubscription = undefined;
+        }
+        this.canvasSubscription = canvas.connect("repaint", (owner) => {
             var _a, _b;
             if (this.availableWidth == null)
                 return;
             const ctx = owner.get_context();
             const maxTemp = this.hourlyForecastData.map(x => x.temp).reduce((p, c) => Math.max(p !== null && p !== void 0 ? p : 0, c !== null && c !== void 0 ? c : 0));
             const minTemp = this.hourlyForecastData.map(x => x.temp).reduce((p, c) => Math.min(p !== null && p !== void 0 ? p : 0, c !== null && c !== void 0 ? c : 0));
+            const maxPrecipVolume = this.hourlyForecastData.map(x => { var _a; return (_a = x.precipitation) === null || _a === void 0 ? void 0 : _a.volume; }).reduce((p, c) => Math.max(p !== null && p !== void 0 ? p : 0, c !== null && c !== void 0 ? c : 0));
             const totalHeight = this.hourlyContainers[0].height;
             const itemWidth = this.hourlyContainers[0].width;
             const totalWidth = this.hourlyContainers.length * itemWidth;
             const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() + this.hourlyForecasts[0].Icon.get_height();
+            const precipitationHeight = this.hourlyForecasts[0].PrecipPercent.get_height() + this.hourlyForecasts[0].PrecipVolume.get_height();
             const tempPadding = 6;
-            ctx.setLineWidth(3);
-            ctx.setSourceRGBA(1, 1, 1, 0.5);
             let points = [];
             let precipitation = [];
             for (let i = 0; i < this.hourlyContainers.length; i++) {
@@ -16770,8 +16793,13 @@ class UIHourlyForecasts {
                 const midX = itemWidth * i + (itemWidth / 2);
                 const midY = (totalHeight / 2);
                 points.push({ x: midX, y: height });
-                precipitation.push(((_b = (_a = data.precipitation) === null || _a === void 0 ? void 0 : _a.volume) !== null && _b !== void 0 ? _b : 0) * 20);
+                precipitation.push(((_b = (_a = data.precipitation) === null || _a === void 0 ? void 0 : _a.volume) !== null && _b !== void 0 ? _b : 0));
             }
+            ctx.setLineWidth(3);
+            if (this.app.config.ForegroundColor == null)
+                ctx.setSourceRGBA(1, 1, 1, 0.5);
+            else
+                ctx.setSourceRGBA(this.app.config.ForegroundColor.red, this.app.config.ForegroundColor.green, this.app.config.ForegroundColor.blue, this.app.config.ForegroundColor.alpha);
             ctx.moveTo(points[0].x, points[0].y);
             for (let i = 0; i < points.length; i++) {
                 const p = points[i];
@@ -16782,7 +16810,8 @@ class UIHourlyForecasts {
             for (let i = 0; i < precipitation.length; i++) {
                 const element = precipitation[i];
                 const point = points[i];
-                ctx.rectangle(point.x - 5, totalHeight - element, 10, element);
+                const normalized = precipitationHeight * (element / Math.max(maxPrecipVolume, 2));
+                ctx.rectangle(point.x - this.volumeGraphWidth / 2, totalHeight - normalized, this.volumeGraphWidth, normalized);
                 ctx.fill();
             }
             return true;
@@ -16793,7 +16822,7 @@ class UIHourlyForecasts {
             return "";
         let precipitationText = "";
         if (!!precip.volume && precip.volume >= 0.1) {
-            precipitationText = `${MillimeterToUserUnits(precip.volume, config.DistanceUnit)}`;
+            precipitationText = `${MillimeterToUserUnits(precip.volume, config.DistanceUnit)}${config.DistanceUnit == "metric" ? _("mm") : _("in")}`;
         }
         return precipitationText;
     }
@@ -17055,6 +17084,7 @@ class UI {
     Rebuild(config) {
         this.ShowLoadingUi();
         this.App.config.textColorStyle = this.GetTextColorStyle();
+        this.App.config.ForegroundColor = this.ForegroundColor();
         this.CurrentWeather.Rebuild(config, this.App.config.textColorStyle);
         this.HourlyWeather.Rebuild(config, this.App.config.textColorStyle);
         this.FutureWeather.Rebuild(config, this.App.config.textColorStyle);
@@ -17102,13 +17132,12 @@ class UI {
         return (luminance > 0.5);
     }
     ForegroundColor() {
-        const hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
-        return hex;
+        return this.menu.actor.get_theme_node().get_foreground_color();
     }
     GetTextColorStyle() {
         let hexColor = null;
         if (this.lightTheme) {
-            hexColor = ShadeHexColor(this.ForegroundColor(), -0.40);
+            hexColor = ShadeHexColor(this.ForegroundColor().to_string().substring(0, 7), -0.40);
         }
         return "color: " + hexColor;
     }

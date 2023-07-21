@@ -163,6 +163,7 @@ export class Config {
 	private app: WeatherApplet;
 	public readonly countryCode: string | null;
 	public textColorStyle: string | null = null;
+	public ForegroundColor: imports.gi.Clutter.Color | null = null;
 
 	public get UserTimezone(): string {
 		const timezone = TimeZone.new_local();
