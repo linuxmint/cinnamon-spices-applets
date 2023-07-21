@@ -16803,7 +16803,7 @@ class UIHourlyForecasts {
                 }),
                 Summary: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
                 PrecipPercent: new uiHourlyForecasts_Label({ text: " ", style_class: "hourly-data", style: "padding-top: 5px;" }),
-                PrecipVolume: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `font-size: 10px; min-width: ${this.volumeGraphWidth}px;` }),
+                PrecipVolume: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `font-size: 80%; min-width: ${this.volumeGraphWidth}px;` }),
                 Temperature: new uiHourlyForecasts_Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-top: ${this.tempGraphHeight}px` })
             });
             this.hourlyForecasts[index].PrecipVolume.clutter_text.set_line_wrap(true);

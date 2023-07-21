@@ -374,7 +374,7 @@ export class UIHourlyForecasts {
 				}),
 				Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
 				PrecipPercent: new Label({ text: " ", style_class: "hourly-data", style: "padding-top: 5px;" }),
-				PrecipVolume: new Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `font-size: 10px; min-width: ${this.volumeGraphWidth}px;` }),
+				PrecipVolume: new Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `font-size: 80%; min-width: ${this.volumeGraphWidth}px;` }),
 				Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data", style: `padding-top: ${this.tempGraphHeight}px`})
 			})
 
