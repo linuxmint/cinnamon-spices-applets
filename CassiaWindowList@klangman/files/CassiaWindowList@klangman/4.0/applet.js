@@ -2614,7 +2614,7 @@ class Workspace {
     this._settings = this._applet._settings;
     this._signalManager = new SignalManager.SignalManager(null);
 
-    this.actor = new St.BoxLayout({ style_class: "window-list-box", track_hover: false, hover: false });
+    this.actor = new St.BoxLayout({ style_class: "grouped-window-list-box", track_hover: false, hover: false });
     this.actor.set_style('border:0px;padding:0px;margin:0px');
     this.actor._delegate = this;
 
