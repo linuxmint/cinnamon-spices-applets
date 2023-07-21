@@ -199,7 +199,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.RefreshWeather(true, loc);
 	};
 
-	public Refresh(this: WeatherApplet, loc: LocationData | null = null, rebuild: boolean = false, ): void {
+	public Refresh(this: WeatherApplet, loc: LocationData | null = null, rebuild: boolean = false): void {
 		this.RefreshWeather(rebuild, loc);
 	}
 
@@ -231,8 +231,10 @@ export class WeatherApplet extends TextIconApplet {
 			}
 
 			this.EnsureProvider();
-			if (this.provider == null)
+			if (this.provider == null) {
+				this.Unlock();
 				return RefreshState.Failure;
+			}
 
 			// No key
 			if (this.provider.needsApiKey && this.config.NoApiKey()) {
@@ -243,17 +245,18 @@ export class WeatherApplet extends TextIconApplet {
 					detail: "no key",
 					message: _("This provider requires an API key to operate")
 				});
+				this.Unlock();
 				return RefreshState.Failure;
 			}
 			let weatherInfo = await this.provider.GetWeather(location);
 			if (weatherInfo == null) {
-				this.Unlock();
 				Logger.Error("Could not refresh weather, data could not be obtained.");
 				this.ShowError({
 					type: "hard",
 					detail: "no api response",
 					message: "API did not return data"
 				})
+				this.Unlock();
 				return RefreshState.Failure;
 			}
 

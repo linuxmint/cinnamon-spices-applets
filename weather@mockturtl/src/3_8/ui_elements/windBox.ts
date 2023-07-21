@@ -4,6 +4,7 @@ import { type WeatherApplet } from "../main";
 import { WeatherData } from "../types";
 import { CompassDirection, CompassDirectionText, LocalizedColon, MPStoUserUnits, _ } from "../utils";
 const { BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
+const { ActorAlign } = imports.gi.Clutter;
 
 export class WindBox {
     private _caption!: imports.gi.St.Label;
@@ -50,7 +51,7 @@ export class WindBox {
 		const iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
 		const iconSize = Math.round(config.CurrentFontSize * 0.8);
 
-		this.labelText = new Label({ text: ELLIPSIS });
+		this.labelText = new Label({ text: ELLIPSIS, x_expand: true, x_align: ActorAlign.FILL });
 		this.windDirectionIcon = new Icon({
 			icon_type: IconType.SYMBOLIC,
 			icon_name: APPLET_ICON,
@@ -59,7 +60,7 @@ export class WindBox {
 		});
 		if (!config._displayWindAsText)
 			windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
-		windBox.add(this.labelText);
+		windBox.add_actor(this.labelText);
 
 		return windBox;
     }

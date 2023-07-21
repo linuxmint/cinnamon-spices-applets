@@ -5,15 +5,16 @@ import { type WeatherApplet } from "../main";
 import { WeatherData } from "../types";
 import { GetHoursMinutes } from "../utils";
 
-const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
+const { BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
+const { ActorAlign } = imports.gi.Clutter;
 
 const STYLE_ASTRONOMY = 'weather-current-astronomy'
 
 export class SunTimesUI {
-    private _actor!: imports.gi.St.Bin;
+    private _actor!: imports.gi.St.BoxLayout;
     private app: WeatherApplet;
 
-    public get actor(): imports.gi.St.Bin {
+    public get actor(): imports.gi.St.BoxLayout {
         return this._actor;
     }
 
@@ -33,9 +34,7 @@ export class SunTimesUI {
         this.Display(data.sunrise, data.sunset, data.location.timeZone);
     }
 
-    public Rebuild(config: Config, textColorStyle: string): imports.gi.St.Bin {
-        // Bin is used here to horizontally center BoxLayout inside BoxLayout, normal add() function does not work here
-        const sunBin = new Bin();
+    public Rebuild(config: Config, textColorStyle: string): imports.gi.St.BoxLayout {
         this.sunriseLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
         this.sunsetLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
 
@@ -55,11 +54,11 @@ export class SunTimesUI {
             style: textColorStyle
         });
 
-        sunriseBox.add_actor(sunriseIcon);
-        sunsetBox.add_actor(sunsetIcon);
+        sunriseBox.add(sunriseIcon);
+        sunsetBox.add(sunsetIcon);
 
         const textOptions: Partial<imports.gi.St.BoxLayoutChildInitOptions> = {
-            x_fill: false,
+            x_fill: true,
             x_align: Align.START,
             y_align: Align.MIDDLE,
             y_fill: false,
@@ -71,14 +70,19 @@ export class SunTimesUI {
 
         const spacer = new Label({ text: BLANK })
 
-        const sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY })
+        const sunBox = new BoxLayout({
+			style_class: STYLE_ASTRONOMY,
+			x_align: ActorAlign.CENTER,
+			x_expand: true,
+			y_expand: true,
+		})
         sunBox.add_actor(sunriseBox);
         sunBox.add_actor(spacer);
         sunBox.add_actor(sunsetBox);
 
-        sunBin.set_child(sunBox);
-        this._actor = sunBin;
-        return sunBin;
+
+        this._actor = sunBox;
+        return sunBox;
     }
 
     public Display(sunrise: DateTime | null, sunset: DateTime | null, tz?: string): void {
