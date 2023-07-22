@@ -1,3 +1,6 @@
+### v1.5.0~20230722
+  * New icon. Author: @Hilyxx
+
 ### v1.4.2~20230718
   * Add mpv-mpris to dependencies.
 ### v1.4.1~20230613
