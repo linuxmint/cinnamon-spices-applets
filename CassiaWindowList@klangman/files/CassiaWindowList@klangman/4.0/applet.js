@@ -1279,6 +1279,10 @@ class WindowListButton {
   }
 
   _updateLabel(actor, event) {
+    // If it's closing, don't do anything
+    if (this.closing==true) {
+       return;
+    }
     // If we are in a left or right panel then we have no space for labels anyhow!
     if (this._applet.orientation == St.Side.LEFT || this._applet.orientation == St.Side.RIGHT) {
        this._updateTooltip();
@@ -3134,7 +3138,9 @@ class Workspace {
   _updateAppButtonVisibility() {
     for (let i = 0; i < this._appButtons.length; i++) {
       let appButton = this._appButtons[i];
-      appButton.updateView();
+      if (appButton.closing!=true) {
+         appButton.updateView();
+      }
     }
     this.actor.queue_relayout();
   }
@@ -3801,7 +3807,7 @@ class WindowList extends Applet.Applet {
 
     if (this._settings.getValue("runWizard")===1) {
        let command = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + this._uuid + "/setupWizard " + this._uuid + " " + this.instance_id;
-       log( "Spawning: " + command );
+       //log( "Spawning: " + command );
        Util.spawnCommandLineAsync(command);
     }
   }
