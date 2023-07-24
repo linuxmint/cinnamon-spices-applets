@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl 3.2.12\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-29 19:42+0100\n"
-"PO-Revision-Date: 2023-04-26 21:50+0200\n"
+"PO-Revision-Date: 2023-07-24 16:52+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -2384,12 +2384,13 @@ msgstr ""
 "disponibles, le nombre maximum de lignes et de colonnes dans l'onglet "
 "Présentation affecteront le nombre final."
 
+# It's hours, not days.
 #. 3.8->settings-schema.json->forecastHours->tooltip
 msgid ""
 "Maximum number of hours that can be displayed, available numbers of data "
 "will affect the final number."
 msgstr ""
-"Nombre maximal de jours qui peuvent être affichés, le nombre de données "
+"Nombre maximal d'heures qui peuvent être affichés, le nombre de données "
 "disponibles affectera le nombre final."
 
 #. 3.8->settings-schema.json->immediatePrecip->description
