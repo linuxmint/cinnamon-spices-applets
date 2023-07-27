@@ -1,0 +1,47 @@
+{
+	"wakapi-head": {
+		"type": "header",
+		"description": "Wakapi Settings"
+	},
+	"refreshInterval": {
+		"type": "spinbutton",
+		"default": 5,
+		"min": 1,
+		"max": 30,
+		"step": 0.5,
+		"units": "minutes",
+		"description": "Refresh interval",
+		"tooltip": "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine."
+	},
+	"apiLink": {
+		"type": "entry",
+		"default": "https://wakapi.example.com",
+		"description": "Wakapi API Link",
+		"tooltip": "The API link to your Wakapi instance."
+	},
+	"apiKey": {
+		"type": "entry",
+		"default": "",
+		"description": "Wakapi API Key",
+		"tooltip": "The API key unique to your Wakapi account."
+	},
+	"getApiKey": {
+		"type": "button",
+		"description": "Open the Wakapi page to get your API key",
+		"callback": "openApiKeyPage",
+		"tooltip": "Opens Wakapi API key webpage"
+	},
+	"display-head": {
+		"type": "header",
+		"description": "Display Settings"
+	},
+	"logoColor": {
+		"type": "radiogroup",
+		"description": "Wakapi logo color",
+		"default": "white",
+		"options": {
+			"White": "white",
+			"Black": "black"
+		}
+	}
+}
