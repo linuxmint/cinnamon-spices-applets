@@ -63,8 +63,10 @@ WakapiDisplay.prototype = {
 		// set logo color
 		this.set_applet_icon_name(`wakapi-${this.logoColor}`);
 
-		// apply new settings
-		this.startUp(false);
+		// apply new settings if apiKey setted correctly
+		let len = this.apiKey.length;
+		if (len == 36)
+			this.startUp(false);
 	},
 
 	startUp: function (setupLoop) {
@@ -90,7 +92,7 @@ WakapiDisplay.prototype = {
 		// show the time from the status bar endpoint
 		this.requestStatusBar().then(
 			(data) => {
-				if (data.data === undefined) 
+				if (data.data === undefined)
 					throw new Error(`No data returned from request, err: ${data}`);
 
 				this.set_applet_label(' ' + data.data.grand_total.digital);
