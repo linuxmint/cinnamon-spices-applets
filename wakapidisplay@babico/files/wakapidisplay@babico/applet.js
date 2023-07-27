@@ -77,14 +77,29 @@ WakapiDisplay.prototype = {
 
 	requestStatusBar: async function () {
 		// make the request to the status bar endpoint
-		const response = await http.LoadJsonAsync(`${this.apiLink}/api/users/current/statusbar/today`, { "api_key": this.apiKey }, null, "GET")
-		return response.Data;
+		try {
+			const response = await http.LoadJsonAsync(`${this.apiLink}/api/users/current/statusbar/today`, { "api_key": this.apiKey }, null, "GET");
+			return response.Data;
+		} catch (error) {
+			global.logError("[wakapidisplay@babico/applet.js:80]" + error);
+			return null;
+		}
 	},
 
 	updateUI: function () {
 		// show the time from the status bar endpoint
 		this.requestStatusBar().then(
-			(data) => this.set_applet_label(' ' + data.data.grand_total.digital)
+			(data) => {
+				if (data.data === undefined) 
+					throw new Error(`No data returned from request, err: ${data}`);
+
+				this.set_applet_label(' ' + data.data.grand_total.digital);
+			}
+		).catch(
+			(error) => {
+				this.set_applet_label('Error!');
+				global.logError("[wakapidisplay@babico/applet.js:91] " + error);
+			}
 		);
 	},
 
