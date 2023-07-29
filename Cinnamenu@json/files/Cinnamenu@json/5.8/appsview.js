@@ -517,9 +517,7 @@ class AppsView {
         this.currentGridViewColumnCount = this.getGridValues().columns;
     }
 
-    highlightFirstItem() {
-        //When displying search results, ensure first item is highlighted so that pressing
-        //return selects top result.
+    focusFirstItem() {
         const buttons = this.getActiveButtons();
         if (buttons[0] && !buttons[0].has_focus) {
             this.appThis.display.clearFocusedActors();
