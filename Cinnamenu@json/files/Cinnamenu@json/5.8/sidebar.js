@@ -217,9 +217,16 @@ class Sidebar {
         const style_class = this.appThis.settings.useBoxStyle ? 'menu-favorites-box' : '';
         this.sidebarOuterBox = new St.BoxLayout({style_class: style_class});
         this.sidebarOuterBox.add(this.sidebarScrollBox, { });
+        if (!this.appThis.settings.showSidebar) {
+            this.sidebarScrollBox.width = 0;
+            this.sidebarScrollBox.height = 0;
+        }
     }
 
     populate () {
+        //if (!this.appThis.settings.showSidebar) {
+        //    return;
+        //}
         this.innerBox.remove_all_children();
         this.items.forEach(item => item.destroy());
         this.items = [];
@@ -344,7 +351,6 @@ class Sidebar {
     }
 
     scrollToQuitButton() {
-        //Scroll to quit button so that it's visible when the menu is opened.
         scrollToButton(this.items[this.items.length - 1], false);
     }
 
