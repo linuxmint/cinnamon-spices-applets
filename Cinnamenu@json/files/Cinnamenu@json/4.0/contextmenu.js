@@ -347,7 +347,7 @@ class ContextMenu {
 
         //Open containing folder
         const folder = file.get_parent();
-        if (app.isRecentFile || app.isFavoriteFile) { //not a browser folder/file
+        if (app.isRecentFile || app.isFavoriteFile || app.isFolderviewFile) {
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
             addMenuItem(new ContextMenuItem(this.appThis, _('Open containing folder'), 'go-jump',
                     () => {
