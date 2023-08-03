@@ -73,7 +73,7 @@ export class DanishMI extends BaseProvider {
 			city: forecasts.city,
 			country: forecasts.country,
 			timeZone: undefined, // because we ask in UTC, we get UTC as the timezone, so we just drop it
-			url: `https://www.dmi.dk/lokation/show/${forecasts.country}/${forecasts.id}`
+			url: `https://www.dmi.dk/lokation/show/${forecasts.country}/${forecasts.id}/${forecasts.city}`
 		};
 		result.coord = {
 			lon: forecasts.longitude,

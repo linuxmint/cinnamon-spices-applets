@@ -1,13 +1,15 @@
 
 const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
-const Cinnamon = imports.gi.Cinnamon;
 const {getChromiumProfileDirs} = require('./utils');
 
-var current_pattern;
-
-function searchBrowserProfile(path, appInfo, pattern) {
+function searchBrowserProfile(appThis, currentSearchId, path, appInfo, pattern) {
     return new Promise(function(resolve, reject) {
+        if (currentSearchId != appThis.currentSearchId) {
+            resolve([]);
+            return;
+        }
+
         const full_path = GLib.build_filenamev([GLib.get_user_config_dir()].concat(path));
         if (!GLib.file_test(full_path + '/History', GLib.FileTest.EXISTS)) {
             resolve([]);
@@ -15,26 +17,31 @@ function searchBrowserProfile(path, appInfo, pattern) {
         }
 
         Util.spawn_async([__meta.path + '/searchHistory.py', full_path, pattern], (results) => {
-            if (pattern == current_pattern) {
-                results = JSON.parse(results);
-                results.forEach( result => {
-                    result.app = appInfo;
-                    if (!result.icon_filename) {//Use browser icon if no favicon available
-                        result.gicon = appInfo.get_icon();
-                    }
-                    result.isSearchResult = true;
-                    result.deleteAfterUse = true;
-                    result.activate = () => Util.spawn(['xdg-open', result.uri]);
-                });
-                resolve(results);
+            if (currentSearchId != appThis.currentSearchId) {
+                resolve([]);
+                return;
             }
-            resolve([]);
+
+            results = JSON.parse(results);
+            results.forEach( result => {
+                result.app = appInfo;
+                if (!result.icon_filename) {//Use browser icon if no favicon available
+                    result.gicon = appInfo.get_icon();
+                }
+                result.isSearchResult = true;
+                result.deleteAfterUse = true;
+                result.activate = () => Util.spawn(['xdg-open', result.uri]);
+            });
+            resolve(results);
         });
     });
 }
 
-function searchBrowserHistory(pattern, callback) {
-    current_pattern = pattern;
+function searchBrowserHistory(appThis, currentSearchId, pattern, callback) {
+    if (currentSearchId != appThis.currentSearchId) {
+        return;
+    }
+
     const promises = [];
     let history = [];
 
@@ -46,7 +53,7 @@ function searchBrowserHistory(pattern, callback) {
         if (!GLib.file_test(full_path + '/History', GLib.FileTest.EXISTS)) {
             return;
         }
-        promises.push(searchBrowserProfile(path, appInfo, pattern));
+        promises.push(searchBrowserProfile(appThis, currentSearchId, path, appInfo, pattern));
     });
 
     Promise.all(promises).then( results => {

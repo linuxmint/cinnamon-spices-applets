@@ -57,7 +57,7 @@
     "preview-settings" : {
       "type" : "section",
       "title" : "Thumbnails menu settings",
-      "keys" : ["show-previews", "number-of-unshrunk-previews"]
+      "keys" : ["show-previews", "number-of-unshrunk-previews", "menu-all-windows-of-pool", "menu-all-windows-of-auto"]
     },
     "preview-mouse-section" : {
       "type" : "section",
@@ -248,6 +248,20 @@
     "dependency": "show-previews",
     "description": "Default thumbnail window size"
   },
+  "menu-all-windows-of-pool": {
+    "type": "switch",
+    "default": true,
+    "dependency" : "group-windows=1",
+    "description": "Show thumbnails for all windows of an application pool",
+    "tooltip": "If enabled, a popup menu will contain all the application windows in the application pool rather then just the selected window within the application pool"
+  },
+  "menu-all-windows-of-auto": {
+    "type": "switch",
+    "default": true,
+    "dependency" : "group-windows=2",
+    "description": "Show thumbnails for all windows of an application pool",
+    "tooltip": "If enabled, a popup menu will contain all the application windows in the application pool rather then just the selected window within the application pool"
+  },
   "preview-timeout-show": {
     "type": "spinbutton",
     "default": 500,
@@ -283,12 +297,17 @@
       "Move to workspace 2": 8,
       "Move to workspace 3": 9,
       "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
       "Visible on this/all workspaces": 11,
       "Move to monitor 1": 14,
       "Move to monitor 2": 15,
       "Move to monitor 3": 16,
       "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
       "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
       "Do nothing": 12
     },
     "description": "Thumbnail window middle button action"
@@ -307,12 +326,17 @@
       "Move to workspace 2": 8,
       "Move to workspace 3": 9,
       "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
       "Visible on this/all workspaces": 11,
       "Move to monitor 1": 14,
       "Move to monitor 2": 15,
       "Move to monitor 3": 16,
       "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
       "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
       "Do nothing": 12
     },
     "description": "Thumbnail window back button action"
@@ -331,12 +355,17 @@
       "Move to workspace 2": 8,
       "Move to workspace 3": 9,
       "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
       "Visible on this/all workspaces": 11,
       "Move to monitor 1": 14,
       "Move to monitor 2": 15,
       "Move to monitor 3": 16,
       "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
       "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
       "Do nothing": 12
     },
     "description": "Thumbnail window forward button action"
@@ -347,7 +376,8 @@
     "options": {
       "Restore/Minimize most recent window": 0,
       "Restore then cycle windows": 1,
-      "Show thumbnail menu": 2
+      "Show thumbnail menu": 2,
+      "Restore or hold for thumbnail menu": 3
     },
     "description": "Left button action for grouped buttons",
     "tooltip": "Action taken when using the left mouse button on a window list entry for a group of windows"
@@ -369,12 +399,17 @@
       "Move to workspace 2": 8,
       "Move to workspace 3": 9,
       "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
       "Visible on this/all workspaces": 11,
       "Move to monitor 1": 14,
       "Move to monitor 2": 15,
       "Move to monitor 3": 16,
       "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
       "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
       "Do nothing": 12
     },
     "description": "Middle button action",
@@ -396,12 +431,17 @@
       "Move to workspace 2": 8,
       "Move to workspace 3": 9,
       "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
       "Visible on this/all workspaces": 11,
       "Move to monitor 1": 14,
       "Move to monitor 2": 15,
       "Move to monitor 3": 16,
       "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
       "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
       "Do nothing": 12
     },
     "description": "Back button action",
@@ -423,12 +463,17 @@
       "Move to workspace 2": 8,
       "Move to workspace 3": 9,
       "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
       "Visible on this/all workspaces": 11,
       "Move to monitor 1": 14,
       "Move to monitor 2": 15,
       "Move to monitor 3": 16,
       "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
       "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
       "Do nothing": 12
     },
     "description": "Forward button action",
@@ -522,12 +567,17 @@
            "Move to workspace 2": 8,
            "Move to workspace 3": 9,
            "Move to workspace 4": 10,
+           "Move to previous workspace": 20,
+           "Move to next workspace": 21,
            "Visible on this/all workspaces": 11,
            "Move to monitor 1": 14,
            "Move to monitor 2": 15,
            "Move to monitor 3": 16,
            "Move to monitor 4": 17,
+           "Move to previous monitor": 22,
+           "Move to next monitor": 23,
            "Move to current/next monitor": 18,
+           "Move titlebar on to screen": 19,
            "Do nothing": 12
            }
         }

@@ -954,10 +954,10 @@ class CinnamenuApplet extends TextIconApplet {
             this.display.categoriesView.buttons.forEach(button => button.disable());
         }
 
-        // When doSearch() below is called by setTimeout, this.currentSearchId may have changed so
-        // store its current value in a const as the current lexical scope is preserved.
+        // When doSearch() below is called by Meta.later_add, this.currentSearchId may have changed
+        // so store its current value in a const as the current lexical scope is preserved.
         const currentSearchId = this.currentSearchId;
-        setTimeout(() => this._doSearch(searchText, currentSearchId));
+        Meta.later_add(Meta.LaterType.IDLE, () => this._doSearch(searchText, currentSearchId));
     }
 
     _endSearchMode() {
@@ -1194,13 +1194,18 @@ class CinnamenuApplet extends TextIconApplet {
             if (HISTORY_PREFIX) {
                 hpattern = pattern.substring(2);
             }
-
-            searchBrowserHistory(hpattern, history => {
-                if (history.length > 0 && this.searchActive && thisSearchId === this.currentSearchId) {
+            Meta.later_add(Meta.LaterType.IDLE, () => {
+                if (!this.searchActive || thisSearchId !== this.currentSearchId) {
+                    return;
+                }
+                searchBrowserHistory(this, thisSearchId, hpattern, history => {
+                    if (history.length === 0 || !this.searchActive || thisSearchId !== this.currentSearchId) {
+                        return;
+                    }
                     webHistoryResults = history;
                     webHistoryResults.length = Math.min(webHistoryResults.length, this.getOptimum(10));
                     showResults();
-                }
+                });
             });
         }
 
@@ -1248,7 +1253,15 @@ class CinnamenuApplet extends TextIconApplet {
         }
 
         //----home folder search--------
-        if (pattern.length > 1 && this.settings.searchHomeFolder || FILE_PREFIX && pattern.length > 3) {
+        Meta.later_add(Meta.LaterType.IDLE, () => {
+            if (!(pattern.length > 1 && this.settings.searchHomeFolder ||
+                                                FILE_PREFIX && pattern.length > 3)) {
+                return;
+            }
+            if (!this.searchActive || thisSearchId !== this.currentSearchId) {
+                return;
+            }
+
             let fpattern = pattern;
             if (FILE_PREFIX) {
                 fpattern = pattern.substring(2);
@@ -1367,40 +1380,43 @@ class CinnamenuApplet extends TextIconApplet {
             };
 
             searchNextDir(this.currentSearchId);
-        }
+        });
 
         ///----search providers--------
-        setTimeout(() => {
+        Meta.later_add(Meta.LaterType.IDLE, () => {
+            if (!this.searchActive || thisSearchId !== this.currentSearchId) {
+                return;
+            }
             launch_all(pattern, (provider, providerResults) => {
-                    providerResults.forEach(providerResult => {
-                        if (!providerResult) {
-                            return;
-                        }
-                        providerResult.isSearchResult = true;
-                        providerResult.name = providerResult.label.replace(/ : /g, ': ');
-                        providerResult.activate = provider.on_result_selected;
-                        providerResult.deleteAfterUse = true;
-                        //providerResult.score = 0.2;
-                        if (providerResult.icon) {
-                            providerResult.icon.icon_size = this.getAppIconSize();
-                        } else if (providerResult.icon_app){
-                            providerResult.icon = providerResult.icon_app.create_icon_texture(
-                                                                                this.getAppIconSize());
-                        } else if (providerResult.icon_filename){
-                            providerResult.icon = new St.Icon({
-                                  gicon: new Gio.FileIcon({
-                                        file: Gio.file_new_for_path(providerResult.icon_filename)}),
-                                        icon_size: this.getAppIconSize() });
-                        }
-                    });
-                    if (!this.searchActive || thisSearchId !== this.currentSearchId ||
-                                                !providerResults || providerResults.length === 0) {
+                providerResults.forEach(providerResult => {
+                    if (!providerResult) {
                         return;
                     }
-                    otherResults = otherResults.concat(providerResults);
-                    showResults();
+                    providerResult.isSearchResult = true;
+                    providerResult.name = providerResult.label.replace(/ : /g, ': ');
+                    providerResult.activate = provider.on_result_selected;
+                    providerResult.deleteAfterUse = true;
+                    //providerResult.score = 0.2;
+                    if (providerResult.icon) {
+                        providerResult.icon.icon_size = this.getAppIconSize();
+                    } else if (providerResult.icon_app) {
+                        providerResult.icon = providerResult.icon_app.create_icon_texture(
+                                                                            this.getAppIconSize());
+                    } else if (providerResult.icon_filename) {
+                        providerResult.icon = new St.Icon({
+                                gicon: new Gio.FileIcon({
+                                    file: Gio.file_new_for_path(providerResult.icon_filename)}),
+                                icon_size: this.getAppIconSize() });
+                    }
                 });
+                if (!this.searchActive || thisSearchId !== this.currentSearchId ||
+                                            !providerResults || providerResults.length === 0) {
+                    return;
+                }
+                otherResults = otherResults.concat(providerResults);
+                showResults();
             });
+        });
 
         showResults();
         return;
@@ -1787,11 +1803,12 @@ class Apps {//This obj provides the .app objects for all the applications catego
         while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
             if (nextType === CMenu.TreeItemType.ENTRY) {
                 const entry = iter.get_entry();
-                const id = entry.get_desktop_file_id();
-                const app = this.appSystem.lookup_app(id);
-                if  (!app || (app && app.get_nodisplay())) {
+                const appInfo = entry.get_app_info();
+                if (!appInfo || appInfo.get_nodisplay()) {
                     continue;
                 }
+                const id = entry.get_desktop_file_id();
+                const app = this.appSystem.lookup_app(id);
 
                 foundApps.push(app);
                 app.name = app.get_name();

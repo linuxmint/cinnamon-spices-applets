@@ -4,6 +4,7 @@ const GLib = imports.gi.GLib;
 const Settings = imports.ui.settings;
 const Gtk = imports.gi.Gtk;
 const Gettext = imports.gettext;
+const { restartCinnamon } = imports.ui.main; // Main
 
 // l10n/translation support
 let UUID;
@@ -27,13 +28,16 @@ MyApplet.prototype = {
         Gtk.IconTheme.get_default().append_search_path(metadata.path);
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "use-symbolic-icon", "useSymbolicIcon", this._updateIcon, null);
+        //~ this.settings.bindProperty(Settings.BindingDirection.IN, "use-symbolic-icon", "useSymbolicIcon", this._updateIcon, null);
+        this.settings.bind("use-symbolic-icon", "useSymbolicIcon", this._updateIcon);
+        this.settings.bind("show-osd", "showOSD");
         this._updateIcon();
         this.set_applet_tooltip(_("Click here to restart Cinnamon"));
      },
 
     on_applet_clicked: function(event) {
-        global.reexec_self();
+        //~ global.reexec_self();
+        restartCinnamon(this.showOSD);
     },
 
     _updateIcon: function() {
@@ -46,5 +50,5 @@ MyApplet.prototype = {
 
 function main(metadata, orientation, panel_height, instance_id) {
     let myApplet = new MyApplet(metadata, orientation, panel_height, instance_id);
-    return myApplet;      
+    return myApplet;
 }

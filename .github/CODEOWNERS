@@ -3,7 +3,8 @@
 
 AutostartPrograms@spacy01/**                       @spacy01
 BgRadio@spacy01/**                                 @spacy01
-CinnVIIStarkMenu@NikoKrause/**                     @NikoKrause
+CassiaWindowList@klangman/**                       @klangman
+CinnVIIStarkMenu@NikoKrause/**                     @fredcw
 Cinnamenu@json/**                                  @fredcw
 CustomApplicationsMenu@LLOBERA/**                  @Nicolas01
 CustomPlaces@Nicolas01/**                          @Nicolas01
@@ -19,6 +20,7 @@ ShellTools@abgoyal/**                              @jaszhix
 ShutdownApplet@DeathMD/**                          @icarter09
 ShutdownMenuWithIcons@LLOBERA/**                   @Nicolas01
 SpicesUpdate@claudiux/**                           @claudiux
+VPN-Sentinel@claudiux/**                           @claudiux
 app-launcher@mchilli/**                            @mchilli
 asl@santiago/**                                    @SamBurgos
 backgroundroll@Sokawaii25/**                       @Sokawaii25
@@ -49,6 +51,7 @@ cryptocoin@guantanamoe/**                          @imDeprecated
 darkMode@linuxedo.com/**                           @slgobinath
 ddcci-monitor-control@andr35/**                    @andr35
 ddcci-multi-monitor@tim-we/**                      @tim-we
+desaturate-all@hkoosha/**                          @hkoosha
 devbar@ludvigbostrom/**                            @ludvigbostrom
 dgs-bpivaty@gmail.com/**                           @bpivaty
 disk-read-and-write-speed@cardsurf/**              @cardsurf
@@ -56,6 +59,7 @@ download-and-upload-speed@cardsurf/**              @cardsurf
 duolingo-helper@nodeengineer.com/**                @nodeengineer
 expressvpn@Hukuta/**                               @Hukuta
 feeds@jonbrettdev.wordpress.com/**                 @jake1164
+fw_fanctrl@juleskreuer.eu/**                       @not-a-feature
 gamemode@axel358/**                                @axel358
 github-projects@morgan-design.com/**               @jamesmorgan
 gmail@lauritsriple/**                              @lauritsriple
@@ -88,6 +92,7 @@ octopussy@centurix/**                              @centurix
 officeCenter@scollins/**                           @collinss
 placesCenter@scollins/**                           @collinss
 pomodoro@gregfreeman.org/**                        @gfreeau
+power-profiles@rcalixte/**                         @rcalixte
 printers@linux-man/**                              @linux-man
 profile-switcher@pixunil/**                        @pixunil
 ptt@thbemme/**                                     @thbemme
@@ -102,7 +107,7 @@ rust-menu@jerrywham/**                             @jerrywham
 serviceLauncher@hulygun/**                         @hulygun
 sessionManager@scollins/**                         @collinss
 show-hide-applets@mohammad-sn/**                   @mohammad-sn
-skeuos-remix@benlazhar.com/**                      @nadhir ben lazhar
+skeuos-remix@benlazhar.com/**                      @NadhirBenLazhar
 sleepTimer@JDatPNW/**                              @JDatPNW
 smallcalc_applet@lerc.sds/**                       @lerc
 sound150@claudiux/**                               @claudiux
@@ -110,6 +115,7 @@ spices-notifier@germanfr/**                        @germanfr
 sshconnect@foobar-beer/**                          @foobar-beer
 sshlauncher@sumo/**                                @sumo
 ssm@Severga/**                                     @Severga
+stacks@centurix/**                                 @centurix
 standardIconNames@jerrywham/**                     @jerrywham
 stevedore@centurix/**                              @centurix
 sticky@scollins/**                                 @collinss
@@ -131,6 +137,7 @@ vboxlauncher@mockturtl/**                          @mockturtl
 vnstat@linuxmint.com/**                            @pdcurtis
 vpnLookOut@claudiux/**                             @claudiux
 wakatimedisplay@inventor96/**                      @inventor96
+wallpaper-slideshow@amaan-mohib/**                 @amaan-mohib
 weather@mockturtl/**                               @Gr3q
 website-notifier@cardsurf/**                       @cardsurf
 window-list@sangorys/**                            @sangorys
@@ -169,6 +176,7 @@ xsession@claudiux/**                               @claudiux
 # mybookmarks@markbokil.com
 # mylauncher@markbokil.com
 # pa-equalizer@jschug.com
+# paneldo@beatlink
 # places-bookmarks@dmo60.de
 # places-with-terminal@mtwebster
 # rwall@typicalfoobar

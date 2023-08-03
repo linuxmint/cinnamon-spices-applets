@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-30 00:45-0300\n"
+"POT-Creation-Date: 2023-07-16 04:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,103 +17,111 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:232
+#: applet.js:236
 msgid "Reload Applet"
 msgstr ""
 
-#: applet.js:243
+#: applet.js:247
 msgid "Recompile Translations"
 msgstr ""
 
-#: applet.js:296
+#: applet.js:299
 msgid "REDSHIFT NOT INSTALLED!"
 msgstr ""
 
-#: applet.js:297
+#: applet.js:302
+msgid "Requires Redshift: yay -S redshift-minimal"
+msgstr ""
+
+#: applet.js:305
 msgid "Requires Redshift: sudo apt-get install redshift"
 msgstr ""
 
-#: applet.js:446 applet.js:467
+#: applet.js:457 applet.js:486
 msgid "should be removed."
 msgstr ""
 
+#: applet.js:479
+msgid "should be replaced by redshift-minimal"
+msgstr ""
+
 #. settings-schema.json->enabled->description
-#: applet.js:629
+#: applet.js:649
 msgid "Enabled"
 msgstr ""
 
-#: applet.js:637 applet.js:682
+#: applet.js:657 applet.js:702
 msgid "Temp:"
 msgstr ""
 
-#: applet.js:648 applet.js:693
+#: applet.js:668 applet.js:713
 msgid "Bright:"
 msgstr ""
 
-#: applet.js:659 applet.js:975
+#: applet.js:679 applet.js:1011
 msgid "Gamma:"
 msgstr ""
 
 #. settings-schema.json->enabledNight->description
-#: applet.js:674
+#: applet.js:694
 msgid "Night Enabled"
 msgstr ""
 
 #. settings-schema.json->iconLabel->description
-#: applet.js:736
+#: applet.js:756
 msgid "Show Label"
 msgstr ""
 
-#: applet.js:935 applet.js:958
+#: applet.js:969 applet.js:994
 msgid "Transition to day"
 msgstr ""
 
-#: applet.js:936 applet.js:959
+#: applet.js:970 applet.js:995
 msgid "Transition to night"
 msgstr ""
 
-#: applet.js:937 applet.js:960
+#: applet.js:971 applet.js:996
 msgid "Night"
 msgstr ""
 
-#: applet.js:938 applet.js:961
+#: applet.js:972 applet.js:997
 msgid "Day"
 msgstr ""
 
-#: applet.js:949
+#: applet.js:986
 msgid "On"
 msgstr ""
 
-#: applet.js:949 applet.js:951
+#: applet.js:986 applet.js:988
 msgid "Off"
 msgstr ""
 
-#: applet.js:966
+#: applet.js:1002
 msgid "Day Temperature"
 msgstr ""
 
-#: applet.js:967
+#: applet.js:1003
 msgid "Day Brightness"
 msgstr ""
 
-#: applet.js:969
+#: applet.js:1005
 msgid "Night Temperature"
 msgstr ""
 
-#: applet.js:970
+#: applet.js:1006
 msgid "Night Brightness"
 msgstr ""
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
-#: applet.js:972
+#: applet.js:1008
 msgid "Temperature"
 msgstr ""
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
-#: applet.js:973
+#: applet.js:1009
 msgid "Brightness"
 msgstr ""
 

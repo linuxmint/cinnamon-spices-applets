@@ -326,7 +326,7 @@ class ContextMenu {
         }
 
         //Add folder as category
-        if (app.isDirectory) {
+        if (app.isDirectory && this.appThis.settings.showCategories) {
             const path = Gio.file_new_for_uri(app.uri).get_path();
             if (!this.appThis.getIsFolderCategory(path)) {
                 this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
@@ -341,7 +341,7 @@ class ContextMenu {
 
         //Open containing folder
         const folder = file.get_parent();
-        if (app.isRecentFile || app.isFavoriteFile) { //not a browser folder/file
+        if (app.isRecentFile || app.isFavoriteFile || app.isFolderviewFile) {
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
             addMenuItem(new ContextMenuItem(this.appThis, _('Open containing folder'), 'go-jump',
                     () => {

@@ -227,7 +227,7 @@ class SensorsApplet extends Applet.TextApplet {
     if (sudoers_smartctl_file.query_exists(null)) {
     try {
         let contents = to_string(GLib.file_get_contents(sudoers_smartctl_path)[1]);
-        if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:"))
+        if (contents.includes("NOPASSWD:NOLOG_INPUT:NOLOG_OUTPUT:NOMAIL:"))
           ret = true;
       } catch (e) {
       ret = false
@@ -473,7 +473,7 @@ class SensorsApplet extends Applet.TextApplet {
         }
       }
 
-      if (this.show_temp && this.temp_disks.length > 0) {
+      if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks.length > 0) {
         for (let disk of this.temp_disks) {
           let _disk_name = disk["disk"].trim();
           if (disk["show_in_tooltip"]) {
@@ -707,7 +707,7 @@ class SensorsApplet extends Applet.TextApplet {
         }
       }
     }
-    if (this.show_temp && this.temp_disks && this.temp_disks.length > 0) {
+    if (this.show_temp && this.s.getValue("disktemp_is_user_readable") && this.temp_disks && this.temp_disks.length > 0) {
       for (let disk of this.temp_disks) {
         let _disk_name = disk["disk"].trim();
         if (disk["show_in_panel"] && _disk_name.length > 0) {

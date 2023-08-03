@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="24"
+   height="24"
+   version="1.1"
+   id="svg9"
+   sodipodi:docname="redshift-status-off-symbolic.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata13">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2560"
+     inkscape:window-height="1355"
+     id="namedview11"
+     showgrid="false"
+     inkscape:zoom="9.8333333"
+     inkscape:cx="12"
+     inkscape:cy="12"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg9" />
+  <defs
+     id="defs3">
+    <style
+       id="current-color-scheme"
+       type="text/css">
+   .ColorScheme-Text { color:#d3dae3; } .ColorScheme-Highlight { color:#5294e2; }
+  </style>
+  </defs>
+  <g
+     transform="matrix(1.4999625,0,0,1.4999625,-851.97833,-1416.4146)"
+     id="g7">
+    <path
+       style="color:#d3dae3;opacity:0.35;fill:currentColor"
+       class="ColorScheme-Text"
+       d="m 576,944.3 c -2.8404,0 -5.1429,2.3091 -5.1429,5.1557 0,1.6879 0.79443,3.1613 2.0411,4.1014 0.57344,0.43406 1.0479,0.99321 1.0479,1.7646 L 574,956.29992 h 4 l 0.0571,-0.97822 c 0.045,-0.77013 0.4722,-1.3306 1.0446,-1.7646 1.2477,-0.94012 2.0411,-2.4135 2.0411,-4.1014 0,-2.8466 -2.3024,-5.1557 -5.1429,-5.1557 z m 0,2.0604 c 1.7033,0 3.0857,1.3895 3.0857,3.0954 0,0.97457 -0.4438,1.8715 -1.2214,2.4557 -1.1602,0.87789 -1.5999,1.8586 -1.7614,2.6743 h -0.2057 c -0.16047,-0.81566 -0.60069,-1.7964 -1.7614,-2.6743 -0.77554,-0.58474 -1.2214,-1.4816 -1.2214,-2.4557 0,-1.7059 1.3829,-3.0954 3.0857,-3.0954 z m -2,10.94 v 1 h 4 v -1 z m 1,2 v 1 h 2 v -1 z"
+       id="path5"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

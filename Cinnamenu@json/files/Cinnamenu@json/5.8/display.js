@@ -39,14 +39,14 @@ class Display {
                                                     x_align: St.Align.START, y_align: St.Align.MIDDLE });
         }
         this.middlePane.add(this.categoriesView.groupCategoriesWorkspacesScrollBox,
-                        { x_fill: false, y_fill: false, x_align: St.Align.START, y_align: St.Align.START });
+            { x_fill: false, y_fill: false, x_align: St.Align.START, y_align: St.Align.START });
         this.middlePane.add(this.appsView.applicationsScrollBox, { x_fill: false, y_fill: false,
-                                            x_align: St.Align.START, y_align: St.Align.START, expand: false });
+                                x_align: St.Align.START, y_align: St.Align.START, expand: false });
         if (sidebarPlacement === SidebarPlacement.RIGHT) {
             this.middlePane.add(this.sidebar.sidebarOuterBox, { expand: false, x_fill: false, y_fill: false,
                                                     x_align: St.Align.START, y_align: St.Align.MIDDLE });
         }
-
+        
         //=============mainBox================
         //set style: 'spacing: 0px' so that extra space is not added to mainBox when contextMenuBox is
         //added. Only happens with themes that have set a spacing value on this class.
@@ -54,11 +54,11 @@ class Display {
                                         vertical: true, reactive: true,
                                         show_on_set_parent: false });
         this.mainBox.add_style_class_name('menu-applications-box'); //this is to support old themes
-        if (sidebarPlacement === SidebarPlacement.TOP) {
+        if (sidebarPlacement === SidebarPlacement.TOP || !this.appThis.settings.showSidebar) {
             this.mainBox.add(this.bottomPane);
         }
         this.mainBox.add_actor(this.middlePane);
-        if (sidebarPlacement !== SidebarPlacement.TOP) {
+        if (sidebarPlacement !== SidebarPlacement.TOP && this.appThis.settings.showSidebar) {
             this.mainBox.add(this.bottomPane);
         }
 
@@ -70,52 +70,34 @@ class Display {
         this.contextMenu.contextMenuBox.height = 0;
         this.mainBox.add(this.contextMenu.contextMenuBox, {expand: false, x_fill: false,
                                                     x_align: St.Align.START, y_align: St.Align.MIDDLE,});
+        
         //=============menu================
         const section = new PopupMenuSection();
         section.actor.add_actor(this.mainBox);
         this.appThis.menu.addMenuItem(section);
 
         //if a blank part of the menu was clicked on, close context menu
-        this.displaySignals.connect(this.mainBox, 'button-release-event',() => this.clearFocusedActors());
+        this.displaySignals.connect(this.mainBox, 'button-release-event',() => {
+            if (this.contextMenu.isOpen) {
+                this.contextMenu.close();
+            }
+        });
 
         //monitor mouse motion to prevent category mis-selection
-        const onMouseMotion = (actor, event) => {
-            //keep track of mouse motion to prevent misselection of another category button when moving mouse
-            //pointer from selected category button to app button by calculating angle of pointer movement
-            let [x, y] = event.get_coords();
-            if (!this.mTrack) {
-                this.mTrack = [];
-            }
-            //compare current position with oldest position in last 0.1 seconds.
-            this.mTrack.push({time: Date.now(), x: x, y: y});//push current position onto array
-            while (this.mTrack[0].time + 100 < Date.now()) {//remove positions older than 0.1 seconds ago
-                this.mTrack.shift();
-            }
-            const dx = x - this.mTrack[0].x;
-            const dy = Math.abs(y - this.mTrack[0].y);
-
-            const tan = dx / dy;
-            this.badAngle = tan > 0.3;//if tan = +infinity, badAngle is true.
-                                      //if tan = -infinity or NaN, badAngle is false.
-        };
         this.categoriesView.categoriesBox.set_reactive(true);
         this.displaySignals.connect(this.categoriesView.categoriesBox, 'motion-event',
-                                                        (...args) => onMouseMotion(...args));
+                                                    () => this.updateMouseTracking());
 
         //When sidebar is not on the left, limit excessive mainBox left padding + categoriesBox left
         //padding to 20px by subtracting the difference from categoriesBox left padding.
-        if (sidebarPlacement !== SidebarPlacement.LEFT) {
-            const catLpadding = this.categoriesView.categoriesBox.get_theme_node().get_padding(St.Side.LEFT);
-            const mainBoxLpadding = this.mainBox.get_theme_node().get_padding(St.Side.LEFT);
-            const excessPadding = Math.max(catLpadding + mainBoxLpadding - 20, 0);//=total padding > 20px
-            if (excessPadding > 0) {
-                this.categoriesView.categoriesBox.style = `padding-left: ${
-                                            Math.max(catLpadding - excessPadding, 0)}px; `;
-            }
+        const catLpadding = this.categoriesView.categoriesBox.get_theme_node().get_padding(St.Side.LEFT);
+        const mainBoxLpadding = this.mainBox.get_theme_node().get_padding(St.Side.LEFT);
+        const excessPadding = Math.max(catLpadding + mainBoxLpadding - 20, 0);//=total padding > 20px
+        if (excessPadding > 0) {
+            this.categoriesView.categoriesBox.style = `padding-left: ${
+                                        Math.max(catLpadding - excessPadding, 0)}px; `;
         }
-
-        //this.sidebar.populate();
-
+        
         if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
             this.appsView.applicationsGridBox.hide();
             this.appsView.applicationsListBox.show();
@@ -127,13 +109,35 @@ class Display {
         this.mainBox.show();
     }
 
+    updateMouseTracking() {
+        this.TRACKING_TIME = 70; //ms
+        //keep track of mouse motion to prevent misselection of another category button when moving mouse
+        //pointer from selected category button to app button by calculating angle of pointer movement
+        let [x, y] = global.get_pointer();
+        if (!this.mTrack) {
+            this.mTrack = [];
+        }
+        //compare current position with oldest position in last 0.1 seconds.
+        this.mTrack.push({time: Date.now(), x: x, y: y});//push current position onto array
+        //remove positions older than TRACKING_TIME ago
+        while (this.mTrack[0].time + this.TRACKING_TIME < Date.now()) {
+            this.mTrack.shift();
+        }
+        const dx = x - this.mTrack[0].x;
+        const dy = Math.abs(y - this.mTrack[0].y);
+
+        const tan = dx / dy;
+        this.badAngle = tan > 0.3;//if tan = +infinity, badAngle is true.
+                                    //if tan = -infinity or NaN, badAngle is false.
+    }
+
     clearFocusedActors() {
         if (this.contextMenu.isOpen) {
             this.contextMenu.close();
         }
         this.appsView.clearAppsViewFocusedActors();
         this.sidebar.clearSidebarFocusedActors();
-        this.categoriesView.allButtonsRemoveFocus();
+        this.categoriesView.allButtonsRemoveFocusAndHover();
     }
 
     onMenuResized(userWidth, userHeight){ //resizing callback
@@ -162,16 +166,18 @@ class Display {
         this.appsView.applicationsScrollBox.height = appsHeight;
         this.categoriesView.groupCategoriesWorkspacesScrollBox.height = appsHeight;
 
-        //find sidebarOuterBox vertical padding
-        const themeNode = this.sidebar.sidebarOuterBox.get_theme_node();
-        const verticalPadding = Math.max(   themeNode.get_length('padding-top') +
-                                            themeNode.get_length('padding-bottom'),
-                                            themeNode.get_length('padding') * 2);
-                
-        //set sidebarScrollBox height
-        this.sidebar.sidebarScrollBox.set_height(-1);//undo previous set_height()
-        this.sidebar.sidebarScrollBox.set_height(Math.min(appsHeight - verticalPadding,
-                                                this.sidebar.sidebarScrollBox.height));
+        if (this.appThis.settings.showSidebar) {
+            //find sidebarOuterBox vertical padding
+            const themeNode = this.sidebar.sidebarOuterBox.get_theme_node();
+            const verticalPadding = Math.max(   themeNode.get_length('padding-top') +
+                                                themeNode.get_length('padding-bottom'),
+                                                themeNode.get_length('padding') * 2);
+                    
+            //set sidebarScrollBox height
+            this.sidebar.sidebarScrollBox.set_height(-1);//undo previous set_height()
+            this.sidebar.sidebarScrollBox.set_height(Math.min(appsHeight - verticalPadding,
+                                                    this.sidebar.sidebarScrollBox.height));
+        }
 
         //------------width-------------
         //Note: the stored menu width value is less than the menu's actual width because it doesn't
@@ -190,8 +196,9 @@ class Display {
         this.searchView.searchEntry.width = 5;  //Set to something small so that it gets set to its
                                                 //minimum value.
         let bottomPaneMinWidth = 0;
-        if (this.appThis.settings.sidebarPlacement === SidebarPlacement.TOP ||
-                            this.appThis.settings.sidebarPlacement === SidebarPlacement.BOTTOM) {
+        if ((this.appThis.settings.sidebarPlacement === SidebarPlacement.TOP ||
+                this.appThis.settings.sidebarPlacement === SidebarPlacement.BOTTOM) &&
+                this.appThis.settings.showSidebar) {
             bottomPaneMinWidth = this.bottomPane.width;
         }
 
@@ -249,7 +256,7 @@ class SearchView {
     showAndConnectSecondaryIcon() {
         this.searchEntry.set_secondary_icon(this.searchActiveIcon);
         this.appThis.signals.connect(this.searchEntry, 'secondary-icon-clicked', () => { //todo
-                                                                    this.searchEntryText.set_text('');});
+                                                        this.searchEntryText.set_text('');});
     }
 
     hideAndDisconnectSecondaryIcon() {
@@ -262,7 +269,8 @@ class SearchView {
 
         //make searchBox l/r padding & margin symmetrical when it uses the full width of the menu.
         if (this.appThis.settings.sidebarPlacement === SidebarPlacement.RIGHT ||
-                                        this.appThis.settings.sidebarPlacement === SidebarPlacement.LEFT) {
+                    this.appThis.settings.sidebarPlacement === SidebarPlacement.LEFT ||
+                    !this.appThis.settings.showSidebar) {
             //set left padding of searchBox to match right padding
             const searchBoxNode = this.searchBox.get_theme_node();
             const searchBoxPaddingRight = searchBoxNode.get_padding(St.Side.RIGHT);
