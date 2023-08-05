@@ -1,0 +1,48 @@
+{
+ "head" : {
+    "type" : "header",
+    "description" : "Settings"
+ },
+ "display-style" : {
+        "type": "combobox",
+        "default" : "combined",
+        "description" : "Speed display style",
+        "options" : {
+            "Combined" : "combined",
+            "Column" : "column",
+            "Side by side" : "row",
+            "Download only" : "download",
+            "Upload only" : "upload"
+        },
+        "tooltip" : "Whether to show download and upload speeds separately or combined"
+  },
+ "refresh-interval" : {
+    "type": "spinbutton",
+    "default" : 1000,
+    "min" : 500,
+    "max" : 5000,
+    "step" : 250,
+    "units" : "milliseconds",
+    "description": "Refresh interval",
+    "tooltip": "Time between data refeshes"
+ },
+ "decimal-places" : {
+    "type": "spinbutton",
+    "default" : 1,
+    "min" : 0,
+    "max" : 3,
+    "step" : 1,
+    "description": "Decimal places",
+    "tooltip": "Number of decimal places to show"
+ },
+ "hide-umbral" : {
+    "type": "spinbutton",
+    "default" : 0,
+    "min" : 0,
+    "max" : 15000,
+    "step" : 250,
+    "units" : "bytes per second",
+    "description": "Hide speed if network traffic is less than",
+    "tooltip": "Use a compact display style if network traffic is less than the specified amount"
+ }
+}
