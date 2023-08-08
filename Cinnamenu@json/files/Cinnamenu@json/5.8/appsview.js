@@ -11,7 +11,6 @@ const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 
 const { _,
         wordWrap,
-        log,
         getThumbnail_gicon,
         showTooltip,
         hideTooltipIfVisible,

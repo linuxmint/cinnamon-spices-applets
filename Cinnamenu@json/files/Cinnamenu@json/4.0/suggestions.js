@@ -1,6 +1,4 @@
-const {log} = require("./utils");
 
-//
 const ByteArray = imports.byteArray;
 
 const Soup = imports.gi.Soup;

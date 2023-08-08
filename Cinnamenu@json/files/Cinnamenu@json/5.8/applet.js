@@ -19,7 +19,7 @@ const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
 const {AppletSettings} = imports.ui.settings;
 
-const {_, graphemeBaseChars, log, searchStr} = require('./utils');
+const {_, graphemeBaseChars, searchStr} = require('./utils');
 const {Display} = require('./display');
 const {BookmarksManager} = require('./browserBookmarks');
 const {wikiSearch, clearWikiSearchCache} = require('./wikipediaSearch');
@@ -956,8 +956,7 @@ class CinnamenuApplet extends TextIconApplet {
                 const headerText = folderContents.errorMsg? folderContents.errorMsg : categoryId;
                 this.display.appsView.populate(folderContents.results, headerText);
             } else {//other applications categories
-                let applist = this.apps.listApplications(categoryId);
-                this.display.appsView.populate(applist);
+                this.display.appsView.populate(this.apps.listApplications(categoryId));
             }
         }
     }

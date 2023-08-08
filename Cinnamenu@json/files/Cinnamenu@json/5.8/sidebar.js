@@ -13,8 +13,7 @@ const { _,
         getThumbnail_gicon,
         showTooltip,
         hideTooltipIfVisible,
-        scrollToButton,
-        log} = require('./utils');
+        scrollToButton} = require('./utils');
 const SidebarPlacement = Object.freeze({ TOP: 0, BOTTOM: 1, LEFT: 2, RIGHT: 3});
 const DescriptionPlacement = Object.freeze({TOOLTIP: 0, UNDER: 1, NONE: 2});
 
@@ -224,9 +223,6 @@ class Sidebar {
     }
 
     populate () {
-        //if (!this.appThis.settings.showSidebar) {
-        //    return;
-        //}
         this.innerBox.remove_all_children();
         this.items.forEach(item => item.destroy());
         this.items = [];

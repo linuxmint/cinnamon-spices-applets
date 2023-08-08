@@ -8,7 +8,7 @@ const St = imports.gi.St;
 const {SignalManager} = imports.misc.signalManager;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 
-const {_, log, scrollToButton} = require('./utils');
+const {_, scrollToButton} = require('./utils');
 
 let buttonTimeoutId = null;
 function clearButtonTimeout() {
@@ -330,7 +330,7 @@ class CategoriesView {
                     button = new CategoryButton(this.appThis, folder, displayName, null, gicon);
                     newButtons.push(button);
                 } catch(e) {
-                    log("Error creating folder category: " + folder + " ...skipping.");
+                    log("Cinnamenu:Error creating folder category: " + folder + " ...skipping.");
                     //remove this error causing element from the array.
                     folderCategories.splice(index, 1);
                 }
