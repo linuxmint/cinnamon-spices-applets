@@ -10,7 +10,7 @@ const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine} = imports.misc.util;
 
-const {_, log} = require('./utils');
+const {_} = require('./utils');
 const {MODABLE, MODED} = require('./emoji');
 
 class ContextMenuItem extends PopupBaseMenuItem {
@@ -255,7 +255,6 @@ class ContextMenu {
         if (this.appThis._pamacManagerAvailable) {
             addMenuItem( new ContextMenuItem(this.appThis, _('App Info'), 'dialog-information',
                         () => { spawnCommandLine("/usr/bin/pamac-manager --details-id=" + app.id);
-                                log(app.id);
                                 this.appThis.menu.close(); } ));
         }
     }

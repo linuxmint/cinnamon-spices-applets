@@ -1,7 +1,6 @@
 const St = imports.gi.St;
 const {SignalManager} = imports.misc.signalManager;
 const {PopupMenuSection} = imports.ui.popupMenu;
-const {log} = require('./utils');
 const {ContextMenu} = require('./contextmenu');
 const {AppsView} = require('./appsview');
 const {CategoriesView} = require('./categoriesview');
@@ -46,7 +45,7 @@ class Display {
             this.middlePane.add(this.sidebar.sidebarOuterBox, { expand: false, x_fill: false, y_fill: false,
                                                     x_align: St.Align.START, y_align: St.Align.MIDDLE });
         }
-        
+
         //=============mainBox================
         //set style: 'spacing: 0px' so that extra space is not added to mainBox when contextMenuBox is
         //added. Only happens with themes that have set a spacing value on this class.
@@ -90,12 +89,14 @@ class Display {
 
         //When sidebar is not on the left, limit excessive mainBox left padding + categoriesBox left
         //padding to 20px by subtracting the difference from categoriesBox left padding.
-        const catLpadding = this.categoriesView.categoriesBox.get_theme_node().get_padding(St.Side.LEFT);
-        const mainBoxLpadding = this.mainBox.get_theme_node().get_padding(St.Side.LEFT);
-        const excessPadding = Math.max(catLpadding + mainBoxLpadding - 20, 0);//=total padding > 20px
-        if (excessPadding > 0) {
-            this.categoriesView.categoriesBox.style = `padding-left: ${
-                                        Math.max(catLpadding - excessPadding, 0)}px; `;
+        if (sidebarPlacement !== SidebarPlacement.LEFT || !this.appThis.settings.showSidebar) {
+            const catLpadding = this.categoriesView.categoriesBox.get_theme_node().get_padding(St.Side.LEFT);
+            const mainBoxLpadding = this.mainBox.get_theme_node().get_padding(St.Side.LEFT);
+            const excessPadding = Math.max(catLpadding + mainBoxLpadding - 20, 0);//=total padding > 20px
+            if (excessPadding > 0) {
+                this.categoriesView.categoriesBox.style = `padding-left: ${
+                                            Math.max(catLpadding - excessPadding, 0)}px; `;
+            }
         }
         
         if (this.appThis.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
