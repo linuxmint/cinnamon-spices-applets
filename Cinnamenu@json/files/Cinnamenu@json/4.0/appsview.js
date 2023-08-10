@@ -402,21 +402,35 @@ class AppsView {
         this.headerText = new St.Label({ style_class: 'menu-applications-header-text' });
         this.applicationsBoxWrapper = new St.BoxLayout({ style_class: 'menu-applications-inner-box',
                                                                                     vertical: true});
-        this.applicationsBoxWrapper.add_style_class_name('menu-applications-box'); //this is to support old themes
+        this.applicationsBoxWrapper.add_style_class_name(
+                                            'menu-applications-box'); //this is to support old themes
 
         this.applicationsBoxWrapper.add(this.headerText, { x_fill: false, x_align: St.Align.MIDDLE });
         this.applicationsBoxWrapper.add(this.applicationsGridBox, { });
         this.applicationsBoxWrapper.add(this.applicationsListBox, { });
-        this.applicationsScrollBox = new St.ScrollView({ style_class: 'vfade menu-applications-scrollbox' });
+        this.applicationsScrollBox = new St.ScrollView(
+                                            { style_class: 'vfade menu-applications-scrollbox' });
         const vscrollApplications = this.applicationsScrollBox.get_vscroll_bar();
         this.appsViewSignals.connect(vscrollApplications, 'scroll-start',
-                                                                () => { this.appThis.menu.passEvents = true; });
+                                                () => { this.appThis.menu.passEvents = true; });
         this.appsViewSignals.connect(vscrollApplications, 'scroll-stop',
-                                                                () => { this.appThis.menu.passEvents = false; });
+                                                () => { this.appThis.menu.passEvents = false; });
         this.applicationsScrollBox.add_actor(this.applicationsBoxWrapper);
         this.applicationsScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         this.applicationsScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
         this.applicationsScrollBox.set_mouse_scrolling(true);
+        this.appsViewSignals.connect(this.applicationsScrollBox, 'button-release-event',
+                        (actor, event) => {
+                            if (event.get_button() === Clutter.BUTTON_SECONDARY  &&
+                                        !this.appThis.display.contextMenu.isOpen &&
+                                        (this.appThis.currentCategory === 'all' ||
+                                        this.appThis.currentCategory.startsWith('/'))) {
+                                hideTooltipIfVisible();
+                                this.appThis.display.contextMenu.openAppsView(event);
+                                return Clutter.EVENT_STOP;
+                            }
+                            return Clutter.EVENT_PROPAGATE;
+                        });
     }
 
     populate(appList, headerText = null) {
