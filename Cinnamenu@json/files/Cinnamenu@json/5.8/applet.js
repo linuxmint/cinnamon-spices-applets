@@ -136,15 +136,15 @@ class CinnamenuApplet extends TextIconApplet {
                     if (Main.overview.visible || Main.expo.visible) return;
                     if (!this.getOtherInstance ||
                                     global.screen.get_current_monitor() === this.panel.monitorIndex) {
-                        //if (!this.isOpen) {
-                        //    this.panel.peekPanel();
-                        //}
+                        if (!this.isOpen) {
+                            this.panel.peekPanel();
+                        }
                         this.menu.toggle_with_options(this.settings.enableAnimation);
                     } else if (typeof this.getOtherInstance === 'function') {
                         const instance = this.getOtherInstance();
-                        //if (!instance.menu.isOpen) {
-                        //    instance.panel.peekPanel();
-                        //}
+                        if (!instance.menu.isOpen) {
+                            instance.panel.peekPanel();
+                        }
                         instance.menu.toggle_with_options.call( instance.menu,
                                                                 instance.settings.enableAnimation);
                     }
@@ -186,6 +186,7 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'custom-menu-width',         value: 'customMenuWidth',       cb: null },
         { key: 'recent-apps',               value: 'recentApps',            cb: null },
         { key: 'search-start-folder',       value: 'searchStartFolder',     cb: null },
+        { key: 'all-apps-old-style',        value: 'allAppsOldStyle',       cb: null },
         { key: 'folder-categories',         value: 'folderCategories',      cb: null },
 
         { key: 'applications-view-mode',    value: 'applicationsViewMode',  cb: refreshDisplay },
@@ -849,7 +850,7 @@ class CinnamenuApplet extends TextIconApplet {
         }
     }
 
-    getOptimum(minimumItems) {
+    getNumberOfItemsToFitColumns(minimumItems) {
         //adjust number of items according to number of columns in grid view to make
         //best use of available space.
         if (this.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
@@ -874,8 +875,8 @@ class CinnamenuApplet extends TextIconApplet {
             this.display.appsView.populate(this.listPlaces());
             break;
         case 'recents':
-            const maxItems = this.getOptimum(6);
-            const maxRecentApps = this.getOptimum(4);
+            const maxItems = this.getNumberOfItemsToFitColumns(6);
+            const maxRecentApps = this.getNumberOfItemsToFitColumns(4);
             
             this.display.appsView.populate_init();
             const recentApps = this.listRecent_apps(maxRecentApps);
@@ -914,13 +915,6 @@ class CinnamenuApplet extends TextIconApplet {
         case 'favorite_apps':
             this.display.appsView.populate(this.listFavoriteApps());
             break;
-        case 'all': // All applications category
-            this.display.appsView.populate_init();
-            this.display.appsView.populate_add(this.apps.listApplications('allApps'));
-            this.display.appsView.populate_add(
-                            this.apps.listApplications('allSettings'), 'Settings');
-            this.display.appsView.populate_finish();
-            break;
         default:
             if (categoryId.startsWith('emoji:')) {
                 const emojiCategory = categoryId.slice(categoryId.indexOf(':') + 1);
@@ -955,6 +949,12 @@ class CinnamenuApplet extends TextIconApplet {
                 const folderContents = this.listFolder(categoryId);
                 const headerText = folderContents.errorMsg? folderContents.errorMsg : categoryId;
                 this.display.appsView.populate(folderContents.results, headerText);
+            } else if (categoryId === 'all' && !this.settings.allAppsOldStyle) {
+                this.display.appsView.populate_init();
+                this.display.appsView.populate_add(this.apps.listApplications('allApps'));
+                this.display.appsView.populate_add(
+                                this.apps.listApplications('allSettings'), _("Settings"));
+                this.display.appsView.populate_finish();
             } else {//other applications categories
                 this.display.appsView.populate(this.apps.listApplications(categoryId));
             }
@@ -1167,7 +1167,7 @@ class CinnamenuApplet extends TextIconApplet {
                         } });
 
             webBookmarksResults.sort((a, b) =>  a.score < b.score);
-            webBookmarksResults.length = Math.min(webBookmarksResults.length, this.getOptimum(10));
+            webBookmarksResults.length = Math.min(webBookmarksResults.length, this.getNumberOfItemsToFitColumns(10));
         }
 
         //---------------------------
@@ -1198,7 +1198,7 @@ class CinnamenuApplet extends TextIconApplet {
             }
 
             //Limit primaryResults to 10
-            primaryResults.length = Math.min(primaryResults.length, this.getOptimum(10));
+            primaryResults.length = Math.min(primaryResults.length, this.getNumberOfItemsToFitColumns(10));
 
             //Display results
             this.display.appsView.populate_init(calculatorResult);
@@ -1240,7 +1240,7 @@ class CinnamenuApplet extends TextIconApplet {
                         return;
                     }
                     webHistoryResults = history;
-                    webHistoryResults.length = Math.min(webHistoryResults.length, this.getOptimum(10));
+                    webHistoryResults.length = Math.min(webHistoryResults.length, this.getNumberOfItemsToFitColumns(10));
                     showResults();
                 });
             });
