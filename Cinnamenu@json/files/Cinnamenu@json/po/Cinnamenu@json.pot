@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-29 14:47+0100\n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,6 +42,9 @@ msgid "Music"
 msgstr ""
 
 msgid "No recent Items"
+msgstr ""
+
+msgid "Settings"
 msgstr ""
 
 msgid "Click to copy"
@@ -125,6 +128,21 @@ msgstr ""
 #. 3.2
 
 msgid "Reset category order"
+msgstr ""
+
+msgid "List settings apps separately"
+msgstr ""
+
+msgid "Single list style"
+msgstr ""
+
+msgid "Hide hidden files"
+msgstr ""
+
+#. 5.8
+#. 4.0
+
+msgid "Show hidden files"
 msgstr ""
 
 msgid "Run with NVIDIA GPU"
@@ -328,12 +346,12 @@ msgstr ""
 msgid "Package %s is a dependency of the following packages:"
 msgstr ""
 
-#. metadata.json->name
+#. metadata.json
 #. 3.2
 msgid "Cinnamenu"
 msgstr ""
 
-#. metadata.json->description
+#. metadata.json
 msgid ""
 "A flexible menu with grid or list layout options, file browser and emoji "
 "search."
@@ -414,10 +432,12 @@ msgid "View applications as list or grid"
 msgstr ""
 
 #. 5.8
+#. 4.0
 msgid "Show sidebar"
 msgstr ""
 
 #. 5.8
+#. 4.0
 msgid "Show the sidebar in the menu"
 msgstr ""
 
@@ -506,10 +526,12 @@ msgid "Choose where to show application descriptions"
 msgstr ""
 
 #. 5.8
+#. 4.0
 msgid "Show categories"
 msgstr ""
 
 #. 5.8
+#. 4.0
 msgid "Show list of application categories"
 msgstr ""
 
@@ -652,11 +674,6 @@ msgstr ""
 #. 5.8
 #. 4.0
 msgid "Autoscroll the application list on mouse hover"
-msgstr ""
-
-#. 5.8
-#. 4.0
-msgid "Show hidden files"
 msgstr ""
 
 #. 5.8
