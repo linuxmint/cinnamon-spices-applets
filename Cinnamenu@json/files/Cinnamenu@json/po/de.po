@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-29 14:47+0100\n"
-"PO-Revision-Date: 2023-08-03 20:02+0200\n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: 2023-08-11 20:35+0200\n"
 "Last-Translator: erwn16 <elmar_wein@web.de>\n"
 "Language-Team: de\n"
 "Language: de\n"
@@ -43,6 +43,9 @@ msgstr "Musik"
 
 msgid "No recent Items"
 msgstr "Keine kürzlich verwendeten Dateien oder Apps"
+
+msgid "Settings"
+msgstr "Einstellungen"
 
 msgid "Click to copy"
 msgstr "Linksklick zum Kopieren"
@@ -121,6 +124,20 @@ msgstr "Ordner als Menü-Kategorie entfernen"
 #. 3.2
 msgid "Reset category order"
 msgstr "Kategorie-Reihenfolge zurücksetzen"
+
+msgid "List settings apps separately"
+msgstr "Apps für Einstellungen separat anzeigen"
+
+msgid "Single list style"
+msgstr "Einfacher Listenstil"
+
+msgid "Hide hidden files"
+msgstr "Versteckte Dateien ausblenden"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files"
+msgstr "Verborgene Dateien im persönlichen Ordner anzeigen"
 
 msgid "Run with NVIDIA GPU"
 msgstr "Mit NVIDIA-Grafikkarte ausführen"
@@ -324,12 +341,12 @@ msgstr "Kann Paket %s wegen Beziehungen zu anderen Paketen nicht entfernen."
 msgid "Package %s is a dependency of the following packages:"
 msgstr "Zwischen Paket %s und folgenden Paketen bestehen Abhängigkeiten:"
 
-#. metadata.json->name
+#. metadata.json
 #. 3.2
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-#. metadata.json->description
+#. metadata.json
 msgid ""
 "A flexible menu with grid or list layout options, file browser and emoji "
 "search."
@@ -378,7 +395,7 @@ msgstr "Inhalte"
 #. 4.0
 #. 4.0
 msgid "Panel"
-msgstr "Leiste"
+msgstr "Cinnamenu in einer Leiste"
 
 #. 5.8
 #. 5.8
@@ -392,7 +409,7 @@ msgstr "Menü"
 #. 5.8
 #. 4.0
 msgid "Applications view mode"
-msgstr "Art der Anzeige für App-Symbole"
+msgstr "Anzeigeform für App-Symbole"
 
 #. 5.8
 #. 3.2
@@ -412,10 +429,12 @@ msgid "View applications as list or grid"
 msgstr "App-Symbole in einer Liste oder einem Raster anzeigen"
 
 #. 5.8
+#. 4.0
 msgid "Show sidebar"
 msgstr "Schaltflächen-Leiste anzeigen"
 
 #. 5.8
+#. 4.0
 msgid "Show the sidebar in the menu"
 msgstr ""
 "Leiste mit den Schaltflächen \"Beenden\", \"Abmelden\" und \"Bildschirm "
@@ -451,7 +470,7 @@ msgstr "Rechts"
 msgid "Choose where to show the sidebar"
 msgstr ""
 "Position, an der die Schaltflächen-Leiste (Sitzungsschaltflächen "
-"\"Bildschirm sperren\"/\"Abmelden\"/\"Beenden\") angezeigt werden"
+"\"Bildschirm sperren\", \"Abmelden\", \"Beenden\") angezeigt wird"
 
 #. 5.8
 #. 4.0
@@ -508,10 +527,12 @@ msgid "Choose where to show application descriptions"
 msgstr "Festlegen, wo die Beschreibungen der Apps angezeigt werden"
 
 #. 5.8
+#. 4.0
 msgid "Show categories"
 msgstr "App-Kategorien anzeigen"
 
 #. 5.8
+#. 4.0
 msgid "Show list of application categories"
 msgstr "App-Kategorien anzeigen"
 
@@ -660,11 +681,6 @@ msgstr "Automatischen Bildlauf im Bereich mit den Apps aktivieren"
 
 #. 5.8
 #. 4.0
-msgid "Show hidden files"
-msgstr "Verborgene Dateien im persönlichen Ordner anzeigen"
-
-#. 5.8
-#. 4.0
 msgid "Show hidden files in folder view"
 msgstr "Verborgene Dateien im persönlichen Ordner anzeigen"
 
@@ -787,7 +803,7 @@ msgstr ""
 #. 3.2
 #. 4.0
 msgid "Use a custom icon"
-msgstr "Ein benutzerdefiniertes Symbol verwenden"
+msgstr "Ein benutzerdefiniertes Symbol für Cinnamenu verwenden"
 
 #. 5.8
 #. 3.2
@@ -812,8 +828,7 @@ msgstr "Eine benutzerdefinierte Symbolgröße verwenden"
 #. 5.8
 #. 4.0
 msgid "Use a custom size for the panel icon"
-msgstr ""
-"Eine benutzerdefinierte Größe für das Leistensymbol von Cinnamenu verwenden"
+msgstr "Eine benutzerdefinierte Größe für das Symbol von Cinnamenu verwenden"
 
 #. 5.8
 #. 4.0
@@ -823,8 +838,7 @@ msgstr "Größe des Leistensymbols (Pixel)"
 #. 5.8
 #. 4.0
 msgid "Choose a custom size for the panel icon"
-msgstr ""
-"Eine benutzerdefinierte Größe für das Leistensymbol von Cinnamenu auswählen"
+msgstr "Eine benutzerdefinierte Größe für das Symbol von Cinnamenu auswählen"
 
 #. 5.8
 #. 3.2
