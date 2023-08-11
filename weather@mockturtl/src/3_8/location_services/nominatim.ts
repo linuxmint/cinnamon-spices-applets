@@ -8,8 +8,8 @@ import { _ } from "../utils";
  * Nominatim communication interface
  */
 export class GeoLocation {
-	private url = "https://nominatim.openstreetmap.org/search/";
-	private params = "?format=json&addressdetails=1&limit=1";
+	private url = "https://nominatim.openstreetmap.org/search";
+	private params = "format=json&addressdetails=1&limit=1";
 	private App: WeatherApplet;
 	private cache: LocationCache = {};
 
@@ -30,7 +30,7 @@ export class GeoLocation {
 				return cached;
 			}
 
-			const locationData = await this.App.LoadJsonAsync<any>(this.url + encodeURIComponent(searchText) + this.params);
+			const locationData = await this.App.LoadJsonAsync<any>(`${this.url}?q=${searchText}&${this.params}`);
 			if (locationData == null)
 				return null;
 

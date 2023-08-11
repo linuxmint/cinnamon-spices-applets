@@ -51,6 +51,7 @@
             "title":"Layout",
             "keys":[
                 "applications-view-mode",
+                "show-sidebar",
                 "sidebar-placement",
                 "sidebar-favorites",
                 "description-placement"
@@ -60,6 +61,7 @@
             "type":"section",
             "title":"Content",
             "keys":[
+                "show-categories",
                 "show-places-category",
                 "show-recents-category",
                 "show-favorite-apps-category",
@@ -162,6 +164,10 @@
         "type":"generic",
         "default":[]
     },
+    "all-apps-old-style":{
+        "type":"generic",
+        "default":false
+    },
 
     "applications-view-mode":{
         "type":"combobox",
@@ -173,7 +179,14 @@
         },
         "tooltip":"View applications as list or grid"
     },
+    "show-sidebar":{
+        "type":"switch",
+        "default":true,
+        "description":"Show sidebar",
+        "tooltip":"Show the sidebar in the menu"
+    },
     "sidebar-placement":{
+        "dependency":"show-sidebar",
         "type":"combobox",
         "default":1,
         "description":"Sidebar location",
@@ -186,6 +199,7 @@
         "tooltip":"Choose where to show the sidebar"
     },
     "sidebar-favorites":{
+        "dependency":"show-sidebar",
         "type":"combobox",
         "default":3,
         "description":"Show favorites on sidebar",
@@ -209,31 +223,42 @@
         "tooltip":"Choose where to show application descriptions"
     },
 
+    "show-categories":{
+        "type":"switch",
+        "default":true,
+        "description":"Show categories",
+        "tooltip":"Show list of application categories"
+    },
     "show-places-category":{
+        "dependency":"show-categories",
         "type":"switch",
         "default":true,
         "description":"Show bookmarks and places",
         "tooltip":"Show bookmarks and places category in the menu"
     },
     "show-recents-category":{
+        "dependency":"show-categories",
         "type":"switch",
         "default":true,
         "description":"Show recent items",
         "tooltip":"Show recent items category in the menu"
     },
     "show-favorite-apps-category":{
+        "dependency":"show-categories",
         "type":"switch",
         "default":false,
         "description":"Show favorite apps category",
         "tooltip":"Show your favorite apps category in the menu"
     },
     "show-home-folder-category":{
+        "dependency":"show-categories",
         "type":"checkbox",
         "default":true,
         "description":"Show home folder",
         "tooltip":"Show home folder category in the menu"
     },
     "show-emoji-category":{
+        "dependency":"show-categories",
         "type":"checkbox",
         "default":true,
         "description":"Show emoji category",
@@ -274,12 +299,14 @@
     },
 
     "category-click":{
+        "dependency":"show-categories",
         "type":"checkbox",
         "default":true,
         "description":"Activate categories on click",
         "tooltip":"Activate categories on click instead of on hover"
     },
     "open-on-category":{
+        "dependency":"show-categories",
         "type":"combobox",
         "default":0,
         "description":"Open menu on category:",
@@ -299,6 +326,7 @@
         "tooltip":"Autoscroll the application list on mouse hover"
     },
     "show-hidden-files":{
+        "dependency":"show-categories",
         "type":"checkbox",
         "default":false,
         "description":"Show hidden files",
@@ -531,6 +559,7 @@
     },
 
     "category-icon-size":{
+        "dependency":"show-categories",
         "type":"spinbutton",
         "default":24,
         "min":0,
@@ -561,6 +590,7 @@
         "tooltip":"Applications grid icon size (pixels)"
     },
     "sidebar-icon-size":{
+        "dependency":"show-sidebar",
         "type":"spinbutton",
         "default":32,
         "min":6,
@@ -571,6 +601,7 @@
         "tooltip":"Sidebar icon size (pixels)"
     },
     "use-box-style":{
+        "dependency":"show-sidebar",
         "type":"checkbox",
         "default":false,
         "description":"Use sidebar box style",

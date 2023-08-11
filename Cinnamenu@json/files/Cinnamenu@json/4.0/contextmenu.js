@@ -10,7 +10,7 @@ const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine} = imports.misc.util;
 
-const {_, log} = require('./utils');
+const {_} = require('./utils');
 const {MODABLE, MODED} = require('./emoji');
 
 class ContextMenuItem extends PopupBaseMenuItem {
@@ -147,6 +147,53 @@ class ContextMenu {
         this._showMenu(e, buttonActor);
     }
 
+    openAppsView(event) {
+        //e is used to position context menu at mouse coords.
+        this.contextMenuButtons.forEach(button => button.destroy());
+        this.contextMenuButtons = [];
+
+        //------populate menu
+        const addMenuItem = (item) => {
+            this.menu.addMenuItem(item);
+            this.contextMenuButtons.push(item);
+        };
+        if (this.appThis.currentCategory === 'all') {
+            if (this.appThis.settings.allAppsOldStyle) {
+                addMenuItem(new ContextMenuItem(this.appThis, _('List settings apps separately'), null,
+                            () => {
+                                this.appThis.settings.allAppsOldStyle = false;
+                                this.close();
+                                this.appThis.setActiveCategory(this.appThis.currentCategory);
+                            }));
+            } else {
+                addMenuItem(new ContextMenuItem(this.appThis, _('Single list style'), null,
+                            () => {
+                                this.appThis.settings.allAppsOldStyle = true;
+                                this.close();
+                                this.appThis.setActiveCategory(this.appThis.currentCategory);
+                            }));
+            }
+        } else if (this.appThis.currentCategory.startsWith('/')) {
+            if (this.appThis.settings.showHiddenFiles) {
+                addMenuItem(new ContextMenuItem(this.appThis, _('Hide hidden files'), null,
+                            () => {
+                                this.appThis.settings.showHiddenFiles = false;
+                                this.close();
+                                this.appThis.setActiveCategory(this.appThis.currentCategory);
+                            }));
+            } else {
+                addMenuItem(new ContextMenuItem(this.appThis, _('Show hidden files'), null,
+                            () => {
+                                this.appThis.settings.showHiddenFiles = true;
+                                this.close();
+                                this.appThis.setActiveCategory(this.appThis.currentCategory);
+                            }));
+            }
+        }
+        
+        this._showMenu(event);
+    }
+
     _showMenu(e, buttonActor) {
         //----Position and open context menu----
         this.isOpen = true;
@@ -259,7 +306,6 @@ class ContextMenu {
         if (this.appThis._pamacManagerAvailable) {
             addMenuItem( new ContextMenuItem(this.appThis, _('App Info'), 'dialog-information',
                         () => { spawnCommandLine("/usr/bin/pamac-manager --details-id=" + app.id);
-                                log(app.id);
                                 this.appThis.menu.close(); } ));
         }
     }
@@ -332,7 +378,7 @@ class ContextMenu {
         }
 
         //Add folder as category
-        if (app.isDirectory) {
+        if (app.isDirectory && this.appThis.settings.showCategories) {
             const path = Gio.file_new_for_uri(app.uri).get_path();
             if (!this.appThis.getIsFolderCategory(path)) {
                 this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));

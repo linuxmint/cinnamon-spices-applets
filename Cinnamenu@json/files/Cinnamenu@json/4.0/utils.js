@@ -26,10 +26,6 @@ const graphemeBaseChars = s =>
 //Combining Diacritical Marks Extended and Combining Diacritical Marks Supplement)
             s.normalize('NFKD').replace(/[\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF]/g, "");
 
-const log = (...args) => {
-    global.log('[Cinnamenu@json]', ...args);
-}
-
 //===========================================================
 
 const getThumbnail_gicon = (uri, mimeType) => {
@@ -301,7 +297,6 @@ var scrollToButton = (button, enableAnimation) => {
 module.exports = {  _,
                     wordWrap,
                     graphemeBaseChars,
-                    log,
                     getThumbnail_gicon,
                     showTooltip,
                     hideTooltipIfVisible,
