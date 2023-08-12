@@ -92,7 +92,7 @@ If everything is fine, the PR is merged, the website is updated and users can se
 In addition to the checks specified above, if the pull request comes from somebody other than the author, it will be held until the author reviews it or gives a thumbs-up, with the following exceptions:
 
 - If it is a bug fix, the PR may be merged, though if the bug is minor, or the fix could potentially impact the way the applet works, we may wait for author approval before merging.
-- If the pull request adds translations it will likewise be merged. These are not going to effect the functionality of the code, and will make the applet available to many users who couldn't use it before due to a language barrier. We view this a essentially a bugfix, but it is included here for clarification.
+- If the pull request adds translations it will likewise be merged. These are not going to effect the functionality of the code, and will make the applet available to many users who couldn't use it before due to a language barrier. We view this as essentially a bugfix, but it is included here for clarification.
 - If the author fails to respond in a reasonable time, we will assume the applet is abandoned (as mentioned above) and the pull request will be merged assuming it meets all other requirements.
 
 If the changes represent a change in functionality, or in look and feel, or if their implementation could be questioned and/or discussed, the reviewer should leave the PR open and ask the author to review it.
@@ -113,7 +113,7 @@ The Cinnamon team can accept or reject the addition and should give justificatio
 
 # Reporting Bugs and Creating Pull Requests
 
-See the [Guidelines for Contributing](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CONTRIBUTING.md)
+See the [Guidelines for Contributing](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CONTRIBUTING.md).
 
 # Translations
 
@@ -124,7 +124,7 @@ Updating a translation template `.pot`:
 ./cinnamon-spices-makepot UUID
 ```
 
-Test your translations `.po` locally before uploading to Spices:"
+Test your translations `.po` locally before uploading to Spices:
 ```
 ./cinnamon-spices-makepot UUID --install
 ```
