@@ -67,7 +67,7 @@
     "hotkey-settings" : {
       "type" : "section",
       "title" : "Hotkey settings",
-      "keys" : ["hotkey-bindings", "hotkey-minimize", "hotkey-new", "hotkey-help"]
+      "keys" : ["hotkey-bindings", "hotkey-minimize", "hotkey-new", "hotkey-sequence", "hotkey-help"]
     },
     "adv-mouse-settings" : {
       "type" : "section",
@@ -525,10 +525,16 @@
     "description": "Open a new window when the application is not running",
     "tooltip": "Start a new window if no window is attached to a hotkey and the hotkey description is an exact match for the application name of a pinned button or a desktop file name"
   },
+  "hotkey-sequence": {
+    "type": "switch",
+    "default": true,
+    "description": "Smart numeric hotkeys (using \"1\" automatically extends to 1-9)",
+    "tooltip": "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The first 9 windows of the assigned application, as ordered on the window-list, will be activated by the 9 hotkeys."
+  },
 
   "hotkey-help" : {
     "type" : "label",
-    "description" : "Hotkeys can be assigned to a window in two ways:\n1. Manual:  Use the \"Assign window to a hotkey\" item in a button context menu.\n2. Automatic:  Enter a \"Description\" matching an application name or desktop file. For example: \"Google Chrome\" or \"firefox.desktop\"\n\nNote: 1) If a hotkey is not working, it's possible that a key combination is already assigned elsewhere. 2) If you remove or rearrange any hotkeys, manual window assignments may need to be reassigned"
+    "description" : "Hotkeys can be assigned to a window in two ways:\n1) Manual: Use \"Assign window to a hotkey\" in the button context menu.\n2) Automatic:  Enter a \"Description\" matching an application name or desktop file. i.e: \"Google Chrome\" or \"firefox.desktop\"\nNote: 1) Hotkey not working? it's possible the key combination is already assigned elsewhere. 2) If you remove or rearrange hotkeys, manual hotkey assignments might need to be reassigned. 3) Hotkeys associated with desktop files can not be manually assigned."
   },
 
   "adv-mouse-list": {
