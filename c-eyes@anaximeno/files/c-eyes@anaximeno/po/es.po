@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-22 03:05-0100\n"
-"PO-Revision-Date: 2023-08-22 03:22-0100\n"
+"POT-Creation-Date: 2023-08-22 03:30-0100\n"
+"PO-Revision-Date: 2023-08-22 03:32-0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.3.1\n"
 
-#: 5.4/applet.js:348 4.2/applet.js:352
+#: 5.4/applet.js:360 4.2/applet.js:365
 msgid "click to deactivate the eye"
 msgstr "haga clic para desactivar el ojo"
 
-#: 5.4/applet.js:348 4.2/applet.js:352
+#: 5.4/applet.js:360 4.2/applet.js:365
 msgid "click to activate the eye"
 msgstr "haga clic para activar el ojo"
 
-#: 5.4/applet.js:349 4.2/applet.js:353
+#: 5.4/applet.js:361 4.2/applet.js:366
 msgid "effects enabled"
 msgstr "efectos habilitados"
 
-#: 5.4/applet.js:349 4.2/applet.js:353
+#: 5.4/applet.js:361 4.2/applet.js:366
 msgid "effects disabled"
 msgstr "efectos desactivados"
 
-#: 5.4/applet.js:350 4.2/applet.js:354
+#: 5.4/applet.js:362 4.2/applet.js:367
 msgid "TIP"
 msgstr ""
 

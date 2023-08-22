@@ -20,6 +20,7 @@
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const Applet = imports.ui.applet;
+const Main = imports.ui.main;
 const Gettext = imports.gettext;
 
 const SignalManager = imports.misc.signalManager;
@@ -217,6 +218,9 @@ class Eye extends Applet.Applet {
 
 		this.signals = new SignalManager.SignalManager(null);
 		this.signals.connect(global.screen, 'in-fullscreen-changed', this.on_fullscreen_changed, this);
+
+		Atspi.init();
+
 		this._mouseListener = Atspi.EventListener.new(this._mouse_click_event.bind(this));
 
 		this._file_mem_cache = {};
@@ -278,14 +282,22 @@ class Eye extends Applet.Applet {
 
 	on_fullscreen_changed() {
 		const monitor = global.screen.get_current_monitor();
-		const isInFullscreen = global.screen.get_monitor_in_fullscreen(monitor);
+		const monitorIsInFullscreen = global.screen.get_monitor_in_fullscreen(monitor);
+		const panelsInMonitor = Main.panelManager.getPanelsInMonitor(monitor);
+
+		let panelIsInCurrentMonitor = false;
+		if (panelsInMonitor !== null && panelsInMonitor !== undefined) {
+			panelIsInCurrentMonitor = panelsInMonitor.includes(this.panel);
+		}
+
+		const shouldHideEye = monitorIsInFullscreen && panelIsInCurrentMonitor;
 
 		if (this.deactivate_on_fullscreen) {
-			this.set_active(!isInFullscreen);
+			this.set_active(!shouldHideEye);
 		}
 
 		if (this.deactivate_effects_on_fullscreen) {
-			this.set_mouse_circle_active(!isInFullscreen && this.mouse_click_show);
+			this.set_mouse_circle_active(!shouldHideEye && this.mouse_click_show);
 		}
 	}
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-22 03:05-0100\n"
+"POT-Creation-Date: 2023-08-22 03:30-0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 5.4/applet.js:348 4.2/applet.js:352
+#: 5.4/applet.js:360 4.2/applet.js:365
 msgid "click to deactivate the eye"
 msgstr ""
 
-#: 5.4/applet.js:348 4.2/applet.js:352
+#: 5.4/applet.js:360 4.2/applet.js:365
 msgid "click to activate the eye"
 msgstr ""
 
-#: 5.4/applet.js:349 4.2/applet.js:353
+#: 5.4/applet.js:361 4.2/applet.js:366
 msgid "effects enabled"
 msgstr ""
 
-#: 5.4/applet.js:349 4.2/applet.js:353
+#: 5.4/applet.js:361 4.2/applet.js:366
 msgid "effects disabled"
 msgstr ""
 
-#: 5.4/applet.js:350 4.2/applet.js:354
+#: 5.4/applet.js:362 4.2/applet.js:367
 msgid "TIP"
 msgstr ""
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-22 03:05-0100\n"
-"PO-Revision-Date: 2023-08-22 03:26-0100\n"
+"POT-Creation-Date: 2023-08-22 03:30-0100\n"
+"PO-Revision-Date: 2023-08-22 03:32-0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.3.1\n"
 
-#: 5.4/applet.js:348 4.2/applet.js:352
+#: 5.4/applet.js:360 4.2/applet.js:365
 msgid "click to deactivate the eye"
 msgstr ""
 
-#: 5.4/applet.js:348 4.2/applet.js:352
+#: 5.4/applet.js:360 4.2/applet.js:365
 msgid "click to activate the eye"
 msgstr ""
 
-#: 5.4/applet.js:349 4.2/applet.js:353
+#: 5.4/applet.js:361 4.2/applet.js:366
 msgid "effects enabled"
 msgstr "effektusok engedélyezve"
 
-#: 5.4/applet.js:349 4.2/applet.js:353
+#: 5.4/applet.js:361 4.2/applet.js:366
 msgid "effects disabled"
 msgstr "effektusok letiltva"
 
-#: 5.4/applet.js:350 4.2/applet.js:354
+#: 5.4/applet.js:362 4.2/applet.js:367
 msgid "TIP"
 msgstr ""
 
