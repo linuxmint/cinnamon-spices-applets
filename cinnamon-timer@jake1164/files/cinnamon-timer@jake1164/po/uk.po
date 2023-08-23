@@ -1,0 +1,230 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-08 11:28+0100\n"
+"PO-Revision-Date: 2023-08-23 13:37+0300\n"
+"Last-Translator: DmytroVoytko <Dmytro.Voytko@gmail.com>\n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#: applet.js:215 applet.js:376
+msgid "Timer"
+msgstr "Таймер"
+
+#. settings-schema.json->preset_time->columns->title
+#: applet.js:221 applet.js:260 applet.js:353
+msgid "Hours"
+msgstr "год."
+
+#. settings-schema.json->preset_time->columns->title
+#: applet.js:221 applet.js:261 applet.js:353
+msgid "Minutes"
+msgstr "хв."
+
+#: applet.js:221 applet.js:353
+msgid "and"
+msgstr "і"
+
+#. settings-schema.json->preset_time->columns->title
+#: applet.js:221 applet.js:262 applet.js:353
+msgid "Seconds"
+msgstr "сек."
+
+#: applet.js:238
+msgid "Reset"
+msgstr "Скинути"
+
+#: applet.js:523
+msgid "Okay"
+msgstr "Гаразд"
+
+#: applet.js:541
+msgid "Cinnamon Timer"
+msgstr "Cinnamon Таймер"
+
+#. settings-schema.json->page1->title
+msgid "General"
+msgstr "Загальне"
+
+#. settings-schema.json->page2->title
+msgid "Sounds"
+msgstr "Звуки"
+
+#. settings-schema.json->page3->title
+#. settings-schema.json->section3->title
+#. settings-schema.json->preset_time->description
+msgid "Preset Times"
+msgstr "Попередньо встановлений час"
+
+#. settings-schema.json->page4->title
+#. settings-schema.json->section4->title
+#. settings-schema.json->slider_intervals->description
+msgid "Slider Intervals"
+msgstr "Інтервали повзунка"
+
+#. settings-schema.json->section1->title
+msgid "General Settings"
+msgstr "Загальні налаштування"
+
+#. settings-schema.json->section2->title
+msgid "Sound Settings"
+msgstr "Налаштування звуку"
+
+#. settings-schema.json->confirm-prompt-enable->description
+msgid "Check this to place a prompt on the window when time has elapsed."
+msgstr "Позначте цю опцію, щоб розмістити сповіщення у вікні, коли час минув."
+
+#. settings-schema.json->confirm-prompt-enable->tooltip
+msgid "Check this to place a prompt on the window when time has elapsed"
+msgstr "Позначте цю опцію, щоб розмістити сповіщення у вікні, коли час минув"
+
+#. settings-schema.json->message-prompt-enable->description
+#. settings-schema.json->message-prompt-enable->tooltip
+msgid "Display a notification when time has elapsed"
+msgstr "Показувати сповіщення, коли час минув"
+
+#. settings-schema.json->display-message->description
+#. settings-schema.json->display-message->tooltip
+msgid ""
+"Global message displayed in notification windows unless defined in preset time."
+msgstr ""
+"Глобальне повідомлення відображається у вікнах сповіщень, якщо не визначено в "
+"попередньо встановлений час."
+
+#. settings-schema.json->sound-prompt-enable->description
+#. settings-schema.json->sound-prompt-enable->tooltip
+msgid "Play a sound when time is elapsed"
+msgstr "Відтворення звуку, коли мине час"
+
+#. settings-schema.json->sound-file->description
+msgid "Full path and filename of alert sound file"
+msgstr "Повний шлях і назва звукового файлу сповіщення"
+
+#. settings-schema.json->sound-file->tooltip
+msgid "Must have Sox installed. Most sound file types supported"
+msgstr ""
+"У вас повинен бути встановлений Sox. Підтримується більшість типів "
+"звукових файлів"
+
+#. settings-schema.json->display-menu-enable->description
+#. settings-schema.json->display-menu-enable->tooltip
+msgid "Show the timer menu when time is elapsed"
+msgstr "Показати меню таймера, коли час минув"
+
+#. settings-schema.json->duration-display-enable->description
+#. settings-schema.json->duration-display-enable->tooltip
+msgid "Display remaining time in panel"
+msgstr "Показати на панелі час, що залишився"
+
+#. settings-schema.json->alarmtime-display-enable->description
+#. settings-schema.json->alarmtime-display-enable->tooltip
+msgid "Display alarm time in panel"
+msgstr "Показувати час будильника на панелі"
+
+#. settings-schema.json->alarmtime-format-small->description
+msgid "Format used to display alarm time in the near future"
+msgstr ""
+"Формат, який використовується для відображення часу будильника в "
+"найближчому майбутньому"
+
+#. settings-schema.json->alarmtime-format-small->tooltip
+msgid ""
+"If the alarm time is less than the minutes specified below away,\n"
+"the alarm time can be displayed with more details\n"
+"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
+"format)"
+msgstr ""
+"Якщо час будильника менший за вказані нижче хвилини,\n"
+"час будильника можна відобразити більш детально\n"
+"(дивіться https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
+"format)"
+
+#. settings-schema.json->alarmtime-format-large->description
+msgid "Format used to display alarm time in the not so near future"
+msgstr ""
+"Формат, який використовується для відображення часу будильника в не дуже "
+"близькому майбутньому"
+
+#. settings-schema.json->alarmtime-format-large->tooltip
+msgid ""
+"If the alarm time is more than the minutes specified below away,\n"
+"the alarm time can be displayed with less details\n"
+"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
+"format)"
+msgstr ""
+"Якщо час будильника перевищує вказані нижче хвилини,\n"
+"час будильника можна відобразити з меншою кількістю деталей\n"
+"(дивіться https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
+"format)"
+
+#. settings-schema.json->alarmtime-format-switchover->units
+msgid "minutes"
+msgstr "хвилини"
+
+#. settings-schema.json->alarmtime-format-switchover->description
+msgid "Time when switching from small to large time format"
+msgstr "Час, коли переходити від малого до великого формату"
+
+#. settings-schema.json->alarmtime-format-switchover->tooltip
+msgid "Switch over time between the two formats specified above"
+msgstr "Перемикається за часом між двома вказаними вище форматами"
+
+#. settings-schema.json->alarm_end->description
+#. settings-schema.json->alarm_end->tooltip
+#. settings-schema.json->alarm_start->description
+#. settings-schema.json->alarm_start->tooltip
+msgid "Do not change, the time the alarm is set to expire"
+msgstr "Не змінюйте, час, на який заплановано сплив будильника"
+
+#. settings-schema.json->message->description
+#. settings-schema.json->message->tooltip
+msgid "Do not change, message being displayed when the current timer expires"
+msgstr "Не змінювати, повідомлення відображається, коли поточний таймер закінчується"
+
+#. settings-schema.json->slider_intervals->columns->title
+msgid "Minimum"
+msgstr "Мінімум"
+
+#. settings-schema.json->slider_intervals->columns->title
+msgid "Maximum"
+msgstr "Максимум"
+
+#. settings-schema.json->slider_intervals->columns->title
+msgid "Step"
+msgstr "Крок"
+
+#. settings-schema.json->preset_time->columns->title
+msgid "Label"
+msgstr "Мітка"
+
+#. settings-schema.json->preset_time->columns->title
+msgid "Custom Message (overrides global message)"
+msgstr "Спеціальне повідомлення (перекриває глобальне повідомлення)"
+
+#. settings-schema.json->sound-volume->description
+#. settings-schema.json->sound-volume->tooltip
+msgid "Specify the playback volume"
+msgstr "Вкажіть гучність відтворення"
+
+#. settings-schema.json->auto-loop-enable->description
+#. settings-schema.json->auto-loop-enable->tooltip
+msgid "Restart the timer automatically when time is elapsed"
+msgstr "Автоматичний перезапуск таймера після закінчення часу"
+
+#. cinnamon-timer@jake1164->metadata.json->description
+msgid "A timer app with visual and auditory notifications."
+msgstr "Додаток таймера з візуальними та звуковими сповіщеннями."
+
+#. cinnamon-timer@jake1164->metadata.json->name
+msgid "Timer with notifications"
+msgstr "Таймер з повідомленнями"
