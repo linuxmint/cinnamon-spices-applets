@@ -229,6 +229,7 @@ MyApplet.prototype = {
     },
 
     set_dark_mode: function (dark_mode) {
+        let prefer_scheme = 'default';
         let win_border_theme = null;
         let gtk_theme = null;
         let cinnamon_theme = null;
@@ -242,6 +243,7 @@ MyApplet.prototype = {
             gtk_theme = this.dark_gtk_theme;
             cinnamon_theme = this.dark_cinnamon_theme;
             icon_theme = this.dark_icon_theme;
+            prefer_scheme = 'prefer-dark';
             this.set_applet_icon_symbolic_path(ICON_MOON);
         }
         else {
@@ -251,17 +253,21 @@ MyApplet.prototype = {
             icon_theme = this.light_icon_theme;
             this.set_applet_icon_symbolic_path(ICON_SUN);
         }
+
+        // This setting only affects applications which support dark mode
+        this.set_gsettings("org.x.apps.portal", "color-scheme", prefer_scheme);
+
         if (this.is_valid_theme_name(win_border_theme)) {
-            Util.spawnCommandLine('gsettings set org.cinnamon.desktop.wm.preferences theme ' + win_border_theme);
+            this.set_gsettings("org.cinnamon.desktop.wm.preferences", "theme", win_border_theme);
         }
         if (this.is_valid_theme_name(gtk_theme)) {
-            Util.spawnCommandLine('gsettings set org.cinnamon.desktop.interface gtk-theme ' + gtk_theme);
+            this.set_gsettings("org.cinnamon.desktop.interface", "gtk-theme", gtk_theme);
         }
         if (this.is_valid_theme_name(cinnamon_theme)) {
-            Util.spawnCommandLine('gsettings set org.cinnamon.theme name ' + cinnamon_theme);
+            this.set_gsettings("org.cinnamon.theme", "name", cinnamon_theme);
         }
         if (this.is_valid_theme_name(icon_theme)) {
-            Util.spawnCommandLine('gsettings set org.cinnamon.desktop.interface icon-theme ' + icon_theme);
+            this.set_gsettings("org.cinnamon.desktop.interface", "icon-theme", icon_theme);
         }
         // Change the wallpaper at last
         if (dark_mode && this.enable_dark_background_switch) {
@@ -273,6 +279,15 @@ MyApplet.prototype = {
 
     is_valid_theme_name: function (theme) {
         return theme != "" && theme != null && theme != "none";
+    },
+
+    set_gsettings: function (schema, key, value) {
+        try {
+            let gSetting = new Gio.Settings({ schema: schema });
+            gSetting.set_string(key, value);
+        } catch (error) {
+            global.logError(error);
+        }
     },
 
     refresh_themes: function () {
@@ -417,11 +432,11 @@ MyApplet.prototype = {
                 }
             }
         }
-        
+
         this.add_to_map(gtk_theme_names, this.gtk_themes);
         this.add_to_map(cinnamon_theme_names, this.cinnamon_themes);
         this.add_to_map(win_border_theme_names, this.window_border_themes);
-        
+
         this.settings.setOptions("light_win_border_theme", Object.assign({}, this.window_border_themes));
         this.settings.setOptions("dark_win_border_theme", Object.assign({}, this.window_border_themes));
 
@@ -441,9 +456,9 @@ MyApplet.prototype = {
                 icon_names.push(icon_name);
             }
         }
-        
+
         this.add_to_map(icon_names, this.icons);
-        
+
         this.settings.setOptions("light_icon_theme", Object.assign({}, this.icons));
         this.settings.setOptions("dark_icon_theme", Object.assign({}, this.icons));
     },
