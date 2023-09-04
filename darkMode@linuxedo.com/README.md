@@ -8,7 +8,7 @@ For more details and feature requests: [Dark Mode in Cinnamon Desktop Environmen
 License: [GPL-v3](https://github.com/linuxedo/cinnamon-dark-mode-applet/blob/main/LICENSE)
 
 ## Changelog
-* Set 3, 2023
+* Sep 3, 2023
   - Add support to XDG Desktop Portal. This dark mode setting affects applications which support it and lets you choose between two options:
     - default: Let the applications decide
     - prefer-dark: Prefer Dark Mode
