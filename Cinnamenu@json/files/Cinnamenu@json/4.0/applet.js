@@ -1011,7 +1011,7 @@ class CinnamenuApplet extends TextIconApplet {
         }
         //if (!text || !text.trim()) return;
 
-        const pattern = graphemeBaseChars(pattern_raw).toLocaleUpperCase();
+        const pattern = graphemeBaseChars(pattern_raw).toLocaleUpperCase().trim();
         //Don't repeat the same search. This can happen if a key and backspace are pressed in quick
         //succession while a previous search is being carried out.
         if (pattern_raw === this.previousSearchPattern) {
@@ -1111,7 +1111,7 @@ class CinnamenuApplet extends TextIconApplet {
                             'https://www.ask.com/web?q=',
                             'https://www.ecosia.org/search?q=',
                             'https://search.aol.co.uk/aol/search?q=',
-                            'https://www.startpage.com/search/?q=',
+                            'https://www.startpage.com/sp/search?query=',
                             'https://search.brave.com/search?q=',
                             'https://www.qwant.com/?q='][this.settings.webSearchOption - 1];
             const gicon = new Gio.FileIcon(
