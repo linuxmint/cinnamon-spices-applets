@@ -137,8 +137,7 @@ class NewTooltip {
 }
 
 //===================================================
-
-const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => {
+const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
     if (!str) {
         return { score: 0, result: str };
     }
@@ -201,6 +200,18 @@ const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => 
     } else {
         return {score: score, result: str};
     }
+};
+
+const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => {
+    const separatorIndex = q.indexOf(" ");
+    if (separatorIndex < 1) {
+        return searchStrPart(q, str, noFuzzySearch, noSubStringSearch);
+    }
+    
+    const part1 = searchStrPart(q.slice(0, separatorIndex), str, noFuzzySearch, noSubStringSearch);
+    const part2 = searchStrPart(q.slice(separatorIndex + 1), str, noFuzzySearch, noSubStringSearch);
+    const avgScore = (part1.score + part2.score) / 2.0;
+    return {score: avgScore, result: part1.result};
 };
 
 var chromiumProfileDirs = null;
