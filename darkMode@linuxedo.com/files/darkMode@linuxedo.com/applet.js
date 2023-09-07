@@ -544,9 +544,6 @@ MyApplet.prototype = {
         let version = GLib.getenv('CINNAMON_VERSION');
         version = version.substring(0, version.lastIndexOf("."));
 
-        global.log("Cinnamon version: " + version);
-        global.log("Minimum version: " + minVersion);
-
         return parseFloat(version) >= minVersion;
     }
 }
