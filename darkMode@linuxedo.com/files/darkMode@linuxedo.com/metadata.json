@@ -1,6 +1,7 @@
 {
-    "uuid": "darkMode@linuxedo.com", 
+    "uuid": "darkMode@linuxedo.com",
     "max-instances": "1",
-    "description": "Easily switch between dark mode and light mode with one click.", 
-    "name": "Dark Mode"
+    "description": "Easily switch between dark mode and light mode with one click.",
+    "name": "Dark Mode",
+    "multiversion": true
 }
