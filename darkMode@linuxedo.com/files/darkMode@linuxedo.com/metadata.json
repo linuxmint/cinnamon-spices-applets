@@ -3,9 +3,5 @@
     "max-instances": "1",
     "description": "Easily switch between dark mode and light mode with one click.",
     "name": "Dark Mode",
-    "multiversion": true,
-    "cinnamon-version": [
-        "3.0",
-        "5.8"
-    ]
+    "multiversion": true
 }
