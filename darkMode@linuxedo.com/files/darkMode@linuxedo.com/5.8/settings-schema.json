@@ -72,26 +72,26 @@
         "description": "Automatically switch modes",
         "default": false
     },
-    "light_mode_start" : {
-        "type" : "timechooser",
+    "light_mode_start": {
+        "type": "timechooser",
         "dependency": "enable_auto_mode_switch=true",
-        "description" : "Light mode start time",
-        "default" : {
-          "h" : 6,
-          "m" : 0,
-          "s" : 0
+        "description": "Light mode start time",
+        "default": {
+            "h": 6,
+            "m": 0,
+            "s": 0
         }
-      },
-      "dark_mode_start" : {
-        "type" : "timechooser",
+    },
+    "dark_mode_start": {
+        "type": "timechooser",
         "dependency": "enable_auto_mode_switch=true",
-        "description" : "Dark mode start time",
-        "default" : {
-          "h" : 18,
-          "m" : 0,
-          "s" : 0
+        "description": "Dark mode start time",
+        "default": {
+            "h": 18,
+            "m": 0,
+            "s": 0
         }
-      },
+    },
     "light_gtk_theme": {
         "type": "combobox",
         "default": "none",
@@ -148,8 +148,8 @@
     "light_background_dir": {
         "type": "filechooser",
         "default": "",
-        "allow-none" : true,
-        "select-dir" : true,
+        "allow-none": true,
+        "select-dir": true,
         "dependency": "enable_light_background_switch=true",
         "description": "Desktop background location",
         "tooltip": "A picture from this folder will be randomly chosen."
@@ -162,15 +162,15 @@
     "dark_background_dir": {
         "type": "filechooser",
         "default": "",
-        "allow-none" : true,
-        "select-dir" : true,
+        "allow-none": true,
+        "select-dir": true,
         "dependency": "enable_dark_background_switch=true",
         "description": "Desktop background location",
         "tooltip": "A picture from this folder will be randomly chosen."
     },
     "postpone_auto_mode_until": {
-        "type":        "generic",
-        "default":     "-1",
+        "type": "generic",
+        "default": "-1",
         "description": "Internal use"
     }
 }
