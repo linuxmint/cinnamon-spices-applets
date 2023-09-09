@@ -254,10 +254,7 @@ MyApplet.prototype = {
             this.set_applet_icon_symbolic_path(ICON_SUN);
         }
 
-        if(this.is_cinnamon_version_supported(5.8)){
-            // This setting only affects applications which support dark mode
-            this.set_gsettings("org.x.apps.portal", "color-scheme", prefer_scheme);
-        }
+        this.set_gsettings("org.x.apps.portal", "color-scheme", prefer_scheme);
 
         if (this.is_valid_theme_name(win_border_theme)) {
             this.set_gsettings("org.cinnamon.desktop.wm.preferences", "theme", win_border_theme);
@@ -538,13 +535,6 @@ MyApplet.prototype = {
 
     is_dir: function (path) {
         return GLib.file_test(path, GLib.FileTest.IS_DIR);
-    },
-
-    is_cinnamon_version_supported: function (minVersion) {
-        let version = GLib.getenv('CINNAMON_VERSION');
-        version = version.substring(0, version.lastIndexOf("."));
-
-        return parseFloat(version) >= minVersion;
     }
 }
 
