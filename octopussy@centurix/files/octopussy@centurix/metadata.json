@@ -2,6 +2,6 @@
     "description": "An applet to manage OctoPrint.", 
     "uuid": "octopussy@centurix", 
     "name": "OctoPrint manager", 
-    "version": "0.1.0",
+    "version": "0.1.1",
     "max-instances": 32
 }
