@@ -6,7 +6,6 @@ const Lang = imports.lang;
 const PopupMenu = imports.ui.popupMenu;
 const ScreenSaver = imports.misc.screenSaver;
 const St = imports.gi.St;
-const Util = imports.misc.util;
 
 // l10n/translation support
 const UUID = "system-controls@rcalixte";
@@ -34,18 +33,14 @@ class SystemControlsApplet extends Applet.TextIconApplet {
         this._contentSection = new PopupMenu.PopupMenuSection();
         this.menu.addMenuItem(this._contentSection);
 
+        let launcher = new Gio.SubprocessLauncher({
+            flags: (Gio.SubprocessFlags.STDIN_PIPE |
+                Gio.SubprocessFlags.STDOUT_PIPE |
+                Gio.SubprocessFlags.STDERR_PIPE)
+        });
+
         let controlsBox = new St.BoxLayout({ style_class: 'controls-box', reactive: true, vertical: false });
 
-        this._controlsIcon = new St.Bin({ style_class: 'controls-icon' });
-
-        this._controlsIcon.hide();
-        controlsBox.add(this._controlsIcon,
-            {
-                x_fill: true,
-                y_fill: false,
-                x_align: St.Align.END,
-                y_align: St.Align.START
-            });
         this.controlsLabel = new St.Label(({ style_class: 'controls-label' }));
         controlsBox.add(this.controlsLabel,
             {
@@ -71,16 +66,16 @@ class SystemControlsApplet extends Applet.TextIconApplet {
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        item = new PopupMenu.PopupIconMenuItem(_("Lock Screen"), "system-lock-screen", St.IconType.SYMBOLIC);
+        item = new PopupMenu.PopupIconMenuItem(_("Lock Screen"), "system-lock-screen-symbolic", St.IconType.SYMBOLIC);
         item.connect('activate', Lang.bind(this, function () {
             let screensaver_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.screensaver" });
             let screensaver_dialog = Gio.file_new_for_path("/usr/bin/cinnamon-screensaver-command");
             if (screensaver_dialog.query_exists(null)) {
                 if (screensaver_settings.get_boolean("ask-for-away-message")) {
-                    Util.spawnCommandLine("cinnamon-screensaver-lock-dialog");
+                    launcher.spawnv(["cinnamon-screensaver-lock-dialog"]);
                 }
                 else {
-                    Util.spawnCommandLine("cinnamon-screensaver-command --lock");
+                    launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
                 }
             }
             else {
@@ -93,35 +88,35 @@ class SystemControlsApplet extends Applet.TextIconApplet {
         if (!lockdown_settings.get_boolean('disable-user-switching')) {
             if (GLib.getenv("XDG_SEAT_PATH")) {
                 // LightDM
-                item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user", St.IconType.SYMBOLIC);
+                item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', Lang.bind(this, function () {
-                    Util.spawnCommandLine("cinnamon-screensaver-command --lock");
-                    Util.spawnCommandLine("dm-tool switch-to-greeter");
+                    launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
+                    launcher.spawnv(["dm-tool", "switch-to-greeter"]);
                 }));
                 this.menu.addMenuItem(item);
             }
             else if (GLib.file_test("/usr/bin/mdmflexiserver", GLib.FileTest.EXISTS)) {
                 // MDM
-                item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user", St.IconType.SYMBOLIC);
+                item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', Lang.bind(this, function () {
-                    Util.spawnCommandLine("mdmflexiserver");
+                    launcher.spawnv(["mdmflexiserver"]);
                 }));
                 this.menu.addMenuItem(item);
             }
             else if (GLib.file_test("/usr/bin/gdmflexiserver", GLib.FileTest.EXISTS)) {
                 // GDM
-                item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user", St.IconType.SYMBOLIC);
+                item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "system-switch-user-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', Lang.bind(this, function () {
-                    Util.spawnCommandLine("cinnamon-screensaver-command --lock");
-                    Util.spawnCommandLine("gdmflexiserver");
+                    launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
+                    launcher.spawnv(["gdmflexiserver"]);
                 }));
                 this.menu.addMenuItem(item);
             }
         }
 
-        item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "system-log-out", St.IconType.SYMBOLIC);
+        item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "system-log-out-symbolic", St.IconType.SYMBOLIC);
         item.connect('activate', Lang.bind(this, function () {
-            Util.spawnCommandLine("cinnamon-session-quit --no-prompt");
+            launcher.spawnv(["cinnamon-session-quit", "--no-prompt"]);
         }));
         this.menu.addMenuItem(item);
 
@@ -129,13 +124,13 @@ class SystemControlsApplet extends Applet.TextIconApplet {
 
         item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "system-suspend", St.IconType.SYMBOLIC);
         item.connect('activate', Lang.bind(this, function () {
-            Util.spawnCommandLine("systemctl suspend");
+            launcher.spawnv(["systemctl", "suspend"]);
         }));
         this.menu.addMenuItem(item);
 
         item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "system-suspend-hibernate", St.IconType.SYMBOLIC);
         item.connect('activate', Lang.bind(this, function () {
-            Util.spawnCommandLine("systemctl hibernate");
+            launcher.spawnv(["systemctl", "hibernate"]);
         }));
         this.menu.addMenuItem(item);
 
@@ -143,13 +138,13 @@ class SystemControlsApplet extends Applet.TextIconApplet {
 
         item = new PopupMenu.PopupIconMenuItem(_("Restart"), "view-refresh", St.IconType.SYMBOLIC);
         item.connect('activate', Lang.bind(this, function () {
-            Util.spawnCommandLine("systemctl reboot");
+            launcher.spawnv(["systemctl", "reboot"]);
         }));
         this.menu.addMenuItem(item);
 
-        item = new PopupMenu.PopupIconMenuItem(_("Power Off"), "system-shutdown", St.IconType.SYMBOLIC);
+        item = new PopupMenu.PopupIconMenuItem(_("Power Off"), "system-shutdown-symbolic", St.IconType.SYMBOLIC);
         item.connect('activate', Lang.bind(this, function () {
-            Util.spawnCommandLine("systemctl poweroff");
+            launcher.spawnv(["systemctl", "poweroff"]);
         }));
         this.menu.addMenuItem(item);
 
