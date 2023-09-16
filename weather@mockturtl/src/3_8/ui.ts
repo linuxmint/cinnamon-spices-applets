@@ -110,6 +110,7 @@ export class UI {
 	public Rebuild(config: Config): void {
 		this.ShowLoadingUi();
 		this.App.config.textColorStyle = this.GetTextColorStyle();
+		this.App.config.ForegroundColor = this.ForegroundColor();
 		this.CurrentWeather.Rebuild(config, this.App.config.textColorStyle);
 		this.HourlyWeather.Rebuild(config, this.App.config.textColorStyle);
 		this.FutureWeather.Rebuild(config, this.App.config.textColorStyle);
@@ -197,17 +198,16 @@ export class UI {
 	/**
 	 * @returns color in hex styling
 	 */
-	private ForegroundColor(): string {
+	private ForegroundColor(): imports.gi.Clutter.Color {
 		// Get hex color without alpha, because it is not supported in css
-		const hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
-		return hex;
+		return this.menu.actor.get_theme_node().get_foreground_color();
 	}
 
 	private GetTextColorStyle(): string {
 		let hexColor: string | null = null;
 		if (this.lightTheme) {
-			// Darken default foreground color
-			hexColor = ShadeHexColor(this.ForegroundColor(), -0.40);
+			// Darken default foreground color, Get hex color without alpha, because it is not supported in css
+			hexColor = ShadeHexColor(this.ForegroundColor().to_string().substring(0, 7), -0.40);
 		}
 		return "color: " + hexColor;
 	}
@@ -228,15 +228,13 @@ export class UI {
 		this.HourlySeparator.Hide();
 
 		// Add everything to the PopupMenu
-		const mainBox = new BoxLayout({ vertical: true })
-		mainBox.add_actor(this.CurrentWeather.actor)
-		mainBox.add_actor(this.HourlySeparator.Actor);
-		mainBox.add_actor(this.HourlyWeather.actor);
-		mainBox.add_actor(this.ForecastSeparator.Actor);
-		mainBox.add_actor(this.FutureWeather.actor);
-		mainBox.add_actor(this.BarSeparator.Actor);
-		mainBox.add_actor(this.Bar.Actor);
-		this.menu.addActor(mainBox);
+		this.menu.addActor(this.CurrentWeather.actor)
+		this.menu.addActor(this.HourlySeparator.Actor);
+		this.menu.addActor(this.HourlyWeather.actor);
+		this.menu.addActor(this.ForecastSeparator.Actor);
+		this.menu.addActor(this.FutureWeather.actor);
+		this.menu.addActor(this.BarSeparator.Actor);
+		this.menu.addActor(this.Bar.Actor);
 	}
 
 	/** Destroys UI first then shows initial UI */
@@ -244,7 +242,7 @@ export class UI {
 		this.CurrentWeather.Destroy();
 		this.FutureWeather.Destroy();
 		this.Bar.Destroy()
-		this.CurrentWeather.actor.set_child(new Label({
+		this.CurrentWeather.actor.add_actor(new Label({
 			text: _('Loading current weather ...')
 		}))
 		this.FutureWeather.actor.set_child(new Label({

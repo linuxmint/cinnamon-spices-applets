@@ -78,16 +78,9 @@ The **Sound 150%** applet is designed to allow translations of some messages (in
 
 The installation of the available languages is done automatically.
 
-| Language | Code | Authors |
-|---:|:---:|:---|
-|Danish|da|[Alan01](https://github.com/Alan01)|
-|Spanish|es|[claudiux](https://github.com/claudiux)|
-|French|fr|[claudiux](https://github.com/claudiux)|
-|Italian|it|[claudiux](https://github.com/claudiux), [Dragone2](https://github.com/Dragone2)|
-|Russian|ru|@sem5959|
-|Swedish|sv|[eson57](https://github.com/eson57)|
+[Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/sound150%40claudiux.md#)
 
-Many thanks to all of these Authors!
+Many thanks to all of the translators!
 
 Any new translation is welcome.
 

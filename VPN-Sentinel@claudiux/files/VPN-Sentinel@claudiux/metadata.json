@@ -2,7 +2,7 @@
   "uuid": "VPN-Sentinel@claudiux",
   "max-instances": "1",
   "name": "VPN Sentinel",
-  "version": "2.0.0",
+  "version": "2.1.1",
   "hide-configuration": false,
   "description": "VPN Sentinel is a powerful applet that monitors the VPN (or Wireguard) link, displays its status, can automatically connect to the last used VPN, reconnect the VPN link in case of unexpected disconnection, and start or stop certain Internet applications depending on the VPN status."
 }

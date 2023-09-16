@@ -1,0 +1,30 @@
+{
+    "section1": {
+        "type": "section",
+        "description": "Keyboard Shortcuts"
+    },
+    "previousProfileKey": {
+        "type": "keybinding",
+        "description": "Previous profile",
+        "default": "",
+        "tooltip": "Set keybinding(s) to switch to previous power profile."
+    },
+    "nextProfileKey": {
+        "type": "keybinding",
+        "description": "Next profile",
+        "default": "",
+        "tooltip": "Set keybinding(s) to switch to next power profile."
+    },
+    "cycleProfiles": {
+        "type": "switch",
+        "default": false,
+        "description": "Cycle through profiles when using keyboard shortcuts",
+        "tooltip": "If enabled, if the current profile is 'Power Saver' and the 'Previous profile' keyboard shortcut is used, the next profile would be 'Performance' (or 'Balanced' on some systems).\n\nIf disabled, if the current profile is 'Power Saver' and the 'Previous profile' keyboard shortcut is used, the profile would not change."
+    },
+    "showOSD": {
+        "type": "switch",
+        "default": true,
+        "description": "On-screen display for keyboard shortcuts",
+        "tooltip": "Show on-screen display of the new profile when using the keyboard shortcuts"
+    }
+}

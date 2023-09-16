@@ -1,0 +1,43 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2021 joka42
+# This file is distributed under the same license as the PACKAGE package.
+# joka42 jas_nombre@web.de, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-13 14:24+0100\n"
+"PO-Revision-Date: 2023-05-16 20:25+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:24
+msgid "Scale User Interface with one click"
+msgstr "Fixez le facteur de résolution d'un seul clic"
+
+#: applet.js:34
+msgid "Scale 200%"
+msgstr "Facteur 200%"
+
+#: applet.js:464
+msgid "Scale 125%"
+msgstr "Facteur 125%"
+
+#: applet.js:50
+msgid "Reset 100%"
+msgstr "Réinitialiser à 100%"
+
+#. metadata.json->name
+msgid "UI Scaler"
+msgstr "Changeur de résolution"
+
+#. metadata.json->description
+msgid "Switch resolution on-the-fly with HiDPI support"
+msgstr "Changez de résolution à la volée avec la prise en charge HiDPI"

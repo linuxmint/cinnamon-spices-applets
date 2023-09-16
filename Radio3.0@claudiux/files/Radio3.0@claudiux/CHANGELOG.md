@@ -1,3 +1,20 @@
+### v1.5.0~20230722
+  * New icon. Author: @Hilyxx
+
+### v1.4.2~20230718
+  * Add mpv-mpris to dependencies.
+### v1.4.1~20230613
+  * Minor bugfix for Cinnamon 5.8.
+
+### v1.4.0~20230526
+  * Now able to display the station logo, if it exists. The user can choose to display it or not, in the contextual menu.
+  * Some bugfixes.
+
+### v1.3.0~20230516
+  * Now compatible with Soup 3.
+  * Fixes a bug in notifications management.
+  * Fixes a bug in OSD display.
+
 ### v1.2.3~20230429
   * Update lib/checkDependencies.js (bugfix)
 

@@ -358,6 +358,12 @@ class MyApplet extends Applet.TextIconApplet {
                     this.recentManager.purge_items();
                 }));
 
+                this.openRecent = new IconMenuItem(_("Recent"), "folder-recent");
+                recentPane.addMenuItem(this.openRecent);
+                this.openRecent.connect("activate", () => {
+                    Util.spawnCommandLineAsync("xdg-open recent:///");
+                });
+
                 this.buildRecentDocumentsSection();
             }
         } catch(e) {

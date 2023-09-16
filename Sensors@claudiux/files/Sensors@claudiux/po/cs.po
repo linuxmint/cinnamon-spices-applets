@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Sensors@claudiux.pot Czech 2.0.1\n"
+"Project-Id-Version: Sensors@claudiux.pot Czech 3.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-28 00:20+0100\n"
-"PO-Revision-Date: 2023-01-09 19:37+0100\n"
+"POT-Creation-Date: 2023-06-16 17:17+0200\n"
+"PO-Revision-Date: 2023-07-16 17:06+0200\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -19,102 +19,102 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Sledování senzorů"
 
-#: applet.js:389 applet.js:440
+#: applet.js:403 applet.js:455
 msgid "high:"
 msgstr "vysoká:"
 
-#: applet.js:389 applet.js:391 applet.js:440 applet.js:442 applet.js:475
+#: applet.js:403 applet.js:405 applet.js:455 applet.js:457 applet.js:495
 msgid "n/a"
 msgstr "n/a"
 
-#: applet.js:391 applet.js:442
+#: applet.js:405 applet.js:457
 msgid "crit:"
 msgstr "krit:"
 
-#: applet.js:475
+#: applet.js:495 applet.js:538
 msgid "min:"
 msgstr "min:"
 
-#: applet.js:506
+#: applet.js:540
 msgid "max:"
 msgstr "max:"
 
-#: applet.js:534
+#: applet.js:568
 msgid "No intrusion detected"
 msgstr "Narušení nedetekováno"
 
-#: applet.js:534
+#: applet.js:568
 msgid "INTRUSION DETECTED!"
 msgstr "DETEKOVÁNO NARUŠENÍ!"
 
-#: applet.js:554
+#: applet.js:588
 msgid "Must be configured!"
 msgstr "Musí být nastaveno!"
 
-#: applet.js:811
+#: applet.js:863
 msgid "Settings"
 msgstr "Předvolby"
 
-#: applet.js:811
+#: applet.js:863
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#: applet.js:818
+#: applet.js:870
 msgid "⚙ General"
 msgstr "⚙ Obecné"
 
-#: applet.js:828
+#: applet.js:880
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Teplotní senzory"
 
-#: applet.js:838
+#: applet.js:890
 msgid "🤂 Fan sensors"
 msgstr "🤂 Senzory větráků"
 
-#: applet.js:848
+#: applet.js:900
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Senzory napětí"
 
-#: applet.js:858
+#: applet.js:910
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Senzory narušení"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:869
+#: applet.js:921
 msgid "Run xsensors"
 msgstr "Spustit xsensors"
 
-#: applet.js:880
+#: applet.js:932
 msgid "Reload this applet"
 msgstr "Znovunačíst tento applet"
 
-#: applet.js:1168
+#: applet.js:1224
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Opravdu odstranit '%s'?"
 
-#: lib/checkDependencies.js:281
+#: lib/checkDependencies.js:303
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Applet %s je plně funkční."
 
-#: lib/checkDependencies.js:282
+#: lib/checkDependencies.js:304
 msgid "All dependencies are installed"
 msgstr "Všechny závislosti jsou nainstalované"
 
-#: lib/checkDependencies.js:307
+#: lib/checkDependencies.js:332
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 "Zdá se, že chybí některé z programů vyžadovaných pro plnou funkčnost appletu."
 
-#: lib/checkDependencies.js:308
+#: lib/checkDependencies.js:333
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "V právě otevřeném okně terminálu prosím proveďte následující příkazy:"
 
-#: lib/checkDependencies.js:309
+#: lib/checkDependencies.js:334
 msgid "Some dependencies are not installed!"
 msgstr "Některé závislosti nejsou nainstalované!"
 
@@ -212,9 +212,9 @@ msgstr "Hodnoty senzorů"
 msgid "Remove from panels certain applets that also use sensors"
 msgstr "Odstraňte z panelu jiné applety, rovněž sledující senzory počítače"
 
-#. settings-schema.json->section_tempHddtemp->title
-msgid "hddtemp is for now only usable by root"
-msgstr "hddtemp je aktuálně použitelný jen rootem"
+#. settings-schema.json->section_tempDisktemp->title
+msgid "For the time being, disk temperature can only be read by root."
+msgstr "V současné době mohou být hodnoty teplot disků čteny pouze rootem."
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -228,8 +228,8 @@ msgid "Temperature sensors"
 msgstr "Teplotní senzory"
 
 #. settings-schema.json->section_tempDisks->title
-msgid "Temperature scripts"
-msgstr "Teplotní skripty"
+msgid "Disk temperature sensors"
+msgstr "Teplotní senzory disků"
 
 #. settings-schema.json->section_fanSensors->title
 msgid "Fan sensors"
@@ -349,6 +349,16 @@ msgstr "Světle šedé"
 msgid "Text Color"
 msgstr "Barva textu"
 
+#. settings-schema.json->separator->description
+msgid "Separator"
+msgstr "Oddělovač"
+
+#. settings-schema.json->separator->tooltip
+msgid ""
+"The string used to separate values in horizontal orientation. Default is '│'."
+msgstr ""
+"Znak použitý pro oddělení hodnot ve vertikálním uspořádání. Výchozí je  '│'."
+
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
 msgstr "Bez okrajové linky"
@@ -393,9 +403,9 @@ msgstr "Zobrazovat v menu akci: Restartovat tento applet"
 msgid "Whether or not to display in menu the action: Restart this applet."
 msgstr "Možnost zobrazit položky 'Restartovat tento applet' v jeho menu."
 
-#. settings-schema.json->make_hddtemp_usable_by_user->description
-msgid "Make hddtemp usable by user"
-msgstr "Udělat hddtemp použitelný uživatelem"
+#. settings-schema.json->make_disktemp_readable_by_user->description
+msgid "Make disk temperature user-readable"
+msgstr "Učinit hodnoty teploty disků čitelné uživatelem"
 
 #. settings-schema.json->show_temp->description
 #. settings-schema.json->show_fan->description
@@ -525,25 +535,54 @@ msgstr ""
 "v bublině"
 
 #. settings-schema.json->temp_sensors->columns->title
-#. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
-#. settings-schema.json->volt_sensors->columns->title
-#. settings-schema.json->intrusion_sensors->columns->title
 msgid "Shown name"
 msgstr ""
 "Zobrazované\n"
 "jméno"
 
-#. settings-schema.json->temp_sensors->tooltip
-#. settings-schema.json->fan_sensors->tooltip
-#. settings-schema.json->volt_sensors->tooltip
-#. settings-schema.json->intrusion_sensors->tooltip
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
 msgid ""
-"Double-click on a line to change Shown name.\n"
-"To reset a Shown name, copy/paste the Sensor name."
+"High\n"
+"(°C)"
+msgstr "Vysoké °C"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid ""
+"Critical\n"
+"(°C)"
 msgstr ""
-"Dvoukliem na řádek je možné změnit zobrazovaný název jednotky.\n"
-"K obnovení původního názvu jej zkopírujte z položky Název senzoru."
+"Kritické \n"
+"(°C)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+msgid "Formula"
+msgstr "Vzorec"
+
+#. settings-schema.json->temp_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'High', 'Critical' or "
+"'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'High' and 'Critical' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Dvojklik na řádek pro provedení změn v 'Vysoká', 'Kritická' a 'Vzorec'.\n"
+"K resetování zobrazeného jména překopírovat zpět 'Jméno senzoru'.\n"
+"'Vysoká' a 'Kritická' (volitelné) musí být platné hodnoty.\n"
+"'Vzorec' (volitelný):\n"
+"Použití $ zastupuje hodnotu vracenou senzorem.\n"
+"Použít lze základní 4 matematické operace (+-*/) a závorky. \n"
+"\n"
+"Příklad?:  $*1.1+0.5"
 
 #. settings-schema.json->btn_renew_disks_list->description
 msgid "Renew the list of known disks"
@@ -554,12 +593,14 @@ msgid "Disk name"
 msgstr "Označení disku"
 
 #. settings-schema.json->temp_disks->columns->title
-msgid "High °C"
-msgstr "Nejvyšší °C"
-
-#. settings-schema.json->temp_disks->columns->title
-msgid "Critical °C"
-msgstr "Kritické °C"
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid ""
+"Shown\n"
+"name"
+msgstr ""
+"Zobrazené\n"
+"jméno"
 
 #. settings-schema.json->temp_disks->tooltip
 msgid ""
@@ -574,6 +615,33 @@ msgstr ""
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
 msgstr "Zkratka pro \"otáčky za minutu\""
+
+#. settings-schema.json->fan_sensors->columns->title
+msgid ""
+"Min\n"
+"(rpm)"
+msgstr ""
+"Min\n"
+"(ot/min)"
+
+#. settings-schema.json->fan_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' (optional) must be valid number.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Dvojklik na řádek pro provedení změn v 'Zobrazené jméno', 'Min' a 'vzorec'.\n"
+"K resetování zobrazeného jména překopírovat zpět 'Jméno senzoru'.\n"
+"'Min' (volitelné) musí být platná hodnota.\n"
+"'Vzorec' (volitelný):\n"
+"Použití $ zastupuje hodnotu vracenou senzorem.\n"
+"Použít lze základní 4 matematické operace (+-*/) a závorky. \n"
+"\n"
+"Příklad?:  $*1.1+0.5"
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -591,6 +659,41 @@ msgstr "Pouze V"
 msgid "mV only"
 msgstr "Pouze mV"
 
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Min\n"
+"(V)"
+msgstr ""
+"Min\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Max\n"
+"(V)"
+msgstr ""
+"Max\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min', 'Max' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' and 'Max' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Dvojklik na řádek pro provedení změn v 'Zobrazené jméno', 'Min' a 'Vzorec'.\n"
+"K resetování zobrazeného jména překopírovat zpět 'Jméno senzoru'.\n"
+"'Min' a 'Max' (volitelné) musí být platné hodnoty.\n"
+"'Vzorec' (volitelný):\n"
+"Použití $ zastupuje hodnotu vracenou senzorem.\n"
+"Použít lze základní 4 matematické operace (+-*/) a závorky. \n"
+"\n"
+"Příklad?:  $*1.1+0.5"
+
 #. settings-schema.json->show_intrusion_name->tooltip
 msgid ""
 " Whether or not to display into this applet label the 'Shown name' of the "
@@ -603,6 +706,14 @@ msgstr ""
 msgid "Show in the panel only when an intrusion was detected"
 msgstr ""
 "Zobrazit na panelu upozornění na 'narušení' pouze v případě jeho detekování"
+
+#. settings-schema.json->intrusion_sensors->tooltip
+msgid ""
+"Double-click on a line to change Shown name.\n"
+"To reset a Shown name, copy/paste the Sensor name."
+msgstr ""
+"Dvoukliem na řádek je možné změnit zobrazovaný název jednotky.\n"
+"K obnovení původního názvu jej zkopírujte z položky Název senzoru."
 
 #. settings-schema.json->report->description
 msgid "Example of sensor values from this computer"
@@ -619,3 +730,12 @@ msgstr "Obnovit výstup"
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Odstranit z panelu applet temperature@fevimu"
+
+#~ msgid "hddtemp is for now only usable by root"
+#~ msgstr "hddtemp je aktuálně použitelný jen rootem"
+
+#~ msgid "Temperature scripts"
+#~ msgstr "Teplotní skripty"
+
+#~ msgid "Make hddtemp usable by user"
+#~ msgstr "Udělat hddtemp použitelný uživatelem"

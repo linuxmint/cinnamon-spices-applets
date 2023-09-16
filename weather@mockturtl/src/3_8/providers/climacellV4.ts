@@ -3,7 +3,7 @@ import { Services } from "../config";
 import { ErrorResponse, HttpError, HTTPParams } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
-import { CelsiusToKelvin, _ } from "../utils";
+import { CelsiusToKelvin, IsNight, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 
 export class ClimacellV4 extends BaseProvider {
@@ -68,13 +68,17 @@ export class ClimacellV4 extends BaseProvider {
 		if (!current || !daily || !hourly || !daily[0]?.values)
 			return null;
 
+		const sunrise = DateTime.fromISO(<string>daily[0].values.sunriseTime, { zone: loc.timeZone });
+		const sunset = DateTime.fromISO(<string>daily[0].values.sunsetTime, { zone: loc.timeZone });
+		const now = DateTime.fromISO(current.startTime, { zone: loc.timeZone });
+
 		const result: WeatherData = {
 			coord: {
 				lat: loc.lat,
 				lon: loc.lon
 			},
 			date: DateTime.fromISO(current.startTime, { zone: loc.timeZone }),
-			condition: this.ResolveCondition(current.values.weatherCode),
+			condition: this.ResolveCondition(current.values.weatherCode, IsNight({sunrise, sunset}, now)),
 			humidity: current.values.humidity,
 			pressure: current.values.pressureSurfaceLevel,
 			temperature: CelsiusToKelvin(current.values.temperature),
@@ -84,8 +88,8 @@ export class ClimacellV4 extends BaseProvider {
 			},
 			dewPoint: CelsiusToKelvin(current.values.dewPoint),
 			// Cast to string, we always get sunrise/sunset from daily
-			sunrise: DateTime.fromISO(<string>daily[0].values.sunriseTime, { zone: loc.timeZone }),
-			sunset: DateTime.fromISO(<string>daily[0].values.sunsetTime, { zone: loc.timeZone }),
+			sunrise,
+			sunset,
 			location: {
 				url: "https://www.tomorrow.io/weather"
 			},
@@ -101,24 +105,26 @@ export class ClimacellV4 extends BaseProvider {
 		const days: ForecastData[] = [];
 
 		for (const element of daily) {
+			const date = DateTime.fromISO(element.startTime, { zone: loc.timeZone });
 			days.push({
-				condition: this.ResolveCondition(element.values.weatherCode),
-				date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
+				condition: this.ResolveCondition(element.values.weatherCode, IsNight({sunrise, sunset}, date)),
+				date,
 				temp_max: CelsiusToKelvin(element.values.temperatureMax),
 				temp_min: CelsiusToKelvin(element.values.temperatureMin)
 			});
 		}
 
 		for (const element of hourly) {
-			const hour: HourlyForecastData = {
-				condition: this.ResolveCondition(element.values.weatherCode),
-				date: DateTime.fromISO(element.startTime, { zone: loc.timeZone }),
-				temp: CelsiusToKelvin(element.values.temperature)
-			};
-
+			let date = DateTime.fromISO(element.startTime, { zone: loc.timeZone });
 			// bit sneaky, but setting the hourly forecast startTime to beginning of the hour
 			// so it is displayed properly
-			hour.date = hour.date.set({ minute: 0, second: 0, millisecond: 0 });
+			date = date.set({ minute: 0, second: 0, millisecond: 0 });
+			
+			const hour: HourlyForecastData = {
+				condition: this.ResolveCondition(element.values.weatherCode, IsNight({sunrise, sunset}, date)),
+				date,
+				temp: CelsiusToKelvin(element.values.temperature)
+			};
 
 			if (element.values.precipitationProbability > 0 && element.values.precipitationIntensity > 0) {
 				hour.precipitation = {

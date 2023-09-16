@@ -278,7 +278,8 @@
       "keys": [
         "color-on",
         "color-off",
-        "color-recording"
+        "color-recording",
+        "show-favicon"
       ]
     },
     "sectionNetworkQuality": {
@@ -468,6 +469,12 @@
       {
         "id": "tags",
         "title": "Tags",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "favicon",
+        "title": "Favicon",
         "type": "string",
         "default": ""
       }
@@ -722,6 +729,12 @@
         "id": "homepage",
         "title": "Home page",
         "type": "string"
+      },
+      {
+        "id": "favicon",
+        "title": "Favicon",
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
@@ -961,6 +974,12 @@
     "type": "colorchooser",
     "default": "rgb(204,0,0)",
     "description": "Color of the symbolic icon while recording"
+  },
+  "show-favicon": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the logo of the radio station listened to",
+    "tooltip": "Replace this applet icon with the radio station logo, if it exists."
   },
   "network-quality": {
     "type": "combobox",

@@ -147,7 +147,14 @@ class EditDialog():
                         if 'Exec' in data: self.command_entry.set_text(data['Exec'])
 
             else:    
-                self.command_entry.set_text(file)
+                if self.valid_exec(file):
+                    self.command_entry.set_text(file)
+                else:
+                    mimetype, val = Gio.content_type_guess(filename=file, data=None)
+                    icon = Gio.content_type_get_generic_icon_name(mimetype)
+                    self.icon_entry.set_icon(icon)
+                    
+                    self.command_entry.set_text(f'xdg-open {file}')
         else:
             filechooser.destroy()
 

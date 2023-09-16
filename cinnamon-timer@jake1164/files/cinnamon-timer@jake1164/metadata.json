@@ -1,6 +1,6 @@
 {
     "uuid": "cinnamon-timer@jake1164",
-    "version": "1.3.0.0",
+    "version": "1.3.1.0",
     "name": "Timer with notifications",
     "description": "A timer app with visual and auditory notifications.",
     "website": "https://cinnamon-spices.linuxmint.com/applets/view/302",

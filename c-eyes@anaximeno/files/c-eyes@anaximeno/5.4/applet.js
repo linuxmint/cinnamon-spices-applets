@@ -20,6 +20,7 @@
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const Applet = imports.ui.applet;
+const Main = imports.ui.main;
 const Gettext = imports.gettext;
 
 const SignalManager = imports.misc.signalManager;
@@ -217,6 +218,9 @@ class Eye extends Applet.Applet {
 
 		this.signals = new SignalManager.SignalManager(null);
 		this.signals.connect(global.screen, 'in-fullscreen-changed', this.on_fullscreen_changed, this);
+
+		Atspi.init();
+
 		this._mouseListener = Atspi.EventListener.new(this._mouse_click_event.bind(this));
 
 		this._file_mem_cache = {};
@@ -278,14 +282,22 @@ class Eye extends Applet.Applet {
 
 	on_fullscreen_changed() {
 		const monitor = global.screen.get_current_monitor();
-		const isInFullscreen = global.screen.get_monitor_in_fullscreen(monitor);
+		const monitorIsInFullscreen = global.screen.get_monitor_in_fullscreen(monitor);
+		const panelsInMonitor = Main.panelManager.getPanelsInMonitor(monitor);
+
+		let panelIsInCurrentMonitor = false;
+		if (panelsInMonitor !== null && panelsInMonitor !== undefined) {
+			panelIsInCurrentMonitor = panelsInMonitor.includes(this.panel);
+		}
+
+		const shouldHideEye = monitorIsInFullscreen && panelIsInCurrentMonitor;
 
 		if (this.deactivate_on_fullscreen) {
-			this.set_active(!isInFullscreen);
+			this.set_active(!shouldHideEye);
 		}
 
 		if (this.deactivate_effects_on_fullscreen) {
-			this.set_mouse_circle_active(!isInFullscreen && this.mouse_click_show);
+			this.set_mouse_circle_active(!shouldHideEye && this.mouse_click_show);
 		}
 	}
 
@@ -326,8 +338,8 @@ class Eye extends Applet.Applet {
 	}
 
 	set_eye_property_update() {
-		this.area.set_width(EYE_AREA_WIDTH + 2 * this.eye_margin);
-		this.area.set_height(EYE_AREA_HEIGHT);
+		this.area.set_width((EYE_AREA_WIDTH + 2 * this.eye_margin) * global.ui_scale);
+		this.area.set_height(EYE_AREA_HEIGHT * global.ui_scale);
 		this.area.queue_repaint();
 	}
 
@@ -345,13 +357,9 @@ class Eye extends Applet.Applet {
 	}
 
 	update_tooltip() {
+		let tip = this.eye_activated ? _("click to deactivate the eye") : _("click to activate the eye");
 		let complement = this.mouse_click_enable ? _("effects enabled") : _("effects disabled");
-
-		if (this.eye_activated) {
-			this.set_applet_tooltip(_("Click to deactivate") + ` (${complement})`);
-		} else {
-			this.set_applet_tooltip(_("Click to activate") + ` (${complement})`);
-		}
+		this.set_applet_tooltip(`<b>${_('TIP')}:</b> ` + tip + '\n - ' + complement + ' -', true);
 	}
 
 	_mouse_circle_create_data_icon(name, color, checkCache) {
@@ -376,21 +384,20 @@ class Eye extends Applet.Applet {
 	}
 
 	_eye_area_pos() {
-		let area_x = 0;
-		let area_y = 0;
 		let obj = this.area;
 
+		let area_x = 0;
+		let area_y = 0;
+
 		do {
-			let [tx, ty] = [0, 0];
+			let pos = obj.get_position();
 
-			try {
-				[tx, ty] = obj.get_position();
-			} catch (e) {
-				//
+			if (pos) {
+				let [tx, ty] = pos;
+
+				area_x += tx;
+				area_y += ty;
 			}
-
-			area_x += tx;
-			area_y += ty;
 
 			obj = obj.get_parent();
 		} while (obj);
@@ -477,15 +484,15 @@ class Eye extends Applet.Applet {
 		} else if (this._last_mouse_x == undefined || this._last_mouse_y == undefined) {
 			it_should_redraw = true;
 		} else {
-			const dist_from_origin = (x, y) => Math.sqrt(x * x + y * y);
+			const dist = (x, y) => Math.sqrt(x * x + y * y);
 
-			const [ox, oy] = this._eye_area_pos();
-			const [last_x, last_y] = [this._last_mouse_x - ox, this._last_mouse_y - oy];
-			const [current_x, current_y] = [mouse_x - ox, mouse_y - oy];
+			let [ox, oy] = this._eye_area_pos();
+			let [last_x, last_y] = [this._last_mouse_x - ox, this._last_mouse_y - oy];
+			let [current_x, current_y] = [mouse_x - ox, mouse_y - oy];
 
-			const dist_prod = dist_from_origin(last_x, last_y) * dist_from_origin(current_x, current_y);
-			const dot_prod = current_x * last_x + current_y * last_y;
-			const angle = dist_prod > 0 ? Math.acos(dot_prod / dist_prod) : 0;
+			let dist_prod = dist(last_x, last_y) * dist(current_x, current_y);
+			let dot_prod = current_x * last_x + current_y * last_y;
+			let angle = dist_prod > 0 ? Math.acos(dot_prod / dist_prod) : 0;
 
 			it_should_redraw = angle > EYE_REDRAW_ANGLE_THRESHOLD;
 		}

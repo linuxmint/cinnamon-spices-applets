@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-28 15:11+0200\n"
-"PO-Revision-Date: 2021-12-22 01:06-0300\n"
+"POT-Creation-Date: 2023-04-28 16:14+0200\n"
+"PO-Revision-Date: 2023-05-24 00:05-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: ../3.0/prefsui.glade.h:1 ../3.2/prefsui.glade.h:1 ../3.4/prefsui.glade.h:1
 #: ../4.0/prefsui.glade.h:1
@@ -68,7 +68,7 @@ msgstr "Colores"
 #: ../3.4/prefsui.glade.h:10 ../4.0/prefsui.glade.h:16
 #: ../3.0/DataProviders.js:107 ../3.0/prefs.js:183 ../3.2/DataProviders.js:107
 #: ../3.2/prefs.js:187 ../3.4/DataProviders.js:58 ../3.4/prefs.js:195
-#: ../4.0/DataProviders.js:54 ../4.0/prefs.js:303
+#: ../4.0/DataProviders.js:55 ../4.0/prefs.js:303
 msgid "CPU"
 msgstr "CPU"
 
@@ -95,7 +95,7 @@ msgstr "Libre"
 #: ../3.0/prefsui.glade.h:15 ../3.2/prefsui.glade.h:16
 #: ../3.4/prefsui.glade.h:15 ../4.0/prefsui.glade.h:21
 #: ../3.0/DataProviders.js:200 ../3.2/DataProviders.js:200
-#: ../3.4/DataProviders.js:195 ../4.0/DataProviders.js:191
+#: ../3.4/DataProviders.js:195 ../4.0/DataProviders.js:194
 msgid "Swap"
 msgstr "Swap"
 
@@ -153,7 +153,8 @@ msgid ""
 "\tthe next largest becomes the new value by which the readings\n"
 "\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
 "\tHowever, it also means that if there is a large reading small readings\n"
-"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small "
+"readings\n"
 "\tthen slightly larger readings may appear larger than they should.\n"
 "\tIf not enabled the largest value used will be the largest reading since\n"
 "\tcinnamon was started.\n"
@@ -170,12 +171,12 @@ msgstr ""
 "más grande se convertirá \n"
 "\ten el nuevo valor por el cual se escalarán las lecturas. Esto permite que "
 "el gráfico se \"amplíe\" \n"
-"\tpara mostrar los detalles del mismo. Sin embargo, también significa que si "
-"hay una lectura grande, \n"
+"\tpara mostrar los detalles del mismo. Sin embargo, también significa que "
+"si hay una lectura grande, \n"
 "\tlas lecturas pequeñas pueden ser indistinguibles de 0. Y si sólo hay "
 "lecturas pequeñas entonces,\n"
-"\tlas lecturas ligeramente más grandes pueden aparecer más grandes de lo que "
-"deberían.\n"
+"\tlas lecturas ligeramente más grandes pueden aparecer más grandes de lo "
+"que deberían.\n"
 "\tSi no se activa, el valor más grande utilizado será la lectura más grande "
 "desde que Cinnamon inició.\n"
 "\n"
@@ -191,27 +192,26 @@ msgstr "Color de etiqueta"
 
 #: ../4.0/prefsui.glade.h:4
 msgid "Curves thickness"
-msgstr ""
+msgstr "Grosor de las curvas"
 
 #: ../4.0/prefsui.glade.h:10
 msgid "Color by activity level"
-msgstr ""
+msgstr "Color por nivel de actividad"
 
 #: ../4.0/prefsui.glade.h:11
 msgid "Use automatic colors"
-msgstr ""
+msgstr "Utilizar colores automáticos"
 
 #: ../4.0/prefsui.glade.h:13
 msgid "by CPU:"
-msgstr ""
+msgstr "por CPU:"
 
 #: ../4.0/prefsui.glade.h:15
 #, no-c-format
 msgid "by activity level (in %):"
-msgstr ""
+msgstr "por nivel de actividad (en %):"
 
 #: ../4.0/prefsui.glade.h:31
-#, fuzzy
 msgid ""
 "Auto Scaling:\n"
 "    This will scale the line graph by the largest reading within the\n"
@@ -222,7 +222,8 @@ msgid ""
 "    may become indistinguishable from 0. And if there are only small "
 "readings\n"
 "    then slightly larger readings may appear larger than they should.\n"
-"    If not enabled the largest value used will be the largest reading since\n"
+"    If not enabled the largest value used will be the largest reading "
+"since\n"
 "    cinnamon was started.\n"
 "\n"
 "Logarithmic Scaling:\n"
@@ -231,88 +232,88 @@ msgid ""
 "    large values so that they dont dominate the smaller readings."
 msgstr ""
 "Escala automática:\n"
-"\tEsta opción escalará el gráfico de líneas en base a la lectura más grande "
-"dentro del área visualizada.\n"
-"\tUna vez que la lectura más grande ya no se muestre, la siguiente lectura "
-"más grande se convertirá \n"
-"\ten el nuevo valor por el cual se escalarán las lecturas. Esto permite que "
-"el gráfico se \"amplíe\" \n"
-"\tpara mostrar los detalles del mismo. Sin embargo, también significa que si "
-"hay una lectura grande, \n"
-"\tlas lecturas pequeñas pueden ser indistinguibles de 0. Y si sólo hay "
-"lecturas pequeñas entonces,\n"
-"\tlas lecturas ligeramente más grandes pueden aparecer más grandes de lo que "
-"deberían.\n"
-"\tSi no se activa, el valor más grande utilizado será la lectura más grande "
-"desde que Cinnamon inició.\n"
+"    Esto escalará el gráfico lineal por la lectura más grande dentro del\n"
+"    del área visualizada. Una vez que la lectura más grande ya no se "
+"muestre\n"
+"    la siguiente más grande se convertirá en el nuevo valor por el cual \n"
+"    se escalarán las lecturas. Esto permite \"ampliar\" el gráfico para "
+"mostrar los detalles.\n"
+"    Sin embargo, también significa que si hay una lectura grande, las "
+"lecturas pequeñas\n"
+"    pueden llegar a ser indistinguibles de 0. Y si sólo hay lecturas "
+"pequeñas\n"
+"    entonces las lecturas ligeramente más grandes pueden aparecer más "
+"grandes de lo que deberían.\n"
+"    Si no se activa, el valor más grande utilizado será la lectura más "
+"grande desde que se inició\n"
+"    cinnamon.\n"
 "\n"
 "Escala logarítmica:\n"
-"\tEsta opción transformará las lecturas para que se muestren usando una "
-"escala logarítmica.\n"
-"\tSi no está familiarizado, básicamente reduce los valores grandes para que "
-"no dominen sobre lecturas más pequeñas."
+"    Transforma las lecturas para que se muestren utilizando una\n"
+"    escala logarítmica. Si no está familiarizado básicamente, reduce los\n"
+"    valores grandes para que no dominen las lecturas más pequeñas."
 
 #: ../3.0/DataProviders.js:113 ../3.2/DataProviders.js:113
-#: ../3.4/DataProviders.js:126 ../4.0/DataProviders.js:122
+#: ../3.4/DataProviders.js:126 ../4.0/DataProviders.js:123
 msgid "------------- CPU ------------"
 msgstr "------------- CPU ------------"
 
 #: ../3.0/DataProviders.js:117 ../3.2/DataProviders.js:117
-#: ../3.4/DataProviders.js:129 ../4.0/DataProviders.js:125
+#: ../3.4/DataProviders.js:129 ../4.0/DataProviders.js:126
 msgid "Core"
 msgstr "Núcleo"
 
 #: ../3.0/DataProviders.js:157 ../3.2/DataProviders.js:157
-#: ../3.4/DataProviders.js:141 ../4.0/DataProviders.js:137
+#: ../3.4/DataProviders.js:141 ../4.0/DataProviders.js:138
 msgid "MEM"
 msgstr "MEM"
 
 #: ../3.0/DataProviders.js:163 ../3.2/DataProviders.js:163
-#: ../3.4/DataProviders.js:161 ../4.0/DataProviders.js:157
+#: ../3.4/DataProviders.js:161 ../4.0/DataProviders.js:158
 msgid "----------- Memory -----------"
-msgstr "----------- Memoria -----------"
+msgstr "----------- Memoria ----------"
 
 #: ../3.0/DataProviders.js:164 ../3.2/DataProviders.js:164
 msgid "Usedup:"
 msgstr "Usado:"
 
 #: ../3.0/DataProviders.js:165 ../3.2/DataProviders.js:165
-#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
 msgid "Cached:"
 msgstr "En caché:"
 
 #: ../3.0/DataProviders.js:166 ../3.2/DataProviders.js:166
-#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
 msgid "Buffer:"
 msgstr "Buffer:"
 
 #: ../3.0/DataProviders.js:167 ../3.2/DataProviders.js:167
-#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
 msgid "Free:"
 msgstr "Libre:"
 
 #: ../3.0/DataProviders.js:194 ../3.2/DataProviders.js:194
-#: ../3.4/DataProviders.js:176 ../4.0/DataProviders.js:172
+#: ../3.4/DataProviders.js:176 ../4.0/DataProviders.js:173
 msgid "SWAP"
 msgstr "SWAP"
 
 #: ../3.0/DataProviders.js:199 ../3.2/DataProviders.js:199
-#: ../3.4/DataProviders.js:194 ../4.0/DataProviders.js:190
+#: ../3.4/DataProviders.js:194 ../4.0/DataProviders.js:193
 msgid "------------ Swap ------------"
 msgstr "------------ Swap ------------"
 
 #: ../3.0/DataProviders.js:264 ../3.2/DataProviders.js:264
-#: ../3.4/DataProviders.js:205 ../4.0/DataProviders.js:201
+#: ../3.4/DataProviders.js:205 ../4.0/DataProviders.js:204
 msgid "NET"
 msgstr "RED"
 
 #: ../3.0/DataProviders.js:305 ../3.2/DataProviders.js:305
-#: ../3.4/DataProviders.js:289 ../4.0/DataProviders.js:284
+#: ../3.4/DataProviders.js:289 ../4.0/DataProviders.js:287
 msgid "---------- Networks ----------"
-msgstr "---------- Redes ----------"
+msgstr "------------ Redes -----------"
 
 #: ../3.0/DataProviders.js:308 ../3.2/DataProviders.js:308
-#: ../3.4/DataProviders.js:300 ../4.0/DataProviders.js:295
+#: ../3.4/DataProviders.js:300 ../4.0/DataProviders.js:298
 msgid "Down:"
 msgstr "Descarga:"
 
@@ -322,22 +323,22 @@ msgid "(KiB/s)"
 msgstr "(KiB/s)"
 
 #: ../3.0/DataProviders.js:309 ../3.2/DataProviders.js:309
-#: ../3.4/DataProviders.js:301 ../4.0/DataProviders.js:296
+#: ../3.4/DataProviders.js:301 ../4.0/DataProviders.js:299
 msgid "Up:"
 msgstr "Subida:"
 
 #: ../3.0/DataProviders.js:382 ../3.2/DataProviders.js:382
-#: ../3.4/DataProviders.js:317 ../4.0/DataProviders.js:312
+#: ../3.4/DataProviders.js:317 ../4.0/DataProviders.js:315
 msgid "DISK"
 msgstr "DISCO"
 
 #: ../3.0/DataProviders.js:408 ../3.2/DataProviders.js:408
-#: ../3.4/DataProviders.js:378 ../4.0/DataProviders.js:373
+#: ../3.4/DataProviders.js:378 ../4.0/DataProviders.js:376
 msgid "------------ Disks -----------"
-msgstr "------------ Discos -----------"
+msgstr "----------- Discos -----------"
 
 #: ../3.0/DataProviders.js:411 ../3.2/DataProviders.js:411
-#: ../3.4/DataProviders.js:386 ../4.0/DataProviders.js:381
+#: ../3.4/DataProviders.js:386 ../4.0/DataProviders.js:384
 msgid "Read:"
 msgstr "Lectura:"
 
@@ -347,7 +348,7 @@ msgid "(MiB/s)"
 msgstr "(MiB/s)"
 
 #: ../3.0/DataProviders.js:412 ../3.2/DataProviders.js:412
-#: ../3.4/DataProviders.js:387 ../4.0/DataProviders.js:382
+#: ../3.4/DataProviders.js:387 ../4.0/DataProviders.js:385
 msgid "Write:"
 msgstr "Escritura:"
 
@@ -357,7 +358,7 @@ msgid "Multi-Core System Monitor Error."
 msgstr "Error del monitor del sistema multinúcleo."
 
 #: ../3.0/applet.js:141 ../3.2/applet.js:139 ../3.4/applet.js:264
-#: ../4.0/applet.js:268
+#: ../4.0/applet.js:275
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -367,7 +368,7 @@ msgstr "Por favor, instale el paquete \"gir1.2-gtop-2.0\"."
 
 #: ../3.0/applet.js:328 ../3.2/applet.js:339
 msgid "Reload this applet"
-msgstr ""
+msgstr "Recargar este applet"
 
 #: ../3.0/prefs.js:290 ../3.2/prefs.js:294 ../3.4/prefs.js:338
 #: ../4.0/prefs.js:494
@@ -393,19 +394,19 @@ msgstr "Escritura"
 msgid "Error while saving file:"
 msgstr "Error al guardar el archivo:"
 
-#: ../3.4/DataProviders.js:49 ../4.0/DataProviders.js:45
+#: ../3.4/DataProviders.js:49 ../4.0/DataProviders.js:47
 msgid "/s"
 msgstr "/s"
 
-#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:158
+#: ../3.4/DataProviders.js:162 ../4.0/DataProviders.js:159
 msgid "Used:"
 msgstr "Usada:"
 
-#: ../3.4/applet.js:60 ../4.0/applet.js:59
+#: ../3.4/applet.js:60 ../4.0/applet.js:64
 msgid "Dependency missing"
 msgstr "Falta dependencia"
 
-#: ../3.4/applet.js:62 ../4.0/applet.js:61
+#: ../3.4/applet.js:62
 msgid ""
 "Please install the GTop package\n"
 "\tUbuntu / Mint: gir1.2-gtop-2.0\n"
@@ -413,38 +414,46 @@ msgid ""
 "\tArch: libgtop\n"
 "to use "
 msgstr ""
-"Por favor, instale el paquete GTop\n"
+"Por favor, para su uso instale el paquete GTop\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop "
+
+#: ../4.0/applet.js:66
+msgid ""
+"Please install the GTop package\n"
 "\tUbuntu / Mint: gir1.2-gtop-2.0\n"
 "\tFedora: libgtop2-devel\n"
 "\tArch: libgtop\n"
-"para utilizar "
+"\topenSUSE: libgtop-devel\n"
+"to use "
+msgstr ""
+"Por favor, para su uso instale el paquete GTop\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel "
+
+#: ../4.0/applet.js:277
+msgid "Refresh graphs"
+msgstr "Actualizar gráficos"
 
 #: ../4.0/prefs.js:335
 msgid "00-20"
-msgstr ""
+msgstr "00-20"
 
 #: ../4.0/prefs.js:335
 msgid "20-40"
-msgstr ""
+msgstr "20-40"
 
 #: ../4.0/prefs.js:335
 msgid "40-60"
-msgstr ""
+msgstr "40-60"
 
 #: ../4.0/prefs.js:335
 msgid "60-80"
-msgstr ""
+msgstr "60-80"
 
 #: ../4.0/prefs.js:335
 msgid "80-100"
-msgstr ""
-
-#~ msgid ""
-#~ "Displays in realtime the cpu usage for each core/cpu and overall memory "
-#~ "usage."
-#~ msgstr ""
-#~ "Muestra en tiempo real el uso de la cpu para cada núcleo/cpu y el uso "
-#~ "global de la memoria."
-
-#~ msgid "Multi-Core System Monitor"
-#~ msgstr "Monitor de sistema multinúcleo"
+msgstr "80-100"

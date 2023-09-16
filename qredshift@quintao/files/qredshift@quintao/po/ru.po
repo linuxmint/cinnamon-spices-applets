@@ -1,0 +1,300 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-04 13:58-0300\n"
+"PO-Revision-Date: 2021-12-27 15:14-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:115
+msgid "REDSHIFT NOT INSTALLED!"
+msgstr "REDHISFT НЕ УСТАНОВЛЕН!"
+
+#: applet.js:116
+msgid "Requires Redshift: sudo apt-get install redshift"
+msgstr "Зависимости Redshift: sudo apt-get install redshift"
+
+#: applet.js:119 applet.js:159
+msgid "Reload Applet"
+msgstr "Перезапустить апплет"
+
+#: applet.js:164
+msgid "Recompile Translations"
+msgstr "Перекомпиляция переводов"
+
+#. settings-schema.json->enabled->description
+#: applet.js:356
+msgid "Enabled"
+msgstr "Активно"
+
+#: applet.js:364 applet.js:410
+msgid "Temp:"
+msgstr "Температура:"
+
+#: applet.js:375 applet.js:421
+msgid "Bright:"
+msgstr "Яркость:"
+
+#: applet.js:387 applet.js:635
+msgid "Gamma:"
+msgstr "Гамма:"
+
+#. settings-schema.json->enabledNight->description
+#: applet.js:402
+msgid "Night Enabled"
+msgstr "Ночной режим активен"
+
+#. settings-schema.json->iconLabel->description
+#: applet.js:464
+msgid "Show Label"
+msgstr "Показать ярлык"
+
+#: applet.js:618
+msgid "On"
+msgstr "Вкл."
+
+#: applet.js:618 applet.js:620
+msgid "Off"
+msgstr "Выкл."
+
+#: applet.js:626
+msgid "Day Temperature"
+msgstr "Дневная температура"
+
+#: applet.js:627
+msgid "Day Brightness"
+msgstr "Дневная яркость"
+
+#: applet.js:629
+msgid "Night Temperature"
+msgstr "Ночная температура"
+
+#: applet.js:630
+msgid "Night Brightness"
+msgstr "Ночная яркость"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->dayTemp->description
+#. settings-schema.json->nightTemp->description
+#: applet.js:632
+msgid "Temperature"
+msgstr "Температура"
+
+#. settings-schema.json->dayBrightness->description
+#. settings-schema.json->nightBrightness->description
+#: applet.js:633
+msgid "Brightness"
+msgstr "Яркость"
+
+#. metadata.json->name
+msgid "QRedshift"
+msgstr "QRedshift"
+
+#. metadata.json->description
+msgid "Sets brightness, gamma levels and color temperature with Redshift. This applet conflicts with redshift-gtk, make sure you remove it."
+msgstr "Устанавливает яркость, цветовую гамму и температуру с помощью красного смещения. Этот апплет конфликтует с redshift-gtk, обязательно удалите его."
+
+#. settings-schema.json->panel-options->title
+msgid "Settings"
+msgstr "Настройки"
+
+#. settings-schema.json->panel-location->title
+msgid "Location"
+msgstr "Местоположение"
+
+#. settings-schema.json->panel-shortcuts->title
+msgid "Shortcuts"
+msgstr "Клавиша быстрого доступа"
+
+#. settings-schema.json->info-section->title
+msgid "Tips"
+msgstr "Подсказки"
+
+#. settings-schema.json->opt-section->title
+msgid "Options"
+msgstr "Опции"
+
+#. settings-schema.json->day-section->title
+msgid "Day Settings"
+msgstr "Настройки дневного режима"
+
+#. settings-schema.json->night-section->title
+msgid "Night Settings"
+msgstr "Настройки ночного режима"
+
+#. settings-schema.json->keybind-section->title
+msgid "Key Bindings"
+msgstr "Клавиатурные сокращения"
+
+#. settings-schema.json->location-section->title
+msgid "Location Settings"
+msgstr "Настройки местоположения"
+
+#. settings-schema.json->autoUpdate->description
+msgid "Auto Update"
+msgstr "Автоматическое обновление"
+
+#. settings-schema.json->autoUpdate->tooltip
+msgid "Continuously adjust color temperature"
+msgstr "Плавная регулировка цветовой температуры"
+
+#. settings-schema.json->autoUpdateInterval->units
+msgid "Sec."
+msgstr "Сек."
+
+#. settings-schema.json->autoUpdateInterval->description
+msgid "Update interval"
+msgstr "Интервал обновления"
+
+#. settings-schema.json->adjustmentMethod->description
+msgid "Adjustment Method"
+msgstr "Способ регулировки"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "needload"
+msgstr "needload"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "randr"
+msgstr "randr"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "vidmode"
+msgstr "vimode"
+
+#. settings-schema.json->adjustmentMethod->tooltip
+msgid "Method to use to set color temperature"
+msgstr "Способ установки цветовой температуры"
+
+#. settings-schema.json->labelScrollAction->description
+msgid "Icon Scroll Action"
+msgstr "Действие прокрутки значка"
+
+#. settings-schema.json->labelScrollAction->options
+msgid "Disabled"
+msgstr "Отключен"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->keyToggle->description
+msgid "On/Off"
+msgstr "Вкл./Выкл."
+
+#. settings-schema.json->keyBrightnessUp->description
+msgid "Increase brightness level"
+msgstr "Увеличить яркость"
+
+#. settings-schema.json->keyBrightnessDown->description
+msgid "Decrease brightness level"
+msgstr "Уменьшить яркость"
+
+#. settings-schema.json->keyTempUp->description
+msgid "Increase temperature level"
+msgstr "Увеличить температуру цвета"
+
+#. settings-schema.json->keyTempDown->description
+msgid "Decrease temperature level"
+msgstr "Уменьшить температуру цвета"
+
+#. settings-schema.json->keyGammaUp->description
+msgid "Increase gamma level"
+msgstr "Увеличить цветовую гамму"
+
+#. settings-schema.json->keyGammaDown->description
+msgid "Decrease gamma level"
+msgstr "Уменьшить цветовую гамму"
+
+#. settings-schema.json->labelScrollAction->options
+msgid "Bright"
+msgstr "Brillo"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->gammaMix->description
+msgid "Gamma"
+msgstr "Гамма"
+
+#. settings-schema.json->labelScrollAction->tooltip
+msgid "Action when scroll on applet icon."
+msgstr "Действие при прокрутке значка апплета."
+
+#. settings-schema.json->dayTemp->units
+#. settings-schema.json->nightTemp->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayBrightness->units
+#. settings-schema.json->nightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->locationRemote->description
+msgid "Remote Location"
+msgstr "Удалённое определение местопаложения"
+
+#. settings-schema.json->locationRemote->tooltip
+#. settings-schema.json->locationUpdate->tooltip
+msgid "Native geoclue on redshift can make the experience slow."
+msgstr "Активный сервис Geoclue может замедлить работу."
+
+#. settings-schema.json->locationUpdate->description
+msgid "Update Location"
+msgstr "Обновить местоположение"
+
+#. settings-schema.json->locationLatitude->description
+msgid "Latitude"
+msgstr "Широта"
+
+#. settings-schema.json->locationLongitude->description
+msgid "Longitude"
+msgstr "Долгота"
+
+#. settings-schema.json->aboutLocation->description
+msgid ""
+"Native geoclue on redshift can make the experience slow.\n"
+"Using: https://geolocation-db.com/"
+msgstr ""
+"Native geoclue может замедлить работу. \n"
+"Использование: https://geolocation-db.com/"
+
+#. settings-schema.json->textTips->description
+msgid "* Right-click the sliders to reset the default (neutral) value."
+msgstr "* Щелкните правой кнопкой мыши по ползунку, чтобы сбросить значение по умолчанию (нейтральное)."
+
+#. settings-schema.json->textInfo->description
+msgid "If you like and use this applet take the time to visit it's page on Cinnamon Spices and give it a star. You only need a github account to do this."
+msgstr "Если вам нравится и вы пользуетесь этим апплетом, найдите время, чтобы посетить его страницу, посвященную Cinnamon, чтобы поставьте ему звездочку. Для этого вам нужна только учетная запись на github."
+
+#. settings-schema.json->textInfo->description
+msgid ""
+"When update to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
+" You will lost all your configs."
+msgstr ""
+"При обновлении до новой версии убедитесь, что вы сбросили настройки по умолчанию, удалив ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
+" Вы потеряете все свои настройки."
+
+#. settings-schema.json->textInfo->description
+msgid "Use symbolic icon"
+msgstr "В виде символьных иконок"
+
+#. settings-schema.json->textInfo->description
+msgid "Choose Start Time"
+msgstr "Выберите начальное время"
+
+#. settings-schema.json->textInfo->description
+msgid "Choose End Time"
+msgstr "Выберите конечное время"
+
+#. settings-schema.json->textInfo->description
+msgid "Use Manual Night Time"
+msgstr "Установить ночное время вручную"

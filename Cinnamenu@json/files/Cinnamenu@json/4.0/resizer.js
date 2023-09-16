@@ -7,12 +7,12 @@ const St = imports.gi.St;
 const ZONE_SIZE = 10;
 
 class PopupResizeHandler {
-    constructor( actor, get_orientation, resized_callback, get_user_width, get_user_height) {
+    constructor(actor, get_orientation, resized_callback, get_user_width, get_user_height) {
         this.actor = actor;
-        this.get_orientation = get_orientation;
-        this.resized_callback = resized_callback;
-        this.get_user_width = get_user_width;
-        this.get_user_height = get_user_height;
+        this._get_orientation = get_orientation;
+        this._resized_callback = resized_callback;
+        this._get_user_width = get_user_width;
+        this._get_user_height = get_user_height;
 
         this._signals = new SignalManager.SignalManager(null);
 
@@ -20,23 +20,25 @@ class PopupResizeHandler {
         this._signals.connect(this.actor, 'leave-event', (...args) => this._leave_event(...args));
         this._signals.connect(this.actor, 'button-press-event', (...args) => this._onButtonPress(...args));
 
-        this.no_edges_draggable = true;
+        this._no_edges_draggable = true;
         this.inhibit_resizing = false;
 
-        this.drag_start_pos = null;
-        this.drag_start_size = null;
-        this.scaled_zone_size = ZONE_SIZE * global.ui_scale;
+        this._drag_start_position = null;
+        this._drag_start_size = null;
+        this._scaled_zone_size = null;
 
-        this.edges = { top:    0,
+        this._edges = { top:    0,
                        bottom: 0,
                        left:   0,
                        right:  0 };
 
         this.resizingInProgress = false;
+        this._workAreaHeight = null;
+        this._workAreaWidth = null;
     }
 
     _onButtonPress(actor, event) {
-        if (this.inhibit_resizing || this.no_edges_draggable)
+        if (this.inhibit_resizing || this._no_edges_draggable)
             return false;
 
         if (event.get_button() != Clutter.BUTTON_PRIMARY)
@@ -48,10 +50,10 @@ class PopupResizeHandler {
         this.resizingInProgress = true;
 
         let [stageX, stageY] = event.get_coords();
-        this.drag_start_position = {x: stageX, y: stageY};
-        this.drag_start_size = {width: this.actor.width, height: this.actor.height};
-        this.init_user_width = this.get_user_width();
-        this.init_user_height = this.get_user_height();
+        this._drag_start_position = {x: stageX, y: stageY};
+        this._drag_start_size = {width: this.actor.width, height: this.actor.height};
+        this._init_user_width = this._get_user_width();
+        this._init_user_height = this._get_user_height();
 
         return true;
     }
@@ -59,8 +61,8 @@ class PopupResizeHandler {
     _grabEvents(event) {
         this._eventsGrabbed = true;
 
-        this.drag_device = event.get_device();
-        this.drag_device.grab(this.actor);
+        this._drag_device = event.get_device();
+        this._drag_device.grab(this.actor);
 
         this._onEventId = this.actor.connect('event', (...args) => this._onEvent(...args));
     }
@@ -69,9 +71,9 @@ class PopupResizeHandler {
         if (!this._eventsGrabbed)
             return;
 
-        if (this.drag_device) {
-            this.drag_device.ungrab();
-            this.drag_device = null;
+        if (this._drag_device) {
+            this._drag_device.ungrab();
+            this._drag_device = null;
         } else if (event) {//this shouldn't arise
             event.get_device().ungrab();
         }
@@ -88,13 +90,14 @@ class PopupResizeHandler {
         global.unset_cursor();
         this._ungrabEvents(event);
 
-        this.actor.queue_relayout();
+        //this.actor.queue_relayout();
 
-        this.drag_start_position = null;
-        this.drag_start_size = null;
+        this._drag_start_position = null;
+        this._drag_start_size = null;
         this.resizingInProgress = false;
+        
         //update position again while this.resizingInProgress === false so that applet can update settings
-        this.resized_callback(this.new_user_width, this.new_user_height);
+        this._resized_callback(this._new_user_width, this._new_user_height);
     }
 
     _onEvent(actor, event) {
@@ -106,11 +109,11 @@ class PopupResizeHandler {
                 this._updateDragPosition(event);
                 return true;
             }
-        } else if (event.type() == Clutter.EventType.KEY_PRESS && this.resizingInProgress) {
+        } else if (event.type() == Clutter.EventType.KEY_RELEASE && this.resizingInProgress) {
             const symbol = event.get_key_symbol();
             if (symbol === Clutter.KEY_Escape) {
                 this._stop_drag();
-                return Clutter.EVENT_STOP;//doesn't work, event not stopping??
+                return Clutter.EVENT_STOP;
             }
             return Clutter.EVENT_STOP;
         }
@@ -119,17 +122,16 @@ class PopupResizeHandler {
 
     _collect_work_area_edges() {
         const monitor = Main.layoutManager.findMonitorForActor(this.actor);
-        //let monitor = Main.layoutManager.currentMonitor;
         const ws = global.screen.get_active_workspace();
         const area = ws.get_work_area_for_monitor(monitor.index);
 
-        this.edges.top = area.y;
-        this.edges.bottom = area.y + area.height;
-        this.edges.left = area.x;
-        this.edges.right = area.x + area.width;
+        this._edges.top = area.y;
+        this._edges.bottom = area.y + area.height;
+        this._edges.left = area.x;
+        this._edges.right = area.x + area.width;
 
-        this.workAreaHeight = area.height;
-        this.workAreaWidth = area.width;
+        this._workAreaHeight = area.height;
+        this._workAreaWidth = area.width;
     }
 
     _motion_event(box, event) {
@@ -137,48 +139,50 @@ class PopupResizeHandler {
             return Clutter.EVENT_PROPAGATE;
         }
         this._collect_work_area_edges();
-        this.scaled_zone_size = ZONE_SIZE * global.ui_scale;
+        this._scaled_zone_size = ZONE_SIZE * global.ui_scale;
 
         let cursor = 0;
 
         let [x, y] = event.get_coords();
         
-        if (this.actor.height > this.workAreaHeight) {
-            const overHeight = this.actor.height - this.workAreaHeight;
-            this.resized_callback(this.get_user_width(), this.get_user_height() - overHeight);
+        //Immediately resize actor if greater than work area. This can happen after a
+        //change of resolution or monitor scaling.
+        if (this.actor.height > this._workAreaHeight) {
+            const overHeight = this.actor.height - this._workAreaHeight;
+            this._resized_callback(this._get_user_width(), this._get_user_height() - overHeight);
             return Clutter.EVENT_PROPAGATE;
         }
-        if (this.actor.width > this.workAreaWidth) {
-            const overWidth = this.actor.width - this.workAreaWidth;
-            this.resized_callback(this.get_user_width() - overWidth, this.get_user_height());
+        if (this.actor.width > this._workAreaWidth) {
+            const overWidth = this.actor.width - this._workAreaWidth;
+            this._resized_callback(this._get_user_width() - overWidth, this._get_user_height());
             return Clutter.EVENT_PROPAGATE;
         }
 
-        this.top_edge_draggable = this.in_top_resize_zone (x, y);
-        this.bottom_edge_draggable = this.in_bottom_resize_zone (x, y);
-        this.left_edge_draggable = this.in_left_resize_zone (x, y,);
-        this.right_edge_draggable = this.in_right_resize_zone (x, y);
+        this._top_edge_draggable = this._in_top_resize_zone (x, y);
+        this._bottom_edge_draggable = this._in_bottom_resize_zone (x, y);
+        this._left_edge_draggable = this._in_left_resize_zone (x, y,);
+        this._right_edge_draggable = this._in_right_resize_zone (x, y);
 
-        this.no_edges_draggable = false;
-        if (this.top_edge_draggable && this.left_edge_draggable) {
+        this._no_edges_draggable = false;
+        if (this._top_edge_draggable && this._left_edge_draggable) {
             cursor = Cinnamon.Cursor.RESIZE_TOP_LEFT;
-        } else if (this.top_edge_draggable && this.right_edge_draggable) {
+        } else if (this._top_edge_draggable && this._right_edge_draggable) {
             cursor = Cinnamon.Cursor.RESIZE_TOP_RIGHT;
-        } else if (this.bottom_edge_draggable && this.left_edge_draggable) {
+        } else if (this._bottom_edge_draggable && this._left_edge_draggable) {
             cursor = Cinnamon.Cursor.RESIZE_BOTTOM_LEFT;
-        } else if (this.bottom_edge_draggable && this.right_edge_draggable) {
+        } else if (this._bottom_edge_draggable && this._right_edge_draggable) {
             cursor = Cinnamon.Cursor.RESIZE_BOTTOM_RIGHT;
-        } else if (this.top_edge_draggable) {
+        } else if (this._top_edge_draggable) {
             cursor = Cinnamon.Cursor.RESIZE_TOP;
-        } else if (this.bottom_edge_draggable) {
+        } else if (this._bottom_edge_draggable) {
             cursor = Cinnamon.Cursor.RESIZE_BOTTOM;
-        } else if (this.left_edge_draggable) {
+        } else if (this._left_edge_draggable) {
             cursor = Cinnamon.Cursor.RESIZE_LEFT;
-        } else if (this.right_edge_draggable) {
+        } else if (this._right_edge_draggable) {
             cursor = Cinnamon.Cursor.RESIZE_RIGHT;
         } else {
             global.unset_cursor();
-            this.no_edges_draggable = true;
+            this._no_edges_draggable = true;
             return Clutter.EVENT_PROPAGATE;
         }
 
@@ -191,32 +195,32 @@ class PopupResizeHandler {
         let delta_width = 0;
         let delta_height = 0;
 
-        const start_w = this.drag_start_size.width;
-        const start_h = this.drag_start_size.height;
+        const start_w = this._drag_start_size.width;
+        const start_h = this._drag_start_size.height;
 
-        if (this.left_edge_draggable) {
-            const x_diff = this.drag_start_position.x - stageX;
-            const new_width = (start_w + x_diff).clamp(0, this.workAreaWidth);
+        if (this._left_edge_draggable) {
+            const x_diff = this._drag_start_position.x - stageX;
+            const new_width = (start_w + x_diff).clamp(0, this._workAreaWidth);
             delta_width = new_width - start_w;
-        } else if (this.right_edge_draggable) {
-            const x_diff = stageX - this.drag_start_position.x;
-            const new_width = (start_w + x_diff).clamp(0, this.workAreaWidth);
+        } else if (this._right_edge_draggable) {
+            const x_diff = stageX - this._drag_start_position.x;
+            const new_width = (start_w + x_diff).clamp(0, this._workAreaWidth);
             delta_width = new_width - start_w;
         }
 
-        if (this.top_edge_draggable) {
-            const y_diff = this.drag_start_position.y - stageY;
-            const new_height = (start_h + y_diff).clamp(0, this.workAreaHeight);
+        if (this._top_edge_draggable) {
+            const y_diff = this._drag_start_position.y - stageY;
+            const new_height = (start_h + y_diff).clamp(0, this._workAreaHeight);
             delta_height = new_height - start_h;
-        } else if (this.bottom_edge_draggable) {
-            const y_diff = stageY - this.drag_start_position.y;
-            const new_height = (start_h + y_diff).clamp(0, this.workAreaHeight);
+        } else if (this._bottom_edge_draggable) {
+            const y_diff = stageY - this._drag_start_position.y;
+            const new_height = (start_h + y_diff).clamp(0, this._workAreaHeight);
             delta_height = new_height - start_h;
         }
 
-        this.new_user_width = this.init_user_width + delta_width;
-        this.new_user_height = this.init_user_height + delta_height;
-        this.resized_callback(this.new_user_width, this.new_user_height);
+        this._new_user_width = this._init_user_width + delta_width;
+        this._new_user_height = this._init_user_height + delta_height;
+        this._resized_callback(this._new_user_width, this._new_user_height);
         
         return true;
     }
@@ -228,43 +232,39 @@ class PopupResizeHandler {
         return Clutter.EVENT_PROPAGATE;
     }
 
-    in_top_resize_zone(x, y) {
-        if (x < this.actor.x || x > this.actor.x + this.actor.width || this.get_orientation() === St.Side.TOP) {
+    _in_top_resize_zone(x, y) {
+        if (x < this.actor.x || x > this.actor.x + this.actor.width || this._get_orientation() === St.Side.TOP) {
             return false;
         }
 
-        return y <= this.actor.y + this.scaled_zone_size && y >= this.actor.y &&
-               this.actor.y >= this.edges.top;
+        return y <= this.actor.y + this._scaled_zone_size && y >= this.actor.y &&
+               this.actor.y >= this._edges.top;
     }
 
-    in_bottom_resize_zone(x, y) {
-        if (x < this.actor.x || x > this.actor.x + this.actor.width || this.get_orientation() === St.Side.BOTTOM) {
+    _in_bottom_resize_zone(x, y) {
+        if (x < this.actor.x || x > this.actor.x + this.actor.width || this._get_orientation() === St.Side.BOTTOM) {
             return false;
         }
 
-        return y >= this.actor.y + this.actor.height - this.scaled_zone_size &&
-               y <= this.actor.y + this.actor.height && this.actor.y + this.actor.height <= this.edges.bottom;
+        return y >= this.actor.y + this.actor.height - this._scaled_zone_size &&
+               y <= this.actor.y + this.actor.height && this.actor.y + this.actor.height <= this._edges.bottom;
     }
 
-    in_left_resize_zone(x, y) {
-        if (y < this.actor.y || y > this.actor.y + this.actor.height || this.get_orientation() === St.Side.LEFT) {
+    _in_left_resize_zone(x, y) {
+        if (y < this.actor.y || y > this.actor.y + this.actor.height || this._get_orientation() === St.Side.LEFT) {
             return false;
         }
 
-        return x <= this.actor.x + this.scaled_zone_size &&
-               x >= this.actor.x && this.actor.x >= this.edges.left;
+        return x <= this.actor.x + this._scaled_zone_size &&
+               x >= this.actor.x && this.actor.x >= this._edges.left;
     }
 
-    in_right_resize_zone(x, y) {
-        if (y < this.actor.y || y > this.actor.y + this.actor.height || this.get_orientation() === St.Side.RIGHT) {
+    _in_right_resize_zone(x, y) {
+        if (y < this.actor.y || y > this.actor.y + this.actor.height || this._get_orientation() === St.Side.RIGHT) {
             return false;
         }
 
-        return x >= this.actor.x + this.actor.width - this.scaled_zone_size &&
-               x <= this.actor.x + this.actor.width && this.actor.x + this.actor.width <= this.edges.right;
+        return x >= this.actor.x + this.actor.width - this._scaled_zone_size &&
+               x <= this.actor.x + this.actor.width && this.actor.x + this.actor.width <= this._edges.right;
     }
-
-    //destroy() {
-    //    this._signals.disconnectAllSignals();
-    //}
 }

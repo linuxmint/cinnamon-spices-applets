@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-27 19:21-0500\n"
-"PO-Revision-Date: 2022-12-29 13:38-0500\n"
+"POT-Creation-Date: 2023-07-10 22:50-0400\n"
+"PO-Revision-Date: 2023-07-10 22:52-0400\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -16,21 +16,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
-#: 5.4/applet.js:139 3.2/applet.js:135
+#: 5.4/applet.js:290 3.2/applet.js:135
 msgid "--%"
 msgstr "--%"
 
-#: 5.4/applet.js:140 3.2/applet.js:136
+#: 5.4/applet.js:291 3.2/applet.js:136
 msgid "Waiting"
 msgstr "Bekleniyor"
 
-#: 5.4/applet.js:164 3.2/applet.js:165
+#: 5.4/applet.js:317 3.2/applet.js:165
 msgid "Some Dependencies not Installed"
 msgstr "Bazı Bağımlılıklar Yüklenmedi"
 
-#: 5.4/applet.js:164
+#: 5.4/applet.js:317
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
 "functionality including notifications and audible alerts .\n"
@@ -42,11 +42,11 @@ msgstr ""
 "\n"
 "Lütfen bunların nasıl kurulacağına ilişkin yardım dosyasını okuyun."
 
-#: 5.4/applet.js:174 3.2/applet.js:198
+#: 5.4/applet.js:327 3.2/applet.js:198
 msgid "Battery Monitor Applet"
 msgstr "Pil İzleme Uygulaması"
 
-#: 5.4/applet.js:174
+#: 5.4/applet.js:327
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -59,44 +59,35 @@ msgstr ""
 "emin olun\n"
 "özellikle uzun yüksek sesli bir dosya belirtilmişse\n"
 
-#: 5.4/applet.js:247 3.2/applet.js:297
+#: 5.4/applet.js:388 3.2/applet.js:297
 msgid "Open Power Statistics"
 msgstr "Güç İstatistiklerini Aç"
 
-#: 5.4/applet.js:253 3.2/applet.js:303
+#: 5.4/applet.js:394 3.2/applet.js:303
 msgid "Open System Monitor"
 msgstr "Sistem Gözlemcisini Aç"
 
-#: 5.4/applet.js:262
+#: 5.4/applet.js:403
 msgid "Housekeeping and System Submenu"
 msgstr "Düzenleme ve Sistem Alt Menüsü"
 
-#: 5.4/applet.js:265 3.2/applet.js:315
+#: 5.4/applet.js:406 3.2/applet.js:315
 msgid "View the Changelog"
 msgstr "Değişim Günlüğünü İncele"
 
-#: 5.4/applet.js:271
+#: 5.4/applet.js:412
 msgid "Open the README"
 msgstr ""
 
-#: 5.4/applet.js:277 3.2/applet.js:327
-msgid "Open stylesheet.css (Advanced Function)"
-msgstr "Stylesheet.css aç (Gelişmiş İşlev)"
-
-#. metadata.json->name
-#: 5.4/applet.js:293 3.2/applet.js:343
-msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
-msgstr "Pil İzleme ve Kapatma Uygulamacığı (BAMS)"
-
-#: 5.4/applet.js:298 3.2/applet.js:348
+#: 5.4/applet.js:428 3.2/applet.js:348
 msgid "Waiting for battery information"
 msgstr "Pil bilgileri bekleniyor"
 
-#: 5.4/applet.js:389
+#: 5.4/applet.js:534
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Düşük Pil - kapat veya ana şebekeye bağla"
 
-#: 5.4/applet.js:394 3.2/applet.js:433
+#: 5.4/applet.js:540 3.2/applet.js:433
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -112,33 +103,43 @@ msgstr ""
 "işinizi kapatın ve makineyi askıya alın veya kapatın\n"
 "\n"
 
-#: 5.4/applet.js:409
+#: 5.4/applet.js:555
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr "Pil Kritik, şebekeye bağlanmazsa askıya alınacak"
 
-#: 5.4/applet.js:426 3.2/applet.js:464
-msgid "Charge:"
-msgstr "Şarj:"
+#: 5.4/applet.js:574
+msgid "Time to Empty:"
+msgstr ""
 
-#: 5.4/applet.js:426 3.2/applet.js:464
+#: 5.4/applet.js:575
+msgid "Time to Full:"
+msgstr ""
+
+#: 5.4/applet.js:578 5.4/applet.js:625
+#, fuzzy
+#| msgid "Percentage Charge:"
+msgid "Current Charge:"
+msgstr "Şarj Oranı:"
+
+#: 5.4/applet.js:578 3.2/applet.js:464
 msgid "Alert:"
 msgstr "Uyarı:"
 
-#: 5.4/applet.js:426 3.2/applet.js:464
+#: 5.4/applet.js:578 3.2/applet.js:464
 msgid "Suspend:"
 msgstr "Askı:"
 
-#: 5.4/applet.js:474 3.2/applet.js:512
-msgid "Percentage Charge:"
-msgstr "Şarj Oranı:"
-
-#: 5.4/applet.js:474 3.2/applet.js:512
+#: 5.4/applet.js:625 3.2/applet.js:512
 msgid "Alert at:"
 msgstr "Uyarı durumu:"
 
-#: 5.4/applet.js:474 3.2/applet.js:512
+#: 5.4/applet.js:625 3.2/applet.js:512
 msgid "Suspend at:"
 msgstr "Askı durumu:"
+
+#: 5.4/applet.js:631
+msgid "The battery level has been recharged to"
+msgstr ""
 
 #: 3.2/applet.js:165
 msgid ""
@@ -173,6 +174,15 @@ msgstr "Düzenleme ve Sistem Alt Menüsü"
 msgid "Open the Help file"
 msgstr "Yardım dosyasını aç"
 
+#: 3.2/applet.js:327
+msgid "Open stylesheet.css (Advanced Function)"
+msgstr "Stylesheet.css aç (Gelişmiş İşlev)"
+
+#. metadata.json->name
+#: 3.2/applet.js:343
+msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
+msgstr "Pil İzleme ve Kapatma Uygulamacığı (BAMS)"
+
 #: 3.2/applet.js:423
 msgid "Battery Low - turn off or connect to mains"
 msgstr "Düşük Pil - kapat veya ana şebekeye bağla"
@@ -201,12 +211,67 @@ msgstr ""
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr "Pil Kritik, şebekeye bağlanmazsa askıya alınacak"
 
+#: 3.2/applet.js:464
+msgid "Charge:"
+msgstr "Şarj:"
+
+#: 3.2/applet.js:512
+msgid "Percentage Charge:"
+msgstr "Şarj Oranı:"
+
 #. metadata.json->description
 msgid "Displays Charge as Percentage and allows Alerts and Actions"
 msgstr "Şarj Yüzdesini Gösterir, Uyarı ve Eylemlere Olanak Sağlar"
 
-#. 5.4->settings-schema.json->head->description
+#. 5.4->settings-schema.json->General->title
+msgid "General"
+msgstr ""
+
+#. 5.4->settings-schema.json->Style->title
+msgid "Style"
+msgstr ""
+
+#. 5.4->settings-schema.json->general->title
 msgid "General Settings"
+msgstr ""
+
+#. 5.4->settings-schema.json->display_mode->title
+#, fuzzy
+#| msgid "Display Mode"
+msgid "Display Options"
+msgstr "Görünüm Kipi"
+
+#. 5.4->settings-schema.json->low_alert->title
+#. 3.2->settings-schema.json->head2->description
+msgid "Battery Low Alert Settings"
+msgstr "Düşük Pil Uyarısı Ayarları"
+
+#. 5.4->settings-schema.json->advanced->title
+msgid "Advanced"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_normal->title
+msgid "Normal"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_discharging->title
+msgid "Discharging"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_alert->title
+msgid "Alert"
+msgstr "Uyarı"
+
+#. 5.4->settings-schema.json->bam_alert_discharging->title
+msgid "Alert Discharging"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_limit_exceeded->title
+msgid "Limit Exceeded"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_limit_exceeded2->title
+msgid "Limit Exceeded - Critical"
 msgstr ""
 
 #. 5.4->settings-schema.json->refreshInterval-spinner->units
@@ -228,6 +293,17 @@ msgstr ""
 "makineniz varsa (yüksek değer belirleyerek) yavaş bir yenileme kullanınız. "
 "Bu ayrıca vurgu hızını da yönetir."
 
+#. 5.4->settings-schema.json->alertPercentage->units
+#. 5.4->settings-schema.json->recharged_alert_percentage->units
+#. 5.4->settings-schema.json->normal_font_size->units
+#. 5.4->settings-schema.json->discharging_font_size->units
+#. 5.4->settings-schema.json->alert_font_size->units
+#. 5.4->settings-schema.json->alert_discharging_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->units
+msgid "%"
+msgstr ""
+
 #. 5.4->settings-schema.json->alertPercentage->description
 #. 3.2->settings-schema.json->alertPercentage->description
 msgid "Percentage Battery Charge at which Alert Displayed"
@@ -242,56 +318,83 @@ msgstr ""
 "Turuncu Uyarı Arkaplanının gösterildiği Pil Şarj Oranı - Bu ayrıca "
 "uygulamacığın sol tıklama menüsünde gösterilir ve buradan ayarlanabilir"
 
-#. 5.4->settings-schema.json->head1->description
-#. 3.2->settings-schema.json->head1->description
-msgid "Display Mode"
-msgstr "Görünüm Kipi"
+#. 5.4->settings-schema.json->recharged_alert->description
+msgid "Visible Alert when Recharging"
+msgstr ""
+
+#. 5.4->settings-schema.json->recharged_alert->tooltip
+msgid "Provide visible alert when battery is recharged to a certain threshold"
+msgstr ""
+
+#. 5.4->settings-schema.json->recharged_alert_percentage->description
+msgid "Percentage threshold for visible recharged alert"
+msgstr ""
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid ""
-"Classic - Battery Percentage with extended messages for horizontal panel"
-msgstr "Klasik - Pil Oranı ve yatay panel için ek mesajlar"
+msgid "Classic"
+msgstr "Klasik"
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid "Classic Plus - Classic with addition of Battery Icon"
-msgstr "Klasik Ek - Klasik ve ek Pil Simgesi"
+msgid "Classic Plus"
+msgstr "Klasik Ek"
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid "Compact - Battery Percentage without extended messages"
-msgstr "Sıkışık - Pil Yüzdesi, ek mesaj olmadan"
+msgid "Compact"
+msgstr "Sıkışık"
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid "Compact Plus - Compact with addition of Battery Icon"
-msgstr "Şıkışık Ek - Şıkışık ve ek Pil Simgesi"
+msgid "Compact Plus"
+msgstr "Şıkışık Ek"
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid "Icon Only on coloured background indicating status"
-msgstr "Sadece Simge - renkli arka plan üstünde durum gösterimi"
+msgid "Icon Only"
+msgstr "Sadece Simge"
 
 #. 5.4->settings-schema.json->displayType->description
 msgid "Toolbar Display Type"
-msgstr ""
+msgstr "Görünüm Tipi"
 
 #. 5.4->settings-schema.json->displayType->tooltip
-#. 3.2->settings-schema.json->displayType->tooltip
 msgid ""
-"This feature offers the Classic (original) display with optional battery "
-"icon and some more compact displays suitable for a vertical panel "
-"(CompactCompact Plus and Icon Only)"
+"The following display options are available (including Compact, Compact "
+"Plus, and Icon Only for vertical panels):\n"
+"  Classic: Battery percentage with extended messages for horizontal panel\n"
+"  Classic Plus: Classic with the addition of a battery icon\n"
+"  Compact: Battery percentage without extended messages\n"
+"  Compact Plus: Compact with the addition of a battery icon\n"
+"  Icon Only: The battery icon on a colored background indicating the current "
+"status"
 msgstr ""
-"Bu özellik (varsayılan) Klasik görünüme ek olarak pil simgesi de sunmayı "
-"sağlar, (Sıkışık, Sıkışık Ek ve Sadece Simge seçenekleri ile birlikte) dikey "
-"panellere de uygun hale getirebilirsiniz."
 
-#. 5.4->settings-schema.json->head2->description
-#. 3.2->settings-schema.json->head2->description
-msgid "Battery Low Alert Settings"
-msgstr "Düşük Pil Uyarısı Ayarları"
+#. 5.4->settings-schema.json->time_remaining_display->description
+msgid "Append estimated time remaining to chosen display type"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_display->tooltip
+msgid ""
+"This will append an estimate to the above option for time remaining based on "
+"the amount of remaining battery power"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->description
+msgid "Append estimated time remaining to toolbar menu"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->tooltip
+msgid ""
+"This will append an estimate to the toolbar menu for time remaining based on "
+"the amount of remaining battery power"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->description
+msgid "Append estimated time remaining to tooltip"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->tooltip
+msgid ""
+"This will append an estimate to the tooltip for time remaining based on the "
+"amount of remaining battery power"
+msgstr ""
 
 #. 5.4->settings-schema.json->useBatteryLowSound->description
 #. 3.2->settings-schema.json->useBatteryLowSound->description
@@ -359,27 +462,6 @@ msgstr ""
 "Kullanıcılara, halka açık yerlerde ses seviyesinin makul bir şekilde "
 "ayarlanması gerekebileceğini hatırlatmak için"
 
-#. 5.4->settings-schema.json->head3->description
-#. 3.2->settings-schema.json->head3->description
-msgid "Household Tasks"
-msgstr "Ev işleri"
-
-#. 5.4->settings-schema.json->deleteTempraryFiles->description
-msgid "Delete temporary files after upgrade to applet version 1.4"
-msgstr "1.4 sürümüne yükselttikten sonra geçici dosyaları silin"
-
-#. 5.4->settings-schema.json->deleteTempraryFiles->tooltip
-msgid ""
-"Applet versions prior to 1.4 used temporary files in the home directory. "
-"These are not needed anymore and can be deleted."
-msgstr ""
-"1.4'ten önceki sürümler, ana dizinde geçici dosyalar kullanıyordu. Bunlara "
-"artık ihtiyaç yoktur ve silinebilir."
-
-#. 5.4->settings-schema.json->head4->description
-msgid "Advanced"
-msgstr ""
-
 #. 5.4->settings-schema.json->customBatteryPath->description
 msgid "Path to battery capacity directory (device path)"
 msgstr ""
@@ -393,6 +475,48 @@ msgid ""
 "/sys/class/power_supply/BAT0"
 msgstr ""
 
+#. 5.4->settings-schema.json->normal_background_color->description
+#. 5.4->settings-schema.json->discharging_background_color->description
+#. 5.4->settings-schema.json->alert_background_color->description
+#. 5.4->settings-schema.json->alert_discharging_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->description
+msgid "Background Color"
+msgstr ""
+
+#. 5.4->settings-schema.json->normal_background_color->tooltip
+#. 5.4->settings-schema.json->normal_border_color->tooltip
+#. 5.4->settings-schema.json->discharging_background_color->tooltip
+#. 5.4->settings-schema.json->discharging_border_color->tooltip
+#. 5.4->settings-schema.json->alert_background_color->tooltip
+#. 5.4->settings-schema.json->alert_border_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_background_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->tooltip
+msgid "RGB or RGBA"
+msgstr ""
+
+#. 5.4->settings-schema.json->normal_border_color->description
+#. 5.4->settings-schema.json->discharging_border_color->description
+#. 5.4->settings-schema.json->alert_border_color->description
+#. 5.4->settings-schema.json->alert_discharging_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->description
+msgid "Border Color"
+msgstr ""
+
+#. 5.4->settings-schema.json->normal_font_size->description
+#. 5.4->settings-schema.json->discharging_font_size->description
+#. 5.4->settings-schema.json->alert_font_size->description
+#. 5.4->settings-schema.json->alert_discharging_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->description
+msgid "Font Size"
+msgstr ""
+
 #. 3.2->settings-schema.json->head->description
 msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
 msgstr "Pil İzleme ve Kapatma Uygulamacığı Genel Ayarları"
@@ -401,9 +525,44 @@ msgstr "Pil İzleme ve Kapatma Uygulamacığı Genel Ayarları"
 msgid "Refresh Interval for Display:"
 msgstr "Görüntüleme için Yenileme Aralığı:"
 
+#. 3.2->settings-schema.json->head1->description
+msgid "Display Mode"
+msgstr "Görünüm Kipi"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid ""
+"Classic - Battery Percentage with extended messages for horizontal panel"
+msgstr "Klasik - Pil Oranı ve yatay panel için ek mesajlar"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Classic Plus - Classic with addition of Battery Icon"
+msgstr "Klasik Ek - Klasik ve ek Pil Simgesi"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Compact - Battery Percentage without extended messages"
+msgstr "Sıkışık - Pil Yüzdesi, ek mesaj olmadan"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Compact Plus - Compact with addition of Battery Icon"
+msgstr "Şıkışık Ek - Şıkışık ve ek Pil Simgesi"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Icon Only on coloured background indicating status"
+msgstr "Sadece Simge - renkli arka plan üstünde durum gösterimi"
+
 #. 3.2->settings-schema.json->displayType->description
 msgid "Type of Display in Toolbar"
 msgstr "Araç Çubuğundaki Görüntü Türü"
+
+#. 3.2->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional battery "
+"icon and some more compact displays suitable for a vertical panel "
+"(CompactCompact Plus and Icon Only)"
+msgstr ""
+"Bu özellik (varsayılan) Klasik görünüme ek olarak pil simgesi de sunmayı "
+"sağlar, (Sıkışık, Sıkışık Ek ve Sadece Simge seçenekleri ile birlikte) dikey "
+"panellere de uygun hale getirebilirsiniz."
 
 #. 3.2->settings-schema.json->useBatteryLowSound->tooltip
 msgid ""
@@ -455,6 +614,10 @@ msgstr ""
 "Kullanıcılara, halka açık yerlerde ses seviyesinin makul bir şekilde "
 "ayarlanması gerekebileceğini hatırlatmak için"
 
+#. 3.2->settings-schema.json->head3->description
+msgid "Household Tasks"
+msgstr "Ev işleri"
+
 #. 3.2->settings-schema.json->deleteTempraryFiles->description
 msgid "Delete temporary files after upgrade to version 1.4"
 msgstr "1.4 sürümüne yükselttikten sonra geçici dosyaları silin"
@@ -466,24 +629,3 @@ msgid ""
 msgstr ""
 "1.4'ten önceki sürümler, ana dizinde geçici dosyalar kullanıyordu. Bunlara "
 "artık ihtiyaç yoktur ve silinebilir."
-
-#~ msgid ""
-#~ "A User Defined Sound File has been Specified for low Battery\n"
-#~ "\n"
-#~ "Please ensure the volume is set sensibly in public places\n"
-#~ "especially if a long loud file is specifed\n"
-#~ msgstr ""
-#~ "Düşük Pil için Kullanıcı Tanımlı Ses Dosyası Belirtildi\n"
-#~ "\n"
-#~ "Lütfen ses seviyesinin halka açık yerlerde makul bir şekilde "
-#~ "ayarlandığından emin olun\n"
-#~ "özellikle uzun yüksek sesli bir dosya belirtilmişse\n"
-
-#~ msgid " "
-#~ msgstr " "
-
-#~ msgid "Type of Display"
-#~ msgstr "Görünüm Tipi"
-
-#~ msgid "Ok"
-#~ msgstr "Tamam"

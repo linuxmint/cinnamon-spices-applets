@@ -1618,7 +1618,7 @@ class CobiWorkspace {
     this.actor._delegate = this;
     this.actor.set_hover(false);
     this.actor.set_track_hover(false);
-    this.actor.add_style_class_name("window-list-box");
+    this.actor.add_style_class_name("grouped-window-list-box");
     
     this.dragInProgress = false;
     

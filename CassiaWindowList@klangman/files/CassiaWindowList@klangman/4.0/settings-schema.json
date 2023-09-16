@@ -1,0 +1,634 @@
+{
+  "layout" : {
+    "type" : "layout",
+    "pages" : ["general-page", "caption-page", "preview-page", "hotkey-page", "advanced-page"],
+
+    "caption-page" : {
+      "type" : "page",
+      "title" : "Labels",
+      "sections" : ["caption-settings", "caption-number-settings"] 
+    },
+
+    "general-page" : {
+      "type" : "page",
+      "title" : "General",
+      "sections" : ["general-settings", "general-mouse"] 
+    },
+
+    "preview-page" : {
+      "type" : "page",
+      "title" : "Thumbnails",
+      "sections" : ["preview-settings", "preview-mouse-section"] 
+    },
+
+    "hotkey-page" : {
+      "type" : "page",
+      "title" : "Hotkeys",
+      "sections" : ["hotkey-settings"]
+    },
+
+    "advanced-page" : {
+      "type" : "page",
+      "title" : "Advanced",
+      "sections" : ["adv-mouse-settings"]
+    },
+
+    "caption-settings" : {
+      "type" : "section",
+      "title" : "Window list button label settings",
+      "dependency" : "group-windows<4",
+      "keys" : ["caption-type", "display-caption-for", "display-caption-for-pined", "hide-caption-for-minimized", "display-indicators", "label-width", "label-animation", "label-animation-time"]
+    },
+    "caption-number-settings" : {
+      "type" : "section",
+      "title" : "Application groups number label settings",
+      "keys" : ["display-number", "number-style"]
+    },
+    "general-settings" : {
+      "type" : "section",
+      "title" : "General window list settings",
+      "keys" : ["group-windows", "display-pinned", "trailing-pinned-behaviour", "show-windows-for-current-monitor", "show-tooltips", "hide-panel-apps"]
+    },
+    "general-mouse" : {
+      "type" : "section",
+      "title" : "Window list mouse settings",
+    "keys" : ["grouped-mouse-action-btn1", "mouse-action-btn2", "mouse-action-btn8", "mouse-action-btn9"]
+    },
+    "preview-settings" : {
+      "type" : "section",
+      "title" : "Thumbnails menu settings",
+      "keys" : ["show-previews", "number-of-unshrunk-previews", "menu-all-windows-of-pool", "menu-all-windows-of-auto"]
+    },
+    "preview-mouse-section" : {
+      "type" : "section",
+      "title" : "Thumbnails menu mouse settings",
+      "keys" : ["menu-show-on-hover", "preview-timeout-show", "preview-timeout-hide", "wheel-adjusts-preview-size", "preview-middle-click", "preview-back-click", "preview-forward-click"]
+    },
+    "hotkey-settings" : {
+      "type" : "section",
+      "title" : "Hotkey settings",
+      "keys" : ["hotkey-bindings", "hotkey-minimize", "hotkey-new", "hotkey-sequence", "hotkey-help"]
+    },
+    "adv-mouse-settings" : {
+      "type" : "section",
+      "title" : "Ctrl/Shift + mouse button actions",
+      "keys" : ["adv-mouse-list", "adv-mouse-help", "backup-file-name"]
+    }
+  },
+  "caption-type": {
+    "type": "combobox",
+    "default": 0,
+    "options": {
+      "Application name": 0,
+      "Window title": 1
+    },
+    "description": "Label contents",
+    "tooltip": "What the content of the label will be"
+  },
+  "display-caption-for": {
+    "type": "combobox",
+    "default": 3,
+    "options": {
+      "Never": 0,
+      "Always": 1,
+      "Focused": 2,
+      "One per application pool": 3
+    },
+    "description": "Display labels for generic window list buttons",
+    "tooltip": "Never: No windows get labels\nAlways: All windows get labels\nFocused: The window with focus will have a label\nOne per application pool: Only one label for a set of adjacent application windows"
+  },
+  "display-caption-for-pined": {
+    "type": "combobox",
+    "default": 0,
+    "options": {
+      "Never": 0,
+      "Always": 1,
+      "Running": 2,
+      "Focused": 3
+    },
+    "description": "Display labels for pinned buttons",
+    "tooltip": "Never: No pinned windows will have a label\nAlways: All pinned windows will have labels\nRunning: Only pinned window that are running will have a label\nFocused: Only the pinned window with focus will have a label"
+  },
+  "hide-caption-for-minimized": {
+    "type": "switch",
+    "default": 0,
+    "description": "Hide labels for minimized buttons",
+    "tooltip": "For groups/pools the label will still show unless all application windows are minimized"
+  },
+  "display-indicators": {
+    "type": "combobox",
+    "default": 1,
+    "options": {
+      "None": 0,
+      "Minimized windows": 1,
+      "Pinned applications": 2,
+      "Minimized and pinned": 3,
+      "Automatic": 7
+    },
+    "description": "Display status indicators",
+    "tooltip": "Choose if the minimized and the pinned indicator characters will be prepended to button label text. Buttons without a text label will not reserve as much space.\nAutomatic: The minimized and pinned indicators will only show when space is not constrained."
+  },
+  "trailing-pinned-behaviour": {
+    "type": "switch",
+    "default": false,
+    "dependency" : "group-windows<4",
+    "description": "Add new window buttons ahead of trailing pinned buttons",
+    "tooltip": "When enabled, new windows will be added to the left of any pinned buttons currently placed on the right of the window list, effectively this allows you to keep pinned buttons at the end of the window list"
+  },
+  "label-width": {
+    "type": "spinbutton",
+    "default": 150,
+    "min": 5,
+    "max": 1000,
+    "units": "pixels",
+    "step": 1,
+    "description": "Label width",
+    "tooltip": "This defines the width of the label section of a window list button"
+  },
+  "label-animation": {
+    "type": "switch",
+    "default": true,
+    "description": "Animate label"
+  },
+  "label-animation-time": {
+    "type": "spinbutton",
+    "default": 500,
+    "min": 5,
+    "max": 10000,
+    "units": "milliseconds",
+    "step": 1,
+    "dependency": "label-animation",
+    "description": "Label animation time"
+  },
+  "display-number": {
+    "type": "combobox",
+    "default": 2,
+    "options": {
+      "Never": 0,
+      "Always": 1,
+      "2 or more windows": 2
+    },
+    "description": "Display number"
+  },
+  "number-style": {
+    "type": "combobox",
+    "default": 1,
+    "options": {
+      "Icon overlay": 0,
+      "Label prepend": 1
+    },
+    "dependency" : "group-windows<4",
+    "description": "Number style",
+    "tooltip": "Controls how the number of windows in a grouped button is presented. When on a vertical panel, the \"label prepend\" option is not possible so \"icon overlay\" will be used instead"
+  },
+
+
+  "group-windows": {
+    "type": "combobox",
+    "default": 2,
+    "options": {
+      "Grouped": 0,
+      "Pooled": 1,
+      "Automatic": 2,
+      "One to one": 3,
+      "Launcher": 4
+    },
+    "description": "Window list behavior style",
+    "tooltip": "Grouped: All windows for an application are managed by one button,\nPooled: All window list buttons for an application are pooled side by side,\nAutomatic: Windows are pooled, and then grouped when space is limited,\nOne to one: Each window gets their own button with no forced ordering,\nLauncher: Only pinned button are shown, behaves like a panel launcher."
+  },
+  "display-pinned": {
+    "type": "switch",
+    "default": true,
+    "dependency" : "group-windows<4",
+    "description": "Allow pinning of window list buttons"
+  },
+  "show-windows-for-current-monitor": {
+    "type": "switch",
+    "default": false,
+    "description": "Only show windows on the same monitor",
+    "tooltip": "If enabled, this applet instance only manages windows\nthat are displayed on the same monitor"
+  },
+  "show-tooltips": {
+    "type": "switch",
+    "default": true,
+    "description": "Show tooltips for window list buttons",
+    "tooltip": "Enable to show tooltips using window title or application name when hovering over window list buttons"
+  },
+  "hide-panel-apps": {
+    "type": "switch",
+    "default": false,
+    "dependency" : "group-windows<4",
+    "description": "Hide window buttons of pinned buttons on other CassiaWindowList instances",
+    "tooltip": "When enabled, windows for applications with pinned buttons on other instances of the CassiaWindowList applet will not show up in this window list"
+  },
+
+
+  "menu-show-on-hover": {
+    "type": "switch",
+    "default": true,
+    "description": "Show on hover",
+    "tooltip": "If enabled, a popup menu with a list of current windows will show when hovering"
+  },
+  "show-previews": {
+    "type": "switch",
+    "default": true,
+    "description": "Show window thumbnails in the popup window list menu",
+    "tooltip": "If enabled, the popup menu will show window thumbnails,\notherwise the menu will only show window titles\n(Always disabled when running Cinnamon in Software Rendering Mode)"
+  },
+  "number-of-unshrunk-previews": {
+    "type": "combobox",
+    "default": 7,
+    "options": {
+      "Extra large": 4,
+      "Large": 5,
+      "Medium": 7,
+      "Small": 9,
+      "Extra small": 11
+    },
+    "dependency": "show-previews",
+    "description": "Default thumbnail window size"
+  },
+  "menu-all-windows-of-pool": {
+    "type": "switch",
+    "default": true,
+    "dependency" : "group-windows=1",
+    "description": "Show thumbnails for all windows of an application pool",
+    "tooltip": "If enabled, a popup menu will contain all the application windows in the application pool rather then just the selected window within the application pool"
+  },
+  "menu-all-windows-of-auto": {
+    "type": "switch",
+    "default": true,
+    "dependency" : "group-windows=2",
+    "description": "Show thumbnails for all windows of an application pool",
+    "tooltip": "If enabled, a popup menu will contain all the application windows in the application pool rather then just the selected window within the application pool"
+  },
+  "preview-timeout-show": {
+    "type": "spinbutton",
+    "default": 500,
+    "min": 5,
+    "max": 10000,
+    "units": "milliseconds",
+    "step": 1,
+    "description": "Hover time before showing menu",
+    "dependency": "menu-show-on-hover",
+    "tooltip": "The waiting time before the thumbnail menu appears when hovering over a button\n(Not used when moving directly to a different button in the list)"
+  },
+  "preview-timeout-hide": {
+    "type": "spinbutton",
+    "default": 500,
+    "min": 5,
+    "max": 10000,
+    "units": "milliseconds",
+    "step": 1,
+    "description": "Time before closing after pointer leaves the menu",
+    "tooltip": "The waiting time for the thumbnail menu to close when leaving a button\n(Not used when moving directly to a different button in the list)"
+  },
+  "preview-middle-click": {
+    "type": "combobox",
+    "default": 0,
+    "options": {
+      "Close thumbnail menu": 0,
+      "Close window": 2,
+      "Minimize/Restore": 3,
+      "Maximize/Restore": 4,
+      "Group/Ungroup windows": 5,
+      "Open new window": 6,
+      "Move to workspace 1": 7,
+      "Move to workspace 2": 8,
+      "Move to workspace 3": 9,
+      "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
+      "Visible on this/all workspaces": 11,
+      "Move to monitor 1": 14,
+      "Move to monitor 2": 15,
+      "Move to monitor 3": 16,
+      "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
+      "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
+      "Do nothing": 12
+    },
+    "description": "Thumbnail window middle button action"
+  },
+  "preview-back-click": {
+    "type": "combobox",
+    "default": 3,
+    "options": {
+      "Close thumbnail menu": 0,
+      "Close window": 2,
+      "Minimize/Restore": 3,
+      "Maximize/Restore": 4,
+      "Group/Ungroup windows": 5,
+      "Open new window": 6,
+      "Move to workspace 1": 7,
+      "Move to workspace 2": 8,
+      "Move to workspace 3": 9,
+      "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
+      "Visible on this/all workspaces": 11,
+      "Move to monitor 1": 14,
+      "Move to monitor 2": 15,
+      "Move to monitor 3": 16,
+      "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
+      "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
+      "Do nothing": 12
+    },
+    "description": "Thumbnail window back button action"
+  },
+  "preview-forward-click": {
+    "type": "combobox",
+    "default": 4,
+    "options": {
+      "Close thumbnail menu": 0,
+      "Close window": 2,
+      "Minimize/Restore": 3,
+      "Maximize/Restore": 4,
+      "Group/Ungroup windows": 5,
+      "Open new window": 6,
+      "Move to workspace 1": 7,
+      "Move to workspace 2": 8,
+      "Move to workspace 3": 9,
+      "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
+      "Visible on this/all workspaces": 11,
+      "Move to monitor 1": 14,
+      "Move to monitor 2": 15,
+      "Move to monitor 3": 16,
+      "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
+      "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
+      "Do nothing": 12
+    },
+    "description": "Thumbnail window forward button action"
+  },
+  "grouped-mouse-action-btn1": {
+    "type": "combobox",
+    "default": 2,
+    "options": {
+      "Restore/Minimize most recent window": 0,
+      "Restore then cycle windows": 1,
+      "Show thumbnail menu": 2,
+      "Restore or hold for thumbnail menu": 3
+    },
+    "description": "Left button action for grouped buttons",
+    "tooltip": "Action taken when using the left mouse button on a window list entry for a group of windows"
+  },
+
+  "mouse-action-btn2": {
+    "type": "combobox",
+    "default": 0,
+    "options": {
+      "Thumbnail menu toggle": 0,
+      "Thumbnail menu hold": 1,
+      "Close window": 2,
+      "Minimize/Restore": 3,
+      "Maximize/Restore": 4,
+      "Restore most recent application window": 13,
+      "Group/Ungroup windows": 5,
+      "Open new window": 6,
+      "Move to workspace 1": 7,
+      "Move to workspace 2": 8,
+      "Move to workspace 3": 9,
+      "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
+      "Visible on this/all workspaces": 11,
+      "Move to monitor 1": 14,
+      "Move to monitor 2": 15,
+      "Move to monitor 3": 16,
+      "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
+      "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
+      "Do nothing": 12
+    },
+    "description": "Middle button action",
+    "tooltip": "Action taken when using the middle mouse button on window list entries"
+  },
+  "mouse-action-btn8": {
+    "type": "combobox",
+    "default": 6,
+    "options": {
+      "Thumbnail menu toggle": 0,
+      "Thumbnail menu hold": 1,
+      "Close window": 2,
+      "Minimize/Restore": 3,
+      "Maximize/Restore": 4,
+      "Restore most recent application window": 13,
+      "Group/Ungroup windows": 5,
+      "Open new window": 6,
+      "Move to workspace 1": 7,
+      "Move to workspace 2": 8,
+      "Move to workspace 3": 9,
+      "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
+      "Visible on this/all workspaces": 11,
+      "Move to monitor 1": 14,
+      "Move to monitor 2": 15,
+      "Move to monitor 3": 16,
+      "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
+      "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
+      "Do nothing": 12
+    },
+    "description": "Back button action",
+    "tooltip": "Action taken when using the back mouse button on window list entries"
+  },
+  "mouse-action-btn9": {
+    "type": "combobox",
+    "default": 5,
+    "options": {
+      "Thumbnail menu toggle": 0,
+      "Thumbnail menu hold": 1,
+      "Close window": 2,
+      "Minimize/Restore": 3,
+      "Maximize/Restore": 4,
+      "Restore most recent application window": 13,
+      "Group/Ungroup windows": 5,
+      "Open new window": 6,
+      "Move to workspace 1": 7,
+      "Move to workspace 2": 8,
+      "Move to workspace 3": 9,
+      "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
+      "Visible on this/all workspaces": 11,
+      "Move to monitor 1": 14,
+      "Move to monitor 2": 15,
+      "Move to monitor 3": 16,
+      "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
+      "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
+      "Do nothing": 12
+    },
+    "description": "Forward button action",
+    "tooltip": "Action taken when using the forward mouse button on window list entries"
+  },
+
+  "wheel-adjusts-preview-size": {
+    "type": "combobox",
+    "default": 1,
+    "options": {
+       "Off": 0,
+       "On (temporary)": 1,
+       "On (global default)": 2,
+       "On (application default)": 3
+    },
+    "dependency": "show-previews",
+    "description": "Adjust the thumbnail window sizes using the scroll-wheel",
+    "tooltip": "If enabled, the size of thumbnail windows will respond to the mouse scroll-wheel. The new size can have a temporary effect or persist on a global or per application basis"
+  },
+
+  "hotkey-bindings": {
+    "type" : "list",
+    "description" : "Hotkey binding available for assignment to a window",
+    "columns" : [
+        {"id": "enabled",     "title": "Enabled",      "type": "boolean", "default": true},
+        {"id": "cycle",       "title": "Cycle application windows", "type": "boolean", "default": false},
+        {"id": "keyCombo",    "title": "Key sequence", "type": "keybinding"},
+        {"id": "description", "title": "Description",  "type": "string"}
+    ],
+    "tooltip": "Define a list of hotkeys used to bring to the foreground specific windows.",
+    "default" : [
+            {
+                "enabled": false,
+                "cycle": true,
+                "keyCombo": "<Alt><Super>c::",
+                "description": "org.gnome.Calculator.desktop"
+            }
+    ]
+  },
+  "hotkey-minimize": {
+    "type": "switch",
+    "default": true,
+    "description": "Minimize window when hotkey target is already in focus",
+    "tooltip": "If enabled and application cycling is not enabled or there is only one window for the application, windows will be minimized if the window is already in focus"
+  },
+  "hotkey-new": {
+    "type": "switch",
+    "default": true,
+    "description": "Open a new window when the application is not running",
+    "tooltip": "Start a new window if no window is attached to a hotkey and the hotkey description is an exact match for the application name of a pinned button or a desktop file name"
+  },
+  "hotkey-sequence": {
+    "type": "switch",
+    "default": true,
+    "description": "Smart numeric hotkeys (using \"1\" automatically extends to 1-9)",
+    "tooltip": "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The first 9 windows of the assigned application, as ordered on the window-list, will be activated by the 9 hotkeys."
+  },
+
+  "hotkey-help" : {
+    "type" : "label",
+    "description" : "Hotkeys can be assigned to a window in two ways:\n1) Manual: Use \"Assign window to a hotkey\" in the button context menu.\n2) Automatic:  Enter a \"Description\" matching an application name or desktop file. i.e: \"Google Chrome\" or \"firefox.desktop\"\nNote: 1) Hotkey not working? it's possible the key combination is already assigned elsewhere. 2) If you remove or rearrange hotkeys, manual hotkey assignments might need to be reassigned. 3) Hotkeys associated with desktop files can not be manually assigned."
+  },
+
+  "adv-mouse-list": {
+    "type" : "list",
+    "description" : "Ctrl/Shift + mouse button actions",
+    "columns" : [
+        {"id": "enabled", "title": "Enabled", "type": "boolean", "default": true},
+        {"id": "keyAndButton", "title": "Key and mouse button", "type": "integer", "default": 0, "options": {
+           "Ctrl  + Left": 0,
+           "Ctrl  + Middle": 1,
+           "Ctrl  + Right": 2,
+           "Ctrl  + Back": 3,
+           "Ctrl  + Forward": 4,
+           "Shift + Left": 5,
+           "Shift + Middle": 6,
+           "Shift + Right": 7,
+           "Shift + Back": 8,
+           "Shift + Forward": 9
+           }
+        },
+        {"id": "context", "title": "Mouse click context", "type": "integer", "default": 0, "options": {
+           "Windowlist button": 0,
+           "Thumbnail window": 1
+           }
+        },
+        {"id": "action", "title": "Action to perform", "type": "integer", "default": 0, "options": {
+           "Thumbnail menu toggle": 0,
+           "Thumbnail menu hold": 1,
+           "Close window": 2,
+           "Minimize/Restore": 3,
+           "Maximize/Restore": 4,
+           "Restore most recent application window": 13,
+           "Group/Ungroup windows": 5,
+           "Open new window": 6,
+           "Move to workspace 1": 7,
+           "Move to workspace 2": 8,
+           "Move to workspace 3": 9,
+           "Move to workspace 4": 10,
+           "Move to previous workspace": 20,
+           "Move to next workspace": 21,
+           "Visible on this/all workspaces": 11,
+           "Move to monitor 1": 14,
+           "Move to monitor 2": 15,
+           "Move to monitor 3": 16,
+           "Move to monitor 4": 17,
+           "Move to previous monitor": 22,
+           "Move to next monitor": 23,
+           "Move to current/next monitor": 18,
+           "Move titlebar on to screen": 19,
+           "Do nothing": 12
+           }
+        }
+    ],
+    "tooltip": "Define a set of mouse button actions when the Ctrl or Shift keys are pressed.",
+    "default" : [
+            {
+                "enabled": true,
+                "keyAndButton": 0,
+                "context": 0,
+                "action": 6
+            }
+    ]
+  },
+
+  "adv-mouse-help" : {
+    "type" : "label",
+    "description" : "Note: The above list contents are frequently incorrectly displayed due to what I suspect is a Cinnamon bug. The values displayed in the edit dialog box are the correct values and the ones that will take effect. I will be looking into the cause of this issue at some point."
+  },
+
+  "backup-file-name" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Settings backup name",
+    "tooltip" : "If a name is entered here, the configuration of this applet instance will be backed up under that name. Backups will be listed in the Setup Wizard restore page when adding a new instance of CassiaWindowList to a panel."
+  },
+
+  "pinned-apps": {
+    "type": "generic",
+    "default": [
+      ["nemo.desktop", "firefox.desktop"]
+    ]
+  },
+
+  "custom-label-app": {
+    "type": "generic",
+    "default": ["Xlet-settings.py", "Cinnamon-desktop-editor.py", "Xlet-about-dialog"]
+  },
+  "custom-label-type": {
+    "type": "generic",
+    "default": [1, 1, 1]
+  },
+
+  "runWizard": {
+     "type": "generic",
+     "default": 1
+  }
+}

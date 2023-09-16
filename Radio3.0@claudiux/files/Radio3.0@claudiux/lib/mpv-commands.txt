@@ -4,3 +4,6 @@ mpv --list-properties
 
 echo '{ "command": ["get_property", "media-title"] }' | socat - /tmp/mpvsocket
 echo '{ "command": ["get_property", "audio-bitrate"] }' | socat - /tmp/mpvsocket | jq ".data"
+
+# Issue:
+/usr/bin/mpv --no-stop-screensaver --script=/home/claude/.local/share/cinnamon/applets/Radio3.0@claudiux/scripts/mpvWatchTitle.lua --no-terminal --no-video --metadata-codepage=auto --input-ipc-server=/run/user/1000/mpvradiosocket https://giorgia.radiobellissima.it:8090/radio.mp3 --cover-art-file=/home/claude/.config/Radio3.0/cover-art/f361b3_786c3987bd404f9f807b4ca7fb4f8337~mv2.jpg --cover-art-auto=exact

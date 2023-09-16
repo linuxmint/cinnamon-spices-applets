@@ -12,6 +12,7 @@ import { WindBox } from "./windBox";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
 const Lang: typeof imports.lang = imports.lang;
+const { ActorAlign } = imports.gi.Clutter;
 
 // stylesheet.css
 const STYLE_SUMMARYBOX = 'weather-current-summarybox'
@@ -25,7 +26,7 @@ const STYLE_CURRENT = 'current'
 const STYLE_LOCATION_SELECTOR = 'location-selector';
 
 export class CurrentWeather {
-	public readonly actor: imports.gi.St.Bin;
+	public readonly actor: imports.gi.St.BoxLayout;
 
 	// TODO: assert these properly
 	private weatherIcon!: imports.gi.St.Icon;
@@ -50,7 +51,7 @@ export class CurrentWeather {
 	private dewPointLabel!: imports.gi.St.Label;
 	private apiUniqueLabel!: imports.gi.St.Label;
 
-	private immediatePrecipitationBox!: imports.gi.St.Bin;
+	private immediatePrecipitationBox!: imports.gi.St.BoxLayout;
 	private immediatePrecipitationLabel!: imports.gi.St.Label;
 
 	private app: WeatherApplet;
@@ -60,8 +61,14 @@ export class CurrentWeather {
 
 	constructor(app: WeatherApplet) {
 		this.app = app;
-		this.actor = new Bin();
-		this.actor.style_class = STYLE_CURRENT;
+		this.actor = new BoxLayout({
+			x_expand: true,
+			y_expand: true,
+			style_class: STYLE_ICONBOX,
+			x_align: ActorAlign.CENTER,
+			y_align: ActorAlign.FILL
+		});
+
 		this.sunTimesUI = new SunTimesUI(app);
 		this.windBox = new WindBox(app);
 		this.app.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a)); //on location store change
@@ -109,8 +116,7 @@ export class CurrentWeather {
 
 	/** Destroys current weather UI box */
 	public Destroy(): void {
-		if (this.actor.get_child() != null)
-			this.actor.get_child().destroy()
+		this.actor.destroy_all_children()
 	}
 
 	public Rebuild(config: Config, textColorStyle: string): void {
@@ -124,12 +130,9 @@ export class CurrentWeather {
 			style_class: STYLE_ICON
 		})
 
-		// Main box
-		const box = new BoxLayout({ style_class: STYLE_ICONBOX })
-		box.add_actor(this.weatherIcon)
-		box.add_actor(this.BuildMiddleColumn(config, textColorStyle));
-		box.add_actor(this.BuildRightColumn(textColorStyle, config))
-		this.actor.set_child(box)
+		this.actor.add_actor(this.weatherIcon)
+		this.actor.add(this.BuildMiddleColumn(config, textColorStyle));
+		this.actor.add_actor(this.BuildRightColumn(textColorStyle, config))
 	};
 
 	// Build helpers
@@ -138,11 +141,11 @@ export class CurrentWeather {
 		this.weatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
 
 		const middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
-		middleColumn.add_actor(this.BuildLocationSection())
+		middleColumn.add(this.BuildLocationSection())
 		middleColumn.add(this.weatherSummary, { expand: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, x_fill: false, y_fill: false })
 
 		this.immediatePrecipitationLabel = new Label({ style_class: "weather-immediate-precipitation" });
-		this.immediatePrecipitationBox = new Bin();
+		this.immediatePrecipitationBox = new BoxLayout({x_align: ActorAlign.CENTER});
 		this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel)
 		this.immediatePrecipitationBox.hide();
 		middleColumn.add_actor(this.immediatePrecipitationBox);
@@ -173,7 +176,7 @@ export class CurrentWeather {
 		const [windCaption, windLabel] = this.windBox.Rebuild(config, textColorStyle);
 
 		const rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
-		const rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES })
+		const rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES, x_expand: true, x_align: ActorAlign.FILL })
 		rb_captions.add_actor(this.temperatureCaption);
 		rb_captions.add_actor(this.humidityCaption);
 		rb_captions.add_actor(this.pressureCaption);
@@ -187,14 +190,14 @@ export class CurrentWeather {
 		rb_values.add_actor(this.dewPointLabel);
 		rb_values.add_actor(this.apiUniqueLabel);
 
-		const rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
+		const rightColumn = new BoxLayout({ style_class: STYLE_DATABOX, x_align: ActorAlign.FILL, x_expand: true });
 		rightColumn.add_actor(rb_captions);
 		rightColumn.add_actor(rb_values);
 		return rightColumn;
 	}
 
 	private BuildLocationSection() {
-		this.locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), });
+		this.locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), x_expand: true, x_align: Align.MIDDLE });
 		this.location = this.locationButton.actor;
 		this.location.connect(SIGNAL_CLICKED, () => {
 			if (this.app.encounteredError) this.app.RefreshWeather(true);
@@ -228,7 +231,7 @@ export class CurrentWeather {
 
 		const box = new BoxLayout();
 		box.add(this.previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
-		box.add(this.location, { x_fill: false, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
+		box.add(this.location, { x_fill: true, expand: true });
 		box.add(this.nextLocationButton.actor, { x_fill: false, x_align: Align.END, y_align: Align.MIDDLE, expand: false });
 		return box;
 	}
@@ -291,7 +294,7 @@ export class CurrentWeather {
 		const temp = TempToUserConfig(dewPoint, this.app.config);
 		this.dewPointCaption.remove_style_class_name(STYLE_HIDDEN);
 		this.dewPointLabel.remove_style_class_name(STYLE_HIDDEN);
-		this.dewPointLabel.text = temp;
+		this.dewPointLabel.set_text(temp);
 	}
 
 	private SetWeatherIcon(iconNames: BuiltinIcons[], customIconName: string) {

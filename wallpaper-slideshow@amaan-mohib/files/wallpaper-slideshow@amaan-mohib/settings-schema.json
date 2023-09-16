@@ -1,0 +1,49 @@
+{
+  "head_path": {
+    "type": "header",
+    "description": "Wallpaper path"
+  },
+  "wallpaper_path": {
+    "type": "filechooser",
+    "select-dir": true,
+    "default": "",
+    "description": "Specify path of the wallpaper directory",
+    "tooltip": "For example: /home/username/Pictures/wallpapers"
+  },
+  "head_delay": {
+    "type": "header",
+    "description": "Delay"
+  },
+  "wallpaper_delay": {
+    "type": "entry",
+    "default": "86400",
+    "description": "Specify the delay to change the wallpaper (in seconds)",
+    "tooltip": "For example: 86400 for 24hrs"
+  },
+  "head_timer": {
+    "type": "header",
+    "description": "Custom interval"
+  },
+  "wallpaper_custom_timer": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Specify a custom interval to check for updates",
+    "tooltip": "Default: 1hr"
+  },
+  "wallpaper_timer": {
+    "type": "entry",
+    "default": "3600",
+    "dependency": "wallpaper_custom_timer",
+    "description": "Specify the interval (in seconds) to check for updates",
+    "tooltip": "For example: 3600 for 1hr"
+  },
+  "head_paused": {
+    "type": "header",
+    "description": "Paused"
+  },
+  "wallpaper_paused": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Pause the wallpaper slideshow"
+  }
+}

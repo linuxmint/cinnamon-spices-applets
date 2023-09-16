@@ -26,11 +26,17 @@ NetBeatApplet.prototype = {
 
 	refresh: function() {
 		let d = new Date();
-		let h = d.getHours();
-		let m = d.getMinutes();
-		let s = d.getSeconds();
-		let tzoff = 60 + d.getTimezoneOffset();
-		let beats = ('000' + Math.floor((s + (m + tzoff) * 60 + h * 3600) / 86.4) % 1000).slice(-3);
+		let h = d.getUTCHours() + 1;
+		let m = d.getUTCMinutes();
+		let s = d.getUTCSeconds();
+		//let tzoff = 60 + d.getTimezoneOffset();
+		//let beats = ('000' + Math.floor((s + (m + tzoff) * 60 + h * 3600) / 86.4) % 1000).slice(-3);
+
+		// calculation fix
+		let beatSecs = (s + m * 60 + h * 3600);
+		let netBeats = beatSecs / 86.4;
+		let beats = ("000" + parseInt(netBeats)).slice(-3);
+
 		this.set_applet_label(_("@" + beats));
 		// only update, if the applet is running
 		return this.keepUpdating;
