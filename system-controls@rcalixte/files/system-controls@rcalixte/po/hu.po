@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-09 14:39-0500\n"
-"PO-Revision-Date: \n"
+"POT-Creation-Date: 2023-09-16 18:19-0400\n"
+"PO-Revision-Date: 2023-09-16 18:20-0400\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -15,41 +15,42 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
-#: applet.js:29
+#. metadata.json->name
+#: 5.4/applet.js:28
 msgid "System Controls"
 msgstr "Rendszervezérlő"
 
-#: applet.js:66
+#: 5.4/applet.js:61
 msgid "Restart Cinnamon"
 msgstr "Cinnamon környezet újraindítása"
 
-#: applet.js:74
+#: 5.4/applet.js:69
 msgid "Lock Screen"
 msgstr "Képernyő zárolása"
 
-#: applet.js:96 applet.js:105 applet.js:113
+#: 5.4/applet.js:91 5.4/applet.js:100 5.4/applet.js:108
 msgid "Switch User"
 msgstr "Felhasználóváltás"
 
-#: applet.js:122
+#: 5.4/applet.js:117
 msgid "Log Out"
 msgstr "Kijelentkezés"
 
-#: applet.js:130
+#: 5.4/applet.js:125
 msgid "Suspend"
 msgstr "Felfüggesztés"
 
-#: applet.js:136
+#: 5.4/applet.js:131
 msgid "Hibernate"
 msgstr "Hibernálás"
 
-#: applet.js:144
+#: 5.4/applet.js:139
 msgid "Restart"
 msgstr "Újraindítás"
 
-#: applet.js:150
+#: 5.4/applet.js:145
 msgid "Power Off"
 msgstr "Kikapcsolás"
 
@@ -62,7 +63,3 @@ msgstr ""
 "képernyő zárolásához, a felhasználóváltáshoz, a bejelentkezéshez, a "
 "felfüggesztéshez, a hibernáláshoz, az újraindításhoz vagy a számítógép "
 "kikapcsolásához"
-
-#. metadata.json->name
-msgid "System Controls Applet"
-msgstr "Rendszervezérlő kisalkalmazás"

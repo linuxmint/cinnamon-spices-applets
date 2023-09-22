@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-20 23:41-0400\n"
+"POT-Creation-Date: 2023-09-18 22:14-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,24 +17,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.0/applet.js:2170
+#: 4.0/applet.js:2192
 msgid "Applet Preferences"
 msgstr ""
 
-#: 4.0/applet.js:2174
+#: 4.0/applet.js:2196
 msgid "About..."
 msgstr ""
 
-#: 4.0/applet.js:2178
+#: 4.0/applet.js:2200
 msgid "Configure..."
 msgstr ""
 
-#: 4.0/applet.js:2182
+#: 4.0/applet.js:2204
 #, javascript-format
 msgid "Remove '%s'"
 msgstr ""
 
-#: 4.0/applet.js:2184
+#: 4.0/applet.js:2206
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr ""
 
@@ -44,91 +44,107 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2193
+#: 4.0/applet.js:2215
 msgid "Open new window"
 msgstr ""
 
-#: 4.0/applet.js:2199
+#: 4.0/applet.js:2223
+msgid "Remove from panel"
+msgstr ""
+
+#: 4.0/applet.js:2225
+msgid "Remove from this workspace"
+msgstr ""
+
+#: 4.0/applet.js:2231
+msgid "Pin to panel"
+msgstr ""
+
+#: 4.0/applet.js:2233
 msgid "Pin to this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2237
+#: 4.0/applet.js:2274
 msgid "Pin to other workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2258
+#: 4.0/applet.js:2295
 msgid "Pin to all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2283 4.0/applet.js:2466
+#: 4.0/applet.js:2313
+msgid "Pin to launcher"
+msgstr ""
+
+#: 4.0/applet.js:2331 4.0/applet.js:2514
 msgid "Add new Hotkey for"
 msgstr ""
 
-#: 4.0/applet.js:2297
+#: 4.0/applet.js:2345
 msgid "Recent files"
 msgstr ""
 
-#: 4.0/applet.js:2321
+#: 4.0/applet.js:2369
 msgid "Places"
 msgstr ""
 
-#: 4.0/applet.js:2363
+#: 4.0/applet.js:2411
 msgid "Only on this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2365
+#: 4.0/applet.js:2413
 msgid "Visible on all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2366
+#: 4.0/applet.js:2414
 msgid "Move to another workspace"
 msgstr ""
 
-#: 4.0/applet.js:2385
+#: 4.0/applet.js:2433
 msgid "Move to another monitor"
 msgstr ""
 
-#: 4.0/applet.js:2393
+#: 4.0/applet.js:2441
 msgid "Monitor"
 msgstr ""
 
-#: 4.0/applet.js:2421
+#: 4.0/applet.js:2469
 msgid "unassigned"
 msgstr ""
 
-#: 4.0/applet.js:2432 4.0/applet.js:2463
+#: 4.0/applet.js:2480 4.0/applet.js:2511
 msgid "Assign window to a hotkey"
 msgstr ""
 
-#: 4.0/applet.js:2486
+#: 4.0/applet.js:2534
 msgid "Change application label contents"
 msgstr ""
 
-#: 4.0/applet.js:2489
+#: 4.0/applet.js:2537
 msgid "Remove custom setting"
 msgstr ""
 
-#: 4.0/applet.js:2496
+#: 4.0/applet.js:2544
 msgid "Use window title"
 msgstr ""
 
-#: 4.0/applet.js:2503
+#: 4.0/applet.js:2551
 msgid "Use application name"
 msgstr ""
 
-#: 4.0/applet.js:2510
+#: 4.0/applet.js:2558
 msgid "No label"
 msgstr ""
 
-#: 4.0/applet.js:2521
+#: 4.0/applet.js:2569
 msgid "Ungroup application windows"
 msgstr ""
 
-#: 4.0/applet.js:2532
+#: 4.0/applet.js:2580
 msgid "Group application windows"
 msgstr ""
 
-#: 4.0/applet.js:2542
+#: 4.0/applet.js:2590
 msgid "Automatic grouping/ungrouping"
 msgstr ""
 
@@ -138,31 +154,31 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2571
+#: 4.0/applet.js:2619
 msgid "Move titlebar on to screen"
 msgstr ""
 
-#: 4.0/applet.js:2576
+#: 4.0/applet.js:2624
 msgid "Restore"
 msgstr ""
 
-#: 4.0/applet.js:2580
+#: 4.0/applet.js:2628
 msgid "Minimize"
 msgstr ""
 
-#: 4.0/applet.js:2586
+#: 4.0/applet.js:2634
 msgid "Unmaximize"
 msgstr ""
 
-#: 4.0/applet.js:2593
+#: 4.0/applet.js:2641
 msgid "Close others"
 msgstr ""
 
-#: 4.0/applet.js:2604
+#: 4.0/applet.js:2652
 msgid "Close all"
 msgstr ""
 
-#: 4.0/applet.js:2613
+#: 4.0/applet.js:2661
 msgid "Close"
 msgstr ""
 
@@ -444,8 +460,38 @@ msgid ""
 "Launcher: Only pinned button are shown, behaves like a panel launcher."
 msgstr ""
 
+#. 4.0->settings-schema.json->display-pinned->options
+msgid "Disabled"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-pinned->options
+msgid "Unique for each workspace"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-pinned->options
+msgid "Common across workspaces"
+msgstr ""
+
 #. 4.0->settings-schema.json->display-pinned->description
-msgid "Allow pinning of window list buttons"
+msgid "Pinning of window list buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-pinned->tooltip
+msgid ""
+"Controls whether window list buttons can be pinned, and whether each "
+"workspace has a unique set of pinned buttons or one common set shared across "
+"all workspaces. When in \"Common across workspaces\" mode the order of the "
+"pinned buttons is also maintained across workspaces."
+msgstr ""
+
+#. 4.0->settings-schema.json->synchronize-pinned->description
+msgid "Synchronize launcher buttons across all workspaces"
+msgstr ""
+
+#. 4.0->settings-schema.json->synchronize-pinned->tooltip
+msgid ""
+"If enabled, the number and order of launcher buttons on the panel will be "
+"synchronize across all workspaces."
 msgstr ""
 
 #. 4.0->settings-schema.json->show-windows-for-current-monitor->description
@@ -724,6 +770,15 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to current/next monitor"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Pin to panel toggle"
 msgstr ""
 
 #. 4.0->settings-schema.json->preview-middle-click->options

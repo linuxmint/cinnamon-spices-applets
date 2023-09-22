@@ -47,7 +47,7 @@
     "general-settings" : {
       "type" : "section",
       "title" : "General window list settings",
-      "keys" : ["group-windows", "display-pinned", "trailing-pinned-behaviour", "show-windows-for-current-monitor", "show-tooltips", "hide-panel-apps"]
+      "keys" : ["group-windows", "display-pinned", "synchronize-pinned", "trailing-pinned-behaviour", "show-windows-for-current-monitor", "show-tooltips", "hide-panel-apps"]
     },
     "general-mouse" : {
       "type" : "section",
@@ -197,10 +197,23 @@
     "tooltip": "Grouped: All windows for an application are managed by one button,\nPooled: All window list buttons for an application are pooled side by side,\nAutomatic: Windows are pooled, and then grouped when space is limited,\nOne to one: Each window gets their own button with no forced ordering,\nLauncher: Only pinned button are shown, behaves like a panel launcher."
   },
   "display-pinned": {
-    "type": "switch",
-    "default": true,
+    "type": "combobox",
+    "default": 1,
+    "options": {
+       "Disabled": 0,
+       "Unique for each workspace": 1,
+       "Common across workspaces": 2
+    },
     "dependency" : "group-windows<4",
-    "description": "Allow pinning of window list buttons"
+    "description": "Pinning of window list buttons",
+    "tooltip": "Controls whether window list buttons can be pinned, and whether each workspace has a unique set of pinned buttons or one common set shared across all workspaces. When in \"Common across workspaces\" mode the order of the pinned buttons is also maintained across workspaces."
+  },
+  "synchronize-pinned": {
+    "type": "switch",
+    "default": false,
+    "dependency" : "group-windows=4",
+    "description": "Synchronize launcher buttons across all workspaces",
+    "tooltip": "If enabled, the number and order of launcher buttons on the panel will be synchronize across all workspaces."
   },
   "show-windows-for-current-monitor": {
     "type": "switch",
@@ -308,6 +321,7 @@
       "Move to next monitor": 23,
       "Move to current/next monitor": 18,
       "Move titlebar on to screen": 19,
+      "Pin to panel toggle": 24,
       "Do nothing": 12
     },
     "description": "Thumbnail window middle button action"
@@ -337,6 +351,7 @@
       "Move to next monitor": 23,
       "Move to current/next monitor": 18,
       "Move titlebar on to screen": 19,
+      "Pin to panel toggle": 24,
       "Do nothing": 12
     },
     "description": "Thumbnail window back button action"
@@ -366,6 +381,7 @@
       "Move to next monitor": 23,
       "Move to current/next monitor": 18,
       "Move titlebar on to screen": 19,
+      "Pin to panel toggle": 24,
       "Do nothing": 12
     },
     "description": "Thumbnail window forward button action"
@@ -410,6 +426,7 @@
       "Move to next monitor": 23,
       "Move to current/next monitor": 18,
       "Move titlebar on to screen": 19,
+      "Pin to panel toggle": 24,
       "Do nothing": 12
     },
     "description": "Middle button action",
@@ -442,6 +459,7 @@
       "Move to next monitor": 23,
       "Move to current/next monitor": 18,
       "Move titlebar on to screen": 19,
+      "Pin to panel toggle": 24,
       "Do nothing": 12
     },
     "description": "Back button action",
@@ -474,6 +492,7 @@
       "Move to next monitor": 23,
       "Move to current/next monitor": 18,
       "Move titlebar on to screen": 19,
+      "Pin to panel toggle": 24,
       "Do nothing": 12
     },
     "description": "Forward button action",
@@ -584,6 +603,7 @@
            "Move to next monitor": 23,
            "Move to current/next monitor": 18,
            "Move titlebar on to screen": 19,
+           "Pin to panel toggle": 24,
            "Do nothing": 12
            }
         }
@@ -616,6 +636,11 @@
     "default": [
       ["nemo.desktop", "firefox.desktop"]
     ]
+  },
+
+  "commoned-pinned-apps": {
+    "type": "generic",
+    "default": ["nemo.desktop", "firefox.desktop"]
   },
 
   "custom-label-app": {
