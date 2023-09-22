@@ -385,7 +385,7 @@ class CobiPopupMenuItem extends PopupMenu.PopupBaseMenuItem {
   }
   
   _onButtonReleaseEvent (actor, event) {
-    if (this._settings.getValue("preview-close-on-middle-click") && (event.get_state() & Clutter.ModifierType.BUTTON2_MASK)) {
+    if (this._settings.getValue("preview-close-on-middle-click") && (event.get_button() === 2)) {
       this._onClose();
       return true;
     }
