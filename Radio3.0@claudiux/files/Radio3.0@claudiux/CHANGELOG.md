@@ -1,3 +1,6 @@
+### v1.6.0~20231004
+  * More than 300 radio stations in Radio3.0_EXAMPLES.json!
+
 ### v1.5.0~20230722
   * New icon. Author: @Hilyxx
 
