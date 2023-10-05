@@ -70,8 +70,8 @@ msgid ""
 "An applet to help you shutdown, restart and suspend your system with single "
 "click"
 msgstr ""
-"Une applet pour vous aider à éteindre, redémarrer et mettre en veille votre "
-"système d'un simpleclic"
+"Un applet pour vous aider à éteindre, redémarrer et mettre en veille votre "
+"système d'un simple clic"
 
 #. ShutdownMenuWithIcons@LLOBERA->metadata.json->name
 msgid "Shutdown Menu With Icons"
