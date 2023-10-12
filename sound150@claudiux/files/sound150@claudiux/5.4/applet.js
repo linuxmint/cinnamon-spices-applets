@@ -525,6 +525,7 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
         }
 
         let slider = new VolumeSlider(applet, stream, name, iconName);
+        slider._slider.style = "min-width: 6em;";
         this.addMenuItem(slider);
     }
 }
@@ -805,10 +806,15 @@ class Player extends PopupMenu.PopupMenuSection {
         else
             this._album = _("Unknown Album");
 
-        if (metadata["xesam:title"])
+        if (metadata["xesam:title"]) {
             this._title = metadata["xesam:title"].unpack();
-        else
+            if (this._title.includes(" - ") && this._artist == _("Unknown Artist")) {
+                [this._artist, this._title] = this._title.split(" - ");
+                this.artistLabel.set_text(this._artist);
+            }
+        } else {
             this._title = _("Unknown Title");
+        }
         this.titleLabel.set_text(this._title);
 
         let change = false;
@@ -1012,7 +1018,6 @@ class MediaPlayerLauncher extends PopupMenu.PopupBaseMenuItem {
 
     _onActivate(event) {
         let _time = event.time;
-        log("_time = " + _time);
         this._app.activate_full(-1, _time);
     }
 }

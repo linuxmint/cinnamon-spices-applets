@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### v4.2.0~20231012
+  * Try to distinguish between the artist and the song title.
+
 ### v4.1.1~20230719
   * Change style of 'sound-player-overlay' with "height: auto;". Thanks to Hilyxx!
 
