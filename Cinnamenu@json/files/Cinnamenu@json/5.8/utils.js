@@ -138,7 +138,7 @@ class NewTooltip {
 
 //===================================================
 const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
-    if (!str) {
+    if (!str || !q) {
         return { score: 0, result: str };
     }
 
@@ -146,7 +146,7 @@ const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
     let foundPosition = 0;
     let foundLength = 0;
     const str2 = graphemeBaseChars(str).toLocaleUpperCase();
-    //q is already graphemeBaseChars() in _doSearch()
+    //q is already graphemeBaseChars().toLocaleUpperCase() in _doSearch()
     let score = 0, bigrams_score = 0;
 
     if (new RegExp('\\b'+escapeRegExp(q)).test(str2)) { //match substring from beginning of words
@@ -191,7 +191,11 @@ const searchStrPart = (q, str, noFuzzySearch, noSubStringSearch) => {
             score = Math.min(longest.length / q.length, 1.0) * bigrams_score;
         }
     }
+    //reduce score if q is short
+    //if (q.length === 1) score *= 0.5;
+    //if (q.length === 2) score *= 0.75;
     //return result of match
+    
     if (HIGHTLIGHT_MATCH && score > 0) {
         let markup = str.slice(0, foundPosition) + '<b>' +
                                     str.slice(foundPosition, foundPosition + foundLength) + '</b>' +
@@ -207,11 +211,14 @@ const searchStr = (q, str, noFuzzySearch = false, noSubStringSearch = false) => 
     if (separatorIndex < 1) {
         return searchStrPart(q, str, noFuzzySearch, noSubStringSearch);
     }
-    
+
+    //There are two search terms separated by a space.
     const part1 = searchStrPart(q.slice(0, separatorIndex), str, noFuzzySearch, noSubStringSearch);
     const part2 = searchStrPart(q.slice(separatorIndex + 1), str, noFuzzySearch, noSubStringSearch);
     const avgScore = (part1.score + part2.score) / 2.0;
-    return {score: avgScore, result: part1.result};
+    const markup = (part1.score >= part2.score) ? part1.result : part2.result;
+    
+    return {score: avgScore, result: markup};
 };
 
 var chromiumProfileDirs = null;

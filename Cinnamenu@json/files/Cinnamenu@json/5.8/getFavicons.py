@@ -19,23 +19,24 @@ def get_favicons(sqlite_file, domains_list):
     if not os.path.exists(FAVICON_CACHE_DIR):
         os.mkdir(FAVICON_CACHE_DIR)
 
-    #make temp copy of Favicons file as orignal is probably locked.
-    fd, temp_filename = tempfile.mkstemp()
-    os.close(fd)
-
-    domains_to_favicons = {}
-
+    sqlite_file_copy_made = False
     try:
-        shutil.copyfile(sqlite_file, temp_filename)
-
-        conn = sqlite3.Connection(temp_filename)
-
         domains_to_favicons = {}
         for domain in domains_list:
             url_parsed = urllib.parse.urlparse(domain)
             netloc = url_parsed.netloc
             filename = os.path.join(FAVICON_CACHE_DIR, netloc)
+
             if not os.path.exists(filename):
+
+                if not sqlite_file_copy_made:
+                    #make temp copy of Favicons file as orignal is probably locked.
+                    fd, temp_filename = tempfile.mkstemp()
+                    os.close(fd)
+                    shutil.copyfile(sqlite_file, temp_filename)
+                    conn = sqlite3.Connection(temp_filename)
+                    sqlite_file_copy_made = True
+
                 cur = conn.cursor()
                 cur.execute("SELECT page_url, icon_id FROM icon_mapping WHERE page_url LIKE ?", [domain + "%"])
 
@@ -55,8 +56,9 @@ def get_favicons(sqlite_file, domains_list):
     except:
         pass
 
-    if os.path.exists(temp_filename):
-        os.unlink(temp_filename)
+    if sqlite_file_copy_made:
+        if os.path.exists(temp_filename):
+            os.unlink(temp_filename)
 
     return domains_to_favicons
 
