@@ -253,9 +253,14 @@ const readChromiumBookmarksFile = function(path, appInfo) {
 
 //=====================
 
-class BookmarksManager {
-    constructor() {
-        this.bookmarks = [];
+let bookmarks = null;
+
+const getWebBookmarksAsync = function() {
+    return new Promise(function(resolve, reject) {
+        if (bookmarks) {
+            resolve(bookmarks);
+            return;
+        }
         const promises = [];
 
         getChromiumProfileDirs().forEach( profilePath => {
@@ -265,11 +270,12 @@ class BookmarksManager {
             promises.push(readChromiumBookmarksFile(path, appInfo));
         });
         Promise.all(promises).then((results) => {
-            results.forEach( result => this.bookmarks = this.bookmarks.concat(result));
+            bookmarks = [];
+            results.forEach( result => bookmarks = bookmarks.concat(result));
 
-            this.bookmarks = this.bookmarks.concat(readFirefoxProfiles());
+            bookmarks = bookmarks.concat(readFirefoxProfiles());
 
-            this.bookmarks.forEach( bookmark => {
+            bookmarks.forEach( bookmark => {
                 if (!bookmark.icon_filename){
                     bookmark.gicon = bookmark.app.get_icon();
                 }
@@ -285,15 +291,18 @@ class BookmarksManager {
 
             // Create a unique list of bookmarks across all browsers.
             const bm = {};
-            this.bookmarks.forEach( bookmark => bm[bookmark.uri] = bookmark );
-            this.bookmarks = [];
-            Object.keys(bm).forEach( key => this.bookmarks.push(bm[key]) );
+            bookmarks.forEach( bookmark => bm[bookmark.uri] = bookmark );
+            bookmarks = [];
+            Object.keys(bm).forEach( key => bookmarks.push(bm[key]) );
 
-            this.bookmarks.sort( (a, b) => { return (a.name.toUpperCase() > b.name.toUpperCase()) ?
+            bookmarks.sort( (a, b) => { return (a.name.toUpperCase() > b.name.toUpperCase()) ?
                                                 1 : (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : 0;  });
+            resolve(bookmarks);
+        }).catch( e => {
+            global.logError(e.message, e.stack);
+            resolve([]);
+        });
+    });
+};
 
-        }).catch((e) => global.logError(e.message, e.stack));
-    }
-}
-
-module.exports = {BookmarksManager};
+module.exports = {getWebBookmarksAsync};
