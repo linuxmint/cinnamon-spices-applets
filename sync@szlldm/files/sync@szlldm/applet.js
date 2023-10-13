@@ -63,7 +63,7 @@ MyApplet.prototype = {
 	dirty = dirty.substring(7).trim();
 	writeback = writeback.substring(11).trim();
 
-	var text = "Click to sync";
+	var text =  _("Click to sync");
 
 	text += "\n---------------------------\n";
 	text += dirty + " / " + writeback;
