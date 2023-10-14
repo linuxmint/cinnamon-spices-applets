@@ -2015,12 +2015,13 @@ WebRadioReceiverAndRecorder.prototype = {
       let artist = "";
       if (title.includes(" - ")) {
         [artist, title] = title.split(" - ");
-        _tooltip += "<i><b>" + artist.replace(/\"/g, "") + "</b></i>";
+        if (artist.length > 0)
+          _tooltip += "<i><b>" + artist.replace(/\"/g, "") + "</b></i>\n";
       }
-      _tooltip += "\n" + title.replace(/\"/g, "");
+      _tooltip += title.replace(/\"/g, "") + "\n";
     }
     if (this.percentage !== "undefined")
-      _tooltip += "\n"+_("Volume: %s%").format(this.percentage);
+      _tooltip += _("Volume: %s%").format(this.percentage);
 
     if (this.show_help_in_tooltip) {
       if (this.record_pid != null)
@@ -2053,7 +2054,8 @@ WebRadioReceiverAndRecorder.prototype = {
         let artist = "";
         if (title.includes(" - ")) {
           [artist, title] = title.split(" - ");
-          _tooltip += "\n<i><b>" + artist.replace(/\"/g, "") + "</b></i>";
+          if (artist.length > 0)
+            _tooltip += "\n<i><b>" + artist.replace(/\"/g, "") + "</b></i>";
         }
         _tooltip += "\n" + title.replace(/\"/g, "");
       }
