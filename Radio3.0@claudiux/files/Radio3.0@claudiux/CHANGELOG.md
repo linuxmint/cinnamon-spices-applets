@@ -1,3 +1,6 @@
+### v1.7.0~20231014
+  * Try distinguishing artist and song name in tooltip.
+
 ### v1.6.0~20231004
   * More than 300 radio stations in Radio3.0_EXAMPLES.json!
 

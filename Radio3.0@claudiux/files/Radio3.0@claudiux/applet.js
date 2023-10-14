@@ -2009,8 +2009,17 @@ WebRadioReceiverAndRecorder.prototype = {
       this.radioNameBolded = this.in_bold(this.get_radio_name(this.last_radio_listened_to, "change_volume_in_radio_tooltip"));
 
     let _tooltip = "" + this.radioNameBolded + this.codecAndBitrate + "\n";
-    if (title.length > 0)
-      _tooltip += title + "\n";
+    //~ if (title.length > 0)
+      //~ _tooltip += title + "\n";
+    if (title.length > 0) {
+      let artist = "";
+      if (title.includes(" - ")) {
+        [artist, title] = title.split(" - ");
+        if (artist.length > 0)
+          _tooltip += "<i><b>" + artist.replace(/\"/g, "") + "</b></i>\n";
+      }
+      _tooltip += title.replace(/\"/g, "") + "\n";
+    }
     if (this.percentage !== "undefined")
       _tooltip += _("Volume: %s%").format(this.percentage);
 
@@ -2041,8 +2050,15 @@ WebRadioReceiverAndRecorder.prototype = {
 
       let title = "" + this.songTitle; // this.get_mpv_title();
 
-      if (title.length > 0)
+      if (title.length > 0) {
+        let artist = "";
+        if (title.includes(" - ")) {
+          [artist, title] = title.split(" - ");
+          if (artist.length > 0)
+            _tooltip += "\n<i><b>" + artist.replace(/\"/g, "") + "</b></i>";
+        }
         _tooltip += "\n" + title.replace(/\"/g, "");
+      }
 
       if (this.context_menu_item_slider != null) {
         let percentage = this.context_menu_item_slider.slider.percentage;
