@@ -129,7 +129,7 @@ const CaptionType = {
   None: 2            // No caption should be displayed
 }
 
-// The possible user setting for how application windows should be grouped
+// The possible user setting for how application windows should be grouped by default
 const GroupType = {
    Grouped: 0,       // All windows for an application should be grouped under a single windowlist button
    Pooled: 1,        // All windows for an application should be pooled side-by-side on the windowlist
@@ -193,12 +193,13 @@ const MouseAction = {
   PinToPanel: 24         // Pin the appButton to the panel
 }
 
-// Possible settings for the left mouse action for grouped buttons
+// Possible settings for the left mouse action for grouped buttons (or Laucher with running windows)
 const LeftClickGrouped = {
    Toggle: 0,         // Restore most resent window or minimize if already in focus
    Cycle: 1,          // Restore most recent window or cycle windows if any window is already in focus
    Thumbnail: 2,      // Show the Thumbnail menu of windows
-   ToggleAndHold: 3   // Restore or Minimize on click, "hold" style thumbnail meanu on hold
+   ToggleAndHold: 3,  // Restore or Minimize on click, "hold" style thumbnail menu on hold
+   NewAndHold: 4      // Open a new window on click, "hold" style thumbnail menu on hold **Only possible in Launcher mode!**
 }
 
 // Possible values for the Pinned label setting
@@ -321,6 +322,7 @@ function animatedRemoveAppButton(workspace, time, button) {
       }
     }
   }
+  /*
   // If we removed a button for an application that is part of a "Smart numeric hotkey" then we might need to update the tooltips for the remaining app buttons
   if (app && button._settings.getValue("hotkey-sequence")) {
     let hotKeys = button._applet._keyBindings;
@@ -336,6 +338,7 @@ function animatedRemoveAppButton(workspace, time, button) {
        }
     }
   }
+  */
   Tweener.addTween(button._labelBox, {
     natural_width: 0,
     time: time * 0.001,
@@ -1077,6 +1080,14 @@ class WindowListButton {
     this._updateNumber();
   }
 
+  getButton1Action() {
+     if (this._settings.getValue("group-windows")===GroupType.Launcher) {
+        return this._settings.getValue("launcher-mouse-action-btn1");
+     } else {
+        return this._settings.getValue("grouped-mouse-action-btn1");
+     }
+  }
+
   get_app_id() {
     return this._app.get_id();
   }
@@ -1241,6 +1252,8 @@ class WindowListButton {
         return b.user_time - a.user_time;
       });
       this.sortedWindows = windows;
+    } else {
+       this.sortedWindows = this._windows;
     }
     this._currentWindow = windows.length > 0 ? windows[0] : null;
     if (this._currentWindow) {
@@ -1264,7 +1277,7 @@ class WindowListButton {
        return;
     }
     let text = null;
-    if (this._windows.length == 0 || this._currentWindow.get_title()==null || (this._windows.length > 1 && this._settings.getValue("grouped-mouse-action-btn1")===LeftClickGrouped.Thumbnail)) {
+    if (this._windows.length == 0 || this._currentWindow.get_title()==null || (this._windows.length > 1 && this.getButton1Action()===LeftClickGrouped.Thumbnail)) {
        text = this._app.get_name();
     } else {
        text = this._currentWindow.get_title();
@@ -1275,43 +1288,54 @@ class WindowListButton {
     let keySequence = this._settings.getValue("hotkey-sequence");
     let keyNew = this._settings.getValue("hotkey-new");
     for (let i=0 ; i < hotKeys.length ; i++) {
-       let [seqCombo,secondCombo] = getSmartNumericHotkey(hotKeys[i].keyCombo);
-       if (hotKeys[i].enabled===true && hotKeys[i].keyCombo!==null && (hotKeyWindows[i] === this._currentWindow ||
-          (this._pinned && keyNew && !hotKeyWindows[i] && (this._app.get_name() == hotKeys[i].description || this._app.get_id() == hotKeys[i].description)) ||
-          ((hotKeys[i].cycle===true || (seqCombo && keySequence)) && hotKeyWindows[i] && this._app === this._workspace.getAppForWindow(hotKeyWindows[i]))))
-       {
-          if ( seqCombo ) {
-             let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
-             let idx = btns.indexOf(this);
-             if (idx == 0 && btns[0]._windows.length > 1) {
-                idx = btns[0]._windows.indexOf(this._currentWindow);
+       if (hotKeys[i].enabled===true && hotKeys[i].keyCombo!==null) {
+          let [seqCombo,secondCombo] = getSmartNumericHotkey(hotKeys[i].keyCombo);
+          if ((hotKeyWindows[i] === this._currentWindow ||
+             (this._pinned && keyNew && !hotKeyWindows[i] && (this._app.get_name() == hotKeys[i].description || this._app.get_id() == hotKeys[i].description)) ||
+             ((hotKeys[i].cycle===true || (seqCombo && keySequence)) && hotKeyWindows[i] && this._app === this._workspace.getAppForWindow(hotKeyWindows[i]))))
+          {
+             if ( seqCombo ) {
+                let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
+                let idx = btns.indexOf(this);
+                if (idx == 0 && btns[0]._windows.length > 1) {
+                   idx = btns[0]._windows.indexOf(this._currentWindow);
+                }
+                if (idx >= 0 && idx < 9) {
+                   seqCombo = seqCombo.replace( /</g, "");
+                   seqCombo = seqCombo.replace( />/g, "+");
+                   text = text + "\n" + seqCombo + (idx+1);
+                }
+                if (secondCombo) {
+                   secondCombo = secondCombo.replace( /</g, "");
+                   secondCombo = secondCombo.replace( />/g, "+");
+                   let end = secondCombo.slice(secondCombo.lastIndexOf("+"))
+                   text = text + "\n" + secondCombo.slice(0,secondCombo.lastIndexOf("+")) + end.toUpperCase();
+                }
+             } else {
+                // i.e.  "<Alt><Super><e>::" -> "Alt+Super+E"
+                let keyString = hotKeys[i].keyCombo.toString();
+                keyString = keyString.replace( /</g, "");
+                keyString = keyString.replace( />/g, "+");
+                if (keyString.endsWith("::")) {
+                   keyString = keyString.slice(0,-2);
+                }else{
+                   let first = keyString.slice(0, keyString.lastIndexOf("::"));
+                   let end = first.slice(first.lastIndexOf("+"))
+                   text = text + "\n" + first.slice(0,first.lastIndexOf("+")) + end.toUpperCase();
+                   keyString = keyString.slice(keyString.indexOf("::")+2);
+                }
+                let end = keyString.slice(keyString.lastIndexOf("+"))
+                text = text + "\n" + keyString.slice(0,keyString.lastIndexOf("+")) + end.toUpperCase();
              }
+          } else if (hotKeys[i].description.toLowerCase() == _("all buttons") ) {
+             let childern = this._workspace.actor.get_children();
+             let idx = childern.indexOf(this.actor);
              if (idx >= 0 && idx < 9) {
-                seqCombo = seqCombo.replace( /</g, "");
-                seqCombo = seqCombo.replace( />/g, "+");
-                text = text + "\n" + seqCombo + (idx+1);
+                let keyString = hotKeys[i].keyCombo.toString();
+                keyString = keyString.replace( /</g, "");
+                keyString = keyString.replace( />/g, "+");
+                text = text + "\n" + keyString.slice(0,keyString.indexOf("+")+1) + (idx+1)
              }
-             if (secondCombo) {
-                secondCombo = secondCombo.replace( /</g, "");
-                secondCombo = secondCombo.replace( />/g, "+");
-                let end = secondCombo.slice(secondCombo.lastIndexOf("+"))
-                text = text + "\n" + secondCombo.slice(0,secondCombo.lastIndexOf("+")) + end.toUpperCase();
-             }
-          } else {
-             // i.e.  "<Alt><Super><e>::" -> "Alt+Super+E"
-             let keyString = hotKeys[i].keyCombo.toString();
-             keyString = keyString.replace( /</g, "");
-             keyString = keyString.replace( />/g, "+");
-             if (keyString.endsWith("::")) {
-                keyString = keyString.slice(0,-2);
-             }else{
-                let first = keyString.slice(0, keyString.lastIndexOf("::"));
-                let end = first.slice(first.lastIndexOf("+"))
-                text = text + "\n" + first.slice(0,first.lastIndexOf("+")) + end.toUpperCase();
-                keyString = keyString.slice(keyString.indexOf("::")+2);
-             }
-             let end = keyString.slice(keyString.lastIndexOf("+"))
-             text = text + "\n" + keyString.slice(0,keyString.lastIndexOf("+")) + end.toUpperCase();
           }
        }
     }
@@ -1366,6 +1390,15 @@ class WindowListButton {
     this._iconBin.natural_width = panelHeight;
     this._iconBin.natural_height = panelHeight;
     this._labelNumberBox.natural_width = panelHeight;
+  }
+
+  _updateNumberForHotkeyHelp(character) {
+     this._labelNumber.set_text(character);
+     this._labelNumberBox.show();
+     let [width, height] = this._labelNumber.get_size();
+     let size = Math.max(width, height);
+     this._labelNumberBin.width = size;
+     this._labelNumberBin.height = size;
   }
 
   _updateNumber() {
@@ -1719,7 +1752,8 @@ class WindowListButton {
            return true; // Some action will be taken on release, don't attempt to so anything else here
         }
      }
-     if (mouseBtn == 1 && this._windows.length > 1 && this._settings.getValue("grouped-mouse-action-btn1") == LeftClickGrouped.ToggleAndHold) {
+     let btn1Action = this.getButton1Action();
+     if (mouseBtn == 1 && ((this._windows.length > 1 && btn1Action == LeftClickGrouped.ToggleAndHold) || (this._windows.length > 0 && btn1Action == LeftClickGrouped.NewAndHold))) {
         this.holdDelay = Mainloop.timeout_add(350, Lang.bind(this, function() {
               this.openThumbnailMenu()
               this._workspace.holdPopup = mouseBtn;
@@ -1771,9 +1805,9 @@ class WindowListButton {
     // left mouse button
     if (mouseBtn == 1) {
       if (this._currentWindow) {
-        let leftGroupedAction = this._settings.getValue("grouped-mouse-action-btn1");
-        if (this._windows.length == 1 || leftGroupedAction == LeftClickGrouped.Toggle || leftGroupedAction == LeftClickGrouped.ToggleAndHold) {
-          if (leftGroupedAction == LeftClickGrouped.ToggleAndHold) {
+        let leftGroupedAction = this.getButton1Action();
+        if (this._windows.length == 1 || leftGroupedAction == LeftClickGrouped.Toggle || leftGroupedAction == LeftClickGrouped.ToggleAndHold || leftGroupedAction == LeftClickGrouped.NewAndHold) {
+          if (leftGroupedAction == LeftClickGrouped.ToggleAndHold || leftGroupedAction == LeftClickGrouped.NewAndHold) {
              if (this.holdDelay) {
                 let doIt = GLib.MainContext.default().find_source_by_id(this.holdDelay);
                 if (doIt) {
@@ -1782,7 +1816,10 @@ class WindowListButton {
              }
              this.closeThumbnailMenu();
           }
-          if (hasFocus(this._currentWindow, false) && !this._currentWindow.minimized) {
+          if (leftGroupedAction == LeftClickGrouped.NewAndHold) {
+             //log( "starting new app window!" );
+             this._startApp();
+          } else if (hasFocus(this._currentWindow, false) && !this._currentWindow.minimized) {
             this._currentWindow.minimize();
           } else {
             this.closeThumbnailMenu();
@@ -1911,9 +1948,11 @@ class WindowListButton {
            let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
            this.closeThumbnailMenu();
            if (btns.length > 1) {
-              this._workspace._groupOneApp(btns, GroupingType.ForcedOn);
+              let button = this._workspace._groupOneApp(btns, GroupingType.ForcedOn);
+              button._saveCustomAppGrouping();
            } else if (btns.length == 1 && btns[0]._windows.length > 1) {
               this._workspace._ungroupOneApp(this, GroupingType.ForcedOff);
+              this._saveCustomAppGrouping();
            }
            break;
         case MouseAction.New:
@@ -2149,6 +2188,14 @@ class WindowListButton {
        this._workspace.holdPopup = holdPopup;
     } else if (this._windows.length > 0 && this._settings.getValue("menu-show-on-hover")) {
       this.openThumbnailMenuDelayed();
+    }
+
+    // Update the tooltip text if the location of this button has changed
+    let childern = this._workspace.actor.get_children();
+    let idx = childern.indexOf(this.actor);
+    if (idx != this._buttonIdx) {
+       this._updateTooltip()
+       this._buttonIdx = idx;
     }
   }
 
@@ -2457,7 +2504,7 @@ class WindowListButton {
       let hotKeys = this._applet._keyBindings;
       item = null;
       for (let i=0 ; i < hotKeys.length ; i++) {
-         if (hotKeys[i].enabled===true && hotKeys[i].description.endsWith(".desktop")!==true) {
+         if (hotKeys[i].enabled===true && hotKeys[i].description.endsWith(".desktop")!==true && hotKeys[i].description.toLowerCase() !== _("all buttons")) {
             let idx = i;
             let keyString;
             if (hotKeys[i].keyCombo!==null) {
@@ -2568,17 +2615,18 @@ class WindowListButton {
          if (this._windows.length > 1) {
             item = new PopupMenu.PopupMenuItem(_("Ungroup application windows"));
             item.connect("activate", Lang.bind(this, function() {
-                  let type = GroupingType.NotGrouped;
-                  if (this._workspace._areButtonsShrunk())
-                     type = GroupingType.ForcedOff;
-                  this._workspace._ungroupOneApp(this, type); 
+                  this._workspace._ungroupOneApp(this, GroupingType.ForcedOff);
+                  this._saveCustomAppGrouping();
                }));
             this._contextMenu.addMenuItem(item);
          } else {
             let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
             if (btns && btns.length > 1) {
               item = new PopupMenu.PopupMenuItem(_("Group application windows"));
-              item.connect("activate", Lang.bind(this, function() { this._workspace._groupOneApp(btns, GroupingType.ForcedOn); }));
+              item.connect("activate", Lang.bind(this, function() {
+                    let button = this._workspace._groupOneApp(btns, GroupingType.ForcedOn);
+                    button._saveCustomAppGrouping();
+                 }));
               this._contextMenu.addMenuItem(item);
             }
          }
@@ -2609,6 +2657,7 @@ class WindowListButton {
                     btns[i]._grouped = GroupingType.ForcedOff;
               }
            }
+           this._saveCustomAppGrouping()
          }));
          this._contextMenu.addMenuItem(item);
       }
@@ -2782,6 +2831,46 @@ class WindowListButton {
         btns[idx]._updateLabel();
      }
   }
+
+  _saveCustomAppGrouping(){
+     if (this._app.is_window_backed()) {
+        return;
+     }
+     let groupType = this._settings.getValue("group-windows");
+     let customAppGrouping = this._settings.getValue("custom-app-grouping");
+     if (groupType == GroupType.Grouped) {
+        let element = customAppGrouping.find((element) => element == this._app.get_id());
+        if (this._grouped != GroupingType.ForcedOn && !element) {
+           customAppGrouping.push(this._app.get_id());
+           this._settings.setValue("custom-app-grouping", customAppGrouping);
+        } else if (this._grouped == GroupingType.ForcedOn && element) {
+           customAppGrouping.splice(customAppGrouping.indexOf(element), 1);
+           this._settings.setValue("custom-app-grouping", customAppGrouping);
+        }
+     } else if (groupType == GroupType.Pooled || groupType == GroupType.Off) {
+        let element = customAppGrouping.find((element) => element == this._app.get_id());
+        if (this._grouped == GroupingType.ForcedOn && !element) {
+           customAppGrouping.push(this._app.get_id());
+           this._settings.setValue("custom-app-grouping", customAppGrouping);
+        } else if (element) {
+           customAppGrouping.splice(customAppGrouping.indexOf(element), 1);
+           this._settings.setValue("custom-app-grouping", customAppGrouping);
+        }
+     } else if (groupType == GroupType.Auto) {
+        let element = customAppGrouping.find((element) => element[0] == this._app.get_id());
+        if (!element && (this._grouped == GroupingType.ForcedOn || this._grouped == GroupingType.ForcedOff)) {
+           customAppGrouping.push([this._app.get_id(),this._grouped]);
+           this._settings.setValue("custom-app-grouping", customAppGrouping);
+        } else if (element && (this._grouped == GroupingType.NotGrouped || this._grouped == GroupingType.Auto)){
+           customAppGrouping.splice(customAppGrouping.indexOf(element), 1);
+           this._settings.setValue("custom-app-grouping", customAppGrouping);
+        } else if (element && this._grouped!=element[1]) {
+           element[1] = this._grouped;
+           this._settings.setValue("custom-app-grouping", customAppGrouping);
+        }
+     }
+  }
+
 }
 
 // Represents a windowlist on a workspace (one for each workspace)
@@ -2896,8 +2985,28 @@ class Workspace {
     // New appButton should behave like the existing buttons for the app
     if (btns && btns.length > 0) {
        appButton._grouped = btns[0]._grouped;
-    } else if (groupingType === GroupType.Grouped) {
-       appButton._grouped = GroupingType.ForcedOn;
+    } else {
+       let customAppGrouping = this._settings.getValue("custom-app-grouping");
+       if (groupingType === GroupType.Grouped) {
+          let element = customAppGrouping.find((element) => element == app.get_id());
+          if (element){
+             appButton._grouped = GroupingType.ForcedOff;
+          } else {
+             appButton._grouped = GroupingType.ForcedOn;
+          }
+       } else if (groupingType === GroupType.Auto) {
+          let element = customAppGrouping.find((element) => element[0] == app.get_id());
+          if (element) {
+             appButton._grouped = element[1];
+          }
+       } else if (groupingType === GroupType.Pooled || groupingType === GroupType.Off) {
+          let element = customAppGrouping.find((element) => element == app.get_id());
+          if (element) {
+             appButton._grouped = GroupingType.ForcedOn;
+          } else {
+             appButton._grouped = GroupingType.ForcedOff;
+          }
+       }
     }
     this._appButtons.push(appButton);
     this.actor.add_actor(appButton.actor);
@@ -3255,6 +3364,7 @@ class Workspace {
 
   _onGroupingChanged() {
      let setting = this._settings.getValue("group-windows");
+     this._settings.setValue("custom-app-grouping", [] );
      switch(setting) {
         case GroupType.Grouped:
            this._groupAllApps(GroupingType.ForcedOn);
@@ -3487,6 +3597,7 @@ class Workspace {
               }
            }
         }
+        /*
         // If "smart numeric hotkeys" are enabled then we might need to update all the tooltips for this application
         if (this._settings.getValue("hotkey-sequence")) {
            let hotKeys = this._applet._keyBindings;
@@ -3504,6 +3615,7 @@ class Workspace {
               }
            }
         }
+        */
         if (this._settings.getValue("display-caption-for") === DisplayCaption.One) {
            source._updateLabel(); // The moved button might need it's label restored
            if (groupingType != GroupType.Pooled && groupingType != GroupType.Auto) {
@@ -3665,6 +3777,11 @@ class Workspace {
   _groupOneApp(btns, type=GroupingType.Auto) {
     let windows = [];
     for (let i=0 ; i<btns.length-1 ; i++) {
+       // Make sure only the last button is a pinned button since all the other buttons will be removed
+       if (btns[i]._pinned) {
+          btns[i]._pinned = false;
+          btns[btns.length-1]._pinned = true;
+       }
        windows.push(btns[i]._windows[0]);
        this._windowRemoved(btns[i]._windows[0], false); // 'false' means the keyBindings will not be cleared!
     }
@@ -3676,7 +3793,8 @@ class Workspace {
     let x = btns[btns.length-1]._windows.shift();
     btns[btns.length-1]._windows.push(x);
     this._updateFocus();
-    btns[btns.length-1]._updateTooltip();
+    //btns[btns.length-1]._updateTooltip();
+    return btns[btns.length-1];
   }
 
   // Ungroup the windows in the passed in buttons, set the button so it's not grouping, add windows back
@@ -3769,6 +3887,7 @@ class WindowList extends Applet.Applet {
 
     this._workspaces = [];
     this._keyBindings = [];
+    this._registeredHelpKeys = [];  // List of hotkeys used to trigger showing assigned hotkeys using the button numberLabel
     this._hiddenApps = null;    // List of applications that should not be visible buttons
     this._pinnedApps = null;    // cached version of "pinned_apps"
     this._displayPinned = null; // cached "display-pinned" setting
@@ -3862,6 +3981,36 @@ class WindowList extends Applet.Applet {
         } else {
            Main.activateWindow(workspace._keyBindingsWindows[idx]);
         }
+     } else if (this._keyBindings[idx].description.toLowerCase() ==  _("all buttons")) {
+        seqNum--;
+        let numChildern = workspace.actor.get_n_children();
+        if (seqNum < numChildern) {
+           let appButton = workspace.actor.get_child_at_index(seqNum)._delegate;
+           if (appButton._windows.length === 0 ) {
+              appButton._app.open_new_window(-1);
+           } else {
+              if (this._keyBindings[idx].cycle === true && appButton._windows.length > 1 && hasFocus(appButton._currentWindow)===true) {
+                 if (appButton._nextWindow===null || appButton._nextWindow===appButton._currentWindow) {
+                    appButton._updateCurrentWindow(); // This will set appButton.sortedWindows
+                    appButton._nextWindow = appButton.sortedWindows[1];
+                 }
+                 let idx = appButton.sortedWindows.indexOf(appButton._nextWindow);
+                 Main.activateWindow(appButton._nextWindow);
+                 if (idx === appButton.sortedWindows.length-1) {
+                    appButton._nextWindow = appButton.sortedWindows[0];
+                 } else {
+                    appButton._nextWindow = appButton.sortedWindows[idx+1];
+                 }
+              } else {
+                 if (minimize && hasFocus(appButton._currentWindow)===true) {
+                    appButton._currentWindow.minimize();
+                 } else {
+                    Main.activateWindow(appButton._currentWindow);
+                 }
+              }
+              return;
+           }
+        }
      } else if (this._keyBindings[idx].description && this._settings.getValue("hotkey-new")) {
         // Try to find a app if the description is a .desktop file name
         let app = workspace._lookupApp(this._keyBindings[idx].description);
@@ -3886,15 +4035,21 @@ class WindowList extends Applet.Applet {
      let oldKeySequence = this._keySequenece;
      let keyBindings = this._settings.getValue("hotkey-bindings");
      let keySequence = this._settings.getValue("hotkey-sequence");  // Is smart numeric hotkeys enabled?
-     let i=0;
+     let keyHelp = this._settings.getValue("hotkey-grave-help");
+     let i;
      let seqCombo;
      let secondCombo;
-     for ( ; i < keyBindings.length ; i++) {
+     // Remove all the help hotkeys
+     for ( i=0 ; i < this._registeredHelpKeys.length ; i++ ) {
+        Main.keybindingManager.removeHotKey("hotkeyhelp-" + i + "-" + this.instanceId);
+     }
+     this._registeredHelpKeys = [];
+     for ( i=0 ; i < keyBindings.length ; i++) {
         // Does the old binding need to be removed?
         if (oldBindings.length > i) {
            [seqCombo,secondCombo] = getSmartNumericHotkey(oldBindings[i].keyCombo);
            if (oldBindings[i].enabled && (!keyBindings[i].enabled || keyBindings[i].keyCombo != oldBindings[i].keyCombo || (seqCombo && oldKeySequence != keySequence))) {
-              if (seqCombo && oldKeySequence) {
+              if (seqCombo && (oldKeySequence || oldBindings[i].description.toLowerCase() == _("all buttons"))) {
                  //log( `removing smart numeric hotkeys for ${oldBindings[i].description}` );
                  for( let num=1 ; num < 10 ; num++ ) {
                     Main.keybindingManager.removeHotKey("hotkey-" + i + "-" + num + this.instanceId);
@@ -3917,7 +4072,7 @@ class WindowList extends Applet.Applet {
         if (keyBindings[i].enabled && (oldBindings.length <= i || !oldBindings[i].enabled || keyBindings[i].keyCombo != oldBindings[i].keyCombo || (seqCombo && oldKeySequence != keySequence))) {
            let idx = i;
            // Register smart numeric hotkeys if applicable
-           if (seqCombo && keySequence) {
+           if (seqCombo && (keySequence || keyBindings[i].description.toLowerCase() == _("all buttons"))) {
               //log( `Registering smart numeric hotkeys for ${keyBindings[i].description}  i.e. ${seqCombo+1}` );
               for( let num=1 ; num < 10 ; num++ ) {
                  Main.keybindingManager.addHotKey("hotkey-" + i + "-" + num + this.instanceId, seqCombo+num, Lang.bind(this, function() {this._performHotkey(idx, num)} ));
@@ -3931,8 +4086,11 @@ class WindowList extends Applet.Applet {
            }
         }
         // If the key is enabled, set the keyBindingWindows for each workspace to the windows that match the description
-        if (keyBindings[i].enabled === true) {
+        if (keyBindings[i].enabled) {
            this.assignHotKeysToExistingWindows(keyBindings[i].description, i);
+           if (keyHelp) {
+              this._registerHotkeyHelperKeys(keyBindings[i].keyCombo);
+           }
         }
      }
      if (i < oldBindings.length) {
@@ -3966,7 +4124,95 @@ class WindowList extends Applet.Applet {
      }
   }
 
-  _updateThumbnailWindowSize(){
+  // Extract the modifiers from the keyCombo and register <modifiers>+` (the grave key) hotkey to show hotkey help using the appButton number label
+  _registerHotkeyHelperKeys(keyCombo) {
+     let colons = keyCombo.indexOf("::");
+     let first = keyCombo.slice(0,colons-1);
+     let second = keyCombo.slice(colons+2,-1)
+     if (first.length > 0) {
+        if (this._registeredHelpKeys.indexOf(first) === -1 ) {
+           let idx = this._registeredHelpKeys.push(first) - 1;
+           Main.keybindingManager.addHotKey("hotkeyhelp-" + idx + "-" + this.instanceId, first+"grave", Lang.bind(this, function() {this._performHotkeyHelp(first)} ));
+        }
+     } else if (second.length > 0) {
+        if (this._registeredHelpKeys.indexOf(second) === -1 ) {
+           let idx = this._registeredHelpKeys.push(second) - 1;
+           Main.keybindingManager.addHotKey("hotkeyhelp-" + idx + "-" + this.instanceId, second+"grave", Lang.bind(this, function() {this._performHotkeyHelp(second)} ));
+        }
+     }
+  }
+
+  // Hotkey handler function for the hotkey helper hotkeys
+  _performHotkeyHelp(modifiers) {
+     let keyBindings = this._keyBindings;
+     let keySequence = this._settings.getValue("hotkey-sequence");
+     let workspace = this.getCurrentWorkSpace();
+     let i;
+     let timerNeeded = false;
+     for ( i=keyBindings.length-1 ; i >= 0 ; i--) {
+        if (keyBindings[i].enabled && keyBindings[i].keyCombo) {
+           let keyCombo = keyBindings[i].keyCombo;
+           let colons = keyCombo.indexOf("::");
+           let first = keyCombo.slice(0,colons);
+           let second = keyCombo.slice(colons+2)
+           if (first.startsWith(modifiers) || second.startsWith(modifiers)) {
+              if (keyBindings[i].description.toLowerCase() == _("all buttons") && keyBindings[i].keyCombo.indexOf(modifiers+"1")!=-1) {
+                 let children = workspace.actor.get_children();
+                 for( let idx=0 ; idx < children.length && idx < 9 ; idx++ ){
+                    children[idx]._delegate._updateNumberForHotkeyHelp((idx+1).toString());
+                 }
+                 timerNeeded= true;
+              } else if (keySequence && keyBindings[i].keyCombo.indexOf(modifiers+"1")!=-1) {
+                 if (workspace._keyBindingsWindows[i]) {
+                    let app = workspace.getAppForWindow(workspace._keyBindingsWindows[i]);
+                    let btns = workspace._lookupAllAppButtonsForApp(app);
+                    for( let idx=0 ; idx<btns.length && idx<9 ; idx++ ) {
+                       btns[idx]._updateNumberForHotkeyHelp((idx+1).toString());
+                    }
+                    timerNeeded = true;
+                 }
+              } else {
+                 if (workspace._keyBindingsWindows[i]) {
+                    let app = workspace.getAppForWindow(workspace._keyBindingsWindows[i]);
+                    if (app && keyBindings[i].cycle) {
+                       let btns = workspace._lookupAllAppButtonsForApp(app);
+                       for( let idx=0 ; idx<btns.length && idx<9 ; idx++ ) {
+                          if (first.startsWith(modifiers)) {
+                             btns[idx]._updateNumberForHotkeyHelp(first.slice(-1));
+                          } else {
+                             btns[idx]._updateNumberForHotkeyHelp(second.slice(-1));
+                          }
+                       }
+                    } else {
+                       let btn = workspace._lookupAppButtonForWindow(workspace._keyBindingsWindows[i]);
+                       if (first.startsWith(modifiers)) {
+                          btn._updateNumberForHotkeyHelp(first.slice(-1));
+                       } else {
+                          btn._updateNumberForHotkeyHelp(second.slice(-1));
+                       }
+                    }
+                    timerNeeded = true;
+                 }
+              }
+           }
+        }
+     }
+     if (timerNeeded) {
+        if (this.hotkeyHelpRemoveDelay) {
+           Mainloop.source_remove(this.hotkeyHelpRemoveDelay);
+        }
+        this.hotkeyHelpRemoveDelay = Mainloop.timeout_add(3000, Lang.bind(this, function() {
+              this.hotkeyHelpRemoveDelay = undefined;
+              let children = workspace.actor.get_children();
+              for( let idx=0 ; idx < children.length ; idx++ ){
+                 children[idx]._delegate._updateNumber();
+              }
+           }
+        ));
+     }
+  }
+
+  _updateThumbnailWindowSize() {
      let size = this._settings.getValue("number-of-unshrunk-previews");
      for (let wsIdx=0 ; wsIdx<this._workspaces.length ; wsIdx++) {
         let ws = this._workspaces[wsIdx];
@@ -4092,6 +4338,7 @@ class WindowList extends Applet.Applet {
     this._signalManager.connect(Main.layoutManager, "monitors-changed", this._updateMonitor, this);
     this._signalManager.connect(this._settings, "changed::hotkey-bindings", this._updateKeybinding, this);
     this._signalManager.connect(this._settings, "changed::hotkey-sequence", this._updateKeybinding, this);
+    this._signalManager.connect(this._settings, "changed::hotkey-grave-help", this._updateKeybinding, this);
     this._signalManager.connect(this._settings, "changed::display-indicators", this._updateIndicators, this);
     this._signalManager.connect(this._settings, "changed::number-of-unshrunk-previews", this._updateThumbnailWindowSize, this);
     this._signalManager.connect(this._settings, "changed::hide-panel-apps", this._updateCurrentWorkspace, this);
@@ -4194,9 +4441,30 @@ class WindowList extends Applet.Applet {
 
   on_applet_removed_from_panel() {
     this._signalManager.disconnectAllSignals();
+    // Remove all the hot keys
+    let keySequence = this._settings.getValue("hotkey-sequence");
+    let seqCombo;
+    let secondCombo;
     for (let i=0 ; i<this._keyBindings.length ; i++) {
-       Main.keybindingManager.removeHotKey("hotkey-" + i + this.instanceId);
+       if (this._keyBindings[i].enabled) {
+          [seqCombo,secondCombo] = getSmartNumericHotkey(this._keyBindings[i].keyCombo);
+          if (seqCombo && keySequence) {
+             for( let num=1 ; num < 10 ; num++ ) {
+                Main.keybindingManager.removeHotKey("hotkey-" + i + "-" + num + this.instanceId);
+             }
+             if (secondCombo) {
+                Main.keybindingManager.removeHotKey("hotkey-" + i + this.instanceId);
+             }
+          } else {
+             Main.keybindingManager.removeHotKey("hotkey-" + i + this.instanceId);
+          }
+       }
     }
+    // Remove all the help hotkeys
+    for ( i=0 ; i < this._registeredHelpKeys.length ; i++ ) {
+       Main.keybindingManager.removeHotKey("hotkeyhelp-" + idx + "-" + this.instanceId);
+    }
+
   }
 
   on_panel_height_changed() {

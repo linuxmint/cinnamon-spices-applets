@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-18 22:14-0400\n"
+"POT-Creation-Date: 2023-10-21 11:34-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,24 +17,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.0/applet.js:2192
+#: 4.0/applet.js:1330 4.0/applet.js:2507 4.0/applet.js:3984 4.0/applet.js:4052
+#: 4.0/applet.js:4075 4.0/applet.js:4159
+msgid "all buttons"
+msgstr ""
+
+#: 4.0/applet.js:2239
 msgid "Applet Preferences"
 msgstr ""
 
-#: 4.0/applet.js:2196
+#: 4.0/applet.js:2243
 msgid "About..."
 msgstr ""
 
-#: 4.0/applet.js:2200
+#: 4.0/applet.js:2247
 msgid "Configure..."
 msgstr ""
 
-#: 4.0/applet.js:2204
+#: 4.0/applet.js:2251
 #, javascript-format
 msgid "Remove '%s'"
 msgstr ""
 
-#: 4.0/applet.js:2206
+#: 4.0/applet.js:2253
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr ""
 
@@ -44,107 +49,107 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2215
+#: 4.0/applet.js:2262
 msgid "Open new window"
 msgstr ""
 
-#: 4.0/applet.js:2223
+#: 4.0/applet.js:2270
 msgid "Remove from panel"
 msgstr ""
 
-#: 4.0/applet.js:2225
+#: 4.0/applet.js:2272
 msgid "Remove from this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2231
+#: 4.0/applet.js:2278
 msgid "Pin to panel"
 msgstr ""
 
-#: 4.0/applet.js:2233
+#: 4.0/applet.js:2280
 msgid "Pin to this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2274
+#: 4.0/applet.js:2321
 msgid "Pin to other workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2295
+#: 4.0/applet.js:2342
 msgid "Pin to all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2313
+#: 4.0/applet.js:2360
 msgid "Pin to launcher"
 msgstr ""
 
-#: 4.0/applet.js:2331 4.0/applet.js:2514
+#: 4.0/applet.js:2378 4.0/applet.js:2561
 msgid "Add new Hotkey for"
 msgstr ""
 
-#: 4.0/applet.js:2345
+#: 4.0/applet.js:2392
 msgid "Recent files"
 msgstr ""
 
-#: 4.0/applet.js:2369
+#: 4.0/applet.js:2416
 msgid "Places"
 msgstr ""
 
-#: 4.0/applet.js:2411
+#: 4.0/applet.js:2458
 msgid "Only on this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2413
+#: 4.0/applet.js:2460
 msgid "Visible on all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2414
+#: 4.0/applet.js:2461
 msgid "Move to another workspace"
 msgstr ""
 
-#: 4.0/applet.js:2433
+#: 4.0/applet.js:2480
 msgid "Move to another monitor"
 msgstr ""
 
-#: 4.0/applet.js:2441
+#: 4.0/applet.js:2488
 msgid "Monitor"
 msgstr ""
 
-#: 4.0/applet.js:2469
+#: 4.0/applet.js:2516
 msgid "unassigned"
 msgstr ""
 
-#: 4.0/applet.js:2480 4.0/applet.js:2511
+#: 4.0/applet.js:2527 4.0/applet.js:2558
 msgid "Assign window to a hotkey"
 msgstr ""
 
-#: 4.0/applet.js:2534
+#: 4.0/applet.js:2581
 msgid "Change application label contents"
 msgstr ""
 
-#: 4.0/applet.js:2537
+#: 4.0/applet.js:2584
 msgid "Remove custom setting"
 msgstr ""
 
-#: 4.0/applet.js:2544
+#: 4.0/applet.js:2591
 msgid "Use window title"
 msgstr ""
 
-#: 4.0/applet.js:2551
+#: 4.0/applet.js:2598
 msgid "Use application name"
 msgstr ""
 
-#: 4.0/applet.js:2558
+#: 4.0/applet.js:2605
 msgid "No label"
 msgstr ""
 
-#: 4.0/applet.js:2569
+#: 4.0/applet.js:2616
 msgid "Ungroup application windows"
 msgstr ""
 
-#: 4.0/applet.js:2580
+#: 4.0/applet.js:2625
 msgid "Group application windows"
 msgstr ""
 
-#: 4.0/applet.js:2590
+#: 4.0/applet.js:2638
 msgid "Automatic grouping/ungrouping"
 msgstr ""
 
@@ -154,31 +159,31 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2619
+#: 4.0/applet.js:2668
 msgid "Move titlebar on to screen"
 msgstr ""
 
-#: 4.0/applet.js:2624
+#: 4.0/applet.js:2673
 msgid "Restore"
 msgstr ""
 
-#: 4.0/applet.js:2628
+#: 4.0/applet.js:2677
 msgid "Minimize"
 msgstr ""
 
-#: 4.0/applet.js:2634
+#: 4.0/applet.js:2683
 msgid "Unmaximize"
 msgstr ""
 
-#: 4.0/applet.js:2641
+#: 4.0/applet.js:2690
 msgid "Close others"
 msgstr ""
 
-#: 4.0/applet.js:2652
+#: 4.0/applet.js:2701
 msgid "Close all"
 msgstr ""
 
-#: 4.0/applet.js:2661
+#: 4.0/applet.js:2710
 msgid "Close"
 msgstr ""
 
@@ -803,18 +808,22 @@ msgid "Thumbnail window forward button action"
 msgstr ""
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore/Minimize most recent window"
 msgstr ""
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore then cycle windows"
 msgstr ""
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Show thumbnail menu"
 msgstr ""
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore or hold for thumbnail menu"
 msgstr ""
 
@@ -826,6 +835,20 @@ msgstr ""
 msgid ""
 "Action taken when using the left mouse button on a window list entry for a "
 "group of windows"
+msgstr ""
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "New window or hold for thumbnail menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->description
+msgid "Left button action (with running windows)"
+msgstr ""
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->tooltip
+msgid ""
+"Action taken when using the left mouse button on a launcher button with one "
+"or more running windows"
 msgstr ""
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
@@ -957,12 +980,23 @@ msgid ""
 "will be activated by the 9 hotkeys."
 msgstr ""
 
+#. 4.0->settings-schema.json->hotkey-grave-help->description
+msgid "Use modifier(s) + ` hotkey to show hotkey hint bubbles"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-grave-help->tooltip
+msgid ""
+"If enabled, The hotkey modifier(s) + ` will be registered for each unique "
+"modifier set defined in the hotkey list. Using these hotkeys will temporally "
+"show a hotkey hint bubble over the button icons."
+msgstr ""
+
 #. 4.0->settings-schema.json->hotkey-help->description
 msgid ""
 "Hotkeys can be assigned to a window in two ways:\n"
 "1) Manual: Use \"Assign window to a hotkey\" in the button context menu.\n"
 "2) Automatic:  Enter a \"Description\" matching an application name or "
-"desktop file. i.e: \"Google Chrome\" or \"firefox.desktop\"\n"
+"desktop file.\n"
 "Note: 1) Hotkey not working? it's possible the key combination is already "
 "assigned elsewhere. 2) If you remove or rearrange hotkeys, manual hotkey "
 "assignments might need to be reassigned. 3) Hotkeys associated with desktop "
