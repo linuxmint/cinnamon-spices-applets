@@ -1,0 +1,59 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "page-settings"
+    ],
+
+    "page-settings": {
+      "type": "page",
+      "title": "Settings",
+      "sections": [
+        "section-panel",
+        "section-menu"
+      ]
+    },
+
+    "section-panel": {
+      "type": "section",
+      "title": "General Settings",
+      "keys": [
+        "useAltIcons",
+        "showTooltip",
+        "showPhaseLabel"
+      ]
+    },
+    "section-menu": {
+      "type": "section",
+      "title": "Update Settings",
+      "keys": [
+        "updateInterval"
+      ]
+    }
+  },
+
+  "showPhaseLabel": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Display the moon phase as a string"
+  },
+  "showTooltip": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Display a tooltip on hover"
+  },
+  "useAltIcons": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Light theme"
+  },
+  "updateInterval": {
+    "type": "spinbutton",
+    "default": 1,
+    "min": 1,
+    "max": 86400,
+    "step": 1,
+    "units": "seconds",
+    "description": "Update interval"
+  }
+}
