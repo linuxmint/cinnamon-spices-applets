@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-24 15:07-0400\n"
-"PO-Revision-Date: 2023-06-30 23:44+0200\n"
+"POT-Creation-Date: 2023-09-18 22:14-0400\n"
+"PO-Revision-Date: 2023-10-22 20:50+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -17,24 +17,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: 4.0/applet.js:1919
+#: 4.0/applet.js:2192
 msgid "Applet Preferences"
 msgstr "Kisalkalmazás beállítások"
 
-#: 4.0/applet.js:1923
+#: 4.0/applet.js:2196
 msgid "About..."
 msgstr "Névjegy…"
 
-#: 4.0/applet.js:1927
+#: 4.0/applet.js:2200
 msgid "Configure..."
 msgstr "Beállítások…"
 
-#: 4.0/applet.js:1931
+#: 4.0/applet.js:2204
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eltávolítás: „%s”"
 
-#: 4.0/applet.js:1933
+#: 4.0/applet.js:2206
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Valóban el szeretné távolítani ezt a CassiaWindowList ezen példányát?"
 
@@ -44,115 +44,141 @@ msgstr "Valóban el szeretné távolítani ezt a CassiaWindowList ezen példány
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:1942
+#: 4.0/applet.js:2215
 msgid "Open new window"
 msgstr "Új ablak megnyitása"
 
-#: 4.0/applet.js:1948
+#: 4.0/applet.js:2223
+msgid "Remove from panel"
+msgstr "Eltávolítás a panelról"
+
+#: 4.0/applet.js:2225
+msgid "Remove from this workspace"
+msgstr "Eltávolítás erről a munkaterületről"
+
+#: 4.0/applet.js:2231
+msgid "Pin to panel"
+msgstr "Panelhez rögzítés"
+
+#: 4.0/applet.js:2233
 msgid "Pin to this workspace"
 msgstr "Erre a munkaterületre rögzítés"
 
-#: 4.0/applet.js:1964
+#: 4.0/applet.js:2274
 msgid "Pin to other workspaces"
 msgstr "Más munkaterületre rögzítés"
 
-#: 4.0/applet.js:1988
+#: 4.0/applet.js:2295
 msgid "Pin to all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2013 4.0/applet.js:2186
+#: 4.0/applet.js:2313
+msgid "Pin to launcher"
+msgstr "Alkalmazásindítóhoz rögzítés"
+
+#: 4.0/applet.js:2331 4.0/applet.js:2514
 msgid "Add new Hotkey for"
 msgstr ""
 
-#: 4.0/applet.js:2027
+#: 4.0/applet.js:2345
 msgid "Recent files"
 msgstr "Nemrég használt fájlok"
 
-#: 4.0/applet.js:2051
+#: 4.0/applet.js:2369
 msgid "Places"
 msgstr "Helyek"
 
-#: 4.0/applet.js:2093
+#: 4.0/applet.js:2411
 msgid "Only on this workspace"
 msgstr "Csak ezen a munkaterületen"
 
-#: 4.0/applet.js:2095
+#: 4.0/applet.js:2413
 msgid "Visible on all workspaces"
 msgstr "Minden munkaterületen látható"
 
-#: 4.0/applet.js:2096
+#: 4.0/applet.js:2414
 msgid "Move to another workspace"
 msgstr "Áthelyezés másik munkaterületre"
 
-#: 4.0/applet.js:2115
+#: 4.0/applet.js:2433
 msgid "Move to another monitor"
 msgstr "Áthelyezés a másik kijelzőre"
 
-#: 4.0/applet.js:2123
+#: 4.0/applet.js:2441
 msgid "Monitor"
 msgstr "Kijelző"
 
-#: 4.0/applet.js:2151
+#: 4.0/applet.js:2469
 msgid "unassigned"
 msgstr "nincs társítva"
 
-#: 4.0/applet.js:2162 4.0/applet.js:2183
+#: 4.0/applet.js:2480 4.0/applet.js:2511
 msgid "Assign window to a hotkey"
 msgstr ""
 
-#: 4.0/applet.js:2206
+#: 4.0/applet.js:2534
 msgid "Change application label contents"
 msgstr ""
 
-#: 4.0/applet.js:2209
+#: 4.0/applet.js:2537
 msgid "Remove custom setting"
 msgstr ""
 
-#: 4.0/applet.js:2216
+#: 4.0/applet.js:2544
 msgid "Use window title"
 msgstr "Ablakcím használata"
 
-#: 4.0/applet.js:2223
+#: 4.0/applet.js:2551
 msgid "Use application name"
 msgstr "Alkalmazásnév használata"
 
-#: 4.0/applet.js:2230
+#: 4.0/applet.js:2558
 msgid "No label"
 msgstr "Nincs címke"
 
-#: 4.0/applet.js:2241
-msgid "Ungroup windows"
-msgstr ""
+#: 4.0/applet.js:2569
+msgid "Ungroup application windows"
+msgstr "Ablakokat ne csoportosítsa alkalmazás szerint"
 
-#: 4.0/applet.js:2252
-msgid "Group windows"
-msgstr "Ablakok csoportosítása"
+#: 4.0/applet.js:2580
+msgid "Group application windows"
+msgstr "Alkalmazás ablakok csoportosítása"
 
-#: 4.0/applet.js:2262
+#: 4.0/applet.js:2590
 msgid "Automatic grouping/ungrouping"
 msgstr ""
 
-#: 4.0/applet.js:2291
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#: 4.0/applet.js:2619
+msgid "Move titlebar on to screen"
+msgstr "Címsor mozgatása a kijelzőre"
+
+#: 4.0/applet.js:2624
 msgid "Restore"
 msgstr "Visszaállítás"
 
-#: 4.0/applet.js:2295
+#: 4.0/applet.js:2628
 msgid "Minimize"
 msgstr "Minimalizálás"
 
-#: 4.0/applet.js:2301
+#: 4.0/applet.js:2634
 msgid "Unmaximize"
 msgstr "Eredeti méret"
 
-#: 4.0/applet.js:2308
+#: 4.0/applet.js:2641
 msgid "Close others"
 msgstr "Többi bezárása"
 
-#: 4.0/applet.js:2319
+#: 4.0/applet.js:2652
 msgid "Close all"
 msgstr "Minden bezárása"
 
-#: 4.0/applet.js:2328
+#: 4.0/applet.js:2661
 msgid "Close"
 msgstr "Bezárás"
 
@@ -384,7 +410,7 @@ msgstr "Kettő vagy több ablak"
 
 #. 4.0->settings-schema.json->display-number->description
 msgid "Display number"
-msgstr ""
+msgstr "Kijelző sorszáma"
 
 #. 4.0->settings-schema.json->number-style->options
 msgid "Icon overlay"
@@ -396,7 +422,7 @@ msgstr ""
 
 #. 4.0->settings-schema.json->number-style->description
 msgid "Number style"
-msgstr ""
+msgstr "Számstílus"
 
 #. 4.0->settings-schema.json->number-style->tooltip
 msgid ""
@@ -434,8 +460,38 @@ msgid ""
 "Launcher: Only pinned button are shown, behaves like a panel launcher."
 msgstr ""
 
+#. 4.0->settings-schema.json->display-pinned->options
+msgid "Disabled"
+msgstr "Letiltva"
+
+#. 4.0->settings-schema.json->display-pinned->options
+msgid "Unique for each workspace"
+msgstr "Egyedi minden munkaterületen"
+
+#. 4.0->settings-schema.json->display-pinned->options
+msgid "Common across workspaces"
+msgstr "Mindegyik munkaterületen"
+
 #. 4.0->settings-schema.json->display-pinned->description
-msgid "Allow pinning of window list buttons"
+msgid "Pinning of window list buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->display-pinned->tooltip
+msgid ""
+"Controls whether window list buttons can be pinned, and whether each "
+"workspace has a unique set of pinned buttons or one common set shared across "
+"all workspaces. When in \"Common across workspaces\" mode the order of the "
+"pinned buttons is also maintained across workspaces."
+msgstr ""
+
+#. 4.0->settings-schema.json->synchronize-pinned->description
+msgid "Synchronize launcher buttons across all workspaces"
+msgstr ""
+
+#. 4.0->settings-schema.json->synchronize-pinned->tooltip
+msgid ""
+"If enabled, the number and order of launcher buttons on the panel will be "
+"synchronize across all workspaces."
 msgstr ""
 
 #. 4.0->settings-schema.json->show-windows-for-current-monitor->description
@@ -515,6 +571,19 @@ msgstr "Nagyon kicsi"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->description
 msgid "Default thumbnail window size"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-all-windows-of-pool->description
+#. 4.0->settings-schema.json->menu-all-windows-of-auto->description
+msgid "Show thumbnails for all windows of an application pool"
+msgstr ""
+
+#. 4.0->settings-schema.json->menu-all-windows-of-pool->tooltip
+#. 4.0->settings-schema.json->menu-all-windows-of-auto->tooltip
+msgid ""
+"If enabled, a popup menu will contain all the application windows in the "
+"application pool rather then just the selected window within the application "
+"pool"
 msgstr ""
 
 #. 4.0->settings-schema.json->preview-timeout-show->description
@@ -622,6 +691,24 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to previous workspace"
+msgstr "Áthelyezés az előző munkaterületre"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to next workspace"
+msgstr "Áthelyezés a következő munkaterületre"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Visible on this/all workspaces"
 msgstr ""
 
@@ -667,7 +754,34 @@ msgstr "Áthelyezés a negyedik kijelzőre"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to previous monitor"
+msgstr "Áthelyezés az előző kijelzőre"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to next monitor"
+msgstr "Áthelyezés a következő kijelzőre"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to current/next monitor"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Pin to panel toggle"
 msgstr ""
 
 #. 4.0->settings-schema.json->preview-middle-click->options
@@ -701,6 +815,10 @@ msgstr ""
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 msgid "Show thumbnail menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
+msgid "Restore or hold for thumbnail menu"
 msgstr ""
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->description
@@ -761,7 +879,7 @@ msgstr "Ki"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "On (temporary)"
-msgstr ""
+msgstr "Be (átmenetileg)"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "On (global default)"
@@ -830,17 +948,28 @@ msgid ""
 "a desktop file name"
 msgstr ""
 
+#. 4.0->settings-schema.json->hotkey-sequence->description
+msgid "Smart numeric hotkeys (using \"1\" automatically extends to 1-9)"
+msgstr ""
+
+#. 4.0->settings-schema.json->hotkey-sequence->tooltip
+msgid ""
+"If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will "
+"automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The "
+"first 9 windows of the assigned application, as ordered on the window-list, "
+"will be activated by the 9 hotkeys."
+msgstr ""
+
 #. 4.0->settings-schema.json->hotkey-help->description
 msgid ""
 "Hotkeys can be assigned to a window in two ways:\n"
-"1. Manual:  Use the \"Assign window to a hotkey\" item in a button context "
-"menu.\n"
-"2. Automatic:  Enter a \"Description\" matching an application name or "
-"desktop file. For example: \"Google Chrome\" or \"firefox.desktop\"\n"
-"\n"
-"Note: 1) If a hotkey is not working, it's possible that a key combination is "
-"already assigned elsewhere. 2) If you remove or rearrange any hotkeys, "
-"manual window assignments may need to be reassigned"
+"1) Manual: Use \"Assign window to a hotkey\" in the button context menu.\n"
+"2) Automatic:  Enter a \"Description\" matching an application name or "
+"desktop file. i.e: \"Google Chrome\" or \"firefox.desktop\"\n"
+"Note: 1) Hotkey not working? it's possible the key combination is already "
+"assigned elsewhere. 2) If you remove or rearrange hotkeys, manual hotkey "
+"assignments might need to be reassigned. 3) Hotkeys associated with desktop "
+"files can not be manually assigned."
 msgstr ""
 
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
