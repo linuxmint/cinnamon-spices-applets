@@ -4012,14 +4012,20 @@ class WindowList extends Applet.Applet {
            }
         }
      } else if (this._keyBindings[idx].description && this._settings.getValue("hotkey-new")) {
-        // Look for a pinned button matching the description and start a new window
-        for (let i=0 ; i < workspace._appButtons.length ; i++) {
-           if (workspace._appButtons[i]._pinned && (workspace._appButtons[i]._app.get_name() == this._keyBindings[idx].description ||
-               workspace._appButtons[i]._app.get_id() == this._keyBindings[idx].description))
-           {
-              workspace._appButtons[i]._app.open_new_window(-1);
-              break;
+        // Try to find a app if the description is a .desktop file name
+        let app = workspace._lookupApp(this._keyBindings[idx].description);
+        // If that didn't work, then look for a pinned button matching the description
+        if (!app) {
+           for (let i=0 ; i < workspace._appButtons.length ; i++) {
+              if (workspace._appButtons[i]._pinned && workspace._appButtons[i]._app.get_name() == this._keyBindings[idx].description) {
+                 app = workspace._appButtons[i]._app;
+                 break;
+              }
            }
+        }
+        // If we found an app start a new window
+        if (app) {
+           app.open_new_window(-1);
         }
      }
   }
