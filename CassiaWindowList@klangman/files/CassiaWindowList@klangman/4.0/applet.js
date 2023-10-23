@@ -1393,7 +1393,7 @@ class WindowListButton {
   }
 
   _updateNumberForHotkeyHelp(character) {
-     this._labelNumber.set_text(character);
+     this._labelNumber.set_text(character.toUpperCase());
      this._labelNumberBox.show();
      let [width, height] = this._labelNumber.get_size();
      let size = Math.max(width, height);
@@ -4012,20 +4012,14 @@ class WindowList extends Applet.Applet {
            }
         }
      } else if (this._keyBindings[idx].description && this._settings.getValue("hotkey-new")) {
-        // Try to find a app if the description is a .desktop file name
-        let app = workspace._lookupApp(this._keyBindings[idx].description);
-        // If that didn't work, then look for a pinned button matching the description
-        if (!app) {
-           for (let i=0 ; i < workspace._appButtons.length ; i++) {
-              if (workspace._appButtons[i]._pinned && workspace._appButtons[i]._app.get_name() == this._keyBindings[idx].description) {
-                 app = workspace._appButtons[i]._app;
-                 break;
-              }
+        // Look for a pinned button matching the description and start a new window
+        for (let i=0 ; i < workspace._appButtons.length ; i++) {
+           if (workspace._appButtons[i]._pinned && (workspace._appButtons[i]._app.get_name() == this._keyBindings[idx].description ||
+               workspace._appButtons[i]._app.get_id() == this._keyBindings[idx].description))
+           {
+              workspace._appButtons[i]._app.open_new_window(-1);
+              break;
            }
-        }
-        // If we found an app start a new window
-        if (app) {
-           app.open_new_window(-1);
         }
      }
   }
@@ -4192,6 +4186,16 @@ class WindowList extends Applet.Applet {
                        }
                     }
                     timerNeeded = true;
+                 } else if(this._keyBindings[i].description && this._settings.getValue("hotkey-new")) {
+                    // look for a pinned button matching the description
+                    for (let idx=0 ; idx < workspace._appButtons.length ; idx++) {
+                       if (workspace._appButtons[idx]._pinned && (workspace._appButtons[idx]._app.get_name() == this._keyBindings[i].description ||
+                           workspace._appButtons[idx]._app.get_id() == this._keyBindings[i].description))
+                       {
+                          workspace._appButtons[idx]._updateNumberForHotkeyHelp(first.slice(-1));
+                          break;
+                       }
+                    }
                  }
               }
            }

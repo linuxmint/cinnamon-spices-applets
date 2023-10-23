@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-21 11:34-0400\n"
+"POT-Creation-Date: 2023-10-23 10:26-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.0/applet.js:1330 4.0/applet.js:2507 4.0/applet.js:3984 4.0/applet.js:4052
-#: 4.0/applet.js:4075 4.0/applet.js:4159
+#: 4.0/applet.js:1330 4.0/applet.js:2507 4.0/applet.js:3984 4.0/applet.js:4046
+#: 4.0/applet.js:4069 4.0/applet.js:4153
 msgid "all buttons"
 msgstr ""
 
