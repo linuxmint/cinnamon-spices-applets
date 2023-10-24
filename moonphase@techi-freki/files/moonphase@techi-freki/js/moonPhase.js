@@ -14,7 +14,11 @@ class MoonPhase extends Applet.TextIconApplet {
 
         this.settings.bind('useAltIcons', 'useAltIcons', this._onSettingsChanged.bind(this));
         this.settings.bind('showTooltip', 'showTooltip', this._onSettingsChanged.bind(this));
+        this.settings.bind('showNameTooltip', 'showNameTooltip', this._onSettingsChanged.bind(this));
+        this.settings.bind('showPercentageTooltip', 'showPercentageTooltip', this._onSettingsChanged.bind(this));
         this.settings.bind('showPhaseLabel', 'showPhaseLabel', this._onSettingsChanged.bind(this));
+        this.settings.bind('showNameLabel', 'showNameLabel', this._onSettingsChanged.bind(this));
+        this.settings.bind('showPercentageLabel', 'showPercentageLabel', this._onSettingsChanged.bind(this));
 
         this.settings.bind('updateInterval', 'updateInterval', this._onSettingsChanged.bind(this));
 
@@ -30,7 +34,11 @@ class MoonPhase extends Applet.TextIconApplet {
     _onSettingsChanged(value) {
         this.useAltIcons = this.settings.getValue('useAltIcons');
         this.showTooltip = this.settings.getValue('showTooltip');
+        this.showNameTooltip = this.settings.getValue('showNameTooltip');
+        this.showPercentageTooltip = this.settings.getValue('showPercentageTooltip');
         this.showPhaseLabel = this.settings.getValue('showPhaseLabel');
+        this.showNameLabel = this.settings.getValue('showNameLabel');
+        this.showPercentageLabel = this.settings.getValue('showPercentageLabel');
 
         this.updateInterval = this.settings.getValue('updateInterval');
 
@@ -42,12 +50,12 @@ class MoonPhase extends Applet.TextIconApplet {
             Mainloop.source_remove(this.updateLoopId);
         }
 
-        const moon = new Moon(new Date(), this.useAltIcons);
+        const moon = new Moon(new Date(), this.useAltIcons, this.showNameLabel, this.showPercentageLabel, this.showNameTooltip, this.showPercentageTooltip);
 
         this.set_applet_icon_name(moon.currentPhaseIcon);
 
         if (this.showTooltip) {
-            this.set_applet_tooltip(moon.currentPhaseName);
+            this.set_applet_tooltip(moon.currentTooltip);
         } else {
             this.set_applet_tooltip('');
         }

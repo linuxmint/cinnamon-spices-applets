@@ -7,11 +7,12 @@ const Gettext = imports.gettext;
 Gettext.bindtextdomain(UUID, get_home_dir() + "/.local/share/locale")
 
 class Moon {
-    constructor(currentDate, useAltIcons) {
+    constructor(currentDate, useAltIcons, showNameLabel, showPercentageLabel, showNameTooltip, showPercentageTooltip) {
         this.currentDate = currentDate;
         this.age = this._getAge();
         this.currentPhaseIcon = this._getCurrentPhaseIcon(useAltIcons);
-        this.currentPhaseName = this._getCurrentPhaseName();
+        this.currentPhaseName = this._getCurrentPhaseName(showNameLabel, showPercentageLabel);
+        this.currentTooltip = this._getCurrentPhaseName(showNameTooltip, showPercentageTooltip);
     }
     // translation
     _(str) {
@@ -32,17 +33,24 @@ class Moon {
 
         return iconSet[age];
     }
-    _getCurrentPhaseName() {
+    _getCurrentPhaseName(showName = true, showPercentage = true) {
+        var name = "";
         const age = Math.round(this.age * 28) / 28;
+        const percent = Math.round((age < 0.5 ? 2*age : 2 - 2*age) * 100) + "%";
 
-        if (age === 0) return this._("New Moon");
-        if (age < 0.25) return this._("Waxing Crescent");
-        if (age === 0.25) return this._("First Quarter");
-        if (age < 0.5) return this._("Waxing Gibbous");
-        if (age === 0.5) return this._("Full Moon");
-        if (age < 0.75) return this._("Waning Gibbous");
-        if (age === 0.75) return this._("Last Quarter");
-        if (age <= 1) return this._("Waning Crescent");
-        return this._("New Moon");
+        if (age === 0) name = this._("New Moon");
+        else if (age < 0.25) name = this._("Waxing Crescent");
+        else if (age === 0.25) name = this._("First Quarter");
+        else if (age < 0.5) name = this._("Waxing Gibbous");
+        else if (age === 0.5) name = this._("Full Moon");
+        else if (age < 0.75) name = this._("Waning Gibbous");
+        else if (age === 0.75) name = this._("Last Quarter");
+        else if (age <= 1) name = this._("Waning Crescent")
+        else name = this._("New Moon");
+
+        if (showName & showPercentage) return name + " (" + percent + ")";
+        if (showName) return name;
+        if (showPercentage) return percent;
+        return _("Moon Phase");
     }
 }
