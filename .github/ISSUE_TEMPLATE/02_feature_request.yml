@@ -82,6 +82,7 @@ body:
     - hideable-applets@cardsurf @cardsurf
     - hwmonitor@sylfurd @hultan
     - ifstat@tagadan
+    - IntelTurboBoost@wsmenezes @wsmenezes
     - internet-indicator@sangorys @sangorys
     - InternetTimeApplet@stefan @stefan12O
     - ioDisk@ctrlesc @somboku
