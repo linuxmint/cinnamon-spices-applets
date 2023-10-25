@@ -4,22 +4,6 @@
 ![Technology](https://img.shields.io/badge/javascript-powered-green.svg)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://opensource.org/licenses/MIT)
 
-## Table of contents
-
-<!-- TOC -->  
-  * [Description](#description)
-  * [Disclaimer](#disclaimer)
-  * [Processors Tested](#processors-tested)
-  * [Requirements](#requirements)
-    * [Installing requirements on Linux](#installing-requirements-on-linux)
-  * [Installation / Removal](#installation--removal)
-  * [Screenshot](#screenshot)
-  * [Troubleshooting](#troubleshooting)
-  * [Issues](#issues)
-  * [License](#license)
-  * [Credits](#credits)
-<!-- TOC -->
-
 ## Description
 
 **cinnamon-applet-IntelTurboBoost** is a simple systray applet designed for Cinnamon desktop environments.
@@ -81,29 +65,11 @@ $ yum install msr-tools
 $ yum install python3-polib
 ~~~
     
-## Installation / Removal
+## Installation
 
-The recommended way to manually install ****cinnamon-applet-IntelTurboBoost**** is using the **Makefile** provided, as follows:
-
-~~~bash
-$ git clone https://github.com/wsmenezes/cinnamon-applet-IntelTurboBoost.git
-$ cd cinnamon-applet-IntelTurboBoost
-$ make install
-~~~
-
-Once it's finished you can add it to the panel using the **Applets** app from Cinnamon.
-
-To remove ****cinnamon-applet-IntelTurboBoost**** from your system, first remove the applet from the panel and proceed
-with the following commands:
-
-~~~bash
-$ cd ~/.local/share/cinnamon/applets
-$ rm -rf IntelTurboBoost@wsmenezes
-~~~
-
-## Screenshot
-
-![screenshot](screenshot.png)
+1. Right click on the cinnamon panel that you wish to add **Intel Turbo Boost** and click on "**Applets**".
+1. Click on the "**Download**" tab, search for **Intel Turbo Boost** and click on the install button.
+1. Back to the "**Manage**" tab, select **Intel Turbo Boost** and add it to the panel using the "**+**" button at the bottom.
 
 ## Troubleshooting
 
