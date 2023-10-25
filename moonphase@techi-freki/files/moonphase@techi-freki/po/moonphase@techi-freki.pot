@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 00:37+0200\n"
+"POT-Creation-Date: 2023-10-25 08:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,39 +17,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: js/moon.js:26 js/moon.js:34
+#: js/moon.js:41 js/moon.js:49
 msgid "New Moon"
 msgstr ""
 
-#: js/moon.js:27
+#: js/moon.js:42
 msgid "Waxing Crescent"
 msgstr ""
 
-#: js/moon.js:28
+#: js/moon.js:43
 msgid "First Quarter"
 msgstr ""
 
-#: js/moon.js:29
+#: js/moon.js:44
 msgid "Waxing Gibbous"
 msgstr ""
 
-#: js/moon.js:30
+#: js/moon.js:45
 msgid "Full Moon"
 msgstr ""
 
-#: js/moon.js:31
+#: js/moon.js:46
 msgid "Waning Gibbous"
 msgstr ""
 
-#: js/moon.js:32
+#: js/moon.js:47
 msgid "Last Quarter"
 msgstr ""
 
-#: js/moon.js:33
+#: js/moon.js:48
 msgid "Waning Crescent"
 msgstr ""
 
 #. metadata.json->name
+#: js/moon.js:54
 msgid "Moon Phase"
 msgstr ""
 
@@ -73,8 +74,24 @@ msgstr ""
 msgid "Display the moon phase as a string"
 msgstr ""
 
+#. settings-schema.json->showNameLabel->description
+msgid "Display the name of the moon phase in the label"
+msgstr ""
+
+#. settings-schema.json->showPercentageLabel->description
+msgid "Display the percentage of the moon phase in the label"
+msgstr ""
+
 #. settings-schema.json->showTooltip->description
 msgid "Display a tooltip on hover"
+msgstr ""
+
+#. settings-schema.json->showNameTooltip->description
+msgid "Display the name of the moon phase in the tooltip"
+msgstr ""
+
+#. settings-schema.json->showPercentageTooltip->description
+msgid "Display percentage of the moon phase in the tooltip"
 msgstr ""
 
 #. settings-schema.json->useAltIcons->description
