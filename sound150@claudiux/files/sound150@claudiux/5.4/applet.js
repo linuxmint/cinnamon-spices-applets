@@ -1026,7 +1026,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
         super(orientation, panel_height, instanceId);
 
-        this.defaultColor = null;
+        //~ this.defaultColor = null;
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
@@ -1068,6 +1068,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("tooltipShowVolume", "tooltipShowVolume", this.on_settings_changed);
         this.settings.bind("tooltipShowPlayer", "tooltipShowPlayer", this.on_settings_changed);
         this.settings.bind("tooltipShowArtistTitle", "tooltipShowArtistTitle", this.on_settings_changed);
+
+        Main.themeManager.connect("theme-set", Lang.bind(this, this._theme_set));
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -1713,17 +1715,22 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
     }
 
+    _theme_set() {
+        this._on_reload_this_applet_pressed();
+    }
+
     _outputValuesChanged(actor, iconName, percentage) {
         this.setIcon(iconName, "output");
         this.mute_out_switch.setIconSymbolicName(iconName);
         this.volume = percentage;
         this.setAppletTooltip();
 
-        if (this.defaultColor === null) {
-            // this.actor.set_style("applet-box");
-            let themeNode = this.actor.get_theme_node();
-            this.defaultColor = themeNode.get_foreground_color();
+        //~ if (!this.defaultColor) {
+        if (!this.themeNode) {
+            this.themeNode = this.actor.get_theme_node();
+            //~ this.defaultColor = this.themeNode.get_foreground_color();
         }
+        this.defaultColor = this.themeNode.get_foreground_color();
         let color = "rgba(" + this.defaultColor.red + "," + this.defaultColor.green + "," + this.defaultColor.blue + "," + this.defaultColor.alpha + ")";
 
         if (this.adaptColor) {
