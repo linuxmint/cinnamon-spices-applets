@@ -2,16 +2,15 @@
     "layout": {
       "type": "layout",
       "pages": [
-        "General",
-        "CPU",
-        "MEM",
-        "NET_IN",
-        "NET_OUT",
-        "DISK_READ",
-        "DISK_WRITE",
-        "BAT"
+        "General_page",
+        "CPU_page",
+        "Memory_page",
+        "Network_page",
+        "Disk_page",
+        "Battery_page"
       ],
-      "General": {
+
+      "General_page": {
         "type": "page",
         "title": "General",
         "sections": [
@@ -20,55 +19,44 @@
           "theme_data_settings"
         ]
       },
-      "CPU": {
+      "CPU_page": {
         "type": "page",
         "title": "CPU",
         "sections": [
           "CPU_settings"
         ]
       },
-      "MEM": {
+      "Memory_page": {
         "type": "page",
-        "title": "MEM",
+        "title": "Memory",
         "sections": [
           "MEM_settings"
         ]
       },
-      "NET_IN": {
+      "Network_page": {
         "type": "page",
-        "title": "NET (in)",
+        "title": "Network",
         "sections": [
-          "NET_IN_settings"
-        ]
-      },
-      "NET_OUT": {
-        "type": "page",
-        "title": "NET (out)",
-        "sections": [
+          "NET_IN_settings",
           "NET_OUT_settings"
         ]
       },
-      "DISK_READ": {
+      "Disk_page": {
         "type": "page",
-        "title": "DISK (read)",
+        "title": "Disk",
         "sections": [
-          "DISK_READ_settings"
-        ]
-      },
-      "DISK_WRITE": {
-        "type": "page",
-        "title": "DISK (write)",
-        "sections": [
+          "DISK_READ_settings",
           "DISK_WRITE_settings"
         ]
       },
-      "BAT": {
+      "Battery_page": {
         "type": "page",
-        "title": "BAT (battery)",
+        "title": "Battery",
         "sections": [
           "BAT_settings"
         ]
       },
+      
       "general_settings": {
         "type": "section",
         "title": "General settings",
