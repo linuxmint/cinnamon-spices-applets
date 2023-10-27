@@ -71,7 +71,6 @@ gpumonitor@axel358/**                              @axel358
 graphicsCenter@scollins/**                         @collinss
 healthyeyes@ipolozov/**                            @ipolozov
 hideable-applets@cardsurf/**                       @cardsurf
-hwmonitor@sylfurd/**                               @hultan
 internet-indicator@sangorys/**                     @sangorys
 ioDisk@ctrlesc/**                                  @somboku
 ipindicator@matus.benko@gmail.com/**               @PrimaMateria
@@ -174,6 +173,7 @@ xsession@claudiux/**                               @claudiux
 # force-quit@cinnamon.org
 # gputemperature@silentage.com
 # hamster@projecthamster.wordpress.com
+# hwmonitor@sylfurd
 # ifstat@tagadan
 # localip@mrieracrespi
 # location-detection@heimdall
