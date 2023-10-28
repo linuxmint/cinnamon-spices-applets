@@ -20,7 +20,11 @@
       "keys": [
         "useAltIcons",
         "showTooltip",
-        "showPhaseLabel"
+        "showNameTooltip",
+        "showPercentageTooltip",
+        "showPhaseLabel",
+        "showNameLabel",
+        "showPercentageLabel"
       ]
     },
     "section-menu": {
@@ -37,10 +41,34 @@
     "default": false,
     "description": "Display the moon phase as a string"
   },
+  "showNameLabel": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Display the name of the moon phase in the label",
+    "dependency": "showPhaseLabel"
+  },
+  "showPercentageLabel": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Display the percentage of the moon phase in the label",
+    "dependency": "showPhaseLabel"
+  },
   "showTooltip": {
     "type": "checkbox",
     "default": true,
     "description": "Display a tooltip on hover"
+  },
+  "showNameTooltip": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Display the name of the moon phase in the tooltip",
+    "dependency": "showTooltip"
+  },
+  "showPercentageTooltip": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Display percentage of the moon phase in the tooltip",
+    "dependency": "showTooltip"
   },
   "useAltIcons": {
     "type": "checkbox",
