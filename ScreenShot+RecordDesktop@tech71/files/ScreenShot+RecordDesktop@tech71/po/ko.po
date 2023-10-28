@@ -79,7 +79,7 @@ msgstr "현재 창 녹화 (오디오 제외)"
 
 #: applet.js:91
 msgid "Stop Recording"
-msgstr "녹화 시작"
+msgstr "녹화 중지"
 
 #: applet.js:96
 msgid "Recording-Stopped"
