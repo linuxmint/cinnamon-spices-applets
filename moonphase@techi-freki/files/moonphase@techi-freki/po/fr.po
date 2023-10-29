@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 00:37+0200\n"
-"PO-Revision-Date: 2023-10-23 01:24+0200\n"
+"POT-Creation-Date: 2023-10-29 05:07+0100\n"
+"PO-Revision-Date: 2023-10-29 05:12+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,39 +18,40 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: js/moon.js:26 js/moon.js:34
+#: js/moon.js:41 js/moon.js:49
 msgid "New Moon"
 msgstr "Nouvelle Lune"
 
-#: js/moon.js:27
+#: js/moon.js:42
 msgid "Waxing Crescent"
 msgstr "Premier croissant"
 
-#: js/moon.js:28
+#: js/moon.js:43
 msgid "First Quarter"
 msgstr "Premier quartier"
 
-#: js/moon.js:29
+#: js/moon.js:44
 msgid "Waxing Gibbous"
 msgstr "Gibbeuse croissante"
 
-#: js/moon.js:30
+#: js/moon.js:45
 msgid "Full Moon"
 msgstr "Pleine Lune"
 
-#: js/moon.js:31
+#: js/moon.js:46
 msgid "Waning Gibbous"
 msgstr "Gibbeuse décroissante"
 
-#: js/moon.js:32
+#: js/moon.js:47
 msgid "Last Quarter"
 msgstr "Dernier quartier"
 
-#: js/moon.js:33
+#: js/moon.js:48
 msgid "Waning Crescent"
 msgstr "Dernier croissant"
 
 #. metadata.json->name
+#: js/moon.js:54
 msgid "Moon Phase"
 msgstr "Phase de la Lune"
 
@@ -74,9 +75,25 @@ msgstr "Paramètres de mise à jour"
 msgid "Display the moon phase as a string"
 msgstr "Afficher la phase de la lune sous forme de chaîne de caractères"
 
+#. settings-schema.json->showNameLabel->description
+msgid "Display the name of the moon phase in the label"
+msgstr "Afficher dans le panneau le nom de la phase de la lune"
+
+#. settings-schema.json->showPercentageLabel->description
+msgid "Display the percentage of the moon phase in the label"
+msgstr "Afficher dans le panneau le pourcentage de la phase lunaire"
+
 #. settings-schema.json->showTooltip->description
 msgid "Display a tooltip on hover"
 msgstr "Afficher une info-bulle au survol"
+
+#. settings-schema.json->showNameTooltip->description
+msgid "Display the name of the moon phase in the tooltip"
+msgstr "Afficher dans l'infobulle le nom de la phase de la lune"
+
+#. settings-schema.json->showPercentageTooltip->description
+msgid "Display percentage of the moon phase in the tooltip"
+msgstr "Afficher dans l'infobulle le pourcentage de la phase de la lune"
 
 #. settings-schema.json->useAltIcons->description
 msgid "Light theme"
