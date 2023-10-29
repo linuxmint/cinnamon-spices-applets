@@ -7,76 +7,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 09:54+0100\n"
-"PO-Revision-Date: 2022-06-03 17:12+0200\n"
+"POT-Creation-Date: 2023-06-23 23:31+0100\n"
+"PO-Revision-Date: 2023-10-29 17:00+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:55
-msgid "[GPaste is not installed]"
-msgstr "[GPaste non è installato]"
-
-#: applet.js:91
-msgid "GPaste clipboard"
-msgstr "GPaste Clipboard"
-
-#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->gpaste-
-#. settings->description
-#: applet.js:97 applet.js:135
-msgid "GPaste Main Program"
-msgstr "Programma Principale GPaste"
-
-#: applet.js:102
-msgid "Select History"
-msgstr "Seleziona Cronologia"
-
-#: applet.js:111
-msgid "Track clipboard changes"
-msgstr "Tieni traccia delle modifiche alla clipboard"
-
-#: applet.js:119
-msgid "(Empty)"
-msgstr "(Vuota)"
-
-#: applet.js:122
-msgid "(No results)"
-msgstr "(Nessun risultato)"
-
-#: applet.js:127
-msgid "New item"
-msgstr "Nuovo elemento"
-
-#: applet.js:130
-msgid "Empty history"
-msgstr "Svuota cronologia"
-
-#: applet.js:447
-msgid "Do you really want to empty the current history?"
-msgstr "Vuoi davvero svuotare la cronologia attuale?"
-
-#: GPasteNewItemDialog.js:48
+#: GPasteNewItemDialog.js:53
 msgid "Please enter the text you want to add to the current history:"
 msgstr "Inserisci il testo che desideri aggiungere alla cronologia corrente:"
 
-#: GPasteNewItemDialog.js:54 GPasteNotInstalledDialog.js:27
+#: GPasteNewItemDialog.js:59 GPasteNotInstalledDialog.js:32
 msgid "OK"
 msgstr "OK"
 
-#: GPasteNewItemDialog.js:58
+#: GPasteNewItemDialog.js:63
 msgid "Cancel"
 msgstr "Annulla"
 
-#: GPasteSearchItem.js:29
-msgid "Type to search..."
-msgstr "Digita per cercare..."
-
-#: GPasteNotInstalledDialog.js:22
+#: GPasteNotInstalledDialog.js:27
 msgid ""
 "GPaste is not installed. Please install the necessary packages and then "
 "restart Cinnamon for this applet to start working."
@@ -84,57 +38,97 @@ msgstr ""
 "GPaste non è installato. Installa i pacchetti necessari e riavvia Cinnamon "
 "affinché questa applet inizi a funzionare."
 
-#. gpaste-reloaded@feuerfuchs.eu->metadata.json->name
+#: GPasteSearchItem.js:34
+msgid "Type to search..."
+msgstr "Digita per cercare..."
+
+#: applet.js:73
+msgid "[GPaste is not installed]"
+msgstr "[GPaste non è installato]"
+
+#: applet.js:109
+msgid "GPaste clipboard"
+msgstr "GPaste Clipboard"
+
+#. settings-schema.json->gpaste-settings->description
+#: applet.js:115 applet.js:153
+msgid "GPaste Main Program"
+msgstr "Programma Principale GPaste"
+
+#: applet.js:120
+msgid "Select History"
+msgstr "Seleziona Cronologia"
+
+#: applet.js:129
+msgid "Track clipboard changes"
+msgstr "Tieni traccia delle modifiche alla clipboard"
+
+#: applet.js:137
+msgid "(Empty)"
+msgstr "(Vuota)"
+
+#: applet.js:140
+msgid "(No results)"
+msgstr "(Nessun risultato)"
+
+#: applet.js:145
+msgid "New item"
+msgstr "Nuovo elemento"
+
+#: applet.js:148
+msgid "Empty history"
+msgstr "Svuota cronologia"
+
+#: applet.js:465
+msgid "Do you really want to empty the current history?"
+msgstr "Vuoi davvero svuotare la cronologia attuale?"
+
+#. metadata.json->description
+msgid "Instantly access and manage your clipboard history"
+msgstr "Accedi e gestisci istantaneamente la cronologia degli appunti"
+
+#. metadata.json->name
 msgid "GPaste Reloaded"
 msgstr "GPaste Reloaded"
 
-#. gpaste-reloaded@feuerfuchs.eu->metadata.json->description
-msgid ""
-"A complete rewrite of the GPaste applet based on the Gnome Shell extension"
-msgstr ""
-"Una riscrittura completa dell'applet GPaste basata sull'estensione Gnome "
-"Shell"
-
-#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->display-gpaste-
-#. ui->description
-msgid "Display 'GPaste Main Program'"
-msgstr "Mostra 'Programma Principale GPaste'"
-
-#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->kb-show-
-#. history->description
-msgid "Show history"
-msgstr "Mostra cronologia"
-
-#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->other->description
-msgid "Other"
-msgstr "Altro"
-
-#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->key-
-#. bindings->description
-msgid "Key bindings"
-msgstr "Scorciatoie da tastiera"
-
-#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->shown-
-#. entries->description
+#. settings-schema.json->shown-entries->description
 msgid "Shown entries"
 msgstr "Voci mostrate"
 
-#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->display-empty-
-#. history->description
-msgid "Display 'Empty history'"
-msgstr "Mostra 'Svuota cronologia'"
-
-#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->display-track-
-#. switch->description
+#. settings-schema.json->display-track-switch->description
 msgid "Display 'Track clipboard changes'"
 msgstr "Mostra 'Tieni traccia delle modifiche alla clipboard'"
 
-#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->display-new-
-#. item->description
+#. settings-schema.json->display-new-item->description
 msgid "Display 'New item'"
 msgstr "Mostra 'Nuovo elemento'"
 
-#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->display-
-#. searchbar->description
+#. settings-schema.json->display-searchbar->description
 msgid "Display search bar"
 msgstr "Mostra barra di ricerca"
+
+#. settings-schema.json->display-gpaste-ui->description
+msgid "Display 'GPaste Main Program'"
+msgstr "Mostra 'Programma Principale GPaste'"
+
+#. settings-schema.json->display-empty-history->description
+msgid "Display 'Empty history'"
+msgstr "Mostra 'Svuota cronologia'"
+
+#. settings-schema.json->key-bindings->description
+msgid "Key bindings"
+msgstr "Scorciatoie da tastiera"
+
+#. settings-schema.json->kb-show-history->description
+msgid "Show history"
+msgstr "Mostra cronologia"
+
+#. settings-schema.json->other->description
+msgid "Other"
+msgstr "Altro"
+
+#~ msgid ""
+#~ "A complete rewrite of the GPaste applet based on the Gnome Shell extension"
+#~ msgstr ""
+#~ "Una riscrittura completa dell'applet GPaste basata sull'estensione Gnome "
+#~ "Shell"
