@@ -2,7 +2,7 @@
   "uuid": "moonphase@techi-freki",
   "name": "Moon Phase",
   "description": "A Cinnamon applet that displays the current moon phase.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "max-instances": 1,
   "author": "Techi Freki"
 }
