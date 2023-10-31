@@ -52,7 +52,7 @@ class MoonPhase extends Applet.TextIconApplet {
 
         const moon = new Moon(new Date(), this.useAltIcons, this.showNameLabel, this.showPercentageLabel, this.showNameTooltip, this.showPercentageTooltip);
 
-        this.set_applet_icon_name(moon.currentPhaseIcon);
+        this.set_applet_icon_symbolic_name(moon.currentPhaseIcon);
 
         if (this.showTooltip) {
             this.set_applet_tooltip(moon.currentTooltip);
