@@ -13,14 +13,14 @@ MyApplet.prototype = {
     
     _init: function(metadata, orientation, panel_height, instance_id) {
         try {
-            global.log("Initializing MuteToggler applet")
+            global.log("MuteToggler: Initializing applet")
             Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
             this.uuid = UUID;
             
             this.set_applet_tooltip(_("Click to mute/unmute microphone"));
 
             try {
-                global.log("Initializing MuteToggler Settings")
+                global.log("MuteToggler: Initializing settings")
                 this.settings = new Settings.AppletSettings(this, this.uuid, instance_id);
                 this.settings.bindProperty(Settings.BindingDirection.IN,
                                      "keybinding",
@@ -42,7 +42,7 @@ MyApplet.prototype = {
             this.is_audio_muted();
             
             this.refresh_loop();
-            global.log("Done initializing MuteToggler applet")
+            global.log("MuteToggler: Done initializing applet")
         } catch (e) {
             global.logError(e);
         }
