@@ -62,7 +62,7 @@ MyApplet.prototype = {
     is_audio_muted: function() {
         try {
             let cmd = [
-                "bash",
+                "sh",
                 "-c",
                 "amixer sget Capture"
                 ];
@@ -95,7 +95,7 @@ MyApplet.prototype = {
     on_applet_clicked: function(event) {
         try{
             let cmd = [
-                "bash",
+                "sh",
                 "-c",
                 "amixer set Capture toggle"
             ];
