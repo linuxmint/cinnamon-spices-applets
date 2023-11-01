@@ -135,5 +135,11 @@
         "description": "Adjust the color of the icon to the volume",
         "tooltip": "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red.",
         "default": true
+    },
+    "alwaysCanChangeMic": {
+        "type": "switch",
+        "description": "Always allow microphone to be reactivated",
+        "tooltip": "Always show the 'Mute input' switch in the context menu.",
+        "default": true
     }
 }

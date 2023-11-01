@@ -1,5 +1,11 @@
 ## CHANGELOG
 
+### v4.4.0~20231101
+  * Allow to always show the 'Mute input' switch in contextual menu.
+
+### v4.3.0~20231026
+  * Fixes 5005: Icon color changing with theme 
+
 ### v4.2.0~20231012
   * Try to distinguish between the artist and the song title.
 
