@@ -1069,6 +1069,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("tooltipShowPlayer", "tooltipShowPlayer", this.on_settings_changed);
         this.settings.bind("tooltipShowArtistTitle", "tooltipShowArtistTitle", this.on_settings_changed);
 
+        this.settings.bind("alwaysCanChangeMic", "alwaysCanChangeMic", this.on_settings_changed);
+
         Main.themeManager.connect("theme-set", Lang.bind(this, this._theme_set));
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -1156,7 +1158,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.mute_in_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute input"), false, "microphone-sensitivity-muted", St.IconType.SYMBOLIC);
         this._applet_context_menu.addMenuItem(this.mute_out_switch);
         this._applet_context_menu.addMenuItem(this.mute_in_switch);
-        this.mute_in_switch.actor.hide();
+        if (!this.alwaysCanChangeMic)
+            this.mute_in_switch.actor.hide();
+        else
+            this.mute_in_switch.actor.show();
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -1275,13 +1280,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (!this._input)
             return;
 
-        if (this._input.is_muted) {
-            this._input.change_is_muted(false);
-            this.mute_in_switch.setToggleState(false);
-        } else {
-            this._input.change_is_muted(true);
-            this.mute_in_switch.setToggleState(true);
-        }
+        let newStatus = !this._input.is_muted;
+        this._input.change_is_muted(newStatus);
+        this.mute_in_switch.setToggleState(newStatus);
     }
 
     _onScrollEvent(actor, event) {
@@ -1880,6 +1881,9 @@ class Sound150Applet extends Applet.TextIconApplet {
                         this._inputSection.actor.hide();
                         this.mute_in_switch.actor.hide();
                     }
+
+                    if (this.alwaysCanChangeMic)
+                        this.mute_in_switch.actor.show();
                 }
                 this._streams.splice(i, 1);
                 break;
