@@ -37,6 +37,23 @@ MyApplet.prototype = {
             if (this.settings) {
                 this.on_settings_changed();
             }
+
+            this.amixer = "";
+            const parameters = ["", " -D pulse"];
+            for (let param of parameters) {
+                let cmd = "amixer" + param + " scontrols";
+                global.log("MuteToggler: Test mixer command '" + cmd + "'");
+                let [res, stdout] = GLib.spawn_command_line_sync(cmd);
+                var string = new TextDecoder().decode(stdout);
+                if (res && string.indexOf("'Capture'") != -1) {
+                    this.amixer = "amixer" + param;
+                    global.log("MuteToggler: Use mixer command '" + this.amixer + "'"
+                    break;
+                } 
+            }
+            if (this.amixer == "") {
+                throw "No working mixer command found!";
+            }
             
             this.set_not_muted_icon();
             this.is_audio_muted();
@@ -64,7 +81,7 @@ MyApplet.prototype = {
             let cmd = [
                 "sh",
                 "-c",
-                "amixer sget Capture"
+                this.amixer + " sget Capture"
                 ];
             Util.spawn_async(cmd, (stdout) => {
                 try{
@@ -98,7 +115,7 @@ MyApplet.prototype = {
             let cmd = [
                 "sh",
                 "-c",
-                "amixer set Capture toggle"
+                this.amixer + " set Capture toggle"
             ];
             Util.spawn_async(cmd, (stdout) => {
                 this.is_audio_muted();
