@@ -4,6 +4,7 @@ const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
 const Settings = imports.ui.settings;
+const GLib = imports.gi.GLib;
 
 const UUID = 'MuteToggler@jebeaudet.com';
 
