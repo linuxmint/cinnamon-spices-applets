@@ -39,21 +39,18 @@ MyApplet.prototype = {
                 this.on_settings_changed();
             }
 
-            this.amixer = "";
+            this.amixer = "amixer";
             const parameters = ["", " -D pulse"];
             for (let param of parameters) {
-                let cmd = "amixer" + param + " scontrols";
+                let cmd = this.amixer + param + " scontrols";
                 global.log("MuteToggler: Test mixer command '" + cmd + "'");
                 let [res, stdout] = GLib.spawn_command_line_sync(cmd);
                 var string = new TextDecoder().decode(stdout);
                 if (res && string.indexOf("'Capture'") != -1) {
-                    this.amixer = "amixer" + param;
-                    global.log("MuteToggler: Use mixer command '" + this.amixer + "'"
+                    this.amixer += param;
+                    global.log("MuteToggler: Use mixer command '" + this.amixer + "'");
                     break;
                 } 
-            }
-            if (this.amixer == "") {
-                throw "No working mixer command found!";
             }
             
             this.set_not_muted_icon();
