@@ -86,8 +86,7 @@ MyApplet.prototype = {
                 ];
             Util.spawn_async(cmd, (stdout) => {
                 try{
-                    var string = new TextDecoder().decode(stdout);
-                    if(string().indexOf("] [on]") != -1){
+                    if(stdout.indexOf("] [on]") != -1){
                         this.set_not_muted_icon();
                     } else {
                         this.set_muted_icon();
