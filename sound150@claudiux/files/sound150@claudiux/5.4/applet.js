@@ -1233,6 +1233,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         else
             this.setAppletTextIcon();
 
+       if (this.alwaysCanChangeMic)
+            this.mute_in_switch.actor.show();
+        else if (this._recordingAppsNum === 0)
+            this.mute_in_switch.actor.hide();
+
         this._changeActivePlayer(this._activePlayer);
     }
 
