@@ -1,3 +1,6 @@
+### v1.8.0~20231108
+  * Updated dependencies.js for Soup3.
+
 ### v1.7.0~20231014
   * Try distinguishing artist and song name in tooltip.
 

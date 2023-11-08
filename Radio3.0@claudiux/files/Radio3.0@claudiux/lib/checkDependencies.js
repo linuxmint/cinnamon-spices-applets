@@ -78,7 +78,8 @@ var DEPENDENCIES = {
     ["ffmpeg", "/usr/bin/ffmpeg", "ffmpeg"],
     ["ffmpegthumbnailer", "/usr/bin/ffmpegthumbnailer", "ffmpegthumbnailer"],
     ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
-    ["", "/usr/lib/python3/dist-packages/polib.py", "python3-polib"]
+    ["", "/usr/lib/python3/dist-packages/polib.py", "python3-polib"],
+    ["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]
   ],
   "arch": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
@@ -91,7 +92,8 @@ var DEPENDENCIES = {
     ["ffmpeg", "/usr/bin/ffmpeg", "ffmpeg"],
     ["ffmpegthumbnailer", "/usr/bin/ffmpegthumbnailer", "ffmpegthumbnailer"],
     ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
-    ["", "/usr/share/licenses/python-brotli/LICENSE", "python-brotli"]
+    ["", "/usr/share/licenses/python-brotli/LICENSE", "python-brotli"],
+    ["", "/usr/lib/girepository-1.0/Soup-3.0.typelib", "libsoup3"]
   ],
   "debian": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
@@ -108,7 +110,8 @@ var DEPENDENCIES = {
     ["ffmpeg", "/usr/bin/ffmpeg", "ffmpeg"],
     ["ffmpegthumbnailer", "/usr/bin/ffmpegthumbnailer", "ffmpegthumbnailer"],
     ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
-    ["", "/usr/lib/python3/dist-packages/polib.py", "python3-polib"]
+    ["", "/usr/lib/python3/dist-packages/polib.py", "python3-polib"],
+    ["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]
   ],
   "fedora": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
@@ -122,7 +125,8 @@ var DEPENDENCIES = {
     ["", "/usr/share/licenses/python3-brotli/LICENSE", "python3-brotli"],
     ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
     ["", "/usr/lib64/gstreamer-1.0/libgstlibav.so", "gstreamer1-libav"],
-    ["", "/usr/share/licenses/python3-polib/LICENSE", "python3-polib"]
+    ["", "/usr/share/licenses/python3-polib/LICENSE", "python3-polib"],
+    ["", "/usr/share/licenses/libsoup3/COPYING", "libsoup3"]
   ],
   "openSUSE": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
@@ -135,7 +139,8 @@ var DEPENDENCIES = {
     ["", "/usr/share/licenses/brotli/LICENSE", "brotli"],
     ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
     ["", "/usr/lib64/gstreamer-1.0/libgstlibav.so", "gstreamer-plugins-libav"],
-    ["", "/usr/share/licenses/python310-polib/LICENSE", "python3-polib"]
+    ["", "/usr/share/licenses/python310-polib/LICENSE", "python3-polib"],
+    ["", "/usr/share/licenses/libsoup-3_0-0/COPYING", "libsoup-3_0-0"]
   ]
 }
 
