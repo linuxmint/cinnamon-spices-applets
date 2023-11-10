@@ -78,8 +78,7 @@ var DEPENDENCIES = {
     ["ffmpeg", "/usr/bin/ffmpeg", "ffmpeg"],
     ["ffmpegthumbnailer", "/usr/bin/ffmpegthumbnailer", "ffmpegthumbnailer"],
     ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
-    ["", "/usr/lib/python3/dist-packages/polib.py", "python3-polib"],
-    ["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]
+    ["", "/usr/lib/python3/dist-packages/polib.py", "python3-polib"]
   ],
   "arch": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
@@ -92,8 +91,7 @@ var DEPENDENCIES = {
     ["ffmpeg", "/usr/bin/ffmpeg", "ffmpeg"],
     ["ffmpegthumbnailer", "/usr/bin/ffmpegthumbnailer", "ffmpegthumbnailer"],
     ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
-    ["", "/usr/share/licenses/python-brotli/LICENSE", "python-brotli"],
-    ["", "/usr/lib/girepository-1.0/Soup-3.0.typelib", "libsoup3"]
+    ["", "/usr/share/licenses/python-brotli/LICENSE", "python-brotli"]
   ],
   "debian": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
@@ -125,8 +123,7 @@ var DEPENDENCIES = {
     ["", "/usr/share/licenses/python3-brotli/LICENSE", "python3-brotli"],
     ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
     ["", "/usr/lib64/gstreamer-1.0/libgstlibav.so", "gstreamer1-libav"],
-    ["", "/usr/share/licenses/python3-polib/LICENSE", "python3-polib"],
-    ["", "/usr/share/licenses/libsoup3/COPYING", "libsoup3"]
+    ["", "/usr/share/licenses/python3-polib/LICENSE", "python3-polib"]
   ],
   "openSUSE": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
@@ -139,11 +136,17 @@ var DEPENDENCIES = {
     ["", "/usr/share/licenses/brotli/LICENSE", "brotli"],
     ["yt-dlp", "/usr/bin/yt-dlp", "yt-dlp"],
     ["", "/usr/lib64/gstreamer-1.0/libgstlibav.so", "gstreamer-plugins-libav"],
-    ["", "/usr/share/licenses/python310-polib/LICENSE", "python3-polib"],
-    ["", "/usr/share/licenses/libsoup-3_0-0/COPYING", "libsoup-3_0-0"]
+    ["", "/usr/share/licenses/python310-polib/LICENSE", "python3-polib"]
   ]
 }
 
+if (versionCompare(GLib.getenv("CINNAMON_VERSION"), "5.8") >= 0) {
+  DEPENDENCIES["default"].push(["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]);
+  DEPENDENCIES["debian"].push(["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]);
+  DEPENDENCIES["arch"].push(["", "/usr/lib/girepository-1.0/Soup-3.0.typelib", "libsoup3"]);
+  DEPENDENCIES["fedora"].push(["", "/usr/share/licenses/libsoup3/COPYING", "libsoup3"]);
+  DEPENDENCIES["openSUSE"].push(["", "/usr/share/licenses/libsoup-3_0-0/COPYING", "libsoup-3_0-0"]);
+}
 
 // --- Do not modify from here --- //
 if (NEEDS_FONTS_SYMBOLA) {
@@ -151,6 +154,23 @@ if (NEEDS_FONTS_SYMBOLA) {
   DEPENDENCIES["debian"].push(["", "/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf", "fonts-symbola"]);
   DEPENDENCIES["fedora"].push(["", "/usr/share/fonts/gdouros-symbola/Symbola.ttf", "gdouros-symbola-fonts"]);
   DEPENDENCIES["openSUSE"].push(["", "/usr/share/fonts/truetype/Symbola.ttf", "gdouros-symbola-fonts"]);
+}
+
+function versionCompare(left, right) {
+  if (typeof left + typeof right != 'stringstring')
+    return false;
+  var a = left.split('.'),
+      b = right.split('.'),
+      i = 0,
+      len = Math.max(a.length, b.length);
+  for (; i < len; i++) {
+    if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
+      return 1;
+    } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
+      return -1;
+    }
+  }
+  return 0;
 }
 
 const _ = function(str) {
