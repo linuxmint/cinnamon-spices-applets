@@ -1,3 +1,6 @@
+### v1.8.1~20231110
+  * Updated dependencies.js for Soup3 - Bugfix.
+
 ### v1.8.0~20231108
   * Updated dependencies.js for Soup3.
 
