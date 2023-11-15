@@ -1,3 +1,6 @@
+### v1.9.1~20231115
+  * Fixes #5097 and removes mpv-mpris for versions of distros that do not have the right package.
+
 ### v1.9.0~20231115
   * Change location of yt-dlp program: from `~/bin/` to `~/.local/bin/`.
   * Fedora (Cinnamon 5.8 and more): use pipewire packages.
