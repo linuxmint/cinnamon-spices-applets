@@ -45,8 +45,7 @@ MyApplet.prototype = {
                 let cmd = this.amixer + param + " scontrols";
                 global.log("MuteToggler: Test mixer command '" + cmd + "'");
                 let [res, stdout] = GLib.spawn_command_line_sync(cmd);
-                var string = new TextDecoder().decode(stdout);
-                if (res && string.indexOf("'Capture'") != -1) {
+                if (res && stdout.indexOf("'Capture'") != -1) {
                     this.amixer += param;
                     global.log("MuteToggler: Use mixer command '" + this.amixer + "'");
                     break;
