@@ -1,3 +1,8 @@
+### v1.9.0~20231115
+  * Change location of yt-dlp program: from `~/bin/` to `~/.local/bin/`.
+  * Fedora (Cinnamon 5.8 and more): use pipewire packages.
+  * (Pipewire will be used in other distros, when available, in a next version of Radio3.0.)
+
 ### v1.8.1~20231110
   * Updated dependencies.js for Soup3 - Bugfix.
 
