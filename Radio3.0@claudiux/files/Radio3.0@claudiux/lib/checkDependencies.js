@@ -65,7 +65,6 @@ const DEPENDENCIES = {
 var DEPENDENCIES = {
   "default": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
-    ["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
     ["", "/usr/share/doc/libmpv1/copyright", "libmpv1"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
@@ -82,7 +81,6 @@ var DEPENDENCIES = {
   ],
   "arch": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
-    ["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
     ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
@@ -95,7 +93,6 @@ var DEPENDENCIES = {
   ],
   "debian": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
-    ["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
     ["", "/usr/lib/x86_64-linux-gnu/libmpv.so", "libmpv?"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
@@ -113,7 +110,6 @@ var DEPENDENCIES = {
   ],
   "fedora": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
-    ["", "/usr/lib64/mpv/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
     ["sox", "/usr/bin/sox", "sox"],
     ["at", "/usr/bin/at", "at"],
@@ -126,7 +122,6 @@ var DEPENDENCIES = {
   ],
   "openSUSE": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
-    ["", "/usr/lib64/mpv/mpris.so", "mpv-mpris"],
     ["wget", "/usr/bin/wget", "wget"],
     ["sox", "/usr/bin/sox",  "sox"],
     ["at", "/usr/bin/at", "at"],
@@ -139,6 +134,17 @@ var DEPENDENCIES = {
   ]
 }
 
+// mpv-mpris is only available from Ubuntu 22.04 (LM 21 LTS, Cinnamon 5.4)
+if (versionCompare(GLib.getenv("CINNAMON_VERSION"), "5.4") >= 0) {
+  DEPENDENCIES["default"].push(["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"]);
+  DEPENDENCIES["arch"].push(["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"]);
+  DEPENDENCIES["debian"].push(["", "/usr/lib/mpv-mpris/mpris.so", "mpv-mpris"]);
+  DEPENDENCIES["fedora"].push(["", "/usr/lib64/mpv/mpris.so", "mpv-mpris"]);
+  DEPENDENCIES["openSUSE"].push(["", "/usr/lib64/mpv/mpris.so", "mpv-mpris"]);
+}
+
+// Soup-3 is used instead of Soup-2.4 from LM 21.2, Cinnamon 5.8.
+// Also pipewire from Fedora 39, Cinnamon 5.8.
 if (versionCompare(GLib.getenv("CINNAMON_VERSION"), "5.8") >= 0) {
   DEPENDENCIES["default"].push(["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]);
   DEPENDENCIES["debian"].push(["", "/usr/share/doc/gir1.2-soup-3.0/copyright", "gir1.2-soup-3.0"]);
@@ -150,7 +156,6 @@ if (versionCompare(GLib.getenv("CINNAMON_VERSION"), "5.8") >= 0) {
   DEPENDENCIES["openSUSE"].push(["", "/usr/share/licenses/libsoup-3_0-0/COPYING", "libsoup-3_0-0"]);
 } else {
   DEPENDENCIES["fedora"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
-
 }
 
 // --- Do not modify from here --- //

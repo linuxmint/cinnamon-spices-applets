@@ -968,9 +968,9 @@ WebRadioReceiverAndRecorder.prototype = {
     this.instanceId = instance_id;
     this.hasMarkup = (this._applet_tooltip.set_markup) ? true : false;
 
-    // To check dependencies:
-    this.dependencies = new Dependencies();
-    this.depCount = 0;
+    //~ // To check dependencies:
+    //~ this.dependencies = new Dependencies();
+    //~ this.depCount = 0;
 
     // yt-dlp updated?
     this.ytdlp_updated = false;
@@ -3470,8 +3470,14 @@ WebRadioReceiverAndRecorder.prototype = {
 
     // Check about dependencies:
     this.checkDepInterval = undefined;
-    if (this.dependencies.areDepMet() || this.dont_check_dependencies) {
+    this.dependencies = new Dependencies();
+    this.depCount = 0;
+    if (this.dont_check_dependencies || this.dependencies.areDepMet()) {
       // (Consider) All dependencies are installed.
+      if (this.checkDepInterval != undefined) {
+        clearInterval(this.checkDepInterval);
+        this.checkDepInterval = undefined;
+      }
 
       // Install or update translations, if any:
       if (!are_translations_installed()) install_translations();
