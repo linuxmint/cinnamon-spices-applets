@@ -20,7 +20,7 @@ msgstr ""
 
 #: applet.js:41
 msgid "Click to mute/unmute microphone"
-msgstr "Clic pour ouvrir/fermer le micro"
+msgstr "Clique pour ouvrir/fermer le micro"
 
 #. metadata.json->name
 msgid "Mic mute toggler"
