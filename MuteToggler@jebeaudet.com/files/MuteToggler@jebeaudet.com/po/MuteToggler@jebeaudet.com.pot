@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-16 14:53+0100\n"
+"POT-Creation-Date: 2023-11-16 18:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:41
+#: applet.js:55
 msgid "Click to mute/unmute microphone"
 msgstr ""
 
@@ -29,8 +29,36 @@ msgstr ""
 msgid "Quickly toggle global microphone mute on and off."
 msgstr ""
 
+#. settings-schema.json->section_keybinding->description
+msgid "Keyboard shortcuts"
+msgstr ""
+
 #. settings-schema.json->keybinding->description
 msgid "Set the keybinding for toggling microphone mute"
+msgstr ""
+
+#. settings-schema.json->section_icons->description
+msgid "Icons"
+msgstr ""
+
+#. settings-schema.json->use_symbolic_icon->description
+msgid "Use symbolic icons"
+msgstr ""
+
+#. settings-schema.json->tint_symbolic_icon->description
+msgid "Tint symbolic icons"
+msgstr ""
+
+#. settings-schema.json->muted_color->description
+msgid "Icon color when microphone is muted"
+msgstr ""
+
+#. settings-schema.json->unmuted_color->description
+msgid "Icon color when microphone is unmuted"
+msgstr ""
+
+#. settings-schema.json->section_debug_messages->description
+msgid "Debug messages"
 msgstr ""
 
 #. settings-schema.json->verbose->description
