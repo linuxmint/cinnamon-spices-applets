@@ -265,6 +265,6 @@ body:
   type: markdown
 description: "If something isn't working, file a report. \U0001F527"
 labels:
-- bug
+- BUG
 name: "\U0001F41C Applet Bug Report"
 title: Applet Bug
