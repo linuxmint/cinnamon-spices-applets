@@ -2,7 +2,13 @@
     "keybinding": {
         "type": "keybinding",
         "description": "Set the keybinding for toggling microphone mute",
-        "default": "unassigned",
+        "default": "",
+        "indent": true
+    },
+    "verbose": {
+        "type": "switch",
+        "description": "Make it verbose in ~/.xsession-errors",
+        "default": true,
         "indent": true
     }
 }
