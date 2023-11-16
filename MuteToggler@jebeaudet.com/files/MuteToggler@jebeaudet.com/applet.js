@@ -5,11 +5,16 @@ const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
-
+const {
+  bindtextdomain,
+  dgettext,
+  gettext
+} = imports.gettext; //Gettext
 const {to_string} = require("./lib/to-string");
 
 const APPNAME = "MuteToggler";
 const UUID = APPNAME + "@jebeaudet.com";
+const HOME_DIR = GLib.get_home_dir();
 
 var VERBOSE = true; // VERBOSE value will be changed according to this applet settings.
 
@@ -25,6 +30,15 @@ function log(message, alwaysLog=false) {
 
 function logError(error) {
   global.logError("\n[" + APPNAME + "]: " + error + "\n")
+}
+
+bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
+function _(str) {
+  let customTranslation = dgettext(UUID, str);
+  if(customTranslation != str) {
+    return customTranslation;
+  }
+  return gettext(str);
 }
 
 MyApplet.prototype = {
