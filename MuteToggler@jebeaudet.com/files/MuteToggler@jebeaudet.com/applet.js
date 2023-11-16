@@ -65,7 +65,26 @@ MyApplet.prototype = {
                                      "verbose",
                                      this.on_settings_changed,
                                      null);
-
+                this.settings.bindProperty(Settings.BindingDirection.IN,
+                                     "use_symbolic_icon",
+                                     "use_symbolic_icon",
+                                     this.is_audio_muted,
+                                     null);
+                this.settings.bindProperty(Settings.BindingDirection.IN,
+                                     "tint_symbolic_icon",
+                                     "tint_symbolic_icon",
+                                     this.is_audio_muted,
+                                     null);
+                this.settings.bindProperty(Settings.BindingDirection.IN,
+                                     "muted_color",
+                                     "muted_color",
+                                     this.is_audio_muted,
+                                     null);
+                this.settings.bindProperty(Settings.BindingDirection.IN,
+                                     "unmuted_color",
+                                     "unmuted_color",
+                                     this.is_audio_muted,
+                                     null);
                 log("Initializing settings")
             } catch (e) {
                 logError(e);
@@ -144,12 +163,30 @@ MyApplet.prototype = {
 
     set_not_muted_icon: function() {
         this.current_icon = "not_muted";
-        this.set_applet_icon_name("not_muted");
+        if (this.use_symbolic_icon) {
+            this.set_applet_icon_symbolic_name("microphone-sensitivity-high-symbolic");
+            if (this.tint_symbolic_icon) {
+                this.actor.set_style("color: %s;".format(this.unmuted_color))
+            } else {
+                this.actor.set_style("color: #e4e4e4;")
+            }
+        } else {
+            this.set_applet_icon_name("not_muted");
+        }
     },
 
     set_muted_icon: function() {
         this.current_icon = "muted";
-        this.set_applet_icon_name("muted");
+        if (this.use_symbolic_icon) {
+            this.set_applet_icon_symbolic_name("microphone-disabled-symbolic");
+            if (this.tint_symbolic_icon) {
+                this.actor.set_style("color: %s;".format(this.muted_color))
+            } else {
+                this.actor.set_style("color: #e4e4e4;")
+            }
+        } else {
+            this.set_applet_icon_name("muted");
+        }
     },
 
     on_applet_clicked: function(event) {
