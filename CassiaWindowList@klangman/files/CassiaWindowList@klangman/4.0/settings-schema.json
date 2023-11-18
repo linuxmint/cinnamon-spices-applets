@@ -30,7 +30,7 @@
     "advanced-page" : {
       "type" : "page",
       "title" : "Advanced",
-      "sections" : ["adv-mouse-settings"]
+      "sections" : ["adv-mouse-settings", "adv-other-settings"]
     },
 
     "caption-settings" : {
@@ -72,7 +72,12 @@
     "adv-mouse-settings" : {
       "type" : "section",
       "title" : "Ctrl/Shift + mouse button actions",
-      "keys" : ["adv-mouse-list", "adv-mouse-help", "backup-file-name"]
+      "keys" : ["adv-mouse-list", "adv-mouse-help"]
+    },
+    "adv-other-settings" : {
+      "type" : "section",
+      "title" : "",
+      "keys" : ["backup-file-name"]
     }
   },
   "caption-type": {
@@ -649,7 +654,7 @@
 
   "adv-mouse-help" : {
     "type" : "label",
-    "description" : "Note: The above list contents are frequently incorrectly displayed due to what I suspect is a Cinnamon bug. The values displayed in the edit dialog box are the correct values and the ones that will take effect. I will be looking into the cause of this issue at some point."
+    "description" : "Note: The above list contents will be incorrectly displayed without this fix:\nhttps://github.com/linuxmint/cinnamon/pull/11908\nThe edit dialog box values are the correct values and the ones that will take effect."
   },
 
   "backup-file-name" : {

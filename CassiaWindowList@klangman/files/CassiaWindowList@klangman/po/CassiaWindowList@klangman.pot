@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 10:26-0400\n"
+"POT-Creation-Date: 2023-11-18 10:25-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,29 +17,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.0/applet.js:1330 4.0/applet.js:2507 4.0/applet.js:3984 4.0/applet.js:4046
-#: 4.0/applet.js:4069 4.0/applet.js:4153
+#: 4.0/applet.js:1330 4.0/applet.js:2515 4.0/applet.js:3992 4.0/applet.js:4060
+#: 4.0/applet.js:4083 4.0/applet.js:4172
 msgid "all buttons"
 msgstr ""
 
-#: 4.0/applet.js:2239
+#: 4.0/applet.js:2247
 msgid "Applet Preferences"
 msgstr ""
 
-#: 4.0/applet.js:2243
+#: 4.0/applet.js:2251
 msgid "About..."
 msgstr ""
 
-#: 4.0/applet.js:2247
+#: 4.0/applet.js:2255
 msgid "Configure..."
 msgstr ""
 
-#: 4.0/applet.js:2251
+#: 4.0/applet.js:2259
 #, javascript-format
 msgid "Remove '%s'"
 msgstr ""
 
-#: 4.0/applet.js:2253
+#: 4.0/applet.js:2261
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr ""
 
@@ -49,107 +49,107 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2262
+#: 4.0/applet.js:2270
 msgid "Open new window"
 msgstr ""
 
-#: 4.0/applet.js:2270
+#: 4.0/applet.js:2278
 msgid "Remove from panel"
 msgstr ""
 
-#: 4.0/applet.js:2272
+#: 4.0/applet.js:2280
 msgid "Remove from this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2278
+#: 4.0/applet.js:2286
 msgid "Pin to panel"
 msgstr ""
 
-#: 4.0/applet.js:2280
+#: 4.0/applet.js:2288
 msgid "Pin to this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2321
+#: 4.0/applet.js:2329
 msgid "Pin to other workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2342
+#: 4.0/applet.js:2350
 msgid "Pin to all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2360
+#: 4.0/applet.js:2368
 msgid "Pin to launcher"
 msgstr ""
 
-#: 4.0/applet.js:2378 4.0/applet.js:2561
+#: 4.0/applet.js:2386 4.0/applet.js:2569
 msgid "Add new Hotkey for"
 msgstr ""
 
-#: 4.0/applet.js:2392
+#: 4.0/applet.js:2400
 msgid "Recent files"
 msgstr ""
 
-#: 4.0/applet.js:2416
+#: 4.0/applet.js:2424
 msgid "Places"
 msgstr ""
 
-#: 4.0/applet.js:2458
+#: 4.0/applet.js:2466
 msgid "Only on this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2460
+#: 4.0/applet.js:2468
 msgid "Visible on all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2461
+#: 4.0/applet.js:2469
 msgid "Move to another workspace"
 msgstr ""
 
-#: 4.0/applet.js:2480
+#: 4.0/applet.js:2488
 msgid "Move to another monitor"
 msgstr ""
 
-#: 4.0/applet.js:2488
+#: 4.0/applet.js:2496
 msgid "Monitor"
 msgstr ""
 
-#: 4.0/applet.js:2516
+#: 4.0/applet.js:2524
 msgid "unassigned"
 msgstr ""
 
-#: 4.0/applet.js:2527 4.0/applet.js:2558
+#: 4.0/applet.js:2535 4.0/applet.js:2566
 msgid "Assign window to a hotkey"
 msgstr ""
 
-#: 4.0/applet.js:2581
+#: 4.0/applet.js:2589
 msgid "Change application label contents"
 msgstr ""
 
-#: 4.0/applet.js:2584
+#: 4.0/applet.js:2592
 msgid "Remove custom setting"
 msgstr ""
 
-#: 4.0/applet.js:2591
+#: 4.0/applet.js:2599
 msgid "Use window title"
 msgstr ""
 
-#: 4.0/applet.js:2598
+#: 4.0/applet.js:2606
 msgid "Use application name"
 msgstr ""
 
-#: 4.0/applet.js:2605
+#: 4.0/applet.js:2613
 msgid "No label"
 msgstr ""
 
-#: 4.0/applet.js:2616
+#: 4.0/applet.js:2624
 msgid "Ungroup application windows"
 msgstr ""
 
-#: 4.0/applet.js:2625
+#: 4.0/applet.js:2633
 msgid "Group application windows"
 msgstr ""
 
-#: 4.0/applet.js:2638
+#: 4.0/applet.js:2646
 msgid "Automatic grouping/ungrouping"
 msgstr ""
 
@@ -159,31 +159,31 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2668
+#: 4.0/applet.js:2676
 msgid "Move titlebar on to screen"
 msgstr ""
 
-#: 4.0/applet.js:2673
+#: 4.0/applet.js:2681
 msgid "Restore"
 msgstr ""
 
-#: 4.0/applet.js:2677
+#: 4.0/applet.js:2685
 msgid "Minimize"
 msgstr ""
 
-#: 4.0/applet.js:2683
+#: 4.0/applet.js:2691
 msgid "Unmaximize"
 msgstr ""
 
-#: 4.0/applet.js:2690
+#: 4.0/applet.js:2698
 msgid "Close others"
 msgstr ""
 
-#: 4.0/applet.js:2701
+#: 4.0/applet.js:2709
 msgid "Close all"
 msgstr ""
 
-#: 4.0/applet.js:2710
+#: 4.0/applet.js:2718
 msgid "Close"
 msgstr ""
 
@@ -1022,10 +1022,11 @@ msgstr ""
 
 #. 4.0->settings-schema.json->adv-mouse-help->description
 msgid ""
-"Note: The above list contents are frequently incorrectly displayed due to "
-"what I suspect is a Cinnamon bug. The values displayed in the edit dialog "
-"box are the correct values and the ones that will take effect. I will be "
-"looking into the cause of this issue at some point."
+"Note: The above list contents will be incorrectly displayed without this "
+"fix:\n"
+"https://github.com/linuxmint/cinnamon/pull/11908\n"
+"The edit dialog box values are the correct values and the ones that will "
+"take effect."
 msgstr ""
 
 #. 4.0->settings-schema.json->backup-file-name->description
