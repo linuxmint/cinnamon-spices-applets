@@ -159,7 +159,7 @@ const GroupingType = {
   NotGrouped:  1,   // Button is not grouped but can be grouped automatically
                     // The value NotGrouped and lower indicate grouping is not currently active
   ForcedOn:    2,   // Button is grouped and can't be ungrouped automatically
-  Auto:        3,   // Button was grouped automatically and can be ungrouped automatically 
+  Auto:        3,   // Button was grouped automatically and can be ungrouped automatically
   Tray:        4,   // Button is a "tray" and therefore only represents a group of windows not a specific window or application
   Unspecified: 5    // Only used to signal that the user setting should be queried, not a valid WindowListButton._grouped value
 }
@@ -1392,6 +1392,10 @@ class WindowListButton {
     this._labelNumberBox.natural_width = panelHeight;
   }
 
+  _removeNumber() {
+     this._labelNumberBox.hide();
+  }
+
   _updateNumberForHotkeyHelp(character) {
      this._labelNumber.set_text(character.toUpperCase());
      this._labelNumberBox.show();
@@ -2158,7 +2162,11 @@ class WindowListButton {
     this._app.open_new_window(-1);
     //let animationTime = this._settings.getValue("animation-time") / 1000;
     //this._animateIcon(animationTime);
-    this._animateIcon(0);
+    if (this._windows.length===0 || this._grouped === GroupingType.ForcedOn || this._grouped === GroupingType.Auto ||
+        this._settings.getValue("group-windows")===GroupType.Launcher)
+    {
+       this._animateIcon(0);
+    }
   }
 
   _onEnterEvent() {
@@ -4148,7 +4156,12 @@ class WindowList extends Applet.Applet {
      let keySequence = this._settings.getValue("hotkey-sequence");
      let workspace = this.getCurrentWorkSpace();
      let i;
-     let timerNeeded = false;
+     // Clear the number labels for all windowlist buttons
+     let children = workspace.actor.get_children();
+     for( let idx=0 ; idx < children.length ; idx++ ){
+        children[idx]._delegate._removeNumber()
+     }
+     // Update buttons with the relevant hotkey characters
      for ( i=keyBindings.length-1 ; i >= 0 ; i--) {
         if (keyBindings[i].enabled && keyBindings[i].keyCombo) {
            let keyCombo = keyBindings[i].keyCombo;
@@ -4161,7 +4174,6 @@ class WindowList extends Applet.Applet {
                  for( let idx=0 ; idx < children.length && idx < 9 ; idx++ ){
                     children[idx]._delegate._updateNumberForHotkeyHelp((idx+1).toString());
                  }
-                 timerNeeded= true;
               } else if (keySequence && keyBindings[i].keyCombo.indexOf(modifiers+"1")!=-1) {
                  if (workspace._keyBindingsWindows[i]) {
                     let app = workspace.getAppForWindow(workspace._keyBindingsWindows[i]);
@@ -4169,7 +4181,6 @@ class WindowList extends Applet.Applet {
                     for( let idx=0 ; idx<btns.length && idx<9 ; idx++ ) {
                        btns[idx]._updateNumberForHotkeyHelp((idx+1).toString());
                     }
-                    timerNeeded = true;
                  }
               } else {
                  if (workspace._keyBindingsWindows[i]) {
@@ -4191,7 +4202,6 @@ class WindowList extends Applet.Applet {
                           btn._updateNumberForHotkeyHelp(second.slice(-1));
                        }
                     }
-                    timerNeeded = true;
                  } else if(this._keyBindings[i].description && this._settings.getValue("hotkey-new")) {
                     // look for a pinned button matching the description
                     for (let idx=0 ; idx < workspace._appButtons.length ; idx++) {
@@ -4207,19 +4217,17 @@ class WindowList extends Applet.Applet {
            }
         }
      }
-     if (timerNeeded) {
-        if (this.hotkeyHelpRemoveDelay) {
-           Mainloop.source_remove(this.hotkeyHelpRemoveDelay);
-        }
-        this.hotkeyHelpRemoveDelay = Mainloop.timeout_add(3000, Lang.bind(this, function() {
-              this.hotkeyHelpRemoveDelay = undefined;
-              let children = workspace.actor.get_children();
-              for( let idx=0 ; idx < children.length ; idx++ ){
-                 children[idx]._delegate._updateNumber();
-              }
-           }
-        ));
+     if (this.hotkeyHelpRemoveDelay) {
+        Mainloop.source_remove(this.hotkeyHelpRemoveDelay);
      }
+     this.hotkeyHelpRemoveDelay = Mainloop.timeout_add(3000, Lang.bind(this, function() {
+           this.hotkeyHelpRemoveDelay = undefined;
+           let children = workspace.actor.get_children();
+           for( let idx=0 ; idx < children.length ; idx++ ){
+              children[idx]._delegate._updateNumber();
+           }
+        }
+     ));
   }
 
   _updateThumbnailWindowSize() {
