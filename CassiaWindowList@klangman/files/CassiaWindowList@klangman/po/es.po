@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 10:26-0400\n"
-"PO-Revision-Date: 2023-11-01 15:10-0300\n"
+"POT-Creation-Date: 2023-11-18 10:25-0500\n"
+"PO-Revision-Date: 2023-11-20 17:29-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,29 +17,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4\n"
 
-#: 4.0/applet.js:1330 4.0/applet.js:2507 4.0/applet.js:3984 4.0/applet.js:4046
-#: 4.0/applet.js:4069 4.0/applet.js:4153
+#: 4.0/applet.js:1330 4.0/applet.js:2515 4.0/applet.js:3992 4.0/applet.js:4060
+#: 4.0/applet.js:4083 4.0/applet.js:4172
 msgid "all buttons"
 msgstr "todos los botones"
 
-#: 4.0/applet.js:2239
+#: 4.0/applet.js:2247
 msgid "Applet Preferences"
 msgstr "Preferencias del applet"
 
-#: 4.0/applet.js:2243
+#: 4.0/applet.js:2251
 msgid "About..."
 msgstr "Acerca de..."
 
-#: 4.0/applet.js:2247
+#: 4.0/applet.js:2255
 msgid "Configure..."
 msgstr "Configurar..."
 
-#: 4.0/applet.js:2251
+#: 4.0/applet.js:2259
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eliminar '%s'"
 
-#: 4.0/applet.js:2253
+#: 4.0/applet.js:2261
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "¿Realmente desea eliminar esta instancia de CassiaWindowList?"
 
@@ -49,107 +49,107 @@ msgstr "¿Realmente desea eliminar esta instancia de CassiaWindowList?"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2262
+#: 4.0/applet.js:2270
 msgid "Open new window"
 msgstr "Abrir nueva ventana"
 
-#: 4.0/applet.js:2270
+#: 4.0/applet.js:2278
 msgid "Remove from panel"
 msgstr "Quitar del panel"
 
-#: 4.0/applet.js:2272
+#: 4.0/applet.js:2280
 msgid "Remove from this workspace"
 msgstr "Eliminar de este espacio de trabajo"
 
-#: 4.0/applet.js:2278
+#: 4.0/applet.js:2286
 msgid "Pin to panel"
 msgstr "Anclar al panel"
 
-#: 4.0/applet.js:2280
+#: 4.0/applet.js:2288
 msgid "Pin to this workspace"
 msgstr "Anclar a este espacio de trabajo"
 
-#: 4.0/applet.js:2321
+#: 4.0/applet.js:2329
 msgid "Pin to other workspaces"
 msgstr "Anclar a otros espacios de trabajo"
 
-#: 4.0/applet.js:2342
+#: 4.0/applet.js:2350
 msgid "Pin to all workspaces"
 msgstr "Anclar a todos los espacios de trabajo"
 
-#: 4.0/applet.js:2360
+#: 4.0/applet.js:2368
 msgid "Pin to launcher"
 msgstr "Anclar al lanzador"
 
-#: 4.0/applet.js:2378 4.0/applet.js:2561
+#: 4.0/applet.js:2386 4.0/applet.js:2569
 msgid "Add new Hotkey for"
 msgstr "Añadir nueva tecla de acceso rápido para"
 
-#: 4.0/applet.js:2392
+#: 4.0/applet.js:2400
 msgid "Recent files"
 msgstr "Archivos recientes"
 
-#: 4.0/applet.js:2416
+#: 4.0/applet.js:2424
 msgid "Places"
 msgstr "Lugares"
 
-#: 4.0/applet.js:2458
+#: 4.0/applet.js:2466
 msgid "Only on this workspace"
 msgstr "Sólo en este espacio de trabajo"
 
-#: 4.0/applet.js:2460
+#: 4.0/applet.js:2468
 msgid "Visible on all workspaces"
 msgstr "Visible en todos los espacios de trabajo"
 
-#: 4.0/applet.js:2461
+#: 4.0/applet.js:2469
 msgid "Move to another workspace"
 msgstr "Mover a otro espacio de trabajo"
 
-#: 4.0/applet.js:2480
+#: 4.0/applet.js:2488
 msgid "Move to another monitor"
 msgstr "Mover a otro monitor"
 
-#: 4.0/applet.js:2488
+#: 4.0/applet.js:2496
 msgid "Monitor"
 msgstr "Monitor"
 
-#: 4.0/applet.js:2516
+#: 4.0/applet.js:2524
 msgid "unassigned"
 msgstr "no asignado"
 
-#: 4.0/applet.js:2527 4.0/applet.js:2558
+#: 4.0/applet.js:2535 4.0/applet.js:2566
 msgid "Assign window to a hotkey"
 msgstr "Asignar ventana a una tecla de acceso rápido"
 
-#: 4.0/applet.js:2581
+#: 4.0/applet.js:2589
 msgid "Change application label contents"
 msgstr "Cambiar el contenido de la etiqueta de la aplicación"
 
-#: 4.0/applet.js:2584
+#: 4.0/applet.js:2592
 msgid "Remove custom setting"
 msgstr "Eliminar configuración personalizada"
 
-#: 4.0/applet.js:2591
+#: 4.0/applet.js:2599
 msgid "Use window title"
 msgstr "Utilizar título de ventana"
 
-#: 4.0/applet.js:2598
+#: 4.0/applet.js:2606
 msgid "Use application name"
 msgstr "Utilizar nombre de aplicación"
 
-#: 4.0/applet.js:2605
+#: 4.0/applet.js:2613
 msgid "No label"
 msgstr "Sin etiqueta"
 
-#: 4.0/applet.js:2616
+#: 4.0/applet.js:2624
 msgid "Ungroup application windows"
 msgstr "Ventanas de aplicaciones separadas"
 
-#: 4.0/applet.js:2625
+#: 4.0/applet.js:2633
 msgid "Group application windows"
 msgstr "Ventanas de aplicaciones agrupadas"
 
-#: 4.0/applet.js:2638
+#: 4.0/applet.js:2646
 msgid "Automatic grouping/ungrouping"
 msgstr "Agrupación/desagrupación automática"
 
@@ -159,31 +159,31 @@ msgstr "Agrupación/desagrupación automática"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2668
+#: 4.0/applet.js:2676
 msgid "Move titlebar on to screen"
 msgstr "Mover la barra de título a la pantalla"
 
-#: 4.0/applet.js:2673
+#: 4.0/applet.js:2681
 msgid "Restore"
 msgstr "Restaurar"
 
-#: 4.0/applet.js:2677
+#: 4.0/applet.js:2685
 msgid "Minimize"
 msgstr "Minimizar"
 
-#: 4.0/applet.js:2683
+#: 4.0/applet.js:2691
 msgid "Unmaximize"
 msgstr "Desmaximizar"
 
-#: 4.0/applet.js:2690
+#: 4.0/applet.js:2698
 msgid "Close others"
 msgstr "Cerrar otros"
 
-#: 4.0/applet.js:2701
+#: 4.0/applet.js:2709
 msgid "Close all"
 msgstr "Cerrar todo"
 
-#: 4.0/applet.js:2710
+#: 4.0/applet.js:2718
 msgid "Close"
 msgstr "Cerrar"
 
@@ -1141,15 +1141,17 @@ msgstr ""
 
 #. 4.0->settings-schema.json->adv-mouse-help->description
 msgid ""
-"Note: The above list contents are frequently incorrectly displayed due to "
-"what I suspect is a Cinnamon bug. The values displayed in the edit dialog "
-"box are the correct values and the ones that will take effect. I will be "
-"looking into the cause of this issue at some point."
+"Note: The above list contents will be incorrectly displayed without this "
+"fix:\n"
+"https://github.com/linuxmint/cinnamon/pull/11908\n"
+"The edit dialog box values are the correct values and the ones that will "
+"take effect."
 msgstr ""
-"Nota: El contenido de la lista anterior se muestra con frecuencia de forma "
-"incorrecta debido a lo que sospecho que es un error de Cinnamon. Los valores "
-"mostrados en el cuadro de diálogo de edición son los correctos y los que "
-"tendrán efecto. Investigaré la causa de este problema en algún momento."
+"Nota: El contenido de la lista anterior se mostrará incorrectamente sin esta "
+"corrección:\n"
+"https://github.com/linuxmint/cinnamon/pull/11908\n"
+"Los valores del cuadro de diálogo de edición son los correctos y los que "
+"tendrán efecto."
 
 #. 4.0->settings-schema.json->backup-file-name->description
 msgid "Settings backup name"
