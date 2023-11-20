@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-22 03:30-0100\n"
-"PO-Revision-Date: 2023-08-22 03:32-0100\n"
+"PO-Revision-Date: 2023-11-20 18:08-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.4\n"
 
 #: 5.4/applet.js:360 4.2/applet.js:365
 msgid "click to deactivate the eye"
@@ -36,7 +36,7 @@ msgstr "efectos desactivados"
 
 #: 5.4/applet.js:362 4.2/applet.js:367
 msgid "TIP"
-msgstr ""
+msgstr "TIP"
 
 #. metadata.json->name
 msgid "Cinnamon Eyes"
