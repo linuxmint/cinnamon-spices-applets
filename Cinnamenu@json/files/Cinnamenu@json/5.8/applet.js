@@ -9,6 +9,7 @@ const St = imports.gi.St;
 const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
+const GnomeSession = imports.misc.gnomeSession;
 const AppletManager = imports.ui.appletManager; //
 //const {SessionManager} = imports.misc.gnomeSession;
 const {ScreenSaverProxy} = imports.misc.screenSaver;
@@ -127,6 +128,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.apps = new Apps(this.appSystem);
         //this.session = new SessionManager();
         this.screenSaverProxy = new ScreenSaverProxy();
+        this.sessionManager = new GnomeSession.SessionManager();
 
         const updateKeybinding = () => {
             Main.keybindingManager.addHotKey(
