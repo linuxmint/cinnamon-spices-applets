@@ -103,6 +103,7 @@ MyApplet.prototype = {
             for (let param of parameters) {
                 let cmd = this.amixer + param + " scontrols";
                 log("Test mixer command '" + cmd + "'");
+                // TODO: Make it async.
                 let [res, stdout] = GLib.spawn_command_line_sync(cmd);
                 if (res && to_string(stdout).indexOf("'Capture'") != -1) {
                     this.amixer += param;
@@ -111,6 +112,7 @@ MyApplet.prototype = {
                 }
             }
 
+            this.applet_is_running = true;
             this.set_not_muted_icon();
             this.is_audio_muted();
 
@@ -135,7 +137,8 @@ MyApplet.prototype = {
 
     refresh_loop: function() {
         this.is_audio_muted();
-        Mainloop.timeout_add(1000, Lang.bind(this, this.refresh_loop));
+        if (this.applet_is_running)
+            Mainloop.timeout_add(1000, Lang.bind(this, this.refresh_loop));
     },
 
     is_audio_muted: function() {
@@ -198,10 +201,15 @@ MyApplet.prototype = {
             ];
             Util.spawn_async(cmd, (stdout) => {
                 this.is_audio_muted();
-        });
+            });
         }catch(e){
             logError(e);
         }
+    },
+
+    on_applet_removed_from_panel: function() {
+        log("was removed from panel");
+        this.applet_is_running = false
     }
 };
 
