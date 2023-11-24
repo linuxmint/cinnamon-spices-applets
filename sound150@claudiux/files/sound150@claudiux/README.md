@@ -50,7 +50,7 @@ On the computer of a child, reduce the maximum volume possible to take care of h
 
 ## Cinnamon versions
 
-Tested successfully on Cinnamon v2.8 to v4.6 (Linux Mint 17.3 to 20).
+Tested successfully on Cinnamon v2.8 to v5.8 (Linux Mint 17.3 to 21.2).
 
 Does not work on Cinnamon prior to v2.8 (Linux Mint prior to 17.3).
 
