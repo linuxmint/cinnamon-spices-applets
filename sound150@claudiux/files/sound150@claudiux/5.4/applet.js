@@ -86,7 +86,7 @@ const formatTextWrap = (text, maxLineLength) => {
   }, '');
 }
 /* global values */
-let players_without_seek_support = ['spotify', 'totem', 'xplayer', 'gnome-mplayer', 'pithos',
+let players_without_seek_support = ['telegram desktop', 'spotify', 'totem', 'xplayer', 'gnome-mplayer', 'pithos',
     'smplayer'];
 let players_with_seek_support = [
     'clementine', 'banshee', 'rhythmbox', 'rhythmbox3', 'pragha', 'quodlibet',
@@ -1034,6 +1034,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         this.settings.bind("showtrack", "showtrack", this.on_settings_changed);
         this.settings.bind("middleClickAction", "middleClickAction");
+        this.settings.bind("middleShiftClickAction", "middleShiftClickAction");
         this.settings.bind("horizontalScroll", "horizontalScroll")
         this.settings.bind("showalbum", "showalbum", this.on_settings_changed);
         this.settings.bind("truncatetext", "truncatetext", this.on_settings_changed);
@@ -1291,7 +1292,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _onScrollEvent(actor, event) {
-        let direction = event.get_scroll_direction();
+        const direction = event.get_scroll_direction();
 
         if (direction == Clutter.ScrollDirection.SMOOTH) {
             return Clutter.EVENT_PROPAGATE;
@@ -1365,18 +1366,34 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     _onButtonPressEvent(actor, event) {
         let buttonId = event.get_button();
+        let modifiers = Cinnamon.get_event_state(event);
+        let shiftPressed = (modifiers & Clutter.ModifierType.SHIFT_MASK);
 
         // mute or play / pause players on middle click
         if (buttonId === 2) {
-            if (this.middleClickAction === "mute") {
-                this._toggle_out_mute();
-                this._toggle_in_mute();
-            } else if (this.middleClickAction === "out_mute")
-                this._toggle_out_mute();
-            else if (this.middleClickAction === "in_mute")
-                this._toggle_in_mute();
-            else if (this.middleClickAction === "player")
-                this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote();
+            if (shiftPressed) {
+                if (this.middleShiftClickAction === "mute") {
+                    if (this._output.is_muted === this._input.is_muted)
+                        this._toggle_in_mute();
+                    this._toggle_out_mute();
+                } else if (this.middleShiftClickAction === "out_mute")
+                    this._toggle_out_mute();
+                else if (this.middleShiftClickAction === "in_mute")
+                    this._toggle_in_mute();
+                else if (this.middleShiftClickAction === "player")
+                    this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote();
+            } else {
+                if (this.middleClickAction === "mute") {
+                    if (this._output.is_muted === this._input.is_muted)
+                        this._toggle_in_mute();
+                    this._toggle_out_mute();
+                } else if (this.middleClickAction === "out_mute")
+                    this._toggle_out_mute();
+                else if (this.middleClickAction === "in_mute")
+                    this._toggle_in_mute();
+                else if (this.middleClickAction === "player")
+                    this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote();
+            }
         } else if (buttonId === 8) { // previous and next track on mouse buttons 4 and 5 (8 and 9 by X11 numbering)
             this._players[this._activePlayer]._mediaServerPlayer.PreviousRemote();
         } else if (buttonId === 9) {
@@ -1467,10 +1484,10 @@ class Sound150Applet extends Applet.TextIconApplet {
             else {
                 title_text = player._title + ' - ' + player._artist;
             }
-            //~ if (this.truncatetext < title_text.length) {
-                //~ title_text = title_text.substr(0, this.truncatetext) + "...";
-            //~ }
-            title_text = formatTextWrap(title_text, this.truncatetext);
+            const glyphs = Util.splitByGlyph(title_text);
+            if (glyphs.length > this.truncatetext) {
+                title_text = glyphs.slice(0, this.truncatetext - 3).join("") + "...";
+            }
         }
         this.set_applet_label(title_text);
         //~ log("setAppletText: title_text:\n"+title_text, true)

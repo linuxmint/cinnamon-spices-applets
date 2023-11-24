@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### v4.5.0~20231124
+  * Adds a shift-middle click action (mute/unmute microphone by default). Thanks to @sphh!
+
 ### v4.4.1~20231103
   * Update the contextual menu when flipping the 'Mute input' switch in the settings.
 
