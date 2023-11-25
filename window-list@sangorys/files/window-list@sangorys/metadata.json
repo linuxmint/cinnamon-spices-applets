@@ -1,0 +1,7 @@
+{
+ "uuid": "window-list@sangorys",
+ "name": "My perfect window-list applet",
+ "description": "Based on the original Cinnamon window list, the window order is memorized and restored. The next huge feature is to also group window like Google Chrome groups tab. This is my definition of a perfect window list applet",
+ "role": "windowattentionhandler",
+ "max-instances": -1
+}

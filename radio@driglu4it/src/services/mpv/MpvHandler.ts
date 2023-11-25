@@ -7,9 +7,18 @@ const { spawnCommandLine } = imports.misc.util;
 // see https://lazka.github.io/pgi-docs/Cvc-1.0/index.html
 const { MixerControl } = imports.gi.Cvc;
 
-export let mpvHandler: ReturnType<typeof createMpvHandler>
+export type MpvHandler = ReturnType<typeof createMpvHandler>
+
+// TODO: this is not really right as the mpvHandler is initally undefined but it is much easier that way..
+export let mpvHandler: MpvHandler
 
 export const initMpvHandler = () => {
+
+    if (mpvHandler) {
+        global.logWarning('mpvHandler already initiallized')
+        return
+    }
+
     mpvHandler = createMpvHandler()
 }
 
@@ -42,7 +51,7 @@ function createMpvHandler() {
     let isLoading: boolean = false
 
     const playbackStatusChangeHandler: ChangeHandler<AdvancedPlaybackStatus>[] = []
-    const channelNameChangeHandler: ChangeHandler<string >[] = []
+    const channelNameChangeHandler: ChangeHandler<string>[] = []
     const volumeChangeHandler: ChangeHandler<number>[] = [] //
     const titleChangeHandler: ChangeHandler<string>[] = []
     const lengthChangeHandler: ChangeHandler<number>[] = []
@@ -66,9 +75,9 @@ function createMpvHandler() {
     let currentUrl: string | null = lastUrl
 
     // When no last Url is passed and mpv is running, it is assumed that mpv is not used for the radio applet (and therefore the playbackstatus is Stopped)
-    const initialPlaybackStatus =  getPlaybackStatus()
+    const initialPlaybackStatus = getPlaybackStatus()
     if (initialPlaybackStatus === 'Stopped') currentUrl = null
-    
+
     let currentLength: number = getLength() // in seconds
     let positionTimerId: ReturnType<typeof setInterval> | null = null
 
@@ -114,7 +123,7 @@ function createMpvHandler() {
     }
 
     function deactivateAllListener(): void {
-        dbus.disconnectSignal(nameOwnerSignalId)
+        if (nameOwnerSignalId) dbus?.disconnectSignal(nameOwnerSignalId)
         if (mediaPropsListenerId) mediaProps?.disconnectSignal(mediaPropsListenerId)
         if (seekListenerId) mediaServerPlayer?.disconnectSignal(seekListenerId)
     }
@@ -410,7 +419,7 @@ function createMpvHandler() {
 
     function getCurrentChannelName(): string | undefined {
 
-        if (getPlaybackStatus() === 'Stopped') return 
+        if (getPlaybackStatus() === 'Stopped') return
 
         const currentChannel = currentUrl ? settingsObject.userStations.find(cnl => cnl.url === currentUrl) : undefined
 

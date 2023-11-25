@@ -1,0 +1,46 @@
+# Liste des connexions VPN disponibles
+nmcli connection show | grep vpn | awk '{print$1}' # -> Bug: n'imprime que le premier mot du nom de la connexion
+nmcli -t -f NAME,TYPE connection show | grep vpn | sed -e "s/:vpn$//" | tr "\n" ";" | sed s/";$"/""/
+
+# LA connection VPN active :
+nmcli connection show --active | grep vpn | awk '{print$1}' # Même bug
+nmcli -t -f NAME,TYPE connection show --active | grep vpn | sed -e "s/:vpn$//" | tr "\n" ";" | sed s/";$"/""/
+
+# Connecter le VPN Luxembourg :
+nmcli connection up Luxembourg
+
+# Stopper proprement Transmission :
+[[ `pidof transmission-gtk` != "" ]] && kill -15 `pidof transmission-gtk`
+
+# Fermer une fenêtre (applications java). Ex: Fermer la fenêtre dont le titre est "Joal ui":
+xdotool search --name "JOAL ui" windowactivate --sync key --window 0 --clearmodifiers alt+F4
+
+# Pour obtenir la liste des connexions actives, monitorer le dossier:
+/sys/class/net/ # Bug: ce dossier ne contient que des liens symboliques qui y apparaissent et disparaissent,
+                # sans changer le status du dossier, il n'est pas monitorable.
+
+
+# Pour obtenir la liste des connexions de type ethernet ou wireless.
+# Si le périphérique est activé, DEVICE n'est pas vide.
+nmcli -t -g TYPE,DEVICE,NAME connection show | grep -E "ethernet|wireless"
+# Exemples de sortie:
+#  1. ethernet activé, wireless désactivé:
+802-3-ethernet:enp2s0:Connexion filaire 1
+802-11-wireless::Auto NOM
+#  2.  ethernet désactivé, wireless activé:
+802-11-wireless:wlxa09f10be08ee:Auto NOM
+802-3-ethernet::Connexion filaire 1
+#  3.  les deux activés:
+802-3-ethernet:enp2s0:Connexion filaire 1
+802-11-wireless:wlxa09f10be08ee:Auto NOM
+
+# Pour connaître l'ip du gateway :
+echo -n $(ip route | grep default | awk '{print $3}')
+# Pour connaître l'ipv4 et l'ipv6 du gateway :
+host _gateway
+
+# Pour ajouter une route (51.91.111.79 est l'IP du serveur, 192.168.1.254 est celle du gateway) :
+nmcli connection mod "Connexion filaire 1" +ipv4.routes "51.91.111.79 192.168.1.254"
+# Il faut ensuite arrêter puis démarrer la connexion :
+nmcli connection down "Connexion filaire 1"
+nmcli connection up "Connexion filaire 1"

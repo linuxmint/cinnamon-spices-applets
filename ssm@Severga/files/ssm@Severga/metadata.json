@@ -1,0 +1,7 @@
+{
+    "uuid": "ssm@Severga",
+    "name": "Simplified System Monitor",
+    "description": "Applet to show system load and state",
+    "hide-configuration": false,
+    "max-instances": 1
+}

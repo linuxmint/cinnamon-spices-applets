@@ -1,0 +1,51 @@
+{
+   "head": {
+      "type": "header",
+      "description": "Settings"
+   },
+   "display-style": {
+      "type": "combobox",
+      "default": "row",
+      "description": "Display style",
+      "options": {
+         "Column": "column",
+         "Side by side": "row",
+         "GPU only": "gpu",
+         "VRAM only": "vram"
+      }
+   },
+   "use-compact-label": {
+      "type": "switch",
+      "description": "Use compact label style",
+      "default": false,
+      "tooltip": "Show only the first character of each label. Example: G for GPU"
+   },
+   "refresh-interval": {
+      "type": "spinbutton",
+      "default": 1500,
+      "min": 500,
+      "max": 5000,
+      "step": 250,
+      "units": "milliseconds",
+      "description": "Refresh interval",
+      "tooltip": "Time between data refeshes"
+   },
+   "decimal-places": {
+      "type": "spinbutton",
+      "default": 1,
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "description": "Decimal places",
+      "tooltip": "Number of decimal places to show"
+   },
+   "font-size": {
+      "type": "spinbutton",
+      "default": 100,
+      "min": 50,
+      "max": 125,
+      "step": 5,
+      "description": "Font size",
+      "tooltip": "Label font size"
+   }
+}

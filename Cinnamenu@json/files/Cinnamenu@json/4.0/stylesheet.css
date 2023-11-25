@@ -1,11 +1,14 @@
 /*css nodes used by Cinnamenu
-┌──.menu-applications-outer-box .menu-applications-box──────────────────────────────────────────────────────────────────────────
-│┌──.menu-favorites-box─────────────────┐┌──.menu-categories-scrollbox .vfade──┐┌──.menu-applications-scrollbox .vfade───────────
-││┌──.menu-favorites-scrollbox .vfade──┐││┌──.menu-categories-box─────────────┐││┌──.menu-applications-inner-box .menu-applications-box──
-│││                                    ││││                                   ││││┌──.menu-applications-header-text────────────────────────
-│
-│┌──.menu-search-box─────────
-││┌──#menu-search-entry──────────
+┌──.menu-background .cinnamenu───────────────────────────────────────────────────────────────────────────────────────────────────
+│┌──.menu-applications-outer-box .menu-applications-box──────────────────────────────────────────────────────────────────────────
+│|┌──.menu-favorites-box─────────────────┐┌──.menu-categories-scrollbox .vfade──┐┌──.menu-applications-scrollbox .vfade───────────
+│││┌──.menu-favorites-scrollbox .vfade──┐││┌──.menu-categories-box─────────────┐││┌──.menu-applications-inner-box .menu-applications-box──
+││││                                    ││││                                   ││││┌──.menu-applications-header-text───┐
+││││                                    ││││                                   ││││└───────────────────────────────────┘
+││││                                    ││││                                   ││││┌──.menu-applications-grid-box (not list view)──┐
+││││                                    ││││                                   ││││└───────────────────────────────────
+││┌──.menu-search-box─────────
+│││┌──#menu-search-entry──────────
 */
 /*---session/favorites box--------------------*/
 .menu-favorites-box {} /*(or none dependant on user options.)*/
@@ -41,8 +44,13 @@ margin to override*/
 
 .menu-category-button-greyed {}
 
-.menu-category-button-hover {} /*and .menu-category-button-selected. Used when
-"activate categories on click" option is set.*/
+.menu-category-button:hover {  /*Only used when "activate categories on click" option is set.*/
+    background-color: rgba(128,128,128,0.2);
+    border-radius: 4px;
+    border-image: none;
+}
+
+/*.menu-category-button-hover {} No longer used. Use .menu-category-button:hover instead.*/
 
 .menu-category-button:highlighted, /*Used to highlight category containing newly installed apps.*/
 .menu-category-button-selected:highlighted {
@@ -54,6 +62,8 @@ margin to override*/
 
 .menu-applications-inner-box {} /*and .menu-applications-box for compatability with old themes.*/
 
+.menu-applications-grid-box {} /*only used in grid view. There is no list view equivalent.*/
+
 .menu-applications-header-text { /*(shows folder name, "no recent files", error messages etc)*/
     font-weight: bold;
     font-size: 110%;
@@ -61,15 +71,42 @@ margin to override*/
 
 .menu-applications-subheading {
     font-weight: bold;
-    font-size: 90%;
+    font-size: 100%;
+    padding-top: 0.3em;
+    padding-left: 0.3em;
     /*text-align: center;*//*known bug: causes label to jump about when resizing menu*/
 }
 
-.menu-application-button {} /*(Note: in grid view, .menu-application-button l&r padding are set to 0px)*/
+.menu-applications-subheading-clickable { /*emoji categories*/
+    /*font-weight: bold;*/
+    font-size: 100%;
+    /*text-align: center;*//*known bug: causes label to jump about when resizing menu*/
+}
+
+.menu-application-button {} /*Note: in grid view mode, top & bottom padding
+                              are set to minimum of 8px in the applet*/
+
+.menu-applications-grid-box .menu-application-button {
+    /*remove l/r padding in grid view to allow maximum space for label*/
+    padding-left: 0px;
+    padding-right: 0px;
+}
 
 .menu-application-button-label {}
 
+.menu-applications-grid-box .menu-application-button-label {
+    padding-right: 2px;
+    padding-left: 2px;
+    text-align: center;
+}
+
 .menu-application-button-selected {}
+
+.menu-applications-grid-box .menu-application-button-selected {
+    /*remove l/r padding in grid view to allow maximum space for label*/
+    padding-left: 0px;
+    padding-right: 0px;
+}
 
 .menu-application-button:highlighted, /*Used to highlight newly installed apps in list or grid view.*/
 .menu-application-button-selected:highlighted {
@@ -82,3 +119,11 @@ margin to override*/
 /*---whole menu-----------------------------
 .cinnamenu (and .menu-background)
 (.menu)*/
+
+/*
+Note: You can make a style to apply to Cinnamenu applet but not other menu applets by
+preceeding the class with ".cinnamenu ". Example:
+.cinnamenu .menu-application-button {
+    //this style will only apply to Cinnamenu applet.
+}
+*/

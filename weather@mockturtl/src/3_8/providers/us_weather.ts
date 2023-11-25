@@ -27,6 +27,8 @@ export class USWeather extends BaseProvider {
 	public readonly maxHourlyForecastSupport = 156;
 	public readonly needsApiKey = false;
 	public readonly remainingCalls: number | null = null;
+	public readonly supportHourlyPrecipChance = false;
+	public readonly supportHourlyPrecipVolume = false;
 
 	private sitesUrl = "https://api.weather.gov/points/";
 
@@ -94,7 +96,7 @@ export class USWeather extends BaseProvider {
 
 	/**
 	 * Handles App errors internally
-	 * @param loc 
+	 * @param loc
 	 */
 	private async GetGridData(loc: LocationData): Promise<GridPayload | null> {
 		// Handling out of country errors in callback
@@ -104,7 +106,7 @@ export class USWeather extends BaseProvider {
 
 	/**
 	 * Handles app errors internally
-	 * @param stationListUrl 
+	 * @param stationListUrl
 	 */
 	private async GetStationData(stationListUrl: string): Promise<StationPayload[] | undefined> {
 		const stations = await this.app.LoadJsonAsync<StationsPayload>(stationListUrl);
@@ -134,7 +136,7 @@ export class USWeather extends BaseProvider {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param message Soup Message object
 	 */
 	private OnObtainingGridData = (message: ErrorResponse<{title: string}>): boolean => {
@@ -154,9 +156,9 @@ export class USWeather extends BaseProvider {
 	}
 
 	/**
-	 * Observation data is a bit spotty, so we mesh 
+	 * Observation data is a bit spotty, so we mesh
 	 * station data
-	 * @param observations 
+	 * @param observations
 	 */
 	private MeshObservationData(observations: ObservationPayload[]): ObservationPayload | null {
 		if (observations.length < 1) return null;
@@ -218,8 +220,8 @@ export class USWeather extends BaseProvider {
 	}
 
 	/**
-	 * 
-	 * @param json 
+	 *
+	 * @param json
 	 * @param hourly can be null
 	 */
 	private ParseCurrent(json: ObservationPayload[], hourly: ForecastsPayload, loc: LocationData): WeatherData | null {
@@ -302,7 +304,6 @@ export class USWeather extends BaseProvider {
 				counter = 0;
 
 			if (counter > 1) {
-				global.log("3 elements")
 				return true;
 			}
 		}
@@ -321,7 +322,6 @@ export class USWeather extends BaseProvider {
 			const curDate = DateTime.fromISO(element.startTime).setZone(this.observationStations[0].properties.timeZone);
 			if (!OnSameDay(today, curDate))
 				continue;
-			global.log(index)
 			return index;
 		}
 
@@ -400,8 +400,8 @@ export class USWeather extends BaseProvider {
 
 	/**
 	 * https://api.weather.gov/icons
-	 * @param icon 
-	 * @param isNight 
+	 * @param icon
+	 * @param isNight
 	 */
 	private ResolveCondition(icon: string, isNight: boolean = false): Condition {
 		if (icon == null)
@@ -425,14 +425,14 @@ export class USWeather extends BaseProvider {
 					main: _("Few clouds"),
 					description: _("Few clouds"),
 					customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-					icons: ["weather-clear-night", "weather-severe-alert"]
+					icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
 				}
 			case "sct": // Partly cloudy
 				return {
 					main: _("Partly cloudy"),
 					description: _("Partly cloudy"),
 					customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-					icons: ["weather-clear", "weather-severe-alert"]
+					icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
 				}
 			case "bkn": // Mostly cloudy
 				return {
@@ -452,28 +452,28 @@ export class USWeather extends BaseProvider {
 				return {
 					main: _("Clear"),
 					description: _("Clear and windy"),
-					customIcon: (IsNight) ? "night-alt-wind-symbolic" : "day-windy-symbolic",
+					customIcon: (isNight) ? "night-alt-wind-symbolic" : "day-windy-symbolic",
 					icons: (isNight) ? ["weather-clear-night"] : ["weather-clear"]
 				}
 			case "wind_few": // A few clouds and windy
 				return {
 					main: _("Few clouds"),
 					description: _("Few clouds and windy"),
-					customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
+					customIcon: (isNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
 					icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
 				}
 			case "wind_sct": // Partly cloudy and windy
 				return {
 					main: _("Partly cloudy"),
 					description: _("Partly cloudy and windy"),
-					customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
+					customIcon: (isNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
 					icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
 				}
 			case "wind_bkn": // Mostly cloudy and windy
 				return {
 					main: _("Mostly cloudy"),
 					description: _("Mostly cloudy and windy"),
-					customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
+					customIcon: (isNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
 					icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
 				}
 			case "wind_ovc":

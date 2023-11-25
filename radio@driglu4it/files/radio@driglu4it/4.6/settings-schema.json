@@ -65,7 +65,7 @@
 		},
 		"youtube-section": {
 			"type": "section",
-			"title": "Youtube Download",
+			"title": "YouTube Download",
 			"keys": [
 				"youtube-download-cli",
 				"music-download-dir-select"
@@ -174,8 +174,8 @@
 	},
 	"youtube-download-cli": {
 		"type": "combobox", 
-		"description": "Youtube Download CLI tool", 
-		"tooltip": "The CLI tool used to download songs from Youtube", 
+		"description": "YouTube Download CLI tool", 
+		"tooltip": "The CLI tool used to download songs from YouTube", 
 		"default": "youtube-dl",
 		"options": {
 			"yt-dlp": "yt-dlp", 
@@ -185,7 +185,7 @@
 	"music-download-dir-select": {
 		"type": "filechooser",
 		"description": "Download directory",
-		"tooltip": "Songs downloaded from Youtube will be saved to this directory.",
+		"tooltip": "Songs downloaded from YouTube will be saved to this directory.",
 		"default": "~/Music/Radio",
 		"select-dir": true
 	},

@@ -12,7 +12,7 @@ class FileSaver(SettingsWidget):
         self.key = key
         self.settings = settings
         self.info = info
-        self.pack_start(Gtk.Label(_(info['description']), halign=Gtk.Align.START), True, True, 0)
+        self.pack_start(Gtk.Label(_(info['description']), halign=Gtk.Align.START, wrap=True), True, True, 0)
         self.button = Gtk.Button(_("Save to File"))
         self.button.connect('clicked', self.button_pressed)
         self.pack_end(self.button, False, False, 0)

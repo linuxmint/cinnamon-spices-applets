@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist xmlns="http://xspf.org/ns/0/" version="1">
+<trackList>
+<track>
+<location>http://retro.dancewave.online/retrodance.flac.ogg</location>
+</track>
+<track>
+<location>http://retro.dancewave.online/retrodance.flac.ogg</location>
+</track>
+<track>
+<location>http://retro.dancewave.online/retrodance.flac.ogg</location>
+</track>
+<track>
+<location>http://retro.dancewave.online/retrodance.flac.ogg</location>
+</track>
+<track>
+<location>http://retro.dancewave.online/retrodance.flac.ogg</location>
+</track>
+</trackList>
+</playlist>

@@ -1,4 +1,4 @@
-import { createPopupMenu, PopupMenuArguments } from "../lib/PopupMenu";
+import { createPopupMenu, PopupMenuProps } from "../lib/PopupMenu";
 import { createSeparatorMenuItem } from "../lib/PopupSeperator";
 import { createSimpleMenuItem, SimpleMenuItemArguments } from "../lib/SimpleMenuItem";
 import { createUpdateStationsMenuItem } from "./RadioPopupMenu/UpdateStationsMenuItem";
@@ -21,7 +21,7 @@ const spawnCommandLineWithErrorLogging = (command: string) => {
     })
 }
 
-export function createRadioContextMenu(args: PopupMenuArguments) {
+export function createRadioContextMenu(args: PopupMenuProps) {
 
     const contextMenu = createPopupMenu(args)
 

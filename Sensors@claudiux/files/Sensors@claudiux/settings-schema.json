@@ -1,5 +1,5 @@
 {
-  "layout": {
+  "layoutsensors": {
     "type": "layout",
     "pages": [
       "page_General",
@@ -23,7 +23,9 @@
       "sections": [
         "section_tempDisplay",
         "section_tempOptions",
-        "section_tempSensors"
+        "section_tempSensors",
+        "section_tempDisktemp",
+        "section_tempDisks"
       ]
     },
     "page_Fans": {
@@ -60,6 +62,8 @@
         "interval",
         "keep_size",
         "char_size",
+        "char_color",
+        "separator",
         "remove_border",
         "remove_icons",
         "bold_values",
@@ -83,11 +87,20 @@
         "remove_temperatureATfevimu"
       ]
     },
+    "section_tempDisktemp": {
+      "type": "section",
+      "title": "For the time being, disk temperature can only be read by root.",
+      "keys": [
+        "make_disktemp_readable_by_user"
+      ],
+      "dependency": "!disktemp_is_user_readable"
+    },
     "section_tempDisplay": {
       "type": "section",
       "title": "Display",
       "keys": [
-        "show_temp"
+        "show_temp",
+        "show_temp_name"
       ]
     },
     "section_tempOptions": {
@@ -111,11 +124,22 @@
         "update_display"
       ]
     },
+    "section_tempDisks": {
+      "type": "section",
+      "title": "Disk temperature sensors",
+      "keys": [
+        "btn_renew_disks_list",
+        "temp_disks",
+        "update_display"
+      ],
+      "dependency": "disktemp_is_user_readable"
+    },
     "section_fanDisplay": {
       "type": "section",
       "title": "Display",
       "keys": [
-        "show_fan"
+        "show_fan",
+        "show_fan_name"
       ]
     },
     "section_fanOptions": {
@@ -140,7 +164,8 @@
       "type": "section",
       "title": "Display",
       "keys": [
-        "show_volt"
+        "show_volt",
+        "show_volt_name"
       ]
     },
     "section_voltOptions": {
@@ -165,7 +190,8 @@
       "type": "section",
       "title": "Display",
       "keys": [
-        "show_intrusion"
+        "show_intrusion",
+        "show_intrusion_name"
       ]
     },
     "section_intrusionOptions": {
@@ -191,7 +217,7 @@
   },
   "interval": {
     "type": "combobox",
-    "default": 1,
+    "default": 10,
     "options": {
       "1": 1,
       "2": 2,
@@ -225,6 +251,24 @@
     "step": 1,
     "description": "Character size (% of standard size)"
   },
+  "char_color": {
+    "type": "combobox",
+    "default": "default",
+    "options": {
+      "Default": "default",
+      "White": "white",
+      "Black": "black",
+      "Grey": "grey",
+      "Light Grey": "lightgrey"
+    },
+    "description": "Text Color"
+  },
+  "separator": {
+    "type": "entry",
+    "description": "Separator",
+    "default": "|",
+    "tooltip": "The string used to separate values in horizontal orientation. Default is '│'."
+  },
   "remove_border": {
     "type": "switch",
     "default": false,
@@ -257,11 +301,23 @@
     "description": "Show in menu the action: Restart this applet",
     "tooltip": "Whether or not to display in menu the action: Restart this applet."
   },
+  "make_disktemp_readable_by_user": {
+    "type": "button",
+    "description": "Make disk temperature user-readable",
+    "callback": "_on_disktemp_button_pressed"
+  },
   "show_temp": {
     "type": "switch",
     "default": false,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
+  },
+  "show_temp_name": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the 'Shown name' of each of these selected sensors",
+    "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
+    "dependency": "show_temp"
   },
   "strictly_positive_temp": {
     "type": "switch",
@@ -310,7 +366,7 @@
     "columns": [
       {
         "id": "sensor",
-        "title": "Sensor name\n(Do not change this!)",
+        "title": "Sensor name\n(Do not modify!)",
         "type": "string"
       },
       {
@@ -328,14 +384,98 @@
       {
         "id": "shown_name",
         "title": "Shown name",
+        "align": 0.5,
         "type": "string"
+      },
+      {
+        "id": "high_by_user",
+        "title": "High\n(°C)",
+        "align": 0.5,
+        "type": "string"
+      },
+      {
+        "id": "crit_by_user",
+        "title": "Critical\n(°C)",
+        "align": 0.5,
+        "type": "string"
+      },
+      {
+        "id": "user_formula",
+        "title": "Formula",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
 
     ],
-    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor name.",
-    "show-buttons": false
+    "tooltip": "Double-click on a line to change 'Shown name', 'High', 'Critical' or 'Formula'.\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\n'High' and 'Critical' (optional) must be valid numbers.\n'Formula' (optional):\n  Use $ as the value returned by the sensor.\n  You can use the 4 operations (+-*/) and parentheses.\n  Example: $*1.1+0.5",
+    "show-buttons": true
+  },
+  "btn_renew_disks_list": {
+    "type": "button",
+    "description": "Renew the list of known disks",
+    "callback": "populate_temp_disks_in_settings"
+  },
+  "temp_disks": {
+    "type": "list",
+    "columns": [
+      {
+        "id": "disk",
+        "title": "Disk name",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "show_in_panel",
+        "title": "Show\nin panel",
+        "align": 0.5,
+        "type": "boolean"
+      },
+      {
+        "id": "show_in_tooltip",
+        "title": "Show\nin tooltip",
+        "align": 0.5,
+        "type": "boolean"
+      },
+      {
+        "id": "shown_name",
+        "title": "Shown\nname",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "id": "high",
+        "title": "High\n(°C)",
+        "type": "integer",
+        "align": 0.5,
+        "min": 0,
+        "max": 127,
+        "default": 69
+      },
+      {
+        "id": "crit",
+        "title": "Critical\n(°C)",
+        "type": "integer",
+        "align": 0.5,
+        "min": 0,
+        "max": 127,
+        "default": 75
+      },
+      {
+        "id": "user_formula",
+        "title": "Formula",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "default": [
+
+    ],
+    "tooltip": "Disk name: The name of the disk, as returned by the 'lsblk' command. Please see help.\nHigh and Critical values: Cf. technical manual of your disk.",
+    "show-buttons": true
   },
   "numberOfTempSensors": {
     "type": "generic",
@@ -346,6 +486,13 @@
     "default": false,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
+  },
+  "show_fan_name": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the 'Shown name' of each of these selected sensors",
+    "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
+    "dependency": "show_fan"
   },
   "strictly_positive_fan": {
     "type": "switch",
@@ -374,7 +521,7 @@
     "columns": [
       {
         "id": "sensor",
-        "title": "Sensor name\n(Do not change this!)",
+        "title": "Sensor name\n(Do not modify!)",
         "type": "string"
       },
       {
@@ -392,13 +539,27 @@
       {
         "id": "shown_name",
         "title": "Shown name",
+        "align": 0.5,
         "type": "string"
+      },
+      {
+        "id": "min_by_user",
+        "title": "Min\n(rpm)",
+        "align": 0.5,
+        "type": "string"
+      },
+      {
+        "id": "user_formula",
+        "title": "Formula",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
 
     ],
-    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor name.",
+    "tooltip": "Double-click on a line to change 'Shown name', 'Min' or 'Formula'.\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\n'Min' (optional) must be valid number.\n'Formula' (optional):\n  Use $ as the value returned by the sensor.\n  You can use the 4 operations (+-*/) and parentheses.\n  Example: $*1.1+0.5",
     "show-buttons": false
   },
   "numberOfFanSensors": {
@@ -410,6 +571,13 @@
     "default": false,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
+  },
+  "show_volt_name": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the 'Shown name' of each of these selected sensors",
+    "tooltip": "Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
+    "dependency": "show_volt"
   },
   "strictly_positive_volt": {
     "type": "switch",
@@ -443,7 +611,7 @@
     "columns": [
       {
         "id": "sensor",
-        "title": "Sensor name\n(Do not change this!)",
+        "title": "Sensor name\n(Do not modify!)",
         "type": "string"
       },
       {
@@ -460,14 +628,33 @@
       },
       {
         "id": "shown_name",
-        "title": "Shown name",
+        "title": "Shown\nname",
         "type": "string"
+      },
+      {
+        "id": "min_by_user",
+        "title": "Min\n(V)",
+        "align": 0.5,
+        "type": "string"
+      },
+      {
+        "id": "max_by_user",
+        "title": "Max\n(V)",
+        "align": 0.5,
+        "type": "string"
+      },
+      {
+        "id": "user_formula",
+        "title": "Formula",
+        "align": 0.5,
+        "type": "string",
+        "default": ""
       }
     ],
     "default": [
 
     ],
-    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor name.",
+    "tooltip": "Double-click on a line to change 'Shown name', 'Min', 'Max' or 'Formula'.\nTo reset a 'Shown name', copy/paste the 'Sensor name'.\n'Min' and 'Max' (optional) must be valid numbers.\n'Formula' (optional):\n  Use $ as the value returned by the sensor.\n  You can use the 4 operations (+-*/) and parentheses.\n  Example: $*1.1+0.5",
     "show-buttons": false
   },
   "numberOfVoltageSensors": {
@@ -479,6 +666,13 @@
     "default": false,
     "description": "Display the values of these selected sensors",
     "tooltip": "Whether or not to display the values of the sensors selected in the list below."
+  },
+  "show_intrusion_name": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the 'Shown name' of each of these selected sensors",
+    "tooltip": " Whether or not to display into this applet label the 'Shown name' of the sensors selected in the list below. Without effect in vertical panels.",
+    "dependency": "show_intrusion"
   },
   "strictly_positive_intrusion": {
     "type": "switch",
@@ -496,7 +690,7 @@
     "columns": [
       {
         "id": "sensor",
-        "title": "Sensor name\n(Do not change this!)",
+        "title": "Sensor name\n(Do not modify!)",
         "type": "string"
       },
       {
@@ -513,7 +707,7 @@
       },
       {
         "id": "shown_name",
-        "title": "Shown name",
+        "title": "Shown\nname",
         "type": "string"
       }
     ],
@@ -541,7 +735,7 @@
   "update_display": {
     "type": "button",
     "description": "Update display",
-    "callback": "updateUI"
+    "callback": "updateUI_from_settings"
   },
   "custom_names": {
     "type": "generic",
@@ -557,5 +751,13 @@
     "type": "button",
     "description": "Remove from panel the temperature@fevimu applet",
     "callback": "_on_remove_temperatureATfevimu_from_panels"
+  },
+  "disktemp_is_user_readable": {
+    "type": "generic",
+    "default": false
+  },
+  "sensors_version": {
+    "type": "generic",
+    "default": "3.5.0"
   }
 }

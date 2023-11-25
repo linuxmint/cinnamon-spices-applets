@@ -7,26 +7,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-28 04:35+0100\n"
-"PO-Revision-Date: 2021-04-05 08:16+0200\n"
+"POT-Creation-Date: 2023-07-10 22:50-0400\n"
+"PO-Revision-Date: 2023-07-10 22:52-0400\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
-#: applet.js:124 3.2/applet.js:164
+#: 5.4/applet.js:290 3.2/applet.js:135
+msgid "--%"
+msgstr "--%"
+
+#: 5.4/applet.js:291 3.2/applet.js:136
+msgid "Waiting"
+msgstr "Várakozik"
+
+#: 5.4/applet.js:317 3.2/applet.js:165
 msgid "Some Dependencies not Installed"
 msgstr "Néhány függőség nincs telepítve"
 
-#: applet.js:124
+#: 5.4/applet.js:317
 msgid ""
-"Both 'sox' and 'zenity' are required for this applet to have all its "
-"facilities including notifications and audible alerts .\n"
+"Both 'sox' and 'zenity' are required for this applet to have all of its "
+"functionality including notifications and audible alerts .\n"
 "\n"
-"Please read the help file on how to install them."
+"Please view the README for help on installing them."
 msgstr ""
 "Mind a „sox”, mind a „zenity” szükséges ahhoz, hogy a kisalkalmazás minden "
 "szolgáltatása rendelkezésre álljon, beleértve az értesítéseket és a hangos "
@@ -34,13 +42,126 @@ msgstr ""
 "\n"
 "Kérjük, olvassa el a súgófájlt a telepítésükhöz."
 
-#: applet.js:132 3.2/applet.js:197
+#: 5.4/applet.js:327 3.2/applet.js:198
 msgid "Battery Monitor Applet"
 msgstr "Akkumulátor Figyelő Kisalkalmazás"
 
-#: applet.js:132
+#: 5.4/applet.js:327
 msgid ""
-"A User Defined Sound File has been Specified for low Battery\n"
+"A user-defined sound file has been specified for Low Battery.\n"
+"\n"
+"Please ensure the volume is set sensibly in public places,\n"
+"especially if a long or loud file is specified.\n"
+msgstr ""
+"A felhasználó által definiált hangfájl van megadva az alacsony "
+"akkumulátorszintre\n"
+"\n"
+"Győződjön meg arról, hogy a hangerőt nyilvános helyekhez mérten állította "
+"be\n"
+"különösen, ha hosszú hangos fájlt választott ki\n"
+
+#: 5.4/applet.js:388 3.2/applet.js:297
+msgid "Open Power Statistics"
+msgstr "Energiastatisztika megjelenítése"
+
+#: 5.4/applet.js:394 3.2/applet.js:303
+msgid "Open System Monitor"
+msgstr "Rendszer Figyelő megjelenítése"
+
+#: 5.4/applet.js:403
+msgid "Housekeeping and System Submenu"
+msgstr "Karbantartás és Rendszer Almenü"
+
+#: 5.4/applet.js:406 3.2/applet.js:315
+msgid "View the Changelog"
+msgstr "Változásnapló megtekintése"
+
+#: 5.4/applet.js:412
+msgid "Open the README"
+msgstr "README fájl megnyitása"
+
+#: 5.4/applet.js:428 3.2/applet.js:348
+msgid "Waiting for battery information"
+msgstr "Várakozás az akkumulátor információra"
+
+#: 5.4/applet.js:534
+msgid "Battery Low - turn off or connect to power supply"
+msgstr ""
+"Akkumulátor töltöttség alacsony - kapcsolja ki vagy csatlakoztassa az "
+"elektromos hálózathoz"
+
+#: 5.4/applet.js:540 3.2/applet.js:433
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"Az akkumulátor töltöttségi szintje a riasztási szintjére csökkent\n"
+"\n"
+" vagy csatlakozzon újra egy áramforráshoz,\n"
+"\n"
+"fejezze be a munkáját, és függessze fel vagy állítsa le a gépet\n"
+"\n"
+
+#: 5.4/applet.js:555
+msgid "Battery Critical - will suspend unless connected to power supply"
+msgstr ""
+"Akkumulátor kritikus szinten, a rendszer fel lesz függesztve, hacsak nem "
+"csatlakozik az elektromos hálózathoz"
+
+#: 5.4/applet.js:574
+msgid "Time to Empty:"
+msgstr ""
+
+#: 5.4/applet.js:575
+msgid "Time to Full:"
+msgstr ""
+
+#: 5.4/applet.js:578 5.4/applet.js:625
+#, fuzzy
+#| msgid "Percentage Charge:"
+msgid "Current Charge:"
+msgstr "Százalékos töltöttség:"
+
+#: 5.4/applet.js:578 3.2/applet.js:464
+msgid "Alert:"
+msgstr "Riasztás:"
+
+#: 5.4/applet.js:578 3.2/applet.js:464
+msgid "Suspend:"
+msgstr "Felfüggesztés:"
+
+#: 5.4/applet.js:625 3.2/applet.js:512
+msgid "Alert at:"
+msgstr "Riasztás ekkor:"
+
+#: 5.4/applet.js:625 3.2/applet.js:512
+msgid "Suspend at:"
+msgstr "Felfüggesztés ekkor:"
+
+#: 5.4/applet.js:631
+msgid "The battery level has been recharged to"
+msgstr ""
+
+#: 3.2/applet.js:165
+msgid ""
+"'upower', 'sox' and 'zenity' are required for this applet to have all its "
+"facilities including notifications and audible alerts .\n"
+"\n"
+"Please read the help file on how to install them."
+msgstr ""
+"Az „upower”, a „sox” és a „zenity” szükségesek ahhoz, hogy ennek a "
+"kisalkalmazásnak minden funkciója rendelkezésre álljon, beleértve az "
+"értesítéseket és a hangos figyelmeztetéseket.\n"
+"\n"
+"Kérjük, olvassa el a súgófájlt a telepítésükhöz."
+
+#: 3.2/applet.js:198
+msgid ""
+"A User Defined Sound File has been Specified for Low Battery\n"
 "\n"
 "Please ensure the volume is set sensibly in public places\n"
 "especially if a long loud file is specifed\n"
@@ -50,60 +171,36 @@ msgstr ""
 "\n"
 "Győződjön meg arról, hogy a hangerőt nyilvános helyekhez mérten állította "
 "be\n"
-"különösen, ha hosszú hangos fájlt állít be\n"
+"különösen, ha hosszú hangos fájlt választott ki\n"
 
-#: applet.js:163
-msgid " "
-msgstr " "
-
-#: applet.js:164 3.2/applet.js:137
-msgid "Waiting"
-msgstr "Várakozik"
-
-#: applet.js:230 3.2/applet.js:296
-msgid "Open Power Statistics"
-msgstr "Energiastatisztika megjelenítése"
-
-#: applet.js:236 3.2/applet.js:302
-msgid "Open System Monitor"
-msgstr "Rendszer Figyelő megjelenítése"
-
-#: applet.js:245 3.2/applet.js:311
+#: 3.2/applet.js:312
 msgid "Housekeeping and System Sub Menu"
 msgstr "Karbantartás és Rendszer Almenü"
 
-#: applet.js:248 3.2/applet.js:314
-msgid "View the Changelog"
-msgstr "Változásnapló megtekintése"
-
-#: applet.js:254 3.2/applet.js:320
+#: 3.2/applet.js:321
 msgid "Open the Help file"
 msgstr "Sugó megnyitása"
 
-#: applet.js:260 3.2/applet.js:326
-msgid "Open stylesheet.css  (Advanced Function)"
+#: 3.2/applet.js:327
+msgid "Open stylesheet.css (Advanced Function)"
 msgstr "Stylesheet.css fájl megnyitása (haladó funkció)"
 
 #. metadata.json->name
-#: applet.js:276 3.2/applet.js:342
-msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
+#: 3.2/applet.js:343
+msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Akkumulátor Kisalkalmazás figyelés és kikapcsolás funkcióval (BAMS)"
 
-#: applet.js:281 3.2/applet.js:347
-msgid "Waiting for battery information"
-msgstr "Várakozás az akkumulátor információra"
-
-#: applet.js:343 3.2/applet.js:427
+#: 3.2/applet.js:423
 msgid "Battery Low - turn off or connect to mains"
 msgstr ""
 "Akkumulátor töltöttség alacsony - kapcsolja ki vagy csatlakoztassa az "
 "elektromos hálózathoz"
 
-#: applet.js:350 3.2/applet.js:435
+#: 3.2/applet.js:431
 msgid "Battery Monitor Applet Alert"
 msgstr "Akkumulátorfigyelő kisalkalmazás riasztás"
 
-#: applet.js:350 3.2/applet.js:435
+#: 3.2/applet.js:431
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -120,82 +217,19 @@ msgstr ""
 "\n"
 "\n"
 
-#: applet.js:352 3.2/applet.js:437
-msgid ""
-"The Battery Level has fallen to your alert level\n"
-"\n"
-" either reconnect to a power source,\n"
-"\n"
-"close down your work and suspend or shutdown the machine\n"
-"\n"
-msgstr ""
-"Az akkumulátor töltöttségi szintje a riasztási szintjére csökkent\n"
-"\n"
-" vagy csatlakozzon újra egy áramforráshoz,\n"
-"\n"
-"fejezze be a munkáját, és függessze fel vagy állítsa le a gépet\n"
-"\n"
-
-#: applet.js:368 3.2/applet.js:453
+#: 3.2/applet.js:449
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
 "Akkumulátor kritikus szinten, a rendszer fel lesz függesztve, hacsak nem "
 "csatlakozik az elektromos hálózathoz"
 
-#: applet.js:383 3.2/applet.js:468
+#: 3.2/applet.js:464
 msgid "Charge:"
 msgstr "Töltés:"
 
-#: applet.js:383 3.2/applet.js:468
-msgid "Alert:"
-msgstr "Riasztás:"
-
-#: applet.js:383 3.2/applet.js:468
-msgid "Suspend:"
-msgstr "Felfüggesztés:"
-
-#: applet.js:441 3.2/applet.js:516
+#: 3.2/applet.js:512
 msgid "Percentage Charge:"
 msgstr "Százalékos töltöttség:"
-
-#: applet.js:441 3.2/applet.js:516
-msgid "Alert at:"
-msgstr "Riasztás ekkor:"
-
-#: applet.js:441 3.2/applet.js:516
-msgid "Suspend at:"
-msgstr "Felfüggesztés ekkor:"
-
-#: 3.2/applet.js:136
-msgid "--%"
-msgstr "--%"
-
-#: 3.2/applet.js:164
-msgid ""
-"'upower', 'sox' and 'zenity' are required for this applet to have all its "
-"facilities including notifications and audible alerts .\n"
-"\n"
-"Please read the help file on how to install them."
-msgstr ""
-"Az „upower”, a „sox” és a „zenity” szükségesek ahhoz, hogy ennek a "
-"kisalkalmazásnak minden funkciója rendelkezésre álljon, beleértve az "
-"értesítéseket és a hangos figyelmeztetéseket.\n"
-"\n"
-"Kérjük, olvassa el a súgófájlt a telepítésükhöz."
-
-#: 3.2/applet.js:197
-msgid ""
-"A User Defined Sound File has been Specified for Low Battery\n"
-"\n"
-"Please ensure the volume is set sensibly in public places\n"
-"especially if a long loud file is specifed\n"
-msgstr ""
-"A felhasználó által definiált hangfájl van megadva az alacsony "
-"akkumulátorszintre\n"
-"\n"
-"Győződjön meg arról, hogy a hangerőt nyilvános helyekhez mérten állította "
-"be\n"
-"különösen, ha hosszú hangos fájlt választott ki\n"
 
 #. metadata.json->description
 msgid "Displays Charge as Percentage and allows Alerts and Actions"
@@ -203,56 +237,327 @@ msgstr ""
 "Megjeleníti a töltést százalékban, és lehetővé teszi a riasztásokat és "
 "műveleteket"
 
-#. settings-schema.json->head->description
+#. 5.4->settings-schema.json->General->title
+#, fuzzy
+#| msgid "General Settings"
+msgid "General"
+msgstr "Általános beállítások"
+
+#. 5.4->settings-schema.json->Style->title
+msgid "Style"
+msgstr ""
+
+#. 5.4->settings-schema.json->general->title
+msgid "General Settings"
+msgstr "Általános beállítások"
+
+#. 5.4->settings-schema.json->display_mode->title
+#, fuzzy
+#| msgid "Display Mode"
+msgid "Display Options"
+msgstr "Megjelenés mód"
+
+#. 5.4->settings-schema.json->low_alert->title
+#. 3.2->settings-schema.json->head2->description
+msgid "Battery Low Alert Settings"
+msgstr "Alacsony akkumulátor szint riasztási beállításai"
+
+#. 5.4->settings-schema.json->advanced->title
+msgid "Advanced"
+msgstr "Speciális"
+
+#. 5.4->settings-schema.json->bam_normal->title
+msgid "Normal"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_discharging->title
+msgid "Discharging"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_alert->title
+msgid "Alert"
+msgstr "Riasztás"
+
+#. 5.4->settings-schema.json->bam_alert_discharging->title
+msgid "Alert Discharging"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_limit_exceeded->title
+msgid "Limit Exceeded"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_limit_exceeded2->title
+msgid "Limit Exceeded - Critical"
+msgstr ""
+
+#. 5.4->settings-schema.json->refreshInterval-spinner->units
+#. 3.2->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "másodpercek"
+
+#. 5.4->settings-schema.json->refreshInterval-spinner->description
+msgid "Refresh Interval for Display"
+msgstr "Frissítési intervallum megjelenítése"
+
+#. 5.4->settings-schema.json->refreshInterval-spinner->tooltip
+#. 3.2->settings-schema.json->refreshInterval-spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine. This also governs the flash speed."
+msgstr ""
+"Növelje vagy csökkentse ezt a tárcsaértéket a frissítési intervallum "
+"megváltoztatásához - használjon lassú frissítést, ha lassú gépe van. Ez "
+"szabályozza a villogás sebességét is."
+
+#. 5.4->settings-schema.json->alertPercentage->units
+#. 5.4->settings-schema.json->recharged_alert_percentage->units
+#. 5.4->settings-schema.json->normal_font_size->units
+#. 5.4->settings-schema.json->discharging_font_size->units
+#. 5.4->settings-schema.json->alert_font_size->units
+#. 5.4->settings-schema.json->alert_discharging_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->units
+msgid "%"
+msgstr ""
+
+#. 5.4->settings-schema.json->alertPercentage->description
+#. 3.2->settings-schema.json->alertPercentage->description
+msgid "Percentage Battery Charge at which Alert Displayed"
+msgstr "Az akkumulátor töltöttségi százaléka, amelynél a riasztás megjelenik"
+
+#. 5.4->settings-schema.json->alertPercentage->tooltip
+#. 3.2->settings-schema.json->alertPercentage->tooltip
+msgid ""
+"Percentage of Battery Charge at which Orange Warning Background is displayed "
+"- It is also shown and can be adjusted in the Applet left click menu"
+msgstr ""
+"Az akkumulátor töltöttségének százaléka, amelynél egy narancssárga "
+"figyelmeztető háttér jelenik meg - Szintén megjelenik és beállítható a "
+"kisalkalmazás bal kattintásos menüjében is"
+
+#. 5.4->settings-schema.json->recharged_alert->description
+msgid "Visible Alert when Recharging"
+msgstr ""
+
+#. 5.4->settings-schema.json->recharged_alert->tooltip
+msgid "Provide visible alert when battery is recharged to a certain threshold"
+msgstr ""
+
+#. 5.4->settings-schema.json->recharged_alert_percentage->description
+msgid "Percentage threshold for visible recharged alert"
+msgstr ""
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Classic"
+msgstr "Klasszikus"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Classic Plus"
+msgstr "Klasszikus Plusz"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Compact"
+msgstr "Kompakt"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Compact Plus"
+msgstr "Kompakt Plusz"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Icon Only"
+msgstr "Csak Ikon"
+
+#. 5.4->settings-schema.json->displayType->description
+msgid "Toolbar Display Type"
+msgstr "Eszköztár megjelenítés típusa"
+
+#. 5.4->settings-schema.json->displayType->tooltip
+msgid ""
+"The following display options are available (including Compact, Compact "
+"Plus, and Icon Only for vertical panels):\n"
+"  Classic: Battery percentage with extended messages for horizontal panel\n"
+"  Classic Plus: Classic with the addition of a battery icon\n"
+"  Compact: Battery percentage without extended messages\n"
+"  Compact Plus: Compact with the addition of a battery icon\n"
+"  Icon Only: The battery icon on a colored background indicating the current "
+"status"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_display->description
+msgid "Append estimated time remaining to chosen display type"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_display->tooltip
+msgid ""
+"This will append an estimate to the above option for time remaining based on "
+"the amount of remaining battery power"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->description
+msgid "Append estimated time remaining to toolbar menu"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->tooltip
+msgid ""
+"This will append an estimate to the toolbar menu for time remaining based on "
+"the amount of remaining battery power"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->description
+msgid "Append estimated time remaining to tooltip"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->tooltip
+msgid ""
+"This will append an estimate to the tooltip for time remaining based on the "
+"amount of remaining battery power"
+msgstr ""
+
+#. 5.4->settings-schema.json->useBatteryLowSound->description
+#. 3.2->settings-schema.json->useBatteryLowSound->description
+msgid "Provide audible alerts when Battery Low and at Shutdown Level"
+msgstr ""
+"Adjon hangos figyelmeztetéseket, ha az akkumulátor szint alacsony vagy "
+"leálláshoz közel van"
+
+#. 5.4->settings-schema.json->useBatteryLowSound->tooltip
+msgid ""
+"Must have `sox` installed. Limited number of sound file types supported (."
+"oga and .wav)"
+msgstr ""
+"Telepíteni kell a Sox-ot. Csak korlátozott számú hangfájltípus támogatott (."
+"oga és .wav)"
+
+#. 5.4->settings-schema.json->chooseBatteryLowSound->description
+#. 3.2->settings-schema.json->chooseBatteryLowSound->description
+msgid ""
+"Allow choice of audible alert file when Battery Low and at Shutdown Level"
+msgstr ""
+"Engedje meg a hangjelzés fájl kiválasztását, ha az akkumulátor töltöttség "
+"alacsony illetve leállási szinten van"
+
+#. 5.4->settings-schema.json->chooseBatteryLowSound->tooltip
+msgid ""
+"Must have `sox` installed. Limited number of sound file types supported in "
+"versions < 4.2"
+msgstr ""
+"Telepíteni kell a Sox-ot. Korlátozott számú hangfájltípus támogatott a <4.2 "
+"verziókban"
+
+#. 5.4->settings-schema.json->batteryLowSound->description
+#. 3.2->settings-schema.json->batteryLowSound->description
+msgid "Choose sound file to use when Battery is Low"
+msgstr "Hangfájl kiválasztása alacsony akkumulátor szinthez"
+
+#. 5.4->settings-schema.json->batteryLowSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places, especially if a "
+"long or loud file is specified"
+msgstr ""
+"Győződjön meg arról, hogy a hangerőt nyilvános helyekhez mérten állította be "
+"különösen, ha hosszú hangos fájlt választott ki"
+
+#. 5.4->settings-schema.json->batteryShutdownSound->description
+msgid "Sound file to use when Battery is at Shutdown Level"
+msgstr ""
+"Válassza ki a használni kívánt hangfájlt, amikor az akkumulátor "
+"kikapcsoláshoz közeli állapotban van"
+
+#. 5.4->settings-schema.json->batteryShutdownSound->tooltip
+msgid ""
+"Please ensure the volume is set sensibly in public places - do not specify a "
+"long or loud file at Shutdown"
+msgstr ""
+"Győződjön meg arról, hogy a hangerőt nyilvános helyekhez mérten állította be "
+"- a leálláshoz ne állítson be hangos és hosszú hangfájlt"
+
+#. 5.4->settings-schema.json->notifyBatteryLowSound->description
+msgid ""
+"Provide notification when user specified sound file is in use (Recommended)"
+msgstr ""
+"Értesítsen amikor a felhasználó által megadott hangfájl van használatban - "
+"ajánlott"
+
+#. 5.4->settings-schema.json->notifyBatteryLowSound->tooltip
+msgid "To remind that the volume may need to be set sensibly in public places"
+msgstr ""
+"Emlékeztesse a felhasználókat, hogy a hangerőt nyilvános helyekhez mérten "
+"kell beállítani"
+
+#. 5.4->settings-schema.json->customBatteryPath->description
+msgid "Path to battery capacity directory (device path)"
+msgstr "Elérési út az akkumulátor kapacitás mappához (eszköz elérési út)"
+
+#. 5.4->settings-schema.json->customBatteryPath->tooltip
+msgid ""
+"Choose your own power_supply object e.g. for monitoring your secondary "
+"battery.\n"
+"\n"
+"Default:\n"
+"/sys/class/power_supply/BAT0"
+msgstr ""
+"Válassza ki az energia ellátás objektumát – például a másodlagos akkumulátor "
+"megfigyeléséhez.\n"
+"\n"
+"Alapértelmezés:\n"
+"/sys/class/power_supply/BAT0"
+
+#. 5.4->settings-schema.json->normal_background_color->description
+#. 5.4->settings-schema.json->discharging_background_color->description
+#. 5.4->settings-schema.json->alert_background_color->description
+#. 5.4->settings-schema.json->alert_discharging_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->description
+msgid "Background Color"
+msgstr ""
+
+#. 5.4->settings-schema.json->normal_background_color->tooltip
+#. 5.4->settings-schema.json->normal_border_color->tooltip
+#. 5.4->settings-schema.json->discharging_background_color->tooltip
+#. 5.4->settings-schema.json->discharging_border_color->tooltip
+#. 5.4->settings-schema.json->alert_background_color->tooltip
+#. 5.4->settings-schema.json->alert_border_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_background_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->tooltip
+msgid "RGB or RGBA"
+msgstr ""
+
+#. 5.4->settings-schema.json->normal_border_color->description
+#. 5.4->settings-schema.json->discharging_border_color->description
+#. 5.4->settings-schema.json->alert_border_color->description
+#. 5.4->settings-schema.json->alert_discharging_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->description
+msgid "Border Color"
+msgstr ""
+
+#. 5.4->settings-schema.json->normal_font_size->description
+#. 5.4->settings-schema.json->discharging_font_size->description
+#. 5.4->settings-schema.json->alert_font_size->description
+#. 5.4->settings-schema.json->alert_discharging_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->description
+msgid "Font Size"
+msgstr ""
+
 #. 3.2->settings-schema.json->head->description
 msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
 msgstr ""
 "Akkumulátor kisalkalmazás általános beállításai megfigyeléssel és "
 "leállítással"
 
-#. settings-schema.json->refreshInterval-spinner->units
-#. 3.2->settings-schema.json->refreshInterval-spinner->units
-msgid "seconds"
-msgstr "másodpercek"
-
-#. settings-schema.json->refreshInterval-spinner->description
 #. 3.2->settings-schema.json->refreshInterval-spinner->description
 msgid "Refresh Interval for Display:"
 msgstr "Frissítési intervallum megjelenítése:"
 
-#. settings-schema.json->refreshInterval-spinner->tooltip
-#. 3.2->settings-schema.json->refreshInterval-spinner->tooltip
-msgid ""
-"Increase or decrease this spinner value to change the refresh interval - "
-"use a slow refresh if you have a slow machine. This also governs the flash "
-"speed."
-msgstr ""
-"Növelje vagy csökkentse ezt a tárcsaértéket a frissítési intervallum "
-"megváltoztatásához - használjon lassú frissítést, ha lassú gépe van. Ez "
-"szabályozza a villogás sebességét is."
-
-#. settings-schema.json->alertPercentage->description
-#. 3.2->settings-schema.json->alertPercentage->description
-msgid "Percentage Battery Charge at which Alert Displayed"
-msgstr "Az akkumulátor töltöttségi százaléka, amelynél a riasztás megjelenik"
-
-#. settings-schema.json->alertPercentage->tooltip
-#. 3.2->settings-schema.json->alertPercentage->tooltip
-msgid ""
-"Percentage of Battery Charge at which Orange Warning Background is "
-"displayed - It is also shown and can be adjusted in the Applet left click "
-"menu"
-msgstr ""
-"Az akkumulátor töltöttségének százaléka, amelynél egy narancssárga "
-"figyelmeztető háttér jelenik meg - Szintén megjelenik és beállítható a "
-"kisalkalmazás bal kattintásos menüjében is"
-
-#. settings-schema.json->head1->description
 #. 3.2->settings-schema.json->head1->description
 msgid "Display Mode"
 msgstr "Megjelenés mód"
 
-#. settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
 msgid ""
 "Classic - Battery Percentage with extended messages for horizontal panel"
@@ -260,32 +565,27 @@ msgstr ""
 "Klasszikus - akkumulátor százalékos aránya kiterjesztett üzenetekkel a "
 "vízszintes panelhez"
 
-#. settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
 msgid "Classic Plus - Classic with addition of Battery Icon"
 msgstr "Klasszikus Plusz - Klasszikus mód plusz az akkumulátor ikon"
 
-#. settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
 msgid "Compact - Battery Percentage without extended messages"
 msgstr ""
 "Kompakt - Az akkumulátor százalékos aránya kiterjesztett üzenetek nélkül"
 
-#. settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
-msgid "Compact Plus - Compact  with addition of Battery Icon"
+msgid "Compact Plus - Compact with addition of Battery Icon"
 msgstr "Kompakt Plusz - Kompakt mód plusz az akkumulátor ikon"
 
-#. settings-schema.json->displayType->options
 #. 3.2->settings-schema.json->displayType->options
 msgid "Icon Only on coloured background indicating status"
 msgstr "Csak Ikon az állapotot jelző színes háttérrel"
 
-#. settings-schema.json->displayType->description
-msgid "Type of Display"
-msgstr "Megjelenítés típusa"
+#. 3.2->settings-schema.json->displayType->description
+msgid "Type of Display in Toolbar"
+msgstr "Megjelenítés típusa az eszköztárban"
 
-#. settings-schema.json->displayType->tooltip
 #. 3.2->settings-schema.json->displayType->tooltip
 msgid ""
 "This feature offers the Classic (original) display with optional battery "
@@ -296,20 +596,6 @@ msgstr ""
 "akkumulátor ikonnal és néhány kompaktabb megjelenítővel, amelyek függőleges "
 "panelhez alkalmasak (KompaktKompakt Plusz és Csak Ikon)"
 
-#. 3.2->settings-schema.json->displayType->description
-msgid "Type of Display in Toolbar"
-msgstr "Megjelenítés típusa az eszköztárban"
-
-#. 3.2->settings-schema.json->head2->description
-msgid "Battery Low Alert Settings"
-msgstr "Alacsony akkumulátor szint riasztási beállításai"
-
-#. 3.2->settings-schema.json->useBatteryLowSound->description
-msgid "Provide audible alerts when Battery Low and at Shutdown Level"
-msgstr ""
-"Adjon hangos figyelmeztetéseket, ha az akkumulátor szint alacsony vagy "
-"leálláshoz közel van"
-
 #. 3.2->settings-schema.json->useBatteryLowSound->tooltip
 msgid ""
 "Must have Sox installed. Limited number of sound file types supported (.oga "
@@ -317,13 +603,6 @@ msgid ""
 msgstr ""
 "Telepíteni kell a Sox-ot. Csak korlátozott számú hangfájltípus támogatott (."
 "oga és .wav)"
-
-#. 3.2->settings-schema.json->chooseBatteryLowSound->description
-msgid ""
-"Allow choice of audible alert file when Battery Low and at Shutdown Level"
-msgstr ""
-"Engedje meg a hangjelzés fájl kiválasztását, ha az akkumulátor töltöttség "
-"alacsony illetve leállási szinten van"
 
 #. 3.2->settings-schema.json->chooseBatteryLowSound->tooltip
 msgid ""
@@ -333,17 +612,13 @@ msgstr ""
 "Telepíteni kell a Sox-ot. Korlátozott számú hangfájltípus támogatott a <4.2 "
 "verziókban"
 
-#. 3.2->settings-schema.json->batteryLowSound->description
-msgid "Choose sound file to use when Battery is Low"
-msgstr "Hangfájl kiválasztása alacsony akkumulátor szinthez"
-
 #. 3.2->settings-schema.json->batteryLowSound->tooltip
 msgid ""
 "Please ensure the volume is set sensibly in public places especially if a "
 "long loud file is specifed"
 msgstr ""
-"Győződjön meg arról, hogy a hangerőt nyilvános helyekhez mérten állította "
-"be különösen, ha hosszú hangos fájlt választott ki"
+"Győződjön meg arról, hogy a hangerőt nyilvános helyekhez mérten állította be "
+"különösen, ha hosszú hangos fájlt választott ki"
 
 #. 3.2->settings-schema.json->batteryShutdownSound->description
 msgid "Choose sound file to use when Battery is at Shutdown Level"
@@ -353,11 +628,11 @@ msgstr ""
 
 #. 3.2->settings-schema.json->batteryShutdownSound->tooltip
 msgid ""
-"Please ensure the volume is set sensibly in public places - do not specify "
-"a long loud file at Shutdown"
+"Please ensure the volume is set sensibly in public places - do not specify a "
+"long loud file at Shutdown"
 msgstr ""
-"Győződjön meg arról, hogy a hangerőt nyilvános helyekhez mérten állította "
-"be - a leálláshoz ne állítson be hangos és hosszú hangfájlt"
+"Győződjön meg arról, hogy a hangerőt nyilvános helyekhez mérten állította be "
+"- a leálláshoz ne állítson be hangos és hosszú hangfájlt"
 
 #. 3.2->settings-schema.json->notifyBatteryLowSound->description
 msgid ""

@@ -481,7 +481,7 @@ msgstr ""
 msgid "Show favorites on sidebar"
 msgstr "Rodyti mėgstamiausius šoninėje juostoje"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "Rodyti mėgstamų programų ir failų piktogramas šoninėje juostoje"
 
 msgid "Show recent items"

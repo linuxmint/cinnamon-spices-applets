@@ -114,17 +114,7 @@ MyApplet.prototype = {
     
     // Returns true if the cron job is running, false otherwise
     isCronBeingUsed: function() {
-        let usingCron = false;
-        try {
-            // If this file exists, then cron is being used
-            Cinnamon.get_file_contents_utf8_sync(AppletDir + '/etc/USING-CRON.lock');
-            usingCron = true;
-        }
-        catch (e) {
-            usingCron = false;
-        }
-        
-        return usingCron;
+        return GLib.file_test(AppletDir + '/etc/USING-CRON.lock', GLib.FileTest.EXISTS);
     },
     
     // Called when the Save Wallpaper button is clicked

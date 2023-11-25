@@ -3,6 +3,7 @@ const PopupMenu = imports.ui.popupMenu;
 const Lang = imports.lang;
 const Settings = imports.ui.settings;
 const Gtk = imports.gi.Gtk;
+const ModalDialog = imports.ui.modalDialog;
 let Util, OctoPrint;
 if (typeof require !== 'undefined') {
 	OctoPrint = require('./octoprint');
@@ -336,9 +337,9 @@ OctoPussy.prototype = {
 			for(var key in this.printerStatus["temperature"]) {
 				let toolNumber = parseInt(key.slice(-1), 10) + 1;
 				if (key == "bed") {
-					status += "[🛏" + this.printerStatus["temperature"][key]["actual"] + "°]";
-				} else {
-					status += "[🠷" + SUPERSCRIPT.substr(toolNumber, 1) + " " + this.printerStatus["temperature"][key]["actual"] + "°]";
+					status += "[🛏" + Math.trunc(this.printerStatus["temperature"][key]["actual"]) + "°]";
+				} else if (toolNumber) {
+					status += "[🠷" + SUPERSCRIPT.substr(toolNumber, 1) + " " + Math.trunc(this.printerStatus["temperature"][key]["actual"]) + "°]";
 				}
 			}
 		}
@@ -391,13 +392,57 @@ OctoPussy.prototype = {
 		this.octoprint.changeFilament();
 	},
 
-	restartOctoPrint: function() {
-		this.octoprint.restartOctoPrint();
-	},
 
-	shutdownOctoPrint: function() {
-		this.octoprint.shutdownOctoPrint();
-	},
+	restartOctoPrint: function() {
+    let dialog = new confirmDialog();
+    
+    dialog.setButtons([
+      {
+        label: _("Restart"),
+        action: Lang.bind(dialog, function() { dialog.emit('sigrestart') })
+      },
+      {
+        label: _("Cancel"),
+        action: Lang.bind(dialog, function() { dialog.emit('sigcancel'); })
+      }
+  	]);
+
+    dialog.connect('sigrestart', Lang.bind(this, function() {
+  		this.octoprint.restartOctoPrint();
+      dialog.destroy();
+    }));
+
+    dialog.connect('sigcancel', Lang.bind(this, function() {
+      dialog.destroy();
+    }));
+
+    dialog.open();
+  },
+
+  shutdownOctoPrint: function() {
+    let dialog = new confirmDialog();
+    
+    dialog.setButtons([
+      {
+        label: _("Shutdown"),
+        action: Lang.bind(dialog, function() { dialog.emit('sigshutdown') })
+      },
+      {
+        label: _("Cancel"),
+        action: Lang.bind(dialog, function() { dialog.emit('sigcancel'); })
+      }
+  	]);
+
+    dialog.connect('sigshutdown', Lang.bind(this, function() {
+    	dialog.destroy();
+    }));
+
+    dialog.connect('sigcancel', Lang.bind(this, function() {
+      dialog.destroy();
+    }));
+
+    dialog.open();
+  },
 
 	openCamera: function() {
 		Main.Util.spawnCommandLine(this.video_cmd.replace("%s", this.octoprint_url + "webcam/?action=stream"));
@@ -415,3 +460,18 @@ OctoPussy.prototype = {
 function main(metadata, orientation, panelHeight, instanceId) {
 	return new OctoPussy(metadata, orientation, panelHeight, instanceId);
 }
+
+function confirmDialog() {
+    this._init.call(this);
+}
+
+confirmDialog.prototype = {
+    __proto__: ModalDialog.ModalDialog.prototype,
+
+    _init: function() {
+        ModalDialog.ModalDialog.prototype._init.call(this);
+        this.message = new St.Label();
+        this.contentLayout.add(this.message);
+				this.message.set_text(_("Please confirm your action!") + "\n");
+    },
+};

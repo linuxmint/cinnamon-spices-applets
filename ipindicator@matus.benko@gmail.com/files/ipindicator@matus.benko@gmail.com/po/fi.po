@@ -1,0 +1,215 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-29 19:29+0200\n"
+"PO-Revision-Date: 2022-11-29 19:59+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi\n"
+
+#: applet.js:22
+msgid "trying to fetch IP information"
+msgstr "yrittää hakea IP-tietoja"
+
+#. metadata.json->name
+msgid "IP Indicator"
+msgstr "IP Indicator"
+
+#. metadata.json->description
+msgid ""
+"Applet shows different icon for different public IP addresses. Useful when "
+"often using VPN."
+msgstr ""
+"Sovelma näyttää eri kuvakkeen eri julkisille IP-osoitteille. Hyödyllinen, "
+"kun käytät VPN:ää usein."
+
+#. settings-schema.json->appearance->options
+msgid "Icon"
+msgstr "Kuvake"
+
+#. settings-schema.json->appearance->options
+msgid "IP"
+msgstr "IP"
+
+#. settings-schema.json->appearance->options
+msgid "Icon and IP"
+msgstr "Kuvake ja IP"
+
+#. settings-schema.json->appearance->description
+msgid "Appearance"
+msgstr "Ulkoasu"
+
+#. settings-schema.json->update_interval_ifconfig->units
+msgid "seconds"
+msgstr "sekuntia"
+
+#. settings-schema.json->update_interval_ifconfig->description
+msgid "Interface check interval:"
+msgstr "Käyttöliittymän tarkistusväli:"
+
+#. settings-schema.json->update_interval_ifconfig->tooltip
+msgid ""
+"Interval in which applet will check if there was change in network "
+"interfaces. Can be frequent."
+msgstr ""
+"Aikaväli, jonka aikana sovelma tarkistaa, onko verkossa tapahtunut "
+"muutoksia. Voi olla usein."
+
+#. settings-schema.json->update_interval_service->units
+msgid "minutes"
+msgstr "minuuttia"
+
+#. settings-schema.json->update_interval_service->description
+msgid "IP Service interval:"
+msgstr "IP Palvelun aikaväli:"
+
+#. settings-schema.json->update_interval_service->tooltip
+msgid ""
+"Interval in which applet will fire get request to one of IP Services. Don't "
+"make it too frequent to not overload the servers."
+msgstr ""
+"Aikaväli, jonka kuluessa sovelma aloittaa pyynnön jollekin IP-palveluista. "
+"Älä tee liian usein, jotta palvelimet eivät ylikuormitu."
+
+#. settings-schema.json->debug_level->description
+msgid "Debug level:"
+msgstr "Korjaustaso:"
+
+#. settings-schema.json->debug_level->tooltip
+msgid ""
+"For debugging purposes. Higher level means more detailed logs in ~/.cinnamon/"
+"glass.log"
+msgstr ""
+"Virheenkorjauksiin korkeampi taso tarkoittaa yksityiskohtaista "
+"sisäänkirjautumista ~/.cinnamon/glass.log"
+
+#. settings-schema.json->head0->description
+msgid ""
+"To match ISP names, use isp value from the service http://ip-api.com/json"
+msgstr ""
+"Käytä ISP nimeä täsmätäksesi palvelun tarjoajien nimet http://ip-api.com/json"
+
+#. settings-schema.json->head1->description
+msgid "Home ISP"
+msgstr "Koti ISP"
+
+#. settings-schema.json->home_isp->description
+msgid "Home ISP:"
+msgstr "Koti ISP:"
+
+#. settings-schema.json->home_isp->tooltip
+msgid ""
+"Fill out your home ISP. If the ISP from IP service will match with this "
+"value, home icon will be used instead of country flag."
+msgstr ""
+"Merkitse sinun kotisi ISP. Jos IP-palvelun ISP vastaa tätä arvoa, kuvaketta "
+"käytetään maan lipun sijasta."
+
+#. settings-schema.json->home_isp_icon-name->description
+msgid "The icon to used for home ISP:"
+msgstr "Kodin Internet-palvelun tarjoajassa käytettävä kuvake:"
+
+#. settings-schema.json->home_isp_icon-name->tooltip
+#. settings-schema.json->other1_isp_icon-name->tooltip
+#. settings-schema.json->other2_isp_icon-name->tooltip
+#. settings-schema.json->other3_isp_icon-name->tooltip
+#. settings-schema.json->other4_isp_icon-name->tooltip
+#. settings-schema.json->other5_isp_icon-name->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr "Valitse kuvakeen tiedosto tai voit myös kirjoittaa nimen tekstiruutuun"
+
+#. settings-schema.json->home_isp_nickname->description
+#. settings-schema.json->other1_isp_nickname->description
+#. settings-schema.json->other2_isp_nickname->description
+#. settings-schema.json->other3_isp_nickname->description
+#. settings-schema.json->other4_isp_nickname->description
+#. settings-schema.json->other5_isp_nickname->description
+msgid "Nickname:"
+msgstr "Nimimerkki:"
+
+#. settings-schema.json->home_isp_nickname->tooltip
+#. settings-schema.json->other1_isp_nickname->tooltip
+#. settings-schema.json->other2_isp_nickname->tooltip
+#. settings-schema.json->other3_isp_nickname->tooltip
+#. settings-schema.json->other4_isp_nickname->tooltip
+#. settings-schema.json->other5_isp_nickname->tooltip
+msgid "Text to show in tooltip when this ISP is active"
+msgstr "Työkalussa näkyvä teksti, kun tämä ISP on aktiivinen"
+
+#. settings-schema.json->head2->description
+msgid "Other ISP 1"
+msgstr "Muu ISP 1"
+
+#. settings-schema.json->other1_isp->description
+msgid "Other ISP 1:"
+msgstr "Muu ISP 1:"
+
+#. settings-schema.json->other1_isp->tooltip
+msgid ""
+"Fill out your other ISP. If the ISP from IP service will match with this "
+"value, home icon will be used instead of country flag."
+msgstr ""
+"Merkitse sinun toinen ISP. Jos IP-palvelun ISP vastaa tätä arvoa, kuvaketta "
+"käytetään maan lipun sijasta."
+
+#. settings-schema.json->other1_isp_icon-name->description
+#. settings-schema.json->other2_isp_icon-name->description
+#. settings-schema.json->other3_isp_icon-name->description
+#. settings-schema.json->other4_isp_icon-name->description
+#. settings-schema.json->other5_isp_icon-name->description
+msgid "The icon to use for other ISP:"
+msgstr "Muille palveluntarjoajille käytettävä kuvake:"
+
+#. settings-schema.json->head3->description
+msgid "Other ISP 2"
+msgstr "Muu ISP 2"
+
+#. settings-schema.json->other2_isp->description
+msgid "Other ISP 2:"
+msgstr "Muu ISP 2:"
+
+#. settings-schema.json->other2_isp->tooltip
+#. settings-schema.json->other3_isp->tooltip
+#. settings-schema.json->other4_isp->tooltip
+#. settings-schema.json->other5_isp->tooltip
+msgid ""
+"Fill out your oher ISP. If the ISP from IP service will match with this "
+"value, home icon will be used instead of country flag."
+msgstr ""
+"Merkitse sinun muu ISP. Jos IP-palvelun ISP vastaa tätä arvoa, kuvaketta "
+"käytetään maan lipun sijasta."
+
+#. settings-schema.json->head4->description
+msgid "Other ISP 3"
+msgstr "Muu ISP 3"
+
+#. settings-schema.json->other3_isp->description
+msgid "Other ISP 3:"
+msgstr "Muu ISP 3:"
+
+#. settings-schema.json->head5->description
+msgid "Other ISP 4"
+msgstr "Muu ISP 4"
+
+#. settings-schema.json->other4_isp->description
+msgid "Other ISP 4:"
+msgstr "Muu ISP 4:"
+
+#. settings-schema.json->head6->description
+msgid "Other ISP 5"
+msgstr "Muu ISP 5"
+
+#. settings-schema.json->other5_isp->description
+msgid "Other ISP 5:"
+msgstr "Muu ISP 5:"

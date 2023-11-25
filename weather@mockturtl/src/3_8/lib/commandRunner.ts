@@ -5,7 +5,7 @@ const { spawnCommandLineAsyncIO } = imports.misc.util;
 
 /**
  * Doesn't do JSON typechecking, you have to do that manually
- * @param command 
+ * @param command
  */
 export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedResponse<TData> | TypedFailResponse> {
 	const response = await SpawnProcess(command);

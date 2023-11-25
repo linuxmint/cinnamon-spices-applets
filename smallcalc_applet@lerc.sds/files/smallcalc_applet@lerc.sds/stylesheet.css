@@ -76,3 +76,14 @@
 .button.operator:active {
     background-color: rgba(87, 156, 142, 0.8);
 }
+.button.equals {
+    background-color: rgba(29, 212, 94, 0.6);
+}
+
+.button.equals:active {
+    background-color: rgba(29, 212, 94, 0.8);
+}
+
+.button.smt {
+    background-color: rgba(240, 74, 80, 0.6);
+}

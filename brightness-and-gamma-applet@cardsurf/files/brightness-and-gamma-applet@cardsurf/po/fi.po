@@ -1,0 +1,193 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-30 14:04+0200\n"
+"PO-Revision-Date: 2022-11-30 14:08+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:178
+msgid "The following packages were not found:"
+msgstr "Seuraavia paketteja ei löytynyt:"
+
+#: applet.js:179
+msgid "Please install the above packages to use the applet"
+msgstr "Asenna seuraavat paketit käyttääksesi sovelmaa"
+
+#: applet.js:564
+msgid "Screen"
+msgstr "Näyttö"
+
+#: applet.js:647
+msgid "Outputs"
+msgstr "Ulostulo"
+
+#. settings-schema.json->options_type->options
+#: appletGui.js:235
+msgid "Brightness"
+msgstr "Kirkkaus"
+
+#: appletGui.js:236
+msgid "Red"
+msgstr "Punainen"
+
+#: appletGui.js:237
+msgid "Green"
+msgstr "Vihreä"
+
+#: appletGui.js:238
+msgid "Blue"
+msgstr "Sininen"
+
+#. metadata.json->description
+msgid "Sets brightness and gamma levels of a screen"
+msgstr "Asettaa näytön kirkkauden ja gammatason"
+
+#. metadata.json->name
+msgid "Brightness and gamma applet"
+msgstr "Kirkkauden ja gammatason sovelma"
+
+#. settings-schema.json->configuration_start->description
+msgid "Configuration"
+msgstr "Määritys"
+
+#. settings-schema.json->apply_startup->description
+msgid "Apply at startup"
+msgstr "Käytä käynnistettäessä"
+
+#. settings-schema.json->apply_startup->tooltip
+msgid "Apply values at applet startup"
+msgstr "Käytä arvoja sovelman käynnistyessä"
+
+#. settings-schema.json->apply_every->units
+#. settings-schema.json->save_every->units
+msgid "seconds"
+msgstr "sekuntia"
+
+#. settings-schema.json->apply_every->description
+msgid "Apply every"
+msgstr "Käytä joka"
+
+#. settings-schema.json->apply_every->tooltip
+msgid ""
+"How often to apply values. 0 means that values are not applied periodically."
+msgstr ""
+"Kuinka usein arvoja tulee soveltaa. 0 tarkoittaa, että arvoja ei käytetä "
+"säännöllisesti."
+
+#. settings-schema.json->apply_asynchronously->description
+msgid "Apply asynchronously"
+msgstr "Käytä epäsynkronisesti"
+
+#. settings-schema.json->apply_asynchronously->tooltip
+msgid "Apply values in a background process"
+msgstr "Käytä arvoja taustaprosessissa"
+
+#. settings-schema.json->update_scroll->description
+msgid "Adjust brightness scroll"
+msgstr "Säädä kirkkautta vierittämällä"
+
+#. settings-schema.json->update_scroll->tooltip
+msgid "Allows to adjust a brightness value on a mouse scroll"
+msgstr "Mahdollistaa kirkkausarvon säätämisen hiiren rullalla"
+
+#. settings-schema.json->scroll_step->units
+#. settings-schema.json->minimum_brightness->units
+#. settings-schema.json->maximum_brightness->units
+#. settings-schema.json->minimum_gamma->units
+#. settings-schema.json->maximum_gamma->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->scroll_step->description
+msgid "Scroll step"
+msgstr "Vierityksen askel"
+
+#. settings-schema.json->scroll_step->tooltip
+msgid "A percentage of a brightness value to adjust on a mouse scroll"
+msgstr ""
+"Prosenttiosuus kirkkaudesta, joka säädellään hiiren vieritystoiminnolla"
+
+#. settings-schema.json->values_start->description
+msgid "Values"
+msgstr "Arvot"
+
+#. settings-schema.json->minimum_brightness->description
+msgid "Minimum brightness"
+msgstr "Pienin kirkkaus"
+
+#. settings-schema.json->minimum_brightness->tooltip
+msgid "A minimum value of brightness. Value from 10% to 50%."
+msgstr "Kirkkauden pienin arvo 10% - 50%."
+
+#. settings-schema.json->maximum_brightness->description
+msgid "Maximum brightness"
+msgstr "Suurin kirkkaus"
+
+#. settings-schema.json->maximum_brightness->tooltip
+msgid "A maximum value of brightness. Value from 51% to 200%."
+msgstr "Kirkkauden suurin arvo 51% - 200%."
+
+#. settings-schema.json->minimum_gamma->description
+msgid "Minimum gamma"
+msgstr "Pienin gamma"
+
+#. settings-schema.json->minimum_gamma->tooltip
+msgid "A minimum value of gamma. Value from 10% to 50%."
+msgstr "Gamman pienin arvo 10% - 50%."
+
+#. settings-schema.json->maximum_gamma->description
+msgid "Maximum gamma"
+msgstr "Suurin gamma"
+
+#. settings-schema.json->maximum_gamma->tooltip
+msgid "A maximum value of gamma. Value from 51% to 200%."
+msgstr "Gamman suurin arvo 51% - 200%."
+
+#. settings-schema.json->save_every->description
+msgid "Save every"
+msgstr "Tallenna joka"
+
+#. settings-schema.json->save_every->tooltip
+msgid "How often to save last used values"
+msgstr "Kuinka usein käytetyt arvot tallennetaan"
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr "Gui"
+
+#. settings-schema.json->options_type->description
+msgid "Show"
+msgstr "Näytä"
+
+#. settings-schema.json->options_type->options
+msgid "All"
+msgstr "Kaikki"
+
+#. settings-schema.json->options_type->options
+msgid "Gamma"
+msgstr "Gamma"
+
+#. settings-schema.json->options_type->tooltip
+msgid "Values shown in user interface"
+msgstr "Käyttöliittymässä näkyvät arvot"
+
+#. settings-schema.json->gui_icon_filepath->description
+msgid "Icon"
+msgstr "Kuvake"
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+msgid "An icon displayed in a panel"
+msgstr "Paneelissa näkyvä kuvake"

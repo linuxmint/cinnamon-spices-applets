@@ -14,7 +14,7 @@
     },
     "menu": {
       "type": "page",
-      "title": "Layout and Content",
+      "title": "Layout",
       "sections": ["menu-layout", "menu-content"]
     },
     "providers": {

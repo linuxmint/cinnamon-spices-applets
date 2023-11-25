@@ -1,56 +1,45 @@
-import { YoutubeDownloadServiceProps, YoutubeDownloadServiceReturnType } from "./YoutubeDownloadManager";
+import {
+  YouTubeDownloadServiceProps,
+  YouTubeDownloadServiceReturnType,
+} from "./YoutubeDownloadManager";
 const { spawnCommandLineAsyncIO } = imports.misc.util;
 
-// TODO: there are some redudances with downloadWithYoutubeDl.
-export function downloadWithYtDlp(props: YoutubeDownloadServiceProps): YoutubeDownloadServiceReturnType {
-    const { downloadDir, title, onFinished, onSuccess, onError } = props
+// TODO: there are some redudances with downloadWithYouTubeDl.
+export function downloadWithYtDlp(
+  props: YouTubeDownloadServiceProps
+): YouTubeDownloadServiceReturnType {
+  const { downloadDir, title, onFinished, onSuccess, onError } = props;
 
-    let hasBeenCancelled = false
+  let hasBeenCancelled = false;
 
-    const downloadCommand = `yt-dlp --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll('"', '\\\"')}" --add-metadata --embed-thumbnail`
+  const downloadCommand = `yt-dlp --output "${downloadDir}/%(title)s.%(ext)s" --extract-audio --audio-format mp3 ytsearch1:"${title.replaceAll(
+    '"',
+    '\\"'
+  )}" --add-metadata --embed-thumbnail`;
 
-    const process = spawnCommandLineAsyncIO(downloadCommand, (stdout, stderr) => {
-        onFinished()
+  const process = spawnCommandLineAsyncIO(downloadCommand, (stdout, stderr) => {
+    onFinished();
 
-
-        if (hasBeenCancelled) {
-            hasBeenCancelled = false
-            return
-        }
-
-        if (stdout) {
-            const downloadPath = getDownloadPath(stdout)
-
-            if (!downloadPath) {
-                onError('downloadPath could not be determined from stdout. Most likely the download has failed', downloadCommand)
-                return
-            }
-
-            onSuccess(downloadPath)
-            return
-        }
-
-
-        if (stderr) {
-            onError(stderr, downloadCommand)
-            return
-        }
-
-    })
-
-    function cancel() {
-        hasBeenCancelled = true
-        process.force_exit()
+    if (hasBeenCancelled) {
+      hasBeenCancelled = false;
+      return;
     }
 
-    return { cancel }
-}
+    if (stdout) {
+      onSuccess();
+      return;
+    }
 
-function getDownloadPath(stdout: string) {
-    const arrayOfLines = stdout.match(/[^\r\n]+/g);
+    if (stderr) {
+      onError(stderr, downloadCommand);
+      return;
+    }
+  });
 
-    const searchString = '[ExtractAudio] Destination: '
+  function cancel() {
+    hasBeenCancelled = true;
+    process.force_exit();
+  }
 
-    return arrayOfLines?.find(line => line.includes(searchString))
-        ?.split(searchString)[1]
+  return { cancel };
 }

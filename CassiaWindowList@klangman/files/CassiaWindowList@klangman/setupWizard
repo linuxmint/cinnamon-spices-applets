@@ -1,0 +1,13 @@
+#!/usr/bin/python3
+
+import os
+import sys
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import GLib 
+
+if len(sys.argv) < 2:
+    print("usage:\n    setupWizard <uuid> <instance_id>")
+else:
+    os.execvp(GLib.get_home_dir() + "/.local/share/cinnamon/applets/CassiaWindowList@klangman/SetupWizard.py", (" ",) + tuple(sys.argv[1:]))
+

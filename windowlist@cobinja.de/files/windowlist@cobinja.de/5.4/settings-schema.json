@@ -1,0 +1,153 @@
+{
+  "section1": {
+    "type": "section",
+    "description" : "Captions"
+  },
+  "caption-type": {
+    "type": "combobox",
+    "default": 1,
+    "options": {
+      "Name": 0,
+      "Title": 1
+    },
+    "description": "Caption type"
+  },
+  "display-caption-for": {
+    "type": "combobox",
+    "default": 0,
+    "options": {
+      "None": 0,
+      "All": 1,
+      "Running": 2,
+      "Focused": 3
+    },
+    "description": "Display Caption For"
+  },
+  "label-width": {
+    "type": "spinbutton",
+    "default": 150,
+    "min": 5,
+    "max": 1000,
+    "units": "pixels",
+    "step": 1,
+    "description": "Label width",
+    "toolip": "This defines the width of the button label"
+  },
+  "label-animation": {
+    "type": "switch",
+    "default": true,
+    "description": "Animate label"
+  },
+  "label-animation-time": {
+    "type": "spinbutton",
+    "default": 500,
+    "min": 5,
+    "max": 10000,
+    "units": "milliseconds",
+    "step": 1,
+    "description": "Label animation time"
+  },
+  "display-number": {
+    "type": "combobox",
+    "default": 1,
+    "options": {
+      "Never": 0,
+      "Always": 1,
+      "2 or more windows": 2
+    },
+    "description": "Display Number"
+  },
+  "section2": {
+    "type": "section",
+    "description" : "Icons"
+  },
+  "group-windows": {
+    "type": "switch",
+    "default": true,
+    "description": "Group Windows",
+    "tooltip": "If windows are grouped, all windows from an application are managed by the same button,\nif not grouped, all windows get an own button"
+  },
+  "display-pinned": {
+    "type": "switch",
+    "default": true,
+    "description": "Display Favorites"
+  },
+  "animation-time": {
+    "type": "spinbutton",
+    "default": 2000,
+    "min": 5,
+    "max": 10000,
+    "units": "milliseconds",
+    "step": 1,
+    "description": "Animation Time",
+    "tooltip": "The flashing time when a new window is opened via a button"
+  },
+  "show-windows-for-current-monitor": {
+    "type": "switch",
+    "default": false,
+    "description": "Only show windows on the same monitor",
+    "tooltip": "If enabled, this applet instance only manages windows\nthat are displayed on the same monitor"
+  },
+  "section3": {
+    "type": "section",
+    "description" : "Preview menu"
+  },
+  "menu-show-on-click": {
+    "type": "switch",
+    "default": true,
+    "description": "Show on click",
+    "tooltip": "If enabled, a popup menu with a list of current windows will show when clicking\n(Only with 2 or more windows)"
+  },
+  "menu-show-on-hover": {
+    "type": "switch",
+    "default": true,
+    "description": "Show on hover",
+    "tooltip": "If enabled, a popup menu with a list of current windows will show when hovering"
+  },
+  "show-previews": {
+    "type": "switch",
+    "default": true,
+    "description": "Show previews",
+    "tooltip": "If enabled, the popup menu will show window previews\n(Always disabled when running Cinnamon in Software Rendering Mode)"
+  },
+  "number-of-unshrunk-previews": {
+    "type": "spinbutton",
+    "default": 8,
+    "min": 5,
+    "max": 20,
+    "units": "Windows",
+    "step": 1,
+    "description": "Number of unshrunk previews"
+  },
+  "preview-timeout-show": {
+    "type": "spinbutton",
+    "default": 1000,
+    "min": 5,
+    "max": 10000,
+    "units": "milliseconds",
+    "step": 1,
+    "description": "Timeout Show",
+    "tooltip": "The waiting time for the popup menu to show, when hovering a button\n(Not used when moving directly to a different button in the list)"
+  },
+  "preview-timeout-hide": {
+    "type": "spinbutton",
+    "default": 1000,
+    "min": 5,
+    "max": 10000,
+    "units": "milliseconds",
+    "step": 1,
+    "description": "Timeout Hide",
+    "tooltip": "The waiting time for the popup menu to hide, when leaving a button\n(Not used when moving directly to a different button in the list)"
+  },
+  "preview-close-on-middle-click": {
+    "type": "switch",
+    "default": false,
+    "description": "Close window on mouse-wheel click"
+  },
+  "pinned-apps": {
+    "type": "generic",
+    "default": [
+      ["nemo.desktop", "firefox.desktop"]
+    ]
+  }
+}

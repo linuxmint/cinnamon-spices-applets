@@ -1,5 +1,71 @@
 # Changelog
 
+## 3.3.1
+
+Fix nominatim not getting location data due to API changes. Related issues:
+
+* Fix [#4983](https://github.com/linuxmint/cinnamon-spices-applets/issues/4983)
+* Fix [#4981](https://github.com/linuxmint/cinnamon-spices-applets/issues/4981)
+* Fix [#4980](https://github.com/linuxmint/cinnamon-spices-applets/issues/4980)
+
+## 3.3.0
+
+* Fix [#4801](https://github.com/linuxmint/cinnamon-spices-applets/issues/4801) - Link to dmi.dk location not working 
+* Fix [#4800](https://github.com/linuxmint/cinnamon-spices-applets/issues/4800) - Wrong icons (Tomorrow.io and US Weather)
+* Fix [#4780](https://github.com/linuxmint/cinnamon-spices-applets/issues/4780) - Hourly Weather Redesign
+* Fix [#4709](https://github.com/linuxmint/cinnamon-spices-applets/issues/4709) - the free space between the interface elements disappears
+
+## 3.2.13
+
+* Add Pirate Weather as a provider
+* Remove DarkSky
+* Fix [#4716](https://github.com/linuxmint/cinnamon-spices-applets/issues/4716)
+* Fix [#4719](https://github.com/linuxmint/cinnamon-spices-applets/issues/4719)
+* Fix [#4762](https://github.com/linuxmint/cinnamon-spices-applets/issues/4762)
+* Fix [#4765](https://github.com/linuxmint/cinnamon-spices-applets/issues/4765)
+
+## 3.2.12
+
+* Minor style changes
+* Make "Location Label Override" behavior identical to Panel label override.
+* Add option to override tooltip label for applet
+* Try to make hourly weather elements slimmer by putting precipitation change and volume in different rows
+* Update luxon and suncalc
+* Update README
+* Use user's timezone for automatic unit inference, Fixes [#4644](https://github.com/linuxmint/cinnamon-spices-applets/issues/4644)
+* Fixes [#4628](https://github.com/linuxmint/cinnamon-spices-applets/issues/4628)
+* Fix MET UK crash when observation stations return a single object instead of an array for it's observation
+* Add support for saving config from new path and respect ENV variable for xsession-errors
+
+## 3.2.11
+
+* Fix issue where refresh loop wouldn't ever resume after a single configuration error  
+
+## 3.2.10
+
+* Add more granular control for setting changes
+* Fixes [#4505](https://github.com/linuxmint/cinnamon-spices-applets/issues/4505)
+
+## 3.2.9
+* Add support for Soup v3
+
+## 3.2.8
+
+* Resolve [#4426](https://github.com/linuxmint/cinnamon-spices-applets/issues/4426) - Add Weather Underground as a provider
+
+## 3.2.7
+
+* Fix [#4390](https://github.com/linuxmint/cinnamon-spices-applets/issues/4390) - Make sure applet works with not configured Locale
+
+## 3.2.6
+
+* Fix [#4387](https://github.com/linuxmint/cinnamon-spices-applets/issues/4387)
+* also add some more location-related entries into the applet label override
+
+## 3.2.5
+
+* Fix [#4378](https://github.com/linuxmint/cinnamon-spices-applets/issues/4378) - Add DWD as a weather provider
+
 ## 3.2.4
 
 * Fix issue on Cinnamon versions where `is_finalized` is not injected into GObject

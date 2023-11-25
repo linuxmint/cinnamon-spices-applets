@@ -1,84 +1,80 @@
 import { createActivWidget } from "./ActivWidget";
 
-const { BoxLayout, Label, Icon, ScrollView } = imports.gi.St
-const { ActorAlign, Point } = imports.gi.Clutter
-const { PolicyType } = imports.gi.Gtk
+const { BoxLayout, Label, Icon, ScrollView } = imports.gi.St;
+// @ts-ignore
+const { ActorAlign, Point } = imports.gi.Clutter;
+const { PolicyType } = imports.gi.Gtk;
 
 interface Arguments {
-    text: string
+  text: string;
 }
 
 export function createSubMenu(args: Arguments) {
+  const { text } = args;
 
-    const {
-        text
-    } = args
+  const container = new BoxLayout({
+    vertical: true,
+  });
 
+  const label = new Label({
+    text,
+  });
 
-    const container = new BoxLayout({
-        vertical: true
-    })
+  const triangle = new Icon({
+    style_class: "popup-menu-arrow",
+    icon_name: "pan-end",
+    rotation_angle_z: 90,
+    x_expand: true,
+    x_align: ActorAlign.END,
+    pivot_point: new Point({ x: 0.5, y: 0.5 }),
+    important: true, // without this, it looks ugly on Mint-X Themes
+  });
 
-    const label = new Label({
-        text
-    })
+  const toggle = new BoxLayout({
+    style_class: "popup-menu-item popup-submenu-menu-item",
+  });
 
-    const triangle = new Icon({
-        style_class: 'popup-menu-arrow',
-        icon_name: 'pan-end',
-        rotation_angle_z: 90,
-        x_expand: true,
-        x_align: ActorAlign.END,
-        pivot_point: new Point({ x: 0.5, y: 0.5 }),
-        important: true // without this, it looks ugly on Mint-X Themes
-    });
+  createActivWidget({
+    widget: toggle,
+    onActivated: toggleScrollbox,
+  });
 
-    const toggle = new BoxLayout({
-        style_class: 'popup-menu-item popup-submenu-menu-item'
-    })
+  [label, triangle].forEach((widget) => toggle.add_child(widget));
+  container.add_child(toggle);
 
-    createActivWidget({
-        widget: toggle,
-        onActivated: toggleScrollbox
-    });
+  const scrollbox = new ScrollView({
+    style_class: "popup-sub-menu",
+    vscrollbar_policy: PolicyType.AUTOMATIC,
+    hscrollbar_policy: PolicyType.NEVER,
+  });
 
+  const box = new BoxLayout({
+    vertical: true,
+  });
 
-    [label, triangle].forEach(widget => toggle.add_child(widget))
-    container.add_child(toggle)
+  function toggleScrollbox() {
+    scrollbox.visible ? closeMenu() : openMenu();
+  }
 
-    const scrollbox = new ScrollView({
-        style_class: 'popup-sub-menu',
-        vscrollbar_policy: PolicyType.AUTOMATIC,
-        hscrollbar_policy: PolicyType.NEVER
-    })
+  function openMenu() {
+    scrollbox.show();
+    triangle.rotation_angle_z = 90;
+  }
 
-    const box = new BoxLayout({
-        vertical: true
-    })
+  function closeMenu() {
+    scrollbox.hide();
+    triangle.rotation_angle_z = 0;
+  }
 
-    function toggleScrollbox() {
-        scrollbox.visible ? closeMenu() : openMenu()
-    }
+  // add_child is recommended but doesn't work: https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/3172
+  scrollbox.add_actor(box);
 
-    function openMenu() {
-        scrollbox.show()
-        triangle.rotation_angle_z = 90
-    }
+  [toggle, scrollbox].forEach((widget) => container.add_child(widget));
 
-    function closeMenu() {
-        scrollbox.hide()
-        triangle.rotation_angle_z = 0
-    }
-
-    // add_child is recommended but doesn't work: https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/3172
-    scrollbox.add_actor(box);
-
-    [toggle, scrollbox].forEach(widget => container.add_child(widget))
-
-    return {
-        /** the container which should be used to add it as child to a parent Actor */
-        actor: container,
-        /** the container which should be used to add children  */
-        box,
-    }
+  return {
+    /** the container which should be used to add it as child to a parent Actor */
+    actor: container,
+    /** the container which should be used to add children  */
+    box,
+  };
 }

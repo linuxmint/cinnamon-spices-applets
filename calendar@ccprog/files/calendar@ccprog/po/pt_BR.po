@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-13 13:37+0200\n"
+"POT-Creation-Date: 2022-06-30 17:27+0200\n"
 "PO-Revision-Date: 2021-10-02 18:47-0300\n"
 "Last-Translator: Marcelo Aof\n"
 "Language-Team: \n"
@@ -18,9 +18,57 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: applet.js:65
+#: applet.js:21
+msgid "%B %-e, %Y"
+msgstr ""
+
+#: applet.js:22 eventView.js:26
+msgid "%A, %B %-e, %Y"
+msgstr ""
+
+#: applet.js:131
 msgid "Date and Time Settings"
 msgstr "Configurações de Data e Hora"
+
+#: eventView.js:65
+msgid "Starting in a few minutes"
+msgstr "Começando em alguns minutos"
+
+#: eventView.js:69
+#, javascript-format
+msgid "Starting in %d minutes"
+msgstr "Começando em %d minutos"
+
+#: eventView.js:79
+msgid "This evening"
+msgstr "Esta noite"
+
+#: eventView.js:82
+msgid "Starting later today"
+msgstr "Começando mais tarde hoje"
+
+#: eventView.js:85
+#, javascript-format
+msgid "In %d hour"
+msgid_plural "In %d hours"
+msgstr[0] "Em %d hora"
+msgstr[1] "Em %d horas"
+
+#: eventView.js:664
+msgid "No Events"
+msgstr "Sem eventos"
+
+#: eventView.js:925
+msgid "In progress"
+msgstr "Em andamento"
+
+#: eventView.js:946
+msgid "All day"
+msgstr "Todo dia"
+
+#: eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
+msgid "Today"
+msgstr "Hoje"
 
 #: settings_widgets.py:95
 msgid "Add new entry"
@@ -53,7 +101,9 @@ msgstr "Calendário com feriados"
 
 #. metadata.json->description
 msgid "Calendar applet with public holiday data provided by Enrico service"
-msgstr "Applet de calendário que exibe os próximos feriados. Dados fornecidos pelo serviço Enrico"
+msgstr ""
+"Applet de calendário que exibe os próximos feriados. Dados fornecidos pelo "
+"serviço Enrico"
 
 #. settings-schema.json->page1->title
 msgid "Calendar"
@@ -79,6 +129,14 @@ msgstr "Atalhos de Teclado"
 #. settings-schema.json->section4->title
 msgid "Show World Times"
 msgstr "Mostrar Relógios Mundiais"
+
+#. settings-schema.json->show-events->description
+msgid "Show calendar events"
+msgstr "Mostrar eventos do calendário"
+
+#. settings-schema.json->show-events->tooltip
+msgid "Check this to display events in the calendar."
+msgstr "Marque esta opção para exibir eventos no calendário."
 
 #. settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"
@@ -109,8 +167,11 @@ msgid "Use a custom date format"
 msgstr "Usar um formato de data personalizado"
 
 #. settings-schema.json->use-custom-format->tooltip
-msgid "Check this to define a custom format for the date in the calendar applet."
-msgstr "Marque esta opção para definir um formato de data personalizado no applet de calendário."
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+"Marque esta opção para definir um formato de data personalizado no applet de "
+"calendário."
 
 #. settings-schema.json->custom-format->description
 msgid "Date format"
@@ -126,7 +187,8 @@ msgstr "Saiba mais sobre a sintaxe do formato de data"
 
 #. settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
-msgstr "Clique neste botão para saber mais sobre a sintaxe dos formatos de data."
+msgstr ""
+"Clique neste botão para saber mais sobre a sintaxe dos formatos de data."
 
 #. settings-schema.json->country->description
 msgid "Country"

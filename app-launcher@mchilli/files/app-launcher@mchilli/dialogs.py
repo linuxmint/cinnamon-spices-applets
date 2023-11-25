@@ -2,11 +2,12 @@
 
 import gi
 gi.require_version("Gtk", "3.0")
+gi.require_version("Gdk", "3.0")
 gi.require_version('XApp', '1.0')
 
 import os
 import configparser
-from gi.repository import Gio, Gtk, GLib, XApp
+from gi.repository import Gio, Gtk, Gdk, GLib, XApp
 
 UUID = 'app-launcher@mchilli'
 APP_NAME = "App Launcher"
@@ -92,6 +93,14 @@ class EditDialog():
         self.dialog.destroy()
         return None
 
+    def on_size_allocate(self, widget, rect):
+        widget.disconnect_by_func(self.on_size_allocate)
+        hints = Gdk.Geometry()
+        hints.max_width = widget.get_screen().get_width()
+        hints.max_height = rect.height
+        mask = Gdk.WindowHints.MAX_SIZE
+        widget.set_geometry_hints(None, hints, mask)
+
     def open_filechooser(self, *args):
         filechooser = Gtk.FileChooserDialog(
             title=APP_NAME, 
@@ -138,7 +147,14 @@ class EditDialog():
                         if 'Exec' in data: self.command_entry.set_text(data['Exec'])
 
             else:    
-                self.command_entry.set_text(file)
+                if self.valid_exec(file):
+                    self.command_entry.set_text(file)
+                else:
+                    mimetype, val = Gio.content_type_guess(filename=file, data=None)
+                    icon = Gio.content_type_get_generic_icon_name(mimetype)
+                    self.icon_entry.set_icon(icon)
+                    
+                    self.command_entry.set_text(f'xdg-open {file}')
         else:
             filechooser.destroy()
 

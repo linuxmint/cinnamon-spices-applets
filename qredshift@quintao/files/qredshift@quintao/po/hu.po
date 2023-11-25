@@ -7,109 +7,115 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-04 13:58-0300\n"
-"PO-Revision-Date: 2021-09-26 07:50+0200\n"
+"POT-Creation-Date: 2022-08-30 00:45-0300\n"
+"PO-Revision-Date: 2022-09-28 14:32+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:207
+#: applet.js:232
 msgid "Reload Applet"
 msgstr "Kisalkalmazás újratöltése"
 
-#: applet.js:212
+#: applet.js:243
 msgid "Recompile Translations"
 msgstr "Fordítások újraépítése"
 
-#: applet.js:265
+#: applet.js:296
 msgid "REDSHIFT NOT INSTALLED!"
 msgstr "A REDSHIFT NINCS INSTALLÁLVA!"
 
-#: applet.js:266
+#: applet.js:297
 msgid "Requires Redshift: sudo apt-get install redshift"
 msgstr ""
 "A Redshift alkalmazást telepítését igényli, amelyet a következő módon "
-"telepítheti fel: sudo apt-get install redshift"
+"telepítheti fel: „sudo apt-get install redshift”"
 
-#: applet.js:510
-msgid "may conflict with this applet, it is highly recommended removing it."
-msgstr ""
-"a kisalkalmazás nem működik együtt ezzel a kisalkalmazással, ezért távolítsa "
-"el azt a csomagot."
+#: applet.js:446 applet.js:467
+msgid "should be removed."
+msgstr "szükséges eltávolítani."
 
 #. settings-schema.json->enabled->description
-#: applet.js:528
+#: applet.js:629
 msgid "Enabled"
 msgstr "Engedélyezve"
 
-#: applet.js:536 applet.js:582
+#: applet.js:637 applet.js:682
 msgid "Temp:"
 msgstr "Színhőmérséklet:"
 
-#: applet.js:547 applet.js:593
+#: applet.js:648 applet.js:693
 msgid "Bright:"
 msgstr "Világosság:"
 
-#: applet.js:559 applet.js:861
+#: applet.js:659 applet.js:975
 msgid "Gamma:"
 msgstr "Gamma:"
 
 #. settings-schema.json->enabledNight->description
-#: applet.js:574
+#: applet.js:674
 msgid "Night Enabled"
 msgstr "Éjszakai üzemmód engedélyezve"
 
 #. settings-schema.json->iconLabel->description
-#: applet.js:636
+#: applet.js:736
 msgid "Show Label"
 msgstr "Címke megjelenítése"
 
-#: applet.js:830 applet.js:846
+#: applet.js:935 applet.js:958
+msgid "Transition to day"
+msgstr "Átmenet nappal"
+
+#: applet.js:936 applet.js:959
+msgid "Transition to night"
+msgstr "Átmenet éjszaka"
+
+#: applet.js:937 applet.js:960
 msgid "Night"
 msgstr "Éjszaka"
 
-#: applet.js:831 applet.js:847
+#: applet.js:938 applet.js:961
 msgid "Day"
 msgstr "Nappal"
 
-#: applet.js:838
+#: applet.js:949
 msgid "On"
 msgstr "Be"
 
-#: applet.js:838 applet.js:840
+#: applet.js:949 applet.js:951
 msgid "Off"
 msgstr "Ki"
 
-#: applet.js:852
+#: applet.js:966
 msgid "Day Temperature"
 msgstr "Napközbeni színhőmérséklet"
 
-#: applet.js:853
+#: applet.js:967
 msgid "Day Brightness"
 msgstr "Napközbeni fényerő"
 
-#: applet.js:855
+#: applet.js:969
 msgid "Night Temperature"
 msgstr "Éjszakai színhőmérséklet"
 
-#: applet.js:856
+#: applet.js:970
 msgid "Night Brightness"
 msgstr "Éjszakai fényerő"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
-#: applet.js:858
+#: applet.js:972
 msgid "Temperature"
 msgstr "Hőmérséklet"
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
-#: applet.js:859
+#: applet.js:973
 msgid "Brightness"
 msgstr "Fényerő"
 
@@ -119,12 +125,11 @@ msgstr "QRedshift"
 
 #. metadata.json->description
 msgid ""
-"Sets brightness, gamma levels and color temperature with Redshift. This "
-"applet conflicts with redshift-gtk, make sure you remove it."
+"It makes the color of your computer's display adapt to the time of day, warm "
+"at night and like sunlight during the day."
 msgstr ""
-"Beállítja a fényerő, a gamma szintjeit és a színhőmérsékletet a Redshit "
-"segítségével. Ez a kisalkalmazás nem működik együtt a redshift-gtk "
-"csomaggal, ezért távolítsa el ezt a csomagot."
+"A számítógép kijelzőjét a napszakhoz igazítja. Az éjszakai meleg színek a "
+"napközbeni napsugárzás fényéhez hasonlítanak."
 
 #. settings-schema.json->panel-options->title
 msgid "Settings"
@@ -171,7 +176,7 @@ msgid "Continuously adjust color temperature"
 msgstr "Képernyő színhőmérsékletének folyamatos beállítása"
 
 #. settings-schema.json->autoUpdateInterval->units
-msgid "Sec."
+msgid "Seconds"
 msgstr "másodperc"
 
 #. settings-schema.json->autoUpdateInterval->description
@@ -262,6 +267,18 @@ msgstr "K"
 msgid "%"
 msgstr "%"
 
+#. settings-schema.json->smoothTransition->description
+msgid "Smooth transition between day and night"
+msgstr "Finom átmenet a nappali és éjszakai beállítás között"
+
+#. settings-schema.json->transitionDuration->units
+msgid "Minutes"
+msgstr "perc"
+
+#. settings-schema.json->transitionDuration->description
+msgid "Transition Duration"
+msgstr "Átmenet hossza"
+
 #. settings-schema.json->manualNightTime->description
 msgid "Use Manual Night Time"
 msgstr "Kézi éjszakai mód használata"
@@ -313,7 +330,7 @@ msgstr ""
 msgid ""
 "When update to a new version make sure you reset the configs to default by "
 "deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
-" You will lost all your configs."
+"You will lost all your configs."
 msgstr ""
 "Új verzióra történő frissítéskor, állítsa vissza a beállításokat az "
 "alapértelmezésre, a „/.cinnamon/configs/qredshift@quintao/qredshift@quintao."
@@ -330,3 +347,19 @@ msgstr ""
 "tehet fel a kisalkalmazással kapcsolatban a közösségnek a Github fiókjával "
 "bejelentkezve. A webhelyen az ismert hibákról, hibaelhárításról, változási "
 "megjegyzésekről és egyebekről is olvashat."
+
+#~ msgid "may conflict with this applet, it is highly recommended removing it."
+#~ msgstr ""
+#~ "a kisalkalmazás nem működik együtt ezzel a kisalkalmazással, ezért "
+#~ "távolítsa el azt a csomagot."
+
+#~ msgid ""
+#~ "Sets brightness, gamma levels and color temperature with Redshift. This "
+#~ "applet conflicts with redshift-gtk, make sure you remove it."
+#~ msgstr ""
+#~ "Beállítja a fényerő, a gamma szintjeit és a színhőmérsékletet a Redshit "
+#~ "segítségével. Ez a kisalkalmazás nem működik együtt a redshift-gtk "
+#~ "csomaggal, ezért távolítsa el ezt a csomagot."
+
+#~ msgid "Sec."
+#~ msgstr "másodperc"

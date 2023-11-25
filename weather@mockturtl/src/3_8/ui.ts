@@ -49,7 +49,7 @@ export class UI {
 		this.App = app;
 		this.menuManager = new PopupMenuManager(this.App);
 		this.menu = new AppletPopupMenu(this.App, orientation);
-		// this.menu.setCustomStyleClass and 
+		// this.menu.setCustomStyleClass and
 		//this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
 		// Doesn't do shit, setting class on the box instead.
 		this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
@@ -61,6 +61,13 @@ export class UI {
 		this.BuildPopupMenu();
 		// Subscriptions
 		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this); // on theme change
+		this.App.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged));
+	}
+
+	private OnConfigChanged = (config: Config, confChange: any, data: WeatherData) => {
+		if (this.App.Provider == null)
+			return;
+		this.Display(data, config, this.App.Provider);
 	}
 
 	public Toggle(): void {
@@ -103,6 +110,7 @@ export class UI {
 	public Rebuild(config: Config): void {
 		this.ShowLoadingUi();
 		this.App.config.textColorStyle = this.GetTextColorStyle();
+		this.App.config.ForegroundColor = this.ForegroundColor();
 		this.CurrentWeather.Rebuild(config, this.App.config.textColorStyle);
 		this.HourlyWeather.Rebuild(config, this.App.config.textColorStyle);
 		this.FutureWeather.Rebuild(config, this.App.config.textColorStyle);
@@ -125,9 +133,9 @@ export class UI {
 
 	/**
 	 * Displays weather info in Popup
-	 * @param weather 
-	 * @param config 
-	 * @param provider 
+	 * @param weather
+	 * @param config
+	 * @param provider
 	 */
 	public Display(weather: WeatherData, config: Config, provider: WeatherProvider): boolean {
 		this.CurrentWeather.Display(weather, config);
@@ -146,8 +154,8 @@ export class UI {
 	// Callbacks
 
 	/**
-	 * Resetting flags from Hourly scroll view when theme changed to 
-	 * prevent incorrect height requests, rebuild 
+	 * Resetting flags from Hourly scroll view when theme changed to
+	 * prevent incorrect height requests, rebuild
 	 * when switching between light and dark themes
 	 * to recolor some of the text
 	 */
@@ -164,7 +172,7 @@ export class UI {
 	private async PopupMenuToggled(caller: any, data: any) {
 		// data - true is opened, false is closed
 		if (data == false) {
-			await delay(100); // Closing after popup menu is closed 
+			await delay(100); // Closing after popup menu is closed
 			this.HideHourlyWeather();
 		}
 	}
@@ -173,7 +181,7 @@ export class UI {
 	// Utils
 
 	/**
-	 * 
+	 *
 	 * @param color Background color
 	 */
 	private IsLightTheme(): boolean {
@@ -190,17 +198,16 @@ export class UI {
 	/**
 	 * @returns color in hex styling
 	 */
-	private ForegroundColor(): string {
+	private ForegroundColor(): imports.gi.Clutter.Color {
 		// Get hex color without alpha, because it is not supported in css
-		const hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
-		return hex;
+		return this.menu.actor.get_theme_node().get_foreground_color();
 	}
 
 	private GetTextColorStyle(): string {
 		let hexColor: string | null = null;
 		if (this.lightTheme) {
-			// Darken default foreground color
-			hexColor = ShadeHexColor(this.ForegroundColor(), -0.40);
+			// Darken default foreground color, Get hex color without alpha, because it is not supported in css
+			hexColor = ShadeHexColor(this.ForegroundColor().to_string().substring(0, 7), -0.40);
 		}
 		return "color: " + hexColor;
 	}
@@ -221,15 +228,13 @@ export class UI {
 		this.HourlySeparator.Hide();
 
 		// Add everything to the PopupMenu
-		const mainBox = new BoxLayout({ vertical: true })
-		mainBox.add_actor(this.CurrentWeather.actor)
-		mainBox.add_actor(this.HourlySeparator.Actor);
-		mainBox.add_actor(this.HourlyWeather.actor);
-		mainBox.add_actor(this.ForecastSeparator.Actor);
-		mainBox.add_actor(this.FutureWeather.actor);
-		mainBox.add_actor(this.BarSeparator.Actor);
-		mainBox.add_actor(this.Bar.Actor);
-		this.menu.addActor(mainBox);
+		this.menu.addActor(this.CurrentWeather.actor)
+		this.menu.addActor(this.HourlySeparator.Actor);
+		this.menu.addActor(this.HourlyWeather.actor);
+		this.menu.addActor(this.ForecastSeparator.Actor);
+		this.menu.addActor(this.FutureWeather.actor);
+		this.menu.addActor(this.BarSeparator.Actor);
+		this.menu.addActor(this.Bar.Actor);
 	}
 
 	/** Destroys UI first then shows initial UI */
@@ -237,7 +242,7 @@ export class UI {
 		this.CurrentWeather.Destroy();
 		this.FutureWeather.Destroy();
 		this.Bar.Destroy()
-		this.CurrentWeather.actor.set_child(new Label({
+		this.CurrentWeather.actor.add_actor(new Label({
 			text: _('Loading current weather ...')
 		}))
 		this.FutureWeather.actor.set_child(new Label({
@@ -265,7 +270,7 @@ export class UI {
 	private async ShowHourlyWeather(animate: boolean = true): Promise<void> {
 		this.HourlySeparator.Show();
 		this.Bar.SwitchButtonToHide();
-		await this.HourlyWeather.Show(animate);
+		await this.HourlyWeather.Show(this.menu.actor.width, animate);
 	}
 
 	private async HideHourlyWeather(animate: boolean = true): Promise<void> {

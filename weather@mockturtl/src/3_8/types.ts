@@ -19,6 +19,8 @@ export interface WeatherProvider {
 	readonly maxHourlyForecastSupport: number;
 	readonly website: string;
 	readonly remainingCalls: number | null;
+	readonly supportHourlyPrecipChance: boolean;
+    readonly supportHourlyPrecipVolume: boolean;
 
 	GetWeather(loc: LocationData): Promise<WeatherData | null>;
 }
@@ -40,17 +42,17 @@ export interface WeatherData {
 		city?: string | undefined,
 		country?: string | undefined,
 		timeZone?: string | undefined,
-		url?: string,
-		tzOffset?: number
+		url?: string | undefined,
+		tzOffset?: number | undefined
 	},
 	stationInfo?: {
 		/** in metres */
 		distanceFrom: number | undefined,
-		name?: string,
+		name?: string | undefined,
 		lat?: number,
 		lon?: number,
 		area?: string
-	}
+	} | undefined,
 	/** preferably in UTC */
 	sunrise: DateTime | null,
 	/** preferably in UTC */
@@ -72,7 +74,7 @@ export interface WeatherData {
 	condition: Condition
 	forecasts: ForecastData[];
 	hourlyForecasts?: HourlyForecastData[] | undefined
-	extra_field?: APIUniqueField;
+	extra_field?: APIUniqueField | undefined;
 	immediatePrecipitation?: ImmediatePrecipitation;
 }
 
@@ -95,11 +97,11 @@ interface StringAPIUniqueField extends BaseAPIUniqueField {
 }
 
 
-/** 
+/**
  * percent: value is a number from 0-100 (or more)
- * 
+ *
  * temperature: value is number in Kelvin
- * 
+ *
  * string:  is a string
 */
 type ExtraField = "percent" | "temperature" | "string";
@@ -116,7 +118,6 @@ export interface ForecastData {
 
 export type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
 export interface HourlyForecastData {
-	/** Set to 12:00 if possible */
 	date: DateTime;
 	/** Kelvin */
 	temp: number | null;
@@ -154,11 +155,11 @@ export interface AppletError {
 }
 
 /** hard will not force a refresh and cleans the applet ui.
- * 
+ *
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 export type ErrorSeverity = "hard" | "soft" | "silent";
-export type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk" | "us-weather";
+export type ApiService = "ipapi" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk" | "us-weather" | "pirate_weather";
 export type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
 	"location not found" | "no network response" | "no api response" | "location not covered" |
 	"bad api response - non json" | "bad api response" | "no response body" |

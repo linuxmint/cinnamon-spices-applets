@@ -70,7 +70,7 @@
         "net_g": {
             "type": "section",
             "title": "General",
-            "keys": ["net_enabled", "net_override_graph_width", "net_graph_width"]
+            "keys": ["net_enabled", "net_override_graph_width", "net_graph_width", "net_minimum_graph_scale"]
         },
         "net_c": {
             "type": "section",
@@ -295,6 +295,16 @@
         "description": "Graph width",
         "units": "pixels",
         "dependency": "net_override_graph_width"
+    },
+    "net_minimum_graph_scale": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 1000000,
+        "step": 10,
+        "description": "Minimum graph scale",
+        "units": "Mb/s",
+        "tooltip": "The minimum scale for the graph in Megabits per second.\nThe graph will not scale below this minimum, but it will automatically scale if the network speed exceeds this value.\n\nTo always automatically scale, set the value to 0."
     },
     "net_color_0": {
         "type": "colorchooser",

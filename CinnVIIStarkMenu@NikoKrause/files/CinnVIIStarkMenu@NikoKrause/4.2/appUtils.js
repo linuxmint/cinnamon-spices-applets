@@ -1,14 +1,18 @@
 const Cinnamon = imports.gi.Cinnamon;
 const CMenu = imports.gi.CMenu;
 
-const Util = imports.misc.util;
+function graphemeBaseChars(s) {
+    //decompose and remove discritics (blocks: Combining Diacritical Marks,
+    //Combining Diacritical Marks Extended and Combining Diacritical Marks Supplement)
+    return s.normalize('NFKD').replace(/[\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF]/g, "");
+}
 
 let appsys = Cinnamon.AppSystem.get_default();
 
 // sort apps by their latinised name
 function appSort(a, b) {
-    a = Util.latinise(a[0].get_name().toLowerCase());
-    b = Util.latinise(b[0].get_name().toLowerCase());
+    a = graphemeBaseChars(a[0].get_name()).toLocaleUpperCase();
+    b = graphemeBaseChars(b[0].get_name()).toLocaleUpperCase();
     return a > b;
 }
 

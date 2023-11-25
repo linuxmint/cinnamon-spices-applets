@@ -1,0 +1,64 @@
+# System Controls Applet
+# Copyright (C) 2022
+# Rick Calixte <10281587+rcalixte@users.noreply.github.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-16 18:19-0400\n"
+"PO-Revision-Date: 2023-09-16 18:20-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#. metadata.json->name
+#: 5.4/applet.js:28
+msgid "System Controls"
+msgstr "Systemsteuerung"
+
+#: 5.4/applet.js:61
+msgid "Restart Cinnamon"
+msgstr "Cinnamon neustarten"
+
+#: 5.4/applet.js:69
+msgid "Lock Screen"
+msgstr "Bildschirm sperren"
+
+#: 5.4/applet.js:91 5.4/applet.js:100 5.4/applet.js:108
+msgid "Switch User"
+msgstr "Benutzer wechseln"
+
+#: 5.4/applet.js:117
+msgid "Log Out"
+msgstr "Abmelden"
+
+#: 5.4/applet.js:125
+msgid "Suspend"
+msgstr "Bereitschaft"
+
+#: 5.4/applet.js:131
+msgid "Hibernate"
+msgstr "Ruhezustand"
+
+#: 5.4/applet.js:139
+msgid "Restart"
+msgstr "Neustarten"
+
+#: 5.4/applet.js:145
+msgid "Power Off"
+msgstr "Ausschalten"
+
+#. metadata.json->description
+msgid ""
+"A simple system controls applet to restart Cinnamon, lock the screen, switch "
+"users, log off, suspend, hibernate, reboot, or power off the computer"
+msgstr ""
+"Einfaches Systemsteuerungs-Applet, mit dem man Cinnamon neustarten, den "
+"Bildschirm sperren, den Benutzer wechseln, sich abmelden und den Rechner in "
+"Bereitschaft oder Ruhezustand setzen, neustarten oder ausschalten kann"

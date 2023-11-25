@@ -7,58 +7,58 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-08 19:11+0200\n"
-"PO-Revision-Date: 2019-09-08 19:13+0200\n"
+"POT-Creation-Date: 2021-02-24 20:57+0100\n"
+"PO-Revision-Date: 2023-04-26 21:31+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:144
+#: applet.js:148
 msgid "(Right click to open folder)"
 msgstr "(Clic droit pour ouvrir son dossier)"
 
-#: applet.js:166
+#: applet.js:170
 msgid "Places"
 msgstr "Emplacements"
 
-#: applet.js:281
+#: applet.js:284
 msgid "Search Home Folder"
 msgstr "Rechercher dans mon dossier personnel"
 
-#: applet.js:304
+#: applet.js:307
 msgid "SYSTEM"
 msgstr "SYSTÈME"
 
-#: applet.js:313
+#: applet.js:316
 msgid "Search File System"
 msgstr "Rechercher dans le système de fichiers"
 
-#: applet.js:338
+#: applet.js:341
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTS RÉCENTS"
 
-#: applet.js:352
+#: applet.js:355
 msgid "Clear"
 msgstr "Effacer"
 
-#: applet.js:395
+#: applet.js:398
 msgid "Computer"
 msgstr "Ordinateur"
 
-#: applet.js:401
+#: applet.js:404
 msgid "File System"
 msgstr "Système de fichiers"
 
-#: applet.js:417
+#: applet.js:420
 msgid "Network"
 msgstr "Réseau"
 
-#: applet.js:554
+#: applet.js:560
 msgid "Trash"
 msgstr "Corbeille"
 
@@ -131,8 +131,8 @@ msgid "Skipping"
 msgstr "Ignoré"
 
 #: search.py:259
-msgid " - direcotry already searched"
-msgstr " - dossier déjà exploré"
+msgid " - directory already searched"
+msgstr " - dossier déjà parcouru"
 
 #. metadata.json->name
 msgid "Places Center"
@@ -298,27 +298,27 @@ msgstr "Montrer les Documents Récents"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "10"
-msgstr ""
+msgstr "10"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "15"
-msgstr ""
+msgstr "15"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "20"
-msgstr ""
+msgstr "30"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "25"
-msgstr ""
+msgstr "25"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "30"
-msgstr ""
+msgstr "30"
 
 #. settings-schema.json->recentSizeLimit->options
 msgid "All Recent Documents"

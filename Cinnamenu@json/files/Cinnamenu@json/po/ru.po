@@ -496,7 +496,7 @@ msgstr ""
 msgid "Show favorites on sidebar"
 msgstr "Показывать избранное на боковой панели"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr "Показывать значки избранных приложений и файлов на боковой панели"
 
 msgid "Show recent items"
