@@ -1,3 +1,6 @@
+### v1.10.1~20231126
+  * Remove libmpv1 or libmpv2 dependency for LM and Debian.
+
 ### v1.10.0~20231126
   * Added the ability to swap artist and song title for certain radio stations.
 
