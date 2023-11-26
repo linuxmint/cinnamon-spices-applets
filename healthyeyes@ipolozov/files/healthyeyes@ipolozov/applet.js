@@ -16,7 +16,7 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
         this.set_applet_icon_name("green");
-        this.set_applet_tooltip("look away from the screen for a while when the circle is red");
+        this.set_applet_tooltip("Look away from the screen for a while when the circle is red, then click the circle to turn it back to green.");
 
         this.refresh();
 	  	  this.timeout = Mainloop.timeout_add_seconds(10, Lang.bind(this, this.refresh));
@@ -31,11 +31,12 @@ MyApplet.prototype = {
         if (minute == 0 || minute == 30) {
             this.set_applet_icon_name("red");
         } 
-        else {
-            this.set_applet_icon_name("green");
-        }
 
         return this.keepUpdating;
+    },
+
+    on_applet_clicked: function() {
+	this.set_applet_icon_name("green");
     },
 
   on_applet_removed_from_panel: function() {
