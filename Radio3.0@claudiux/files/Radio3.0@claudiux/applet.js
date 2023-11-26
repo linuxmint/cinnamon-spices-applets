@@ -2002,7 +2002,7 @@ WebRadioReceiverAndRecorder.prototype = {
 
   change_volume_in_radio_tooltip: function() {
     //log("change_volume_in_radio_tooltip");
-    let title = "" + this.songTitle;
+    var title = "" + this.songTitle;
     title = title.replace(/\"/g, "");
 
     if (this.radioNameBolded === undefined)
@@ -2012,9 +2012,12 @@ WebRadioReceiverAndRecorder.prototype = {
     //~ if (title.length > 0)
       //~ _tooltip += title + "\n";
     if (title.length > 0) {
-      let artist = "";
+      var artist = "";
       if (title.includes(" - ")) {
         [artist, title] = title.split(" - ");
+        //~ if (this.artist_title_swap) {
+          //~ [artist, title] = [title, artist];
+        //~ }
         if (artist.length > 0)
           _tooltip += "<i><b>" + artist.replace(/\"/g, "") + "</b></i>\n";
       }
@@ -2048,13 +2051,16 @@ WebRadioReceiverAndRecorder.prototype = {
       this.radioNameBolded = this.in_bold(this.get_radio_name(this.last_radio_listened_to, "set_radio_tooltip_to_default_one"));
       _tooltip = "" + this.radioNameBolded + this.codecAndBitrate;
 
-      let title = "" + this.songTitle; // this.get_mpv_title();
+      var title = "" + this.songTitle; // this.get_mpv_title();
 
       if (title.length > 0) {
-        let artist = "";
+        var artist = "";
         if (title.includes(" - ")) {
           [artist, title] = title.split(" - ");
-          if (artist.length > 0)
+          //~ if (this.artist_title_swap) {
+            //~ [artist, title] = [title, artist];
+          //~ }
+        if (artist.length > 0)
             _tooltip += "\n<i><b>" + artist.replace(/\"/g, "") + "</b></i>";
         }
         _tooltip += "\n" + title.replace(/\"/g, "");
@@ -2787,6 +2793,11 @@ WebRadioReceiverAndRecorder.prototype = {
     let is_recording = pid != null;
 
     let has_no_title = title.length===0 || title.endsWith(".mp3") || title.endsWith(".aac");
+
+    if (!has_no_title && title.includes(" - ") && this.artist_title_swap) {
+      let [_title, _artist] = title.split(" - ");
+      title = ""+_artist+" - "+_title;
+    }
 
     this.songTitle = title;
 
@@ -5546,6 +5557,22 @@ WebRadioReceiverAndRecorder.prototype = {
       }
     }
 
+    radios = null;
+    return _ret
+  },
+
+  get artist_title_swap() {
+    var _ret = false;
+    let radios = this.settings.getValue("radios");
+    for (let radio of radios) {
+      if (radio.url == undefined || radio.name == undefined || !radio.inc)
+        continue;
+      let url = "" + radio.url.trim();
+      if (url.length !== 0 && url === this.last_radio_listened_to) {
+        _ret = radio.author_title_swap === true;
+        break;
+      }
+    }
     radios = null;
     return _ret
   },
