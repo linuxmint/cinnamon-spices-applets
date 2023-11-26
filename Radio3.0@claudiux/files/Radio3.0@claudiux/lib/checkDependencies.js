@@ -40,7 +40,7 @@ const NEEDS_FONTS_SYMBOLA = false;
  *
  * Example: To install the executable 'sox' and the library 'libsox-fmt-mp3.so', we need to install two packages in
  * Debian and derivatives distros (default) and only one package (named sox) in Arch and Fedora distros.
-const DEPENDENCIES = {
+var DEPENDENCIES = {
   "default": [
     ["sox", "/usr/bin/sox",  "sox"],
     ["", "/usr/share/doc/libsox-fmt-mp3/copyright", "libsox-fmt-mp3"]
@@ -66,7 +66,6 @@ var DEPENDENCIES = {
   "default": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
     ["wget", "/usr/bin/wget", "wget"],
-    ["", "/usr/share/doc/libmpv1/copyright", "libmpv1"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
     ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
@@ -94,7 +93,6 @@ var DEPENDENCIES = {
   "debian": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
     ["wget", "/usr/bin/wget", "wget"],
-    ["", "/usr/lib/x86_64-linux-gnu/libmpv.so", "libmpv?"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
     ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
