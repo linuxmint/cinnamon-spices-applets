@@ -1,3 +1,6 @@
+### v1.11.1~20231128
+  * Moves the "Do not check dependencies" option from the Settings Behavior tab to the context menu. This avoids error messages.
+
 ### v1.11.0~20231128
   * Fixes dependency issues.
   * Option "Do not check about dependencies" works fine now.

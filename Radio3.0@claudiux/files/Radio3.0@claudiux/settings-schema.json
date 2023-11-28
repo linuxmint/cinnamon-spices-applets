@@ -198,8 +198,7 @@
       "title": "Start-up",
       "keys": [
         "switch-on-last-station-at-start-up",
-        "volume-at-startup",
-        "dont-check-dependencies"
+        "volume-at-startup"
       ]
     },
     "sectionBehaviorVolumeStep": {
@@ -816,7 +815,7 @@
     "tooltip": "If set, then this will change the volume level starting a new radio, in percentage of the general volume level.\nDefault is (Undefined): The volume level remains unchanged.\n\nPlease note that you can change the volume level scrolling on this applet icon, or using the slider in the context menu."
   },
   "dont-check-dependencies": {
-    "type": "switch",
+    "type": "generic",
     "description": "Do not check about dependencies",
     "default": false
   },
