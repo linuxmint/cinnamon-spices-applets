@@ -1127,7 +1127,7 @@ WebRadioReceiverAndRecorder.prototype = {
   get_user_settings: function() {
     //log("get_user_settings");
 
-    this.settings.bind("dont-check-dependencies", "dont_check_dependencies");
+    this.settings.bind("dont-check-dependencies", "dont_check_dependencies", this.on_option_menu_reload_this_applet_clicked.bind(this));
     this.settings.bind("recentRadios", "recentRadios");
     this.settings.bind("volume-step", "volume_step");
     this.settings.bind("volume-at-startup", "volume_at_startup");
@@ -2822,8 +2822,9 @@ WebRadioReceiverAndRecorder.prototype = {
           this.rec_format
         );
       } else {
-        command = `%s --no-stop-screensaver --no-terminal --no-video --no-cache --load-scripts=no --metadata-codepage=auto --stream-dump="%s/%s.%s" %s &`.format(
+        command = `%s --no-stop-screensaver --no-terminal --no-video --no-cache --load-scripts=no %s --metadata-codepage=auto --stream-dump="%s/%s.%s" %s &`.format(
           MPV_PROGRAM(),
+          (""+this.rec_format === "flac") ? "--oac=flac" : "",
           _rec_folder,
           title_with_date,
           this.rec_format,
@@ -3205,8 +3206,9 @@ WebRadioReceiverAndRecorder.prototype = {
         this.rec_format
       );
     } else {
-      command = `%s --no-stop-screensaver --no-terminal --no-video --no-cache --load-scripts=no --metadata-codepage=auto --stream-dump="%s/%s.%s" %s &`.format(
+      command = `%s --no-stop-screensaver --no-terminal --no-video --no-cache --load-scripts=no %s --metadata-codepage=auto --stream-dump="%s/%s.%s" %s &`.format(
         MPV_PROGRAM(),
+        (""+this.rec_format === "flac") ? "--oac=flac" : "",
         _rec_folder,
         title.replace(/\"/g, '') + "_" + date,
         this.rec_format,
@@ -3478,20 +3480,27 @@ WebRadioReceiverAndRecorder.prototype = {
     //~ log("['1', '3', '4', '5', '6', '7', '9']: "+this.to_ranges(['1', '3', '4', '5', '6', '7', '9']), true);
     //~ log("['1', '2', '3', '5', '6', '8', '9']: "+this.to_ranges(['1', '2', '3', '5', '6', '8', '9']), true);
 
+    // Install or update translations, if any:
+    if (!are_translations_installed()) install_translations();
 
     // Check about dependencies:
     this.checkDepInterval = undefined;
-    this.dependencies = new Dependencies();
+    this.dependencies = null;
+
+    if (!this.dont_check_dependencies)
+      this.dependencies = new Dependencies();
     this.depCount = 0;
-    if (this.dont_check_dependencies || this.dependencies.areDepMet()) {
+    //~ log("this.dont_check_dependencies: "+this.dont_check_dependencies, true);
+    //~ log("this.dependencies.areDepMet(): "+this.dependencies.areDepMet(), true);
+    if (this.dont_check_dependencies || (this.dependencies && this.dependencies.areDepMet())) {
       // (Consider) All dependencies are installed.
+      //~ log("All dependencies are installed.", true);
       if (this.checkDepInterval != undefined) {
         clearInterval(this.checkDepInterval);
         this.checkDepInterval = undefined;
       }
 
-      // Install or update translations, if any:
-      if (!are_translations_installed()) install_translations();
+
 
       this.songTitle = "";
       if (this.settings.getValue("reset-recents"))
@@ -3509,13 +3518,15 @@ WebRadioReceiverAndRecorder.prototype = {
 
     if (!this.ytdlp_updated) {
       log("Updating yt-dlp.");
-      this.checkDepInterval = setInterval(
+      this.checkYTDLPInterval = setInterval(
         () => {
           spawnCommandLineAsyncIO(
             YTDLP_UPDATE_BASH_SCRIPT,
             Lang.bind(this, (out, err, exitCode) => {
               if (exitCode === 0) {
                 this.ytdlp_updated = true;
+                clearInterval(this.checkYTDLPInterval);
+                this.checkYTDLPInterval = undefined;
               } else {
                 let icon = new Icon({
                   icon_name: 'webradioreceiver',
@@ -3538,6 +3549,11 @@ WebRadioReceiverAndRecorder.prototype = {
     if (this.checkDepInterval != undefined) {
       clearInterval(this.checkDepInterval);
       this.checkDepInterval = undefined;
+    }
+
+    if (this.checkYTDLPInterval != undefined) {
+      clearInterval(this.checkYTDLPInterval);
+      this.checkYTDLPInterval = undefined;
     }
 
     // Stop looping:

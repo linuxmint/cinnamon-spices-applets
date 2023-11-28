@@ -1,3 +1,7 @@
+### v1.11.0~20231128
+  * Fixes dependency issues.
+  * Option "Do not check about dependencies" works fine now.
+
 ### v1.10.1~20231126
   * Remove libmpv1 or libmpv2 dependency for LM and Debian.
 
