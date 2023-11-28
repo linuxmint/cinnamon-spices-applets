@@ -175,7 +175,7 @@ class InputSourceApp extends Applet.IconApplet {
       // Set a setting submenu
       let subMenu = new PopupMenu.PopupSubMenuMenuItem(_("Options"));
       this.menu.addMenuItem(subMenu);
-      item = new PopupMenu.PopupMenuItem(_("Clear monitors cache"));
+      item = new PopupMenu.PopupMenuItem(_("Clear monitor cache"));
       item.connect("activate", Lang.bind(this, function()
          {
             this.settings.setValue("monitor-cache", []);
@@ -192,6 +192,12 @@ class InputSourceApp extends Applet.IconApplet {
                }
             }
             this.updateToolTip();
+         }));
+      subMenu.menu.addMenuItem(item);
+      item = new PopupMenu.PopupMenuItem(_("Help"));
+      item.connect("activate", Lang.bind(this, function()
+         {
+            Util.spawnCommandLineAsync("/usr/bin/xdg-open https://cinnamon-spices.linuxmint.com/applets/view/382");
          }));
       subMenu.menu.addMenuItem(item);
       // Add a separator
