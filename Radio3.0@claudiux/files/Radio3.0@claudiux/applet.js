@@ -810,6 +810,32 @@ class R3Button {
     }
 }
 
+class R3WebpageMenuItem extends PopupBaseMenuItem {
+  constructor(parent, score, params) {
+    super(params);
+    this.parent = parent;
+
+    let label = new Label({ text: _("Radio3.0 web page...") });
+    this.addActor(label);
+
+    let stars = new BoxLayout({ style: 'spacing: .25em' });
+    let star_icon = new Icon({ icon_name: 'starred', icon_type: IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
+    let star_count = new Label({ text: score.toString() });
+    stars.add_actor(star_icon);
+    stars.add_actor(star_count);
+    this.addActor(stars);
+  }
+
+  activate() {
+    spawnCommandLineAsync("bash -c 'xdg-open https://cinnamon-spices.linuxmint.com/applets/view/360'");
+    super.activate();
+  }
+
+  destroy() {
+    super.destroy();
+  }
+}
+
 class TitleSeparatorMenuItem extends PopupBaseMenuItem {
   constructor(title, icon_name, reactive=false) {
     super({ reactive: reactive });
@@ -1188,6 +1214,9 @@ WebRadioReceiverAndRecorder.prototype = {
     // YT:
     this.settings.bind("yt-progress-interval", "yt_interval");
     this.settings.bind("yt-cookies-from", "cookies_from");
+
+    // Score:
+    this.settings.bind("score", "score");
 
     // Help TextViews:
     this.populate_help_textviews()
@@ -3483,6 +3512,15 @@ WebRadioReceiverAndRecorder.prototype = {
     // Install or update translations, if any:
     if (!are_translations_installed()) install_translations();
 
+    spawnCommandLineAsyncIO(SCRIPTS_DIR+"/get-score.sh", Lang.bind(this, (stdout, err, exitCode) => {
+      try {
+        //~ log("score: "+stdout, true);
+        this.settings.setValue("score", 1*stdout);
+      } catch(e) {
+        logError("Reading score error: "+e)
+      }
+    }));
+
     // Check about dependencies:
     this.checkDepInterval = undefined;
     this.dependencies = null;
@@ -4304,10 +4342,11 @@ WebRadioReceiverAndRecorder.prototype = {
 
     // Web page...
     if (this.context_menu_item_webpage == null) {
-      this.context_menu_item_webpage = new PopupIconMenuItem(_("Radio3.0 web page..."),
-        "web-browser",
-        IconType.SYMBOLIC);
-      this.context_menu_item_webpage.connect('activate', () => spawnCommandLineAsync("bash -c 'xdg-open https://cinnamon-spices.linuxmint.com/applets/view/360'"));
+      this.context_menu_item_webpage = new R3WebpageMenuItem(this, this.score);
+      //~ this.context_menu_item_webpage = new PopupIconMenuItem(_("Radio3.0 web page..."),
+        //~ "web-browser",
+        //~ IconType.SYMBOLIC);
+      //~ this.context_menu_item_webpage.connect('activate', () => spawnCommandLineAsync("bash -c 'xdg-open https://cinnamon-spices.linuxmint.com/applets/view/360'"));
     }
     if (items.indexOf(this.context_menu_item_webpage) == -1) {
       this._applet_context_menu.addMenuItem(this.context_menu_item_webpage);

@@ -1702,5 +1702,9 @@
   "scheduling-allowed": {
     "type": "generic",
     "default": true
+  },
+  "score": {
+    "type": "generic",
+    "default": 0
   }
 }
