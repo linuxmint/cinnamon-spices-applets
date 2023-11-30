@@ -107,7 +107,7 @@ Radio3.0 uses:
 
   * _sox_ (Sound eXchange) to record in a file the radio stream, or rather the sound coming out of your sound card.
 
-  * _pacmd_ (PulseAudio Command) which is a _pulseaudio_ tool.
+  * _pacmd_ (PulseAudio Command) which is a _pulseaudio_ tool, usable even with _pipewire_.
 
   * _at_ to schedule recordings.
 
@@ -135,7 +135,7 @@ You can also install _Pulse Effects_ to use several sound effects (reverb, etc) 
 
 `sudo apt update`
 
-`sudo apt install mpv libmpv1 libmpv-dev sox libsox-fmt-all pulseaudio pulseaudio-utils at libnotify-bin youtube-dl ffmpeg ffmpegthumbnailer python3-polib python3-brotli`
+`sudo apt install mpv libmpv-dev sox libsox-fmt-all pulseaudio-utils at libnotify-bin youtube-dl ffmpeg ffmpegthumbnailer python3-polib python3-brotli`
 
 Optionally:
 
@@ -144,7 +144,7 @@ Optionally:
 <a name="DepArch"></a>
 ### Arch
 
-`sudo pacman -Syu mpv sox pulseaudio at libnotify youtube-dl ffmpeg ffmpegthumbnailer python-brotli`
+`sudo pacman -Syu mpv sox at libnotify youtube-dl ffmpeg ffmpegthumbnailer python-brotli`
 
 `yay -S python-polib`
 
@@ -161,7 +161,7 @@ To install Yay on in Arch Linux and other Arch-based systems, run the following 
 <a name="DepFedora"></a>
 ### Fedora
 
-`sudo dnf install mpv sox pulseaudio at libnotify yt-dlp ffmpeg gstreamer1-libav python3-brotli python3-polib`
+`sudo dnf install mpv sox at libnotify yt-dlp ffmpeg gstreamer1-libav python3-brotli python3-polib`
 
 [Return to Table Of Contents](#TOC)
 
@@ -210,7 +210,7 @@ The best place is near the _Sound_ applet. So you can easily control the general
 
 This applet has a menu (left-click) and a contextual menu (right-click).
 
-Some actions can be made using middle-click or scrolling on the icon.
+Some actions can be made using middle-click (play/stop radio) or scrolling on the icon (volume change).
 
 <a name="HowToAdd"></a>
 ### How to add radio stations to my list?
@@ -244,7 +244,7 @@ While listening a radio, the color of the symbolic icon changes (green by defaul
 
 While no radio is playing, middle-click on the icon.
 
-(Another way : Click on the first radio in the *Recently Played Stations* section of the menu.)
+Another way : Click on the first radio in the *Recently Played Stations* section of the menu.
 
 <a name="ListenAtStartup"></a>
 ### Play at Cinnamon startup the last radio you listened to
