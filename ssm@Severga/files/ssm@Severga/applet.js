@@ -58,6 +58,9 @@ SSMApplet.prototype = {
 			this._applet_tooltip.set_text(_("Required GTop package missing!"));
 		} else {
 			this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace; font-size: 9pt');
+			this._applet_context_menu.addMenuItem(new Applet.MenuItem(_("Reset Peak Temperature"), "go-bottom-symbolic", () => {
+				this.maxTempEver = -283;
+			}));
 			this._applet_context_menu.addMenuItem(new Applet.MenuItem(_("Clear Cache"), "user-trash", () => {
 				let [success, argv] = GLib.shell_parse_argv("pkexec sh -c 'echo 1 >/proc/sys/vm/drop_caches'");
 				let flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD;
@@ -103,6 +106,8 @@ SSMApplet.prototype = {
 			this.memDataProvider = new MemDataProvider();
 			this.netDataProvider = new NetDataProvider();
 			
+			this.maxTempEver = -283;
+			
 			this.timeoutR = 0;
 			this.timeout = Mainloop.timeout_add_seconds(1, () => this._update());
 			this.timeout2 = Mainloop.timeout_add_seconds(0.5, () => this._update2());
@@ -145,6 +150,7 @@ SSMApplet.prototype = {
 		} else {
 			this.currentTemp = -283;
 		}
+		if (this.currentTemp > this.maxTempEver) this.maxTempEver = this.currentTemp;
 		this.waitingForSensors = false;
 	},
 	
@@ -152,7 +158,7 @@ SSMApplet.prototype = {
 		let shortInfo, shortInfo2, longInfo, tooltip;
 		[shortInfo, longInfo] = this.cpuDataProvider.data();
 		this.cpuLabel.set_text(shortInfo);
-		tooltip = "<b>" + _("CPUs") + "</b>   " + (this.sensorsFailed || this.currentTemp == -283 ? "" : "(<i>" + this.currentTemp + "°C max</i>)") + "\n" + longInfo + "\n\n";
+		tooltip = "<b>" + _("CPUs") + "</b>   " + (this.sensorsFailed || this.currentTemp == -283 ? "" : "(<i>" + this.currentTemp + _("°C max; ") + this.maxTempEver + _("°C peak") + "</i>)") + "\n" + longInfo + "\n\n";
 		[shortInfo, longInfo] = this.memDataProvider.data();
 		this.memLabel.set_text(shortInfo);
 		tooltip += "<b>" + _("Memory") + "</b> (<i>" + (this.memDataProvider.memSize / 1000000000).toFixed(1) + _("GB") + (this.memDataProvider.swapSize ? "; " + (this.memDataProvider.swapSize / 1000000000).toFixed(1) + _("GB swap") : "") + "</i>)\n" + longInfo +"\n\n";
