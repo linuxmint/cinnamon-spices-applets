@@ -1,7 +1,5 @@
 const { Message, SessionAsync } = imports.gi.Soup;
 
-const httpSession = new SessionAsync();
-
 export interface HTTPParams {
   [key: string]: boolean | string | number | undefined;
 }
@@ -30,9 +28,8 @@ export interface LoadJsonArgs<T1> {
   headers?: Headers;
   onSuccess: (resp: T1) => void;
   onErr: (err: HttpError) => void;
-  onSettled?: () => void
+  onSettled?: () => void;
 }
-
 
 function checkForHttpError(
   message: imports.gi.Soup.Message
@@ -52,48 +49,70 @@ function checkForHttpError(
 
   return errMessage
     ? {
-      code,
-      reason_phrase,
-      message: errMessage,
-    }
+        code,
+        reason_phrase,
+        message: errMessage,
+      }
     : false;
 }
 
-export function makeJsonHttpRequest<T1>(args: LoadJsonArgs<T1>) {
-  const {
-    url,
-    method = "GET",
-    onErr,
-    onSuccess,
-    onSettled,
-    headers,
-  } = args;
+type HttpHandler = {
+  makeJsonHttpRequest: <T1>(args: LoadJsonArgs<T1>) => void;
+};
 
-  const uri = url;
-  // const uri = queryParams ? `${url}?${stringify(queryParams)}` : url
-  const message = Message.new(method, uri);
+const createSoup2HttpHandler = (): HttpHandler => {
+  const httpSession = new SessionAsync();
 
-  if (!message) {
-    throw new Error(`Message Object couldn't be created`);
-  }
+  return {
+    makeJsonHttpRequest: <T1>(args: LoadJsonArgs<T1>) => {
+      const {
+        url,
+        method = "GET",
+        onErr,
+        onSuccess,
+        onSettled,
+        headers,
+      } = args;
 
-  headers &&
-    Object.entries(headers).forEach(([key, value]) => {
-      message.request_headers.append(key, value);
-    });
+      const uri = url;
+      // const uri = queryParams ? `${url}?${stringify(queryParams)}` : url
+      const message = Message.new(method, uri);
 
+      if (!message) {
+        throw new Error(`Message Object couldn't be created`);
+      }
 
-  httpSession.queue_message(message, (session, msgResponse) => {
-    onSettled?.()
-    const error = checkForHttpError(msgResponse);
+      headers &&
+        Object.entries(headers).forEach(([key, value]) => {
+          message.request_headers.append(key, value);
+        });
 
-    if (error) {
-      onErr(error);
-      return;
-    }
+      httpSession.queue_message(message, (session, msgResponse) => {
+        onSettled?.();
+        const error = checkForHttpError(msgResponse);
 
-    // TODO: We should actually check if this is really of type T1
-    const data = JSON.parse(msgResponse.response_body.data) as T1;
-    onSuccess(data);
-  });
-}
+        if (error) {
+          onErr(error);
+          return;
+        }
+
+        // TODO: We should actually check if this is really of type T1
+        const data = JSON.parse(msgResponse.response_body.data) as T1;
+        onSuccess(data);
+      });
+    },
+  };
+};
+
+const createSoup3HttpHandler = (): HttpHandler => {
+  return {
+    makeJsonHttpRequest: <T1>(args: LoadJsonArgs<T1>) => {
+      global.log("todo");
+    },
+  };
+};
+
+export const { makeJsonHttpRequest } =
+  imports.gi.Soup.MAJOR_VERSION == 2
+    ? createSoup2HttpHandler()
+    : createSoup3HttpHandler();

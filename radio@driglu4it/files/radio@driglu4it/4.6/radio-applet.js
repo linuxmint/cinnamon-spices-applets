@@ -5570,7 +5570,6 @@ function createYouTubeDownloadIcon() {
 
 ;// CONCATENATED MODULE: ./src/lib/HttpHandler.ts
 const { Message, SessionAsync } = imports.gi.Soup;
-const httpSession = new SessionAsync();
 function isHttpError(x) {
     return typeof x.reason_phrase === "string";
 }
@@ -5596,30 +5595,45 @@ function checkForHttpError(message) {
         }
         : false;
 }
-function makeJsonHttpRequest(args) {
-    const { url, method = "GET", onErr, onSuccess, onSettled, headers, } = args;
-    const uri = url;
-    // const uri = queryParams ? `${url}?${stringify(queryParams)}` : url
-    const message = Message.new(method, uri);
-    if (!message) {
-        throw new Error(`Message Object couldn't be created`);
-    }
-    headers &&
-        Object.entries(headers).forEach(([key, value]) => {
-            message.request_headers.append(key, value);
-        });
-    httpSession.queue_message(message, (session, msgResponse) => {
-        onSettled === null || onSettled === void 0 ? void 0 : onSettled();
-        const error = checkForHttpError(msgResponse);
-        if (error) {
-            onErr(error);
-            return;
-        }
-        // TODO: We should actually check if this is really of type T1
-        const data = JSON.parse(msgResponse.response_body.data);
-        onSuccess(data);
-    });
-}
+const createSoup2HttpHandler = () => {
+    const httpSession = new SessionAsync();
+    return {
+        makeJsonHttpRequest: (args) => {
+            const { url, method = "GET", onErr, onSuccess, onSettled, headers, } = args;
+            const uri = url;
+            // const uri = queryParams ? `${url}?${stringify(queryParams)}` : url
+            const message = Message.new(method, uri);
+            if (!message) {
+                throw new Error(`Message Object couldn't be created`);
+            }
+            headers &&
+                Object.entries(headers).forEach(([key, value]) => {
+                    message.request_headers.append(key, value);
+                });
+            httpSession.queue_message(message, (session, msgResponse) => {
+                onSettled === null || onSettled === void 0 ? void 0 : onSettled();
+                const error = checkForHttpError(msgResponse);
+                if (error) {
+                    onErr(error);
+                    return;
+                }
+                // TODO: We should actually check if this is really of type T1
+                const data = JSON.parse(msgResponse.response_body.data);
+                onSuccess(data);
+            });
+        },
+    };
+};
+const createSoup3HttpHandler = () => {
+    return {
+        makeJsonHttpRequest: (args) => {
+            global.log("todo");
+        },
+    };
+};
+const { makeJsonHttpRequest } = imports.gi.Soup.MAJOR_VERSION == 2
+    ? createSoup2HttpHandler()
+    : createSoup3HttpHandler();
 
 ;// CONCATENATED MODULE: ./src/ui/RadioPopupMenu/UpdateStationsMenuItem.ts
 
