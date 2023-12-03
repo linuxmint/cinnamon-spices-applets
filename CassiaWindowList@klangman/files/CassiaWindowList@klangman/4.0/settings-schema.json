@@ -47,7 +47,7 @@
     "general-settings" : {
       "type" : "section",
       "title" : "General window list settings",
-      "keys" : ["group-windows", "display-pinned", "synchronize-pinned", "trailing-pinned-behaviour", "show-windows-for-current-monitor", "show-tooltips", "hide-panel-apps"]
+      "keys" : ["group-windows", "display-pinned", "synchronize-pinned", "trailing-pinned-behaviour", "show-windows-for-current-monitor", "show-windows-for-all-workspaces", "show-tooltips", "hide-panel-apps"]
     },
     "general-mouse" : {
       "type" : "section",
@@ -225,6 +225,11 @@
     "default": false,
     "description": "Only show windows on the same monitor",
     "tooltip": "If enabled, this applet instance only manages windows\nthat are displayed on the same monitor"
+  },
+  "show-windows-for-all-workspaces": {
+    "type": "switch",
+    "default": false,
+    "description": "Include windows from all workspaces"
   },
   "show-tooltips": {
     "type": "switch",
