@@ -330,6 +330,7 @@ class InputSourceApp extends Applet.IconApplet {
             item.actor.set_reactive(false);
             this.menu.addMenuItem(item,0);
          }
+         this.exitCode = 0;
       } else {
          let pos = 0;
          for (let i=0 ; i<this.displays.length ; i++) {
