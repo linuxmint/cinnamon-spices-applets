@@ -1,4 +1,8 @@
 
+### 1.2.1
+
+* Add support for Cinnamon 6.0+
+
 ### 1.2
 
 * Moved to officially support Cinnamon 5.4+
