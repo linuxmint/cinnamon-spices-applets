@@ -1,4 +1,6 @@
-const { Message, SessionAsync } = imports.gi.Soup;
+const { Message, SessionAsync, Session } = imports.gi.Soup;
+const { PRIORITY_DEFAULT } = imports.gi.GLib;
+const ByteArray = imports.byteArray;
 
 export interface HTTPParams {
   [key: string]: boolean | string | number | undefined;
@@ -74,9 +76,8 @@ const createSoup2HttpHandler = (): HttpHandler => {
         headers,
       } = args;
 
-      const uri = url;
       // const uri = queryParams ? `${url}?${stringify(queryParams)}` : url
-      const message = Message.new(method, uri);
+      const message = Message.new(method, url);
 
       if (!message) {
         throw new Error(`Message Object couldn't be created`);
@@ -105,9 +106,57 @@ const createSoup2HttpHandler = (): HttpHandler => {
 };
 
 const createSoup3HttpHandler = (): HttpHandler => {
+  const httpSession = new Session() as any;
+
   return {
     makeJsonHttpRequest: <T1>(args: LoadJsonArgs<T1>) => {
-      global.log("todo");
+      const {
+        url,
+        method = "GET",
+        onErr,
+        onSuccess,
+        onSettled,
+        headers,
+      } = args;
+
+      const message = Message.new(method, url);
+
+      if (!message) {
+        throw new Error(`Message Object couldn't be created`);
+      }
+
+      headers &&
+        Object.entries(headers).forEach(([key, value]) => {
+          message.request_headers.append(key, value);
+        });
+
+      httpSession.send_and_read_async(
+        message,
+        PRIORITY_DEFAULT,
+        null,
+        (session: any, result: any) => {
+          const res: imports.gi.GLib.Bytes | null =
+            httpSession.send_and_read_finish(result);
+
+          // TODO: check for error
+          const responseBody =
+            res != null ? ByteArray.toString(ByteArray.fromGBytes(res)) : null;
+
+          if (!responseBody) {
+            onErr({
+              code: 0,
+              reason_phrase: "no network response",
+              message: "no response body",
+            });
+            return;
+          }
+
+          if (responseBody) {
+            const data = JSON.parse(responseBody) as T1;
+            onSuccess(data);
+          }
+        }
+      );
     },
   };
 };

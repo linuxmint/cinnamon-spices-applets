@@ -5569,7 +5569,9 @@ function createYouTubeDownloadIcon() {
 }
 
 ;// CONCATENATED MODULE: ./src/lib/HttpHandler.ts
-const { Message, SessionAsync } = imports.gi.Soup;
+const { Message, SessionAsync, Session } = imports.gi.Soup;
+const { PRIORITY_DEFAULT } = imports.gi.GLib;
+const ByteArray = imports.byteArray;
 function isHttpError(x) {
     return typeof x.reason_phrase === "string";
 }
@@ -5600,9 +5602,8 @@ const createSoup2HttpHandler = () => {
     return {
         makeJsonHttpRequest: (args) => {
             const { url, method = "GET", onErr, onSuccess, onSettled, headers, } = args;
-            const uri = url;
             // const uri = queryParams ? `${url}?${stringify(queryParams)}` : url
-            const message = Message.new(method, uri);
+            const message = Message.new(method, url);
             if (!message) {
                 throw new Error(`Message Object couldn't be created`);
             }
@@ -5625,9 +5626,35 @@ const createSoup2HttpHandler = () => {
     };
 };
 const createSoup3HttpHandler = () => {
+    const httpSession = new Session();
     return {
         makeJsonHttpRequest: (args) => {
-            global.log("todo");
+            const { url, method = "GET", onErr, onSuccess, onSettled, headers, } = args;
+            const message = Message.new(method, url);
+            if (!message) {
+                throw new Error(`Message Object couldn't be created`);
+            }
+            headers &&
+                Object.entries(headers).forEach(([key, value]) => {
+                    message.request_headers.append(key, value);
+                });
+            httpSession.send_and_read_async(message, PRIORITY_DEFAULT, null, (session, result) => {
+                const res = httpSession.send_and_read_finish(result);
+                // TODO: check for error
+                const responseBody = res != null ? ByteArray.toString(ByteArray.fromGBytes(res)) : null;
+                if (!responseBody) {
+                    onErr({
+                        code: 0,
+                        reason_phrase: "no network response",
+                        message: "no response body",
+                    });
+                    return;
+                }
+                if (responseBody) {
+                    const data = JSON.parse(responseBody);
+                    onSuccess(data);
+                }
+            });
         },
     };
 };
@@ -5642,15 +5669,18 @@ const { makeJsonHttpRequest } = imports.gi.Soup.MAJOR_VERSION == 2
 const { File: UpdateStationsMenuItem_File, FileCreateFlags } = imports.gi.Gio;
 const { Bytes } = imports.gi.GLib;
 const saveStations = (stationsUnfiltered) => {
-    const filteredStations = stationsUnfiltered.flatMap(({ name, url }, index) => {
+    const filteredStations = stationsUnfiltered
+        .flatMap(({ name, url }, index) => {
         const isDuplicate = stationsUnfiltered.findIndex((val) => val.name === name && val.url === url) !== index;
         if (isDuplicate)
             return [];
-        if (name.length > 200 || url.length > 200) {
-            // some stations have unnormal long names/urls - probably due to some encoding issue on radio browser api side or so. 
+        const trimmedName = name.trim();
+        const trimmedUrl = url.trim();
+        if (trimmedName.length === 0 || trimmedName.length > 200 || trimmedUrl.length > 200) {
+            // some stations have unnormal long names/urls - probably due to some encoding issue on radio browser api side or so.
             return [];
         }
-        return [[name.trim(), url.trim()]];
+        return [[trimmedName, trimmedUrl]];
     })
         // We need to sort our self - even though they should already be sorted - because some stations are wrongly shown first due to leading spaces
         .sort((a, b) => a[0].localeCompare(b[0]));
@@ -5659,11 +5689,11 @@ const saveStations = (stationsUnfiltered) => {
         file.create(FileCreateFlags.NONE, null);
     }
     file.replace_contents_bytes_async(new Bytes(JSON.stringify(filteredStations)), null, false, FileCreateFlags.REPLACE_DESTINATION, null, (file, result) => {
-        notify('Stations updated successfully');
+        notify("Stations updated successfully");
     });
 };
 function createUpdateStationsMenuItem() {
-    const defaultText = 'Update Radio Stationlist';
+    const defaultText = "Update Radio Stationlist";
     let isLoading = false;
     const menuItem = createSimpleMenuItem({
         text: defaultText,
@@ -5671,8 +5701,8 @@ function createUpdateStationsMenuItem() {
             if (isLoading)
                 return;
             isLoading = true;
-            self.setText('Updating Radio stations...');
-            notify('Upating Radio stations... \n\nThis can take several minutes!');
+            self.setText("Updating Radio stations...");
+            notify("Upating Radio stations... \n\nThis can take several minutes!");
             makeJsonHttpRequest({
                 url: "http://de1.api.radio-browser.info/json/stations",
                 onSuccess: (resp) => saveStations(resp),
@@ -5682,7 +5712,7 @@ function createUpdateStationsMenuItem() {
                 onSettled: () => {
                     self.setText(defaultText);
                     isLoading = false;
-                }
+                },
             });
         },
     });
