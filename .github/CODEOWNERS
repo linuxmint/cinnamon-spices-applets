@@ -101,7 +101,6 @@ printers@linux-man/**                              @linux-man
 profile-switcher@pixunil/**                        @pixunil
 ptt@thbemme/**                                     @thbemme
 qredshift@quintao/**                               @raphaelquintao
-radio@driglu4it/**                                 @jonath92
 rancher@centurix/**                                @centurix
 ratecurrency@magner/**                             @AleksiMagner
 redshift@marvel4u/**                               @marvel4u
@@ -186,6 +185,7 @@ xsession@claudiux/**                               @claudiux
 # paneldo@beatlink
 # places-bookmarks@dmo60.de
 # places-with-terminal@mtwebster
+# radio@driglu4it
 # rwall@typicalfoobar
 # screen-inhibit@mtwebster
 # scripts@paucapo.com
