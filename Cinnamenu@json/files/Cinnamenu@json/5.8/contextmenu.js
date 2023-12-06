@@ -133,7 +133,11 @@ class ContextMenu {
         if (categoryId.startsWith('/')) {
             addMenuItem(new ContextMenuItem(this.appThis, _('Remove category'), 'user-trash',
                         () => {
-                            this.appThis.removeFolderCategory(categoryId);
+                            if (categoryId === GLib.get_home_dir()) {
+                                this.appThis.settings.showHomeFolder = false;
+                            } else {
+                                this.appThis.removeFolderCategory(categoryId);
+                            }
                             this.appThis.display.categoriesView.update();
                             this.close();
                         }));
