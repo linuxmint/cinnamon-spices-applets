@@ -608,7 +608,7 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
 
     this._descBox.natural_width = width;
 
-    let clones = WindowUtils.createWindowClone(this._metaWindow, width, height, true, true);
+    let clones = WindowUtils.createWindowClone(this._metaWindow, width, height, false, true);
     for (let i = 0; i < clones.length; i++) {
       let clone = clones[i];
       this._cloneBox.add_actor(clone.actor);
@@ -1271,17 +1271,13 @@ class WindowListButton {
     let enableTooltips = this._settings.getValue("show-tooltips");
     let hoverEnabled = this._settings.getValue("menu-show-on-hover");
     if (!enableTooltips || !this._tooltip || (hoverEnabled && this._windows.length > 0)) {
-       if (this._tooltip)
+       if (this._tooltip) {
           this._tooltip.set_text("");
-          this._tooltip.preventShow = false
+          this._tooltip.preventShow = false;
+       }
        return;
     }
-    let text = null;
-    if (this._windows.length == 0 || this._currentWindow.get_title()==null || (this._windows.length > 1 && this.getButton1Action()===LeftClickGrouped.Thumbnail)) {
-       text = this._app.get_name();
-    } else {
-       text = this._currentWindow.get_title();
-    }
+    let text = "";
     // If this button's window is associated with a hotkey sequence, then append the hotkey sequence to the tooltip
     let hotKeys = this._applet._keyBindings;
     let hotKeyWindows = this._workspace._keyBindingsWindows;
@@ -1339,15 +1335,23 @@ class WindowListButton {
           }
        }
     }
-
-    // Disable the tooltip if there is no text or the thumbnail menu is configured to automatically popup.
-    if (!text) {
-       this._tooltip.set_text("");
-       this._tooltip.preventShow = true;
+    let title;
+    if (this._windows.length == 0 || this._currentWindow.get_title()==null || (this._windows.length > 1 && this.getButton1Action()===LeftClickGrouped.Thumbnail)) {
+       title = this._app.get_name();
     } else {
-       this._tooltip.set_text( text );
-       this._tooltip.preventShow = false;
+       title = this._currentWindow.get_title();
     }
+    if (majorVersion < 5) {
+       this._tooltip.set_text(title + text);
+    } else {
+       if (text.length > 0 ) {
+          text = "<b>"+title+"</b>"+"<small>"+text+"</small>";
+       }else{
+          text = title;
+       }
+       this._tooltip.set_markup( text );
+    }
+    this._tooltip.preventShow = false;
   }
 
   updateIcon() {
@@ -1827,8 +1831,7 @@ class WindowListButton {
             this._currentWindow.minimize();
           } else {
             this.closeThumbnailMenu();
-            //Main.activateWindow(this._currentWindow);
-            this._currentWindow.activate(0);
+            Main.activateWindow(this._currentWindow);
           }
         } else if (leftGroupedAction == LeftClickGrouped.Thumbnail) {
           if (this.menu && this.menu.isOpen) {
@@ -3089,7 +3092,7 @@ class Workspace {
       return;
     }
 
-    if (metaWindow.get_workspace().index() != this._wsNum && !metaWindow.is_on_all_workspaces()) {
+    if (!this._settings.getValue("show-windows-for-all-workspaces") && metaWindow.get_workspace().index() != this._wsNum && !metaWindow.is_on_all_workspaces()) {
       return;
     }
 
@@ -3176,9 +3179,26 @@ class Workspace {
      }
   }
 
+  removeOtherWorkspaceWindows(){
+     for( let i = this._appButtons.length-1 ; i >= 0 ; i-- ) {
+        let btn = this._appButtons[i];
+        for( let idx = btn._windows.length-1 ; idx >= 0 ; idx-- ) {
+           let window = btn._windows[idx];
+           if (window.get_workspace().index() != this._wsNum) {
+              this._windowRemoved(window, false);
+           }
+        }
+     }
+  }
+
   _updateAllWindowsForMonitor() {
-    let ws = global.screen.get_workspace_by_index(this._wsNum);
-    let windows = ws.list_windows();
+    let windows;
+    if (!this._settings.getValue("show-windows-for-all-workspaces")) {
+       let ws = global.screen.get_workspace_by_index(this._wsNum);
+       windows = ws.list_windows();
+    } else {
+       windows = global.display.list_windows(0);
+    }
     let setting = this._settings.getValue("show-windows-for-current-monitor");
 
     for (let i = 0; i < windows.length; i++) {
@@ -3460,7 +3480,8 @@ class Workspace {
        }
        if (newFocus) {
           if (this._currentFocus && newFocus != this._currentFocus) {
-             this._currentFocus._updateFocus();
+             this._currentFocus.actor.remove_style_pseudo_class("focus");
+             this._currentFocus._updateLabel();
              let pinnedSetting = this._settings.getValue("display-caption-for-pined");
              let capSetting = this._settings.getValue("display-caption-for");
              if (pinnedSetting == PinnedLabel.Focused && capSetting === DisplayCaption.One) {
@@ -4363,12 +4384,22 @@ class WindowList extends Applet.Applet {
     this._signalManager.connect(this._settings, "changed::group-windows", this._onGroupingChanged, this);
     this._signalManager.connect(this._settings, "changed::display-pinned", this._onDisplayPinnedChanged, this);
     this._signalManager.connect(this._settings, "changed::synchronize-pinned", this._onSynchronizePinnedChanged, this);
+    this._signalManager.connect(this._settings, "changed::show-windows-for-all-workspaces", this._onShowOnAllWorkspacesChanged, this);
     this._signalManager.connect(this._settings, "settings-changed", this._onSettingsChanged, this);
 
     if (this._settings.getValue("runWizard")===1) {
        let command = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + this._uuid + "/setupWizard " + this._uuid + " " + this.instance_id;
        Util.spawnCommandLineAsync(command);
     }
+  }
+
+  _onShowOnAllWorkspacesChanged() {
+     if (this._settings.getValue("show-windows-for-all-workspaces")) {
+        this._workspaces.forEach( (ws) => {ws._updateAllWindowsForMonitor();} );
+     } else {
+        this._workspaces.forEach( (ws) => {ws.removeOtherWorkspaceWindows();} );
+     }
+
   }
 
   _onDisplayPinnedChanged(){
@@ -4555,6 +4586,7 @@ class WindowList extends Applet.Applet {
       if (ws._wsNum == currentWs) {
         ws.actor.show();
         ws._updateAppButtonVisibility();
+        ws._updateFocus();
       } else {
         ws.actor.hide();
       }
@@ -4590,10 +4622,12 @@ class WindowList extends Applet.Applet {
          if (stuck) {
            workspace._windowAdded(window);
          } else {
-           if (wsNumNew == wsIdx) {
-             workspace._windowAdded(window);
-           } else {
-             workspace._windowRemoved(window);
+           if (!this._settings.getValue("show-windows-for-all-workspaces")) {
+              if (wsNumNew == wsIdx) {
+                workspace._windowAdded(window);
+              } else {
+                workspace._windowRemoved(window);
+              }
            }
          }
        }

@@ -116,7 +116,7 @@ class SystemControlsApplet extends Applet.TextIconApplet {
 
         item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "system-log-out-symbolic", St.IconType.SYMBOLIC);
         item.connect('activate', Lang.bind(this, function () {
-            launcher.spawnv(["cinnamon-session-quit", "--no-prompt"]);
+            launcher.spawnv(["cinnamon-session-quit", "--logout", "--no-prompt"]);
         }));
         this.menu.addMenuItem(item);
 

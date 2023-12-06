@@ -40,7 +40,7 @@ const NEEDS_FONTS_SYMBOLA = false;
  *
  * Example: To install the executable 'sox' and the library 'libsox-fmt-mp3.so', we need to install two packages in
  * Debian and derivatives distros (default) and only one package (named sox) in Arch and Fedora distros.
-const DEPENDENCIES = {
+var DEPENDENCIES = {
   "default": [
     ["sox", "/usr/bin/sox",  "sox"],
     ["", "/usr/share/doc/libsox-fmt-mp3/copyright", "libsox-fmt-mp3"]
@@ -66,7 +66,6 @@ var DEPENDENCIES = {
   "default": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
     ["wget", "/usr/bin/wget", "wget"],
-    ["", "/usr/share/doc/libmpv1/copyright", "libmpv1"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
     ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
@@ -94,10 +93,9 @@ var DEPENDENCIES = {
   "debian": [
     ["mpv", "/usr/bin/mpv",  "mpv"],
     ["wget", "/usr/bin/wget", "wget"],
-    ["", "/usr/lib/x86_64-linux-gnu/libmpv.so", "libmpv?"],
     ["", "/usr/share/doc/libmpv-dev/copyright", "libmpv-dev"],
     ["pacmd", "/usr/bin/pacmd", "pulseaudio-utils"],
-    ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
+    //~ ["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"],
     ["sox", "/usr/bin/sox", "sox"],
     ["", "/usr/share/doc/libsox-fmt-all/copyright", "libsox-fmt-all"],
     ["at", "/usr/bin/at", "at"],
@@ -155,6 +153,7 @@ if (versionCompare(GLib.getenv("CINNAMON_VERSION"), "5.8") >= 0) {
   DEPENDENCIES["fedora"].push(["pipewire-pulse", "/usr/bin/pipewire-pulseaudio", "pipewire-pulseaudio"]);
   DEPENDENCIES["openSUSE"].push(["", "/usr/share/licenses/libsoup-3_0-0/COPYING", "libsoup-3_0-0"]);
 } else {
+  DEPENDENCIES["debian"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
   DEPENDENCIES["fedora"].push(["pulseaudio", "/usr/bin/pulseaudio", "pulseaudio"]);
 }
 

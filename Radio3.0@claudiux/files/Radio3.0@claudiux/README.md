@@ -33,7 +33,7 @@ With Radio3.0 you can:
   * Modify the volume of the radio, independent of the general sound volume.
 
 
-Details, help and FAQ can be found in the Manual.
+Details, help and FAQ can be found in the [Manual](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/Radio3.0%40claudiux/files/Radio3.0%40claudiux/help/MANUAL.md).
 
 ## Translations
 

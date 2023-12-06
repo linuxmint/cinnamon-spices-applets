@@ -810,6 +810,32 @@ class R3Button {
     }
 }
 
+class R3WebpageMenuItem extends PopupBaseMenuItem {
+  constructor(parent, score, params) {
+    super(params);
+    this.parent = parent;
+
+    let label = new Label({ text: _("Radio3.0 web page...") });
+    this.addActor(label);
+
+    let stars = new BoxLayout({ style: 'spacing: .25em' });
+    let star_icon = new Icon({ icon_name: 'starred', icon_type: IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
+    let star_count = new Label({ text: score.toString() });
+    stars.add_actor(star_icon);
+    stars.add_actor(star_count);
+    this.addActor(stars);
+  }
+
+  activate() {
+    spawnCommandLineAsync("bash -c 'xdg-open https://cinnamon-spices.linuxmint.com/applets/view/360'");
+    super.activate();
+  }
+
+  destroy() {
+    super.destroy();
+  }
+}
+
 class TitleSeparatorMenuItem extends PopupBaseMenuItem {
   constructor(title, icon_name, reactive=false) {
     super({ reactive: reactive });
@@ -1188,6 +1214,9 @@ WebRadioReceiverAndRecorder.prototype = {
     // YT:
     this.settings.bind("yt-progress-interval", "yt_interval");
     this.settings.bind("yt-cookies-from", "cookies_from");
+
+    // Score:
+    this.settings.bind("score", "score");
 
     // Help TextViews:
     this.populate_help_textviews()
@@ -2002,7 +2031,7 @@ WebRadioReceiverAndRecorder.prototype = {
 
   change_volume_in_radio_tooltip: function() {
     //log("change_volume_in_radio_tooltip");
-    let title = "" + this.songTitle;
+    var title = "" + this.songTitle;
     title = title.replace(/\"/g, "");
 
     if (this.radioNameBolded === undefined)
@@ -2012,9 +2041,12 @@ WebRadioReceiverAndRecorder.prototype = {
     //~ if (title.length > 0)
       //~ _tooltip += title + "\n";
     if (title.length > 0) {
-      let artist = "";
+      var artist = "";
       if (title.includes(" - ")) {
         [artist, title] = title.split(" - ");
+        //~ if (this.artist_title_swap) {
+          //~ [artist, title] = [title, artist];
+        //~ }
         if (artist.length > 0)
           _tooltip += "<i><b>" + artist.replace(/\"/g, "") + "</b></i>\n";
       }
@@ -2048,13 +2080,16 @@ WebRadioReceiverAndRecorder.prototype = {
       this.radioNameBolded = this.in_bold(this.get_radio_name(this.last_radio_listened_to, "set_radio_tooltip_to_default_one"));
       _tooltip = "" + this.radioNameBolded + this.codecAndBitrate;
 
-      let title = "" + this.songTitle; // this.get_mpv_title();
+      var title = "" + this.songTitle; // this.get_mpv_title();
 
       if (title.length > 0) {
-        let artist = "";
+        var artist = "";
         if (title.includes(" - ")) {
           [artist, title] = title.split(" - ");
-          if (artist.length > 0)
+          //~ if (this.artist_title_swap) {
+            //~ [artist, title] = [title, artist];
+          //~ }
+        if (artist.length > 0)
             _tooltip += "\n<i><b>" + artist.replace(/\"/g, "") + "</b></i>";
         }
         _tooltip += "\n" + title.replace(/\"/g, "");
@@ -2788,6 +2823,11 @@ WebRadioReceiverAndRecorder.prototype = {
 
     let has_no_title = title.length===0 || title.endsWith(".mp3") || title.endsWith(".aac");
 
+    if (!has_no_title && title.includes(" - ") && this.artist_title_swap) {
+      let [_title, _artist] = title.split(" - ");
+      title = ""+_artist+" - "+_title;
+    }
+
     this.songTitle = title;
 
     let _rec_folder = RADIO30_MUSIC_DIR;
@@ -2811,8 +2851,9 @@ WebRadioReceiverAndRecorder.prototype = {
           this.rec_format
         );
       } else {
-        command = `%s --no-stop-screensaver --no-terminal --no-video --no-cache --load-scripts=no --metadata-codepage=auto --stream-dump="%s/%s.%s" %s &`.format(
+        command = `%s --no-stop-screensaver --no-terminal --no-video --no-cache --load-scripts=no %s --metadata-codepage=auto --stream-dump="%s/%s.%s" %s &`.format(
           MPV_PROGRAM(),
+          (""+this.rec_format === "flac") ? "--oac=flac" : "",
           _rec_folder,
           title_with_date,
           this.rec_format,
@@ -3194,8 +3235,9 @@ WebRadioReceiverAndRecorder.prototype = {
         this.rec_format
       );
     } else {
-      command = `%s --no-stop-screensaver --no-terminal --no-video --no-cache --load-scripts=no --metadata-codepage=auto --stream-dump="%s/%s.%s" %s &`.format(
+      command = `%s --no-stop-screensaver --no-terminal --no-video --no-cache --load-scripts=no %s --metadata-codepage=auto --stream-dump="%s/%s.%s" %s &`.format(
         MPV_PROGRAM(),
+        (""+this.rec_format === "flac") ? "--oac=flac" : "",
         _rec_folder,
         title.replace(/\"/g, '') + "_" + date,
         this.rec_format,
@@ -3467,20 +3509,36 @@ WebRadioReceiverAndRecorder.prototype = {
     //~ log("['1', '3', '4', '5', '6', '7', '9']: "+this.to_ranges(['1', '3', '4', '5', '6', '7', '9']), true);
     //~ log("['1', '2', '3', '5', '6', '8', '9']: "+this.to_ranges(['1', '2', '3', '5', '6', '8', '9']), true);
 
+    // Install or update translations, if any:
+    if (!are_translations_installed()) install_translations();
+
+    spawnCommandLineAsyncIO(SCRIPTS_DIR+"/get-score.sh", Lang.bind(this, (stdout, err, exitCode) => {
+      try {
+        //~ log("score: "+stdout, true);
+        this.settings.setValue("score", 1*stdout);
+      } catch(e) {
+        logError("Reading score error: "+e)
+      }
+    }));
 
     // Check about dependencies:
     this.checkDepInterval = undefined;
-    this.dependencies = new Dependencies();
+    this.dependencies = null;
+
+    if (!this.dont_check_dependencies)
+      this.dependencies = new Dependencies();
     this.depCount = 0;
-    if (this.dont_check_dependencies || this.dependencies.areDepMet()) {
+    //~ log("this.dont_check_dependencies: "+this.dont_check_dependencies, true);
+    //~ log("this.dependencies.areDepMet(): "+this.dependencies.areDepMet(), true);
+    if (this.dont_check_dependencies || (this.dependencies && this.dependencies.areDepMet())) {
       // (Consider) All dependencies are installed.
+      //~ log("All dependencies are installed.", true);
       if (this.checkDepInterval != undefined) {
         clearInterval(this.checkDepInterval);
         this.checkDepInterval = undefined;
       }
 
-      // Install or update translations, if any:
-      if (!are_translations_installed()) install_translations();
+
 
       this.songTitle = "";
       if (this.settings.getValue("reset-recents"))
@@ -3498,13 +3556,15 @@ WebRadioReceiverAndRecorder.prototype = {
 
     if (!this.ytdlp_updated) {
       log("Updating yt-dlp.");
-      this.checkDepInterval = setInterval(
+      this.checkYTDLPInterval = setInterval(
         () => {
           spawnCommandLineAsyncIO(
             YTDLP_UPDATE_BASH_SCRIPT,
             Lang.bind(this, (out, err, exitCode) => {
               if (exitCode === 0) {
                 this.ytdlp_updated = true;
+                clearInterval(this.checkYTDLPInterval);
+                this.checkYTDLPInterval = undefined;
               } else {
                 let icon = new Icon({
                   icon_name: 'webradioreceiver',
@@ -3527,6 +3587,11 @@ WebRadioReceiverAndRecorder.prototype = {
     if (this.checkDepInterval != undefined) {
       clearInterval(this.checkDepInterval);
       this.checkDepInterval = undefined;
+    }
+
+    if (this.checkYTDLPInterval != undefined) {
+      clearInterval(this.checkYTDLPInterval);
+      this.checkYTDLPInterval = undefined;
     }
 
     // Stop looping:
@@ -4277,10 +4342,11 @@ WebRadioReceiverAndRecorder.prototype = {
 
     // Web page...
     if (this.context_menu_item_webpage == null) {
-      this.context_menu_item_webpage = new PopupIconMenuItem(_("Radio3.0 web page..."),
-        "web-browser",
-        IconType.SYMBOLIC);
-      this.context_menu_item_webpage.connect('activate', () => spawnCommandLineAsync("bash -c 'xdg-open https://cinnamon-spices.linuxmint.com/applets/view/360'"));
+      this.context_menu_item_webpage = new R3WebpageMenuItem(this, this.score);
+      //~ this.context_menu_item_webpage = new PopupIconMenuItem(_("Radio3.0 web page..."),
+        //~ "web-browser",
+        //~ IconType.SYMBOLIC);
+      //~ this.context_menu_item_webpage.connect('activate', () => spawnCommandLineAsync("bash -c 'xdg-open https://cinnamon-spices.linuxmint.com/applets/view/360'"));
     }
     if (items.indexOf(this.context_menu_item_webpage) == -1) {
       this._applet_context_menu.addMenuItem(this.context_menu_item_webpage);
@@ -4398,8 +4464,22 @@ WebRadioReceiverAndRecorder.prototype = {
         }));
     }
     if (items.indexOf(this.context_menu_item_showLogo) == -1) {
-        this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
         this._applet_context_menu.addMenuItem(this.context_menu_item_showLogo);
+    }
+
+    // Do not check about dependencies
+    if (this.context_menu_item_dontCheckDep == null) {
+        this.context_menu_item_dontCheckDep = new PopupSwitchMenuItem(_("Do not check about dependencies"),
+          this.dont_check_dependencies,
+          null);
+        this.context_menu_item_dontCheckDep.connect("toggled", Lang.bind(this, function() {
+          this.dont_check_dependencies = !this.dont_check_dependencies;
+          this.on_option_menu_reload_this_applet_clicked();
+        }));
+    }
+    if (items.indexOf(this.context_menu_item_dontCheckDep) == -1) {
+        this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
+        this._applet_context_menu.addMenuItem(this.context_menu_item_dontCheckDep);
     }
 
     // Open Recordings Folder
@@ -5546,6 +5626,22 @@ WebRadioReceiverAndRecorder.prototype = {
       }
     }
 
+    radios = null;
+    return _ret
+  },
+
+  get artist_title_swap() {
+    var _ret = false;
+    let radios = this.settings.getValue("radios");
+    for (let radio of radios) {
+      if (radio.url == undefined || radio.name == undefined || !radio.inc)
+        continue;
+      let url = "" + radio.url.trim();
+      if (url.length !== 0 && url === this.last_radio_listened_to) {
+        _ret = radio.author_title_swap === true;
+        break;
+      }
+    }
     radios = null;
     return _ret
   },

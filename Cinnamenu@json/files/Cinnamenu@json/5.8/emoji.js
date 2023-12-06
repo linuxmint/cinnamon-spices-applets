@@ -1,6 +1,6 @@
 const {_} = require('./utils');
 //This list is taken from https://unicode.org/emoji/charts/emoji-list.html
-//Emoji List, v14.0
+//Emoji List, v15.1
 
 //Additional keywords are from emojilib (https://github.com/muan/emojilib) License: MIT
 
@@ -201,6 +201,18 @@ const EMOJI = [
 '🤥',
 'lying face',
 'face lie pinocchio'
+],[
+'🫨',
+'shaking face',
+'earthquake face shaking shock vibrate loud fear double'
+],[
+'🙂‍↔️',
+'head shaking horizontally',
+'head shaking horizontally no face'
+],[
+'🙂‍↕️',
+'head shaking vertically',
+'head shaking vertically yes nod face agree'
 ],[
 '😌',
 'relieved face',
@@ -570,6 +582,10 @@ const EMOJI = [
 'red heart',
 'heart love like valentines'
 ],[
+'🩷',
+'pink heart',
+'cute heart like love pink friendship affection valentines'
+],[
 '🧡',
 'orange heart',
 'orange love like affection valentines'
@@ -586,21 +602,29 @@ const EMOJI = [
 'blue heart',
 'blue love like affection valentines'
 ],[
+'🩵',
+'light blue heart',
+'cyan heart light blue teal love like affection valentines'
+],[
 '💜',
 'purple heart',
 'purple love like affection valentines'
 ],[
 '🤎',
 'brown heart',
-'brown heart coffee'
+'brown heart coffee love like'
 ],[
 '🖤',
 'black heart',
-'black evil wicked'
+'black evil wicked love like'
+],[
+'🩶',
+'grey heart',
+'grey heart silver slate love like affection valentines'
 ],[
 '🤍',
 'white heart',
-'heart white pure'
+'heart white pure love like'
 ],[
 '💯',
 'hundred points',
@@ -693,6 +717,14 @@ const EMOJI = [
 '🫴',
 'palm up hand',
 'beckon catch come offer'
+],[
+'🫷',
+'leftwards pushing hand',
+'high five leftward pushing hand refuse reject stop wait palm'
+],[
+'🫸',
+'rightwards pushing hand',
+'high five rightward pushing hand refuse reject stop wait palm'
 ],[
 '👌',
 'OK hand',
@@ -1608,15 +1640,27 @@ const EMOJI = [
 ],[
 '🚶',
 'person walking',
-'hike walk walking move'
+'hike walking move human feet steps'
 ],[
 '🚶‍♂️',
 'man walking',
-'hike man walk human feet steps'
+'hike man walking move human feet steps'
 ],[
 '🚶‍♀️',
 'woman walking',
-'hike walk woman human feet steps female'
+'hike walking woman move human feet steps female'
+],[
+'🚶‍➡️',
+'person walking facing right',
+'hike man walking move human feet steps'
+],[
+'🚶‍♂️‍➡️',
+'man walking facing right',
+'hike man walking move human feet steps'
+],[
+'🚶‍♀️‍➡️',
+'woman walking facing right',
+'hike walking woman move human feet steps female'
 ],[
 '🧍',
 'person standing',
@@ -1632,7 +1676,7 @@ const EMOJI = [
 ],[
 '🧎',
 'person kneeling',
-'kneel kneeling pray respectful'
+'person kneeling pray respectful'
 ],[
 '🧎‍♂️',
 'man kneeling',
@@ -1642,53 +1686,113 @@ const EMOJI = [
 'woman kneeling',
 'kneeling woman respectful pray'
 ],[
+'🧎‍➡️',
+'person kneeling facing right',
+'person kneeling pray respectful'
+],[
+'🧎‍♀️‍➡️',
+'woman kneeling facing right',
+'kneeling woman respectful pray'
+],[
+'🧎‍♂️‍➡️',
+'man kneeling facing right',
+'kneeling man pray respectful'
+],[
 '🧑‍🦯',
 'person with white cane',
 'accessibility blind person with probing cane'
 ],[
+'🧑‍🦯‍➡️',
+'person with white cane facing right',
+'accessibility blind person with probing cane'
+],[
 '👨‍🦯',
 'man with white cane',
-'accessibility blind man man with probing cane'
+'accessibility blind man with probing cane'
+],[
+'👨‍🦯‍➡️',
+'man with white cane facing right',
+'accessibility blind man with probing cane'
 ],[
 '👩‍🦯',
 'woman with white cane',
-'accessibility blind woman woman with probing cane'
+'accessibility blind woman with probing cane'
+],[
+'👩‍🦯‍➡️',
+'woman with white cane facing right',
+'accessibility blind woman with probing cane'
 ],[
 '🧑‍🦼',
 'person in motorized wheelchair',
+'accessibility wheelchair disability'
+],[
+'🧑‍🦼‍➡️',
+'person in motorized wheelchair facing right',
 'accessibility wheelchair disability'
 ],[
 '👨‍🦼',
 'man in motorized wheelchair',
 'accessibility man wheelchair disability'
 ],[
+'👨‍🦼‍➡️',
+'man in motorized wheelchair facing right',
+'accessibility man wheelchair disability'
+],[
 '👩‍🦼',
 'woman in motorized wheelchair',
+'accessibility wheelchair woman disability'
+],[
+'👩‍🦼‍➡️',
+'woman in motorized wheelchair facing right',
 'accessibility wheelchair woman disability'
 ],[
 '🧑‍🦽',
 'person in manual wheelchair',
 'accessibility wheelchair disability'
 ],[
+'🧑‍🦽‍➡️',
+'person in manual wheelchair facing right',
+'accessibility wheelchair disability'
+],[
 '👨‍🦽',
 'man in manual wheelchair',
+'accessibility man wheelchair disability'
+],[
+'👨‍🦽‍➡️',
+'man in manual wheelchair facing right',
 'accessibility man wheelchair disability'
 ],[
 '👩‍🦽',
 'woman in manual wheelchair',
 'accessibility wheelchair woman disability'
 ],[
+'👩‍🦽‍➡️',
+'woman in manual wheelchair facing right',
+'accessibility wheelchair woman disability'
+],[
 '🏃',
 'person running',
-'marathon running move'
+'marathon racing running sprint move fast exercise race'
 ],[
 '🏃‍♂️',
 'man running',
-'man marathon racing running walking exercise race'
+'man marathon racing running sprint move fast exercise race male'
 ],[
 '🏃‍♀️',
 'woman running',
-'marathon racing running woman walking exercise race female'
+'marathon racing running sprint woman move fast exercise race female'
+],[
+'🏃‍➡️',
+'person running facing right',
+'marathon running sprint move fast exercise race'
+],[
+'🏃‍♀️‍➡️',
+'woman running facing right',
+'marathon racing running sprint woman move fast exercise race female'
+],[
+'🏃‍♂️‍➡️',
+'man running facing right',
+'man marathon racing running sprint move fast exercise race male'
 ],[
 '💃',
 'woman dancing',
@@ -1978,109 +2082,105 @@ const EMOJI = [
 'couple with heart: woman, woman',
 'couple couple with heart love woman couple with heart woman woman pair like affection human dating valentines marriage'
 ],[
-'👪',
-'family',
-'home parents child mom dad father mother people human'
-],[
 '👨‍👩‍👦',
 'family: man, woman, boy',
-'boy family man woman family man woman boy love'
+'home parents children mom dad father mother man women boy people human'
 ],[
 '👨‍👩‍👧',
 'family: man, woman, girl',
-'family girl man woman family man woman girl home parents people human child'
+'home parents children mom dad father mother man women girl people human'
 ],[
 '👨‍👩‍👧‍👦',
 'family: man, woman, girl, boy',
-'boy family girl man woman family man woman girl boy home parents people human children'
+'home parents children mom dad father mother man women girl boy people human'
 ],[
 '👨‍👩‍👦‍👦',
 'family: man, woman, boy, boy',
-'boy family man woman family man woman boy boy home parents people human children'
+'home parents children mom dad father mother man women boy people human'
 ],[
 '👨‍👩‍👧‍👧',
 'family: man, woman, girl, girl',
-'family girl man woman family man woman girl girl home parents people human children'
+'home parents children mom dad father mother man women girl people human'
 ],[
 '👨‍👨‍👦',
 'family: man, man, boy',
-'boy family man family man man boy home parents people human children'
+'home parents children dad father man boy people human'
 ],[
 '👨‍👨‍👧',
 'family: man, man, girl',
-'family girl man family man man girl home parents people human children'
+'home parents children dad father man girl people human'
 ],[
 '👨‍👨‍👧‍👦',
 'family: man, man, girl, boy',
-'boy family girl man family man man girl boy home parents people human children'
+'home parents children dad father man girl boy people human'
 ],[
 '👨‍👨‍👦‍👦',
 'family: man, man, boy, boy',
-'boy family man family man man boy boy home parents people human children'
+'home parents children dad father man boy people human'
 ],[
 '👨‍👨‍👧‍👧',
 'family: man, man, girl, girl',
-'family girl man family man man girl girl home parents people human children'
+'home parents children dad father man girl people human'
 ],[
 '👩‍👩‍👦',
 'family: woman, woman, boy',
-'boy family woman family woman woman boy home parents people human children'
+'home parents children mom mother women boy people human'
 ],[
 '👩‍👩‍👧',
 'family: woman, woman, girl',
-'family girl woman family woman woman girl home parents people human children'
+'home parents children mom mother women girl people human'
 ],[
 '👩‍👩‍👧‍👦',
 'family: woman, woman, girl, boy',
-'boy family girl woman family woman woman girl boy home parents people human children'
+'home parents children mom mother women girl boy people human'
 ],[
 '👩‍👩‍👦‍👦',
 'family: woman, woman, boy, boy',
-'boy family woman family woman woman boy boy home parents people human children'
+'home parents children mom mother women boy people human'
 ],[
 '👩‍👩‍👧‍👧',
 'family: woman, woman, girl, girl',
-'family girl woman family woman woman girl girl home parents people human children'
+'home parents children mom mother women girl people human'
 ],[
 '👨‍👦',
 'family: man, boy',
-'boy family man family man boy home parent people human child'
+'home parents children dad father man boy people human'
 ],[
 '👨‍👦‍👦',
 'family: man, boy, boy',
-'boy family man family man boy boy home parent people human children'
+'home parents children dad father man boy people human'
 ],[
 '👨‍👧',
 'family: man, girl',
-'family girl man family man girl home parent people human child'
+'home parents children dad father man girl people human'
 ],[
 '👨‍👧‍👦',
 'family: man, girl, boy',
-'boy family girl man family man girl boy home parent people human children'
+'home parents children dad father man girl boy people human'
 ],[
 '👨‍👧‍👧',
 'family: man, girl, girl',
-'family girl man family man girl girl home parent people human children'
+'home parents children dad father man girl people human'
 ],[
 '👩‍👦',
 'family: woman, boy',
-'boy family woman family woman boy home parent people human child'
+'home parents children mom mother women boy people human'
 ],[
 '👩‍👦‍👦',
 'family: woman, boy, boy',
-'boy family woman family woman boy boy home parent people human children'
+'home parents children mom mother women boy people human'
 ],[
 '👩‍👧',
 'family: woman, girl',
-'family girl woman family woman girl home parent people human child'
+'home parents children mom mother women girl people human'
 ],[
 '👩‍👧‍👦',
 'family: woman, girl, boy',
-'boy family girl woman family woman girl boy home parent people human children'
+'home parents children mom mother women girl boy people human'
 ],[
 '👩‍👧‍👧',
 'family: woman, girl, girl',
-'family girl woman family woman girl girl home parent people human children'
+'home parents children mom mother women girl people human'
 ],[
 '🗣',
 'speaking head',
@@ -2097,6 +2197,26 @@ const EMOJI = [
 '🫂',
 'people hugging',
 'goodbye hello hug thanks care'
+],[
+'👪',
+'family',
+'home parents children mom dad father mother man women girl boy people human'
+],[
+'🧑‍🧑‍🧒',
+'family: adult, adult, child',
+'home parents children mom dad father mother man women girl boy people human'
+],[
+'🧑‍🧑‍🧒‍🧒',
+'family: adult, adult, child, child',
+'home parents children mom dad father mother man women girl boy people human'
+],[
+'🧑‍🧒',
+'family: adult, child',
+'home parents children mom dad father mother man women girl boy people human'
+],[
+'🧑‍🧒‍🧒',
+'family: adult, child, child',
+'home parents children mom dad father mother man women girl boy people human'
 ],[
 '👣',
 'footprints',
@@ -2197,6 +2317,14 @@ const EMOJI = [
 '🐴',
 'horse face',
 'face horse animal brown nature'
+],[
+'🫎',
+'moose',
+'animal antlers elk mammal moose canada sweden'
+],[
+'🫏',
+'donkey',
+'animal ass burro donkey mammal mule stubborn'
 ],[
 '🐎',
 'horse',
@@ -2446,6 +2574,22 @@ const EMOJI = [
 'parrot',
 'bird pirate talk animal nature'
 ],[
+'🪽',
+'wing',
+'angelic aviation bird flying mythology wing'
+],[
+'🐦‍⬛',
+'black bird',
+'bird black crow raven rook'
+],[
+'🪿',
+'goose',
+'bird fowl wild goose honk silly'
+],[
+'🐦‍🔥',
+'phoenix',
+'fantasy firebird phoenix rebirth reincarnation'
+],[
 '🐸',
 'frog',
 'face animal nature croak toad'
@@ -2525,6 +2669,10 @@ const EMOJI = [
 '🪸',
 'coral',
 'ocean sea reef'
+],[
+'🪼',
+'jellyfish',
+'burn invertebrate jellyfish marine ouch stinger tentacles'
 ],[
 '🐌',
 'snail',
@@ -2628,11 +2776,15 @@ const EMOJI = [
 ],[
 '🌼',
 'blossom',
-'flower nature flowers yellow'
+'blossom flower nature flowers yellow'
 ],[
 '🌷',
 'tulip',
-'flower flowers plant nature summer spring'
+'flower flowers plant nature summer spring blossom'
+],[
+'🪻',
+'hyacinth',
+'bluebonnet flower hyacinth lavender lupine snapdragon blossom springtime'
 ],[
 '🌱',
 'seedling',
@@ -2713,6 +2865,10 @@ const EMOJI = [
 '🍋',
 'lemon',
 'citrus fruit nature'
+],[
+'🍋‍🟩',
+'lime',
+'citrus fruit lime tropical'
 ],[
 '🍌',
 'banana',
@@ -2833,6 +2989,18 @@ const EMOJI = [
 '🌰',
 'chestnut',
 'plant food squirrel'
+],[
+'🫚',
+'ginger root',
+'beer ginger root spice flavour cooking'
+],[
+'🫛',
+'pea pod',
+'beans edamame legume pea pod vegetable green'
+],[
+'🍄‍🟫',
+'brown mushroom',
+'brown mushroom food fungus nature vegetable'
 ],[
 '🍞',
 'bread',
@@ -4518,6 +4686,10 @@ const EMOJI = [
 'woman’s clothes',
 'clothing woman woman s clothes fashion shopping bags female'
 ],[
+'🪭',
+'folding hand fan',
+'cooling dance flutter folding hand fan hot shy buchaechum nihon buyō maranao'
+],[
 '👛',
 'purse',
 'clothing coin fashion accessories money sales shopping'
@@ -4573,6 +4745,10 @@ const EMOJI = [
 '👢',
 'woman’s boot',
 'boot clothing shoe woman woman s boot shoes fashion'
+],[
+'🪮',
+'hair pick',
+'afro comb hair pick curly'
 ],[
 '👑',
 'crown',
@@ -4725,6 +4901,14 @@ const EMOJI = [
 '🪘',
 'long drum',
 'beat conga drum rhythm music'
+],[
+'🪇',
+'maracas',
+'instrument maracas music percussion rattle shake'
+],[
+'🪈',
+'flute',
+'fife flute music pipe recorder woodwind'
 ],[
 '📱',
 'mobile phone',
@@ -5252,7 +5436,11 @@ const EMOJI = [
 ],[
 '🔗',
 'link',
-'rings url'
+'chain rings url hyperlink'
+],[
+'⛓️‍💥',
+'broken chain',
+'breaking broken chain cuffs freedom'
 ],[
 '⛓',
 'chains',
@@ -5694,6 +5882,10 @@ const EMOJI = [
 'dotted six-pointed star',
 'fortune star dotted six pointed star purple-square religion jewish hexagram'
 ],[
+'🪯',
+'khanda',
+'khanda religion Sikh'
+],[
 '♈',
 'Aries',
 'ram zodiac aries sign purple-square astrology'
@@ -5833,6 +6025,10 @@ const EMOJI = [
 '📶',
 'antenna bars',
 'antenna bar cell mobile phone blue-square reception internet connection wifi bluetooth bars'
+],[
+'🛜',
+'wireless',
+'computer internet network wi-fi wifi wireless connection'
 ],[
 '📳',
 'vibration mode',
@@ -7421,7 +7617,7 @@ const EMOJI = [
 ];
 
 //this list is taken from https://unicode.org/emoji/charts/full-emoji-modifiers.html
-//Full Emoji Modifier Sequences, v14.0
+//Full Emoji Modifier Sequences, v15.1
 
 const MODED = [
 '👋🏻',
@@ -7433,6 +7629,8 @@ const MODED = [
 '🫲🏻',
 '🫳🏻',
 '🫴🏻',
+'🫷🏻',
+'🫸🏻',
 '👌🏻',
 '🤌🏻',
 '🤏🏻',
@@ -7460,6 +7658,7 @@ const MODED = [
 '🫶🏻',
 '👐🏻',
 '🤲🏻',
+'🤝🏻',
 '🙏🏻',
 '✍🏻',
 '💅🏻',
@@ -7644,24 +7843,42 @@ const MODED = [
 '🚶🏻',
 '🚶🏻‍♂️',
 '🚶🏻‍♀️',
+'🚶🏻‍➡️',
+'🚶🏻‍♀️‍➡️',
+'🚶🏻‍♂️‍➡️',
 '🧍🏻',
 '🧍🏻‍♂️',
 '🧍🏻‍♀️',
 '🧎🏻',
 '🧎🏻‍♂️',
 '🧎🏻‍♀️',
+'🧎🏻‍➡️',
+'🧎🏻‍♀️‍➡️',
+'🧎🏻‍♂️‍➡️',
 '🧑🏻‍🦯',
+'🧑🏻‍🦯‍➡️',
 '👨🏻‍🦯',
+'👨🏻‍🦯‍➡️',
 '👩🏻‍🦯',
+'👩🏻‍🦯‍➡️',
 '🧑🏻‍🦼',
+'🧑🏻‍🦼‍➡️',
 '👨🏻‍🦼',
+'👨🏻‍🦼‍➡️',
 '👩🏻‍🦼',
+'👩🏻‍🦼‍➡️',
 '🧑🏻‍🦽',
+'🧑🏻‍🦽‍➡️',
 '👨🏻‍🦽',
+'👨🏻‍🦽‍➡️',
 '👩🏻‍🦽',
+'👩🏻‍🦽‍➡️',
 '🏃🏻',
 '🏃🏻‍♂️',
 '🏃🏻‍♀️',
+'🏃🏻‍➡️',
+'🏃🏻‍♀️‍➡️',
+'🏃🏻‍♂️‍➡️',
 '💃🏻',
 '🕺🏻',
 '🕴🏻',
