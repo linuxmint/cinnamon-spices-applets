@@ -1,0 +1,38 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-07 22:41+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: blogdron\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+#. metadata.json->name
+msgid "Power Consumption Display"
+msgstr "Отображение Энергопотребления (Power Consumption Display)"
+
+#. metadata.json->description
+msgid "Shows power consumption when in battery mode"
+msgstr "Отображает энергопотребление в режиме работы от батареи"
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr "Показать значение"
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Show Watt symbol after the value."
+msgstr "Показать символ W (Ватты) после значения."
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr "миллисекунд"
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr "Период обновления"
