@@ -11,6 +11,7 @@ const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
+const Clutter = imports.gi.Clutter;
 
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
@@ -38,6 +39,12 @@ class MyApplet extends Applet.TextIconApplet {
             this.instanceId = instanceId;
             this.groupBuffer = [];
 
+            this.dragging = false;
+            this.dragPlaceholder = null;
+            this.dragPlaceholderParent = null;
+            this.dragOverSubMenu = false;
+            this.dragIndex = null;
+
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
             if (this.orientation == St.Side.RIGHT || this.orientation == St.Side.LEFT) {
                 this.hide_applet_label(true);
@@ -46,6 +53,7 @@ class MyApplet extends Applet.TextIconApplet {
             this.bindSettings();
             this.initMenu();
             this.connectSignals();
+            this.addHotkey();
             this.initIcons();
             this.initLabel();
         } catch (e) {
@@ -65,7 +73,9 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bind('launcher-icon', 'launcherIcon', this.initIcons);
         this.settings.bind('notification-enabled', 'notificationEnabled');
         this.settings.bind('notification-text', 'notificationText');
+        this.settings.bind('hotkey-binding', 'hotkeyBinding', this.addHotkey);
 
+        this.settings.bind('fixed-menu-width', 'fixedMenuWidth', this.updateMenu);
         this.settings.bind('visible-app-icons', 'visibleAppIcons', this.updateMenu);
         this.settings.bind('use-symbolic-icons', 'useSymbolicIcons', this.updateMenu);
         this.settings.bind('app-icon-size', 'appIconSize', this.updateMenu);
@@ -101,7 +111,9 @@ class MyApplet extends Applet.TextIconApplet {
             });
             this.menu.addMenuItem(item);
         } else {
-            this.listApplications.forEach((application) => {
+            let itemWidths = [];
+
+            this.listApplications.forEach((application, index) => {
                 let name = application.name;
                 let group = application.group;
                 let icon = application.icon;
@@ -114,15 +126,29 @@ class MyApplet extends Applet.TextIconApplet {
                     if (Object.keys(groups).includes(group)) {
                         groups[group].addMenuItem(item);
                     } else {
-                        let subMenu = this.createSubMenuItem(group);
+                        let subMenu = this.createSubMenuItem(group, index);
                         groups[group] = subMenu;
                         subMenu.addMenuItem(item);
                         this.menu.addMenuGroupItem(subMenu);
                         this.menu.addMenuItem(subMenu);
                     }
+                    if (item instanceof MyPopupMenuItem) {
+                        itemWidths.push(item.getWidth());
+                    }
                 }
-                this.menu.addMenuAppItem(item);
+                if (item instanceof MyPopupMenuItem || item instanceof MyPopupSeparatorMenuItem) {
+                    this.menu.addMenuAppItem(item);
+                }
             });
+            if (this.fixedMenuWidth) {
+                this.menu.getMenuGroupItems().forEach((group) => {
+                    // largest item + (basic icon size + icon size) or (basic size)
+                    group.setWidth(
+                        Math.max(...itemWidths) +
+                            (this.visibleAppIcons ? 40 + this.appIconSize : 28)
+                    );
+                });
+            }
         }
     }
 
@@ -160,7 +186,7 @@ class MyApplet extends Applet.TextIconApplet {
         this.updateMenu();
     }
 
-    createSubMenuItem(name) {
+    createSubMenuItem(name, index) {
         let existGroupIcons = {};
         this.listGroups.map((e) => (existGroupIcons[e.name] = e.icon));
         let icon =
@@ -171,6 +197,7 @@ class MyApplet extends Applet.TextIconApplet {
         return new MyPopupSubMenuItem({
             applet: this,
             name: name,
+            index: index,
             visibleAppIcons: this.visibleAppIcons,
             icon: icon,
             useSymbolicIcons: this.useSymbolicIcons,
@@ -179,16 +206,24 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     createMenuItem(name, icon, group, command) {
-        return new MyPopupMenuItem({
-            applet: this,
-            name: name,
-            group: group,
-            visibleAppIcons: this.visibleAppIcons,
-            icon: icon,
-            useSymbolicIcons: this.useSymbolicIcons,
-            iconSize: this.appIconSize,
-            command: command,
-        });
+        if (name === '$eparator$') {
+            return new MyPopupSeparatorMenuItem({
+                red: command[0],
+                green: command[1],
+                blue: command[2],
+            });
+        } else {
+            return new MyPopupMenuItem({
+                applet: this,
+                name: name,
+                group: group,
+                visibleAppIcons: this.visibleAppIcons,
+                icon: icon,
+                useSymbolicIcons: this.useSymbolicIcons,
+                iconSize: this.appIconSize,
+                command: command,
+            });
+        }
     }
 
     initIcons() {
@@ -316,12 +351,50 @@ class MyApplet extends Applet.TextIconApplet {
         return icon;
     }
 
+    addHotkey() {
+        Main.keybindingManager.addHotKey(
+            `app-launcher-${this.instanceId}`,
+            this.hotkeyBinding,
+            () => {
+                this.menu.toggle();
+            }
+        );
+    }
+
+    removeHotkey() {
+        Main.keybindingManager.removeHotKey(`app-launcher-${this.instanceId}`);
+    }
+
     run(name, icon, command) {
         if (this.notificationEnabled) {
             let text = this._replaceAll(this.notificationText, '%s', name);
             this.showNotification(APPNAME, text, icon);
         }
         Util.spawnCommandLine(command);
+    }
+
+    on_applet_clicked(event) {
+        if (this.activeDrag()) {
+            this.endDrag();
+        }
+        this.menu.toggle();
+    }
+
+    on_applet_reloaded() {
+        this.settings.finalize();
+        this.signalManager.disconnectAllSignals();
+        this.removeHotkey();
+    }
+
+    on_applet_removed_from_panel() {
+        this.removeHotkey();
+    }
+
+    on_menu_state_changed(menu, isOpen, sourceActor) {
+        this.toggleIcon();
+        if (!isOpen && this.menu.isContextOpen()) {
+            this.menu.closeContext();
+        }
     }
 
     handleDragOver(source, actor, x, y, time) {
@@ -331,29 +404,117 @@ class MyApplet extends Applet.TextIconApplet {
 
         if (!this.menu.isOpen) {
             this.menu.open();
-            this.menu.beginDrag();
+            this.beginDrag();
         }
 
         return DND.DragMotionResult.MOVE_DROP;
     }
 
-    on_applet_clicked(event) {
-        if (this.menu.activeDrag()) {
-            this.menu.endDrag(true);
-        }
-        this.menu.toggle();
+    beginDrag() {
+        this.dragging = true;
+
+        this.menu.expandMenu();
     }
 
-    on_applet_reloaded() {
-        this.settings.finalize();
-        this.signalManager.disconnectAllSignals();
+    endDrag() {
+        this.clearDragPlaceholder();
+
+        this.menu.collapseMenu();
+
+        if (this.menu.isOpen) {
+            this.menu.close();
+        }
+
+        this.dragging = false;
     }
 
-    on_menu_state_changed(menu, isOpen, sourceActor) {
-        this.toggleIcon();
-        if (!isOpen && this.menu.isContextOpen()) {
-            this.menu.closeContext();
+    activeDrag() {
+        return this.dragging;
+    }
+
+    handleDrag(source, x, y, box, indent) {
+        let children = box.get_children();
+        let boxSize = box.height;
+        let mousePos = y;
+
+        let dropIndex = Math.floor((mousePos / boxSize) * children.length);
+
+        if (dropIndex >= children.length) {
+            dropIndex = -1;
+        } else if (dropIndex < -1) {
+            dropIndex = 0;
         }
+
+        if (this.dragIndex !== dropIndex) {
+            if (!this.dragPlaceholder) {
+                this.createDragPlaceholder(box, source, dropIndex, indent);
+            } else {
+                this.setDragPlaceholder(box, dropIndex, indent);
+            }
+            this.dragIndex = dropIndex;
+        }
+    }
+
+    createDragPlaceholder(parent, source, index, indent = false) {
+        if (this.dragPlaceholder) {
+            return;
+        }
+
+        let app = this.getAppInfo(source);
+        let name = app.get_display_name();
+        let icon = app.get_icon().to_string();
+
+        this.dragPlaceholder = this.createMenuItem(name, icon);
+        this.setDragPlaceholder(parent, index, indent);
+    }
+
+    setDragPlaceholder(parent, index, indent = false) {
+        if (parent !== this.dragPlaceholderParent) {
+            if (this.dragPlaceholderParent) {
+                this.dragPlaceholderParent.remove_child(this.dragPlaceholder.actor);
+            }
+            this.dragPlaceholderParent = parent;
+            this.dragPlaceholder.setIndentation(indent);
+            parent.insert_child_at_index(this.dragPlaceholder.actor, index);
+        } else {
+            parent.set_child_at_index(this.dragPlaceholder.actor, index);
+        }
+    }
+
+    clearDragPlaceholder() {
+        if (this.dragPlaceholder) {
+            this.dragPlaceholderParent.remove_child(this.dragPlaceholder.actor);
+        }
+
+        this.dragPlaceholder = null;
+        this.dragPlaceholderParent = null;
+        this.dragIndex = null;
+    }
+
+    getAppInfo(source) {
+        if (source.hasOwnProperty('app')) {
+            return source.app.get_app_info();
+        } else if (source.hasOwnProperty('id')) {
+            return appSystem.lookup_app(source.id).get_app_info();
+        }
+
+        throw new Error(`${UUID}: cant get app info`);
+    }
+
+    prepareAppInfo(source) {
+        let app = this.getAppInfo(source);
+
+        let name = app.get_display_name();
+        let icon = app.get_icon().to_string();
+
+        let execTokens = /\s%[uU]|\s%[fF]/g;
+        let command = app.get_commandline().replace(execTokens, '');
+
+        return {
+            name: name,
+            icon: icon,
+            command: command,
+        };
     }
 }
 
@@ -366,10 +527,6 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
             this._menuGroupItems = [];
 
             this.contextOpen = false;
-            this._dragging = false;
-            this._draggable = DND.makeDraggable(this.applet.actor);
-            this._dragPlaceholder = null;
-            this._dragIndex = null;
         } catch (error) {
             global.log(error);
         }
@@ -486,8 +643,7 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
         this.unselectMenuAppItems();
     }
 
-    openContext() {
-        this.contextOpen = true;
+    expandMenu() {
         this.openMenuGroupItems();
         this.setMenuGroupItemsShowTriangle(false);
         this.getMenuGroupItems().forEach((group) => {
@@ -495,14 +651,23 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
         });
     }
 
-    closeContext() {
-        this.contextOpen = false;
-        this.unselectMenuItems();
+    collapseMenu() {
         this.closeMenuGroupItems();
         this.setMenuGroupItemsShowTriangle(true);
         this.getMenuGroupItems().forEach((group) => {
             group.setItemsIndentation(false);
         });
+    }
+
+    openContext() {
+        this.contextOpen = true;
+        this.expandMenu();
+    }
+
+    closeContext() {
+        this.contextOpen = false;
+        this.unselectMenuItems();
+        this.collapseMenu();
         this.actor.grab_key_focus(); // necessary to recalc the width
     }
 
@@ -510,83 +675,12 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
         return this.contextOpen;
     }
 
-    beginDrag() {
-        // this delete all hidden items(in groups), so the drag is more presice
-        this._dragging = true;
-        let children = this.box.get_children();
-        children.forEach((element) => {
-            if (!element.is_visible()) {
-                element.destroy();
-            }
-        });
-    }
-
-    endDrag(updateMenu = false) {
-        // if (updateMenu = true) this updates the menu to bring back the deleted items
-        this._clearPlaceholder();
-
-        if (updateMenu) {
-            this.applet.updateMenu();
-        }
-
-        this._dragging = false;
-    }
-
-    activeDrag() {
-        return this._dragging;
-    }
-
-    _createPlaceholder(name, icon, index) {
-        if (this._dragPlaceholder) {
-            return;
-        }
-
-        this._dragPlaceholder = this.applet.createMenuItem(name, icon);
-        this.box.insert_child_at_index(this._dragPlaceholder.actor, index);
-    }
-
-    _clearPlaceholder() {
-        if (this._dragPlaceholder) {
-            this.box.remove_child(this._dragPlaceholder.actor);
-        }
-
-        this._dragPlaceholder = null;
-        this._dragIndex = null;
-    }
-
-    _getAppInfo(source) {
-        if (source.hasOwnProperty('app')) {
-            return source.app.get_app_info();
-        } else if (source.hasOwnProperty('id')) {
-            return appSystem.lookup_app(source.id).get_app_info();
-        }
-        throw new Error(`${UUID}: cant get app info`);
-    }
-
     handleDragOver(source, actor, x, y, time) {
-        let children = this.box.get_children();
-        let boxSize = this.box.height;
-        let mousePos = y;
-
-        let dropIndex = Math.floor((mousePos / boxSize) * children.length);
-
-        if (dropIndex >= children.length) {
-            dropIndex = -1;
-        } else if (dropIndex < -1) {
-            dropIndex = 0;
+        if (this.applet.dragOverSubMenu) {
+            return DND.DragMotionResult.COPY_DROP;
         }
 
-        if (this._dragIndex !== dropIndex) {
-            if (!this._dragPlaceholder) {
-                let app = this._getAppInfo(source);
-                let name = app.get_display_name();
-                let icon = app.get_icon().to_string();
-                this._createPlaceholder(name, icon, dropIndex);
-            } else {
-                this.box.set_child_at_index(this._dragPlaceholder.actor, dropIndex);
-            }
-            this._dragIndex = dropIndex;
-        }
+        this.applet.handleDrag(source, x, y, this.box, false);
 
         return DND.DragMotionResult.COPY_DROP;
     }
@@ -596,24 +690,18 @@ class MyPopupMenu extends Applet.AppletPopupMenu {
             this.close();
         }
 
-        this.endDrag(true);
+        this.applet.endDrag();
     }
 
     acceptDrop(source, actor, x, y, time) {
-        if (!source.isDraggableApp) {
+        if (!source.isDraggableApp || this.applet.dragOverSubMenu) {
             return false;
         }
-        let app = this._getAppInfo(source);
-        let name = app.get_display_name();
-        let icon = app.get_icon().to_string();
-        let execTokens = /\s%[uU]|\s%[fF]/g;
-        let command = app.get_commandline().replace(execTokens, '');
-        this.applet.addApp(name, icon, '', command, this._dragIndex);
+        let app = this.applet.prepareAppInfo(source);
 
-        if (this.isOpen) {
-            this.close();
-        }
-        this.endDrag();
+        this.applet.addApp(app.name, app.icon, '', app.command, this.applet.dragIndex);
+
+        this.applet.endDrag();
 
         return true;
     }
@@ -623,6 +711,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
     _init({
         applet = undefined,
         name = 'PopupMenuItem',
+        index = 0,
         visibleAppIcons = true,
         icon = 'application-x-executable',
         iconSize = 24,
@@ -635,6 +724,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
             this.actor.type = 'popup-item';
             this._selected = false;
             this.name = name;
+            this.index = index;
             this.icon = icon;
             this.iconSize = iconSize;
             this.iconType = useSymbolicIcons ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR;
@@ -651,6 +741,18 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
             if (visibleAppIcons) {
                 this._createIcon(useSymbolicIcons);
             }
+
+            this.menu.handleDragOver = (source, actor, x, y, time) => {
+                return this.handleMenuDragOver(source, actor, x, y, time);
+            };
+
+            this.menu.handleDragOut = () => {
+                this.handleMenuDragOut();
+            };
+
+            this.menu.acceptDrop = (source, actor, x, y, time) => {
+                return this.acceptMenuDrop(source, actor, x, y, time);
+            };
         } catch (error) {
             global.log(error);
         }
@@ -762,7 +864,7 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
                 JSON.stringify(this.applet.listGroups),
                 JSON.stringify([
                     {
-                        'is-group': true,
+                        type: 'group',
                         group: '',
                     },
                     this.icon,
@@ -786,9 +888,19 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
         this._closeContext();
     }
 
+    setWidth(width) {
+        this.actor.set_width(width);
+    }
+
+    getWidth() {
+        return this.actor.get_width();
+    }
+
     addMenuItem(item) {
         this.menu.addMenuItem(item);
-        this._menuItems.push(item);
+        if (item instanceof MyPopupMenuItem) {
+            this._menuItems.push(item);
+        }
     }
 
     getMenuItems() {
@@ -857,6 +969,34 @@ class MyPopupSubMenuItem extends PopupMenu.PopupSubMenuMenuItem {
 
     _closeContext() {
         this.applet.menu.closeContext();
+    }
+
+    handleMenuDragOver(source, actor, x, y, time) {
+        this.applet.dragOverSubMenu = true;
+
+        this.applet.handleDrag(source, x, y, this.menu.box, true);
+
+        return DND.DragMotionResult.COPY_DROP;
+    }
+
+    handleMenuDragOut() {
+        this.applet.dragOverSubMenu = false;
+        this.applet.clearDragPlaceholder();
+    }
+
+    acceptMenuDrop(source, actor, x, y, time) {
+        if (!source.isDraggableApp) {
+            return false;
+        }
+        let app = this.applet.prepareAppInfo(source);
+        let group = this.name;
+        let index = this.index;
+
+        this.applet.addApp(app.name, app.icon, group, app.command, index + this.applet.dragIndex);
+
+        this.applet.endDrag();
+
+        return true;
     }
 }
 
@@ -931,6 +1071,19 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
         return true;
     }
 
+    _onKeyPressEvent(actor, event) {
+        let symbol = event.get_key_symbol();
+        if (
+            symbol === Clutter.KEY_space ||
+            symbol === Clutter.KEY_Return ||
+            symbol === Clutter.KEY_KP_Enter
+        ) {
+            this._onItemClicked(1);
+            return true;
+        }
+        return false;
+    }
+
     _onButtonHoverEvent(actor, event) {
         actor.set_opacity(actor.hover ? 255 : 125);
         actor.hover ? global.set_cursor(Cinnamon.Cursor.POINTING_HAND) : global.unset_cursor();
@@ -947,6 +1100,11 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
                 } else {
                     this.applet.run(this.name, this.icon, this.command);
                     this.applet.menu.close(true);
+                }
+                break;
+            case 2:
+                if (!this.applet.menu.isContextOpen()) {
+                    this.applet.run(this.name, this.icon, this.command);
                 }
                 break;
             case 3:
@@ -991,7 +1149,7 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
                 JSON.stringify(this.applet.listGroups),
                 JSON.stringify([
                     {
-                        'is-group': false,
+                        type: 'app',
                         group: this.group,
                     },
                     this.icon,
@@ -1028,6 +1186,14 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
 
     _onButtonCancel() {
         this._closeContext();
+    }
+
+    setWidth(width) {
+        this.actor.set_width(width);
+    }
+
+    getWidth() {
+        return this.actor.get_width();
     }
 
     select() {
@@ -1091,6 +1257,47 @@ class MyPopupMenuItem extends PopupMenu.PopupIconMenuItem {
     _closeContext() {
         this.applet.menu.closeContext();
     }
+}
+
+class MyPopupSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
+    _init({ red = 255, green = 255, blue = 255, alpha = 255 } = {}) {
+        try {
+            super._init.call(this, { reactive: false });
+
+            this._drawingArea = new St.DrawingArea({ style_class: 'popup-separator-menu-item' });
+            this.addActor(this._drawingArea, { span: -1, expand: true });
+            this._signals.connect(this._drawingArea, 'repaint', (area) => {
+                this._onRepaint(area);
+            });
+
+            this.red = red;
+            this.green = green;
+            this.blue = blue;
+            this.alpha = alpha;
+        } catch (error) {
+            global.log(error);
+        }
+    }
+
+    _onRepaint(area) {
+        let cr = area.get_context();
+        let themeNode = area.get_theme_node();
+        let [width, height] = area.get_surface_size();
+        let margin = themeNode.get_length('-margin-horizontal');
+        let gradientHeight = themeNode.get_length('-gradient-height');
+        let gradientWidth = width - margin * 2;
+        let gradientOffset = (height - gradientHeight) / 2;
+
+        cr.setSourceRGBA(this.red / 255, this.green / 255, this.blue / 255, this.alpha / 255);
+        cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight);
+        cr.fill();
+
+        cr.$dispose();
+    }
+
+    // fix: let the seperator count like an item for editing
+    unselect() {}
+    isSelected() {}
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {

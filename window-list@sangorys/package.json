@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "eslint": "^8.25.0",
+    "eslint-doc-generator": "^0.11.0"
+  }
+}

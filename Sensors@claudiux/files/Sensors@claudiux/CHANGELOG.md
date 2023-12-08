@@ -1,3 +1,33 @@
+### v3.1.1~20230708
+  * Fixes #4929
+
+### v3.1.0~20230630
+  * Fixes issues for Manjaro and Arch Linux.
+
+### v3.0.3~20230615
+  * Fixes #4846 (/var/log/auth.log flooding by sudo)
+
+### v3.0.2~20230607
+  * Fixes #4886 (double-separator bug)
+
+### v3.0.1~20230429
+  * lib/checkDependencies.js: fixes  #4828
+
+### v3.0.0~20230420
+  * Now users can specify certain limit values and a formula to correct the values returned by a sensor.
+
+### v2.0.3~20230205
+  * Better integration with Fedora - Fixes #4672
+
+### v2.0.2~20230105
+  * Minor bug fix: remove useless trailing separator 
+
+### v2.0.1~20221228
+  * Bugfixes (changing text color)
+
+### v2.0.0~20221113
+  * Can now read disk temperature.
+
 ### v1.4.0~20201006
   * Add script `xs.py` for compatibility with Cinnamon 3.8 and 4.0.
   * Rewritten function `versionCompare` (in `constants.js`).

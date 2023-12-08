@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: calendar@ccprog VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-13 13:37+0200\n"
-"PO-Revision-Date: 2021-02-27 15:40+0100\n"
+"POT-Creation-Date: 2022-06-30 17:27+0200\n"
+"PO-Revision-Date: 2022-11-02 22:13+0100\n"
 "Last-Translator: Claus Colloseus <ccprog@gmx.de>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -14,9 +14,57 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 
-#: applet.js:65
+#: applet.js:21
+msgid "%B %-e, %Y"
+msgstr "%B %-e, %Y"
+
+#: applet.js:22 eventView.js:26
+msgid "%A, %B %-e, %Y"
+msgstr "%A, %B %-e, %Y"
+
+#: applet.js:131
 msgid "Date and Time Settings"
 msgstr "Datums- und Zeiteinstellungen"
+
+#: eventView.js:65
+msgid "Starting in a few minutes"
+msgstr "Beginnt in wenigen Minuten"
+
+#: eventView.js:69
+#, javascript-format
+msgid "Starting in %d minutes"
+msgstr "Wird in %d Minuten gestartet"
+
+#: eventView.js:79
+msgid "This evening"
+msgstr "Heute Abend"
+
+#: eventView.js:82
+msgid "Starting later today"
+msgstr "Beginnt heute später"
+
+#: eventView.js:85
+#, javascript-format
+msgid "In %d hour"
+msgid_plural "In %d hours"
+msgstr[0] "In %d Stunde"
+msgstr[1] "In %d Stunden"
+
+#: eventView.js:664
+msgid "No Events"
+msgstr "Keine Termine"
+
+#: eventView.js:925
+msgid "In progress"
+msgstr "Zur Zeit"
+
+#: eventView.js:946
+msgid "All day"
+msgstr "Ganztägig"
+
+#: eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
+msgid "Today"
+msgstr "Heute"
 
 #: settings_widgets.py:95
 msgid "Add new entry"
@@ -75,6 +123,14 @@ msgstr "Tastenkombinationen"
 #. settings-schema.json->section4->title
 msgid "Show World Times"
 msgstr "Zeige Weltzeiten"
+
+#. settings-schema.json->show-events->description
+msgid "Show calendar events"
+msgstr "Kalendereinträge anzeigen"
+
+#. settings-schema.json->show-events->tooltip
+msgid "Check this to display events in the calendar."
+msgstr "Aktivieren, um Termine im Kalender anzuzeigen."
 
 #. settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"
@@ -181,7 +237,7 @@ msgstr "Kolumbien"
 
 #. settings-schema.json->country->options
 msgid "Croatia"
-msgstr "Kroatioen"
+msgstr "Kroatien"
 
 #. settings-schema.json->country->options
 msgid "Czech Republic"
@@ -289,7 +345,7 @@ msgstr "Peru"
 
 #. settings-schema.json->country->options
 msgid "Philippines"
-msgstr "Philippienen"
+msgstr "Philippinen"
 
 #. settings-schema.json->country->options
 msgid "Poland"
@@ -349,11 +405,11 @@ msgstr "Vereinigtes Königreich"
 
 #. settings-schema.json->country->options
 msgid "United States of America"
-msgstr "Vereinigte Staten von Amerika"
+msgstr "Vereinigte Staaten von Amerika"
 
 #. settings-schema.json->region_aus->options
 msgid "Australian Capital Territory"
-msgstr "Australian Capital Territory"
+msgstr "Australisches Hauptstadt-Territorium"
 
 #. settings-schema.json->region_aus->options
 msgid "Queensland"
@@ -361,15 +417,15 @@ msgstr "Queensland"
 
 #. settings-schema.json->region_aus->options
 msgid "New South Wales"
-msgstr "New South Wales"
+msgstr "Neu-Süd-Wales"
 
 #. settings-schema.json->region_aus->options
 msgid "Northern Territory"
-msgstr "Northern Territory"
+msgstr "Nördliches Territorium"
 
 #. settings-schema.json->region_aus->options
 msgid "South Australia"
-msgstr "South Australia"
+msgstr "Südaustralien"
 
 #. settings-schema.json->region_aus->options
 msgid "Tasmania"
@@ -381,7 +437,7 @@ msgstr "Victoria"
 
 #. settings-schema.json->region_aus->options
 msgid "Western Australia"
-msgstr "Western Australia"
+msgstr "Westaustralien"
 
 #. settings-schema.json->region_can->options
 msgid "Alberta"
@@ -421,7 +477,7 @@ msgstr "Ontario"
 
 #. settings-schema.json->region_can->options
 msgid "Prince Edward Island"
-msgstr "Prince Edward Island"
+msgstr "Prinz-Edward-Insel"
 
 #. settings-schema.json->region_can->options
 msgid "Quebec"

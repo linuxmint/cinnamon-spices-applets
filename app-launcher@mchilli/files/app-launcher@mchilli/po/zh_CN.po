@@ -1,0 +1,215 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-18 11:06+0200\n"
+"PO-Revision-Date: 2023-02-09 21:56+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: applet.js:102
+msgid "Edit Applications"
+msgstr "编辑应用程序"
+
+#: applet.js:694 applet.js:948
+msgid "Delete"
+msgstr "删除"
+
+#: applet.js:695 applet.js:949
+msgid "Edit"
+msgstr "编辑"
+
+#: applet.js:696 applet.js:950
+msgid "Cancel"
+msgstr "取消"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#: dialogs.py:35 widgets.py:35
+msgid "Name"
+msgstr "名称"
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:41
+msgid "Group"
+msgstr "组"
+
+#. settings-schema.json->list-applications->columns->title
+#: dialogs.py:42 widgets.py:42
+msgid "Command"
+msgstr "命令"
+
+#: dialogs.py:178
+msgid "The name cannot be empty"
+msgstr "名称不能为空"
+
+#: dialogs.py:183
+msgid "The name is already used"
+msgstr "名称已被使用"
+
+#: dialogs.py:190
+msgid "Valid name"
+msgstr "有效名称"
+
+#: dialogs.py:196
+msgid "Valid command"
+msgstr "有效命令"
+
+#: dialogs.py:199
+msgid "The command is not valid"
+msgstr "命令无效"
+
+#: dialogs.py:211
+msgid "Which data should be replaced from *.desktop file?"
+msgstr "您想要替换 *.desktop 文件中的哪些信息？"
+
+#: dialogs.py:256
+msgid "really delete?"
+msgstr "确认删除？"
+
+#. settings-schema.json->list-applications->columns->title
+#. settings-schema.json->list-groups->columns->title
+#. settings-schema.json->launcher-icon->description
+#: widgets.py:28
+msgid "Icon"
+msgstr "图标"
+
+#: widgets.py:116
+msgid "Add application"
+msgstr "添加应用程序"
+
+#: widgets.py:117
+msgid "Add new entry"
+msgstr "添加新条目"
+
+#: widgets.py:121
+msgid "Add separator"
+msgstr "添加分隔符"
+
+#: widgets.py:129
+msgid "Remove selected entry"
+msgstr "移除所选条目"
+
+#: widgets.py:135
+msgid "Edit selected entry"
+msgstr "编辑所选条目"
+
+#: widgets.py:141
+msgid "Duplicate selected entry"
+msgstr "重复选定的条目"
+
+#: widgets.py:147
+msgid "Move selected entry up"
+msgstr "上移所选条目"
+
+#: widgets.py:153
+msgid "Move selected entry down"
+msgstr "下移所选条目"
+
+#: widgets.py:316
+msgid "Separator"
+msgstr "分隔符"
+
+#. metadata.json->name
+msgid "App Launcher"
+msgstr "应用程序启动器"
+
+#. metadata.json->description
+msgid "A simple App Launcher"
+msgstr "一个简单的应用程序启动器"
+
+#. settings-schema.json->page-applications->title
+#. settings-schema.json->section-applications->title
+msgid "Applications"
+msgstr "应用程序"
+
+#. settings-schema.json->page-settings->title
+msgid "Settings"
+msgstr "设置"
+
+#. settings-schema.json->section-settings-global->title
+msgid "Global Settings"
+msgstr "全局设置"
+
+#. settings-schema.json->section-settings-applications->title
+msgid "Application Settings"
+msgstr "应用程序设置"
+
+#. settings-schema.json->visible-launcher-label->description
+msgid "Show Label"
+msgstr "显示标签"
+
+#. settings-schema.json->launcher-label->description
+msgid "Label"
+msgstr "标签"
+
+#. settings-schema.json->custom-launcher-icon->description
+msgid "Custom Icon"
+msgstr "自定义图标"
+
+#. settings-schema.json->notification-enabled->description
+msgid "Show Notifications"
+msgstr "显示通知"
+
+#. settings-schema.json->notification-enabled->tooltip
+msgid "Show notification on application launch"
+msgstr "在应用程序启动时显示通知"
+
+#. settings-schema.json->notification-text->description
+msgid "Notification Text"
+msgstr "通知文本"
+
+#. settings-schema.json->notification-text->tooltip
+msgid "%s will be your application name"
+msgstr "%s 将是您的应用程序名称"
+
+#. settings-schema.json->hotkey-binding->description
+msgid "Show menu"
+msgstr "显示菜单"
+
+#. settings-schema.json->hotkey-binding->tooltip
+msgid "Set keybinding(s) to show the menu"
+msgstr "设置快捷键以显示菜单"
+
+#. settings-schema.json->fixed-menu-width->description
+msgid "Fixed Menu Width"
+msgstr "固定菜单宽度"
+
+#. settings-schema.json->fixed-menu-width->tooltip
+msgid "Based on the largest submenu item, to prevent menu width flickering"
+msgstr "基于最大的子菜单项目，以防止菜单宽度的闪动"
+
+#. settings-schema.json->visible-app-icons->description
+msgid "Show Application Icons"
+msgstr "显示应用程序图标"
+
+#. settings-schema.json->visible-app-icons->tooltip
+msgid "Show Application Icons in Popup-Menu"
+msgstr "在弹出式菜单中显示应用程序图标"
+
+#. settings-schema.json->use-symbolic-icons->description
+msgid "Use Symbolic Application Icons"
+msgstr "使用应用程序符号图标"
+
+#. settings-schema.json->use-symbolic-icons->tooltip
+msgid "Use Symbolic Application Icons, where it's possible"
+msgstr "在可能的情况下，使用应用程序符号图标"
+
+#. settings-schema.json->app-icon-size->description
+msgid "Application Icon Size"
+msgstr "应用程序图标大小"
+
+#. settings-schema.json->app-icon-size->tooltip
+msgid "Set Icon size"
+msgstr "设置图标大小"

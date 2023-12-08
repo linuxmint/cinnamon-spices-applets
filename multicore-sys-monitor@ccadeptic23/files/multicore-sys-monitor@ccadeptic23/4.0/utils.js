@@ -3,11 +3,11 @@ const Gettext = imports.gettext;
 const UUID = 'multicore-sys-monitor@ccadeptic23';
 // Translation support
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
-const _ = function(str) {
+var _ = function(str) {
   return Gettext.dgettext(UUID, str);
 }
 
-const findIndex = function(arr, cb) {
+var findIndex = function(arr, cb) {
   for (let i = 0, len = arr.length; i < len; i++) {
     if (cb(arr[i], i, arr)) {
       return i;
@@ -16,7 +16,7 @@ const findIndex = function(arr, cb) {
   return -1;
 }
 
-const map = function (arr, fn) {
+var map = function (arr, fn) {
   if (arr == null) {
     return [];
   }
@@ -31,7 +31,7 @@ const map = function (arr, fn) {
   return out;
 }
 
-const tryFn = function(fn, errCb) {
+var tryFn = function(fn, errCb) {
   try {
     return fn();
   } catch (e) {
@@ -41,7 +41,7 @@ const tryFn = function(fn, errCb) {
   }
 }
 
-const filter = function (arr, cb) {
+var filter = function (arr, cb) {
   let result = [];
   for (let i = 0, len = arr.length; i < len; i++) {
     if (cb(arr[i], i, arr)) {

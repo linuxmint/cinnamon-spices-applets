@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-04 21:15+0300\n"
-"PO-Revision-Date: 2019-10-24 22:50+0200\n"
+"PO-Revision-Date: 2022-06-03 18:38+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it\n"
 
 #. metadata.json->name
 msgid "Fiat and cryptocurrency quote rates"
-msgstr "Tassi di quotazione di Fiat e criptovaluta"
+msgstr "Tassi di quotazione di moneta legale e criptovaluta"
 
 #. metadata.json->description
 msgid ""
@@ -38,7 +38,7 @@ msgstr "Generale"
 
 #. settings-schema.json->country->description
 msgid "Choosing a server for fiat currency"
-msgstr "Scelta di un server per valuta fiat"
+msgstr "Scelta di un server per valuta in moneta legale"
 
 #. settings-schema.json->country->tooltip
 msgid "Affects the load data fiat currency quotes"
@@ -143,99 +143,99 @@ msgstr "In quale valuta mostrare le informazioni sul preventivo"
 
 #. settings-schema.json->currency->options
 msgid "Australian dollar (AUD)"
-msgstr ""
+msgstr "Australian dollar (AUD)"
 
 #. settings-schema.json->currency->options
 msgid "Brazilian real (BRL)"
-msgstr ""
+msgstr "Brazilian real (BRL)"
 
 #. settings-schema.json->currency->options
 msgid "Bulgarian lev (BGN)"
-msgstr ""
+msgstr "Bulgarian lev (BGN)"
 
 #. settings-schema.json->currency->options
 msgid "Canadian dollar (CAD)"
-msgstr ""
+msgstr "Canadian dollar (CAD)"
 
 #. settings-schema.json->currency->options
 msgid "Chinese yuan renminbi (CNY)"
-msgstr ""
+msgstr "Chinese yuan renminbi (CNY)"
 
 #. settings-schema.json->currency->options
 msgid "Czech koruna (CZK)"
-msgstr ""
+msgstr "Czech koruna (CZK)"
 
 #. settings-schema.json->currency->options
 msgid "Danish krone (DKK)"
-msgstr ""
+msgstr "Danish krone (DKK)"
 
 #. settings-schema.json->currency->options
 msgid "Euro (EUR)"
-msgstr ""
+msgstr "Euro (EUR)"
 
 #. settings-schema.json->currency->options
 msgid "Hong Kong dollar (HKD)"
-msgstr ""
+msgstr "Hong Kong dollar (HKD)"
 
 #. settings-schema.json->currency->options
 msgid "Hungarian forint (HUF)"
-msgstr ""
+msgstr "Hungarian forint (HUF)"
 
 #. settings-schema.json->currency->options
 msgid "Indian rupee (INR)"
-msgstr ""
+msgstr "Indian rupee (INR)"
 
 #. settings-schema.json->currency->options
 msgid "Japanese yen (JPY)"
-msgstr ""
+msgstr "Japanese yen (JPY)"
 
 #. settings-schema.json->currency->options
 msgid "Norwegian krone (NOK)"
-msgstr ""
+msgstr "Norwegian krone (NOK)"
 
 #. settings-schema.json->currency->options
 msgid "Polish zloty (PLN)"
-msgstr ""
+msgstr "Polish zloty (PLN)"
 
 #. settings-schema.json->currency->options
 msgid "Pound sterling (GBP)"
-msgstr ""
+msgstr "Pound sterling (GBP)"
 
 #. settings-schema.json->currency->options
 msgid "Romanian leu (RON)"
-msgstr ""
+msgstr "Romanian leu (RON)"
 
 #. settings-schema.json->currency->options
 msgid "Russian rouble (RUB)"
-msgstr ""
+msgstr "Russian rouble (RUB)"
 
 #. settings-schema.json->currency->options
 msgid "Singapore dollar (SGD)"
-msgstr ""
+msgstr "Singapore dollar (SGD)"
 
 #. settings-schema.json->currency->options
 msgid "South African rand (ZAR)"
-msgstr ""
+msgstr "South African rand (ZAR)"
 
 #. settings-schema.json->currency->options
 msgid "South Korean won (KRW)"
-msgstr ""
+msgstr "South Korean won (KRW)"
 
 #. settings-schema.json->currency->options
 msgid "Swedish krona (SEK)"
-msgstr ""
+msgstr "Swedish krona (SEK)"
 
 #. settings-schema.json->currency->options
 msgid "Swiss franc (CHF)"
-msgstr ""
+msgstr "Swiss franc (CHF)"
 
 #. settings-schema.json->currency->options
 msgid "Turkish lira (TRY)"
-msgstr ""
+msgstr "Turkish lira (TRY)"
 
 #. settings-schema.json->currency->options
 msgid "US dollar (USD)"
-msgstr ""
+msgstr "US dollar (USD)"
 
 #. settings-schema.json->display->description
 msgid "Display type quotes"
@@ -327,99 +327,99 @@ msgstr "Moneta"
 
 #. modules/stringsForTranslation.js:17
 msgid "Australian dollar"
-msgstr ""
+msgstr "Australian dollar"
 
 #. modules/stringsForTranslation.js:18
 msgid "Brazilian real"
-msgstr ""
+msgstr "Brazilian real"
 
 #. modules/stringsForTranslation.js:19
 msgid "Bulgarian lev"
-msgstr ""
+msgstr "Bulgarian lev"
 
 #. modules/stringsForTranslation.js:20
 msgid "Canadian dollar"
-msgstr ""
+msgstr "Canadian dollar"
 
 #. modules/stringsForTranslation.js:21
 msgid "Chinese yuan renminbi"
-msgstr ""
+msgstr "Chinese yuan renminbi"
 
 #. modules/stringsForTranslation.js:22
 msgid "Czech koruna"
-msgstr ""
+msgstr "Czech koruna"
 
 #. modules/stringsForTranslation.js:23
 msgid "Danish krone"
-msgstr ""
+msgstr "Danish krone"
 
 #. modules/stringsForTranslation.js:24
 msgid "Euro"
-msgstr ""
+msgstr "Euro"
 
 #. modules/stringsForTranslation.js:25
 msgid "Hong Kong dollar"
-msgstr ""
+msgstr "Hong Kong dollar"
 
 #. modules/stringsForTranslation.js:26
 msgid "Hungarian forint"
-msgstr ""
+msgstr "Hungarian forint"
 
 #. modules/stringsForTranslation.js:27
 msgid "Indian rupee"
-msgstr ""
+msgstr "Indian rupee"
 
 #. modules/stringsForTranslation.js:28
 msgid "Japanese yen"
-msgstr ""
+msgstr "Japanese yen"
 
 #. modules/stringsForTranslation.js:29
 msgid "Norwegian krone"
-msgstr ""
+msgstr "Norwegian krone"
 
 #. modules/stringsForTranslation.js:30
 msgid "Polish zloty"
-msgstr ""
+msgstr "Polish zloty"
 
 #. modules/stringsForTranslation.js:31
 msgid "Pound sterling"
-msgstr ""
+msgstr "Pound sterling"
 
 #. modules/stringsForTranslation.js:32
 msgid "Romanian leu"
-msgstr ""
+msgstr "Romanian leu"
 
 #. modules/stringsForTranslation.js:33
 msgid "Russian rouble"
-msgstr ""
+msgstr "Russian rouble"
 
 #. modules/stringsForTranslation.js:34
 msgid "Singapore dollar"
-msgstr ""
+msgstr "Singapore dollar"
 
 #. modules/stringsForTranslation.js:35
 msgid "South African rand"
-msgstr ""
+msgstr "South African rand"
 
 #. modules/stringsForTranslation.js:36
 msgid "South Korean won"
-msgstr ""
+msgstr "South Korean won"
 
 #. modules/stringsForTranslation.js:37
 msgid "Swedish krona"
-msgstr ""
+msgstr "Swedish krona"
 
 #. modules/stringsForTranslation.js:38
 msgid "Swiss franc"
-msgstr ""
+msgstr "Swiss franc"
 
 #. modules/stringsForTranslation.js:39
 msgid "Turkish lira"
-msgstr ""
+msgstr "Turkish lira"
 
 #. modules/stringsForTranslation.js:40
 msgid "US dollar"
-msgstr ""
+msgstr "US dollar"
 
 #. modules/stringsForTranslation.js:43
 msgid "Set API key..."
@@ -439,27 +439,27 @@ msgstr "Aggiorna: "
 
 #. modules/stringsForTranslation.js:47
 msgid "Rank: #"
-msgstr ""
+msgstr "Rango: #"
 
 #. modules/stringsForTranslation.js:48
 msgid "1H:"
-msgstr ""
+msgstr "1H:"
 
 #. modules/stringsForTranslation.js:49
 msgid "24H:"
-msgstr ""
+msgstr "24H:"
 
 #. modules/stringsForTranslation.js:50
 msgid "7D:"
-msgstr ""
+msgstr "7D:"
 
 #. modules/stringsForTranslation.js:51
 msgid "Max.: "
-msgstr ""
+msgstr "Max.: "
 
 #. modules/stringsForTranslation.js:52
 msgid "Min.: "
-msgstr ""
+msgstr "Min.: "
 
 #. modules/stringsForTranslation.js:53
 msgid "For the Russian server, try again in 15 seconds."

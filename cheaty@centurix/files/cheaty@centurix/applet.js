@@ -11,6 +11,7 @@ const Tooltips = imports.ui.tooltips;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
+const ByteArray = imports.byteArray;
 const UUID = "cheaty@centurix";
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
@@ -142,6 +143,7 @@ DescriptionMenuItem.prototype =
 
 
 function Cheaty(metadata, orientation, panelHeight, instanceId) {
+	this.instance_id = instanceId;
 	this.settings = new Settings.AppletSettings(this, UUID, instanceId);
 	this._init(orientation, panelHeight, instanceId);
 }
@@ -162,6 +164,9 @@ Cheaty.prototype = {
 
 		this.cheatsheetFolder = REFDOCS;
 
+		// Fill in our sheets from the folder
+		this.cheatsheets = [];
+
 		this.settings.bindProperty(
 			Settings.BindingDirection.IN, 
 			"cheatsheetFolder",
@@ -169,9 +174,24 @@ Cheaty.prototype = {
 			this.onCheatsheetFolderUpdate, 
 			null
 		);
+		this.settings.bind("keyOpen", "keyOpen", this._setKeybinding);
+		this._setKeybinding();
+		this.settings.bindProperty(
+			Settings.BindingDirection.BIDIRECTIONAL,
+			"cheatsheets",
+			"cheatsheets",
+			this.onCheatsheetsUpdate,
+			null
+		);
+
 
 		this._msgsrc = new MessageTray.SystemNotificationSource("Cheaty");
 		Main.messageTray.add(this._msgsrc);
+		this.refresh(true);
+	},
+
+	refresh: function(updateSettings=false) {
+		this.menu.removeAll();
 
 		let currentDir = Gio.file_new_for_path(resolveHome(this.cheatsheetFolder));
 
@@ -179,6 +199,12 @@ Cheaty.prototype = {
 		let file;
 
 		this._sheets = [];
+
+		let current_sheets = [];
+		let tmp_sheets = this.settings.getValue("cheatsheets")
+		tmp_sheets.forEach((sheet) => {
+			current_sheets.push(sheet.name);
+		});
 
 		while ((file = enumerator.next_file(null)) !== null) {
 			if (file.get_file_type() === Gio.FileType.DIRECTORY) {
@@ -193,7 +219,28 @@ Cheaty.prototype = {
 
 					let [ok, data, etag] = sheet.load_contents(null);
 					if (ok) {
-						let contents = JSON.parse(data);
+						let contents = JSON.parse(ByteArray.toString(data));
+
+						if (!current_sheets.includes(contents.name)) {
+							// Detected a new sheet, add it to the settings
+							tmp_sheets.push({
+								"enabled": true,
+								"name": contents.name,
+								"description": contents.description,
+								"author": contents.author
+							})
+						} else {
+							// Get the enabled state from the settings
+							let breaker = false;
+							tmp_sheets.forEach((sheet) => {
+								if (sheet.name == contents.name && !sheet.enabled) {
+									breaker = true;
+								}
+							})
+							if (breaker) {
+								continue;
+							}
+						}
 
 						let iconPath = resolveHome(this.cheatsheetFolder) + '/' + sheetName + '/icon.svg';
 
@@ -221,9 +268,28 @@ Cheaty.prototype = {
 				}
 			}
 		}
+		if (updateSettings) {
+			this.settings.setValue("cheatsheets", tmp_sheets);
+		}
+	},
+
+	_setKeybinding: function () {
+		Main.keybindingManager.addHotKey("cheaty-show-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
+	},
+
+	on_applet_removed_from_panel: function () {
+		Main.keybindingManager.removeHotKey("cheaty-show-" + this.instance_id);
+	},
+
+	_openMenu: function () {
+		this.menu.toggle();
 	},
 
 	onCheatsheetFolderUpdate: function() {
+	},
+
+	onCheatsheetsUpdate: function(newValue) {
+		this.refresh(false);
 	},
 
 	settingsApiCheck: function() {
@@ -256,7 +322,7 @@ Cheaty.prototype = {
 	},
 
 	on_applet_clicked: function(event) {
-		this.menu.toggle();
+		this._openMenu();
 	}
 }
 

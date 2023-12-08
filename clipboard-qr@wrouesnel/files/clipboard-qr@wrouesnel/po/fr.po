@@ -7,20 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-28 16:00+0800\n"
-"PO-Revision-Date: 2019-10-22 23:30+0200\n"
+"POT-Creation-Date: 2020-05-09 12:25+0200\n"
+"PO-Revision-Date: 2023-04-27 16:48+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
-
-#: QR.js:78
-msgid "QR generated."
-msgstr "QR Code créé."
+"X-Generator: Poedit 3.0.1\n"
 
 #: QRLib.js:682
 msgid "Invalid or unsupported mode."
@@ -46,22 +42,31 @@ msgstr "Version invalide."
 msgid "Invalid mask."
 msgstr "Masque invalide."
 
+#: QR.js:80 applet.js:194
+msgid "QR generated"
+msgstr "QR Code créé."
+
 #: applet.js:63
 msgid "Create QR code from clipboard"
 msgstr "Créez un QR code à partir du presse-papier"
 
-#: applet.js:135
+#: applet.js:75
+#, javascript-format
+msgid "Save QR code as SVG in '~/%s'"
+msgstr "Enregistrer le QR code au format SVG dans '~/%s'"
+
+#: applet.js:158
 msgid "Scan QR Code"
 msgstr "Scannez le QR Code"
 
-#: applet.js:155
+#: applet.js:183 applet.js:197
 msgid "No QR code scanned."
 msgstr "Aucun QR Code numérisé."
 
-#. clipboard-qr@wrouesnel->metadata.json->description
-msgid "Create QR codes from clipboard content"
-msgstr "Créez des QR Codes à partir du contenu du presse-papier"
-
-#. clipboard-qr@wrouesnel->metadata.json->name
+#. metadata.json->name
 msgid "Clipboard QR code applet"
 msgstr "Conversion du contenu du Presse-Papier en QR Code"
+
+#. metadata.json->description
+msgid "Create QR codes from clipboard content"
+msgstr "Créez des QR Codes à partir du contenu du presse-papier"

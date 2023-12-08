@@ -8,8 +8,8 @@ import { _ } from "../utils";
  * Nominatim communication interface
  */
 export class GeoLocation {
-	private url = "https://nominatim.openstreetmap.org/search/";
-	private params = "?format=json&addressdetails=1&limit=1";
+	private url = "https://nominatim.openstreetmap.org/search";
+	private params = "format=json&addressdetails=1&limit=1";
 	private App: WeatherApplet;
 	private cache: LocationCache = {};
 
@@ -19,18 +19,18 @@ export class GeoLocation {
 
 	/**
 	 * Finds location and rebuilds entryText so it can be looked up again
-	 * @param searchText 
+	 * @param searchText
 	 */
 	public async GetLocation(searchText: string): Promise<LocationData | null> {
 		try {
 			searchText = searchText.trim();
-			let cached = this.cache?.searchText;
+			const cached = this.cache?.searchText;
 			if (cached != null) {
 				Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
 				return cached;
 			}
 
-			let locationData = await this.App.LoadJsonAsync<any>(this.url + encodeURIComponent(searchText) + this.params);
+			const locationData = await this.App.LoadJsonAsync<any>(`${this.url}?q=${searchText}&${this.params}`);
 			if (locationData == null)
 				return null;
 
@@ -43,7 +43,7 @@ export class GeoLocation {
 				return null;
 			}
 			Logger.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
-			let result: LocationData = {
+			const result: LocationData = {
 				lat: parseFloat(locationData[0].lat),
 				lon: parseFloat(locationData[0].lon),
 				city: locationData[0].address.city || locationData[0].address.town || locationData[0].address.village,
@@ -66,15 +66,15 @@ export class GeoLocation {
 	}
 
 	/**
-	 * Nominatim doesn't return any result if the State district is included in the search 
+	 * Nominatim doesn't return any result if the State district is included in the search
 	 * in specific case, we have to build it from the address details omitting specific
 	 * keys
-	 * @param locationData 
+	 * @param locationData
 	 */
 	private BuildEntryText(locationData: any): string {
 		if (locationData.address == null) return locationData.display_name;
-		let entryText: string[] = [];
-		for (let key in locationData.address) {
+		const entryText: string[] = [];
+		for (const key in locationData.address) {
 			if (key == "state_district") continue;
 			if (key == "county") continue;
 			if (key == "country_code") continue;

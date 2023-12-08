@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-29 05:07+0100\n"
+"PO-Revision-Date: 2023-10-30 12:41+0100\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: js/moon.js:41 js/moon.js:49
+msgid "New Moon"
+msgstr "Luna Nuova"
+
+#: js/moon.js:42
+msgid "Waxing Crescent"
+msgstr "Mezzaluna Crescente"
+
+#: js/moon.js:43
+msgid "First Quarter"
+msgstr "Primo Quarto"
+
+#: js/moon.js:44
+msgid "Waxing Gibbous"
+msgstr "Gibbosa Crescente"
+
+#: js/moon.js:45
+msgid "Full Moon"
+msgstr "Luna Piena"
+
+#: js/moon.js:46
+msgid "Waning Gibbous"
+msgstr "Gibbosa Calante"
+
+#: js/moon.js:47
+msgid "Last Quarter"
+msgstr "Ultimo Quarto"
+
+#: js/moon.js:48
+msgid "Waning Crescent"
+msgstr "Mezzaluna Calante"
+
+#. metadata.json->name
+#: js/moon.js:54
+msgid "Moon Phase"
+msgstr "Fase Lunare"
+
+#. metadata.json->description
+msgid "A Cinnamon applet that displays the current moon phase."
+msgstr "Un'applet di Cinnamon che mostra l'attuale fase lunare."
+
+#. settings-schema.json->page-settings->title
+msgid "Settings"
+msgstr "Impostazioni"
+
+#. settings-schema.json->section-panel->title
+msgid "General Settings"
+msgstr "Impostazioni Generali"
+
+#. settings-schema.json->section-menu->title
+msgid "Update Settings"
+msgstr "Aggiorna impostazioni"
+
+#. settings-schema.json->showPhaseLabel->description
+msgid "Display the moon phase as a string"
+msgstr "Mostra la fase lunare come stringa"
+
+#. settings-schema.json->showNameLabel->description
+msgid "Display the name of the moon phase in the label"
+msgstr "Mostra il nome della fase lunare nell'etichetta"
+
+#. settings-schema.json->showPercentageLabel->description
+msgid "Display the percentage of the moon phase in the label"
+msgstr "Mostra la percentuale della fase lunare nell'etichetta"
+
+#. settings-schema.json->showTooltip->description
+msgid "Display a tooltip on hover"
+msgstr "Mostra un tooltip al passaggio del mouse"
+
+#. settings-schema.json->showNameTooltip->description
+msgid "Display the name of the moon phase in the tooltip"
+msgstr "Mostra il nome della fase lunare nel tooltip"
+
+#. settings-schema.json->showPercentageTooltip->description
+msgid "Display percentage of the moon phase in the tooltip"
+msgstr "Mostra la percentuale della fase lunare nel tooltip"
+
+#. settings-schema.json->useAltIcons->description
+msgid "Light theme"
+msgstr "Tema chiaro"
+
+#. settings-schema.json->updateInterval->units
+msgid "seconds"
+msgstr "secondi"
+
+#. settings-schema.json->updateInterval->description
+msgid "Update interval"
+msgstr "Intervallo di aggiornamento"

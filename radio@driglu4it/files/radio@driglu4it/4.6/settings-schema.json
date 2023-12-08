@@ -65,8 +65,9 @@
 		},
 		"youtube-section": {
 			"type": "section",
-			"title": "Youtube Download",
+			"title": "YouTube Download",
 			"keys": [
+				"youtube-download-cli",
 				"music-download-dir-select"
 			]
 		}
@@ -94,13 +95,22 @@
 		],
 		"default": [
 			{
-				"name": "Chillout",
-				"url": "http://ic7.101.ru:8000/c15_3",
+				"name": "Smooth Chill",
+				"url": "https://media-ssl.musicradio.com/ChillMP3",
 				"inc": true
 			},
 			{
 				"name": "Austrian Rock Radio",
 				"url": "http://live.antenne.at/arr",
+				"inc": true
+			},{
+				"name": "Rádio KIKS Rock", 
+				"url": "https://stream.radiokiks.sk/kiks_rock.mp3", 
+				"inc": true
+			},
+			{
+				"name": "Radio BOB", 
+				"url": "http://live6.infonetmedia.si/Europa05", 
 				"inc": true
 			},
 			{
@@ -160,19 +170,28 @@
 	"last-url": {
 		"type": "generic",
 		"value": null,
-		"dfault": null
+		"default": null
+	},
+	"youtube-download-cli": {
+		"type": "combobox", 
+		"description": "YouTube Download CLI tool", 
+		"tooltip": "The CLI tool used to download songs from YouTube", 
+		"default": "youtube-dl",
+		"options": {
+			"yt-dlp": "yt-dlp", 
+			"youtube-dl": "youtube-dl"
+		}
 	},
 	"music-download-dir-select": {
 		"type": "filechooser",
 		"description": "Download directory",
-		"tooltip": "Songs downloaded from Youtube will be saved to this directory.",
+		"tooltip": "Songs downloaded from YouTube will be saved to this directory.",
 		"default": "~/Music/Radio",
 		"select-dir": true
 	},
 	"radio-search-widget": {
 		"type": "custom",
 		"file": "RadioSearchWidget.py",
-		"widget": "RadioSearchWidget",
-		"description": "Try out this custom widget!"
+		"widget": "RadioSearchWidget"
 	}
 }

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu 3.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-07 10:55+0100\n"
+"POT-Creation-Date: 2022-03-16 02:20+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
 "Language-Team: tr\n"
@@ -111,14 +111,50 @@ msgstr "Dosyaları bul..."
 msgid "Please wait..."
 msgstr "Lütfen bekleyin..."
 
+msgid "Applications"
+msgstr "Uygulamalar"
+
+msgid "Documents"
+msgstr "Belgeler"
+
+msgid "Videos"
+msgstr "Videolar"
+
+msgid "Images"
+msgstr "Resimler"
+
+msgid "Music"
+msgstr "Müzik"
+
 msgid "No recent Items"
 msgstr "Son dosya yok"
 
 msgid "Click to copy"
 msgstr "Kopyalamak için tıkla"
 
+msgid "Applications and files"
+msgstr "Uygulamalar ve dosyalar"
+
+msgid "Other search results"
+msgstr "Diğer arama sonuçları"
+
+msgid "Browser history"
+msgstr "Tarayıcı geçmişi"
+
+msgid "Browser bookmarks"
+msgstr "Tarayıcı yer imleri"
+
+msgid "Emoji"
+msgstr "İmoji"
+
 msgid "Trash"
 msgstr "Çöp"
+
+msgid "Error while opening file:"
+msgstr "Dosya açılırken hata:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Çok fazla girdi - sadece ilk 1000 girdi gösteriliyor"
 
 msgid "Favorites"
 msgstr "Favoriler"
@@ -128,9 +164,6 @@ msgstr "Son dosyalar"
 
 msgid "Home folder"
 msgstr "Ev dizini"
-
-msgid "Too many entries - showing first 1000 entries only"
-msgstr "Çok fazla girdi - sadece ilk 1000 girdi gösteriliyor"
 
 msgid "Reset category order"
 msgstr "Kategori sırasını sıfırla"
@@ -168,8 +201,26 @@ msgstr "Çöpe taşı"
 msgid "Error while moving file to trash:"
 msgstr "Dosya çöpe taşınırken hata:"
 
-msgid "Error while opening file:"
-msgstr "Dosya açılırken hata:"
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Bu menü ögesi herhangi bir paketle ilişkili değildir. Yine de menüden "
+"kaldırmak ister misiniz? "
+
+msgid "The following packages will be removed:"
+msgstr "Aşağıdaki paketler kaldırılacak:"
+
+msgid "Packages to be removed"
+msgstr "Kaldırılacak paketler"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "%s paketi diğer paketler tarafından gerekli olduğu için kaldırılamaz. "
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "%s paketi, aşağıdaki paketlerin bir bağımlılığıdır: "
 
 msgid "Open"
 msgstr "Aç"
@@ -440,7 +491,7 @@ msgstr ""
 msgid "Show favorites on sidebar"
 msgstr "Kenar çubuğunda sık kullanılanları göster"
 
-msgid "Show your favorite app and file icons on the sidebar"
+msgid "Show your favorite apps and file icons on the sidebar"
 msgstr ""
 "Kenar çubuğunda sık kullanılan uygulamaları ve dosya simgelerini gösterir"
 
@@ -483,36 +534,6 @@ msgstr "Arama sonuçlarında imojileri gösterir"
 msgid "Web search option"
 msgstr "Web arama seçenekleri"
 
-msgid "Google"
-msgstr "Google"
-
-msgid "Bing"
-msgstr "Bing"
-
-msgid "Baidu"
-msgstr "Baidu"
-
-msgid "Yahoo"
-msgstr "Yahoo"
-
-msgid "Yandex"
-msgstr "Yandex"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ask"
-msgstr "Ask"
-
-msgid "Ecosia"
-msgstr "Ecosia"
-
-msgid "AOL"
-msgstr "AOL"
-
-msgid "Startpage"
-msgstr "Startpage"
-
 msgid "Show an internet search option in search results"
 msgstr "Arama sonuçlarında bir internet arama seçeneği gösterir"
 
@@ -522,18 +543,30 @@ msgstr "Ev dizininde ara"
 msgid "When searching, also search my home folder for files"
 msgstr "Arama yaparken, ev dizininde de dosya araması yapar"
 
+msgid "Web history search"
+msgstr "Web geçmişinde ara"
+
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Arama yaparken, tarayıcının geçmişinde de ara (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Not: Firefox geçmişi şu anda desteklenmemektedir."
+
 msgid "Web bookmarks search"
 msgstr "Web sık kullanılanlarında ara"
 
 msgid ""
 "When searching, also search my browser's web bookmarks (Google Chrome, "
-"Firefox, Chromium, Opera, Brave)\n"
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
 "Note: To search Firefox bookmarks you will need to install package gir1.2-"
 "gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
 "libgda (Arch based distributions) and restart your computer."
 msgstr ""
 "Arama yaparken tarayıcının web yer imlerinde de arama yapar (Google Chrome, "
-"Firefox, Chromium, Opera, Brave)\n"
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
 "Not: Firefox yer imlerinde arama yapmak için (Ubuntu ve Linux Mint dahil "
 "Debian tabanlı dağıtımlarda) gir1.2-gda-5.0 paketini ya da (Arch tabanlı "
 "dağıtımlarda) libgda paketini yüklemeniz ve bilgisayarınızı yeniden "
@@ -544,6 +577,25 @@ msgstr "Wikipedia araması"
 
 msgid "Show some Wikipedia results"
 msgstr "Bazı Wikipedia sonuçlarını gösterir"
+
+msgid "Wikipedia language"
+msgstr "Wikipedia dili"
+
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Not: Bazı arama seçeneklerini arama teriminizin önüne ekleyerek; bunlar için "
+"arama pasif olsa bile arama yapabilirsiniz.\n"
+"Örneğin: Bir emojiyi aramak için, kalp emojilerini bulmak amacıyla 'e heart' "
+"yazın. Benzer şekilde, dosya araması için 'f', tarayıcı geçmişinde arama "
+"için 'h' ve tarayıcı yer imlerinde arama için 'b' öneklerini "
+"kullanabilirsiniz.\n"
 
 msgid "Use a custom icon size"
 msgstr "Özel simge boyutu kullan"

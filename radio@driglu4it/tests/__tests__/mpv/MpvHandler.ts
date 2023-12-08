@@ -34,9 +34,7 @@ const callbacks = { onPlaybackstatusChanged, onUrlChanged, onVolumeChanged, onTi
 
 function initMpvListener(args: { lastUrl?: string }) {
 
-    const {
-        lastUrl
-    } = args
+    const lastUrl = args.lastUrl || ''
 
     let mprisListener = createMpvHandler({
         ...callbacks,
@@ -297,7 +295,7 @@ describe('changing volume is working', () => {
         })
 
         const expectedCvcVolume = control.get_vol_max_norm() * VALID_VOLUME_PERCENT_2 / 100
-        expect(cvcStream.volume).toBe(expectedCvcVolume)
+        expect(cvcStream!.volume).toBe(expectedCvcVolume)
     });
 
 });

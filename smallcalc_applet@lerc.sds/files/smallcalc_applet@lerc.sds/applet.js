@@ -46,7 +46,8 @@ function makeApplet(orientation, panel_height, applet_id) {
     var base = 10;
 
     var settings = new Settings.AppletSettings(applet, uuid, applet.instance_id);
-    settings.bindProperty(Settings.BindingDirection.IN, "definitions", "definitions", definitionsChanged);
+    settings.bind("definitions", "definitions", definitionsChanged);
+    settings.bind("precision", "precision", null);
 
     let parser = MathJS.parser();
     loadDefinitions();
@@ -69,6 +70,7 @@ function makeApplet(orientation, panel_height, applet_id) {
 
     buildLayout();
 
+    let drag_device;
     enableDragging();
 
 
@@ -107,7 +109,9 @@ function makeApplet(orientation, panel_height, applet_id) {
 
         osdBox.connect("button-press-event", function(actor, event) {
             dragging = true;
-            Clutter.grab_pointer(osdBox);
+            drag_device = event.get_device();
+            drag_device.grab(osdBox);
+
             Main.pushModal(osdBox);
 
             dragStartMousePosition = event.get_coords();
@@ -117,7 +121,7 @@ function makeApplet(orientation, panel_height, applet_id) {
         osdBox.connect("button-release-event", function() {
             dragging = false;
             Main.popModal(osdBox);
-            Clutter.ungrab_pointer();
+            drag_device.ungrab();
 
             layoutBox.textEntryField.grab_key_focus();
         });
@@ -279,6 +283,14 @@ function makeApplet(orientation, panel_height, applet_id) {
             if (typeof(result) === 'function') {
                 newText = "function ''" + result.name + "'' set.";
             } else {
+                if (typeof(result) === 'number') {
+                    //~ let ent = Math.trunc(result);
+                    //~ let m = (ent <0) ? -1 : 1;
+                    //~ ent = Math.abs(ent);
+                    //~ result = ent + Math.round((Math.abs(result)-ent) * 10**applet.precision)/(10**applet.precision);
+                    //~ result = m * result;
+                    result = MathJS.format(result, {precision: applet.precision});
+                }
                 addToHistory("" + result);
                 newText = baseRepresentation("" + result, base);
             }
@@ -361,7 +373,7 @@ function makeApplet(orientation, panel_height, applet_id) {
         function handleKeyPress(actor, event) {
             let key = event.get_key_symbol();
             let keyCode = event.get_key_unicode();
-            if (key == Clutter.KP_Enter || key == Clutter.Return) {
+            if (key == 65421 || key == Clutter.KP_Enter || key == Clutter.Return) {
                 evaluateDisplay();
             }
             if (key == Clutter.Down) {
@@ -463,7 +475,7 @@ function makeApplet(orientation, panel_height, applet_id) {
         store[3][2].add_style_class_name("pi");
         store[3][3].add_style_class_name("operator equals");
         store[3][4].add_style_class_name("operator ");
-
+        fnStore[0][5].add_style_class_name("smt");
 
         textBox.grab_key_focus();
 

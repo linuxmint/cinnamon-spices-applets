@@ -1,5 +1,5 @@
 {
-    "description": "Quiet reminder to take a break every half an hour. When the circle is red, give your eyes a rest by looking away from your monitor.",
+    "description": "Quiet reminder to take a break every half an hour. When the circle is red, give your eyes a rest by looking away from your monitor, then click the circle.",
     "uuid": "healthyeyes@ipolozov",
     "name": "Healthy Eyes"
 }

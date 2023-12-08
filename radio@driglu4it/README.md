@@ -12,16 +12,21 @@ A simple radio applet for Cinnamon. The radio-applet has been totally rewritten 
 - The volume can be controlled by using the mouse wheel while the cursor is placed on the icon in the panel. Also it is possible to toggle the play/pause status by middleclicking on the icon
 - The title of the radio channel can be shown in the panel
 - The icon color changes when a radio channel is playing
+- Seek backward/forward
 
 ## Dependencies
 
-The [mpv media player](https://mpv.io) is used for playing the radio channel. As the mpv media player doesn't support MPRIS control out of the box, [this plugin](https://github.com/hoyon/mpv-mpris) is used to get this feature. For the mpv player and the plugin, a download dialogue is opened when clicking on the applet.
+The [mpv media player](https://mpv.io) is used for playing the radio channel. As the mpv media player doesn't support MPRIS control out of the box, [this plugin](https://github.com/hoyon/mpv-mpris) is used to get this feature. For the mpv player and the plugin, a download dialogue is opened when clicking on the applet. 
 
 **TLDR** Run this [gist](https://gist.github.com/jonath92/0f6bf4606bc8a34be1bb0826c99b73d1) as sudo to install `youtube-dl`
 
-`youtube-dl` is needed for the youtube-download feature. As google frequently makes technical changes to Youtube, it is highly recommended to always have the newest version of youtube-dl installed as otherwise the feature will most likely stop working after a short time. Unfortunately, the newest version in the official linux mint apt repository is usually not even close to sufficiently up to date. Therefore I highly recommend installing `youtube-dl` by following the [official installation instructions](https://github.com/ytdl-org/youtube-dl#installation). However as the `mpv` package already includes an outdated youtube-dl version, it first needs to be removed to prevent conflicts which may occur when different versions of youtube-dl are installed on your system. In order to automatically update `youtube-dl`, I furthermore recommend creating a script in `/etc/cron.daily` (which needs to be without extension). I have created a [gist](https://gist.github.com/jonath92/0f6bf4606bc8a34be1bb0826c99b73d1) for this purpose.
+For the youtube download feature you can either use [youtube-dl](https://github.com/ytdl-org/youtube-dl) or [yt-dlp](https://github.com/yt-dlp/yt-dlp). By default youtube-dl is selected. As google frequently makes technical changes to Youtube, it is highly recommended to always have the newest version of the download cli tool installed as otherwise the feature will most likely stop working after a short time. Unfortunately, the newest version in the official linux mint apt repository is usually not even close to sufficiently up to date. Therefore I highly recommend installing the software by following the official installstion instruction which can be found on the respective github page and adding a script in `/etc/cron.daily` to automate the update. I have created a gist for both [youtube-dl](https://gist.github.com/jonath92/0f6bf4606bc8a34be1bb0826c99b73d1) and [yt-dlp](https://gist.github.com/jonath92/039e998b3d3f6ba4afd5d5c671eaedf1) for this purpose.
 
 ## Known Issues
 
-- Special characters (e.g German Umlaute) are not shown correctly on the sound applet (when the option "Show song information on the panel" is activated). This is a limitation of the mpv player. I haven't yet found a workaround for that. Ideas are welcome.
+- Special characters (e.g German Umlaute) are not shown correctly on the sound applet (when the option "Show song information on the panel" is activated). This is a [bug](https://github.com/mpv-player/mpv/issues/8844) of the mpv player. There is an open [pull request](https://github.com/mpv-player/mpv/pull/8845) which will fix that. At the moment the only workaround is to compile mpv from the source of the mentioned pull request. 
 - For some radio stations (e.g. BBC) the metadata can't be shown
+- It is automatically downloaded the compiled version of the mpv mpris plugin which however is only suitable for 64-bit x86 architecutres (e.g. not for the raspberry pi). In that case you unfortunately have to [build the plugin](https://github.com/hoyon/mpv-mpris#build) by yourself at the moment and place the plugin at: `~/.cinnamon/configs/radio@driglu4it/.mpris.so`. 
+
+## New Maintainer Needed
+I (https://github.com/jonath92) have been expanding and maintaining the Radio Applet for a while now, but for personal reasons I unfortunately have very little time for this project. Therefore I am looking for a new mainainter. I am still more than willing to help a new maintainer with technical questions about the code. If you need help regarding the code, just open an issue in the applet repo and notify me in the issue. 

@@ -8,7 +8,8 @@ import { _, AwareDateString, MetreToUserUnits } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { DateTime } from "luxon";
 
-const { BoxLayout, IconType, Label, Icon, Align, } = imports.gi.St;
+const { BoxLayout, IconType, Label, Icon, Align, Button, Side } = imports.gi.St;
+const { Tooltip } = imports.ui.tooltips;
 
 const STYLE_BAR = 'bottombar'
 
@@ -22,9 +23,10 @@ export class UIBar {
 	public ToggleClicked: Event<UIBar, boolean> = new Event();
 
 	// TODO: assert these properly
-	private providerCreditButton!: WeatherButton;
-	private hourlyButton!: WeatherButton;
-	private _timestamp!: imports.gi.St.Label;
+	private providerCreditButton: WeatherButton | null = null;
+	private hourlyButton: WeatherButton | null = null;
+	private _timestamp: imports.gi.St.Button | null = null;
+	private timestampTooltip: imports.ui.tooltips.Tooltip<imports.gi.St.Button> | null = null;
 
 	private app: WeatherApplet;
 
@@ -34,43 +36,74 @@ export class UIBar {
 	}
 
 	public SwitchButtonToShow() {
-		if (!!this.hourlyButton?.actor.child) (this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = "custom-down-arrow-symbolic";
+		const icon: CustomIcons = this.app.Orientation == Side.BOTTOM ? "custom-up-arrow-symbolic" : "custom-down-arrow-symbolic";
+		if (!!this.hourlyButton?.actor.child)
+			(this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = icon;
 	}
 
 	public SwitchButtonToHide() {
-		if (!!this.hourlyButton?.actor.child) (this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = "custom-up-arrow-symbolic";
+		const icon: CustomIcons = this.app.Orientation == Side.BOTTOM ? "custom-down-arrow-symbolic" : "custom-up-arrow-symbolic";
+		if (!!this.hourlyButton?.actor.child)
+			(this.hourlyButton.actor.child as imports.gi.St.Icon).icon_name = icon;
 	}
 
 	public DisplayErrorMessage(msg: string) {
-		this._timestamp.text = msg;
+		if (this._timestamp == null)
+			return;
+
+		this._timestamp.label = msg;
 	}
 
 	public Display(weather: WeatherData, provider: WeatherProvider, config: Config, shouldShowToggle: boolean): boolean {
-		this.providerCreditButton.actor.label = _("Powered by") + " " + provider.prettyName;
-		this.providerCreditButton.url = provider.website;
-		let lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
-		this._timestamp.text = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
+		if (this._timestamp == null || this.providerCreditButton == null || this.providerCreditButton?.actor.is_finalized?.())
+			return false;
 
-		if (weather.location.distanceFrom != null) {
-			let stringFormat = {
-				distance: MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
-				distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
-			}
-			this._timestamp.text += `, ${_("{distance}{distanceUnit} from you", stringFormat)}`;
+		let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
+		if (provider.remainingCalls != null) {
+			creditLabel+= ` (${provider.remainingCalls})`;
 		}
 
-		if (!shouldShowToggle)
+		this.providerCreditButton.actor.label = creditLabel;
+		this.providerCreditButton.url = provider.website;
+		const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
+		this._timestamp.label = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
+
+		if (weather?.stationInfo?.distanceFrom != null) {
+			const stringFormat = {
+				distance: MetreToUserUnits(weather.stationInfo.distanceFrom, config.DistanceUnit).toString(),
+				distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
+			}
+			this._timestamp.label += `, ${_("{distance} {distanceUnit} from you", stringFormat)}`;
+		}
+
+		let tooltipText = "";
+		if (weather?.stationInfo?.name != null)
+			tooltipText = _("Station Name: {stationName}", { stationName: weather.stationInfo.name });
+
+		if (weather?.stationInfo?.area != null) {
+			tooltipText += ", ";
+			tooltipText += _("Area: {stationArea}", {stationArea: weather.stationInfo.area});
+		}
+
+		this.timestampTooltip?.set_text(tooltipText);
+
+		if (!shouldShowToggle || config._alwaysShowHourlyWeather)
 			this.HideHourlyToggle();
+		else
+			this.ShowHourlyToggle();
 		return true;
 	}
 
 	public Destroy(): void {
 		this.actor.destroy_all_children();
+		this.timestampTooltip?.destroy();
 	}
 
 	public Rebuild(config: Config) {
 		this.Destroy();
-		this._timestamp = new Label({ text: "Placeholder" });
+		this._timestamp = new Button({ label: "Placeholder" });
+		this.timestampTooltip = new Tooltip(this._timestamp, "");
+
 		this.actor.add(this._timestamp, {
 			x_fill: false,
 			x_align: Align.START,
@@ -86,7 +119,7 @@ export class UIBar {
 				icon_type: IconType.SYMBOLIC,
 				// always want it a bit bigger due to the icons's horizontal nature
 				icon_size: config.CurrentFontSize + 3,
-				icon_name: "custom-down-arrow-symbolic" as CustomIcons,
+				icon_name: this.app.Orientation == Side.BOTTOM ? "custom-up-arrow-symbolic" as CustomIcons : "custom-down-arrow-symbolic" as CustomIcons,
 				style: "margin: 2px 5px;"
 			}),
 		});
@@ -105,7 +138,7 @@ export class UIBar {
 		}
 
 		this.providerCreditButton = new WeatherButton({ label: _(ELLIPSIS), reactive: true });
-		this.providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(this.providerCreditButton));
+		this.providerCreditButton.actor.connect(SIGNAL_CLICKED, () => OpenUrl(this.providerCreditButton!));
 
 		this.actor.add(this.providerCreditButton.actor, {
 			x_fill: false,
@@ -117,8 +150,8 @@ export class UIBar {
 	}
 
 	/**
-	 * 
-	 * @param unit 
+	 *
+	 * @param unit
 	 * @return km or mi, based on unit
 	 */
 	private BigDistanceUnitFor(unit: DistanceUnits) {
@@ -127,8 +160,11 @@ export class UIBar {
 	}
 
 	private HideHourlyToggle() {
-		if (this.hourlyButton != null)
-			this.hourlyButton.actor.child = null;
+		this.hourlyButton?.actor.hide();
+	}
+
+	private ShowHourlyToggle() {
+		this.hourlyButton?.actor.show();
 	}
 
 }

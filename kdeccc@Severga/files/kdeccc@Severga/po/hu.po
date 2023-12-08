@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-07 21:48+0300\n"
+"PO-Revision-Date: 2023-05-07 19:55+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:60
+msgid "Configure KDE Connect"
+msgstr "KDE Connect beállítása"
+
+#: applet.js:111
+msgid "No reachable paired devices"
+msgstr "A párosított eszközök nem érhetőek el"
+
+#: applet.js:122
+msgid "Id:  "
+msgstr "Telefonszám:  "
+
+#: applet.js:123
+msgid "    Send Ping to"
+msgstr "    Ping küldése"
+
+#: applet.js:124
+msgid "    Force to Ring"
+msgstr "    Megcsörgetés"
+
+#: applet.js:125
+msgid "    Send File to..."
+msgstr "    Fájl küldése…"
+
+#: applet.js:130
+msgid "    Send SMS via..."
+msgstr "    SMS küldése…"
+
+#: applet.js:133
+msgid "Enter the phone number of your SMS's addressee:"
+msgstr "Adja meg az SMS címzettjének telefonszámát:"
+
+#: applet.js:136
+msgid "Enter the text of your SMS:"
+msgstr "Adja meg az SMS-üzenet szövegét:"
+
+#: applet.js:137
+msgid "...message body..."
+msgstr "...üzenettörzs..."
+
+#: applet.js:139
+msgid "Press <"
+msgstr "Nyomja meg <"
+
+#: applet.js:139 applet.js:149
+msgid "Yes"
+msgstr "Igen"
+
+#: applet.js:139
+msgid "> if you are ready to send your SMS, or <"
+msgstr "> amennyiben el kívánja küldeni az SMS üzenetet, vagy <"
+
+#: applet.js:139 applet.js:143
+msgid "Cancel"
+msgstr "Mégse"
+
+#: applet.js:139
+msgid "> to avoid sending."
+msgstr "> a küldés elkerüléséhez."
+
+#: applet.js:158
+msgid "    Mount and Explore"
+msgstr "    Felcsatolás és tallózás"
+
+#: applet.js:182
+msgid "    Unmount"
+msgstr "    Leválasztás"
+
+#: applet.js:202
+msgid "Reachable paired devices: "
+msgstr "Elérhető párosított eszközök: "
+
+#. metadata.json->name
+msgid "KDE Connect Control Center"
+msgstr "KDE Connect Control Center"
+
+#. metadata.json->description
+msgid "Applet to provide access to some KDE Connect functionality"
+msgstr "A kisalkalmazás hozzáférést biztosít a KDE Connect néhány funkciójához"

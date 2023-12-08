@@ -58,9 +58,9 @@ export class LocationStore {
 			currentlyDisplayedChanged = !this.IsEqual(this.locations?.[currentIndex], locs?.[currentIndex])
 		else if (newIndex == -1)
 			currentlyDisplayedDeleted = true;
-		// currenlty displayed position's changed
-		// even tho this seems to happen automatically, 
-		// probably beacause I'm using object references somewhere
+		// currently displayed position's changed
+		// even tho this seems to happen automatically,
+		// probably because I'm using object references somewhere
 		else if (newIndex != currentIndex)
 			this.currentIndex = newIndex
 
@@ -69,7 +69,7 @@ export class LocationStore {
 
 		if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
 			Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.")
-			this.app.RefreshAndRebuild()
+			this.app.Refresh();
 		}
 		this.InvokeStorageChanged();
 	}
@@ -81,7 +81,7 @@ export class LocationStore {
 	 * @param loc preferably obtained from storage
 	 */
 	public SwitchToLocation(loc: LocationData): boolean {
-		let index = this.FindIndex(loc);
+		const index = this.FindIndex(loc);
 		if (index == -1) return false;
 
 		this.currentIndex = index;
@@ -90,26 +90,25 @@ export class LocationStore {
 
 	/**
 	 * Tries to find a location in storage based on the entryText
-	 * @param entryText 
+	 * @param entryText
 	 */
 	public FindLocation(entryText: string): LocationData | null {
-		for (let index = 0; index < this.locations.length; index++) {
-			const element = this.locations[index];
-			if (element.entryText == entryText)
+		for (const location of this.locations) {
+			if (location.entryText == entryText)
 				return {
-					country: element.country,
-					city: element.city,
-					entryText: element.entryText,
-					lat: element.lat,
-					lon: element.lon,
-					timeZone: this.NormalizeTZ(element.timeZone),
+					country: location.country,
+					city: location.city,
+					entryText: location.entryText,
+					lat: location.lat,
+					lon: location.lon,
+					timeZone: this.NormalizeTZ(location.timeZone),
 				};
 		}
 		return null;
 	}
 
 	private NormalizeTZ(tz: string): string {
-		let valid = ValidTimezone(tz) ? tz : DateTime.local().zoneName;
+		const valid = ValidTimezone(tz) ? tz : DateTime.local().zoneName;
 		if (!valid)
 			Logger.Info(`Timezone '${tz}' is not valid for saved location, switching for local tz '${DateTime.local().zoneName}'`)
 		return valid;
@@ -122,7 +121,7 @@ export class LocationStore {
 		return loc;
 	}
 
-	/** Only gets the location, if you want to switch between locations, use 
+	/** Only gets the location, if you want to switch between locations, use
 	 * Config.SwitchToNextLocation function
 	 */
 	public GetNextLocation(currentLoc: LocationData | null): LocationData | null {
@@ -159,7 +158,7 @@ export class LocationStore {
 		}
 	}
 
-	/** Only gets the location, if you want to switch between locations, use 
+	/** Only gets the location, if you want to switch between locations, use
 	 * Config.SwitchToPreviousLocation function
 	 */
 	public GetPreviousLocation(currentLoc: LocationData | null): LocationData | null {
@@ -197,8 +196,8 @@ export class LocationStore {
 	public ShouldShowLocationSelectors(currentLoc: LocationData | null): boolean {
 		if (currentLoc == null)
 			return false;
-			
-		let threshold = this.InStorage(currentLoc) ? 2 : 1;
+
+		const threshold = this.InStorage(currentLoc) ? 2 : 1;
 		if (this.locations.length >= threshold)
 			return true;
 		else
@@ -243,8 +242,7 @@ export class LocationStore {
 	private FindIndex(loc: LocationData | null, locations: LocationData[] | null = null): number {
 		if (loc == null) return -1;
 		if (locations == null) locations = this.locations
-		for (let index = 0; index < locations.length; index++) {
-			const element = locations[index];
+		for (const [index, element] of locations.entries()) {
 			if (element.entryText == loc.entryText) return index;
 		}
 		return -1;
@@ -252,16 +250,17 @@ export class LocationStore {
 
 	/**
 	 * Checks if 2 locations are completely equal
-	 * @param oldLoc 
-	 * @param newLoc 
+	 * @param oldLoc
+	 * @param newLoc
 	 */
 	private IsEqual(oldLoc: LocationData, newLoc: LocationData): boolean {
 		if (oldLoc == null)
 			return false;
 		if (newLoc == null)
 			return false;
-		for (let key in newLoc) {
-			if ((oldLoc as any)[key] != (newLoc as any)[key]) {
+		let key: keyof LocationData;
+		for (key in newLoc) {
+			if (oldLoc[key] != newLoc[key]) {
 				return false
 			}
 		}

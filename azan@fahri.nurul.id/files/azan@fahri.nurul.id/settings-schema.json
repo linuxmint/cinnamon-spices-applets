@@ -76,6 +76,15 @@
             "GMT +13:00": "13"
         }
     },
+	"time_format": {
+		"type": "combobox",
+		"default": "24h",
+		"description": "Time format",
+		"options": {
+			"24h": "24h",
+			"12h": "12h"
+		}
+	},
     "head_juristic": {
         "type": "header",
         "description": "Juristic Settings"

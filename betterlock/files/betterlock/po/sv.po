@@ -18,60 +18,54 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:97
+msgid "Scr Lock"
+msgstr "Scr Lock"
+
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: applet.js:103
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: applet.js:142
 msgid "Lock Keys"
 msgstr "Tangentlås"
 
-#: applet.js:190
+msgid "Scr lock on"
+msgstr "Scr Lock på"
+
+msgid "Scr lock off"
+msgstr "Scr Lock av"
+
 msgid "Num lock on"
 msgstr "Num Lock på"
 
-#: applet.js:193
 msgid "Num lock off"
 msgstr "Num Lock av"
 
-#: applet.js:201
 msgid "Caps lock on"
 msgstr "Caps Lock på"
 
-#: applet.js:204
 msgid "Caps lock off"
 msgstr "Caps Lock av"
 
-#. betterlock->settings-schema.json->show-notifications->description
 msgid "Show notifications"
 msgstr "Visa aviseringar"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Num Lock only"
-msgstr "Endast Num Lock"
+msgid "Show caps lock indicator"
+msgstr "Visa caps lock-indikator"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Caps Lock only"
-msgstr "Endast Caps Lock"
+msgid "Show num lock indicator"
+msgstr "Visa num lock-indikator"
 
-#. betterlock->settings-schema.json->indicator-type->options
-msgid "Num Lock and Caps Lock"
-msgstr "Num Lock och Caps Lock"
+msgid "Show scr lock indicator"
+msgstr "Visa scr-låsindikator"
 
-#. betterlock->settings-schema.json->indicator-type->description
-msgid "Choose which indicator to show"
-msgstr "Välj vilken indikator som skall visas"
-
-#. betterlock->metadata.json->description
 msgid ""
-"Shows whether caps lock/num lock is on, and displays a notification when "
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification when "
 "these change."
-msgstr "Visar om Caps Lock/Num Lock är på och meddelar när det ändras."
+msgstr ""
+"Visar om caps lock/num lock/scr lock är på och visar ett meddelande när dessa "
+"ändras."
 
-#. betterlock->metadata.json->name
-msgid "Num Lock/Caps Lock indicator with notifications"
-msgstr "Num Lock-/Caps Lock-indikator med avisering"
+msgid "Lock keys indicator with notifications"
+msgstr "Låsnyckelindikator med aviseringar"

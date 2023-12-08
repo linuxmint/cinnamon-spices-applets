@@ -18,6 +18,9 @@ export interface WeatherProvider {
 	readonly maxForecastSupport: number;
 	readonly maxHourlyForecastSupport: number;
 	readonly website: string;
+	readonly remainingCalls: number | null;
+	readonly supportHourlyPrecipChance: boolean;
+    readonly supportHourlyPrecipVolume: boolean;
 
 	GetWeather(loc: LocationData): Promise<WeatherData | null>;
 }
@@ -36,14 +39,20 @@ export interface WeatherData {
 		lon: number,
 	};
 	location: {
-		city?: string,
-		country?: string,
-		timeZone?: string,
-		url?: string,
-		/** in metres */
-		distanceFrom?: number,
-		tzOffset?: number
+		city?: string | undefined,
+		country?: string | undefined,
+		timeZone?: string | undefined,
+		url?: string | undefined,
+		tzOffset?: number | undefined
 	},
+	stationInfo?: {
+		/** in metres */
+		distanceFrom: number | undefined,
+		name?: string | undefined,
+		lat?: number,
+		lon?: number,
+		area?: string
+	} | undefined,
 	/** preferably in UTC */
 	sunrise: DateTime | null,
 	/** preferably in UTC */
@@ -60,28 +69,39 @@ export interface WeatherData {
 	pressure: number | null;
 	/** In percent */
 	humidity: number | null;
+	/** In kelvin */
+	dewPoint: number | null;
 	condition: Condition
 	forecasts: ForecastData[];
-	hourlyForecasts?: HourlyForecastData[]
-	extra_field?: APIUniqueField;
+	hourlyForecasts?: HourlyForecastData[] | undefined
+	extra_field?: APIUniqueField | undefined;
 	immediatePrecipitation?: ImmediatePrecipitation;
 }
 
 
-export interface APIUniqueField {
-	name: string,
-	/**
-	 * Refer to the type 
-	 */
-	value: any,
-	type: ExtraField
+export type APIUniqueField = NumberAPIUniqueField | StringAPIUniqueField;
+
+interface BaseAPIUniqueField {
+	name: string;
+	type: ExtraField;
 }
 
-/** 
+interface NumberAPIUniqueField extends BaseAPIUniqueField {
+	value: number;
+	type: Extract<ExtraField, "temperature" | "percent">
+}
+
+interface StringAPIUniqueField extends BaseAPIUniqueField {
+	value: string;
+	type: Extract<ExtraField, "string">
+}
+
+
+/**
  * percent: value is a number from 0-100 (or more)
- * 
+ *
  * temperature: value is number in Kelvin
- * 
+ *
  * string:  is a string
 */
 type ExtraField = "percent" | "temperature" | "string";
@@ -98,28 +118,27 @@ export interface ForecastData {
 
 export type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
 export interface HourlyForecastData {
-	/** Set to 12:00 if possible */
 	date: DateTime;
 	/** Kelvin */
 	temp: number | null;
 	condition: Condition;
-	precipitation?: Precipitation;
+	precipitation?: Precipitation | undefined;
 }
 
 export interface Precipitation {
 	type: PrecipitationType,
 	/** in mm */
-	volume?: number,
+	volume?: number | undefined,
 	/** % */
-	chance?: number
+	chance?: number | undefined
 }
 
 type LocationSource = "ip-api" | "address-search" | "manual";
 export interface LocationData {
 	lat: number;
 	lon: number;
-	city?: string;
-	country?: string;
+	city?: string | undefined;
+	country?: string | undefined;
 	/** Always set, if not available system tz is provided */
 	timeZone: string;
 	entryText: string;
@@ -136,11 +155,11 @@ export interface AppletError {
 }
 
 /** hard will not force a refresh and cleans the applet ui.
- * 
+ *
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 export type ErrorSeverity = "hard" | "soft" | "silent";
-export type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk" | "us-weather";
+export type ApiService = "ipapi" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk" | "us-weather" | "pirate_weather";
 export type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
 	"location not found" | "no network response" | "no api response" | "location not covered" |
 	"bad api response - non json" | "bad api response" | "no response body" |
@@ -155,13 +174,13 @@ export interface Condition {
 	/** Long Description */
 	description: string,
 	/** GTK icon name, descending from most fit to least fit.
-	 * needs mutiple in case one/some of them are not available
+	 * needs multiple in case one/some of them are not available
 	 */
 	icons: BuiltinIcons[],
 	customIcon: CustomIcons
 }
 
-/** Immediate precipitation for the next hour, currenlty only OpenWeatherMap uses it.
+/** Immediate precipitation for the next hour, currently only OpenWeatherMap uses it.
  */
 export interface ImmediatePrecipitation {
 	/** Precipitation in * minutes */

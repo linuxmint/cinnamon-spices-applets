@@ -1,0 +1,56 @@
+{
+    "list_editor": {
+        "type": "entry",
+        "default": "xed",
+        "description": "The text editor used for opening the text file"
+    },
+    "path_to_file": {
+        "type": "entry",
+        "default": "./Documents/todo.txt",
+        "description": "The path to the text file. It must already exist."
+    },
+    "empty_file_message": {
+        "type": "entry",
+        "default": "Add Todo",
+        "description": "The message shown when the text file is empty"
+    },
+    "prefix_string": {
+        "type": "entry",
+        "default": "•  ",
+        "description": "The text added to the beginning of every panel message"
+    },
+    "suffix_string": {
+        "type": "entry",
+        "default": "  •",
+        "description": "The text added to the end of every panel message"
+    },
+    "text_width": {
+        "type": "scale",
+        "default": 50,
+        "min": 10,
+        "max": 500,
+        "step": 10,
+        "description": "The width of the panel text in characters"
+    },
+    "reminder_delay": {
+        "type": "scale",
+        "default": 5,
+        "min": 0,
+        "max": 3600,
+        "step": 1,
+        "description": "How often (in seconds) to flash the applet periodically for reminders. Set to 0 to disable"
+    },
+    "reminder_time": {
+        "type": "scale",
+        "default": 200,
+        "min": 0,
+        "max": 10000,
+        "step": 100,
+        "description": "How long (in milliseconds) should the applet reminder color stay set. Set to 0 for infinity"
+    },
+    "reminder_color": {
+        "type": "entry",
+        "default": "#00ACFF",
+        "description": "The color used when reminding"
+    }
+}

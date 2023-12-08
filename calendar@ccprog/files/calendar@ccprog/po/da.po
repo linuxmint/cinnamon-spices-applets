@@ -7,28 +7,76 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-13 13:37+0200\n"
-"PO-Revision-Date: 2021-02-27 16:16+0100\n"
+"POT-Creation-Date: 2022-06-30 17:27+0200\n"
+"PO-Revision-Date: 2022-10-26 17:45+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:65
+#: applet.js:21
+msgid "%B %-e, %Y"
+msgstr "%-e. %B %Y"
+
+#: applet.js:22 eventView.js:26
+msgid "%A, %B %-e, %Y"
+msgstr "%A den %-e. %B %Y"
+
+#: applet.js:131
 msgid "Date and Time Settings"
-msgstr ""
+msgstr "Indstillinger for dato og tid"
+
+#: eventView.js:65
+msgid "Starting in a few minutes"
+msgstr "Starter om få minutter"
+
+#: eventView.js:69
+#, javascript-format
+msgid "Starting in %d minutes"
+msgstr "Starter om %d minutter"
+
+#: eventView.js:79
+msgid "This evening"
+msgstr "I aften"
+
+#: eventView.js:82
+msgid "Starting later today"
+msgstr "Starter senere i dag"
+
+#: eventView.js:85
+#, javascript-format
+msgid "In %d hour"
+msgid_plural "In %d hours"
+msgstr[0] "Om %d time"
+msgstr[1] "Om %d timer"
+
+#: eventView.js:664
+msgid "No Events"
+msgstr "Ingen begivenheder"
+
+#: eventView.js:925
+msgid "In progress"
+msgstr "I gang"
+
+#: eventView.js:946
+msgid "All day"
+msgstr "Hele dagen"
+
+#: eventView.js:971 eventView.js:994 eventView.js:1032 eventView.js:1054
+msgid "Today"
+msgstr "I dag"
 
 #: settings_widgets.py:95
 msgid "Add new entry"
-msgstr ""
+msgstr "Tilføj ny indgang"
 
 #: settings_widgets.py:99
 msgid "Edit entry"
-msgstr ""
+msgstr "Redigér indgang"
 
 #. settings-schema.json->region_aus->description
 #. settings-schema.json->region_can->description
@@ -45,7 +93,7 @@ msgstr "Region"
 
 #: settings_widgets.py:123
 msgid "City"
-msgstr ""
+msgstr "By"
 
 #. metadata.json->name
 msgid "Calendar with public Holidays"
@@ -57,7 +105,7 @@ msgstr "Kalender med offentlige helligdage leveret af Enrico"
 
 #. settings-schema.json->page1->title
 msgid "Calendar"
-msgstr ""
+msgstr "Kalender"
 
 #. settings-schema.json->page2->title
 #. settings-schema.json->worldclocks->description
@@ -66,7 +114,7 @@ msgstr "Verdensure"
 
 #. settings-schema.json->section1->title
 msgid "Display"
-msgstr ""
+msgstr "Fremvisning"
 
 #. settings-schema.json->section2->title
 msgid "Get Public Holidays for"
@@ -74,19 +122,27 @@ msgstr "Hent offentlige helligdage for"
 
 #. settings-schema.json->section3->title
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Tastaturgenveje"
 
 #. settings-schema.json->section4->title
 msgid "Show World Times"
 msgstr "Vis verdenstid"
 
+#. settings-schema.json->show-events->description
+msgid "Show calendar events"
+msgstr "Vis kalenderbegivenheder"
+
+#. settings-schema.json->show-events->tooltip
+msgid "Check this to display events in the calendar."
+msgstr "Aktivér denne for at få vist begivenheder i kalenderen."
+
 #. settings-schema.json->show-week-numbers->description
 msgid "Show week numbers in calendar"
-msgstr ""
+msgstr "Vis ugenumre i kalenderen"
 
 #. settings-schema.json->show-week-numbers->tooltip
 msgid "Check this to show week numbers in the calendar."
-msgstr ""
+msgstr "Aktivér denne for at vise ugenumre i kalenderen."
 
 #. settings-schema.json->weekend-length->description
 msgid "Mark as weekend days"
@@ -106,28 +162,27 @@ msgstr "To dage"
 
 #. settings-schema.json->use-custom-format->description
 msgid "Use a custom date format"
-msgstr ""
+msgstr "Anvend et brugerdefineret datoformat"
 
 #. settings-schema.json->use-custom-format->tooltip
-msgid ""
-"Check this to define a custom format for the date in the calendar applet."
-msgstr ""
+msgid "Check this to define a custom format for the date in the calendar applet."
+msgstr "Aktivér denne for at angive et brugerdefineret format for datoen i kalenderpanelprogrammet."
 
 #. settings-schema.json->custom-format->description
 msgid "Date format"
-msgstr ""
+msgstr "Datoformat"
 
 #. settings-schema.json->custom-format->tooltip
 msgid "Set your custom format here."
-msgstr ""
+msgstr "Indstil dit brugerdefineret format her."
 
 #. settings-schema.json->format-button->description
 msgid "Show information on date format syntax"
-msgstr ""
+msgstr "Vis information om syntaks for datoformat"
 
 #. settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
-msgstr ""
+msgstr "Tryk på denne knap for at lære mere om syntaksen for datoformater."
 
 #. settings-schema.json->country->description
 msgid "Country"
@@ -155,7 +210,7 @@ msgstr "Bosnien og Herzegovina"
 
 #. settings-schema.json->country->options
 msgid "Belarus"
-msgstr ""
+msgstr "Belarus"
 
 #. settings-schema.json->country->options
 msgid "Brazil"
@@ -195,7 +250,7 @@ msgstr "Estland"
 
 #. settings-schema.json->country->options
 msgid "Spain"
-msgstr ""
+msgstr "Spanien"
 
 #. settings-schema.json->country->options
 msgid "Finland"
@@ -335,7 +390,7 @@ msgstr "Schweiz"
 
 #. settings-schema.json->country->options
 msgid "Turkey"
-msgstr ""
+msgstr "Tyrkiet"
 
 #. settings-schema.json->country->options
 msgid "Ukraine"
@@ -499,79 +554,79 @@ msgstr "Thüringen"
 
 #. settings-schema.json->region_esp->options
 msgid "Andalucía"
-msgstr ""
+msgstr "Andalucien"
 
 #. settings-schema.json->region_esp->options
 msgid "Aragón"
-msgstr ""
+msgstr "Aragón"
 
 #. settings-schema.json->region_esp->options
 msgid "Asturias"
-msgstr ""
+msgstr "Asturias"
 
 #. settings-schema.json->region_esp->options
 msgid "Canarias"
-msgstr ""
+msgstr "Kanarieøerne"
 
 #. settings-schema.json->region_esp->options
 msgid "Cantabria"
-msgstr ""
+msgstr "Cantabrien"
 
 #. settings-schema.json->region_esp->options
 msgid "Castilla y León"
-msgstr ""
+msgstr "Castilla y León"
 
 #. settings-schema.json->region_esp->options
 msgid "Castilla-La Mancha"
-msgstr ""
+msgstr "Castilla-La Mancha"
 
 #. settings-schema.json->region_esp->options
 msgid "Cataluña"
-msgstr ""
+msgstr "Catalonien"
 
 #. settings-schema.json->region_esp->options
 msgid "Ceuta"
-msgstr ""
+msgstr "Ceuta"
 
 #. settings-schema.json->region_esp->options
 msgid "Extremadura"
-msgstr ""
+msgstr "Extremadura"
 
 #. settings-schema.json->region_esp->options
 msgid "Galicia"
-msgstr ""
+msgstr "Galicien"
 
 #. settings-schema.json->region_esp->options
 msgid "Islas Baleares"
-msgstr ""
+msgstr "Balearerne"
 
 #. settings-schema.json->region_esp->options
 msgid "La Rioja"
-msgstr ""
+msgstr "La Rioja"
 
 #. settings-schema.json->region_esp->options
 msgid "Madrid"
-msgstr ""
+msgstr "Madrid"
 
 #. settings-schema.json->region_esp->options
 msgid "Melilla"
-msgstr ""
+msgstr "Melilla"
 
 #. settings-schema.json->region_esp->options
 msgid "Murcia"
-msgstr ""
+msgstr "Murcia"
 
 #. settings-schema.json->region_esp->options
 msgid "Navarra"
-msgstr ""
+msgstr "Navarra"
 
 #. settings-schema.json->region_esp->options
 msgid "País Vasco"
-msgstr ""
+msgstr "País Vasco"
 
 #. settings-schema.json->region_esp->options
 msgid "Valencia"
-msgstr ""
+msgstr "Valencia"
 
 #. settings-schema.json->region_nzl->options
 msgid "Auckland"
@@ -643,35 +698,35 @@ msgstr "Chatham Islands Territory"
 
 #. settings-schema.json->region_svk->options
 msgid "Banskobystrický kraj"
-msgstr "Banskobystrický kraj"
+msgstr "Banská Bystrica-regionen"
 
 #. settings-schema.json->region_svk->options
 msgid "Bratislavský kraj"
-msgstr "Bratislavský kraj"
+msgstr "Bratislava-regionen"
 
 #. settings-schema.json->region_svk->options
 msgid "Košický kraj"
-msgstr "Košický kraj"
+msgstr "Košický-regionen"
 
 #. settings-schema.json->region_svk->options
 msgid "Nitriansky kraj"
-msgstr "Nitriansky kraj"
+msgstr "Nitra-regionen"
 
 #. settings-schema.json->region_svk->options
 msgid "Prešovský kraj"
-msgstr "Prešovský kraj"
+msgstr "Prešov-regionen"
 
 #. settings-schema.json->region_svk->options
 msgid "Trnavský kraj"
-msgstr "Trnavský kraj"
+msgstr "Trnava-regionen"
 
 #. settings-schema.json->region_svk->options
 msgid "Trenčiansky kraj"
-msgstr "Trenčiansky kraj"
+msgstr "Trenčín-regionen"
 
 #. settings-schema.json->region_svk->options
 msgid "Žilinský kraj"
-msgstr "Žilinský kraj"
+msgstr "Žilina-regionen"
 
 #. settings-schema.json->region_che->options
 msgid "Aargau"
@@ -999,11 +1054,11 @@ msgstr "Wyoming"
 
 #. settings-schema.json->keyOpen->description
 msgid "Show calendar"
-msgstr ""
+msgstr "Vis kalender"
 
 #. settings-schema.json->keyOpen->tooltip
 msgid "Set keybinding(s) to show the calendar."
-msgstr ""
+msgstr "Indstil tastegenveje til visning af kalenderen."
 
 #. settings-schema.json->worldclocks->columns->title
 msgid "Display name"

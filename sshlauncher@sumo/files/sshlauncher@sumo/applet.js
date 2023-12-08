@@ -14,6 +14,7 @@ const UUID = "sshlauncher@sumo";
 const AppletDir = imports.ui.appletManager.appletMeta[UUID].path;
 const Gtk = imports.gi.Gtk;
 const Settings = imports.ui.settings;
+const ByteArray = imports.byteArray;
 
 /**
  * DEBUG:
@@ -192,7 +193,7 @@ MyApplet.prototype = {
       let [res, out, err, status] = GLib.spawn_command_line_sync('grep -e "^Host " -e "^#GroupStart" -e "^#GroupEnd" .ssh/config');
       if(out.length!=0) {
         let inGroup = false;
-        let hosts = out.toString().split("\n");
+        let hosts = ByteArray.toString(out).split("\n");
         let Grouper = null;
 
         for(let i=0; i<hosts.length; i++) {

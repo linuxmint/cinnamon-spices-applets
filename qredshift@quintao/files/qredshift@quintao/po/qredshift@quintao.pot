@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-04 13:58-0300\n"
-"PO-Revision-Date: 2021-08-17 13:12+0300\n"
+"POT-Creation-Date: 2023-07-16 04:01+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -17,95 +17,111 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:207
+#: applet.js:236
 msgid "Reload Applet"
 msgstr ""
 
-#: applet.js:212
+#: applet.js:247
 msgid "Recompile Translations"
 msgstr ""
 
-#: applet.js:265
+#: applet.js:299
 msgid "REDSHIFT NOT INSTALLED!"
 msgstr ""
 
-#: applet.js:266
+#: applet.js:302
+msgid "Requires Redshift: yay -S redshift-minimal"
+msgstr ""
+
+#: applet.js:305
 msgid "Requires Redshift: sudo apt-get install redshift"
 msgstr ""
 
-#: applet.js:510
-msgid "may conflict with this applet, it is highly recommended removing it."
+#: applet.js:457 applet.js:486
+msgid "should be removed."
+msgstr ""
+
+#: applet.js:479
+msgid "should be replaced by redshift-minimal"
 msgstr ""
 
 #. settings-schema.json->enabled->description
-#: applet.js:528
+#: applet.js:649
 msgid "Enabled"
 msgstr ""
 
-#: applet.js:536 applet.js:582
+#: applet.js:657 applet.js:702
 msgid "Temp:"
 msgstr ""
 
-#: applet.js:547 applet.js:593
+#: applet.js:668 applet.js:713
 msgid "Bright:"
 msgstr ""
 
-#: applet.js:559 applet.js:861
+#: applet.js:679 applet.js:1011
 msgid "Gamma:"
 msgstr ""
 
 #. settings-schema.json->enabledNight->description
-#: applet.js:574
+#: applet.js:694
 msgid "Night Enabled"
 msgstr ""
 
 #. settings-schema.json->iconLabel->description
-#: applet.js:636
+#: applet.js:756
 msgid "Show Label"
 msgstr ""
 
-#: applet.js:830 applet.js:846
+#: applet.js:969 applet.js:994
+msgid "Transition to day"
+msgstr ""
+
+#: applet.js:970 applet.js:995
+msgid "Transition to night"
+msgstr ""
+
+#: applet.js:971 applet.js:996
 msgid "Night"
 msgstr ""
 
-#: applet.js:831 applet.js:847
+#: applet.js:972 applet.js:997
 msgid "Day"
 msgstr ""
 
-#: applet.js:838
+#: applet.js:986
 msgid "On"
 msgstr ""
 
-#: applet.js:838 applet.js:840
+#: applet.js:986 applet.js:988
 msgid "Off"
 msgstr ""
 
-#: applet.js:852
+#: applet.js:1002
 msgid "Day Temperature"
 msgstr ""
 
-#: applet.js:853
+#: applet.js:1003
 msgid "Day Brightness"
 msgstr ""
 
-#: applet.js:855
+#: applet.js:1005
 msgid "Night Temperature"
 msgstr ""
 
-#: applet.js:856
+#: applet.js:1006
 msgid "Night Brightness"
 msgstr ""
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
-#: applet.js:858
+#: applet.js:1008
 msgid "Temperature"
 msgstr ""
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
-#: applet.js:859
+#: applet.js:1009
 msgid "Brightness"
 msgstr ""
 
@@ -115,8 +131,8 @@ msgstr ""
 
 #. metadata.json->description
 msgid ""
-"Sets brightness, gamma levels and color temperature with Redshift. This "
-"applet conflicts with redshift-gtk, make sure you remove it."
+"It makes the color of your computer's display adapt to the time of day, warm"
+" at night and like sunlight during the day."
 msgstr ""
 
 #. settings-schema.json->panel-options->title
@@ -164,7 +180,7 @@ msgid "Continuously adjust color temperature"
 msgstr ""
 
 #. settings-schema.json->autoUpdateInterval->units
-msgid "Sec."
+msgid "Seconds"
 msgstr ""
 
 #. settings-schema.json->autoUpdateInterval->description
@@ -255,6 +271,18 @@ msgstr ""
 msgid "%"
 msgstr ""
 
+#. settings-schema.json->smoothTransition->description
+msgid "Smooth transition between day and night"
+msgstr ""
+
+#. settings-schema.json->transitionDuration->units
+msgid "Minutes"
+msgstr ""
+
+#. settings-schema.json->transitionDuration->description
+msgid "Transition Duration"
+msgstr ""
+
 #. settings-schema.json->manualNightTime->description
 msgid "Use Manual Night Time"
 msgstr ""
@@ -301,7 +329,7 @@ msgstr ""
 #. settings-schema.json->textHelp->description
 msgid ""
 "When update to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
-" You will lost all your configs."
+"You will lost all your configs."
 msgstr ""
 
 #. settings-schema.json->textInfo->description

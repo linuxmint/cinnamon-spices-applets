@@ -1,0 +1,141 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-25 19:47+0100\n"
+"PO-Revision-Date: 2017-01-25 19:47+0100\n"
+"Last-Translator: Lars Mueller <cobinja@mail.com>\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "A window list with app grouping and window previews"
+msgstr "Eine Fensterleiste mit Programmgruppierung und Fenstervorschau"
+
+msgid "Remove this applet"
+msgstr "Dieses Applet entfernen"
+
+msgid "Open new window"
+msgstr "Neues Fenster öffnen"
+
+msgid "Captions"
+msgstr "Beschriftungen"
+
+msgid "Caption type"
+msgstr "Beschriftungstyp"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Display Caption For"
+msgstr "Zeige Beschriftungen für"
+
+msgid "None"
+msgstr "Keine"
+
+msgid "All"
+msgstr "Alle"
+
+msgid "Running"
+msgstr "Laufende"
+
+msgid "Focused"
+msgstr "Fokussierte"
+
+msgid "Label width"
+msgstr "Beschriftungsbreite"
+
+msgid "Animate label"
+msgstr "Beschriftung animieren"
+
+msgid "Label animation time"
+msgstr "Animationsdauer"
+
+msgid "Display Number"
+msgstr "Zeige Anzahl"
+
+msgid "Smart"
+msgstr "Smart"
+
+msgid "Group Windows"
+msgstr "Fenster gruppieren"
+
+msgid "Display Favorites"
+msgstr "Favoriten anzeigen"
+
+msgid "Animation Time"
+msgstr "Animationsdauer"
+
+msgid "Preview menu"
+msgstr "Vorschau-Menü"
+
+msgid "Show on hover"
+msgstr "Beim Darüberfahren anzeigen"
+
+msgid "Timeout Show"
+msgstr "Verzögerung Anzeigen"
+
+msgid "Timeout Hide"
+msgstr "Verzögerung Verbergen"
+
+msgid "Pin to this workspace"
+msgstr "An diese Arbeitsfläche anheften"
+
+msgid "Pin to other workspaces"
+msgstr "An andere Arbeitsflächen anheften"
+
+msgid "Unmaximize"
+msgstr "De-Maximieren"
+
+msgid "Close window on mouse-wheel click"
+msgstr "Schließe Fenster mit Mausrad-Klick"
+
+msgid "If windows are grouped, all windows from an application are managed by the same button,\nif not grouped, all windows get an own button"
+msgstr "Wenn Fenster gruppiert werden, werden alle Fenster dieser Anwendung von der selben Schaltfläche verwaltet\nFalls nicht gruppiert wird, bekommt jedes Fenster eine eigene Schaltfläche"
+
+msgid "The flashing time when a new window is opened via a button"
+msgstr "Die Animationszeit beim Öffnen eines neuen Fensters von der Schaltfläche aus"
+
+msgid "If enabled, the popup menu will show window previews\n(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr "Wenn aktiviert, zeigt das Menü Vorschauen der Fenster an\n(Immer deaktiviert, wenn Cinnamon im Software Rendering Modus läuft)"
+
+msgid "The waiting time for the popup menu to show, when hovering a button\n(Not used when moving directly to a different button in the list)"
+msgstr "Die Wartezeit, bis das Menü gezeigt wird, wenn die Maus über der Schaltfläche ist\n(Wird nicht benutzt, wenn direkt zu einer anderen Schaltfläche gewechselt wird)"
+
+msgid "The waiting time for the popup menu to hide, when leaving a button\n(Not used when moving directly to a different button in the list)"
+msgstr "Die Wartezeit, bis das Menü ausgeblendet wird, wenn die Maus eine Schaltfläche verlässt\n(Wird nicht benutzt, wenn direkt zu einer anderen Schaltfläche gewechselt wird)"
+
+msgid "Only show windows on the same monitor"
+msgstr "Nur Fenster auf dem gleichen Bildschirm zeigen"
+
+msgid "If enabled, this applet instance only manages windows\nthat are displayed on the same monitor"
+msgstr "Wenn aktiviert, werden nur Fenster angezeigt,\ndie auf dem gleichen Bildschirm angezeigt werden"
+
+msgid "Move to another monitor"
+msgstr "Auf anderen Bildschirm verschieben"
+
+msgid "Always"
+msgstr "Immer"
+
+msgid "2 or more windows"
+msgstr "2 oder mehr Fenster"
+
+msgid "Number of unshrunk previews"
+msgstr "Anzahl der unverkleinerten Vorschaubilder"
+
+msgid "Show on click"
+msgstr "Beim Klicken anzeigen"
+
+msgid "If enabled, a popup menu with a list of current windows will show when clicking\n(Only with 2 or more windows)"
+msgstr "Wenn aktiviert, wird beim Klicken ein Menü mit einer Liste der Fenster angezeigt\n(Nur bei 2 oder mehr Fenstern)"
+
+msgid "If enabled, a popup menu with a list of current windows will show when hovering"
+msgstr "Wenn aktiviert, wird beim Darüberfahren ein Menü mit einer Liste der Fenster angezeigt"
+
+msgid "Show previews"
+msgstr "Vorschaubilder anzeigen"

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux v2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-31 03:53+0200\n"
-"PO-Revision-Date: 2020-07-31 04:00+0200\n"
+"PO-Revision-Date: 2021-12-27 11:12-0300\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: 4.2/applet.js:140
 msgid "You are advised to restart Cinnamon"
@@ -430,6 +430,18 @@ msgid ""
 msgstr ""
 "Para obtener ahora la última versión de un tema, fijar sus dos conmutadores "
 "en TRUE."
+
+#: 4.6/applet.js:2028
+msgid "The Cinnamon Server seems to be DOWN!"
+msgstr "El servidor Cinnamon parece estar ¡ABAJO!"
+
+#: 4.6/applet.js:2028
+msgid "Middle-Click to Retry"
+msgstr "Haga clic en el medio para reintentar"
+
+#. 4.6->settings-schema.json->section_general4->title
+msgid "Display"
+msgstr "Pantalla"
 
 #: cs/4.2/bin/SUExtensionCore.py:723
 msgid "Upgradable"
@@ -1008,6 +1020,22 @@ msgstr ""
 "el botón en el menú:\n"
 "Abra la pestaña Descargar en Configuración del sistema para el tipo "
 "correspondiente de Spices, con las Spices ordenadas por fecha."
+
+#. 4.6->settings-schema.json->tooltip_max_width_screen_percentage->units
+msgid "% of screen width"
+msgstr "% de la anchura de la pantalla"
+
+#. 4.6->settings-schema.json->tooltip_max_width_screen_percentage->description
+msgid "Tooltip: Maximum width"
+msgstr "Descripción emergente: Anchura máxima"
+
+#. 4.6->settings-schema.json->tooltip_max_width_screen_percentage->tooltip
+msgid ""
+"What is the maximum percentage of your screen width that the tooltip can "
+"occupy?"
+msgstr ""
+"¿Cuál es el porcentaje máximo del ancho de la pantalla que puede ocupar la "
+"descripción emergente?"
 
 #~ msgid "(Refresh to see the description)"
 #~ msgstr "(Actualiza para ver la descripción)"

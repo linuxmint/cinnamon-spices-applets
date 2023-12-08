@@ -2,6 +2,8 @@ export type PlayPause = "Playing" | "Paused"
 export type PlaybackStatus = PlayPause | "Stopped"
 export type AdvancedPlaybackStatus = PlaybackStatus | 'Loading'
 
+export type ChangeHandler<T> = (newValue: T) => void
+
 export interface Channel {
     name: string,
     url: string,
@@ -9,6 +11,8 @@ export interface Channel {
 }
 
 export type AppletIcon = 'SYMBOLIC' | 'FULLCOLOR' | 'BICOLOR'
+export type YouTubeClis = 'youtube-dl' | 'yt-dlp'
+
 
 // MPRIS
 type LoopStatus = 'None' | 'Track' | 'Playlist'
@@ -361,9 +365,11 @@ interface MprisMetadataUnpacked {
 }
 
 type MprisMetadataDeepUnpacked = {
+    // @ts-ignore
     [P in keyof MprisMetadataUnpacked]: ReturnType<MprisMetadataUnpacked[P]['unpack']>
 }
 
 export type MprisMetadataRecursiveUnpacked = {
+    // @ts-ignore
     [P in keyof MprisMetadataDeepUnpacked]: ReturnType<MprisMetadataDeepUnpacked[P]['unpack']>
 }

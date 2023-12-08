@@ -1,6 +1,8 @@
 This applet is a fork of Cinnamon's own calender. It adds the capability to mark
 public holidays in the calender panel in addition to the weekend days. Like the
 World Clock calendar, it has the capability to display additional time zones.
+The capability to display events is identical to the Cinnamon calendar (for Cinnamon
+version 5.2+).
 
 Choose the Country and region for which to show the public holidays in the applet
 "Calendar" settings page. Add timezones to display in the applet "World Clocks"
@@ -42,12 +44,10 @@ to your calendar as a whole-day event. If the calendar also mentions your countr
 Holiday, both have no distinguishing feature that would make it possible to mark one and
 not the other as a non-working day.
 
-This applet takes the notion of a non-working day, which could be a weekend day, a public
-holiday, or a religious observance (including the latter is not yet implemented), and
-gives them all the same visual marker. Events are not marked, or if they would be
-in a future version, they would need a separate representation to display the richer information
-attached to them. (Things like location, start and end time or participants.)
+This applet distinguishes between holidays and events. They have separate data sources, and they 
+are visualised in a different way.
 
-So, as it stands, holidays and events need to be separate data sources, and sources
-that provide data in an iCalendar format are not fit to be used as source for public
-holidays.
+Holidays are marked as non-working days, the same as a weekend day. (Religious observances are
+not yet implemented).
+
+Events are marked separately, and their details are shown in a side column.

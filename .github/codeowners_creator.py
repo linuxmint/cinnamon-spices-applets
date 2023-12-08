@@ -32,22 +32,21 @@ class Main():
                 info_file_path = os.path.join(repo_folder, name, "info.json")
 
                 if os.path.isfile(info_file_path):
-                    info_file = open(info_file_path, "r")
-                    raw_data = info_file.read()
-                    info_file.close()
+                    with open(info_file_path, "r", encoding="UTF-8") as info_file:
+                        raw_data = info_file.read()
 
                     try:
                         xlet_author = json.loads(raw_data)["author"]
-                    except Exception as e:
+                    except:
                         xlet_author = None
 
                     if xlet_author is not None:
                         if xlet_author == "none":
-                            donated_xlets_list.append("# " + name)
+                            donated_xlets_list.append(f"# {name}")
                         else:
-                            xlets_list.append("{:<50}".format(name + "/**") + " @" + xlet_author)
+                            xlets_list.append(f"{name + '/**':<50} @{xlet_author}")
         finally:
-            with open(os.path.join(repo_folder, ".github", "CODEOWNERS"), "w") as codeowners_file:
+            with open(os.path.join(repo_folder, ".github", "CODEOWNERS"), "w", encoding="UTF-8") as codeowners_file:
                 file_content = "{}{}{}{}{}".format(
                     initial_comment,
                     "\n".join(sorted(xlets_list)),

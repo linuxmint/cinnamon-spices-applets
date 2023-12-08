@@ -16,6 +16,9 @@ import io
 import os
 import subprocess
 
+import gi
+gi.require_version('Gtk', '3.0')
+
 from gi.repository import Gtk, GLib  # pylint: disable-msg=E0611
 
 # prefer simplejson if available (it's faster), and fallback to json
@@ -35,7 +38,6 @@ APPLET_DIR = os.path.dirname(os.path.abspath(__file__))
 import gettext
 home = os.path.expanduser("~")
 gettext.install("calendar@simonwiles.net", home + "/.local/share/locale")
-
 
 class SettingsWindow(Gtk.Window):
     """ Build settings panel window """
@@ -242,8 +244,12 @@ class AppletSettings(object):
     def __init__(self, uuid, instance_id):
 
         _fn_basename = instance_id if instance_id is not None else uuid
-        self.settings_json = os.path.expanduser(os.path.join(
-            '~', '.cinnamon', 'configs', uuid, '{}.json'.format(_fn_basename)))
+        self.settings_json = os.path.join(GLib.get_user_config_dir(),
+            'cinnamon', 'spices', uuid, '{}.json'.format(_fn_basename))
+        if not os.path.exists(self.settings_json):
+            #try old path for config files instead
+            self.settings_json = os.path.expanduser(os.path.join(
+                '~', '.cinnamon', 'configs', uuid, '{}.json'.format(_fn_basename)))
 
         try:
             with io.open(self.settings_json, 'r', encoding='utf8') as handle:
