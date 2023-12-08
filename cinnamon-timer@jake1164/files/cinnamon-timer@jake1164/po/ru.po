@@ -21,19 +21,19 @@ msgstr "Таймер"
 #: 2.6/applet.js:94 2.6/applet.js:221 2.6/applet.js:301 3.4/applet.js:224
 #: 3.4/applet.js:264 3.4/applet.js:357
 msgid "Minutes"
-msgstr "Минуты"
+msgstr "Мин."
 
 #. 3.4->settings-schema.json->preset_time->columns->title
 #: 2.6/applet.js:220 2.6/applet.js:301 3.4/applet.js:224 3.4/applet.js:263
 #: 3.4/applet.js:357
 msgid "Hours"
-msgstr "Часы"
+msgstr "Час."
 
 #. 3.4->settings-schema.json->preset_time->columns->title
 #: 2.6/applet.js:222 2.6/applet.js:301 3.4/applet.js:224 3.4/applet.js:265
 #: 3.4/applet.js:357
 msgid "Seconds"
-msgstr "Секунды"
+msgstr "Сек."
 
 #: 2.6/applet.js:224 3.4/applet.js:241
 msgid "Reset"
@@ -135,7 +135,7 @@ msgstr "Звуки"
 #. 3.4->settings-schema.json->section3->title
 #. 3.4->settings-schema.json->preset_time->description
 msgid "Preset Times"
-msgstr "Предустановки Таймеров"
+msgstr "Таймеры"
 
 #. 3.4->settings-schema.json->page4->title
 #. 3.4->settings-schema.json->section4->title
@@ -153,8 +153,7 @@ msgstr "Настройки Звука"
 
 #. 3.4->settings-schema.json->display-message->description
 #. 3.4->settings-schema.json->display-message->tooltip
-msgid ""
-"Global message displayed in notification windows unless defined in preset time."
+msgid "Global message displayed in notification windows unless defined in preset time."
 msgstr "Глобальное сообщение отображается в окнах уведомлений."
 
 #. 3.4->settings-schema.json->sound-volume->description
