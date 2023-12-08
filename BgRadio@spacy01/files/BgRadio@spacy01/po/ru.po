@@ -32,7 +32,7 @@ msgstr ""
 #: applet.js:173 applet.js:181 applet.js:189
 #, javascript-format
 msgid "Listening %s"
-msgstr ""
+msgstr "Проигрывается %s"
 
 #: applet.js:57
 msgid "bTV Radio"
@@ -115,7 +115,7 @@ msgstr ""
 #: applet.js:285 applet.js:293
 #, javascript-format
 msgid "Watching %s"
-msgstr ""
+msgstr "Просматривается %s"
 
 #: applet.js:209
 msgid "BNT 2"
