@@ -27,7 +27,7 @@ create_resolution()
 # Using Luxodius python script for scaling 
 # https://bbs.archlinux.org/viewtopic.php?id=278808
   
-    .local/share/cinnamon/applets/rswitcher@nixdev.com/scale.py $SCALINGFACTOR
+    ~/.local/share/cinnamon/applets/rswitcher@nixdev.com/scale.py $SCALINGFACTOR
     sleep 0.5
 
     xrandr \
