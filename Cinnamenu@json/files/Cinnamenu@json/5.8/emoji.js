@@ -5,6 +5,7 @@ const {_} = require('./utils');
 //Additional keywords are from emojilib (https://github.com/muan/emojilib) License: MIT
 
 const EMOJI = [
+[ null, _('Smileys & Emotion') ],
 [
 '😀',
 'grinning face',
@@ -415,8 +416,8 @@ const EMOJI = [
 'face triumph won gas phew proud pride'
 ],[
 '😡',
-'pouting face',
-'angry face mad pouting rage red hate despise'
+'enraged face',
+'angry enraged face mad pouting rage red hate despise'
 ],[
 '😠',
 'angry face',
@@ -522,10 +523,6 @@ const EMOJI = [
 'speak-no-evil monkey',
 'evil face forbidden monkey speak speak no evil monkey animal nature omg'
 ],[
-'💋',
-'kiss mark',
-'kiss lips face love like affection valentines'
-],[
 '💌',
 'love letter',
 'heart letter love mail email like affection envelope valentines'
@@ -626,6 +623,10 @@ const EMOJI = [
 'white heart',
 'heart white pure love like'
 ],[
+'💋',
+'kiss mark',
+'kiss lips face love like affection valentines'
+],[
 '💯',
 'hundred points',
 '100 full hundred score perfect numbers century exam quiz test pass'
@@ -654,10 +655,6 @@ const EMOJI = [
 'hole',
 'embarrassing'
 ],[
-'💣',
-'bomb',
-'comic boom explode explosion terrorism'
-],[
 '💬',
 'speech balloon',
 'balloon bubble comic dialog speech words message talk chatting'
@@ -681,7 +678,11 @@ const EMOJI = [
 '💤',
 'zzz',
 'comic sleep sleepy tired dream'
-],[
+],
+
+
+
+[ null, _('People & Body') ],[
 '👋',
 'waving hand',
 'hand wave waving hands gesture goodbye solong farewell hello hi palm'
@@ -2237,7 +2238,11 @@ const EMOJI = [
 '🦲',
 'bald',
 'chemotherapy hairless no hair shaven'
-],[
+],
+
+
+
+[ null, _('Animals & Nature') ],[
 '🐵',
 'monkey face',
 'face monkey animal nature circus'
@@ -2846,6 +2851,14 @@ const EMOJI = [
 'nest with eggs',
 'nesting birds'
 ],[
+'🍄',
+'mushroom',
+'mushroom toadstool fungus'
+],
+
+
+
+[ null, _('Food & Drink') ],[
 '🍇',
 'grapes',
 'fruit grape food wine'
@@ -2973,10 +2986,6 @@ const EMOJI = [
 '🧅',
 'onion',
 'flavoring cook food spice'
-],[
-'🍄',
-'mushroom',
-'toadstool plant vegetable'
 ],[
 '🥜',
 'peanuts',
@@ -3389,7 +3398,11 @@ const EMOJI = [
 '🏺',
 'amphora',
 'Aquarius cooking drink jug zodiac vase jar'
-],[
+],
+
+
+
+[ null, _('Travel & Places') ],[
 '🌍',
 'globe showing Europe-Africa',
 'Africa earth Europe globe world globe showing europe africa international'
@@ -4261,7 +4274,11 @@ const EMOJI = [
 '🌊',
 'water wave',
 'ocean water wave sea nature tsunami disaster'
-],[
+],
+
+
+
+[ null, _('Activities') ],[
 '🎃',
 'jack-o-lantern',
 'celebration halloween jack lantern jack o lantern light pumpkin creepy fall'
@@ -4490,6 +4507,10 @@ const EMOJI = [
 'kite',
 'fly soar wind'
 ],[
+'🔫',
+'water pistol',
+'gun handgun pistol revolver tool water weapon violence'
+],[
 '🎱',
 'pool 8 ball',
 '8 ball billiard eight game pool hobby luck magic'
@@ -4501,14 +4522,6 @@ const EMOJI = [
 '🪄',
 'magic wand',
 'magic witch wizard supernature power'
-],[
-'🧿',
-'nazar amulet',
-'bead charm evil-eye nazar talisman'
-],[
-'🪬',
-'hamsa',
-'amulet Fatima hand Mary Miriam protection'
 ],[
 '🎮',
 'video game',
@@ -4605,7 +4618,11 @@ const EMOJI = [
 '🪢',
 'knot',
 'rope tangled tie twine twist scout'
-],[
+],
+
+
+
+[ null, _('Objects') ],[
 '👓',
 'glasses',
 'clothing eye eyeglasses eyewear fashion accessories eyesight nerdy dork geek'
@@ -5386,9 +5403,9 @@ const EMOJI = [
 'crossed swords',
 'crossed swords weapon'
 ],[
-'🔫',
-'water pistol',
-'gun handgun pistol revolver tool water weapon violence'
+'💣',
+'bomb',
+'comic boom explode explosion terrorism'
 ],[
 '🪃',
 'boomerang',
@@ -5634,6 +5651,14 @@ const EMOJI = [
 'funeral urn',
 'ashes death funeral urn dead die rip'
 ],[
+'🧿',
+'nazar amulet',
+'bead charm evil-eye nazar talisman'
+],[
+'🪬',
+'hamsa',
+'amulet Fatima hand Mary Miriam protection'
+],[
 '🗿',
 'moai',
 'face moyai statue rock easter island'
@@ -5645,7 +5670,11 @@ const EMOJI = [
 '🪪',
 'identification card',
 'credentials ID license security'
-],[
+],
+
+
+
+[ null, _('Symbols') ],[
 '🏧',
 'ATM sign',
 'atm automated bank teller atm sign money sales cash blue-square payment'
@@ -6537,7 +6566,11 @@ const EMOJI = [
 '🔲',
 'black square button',
 'button geometric square shape input frame'
-],[
+],
+
+
+
+[ null, _('Flags') ],[
 '🏁',
 'chequered flag',
 'checkered chequered racing contest finishline race gokart'
@@ -7945,23 +7978,35 @@ const MODED = [
 '👩🏻‍❤️‍👩🏻'
 
 ];
+
+const EMOJI_CATEGORIES = [];
+
+let i = 0;
+while (i < EMOJI.length) {
+    if (EMOJI[i][0] === null) {
+        EMOJI_CATEGORIES.push({
+            name: EMOJI[i][1],
+            start: i,
+            end: null
+        });
+        EMOJI.splice(i, 1);
+    }
+    i++;
+}
+
+for (let i = 0; i < EMOJI_CATEGORIES.length; i++) {
+    if (i === EMOJI_CATEGORIES.length - 1) {
+        EMOJI_CATEGORIES[i].end = EMOJI.length;
+    } else {
+        EMOJI_CATEGORIES[i].end = EMOJI_CATEGORIES[i+1].start;
+    }
+}
+
 // MODED is the emojis with the skin tone modifier \u{1F3FB} included
 // create MODABLE[], the same emoji but with the skin tone modifiers removed.
 const MODABLE = [];
 for (let i = 0; i < MODED.length; i++) {
     MODABLE[i] = MODED[i].replace(/\u{1F3FB}/ug, '');
 }
-
-const EMOJI_CATEGORIES = [
-    {name: _('Smileys & Emotion'),  start: 0,       end: 163},
-    {name: _('People & Body'),      start: 163,     end: 528},
-    {name: _('Animals & Nature'),   start: 528,     end: 672},
-    {name: _('Food & Drink'),       start: 672,     end: 804},
-    {name: _('Travel & Places'),    start: 804,     end: 1022},
-    {name: _('Activities'),         start: 1022,    end: 1108},
-    {name: _('Objects'),            start: 1108,    end: 1363},
-    {name: _('Symbols'),            start: 1363,    end: 1584},
-    {name: _('Flags'),              start: 1584,    end: 1853}
-];
 
 module.exports = {EMOJI, MODED, MODABLE, EMOJI_CATEGORIES};
