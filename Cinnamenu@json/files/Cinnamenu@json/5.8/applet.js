@@ -10,8 +10,7 @@ const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
 const GnomeSession = imports.misc.gnomeSession;
-const AppletManager = imports.ui.appletManager; //
-//const {SessionManager} = imports.misc.gnomeSession;
+const AppletManager = imports.ui.appletManager;
 const {ScreenSaverProxy} = imports.misc.screenSaver;
 const {PopupMenuManager, PopupIconMenuItem} = imports.ui.popupMenu;
 const {getAppFavorites} = imports.ui.appFavorites;
@@ -181,7 +180,7 @@ class CinnamenuApplet extends TextIconApplet {
         };
 
         this.settings = {};
-        this.settingsObj = new AppletSettings(this.settings, __meta.uuid, this.instance_id);
+        this.appletSettings = new AppletSettings(this.settings, __meta.uuid, this.instance_id);
         [
         { key: 'categories',                value: 'categories',            cb: null },
         { key: 'custom-menu-height',        value: 'customMenuHeight',      cb: null },
@@ -235,7 +234,7 @@ class CinnamenuApplet extends TextIconApplet {
         { key: 'sidebar-icon-size',         value: 'sidebarIconSize',       cb: refreshDisplay },
         { key: 'use-box-style',             value: 'useBoxStyle',           cb: refreshDisplay },
         { key: 'use-tile-style',            value: 'useTileStyle',          cb: refreshDisplay }
-        ].forEach(setting => this.settingsObj.bind(
+        ].forEach(setting => this.appletSettings.bind(
                           setting.key,
                           setting.value,
                           setting.cb ? (...args) => setting.cb.call(this, ...args) : null ) );
@@ -271,10 +270,10 @@ class CinnamenuApplet extends TextIconApplet {
     on_applet_removed_from_panel() {
         this.willUnmount = true;
         Main.keybindingManager.removeHotKey('overlay-key-' + this.instance_id);
-        if (!this.settingsObj) {
+        if (!this.appletSettings) {
             return;
         }
-        this.settingsObj.finalize();
+        this.appletSettings.finalize();
         this.signals.disconnectAllSignals();
         this.display.destroy();
         this.menu.destroy();
@@ -412,7 +411,9 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     addFolderCategory(path) {
-        this.settings.folderCategories.push(path);
+        const folderCategories = this.settings.folderCategories.slice();
+        folderCategories.push(path);
+        this.settings.folderCategories = folderCategories;
     }
 
     removeFolderCategory(path) {

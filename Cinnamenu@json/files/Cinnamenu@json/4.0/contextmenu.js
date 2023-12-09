@@ -135,6 +135,7 @@ class ContextMenu {
                         () => {
                             if (categoryId === GLib.get_home_dir()) {
                                 this.appThis.settings.showHomeFolder = false;
+                                this.appThis._onShowHomeFolderChange();
                             } else {
                                 this.appThis.removeFolderCategory(categoryId);
                             }
@@ -388,6 +389,9 @@ class ContextMenu {
                 this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
                 addMenuItem(new ContextMenuItem(this.appThis, _('Add folder as category'), 'list-add',
                     () => {
+                        if (path === GLib.get_home_dir()) {
+                            this.appThis.settings.showHomeFolder = true;
+                        }
                         this.appThis.addFolderCategory(path);
                         this.appThis.display.categoriesView.update();
                         this.close();
