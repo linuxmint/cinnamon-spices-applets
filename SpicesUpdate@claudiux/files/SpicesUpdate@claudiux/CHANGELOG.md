@@ -1,3 +1,6 @@
+### v6.4.3~20231209
+  * Fixes #5167. Use of Soup3 (Cinnamon 6.0).
+.
 ### v6.4.2~20230413
   * Minor bugfix.
 
