@@ -69,8 +69,8 @@
 
   var contains = function(array, value) {
     var index = -1;
-    var length = array.length;
-    while (++index < length) {
+    var _length = array.length;
+    while (++index < _length) {
       if (array[index] == value) {
         return true;
       }

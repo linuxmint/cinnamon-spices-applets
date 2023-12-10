@@ -1409,19 +1409,17 @@ WebRadioReceiverAndRecorder.prototype = {
 
     try {
       let config_dir = file_new_for_path(DOT_CONFIG_DIR);
-      if ( versionCompare(getenv("CINNAMON_VERSION"), "5.6") <= 0 ) {
-        // Remove attributes 'metadata::custom-icon' and 'metadata::custom-icon-name':
-        config_dir.set_attribute("metadata::custom-icon", 0, null, 0, null);
-        config_dir.set_attribute("metadata::custom-icon-name", 0, null, 0, null);
-    }
+      // Remove old attributes:
+      config_dir.set_attribute_string('metadata::custom-icon', "", 0, null);
+      config_dir.set_attribute_string('metadata::custom-icon-name', "", 0, null);
       // Set the right attribute:
       config_dir.set_attribute_string(icon_attr, path_to_icon, 0, null);
 
       let radio30_music_dir = file_new_for_path(RADIO30_MUSIC_DIR);
-      if ( versionCompare(getenv("CINNAMON_VERSION"), "5.6") <= 0 ) {
-        radio30_music_dir.set_attribute("metadata::custom-icon", 0, null, 0, null);
-        radio30_music_dir.set_attribute("metadata::custom-icon-name", 0, null, 0, null);
-    }
+      // Remove old attributes:
+      radio30_music_dir.set_attribute_string('metadata::custom-icon', "", 0, null);
+      radio30_music_dir.set_attribute_string('metadata::custom-icon-name', "", 0, null);
+      // Set the right attribute:
       radio30_music_dir.set_attribute_string(icon_attr, path_to_icon, 0, null);
     } catch(e) {
       logError(e)
