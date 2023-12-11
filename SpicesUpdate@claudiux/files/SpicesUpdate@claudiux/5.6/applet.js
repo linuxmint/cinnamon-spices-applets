@@ -56,7 +56,7 @@ const {
     mkdir_with_parents,
     file_set_contents,
     file_get_contents,
-    uuid_string_random,
+    //~ uuid_string_random,
     markup_escape_text
 } = imports.gi.GLib; //GLib
 
@@ -560,9 +560,13 @@ class SpicesUpdate extends IconApplet {
     define_http_session() {
         if (this._httpSession) Util.unref(this._httpSession);
 
-        this._httpSession = new Soup.Session(); // SessionAsync is deprecated. Use Session instead.
-        this._httpSession.timeout=60;
-        Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
+        if (Soup.MAJOR_VERSION == 2) { //Soup2
+            this._httpSession = new Soup.SessionAsync();
+            this._httpSession.timeout=60;
+            Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
+        } else { // Soup3
+            this._httpSession = new Soup.Session(); // SessionAsync is deprecated. Use Session instead.
+        }
     }
 
     //monitor_interfaces() {
@@ -1184,7 +1188,7 @@ class SpicesUpdate extends IconApplet {
     }
 
     are_dependencies_installed() {
-        let _fonts_installed = 
+        let _fonts_installed =
             file_new_for_path("/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf").query_exists(null) ||
             file_new_for_path("/usr/share/fonts/TTF/Symbola.ttf").query_exists(null) ||
             file_new_for_path("/usr/share/fonts/truetype/Symbola.ttf").query_exists(null) ||
@@ -1192,7 +1196,7 @@ class SpicesUpdate extends IconApplet {
             file_new_for_path("%s/.local/share/fonts/Symbola_Hinted.ttf".format(HOME_DIR)).query_exists(null) ||
             file_new_for_path("%s/.local/share/fonts/Symbola.ttf".format(HOME_DIR)).query_exists(null) ||
             file_new_for_path("%s/.local/share/fonts/Symbola.otf".format(HOME_DIR)).query_exists(null);
-        
+
         if (!_fonts_installed) {
             let _ArchlinuxWitnessFile = file_new_for_path("/etc/arch-release");
             let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
@@ -1310,10 +1314,11 @@ class SpicesUpdate extends IconApplet {
 
         //Should we renew the cache?
         let is_to_download = false;
+        let currentTime = Math.round(new Date().getTime()/1000.0);
 
         if (jsonFile.query_exists(null)) {
             let jsonModifTime = jsonFile.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
-            let currentTime = Math.round(new Date().getTime()/1000.0);
+
             if (currentTime - jsonModifTime > Math.round(this.refreshInterval/2)) {
                 // the cache is too old
                 is_to_download = true
@@ -1327,7 +1332,8 @@ class SpicesUpdate extends IconApplet {
 
         if (is_to_download === true || this.forceRefresh === true || force === true) {
             // replace local json cache file by the remote one
-            let message = Soup.Message.new("GET", URL_MAP[type] + uuid_string_random());
+            //~ let message = Soup.Message.new("GET", URL_MAP[type] + uuid_string_random());
+            let message = Soup.Message.new("GET", URL_MAP[type] + "time=" + currentTime);
             this._httpSession.queue_message(message, Lang.bind(this, this._on_response_download_cache, type, force));
             this.testblink[type]=null;
         }

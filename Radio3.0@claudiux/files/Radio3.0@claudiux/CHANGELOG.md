@@ -1,3 +1,9 @@
+### v1.11.3~20231210
+  * Minor bugfixes. Maybe fixes #5201.
+
+### v1.11.2~20231130
+  * Updates context menu, screenshot, README and MANUAL
+
 ### v1.11.1~20231128
   * Moves the "Do not check dependencies" option from the Settings Behavior tab to the context menu. This avoids error messages.
 
