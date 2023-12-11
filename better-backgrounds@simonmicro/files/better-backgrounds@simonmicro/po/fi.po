@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-28 20:26+0000\n"
-"PO-Revision-Date: 2022-11-28 23:19+0200\n"
+"PO-Revision-Date: 2023-12-11 14:35+0200\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,21 +80,21 @@ msgstr "Käytä"
 
 #. settings-schema.json->applet-icon-animation->description
 msgid "Animate icon while downloading"
-msgstr "Animoi kuvake latauksen aikana"
+msgstr "Animoi kuvake lataamisen aikana"
 
 #. settings-schema.json->applet-icon-animation->tooltip
 msgid "When a new background is downloaded the icon gets animated..."
-msgstr "Kun uusi tausta ladataan, kuvake animoituu..."
+msgstr "Kun uutta taustakuvaa ladataan, nähdään kuvakkeen animmaatio..."
 
 #. settings-schema.json->applet-show-notification->description
 msgid "Show notifications on problems"
-msgstr "Näytä ilmoitukset ongelmista"
+msgstr "Näytä ilmoitus kohdatusta ongelmasta"
 
 #. settings-schema.json->applet-show-notification->tooltip
 msgid "Bad network? Faulty setup? The applet will notify you. Every time."
 msgstr ""
-"Huono nettiyhteys? Virheellinen asetus? Sovelma ilmoittaa sinulle. Joka "
-"kerta."
+"Huono nettiyhteys? Virheellinen asetus? Sovelma ilmoittaa sinulle niistä "
+"joka kerta."
 
 #. settings-schema.json->applet-info-issues->description
 msgid ""
@@ -102,18 +102,17 @@ msgid ""
 "source code at https://github.com/simonmicro/better-backgrounds right over "
 "on Github!"
 msgstr ""
-"Löysitkö virheen tai haluatko ehdottaa puuttuvaa ominaisuutta? Tarkista "
-"Github lähdekoodi osoitteessa https://github.com/simonmicro/better-"
-"backgrounds"
+"Löysitkö virheen tai ehdottaa puuttuvaa ominaisuutta? Lähdekoodi https://"
+"github.com/simonmicro/better-backgrounds on nähtävillä Github:ssa!"
 
 #. settings-schema.json->applet-store-location->description
 msgid "Picture save location"
-msgstr "Kuvan tallennuspaikka"
+msgstr "Kuvan tallennuspaikka kiintolevyllä"
 
 #. settings-schema.json->applet-store-location->tooltip
 msgid ""
 "When you choose to save the current background, where do you want to put it?"
-msgstr "Kun päätät tallentaa nykyisen taustan, mihin haluat sijoittaa sen?"
+msgstr "Kun päätät tallentaa taustakuvan, mihin kansioon haluat tallentaa sen?"
 
 #. settings-schema.json->applet-store-info->description
 msgid ""
@@ -125,7 +124,7 @@ msgstr ""
 
 #. settings-schema.json->change-onstart->description
 msgid "On applet reloading"
-msgstr "Sovelluksen latautuessa uudelleen"
+msgstr "Sovelluksen latautumisen yhteydessä"
 
 #. settings-schema.json->change-onstart->tooltip
 msgid "Every time the applet is (re-)loaded, the background will be changed"
@@ -133,11 +132,11 @@ msgstr "Joka kerta kun sovelma ladataan (uudelleen), tausta muuttuu"
 
 #. settings-schema.json->change-onclick->description
 msgid "Clicking on the applet"
-msgstr "Napsauttamalla sovelmaa"
+msgstr "Painamalla sovelmaa"
 
 #. settings-schema.json->change-onclick->tooltip
 msgid "Just click onto the icon in your panel"
-msgstr "Napsauta vain kuvaketta paneelissa"
+msgstr "Paina vain kuvaketta paneelissa"
 
 #. settings-schema.json->change-onclick-nomenu->description
 msgid ""
@@ -145,22 +144,21 @@ msgid ""
 "clicking will change the background before you've got any chance to press "
 "the corresponding button to e.g. save the image!"
 msgstr ""
-"Huomaa, että tämä poistaa sovelman napsautuksen valikossa, koska painallus "
-"muuttaa taustan ennen kuin sinulla on mahdollisuutta painaa painiketta esim. "
-"tallenna kuva!"
+"Huomaa, että tämä poistaa sovelman valikon valinnat käytöstä, etkä voi "
+"esimerkiksi valita \"Tallenna kuva\" ominausuutta!"
 
 #. settings-schema.json->change-ontime->description
 msgid "After some time"
-msgstr "Jonkin ajan kuluttua"
+msgstr "Aikaväli kun taustakuva vaihtuu"
 
 #. settings-schema.json->change-ontime->tooltip
 msgid ""
 "After the specified number of minutes passes, we will change the background"
-msgstr "Kun määritetty määrä minuutteja on kulunut, taustaa vaihdetaan"
+msgstr "Kun antamasi aikaväli minuuteissa on kulunut, taustakuva vaihdetaan"
 
 #. settings-schema.json->change-time->description
 msgid "Change after"
-msgstr "Vaihda jälkeen"
+msgstr "Vaihdon aikaväli"
 
 #. settings-schema.json->change-time->units
 msgid "minutes"
@@ -172,7 +170,7 @@ msgid ""
 "Please make sure this package or command is installed."
 msgstr ""
 "Tämä ominaisuus käyttää komentoa \"mogrify\" paketista \"imagemagick\". "
-"Varmista, että tämä paketti tai komento on asennettu."
+"Varmista, että tämä paketti on asennettuna."
 
 #. settings-schema.json->effect-select->description
 msgid "Apply effects"
@@ -180,7 +178,7 @@ msgstr "Käytä tehosteita"
 
 #. settings-schema.json->effect-select->options
 msgid "Gaussian blur"
-msgstr "Gauss-sumennus"
+msgstr "Sumennus"
 
 #. settings-schema.json->effect-select->options
 msgid "Grayscale"
@@ -192,7 +190,7 @@ msgstr "Ei mitään"
 
 #. settings-schema.json->image-source->description
 msgid "Image source"
-msgstr "Kuvan lähde"
+msgstr "Kuva tulee lähteestä"
 
 #. settings-schema.json->image-source->options
 msgid "Bing"
@@ -223,15 +221,15 @@ msgid ""
 "This source supports displaying additional image autor information. It will "
 "be shown inside the applets tooltip."
 msgstr ""
-"Tämä lähde tukee kuvien tekijätietojen näyttämistä. Se näkyy sovelmien "
-"työkaluvihjeessä."
+"Tämä lähde tukee taustakuvan tekiän tietojen näyttämisen. Näkyy osoittamalla "
+"sovelman kuvaketta."
 
 #. settings-schema.json->install-warn-cutycapt->description
 msgid ""
 "Please make sure to install the 'cutycapt' package from the package manager "
 "of your choice!"
 msgstr ""
-"Varmista, että asennat \"cutycapt\"-paketin valitsemallasi "
+"Varmista, että asennat ensin \"cutycapt\" nimisen paketin tietokoneeseesi "
 "ohjelmistohallinnalla!"
 
 #. settings-schema.json->install-warn-imagemagick->description
@@ -248,9 +246,9 @@ msgid ""
 "demand. Please be patient and try again later if you experience problems. "
 "More information can be found at: https://status.unsplash.com/"
 msgstr ""
-"Tämän lähteen tiedetään aiheuttavan ongelmia, etenkin suuren kysynnän "
-"aikoina. Ole kärsivällinen ja yritä uudelleen. Jos kohtaat ongelmia, "
-"lisätietoja löytyy osoitteesta: https://status.unsplash.com/"
+"Tämän lähde ei aina toimi, etenkin suuren kysynnän aikana. Ole kärsivällinen "
+"ja yritä uudelleen. Jos kohtaat jatkuvasti ongelmia, lisätietoja löytyy "
+"osoitteesta: https://status.unsplash.com/"
 
 #. settings-schema.json->image-res-manual->description
 msgid "Use custom resolution"
@@ -258,13 +256,15 @@ msgstr "Käytä mukautettua resoluutiota"
 
 #. settings-schema.json->image-res-manual->tooltip
 msgid "This is mostly 1920x1080 or higher"
-msgstr "Useimmiten 1920x1080 tai suurempi"
+msgstr "Usein tämä on 1920x1080 tai suurempi"
 
 #. settings-schema.json->image-res-info->description
 msgid ""
 "Please make sure to choose a common resolution, otherwise the background "
 "can't be changed!"
-msgstr "Muista valita yleinen resoluutio, muuten taustaa ei voi muuttaa!"
+msgstr ""
+"Muista valita yleisesti käytetty resoluutio, muuten taustakuva ei "
+"välttämättä muutu!"
 
 #. settings-schema.json->image-res-width->description
 msgid "Width"
@@ -281,11 +281,11 @@ msgstr "Korkeus"
 
 #. settings-schema.json->image-tag->description
 msgid "Use own search tags"
-msgstr "Käytä omia tunnisteita hakuun"
+msgstr "Käytä omia tunnisteita kuvien hakemiseen"
 
 #. settings-schema.json->image-tag->tooltip
 msgid "Specify own tags to look for..."
-msgstr "Määritä omat tunnisteet hakuun..."
+msgstr "Määritä omat tunnisteet eli hakusanat hakuun..."
 
 #. settings-schema.json->image-res-himawari->description
 msgid ""
@@ -293,10 +293,9 @@ msgid ""
 "image resolution. So e.g. the factor '4x' would result in a 2200x2200 pixels "
 "image. Please note that factor² much tiles will be temporarly downloaded."
 msgstr ""
-"Kuvan suurennoskerroin - tämä kerroin kertaa ruudun koko (550 pikseliä) "
-"vastaa kuvan resoluutiota. Eli esim. kerroin \"4x\" johtaisi 2200x2200 "
-"pikselin kuvaan. Huomaa, että paljon factor² laattoja ladataan "
-"väliaikaisesti."
+"Kuvan suurennuskerroin - tämä kerroin ruudun kokoa (550 pikseliä) vastaa "
+"kuvan resoluutiota. Esim. kerroin \"4x\" johtaisi 2200x2200 pikselin kuvaan. "
+"Huomaa, että factor² laattoja ladataan väliaikaisesti paljon."
 
 #. settings-schema.json->image-res-himawari->options
 msgid "1x"
@@ -320,7 +319,7 @@ msgstr "20x"
 
 #. settings-schema.json->image-res-unsupported->description
 msgid "Sorry, the selected source does not support resolution modifiers."
-msgstr "Valittu lähde ei valitettavasti tue resoluution muokkaajia."
+msgstr "Valittu lähde ei valitettavasti tue resoluution muokkaamista."
 
 #. settings-schema.json->image-tag-info->description
 msgid ""
@@ -329,10 +328,9 @@ msgid ""
 "tags are understood as AND - not as OR! A valid search term could be 'nature,"
 "water'..."
 msgstr ""
-"Muista valita saatavilla oleva tunniste, muuten taustaa ei voi muuttaa! "
-"Varmista, että erotat tunnisteet merkillä, älä välilyönnillä, myös "
-"tunnisteet ymmärretään AND - ei OR! Kelvollinen hakutermi voisi olla "
-"\"nature,water\"..."
+"Valitse saatavilla oleva nimi tunniste, muuten taustaa ei muutu! Erota "
+"tunnisteet pilkulla, älä välilyönnillä. Tunnisteet ymmärretään myös AND - "
+"mutta ei OR! Hakutermi voisi olla \"nature,water\"..."
 
 #. settings-schema.json->image-tag-data->description
 msgid "Search tags"
@@ -340,7 +338,7 @@ msgstr "Haku tunnisteilla"
 
 #. settings-schema.json->image-tag-data->tooltip
 msgid "Enter your topic filters"
-msgstr "Anna aihe suodattimeen"
+msgstr "Anna suodattimeen aihe kuten nature space green"
 
 #. settings-schema.json->image-align-info->description
 msgid ""
@@ -349,16 +347,16 @@ msgid ""
 "because it ensures always the best fit on your screen."
 msgstr ""
 "Huomaa, että kuvan tasauksen ominaisuuksia ei muuteta alkuperäisestä "
-"työpöydän taustakuvasta. On suositeltavaa valita suurennos vaihtoehdoksi, "
-"koska se varmistaa aina parhaan istuvuuden näytöllesi."
+"työpöydän taustakuvasta. Parempi valita suurennos vaihtoehdoksi, koska se "
+"varmistaa aina kuvan sopivuuden näytöllesi."
 
 #. settings-schema.json->image-uri->description
 msgid "Website URI to render"
-msgstr "Nettisivun URI renderöitäväksi"
+msgstr "Verkkosivun osoite, joka renderöidään taustakuvaksi"
 
 #. settings-schema.json->image-uri->tooltip
 msgid "Enter the website URI which sould be rendered as your background"
-msgstr "Anna nettisivun URL-osoite, joka renderöidään taustaksi"
+msgstr "Anna sen verkkosivun osoite, jonka haluat renderöidä taustakuvaksi"
 
 #. settings-schema.json->image-update-button->description
 msgid "Apply now"
@@ -369,5 +367,4 @@ msgid ""
 "The settings are already stored - press this button to force a refresh of "
 "the background now."
 msgstr ""
-"Asetukset on jo tallennettu - paina painiketta pakottaaksesi taustan "
-"päivityksen nyt."
+"Asetukset ovat tallennettu - paina painiketta ja pakota taustan päivitys nyt."
