@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-08 19:56+0300\n"
-"PO-Revision-Date: 2023-03-29 16:57+0200\n"
+"POT-Creation-Date: 2023-12-02 12:12+0300\n"
+"PO-Revision-Date: 2023-12-11 18:11+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -18,95 +18,107 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:33 applet.js:59
+#: applet.js:32 applet.js:58
 msgid "Required GTop package missing!"
 msgstr "Il pacchetto richiesto GTop è assente!"
 
-#: applet.js:57
+#: applet.js:56
 msgid "Error!"
 msgstr "Errore!"
 
-#: applet.js:62
+#: applet.js:61
+msgid "Reset Peak Temperature"
+msgstr "Ripristina la temperatura di picco"
+
+#: applet.js:64
 msgid "Clear Cache"
 msgstr "Svuota Cache"
 
-#: applet.js:156
+#: applet.js:161
 msgid "CPUs"
 msgstr "CPU"
 
-#: applet.js:159
+#: applet.js:161
+msgid "°C max; "
+msgstr "°C max; "
+
+#: applet.js:161
+msgid "°C peak"
+msgstr "°C di picco"
+
+#: applet.js:164
 msgid "Memory"
 msgstr "Memoria"
 
-#: applet.js:159
+#: applet.js:164
 msgid "GB"
 msgstr "GB"
 
-#: applet.js:159
+#: applet.js:164
 msgid "GB swap"
 msgstr "GB swap"
 
-#: applet.js:162
+#: applet.js:167
 msgid "Network"
 msgstr "Rete"
 
-#: applet.js:316
+#: applet.js:321
 msgid "Core "
 msgstr "Core "
 
-#: applet.js:361
+#: applet.js:366
 msgid "Used:   "
 msgstr "Usati:  "
 
-#: applet.js:362
+#: applet.js:367
 msgid "Cache:  "
 msgstr "Cache:  "
 
-#: applet.js:363
+#: applet.js:368
 msgid "Buffer: "
 msgstr "Buffer: "
 
-#: applet.js:367
+#: applet.js:372
 msgid "Swap:   "
 msgstr "Swap:   "
 
-#: applet.js:437
+#: applet.js:442
 msgid "Up:      "
 msgstr "Up:      "
 
-#: applet.js:437 applet.js:438
+#: applet.js:442 applet.js:443
 msgid "B/s"
 msgstr "B/s"
 
-#: applet.js:438
+#: applet.js:443
 msgid "Down:    "
 msgstr "Down:    "
 
-#: applet.js:439
+#: applet.js:444
 msgid "Data:    "
 msgstr "Dati:    "
 
-#: applet.js:439
+#: applet.js:444
 msgid "B"
 msgstr "B"
 
-#: applet.js:443
+#: applet.js:448
 msgid "no interfaces to show"
 msgstr "nessuna interfaccia da mostrare"
 
-#: applet.js:448
+#: applet.js:453
 msgid "k"
 msgstr "k"
 
-#: applet.js:448
+#: applet.js:453
 msgid "M"
 msgstr "M"
 
-#: applet.js:448
+#: applet.js:453
 msgid "G"
 msgstr "G"
 
-#: applet.js:448
+#: applet.js:453
 msgid "T"
 msgstr "T"
 
