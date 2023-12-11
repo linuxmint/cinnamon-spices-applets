@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 10:26-0400\n"
-"PO-Revision-Date: 2023-10-30 15:35+0100\n"
+"POT-Creation-Date: 2023-12-03 13:17-0500\n"
+"PO-Revision-Date: 2023-12-11 17:29+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -18,29 +18,29 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: 4.0/applet.js:1330 4.0/applet.js:2507 4.0/applet.js:3984 4.0/applet.js:4046
-#: 4.0/applet.js:4069 4.0/applet.js:4153
+#: 4.0/applet.js:1326 4.0/applet.js:2518 4.0/applet.js:4013 4.0/applet.js:4081
+#: 4.0/applet.js:4104 4.0/applet.js:4193
 msgid "all buttons"
 msgstr "tutti i pulsanti"
 
-#: 4.0/applet.js:2239
+#: 4.0/applet.js:2250
 msgid "Applet Preferences"
 msgstr "Preferenze Applet"
 
-#: 4.0/applet.js:2243
+#: 4.0/applet.js:2254
 msgid "About..."
 msgstr "Informazioni su..."
 
-#: 4.0/applet.js:2247
+#: 4.0/applet.js:2258
 msgid "Configure..."
 msgstr "Configura..."
 
-#: 4.0/applet.js:2251
+#: 4.0/applet.js:2262
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Rimuovi '%s'"
 
-#: 4.0/applet.js:2253
+#: 4.0/applet.js:2264
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Vuoi davvero rimuovere questa istanza di CassiaWindowList?"
 
@@ -50,107 +50,107 @@ msgstr "Vuoi davvero rimuovere questa istanza di CassiaWindowList?"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2262
+#: 4.0/applet.js:2273
 msgid "Open new window"
 msgstr "Apri una nuova finestra"
 
-#: 4.0/applet.js:2270
+#: 4.0/applet.js:2281
 msgid "Remove from panel"
 msgstr "Rimuovi dal pannello"
 
-#: 4.0/applet.js:2272
+#: 4.0/applet.js:2283
 msgid "Remove from this workspace"
 msgstr "Rimuovi da questa area di lavoro"
 
-#: 4.0/applet.js:2278
+#: 4.0/applet.js:2289
 msgid "Pin to panel"
 msgstr "Appunta al pannello"
 
-#: 4.0/applet.js:2280
+#: 4.0/applet.js:2291
 msgid "Pin to this workspace"
 msgstr "Appunta a questo spazio di lavoro"
 
-#: 4.0/applet.js:2321
+#: 4.0/applet.js:2332
 msgid "Pin to other workspaces"
 msgstr "Appunta ad altre aree di lavoro"
 
-#: 4.0/applet.js:2342
+#: 4.0/applet.js:2353
 msgid "Pin to all workspaces"
 msgstr "Appunta in tutte le aree di lavoro"
 
-#: 4.0/applet.js:2360
+#: 4.0/applet.js:2371
 msgid "Pin to launcher"
 msgstr "Appunta al launcher"
 
-#: 4.0/applet.js:2378 4.0/applet.js:2561
+#: 4.0/applet.js:2389 4.0/applet.js:2572
 msgid "Add new Hotkey for"
 msgstr "Aggiungi un nuovo tasto di scelta rapida per"
 
-#: 4.0/applet.js:2392
+#: 4.0/applet.js:2403
 msgid "Recent files"
 msgstr "Recenti"
 
-#: 4.0/applet.js:2416
+#: 4.0/applet.js:2427
 msgid "Places"
 msgstr "Posizioni"
 
-#: 4.0/applet.js:2458
+#: 4.0/applet.js:2469
 msgid "Only on this workspace"
 msgstr "Solo su questo spazio di lavoro"
 
-#: 4.0/applet.js:2460
+#: 4.0/applet.js:2471
 msgid "Visible on all workspaces"
 msgstr "Visibile su tutte le aree di lavoro"
 
-#: 4.0/applet.js:2461
+#: 4.0/applet.js:2472
 msgid "Move to another workspace"
 msgstr "Sposta su un'altra area di lavoro"
 
-#: 4.0/applet.js:2480
+#: 4.0/applet.js:2491
 msgid "Move to another monitor"
 msgstr "Sposta su un altro schermo"
 
-#: 4.0/applet.js:2488
+#: 4.0/applet.js:2499
 msgid "Monitor"
 msgstr "Monitor"
 
-#: 4.0/applet.js:2516
+#: 4.0/applet.js:2527
 msgid "unassigned"
 msgstr "non assegnato"
 
-#: 4.0/applet.js:2527 4.0/applet.js:2558
+#: 4.0/applet.js:2538 4.0/applet.js:2569
 msgid "Assign window to a hotkey"
 msgstr "Assegna finestra ad un tasto di scelta rapida"
 
-#: 4.0/applet.js:2581
+#: 4.0/applet.js:2592
 msgid "Change application label contents"
 msgstr "Cambia il contenuto dell'etichetta dell'applicazione"
 
-#: 4.0/applet.js:2584
+#: 4.0/applet.js:2595
 msgid "Remove custom setting"
 msgstr "Rimuovi impostazioni personalizzate"
 
-#: 4.0/applet.js:2591
+#: 4.0/applet.js:2602
 msgid "Use window title"
 msgstr "Usa il titolo della finestra"
 
-#: 4.0/applet.js:2598
+#: 4.0/applet.js:2609
 msgid "Use application name"
 msgstr "Usa il nome dell'applicazione"
 
-#: 4.0/applet.js:2605
+#: 4.0/applet.js:2616
 msgid "No label"
 msgstr "Nessuna etichetta"
 
-#: 4.0/applet.js:2616
+#: 4.0/applet.js:2627
 msgid "Ungroup application windows"
 msgstr "Separa le finestre dell'applicazione"
 
-#: 4.0/applet.js:2625
+#: 4.0/applet.js:2636
 msgid "Group application windows"
 msgstr "Raggruppa le finestre dell'applicazione"
 
-#: 4.0/applet.js:2638
+#: 4.0/applet.js:2649
 msgid "Automatic grouping/ungrouping"
 msgstr "Raggruppamento/separazione automatica"
 
@@ -160,31 +160,31 @@ msgstr "Raggruppamento/separazione automatica"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2668
+#: 4.0/applet.js:2679
 msgid "Move titlebar on to screen"
 msgstr "Sposta la barra del titolo sullo schermo"
 
-#: 4.0/applet.js:2673
+#: 4.0/applet.js:2684
 msgid "Restore"
 msgstr "Ripristina"
 
-#: 4.0/applet.js:2677
+#: 4.0/applet.js:2688
 msgid "Minimize"
 msgstr "Minimizza"
 
-#: 4.0/applet.js:2683
+#: 4.0/applet.js:2694
 msgid "Unmaximize"
 msgstr "De-massimizza"
 
-#: 4.0/applet.js:2690
+#: 4.0/applet.js:2701
 msgid "Close others"
 msgstr "Chiudi altri"
 
-#: 4.0/applet.js:2701
+#: 4.0/applet.js:2712
 msgid "Close all"
 msgstr "Chiudi tutto"
 
-#: 4.0/applet.js:2710
+#: 4.0/applet.js:2721
 msgid "Close"
 msgstr "Chiudi"
 
@@ -556,6 +556,10 @@ msgid ""
 msgstr ""
 "Se abilitato, questa istanza dell'applet gestisce solo le finestre\n"
 "che vengono visualizzate sullo stesso schermo"
+
+#. 4.0->settings-schema.json->show-windows-for-all-workspaces->description
+msgid "Include windows from all workspaces"
+msgstr "Includi finestre da tutte le aree di lavoro"
 
 #. 4.0->settings-schema.json->show-tooltips->description
 msgid "Show tooltips for window list buttons"
@@ -1152,16 +1156,17 @@ msgstr ""
 
 #. 4.0->settings-schema.json->adv-mouse-help->description
 msgid ""
-"Note: The above list contents are frequently incorrectly displayed due to "
-"what I suspect is a Cinnamon bug. The values displayed in the edit dialog "
-"box are the correct values and the ones that will take effect. I will be "
-"looking into the cause of this issue at some point."
+"Note: The above list contents will be incorrectly displayed without this "
+"fix:\n"
+"https://github.com/linuxmint/cinnamon/pull/11908\n"
+"The edit dialog box values are the correct values and the ones that will "
+"take effect."
 msgstr ""
-"Nota: i contenuti dell'elenco precedente vengono spesso visualizzati in modo "
-"errato a causa di quello che sospetto sia un bug di Cinnamon. I valori "
-"visualizzati nella finestra di dialogo di modifica sono quelli corretti e "
-"quelli che avranno effetto. Prima o poi esaminerò la causa di questo "
-"problema."
+"Nota: il contenuto dell'elenco precedente verrà visualizzato in modo errato "
+"senza questa correzione:\n"
+"https://github.com/linuxmint/cinnamon/pull/11908\n"
+"I valori della finestra di dialogo di modifica sono quelli corretti e quelli "
+"che avranno effetto."
 
 #. 4.0->settings-schema.json->backup-file-name->description
 msgid "Settings backup name"
