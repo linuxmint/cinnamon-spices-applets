@@ -48,6 +48,10 @@ const SignalManager = imports.misc.signalManager;
 const CinnamonDesktop = imports.gi.CinnamonDesktop;
 const ModalDialog = imports.ui.modalDialog;
 const Config = imports.misc.config;
+const GdkPixbuf = imports.gi.GdkPixbuf;
+const Cogl = imports.gi.Cogl;
+
+const ICONTHEME = Gtk.IconTheme.get_default();
 
 const UUID = "CassiaWindowList@klangman";
 
@@ -252,6 +256,15 @@ const DisplayPinned = {
    Disabled: 0,
    Enabled: 1,
    Synchronized: 2
+}
+
+const SaturationType = {
+   All: 0,
+   Minimized: 1,
+   Idle: 2,
+   OtherWorkspaces: 3,
+   OtherMonitors: 4,
+   Focused: 5
 }
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
@@ -1022,6 +1035,7 @@ class WindowListButton {
     this.actor.add_actor(this._labelBox);
 
     this._icon = null;
+    this._modifiedIcon = null;  // This is a version of the icon that has had it saturation modified
     this._iconBin = new St.Bin({name: "appMenuIcon"});
     this._iconBin._delegate = this;
     this._iconBox.add_actor(this._iconBin);
@@ -1078,6 +1092,41 @@ class WindowListButton {
 
     this.isDraggableApp = true;
     this._updateNumber();
+  }
+
+  isMinimizedAll() {
+     let minimized=0;
+     for (let idx=0 ; idx < this._windows.length ; idx++ ) {
+        if (this._windows[idx].minimized)
+           minimized++;
+     }
+     if (minimized > 0 && minimized === this._windows.length )
+        return true;
+     return false;
+  }
+
+  isOnOtherWorkspaceAll() {
+     let other=0;
+     for (let idx=0 ; idx < this._windows.length ; idx++ ) {
+        let ws = this._windows[idx].get_workspace();
+        if (ws && ws.index() != this._workspace._wsNum)
+           other++;
+     }
+     if (other > 0 && other === this._windows.length )
+        return true;
+     return false;
+  }
+
+  isOnOtherMonitorsAll() {
+     let other=0;
+     for (let idx=0 ; idx < this._windows.length ; idx++ ) {
+        let monitor = this._windows[idx].get_monitor();
+        if (monitor != -1 && monitor != this._applet.panel.monitorIndex)
+           other++;
+     }
+     if (other > 0 && other === this._windows.length )
+        return true;
+     return false;
   }
 
   getButton1Action() {
@@ -1193,6 +1242,11 @@ class WindowListButton {
     if (this.menu && this._windows.length == 1) {
       this._workspace.menuManager.addMenu(this.menu);
     }
+    if (this._workspace.iconSaturation!=100 &&
+       (this._pinned && this._windows.length===1 && this._workspace.saturationType == SaturationType.Idle) ||
+       (this._workspace.saturationType == SaturationType.OtherMonitors && this.isOnOtherMonitorsAll()) ) {
+       this.updateIconSelection();
+    }
   }
 
   removeWindow(metaWindow) {
@@ -1219,6 +1273,9 @@ class WindowListButton {
         this.actor.remove_style_pseudo_class("active");
         this._minLabelSize = -1
         this.closeThumbnailMenu();
+        if (this._workspace.iconSaturation!=100 && this._workspace.saturationType == SaturationType.Idle) {
+          this.updateIconSelection();
+        }
       }
     }
     this._updateTooltip();
@@ -1263,6 +1320,9 @@ class WindowListButton {
 
   _onWindowWorkspaceChanged(window, wsNum) {
     this._applet.windowWorkspaceChanged(window, wsNum);
+    if (this._workspace.iconSaturation!=100 && this._workspace.saturationType == SaturationType.OtherWorkspaces) {
+       this.updateIconSelection();
+    }
   }
 
   _updateTooltip() {
@@ -1354,6 +1414,23 @@ class WindowListButton {
     this._tooltip.preventShow = false;
   }
 
+  updateIconSelection() {
+     if (this._workspace.iconSaturation != 100 && this._modifiedIcon) {
+        let satType = this._workspace.saturationType;
+        if (satType == SaturationType.All ||
+           (satType == SaturationType.Minimized && this.isMinimizedAll()) ||
+           (satType == SaturationType.Idle && this._pinned && this._windows.length==0) ||
+           (satType == SaturationType.OtherWorkspaces && this.isOnOtherWorkspaceAll()) ||
+           (satType == SaturationType.OtherMonitors && this.isOnOtherMonitorsAll()) ||
+           (satType == SaturationType.Focused && !this._hasFocus()) )
+        {
+           this._iconBin.set_child(this._modifiedIcon);
+           return;
+        }
+     }
+     this._iconBin.set_child(this._icon);
+  }
+
   updateIcon() {
     let panelHeight = this._applet._panelHeight;
 
@@ -1363,25 +1440,44 @@ class WindowListButton {
 
     if (this._icon)
        this._icon.destroy();
+    if (this._modifiedIcon) {
+       this._modifiedIcon.destroy();
+       this._modifiedIcon = null;
+    }
 
     if (this._app) {
       let appInfo = this._app.get_app_info();
       if (appInfo) {
         let infoIcon = appInfo.get_icon();
-        icon = new St.Icon({ gicon: infoIcon,
-                             icon_size: this.iconSize
-                           });
+        let saturation = this._workspace.iconSaturation;
+        if (saturation != 100) {
+           let pixBuf;
+           let themeIcon = ICONTHEME.lookup_icon(infoIcon.to_string(), this.iconSize, 0);
+           if (themeIcon) {
+              pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(themeIcon.get_filename(), this.iconSize, this.iconSize);
+           } else {
+              pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(infoIcon.to_string(), this.iconSize, this.iconSize);
+           }
+           if (pixBuf) {
+              let image = new Clutter.Image();
+              pixBuf.saturate_and_pixelate(pixBuf, saturation/100, false);
+              image.set_data(pixBuf.get_pixels(), pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
+                 this.iconSize, this.iconSize, pixBuf.get_rowstride() );
+              this._modifiedIcon = new Clutter.Actor({width: this.iconSize, height: this.iconSize, content: image});
+           } else {
+              //log( `Can't find icon for ${infoIcon.to_string()}` );
+           }
+        }
+        icon = new St.Icon({ gicon: infoIcon, icon_size: this.iconSize });
       } else {
         icon = this._app.create_icon_texture(this.iconSize);
       }
     } else {
-      icon = new St.Icon({ icon_name: "application-default-icon",
-                           icon_type: St.IconType.FULLCOLOR,
-                           icon_size: this.iconSize });
+      icon = new St.Icon({ icon_name: "application-default-icon", icon_type: St.IconType.FULLCOLOR, icon_size: this.iconSize });
     }
 
     this._icon = icon;
-    this._iconBin.set_child(this._icon);
+    this.updateIconSelection();
 
     if (this._applet.orientation == St.Side.LEFT || this._applet.orientation == St.Side.RIGHT) {
       panelHeight--;
@@ -1425,7 +1521,7 @@ class WindowListButton {
       text += number;
     }
 
-    if (style == 1 && (this._applet.orientation == St.Side.LEFT || this._applet.orientation == St.Side.RIGHT))
+    if (style == 1 && (groupType == GroupType.Launcher || (this._applet.orientation == St.Side.LEFT || this._applet.orientation == St.Side.RIGHT)))
        style = 0;  // No space for a label based window group counter, so force the icon overlay option if it's not disabled!
 
     if (text == "" || style == 1) {
@@ -1450,6 +1546,16 @@ class WindowListButton {
     // If we are in a left or right panel then we have no space for labels anyhow!
     if (this._applet.orientation == St.Side.LEFT || this._applet.orientation == St.Side.RIGHT) {
        this._updateTooltip();
+       return;
+    }
+    // If we are in launcher mode then set the label width to 0
+    let groupSetting = this._settings.getValue("group-windows");
+    if (groupSetting === GroupType.Launcher ) {
+       if (this._labelWidth != 0) {
+          let animTime = this._settings.getValue("label-animation") ? this._settings.getValue("label-animation-time") : 0;
+          resizeActor(this._labelBox, animTime, 0, "", this);
+          this._labelWidth = 0;
+       }
        return;
     }
 
@@ -1500,13 +1606,7 @@ class WindowListButton {
     }
     if (needsCaption === true && minimizedSetting === true && this._currentWindow && this._currentWindow.minimized) {
        if (this._windows.length > 1) {
-          let minimized=0;
-          for (let idx=0 ; idx < this._windows.length ; idx++ ) {
-             if (this._windows[idx].minimized) 
-                minimized++;
-          }
-          if (minimized === this._windows.length )
-             needsCaption = false;
+          needsCaption = !this.isMinimizedAll();
        } else if (oneCaption === true) {
           let btns = this._workspace._lookupAllAppButtonsForApp(this._app);
           let minimized = 0;
@@ -1545,8 +1645,8 @@ class WindowListButton {
     }
 
     // Do we need a window number char
-    if (style === 1 && ((numSetting === DisplayNumber.All && number >= 1) || ((numSetting === DisplayNumber.Smart && number >= 2) && 
-       (this._settings.getValue("group-windows") === 0 || this._grouped > GroupingType.NotGrouped)))) 
+    if (style === 1 && ((numSetting === DisplayNumber.All && number >= 1) || ((numSetting === DisplayNumber.Smart && number >= 2) &&
+       (groupSetting === 0 || this._grouped > GroupingType.NotGrouped))))
     {
       if (number > 20) {
         text = "\u{24A8} " + text; // The Unicode character "(m)"
@@ -1702,10 +1802,16 @@ class WindowListButton {
         if (metaWindow.urgent || metaWindow.demands_attention) {
           this._unflashButton();
         }
+        if (this._workspace.iconSaturation!=100 && this._workspace.saturationType == SaturationType.Focused) {
+           this.updateIconSelection();
+        }
         break;
       } else {
         this.actor.remove_style_pseudo_class("focus");
         this._updateLabel();
+        if (this._workspace.iconSaturation!=100 && this._workspace.saturationType == SaturationType.Focused) {
+           this.updateIconSelection();
+        }
       }
     }
   }
@@ -2230,6 +2336,9 @@ class WindowListButton {
     if (this._currentWindow == metaWindow) {
       this._updateFocus();
     }
+    if (this._workspace.iconSaturation!=100 && this._workspace.saturationType == SaturationType.Minimized) {
+       this.updateIconSelection();
+    }
   }
 
   _hasFocus() {
@@ -2473,10 +2582,13 @@ class WindowListButton {
         this._contextMenu.addMenuItem(item);
 
         for (let i = 0; i < this._applet._workspaces.length; i++) {
-          if (i != this._workspace._wsNum) {
+          if (i != metaWindow.get_workspace().index()) {
             // Make the index a local variable to pass to function
             let j = i;
             let name = Main.workspace_names[i] ? Main.workspace_names[i] : Main._makeDefaultWorkspaceName(i);
+            if (j == this._workspace._wsNum) {
+               name += _(" (this workspace)");
+            }
             let ws = new PopupMenu.PopupMenuItem(name);
             ws.connect("activate", Lang.bind(this, function() {
                 metaWindow.change_workspace_by_index(j, false);
@@ -2939,6 +3051,10 @@ class Workspace {
     //this._signalManager.connect(this._windowTracker, "notify::focus-app", this._updateFocus, this);
     this._signalManager.connect(global.settings, "changed::panel-edit-mode", this._onPanelEditModeChanged, this);
     this._signalManager.connect(this._settings, "changed::show-windows-for-current-monitor", this._updateAllWindowsForMonitor, this);
+    this._signalManager.connect(this._settings, "changed::icon-saturation", this._updateAllIcons, this);
+    this._signalManager.connect(this._settings, "changed::saturation-application", this._updateAllIcons, this);
+    this.iconSaturation = this._settings.getValue("icon-saturation");
+    this.saturationType = this._settings.getValue("saturation-application");
   }
 
   onOrientationChanged(orientation) {
@@ -3215,6 +3331,14 @@ class Workspace {
     }
   }
 
+  _updateAllIcons() {
+    this.iconSaturation = this._settings.getValue("icon-saturation");
+    this.saturationType = this._settings.getValue("saturation-application");
+    for (let i = 0; i < this._appButtons.length; i++) {
+      this._appButtons[i].updateIcon();
+    }
+  }
+
   _lookupApp(appId) {
     let app = null;
     if (appId) {
@@ -3409,6 +3533,7 @@ class Workspace {
            this._ungroupAllApps(GroupingType.ForcedOff);
            break;
         case GroupType.Launcher:
+           this._groupAllApps(GroupingType.ForcedOn);
            break;
      }
      this._updateAppButtonVisibility()
@@ -3424,7 +3549,7 @@ class Workspace {
            if (allButtons.length > 1){
               apps.push(appButtons[i]._app);
               let windows = [];
-              allButtons.forEach((element) => {windows.push(element._windows[0]); this._windowRemoved(element._windows[0]);} );
+              allButtons.forEach((element) => {if(element._windows.length>0) {windows.push(element._windows[0]); this._windowRemoved(element._windows[0]);}} );
               windows.forEach((element) => {this._windowAdded(element);} );
            }
         }
@@ -3482,6 +3607,9 @@ class Workspace {
           if (this._currentFocus && newFocus != this._currentFocus) {
              this._currentFocus.actor.remove_style_pseudo_class("focus");
              this._currentFocus._updateLabel();
+             if (this.iconSaturation!=100 && this.saturationType == SaturationType.Focused) {
+                this._currentFocus.updateIconSelection();
+             }
              let pinnedSetting = this._settings.getValue("display-caption-for-pined");
              let capSetting = this._settings.getValue("display-caption-for");
              if (pinnedSetting == PinnedLabel.Focused && capSetting === DisplayCaption.One) {
@@ -4070,7 +4198,7 @@ class WindowList extends Applet.Applet {
      let secondCombo;
      // Remove all the help hotkeys
      for ( i=0 ; i < this._registeredHelpKeys.length ; i++ ) {
-        Main.keybindingManager.removeHotKey("hotkeyhelp-" + i + "-" + this.instanceId);
+        Main.keybindingManager.removeHotKey("CassiaWLHelp-" + i + "-" + this.instanceId);
      }
      this._registeredHelpKeys = [];
      for ( i=0 ; i < keyBindings.length ; i++) {
@@ -4081,13 +4209,13 @@ class WindowList extends Applet.Applet {
               if (seqCombo && (oldKeySequence || oldBindings[i].description.toLowerCase() == _("all buttons"))) {
                  //log( `removing smart numeric hotkeys for ${oldBindings[i].description}` );
                  for( let num=1 ; num < 10 ; num++ ) {
-                    Main.keybindingManager.removeHotKey("hotkey-" + i + "-" + num + this.instanceId);
+                    Main.keybindingManager.removeHotKey("CassiaWL-" + i + "-" + num + this.instanceId);
                  }
                  if (secondCombo) {
-                    Main.keybindingManager.removeHotKey("hotkey-" + i + this.instanceId);
+                    Main.keybindingManager.removeHotKey("CassiaWL-" + i + this.instanceId);
                  }
               } else {
-                 Main.keybindingManager.removeHotKey("hotkey-" + i + this.instanceId);
+                 Main.keybindingManager.removeHotKey("CassiaWL-" + i + this.instanceId);
               }
               // Clear out the existing key->window mapping
               for (let wsIdx=0 ; wsIdx<this._workspaces.length ; wsIdx++) {
@@ -4104,14 +4232,14 @@ class WindowList extends Applet.Applet {
            if (seqCombo && (keySequence || keyBindings[i].description.toLowerCase() == _("all buttons"))) {
               //log( `Registering smart numeric hotkeys for ${keyBindings[i].description}  i.e. ${seqCombo+1}` );
               for( let num=1 ; num < 10 ; num++ ) {
-                 Main.keybindingManager.addHotKey("hotkey-" + i + "-" + num + this.instanceId, seqCombo+num, Lang.bind(this, function() {this._performHotkey(idx, num)} ));
+                 Main.keybindingManager.addHotKey("CassiaWL-" + i + "-" + num + this.instanceId, seqCombo+num, Lang.bind(this, function() {this._performHotkey(idx, num)} ));
               }
               if (secondCombo) {
-                 Main.keybindingManager.addHotKey("hotkey-" + i + this.instanceId, secondCombo, Lang.bind(this, function() {this._performHotkey(idx)} ));
+                 Main.keybindingManager.addHotKey("CassiaWL-" + i + this.instanceId, secondCombo, Lang.bind(this, function() {this._performHotkey(idx)} ));
               }
            } else {
               // Register the hotkey
-              Main.keybindingManager.addHotKey("hotkey-" + i + this.instanceId, keyBindings[i].keyCombo, Lang.bind(this, function() {this._performHotkey(idx)} ));
+              Main.keybindingManager.addHotKey("CassiaWL-" + i + this.instanceId, keyBindings[i].keyCombo, Lang.bind(this, function() {this._performHotkey(idx)} ));
            }
         }
         // If the key is enabled, set the keyBindingWindows for each workspace to the windows that match the description
@@ -4129,14 +4257,14 @@ class WindowList extends Applet.Applet {
               let [seqCombo, secondCombo] = getSmartNumericHotkey(oldBindings[i].keyCombo);
               if (seqCombo) {
                  for( let num=1 ; num < 10 ; num++ ) {
-                    Main.keybindingManager.removeHotKey("hotkey-" + i + "-" + num + this.instanceId);
+                    Main.keybindingManager.removeHotKey("CassiaWL-" + i + "-" + num + this.instanceId);
                  }
                  if (secondCombo) {
-                    Main.keybindingManager.removeHotKey("hotkey-" + i + this.instanceId);
+                    Main.keybindingManager.removeHotKey("CassiaWL-" + i + this.instanceId);
                  }
               }
            } else {
-              Main.keybindingManager.removeHotKey("hotkey-" + i + this.instanceId);
+              Main.keybindingManager.removeHotKey("CassiaWL-" + i + this.instanceId);
            }
            i++;
         }
@@ -4161,12 +4289,12 @@ class WindowList extends Applet.Applet {
      if (first.length > 0) {
         if (this._registeredHelpKeys.indexOf(first) === -1 ) {
            let idx = this._registeredHelpKeys.push(first) - 1;
-           Main.keybindingManager.addHotKey("hotkeyhelp-" + idx + "-" + this.instanceId, first+"grave", Lang.bind(this, function() {this._performHotkeyHelp(first)} ));
+           Main.keybindingManager.addHotKey("CassiaWLHelp-" + idx + "-" + this.instanceId, first+"grave", Lang.bind(this, function() {this._performHotkeyHelp(first)} ));
         }
      } else if (second.length > 0) {
         if (this._registeredHelpKeys.indexOf(second) === -1 ) {
            let idx = this._registeredHelpKeys.push(second) - 1;
-           Main.keybindingManager.addHotKey("hotkeyhelp-" + idx + "-" + this.instanceId, second+"grave", Lang.bind(this, function() {this._performHotkeyHelp(second)} ));
+           Main.keybindingManager.addHotKey("CassiaWLHelp-" + idx + "-" + this.instanceId, second+"grave", Lang.bind(this, function() {this._performHotkeyHelp(second)} ));
         }
      }
   }
@@ -4499,19 +4627,19 @@ class WindowList extends Applet.Applet {
           [seqCombo,secondCombo] = getSmartNumericHotkey(this._keyBindings[i].keyCombo);
           if (seqCombo && keySequence) {
              for( let num=1 ; num < 10 ; num++ ) {
-                Main.keybindingManager.removeHotKey("hotkey-" + i + "-" + num + this.instanceId);
+                Main.keybindingManager.removeHotKey("CassiaWL-" + i + "-" + num + this.instanceId);
              }
              if (secondCombo) {
-                Main.keybindingManager.removeHotKey("hotkey-" + i + this.instanceId);
+                Main.keybindingManager.removeHotKey("CassiaWL-" + i + this.instanceId);
              }
           } else {
-             Main.keybindingManager.removeHotKey("hotkey-" + i + this.instanceId);
+             Main.keybindingManager.removeHotKey("CassiaWL-" + i + this.instanceId);
           }
        }
     }
     // Remove all the help hotkeys
-    for ( i=0 ; i < this._registeredHelpKeys.length ; i++ ) {
-       Main.keybindingManager.removeHotKey("hotkeyhelp-" + idx + "-" + this.instanceId);
+    for ( let i=0 ; i < this._registeredHelpKeys.length ; i++ ) {
+       Main.keybindingManager.removeHotKey("CassiaWLHelp-" + i + "-" + this.instanceId);
     }
 
   }
@@ -4636,6 +4764,13 @@ class WindowList extends Applet.Applet {
 
   windowMonitorChanged(screen, window, monitor) {
     if (!this._settings.getValue("show-windows-for-current-monitor")) {
+      let ws = this.getCurrentWorkSpace();
+      if (ws.saturationType == SaturationType.OtherMonitors && ws.iconSaturation!=100) {
+        let btn = ws._lookupAppButtonForWindow(window);
+        if (btn) {
+          btn.updateIconSelection();
+        }
+      }
       return;
     }
     if (monitor == this.panel.monitorIndex) {
