@@ -77,7 +77,7 @@
     "adv-other-settings" : {
       "type" : "section",
       "title" : "",
-      "keys" : ["backup-file-name"]
+      "keys" : ["backup-file-name", "icon-saturation", "saturation-application"]
     }
   },
   "caption-type": {
@@ -412,7 +412,7 @@
 
   "launcher-mouse-action-btn1": {
     "type": "combobox",
-    "default": 2,
+    "default": 4,
     "options": {
       "Restore/Minimize most recent window": 0,
       "Restore then cycle windows": 1,
@@ -667,6 +667,33 @@
     "default" : "",
     "description" : "Settings backup name",
     "tooltip" : "If a name is entered here, the configuration of this applet instance will be backed up under that name. Backups will be listed in the Setup Wizard restore page when adding a new instance of CassiaWindowList to a panel."
+  },
+
+  "icon-saturation": {
+    "type": "spinbutton",
+    "default": 100,
+    "min": 0,
+    "max": 200,
+    "units": "percent",
+    "step": 1,
+    "description": "Icon color saturation",
+    "tooltip": "Sets the color saturation for icons from 0% (grayscale) to 200%, default is 100%\nThis option is experimental, some icons are not currently effected by this setting"
+  },
+
+  "saturation-application": {
+    "type": "combobox",
+    "default": 0,
+    "options": {
+       "All Buttons": 0,
+       "Minimized buttons": 1,
+       "Idle pinned buttons": 2,
+       "Buttons for windows on other workspaces": 3,
+       "Buttons for windows on other monitors": 4,
+       "All buttons excepted focused window": 5
+    },
+    "dependency": "icon-saturation!=100",
+    "description": "Where to apply the icon color saturation",
+    "tooltip": "Which buttons will have the custom icon color saturation applied\nThis option is only available when the saturation is not set to 100%"
   },
 
   "pinned-apps": {
