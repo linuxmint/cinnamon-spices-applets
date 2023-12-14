@@ -6,15 +6,27 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-18 22:14-0400\n"
-"PO-Revision-Date: 2023-12-12 16:10+0100\n"
+"POT-Creation-Date: 2023-12-03 13:17-0500\n"
+"PO-Revision-Date: 2023-12-14 09:22+0100\n"
+"PO-Revision-Date: 2023-12-14 09:20+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language-Team: \n"
 "Language: hu\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: 4.0/applet.js:2192
@@ -1308,3 +1320,80 @@ msgstr "Monitor1PanelIndító"
 #: SetupWizard.ui:558
 msgid "Monitor2PanelLauncher"
 msgstr "Monitor2PanelIndító"
+
+#: 4.0/applet.js:1326 4.0/applet.js:2518 4.0/applet.js:4013 4.0/applet.js:4081
+#: 4.0/applet.js:4104 4.0/applet.js:4193
+msgid "all buttons"
+msgstr "minden gomb"
+
+#. 4.0->settings-schema.json->show-windows-for-all-workspaces->description
+msgid "Include windows from all workspaces"
+msgstr "Tartalmazzon ablakokat minden munkaterületről"
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+msgid "New window or hold for thumbnail menu"
+msgstr "Új ablak, vagy tartsa lenyomva a miniatűr menü megjelenítéséhez"
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->description
+msgid "Left button action (with running windows)"
+msgstr "Bal gomb művelet (futó ablakoknál)"
+
+#. 4.0->settings-schema.json->launcher-mouse-action-btn1->tooltip
+msgid ""
+"Action taken when using the left mouse button on a launcher button with one "
+"or more running windows"
+msgstr ""
+"A bal egérgombbal egy vagy több futó ablakkal rendelkező indítógombon "
+"végrehajtott művelet"
+
+#. 4.0->settings-schema.json->hotkey-grave-help->description
+msgid "Use modifier(s) + ` hotkey to show hotkey hint bubbles"
+msgstr ""
+"Használja a módosító(ka)t + ` gyorsbillentyűket a gyorsbillentyű-tipp "
+"buborékok megjelenítéséhez"
+
+#. 4.0->settings-schema.json->hotkey-grave-help->tooltip
+msgid ""
+"If enabled, The hotkey modifier(s) + ` will be registered for each unique "
+"modifier set defined in the hotkey list. Using these hotkeys will temporally "
+"show a hotkey hint bubble over the button icons."
+msgstr ""
+"Ha engedélyezve van, a gyorsbillentyű-módosító(k) + ` minden egyes, a "
+"gyorsbillentyű-listában meghatározott egyedi módosítókészlethez regisztrálva "
+"lesz. Ezeknek a gyorsbillentyűknek a használatakor ideiglenesen egy "
+"gyorsbillentyű-tipp buborék jelenik meg a gombikonok felett."
+
+#. 4.0->settings-schema.json->hotkey-help->description
+msgid ""
+"Hotkeys can be assigned to a window in two ways:\n"
+"1) Manual: Use \"Assign window to a hotkey\" in the button context menu.\n"
+"2) Automatic:  Enter a \"Description\" matching an application name or "
+"desktop file.\n"
+"Note: 1) Hotkey not working? it's possible the key combination is already "
+"assigned elsewhere. 2) If you remove or rearrange hotkeys, manual hotkey "
+"assignments might need to be reassigned. 3) Hotkeys associated with desktop "
+"files can not be manually assigned."
+msgstr ""
+"A gyorsbillentyűket kétféleképpen lehet hozzárendelni egy ablakhoz:\n"
+"1) Kézi: Használja az \"Ablak hozzárendelése gyorsbillentyűhöz\" lehetőséget "
+"a gomb helyi menüjében.\n"
+"2) Automatikus: Adjon meg egy „Leírást”, amely megfelel az alkalmazás "
+"nevének vagy az asztali fájlnak.\n"
+"Megjegyzés: 1) Nem működik a gyorsbillentyű? lehetséges, hogy a "
+"billentyűkombináció már máshol van hozzárendelve. 2) Ha eltávolítja vagy "
+"átrendezi a gyorsbillentyűket, előfordulhat, hogy a kézi gyorsbillentyű-"
+"hozzárendeléseket újra kell rendelni. 3) Az asztali fájlokhoz tartozó "
+"gyorsbillentyűket nem lehet manuálisan hozzárendelni."
+
+#. 4.0->settings-schema.json->adv-mouse-help->description
+msgid ""
+"Note: The above list contents will be incorrectly displayed without this "
+"fix:\n"
+"https://github.com/linuxmint/cinnamon/pull/11908\n"
+"The edit dialog box values are the correct values and the ones that will "
+"take effect."
+msgstr ""
+"Megjegyzés: A fenti lista tartalma hibásan jelenik meg a javítás nélkül:\n"
+"https://github.com/linuxmint/cinnamon/pull/11908\n"
+"A szerkesztés párbeszédpanel értékei a megfelelő értékek, és azok, amelyek "
+"életbe lépnek."
