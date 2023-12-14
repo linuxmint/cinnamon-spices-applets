@@ -6,15 +6,27 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-26 18:02+0200\n"
-"PO-Revision-Date: 2023-12-13 16:19+0100\n"
+"POT-Creation-Date: 2023-11-28 18:37+0100\n"
+"PO-Revision-Date: 2023-12-14 09:32+0100\n"
+"PO-Revision-Date: 2023-12-14 09:31+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language-Team: \n"
 "Language: hu\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:425
@@ -367,7 +379,7 @@ msgstr "HIBA: Érvénytelen YT-videó URL-je!"
 
 #: applet.js:3936
 msgid "Unable to extract a single soundtrack"
-msgstr "HIBA: Érvénytelen YT-videó URL-je!"
+msgstr "HIBA: Érvénytelen YT-videó URL-je"
 
 #: applet.js:3936
 msgid "Maybe it's a playlist?"
@@ -2916,3 +2928,11 @@ msgstr "Keresés…"
 #. settings-schema.json->sched-rmbutton->description
 msgid "Remove selected items"
 msgstr "Kiválasztott elemek eltávolítása"
+
+#: applet.js:4307
+msgid "Radio3.0 web page..."
+msgstr "Radio3.0 weboldal..."
+
+#. settings-schema.json->radios->columns->title
+msgid "Artist/Title swap"
+msgstr "Előadó/Cím felcserélése"
