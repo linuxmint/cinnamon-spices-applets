@@ -1,0 +1,59 @@
+{
+    "section1": {
+        "type": "section",
+        "description": "Configure"
+    },
+    "resource": {
+        "type": "radiogroup",
+        "default": "https://t.mwm.moe/pc",
+        "description": "Wallpaper api resource",
+        "options": {
+            "mwm.moe": "https://t.mwm.moe/pc",
+            "loliapi.com": "https://www.loliapi.com/acg/pc/",
+            "zichen.zone": "https://app.zichen.zone/api/acg.php",
+            "dmoe.cc": "https://www.dmoe.cc/random.php",
+            "xjh.me": "https://cloud.qqshabi.cn/api/images/api.php",
+            "vvhan.com": "https://api.vvhan.com/api/acgimg",
+            "paulzzh.com": "https://img.paulzzh.com/touhou/random",
+            "paugram.com": "https://api.paugram.com/wallpaper/",
+            "r10086.com": "https://api.r10086.com/%E6%A8%B1%E9%81%93%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87api%E6%8E%A5%E5%8F%A3.php?%E5%9B%BE%E7%89%87%E7%B3%BB%E5%88%97=%E5%8A%A8%E6%BC%AB%E7%BB%BC%E5%90%882",
+            "jitsu.top":"https://moe.jitsu.top/img/?sort=pc"
+        },
+        "tooltip": "Select a wallpaper resource"
+    },
+    "saveImage": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Automatically save background images",
+        "tooltip": "Automatically save background images"
+    },
+    "saveImagePath": {
+        "type": "filechooser",
+        "select-dir": true,
+        "default": "",
+        "description": "Save background images to",
+        "tooltip": "Automatically save background images to this directory"
+    },
+    "slideshow": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Play backgrounds as a slideshow",
+        "tooltip": "Play backgrounds as a slideshow"
+    },
+    "delay": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "units": "minutes",
+        "description": "Delay",
+        "tooltip": "Delay"
+    },
+    "click": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Enable click to switch images",
+        "tooltip": "Enable click to switch images"
+    }
+}
