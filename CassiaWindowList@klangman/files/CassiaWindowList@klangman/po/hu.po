@@ -7,25 +7,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Project-Id-Version: \n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
 "Report-Msgid-Bugs-To: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-18 22:14-0400\n"
 "POT-Creation-Date: 2023-12-03 13:17-0500\n"
-"PO-Revision-Date: 2023-12-14 09:22+0100\n"
+"POT-Creation-Date: 2023-12-12 10:09-0500\n"
+"PO-Revision-Date: 2023-12-16 16:29+0100\n"
 "PO-Revision-Date: 2023-12-14 09:20+0100\n"
+"PO-Revision-Date: 2023-12-16 16:26+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Last-Translator: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language-Team: \n"
+"Language-Team: \n"
+"Language: hu\n"
 "Language: hu\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "MIME-Version: 1.0\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
@@ -1397,3 +1409,132 @@ msgstr ""
 "https://github.com/linuxmint/cinnamon/pull/11908\n"
 "A szerkesztés párbeszédpanel értékei a megfelelő értékek, és azok, amelyek "
 "életbe lépnek."
+
+#: 4.0/applet.js:2590
+msgid " (this workspace)"
+msgstr "(ez a munkaterület)"
+
+#. 4.0->settings-schema.json->icon-saturation->units
+msgid "percent"
+msgstr "százalék"
+
+#. 4.0->settings-schema.json->icon-saturation->description
+msgid "Icon color saturation"
+msgstr "Ikon színtelítettsége"
+
+#. 4.0->settings-schema.json->icon-saturation->tooltip
+msgid ""
+"Sets the color saturation for icons from 0% (grayscale) to 200%, default is "
+"100%\n"
+"This option is experimental, some icons are not currently effected by this "
+"setting"
+msgstr ""
+"Az ikonok színtelítettségét 0%-ról (szürkeárnyalatos) 200%-ra állítja, "
+"alapértelmezés szerint 100%\n"
+"Ez a lehetőség kísérleti jellegű, néhány ikonra jelenleg nincs hatással ez a "
+"beállítás"
+
+#. 4.0->settings-schema.json->saturation-application->options
+msgid "All Buttons"
+msgstr "Minden gomb"
+
+#. 4.0->settings-schema.json->saturation-application->options
+msgid "Minimized buttons"
+msgstr "Minimalizált gombok"
+
+#. 4.0->settings-schema.json->saturation-application->options
+msgid "Idle pinned buttons"
+msgstr "Üresjáratban rögzített gombok"
+
+#. 4.0->settings-schema.json->saturation-application->options
+msgid "Buttons for windows on other workspaces"
+msgstr "Gombok más munkaterületeken lévő ablakokhoz"
+
+#. 4.0->settings-schema.json->saturation-application->options
+msgid "Buttons for windows on other monitors"
+msgstr "Gombok más monitorokon lévő ablakokhoz"
+
+#. 4.0->settings-schema.json->saturation-application->options
+msgid "All buttons excepted focused window"
+msgstr "Minden gomb, kivéve a fókuszált ablakot"
+
+#. 4.0->settings-schema.json->saturation-application->description
+msgid "Where to apply the icon color saturation"
+msgstr "Hol kell alkalmazni az ikon színtelítettségét"
+
+#. 4.0->settings-schema.json->saturation-application->tooltip
+msgid ""
+"Which buttons will have the custom icon color saturation applied\n"
+"This option is only available when the saturation is not set to 100%"
+msgstr ""
+"Mely gombokra lesz alkalmazva az egyéni ikon színtelítettsége\n"
+"Ez az opció csak akkor érhető el, ha a telítettség nincs 100%-ra állítva"
+
+#: SetupWizard.ui:354
+msgid "Panel Launcher Setup"
+msgstr "Panelindító beállítása"
+
+#: SetupWizard.ui:370
+msgid ""
+"Unlike most Panel Launcher applets, this launcher keeps tack of \n"
+"running windows and uses window Thumbnail menus.\n"
+"\n"
+"You can launch additional windows by clicking the 'Back' mouse \n"
+"button or using the Left mouse button while holding the Ctrl key.\n"
+"\n"
+"How would you like the Left mouse button to behave when \n"
+"windows already exist for a launcher button?"
+msgstr ""
+"A legtöbb Panel Launcher kisalkalmazással ellentétben ez az indító lépést "
+"tart\n"
+"ablakokat futtat, és az ablak miniatűr menüit használja.\n"
+"\n"
+"További ablakokat indíthat el a „Vissza” egérgombbal\n"
+"gombbal vagy a bal egérgombbal, miközben lenyomva tartja a Ctrl billentyűt.\n"
+"\n"
+"Hogyan szeretné, ha a bal egérgomb mikor viselkedne\n"
+"már léteznek ablakok az indítógombhoz?"
+
+#: SetupWizard.ui:388
+msgid "Open new window / Hold for Thumbnail menu"
+msgstr "Új ablak megnyitása / Tartsa lenyomva a Miniatűr menühöz"
+
+#: SetupWizard.ui:407
+msgid "Restore most recent window / Cycle windows"
+msgstr "A legutóbbi ablak visszaállítása / Az ablakok ciklusa"
+
+#: SetupWizard.ui:427
+msgid "Open the Thumbnail menu"
+msgstr "Nyissa meg a Miniatűr menüt"
+
+#: SetupWizard.ui:461
+msgid "Thumbnail window menu on mouse hover"
+msgstr "Bélyegkép ablak menüje az egérmutatóval"
+
+#: SetupWizard.ui:508
+msgid ""
+"There are many more options and features to explorer in the\n"
+"applet configurator and the window list button context menu,\n"
+"for example:\n"
+"\n"
+" • Hot-keys to launch / activate a specific window.\n"
+" • Customizable mouse button actions.\n"
+" • Customizable icon saturation (grayscale / vivid).\n"
+" • Customizable Ctrl/Shift + mouse button actions.\n"
+" • Application specific grouping and label settings.\n"
+" • Thumbnail window zooming using the scroll-wheel.\n"
+" • Automatic application grouping when space is limited.\n"
+" • And much more."
+msgstr ""
+"Számos további lehetőség és funkció áll rendelkezésre a felfedező számára\n"
+"kisalkalmazás konfigurátor és az ablaklista gomb helyi menüje,\n"
+"például:\n"
+"\n"
+"  • Gyorsbillentyűk egy adott ablak elindításához/aktiválásához.\n"
+"  • Testreszabható egérgomb műveletek.\n"
+"  • Testreszabható ikon telítettség (szürkeárnyalatos / élénk).\n"
+"  • Testreszabható Ctrl/Shift + egérgomb műveletek.\n"
+"  • Alkalmazásspecifikus csoportosítás és címkebeállítások.\n"
+"  • Miniatűr ablak nagyítása a görgő segítségével.\n"
+"  • Automatikus alkalmazások csoportosítása korlátozott hely esetén.\n"
+"  • És még sok más."
