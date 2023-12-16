@@ -1072,6 +1072,9 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.settings.bind("alwaysCanChangeMic", "alwaysCanChangeMic", this.on_settings_changed);
 
+        this.settings.bind("volume", "volume");
+        this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", this.volume_near_icon);
+
         Main.themeManager.connect("theme-set", Lang.bind(this, this._theme_set));
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -1242,6 +1245,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._changeActivePlayer(this._activePlayer);
     }
 
+    on_applet_added_to_panel() {
+        this.volume_near_icon()
+    }
+
     on_applet_removed_from_panel() {
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
 
@@ -1299,6 +1306,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
 
         this._volumeChange(direction);
+        this.volume_near_icon()
     }
 
     _volumeChange(direction) {
@@ -1362,6 +1370,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         } else {
             this._applet_tooltip.hide();
         }
+        this.volume_near_icon()
     }
 
     _onButtonPressEvent(actor, event) {
@@ -1448,6 +1457,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             // if we have no active player show the output icon
             this.set_applet_icon_symbolic_name(this._outputIcon);
         }
+        this.volume_near_icon()
     }
 
     setAppletIcon(player, path) {
@@ -1521,6 +1531,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             }
         }
         this.set_applet_tooltip(tooltips.join("\n"));
+        this.volume_near_icon();
     }
 
     _isInstance(busName) {
@@ -1935,6 +1946,16 @@ class Sound150Applet extends Applet.TextIconApplet {
         let command = "cinnamon-settings sound -t 4";
         Util.spawnCommandLine(command);
     }
+
+    volume_near_icon() {
+        if (this.showVolumeLevelNearIcon) {
+            this._applet_label.set_text(""+this.volume);
+            this.hide_applet_label(false);
+        } else {
+            this._applet_label.set_text("");
+            this.hide_applet_label(true);
+        }
+      }
 }
 
 function main(metadata, orientation, panel_height, instanceId) {
