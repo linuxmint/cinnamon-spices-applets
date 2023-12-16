@@ -5,19 +5,17 @@
     },
     "resource": {
         "type": "radiogroup",
-        "default": "https://t.mwm.moe/pc",
+        "default": "https://www.loliapi.com/acg/pc/",
         "description": "Wallpaper api resource",
         "options": {
-            "mwm.moe": "https://t.mwm.moe/pc",
             "loliapi.com": "https://www.loliapi.com/acg/pc/",
             "zichen.zone": "https://app.zichen.zone/api/acg.php",
-            "dmoe.cc": "https://www.dmoe.cc/random.php",
-            "xjh.me": "https://cloud.qqshabi.cn/api/images/api.php",
-            "vvhan.com": "https://api.vvhan.com/api/acgimg",
-            "paulzzh.com": "https://img.paulzzh.com/touhou/random",
+            "moe.jitsu.top":"https://moe.jitsu.top/img/?sort=pc",
             "paugram.com": "https://api.paugram.com/wallpaper/",
-            "r10086.com": "https://api.r10086.com/%E6%A8%B1%E9%81%93%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87api%E6%8E%A5%E5%8F%A3.php?%E5%9B%BE%E7%89%87%E7%B3%BB%E5%88%97=%E5%8A%A8%E6%BC%AB%E7%BB%BC%E5%90%882",
-            "jitsu.top":"https://moe.jitsu.top/img/?sort=pc"
+            "t.mwm.moe": "https://t.mwm.moe/pc",
+            "dmoe.cc": "https://www.dmoe.cc/random.php",
+            "api.vvhan.com": "https://api.vvhan.com/api/acgimg",
+            "paulzzh.com": "https://img.paulzzh.com/touhou/random"
         },
         "tooltip": "Select a wallpaper resource"
     },

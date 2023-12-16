@@ -1,15 +1,15 @@
-# Anime Desktop Wallpaper
+# 动漫桌面壁纸
 
-A Cinnamon applet to apply the daily Anime Wallpaper to your Cinnamon Desktop Background.
-Based on [bing-wallpaper@starcross.dev](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/bing-wallpaper%40starcross.dev)
+这是一个用来将动漫图片配置为桌面背景的cinnamon小程序
+基于[bing-wallpaper@starcross.dev](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/bing-wallpaper%40starcross.dev) 修改而来
 
-### Requirements:
-Need `dwebp` tool to transcode webp images.It can be installed wih the Synaptic Package Manager or using the following terminal command:
+### 依赖:
+需要`dwebp`工具转码webp格式文件。它可以通过Synaptic Package Manager或使用以下终端命令进行安装:
 ```sh
 sudo apt install webp
 ```
 
-### Image sources:
+### 图源:
 - [LoliAPI](https://loliapi.com/) - [电脑端二次元图片](https://www.loliapi.com/acg/pc/)
 - [梓宸的小屋](https://zichen.zone/) - [梓宸随机图片API](https://app.zichen.zone/api/acg.php)
 - [Jitsuの主页](https://jitsu.top/) - [Jitsuの随机涩图API](https://moe.jitsu.top/img/?sort=pc)
@@ -22,3 +22,4 @@ sudo apt install webp
 ### README.md
 - [English](README.md)
 - [简体中文](README.zh_CN.md)
+

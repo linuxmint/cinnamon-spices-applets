@@ -13,9 +13,9 @@ const APPLET_PATH = imports.ui.appletManager.appletMeta['anime-wallpaper@flyflya
 const SAVE_IMAGE_PATH = `${GLib.get_home_dir()}/Pictures/`;
 
 const SAVE_SCRIPT = `${APPLET_PATH}/savefile.sh`;
-const ANIME_URL = 'https://t.mwm.moe/pc';
+const ANIME_URL = 'https://www.loliapi.com/acg/pc/';
 
-const logging = true;
+const logging = false;
 
 let _httpSession;
 if (Soup.MAJOR_VERSION == 2) {
@@ -185,6 +185,14 @@ class AnimeWallpaperApplet extends Applet.TextIconApplet {
         if (this.autoRefresh) {
             this._set_timeout(this.reloadTime);
         }
+
+        // update context menu state
+        if (this.saveImageOption)
+            this.saveImageOption.setToggleState(this.saveImage);
+        if (this.autoRefreshOption)
+            this.autoRefreshOption.setToggleState(this.autoRefresh);
+        if (this.clickOption)
+            this.clickOption.setToggleState(this.click);
     }
 
     _remove_timeout() {
