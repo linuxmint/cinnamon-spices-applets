@@ -1153,6 +1153,7 @@ WebRadioReceiverAndRecorder.prototype = {
   get_user_settings: function() {
     //log("get_user_settings");
 
+    this.settings.bind("show-volume-level-near-icon", "show_volume_level_near_icon", this.volume_near_icon);
     this.settings.bind("dont-check-dependencies", "dont_check_dependencies");
     this.settings.bind("recentRadios", "recentRadios");
     this.settings.bind("volume-step", "volume_step");
@@ -1220,6 +1221,14 @@ WebRadioReceiverAndRecorder.prototype = {
 
     // Help TextViews:
     this.populate_help_textviews()
+  },
+
+  volume_near_icon: function() {
+    if (this.show_volume_level_near_icon) {
+      this.set_applet_label(""+this.percentage+"%")
+    } else {
+      this.set_applet_label("")
+    }
   },
 
   onShortcutChanged: function() {
@@ -2068,6 +2077,7 @@ WebRadioReceiverAndRecorder.prototype = {
 
     _tooltip = null;
     title = null;
+    this.volume_near_icon();
   },
 
   set_radio_tooltip_to_default_one: function() {
@@ -3474,6 +3484,7 @@ WebRadioReceiverAndRecorder.prototype = {
 
     this.page_label = undefined;
     this.settingsWindow = undefined;
+    this.volume_near_icon();
   },
 
   listen_to_last_station: function() {
@@ -3577,6 +3588,8 @@ WebRadioReceiverAndRecorder.prototype = {
         60000
       );
     }
+
+    this.volume_near_icon();
   },
 
   on_applet_removed_from_panel: function() {
@@ -4542,6 +4555,21 @@ WebRadioReceiverAndRecorder.prototype = {
     if (this.context_menu_item_reloadThisApplet != null && items.indexOf(this.context_menu_item_reloadThisApplet) == -1) {
       this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
       this._applet_context_menu.addMenuItem(this.context_menu_item_reloadThisApplet);
+    }
+
+    // Display volume level near icon?
+    if (this.context_menu_item_showVolumeNearIcon == null) {
+        this.context_menu_item_showVolumeNearIcon = new PopupSwitchMenuItem(_("Display volume level near icon"),
+          this.show_volume_level_near_icon,
+          null);
+        this.context_menu_item_showVolumeNearIcon.connect("toggled", Lang.bind(this, function() {
+          this.show_volume_level_near_icon = !this.show_volume_level_near_icon;
+          this.volume_near_icon();
+        }));
+    }
+    if (items.indexOf(this.context_menu_item_showVolumeNearIcon) == -1) {
+        this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
+        this._applet_context_menu.addMenuItem(this.context_menu_item_showVolumeNearIcon);
     }
 
     // Submenu Cancel YT downloads
