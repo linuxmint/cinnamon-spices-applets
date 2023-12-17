@@ -48,6 +48,11 @@ AUTO_IND   = 7
 APP_NAME   = 0
 WIN_TITLE  = 1
 
+# Launch left click action options
+RESTORE    = 1
+THUMBNAIL  = 2
+NEW_WINDOW = 4
+
 class SetupWizard:
    def __init__(self, uuid=0, instanceId=0):
       self.uuid = uuid;
@@ -63,10 +68,11 @@ class SetupWizard:
          self.configFilePath = Path(configFile)
          print( configFile )
       if (self.configFilePath.is_file() == False):
-            print( f"Can't find the config file for instance {instanceId}" );
+            print( f"Can't find the config file for instance {instanceId}" )
       else:
-         self.settings = JSONSettingsHandler( configFile );
+         self.settings = JSONSettingsHandler( configFile )
          self.appBehaviour = self.settings.get_value("group-windows")
+         self.launcherLeftClick = self.settings.get_value("launcher-mouse-action-btn1")
 
          self.window = self.builder.get_object("setup_wizard_window")
          self.stack  = self.builder.get_object("stack_id")
@@ -90,12 +96,28 @@ class SetupWizard:
          self.oneToOneRadio = self.builder.get_object("one_to_one_radio")
          self.groupedRadio = self.builder.get_object("grouped_radio")
          self.pooledRadio = self.builder.get_object("pooled_radio")
+
+         self.newWindowRadio = self.builder.get_object("lc_new_window_radio")
+         self.lcRestoreRadio = self.builder.get_object("lc_restore_radio")
+         self.thumbnailRadio = self.builder.get_object("lc_thumbnail_radio")
+         self.mouseHoverChk  = self.builder.get_object("mouse_hover_chkbox")
+
          if self.appBehaviour == OFF:
             self.oneToOneRadio.set_active(True)
          elif self.appBehaviour == GROUPED:
             self.groupedRadio.set_active(True)
          elif self.appBehaviour == POOLED or self.appBehaviour == AUTO:
             self.pooledRadio.set_active(True)
+
+         if self.launcherLeftClick == RESTORE:
+            self.lcRestoreRadio.set_active(True)
+         elif self.launcherLeftClick == THUMBNAIL:
+            self.thumbnailRadio.set_active(True)
+         elif self.launcherLeftClick == NEW_WINDOW:
+            self.newWindowRadio.set_active(True);
+         else:
+            self.newWindowRadio.set_active(True);
+            self.settings.set_value("launcher-mouse-action-btn1", NEW_WINDOW)
 
          self.noLabelChk = self.builder.get_object("no_label_chkbox")
          self.noMinimizedChk = self.builder.get_object("no_minimized_chkbox")
@@ -109,6 +131,10 @@ class SetupWizard:
             self.noMinimizedChk.set_active(True)
          if hover == False:
             self.noHoverChk.set_active(True);
+            self.mouseHoverChk.set_active(False);
+         else:
+            self.noHoverChk.set_active(False);
+            self.mouseHoverChk.set_active(True);
 
          self.backupFileEntry = self.builder.get_object("backup_file_entry")
 
@@ -223,6 +249,20 @@ class SetupWizard:
             self.settings.set_value("display-indicators", 1)
          elif widget == self.noHoverChk:
             self.settings.set_value("menu-show-on-hover", True)
+
+   def onLaunchPageToggled(self, widget):
+      if widget.get_active() == True:
+         if widget == self.newWindowRadio:
+            self.settings.set_value("launcher-mouse-action-btn1", NEW_WINDOW)
+         elif widget == self.lcRestoreRadio:
+            self.settings.set_value("launcher-mouse-action-btn1", RESTORE)
+         elif widget == self.thumbnailRadio:
+            self.settings.set_value("launcher-mouse-action-btn1", THUMBNAIL)
+         elif widget == self.mouseHoverChk:
+            self.settings.set_value("menu-show-on-hover", True)
+      else:
+         if widget == self.mouseHoverChk:
+            self.settings.set_value("menu-show-on-hover", False)
 
    def onClickConfig(self, widget):
       #os.system("xlet-settings applet " + self.uuid + " -i " + self.instanceId + " -t 0")

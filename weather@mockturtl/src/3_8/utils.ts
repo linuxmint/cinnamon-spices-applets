@@ -106,9 +106,27 @@ function NormalizeTimezone(tz?: string | undefined) {
 	return tz;
 }
 
-export function GetDayName(date: DateTime, locale: string | null, showDate: boolean = false, tz?: string | undefined): string {
+interface GetDayNameOptions {
+	locale?: string | null,
+	showDate?: boolean,
+	tz?: string | undefined
+	short?: boolean
+	useTodayTomorrow?: boolean
+}
+
+
+export function GetDayName(date: DateTime, options: GetDayNameOptions = {}): string {
+	const {
+		locale = null,
+		showDate = false,
+		tz = undefined,
+		short = false,
+		useTodayTomorrow = true
+	} = options;
+
+	// locale: string | null, showDate: boolean = false, tz?: string | undefined
 	const params: Intl.DateTimeFormatOptions = {
-		weekday: "long",
+		weekday: short ? "short" : "long",
 	}
 
 	params.timeZone = <string>NormalizeTimezone(tz);
@@ -127,8 +145,10 @@ export function GetDayName(date: DateTime, locale: string | null, showDate: bool
 	}
 
 	// today or tomorrow, no need to include date
+	if (useTodayTomorrow) {
 	if (date.hasSame(now, "day") || date.hasSame(tomorrow, "day"))
 		delete params.weekday;
+	}
 
 	if (!!locale)
 		date = date.setLocale(locale);
@@ -136,8 +156,10 @@ export function GetDayName(date: DateTime, locale: string | null, showDate: bool
 	let dateString = date.toLocaleString(params);
 	dateString = CapitalizeFirstLetter(dateString);
 
-	if (date.hasSame(now, "day")) dateString = _("Today");
-	if (date.hasSame(tomorrow, "day")) dateString = _("Tomorrow");
+	if (useTodayTomorrow) {
+		if (date.hasSame(now, "day")) dateString = _("Today");
+		if (date.hasSame(tomorrow, "day")) dateString = _("Tomorrow");
+	}
 
 	return dateString;
 }

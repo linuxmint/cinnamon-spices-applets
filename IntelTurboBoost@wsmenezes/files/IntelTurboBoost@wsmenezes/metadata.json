@@ -1,0 +1,12 @@
+{
+    "uuid": "IntelTurboBoost@wsmenezes",
+    "name": "Intel Turbo Boost",
+    "website": "https://github.com/wsmenezes/cinnamon-applet-IntelTurboBoost",
+    "description": "Enable/Disable Intel Turbo Boost.",
+    "original-authors": [
+        "William Menezes <william.menezes@gmail.com>"
+    ],
+    "version": "0.0.1",
+    "max-instances": "-1",
+    "author": "wsmenezes"
+}

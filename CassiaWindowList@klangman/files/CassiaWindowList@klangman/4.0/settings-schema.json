@@ -30,7 +30,7 @@
     "advanced-page" : {
       "type" : "page",
       "title" : "Advanced",
-      "sections" : ["adv-mouse-settings"]
+      "sections" : ["adv-mouse-settings", "adv-other-settings"]
     },
 
     "caption-settings" : {
@@ -47,17 +47,17 @@
     "general-settings" : {
       "type" : "section",
       "title" : "General window list settings",
-      "keys" : ["group-windows", "display-pinned", "trailing-pinned-behaviour", "show-windows-for-current-monitor", "show-tooltips", "hide-panel-apps"]
+      "keys" : ["group-windows", "display-pinned", "synchronize-pinned", "trailing-pinned-behaviour", "show-windows-for-current-monitor", "show-windows-for-all-workspaces", "show-tooltips", "hide-panel-apps"]
     },
     "general-mouse" : {
       "type" : "section",
       "title" : "Window list mouse settings",
-    "keys" : ["grouped-mouse-action-btn1", "mouse-action-btn2", "mouse-action-btn8", "mouse-action-btn9"]
+    "keys" : ["grouped-mouse-action-btn1", "launcher-mouse-action-btn1", "mouse-action-btn2", "mouse-action-btn8", "mouse-action-btn9"]
     },
     "preview-settings" : {
       "type" : "section",
       "title" : "Thumbnails menu settings",
-      "keys" : ["show-previews", "number-of-unshrunk-previews"]
+      "keys" : ["show-previews", "number-of-unshrunk-previews", "menu-all-windows-of-pool", "menu-all-windows-of-auto"]
     },
     "preview-mouse-section" : {
       "type" : "section",
@@ -67,12 +67,17 @@
     "hotkey-settings" : {
       "type" : "section",
       "title" : "Hotkey settings",
-      "keys" : ["hotkey-bindings", "hotkey-minimize", "hotkey-new", "hotkey-help"]
+      "keys" : ["hotkey-bindings", "hotkey-minimize", "hotkey-new", "hotkey-sequence", "hotkey-grave-help", "hotkey-help"]
     },
     "adv-mouse-settings" : {
       "type" : "section",
       "title" : "Ctrl/Shift + mouse button actions",
-      "keys" : ["adv-mouse-list", "adv-mouse-help", "backup-file-name"]
+      "keys" : ["adv-mouse-list", "adv-mouse-help"]
+    },
+    "adv-other-settings" : {
+      "type" : "section",
+      "title" : "",
+      "keys" : ["backup-file-name", "icon-saturation", "saturation-application"]
     }
   },
   "caption-type": {
@@ -197,16 +202,34 @@
     "tooltip": "Grouped: All windows for an application are managed by one button,\nPooled: All window list buttons for an application are pooled side by side,\nAutomatic: Windows are pooled, and then grouped when space is limited,\nOne to one: Each window gets their own button with no forced ordering,\nLauncher: Only pinned button are shown, behaves like a panel launcher."
   },
   "display-pinned": {
-    "type": "switch",
-    "default": true,
+    "type": "combobox",
+    "default": 1,
+    "options": {
+       "Disabled": 0,
+       "Unique for each workspace": 1,
+       "Common across workspaces": 2
+    },
     "dependency" : "group-windows<4",
-    "description": "Allow pinning of window list buttons"
+    "description": "Pinning of window list buttons",
+    "tooltip": "Controls whether window list buttons can be pinned, and whether each workspace has a unique set of pinned buttons or one common set shared across all workspaces. When in \"Common across workspaces\" mode the order of the pinned buttons is also maintained across workspaces."
+  },
+  "synchronize-pinned": {
+    "type": "switch",
+    "default": false,
+    "dependency" : "group-windows=4",
+    "description": "Synchronize launcher buttons across all workspaces",
+    "tooltip": "If enabled, the number and order of launcher buttons on the panel will be synchronize across all workspaces."
   },
   "show-windows-for-current-monitor": {
     "type": "switch",
     "default": false,
     "description": "Only show windows on the same monitor",
     "tooltip": "If enabled, this applet instance only manages windows\nthat are displayed on the same monitor"
+  },
+  "show-windows-for-all-workspaces": {
+    "type": "switch",
+    "default": false,
+    "description": "Include windows from all workspaces"
   },
   "show-tooltips": {
     "type": "switch",
@@ -248,6 +271,20 @@
     "dependency": "show-previews",
     "description": "Default thumbnail window size"
   },
+  "menu-all-windows-of-pool": {
+    "type": "switch",
+    "default": true,
+    "dependency" : "group-windows=1",
+    "description": "Show thumbnails for all windows of an application pool",
+    "tooltip": "If enabled, a popup menu will contain all the application windows in the application pool rather then just the selected window within the application pool"
+  },
+  "menu-all-windows-of-auto": {
+    "type": "switch",
+    "default": true,
+    "dependency" : "group-windows=2",
+    "description": "Show thumbnails for all windows of an application pool",
+    "tooltip": "If enabled, a popup menu will contain all the application windows in the application pool rather then just the selected window within the application pool"
+  },
   "preview-timeout-show": {
     "type": "spinbutton",
     "default": 500,
@@ -283,12 +320,18 @@
       "Move to workspace 2": 8,
       "Move to workspace 3": 9,
       "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
       "Visible on this/all workspaces": 11,
       "Move to monitor 1": 14,
       "Move to monitor 2": 15,
       "Move to monitor 3": 16,
       "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
       "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
+      "Pin to panel toggle": 24,
       "Do nothing": 12
     },
     "description": "Thumbnail window middle button action"
@@ -307,12 +350,18 @@
       "Move to workspace 2": 8,
       "Move to workspace 3": 9,
       "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
       "Visible on this/all workspaces": 11,
       "Move to monitor 1": 14,
       "Move to monitor 2": 15,
       "Move to monitor 3": 16,
       "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
       "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
+      "Pin to panel toggle": 24,
       "Do nothing": 12
     },
     "description": "Thumbnail window back button action"
@@ -331,12 +380,18 @@
       "Move to workspace 2": 8,
       "Move to workspace 3": 9,
       "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
       "Visible on this/all workspaces": 11,
       "Move to monitor 1": 14,
       "Move to monitor 2": 15,
       "Move to monitor 3": 16,
       "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
       "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
+      "Pin to panel toggle": 24,
       "Do nothing": 12
     },
     "description": "Thumbnail window forward button action"
@@ -347,10 +402,27 @@
     "options": {
       "Restore/Minimize most recent window": 0,
       "Restore then cycle windows": 1,
-      "Show thumbnail menu": 2
+      "Show thumbnail menu": 2,
+      "Restore or hold for thumbnail menu": 3
     },
+    "dependency" : "group-windows<4",
     "description": "Left button action for grouped buttons",
     "tooltip": "Action taken when using the left mouse button on a window list entry for a group of windows"
+  },
+
+  "launcher-mouse-action-btn1": {
+    "type": "combobox",
+    "default": 4,
+    "options": {
+      "Restore/Minimize most recent window": 0,
+      "Restore then cycle windows": 1,
+      "Show thumbnail menu": 2,
+      "Restore or hold for thumbnail menu": 3,
+      "New window or hold for thumbnail menu": 4
+    },
+    "dependency" : "group-windows=4",
+    "description": "Left button action (with running windows)",
+    "tooltip": "Action taken when using the left mouse button on a launcher button with one or more running windows"
   },
 
   "mouse-action-btn2": {
@@ -369,12 +441,18 @@
       "Move to workspace 2": 8,
       "Move to workspace 3": 9,
       "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
       "Visible on this/all workspaces": 11,
       "Move to monitor 1": 14,
       "Move to monitor 2": 15,
       "Move to monitor 3": 16,
       "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
       "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
+      "Pin to panel toggle": 24,
       "Do nothing": 12
     },
     "description": "Middle button action",
@@ -396,12 +474,18 @@
       "Move to workspace 2": 8,
       "Move to workspace 3": 9,
       "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
       "Visible on this/all workspaces": 11,
       "Move to monitor 1": 14,
       "Move to monitor 2": 15,
       "Move to monitor 3": 16,
       "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
       "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
+      "Pin to panel toggle": 24,
       "Do nothing": 12
     },
     "description": "Back button action",
@@ -423,12 +507,18 @@
       "Move to workspace 2": 8,
       "Move to workspace 3": 9,
       "Move to workspace 4": 10,
+      "Move to previous workspace": 20,
+      "Move to next workspace": 21,
       "Visible on this/all workspaces": 11,
       "Move to monitor 1": 14,
       "Move to monitor 2": 15,
       "Move to monitor 3": 16,
       "Move to monitor 4": 17,
+      "Move to previous monitor": 22,
+      "Move to next monitor": 23,
       "Move to current/next monitor": 18,
+      "Move titlebar on to screen": 19,
+      "Pin to panel toggle": 24,
       "Do nothing": 12
     },
     "description": "Forward button action",
@@ -463,6 +553,12 @@
             {
                 "enabled": false,
                 "cycle": true,
+                "keyCombo": "<Super>1::",
+                "description": "All Buttons"
+            },
+            {
+                "enabled": false,
+                "cycle": true,
                 "keyCombo": "<Alt><Super>c::",
                 "description": "org.gnome.Calculator.desktop"
             }
@@ -480,10 +576,22 @@
     "description": "Open a new window when the application is not running",
     "tooltip": "Start a new window if no window is attached to a hotkey and the hotkey description is an exact match for the application name of a pinned button or a desktop file name"
   },
+  "hotkey-sequence": {
+    "type": "switch",
+    "default": true,
+    "description": "Smart numeric hotkeys (using \"1\" automatically extends to 1-9)",
+    "tooltip": "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The first 9 windows of the assigned application, as ordered on the window-list, will be activated by the 9 hotkeys."
+  },
+  "hotkey-grave-help": {
+    "type": "switch",
+    "default": true,
+    "description": "Use modifier(s) + ` hotkey to show hotkey hint bubbles",
+    "tooltip": "If enabled, The hotkey modifier(s) + ` will be registered for each unique modifier set defined in the hotkey list. Using these hotkeys will temporally show a hotkey hint bubble over the button icons."
+  },
 
   "hotkey-help" : {
     "type" : "label",
-    "description" : "Hotkeys can be assigned to a window in two ways:\n1. Manual:  Use the \"Assign window to a hotkey\" item in a button context menu.\n2. Automatic:  Enter a \"Description\" matching an application name or desktop file. For example: \"Google Chrome\" or \"firefox.desktop\"\n\nNote: 1) If a hotkey is not working, it's possible that a key combination is already assigned elsewhere. 2) If you remove or rearrange any hotkeys, manual window assignments may need to be reassigned"
+    "description" : "Hotkeys can be assigned to a window in two ways:\n1) Manual: Use \"Assign window to a hotkey\" in the button context menu.\n2) Automatic:  Enter a \"Description\" matching an application name or desktop file.\nNote: 1) Hotkey not working? it's possible the key combination is already assigned elsewhere. 2) If you remove or rearrange hotkeys, manual hotkey assignments might need to be reassigned. 3) Hotkeys associated with desktop files can not be manually assigned."
   },
 
   "adv-mouse-list": {
@@ -522,12 +630,18 @@
            "Move to workspace 2": 8,
            "Move to workspace 3": 9,
            "Move to workspace 4": 10,
+           "Move to previous workspace": 20,
+           "Move to next workspace": 21,
            "Visible on this/all workspaces": 11,
            "Move to monitor 1": 14,
            "Move to monitor 2": 15,
            "Move to monitor 3": 16,
            "Move to monitor 4": 17,
+           "Move to previous monitor": 22,
+           "Move to next monitor": 23,
            "Move to current/next monitor": 18,
+           "Move titlebar on to screen": 19,
+           "Pin to panel toggle": 24,
            "Do nothing": 12
            }
         }
@@ -545,7 +659,7 @@
 
   "adv-mouse-help" : {
     "type" : "label",
-    "description" : "Note: The above list contents are frequently incorrectly displayed due to what I suspect is a Cinnamon bug. The values displayed in the edit dialog box are the correct values and the ones that will take effect. I will be looking into the cause of this issue at some point."
+    "description" : "Note: The above list contents will be incorrectly displayed without this fix:\nhttps://github.com/linuxmint/cinnamon/pull/11908\nThe edit dialog box values are the correct values and the ones that will take effect."
   },
 
   "backup-file-name" : {
@@ -555,11 +669,48 @@
     "tooltip" : "If a name is entered here, the configuration of this applet instance will be backed up under that name. Backups will be listed in the Setup Wizard restore page when adding a new instance of CassiaWindowList to a panel."
   },
 
+  "icon-saturation": {
+    "type": "spinbutton",
+    "default": 100,
+    "min": 0,
+    "max": 200,
+    "units": "percent",
+    "step": 1,
+    "description": "Icon color saturation",
+    "tooltip": "Sets the color saturation for icons from 0% (grayscale) to 200%, default is 100%\nThis option is experimental, some icons are not currently effected by this setting"
+  },
+
+  "saturation-application": {
+    "type": "combobox",
+    "default": 0,
+    "options": {
+       "All Buttons": 0,
+       "Minimized buttons": 1,
+       "Idle pinned buttons": 2,
+       "Buttons for windows on other workspaces": 3,
+       "Buttons for windows on other monitors": 4,
+       "All buttons excepted focused window": 5
+    },
+    "dependency": "icon-saturation!=100",
+    "description": "Where to apply the icon color saturation",
+    "tooltip": "Which buttons will have the custom icon color saturation applied\nThis option is only available when the saturation is not set to 100%"
+  },
+
   "pinned-apps": {
     "type": "generic",
     "default": [
       ["nemo.desktop", "firefox.desktop"]
     ]
+  },
+
+  "custom-app-grouping": {
+     "type": "generic",
+     "default": []
+  },
+
+  "commoned-pinned-apps": {
+    "type": "generic",
+    "default": ["nemo.desktop", "firefox.desktop"]
   },
 
   "custom-label-app": {

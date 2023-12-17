@@ -149,7 +149,7 @@ img { max-width: 100%; }
 <p><em>sox</em> (Sound eXchange) to record in a file the radio stream, or rather the sound coming out of your sound card.</p>
 </li>
 <li>
-<p><em>pacmd</em> (PulseAudio Command) which is a <em>pulseaudio</em> tool.</p>
+<p><em>pacmd</em> (PulseAudio Command) which is a <em>pulseaudio</em> tool, usable even with <em>pipewire</em>.</p>
 </li>
 <li>
 <p><em>at</em> to schedule recordings.</p>
@@ -178,12 +178,12 @@ img { max-width: 100%; }
 <p><a name="DepMint"></a></p>
 <h3>Linux Mint, Ubuntu, Debian</h3>
 <p><code>sudo apt update</code></p>
-<p><code>sudo apt install mpv libmpv1 libmpv-dev sox libsox-fmt-all pulseaudio pulseaudio-utils at libnotify-bin youtube-dl ffmpeg ffmpegthumbnailer python3-polib python3-brotli</code></p>
+<p><code>sudo apt install mpv libmpv-dev sox libsox-fmt-all pulseaudio-utils at libnotify-bin youtube-dl ffmpeg ffmpegthumbnailer python3-polib python3-brotli</code></p>
 <p>Optionally:</p>
 <p><code>sudo apt install pulseeffects</code></p>
 <p><a name="DepArch"></a></p>
 <h3>Arch</h3>
-<p><code>sudo pacman -Syu mpv sox pulseaudio at libnotify youtube-dl ffmpeg ffmpegthumbnailer python-brotli</code></p>
+<p><code>sudo pacman -Syu mpv sox at libnotify youtube-dl ffmpeg ffmpegthumbnailer python-brotli</code></p>
 <p><code>yay -S python-polib</code></p>
 <p>To install Yay on in Arch Linux and other Arch-based systems, run the following commands one by one:</p>
 <p><code>sudo pacman -S --needed git base-devel</code></p>
@@ -192,7 +192,7 @@ img { max-width: 100%; }
 <p><code>makepkg -si</code></p>
 <p><a name="DepFedora"></a></p>
 <h3>Fedora</h3>
-<p><code>sudo dnf install mpv sox pulseaudio at libnotify yt-dlp ffmpeg gstreamer1-libav python3-brotli python3-polib</code></p>
+<p><code>sudo dnf install mpv sox at libnotify yt-dlp ffmpeg gstreamer1-libav python3-brotli python3-polib</code></p>
 <p><a href="#TOC">Return to Table Of Contents</a></p>
 <hr>
 <p><a name="InstallYtdlp"></a></p>
@@ -224,7 +224,7 @@ img { max-width: 100%; }
 <p><a name="UsingApplet"></a></p>
 <h2>Using the Radio3.0 applet</h2>
 <p>This applet has a menu (left-click) and a contextual menu (right-click).</p>
-<p>Some actions can be made using middle-click or scrolling on the icon.</p>
+<p>Some actions can be made using middle-click (play/stop radio) or scrolling on the icon (volume change).</p>
 <p><a name="HowToAdd"></a></p>
 <h3>How to add radio stations to my list?</h3>
 <p>There are four ways to add at least one radio station in your list.</p>
@@ -261,7 +261,7 @@ img { max-width: 100%; }
 <p><a name="ListenLastRadio"></a></p>
 <h3>Switch on the last radio station listened to</h3>
 <p>While no radio is playing, middle-click on the icon.</p>
-<p>(Another way : Click on the first radio in the <em>Recently Played Stations</em> section of the menu.)</p>
+<p>Another way : Click on the first radio in the <em>Recently Played Stations</em> section of the menu.</p>
 <p><a name="ListenAtStartup"></a></p>
 <h3>Play at Cinnamon startup the last radio you listened to</h3>
 <p>Check the "Radio ON at startup" option in the contextual menu.</p>

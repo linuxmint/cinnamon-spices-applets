@@ -1,0 +1,5 @@
+{
+    "uuid": "gpumonitor@axel358",
+    "name": "AMD GPU Monitor",
+    "description": "Monitor AMD GPU statistics, requires radeontop"
+}

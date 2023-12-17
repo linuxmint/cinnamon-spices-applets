@@ -422,6 +422,7 @@ MyApplet.prototype = {
 
         if (this.AutoLoopPromptOn) {
             this.timerDuration = this.timerDurationLoop;
+            this.alarmOn = false;
             this.doStartTimer();
         }
     },

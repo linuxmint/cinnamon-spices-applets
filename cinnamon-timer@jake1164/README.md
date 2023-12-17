@@ -12,9 +12,28 @@ All settings can be changed by right clicking on the icon and selecting configur
 
 2) Enable the applet in cinnamon settings
 
+## Tips
+* if you want change panel icon color, edit stylesheet.css.
+
+    File path
+    
+          ~/.local/share/cinnamon/applets/cinnamon-time@jake1164/3.4/stylesheet.css
+    
+    Example
+    
+        .timer-running .system-status-icon {
+	            color: orange;
+        }
+
 ## TODO:
 
 ## Changelog
+* 1.3.1
+  - Fixed bug. (Panel icon status incorrect when timer has expired once)
+
+* 1.3.0
+  - Added auto loop.
+
 * 1.2.0
   - The time of the alarm is displayed (configurable).
   - Changed the order of the default Preset Times to be strictly descending.

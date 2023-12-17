@@ -1,4 +1,28 @@
-## CHANGELOG
+### v4.6.0~20231216
+  * Adds the ability to display the volume level near the icon.
+
+### v4.5.0~20231124
+  * Adds a shift-middle click action (mute/unmute microphone by default). Thanks to @sphh!
+
+### v4.4.1~20231103
+  * Update the contextual menu when flipping the 'Mute input' switch in the settings.
+
+### v4.4.0~20231101
+  * Allow to always show the 'Mute input' switch in contextual menu.
+
+### v4.3.0~20231026
+  * Fixes 5005: Icon color changing with theme
+
+### v4.2.0~20231012
+  * Try to distinguish between the artist and the song title.
+
+### v4.1.1~20230719
+  * Change style of 'sound-player-overlay' with "height: auto;". Thanks to Hilyxx!
+
+### v4.1.0~20230717
+  * Show entire title (wrapped) in player section (opening menu). Look at [discussion 79](]https://github.com/orgs/linuxmint/discussions/79).
+### v4.0.0~20230701
+  * Fixes alignment error, like the sound Cinnamon applet (Cinnamon 5.8).
 
 ### v3.1.0~20230520
   * Fixes a deprecation.

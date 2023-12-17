@@ -12,8 +12,7 @@
         "type": "switch",
         "default": false,
         "description": "Show Loop and Shuffle controls",
-        "dependency": "playerControl",
-        "indent": true
+        "dependency": "playerControl"
     },
     "keyOpen": {
         "type": "keybinding",
@@ -60,6 +59,17 @@
         },
         "description": "Action on middle click"
     },
+    "middleShiftClickAction": {
+        "type": "combobox",
+        "default": "in_mute",
+        "options": {
+            "Toggle Mute": "mute",
+            "Toggle Mute output": "out_mute",
+            "Toggle Mute input": "in_mute",
+            "Toggle Play / Pause": "player"
+        },
+        "description": "Action on shift+middle click"
+    },
     "horizontalScroll": {
         "type": "switch",
         "default": false,
@@ -104,6 +114,15 @@
     },
     "section4": {
         "type": "section",
+        "description": "Icon"
+    },
+    "showVolumeLevelNearIcon": {
+        "type": "switch",
+        "default": false,
+        "description": "Display volume level near icon"
+    },
+    "section5": {
+        "type": "section",
         "description": "Sound Settings"
     },
     "setAmplification": {
@@ -136,5 +155,15 @@
         "description": "Adjust the color of the icon to the volume",
         "tooltip": "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red.",
         "default": true
+    },
+    "alwaysCanChangeMic": {
+        "type": "switch",
+        "description": "Always allow microphone to be reactivated",
+        "tooltip": "Always show the 'Mute input' switch in the context menu.",
+        "default": true
+    },
+    "volume": {
+        "type": "generic",
+        "default": "50%"
     }
 }

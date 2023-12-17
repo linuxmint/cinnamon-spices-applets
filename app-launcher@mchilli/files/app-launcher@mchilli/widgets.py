@@ -65,7 +65,6 @@ class CustomAppList(SettingsWidget):
         self.settings = settings
         self.info = info
         
-        self.height = 0
         self.groups = {}
 
         self.set_orientation(Gtk.Orientation.VERTICAL)
@@ -80,6 +79,7 @@ class CustomAppList(SettingsWidget):
         self.tree_view.set_property("level-indentation", 10)
         
         self.scrollbox = Gtk.ScrolledWindow()
+        self.scrollbox.set_margin_bottom(-200)
         self.scrollbox.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         self.pack_start(self.scrollbox, True, True, 0)
         self.scrollbox.add(self.tree_view)
@@ -166,8 +166,9 @@ class CustomAppList(SettingsWidget):
         self.restore_list()
 
         def get_window(self, *args):
-                window = self.get_toplevel()
-                window.connect("check-resize", self.on_check_resize)
+            window = self.get_toplevel()
+            self.scrollbox.set_size_request(-1, window.get_size().height)
+            window.connect("size-allocate", self.on_window_size_allocate)
 
         self.connect("realize", get_window)
         self.settings.listen("list-applications", self.valid_backup_restore)
@@ -176,13 +177,10 @@ class CustomAppList(SettingsWidget):
         self.tree_view.set_activate_on_single_click(False)
         self.tree_view.connect("row-activated", self.on_row_activated)
 
-    def on_check_resize(self, window):
-        ''' hack to change the size of the listview
+    def on_window_size_allocate(self, window, size):
+        ''' resize the list to fit the window height
         '''
-        height = window.get_size().height
-        if self.height != height:
-            self.height = height
-            self.scrollbox.set_size_request(-1, self.height - 152)
+        self.scrollbox.set_size_request(-1, size.height)
 
     def on_row_activated(self, *args):
         ''' activate if row double clicked

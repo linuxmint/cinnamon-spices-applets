@@ -1,5 +1,6 @@
 const St = imports.gi.St;
 
+const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
@@ -7,11 +8,12 @@ const Settings = imports.ui.settings;
 const Mainloop = imports.mainloop;
 var Util = imports.misc.util;
 
-const {HttpLib} = require("./lib/httpLib");
+var { HttpLib } = require("./lib/httpLib");
 const http = new HttpLib();
 
 const UUID = 'spices-notifier@germanfr';
 
+const _TYPES = ['themes', 'applets', 'desklets', 'extensions'];
 const SPICES_URL = 'https://cinnamon-spices.linuxmint.com';
 const HTML_COUNT_ID = 'count';
 const COMMENTS_REGEX = new RegExp(`<[a-z]+ id="${HTML_COUNT_ID}">([0-9]+)</[a-z]+>`);
@@ -116,6 +118,10 @@ class SpicesNotifier extends Applet.TextIconApplet {
     this.updateId = 0;
     this.iteration = 0;
 
+    let reload_all = new PopupMenu.PopupIconMenuItem(_("Refresh"), 'reload', St.IconType.SYMBOLIC);
+    reload_all.connect('activate', this.reload.bind(this));
+    this._applet_context_menu.addMenuItem(reload_all);
+
     this.reload();
   }
 
@@ -127,7 +133,13 @@ class SpicesNotifier extends Applet.TextIconApplet {
       counter += 1;
     }
     this.uuidList = uuidList;
-    this.reload()
+
+    //Cinnamon seems to be triggering this function multiple times even though
+    //uuids haven't changed so only reload when uuids have actually changed.
+    if (uuidList != this.previous_uuidList) {
+      this.reload()
+    }
+    this.previous_uuidList = uuidList;
   }
 
   on_applet_clicked() {
@@ -159,16 +171,18 @@ class SpicesNotifier extends Applet.TextIconApplet {
     this.my_xlets = [];
     this.unread = 0;
     this.update_applet();
-    this.menu.removeAll();
     if(this.updateId > 0)
       Mainloop.source_remove(this.updateId);
 
-    // We need this to avoid duplicates on consecutive loads, because it's async
     this.iteration++;
-    this.get_xlets('themes');
-    this.get_xlets('applets');
-    this.get_xlets('desklets');
-    this.get_xlets('extensions');
+    // We need this to avoid duplicates on consecutive loads, because it's async
+
+    for (let _type of _TYPES) {
+      let toId = setTimeout(Lang.bind(this, () => {
+        this.get_xlets(_type);
+        return false
+      }), 1000); // 1 second
+    }
 
     let ms = this.update_interval * 60 * 1000;
     this.updateId = Mainloop.timeout_add(ms, this.reload.bind(this));
@@ -182,9 +196,10 @@ class SpicesNotifier extends Applet.TextIconApplet {
     }
 
     let iteration = this.iteration;
+    let now = Math.ceil(Date.now() / 1000);
     /* The question mark at the end is a hack to force the server to not
        send us a very old cached version of the json file. */
-    let response = await http.LoadAsync(`${SPICES_URL}/json/${type}.json?`);
+    let response = await http.LoadAsync(`${SPICES_URL}/json/${type}.json?`+'time='+now);
     if (!response.Success) {
       logError(`HTTP Error! status : ${response.status}`);
     } else {
@@ -222,8 +237,8 @@ class SpicesNotifier extends Applet.TextIconApplet {
       item.update_comment_count(count - read);
       return;
     }
-
-    let response = await http.LoadAsync(xlet.page);
+    let now = Math.ceil(Date.now() / 1000);
+    let response = await http.LoadAsync(xlet.page+"?time="+now);
     if (response.Success) {
       let result = COMMENTS_REGEX.exec(response.Data);
       if (result && result[1]) {
@@ -263,6 +278,8 @@ class SpicesNotifier extends Applet.TextIconApplet {
     let menuItems = [];
     let username = this.username.toLowerCase();
     let list = this.uuidList.toLowerCase().split(';');
+
+    if (type === _TYPES[0]) this.menu.removeAll();
 
     for(let uuid in xlets) {
       let xlet = xlets[uuid];

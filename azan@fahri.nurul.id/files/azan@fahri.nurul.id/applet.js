@@ -103,7 +103,7 @@ AzanApplet.prototype = {
             //             this.menu.addMenuItem(this._batteryItem);
 
 
-            this._dateMenuItem = new PopupMenu.PopupMenuItem(_(""), {
+            this._dateMenuItem = new PopupMenu.PopupMenuItem("", {
                 reactive: false
             });
             // this._dateLabel = new St.Label();

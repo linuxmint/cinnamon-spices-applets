@@ -8,18 +8,56 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
-        "name": "Radio BluesFlac",
-        "bitrate": "1500",
-        "codec": "OGG",
-        "url": "https://streams.radiomast.io/radioblues-flac",
-        "uuid": "c9d75db2-d044-465a-9ec6-ee46c8d20a0b",
-        "homepage": "https://bluesflac.com/",
-        "tags": ""
+        "name": "Bar Legend Radio",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://solid24.streamupsolutions.com/proxy/nilxzqeg?mp=/stream",
+        "uuid": "d168c5ba-9bf4-47c7-9609-b5134c90b62d",
+        "homepage": "https://www.barlegendradio.net/",
+        "tags": "blues,jazz,rock",
+        "favicon": "https://www.liveradio.ie/files/images/402053/resized/180x172c/bar_legend_radio.jpg"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "New Orleans Blues - Radio Caprice",
+        "bitrate": "320",
+        "codec": "AAC+",
+        "url": "http://213.141.131.10:8004/louisianablues",
+        "uuid": "71094e57-eb40-49a4-afff-a42062cdcafb",
+        "homepage": "http://radcap.ru/louisianablues.html",
+        "tags": "blues,louisiana,new orleans",
+        "favicon": "http://radcap.ru/apple-touch-icon.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "BluesWave Radio",
+        "bitrate": "320",
+        "codec": "AAC+",
+        "url": "https://blueswave.radio:8100/hifiblues",
+        "uuid": "3bd46a05-e589-4263-8eb9-680e45400947",
+        "homepage": "https://blueswave.radio/",
+        "tags": "blues",
+        "favicon": "https://blueswave.radio/wp-content/uploads/2021/01/BluesWave.Radio_.logo_.300X300.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "RDMIX RELAXING BLUES",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://giorgia.radiobellissima.it:8090/radio.mp3",
+        "uuid": "754d1816-68a0-4b6c-ad88-ff16252e298a",
+        "homepage": "https://radiodimensionemix.torontocast.stream/",
+        "tags": "blues,guitar,relaxing,romantic",
+        "favicon": "https://static.wixstatic.com/media/f361b3_786c3987bd404f9f807b4ca7fb4f8337~mv2.jpg"
     },
     {
         "inc": true,
@@ -27,43 +65,11 @@
         "name": "Digital Impulse - Blues",
         "bitrate": "320",
         "codec": "MP3",
-        "url": "http://5.39.71.159:8990/stream",
-        "uuid": "",
-        "homepage": "",
-        "tags": ""
-    },
-    {
-        "inc": true,
-        "play": false,
-        "name": "BluesMen Channel - Hits",
-        "bitrate": "320",
-        "codec": "MP3",
-        "url": "http://173.249.21.17:8108/",
-        "uuid": "",
-        "homepage": "",
-        "tags": ""
-    },
-    {
-        "inc": true,
-        "play": false,
-        "name": "Grolloo Radio",
-        "bitrate": "320",
-        "codec": "MP3",
-        "url": "https://uk1.streamingpulse.com/ssl/grollooradio",
-        "uuid": "a438e66d-2ba7-46b4-89c9-01bc4204e161",
-        "homepage": "https://grollooradio.nl/",
-        "tags": "americana,blues,cajun,country,nederpop,soul"
-    },
-    {
-        "inc": true,
-        "play": false,
-        "name": "Blues Radio alternative",
-        "bitrate": "192",
-        "codec": "MP3",
-        "url": "https://i4.streams.ovh/sc/bluesrad/stream",
-        "uuid": "56662166-bec6-4cea-90f0-fd16bb8089c6",
-        "homepage": "https://bluesradio.gr/",
-        "tags": ""
+        "url": "http://orion.shoutca.st:8990/stream",
+        "uuid": "961d83eb-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://www.di-radio.com/blues",
+        "tags": "blues",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -74,7 +80,80 @@
         "url": "https://i4.streams.ovh:8352/stream",
         "uuid": "",
         "homepage": "https://bluesradio.gr/",
-        "tags": "blues"
+        "tags": "blues",
+        "favicon": "https://pbs.twimg.com/profile_images/1606718775813865482/tSii6qLr_400x400.jpg"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "1.FM - Blues Radio",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "http://strm112.1.fm/blues_mobile_mp3",
+        "uuid": "9617ccb4-0601-11e8-ae97-52543be04c81",
+        "homepage": "https://www.1.fm/",
+        "tags": "blues",
+        "favicon": "http://liveradio.de/media/cache/station_detail/18f08aee-f06b-4965-b607-3f25a581619c.jpg"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio BluesFlac",
+        "bitrate": "1500",
+        "codec": "OGG",
+        "url": "https://streams.radiomast.io/radioblues-flac",
+        "uuid": "c9d75db2-d044-465a-9ec6-ee46c8d20a0b",
+        "homepage": "https://bluesflac.com/",
+        "tags": "",
+        "favicon": "https://bluesflac.com/wp-content/uploads/2019/11/cropped-skull-1-180x180.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Digital Impulse - Blues",
+        "bitrate": "0320",
+        "codec": "MP3",
+        "url": "http://5.39.71.159:8990/stream",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "BluesMen Channel (Gold)",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "http://173.249.21.17:8114/;stream.nsv",
+        "uuid": "b050e081-852a-4213-82b7-c5771619f9a7",
+        "homepage": "https://onlineradiobox.com/json/us/bluesmenchannelgold/play?platform=web",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "BluesMen Channel - Hits",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "http://173.249.21.17:8108/",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Blues Radio alternative",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "https://i4.streams.ovh/sc/bluesrad/stream",
+        "uuid": "56662166-bec6-4cea-90f0-fd16bb8089c6",
+        "homepage": "https://bluesradio.gr/",
+        "tags": "",
+        "favicon": "https://i1.wp.com/bluesradio.gr/wp-content/uploads/2021/06/cropped-24-7bug.png?fit=180%2c180&#038;ssl=1"
     },
     {
         "inc": true,
@@ -85,51 +164,44 @@
         "url": "http://radio.streemlion.com:2070/stream",
         "uuid": "c4d8290e-2414-4504-8d30-91ed4d0b07cc",
         "homepage": "https://thebluescove.com/",
-        "tags": ""
+        "tags": "",
+        "favicon": "https://cdn-profiles.tunein.com/s299348/images/logog.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Amazing Blues",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "https://stream.amazingradios.com/blues",
+        "uuid": "8463e3f1-9964-42f9-b3fe-f866c18da9b5",
+        "homepage": "https://blues.amazingradios.com/",
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
         "name": "Country/folk blues - Radio Caprice",
-        "bitrate": "128",
+        "bitrate": "320",
         "codec": "AAC+",
         "url": "http://79.120.77.11:8004/countryblues",
         "uuid": "cc4e23dd-5485-4176-9ade-0a79a08b3ee1",
         "homepage": "http://radcap.ru/countryblues.html",
-        "tags": "blues,country blues"
-    },
-    {
-        "inc": true,
-        "play": false,
-        "name": "BLUES ROCK RADIO",
-        "bitrate": "128",
-        "codec": "MP3",
-        "url": "https://mpc.mediacp.eu/stream/bluesrock",
-        "uuid": "554b22b2-a86a-4074-8195-3d4e97082003",
-        "homepage": "http://bluesrockradio.cz/",
-        "tags": "blues rock"
+        "tags": "blues,country blues",
+        "favicon": "http://radcap.ru/apple-touch-icon.png"
     },
     {
         "inc": true,
         "play": false,
         "name": "Austin Blues Radio",
-        "bitrate": "128",
+        "bitrate": "0128",
         "codec": "MP3",
         "url": "http://158.69.131.71:8036/stream",
         "uuid": "",
         "homepage": "",
-        "tags": ""
-    },
-    {
-        "inc": true,
-        "play": false,
-        "name": "Blues Radio UK",
-        "bitrate": "128",
-        "codec": "MP3",
-        "url": "http://149.255.59.3:8232/stream",
-        "uuid": "",
-        "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -140,18 +212,32 @@
         "url": "http://stream.laut.fm/bluesclub",
         "uuid": "dae03777-5373-11e8-a4d1-52543be04c81",
         "homepage": "http://laut.fm/bluesclub",
-        "tags": "blues,legends,rock"
+        "tags": "blues,legends,rock",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
-        "name": "Joint Radio Blues Rock",
-        "bitrate": "0128",
-        "codec": "MP3",
-        "url": "http://192.111.151.2:9992/stream",
+        "name": "Country",
+        "bitrate": "",
+        "codec": "",
+        "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Sfliny Country",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "http://ec4.yesstreaming.net:3790/",
+        "uuid": "87699bd5-b56d-47ed-a774-90cb07c9f78d",
+        "homepage": "https://www.sfliny.com/",
+        "tags": "country",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -162,7 +248,8 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -173,7 +260,8 @@
         "url": "https://www.radioking.com/play/legrigri/273715",
         "uuid": "d8104a4f-865d-438a-92c1-2ac2442459cf",
         "homepage": "https://www.le-grigri.com/",
-        "tags": "african music,free jazz,hip-hop,jazz,world music"
+        "tags": "african music,free jazz,hip-hop,jazz,world music",
+        "favicon": "https://www.le-grigri.com/favicon.ico"
     },
     {
         "inc": true,
@@ -184,7 +272,8 @@
         "url": "http://80.82.229.202:8000/sun-jazz.mp3",
         "uuid": "f184e7d5-3fa7-11ea-a9fa-52543be04c81",
         "homepage": "http://80.82.229.202:8000/",
-        "tags": "classic jazz,tango,vocal jazz"
+        "tags": "classic jazz,tango,vocal jazz",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -195,7 +284,8 @@
         "url": "https://www.radioking.com/play/couleurs-jazz/216016",
         "uuid": "505f1686-0ddd-488b-8355-2f7d7a83ba65",
         "homepage": "https://couleursjazz.fr/",
-        "tags": "jazz"
+        "tags": "jazz",
+        "favicon": "https://couleursjazz.fr/wp-content/uploads/2018/12/logo_w.svg"
     },
     {
         "inc": true,
@@ -206,18 +296,20 @@
         "url": "https://funkyradio.streamingmedia.it/play.mp3",
         "uuid": "c77c45c4-cf37-414c-ae34-868f7d9cd944",
         "homepage": "https://funky.radio/",
-        "tags": "60s,70s,70s disco,80s,black,black music,disco,funk,funky,motown,music,oldies,p-funk,r&b,r'n'b,rare groove,rnb,soul,usa"
+        "tags": "60s,70s,70s disco,80s,black,black music,disco,funk,funky,motown,music,oldies,p-funk,r&b,r'n'b,rare groove,rnb,soul,usa",
+        "favicon": "https://funkyradio.streamingmedia.it/funkyradiologo.png"
     },
     {
         "inc": true,
         "play": false,
         "name": "Jazz",
-        "bitrate": "256",
+        "bitrate": "0256",
         "codec": "MP3",
         "url": "http://icecast4.play.cz/crojazz256.mp3",
         "uuid": "3b5438eb-0c6c-11e9-a80b-52543be04c81",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -228,7 +320,8 @@
         "url": "http://strm112.1.fm/sax4ever_mobile_mp3",
         "uuid": "962a7ec6-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
-        "tags": "jazz"
+        "tags": "jazz",
+        "favicon": "http://liveradio.de/media/cache/station_detail/18f08aee-f06b-4965-b607-3f25a581619c.jpg"
     },
     {
         "inc": true,
@@ -239,7 +332,8 @@
         "url": "http://strm112.1.fm/ajazz_mobile_mp3",
         "uuid": "962a6335-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
-        "tags": "jazz"
+        "tags": "jazz",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -250,7 +344,8 @@
         "url": "http://strm112.1.fm/smoothjazz_mobile_mp3",
         "uuid": "9625c394-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
-        "tags": "smooth jazz"
+        "tags": "smooth jazz",
+        "favicon": "http://liveradio.de/media/cache/station_detail/18f08aee-f06b-4965-b607-3f25a581619c.jpg"
     },
     {
         "inc": true,
@@ -261,7 +356,8 @@
         "url": "http://tsfjazz.ice.infomaniak.ch/tsfjazz-high",
         "uuid": "9608ddae-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.tsfjazz.com/",
-        "tags": "jazz"
+        "tags": "jazz",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -272,18 +368,20 @@
         "url": "http://jazz-wr10.ice.infomaniak.ch/jazz-wr10-128.mp3",
         "uuid": "96135b8e-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.jazzradio.fr/radio/webradio/13/soul",
-        "tags": "soul"
+        "tags": "soul",
+        "favicon": "http://www.jazzradio.fr/apple-touch-icon-120x120.png"
     },
     {
         "inc": true,
         "play": false,
         "name": "Jazz Radio",
-        "bitrate": "128",
+        "bitrate": "192",
         "codec": "MP3",
         "url": "http://jazzradio.ice.infomaniak.ch/jazzradio-high.mp3",
         "uuid": "96136fe5-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.jazzradio.fr/",
-        "tags": "jazz,soul"
+        "tags": "jazz,soul",
+        "favicon": "http://www.jazzradio.fr/apple-touch-icon-120x120.png"
     },
     {
         "inc": true,
@@ -294,29 +392,8 @@
         "url": "http://75.102.53.58:80/1067",
         "uuid": "",
         "homepage": "",
-        "tags": ""
-    },
-    {
-        "inc": true,
-        "play": false,
-        "name": "Audiogrooves Disco Shine Channel",
-        "bitrate": "112",
-        "codec": "OGG",
-        "url": "http://soul.audiogrooves.net/disco-shine.ogg",
-        "uuid": "10d23bf5-2c28-11e8-91bf-52543be04c81",
-        "homepage": "https://audiogrooves.net/",
-        "tags": "70s,80s,disco,euro disco,groove"
-    },
-    {
-        "inc": true,
-        "play": false,
-        "name": "Audiogrooves Jazz Flight Channel",
-        "bitrate": "80",
-        "codec": "OGG",
-        "url": "http://soul.audiogrooves.net/jazzy-flight.ogg",
-        "uuid": "e0714fcc-2c27-11e8-91bf-52543be04c81",
-        "homepage": "https://audiogrooves.net/",
-        "tags": "acid jazz,jazz,nu-jazz"
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -327,18 +404,128 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Arte TV (Français)",
+        "bitrate": "128",
+        "codec": "UNKNOWN",
+        "url": "https://artesimulcast.akamaized.net/hls/live/2031003/artelive_fr/master_v360.m3u8",
+        "uuid": "df9f3312-6c04-4f1d-94cb-89bd778d5248",
+        "homepage": "https://www.arte.tv/fr/",
+        "tags": "cinema,culture,documentaries,europe,european,film,france,germany,news,public",
+        "favicon": "https://static-cdn.arte.tv/replay/favicons/apple-touch-icon-120x120.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Fréquence 3 (FLAC)",
+        "bitrate": "1280",
+        "codec": "FLAC",
+        "url": "https://frequence3.net-radio.fr/frequence3.flac",
+        "uuid": "",
+        "homepage": "https://www.frequence3.com",
+        "tags": "undefined",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Fréquence 3 – Touraine – 99.0 FM",
+        "bitrate": "160",
+        "codec": "MP3",
+        "url": "https://frequence3.net-radio.fr/frequence3-fm37.mp3",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Fréquence 3 – Loir-et-Cher – 89.9 FM",
+        "bitrate": "160",
+        "codec": "MP3",
+        "url": "https://frequence3.net-radio.fr/frequence3-fm41.mp3",
+        "uuid": "",
+        "homepage": "https://www.frequence3.com",
+        "tags": "undefined",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Fréquence 3 World (FLAC)",
+        "bitrate": "128",
+        "codec": "OGG",
+        "url": "https://frequence3.net-radio.fr/frequence3world.flac",
+        "uuid": "46eb7347-e63c-49a2-80af-e7df471c9703",
+        "homepage": "https://www.frequence3.com/",
+        "tags": "world music",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Fréquence 3 Dance (FLAC)",
+        "bitrate": "1280",
+        "codec": "FLAC",
+        "url": "https://frequence3.net-radio.fr/frequence3dance.flac",
+        "uuid": "",
+        "homepage": "https://www.frequence3.com",
+        "tags": "undefined",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Fréquence 3 Gold (FLAC)",
+        "bitrate": "1024",
+        "codec": "FLAC",
+        "url": "https://frequence3.net-radio.fr/frequence3gold.flac",
+        "uuid": "738be51d-0eb7-4485-969c-a698cfe41043",
+        "homepage": "https://www.frequence3.com/",
+        "tags": "80's,90's",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Fréquence 3 Urban (FLAC)",
+        "bitrate": "128",
+        "codec": "OGG",
+        "url": "https://frequence3.net-radio.fr/frequence3urban.flac",
+        "uuid": "b5c3c88f-cef2-43cb-87f6-2c57d81c1827",
+        "homepage": "https://www.frequence3.com/les-radios-frequence-3/urban/",
+        "tags": "hip-hop,r&b,rap,urban",
+        "favicon": "https://api2.frequence3.net/static/img/stations/horizontal/frequence3urban.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "MAXI FRANCE - WWW.MAXIFRANCE.FR",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "https://panel.mediacp.fr:9039/stream",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
         "name": "Radio Sing Sing (FLAC 1024)",
-        "bitrate": "1024",
+        "bitrate": "896",
         "codec": "FLAC",
         "url": "http://stream.sing-sing-bis.org:8000/singsingFlac",
         "uuid": "",
         "homepage": "http://www.sing-sing-bis.org/",
-        "tags": "undefined"
+        "tags": "undefined",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -349,7 +536,8 @@
         "url": "http://stream.sing-sing-bis.org:8000/singsingopus256",
         "uuid": "",
         "homepage": "http://www.sing-sing-bis.org/",
-        "tags": "undefined"
+        "tags": "undefined",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -360,7 +548,8 @@
         "url": "http://stream.sing-sing-bis.org:8000/singsingaac256",
         "uuid": "",
         "homepage": "http://www.sing-sing-bis.org/",
-        "tags": "undefined"
+        "tags": "undefined",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -371,7 +560,8 @@
         "url": "http://www.sing-sing-bis.org/confortaac.pls",
         "uuid": "96182f72-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.sing-sing-bis.org/",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -382,29 +572,32 @@
         "url": "http://icecast.radiofrance.fr/franceinfo-hifi.aac",
         "uuid": "31074f8a-e6f4-11e9-a96c-52543be04c81",
         "homepage": "https://www.francetvinfo.fr/en-direct/radio.html",
-        "tags": "aac,information,public radio,radio france"
+        "tags": "aac,information,public radio,radio france",
+        "favicon": "https://www.francetvinfo.fr/assets/common/images/pwa/ios/120-5487caf3.png"
     },
     {
         "inc": true,
         "play": false,
         "name": "France Culture",
-        "bitrate": "128",
+        "bitrate": "192",
         "codec": "AAC",
         "url": "http://icecast.radiofrance.fr/franceculture-hifi.aac",
         "uuid": "6a1440b2-e6f0-11e9-a96c-52543be04c81",
         "homepage": "https://www.franceculture.fr/",
-        "tags": "aac,culture,public radio,radio france"
+        "tags": "aac,culture,public radio,radio france",
+        "favicon": "https://upload.wikimedia.org/wikipedia/fr/thumb/c/c9/France_Culture_-_2008.svg/1024px-France_Culture_-_2008.svg.png"
     },
     {
         "inc": true,
         "play": false,
         "name": "France Inter",
-        "bitrate": "128",
+        "bitrate": "192",
         "codec": "AAC",
         "url": "http://direct.franceinter.fr/live/franceinter-hifi.aac",
         "uuid": "d2bbffaf-5d67-4a65-9772-097d8c0269d3",
         "homepage": "https://www.franceinter.fr/",
-        "tags": ""
+        "tags": "",
+        "favicon": "https://canada-culture.org/wp-content/uploads/2018/05/logo-france-inter.png"
     },
     {
         "inc": true,
@@ -415,7 +608,8 @@
         "url": "http://vps.cbad.fr:8000/stt2020",
         "uuid": "456a0101-7542-438e-a731-f63f0ec70e19",
         "homepage": "",
-        "tags": "news"
+        "tags": "news",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -426,7 +620,8 @@
         "url": "http://direct.francebleu.fr/live/fbvaucluse-midfi.mp3",
         "uuid": "96131db3-0601-11e8-ae97-52543be04c81",
         "homepage": "https://www.francebleu.fr/vaucluse",
-        "tags": ""
+        "tags": "",
+        "favicon": "https://www.francebleu.fr/favicons/apple-touch-icon-180x180.png"
     },
     {
         "inc": true,
@@ -437,7 +632,8 @@
         "url": "http://direct.mouv.fr/live/mouv-midfi.mp3",
         "uuid": "ff2f925e-2e17-11ea-aa0c-52543be04c81",
         "homepage": "https://www.mouv.fr/",
-        "tags": "rap"
+        "tags": "rap",
+        "favicon": "https://www.mouv.fr/dist/favicons/logo-120.png"
     },
     {
         "inc": true,
@@ -448,7 +644,8 @@
         "url": "http://direct.mouv.fr/live/mouvxtra-midfi.mp3",
         "uuid": "9636ea30-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.mouv.fr/",
-        "tags": "public radio,radio france,youth"
+        "tags": "public radio,radio france,youth",
+        "favicon": "http://www.mouv.fr/dist/favicons/logo-120.png"
     },
     {
         "inc": true,
@@ -459,18 +656,20 @@
         "url": "http://radio-active.net:8000/active",
         "uuid": "960b6497-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.radio-active.net/",
-        "tags": "320kbps"
+        "tags": "320kbps",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
         "name": "France Musique La B.O.",
-        "bitrate": "128",
+        "bitrate": "192",
         "codec": "AAC",
         "url": "http://icecast.radiofrance.fr/francemusiquelabo-hifi.aac",
         "uuid": "379d25e3-eb8d-11e9-a96c-52543be04c81",
         "homepage": "https://www.francemusique.fr/musiques-de-films",
-        "tags": "aac,movie soundtracks,public radio,radio france"
+        "tags": "aac,movie soundtracks,public radio,radio france",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -481,7 +680,8 @@
         "url": "http://live1.jupinfo.fr:8000/play",
         "uuid": "6b1d0ed8-d9b7-402f-9178-d6165e081d44",
         "homepage": "http://www.laradiosanspub.fr/",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -492,7 +692,8 @@
         "url": "http://streaming.radio.rtl.fr/rtl-1-44-128",
         "uuid": "9606c2cd-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.rtl.fr/",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": false,
@@ -503,7 +704,8 @@
         "url": "http://start-sud.ice.infomaniak.ch/start-sud-high.mp3",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -514,7 +716,8 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -525,29 +728,32 @@
         "url": "http://www.radiogalere.org:8080/galere.mp3",
         "uuid": "96109b22-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.radiogalere.org/",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
         "name": "Radio Libertaire (France)",
-        "bitrate": "192",
+        "bitrate": "256",
         "codec": "MP3",
         "url": "http://media.radio-libertaire.org:8080/radiolib.mp3",
         "uuid": "a685d799-8ee0-4f8b-b6e0-77345b34863d",
         "homepage": "https://www.radio-libertaire.net/",
-        "tags": "music,talk"
+        "tags": "music,talk",
+        "favicon": "https://image.jimcdn.com/app/cms/image/transf/dimension=1920x400:format=jpg/path/s38eab3b1d92587b0/image/ia47e45fb52863fa6/version/1437489151/image.jpg"
     },
     {
         "inc": true,
         "play": false,
         "name": "Cause Commune (Libre @ Toi)",
-        "bitrate": "160",
+        "bitrate": "128",
         "codec": "OGG",
         "url": "http://212.129.27.101:8000/voixdulat_ogg",
         "uuid": "961a2e42-0601-11e8-ae97-52543be04c81",
         "homepage": "https://cause-commune.fm/",
-        "tags": "alternative,information,libre,opinion"
+        "tags": "alternative,information,libre,opinion",
+        "favicon": "https://cause-commune.fm/wp-content/uploads/2018/08/logo-cc-ico-150x150.png"
     },
     {
         "inc": true,
@@ -558,18 +764,20 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
         "name": "Fip",
-        "bitrate": "128",
+        "bitrate": "192",
         "codec": "AAC",
         "url": "http://icecast.radiofrance.fr/fip-hifi.aac",
         "uuid": "932eb148-e6f6-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/",
-        "tags": "aac,music,public radio,radio france"
+        "tags": "aac,music,public radio,radio france",
+        "favicon": "https://upload.wikimedia.org/wikipedia/fr/thumb/d/d5/FIP_logo_2005.svg/1024px-FIP_logo_2005.svg.png"
     },
     {
         "inc": true,
@@ -580,51 +788,56 @@
         "url": "http://icecast.radiofrance.fr/fipnouveautes-hifi.aac",
         "uuid": "a9464601-eaa5-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/tout-nouveau-tout-fip/webradio",
-        "tags": "aac,music,public radio,radio france"
+        "tags": "aac,music,public radio,radio france",
+        "favicon": "https://cdn.radiofrance.fr/s3/cruiser-production/2019/06/e061141c-f6b4-4502-ba43-f6ec693a049b/200x200_fip-nouveau_ok.jpg"
     },
     {
         "inc": true,
         "play": false,
         "name": "FIP Rock",
-        "bitrate": "128",
+        "bitrate": "192",
         "codec": "AAC",
         "url": "http://icecast.radiofrance.fr/fiprock-hifi.aac",
         "uuid": "ddc49aac-eb85-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/rock/webradio",
-        "tags": "aac,public radio,radio france,rock"
+        "tags": "aac,public radio,radio france,rock",
+        "favicon": "https://cdn.radiofrance.fr/s3/cruiser-production/2019/06/f5b944ca-9a21-4970-8eed-e711dac8ac15/200x200_fip-rock_ok.jpg"
     },
     {
         "inc": true,
         "play": false,
         "name": "FIP Reggae",
-        "bitrate": "128",
+        "bitrate": "192",
         "codec": "AAC",
         "url": "http://icecast.radiofrance.fr/fipreggae-hifi.aac",
         "uuid": "84764bda-eb7e-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/reggae/webradio",
-        "tags": "aac,public radio,radio france,reggae"
+        "tags": "aac,public radio,radio france,reggae",
+        "favicon": "https://cdn.radiofrance.fr/s3/cruiser-production/2019/06/15a58f25-86a5-4b1a-955e-5035d9397da3/200x200_fip-reggae_ok.jpg"
     },
     {
         "inc": true,
         "play": false,
         "name": "FIP Pop",
-        "bitrate": "128",
+        "bitrate": "192",
         "codec": "AAC",
         "url": "https://icecast.radiofrance.fr/fippop-hifi.aac",
         "uuid": "76b129aa-45cc-46cf-b6b2-1fde08a2c8f9",
         "homepage": "https://www.fip.fr/pop/webradio",
-        "tags": "aac,pop,public radio,radio france"
+        "tags": "aac,pop,public radio,radio france",
+        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png"
     },
     {
         "inc": true,
         "play": false,
         "name": "Fip Pop",
-        "bitrate": "128",
+        "bitrate": "192",
         "codec": "AAC",
         "url": "https://icecast.radiofrance.fr/fippop-hifi.aac?id=radiofrance",
         "uuid": "36dda8c3-88fa-49be-992a-ada02abdf1dc",
         "homepage": "https://www.fip.fr/",
-        "tags": "eclectic,pop"
+        "tags": "eclectic,pop",
+        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png"
     },
     {
         "inc": true,
@@ -635,18 +848,20 @@
         "url": "http://icecast.radiofrance.fr/fipworld-hifi.aac",
         "uuid": "cbc50678-e70e-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/musiques-du-monde/webradio",
-        "tags": "aac,public radio,radio france,world music"
+        "tags": "aac,public radio,radio france,world music",
+        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png"
     },
     {
         "inc": true,
         "play": false,
         "name": "FIP Jazz",
-        "bitrate": "128",
+        "bitrate": "192",
         "codec": "AAC",
         "url": "http://icecast.radiofrance.fr/fipjazz-hifi.aac",
         "uuid": "5b9ceedf-eb85-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/jazz/webradio",
-        "tags": "aac,jazz,public radio,radio france"
+        "tags": "aac,jazz,public radio,radio france",
+        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png"
     },
     {
         "inc": true,
@@ -657,18 +872,20 @@
         "url": "http://icecast.radiofrance.fr/fipgroove-hifi.aac",
         "uuid": "c454908c-eb81-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/groove/webradio",
-        "tags": "aac,groove,public radio,radio france"
+        "tags": "aac,groove,public radio,radio france",
+        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png"
     },
     {
         "inc": true,
         "play": false,
         "name": "FIP Electro",
-        "bitrate": "128",
+        "bitrate": "192",
         "codec": "AAC",
         "url": "http://icecast.radiofrance.fr/fipelectro-hifi.aac",
         "uuid": "b809226c-eb82-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/electro/webradio",
-        "tags": "aac,electro,public radio,radio france"
+        "tags": "aac,electro,public radio,radio france",
+        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png"
     },
     {
         "inc": true,
@@ -679,18 +896,116 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
-        "name": "RTS programme Fréquence Plus",
-        "bitrate": "64",
-        "codec": "AAC+",
-        "url": "http://statslive.infomaniak.ch/playlist/frequenceplus71/frequenceplus71-64.aac/playlist.pls",
-        "uuid": "96418a3e-0601-11e8-ae97-52543be04c81",
-        "homepage": "http://www.frequenceplusfm.com/",
-        "tags": ""
+        "name": "Radiocratie",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "https://flux.radiocratie.com/flux",
+        "uuid": "3a08f80f-b8bf-48a2-926c-17f980de85d9",
+        "homepage": "https://radiocratie.com/",
+        "tags": "chanson française,electronic,hip-hop,jazz,jungle,pop",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "M Radio Voix Féminines",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://mfmwr-013.ice.infomaniak.ch/mfmwr-013.mp3",
+        "uuid": "9613fe3a-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://mradio.fr/",
+        "tags": "chansons françaises,women",
+        "favicon": "https://mradio.fr/apple-touch-icon-120x120.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "M Radio 100% Live",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://mfmwr-008.ice.infomaniak.ch/mfmwr-008.mp3",
+        "uuid": "4b4538de-295b-11e9-a80b-52543be04c81",
+        "homepage": "https://mradio.fr/",
+        "tags": "la radio 100% chanson française,maxi france",
+        "favicon": "https://mradio.fr/apple-touch-icon-120x120.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "M Radio Culte Années 60 et 70",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://mfmwr-022.ice.infomaniak.ch/mfmwr-022.mp3",
+        "uuid": "96140603-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://mradio.fr/",
+        "tags": "60s,70s,chansons françaises",
+        "favicon": "https://mradio.fr/apple-touch-icon-120x120.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Harmony Radio",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://server1.harmonyradio.be:8052/",
+        "uuid": "963cf651-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://www.harmonyradio.be/",
+        "tags": "chansons françaises,pop",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Europe 1 Musique",
+        "bitrate": "4",
+        "codec": "AAC",
+        "url": "https://wr.lmn.fm/e1-wr5.aac?aw_0_1st.playerid=lgrdnwsRadioplayer",
+        "uuid": "b1fe0ab1-72be-42fc-b1d1-0ff4122863ae",
+        "homepage": "https://www.europe1.fr/culture/nouveau-ecoutez-europe-musique-4095053",
+        "tags": "chansons,pop",
+        "favicon": "https://resize-europe1.lanmedia.fr/f/webp/r/622,311,forcex,center-middle/img/var/europe1/storage/images/europe1/culture/nouveau-ecoutez-europe-musique-4095053/58235425-1-fre-FR/NOUVEAU-Ecoutez-Europe-Musique.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Allzic Radio Enfoirés",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://allzic12.ice.infomaniak.ch/allzic12.mp3",
+        "uuid": "961ed7aa-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://www.allzicradio.com/fr/player/listen/121/allzic-radio-enfoirs",
+        "tags": "chansons françaises",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Brassens",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "https://www.zestream.eu:8010/radiobrassens.mp3",
+        "uuid": "93a18f3a-6eea-426c-b77e-e01a5992b685",
+        "homepage": "http://www.radiobrassens.com/",
+        "tags": "misc",
+        "favicon": "https://www.radiobrassens.com/wp-content/uploads/2017/11/logo-radio-brassens-favicon.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "RTS Option Musique (Suisse)",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://stream.srg-ssr.ch/option-musique/mp3_128.m3u",
+        "uuid": "70f97520-176a-4436-b9cc-829c5c4eae9c",
+        "homepage": "https://programmesradio.rts.ch/option-musique",
+        "tags": "chansons,pop",
+        "favicon": "https://www.radio.fr/images/broadcasts/9e/dd/3462/5/c300.png"
     },
     {
         "inc": false,
@@ -701,18 +1016,20 @@
         "url": "https://scdn.nrjaudio.fm/audio1/fr/55562/aac_64.mp3",
         "uuid": "8003bc6f-340b-11ea-afca-52543be04c81",
         "homepage": "https://www.cheriefm.fr/",
-        "tags": "france"
+        "tags": "france",
+        "favicon": "https://www.cheriefm.fr/uploads/assets/cherie/icons/apple-icon-120x120.png"
     },
     {
         "inc": true,
         "play": false,
         "name": "Radio Sud (Belgique)",
-        "bitrate": "224",
+        "bitrate": "160",
         "codec": "OGG",
         "url": "http://streaming.domainepublic.net:8000/radiosud.ogg",
         "uuid": "f16938ab-d2bc-4f34-aac5-6d90b63fad1b",
         "homepage": "https://www.radiosud.be/",
-        "tags": ""
+        "tags": "",
+        "favicon": "https://www.radiosud.be/favicon/apple-icon-120x120.png"
     },
     {
         "inc": true,
@@ -723,7 +1040,8 @@
         "url": "https://alouettenouveauxtalents.ice.infomaniak.ch/alouettenouveauxtalents-128.mp3",
         "uuid": "0c9c8e21-3859-4bb5-9620-9234e3a74bd4",
         "homepage": "https://www.alouette.fr/",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -734,7 +1052,8 @@
         "url": "http://jazz-wr18.ice.infomaniak.ch/jazz-wr18-128.mp3",
         "uuid": "961363c4-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.jazzradio.fr/radio/webradio/23/jazzy-french",
-        "tags": "french music,jazz"
+        "tags": "french music,jazz",
+        "favicon": "http://www.jazzradio.fr/apple-touch-icon-120x120.png"
     },
     {
         "inc": true,
@@ -745,7 +1064,8 @@
         "url": "https://streamingv2.shoutcast.com/100-Pour-Cent-France",
         "uuid": "884c87a2-9dbe-46d5-a95d-dd3bf8ba6765",
         "homepage": "https://ecouterradioenligne.com/100-pour-cent-france/",
-        "tags": "chansons françaises"
+        "tags": "chansons françaises",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -756,7 +1076,8 @@
         "url": "http://stream.chantefrance.com/Chante_France",
         "uuid": "9609743b-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.chantefrance.com/",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -767,7 +1088,8 @@
         "url": "http://stream1.chantefrance.com/cf-80",
         "uuid": "96147fcb-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.chantefrance.com/",
-        "tags": "80s"
+        "tags": "80s",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -778,18 +1100,20 @@
         "url": "http://stream.chantefrance.com/cf-nouveautes.aac",
         "uuid": "ce3b536e-2e20-11ea-aa0c-52543be04c81",
         "homepage": "https://www.chantefrance.com/",
-        "tags": "chansons françaises"
+        "tags": "chansons françaises",
+        "favicon": "https://bocir-prod-bucket.s3.eu-west-1.amazonaws.com/radios/chante-france/images/favicon.x-icon"
     },
     {
         "inc": true,
         "play": false,
         "name": "RMF Francais",
-        "bitrate": "48",
+        "bitrate": "64",
         "codec": "AAC+",
         "url": "http://195.150.20.7/FRANCAIS",
         "uuid": "960db9c6-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.rmfon.pl/play,54",
-        "tags": "french music"
+        "tags": "french music",
+        "favicon": "http://www.rmfon.pl/img/favicon/favicon120.png"
     },
     {
         "inc": true,
@@ -800,7 +1124,8 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -811,7 +1136,8 @@
         "url": "http://cbcmp3.ic.llnwd.net/stream/cbcmp3_P-2OTOR0_TOR",
         "uuid": "b14eb284-7343-427f-bdfc-9bedd935b4fa",
         "homepage": "https://ici.radio-canada.ca/ohdio/premiere",
-        "tags": ""
+        "tags": "",
+        "favicon": "https://ici.radio-canada.ca/v5/ohdio/dist/appohdio/assets/pwa/apple-touch-icon-180x180.png"
     },
     {
         "inc": true,
@@ -822,7 +1148,8 @@
         "url": "http://live02.rfi.fr/rfimonde-96k.mp3",
         "uuid": "170e9f59-e70d-11e9-a96c-52543be04c81",
         "homepage": "http://www.rfi.fr/",
-        "tags": "france médias monde,information,public radio,world news"
+        "tags": "france médias monde,information,public radio,world news",
+        "favicon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/RFI_logo_2013.svg/1024px-RFI_logo_2013.svg.png"
     },
     {
         "inc": true,
@@ -833,7 +1160,8 @@
         "url": "http://stream.srg-ssr.ch/m/la-1ere/mp3_128",
         "uuid": "9608efd5-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.rts.ch/la-1ere/",
-        "tags": "public radio,srg ssr"
+        "tags": "public radio,srg ssr",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -844,7 +1172,8 @@
         "url": "http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_low/ak/bbc_radio_fourfm.m3u8",
         "uuid": "3901699a-3e02-4fb4-addf-13297dc4c83a",
         "homepage": "https://www.bbc.co.uk/sounds/play/live:bbc_radio_fourfm",
-        "tags": "comedy,drama,news,talk"
+        "tags": "comedy,drama,news,talk",
+        "favicon": "https://static.files.bbci.co.uk/sounds/web/sounds-web/img/sounds-apple-touch-icon.ead169771d.png"
     },
     {
         "inc": true,
@@ -855,18 +1184,44 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Columbia",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://broadcast.miami/proxy/columbia?mp=/stream/;",
+        "uuid": "7655e3e7-398c-4f4b-8354-acb681e3add8",
+        "homepage": "https://www.radio-columbia.com/",
+        "tags": "disco,funk,soul",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "FUNKY TRACKS RADIO Barcelona",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "http://streaming2.elitecomunicacion.es:8134/stream",
+        "uuid": "62bf5294-65dc-4a7a-9fb1-f60550dfa15b",
+        "homepage": "https://www.funkytracksradio.com/",
+        "tags": "80s,disco,funky,funky 70,funky house",
+        "favicon": "https://cdn.webrad.io/images/logos/emisora-org-es/funky-tracks.png"
     },
     {
         "inc": true,
         "play": false,
         "name": "B4B RADIO FUNK",
-        "bitrate": "192",
+        "bitrate": "0192",
         "codec": "MP3",
         "url": "https://radio9.pro-fhi.net:19164/",
-        "uuid": "df1f7f70-46ab-4b84-becb-863b4a299dbf",
+        "uuid": "",
         "homepage": "https://www.b4bradio.com/radio-funk.html",
-        "tags": "disco,funk"
+        "tags": "undefined",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -877,7 +1232,8 @@
         "url": "http://listen.radionomy.com/FUNK-FRANCE",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "undefined",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -888,18 +1244,128 @@
         "url": "http://jazz-wr08.ice.infomaniak.ch/jazz-wr08-128.mp3",
         "uuid": "9613614b-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.jazzradio.fr/radio/webradio/15/groove",
-        "tags": "groove,jazz"
+        "tags": "groove,jazz",
+        "favicon": "https://www.jazzradio.fr/apple-touch-icon-120x120.png"
     },
     {
         "inc": true,
         "play": false,
-        "name": "Pop & Rock",
+        "name": "Pop - Rock - Folk",
         "bitrate": "",
         "codec": "",
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radiofreccia",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://streamingv2.shoutcast.com/radiofreccia",
+        "uuid": "11467fc3-1e4f-494f-8616-6d7a378a7d53",
+        "homepage": "https://www.radiofreccia.it/",
+        "tags": "rock",
+        "favicon": "https://cloud.radiofreccia.it/assets/www.radiofreccia.it/1.0.27/img/logo/apple-icon-120x120.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Zappa Stream Radio",
+        "bitrate": "896",
+        "codec": "FLAC",
+        "url": "https://streams.norbert.de/zappa.flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "undefined",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "ROCK ANTENNE",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://stream.antenne.de:80/rockantenne",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Grolloo Radio",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://uk1.streamingpulse.com/ssl/grollooradio",
+        "uuid": "a438e66d-2ba7-46b4-89c9-01bc4204e161",
+        "homepage": "https://grollooradio.nl/",
+        "tags": "americana,blues,cajun,country,nederpop,soul",
+        "favicon": "https://grollooradio.nl/wp-content/uploads/2023/04/cropped-grollooapp-1-180x180.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "ICE RADIO",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://stream.iceradio.nl/iceradiohq?ver=30283",
+        "uuid": "790ef988-70ac-4823-9732-c80f57a129f0",
+        "homepage": "",
+        "tags": "rock",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "RMV Radio",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "http://www.rmvradio.fr/stream/hd.m3u",
+        "uuid": "96090f58-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://www.rmvradio.fr/",
+        "tags": "",
+        "favicon": "http://www.rmvradio.fr/favicon.ico"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Zwischen-Welten Radio",
+        "bitrate": "256",
+        "codec": "MP3",
+        "url": "http://136.243.21.79:8000/high.mp3",
+        "uuid": "",
+        "homepage": "",
+        "tags": "folk, world folk",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Amazing Radio",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://stream.laut.fm/amazingradio",
+        "uuid": "1ebaa481-8525-47ec-9296-9ff1eb1e400e",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Caroline 259 Gold",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "http://95.211.66.140:8253/",
+        "uuid": "74364cf0-f739-11e8-a471-52543be04c81",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -910,7 +1376,8 @@
         "url": "http://s4.citrus3.com:8366/stream",
         "uuid": "34975b12-c845-4a2f-b39d-5acb25b10855",
         "homepage": "https://www.bigbeatbrighton.co.uk/",
-        "tags": "00s,90s,dance,indie,pop"
+        "tags": "00s,90s,dance,indie,pop",
+        "favicon": "https://ueni-favicons.s3.eu-central-1.amazonaws.com/production/232a0fb69aa04d5b992efefc9d199abd_IMG_20200628_095825_063.jpg"
     },
     {
         "inc": true,
@@ -921,7 +1388,8 @@
         "url": "http://streams.rsa-sachsen.de/rsa-beatles/mp3-192/mediaplayerrsa",
         "uuid": "9646971f-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.rsa-sachsen.de/rsa-beatles-radio",
-        "tags": "beatles"
+        "tags": "beatles",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -932,7 +1400,8 @@
         "url": "http://www.beatlesradio.com:8000/stream/1/",
         "uuid": "96151576-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.beatlesradio.com/",
-        "tags": "60s,breakbeat,oldies,pop,rock"
+        "tags": "60s,breakbeat,oldies,pop,rock",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -943,7 +1412,8 @@
         "url": "https://18533.live.streamtheworld.com/T_RAD_GRTST_HITS_S01AAC",
         "uuid": "22e94a2f-51ac-4f3b-8f65-c28446e988ca",
         "homepage": "https://totallyradio.com.au/Greatest-Hits/",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -954,7 +1424,8 @@
         "url": "http://stream.c9.fr/c9radio-192.mp3.m3u",
         "uuid": "df73c0cc-c668-4db8-aae5-e1fc0a077ca0",
         "homepage": "https://www.c9.fr/",
-        "tags": "pop rock"
+        "tags": "pop rock",
+        "favicon": "https://www.c9.fr/favicon.ico"
     },
     {
         "inc": true,
@@ -965,7 +1436,8 @@
         "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_89FM_ADP.aac?dist=site-89fm",
         "uuid": "65908a60-3a4c-4d8c-b66c-d8eb96faefc6",
         "homepage": "https://www.radiorock.com.br/",
-        "tags": "alternative rock,rock"
+        "tags": "alternative rock,rock",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -976,7 +1448,8 @@
         "url": "https://stream01.truckersradio.nl//radio//8010//stream.mp3?1614707357",
         "uuid": "717b3f02-eaf6-4bb9-8d5d-6e51c33bdb0e",
         "homepage": "https://truckersradio.nl/",
-        "tags": "country,dance,funny,mix,pop,talk,top 40,truckerhits"
+        "tags": "country,dance,funny,mix,pop,talk,top 40,truckerhits",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -987,7 +1460,8 @@
         "url": "http://www.radiomonique.nl/winamp_RM_320.pls",
         "uuid": "82f7a749-68a4-11e8-b15b-52543be04c81",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -998,7 +1472,8 @@
         "url": "https://listen.radioking.com/radio/273427/stream/318916",
         "uuid": "f34f75c1-2e52-409d-8753-5afda5d4b043",
         "homepage": "https://lebonmix.radio/",
-        "tags": "electronic"
+        "tags": "electronic",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1009,7 +1484,8 @@
         "url": "http://185.33.21.112:80/top40_128",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1020,7 +1496,8 @@
         "url": "http://185.33.21.112:80/x_128",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1031,7 +1508,8 @@
         "url": "https://dinoradio.level27.be/",
         "uuid": "4d951bba-4b72-42ec-a610-893862d8211d",
         "homepage": "https://www.dinoradio.be/",
-        "tags": "golden oldies,goldies,oldies"
+        "tags": "golden oldies,goldies,oldies",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1042,7 +1520,8 @@
         "url": "http://audiostream.rtl.be/mint",
         "uuid": "960c569c-0601-11e8-ae97-52543be04c81",
         "homepage": "http://player.radiocontact.be/mint/player/",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1053,7 +1532,44 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Roger Radio",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "http://rogerradio.theholyroger.com/live",
+        "uuid": "680021a3-8477-45c7-9d3a-8731b9477792",
+        "homepage": "https://radio.theholyroger.com/",
+        "tags": "bitcoin,chiptunes,classical,community,cryptocurrency,drum & bass,electronic,funk,hip-hop,jazz,metal,phonk,request line,roger",
+        "favicon": "https://theholyroger.com/uploads/site_favicon.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Heavy1",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://listen.radioking.com/radio/119653/stream/159127",
+        "uuid": "e389696c-5217-43d3-aa41-bc3c5b52f049",
+        "homepage": "https://www.heavy1.radio/",
+        "tags": "hard rock,heavy metal,rock",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "France Metal",
+        "bitrate": "0320",
+        "codec": "MP3",
+        "url": "https://manager5.streamradio.fr:1865/stream",
+        "uuid": "13e23984-0151-4adf-9c12-eaa16f44afcd",
+        "homepage": "https://france-metal-radio.com/index",
+        "tags": "metal",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1064,32 +1580,71 @@
         "url": "http://i6.streams.ovh:16036/stream",
         "uuid": "52d39f8a-3288-47e1-8c07-a7d629ea7c98",
         "homepage": "https://www.metalcity.gr/?m=1",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
         "name": "Megarock Radio 320k",
-        "bitrate": "320",
+        "bitrate": "128",
         "codec": "MP3",
         "url": "https://stream3.megarockradio.net:80/",
         "uuid": "e5b81ad3-bb7d-41a5-a3d3-0f715434778e",
         "homepage": "https://megarockradio.net/",
-        "tags": "classic rock,hard rock,metal,requests"
+        "tags": "classic rock,hard rock,metal,requests",
+        "favicon": "https://megarockradio.net/wp-content/uploads/2021/10/cropped-1f918-1f3fb-180x180.png"
     },
     {
-        "inc": false,
+        "inc": true,
+        "play": false,
+        "name": "The Metal Plague",
+        "bitrate": "256",
+        "codec": "MP3",
+        "url": "http://46.4.40.246:8386/stream",
+        "uuid": "",
+        "homepage": "",
+        "tags": "undefined",
+        "favicon": ""
+    },
+    {
+        "inc": true,
         "play": false,
         "name": "P11 Bandit",
-        "bitrate": "191",
+        "bitrate": "192",
         "codec": "AAC",
         "url": "https://p11.p4groupaudio.com/P11_AH",
         "uuid": "a1e0f382-13c0-4946-b749-c8d6fb052678",
         "homepage": "https://www.p4.no/lyttesenter/?fbclid=IwAR16g3IasYLWw5RkXav5KrV_vWK3wb5xpIHNGytn20fQ3qTATiGoRcQ77dc",
-        "tags": "hard rock,heavy metal,metal"
+        "tags": "hard rock,heavy metal,metal",
+        "favicon": ""
     },
     {
-        "inc": false,
+        "inc": true,
+        "play": false,
+        "name": "CLASSIC METAL RADIO (classicmetalradio.net)",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "https://hazel.torontocast.com:2280/",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Thunder Radio Cologne",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://192.227.85.169:5251/stream",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
         "play": false,
         "name": "TheBlast.fm",
         "bitrate": "128",
@@ -1097,7 +1652,32 @@
         "url": "https://theblast-stream.theblast.fm/128",
         "uuid": "a76bb03c-b3f2-11ea-993a-52543be04c81",
         "homepage": "https://theblast.fm/",
-        "tags": "alternative,christian,christian rock,metal,rock"
+        "tags": "alternative,christian,christian rock,metal,rock",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "100 GREATEST HEAVY METAL",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "https://62.171.171.202:8110/radio.mp3",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Metalzone.GR Radio",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://46.4.48.7:8282/stream",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1108,7 +1688,80 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Caprice - Cyberpunk",
+        "bitrate": "320",
+        "codec": "AAC+",
+        "url": "http://79.120.12.130:8004/cyberpunk",
+        "uuid": "4760f774-8aaf-4c35-b0a4-67026b0d32c0",
+        "homepage": "http://www.radcap.ru/cyberpunk.html",
+        "tags": "cyberpunk",
+        "favicon": "http://radcap.ru/stylegraf/cyberpunk-c.jpg"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Caprice - Crust Punk",
+        "bitrate": "320",
+        "codec": "AAC+",
+        "url": "http://79.120.39.202:9123/",
+        "uuid": "6397f250-256e-11e8-91bf-52543be04c81",
+        "homepage": "http://radcap.ru/crust.html",
+        "tags": "crust,punk",
+        "favicon": "http://radcap.ru/apple-touch-icon.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "PunkRockRadio.ca",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "https://stream.radio.co/s904013bb1/listen",
+        "uuid": "6c3a79d6-2315-44c8-81df-f8aa5a7458cd",
+        "homepage": "https://www.punkrockradio.ca/",
+        "tags": "post-punk,punk,quebec",
+        "favicon": "https://cdn2.editmysite.com/images/site/footer/og-image-placeholder-blank.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Punkrockers Radio",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "http://stream.punkrockers-radio.de:8000/mp3",
+        "uuid": "a1f18162-da2b-419e-9e86-72a81e508a40",
+        "homepage": "http://punkrockers-radio.de/",
+        "tags": "post-hardcore,punk,ska",
+        "favicon": "https://www.punkrockers-radio.de/img/punkrockers-radio_play-button.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "PUNK IRRATIA",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "https://punkirratia.net:8443/punk",
+        "uuid": "964165a2-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://punkirratia.net",
+        "tags": "punk,anarcho-punk,hardcore",
+        "favicon": "https://punkirratia.net:8443/punkirratia.jpg"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "punk fm",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "http://carol.epichosts.co.uk:8430/autodj.mp3",
+        "uuid": "f3c6ab3e-bbe1-4752-a48b-e93b3f2b08fa",
+        "homepage": "https://www.punkfm.co.uk/",
+        "tags": "punk",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1119,7 +1772,32 @@
         "url": "http://85.234.59.191:8000/stream",
         "uuid": "f3638b19-e63a-4d0b-b116-f1e834e5479c",
         "homepage": "https://retrowave.one/",
-        "tags": "80s,cyberpunk,darksynth,darkwave,electronic,outrun,retrowave,sovietwave,synthpop,synthwave,various"
+        "tags": "80s,cyberpunk,darksynth,darkwave,electronic,outrun,retrowave,sovietwave,synthpop,synthwave,various",
+        "favicon": "https://retrowave.one/favicon.ico"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Ska",
+        "bitrate": "",
+        "codec": "",
+        "url": "",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Caprice - Ska",
+        "bitrate": "320",
+        "codec": "AAC+",
+        "url": "http://79.111.119.111:9043/",
+        "uuid": "960d297c-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://radcap.ru/ska.html",
+        "tags": "ska",
+        "favicon": "http://radcap.ru/apple-touch-icon.png"
     },
     {
         "inc": true,
@@ -1130,7 +1808,20 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "SomaFM | Heavyweight Reggae | 80 aac",
+        "bitrate": "80",
+        "codec": "AAC+",
+        "url": "https://somafm.com/reggae80.pls",
+        "uuid": "3e55abce-a772-448a-91a1-ce29dd65abca",
+        "homepage": "https://somafm.com/reggae/",
+        "tags": "reggae,rocksteady,ska",
+        "favicon": "https://somafm.com/img3/reggae400.png"
     },
     {
         "inc": true,
@@ -1141,7 +1832,8 @@
         "url": "http://strm112.1.fm/reggae_mobile_mp3",
         "uuid": "960f2d97-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
-        "tags": "reggae"
+        "tags": "reggae",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1152,7 +1844,92 @@
         "url": "http://144.217.129.213:9878/stream",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Chillout",
+        "bitrate": "",
+        "codec": "",
+        "url": "",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "House Fusion Radio (UK)",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "https://housefusionradiouk.out.airtime.pro/housefusionradiouk_a",
+        "uuid": "b6d47672-aa01-4363-bd26-32f0e8d9570e",
+        "homepage": "https://house-fusion-radio5.webnode.co.uk/",
+        "tags": "chillout,deep,disco,funky,house,old skool,progressive,techno",
+        "favicon": "https://a9529f376f.cbaul-cdnwnd.com/b98b49fd8fd891343f258e40ce0544f4/200000038-135391353b/450/House%20Fusion%201.jpg"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Eldo Radio Chill",
+        "bitrate": "256",
+        "codec": "AAC",
+        "url": "https://stream.rtl.lu/live/hls/radio/eldochill",
+        "uuid": "f5e8a89f-4016-4f5f-baca-aeb74aad668a",
+        "homepage": "https://www.eldo.lu/radio/livestream/chill",
+        "tags": "chillout",
+        "favicon": "https://www.eldo.lu/assets/images/favicon-eldo/favicon-120.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "EL-Stacja HQ",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "http://radio.el-stacja.pl:8000/elstacja320mp3",
+        "uuid": "33d39331-3f06-4350-90d6-9f1b2c526046",
+        "homepage": "https://el-stacja.pl/",
+        "tags": "chillout,electronic,electronica",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Disco Cafe",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://azuracast.streams.ovh:8260/radio.mp3",
+        "uuid": "29995961-137e-4adb-bad1-71eaa989a598",
+        "homepage": "https://www.discocafe.eu/",
+        "tags": "chillout,disco,lounge,oldies",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Chill Out Zone",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "http://air.chillout.zone:8000/radio",
+        "uuid": "9619b5e8-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://chillout.zone/",
+        "tags": "320kbps,ambient,breaks,chillout,psychill",
+        "favicon": "http://static.tumblr.com/5f6637bbc70ea25ad9381fb8a45dd96b/iggknak/AAFnk62e5/tumblr_static_3ofi0bchjmskgwswc0g8go4cw.jpg"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "1.FM - Chillout Lounge Radio",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "http://strm112.1.fm/chilloutlounge_mobile_mp3",
+        "uuid": "961fb4b2-0601-11e8-ae97-52543be04c81",
+        "homepage": "https://www.1.fm/",
+        "tags": "chillout,lounge",
+        "favicon": "http://liveradio.de/media/cache/station_detail/18f08aee-f06b-4965-b607-3f25a581619c.jpg"
     },
     {
         "inc": true,
@@ -1163,7 +1940,44 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Somafm - Synphaera (64k aac)",
+        "bitrate": "64",
+        "codec": "AAC+",
+        "url": "https://somafm.com/synphaera64.pls",
+        "uuid": "411ba841-c1c8-497a-a3f8-00d8fe0ef89c",
+        "homepage": "https://somafm.com/synphaera",
+        "tags": "electronic",
+        "favicon": "https://somafm.com/img3/synphaera400.jpg"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Dance Wave Retro! (FLAC)",
+        "bitrate": "768",
+        "codec": "FLAC",
+        "url": "http://retro.dancewave.online/retrodance.flac.ogg",
+        "uuid": "",
+        "homepage": "",
+        "tags": "dance,techno",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Dance Wave! (FLAC)",
+        "bitrate": "768",
+        "codec": "OGG",
+        "url": "http://dancewave.online/dance.flac.ogg",
+        "uuid": "540bd58d-1d2f-4cae-a5b1-414b40ce3f3f",
+        "homepage": "https://dancewave.online/",
+        "tags": "",
+        "favicon": "http://dancewave.online/dw_logo.png"
     },
     {
         "inc": true,
@@ -1174,7 +1988,32 @@
         "url": "http://secure.live-streams.nl/flac.flac",
         "uuid": "af6f51b1-0ca9-11ea-a87e-52543be04c81",
         "homepage": "https://www.intenseradio.net/",
-        "tags": "dance,deep house,flac,hard techno,techno,trance"
+        "tags": "dance,deep house,flac,hard techno,techno,trance",
+        "favicon": "https://www.intenseradio.net/wp-content/uploads/fbrfg/apple-touch-icon.png?v=gaek7lvrgd"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "DeepeRadioStation",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "http://188.134.9.134:8000/",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Eurodance 90",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "https://stream-eurodance90.fr/radio/8000/128.mp3",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1185,7 +2024,8 @@
         "url": "http://cmr-hosting.com:8030/stream?type=http&nocache=773949",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1196,7 +2036,8 @@
         "url": "https://radiobossrelay.radioca.st/stream",
         "uuid": "61bdc00f-5a55-4e0b-a841-7747d66fa7dd",
         "homepage": "https://londonmusicradio.com/",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1207,7 +2048,8 @@
         "url": "https://larry.torontocast.com:2095/stream",
         "uuid": "3808d861-d348-44ae-8844-589ba59bd4e5",
         "homepage": "https://www.nordiclodgeradio.com/",
-        "tags": "ambient,chillout,electronic,lounge,relax"
+        "tags": "ambient,chillout,electronic,lounge,relax",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1218,7 +2060,8 @@
         "url": "https://yleradiolive.akamaized.net/hls/live/2027674/in-YleX/master.m3u8",
         "uuid": "1f9f88c2-f9a3-4554-bee2-0afcf2483aa3",
         "homepage": "https://areena.yle.fi/audio/ohjelmat/ylex",
-        "tags": "dance,pop,rap,rock"
+        "tags": "dance,pop,rap,rock",
+        "favicon": "https://images.cdn.yle.fi/f_auto,w_48,h_48,dpr_4.0/v1496664710/yle-areena-app.png"
     },
     {
         "inc": true,
@@ -1229,18 +2072,20 @@
         "url": "http://radiodeepunderground.com:8000/rdu.mp3",
         "uuid": "dd2cc3a5-278e-4c8e-972a-a239a86c6a81",
         "homepage": "http://radiodeepunderground.com/",
-        "tags": ""
+        "tags": "",
+        "favicon": "https://cdn-profiles.tunein.com/s291934/images/logog.jpg?t=153901"
     },
     {
         "inc": false,
         "play": false,
         "name": "B4B Deep House",
-        "bitrate": "192",
+        "bitrate": "128",
         "codec": "MP3",
         "url": "http://www.b4bradio.com/flux/deep-house.m3u",
         "uuid": "a9183d95-50d6-11ea-b877-52543be04c81",
         "homepage": "https://www.b4bradio.com/",
-        "tags": "dance,deep house"
+        "tags": "dance,deep house",
+        "favicon": "https://www.b4bradio.com/images/favicon.png"
     },
     {
         "inc": false,
@@ -1251,7 +2096,8 @@
         "url": "http://stream.rtsfm.com/rts-avignon",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": false,
@@ -1262,7 +2108,8 @@
         "url": "http://airtime.radiocampusavignon.fr:8000/live",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1273,18 +2120,20 @@
         "url": "http://188.165.206.81:8010/stream",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
         "name": "Dimensione Mix",
-        "bitrate": "128",
+        "bitrate": "192",
         "codec": "MP3",
         "url": "http://igor.torontocast.com:1770/stream",
         "uuid": "9cdf8b70-b05c-4fe6-a4c2-02b3858c5044",
         "homepage": "https://radiodimensionemix.torontocast.stream/",
-        "tags": "70s,80s,90s,hits,top 100"
+        "tags": "70s,80s,90s,hits,top 100",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1295,7 +2144,8 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1306,7 +2156,8 @@
         "url": "http://www.radiofeeds.net/sharptemp.pls?station=nationradio70s.mp3",
         "uuid": "badbee09-b4ed-4059-a7e7-7fd518a808e4",
         "homepage": "https://nationradio.uk/",
-        "tags": "70's"
+        "tags": "70's",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1317,7 +2168,8 @@
         "url": "https://icecast.omroep.nl/radio5-bb-mp3",
         "uuid": "46e55863-cef7-4f50-954e-3fa7feede49f",
         "homepage": "https://www.nporadio5.nl/",
-        "tags": "60's,70's,80's,evergreens"
+        "tags": "60's,70's,80's,evergreens",
+        "favicon": "https://www.nporadio5.nl/apple-touch-icon.png"
     },
     {
         "inc": true,
@@ -1328,18 +2180,56 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Oxygen The 80s Hits",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://oxygenmusic.hu:8443/oxygenthe80shits",
+        "uuid": "bc910109-8c16-45dd-a337-83b631b51888",
+        "homepage": "https://oxygenmusic.hu/",
+        "tags": "80's,80s,classic hits",
+        "favicon": "https://oxygenmusic.hu/logo192.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Sfliny Alternative 80's",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "http://ec4.yesstreaming.net:2180/",
+        "uuid": "0834f9c1-3d08-480c-b6bd-5b335341e9f6",
+        "homepage": "http://www.sfliny.com/",
+        "tags": "80's,new wave",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "YURADIO80",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://fra-pioneer01.dedicateware.com:1110/",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
         "name": "Magic radio (Flac)",
-        "bitrate": "1500",
+        "bitrate": "128",
         "codec": "OGG",
         "url": "http://mp3.magic-radio.net/flac.m3u",
         "uuid": "0662acad-2d68-11ea-aa0c-52543be04c81",
         "homepage": "https://magic-radio.net/",
-        "tags": "80s,flac,sanspub"
+        "tags": "80s,flac,sanspub",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1350,7 +2240,8 @@
         "url": "http://172.93.237.106:8155/live",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1361,7 +2252,8 @@
         "url": "https://s2.ssl-stream.com:8050/256.mp3",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1372,7 +2264,8 @@
         "url": "https://nr8.newradio.it:19574/stream",
         "uuid": "44c862a3-27e7-4d88-be66-4c70a642bb38",
         "homepage": "https://www.70-80.it/",
-        "tags": "320 kbps,70,70 80 hits,70 80 hits hq,70 music,70-80,70-80 hits,80,80 music,high quality audio,hq"
+        "tags": "320 kbps,70,70 80 hits,70 80 hits hq,70 music,70-80,70-80 hits,80,80 music,high quality audio,hq",
+        "favicon": "https://www.70-80.it/favicon.ico"
     },
     {
         "inc": true,
@@ -1383,7 +2276,8 @@
         "url": "http://nr11.newradio.it:9208/stream",
         "uuid": "9640d060-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.radiottanta.com/",
-        "tags": "70s,80s,90s,classic hits,rovereto"
+        "tags": "70s,80s,90s,classic hits,rovereto",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1394,7 +2288,8 @@
         "url": "http://strm112.1.fm/80s_90s_mobile_mp3",
         "uuid": "9626b3f8-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
-        "tags": "80s,european music"
+        "tags": "80s,european music",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1405,7 +2300,8 @@
         "url": "https://stream.0nlineradio.com/80s-rock?ref=radiobrowser",
         "uuid": "99a0a3ef-d6b6-42f8-bad8-63132543c363",
         "homepage": "https://0nlineradio.com/",
-        "tags": "1980s,80er,80s,80s rock,classic rock,classic rock oldies,rock"
+        "tags": "1980s,80er,80s,80s rock,classic rock,classic rock oldies,rock",
+        "favicon": "https://i.ibb.co/31QbY3f/80s-rock.jpg"
     },
     {
         "inc": true,
@@ -1416,7 +2312,8 @@
         "url": "https://80s-high.rautemusik.fm/?ref=radiobrowser",
         "uuid": "0507b8b1-4a4d-42cd-872f-fd6f6c64712f",
         "homepage": "https://www.rm.fm/80s",
-        "tags": "1980s,80,80's,80er,80s,golden oldies,goldies,oldies"
+        "tags": "1980s,80,80's,80er,80s,golden oldies,goldies,oldies",
+        "favicon": "https://i.ibb.co/TbS5mh3/80s.jpg"
     },
     {
         "inc": true,
@@ -1427,7 +2324,8 @@
         "url": "http://streams.80s80s.de/mix/mp3-192/streams.80s80s.de/play.pls",
         "uuid": "905d8810-1c82-4e21-b6cc-2b105e37bffa",
         "homepage": "https://www.80s80s.de/",
-        "tags": "80s,mix"
+        "tags": "80s,mix",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1438,7 +2336,8 @@
         "url": "http://strm112.1.fm/magic80_mobile_mp3",
         "uuid": "962a885b-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
-        "tags": "80s"
+        "tags": "80s",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1449,7 +2348,8 @@
         "url": "http://vps.radioduepuntozero.it/stream.mp3",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1460,7 +2360,8 @@
         "url": "https://samcloud.spacial.com/api/listen?sid=111415&rid=194939&f=mp3,any&br=128000,any&m=sc",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1471,7 +2372,8 @@
         "url": "http://stream.laut.fm/80sexitos",
         "uuid": "9d5a5d73-f563-4f60-934d-dc9452e2ea0a",
         "homepage": "https://laut.fm/80sexitos",
-        "tags": "70s,80s,90s,disco,pop,rock,romantic"
+        "tags": "70s,80s,90s,disco,pop,rock,romantic",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1482,18 +2384,8 @@
         "url": "http://158.69.114.190:8065/stream",
         "uuid": "",
         "homepage": "",
-        "tags": ""
-    },
-    {
-        "inc": true,
-        "play": false,
-        "name": "Ubuntu FM",
-        "bitrate": "128",
-        "codec": "MP3",
-        "url": "http://listen.shoutcast.com/ubuntufm",
-        "uuid": "",
-        "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1504,7 +2396,8 @@
         "url": "https://0n-80s.radionetz.de/0n-80s.aac",
         "uuid": "f3842846-f2c0-11e8-a471-52543be04c81",
         "homepage": "http://www.0nradio.com",
-        "tags": "80s,80er,oldies,pop"
+        "tags": "80s,80er,oldies,pop",
+        "favicon": "https://www.0nradio.com/logos/0n-80s_600x600.jpg"
     },
     {
         "inc": true,
@@ -1515,7 +2408,8 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1526,7 +2420,8 @@
         "url": "http://streams.90s90s.de/inthemix/mp3-192/streams.90s90s.de/play.m3u",
         "uuid": "b907e678-48a6-4b39-9883-9e1bbabfcda5",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1537,29 +2432,44 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio ItaloPower!",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "http://stream.radioitalopower.com:10018/italopower",
+        "uuid": "6ffa9e34-e9c0-4f60-896f-c1426c3e5b03",
+        "homepage": "https://radioitalopower.com/",
+        "tags": "",
+        "favicon": "https://radioitalopower.com/assets/img/apple-touch-icon.png"
     },
     {
         "inc": true,
         "play": false,
         "name": "Radio San Marino",
-        "bitrate": "217",
+        "bitrate": "218",
         "codec": "AAC",
         "url": "https://d18ufyp3q60j7u.cloudfront.net/radio-ch01/radio-ch01/playlist.m3u8",
         "uuid": "0f1d84d0-7370-11e9-af37-52543be04c81",
         "homepage": "https://www.smtvsanmarino.sm/radio/ascolta-radio-san-marino",
-        "tags": "città di san marino,pop,top 40"
+        "tags": "città di san marino,pop,top 40",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
         "name": "Radio Roma",
-        "bitrate": "1485",
+        "bitrate": "1253",
         "codec": "AAC",
         "url": "https://585b674743bbb.streamlock.net/9044/9044/playlist.m3u8",
         "uuid": "2a28487e-19fb-4ca2-9b74-43fa02e983a7",
         "homepage": "https://www.radioroma.it/",
-        "tags": "pop,roma"
+        "tags": "pop,roma",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1570,7 +2480,8 @@
         "url": "https://nl1.streamingpulse.com/ssl/radiorougeitaly",
         "uuid": "07ee48b6-cd55-4557-b569-8b717841b2e9",
         "homepage": "https://radiorouge.com/",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1581,7 +2492,8 @@
         "url": "http://62.210.131.27:8075/stream.m3u",
         "uuid": "c6fbb5a0-00a3-11ea-bbf2-52543be04c81",
         "homepage": "http://www.topitalia.fr/",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1592,7 +2504,8 @@
         "url": "https://gmusto3.radioca.st/stream",
         "uuid": "0f5f71e2-ee63-4054-9d0d-18f2e106b37d",
         "homepage": "https://www.radioenergy.to/",
-        "tags": "70s,80s,90s,classic hits,classic rock,disco,funk,oldies,pop,pop rock,rock,soul"
+        "tags": "70s,80s,90s,classic hits,classic rock,disco,funk,oldies,pop,pop rock,rock,soul",
+        "favicon": "https://www.radioenergy.to/favicon.ico"
     },
     {
         "inc": true,
@@ -1603,7 +2516,8 @@
         "url": "http://strm112.1.fm/italiaonair_mobile_mp3",
         "uuid": "962a9277-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
-        "tags": "italian pop"
+        "tags": "italian pop",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1614,7 +2528,8 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1625,7 +2540,8 @@
         "url": "http://jenny.torontocast.com:8094/Stream-HD",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1636,7 +2552,8 @@
         "url": "http://hazel.torontocast.com:2920/",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1647,7 +2564,8 @@
         "url": "https://radio10.pro-fhi.net/live/WitchesRadio",
         "uuid": "42cd283f-05fd-416a-ad66-bceb3ec09cac",
         "homepage": "https://witchesradio.fr/",
-        "tags": "ambiant,celtic,new age"
+        "tags": "ambiant,celtic,new age",
+        "favicon": "https://witchesradio.fr/favicon.ico"
     },
     {
         "inc": true,
@@ -1658,18 +2576,44 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Activ radio",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "http://94.23.219.163:8000/stetienne.mp3",
+        "uuid": "9240b9fd-5a96-4aba-9404-01af5fb7ac0e",
+        "homepage": "http://www.activradio.fr/",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Paradise (320k)",
+        "bitrate": "320",
+        "codec": "AAC",
+        "url": "http://stream-uk1.radioparadise.com/aac-320",
+        "uuid": "9617a958-0601-11e8-ae97-52543be04c81",
+        "homepage": "https://www.radioparadise.com/",
+        "tags": "california,eclectic,free,internet,non-commercial,paradise,radio",
+        "favicon": "https://www.radioparadise.com/apple-touch-icon.png"
     },
     {
         "inc": true,
         "play": false,
         "name": "C Lab",
-        "bitrate": "192",
+        "bitrate": "320",
         "codec": "MP3",
         "url": "http://stream.c-lab.fr:8001/c-lab",
         "uuid": "0a0bb091-69c0-11e9-af37-52543be04c81",
         "homepage": "https://www.c-lab.fr/",
-        "tags": "electro,funk,hiphop,jazz,pop,rap,reggae,soul,world music"
+        "tags": "electro,funk,hiphop,jazz,pop,rap,reggae,soul,world music",
+        "favicon": "https://www.c-lab.fr/apple-icon-120x120.png"
     },
     {
         "inc": true,
@@ -1680,7 +2624,8 @@
         "url": "http://5.135.177.61:8000/;stream/1",
         "uuid": "9638348d-0601-11e8-ae97-52543be04c81",
         "homepage": "http://chaos-radio.fr/",
-        "tags": "music"
+        "tags": "music",
+        "favicon": "http://chaos-radio.fr/assets/icons/icon-128x128.png"
     },
     {
         "inc": true,
@@ -1691,7 +2636,8 @@
         "url": "https://121gigawattradio.tk:8000/radio.mp3",
         "uuid": "3c64d004-8a0d-4ab7-a235-49091372ea77",
         "homepage": "https://www.121gigawattradio.com/",
-        "tags": "80s rock,blues,classic hits,country,evergreen,hits,jazz,metal,movie soundtracks,old school hip hop,pop,reggae,rnb,rock,soul"
+        "tags": "80s rock,blues,classic hits,country,evergreen,hits,jazz,metal,movie soundtracks,old school hip hop,pop,reggae,rnb,rock,soul",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1702,7 +2648,8 @@
         "url": "http://mistralfmaubagne.ice.infomaniak.ch/mistralfmaubagne-128.mp3",
         "uuid": "961487e8-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.mistralfm.com/",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1713,7 +2660,8 @@
         "url": "http://radios.topymedia.com:8054/stream/;.mp3",
         "uuid": "00e280f9-3de4-4f5b-be7f-8196ae9e274e",
         "homepage": "http://www.atlantica-radio.fr/",
-        "tags": "misc"
+        "tags": "misc",
+        "favicon": "https://www.atlantica-radio.fr/storage/2017/08/cropped-logo_altantica_radio-180x180.png"
     },
     {
         "inc": true,
@@ -1724,7 +2672,8 @@
         "url": "http://stream.radioparadise.com/eclectic-320",
         "uuid": "249d01b0-f5af-11e9-bbf2-52543be04c81",
         "homepage": "https://radioparadise.com/",
-        "tags": "eclectic"
+        "tags": "eclectic",
+        "favicon": "https://radioparadise.com/apple-touch-icon.png"
     },
     {
         "inc": true,
@@ -1735,18 +2684,20 @@
         "url": "http://gr01.cdnstream.com:8060/",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
         "name": "Radio Brony (OGG)",
-        "bitrate": "192",
+        "bitrate": "0192",
         "codec": "OGG",
         "url": "https://radio.radiobrony.fr/ogg",
         "uuid": "35eab8a2-b5ad-449e-8e4d-98725ffd727d",
-        "homepage": "https://radiobrony.fr/",
-        "tags": "brony,fan music,live show,mlp,my little pony,my little pony: friendship is magic"
+        "homepage": "https://radiobrony.fr",
+        "tags": "brony,fan music,live show,mlp,my little pony,my little pony: friendship is magic",
+        "favicon": "https://radiobrony.fr/img/icons/bwavatar-details.png"
     },
     {
         "inc": true,
@@ -1757,7 +2708,20 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Accent 4",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://str0.creacast.com/accent4",
+        "uuid": "9607c7d3-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://www.accent4.com/",
+        "tags": "",
+        "favicon": "https://www.accent4.com/wp-content/uploads/2019/07/cropped-logo-white-180x180.png"
     },
     {
         "inc": true,
@@ -1768,7 +2732,8 @@
         "url": "https://stream.retetoscanaclassica.it:8443/source",
         "uuid": "eeb2f786-0868-42ec-9087-54ab82474347",
         "homepage": "https://retetoscanaclassica.it/",
-        "tags": "classical"
+        "tags": "classical",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1779,7 +2744,8 @@
         "url": "http://direct.francemusique.fr/live/francemusiquelevenementielle-hifi.mp3",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1790,7 +2756,932 @@
         "url": "http://stream.wqxr.org/wqxr",
         "uuid": "a2bd7f10-4831-416a-939c-729be46ec76a",
         "homepage": "https://www.wnyc.org/",
-        "tags": "classical"
+        "tags": "classical",
+        "favicon": "https://media.wnyc.org/i/300/300/c/80/1/wnyc_square_logo.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Lossless",
+        "bitrate": "",
+        "codec": "",
+        "url": "",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "The Cheese",
+        "bitrate": "768",
+        "codec": "FLAC",
+        "url": "http://thecheese.ddns.net:8004/stream",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Super Stereo 7 - Jazz",
+        "bitrate": "",
+        "codec": "OGG",
+        "url": "http://198.204.228.202:8030/flac7",
+        "uuid": "92ac2fd9-799b-413b-8a5c-6a6ea2421656",
+        "homepage": "http://www.superstereo24bit.com/",
+        "tags": "jazz",
+        "favicon": "http://www.superstereo24bit.com/img/m7.jpg"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Super Stereo 6 - Instrumental",
+        "bitrate": "",
+        "codec": "OGG",
+        "url": "http://198.204.228.202:8157/flac6",
+        "uuid": "4ce50b53-9ea5-4b37-9393-f889b058215e",
+        "homepage": "",
+        "tags": "classical",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Super Stereo 5 - Rock",
+        "bitrate": "",
+        "codec": "OGG",
+        "url": "http://198.204.228.202:8511/canal1",
+        "uuid": "dfd5bf12-1d84-430a-bb2b-1e52c714bba0",
+        "homepage": "",
+        "tags": "rock",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Super Stereo 4 - 90's",
+        "bitrate": "",
+        "codec": "OGG",
+        "url": "http://198.204.228.202:8030/flac",
+        "uuid": "cb6deb4b-dc44-4af7-97f5-2ea791f0610c",
+        "homepage": "",
+        "tags": "classical",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Super Stereo 2 - 50's 60's",
+        "bitrate": "",
+        "codec": "OGG",
+        "url": "http://198.204.228.202:8157/flac",
+        "uuid": "5f038f11-f972-4737-95d7-4cddd9cb509e",
+        "homepage": "",
+        "tags": "decades",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Super Stereo 1 - Yacht Rock",
+        "bitrate": "",
+        "codec": "OGG",
+        "url": "http://198.204.228.202:8160/flac",
+        "uuid": "3cb3a1e7-6a06-42a7-b72d-5e339cff6c35",
+        "homepage": "",
+        "tags": "classical",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Sun",
+        "bitrate": "1536",
+        "codec": "FLAC",
+        "url": "http://diffusion.lafrap.fr:8000/sun.flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Soul City FM",
+        "bitrate": "1536",
+        "codec": "FLAC",
+        "url": "http://euk-85965.eukservers.com:8000/soul",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "SomaFM",
+        "bitrate": "1024",
+        "codec": "UNKNOWN",
+        "url": "https://hls.somafm.com/hls/groovesalad/FLAC/program.m3u8",
+        "uuid": "000f6a5e-fdbb-489c-90c5-89fd4c9e1113",
+        "homepage": "https://hls.somafm.com/",
+        "tags": "ambient,chillout,downtempo,groove,lounge,sleep",
+        "favicon": "https://somafm.com/img3/groovesalad-400.jpg"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Sector Radio - Space",
+        "bitrate": "1411",
+        "codec": "OGG",
+        "url": "http://89.223.45.5:8000/space-flac",
+        "uuid": "1577922b-0dc0-11ea-a87e-52543be04c81",
+        "homepage": "http://sectorradio.ru/",
+        "tags": "electronic,relaxing",
+        "favicon": "http://sectorradio.ru/icons/progressive-128.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Sector Radio - Progressive",
+        "bitrate": "1411",
+        "codec": "OGG",
+        "url": "http://89.223.45.5:8000/progressive-flac",
+        "uuid": "964e557e-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://sectorradio.ru/",
+        "tags": "music,progressive",
+        "favicon": "http://sectorradio.ru/icons/progressive-128.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Sector Radio - Indigo",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://89.223.45.5:8000/indigo-flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Sector Radio - Classical",
+        "bitrate": "128",
+        "codec": "OGG",
+        "url": "http://89.223.45.5:8000/nota-flac",
+        "uuid": "98d1b72a-8044-11e9-aa30-52543be04c81",
+        "homepage": "http://sectorradio.ru/",
+        "tags": "classical,instrumental,lossless",
+        "favicon": "http://sectorradio.ru/icons/progressive-128.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Sector Radio - 90's",
+        "bitrate": "1411",
+        "codec": "OGG",
+        "url": "http://89.223.45.5:8000/next-flac",
+        "uuid": "9644518b-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://sectorradio.ru/",
+        "tags": "90s,music,retro",
+        "favicon": "http://sectorradio.ru/icons/progressive-128.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Sector Radio - 80's",
+        "bitrate": "1411",
+        "codec": "OGG",
+        "url": "http://89.223.45.5:8000/geny-flac",
+        "uuid": "e2e1c43b-da27-4eaf-ad6d-c4fdfad4dbe9",
+        "homepage": "",
+        "tags": "classical",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Sector Radio - 10's",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://89.223.45.5:8000/zed-flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Sanctuary Radio - Dark Electro",
+        "bitrate": "896",
+        "codec": "FLAC",
+        "url": "http://66.94.113.88:8000/ultra_hq",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Sanctuary Radio - Club Mix",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://66.94.113.88:8000/clubmix_ultra_hq",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Sanctuary Radio - 80's Alternative",
+        "bitrate": "1024",
+        "codec": "FLAC",
+        "url": "http://66.94.113.88:8000/retro_ultra_hq",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Rondo Klasu Pro",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://rondo.iradio.fi:8000/klasupro.flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Rondo Klasu",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://iradio.fi:8000/klasu.flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Riverside Radio",
+        "bitrate": "2000",
+        "codec": "OGG",
+        "url": "https://stream.and-stuff.nl:8443/riverside",
+        "uuid": "eda5f188-318e-4246-8c83-031ace70827a",
+        "homepage": "",
+        "tags": "misc",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Paradise - Rock",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://icy-8.radioparadise.com/rock-flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Paradise - Mellow",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://icy-6.radioparadise.com/mellow-flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Paradise - Eclectic",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://icy-6.radioparadise.com/eclectic-flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Paradise",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://icy-8.radioparadise.com/flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Calico",
+        "bitrate": "",
+        "codec": "OGG",
+        "url": "https://radio3.radio-calico.com:8443/calico",
+        "uuid": "0a55298e-7589-4dde-9c85-b0960c87193f",
+        "homepage": "https://radio-calico.com/",
+        "tags": "pop,rock",
+        "favicon": "https://radio-calico.com/favicon.ico"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Blues",
+        "bitrate": "1500",
+        "codec": "OGG",
+        "url": "http://streams.radiomast.io/radioblues-flac",
+        "uuid": "ef1bebe7-2dd5-4acc-bd56-7853629d0050",
+        "homepage": "",
+        "tags": "jazz",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Audiomastering",
+        "bitrate": "320",
+        "codec": "FLAC",
+        "url": "http://radio.audiomastering.lt:8000/pure",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio 2.0",
+        "bitrate": "1024",
+        "codec": "FLAC",
+        "url": "https://vps.radioduepuntozero.it/stream.ogg",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "PiratenKanon.FM",
+        "bitrate": "1792",
+        "codec": "",
+        "url": "http://radio.stream-online.eu:10900/flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Pi-ano",
+        "bitrate": "640",
+        "codec": "FLAC",
+        "url": "http://stream.p-node.org/piano",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "OpenSky Radio",
+        "bitrate": "",
+        "codec": "",
+        "url": "https://audio.opensky.radio:8082/flac?_res_tag_=audio",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Open Broadcast",
+        "bitrate": "",
+        "codec": "OGG",
+        "url": "http://stream.openbroadcast.org/openbroadcast.flac",
+        "uuid": "08502b08-ed8b-482a-9047-d0d64fc481d4",
+        "homepage": "https://www.openbroadcast.ch/",
+        "tags": "flac,music,open",
+        "favicon": "https://www.openbroadcast.ch/static/asset/img/artwork/touch-icon-120x120.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Naim Radio - Jazz",
+        "bitrate": "128",
+        "codec": "OGG",
+        "url": "http://mscp3.live-streams.nl:8340/jazz-flac.flac",
+        "uuid": "d8dc960b-20d2-45a1-96cf-a79af5c64a61",
+        "homepage": "https://www.naimaudio.com/",
+        "tags": "flac,jazz",
+        "favicon": "https://www.naimaudio.com/apple-touch-icon-120x120.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Naim Radio - Classical",
+        "bitrate": "128",
+        "codec": "OGG",
+        "url": "http://mscp3.live-streams.nl:8250/class-flac.flac",
+        "uuid": "ddde79f4-389a-4055-b2e4-90c1dbb73084",
+        "homepage": "https://www.naimaudio.com/",
+        "tags": "flac",
+        "favicon": "https://www.naimaudio.com/apple-touch-icon-120x120.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Naim Radio",
+        "bitrate": "160",
+        "codec": "OGG",
+        "url": "http://mscp3.live-streams.nl:8360/flac.flac",
+        "uuid": "608a3ea6-953a-4345-bb30-9fe57cccd6f9",
+        "homepage": "http://naimradio.com/",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Mother Earth Radio",
+        "bitrate": "",
+        "codec": "OGG",
+        "url": "https://motherearth.streamserver24.com/motherearth",
+        "uuid": "af2fd7bb-4d49-4d5a-8df0-ae231c430cea",
+        "homepage": "http://motherearthradio.de",
+        "tags": "classical",
+        "favicon": "https://motherearthradio.de/images/mergoldcube512.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Mother Earth Klassik",
+        "bitrate": "",
+        "codec": "OGG",
+        "url": "https://motherearth.streamserver24.com/motherearth",
+        "uuid": "af2fd7bb-4d49-4d5a-8df0-ae231c430cea",
+        "homepage": "http://motherearthradio.de",
+        "tags": "classical",
+        "favicon": "https://motherearthradio.de/images/mergoldcube512.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Mother Earth Instrumental",
+        "bitrate": "2048",
+        "codec": "FLAC",
+        "url": "http://server9.streamserver24.com:18920/motherearth.instrumental",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "MaXXima",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://maxxima.mine.nu:8000/maxx.ogg",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Max Radio Society - Uptown Radio",
+        "bitrate": "",
+        "codec": "",
+        "url": "https://www.maxradio.ca/UHD/UptownRadio/FLAC/Uptown.m3u8",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Max Radio Society - New West Rock",
+        "bitrate": "",
+        "codec": "",
+        "url": "https://www.maxradio.ca/UHD/NewWestRock/FLAC/NewWestRock.m3u8",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Max Radio Society - Max Radio",
+        "bitrate": "",
+        "codec": "",
+        "url": "https://www.maxradio.ca/UHD/MaxRadio/FLAC/Max.m3u8",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Max Radio Society - LG73",
+        "bitrate": "",
+        "codec": "",
+        "url": "https://www.maxradio.ca/UHD/LG73/FLAC/LG73.m3u8",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Magic Radio",
+        "bitrate": "128",
+        "codec": "OGG",
+        "url": "http://mp3.magic-radio.net/flac",
+        "uuid": "bfdf3bab-6086-4f8a-bca8-edf60b1ec1b8",
+        "homepage": "",
+        "tags": "misc",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Le Son Parisien",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://stream.lesonparisien.com/live.flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "LapFox Radio",
+        "bitrate": "",
+        "codec": "OGG",
+        "url": "https://radio.lapfoxradio.com/radio/8000/stream-flac.flac",
+        "uuid": "0816a06c-a7e9-4f3c-9708-2682485f7a79",
+        "homepage": "https://lapfoxradio.com/",
+        "tags": "electronic,furry",
+        "favicon": "https://lapfoxradio.com/lapfox-radio-icon-black.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "La SuperSonica",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://c11.radioboss.fm:8093/stream",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "La Radio de la Mer",
+        "bitrate": "",
+        "codec": "",
+        "url": "https://streaming.lamer.live/laradiodelamer-uhd.flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "JBRadio2",
+        "bitrate": "",
+        "codec": "OGG",
+        "url": "https://maggie.torontocast.com:8076/flac",
+        "uuid": "b8c3a07d-f958-473e-b787-110eb517db0c",
+        "homepage": "https://jb-radio.net/",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Intense Radio",
+        "bitrate": "",
+        "codec": "",
+        "url": "https://secure.live-streams.nl/flac.flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Insanity Radio",
+        "bitrate": "",
+        "codec": "",
+        "url": "https://stream.cor.insanityradio.com/insanity_unprocessed.flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Hi Online",
+        "bitrate": "128",
+        "codec": "OGG",
+        "url": "http://mscp2.live-streams.nl:8100/flac.flac",
+        "uuid": "aece9305-b6da-46af-a565-bd992a196726",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Hard Dance Radio - Scooter",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://harddanceradio.ddns.is74.ru:9000/scooter.ogg",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Hard Dance Radio - Russian",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://harddanceradio.ddns.is74.ru:9000/russian.ogg",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Hard Dance Radio - Lounge",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://harddanceradio.ddns.is74.ru:9000/lounge.ogg",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Hard Dance Radio - Hard Dance",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://harddanceradio.ddns.is74.ru:9000/hard_dance.ogg",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Hard Dance Radio - Happy Hardcore",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://harddanceradio.ddns.is74.ru:9000/happyhardcore.ogg",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Hard Dance Radio - Eurodisco",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://harddanceradio.ddns.is74.ru:9000/eurodisco.ogg",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Hard Dance Radio - Eurodance",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://harddanceradio.ddns.is74.ru:9000/eurodance.ogg",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Hard Dance Radio - Dance",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://harddanceradio.ddns.is74.ru:9000/dance.ogg",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "H2O Radio",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://ice2.ikoula.net-radio.fr/h2oradio.flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Frequence 3 Urban",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://ice1.ikoula.net-radio.fr/frequence3urban.flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Frequence 3 Gold",
+        "bitrate": "",
+        "codec": "",
+        "url": "http://ice1.ikoula.net-radio.fr:80/frequence3gold.flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Frequence 3",
+        "bitrate": "128",
+        "codec": "OGG",
+        "url": "http://hd.stream.frequence3.net/frequence3.flac",
+        "uuid": "c671f4a6-802b-472e-b8bd-a18f6e8d47f7",
+        "homepage": "https://www.frequence3.com/",
+        "tags": "pop",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Easy Radio",
+        "bitrate": "",
+        "codec": "",
+        "url": "https://easyradio.bg/m3u/easyradio.bg-flac.m3u",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Danubius Radio",
+        "bitrate": "",
+        "codec": "",
+        "url": "https://danubiusradio.hu/danubius_HiFi.m3u",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Chiru",
+        "bitrate": "",
+        "codec": "FLAC",
+        "url": "https://chiru.no/stream.flac",
+        "uuid": "75937095-92bb-4f6d-b09a-5c738323d4f0",
+        "homepage": "https://chiru.no/",
+        "tags": "anime,flac,j-pop,jpop",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Chill Out Zone Plus",
+        "bitrate": "",
+        "codec": "",
+        "url": "https://chillout.zone/chillout_plus",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Chill In Zone Plus",
+        "bitrate": "896",
+        "codec": "FLAC",
+        "url": "https://chillout.zone/chillin_plus",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Budapest Rock Radio",
+        "bitrate": "1024",
+        "codec": "FLAC",
+        "url": "https://s2.audiostream.hu/bdpstrock_FLAC.m3u",
+        "uuid": "",
+        "homepage": "",
+        "tags": "undefined",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "BailRigg 95.3FM",
+        "bitrate": "1024",
+        "codec": "",
+        "url": "https://bfm-stream.lancs.ac.uk/flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "95bFM",
+        "bitrate": "128",
+        "codec": "OGG",
+        "url": "http://streams.95bfm.com/stream112",
+        "uuid": "960b13e9-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://95bfm.com/",
+        "tags": "alternative,auckland,community radio,indie",
+        "favicon": "http://95bfm.com/sites/all/themes/bfm_ui/favicons/favicon-128.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "60 North Radio",
+        "bitrate": "896",
+        "codec": "",
+        "url": "http://r5.zetcast.net/flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "undefined",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1801,18 +3692,20 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
         "name": "Bird song",
-        "bitrate": "128",
+        "bitrate": "0128",
         "codec": "MP3",
         "url": "http://tx.sharp-stream.com/http_live.php?i=rspb.mp3",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1823,7 +3716,8 @@
         "url": "http://streaming-saltlakecity1.radio.co/s5c5da6a36/listen",
         "uuid": "16f7eaeb-1aa0-41b2-b4f3-66e29eb53136",
         "homepage": "",
-        "tags": "pop,rock"
+        "tags": "pop,rock",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1834,7 +3728,20 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "City Radio",
+        "bitrate": "896",
+        "codec": "FLAC",
+        "url": "http://cityradio.ddns.net:8000/cityradio48flac",
+        "uuid": "",
+        "homepage": "",
+        "tags": "undefined",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1845,18 +3752,20 @@
         "url": "http://5.39.71.159:8763/stream",
         "uuid": "2a91de8d-abf5-11e9-88f4-52543be04c81",
         "homepage": "https://atlanticradiouk.co.uk/",
-        "tags": "70s,80s,merseyside,pop,top 40,uk"
+        "tags": "70s,80s,merseyside,pop,top 40,uk",
+        "favicon": ""
     },
     {
         "inc": true,
         "play": false,
         "name": "The Oasis - Modern Easy Listening",
-        "bitrate": "192",
+        "bitrate": "0192",
         "codec": "MP3",
         "url": "http://cheetah.streemlion.com:1320/stream",
         "uuid": "47804b64-26f7-4af6-9d4c-2b0572da8c8c",
         "homepage": "https://theoasismel.com/",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1867,7 +3776,8 @@
         "url": "http://ubuntu.hbr1.com:19800/ambient.ogg",
         "uuid": "e69b1cef-99d9-11e8-a767-52543be04c81",
         "homepage": "",
-        "tags": "ambient,chill"
+        "tags": "ambient,chill",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1878,7 +3788,20 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Gensokyo Radio",
+        "bitrate": "256",
+        "codec": "MP3",
+        "url": "https://stream.gensokyoradio.net/GensokyoRadio-enhanced.m3u",
+        "uuid": "248a7684-7e28-4912-9812-efefc2bba2e1",
+        "homepage": "https://gensokyoradio.net/",
+        "tags": "anime,touhou",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1889,7 +3812,8 @@
         "url": "http://igor.torontocast.com:1710/;",
         "uuid": "54bbcba8-3e53-4d18-a387-fb8d0cd5bd64",
         "homepage": "https://asiadreamradio.torontocast.stream/stations/en/index.html",
-        "tags": "70s,80s,90s,classic hits,hits,j-pop,japanese,top 40"
+        "tags": "70s,80s,90s,classic hits,hits,j-pop,japanese,top 40",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1900,7 +3824,8 @@
         "url": "http://uknr.org:8000/",
         "uuid": "25b7f90e-d455-4981-a9f2-7a2954a96716",
         "homepage": "http://uknr.org/",
-        "tags": "misc"
+        "tags": "misc",
+        "favicon": "https://hips.hearstapps.com/digitalspyuk.cdnds.net/12/35/media_uknova_logo.jpg"
     },
     {
         "inc": true,
@@ -1911,7 +3836,8 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1919,10 +3845,95 @@
         "name": "1.FM - Destination: SPA (www.1.fm)",
         "bitrate": "320",
         "codec": "MP3",
-        "url": "http://185.33.21.112:80/spa_mobile_mp3",
+        "url": "http://185.33.21.112:80/spa_mobile_aac",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "undefined",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Peaceful Radio",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://playerservices.streamtheworld.com/pls/SAM02AAC138.pls",
+        "uuid": "964714a2-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://www.peacefulradio.info/",
+        "tags": "new age,relax",
+        "favicon": "http://www.peacefulradio.info/wp-content/uploads/2016/05/Logo-PR2v2.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "JP Zen - Jovem Pan",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://6d9a.webradio.upx.net.br:8024/stream",
+        "uuid": "eebe992f-b553-11e8-afe1-52543be04c81",
+        "homepage": "http://jovempanfm.uol.com.br/",
+        "tags": "chill,new age",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Healing Music Radio",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://us3.internet-radio.com:8169/live",
+        "uuid": "96500c2a-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://www.peteredwards.com/",
+        "tags": "ambient,cinematic,easy listening,new age",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "100 Suoni Natura e Relax",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://62.171.171.202:8180/radio.mp3",
+        "uuid": "9464f95e-03e0-4436-a743-18afa4f65955",
+        "homepage": "https://info201774.wixsite.com/100suoninaturarelax",
+        "tags": "ambient,ambient and relaxation music,ambiental,nature,new age,relax,relaxation,relaxation music,sounds of nature",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Art - Vocal New Age",
+        "bitrate": "96",
+        "codec": "MP3",
+        "url": "http://air.radioart.com/fVocal_new_age.mp3",
+        "uuid": "31a026cf-c45f-4984-8265-69eb98b86d64",
+        "homepage": "https://www.radioart.com/",
+        "tags": "music,new age,vocal",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Art - New Age",
+        "bitrate": "96",
+        "codec": "MP3",
+        "url": "http://air.radioart.com/fNew_age.mp3",
+        "uuid": "1f532046-2ea6-42ca-8298-6cd5635d7c8e",
+        "homepage": "https://www.radioart.com/",
+        "tags": "easy listening,instrumental,new age,relax",
+        "favicon": "https://www.radioart.com/templates/yootheme/cache/logo-2d9baf0b.png"
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Caprice - Meditation Music",
+        "bitrate": "48",
+        "codec": "AAC+",
+        "url": "http://79.120.77.11:8002/meditation",
+        "uuid": "bebfa334-df6f-11e9-a8ba-52543be04c81",
+        "homepage": "http://radcap.ru/meditation.html",
+        "tags": "meditation,new age,relax,yoga,zen",
+        "favicon": "http://radcap.ru/stylegraf/meditation.jpg"
     },
     {
         "inc": true,
@@ -1933,7 +3944,32 @@
         "url": "",
         "uuid": "",
         "homepage": "",
-        "tags": ""
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Ok Radio",
+        "bitrate": "128",
+        "codec": "AAC",
+        "url": "http://51.77.133.57:8054/radio.mp3",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "UbuntuFM",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "https://streaming.coollective.nl:8443/UbuntuFM",
+        "uuid": "2ad985ec-f235-4e36-b362-b3b993174b40",
+        "homepage": "https://www.ubuntu.fm/radio",
+        "tags": "afropop,afrosoul,dancehall,folk,funk,hiphop,jazz,kwaito,latin,nu-jazz,reggae,rock,soul",
+        "favicon": "https://www.ubuntu.fm/sites/default/files//favicons/apple-touch-icon.png"
     },
     {
         "inc": true,
@@ -1944,7 +3980,8 @@
         "url": "http://eu1.reliastream.com:2199/tunein/mondobon.pls",
         "uuid": "98a036f9-102a-11e9-a80b-52543be04c81",
         "homepage": "http://www.mondobongoradio.com/",
-        "tags": "world music"
+        "tags": "world music",
+        "favicon": "https://www.mondobongoradio.com/apple-touch-icon.png"
     },
     {
         "inc": true,
@@ -1955,7 +3992,8 @@
         "url": "https://stream.radioparadise.com/world-etc-320",
         "uuid": "21a282be-44f4-4b8e-aae9-b4c2041af4a5",
         "homepage": "https://radioparadise.com/",
-        "tags": "eclectic,world,world music"
+        "tags": "eclectic,world,world music",
+        "favicon": "https://radioparadise.com/apple-touch-icon.png"
     },
     {
         "inc": true,
@@ -1966,7 +4004,8 @@
         "url": "http://mediaserv38.live-streams.nl:8027/live",
         "uuid": "961be65b-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.hionline.eu/",
-        "tags": "320kbps,african,ethnic,latin,latino,reggae,world music"
+        "tags": "320kbps,african,ethnic,latin,latino,reggae,world music",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1977,7 +4016,8 @@
         "url": "http://stream.trace.tv/trace_fm_ci-midfi.aac",
         "uuid": "9622928a-0601-11e8-ae97-52543be04c81",
         "homepage": "http://trace.ci/",
-        "tags": "african music,hiphop"
+        "tags": "african music,hiphop",
+        "favicon": "https://trace.ci/wp-content/uploads/2019/11/cropped-cropped-favicon-100x100.png"
     },
     {
         "inc": true,
@@ -1988,7 +4028,8 @@
         "url": "https://c16.radioboss.fm/stream/5",
         "uuid": "c930e523-9968-48de-8698-aca66eb8f506",
         "homepage": "",
-        "tags": "world music"
+        "tags": "world music",
+        "favicon": ""
     },
     {
         "inc": true,
@@ -1999,6 +4040,19 @@
         "url": "http://abf.net-radio.fr/abfcult.mp3",
         "uuid": "917f7372-3e40-46ef-851f-57aaab2686f2",
         "homepage": "http://abf.net-radio.fr/",
-        "tags": "80s,90s,classic hits"
+        "tags": "80s,90s,classic hits",
+        "favicon": ""
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Mohawk Radio",
+        "bitrate": "20",
+        "codec": "AAC+",
+        "url": "http://playerservices.streamtheworld.com/m3u/CKONFM.m3u",
+        "uuid": "961fb975-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://www.ckonfm.com/",
+        "tags": "akwesasne,country,indigenous,mohawk",
+        "favicon": "https://upload.wikimedia.org/wikipedia/en/thumb/9/95/CKON-FM.png/200px-CKON-FM.png"
     }
 ]

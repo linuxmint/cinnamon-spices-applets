@@ -385,7 +385,7 @@ class CobiPopupMenuItem extends PopupMenu.PopupBaseMenuItem {
   }
   
   _onButtonReleaseEvent (actor, event) {
-    if (this._settings.getValue("preview-close-on-middle-click") && (event.get_state() & Clutter.ModifierType.BUTTON2_MASK)) {
+    if (this._settings.getValue("preview-close-on-middle-click") && (event.get_button() === 2)) {
       this._onClose();
       return true;
     }
@@ -1618,7 +1618,7 @@ class CobiWorkspace {
     this.actor._delegate = this;
     this.actor.set_hover(false);
     this.actor.set_track_hover(false);
-    this.actor.add_style_class_name("window-list-box");
+    this.actor.add_style_class_name("grouped-window-list-box");
     
     this.dragInProgress = false;
     

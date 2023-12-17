@@ -13,8 +13,7 @@ const { _,
         getThumbnail_gicon,
         showTooltip,
         hideTooltipIfVisible,
-        scrollToButton,
-        log} = require('./utils');
+        scrollToButton} = require('./utils');
 const SidebarPlacement = Object.freeze({ TOP: 0, BOTTOM: 1, LEFT: 2, RIGHT: 3});
 const DescriptionPlacement = Object.freeze({TOOLTIP: 0, UNDER: 1, NONE: 2});
 
@@ -217,6 +216,10 @@ class Sidebar {
         const style_class = this.appThis.settings.useBoxStyle ? 'menu-favorites-box' : '';
         this.sidebarOuterBox = new St.BoxLayout({style_class: style_class});
         this.sidebarOuterBox.add(this.sidebarScrollBox, { });
+        if (!this.appThis.settings.showSidebar) {
+            this.sidebarScrollBox.width = 0;
+            this.sidebarScrollBox.height = 0;
+        }
     }
 
     populate () {
@@ -344,7 +347,6 @@ class Sidebar {
     }
 
     scrollToQuitButton() {
-        //Scroll to quit button so that it's visible when the menu is opened.
         scrollToButton(this.items[this.items.length - 1], false);
     }
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-08 19:56+0300\n"
-"PO-Revision-Date: 2023-03-12 15:33-0300\n"
+"POT-Creation-Date: 2023-12-02 12:12+0300\n"
+"PO-Revision-Date: 2023-12-02 10:16-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -16,97 +16,109 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4\n"
 
-#: applet.js:33 applet.js:59
+#: applet.js:32 applet.js:58
 msgid "Required GTop package missing!"
 msgstr "¡Falta el paquete GTop!"
 
-#: applet.js:57
+#: applet.js:56
 msgid "Error!"
 msgstr "¡Error!"
 
-#: applet.js:62
+#: applet.js:61
+msgid "Reset Peak Temperature"
+msgstr "Restablecer la temperatura máxima"
+
+#: applet.js:64
 msgid "Clear Cache"
 msgstr "Limpiar caché"
 
-#: applet.js:156
+#: applet.js:161
 msgid "CPUs"
 msgstr "CPUs"
 
-#: applet.js:159
+#: applet.js:161
+msgid "°C max; "
+msgstr "°C max; "
+
+#: applet.js:161
+msgid "°C peak"
+msgstr "°C pico"
+
+#: applet.js:164
 msgid "Memory"
 msgstr "Memoria"
 
-#: applet.js:159
+#: applet.js:164
 msgid "GB"
 msgstr "GB"
 
-#: applet.js:159
+#: applet.js:164
 msgid "GB swap"
 msgstr "GB swap"
 
-#: applet.js:162
+#: applet.js:167
 msgid "Network"
 msgstr "Red"
 
-#: applet.js:316
+#: applet.js:321
 msgid "Core "
 msgstr "Núcleo "
 
-#: applet.js:361
+#: applet.js:366
 msgid "Used:   "
 msgstr "Usada:   "
 
-#: applet.js:362
+#: applet.js:367
 msgid "Cache:  "
 msgstr "Caché:  "
 
-#: applet.js:363
+#: applet.js:368
 msgid "Buffer: "
 msgstr "Buffer: "
 
-#: applet.js:367
+#: applet.js:372
 msgid "Swap:   "
 msgstr "Swap:   "
 
-#: applet.js:437
+#: applet.js:442
 msgid "Up:      "
 msgstr "Subida:      "
 
-#: applet.js:437 applet.js:438
+#: applet.js:442 applet.js:443
 msgid "B/s"
 msgstr "B/s"
 
-#: applet.js:438
+#: applet.js:443
 msgid "Down:    "
 msgstr "Descarga:    "
 
-#: applet.js:439
+#: applet.js:444
 msgid "Data:    "
 msgstr "Datos:    "
 
-#: applet.js:439
+#: applet.js:444
 msgid "B"
 msgstr "B"
 
-#: applet.js:443
+#: applet.js:448
 msgid "no interfaces to show"
 msgstr "no hay interfaces para mostrar"
 
-#: applet.js:448
+#: applet.js:453
 msgid "k"
 msgstr "k"
 
-#: applet.js:448
+#: applet.js:453
 msgid "M"
 msgstr "M"
 
-#: applet.js:448
+#: applet.js:453
 msgid "G"
 msgstr "G"
 
-#: applet.js:448
+#: applet.js:453
 msgid "T"
 msgstr "T"
 
@@ -215,8 +227,8 @@ msgid ""
 "Network panel section HTML style (e.g.: text-align: left; margin-left: 5px; "
 "font-size: 8pt;)"
 msgstr ""
-"Estilo HTML de la sección del panel de red (por ej: text-align: left; "
-"margin-left: 5px; font-size: 8pt;)"
+"Estilo HTML de la sección del panel de red (por ej: text-align: left; margin-"
+"left: 5px; font-size: 8pt;)"
 
 #. settings-schema.json->net_black_list->description
 msgid "Network interfaces blacklist"

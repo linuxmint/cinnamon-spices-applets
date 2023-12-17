@@ -88,7 +88,11 @@ export class UIForecasts {
 				const comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
 
 				// Day Names
-				const dayName: string = GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
+				const dayName: string = GetDayName(forecastData.date, {
+					locale: config.currentLocale,
+					showDate: config._showForecastDates,
+					tz: weather.location.timeZone
+				});
 				forecastUi.Day.actor.label = dayName;
 
 				forecastUi.Day.Hovered.Unsubscribe(this.DayHoveredCallback);

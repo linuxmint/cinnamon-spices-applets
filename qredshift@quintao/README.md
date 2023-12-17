@@ -28,7 +28,9 @@ If you want to submit some translations please make it on the original repositor
 2. Download zip from [this link](https://cinnamon-spices.linuxmint.com/files/applets/qredshift@quintao.zip) and extract .zip archive to `~/.local/share/cinnamon/applets`
     - Or automatically download it from Cinnamon Applets download tab.
 3. Enable the applet in Cinnamon settings
-4. Make sure you remove redshift-gtk `sudo apt-get remove redshift-gtk`
+4. Make sure you remove redshift-gtk: `sudo apt-get remove redshift-gtk` or in certain distros (Arch based):
+    * remove the `redshift` package, then install the `redshift-minimal` package
+    * or use this command: `which redshift-gtk && sudo chmod -x $(which redshift-gtk)`
 5. `~/.config/redshift.conf` may conflict with this applet, it is highly recommended removing it.
     - Applet will show a warning to remove it.
 6. Make sure you disable redshift service `systemctl mask --user redshift.service`

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-02 19:27+0200\n"
-"PO-Revision-Date: 2023-05-07 19:51+0200\n"
+"POT-Creation-Date: 2023-04-28 16:14+0200\n"
+"PO-Revision-Date: 2023-06-30 23:34+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -355,7 +355,7 @@ msgid "Multi-Core System Monitor Error."
 msgstr "Többmagos rendszerfigyelő hiba."
 
 #: ../3.0/applet.js:141 ../3.2/applet.js:139 ../3.4/applet.js:264
-#: ../4.0/applet.js:270
+#: ../4.0/applet.js:275
 msgid "Preferences"
 msgstr "Beállítások"
 
@@ -399,7 +399,7 @@ msgstr "/s"
 msgid "Used:"
 msgstr "Használt:"
 
-#: ../3.4/applet.js:60 ../4.0/applet.js:59
+#: ../3.4/applet.js:60 ../4.0/applet.js:64
 msgid "Dependency missing"
 msgstr "Függőség hiányzik"
 
@@ -417,7 +417,7 @@ msgstr ""
 "\tArch: libgtop\n"
 "a használathoz "
 
-#: ../4.0/applet.js:61
+#: ../4.0/applet.js:66
 msgid ""
 "Please install the GTop package\n"
 "\tUbuntu / Mint: gir1.2-gtop-2.0\n"
@@ -432,6 +432,10 @@ msgstr ""
 "\tArch: libgtop\n"
 "\topenSUSE: libgtop-devel\n"
 "a használathoz "
+
+#: ../4.0/applet.js:277
+msgid "Refresh graphs"
+msgstr "Grafikonok frissítése"
 
 #: ../4.0/prefs.js:335
 msgid "00-20"

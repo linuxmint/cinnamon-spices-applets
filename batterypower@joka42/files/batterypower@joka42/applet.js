@@ -28,6 +28,15 @@ BatteryPowerApplet.prototype = {
 		this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval', () => this.on_settings_changed(), null);
 		this.UPowerRefreshed = false;
 
+		this.batFolder = "";
+		for (let i = 0; i < 10; i++)
+		{
+			const statusFile = "/sys/class/power_supply/BAT" + i +"/status";
+			if (GLib.file_test(statusFile, 1 << 4)){
+				this.batFolder = "BAT" + i;
+			}
+		}
+
 		this.loopId = Mainloop.timeout_add(this.state.interval, () => this.update());
 	},
 
@@ -71,12 +80,14 @@ BatteryPowerApplet.prototype = {
 	},
 
 	_getBatteryStatus: function () {
-		const statusFile = "/sys/class/power_supply/BAT0/status";
-		if (GLib.file_test(statusFile, 1 << 4)) {
-			try {
-				return String(GLib.file_get_contents(statusFile)[1]).trim();
-			} catch (error) {
-				// do nothing
+		if (this.batFolder){
+			const statusFile = "/sys/class/power_supply/" + this.batFolder + "/status";
+			if (GLib.file_test(statusFile, 1 << 4)) {
+				try {
+					return String(GLib.file_get_contents(statusFile)[1]).trim();
+				} catch (error) {
+					// do nothing
+				}
 			}
 		}
 
@@ -104,24 +115,26 @@ BatteryPowerApplet.prototype = {
 		// If the files cannot be found, upower is used to update the power draw from the 
 		// battery.
 
-		const powerDrawFile = "/sys/class/power_supply/BAT0/power_now";
-		if(GLib.file_test(powerDrawFile, 1 << 4)) {
-			try{
-				return parseInt(GLib.file_get_contents(powerDrawFile)[1]) / 1000000.0;
-			} catch (error) {
-				return 0.0;
+		if (this.batFolder) {
+			const powerDrawFile = "/sys/class/power_supply/" + this.batFolder + "/power_now";
+			if(GLib.file_test(powerDrawFile, 1 << 4)) {
+				try{
+					return parseInt(GLib.file_get_contents(powerDrawFile)[1]) / 1000000.0;
+				} catch (error) {
+					return 0.0;
+				}
 			}
-		}
-		
-		const currentDrawFile = "/sys/class/power_supply/BAT0/current_now";
-		const voltageDrawFile = "/sys/class/power_supply/BAT0/voltage_now";
-		if (GLib.file_test(currentDrawFile, 1 << 4) && GLib.file_test(voltageDrawFile, 1 << 4)) {
-			try {
-				const current = parseInt(GLib.file_get_contents(currentDrawFile)[1]) / 1000000.0;
-				const voltage = parseInt(GLib.file_get_contents(voltageDrawFile)[1]) / 1000000.0;
-				return current * voltage;
-			} catch (error) {
-				return 0.0;
+			
+			const currentDrawFile = "/sys/class/power_supply/" + this.batFolder + "/current_now";
+			const voltageDrawFile = "/sys/class/power_supply/" + this.batFolder + "/voltage_now";
+			if (GLib.file_test(currentDrawFile, 1 << 4) && GLib.file_test(voltageDrawFile, 1 << 4)) {
+				try {
+					const current = parseInt(GLib.file_get_contents(currentDrawFile)[1]) / 1000000.0;
+					const voltage = parseInt(GLib.file_get_contents(voltageDrawFile)[1]) / 1000000.0;
+					return current * voltage;
+				} catch (error) {
+					return 0.0;
+				}
 			}
 		}
 

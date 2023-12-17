@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-08 11:28+0100\n"
-"PO-Revision-Date: 2019-02-28 21:37+0100\n"
+"PO-Revision-Date: 2023-10-29 17:40+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:215 applet.js:376
 msgid "Timer"
@@ -47,7 +47,7 @@ msgstr "Réinitialiser"
 
 #: applet.js:523
 msgid "Okay"
-msgstr "D'accord !"
+msgstr "D'accord"
 
 #: applet.js:541
 msgid "Cinnamon Timer"
@@ -120,7 +120,7 @@ msgstr "Chemin complet vers le fichier son de l'alarme"
 msgid "Must have Sox installed. Most sound file types supported"
 msgstr ""
 "Sox doit être installé. Sauf cas très exceptionnel, tout type de fichiers "
-"son est utilisable."
+"son est utilisable"
 
 #. settings-schema.json->display-menu-enable->description
 #. settings-schema.json->display-menu-enable->tooltip
@@ -212,6 +212,16 @@ msgstr "Étiquette"
 #. settings-schema.json->preset_time->columns->title
 msgid "Custom Message (overrides global message)"
 msgstr "Message spécifique (remplace le message défini dans Général)"
+
+#. settings-schema.json->sound-volume->description
+#. settings-schema.json->sound-volume->tooltip
+msgid "Specify the playback volume"
+msgstr "Préciser le volume sonore"
+
+#. settings-schema.json->auto-loop-enable->description
+#. settings-schema.json->auto-loop-enable->tooltip
+msgid "Restart the timer automatically when time is elapsed"
+msgstr "Redémarrer automatiquement le minuteur une fois le temps écoulé"
 
 #~ msgid "A timer app with visual and auditory notifications."
 #~ msgstr "Un minuteur avec notifications visuelles et sonores."

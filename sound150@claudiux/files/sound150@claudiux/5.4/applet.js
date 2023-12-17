@@ -21,6 +21,7 @@ const Settings = imports.ui.settings;
 const Slider = imports.ui.slider;
 const Gettext = imports.gettext; // Needed for translations
 const Extension = imports.ui.extension; // Needed to reload this applet
+const Pango = imports.gi.Pango;
 
 const UUID = "sound150@claudiux";
 const HOME_DIR = GLib.get_home_dir();
@@ -68,8 +69,24 @@ function logError(error) {
     global.logError("[" + UUID + "]: " + error)
 }
 
+// Text wrapper
+const formatTextWrap = (text, maxLineLength) => {
+  const words = text.replace(/[\r\n]+/g, ' ').split(' ');
+  let lineLength = 0;
+
+  // use functional reduce, instead of for loop
+  return words.reduce((result, word) => {
+    if (lineLength + word.length >= maxLineLength) {
+      lineLength = word.length;
+      return result + `\n${word}`; // don't add spaces upfront
+    } else {
+      lineLength += word.length + (result ? 1 : 0);
+      return result ? result + ` ${word}` : `${word}`; // add space only when needed
+    }
+  }, '');
+}
 /* global values */
-let players_without_seek_support = ['spotify', 'totem', 'xplayer', 'gnome-mplayer', 'pithos',
+let players_without_seek_support = ['telegram desktop', 'spotify', 'totem', 'xplayer', 'gnome-mplayer', 'pithos',
     'smplayer'];
 let players_with_seek_support = [
     'clementine', 'banshee', 'rhythmbox', 'rhythmbox3', 'pragha', 'quodlibet',
@@ -483,9 +500,11 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
         }
 
         // Trim stream name
-        if (name.length > 20) {
-            name = name.substring(0, 16) + "... ";
-        }
+        //~ if (name.length > 20) {
+            //~ name = name.substring(0, 16) + "... ";
+        //~ }
+        name = formatTextWrap(name, 20);
+        //~ log("StreamMenuSection: name:"+name, true);
 
         // Special cases
         if (name === "Banshee") {
@@ -494,15 +513,19 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
         else if (name === "Spotify") {
             iconName = "spotify";
         }
-        if (name === "VBox") {
+        else if (name === "VBox") {
             name = "Virtualbox";
             iconName = "virtualbox";
+        }
+        else if (name === "Mpv") {
+            iconName = "mpv"
         }
         else if (iconName === "audio") {
             iconName = "audio-x-generic";
         }
 
         let slider = new VolumeSlider(applet, stream, name, iconName);
+        slider._slider.style = "min-width: 6em;";
         this.addMenuItem(slider);
     }
 }
@@ -595,15 +618,21 @@ class Player extends PopupMenu.PopupMenuSection {
         this._artist = _("Unknown Artist");
         this._album = _("Unknown Album");
         this._title = _("Unknown Title");
-        this.trackInfo = new St.BoxLayout({style_class: 'sound-player-overlay', important: true, vertical: true});
+        this.trackInfo = new St.BoxLayout({style_class: 'sound-player-overlay', style: 'height: auto;', important: true, vertical: true});
         let artistInfo = new St.BoxLayout();
         let artistIcon = new St.Icon({ icon_type: St.IconType.SYMBOLIC, icon_name: "system-users", style_class: 'popup-menu-icon' });
         this.artistLabel = new St.Label({text:this._artist});
+        this.artistLabel.clutterText.line_wrap = true;
+        this.artistLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        this.artistLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
         artistInfo.add_actor(artistIcon);
         artistInfo.add_actor(this.artistLabel);
         let titleInfo = new St.BoxLayout();
         let titleIcon = new St.Icon({ icon_type: St.IconType.SYMBOLIC, icon_name: "audio-x-generic", style_class: 'popup-menu-icon' });
         this.titleLabel = new St.Label({text:this._title});
+        this.titleLabel.clutterText.line_wrap = true;
+        this.titleLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
         titleInfo.add_actor(titleIcon);
         titleInfo.add_actor(this.titleLabel);
         this.trackInfo.add_actor(artistInfo);
@@ -777,10 +806,15 @@ class Player extends PopupMenu.PopupMenuSection {
         else
             this._album = _("Unknown Album");
 
-        if (metadata["xesam:title"])
+        if (metadata["xesam:title"]) {
             this._title = metadata["xesam:title"].unpack();
-        else
+            if (this._title.includes(" - ") && this._artist == _("Unknown Artist")) {
+                [this._artist, this._title] = this._title.split(" - ");
+                this.artistLabel.set_text(this._artist);
+            }
+        } else {
             this._title = _("Unknown Title");
+        }
         this.titleLabel.set_text(this._title);
 
         let change = false;
@@ -977,13 +1011,13 @@ class MediaPlayerLauncher extends PopupMenu.PopupBaseMenuItem {
         this.label = new St.Label({ text: app.get_name() });
         this.addActor(this.label);
         this._icon = app.create_icon_texture(ICON_SIZE);
-        this.addActor(this._icon, { expand: false });
+        this._icon_bin = new St.Bin({ x_align: St.Align.END, child: this._icon });
+        this.addActor(this._icon_bin, { expand: true, span: -1, align: St.Align.END });
         this.connect("activate", (event) => this._onActivate(event));
     }
 
     _onActivate(event) {
         let _time = event.time;
-        log("_time = " + _time);
         this._app.activate_full(-1, _time);
     }
 }
@@ -992,7 +1026,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
         super(orientation, panel_height, instanceId);
 
-        this.defaultColor = null;
+        //~ this.defaultColor = null;
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
@@ -1000,6 +1034,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         this.settings.bind("showtrack", "showtrack", this.on_settings_changed);
         this.settings.bind("middleClickAction", "middleClickAction");
+        this.settings.bind("middleShiftClickAction", "middleShiftClickAction");
         this.settings.bind("horizontalScroll", "horizontalScroll")
         this.settings.bind("showalbum", "showalbum", this.on_settings_changed);
         this.settings.bind("truncatetext", "truncatetext", this.on_settings_changed);
@@ -1034,6 +1069,13 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("tooltipShowVolume", "tooltipShowVolume", this.on_settings_changed);
         this.settings.bind("tooltipShowPlayer", "tooltipShowPlayer", this.on_settings_changed);
         this.settings.bind("tooltipShowArtistTitle", "tooltipShowArtistTitle", this.on_settings_changed);
+
+        this.settings.bind("alwaysCanChangeMic", "alwaysCanChangeMic", this.on_settings_changed);
+
+        this.settings.bind("volume", "volume");
+        this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", this.volume_near_icon);
+
+        Main.themeManager.connect("theme-set", Lang.bind(this, this._theme_set));
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -1120,7 +1162,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.mute_in_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute input"), false, "microphone-sensitivity-muted", St.IconType.SYMBOLIC);
         this._applet_context_menu.addMenuItem(this.mute_out_switch);
         this._applet_context_menu.addMenuItem(this.mute_in_switch);
-        this.mute_in_switch.actor.hide();
+        if (!this.alwaysCanChangeMic)
+            this.mute_in_switch.actor.hide();
+        else
+            this.mute_in_switch.actor.show();
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -1192,7 +1237,16 @@ class Sound150Applet extends Applet.TextIconApplet {
         else
             this.setAppletTextIcon();
 
+       if (this.alwaysCanChangeMic)
+            this.mute_in_switch.actor.show();
+        else if (this._recordingAppsNum === 0)
+            this.mute_in_switch.actor.hide();
+
         this._changeActivePlayer(this._activePlayer);
+    }
+
+    on_applet_added_to_panel() {
+        this.volume_near_icon()
     }
 
     on_applet_removed_from_panel() {
@@ -1239,23 +1293,20 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (!this._input)
             return;
 
-        if (this._input.is_muted) {
-            this._input.change_is_muted(false);
-            this.mute_in_switch.setToggleState(false);
-        } else {
-            this._input.change_is_muted(true);
-            this.mute_in_switch.setToggleState(true);
-        }
+        let newStatus = !this._input.is_muted;
+        this._input.change_is_muted(newStatus);
+        this.mute_in_switch.setToggleState(newStatus);
     }
 
     _onScrollEvent(actor, event) {
-        let direction = event.get_scroll_direction();
+        const direction = event.get_scroll_direction();
 
         if (direction == Clutter.ScrollDirection.SMOOTH) {
             return Clutter.EVENT_PROPAGATE;
         }
 
         this._volumeChange(direction);
+        this.volume_near_icon()
     }
 
     _volumeChange(direction) {
@@ -1319,22 +1370,39 @@ class Sound150Applet extends Applet.TextIconApplet {
         } else {
             this._applet_tooltip.hide();
         }
+        this.volume_near_icon()
     }
 
     _onButtonPressEvent(actor, event) {
         let buttonId = event.get_button();
+        let modifiers = Cinnamon.get_event_state(event);
+        let shiftPressed = (modifiers & Clutter.ModifierType.SHIFT_MASK);
 
         // mute or play / pause players on middle click
         if (buttonId === 2) {
-            if (this.middleClickAction === "mute") {
-                this._toggle_out_mute();
-                this._toggle_in_mute();
-            } else if (this.middleClickAction === "out_mute")
-                this._toggle_out_mute();
-            else if (this.middleClickAction === "in_mute")
-                this._toggle_in_mute();
-            else if (this.middleClickAction === "player")
-                this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote();
+            if (shiftPressed) {
+                if (this.middleShiftClickAction === "mute") {
+                    if (this._output.is_muted === this._input.is_muted)
+                        this._toggle_in_mute();
+                    this._toggle_out_mute();
+                } else if (this.middleShiftClickAction === "out_mute")
+                    this._toggle_out_mute();
+                else if (this.middleShiftClickAction === "in_mute")
+                    this._toggle_in_mute();
+                else if (this.middleShiftClickAction === "player")
+                    this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote();
+            } else {
+                if (this.middleClickAction === "mute") {
+                    if (this._output.is_muted === this._input.is_muted)
+                        this._toggle_in_mute();
+                    this._toggle_out_mute();
+                } else if (this.middleClickAction === "out_mute")
+                    this._toggle_out_mute();
+                else if (this.middleClickAction === "in_mute")
+                    this._toggle_in_mute();
+                else if (this.middleClickAction === "player")
+                    this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote();
+            }
         } else if (buttonId === 8) { // previous and next track on mouse buttons 4 and 5 (8 and 9 by X11 numbering)
             this._players[this._activePlayer]._mediaServerPlayer.PreviousRemote();
         } else if (buttonId === 9) {
@@ -1389,6 +1457,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             // if we have no active player show the output icon
             this.set_applet_icon_symbolic_name(this._outputIcon);
         }
+        this.volume_near_icon()
     }
 
     setAppletIcon(player, path) {
@@ -1425,11 +1494,13 @@ class Sound150Applet extends Applet.TextIconApplet {
             else {
                 title_text = player._title + ' - ' + player._artist;
             }
-            if (this.truncatetext < title_text.length) {
-                title_text = title_text.substr(0, this.truncatetext) + "...";
+            const glyphs = Util.splitByGlyph(title_text);
+            if (glyphs.length > this.truncatetext) {
+                title_text = glyphs.slice(0, this.truncatetext - 3).join("") + "...";
             }
         }
         this.set_applet_label(title_text);
+        //~ log("setAppletText: title_text:\n"+title_text, true)
     }
 
     setAppletTextIcon(player, icon) {
@@ -1460,6 +1531,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             }
         }
         this.set_applet_tooltip(tooltips.join("\n"));
+        this.volume_near_icon();
     }
 
     _isInstance(busName) {
@@ -1677,17 +1749,22 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
     }
 
+    _theme_set() {
+        this._on_reload_this_applet_pressed();
+    }
+
     _outputValuesChanged(actor, iconName, percentage) {
         this.setIcon(iconName, "output");
         this.mute_out_switch.setIconSymbolicName(iconName);
         this.volume = percentage;
         this.setAppletTooltip();
 
-        if (this.defaultColor === null) {
-            // this.actor.set_style("applet-box");
-            let themeNode = this.actor.get_theme_node();
-            this.defaultColor = themeNode.get_foreground_color();
+        //~ if (!this.defaultColor) {
+        if (!this.themeNode) {
+            this.themeNode = this.actor.get_theme_node();
+            //~ this.defaultColor = this.themeNode.get_foreground_color();
         }
+        this.defaultColor = this.themeNode.get_foreground_color();
         let color = "rgba(" + this.defaultColor.red + "," + this.defaultColor.green + "," + this.defaultColor.blue + "," + this.defaultColor.alpha + ")";
 
         if (this.adaptColor) {
@@ -1837,6 +1914,9 @@ class Sound150Applet extends Applet.TextIconApplet {
                         this._inputSection.actor.hide();
                         this.mute_in_switch.actor.hide();
                     }
+
+                    if (this.alwaysCanChangeMic)
+                        this.mute_in_switch.actor.show();
                 }
                 this._streams.splice(i, 1);
                 break;
@@ -1866,6 +1946,16 @@ class Sound150Applet extends Applet.TextIconApplet {
         let command = "cinnamon-settings sound -t 4";
         Util.spawnCommandLine(command);
     }
+
+    volume_near_icon() {
+        if (this.showVolumeLevelNearIcon) {
+            this._applet_label.set_text(""+this.volume);
+            this.hide_applet_label(false);
+        } else {
+            this._applet_label.set_text("");
+            this.hide_applet_label(true);
+        }
+      }
 }
 
 function main(metadata, orientation, panel_height, instanceId) {

@@ -1,8 +1,59 @@
 {
-    "keybinding": {
-        "type": "keybinding",
-        "description": "Set the keybinding for toggling microphone mute",
-        "default": "unassigned",
-        "indent": true
-    }
+  "section_keybinding": {
+    "type": "section",
+    "description": "Keyboard shortcuts",
+    "keys": [
+      "keybinding"
+    ]
+  },
+  "keybinding": {
+    "type": "keybinding",
+    "description": "Set the keybinding for toggling microphone mute",
+    "default": ""
+  },
+  "section_icons": {
+    "type": "section",
+    "description": "Icons",
+    "keys": [
+      "use_symbolic_icon",
+      "tint_symbolic_icon",
+      "muted_color",
+      "unmuted_color"
+    ]
+  },
+  "use_symbolic_icon": {
+    "type": "switch",
+    "description": "Use symbolic icons",
+    "default": false
+  },
+  "tint_symbolic_icon": {
+    "type": "switch",
+    "dependency": "use_symbolic_icon",
+    "description": "Tint symbolic icons",
+    "default": true
+  },
+  "muted_color": {
+    "type": "colorchooser",
+    "dependency": "use_symbolic_icon",
+    "description": "Icon color when microphone is muted",
+    "default": "#e01b24"
+  },
+  "unmuted_color": {
+    "type": "colorchooser",
+    "dependency": "use_symbolic_icon",
+    "description": "Icon color when microphone is unmuted",
+    "default": "#33d17a"
+  },
+  "section_debug_messages": {
+    "type": "section",
+    "description": "Debug messages",
+    "keys": [
+      "verbose"
+    ]
+  },
+  "verbose": {
+    "type": "switch",
+    "description": "Make it verbose in ~/.xsession-errors",
+    "default": true
+  }
 }

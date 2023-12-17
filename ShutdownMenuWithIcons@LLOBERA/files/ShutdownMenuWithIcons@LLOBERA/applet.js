@@ -39,7 +39,7 @@ MyApplet.prototype = {
         
         try {        
             this.set_applet_icon_symbolic_name("system-shutdown");
-            this.set_applet_tooltip("Shutdown Menu With Icons");
+            this.set_applet_tooltip(_("Shutdown Menu With Icons"));
                       
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);

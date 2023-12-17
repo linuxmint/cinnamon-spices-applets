@@ -1,6 +1,18 @@
 This is a Cinnamon window list and panel launcher applet based on CobiWindowList with a number of additional features
 designed to give you more control over how your window-list operates.
 
+Recent new features (Aug-Dec 2023):
+
+1. Ability to change the icon saturation from grayscale (0%) to vivid (200%)
+2. Ability to show windows from other workspaces
+3. Restores custom group/ungroup application setting after reboot/cinnamon-restart
+4. Hotkey option to assign a set of 1-9 hotkeys to all window-list buttons
+5. Hotkey hints using the (`) grave key with any registered hotkey modifiers
+6. Added a Left-Click option to start new application windows in Launcher mode
+7. Ability to show a common set of pinned buttons on all workspaces
+8. Smart numeric hotkeys to assign a set of 1-9 hotkeys to a specific application
+9. A bunch of fixes
+
 The design goals are to:
 
 1. Allow you to declutter your window list when running many windows without having to do without button labels
@@ -43,6 +55,4 @@ devlopment GitHub repository:
 https://github.com/klangman/CassiaWindowList
 
 This is where I develop new features or test out any new ideas I have before pushing to cinnamon-spices.
-
-
 
