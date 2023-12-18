@@ -503,6 +503,17 @@ function getFirstLauncherApp() {
    return null;
 }
 
+// Is the passed in string equal to "all buttons" disregarding case and accepting English or a
+// translation. Since the default hotkey entry using "All Buttons" is not translatable, the hotkey
+// will still be English even when using a translation, so we should accept English or a translation.
+// Also ensures that the key sequence uses the "1" key as required by the "All Buttons" syntax.
+function isAllButtons(hotkey) {
+   let lower = hotkey.description.toLowerCase();
+   if ((lower == "all buttons" || lower ==  _("all buttons")) && hotkey.keyCombo.indexOf(">1")!=-1)
+      return true;
+   return false;
+}
+
 // Represents an item in the Thumbnail popup menu
 class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
 
@@ -1383,7 +1394,7 @@ class WindowListButton {
                 let end = keyString.slice(keyString.lastIndexOf("+"))
                 text = text + "\n" + keyString.slice(0,keyString.lastIndexOf("+")) + end.toUpperCase();
              }
-          } else if (hotKeys[i].description.toLowerCase() == _("all buttons") ) {
+          } else if (isAllButtons(hotKeys[i])) {
              let childern = this._workspace.actor.get_children();
              let idx = childern.indexOf(this.actor);
              if (idx >= 0 && idx < 9) {
@@ -2627,7 +2638,7 @@ class WindowListButton {
       let hotKeys = this._applet._keyBindings;
       item = null;
       for (let i=0 ; i < hotKeys.length ; i++) {
-         if (hotKeys[i].enabled===true && hotKeys[i].description.endsWith(".desktop")!==true && hotKeys[i].description.toLowerCase() !== _("all buttons")) {
+         if (hotKeys[i].enabled===true && hotKeys[i].description.endsWith(".desktop")!==true && isAllButtons(hotKeys[i])!==true) {
             let idx = i;
             let keyString;
             if (hotKeys[i].keyCombo!==null) {
@@ -4138,7 +4149,7 @@ class WindowList extends Applet.Applet {
         } else {
            Main.activateWindow(workspace._keyBindingsWindows[idx]);
         }
-     } else if (this._keyBindings[idx].description.toLowerCase() ==  _("all buttons")) {
+     } else if (isAllButtons(this._keyBindings[idx])) {
         seqNum--;
         let numChildern = workspace.actor.get_n_children();
         if (seqNum < numChildern) {
@@ -4206,7 +4217,7 @@ class WindowList extends Applet.Applet {
         if (oldBindings.length > i) {
            [seqCombo,secondCombo] = getSmartNumericHotkey(oldBindings[i].keyCombo);
            if (oldBindings[i].enabled && (!keyBindings[i].enabled || keyBindings[i].keyCombo != oldBindings[i].keyCombo || (seqCombo && oldKeySequence != keySequence))) {
-              if (seqCombo && (oldKeySequence || oldBindings[i].description.toLowerCase() == _("all buttons"))) {
+              if (seqCombo && (oldKeySequence || isAllButtons(oldBindings[i]))) {
                  //log( `removing smart numeric hotkeys for ${oldBindings[i].description}` );
                  for( let num=1 ; num < 10 ; num++ ) {
                     Main.keybindingManager.removeHotKey("CassiaWL-" + i + "-" + num + this.instanceId);
@@ -4229,7 +4240,7 @@ class WindowList extends Applet.Applet {
         if (keyBindings[i].enabled && (oldBindings.length <= i || !oldBindings[i].enabled || keyBindings[i].keyCombo != oldBindings[i].keyCombo || (seqCombo && oldKeySequence != keySequence))) {
            let idx = i;
            // Register smart numeric hotkeys if applicable
-           if (seqCombo && (keySequence || keyBindings[i].description.toLowerCase() == _("all buttons"))) {
+           if (seqCombo && (keySequence || isAllButtons(keyBindings[i]))) {
               //log( `Registering smart numeric hotkeys for ${keyBindings[i].description}  i.e. ${seqCombo+1}` );
               for( let num=1 ; num < 10 ; num++ ) {
                  Main.keybindingManager.addHotKey("CassiaWL-" + i + "-" + num + this.instanceId, seqCombo+num, Lang.bind(this, function() {this._performHotkey(idx, num)} ));
@@ -4318,7 +4329,7 @@ class WindowList extends Applet.Applet {
            let first = keyCombo.slice(0,colons);
            let second = keyCombo.slice(colons+2)
            if (first.startsWith(modifiers) || second.startsWith(modifiers)) {
-              if (keyBindings[i].description.toLowerCase() == _("all buttons") && keyBindings[i].keyCombo.indexOf(modifiers+"1")!=-1) {
+              if (isAllButtons(keyBindings[i])) {
                  let children = workspace.actor.get_children();
                  for( let idx=0 ; idx < children.length && idx < 9 ; idx++ ){
                     children[idx]._delegate._updateNumberForHotkeyHelp((idx+1).toString());
