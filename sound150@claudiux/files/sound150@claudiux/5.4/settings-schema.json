@@ -114,6 +114,15 @@
     },
     "section4": {
         "type": "section",
+        "description": "Icon"
+    },
+    "showVolumeLevelNearIcon": {
+        "type": "switch",
+        "default": false,
+        "description": "Display volume level near icon"
+    },
+    "section5": {
+        "type": "section",
         "description": "Sound Settings"
     },
     "setAmplification": {
@@ -152,5 +161,9 @@
         "description": "Always allow microphone to be reactivated",
         "tooltip": "Always show the 'Mute input' switch in the context menu.",
         "default": true
+    },
+    "volume": {
+        "type": "generic",
+        "default": "50%"
     }
 }

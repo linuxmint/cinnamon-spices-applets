@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-03 13:17-0500\n"
-"PO-Revision-Date: 2023-12-03 17:29-0300\n"
+"POT-Creation-Date: 2023-12-12 10:09-0500\n"
+"PO-Revision-Date: 2023-12-13 16:13-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,29 +17,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4\n"
 
-#: 4.0/applet.js:1326 4.0/applet.js:2518 4.0/applet.js:4013 4.0/applet.js:4081
-#: 4.0/applet.js:4104 4.0/applet.js:4193
+#: 4.0/applet.js:1386 4.0/applet.js:2630 4.0/applet.js:4141 4.0/applet.js:4209
+#: 4.0/applet.js:4232 4.0/applet.js:4321
 msgid "all buttons"
 msgstr "todos los botones"
 
-#: 4.0/applet.js:2250
+#: 4.0/applet.js:2359
 msgid "Applet Preferences"
 msgstr "Preferencias del applet"
 
-#: 4.0/applet.js:2254
+#: 4.0/applet.js:2363
 msgid "About..."
 msgstr "Acerca de..."
 
-#: 4.0/applet.js:2258
+#: 4.0/applet.js:2367
 msgid "Configure..."
 msgstr "Configurar..."
 
-#: 4.0/applet.js:2262
+#: 4.0/applet.js:2371
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eliminar '%s'"
 
-#: 4.0/applet.js:2264
+#: 4.0/applet.js:2373
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "¿Realmente desea eliminar esta instancia de CassiaWindowList?"
 
@@ -49,107 +49,111 @@ msgstr "¿Realmente desea eliminar esta instancia de CassiaWindowList?"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2273
+#: 4.0/applet.js:2382
 msgid "Open new window"
 msgstr "Abrir nueva ventana"
 
-#: 4.0/applet.js:2281
+#: 4.0/applet.js:2390
 msgid "Remove from panel"
 msgstr "Quitar del panel"
 
-#: 4.0/applet.js:2283
+#: 4.0/applet.js:2392
 msgid "Remove from this workspace"
 msgstr "Eliminar de este espacio de trabajo"
 
-#: 4.0/applet.js:2289
+#: 4.0/applet.js:2398
 msgid "Pin to panel"
 msgstr "Anclar al panel"
 
-#: 4.0/applet.js:2291
+#: 4.0/applet.js:2400
 msgid "Pin to this workspace"
 msgstr "Anclar a este espacio de trabajo"
 
-#: 4.0/applet.js:2332
+#: 4.0/applet.js:2441
 msgid "Pin to other workspaces"
 msgstr "Anclar a otros espacios de trabajo"
 
-#: 4.0/applet.js:2353
+#: 4.0/applet.js:2462
 msgid "Pin to all workspaces"
 msgstr "Anclar a todos los espacios de trabajo"
 
-#: 4.0/applet.js:2371
+#: 4.0/applet.js:2480
 msgid "Pin to launcher"
 msgstr "Anclar al lanzador"
 
-#: 4.0/applet.js:2389 4.0/applet.js:2572
+#: 4.0/applet.js:2498 4.0/applet.js:2684
 msgid "Add new Hotkey for"
 msgstr "Añadir nueva tecla de acceso rápido para"
 
-#: 4.0/applet.js:2403
+#: 4.0/applet.js:2512
 msgid "Recent files"
 msgstr "Archivos recientes"
 
-#: 4.0/applet.js:2427
+#: 4.0/applet.js:2536
 msgid "Places"
 msgstr "Lugares"
 
-#: 4.0/applet.js:2469
+#: 4.0/applet.js:2578
 msgid "Only on this workspace"
 msgstr "Sólo en este espacio de trabajo"
 
-#: 4.0/applet.js:2471
+#: 4.0/applet.js:2580
 msgid "Visible on all workspaces"
 msgstr "Visible en todos los espacios de trabajo"
 
-#: 4.0/applet.js:2472
+#: 4.0/applet.js:2581
 msgid "Move to another workspace"
 msgstr "Mover a otro espacio de trabajo"
 
-#: 4.0/applet.js:2491
+#: 4.0/applet.js:2590
+msgid " (this workspace)"
+msgstr "(este espacio de trabajo)"
+
+#: 4.0/applet.js:2603
 msgid "Move to another monitor"
 msgstr "Mover a otro monitor"
 
-#: 4.0/applet.js:2499
+#: 4.0/applet.js:2611
 msgid "Monitor"
 msgstr "Monitor"
 
-#: 4.0/applet.js:2527
+#: 4.0/applet.js:2639
 msgid "unassigned"
 msgstr "no asignado"
 
-#: 4.0/applet.js:2538 4.0/applet.js:2569
+#: 4.0/applet.js:2650 4.0/applet.js:2681
 msgid "Assign window to a hotkey"
 msgstr "Asignar ventana a una tecla de acceso rápido"
 
-#: 4.0/applet.js:2592
+#: 4.0/applet.js:2704
 msgid "Change application label contents"
 msgstr "Cambiar el contenido de la etiqueta de la aplicación"
 
-#: 4.0/applet.js:2595
+#: 4.0/applet.js:2707
 msgid "Remove custom setting"
 msgstr "Eliminar configuración personalizada"
 
-#: 4.0/applet.js:2602
+#: 4.0/applet.js:2714
 msgid "Use window title"
 msgstr "Utilizar título de ventana"
 
-#: 4.0/applet.js:2609
+#: 4.0/applet.js:2721
 msgid "Use application name"
 msgstr "Utilizar nombre de aplicación"
 
-#: 4.0/applet.js:2616
+#: 4.0/applet.js:2728
 msgid "No label"
 msgstr "Sin etiqueta"
 
-#: 4.0/applet.js:2627
+#: 4.0/applet.js:2739
 msgid "Ungroup application windows"
 msgstr "Ventanas de aplicaciones separadas"
 
-#: 4.0/applet.js:2636
+#: 4.0/applet.js:2748
 msgid "Group application windows"
 msgstr "Ventanas de aplicaciones agrupadas"
 
-#: 4.0/applet.js:2649
+#: 4.0/applet.js:2761
 msgid "Automatic grouping/ungrouping"
 msgstr "Agrupación/desagrupación automática"
 
@@ -159,43 +163,43 @@ msgstr "Agrupación/desagrupación automática"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2679
+#: 4.0/applet.js:2791
 msgid "Move titlebar on to screen"
 msgstr "Mover la barra de título a la pantalla"
 
-#: 4.0/applet.js:2684
+#: 4.0/applet.js:2796
 msgid "Restore"
 msgstr "Restaurar"
 
-#: 4.0/applet.js:2688
+#: 4.0/applet.js:2800
 msgid "Minimize"
 msgstr "Minimizar"
 
-#: 4.0/applet.js:2694
+#: 4.0/applet.js:2806
 msgid "Unmaximize"
 msgstr "Desmaximizar"
 
-#: 4.0/applet.js:2701
+#: 4.0/applet.js:2813
 msgid "Close others"
 msgstr "Cerrar otros"
 
-#: 4.0/applet.js:2712
+#: 4.0/applet.js:2824
 msgid "Close all"
 msgstr "Cerrar todo"
 
-#: 4.0/applet.js:2721
+#: 4.0/applet.js:2833
 msgid "Close"
 msgstr "Cerrar"
 
-#: SetupWizard.py:162
+#: SetupWizard.py:188
 msgid "Exit"
 msgstr "Salir"
 
-#: SetupWizard.py:184
+#: SetupWizard.py:210
 msgid "Next"
 msgstr "Siguiente"
 
-#: SetupWizard.py:243
+#: SetupWizard.py:283
 msgid "Backup file already exist. Do you want to overwrite it?"
 msgstr "El archivo de copia de seguridad ya existe. ¿Desea sobrescribirlo?"
 
@@ -1172,6 +1176,64 @@ msgstr ""
 "página de restauración del Asistente de Configuración cuando se añada una "
 "nueva instancia de CassiaWindowList a un panel."
 
+#. 4.0->settings-schema.json->icon-saturation->units
+msgid "percent"
+msgstr "por ciento"
+
+#. 4.0->settings-schema.json->icon-saturation->description
+msgid "Icon color saturation"
+msgstr "Saturación de color de icono"
+
+#. 4.0->settings-schema.json->icon-saturation->tooltip
+msgid ""
+"Sets the color saturation for icons from 0% (grayscale) to 200%, default is "
+"100%\n"
+"This option is experimental, some icons are not currently effected by this "
+"setting"
+msgstr ""
+"Establece la saturación de color de los iconos de 0% (escala de grises) a "
+"200%, por defecto es 100%.\n"
+"Esta opción es experimental, algunos iconos no se ven afectados por este "
+"ajuste."
+
+#. 4.0->settings-schema.json->saturation-application->options
+msgid "All Buttons"
+msgstr "Todos los botones"
+
+#. 4.0->settings-schema.json->saturation-application->options
+msgid "Minimized buttons"
+msgstr "Botones minimizados"
+
+#. 4.0->settings-schema.json->saturation-application->options
+msgid "Idle pinned buttons"
+msgstr "Botones anclados inactivos"
+
+#. 4.0->settings-schema.json->saturation-application->options
+msgid "Buttons for windows on other workspaces"
+msgstr "Botones para ventanas en otros espacios de trabajo"
+
+#. 4.0->settings-schema.json->saturation-application->options
+msgid "Buttons for windows on other monitors"
+msgstr "Botones para ventanas en otros monitores"
+
+#. 4.0->settings-schema.json->saturation-application->options
+msgid "All buttons excepted focused window"
+msgstr "Todos los botones excepto la ventana enfocada"
+
+#. 4.0->settings-schema.json->saturation-application->description
+msgid "Where to apply the icon color saturation"
+msgstr "Dónde aplicar la saturación de color del icono"
+
+#. 4.0->settings-schema.json->saturation-application->tooltip
+msgid ""
+"Which buttons will have the custom icon color saturation applied\n"
+"This option is only available when the saturation is not set to 100%"
+msgstr ""
+"A qué botones se les aplicará la saturación de color del icono "
+"personalizado.\n"
+"Esta opción sólo está disponible cuando la saturación no está ajustada al "
+"100%."
+
 #: SetupWizard.ui:7
 msgid "CassiaWindowList Basic Setup Wizard"
 msgstr "Asistente de configuración básica de CassiaWindowList"
@@ -1268,82 +1330,93 @@ msgstr ""
 "No aparece el menú de la ventana de miniaturas al pasar el ratón por encima"
 
 #: SetupWizard.ui:354
-msgid "Notes about the Panel Launcher behaviour"
-msgstr "Notas sobre el comportamiento del panel de inicio"
+msgid "Panel Launcher Setup"
+msgstr "Configuración del Lanzador rápido"
 
 #: SetupWizard.ui:370
 msgid ""
-"Unlike most Panel Launcher applets, this launcher\n"
-"keeps tack of running windows and will activate\n"
-"existing windows rather then launching new ones.\n"
+"Unlike most Panel Launcher applets, this launcher keeps tack of \n"
+"running windows and uses window Thumbnail menus.\n"
 "\n"
-"You can launch additional windows by clicking the\n"
-"'Back' mouse button or Ctrl+Left mouse button \n"
-"(by default).\n"
+"You can launch additional windows by clicking the 'Back' mouse \n"
+"button or using the Left mouse button while holding the Ctrl key.\n"
 "\n"
-"It also uses Thumbnail menus to show a list of all\n"
-"open windows. In general it works like \"pinned\"\n"
-"buttons on a window list rather then a basic\n"
-"launcher"
+"How would you like the Left mouse button to behave when \n"
+"windows already exist for a launcher button?"
 msgstr ""
-"A diferencia de la mayoría de los paneles de inicio, este lanzador\n"
-"mantiene ventanas en ejecución y activará las\n"
-"ventanas existentes en lugar de lanzar otras nuevas.\n"
+"A diferencia de la mayoría de los subprogramas de Lanzador rápido, este "
+"lanzador realiza un seguimiento \n"
+"de las ventanas en ejecución y utiliza menús de miniaturas de ventanas.\n"
 "\n"
-"Puede abrir ventanas adicionales pulsando el botón\n"
-"botón 'Atrás' del ratón o Ctrl+botón izquierdo del ratón \n"
-"(por defecto).\n"
+"Puedes abrir ventanas adicionales pulsando el botón \"Atrás\" del ratón\n"
+"o utilizando el botón izquierdo del ratón mientras mantiene pulsada la tecla "
+"Ctrl.\n"
 "\n"
-"También utiliza menús en miniatura para mostrar una lista de todas las "
-"ventanas abiertas.\n"
-"ventanas abiertas. En general, funciona como botones\n"
-"en una lista de ventanas en lugar de un\n"
-"lanzador"
+"¿Cómo desea que se comporte el botón izquierdo del ratón cuando \n"
+"ya existen ventanas para un botón lanzador?"
 
-#: SetupWizard.ui:408
+#: SetupWizard.ui:388
+msgid "Open new window / Hold for Thumbnail menu"
+msgstr "Abrir nueva ventana / Mantener para el menú de miniaturas"
+
+#: SetupWizard.ui:407
+msgid "Restore most recent window / Cycle windows"
+msgstr "Restaurar la ventana más reciente / Ciclo de ventanas"
+
+#: SetupWizard.ui:427
+msgid "Open the Thumbnail menu"
+msgstr "Abrir el menú Miniaturas"
+
+#: SetupWizard.ui:461
+msgid "Thumbnail window menu on mouse hover"
+msgstr "Menú de la ventana de miniaturas al pasar el ratón por encima"
+
+#: SetupWizard.ui:492
 msgid "All done!"
 msgstr "¡Ya está!"
 
-#: SetupWizard.ui:424
+#: SetupWizard.ui:508
 msgid ""
-"There are many more options and features to explorer\n"
-"in the applet configurator and the window list button\n"
-"context menu, for example:\n"
+"There are many more options and features to explorer in the\n"
+"applet configurator and the window list button context menu,\n"
+"for example:\n"
 "\n"
 " • Hot-keys to launch / activate a specific window.\n"
 " • Customizable mouse button actions.\n"
+" • Customizable icon saturation (grayscale / vivid).\n"
 " • Customizable Ctrl/Shift + mouse button actions.\n"
 " • Application specific grouping and label settings.\n"
 " • Thumbnail window zooming using the scroll-wheel.\n"
 " • Automatic application grouping when space is limited.\n"
 " • And much more."
 msgstr ""
-"Hay muchas más opciones y funciones para explorar\n"
-"en el configurador de applet y en el botón de lista de ventanas menú "
-"contextual, \n"
+"Hay muchas más opciones y funciones para explorar en el\n"
+"configurador de applets y en el menú contextual del botón de lista de "
+"ventanas,\n"
 "por ejemplo:\n"
 "\n"
-" - Teclas de acceso rápido para lanzar / activar una ventana específica.\n"
-" - Acciones personalizables del botón del ratón.\n"
-" - Acciones personalizables Ctrl/Shift + botón del ratón.\n"
-" - Agrupación específica de aplicaciones y configuración de etiquetas.\n"
-" - Ampliación de la ventana en miniatura con la rueda de desplazamiento.\n"
-" - Agrupación automática de aplicaciones cuando el espacio es limitado.\n"
-" - Y mucho más."
+" • Teclas de acceso rápido para lanzar / activar una ventana específica.\n"
+" • Acciones personalizables de los botones del ratón.\n"
+" • Saturación de iconos personalizable (escala de grises / vivos).\n"
+" • Acciones personalizables Ctrl/Shift + botón del ratón.\n"
+" • Agrupación específica de aplicaciones y configuración de etiquetas.\n"
+" • Zoom de la ventana en miniatura con la rueda de desplazamiento.\n"
+" • Agrupación automática de aplicaciones cuando el espacio es limitado.\n"
+" • Y mucho más."
 
-#: SetupWizard.ui:445
+#: SetupWizard.ui:530
 msgid "Exit and launch the applet configurator now"
 msgstr "Salir e iniciar el configurador del applet"
 
-#: SetupWizard.ui:474
+#: SetupWizard.ui:559
 msgid "Select a backup configuration to restore?"
 msgstr "¿Seleccionar una configuración de copia de seguridad para restaurar?"
 
-#: SetupWizard.ui:517
+#: SetupWizard.ui:602
 msgid "Configuration Backup?"
 msgstr "¿Respaldo de configuración?"
 
-#: SetupWizard.ui:533
+#: SetupWizard.ui:618
 msgid ""
 "If you would like to maintain an automatic backup\n"
 "of this applet configuration then select or enter a\n"
@@ -1356,26 +1429,29 @@ msgstr ""
 "cambios de configuración actuales y futuros se guardarán en esta copia de "
 "seguridad:"
 
-#: SetupWizard.ui:553
+#: SetupWizard.ui:638
 msgid "MainWindowList"
 msgstr "MainWindowList"
 
-#: SetupWizard.ui:554
+#: SetupWizard.ui:639
 msgid "MainPanelLauncher"
 msgstr "MainPanelLauncher"
 
-#: SetupWizard.ui:555
+#: SetupWizard.ui:640
 msgid "Monitor1WindowList"
 msgstr "Monitor1WindowList"
 
-#: SetupWizard.ui:556
+#: SetupWizard.ui:641
 msgid "Monitor2WindowList"
 msgstr "Monitor2WindowList"
 
-#: SetupWizard.ui:557
+#: SetupWizard.ui:642
 msgid "Monitor1PanelLauncher"
 msgstr "Monitor1PanelLauncher"
 
-#: SetupWizard.ui:558
+#: SetupWizard.ui:643
 msgid "Monitor2PanelLauncher"
 msgstr "Monitor2PanelLauncher"
+
+#~ msgid "Notes about the Panel Launcher behaviour"
+#~ msgstr "Notas sobre el comportamiento del panel de inicio"

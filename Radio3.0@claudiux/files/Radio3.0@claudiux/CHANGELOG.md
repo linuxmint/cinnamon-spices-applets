@@ -1,3 +1,8 @@
+### v1.12.0~20231216
+  * Added an option (in the context menu) to display the volume level near the icon.
+  * Updated .pot file for translations.
+  * Updated fr.po file - French translation.
+
 ### v1.11.3~20231210
   * Minor bugfixes. Maybe fixes #5201.
 

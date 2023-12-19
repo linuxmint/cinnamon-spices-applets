@@ -1,4 +1,5 @@
-## CHANGELOG
+### v4.6.0~20231216
+  * Adds the ability to display the volume level near the icon.
 
 ### v4.5.0~20231124
   * Adds a shift-middle click action (mute/unmute microphone by default). Thanks to @sphh!

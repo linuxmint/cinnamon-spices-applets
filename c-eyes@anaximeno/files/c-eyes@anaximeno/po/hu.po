@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-22 03:30-0100\n"
-"PO-Revision-Date: 2023-08-22 03:32-0100\n"
+"PO-Revision-Date: 2023-12-14 09:05+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: 5.4/applet.js:360 4.2/applet.js:365
 msgid "click to deactivate the eye"
-msgstr ""
+msgstr "kattintson a szem kikapcsolásához"
 
 #: 5.4/applet.js:360 4.2/applet.js:365
 msgid "click to activate the eye"
-msgstr ""
+msgstr "kattintson a szem aktiválásához"
 
 #: 5.4/applet.js:361 4.2/applet.js:366
 msgid "effects enabled"
@@ -35,11 +35,11 @@ msgstr "effektusok letiltva"
 
 #: 5.4/applet.js:362 4.2/applet.js:367
 msgid "TIP"
-msgstr ""
+msgstr "TIP"
 
 #. metadata.json->name
 msgid "Cinnamon Eyes"
-msgstr ""
+msgstr "Cinnamon Szemek"
 
 #. metadata.json->description
 msgid ""
@@ -86,22 +86,22 @@ msgstr "Üzemmód"
 #. 5.4->settings-schema.json->eye-mode->options
 #. 4.2->settings-schema.json->eye-mode->options
 msgid "Lids"
-msgstr ""
+msgstr "Szemhéj"
 
 #. 5.4->settings-schema.json->eye-mode->options
 #. 4.2->settings-schema.json->eye-mode->options
 msgid "Lids Filled"
-msgstr ""
+msgstr "Szemhéj, teli"
 
 #. 5.4->settings-schema.json->eye-mode->options
 #. 4.2->settings-schema.json->eye-mode->options
 msgid "Bulb"
-msgstr ""
+msgstr "Szemgolyó"
 
 #. 5.4->settings-schema.json->eye-mode->options
 #. 4.2->settings-schema.json->eye-mode->options
 msgid "Bulb Filled"
-msgstr ""
+msgstr "Szemgolyó, teli"
 
 #. 5.4->settings-schema.json->eye-line-width->description
 #. 4.2->settings-schema.json->eye-line-width->description
@@ -122,14 +122,12 @@ msgstr "képpont"
 #. 5.4->settings-schema.json->eye-margin->description
 #. 4.2->settings-schema.json->eye-margin->description
 msgid "Margin"
-msgstr ""
+msgstr "Tűréshatár"
 
 #. 5.4->settings-schema.json->eye-vertical-padding->description
 #. 4.2->settings-schema.json->eye-vertical-padding->description
-#, fuzzy
-#| msgid "Vertical Padding"
 msgid "Padding"
-msgstr "Függőleges térköz"
+msgstr "Térköz"
 
 #. 5.4->settings-schema.json->eye-repaint-interval->units
 #. 5.4->settings-schema.json->fade-timeout->units
@@ -141,12 +139,12 @@ msgstr "ms"
 #. 5.4->settings-schema.json->eye-repaint-interval->description
 #. 4.2->settings-schema.json->eye-repaint-interval->description
 msgid "Repaint Interval"
-msgstr ""
+msgstr "Újrafestési időköz"
 
 #. 5.4->settings-schema.json->eye-activate-by-default->description
 #. 4.2->settings-schema.json->eye-activate-by-default->description
 msgid "Start Activated"
-msgstr ""
+msgstr "Indítás Aktiválva"
 
 #. 5.4->settings-schema.json->deactivate-on-fullscreen->description
 #. 5.4->settings-schema.json->deactivate-effects-on-fullscreen->description
@@ -158,17 +156,17 @@ msgstr "Kikapcsolás teljes képernyőn"
 #. 5.4->settings-schema.json->eye-clicked-color->description
 #. 4.2->settings-schema.json->eye-clicked-color->description
 msgid "Activated Base Color"
-msgstr ""
+msgstr "Aktivált alapszín"
 
 #. 5.4->settings-schema.json->iris-clicked-color->description
 #. 4.2->settings-schema.json->iris-clicked-color->description
 msgid "Activated Iris Color"
-msgstr ""
+msgstr "Aktivált írisz szín"
 
 #. 5.4->settings-schema.json->pupil-clicked-color->description
 #. 4.2->settings-schema.json->pupil-clicked-color->description
 msgid "Activated Pupil Color"
-msgstr ""
+msgstr "Aktivált pupillaszín"
 
 #. 5.4->settings-schema.json->mouse-click-enable->description
 #. 4.2->settings-schema.json->mouse-click-enable->description
@@ -178,7 +176,7 @@ msgstr "Effektusok engedélyezése"
 #. 5.4->settings-schema.json->mouse-click-mode->description
 #. 4.2->settings-schema.json->mouse-click-mode->description
 msgid "Icon Mode"
-msgstr ""
+msgstr "Ikonmód"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
@@ -188,57 +186,57 @@ msgstr "Egyszerű"
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Trigun"
-msgstr ""
+msgstr "Trigun"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Nublo"
-msgstr ""
+msgstr "Nublo"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Risco"
-msgstr ""
+msgstr "Risco"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Wolf"
-msgstr ""
+msgstr "Farkas"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Pincel"
-msgstr ""
+msgstr "Escet"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Claw"
-msgstr ""
+msgstr "Karom"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Metropoli"
-msgstr ""
+msgstr "Metropoli"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Flowey"
-msgstr ""
+msgstr "Flowey"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Kusco"
-msgstr ""
+msgstr "Kusco"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Ouroboros"
-msgstr ""
+msgstr "Uroborosz"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Helix"
-msgstr ""
+msgstr "Helix"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
@@ -248,17 +246,17 @@ msgstr "Irány"
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Spinks"
-msgstr ""
+msgstr "Spinks"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Thatch"
-msgstr ""
+msgstr "Nádtető"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Cotton"
-msgstr ""
+msgstr "Vatta"
 
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
@@ -268,7 +266,7 @@ msgstr "Kör"
 #. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
 msgid "Gear"
-msgstr ""
+msgstr "Fogaskerék"
 
 #. 5.4->settings-schema.json->mouse-click-image-size->description
 #. 4.2->settings-schema.json->mouse-click-image-size->description
@@ -288,7 +286,7 @@ msgstr "Pislogás"
 #. 5.4->settings-schema.json->click-animation-mode->options
 #. 4.2->settings-schema.json->click-animation-mode->options
 msgid "Bounce Back"
-msgstr ""
+msgstr "Visszapattan"
 
 #. 5.4->settings-schema.json->click-animation-mode->options
 #. 4.2->settings-schema.json->click-animation-mode->options

@@ -10,6 +10,7 @@ body:
     default: 0
     label: Applet name and maintainer
     options:
+    - anime-wallpaper@flyflyan @fly206
     - app-launcher@mchilli @mchilli
     - asl@santiago @SamBurgos
     - AutostartPrograms@spacy01 @spacy01

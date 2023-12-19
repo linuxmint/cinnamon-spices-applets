@@ -29,14 +29,14 @@ class Moon {
             new AltIconSet().getSet() :
             new DefaultIconSet().getSet();
 
-        const age = Math.round(this.age * 28);
+        const age = Math.trunc(this.age * 28); // trunc instead of round ?
 
         return iconSet[age];
     }
     _getCurrentPhaseName(showName = true, showPercentage = true) {
         var name = "";
-        const age = Math.round(this.age * 28) / 28;
-        const percent = Math.round((age < 0.5 ? 2*age : 2 - 2*age) * 100) + "%";
+        const age = Math.trunc(this.age * 28) / 28; // trunc instead of round ?
+        const percent = Math.trunc((age < 0.5 ? 2*age : 2 - 2*age) * 100) + "%";  // trunc instead of round ?
 
         if (age === 0) name = this._("New Moon");
         else if (age < 0.25) name = this._("Waxing Crescent");

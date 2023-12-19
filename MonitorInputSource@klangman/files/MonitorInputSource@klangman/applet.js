@@ -48,22 +48,22 @@ function _(text) {
 function getActionName(actionCode) {
    let name = "";
    if ((actionCode&Modifier.Ctrl) == Modifier.Ctrl) {
-      name += "Ctrl+";
+      name += _("Ctrl+");
    }
    if ((actionCode&Modifier.Shift) == Modifier.Shift) {
-      name += "Shift+";
+      name += _("Shift+");
    }
    let button = (actionCode&0xf);
    if (button == 1) {
-      name += "Left Click";
+      name += _("Left Click");
    } else if (button == 2) {
-      name += "Middle Click";
+      name += _("Middle Click");
    } else if (button == 3) {
-      name += "Right Click";
+      name += _("Right Click");
    } else if (button == 8) {
-      name += "Back Click";
+      name += _("Back Click");
    } else if (button == 9) {
-      name += "Forward Click";
+      name += _("Forward Click");
    }
    return name;
 }
@@ -155,7 +155,7 @@ class InputSourceApp extends Applet.IconApplet {
       super(orientation, panelHeight, instanceId);
       this._signalManager = new SignalManager.SignalManager(null);
       this.set_applet_icon_symbolic_name("video-display-symbolic");
-      this.set_applet_tooltip("Monitor input sources");
+      this.set_applet_tooltip(_("Monitor input sources"));
       this.menu = new Applet.AppletPopupMenu(this, orientation);
       this.menuManager = new PopupMenu.PopupMenuManager(this);
       this.menuManager.addMenu(this.menu);
@@ -366,13 +366,13 @@ class InputSourceApp extends Applet.IconApplet {
          let item = items[i];
          if (item instanceof InputMenuItem && item.actionCode != 0) {
             let display = item.getDisplay();
-            toolTipText += "\n"+ getActionName(item.actionCode) + " for " + display.name + ":" + item.getInputName();
+            toolTipText += "\n"+ getActionName(item.actionCode) + " " + _("for") + " " + display.name + ":" + item.getInputName();
          }
       }
       if (toolTipText.length>0) {
-         toolTipText = "<b>Monitor input sources</b>" + toolTipText;
+         toolTipText = "<b>" + _("Monitor input sources") + "</b>" + toolTipText;
       } else {
-         toolTipText = "Monitor input sources"
+         toolTipText = _("Monitor input sources");
       }
       this.set_applet_tooltip(toolTipText, true);
    }
