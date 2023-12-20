@@ -56,8 +56,8 @@ class ExpansionClickAnimationMode extends ClickAnimationMode {
 
         actor.ease({
             opacity: options.opacity * 0.08,
-            x: mouse_x - (options.icon_size * actor_scale / 2),
-            y: mouse_y - (options.icon_size * actor_scale / 2),
+            x: mouse_x - (options.icon_size * actor_scale * global.ui_scale / 2),
+            y: mouse_y - (options.icon_size * actor_scale * global.ui_scale / 2),
             scale_x: actor_scale,
             scale_y: actor_scale,
             duration: options.timeout,
@@ -76,8 +76,8 @@ class RetractionClickAnimationMode extends ClickAnimationMode {
         const [mouse_x, mouse_y, mask] = global.get_pointer();
 
         let actor = new St.Icon({
-            x: mouse_x - (options.icon_size / 2),
-            y: mouse_y - (options.icon_size / 2),
+            x: mouse_x - (options.icon_size * global.ui_scale / 2),
+            y: mouse_y - (options.icon_size * global.ui_scale / 2),
             reactive: false,
             can_focus: false,
             track_hover: false,
@@ -125,8 +125,8 @@ class BounceBackClickAnimationMode extends ClickAnimationMode {
         Main.uiGroup.add_child(actor);
 
         actor.ease({
-            x: mouse_x - (options.icon_size / 2),
-            y: mouse_y - (options.icon_size / 2),
+            x: mouse_x - (options.icon_size * global.ui_scale / 2),
+            y: mouse_y - (options.icon_size * global.ui_scale / 2),
             scale_x: 1,
             scale_y: 1,
             opacity: options.opacity,
@@ -157,8 +157,8 @@ class BlinkClickAnimationMode extends ClickAnimationMode {
         const [mouse_x, mouse_y, mask] = global.get_pointer();
 
         let actor = new St.Icon({
-            x: mouse_x - (options.icon_size / 2),
-            y: mouse_y - (options.icon_size / 2),
+            x: mouse_x - (options.icon_size * global.ui_scale / 2),
+            y: mouse_y - (options.icon_size * global.ui_scale / 2),
             reactive: false,
             can_focus: false,
             track_hover: false,
