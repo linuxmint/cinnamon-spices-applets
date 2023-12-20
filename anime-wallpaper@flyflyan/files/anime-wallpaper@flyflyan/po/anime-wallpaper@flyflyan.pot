@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-20 15:57+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. settings-schema.json->saveImage->description
+#. settings-schema.json->saveImage->tooltip
+#: applet.js:89
+msgid "Automatically save background images"
+msgstr ""
+
+#. settings-schema.json->slideshow->description
+#. settings-schema.json->slideshow->tooltip
+#: applet.js:93
+msgid "Play backgrounds as a slideshow"
+msgstr ""
+
+#. settings-schema.json->click->description
+#. settings-schema.json->click->tooltip
+#: applet.js:97
+msgid "Enable click to switch images"
+msgstr ""
+
+#. metadata.json->name
+msgid "Anime Desktop Wallpaper"
+msgstr ""
+
+#. metadata.json->description
+msgid "Download and apply Anime Wallpaper to your desktop"
+msgstr ""
+
+#. settings-schema.json->section1->description
+msgid "Configure"
+msgstr ""
+
+#. settings-schema.json->resource->description
+msgid "Wallpaper api resource"
+msgstr ""
+
+#. settings-schema.json->resource->options
+msgid "loliapi.com"
+msgstr ""
+
+#. settings-schema.json->resource->options
+msgid "zichen.zone"
+msgstr ""
+
+#. settings-schema.json->resource->options
+msgid "moe.jitsu.top"
+msgstr ""
+
+#. settings-schema.json->resource->options
+msgid "paugram.com"
+msgstr ""
+
+#. settings-schema.json->resource->options
+msgid "t.mwm.moe"
+msgstr ""
+
+#. settings-schema.json->resource->options
+msgid "dmoe.cc"
+msgstr ""
+
+#. settings-schema.json->resource->options
+msgid "api.vvhan.com"
+msgstr ""
+
+#. settings-schema.json->resource->options
+msgid "paulzzh.com"
+msgstr ""
+
+#. settings-schema.json->resource->tooltip
+msgid "Select a wallpaper resource"
+msgstr ""
+
+#. settings-schema.json->saveImagePath->description
+msgid "Save background images to"
+msgstr ""
+
+#. settings-schema.json->saveImagePath->tooltip
+msgid "Automatically save background images to this directory"
+msgstr ""
+
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->delay->description
+#. settings-schema.json->delay->tooltip
+msgid "Delay"
+msgstr ""
