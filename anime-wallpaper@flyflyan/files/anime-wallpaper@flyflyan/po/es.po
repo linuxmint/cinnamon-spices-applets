@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-20 15:57+0200\n"
+"PO-Revision-Date: 2023-12-21 10:12-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4\n"
+
+#. settings-schema.json->saveImage->description
+#. settings-schema.json->saveImage->tooltip
+#: applet.js:89
+msgid "Automatically save background images"
+msgstr "Guardar automáticamente imágenes de fondo"
+
+#. settings-schema.json->slideshow->description
+#. settings-schema.json->slideshow->tooltip
+#: applet.js:93
+msgid "Play backgrounds as a slideshow"
+msgstr "Reproducir fondos como un pase de diapositivas"
+
+#. settings-schema.json->click->description
+#. settings-schema.json->click->tooltip
+#: applet.js:97
+msgid "Enable click to switch images"
+msgstr "Activar el clic para cambiar de imagen"
+
+#. metadata.json->name
+msgid "Anime Desktop Wallpaper"
+msgstr "Fondo de escritorio de anime"
+
+#. metadata.json->description
+msgid "Download and apply Anime Wallpaper to your desktop"
+msgstr "Descarga y aplica fondos de anime a tu escritorio"
+
+#. settings-schema.json->section1->description
+msgid "Configure"
+msgstr "Configurar"
+
+#. settings-schema.json->resource->description
+msgid "Wallpaper api resource"
+msgstr "Recurso API de fondo de pantalla"
+
+#. settings-schema.json->resource->options
+msgid "loliapi.com"
+msgstr "loliapi.com"
+
+#. settings-schema.json->resource->options
+msgid "zichen.zone"
+msgstr "zichen.zone"
+
+#. settings-schema.json->resource->options
+msgid "moe.jitsu.top"
+msgstr "moe.jitsu.top"
+
+#. settings-schema.json->resource->options
+msgid "paugram.com"
+msgstr "paugram.com"
+
+#. settings-schema.json->resource->options
+msgid "t.mwm.moe"
+msgstr "t.mwm.moe"
+
+#. settings-schema.json->resource->options
+msgid "dmoe.cc"
+msgstr "dmoe.cc"
+
+#. settings-schema.json->resource->options
+msgid "api.vvhan.com"
+msgstr "api.vvhan.com"
+
+#. settings-schema.json->resource->options
+msgid "paulzzh.com"
+msgstr "paulzzh.com"
+
+#. settings-schema.json->resource->tooltip
+msgid "Select a wallpaper resource"
+msgstr "Seleccione un recurso de fondo de pantalla"
+
+#. settings-schema.json->saveImagePath->description
+msgid "Save background images to"
+msgstr "Guardar imágenes de fondo en"
+
+#. settings-schema.json->saveImagePath->tooltip
+msgid "Automatically save background images to this directory"
+msgstr "Guardar automáticamente las imágenes de fondo en este directorio"
+
+#. settings-schema.json->delay->units
+msgid "minutes"
+msgstr "minutos"
+
+#. settings-schema.json->delay->description
+#. settings-schema.json->delay->tooltip
+msgid "Delay"
+msgstr "Retraso"
