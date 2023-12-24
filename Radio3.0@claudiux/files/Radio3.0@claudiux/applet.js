@@ -223,10 +223,13 @@ validChars = validChars.replace(/,/g, "");
 validChars = Array.from(validChars);
 //~ global.log("validChars: "+validChars);
 
-
-
 function _get_system_natural_scroll() {
-  let _SETTINGS_SCHEMA='org.cinnamon.desktop.peripherals.mouse';
+  var _SETTINGS_SCHEMA;
+  if (versionCompare(getenv("CINNAMON_VERSION"), "5.1") <= 0) {
+    _SETTINGS_SCHEMA='org.cinnamon.settings-daemon.peripherals.mouse';
+  } else {
+    _SETTINGS_SCHEMA='org.cinnamon.desktop.peripherals.mouse';
+  }
   let _SETTINGS_KEY = 'natural-scroll';
   let _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
   let ret = _interface_settings.get_boolean(_SETTINGS_KEY);
@@ -1153,7 +1156,7 @@ WebRadioReceiverAndRecorder.prototype = {
   get_user_settings: function() {
     //log("get_user_settings");
 
-    this.settings.bind("show-volume-level-near-icon", "show_volume_level_near_icon", this.volume_near_icon);
+    this.settings.bind("show-volume-level-near-icon", "show_volume_level_near_icon", this.volume_near_icon.bind(this));
     this.settings.bind("dont-check-dependencies", "dont_check_dependencies");
     this.settings.bind("recentRadios", "recentRadios");
     this.settings.bind("volume-step", "volume_step");
@@ -1228,6 +1231,15 @@ WebRadioReceiverAndRecorder.prototype = {
       this.set_applet_label(""+this.percentage+"%")
     } else {
       this.set_applet_label("")
+    }
+
+    if (this._applet_context_menu == null || this.context_menu_item_showVolumeNearIcon == null) return;
+
+    let items = this._applet_context_menu._getMenuItems();
+    let index = items.indexOf(this.context_menu_item_showVolumeNearIcon);
+
+    if (index > -1 && this.context_menu_item_showVolumeNearIcon._switch.state != this.show_volume_level_near_icon) {
+      this.context_menu_item_showVolumeNearIcon._switch.setToggleState(this.show_volume_level_near_icon);
     }
   },
 
