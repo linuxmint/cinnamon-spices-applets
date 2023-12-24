@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-28 15:11+0200\n"
-"PO-Revision-Date: 2020-12-19 16:59+0100\n"
+"PO-Revision-Date: 2023-12-24 13:44+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
-"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: po\n"
 
@@ -156,7 +156,8 @@ msgid ""
 "\tthe next largest becomes the new value by which the readings\n"
 "\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
 "\tHowever, it also means that if there is a large reading small readings\n"
-"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small "
+"readings\n"
 "\tthen slightly larger readings may appear larger than they should.\n"
 "\tIf not enabled the largest value used will be the largest reading since\n"
 "\tcinnamon was started.\n"
@@ -188,27 +189,26 @@ msgstr "Etiketfarve"
 
 #: ../4.0/prefsui.glade.h:4
 msgid "Curves thickness"
-msgstr ""
+msgstr "Kurvens tykkelse"
 
 #: ../4.0/prefsui.glade.h:10
 msgid "Color by activity level"
-msgstr ""
+msgstr "Farve efter aktivitetsniveau"
 
 #: ../4.0/prefsui.glade.h:11
 msgid "Use automatic colors"
-msgstr ""
+msgstr "Brug automatiske farver"
 
 #: ../4.0/prefsui.glade.h:13
 msgid "by CPU:"
-msgstr ""
+msgstr "efter CPU:"
 
 #: ../4.0/prefsui.glade.h:15
 #, no-c-format
 msgid "by activity level (in %):"
-msgstr ""
+msgstr "efter aktivitetsniveau (i %):"
 
 #: ../4.0/prefsui.glade.h:31
-#, fuzzy
 msgid ""
 "Auto Scaling:\n"
 "    This will scale the line graph by the largest reading within the\n"
@@ -219,7 +219,8 @@ msgid ""
 "    may become indistinguishable from 0. And if there are only small "
 "readings\n"
 "    then slightly larger readings may appear larger than they should.\n"
-"    If not enabled the largest value used will be the largest reading since\n"
+"    If not enabled the largest value used will be the largest reading "
+"since\n"
 "    cinnamon was started.\n"
 "\n"
 "Logarithmic Scaling:\n"
@@ -354,11 +355,11 @@ msgstr "Indstillinger"
 
 #: ../3.0/applet.js:323 ../3.2/applet.js:334
 msgid "Please install \"gir1.2-gtop-2.0\" package."
-msgstr "Installér pakken \"gir1.2-gtop-2.0\"."
+msgstr "Installér pakken “gir1.2-gtop-2.0”."
 
 #: ../3.0/applet.js:328 ../3.2/applet.js:339
 msgid "Reload this applet"
-msgstr ""
+msgstr "Genindlæs panelprogrammet"
 
 #: ../3.0/prefs.js:290 ../3.2/prefs.js:294 ../3.4/prefs.js:338
 #: ../4.0/prefs.js:494
@@ -412,20 +413,20 @@ msgstr ""
 
 #: ../4.0/prefs.js:335
 msgid "00-20"
-msgstr ""
+msgstr "00–20"
 
 #: ../4.0/prefs.js:335
 msgid "20-40"
-msgstr ""
+msgstr "20–40"
 
 #: ../4.0/prefs.js:335
 msgid "40-60"
-msgstr ""
+msgstr "40–60"
 
 #: ../4.0/prefs.js:335
 msgid "60-80"
-msgstr ""
+msgstr "60–80"
 
 #: ../4.0/prefs.js:335
 msgid "80-100"
-msgstr ""
+msgstr "80–100"
