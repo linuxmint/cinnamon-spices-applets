@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-16 17:17+0200\n"
+"POT-Creation-Date: 2023-12-24 10:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,105 +18,105 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: applet.js:90
+#: applet.js:99
 msgid "Sensors Monitor"
 msgstr ""
 
-#: applet.js:403 applet.js:455
+#: applet.js:463 applet.js:505
 msgid "high:"
 msgstr ""
 
-#: applet.js:403 applet.js:405 applet.js:455 applet.js:457 applet.js:495
+#: applet.js:463 applet.js:465 applet.js:505 applet.js:507 applet.js:548
 msgid "n/a"
 msgstr ""
 
-#: applet.js:405 applet.js:457
+#: applet.js:465 applet.js:507
 msgid "crit:"
 msgstr ""
 
-#: applet.js:495 applet.js:538
+#: applet.js:548 applet.js:591
 msgid "min:"
 msgstr ""
 
-#: applet.js:540
+#: applet.js:593
 msgid "max:"
 msgstr ""
 
-#: applet.js:568
+#: applet.js:621
 msgid "No intrusion detected"
 msgstr ""
 
-#: applet.js:568
+#: applet.js:621
 msgid "INTRUSION DETECTED!"
 msgstr ""
 
-#: applet.js:588
+#: applet.js:641
 msgid "Must be configured!"
 msgstr ""
 
-#: applet.js:863
+#: applet.js:896
 msgid "Settings"
 msgstr ""
 
-#: applet.js:863
+#: applet.js:896
 msgid ":"
 msgstr ""
 
 #. settings-schema.json->page_General->title
-#: applet.js:870
+#: applet.js:903
 msgid "⚙ General"
 msgstr ""
 
-#: applet.js:880
+#: applet.js:913
 msgid "🌡 Temperature sensors"
 msgstr ""
 
-#: applet.js:890
+#: applet.js:923
 msgid "🤂 Fan sensors"
 msgstr ""
 
-#: applet.js:900
+#: applet.js:933
 msgid "🗲 Voltage sensors"
 msgstr ""
 
-#: applet.js:910
+#: applet.js:943
 msgid "⮿ Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#: applet.js:921
+#: applet.js:954
 msgid "Run xsensors"
 msgstr ""
 
-#: applet.js:932
+#: applet.js:965
 msgid "Reload this applet"
 msgstr ""
 
-#: applet.js:1224
+#: applet.js:1256
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
 
-#: lib/checkDependencies.js:303
+#: lib/checkDependencies.js:317
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr ""
 
-#: lib/checkDependencies.js:304
+#: lib/checkDependencies.js:318
 msgid "All dependencies are installed"
 msgstr ""
 
-#: lib/checkDependencies.js:332
+#: lib/checkDependencies.js:346
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 
-#: lib/checkDependencies.js:333
+#: lib/checkDependencies.js:347
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 
-#: lib/checkDependencies.js:334
+#: lib/checkDependencies.js:348
 msgid "Some dependencies are not installed!"
 msgstr ""
 
