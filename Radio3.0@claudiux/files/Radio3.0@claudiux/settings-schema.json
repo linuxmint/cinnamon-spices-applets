@@ -273,12 +273,13 @@
     },
     "sectionBehaviorSymbolicIconColor": {
       "type": "section",
-      "title": "Symbolic Icon Color",
+      "title": "Icon",
       "keys": [
         "color-on",
         "color-off",
         "color-recording",
-        "show-favicon"
+        "show-favicon",
+        "show-volume-level-near-icon"
       ]
     },
     "sectionNetworkQuality": {
@@ -1708,7 +1709,8 @@
     "default": 0
   },
   "show-volume-level-near-icon": {
-    "type": "generic",
+    "type": "switch",
+    "description": "Display volume level near icon",
     "default": true
   }
 }
