@@ -8,207 +8,243 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-08 11:28+0100\n"
-"PO-Revision-Date: 2019-11-30 14:17+0100\n"
+"PO-Revision-Date: 2023-12-24 10:08+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:215 applet.js:376
+#: 2.6/applet.js:88 2.6/applet.js:303 3.4/applet.js:218 3.4/applet.js:380
 msgid "Timer"
 msgstr "Nedtælling"
 
-#. settings-schema.json->preset_time->columns->title
-#: applet.js:221 applet.js:260 applet.js:353
-msgid "Hours"
-msgstr "Timer"
-
-#. settings-schema.json->preset_time->columns->title
-#: applet.js:221 applet.js:261 applet.js:353
+#. 3.4->settings-schema.json->preset_time->columns->title
+#: 2.6/applet.js:94 2.6/applet.js:221 2.6/applet.js:301 3.4/applet.js:224
+#: 3.4/applet.js:264 3.4/applet.js:357
 msgid "Minutes"
 msgstr "Minutter"
 
-#: applet.js:221 applet.js:353
-msgid "and"
-msgstr "og"
+#. 3.4->settings-schema.json->preset_time->columns->title
+#: 2.6/applet.js:220 2.6/applet.js:301 3.4/applet.js:224 3.4/applet.js:263
+#: 3.4/applet.js:357
+msgid "Hours"
+msgstr "Timer"
 
-#. settings-schema.json->preset_time->columns->title
-#: applet.js:221 applet.js:262 applet.js:353
+#. 3.4->settings-schema.json->preset_time->columns->title
+#: 2.6/applet.js:222 2.6/applet.js:301 3.4/applet.js:224 3.4/applet.js:265
+#: 3.4/applet.js:357
 msgid "Seconds"
 msgstr "Sekunder"
 
-#: applet.js:238
+#: 2.6/applet.js:224 3.4/applet.js:241
 msgid "Reset"
 msgstr "Nulstil"
 
-#: applet.js:523
+#: 2.6/applet.js:301 3.4/applet.js:224 3.4/applet.js:357
+msgid "and"
+msgstr "og"
+
+#: 2.6/applet.js:450 3.4/applet.js:533
 msgid "Okay"
 msgstr "Okay"
 
-#: applet.js:541
+#: 2.6/applet.js:468 3.4/applet.js:551
 msgid "Cinnamon Timer"
 msgstr "Cinnamon-timer"
 
-#. settings-schema.json->page1->title
-msgid "General"
-msgstr "Generelt"
+#. metadata.json->name
+msgid "Timer with notifications"
+msgstr "Timer med underretninger"
 
-#. settings-schema.json->page2->title
-msgid "Sounds"
-msgstr "Lyde"
+#. metadata.json->description
+msgid "A timer app with visual and auditory notifications."
+msgstr "En timer med synlige og hørbare underretninger"
 
-#. settings-schema.json->page3->title
-#. settings-schema.json->section3->title
-#. settings-schema.json->preset_time->description
-msgid "Preset Times"
-msgstr "Forudindstillede tider"
-
-#. settings-schema.json->page4->title
-#. settings-schema.json->section4->title
-#. settings-schema.json->slider_intervals->description
-msgid "Slider Intervals"
-msgstr "Skyderintervaller"
-
-#. settings-schema.json->section1->title
-msgid "General Settings"
-msgstr "Generelle indstillinger"
-
-#. settings-schema.json->section2->title
-msgid "Sound Settings"
-msgstr "Lydindstillinger"
-
-#. settings-schema.json->confirm-prompt-enable->description
+#. 2.6->settings-schema.json->confirm-prompt-enable->description
+#. 3.4->settings-schema.json->confirm-prompt-enable->description
 msgid "Check this to place a prompt on the window when time has elapsed."
 msgstr "Aktivér denne for at vise et vindue, når tiden er gået."
 
-#. settings-schema.json->confirm-prompt-enable->tooltip
+#. 2.6->settings-schema.json->confirm-prompt-enable->tooltip
+#. 3.4->settings-schema.json->confirm-prompt-enable->tooltip
 msgid "Check this to place a prompt on the window when time has elapsed"
 msgstr "Aktivér denne for at vise et vindue, når tiden er gået"
 
-#. settings-schema.json->message-prompt-enable->description
-#. settings-schema.json->message-prompt-enable->tooltip
+#. 2.6->settings-schema.json->message-prompt-enable->description
+#. 2.6->settings-schema.json->message-prompt-enable->tooltip
+#. 3.4->settings-schema.json->message-prompt-enable->description
+#. 3.4->settings-schema.json->message-prompt-enable->tooltip
 msgid "Display a notification when time has elapsed"
-msgstr "Vis en meddelelse, når tiden er udløbet"
+msgstr "Vis en underetning, når tiden er udløbet"
 
-#. settings-schema.json->display-message->description
-#. settings-schema.json->display-message->tooltip
+#. 2.6->settings-schema.json->display-message->description
+#. 2.6->settings-schema.json->display-message->tooltip
+msgid "Message displayed in notification windows"
+msgstr "Besked vist i underretningsvinduet"
+
+#. 2.6->settings-schema.json->sound-prompt-enable->description
+#. 2.6->settings-schema.json->sound-prompt-enable->tooltip
+#. 3.4->settings-schema.json->sound-prompt-enable->description
+#. 3.4->settings-schema.json->sound-prompt-enable->tooltip
+msgid "Play a sound when time is elapsed"
+msgstr "Afspil en lyd, når tiden er gået"
+
+#. 2.6->settings-schema.json->sound-file->description
+#. 3.4->settings-schema.json->sound-file->description
+msgid "Full path and filename of alert sound file"
+msgstr "Fuld sti og filnavn til lydfilen"
+
+#. 2.6->settings-schema.json->sound-file->tooltip
+#. 3.4->settings-schema.json->sound-file->tooltip
+msgid "Must have Sox installed. Most sound file types supported"
+msgstr "Sox skal være installeret. De fleste lydfiltyper er understøttet"
+
+#. 2.6->settings-schema.json->display-menu-enable->description
+#. 2.6->settings-schema.json->display-menu-enable->tooltip
+#. 3.4->settings-schema.json->display-menu-enable->description
+#. 3.4->settings-schema.json->display-menu-enable->tooltip
+msgid "Show the timer menu when time is elapsed"
+msgstr "Vis timermenuen, når tiden er gået"
+
+#. 2.6->settings-schema.json->time_display_enable->description
+#. 2.6->settings-schema.json->time_display_enable->tooltip
+#. 3.4->settings-schema.json->duration-display-enable->description
+#. 3.4->settings-schema.json->duration-display-enable->tooltip
+msgid "Display remaining time in panel"
+msgstr "Vis resterende tid i panelet"
+
+#. 2.6->settings-schema.json->alarm_end->description
+#. 2.6->settings-schema.json->alarm_end->tooltip
+#. 2.6->settings-schema.json->alarm_start->description
+#. 2.6->settings-schema.json->alarm_start->tooltip
+#. 3.4->settings-schema.json->alarm_end->description
+#. 3.4->settings-schema.json->alarm_end->tooltip
+#. 3.4->settings-schema.json->alarm_start->description
+#. 3.4->settings-schema.json->alarm_start->tooltip
+msgid "Do not change, the time the alarm is set to expire"
+msgstr "Ændr ikke tiden, som alarmen er sat til"
+
+#. 3.4->settings-schema.json->page1->title
+msgid "General"
+msgstr "Generelt"
+
+#. 3.4->settings-schema.json->page2->title
+msgid "Sounds"
+msgstr "Lyde"
+
+#. 3.4->settings-schema.json->page3->title
+#. 3.4->settings-schema.json->section3->title
+#. 3.4->settings-schema.json->preset_time->description
+msgid "Preset Times"
+msgstr "Forudindstillede tider"
+
+#. 3.4->settings-schema.json->page4->title
+#. 3.4->settings-schema.json->section4->title
+#. 3.4->settings-schema.json->slider_intervals->description
+msgid "Slider Intervals"
+msgstr "Skyderintervaller"
+
+#. 3.4->settings-schema.json->section1->title
+msgid "General Settings"
+msgstr "Generelle indstillinger"
+
+#. 3.4->settings-schema.json->section2->title
+msgid "Sound Settings"
+msgstr "Lydindstillinger"
+
+#. 3.4->settings-schema.json->display-message->description
+#. 3.4->settings-schema.json->display-message->tooltip
 msgid ""
 "Global message displayed in notification windows unless defined in preset "
 "time."
 msgstr ""
-"Global besked vist i meddelelsesvinduet, med mindre andet er angivet under "
-"forudindstillede tider."
+"Global besked vist i underretningsvinduet, med mindre andet er angivet "
+"under forudindstillede tider."
 
-#. settings-schema.json->sound-prompt-enable->description
-#. settings-schema.json->sound-prompt-enable->tooltip
-msgid "Play a sound when time is elapsed"
-msgstr "Afspil en lyd, når tiden er gået"
+#. 3.4->settings-schema.json->sound-volume->description
+#. 3.4->settings-schema.json->sound-volume->tooltip
+msgid "Specify the playback volume"
+msgstr "Angiv afspilningslydstyrke"
 
-#. settings-schema.json->sound-file->description
-msgid "Full path and filename of alert sound file"
-msgstr "Fuld sti og filnavn til lydfilen"
-
-#. settings-schema.json->sound-file->tooltip
-msgid "Must have Sox installed. Most sound file types supported"
-msgstr "Sox skal være installeret. De fleste lydfiltyper er understøttet"
-
-#. settings-schema.json->display-menu-enable->description
-#. settings-schema.json->display-menu-enable->tooltip
-msgid "Show the timer menu when time is elapsed"
-msgstr "Vis timermenuen, når tiden er gået"
-
-#. settings-schema.json->duration-display-enable->description
-#. settings-schema.json->duration-display-enable->tooltip
-msgid "Display remaining time in panel"
-msgstr "Vis resterende tid i panelet"
-
-#. settings-schema.json->alarmtime-display-enable->description
-#. settings-schema.json->alarmtime-display-enable->tooltip
+#. 3.4->settings-schema.json->alarmtime-display-enable->description
+#. 3.4->settings-schema.json->alarmtime-display-enable->tooltip
 msgid "Display alarm time in panel"
 msgstr "Vis alarmtiden i panelet"
 
-#. settings-schema.json->alarmtime-format-small->description
+#. 3.4->settings-schema.json->alarmtime-format-small->description
 msgid "Format used to display alarm time in the near future"
 msgstr "Format til visning af alarmtiden i den nærmeste fremtid"
 
-#. settings-schema.json->alarmtime-format-small->tooltip
+#. 3.4->settings-schema.json->alarmtime-format-small->tooltip
 msgid ""
 "If the alarm time is less than the minutes specified below away,\n"
 "the alarm time can be displayed with more details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
+"time-format)"
 msgstr ""
 "Er alarmtiden mindre end antal minutter angivet nedenfor,\n"
 "kan alarmtiden vises med flere detaljer\n"
-"(se https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(se https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
+"time-format)"
 
-#. settings-schema.json->alarmtime-format-large->description
+#. 3.4->settings-schema.json->alarmtime-format-large->description
 msgid "Format used to display alarm time in the not so near future"
 msgstr "Format til visning af alarmtiden i den ikke så nære fremtid"
 
-#. settings-schema.json->alarmtime-format-large->tooltip
+#. 3.4->settings-schema.json->alarmtime-format-large->tooltip
 msgid ""
 "If the alarm time is more than the minutes specified below away,\n"
 "the alarm time can be displayed with less details\n"
-"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
+"time-format)"
 msgstr ""
 "Er alarmtiden større end antal minutter angivet nedenfor,\n"
 "kan alarmtiden vises med færre detaljer\n"
-"(se https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-"
-"format)"
+"(se https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-"
+"time-format)"
 
-#. settings-schema.json->alarmtime-format-switchover->units
+#. 3.4->settings-schema.json->alarmtime-format-switchover->units
 msgid "minutes"
 msgstr "minutter"
 
-#. settings-schema.json->alarmtime-format-switchover->description
+#. 3.4->settings-schema.json->alarmtime-format-switchover->description
 msgid "Time when switching from small to large time format"
 msgstr "Tiden hvor der skiftes fra lille til stort tidsformat"
 
-#. settings-schema.json->alarmtime-format-switchover->tooltip
+#. 3.4->settings-schema.json->alarmtime-format-switchover->tooltip
 msgid "Switch over time between the two formats specified above"
 msgstr "Tiden hvor der skiftes mellem de to formater angivet ovenfor"
 
-#. settings-schema.json->alarm_end->description
-#. settings-schema.json->alarm_end->tooltip
-#. settings-schema.json->alarm_start->description
-#. settings-schema.json->alarm_start->tooltip
-msgid "Do not change, the time the alarm is set to expire"
-msgstr "Ændr ikke tiden, som alarmen er sat til"
+#. 3.4->settings-schema.json->auto-loop-enable->description
+#. 3.4->settings-schema.json->auto-loop-enable->tooltip
+msgid "Restart the timer automatically when time is elapsed"
+msgstr "Genstart automatisk timeren, når tiden er gået"
 
-#. settings-schema.json->message->description
-#. settings-schema.json->message->tooltip
+#. 3.4->settings-schema.json->message->description
+#. 3.4->settings-schema.json->message->tooltip
 msgid "Do not change, message being displayed when the current timer expires"
 msgstr "Ændr ikke beskeden, der vises, når tiden er udløbet"
 
-#. settings-schema.json->slider_intervals->columns->title
+#. 3.4->settings-schema.json->slider_intervals->columns->title
 msgid "Minimum"
 msgstr "Minimum"
 
-#. settings-schema.json->slider_intervals->columns->title
+#. 3.4->settings-schema.json->slider_intervals->columns->title
 msgid "Maximum"
 msgstr "Maksimum"
 
-#. settings-schema.json->slider_intervals->columns->title
+#. 3.4->settings-schema.json->slider_intervals->columns->title
 msgid "Step"
 msgstr "Trin"
 
-#. settings-schema.json->preset_time->columns->title
+#. 3.4->settings-schema.json->preset_time->columns->title
 msgid "Label"
 msgstr "Etiket"
 
-#. settings-schema.json->preset_time->columns->title
+#. 3.4->settings-schema.json->preset_time->columns->title
 msgid "Custom Message (overrides global message)"
 msgstr "Selvvalgt besked (tilsidesætter global besked)"
-
-#~ msgid "A timer app with visual and auditory notifications."
-#~ msgstr "Et panelprogrammer der tæller ned. Visuel og lydlig påmindelse."
-
-#~ msgid "Timer with notifications"
-#~ msgstr "Nedtælling med påmindelser"
