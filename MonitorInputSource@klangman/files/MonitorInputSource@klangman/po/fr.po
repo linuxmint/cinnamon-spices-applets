@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-28 10:34-0500\n"
-"PO-Revision-Date: 2023-12-04 19:31+0100\n"
+"POT-Creation-Date: 2023-12-17 18:39-0500\n"
+"PO-Revision-Date: 2023-12-25 13:05+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,7 +18,39 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:170 applet.js:463
+#: applet.js:51
+msgid "Ctrl+"
+msgstr "Ctrl+"
+
+#: applet.js:54
+msgid "Shift+"
+msgstr "Maj+"
+
+#: applet.js:58
+msgid "Left Click"
+msgstr "Clic gauche"
+
+#: applet.js:60
+msgid "Middle Click"
+msgstr "Clic-molette"
+
+#: applet.js:62
+msgid "Right Click"
+msgstr "Clic droit"
+
+#: applet.js:64
+msgid "Back Click"
+msgstr "Clic Arrière"
+
+#: applet.js:66
+msgid "Forward Click"
+msgstr "Clic Avant"
+
+#: applet.js:158 applet.js:373 applet.js:375
+msgid "Monitor input sources"
+msgstr "Source d'entrée pour l'écran"
+
+#: applet.js:170 applet.js:464
 msgid "Detecting monitors..."
 msgstr "Détection des écrans..."
 
@@ -50,7 +82,11 @@ msgstr "Erreur, code de sortie de \"ddcutil\" "
 msgid "No capable monitors detected"
 msgstr "Aucun écran compatible n'a été détecté"
 
-#: applet.js:455
+#: applet.js:369
+msgid "for"
+msgstr "pour"
+
+#: applet.js:456
 msgid "Refresh"
 msgstr "Actualiser"
 
