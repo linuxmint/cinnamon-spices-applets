@@ -69,11 +69,15 @@ IconLabel.prototype = {
     set_label_fixed_width: function(fixed_width_text) {
         Mainloop.timeout_add(1, Lang.bind(this, function() {
             let text = this.label.get_text();
-            this.set_label_to_preferred_width();
-            this.set_label_text(fixed_width_text);
-            let fixed_width = this.label.get_width();
-            this.set_label_width(fixed_width);
-            this.set_label_text(text);
+
+            if (text) {
+                this.set_label_to_preferred_width();
+                this.set_label_text(fixed_width_text);
+                let fixed_width = this.label.get_width();
+                this.set_label_width(fixed_width);
+                this.set_label_text(text);
+            }
+
             return false;
         }));
     },
