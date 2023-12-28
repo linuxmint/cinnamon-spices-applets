@@ -1,0 +1,72 @@
+{
+    "filter_active": {
+        "type": "checkbox",
+        "description": "Filter Active",
+        "default": false
+    },
+    "category": {
+        "type": "combobox",
+        "description": "Category",
+        "default": "corrections",
+        "options": {
+            "Color Blindness - Corrections": "corrections",
+            "Color Blindness - Simulations": "simulations",
+            "Inversions": "inversions",
+            "Other Effects": "other"
+        }
+    },
+    "color_corrections": {
+        "type": "combobox",
+        "description": "Corrections",
+        "default": "DeuteranopiaCorrection",
+        "dependency": "category=corrections",
+        "options": {
+            "Protanopia Correction": "ProtanopiaCorrection",
+            "Protanopia High Contrast": "ProtanopiaCorrectionHighContrast",
+            "Deuteranopia Correction": "DeuteranopiaCorrection",
+            "Deuteranopia High Contrast": "DeuteranopiaCorrectionHighContrast",
+            "Tritanopia Correction": "TritanopiaCorrection"
+        }
+    },
+    "color_simulations": {
+        "type": "combobox",
+        "description": "Simulations",
+        "default": "DeuteranopiaSimulation",
+        "dependency": "category=simulations",
+        "options": {
+            "Protanopia Simulation": "ProtanopiaSimulation",
+            "Deuteranopia Simulation": "DeuteranopiaSimulation",
+            "Tritanopia Simulation": "TritanopiaSimulation"
+        }
+    },
+    "inversions": {
+        "type": "combobox",
+        "description": "Inversions",
+        "default": "LightnessInversion",
+        "dependency": "category=inversions",
+        "options": {
+            "Lightness Inversion": "LightnessInversion",
+            "Color Inversion": "ColorInversion"
+        }
+    },
+    "other": {
+        "type": "combobox",
+        "description": "Other Effects",
+        "default": "Desaturation",
+        "dependency": "category=other",
+        "options": {
+            "Desaturation": "Desaturation",
+            "Channel Mixer - GBR": "ColorMixerGBR",
+            "Channel Mixer - BRG": "ColorMixerBRG"
+        }
+    },
+    "filter_strength": {
+        "type": "scale",
+        "description": "Filter Strength",
+        "default": 99,
+        "min": 1,
+        "max": 99,
+        "step": 1,
+        "dependency": "category!=inversions"
+    }
+}
