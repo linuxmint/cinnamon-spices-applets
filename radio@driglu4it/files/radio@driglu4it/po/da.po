@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-08 17:18+0100\n"
-"PO-Revision-Date: 2022-10-28 19:24+0200\n"
+"PO-Revision-Date: 2023-12-25 10:49+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
@@ -52,8 +52,8 @@ msgid "Copy current song title"
 msgstr "Kopiér den aktuelle sangs titel"
 
 #: 4.6/applet.js:202
-msgid "Download from Youtube"
-msgstr "Download fra Youtube"
+msgid "Download from YouTube"
+msgstr "Download fra YouTube"
 
 #: 4.6/applet.js:215
 msgid "Can't copy current Song. Is the Radio playing?"
@@ -65,8 +65,8 @@ msgid "download finished. File saved to %s"
 msgstr "download er færdig. Filen gemt i %s"
 
 #: 4.6/applet.js:237
-msgid "Couldn't download song from Youtube due to an Error."
-msgstr "Kunne ikke downloade sangen fra Youtube pga. en fejl."
+msgid "Couldn't download song from YouTube due to an Error."
+msgstr "Kunne ikke downloade sangen fra YouTube pga. en fejl."
 
 #: 4.6/applet.js:238
 msgid "See Logs for more information"
@@ -193,8 +193,8 @@ msgid "Volume"
 msgstr "Lydstyrke"
 
 #. 4.6->settings-schema.json->youtube-section->title
-msgid "Youtube Download"
-msgstr "Download fra Youtube"
+msgid "YouTube Download"
+msgstr "Download fra YouTube"
 
 #. 4.6->settings-schema.json->tree->columns->title
 #. 3.0->settings-schema.json->tree->columns->title
@@ -273,8 +273,8 @@ msgid ""
 "The initial volume is applied when clicking on a radio stream and no other "
 "radio stream is already running"
 msgstr ""
-"Begyndelseslydstyrke anvendes, når der klikkes på en radiostrøm, og der "
-"ikke allerede kører en radiostrøm"
+"Begyndelseslydstyrke anvendes, når der klikkes på en radiostrøm, og der ikke "
+"allerede kører en radiostrøm"
 
 #. 4.6->settings-schema.json->music-download-dir-select->description
 msgid "Download directory"
@@ -282,10 +282,10 @@ msgstr "Downloadmappe"
 
 #. 4.6->settings-schema.json->music-download-dir-select->tooltip
 msgid ""
-"Songs downloaded from Youtube will be saved to this directory. This feature "
+"Songs downloaded from YouTube will be saved to this directory. This feature "
 "can be found in the right-click-menu of the applet"
 msgstr ""
-"Sange downloadet fra Youtube vil blive gemt i denne mappe. Funktionen kan "
+"Sange downloadet fra YouTube vil blive gemt i denne mappe. Funktionen kan "
 "findes i panelprogrammets kontekstmenu"
 
 #. 3.0->settings-schema.json->page2->title

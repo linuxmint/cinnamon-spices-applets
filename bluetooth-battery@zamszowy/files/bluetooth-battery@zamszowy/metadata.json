@@ -1,5 +1,6 @@
 {
     "uuid": "bluetooth-battery@zamszowy",
     "name": "Bluetooth battery",
-    "description": "Shows battery levels of different devices"
+    "description": "Shows battery levels of different devices",
+    "max-instances": -1
 }
