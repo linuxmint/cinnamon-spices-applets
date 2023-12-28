@@ -7,11 +7,11 @@ function MyApplet() {
 }
 
 MyApplet.prototype = {
-    __proto__: Applet.TextIconApplet.prototype,
+    __proto__: Applet.IconApplet.prototype,
 
     _init: function(aMetadata, aOrientation, aPanelHeight, aInstanceId) {
-        Applet.TextIconApplet.prototype._init.call(this, aOrientation, aPanelHeight, aInstanceId);
-        
+        Applet.IconApplet.prototype._init.call(this, aOrientation, aPanelHeight, aInstanceId);
+
         if (Applet.hasOwnProperty("AllowedLayout")) {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
         }
