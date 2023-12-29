@@ -300,11 +300,16 @@ class CBApplet extends Applet.TextIconApplet {
         this._syncSettings();
         this._updatePanel();
         this._setOrnament();
+        let sameShader = this._activeItem._effect.effectName == this._activeData.effectName;
 
-        if (!this.filter_active) {
-            let properties = this._getProperties();
-            this._activeEffect = this._activeData.effect(properties);
-        }
+        let properties = this._getProperties();
+        this._activeEffect = this._activeData.effect(properties);
+
+        if (!sameShader)
+            this._updateEffect();
+        else
+            if (this.filter_active)
+                this._addEffect(this._activeData.effect(properties));
     }
 
     _updateSlider(slider, value) {
