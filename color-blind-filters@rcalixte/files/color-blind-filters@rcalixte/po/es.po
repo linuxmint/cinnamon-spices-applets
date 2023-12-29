@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-28 15:54-0500\n"
+"POT-Creation-Date: 2023-12-29 02:43-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -103,11 +103,11 @@ msgstr "Mezclador de canales - GBR"
 msgid "Channel Mixer - BRG"
 msgstr "Mezclador de canales - BRG"
 
-#: 5.4/applet.js:368
+#: 5.4/applet.js:373
 msgid "Current filter:"
 msgstr "Filtro actual:"
 
-#: 5.4/applet.js:370
+#: 5.4/applet.js:375
 msgid "Filters disabled."
 msgstr "Filtros desactivados."
 
@@ -121,7 +121,7 @@ msgstr ""
 "daltónicos."
 
 #. metadata.json->name
-msgid "Color-Blind Filters"
+msgid "Color-blind Filters"
 msgstr "Filtros daltónicos"
 
 #. 5.4->settings-schema.json->filter_active->description
