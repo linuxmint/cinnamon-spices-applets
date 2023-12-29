@@ -233,7 +233,11 @@ class CBApplet extends Applet.TextIconApplet {
         else
             this._removeEffect();
 
+        if (this.popupMenu.isOpen)
+            this.popupMenu.toggle();
+        this._refreshApplet();
         this._updatePanel();
+        this._setOrnament();
         this._syncSettings();
     }
 
