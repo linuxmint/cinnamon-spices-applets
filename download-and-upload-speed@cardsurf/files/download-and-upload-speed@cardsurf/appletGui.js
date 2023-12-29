@@ -74,12 +74,12 @@ IconLabel.prototype = {
             let text = this.label.get_text();
             let fixed_width = this.label.get_width();
 
-            if (text) {
-                this.set_label_text(text);
-            }
-
             if (fixed_width) {
                 this.set_label_width(fixed_width);
+            }
+
+            if (text) {
+                this.set_label_text(text);
             }
 
             return false;
