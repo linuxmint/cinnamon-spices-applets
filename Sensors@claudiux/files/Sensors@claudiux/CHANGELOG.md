@@ -1,3 +1,6 @@
+### v3.1.2~20231230
+  * Removes the --window-icon parameter for zenity v4.
+
 ### v3.1.1~20230708
   * Fixes #4929
 

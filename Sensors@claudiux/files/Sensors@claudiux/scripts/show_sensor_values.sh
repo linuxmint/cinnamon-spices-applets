@@ -2,11 +2,16 @@
 ICON=$HOME/.local/share/cinnamon/applets/Sensors@claudiux/icon.png
 TITLE="Sensors@claudiux"
 FILE=$HOME/.local/share/cinnamon/applets/Sensors@claudiux/scripts/report.txt
-
+# From v4.0.0, zenity does not support anymore the --window-icon parameter:
+ZVERSION=$(zenity --version | cut -d"." -f1)
 sleep 1
 if [ -f $FILE ]; then {
   REPORT=$(cat $FILE)
-  echo "$REPORT" | zenity --title "$TITLE" --text-info --width 600 --height 800 --window-icon="$ICON" &
+  if [ "$ZVERSION" = "3" ]; then {
+    echo "$REPORT" | zenity --title "$TITLE" --text-info --width 600 --height 800 --window-icon="$ICON" &
+  }; else {
+    echo "$REPORT" | zenity --title "$TITLE" --text-info --width 600 --height 800 &
+  }; fi
 }; fi
 
 exit 0
