@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-10 22:50-0400\n"
+"POT-Creation-Date: 2023-12-30 13:28-0500\n"
 "PO-Revision-Date: 2023-12-13 16:30+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -676,3 +676,24 @@ msgid ""
 msgstr ""
 "Az 1.4 előtti verziók ideiglenes fájlokat használtak a saját könyvtárban. "
 "Ezekre már nincs szükség, és törölhetők."
+
+#: 5.4/suspendScript.sh:22
+msgid "WARNING: SUSPENDING SOON"
+msgstr ""
+
+#: 5.4/suspendScript.sh:23
+msgid "The battery level is critical. The machine will be suspended shortly."
+msgstr ""
+
+#: 5.4/suspendScript.sh:24
+msgid "Abort Suspension"
+msgstr ""
+
+#: 5.4/suspendScript.sh:25
+#, fuzzy
+msgid "Suspend Immediately"
+msgstr "Felfüggesztés ekkor:"
+
+#: 5.4/suspendScript.sh:26
+msgid "The machine was suspended as the battery level was critical."
+msgstr ""
