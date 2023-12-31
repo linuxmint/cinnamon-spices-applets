@@ -44,6 +44,7 @@ body:
     - clipboard-eraser@Techcrafter @Techcrafter
     - clipboard-qr@wrouesnel @wrouesnel
     - collapsible-systray@feuerfuchs.eu @feuerfuchs
+    - color-blind-filters@rcalixte @rcalixte
     - color-picker@fmete @icarter09
     - commandLauncher@scollins @collinss
     - CommandRunner@appdevsw
