@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-30 13:28-0500\n"
-"PO-Revision-Date: 2023-12-24 09:49+0100\n"
+"PO-Revision-Date: 2023-12-31 09:25+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
@@ -646,21 +646,21 @@ msgstr ""
 
 #: 5.4/suspendScript.sh:22
 msgid "WARNING: SUSPENDING SOON"
-msgstr ""
+msgstr "ADVARSEL: Går snart i hviletilstand"
 
 #: 5.4/suspendScript.sh:23
 msgid "The battery level is critical. The machine will be suspended shortly."
 msgstr ""
+"Batteriniveauet er kritisk lavt. Maskinen vil snart gå i hviletilstand."
 
 #: 5.4/suspendScript.sh:24
 msgid "Abort Suspension"
-msgstr ""
+msgstr "Annullér hviletilstand"
 
 #: 5.4/suspendScript.sh:25
-#, fuzzy
 msgid "Suspend Immediately"
-msgstr "Sæt i hviletilstand ved:"
+msgstr "Gå i hviletilstand med det samme"
 
 #: 5.4/suspendScript.sh:26
 msgid "The machine was suspended as the battery level was critical."
-msgstr ""
+msgstr "Maskinen gik i hviletilstand, da batteriniveauet var kritisk lavt."
