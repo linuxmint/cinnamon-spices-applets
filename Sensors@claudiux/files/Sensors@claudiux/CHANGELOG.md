@@ -1,3 +1,7 @@
+### v3.1.3~20231231
+  * Adds the --icon parameter for zenity v4.
+  * Allows translations for messages in bash scripts.
+
 ### v3.1.2~20231230
   * Removes the --window-icon parameter for zenity v4.
 
