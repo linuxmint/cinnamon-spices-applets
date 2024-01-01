@@ -1,3 +1,6 @@
+### v3.2.1~20240102
+  * Toggle menu after selecting Suspend option.
+
 ### v3.2.0~20240101
   * Adds the ability to suspend this applet (menu option).
 
