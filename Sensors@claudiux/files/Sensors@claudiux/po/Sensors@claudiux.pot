@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-31 18:54+0100\n"
+"POT-Creation-Date: 2024-01-01 23:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,81 +18,89 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: applet.js:99
+#: applet.js:100
 msgid "Sensors Monitor"
 msgstr ""
 
-#: applet.js:463 applet.js:505
+#: applet.js:258
+msgid "Suspended"
+msgstr ""
+
+#: applet.js:468 applet.js:510
 msgid "high:"
 msgstr ""
 
-#: applet.js:463 applet.js:465 applet.js:505 applet.js:507 applet.js:548
+#: applet.js:468 applet.js:470 applet.js:510 applet.js:512 applet.js:553
 msgid "n/a"
 msgstr ""
 
-#: applet.js:465 applet.js:507
+#: applet.js:470 applet.js:512
 msgid "crit:"
 msgstr ""
 
-#: applet.js:548 applet.js:591
+#: applet.js:553 applet.js:596
 msgid "min:"
 msgstr ""
 
-#: applet.js:593
+#: applet.js:598
 msgid "max:"
 msgstr ""
 
-#: applet.js:621
+#: applet.js:626
 msgid "No intrusion detected"
 msgstr ""
 
-#: applet.js:621
+#: applet.js:626
 msgid "INTRUSION DETECTED!"
 msgstr ""
 
-#: applet.js:641
+#: applet.js:646
 msgid "Must be configured!"
 msgstr ""
 
-#: applet.js:896
+#: applet.js:901
 msgid "Settings"
 msgstr ""
 
-#: applet.js:896
+#: applet.js:901
 msgid ":"
 msgstr ""
 
 #. settings-schema.json->page_General->title
-#: applet.js:903
+#: applet.js:908
 msgid "⚙ General"
 msgstr ""
 
-#: applet.js:913
+#: applet.js:918
 msgid "🌡 Temperature sensors"
 msgstr ""
 
-#: applet.js:923
+#: applet.js:928
 msgid "🤂 Fan sensors"
 msgstr ""
 
-#: applet.js:933
+#: applet.js:938
 msgid "🗲 Voltage sensors"
 msgstr ""
 
-#: applet.js:943
+#: applet.js:948
 msgid "⮿ Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#: applet.js:954
+#: applet.js:959
 msgid "Run xsensors"
 msgstr ""
 
-#: applet.js:965
+#: applet.js:968
+msgid "Suspend Sensors"
+msgstr ""
+
+#: applet.js:978
 msgid "Reload this applet"
 msgstr ""
 
-#: applet.js:1256
+#: applet.js:1269
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
