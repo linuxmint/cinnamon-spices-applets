@@ -968,6 +968,7 @@ class SensorsApplet extends Applet.TextApplet {
     let suspend_switch = new PopupMenu.PopupSwitchMenuItem(_("Suspend Sensors"), this.suspended);
     suspend_switch.connect("toggled", Lang.bind(this, function() {
       this.suspended = !this.suspended;
+      this.menu.toggle()
     }));
     this.menu.addMenuItem(suspend_switch);
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
