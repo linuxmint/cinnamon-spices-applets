@@ -69,6 +69,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.applet_version = metadata.version;
     this.applet_name = metadata.name;
     this._temp = [];
+    this.suspended = false;
 
     // Both types of panel: horizontal and vertical:
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
@@ -247,11 +248,15 @@ class SensorsApplet extends Applet.TextApplet {
 
     // this.reaper.set_fahrenheit(this.use_fahrenheit); // Useless because toooo buggy! Let this applet do the job.
 
-    this.reaper.reap_sensors(
-      this.strictly_positive_temp ? 1 : 0,
-      this.strictly_positive_fan ? 1 : 0,
-      this.strictly_positive_volt ? 1 : 0
-    );
+    if (!this.suspended) {
+      this.reaper.reap_sensors(
+        this.strictly_positive_temp ? 1 : 0,
+        this.strictly_positive_fan ? 1 : 0,
+        this.strictly_positive_volt ? 1 : 0
+      );
+    } else {
+      this.set_applet_label(_("Suspended"));
+    }
 
     this.loopId = Mainloop.timeout_add(this.interval * 1000, () => this.reap_sensors());
     return false
@@ -957,6 +962,14 @@ class SensorsApplet extends Applet.TextApplet {
     );
     _values_in_real_time_button.connect("activate", this._on_xsensors_pressed);
     this.menu.addMenuItem(_values_in_real_time_button);
+    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+    // Button suspend
+    let suspend_switch = new PopupMenu.PopupSwitchMenuItem(_("Suspend Sensors"), this.suspended);
+    suspend_switch.connect("toggled", Lang.bind(this, function() {
+      this.suspended = !this.suspended;
+    }));
+    this.menu.addMenuItem(suspend_switch);
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
     if (RELOAD() || this.restart_in_menu) {

@@ -1,3 +1,6 @@
+### v3.2.0~20240101
+  * Adds the ability to suspend this applet (menu option).
+
 ### v3.1.3~20231231
   * Adds the --icon parameter for zenity v4.
   * Allows translations for messages in bash scripts.
