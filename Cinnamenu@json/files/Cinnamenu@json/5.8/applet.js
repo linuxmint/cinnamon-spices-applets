@@ -1018,6 +1018,7 @@ class CinnamenuApplet extends TextIconApplet {
         //if (!text || !text.trim()) return;
 
         const pattern = graphemeBaseChars(pattern_raw).toLocaleUpperCase().trim();
+        
         //Don't repeat the same search. This can happen if a key and backspace are pressed in quick
         //succession while a previous search is being carried out.
         if (pattern_raw === this.previousSearchPattern) {
@@ -1061,7 +1062,6 @@ class CinnamenuApplet extends TextIconApplet {
 
         //-----
         
-
         const showResults = () => {//sort and display all search results
             if (!this.searchActive || thisSearchId != this.currentSearchId){
                 return; //Search mode has ended or search string has changed
@@ -1144,22 +1144,35 @@ class CinnamenuApplet extends TextIconApplet {
 
         if ((typeof ans === 'number' || typeof ans === 'boolean' || typeof ans === 'bigint')
                                                                     && ans != pattern_raw ) {
+            
+            let ans_str = ans.toString();
+            //remove rounding error
+            if (typeof ans === 'number') {
+                if (ans > Number.MAX_SAFE_INTEGER || ans < Number.MIN_SAFE_INTEGER) {
+                    // JS will show up to 21 digits of an integer (inaccurately) even though
+                    // only 16 are significant, so show in exponential form instead.
+                    ans_str = Number(ans.toPrecision(16)).toExponential();
+                } else {
+                    ans_str = Number(ans.toPrecision(16)).toString();
+                }
+            }
+            
             if (!this.calcGIcon) {
                 this.calcGIcon = new Gio.FileIcon(
                         { file: Gio.file_new_for_path(__meta.path + '/../icons/calc.png')});
             }
             otherResults.push({
                             isSearchResult: true,
-                            name: ans.toString(),//('Solution:') + ' ' + ans,
+                            name: ans_str,//('Solution:') + ' ' + ans,
                             description: _('Click to copy'),
                             deleteAfterUse: true,
                             icon: new St.Icon({ gicon: this.calcGIcon,
                                                 icon_size: this.getAppIconSize() }),
                             activate: () => {
                                     const clipboard = St.Clipboard.get_default();
-                                    clipboard.set_text(St.ClipboardType.CLIPBOARD, ans.toString());}
+                                    clipboard.set_text(St.ClipboardType.CLIPBOARD, ans_str);}
                          });
-            calculatorResult = pattern_raw + " = " + ans;
+            calculatorResult = pattern_raw + " = " + ans_str;
         }
 
         //---web search option and search suggestions---
