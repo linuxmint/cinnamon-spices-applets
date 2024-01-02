@@ -1,3 +1,7 @@
+### v3.3.0~20240102
+  * Fixes #4986.
+  * From now on, the monospace font style is only used when size must be preserved.
+
 ### v3.2.1~20240102
   * Toggle menu after selecting Suspend option.
 
