@@ -115,8 +115,9 @@ class SensorsApplet extends Applet.TextApplet {
     this._variables();
 
     // Style class name:
+    let _monospace = (this.keep_size) ? "sensors-monospace" : "applet-label";
     let _border_type = (this.remove_border) ? "-noborder" : "";
-    this.actor.set_style_class_name("sensors-label%s".format(_border_type));
+    this.actor.set_style_class_name("%s sensors-label%s".format(_monospace, _border_type));
 
     // Initialize some properties:
     this.isRunning = false;
@@ -667,8 +668,9 @@ class SensorsApplet extends Applet.TextApplet {
     //~ this.check_disktemp_user_readable();
 
     var _appletLabel = "";
+    let _monospace = (this.keep_size) ? "sensors-monospace" : "applet-label";
     let _border_type = (this.remove_border) ? "-noborder" : "";
-    var _actor_style = "sensors-label%s sensors-size%s".format(_border_type, this.char_size);
+    var _actor_style = "%s sensors-label%s sensors-size%s".format(_monospace, _border_type, this.char_size);
 
     let vertical = (this._orientation == St.Side.LEFT || this._orientation == St.Side.RIGHT);
     let sep = (vertical) ? "\n" : this.separator;
@@ -703,9 +705,9 @@ class SensorsApplet extends Applet.TextApplet {
               1.0*t["crit_by_user"] : 1.0*this._get_crit_temp(this.data["temps"][t["sensor"]]);
 
             if (!isNaN(_temp_crit) && _temp_crit > 0 && _temp >= _temp_crit)
-              _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
+              _actor_style = "%s sensors-critical%s sensors-size%s".format(_monospace, _border_type, this.char_size);
             else if (!isNaN(_temp_max) && _temp_max > 0 && _temp >= _temp_max)
-              _actor_style = "sensors-high%s sensors-size%s".format(_border_type, this.char_size);
+              _actor_style = "%s sensors-high%s sensors-size%s".format(_monospace, _border_type, this.char_size);
 
             nbr_already_shown += 1;
           }
@@ -725,9 +727,9 @@ class SensorsApplet extends Applet.TextApplet {
           let _temp_max = disk["high"];
           let _temp_crit = disk["crit"];
           if (_temp >= _temp_crit)
-            _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
+            _actor_style = "%s sensors-critical%s sensors-size%s".format(_monospace, _border_type, this.char_size);
           else if (_temp >= _temp_max)
-            _actor_style = "sensors-high%s sensors-size%s".format(_border_type, this.char_size);
+            _actor_style = "%s sensors-high%s sensors-size%s".format(_monospace, _border_type, this.char_size);
 
           _shown_name = "";
           if (this.show_temp_name && !vertical)
@@ -768,7 +770,7 @@ class SensorsApplet extends Applet.TextApplet {
             1.0*f["min_by_user"] : 1.0*this._get_min_fan(this.data["fans"][f["sensor"]]);
 
           if (_fan < _fan_min)
-            _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
+            _actor_style = "%s sensors-critical%s sensors-size%s".format(_monospace, _border_type, this.char_size);
 
           nbr_already_shown += 1;
         }
@@ -807,7 +809,7 @@ class SensorsApplet extends Applet.TextApplet {
           let _voltage_min = (_min_defined_by_user && _min_defined_by_user.length > 0) ? 1.0*_min_defined_by_user : 1.0*this._get_min_voltage(this.data["voltages"][v["sensor"]]);
 
           if (_voltage >= _voltage_max || _voltage < _voltage_min)
-            _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
+            _actor_style = "%s sensors-critical%s sensors-size%s".format(_monospace, _border_type, this.char_size);
 
           nbr_already_shown += 1;
         }
@@ -836,7 +838,7 @@ class SensorsApplet extends Applet.TextApplet {
           let _intrusion_alarm = this._get_alarm_intrusion(this.data["intrusions"][i["sensor"]]);
 
           if (_intrusion_alarm)
-            _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
+            _actor_style = "%s sensors-critical%s sensors-size%s".format(_monospace, _border_type, this.char_size);
 
           nbr_already_shown += 1;
         }
