@@ -162,6 +162,21 @@
         "tooltip": "Always show the 'Mute input' switch in the context menu.",
         "default": true
     },
+    "volume-mute": {
+        "type": "keybinding",
+        "default": "XF86AudioMute",
+        "description": "Volume Mute"
+    },
+    "volume-up": {
+        "type": "keybinding",
+        "default": "XF86AudioRaiseVolume",
+        "description": "Volume Up"
+    },
+    "volume-down": {
+        "type": "keybinding",
+        "default": "XF86AudioLowerVolume",
+        "description": "Volume Down"
+    },
     "volume": {
         "type": "generic",
         "default": "50%"
