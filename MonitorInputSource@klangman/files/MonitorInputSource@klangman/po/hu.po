@@ -6,16 +6,28 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-28 10:34-0500\n"
-"PO-Revision-Date: 2023-12-13 15:22+0100\n"
+"POT-Creation-Date: 2023-12-17 18:39-0500\n"
+"PO-Revision-Date: 2024-01-06 15:38+0100\n"
+"PO-Revision-Date: 2024-01-06 15:27+0100\n"
+"Last-Translator: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language-Team: \n"
+"Language: hu\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: applet.js:170 applet.js:463
@@ -61,3 +73,39 @@ msgstr "Monitor bemeneti forrás"
 #. metadata.json->description
 msgid "Change your monitors video input source directly from the cinnamon panel"
 msgstr "Módosítsa a monitor videobemenetét közvetlenül a Cinnamon panelről"
+
+#: applet.js:51
+msgid "Ctrl+"
+msgstr "Ctrl+"
+
+#: applet.js:54
+msgid "Shift+"
+msgstr "Shift+"
+
+#: applet.js:58
+msgid "Left Click"
+msgstr "Bal kattintás"
+
+#: applet.js:60
+msgid "Middle Click"
+msgstr "Középső kattintás"
+
+#: applet.js:62
+msgid "Right Click"
+msgstr "Jobb kattintás"
+
+#: applet.js:64
+msgid "Back Click"
+msgstr "Vissza  kattintás"
+
+#: applet.js:66
+msgid "Forward Click"
+msgstr "Előre kattintás"
+
+#: applet.js:158 applet.js:373 applet.js:375
+msgid "Monitor input sources"
+msgstr "Monitor bemeneti források"
+
+#: applet.js:369
+msgid "for"
+msgstr "ehhez:"

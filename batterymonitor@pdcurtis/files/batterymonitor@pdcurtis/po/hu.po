@@ -6,15 +6,27 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-30 13:28-0500\n"
-"PO-Revision-Date: 2023-12-13 16:30+0100\n"
+"POT-Creation-Date: 2023-12-30 13:28-0500\n"
+"PO-Revision-Date: 2024-01-06 15:49+0100\n"
+"PO-Revision-Date: 2024-01-06 15:46+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language-Team: \n"
 "Language: hu\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: 5.4/applet.js:290 3.2/applet.js:135
@@ -679,21 +691,22 @@ msgstr ""
 
 #: 5.4/suspendScript.sh:22
 msgid "WARNING: SUSPENDING SOON"
-msgstr ""
+msgstr "FIGYELMEZTETÉS: HAMAROSAN FEL LESZ FÜGGESZTVE"
 
 #: 5.4/suspendScript.sh:23
 msgid "The battery level is critical. The machine will be suspended shortly."
 msgstr ""
+"Az akkumulátor töltöttségi szintje kritikus. A gépet hamarosan felfüggesztik."
 
 #: 5.4/suspendScript.sh:24
 msgid "Abort Suspension"
-msgstr ""
+msgstr "Felfüggesztés megszakítása"
 
 #: 5.4/suspendScript.sh:25
-#, fuzzy
 msgid "Suspend Immediately"
-msgstr "Felfüggesztés ekkor:"
+msgstr "Azonnali Felfüggesztés"
 
 #: 5.4/suspendScript.sh:26
 msgid "The machine was suspended as the battery level was critical."
 msgstr ""
+"A gépet felfüggesztették, mivel az akkumulátor töltöttsége kritikus volt."
