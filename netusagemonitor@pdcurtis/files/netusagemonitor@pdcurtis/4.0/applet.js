@@ -768,7 +768,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
 
             this.subMenuItem5 = new PopupMenu.PopupMenuItem(_("Open suspendScript  (Advanced Function)"));
             this.subMenuItem5.connect('activate', Lang.bind(this, function (event) {
-                GLib.spawn_command_line_async(this.textEd + ' ' + this.appletPath + '/suspendScript');
+                GLib.spawn_command_line_async(this.textEd + ' ' + this.appletPath + '/suspendScript.sh');
             }));
             this.subMenu1.menu.addMenuItem(this.subMenuItem5);
 
@@ -782,7 +782,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
 
             this.subMenuItem6 = new PopupMenu.PopupMenuItem(_("Test suspendScript  (Advanced Test Function)"));
             this.subMenuItem6.connect('activate', Lang.bind(this, function (event) {
-                GLib.spawn_command_line_async('sh ' + this.appletPath + '/suspendScript');
+                GLib.spawn_command_line_async('/usr/bin/bash ' + this.appletPath + '/suspendScript.sh');
             }));
             this.subMenu1.menu.addMenuItem(this.subMenuItem6);
 
@@ -861,7 +861,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
             GLib.spawn_command_line_async('sh ' + this.appletPath + '/alertScript');
 
         } else if (this.crisisManagement == "suspendscript") {
-            GLib.spawn_command_line_async('sh ' + this.appletPath + '/suspendScript');
+            GLib.spawn_command_line_async('/usr/bin/bash ' + this.appletPath + '/suspendScript.sh');
 
         } else if (this.crisisManagement == "disablenetworking") {
               this.delayedNetworkingDisable(this.disconnectDelay);

@@ -1,3 +1,20 @@
+### v3.3.0~20240102
+  * Fixes #4986.
+  * From now on, the monospace font style is only used when size must be preserved.
+
+### v3.2.1~20240102
+  * Toggle menu after selecting Suspend option.
+
+### v3.2.0~20240101
+  * Adds the ability to suspend this applet (menu option).
+
+### v3.1.3~20231231
+  * Adds the --icon parameter for zenity v4.
+  * Allows translations for messages in bash scripts.
+
+### v3.1.2~20231230
+  * Removes the --window-icon parameter for zenity v4.
+
 ### v3.1.1~20230708
   * Fixes #4929
 

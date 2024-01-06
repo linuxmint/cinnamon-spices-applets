@@ -1,3 +1,6 @@
+### v1.13.0~20231224
+  * Fixes #5246. Display of volume level near icon and fixes scrolling problems with Cinnamon prior to 5.1.
+
 ### v1.12.0~20231216
   * Added an option (in the context menu) to display the volume level near the icon.
   * Updated .pot file for translations.

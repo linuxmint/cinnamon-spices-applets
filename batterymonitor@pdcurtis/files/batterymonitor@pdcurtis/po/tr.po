@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-10 22:50-0400\n"
+"POT-Creation-Date: 2023-12-30 13:28-0500\n"
 "PO-Revision-Date: 2023-07-10 22:52-0400\n"
 "Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
 "Language-Team: \n"
@@ -117,7 +117,6 @@ msgstr ""
 
 #: 5.4/applet.js:578 5.4/applet.js:625
 #, fuzzy
-#| msgid "Percentage Charge:"
 msgid "Current Charge:"
 msgstr "Şarj Oranı:"
 
@@ -237,7 +236,6 @@ msgstr ""
 
 #. 5.4->settings-schema.json->display_mode->title
 #, fuzzy
-#| msgid "Display Mode"
 msgid "Display Options"
 msgstr "Görünüm Kipi"
 
@@ -629,3 +627,24 @@ msgid ""
 msgstr ""
 "1.4'ten önceki sürümler, ana dizinde geçici dosyalar kullanıyordu. Bunlara "
 "artık ihtiyaç yoktur ve silinebilir."
+
+#: 5.4/suspendScript.sh:22
+msgid "WARNING: SUSPENDING SOON"
+msgstr ""
+
+#: 5.4/suspendScript.sh:23
+msgid "The battery level is critical. The machine will be suspended shortly."
+msgstr ""
+
+#: 5.4/suspendScript.sh:24
+msgid "Abort Suspension"
+msgstr ""
+
+#: 5.4/suspendScript.sh:25
+#, fuzzy
+msgid "Suspend Immediately"
+msgstr "Askı durumu:"
+
+#: 5.4/suspendScript.sh:26
+msgid "The machine was suspended as the battery level was critical."
+msgstr ""

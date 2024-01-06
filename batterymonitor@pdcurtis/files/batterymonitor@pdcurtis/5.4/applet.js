@@ -303,7 +303,7 @@ MyApplet.prototype = {
             this.applet_running = true; // Allow applet to be fully stopped when removed from panel
 
             // Set text editor
-            this.textEd = "xdg-open";
+            this.textEd = '/usr/bin/open';
 
             // Check that all Dependencies Met by presence of sox and zenity
             if (GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity")) {
@@ -387,13 +387,13 @@ MyApplet.prototype = {
 
             let menuitem2 = new PopupMenu.PopupMenuItem(_("Open Power Statistics"));
             menuitem2.connect('activate', Lang.bind(this, function (event) {
-                this.launcher.spawnv(['gnome-power-statistics']);
+                this.launcher.spawnv(['/usr/bin/gnome-power-statistics']);
             }));
             this._applet_context_menu.addMenuItem(menuitem2);
 
             this.menuitem3 = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
             this.menuitem3.connect('activate', Lang.bind(this, function (event) {
-                this.launcher.spawnv(['gnome-system-monitor']);
+                this.launcher.spawnv(['/usr/bin/gnome-system-monitor']);
             }));
             this._applet_context_menu.addMenuItem(this.menuitem3);
 
@@ -536,7 +536,7 @@ MyApplet.prototype = {
                         this.alertFlag = true; // Reset above when out of warning range
                         // Audible alert - type set earlier
                         if (this.useBatteryLowSound)
-                            this.launcher.spawnv(['play', this.batteryLowSound]);
+                            this.launcher.spawnv(['/usr/bin/play', this.batteryLowSound]);
                         new ModalDialog.NotifyDialog(_("The Battery Level has fallen to your alert level\n\n either reconnect to a power source,\n\nclose down your work and suspend or shutdown the machine\n\n")).open();
                     }
                 }
@@ -556,8 +556,8 @@ MyApplet.prototype = {
                     if (this.batteryPercentage < this.lastBatteryPercentage) {
                         // Audible alert moved from suspendScript in v32_1.0.0
                         if (this.useBatteryLowSound)
-                            this.launcher.spawnv(['play', this.batteryShutdownSound]);
-                        this.launcher.spawnv(['sh', `${this.appletPath}/suspendScript`]);
+                            this.launcher.spawnv(['/usr/bin/play', this.batteryShutdownSound]);
+                        this.launcher.spawnv(['/usr/bin/bash', `${this.appletPath}/suspendScript.sh`]);
                     }
                 }
             }

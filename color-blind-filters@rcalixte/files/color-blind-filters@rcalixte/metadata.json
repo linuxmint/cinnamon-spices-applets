@@ -1,0 +1,7 @@
+{
+    "description": "An applet for the Cinnamon Desktop Environment that offers full-screen color filters that should help color-blind users and developers.",
+    "uuid": "color-blind-filters@rcalixte",
+    "name": "Color-blind Filters",
+    "version": "1.0",
+    "max-instances": 1
+}

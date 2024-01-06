@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-16 17:17+0200\n"
-"PO-Revision-Date: 2023-06-16 17:20+0200\n"
+"POT-Creation-Date: 2024-01-01 23:48+0100\n"
+"PO-Revision-Date: 2024-01-01 23:50+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,95 +19,103 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
-#: applet.js:90
+#: applet.js:100
 msgid "Sensors Monitor"
 msgstr "Moniteur de Capteurs"
 
-#: applet.js:403 applet.js:455
+#: applet.js:258
+msgid "Suspended"
+msgstr "Désactivé"
+
+#: applet.js:468 applet.js:510
 msgid "high:"
 msgstr "élevée :"
 
-#: applet.js:403 applet.js:405 applet.js:455 applet.js:457 applet.js:495
+#: applet.js:468 applet.js:470 applet.js:510 applet.js:512 applet.js:553
 msgid "n/a"
 msgstr "n/a"
 
-#: applet.js:405 applet.js:457
+#: applet.js:470 applet.js:512
 msgid "crit:"
 msgstr "critique :"
 
-#: applet.js:495 applet.js:538
+#: applet.js:553 applet.js:596
 msgid "min:"
 msgstr "min :"
 
-#: applet.js:540
+#: applet.js:598
 msgid "max:"
 msgstr "max :"
 
-#: applet.js:568
+#: applet.js:626
 msgid "No intrusion detected"
 msgstr "Aucune intrusion détectée"
 
-#: applet.js:568
+#: applet.js:626
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSION DÉTECTÉE !"
 
-#: applet.js:588
+#: applet.js:646
 msgid "Must be configured!"
 msgstr "Doit être configuré !"
 
-#: applet.js:863
+#: applet.js:901
 msgid "Settings"
 msgstr "Paramètres"
 
-#: applet.js:863
+#: applet.js:901
 msgid ":"
 msgstr " :"
 
 #. settings-schema.json->page_General->title
-#: applet.js:870
+#: applet.js:908
 msgid "⚙ General"
 msgstr "⚙ Général"
 
-#: applet.js:880
+#: applet.js:918
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Capteurs de température"
 
-#: applet.js:890
+#: applet.js:928
 msgid "🤂 Fan sensors"
 msgstr "🤂 Capteurs de ventilateur"
 
-#: applet.js:900
+#: applet.js:938
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Capteurs de tension"
 
-#: applet.js:910
+#: applet.js:948
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Capteurs d'intrusion"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:921
+#: applet.js:959
 msgid "Run xsensors"
 msgstr "Lancer xsensors"
 
-#: applet.js:932
+#: applet.js:968
+msgid "Suspend Sensors"
+msgstr "Désactiver Sensors"
+
+#: applet.js:978
 msgid "Reload this applet"
 msgstr "Recharger cette applet"
 
-#: applet.js:1224
+#: applet.js:1269
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Êtes-vous sûr de vouloir enlever \"%s\" ?"
 
-#: lib/checkDependencies.js:303
+#: lib/checkDependencies.js:317
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "L'applet %s est pleinement fonctionnelle."
 
-#: lib/checkDependencies.js:304
+#: lib/checkDependencies.js:318
 msgid "All dependencies are installed"
 msgstr "Toutes les dépendances sont installées"
 
-#: lib/checkDependencies.js:332
+#: lib/checkDependencies.js:346
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -115,11 +123,11 @@ msgstr ""
 "Vous semblez ne pas disposer des programmes requis pour bénéficier de toutes "
 "les fonctionnalités de cette applet."
 
-#: lib/checkDependencies.js:333
+#: lib/checkDependencies.js:347
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Veuillez exécuter, dans le terminal qui s'est ouvert, les commandes :"
 
-#: lib/checkDependencies.js:334
+#: lib/checkDependencies.js:348
 msgid "Some dependencies are not installed!"
 msgstr "Certaines dépendances ne sont pas installées !"
 

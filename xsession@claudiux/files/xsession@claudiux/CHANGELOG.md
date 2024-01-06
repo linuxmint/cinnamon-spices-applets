@@ -1,3 +1,9 @@
+### v1.0.5~20231231
+  * Adds the --icon parameter for zenity v4.
+
+### v1.0.4~20231230
+  * Removes the --window-icon parameter for zenity v4.
+
 ### v1.0.3~20230428
   * Code cleanup
 

@@ -80,6 +80,7 @@ class QRedshift extends Applet.TextIconApplet {
         this.opt = {
             redshift_version: 0,
             enabled: true,
+            enableAtStartup: false,
             autoUpdate: false,
             autoUpdateInterval: 20,
             smoothTransition: true,
@@ -140,6 +141,7 @@ class QRedshift extends Applet.TextIconApplet {
         };
         
         this.settings.bind('enabled', 'enabled', this.onSettChange.bind(this));
+        this.settings.bind("enableAtStartup", "enableAtStartup");
         this.settings.bind('autoUpdate', 'autoUpdate', this.onSettChange.bind(this));
         this.settings.bind('autoUpdateInterval', 'autoUpdateInterval', this.onSettChange.bind(this));
         this.settings.bind('adjustmentMethod', 'adjustmentMethod', this.onSettChange.bind(this));
@@ -823,6 +825,8 @@ class QRedshift extends Applet.TextIconApplet {
     
     on_applet_added_to_panel() {
         qLOG('QRedshift', 'ADDED TO PANEL');
+        if (this.opt.enableAtStartup === true)
+            this.opt.enabled = true;
     }
     
     

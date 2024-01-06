@@ -1,4 +1,10 @@
 
+### 2.1.0
+
+* Modified system calls to use full paths
+* Modified the suspend script to support translatable strings
+* Added support for Zenity 4.x+
+
 ### 2.0.0
 
 * Style options are now managed via the GUI configuration dialog, deprecating stylesheet.css
