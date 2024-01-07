@@ -1,3 +1,7 @@
+### v3.4.0~20240107
+  * Fixes #5352.
+  * Added an option in the General tab to display a tooltip or not.
+
 ### v3.3.0~20240102
   * Fixes #4986.
   * From now on, the monospace font style is only used when size must be preserved.
