@@ -15128,7 +15128,60 @@ class PirateWeather extends BaseProvider {
 }
 ;
 
+;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geoclue.ts
+
+
+const GeoClueLib = imports.gi.Geoclue;
+class GeoClue {
+    constructor(_app) {
+        this.notSupported = false;
+        this.app = _app;
+        if (GeoClueLib == null) {
+            this.notSupported = true;
+            return;
+        }
+    }
+    async GetLocation() {
+        if (this.notSupported || GeoClueLib == null) {
+            return null;
+        }
+        const { AccuracyLevel } = GeoClueLib;
+        await new Promise((resolve, reject) => {
+            GeoClueLib.Simple.new_with_thresholds("weather_mockturtl", AccuracyLevel.CITY, 5, 0, null, (client, res) => {
+                const simple = GeoClueLib.Simple.new_finish(res);
+                const clientObj = simple.get_client();
+                if (clientObj == null || !clientObj.active) {
+                    resolve(null);
+                    return;
+                }
+                const loc = simple.get_location();
+                if (loc == null) {
+                    resolve(null);
+                    return;
+                }
+                resolve({
+                    lat: loc.latitude,
+                    lon: loc.longitude,
+                    city: undefined,
+                    country: undefined,
+                    timeZone: "",
+                    entryText: loc.latitude + "," + loc.longitude,
+                });
+                return;
+            });
+        });
+        return null;
+    }
+    ;
+    HandleErrorResponse(json) {
+        this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
+        logger_Logger.Error("ip-api responds with Error: " + json.reason);
+    }
+    ;
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
 
 
 
@@ -15257,6 +15310,7 @@ class Config {
         logger_Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
         this.countryCode = this.GetCountryCode(this.currentLocale);
         this.autoLocProvider = new GeoJS(app);
+        this.geoClue = new GeoClue(app);
         this.geoLocationService = new GeoLocation(app);
         this.InterfaceSettings = new config_Settings({ schema: "org.cinnamon.desktop.interface" });
         this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
@@ -15327,6 +15381,7 @@ class Config {
     ;
     async EnsureLocation() {
         this.currentLocation = null;
+        const res = await this.geoClue.GetLocation();
         if (!this._manualLocation) {
             const location = await this.autoLocProvider.GetLocation();
             if (!location)
@@ -17212,7 +17267,7 @@ class UI {
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/soupLib.ts
 
-const { Message, Session, SessionAsync } = imports.gi.Soup;
+const { Message, Session } = imports.gi.Soup;
 const { PRIORITY_DEFAULT } = imports.gi.GLib;
 const soupLib_ByteArray = imports.byteArray;
 function AddParamsToURI(url, params) {
@@ -17272,8 +17327,8 @@ class Soup3 {
 }
 class Soup2 {
     constructor() {
+        const { ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
         this._httpSession = new SessionAsync();
-        const { ProxyResolverDefault } = imports.gi.Soup;
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;

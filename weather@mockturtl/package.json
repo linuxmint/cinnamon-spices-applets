@@ -17,7 +17,7 @@
   "devDependencies": {
     "@babel/core": "7.16.0",
     "@babel/preset-env": "7.16.4",
-    "@ci-types/cjs": "^6.0.2-3",
+    "@ci-types/cjs": "^6.0.2-4",
     "@types/luxon": "3.2.0",
     "@types/suncalc": "1.9.0",
     "babel-loader": "8.2.2",

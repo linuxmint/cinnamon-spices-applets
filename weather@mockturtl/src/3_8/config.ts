@@ -23,6 +23,7 @@ import { Event } from "./lib/events";
 import { GeoIP } from "./location_services/geoip_services/base";
 import { GeoJS } from "./location_services/geoip_services/geojs.io";
 import { PirateWeather } from "./providers/pirate_weather/pirateWeather";
+import { GeoClue } from "./location_services/geoip_services/geoclue";
 
 const { get_home_dir, get_user_data_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -190,6 +191,7 @@ export class Config {
 	}
 
 	private readonly autoLocProvider: GeoIP;
+	private readonly geoClue: GeoClue;
 	private readonly geoLocationService: GeoLocation;
 
 	/** Stores and retrieves manual locations */
@@ -209,6 +211,7 @@ export class Config {
 		Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
 		this.countryCode = this.GetCountryCode(this.currentLocale);
 		this.autoLocProvider = new GeoJS(app); // IP location lookup
+		this.geoClue = new GeoClue(app);
 		this.geoLocationService = new GeoLocation(app);
 		this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });
 		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
@@ -309,6 +312,8 @@ export class Config {
 	 */
 	public async EnsureLocation(): Promise<LocationData | null> {
 		this.currentLocation = null;
+		// TODO: fallback to this or fallback to internet?
+		const res = await this.geoClue.GetLocation()
 
 		// Automatic location
 		if (!this._manualLocation) {
