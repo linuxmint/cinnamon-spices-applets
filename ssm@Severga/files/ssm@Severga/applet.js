@@ -379,7 +379,7 @@ MemDataProvider.prototype = {
 
 //<NetDataProvider (based on Multi-Core System Monitor applet... thanks!)>
 let new_NMClient = imports.gi.NM.Client.new;
-//let CONNECTED_STATE = imports.gi.NM.DeviceState.ACTIVATED;
+let CONNECTED_STATE = imports.gi.NM.DeviceState.ACTIVATED;
 
 function NetDataProvider() {
 	this._init();
@@ -405,8 +405,8 @@ NetDataProvider.prototype = {
 			GTop.glibtop_get_netload(this.gtop, this.currentReadings[i].id);
 			this.currentReadings[i].down = this.gtop.bytes_in;
 			this.currentReadings[i].up = this.gtop.bytes_out;
-			this.currentReadings[i].downSpeed = (this.currentReadings[i].down - this.currentReadings[i].lastReading[0]) / secondsSinceLastUpdate;
-			this.currentReadings[i].upSpeed = (this.currentReadings[i].up - this.currentReadings[i].lastReading[1]) / secondsSinceLastUpdate;
+			this.currentReadings[i].downSpeed = Math.max((this.currentReadings[i].down - this.currentReadings[i].lastReading[0]) / secondsSinceLastUpdate, 0);
+			this.currentReadings[i].upSpeed = Math.max((this.currentReadings[i].up - this.currentReadings[i].lastReading[1]) / secondsSinceLastUpdate, 0);
 			this.currentReadings[i].lastReading[0] = this.currentReadings[i].down;
 			this.currentReadings[i].lastReading[1] = this.currentReadings[i].up;
 		}
@@ -417,6 +417,7 @@ NetDataProvider.prototype = {
 		this.currentReadings = [];
 		let devices = this.nmClient.get_devices();
 		for (let i = 0, len = devices.length; i < len; i++) {
+			if (devices[i].state !== CONNECTED_STATE) continue;
 			devices[i] = devices[i].get_iface();
 			GTop.glibtop_get_netload(this.gtop, devices[i]);
 			this.currentReadings.push({
