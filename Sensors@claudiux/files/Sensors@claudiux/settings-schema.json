@@ -13,6 +13,7 @@
       "title": "⚙ General",
       "sections": [
         "section_Display",
+        "section_Tooltip",
         "section_Report",
         "section_remove_incompatible_xlets"
       ]
@@ -66,9 +67,17 @@
         "separator",
         "remove_border",
         "remove_icons",
+        "restart_in_menu",
+        "show_tooltip"
+      ]
+    },
+    "section_Tooltip": {
+      "type": "section",
+      "dependency": "show_tooltip",
+      "title": "Tooltip",
+      "keys": [
         "bold_values",
-        "bold_italics_main_sensors",
-        "restart_in_menu"
+        "bold_italics_main_sensors"
       ]
     },
     "section_Report": {
@@ -281,17 +290,22 @@
     "description": "Remove icons",
     "tooltip": "Whether or not to remove icons in panel."
   },
+  "show_tooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Display a tooltip on mouseover"
+  },
   "bold_values": {
     "type": "switch",
-    "default": false,
     "dependency": "has_set_markup",
+    "default": false,
     "description": "Show values in bold in the tooltip",
     "tooltip": "Whether or not to show values in bold in the tooltip."
   },
   "bold_italics_main_sensors": {
     "type": "switch",
-    "default": false,
     "dependency": "has_set_markup",
+    "default": false,
     "description": "Show main sensors in bold italics in the tooltip",
     "tooltip": "Whether or not to display the names of the main sensors (those displayed in the panel) in bold italics in the tooltip."
   },
