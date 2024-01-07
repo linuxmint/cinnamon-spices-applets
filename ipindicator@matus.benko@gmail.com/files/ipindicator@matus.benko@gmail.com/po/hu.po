@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-06 16:04+0100\n"
-"PO-Revision-Date: 2024-01-06 22:50+0100\n"
+"PO-Revision-Date: 2024-01-07 06:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -24,7 +24,7 @@ msgstr "IP-adatokat próbál lekérni"
 
 #. metadata.json->name
 msgid "IP Indicator"
-msgstr "IP jelző"
+msgstr "IP indikátor"
 
 #. metadata.json->description
 msgid ""
@@ -91,7 +91,7 @@ msgid ""
 "For debugging purposes. Higher level means more detailed logs in ~/.cinnamon/"
 "glass.log"
 msgstr ""
-"Hibakeresési célokra. A magasabb szint részletesebb naplókat jelent a ~/."
+"Hibakeresési célokra. A magasabb szint részletesebb naplózást készít a ~/."
 "cinnamon/glass.log fájlban"
 
 #. settings-schema.json->head0->description
@@ -99,7 +99,7 @@ msgid ""
 "To match ISP names, use isp value from the service http://ip-api.com/json"
 msgstr ""
 "Az internetszolgáltatók nevének egyeztetéséhez használja a http://ip-api.com/"
-"json szolgáltatásból származó isp értéket"
+"json szolgáltatásból származó \"isp\" értéket"
 
 #. settings-schema.json->head1->description
 msgid "Home ISP"
@@ -154,20 +154,20 @@ msgstr ""
 
 #. settings-schema.json->head2->description
 msgid "Other ISP 1"
-msgstr "Más szolgáltató 1"
+msgstr "Másik szolgáltató 1"
 
 #. settings-schema.json->other1_isp->description
 msgid "Other ISP 1:"
-msgstr "Más szolgáltató 1:"
+msgstr "Másik szolgáltató 1:"
 
 #. settings-schema.json->other1_isp->tooltip
 msgid ""
 "Fill out your other ISP. If the ISP from IP service will match with this "
 "value, home icon will be used instead of country flag."
 msgstr ""
-"Töltse ki további internetszolgáltatóját. Ha az internetszolgáltató "
-"megegyezik az IP-szolgáltatásból származó értékkel, akkor az országzászló "
-"helyett a házikó ikon lesz használva."
+"Töltse ki másik internetszolgáltatóját. Ha az IP-szolgáltatásból származó "
+"\"isp\" érték megegyezik az itt megadottal, akkor az országzászló helyett a "
+"házikó ikon lesz használva."
 
 #. settings-schema.json->other1_isp_icon-name->description
 #. settings-schema.json->other2_isp_icon-name->description
@@ -175,15 +175,15 @@ msgstr ""
 #. settings-schema.json->other4_isp_icon-name->description
 #. settings-schema.json->other5_isp_icon-name->description
 msgid "The icon to use for other ISP:"
-msgstr "Más internetszolgáltatóknál használandó ikon:"
+msgstr "Másik internetszolgáltatónál használandó ikon:"
 
 #. settings-schema.json->head3->description
 msgid "Other ISP 2"
-msgstr "Más szolgáltató 2"
+msgstr "Másik szolgáltató 2"
 
 #. settings-schema.json->other2_isp->description
 msgid "Other ISP 2:"
-msgstr "Más szolgáltató 2:"
+msgstr "Másik szolgáltató 2:"
 
 #. settings-schema.json->other2_isp->tooltip
 #. settings-schema.json->other3_isp->tooltip
@@ -193,30 +193,30 @@ msgid ""
 "Fill out your oher ISP. If the ISP from IP service will match with this "
 "value, home icon will be used instead of country flag."
 msgstr ""
-"Töltse ki további internetszolgáltatóját. Ha az internetszolgáltató "
-"megegyezik az IP-szolgáltatásból származó értékkel, akkor az országzászló "
-"helyett a házikó ikon lesz használva."
+"Töltse ki másik internetszolgáltatóját. Ha az IP-szolgáltatásból származó "
+"\"isp\" érték megegyezik az itt megadottal, akkor az országzászló helyett a "
+"házikó ikon lesz használva."
 
 #. settings-schema.json->head4->description
 msgid "Other ISP 3"
-msgstr "Más szolgáltató 3"
+msgstr "Másik szolgáltató 3"
 
 #. settings-schema.json->other3_isp->description
 msgid "Other ISP 3:"
-msgstr "Más szolgáltató 3:"
+msgstr "Másik szolgáltató 3:"
 
 #. settings-schema.json->head5->description
 msgid "Other ISP 4"
-msgstr "Más szolgáltató 4"
+msgstr "Másik szolgáltató 4"
 
 #. settings-schema.json->other4_isp->description
 msgid "Other ISP 4:"
-msgstr "Más szolgáltató 4:"
+msgstr "Másik szolgáltató 4:"
 
 #. settings-schema.json->head6->description
 msgid "Other ISP 5"
-msgstr "Más szolgáltató 5"
+msgstr "Másik szolgáltató 5"
 
 #. settings-schema.json->other5_isp->description
 msgid "Other ISP 5:"
-msgstr "Más szolgáltató 5:"
+msgstr "Másik szolgáltató 5:"
