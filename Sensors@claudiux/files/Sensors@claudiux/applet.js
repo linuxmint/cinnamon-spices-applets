@@ -145,6 +145,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.s = new AppletSettings(this, UUID, this.instanceId);
 
     // General tab
+    this.s.bind("show_tooltip", "show_tooltip", this.on_settings_changed, null);
     this.s.bind("has_set_markup", "has_set_markup", null, null);
     this.s.bind("interval", "interval", this.on_settings_changed, null);
     this.s.bind("keep_size", "keep_size", this.updateUI, null);
@@ -157,13 +158,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.s.bind("bold_italics_main_sensors", "bold_italics_main_sensors", this.updateUI, null);
     this.s.bind("restart_in_menu", "restart_in_menu", null, null);
 
-    if (this._applet_tooltip.set_markup === undefined) {
-      this.bold_values = false;
-      this.bold_italics_main_sensors = false;
-      this.has_set_markup = false;
-    } else {
-      this.has_set_markup = true;
-    }
+    this.detect_markup();
 
     // Custom names (generic)
     this.s.bind("custom_names", "custom_names", null, null);
@@ -237,6 +232,18 @@ class SensorsApplet extends Applet.TextApplet {
     }
     log("is_disktemp_user_readable: "+ret);
     return ret
+  }
+
+  detect_markup() {
+    if (this._applet_tooltip.set_markup === undefined) {
+      this.bold_values = false;
+      this.bold_italics_main_sensors = false;
+      this.has_set_markup = false;
+    } else {
+      this.has_set_markup = true;
+      //~ this.s.setValue("has_set_markup", this.show_tooltip);
+      //~ log("this.has_set_markup: "+this.has_set_markup, true)
+    }
   }
 
   reap_sensors() {
@@ -437,6 +444,10 @@ class SensorsApplet extends Applet.TextApplet {
    * updateTooltip: updates the tooltil of this applet.
    */
   updateTooltip() {
+    if (!this.show_tooltip) {
+      this.set_applet_tooltip("");
+      return
+    }
     if (!this.isUpdatingUI) return;
 
     var _tooltip = "";
@@ -1167,6 +1178,7 @@ class SensorsApplet extends Applet.TextApplet {
         Mainloop.source_remove(this.loopId);
         this.loopId = 0;
     }
+    this.detect_markup();
     this.isLooping = true;
     this.reap_sensors();
   }

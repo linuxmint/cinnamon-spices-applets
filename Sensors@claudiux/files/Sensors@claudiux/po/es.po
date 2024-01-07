@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-01 23:48+0100\n"
-"PO-Revision-Date: 2024-01-01 21:02-0300\n"
+"POT-Creation-Date: 2024-01-07 01:39+0100\n"
+"PO-Revision-Date: 2024-01-07 15:26-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -23,85 +23,85 @@ msgstr ""
 msgid "Sensors Monitor"
 msgstr "Monitor de sensores"
 
-#: applet.js:258
+#: applet.js:266
 msgid "Suspended"
 msgstr "Suspendido"
 
-#: applet.js:468 applet.js:510
+#: applet.js:480 applet.js:522
 msgid "high:"
 msgstr "alto:"
 
-#: applet.js:468 applet.js:470 applet.js:510 applet.js:512 applet.js:553
+#: applet.js:480 applet.js:482 applet.js:522 applet.js:524 applet.js:565
 msgid "n/a"
 msgstr "n/a"
 
-#: applet.js:470 applet.js:512
+#: applet.js:482 applet.js:524
 msgid "crit:"
 msgstr "crít:"
 
-#: applet.js:553 applet.js:596
+#: applet.js:565 applet.js:608
 msgid "min:"
 msgstr "min:"
 
-#: applet.js:598
+#: applet.js:610
 msgid "max:"
 msgstr "max:"
 
-#: applet.js:626
+#: applet.js:638
 msgid "No intrusion detected"
 msgstr "No se detectó intrusión"
 
-#: applet.js:626
+#: applet.js:638
 msgid "INTRUSION DETECTED!"
 msgstr "¡INTRUSIÓN DETECTADA!"
 
-#: applet.js:646
+#: applet.js:658
 msgid "Must be configured!"
 msgstr "¡Debe estar configurado!"
 
-#: applet.js:901
+#: applet.js:914
 msgid "Settings"
 msgstr "Ajustes"
 
-#: applet.js:901
+#: applet.js:914
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#: applet.js:908
+#: applet.js:921
 msgid "⚙ General"
 msgstr "⚙ General"
 
-#: applet.js:918
+#: applet.js:931
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Sensores de temperatura"
 
-#: applet.js:928
+#: applet.js:941
 msgid "🤂 Fan sensors"
 msgstr "🤂 Sensores de ventilador"
 
-#: applet.js:938
+#: applet.js:951
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Sensores de voltaje"
 
-#: applet.js:948
+#: applet.js:961
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Sensores de intrusión"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:959
+#: applet.js:972
 msgid "Run xsensors"
 msgstr "Lanzar xsensors"
 
-#: applet.js:968
+#: applet.js:981
 msgid "Suspend Sensors"
 msgstr "Suspender sensores"
 
-#: applet.js:978
+#: applet.js:992
 msgid "Reload this applet"
 msgstr "Recargar este applet"
 
-#: applet.js:1269
+#: applet.js:1284
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "¿Está seguro de que desea eliminar \"%s\"?"
@@ -216,6 +216,10 @@ msgstr "⮿ Intrusión"
 #. settings-schema.json->section_intrusionOptions->title
 msgid "Options"
 msgstr "Opciones"
+
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr "Información sobre herramientas"
 
 #. settings-schema.json->section_Report->title
 msgid "Sensors values"
@@ -389,6 +393,10 @@ msgstr "Eliminar los iconos"
 #. settings-schema.json->remove_icons->tooltip
 msgid "Whether or not to remove icons in panel."
 msgstr "Eliminar o no los iconos del panel."
+
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
+msgstr "Mostrar información sobre herramientas al pasar el mouse"
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
