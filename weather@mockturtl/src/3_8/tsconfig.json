@@ -13,9 +13,11 @@
         "noImplicitReturns": true,
 		"noImplicitAny": true,
         "experimentalDecorators": true,
+		"types": [
+			"@ci-types/cjs"
+		]
 	},
 	"include": [
 		"./**/*",
-		"../../../.typescript-declarations/**/*",
 	],
 }
