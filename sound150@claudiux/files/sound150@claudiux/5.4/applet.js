@@ -87,7 +87,7 @@ const formatTextWrap = (text, maxLineLength) => {
 }
 /* global values */
 let players_without_seek_support = ['telegram desktop', 'spotify', 'totem', 'xplayer', 'gnome-mplayer', 'pithos',
-    'smplayer'];
+    'smplayer', 'mpv'];
 let players_with_seek_support = [
     'clementine', 'banshee', 'rhythmbox', 'rhythmbox3', 'pragha', 'quodlibet',
     'amarok', 'xnoise', 'gmusicbrowser', 'vlc', 'qmmp', 'deadbeef', 'audacious'];
@@ -516,6 +516,9 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
         else if (name === "VBox") {
             name = "Virtualbox";
             iconName = "virtualbox";
+        }
+        else if (name === "Firefox") {
+            iconName = "firefox";
         }
         else if (name === "Mpv") {
             iconName = "mpv"
@@ -1013,6 +1016,7 @@ class MediaPlayerLauncher extends PopupMenu.PopupBaseMenuItem {
         this._icon = app.create_icon_texture(ICON_SIZE);
         this._icon_bin = new St.Bin({ x_align: St.Align.END, child: this._icon });
         this.addActor(this._icon_bin, { expand: true, span: -1, align: St.Align.END });
+
         this.connect("activate", (event) => this._onActivate(event));
     }
 
@@ -1045,7 +1049,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         });
 
         this.settings.bind("playerControl", "playerControl", this.on_settings_changed);
-        this.settings.bind("extendedPlayerControl", "extendedPlayerControl", function () {
+        this.settings.bind("extendedPlayerControl", "extendedPlayerControl", function() {
             for (let i in this._players)
                 this._players[i].onSettingsChanged();
         });
@@ -1074,6 +1078,9 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.settings.bind("volume", "volume");
         this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", this.volume_near_icon);
+        this.settings.bind("volume-mute", "volume_mute", this._setKeybinding);
+        this.settings.bind("volume-up", "volume_up", this._setKeybinding);
+        this.settings.bind("volume-down", "volume_down", this._setKeybinding);
 
         Main.themeManager.connect("theme-set", Lang.bind(this, this._theme_set));
 
@@ -1216,8 +1223,16 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
 
+        Main.keybindingManager.removeHotKey("raise-volume");
+        Main.keybindingManager.removeHotKey("lower-volume");
+        Main.keybindingManager.removeHotKey("volume-mute");
+        Main.keybindingManager.removeHotKey("volume-up");
+        Main.keybindingManager.removeHotKey("volume-down");
         Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => this._volumeChange(Clutter.ScrollDirection.UP));
         Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => this._volumeChange(Clutter.ScrollDirection.DOWN));
+        Main.keybindingManager.addHotKey("volume-mute", this.volume_mute, (...args) => this._mutedChanged(...args));
+        Main.keybindingManager.addHotKey("volume-up", this.volume_up, () => this._volumeChange(Clutter.ScrollDirection.UP));
+        Main.keybindingManager.addHotKey("volume-down", this.volume_down, () => this._volumeChange(Clutter.ScrollDirection.DOWN));
     }
 
     _on_sound_settings_change() {
@@ -1254,6 +1269,9 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         Main.keybindingManager.removeHotKey("raise-volume-" + this.instance_id);
         Main.keybindingManager.removeHotKey("lower-volume-" + this.instance_id);
+        Main.keybindingManager.removeHotKey("volume-mute");
+        Main.keybindingManager.removeHotKey("volume-up");
+        Main.keybindingManager.removeHotKey("volume-down");
 
         if (this.hideSystray)
             this.unregisterSystrayIcons();
@@ -1488,7 +1506,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     setAppletText(player) {
         let title_text = "";
         if (this.showtrack && player && player._playerStatus == 'Playing') {
-            if (player._artist == "Unknown Artist") {
+            if (player._artist == _("Unknown Artist")) { // should it be translated?
                 title_text = player._title;
             }
             else {

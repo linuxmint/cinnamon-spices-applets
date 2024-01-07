@@ -1,3 +1,6 @@
+### v4.7.0~20240106
+  * Adds the ability to redefine multimedia shortcuts.
+
 ### v4.6.0~20231216
   * Adds the ability to display the volume level near the icon.
 
