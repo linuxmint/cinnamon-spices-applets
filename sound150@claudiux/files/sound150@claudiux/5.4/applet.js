@@ -1069,6 +1069,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("magneticOn", "magneticOn", () => this._on_sound_settings_change());
 
         this.settings.bind("adaptColor", "adaptColor", () => this._on_sound_settings_change());
+        this.settings.bind("color101_115", "color101_115", () => this._on_sound_settings_change());
+        this.settings.bind("color116_130", "color116_130", () => this._on_sound_settings_change());
+        this.settings.bind("color131_150", "color131_150", () => this._on_sound_settings_change());
+
 
         this.settings.bind("tooltipShowVolume", "tooltipShowVolume", this.on_settings_changed);
         this.settings.bind("tooltipShowPlayer", "tooltipShowPlayer", this.on_settings_changed);
@@ -1230,9 +1234,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         Main.keybindingManager.removeHotKey("volume-down");
         Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => this._volumeChange(Clutter.ScrollDirection.UP));
         Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => this._volumeChange(Clutter.ScrollDirection.DOWN));
-        Main.keybindingManager.addHotKey("volume-mute", this.volume_mute, (...args) => this._mutedChanged(...args));
-        Main.keybindingManager.addHotKey("volume-up", this.volume_up, () => this._volumeChange(Clutter.ScrollDirection.UP));
-        Main.keybindingManager.addHotKey("volume-down", this.volume_down, () => this._volumeChange(Clutter.ScrollDirection.DOWN));
+        if (this.volume_mute.length > 2)
+            Main.keybindingManager.addHotKey("volume-mute", this.volume_mute, (...args) => this._mutedChanged(...args));
+        if (this.volume_up.length > 2)
+            Main.keybindingManager.addHotKey("volume-up", this.volume_up, () => this._volumeChange(Clutter.ScrollDirection.UP));
+        if (this.volume_down.length > 2)
+            Main.keybindingManager.addHotKey("volume-down", this.volume_down, () => this._volumeChange(Clutter.ScrollDirection.DOWN));
     }
 
     _on_sound_settings_change() {
@@ -1777,10 +1784,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.volume = percentage;
         this.setAppletTooltip();
 
-        //~ if (!this.defaultColor) {
         if (!this.themeNode) {
             this.themeNode = this.actor.get_theme_node();
-            //~ this.defaultColor = this.themeNode.get_foreground_color();
         }
         this.defaultColor = this.themeNode.get_foreground_color();
         let color = "rgba(" + this.defaultColor.red + "," + this.defaultColor.green + "," + this.defaultColor.blue + "," + this.defaultColor.alpha + ")";
@@ -1788,11 +1793,11 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this.adaptColor) {
             let pc = Math.round(percentage.split("%")[0]);
             if (pc > 130)
-                color = "red";
+                color = this.color131_150; //"red";
             else if (pc > 115)
-                color = "orange";
+                color = this.color116_130; //"orange";
             else if (pc > 100)
-                color = "yellow";
+                color = this.color101_115; // "yellow";
         }
         let _style = "color: %s;".format(color);
         this.actor.style = _style;
@@ -1973,7 +1978,14 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._applet_label.set_text("");
             this.hide_applet_label(true);
         }
-      }
+    }
+
+    _reset_colors() {
+        this.color101_115 = "yellow";
+        this.color116_130 = "orange";
+        this.color131_150 = "red";
+        this._on_sound_settings_change()
+    }
 }
 
 function main(metadata, orientation, panel_height, instanceId) {
