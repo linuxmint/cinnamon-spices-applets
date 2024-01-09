@@ -1,3 +1,7 @@
+### v5.0.0~20240109
+  * Modifies the presentation of settings, with tabs.
+  * Allows the user to change the icon colors.
+
 ### v4.7.0~20240106
   * Adds the ability to redefine multimedia shortcuts.
 
