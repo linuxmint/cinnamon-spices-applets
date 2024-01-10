@@ -1,39 +1,23 @@
 # #-#-#-#-#  hu_regi.po  #-#-#-#-#
+# #-#-#-#-#  hu_regi.po  #-#-#-#-#
 # Sensors@claudiux
 # Copyright (C) 2020 claudiux aka Claude Clerc
 # This file is distributed under the same license as the Sensors@claudiux package.
 # claudiux <claude.clerc@gmail.com>, 2020.
 #
-# #-#-#-#-#  hu_uj.po  #-#-#-#-#
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-16 17:17+0200\n"
-"POT-Creation-Date: 2024-01-01 23:48+0100\n"
-"PO-Revision-Date: 2024-01-06 15:41+0100\n"
-"PO-Revision-Date: 2024-01-06 15:40+0100\n"
+"PO-Revision-Date: 2024-01-10 07:32+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "Language-Team: \n"
 "Language: hu\n"
-"Language: hu\n"
-"MIME-Version: 1.0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
@@ -774,12 +758,10 @@ msgstr "Felfüggesztve"
 msgid "Suspend Sensors"
 msgstr "Felfüggesztett Szenzorok"
 
-#~ msgid "hddtemp is for now only usable by root"
-#~ msgstr ""
-#~ "a „hddtemp” alkalmazást kizárólag a rendszergazda felhasználó használhatja"
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr "Eszköztipp"
 
-#~ msgid "Make hddtemp usable by user"
-#~ msgstr "Tegye elérhetővé a „hddtemp” alkalmazást a felhasználók számára"
-
-#~ msgid "Temperature scripts"
-#~ msgstr "Hőmérséklet parancsfájlok"
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
+msgstr "Eszköztipp megjelenítése az egérmutatóval"
