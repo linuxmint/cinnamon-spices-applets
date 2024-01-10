@@ -1,3 +1,14 @@
+### v5.1.0~20240109
+  * Updates README.md
+  * Adds two options to the Icon tab settings that are already in the Behavior tab, but which also concern the icon.
+
+### v5.0.0~20240109
+  * Modifies the presentation of settings, with tabs.
+  * Allows the user to change the icon colors.
+
+### v4.7.0~20240106
+  * Adds the ability to redefine multimedia shortcuts.
+
 ### v4.6.0~20231216
   * Adds the ability to display the volume level near the icon.
 
