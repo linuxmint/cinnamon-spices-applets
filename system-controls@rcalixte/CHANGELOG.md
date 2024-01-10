@@ -1,4 +1,9 @@
 
+### 1.3.0
+* Remove options that are unavailable when locks (disable-log-out, disable-switching-user, disable-lock-screen) are enabled, without having to restart the applet.
+* Add OSD when restarting Cinnamon.
+* Close the menu before activating any action.
+
 ### 1.2.2
 
 * Remove unavailable options in the Wayland session for now

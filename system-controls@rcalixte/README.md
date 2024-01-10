@@ -10,9 +10,9 @@ This is an applet that adds an icon in the panel that provides access to the
 following system controls functions:
 
 * Restart Cinnamon
-* Lock Screen
+* Lock Screen (when allowed)
 * Switch User (if enabled in system settings)
-* Log Out
+* Log Out (when allowed)
 * Suspend
 * Hibernate
 * Restart
