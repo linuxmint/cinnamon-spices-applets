@@ -1,0 +1,239 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-11 10:39-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:83
+msgid "Translator"
+msgstr ""
+
+#: applet.js:189
+msgid "Unable to query available languages from translate-shell"
+msgstr ""
+
+#: applet.js:197
+msgid "Required \"trans\" command not found, please install translate-shell"
+msgstr ""
+
+#: applet.js:201
+msgid "Error, the \"trans\" command returned an exit code of "
+msgstr ""
+
+#: applet.js:272
+msgid "Swap Languages"
+msgstr ""
+
+#: applet.js:307
+msgid "{Text to translate}"
+msgstr ""
+
+#: applet.js:324
+msgid "{Translated text}"
+msgstr ""
+
+#: applet.js:338
+msgid "Configure"
+msgstr ""
+
+#: applet.js:339
+msgid "Play"
+msgstr ""
+
+#: applet.js:343
+msgid "Paste"
+msgstr ""
+
+#: applet.js:347
+msgid "Clear"
+msgstr ""
+
+#: applet.js:351
+msgid "Translate"
+msgstr ""
+
+#: applet.js:356
+msgid "Copy"
+msgstr ""
+
+#: applet.js:362
+msgid "Play Translation"
+msgstr ""
+
+#. metadata.json->name
+msgid "Panel Translator"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Translate text to other languages from the Cinnamon panel using Google, Bing"
+" and other translators"
+msgstr ""
+
+#. settings-schema.json->languages-header->description
+msgid "Default Languages"
+msgstr ""
+
+#. settings-schema.json->default-from-language->description
+msgid "Source language"
+msgstr ""
+
+#. settings-schema.json->default-to-language->description
+msgid "Target language"
+msgstr ""
+
+#. settings-schema.json->engine-header->description
+msgid "Translation Engine"
+msgstr ""
+
+#. settings-schema.json->translate-engine->options
+msgid "Apertium"
+msgstr ""
+
+#. settings-schema.json->translate-engine->options
+msgid "Aspell"
+msgstr ""
+
+#. settings-schema.json->translate-engine->options
+msgid "Auto"
+msgstr ""
+
+#. settings-schema.json->translate-engine->options
+msgid "Bing"
+msgstr ""
+
+#. settings-schema.json->translate-engine->options
+msgid "Google"
+msgstr ""
+
+#. settings-schema.json->translate-engine->options
+msgid "Hunspell"
+msgstr ""
+
+#. settings-schema.json->translate-engine->options
+msgid "Spell"
+msgstr ""
+
+#. settings-schema.json->translate-engine->options
+msgid "Yandex"
+msgstr ""
+
+#. settings-schema.json->translate-engine->description
+msgid "Engine (Auto/Google recommended!)"
+msgstr ""
+
+#. settings-schema.json->translate-engine->tooltip
+msgid ""
+"Most engines don't support play back and some don't even translate, others "
+"just report HTTP errors. So it's best to use \"Auto\" and let translate-"
+"shell decide what translator to use."
+msgstr ""
+
+#. settings-schema.json->auto-header->description
+msgid "Panel Button Actions"
+msgstr ""
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Disabled"
+msgstr ""
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Selection"
+msgstr ""
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Clipboard"
+msgstr ""
+
+#. settings-schema.json->left-auto-paste->description
+msgid "Automatically paste and translate on left click"
+msgstr ""
+
+#. settings-schema.json->left-auto-paste->tooltip
+msgid ""
+"Automatically paste the current selection/clipboard content and translate it"
+" when opening the popup window using a left click on the translator panel "
+"button"
+msgstr ""
+
+#. settings-schema.json->left-auto-play->description
+msgid "Automatically play the translation on left click"
+msgstr ""
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Do nothing"
+msgstr ""
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Show popup dialog and translate Selection"
+msgstr ""
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Show popup dialog and translate Clipboard"
+msgstr ""
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Show popup dialog, translate Selection and play"
+msgstr ""
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Show popup dialog, translate Clipboard and play"
+msgstr ""
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Play translation of Selection"
+msgstr ""
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Play translation of Clipboard"
+msgstr ""
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Translate Selection and copy the translation"
+msgstr ""
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Translate Clipboard and copy the translation"
+msgstr ""
+
+#. settings-schema.json->middle-button-action->description
+msgid "Middle button action"
+msgstr ""
+
+#. settings-schema.json->middle-button-action->tooltip
+msgid ""
+"Select the action to take when using the middle mouse button to click on the"
+" translator panel button"
+msgstr ""
+
+#. settings-schema.json->ctrl-middle-button-action->description
+msgid "Ctrl + Middle button action"
+msgstr ""
+
+#. settings-schema.json->ctrl-middle-button-action->tooltip
+msgid ""
+"Select the action to take when holding the Ctrl key and using the middle "
+"mouse button to click on the translator panel button"
+msgstr ""
