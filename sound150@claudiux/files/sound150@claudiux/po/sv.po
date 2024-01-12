@@ -1,14 +1,14 @@
 # Swedish translation for sound150@claudiux.
 # Copyright (C) 2018 Claudiux <claude.clerc@gmail.com>
 # This file is distributed under the same license as the cinnamon package.
-# FIRST AUTHOR: Åke Engelbrektson <eson@svenskasprakfiler.se>, 2018.
+# FIRST AUTHOR: Åke Engelbrektson <eson@svenskasprakfiler.se>, 2018, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sound150@claudiux v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-31 22:37+0200\n"
-"PO-Revision-Date: 2022-12-26 15:26-0500\n"
+"POT-Creation-Date: 2024-01-09 01:09+0100\n"
+"PO-Revision-Date: 2024-01-10 10:30+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
@@ -16,161 +16,161 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4\n"
 
-#: 5.4/applet.js:73 4.4/applet.js:72 4.6/applet.js:73 3.4/applet.js:65
-#: 2.8/applet.js:65
+#: 4.6/applet.js:73 3.4/applet.js:65 4.4/applet.js:72 2.8/applet.js:65
+#: 5.4/applet.js:95
 msgid "Playing"
-msgstr ""
+msgstr "Spelar"
 
-#: 5.4/applet.js:74 4.4/applet.js:73 4.6/applet.js:74 3.4/applet.js:66
-#: 2.8/applet.js:66
+#: 4.6/applet.js:74 3.4/applet.js:66 4.4/applet.js:73 2.8/applet.js:66
+#: 5.4/applet.js:96
 msgid "Paused"
-msgstr ""
+msgstr "Pausad"
 
-#: 5.4/applet.js:75 4.4/applet.js:74 4.6/applet.js:75 3.4/applet.js:67
-#: 2.8/applet.js:67
+#: 4.6/applet.js:75 3.4/applet.js:67 4.4/applet.js:74 2.8/applet.js:67
+#: 5.4/applet.js:97
 msgid "Stopped"
-msgstr ""
+msgstr "Stoppad"
 
-#: 5.4/applet.js:587 5.4/applet.js:757 5.4/applet.js:760 5.4/applet.js:763
-#: 5.4/applet.js:1404 4.4/applet.js:591 4.4/applet.js:723 4.4/applet.js:727
-#: 4.6/applet.js:592 4.6/applet.js:719 4.6/applet.js:723 3.4/applet.js:534
-#: 3.4/applet.js:766 3.4/applet.js:770 2.8/applet.js:529 2.8/applet.js:761
-#: 2.8/applet.js:765
-msgid "Unknown Artist"
-msgstr ""
-
-#: 5.4/applet.js:588 5.4/applet.js:770 4.4/applet.js:592 4.4/applet.js:734
-#: 4.6/applet.js:593 4.6/applet.js:730 3.4/applet.js:535 3.4/applet.js:777
-#: 2.8/applet.js:530 2.8/applet.js:772
-msgid "Unknown Album"
-msgstr ""
-
-#: 5.4/applet.js:589 5.4/applet.js:775 5.4/applet.js:1407 4.4/applet.js:593
-#: 4.4/applet.js:739 4.6/applet.js:594 4.6/applet.js:735 3.4/applet.js:536
-#: 3.4/applet.js:782 2.8/applet.js:531 2.8/applet.js:777
-msgid "Unknown Title"
-msgstr ""
-
-#: 5.4/applet.js:611 4.4/applet.js:615 4.6/applet.js:616 3.4/applet.js:557
-#: 2.8/applet.js:552
-msgid "Previous"
-msgstr ""
-
-#: 5.4/applet.js:614 5.4/applet.js:845 5.4/applet.js:851 4.4/applet.js:618
-#: 4.4/applet.js:794 4.4/applet.js:800 4.6/applet.js:619 4.6/applet.js:790
-#: 4.6/applet.js:796 3.4/applet.js:560 3.4/applet.js:842 3.4/applet.js:848
-#: 2.8/applet.js:555 2.8/applet.js:837 2.8/applet.js:843
-msgid "Play"
-msgstr ""
-
-#: 5.4/applet.js:617 4.4/applet.js:621 4.6/applet.js:622 3.4/applet.js:563
-#: 2.8/applet.js:558
-msgid "Stop"
-msgstr ""
-
-#: 5.4/applet.js:620 4.4/applet.js:624 4.6/applet.js:625 3.4/applet.js:566
-#: 2.8/applet.js:561
-msgid "Next"
-msgstr ""
-
-#: 5.4/applet.js:634 5.4/applet.js:877 4.4/applet.js:634 4.4/applet.js:824
-#: 4.6/applet.js:635 4.6/applet.js:822 3.4/applet.js:577 3.4/applet.js:872
-#: 2.8/applet.js:572 2.8/applet.js:867
-msgid "Consecutive Playing"
-msgstr ""
-
-#: 5.4/applet.js:637 5.4/applet.js:893 4.4/applet.js:641 4.4/applet.js:838
-#: 4.6/applet.js:638 4.6/applet.js:838 3.4/applet.js:584 3.4/applet.js:886
-#: 2.8/applet.js:579 2.8/applet.js:881
-msgid "No Shuffle"
-msgstr ""
-
-#: 5.4/applet.js:684 4.4/applet.js:557 4.6/applet.js:558 3.4/applet.js:500
-#: 2.8/applet.js:495
+#: 4.6/applet.js:558 3.4/applet.js:500 4.4/applet.js:557 2.8/applet.js:495
+#: 5.4/applet.js:724
 msgid "Open Player"
-msgstr ""
+msgstr "Öppna spelare"
 
-#: 5.4/applet.js:698 4.4/applet.js:570 4.6/applet.js:571 3.4/applet.js:513
-#: 2.8/applet.js:508
+#: 4.6/applet.js:571 3.4/applet.js:513 4.4/applet.js:570 2.8/applet.js:508
+#: 5.4/applet.js:738
 msgid "Quit Player"
-msgstr ""
+msgstr "Avsluta spelare"
 
-#: 5.4/applet.js:839 4.4/applet.js:788 4.6/applet.js:784 3.4/applet.js:836
-#: 2.8/applet.js:831
+#: 4.6/applet.js:592 4.6/applet.js:719 4.6/applet.js:723 3.4/applet.js:534
+#: 3.4/applet.js:766 3.4/applet.js:770 4.4/applet.js:591 4.4/applet.js:723
+#: 4.4/applet.js:727 2.8/applet.js:529 2.8/applet.js:761 2.8/applet.js:765
+#: 5.4/applet.js:621 5.4/applet.js:797 5.4/applet.js:800 5.4/applet.js:803
+#: 5.4/applet.js:814 5.4/applet.js:1516 5.4/applet.js:1550
+msgid "Unknown Artist"
+msgstr "Okänd artist"
+
+#: 4.6/applet.js:593 4.6/applet.js:730 3.4/applet.js:535 3.4/applet.js:777
+#: 4.4/applet.js:592 4.4/applet.js:734 2.8/applet.js:530 2.8/applet.js:772
+#: 5.4/applet.js:622 5.4/applet.js:810
+msgid "Unknown Album"
+msgstr "Okänt album"
+
+#: 4.6/applet.js:594 4.6/applet.js:735 3.4/applet.js:536 3.4/applet.js:782
+#: 4.4/applet.js:593 4.4/applet.js:739 2.8/applet.js:531 2.8/applet.js:777
+#: 5.4/applet.js:623 5.4/applet.js:819 5.4/applet.js:1553
+msgid "Unknown Title"
+msgstr "Okänd låt"
+
+#: 4.6/applet.js:616 3.4/applet.js:557 4.4/applet.js:615 2.8/applet.js:552
+#: 5.4/applet.js:651
+msgid "Previous"
+msgstr "Föregående"
+
+#: 4.6/applet.js:619 4.6/applet.js:790 4.6/applet.js:796 3.4/applet.js:560
+#: 3.4/applet.js:842 3.4/applet.js:848 4.4/applet.js:618 4.4/applet.js:794
+#: 4.4/applet.js:800 2.8/applet.js:555 2.8/applet.js:837 2.8/applet.js:843
+#: 5.4/applet.js:654 5.4/applet.js:890 5.4/applet.js:896
+msgid "Play"
+msgstr "Spela"
+
+#: 4.6/applet.js:622 3.4/applet.js:563 4.4/applet.js:621 2.8/applet.js:558
+#: 5.4/applet.js:657
+msgid "Stop"
+msgstr "Stopp"
+
+#: 4.6/applet.js:625 3.4/applet.js:566 4.4/applet.js:624 2.8/applet.js:561
+#: 5.4/applet.js:660
+msgid "Next"
+msgstr "Nästa"
+
+#: 4.6/applet.js:635 4.6/applet.js:822 3.4/applet.js:577 3.4/applet.js:872
+#: 4.4/applet.js:634 4.4/applet.js:824 2.8/applet.js:572 2.8/applet.js:867
+#: 5.4/applet.js:674 5.4/applet.js:922
+msgid "Consecutive Playing"
+msgstr "Spela i följd"
+
+#: 4.6/applet.js:638 4.6/applet.js:838 3.4/applet.js:584 3.4/applet.js:886
+#: 4.4/applet.js:641 4.4/applet.js:838 2.8/applet.js:579 2.8/applet.js:881
+#: 5.4/applet.js:677 5.4/applet.js:938
+msgid "No Shuffle"
+msgstr "Ingen blandning"
+
+#: 4.6/applet.js:784 3.4/applet.js:836 4.4/applet.js:788 2.8/applet.js:831
+#: 5.4/applet.js:884
 msgid "Pause"
-msgstr ""
+msgstr "Paus"
 
-#: 5.4/applet.js:879 4.4/applet.js:826 4.6/applet.js:824 3.4/applet.js:874
-#: 2.8/applet.js:869
+#: 4.6/applet.js:824 3.4/applet.js:874 4.4/applet.js:826 2.8/applet.js:869
+#: 5.4/applet.js:924
 msgid "Repeat Single"
-msgstr ""
+msgstr "Upprepa enskild"
 
-#: 5.4/applet.js:881 4.4/applet.js:828 4.6/applet.js:826 3.4/applet.js:876
-#: 2.8/applet.js:871
+#: 4.6/applet.js:826 3.4/applet.js:876 4.4/applet.js:828 2.8/applet.js:871
+#: 5.4/applet.js:926
 msgid "Repeat All"
-msgstr ""
+msgstr "Upprepa alla"
 
-#: 5.4/applet.js:893 4.4/applet.js:838 4.6/applet.js:838 3.4/applet.js:886
-#: 2.8/applet.js:881
+#: 4.6/applet.js:838 3.4/applet.js:886 4.4/applet.js:838 2.8/applet.js:881
+#: 5.4/applet.js:938
 msgid "Shuffle"
-msgstr ""
+msgstr "Blanda"
 
-#: 5.4/applet.js:1100 4.4/applet.js:1019 4.6/applet.js:1027 3.4/applet.js:1184
-#: 2.8/applet.js:1262
+#: 4.6/applet.js:1027 3.4/applet.js:1184 4.4/applet.js:1019 2.8/applet.js:1262
+#: 5.4/applet.js:1172
 msgid "Mute output"
-msgstr ""
+msgstr "Stäng av ljudet"
 
-#: 5.4/applet.js:1101 4.4/applet.js:1020 4.6/applet.js:1028 3.4/applet.js:1185
-#: 2.8/applet.js:1263
+#: 4.6/applet.js:1028 3.4/applet.js:1185 4.4/applet.js:1020 2.8/applet.js:1263
+#: 5.4/applet.js:1173
 msgid "Mute input"
-msgstr ""
+msgstr "Stäng av ingångsljudet"
 
-#: 5.4/applet.js:1108 4.4/applet.js:1026 4.6/applet.js:1034 3.4/applet.js:1191
-#: 2.8/applet.js:1269
+#: 4.6/applet.js:1034 3.4/applet.js:1191 4.4/applet.js:1026 2.8/applet.js:1269
+#: 5.4/applet.js:1183
 msgid "Applications"
-msgstr ""
+msgstr "Program"
 
-#: 5.4/applet.js:1109 4.4/applet.js:1027 4.6/applet.js:1035 3.4/applet.js:1192
-#: 2.8/applet.js:1270
+#: 4.6/applet.js:1035 3.4/applet.js:1192 4.4/applet.js:1027 2.8/applet.js:1270
+#: 5.4/applet.js:1184
 msgid "Output device"
-msgstr ""
+msgstr "Utdataenhet"
 
-#: 5.4/applet.js:1116 4.4/applet.js:1034 4.6/applet.js:1042 3.4/applet.js:1199
-#: 2.8/applet.js:1277
+#: 4.6/applet.js:1042 3.4/applet.js:1199 4.4/applet.js:1034 2.8/applet.js:1277
+#: 5.4/applet.js:1191
 msgid "Microphone"
-msgstr ""
+msgstr "Mikrofon"
 
-#: 5.4/applet.js:1118 4.4/applet.js:1036 4.6/applet.js:1044 3.4/applet.js:1202
-#: 2.8/applet.js:1280
+#: 4.6/applet.js:1044 3.4/applet.js:1202 4.4/applet.js:1036 2.8/applet.js:1280
+#: 5.4/applet.js:1193
 msgid "Input device"
-msgstr ""
+msgstr "Indataenhet"
 
-#: 5.4/applet.js:1397 5.4/applet.js:1536 4.4/applet.js:1403 4.4/applet.js:1497
-#: 4.6/applet.js:1420 4.6/applet.js:1515 3.4/applet.js:1577 3.4/applet.js:1662
-#: 2.8/applet.js:1650 2.8/applet.js:1735
-msgid "Volume"
-msgstr ""
-
-#: 5.4/applet.js:1525 4.4/applet.js:1397 4.6/applet.js:1409 3.4/applet.js:1571
-#: 2.8/applet.js:1644
+#: 4.6/applet.js:1409 3.4/applet.js:1571 4.4/applet.js:1397 2.8/applet.js:1644
+#: 5.4/applet.js:1672
 msgid "Launch player"
-msgstr ""
+msgstr "Starta spelare"
 
-#: 5.4/applet.js:1530 4.4/applet.js:1392 4.6/applet.js:1414 3.4/applet.js:1566
-#: 2.8/applet.js:1639
+#: 4.6/applet.js:1414 3.4/applet.js:1566 4.4/applet.js:1392 2.8/applet.js:1639
+#: 5.4/applet.js:1677
 msgid "Choose player controls"
-msgstr ""
+msgstr "Välj spelarkontroller"
 
-#. 5.4->settings-schema.json->section4->description
-#. 4.4->settings-schema.json->section3->description
+#: 4.6/applet.js:1420 4.6/applet.js:1515 3.4/applet.js:1577 3.4/applet.js:1662
+#: 4.4/applet.js:1403 4.4/applet.js:1497 2.8/applet.js:1650 2.8/applet.js:1735
+#: 5.4/applet.js:1543 5.4/applet.js:1683
+msgid "Volume"
+msgstr "Volym"
+
 #. 4.6->settings-schema.json->section3->description
 #. 3.4->settings-schema.json->section3->description
-#: 5.4/applet.js:1542 4.4/applet.js:1409 4.6/applet.js:1426 3.4/applet.js:1584
-#: 2.8/applet.js:1657
+#. 4.4->settings-schema.json->section3->description
+#. 5.4->settings-schema.json->section5->title
+#: 4.6/applet.js:1426 3.4/applet.js:1584 4.4/applet.js:1409 2.8/applet.js:1657
+#: 5.4/applet.js:1689
 msgid "Sound Settings"
-msgstr ""
+msgstr "Ljudinställningar"
 
 #. metadata.json->name
 msgid "Sound 150%"
@@ -184,233 +184,221 @@ msgstr ""
 "Ett panelprogram, baserat på Cinnamons eget, för att kontrollera ljud (upp "
 "till 150% av nominell volym) och musik"
 
-#. 5.4->settings-schema.json->section1->description
-#. 4.4->settings-schema.json->section1->description
 #. 4.6->settings-schema.json->section1->description
 #. 3.4->settings-schema.json->section1->description
+#. 4.4->settings-schema.json->section1->description
+#. 5.4->settings-schema.json->section1->title
 msgid "Menu"
-msgstr ""
+msgstr "Meny"
 
-#. 5.4->settings-schema.json->playerControl->description
-#. 4.4->settings-schema.json->playerControl->description
 #. 4.6->settings-schema.json->playerControl->description
 #. 3.4->settings-schema.json->playerControl->description
+#. 4.4->settings-schema.json->playerControl->description
 #. 2.8->settings-schema.json->playerControl->description
+#. 5.4->settings-schema.json->playerControl->description
 msgid "Control Players"
-msgstr ""
+msgstr "Kontrollera spelare"
 
-#. 5.4->settings-schema.json->extendedPlayerControl->description
-#. 4.4->settings-schema.json->extendedPlayerControl->description
 #. 4.6->settings-schema.json->extendedPlayerControl->description
 #. 3.4->settings-schema.json->extendedPlayerControl->description
+#. 4.4->settings-schema.json->extendedPlayerControl->description
 #. 2.8->settings-schema.json->extendedPlayerControl->description
+#. 5.4->settings-schema.json->extendedPlayerControl->description
 msgid "Show Loop and Shuffle controls"
-msgstr ""
+msgstr "Visa loop- och blandningsreglage"
 
-#. 5.4->settings-schema.json->keyOpen->description
 #. 4.6->settings-schema.json->keyOpen->description
+#. 5.4->settings-schema.json->keyOpen->description
 msgid "Show menu"
-msgstr ""
+msgstr "Visa meny"
 
-#. 5.4->settings-schema.json->keyOpen->tooltip
 #. 4.6->settings-schema.json->keyOpen->tooltip
+#. 5.4->settings-schema.json->keyOpen->tooltip
 msgid "Set keybinding(s) to show the sound applet menu."
-msgstr ""
+msgstr "Ställ in tangentbindning(ar) för att visa panelprogrammenyn."
 
-#. 5.4->settings-schema.json->section2->description
-#. 4.4->settings-schema.json->section2->description
 #. 4.6->settings-schema.json->section2->description
 #. 3.4->settings-schema.json->section2->description
+#. 4.4->settings-schema.json->section2->description
+#. 5.4->settings-schema.json->section2->title
 msgid "Panel"
-msgstr ""
+msgstr "Panel"
 
-#. 5.4->settings-schema.json->showtrack->description
-#. 4.4->settings-schema.json->showtrack->description
 #. 4.6->settings-schema.json->showtrack->description
 #. 3.4->settings-schema.json->showtrack->description
+#. 4.4->settings-schema.json->showtrack->description
 #. 2.8->settings-schema.json->showtrack->description
+#. 5.4->settings-schema.json->showtrack->description
 msgid "Show song information on the panel"
-msgstr ""
+msgstr "Visa låtinformation i panelen"
 
-#. 5.4->settings-schema.json->truncatetext->units
-#. 4.4->settings-schema.json->truncatetext->units
 #. 4.6->settings-schema.json->truncatetext->units
 #. 3.4->settings-schema.json->truncatetext->units
+#. 4.4->settings-schema.json->truncatetext->units
 #. 2.8->settings-schema.json->truncatetext->units
+#. 5.4->settings-schema.json->truncatetext->units
 msgid "characters"
-msgstr ""
+msgstr "tecken"
 
-#. 5.4->settings-schema.json->truncatetext->description
-#. 4.4->settings-schema.json->truncatetext->description
 #. 4.6->settings-schema.json->truncatetext->description
 #. 3.4->settings-schema.json->truncatetext->description
+#. 4.4->settings-schema.json->truncatetext->description
 #. 2.8->settings-schema.json->truncatetext->description
+#. 5.4->settings-schema.json->truncatetext->description
 msgid "Limit song information to"
-msgstr ""
+msgstr "Begränsa låtinformation till"
 
-#. 5.4->settings-schema.json->middleClickAction->options
-#. 4.4->settings-schema.json->middleClickAction->options
 #. 4.6->settings-schema.json->middleClickAction->options
 #. 3.4->settings-schema.json->middleClickAction->options
+#. 4.4->settings-schema.json->middleClickAction->options
 #. 2.8->settings-schema.json->middleClickAction->options
+#. 5.4->settings-schema.json->middleClickAction->options
+#. 5.4->settings-schema.json->middleShiftClickAction->options
 msgid "Toggle Mute"
-msgstr ""
+msgstr "Växla hörbarhet"
 
-#. 5.4->settings-schema.json->middleClickAction->options
-#. 4.4->settings-schema.json->middleClickAction->options
 #. 4.6->settings-schema.json->middleClickAction->options
+#. 4.4->settings-schema.json->middleClickAction->options
+#. 5.4->settings-schema.json->middleClickAction->options
+#. 5.4->settings-schema.json->middleShiftClickAction->options
 msgid "Toggle Mute output"
-msgstr ""
+msgstr "Växla hörbarhet för utdata"
 
-#. 5.4->settings-schema.json->middleClickAction->options
-#. 4.4->settings-schema.json->middleClickAction->options
 #. 4.6->settings-schema.json->middleClickAction->options
-msgid "Toggle Mute input"
-msgstr ""
-
-#. 5.4->settings-schema.json->middleClickAction->options
 #. 4.4->settings-schema.json->middleClickAction->options
+#. 5.4->settings-schema.json->middleClickAction->options
+#. 5.4->settings-schema.json->middleShiftClickAction->options
+msgid "Toggle Mute input"
+msgstr "Växla hörbarhet för indata"
+
 #. 4.6->settings-schema.json->middleClickAction->options
 #. 3.4->settings-schema.json->middleClickAction->options
+#. 4.4->settings-schema.json->middleClickAction->options
 #. 2.8->settings-schema.json->middleClickAction->options
+#. 5.4->settings-schema.json->middleClickAction->options
+#. 5.4->settings-schema.json->middleShiftClickAction->options
 msgid "Toggle Play / Pause"
-msgstr ""
+msgstr "Växla Spela/Pausa"
 
-#. 5.4->settings-schema.json->middleClickAction->description
-#. 4.4->settings-schema.json->middleClickAction->description
 #. 4.6->settings-schema.json->middleClickAction->description
 #. 3.4->settings-schema.json->middleClickAction->description
+#. 4.4->settings-schema.json->middleClickAction->description
 #. 2.8->settings-schema.json->middleClickAction->description
+#. 5.4->settings-schema.json->middleClickAction->description
 msgid "Action on middle click"
-msgstr ""
+msgstr "Åtgärd vid mushjulsklick"
 
-#. 5.4->settings-schema.json->horizontalScroll->description
-#. 4.4->settings-schema.json->horizontalScroll->description
 #. 4.6->settings-schema.json->horizontalScroll->description
+#. 4.4->settings-schema.json->horizontalScroll->description
+#. 5.4->settings-schema.json->horizontalScroll->description
 msgid "Use horizontal scrolling to move between tracks"
-msgstr ""
+msgstr "Använd horisontell rullning för att flytta mellan spår"
 
-#. 5.4->settings-schema.json->showalbum->description
-#. 4.4->settings-schema.json->showalbum->description
 #. 4.6->settings-schema.json->showalbum->description
 #. 3.4->settings-schema.json->showalbum->description
+#. 4.4->settings-schema.json->showalbum->description
 #. 2.8->settings-schema.json->showalbum->description
+#. 5.4->settings-schema.json->showalbum->description
 msgid "Show album art as icon"
-msgstr ""
+msgstr "Visa skivomslag som ikon"
 
-#. 5.4->settings-schema.json->keepAlbumAspectRatio->description
-#. 4.4->settings-schema.json->keepAlbumAspectRatio->description
 #. 4.6->settings-schema.json->keepAlbumAspectRatio->description
+#. 4.4->settings-schema.json->keepAlbumAspectRatio->description
+#. 5.4->settings-schema.json->keepAlbumAspectRatio->description
 msgid "Keep album art aspect ratio"
-msgstr ""
+msgstr "Bevara bildförhållandet för skivomslag"
 
-#. 5.4->settings-schema.json->hideSystray->description
-#. 4.4->settings-schema.json->hideSystray->description
 #. 4.6->settings-schema.json->hideSystray->description
 #. 3.4->settings-schema.json->hideSystray->description
+#. 4.4->settings-schema.json->hideSystray->description
 #. 2.8->settings-schema.json->hideSystray->description
+#. 5.4->settings-schema.json->hideSystray->description
 msgid "Hide system tray icons for compatible players"
-msgstr ""
+msgstr "Dölj systemfältsikoner för kompatibla spelare"
 
-#. 5.4->settings-schema.json->section3->description
-msgid "Tooltip"
-msgstr ""
-
-#. 5.4->settings-schema.json->tooltipShowVolume->description
-msgid "Show volume in tooltip"
-msgstr ""
-
-#. 5.4->settings-schema.json->tooltipShowPlayer->description
-msgid "Show player in tooltip"
-msgstr ""
-
-#. 5.4->settings-schema.json->tooltipShowArtistTitle->description
-msgid "Show song artist and title in tooltip"
-msgstr ""
-
-#. 5.4->settings-schema.json->setAmplification->description
-#. 4.4->settings-schema.json->setAmplification->description
 #. 4.6->settings-schema.json->setAmplification->description
 #. 3.4->settings-schema.json->percentMaxVol->description
+#. 4.4->settings-schema.json->setAmplification->description
 #. 2.8->settings-schema.json->percentMaxVol->description
+#. 5.4->settings-schema.json->setAmplification->description
 msgid "Maximum volume control"
 msgstr "Maximal volym"
 
-#. 5.4->settings-schema.json->stepVolume->options
-#. 4.4->settings-schema.json->stepVolume->options
 #. 4.6->settings-schema.json->stepVolume->options
 #. 3.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
 #. 2.8->settings-schema.json->stepVolume->options
+#. 5.4->settings-schema.json->stepVolume->options
 msgid "6%"
-msgstr ""
+msgstr "6%"
 
-#. 5.4->settings-schema.json->stepVolume->options
-#. 4.4->settings-schema.json->stepVolume->options
 #. 4.6->settings-schema.json->stepVolume->options
 #. 3.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
 #. 2.8->settings-schema.json->stepVolume->options
+#. 5.4->settings-schema.json->stepVolume->options
 msgid "5%"
-msgstr ""
+msgstr "5%"
 
-#. 5.4->settings-schema.json->stepVolume->options
-#. 4.4->settings-schema.json->stepVolume->options
 #. 4.6->settings-schema.json->stepVolume->options
 #. 3.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
 #. 2.8->settings-schema.json->stepVolume->options
+#. 5.4->settings-schema.json->stepVolume->options
 msgid "4%"
-msgstr ""
+msgstr "4%"
 
-#. 5.4->settings-schema.json->stepVolume->options
-#. 4.4->settings-schema.json->stepVolume->options
 #. 4.6->settings-schema.json->stepVolume->options
 #. 3.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
 #. 2.8->settings-schema.json->stepVolume->options
+#. 5.4->settings-schema.json->stepVolume->options
 msgid "3%"
-msgstr ""
+msgstr "3%"
 
-#. 5.4->settings-schema.json->stepVolume->options
-#. 4.4->settings-schema.json->stepVolume->options
 #. 4.6->settings-schema.json->stepVolume->options
 #. 3.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
 #. 2.8->settings-schema.json->stepVolume->options
+#. 5.4->settings-schema.json->stepVolume->options
 msgid "2%"
-msgstr ""
+msgstr "2%"
 
-#. 5.4->settings-schema.json->stepVolume->options
-#. 4.4->settings-schema.json->stepVolume->options
 #. 4.6->settings-schema.json->stepVolume->options
 #. 3.4->settings-schema.json->stepVolume->options
+#. 4.4->settings-schema.json->stepVolume->options
 #. 2.8->settings-schema.json->stepVolume->options
+#. 5.4->settings-schema.json->stepVolume->options
 msgid "1%"
-msgstr ""
+msgstr "1%"
 
-#. 5.4->settings-schema.json->stepVolume->tooltip
-#. 4.4->settings-schema.json->stepVolume->tooltip
 #. 4.6->settings-schema.json->stepVolume->tooltip
 #. 3.4->settings-schema.json->stepVolume->tooltip
+#. 4.4->settings-schema.json->stepVolume->tooltip
 #. 2.8->settings-schema.json->stepVolume->tooltip
+#. 5.4->settings-schema.json->stepVolume->tooltip
 msgid "% of nominal volume"
 msgstr "% av nominell volym"
 
-#. 5.4->settings-schema.json->stepVolume->description
-#. 4.4->settings-schema.json->stepVolume->description
 #. 4.6->settings-schema.json->stepVolume->description
 #. 3.4->settings-schema.json->stepVolume->description
+#. 4.4->settings-schema.json->stepVolume->description
 #. 2.8->settings-schema.json->stepVolume->description
+#. 5.4->settings-schema.json->stepVolume->description
 msgid "+/-"
-msgstr ""
+msgstr "+/-"
 
-#. 5.4->settings-schema.json->magneticOn->description
-#. 4.4->settings-schema.json->magneticOn->description
 #. 4.6->settings-schema.json->magneticOn->description
 #. 3.4->settings-schema.json->magneticOn->description
+#. 4.4->settings-schema.json->magneticOn->description
+#. 5.4->settings-schema.json->magneticOn->description
 msgid "Magnetize the 'Volume 100%' mark"
-msgstr "Magnetisera märket för \"Volym: 100%\"."
+msgstr "Magnetisera märket för \"Volym: 100%\""
 
-#. 5.4->settings-schema.json->magneticOn->tooltip
-#. 4.4->settings-schema.json->magneticOn->tooltip
 #. 4.6->settings-schema.json->magneticOn->tooltip
 #. 3.4->settings-schema.json->magneticOn->tooltip
+#. 4.4->settings-schema.json->magneticOn->tooltip
+#. 5.4->settings-schema.json->magneticOn->tooltip
 msgid ""
 "When checked, the 'Volume 100%' mark becomes magnetic: the volume is "
 "automatically set to 100% when the distance between the volume value and "
@@ -420,96 +408,97 @@ msgstr ""
 "automatiskt till 100% när avståndet mellan aktuell volym och 100% är mindre "
 "än ett halvt steg."
 
-#. 5.4->settings-schema.json->adaptColor->description
-#. 4.4->settings-schema.json->adaptColor->description
 #. 4.6->settings-schema.json->adaptColor->description
 #. 3.4->settings-schema.json->adaptColor->description
+#. 4.4->settings-schema.json->adaptColor->description
 #. 2.8->settings-schema.json->adaptColor->description
+#. 5.4->settings-schema.json->adaptColor->description
 msgid "Adjust the color of the icon to the volume"
 msgstr "Justera färgen på volymikonen"
 
-#. 5.4->settings-schema.json->adaptColor->tooltip
-#. 4.4->settings-schema.json->adaptColor->tooltip
 #. 4.6->settings-schema.json->adaptColor->tooltip
 #. 3.4->settings-schema.json->adaptColor->tooltip
+#. 4.4->settings-schema.json->adaptColor->tooltip
 #. 2.8->settings-schema.json->adaptColor->tooltip
 msgid "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red."
 msgstr "Från 101% till 115%: Gul. Från 116% till 130%: Orange. Över 130%: Röd."
 
 #. 3.4->settings-schema.json->alwaysShowInput->description
 msgid "Always show input controls"
-msgstr ""
+msgstr "Visa alltid indatakontroller"
 
 #. 3.4->settings-schema.json->alwaysShowInput->tooltip
 msgid ""
 "When checked, input volume and source controls are always shown, even if no "
 "application is currently recording sound."
 msgstr ""
+"När det här alternativet är markerat visas alltid kontroller för "
+"ingångsvolym och källa, även om inget program spelar in ljud för tillfället."
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options
 msgid "150%"
-msgstr ""
+msgstr "150%"
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options
 msgid "140%"
-msgstr ""
+msgstr "140%"
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options
 msgid "130%"
-msgstr ""
+msgstr "130%"
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options
 msgid "120%"
-msgstr ""
+msgstr "120%"
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options
 msgid "110%"
-msgstr ""
+msgstr "110%"
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options
 msgid "90%"
-msgstr ""
+msgstr "90%"
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options
 msgid "80%"
-msgstr ""
+msgstr "80%"
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options
 msgid "70%"
-msgstr ""
+msgstr "70%"
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options
 msgid "60%"
-msgstr ""
+msgstr "60%"
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options
 msgid "50%"
-msgstr ""
+msgstr "50%"
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options
 msgid "40%"
-msgstr ""
+msgstr "40%"
 
 #. 3.4->settings-schema.json->percentMaxVol->options
 #. 2.8->settings-schema.json->percentMaxVol->options
 msgid "30%"
-msgstr ""
+msgstr "30%"
 
 #. 3.4->settings-schema.json->percentMaxVol->tooltip
 #. 2.8->settings-schema.json->percentMaxVol->tooltip
@@ -524,23 +513,105 @@ msgstr ""
 
 #. 3.4->settings-schema.json->stepVolume->options
 #. 2.8->settings-schema.json->stepVolume->options
+#. 5.4->settings-schema.json->stepVolume->options
 msgid "10%"
-msgstr ""
+msgstr "10%"
 
 #. 3.4->settings-schema.json->stepVolume->options
 #. 2.8->settings-schema.json->stepVolume->options
+#. 5.4->settings-schema.json->stepVolume->options
 msgid "9%"
-msgstr ""
+msgstr "9%"
 
 #. 3.4->settings-schema.json->stepVolume->options
 #. 2.8->settings-schema.json->stepVolume->options
+#. 5.4->settings-schema.json->stepVolume->options
 msgid "8%"
-msgstr ""
+msgstr "8%"
 
 #. 3.4->settings-schema.json->stepVolume->options
 #. 2.8->settings-schema.json->stepVolume->options
+#. 5.4->settings-schema.json->stepVolume->options
 msgid "7%"
-msgstr ""
+msgstr "7%"
+
+#. 5.4->settings-schema.json->page_behavior->title
+msgid "Behavior"
+msgstr "Beteende"
+
+#. 5.4->settings-schema.json->page_icon->title
+#. 5.4->settings-schema.json->section4->title
+msgid "Icon"
+msgstr "Ikon"
+
+#. 5.4->settings-schema.json->page_sound->title
+msgid "Sound"
+msgstr "Ljud"
+
+#. 5.4->settings-schema.json->page_shortcuts->title
+#. 5.4->settings-schema.json->section6->title
+msgid "Shortcuts"
+msgstr "Genvägar"
+
+#. 5.4->settings-schema.json->section3->title
+msgid "Tooltip"
+msgstr "Knappbeskrivning"
+
+#. 5.4->settings-schema.json->middleShiftClickAction->description
+msgid "Action on shift+middle click"
+msgstr "Åtgärd vid Shift+Mushjulsklick"
+
+#. 5.4->settings-schema.json->tooltipShowVolume->description
+msgid "Show volume in tooltip"
+msgstr "Visa volym i knappbeskrivning"
+
+#. 5.4->settings-schema.json->tooltipShowPlayer->description
+msgid "Show player in tooltip"
+msgstr "Visa spelare i knappbeskrivning"
+
+#. 5.4->settings-schema.json->tooltipShowArtistTitle->description
+msgid "Show song artist and title in tooltip"
+msgstr "Visa artist och låttitel i knappbeskrivning"
+
+#. 5.4->settings-schema.json->showVolumeLevelNearIcon->description
+msgid "Display volume level near icon"
+msgstr "Visa volymnivå nära ikonen"
+
+#. 5.4->settings-schema.json->color101_115->description
+msgid "Icon color: 101%-115%"
+msgstr "Ikonfärg: 101%-115%"
+
+#. 5.4->settings-schema.json->color116_130->description
+msgid "Icon color: 116%-130%"
+msgstr "Ikonfärg: 116%-130%"
+
+#. 5.4->settings-schema.json->color131_150->description
+msgid "Icon color: 131%-150%"
+msgstr "Ikonfärg: 131%-150%"
+
+#. 5.4->settings-schema.json->resetColorsButton->description
+msgid "Set colors to default values (yellow, orange, red)"
+msgstr "Ange färger till standardvärden (gul, orange, röd)"
+
+#. 5.4->settings-schema.json->alwaysCanChangeMic->description
+msgid "Always allow microphone to be reactivated"
+msgstr "Tillåt alltid att mikrofonen återaktiveras"
+
+#. 5.4->settings-schema.json->alwaysCanChangeMic->tooltip
+msgid "Always show the 'Mute input' switch in the context menu."
+msgstr "Visa alltid omkopplaren \"Stäng av ingångsljudet\" i snabbmenyn."
+
+#. 5.4->settings-schema.json->volume-mute->description
+msgid "Volume Mute"
+msgstr "Ljudavstängning"
+
+#. 5.4->settings-schema.json->volume-up->description
+msgid "Volume Up"
+msgstr "Volym upp"
+
+#. 5.4->settings-schema.json->volume-down->description
+msgid "Volume Down"
+msgstr "Volym ner"
 
 #~ msgid "Step"
 #~ msgstr "Steg"
