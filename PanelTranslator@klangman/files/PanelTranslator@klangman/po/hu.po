@@ -1,0 +1,258 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-11 10:39-0500\n"
+"PO-Revision-Date: 2024-01-13 12:48+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:83
+msgid "Translator"
+msgstr "Fordító"
+
+#: applet.js:189
+msgid "Unable to query available languages from translate-shell"
+msgstr ""
+"Nem lehet lekérdezni a rendelkezésre álló nyelveket a translate-shellből"
+
+#: applet.js:197
+msgid "Required \"trans\" command not found, please install translate-shell"
+msgstr ""
+"A szükséges \"trans\" parancs nem található, kérjük telepítse a translate-"
+"shellt"
+
+#: applet.js:201
+msgid "Error, the \"trans\" command returned an exit code of "
+msgstr "Hiba, a \"trans\" parancs a következő kilépési kódot adta vissza:"
+
+#: applet.js:272
+msgid "Swap Languages"
+msgstr "Nyelvek cseréje"
+
+#: applet.js:307
+msgid "{Text to translate}"
+msgstr "{Szöveg a fordításhoz}"
+
+#: applet.js:324
+msgid "{Translated text}"
+msgstr "{Lefordított szöveg}"
+
+#: applet.js:338
+msgid "Configure"
+msgstr "Beállítás"
+
+#: applet.js:339
+msgid "Play"
+msgstr "Lejátszás"
+
+#: applet.js:343
+msgid "Paste"
+msgstr "Beillesztés"
+
+#: applet.js:347
+msgid "Clear"
+msgstr "Törlés"
+
+#: applet.js:351
+msgid "Translate"
+msgstr "Fordítás"
+
+#: applet.js:356
+msgid "Copy"
+msgstr "Másolás"
+
+#: applet.js:362
+msgid "Play Translation"
+msgstr "Fordítás lejátszása"
+
+#. metadata.json->name
+msgid "Panel Translator"
+msgstr "Panel Fordító"
+
+#. metadata.json->description
+msgid ""
+"Translate text to other languages from the Cinnamon panel using Google, Bing "
+"and other translators"
+msgstr ""
+"Fordítson szöveget más nyelvekre a Cinnamon panelről a Google, Bing és más "
+"fordítók segítségével"
+
+#. settings-schema.json->languages-header->description
+msgid "Default Languages"
+msgstr "Alapvető nyelvek"
+
+#. settings-schema.json->default-from-language->description
+msgid "Source language"
+msgstr "Forrás nyelv"
+
+#. settings-schema.json->default-to-language->description
+msgid "Target language"
+msgstr "Cél nyelv"
+
+#. settings-schema.json->engine-header->description
+msgid "Translation Engine"
+msgstr "Fordítómotor"
+
+#. settings-schema.json->translate-engine->options
+msgid "Apertium"
+msgstr "Apertium"
+
+#. settings-schema.json->translate-engine->options
+msgid "Aspell"
+msgstr "Aspell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Auto"
+msgstr "Auto"
+
+#. settings-schema.json->translate-engine->options
+msgid "Bing"
+msgstr "Bing"
+
+#. settings-schema.json->translate-engine->options
+msgid "Google"
+msgstr "Google"
+
+#. settings-schema.json->translate-engine->options
+msgid "Hunspell"
+msgstr "Hunspell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Spell"
+msgstr "Spell"
+
+#. settings-schema.json->translate-engine->options
+msgid "Yandex"
+msgstr "Yandex"
+
+#. settings-schema.json->translate-engine->description
+msgid "Engine (Auto/Google recommended!)"
+msgstr "Motor (Auto/Google ajánlott!)"
+
+#. settings-schema.json->translate-engine->tooltip
+msgid ""
+"Most engines don't support play back and some don't even translate, others "
+"just report HTTP errors. So it's best to use \"Auto\" and let translate-"
+"shell decide what translator to use."
+msgstr ""
+"A legtöbb motor nem támogatja a lejátszást és néhány nem is fordít, mások "
+"csak HTTP-hibákat jelentenek. Ezért a legjobb, ha az \"Auto\" opciót "
+"használja, és hagyja, hogy a translate-shell döntse el, melyik fordítót "
+"használja."
+
+#. settings-schema.json->auto-header->description
+msgid "Panel Button Actions"
+msgstr "Panel gombok műveletek"
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Disabled"
+msgstr "Kikapcsolva"
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Selection"
+msgstr "Kijelölés"
+
+#. settings-schema.json->left-auto-paste->options
+msgid "Clipboard"
+msgstr "Vágólap"
+
+#. settings-schema.json->left-auto-paste->description
+msgid "Automatically paste and translate on left click"
+msgstr "Automatikus beillesztés és fordítás balra kattintva"
+
+#. settings-schema.json->left-auto-paste->tooltip
+msgid ""
+"Automatically paste the current selection/clipboard content and translate it "
+"when opening the popup window using a left click on the translator panel "
+"button"
+msgstr ""
+"Automatikusan beilleszti az aktuális kijelölés/vágólap tartalmát és "
+"lefordítja azt a felugró ablak megnyitásakor bal egérgombbal a fordítópanel "
+"gombjára kattintva."
+
+#. settings-schema.json->left-auto-play->description
+msgid "Automatically play the translation on left click"
+msgstr "Automatikusan lejátssza a fordítást bal egérkattintással"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Do nothing"
+msgstr "Ne tegyen semmit"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Show popup dialog and translate Selection"
+msgstr "Felugró párbeszédpanel megjelenítése és a kiválasztás lefordítása"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Show popup dialog and translate Clipboard"
+msgstr "Felugró párbeszédpanel megjelenítése és a vágólap lefordítása"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Show popup dialog, translate Selection and play"
+msgstr ""
+"Felugró párbeszédpanel megjelenítése, kijelölés fordítása és lejátszása"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Show popup dialog, translate Clipboard and play"
+msgstr "Felugró párbeszédpanel megjelenítése, vágólap fordítása és lejátszása"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Play translation of Selection"
+msgstr "A kijelölés fordításának lejátszása"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Play translation of Clipboard"
+msgstr "A vágólap fordításának lejátszása"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Translate Selection and copy the translation"
+msgstr "Kijelölés fordítása és a fordítás másolása"
+
+#. settings-schema.json->middle-button-action->options
+#. settings-schema.json->ctrl-middle-button-action->options
+msgid "Translate Clipboard and copy the translation"
+msgstr "Vágólap fordítása és a fordítás másolása"
+
+#. settings-schema.json->middle-button-action->description
+msgid "Middle button action"
+msgstr "Középső gomb művelete"
+
+#. settings-schema.json->middle-button-action->tooltip
+msgid ""
+"Select the action to take when using the middle mouse button to click on the "
+"translator panel button"
+msgstr ""
+"Válassza ki a műveletet, amelyet akkor kell végrehajtani, ha a középső "
+"egérgombbal a fordítópanel gombjára kattint."
+
+#. settings-schema.json->ctrl-middle-button-action->description
+msgid "Ctrl + Middle button action"
+msgstr "Ctrl + Középső gomb művelet"
+
+#. settings-schema.json->ctrl-middle-button-action->tooltip
+msgid ""
+"Select the action to take when holding the Ctrl key and using the middle "
+"mouse button to click on the translator panel button"
+msgstr ""
+"Válassza ki a műveletet, amelyet a Ctrl billentyű lenyomva tartása és a "
+"középső egérgombbal a fordítópanel gombjára való kattintás közben kell "
+"végrehajtani"
