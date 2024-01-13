@@ -7,14 +7,13 @@ Uses [Google](https://translate.google.com/), [Bing](https://www.bing.com/transl
 
 1. Type text into a popup dialog from the Cinnamon panel and translate to the language of your choice
 2. Optional automatically translate and playback (Text-to-Speech) from the current selection or clipboard
-3. Middle mouse button can be configured to perform 6 different translation actions
+3. Middle mouse button can be configured to perform 8 different translation actions
 4. Ctrl + Middle mouse button can be configured to perform 8 different translation actions
 
 ## Current Limitations
 
 1. The text boxes are using St.Entry widgets without scroll bars so I have ***limited the text to 200 characters*** until I can find a way to have a type of widget that supports scroll bars. It also seems like translation-shell can not perform "Text-to-Speech" when the text is more than than 200 characters.
 2. In my testing, only the Goggle translate engine works consistently (but Bing worked most of the time), and it's the only one that would perform Text-to-Speech for me. I allow other engines to be selected in case some future versions of translate-shell (or different OS setups) works better then what I have seen.
-3. Currently only the English name for each language can be entered into the from/to language entry fields.
 
 ## Requirements
 
@@ -28,7 +27,7 @@ It's best to install translate-shell 0.9.7.1 for more supported languages and ot
 
 https://www.soimort.org/translate-shell/#installation
 
-In order to allow for Text-to-Speech functionality one of mplayer, mpv, mpg123, or eSpeak must be installed. I tested with mplayer mostly.
+To enable Text-to-Speech one of these media players must be installed: mplayer, mpv, mpg123, or eSpeak. I tested with mplayer mostly.
 
 ```
 sudo apt-get install mplayer
@@ -48,4 +47,4 @@ You can leave a comment here on cinnamon-spices.linuxmint.com or you can create 
 https://github.com/klangman/PanelTranslator
 
 This is where I develop new features or test out any new ideas I have before pushing to cinnamon-spices.
-Please, if you find any issues, feel free to create an issue here on Github. Thanks!
+Please, if you find any issues, feel free to create an issue on Github. Thanks!
