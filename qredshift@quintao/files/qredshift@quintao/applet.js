@@ -11,6 +11,7 @@ const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const Main = imports.ui.main;
 const Signals = imports.signals;
+const Meta = imports.gi.Meta;
 
 const Gettext = imports.gettext;
 const UUID = "qredshift@quintao";
@@ -825,7 +826,9 @@ class QRedshift extends Applet.TextIconApplet {
     
     on_applet_added_to_panel() {
         qLOG('QRedshift', 'ADDED TO PANEL');
-        if (this.opt.enableAtStartup === true)
+        if (Meta.is_wayland_compositor())
+            this.opt.enabled = false;
+        else if (this.opt.enableAtStartup === true)
             this.opt.enabled = true;
     }
     
