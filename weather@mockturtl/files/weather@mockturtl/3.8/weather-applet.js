@@ -17397,7 +17397,7 @@ class HttpLib {
         }
     }
     async LoadAsync(url, params, headers, method = "GET") {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c, _d, _e, _f;
         const message = await soupLib.Send(url, params, headers, method);
         let error = undefined;
         if (!message) {
@@ -17437,10 +17437,10 @@ class HttpLib {
         }
         logger_Logger.Verbose("API full response: " + ((_c = message === null || message === void 0 ? void 0 : message.response_body) === null || _c === void 0 ? void 0 : _c.toString()));
         if (error != null)
-            logger_Logger.Info("Error calling URL: " + error.reason_phrase + ", " + ((_d = error === null || error === void 0 ? void 0 : error.response) === null || _d === void 0 ? void 0 : _d.response_body));
+            logger_Logger.Info(`Error calling URL: ${error.code}, ${error.reason_phrase}, ${(_e = (_d = error === null || error === void 0 ? void 0 : error.response) === null || _d === void 0 ? void 0 : _d.response_body) !== null && _e !== void 0 ? _e : "None"}`);
         return {
             Success: (error == null),
-            Data: ((_e = message === null || message === void 0 ? void 0 : message.response_body) !== null && _e !== void 0 ? _e : null),
+            Data: ((_f = message === null || message === void 0 ? void 0 : message.response_body) !== null && _f !== void 0 ? _f : null),
             ResponseHeaders: message === null || message === void 0 ? void 0 : message.response_headers,
             ErrorData: error,
             Response: message
@@ -17497,6 +17497,8 @@ class WeatherApplet extends TextIconApplet {
                     if (this.online === true)
                         break;
                     logger_Logger.Info("Internet access now available, resuming operations.");
+                    this.encounteredError = false;
+                    this.loop.ResetErrorCount();
                     this.loop.Resume();
                     this.online = true;
                     break;
