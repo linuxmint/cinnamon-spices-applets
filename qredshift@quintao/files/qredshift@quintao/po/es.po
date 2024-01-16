@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-01 03:02+0100\n"
-"PO-Revision-Date: 2023-12-31 23:17-0300\n"
+"POT-Creation-Date: 2024-01-16 03:29-0100\n"
+"PO-Revision-Date: 2024-01-16 13:17-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -18,111 +18,111 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4\n"
 
-#: applet.js:238
+#: applet.js:239
 msgid "Reload Applet"
 msgstr "Recargar Applet"
 
-#: applet.js:249
+#: applet.js:250
 msgid "Recompile Translations"
 msgstr "Recompilar traducciones"
 
-#: applet.js:301
+#: applet.js:302
 msgid "REDSHIFT NOT INSTALLED!"
 msgstr "¡REDHISFT NO ESTÁ INSTALADO!"
 
-#: applet.js:304
+#: applet.js:305
 msgid "Requires Redshift: yay -S redshift-minimal"
 msgstr "Requiere Redshift: yay -S redshift-minimal"
 
-#: applet.js:307
+#: applet.js:308
 msgid "Requires Redshift: sudo apt-get install redshift"
 msgstr "Requiere Redshift: sudo apt-get install redshift"
 
-#: applet.js:459 applet.js:488
+#: applet.js:460 applet.js:489
 msgid "should be removed."
 msgstr "debe ser eliminado."
 
-#: applet.js:481
+#: applet.js:482
 msgid "should be replaced by redshift-minimal"
 msgstr "debe sustituirse por redshift-minimal"
 
 #. settings-schema.json->enabled->description
-#: applet.js:651
+#: applet.js:652
 msgid "Enabled"
 msgstr "Habilitado"
 
-#: applet.js:659 applet.js:704
+#: applet.js:660 applet.js:705
 msgid "Temp:"
 msgstr "Temperatura:"
 
-#: applet.js:670 applet.js:715
+#: applet.js:671 applet.js:716
 msgid "Bright:"
 msgstr "Brillo:"
 
-#: applet.js:681 applet.js:1015
+#: applet.js:682 applet.js:1018
 msgid "Gamma:"
 msgstr "Gamma:"
 
 #. settings-schema.json->enabledNight->description
-#: applet.js:696
+#: applet.js:697
 msgid "Night Enabled"
 msgstr "Modo nocturno habilitado"
 
 #. settings-schema.json->iconLabel->description
-#: applet.js:758
+#: applet.js:759
 msgid "Show Label"
 msgstr "Mostrar etiqueta"
 
-#: applet.js:973 applet.js:998
+#: applet.js:976 applet.js:1001
 msgid "Transition to day"
 msgstr "Transición al día"
 
-#: applet.js:974 applet.js:999
+#: applet.js:977 applet.js:1002
 msgid "Transition to night"
 msgstr "Transición a la noche"
 
-#: applet.js:975 applet.js:1000
+#: applet.js:978 applet.js:1003
 msgid "Night"
 msgstr "Noche"
 
-#: applet.js:976 applet.js:1001
+#: applet.js:979 applet.js:1004
 msgid "Day"
 msgstr "Día"
 
-#: applet.js:990
+#: applet.js:993
 msgid "On"
 msgstr "Ecendido"
 
-#: applet.js:990 applet.js:992
+#: applet.js:993 applet.js:995
 msgid "Off"
 msgstr "Apagado"
 
-#: applet.js:1006
+#: applet.js:1009
 msgid "Day Temperature"
 msgstr "Temperatura diurna"
 
-#: applet.js:1007
+#: applet.js:1010
 msgid "Day Brightness"
 msgstr "Brillo diurno"
 
-#: applet.js:1009
+#: applet.js:1012
 msgid "Night Temperature"
 msgstr "Temperatura nocturna"
 
-#: applet.js:1010
+#: applet.js:1013
 msgid "Night Brightness"
 msgstr "Brillo nocturno"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
-#: applet.js:1012
+#: applet.js:1015
 msgid "Temperature"
 msgstr "Temperatura"
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
-#: applet.js:1013
+#: applet.js:1016
 msgid "Brightness"
 msgstr "Brillo"
 
@@ -174,13 +174,24 @@ msgstr "Atajos del teclado"
 msgid "Location Settings"
 msgstr "Configuración de ubicación"
 
+#. settings-schema.json->enabled->tooltip
+msgid ""
+"Automatically disabled under Wayland due to redshift not being yet supported "
+"by Wayland"
+msgstr ""
+"Desactivado automáticamente en Wayland debido a que redshift aún no es "
+"compatible con Wayland"
+
 #. settings-schema.json->enableAtStartup->description
-msgid "Activate QRedshift as soon as Cinnamon starts up"
-msgstr "Activar QRedshift en cuanto se inicie Cinnamon"
+msgid "Reactivate QRedshift as soon as Cinnamon starts up"
+msgstr "Reactivar QRedshift en cuanto se inicie Cinnamon"
 
 #. settings-schema.json->enableAtStartup->tooltip
-msgid "(even if it has previously been deactivated)"
-msgstr "(aunque se haya desactivado previamente)"
+msgid ""
+"Won't work under Wayland due to redshift not being yet supported by Wayland"
+msgstr ""
+"No funcionará en Wayland debido a que redshift aún no está soportado por "
+"Wayland"
 
 #. settings-schema.json->autoUpdate->description
 msgid "Auto Update"
@@ -360,3 +371,6 @@ msgstr ""
 "Si te gusta y usas este applet tómate el tiempo de visitar su página en "
 "Cinnamon Spices y dale una estrella. Sólo necesitas una cuenta de github "
 "para hacerlo."
+
+#~ msgid "(even if it has previously been deactivated)"
+#~ msgstr "(aunque se haya desactivado previamente)"
