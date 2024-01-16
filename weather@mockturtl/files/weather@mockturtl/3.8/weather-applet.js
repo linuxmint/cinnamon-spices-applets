@@ -15381,8 +15381,14 @@ class Config {
     ;
     async EnsureLocation() {
         this.currentLocation = null;
-        const res = await this.geoClue.GetLocation();
         if (!this._manualLocation) {
+            const geoClue = await this.geoClue.GetLocation();
+            if (geoClue != null) {
+                logger_Logger.Info("Location obtained via geoclue");
+                this.InjectLocationToConfig(geoClue);
+                return geoClue;
+            }
+            logger_Logger.Info("Geoclue failed, trying geolocation api");
             const location = await this.autoLocProvider.GetLocation();
             if (!location)
                 return null;

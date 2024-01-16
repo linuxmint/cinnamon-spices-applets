@@ -312,14 +312,21 @@ export class Config {
 	 */
 	public async EnsureLocation(): Promise<LocationData | null> {
 		this.currentLocation = null;
-		// TODO: fallback to this or fallback to internet?
-		const res = await this.geoClue.GetLocation()
 
 		// Automatic location
 		if (!this._manualLocation) {
+			const geoClue = await this.geoClue.GetLocation();
+			if (geoClue != null) {
+				Logger.Info("Location obtained via geoclue");
+				this.InjectLocationToConfig(geoClue);
+				return geoClue;
+			}
+
+			Logger.Info("Geoclue failed, trying geolocation api");
 			const location = await this.autoLocProvider.GetLocation();
 			// User facing errors handled by provider
-			if (!location) return null;
+			if (!location)
+				return null;
 
 			this.InjectLocationToConfig(location);
 			return location;
