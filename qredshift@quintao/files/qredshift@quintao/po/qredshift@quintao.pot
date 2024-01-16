@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-01 03:02+0100\n"
+"POT-Creation-Date: 2024-01-16 03:29-0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,111 +17,111 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:238
+#: applet.js:239
 msgid "Reload Applet"
 msgstr ""
 
-#: applet.js:249
+#: applet.js:250
 msgid "Recompile Translations"
 msgstr ""
 
-#: applet.js:301
+#: applet.js:302
 msgid "REDSHIFT NOT INSTALLED!"
 msgstr ""
 
-#: applet.js:304
+#: applet.js:305
 msgid "Requires Redshift: yay -S redshift-minimal"
 msgstr ""
 
-#: applet.js:307
+#: applet.js:308
 msgid "Requires Redshift: sudo apt-get install redshift"
 msgstr ""
 
-#: applet.js:459 applet.js:488
+#: applet.js:460 applet.js:489
 msgid "should be removed."
 msgstr ""
 
-#: applet.js:481
+#: applet.js:482
 msgid "should be replaced by redshift-minimal"
 msgstr ""
 
 #. settings-schema.json->enabled->description
-#: applet.js:651
+#: applet.js:652
 msgid "Enabled"
 msgstr ""
 
-#: applet.js:659 applet.js:704
+#: applet.js:660 applet.js:705
 msgid "Temp:"
 msgstr ""
 
-#: applet.js:670 applet.js:715
+#: applet.js:671 applet.js:716
 msgid "Bright:"
 msgstr ""
 
-#: applet.js:681 applet.js:1015
+#: applet.js:682 applet.js:1018
 msgid "Gamma:"
 msgstr ""
 
 #. settings-schema.json->enabledNight->description
-#: applet.js:696
+#: applet.js:697
 msgid "Night Enabled"
 msgstr ""
 
 #. settings-schema.json->iconLabel->description
-#: applet.js:758
+#: applet.js:759
 msgid "Show Label"
 msgstr ""
 
-#: applet.js:973 applet.js:998
+#: applet.js:976 applet.js:1001
 msgid "Transition to day"
 msgstr ""
 
-#: applet.js:974 applet.js:999
+#: applet.js:977 applet.js:1002
 msgid "Transition to night"
 msgstr ""
 
-#: applet.js:975 applet.js:1000
+#: applet.js:978 applet.js:1003
 msgid "Night"
 msgstr ""
 
-#: applet.js:976 applet.js:1001
+#: applet.js:979 applet.js:1004
 msgid "Day"
 msgstr ""
 
-#: applet.js:990
+#: applet.js:993
 msgid "On"
 msgstr ""
 
-#: applet.js:990 applet.js:992
+#: applet.js:993 applet.js:995
 msgid "Off"
 msgstr ""
 
-#: applet.js:1006
+#: applet.js:1009
 msgid "Day Temperature"
 msgstr ""
 
-#: applet.js:1007
+#: applet.js:1010
 msgid "Day Brightness"
 msgstr ""
 
-#: applet.js:1009
+#: applet.js:1012
 msgid "Night Temperature"
 msgstr ""
 
-#: applet.js:1010
+#: applet.js:1013
 msgid "Night Brightness"
 msgstr ""
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
-#: applet.js:1012
+#: applet.js:1015
 msgid "Temperature"
 msgstr ""
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
-#: applet.js:1013
+#: applet.js:1016
 msgid "Brightness"
 msgstr ""
 
@@ -171,12 +171,19 @@ msgstr ""
 msgid "Location Settings"
 msgstr ""
 
+#. settings-schema.json->enabled->tooltip
+msgid ""
+"Automatically disabled under Wayland due to redshift not being yet supported"
+" by Wayland"
+msgstr ""
+
 #. settings-schema.json->enableAtStartup->description
-msgid "Activate QRedshift as soon as Cinnamon starts up"
+msgid "Reactivate QRedshift as soon as Cinnamon starts up"
 msgstr ""
 
 #. settings-schema.json->enableAtStartup->tooltip
-msgid "(even if it has previously been deactivated)"
+msgid ""
+"Won't work under Wayland due to redshift not being yet supported by Wayland"
 msgstr ""
 
 #. settings-schema.json->autoUpdate->description
