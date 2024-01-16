@@ -106,13 +106,14 @@
   "enabled": {
     "type": "checkbox",
     "default": false,
-    "description": "Enabled"
+    "description": "Enabled",
+    "tooltip": "Automatically disabled under Wayland due to redshift not being yet supported by Wayland"
   },
   "enableAtStartup": {
     "type": "checkbox",
     "default": false,
-    "description": "Activate QRedshift as soon as Cinnamon starts up",
-    "tooltip": "(even if it has previously been deactivated)"
+    "description": "Reactivate QRedshift as soon as Cinnamon starts up",
+    "tooltip": "Won't work under Wayland due to redshift not being yet supported by Wayland"
   },
   "autoUpdate": {
     "type": "checkbox",
