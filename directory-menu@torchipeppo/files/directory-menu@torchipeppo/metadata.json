@@ -1,8 +1,0 @@
-{
-    "uuid": "directory-menu@torchipeppo",
-    "name": "Directory Menu",
-    "description": "Show a directory in a dropdown menu",
-    "version": "0.1",
-    "author": "torchipeppo",
-    "max-instances": "-1"
-}
