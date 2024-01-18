@@ -997,7 +997,8 @@ class Player extends PopupMenu.PopupMenuSection {
     }
 
     destroy() {
-        this._seeker.destroy();
+        if (this._seeker)
+            this._seeker.destroy();
         if (this._prop)
             this._prop.disconnectSignal(this._propChangedId);
 
@@ -1402,12 +1403,13 @@ class Sound150Applet extends Applet.TextIconApplet {
         let buttonId = event.get_button();
         let modifiers = Cinnamon.get_event_state(event);
         let shiftPressed = (modifiers & Clutter.ModifierType.SHIFT_MASK);
+        let ctrlPressed = (modifiers & Clutter.ModifierType.CONTROL_MASK);
 
         // mute or play / pause players on middle click
         if (buttonId === 2) {
-            if (shiftPressed) {
+            if (shiftPressed || ctrlPressed) {
                 if (this.middleShiftClickAction === "mute") {
-                    if (this._output.is_muted === this._input.is_muted)
+                    if (this._input && this._output && this._output.is_muted === this._input.is_muted)
                         this._toggle_in_mute();
                     this._toggle_out_mute();
                 } else if (this.middleShiftClickAction === "out_mute")
@@ -1418,7 +1420,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                     this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote();
             } else {
                 if (this.middleClickAction === "mute") {
-                    if (this._output.is_muted === this._input.is_muted)
+                    if (this._input && this._output && this._output.is_muted === this._input.is_muted)
                         this._toggle_in_mute();
                     this._toggle_out_mute();
                 } else if (this.middleClickAction === "out_mute")
