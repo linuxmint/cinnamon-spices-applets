@@ -1084,6 +1084,7 @@ class WindowListButton {
     this._signalManager.connect(this._settings, "changed::show-tooltips", this._updateTooltip, this);
     this._signalManager.connect(this._settings, "changed::number-style", Lang.bind(this, function() { this._updateNumber(); this._updateLabel(); }), this);
     this._signalManager.connect(this._settings, "changed::label-width", this._updateLabel, this);
+    this._signalManager.connect(this._settings, "changed::button-spacing", this._updateSpacing, this);
     this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent, this);
     this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent, this);
     this._signalManager.connect(this.actor, "notify::hover", this._updateVisualState, this);
@@ -1103,6 +1104,19 @@ class WindowListButton {
 
     this.isDraggableApp = true;
     this._updateNumber();
+    this._updateSpacing();
+  }
+
+  _updateSpacing() {
+     let spacing = this._settings.getValue("button-spacing");
+     let left = Math.floor(spacing/2);
+     let right = left + (spacing%2);
+     if (this._applet.orientation == St.Side.LEFT || this._applet.orientation == St.Side.RIGHT) {
+        this._iconBox.set_style("margin-top:"+right+"px;margin-bottom:"+left+"px;");
+     } else {
+        this._labelBox.set_style("margin-right:"+right+"px;");
+        this._iconBox.set_style("margin-left:"+left+"px;");
+     }
   }
 
   isMinimizedAll() {
@@ -1412,14 +1426,11 @@ class WindowListButton {
     } else {
        title = this._currentWindow.get_title();
     }
-    if (majorVersion < 5) {
+    if (text.length == 0 || majorVersion < 5) {
        this._tooltip.set_text(title + text);
     } else {
-       if (text.length > 0 ) {
-          text = "<b>"+title+"</b>"+"<small>"+text+"</small>";
-       }else{
-          text = title;
-       }
+       title = GLib.markup_escape_text(title, -1);
+       text = "<b>"+title+"</b>"+"<small>"+text+"</small>";
        this._tooltip.set_markup( text );
     }
     this._tooltip.preventShow = false;
@@ -1743,6 +1754,7 @@ class WindowListButton {
     }
     this.closeThumbnailMenu();
     this._updateLabel()
+    this._updateSpacing();
   }
 
   _flashButton() {
@@ -2282,8 +2294,8 @@ class WindowListButton {
     this._app.open_new_window(-1);
     //let animationTime = this._settings.getValue("animation-time") / 1000;
     //this._animateIcon(animationTime);
-    if (this._windows.length===0 || this._grouped === GroupingType.ForcedOn || this._grouped === GroupingType.Auto ||
-        this._settings.getValue("group-windows")===GroupType.Launcher)
+    if (this._settings.getValue("animate-icon") && (this._windows.length===0 || this._grouped === GroupingType.ForcedOn || this._grouped === GroupingType.Auto ||
+        this._settings.getValue("group-windows")===GroupType.Launcher))
     {
        this._animateIcon(0);
     }
@@ -4825,7 +4837,6 @@ class WindowList extends Applet.Applet {
   // Check other instances of the CassiaWindowList applet and populate the list of hidden applications
   // based on which applications other instances have pinned.
   checkForLauncherApplications() {
-     let wsIdx = global.screen.get_active_workspace_index();
      let applets = AppletManager.getRunningInstancesForUuid("CassiaWindowList@klangman");
      //log( `Found ${applets.length} cassia window list applets!` );
      for (let i=0 ; i < applets.length ; i++) {
