@@ -1,3 +1,8 @@
+### v5.1.1~20240118
+  * Use Ctrl-Middle-Click or Shift-Middle-Click to toggle mute as defined in settings.
+  * Takes into account an undefined input.
+  * Updates French translation.
+
 ### v5.1.0~20240109
   * Updates README.md
   * Adds two options to the Icon tab settings that are already in the Behavior tab, but which also concern the icon.
