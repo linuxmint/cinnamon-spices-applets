@@ -3,15 +3,17 @@ designed to give you more control over how your window-list operates.
 
 Recent new features (Aug-Dec 2023):
 
-1. Ability to change the icon saturation from grayscale (0%) to vivid (200%)
-2. Ability to show windows from other workspaces
-3. Restores custom group/ungroup application setting after reboot/cinnamon-restart
-4. Hotkey option to assign a set of 1-9 hotkeys to all window-list buttons
-5. Hotkey hints using the (`) grave key with any registered hotkey modifiers
-6. Added a Left-Click option to start new application windows in Launcher mode
-7. Ability to show a common set of pinned buttons on all workspaces
-8. Smart numeric hotkeys to assign a set of 1-9 hotkeys to a specific application
-9. A bunch of fixes
+1.  Adjustable spacing between window-list buttons
+2.  Ability to disable the new window animation
+3.  Ability to change the icon saturation from grayscale (0%) to vivid (200%)
+4.  Ability to show windows from other workspaces
+5.  Restores custom group/ungroup application setting after reboot/cinnamon-restart
+6.  Hotkey option to assign a set of 1-9 hotkeys to all window-list buttons
+7.  Hotkey hints using the (`) grave key with any registered hotkey modifiers
+8.  Added a Left-Click option to start new application windows in Launcher mode
+9.  Ability to show a common set of pinned buttons on all workspaces
+10. Smart numeric hotkeys to assign a set of 1-9 hotkeys to a specific application
+11. A bunch of fixes
 
 The design goals are to:
 
@@ -31,7 +33,7 @@ This applet requires at least Cinnamon 4.0
 5. Select the "Cassia Window List" entry and then click the "+" button at the bottom of the Applet window
 6. The CassiaWindowList Basic Setup Wizard window will appear, follow the instructions to configure to your liking
 7. Right click on the cinnamon panel and use "Panel edit mode" to enable moving the window-list within the panel
-8. More configuration options: Right-click on any windowlist button, "Applet Preferences" ->  "Configure..."
+8. More configuration options: Right-click on any window-list button, "Applet Preferences" ->  "Configure..."
 
 ## Features
 In addition to the features of the CobiWindowList...
@@ -50,9 +52,12 @@ In addition to the features of the CobiWindowList...
  
 ## Feedback
 You can leave a comment here on cinnamon-spices.linuxmint.com or you can create an issue on my CassiaWindowList
-devlopment GitHub repository:
+development GitHub repository:
 
 https://github.com/klangman/CassiaWindowList
 
-This is where I develop new features or test out any new ideas I have before pushing to cinnamon-spices.
+This is where I develop new features and test out any new ideas I have before pushing to cinnamon-spices.
+
+If you use use this applet please let me know by liking it here and on my Github repository, that way I will be 
+encouraged to continue working on the project.
 
