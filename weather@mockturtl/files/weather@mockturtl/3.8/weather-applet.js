@@ -15130,7 +15130,6 @@ class PirateWeather extends BaseProvider {
 
 ;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geoclue.ts
 
-
 const GeoClueLib = imports.gi.Geoclue;
 class GeoClue {
     constructor(_app) {
@@ -15146,11 +15145,12 @@ class GeoClue {
             return null;
         }
         const { AccuracyLevel } = GeoClueLib;
-        await new Promise((resolve, reject) => {
-            GeoClueLib.Simple.new_with_thresholds("weather_mockturtl", AccuracyLevel.CITY, 5, 0, null, (client, res) => {
+        return await new Promise((resolve, reject) => {
+            GeoClueLib.Simple.new_with_thresholds("weather_mockturtl", AccuracyLevel.CITY, 0, 0, null, (client, res) => {
                 const simple = GeoClueLib.Simple.new_finish(res);
                 const clientObj = simple.get_client();
                 if (clientObj == null || !clientObj.active) {
+                    logger_Logger.Info("GeoGlue2 Geolocation disabled, skipping");
                     resolve(null);
                     return;
                 }
@@ -15167,15 +15167,8 @@ class GeoClue {
                     timeZone: "",
                     entryText: loc.latitude + "," + loc.longitude,
                 });
-                return;
             });
         });
-        return null;
-    }
-    ;
-    HandleErrorResponse(json) {
-        this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
-        logger_Logger.Error("ip-api responds with Error: " + json.reason);
     }
     ;
 }

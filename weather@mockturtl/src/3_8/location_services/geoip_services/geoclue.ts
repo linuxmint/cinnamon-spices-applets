@@ -24,11 +24,12 @@ export class GeoClue implements GeoIP {
 		}
 
 		const { AccuracyLevel } = GeoClueLib;
-		await new Promise<LocationData | null>((resolve, reject) => {
-			GeoClueLib.Simple.new_with_thresholds("weather_mockturtl", AccuracyLevel.CITY, 5, 0, null, (client, res) => {
+		return await new Promise<LocationData | null>((resolve, reject) => {
+			GeoClueLib.Simple.new_with_thresholds("weather_mockturtl", AccuracyLevel.CITY, 0, 0, null, (client, res) => {
 				const simple = GeoClueLib.Simple.new_finish(res);
 				const clientObj = simple.get_client();
 				if (clientObj == null || !clientObj.active) {
+					Logger.Info("GeoGlue2 Geolocation disabled, skipping");
 					resolve(null);
 					return;
 				}
@@ -47,16 +48,7 @@ export class GeoClue implements GeoIP {
 					timeZone: "",
 					entryText: loc.latitude + "," + loc.longitude,
 				});
-				return;
 			})
 		});
-
-		return null;
-
-	};
-
-	HandleErrorResponse(json: any): void {
-		this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" })
-		Logger.Error("ip-api responds with Error: " + json.reason);
 	};
 }
