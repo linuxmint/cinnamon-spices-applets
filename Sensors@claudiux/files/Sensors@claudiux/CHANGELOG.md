@@ -1,3 +1,6 @@
+### v3.5.0~20240119
+  * Improves subprocesses.
+
 ### v3.4.0~20240107
   * Fixes #5352.
   * Added an option in the General tab to display a tooltip or not.
