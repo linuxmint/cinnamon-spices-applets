@@ -4,7 +4,12 @@ import { LocationData } from "../../types";
 import { _ } from "../../utils";
 import { GeoIP } from "./base";
 const GeoClueLib: typeof imports.gi.Geoclue | undefined = imports.gi.Geoclue;
+const GeocodeGlib: typeof imports.gi.GeocodeGlib | undefined = imports.gi.GeocodeGlib;
 
+interface ExtendedLocationData extends LocationData {
+	accuracy: imports.gi.Geoclue.AccuracyLevel;
+	altitude: number;
+}
 
 export class GeoClue implements GeoIP {
 	private app: WeatherApplet;
@@ -24,7 +29,7 @@ export class GeoClue implements GeoIP {
 		}
 
 		const { AccuracyLevel } = GeoClueLib;
-		return await new Promise<LocationData | null>((resolve, reject) => {
+		const res = await new Promise<ExtendedLocationData | null>((resolve, reject) => {
 			GeoClueLib.Simple.new_with_thresholds("weather_mockturtl", AccuracyLevel.CITY, 0, 0, null, (client, res) => {
 				const simple = GeoClueLib.Simple.new_finish(res);
 				const clientObj = simple.get_client();
@@ -40,15 +45,61 @@ export class GeoClue implements GeoIP {
 					return;
 				}
 
-				resolve({
+				const result: ExtendedLocationData = {
 					lat: loc.latitude,
 					lon: loc.longitude,
 					city: undefined,
 					country: undefined,
 					timeZone: "",
 					entryText: loc.latitude + "," + loc.longitude,
-				});
+					altitude: loc.altitude,
+					accuracy: loc.accuracy,
+				}
+
+				resolve(result);
 			})
 		});
+
+		if (res == null) {
+			return null;
+		}
+
+		const geoCodeRes = await this.GetGeoCodeData(res.lat, res.lon, res.accuracy);
+		if (geoCodeRes == null) {
+			return res;
+		}
+
+		return {
+			...res,
+			...geoCodeRes,
+		};
 	};
+
+	private async GetGeoCodeData(lat: number, lon: number, accuracy: imports.gi.Geoclue.AccuracyLevel): Promise<Partial<LocationData> | null> {
+		if (GeocodeGlib == null) {
+			return null;
+		}
+
+		const geoCodeLoc = GeocodeGlib.Location.new(
+			lat,
+			lon,
+			accuracy
+		)
+
+		const geoCodeRes = GeocodeGlib.Reverse.new_for_location(geoCodeLoc);
+		return new Promise<Partial<LocationData> | null>((resolve, reject) => {
+			geoCodeRes.resolve_async(null, (obj, res) => {
+				const result = geoCodeRes.resolve_finish(res);
+				if (result == null) {
+					resolve(null);
+					return;
+				}
+
+				resolve({
+					city: result.town,
+					country: result.country,
+				})
+			});
+		})
+	}
 }

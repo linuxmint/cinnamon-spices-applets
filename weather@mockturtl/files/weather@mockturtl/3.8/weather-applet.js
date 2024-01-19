@@ -15131,6 +15131,7 @@ class PirateWeather extends BaseProvider {
 ;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geoclue.ts
 
 const GeoClueLib = imports.gi.Geoclue;
+const GeocodeGlib = imports.gi.GeocodeGlib;
 class GeoClue {
     constructor(_app) {
         this.notSupported = false;
@@ -15145,7 +15146,7 @@ class GeoClue {
             return null;
         }
         const { AccuracyLevel } = GeoClueLib;
-        return await new Promise((resolve, reject) => {
+        const res = await new Promise((resolve, reject) => {
             GeoClueLib.Simple.new_with_thresholds("weather_mockturtl", AccuracyLevel.CITY, 0, 0, null, (client, res) => {
                 const simple = GeoClueLib.Simple.new_finish(res);
                 const clientObj = simple.get_client();
@@ -15159,18 +15160,49 @@ class GeoClue {
                     resolve(null);
                     return;
                 }
-                resolve({
+                const result = {
                     lat: loc.latitude,
                     lon: loc.longitude,
                     city: undefined,
                     country: undefined,
                     timeZone: "",
                     entryText: loc.latitude + "," + loc.longitude,
+                    altitude: loc.altitude,
+                    accuracy: loc.accuracy,
+                };
+                resolve(result);
+            });
+        });
+        if (res == null) {
+            return null;
+        }
+        const geoCodeRes = await this.GetGeoCodeData(res.lat, res.lon, res.accuracy);
+        if (geoCodeRes == null) {
+            return res;
+        }
+        return Object.assign(Object.assign({}, res), geoCodeRes);
+    }
+    ;
+    async GetGeoCodeData(lat, lon, accuracy) {
+        if (GeocodeGlib == null) {
+            return null;
+        }
+        const geoCodeLoc = GeocodeGlib.Location.new(lat, lon, accuracy);
+        const geoCodeRes = GeocodeGlib.Reverse.new_for_location(geoCodeLoc);
+        return new Promise((resolve, reject) => {
+            geoCodeRes.resolve_async(null, (obj, res) => {
+                const result = geoCodeRes.resolve_finish(res);
+                if (result == null) {
+                    resolve(null);
+                    return;
+                }
+                resolve({
+                    city: result.town,
+                    country: result.country,
                 });
             });
         });
     }
-    ;
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
