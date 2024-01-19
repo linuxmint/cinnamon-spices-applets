@@ -1,7 +1,7 @@
 # Panel Translator
 A translator applet for the Cinnamon desktop environment
 
-Uses [Google](https://translate.google.com/), [Bing](https://www.bing.com/translator) and others (via [trantlate-shell](https://github.com/soimort/translate-shell)) to translate text into more then 150 languages (depending on the version of translate-shell you install).
+Uses [Google](https://translate.google.com/), [Bing](https://www.bing.com/translator) and others (via [translate-shell](https://github.com/soimort/translate-shell)) to translate text into more then 150 languages (depending on the version of translate-shell you install).
 
 ## Features
 
@@ -9,6 +9,7 @@ Uses [Google](https://translate.google.com/), [Bing](https://www.bing.com/transl
 2. Optional automatically translate and playback (Text-to-Speech) from the current selection or clipboard
 3. Middle mouse button can be configured to perform 8 different translation actions
 4. Ctrl + Middle mouse button can be configured to perform 8 different translation actions
+5. Smart language selection entry fields automatically finds language matches as you type, or use the up/down arrow keys to cycle through available languages
 
 ## Current Limitations
 
@@ -17,7 +18,7 @@ Uses [Google](https://translate.google.com/), [Bing](https://www.bing.com/transl
 
 ## Requirements
 
-The [trantlate-shell](https://github.com/soimort/translate-shell) package must be installed for this applet to operate correctly.
+The [translate-shell](https://github.com/soimort/translate-shell) package must be installed for this applet to operate correctly.
 
 ```
 sudo apt-get install translate-shell
@@ -48,3 +49,6 @@ https://github.com/klangman/PanelTranslator
 
 This is where I develop new features or test out any new ideas I have before pushing to cinnamon-spices.
 Please, if you find any issues, feel free to create an issue on Github. Thanks!
+
+If you use use this applet please let me know by liking it here and on my Github repository, that way I will be
+encouraged to continue working on the project.
