@@ -1,19 +1,4 @@
 {
-    "languages-header": {
-        "type": "header",
-        "description": "Default Languages"
-    },
-    "default-from-language": {
-        "type" : "entry",
-        "default": "English",
-        "description": "Source language"
-    },
-    "default-to-language": {
-        "type" : "entry",
-        "default": "French",
-        "description": "Target language"
-    },
-
     "engine-header": {
         "type": "header",
         "description": "Translation Engine"
@@ -89,5 +74,14 @@
         },
         "description": "Ctrl + Middle button action",
         "tooltip": "Select the action to take when holding the Ctrl key and using the middle mouse button to click on the translator panel button"
+    },
+
+    "default-from-language": {
+        "type" : "generic",
+        "default": "English"
+    },
+    "default-to-language": {
+        "type" : "generic",
+        "default": "French"
     }
 }
