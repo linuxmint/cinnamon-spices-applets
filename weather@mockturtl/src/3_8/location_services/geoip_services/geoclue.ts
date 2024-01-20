@@ -30,7 +30,7 @@ export class GeoClue implements GeoIP {
 
 		const { AccuracyLevel } = GeoClueLib;
 		const res = await new Promise<ExtendedLocationData | null>((resolve, reject) => {
-			GeoClueLib.Simple.new_with_thresholds("weather_mockturtl", AccuracyLevel.CITY, 0, 0, null, (client, res) => {
+			GeoClueLib.Simple.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, null, (client, res) => {
 				const simple = GeoClueLib.Simple.new_finish(res);
 				const clientObj = simple.get_client();
 				if (clientObj == null || !clientObj.active) {

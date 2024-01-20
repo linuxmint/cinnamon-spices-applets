@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-19 09:48+0000\n"
+"POT-Creation-Date: 2024-01-20 13:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2259,6 +2259,12 @@ msgid ""
 "{Street} {City/Town} {Postcode} {Country}. The search algorithm is very "
 "flexible with the format. After 3 seconds without typing the address you "
 "entered is replaced automatically for validating your choice."
+msgstr ""
+
+#. 3.8->settings-schema.json->locationDescription->description
+msgid ""
+"If the location field matches a saved location's 'Search Entry' field, the "
+"saved location will be used instead."
 msgstr ""
 
 #. 3.8->settings-schema.json->saveLocation->description

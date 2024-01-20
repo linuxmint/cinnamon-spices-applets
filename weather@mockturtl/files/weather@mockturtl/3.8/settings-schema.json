@@ -56,7 +56,8 @@
 			"title": "Location settings",
 			"keys": [
 				"manualLocation",
-				"location"
+				"location",
+				"locationDescription"
 			]
 		},
 		"location-store": {
@@ -217,6 +218,11 @@
 		"dependency": "manualLocation",
 		"description": "Location",
 		"tooltip": "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}. The search algorithm is very flexible with the format. After 3 seconds without typing the address you entered is replaced automatically for validating your choice."
+	},
+	"locationDescription": {
+		"type": "label",
+		"dependency": "manualLocation",
+		"description": "If the location field matches a saved location's 'Search Entry' field, the saved location will be used instead."
 	},
 	"saveLocation": {
 		"type": "button",
