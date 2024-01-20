@@ -15130,8 +15130,8 @@ class PirateWeather extends BaseProvider {
 
 ;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geoclue.ts
 
-let GeoClueLib;
-let GeocodeGlib;
+let GeoClueLib = undefined;
+let GeocodeGlib = undefined;
 try {
     GeoClueLib = imports.gi.Geoclue;
     GeocodeGlib = imports.gi.GeocodeGlib;
@@ -15141,21 +15141,17 @@ catch (e) {
 }
 class GeoClue {
     constructor(_app) {
-        this.notSupported = false;
         this.app = _app;
-        if (GeoClueLib == null) {
-            this.notSupported = true;
-            return;
-        }
     }
     async GetLocation() {
-        if (this.notSupported || GeoClueLib == null) {
+        if (GeoClueLib == null || GeocodeGlib == null) {
             return null;
         }
-        const { AccuracyLevel, Simple: GeoCloue } = GeoClueLib;
+        const { AccuracyLevel, Simple: GeoClue } = GeoClueLib;
+        global.log("Geoclue", GeoClueLib.Simple);
         const res = await new Promise((resolve, reject) => {
-            GeoCloue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, null, (client, res) => {
-                const simple = GeoCloue.new_finish(res);
+            GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, null, (client, res) => {
+                const simple = GeoClue.new_finish(res);
                 const clientObj = simple.get_client();
                 if (clientObj == null || !clientObj.active) {
                     logger_Logger.Info("GeoGlue2 Geolocation disabled, skipping");

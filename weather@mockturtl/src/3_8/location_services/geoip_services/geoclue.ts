@@ -4,8 +4,8 @@ import { LocationData } from "../../types";
 import { _ } from "../../utils";
 import { GeoIP } from "./base";
 
-let GeoClueLib: typeof imports.gi.Geoclue | undefined;
-let GeocodeGlib: typeof imports.gi.GeocodeGlib | undefined;
+let GeoClueLib: typeof imports.gi.Geoclue | undefined = undefined;
+let GeocodeGlib: typeof imports.gi.GeocodeGlib | undefined = undefined;
 try {
 	GeoClueLib = imports.gi.Geoclue;
 	GeocodeGlib = imports.gi.GeocodeGlib;
@@ -21,25 +21,21 @@ interface ExtendedLocationData extends LocationData {
 
 export class GeoClue implements GeoIP {
 	private app: WeatherApplet;
-	private readonly notSupported: boolean = false;
 
 	constructor(_app: WeatherApplet) {
 		this.app = _app;
-		if (GeoClueLib == null) {
-			this.notSupported = true;
-			return;
-		}
 	}
 
 	public async GetLocation(): Promise<LocationData | null> {
-		if (this.notSupported || GeoClueLib == null) {
+		if (GeoClueLib == null || GeocodeGlib == null) {
 			return null;
 		}
 
-		const { AccuracyLevel, Simple: GeoCloue } = GeoClueLib;
+		const { AccuracyLevel, Simple: GeoClue } = GeoClueLib;
+		global.log("Geoclue", GeoClueLib.Simple )
 		const res = await new Promise<ExtendedLocationData | null>((resolve, reject) => {
-			GeoCloue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, null, (client, res) => {
-				const simple = GeoCloue.new_finish(res);
+			GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, null, (client, res) => {
+				const simple = GeoClue.new_finish(res);
 				const clientObj = simple.get_client();
 				if (clientObj == null || !clientObj.active) {
 					Logger.Info("GeoGlue2 Geolocation disabled, skipping");
