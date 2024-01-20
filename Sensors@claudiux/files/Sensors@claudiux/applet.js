@@ -78,12 +78,13 @@ class SensorsApplet extends Applet.TextApplet {
     Util.spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
 
     this.sudo_or_wheel = "none";
-    Util.spawnCommandLineAsyncIO("/bin/bash -c 'groups'", Lang.bind(this, (out, err, exitCode) => {
+    let subProcess = Util.spawnCommandLineAsyncIO("/bin/bash -c 'groups'", Lang.bind(this, (out, err, exitCode) => {
       if (exitCode == 0) {
         let groups = out.trim().split(' ');
         if (groups.indexOf("wheel") > -1) this.sudo_or_wheel = "wheel";
         if (groups.indexOf("sudo") > -1) this.sudo_or_wheel = "sudo";
       }
+      subProcess.send_signal(9);
     }));
 
     // Detect language for numeric format:
@@ -376,7 +377,7 @@ class SensorsApplet extends Applet.TextApplet {
         let _temp;
         //~ if (disk["value"])
           //~ _temp = disk["value"];
-        Util.spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
+        let subProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
           if (exitCode === 0) {
             //~ this._temp[_disk_name] = stdout;
 
@@ -400,6 +401,7 @@ class SensorsApplet extends Applet.TextApplet {
               this._temp[_disk_name] = _temp;
             }
           }
+          subProcess.send_signal(9);
         }));
       }
     }
@@ -408,7 +410,7 @@ class SensorsApplet extends Applet.TextApplet {
   populate_temp_disks_in_settings() {
     let command = SCRIPTS_DIR+"/get_disk_list.sh";
     var temp_disks = this.temp_disks;
-    Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
+    let subProcess = Util.spawnCommandLineAsyncIO(command, Lang.bind(this, function(stdout, stderr, exitCode) {
       if (exitCode === 0) {
         let out = stdout.trim();
         let disks = out.split(" ");
@@ -421,7 +423,8 @@ class SensorsApplet extends Applet.TextApplet {
             temp_disks.push({"disk": d, "shown_name": d});
         }
         this.temp_disks = temp_disks
-      }
+      };
+      subProcess.send_signal(9);
     }))
   }
 
@@ -1302,10 +1305,11 @@ class SensorsApplet extends Applet.TextApplet {
   }
 
   _on_disktemp_button_pressed() {
-    Util.spawnCommandLineAsyncIO(
+    let subProcess = Util.spawnCommandLineAsyncIO(
       "/bin/bash -c '%s/pkexec_make_smartctl_usable_by_sudoers.sh %s'".format(SCRIPTS_DIR, this.sudo_or_wheel),
       Lang.bind(this, (out, err, exitCode) => {
         this.s.setValue("disktemp_is_user_readable", this.is_disktemp_user_readable());
+        subProcess.send_signal(9);
     }));
   }
 
