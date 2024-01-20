@@ -15132,29 +15132,28 @@ class PirateWeather extends BaseProvider {
 
 let GeoClueLib = undefined;
 let GeocodeGlib = undefined;
-try {
-    GeoClueLib = imports.gi.Geoclue;
-    GeocodeGlib = imports.gi.GeocodeGlib;
-}
-catch (e) {
-    logger_Logger.Error("GeoClue2 not available, skipping");
-}
 class GeoClue {
     constructor(_app) {
         this.app = _app;
+        try {
+            GeoClueLib = imports.gi.Geoclue;
+            GeocodeGlib = imports.gi.GeocodeGlib;
+        }
+        catch (e) {
+            logger_Logger.Info("GeoClue2 not available, disabling it's use.");
+        }
     }
     async GetLocation() {
         if (GeoClueLib == null || GeocodeGlib == null) {
             return null;
         }
         const { AccuracyLevel, Simple: GeoClue } = GeoClueLib;
-        global.log("Geoclue", GeoClueLib.Simple);
         const res = await new Promise((resolve, reject) => {
             GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, null, (client, res) => {
                 const simple = GeoClue.new_finish(res);
                 const clientObj = simple.get_client();
                 if (clientObj == null || !clientObj.active) {
-                    logger_Logger.Info("GeoGlue2 Geolocation disabled, skipping");
+                    logger_Logger.Debug("GeoGlue2 Geolocation disabled, skipping");
                     resolve(null);
                     return;
                 }
@@ -15412,14 +15411,14 @@ class Config {
         if (!this._manualLocation) {
             const geoClue = await this.geoClue.GetLocation();
             if (geoClue != null) {
-                logger_Logger.Info("Location obtained via geoclue");
+                logger_Logger.Debug("Auto location obtained via GeoClue2.");
                 this.InjectLocationToConfig(geoClue);
                 return geoClue;
             }
-            logger_Logger.Info("Geoclue failed, trying geolocation api");
             const location = await this.autoLocProvider.GetLocation();
             if (!location)
                 return null;
+            logger_Logger.Debug("Auto location obtained via IP lookup.");
             this.InjectLocationToConfig(location);
             return location;
         }
@@ -15429,13 +15428,13 @@ class Config {
                 type: "hard",
                 detail: "no location",
                 userError: true,
-                message: _("Make sure you entered a location or use Automatic location instead")
+                message: _("Make sure you entered a location or use Automatic location instead.")
             });
             return null;
         }
         let location = this.LocStore.FindLocation(this._location);
         if (location != null) {
-            logger_Logger.Debug("location exist in locationstore, retrieve");
+            logger_Logger.Debug("Manual Location exist in Saved Locations, retrieve.");
             this.LocStore.SwitchToLocation(location);
             this.InjectLocationToConfig(location, true);
             return location;
@@ -15449,6 +15448,7 @@ class Config {
                 timeZone: DateTime.now().zoneName,
                 entryText: loc,
             };
+            logger_Logger.Debug("Manual Location is a coordinate, using it directly.");
             this.InjectLocationToConfig(location);
             return location;
         }
@@ -15457,11 +15457,11 @@ class Config {
         if (locationData == null)
             return null;
         if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.entryText)) {
-            logger_Logger.Debug("Address found via address search");
+            logger_Logger.Debug("Coordinates are found via Reverse address search");
         }
         location = this.LocStore.FindLocation(locationData.entryText);
         if (location != null) {
-            logger_Logger.Debug("Found location was found in locationStore, return that instead");
+            logger_Logger.Debug("Entered location was found in Saved Location, switch to it instead.");
             this.InjectLocationToConfig(location);
             this.LocStore.SwitchToLocation(location);
             return location;

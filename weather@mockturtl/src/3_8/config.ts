@@ -317,17 +317,17 @@ export class Config {
 		if (!this._manualLocation) {
 			const geoClue = await this.geoClue.GetLocation();
 			if (geoClue != null) {
-				Logger.Info("Location obtained via geoclue");
+				Logger.Debug("Auto location obtained via GeoClue2.");
 				this.InjectLocationToConfig(geoClue);
 				return geoClue;
 			}
 
-			Logger.Info("Geoclue failed, trying geolocation api");
 			const location = await this.autoLocProvider.GetLocation();
 			// User facing errors handled by provider
 			if (!location)
 				return null;
 
+			Logger.Debug("Auto location obtained via IP lookup.");
 			this.InjectLocationToConfig(location);
 			return location;
 		}
@@ -340,7 +340,7 @@ export class Config {
 				type: "hard",
 				detail: "no location",
 				userError: true,
-				message: _("Make sure you entered a location or use Automatic location instead")
+				message: _("Make sure you entered a location or use Automatic location instead.")
 			});
 			return null;
 		}
@@ -348,7 +348,7 @@ export class Config {
 		// Find location in storage
 		let location = this.LocStore.FindLocation(this._location);
 		if (location != null) {
-			Logger.Debug("location exist in locationstore, retrieve");
+			Logger.Debug("Manual Location exist in Saved Locations, retrieve.");
 			this.LocStore.SwitchToLocation(location);
 			this.InjectLocationToConfig(location, true);
 			return location;
@@ -364,6 +364,7 @@ export class Config {
 				timeZone: DateTime.now().zoneName,
 				entryText: loc,
 			}
+			Logger.Debug("Manual Location is a coordinate, using it directly.");
 			this.InjectLocationToConfig(location);
 			return location;
 		}
@@ -373,13 +374,13 @@ export class Config {
 		// User facing errors are handled by service
 		if (locationData == null) return null;
 		if (!!locationData?.entryText) {
-			Logger.Debug("Address found via address search");
+			Logger.Debug("Coordinates are found via Reverse address search");
 		}
 
 		// Maybe location is in locationStore, first search
 		location = this.LocStore.FindLocation(locationData.entryText);
 		if (location != null) {
-			Logger.Debug("Found location was found in locationStore, return that instead");
+			Logger.Debug("Entered location was found in Saved Location, switch to it instead.");
 			this.InjectLocationToConfig(location);
 			this.LocStore.SwitchToLocation(location);
 			return location;
