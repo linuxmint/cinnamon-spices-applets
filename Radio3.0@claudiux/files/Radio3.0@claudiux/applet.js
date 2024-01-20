@@ -41,7 +41,7 @@ const {
   //killall,
   setTimeout,
   clearTimeout
-} = imports.misc.util; //Util
+} = require("./lib/util");
 
 const {
   ScrollDirection,
@@ -1406,13 +1406,14 @@ WebRadioReceiverAndRecorder.prototype = {
       return
     }
     let command = SCRIPTS_DIR+'/download-favicon.sh "'+url+'" "'+name+'.png"';
-    spawnCommandLineAsyncIO(command, Lang.bind(this, (out, err, exitCode) => {
+    let subProcess = spawnCommandLineAsyncIO(command, Lang.bind(this, (out, err, exitCode) => {
       //~ log("out: "+out, true);
       //~ log("err: "+err, true);
       //~ log("exitCode: "+exitCode, true);
       if (exitCode === 0) {
         this.set_applet_icon_path(png_path);
       }
+      subProcess.send_signal(9);
     }));
   },
 
@@ -2647,7 +2648,8 @@ WebRadioReceiverAndRecorder.prototype = {
       if (exitCode != 0) {
         yt_dl_exitCode = exitCode;
       }
-      yt_dl_errMsg = ""+err
+      yt_dl_errMsg = ""+err;
+      yt_dl_process.send_signal(9);
     });
     let yt_dl_pid = yt_dl_process.get_identifier();
     //~ log("PID: "+yt_dl_pid, true);
@@ -3533,13 +3535,14 @@ WebRadioReceiverAndRecorder.prototype = {
     // Install or update translations, if any:
     if (!are_translations_installed()) install_translations();
 
-    spawnCommandLineAsyncIO(SCRIPTS_DIR+"/get-score.sh", Lang.bind(this, (stdout, err, exitCode) => {
+    let subProcess = spawnCommandLineAsyncIO(SCRIPTS_DIR+"/get-score.sh", Lang.bind(this, (stdout, err, exitCode) => {
       try {
         //~ log("score: "+stdout, true);
         this.settings.setValue("score", 1*stdout);
       } catch(e) {
         logError("Reading score error: "+e)
       }
+      subProcess.send_signal(9);
     }));
 
     // Check about dependencies:
@@ -3579,7 +3582,7 @@ WebRadioReceiverAndRecorder.prototype = {
       log("Updating yt-dlp.");
       this.checkYTDLPInterval = setInterval(
         () => {
-          spawnCommandLineAsyncIO(
+          let subProcess2 = spawnCommandLineAsyncIO(
             YTDLP_UPDATE_BASH_SCRIPT,
             Lang.bind(this, (out, err, exitCode) => {
               if (exitCode === 0) {
@@ -3594,6 +3597,7 @@ WebRadioReceiverAndRecorder.prototype = {
                 });
                 criticalNotify(_("Please Log Out then Log In"), _("to finalize yt-dlp update"), icon)
               }
+              subProcess2.send_signal(9);
             })
           )
         },
@@ -4178,7 +4182,7 @@ WebRadioReceiverAndRecorder.prototype = {
       }, 50);
     }
 
-    spawnCommandLineAsyncIO(yt_title_and_dir_command, Lang.bind(this, (out, err, exitCode) => {
+    let subProcess = spawnCommandLineAsyncIO(yt_title_and_dir_command, Lang.bind(this, (out, err, exitCode) => {
       var errors = [];
       if (err.length > 0) {
         let all_errors = err.trim().split("\n");
@@ -4290,8 +4294,15 @@ WebRadioReceiverAndRecorder.prototype = {
       log("yt_dl_command: "+yt_dl_command);
 
       title = titles.join("\n");
+
       this.download_from_YT(title, yt_dl_command, "%s".format(real_dir));
+
+      subProcess.send_signal(9);
     }));
+  },
+
+  on_button_YT_open_dir: function() {
+    spawnCommandLineAsync(`bash -c 'xdg-open "%s"'`.format(RADIO30_MUSIC_DIR+"/"+this.settings.getValue("recordings-subdirectory")))
   },
 
   to_ranges: function(arr) {
@@ -4961,13 +4972,14 @@ WebRadioReceiverAndRecorder.prototype = {
     file_set_contents(begin_job_file, job);
 
     let command = `%s/create-job.sh "%s" "%s"`.format(SCRIPTS_DIR, begin_job_file, at_begin_time);
-    spawnCommandLineAsyncIO(command, Lang.bind(this, function(out, err, exitCode) {
+    let subProcess = spawnCommandLineAsyncIO(command, Lang.bind(this, function(out, err, exitCode) {
       if (exitCode != 0 || out == null) return;
 
       let jobId = parseInt(out.trim());
       let begin_jobId_file = JOBS_DIR + "/idBegin_" + job_uid;
 
       file_set_contents(begin_jobId_file, ""+jobId+"\n");
+      subProcess.send_signal(9);
     }));
   },
 

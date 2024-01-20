@@ -363,7 +363,8 @@
         "recordings-keep-video",
         "recordings-subdirectory",
         "recordings-extract-button",
-        "recordings-extract-update"
+        "recordings-extract-update",
+        "recordings-open-folder"
       ]
     },
     "sectionRecordingScheduleARecording": {
@@ -1181,6 +1182,11 @@
     "default": 0.0,
     "description": "%",
     "dependency": "show-recordings-extract-update"
+  },
+  "recordings-open-folder": {
+    "type": "button",
+    "description": "Open the recordings folder",
+    "callback": "on_button_YT_open_dir"
   },
   "show-recordings-extract-update": {
     "type": "generic",

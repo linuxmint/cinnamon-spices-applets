@@ -42,7 +42,7 @@ const {
   //killall,
   setTimeout,
   clearTimeout
-} = imports.misc.util; //Util
+} = require("./lib/util"); //Util
 
 const ByteArray = imports.byteArray;
 const to_string = function(data) {
