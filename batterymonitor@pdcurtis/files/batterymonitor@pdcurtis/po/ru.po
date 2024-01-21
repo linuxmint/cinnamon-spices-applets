@@ -365,6 +365,18 @@ msgstr ""
 " Компактный Плюс: Компактный с добавлением значка батареи\n"
 " Только Значок: Значок батареи на цветном фоне отображающем текущий статус"
 
+#. 5.4->settings-schema.json->iconTheme->options
+msgid "Classic"
+msgstr "Класический"
+
+#. 5.4->settings-schema.json->iconTheme->description
+msgid "Icon Theme"
+msgstr "Тема значков"
+
+#. 5.4->settings-schema.json->iconTheme->tooltip
+msgid "Icon Theme"
+msgstr "Тема значков"
+
 #. 5.4->settings-schema.json->time_remaining_display->description
 msgid "Append estimated time remaining to chosen display type"
 msgstr "Добавить рассчитанное время к выбранному типу отображения"

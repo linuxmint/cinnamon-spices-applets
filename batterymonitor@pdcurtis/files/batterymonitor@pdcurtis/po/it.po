@@ -380,6 +380,18 @@ msgstr ""
 "   Solo Icona: l'icona della batteria su uno sfondo colorato che indica lo "
 "stato corrente"
 
+#. 5.4->settings-schema.json->iconTheme->options
+msgid "Classic"
+msgstr "Classica"
+
+#. 5.4->settings-schema.json->iconTheme->description
+msgid "Icon Theme"
+msgstr "Tema dell'icona"
+
+#. 5.4->settings-schema.json->iconTheme->tooltip
+msgid "Icon Theme"
+msgstr "Tema dell'icona"
+
 #. 5.4->settings-schema.json->time_remaining_display->description
 msgid "Append estimated time remaining to chosen display type"
 msgstr "Aggiungi il tempo rimanente stimato al tipo di visualizzazione scelto"

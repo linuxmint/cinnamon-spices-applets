@@ -341,6 +341,18 @@ msgid ""
 "status"
 msgstr ""
 
+#. 5.4->settings-schema.json->iconTheme->options
+msgid "Classic"
+msgstr "经典的"
+
+#. 5.4->settings-schema.json->iconTheme->description
+msgid "Icon Theme"
+msgstr "图标主题"
+
+#. 5.4->settings-schema.json->iconTheme->tooltip
+msgid "Icon Theme"
+msgstr "图标主题"
+
 #. 5.4->settings-schema.json->time_remaining_display->description
 msgid "Append estimated time remaining to chosen display type"
 msgstr ""

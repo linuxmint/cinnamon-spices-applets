@@ -374,6 +374,18 @@ msgstr ""
 "  Kun ikon: Batteriikonet på en farvet baggrund der angiver den aktuelle "
 "status"
 
+#. 5.4->settings-schema.json->iconTheme->options
+msgid "Classic"
+msgstr "Klassisk"
+
+#. 5.4->settings-schema.json->iconTheme->description
+msgid "Icon Theme"
+msgstr "Ikon Tema"
+
+#. 5.4->settings-schema.json->iconTheme->tooltip
+msgid "Icon Theme"
+msgstr "Ikon Tema"
+
 #. 5.4->settings-schema.json->time_remaining_display->description
 msgid "Append estimated time remaining to chosen display type"
 msgstr "Tilføj estimeret resterende tid til den valgte visningstype"

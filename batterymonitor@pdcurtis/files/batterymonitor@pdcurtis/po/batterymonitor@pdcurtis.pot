@@ -326,6 +326,18 @@ msgid ""
 "  Icon Only: The battery icon on a colored background indicating the current status"
 msgstr ""
 
+#. 5.4->settings-schema.json->iconTheme->options
+msgid "Classic"
+msgstr ""
+
+#. 5.4->settings-schema.json->iconTheme->description
+msgid "Icon Theme"
+msgstr ""
+
+#. 5.4->settings-schema.json->iconTheme->tooltip
+msgid "Icon Theme"
+msgstr ""
+
 #. 5.4->settings-schema.json->time_remaining_display->description
 msgid "Append estimated time remaining to chosen display type"
 msgstr ""
