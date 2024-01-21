@@ -49,6 +49,21 @@ MyApplet.prototype = {
         this.setupUI();
     },
 
+    setupIconPaths: function () {
+        this.battery100 = this.metadata.path + `/icons/${this.iconTheme}/battery-100.png`;
+        this.battery080 = this.metadata.path + `/icons/${this.iconTheme}/battery-080.png`;
+        this.battery060 = this.metadata.path + `/icons/${this.iconTheme}/battery-060.png`;
+        this.battery040 = this.metadata.path + `/icons/${this.iconTheme}/battery-040.png`;
+        this.batteryCaution = this.metadata.path + `/icons/${this.iconTheme}/battery-caution.png`;
+        this.batteryLow = this.metadata.path + `/icons/${this.iconTheme}/battery-low.png`;
+        this.batteryCharging100 = this.metadata.path + `/icons/${this.iconTheme}/battery-charging.png`;
+        this.batteryCharging080 = this.metadata.path + `/icons/${this.iconTheme}/battery-charging-080.png`;
+        this.batteryCharging060 = this.metadata.path + `/icons/${this.iconTheme}/battery-charging-060.png`;
+        this.batteryCharging040 = this.metadata.path + `/icons/${this.iconTheme}/battery-charging-040.png`;
+        this.batteryChargingCaution = this.metadata.path + `/icons/${this.iconTheme}/battery-charging-caution.png`;
+        this.batteryChargingLow = this.metadata.path + `/icons/${this.iconTheme}/battery-charging-low.png`;
+    },
+
     setupUI: function () {
         try {
             // Picks up UUID from metadata for Settings
@@ -83,6 +98,12 @@ MyApplet.prototype = {
                 "displayType",
                 this.on_settings_changed,
                 null);
+            
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "iconTheme",
+                "iconTheme",
+                this.on_settings_changed,
+                null)
 
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 "time_remaining_display",
@@ -257,18 +278,7 @@ MyApplet.prototype = {
             this.appletPath = this.metadata.path;
             this.changelog = this.metadata.path + "/../CHANGELOG.md";
             this.helpfile = this.metadata.path + "/../README.md";
-            this.battery100 = this.metadata.path + "/icons/battery-100.png";
-            this.battery080 = this.metadata.path + "/icons/battery-080.png";
-            this.battery060 = this.metadata.path + "/icons/battery-060.png";
-            this.battery040 = this.metadata.path + "/icons/battery-040.png";
-            this.batteryCaution = this.metadata.path + "/icons/battery-caution.png";
-            this.batteryLow = this.metadata.path + "/icons/battery-low.png";
-            this.batteryCharging100 = this.metadata.path + "/icons/battery-charging.png";
-            this.batteryCharging080 = this.metadata.path + "/icons/battery-charging-080.png";
-            this.batteryCharging060 = this.metadata.path + "/icons/battery-charging-060.png";
-            this.batteryCharging040 = this.metadata.path + "/icons/battery-charging-040.png";
-            this.batteryChargingCaution = this.metadata.path + "/icons/battery-charging-caution.png";
-            this.batteryChargingLow = this.metadata.path + "/icons/battery-charging-low.png";
+            this.setupIconPaths();
 
             // Determine best default battery path if possible
             let batteryBasePath = "/sys/class/power_supply";
@@ -370,6 +380,7 @@ MyApplet.prototype = {
             this.batteryLowSound = this.batteryLowSound1;
             this.batteryShutdownSound = this.batteryShutdownSound1
         }
+        this.setupIconPaths();
         this.updateLoop();
     },
 
