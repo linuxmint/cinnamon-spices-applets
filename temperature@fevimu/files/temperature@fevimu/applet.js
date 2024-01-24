@@ -180,7 +180,7 @@ CPUTemperatureApplet.prototype = {
       return false;
     }
 
-    let _monospace = (this.keep_size) ? "temp-monospace" : "applet-label";
+    let _monospace = (this.keep_size) ? "temp-monospace" : "applet-box";
     this.actor.set_style_class_name("%s".format(_monospace));
 
 
