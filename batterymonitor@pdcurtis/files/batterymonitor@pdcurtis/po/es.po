@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-21 17:43-0500\n"
-"PO-Revision-Date: 2024-01-21 17:50-0500\n"
+"PO-Revision-Date: 2024-01-23 23:07-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -316,12 +316,12 @@ msgstr "Clásico"
 #. 3.2->settings-schema.json->iconTheme->options
 #. 5.4->settings-schema.json->iconTheme->options
 msgid "Yaru Light"
-msgstr ""
+msgstr "Yaru Claro"
 
 #. 3.2->settings-schema.json->iconTheme->options
 #. 5.4->settings-schema.json->iconTheme->options
 msgid "Yaru Dark"
-msgstr ""
+msgstr "Yaru Oscuro"
 
 #. 3.2->settings-schema.json->head2->description
 #. 5.4->settings-schema.json->low_alert->title
