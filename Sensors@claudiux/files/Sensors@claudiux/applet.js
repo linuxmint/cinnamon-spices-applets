@@ -116,7 +116,7 @@ class SensorsApplet extends Applet.TextApplet {
     this._variables();
 
     // Style class name:
-    let _monospace = (this.keep_size) ? "sensors-monospace" : "applet-label";
+    let _monospace = (this.keep_size) ? "sensors-monospace" : "applet-box";
     let _border_type = (this.remove_border) ? "-noborder" : "";
     this.actor.set_style_class_name("%s sensors-label%s".format(_monospace, _border_type));
 
@@ -682,7 +682,7 @@ class SensorsApplet extends Applet.TextApplet {
     //~ this.check_disktemp_user_readable();
 
     var _appletLabel = "";
-    let _monospace = (this.keep_size) ? "sensors-monospace" : "applet-label";
+    let _monospace = (this.keep_size) ? "sensors-monospace" : "applet-box";
     let _border_type = (this.remove_border) ? "-noborder" : "";
     var _actor_style = "%s sensors-label%s sensors-size%s".format(_monospace, _border_type, this.char_size);
 
