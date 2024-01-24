@@ -56,5 +56,11 @@
     "dependency": "change-color",
     "description": "Only use colors to alert me",
     "tooltip": "Select this option to not display text alerts in horizontal panels.\n(No text alert is ever displayed on vertical panels.)"
+  },
+  "keep_size": {
+    "type": "switch",
+    "default": false,
+    "description": "Avoid size changes",
+    "tooltip": "Checked: The size of this applet remains constant, once all your preferences have been defined.\nUnchecked: The size of this applet is optimized, but it may change."
   }
 }
