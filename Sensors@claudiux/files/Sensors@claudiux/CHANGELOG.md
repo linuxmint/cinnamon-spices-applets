@@ -1,3 +1,6 @@
+### v3.5.2~20240124
+  * Prevents display error.
+
 ### v3.5.1~20240120
   * Improves subprocesses (part2).
 
