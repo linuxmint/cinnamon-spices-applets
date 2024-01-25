@@ -61,6 +61,7 @@ class ExitApplet extends Applet.IconApplet {
         this.s.bind("showLockscreen", "showLockscreen");
         this.s.bind("showSwitchUser", "showSwitchUser");
         this.s.bind("showLogout", "showLogout");
+        this.s.bind("logoutMode", "logoutMode");
     }
 
     check_system_managed_options() {
@@ -165,7 +166,7 @@ class ExitApplet extends Applet.IconApplet {
             item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "system-log-out-symbolic", St.IconType.SYMBOLIC);
             item.connect('activate', Lang.bind(this, function () {
                 this.menu.close(true);
-                launcher.spawnv(["cinnamon-session-quit", "--logout", "--no-prompt"]);
+                launcher.spawnv(["cinnamon-session-quit", "--logout", this.logoutMode]);
             }));
             this.menu.addMenuItem(item);
         }
