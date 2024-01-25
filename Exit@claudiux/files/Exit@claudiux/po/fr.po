@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 20:33+0100\n"
-"PO-Revision-Date: 2024-01-12 20:34+0100\n"
+"POT-Creation-Date: 2024-01-25 23:19+0100\n"
+"PO-Revision-Date: 2024-01-25 23:22+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -17,35 +17,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: 5.4/applet.js:91
+#: 5.4/applet.js:96
 msgid "Restart Cinnamon"
 msgstr "Redémarrer Cinnamon"
 
-#: 5.4/applet.js:103
+#: 5.4/applet.js:108
 msgid "Lock Screen"
 msgstr "Verrouiller l'écran"
 
-#: 5.4/applet.js:126 5.4/applet.js:136 5.4/applet.js:145
+#: 5.4/applet.js:131 5.4/applet.js:141 5.4/applet.js:150
 msgid "Switch User"
 msgstr "Changer d'utilisateur"
 
-#: 5.4/applet.js:157
+#: 5.4/applet.js:166
 msgid "Log Out"
 msgstr "Se déconnecter"
 
-#: 5.4/applet.js:169
+#: 5.4/applet.js:178
 msgid "Suspend"
 msgstr "Mettre en veille"
 
-#: 5.4/applet.js:178
+#: 5.4/applet.js:187
 msgid "Hibernate"
 msgstr "Hiberner"
 
-#: 5.4/applet.js:190
+#: 5.4/applet.js:199
 msgid "Restart"
 msgstr "Redémarrer l'ordinateur"
 
-#: 5.4/applet.js:199
+#: 5.4/applet.js:208
 msgid "Power Off"
 msgstr "Arrêter l'ordinateur"
 
@@ -122,6 +122,30 @@ msgstr "Afficher l'option Changer d'utilisateur"
 #. 5.4->settings-schema.json->showLogout->description
 msgid "Show the Log Out option"
 msgstr "Afficher l'option Se déconnecter"
+
+#. 5.4->settings-schema.json->logoutMode->description
+msgid "Log Out Mode"
+msgstr "Mode de déconnexion"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "With confirmation"
+msgstr "Avec demande de confirmation"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Without confirmation"
+msgstr "Sans confirmation"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Force"
+msgstr "Forcer"
+
+#. 5.4->settings-schema.json->logoutMode->tooltip
+msgid ""
+"The 'Force' option lets you log out while ignoring inhibitors. Useful when "
+"several sessions are open."
+msgstr ""
+"L'option \"Forcer\" vous permet de vous déconnecter tout en ignorant les "
+"inhibiteurs. Utile lorsque plusieurs sessions sont ouvertes."
 
 #~ msgid "System Controls"
 #~ msgstr "Les contrôles du système"

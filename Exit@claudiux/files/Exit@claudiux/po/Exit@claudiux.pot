@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 20:33+0100\n"
+"POT-Creation-Date: 2024-01-25 23:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,35 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 5.4/applet.js:91
+#: 5.4/applet.js:96
 msgid "Restart Cinnamon"
 msgstr ""
 
-#: 5.4/applet.js:103
+#: 5.4/applet.js:108
 msgid "Lock Screen"
 msgstr ""
 
-#: 5.4/applet.js:126 5.4/applet.js:136 5.4/applet.js:145
+#: 5.4/applet.js:131 5.4/applet.js:141 5.4/applet.js:150
 msgid "Switch User"
 msgstr ""
 
-#: 5.4/applet.js:157
+#: 5.4/applet.js:166
 msgid "Log Out"
 msgstr ""
 
-#: 5.4/applet.js:169
+#: 5.4/applet.js:178
 msgid "Suspend"
 msgstr ""
 
-#: 5.4/applet.js:178
+#: 5.4/applet.js:187
 msgid "Hibernate"
 msgstr ""
 
-#: 5.4/applet.js:190
+#: 5.4/applet.js:199
 msgid "Restart"
 msgstr ""
 
-#: 5.4/applet.js:199
+#: 5.4/applet.js:208
 msgid "Power Off"
 msgstr ""
 
@@ -117,4 +117,26 @@ msgstr ""
 
 #. 5.4->settings-schema.json->showLogout->description
 msgid "Show the Log Out option"
+msgstr ""
+
+#. 5.4->settings-schema.json->logoutMode->description
+msgid "Log Out Mode"
+msgstr ""
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "With confirmation"
+msgstr ""
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Without confirmation"
+msgstr ""
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Force"
+msgstr ""
+
+#. 5.4->settings-schema.json->logoutMode->tooltip
+msgid ""
+"The 'Force' option lets you log out while ignoring inhibitors. Useful when "
+"several sessions are open."
 msgstr ""
