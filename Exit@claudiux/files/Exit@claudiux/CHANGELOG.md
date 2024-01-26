@@ -1,3 +1,7 @@
+### v1.1.1~20240126
+
+* Updated README.md and screenshot.
+
 ### v1.1.0~20240125
 
 * "Log Out Mode" option added to settings. From now, the user can choose to log out with or without confirmation, or to force log out (useful when several sessions are open).
