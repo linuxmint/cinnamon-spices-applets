@@ -41,3 +41,19 @@ For now, these menu options are not available using a **wayland** session:
 * Switch User
 
 So you can't see them in this applet's settings.
+
+## Log Out modes
+
+There are three Log Out modes:
+
+- With confirmation: Opens a window to confirm or cancel the disconnection.
+- Without confirmation.
+- Force: Lets you log out while ignoring inhibitors. Useful when several sessions are open.
+
+Select your preferred mode in the settings (since version 1.1.0).
+
+## Translations
+
+[Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/Exit%40claudiux.md)
+
+Many thanks to the translators!
