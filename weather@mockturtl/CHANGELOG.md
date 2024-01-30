@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.4.0
+
+* Fix [#5212](https://github.com/linuxmint/cinnamon-spices-applets/issues/5212)
+* Fix [#5392](https://github.com/linuxmint/cinnamon-spices-applets/issues/5392)
+* Fix [#5355](https://github.com/linuxmint/cinnamon-spices-applets/issues/5355)
+* Add description to Manual location entry
+* Fix Saving Logs button not included the redacted config
+* Update library typings for applet
+* Use fedora geoip project for autolocation via the internet
+
 ## 3.3.1
 
 Fix nominatim not getting location data due to API changes. Related issues:

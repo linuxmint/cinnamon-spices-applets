@@ -161,7 +161,10 @@ export class WeatherApplet extends TextIconApplet {
 			case NetworkConnectivity.PORTAL:
 				if (this.online === true)
 					break;
+
 				Logger.Info("Internet access now available, resuming operations.");
+				this.encounteredError = false;
+				this.loop.ResetErrorCount();
 				this.loop.Resume();
 				this.online = true;
 				break;
