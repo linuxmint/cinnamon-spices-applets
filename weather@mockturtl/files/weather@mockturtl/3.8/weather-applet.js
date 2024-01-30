@@ -14860,7 +14860,6 @@ class PirateWeather extends BaseProvider {
         this.supportHourlyPrecipVolume = true;
         this.remainingQuota = null;
         this.query = "https://api.pirateweather.net/forecast/";
-        this.unit = "si";
         this.HandleError = (message) => {
             if (message.ErrorData.code == 403) {
                 this.app.ShowError({
@@ -15050,7 +15049,7 @@ class PirateWeather extends BaseProvider {
                 return 'si';
             }
             else {
-                return 'uk2';
+                return 'uk';
             }
         }
         else {

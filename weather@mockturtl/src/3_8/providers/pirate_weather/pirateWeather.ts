@@ -30,7 +30,6 @@ export class PirateWeather extends BaseProvider {
 	};
 
 	private query = "https://api.pirateweather.net/forecast/";
-	private unit: PirateWeatherQueryUnits = "si";
 
 	constructor(_app: WeatherApplet) {
 		super(_app);
@@ -259,7 +258,7 @@ export class PirateWeather extends BaseProvider {
 				return 'si';
 			}
 			else {
-				return 'uk2';
+				return 'uk';
 			}
 		}
 		else {
