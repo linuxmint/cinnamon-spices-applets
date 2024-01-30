@@ -21,9 +21,9 @@ import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
 import { WeatherUnderground } from "./providers/weatherUnderground";
 import { Event } from "./lib/events";
 import { GeoIP } from "./location_services/geoip_services/base";
-import { GeoJS } from "./location_services/geoip_services/geojs.io";
 import { PirateWeather } from "./providers/pirate_weather/pirateWeather";
 import { GeoClue } from "./location_services/geoip_services/geoclue";
+import { GeoIPFedora } from "./location_services/geoip_services/geoip.fedora";
 
 const { get_home_dir, get_user_data_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
@@ -210,7 +210,7 @@ export class Config {
 		this.currentLocale = ConstructJsLocale(get_language_names()[0]);
 		Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
 		this.countryCode = this.GetCountryCode(this.currentLocale);
-		this.autoLocProvider = new GeoJS(app); // IP location lookup
+		this.autoLocProvider = new GeoIPFedora(app); // IP location lookup
 		this.geoClue = new GeoClue(app);
 		this.geoLocationService = new GeoLocation(app);
 		this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });

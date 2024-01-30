@@ -14838,55 +14838,6 @@ class WeatherUnderground extends BaseProvider {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geojs.io.ts
-
-
-class GeoJS {
-    constructor(_app) {
-        this.query = "https://get.geojs.io/v1/ip/geo.json";
-        this.app = _app;
-    }
-    async GetLocation() {
-        const json = await this.app.LoadJsonAsync(this.query);
-        if (!json) {
-            return null;
-        }
-        return this.ParseInformation(json);
-    }
-    ;
-    ParseInformation(json) {
-        try {
-            const lat = parseFloat(json.latitude);
-            const lon = parseFloat(json.longitude);
-            if (Number.isNaN(lat) || Number.isNaN(lon)) {
-                this.HandleErrorResponse(json);
-                return null;
-            }
-            const result = {
-                lat: lat,
-                lon: lon,
-                city: json.city,
-                country: json.country,
-                timeZone: json.timezone,
-                entryText: lat + "," + lon,
-            };
-            logger_Logger.Debug("Location obtained:" + lat + "," + lon);
-            return result;
-        }
-        catch (e) {
-            logger_Logger.Error("ip-api parsing error: " + e);
-            this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
-            return null;
-        }
-    }
-    ;
-    HandleErrorResponse(json) {
-        this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
-        logger_Logger.Error("ip-api responds with Error: " + json.reason);
-    }
-    ;
-}
-
 ;// CONCATENATED MODULE: ./src/3_8/providers/pirate_weather/pirateWeather.ts
 
 
@@ -15207,6 +15158,58 @@ class GeoClue {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geoip.fedora.ts
+
+
+class GeoIPFedora {
+    constructor(app) {
+        this.query = "https://geoip.fedoraproject.org/city";
+        this.app = app;
+    }
+    async GetLocation() {
+        const json = await this.app.LoadJsonAsync(this.query);
+        if (!json) {
+            logger_Logger.Info("geoip.fedoraproject didn't return any data");
+            return null;
+        }
+        return this.ParseInformation(json);
+    }
+    ParseInformation(json) {
+        var _a, _b, _c;
+        if (json.latitude === null || json.longitude === null) {
+            this.HandleErrorResponse(json);
+            return null;
+        }
+        try {
+            const result = {
+                lat: json.latitude,
+                lon: json.longitude,
+                city: (_a = json.city) !== null && _a !== void 0 ? _a : undefined,
+                country: (_b = json.country_name) !== null && _b !== void 0 ? _b : undefined,
+                timeZone: (_c = json.time_zone) !== null && _c !== void 0 ? _c : this.app.config.UserTimezone,
+                entryText: json.latitude + "," + json.longitude,
+            };
+            logger_Logger.Debug("Location obtained: " + json.latitude + "," + json.longitude);
+            return result;
+        }
+        catch (e) {
+            logger_Logger.Error("geoip.fedoraproject parsing error: " + e);
+            this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
+            return null;
+        }
+    }
+    ;
+    HandleErrorResponse(json) {
+        this.app.ShowError({
+            type: "hard",
+            detail: "bad api response",
+            message: _("Location Service couldn't find your location, please see the logs in Looking Glass"),
+            service: "geoip.fedoreproject"
+        });
+    }
+    ;
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
 
 
@@ -15336,7 +15339,7 @@ class Config {
         this.currentLocale = ConstructJsLocale(get_language_names()[0]);
         logger_Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
         this.countryCode = this.GetCountryCode(this.currentLocale);
-        this.autoLocProvider = new GeoJS(app);
+        this.autoLocProvider = new GeoIPFedora(app);
         this.geoClue = new GeoClue(app);
         this.geoLocationService = new GeoLocation(app);
         this.InterfaceSettings = new config_Settings({ schema: "org.cinnamon.desktop.interface" });

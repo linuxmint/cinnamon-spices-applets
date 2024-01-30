@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-20 13:17+0000\n"
+"POT-Creation-Date: 2024-01-30 08:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -175,7 +175,7 @@ msgstr ""
 msgid "Wind"
 msgstr ""
 
-#: 3.0/applet.js:1639 3.8/weather-applet.js:15429
+#: 3.0/applet.js:1639
 msgid "Make sure you entered a location or use Automatic location instead"
 msgstr ""
 
@@ -245,12 +245,12 @@ msgstr ""
 #: 3.8/weather-applet.js:10740 3.8/weather-applet.js:11711
 #: 3.8/weather-applet.js:12150 3.8/weather-applet.js:12659
 #: 3.8/weather-applet.js:13021 3.8/weather-applet.js:14388
-#: 3.8/weather-applet.js:14978
+#: 3.8/weather-applet.js:14929
 msgid "Feels Like"
 msgstr ""
 
 #: 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
-#: 3.8/weather-applet.js:15040
+#: 3.8/weather-applet.js:14991
 msgid "Failed to Process Weather Info"
 msgstr ""
 
@@ -261,7 +261,7 @@ msgid ""
 msgstr ""
 
 #: 3.0/climacell.js:239 3.0/darkSky.js:229 3.0/weatherbit.js:331
-#: 3.8/weather-applet.js:11877 3.8/weather-applet.js:14920
+#: 3.8/weather-applet.js:11877 3.8/weather-applet.js:14871
 msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
@@ -532,17 +532,17 @@ msgid ""
 "or get one first on https://darksky.net/dev/register"
 msgstr ""
 
-#: 3.0/darkSky.js:238 3.8/weather-applet.js:14930
+#: 3.0/darkSky.js:238 3.8/weather-applet.js:14881
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from DarkSky"
 msgstr ""
 
-#: 3.0/ipApi.js:89 3.8/weather-applet.js:14878
+#: 3.0/ipApi.js:89 3.8/weather-applet.js:15197
 msgid "Could not obtain location"
 msgstr ""
 
-#: 3.0/ipApi.js:95 3.8/weather-applet.js:14884
+#: 3.0/ipApi.js:95
 msgid ""
 "Location Service responded with errors, please see the logs in Looking Glass"
 msgstr ""
@@ -1685,8 +1685,18 @@ msgstr ""
 msgid "Mostly Clear"
 msgstr ""
 
-#: 3.8/weather-applet.js:14902
+#: 3.8/weather-applet.js:14853
 msgid "Pirate Weather"
+msgstr ""
+
+#: 3.8/weather-applet.js:15206
+msgid ""
+"Location Service couldn't find your location, please see the logs in Looking"
+" Glass"
+msgstr ""
+
+#: 3.8/weather-applet.js:15428
+msgid "Make sure you entered a location or use Automatic location instead."
 msgstr ""
 
 #: 3.8/weather-applet.js:15565
