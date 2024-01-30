@@ -1,3 +1,7 @@
+### v1.15.0~20240130
+  * Try to minimize disk writes.
+  * Uses class instead of prototype.
+
 ### v1.14.0
   * Improves sub-processes.
   * Adds a button "Open the recordings folder" in YT tab (in this applet settings).
