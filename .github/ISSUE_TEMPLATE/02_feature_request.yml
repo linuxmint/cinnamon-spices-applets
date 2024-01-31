@@ -227,7 +227,7 @@ body:
       and in a mature manner. If in doubt, refer to the [Golden Rule](https://en.wikipedia.org/wiki/Golden_Rule)
       and [Github''s Community Guidelines](https://docs.github.com/en/site-policy/github-terms/github-community-guidelines).*'
   type: markdown
-description: "If you have a feature request \U0001F4A1"
+description: "If you have a feature request for an existing Applet \U0001F4A1"
 labels:
 - FEATURE REQUEST
 name: "\U0001F680 Applet Feature Request"
