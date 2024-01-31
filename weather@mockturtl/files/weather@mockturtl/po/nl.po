@@ -1,15 +1,15 @@
 # Dutch translation for cinnamon-weather (weather@mockturtl)
-# Copyright (C) 2023
+# Copyright (C) 2024
 # This file is distributed under the same license as the package cinnamon-weather (weather@mockturtl).
-# Pjotr <pjotrvertaalt@gmail.com>, 2013-2023.
+# Pjotr <pjotrvertaalt@gmail.com>, 2013-2024.
 # Jurien (French77) <Jurien@protonmail.com>, 2020-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: cinnamon-weather (weather@mockturtl or Weather)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-21 09:37+0100\n"
-"PO-Revision-Date: 2023-10-30 16:54+0100\n"
+"POT-Creation-Date: 2024-01-30 08:55+0000\n"
+"PO-Revision-Date: 2024-01-31 18:03+0100\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -20,48 +20,48 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
-#: 3.8/weather-applet.js:17519
+#: 3.8/weather-applet.js:17607
 msgid "Error"
 msgstr "Fout"
 
 #: 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
 #: 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
-#: 3.8/weather-applet.js:17520 3.8/weather-applet.js:17522
-#: 3.8/weather-applet.js:17524 3.8/weather-applet.js:17527
-#: 3.8/weather-applet.js:17530 3.8/weather-applet.js:17531
-#: 3.8/weather-applet.js:17532 3.8/weather-applet.js:17533
+#: 3.8/weather-applet.js:17608 3.8/weather-applet.js:17610
+#: 3.8/weather-applet.js:17612 3.8/weather-applet.js:17615
+#: 3.8/weather-applet.js:17618 3.8/weather-applet.js:17619
+#: 3.8/weather-applet.js:17620 3.8/weather-applet.js:17621
 msgid "Service Error"
 msgstr "Dienstfout"
 
-#: 3.0/applet.js:168 3.8/weather-applet.js:17521
+#: 3.0/applet.js:168 3.8/weather-applet.js:17609
 msgid "Incorrect API Key"
 msgstr "Verkeerde API-sleutel"
 
-#: 3.0/applet.js:170 3.8/weather-applet.js:17523
+#: 3.0/applet.js:170 3.8/weather-applet.js:17611
 msgid "Incorrect Location Format"
 msgstr "Onjuiste locatie-opmaak"
 
-#: 3.0/applet.js:172 3.8/weather-applet.js:17525
+#: 3.0/applet.js:172 3.8/weather-applet.js:17613
 msgid "Key Blocked"
 msgstr "Sleutel geblokkeerd"
 
-#: 3.0/applet.js:173 3.8/weather-applet.js:17526
+#: 3.0/applet.js:173 3.8/weather-applet.js:17614
 msgid "Can't find location"
 msgstr "Kan locatie niet vinden"
 
-#: 3.0/applet.js:175 3.8/weather-applet.js:17528
+#: 3.0/applet.js:175 3.8/weather-applet.js:17616
 msgid "No Api Key"
 msgstr "Geen API-sleutel"
 
-#: 3.0/applet.js:176 3.8/weather-applet.js:17529
+#: 3.0/applet.js:176 3.8/weather-applet.js:17617
 msgid "No Location"
 msgstr "Geen locatie"
 
-#: 3.0/applet.js:181 3.8/weather-applet.js:17534
+#: 3.0/applet.js:181 3.8/weather-applet.js:17622
 msgid "Missing Packages"
 msgstr "Ontbrekende pakketten"
 
-#: 3.0/applet.js:182 3.8/weather-applet.js:17535
+#: 3.0/applet.js:182 3.8/weather-applet.js:17623
 msgid "Location not covered"
 msgstr "Locatie niet gedekt"
 
@@ -69,16 +69,16 @@ msgstr "Locatie niet gedekt"
 msgid "Weather Applet"
 msgstr "Werkbalkhulpje voor weer"
 
-#: 3.0/applet.js:217 3.8/weather-applet.js:17833
+#: 3.0/applet.js:217 3.8/weather-applet.js:17921
 msgid "..."
 msgstr "..."
 
-#: 3.0/applet.js:218 3.8/weather-applet.js:17834
+#: 3.0/applet.js:218 3.8/weather-applet.js:17922
 msgid "Click to open"
 msgstr "Klik om te openen"
 
-#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:16129
-#: 3.8/weather-applet.js:17837
+#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:16215
+#: 3.8/weather-applet.js:17925
 msgid "Refresh"
 msgstr "Verversen"
 
@@ -101,13 +101,13 @@ msgstr "U kunt een automatisch verkregen locatie helaas niet opslaan"
 msgid "Could not get weather information"
 msgstr "Kon geen weersinformatie verkrijgen voor uw gebied"
 
-#: 3.0/applet.js:624 3.8/weather-applet.js:17672
+#: 3.0/applet.js:624 3.8/weather-applet.js:17760
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 "Onverwachte fout tijdens verversen, zie a.u.b. logboek in Looking Glass"
 
-#: 3.0/applet.js:670 3.8/weather-applet.js:17915
+#: 3.0/applet.js:670 3.8/weather-applet.js:18003
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
@@ -123,7 +123,7 @@ msgstr "Netwerkfout, controleer a.u.b. de logboeken in Looking Glass"
 msgid "As of"
 msgstr "Met ingang van"
 
-#: 3.0/applet.js:1108 3.8/weather-applet.js:16920
+#: 3.0/applet.js:1108 3.8/weather-applet.js:17006
 msgid "Powered by"
 msgstr "Mogelijk gemaakt door"
 
@@ -131,56 +131,56 @@ msgstr "Mogelijk gemaakt door"
 msgid "from you"
 msgstr "van u"
 
-#: 3.0/applet.js:1132 3.8/weather-applet.js:16833
+#: 3.0/applet.js:1132 3.8/weather-applet.js:16919
 msgid "mm"
 msgstr "mm"
 
-#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:16833
+#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:16919
 msgid "in"
 msgstr "in"
 
 #: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:10312
-#: 3.8/weather-applet.js:16998
+#: 3.8/weather-applet.js:17084
 msgid "mi"
 msgstr "mi"
 
 #: 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:10313
-#: 3.8/weather-applet.js:16999
+#: 3.8/weather-applet.js:17085
 msgid "km"
 msgstr "km"
 
-#: 3.0/applet.js:1227 3.8/weather-applet.js:17176
+#: 3.0/applet.js:1227 3.8/weather-applet.js:17262
 msgid "Loading current weather ..."
 msgstr "Huidig weer aan het laden..."
 
-#: 3.0/applet.js:1230 3.8/weather-applet.js:17179
+#: 3.0/applet.js:1230 3.8/weather-applet.js:17265
 msgid "Loading future weather ..."
 msgstr "Weersverwachting aan het laden..."
 
-#: 3.0/applet.js:1280 3.8/weather-applet.js:16082
+#: 3.0/applet.js:1280 3.8/weather-applet.js:16168
 msgid "Loading ..."
 msgstr "Bezig met laden..."
 
-#: 3.0/applet.js:1329 3.8/weather-applet.js:16103
+#: 3.0/applet.js:1329 3.8/weather-applet.js:16189
 msgid "Temperature"
 msgstr "Temperatuur"
 
-#: 3.0/applet.js:1330 3.8/weather-applet.js:16104
+#: 3.0/applet.js:1330 3.8/weather-applet.js:16190
 msgid "Humidity"
 msgstr "Luchtvochtigheid"
 
-#: 3.0/applet.js:1331 3.8/weather-applet.js:16105
+#: 3.0/applet.js:1331 3.8/weather-applet.js:16191
 msgid "Pressure"
 msgstr "Luchtdruk"
 
 #: 3.0/applet.js:1332 3.8/weather-applet.js:12249 3.8/weather-applet.js:12256
 #: 3.8/weather-applet.js:12257 3.8/weather-applet.js:12263
 #: 3.8/weather-applet.js:14217 3.8/weather-applet.js:14218
-#: 3.8/weather-applet.js:15951
+#: 3.8/weather-applet.js:16037
 msgid "Wind"
 msgstr "Wind"
 
-#: 3.0/applet.js:1639 3.8/weather-applet.js:15343
+#: 3.0/applet.js:1639
 msgid "Make sure you entered a location or use Automatic location instead"
 msgstr ""
 "Zorg ervoor dat u een locatie hebt ingevoerd of gebruik in plaats daarvan "
@@ -258,12 +258,12 @@ msgstr ""
 #: 3.8/weather-applet.js:10740 3.8/weather-applet.js:11711
 #: 3.8/weather-applet.js:12150 3.8/weather-applet.js:12659
 #: 3.8/weather-applet.js:13021 3.8/weather-applet.js:14388
-#: 3.8/weather-applet.js:14978
+#: 3.8/weather-applet.js:14929
 msgid "Feels Like"
 msgstr "Voelt als"
 
 #: 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
-#: 3.8/weather-applet.js:15040
+#: 3.8/weather-applet.js:14991
 msgid "Failed to Process Weather Info"
 msgstr "Kon weersinformatie niet verwerken"
 
@@ -276,7 +276,7 @@ msgstr ""
 "of verkrijg er eerst een op https://developer.climacell.co/sign-up"
 
 #: 3.0/climacell.js:239 3.0/darkSky.js:229 3.0/weatherbit.js:331
-#: 3.8/weather-applet.js:11877 3.8/weather-applet.js:14920
+#: 3.8/weather-applet.js:11877 3.8/weather-applet.js:14871
 msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
@@ -550,7 +550,7 @@ msgstr ""
 "Voer a.u.b. de API-sleutel in de instellingen in,\n"
 "of verkrijg er eerst een op https://darksky.net/dev/register"
 
-#: 3.0/darkSky.js:238 3.8/weather-applet.js:14930
+#: 3.0/darkSky.js:238 3.8/weather-applet.js:14881
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from DarkSky"
@@ -558,11 +558,11 @@ msgstr ""
 "Zorg er a.u.b. voor dat u\n"
 "de API-sleutel van DarkSky hebt ingevoerd"
 
-#: 3.0/ipApi.js:89 3.8/weather-applet.js:14878
+#: 3.0/ipApi.js:89 3.8/weather-applet.js:15197
 msgid "Could not obtain location"
 msgstr "Kon locatie niet verkrijgen"
 
-#: 3.0/ipApi.js:95 3.8/weather-applet.js:14884
+#: 3.0/ipApi.js:95
 msgid ""
 "Location Service responded with errors, please see the logs in Looking Glass"
 msgstr ""
@@ -1724,11 +1724,25 @@ msgstr "Koud"
 msgid "Mostly Clear"
 msgstr "Overwegend helder"
 
-#: 3.8/weather-applet.js:14902
+#: 3.8/weather-applet.js:14853
 msgid "Pirate Weather"
 msgstr "Pirate Weather"
 
-#: 3.8/weather-applet.js:15481
+#: 3.8/weather-applet.js:15206
+msgid ""
+"Location Service couldn't find your location, please see the logs in Looking "
+"Glass"
+msgstr ""
+"Locatiedienst kon uw locatie niet vinden, zie a.u.b. de logboeken in Looking "
+"Glass"
+
+#: 3.8/weather-applet.js:15428
+msgid "Make sure you entered a location or use Automatic location instead."
+msgstr ""
+"Zorg ervoor dat u een locatie hebt ingevoerd of gebruik in plaats daarvan "
+"Automatische locatie."
+
+#: 3.8/weather-applet.js:15565
 msgid ""
 "Could not retrieve config, file was not found under paths\n"
 " {configFilePath}"
@@ -1736,7 +1750,7 @@ msgstr ""
 "Kon instellingen niet ophalen, bestand niet gevonden onder paden\n"
 " {configFilePath}"
 
-#: 3.8/weather-applet.js:15486
+#: 3.8/weather-applet.js:15572
 msgid ""
 "Could not get contents of config file under path\n"
 " {configFilePath}"
@@ -1744,56 +1758,56 @@ msgstr ""
 "Kon inhoud van instellingenbestand niet verkrijgen onder pad\n"
 " {configFilePath}"
 
-#: 3.8/weather-applet.js:16106
+#: 3.8/weather-applet.js:16192
 msgid "Dew Point"
 msgstr "Dauwpunt"
 
-#: 3.8/weather-applet.js:16178
+#: 3.8/weather-applet.js:16264
 msgid "Precipitation will end in {precipEnd} minutes"
 msgstr "Neerslag zal ophouden over {precipEnd} minuten"
 
-#: 3.8/weather-applet.js:16180
+#: 3.8/weather-applet.js:16266
 msgid "Precipitation won't end in within an hour"
 msgstr "Neerslag zal niet binnen een uur ophouden"
 
-#: 3.8/weather-applet.js:16183
+#: 3.8/weather-applet.js:16269
 msgid "Precipitation will start within {precipStart} minutes"
 msgstr "Neerslag zal beginnen over {precipStart} minuten"
 
-#: 3.8/weather-applet.js:16395
+#: 3.8/weather-applet.js:16481
 msgid "Forecast parsing failed, see logs for more details."
 msgstr ""
 "Lezen van voorspelling mislukt, zie logboeken voor meer bijzonderheden."
 
-#: 3.8/weather-applet.js:16927 3.8/weather-applet.js:17714
+#: 3.8/weather-applet.js:17013 3.8/weather-applet.js:17802
 msgid "As of {lastUpdatedTime}"
 msgstr "Met ingang van {lastUpdatedTime}"
 
-#: 3.8/weather-applet.js:16933
+#: 3.8/weather-applet.js:17019
 msgid "{distance} {distanceUnit} from you"
 msgstr "{distance}{distanceUnit} van u vandaan"
 
-#: 3.8/weather-applet.js:16937
+#: 3.8/weather-applet.js:17023
 msgid "Station Name: {stationName}"
 msgstr "Stationsnaam: {stationName}"
 
-#: 3.8/weather-applet.js:16940
+#: 3.8/weather-applet.js:17026
 msgid "Area: {stationArea}"
 msgstr "Gebied: {stationArea}"
 
-#: 3.8/weather-applet.js:17485 3.8/weather-applet.js:17495
+#: 3.8/weather-applet.js:17573 3.8/weather-applet.js:17583
 msgid "Error Saving Debug Information"
 msgstr "Fout bij opslaan van foutopsporingsinformatie"
 
-#: 3.8/weather-applet.js:17507
+#: 3.8/weather-applet.js:17595
 msgid "Debug Information saved successfully"
 msgstr "Foutopsporingsinformatie met succes opgeslagen"
 
-#: 3.8/weather-applet.js:17507
+#: 3.8/weather-applet.js:17595
 msgid "Saved to {filePath}"
 msgstr "Opgeslagen naar {filePath}"
 
-#: 3.8/weather-applet.js:17638
+#: 3.8/weather-applet.js:17726
 msgid "This provider requires an API key to operate"
 msgstr "Deze aanbieder heeft een API-sleutel nodig om te kunnen werken"
 
@@ -2329,6 +2343,14 @@ msgstr ""
 "zeer flexibel met de opmaak. Drie seconden nadat u bent opgehouden met "
 "tikken zal het door u ingegeven adres automatisch worden vervangen om uw "
 "keuze te valideren."
+
+#. 3.8->settings-schema.json->locationDescription->description
+msgid ""
+"If the location field matches a saved location's 'Search Entry' field, the "
+"saved location will be used instead."
+msgstr ""
+"Als het locatieveld overeenkomt met het zoekveld voor een opgeslagen "
+"locatie, dan zal de opgeslagen locatie worden gebruikt."
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
