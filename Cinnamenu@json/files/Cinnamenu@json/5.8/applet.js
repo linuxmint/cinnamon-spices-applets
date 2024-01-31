@@ -243,7 +243,7 @@ class CinnamenuApplet extends TextIconApplet {
             //This is a hidden config option.
             this.settings.searchStartFolder = GLib.get_home_dir();
         }
-        getWebBookmarksAsync();
+
         this.recentApps = new RecentApps(this);
         this._onEnableRecentsChange();
         updateActivateOnHover();
