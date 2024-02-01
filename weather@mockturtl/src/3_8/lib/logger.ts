@@ -30,11 +30,11 @@ class Log {
 		return LogLevelSeverity[level] <= LogLevelSeverity[this.logLevel];
 	}
 
-	Info(message: string): void {
+	Info(message: string, level: string = "Info"): void {
 		if (!this.CanLog("info"))
 			return;
 
-		const msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
+		const msg = `[${UUID}#${this.ID}:${level}]: ${message.toString()}`;
 		global.log(msg);
 	}
 
@@ -42,7 +42,7 @@ class Log {
 		if (!this.CanLog("error"))
 			return;
 
-		global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
+		global.logError("[" + UUID + "#" + this.ID + ":Error]: " + error.toString());
 		if (!!e?.stack)
 			global.logError(e.stack);
 	};
@@ -51,14 +51,14 @@ class Log {
 		if (!this.CanLog("debug"))
 			return;
 
-		this.Info(message);
+		this.Info(message, "Debug");
 	}
 
 	Verbose(message: string): void {
 		if (!this.CanLog("verbose"))
 			return;
 
-		this.Info(message);
+		this.Info(message, "Verbose");
 	}
 
 	public UpdateInstanceID(instanceID: number): void {

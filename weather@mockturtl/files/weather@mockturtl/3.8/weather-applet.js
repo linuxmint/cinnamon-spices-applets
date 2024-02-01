@@ -9589,16 +9589,16 @@ class Log {
     CanLog(level) {
         return LogLevelSeverity[level] <= LogLevelSeverity[this.logLevel];
     }
-    Info(message) {
+    Info(message, level = "Info") {
         if (!this.CanLog("info"))
             return;
-        const msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
+        const msg = `[${UUID}#${this.ID}:${level}]: ${message.toString()}`;
         global.log(msg);
     }
     Error(error, e) {
         if (!this.CanLog("error"))
             return;
-        global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
+        global.logError("[" + UUID + "#" + this.ID + ":Error]: " + error.toString());
         if (!!(e === null || e === void 0 ? void 0 : e.stack))
             global.logError(e.stack);
     }
@@ -9606,12 +9606,12 @@ class Log {
     Debug(message) {
         if (!this.CanLog("debug"))
             return;
-        this.Info(message);
+        this.Info(message, "Debug");
     }
     Verbose(message) {
         if (!this.CanLog("verbose"))
             return;
-        this.Info(message);
+        this.Info(message, "Verbose");
     }
     UpdateInstanceID(instanceID) {
         this.ID = instanceID;
