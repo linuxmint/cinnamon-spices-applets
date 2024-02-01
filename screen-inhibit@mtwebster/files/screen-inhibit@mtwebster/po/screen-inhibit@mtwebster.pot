@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-31 23:30+0100\n"
+"POT-Creation-Date: 2024-02-01 20:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,20 +17,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:19
+#: applet.js:20
 msgid "Currently preventing screensaver"
 msgstr ""
 
-#: applet.js:20
+#: applet.js:21
 msgid "Currently allowing screensaver"
 msgstr ""
 
-#: applet.js:99
+#: applet.js:100
 msgid "Screensaver settings"
 msgstr ""
 
 #. settings-schema.json->inhibit-at-startup->description
-#: applet.js:103
+#: applet.js:104
 msgid "Inhibit screensaver at startup"
 msgstr ""
 
@@ -59,6 +59,10 @@ msgstr ""
 msgid "Power management prevented icon:"
 msgstr ""
 
+#. settings-schema.json->reset-icons->description
+msgid "Reset to default icons"
+msgstr ""
+
 #. settings-schema.json->head1->description
 msgid "Keybinding"
 msgstr ""
@@ -69,10 +73,4 @@ msgstr ""
 
 #. settings-schema.json->head2->description
 msgid "Startup"
-msgstr ""
-
-#. settings-schema.json->inhibit-at-startup->tooltip
-msgid ""
-"(More precisely, 10 seconds after startup, to ensure that the session is "
-"correctly launched)."
 msgstr ""

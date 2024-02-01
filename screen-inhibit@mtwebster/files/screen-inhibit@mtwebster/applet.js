@@ -197,10 +197,12 @@ class ScreenSaverInhibitor extends Applet.IconApplet {
 
     on_applet_added_to_panel() {
         if (this.inhibit_at_startup && !this.inhibited) {
-            let id = setTimeout ( () => {
-                this.on_applet_clicked();
-                clearTimeout(id);
-            }, 10000); // Let 10000 ms (10 sec.) to have this._sessionProxy not null.
+            let id = setInterval ( () => {
+                if (this._sessionProxy) { // Ensures that this._sessionProxy is defined.
+                    this.on_applet_clicked();
+                    clearTimeout(id);
+                }
+            }, 300);
         }
     }
 

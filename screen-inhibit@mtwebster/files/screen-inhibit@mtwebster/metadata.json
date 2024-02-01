@@ -1,5 +1,7 @@
 {
     "description": "Click to inhibit the screensaver, click again to remove inhibition",
     "uuid": "screen-inhibit@mtwebster",
-    "name": "Screensaver Inhibitor"
+    "name": "Screensaver Inhibitor",
+    "author": "claudiux",
+    "version": "2.0.1"
 }
