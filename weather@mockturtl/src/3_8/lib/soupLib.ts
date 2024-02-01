@@ -60,18 +60,25 @@ class Soup3 implements SoupLib {
             else {
                 AddHeadersToMessage(message, headers);
                 this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, null, (session: any, result: any) => {
-                    const res: imports.gi.GLib.Bytes | null = this._httpSession.send_and_read_finish(result);
-                    const headers: Record<string, string> = {};
-                    message.get_response_headers().foreach((name: string, value: string) => {
-                        headers[name] = value;
-                    })
-
-                    resolve({
-                        reason_phrase: message.get_reason_phrase() ?? "",
-                        status_code: message.get_status(),
-                        response_body: res != null ? ByteArray.toString(ByteArray.fromGBytes(res)) : null,
-                        response_headers: headers
-                    });
+					const headers: Record<string, string> = {};
+					let res: imports.gi.GLib.Bytes | null = null;
+					try {
+						res = this._httpSession.send_and_read_finish(result);
+						message.get_response_headers().foreach((name: string, value: string) => {
+							headers[name] = value;
+						})
+					}
+					catch(e) {
+						Logger.Error("Error reading response: " + e);
+					}
+					finally {
+						resolve({
+							reason_phrase: message.get_reason_phrase() ?? "",
+							status_code: message.get_status(),
+							response_body: res != null ? ByteArray.toString(ByteArray.fromGBytes(res)) : null,
+							response_headers: headers
+						});
+					}
                 });
             }
         });

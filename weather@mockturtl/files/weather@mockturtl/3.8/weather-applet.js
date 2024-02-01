@@ -17344,17 +17344,25 @@ class Soup3 {
                 AddHeadersToMessage(message, headers);
                 this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, null, (session, result) => {
                     var _a;
-                    const res = this._httpSession.send_and_read_finish(result);
                     const headers = {};
-                    message.get_response_headers().foreach((name, value) => {
-                        headers[name] = value;
-                    });
-                    resolve({
-                        reason_phrase: (_a = message.get_reason_phrase()) !== null && _a !== void 0 ? _a : "",
-                        status_code: message.get_status(),
-                        response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
-                        response_headers: headers
-                    });
+                    let res = null;
+                    try {
+                        res = this._httpSession.send_and_read_finish(result);
+                        message.get_response_headers().foreach((name, value) => {
+                            headers[name] = value;
+                        });
+                    }
+                    catch (e) {
+                        logger_Logger.Error("Error reading response: " + e);
+                    }
+                    finally {
+                        resolve({
+                            reason_phrase: (_a = message.get_reason_phrase()) !== null && _a !== void 0 ? _a : "",
+                            status_code: message.get_status(),
+                            response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
+                            response_headers: headers
+                        });
+                    }
                 });
             }
         });
