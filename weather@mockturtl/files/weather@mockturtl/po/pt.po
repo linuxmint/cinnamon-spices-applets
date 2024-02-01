@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-30 08:55+0000\n"
-"PO-Revision-Date: 2024-02-01 01:51-0100\n"
+"PO-Revision-Date: 2024-02-01 02:42-0100\n"
 "Last-Translator: \n"
 "Language-Team: Português ; Daniel Miranda <dmiranda@gmail.com>, Luiz Rodrigo "
 "<contact@lurodrigo.com>, Zé Bento <bento2000@gmail.com>\n"
@@ -166,22 +166,22 @@ msgstr "Carregando ..."
 
 #: 3.0/applet.js:1329 3.8/weather-applet.js:16189
 msgid "Temperature"
-msgstr "Temperatura:"
+msgstr "Temperatura"
 
 #: 3.0/applet.js:1330 3.8/weather-applet.js:16190
 msgid "Humidity"
-msgstr "Humidade:"
+msgstr "Humidade"
 
 #: 3.0/applet.js:1331 3.8/weather-applet.js:16191
 msgid "Pressure"
-msgstr "Pressão:"
+msgstr "Pressão"
 
 #: 3.0/applet.js:1332 3.8/weather-applet.js:12249 3.8/weather-applet.js:12256
 #: 3.8/weather-applet.js:12257 3.8/weather-applet.js:12263
 #: 3.8/weather-applet.js:14217 3.8/weather-applet.js:14218
 #: 3.8/weather-applet.js:16037
 msgid "Wind"
-msgstr "Vento:"
+msgstr "Vento"
 
 #: 3.0/applet.js:1639
 msgid "Make sure you entered a location or use Automatic location instead"
