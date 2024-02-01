@@ -90,9 +90,9 @@ export class WeatherApplet extends TextIconApplet {
 		} catch (e) {
 			// vertical panel not supported
 		}
-		this.loop.Start();
 		this.OnNetworkConnectivityChanged();
 		NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
+		this.loop.Start();
 		// We need a full rebuild and refresh for these
 		this.config.DataServiceChanged.Subscribe(() => this.RefreshAndRebuild());
 
@@ -162,7 +162,12 @@ export class WeatherApplet extends TextIconApplet {
 				if (this.online === true)
 					break;
 
-				Logger.Info("Internet access now available, resuming operations.");
+				const name =
+					NetworkMonitor.get_default().connectivity == NetworkConnectivity.FULL ? "FULL" :
+					NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
+					: "PORTAL";
+
+				Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, resuming operations.`);
 				this.encounteredError = false;
 				this.loop.ResetErrorCount();
 				this.loop.Resume();
