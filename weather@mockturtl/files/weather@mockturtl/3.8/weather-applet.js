@@ -17399,7 +17399,7 @@ class Soup2 {
         return data;
     }
 }
-const soupLib = imports.gi.Soup.MAJOR_VERSION == 3 ? new Soup3() : new Soup2();
+const soupLib = imports.gi.Soup.SessionAsync != undefined ? new Soup2() : new Soup3();
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
 

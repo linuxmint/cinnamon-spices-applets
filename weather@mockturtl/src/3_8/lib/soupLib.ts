@@ -133,5 +133,5 @@ class Soup2 implements SoupLib {
 	}
 }
 
-
-export const soupLib: SoupLib = imports.gi.Soup.MAJOR_VERSION == 3 ? new Soup3() : new Soup2();
+// SessionAsync is a Soup2 class
+export const soupLib: SoupLib = (imports.gi.Soup as any).SessionAsync != undefined ? new Soup2() : new Soup3();
