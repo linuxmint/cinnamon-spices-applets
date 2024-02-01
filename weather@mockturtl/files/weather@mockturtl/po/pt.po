@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-30 08:55+0000\n"
-"PO-Revision-Date: 2024-02-01 02:42-0100\n"
+"PO-Revision-Date: 2024-02-01 16:18-0100\n"
 "Last-Translator: \n"
 "Language-Team: Português ; Daniel Miranda <dmiranda@gmail.com>, Luiz Rodrigo "
 "<contact@lurodrigo.com>, Zé Bento <bento2000@gmail.com>\n"
@@ -265,7 +265,7 @@ msgstr ""
 #: 3.8/weather-applet.js:13021 3.8/weather-applet.js:14388
 #: 3.8/weather-applet.js:14929
 msgid "Feels Like"
-msgstr "Parece Ser"
+msgstr "Sensação térmica"
 
 #: 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
 #: 3.8/weather-applet.js:14991
@@ -579,16 +579,12 @@ msgstr ""
 "no Looking Glass (Aparência Vidrada)"
 
 #: 3.0/met_norway.js:131 3.8/weather-applet.js:11203
-#, fuzzy
-#| msgid "Cloudy"
 msgid "Cloudiness"
 msgstr "Nublado"
 
 #: 3.0/met_norway.js:280 3.0/met_norway.js:281 3.0/openWeatherMap.js:412
 #: 3.8/weather-applet.js:11040 3.8/weather-applet.js:11351
 #: 3.8/weather-applet.js:11352
-#, fuzzy
-#| msgid "Clear"
 msgid "Clear sky"
 msgstr "Limpo"
 
