@@ -40,7 +40,6 @@
     "type" : "switch",
     "default" : false,
     "description" : "Inhibit screensaver at startup",
-    "tooltip": "(More precisely, 10 seconds after startup, to ensure that the session is correctly launched).",
     "indent": true
  }
 }

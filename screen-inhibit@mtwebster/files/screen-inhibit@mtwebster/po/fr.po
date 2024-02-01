@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-31 23:30+0100\n"
-"PO-Revision-Date: 2024-01-31 23:31+0100\n"
+"POT-Creation-Date: 2024-02-01 20:42+0100\n"
+"PO-Revision-Date: 2024-02-01 20:44+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:19
+#: applet.js:20
 msgid "Currently preventing screensaver"
 msgstr "L'économiseur d'écran ne s'activera pas"
 
-#: applet.js:20
+#: applet.js:21
 msgid "Currently allowing screensaver"
 msgstr "L'économiseur d'écran peut s'activer"
 
-#: applet.js:99
+#: applet.js:100
 msgid "Screensaver settings"
 msgstr "Paramètres de l'économiseur d'écran"
 
 #. settings-schema.json->inhibit-at-startup->description
-#: applet.js:103
+#: applet.js:104
 msgid "Inhibit screensaver at startup"
 msgstr "Inhiber l'économiseur d'écran au démarrage de l'applet"
 
@@ -64,6 +64,10 @@ msgstr ""
 msgid "Power management prevented icon:"
 msgstr "Icône signifiant que l'économiseur d'écran est inhibé :"
 
+#. settings-schema.json->reset-icons->description
+msgid "Reset to default icons"
+msgstr "Rétablir les icônes par défaut"
+
 #. settings-schema.json->head1->description
 msgid "Keybinding"
 msgstr "Raccourci-clavier"
@@ -77,10 +81,9 @@ msgstr ""
 msgid "Startup"
 msgstr "Démarrage"
 
-#. settings-schema.json->inhibit-at-startup->tooltip
-msgid ""
-"(More precisely, 10 seconds after startup, to ensure that the session is "
-"correctly launched)."
-msgstr ""
-"(Plus précisément 10 secondes après le démarrage pour s'assurer que la "
-"session est correctement lancée)."
+#~ msgid ""
+#~ "(More precisely, 10 seconds after startup, to ensure that the session is "
+#~ "correctly launched)."
+#~ msgstr ""
+#~ "(Plus précisément 10 secondes après le démarrage pour s'assurer que la "
+#~ "session est correctement lancée)."

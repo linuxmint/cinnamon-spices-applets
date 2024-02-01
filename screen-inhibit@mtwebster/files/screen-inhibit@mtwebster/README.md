@@ -12,7 +12,7 @@ This applet works out of the box; so you can ignore the settings. But there are 
   * Select the icons.
   * Reset to default icons.
   * Keybinding.
-  * Whether or not to inhibit the screensaver at startup. Please note that inhibition starts 10 seconds after applet startup.
+  * Whether or not to inhibit the screensaver at startup.
 
 ### Translations
 
