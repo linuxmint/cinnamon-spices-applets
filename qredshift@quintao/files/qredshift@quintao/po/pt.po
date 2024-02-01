@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: qredshift@quintao\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-16 03:29-0100\n"
-"PO-Revision-Date: 2024-02-01 16:31-0100\n"
+"PO-Revision-Date: 2024-02-01 16:39-0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -32,7 +32,7 @@ msgstr "REDSHIFT NÃO INSTALADO!"
 
 #: applet.js:305
 msgid "Requires Redshift: yay -S redshift-minimal"
-msgstr "Requer o Redshift: sudo yay -S install redshift"
+msgstr "Requer o Redshift: sudo yay -S redshift-minimal"
 
 #: applet.js:308
 msgid "Requires Redshift: sudo apt-get install redshift"
