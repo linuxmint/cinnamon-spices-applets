@@ -69,7 +69,7 @@ class Soup3 implements SoupLib {
 						})
 					}
 					catch(e) {
-						Logger.Error("Error reading response: " + e);
+						Logger.Error("Error reading http request's response: " + e);
 					}
 					finally {
 						resolve({

@@ -17353,7 +17353,7 @@ class Soup3 {
                         });
                     }
                     catch (e) {
-                        logger_Logger.Error("Error reading response: " + e);
+                        logger_Logger.Error("Error reading http request's response: " + e);
                     }
                     finally {
                         resolve({
