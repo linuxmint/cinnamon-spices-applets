@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-31 23:30+0100\n"
-"PO-Revision-Date: 2024-02-01 08:49-0300\n"
+"POT-Creation-Date: 2024-02-01 20:42+0100\n"
+"PO-Revision-Date: 2024-02-01 17:54-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -18,32 +18,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:19
-msgid "Currently preventing screensaver"
-msgstr "Actualmente impidiendo el salvapantallas"
-
 #: applet.js:20
-msgid "Currently allowing screensaver"
-msgstr "Actualmente permite el salvapantallas"
+msgid "Currently preventing screensaver"
+msgstr "Actualmente impidiendo el protector de pantalla"
 
-#: applet.js:99
+#: applet.js:21
+msgid "Currently allowing screensaver"
+msgstr "Actualmente permite el protector de pantalla"
+
+#: applet.js:100
 msgid "Screensaver settings"
-msgstr "Configuración del salvapantallas"
+msgstr "Configuración del protector de pantalla"
 
 #. settings-schema.json->inhibit-at-startup->description
-#: applet.js:103
+#: applet.js:104
 msgid "Inhibit screensaver at startup"
-msgstr "Inhibir el salvapantallas al arrancar"
+msgstr "Inhibir el protector de pantalla al arrancar"
 
 #. metadata.json->description
 msgid "Click to inhibit the screensaver, click again to remove inhibition"
 msgstr ""
-"Haga clic para inhibir el salvapantallas, haga clic de nuevo para eliminar "
-"la inhibición"
+"Haga clic para inhibir el protector de pantalla, haga clic de nuevo para "
+"eliminar la inhibición"
 
 #. metadata.json->name
 msgid "Screensaver Inhibitor"
-msgstr "Inhibidor del salvapantallas"
+msgstr "Inhibidor del protector de pantalla"
 
 #. settings-schema.json->head->description
 msgid "Icons"
@@ -64,6 +64,10 @@ msgstr ""
 msgid "Power management prevented icon:"
 msgstr "Icono de gestión de energía impedida:"
 
+#. settings-schema.json->reset-icons->description
+msgid "Reset to default icons"
+msgstr "Restablecer los iconos por defecto"
+
 #. settings-schema.json->head1->description
 msgid "Keybinding"
 msgstr "Combinación de teclas"
@@ -72,16 +76,15 @@ msgstr "Combinación de teclas"
 msgid "Set the keybinding for screensaver inhibit"
 msgstr ""
 "Establecer la combinación de teclas para permitir la inhibición del "
-"salvapantallas"
+"protector de pantalla"
 
 #. settings-schema.json->head2->description
 msgid "Startup"
 msgstr "Inicio"
 
-#. settings-schema.json->inhibit-at-startup->tooltip
-msgid ""
-"(More precisely, 10 seconds after startup, to ensure that the session is "
-"correctly launched)."
-msgstr ""
-"(Más concretamente, 10 segundos después del inicio, para garantizar que la "
-"sesión se inicia correctamente)."
+#~ msgid ""
+#~ "(More precisely, 10 seconds after startup, to ensure that the session is "
+#~ "correctly launched)."
+#~ msgstr ""
+#~ "(Más concretamente, 10 segundos después del inicio, para garantizar que "
+#~ "la sesión se inicia correctamente)."
