@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: qredshift@quintao\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-16 03:29-0100\n"
-"PO-Revision-Date: 2024-02-01 16:40-0100\n"
+"PO-Revision-Date: 2024-02-02 18:35-0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -79,7 +79,7 @@ msgstr "Transição para o dia"
 
 #: applet.js:977 applet.js:1002
 msgid "Transition to night"
-msgstr "Transição para o noita"
+msgstr "Transição para a noite"
 
 #: applet.js:978 applet.js:1003
 msgid "Night"
