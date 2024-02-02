@@ -1,3 +1,12 @@
+### v3.5.2~20240124
+  * Prevents display error.
+
+### v3.5.1~20240120
+  * Improves subprocesses (part2).
+
+### v3.5.0~20240119
+  * Improves subprocesses.
+
 ### v3.4.0~20240107
   * Fixes #5352.
   * Added an option in the General tab to display a tooltip or not.

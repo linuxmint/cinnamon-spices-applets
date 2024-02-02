@@ -98,6 +98,7 @@ body:
     - disk-read-and-write-speed@cardsurf @cardsurf
     - download-and-upload-speed@cardsurf @cardsurf
     - duolingo-helper@nodeengineer.com @nodeengineer
+    - Exit@claudiux @claudiux
     - expressvpn@Hukuta @Hukuta
     - feeds@jonbrettdev.wordpress.com @jake1164
     - force-quit@cinnamon.org
@@ -152,6 +153,7 @@ body:
     - officeCenter@scollins @collinss
     - pa-equalizer@jschug.com
     - paneldo@beatlink
+    - PanelTranslator@klangman @klangman
     - PDFManager@cinnamon.org
     - places-bookmarks@dmo60.de
     - places-with-terminal@mtwebster

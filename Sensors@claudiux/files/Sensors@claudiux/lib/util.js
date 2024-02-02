@@ -216,7 +216,8 @@ function spawnCommandLineAsyncIO(command, callback, opts = {}) {
     let subprocess = new Gio.Subprocess({
         argv: argv ? argv : ['bash', '-c', command],
         flags: flags ? flags
-            : Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDIN_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
+            : Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDIN_PIPE | Gio.SubprocessFlags.STDERR_PIPE | GLib.SpawnFlags.DO_NOT_REAP_CHILD | GLib.SpawnFlags.LEAVE_DESCRIPTORS_OPEN
+            //~ : Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDIN_PIPE | Gio.SubprocessFlags.STDERR_PIPE
     });
     subprocess.init(null);
     let cancellable = new Gio.Cancellable();

@@ -89,7 +89,7 @@ export class HttpLib {
 
 		Logger.Verbose("API full response: " + message?.response_body?.toString());
 		if (error != null)
-			Logger.Info("Error calling URL: " + error.reason_phrase + ", " + error?.response?.response_body);
+			Logger.Info(`Error calling URL: ${error.code}, ${error.reason_phrase}, ${error?.response?.response_body ?? "None"}`);
 		return <GenericResponse>{
 			Success: (error == null),
 			Data: (message?.response_body ?? null),

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sound150@claudiux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-09 01:09+0100\n"
-"PO-Revision-Date: 2024-01-09 01:11+0100\n"
+"PO-Revision-Date: 2024-01-18 12:39+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -255,21 +255,21 @@ msgstr "Limiter la taille des infos sur la chanson à"
 #. 5.4->settings-schema.json->middleClickAction->options
 #. 5.4->settings-schema.json->middleShiftClickAction->options
 msgid "Toggle Mute"
-msgstr "Basculer en sourdine"
+msgstr "Basculer la sourdine"
 
 #. 4.6->settings-schema.json->middleClickAction->options
 #. 4.4->settings-schema.json->middleClickAction->options
 #. 5.4->settings-schema.json->middleClickAction->options
 #. 5.4->settings-schema.json->middleShiftClickAction->options
 msgid "Toggle Mute output"
-msgstr "Basculer la sortie en sourdine"
+msgstr "Basculer la sourdine de la sortie"
 
 #. 4.6->settings-schema.json->middleClickAction->options
 #. 4.4->settings-schema.json->middleClickAction->options
 #. 5.4->settings-schema.json->middleClickAction->options
 #. 5.4->settings-schema.json->middleShiftClickAction->options
 msgid "Toggle Mute input"
-msgstr "Basculer l'entrée en sourdine"
+msgstr "Basculer la sourdine de l'entrée"
 
 #. 4.6->settings-schema.json->middleClickAction->options
 #. 3.4->settings-schema.json->middleClickAction->options

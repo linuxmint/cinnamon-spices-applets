@@ -1,3 +1,15 @@
+### v1.15.1~20240201
+  * Reverses certain modifications because of the risk of data loss.
+  * Code cleanup.
+
+### v1.15.0~20240130
+  * Try to minimize disk writes.
+  * Uses class instead of prototype.
+
+### v1.14.0~20240120
+  * Improves sub-processes.
+  * Adds a button "Open the recordings folder" in YT tab (in this applet settings).
+
 ### v1.13.0~20231224
   * Fixes #5246. Display of volume level near icon and fixes scrolling problems with Cinnamon prior to 5.1.
 

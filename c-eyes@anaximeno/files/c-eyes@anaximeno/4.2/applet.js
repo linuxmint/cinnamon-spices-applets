@@ -363,8 +363,7 @@ class Eye extends Applet.Applet {
 
 	update_tooltip() {
 		let tip = this.eye_activated ? _("click to deactivate the eye") : _("click to activate the eye");
-		let complement = this.mouse_click_enable ? _("effects enabled") : _("effects disabled");
-		this.set_applet_tooltip(`${_('TIP')}: ` + tip + '\n - ' + complement + ' -', true);
+		this.set_applet_tooltip(`${_('TIP')}: ` + tip, true);
 	}
 
 	_mouse_circle_create_data_icon(name, color, checkCache) {
