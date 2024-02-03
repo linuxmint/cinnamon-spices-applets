@@ -852,7 +852,7 @@ class VPNSentinel extends Applet.TextIconApplet {
     let flagList = this.s.getValue("flagList");
     this.showLabel();
 
-    if (this.vpnStatus === "off") {
+    if (this.vpnStatus === "transient" || this.vpnStatus === "off") {
       switch(this.labelWhenVPNisOff) {
         case "NoLabel":
           this.hideLabel();
