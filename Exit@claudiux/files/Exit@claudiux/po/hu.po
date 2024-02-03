@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-12 20:33+0100\n"
-"PO-Revision-Date: 2024-01-13 10:04+0100\n"
+"POT-Creation-Date: 2024-01-25 23:19+0100\n"
+"PO-Revision-Date: 2024-02-03 06:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -56,8 +56,8 @@ msgid ""
 "hibernate, reboot or shut down the computer"
 msgstr ""
 "A Cinnamon újraindítása, a képernyő zárolása, felhasználóváltás, "
-"kijelentkezés, felfüggesztés, hibernálás, újraindítás vagy a "
-"számítógép leállítása"
+"kijelentkezés, felfüggesztés, hibernálás, újraindítás vagy a számítógép "
+"leállítása"
 
 #. metadata.json->name
 msgid "Exit"
@@ -124,3 +124,27 @@ msgstr "A Felhasználó váltás opció megjelenítése"
 #. 5.4->settings-schema.json->showLogout->description
 msgid "Show the Log Out option"
 msgstr "A Kijelentkezés opció megjelenítése"
+
+#. 5.4->settings-schema.json->logoutMode->description
+msgid "Log Out Mode"
+msgstr "Kijelentkezési mód"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "With confirmation"
+msgstr "Megerősítéssel"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Without confirmation"
+msgstr "Megerősítés nélkül"
+
+#. 5.4->settings-schema.json->logoutMode->options
+msgid "Force"
+msgstr "Erőltetett"
+
+#. 5.4->settings-schema.json->logoutMode->tooltip
+msgid ""
+"The 'Force' option lets you log out while ignoring inhibitors. Useful when "
+"several sessions are open."
+msgstr ""
+"Az 'Erőltetett' opcióval a gátló tényezők figyelmen kívül hagyásával "
+"kijelentkezhet. Hasznos, ha több munkamenet van nyitva."
