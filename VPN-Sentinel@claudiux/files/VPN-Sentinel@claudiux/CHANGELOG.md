@@ -1,3 +1,7 @@
+### v2.2.1~20240202
+  * Changes icon.png and icon.svg.
+  * Updates README.md
+
 ### v2.2.0~20240120
   * Improves sub-processes.
 
