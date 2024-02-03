@@ -6,17 +6,29 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-21 17:43-0500\n"
-"PO-Revision-Date: 2024-01-21 17:50-0500\n"
+"POT-Creation-Date: 2024-01-21 17:43-0500\n"
+"PO-Revision-Date: 2024-02-03 07:11+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language-Team: \n"
+"Language: hu\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #: 3.2/applet.js:130 5.4/applet.js:300
@@ -328,12 +340,12 @@ msgstr "Klasszikus"
 #. 3.2->settings-schema.json->iconTheme->options
 #. 5.4->settings-schema.json->iconTheme->options
 msgid "Yaru Light"
-msgstr ""
+msgstr "Yaru Világos"
 
 #. 3.2->settings-schema.json->iconTheme->options
 #. 5.4->settings-schema.json->iconTheme->options
 msgid "Yaru Dark"
-msgstr ""
+msgstr "Yaru Sötét"
 
 #. 3.2->settings-schema.json->head2->description
 #. 5.4->settings-schema.json->low_alert->title
