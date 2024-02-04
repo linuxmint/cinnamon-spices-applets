@@ -2,7 +2,7 @@
     "uuid": "directory-menu@torchipeppo",
     "name": "Directory Menu",
     "description": "Show a directory in a dropdown menu",
-    "version": "0.3",
+    "version": "0.4",
     "author": "torchipeppo",
     "max-instances": "-1"
 }

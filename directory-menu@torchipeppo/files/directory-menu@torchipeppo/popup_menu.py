@@ -20,6 +20,7 @@ KNOWN ISSUES
 
 #!/usr/bin/python3
 
+import subprocess
 import sys
 import json
 
@@ -136,12 +137,17 @@ class Cassettone:
             "uri": uri,
             "timestamp": timestamp,
         }))
+        subprocess.run(['/usr/bin/xdg-open', uri], check=False)
 
     def open_terminal_at_path(self, path):
         print(json.dumps({
             "action": "open_terminal_at_path",
             "path": path,
         }))
+        terminal_preferences = Gio.Settings.new("org.cinnamon.desktop.default-applications.terminal")
+        argv = [terminal_preferences.get_string("exec")]
+        spawn_flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.STDOUT_TO_DEV_NULL | GLib.SpawnFlags.STDERR_TO_DEV_NULL
+        GLib.spawn_async(working_directory=path, argv=argv, flags=spawn_flags)
 
     def destroy_subitem_later(self, subItem):
         def g2():

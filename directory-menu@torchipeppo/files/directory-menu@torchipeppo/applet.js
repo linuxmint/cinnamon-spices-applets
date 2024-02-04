@@ -46,31 +46,6 @@ class CassettoneApplet extends Applet.IconApplet {
         this.actor.connect('button-release-event', Lang.bind(this, this.on_button_release_event));
     }
 
-    // essentially an independent JS translation of xapp_favorites_launch from the Favorites Xapp.
-    launch(uri, timestamp) {
-        let display = Gdk.Display.get_default();
-        let launch_context = display.get_app_launch_context();
-        launch_context.set_timestamp(timestamp);
-        Gio.AppInfo.launch_default_for_uri_async(uri, launch_context, null, this.launch_callback);
-    }
-
-    // emulates how nemo handles opening in terminal (using the same flags as Util.spawn)
-    open_terminal_at_path(path) {
-        let gnome_terminal_preferences = Gio.Settings.new("org.cinnamon.desktop.default-applications.terminal");
-        let default_terminal = gnome_terminal_preferences.get_string("exec");
-        let argv = [default_terminal];
-        let spawn_flags = GLib.SpawnFlags.SEARCH_PATH
-                    | GLib.SpawnFlags.STDOUT_TO_DEV_NULL
-                    | GLib.SpawnFlags.STDERR_TO_DEV_NULL;
-        GLib.spawn_async(path, argv, null, spawn_flags, null);
-    }
-
-    launch_callback(source_object, result) {
-        if (!Gio.AppInfo.launch_default_for_uri_finish(result)) {
-            log("An error has occurred while launching an item of the Directory Menu.")
-        }
-    }
-
     normalize_tilde(path) {
         if (path[0] == "~") {
             path = "file://" + GLib.get_home_dir() + path.slice(1);
@@ -165,25 +140,7 @@ class CassettoneApplet extends Applet.IconApplet {
             "orientation": o,
         }
 
-        Util.spawn_async(
-            ['python3', `${this.metadata.path}/popup_menu.py`, JSON.stringify(args)],
-            (response) => {
-                if (response) {  // empty response signifies no action
-                    response = JSON.parse(response);
-                    if (response !== null) {
-                        if (response.action == "launch_default_for_uri") {
-                            this.launch(response.uri, response.timestamp);
-                        }
-                        else if (response.action == "open_terminal_at_path") {
-                            this.open_terminal_at_path(response.path);
-                        }
-                        else {
-                            log("Python-based menu returned unknown action " + response.action)
-                        }
-                    }
-                }
-            }
-        );
+        Util.spawn_async(['python3', `${this.metadata.path}/popup_menu.py`, JSON.stringify(args)]);
 
         return true;
     }
