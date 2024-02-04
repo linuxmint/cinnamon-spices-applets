@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-04 22:10+0000\n"
+"PO-Revision-Date: 2024-02-04 18:56-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+msgid "Directory Menu"
+msgstr "Menu de Diretórios"
+
+#. metadata.json->description
+msgid "Quickly navigate through directories on your system using a dropdown menu."
+msgstr "Navegue rapidamente através dos diretórios do seu sistema utilizando um menu dropdown."
+
+#. settings-schema.json->starting-uri->description
+msgid "Base Directory"
+msgstr "Diretório base"
+
+#. settings-schema.json->icon-name->description
+msgid "Icon (hover here for info!)"
+msgstr "Ícone"
+
+#. settings-schema.json->icon-name->tooltip
+msgid "Must be an icon name (no path), and should be symbolic."
+msgstr "Precisa ser o nome de um ícone."
+
+#. settings-schema.json->tooltip->description
+msgid "Tooltip text"
+msgstr "Texto da dica"
+
+#. settings-schema.json->show-hidden->description
+msgid "Include hidden files"
+msgstr "Incluir ficheiros ocultos"
+
+#. popup_menu.py:71
+msgid "Open Folder"
+msgstr "Abrir pasta"
+
+#. popup_menu.py:76
+msgid "Open in Terminal"
+msgstr "Abrir no terminal"
