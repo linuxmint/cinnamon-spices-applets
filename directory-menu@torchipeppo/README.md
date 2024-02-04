@@ -20,7 +20,6 @@ Download or clone this repo, then put the `directory-menu@torchipeppo` directory
 
 Developed, tested and extensively used by the author on Cinnamon 5.0.7.
 
-Also tested successfully on Cinnamon 5.2.
+Also tested successfully on Cinnamon 5.2 and Cinnamon 6.0.
 
-As of applet version 0.2, it should work on Cinnamon 6.0 (and previous) as well.
-At least, it does on the author's VMs. Further tests are pending.
+May work on some previous versions, but it's untested there, so there's no guarantee.
