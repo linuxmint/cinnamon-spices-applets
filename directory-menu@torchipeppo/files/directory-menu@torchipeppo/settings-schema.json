@@ -1,27 +1,24 @@
 {
     "starting-uri": {
-       "type": "filechooser",
-       "default" : "~",
-       "description" : "Base Directory",
-       "select-dir": true
+        "type": "filechooser",
+        "default": "~",
+        "description": "Base Directory",
+        "select-dir": true
     },
-
     "icon-name": {
         "type": "iconfilechooser",
-        "default" : "folder-symbolic",
-        "description" : "Icon (hover here for info!)",
+        "default": "folder-symbolic",
+        "description": "Icon (hover here for info!)",
         "tooltip": "Must be an icon name (no path), and should be symbolic."
     },
-
     "tooltip": {
         "type": "entry",
-        "default" : "Directory Menu",
-        "description" : "Tooltip text"
+        "default": "Directory Menu",
+        "description": "Tooltip text"
     },
-
     "show-hidden": {
         "type": "switch",
-        "default" : false,
-        "description" : "Include hidden files"
+        "default": false,
+        "description": "Include hidden files"
     }
 }
