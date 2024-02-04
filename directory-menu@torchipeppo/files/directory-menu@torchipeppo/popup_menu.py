@@ -23,12 +23,22 @@ KNOWN ISSUES
 import subprocess
 import sys
 import json
+import os
 
 import gi
 gi.require_version("Gtk", "3.0")
 gi.require_version("Gdk", "3.0")
 gi.require_version("GLib", "2.0")
 from gi.repository import Gio, Gtk, Gdk, GLib
+
+import gettext
+UUID = "directory-menu@torchipeppo"
+HOME = os.path.expanduser("~")
+gettext.bindtextdomain(UUID, os.path.join(HOME, ".local/share/locale"))
+gettext.textdomain(UUID)
+
+def _(message: str) -> str:
+    return gettext.gettext(message)
 
 def log(message):
     with open("/tmp/DM-remake-log.txt", "a") as f:
@@ -58,12 +68,12 @@ class Cassettone:
         # // First, the two directory actions: Open Folder and Open In Terminal
 
         open_image = Gtk.Image.new_from_icon_name("folder", Gtk.IconSize.MENU)
-        open_item = self.new_image_menu_item("Open Folder", open_image)
+        open_item = self.new_image_menu_item(_("Open Folder"), open_image)
         open_item.connect("activate", lambda _: self.launch(directory.get_uri(), Gtk.get_current_event_time()))
         menu.append(open_item)
 
         term_image = Gtk.Image.new_from_icon_name("terminal", Gtk.IconSize.MENU)
-        term_item = self.new_image_menu_item("Open in Terminal", term_image)
+        term_item = self.new_image_menu_item(_("Open in Terminal"), term_image)
         term_item.connect("activate", lambda _: self.open_terminal_at_path(directory.get_path()))
         menu.append(term_item)
 
