@@ -45,3 +45,11 @@ msgstr ""
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr ""
+
+#. popup_menu.py:71
+msgid "Open Folder"
+msgstr ""
+
+#. popup_menu.py:76
+msgid "Open in Terminal"
+msgstr ""
