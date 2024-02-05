@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-04 13:37+0100\n"
-"PO-Revision-Date: 2024-02-05 17:34-0300\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 15:38-0500\n"
+"PO-Revision-Date: 2024-02-05 15:40-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -18,18 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:123
+#: applet.js:127
 msgid "sct is now at"
 msgstr "sct está ahora en"
 
-#: applet.js:127
+#: applet.js:131
 msgid "sct not found"
 msgstr "no se ha encontrado sct"
 
-#: applet.js:128
+#: applet.js:132
 msgid "Please install sct to set the color temperature with this applet."
-msgstr ""
-"Por favor, instale sct para ajustar la temperatura de color con este applet."
+msgstr "Por favor, instale sct para ajustar la temperatura de color con este applet."
 
 #. metadata.json->name
 msgid "SCT Toggle"
@@ -38,12 +36,10 @@ msgstr "Conmutador SCT"
 #. metadata.json->description
 msgid ""
 "Toggle screen temperatures with sct. \n"
-"Set up to 7 custom color temperatures and toggle through by clicking on the "
-"applet"
+"Set up to 7 custom color temperatures and toggle through by clicking on the applet"
 msgstr ""
 "Cambie la temperatura de color de la pantalla con sct.\n"
-"Configure hasta 7 temperaturas de color y cambia entre ellas haciendo clic "
-"en el applet"
+"Configure hasta 7 temperaturas de color y cambia entre ellas haciendo clic en el applet"
 
 #. settings-schema.json->head->description
 msgid "Color Temperatur Steps"
@@ -55,12 +51,8 @@ msgstr "Temperatura de color en el paso 1"
 
 #. settings-schema.json->colorStep1->tooltip
 #. settings-schema.json->colorStep2->tooltip
-msgid ""
-"Add a value between 1000 and 10000, where 1000 is red, 6500 is daylight and "
-"10000 is blue"
-msgstr ""
-"Añade un valor entre 1000 y 10000, donde 1000 es rojo, 6500 es luz de día y "
-"10000 es azul"
+msgid "Add a value between 1000 and 10000, where 1000 is red, 6500 is daylight and 10000 is blue"
+msgstr "Añade un valor entre 1000 y 10000, donde 1000 es rojo, 6500 es luz de día y 10000 es azul"
 
 #. settings-schema.json->colorStep2->description
 msgid "Color temperatur at step 2"
@@ -104,9 +96,7 @@ msgstr "El icono que se utilizará en el panel"
 
 #. settings-schema.json->iconName->tooltip
 msgid "Select an icon file, or you can type an icon name into the entry box"
-msgstr ""
-"Seleccione un archivo de iconos o escriba un nombre de icono en el cuadro "
-"de entrada"
+msgstr "Seleccione un archivo de iconos o escriba un nombre de icono en el cuadro de entrada"
 
 #. settings-schema.json->resetIconName->description
 msgid "reset icon name"
