@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-16 15:16-0400\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 15:52-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -30,12 +30,8 @@ msgid "Performance"
 msgstr "Prestazioni"
 
 #: 5.4/applet.js:58 5.4/applet.js:64
-msgid ""
-"Please make sure the power-profiles-daemon package is installed and the "
-"service is running."
-msgstr ""
-"Assicurati che il pacchetto power-profiles-daemon sia installato e che il "
-"servizio sia in esecuzione."
+msgid "Please make sure the power-profiles-daemon package is installed and the service is running."
+msgstr "Assicurati che il pacchetto power-profiles-daemon sia installato e che il servizio sia in esecuzione."
 
 #: 5.4/applet.js:59
 msgid "exception:"
@@ -54,12 +50,8 @@ msgid "Active Profile Holds:"
 msgstr "Conservazione del Profilo Attivo:"
 
 #. metadata.json->description
-msgid ""
-"An applet to modify the current system power profile as determined by power-"
-"profiles-daemon"
-msgstr ""
-"Un'applet per modificare il profilo energetico corrente del sistema come "
-"determinato da power-profiles-daemon"
+msgid "An applet to modify the current system power profile as determined by power-profiles-daemon"
+msgstr "Un'applet per modificare il profilo energetico corrente del sistema come determinato da power-profiles-daemon"
 
 #. metadata.json->name
 msgid "Power Profiles"
@@ -75,9 +67,7 @@ msgstr "Profilo precedente"
 
 #. 5.4->settings-schema.json->previousProfileKey->tooltip
 msgid "Set keybinding(s) to switch to previous power profile."
-msgstr ""
-"Imposta le combinazioni di tasti per passare al profilo di alimentazione "
-"precedente."
+msgstr "Imposta le combinazioni di tasti per passare al profilo di alimentazione precedente."
 
 #. 5.4->settings-schema.json->nextProfileKey->description
 msgid "Next profile"
@@ -85,9 +75,7 @@ msgstr "Profilo successivo"
 
 #. 5.4->settings-schema.json->nextProfileKey->tooltip
 msgid "Set keybinding(s) to switch to next power profile."
-msgstr ""
-"Imposta le combinazioni di tasti per passare al profilo di alimentazione "
-"successivo."
+msgstr "Imposta le combinazioni di tasti per passare al profilo di alimentazione successivo."
 
 #. 5.4->settings-schema.json->cycleProfiles->description
 msgid "Cycle through profiles when using keyboard shortcuts"
@@ -95,28 +83,18 @@ msgstr "Scorri i profili quando usi le scorciatoie da tastiera"
 
 #. 5.4->settings-schema.json->cycleProfiles->tooltip
 msgid ""
-"If enabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the next profile would be "
-"'Performance' (or 'Balanced' on some systems).\n"
+"If enabled, if the current profile is 'Power Saver' and the 'Previous profile' keyboard shortcut is used, the next profile would be 'Performance' (or 'Balanced' on some systems).\n"
 "\n"
-"If disabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the profile would not change."
+"If disabled, if the current profile is 'Power Saver' and the 'Previous profile' keyboard shortcut is used, the profile would not change."
 msgstr ""
-"Se abilitato, se il profilo corrente è \"Risparmio Energetico\" e viene "
-"utilizzata la scorciatoia da tastiera \"Profilo precedente\", il profilo "
-"successivo sarà \"Prestazioni\" (o \"Bilanciato\" su alcuni sistemi).\n"
+"Se abilitato, se il profilo corrente è \"Risparmio Energetico\" e viene utilizzata la scorciatoia da tastiera \"Profilo precedente\", il profilo successivo sarà \"Prestazioni\" (o \"Bilanciato\" su alcuni sistemi).\n"
 "\n"
-"Se disabilitato, se il profilo corrente è \"Risparmio Energetico\" e viene "
-"utilizzata la scorciatoia da tastiera \"Profilo precedente\", il profilo "
-"non cambierà."
+"Se disabilitato, se il profilo corrente è \"Risparmio Energetico\" e viene utilizzata la scorciatoia da tastiera \"Profilo precedente\", il profilo non cambierà."
 
 #. 5.4->settings-schema.json->showOSD->description
 msgid "On-screen display for keyboard shortcuts"
 msgstr "Visualizzazione su schermo (OSD) per le scorciatoie da tastiera"
 
 #. 5.4->settings-schema.json->showOSD->tooltip
-msgid ""
-"Show on-screen display of the new profile when using the keyboard shortcuts"
-msgstr ""
-"Mostra la visualizzazione su schermo (OSD) del nuovo profilo quando si "
-"utilizzano le scorciatoie da tastiera"
+msgid "Show on-screen display of the new profile when using the keyboard shortcuts"
+msgstr "Mostra la visualizzazione su schermo (OSD) del nuovo profilo quando si utilizzano le scorciatoie da tastiera"

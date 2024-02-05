@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-16 15:16-0400\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 15:52-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -30,12 +30,8 @@ msgid "Performance"
 msgstr "Performance"
 
 #: 5.4/applet.js:58 5.4/applet.js:64
-msgid ""
-"Please make sure the power-profiles-daemon package is installed and the "
-"service is running."
-msgstr ""
-"Assurez-vous que le paquet power-profiles-daemon est installé et que le "
-"service est en cours d'exécution."
+msgid "Please make sure the power-profiles-daemon package is installed and the service is running."
+msgstr "Assurez-vous que le paquet power-profiles-daemon est installé et que le service est en cours d'exécution."
 
 #: 5.4/applet.js:59
 msgid "exception:"
@@ -54,12 +50,8 @@ msgid "Active Profile Holds:"
 msgstr "Le Profil actif détient :"
 
 #. metadata.json->description
-msgid ""
-"An applet to modify the current system power profile as determined by power-"
-"profiles-daemon"
-msgstr ""
-"Une applet pour modifier le profil d'alimentation actuel du système tel que "
-"déterminé par power-profiles-daemon"
+msgid "An applet to modify the current system power profile as determined by power-profiles-daemon"
+msgstr "Une applet pour modifier le profil d'alimentation actuel du système tel que déterminé par power-profiles-daemon"
 
 #. metadata.json->name
 msgid "Power Profiles"
@@ -75,9 +67,7 @@ msgstr "Profil précédent"
 
 #. 5.4->settings-schema.json->previousProfileKey->tooltip
 msgid "Set keybinding(s) to switch to previous power profile."
-msgstr ""
-"Définir le ou les raccourcis-clavier pour passer au profil d'alimentation "
-"précédent."
+msgstr "Définir le ou les raccourcis-clavier pour passer au profil d'alimentation précédent."
 
 #. 5.4->settings-schema.json->nextProfileKey->description
 msgid "Next profile"
@@ -85,9 +75,7 @@ msgstr "Profil suivant"
 
 #. 5.4->settings-schema.json->nextProfileKey->tooltip
 msgid "Set keybinding(s) to switch to next power profile."
-msgstr ""
-"Définir le ou les raccourcis-clavier pour passer au profil d'alimentation "
-"suivant."
+msgstr "Définir le ou les raccourcis-clavier pour passer au profil d'alimentation suivant."
 
 #. 5.4->settings-schema.json->cycleProfiles->description
 msgid "Cycle through profiles when using keyboard shortcuts"
@@ -95,28 +83,18 @@ msgstr "Parcourir les profils lors de l'utilisation de raccourcis clavier"
 
 #. 5.4->settings-schema.json->cycleProfiles->tooltip
 msgid ""
-"If enabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the next profile would be "
-"'Performance' (or 'Balanced' on some systems).\n"
+"If enabled, if the current profile is 'Power Saver' and the 'Previous profile' keyboard shortcut is used, the next profile would be 'Performance' (or 'Balanced' on some systems).\n"
 "\n"
-"If disabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the profile would not change."
+"If disabled, if the current profile is 'Power Saver' and the 'Previous profile' keyboard shortcut is used, the profile would not change."
 msgstr ""
-"S'il est activé, si le profil actuel est « Économie d'énergie » et que le "
-"raccourci clavier \"Profil précédent\" est utilisé, le profil suivant sera « "
-"Performance » (ou « Équilibré » sur certains systèmes).\n"
+"S'il est activé, si le profil actuel est « Économie d'énergie » et que le raccourci clavier \"Profil précédent\" est utilisé, le profil suivant sera « Performance » (ou « Équilibré » sur certains systèmes).\n"
 "\n"
-"S'il est désactivé, si le profil actuel est « Économie d'énergie » et que le "
-"raccourci clavier « Profil précédent » est utilisé, le profil ne changera "
-"pas."
+"S'il est désactivé, si le profil actuel est « Économie d'énergie » et que le raccourci clavier « Profil précédent » est utilisé, le profil ne changera pas."
 
 #. 5.4->settings-schema.json->showOSD->description
 msgid "On-screen display for keyboard shortcuts"
 msgstr "Afficher un OSD lors de l'utilisation des raccourcis-clavier"
 
 #. 5.4->settings-schema.json->showOSD->tooltip
-msgid ""
-"Show on-screen display of the new profile when using the keyboard shortcuts"
-msgstr ""
-"Afficher à l'écran le nouveau profil lors de l'utilisation des raccourcis-"
-"clavier"
+msgid "Show on-screen display of the new profile when using the keyboard shortcuts"
+msgstr "Afficher à l'écran le nouveau profil lors de l'utilisation des raccourcis-clavier"
