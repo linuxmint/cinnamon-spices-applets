@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-16 15:16-0400\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 15:52-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -30,12 +30,8 @@ msgid "Performance"
 msgstr "Teljesítmény"
 
 #: 5.4/applet.js:58 5.4/applet.js:64
-msgid ""
-"Please make sure the power-profiles-daemon package is installed and the "
-"service is running."
-msgstr ""
-"Győződjön meg arról, hogy telepítve van a power-profiles-daemon csomag, és "
-"hogy a szolgáltatás fut."
+msgid "Please make sure the power-profiles-daemon package is installed and the service is running."
+msgstr "Győződjön meg arról, hogy telepítve van a power-profiles-daemon csomag, és hogy a szolgáltatás fut."
 
 #: 5.4/applet.js:59
 msgid "exception:"
@@ -54,12 +50,8 @@ msgid "Active Profile Holds:"
 msgstr "Aktív profil megtartása:"
 
 #. metadata.json->description
-msgid ""
-"An applet to modify the current system power profile as determined by power-"
-"profiles-daemon"
-msgstr ""
-"Kisalkalmazás, amely lehetővé teszi a jelenlegi rendszer a power-profiles-"
-"daemon által meghatározott energiaprofil módosítását"
+msgid "An applet to modify the current system power profile as determined by power-profiles-daemon"
+msgstr "Kisalkalmazás, amely lehetővé teszi a jelenlegi rendszer a power-profiles-daemon által meghatározott energiaprofil módosítását"
 
 #. metadata.json->name
 msgid "Power Profiles"
@@ -83,8 +75,7 @@ msgstr "Következő profil"
 
 #. 5.4->settings-schema.json->nextProfileKey->tooltip
 msgid "Set keybinding(s) to switch to next power profile."
-msgstr ""
-"Gyorsbillentyű beállítása a következő energiaprofilra történő váltáshoz."
+msgstr "Gyorsbillentyű beállítása a következő energiaprofilra történő váltáshoz."
 
 #. 5.4->settings-schema.json->cycleProfiles->description
 msgid "Cycle through profiles when using keyboard shortcuts"
@@ -92,28 +83,18 @@ msgstr "Profilok közötti váltás gyorsbillentyű használatakor"
 
 #. 5.4->settings-schema.json->cycleProfiles->tooltip
 msgid ""
-"If enabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the next profile would be "
-"'Performance' (or 'Balanced' on some systems).\n"
+"If enabled, if the current profile is 'Power Saver' and the 'Previous profile' keyboard shortcut is used, the next profile would be 'Performance' (or 'Balanced' on some systems).\n"
 "\n"
-"If disabled, if the current profile is 'Power Saver' and the 'Previous "
-"profile' keyboard shortcut is used, the profile would not change."
+"If disabled, if the current profile is 'Power Saver' and the 'Previous profile' keyboard shortcut is used, the profile would not change."
 msgstr ""
-"Ha engedélyezve van, és a jelenleg az „Energiatakarékos” profil van "
-"használatban, továbbá a „Korábbi profil” gyorsbillentyű kerül használatra, "
-"akkor a következő „Teljesítmény” profil lesz (vagy „Kiegyensúlyozott” néven "
-"elérhető néhány rendszeren).\n"
+"Ha engedélyezve van, és a jelenleg az „Energiatakarékos” profil van használatban, továbbá a „Korábbi profil” gyorsbillentyű kerül használatra, akkor a következő „Teljesítmény” profil lesz (vagy „Kiegyensúlyozott” néven elérhető néhány rendszeren).\n"
 "\n"
-"Ha le van tiltva, és a jelenlegi „Energiatakarékos” profil, valamint a "
-"„Korábbi profil” gyorsbillentyű kerül használatra, akkor a profil nem fog "
-"változni."
+"Ha le van tiltva, és a jelenlegi „Energiatakarékos” profil, valamint a „Korábbi profil” gyorsbillentyű kerül használatra, akkor a profil nem fog változni."
 
 #. 5.4->settings-schema.json->showOSD->description
 msgid "On-screen display for keyboard shortcuts"
 msgstr "Gyorsbillentyűk megjelenítése a képernyőn"
 
 #. 5.4->settings-schema.json->showOSD->tooltip
-msgid ""
-"Show on-screen display of the new profile when using the keyboard shortcuts"
-msgstr ""
-"Képernyőn az új profil megjelenítése a gyorsbillentyűvel történő váltáskor"
+msgid "Show on-screen display of the new profile when using the keyboard shortcuts"
+msgstr "Képernyőn az új profil megjelenítése a gyorsbillentyűvel történő váltáskor"
