@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-18 11:06+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 14:46-0500\n"
 "PO-Revision-Date: 2022-05-25 15:32+0200\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -17,106 +17,106 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
 
-#: applet.js:102
+#: applet.js:108
 msgid "Edit Applications"
 msgstr "Alkalmazások szerkesztése"
 
-#: applet.js:694 applet.js:948
+#: applet.js:737 applet.js:1031
 msgid "Delete"
 msgstr "Törlés"
 
-#: applet.js:695 applet.js:949
+#: applet.js:738 applet.js:1032
 msgid "Edit"
 msgstr "Szerkesztés"
 
-#: applet.js:696 applet.js:950
+#: applet.js:739 applet.js:1033
 msgid "Cancel"
 msgstr "Mégse"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#: dialogs.py:35 widgets.py:35
+#: dialogs.py:45 widgets.py:36 dialogs.glade:93 dialogs.glade:326
 msgid "Name"
 msgstr "Név"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:41
+#: dialogs.py:51 dialogs.glade:104
 msgid "Group"
 msgstr "Csoport"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:42 widgets.py:42
+#: dialogs.py:52 widgets.py:43 dialogs.glade:115
 msgid "Command"
 msgstr "Parancs"
 
-#: dialogs.py:178
+#: dialogs.py:203
 msgid "The name cannot be empty"
 msgstr "A név nem lehet üres"
 
-#: dialogs.py:183
+#: dialogs.py:208
 msgid "The name is already used"
 msgstr "A megadott név már használatban van"
 
-#: dialogs.py:190
+#: dialogs.py:215
 msgid "Valid name"
 msgstr "Érvényes név"
 
-#: dialogs.py:196
+#: dialogs.py:221
 msgid "Valid command"
 msgstr "Érvényes parancs"
 
-#: dialogs.py:199
+#: dialogs.py:224
 msgid "The command is not valid"
 msgstr "Az elindítandó parancs nem érvényes"
 
-#: dialogs.py:211
+#: dialogs.py:236
 msgid "Which data should be replaced from *.desktop file?"
 msgstr "Milyen adatok legyenek kicserélve a *.desktop fájlban?"
 
-#: dialogs.py:256
+#: dialogs.py:281 dialogs.glade:561
 msgid "really delete?"
 msgstr "valóban törli?"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
 #. settings-schema.json->launcher-icon->description
-#: widgets.py:28
+#: widgets.py:29
 msgid "Icon"
 msgstr "Ikon"
 
-#: widgets.py:116
+#: widgets.py:125
 msgid "Add application"
 msgstr "Alkalmazás hozzáadása"
 
-#: widgets.py:117
+#: widgets.py:126
 msgid "Add new entry"
 msgstr "Új bejegyzés hozzáadása"
 
-#: widgets.py:121
+#: widgets.py:130
 msgid "Add separator"
 msgstr "Elválasztó hozzáadása"
 
-#: widgets.py:129
+#: widgets.py:138
 msgid "Remove selected entry"
 msgstr "Kijelölt bejegyzés eltávolítása"
 
-#: widgets.py:135
+#: widgets.py:144
 msgid "Edit selected entry"
 msgstr "Kijelölt bejegyzés szerkesztése"
 
-#: widgets.py:141
+#: widgets.py:150
 msgid "Duplicate selected entry"
 msgstr "Kijelölt bejegyzés másolása"
 
-#: widgets.py:147
+#: widgets.py:156
 msgid "Move selected entry up"
 msgstr "Kijelölt bejegyzés mozgatása fel"
 
-#: widgets.py:153
+#: widgets.py:162
 msgid "Move selected entry down"
 msgstr "Kijelölt bejegyzés mozgatása le"
 
-#: widgets.py:316
+#: widgets.py:323
 msgid "Separator"
 msgstr "Elválasztó"
 
@@ -187,9 +187,7 @@ msgstr "Rögzített szélességű menü"
 
 #. settings-schema.json->fixed-menu-width->tooltip
 msgid "Based on the largest submenu item, to prevent menu width flickering"
-msgstr ""
-"A legszélesebb almenü alapján kiválasztott szélességgel elkerülhető menü "
-"urgálása"
+msgstr "A legszélesebb almenü alapján kiválasztott szélességgel elkerülhető menü urgálása"
 
 #. settings-schema.json->visible-app-icons->description
 msgid "Show Application Icons"

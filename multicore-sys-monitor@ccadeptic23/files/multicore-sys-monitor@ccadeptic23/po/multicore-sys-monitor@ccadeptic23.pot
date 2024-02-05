@@ -1,147 +1,145 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# gogo <trebelnik2@gmail.com>, 2017.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Multi-Core System Monitor 1.5\n"
+"Project-Id-Version: multicore-sys-monitor@ccadeptic23 1.9.4\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2024-02-05 14:48-0500\n"
-"PO-Revision-Date: 2019-01-22 23:49+0100\n"
-"Last-Translator: gogo <trebelnik2@gmail.com>\n"
-"Language-Team: Croatian\n"
-"Language: hr\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: 3.2/DataProviders.js:107 3.2/prefs.js:187 4.0/DataProviders.js:55
 #: 4.0/prefs.js:303 3.4/DataProviders.js:58 3.4/prefs.js:195
 #: 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/prefsui.glade:504
 #: 4.0/prefsui.glade:580 3.4/prefsui.glade:434 3.0/prefsui.glade:452
 msgid "CPU"
-msgstr "CPU"
+msgstr ""
 
 #: 3.2/DataProviders.js:113 4.0/DataProviders.js:123 3.4/DataProviders.js:126
 #: 3.0/DataProviders.js:113
 msgid "------------- CPU ------------"
-msgstr "--------------CPU-------------"
+msgstr ""
 
 #: 3.2/DataProviders.js:117 4.0/DataProviders.js:126 3.4/DataProviders.js:129
 #: 3.0/DataProviders.js:117
 msgid "Core"
-msgstr "Jezgra"
+msgstr ""
 
 #: 3.2/DataProviders.js:157 4.0/DataProviders.js:138 3.4/DataProviders.js:141
 #: 3.0/DataProviders.js:157
 msgid "MEM"
-msgstr "MEM"
+msgstr ""
 
 #: 3.2/DataProviders.js:163 4.0/DataProviders.js:158 3.4/DataProviders.js:161
 #: 3.0/DataProviders.js:163
 msgid "----------- Memory -----------"
-msgstr "-----------MEMORIJA-----------"
+msgstr ""
 
 #: 3.2/DataProviders.js:164 3.0/DataProviders.js:164
 msgid "Usedup:"
-msgstr "Iskorišteno:\t\t"
+msgstr ""
 
 #: 3.2/DataProviders.js:165 4.0/DataProviders.js:159 3.4/DataProviders.js:162
 #: 3.0/DataProviders.js:165
 msgid "Cached:"
-msgstr "Predmemorija:\t"
+msgstr ""
 
 #: 3.2/DataProviders.js:166 4.0/DataProviders.js:159 3.4/DataProviders.js:162
 #: 3.0/DataProviders.js:166
 msgid "Buffer:"
-msgstr "Međuspremnik:\t"
+msgstr ""
 
 #: 3.2/DataProviders.js:167 4.0/DataProviders.js:159 3.4/DataProviders.js:162
 #: 3.0/DataProviders.js:167
 msgid "Free:"
-msgstr "Slobodno:\t\t"
+msgstr ""
 
 #: 3.2/DataProviders.js:194 4.0/DataProviders.js:173 3.4/DataProviders.js:176
 #: 3.0/DataProviders.js:194
 msgid "SWAP"
-msgstr "SWAP"
+msgstr ""
 
 #: 3.2/DataProviders.js:199 4.0/DataProviders.js:193 3.4/DataProviders.js:194
 #: 3.0/DataProviders.js:199
 msgid "------------ Swap ------------"
-msgstr "-------------SWAP-------------"
+msgstr ""
 
 #: 3.2/DataProviders.js:200 4.0/DataProviders.js:194 3.4/DataProviders.js:195
 #: 3.0/DataProviders.js:200 3.2/prefsui.glade:837 4.0/prefsui.glade:907
 #: 3.4/prefsui.glade:761 3.0/prefsui.glade:785
 msgid "Swap"
-msgstr "Swap:"
+msgstr ""
 
 #: 3.2/DataProviders.js:264 4.0/DataProviders.js:204 3.4/DataProviders.js:205
 #: 3.0/DataProviders.js:264
 msgid "NET"
-msgstr "MREŽA"
+msgstr ""
 
 #: 3.2/DataProviders.js:305 4.0/DataProviders.js:287 3.4/DataProviders.js:289
 #: 3.0/DataProviders.js:305
 msgid "---------- Networks ----------"
-msgstr "------------MREŽA-------------"
+msgstr ""
 
 #: 3.2/DataProviders.js:308 4.0/DataProviders.js:298 3.4/DataProviders.js:300
 #: 3.0/DataProviders.js:308
 msgid "Down:"
-msgstr "Preuzimanje:"
+msgstr ""
 
 #: 3.2/DataProviders.js:308 3.2/DataProviders.js:309 3.0/DataProviders.js:308
 #: 3.0/DataProviders.js:309
 msgid "(KiB/s)"
-msgstr "(KiB/s)"
+msgstr ""
 
 #: 3.2/DataProviders.js:309 4.0/DataProviders.js:299 3.4/DataProviders.js:301
 #: 3.0/DataProviders.js:309
 msgid "Up:"
-msgstr "Slanje:"
+msgstr ""
 
 #: 3.2/DataProviders.js:382 4.0/DataProviders.js:315 3.4/DataProviders.js:317
 #: 3.0/DataProviders.js:382
 msgid "DISK"
-msgstr "DISK"
+msgstr ""
 
 #: 3.2/DataProviders.js:408 4.0/DataProviders.js:376 3.4/DataProviders.js:378
 #: 3.0/DataProviders.js:408
 msgid "------------ Disks -----------"
-msgstr "------------DISKOVI-----------"
+msgstr ""
 
 #: 3.2/DataProviders.js:411 4.0/DataProviders.js:384 3.4/DataProviders.js:386
 #: 3.0/DataProviders.js:411
 msgid "Read:"
-msgstr "Čitanje:"
+msgstr ""
 
 #: 3.2/DataProviders.js:411 3.2/DataProviders.js:412 3.0/DataProviders.js:411
 #: 3.0/DataProviders.js:412
 msgid "(MiB/s)"
-msgstr "(MiB/s)"
+msgstr ""
 
 #: 3.2/DataProviders.js:412 4.0/DataProviders.js:385 3.4/DataProviders.js:387
 #: 3.0/DataProviders.js:412
 msgid "Write:"
-msgstr "Zapisivanje:"
+msgstr ""
 
 #: 3.2/ErrorApplet.js:28 3.2/ErrorApplet.js:34 3.0/ErrorApplet.js:28
 #: 3.0/ErrorApplet.js:34
 msgid "Multi-Core System Monitor Error."
-msgstr "Greška višejezgrenog nadgledatelja sustava."
+msgstr ""
 
 #: 3.2/applet.js:139 4.0/applet.js:275 3.4/applet.js:264 3.0/applet.js:141
 msgid "Preferences"
-msgstr "Osobitosti"
+msgstr ""
 
 #: 3.2/applet.js:334 3.0/applet.js:323
 msgid "Please install \"gir1.2-gtop-2.0\" package."
-msgstr "Instalirajte \"gir1.2-gtop-2.0\" paket."
+msgstr ""
 
 #: 3.2/applet.js:339 3.0/applet.js:328
 msgid "Reload this applet"
@@ -156,42 +154,41 @@ msgstr ""
 #: 3.0/prefsui.glade:304 3.0/prefsui.glade:476 3.0/prefsui.glade:856
 #: 3.0/prefsui.glade:1178
 msgid "Enable"
-msgstr "Omogući"
+msgstr ""
 
 #: 3.2/prefs.js:294 4.0/prefs.js:494 3.4/prefs.js:338 3.0/prefs.js:290
 msgid "Down"
-msgstr "Preuzimanje"
+msgstr ""
 
 #: 3.2/prefs.js:302 4.0/prefs.js:502 3.4/prefs.js:346 3.0/prefs.js:298
 msgid "Up"
-msgstr "Slanje"
+msgstr ""
 
 #: 3.2/prefs.js:414 4.0/prefs.js:635 3.4/prefs.js:479 3.0/prefs.js:406
 msgid "Read"
-msgstr "Čitanje"
+msgstr ""
 
 #: 3.2/prefs.js:423 4.0/prefs.js:644 3.4/prefs.js:488 3.0/prefs.js:414
 msgid "Write"
-msgstr "Zapisivanje"
+msgstr ""
 
 #: 3.2/prefs.js:540 3.0/prefs.js:530
 msgid "Error while saving file:"
-msgstr "Greška spremanja datoteke:"
+msgstr ""
 
 #: 4.0/DataProviders.js:47 3.4/DataProviders.js:49
 msgid "/s"
-msgstr "/s"
+msgstr ""
 
 #: 4.0/DataProviders.js:159 3.4/DataProviders.js:162
 msgid "Used:"
-msgstr "Iskorišteno:"
+msgstr ""
 
 #: 4.0/applet.js:64 3.4/applet.js:60
 msgid "Dependency missing"
-msgstr "Nedostaje zavisnost"
+msgstr ""
 
 #: 4.0/applet.js:66
-#, fuzzy
 msgid ""
 "Please install the GTop package\n"
 "\tUbuntu / Mint: gir1.2-gtop-2.0\n"
@@ -200,16 +197,10 @@ msgid ""
 "\topenSUSE: libgtop-devel\n"
 "to use "
 msgstr ""
-"Instalirajte GTop paket\n"
-"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
-"\tFedora: libgtop2-devel\n"
-"\tArch: libgtop\n"
-"za korištenje "
 
 #: 4.0/applet.js:277
-#, fuzzy
 msgid "Refresh graphs"
-msgstr "Brzina osvježavanja (ms)"
+msgstr ""
 
 #: 4.0/prefs.js:335
 msgid "00-20"
@@ -239,52 +230,47 @@ msgid ""
 "\tArch: libgtop\n"
 "to use "
 msgstr ""
-"Instalirajte GTop paket\n"
-"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
-"\tFedora: libgtop2-devel\n"
-"\tArch: libgtop\n"
-"za korištenje "
 
 #. metadata.json->name
 msgid "Multi-Core System Monitor"
-msgstr "Višejezgreni nadgledatelj sustava"
+msgstr ""
 
 #. metadata.json->description
 msgid "Displays in realtime the cpu usage for each core/cpu and overall memory usage."
-msgstr "Prikazuje u stvarnom vremenu cpu upotrebu za svaku jezgru i ukupnu memoriju."
+msgstr ""
 
 #: 3.2/prefsui.glade:49 4.0/prefsui.glade:56 3.4/prefsui.glade:49
 #: 3.0/prefsui.glade:49
 msgid "Multi-Core System Monitor Preferences"
-msgstr "Osobitosti višejezgrenog nadgledatelja sustava"
+msgstr ""
 
 #: 3.2/prefsui.glade:81 4.0/prefsui.glade:90 3.4/prefsui.glade:83
 #: 3.0/prefsui.glade:81
 msgid "Labels"
-msgstr "Nazivi"
+msgstr ""
 
 #: 3.2/prefsui.glade:132 4.0/prefsui.glade:140 3.4/prefsui.glade:133
 #: 3.0/prefsui.glade:132
 msgid "Refresh Rate (ms)"
-msgstr "Brzina osvježavanja (ms)"
+msgstr ""
 
 #: 3.2/prefsui.glade:189 3.0/prefsui.glade:189
 msgid "Height"
-msgstr "Visina"
+msgstr ""
 
 #: 3.2/prefsui.glade:245 4.0/prefsui.glade:212 3.4/prefsui.glade:177
 msgid "Label Color"
-msgstr "Boja naziva"
+msgstr ""
 
 #: 3.2/prefsui.glade:297 4.0/prefsui.glade:263 3.4/prefsui.glade:228
 #: 3.0/prefsui.glade:245
 msgid "Background Color"
-msgstr "Boja pozadine"
+msgstr ""
 
 #: 3.2/prefsui.glade:333 4.0/prefsui.glade:299 3.4/prefsui.glade:264
 #: 3.0/prefsui.glade:281
 msgid "General"
-msgstr "Općenito"
+msgstr ""
 
 #: 3.2/prefsui.glade:412 3.2/prefsui.glade:585 3.2/prefsui.glade:964
 #: 3.2/prefsui.glade:1297 4.0/prefsui.glade:376 4.0/prefsui.glade:659
@@ -293,82 +279,82 @@ msgstr "Općenito"
 #: 3.0/prefsui.glade:360 3.0/prefsui.glade:533 3.0/prefsui.glade:912
 #: 3.0/prefsui.glade:1245
 msgid "Width"
-msgstr "Širina"
+msgstr ""
 
 #: 3.2/prefsui.glade:463 3.2/prefsui.glade:636 4.0/prefsui.glade:494
 #: 4.0/prefsui.glade:710 3.4/prefsui.glade:392 3.4/prefsui.glade:564
 #: 3.0/prefsui.glade:411 3.0/prefsui.glade:584
 msgid "Colors"
-msgstr "Boje"
+msgstr ""
 
 #: 3.2/prefsui.glade:658 4.0/prefsui.glade:733 3.4/prefsui.glade:587
 #: 3.0/prefsui.glade:606
 msgid "Usedup"
-msgstr "Iskorišteno:\t\t"
+msgstr ""
 
 #: 3.2/prefsui.glade:697 4.0/prefsui.glade:771 3.4/prefsui.glade:625
 #: 3.0/prefsui.glade:645
 msgid "Cached"
-msgstr "Predmemorija:"
+msgstr ""
 
 #: 3.2/prefsui.glade:736 4.0/prefsui.glade:809 3.4/prefsui.glade:663
 #: 3.0/prefsui.glade:684
 msgid "Buffer"
-msgstr "Međuspremnik:\t"
+msgstr ""
 
 #: 3.2/prefsui.glade:775 4.0/prefsui.glade:847 3.4/prefsui.glade:701
 #: 3.0/prefsui.glade:723
 msgid "Free"
-msgstr "Slobodno:\t\t"
+msgstr ""
 
 #: 3.2/prefsui.glade:884 4.0/prefsui.glade:954 3.4/prefsui.glade:808
 #: 3.0/prefsui.glade:832
 msgid "Memory"
-msgstr "Memorija"
+msgstr ""
 
 #: 3.2/prefsui.glade:1024 3.2/prefsui.glade:1357 4.0/prefsui.glade:1093
 #: 4.0/prefsui.glade:1439 3.4/prefsui.glade:947 3.4/prefsui.glade:1293
 #: 3.0/prefsui.glade:972 3.0/prefsui.glade:1305
 msgid "Scaling"
-msgstr "Promjena veličine"
+msgstr ""
 
 #: 3.2/prefsui.glade:1071 3.2/prefsui.glade:1404 4.0/prefsui.glade:1139
 #: 4.0/prefsui.glade:1485 3.4/prefsui.glade:993 3.4/prefsui.glade:1339
 #: 3.0/prefsui.glade:1019 3.0/prefsui.glade:1352
 msgid "Auto Scale"
-msgstr "Automatska"
+msgstr ""
 
 #: 3.2/prefsui.glade:1110 3.2/prefsui.glade:1443 4.0/prefsui.glade:1177
 #: 4.0/prefsui.glade:1523 3.4/prefsui.glade:1031 3.4/prefsui.glade:1377
 #: 3.0/prefsui.glade:1058 3.0/prefsui.glade:1391
 msgid "Logarithmic"
-msgstr "Logaritamska"
+msgstr ""
 
 #: 3.2/prefsui.glade:1162 3.2/prefsui.glade:1495 4.0/prefsui.glade:1228
 #: 4.0/prefsui.glade:1574 3.4/prefsui.glade:1082 3.4/prefsui.glade:1428
 #: 3.0/prefsui.glade:1110 3.0/prefsui.glade:1443
 msgid "Devices"
-msgstr "Uređaji"
+msgstr ""
 
 #: 3.2/prefsui.glade:1206 4.0/prefsui.glade:1289 3.4/prefsui.glade:1143
 #: 3.0/prefsui.glade:1154
 msgid "Network"
-msgstr "Mreža"
+msgstr ""
 
 #: 3.2/prefsui.glade:1540 4.0/prefsui.glade:1635 3.4/prefsui.glade:1489
 #: 3.0/prefsui.glade:1488
 msgid "Disk IO"
-msgstr "Disk U/I"
+msgstr ""
 
 #: 3.2/prefsui.glade:1602 4.0/prefsui.glade:1695 3.4/prefsui.glade:1549
 #: 3.0/prefsui.glade:1550
 msgid "Scaling Description"
-msgstr "Opis promjene veličine"
+msgstr ""
 
 #: 3.2/prefsui.glade:1614 4.0/prefsui.glade:1710 3.4/prefsui.glade:1564
 #: 3.0/prefsui.glade:1562
 msgid "Close"
-msgstr "Zatvori"
+msgstr ""
 
 #: 3.2/prefsui.glade:1644 3.4/prefsui.glade:1594 3.0/prefsui.glade:1592
 msgid ""
@@ -388,21 +374,6 @@ msgid ""
 "\tlogarithmic scale. If you are not familiar basically, it reduces the\n"
 "\tlarge values so that they dont dominate the smaller readings."
 msgstr ""
-"Automatska promjena:\n"
-"\tOvo će promijeniti liniju grafa prema najvećem očitanju s prikazanim\n"
-"\tpodručjem. Jednom kada najveće očitanje nije više prikazano sljedeće\n"
-"\tnajveće očitanje postaje nova vrijednost prema kojoj su očitanja\n"
-"\tpromijenjena. To omogućuje iscrtavanju \"zumiranju\" prikaz pojedinosti\n"
-"\tgrafa. Međutim, to isto znači ako postoji veliko očitanje, malo očitanje \n"
-"\tmože postati istovjetno od 0. I ako postoje samo mala očitanja tada se\n"
-"\tneznatno veća očitanja mogu pojaviti veća nego što bi trebala biti.\n"
-"\tAko nije omogućeno najveća korištena vrijednost biti će najveće\n"
-"\točitanje od kada je Cinnamon pokrenut.\n"
-"\n"
-"Logaritamska promjena:\n"
-"\tOva promjena pretvara očitanja tako da se prikazuju koristeći\n"
-"\tlogaritamsku promjenu. Ako niste upoznati s osnovama, ona smanjuje\n"
-"\tnajveću vrijednost tako da ne dominira manjim očitanjem."
 
 #: 4.0/prefsui.glade:168
 msgid "Curves thickness"
@@ -425,7 +396,6 @@ msgid "by activity level (in %):"
 msgstr ""
 
 #: 4.0/prefsui.glade:1740
-#, fuzzy
 msgid ""
 "Auto Scaling:\n"
 "    This will scale the line graph by the largest reading within the\n"
@@ -443,18 +413,3 @@ msgid ""
 "    logarithmic scale. If you are not familiar basically, it reduces the\n"
 "    large values so that they dont dominate the smaller readings."
 msgstr ""
-"Automatska promjena:\n"
-"\tOvo će promijeniti liniju grafa prema najvećem očitanju s prikazanim\n"
-"\tpodručjem. Jednom kada najveće očitanje nije više prikazano sljedeće\n"
-"\tnajveće očitanje postaje nova vrijednost prema kojoj su očitanja\n"
-"\tpromijenjena. To omogućuje iscrtavanju \"zumiranju\" prikaz pojedinosti\n"
-"\tgrafa. Međutim, to isto znači ako postoji veliko očitanje, malo očitanje \n"
-"\tmože postati istovjetno od 0. I ako postoje samo mala očitanja tada se\n"
-"\tneznatno veća očitanja mogu pojaviti veća nego što bi trebala biti.\n"
-"\tAko nije omogućeno najveća korištena vrijednost biti će najveće\n"
-"\točitanje od kada je Cinnamon pokrenut.\n"
-"\n"
-"Logaritamska promjena:\n"
-"\tOva promjena pretvara očitanja tako da se prikazuju koristeći\n"
-"\tlogaritamsku promjenu. Ako niste upoznati s osnovama, ona smanjuje\n"
-"\tnajveću vrijednost tako da ne dominira manjim očitanjem."
