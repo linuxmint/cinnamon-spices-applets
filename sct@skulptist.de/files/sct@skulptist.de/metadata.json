@@ -1,0 +1,8 @@
+{
+  "uuid": "sct@skulptist.de",
+  "author": "Matthias Hermsdorf",
+  "version": "1.0.1",
+  "name": "SCT Toggle",
+  "description": "Toggle screen temperatures with sct. \nSet up to 7 custom color temperatures and toggle through by clicking on the applet",
+  "max-instances": "1"
+}
