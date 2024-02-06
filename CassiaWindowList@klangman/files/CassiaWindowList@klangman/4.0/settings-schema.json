@@ -18,7 +18,7 @@
     "preview-page" : {
       "type" : "page",
       "title" : "Thumbnails",
-      "sections" : ["preview-settings", "preview-mouse-section"] 
+      "sections" : ["preview-settings", "preview-mouse-section"]
     },
 
     "hotkey-page" : {
@@ -47,7 +47,7 @@
     "general-settings" : {
       "type" : "section",
       "title" : "General window list settings",
-      "keys" : ["group-windows", "display-pinned", "synchronize-pinned", "trailing-pinned-behaviour", "animate-icon", "show-windows-for-current-monitor", "show-windows-for-all-workspaces", "show-tooltips", "button-spacing"]
+      "keys" : ["group-windows", "display-pinned", "synchronize-pinned", "animate-icon", "show-windows-for-current-monitor", "show-windows-for-all-workspaces", "show-tooltips", "button-spacing", "hover-peek-windowlist", "no-click-activate"]
     },
     "general-mouse" : {
       "type" : "section",
@@ -57,7 +57,7 @@
     "preview-settings" : {
       "type" : "section",
       "title" : "Thumbnails menu settings",
-      "keys" : ["show-previews", "number-of-unshrunk-previews", "menu-all-windows-of-pool", "menu-all-windows-of-auto"]
+      "keys" : ["show-previews", "number-of-unshrunk-previews", "menu-all-windows-of-pool", "menu-all-windows-of-auto", "hover-peek-thumbnail", "no-click-activate-thumbnail"]
     },
     "preview-mouse-section" : {
       "type" : "section",
@@ -77,7 +77,7 @@
     "adv-other-settings" : {
       "type" : "section",
       "title" : "",
-      "keys" : ["backup-file-name", "hide-panel-apps", "icon-saturation", "saturation-application"]
+      "keys" : ["backup-file-name", "hide-panel-apps",  "trailing-pinned-behaviour", "fade-animation-time", "icon-saturation", "saturation-application"]
     }
   },
   "caption-type": {
@@ -140,6 +140,16 @@
     "description": "Add new window buttons ahead of trailing pinned buttons",
     "tooltip": "When enabled, new windows will be added to the left of any pinned buttons currently placed on the right of the window list, effectively this allows you to keep pinned buttons at the end of the window list"
   },
+  "fade-animation-time": {
+    "type": "spinbutton",
+    "default": 100,
+    "min": 0,
+    "max": 2000,
+    "units": "milliseconds",
+    "step": 20,
+    "description": "Fade animation effect duration",
+    "tooltip": "This defines the duration of the fade-in/out animation effect. It applies to the Thumbnail menus and the full size window previews"
+  },
   "label-width": {
     "type": "spinbutton",
     "default": 150,
@@ -159,11 +169,11 @@
     "type": "spinbutton",
     "default": 500,
     "min": 5,
-    "max": 10000,
+    "max": 2000,
     "units": "milliseconds",
-    "step": 1,
+    "step": 20,
     "dependency": "label-animation",
-    "description": "Label animation time"
+    "description": "Label animation duration"
   },
   "display-number": {
     "type": "combobox",
@@ -254,6 +264,20 @@
     "description": "Spacing between buttons",
     "tooltip": "This defines the spacing between the buttons, the value will be divided in half and added to the left of the icon and to the right of the label on horizontal panels or to the top and button of the icon on vertical panels"
   },
+  "hover-peek-windowlist": {
+    "type": "switch",
+    "default": 0,
+    "dependency" : "group-windows<4",
+    "description": "Show a full size window preview when hovering over a button",
+    "tooltip": "If enabled, a full size preview window will appear when the mouse pointer is hovering over a window-list button."
+  },
+  "no-click-activate": {
+    "type": "switch",
+    "default": 0,
+    "dependency" : "group-windows<4",
+    "description": "Automatic focus change when leaving the panel",
+    "tooltip": "If enabled, the current window for a window-list button will get the focus when the mouse pointer leaves the panel. Leaving the window-list with Ctrl or Shift held or while remaining on the panel will leave the focus unchanged. This option is typically used in conjunction with the preview hovering option above."
+  },
 
   "menu-show-on-hover": {
     "type": "switch",
@@ -298,9 +322,9 @@
     "type": "spinbutton",
     "default": 500,
     "min": 5,
-    "max": 10000,
+    "max": 2000,
     "units": "milliseconds",
-    "step": 1,
+    "step": 20,
     "description": "Hover time before showing menu",
     "dependency": "menu-show-on-hover",
     "tooltip": "The waiting time before the thumbnail menu appears when hovering over a button\n(Not used when moving directly to a different button in the list)"
@@ -309,9 +333,9 @@
     "type": "spinbutton",
     "default": 500,
     "min": 5,
-    "max": 10000,
+    "max": 2000,
     "units": "milliseconds",
-    "step": 1,
+    "step": 20,
     "description": "Time before closing after pointer leaves the menu",
     "tooltip": "The waiting time for the thumbnail menu to close when leaving a button\n(Not used when moving directly to a different button in the list)"
   },
@@ -405,6 +429,21 @@
     },
     "description": "Thumbnail window forward button action"
   },
+
+  "hover-peek-thumbnail": {
+    "type": "switch",
+    "default": false,
+    "description": "Show a full size window preview when hovering over a Thumbnail",
+    "tooltip": "If enabled, a full size preview window will appear when the mouse pointer is hovering over a Thumbnail menu item"
+  },
+  "no-click-activate-thumbnail": {
+    "type": "switch",
+    "default": 0,
+    "dependency" : "group-windows<4",
+    "description": "Automatic focus change when leaving the Thumbnail menu",
+    "tooltip": "If enabled, the window associated with the Thumbnail menu item will get the focus when the mouse pointer leaves the menu. Leaving the menu with Ctrl or Shift held or leaving from either end of the menu will leave the focus unchanged. This option is typically used in conjunction with the preview hovering option above."
+  },
+
   "grouped-mouse-action-btn1": {
     "type": "combobox",
     "default": 2,
