@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-18 09:58-0500\n"
+"POT-Creation-Date: 2024-02-06 10:21-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,28 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.0/applet.js:512
+#: 4.0/applet.js:516
 msgid "all buttons"
 msgstr ""
 
-#: 4.0/applet.js:2382
+#: 4.0/applet.js:2501
 msgid "Applet Preferences"
 msgstr ""
 
-#: 4.0/applet.js:2386
+#: 4.0/applet.js:2505
 msgid "About..."
 msgstr ""
 
-#: 4.0/applet.js:2390
+#: 4.0/applet.js:2509
 msgid "Configure..."
 msgstr ""
 
-#: 4.0/applet.js:2394
+#: 4.0/applet.js:2513
+msgid "Website"
+msgstr ""
+
+#: 4.0/applet.js:2517
 #, javascript-format
 msgid "Remove '%s'"
 msgstr ""
 
-#: 4.0/applet.js:2396
+#: 4.0/applet.js:2519
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr ""
 
@@ -48,111 +52,111 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2405
+#: 4.0/applet.js:2528
 msgid "Open new window"
 msgstr ""
 
-#: 4.0/applet.js:2413
+#: 4.0/applet.js:2536
 msgid "Remove from panel"
 msgstr ""
 
-#: 4.0/applet.js:2415
+#: 4.0/applet.js:2538
 msgid "Remove from this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2421
+#: 4.0/applet.js:2544
 msgid "Pin to panel"
 msgstr ""
 
-#: 4.0/applet.js:2423
+#: 4.0/applet.js:2546
 msgid "Pin to this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2464
+#: 4.0/applet.js:2587
 msgid "Pin to other workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2485
+#: 4.0/applet.js:2608
 msgid "Pin to all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2503
+#: 4.0/applet.js:2626
 msgid "Pin to launcher"
 msgstr ""
 
-#: 4.0/applet.js:2521 4.0/applet.js:2707
+#: 4.0/applet.js:2644 4.0/applet.js:2830
 msgid "Add new Hotkey for"
 msgstr ""
 
-#: 4.0/applet.js:2535
+#: 4.0/applet.js:2658
 msgid "Recent files"
 msgstr ""
 
-#: 4.0/applet.js:2559
+#: 4.0/applet.js:2682
 msgid "Places"
 msgstr ""
 
-#: 4.0/applet.js:2601
+#: 4.0/applet.js:2724
 msgid "Only on this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2603
+#: 4.0/applet.js:2726
 msgid "Visible on all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2604
+#: 4.0/applet.js:2727
 msgid "Move to another workspace"
 msgstr ""
 
-#: 4.0/applet.js:2613
+#: 4.0/applet.js:2736
 msgid " (this workspace)"
 msgstr ""
 
-#: 4.0/applet.js:2626
+#: 4.0/applet.js:2749
 msgid "Move to another monitor"
 msgstr ""
 
-#: 4.0/applet.js:2634
+#: 4.0/applet.js:2757
 msgid "Monitor"
 msgstr ""
 
-#: 4.0/applet.js:2662
+#: 4.0/applet.js:2785
 msgid "unassigned"
 msgstr ""
 
-#: 4.0/applet.js:2673 4.0/applet.js:2704
+#: 4.0/applet.js:2796 4.0/applet.js:2827
 msgid "Assign window to a hotkey"
 msgstr ""
 
-#: 4.0/applet.js:2727
+#: 4.0/applet.js:2850
 msgid "Change application label contents"
 msgstr ""
 
-#: 4.0/applet.js:2730
+#: 4.0/applet.js:2853
 msgid "Remove custom setting"
 msgstr ""
 
-#: 4.0/applet.js:2737
+#: 4.0/applet.js:2860
 msgid "Use window title"
 msgstr ""
 
-#: 4.0/applet.js:2744
+#: 4.0/applet.js:2867
 msgid "Use application name"
 msgstr ""
 
-#: 4.0/applet.js:2751
+#: 4.0/applet.js:2874
 msgid "No label"
 msgstr ""
 
-#: 4.0/applet.js:2762
+#: 4.0/applet.js:2885
 msgid "Ungroup application windows"
 msgstr ""
 
-#: 4.0/applet.js:2771
+#: 4.0/applet.js:2894
 msgid "Group application windows"
 msgstr ""
 
-#: 4.0/applet.js:2784
+#: 4.0/applet.js:2907
 msgid "Automatic grouping/ungrouping"
 msgstr ""
 
@@ -162,31 +166,31 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2814
+#: 4.0/applet.js:2937
 msgid "Move titlebar on to screen"
 msgstr ""
 
-#: 4.0/applet.js:2819
+#: 4.0/applet.js:2942
 msgid "Restore"
 msgstr ""
 
-#: 4.0/applet.js:2823
+#: 4.0/applet.js:2946
 msgid "Minimize"
 msgstr ""
 
-#: 4.0/applet.js:2829
+#: 4.0/applet.js:2952
 msgid "Unmaximize"
 msgstr ""
 
-#: 4.0/applet.js:2836
+#: 4.0/applet.js:2959
 msgid "Close others"
 msgstr ""
 
-#: 4.0/applet.js:2847
+#: 4.0/applet.js:2970
 msgid "Close all"
 msgstr ""
 
-#: 4.0/applet.js:2856
+#: 4.0/applet.js:2979
 msgid "Close"
 msgstr ""
 
@@ -386,6 +390,23 @@ msgid ""
 "you to keep pinned buttons at the end of the window list"
 msgstr ""
 
+#. 4.0->settings-schema.json->fade-animation-time->units
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr ""
+
+#. 4.0->settings-schema.json->fade-animation-time->description
+msgid "Fade animation effect duration"
+msgstr ""
+
+#. 4.0->settings-schema.json->fade-animation-time->tooltip
+msgid ""
+"This defines the duration of the fade-in/out animation effect. It applies to "
+"the Thumbnail menus and the full size window previews"
+msgstr ""
+
 #. 4.0->settings-schema.json->label-width->units
 #. 4.0->settings-schema.json->button-spacing->units
 msgid "pixels"
@@ -403,14 +424,8 @@ msgstr ""
 msgid "Animate label"
 msgstr ""
 
-#. 4.0->settings-schema.json->label-animation-time->units
-#. 4.0->settings-schema.json->preview-timeout-show->units
-#. 4.0->settings-schema.json->preview-timeout-hide->units
-msgid "milliseconds"
-msgstr ""
-
 #. 4.0->settings-schema.json->label-animation-time->description
-msgid "Label animation time"
+msgid "Label animation duration"
 msgstr ""
 
 #. 4.0->settings-schema.json->display-number->options
@@ -547,6 +562,29 @@ msgid ""
 "This defines the spacing between the buttons, the value will be divided in "
 "half and added to the left of the icon and to the right of the label on "
 "horizontal panels or to the top and button of the icon on vertical panels"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->description
+msgid "Show a full size window preview when hovering over a button"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a window-list button."
+msgstr ""
+
+#. 4.0->settings-schema.json->no-click-activate->description
+msgid "Automatic focus change when leaving the panel"
+msgstr ""
+
+#. 4.0->settings-schema.json->no-click-activate->tooltip
+msgid ""
+"If enabled, the current window for a window-list button will get the focus "
+"when the mouse pointer leaves the panel. Leaving the window-list with Ctrl "
+"or Shift held or while remaining on the panel will leave the focus "
+"unchanged. This option is typically used in conjunction with the preview "
+"hovering option above."
 msgstr ""
 
 #. 4.0->settings-schema.json->menu-show-on-hover->description
@@ -824,6 +862,29 @@ msgstr ""
 
 #. 4.0->settings-schema.json->preview-forward-click->description
 msgid "Thumbnail window forward button action"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-peek-thumbnail->description
+msgid "Show a full size window preview when hovering over a Thumbnail"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a Thumbnail menu item"
+msgstr ""
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->description
+msgid "Automatic focus change when leaving the Thumbnail menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->tooltip
+msgid ""
+"If enabled, the window associated with the Thumbnail menu item will get the "
+"focus when the mouse pointer leaves the menu. Leaving the menu with Ctrl or "
+"Shift held or leaving from either end of the menu will leave the focus "
+"unchanged. This option is typically used in conjunction with the preview "
+"hovering option above."
 msgstr ""
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
