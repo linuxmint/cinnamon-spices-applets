@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: oversteer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-30 08:55+0000\n"
-"PO-Revision-Date: 2024-01-31 22:22+0100\n"
+"PO-Revision-Date: 2024-02-07 19:27+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu_HU\n"
@@ -123,11 +123,11 @@ msgstr ""
 
 #: 3.0/applet.js:969 3.0/applet.js:1110
 msgid "As of"
-msgstr "Ekkorra"
+msgstr "Ekkorra:"
 
 #: 3.0/applet.js:1108 3.8/weather-applet.js:17006
 msgid "Powered by"
-msgstr "Időjárási-adatszolgáltató"
+msgstr "Időjárási-adatszolgáltató:"
 
 #: 3.0/applet.js:1113
 msgid "from you"
@@ -277,7 +277,7 @@ msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://developer.climacell.co/sign-up"
 msgstr ""
-"Adjon meg egy API kulcsot az kisalkamazás beállításaiban,\n"
+"Adjon meg egy API kulcsot az kisalkalmazás beállításaiban,\n"
 "vagy szerezzen egyet a https://developer.climacell.co/sign-up oldalról"
 
 #: 3.0/climacell.js:239 3.0/darkSky.js:229 3.0/weatherbit.js:331
@@ -285,7 +285,8 @@ msgstr ""
 msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
-msgstr "Ellenőrizze hogy az API kulcs helyes és az account nincs blockolva"
+msgstr ""
+"Ellenőrizze hogy az API kulcs helyes és a felhasználói fiók nincs blokkolva"
 
 #: 3.0/climacell.js:248 3.8/weather-applet.js:12113
 msgid ""
@@ -353,7 +354,7 @@ msgstr "Ónos eső"
 
 #: 3.0/climacell.js:294 3.8/weather-applet.js:12341 3.8/weather-applet.js:13165
 msgid "Light freezing rain"
-msgstr "Szorványos ónos eső"
+msgstr "Szórványos ónos eső"
 
 #: 3.0/climacell.js:301
 msgid "Light freezing drizzle"
@@ -648,7 +649,7 @@ msgstr "Enyhe záporeső és mennydörgés"
 #: 3.8/weather-applet.js:11492 3.8/weather-applet.js:11498
 #: 3.8/weather-applet.js:11505 3.8/weather-applet.js:11512
 msgid "Light sleet"
-msgstr "Gyenge havas záporeső"
+msgstr "Gyenge havas eső"
 
 #: 3.0/met_norway.js:428 3.8/weather-applet.js:11499
 msgid "Light sleet and thunder"
@@ -719,7 +720,7 @@ msgstr "Ónos záporeső"
 
 #: 3.0/met_norway.js:533 3.8/weather-applet.js:11604
 msgid "Sleet showers and thunder"
-msgstr "Ónoseső és mennydörgés"
+msgstr "Havas eső és mennydörgés"
 
 #: 3.0/met_norway.js:547 3.8/weather-applet.js:11618
 msgid "Snow and thunder"
@@ -877,7 +878,7 @@ msgstr ""
 #: 3.0/openWeatherMap.js:250 3.8/weather-applet.js:10884
 msgid "If this problem persists, please contact the Author of this applet"
 msgstr ""
-"Ha a hiba továbbra is fennáll, vegye fel a kapcsolatot az applet "
+"Ha a hiba továbbra is fennáll, vegye fel a kapcsolatot a kisalkalmazás "
 "fejlesztőjével"
 
 #: 3.0/openWeatherMap.js:254 3.8/weather-applet.js:10888
@@ -1276,7 +1277,7 @@ msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://www.weatherbit.io/account/create"
 msgstr ""
-"Adjon meg egy API kulcsot az kisalkamazás beállításaiban,\n"
+"Adjon meg egy API kulcsot az kisalkalmazás beállításaiban,\n"
 "vagy szerezzen egyet a https://www.weatherbit.io/account/create oldalról"
 
 #: 3.0/yahoo.js:78
@@ -1703,7 +1704,7 @@ msgstr "A megadott API-kulcs nem érvényes."
 
 #: 3.8/weather-applet.js:14460
 msgid "The location you provided was not found."
-msgstr "A megadott  földrajzi helyzethez nem található."
+msgstr "A megadott földrajzi helyzethez nem található."
 
 #: 3.8/weather-applet.js:14496 3.8/weather-applet.js:14497
 msgid "Strong Storm"
@@ -1773,7 +1774,7 @@ msgstr "Harmatpont"
 
 #: 3.8/weather-applet.js:16264
 msgid "Precipitation will end in {precipEnd} minutes"
-msgstr "A csapadék {precipStart} percen belül megszűnik"
+msgstr "A csapadék {precipEnd} percen belül megszűnik"
 
 #: 3.8/weather-applet.js:16266
 msgid "Precipitation won't end in within an hour"
@@ -2305,7 +2306,7 @@ msgid ""
 "can access with the button on the Help tab."
 msgstr ""
 "Számtalan időjárás-előrejelzési szolgáltató adatait használhatja. Néhány "
-"szolgáltató adatainak használatához  API-kulcs szükséges, néhánynál területi "
+"szolgáltató adatainak használatához API-kulcs szükséges, néhánynál területi "
 "korlátozás van érvényben. Az előrejelzések eltérnek a szolgáltatott "
 "előrejelzés hosszában, és mindegyikhez működő internet-kapcsolatra van "
 "szükség. A lehetséges beállítások a Cinnamon Spices weboldalon részletesen "
@@ -2314,7 +2315,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Deutscher Wetterdienst (Germany only)"
-msgstr "Deutscher Wetterdienst (csak Némertország)"
+msgstr "Deutscher Wetterdienst (csak Németország)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (UK only)"
@@ -2354,11 +2355,10 @@ msgid ""
 msgstr ""
 "Megadhatja a koordinátákat „szélesség,hosszúság” formátumban (például: "
 "51.5085,-0.1257) vagy használhatja a „Város,Országkód” formátumot (például: "
-"„Tárnok,HU”, illetve kipróbálhatja a cím megadását is „{Házszám} "
-"{Közterület} {Település} {Irányítószám} {Ország}” formátumban. A megadás "
-"formáját tekintve a keresőalgoritmus nagyon rugalmas. Három másodperc "
-"gépelés nélküli várakozással töltött idő után behelyettesítésre kerül a "
-"találat."
+"„Tárnok,HU”, illetve kipróbálhatja a cím megadását is „{House number} "
+"{Street} {City/Town} {Postcode} {Country}” formátumban. A megadás formáját "
+"tekintve a keresőalgoritmus nagyon rugalmas. Három másodperc gépelés nélküli "
+"várakozással töltött idő után behelyettesítésre kerül a találat."
 
 #. 3.8->settings-schema.json->locationDescription->description
 msgid ""
@@ -2480,7 +2480,7 @@ msgid ""
 "in the IANA time zone format (e.g. 'Europe/London')"
 msgstr ""
 "Bizonyosodjon meg róla, hogy a Keresési mező egyedi értéket tartalmaz és az "
-"időzóna az IANA időzóna-formátumnak megfelelő (példul: „Europe/Budapest)”."
+"időzóna az IANA időzóna-formátumnak megfelelő (például: 'Europe/Budapest')."
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Latitude"
@@ -2533,7 +2533,7 @@ msgid ""
 msgstr ""
 "További információkért látogassa meg a Spices webhelyet, amit elérhet az "
 "alábbi gombra kattintva. Itt továbbá megjegyzéseket fűzhet, vagy kérdéseket "
-"tehet fel a kisalkalmazással kapcsolatban a közösségnek a Github fiókjával "
+"tehet fel a kisalkalmazással kapcsolatban a közösségnek a GitHub fiókjával "
 "bejelentkezve. A webhelyen az ismert hibákról, hibaelhárításról, változási "
 "megjegyzésekről és egyebekről is olvashat."
 
@@ -2595,7 +2595,7 @@ msgstr ""
 "A legtöbb esetben a helymeghatározás automatikusan működik, de kézzel is "
 "megadhatja a koordinátákat „szélességi,hosszúsági” koordinátákkal (például: "
 "51.5085,-0.1257), vagy használhatja a „város,országkód„ formátumban "
-"(például: Budapest,HU), vagy próbálja meg megadni a {Házszám} {Közterület} "
+"(például: Budapest, HU), vagy próbálja meg megadni a {Házszám} {Közterület} "
 "{Település} {Postai irányítószám} {Ország} formában. A keresési algoritmus "
 "nagyon rugalmas a formátumot illetően. A beírt címet 3 másodperc beírás "
 "utáni várakozás után a rendszer automatikusan kicseréli a felismert címre, "
