@@ -29,6 +29,8 @@ def parse_args():
     parser.add_argument('uuid', type=str, metavar='UUID', nargs='?',
                         help='the UUID of the Spice')
     args = parser.parse_args()
+    if args.uuid and args.uuid.endswith('/'):
+        args.uuid = args.uuid.replace('/', '')
     if args.all and not args.uuid:
         for file_path in os.listdir("."):
             if os.path.isdir(file_path) and not file_path.startswith("."):
