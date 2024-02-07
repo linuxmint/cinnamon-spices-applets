@@ -1,20 +1,21 @@
-# Color-blind Filters
-# Copyright (C) 2023
-# Rick Calixte <10281587+rcalixte@users.noreply.github.com>, 2023.
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-29 03:28-0500\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"Project-Id-Version: color-blind-filters@rcalixte 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-07 14:21-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4\n"
 
 #. 5.4->settings-schema.json->category->options
 #: 5.4/applet.js:122
@@ -113,8 +114,8 @@ msgstr ""
 
 #. metadata.json->description
 msgid ""
-"An applet for the Cinnamon Desktop Environment that offers full-screen "
-"color filters that should help color-blind users and developers."
+"An applet for the Cinnamon Desktop Environment that offers full-screen color "
+"filters that should help color-blind users and developers."
 msgstr ""
 
 #. metadata.json->name
