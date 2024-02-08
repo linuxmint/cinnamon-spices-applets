@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oversteer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-30 08:55+0000\n"
-"PO-Revision-Date: 2024-02-07 19:27+0100\n"
+"POT-Creation-Date: 2024-02-01 22:49+0000\n"
+"PO-Revision-Date: 2024-02-08 12:05+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu_HU\n"
@@ -19,48 +19,48 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
-#: 3.8/weather-applet.js:17607
+#: 3.8/weather-applet.js:17615
 msgid "Error"
 msgstr "Hiba"
 
 #: 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
 #: 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
-#: 3.8/weather-applet.js:17608 3.8/weather-applet.js:17610
-#: 3.8/weather-applet.js:17612 3.8/weather-applet.js:17615
-#: 3.8/weather-applet.js:17618 3.8/weather-applet.js:17619
-#: 3.8/weather-applet.js:17620 3.8/weather-applet.js:17621
+#: 3.8/weather-applet.js:17616 3.8/weather-applet.js:17618
+#: 3.8/weather-applet.js:17620 3.8/weather-applet.js:17623
+#: 3.8/weather-applet.js:17626 3.8/weather-applet.js:17627
+#: 3.8/weather-applet.js:17628 3.8/weather-applet.js:17629
 msgid "Service Error"
 msgstr "Szolgáltató hiba"
 
-#: 3.0/applet.js:168 3.8/weather-applet.js:17609
+#: 3.0/applet.js:168 3.8/weather-applet.js:17617
 msgid "Incorrect API Key"
 msgstr "Rossz API-kulcs"
 
-#: 3.0/applet.js:170 3.8/weather-applet.js:17611
+#: 3.0/applet.js:170 3.8/weather-applet.js:17619
 msgid "Incorrect Location Format"
 msgstr "Hibás földrajzi helyzetformátum"
 
-#: 3.0/applet.js:172 3.8/weather-applet.js:17613
+#: 3.0/applet.js:172 3.8/weather-applet.js:17621
 msgid "Key Blocked"
 msgstr "Kulcs ideiglenesen letilva"
 
-#: 3.0/applet.js:173 3.8/weather-applet.js:17614
+#: 3.0/applet.js:173 3.8/weather-applet.js:17622
 msgid "Can't find location"
 msgstr "Földrajzi helyzet nem található"
 
-#: 3.0/applet.js:175 3.8/weather-applet.js:17616
+#: 3.0/applet.js:175 3.8/weather-applet.js:17624
 msgid "No Api Key"
 msgstr "Nincs API-kulcs megadva"
 
-#: 3.0/applet.js:176 3.8/weather-applet.js:17617
+#: 3.0/applet.js:176 3.8/weather-applet.js:17625
 msgid "No Location"
 msgstr "A földrajzi helyzet nincs megadva"
 
-#: 3.0/applet.js:181 3.8/weather-applet.js:17622
+#: 3.0/applet.js:181 3.8/weather-applet.js:17630
 msgid "Missing Packages"
 msgstr "Hiányzó csomag"
 
-#: 3.0/applet.js:182 3.8/weather-applet.js:17623
+#: 3.0/applet.js:182 3.8/weather-applet.js:17631
 msgid "Location not covered"
 msgstr "A földrajzi helyzetről nincs információ"
 
@@ -68,16 +68,16 @@ msgstr "A földrajzi helyzetről nincs információ"
 msgid "Weather Applet"
 msgstr "Időjárás kisalkalmazás"
 
-#: 3.0/applet.js:217 3.8/weather-applet.js:17921
+#: 3.0/applet.js:217 3.8/weather-applet.js:17929
 msgid "..."
 msgstr "…"
 
-#: 3.0/applet.js:218 3.8/weather-applet.js:17922
+#: 3.0/applet.js:218 3.8/weather-applet.js:17930
 msgid "Click to open"
 msgstr "Megnyitás"
 
-#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:16215
-#: 3.8/weather-applet.js:17925
+#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:16220
+#: 3.8/weather-applet.js:17933
 msgid "Refresh"
 msgstr "Frissítés"
 
@@ -100,14 +100,14 @@ msgstr "Az automatikusan megállapított földrajzi helyzet nem menthető el"
 msgid "Could not get weather information"
 msgstr "Az időjárás információk nem kérhetők le"
 
-#: 3.0/applet.js:624 3.8/weather-applet.js:17760
+#: 3.0/applet.js:624 3.8/weather-applet.js:17768
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 "Ismeretlen hiba lépett fel frissítés közben, a hibaüzenet megtekinthető a "
 "Looking Glass naplóban"
 
-#: 3.0/applet.js:670 3.8/weather-applet.js:18003
+#: 3.0/applet.js:670 3.8/weather-applet.js:18011
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
@@ -125,7 +125,7 @@ msgstr ""
 msgid "As of"
 msgstr "Ekkorra:"
 
-#: 3.0/applet.js:1108 3.8/weather-applet.js:17006
+#: 3.0/applet.js:1108 3.8/weather-applet.js:17011
 msgid "Powered by"
 msgstr "Időjárási-adatszolgáltató:"
 
@@ -133,52 +133,52 @@ msgstr "Időjárási-adatszolgáltató:"
 msgid "from you"
 msgstr "öntől"
 
-#: 3.0/applet.js:1132 3.8/weather-applet.js:16919
+#: 3.0/applet.js:1132 3.8/weather-applet.js:16924
 msgid "mm"
 msgstr "mm"
 
-#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:16919
+#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:16924
 msgid "in"
 msgstr "múlva"
 
 #: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:10312
-#: 3.8/weather-applet.js:17084
+#: 3.8/weather-applet.js:17089
 msgid "mi"
 msgstr "mi"
 
 #: 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:10313
-#: 3.8/weather-applet.js:17085
+#: 3.8/weather-applet.js:17090
 msgid "km"
 msgstr "km"
 
-#: 3.0/applet.js:1227 3.8/weather-applet.js:17262
+#: 3.0/applet.js:1227 3.8/weather-applet.js:17267
 msgid "Loading current weather ..."
 msgstr "Időjárás betöltése…"
 
-#: 3.0/applet.js:1230 3.8/weather-applet.js:17265
+#: 3.0/applet.js:1230 3.8/weather-applet.js:17270
 msgid "Loading future weather ..."
 msgstr "Időjárás-előrejelzés betöltése…"
 
-#: 3.0/applet.js:1280 3.8/weather-applet.js:16168
+#: 3.0/applet.js:1280 3.8/weather-applet.js:16173
 msgid "Loading ..."
 msgstr "(betöltés…)"
 
-#: 3.0/applet.js:1329 3.8/weather-applet.js:16189
+#: 3.0/applet.js:1329 3.8/weather-applet.js:16194
 msgid "Temperature"
 msgstr "Hőmérséklet"
 
-#: 3.0/applet.js:1330 3.8/weather-applet.js:16190
+#: 3.0/applet.js:1330 3.8/weather-applet.js:16195
 msgid "Humidity"
 msgstr "Páratartalom"
 
-#: 3.0/applet.js:1331 3.8/weather-applet.js:16191
+#: 3.0/applet.js:1331 3.8/weather-applet.js:16196
 msgid "Pressure"
 msgstr "Légnyomás"
 
 #: 3.0/applet.js:1332 3.8/weather-applet.js:12249 3.8/weather-applet.js:12256
 #: 3.8/weather-applet.js:12257 3.8/weather-applet.js:12263
 #: 3.8/weather-applet.js:14217 3.8/weather-applet.js:14218
-#: 3.8/weather-applet.js:16037
+#: 3.8/weather-applet.js:16042
 msgid "Wind"
 msgstr "Szél"
 
@@ -263,12 +263,12 @@ msgstr ""
 #: 3.8/weather-applet.js:10740 3.8/weather-applet.js:11711
 #: 3.8/weather-applet.js:12150 3.8/weather-applet.js:12659
 #: 3.8/weather-applet.js:13021 3.8/weather-applet.js:14388
-#: 3.8/weather-applet.js:14929
+#: 3.8/weather-applet.js:14928
 msgid "Feels Like"
 msgstr "Hőérzet"
 
 #: 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
-#: 3.8/weather-applet.js:14991
+#: 3.8/weather-applet.js:14990
 msgid "Failed to Process Weather Info"
 msgstr "Nem sikerült feldolgozni az időjárás-jelentést"
 
@@ -281,7 +281,7 @@ msgstr ""
 "vagy szerezzen egyet a https://developer.climacell.co/sign-up oldalról"
 
 #: 3.0/climacell.js:239 3.0/darkSky.js:229 3.0/weatherbit.js:331
-#: 3.8/weather-applet.js:11877 3.8/weather-applet.js:14871
+#: 3.8/weather-applet.js:11877 3.8/weather-applet.js:14870
 msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
@@ -554,7 +554,7 @@ msgstr ""
 "API-kulcs megadása szükséges a beállításokban,\n"
 "vagy szerezzen egyet a https://darksky.net/dev/register oldalról"
 
-#: 3.0/darkSky.js:238 3.8/weather-applet.js:14881
+#: 3.0/darkSky.js:238 3.8/weather-applet.js:14880
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from DarkSky"
@@ -562,7 +562,7 @@ msgstr ""
 "Ellenőrizze, hogy a DarkSky szolgáltatótól származó\n"
 "API kulcsot helyesen adta meg"
 
-#: 3.0/ipApi.js:89 3.8/weather-applet.js:15197
+#: 3.0/ipApi.js:89 3.8/weather-applet.js:15196
 msgid "Could not obtain location"
 msgstr "Helyzetmeghatározás sikertelen"
 
@@ -1738,7 +1738,7 @@ msgstr "Nagyrészt tiszta"
 msgid "Pirate Weather"
 msgstr "Pirate Weather"
 
-#: 3.8/weather-applet.js:15206
+#: 3.8/weather-applet.js:15205
 msgid ""
 "Location Service couldn't find your location, please see the logs in Looking "
 "Glass"
@@ -1746,13 +1746,13 @@ msgstr ""
 "Földrajzi helymeghatározás nem sikerült, a naplóbejegyzések megtekinthetők a "
 "Looking Glass naplóban"
 
-#: 3.8/weather-applet.js:15428
+#: 3.8/weather-applet.js:15433
 msgid "Make sure you entered a location or use Automatic location instead."
 msgstr ""
 "Ellenőrizze hogy van-e földrajzi helyzet megadva vagy használja az "
 "automatikus helyzet-meghatározást."
 
-#: 3.8/weather-applet.js:15565
+#: 3.8/weather-applet.js:15570
 msgid ""
 "Could not retrieve config, file was not found under paths\n"
 " {configFilePath}"
@@ -1760,7 +1760,7 @@ msgstr ""
 "Nem tölthető be a beállítófájl a megadott elérési útvonalról:\n"
 " {configFilePath}"
 
-#: 3.8/weather-applet.js:15572
+#: 3.8/weather-applet.js:15577
 msgid ""
 "Could not get contents of config file under path\n"
 " {configFilePath}"
@@ -1768,57 +1768,57 @@ msgstr ""
 "Nem tölthető be a beállítófájl tartalma a megadott elérési útvonalról:\n"
 " {configFilePath}"
 
-#: 3.8/weather-applet.js:16192
+#: 3.8/weather-applet.js:16197
 msgid "Dew Point"
 msgstr "Harmatpont"
 
-#: 3.8/weather-applet.js:16264
+#: 3.8/weather-applet.js:16269
 msgid "Precipitation will end in {precipEnd} minutes"
 msgstr "A csapadék {precipEnd} percen belül megszűnik"
 
-#: 3.8/weather-applet.js:16266
+#: 3.8/weather-applet.js:16271
 msgid "Precipitation won't end in within an hour"
 msgstr "A csapadék nem szűnik meg egy órán belül"
 
-#: 3.8/weather-applet.js:16269
+#: 3.8/weather-applet.js:16274
 msgid "Precipitation will start within {precipStart} minutes"
 msgstr "A csapadék {precipStart} percen belül esni kezd"
 
-#: 3.8/weather-applet.js:16481
+#: 3.8/weather-applet.js:16486
 msgid "Forecast parsing failed, see logs for more details."
 msgstr ""
 "Az előrejelzés értelmezése nem sikerült. További részletekért tekintse meg a "
 "naplófájlokat."
 
-#: 3.8/weather-applet.js:17013 3.8/weather-applet.js:17802
+#: 3.8/weather-applet.js:17018 3.8/weather-applet.js:17810
 msgid "As of {lastUpdatedTime}"
 msgstr "Frissítve: {lastUpdatedTime}"
 
-#: 3.8/weather-applet.js:17019
+#: 3.8/weather-applet.js:17024
 msgid "{distance} {distanceUnit} from you"
 msgstr "{distance}{distanceUnit} távolságra Öntől"
 
-#: 3.8/weather-applet.js:17023
+#: 3.8/weather-applet.js:17028
 msgid "Station Name: {stationName}"
 msgstr "Állomásnév: {stationName}"
 
-#: 3.8/weather-applet.js:17026
+#: 3.8/weather-applet.js:17031
 msgid "Area: {stationArea}"
 msgstr "Térség: {stationArea}"
 
-#: 3.8/weather-applet.js:17573 3.8/weather-applet.js:17583
+#: 3.8/weather-applet.js:17581 3.8/weather-applet.js:17591
 msgid "Error Saving Debug Information"
 msgstr "Hiba lépett fel a hibakeresési információk elmentése közben"
 
-#: 3.8/weather-applet.js:17595
+#: 3.8/weather-applet.js:17603
 msgid "Debug Information saved successfully"
 msgstr "A hibakeresési információk sikeresen mentve"
 
-#: 3.8/weather-applet.js:17595
+#: 3.8/weather-applet.js:17603
 msgid "Saved to {filePath}"
 msgstr "Elmentve ide: {filePath}"
 
-#: 3.8/weather-applet.js:17726
+#: 3.8/weather-applet.js:17734
 msgid "This provider requires an API key to operate"
 msgstr ""
 "Ez az időjárás-előrejelzés szolgáltató API-kulcs használatát írj elő a "
