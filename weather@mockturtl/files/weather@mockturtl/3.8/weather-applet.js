@@ -9589,16 +9589,16 @@ class Log {
     CanLog(level) {
         return LogLevelSeverity[level] <= LogLevelSeverity[this.logLevel];
     }
-    Info(message) {
+    Info(message, level = "Info") {
         if (!this.CanLog("info"))
             return;
-        const msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
+        const msg = `[${UUID}#${this.ID}:${level}]: ${message.toString()}`;
         global.log(msg);
     }
     Error(error, e) {
         if (!this.CanLog("error"))
             return;
-        global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString());
+        global.logError("[" + UUID + "#" + this.ID + ":Error]: " + error.toString());
         if (!!(e === null || e === void 0 ? void 0 : e.stack))
             global.logError(e.stack);
     }
@@ -9606,12 +9606,12 @@ class Log {
     Debug(message) {
         if (!this.CanLog("debug"))
             return;
-        this.Info(message);
+        this.Info(message, "Debug");
     }
     Verbose(message) {
         if (!this.CanLog("verbose"))
             return;
-        this.Info(message);
+        this.Info(message, "Verbose");
     }
     UpdateInstanceID(instanceID) {
         this.ID = instanceID;
@@ -14860,7 +14860,6 @@ class PirateWeather extends BaseProvider {
         this.supportHourlyPrecipVolume = true;
         this.remainingQuota = null;
         this.query = "https://api.pirateweather.net/forecast/";
-        this.unit = "si";
         this.HandleError = (message) => {
             if (message.ErrorData.code == 403) {
                 this.app.ShowError({
@@ -15050,7 +15049,7 @@ class PirateWeather extends BaseProvider {
                 return 'si';
             }
             else {
-                return 'uk2';
+                return 'uk';
             }
         }
         else {
@@ -17345,17 +17344,25 @@ class Soup3 {
                 AddHeadersToMessage(message, headers);
                 this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, null, (session, result) => {
                     var _a;
-                    const res = this._httpSession.send_and_read_finish(result);
                     const headers = {};
-                    message.get_response_headers().foreach((name, value) => {
-                        headers[name] = value;
-                    });
-                    resolve({
-                        reason_phrase: (_a = message.get_reason_phrase()) !== null && _a !== void 0 ? _a : "",
-                        status_code: message.get_status(),
-                        response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
-                        response_headers: headers
-                    });
+                    let res = null;
+                    try {
+                        res = this._httpSession.send_and_read_finish(result);
+                        message.get_response_headers().foreach((name, value) => {
+                            headers[name] = value;
+                        });
+                    }
+                    catch (e) {
+                        logger_Logger.Error("Error reading http request's response: " + e);
+                    }
+                    finally {
+                        resolve({
+                            reason_phrase: (_a = message.get_reason_phrase()) !== null && _a !== void 0 ? _a : "",
+                            status_code: message.get_status(),
+                            response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
+                            response_headers: headers
+                        });
+                    }
                 });
             }
         });
@@ -17400,7 +17407,7 @@ class Soup2 {
         return data;
     }
 }
-const soupLib = imports.gi.Soup.MAJOR_VERSION == 3 ? new Soup3() : new Soup2();
+const soupLib = imports.gi.Soup.SessionAsync != undefined ? new Soup2() : new Soup3();
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
 
@@ -17533,7 +17540,10 @@ class WeatherApplet extends TextIconApplet {
                 case NetworkConnectivity.PORTAL:
                     if (this.online === true)
                         break;
-                    logger_Logger.Info("Internet access now available, resuming operations.");
+                    const name = NetworkMonitor.get_default().connectivity == NetworkConnectivity.FULL ? "FULL" :
+                        NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
+                            : "PORTAL";
+                    logger_Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, resuming operations.`);
                     this.encounteredError = false;
                     this.loop.ResetErrorCount();
                     this.loop.Resume();
@@ -17645,9 +17655,9 @@ class WeatherApplet extends TextIconApplet {
         }
         catch (e) {
         }
-        this.loop.Start();
         this.OnNetworkConnectivityChanged();
         NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
+        this.loop.Start();
         this.config.DataServiceChanged.Subscribe(() => this.RefreshAndRebuild());
         this.config.VerticalOrientationChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.ForecastColumnsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));

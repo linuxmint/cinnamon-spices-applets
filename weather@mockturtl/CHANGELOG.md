@@ -1,5 +1,22 @@
 # Changelog
 
+## 3.4.1
+
+Changes:
+
+* Fix [#5414](https://github.com/linuxmint/cinnamon-spices-applets/issues/5414) - Wrong Celsius temperature from Pirate Weather
+
+Fix incorrect soup version detection
+
+* Fix [#5152](https://github.com/linuxmint/cinnamon-spices-applets/issues/5152)
+* Fix [#5430](https://github.com/linuxmint/cinnamon-spices-applets/issues/5430#issuecomment-1920767915)
+
+Fix Applet not loading weather when soup throw error on reading message response - plus check network status before starting the refresh loop instead of after
+
+* Fix [#5425](https://github.com/linuxmint/cinnamon-spices-applets/issues/5425)
+* Fix [#5426](https://github.com/linuxmint/cinnamon-spices-applets/issues/5426)
+* Fix [#5457](https://github.com/linuxmint/cinnamon-spices-applets/issues/5457)
+
 ## 3.4.0
 
 * Fix [#5212](https://github.com/linuxmint/cinnamon-spices-applets/issues/5212)

@@ -7,7 +7,7 @@ import { PirateWeatherMinutelyPayload } from "./minutely";
  * - 'us' returns miles/hour and Fahrenheit
  * - 'uk2' return miles/hour and Celsius
  */
-export type PirateWeatherQueryUnits = 'si' | 'us' | 'uk2';
+export type PirateWeatherQueryUnits = 'si' | 'us' | 'uk';
 
 
 export interface PirateWeatherPayload {
