@@ -63,6 +63,7 @@ body:
     - devutils@fogl
     - dgs-bpivaty@gmail.com @bpivaty
     - diaspora-notif@douze12
+    - directory-menu@torchipeppo @torchipeppo
     - disk-read-and-write-speed@cardsurf @cardsurf
     - download-and-upload-speed@cardsurf @cardsurf
     - duolingo-helper@nodeengineer.com @nodeengineer
@@ -141,11 +142,12 @@ body:
     - rswitcher@nixdev.com @mindbeat
     - rust-menu@jerrywham @jerrywham
     - rwall@typicalfoobar
-    - screen-inhibit@mtwebster
+    - screen-inhibit@mtwebster @claudiux
     - ScreenLocker@tuuxx @tuuxx
     - ScreenShot+RecordDesktop@tech71 @icarter09
     - ScreenShot@tech71
     - scripts@paucapo.com
+    - sct@skulptist.de @Matthias-Hermsdorf
     - search-box@mtwebster
     - Sensors@claudiux @claudiux
     - separator2@zyzz
