@@ -60,6 +60,7 @@ ddcci-multi-monitor@tim-we/**                      @tim-we
 desaturate-all@hkoosha/**                          @hkoosha
 devbar@ludvigbostrom/**                            @ludvigbostrom
 dgs-bpivaty@gmail.com/**                           @bpivaty
+directory-menu@torchipeppo/**                      @torchipeppo
 disk-read-and-write-speed@cardsurf/**              @cardsurf
 download-and-upload-speed@cardsurf/**              @cardsurf
 duolingo-helper@nodeengineer.com/**                @nodeengineer
@@ -111,6 +112,8 @@ redshift@marvel4u/**                               @marvel4u
 restart-cinnamon@kolle/**                          @icarter09
 rswitcher@nixdev.com/**                            @mindbeat
 rust-menu@jerrywham/**                             @jerrywham
+screen-inhibit@mtwebster/**                        @claudiux
+sct@skulptist.de/**                                @Matthias-Hermsdorf
 serviceLauncher@hulygun/**                         @hulygun
 sessionManager@scollins/**                         @collinss
 shadowsocks-switch@Klavionik/**                    @Klavionik
@@ -191,7 +194,6 @@ xsession@claudiux/**                               @claudiux
 # places-with-terminal@mtwebster
 # radio@driglu4it
 # rwall@typicalfoobar
-# screen-inhibit@mtwebster
 # scripts@paucapo.com
 # search-box@mtwebster
 # separator2@zyzz
