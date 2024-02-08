@@ -6,10 +6,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
 "POT-Creation-Date: 2024-02-05 14:47-0500\n"
-"PO-Revision-Date: 2023-05-07 20:14+0200\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"PO-Revision-Date: 2024-02-08 15:05+0100\n"
+"Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -112,7 +113,9 @@ msgstr "Naptár munkaszüneti napokkal"
 
 #. metadata.json->description
 msgid "Calendar applet with public holiday data provided by Enrico service"
-msgstr "Naptári kisalkalmazás munkaszüneti adatokkal, az Enrico szolgáltatás által biztosítva"
+msgstr ""
+"Naptári kisalkalmazás munkaszüneti adatokkal, az Enrico szolgáltatás által "
+"biztosítva"
 
 #. 3.8->settings-schema.json->page1->title
 #. 5.2->settings-schema.json->page1->title
@@ -174,7 +177,8 @@ msgstr "Megjelölés hétvégeként"
 #. 3.8->settings-schema.json->weekend-length->tooltip
 #. 5.2->settings-schema.json->weekend-length->tooltip
 msgid "Set how many days are marked as non-working days per week."
-msgstr "Állítsa be, hogy egy héten hány nap legyen nem munkanapként megjelölve."
+msgstr ""
+"Állítsa be, hogy egy héten hány nap legyen nem munkanapként megjelölve."
 
 #. 3.8->settings-schema.json->weekend-length->options
 #. 5.2->settings-schema.json->weekend-length->options
@@ -193,8 +197,10 @@ msgstr "Egyéni dátumformátum használata"
 
 #. 3.8->settings-schema.json->use-custom-format->tooltip
 #. 5.2->settings-schema.json->use-custom-format->tooltip
-msgid "Check this to define a custom format for the date in the calendar applet."
-msgstr "Válassza ki ezt a naptár kisalkalmazásban egyéni dátumformátum használatához."
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+"Válassza ki ezt a naptár kisalkalmazásban egyéni dátumformátum használatához."
 
 #. 3.8->settings-schema.json->custom-format->description
 #. 5.2->settings-schema.json->custom-format->description
@@ -214,7 +220,8 @@ msgstr "Információk megjelenítése a dátumformátum szintaxisáról"
 #. 3.8->settings-schema.json->format-button->tooltip
 #. 5.2->settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
-msgstr "A dátumformátumok szintaxisáról többet megtudhat, ha erre a gombra kattint."
+msgstr ""
+"A dátumformátumok szintaxisáról többet megtudhat, ha erre a gombra kattint."
 
 #. 3.8->settings-schema.json->country->description
 #. 5.2->settings-schema.json->country->description
@@ -369,7 +376,7 @@ msgstr "Dél-Korea"
 #. 3.8->settings-schema.json->country->options
 #. 5.2->settings-schema.json->country->options
 msgid "kosovo"
-msgstr ""
+msgstr "koszovó"
 
 #. 3.8->settings-schema.json->country->options
 #. 5.2->settings-schema.json->country->options
