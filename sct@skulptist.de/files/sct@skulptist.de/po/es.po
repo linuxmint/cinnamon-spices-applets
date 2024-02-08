@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-08 11:35+0100\n"
-"PO-Revision-Date: 2024-02-08 11:46+0100\n"
+"POT-Creation-Date: 2024-02-08 22:36+0100\n"
+"PO-Revision-Date: 2024-02-08 19:27-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:73
+#: applet.js:74
 msgid "sct is now at"
 msgstr "sct está ahora en"
 
@@ -36,13 +36,12 @@ msgstr "Conmutador SCT"
 
 #. metadata.json->description
 msgid ""
-"Toggle screen temperatures with sct. \n"
-"Set up to 7 custom color temperatures and toggle through by clicking on the "
-"applet"
+"Toggle screen temperatures with sct. Set up to 7 custom color temperatures "
+"and toggle through by clicking on the applet"
 msgstr ""
 "Cambie la temperatura de color de la pantalla con sct.\n"
-"Configure hasta 7 temperaturas de color y cambia entre ellas haciendo clic "
-"en el applet"
+"Configure hasta 7 temperaturas de color personalizadas y cambie entre ellas "
+"haciendo clic en el applet"
 
 #. settings-schema.json->head->description
 msgid "Color Temperatur Steps"
