@@ -1,13 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# This file is put in the public domain.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: sct@skulptist.de 1.0.1\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2024-02-05 15:38-0500\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-08 11:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,15 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:127
+#: applet.js:73
 msgid "sct is now at"
 msgstr ""
 
-#: applet.js:131
+#: connectSct.js:14
 msgid "sct not found"
 msgstr ""
 
-#: applet.js:132
+#: connectSct.js:15
 msgid "Please install sct to set the color temperature with this applet."
 msgstr ""
 
@@ -48,7 +49,9 @@ msgstr ""
 
 #. settings-schema.json->colorStep1->tooltip
 #. settings-schema.json->colorStep2->tooltip
-msgid "Add a value between 1000 and 10000, where 1000 is red, 6500 is daylight and 10000 is blue"
+msgid ""
+"Add a value between 1000 and 10000, where 1000 is red, 6500 is daylight and "
+"10000 is blue."
 msgstr ""
 
 #. settings-schema.json->colorStep2->description
@@ -64,7 +67,7 @@ msgstr ""
 #. settings-schema.json->colorStep5->tooltip
 #. settings-schema.json->colorStep6->tooltip
 #. settings-schema.json->colorStep7->tooltip
-msgid "Optional. Add another value between 1000 and 10000, or leave empty"
+msgid "Optional. Add another value between 1000 and 10000, or leave empty."
 msgstr ""
 
 #. settings-schema.json->colorStep4->description
@@ -92,9 +95,9 @@ msgid "The icon to use in the panel"
 msgstr ""
 
 #. settings-schema.json->iconName->tooltip
-msgid "Select an icon file, or you can type an icon name into the entry box"
+msgid "Select an icon file, or you can type an icon name into the entry box."
 msgstr ""
 
 #. settings-schema.json->resetIconName->description
-msgid "reset icon name"
+msgid "Reset icon name"
 msgstr ""
