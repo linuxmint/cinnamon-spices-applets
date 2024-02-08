@@ -1,8 +1,8 @@
 // Shutdown Menu With Icons Cinnamon Applet
-// Developed by Nicolas LLOBERA - nllobera@gmail.com from the System Shutdown and Restart Applet by Shelley
-// version: 2.2 (28-08-2013)
+// Developed by Nicolas LLOBERA from the System Shutdown and Restart Applet by Shelley
+// version: 2.3 (08-02-2024)
 // License: GPLv3
-// Copyright © 2013 Nicolas LLOBERA
+// Copyright © 2024 Nicolas LLOBERA
 
 const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
