@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-11 10:39-0500\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-09 17:42-0500\n"
 "PO-Revision-Date: 2024-01-13 12:48+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,62 +19,66 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:83
+#: applet.js:91 applet.js:269 applet.js:271
 msgid "Translator"
 msgstr "Fordító"
 
-#: applet.js:189
+#: applet.js:197
 msgid "Unable to query available languages from translate-shell"
 msgstr ""
 "Nem lehet lekérdezni a rendelkezésre álló nyelveket a translate-shellből"
 
-#: applet.js:197
+#: applet.js:208
 msgid "Required \"trans\" command not found, please install translate-shell"
 msgstr ""
 "A szükséges \"trans\" parancs nem található, kérjük telepítse a translate-"
 "shellt"
 
-#: applet.js:201
+#: applet.js:212
 msgid "Error, the \"trans\" command returned an exit code of "
 msgstr "Hiba, a \"trans\" parancs a következő kilépési kódot adta vissza:"
 
-#: applet.js:272
+#: applet.js:292
 msgid "Swap Languages"
 msgstr "Nyelvek cseréje"
 
-#: applet.js:307
+#: applet.js:329
 msgid "{Text to translate}"
 msgstr "{Szöveg a fordításhoz}"
 
-#: applet.js:324
+#: applet.js:342
 msgid "{Translated text}"
 msgstr "{Lefordított szöveg}"
 
-#: applet.js:338
+#: applet.js:356
 msgid "Configure"
 msgstr "Beállítás"
 
-#: applet.js:339
+#: applet.js:357
+msgid "Help"
+msgstr ""
+
+#: applet.js:361
 msgid "Play"
 msgstr "Lejátszás"
 
-#: applet.js:343
+#: applet.js:365
 msgid "Paste"
 msgstr "Beillesztés"
 
-#: applet.js:347
+#: applet.js:369
 msgid "Clear"
 msgstr "Törlés"
 
-#: applet.js:351
+#: applet.js:373
 msgid "Translate"
 msgstr "Fordítás"
 
-#: applet.js:356
+#: applet.js:378
 msgid "Copy"
 msgstr "Másolás"
 
-#: applet.js:362
+#: applet.js:384
 msgid "Play Translation"
 msgstr "Fordítás lejátszása"
 
@@ -88,18 +93,6 @@ msgid ""
 msgstr ""
 "Fordítson szöveget más nyelvekre a Cinnamon panelről a Google, Bing és más "
 "fordítók segítségével"
-
-#. settings-schema.json->languages-header->description
-msgid "Default Languages"
-msgstr "Alapvető nyelvek"
-
-#. settings-schema.json->default-from-language->description
-msgid "Source language"
-msgstr "Forrás nyelv"
-
-#. settings-schema.json->default-to-language->description
-msgid "Target language"
-msgstr "Cél nyelv"
 
 #. settings-schema.json->engine-header->description
 msgid "Translation Engine"
