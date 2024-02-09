@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-08 11:35+0100\n"
-"PO-Revision-Date: 2024-02-08 15:16+0100\n"
+"POT-Creation-Date: 2024-02-08 22:36+0100\n"
+"PO-Revision-Date: 2024-02-09 12:45+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:73
+#: applet.js:74
 msgid "sct is now at"
 msgstr "sct jelenleg"
 
@@ -38,13 +38,11 @@ msgstr "SCT kapcsoló"
 
 #. metadata.json->description
 msgid ""
-"Toggle screen temperatures with sct. \n"
-"Set up to 7 custom color temperatures and toggle through by clicking on the "
-"applet"
+"Toggle screen temperatures with sct. Set up to 7 custom color temperatures "
+"and toggle through by clicking on the applet"
 msgstr ""
-"Váltsa át a képernyő hőmérsékletét az sct-vel.\n"
-"Állítson be akár 7 egyedi színhőmérsékletet és váltogasson közöttük a "
-"kisalkalmazásra való kattintással"
+"Váltsa át a képernyő hőmérsékletét az sct-vel.Állítson be akár 7 egyedi "
+"színhőmérsékletet és váltogasson közöttük a kisalkalmazásra való kattintással"
 
 #. settings-schema.json->head->description
 msgid "Color Temperatur Steps"
@@ -78,8 +76,8 @@ msgstr "Színhőmérséklet a 3. lépésben"
 #. settings-schema.json->colorStep7->tooltip
 msgid "Optional. Add another value between 1000 and 10000, or leave empty."
 msgstr ""
-"Választható. Adjon hozzá egy másik értéket 1000 és 10000 között, vagy "
-"hagyja üresen."
+"Választható. Adjon hozzá egy másik értéket 1000 és 10000 között, vagy hagyja "
+"üresen."
 
 #. settings-schema.json->colorStep4->description
 msgid "Color temperatur at step 4"
