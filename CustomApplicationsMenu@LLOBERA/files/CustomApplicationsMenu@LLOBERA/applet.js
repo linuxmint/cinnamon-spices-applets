@@ -1,7 +1,7 @@
 // Custom Applications Menu Cinnamon Applet
-// Developed by Nicolas LLOBERA - nllobera@gmail.com
+// Developed by Nicolas LLOBERA
 // License: GPLv3
-// Copyright © 2012 Nicolas LLOBERA
+// Copyright © 2024 Nicolas LLOBERA
 
 /* Import */
 const Gettext   = imports.gettext;
