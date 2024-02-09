@@ -27,9 +27,12 @@ const Util = imports.misc.util;
 const Lang = imports.lang;
 const Tooltips = imports.ui.tooltips;
 const Clutter = imports.gi.Clutter;
+const Config = imports.misc.config;
 
 const UUID = "PanelTranslator@klangman";
 const ICON_SIZE = 16;
+
+const majorVersion = parseInt(Config.PACKAGE_VERSION.substring(0,1));
 
 const { hardcodedLanguages } = require('./languages_0_9_6_12.js');
 
@@ -70,6 +73,11 @@ function _(text) {
     locText = window._(text);
   }
   return locText;
+}
+
+function escapeQuotes(txt) {
+   txt = txt.replace(/\"/g, "\\\"");
+   return txt;
 }
 
 class PanelTranslatorApp extends Applet.IconApplet {
@@ -194,6 +202,7 @@ class PanelTranslatorApp extends Applet.IconApplet {
             let toDefName = this.settings.getValue("default-to-language");
             this.translatorPopup.setFromLanguage( this.getLanguage( fromDefName ), fromDefName );
             this.translatorPopup.setToLanguage(   this.getLanguage( toDefName ), toDefName );
+            this.updateTooltip( fromDefName, toDefName );
          }
       } else if (exitCode===127){
          this.infomenuitem.label.set_text(_("Required \"trans\" command not found, please install translate-shell"));
@@ -255,6 +264,13 @@ class PanelTranslatorApp extends Applet.IconApplet {
       this.engine = ret;
    }
 
+   updateTooltip(fromLanguageTxt, toLanguageTxt) {
+      if(majorVersion > 4 && fromLanguageTxt.length > 0 && toLanguageTxt.length > 0){
+         this.set_applet_tooltip("<b>" + _("Translator") + "</b>" + "\n" + fromLanguageTxt + " \u{2B95} " + toLanguageTxt, true);
+      } else {
+         this.set_applet_tooltip(_("Translator"));
+      }
+   }
 }
 
 class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
@@ -317,7 +333,7 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
       text.set_max_length(200);
       text.connect('text-changed', () => {this.enableTranslateIfPossible();});
       text.connect('activate', (actor, event) => {
-         Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + this.fromTextBox.get_text() + "\"", Lang.bind(this, this.readTranslation) );
+         Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
          });
       //fromScrollView.set_child(this.fromTextBox);
       this.textBox.add_child(this.fromTextBox);
@@ -343,7 +359,7 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
          Util.spawnCommandLineAsync("/usr/bin/xdg-open https://cinnamon-spices.linuxmint.com/applets/view/385");
          });
       this.playFrom = new ControlButton("audio-speakers-symbolic", _("Play"), () => {
-         Util.spawnCommandLineAsync("trans -b -p -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.fromLanguage.code + " \"" + this.fromTextBox.get_text() + "\"");
+         Util.spawnCommandLineAsync("trans -b -p -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.fromLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"");
          });
       this.playFrom.setEnabled(false);
       this.paste = new ControlButton("edit-paste-symbolic", _("Paste"), () => {
@@ -355,7 +371,7 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
          this.toTextBox.set_text("");
          });
       this.translate = new ControlButton("media-playback-start-symbolic", _("Translate"), () => {
-         Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + this.fromTextBox.get_text() + "\"", Lang.bind(this, this.readTranslation) );
+         Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
          });
       this.translate.setEnabled(false);
       let toBtnBox = new St.BoxLayout({x_align: Clutter.ActorAlign.END, x_expand: true});
@@ -366,7 +382,7 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
       this.copy.setEnabled(false);
       this.copy.getActor().set_x_align(Clutter.ActorAlign.END);
       this.playTo = new ControlButton("audio-speakers-symbolic", _("Play Translation"), () => {
-         Util.spawnCommandLineAsync("trans -b -p -e " + this._applet.engine + " " + this.toLanguage.code + ":" + this.toLanguage.code + " \"" + this.toTextBox.get_text() + "\"");
+         Util.spawnCommandLineAsync("trans -b -p -e " + this._applet.engine + " " + this.toLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.toTextBox.get_text()) + "\"");
          });
       this.playTo.setEnabled(false);
 
@@ -441,13 +457,13 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
          // Set the text box to "" since the associated language has been changed.
          if (actor == this.fromSearchEntry.get_clutter_text()) {
             this.fromLanguage = language;
-            this.fromTextBox.set_text("");
+            this.fromTextBox.set_text(""); // Clear the text box since the language has changed!
             if (language) {
                this._applet.settings.setValue("default-from-language", useEnglish ? language.englishName : language.name);
             }
          } else {
             this.toLanguage = language;
-            this.toTextBox.set_text("");
+            this.toTextBox.set_text(""); // Clear the text box since the language has changed!
             if (language) {
                this._applet.settings.setValue("default-to-language", useEnglish ? language.englishName : language.name);
             }
@@ -462,6 +478,7 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
          }
          actor.set_cursor_position(cursorPos);
       }
+      this._applet.updateTooltip(this.fromSearchEntry.get_text(), this.toSearchEntry.get_text());
    }
 
    readTranslation(stdout, stderr, exitCode) {
@@ -473,7 +490,7 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
 
    playTranslation(stdout, stderr, exitCode) {
       if (this.readTranslation(stdout, stderr, exitCode)==0) {
-         Util.spawnCommandLineAsync("trans -b -p -e " + this._applet.engine + " " + this.toLanguage.code + ":" + this.toLanguage.code + " \"" + this.toTextBox.get_text() + "\"");
+         Util.spawnCommandLineAsync("trans -b -p -e " + this._applet.engine + " " + this.toLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.toTextBox.get_text()) + "\"");
       }
    }
 
@@ -494,14 +511,14 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
 
    // Callback that gets the clipboard text then performs some action with that text.
    clipboardText(cb, text, translate, play=false, copy=false) {
-      this.fromTextBox.set_text(text);
+      this.fromTextBox.set_text(text.trim());
       if (translate) {
          if (play) {
-            Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + this.fromTextBox.get_text() + "\"", Lang.bind(this, this.playTranslation) );
+            Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.playTranslation) );
          } else if (copy) {
-            Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + this.fromTextBox.get_text() + "\"", Lang.bind(this, this.copyTranslation) );
+            Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.copyTranslation) );
          } else {
-            Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + this.fromTextBox.get_text() + "\"", Lang.bind(this, this.readTranslation) );
+            Util.spawnCommandLineAsyncIO( "trans -b -e " + this._applet.engine + " " + this.fromLanguage.code + ":" + this.toLanguage.code + " \"" + escapeQuotes(this.fromTextBox.get_text()) + "\"", Lang.bind(this, this.readTranslation) );
          }
       } else {
          this.toTextBox.set_text("");
