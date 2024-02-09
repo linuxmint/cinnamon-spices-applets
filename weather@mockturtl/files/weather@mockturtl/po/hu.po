@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: oversteer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-01 22:49+0000\n"
-"PO-Revision-Date: 2024-02-08 12:05+0100\n"
+"PO-Revision-Date: 2024-02-09 19:05+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu_HU\n"
@@ -2175,7 +2175,7 @@ msgstr "Napfelkelte és napnyugta mutatása"
 #. 3.0->settings-schema.json->show24Hours->description
 #. 3.8->settings-schema.json->show24Hours->description
 msgid "Display time in 24 hour format"
-msgstr "Huszonnégy órás időformátum"
+msgstr "Idő megjelenítése 24 órás formátumban"
 
 #. 3.0->settings-schema.json->shortHourlyTime->description
 #. 3.8->settings-schema.json->shortHourlyTime->description
