@@ -8,9 +8,10 @@ This is a re-creation of a built-in feature in XFCE.
 
 * View the selected directory as a compact list
 * **Arbitrarily deep navigation through subdirectories**
+* Fast navigation: just hover on a directory to open it
 * Open any file by clicking on it
 * "Open in Terminal" button for directories
-* Configurable setting for showing or hiding hidden files
+* Configurable settings for handling hidden files, limiting menu width, and customization
 
 ## Installation
 

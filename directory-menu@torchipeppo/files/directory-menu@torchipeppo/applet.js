@@ -37,6 +37,7 @@ class CassettoneApplet extends Applet.IconApplet {
         this.settings.bind("show-hidden", "show_hidden", null, null);
         this.settings.bind("icon-name", "icon_name", this.set_applet_icon_symbolic_name, null);
         this.settings.bind("tooltip", "tooltip_text", (newtext) => {this.set_applet_tooltip(_(newtext))}, null);
+        this.settings.bind("character-limit", "character_limit", null, null);
         this.starting_uri = this.normalize_tilde(this.starting_uri);
 
         this.set_applet_icon_symbolic_name(this.icon_name);
@@ -138,6 +139,7 @@ class CassettoneApplet extends Applet.IconApplet {
             "x": x,
             "y": y,
             "orientation": o,
+            "character_limit": this.character_limit,
         }
 
         Util.spawn_async(['python3', `${this.metadata.path}/popup_menu.py`, JSON.stringify(args)]);
