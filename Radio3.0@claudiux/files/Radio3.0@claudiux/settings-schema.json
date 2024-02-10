@@ -308,7 +308,9 @@
       "type": "section",
       "title": "Database Info",
       "keys": [
-        "database-url"
+        "database-url",
+        "database-favorite",
+        "help_favDB"
       ]
     },
     "sectionRecordingRecordings": {
@@ -1022,6 +1024,18 @@
     "description": "Database URL",
     "default": "",
     "height": 25
+  },
+  "database-favorite": {
+    "type": "combobox",
+    "default": "random",
+    "description": "Your favorite database:",
+    "options": {
+      "Random": "random"
+    }
+  },
+  "help_favDB": {
+    "type": "label",
+    "description": "Please note that the new database URL will only be shown in the text above the next time you open this window. However, your choice is immediately taken into account."
   },
   "recording-path": {
     "type": "filechooser",

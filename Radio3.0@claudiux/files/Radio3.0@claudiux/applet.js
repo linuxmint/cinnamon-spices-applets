@@ -1,22 +1,19 @@
-'use strict';
+//'use strict';
 // infos on use strict: https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Strict_mode
-const {
-  TextIconApplet,
+const { TextIconApplet,
   AllowedLayout,
   AppletPopupMenu
 } = imports.ui.applet; //Applet
 
 const AppletManager = imports.ui.appletManager; //AppletManager
 
-const {
-  WindowTracker,
+const { WindowTracker,
   AppSystem
 } = imports.gi.Cinnamon; //Cinnamon
 
 const Lang = imports.lang;
 
-const {
-  PopupMenuManager,
+const { PopupMenuManager,
   PopupMenuItem,
   PopupSeparatorMenuItem,
   PopupIconMenuItem,
@@ -196,7 +193,9 @@ const {to_string} = require("./lib/to-string");
 
 const {HttpLib} = require("./lib/httpLib");
 
-const { fixedEncodeURIComponent } = require("./lib/fixedEncodeURIComponent");
+const {
+  fixedEncodeURIComponent
+} = require("./lib/fixedEncodeURIComponent");
 
 const {
   are_translations_installed,
@@ -1045,6 +1044,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.tabNumberOfScheduling = 1*userSettings["layoutradio"]["pages"].indexOf("pageScheduling");
     this.tabNumberOfSearch = 1*userSettings["layoutradio"]["pages"].indexOf("pageSearch");
+    this.tabNumberOfNetwork = 1*userSettings["layoutradio"]["pages"].indexOf("pageNetwork");
     this.tabNumberOfRecording = 1*userSettings["layoutradio"]["pages"].indexOf("pageRecording");
     this.tabNumberOfYT = 1*userSettings["layoutradio"]["pages"].indexOf("pageYT");
     userSettings = null;
@@ -1056,7 +1056,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.check_hd_space_left();
 
     // Database:
+    let favorite_options = { "Random": "random" };
+    for (let _server of this.DB_SERVERS) {
+      favorite_options[_server] = _server;
+    }
+    this.settings.setOptions("database-favorite", favorite_options);
     this.get_random_server_name();
+    favorite_options = null;
 
     // Screensaver Inhibitor:
     this.screensaver_inhibitor = new ScreensaverInhibitor.ScreensaverInhibitor(this);
@@ -1186,6 +1192,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     // Network:
     this.settings.bind("network-monitoring", "network_monitoring", this.on_network_monitoring_changed.bind(this));
     this.settings.bind("network-quality", "network_quality");
+    this.settings.bind("database-url", "database_url");
+    this.settings.bind("database-favorite", "database_favorite", this.on_database_favorite_changed.bind(this));
 
     // YT:
     this.settings.bind("yt-progress-interval", "yt_interval");
@@ -1213,6 +1221,26 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (index > -1 && this.context_menu_item_showVolumeNearIcon._switch.state != this.show_volume_level_near_icon) {
       this.context_menu_item_showVolumeNearIcon._switch.setToggleState(this.show_volume_level_near_icon);
     }
+  }
+
+  on_database_favorite_changed() {
+    if (this.database_favorite !== "random") {
+      //~ this.database_url = ""+this.database_favorite;
+
+      let id_to = setTimeout( Lang.bind(this, () => {
+        //~ var fav = ""+this.settings.getValue("database-favorite");
+        //~ this.settings.setValue("database-url", ""+fav);
+        //~ this.settings.getValue("database-url");
+        this.settings.setValue("database-url", ""+this.settings.getValue("database-favorite"));
+        //~ this.configureApplet(this.tabNumberOfNetwork);
+        //~ this.settings.emit("settings-changed");
+        this.get_random_server_name();
+        clearTimeout(id_to);
+      }), 1000);
+    } else {
+      this.get_random_server_name();
+    }
+    //~ this.get_random_server_name()
   }
 
   onShortcutChanged() {
@@ -4194,6 +4222,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     ))
   }
 
+  //~ on_network_button_favDB_clicked() {
+    //~ this.database_url = ""+this.database_favorite;
+    //~ this.settings._checkSettings();
+  //~ }
+
   to_ranges(arr) {
     // Ex: arr = ['1', '2', '3', '5', '7', '8', '9']
     if (arr.length === 0) return "";
@@ -5452,18 +5485,23 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   get_random_server_name(pos=null) {
-    let _ret;
+    var _ret;
 
-    if (pos != null && typeof(pos) === "number") {
-      // Change of server was requested:
-      _ret = ""+this.DB_SERVERS[pos-1]
-    } else if (this.server_name != null) {
-      // Ensure that the server is the same during all session:
-      _ret = ""+this.server_name
+    let _favorite_database = this.settings.getValue("database-favorite");
+    if (_favorite_database === "random") {
+      if (pos != null && typeof(pos) === "number") {
+        // Change of server was requested:
+        _ret = ""+this.DB_SERVERS[pos-1]
+      } else if (this.server_name != null) {
+        // Ensure that the server is the same during all session:
+        _ret = ""+this.server_name
+      } else {
+        // Random server:
+        //log("this.DB_SERVERS.length: "+this.DB_SERVERS.length, true);
+        _ret = ""+this.DB_SERVERS[random_int_range(0, this.DB_SERVERS.length)]
+      }
     } else {
-      // Random server:
-      //log("this.DB_SERVERS.length: "+this.DB_SERVERS.length, true);
-      _ret = ""+this.DB_SERVERS[random_int_range(0, this.DB_SERVERS.length)]
+      _ret = ""+_favorite_database;
     }
 
     //log("get_random_server_name: "+_ret+"; length: "+this.DB_SERVERS.length, true);
