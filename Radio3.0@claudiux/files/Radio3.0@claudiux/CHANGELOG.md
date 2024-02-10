@@ -1,3 +1,6 @@
+### v1.15.2~20240210
+  * Added the ability to choose a favorite database to search for radio stations.
+
 ### v1.15.1~20240201
   * Reverses certain modifications because of the risk of data loss.
   * Code cleanup.
