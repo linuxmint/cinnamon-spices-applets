@@ -16,6 +16,15 @@
         "default": "Directory Menu",
         "description": "Tooltip text"
     },
+    "character-limit": {
+        "type": "spinbutton",
+        "default" : -1,
+        "min": -1,
+        "max": 9999,
+        "step": 1,
+        "description" : "Character Limit (-1 to disable)",
+        "tooltip": "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide."
+    },
     "show-hidden": {
         "type": "switch",
         "default": false,

@@ -111,6 +111,8 @@ class Cassettone:
 
     def add_to_menu_from_gioinfo(self, menu, info):
         display_text = info.display_name
+        if self.character_limit > -1 and len(display_text) > self.character_limit:
+            display_text = display_text[:self.character_limit] + "..."
 
         icon = Gio.content_type_get_icon(info.content_type)
         image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.MENU)
@@ -238,6 +240,7 @@ class Cassettone:
         self.x = args["x"]
         self.y = args["y"]
         self.orientation = args["orientation"]
+        self.character_limit = args["character_limit"]
 
         # https://github.com/linuxmint/xapp/blob/master/libxapp/xapp-status-icon.c#L222
         # would be nice to determine it somehow, but it might not be so important right now
