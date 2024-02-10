@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-04 22:10+0000\n"
-"PO-Revision-Date: 2024-02-04 18:53-0500\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-10 15:22+0100\n"
+"PO-Revision-Date: 2024-02-10 12:34-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -43,6 +44,18 @@ msgstr "Debe ser un nombre de icono (sin ruta), y debe ser simbólico."
 #. settings-schema.json->tooltip->description
 msgid "Tooltip text"
 msgstr "Texto de información sobre herramientas"
+
+#. settings-schema.json->character-limit->description
+msgid "Character Limit (-1 to disable)"
+msgstr "Límite de caracteres (-1 para desactivar)"
+
+#. settings-schema.json->character-limit->tooltip
+msgid ""
+"(Approximately) Limit the number of characters of each entry.\n"
+"Useful if you think the menu is too wide."
+msgstr ""
+"Limita (aproximadamente) el número de caracteres de cada entrada.\n"
+"Útil si crees que el menú es demasiado amplio."
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
