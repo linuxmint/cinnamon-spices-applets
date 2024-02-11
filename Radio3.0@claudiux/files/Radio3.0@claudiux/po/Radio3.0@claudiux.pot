@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-10 21:39+0100\n"
+"POT-Creation-Date: 2024-02-11 14:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1330,10 +1330,6 @@ msgstr ""
 msgid "Apply HTTP Proxy"
 msgstr ""
 
-#. settings-schema.json->database-url->description
-msgid "Database URL"
-msgstr ""
-
 #. settings-schema.json->database-favorite->description
 msgid "Your favorite database:"
 msgstr ""
@@ -1342,11 +1338,8 @@ msgstr ""
 msgid "Random"
 msgstr ""
 
-#. settings-schema.json->help_favDB->description
-msgid ""
-"Please note that the new database URL will only be shown in the text above "
-"the next time you open this window. However, your choice is immediately "
-"taken into account."
+#. settings-schema.json->database-url->description
+msgid "Database URL"
 msgstr ""
 
 #. settings-schema.json->recording-path->description

@@ -1,3 +1,6 @@
+### v1.15.3~20240211
+  * Minor changes in settings (Network tab).
+
 ### v1.15.2~20240210
   * Added the ability to choose a favorite database to search for radio stations.
 

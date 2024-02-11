@@ -308,9 +308,8 @@
       "type": "section",
       "title": "Database Info",
       "keys": [
-        "database-url",
         "database-favorite",
-        "help_favDB"
+        "database-url"
       ]
     },
     "sectionRecordingRecordings": {
@@ -1019,12 +1018,6 @@
     "callback": "set_MPV_ALIAS",
     "description": "Apply HTTP Proxy"
   },
-  "database-url": {
-    "type": "textview",
-    "description": "Database URL",
-    "default": "",
-    "height": 25
-  },
   "database-favorite": {
     "type": "combobox",
     "default": "random",
@@ -1033,9 +1026,12 @@
       "Random": "random"
     }
   },
-  "help_favDB": {
-    "type": "label",
-    "description": "Please note that the new database URL will only be shown in the text above the next time you open this window. However, your choice is immediately taken into account."
+  "database-url": {
+    "type": "textview",
+    "dependency": "database-favorite=random",
+    "description": "Database URL",
+    "default": "",
+    "height": 25
   },
   "recording-path": {
     "type": "filechooser",

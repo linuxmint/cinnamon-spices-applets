@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Radio3.0@claudiux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-10 21:39+0100\n"
-"PO-Revision-Date: 2024-02-10 21:41+0100\n"
+"POT-Creation-Date: 2024-02-11 14:41+0100\n"
+"PO-Revision-Date: 2024-02-11 14:41+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -1444,10 +1444,6 @@ msgstr ""
 msgid "Apply HTTP Proxy"
 msgstr "Appliquer ce Proxy HTTP"
 
-#. settings-schema.json->database-url->description
-msgid "Database URL"
-msgstr "URL de la base de données"
-
 #. settings-schema.json->database-favorite->description
 msgid "Your favorite database:"
 msgstr "Votre base de données favorite :"
@@ -1456,15 +1452,9 @@ msgstr "Votre base de données favorite :"
 msgid "Random"
 msgstr "Aléatoire"
 
-#. settings-schema.json->help_favDB->description
-msgid ""
-"Please note that the new database URL will only be shown in the text above "
-"the next time you open this window. However, your choice is immediately "
-"taken into account."
-msgstr ""
-"Veuillez noter que la nouvelle URL de la base de données ne sera affichée "
-"dans le texte ci-dessus que lors de la prochaine ouverture de cette fenêtre. "
-"Cependant, votre choix est immédiatement pris en compte."
+#. settings-schema.json->database-url->description
+msgid "Database URL"
+msgstr "URL de la base de données"
 
 #. settings-schema.json->recording-path->description
 msgid "Path to the folder that will contain your future recordings"
@@ -2967,84 +2957,4 @@ msgstr "Rechercher..."
 msgid "Remove selected items"
 msgstr "Supprimer de cette liste les stations sélectionnées"
 
-#~ msgid "Symbolic Icon Color"
-#~ msgstr "Couleur de l'icône symbolique"
 
-#~ msgid "Search for other stations in the Radio Database."
-#~ msgstr "Chercher d'autres stations dans la base de données."
-
-#~ msgid "Unable to download from YT"
-#~ msgstr "Impossible de télécharger ceci depuis YT"
-
-#~ msgid "Consent"
-#~ msgstr "Consentement"
-
-#~ msgid "Type"
-#~ msgstr "Type"
-
-#~ msgid "Symbolic Icon"
-#~ msgstr "Icône symbolique"
-
-#~ msgid "Full Color Icon"
-#~ msgstr "Icône en couleurs"
-
-#~ msgid "Allow to record songs or programs"
-#~ msgstr "Permettre d'enregistrer des chansons ou des programmes"
-
-#~ msgid "Recordings are not allowed. See in the Recording tab."
-#~ msgstr ""
-#~ "Les enregistrements ne sont pas autorisés (cf. onglet Enregistrement)."
-
-#~ msgid "Extract soundtrack from a YT video..."
-#~ msgstr "Extraire la bande sonore d'une vidéo YouTube..."
-
-#~ msgid "Record this!"
-#~ msgstr "Enregistrer ça !"
-
-#~ msgid "Find Radio Station"
-#~ msgstr "Trouver une station"
-
-#~ msgid "Add to My Stations"
-#~ msgstr "Ajouter à ma liste de stations"
-
-#~ msgid "Poor"
-#~ msgstr "Faible"
-
-#~ msgid ""
-#~ "If the category you just created does not appear in the drop-down list, "
-#~ "press the button above."
-#~ msgstr ""
-#~ "Si la catégorie que vous venez de créer n'apparaît pas dans la liste "
-#~ "déroulante, pressez le bouton ci-dessus."
-
-#~ msgid "This window will disappear and reappear updated after two seconds."
-#~ msgstr ""
-#~ "Cette fenêtre disparaîtra pour réapparaître actualisée au bout de deux "
-#~ "secondes."
-
-#~ msgid "Update the Category and Station lists"
-#~ msgstr "Mettre à jour les listes de Catégories et de Stations"
-
-#~ msgid "Frequency of checks"
-#~ msgstr "Fréquence des vérifications"
-
-#~ msgid "12"
-#~ msgstr "12"
-
-#~ msgid "24"
-#~ msgstr "24"
-
-#~ msgid "0: disable all checks"
-#~ msgstr "0 : désactive toutes les vérifications"
-
-#~ msgid "The value above is the number of checks"
-#~ msgstr "La valeur ci-dessus est le nombre de vérifications"
-
-#~ msgid "per hour"
-#~ msgstr "par heure"
-
-#~ msgid "per day"
-#~ msgstr "par jour"
-
-#~ msgid "Import the selected items into my radio list"
-#~ msgstr "Importer dans ma liste les stations sélectionnées"
