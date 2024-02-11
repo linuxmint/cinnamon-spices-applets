@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-17 23:49-0500\n"
-"PO-Revision-Date: 2023-12-25 12:59+0100\n"
+"POT-Creation-Date: 2024-02-06 10:21-0500\n"
+"PO-Revision-Date: 2024-02-11 16:45+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,28 +18,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: 4.0/applet.js:512
+#: 4.0/applet.js:516
 msgid "all buttons"
 msgstr "tous les boutons"
 
-#: 4.0/applet.js:2370
+#: 4.0/applet.js:2501
 msgid "Applet Preferences"
 msgstr "Préférences"
 
-#: 4.0/applet.js:2374
+#: 4.0/applet.js:2505
 msgid "About..."
 msgstr "À propos..."
 
-#: 4.0/applet.js:2378
+#: 4.0/applet.js:2509
 msgid "Configure..."
 msgstr "Configurer..."
 
-#: 4.0/applet.js:2382
+#: 4.0/applet.js:2513
+msgid "Website"
+msgstr "Site web"
+
+#: 4.0/applet.js:2517
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Supprimer '%s'"
 
-#: 4.0/applet.js:2384
+#: 4.0/applet.js:2519
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Voulez-vous vraiment supprimer cette instance de CassiaWindowList ?"
 
@@ -49,111 +53,111 @@ msgstr "Voulez-vous vraiment supprimer cette instance de CassiaWindowList ?"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2393
+#: 4.0/applet.js:2528
 msgid "Open new window"
 msgstr "Ouvrir une nouvelle fenêtre"
 
-#: 4.0/applet.js:2401
+#: 4.0/applet.js:2536
 msgid "Remove from panel"
 msgstr "Retirer du panneau"
 
-#: 4.0/applet.js:2403
+#: 4.0/applet.js:2538
 msgid "Remove from this workspace"
 msgstr "Retirer de cet espace de travail"
 
-#: 4.0/applet.js:2409
+#: 4.0/applet.js:2544
 msgid "Pin to panel"
 msgstr "Épingler au panneau"
 
-#: 4.0/applet.js:2411
+#: 4.0/applet.js:2546
 msgid "Pin to this workspace"
 msgstr "Épingler à cet espace de travail"
 
-#: 4.0/applet.js:2452
+#: 4.0/applet.js:2587
 msgid "Pin to other workspaces"
 msgstr "Épingler aux autres espaces de travail"
 
-#: 4.0/applet.js:2473
+#: 4.0/applet.js:2608
 msgid "Pin to all workspaces"
 msgstr "Épingler à tous les espaces de travail"
 
-#: 4.0/applet.js:2491
+#: 4.0/applet.js:2626
 msgid "Pin to launcher"
 msgstr "Épingler au lanceur"
 
-#: 4.0/applet.js:2509 4.0/applet.js:2695
+#: 4.0/applet.js:2644 4.0/applet.js:2830
 msgid "Add new Hotkey for"
 msgstr "Ajouter un nouveau raccourci clavier pour"
 
-#: 4.0/applet.js:2523
+#: 4.0/applet.js:2658
 msgid "Recent files"
 msgstr "Fichiers récents"
 
-#: 4.0/applet.js:2547
+#: 4.0/applet.js:2682
 msgid "Places"
 msgstr "Emplacements"
 
-#: 4.0/applet.js:2589
+#: 4.0/applet.js:2724
 msgid "Only on this workspace"
 msgstr "Seulement sur cet espace de travail"
 
-#: 4.0/applet.js:2591
+#: 4.0/applet.js:2726
 msgid "Visible on all workspaces"
 msgstr "Visible sur tous les espaces de travail"
 
-#: 4.0/applet.js:2592
+#: 4.0/applet.js:2727
 msgid "Move to another workspace"
 msgstr "Déplacer vers un autre espace de travail"
 
-#: 4.0/applet.js:2601
+#: 4.0/applet.js:2736
 msgid " (this workspace)"
 msgstr " (cet espace de travail)"
 
-#: 4.0/applet.js:2614
+#: 4.0/applet.js:2749
 msgid "Move to another monitor"
 msgstr "Déplacer vers un autre moniteur"
 
-#: 4.0/applet.js:2622
+#: 4.0/applet.js:2757
 msgid "Monitor"
 msgstr "Moniteur"
 
-#: 4.0/applet.js:2650
+#: 4.0/applet.js:2785
 msgid "unassigned"
 msgstr "non attribué"
 
-#: 4.0/applet.js:2661 4.0/applet.js:2692
+#: 4.0/applet.js:2796 4.0/applet.js:2827
 msgid "Assign window to a hotkey"
 msgstr "Attribuer une fenêtre à un raccourci clavier"
 
-#: 4.0/applet.js:2715
+#: 4.0/applet.js:2850
 msgid "Change application label contents"
 msgstr "Modifier le libellé de l'étiquette de l'application"
 
-#: 4.0/applet.js:2718
+#: 4.0/applet.js:2853
 msgid "Remove custom setting"
 msgstr "Supprimer le paramètre personnalisé"
 
-#: 4.0/applet.js:2725
+#: 4.0/applet.js:2860
 msgid "Use window title"
 msgstr "Utiliser le titre de fenêtre"
 
-#: 4.0/applet.js:2732
+#: 4.0/applet.js:2867
 msgid "Use application name"
 msgstr "Utiliser le nom de l'application"
 
-#: 4.0/applet.js:2739
+#: 4.0/applet.js:2874
 msgid "No label"
 msgstr "Sans étiquette"
 
-#: 4.0/applet.js:2750
+#: 4.0/applet.js:2885
 msgid "Ungroup application windows"
 msgstr "Dégrouper les fenêtres de l'application"
 
-#: 4.0/applet.js:2759
+#: 4.0/applet.js:2894
 msgid "Group application windows"
 msgstr "Grouper les fenêtres par application"
 
-#: 4.0/applet.js:2772
+#: 4.0/applet.js:2907
 msgid "Automatic grouping/ungrouping"
 msgstr "Regrouper/dégrouper automatiquement"
 
@@ -163,31 +167,31 @@ msgstr "Regrouper/dégrouper automatiquement"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2802
+#: 4.0/applet.js:2937
 msgid "Move titlebar on to screen"
 msgstr "Déplacer la barre de titre sur l'écran"
 
-#: 4.0/applet.js:2807
+#: 4.0/applet.js:2942
 msgid "Restore"
 msgstr "Restaurer"
 
-#: 4.0/applet.js:2811
+#: 4.0/applet.js:2946
 msgid "Minimize"
 msgstr "Minimiser"
 
-#: 4.0/applet.js:2817
+#: 4.0/applet.js:2952
 msgid "Unmaximize"
 msgstr "Démaximiser"
 
-#: 4.0/applet.js:2824
+#: 4.0/applet.js:2959
 msgid "Close others"
 msgstr "Fermer les autres"
 
-#: 4.0/applet.js:2835
+#: 4.0/applet.js:2970
 msgid "Close all"
 msgstr "Tout fermer"
 
-#: 4.0/applet.js:2844
+#: 4.0/applet.js:2979
 msgid "Close"
 msgstr "Fermer"
 
@@ -412,7 +416,28 @@ msgstr ""
 "fenêtres, ce qui permet de conserver les boutons épinglés à la fin de la "
 "liste des fenêtres"
 
+#. 4.0->settings-schema.json->fade-animation-time->units
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr "millisecondes"
+
+#. 4.0->settings-schema.json->fade-animation-time->description
+msgid "Fade animation effect duration"
+msgstr "Durée de l'effet d'animation en fondu"
+
+#. 4.0->settings-schema.json->fade-animation-time->tooltip
+msgid ""
+"This defines the duration of the fade-in/out animation effect. It applies to "
+"the Thumbnail menus and the full size window previews"
+msgstr ""
+"Ce paramètre définit la durée de l'effet d'animation en fondu entrant/"
+"sortant. Il s'applique aux menus Vignettes et aux fenêtres de "
+"prévisualisation en taille réelle"
+
 #. 4.0->settings-schema.json->label-width->units
+#. 4.0->settings-schema.json->button-spacing->units
 msgid "pixels"
 msgstr "pixels"
 
@@ -429,15 +454,9 @@ msgstr ""
 msgid "Animate label"
 msgstr "Étiquette animée"
 
-#. 4.0->settings-schema.json->label-animation-time->units
-#. 4.0->settings-schema.json->preview-timeout-show->units
-#. 4.0->settings-schema.json->preview-timeout-hide->units
-msgid "milliseconds"
-msgstr "millisecondes"
-
 #. 4.0->settings-schema.json->label-animation-time->description
-msgid "Label animation time"
-msgstr "Durée d'animation de l'étiquette"
+msgid "Label animation duration"
+msgstr "Durée d'animation des étiquettes"
 
 #. 4.0->settings-schema.json->display-number->options
 msgid "2 or more windows"
@@ -595,6 +614,54 @@ msgstr ""
 "Lorsque cette option est activée, les fenêtres des applications dont les "
 "boutons sont épinglés sur d'autres instances de l'applet CassiaWindowList "
 "n'apparaîtront pas dans cette liste de fenêtres"
+
+#. 4.0->settings-schema.json->button-spacing->description
+msgid "Spacing between buttons"
+msgstr "Espace entre les boutons"
+
+#. 4.0->settings-schema.json->button-spacing->tooltip
+msgid ""
+"This defines the spacing between the buttons, the value will be divided in "
+"half and added to the left of the icon and to the right of the label on "
+"horizontal panels or to the top and button of the icon on vertical panels"
+msgstr ""
+"La valeur sera divisée par deux et ajoutée à la gauche de l'icône et à la "
+"droite de l'étiquette sur les panneaux horizontaux ou au haut et au bouton "
+"de l'icône sur les panneaux verticaux"
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->description
+msgid "Show a full size window preview when hovering over a button"
+msgstr ""
+"Afficher un aperçu de la fenêtre en taille réelle lors du survol d'un bouton"
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a window-list button."
+msgstr ""
+"Si cette option est activée, une fenêtre de prévisualisation pleine taille "
+"apparaît lorsque le pointeur de la souris passe au-dessus d'un bouton de la "
+"liste des fenêtres."
+
+#. 4.0->settings-schema.json->no-click-activate->description
+msgid "Automatic focus change when leaving the panel"
+msgstr ""
+"Changement automatique de la mise au point lorsque l'on quitte le panneau"
+
+#. 4.0->settings-schema.json->no-click-activate->tooltip
+msgid ""
+"If enabled, the current window for a window-list button will get the focus "
+"when the mouse pointer leaves the panel. Leaving the window-list with Ctrl "
+"or Shift held or while remaining on the panel will leave the focus "
+"unchanged. This option is typically used in conjunction with the preview "
+"hovering option above."
+msgstr ""
+"Si cette option est activée, la fenêtre actuelle d'un bouton de la liste des "
+"fenêtres sera prise en compte lorsque le pointeur de la souris quittera le "
+"panneau. Si vous quittez la liste des fenêtres en maintenant la touche Ctrl "
+"ou Shift enfoncée, ou si vous restez dans le panneau, le focus restera "
+"inchangé. Cette option est généralement utilisée en conjonction avec "
+"l'option de survol de l'aperçu ci-dessus."
 
 #. 4.0->settings-schema.json->menu-show-on-hover->description
 msgid "Show on hover"
@@ -892,6 +959,42 @@ msgstr "Action du bouton \"arrière\" sur une miniature de fenêtre"
 msgid "Thumbnail window forward button action"
 msgstr "Action du bouton \"avant\" sur une miniature de fenêtre"
 
+#. 4.0->settings-schema.json->hover-peek-thumbnail->description
+msgid "Show a full size window preview when hovering over a Thumbnail"
+msgstr ""
+"Afficher une fenêtre de prévisualisation en taille réelle lors du survol "
+"d'une vignette"
+
+#. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a Thumbnail menu item"
+msgstr ""
+"Si cette option est activée, une fenêtre de prévisualisation en taille "
+"réelle s'affiche lorsque le pointeur de la souris passe au-dessus d'un "
+"élément du menu Vignettes"
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->description
+msgid "Automatic focus change when leaving the Thumbnail menu"
+msgstr ""
+"Changement automatique de la mise au point lorsque l'on quitte le menu des "
+"vignettes"
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->tooltip
+msgid ""
+"If enabled, the window associated with the Thumbnail menu item will get the "
+"focus when the mouse pointer leaves the menu. Leaving the menu with Ctrl or "
+"Shift held or leaving from either end of the menu will leave the focus "
+"unchanged. This option is typically used in conjunction with the preview "
+"hovering option above."
+msgstr ""
+"Si cette option est activée, la fenêtre associée à l'élément de menu "
+"Vignette sera mise en évidence lorsque le pointeur de la souris quittera le "
+"menu. Si vous quittez le menu en maintenant la touche Ctrl ou Shift "
+"enfoncée, ou si vous quittez le menu par l'une de ses extrémités, le focus "
+"restera inchangé. Cette option est généralement utilisée en conjonction avec "
+"l'option de survol de l'aperçu ci-dessus."
+
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore/Minimize most recent window"
@@ -1171,6 +1274,18 @@ msgstr ""
 "https://github.com/linuxmint/cinnamon/pull/11908\n"
 "Les valeurs de la boîte de dialogue d'édition sont des valeurs correctes et "
 "sont les seules qui seront prises en compte."
+
+#. 4.0->settings-schema.json->animate-icon->description
+msgid "Icon animation when launching new windows"
+msgstr "Animation de l'icône lors de l'ouverture de nouvelles fenêtres"
+
+#. 4.0->settings-schema.json->animate-icon->tooltip
+msgid ""
+"When enabled, the icon will animate when launching new windows for an "
+"application"
+msgstr ""
+"Lorsque cette option est activée, l'icône s'anime lors de l'ouverture de "
+"nouvelles fenêtres pour une application"
 
 #. 4.0->settings-schema.json->backup-file-name->description
 msgid "Settings backup name"
