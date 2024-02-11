@@ -2,7 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: calendar@ccprog 1.1.6\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
 "POT-Creation-Date: 2024-02-05 14:47-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
@@ -108,7 +109,9 @@ msgstr "Calendrier avec jours fériés"
 
 #. metadata.json->description
 msgid "Calendar applet with public holiday data provided by Enrico service"
-msgstr "Applet de calendrier avec données de jours fériés fournies par le service Enrico"
+msgstr ""
+"Applet de calendrier avec données de jours fériés fournies par le service "
+"Enrico"
 
 #. 3.8->settings-schema.json->page1->title
 #. 5.2->settings-schema.json->page1->title
@@ -160,7 +163,8 @@ msgstr "Afficher les numéros de semaine dans le calendrier"
 #. 3.8->settings-schema.json->show-week-numbers->tooltip
 #. 5.2->settings-schema.json->show-week-numbers->tooltip
 msgid "Check this to show week numbers in the calendar."
-msgstr "Cochez cette case pour afficher les numéros de semaine dans le calendrier."
+msgstr ""
+"Cochez cette case pour afficher les numéros de semaine dans le calendrier."
 
 #. 3.8->settings-schema.json->weekend-length->description
 #. 5.2->settings-schema.json->weekend-length->description
@@ -170,7 +174,8 @@ msgstr "Nombre de jour formant un weekend"
 #. 3.8->settings-schema.json->weekend-length->tooltip
 #. 5.2->settings-schema.json->weekend-length->tooltip
 msgid "Set how many days are marked as non-working days per week."
-msgstr "Définit le nombre de jours marqués comme jours non ouvrables par semaine."
+msgstr ""
+"Définit le nombre de jours marqués comme jours non ouvrables par semaine."
 
 #. 3.8->settings-schema.json->weekend-length->options
 #. 5.2->settings-schema.json->weekend-length->options
@@ -189,8 +194,11 @@ msgstr "Utiliser un format de date personnalisé"
 
 #. 3.8->settings-schema.json->use-custom-format->tooltip
 #. 5.2->settings-schema.json->use-custom-format->tooltip
-msgid "Check this to define a custom format for the date in the calendar applet."
-msgstr "Cochez cette case pour définir votre propre format de date dans la barre des tâches."
+msgid ""
+"Check this to define a custom format for the date in the calendar applet."
+msgstr ""
+"Cochez cette case pour définir votre propre format de date dans la barre des "
+"tâches."
 
 #. 3.8->settings-schema.json->custom-format->description
 #. 5.2->settings-schema.json->custom-format->description
@@ -210,7 +218,8 @@ msgstr "Afficher des indications sur la syntaxe du format de date"
 #. 3.8->settings-schema.json->format-button->tooltip
 #. 5.2->settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
-msgstr "Cliquez sur ce bouton pour en savoir plus sur la syntaxe des formats de date."
+msgstr ""
+"Cliquez sur ce bouton pour en savoir plus sur la syntaxe des formats de date."
 
 #. 3.8->settings-schema.json->country->description
 #. 5.2->settings-schema.json->country->description
@@ -365,7 +374,7 @@ msgstr "Corée du Sud"
 #. 3.8->settings-schema.json->country->options
 #. 5.2->settings-schema.json->country->options
 msgid "kosovo"
-msgstr ""
+msgstr "Kosovo"
 
 #. 3.8->settings-schema.json->country->options
 #. 5.2->settings-schema.json->country->options

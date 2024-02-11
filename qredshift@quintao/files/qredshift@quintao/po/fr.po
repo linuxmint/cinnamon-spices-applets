@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: qredshift@quintao\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-01 03:02+0100\n"
-"PO-Revision-Date: 2024-01-01 03:04+0100\n"
+"POT-Creation-Date: 2024-01-16 03:29-0100\n"
+"PO-Revision-Date: 2024-02-11 18:39+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,111 +18,111 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:238
+#: applet.js:239
 msgid "Reload Applet"
 msgstr "Relancer cette applet"
 
-#: applet.js:249
+#: applet.js:250
 msgid "Recompile Translations"
 msgstr "Recompiler les traductions"
 
-#: applet.js:301
+#: applet.js:302
 msgid "REDSHIFT NOT INSTALLED!"
 msgstr "REDSHIFT N'EST PAS INSTALLÉ !"
 
-#: applet.js:304
+#: applet.js:305
 msgid "Requires Redshift: yay -S redshift-minimal"
 msgstr "Nécessite l'installation de Redshift : yay -S redshift-minimal"
 
-#: applet.js:307
+#: applet.js:308
 msgid "Requires Redshift: sudo apt-get install redshift"
 msgstr "Nécessite l'installation de Redshift : sudo apt-get install redshift"
 
-#: applet.js:459 applet.js:488
+#: applet.js:460 applet.js:489
 msgid "should be removed."
 msgstr "devrait être retiré."
 
-#: applet.js:481
+#: applet.js:482
 msgid "should be replaced by redshift-minimal"
 msgstr "doit être remplacé par redshift-minimal"
 
 #. settings-schema.json->enabled->description
-#: applet.js:651
+#: applet.js:652
 msgid "Enabled"
 msgstr "Activé"
 
-#: applet.js:659 applet.js:704
+#: applet.js:660 applet.js:705
 msgid "Temp:"
 msgstr "Temp. :"
 
-#: applet.js:670 applet.js:715
+#: applet.js:671 applet.js:716
 msgid "Bright:"
 msgstr "Brill. :"
 
-#: applet.js:681 applet.js:1015
+#: applet.js:682 applet.js:1018
 msgid "Gamma:"
 msgstr "Gamma :"
 
 #. settings-schema.json->enabledNight->description
-#: applet.js:696
+#: applet.js:697
 msgid "Night Enabled"
 msgstr "Activer les paramètres de nuit"
 
 #. settings-schema.json->iconLabel->description
-#: applet.js:758
+#: applet.js:759
 msgid "Show Label"
 msgstr "Afficher l'étiquette de cette applet"
 
-#: applet.js:973 applet.js:998
+#: applet.js:976 applet.js:1001
 msgid "Transition to day"
 msgstr "Transition vers le jour"
 
-#: applet.js:974 applet.js:999
+#: applet.js:977 applet.js:1002
 msgid "Transition to night"
 msgstr "Transition vers la nuit"
 
-#: applet.js:975 applet.js:1000
+#: applet.js:978 applet.js:1003
 msgid "Night"
 msgstr "Nuit"
 
-#: applet.js:976 applet.js:1001
+#: applet.js:979 applet.js:1004
 msgid "Day"
 msgstr "Jour"
 
-#: applet.js:990
+#: applet.js:993
 msgid "On"
 msgstr "Activé"
 
-#: applet.js:990 applet.js:992
+#: applet.js:993 applet.js:995
 msgid "Off"
 msgstr "Désactivé"
 
-#: applet.js:1006
+#: applet.js:1009
 msgid "Day Temperature"
 msgstr "Température de jour"
 
-#: applet.js:1007
+#: applet.js:1010
 msgid "Day Brightness"
 msgstr "Brillance de jour"
 
-#: applet.js:1009
+#: applet.js:1012
 msgid "Night Temperature"
 msgstr "Température de nuit"
 
-#: applet.js:1010
+#: applet.js:1013
 msgid "Night Brightness"
 msgstr "Brillance de nuit"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
-#: applet.js:1012
+#: applet.js:1015
 msgid "Temperature"
 msgstr "Température"
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
-#: applet.js:1013
+#: applet.js:1016
 msgid "Brightness"
 msgstr "Brillance"
 
@@ -175,13 +175,24 @@ msgstr "Raccourcis clavier"
 msgid "Location Settings"
 msgstr "Paramètres de lieu"
 
+#. settings-schema.json->enabled->tooltip
+msgid ""
+"Automatically disabled under Wayland due to redshift not being yet supported "
+"by Wayland"
+msgstr ""
+"Automatiquement désactivé sous Wayland car redshift n'est pas encore pris en "
+"charge par Wayland"
+
 #. settings-schema.json->enableAtStartup->description
-msgid "Activate QRedshift as soon as Cinnamon starts up"
-msgstr "Activer QRedshift au démarrage de Cinnamon"
+msgid "Reactivate QRedshift as soon as Cinnamon starts up"
+msgstr "Réactiver QRedshift dès que Cinnamon démarre"
 
 #. settings-schema.json->enableAtStartup->tooltip
-msgid "(even if it has previously been deactivated)"
-msgstr "(même s'il a été précédemment désactivé)"
+msgid ""
+"Won't work under Wayland due to redshift not being yet supported by Wayland"
+msgstr ""
+"Ne fonctionnera pas sous Wayland car redshift n'est pas encore pris en "
+"charge par Wayland"
 
 #. settings-schema.json->autoUpdate->description
 msgid "Auto Update"
@@ -335,7 +346,7 @@ msgid ""
 msgstr ""
 "Votre géolocalisation peut ne pas se faire instantanément.\n"
 "Cette applet utilise https://geolocation-db.com/ comme service de "
-"géolocalisation."
+"géolocalisation"
 
 #. settings-schema.json->textTips->description
 msgid "* Right-click the sliders to reset the default (neutral) value."
@@ -362,6 +373,9 @@ msgstr ""
 "Si vous utilisez et appréciez cette applet, prenez le temps de visiter sa "
 "page sur Cinnamon Spices et attribuez-lui une étoile. Pour ce faire, vous "
 "n'avez besoin que d'un compte Github."
+
+#~ msgid "(even if it has previously been deactivated)"
+#~ msgstr "(même s'il a été précédemment désactivé)"
 
 #~ msgid ""
 #~ "Sets brightness, gamma levels and color temperature with Redshift.\n"

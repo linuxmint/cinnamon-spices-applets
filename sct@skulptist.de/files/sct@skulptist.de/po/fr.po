@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-08 11:35+0100\n"
-"PO-Revision-Date: 2024-02-08 11:37+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2024-02-08 22:36+0100\n"
+"PO-Revision-Date: 2024-02-11 18:42+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:73
+#: applet.js:74
 msgid "sct is now at"
 msgstr "sct est maintenant à"
 
@@ -38,13 +38,12 @@ msgstr "Bascule SCT"
 
 #. metadata.json->description
 msgid ""
-"Toggle screen temperatures with sct. \n"
-"Set up to 7 custom color temperatures and toggle through by clicking on the "
-"applet"
+"Toggle screen temperatures with sct. Set up to 7 custom color temperatures "
+"and toggle through by clicking on the applet"
 msgstr ""
 "Basculez les températures de l'écran avec sct.\n"
 "Configurez jusqu'à 7 températures de couleur personnalisées et passez d'une "
-"température à l'autre en cliquant sur l'applet."
+"température à l'autre en cliquant sur l'applet"
 
 #. settings-schema.json->head->description
 msgid "Color Temperatur Steps"
@@ -98,7 +97,7 @@ msgstr "Température de couleur à l'étape 7"
 
 #. settings-schema.json->head2->description
 msgid "Applet Icon"
-msgstr "Icône d'applet"
+msgstr "Icône de l'applet"
 
 #. settings-schema.json->iconName->description
 msgid "The icon to use in the panel"
