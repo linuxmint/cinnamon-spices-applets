@@ -1,5 +1,6 @@
 {
-    "description": "Immediately suspends the computer", 
-    "uuid": "suspend@janax", 
-    "name": "Suspend computer"
+    "description": "Immediately suspends the computer",
+    "uuid": "suspend@janax",
+    "name": "Suspend computer",
+    "max-instances": -1
 }
