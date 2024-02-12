@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-02-12 11:21-0500\n"
-"PO-Revision-Date: 2021-12-28 11:27-0300\n"
+"PO-Revision-Date: 2024-02-12 14:10-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,12 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: applet.js:64
-#, fuzzy
 msgid "Suspend"
-msgstr "suspender"
+msgstr "Suspender"
 
 #. metadata.json->description
 msgid "Immediately suspends the computer"
@@ -33,44 +32,51 @@ msgid "Suspend computer"
 msgstr "Suspender el computador"
 
 #. settings-schema.json->suspend-header->description
-#, fuzzy
 msgid "Suspend computer setting"
-msgstr "Suspender el computador"
+msgstr "Configuración"
 
 #. settings-schema.json->suspend-on-double-click->description
 msgid "Double-click to suspend"
-msgstr ""
+msgstr "Doble clic para suspender"
 
 #. settings-schema.json->suspend-on-double-click->tooltip
 msgid ""
 "When enabled, a double-click will suspend the computer, otherwise the "
 "computer will suspend on a single click."
 msgstr ""
+"Cuando está activado, un doble clic suspenderá el ordenador, de lo "
+"contrario el ordenador se suspenderá con un solo clic."
 
 #. settings-schema.json->count-down->description
 msgid "Use a count down before suspending"
-msgstr ""
+msgstr "Utilice una cuenta regresiva antes de suspender"
 
 #. settings-schema.json->count-down->tooltip
 msgid ""
 "When enabled, a count down will occurs before suspending the computer.\n"
 "Clicking again during the count down will cancel the suspend."
 msgstr ""
+"Cuando está activada, se produce una cuenta regresiva antes de suspender el "
+"ordenador.\n"
+"Si vuelve a hacer clic durante la cuentaregresiva, se cancelará la "
+"suspensión."
 
 #. settings-schema.json->count-down-duration->units
 msgid "seconds"
-msgstr ""
+msgstr "segundos"
 
 #. settings-schema.json->count-down-duration->description
 msgid "Count down duration"
-msgstr ""
+msgstr "Duración de la cuenta regresiva"
 
 #. settings-schema.json->fullcolor-icon->description
 msgid "Use a full color icon"
-msgstr ""
+msgstr "Utilizar un icono a todo color"
 
 #. settings-schema.json->fullcolor-icon->tooltip
 msgid ""
 "When enabled, a full color panel icon will be used, otherwise a symbol icon "
 "sill be used."
 msgstr ""
+"Si está activada, se utilizará un icono de panel a todo color; de lo "
+"contrario, se utilizará un icono de símbolo."
