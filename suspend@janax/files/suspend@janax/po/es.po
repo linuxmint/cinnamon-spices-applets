@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-23 12:17+0800\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-12 11:21-0500\n"
 "PO-Revision-Date: 2021-12-28 11:27-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,14 +19,58 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:25
-msgid "suspend"
+#: applet.js:64
+#, fuzzy
+msgid "Suspend"
 msgstr "suspender"
 
-#. suspend@janax->metadata.json->description
+#. metadata.json->description
 msgid "Immediately suspends the computer"
 msgstr "Suspende inmediatamente el ordenador"
 
-#. suspend@janax->metadata.json->name
+#. metadata.json->name
 msgid "Suspend computer"
 msgstr "Suspender el computador"
+
+#. settings-schema.json->suspend-header->description
+#, fuzzy
+msgid "Suspend computer setting"
+msgstr "Suspender el computador"
+
+#. settings-schema.json->suspend-on-double-click->description
+msgid "Double-click to suspend"
+msgstr ""
+
+#. settings-schema.json->suspend-on-double-click->tooltip
+msgid ""
+"When enabled, a double-click will suspend the computer, otherwise the "
+"computer will suspend on a single click."
+msgstr ""
+
+#. settings-schema.json->count-down->description
+msgid "Use a count down before suspending"
+msgstr ""
+
+#. settings-schema.json->count-down->tooltip
+msgid ""
+"When enabled, a count down will occurs before suspending the computer.\n"
+"Clicking again during the count down will cancel the suspend."
+msgstr ""
+
+#. settings-schema.json->count-down-duration->units
+msgid "seconds"
+msgstr ""
+
+#. settings-schema.json->count-down-duration->description
+msgid "Count down duration"
+msgstr ""
+
+#. settings-schema.json->fullcolor-icon->description
+msgid "Use a full color icon"
+msgstr ""
+
+#. settings-schema.json->fullcolor-icon->tooltip
+msgid ""
+"When enabled, a full color panel icon will be used, otherwise a symbol icon "
+"sill be used."
+msgstr ""
