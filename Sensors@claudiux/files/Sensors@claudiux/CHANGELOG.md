@@ -1,3 +1,6 @@
+### v3.5.3~20240213
+  * Minor change in settings: A sensor's name can now be displayed in full.
+
 ### v3.5.2~20240124
   * Prevents display error.
 
