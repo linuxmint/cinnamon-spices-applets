@@ -131,6 +131,7 @@ standardIconNames@jerrywham/**                     @jerrywham
 stevedore@centurix/**                              @centurix
 sticky@scollins/**                                 @collinss
 stopwatch@pdcurtis/**                              @pdcurtis
+suspend@janax/**                                   @klangman
 sync@szlldm/**                                     @szlldm
 sysmonitor@orcus/**                                @orcuscz
 system-controls@rcalixte/**                        @rcalixte
@@ -199,7 +200,6 @@ xsession@claudiux/**                               @claudiux
 # separator2@zyzz
 # shutdown-timer@webum.by
 # softyubikey@yubiserver.include.gr
-# suspend@janax
 # systray-collapsible@koutch
 # todo@threefi
 # uptime@vatanuki.kun
