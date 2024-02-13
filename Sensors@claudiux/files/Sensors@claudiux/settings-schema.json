@@ -381,7 +381,8 @@
       {
         "id": "sensor",
         "title": "Sensor name\n(Do not modify!)",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -439,7 +440,8 @@
         "id": "disk",
         "title": "Disk name",
         "type": "string",
-        "default": ""
+        "default": "",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -536,7 +538,8 @@
       {
         "id": "sensor",
         "title": "Sensor name\n(Do not modify!)",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -626,7 +629,8 @@
       {
         "id": "sensor",
         "title": "Sensor name\n(Do not modify!)",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -705,7 +709,8 @@
       {
         "id": "sensor",
         "title": "Sensor name\n(Do not modify!)",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
