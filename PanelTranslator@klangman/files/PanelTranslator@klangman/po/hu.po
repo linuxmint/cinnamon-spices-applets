@@ -9,8 +9,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-02-09 17:42-0500\n"
-"PO-Revision-Date: 2024-01-13 12:48+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2024-02-13 18:08+0100\n"
+"Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -56,7 +56,7 @@ msgstr "Beállítás"
 
 #: applet.js:357
 msgid "Help"
-msgstr ""
+msgstr "Segítség"
 
 #: applet.js:361
 msgid "Play"
