@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: suspend@janax 2.0\n"
+"Project-Id-Version: suspend@janax 2.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-12 11:21-0500\n"
+"POT-Creation-Date: 2024-02-12 23:35-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:64
+#: applet.js:48
 msgid "Suspend"
 msgstr ""
 
@@ -67,6 +67,6 @@ msgstr ""
 
 #. settings-schema.json->fullcolor-icon->tooltip
 msgid ""
-"When enabled, a full color panel icon will be used, otherwise a symbol icon "
-"sill be used."
+"When enabled, a full color panel icon will be used, otherwise a symbolic "
+"icon sill be used."
 msgstr ""

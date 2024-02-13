@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-12 11:21-0500\n"
+"POT-Creation-Date: 2024-02-12 23:35-0500\n"
 "PO-Revision-Date: 2024-02-12 14:10-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:64
+#: applet.js:48
 msgid "Suspend"
 msgstr "Suspender"
 
@@ -44,8 +44,8 @@ msgid ""
 "When enabled, a double-click will suspend the computer, otherwise the "
 "computer will suspend on a single click."
 msgstr ""
-"Cuando está activado, un doble clic suspenderá el ordenador, de lo "
-"contrario el ordenador se suspenderá con un solo clic."
+"Cuando está activado, un doble clic suspenderá el ordenador, de lo contrario "
+"el ordenador se suspenderá con un solo clic."
 
 #. settings-schema.json->count-down->description
 msgid "Use a count down before suspending"
@@ -74,9 +74,10 @@ msgid "Use a full color icon"
 msgstr "Utilizar un icono a todo color"
 
 #. settings-schema.json->fullcolor-icon->tooltip
+#, fuzzy
 msgid ""
-"When enabled, a full color panel icon will be used, otherwise a symbol icon "
-"sill be used."
+"When enabled, a full color panel icon will be used, otherwise a symbolic "
+"icon sill be used."
 msgstr ""
 "Si está activada, se utilizará un icono de panel a todo color; de lo "
 "contrario, se utilizará un icono de símbolo."

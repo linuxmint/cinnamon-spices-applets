@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-12 11:21-0500\n"
+"POT-Creation-Date: 2024-02-12 23:35-0500\n"
 "PO-Revision-Date: 2023-05-11 18:36+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:64
+#: applet.js:48
 #, fuzzy
 msgid "Suspend"
 msgstr "Suspendre toute activité de l'ordinateur"
@@ -71,6 +71,6 @@ msgstr ""
 
 #. settings-schema.json->fullcolor-icon->tooltip
 msgid ""
-"When enabled, a full color panel icon will be used, otherwise a symbol icon "
-"sill be used."
+"When enabled, a full color panel icon will be used, otherwise a symbolic "
+"icon sill be used."
 msgstr ""

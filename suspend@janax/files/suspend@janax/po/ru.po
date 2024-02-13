@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-12 11:21-0500\n"
+"POT-Creation-Date: 2024-02-12 23:35-0500\n"
 "PO-Revision-Date: 2017-05-02 19:56+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: applet.js:64
+#: applet.js:48
 #, fuzzy
 msgid "Suspend"
 msgstr "приостановить"
@@ -72,6 +72,6 @@ msgstr ""
 
 #. settings-schema.json->fullcolor-icon->tooltip
 msgid ""
-"When enabled, a full color panel icon will be used, otherwise a symbol icon "
-"sill be used."
+"When enabled, a full color panel icon will be used, otherwise a symbolic "
+"icon sill be used."
 msgstr ""
