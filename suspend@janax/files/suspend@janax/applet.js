@@ -26,7 +26,7 @@ class SuspendApplet extends Applet.Applet {
       this.settings = new Settings.AppletSettings(this, UUID, instanceId);
 
       // Icon Box to contain the icon and the count down label
-      let iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
+      let iconSize = this.getPanelIconSize( (this.settings.getValue("fullcolor-icon")) ? St.IconType.FULLCOLOR : St.IconType.SYMBOLIC);
       this._iconBox = new St.Group({natural_width: iconSize, natural_height: iconSize, x_align: Clutter.ActorAlign.CENTER, y_align: Clutter.ActorAlign.CENTER});
 
       // Create the icon and it's container
@@ -34,22 +34,6 @@ class SuspendApplet extends Applet.Applet {
       this._iconBin = new St.Bin();
       this._iconBin._delegate = this;
       this._iconBox.add_actor(this._iconBin);
-      /*
-      if( this.settings.getValue("fullcolor-icon") ){
-         this._icon = new St.Icon({ icon_name: "gnome-session-suspend",
-                                    icon_type: St.IconType.FULLCOLOR,
-                                    reactive: true, track_hover: true,
-                                    style_class: 'applet-icon',
-                                    icon_size: iconSize});
-      }else{
-         this._icon = new St.Icon({ icon_name: "weather-clear-night",
-                                    icon_type: St.IconType.SYMBOLIC,
-                                    reactive: true, track_hover: true,
-                                    style_class: 'applet-icon',
-                                    icon_size: iconSize});
-      }
-      this._iconBin.set_child(this._icon);
-      */
       this._updateIcon();
 
       // Create the count down number label and it's containers
@@ -66,33 +50,31 @@ class SuspendApplet extends Applet.Applet {
    }
 
    _updateIcon() {
-      let iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
-      log( "Icon updating" );
       if( this._icon ){
          this._icon.destroy();
-         //this._iconBin.remove_child(this._icon);
       }
       if( this.settings.getValue("fullcolor-icon") ){
+         let iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
          this._icon = new St.Icon({ icon_name: "gnome-session-suspend",
                                     icon_type: St.IconType.FULLCOLOR,
                                     reactive: true, track_hover: true,
                                     style_class: 'applet-icon',
                                     icon_size: iconSize});
       }else{
+      let iconSize = this.getPanelIconSize(St.IconType.SYMBOLIC);
          this._icon = new St.Icon({ icon_name: "weather-clear-night",
                                     icon_type: St.IconType.SYMBOLIC,
                                     reactive: true, track_hover: true,
-                                    style_class: 'applet-icon',
-                                    icon_size: iconSize});
+                                    style_class: 'applet-icon'});
       }
       this._iconBin.set_child(this._icon);
+      this.on_panel_icon_size_changed()
    }
 
    on_panel_icon_size_changed() {
-      let iconSize = this.getPanelIconSize(St.IconType.FULLCOLOR);
+      let iconSize = this.getPanelIconSize(this.settings.getValue("fullcolor-icon") ? St.IconType.FULLCOLOR : St.IconType.SYMBOLIC);
+      this._iconBox.set_size(iconSize, iconSize);
       this._icon.set_icon_size(iconSize);
-      this._iconBox.set_height(iconSize);
-      this._iconBox.set_width(iconSize);
    }
 
    on_applet_clicked(event) {
