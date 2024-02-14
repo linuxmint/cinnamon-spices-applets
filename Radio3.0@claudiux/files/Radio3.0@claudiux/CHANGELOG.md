@@ -1,3 +1,6 @@
+### v1.16.1~20240214
+  * Slight improvements in settings and context menu.
+
 ### v1.16.0~20240214
   * Bugfixes.
 
