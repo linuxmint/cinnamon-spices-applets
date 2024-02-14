@@ -817,10 +817,14 @@ class R3WebpageMenuItem extends PopupBaseMenuItem {
     super(params);
     this.parent = parent;
 
+    let boxIconLabel = new BoxLayout({ style: 'spacing: 1em' });
+    let web_icon = new Icon({ icon_name: 'web-browser', icon_type: IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
+    boxIconLabel.add_actor(web_icon);
     let label = new Label({ text: _("Radio3.0 web page...") });
-    this.addActor(label);
+    boxIconLabel.add_actor(label);
+    this.addActor(boxIconLabel);
 
-    let stars = new BoxLayout({ style: 'spacing: .25em' });
+    let stars = new BoxLayout({ style: 'spacing: 0.25em' });
     let star_icon = new Icon({ icon_name: 'starred', icon_type: IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
     let star_count = new Label({ text: score.toString() });
     stars.add_actor(star_icon);

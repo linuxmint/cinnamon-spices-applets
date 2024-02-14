@@ -434,6 +434,7 @@
         "id": "name",
         "title": "Station or Category",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
@@ -454,30 +455,35 @@
         "id": "url",
         "title": "Streaming URL (empty for a category)",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
         "id": "uuid",
         "title": "Unique identifier",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
         "id": "homepage",
         "title": "Home page",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
         "id": "tags",
         "title": "Tags",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
         "id": "favicon",
         "title": "Favicon",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
@@ -613,7 +619,8 @@
       {
         "id": "name",
         "title": "Title",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "bitrate",
@@ -632,7 +639,8 @@
       {
         "id": "url",
         "title": "Streaming URL",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       }
     ],
     "default": [
@@ -692,6 +700,7 @@
         "id": "name",
         "title": "Station",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
@@ -717,32 +726,38 @@
       {
         "id": "tags",
         "title": "Tags",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "url",
         "title": "Streaming URL",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "country",
         "title": "Country",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "uuid",
         "title": "Unique identifier",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "homepage",
         "title": "Home page",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "favicon",
         "title": "Favicon",
         "type": "string",
+        "expand-width": true,
         "default": ""
       }
     ],
@@ -1284,12 +1299,14 @@
       {
         "id": "station",
         "title": "Station",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "uuid",
         "title": "Identifier",
         "type": "string",
+        "expand-width": true,
         "default": ""
       }
     ],
