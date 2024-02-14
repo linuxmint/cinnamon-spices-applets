@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-08 11:35+0100\n"
-"PO-Revision-Date: 2024-02-08 11:42+0100\n"
+"POT-Creation-Date: 2024-02-14 12:38+0100\n"
+"PO-Revision-Date: 2024-02-14 12:43+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:73
+#: applet.js:70
 msgid "sct is now at"
 msgstr "sct è ora a"
 
@@ -37,9 +37,8 @@ msgstr "Interruttore SCT"
 
 #. metadata.json->description
 msgid ""
-"Toggle screen temperatures with sct. \n"
-"Set up to 7 custom color temperatures and toggle through by clicking on the "
-"applet"
+"Toggle screen temperatures with sct. Set up to 7 custom color temperatures "
+"and toggle through by clicking on the applet"
 msgstr ""
 "Attiva/disattiva le temperature dello schermo con sct.\n"
 "Imposta fino a 7 temperature di colore personalizzate e selezionale facendo "
@@ -50,7 +49,7 @@ msgid "Color Temperatur Steps"
 msgstr "Passaggi della temperatura del colore"
 
 #. settings-schema.json->colorStep1->description
-msgid "Color temperatur at step 1"
+msgid "Color temperature at step 1"
 msgstr "Temperatura del colore al passaggio 1"
 
 #. settings-schema.json->colorStep1->tooltip
@@ -59,15 +58,15 @@ msgid ""
 "Add a value between 1000 and 10000, where 1000 is red, 6500 is daylight and "
 "10000 is blue."
 msgstr ""
-"Aggiungi un valore compreso tra 1000 e 10000, dove 1000 è rosso, 6500 è "
-"luce diurna e 10000 è blu."
+"Aggiungi un valore compreso tra 1000 e 10000, dove 1000 è rosso, 6500 è luce "
+"diurna e 10000 è blu."
 
 #. settings-schema.json->colorStep2->description
-msgid "Color temperatur at step 2"
+msgid "Color temperature at step 2"
 msgstr "Temperatura del colore al passaggio 2"
 
 #. settings-schema.json->colorStep3->description
-msgid "Color temperatur at step 3"
+msgid "Color temperature at step 3"
 msgstr "Temperatura del colore al passaggio 3"
 
 #. settings-schema.json->colorStep3->tooltip
@@ -81,19 +80,19 @@ msgstr ""
 "vuoto."
 
 #. settings-schema.json->colorStep4->description
-msgid "Color temperatur at step 4"
+msgid "Color temperature at step 4"
 msgstr "Temperatura del colore al passaggio 4"
 
 #. settings-schema.json->colorStep5->description
-msgid "Color temperatur at step 5"
+msgid "Color temperature at step 5"
 msgstr "Temperatura del colore al passaggio 5"
 
 #. settings-schema.json->colorStep6->description
-msgid "Color temperatur at step 6"
+msgid "Color temperature at step 6"
 msgstr "Temperatura del colore al passaggio 6"
 
 #. settings-schema.json->colorStep7->description
-msgid "Color temperatur at step 7"
+msgid "Color temperature at step 7"
 msgstr "Temperatura del colore al passaggio 7"
 
 #. settings-schema.json->head2->description

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-08 22:36+0100\n"
-"PO-Revision-Date: 2024-02-11 18:42+0100\n"
+"POT-Creation-Date: 2024-02-14 12:38+0100\n"
+"PO-Revision-Date: 2024-02-14 12:43+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:74
+#: applet.js:70
 msgid "sct is now at"
 msgstr "sct est maintenant à"
 
@@ -50,7 +50,7 @@ msgid "Color Temperatur Steps"
 msgstr "Étapes de température de couleur"
 
 #. settings-schema.json->colorStep1->description
-msgid "Color temperatur at step 1"
+msgid "Color temperature at step 1"
 msgstr "Température de couleur à l'étape 1"
 
 #. settings-schema.json->colorStep1->tooltip
@@ -63,11 +63,11 @@ msgstr ""
 "rouge, 6 500 à la lumière du jour et 10 000 au bleu."
 
 #. settings-schema.json->colorStep2->description
-msgid "Color temperatur at step 2"
+msgid "Color temperature at step 2"
 msgstr "Température de couleur à l'étape 2"
 
 #. settings-schema.json->colorStep3->description
-msgid "Color temperatur at step 3"
+msgid "Color temperature at step 3"
 msgstr "Température de couleur à l'étape 3"
 
 #. settings-schema.json->colorStep3->tooltip
@@ -80,19 +80,19 @@ msgstr ""
 "Facultatif. Ajoutez une autre valeur entre 1000 et 10000, ou laissez vide."
 
 #. settings-schema.json->colorStep4->description
-msgid "Color temperatur at step 4"
+msgid "Color temperature at step 4"
 msgstr "Température de couleur à l'étape 4"
 
 #. settings-schema.json->colorStep5->description
-msgid "Color temperatur at step 5"
+msgid "Color temperature at step 5"
 msgstr "Température de couleur à l'étape 5"
 
 #. settings-schema.json->colorStep6->description
-msgid "Color temperatur at step 6"
+msgid "Color temperature at step 6"
 msgstr "Température de couleur à l'étape 6"
 
 #. settings-schema.json->colorStep7->description
-msgid "Color temperatur at step 7"
+msgid "Color temperature at step 7"
 msgstr "Température de couleur à l'étape 7"
 
 #. settings-schema.json->head2->description

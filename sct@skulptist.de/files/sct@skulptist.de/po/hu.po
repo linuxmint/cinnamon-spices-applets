@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-08 22:36+0100\n"
-"PO-Revision-Date: 2024-02-09 12:45+0100\n"
+"POT-Creation-Date: 2024-02-14 12:38+0100\n"
+"PO-Revision-Date: 2024-02-14 12:42+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:74
+#: applet.js:70
 msgid "sct is now at"
 msgstr "sct jelenleg"
 
@@ -41,15 +41,16 @@ msgid ""
 "Toggle screen temperatures with sct. Set up to 7 custom color temperatures "
 "and toggle through by clicking on the applet"
 msgstr ""
-"Váltsa át a képernyő hőmérsékletét az sct-vel.Állítson be akár 7 egyedi "
-"színhőmérsékletet és váltogasson közöttük a kisalkalmazásra való kattintással"
+"Váltsa át a képernyő hőmérsékletét az sct-vel.\n"
+"Állítson be akár 7 egyedi színhőmérsékletet és váltogasson közöttük a "
+"kisalkalmazásra való kattintással"
 
 #. settings-schema.json->head->description
 msgid "Color Temperatur Steps"
 msgstr "Színhőmérséklet lépték"
 
 #. settings-schema.json->colorStep1->description
-msgid "Color temperatur at step 1"
+msgid "Color temperature at step 1"
 msgstr "Színhőmérséklet az 1. lépésben"
 
 #. settings-schema.json->colorStep1->tooltip
@@ -62,11 +63,11 @@ msgstr ""
 "a nappali és az 10000 a kék."
 
 #. settings-schema.json->colorStep2->description
-msgid "Color temperatur at step 2"
+msgid "Color temperature at step 2"
 msgstr "Színhőmérséklet a 2. lépésben"
 
 #. settings-schema.json->colorStep3->description
-msgid "Color temperatur at step 3"
+msgid "Color temperature at step 3"
 msgstr "Színhőmérséklet a 3. lépésben"
 
 #. settings-schema.json->colorStep3->tooltip
@@ -80,19 +81,19 @@ msgstr ""
 "üresen."
 
 #. settings-schema.json->colorStep4->description
-msgid "Color temperatur at step 4"
+msgid "Color temperature at step 4"
 msgstr "Színhőmérséklet a 4. lépésben"
 
 #. settings-schema.json->colorStep5->description
-msgid "Color temperatur at step 5"
+msgid "Color temperature at step 5"
 msgstr "Színhőmérséklet az 5. lépésben"
 
 #. settings-schema.json->colorStep6->description
-msgid "Color temperatur at step 6"
+msgid "Color temperature at step 6"
 msgstr "Színhőmérséklet a 6. lépésben"
 
 #. settings-schema.json->colorStep7->description
-msgid "Color temperatur at step 7"
+msgid "Color temperature at step 7"
 msgstr "Színhőmérséklet a 7. lépésben"
 
 #. settings-schema.json->head2->description
