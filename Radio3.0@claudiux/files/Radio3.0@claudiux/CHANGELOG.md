@@ -1,3 +1,6 @@
+### v1.16.0~20240214
+  * Bugfixes.
+
 ### v1.15.3~20240211
   * Minor changes in settings (Network tab).
 

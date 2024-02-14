@@ -1135,7 +1135,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("show-volume-level-near-icon", "show_volume_level_near_icon", this.volume_near_icon.bind(this));
     this.settings.bind("dont-check-dependencies", "dont_check_dependencies");
     this.settings.bind("recentRadios", "recentRadios");
-    this.tmpRecentRadios = this.recentRadios;
     this.settings.bind("volume-step", "volume_step");
     this.settings.bind("volume-at-startup", "volume_at_startup");
     this.settings.bind("volume-percentage", "percentage");
@@ -1158,7 +1157,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("limits-hd-size-prefixes", "size_prefixes", (...args) => set_nemo_size_prefixes(...args));
 
     this.settings.bind("last-radio-listened-to", "last_radio_listened_to");
-    this.last_radio = ""+this.last_radio_listened_to;
     this.settings.bind("switch-on-last-station-at-start-up", "switch_on_last_station_at_start_up",
       this.on_switch_on_last_station_at_start_up.bind(this));
     this.settings.bind("notif-station-change", "notif_station_change");
@@ -1287,14 +1285,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.on_applet_middle_clicked(event);
     });
     keybindingManager.addHotKey("shortcutNext", this.shortcutNext, (event) => {
-      if (this.tmpRecentRadios.length < 2) return;
-      let next_radio = this.tmpRecentRadios[this.recent_number - 1];
+      if (this.recentRadios.length < 2) return;
+      let next_radio = this.recentRadios[this.recent_number - 1];
       this.stop_mpv_radio(false);
       this.start_mpv_radio(next_radio);
     });
     keybindingManager.addHotKey("shortcutPrevious", this.shortcutPrevious, (event) => {
-      if (this.tmpRecentRadios.length < 2) return;
-      let prev_radio = this.tmpRecentRadios[1];
+      if (this.recentRadios.length < 2) return;
+      let prev_radio = this.recentRadios[1];
       this.stop_mpv_radio(false);
       this.start_mpv_radio(prev_radio);
     });
@@ -1521,12 +1519,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           "uuid": station.uuid,
           "homepage": station.homepage,
           "tags": station.tags,
-          "favicon": station.favicon ? station.favicon : ""
+          "favicon": station.favicon ? station.favicon : "",
+          "author_title_swap": station.author_title_swap == undefined ? false : station.author_title_swap
         };
       }
     }
 
-    for (let id of this.tmpRecentRadios)
+    for (let id of this.recentRadios)
       if (!this.radiosHash[""+id])
         this.search_name_by_url_on_RDB(""+id);
   }
@@ -1920,7 +1919,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           "homepage": r.homepage,
           "uuid": r.stationuuid,
           "tags": `${r.tags}`,
-          "favicon": r.favicon ? r.favicon : ""
+          "favicon": r.favicon ? r.favicon : "",
+          "author_title_swap": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].author_title_swap != undefined) ? this.radiosHash[""+station_url].author_title_swap : false
         };
         return r.name;
       }
@@ -1941,7 +1941,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           "homepage": (!r.homepage) ? "" : ""+r.homepage,
           "uuid": (!r.stationuuid) ? "" : ""+r.stationuuid,
           "tags": (!r.tags) ? "" : ""+r.tags, // `${r.tags}`
-          "favicon": r.favicon ? r.favicon : ""
+          "favicon": r.favicon ? r.favicon : "",
+          "author_title_swap": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].author_title_swap != undefined) ? this.radiosHash[""+station_url].author_title_swap : false
         };
         return r.stationuuid;
       }
@@ -1974,7 +1975,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           "homepage": (!r.homepage) ? "" : ""+r.homepage,
           "uuid": (!r.stationuuid) ? "" : ""+r.stationuuid,
           "tags": (!r.tags) ? "" : ""+r.tags, // `${r.tags}`
-          "favicon": r.favicon ? r.favicon : ""
+          "favicon": r.favicon ? r.favicon : "",
+          "author_title_swap": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].author_title_swap != undefined) ? this.radiosHash[""+station_url].author_title_swap : false
           }
           try {
             delete this.radiosHash[""+old_url];
@@ -1989,7 +1991,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             "homepage": (!r.homepage) ? "" : ""+r.homepage,
             "uuid": (!r.stationuuid) ? "" : ""+r.stationuuid,
             "tags": (!r.tags) ? "" : ""+r.tags, // `${r.tags}`
-            "favicon": r.favicon ? r.favicon : ""
+            "favicon": r.favicon ? r.favicon : "",
+            "author_title_swap": (this.radiosHash[""+station_url] != undefined && this.radiosHash[""+station_url].author_title_swap != undefined) ? this.radiosHash[""+station_url].author_title_swap : false
           };
         }
         return r.url;
@@ -2298,7 +2301,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         this.menu.addMenuItem(menuitemHead2);
 
         var indexRecentRadios = 0;
-        for (let id of this.tmpRecentRadios) {
+        for (let id of this.recentRadios) {
           let title = ""+this.get_radio_name(id, "make_menu: recent radios");
 
           if (title.length === 0 || title === "undefined" || title ==="null") {
@@ -2341,7 +2344,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
       while (to_remove_from_recentRadios.length > 0) {
         let to_remove = to_remove_from_recentRadios.shift();
-        this.tmpRecentRadios.splice(this.recentRadios.indexOf(to_remove), 1);
+        this.recentRadios.splice(this.recentRadios.indexOf(to_remove), 1);
       }
       this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
@@ -2941,7 +2944,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.last_radio_listened_to = _id;
 
-    let recentRadios = this.tmpRecentRadios; // this.settings.getValue("recentRadios");
+    let recentRadios = this.recentRadios; // this.settings.getValue("recentRadios");
 
     let index_of_id = recentRadios.indexOf(_id);
 
@@ -2954,7 +2957,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     while (recentRadios.length > 12) recentRadios.pop();
 
-    this.tmpRecentRadios = recentRadios; // this.settings.setValue("recentRadios", recentRadios);
+    this.recentRadios = recentRadios; // this.settings.setValue("recentRadios", recentRadios);
 
     this.radioId = _id;
 
@@ -3413,7 +3416,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //log("on_applet_reloaded", true);
     this.songTitle = "";
     // Register recent Radios:
-    this.recentRadios = this.tmpRecentRadios;
+    this.recentRadios = this.recentRadios;
 
     //this.set_radio_hashtable();
 
@@ -3544,7 +3547,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.appletRunning = false;
 
     // Register recent Radios:
-    this.recentRadios = this.tmpRecentRadios;
+    this.recentRadios = this.recentRadios;
 
     //this.radiosHash = null;
     this.radiosHash = {};
@@ -3766,7 +3769,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
           //log(""+station.name+" - tags: "+`${rh.tags}`);
           new_station["tags"] = (`${rh.tags}`.length > 0) ? ""+`${rh.tags}` : "";
-          new_station["favicon"] = rh.favicon ? rh.favicon : ""
+          new_station["favicon"] = rh.favicon ? rh.favicon : "";
+          new_station["author_title_swap"] = rh.author_title_swap != undefined ? rh.author_title_swap : false;
         } else {
           new_station["inc"] = station.inc;
           new_station["play"] = false;
@@ -3778,6 +3782,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           new_station["homepage"] = (station.homepage && (station.homepage.length > 0)) ? station.homepage : "";
           new_station["tags"] = "";
           new_station["favicon"] = (station.favicon && (station.favicon.length > 0)) ? station.favicon : "";
+          new_station["author_title_swap"] = station.author_title_swap != undefined ? station.author_title_swap : false;
         }
 
         new_stations.push(new_station);
@@ -3794,91 +3799,91 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.radio_notify(_("Update completed successfully"));
   }
 
-  async on_button_radios_update_clicked_OLD() {
-    //FIXME!: Make update in two times: firstly for stations wich have uuid, then for those they don't.
-    this.radio_notify(_("Update in progress"), _("It may take a while ... Please wait."));
-    this.settings.setValue("scale-update", 0);
-    this.settings.setValue("show-scale-update", true);
-    let urls = this.radio_urls;
-    let nb_of_urls = urls.length;
-    var i = 1;
-    for (let url of urls) {
-      await this.search_uuid_by_url_on_RDB(url).then(Lang.bind(this, () => {
-        //log(""+i+"/"+nb_of_urls+": OK!");
-        let scale_value = Math.ceil(100 * (i / nb_of_urls));
-        this.settings.setValue("scale-update", scale_value);
-      })).catch(e => logError(e));
-      i++
-    }
-    this.settings.setValue("scale-update", 100);
+  //~ async on_button_radios_update_clicked_OLD() {
+    //~ //FIXME!: Make update in two times: firstly for stations wich have uuid, then for those they don't.
+    //~ this.radio_notify(_("Update in progress"), _("It may take a while ... Please wait."));
+    //~ this.settings.setValue("scale-update", 0);
+    //~ this.settings.setValue("show-scale-update", true);
+    //~ let urls = this.radio_urls;
+    //~ let nb_of_urls = urls.length;
+    //~ var i = 1;
+    //~ for (let url of urls) {
+      //~ await this.search_uuid_by_url_on_RDB(url).then(Lang.bind(this, () => {
+        //~ //log(""+i+"/"+nb_of_urls+": OK!");
+        //~ let scale_value = Math.ceil(100 * (i / nb_of_urls));
+        //~ this.settings.setValue("scale-update", scale_value);
+      //~ })).catch(e => logError(e));
+      //~ i++
+    //~ }
+    //~ this.settings.setValue("scale-update", 100);
 
-    urls = null;
+    //~ urls = null;
 
-    let stations = this.settings.getValue("radios");
-    var new_stations = [];
-    i = 1;
-    for (let station of stations) {
-      let id = station.url;
-      let uuid = ((station.uuid != null) && (station.uuid.length > 0)) ? ""+station.uuid : "";
-      var new_station = {};
-      try {
+    //~ let stations = this.settings.getValue("radios");
+    //~ var new_stations = [];
+    //~ i = 1;
+    //~ for (let station of stations) {
+      //~ let id = station.url;
+      //~ let uuid = ((station.uuid != null) && (station.uuid.length > 0)) ? ""+station.uuid : "";
+      //~ var new_station = {};
+      //~ try {
 
-        if ((id != null) && (id.length > 0) && this.radiosHash[id]) {
-          //log("NEW: "+i+"/"+nb_of_urls);
-          let rh = this.radiosHash[id];
-          new_station["inc"] = station.inc;
-          new_station["play"] = false;
-          new_station["name"] = station.name;
+        //~ if ((id != null) && (id.length > 0) && this.radiosHash[id]) {
+          //~ //log("NEW: "+i+"/"+nb_of_urls);
+          //~ let rh = this.radiosHash[id];
+          //~ new_station["inc"] = station.inc;
+          //~ new_station["play"] = false;
+          //~ new_station["name"] = station.name;
 
-          new_station["codec"] = ((rh.codec != null) &&
-            (""+rh.codec != "undefined") && (""+rh.codec.length > 0)
-          ) ? ""+rh.codec : (station.codec) ? station.codec : "";
+          //~ new_station["codec"] = ((rh.codec != null) &&
+            //~ (""+rh.codec != "undefined") && (""+rh.codec.length > 0)
+          //~ ) ? ""+rh.codec : (station.codec) ? station.codec : "";
 
-          new_station["bitrate"] = ( (rh.bitrate != null) &&
-            (""+rh.bitrate != "undefined") && (""+rh.bitrate.length > 0)
-          ) ? ""+rh.bitrate : (station.bitrate) ? station.bitrate : "";
+          //~ new_station["bitrate"] = ( (rh.bitrate != null) &&
+            //~ (""+rh.bitrate != "undefined") && (""+rh.bitrate.length > 0)
+          //~ ) ? ""+rh.bitrate : (station.bitrate) ? station.bitrate : "";
 
-          new_station["url"] = ""+id;
+          //~ new_station["url"] = ""+id;
 
-          new_station["uuid"] = (rh.uuid != null && ""+rh.uuid != "undefined") ? ""+rh.uuid : "";
+          //~ new_station["uuid"] = (rh.uuid != null && ""+rh.uuid != "undefined") ? ""+rh.uuid : "";
 
-          new_station["homepage"] = ( (rh.homepage != null) &&
-            (""+rh.homepage != "undefined") && (""+rh.homepage.length > 0)
-          ) ? ""+rh.homepage : (station.homepage) ? station.homepage : "";
+          //~ new_station["homepage"] = ( (rh.homepage != null) &&
+            //~ (""+rh.homepage != "undefined") && (""+rh.homepage.length > 0)
+          //~ ) ? ""+rh.homepage : (station.homepage) ? station.homepage : "";
 
-          //log(""+station.name+" - tags: "+`${rh.tags}`);
-          new_station["tags"] = (`${rh.tags}`.length > 0) ? ""+`${rh.tags}` : "";
-          new_station["favicon"] = rh.favicon.length > 0 ? ""+rh.favicon : "";
-        } else {
-          //log("OLD: "+i+"/"+nb_of_urls);
-          new_station["inc"] = station.inc;
-          new_station["play"] = false;
-          new_station["name"] = station.name;
-          new_station["codec"] = (station.codec && (station.codec.length > 0)) ? station.codec : "";
-          new_station["bitrate"] = (station.bitrate && (station.bitrate.length > 0)) ? station.bitrate : "";
-          new_station["url"] = ""+id;
-          new_station["uuid"] = "";
-          new_station["homepage"] = (station.homepage && (station.homepage.length > 0)) ? station.homepage : "";
-          //log(""+station.name+" - tags: "+`${station.tags}`);
-          new_station["tags"] = "";
-          new_station["favicon"] = "";
-        }
+          //~ //log(""+station.name+" - tags: "+`${rh.tags}`);
+          //~ new_station["tags"] = (`${rh.tags}`.length > 0) ? ""+`${rh.tags}` : "";
+          //~ new_station["favicon"] = rh.favicon.length > 0 ? ""+rh.favicon : "";
+        //~ } else {
+          //~ //log("OLD: "+i+"/"+nb_of_urls);
+          //~ new_station["inc"] = station.inc;
+          //~ new_station["play"] = false;
+          //~ new_station["name"] = station.name;
+          //~ new_station["codec"] = (station.codec && (station.codec.length > 0)) ? station.codec : "";
+          //~ new_station["bitrate"] = (station.bitrate && (station.bitrate.length > 0)) ? station.bitrate : "";
+          //~ new_station["url"] = ""+id;
+          //~ new_station["uuid"] = "";
+          //~ new_station["homepage"] = (station.homepage && (station.homepage.length > 0)) ? station.homepage : "";
+          //~ //log(""+station.name+" - tags: "+`${station.tags}`);
+          //~ new_station["tags"] = "";
+          //~ new_station["favicon"] = "";
+        //~ }
 
-        new_stations.push(new_station);
-        i++
-      } catch(e) {
-        logError(e)
-      }
-    }
+        //~ new_stations.push(new_station);
+        //~ i++
+      //~ } catch(e) {
+        //~ logError(e)
+      //~ }
+    //~ }
 
-    this.settings.setValue("radios", new_stations);
+    //~ this.settings.setValue("radios", new_stations);
 
-    this.radio_notify(_("Update completed successfully"));
+    //~ this.radio_notify(_("Update completed successfully"));
 
 
-    this.settings.setValue("scale-update", 0);
-    this.settings.setValue("show-scale-update", false)
-  }
+    //~ this.settings.setValue("scale-update", 0);
+    //~ this.settings.setValue("show-scale-update", false)
+  //~ }
 
   on_option_menu_reload_this_applet_clicked() {
     //log("on_option_menu_reload_this_applet_clicked");
@@ -5338,7 +5343,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   empty_recents() {
-    this.tmpRecentRadios = []; // this.settings.setValue("recentRadios", []);
+    this.recentRadios = []; // this.settings.setValue("recentRadios", []);
   }
 
   icon_rotate() {
@@ -5602,7 +5607,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         continue;
       let url = "" + radio.url.trim();
       if (url.length !== 0 && url === this.last_radio_listened_to) {
-        _ret = radio.author_title_swap === true;
+        _ret = (radio.author_title_swap != undefined && radio.author_title_swap === true);
         break;
       }
     }
