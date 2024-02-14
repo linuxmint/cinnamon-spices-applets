@@ -22,13 +22,11 @@ function MyApplet(metadata, orientation, panel_height, instance_id) {
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    instanceId: undefined,
     iconName: undefined, // iconName will get populated by the bindProperty
     iconChanged: "false",
 
     _init: function(metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id)
-        this.instanceId = instance_id
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id)
 
         this.settings.bind("maxSteps", "maxSteps")
