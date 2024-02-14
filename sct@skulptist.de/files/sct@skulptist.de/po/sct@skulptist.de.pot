@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-08 22:36+0100\n"
+"POT-Creation-Date: 2024-02-14 12:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:74
+#: applet.js:70
 msgid "sct is now at"
 msgstr ""
 
@@ -44,7 +44,7 @@ msgid "Color Temperatur Steps"
 msgstr ""
 
 #. settings-schema.json->colorStep1->description
-msgid "Color temperatur at step 1"
+msgid "Color temperature at step 1"
 msgstr ""
 
 #. settings-schema.json->colorStep1->tooltip
@@ -55,11 +55,11 @@ msgid ""
 msgstr ""
 
 #. settings-schema.json->colorStep2->description
-msgid "Color temperatur at step 2"
+msgid "Color temperature at step 2"
 msgstr ""
 
 #. settings-schema.json->colorStep3->description
-msgid "Color temperatur at step 3"
+msgid "Color temperature at step 3"
 msgstr ""
 
 #. settings-schema.json->colorStep3->tooltip
@@ -71,19 +71,19 @@ msgid "Optional. Add another value between 1000 and 10000, or leave empty."
 msgstr ""
 
 #. settings-schema.json->colorStep4->description
-msgid "Color temperatur at step 4"
+msgid "Color temperature at step 4"
 msgstr ""
 
 #. settings-schema.json->colorStep5->description
-msgid "Color temperatur at step 5"
+msgid "Color temperature at step 5"
 msgstr ""
 
 #. settings-schema.json->colorStep6->description
-msgid "Color temperatur at step 6"
+msgid "Color temperature at step 6"
 msgstr ""
 
 #. settings-schema.json->colorStep7->description
-msgid "Color temperatur at step 7"
+msgid "Color temperature at step 7"
 msgstr ""
 
 #. settings-schema.json->head2->description
