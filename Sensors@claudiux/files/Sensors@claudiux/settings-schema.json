@@ -63,6 +63,7 @@
         "interval",
         "keep_size",
         "char_size",
+        "char_color_customized",
         "char_color",
         "separator",
         "remove_border",
@@ -260,16 +261,15 @@
     "step": 1,
     "description": "Character size (% of standard size)"
   },
+  "char_color_customized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize Text Color"
+  },
   "char_color": {
-    "type": "combobox",
-    "default": "default",
-    "options": {
-      "Default": "default",
-      "White": "white",
-      "Black": "black",
-      "Grey": "grey",
-      "Light Grey": "lightgrey"
-    },
+    "type": "colorchooser",
+    "default": "#CFD8DC",
+    "dependency": "char_color_customized",
     "description": "Text Color"
   },
   "separator": {

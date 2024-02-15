@@ -1,3 +1,6 @@
+### v3.6.0~20240215
+  * Adds ability to choose the color of the text in panel.
+
 ### v3.5.3~20240213
   * Minor change in settings: A sensor's name can now be displayed in full.
 
