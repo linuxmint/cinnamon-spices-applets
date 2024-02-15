@@ -151,6 +151,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.s.bind("interval", "interval", this.on_settings_changed, null);
     this.s.bind("keep_size", "keep_size", this.updateUI, null);
     this.s.bind("char_size", "char_size", this.updateUI, null);
+    this.s.bind("char_color_customized", "char_color_customized", this.updateUI, null);
     this.s.bind("char_color", "char_color", this.updateUI, null);
     this.s.bind("separator", "separator", this.updateUI, null);
     this.s.bind("remove_border", "remove_border", this.updateUI, null);
@@ -888,7 +889,14 @@ class SensorsApplet extends Applet.TextApplet {
     this.set_applet_label(_appletLabel);
 
     this.actor.set_style_class_name(_actor_style);
-    this._applet_label.set_style_class_name("tcolor"+this.char_color);
+    //~ this._applet_label.set_style_class_name("tcolor"+this.char_color);
+    if (!this.char_color_customized) {
+      this._applet_label.set_style("");
+      this._applet_label.set_style_class_name("applet-label");
+    } else {
+      this._applet_label.set_style_class_name("applet-label");
+      this._applet_label.set_style("color: "+this.char_color);
+    }
 
     if (this.tooltip_must_be_updated)
       this.updateTooltip();
