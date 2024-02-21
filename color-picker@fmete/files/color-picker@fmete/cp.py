@@ -36,7 +36,8 @@ except ImportError:
 
 def getPixelColor(x, y):
   w = Gdk.get_default_root_window()
-  pb = Gdk.pixbuf_get_from_window(w, x, y, 1, 1)
+  scale_factor = w.get_scale_factor()
+  pb = Gdk.pixbuf_get_from_window(w, x // scale_factor, y // scale_factor, 1, 1)
   return pb.get_pixels()
 
 def mousePixel():
