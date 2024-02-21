@@ -4,7 +4,9 @@
 
 This sound150@claudiux applet is an improvement of the sound@cinnamon.org applet.
 
-An option allows you to control the volume up to 150% of its nominal value.
+**It can display the song's cover art when it is embedded in the file (.mp3, .flac ...)**
+
+**An option allows you to control the volume up to 150% of its nominal value.**
 
 The icon and the slider are colored according to the volume when it is greater than 100%.
 

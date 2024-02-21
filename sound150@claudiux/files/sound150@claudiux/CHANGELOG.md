@@ -1,3 +1,7 @@
+### v5.2.0~20240221
+  * The art album icon is now correctly removed when changing streams.
+  * Shows album art (or song art) even if mpris:artUrl is not in the metadata!
+
 ### v5.1.1~20240118
   * Use Ctrl-Middle-Click or Shift-Middle-Click to toggle mute as defined in settings.
   * Takes into account an undefined input.
