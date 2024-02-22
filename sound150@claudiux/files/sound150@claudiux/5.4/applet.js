@@ -9,9 +9,7 @@ const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
-const {
-  PixelFormat
-} = imports.gi.Cogl; //Cogl
+const Cogl = imports.gi.Cogl; //Cogl
 const Gdk = imports.gi.Gdk;
 const GdkPixbuf = imports.gi.GdkPixbuf;
 const Cvc = imports.gi.Cvc;
@@ -25,6 +23,7 @@ const Pango = imports.gi.Pango;
 
 const UUID = "sound150@claudiux";
 const HOME_DIR = GLib.get_home_dir();
+const PATH2SCRIPTS = HOME_DIR+"/.local/share/cinnamon/applets/"+UUID+"/scripts";
 
 const MEDIA_PLAYER_2_PATH = "/org/mpris/MediaPlayer2";
 const MEDIA_PLAYER_2_NAME = "org.mpris.MediaPlayer2";
@@ -87,10 +86,11 @@ const formatTextWrap = (text, maxLineLength) => {
 }
 /* global values */
 let players_without_seek_support = ['telegram desktop', 'spotify', 'totem', 'xplayer', 'gnome-mplayer', 'pithos',
-    'smplayer', 'mpv'];
+    'smplayer'];
 let players_with_seek_support = [
     'clementine', 'banshee', 'rhythmbox', 'rhythmbox3', 'pragha', 'quodlibet',
-    'amarok', 'xnoise', 'gmusicbrowser', 'vlc', 'qmmp', 'deadbeef', 'audacious'];
+    'amarok', 'xnoise', 'gmusicbrowser', 'vlc', 'qmmp', 'deadbeef', 'audacious',
+    'celluloid', 'mpv'];
 /* dummy vars for translation */
 let x = _("Playing");
 x = _("Paused");
@@ -768,9 +768,13 @@ class Player extends PopupMenu.PopupMenuSection {
         });
     }
 
-    _setMetadata(metadata) {
+    async _setMetadata(metadata) {
         if (!metadata)
             return;
+
+        //~ for (let info of Object.keys(metadata)) {
+            //~ log(""+info+": "+metadata[info].unpack(), true);
+        //~ }
 
         let trackid = "";  // D-Bus path: A unique identity for this track
         if (metadata["mpris:trackid"]) {
@@ -823,19 +827,34 @@ class Player extends PopupMenu.PopupMenuSection {
         let change = false;
         if (metadata["mpris:artUrl"]) {
             let artUrl = metadata["mpris:artUrl"].unpack();
-            if (this._trackCoverFile != artUrl) {
+            //~ if (this._trackCoverFile != artUrl) {
                 this._trackCoverFile = artUrl;
                 change = true;
-            }
-        }
-        else {
-            if (this._trackCoverFile != false) {
+            //~ }
+        } else if(metadata["xesam:url"]) {
+            await Util.spawnCommandLineAsyncIO("bash -C %s/get_album_art.sh".format(PATH2SCRIPTS), Lang.bind(this, function(stdout, stderr, exitCode) {
+                if (exitCode === 0) {
+                    this._trackCoverFile = "file://"+stdout;
+                    let cover_path = decodeURIComponent(this._trackCoverFile);
+                    cover_path = cover_path.replace("file://", "");
+                    this._showCover(cover_path);
+                } else {
+                    this._trackCoverFile = null;
+                    change = true;
+                }
+            }));
+        } else {
+            //~ if (this._trackCoverFile != false) {
                 this._trackCoverFile = false;
                 change = true;
-            }
+            //~ }
         }
 
         if (change) {
+            if (this._trackCoverFileTmp) {
+                this._trackCoverFileTmp.delete(null);
+                this._trackCoverFileTmp = null;
+            }
             if (this._trackCoverFile) {
                 let cover_path = "";
                 if (this._trackCoverFile.match(/^http/)) {
@@ -870,8 +889,11 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._showCover(cover_path);
                 }
             }
-            else
-                this._showCover(false);
+            else {
+                this._trackCoverFile = null;
+                this._trackCoverFileTmp = null;
+                this._showCover(null); //false
+            }
         }
         this._applet.setAppletTextIcon(this, true);
     }
@@ -951,17 +973,25 @@ class Player extends PopupMenu.PopupMenuSection {
         }
         else {
             this._cover_path = cover_path;
+            this._applet._icon_path = cover_path; // Added
+            this._applet.setAppletIcon(this._applet.player, cover_path); // Added
             this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(cover_path, 300, 300, this._on_cover_loaded.bind(this));
-            let image = new Clutter.Image();
-            let pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(this._cover_path, 300, 300);
-            image.set_data(
-                pixbuf.get_pixels(),
-                pixbuf.get_has_alpha() ? PixelFormat.RGBA_8888 : PixelFormat.RGBA_888,
-                pixbuf.get_width(),
-                pixbuf.get_height(),
-                pixbuf.get_rowstride()
-            );
-            this.cover = image.get_texture();
+            this._applet.setIcon();
+
+
+            //~ log("this._cover_path: "+this._cover_path, true);
+            //~ let pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(this._cover_path, 300, 300);
+            //~ if (pixbuf) {
+                //~ let image = new Clutter.Image();
+                //~ image.set_data(
+                    //~ pixbuf.get_pixels(),
+                    //~ pixbuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
+                    //~ pixbuf.get_width(),
+                    //~ pixbuf.get_height(),
+                    //~ pixbuf.get_rowstride()
+                //~ );
+                //~ this.cover = image.get_texture();
+            //~ }
             //~ if (this._applet.keepAlbumAspectRatio) {
                 //~ this.cover = new Clutter.Texture({ width: 300, keep_aspect_ratio: true, filter_quality: 2, filename: cover_path });
             //~ }
@@ -1002,7 +1032,9 @@ class Player extends PopupMenu.PopupMenuSection {
         if (this._prop)
             this._prop.disconnectSignal(this._propChangedId);
 
-        PopupMenu.PopupMenuSection.prototype.destroy.call(this);
+        try {
+            PopupMenu.PopupMenuSection.prototype.destroy.call(this);
+        } catch(e) {}
     }
 }
 
@@ -1031,7 +1063,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
         super(orientation, panel_height, instanceId);
 
-        //~ this.defaultColor = null;
+        Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/rm_tmp_files.sh'");
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
@@ -1062,10 +1094,10 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.settings.bind("stepVolume", "stepVolume", () => {
             VOLUME_ADJUSTMENT_STEP = this.settings.getValue("stepVolume") / 100;
-            log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
+            //~ log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
         });
         VOLUME_ADJUSTMENT_STEP = this.settings.getValue("stepVolume") / 100;
-        log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
+        //~ log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
 
         this.settings.bind("magneticOn", "magneticOn", () => this._on_sound_settings_change());
 
@@ -1277,9 +1309,11 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         Main.keybindingManager.removeHotKey("raise-volume-" + this.instance_id);
         Main.keybindingManager.removeHotKey("lower-volume-" + this.instance_id);
-        Main.keybindingManager.removeHotKey("volume-mute");
-        Main.keybindingManager.removeHotKey("volume-up");
-        Main.keybindingManager.removeHotKey("volume-down");
+        try {
+            Main.keybindingManager.removeHotKey("volume-mute");
+            Main.keybindingManager.removeHotKey("volume-up");
+            Main.keybindingManager.removeHotKey("volume-down");
+        } catch(e) {}
 
         if (this.hideSystray)
             this.unregisterSystrayIcons();
@@ -1452,6 +1486,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     setIcon(icon, source) {
+        //~ log("setIcon("+icon+", "+source+")", true);
         if (this._iconTimeoutId) {
             Mainloop.source_remove(this._iconTimeoutId);
             this._iconTimeoutId = 0;
@@ -1475,10 +1510,13 @@ class Sound150Applet extends Applet.TextIconApplet {
                 });
             } else {
                 // if we have an active player and want to change the icon, change it immediately
-                if (this._playerIcon[1])
+                if (this._playerIcon[1]) {
+                    //~ log("CHANGE the icon !!! "+this._playerIcon[0], true);
                     this.set_applet_icon_path(this._playerIcon[0]);
-                else
+                } else {
+                    //~ log("DON'T change the icon !!!", true);
                     this.set_applet_icon_symbolic_name(this._playerIcon[0]);
+                }
             }
         } else {
             // if we have no active player show the output icon
@@ -1488,16 +1526,18 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     setAppletIcon(player, path) {
-        if (path) {
+        //~ log("setAppletIcon path:"+path, true);
+        if (path != null) {
             if (path === true) {
                 // Restore the icon path from the saved path.
                 path = this._icon_path;
             } else {
                 this._icon_path = path;
             }
-        } else if (path === null) {
+        } else {
             // This track has no art, erase the saved path.
             this._icon_path = null;
+            path = null;
         }
 
         if (this.showalbum) {
@@ -1927,8 +1967,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         for (let i = 0, l = this._streams.length; i < l; ++i) {
             if (this._streams[i].id === id) {
                 let stream = this._streams[i];
-                if (stream.item)
+                if (stream.item) {
                     stream.item.destroy();
+                }
 
                 // hide submenus or sections if showing them is unnecessary
                 if (stream.type === "SinkInput") {
