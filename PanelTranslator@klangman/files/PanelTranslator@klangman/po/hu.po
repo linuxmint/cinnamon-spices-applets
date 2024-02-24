@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-09 17:42-0500\n"
+"POT-Creation-Date: 2024-02-24 12:39-0500\n"
 "PO-Revision-Date: 2024-02-13 18:08+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
@@ -19,66 +19,66 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:91 applet.js:269 applet.js:271
+#: applet.js:91 applet.js:279 applet.js:281
 msgid "Translator"
 msgstr "Fordító"
 
-#: applet.js:197
+#: applet.js:207
 msgid "Unable to query available languages from translate-shell"
 msgstr ""
 "Nem lehet lekérdezni a rendelkezésre álló nyelveket a translate-shellből"
 
-#: applet.js:208
+#: applet.js:218
 msgid "Required \"trans\" command not found, please install translate-shell"
 msgstr ""
 "A szükséges \"trans\" parancs nem található, kérjük telepítse a translate-"
 "shellt"
 
-#: applet.js:212
+#: applet.js:222
 msgid "Error, the \"trans\" command returned an exit code of "
 msgstr "Hiba, a \"trans\" parancs a következő kilépési kódot adta vissza:"
 
-#: applet.js:292
+#: applet.js:302
 msgid "Swap Languages"
 msgstr "Nyelvek cseréje"
 
-#: applet.js:329
+#: applet.js:338
 msgid "{Text to translate}"
 msgstr "{Szöveg a fordításhoz}"
 
-#: applet.js:342
+#: applet.js:349
 msgid "{Translated text}"
 msgstr "{Lefordított szöveg}"
 
-#: applet.js:356
+#: applet.js:363
 msgid "Configure"
 msgstr "Beállítás"
 
-#: applet.js:357
+#: applet.js:364
 msgid "Help"
 msgstr "Segítség"
 
-#: applet.js:361
+#: applet.js:368
 msgid "Play"
 msgstr "Lejátszás"
 
-#: applet.js:365
+#: applet.js:372
 msgid "Paste"
 msgstr "Beillesztés"
 
-#: applet.js:369
+#: applet.js:376
 msgid "Clear"
 msgstr "Törlés"
 
-#: applet.js:373
+#: applet.js:380
 msgid "Translate"
 msgstr "Fordítás"
 
-#: applet.js:378
+#: applet.js:385
 msgid "Copy"
 msgstr "Másolás"
 
-#: applet.js:384
+#: applet.js:391
 msgid "Play Translation"
 msgstr "Fordítás lejátszása"
 

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PanelTranslator@klangman 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-09 17:42-0500\n"
+"POT-Creation-Date: 2024-02-24 12:39-0500\n"
 "PO-Revision-Date: 2024-02-11 17:08+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -18,67 +18,67 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:91 applet.js:269 applet.js:271
+#: applet.js:91 applet.js:279 applet.js:281
 msgid "Translator"
 msgstr "Traducteur"
 
-#: applet.js:197
+#: applet.js:207
 msgid "Unable to query available languages from translate-shell"
 msgstr ""
 "Impossible de demander quelles sont les langues disponibles à partir de "
 "translate-shell"
 
-#: applet.js:208
+#: applet.js:218
 msgid "Required \"trans\" command not found, please install translate-shell"
 msgstr ""
 "La commande \"trans\" requise n'a pas été trouvée, veuillez installer "
 "translate-shell"
 
-#: applet.js:212
+#: applet.js:222
 msgid "Error, the \"trans\" command returned an exit code of "
 msgstr "Erreur, la commande \"trans\" a renvoyé un code de sortie de "
 
-#: applet.js:292
+#: applet.js:302
 msgid "Swap Languages"
 msgstr "Intervertir les langues"
 
-#: applet.js:329
+#: applet.js:338
 msgid "{Text to translate}"
 msgstr "{Texte à traduire}"
 
-#: applet.js:342
+#: applet.js:349
 msgid "{Translated text}"
 msgstr "{Texte traduit}"
 
-#: applet.js:356
+#: applet.js:363
 msgid "Configure"
 msgstr "Configurer"
 
-#: applet.js:357
+#: applet.js:364
 msgid "Help"
 msgstr "Aide"
 
-#: applet.js:361
+#: applet.js:368
 msgid "Play"
 msgstr "Écouter"
 
-#: applet.js:365
+#: applet.js:372
 msgid "Paste"
 msgstr "Coller"
 
-#: applet.js:369
+#: applet.js:376
 msgid "Clear"
 msgstr "Effacer"
 
-#: applet.js:373
+#: applet.js:380
 msgid "Translate"
 msgstr "Traduire"
 
-#: applet.js:378
+#: applet.js:385
 msgid "Copy"
 msgstr "Copier"
 
-#: applet.js:384
+#: applet.js:391
 msgid "Play Translation"
 msgstr "Écouter la traduction"
 
