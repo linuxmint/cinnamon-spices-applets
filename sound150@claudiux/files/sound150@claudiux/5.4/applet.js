@@ -1233,6 +1233,14 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
+        let easy_effects = this.get_easy_effects();
+        //~ log("easy_effects: "+easy_effects, true);
+        if (easy_effects) {
+            this.context_menu_item_easyEffects = new PopupMenu.PopupIconMenuItem(_("Easy Effects"), "easyeffects", St.IconType.SYMBOLIC);
+            this.context_menu_item_easyEffects.connect('activate', async () => { Util.spawnCommandLine("%s".format(easy_effects)) });
+            this._applet_context_menu.addMenuItem(this.context_menu_item_easyEffects);
+        }
+
         this.mute_out_switch.connect('toggled', () => this._toggle_out_mute());
         this.mute_in_switch.connect('toggled', () => this._toggle_in_mute());
 
@@ -1252,6 +1260,49 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
 
         this._sound_settings.connect("changed::" + MAXIMUM_VOLUME_KEY, () => this._on_sound_settings_change());
+
+        this._loopArtId = 0;
+        this.loopArt();
+    }
+
+    get_easy_effects() {
+        var commandline = null;
+        let appsys = Cinnamon.AppSystem.get_default();
+        const dirs = [];
+        const iter = appsys.get_tree().get_root_directory().iter();
+        const CMenu = imports.gi.CMenu;
+
+        let nextType;
+        while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
+            if (nextType === CMenu.TreeItemType.DIRECTORY) {
+                dirs.push(iter.get_directory());
+            }
+
+            dirs.forEach(dir => {
+                if (!dir.get_is_nodisplay()) {
+                    const dirId = dir.get_menu_id();
+                    //~ log("dirId: "+dirId, true);
+                    if (dirId === "Multimedia") {
+                        const dirIter = dir.iter();
+                        let nextTypeDir;
+                        while ((nextTypeDir = dirIter.next()) !== CMenu.TreeItemType.INVALID) {
+                            const entry = dirIter.get_entry();
+                            const appInfo = entry.get_app_info();
+                            if (appInfo && !appInfo.get_nodisplay()) {
+                                const id = entry.get_desktop_file_id();
+                                const app = appsys.lookup_app(id);
+                                //~ log("APP NAME: "+app.get_name(), true);
+                                if (app.get_name() == "Easy Effects") {
+                                    commandline = appInfo.get_commandline();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        return commandline;
     }
 
     _setKeybinding() {
@@ -1320,6 +1371,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this._iconTimeoutId) {
             Mainloop.source_remove(this._iconTimeoutId);
             this._iconTimeoutId = 0;
+        }
+        if (this._loopArtId) {
+            Mainloop.source_remove(this._loopArtId);
+            this._loopArtId = 0;
         }
 
         this._dbus.disconnectSignal(this._ownerChangedId);
@@ -1523,6 +1578,22 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.set_applet_icon_symbolic_name(this._outputIcon);
         }
         this.volume_near_icon()
+    }
+
+    loopArt() {
+        let subProcess = Util.spawnCommandLineAsyncIO("bash -C %s/get_album_art.sh".format(PATH2SCRIPTS), Lang.bind(this, function(stdout, stderr, exitCode) {
+            if (exitCode === 0) {
+                this._trackCoverFile = "file://"+stdout;
+                let cover_path = decodeURIComponent(this._trackCoverFile);
+                cover_path = cover_path.replace("file://", "");
+                this._icon_path = cover_path;
+                this.setAppletIcon(true, true);
+            } else {
+                this._trackCoverFile = null;
+            }
+            subProcess.send_signal(9);
+        }));
+        this._loopArtId = Mainloop.timeout_add_seconds(5, this.loopArt.bind(this))
     }
 
     setAppletIcon(player, path) {
