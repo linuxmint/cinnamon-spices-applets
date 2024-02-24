@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-12 23:35-0500\n"
+"POT-Creation-Date: 2024-02-24 10:59-0500\n"
 "PO-Revision-Date: 2024-02-13 18:20+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
@@ -32,7 +32,8 @@ msgid "Suspend computer"
 msgstr "Számítógép felfüggesztése"
 
 #. settings-schema.json->suspend-header->description
-msgid "Suspend computer setting"
+#, fuzzy
+msgid "Suspend computer settings"
 msgstr "Számítógép felfüggesztésének beállításai"
 
 #. settings-schema.json->suspend-on-double-click->description
@@ -58,8 +59,7 @@ msgid ""
 msgstr ""
 "Amikor engedélyezve van, egy visszaszámláló indul mielőtt felfüggesztené a "
 "számítógépet.\n"
-"Visszaszámolás alatt ismételt kattintás esetén megszakítja a "
-"felfüggesztést."
+"Visszaszámolás alatt ismételt kattintás esetén megszakítja a felfüggesztést."
 
 #. settings-schema.json->count-down-duration->units
 msgid "seconds"
@@ -80,3 +80,12 @@ msgid ""
 msgstr ""
 "Amikor engedélyezve van, színes ikon jelenik meg, egyéb esetben egy "
 "szimbolikus ikon lesz használva."
+
+#. settings-schema.json->system-suspend-header->description
+#, fuzzy
+msgid "System suspend settings"
+msgstr "Számítógép felfüggesztésének beállításai"
+
+#. settings-schema.json->config-power->description
+msgid "Open Power Management Settings"
+msgstr ""

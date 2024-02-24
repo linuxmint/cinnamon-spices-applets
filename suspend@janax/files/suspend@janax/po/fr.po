@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-12 23:35-0500\n"
+"POT-Creation-Date: 2024-02-24 10:59-0500\n"
 "PO-Revision-Date: 2024-02-16 10:04+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -32,7 +32,8 @@ msgid "Suspend computer"
 msgstr "Mise en veille de l'ordinateur"
 
 #. settings-schema.json->suspend-header->description
-msgid "Suspend computer setting"
+#, fuzzy
+msgid "Suspend computer settings"
 msgstr "Préférences de Mise en veille de l'ordinateur"
 
 #. settings-schema.json->suspend-on-double-click->description
@@ -44,8 +45,8 @@ msgid ""
 "When enabled, a double-click will suspend the computer, otherwise the "
 "computer will suspend on a single click."
 msgstr ""
-"Lorsque cette option est activée un double-clic met en veille "
-"l'ordinateur, sinon l'ordinateur est mis en veille par un simple clic."
+"Lorsque cette option est activée un double-clic met en veille l'ordinateur, "
+"sinon l'ordinateur est mis en veille par un simple clic."
 
 #. settings-schema.json->count-down->description
 msgid "Use a count down before suspending"
@@ -78,5 +79,14 @@ msgid ""
 "When enabled, a full color panel icon will be used, otherwise a symbolic "
 "icon sill be used."
 msgstr ""
-"Si cette option est activée, une icône de panneau en couleurs sera "
-"utilisée, sinon une icône symbolique sera utilisée."
+"Si cette option est activée, une icône de panneau en couleurs sera utilisée, "
+"sinon une icône symbolique sera utilisée."
+
+#. settings-schema.json->system-suspend-header->description
+#, fuzzy
+msgid "System suspend settings"
+msgstr "Préférences de Mise en veille de l'ordinateur"
+
+#. settings-schema.json->config-power->description
+msgid "Open Power Management Settings"
+msgstr ""
