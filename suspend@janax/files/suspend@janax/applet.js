@@ -61,7 +61,7 @@ class SuspendApplet extends Applet.Applet {
                                     style_class: 'applet-icon',
                                     icon_size: iconSize});
       }else{
-      let iconSize = this.getPanelIconSize(St.IconType.SYMBOLIC);
+         let iconSize = this.getPanelIconSize(St.IconType.SYMBOLIC);
          this._icon = new St.Icon({ icon_name: "weather-clear-night",
                                     icon_type: St.IconType.SYMBOLIC,
                                     reactive: true, track_hover: true,
@@ -110,6 +110,10 @@ class SuspendApplet extends Applet.Applet {
          this._countDown = null;
          GLib.spawn_command_line_async('systemctl suspend -i');
       }
+   }
+
+   on_config_power_pressed() {
+      GLib.spawn_command_line_async('cinnamon-settings power');
    }
 }
 

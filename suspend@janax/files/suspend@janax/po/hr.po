@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: suspend@janax\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-12 23:35-0500\n"
+"POT-Creation-Date: 2024-02-24 10:59-0500\n"
 "PO-Revision-Date: 2017-05-08 14:04+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: \n"
@@ -35,7 +35,7 @@ msgstr "Suspendiraj računalo"
 
 #. settings-schema.json->suspend-header->description
 #, fuzzy
-msgid "Suspend computer setting"
+msgid "Suspend computer settings"
 msgstr "Suspendiraj računalo"
 
 #. settings-schema.json->suspend-on-double-click->description
@@ -74,4 +74,13 @@ msgstr ""
 msgid ""
 "When enabled, a full color panel icon will be used, otherwise a symbolic "
 "icon sill be used."
+msgstr ""
+
+#. settings-schema.json->system-suspend-header->description
+#, fuzzy
+msgid "System suspend settings"
+msgstr "Suspendiraj računalo"
+
+#. settings-schema.json->config-power->description
+msgid "Open Power Management Settings"
 msgstr ""

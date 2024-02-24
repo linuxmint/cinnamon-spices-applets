@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: suspend@janax\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-12 23:35-0500\n"
+"POT-Creation-Date: 2024-02-24 10:59-0500\n"
 "PO-Revision-Date: 2017-05-30 05:51+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -34,7 +34,7 @@ msgstr "Försätt datorn i viloläge"
 
 #. settings-schema.json->suspend-header->description
 #, fuzzy
-msgid "Suspend computer setting"
+msgid "Suspend computer settings"
 msgstr "Försätt datorn i viloläge"
 
 #. settings-schema.json->suspend-on-double-click->description
@@ -73,4 +73,13 @@ msgstr ""
 msgid ""
 "When enabled, a full color panel icon will be used, otherwise a symbolic "
 "icon sill be used."
+msgstr ""
+
+#. settings-schema.json->system-suspend-header->description
+#, fuzzy
+msgid "System suspend settings"
+msgstr "Försätt datorn i viloläge"
+
+#. settings-schema.json->config-power->description
+msgid "Open Power Management Settings"
 msgstr ""

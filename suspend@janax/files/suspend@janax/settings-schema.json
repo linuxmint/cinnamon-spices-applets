@@ -1,7 +1,7 @@
 {
    "suspend-header": {
       "type": "header",
-      "description": "Suspend computer setting"
+      "description": "Suspend computer settings"
    },
    "suspend-on-double-click": {
       "type": "switch",
@@ -18,7 +18,7 @@
    "count-down-duration": {
     "type": "spinbutton",
     "default": 5,
-    "min": 0,
+    "min": 1,
     "max": 9,
     "units": "seconds",
     "step": 1,
@@ -30,5 +30,14 @@
       "default": 1,
       "description": "Use a full color icon",
       "tooltip": "When enabled, a full color panel icon will be used, otherwise a symbolic icon sill be used."
+   },
+   "system-suspend-header": {
+      "type": "header",
+      "description": "System suspend settings"
+   },
+   "config-power": {
+      "type": "button",
+      "description" : "Open Power Management Settings",
+      "callback" : "on_config_power_pressed"
    }
 }
