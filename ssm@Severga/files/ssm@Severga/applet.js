@@ -247,7 +247,10 @@ SSMApplet.prototype = {
 			this._remove_timeoutR();
 			this.cpuLabel.destroy();
 			this.memLabel.destroy();
-			this.netDataProvider.disconnectFromNM();
+			if (this.netDataProvider.timeout) {
+				Mainloop.source_remove(this.netDataProvider.timeout);
+				this.netDataProvider.timeout = 0;
+			}
 			this.netLabel.destroy();
 		} else {
 			this.errorLabel.destroy();
@@ -389,13 +392,10 @@ NetDataProvider.prototype = {
 	_init: function() {
 		this.gtop = new GTop.glibtop_netload();
 		this.nmClient = new_NMClient(null);
-		this.signals = [
-			this.nmClient.connect("device-added", () => this._get_devices()),
-			this.nmClient.connect("device-removed", () => this._get_devices())
-		];
 		this.currentReadings = [];
 		this.lastUpdatedTime = Date.now();
 		this._get_devices();
+		this.timeout = Mainloop.timeout_add_seconds(30, () => this._get_devices());
 	},
 	
 	_fetch_data: function() {
@@ -430,6 +430,7 @@ NetDataProvider.prototype = {
 			});
 		}
 		devices = null;
+		return true;
 	},
 	
 	data: function(blackList = [], longInfoTab = 2, longInfoSize = 5) {
@@ -458,10 +459,6 @@ NetDataProvider.prototype = {
 			i++;
 		}
 		return value.toFixed(2) + pref[i];
-	},
-	
-	disconnectFromNM: function() {
-		for (let i = 0; i < this.signals.length; i++) this.nmClient.disconnect(this.signals[i]);
 	}
 }
 //</NetDataProvider>
