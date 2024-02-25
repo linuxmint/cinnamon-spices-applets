@@ -1,4 +1,11 @@
-### v5.2.0~20240221
+### v6.2.0~20240225
+  * Displays the cover of the song broadcast by the Radio3.0@claudiux applet, when available.
+
+### v6.1.0~20240224
+  * Fixes song art display for vlc when changing song.
+  * Adds the easyeffects option to the context menu when installed, to launch it.
+
+### v6.0.0~20240221
   * The art album icon is now correctly removed when changing streams.
   * Shows album art (or song art) even if mpris:artUrl is not in the metadata!
 

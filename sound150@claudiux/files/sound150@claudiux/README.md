@@ -4,7 +4,7 @@
 
 This sound150@claudiux applet is an improvement of the sound@cinnamon.org applet.
 
-**It can display the song's cover art when it is embedded in the file (.mp3, .flac ...)**
+**It can display the song's cover art when it is embedded in the file (.mp3, .flac ...) or available from the [Radio3.0 applet](https://cinnamon-spices.linuxmint.com/applets/view/360)**
 
 **An option allows you to control the volume up to 150% of its nominal value.**
 
