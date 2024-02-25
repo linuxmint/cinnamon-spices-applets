@@ -827,27 +827,35 @@ class Player extends PopupMenu.PopupMenuSection {
         let change = false;
         if (metadata["mpris:artUrl"]) {
             let artUrl = metadata["mpris:artUrl"].unpack();
-            //~ if (this._trackCoverFile != artUrl) {
+            //if (this._trackCoverFile != artUrl) {
                 this._trackCoverFile = artUrl;
                 change = true;
-            //~ }
+            //}
         } else if(metadata["xesam:url"]) {
             await Util.spawnCommandLineAsyncIO("bash -C %s/get_album_art.sh".format(PATH2SCRIPTS), Lang.bind(this, function(stdout, stderr, exitCode) {
                 if (exitCode === 0) {
                     this._trackCoverFile = "file://"+stdout;
                     let cover_path = decodeURIComponent(this._trackCoverFile);
                     cover_path = cover_path.replace("file://", "");
-                    this._showCover(cover_path);
+                    const file = Gio.File.new_for_path(cover_path);
+                    const fileInfo = file.query_info('standard::*,unix::uid',
+                        Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
+                    const size = fileInfo.get_size();
+                    if (size > 0) {
+                        this._showCover(cover_path);
+                    } else {
+                        cover_path = null;
+                    }
                 } else {
                     this._trackCoverFile = null;
                     change = true;
                 }
             }));
         } else {
-            //~ if (this._trackCoverFile != false) {
+            //if (this._trackCoverFile != false) {
                 this._trackCoverFile = false;
                 change = true;
-            //~ }
+            //}
         }
 
         if (change) {
@@ -1586,8 +1594,17 @@ class Sound150Applet extends Applet.TextIconApplet {
                 this._trackCoverFile = "file://"+stdout;
                 let cover_path = decodeURIComponent(this._trackCoverFile);
                 cover_path = cover_path.replace("file://", "");
-                this._icon_path = cover_path;
-                this.setAppletIcon(true, true);
+                const file = Gio.File.new_for_path(cover_path);
+                const fileInfo = file.query_info('standard::*,unix::uid',
+                    Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
+                const size = fileInfo.get_size();
+                if (size > 0) {
+                    this._icon_path = cover_path;
+                    this.setAppletIcon(true, true);
+                } else {
+                    this._icon_path = null;
+                    this._trackCoverFile = null;
+                }
             } else {
                 this._trackCoverFile = null;
             }

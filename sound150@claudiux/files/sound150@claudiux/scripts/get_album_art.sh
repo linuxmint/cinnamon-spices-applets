@@ -1,4 +1,15 @@
 #!/bin/bash
+RSONGART=$HOME/.config/Radio3.0/song-art
+[[ -d $RSONGART ]] && {
+        RET=""
+        for f in $(ls -t1 $RSONGART); do {
+                [[ -z $f ]] || {
+                  echo -n "$RSONGART/$f"
+                  exit 0
+                }
+        }; done
+}
+
 [[ -x /usr/bin/playerctl ]] || exit 1
 
 function urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
