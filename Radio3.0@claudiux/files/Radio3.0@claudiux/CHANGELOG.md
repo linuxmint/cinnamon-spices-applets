@@ -1,3 +1,6 @@
+### v1.17.0~20240225
+  * Create the cover of the song broadcast by Radio3.0@claudiux as soon as possible, so that it can be displayed by the [sound150@claudiux applet](https://cinnamon-spices.linuxmint.com/applets/view/306).
+
 ### v1.16.1~20240214
   * Slight improvements in settings and context menu.
 

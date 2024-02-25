@@ -274,6 +274,7 @@ const USER_NAME = get_user_name();
 const RUNTIME_DIR = get_user_runtime_dir();
 const DOT_CONFIG_DIR = HOME_DIR + "/.config/" + APPNAME;
 const COVER_ART_DIR = DOT_CONFIG_DIR + "/cover-art";
+const SONG_ART_DIR = DOT_CONFIG_DIR + "/song-art";
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const HELP_DIR = APPLET_DIR + "/help";
@@ -412,7 +413,7 @@ function _(str) {
  * Returns the language of the user.
  */
 function get_user_language() {
-  log("get_language_names(): "+get_language_names());
+  //~ log("get_language_names(): "+get_language_names());
   let _language;
   try {
     _language = ""+get_language_names()[0].split("_")[0];
@@ -506,6 +507,8 @@ function _get_lang() {
 
 function formatNumber(value, decimals=1) {
   if (typeof(value) === "number") {
+    if (_get_lang() === "C") return ""+value;
+
     return ""+new Intl.NumberFormat(
       _get_lang(),
       { minimumIntegerDigits: 1, minimumFractionDigits: decimals, maximumFractionDigits: decimals },
@@ -951,6 +954,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       mkdir_with_parents(JOBS_DIR, 0o755);
     if (!file_test(COVER_ART_DIR, FileTest.EXISTS))
       mkdir_with_parents(COVER_ART_DIR, 0o755);
+    if (!file_test(SONG_ART_DIR, FileTest.EXISTS))
+      mkdir_with_parents(SONG_ART_DIR, 0o755);
     spawnCommandLineAsync("bash -c 'cp -a "+ APPLET_DIR +"/stations/Radio3.0_*.json "+ RADIO_LISTS_DIR +"/'");
     if (!file_test(DOT_CONFIG_DIR +"/icon.svg", FileTest.EXISTS)) {
       spawnCommandLineAsync("bash -c 'cp -a "+ APPLET_ICON +" "+ DOT_CONFIG_DIR +"/'")
@@ -1304,15 +1309,15 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   on_rec_path_changed() {
-    log("on_rec_path_changed");
+    //~ log("on_rec_path_changed");
     let recording_path = this.settings.getValue("recording-path");
     if (  recording_path.length !== 0 &&
           recording_path !== "file://"+RADIO30_MUSIC_DIR) {
       RADIO30_MUSIC_DIR = recording_path.slice("file://".length, recording_path.length);
       this.rec_folder = "file://" + RADIO30_MUSIC_DIR;
     }
-    log("RADIO30_MUSIC_DIR: "+RADIO30_MUSIC_DIR);
-    log("this.rec_folder: "+this.rec_folder);
+    //~ log("RADIO30_MUSIC_DIR: "+RADIO30_MUSIC_DIR);
+    //~ log("this.rec_folder: "+this.rec_folder);
   }
 
   set_rec_path_to_default() {
@@ -2224,7 +2229,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           + ` --buffer-size 4096 -x --audio-format ${yt_format} --audio-quality 0`
           + ` --add-metadata --embed-thumbnail --newline "ytsearch1:${yt_title}&page=1"`;
 
-        log("yt_dl_command: "+yt_dl_command);
+        //~ log("yt_dl_command: "+yt_dl_command);
 
         let brainz_item = new PopupIconMenuItem(""+title, "audio-x-generic", IconType.SYMBOLIC, { reactive: true });
         brainz_item.connect('activate', Lang.bind(this, function() {
@@ -2402,7 +2407,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           let isCategory = (id.length === 0);
 
           if (isCategory) {
-            log("Category: "+title, true);
+            //~ log("Category: "+title, true);
             //~ this.menuItems[i] = new PopupSubMenuMenuItem(title);
             this.menuItems.push( new PopupSubMenuMenuItem(title) );
             allCategoriesMenu.menu.addMenuItem(this.menuItems[-1]);
@@ -2420,7 +2425,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             indexOfLastCategory = this.menuItems.length - 1;
           } else {
             if (this.radios[i] != null && this.radios[i].inc === true) {
-              log(" Station: "+title, true);
+              //~ log(" Station: "+title, true);
               this.menuItems.push( new PopupMenuItem(title, { reactive: true }) );
               if (indexOfLastCategory != null) {
                 this.menuItems[-1].connect('activate', () => {
@@ -2893,7 +2898,18 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.updateUI();
 
+    if (!has_no_title)
+      this.download_songArt(title);
+
     pid = null;
+  }
+
+  download_songArt(title) {
+    if (!YTDL_PROGRAM().includes("yt-dlp")) return;
+
+    let command = '%s/get_song_art.sh "%s"'.format(SCRIPTS_DIR, title);
+    //~ log("command: "+command, true);
+    spawnCommandLineAsync(command);
   }
 
   change_selected_item() {
@@ -3010,7 +3026,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.unmonitor_mpv_title();
 
     spawnCommandLine("kill -15 " + pid);
-    spawnCommandLine("rm -f %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE));
+    spawnCommandLine("rm -f %s %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE, `${SONG_ART_DIR}/R3SongArt*`));
     file_set_contents(MPV_TITLE_FILE, "");
 
     this.change_symbolic_icon();
@@ -3268,7 +3284,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.unmonitor_interfaces();
 
-    spawnCommandLine("rm -f %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE));
+    spawnCommandLine("rm -f %s %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE, `${SONG_ART_DIR}/R3SongArt*`));
   }
 
   on_applet_clicked(event) {
@@ -4094,7 +4110,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       dir_to_open,
       yt_url
     );
-    log("yt_title_and_dir_command: "+yt_title_and_dir_command);
+    //~ log("yt_title_and_dir_command: "+yt_title_and_dir_command);
 
     let titles = [];
     let title = "";
@@ -4214,7 +4230,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         ""+yt_url
       );
 
-      log("yt_dl_command: "+yt_dl_command);
+      //~ log("yt_dl_command: "+yt_dl_command);
 
       title = titles.join("\n");
 
