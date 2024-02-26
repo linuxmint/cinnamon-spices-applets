@@ -1,3 +1,8 @@
+### v6.2.1~20240226
+  * Helps the user to install playerctl.
+  * icon.png replaced.
+
+
 ### v6.2.0~20240225
   * Displays the cover of the song broadcast by the Radio3.0@claudiux applet, when available.
 

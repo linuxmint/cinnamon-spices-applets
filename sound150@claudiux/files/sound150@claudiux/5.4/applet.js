@@ -1589,6 +1589,10 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     loopArt() {
+        if (!this._playerctl) {
+            this._loopArtId = Mainloop.timeout_add_seconds(5, this.loopArt.bind(this));
+            return
+        }
         let subProcess = Util.spawnCommandLineAsyncIO("bash -C %s/get_album_art.sh".format(PATH2SCRIPTS), Lang.bind(this, function(stdout, stderr, exitCode) {
             if (exitCode === 0) {
                 this._trackCoverFile = "file://"+stdout;
@@ -1685,6 +1689,11 @@ class Sound150Applet extends Applet.TextIconApplet {
                 }
             }
         }
+        if (!this._playerctl) {
+            tooltips.push(_("The 'playerctl' package is required!"));
+            tooltips.push(_("Please select 'Install playerctl' in this menu"));
+        }
+
         this.set_applet_tooltip(tooltips.join("\n"));
         this.volume_near_icon();
     }
@@ -1818,11 +1827,21 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.menu.addSettingsAction(_("Sound Settings"), 'sound');
 
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
         // button Reload this applet
-        if (DEBUG()) {
-            let _reload_button = new PopupMenu.PopupIconMenuItem("Reload this applet", "edit-redo", St.IconType.SYMBOLIC);
-            _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed());
-            this.menu.addMenuItem(_reload_button);
+        let _reload_button = new PopupMenu.PopupIconMenuItem(_("Reload this applet"), "restart", St.IconType.SYMBOLIC);
+        _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed());
+        this.menu.addMenuItem(_reload_button);
+
+        //button Install playerctl (when it isn't installed)
+        if (this._playerctl === null) {
+            let _install_playerctl_button = new PopupMenu.PopupIconMenuItem(_("Install playerctl"), "system-software-install", St.IconType.SYMBOLIC);
+            _install_playerctl_button.connect("activate", (event) => {
+                Util.spawnCommandLine("bash -C '%s/install_playerctl.sh'".format(PATH2SCRIPTS));
+                this._on_reload_this_applet_pressed();
+            });
+            this.menu.addMenuItem(_install_playerctl_button);
         }
     }
 
@@ -1932,7 +1951,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         let _style = "color: %s;".format(color);
         this.actor.style = _style;
         this._outputVolumeSection.icon.style = _style;
-        this._outputVolumeSection.style = _style;
+        //~ this._outputVolumeSection.style = _style;
     }
 
     _inputValuesChanged(actor, iconName) {
@@ -2116,6 +2135,10 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.color116_130 = "orange";
         this.color131_150 = "red";
         this._on_sound_settings_change()
+    }
+
+    get _playerctl() {
+        return GLib.find_program_in_path("playerctl");
     }
 }
 
