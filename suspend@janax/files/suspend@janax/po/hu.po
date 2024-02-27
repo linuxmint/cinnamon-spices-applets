@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-02-24 10:59-0500\n"
-"PO-Revision-Date: 2024-02-13 18:20+0100\n"
+"PO-Revision-Date: 2024-02-27 16:42+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -32,7 +32,6 @@ msgid "Suspend computer"
 msgstr "Számítógép felfüggesztése"
 
 #. settings-schema.json->suspend-header->description
-#, fuzzy
 msgid "Suspend computer settings"
 msgstr "Számítógép felfüggesztésének beállításai"
 
@@ -82,10 +81,9 @@ msgstr ""
 "szimbolikus ikon lesz használva."
 
 #. settings-schema.json->system-suspend-header->description
-#, fuzzy
 msgid "System suspend settings"
-msgstr "Számítógép felfüggesztésének beállításai"
+msgstr "Rendszer felfüggesztésének beállításai"
 
 #. settings-schema.json->config-power->description
 msgid "Open Power Management Settings"
-msgstr ""
+msgstr "Energiagazdálkodási beállítások megnyitása"
