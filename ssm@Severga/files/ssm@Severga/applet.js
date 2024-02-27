@@ -247,10 +247,7 @@ SSMApplet.prototype = {
 			this._remove_timeoutR();
 			this.cpuLabel.destroy();
 			this.memLabel.destroy();
-			if (this.netDataProvider.timeout) {
-				Mainloop.source_remove(this.netDataProvider.timeout);
-				this.netDataProvider.timeout = 0;
-			}
+			this.netDataProvider.disconnectFromNM();
 			this.netLabel.destroy();
 		} else {
 			this.errorLabel.destroy();
@@ -392,10 +389,14 @@ NetDataProvider.prototype = {
 	_init: function() {
 		this.gtop = new GTop.glibtop_netload();
 		this.nmClient = new_NMClient(null);
+		this.signals = [
+			this.nmClient.connect("device-added", () => this._get_devices()),
+			this.nmClient.connect("device-removed", () => this._get_devices())
+		];
+		this.devices = [];
 		this.currentReadings = [];
 		this.lastUpdatedTime = Date.now();
 		this._get_devices();
-		this.timeout = Mainloop.timeout_add_seconds(30, () => this._get_devices());
 	},
 	
 	_fetch_data: function() {
@@ -414,14 +415,22 @@ NetDataProvider.prototype = {
 	},
 	
 	_get_devices: function() {
+		this.devices = this.nmClient.get_devices();
+		for (let i = 0, len = this.devices.length; i < len; i++) {
+			this.devices[i].signal = this.devices[i].connect("state-changed", () => this._process_devices());
+		}
+		this._process_devices();
+	},
+	
+	_process_devices: function() {
+													global.log("UPDATE!!!");
 		this.currentReadings = [];
-		let devices = this.nmClient.get_devices();
-		for (let i = 0, len = devices.length; i < len; i++) {
-			if (devices[i].state !== CONNECTED_STATE) continue;
-			devices[i] = devices[i].get_iface();
-			GTop.glibtop_get_netload(this.gtop, devices[i]);
+		for (let i = 0, len = this.devices.length; i < len; i++) {
+			if (this.devices[i].state !== CONNECTED_STATE) continue;
+			let iface = this.devices[i].get_iface();
+			GTop.glibtop_get_netload(this.gtop, iface);
 			this.currentReadings.push({
-				id: devices[i],
+				id: iface,
 				down: 0,
 				up: 0,
 				downSpeed: 0,
@@ -429,8 +438,6 @@ NetDataProvider.prototype = {
 				lastReading: [this.gtop.bytes_in, this.gtop.bytes_out]
 			});
 		}
-		devices = null;
-		return true;
 	},
 	
 	data: function(blackList = [], longInfoTab = 2, longInfoSize = 5) {
@@ -459,6 +466,11 @@ NetDataProvider.prototype = {
 			i++;
 		}
 		return value.toFixed(2) + pref[i];
+	},
+	
+	disconnectFromNM: function() {
+		for (let i = 0; i < this.signals.length; i++) this.nmClient.disconnect(this.signals[i]);
+		for (let i = 0; i < this.devices.length; i++) this.devices[i].disconnect(this.devices[i].signal);
 	}
 }
 //</NetDataProvider>
