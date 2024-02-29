@@ -417,12 +417,13 @@ NetDataProvider.prototype = {
 	_get_devices: function() {
 		this.devices = this.nmClient.get_devices();
 		for (let i = 0, len = this.devices.length; i < len; i++) {
-			this.devices[i].signal = this.devices[i].connect("state-changed", () => this._process_devices());
+			this.devices[i].connect("state-changed", () => this._process_devices());
 		}
 		this._process_devices();
 	},
 	
 	_process_devices: function() {
+	global.log("PROCESS");
 		this.currentReadings = [];
 		for (let i = 0, len = this.devices.length; i < len; i++) {
 			if (this.devices[i].state !== CONNECTED_STATE) continue;
@@ -469,7 +470,6 @@ NetDataProvider.prototype = {
 	
 	disconnectFromNM: function() {
 		for (let i = 0; i < this.signals.length; i++) this.nmClient.disconnect(this.signals[i]);
-		for (let i = 0; i < this.devices.length; i++) this.devices[i].disconnect(this.devices[i].signal);
 	}
 }
 //</NetDataProvider>
