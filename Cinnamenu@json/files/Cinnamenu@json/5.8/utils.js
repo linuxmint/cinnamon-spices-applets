@@ -126,7 +126,6 @@ class NewTooltip {
         tooltipLeft = Math.min(tooltipLeft, monitor.x + monitor.width - tooltipWidth);
         tooltipTop = Math.max(tooltipTop, monitor.y);
         tooltipTop = Math.min(tooltipTop, monitor.y + monitor.height - tooltipHeight);
-        log(tooltipTop, monitor.y , monitor.height , tooltipHeight)
 
         this.tooltip.set_position(tooltipLeft, tooltipTop);
         this.tooltip.raise_top();
