@@ -423,7 +423,6 @@ NetDataProvider.prototype = {
 	},
 	
 	_process_devices: function() {
-	global.log("PROCESS");
 		this.currentReadings = [];
 		for (let i = 0, len = this.devices.length; i < len; i++) {
 			if (this.devices[i].state !== CONNECTED_STATE) continue;
