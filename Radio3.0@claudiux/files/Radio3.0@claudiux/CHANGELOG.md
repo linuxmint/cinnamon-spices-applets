@@ -1,3 +1,6 @@
+### v1.17.2~20240304
+  * Now compatible with the Horizontal OSD extension.
+
 ### v1.17.1~20240304
   * Better manage song art.
 
