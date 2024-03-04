@@ -1,3 +1,6 @@
+### v6.2.2~20240304
+  * Removes error messages about length which wasn't an valid value.
+
 ### v6.2.1~20240226
   * Helps the user to install playerctl.
   * icon.png replaced.
