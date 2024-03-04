@@ -1,3 +1,4 @@
+"use strict";
 const Applet = imports.ui.applet;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
@@ -621,7 +622,9 @@ class Player extends PopupMenu.PopupMenuSection {
         this._artist = _("Unknown Artist");
         this._album = _("Unknown Album");
         this._title = _("Unknown Title");
-        this.trackInfo = new St.BoxLayout({style_class: 'sound-player-overlay', style: 'height: auto;', important: true, vertical: true});
+        //this.trackInfo = new St.BoxLayout({style_class: 'sound-player-overlay', style: 'height: auto;', important: true, vertical: true});
+        // Removing "style: 'height: auto;'" avoids warning messages "St-WARNING **: Ignoring length property that isn't a number at line 1, col 9"
+        this.trackInfo = new St.BoxLayout({style_class: 'sound-player-overlay', important: true, vertical: true});
         let artistInfo = new St.BoxLayout();
         let artistIcon = new St.Icon({ icon_type: St.IconType.SYMBOLIC, icon_name: "system-users", style_class: 'popup-menu-icon' });
         this.artistLabel = new St.Label({text:this._artist});
@@ -838,13 +841,19 @@ class Player extends PopupMenu.PopupMenuSection {
                     let cover_path = decodeURIComponent(this._trackCoverFile);
                     cover_path = cover_path.replace("file://", "");
                     const file = Gio.File.new_for_path(cover_path);
-                    const fileInfo = file.query_info('standard::*,unix::uid',
-                        Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
-                    const size = fileInfo.get_size();
-                    if (size > 0) {
-                        this._showCover(cover_path);
-                    } else {
+                    try {
+                        const fileInfo = file.query_info('standard::*,unix::uid',
+                            Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
+                        const size = fileInfo.get_size();
+                        if (size > 0) {
+                            this._showCover(cover_path);
+                        } else {
+                            cover_path = null;
+                        }
+                    } catch(e) {
                         cover_path = null;
+                        this._trackCoverFile = null;
+                        change = true;
                     }
                 } else {
                     this._trackCoverFile = null;
@@ -988,24 +997,27 @@ class Player extends PopupMenu.PopupMenuSection {
 
 
             //~ log("this._cover_path: "+this._cover_path, true);
-            //~ let pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(this._cover_path, 300, 300);
-            //~ if (pixbuf) {
-                //~ let image = new Clutter.Image();
-                //~ image.set_data(
-                    //~ pixbuf.get_pixels(),
-                    //~ pixbuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
-                    //~ pixbuf.get_width(),
-                    //~ pixbuf.get_height(),
-                    //~ pixbuf.get_rowstride()
-                //~ );
-                //~ this.cover = image.get_texture();
-            //~ }
-            //~ if (this._applet.keepAlbumAspectRatio) {
-                //~ this.cover = new Clutter.Texture({ width: 300, keep_aspect_ratio: true, filter_quality: 2, filename: cover_path });
-            //~ }
-            //~ else {
-                //~ this.cover = new Clutter.Texture({ width: 300, height: 300, keep_aspect_ratio: false, filter_quality: 2, filename: cover_path });
-            //~ }
+            try {
+                let pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(this._cover_path, 300, 300);
+                if (pixbuf) {
+                    let image = new Clutter.Image();
+                    image.set_data(
+                        pixbuf.get_pixels(),
+                        //pixbuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
+                        pixbuf.get_has_alpha() ? 19 : 2,
+                        pixbuf.get_width(),
+                        pixbuf.get_height(),
+                        pixbuf.get_rowstride()
+                    );
+                    this.cover = image.get_texture();
+                }
+                if (this._applet.keepAlbumAspectRatio) {
+                    this.cover = new Clutter.Texture({ width: 300, keep_aspect_ratio: true, filter_quality: 2, filename: cover_path });
+                }
+                else {
+                    this.cover = new Clutter.Texture({ width: 300, height: 300, keep_aspect_ratio: false, filter_quality: 2, filename: cover_path });
+                }
+            } catch(e) {}
         }
     }
 
@@ -1021,7 +1033,9 @@ class Player extends PopupMenu.PopupMenuSection {
 
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
         // (and move the player controls as a result).
-        actor.margin_bottom = (300 - actor.height)*global.ui_scale;
+        //~ log("actor size (wxh): "+actor.width+"x"+actor.height, true);
+        actor.set_margin_bottom(Math.max(0, Math.trunc((300 - actor.height)*global.ui_scale)));
+        actor.set_margin_left(Math.max(0, Math.trunc((300 - actor.width)*global.ui_scale)));
 
         this.cover = actor;
         this.coverBox.add_actor(this.cover);
@@ -1599,13 +1613,18 @@ class Sound150Applet extends Applet.TextIconApplet {
                 let cover_path = decodeURIComponent(this._trackCoverFile);
                 cover_path = cover_path.replace("file://", "");
                 const file = Gio.File.new_for_path(cover_path);
-                const fileInfo = file.query_info('standard::*,unix::uid',
-                    Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
-                const size = fileInfo.get_size();
-                if (size > 0) {
-                    this._icon_path = cover_path;
-                    this.setAppletIcon(true, true);
-                } else {
+                try {
+                    const fileInfo = file.query_info('standard::*,unix::uid',
+                        Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
+                    const size = fileInfo.get_size();
+                    if (size > 0) {
+                        this._icon_path = cover_path;
+                        this.setAppletIcon(true, true);
+                    } else {
+                        this._icon_path = null;
+                        this._trackCoverFile = null;
+                    }
+                } catch(e) {
                     this._icon_path = null;
                     this._trackCoverFile = null;
                 }
