@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-05 14:36-0500\n"
-"PO-Revision-Date: 2024-01-23 23:07-0300\n"
+"PO-Revision-Date: 2024-03-05 17:04-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: 5.4/applet.js:300 3.2/applet.js:130
 msgid "--%"
@@ -28,22 +28,20 @@ msgid "Waiting"
 msgstr "Esperando"
 
 #: 5.4/applet.js:327
-#, fuzzy
 msgid "Some dependencies not installed."
-msgstr "Algunas dependencias no están instaladas"
+msgstr "Algunas dependencias no están instaladas."
 
 #: 5.4/applet.js:327
-#, fuzzy
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
 "functionality including notifications and audible alerts.\n"
 "\n"
 "Please view the README for help on installing them.\n"
 msgstr ""
-"Tanto 'sox' como 'zenity' son necesarios para que este applet tenga todas "
-"sus facilidades, incluyendo las notificaciones y las alertas sonoras.\n"
+"Tanto 'sox' como 'zenity' son necesarios para que este applet tenga toda su "
+"funcionalidad, incluyendo notificaciones y alertas sonoras.\n"
 "\n"
-"Por favor, lea el archivo de ayuda sobre cómo instalarlos."
+"Por favor, consulte el README para obtener ayuda sobre su instalación.\n"
 
 #: 5.4/applet.js:337 3.2/applet.js:193
 msgid "Battery Monitor Applet"
@@ -88,28 +86,24 @@ msgid "Waiting for battery information"
 msgstr "A la espera de información sobre la batería"
 
 #: 5.4/applet.js:444
-#, fuzzy
 msgid "Alert/Suspend:"
-msgstr "Suspender:"
+msgstr "Alerta/Suspensión:"
 
 #: 5.4/applet.js:549
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Batería baja - apague o conecte a la red eléctrica"
 
 #: 5.4/applet.js:555
-#, fuzzy
 msgid ""
 "The battery level has fallen to your alert level.\n"
 "\n"
 "Either connect to a power source or save or close down\n"
 "your work and suspend or shutdown the machine.\n"
 msgstr ""
-"El nivel de la batería ha descendido a su nivel de alerta\n"
+"El nivel de batería ha descendido a su nivel de alerta.\n"
 "\n"
-"vuelva a conectarse a una fuente de alimentación,\n"
-"\n"
-"cierre su trabajo y suspenda o apague la máquina\n"
-"\n"
+"Conéctese a una fuente de alimentación o guarde o cierre\n"
+"su trabajo y suspenda o apague la máquina.\n"
 
 #: 5.4/applet.js:570
 msgid "Battery Critical - will suspend unless connected to power supply"
@@ -251,10 +245,8 @@ msgid "Percentage Charge:"
 msgstr "Porcentaje de carga:"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Displays charge as percentage and allows alerts and actions"
-msgstr ""
-"Muestra la carga en forma de porcentaje y permite realizar alertas y acciones"
+msgstr "Muestra la carga en porcentaje y permite alertas y acciones"
 
 #. 5.4->settings-schema.json->General->title
 msgid "General"
