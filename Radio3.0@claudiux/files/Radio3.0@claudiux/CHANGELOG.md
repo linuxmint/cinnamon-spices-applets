@@ -1,3 +1,7 @@
+### v1.17.3~20240305
+  * Remove error messages about St.Button.
+
+
 ### v1.17.2~20240304
   * Now compatible with the Horizontal OSD extension.
 

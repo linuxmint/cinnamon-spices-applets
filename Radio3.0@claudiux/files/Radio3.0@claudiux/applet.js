@@ -771,50 +771,55 @@ const messageTray = new RadioMessageTray();
 const source = new RadioNotificationSource("Radio3.0");
 messageTray.add(source);
 
-class R3Button {
-    constructor(icon, tooltip, callback, small = false) {
-        this.actor = new Bin();
+//~ class R3Button {
+    //~ constructor(icon, tooltip, callback, small = false) {
+        //~ this.actor = new Bin();
 
-        this.button = new Button({
-          reactive: true,
-          can_focus: true,
-          style_class: "popup-menu-item",
-          style: "height:20px; width:20px; padding:10px!important"
-        });
-        this.button.connect('clicked', callback);
+        //~ this.button = new Button({
+          //~ reactive: true,
+          //~ can_focus: true,
+          //~ style_class: "popup-menu-item",
+          //~ style: "height:20px; width:20px; padding:10px!important"
+        //~ });
+        //~ this.button.connect('clicked', callback);
 
-        if (small)
-            this.button.add_style_pseudo_class("small");
+        //~ if (small)
+            //~ this.button.add_style_pseudo_class("small");
 
-        this.icon = new Icon({
-            icon_type: IconType.SYMBOLIC,
-            icon_name: icon
-        });
-        this.button.set_child(this.icon);
-        this.actor.add_actor(this.button);
+        //~ this.icon = new Icon({
+            //~ icon_type: IconType.SYMBOLIC,
+            //~ icon_name: icon
+        //~ });
+        //~ this.button.set_child(this.icon);
+        //~ this.actor.add_actor(this.button);
 
-        this.tooltip = new Tooltip(this.button, tooltip);
-    }
+        //~ this.tooltip = new Tooltip(this.button, tooltip);
+    //~ }
 
-    getActor() {
-        return this.actor;
-    }
+    //~ getActor() {
+        //~ return this.actor;
+    //~ }
 
-    setData(icon, tooltip) {
-        this.icon.icon_name = icon;
-        this.tooltip.set_text(tooltip);
-    }
+    //~ setData(icon, tooltip) {
+        //~ this.icon.icon_name = icon;
+        //~ this.tooltip.set_text(tooltip);
+    //~ }
 
-    setActive(status) {
-        this.button.change_style_pseudo_class("active", status);
-    }
+    //~ setActive(status) {
+        //~ this.button.change_style_pseudo_class("active", status);
+    //~ }
 
-    setEnabled(status) {
-        this.button.change_style_pseudo_class("insensitive", !status);
-        this.button.can_focus = status;
-        this.button.reactive = status;
-    }
-}
+    //~ setEnabled(status) {
+        //~ this.button.change_style_pseudo_class("insensitive", !status);
+        //~ this.button.can_focus = status;
+        //~ this.button.reactive = status;
+    //~ }
+
+    //~ destroy() {
+      //~ this.button.destroy();
+      //~ this.actor.destroy();
+    //~ }
+//~ }
 
 class R3WebpageMenuItem extends PopupBaseMenuItem {
   constructor(parent, score, params) {
@@ -2269,43 +2274,44 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           }
         }
 
-        let trackInfo = new BoxLayout({ style_class: 'sound-player-overlay', important: true, vertical: true });
-        let songBox = new PopupMenuSection();
+        //~ let trackInfo = new BoxLayout({ style_class: 'sound-player-overlay', important: true, vertical: true });
+        //~ let songBox = new PopupMenuSection();
 
-        let song_toolbar = new BoxLayout(
-          { style_class: "sound-player",
-            important: true,
-            vertical: true,
-            style: 'padding: 10px;',
-            x_align: Align.MIDDLE
-          }
-        );
+        //~ let song_toolbar = new BoxLayout(
+          //~ { style_class: "sound-player",
+            //~ important: true,
+            //~ vertical: true,
+            //~ style: 'padding: 10px;',
+            //~ x_align: Align.MIDDLE
+          //~ }
+        //~ );
 
-        songBox.addActor(song_toolbar, { expand: true });
+        //~ songBox.addActor(song_toolbar, { expand: true });
 
-        let songButtons = new Bin({ x_align: Align.MIDDLE });
+        //~ let songButtons = new Bin({ x_align: Align.MIDDLE });
 
-        let brainzBtn = new R3Button(
-          "audio-x-generic",
-          _("Infos on: %s").format(title),
-          Lang.bind(this, function() {
-            spawnCommandLineAsync("xdg-open " + brainz_link)
-          }),
-          false
-        );
+        //~ let brainzBtn = new R3Button(
+          //~ "audio-x-generic",
+          //~ _("Infos on: %s").format(title),
+          //~ Lang.bind(this, function() {
+            //~ spawnCommandLineAsync("xdg-open " + brainz_link)
+          //~ }),
+          //~ false
+        //~ );
 
-        let watchOnYT = new R3Button(
-          "media-playback-start",
-          _("Watch on YT"),
-          Lang.bind(this, function() {
-            spawnCommandLineAsync("xdg-open " + yt_watch_link);
-          }),
-          false
-        );
+        //~ let watchOnYT = new R3Button(
+          //~ "media-playback-start",
+          //~ _("Watch on YT"),
+          //~ Lang.bind(this, function() {
+            //~ spawnCommandLineAsync("xdg-open " + yt_watch_link);
+          //~ }),
+          //~ false
+        //~ );
 
-        song_toolbar.add_actor(songButtons);
-        songButtons.add_actor(brainzBtn.getActor());
-        songButtons.add_actor(watchOnYT.getActor());
+        //~ song_toolbar.add_actor(songButtons);
+        //~ songButtons.add_actor(brainzBtn.getActor());
+        //~ songButtons.add_actor(watchOnYT.getActor());
+
         //trackInfo.add_actor(songButtons);
         //~ songBox.set_child(song_toolbar);
 
