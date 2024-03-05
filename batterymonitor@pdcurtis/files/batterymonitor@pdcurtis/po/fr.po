@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-05 14:47-0500\n"
+"POT-Creation-Date: 2024-03-05 14:36-0500\n"
 "PO-Revision-Date: 2024-02-11 17:10+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -27,16 +27,18 @@ msgstr "--%"
 msgid "Waiting"
 msgstr "En attente"
 
-#: 5.4/applet.js:327 3.2/applet.js:160
-msgid "Some Dependencies not Installed"
+#: 5.4/applet.js:327
+#, fuzzy
+msgid "Some dependencies not installed."
 msgstr "Certaines dépendances ne sont pas installées"
 
 #: 5.4/applet.js:327
+#, fuzzy
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
-"functionality including notifications and audible alerts .\n"
+"functionality including notifications and audible alerts.\n"
 "\n"
-"Please view the README for help on installing them."
+"Please view the README for help on installing them.\n"
 msgstr ""
 "'sox' et 'zenity' sont requis pour que cette applet dispose de toutes ses "
 "fonctionnalités, y compris les notifications et les alertes sonores .\n"
@@ -85,18 +87,22 @@ msgstr "Ouvrir le fichier README"
 msgid "Waiting for battery information"
 msgstr "En attente d'information sur la batterie"
 
-#: 5.4/applet.js:545
+#: 5.4/applet.js:444
+#, fuzzy
+msgid "Alert/Suspend:"
+msgstr "Mise en veille :"
+
+#: 5.4/applet.js:549
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Batterie faible - arrêter ou brancher sur secteur"
 
-#: 5.4/applet.js:551 3.2/applet.js:443
+#: 5.4/applet.js:555
+#, fuzzy
 msgid ""
-"The Battery Level has fallen to your alert level\n"
+"The battery level has fallen to your alert level.\n"
 "\n"
-" either reconnect to a power source,\n"
-"\n"
-"close down your work and suspend or shutdown the machine\n"
-"\n"
+"Either connect to a power source or save or close down\n"
+"your work and suspend or shutdown the machine.\n"
 msgstr ""
 "La niveau de la batterie a atteint le niveau d'alerte que vous avez défini.\n"
 "\n"
@@ -105,43 +111,47 @@ msgstr ""
 "ordinateur.\n"
 "\n"
 
-#: 5.4/applet.js:566
+#: 5.4/applet.js:570
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Niveau critique de la batterie. L'ordinateur va se mettre en veille sauf si "
 "vous le branchez sur secteur"
 
-#: 5.4/applet.js:585
+#: 5.4/applet.js:589
 msgid "Time to Empty:"
 msgstr "Temps jusqu'à l'état Vidée :"
 
-#: 5.4/applet.js:586
+#: 5.4/applet.js:590
 msgid "Time to Full:"
 msgstr "Temps jusqu'à l'état Pleine :"
 
-#: 5.4/applet.js:589 5.4/applet.js:636
+#: 5.4/applet.js:593 5.4/applet.js:640
 msgid "Current Charge:"
 msgstr "Charge actuelle :"
 
-#: 5.4/applet.js:589 3.2/applet.js:474
+#: 5.4/applet.js:593 3.2/applet.js:474
 msgid "Alert:"
 msgstr "Alerte :"
 
-#: 5.4/applet.js:589 3.2/applet.js:474
+#: 5.4/applet.js:593 3.2/applet.js:474
 msgid "Suspend:"
 msgstr "Mise en veille :"
 
-#: 5.4/applet.js:636 3.2/applet.js:522
+#: 5.4/applet.js:640 3.2/applet.js:522
 msgid "Alert at:"
 msgstr "Alerte à :"
 
-#: 5.4/applet.js:636 3.2/applet.js:522
+#: 5.4/applet.js:640 3.2/applet.js:522
 msgid "Suspend at:"
 msgstr "Mise en veille à :"
 
-#: 5.4/applet.js:642
+#: 5.4/applet.js:646
 msgid "The battery level has been recharged to"
 msgstr "La batterie est considérée rechargée à"
+
+#: 3.2/applet.js:160
+msgid "Some Dependencies not Installed"
+msgstr "Certaines dépendances ne sont pas installées"
 
 #: 3.2/applet.js:160
 msgid ""
@@ -211,6 +221,22 @@ msgstr ""
 "ordinateur.\n"
 "\n"
 
+#: 3.2/applet.js:443
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"La niveau de la batterie a atteint le niveau d'alerte que vous avez défini.\n"
+"\n"
+"Rebranchez votre ordinateur sur secteur\n"
+"ou bien fermez vos applications puis arrêtez ou mettez en veille votre "
+"ordinateur.\n"
+"\n"
+
 #: 3.2/applet.js:459
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
@@ -226,7 +252,8 @@ msgid "Percentage Charge:"
 msgstr "Pourcentage de charge :"
 
 #. metadata.json->description
-msgid "Displays Charge as Percentage and allows Alerts and Actions"
+#, fuzzy
+msgid "Displays charge as percentage and allows alerts and actions"
 msgstr ""
 "Affiche la charge de la batterie, les messages d'alerte selon son niveau et "
 "agit en cas de franchissement d'un seuil critique"
