@@ -2371,6 +2371,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
           this.menu.addMenuItem(item);
         }
+        titles = [];
         titles = null;
       }
 
@@ -4494,7 +4495,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       IconType.SYMBOLIC
     );
     this.context_menu_item_openRecordingsFolder.connect("activate", Lang.bind(this, function(event) {
-      spawnCommandLineAsync(app_info_get_default_for_type('inode/directory', false).get_executable() + " " + this.rec_folder);
+      this.open_rec_folder()
     }));
 
     this._applet_context_menu.addMenuItem(this.context_menu_item_openRecordingsFolder);
@@ -4584,6 +4585,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
     }
 
+  }
+
+  open_rec_folder() {
+    spawnCommandLineAsync(app_info_get_default_for_type('inode/directory', false).get_executable() + " " + this.rec_folder);
   }
 
   _onStreamAdded(control, id) {
