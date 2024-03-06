@@ -2326,14 +2326,19 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         let menuitemHead2 = new TitleSeparatorMenuItem(_("Recently Played Stations:"), "pan-down");
         this.menu.addMenuItem(menuitemHead2);
 
+        var titles = [];
+
         var indexRecentRadios = 0;
         for (let id of this.recentRadios) {
           let title = ""+this.get_radio_name(id, "make_menu: recent radios");
+          if (titles.indexOf(title) > -1) continue;
 
           if (!title || title.length === 0 || title === "undefined" || title ==="null") {
             to_remove_from_recentRadios.push(""+id);
             continue;
           }
+
+          titles.push(title);
 
           indexRecentRadios += 1;
           if (indexRecentRadios > this.recent_number)
@@ -2366,6 +2371,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
           this.menu.addMenuItem(item);
         }
+        titles = null;
       }
 
       while (to_remove_from_recentRadios && to_remove_from_recentRadios.length > 0) {
