@@ -1,3 +1,6 @@
+### v1.17.5~20240306
+  * Modifies the Recordings tab in settings, adding a button to open the Recordings folder.
+
 ### v1.17.4~20240306
   * Prevents multiple identical entries in recently listened-to stations.
 
