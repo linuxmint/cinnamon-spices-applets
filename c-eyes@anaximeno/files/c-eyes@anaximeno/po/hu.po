@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-22 03:30-0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-07 19:20-0100\n"
 "PO-Revision-Date: 2023-12-14 09:05+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
@@ -17,23 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: 5.4/applet.js:360 4.2/applet.js:365
+#: 4.2/applet.js:379 5.4/applet.js:374
 msgid "click to deactivate the eye"
 msgstr "kattintson a szem kikapcsolásához"
 
-#: 5.4/applet.js:360 4.2/applet.js:365
+#: 4.2/applet.js:379 5.4/applet.js:374
 msgid "click to activate the eye"
 msgstr "kattintson a szem aktiválásához"
 
-#: 5.4/applet.js:361 4.2/applet.js:366
-msgid "effects enabled"
-msgstr "effektusok engedélyezve"
-
-#: 5.4/applet.js:361 4.2/applet.js:366
-msgid "effects disabled"
-msgstr "effektusok letiltva"
-
-#: 5.4/applet.js:362 4.2/applet.js:367
+#: 4.2/applet.js:380 5.4/applet.js:375
 msgid "TIP"
 msgstr "TIP"
 
@@ -49,294 +42,318 @@ msgstr ""
 "Egy Cinnamon kisalkalmazás, amely hozzáad egy szemet a panelhez, amely "
 "követi az egérmutatót és kattintás esetén animációkat jelenít meg."
 
-#. 5.4->settings-schema.json->eye->title
 #. 4.2->settings-schema.json->eye->title
+#. 5.4->settings-schema.json->eye->title
 msgid "Eye"
 msgstr "Szem"
 
-#. 5.4->settings-schema.json->effects->title
 #. 4.2->settings-schema.json->effects->title
+#. 5.4->settings-schema.json->effects->title
 msgid "Effects"
 msgstr "Effektusok"
 
-#. 5.4->settings-schema.json->eye-generic->title
-#. 5.4->settings-schema.json->click-generic->title
 #. 4.2->settings-schema.json->eye-generic->title
 #. 4.2->settings-schema.json->click-generic->title
+#. 5.4->settings-schema.json->eye-generic->title
+#. 5.4->settings-schema.json->click-generic->title
 msgid "General"
 msgstr "Általános"
 
-#. 5.4->settings-schema.json->eye-colors->title
-#. 5.4->settings-schema.json->click-colors->title
 #. 4.2->settings-schema.json->eye-colors->title
 #. 4.2->settings-schema.json->click-colors->title
+#. 5.4->settings-schema.json->eye-colors->title
+#. 5.4->settings-schema.json->click-colors->title
 msgid "Colors"
 msgstr "Színek"
 
-#. 5.4->settings-schema.json->click-events->title
 #. 4.2->settings-schema.json->click-events->title
+#. 5.4->settings-schema.json->click-events->title
 msgid "Events"
 msgstr "Események"
 
-#. 5.4->settings-schema.json->eye-mode->description
 #. 4.2->settings-schema.json->eye-mode->description
+#. 5.4->settings-schema.json->eye-mode->description
 msgid "Mode"
 msgstr "Üzemmód"
 
-#. 5.4->settings-schema.json->eye-mode->options
 #. 4.2->settings-schema.json->eye-mode->options
+#. 5.4->settings-schema.json->eye-mode->options
 msgid "Lids"
 msgstr "Szemhéj"
 
-#. 5.4->settings-schema.json->eye-mode->options
 #. 4.2->settings-schema.json->eye-mode->options
-msgid "Lids Filled"
-msgstr "Szemhéj, teli"
-
 #. 5.4->settings-schema.json->eye-mode->options
-#. 4.2->settings-schema.json->eye-mode->options
 msgid "Bulb"
 msgstr "Szemgolyó"
 
-#. 5.4->settings-schema.json->eye-mode->options
-#. 4.2->settings-schema.json->eye-mode->options
-msgid "Bulb Filled"
-msgstr "Szemgolyó, teli"
-
-#. 5.4->settings-schema.json->eye-line-width->description
 #. 4.2->settings-schema.json->eye-line-width->description
+#. 5.4->settings-schema.json->eye-line-width->description
 msgid "Line Width"
 msgstr "Vonalvastagság"
 
-#. 5.4->settings-schema.json->eye-line-width->units
-#. 5.4->settings-schema.json->eye-margin->units
-#. 5.4->settings-schema.json->eye-vertical-padding->units
-#. 5.4->settings-schema.json->mouse-click-image-size->units
 #. 4.2->settings-schema.json->eye-line-width->units
 #. 4.2->settings-schema.json->eye-margin->units
 #. 4.2->settings-schema.json->eye-vertical-padding->units
 #. 4.2->settings-schema.json->mouse-click-image-size->units
+#. 5.4->settings-schema.json->eye-line-width->units
+#. 5.4->settings-schema.json->eye-margin->units
+#. 5.4->settings-schema.json->eye-vertical-padding->units
+#. 5.4->settings-schema.json->mouse-click-image-size->units
 msgid "px"
 msgstr "képpont"
 
-#. 5.4->settings-schema.json->eye-margin->description
 #. 4.2->settings-schema.json->eye-margin->description
+#. 5.4->settings-schema.json->eye-margin->description
 msgid "Margin"
 msgstr "Tűréshatár"
 
-#. 5.4->settings-schema.json->eye-vertical-padding->description
 #. 4.2->settings-schema.json->eye-vertical-padding->description
+#. 5.4->settings-schema.json->eye-vertical-padding->description
 msgid "Padding"
 msgstr "Térköz"
 
-#. 5.4->settings-schema.json->eye-repaint-interval->units
-#. 5.4->settings-schema.json->fade-timeout->units
 #. 4.2->settings-schema.json->eye-repaint-interval->units
 #. 4.2->settings-schema.json->fade-timeout->units
+#. 5.4->settings-schema.json->eye-repaint-interval->units
+#. 5.4->settings-schema.json->fade-timeout->units
 msgid "ms"
 msgstr "ms"
 
-#. 5.4->settings-schema.json->eye-repaint-interval->description
 #. 4.2->settings-schema.json->eye-repaint-interval->description
-msgid "Repaint Interval"
+#. 5.4->settings-schema.json->eye-repaint-interval->description
+#, fuzzy
+msgid "Eye Update Interval"
 msgstr "Újrafestési időköz"
 
-#. 5.4->settings-schema.json->eye-activate-by-default->description
+#. 4.2->settings-schema.json->eye-repaint-interval->tooltip
+#. 5.4->settings-schema.json->eye-repaint-interval->tooltip
+msgid ""
+"This setting controls the time to redraw the eye again. Lower values "
+"(measured in miliseconds) result in smoother animation but require more "
+"processing power."
+msgstr ""
+
+#. 4.2->settings-schema.json->eye-repaint-angle->units
+#. 5.4->settings-schema.json->eye-repaint-angle->units
+msgid "radians"
+msgstr ""
+
+#. 4.2->settings-schema.json->eye-repaint-angle->description
+#. 5.4->settings-schema.json->eye-repaint-angle->description
+msgid "Eye Update Sensitivity"
+msgstr ""
+
+#. 4.2->settings-schema.json->eye-repaint-angle->tooltip
+#. 5.4->settings-schema.json->eye-repaint-angle->tooltip
+msgid ""
+"This setting controls the minimum angle change between mouse movements "
+"required to redraw the eye. Lower values (measured in radians) result in "
+"smoother animation but require more processing power."
+msgstr ""
+
 #. 4.2->settings-schema.json->eye-activate-by-default->description
+#. 5.4->settings-schema.json->eye-activate-by-default->description
 msgid "Start Activated"
 msgstr "Indítás Aktiválva"
 
-#. 5.4->settings-schema.json->deactivate-on-fullscreen->description
-#. 5.4->settings-schema.json->deactivate-effects-on-fullscreen->description
 #. 4.2->settings-schema.json->deactivate-on-fullscreen->description
 #. 4.2->settings-schema.json->deactivate-effects-on-fullscreen->description
+#. 5.4->settings-schema.json->deactivate-on-fullscreen->description
+#. 5.4->settings-schema.json->deactivate-effects-on-fullscreen->description
 msgid "Deactivate On Fullscreen"
 msgstr "Kikapcsolás teljes képernyőn"
 
-#. 5.4->settings-schema.json->eye-clicked-color->description
 #. 4.2->settings-schema.json->eye-clicked-color->description
+#. 5.4->settings-schema.json->eye-clicked-color->description
 msgid "Activated Base Color"
 msgstr "Aktivált alapszín"
 
-#. 5.4->settings-schema.json->iris-clicked-color->description
 #. 4.2->settings-schema.json->iris-clicked-color->description
+#. 5.4->settings-schema.json->iris-clicked-color->description
 msgid "Activated Iris Color"
 msgstr "Aktivált írisz szín"
 
-#. 5.4->settings-schema.json->pupil-clicked-color->description
 #. 4.2->settings-schema.json->pupil-clicked-color->description
+#. 5.4->settings-schema.json->pupil-clicked-color->description
 msgid "Activated Pupil Color"
 msgstr "Aktivált pupillaszín"
 
-#. 5.4->settings-schema.json->mouse-click-enable->description
+#. 4.2->settings-schema.json->fill-lids-color-painting->description
+#. 5.4->settings-schema.json->fill-lids-color-painting->description
+msgid "Fill Colors Inside the Eye"
+msgstr ""
+
+#. 4.2->settings-schema.json->fill-bulb-color-painting->description
+#. 5.4->settings-schema.json->fill-bulb-color-painting->description
+msgid "Fill the Colors Inside the Eye"
+msgstr ""
+
 #. 4.2->settings-schema.json->mouse-click-enable->description
+#. 5.4->settings-schema.json->mouse-click-enable->description
 msgid "Enable Effects"
 msgstr "Effektusok engedélyezése"
 
-#. 5.4->settings-schema.json->mouse-click-mode->description
 #. 4.2->settings-schema.json->mouse-click-mode->description
+#. 5.4->settings-schema.json->mouse-click-mode->description
 msgid "Icon Mode"
 msgstr "Ikonmód"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Simple"
 msgstr "Egyszerű"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Trigun"
 msgstr "Trigun"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Nublo"
 msgstr "Nublo"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Risco"
 msgstr "Risco"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Wolf"
 msgstr "Farkas"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Pincel"
 msgstr "Escet"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Claw"
 msgstr "Karom"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Metropoli"
 msgstr "Metropoli"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Flowey"
 msgstr "Flowey"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Kusco"
 msgstr "Kusco"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Ouroboros"
 msgstr "Uroborosz"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Helix"
 msgstr "Helix"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Direction"
 msgstr "Irány"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Spinks"
 msgstr "Spinks"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Thatch"
 msgstr "Nádtető"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Cotton"
 msgstr "Vatta"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Circle"
 msgstr "Kör"
 
-#. 5.4->settings-schema.json->mouse-click-mode->options
 #. 4.2->settings-schema.json->mouse-click-mode->options
+#. 5.4->settings-schema.json->mouse-click-mode->options
 msgid "Gear"
 msgstr "Fogaskerék"
 
-#. 5.4->settings-schema.json->mouse-click-image-size->description
 #. 4.2->settings-schema.json->mouse-click-image-size->description
+#. 5.4->settings-schema.json->mouse-click-image-size->description
 msgid "Icon Size"
 msgstr "Ikonméret"
 
-#. 5.4->settings-schema.json->click-animation-mode->description
 #. 4.2->settings-schema.json->click-animation-mode->description
+#. 5.4->settings-schema.json->click-animation-mode->description
 msgid "Click Animation Mode"
 msgstr "Kattintás animáció üzemmódja"
 
-#. 5.4->settings-schema.json->click-animation-mode->options
 #. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
 msgid "Blink"
 msgstr "Pislogás"
 
-#. 5.4->settings-schema.json->click-animation-mode->options
 #. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
 msgid "Bounce Back"
 msgstr "Visszapattan"
 
-#. 5.4->settings-schema.json->click-animation-mode->options
 #. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
 msgid "Retract"
 msgstr "Reakció"
 
-#. 5.4->settings-schema.json->click-animation-mode->options
 #. 4.2->settings-schema.json->click-animation-mode->options
+#. 5.4->settings-schema.json->click-animation-mode->options
 msgid "Expand"
 msgstr "Kibontás"
 
-#. 5.4->settings-schema.json->mouse-left-click-enable->description
 #. 4.2->settings-schema.json->mouse-left-click-enable->description
+#. 5.4->settings-schema.json->mouse-left-click-enable->description
 msgid "Enable Left Click"
 msgstr "Bal kattintás engedélyezése"
 
-#. 5.4->settings-schema.json->mouse-middle-click-enable->description
 #. 4.2->settings-schema.json->mouse-middle-click-enable->description
+#. 5.4->settings-schema.json->mouse-middle-click-enable->description
 msgid "Enable Middle Click"
 msgstr "Középső kattintás engedélyezése"
 
-#. 5.4->settings-schema.json->mouse-right-click-enable->description
 #. 4.2->settings-schema.json->mouse-right-click-enable->description
+#. 5.4->settings-schema.json->mouse-right-click-enable->description
 msgid "Enable Right Click"
 msgstr "Jobb kattintás engedélyezése"
 
-#. 5.4->settings-schema.json->fade-timeout->description
 #. 4.2->settings-schema.json->fade-timeout->description
+#. 5.4->settings-schema.json->fade-timeout->description
 msgid "Fade Timeout"
 msgstr "Elhalványodás időköze"
 
-#. 5.4->settings-schema.json->mouse-left-click-color->description
 #. 4.2->settings-schema.json->mouse-left-click-color->description
+#. 5.4->settings-schema.json->mouse-left-click-color->description
 msgid "Left Click Color"
 msgstr "Bal kattintás szín"
 
-#. 5.4->settings-schema.json->mouse-middle-click-color->description
 #. 4.2->settings-schema.json->mouse-middle-click-color->description
+#. 5.4->settings-schema.json->mouse-middle-click-color->description
 msgid "Middle Click Color"
 msgstr "Középső kattintás szín"
 
-#. 5.4->settings-schema.json->mouse-right-click-color->description
 #. 4.2->settings-schema.json->mouse-right-click-color->description
+#. 5.4->settings-schema.json->mouse-right-click-color->description
 msgid "Right Click Color"
 msgstr "Jobb kattintás szín"
 
-#. 5.4->settings-schema.json->mouse-click-opacity->description
 #. 4.2->settings-schema.json->mouse-click-opacity->description
+#. 5.4->settings-schema.json->mouse-click-opacity->description
 msgid "General Opacity"
 msgstr "Általános átlátszatlanság"
-
-#~ msgid "Horizontal Margin"
-#~ msgstr "Vízszintes margó"

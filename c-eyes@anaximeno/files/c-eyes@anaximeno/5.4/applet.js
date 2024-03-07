@@ -31,7 +31,6 @@ const { ClickAnimationModeFactory } = require("./clickAnimationModes.js");
 const { Debouncer } = require("./helper.js");
 
 const CLICK_DEBOUNCE_INTERVAL = 2;
-const EYE_REDRAW_ANGLE_THRESHOLD = 0.009;
 const EYE_AREA_WIDTH = 28;
 const EYE_AREA_HEIGHT = 16;
 
@@ -85,6 +84,11 @@ class Eye extends Applet.Applet {
 				cb: settingsDebouncer.debounce((e) => this.set_active(true), 400),
 			},
 			{
+				key: "eye-repaint-angle",
+				value: "eye_repaint_angle",
+				cb: null,
+			},
+			{
 				key: "fade-timeout",
 				value: "fade_timeout",
 				cb: settingsDebouncer.debounce((e) => this.on_property_updated(e), 400),
@@ -123,6 +127,16 @@ class Eye extends Applet.Applet {
 				key: "pupil-clicked-color",
 				value: "pupil_clicked_color",
 				cb: this.on_property_updated,
+			},
+			{
+				key: "fill-lids-color-painting",
+				value: "fill_lids_color_painting",
+				cb: this.on_property_updated
+			},
+			{
+				key: "fill-bulb-color-painting",
+				value: "fill_bulb_color_painting",
+				cb: this.on_property_updated
 			},
 			{
 				key: "mouse-click-image-size",
@@ -433,6 +447,8 @@ class Eye extends Applet.Applet {
 			line_width: this.eye_line_width,
 			is_eye_active: this.eye_activated,
 			padding: this.eye_vertical_padding,
+			lids_fill: this.fill_lids_color_painting,
+			bulb_fill: this.fill_bulb_color_painting,
 		};
 
 		if (this.eye_activated) {
@@ -485,15 +501,19 @@ class Eye extends Applet.Applet {
 		} else {
 			const dist = (x, y) => Math.sqrt(x * x + y * y);
 
-			let [ox, oy] = this._eye_area_pos();
-			let [last_x, last_y] = [this._last_mouse_x - ox, this._last_mouse_y - oy];
-			let [current_x, current_y] = [mouse_x - ox, mouse_y - oy];
+			const [ox, oy] = this._eye_area_pos();
+			const [last_x, last_y] = [this._last_mouse_x - ox, this._last_mouse_y - oy];
+			const [current_x, current_y] = [mouse_x - ox, mouse_y - oy];
 
-			let dist_prod = dist(last_x, last_y) * dist(current_x, current_y);
-			let dot_prod = current_x * last_x + current_y * last_y;
-			let angle = dist_prod > 0 ? Math.acos(dot_prod / dist_prod) : 0;
+			const dist_prod = dist(last_x, last_y) * dist(current_x, current_y);
+			const dot_prod = current_x * last_x + current_y * last_y;
 
-			it_should_redraw = angle > EYE_REDRAW_ANGLE_THRESHOLD;
+			if (dist_prod == 0)
+				return true;
+
+			const angle = Math.acos(dot_prod / dist_prod);
+
+			it_should_redraw = angle > this.eye_repaint_angle;
 		}
 
 		if (it_should_redraw) {
