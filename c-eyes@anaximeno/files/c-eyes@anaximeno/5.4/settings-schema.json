@@ -166,7 +166,7 @@
 		"dependency": "eye-mode=lids",
 		"type": "checkbox",
 		"default": false,
-		"description": "Fill Colors Inside the Eye"
+		"description": "Fill the Colors Inside the Eye"
 	},
 	"fill-bulb-color-painting": {
 		"dependency": "eye-mode=bulb",

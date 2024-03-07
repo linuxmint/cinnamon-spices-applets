@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-07 19:20-0100\n"
+"POT-Creation-Date: 2024-03-07 19:45-0100\n"
 "PO-Revision-Date: 2023-10-30 13:13+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -180,11 +180,8 @@ msgid "Activated Pupil Color"
 msgstr "Colore Pupilla attivato"
 
 #. 4.2->settings-schema.json->fill-lids-color-painting->description
-#. 5.4->settings-schema.json->fill-lids-color-painting->description
-msgid "Fill Colors Inside the Eye"
-msgstr ""
-
 #. 4.2->settings-schema.json->fill-bulb-color-painting->description
+#. 5.4->settings-schema.json->fill-lids-color-painting->description
 #. 5.4->settings-schema.json->fill-bulb-color-painting->description
 msgid "Fill the Colors Inside the Eye"
 msgstr ""
