@@ -46,22 +46,22 @@ class EyelidMode extends EyeMode {
         mouse_x -= area_x;
         mouse_y -= area_y;
 
-        let mouse_ang = Math.atan2(mouse_y, mouse_x);
+        const mouse_ang = Math.atan2(mouse_y, mouse_x);
         let mouse_rad = Math.sqrt(mouse_x * mouse_x + mouse_y * mouse_y);
 
-        let eye_rad = (area_height - padding) / 2;
-        let iris_rad = eye_rad * 0.5;
-        let pupil_rad = iris_rad * 0.4;
+        const eye_rad = (area_height - padding) / 2;
+        const iris_rad = eye_rad * 0.5;
+        const pupil_rad = iris_rad * 0.4;
 
-        let max_rad = eye_rad * (Math.pow(Math.cos(mouse_ang), 4) * 0.5 + 0.25);
+        const max_rad = eye_rad * (Math.pow(Math.cos(mouse_ang), 4) * 0.5 + 0.25);
 
         if (mouse_rad > max_rad)
             mouse_rad = max_rad;
 
-        let iris_arc = Math.asin(iris_rad / eye_rad);
-        let iris_r = eye_rad * Math.cos(iris_arc);
+        const iris_arc = Math.asin(iris_rad / eye_rad);
+        const iris_r = eye_rad * Math.cos(iris_arc);
 
-        let eye_ang = Math.atan(mouse_rad / iris_r);
+        const eye_ang = Math.atan(mouse_rad / iris_r);
 
         let cr = area.get_context();
 
@@ -72,108 +72,12 @@ class EyelidMode extends EyeMode {
         cr.translate(area_width * 0.5, area_height * 0.5);
         cr.setLineWidth(options.line_width);
 
-        let x_def = iris_rad * Math.cos(mouse_ang) * (Math.sin(eye_ang));
-        let y_def = iris_rad * Math.sin(mouse_ang) * (Math.sin(eye_ang));
+        const x_def = iris_rad * Math.cos(mouse_ang) * (Math.sin(eye_ang));
+        const y_def = iris_rad * Math.sin(mouse_ang) * (Math.sin(eye_ang));
         let amp;
 
-        let top_lid = 0.8;
-        let bottom_lid = 0.6;
-
-        amp = eye_rad * top_lid;
-        cr.moveTo(-eye_rad, 0);
-        cr.curveTo(x_def - iris_rad, y_def + amp,
-            x_def + iris_rad, y_def + amp, eye_rad, 0);
-
-        amp = eye_rad * bottom_lid;
-        cr.curveTo(x_def + iris_rad, y_def - amp,
-            x_def - iris_rad, y_def - amp, -eye_rad, 0);
-        cr.stroke();
-
-        amp = eye_rad * top_lid;
-        cr.moveTo(-eye_rad, 0);
-        cr.curveTo(x_def - iris_rad, y_def + amp,
-            x_def + iris_rad, y_def + amp, eye_rad, 0);
-
-        amp = eye_rad * bottom_lid;
-        cr.curveTo(x_def + iris_rad, y_def - amp,
-            x_def - iris_rad, y_def - amp, -eye_rad, 0);
-        cr.clip();
-
-        // -- Drawing the iris of the eye
-
-        cr.rotate(mouse_ang);
-        cr.setLineWidth(options.line_width / iris_rad);
-
-        Clutter.cairo_set_source_color(cr, options.iris_color);
-
-        cr.translate(iris_r * Math.sin(eye_ang), 0);
-        cr.scale(iris_rad * Math.cos(eye_ang), iris_rad);
-        cr.arc(0, 0, 1.0, 0, 2 * Math.PI);
-        cr.stroke();
-        cr.scale(1 / (iris_rad * Math.cos(eye_ang)), 1 / iris_rad);
-        cr.translate(-iris_r * Math.sin(eye_ang), 0);
-
-        // -- Drawing the pupil of the eye
-
-        Clutter.cairo_set_source_color(cr, options.pupil_color);
-
-        cr.translate(eye_rad * Math.sin(eye_ang), 0);
-        cr.scale(pupil_rad * Math.cos(eye_ang), pupil_rad);
-        cr.arc(0, 0, 1.0, 0, 2 * Math.PI);
-        cr.fill();
-
-        cr.save();
-        cr.restore();
-        cr.$dispose();
-    }
-}
-
-class EyelidFillMode extends EyeMode {
-    drawEye(area, options) {
-        let [mouse_x, mouse_y, mask] = global.get_pointer();
-        let [area_width, area_height] = area.get_surface_size();
-        let [area_x, area_y] = [options.area_x, options.area_y];
-
-        const padding = options.padding || DEFAULT_VERTICAL_PADDING;
-
-        area_x += area_width / 2;
-        area_y += area_height / 2;
-
-        mouse_x -= area_x;
-        mouse_y -= area_y;
-
-        let mouse_ang = Math.atan2(mouse_y, mouse_x);
-        let mouse_rad = Math.sqrt(mouse_x * mouse_x + mouse_y * mouse_y);
-
-        let eye_rad = (area_height - padding) / 2;
-        let iris_rad = eye_rad * 0.5;
-        let pupil_rad = iris_rad * 0.4;
-
-        let max_rad = eye_rad * (Math.pow(Math.cos(mouse_ang), 4) * 0.5 + 0.25);
-
-        if (mouse_rad > max_rad)
-            mouse_rad = max_rad;
-
-        let iris_arc = Math.asin(iris_rad / eye_rad);
-        let iris_r = eye_rad * Math.cos(iris_arc);
-
-        let eye_ang = Math.atan(mouse_rad / iris_r);
-
-        let cr = area.get_context();
-
-        // -- Drawing the base of the eye
-
-        Clutter.cairo_set_source_color(cr, options.eye_color);
-
-        cr.translate(area_width * 0.5, area_height * 0.5);
-        cr.setLineWidth(options.line_width);
-
-        let x_def = iris_rad * Math.cos(mouse_ang) * (Math.sin(eye_ang));
-        let y_def = iris_rad * Math.sin(mouse_ang) * (Math.sin(eye_ang));
-        let amp;
-
-        let top_lid = 0.8;
-        let bottom_lid = 0.6;
+        const top_lid = 0.8;
+        const bottom_lid = 0.6;
 
         amp = eye_rad * top_lid;
         cr.moveTo(-eye_rad, 0);
@@ -184,7 +88,7 @@ class EyelidFillMode extends EyeMode {
         cr.curveTo(x_def + iris_rad, y_def - amp,
             x_def - iris_rad, y_def - amp, -eye_rad, 0);
 
-        options.is_eye_active ? cr.fill() : cr.stroke();
+        options.is_eye_active && options.lids_fill ? cr.fill() : cr.stroke();
 
         amp = eye_rad * top_lid;
         cr.moveTo(-eye_rad, 0);
@@ -207,7 +111,7 @@ class EyelidFillMode extends EyeMode {
         cr.scale(iris_rad * Math.cos(eye_ang), iris_rad);
         cr.arc(0, 0, 1.0, 0, 2 * Math.PI);
 
-        options.is_eye_active ? cr.fill() : cr.stroke();
+        options.is_eye_active && options.lids_fill ? cr.fill() : cr.stroke();
 
         cr.scale(1 / (iris_rad * Math.cos(eye_ang)), 1 / iris_rad);
         cr.translate(-iris_r * Math.sin(eye_ang), 0);
@@ -226,6 +130,7 @@ class EyelidFillMode extends EyeMode {
         cr.$dispose();
     }
 }
+
 
 class BulbMode extends EyeMode {
     drawEye(area, options) {
@@ -241,24 +146,23 @@ class BulbMode extends EyeMode {
         mouse_x -= area_x;
         mouse_y -= area_y;
 
-        let mouse_ang = Math.atan2(mouse_y, mouse_x);
         let mouse_rad = Math.sqrt(mouse_x * mouse_x + mouse_y * mouse_y);
+        const mouse_ang = Math.atan2(mouse_y, mouse_x);
 
-        let eye_rad = (area_height - padding) / 2.3;
-        let iris_rad = eye_rad * 0.6;
-        let pupil_rad = iris_rad * 0.4;
+        const eye_rad = (area_height - padding) / 2.3;
+        const iris_rad = eye_rad * 0.6;
+        const pupil_rad = iris_rad * 0.4;
 
-        let max_rad = eye_rad * Math.cos(Math.asin((iris_rad) / eye_rad)) - options.line_width;
+        const max_rad = eye_rad * Math.cos(Math.asin((iris_rad) / eye_rad)) - options.line_width;
 
-        if (mouse_rad > max_rad)
-            mouse_rad = max_rad;
+        if (mouse_rad > max_rad) mouse_rad = max_rad;
 
-        let iris_arc = Math.asin(iris_rad / eye_rad);
-        let iris_r = eye_rad * Math.cos(iris_arc);
+        const iris_arc = Math.asin(iris_rad / eye_rad);
+        const iris_r = eye_rad * Math.cos(iris_arc);
 
-        let eye_ang = Math.atan(mouse_rad / iris_r);
+        const eye_ang = Math.atan(mouse_rad / iris_r);
 
-        let cr = area.get_context();
+        const cr = area.get_context();
 
         // -- Drawing the base of the eye
 
@@ -267,7 +171,8 @@ class BulbMode extends EyeMode {
         cr.translate(area_width * 0.5, area_height * 0.5);
         cr.setLineWidth(options.line_width);
         cr.arc(0, 0, eye_rad, 0, 2 * Math.PI);
-        cr.stroke();
+
+        options.is_eye_active && options.bulb_fill ? cr.fill() : cr.stroke();
 
         // -- Drawing the iris of the eye
 
@@ -279,7 +184,9 @@ class BulbMode extends EyeMode {
         cr.translate(iris_r * Math.sin(eye_ang), 0);
         cr.scale(iris_rad * Math.cos(eye_ang), iris_rad);
         cr.arc(0, 0, 1.0, 0, 2 * Math.PI);
-        cr.stroke();
+
+        options.is_eye_active && options.bulb_fill ? cr.fill() : cr.stroke();
+
         cr.scale(1 / (iris_rad * Math.cos(eye_ang)), 1 / iris_rad);
         cr.translate(-iris_r * Math.sin(eye_ang), 0);
 
@@ -298,78 +205,6 @@ class BulbMode extends EyeMode {
     }
 }
 
-class BulbFillMode extends EyeMode {
-    drawEye(area, options) {
-        let [mouse_x, mouse_y, mask] = global.get_pointer();
-        let [area_width, area_height] = area.get_surface_size();
-        let [area_x, area_y] = [options.area_x, options.area_y];
-
-        const padding = options.padding || DEFAULT_VERTICAL_PADDING;
-
-        area_x += area_width / 2;
-        area_y += area_height / 2;
-
-        mouse_x -= area_x;
-        mouse_y -= area_y;
-
-        let mouse_ang = Math.atan2(mouse_y, mouse_x);
-        let mouse_rad = Math.sqrt(mouse_x * mouse_x + mouse_y * mouse_y);
-
-        let eye_rad = (area_height - padding) / 2.3;
-        let iris_rad = eye_rad * 0.6;
-        let pupil_rad = iris_rad * 0.4;
-
-        let max_rad = eye_rad * Math.cos(Math.asin((iris_rad) / eye_rad)) - options.line_width;
-
-        if (mouse_rad > max_rad)
-            mouse_rad = max_rad;
-
-        let iris_arc = Math.asin(iris_rad / eye_rad);
-        let iris_r = eye_rad * Math.cos(iris_arc);
-
-        let eye_ang = Math.atan(mouse_rad / iris_r);
-
-        let cr = area.get_context();
-
-        // -- Drawing the base of the eye
-
-        Clutter.cairo_set_source_color(cr, options.eye_color);
-
-        cr.translate(area_width * 0.5, area_height * 0.5);
-        cr.setLineWidth(options.line_width);
-        cr.arc(0, 0, eye_rad, 0, 2 * Math.PI);
-        options.is_eye_active ? cr.fill() : cr.stroke();
-
-        // -- Drawing the iris of the eye
-
-        cr.rotate(mouse_ang);
-        cr.setLineWidth(options.line_width / iris_rad);
-
-        Clutter.cairo_set_source_color(cr, options.iris_color);
-
-        cr.translate(iris_r * Math.sin(eye_ang), 0);
-        cr.scale(iris_rad * Math.cos(eye_ang), iris_rad);
-        cr.arc(0, 0, 1.0, 0, 2 * Math.PI);
-
-        options.is_eye_active ? cr.fill() : cr.stroke();
-
-        cr.scale(1 / (iris_rad * Math.cos(eye_ang)), 1 / iris_rad);
-        cr.translate(-iris_r * Math.sin(eye_ang), 0);
-
-        // -- Drawing the pupil of the eye
-
-        Clutter.cairo_set_source_color(cr, options.pupil_color);
-
-        cr.translate(eye_rad * Math.sin(eye_ang), 0);
-        cr.scale(pupil_rad * Math.cos(eye_ang), pupil_rad);
-        cr.arc(0, 0, 1.0, 0, 2 * Math.PI);
-        cr.fill();
-
-        cr.save();
-        cr.restore();
-        cr.$dispose();
-    }
-}
 
 class EyeModeFactory {
     /**
@@ -381,10 +216,7 @@ class EyeModeFactory {
         switch (mode) {
             case "bulb":
                 return new BulbMode();
-            case "bulb-fill":
-                return new BulbFillMode();
-            case "lids-fill":
-                return new EyelidFillMode();
+
             case "lids":
             default:
                 return new EyelidMode();
