@@ -513,7 +513,7 @@ class Eye extends Applet.Applet {
 
 			const angle = Math.acos(dot_prod / dist_prod);
 
-			it_should_redraw = angle > this.eye_repaint_angle;
+			it_should_redraw = angle >= this.eye_repaint_angle;
 		}
 
 		if (it_should_redraw) {
