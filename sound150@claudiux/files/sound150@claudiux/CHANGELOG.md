@@ -1,4 +1,7 @@
 ### v6.3.1~20240308
+  * Fixes #5576.
+
+### v6.3.0~20240308
   * Allows to display icon indicating that the microphone is muted, if applicable.
   * Sound volume: Now can magnetize all multiples of 25%.
 

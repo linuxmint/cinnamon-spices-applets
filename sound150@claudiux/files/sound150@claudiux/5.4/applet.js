@@ -2023,19 +2023,31 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.defaultColor = this.themeNode.get_foreground_color();
         let color = "rgba(" + this.defaultColor.red + "," + this.defaultColor.green + "," + this.defaultColor.blue + "," + this.defaultColor.alpha + ")";
 
+        let changeColor = false;
         if (this.adaptColor) {
             let pc = Math.round(percentage.split("%")[0]);
-            if (pc > 130)
+            if (pc > 130) {
                 color = this.color131_150; //"red";
-            else if (pc > 115)
+                changeColor = true;
+            }
+            else if (pc > 115) {
                 color = this.color116_130; //"orange";
-            else if (pc > 100)
+                changeColor = true;
+            }
+            else if (pc > 100) {
                 color = this.color101_115; // "yellow";
+                changeColor = true;
+            }
         }
         let _style = "color: %s;".format(color);
         this.actor.style = _style;
-        this._outputVolumeSection.icon.style = _style;
-        //~ this._outputVolumeSection.style = _style;
+
+        if (changeColor) {
+            this._outputVolumeSection.icon.style = _style;
+            //~ this._outputVolumeSection.style = _style;
+        } else {
+            this._outputVolumeSection.icon.style = this._inputVolumeSection.icon.style
+        }
     }
 
     _inputValuesChanged(actor, iconName) {
