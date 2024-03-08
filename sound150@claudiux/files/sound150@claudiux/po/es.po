@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-08 19:50+0100\n"
-"PO-Revision-Date: 2024-02-26 12:50-0300\n"
+"PO-Revision-Date: 2024-03-08 16:11-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -607,11 +607,11 @@ msgstr "Mostrar el nivel de volumen cerca del icono"
 
 #. 5.4->settings-schema.json->showMicMutedOnIcon->description
 msgid "Display icon indicating that the microphone is muted, if applicable"
-msgstr ""
+msgstr "Mostrar ícono que indique que el micrófono está silenciado, si procede"
 
 #. 5.4->settings-schema.json->magnetic25On->description
 msgid "Magnetize all multiples of 25%"
-msgstr ""
+msgstr "Magnetizar todos los múltiplos de 25%"
 
 #. 5.4->settings-schema.json->color101_115->description
 msgid "Icon color: 101%-115%"
