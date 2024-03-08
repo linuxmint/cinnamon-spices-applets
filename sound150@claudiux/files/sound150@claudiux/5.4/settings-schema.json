@@ -72,14 +72,15 @@
       "type": "section",
       "title": "Icon",
       "keys": [
+        "showalbum",
+        "keepAlbumAspectRatio",
         "showVolumeLevelNearIcon",
+        "showMicMutedOnIcon",
         "adaptColor",
         "color101_115",
         "color116_130",
         "color131_150",
-        "resetColorsButton",
-        "showalbum",
-        "keepAlbumAspectRatio"
+        "resetColorsButton"
       ]
     },
     "section5": {
@@ -89,6 +90,7 @@
         "setAmplification",
         "stepVolume",
         "magneticOn",
+        "magnetic25On",
         "alwaysCanChangeMic"
       ]
     },
@@ -209,6 +211,11 @@
     "default": false,
     "description": "Display volume level near icon"
   },
+  "showMicMutedOnIcon": {
+    "type": "switch",
+    "default": true,
+    "description": "Display icon indicating that the microphone is muted, if applicable"
+  },
   "setAmplification": {
     "type": "button",
     "description": "Maximum volume control",
@@ -237,6 +244,12 @@
     "description": "Magnetize the 'Volume 100%' mark",
     "tooltip": "When checked, the 'Volume 100%' mark becomes magnetic: the volume is automatically set to 100% when the distance between the volume value and 100% is lesser than a half-step.",
     "default": true
+  },
+  "magnetic25On": {
+    "type": "switch",
+    "description": "Magnetize all multiples of 25%",
+    "dependency": "magneticOn",
+    "default": false
   },
   "adaptColor": {
     "type": "switch",
