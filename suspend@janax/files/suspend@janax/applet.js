@@ -78,13 +78,15 @@ class SuspendApplet extends Applet.Applet {
    }
 
    on_applet_clicked(event) {
+      let useCountDown = this.settings.getValue("count-down");
+      let immediate = (event.has_control_modifier() && useCountDown && this.settings.getValue("ctrl-override-countdown"));
       if( this._countDown ) {
          Mainloop.source_remove(this._countDown);
          this._labelNumberBox.hide();
          this._countDown = null;
-      } else {
+      } else if( !immediate ){
          if( !this.settings.getValue("suspend-on-double-click") || event.get_click_count() === 2 ) {
-            if( this.settings.getValue("count-down") ) {
+            if( useCountDown ) {
                this.countDownTime = this.settings.getValue("count-down-duration");
                this._labelNumber.set_text( this.countDownTime.toString() );
                this._labelNumberBox.show();
@@ -97,6 +99,9 @@ class SuspendApplet extends Applet.Applet {
                GLib.spawn_command_line_async('systemctl suspend -i');
             }
          }
+      }
+      if( immediate ){
+         GLib.spawn_command_line_async('systemctl suspend -i');
       }
    }
 

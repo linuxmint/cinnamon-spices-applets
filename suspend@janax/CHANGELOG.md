@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.3
+
+* Added an option to allow Ctrl-Click to bypass the count down timer and suspend immediately
+* Fixed a minor typo in the tooltip text for the icon config option
+
 ## 2.0.2
 
 * Limit count down timer to a minimum of 1 rather than 0
