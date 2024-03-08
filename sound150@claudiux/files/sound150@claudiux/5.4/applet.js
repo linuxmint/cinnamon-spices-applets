@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 const Applet = imports.ui.applet;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
@@ -146,7 +146,7 @@ class ControlButton {
 
 class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
     constructor(applet, stream, tooltip, app_icon) {
-        super(0);
+        super(1*applet.volume.slice(0, -1));
         this.applet = applet;
 
         if (tooltip)
@@ -210,6 +210,14 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             //100% is magnetic:
             if (this.applet.magneticOn === true && volume != this.applet._volumeNorm && volume > this.applet._volumeNorm * (1 - VOLUME_ADJUSTMENT_STEP / 2) && volume < this.applet._volumeNorm * (1 + VOLUME_ADJUSTMENT_STEP / 2))
                 volume = this.applet._volumeNorm;
+
+            if (this.applet.magneticOn === true && this.applet.magnetic25On === true) {
+                for (let i = 0.25; i < 1.5; i+=0.25) {
+                    if (i==1) continue;
+                    if (volume != i*this.applet._volumeNorm && volume > this.applet._volumeNorm * (i - VOLUME_ADJUSTMENT_STEP / 2) && volume < this.applet._volumeNorm * (i + VOLUME_ADJUSTMENT_STEP / 2))
+                        volume = i*this.applet._volumeNorm;
+                }
+            }
         }
         this.stream.volume = volume;
         this.stream.push_volume();
@@ -274,6 +282,18 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
                 this.applet._output.volume = this.applet._volumeNorm;
                 this.applet._output.push_volume();
             }
+            if (this.applet.magneticOn === true && this.applet.magnetic25On === true) {
+                for (let i = 0.25; i < 1.5; i+=0.25) {
+                    if (i==1) continue;
+                    if (visible_value != i*this.applet._volumeNorm && visible_value > this.applet._volumeNorm * (i - VOLUME_ADJUSTMENT_STEP / 2) && visible_value < this.applet._volumeNorm * (i + VOLUME_ADJUSTMENT_STEP / 2)) {
+                        visible_value = i*this.applet._volumeNorm;
+                        value = visible_value / this.applet._volumeMax;
+                        this.applet._output.volume = i*this.applet._volumeNorm;
+                        this.applet._output.push_volume();
+                    }
+                }
+
+            }
         } else {
             visible_value = volume / this.applet._volumeNorm;
             value = visible_value
@@ -295,18 +315,25 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
     }
 
     _volumeToIcon(value) {
+        let nominal = this.applet._volumeNorm / this.applet._volumeMax;
         let icon;
         if (value < 0.005) {
             icon = "muted";
         } else {
-            let n = Math.floor(3 * value);
-            if (n < 1)
+            //~ let n = Math.floor(3 * value);
+            let n2 = Math.floor(300 * value)/100;
+            //~ if (!this.isMic) log("n: "+n+"  n2: "+n2, true);
+            if (n2 < 1)
                 icon = "low";
-            else if (n < 2)
+            else if (n2 < 2)
                 icon = "medium";
-            else
+            else if (n2 < 3 * nominal)
                 icon = "high";
+            else
+                icon = "overamplified";
         }
+        if (this.applet.showMicMutedOnIcon && !this.isMic && (!this.applet.mute_in_switch || this.applet.mute_in_switch.state)) icon += "-with-mic-disabled";
+
         return this.isMic ? "microphone-sensitivity-" + icon : "audio-volume-" + icon;
     }
 }
@@ -1122,6 +1149,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         //~ log("VOLUME_ADJUSTMENT_STEP = " + VOLUME_ADJUSTMENT_STEP);
 
         this.settings.bind("magneticOn", "magneticOn", () => this._on_sound_settings_change());
+        this.settings.bind("magnetic25On", "magnetic25On", () => this._on_sound_settings_change());
 
         this.settings.bind("adaptColor", "adaptColor", () => this._on_sound_settings_change());
         this.settings.bind("color101_115", "color101_115", () => this._on_sound_settings_change());
@@ -1137,6 +1165,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.settings.bind("volume", "volume");
         this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", this.volume_near_icon);
+        this.settings.bind("showMicMutedOnIcon", "showMicMutedOnIcon", () => this._on_sound_settings_change());
         this.settings.bind("volume-mute", "volume_mute", this._setKeybinding);
         this.settings.bind("volume-up", "volume_up", this._setKeybinding);
         this.settings.bind("volume-down", "volume_down", this._setKeybinding);
@@ -1246,12 +1275,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._inputVolumeSection = new VolumeSlider(this, null, _("Microphone"), null);
         this._inputVolumeSection.connect("values-changed", (...args) => this._inputValuesChanged(...args));
         this._selectInputDeviceItem = new PopupMenu.PopupSubMenuMenuItem(_("Input device"));
-        this._inputSection.addMenuItem(this._inputVolumeSection);
+        //this._inputSection.addMenuItem(this._inputVolumeSection);
         this._inputSection.addMenuItem(this._selectInputDeviceItem);
         this._applet_context_menu.addMenuItem(this._inputSection);
 
-        this._selectInputDeviceItem.actor.hide();
-        this._inputSection.actor.hide();
+        this._selectInputDeviceItem.actor.show(); //.hide();
+        this._inputSection.actor.show(); //.hide();
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -1427,12 +1456,15 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _toggle_in_mute() {
-        if (!this._input)
+        if (!this._input) {
+            this._volumeChange(null);
             return;
+        }
 
         let newStatus = !this._input.is_muted;
         this._input.change_is_muted(newStatus);
         this.mute_in_switch.setToggleState(newStatus);
+        this._volumeChange(null);
     }
 
     _onScrollEvent(actor, event) {
@@ -1448,39 +1480,57 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     _volumeChange(direction) {
         let currentVolume = this._output.volume;
-        let volumeChange = false;
+        let volumeChange = (direction === null) ? true : false;
         let player = this._players[this._activePlayer];
 
-        if (direction == Clutter.ScrollDirection.DOWN) {
-            let prev_muted = this._output.is_muted;
-            this._output.volume = Math.max(0, currentVolume - this._volumeNorm * VOLUME_ADJUSTMENT_STEP);
-            if (this._output.volume < 1) {
-                this._output.volume = 0;
-                if (!prev_muted)
-                    this._output.change_is_muted(true);
-            } else {
+        if (direction !== null) {
+            if (direction == Clutter.ScrollDirection.DOWN) {
+                let prev_muted = this._output.is_muted;
+                this._output.volume = Math.max(0, currentVolume - this._volumeNorm * VOLUME_ADJUSTMENT_STEP);
+                if (this._output.volume < 1) {
+                    this._output.volume = 0;
+                    if (!prev_muted)
+                        this._output.change_is_muted(true);
+                } else {
+                    // 100% is magnetic:
+                    if (this.magneticOn === true && this._output.volume != this._volumeNorm && this._output.volume > this._volumeNorm * (1 - VOLUME_ADJUSTMENT_STEP / 2) && this._output.volume < this._volumeNorm * (1 + VOLUME_ADJUSTMENT_STEP / 2))
+                        this._output.volume = this._volumeNorm;
+
+                    if (this.magneticOn === true && this.magnetic25On === true) {
+                        for (let i = 0.25; i < 1.5; i+=0.25) {
+                            if (i==1) continue;
+                            if (this._output.volume != i*this._volumeNorm && this._output.volume > this._volumeNorm * (i - VOLUME_ADJUSTMENT_STEP / 2) && this._output.volume < this._volumeNorm * (i + VOLUME_ADJUSTMENT_STEP / 2))
+                                this._output.volume = i*this._volumeNorm;
+                        }
+                    }
+                }
+
+                volumeChange = true;
+            }
+            else if (direction == Clutter.ScrollDirection.UP) {
+                this._output.volume = Math.min(this._volumeMax, currentVolume + this._volumeNorm * VOLUME_ADJUSTMENT_STEP);
                 // 100% is magnetic:
                 if (this.magneticOn === true && this._output.volume != this._volumeNorm && this._output.volume > this._volumeNorm * (1 - VOLUME_ADJUSTMENT_STEP / 2) && this._output.volume < this._volumeNorm * (1 + VOLUME_ADJUSTMENT_STEP / 2))
                     this._output.volume = this._volumeNorm;
+
+                if (this.magneticOn === true && this.magnetic25On === true) {
+                for (let i = 0.25; i < 1.5; i+=0.25) {
+                    if (i==1) continue;
+                    if (this._output.volume != i*this._volumeNorm && this._output.volume > this._volumeNorm * (i - VOLUME_ADJUSTMENT_STEP / 2) && this._output.volume < this._volumeNorm * (i + VOLUME_ADJUSTMENT_STEP / 2))
+                        this._output.volume = i*this._volumeNorm;
+                }
             }
 
-            volumeChange = true;
-        }
-        else if (direction == Clutter.ScrollDirection.UP) {
-            this._output.volume = Math.min(this._volumeMax, currentVolume + this._volumeNorm * VOLUME_ADJUSTMENT_STEP);
-            // 100% is magnetic:
-            if (this.magneticOn === true && this._output.volume != this._volumeNorm && this._output.volume > this._volumeNorm * (1 - VOLUME_ADJUSTMENT_STEP / 2) && this._output.volume < this._volumeNorm * (1 + VOLUME_ADJUSTMENT_STEP / 2))
-                this._output.volume = this._volumeNorm;
-
-            this._output.change_is_muted(false);
-            volumeChange = true;
-        }
-        else if (this.horizontalScroll && player !== null && player._playerStatus !== "Stopped") {
-            if (direction == Clutter.ScrollDirection.LEFT) {
-                this._players[this._activePlayer]._mediaServerPlayer.PreviousRemote();
+                this._output.change_is_muted(false);
+                volumeChange = true;
             }
-            else if (direction == Clutter.ScrollDirection.RIGHT) {
-                this._players[this._activePlayer]._mediaServerPlayer.NextRemote();
+            else if (this.horizontalScroll && player !== null && player._playerStatus !== "Stopped") {
+                if (direction == Clutter.ScrollDirection.LEFT) {
+                    this._players[this._activePlayer]._mediaServerPlayer.PreviousRemote();
+                }
+                else if (direction == Clutter.ScrollDirection.RIGHT) {
+                    this._players[this._activePlayer]._mediaServerPlayer.NextRemote();
+                }
             }
         }
 
@@ -1491,13 +1541,19 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._applet_tooltip.show();
             let volume = this.volume.slice(0, -1);
             let icon_name = "audio-volume";
-            if (volume <1) icon_name += "-muted";
+            if (volume > 100) icon_name += "-overamplified";
+            else if (volume <1) icon_name += "-muted";
             else if (volume < 33) icon_name += "-low";
             else if (volume < 67) icon_name += "-medium";
             else icon_name += "-high";
+            if (this.showMicMutedOnIcon &&
+                (!this.mute_in_switch || this.mute_in_switch.state)
+            )
+                icon_name += "-with-mic-disabled";
             icon_name += "-symbolic";
             let icon = Gio.Icon.new_for_string(icon_name);
             Main.osdWindowManager.show(-1, icon, volume, null);
+            this.set_applet_icon_symbolic_name(icon_name);
             var intervalId = null;
             intervalId = Util.setInterval(() => {
                 this._applet_tooltip.hide();
@@ -1655,11 +1711,17 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (path && player && (player === true || player._playerStatus == 'Playing')) {
                 this.setIcon(path, "player-path");
             } else {
-                this.setIcon('media-optical-cd-audio', 'player-name');
+                if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
+                    this.setIcon('media-optical-cd-audio-with-mic-disabled', 'player-name');
+                else
+                    this.setIcon('media-optical-cd-audio', 'player-name');
             }
         }
         else {
-            this.setIcon('audio-x-generic', 'player-name');
+            if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
+                this.setIcon('audio-x-generic-with-mic-disabled', 'player-name');
+            else
+                this.setIcon('audio-x-generic', 'player-name');
         }
     }
 
@@ -1842,6 +1904,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._outputVolumeSection.connect("values-changed", (...args) => this._outputValuesChanged(...args));
 
         this.menu.addMenuItem(this._outputVolumeSection);
+        this.menu.addMenuItem(this._inputVolumeSection);
+
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         this.menu.addSettingsAction(_("Sound Settings"), 'sound');
@@ -1939,6 +2003,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.mute_out_switch.setToggleState(this._output.is_muted);
         } else if (property == "_input") {
             this.mute_in_switch.setToggleState(this._input.is_muted);
+            this._volumeChange(null); //Added
         }
     }
 
@@ -2012,6 +2077,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this._inputVolumeSection.connectWithStream(this._input);
             this._inputMutedId = this._input.connect('notify::is-muted', (...args) => this._mutedChanged(...args, '_input'));
             this._mutedChanged(null, null, '_input');
+            this._inputSection.actor.show(); // Added
         } else {
             this._inputSection.actor.hide();
         }
@@ -2107,8 +2173,10 @@ class Sound150Applet extends Applet.TextIconApplet {
                         this.mute_in_switch.actor.hide();
                     }
 
-                    if (this.alwaysCanChangeMic)
+                    if (this.alwaysCanChangeMic) {
+                        this._inputSection.actor.show();
                         this.mute_in_switch.actor.show();
+                    }
                 }
                 this._streams.splice(i, 1);
                 break;
