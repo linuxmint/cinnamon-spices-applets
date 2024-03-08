@@ -332,7 +332,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             else
                 icon = "overamplified";
         }
-        if (this.applet.showMicMutedOnIcon && !this.isMic && (!this.applet.mute_in_switch || this.applet.mute_in_switch.state)) icon += "-with-mic-disabled";
+        //~ if (this.applet.showMicMutedOnIcon && !this.isMic && (!this.applet.mute_in_switch || this.applet.mute_in_switch.state)) icon += "-with-mic-disabled";
 
         return this.isMic ? "microphone-sensitivity-" + icon : "audio-volume-" + icon;
     }
