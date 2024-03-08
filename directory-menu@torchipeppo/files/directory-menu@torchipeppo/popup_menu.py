@@ -157,7 +157,7 @@ class Cassettone:
             "path": path,
         }))
         terminal_preferences = Gio.Settings.new("org.cinnamon.desktop.default-applications.terminal")
-        argv = [terminal_preferences.get_string("exec")]
+        argv = terminal_preferences.get_string("exec").split()
         spawn_flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.STDOUT_TO_DEV_NULL | GLib.SpawnFlags.STDERR_TO_DEV_NULL
         GLib.spawn_async(working_directory=path, argv=argv, flags=spawn_flags)
 
