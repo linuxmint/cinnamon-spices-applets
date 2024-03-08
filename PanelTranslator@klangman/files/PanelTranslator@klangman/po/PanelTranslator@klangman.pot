@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PanelTranslator@klangman 1.0.1\n"
+"Project-Id-Version: PanelTranslator@klangman 1.0.2\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-24 12:39-0500\n"
+"POT-Creation-Date: 2024-03-08 10:14-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,63 +17,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:91 applet.js:279 applet.js:281
+#: applet.js:96 applet.js:284 applet.js:286
 msgid "Translator"
 msgstr ""
 
-#: applet.js:207
+#: applet.js:212
 msgid "Unable to query available languages from translate-shell"
 msgstr ""
 
-#: applet.js:218
+#: applet.js:223
 msgid "Required \"trans\" command not found, please install translate-shell"
 msgstr ""
 
-#: applet.js:222
+#: applet.js:227
 msgid "Error, the \"trans\" command returned an exit code of "
 msgstr ""
 
-#: applet.js:302
+#: applet.js:307
 msgid "Swap Languages"
 msgstr ""
 
-#: applet.js:338
+#: applet.js:343
 msgid "{Text to translate}"
 msgstr ""
 
-#: applet.js:349
+#: applet.js:354
 msgid "{Translated text}"
 msgstr ""
 
-#: applet.js:363
+#: applet.js:368
 msgid "Configure"
 msgstr ""
 
-#: applet.js:364
+#: applet.js:369
 msgid "Help"
 msgstr ""
 
-#: applet.js:368
+#: applet.js:373
 msgid "Play"
 msgstr ""
 
-#: applet.js:372
+#: applet.js:377
 msgid "Paste"
 msgstr ""
 
-#: applet.js:376
+#: applet.js:381
 msgid "Clear"
 msgstr ""
 
-#: applet.js:380
+#: applet.js:385
 msgid "Translate"
 msgstr ""
 
-#: applet.js:385
+#: applet.js:390
 msgid "Copy"
 msgstr ""
 
-#: applet.js:391
+#: applet.js:396
 msgid "Play Translation"
 msgstr ""
 
