@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-24 10:59-0500\n"
+"POT-Creation-Date: 2024-03-07 23:19-0500\n"
 "PO-Revision-Date: 2024-02-13 18:20+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
@@ -69,14 +69,26 @@ msgstr "másodperc"
 msgid "Count down duration"
 msgstr "Visszaszámlálás ideje"
 
+#. settings-schema.json->ctrl-override-countdown->description
+msgid "Ctrl+Click to override the count down and suspend immediately"
+msgstr ""
+
+#. settings-schema.json->ctrl-override-countdown->tooltip
+msgid ""
+"When enabled, using Ctrl+Click will suspend the computer immediately, "
+"without starting a count down or waiting for an existing count down to "
+"finish."
+msgstr ""
+
 #. settings-schema.json->fullcolor-icon->description
 msgid "Use a full color icon"
 msgstr "Színes ikon használata"
 
 #. settings-schema.json->fullcolor-icon->tooltip
+#, fuzzy
 msgid ""
 "When enabled, a full color panel icon will be used, otherwise a symbolic "
-"icon sill be used."
+"icon will be used."
 msgstr ""
 "Amikor engedélyezve van, színes ikon jelenik meg, egyéb esetben egy "
 "szimbolikus ikon lesz használva."

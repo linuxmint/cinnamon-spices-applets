@@ -25,11 +25,18 @@
     "description": "Count down duration",
     "dependency" : "count-down"
    },
+   "ctrl-override-countdown": {
+      "type": "switch",
+      "default": 0,
+      "description": "Ctrl+Click to override the count down and suspend immediately",
+      "tooltip": "When enabled, using Ctrl+Click will suspend the computer immediately, without starting a count down or waiting for an existing count down to finish.",
+      "dependency" : "count-down"
+   },
    "fullcolor-icon": {
       "type": "switch",
       "default": 1,
       "description": "Use a full color icon",
-      "tooltip": "When enabled, a full color panel icon will be used, otherwise a symbolic icon sill be used."
+      "tooltip": "When enabled, a full color panel icon will be used, otherwise a symbolic icon will be used."
    },
    "system-suspend-header": {
       "type": "header",
