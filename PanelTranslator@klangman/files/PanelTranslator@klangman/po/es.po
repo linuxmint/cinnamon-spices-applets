@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-24 12:39-0500\n"
+"POT-Creation-Date: 2024-03-08 10:14-0500\n"
 "PO-Revision-Date: 2024-02-09 20:40-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,63 +18,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:91 applet.js:279 applet.js:281
+#: applet.js:96 applet.js:284 applet.js:286
 msgid "Translator"
 msgstr "Traductor"
 
-#: applet.js:207
+#: applet.js:212
 msgid "Unable to query available languages from translate-shell"
 msgstr "No se pueden consultar los idiomas disponibles desde Translate-Shell"
 
-#: applet.js:218
+#: applet.js:223
 msgid "Required \"trans\" command not found, please install translate-shell"
 msgstr "No se encontró el comando \"trans\" requerido; instale Translate-Shell"
 
-#: applet.js:222
+#: applet.js:227
 msgid "Error, the \"trans\" command returned an exit code of "
 msgstr "Error, el comando \"trans\" devuelve un código de salida de "
 
-#: applet.js:302
+#: applet.js:307
 msgid "Swap Languages"
 msgstr "Intercambiar idiomas"
 
-#: applet.js:338
+#: applet.js:343
 msgid "{Text to translate}"
 msgstr "{Texto a traducir}"
 
-#: applet.js:349
+#: applet.js:354
 msgid "{Translated text}"
 msgstr "{Texto traducido}"
 
-#: applet.js:363
+#: applet.js:368
 msgid "Configure"
 msgstr "Configurar"
 
-#: applet.js:364
+#: applet.js:369
 msgid "Help"
 msgstr "Ayuda"
 
-#: applet.js:368
+#: applet.js:373
 msgid "Play"
 msgstr "Reproducir"
 
-#: applet.js:372
+#: applet.js:377
 msgid "Paste"
 msgstr "Pegar"
 
-#: applet.js:376
+#: applet.js:381
 msgid "Clear"
 msgstr "Limpiar"
 
-#: applet.js:380
+#: applet.js:385
 msgid "Translate"
 msgstr "Traducir"
 
-#: applet.js:385
+#: applet.js:390
 msgid "Copy"
 msgstr "Copiar"
 
-#: applet.js:391
+#: applet.js:396
 msgid "Play Translation"
 msgstr "Reproducir traducción"
 
