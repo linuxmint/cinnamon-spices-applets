@@ -1,3 +1,18 @@
+### v1.17.5~20240306
+  * Modifies the Recordings tab in settings, adding a button to open the Recordings folder.
+
+### v1.17.4~20240306
+  * Prevents multiple identical entries in recently listened-to stations.
+
+### v1.17.3~20240305
+  * Remove error messages about St.Button.
+
+### v1.17.2~20240304
+  * Now compatible with the Horizontal OSD extension.
+
+### v1.17.1~20240304
+  * Better manage song art.
+
 ### v1.17.0~20240225
   * Create the cover of the song broadcast by Radio3.0@claudiux as soon as possible, so that it can be displayed by the [sound150@claudiux applet](https://cinnamon-spices.linuxmint.com/applets/view/306).
 

@@ -2,8 +2,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
-"POT-Creation-Date: 2024-02-05 14:47-0500\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-05 14:36-0500\n"
 "PO-Revision-Date: 2024-01-21 17:50-0500\n"
 "Last-Translator: blogdron\n"
 "Language-Team: \n"
@@ -11,7 +12,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 3.4\n"
 
 #: 5.4/applet.js:300 3.2/applet.js:130
@@ -22,15 +24,18 @@ msgstr ""
 msgid "Waiting"
 msgstr "Ожидание"
 
-#: 5.4/applet.js:327 3.2/applet.js:160
-msgid "Some Dependencies not Installed"
+#: 5.4/applet.js:327
+#, fuzzy
+msgid "Some dependencies not installed."
 msgstr "Некоторые Зависимости не Установлены"
 
 #: 5.4/applet.js:327
+#, fuzzy
 msgid ""
-"Both 'sox' and 'zenity' are required for this applet to have all of its functionality including notifications and audible alerts .\n"
+"Both 'sox' and 'zenity' are required for this applet to have all of its "
+"functionality including notifications and audible alerts.\n"
 "\n"
-"Please view the README for help on installing them."
+"Please view the README for help on installing them.\n"
 msgstr ""
 "'sox' и 'zenity' необходимы для текстовых и звуковых уведомлений .\n"
 "\n"
@@ -49,7 +54,8 @@ msgid ""
 msgstr ""
 "Пользовательский звук уведомления о низком заряде батареи.\n"
 "\n"
-"Убедитесь что громкость установлена в разумных пределах, особенно в публичных местах.\n"
+"Убедитесь что громкость установлена в разумных пределах, особенно в "
+"публичных местах.\n"
 
 #: 5.4/applet.js:399 3.2/applet.js:307
 msgid "Open Power Statistics"
@@ -75,18 +81,22 @@ msgstr "Открыть файл README"
 msgid "Waiting for battery information"
 msgstr "Ожидание информации о батарее"
 
-#: 5.4/applet.js:545
+#: 5.4/applet.js:444
+#, fuzzy
+msgid "Alert/Suspend:"
+msgstr "Приостановить:"
+
+#: 5.4/applet.js:549
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Батарея разряжена - выключите или подключите к сети"
 
-#: 5.4/applet.js:551 3.2/applet.js:443
+#: 5.4/applet.js:555
+#, fuzzy
 msgid ""
-"The Battery Level has fallen to your alert level\n"
+"The battery level has fallen to your alert level.\n"
 "\n"
-" either reconnect to a power source,\n"
-"\n"
-"close down your work and suspend or shutdown the machine\n"
-"\n"
+"Either connect to a power source or save or close down\n"
+"your work and suspend or shutdown the machine.\n"
 msgstr ""
 "Уровень заряда батареи упал до Вашего уровня предупреждений\n"
 "\n"
@@ -94,49 +104,57 @@ msgstr ""
 "или прекратите вашу работу и приостановите или выключите машину\n"
 "\n"
 
-#: 5.4/applet.js:566
+#: 5.4/applet.js:570
 msgid "Battery Critical - will suspend unless connected to power supply"
-msgstr "Критический уровень заряда, работа будет приостановлена, если не подлючить к сети"
+msgstr ""
+"Критический уровень заряда, работа будет приостановлена, если не подлючить к "
+"сети"
 
-#: 5.4/applet.js:585
+#: 5.4/applet.js:589
 msgid "Time to Empty:"
 msgstr "Время до разряда:"
 
-#: 5.4/applet.js:586
+#: 5.4/applet.js:590
 msgid "Time to Full:"
 msgstr "Время до заряда:"
 
-#: 5.4/applet.js:589 5.4/applet.js:636
+#: 5.4/applet.js:593 5.4/applet.js:640
 msgid "Current Charge:"
 msgstr "Процент Заряда:"
 
-#: 5.4/applet.js:589 3.2/applet.js:474
+#: 5.4/applet.js:593 3.2/applet.js:474
 msgid "Alert:"
 msgstr "Предупреждение:"
 
-#: 5.4/applet.js:589 3.2/applet.js:474
+#: 5.4/applet.js:593 3.2/applet.js:474
 msgid "Suspend:"
 msgstr "Приостановить:"
 
-#: 5.4/applet.js:636 3.2/applet.js:522
+#: 5.4/applet.js:640 3.2/applet.js:522
 msgid "Alert at:"
 msgstr "Оповещение по:"
 
-#: 5.4/applet.js:636 3.2/applet.js:522
+#: 5.4/applet.js:640 3.2/applet.js:522
 msgid "Suspend at:"
 msgstr "Приостановить на:"
 
-#: 5.4/applet.js:642
+#: 5.4/applet.js:646
 msgid "The battery level has been recharged to"
 msgstr "Батарея была заряжена до"
 
 #: 3.2/applet.js:160
+msgid "Some Dependencies not Installed"
+msgstr "Некоторые Зависимости не Установлены"
+
+#: 3.2/applet.js:160
 msgid ""
-"'upower', 'sox' and 'zenity' are required for this applet to have all its facilities including notifications and audible alerts .\n"
+"'upower', 'sox' and 'zenity' are required for this applet to have all its "
+"facilities including notifications and audible alerts .\n"
 "\n"
 "Please read the help file on how to install them."
 msgstr ""
-"'upower','sox' и 'zenity' необходимы чтобы апплет имел возможность получать информациб о батарее и показывать текстовые и звуковые уведомления.\n"
+"'upower','sox' и 'zenity' необходимы чтобы апплет имел возможность получать "
+"информациб о батарее и показывать текстовые и звуковые уведомления.\n"
 "Пожалуйста, прочтите README для инструкции по установке."
 
 #: 3.2/applet.js:193
@@ -148,7 +166,8 @@ msgid ""
 msgstr ""
 "Пользовательский звук уведомления о низком заряде батареи.\n"
 "\n"
-"Убедитесь что громкость установлена в разумных пределах, особенно в публичных местах.\n"
+"Убедитесь что громкость установлена в разумных пределах, особенно в "
+"публичных местах.\n"
 
 #: 3.2/applet.js:322
 msgid "Housekeeping and System Sub Menu"
@@ -190,9 +209,26 @@ msgstr ""
 "или прекратите вашу работу и приостановите или выключите машину\n"
 "\n"
 
+#: 3.2/applet.js:443
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"Уровень заряда батареи упал до Вашего уровня предупреждений\n"
+"\n"
+"либо подключите к источнику питания\n"
+"или прекратите вашу работу и приостановите или выключите машину\n"
+"\n"
+
 #: 3.2/applet.js:459
 msgid "Battery Critical will Suspend unless connected to mains"
-msgstr "Критический уровень заряда, работа будет приостановлена, если не подлючить к сети"
+msgstr ""
+"Критический уровень заряда, работа будет приостановлена, если не подлючить к "
+"сети"
 
 #: 3.2/applet.js:474
 msgid "Charge:"
@@ -203,7 +239,8 @@ msgid "Percentage Charge:"
 msgstr "Процент заряда:"
 
 #. metadata.json->description
-msgid "Displays Charge as Percentage and allows Alerts and Actions"
+#, fuzzy
+msgid "Displays charge as percentage and allows alerts and actions"
 msgstr "Показывает заряд в процентах и разрешенные предупреждения и действия"
 
 #. 5.4->settings-schema.json->General->title
@@ -266,8 +303,12 @@ msgstr "Интервал обновления для отображения"
 
 #. 5.4->settings-schema.json->refreshInterval-spinner->tooltip
 #. 3.2->settings-schema.json->refreshInterval-spinner->tooltip
-msgid "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine. This also governs the flash speed."
-msgstr "Увеличьте или уменьшите это значение счетчика, чтобы изменить интервал обновления - используйте медленное обновление, если у вас медленная машина."
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine. This also governs the flash speed."
+msgstr ""
+"Увеличьте или уменьшите это значение счетчика, чтобы изменить интервал "
+"обновления - используйте медленное обновление, если у вас медленная машина."
 
 #. 5.4->settings-schema.json->alertPercentage->units
 #. 5.4->settings-schema.json->recharged_alert_percentage->units
@@ -287,8 +328,13 @@ msgstr "Процент заряда батареи, при котором ото
 
 #. 5.4->settings-schema.json->alertPercentage->tooltip
 #. 3.2->settings-schema.json->alertPercentage->tooltip
-msgid "Percentage of Battery Charge at which Orange Warning Background is displayed - It is also shown and can be adjusted in the Applet left click menu"
-msgstr "Процент заряда батареи, при котором отображается предупреждение оранжевый фон - это также показано и может быть скорректирована в Апплета, левый клик меню"
+msgid ""
+"Percentage of Battery Charge at which Orange Warning Background is displayed "
+"- It is also shown and can be adjusted in the Applet left click menu"
+msgstr ""
+"Процент заряда батареи, при котором отображается предупреждение оранжевый "
+"фон - это также показано и может быть скорректирована в Апплета, левый клик "
+"меню"
 
 #. 5.4->settings-schema.json->recharged_alert->description
 msgid "Visible Alert when Recharging"
@@ -330,15 +376,19 @@ msgstr "Внешний Вид"
 
 #. 5.4->settings-schema.json->displayType->tooltip
 msgid ""
-"The following display options are available (including Compact, Compact Plus, and Icon Only for vertical panels):\n"
+"The following display options are available (including Compact, Compact "
+"Plus, and Icon Only for vertical panels):\n"
 "  Classic: Battery percentage with extended messages for horizontal panel\n"
 "  Classic Plus: Classic with the addition of a battery icon\n"
 "  Compact: Battery percentage without extended messages\n"
 "  Compact Plus: Compact with the addition of a battery icon\n"
-"  Icon Only: The battery icon on a colored background indicating the current status"
+"  Icon Only: The battery icon on a colored background indicating the current "
+"status"
 msgstr ""
-"Доступны следующие варианты отображения (включая Компактный, Компактный Плюс, только Значок для вертикальной ориентации):\n"
-" Классический: Процент заряда с дополнительными сообщениями для горизонтальной панели\n"
+"Доступны следующие варианты отображения (включая Компактный, Компактный "
+"Плюс, только Значок для вертикальной ориентации):\n"
+" Классический: Процент заряда с дополнительными сообщениями для "
+"горизонтальной панели\n"
 " Классический Плюс: Классический с значком батареи\n"
 " Компактный: Процент заряда без дополнительных сообщений\n"
 " Компактный Плюс: Компактный с добавлением значка батареи\n"
@@ -364,24 +414,36 @@ msgid "Append estimated time remaining to chosen display type"
 msgstr "Добавить рассчитанное время к выбранному типу отображения"
 
 #. 5.4->settings-schema.json->time_remaining_display->tooltip
-msgid "This will append an estimate to the above option for time remaining based on the amount of remaining battery power"
-msgstr "Это добавит рассчитанное время к указанной выше опции для оставшегося времени заряда"
+msgid ""
+"This will append an estimate to the above option for time remaining based on "
+"the amount of remaining battery power"
+msgstr ""
+"Это добавит рассчитанное время к указанной выше опции для оставшегося "
+"времени заряда"
 
 #. 5.4->settings-schema.json->time_remaining_toolbar->description
 msgid "Append estimated time remaining to toolbar menu"
 msgstr "Добавить время до разряда в панель инструментов меню"
 
 #. 5.4->settings-schema.json->time_remaining_toolbar->tooltip
-msgid "This will append an estimate to the toolbar menu for time remaining based on the amount of remaining battery power"
-msgstr "В меню панели инструментов будет добавлена информация о оставшемся заряде батареи"
+msgid ""
+"This will append an estimate to the toolbar menu for time remaining based on "
+"the amount of remaining battery power"
+msgstr ""
+"В меню панели инструментов будет добавлена информация о оставшемся заряде "
+"батареи"
 
 #. 5.4->settings-schema.json->time_remaining_tooltip->description
 msgid "Append estimated time remaining to tooltip"
 msgstr "Добавить оставшееся время заряда в всплывающую подсказку"
 
 #. 5.4->settings-schema.json->time_remaining_tooltip->tooltip
-msgid "This will append an estimate to the tooltip for time remaining based on the amount of remaining battery power"
-msgstr "Это добавит показ времени оставшегося заряда в всплывающую подсказку (при наведении мыши)"
+msgid ""
+"This will append an estimate to the tooltip for time remaining based on the "
+"amount of remaining battery power"
+msgstr ""
+"Это добавит показ времени оставшегося заряда в всплывающую подсказку (при "
+"наведении мыши)"
 
 #. 5.4->settings-schema.json->useBatteryLowSound->description
 #. 3.2->settings-schema.json->useBatteryLowSound->description
@@ -389,16 +451,21 @@ msgid "Provide audible alerts when Battery Low and at Shutdown Level"
 msgstr "Использовать звуковое уведомление при крайне низком заряде"
 
 #. 5.4->settings-schema.json->useBatteryLowSound->tooltip
-msgid "Must have `sox` installed. Limited number of sound file types supported (.oga and .wav)"
+msgid ""
+"Must have `sox` installed. Limited number of sound file types supported (."
+"oga and .wav)"
 msgstr "Должен быть установлен `sox`. Поддерживается только (.oga и .wav)"
 
 #. 5.4->settings-schema.json->chooseBatteryLowSound->description
 #. 3.2->settings-schema.json->chooseBatteryLowSound->description
-msgid "Allow choice of audible alert file when Battery Low and at Shutdown Level"
+msgid ""
+"Allow choice of audible alert file when Battery Low and at Shutdown Level"
 msgstr "Разрешить выбор звукового уведомления при низком заряде"
 
 #. 5.4->settings-schema.json->chooseBatteryLowSound->tooltip
-msgid "Must have `sox` installed. Limited number of sound file types supported in versions < 4.2"
+msgid ""
+"Must have `sox` installed. Limited number of sound file types supported in "
+"versions < 4.2"
 msgstr "Должен быть установлен `sox`. "
 
 #. 5.4->settings-schema.json->batteryLowSound->description
@@ -407,20 +474,29 @@ msgid "Choose sound file to use when Battery is Low"
 msgstr "Выберите звуковой файл для уведомления о низком заряде батареи"
 
 #. 5.4->settings-schema.json->batteryLowSound->tooltip
-msgid "Please ensure the volume is set sensibly in public places, especially if a long or loud file is specified"
+msgid ""
+"Please ensure the volume is set sensibly in public places, especially if a "
+"long or loud file is specified"
 msgstr "Пожалуйста, убедитесь что уровень громкости задан в разумных пределах"
 
 #. 5.4->settings-schema.json->batteryShutdownSound->description
 msgid "Sound file to use when Battery is at Shutdown Level"
-msgstr "Звуковой файл, который будет использоваться для уведомления о критическом заряде"
+msgstr ""
+"Звуковой файл, который будет использоваться для уведомления о критическом "
+"заряде"
 
 #. 5.4->settings-schema.json->batteryShutdownSound->tooltip
-msgid "Please ensure the volume is set sensibly in public places - do not specify a long or loud file at Shutdown"
+msgid ""
+"Please ensure the volume is set sensibly in public places - do not specify a "
+"long or loud file at Shutdown"
 msgstr "Пожалуйста, убедитесь что уровень громкости задан в разумных пределах"
 
 #. 5.4->settings-schema.json->notifyBatteryLowSound->description
-msgid "Provide notification when user specified sound file is in use (Recommended)"
-msgstr "Показывать уведомление когда заданный пользователем звуковой файл используется (рекомендуется)"
+msgid ""
+"Provide notification when user specified sound file is in use (Recommended)"
+msgstr ""
+"Показывать уведомление когда заданный пользователем звуковой файл "
+"используется (рекомендуется)"
 
 #. 5.4->settings-schema.json->notifyBatteryLowSound->tooltip
 msgid "To remind that the volume may need to be set sensibly in public places"
@@ -432,12 +508,14 @@ msgstr "Путь к системному каталогу батареи (/sys/,
 
 #. 5.4->settings-schema.json->customBatteryPath->tooltip
 msgid ""
-"Choose your own power_supply object e.g. for monitoring your secondary battery.\n"
+"Choose your own power_supply object e.g. for monitoring your secondary "
+"battery.\n"
 "\n"
 "Default:\n"
 "/sys/class/power_supply/BAT0"
 msgstr ""
-"Задайте пусть к информационному каталогу устройства. Для мониторинга текущей батареи.\n"
+"Задайте пусть к информационному каталогу устройства. Для мониторинга текущей "
+"батареи.\n"
 "\n"
 "По умолчанию\n"
 "/sys/class/power_supply/BAT0"
@@ -497,7 +575,8 @@ msgid "Display Mode"
 msgstr "Режим Отображения"
 
 #. 3.2->settings-schema.json->displayType->options
-msgid "Classic - Battery Percentage with extended messages for horizontal panel"
+msgid ""
+"Classic - Battery Percentage with extended messages for horizontal panel"
 msgstr ""
 
 #. 3.2->settings-schema.json->displayType->options
@@ -521,19 +600,28 @@ msgid "Type of Display in Toolbar"
 msgstr ""
 
 #. 3.2->settings-schema.json->displayType->tooltip
-msgid "This feature offers the Classic (original) display with optional battery icon and some more compact displays suitable for a vertical panel (CompactCompact Plus and Icon Only)"
+msgid ""
+"This feature offers the Classic (original) display with optional battery "
+"icon and some more compact displays suitable for a vertical panel "
+"(CompactCompact Plus and Icon Only)"
 msgstr ""
 
 #. 3.2->settings-schema.json->useBatteryLowSound->tooltip
-msgid "Must have Sox installed. Limited number of sound file types supported (.oga and .wav)"
+msgid ""
+"Must have Sox installed. Limited number of sound file types supported (.oga "
+"and .wav)"
 msgstr ""
 
 #. 3.2->settings-schema.json->chooseBatteryLowSound->tooltip
-msgid "Must have Sox installed. Limited number of sound file types supported in versions < 4.2"
+msgid ""
+"Must have Sox installed. Limited number of sound file types supported in "
+"versions < 4.2"
 msgstr ""
 
 #. 3.2->settings-schema.json->batteryLowSound->tooltip
-msgid "Please ensure the volume is set sensibly in public places especially if a long loud file is specifed"
+msgid ""
+"Please ensure the volume is set sensibly in public places especially if a "
+"long loud file is specifed"
 msgstr ""
 
 #. 3.2->settings-schema.json->batteryShutdownSound->description
@@ -541,15 +629,19 @@ msgid "Choose sound file to use when Battery is at Shutdown Level"
 msgstr ""
 
 #. 3.2->settings-schema.json->batteryShutdownSound->tooltip
-msgid "Please ensure the volume is set sensibly in public places - do not specify a long loud file at Shutdown"
+msgid ""
+"Please ensure the volume is set sensibly in public places - do not specify a "
+"long loud file at Shutdown"
 msgstr ""
 
 #. 3.2->settings-schema.json->notifyBatteryLowSound->description
-msgid "Provide Notification when user specified sound file is in use - Recommended"
+msgid ""
+"Provide Notification when user specified sound file is in use - Recommended"
 msgstr ""
 
 #. 3.2->settings-schema.json->notifyBatteryLowSound->tooltip
-msgid "To remind users that the volume may need to be set sensibly in public places"
+msgid ""
+"To remind users that the volume may need to be set sensibly in public places"
 msgstr ""
 
 #. 3.2->settings-schema.json->head3->description
@@ -561,7 +653,9 @@ msgid "Delete temporary files after upgrade to version 1.4"
 msgstr ""
 
 #. 3.2->settings-schema.json->deleteTempraryFiles->tooltip
-msgid "Versions prior to 1.4 used temporary files in the home directory. These are not needed any more and can be deleted."
+msgid ""
+"Versions prior to 1.4 used temporary files in the home directory. These are "
+"not needed any more and can be deleted."
 msgstr ""
 
 #: 5.4/suspendScript.sh:22

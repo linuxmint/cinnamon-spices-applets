@@ -317,6 +317,7 @@
       "title": "Recordings",
       "keys": [
         "recording-path",
+        "button-open-rec-folder",
         "button-rec-path-to-default",
         "recording-format",
         "recording-ends-auto"
@@ -1054,6 +1055,11 @@
     "select-dir": true,
     "default": ""
   },
+  "button-open-rec-folder": {
+    "type": "button",
+    "description": "Open the recordings folder",
+    "callback": "open_rec_folder"
+  },
   "button-rec-path-to-default": {
     "type": "button",
     "description": "Set this path to default one",
@@ -1069,7 +1075,8 @@
       "OGG": "ogg",
       "RAW": "raw",
       "WAV": "wav"
-    }
+    },
+    "tooltip": "Please note that this choice will have no effect on any current recording, but on subsequent ones."
   },
   "recording-ends-auto": {
     "type": "combobox",

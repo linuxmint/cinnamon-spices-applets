@@ -109,21 +109,25 @@ class NewTooltip {
         this.tooltip = new St.Label({
             name: 'Tooltip'
         });
-        this.tooltip.show_on_set_parent = false;
+        this.tooltip.show_on_set_parent = true;
         Main.uiGroup.add_actor(this.tooltip);
         this.tooltip.get_clutter_text().set_markup(this.text);
         this.tooltip.set_style('text-align: left;');
 
         let tooltipWidth = this.tooltip.get_allocation_box().x2 - this.tooltip.get_allocation_box().x1;
+        let tooltipHeight = this.tooltip.get_allocation_box().y2 - this.tooltip.get_allocation_box().y1;
         let monitor = Main.layoutManager.findMonitorForActor(this.actor);
         let tooltipLeft = this.xpos;
+        let tooltipTop = this.ypos;
         if (this.center_x) {
             tooltipLeft -= Math.floor(tooltipWidth / 3);
         }
         tooltipLeft = Math.max(tooltipLeft, monitor.x);
         tooltipLeft = Math.min(tooltipLeft, monitor.x + monitor.width - tooltipWidth);
+        tooltipTop = Math.max(tooltipTop, monitor.y);
+        tooltipTop = Math.min(tooltipTop, monitor.y + monitor.height - tooltipHeight);
 
-        this.tooltip.set_position(tooltipLeft, this.ypos);
+        this.tooltip.set_position(tooltipLeft, tooltipTop);
         this.tooltip.raise_top();
         this.tooltip.show();
     }

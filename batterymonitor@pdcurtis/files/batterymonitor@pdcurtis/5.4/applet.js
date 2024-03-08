@@ -98,7 +98,7 @@ MyApplet.prototype = {
                 "displayType",
                 this.on_settings_changed,
                 null);
-            
+
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 "iconTheme",
                 "iconTheme",
@@ -324,7 +324,7 @@ MyApplet.prototype = {
                     icon_type: St.IconType.FULLCOLOR,
                     icon_size: 36
                 });
-                Main.criticalNotify(_("Some Dependencies not Installed"), _("Both 'sox' and 'zenity' are required for this applet to have all of its functionality including notifications and audible alerts .\n\nPlease view the README for help on installing them."), icon);
+                Main.criticalNotify(_("Some dependencies not installed."), _("Both 'sox' and 'zenity' are required for this applet to have all of its functionality including notifications and audible alerts.\n\nPlease view the README for help on installing them.\n"), icon);
                 this.dependenciesMet = false;
             }
 
@@ -385,8 +385,8 @@ MyApplet.prototype = {
     },
 
     on_slider_changed: function (slider, value) {
-        this.alertPercentage = (value * 30) + 10; // This is our BIDIRECTIONAL setting - by updating our configuration file will also be updated
-
+        this.alertPercentage = Math.round((value * 30) + 10); // This is our BIDIRECTIONAL setting - by updating our configuration file will also be updated
+        this.updateUI();
     },
 
     // Build the Right Click Context Menu
@@ -441,8 +441,12 @@ MyApplet.prototype = {
             });
             this.menu.addMenuItem(this.menuitemInfo1);
 
+            this.sliderLabel = new PopupMenu.PopupMenuItem(_('Alert/Suspend:'), {
+                reactive: false
+            });
             this.slider = new PopupMenu.PopupSliderMenuItem(0);
             this.slider.connect("value-changed", Lang.bind(this, this.on_slider_changed));
+            this.menu.addMenuItem(this.sliderLabel);
             this.menu.addMenuItem(this.slider);
         } catch (e) {
             global.logError(e);
@@ -548,7 +552,7 @@ MyApplet.prototype = {
                         // Audible alert - type set earlier
                         if (this.useBatteryLowSound)
                             this.launcher.spawnv(['/usr/bin/play', this.batteryLowSound]);
-                        new ModalDialog.NotifyDialog(_("The Battery Level has fallen to your alert level\n\n either reconnect to a power source,\n\nclose down your work and suspend or shutdown the machine\n\n")).open();
+                        new ModalDialog.NotifyDialog(_("The battery level has fallen to your alert level.\n\nEither connect to a power source or save or close down\nyour work and suspend or shutdown the machine.\n")).open();
                     }
                 }
             }
@@ -580,7 +584,7 @@ MyApplet.prototype = {
             */
             // set Tooltip
 
-            this.time_string = this.time_remaining_display || this.time_remaining_tooltip || this.time_remaining_toolbar ?
+            this.time_string = (this.time_remaining_display || this.time_remaining_tooltip || this.time_remaining_toolbar) && this.batteryPercentage != 100 ?
                 (is_discharging ?
                     (this._timeToEmpty != 0 ? "\n" + _("Time to Empty:") + " (" + this.timeToString(this._timeToEmpty) + ")" : "") :
                     (this._timeToFull != 0 ? "\n" + _("Time to Full:") + " (" + this.timeToString(this._timeToFull) + ")" : "")) :
@@ -611,7 +615,7 @@ MyApplet.prototype = {
             if (!(this.displayType == "classic" || this.displayType == "classicPlus") || !this.isHorizontal)
                 this.batteryMessage = "";
 
-            this.time_display = this.time_remaining_display ?
+            this.time_display = this.time_remaining_display && this.batteryPercentage != 100 ?
                 (is_discharging ?
                     (this._timeToEmpty != 0 ? ` (${this.timeToString(this._timeToEmpty)})` : "") :
                     (this._timeToFull != 0 ? ` (${this.timeToString(this._timeToFull)})` : "")) :

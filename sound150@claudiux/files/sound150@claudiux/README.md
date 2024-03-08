@@ -32,6 +32,10 @@ Note that the icons are those of the system.
 
 An option in settings allows you to don't display colors.
 
+## Dependencies
+
+This applet requires *playerctl*. If this package is not installed, the user can install it using the 'Install playerctl' option in the menu. If this option is absent from the menu, this means that *playerctrl* is already installed.
+
 ## Settings
 
  * Settings can be accessed by right-clicking on this applet icon (Configure... option of the context menu).

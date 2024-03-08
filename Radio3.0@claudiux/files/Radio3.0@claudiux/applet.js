@@ -301,6 +301,7 @@ const USER_DOWNLOAD_DIR = get_user_special_dir(UserDirectory.DIRECTORY_DOWNLOAD)
 const YTDLP_UPDATE_BASH_SCRIPT = SCRIPTS_DIR + "/update-yt-dlp.sh";
 const MPV_BITRATE_BASH_SCRIPT = SCRIPTS_DIR + "/mpvWatchBitrate.sh";
 const MPV_TITLE_BASH_SCRIPT = SCRIPTS_DIR + "/mpvWatchTitle.sh";
+const DEL_SONG_ARTS_SCRIPT = SCRIPTS_DIR + "/del_song_arts.sh";
 const MPV_LUA_SCRIPT = SCRIPTS_DIR + "/mpvWatchTitle.lua";
 const MPV_PID_FILE = RUNTIME_DIR + "/mpv_radio_PID";
 const MPV_SOCKET = RUNTIME_DIR + "/mpvradiosocket";
@@ -770,50 +771,55 @@ const messageTray = new RadioMessageTray();
 const source = new RadioNotificationSource("Radio3.0");
 messageTray.add(source);
 
-class R3Button {
-    constructor(icon, tooltip, callback, small = false) {
-        this.actor = new Bin();
+//~ class R3Button {
+    //~ constructor(icon, tooltip, callback, small = false) {
+        //~ this.actor = new Bin();
 
-        this.button = new Button({
-          reactive: true,
-          can_focus: true,
-          style_class: "popup-menu-item",
-          style: "height:20px; width:20px; padding:10px!important"
-        });
-        this.button.connect('clicked', callback);
+        //~ this.button = new Button({
+          //~ reactive: true,
+          //~ can_focus: true,
+          //~ style_class: "popup-menu-item",
+          //~ style: "height:20px; width:20px; padding:10px!important"
+        //~ });
+        //~ this.button.connect('clicked', callback);
 
-        if (small)
-            this.button.add_style_pseudo_class("small");
+        //~ if (small)
+            //~ this.button.add_style_pseudo_class("small");
 
-        this.icon = new Icon({
-            icon_type: IconType.SYMBOLIC,
-            icon_name: icon
-        });
-        this.button.set_child(this.icon);
-        this.actor.add_actor(this.button);
+        //~ this.icon = new Icon({
+            //~ icon_type: IconType.SYMBOLIC,
+            //~ icon_name: icon
+        //~ });
+        //~ this.button.set_child(this.icon);
+        //~ this.actor.add_actor(this.button);
 
-        this.tooltip = new Tooltip(this.button, tooltip);
-    }
+        //~ this.tooltip = new Tooltip(this.button, tooltip);
+    //~ }
 
-    getActor() {
-        return this.actor;
-    }
+    //~ getActor() {
+        //~ return this.actor;
+    //~ }
 
-    setData(icon, tooltip) {
-        this.icon.icon_name = icon;
-        this.tooltip.set_text(tooltip);
-    }
+    //~ setData(icon, tooltip) {
+        //~ this.icon.icon_name = icon;
+        //~ this.tooltip.set_text(tooltip);
+    //~ }
 
-    setActive(status) {
-        this.button.change_style_pseudo_class("active", status);
-    }
+    //~ setActive(status) {
+        //~ this.button.change_style_pseudo_class("active", status);
+    //~ }
 
-    setEnabled(status) {
-        this.button.change_style_pseudo_class("insensitive", !status);
-        this.button.can_focus = status;
-        this.button.reactive = status;
-    }
-}
+    //~ setEnabled(status) {
+        //~ this.button.change_style_pseudo_class("insensitive", !status);
+        //~ this.button.can_focus = status;
+        //~ this.button.reactive = status;
+    //~ }
+
+    //~ destroy() {
+      //~ this.button.destroy();
+      //~ this.actor.destroy();
+    //~ }
+//~ }
 
 class R3WebpageMenuItem extends PopupBaseMenuItem {
   constructor(parent, score, params) {
@@ -946,8 +952,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     // Ensure right permissions and structure:
     spawnCommandLineAsync("bash -c 'cd "+ SCRIPTS_DIR + " && chmod 755 *.sh *.py'");
     spawnCommandLineAsync("bash -c 'cd "+ SCRIPTS_DIR + " && chmod 700 *.lua'");
-    if (!file_test(RADIO30_MUSIC_DIR, FileTest.EXISTS))
-      mkdir_with_parents(RADIO30_MUSIC_DIR, 0o755);
+
     if (!file_test(RADIO_LISTS_DIR, FileTest.EXISTS))
       mkdir_with_parents(RADIO_LISTS_DIR, 0o755);
     if (!file_test(JOBS_DIR, FileTest.EXISTS))
@@ -1213,6 +1218,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.populate_help_textviews()
   }
 
+  ensure_radio30_music_dir() {
+    if (!file_test(RADIO30_MUSIC_DIR, FileTest.EXISTS)) {
+      mkdir_with_parents(RADIO30_MUSIC_DIR, 0o755);
+      this.set_folders_icon(true);
+    }
+  }
+
   volume_near_icon() {
     if (this.show_volume_level_near_icon) {
       this.set_applet_label(""+this.percentage+"%")
@@ -1314,8 +1326,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     if (  recording_path.length !== 0 &&
           recording_path !== "file://"+RADIO30_MUSIC_DIR) {
       RADIO30_MUSIC_DIR = recording_path.slice("file://".length, recording_path.length);
-      this.rec_folder = "file://" + RADIO30_MUSIC_DIR;
     }
+    this.rec_folder = "file://" + RADIO30_MUSIC_DIR;
+    this.recording_path = ""+this.rec_folder;
+    this.ensure_radio30_music_dir();
     //~ log("RADIO30_MUSIC_DIR: "+RADIO30_MUSIC_DIR);
     //~ log("this.rec_folder: "+this.rec_folder);
   }
@@ -1401,7 +1415,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }));
   }
 
-  async set_folders_icon() {
+  async set_folders_icon(force=false) {
     let path_to_icon = DOT_CONFIG_DIR + "/icon.svg";
     let icon_attr = "metadata::custom-icon";
 
@@ -1421,12 +1435,14 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       // Set the right attribute:
       config_dir.set_attribute_string(icon_attr, path_to_icon, 0, null);
 
-      let radio30_music_dir = file_new_for_path(RADIO30_MUSIC_DIR);
-      // Remove old attributes:
-      radio30_music_dir.set_attribute_string('metadata::custom-icon', "", 0, null);
-      radio30_music_dir.set_attribute_string('metadata::custom-icon-name', "", 0, null);
-      // Set the right attribute:
-      radio30_music_dir.set_attribute_string(icon_attr, path_to_icon, 0, null);
+      if (force || (this.recording_path && this.recording_path.length > 0)) {
+        let radio30_music_dir = file_new_for_path(RADIO30_MUSIC_DIR);
+        // Remove old attributes:
+        radio30_music_dir.set_attribute_string('metadata::custom-icon', "", 0, null);
+        radio30_music_dir.set_attribute_string('metadata::custom-icon-name', "", 0, null);
+        // Set the right attribute:
+        radio30_music_dir.set_attribute_string(icon_attr, path_to_icon, 0, null);
+      }
     } catch(e) {
       logError(e)
     }
@@ -1905,11 +1921,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
     }
 
-    if (homepage.length === 0) {
+    //if (homepage.length === 0) {
       // Search on Radio Database
       // FIXME!
       //this.search_homepage_by_url_on_RDB(id);
-    }
+    //}
 
     radios = null;
     return homepage;
@@ -2155,7 +2171,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //log("!!!! make_menu: this.radios: "+JSON.stringify(this.radios, null, 2));
 
     // MINIMAL MENU:
-    if (this.radios == null || this.radios.length === 0) {
+    if (!this.radios || this.radios.length === 0) {
       //log("!!!! make_menu: MINIMAL MENU");
       this.menu.removeAll();
       this.currentMenuItem = null;
@@ -2206,7 +2222,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
 
       // SONG TITLE, BRAINZ LINK, YT LINK:
-      if (this.songTitle.length > 0) {
+      if (this.songTitle && this.songTitle.length > 0) {
         let title = this.songTitle.replace(/\//g, " & ");
         let query = fixedEncodeURIComponent(title);
         let proxy_option = "";
@@ -2258,43 +2274,44 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
           }
         }
 
-        let trackInfo = new BoxLayout({ style_class: 'sound-player-overlay', important: true, vertical: true });
-        let songBox = new PopupMenuSection();
+        //~ let trackInfo = new BoxLayout({ style_class: 'sound-player-overlay', important: true, vertical: true });
+        //~ let songBox = new PopupMenuSection();
 
-        let song_toolbar = new BoxLayout(
-          { style_class: "sound-player",
-            important: true,
-            vertical: true,
-            style: 'padding: 10px;',
-            x_align: Align.MIDDLE
-          }
-        );
+        //~ let song_toolbar = new BoxLayout(
+          //~ { style_class: "sound-player",
+            //~ important: true,
+            //~ vertical: true,
+            //~ style: 'padding: 10px;',
+            //~ x_align: Align.MIDDLE
+          //~ }
+        //~ );
 
-        songBox.addActor(song_toolbar, { expand: true });
+        //~ songBox.addActor(song_toolbar, { expand: true });
 
-        let songButtons = new Bin({ x_align: Align.MIDDLE });
+        //~ let songButtons = new Bin({ x_align: Align.MIDDLE });
 
-        let brainzBtn = new R3Button(
-          "audio-x-generic",
-          _("Infos on: %s").format(title),
-          Lang.bind(this, function() {
-            spawnCommandLineAsync("xdg-open " + brainz_link)
-          }),
-          false
-        );
+        //~ let brainzBtn = new R3Button(
+          //~ "audio-x-generic",
+          //~ _("Infos on: %s").format(title),
+          //~ Lang.bind(this, function() {
+            //~ spawnCommandLineAsync("xdg-open " + brainz_link)
+          //~ }),
+          //~ false
+        //~ );
 
-        let watchOnYT = new R3Button(
-          "media-playback-start",
-          _("Watch on YT"),
-          Lang.bind(this, function() {
-            spawnCommandLineAsync("xdg-open " + yt_watch_link);
-          }),
-          false
-        );
+        //~ let watchOnYT = new R3Button(
+          //~ "media-playback-start",
+          //~ _("Watch on YT"),
+          //~ Lang.bind(this, function() {
+            //~ spawnCommandLineAsync("xdg-open " + yt_watch_link);
+          //~ }),
+          //~ false
+        //~ );
 
-        song_toolbar.add_actor(songButtons);
-        songButtons.add_actor(brainzBtn.getActor());
-        songButtons.add_actor(watchOnYT.getActor());
+        //~ song_toolbar.add_actor(songButtons);
+        //~ songButtons.add_actor(brainzBtn.getActor());
+        //~ songButtons.add_actor(watchOnYT.getActor());
+
         //trackInfo.add_actor(songButtons);
         //~ songBox.set_child(song_toolbar);
 
@@ -2309,14 +2326,19 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         let menuitemHead2 = new TitleSeparatorMenuItem(_("Recently Played Stations:"), "pan-down");
         this.menu.addMenuItem(menuitemHead2);
 
+        var titles = [];
+
         var indexRecentRadios = 0;
         for (let id of this.recentRadios) {
           let title = ""+this.get_radio_name(id, "make_menu: recent radios");
+          if (titles.indexOf(title) > -1) continue;
 
-          if (title.length === 0 || title === "undefined" || title ==="null") {
+          if (!title || title.length === 0 || title === "undefined" || title ==="null") {
             to_remove_from_recentRadios.push(""+id);
             continue;
           }
+
+          titles.push(title);
 
           indexRecentRadios += 1;
           if (indexRecentRadios > this.recent_number)
@@ -2341,7 +2363,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
             item.setShowDot(true);
             let homepage = this.get_radio_homepage(id, "make_menu: recent radios");
             item_homepage = null;
-            if (homepage != 'null' && homepage.length > 0) {
+            if (homepage && homepage != 'null' && homepage.length > 0) {
               item_homepage = new PopupIconMenuItem(_("Visit the home page of this station"), "web-browser", IconType.SYMBOLIC, { reactive: true });
               item_homepage.connect('activate', () => { spawnCommandLineAsync(`xdg-open ${homepage}`) });
             }
@@ -2349,9 +2371,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
           this.menu.addMenuItem(item);
         }
+        titles = [];
+        titles = null;
       }
 
-      while (to_remove_from_recentRadios.length > 0) {
+      while (to_remove_from_recentRadios && to_remove_from_recentRadios.length > 0) {
         let to_remove = to_remove_from_recentRadios.shift();
         this.recentRadios.splice(this.recentRadios.indexOf(to_remove), 1);
       }
@@ -2399,11 +2423,11 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
         //~ this.menuCategories = [null];
         var indexOfLastCategory = null;
-        var i = 0, _length = this.radios.length;
+        var i = 0, _length = (this.radios) ? this.radios.length : 0;
         while (i < _length) {
           //~ global.log("lastCategory is null: "+(lastCategory == null));
           let title = ""+this.radios[i].name;
-          let id = ""+this.radios[i].url;
+          let id = (this.radios[i].url) ? ""+this.radios[i].url : "";
           let isCategory = (id.length === 0);
 
           if (isCategory) {
@@ -2453,9 +2477,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         let allRadiosMenu = new RadioPopupSubMenuMenuItem(_("My Radio Stations") + "  (%s)".format(""+this.number_of_stations));
         this.menu.addMenuItem(allRadiosMenu);
 
-        for (let i = 0, _length = this.radios.length; i < _length; i++) {
+        for (let i = 0, _length = (this.radios) ? this.radios.length : 0; i < _length; i++) {
           let title = ""+this.radios[i].name;
-          let id = ""+this.radios[i].url;
+          let id = (this.radios[i].url) ? ""+this.radios[i].url : "";
           let isCategory = id.length === 0;
           let reactive = !isCategory;
 
@@ -2494,7 +2518,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
               }
             }));
 
-            if (force && id.length > 0 && this.radioId === id)
+            if (force && id && id.length > 0 && this.radioId === id)
               this.menuItems[i].setShowDot(true);
 
             if (this.radioId === id && change_tooltip)
@@ -2915,6 +2939,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   change_selected_item() {
     //log("change_selected_item");
     var radios = this.settings.getValue("radios");
+    if (!radios) return;
 
     for (let i = 0, _length = radios.length; i < _length; i++) {
       if (radios[i].name == undefined || radios[i].url == undefined || radios[i].inc == undefined)
@@ -3011,7 +3036,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //log("stop_mpv_radio");
     let pid = this.get_mpv_pid();
 
-    if (this.radioId.length === 0 || pid == null) return;
+    if (!this.radioId || this.radioId.length === 0 || pid == null) return;
 
     this.update_radio_with_codec_and_bitrate(this.radioId, this.codec, this.bitrate);
 
@@ -3026,7 +3051,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.unmonitor_mpv_title();
 
     spawnCommandLine("kill -15 " + pid);
-    spawnCommandLine("rm -f %s %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE, `${SONG_ART_DIR}/R3SongArt*`));
+    spawnCommandLine("rm -f %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE));
+    spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
     file_set_contents(MPV_TITLE_FILE, "");
 
     this.change_symbolic_icon();
@@ -3179,6 +3205,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   start_recording() {
+    this.ensure_radio30_music_dir();
     if (!this.check_hd_space_left()) return;
 
     //log("start_recording");
@@ -3188,7 +3215,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     let title = this.songTitle;
     let date = DateTime.new_now_local().format("%F_%X").replace(/:/g, "-");
 
-    if (title.length === 0) {
+    if (!title || title.length === 0) {
       title = this._clean_str(this.get_radio_name(this.radioId, "start_recording"));
     }
 
@@ -3284,7 +3311,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     this.unmonitor_interfaces();
 
-    spawnCommandLine("rm -f %s %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE, `${SONG_ART_DIR}/R3SongArt*`));
+    //~ spawnCommandLine("rm -f %s %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE, `${SONG_ART_DIR}/R3SongArt*`));
+    spawnCommandLine("rm -f %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE));
+    spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
   }
 
   on_applet_clicked(event) {
@@ -3306,10 +3335,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       return
     }
 
-    if (this.radioId.length !== 0) {
+    if (this.radioId && this.radioId.length !== 0) {
       this.stop_mpv_radio();
     } else {
-      if (this.last_radio_listened_to.length > 0) {
+      if (this.last_radio_listened_to && this.last_radio_listened_to.length > 0) {
         this.stop_mpv_radio(false);
         this.start_mpv_radio(this.last_radio_listened_to);
       }
@@ -3464,7 +3493,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   listen_to_last_station() {
     let id = this.last_radio_listened_to;
 
-    if (this.switch_on_last_station_at_start_up && id.length > 0) {
+    if (this.switch_on_last_station_at_start_up && id && id.length > 0) {
       this.start_mpv_radio(id);
     }
 
@@ -3480,6 +3509,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   on_applet_added_to_panel() {
     // Install or update translations, if any:
     if (!are_translations_installed()) install_translations();
+
+    spawnCommandLineAsync("bash -c '"+DEL_SONG_ARTS_SCRIPT+"'");
 
     let subProcess = spawnCommandLineAsyncIO(SCRIPTS_DIR+"/get-score.sh", Lang.bind(this, (stdout, err, exitCode) => {
       try {
@@ -3633,7 +3664,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   on_button_radios_save_clicked() {
-    if (this.radios == null || this.radios.length === 0) {
+    if (!this.radios || this.radios.length === 0) {
       this.radio_notify(_("Nothing to save."));
       return;
     }
@@ -3690,7 +3721,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         //log("on_button_radios_restore_clicked: ids:"+ids);
         //log("on_button_radios_restore_clicked: defaults:"+defaults);
 
-        if (ids.length > 0 && json_contents.length > 0) {
+        if (ids.length > 0 && json_contents && json_contents.length > 0) {
           let new_radios = [];
           for (let entry of json_contents) {
             let new_station = {};
@@ -3764,7 +3795,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       var new_station = {};
       try {
 
-        if ((id != null) && (id.length > 0) && this.radiosHash[id]) {
+        if (id && (id.length > 0) && this.radiosHash[id]) {
           //log("NEW: "+i+"/"+nb_of_urls);
           let rh = this.radiosHash[id];
           new_station["inc"] = station.inc;
@@ -4464,7 +4495,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       IconType.SYMBOLIC
     );
     this.context_menu_item_openRecordingsFolder.connect("activate", Lang.bind(this, function(event) {
-      spawnCommandLineAsync(app_info_get_default_for_type('inode/directory', false).get_executable() + " " + this.rec_folder);
+      this.open_rec_folder()
     }));
 
     this._applet_context_menu.addMenuItem(this.context_menu_item_openRecordingsFolder);
@@ -4554,6 +4585,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
     }
 
+  }
+
+  open_rec_folder() {
+    spawnCommandLineAsync(app_info_get_default_for_type('inode/directory', false).get_executable() + " " + this.rec_folder);
   }
 
   _onStreamAdded(control, id) {

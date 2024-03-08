@@ -32,7 +32,6 @@ msgid "Suspend computer"
 msgstr "Számítógép felfüggesztése"
 
 #. settings-schema.json->suspend-header->description
-#, fuzzy
 msgid "Suspend computer settings"
 msgstr "Számítógép felfüggesztésének beállításai"
 
@@ -94,10 +93,9 @@ msgstr ""
 "szimbolikus ikon lesz használva."
 
 #. settings-schema.json->system-suspend-header->description
-#, fuzzy
 msgid "System suspend settings"
-msgstr "Számítógép felfüggesztésének beállításai"
+msgstr "Rendszer felfüggesztésének beállításai"
 
 #. settings-schema.json->config-power->description
 msgid "Open Power Management Settings"
-msgstr ""
+msgstr "Energiagazdálkodási beállítások megnyitása"
