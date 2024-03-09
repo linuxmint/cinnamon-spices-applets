@@ -111,12 +111,14 @@ class ControlButton {
         this.button = new St.Button();
         this.button.connect('clicked', callback);
 
-        if (small)
+        if (small) {
             this.button.add_style_pseudo_class("small");
+        }
 
         this.icon = new St.Icon({
             icon_type: St.IconType.SYMBOLIC,
-            icon_name: icon
+            icon_name: icon,
+            style_class: (small) ? 'popup-menu-icon' : ''
         });
         this.button.set_child(this.icon);
         this.actor.add_actor(this.button);
@@ -131,6 +133,10 @@ class ControlButton {
     setData(icon, tooltip) {
         this.icon.icon_name = icon;
         this.tooltip.set_text(tooltip);
+    }
+
+    setIconName(icon) {
+        this.icon.icon_name = icon;
     }
 
     setActive(status) {
@@ -148,6 +154,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
     constructor(applet, stream, tooltip, app_icon) {
         super(1*applet.volume.slice(0, -1));
         this.applet = applet;
+        this.oldValue = 1*applet.volume.slice(0, -1);
 
         if (tooltip)
             this.tooltipText = tooltip + ": ";
@@ -158,6 +165,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 
         this.connect("value-changed", () => this._onValueChanged());
 
+        //TODO: Replace icon by a ControlButton to mute/unmute.
         this.app_icon = app_icon;
         if (this.app_icon == null) {
             this.iconName = this.isMic ? "microphone-sensitivity-muted" : "audio-volume-muted";
@@ -167,8 +175,33 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             this.icon = new St.Icon({icon_name: this.app_icon, icon_type: St.IconType.FULLCOLOR, icon_size: 16*global.ui_scale});
         }
 
+        this.button = new ControlButton(
+            (this.iconName) ? this.iconName : this.app_icon,
+            _("Mute"),
+            () => {
+                let muted = false;
+                if (this._value) this.oldValue = this._value;
+                if (this.isMic) {
+                    this.applet.mute_in_switch.setToggleState(!this.applet.mute_in_switch.state);
+                    if (this.applet.mute_in_switch.state) muted = true;
+                } else {
+                    this.applet.mute_out_switch.setToggleState(!this.applet.mute_out_switch.state);
+                    if (this.applet.mute_out_switch.state) muted = true;
+                }
+                if (muted) {
+                    this.oldValue = this._value;
+                    this.setValue(0);
+                } else {
+                    this.setValue(this.oldValue);
+                }
+                this._onValueChanged();
+            },
+            true
+        );
+
         this.removeActor(this._slider);
-        this.addActor(this.icon, {span: 0});
+        //this.addActor(this.icon, {span: 0});
+        this.addActor(this.button.actor, {span: 0});
         this.addActor(this._slider, {span: -1, expand: true});
 
         this.connectWithStream(stream);
@@ -210,7 +243,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             //100% is magnetic:
             if (this.applet.magneticOn === true && volume != this.applet._volumeNorm && volume > this.applet._volumeNorm * (1 - VOLUME_ADJUSTMENT_STEP / 2) && volume < this.applet._volumeNorm * (1 + VOLUME_ADJUSTMENT_STEP / 2))
                 volume = this.applet._volumeNorm;
-
+            //Other 25% magnetized?
             if (this.applet.magneticOn === true && this.applet.magnetic25On === true) {
                 for (let i = 0.25; i < 1.5; i+=0.25) {
                     if (i==1) continue;
@@ -306,9 +339,12 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             this.tooltip.show();
         let iconName = this._volumeToIcon(value);
         if (this.app_icon == null) {
-            this.icon.icon_name = iconName;
+            this.icon.icon_name = iconName.replace('-with-mic-disabled', '');
+            this.button.setIconName(iconName.replace('-with-mic-disabled', ''));
+            this.applet.set_applet_icon_symbolic_name(iconName);
         }
         this.setValue(value);
+        if (this.isOutputSink) this.button.icon.style = this.applet.actor.style;
 
         // send data to applet
         this.emit("values-changed", iconName, percentage);
@@ -332,7 +368,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             else
                 icon = "overamplified";
         }
-        //~ if (this.applet.showMicMutedOnIcon && !this.isMic && (!this.applet.mute_in_switch || this.applet.mute_in_switch.state)) icon += "-with-mic-disabled";
+        if (this.applet.showMicMutedOnIcon && !this.isMic && (!this.applet.mute_in_switch || this.applet.mute_in_switch.state)) icon += "-with-mic-disabled";
 
         return this.isMic ? "microphone-sensitivity-" + icon : "audio-volume-" + icon;
     }
