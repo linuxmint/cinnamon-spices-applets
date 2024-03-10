@@ -337,14 +337,19 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         this.tooltip.set_text(this.tooltipText + percentage);
         if (this._dragging)
             this.tooltip.show();
-        let iconName = this._volumeToIcon(value);
+        const iconName = this._volumeToIcon(value);
+        const iconNameWithoutMic = iconName.replace('-with-mic-disabled', '');
         if (this.app_icon == null) {
-            this.icon.icon_name = iconName.replace('-with-mic-disabled', '');
-            this.button.setIconName(iconName.replace('-with-mic-disabled', ''));
-            this.applet.set_applet_icon_symbolic_name(iconName);
+            this.icon.icon_name = iconNameWithoutMic
+            this.button.setIconName(iconNameWithoutMic);
+            if (this.isOutputSink)
+                this.applet.set_applet_icon_symbolic_name(iconName);
         }
         this.setValue(value);
-        if (this.isOutputSink) this.button.icon.style = this.applet.actor.style;
+        if (this.isOutputSink) {
+            this.button.icon.style_class = "popup-menu-icon";
+            this.button.icon.style = (visible_value > 1) ? this.applet.actor.style : "";
+        }
 
         // send data to applet
         this.emit("values-changed", iconName, percentage);
