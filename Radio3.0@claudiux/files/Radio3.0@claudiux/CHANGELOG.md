@@ -1,3 +1,8 @@
+### v1.17.6~20240310
+  * Fixes #5571.
+  * OSD now shows the real volume level at startup.
+
+
 ### v1.17.5~20240306
   * Modifies the Recordings tab in settings, adding a button to open the Recordings folder.
 

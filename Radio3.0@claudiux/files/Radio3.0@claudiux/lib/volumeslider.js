@@ -49,7 +49,7 @@ function logError(error) {
  */
 class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
     constructor(applet, stream, tooltip, app_icon = null) {
-        super(0);
+        super(applet.percentage);
         this.applet = applet;
 
         //this.last_now = Date.now();
