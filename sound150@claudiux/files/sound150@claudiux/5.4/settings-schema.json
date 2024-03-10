@@ -99,6 +99,7 @@
       "title": "Shortcuts",
       "keys": [
         "keyOpen",
+        "redefine-volume-keybindings",
         "volume-mute",
         "volume-up",
         "volume-down"
@@ -286,19 +287,27 @@
     "tooltip": "Always show the 'Mute input' switch in the context menu.",
     "default": true
   },
+  "redefine-volume-keybindings": {
+    "type": "switch",
+    "description": "Redefine Volume Keyboard Shortcuts",
+    "default": false
+  },
   "volume-mute": {
     "type": "keybinding",
-    "default": "XF86AudioMute",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
     "description": "Volume Mute"
   },
   "volume-up": {
     "type": "keybinding",
-    "default": "XF86AudioRaiseVolume",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
     "description": "Volume Up"
   },
   "volume-down": {
     "type": "keybinding",
-    "default": "XF86AudioLowerVolume",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
     "description": "Volume Down"
   },
   "volume": {

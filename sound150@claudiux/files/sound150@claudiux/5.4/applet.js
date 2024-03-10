@@ -1207,6 +1207,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("volume", "volume");
         this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", this.volume_near_icon);
         this.settings.bind("showMicMutedOnIcon", "showMicMutedOnIcon", () => this._on_sound_settings_change());
+        this.settings.bind("redefine-volume-keybindings", "redefine_volume_keybindings", this._setKeybinding);
         this.settings.bind("volume-mute", "volume_mute", this._setKeybinding);
         this.settings.bind("volume-up", "volume_up", this._setKeybinding);
         this.settings.bind("volume-down", "volume_down", this._setKeybinding);
@@ -1398,16 +1399,19 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _setKeybinding() {
+        Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
+
+        if (!this.redefine_volume_keybindings) return;
+
         Main.keybindingManager.removeHotKey("media-keys-4");
         Main.keybindingManager.removeHotKey("media-keys-2");
-
-        Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
 
         Main.keybindingManager.removeHotKey("raise-volume");
         Main.keybindingManager.removeHotKey("lower-volume");
         Main.keybindingManager.removeHotKey("volume-mute");
         Main.keybindingManager.removeHotKey("volume-up");
         Main.keybindingManager.removeHotKey("volume-down");
+
         Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => this._volumeChange(Clutter.ScrollDirection.UP));
         Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => this._volumeChange(Clutter.ScrollDirection.DOWN));
         if (this.volume_mute.length > 2)
@@ -1449,14 +1453,17 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_applet_removed_from_panel() {
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
-
-        Main.keybindingManager.removeHotKey("raise-volume-" + this.instance_id);
-        Main.keybindingManager.removeHotKey("lower-volume-" + this.instance_id);
-        try {
-            Main.keybindingManager.removeHotKey("volume-mute");
-            Main.keybindingManager.removeHotKey("volume-up");
-            Main.keybindingManager.removeHotKey("volume-down");
-        } catch(e) {}
+        if (this.redefine_volume_keybindings) {
+            try {
+                Main.keybindingManager.removeHotKey("raise-volume-" + this.instance_id);
+                Main.keybindingManager.removeHotKey("lower-volume-" + this.instance_id);
+            } catch(e) {}
+            try {
+                Main.keybindingManager.removeHotKey("volume-mute");
+                Main.keybindingManager.removeHotKey("volume-up");
+                Main.keybindingManager.removeHotKey("volume-down");
+            } catch(e) {}
+        }
 
         if (this.hideSystray)
             this.unregisterSystrayIcons();
