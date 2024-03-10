@@ -1,3 +1,7 @@
+### v6.3.4~20240310
+  * Redefining volume keyboard shortcuts becomes optional.
+
+
 ### v6.3.3~20240310
   * Fixes definitively #5576.
 
