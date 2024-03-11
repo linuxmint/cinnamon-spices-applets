@@ -1,3 +1,6 @@
+### v6.3.5~20240311
+  * Take into account XML data from ZettaLite to get artist and title.
+
 ### v6.3.4~20240310
   * Redefining volume keyboard shortcuts becomes optional.
 
