@@ -1,3 +1,7 @@
+### v1.17.7~20240311
+  * Take into account XML data from ZettaLite to get Artist and Title.
+
+
 ### v1.17.6~20240310
   * Fixes #5571.
   * OSD now shows the real volume level at startup.
