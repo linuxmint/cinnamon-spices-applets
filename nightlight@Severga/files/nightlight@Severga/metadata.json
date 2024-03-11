@@ -4,6 +4,5 @@
     "description": "Screen night light activating applet",
     "hide-configuration": false,
     "max-instances": 1,
-    "author": "Severga",
-    "last-edited": 1710178524
+    "author": "Severga"
 }
