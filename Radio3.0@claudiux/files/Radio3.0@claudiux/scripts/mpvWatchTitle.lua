@@ -56,10 +56,10 @@ end
 
 function write_song(songname)
   new_songname = songname
-  postitle = string.find(new_songname, "xml")
-  if postitle then
-    new_songname = ""
-  end
+  --~ postitle = string.find(new_songname, "xml")
+  --~ if postitle then
+    --~ new_songname = ""
+  --~ end
   if new_songname == old_songname then return end
   old_songname = new_songname
   local file = io.open(title_file_path, "w")

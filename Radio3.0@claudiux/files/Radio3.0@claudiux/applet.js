@@ -177,6 +177,9 @@ const {
   criticalNotify
 } = require("./lib/checkDependencies");
 
+let HtmlEncodeDecode = require('./lib/htmlEncodeDecode');
+const { xml2json } = require('lib/xml2json.min');
+
 const FilesCsv = require("./lib/filesCsv");
 const FilesPls = require("./lib/filesPls");
 const FilesM3u = require("./lib/filesM3u");
@@ -219,6 +222,11 @@ validChars += "," + range("0".charCodeAt(0), "9".charCodeAt(0), 1).map((x) =>
 );
 validChars = validChars.replace(/,/g, "");
 validChars = Array.from(validChars);
+
+// To capitalize each word
+function capitalize_each_word(s) {
+    return s.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
+}
 
 function _get_system_natural_scroll() {
   var _SETTINGS_SCHEMA;
@@ -1663,6 +1671,31 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     //let title = title_obj.prop;
 
     if (title.length === 0 || (title.length > 0 && this.songTitle == title)) return;
+
+    if (title.includes("xml")) {
+      let xml_string = title.replace(/>\s*</g, "><"); // deletes all useless spaces.
+      xml_string = HtmlEncodeDecode.decode(xml_string);
+      let json_data = xml2json(xml_string);
+      if (json_data ["ZettaLite"]) {
+        var json_title = "";
+        var json_artist = "";
+        var found = false;
+        let events = json_data ["ZettaLite"]["LogEventCollection"]["LogEvent"];
+        for (let i; i<events.length; i++) {
+          if (events[i]["Type"].toLowerCase()==="song") {
+            json_title = ""+events[i]["Asset"]["Title"];
+            json_artist = ""+events[i]["Asset"]["Artist1"];
+            found = true;
+            break
+          }
+        }
+        if (found)
+          title = capitalize_each_word(json_artist) + " - " + capitalize_each_word(json_title);
+        else
+          title = "";
+      } else
+        title = "";
+    }
 
     //this.get_mpv_bitrate();
 
