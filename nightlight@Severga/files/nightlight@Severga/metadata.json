@@ -1,0 +1,9 @@
+{
+    "uuid": "nightlight@Severga",
+    "name": "Night Light",
+    "description": "Screen night light activating applet",
+    "hide-configuration": false,
+    "max-instances": 1,
+    "author": "Severga",
+    "last-edited": 1710178524
+}
