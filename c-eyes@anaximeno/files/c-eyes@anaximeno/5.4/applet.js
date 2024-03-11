@@ -444,9 +444,9 @@ class Eye extends Applet.Applet {
 			eye_color: foreground_color,
 			iris_color: foreground_color,
 			pupil_color: foreground_color,
-			line_width: this.eye_line_width,
 			is_eye_active: this.eye_activated,
-			padding: this.eye_vertical_padding,
+			line_width: (this.eye_line_width * global.ui_scale),
+			padding: (this.eye_vertical_padding * global.ui_scale),
 			lids_fill: this.fill_lids_color_painting,
 			bulb_fill: this.fill_bulb_color_painting,
 		};
@@ -492,12 +492,12 @@ class Eye extends Applet.Applet {
 
 	_eye_should_redraw() {
 		const [mouse_x, mouse_y, _] = global.get_pointer();
-		let it_should_redraw = true;
+		let should_redraw = true;
 
 		if (this._last_mouse_x == mouse_x && this._last_mouse_y == mouse_y) {
-			it_should_redraw = false;
+			should_redraw = false;
 		} else if (this._last_mouse_x == undefined || this._last_mouse_y == undefined) {
-			it_should_redraw = true;
+			should_redraw = true;
 		} else {
 			const dist = (x, y) => Math.sqrt(x * x + y * y);
 
@@ -508,20 +508,20 @@ class Eye extends Applet.Applet {
 			const dist_prod = dist(last_x, last_y) * dist(current_x, current_y);
 			const dot_prod = current_x * last_x + current_y * last_y;
 
-			if (dist_prod == 0)
-				return true;
-
-			const angle = Math.acos(dot_prod / dist_prod);
-
-			it_should_redraw = angle >= this.eye_repaint_angle;
+			if (dist_prod == 0) {
+				should_redraw = true;
+			} else {
+				const angle = Math.acos(dot_prod / dist_prod);
+				should_redraw = angle >= this.eye_repaint_angle;
+			}
 		}
 
-		if (it_should_redraw) {
+		if (should_redraw) {
 			this._last_mouse_x = mouse_x;
 			this._last_mouse_y = mouse_y;
 		}
 
-		return it_should_redraw;
+		return should_redraw;
 	}
 }
 
