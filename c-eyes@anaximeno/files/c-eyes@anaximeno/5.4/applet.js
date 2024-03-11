@@ -525,6 +525,6 @@ class Eye extends Applet.Applet {
 	}
 }
 
-function main(metadata, orientation, instanceId) {
-	return new Eye(metadata, orientation, instanceId);
+function main(metadata, orientation, panelHeight, instanceId) {
+	return new Eye(metadata, orientation, panelHeight, instanceId);
 }
