@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-12 21:59+0100\n"
-"PO-Revision-Date: 2024-03-08 16:11-0300\n"
+"PO-Revision-Date: 2024-03-12 19:13-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -176,7 +176,7 @@ msgstr "Ajustes de sonido"
 
 #: 5.4/applet.js:189
 msgid "Mute"
-msgstr ""
+msgstr "Silenciar"
 
 #: 5.4/applet.js:1372
 msgid "Easy Effects"
@@ -646,11 +646,11 @@ msgstr ""
 
 #. 5.4->settings-schema.json->redefine-volume-keybindings->description
 msgid "Redefine Volume Keyboard Shortcuts"
-msgstr ""
+msgstr "Redefinir los atajos de teclado de volumen"
 
 #. 5.4->settings-schema.json->pause-on-off->description
 msgid "Pause/Play toggle"
-msgstr ""
+msgstr "Pausar/Reproducir"
 
 #. 5.4->settings-schema.json->volume-mute->description
 msgid "Volume Mute"
