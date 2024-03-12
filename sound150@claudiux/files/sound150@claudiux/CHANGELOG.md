@@ -1,3 +1,6 @@
+### v6.4.0~20240312
+  * Adds keyboard shortcut Pause/Play.
+
 ### v6.3.5~20240311
   * Take into account XML data from ZettaLite to get artist and title.
 

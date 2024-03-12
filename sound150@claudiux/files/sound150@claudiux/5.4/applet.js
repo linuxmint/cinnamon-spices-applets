@@ -1247,6 +1247,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", this.volume_near_icon);
         this.settings.bind("showMicMutedOnIcon", "showMicMutedOnIcon", () => this._on_sound_settings_change());
         this.settings.bind("redefine-volume-keybindings", "redefine_volume_keybindings", this._setKeybinding);
+        this.settings.bind("pause-on-off", "pause_on_off", this._setKeybinding);
         this.settings.bind("volume-mute", "volume_mute", this._setKeybinding);
         this.settings.bind("volume-up", "volume_up", this._setKeybinding);
         this.settings.bind("volume-down", "volume_down", this._setKeybinding);
@@ -1450,9 +1451,13 @@ class Sound150Applet extends Applet.TextIconApplet {
         Main.keybindingManager.removeHotKey("volume-mute");
         Main.keybindingManager.removeHotKey("volume-up");
         Main.keybindingManager.removeHotKey("volume-down");
+        Main.keybindingManager.removeHotKey("pause");
 
         Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => this._volumeChange(Clutter.ScrollDirection.UP));
         Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => this._volumeChange(Clutter.ScrollDirection.DOWN));
+        if (this.pause_on_off.length > 2)
+            Main.keybindingManager.addHotKey("pause", this.pause_on_off,
+                () => this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote());
         if (this.volume_mute.length > 2)
             Main.keybindingManager.addHotKey("volume-mute", this.volume_mute, (...args) => this._mutedChanged(...args));
         if (this.volume_up.length > 2)
@@ -1501,6 +1506,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                 Main.keybindingManager.removeHotKey("volume-mute");
                 Main.keybindingManager.removeHotKey("volume-up");
                 Main.keybindingManager.removeHotKey("volume-down");
+                Main.keybindingManager.removeHotKey("pause");
             } catch(e) {}
         }
 
