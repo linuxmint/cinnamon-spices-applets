@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-17 18:39-0500\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-12 22:04-0400\n"
 "PO-Revision-Date: 2024-01-06 15:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,50 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
-
-#: applet.js:170 applet.js:463
-msgid "Detecting monitors..."
-msgstr "Monitorok észlelése..."
-
-#: applet.js:176
-msgid "Options"
-msgstr "Beállítások"
-
-#: applet.js:178
-msgid "Clear monitor cache"
-msgstr "A monitor gyorsítótárának törlése"
-
-#: applet.js:184
-msgid "Clear quick actions"
-msgstr "Gyors műveletek törlése"
-
-#: applet.js:197
-msgid "Help"
-msgstr "Súgó"
-
-#: applet.js:321
-msgid "Required \"ddcutil\" not found"
-msgstr "A kötelező \"ddcutil\" nem található"
-
-#: applet.js:325
-msgid "Error, \"ddcutil\" exit code "
-msgstr "Hiba, \"ddcutil\" kilépési kód "
-
-#: applet.js:329
-msgid "No capable monitors detected"
-msgstr "Nem észleltek megfelelő monitorokat"
-
-#: applet.js:455
-msgid "Refresh"
-msgstr "Frissítés"
-
-#. metadata.json->name
-msgid "Monitor Input Source"
-msgstr "Monitor bemeneti forrás"
-
-#. metadata.json->description
-msgid "Change your monitors video input source directly from the cinnamon panel"
-msgstr "Módosítsa a monitor videobemenetét közvetlenül a Cinnamon panelről"
 
 #: applet.js:51
 msgid "Ctrl+"
@@ -90,10 +47,55 @@ msgstr "Vissza  kattintás"
 msgid "Forward Click"
 msgstr "Előre kattintás"
 
-#: applet.js:158 applet.js:373 applet.js:375
+#: applet.js:158 applet.js:390 applet.js:392
 msgid "Monitor input sources"
 msgstr "Monitor bemeneti források"
 
-#: applet.js:369
+#: applet.js:170 applet.js:217 applet.js:480
+msgid "Detecting monitors..."
+msgstr "Monitorok észlelése..."
+
+#: applet.js:176
+msgid "Options"
+msgstr "Beállítások"
+
+#: applet.js:178
+msgid "Clear monitor cache"
+msgstr "A monitor gyorsítótárának törlése"
+
+#: applet.js:184
+msgid "Clear quick actions"
+msgstr "Gyors műveletek törlése"
+
+#: applet.js:197
+msgid "Help"
+msgstr "Súgó"
+
+#: applet.js:339
+msgid "Required \"ddcutil\" not found"
+msgstr "A kötelező \"ddcutil\" nem található"
+
+#: applet.js:343
+msgid "Error, \"ddcutil\" exit code "
+msgstr "Hiba, \"ddcutil\" kilépési kód "
+
+#: applet.js:347
+msgid "No capable monitors detected"
+msgstr "Nem észleltek megfelelő monitorokat"
+
+#: applet.js:386
 msgid "for"
 msgstr "ehhez:"
+
+#: applet.js:473
+msgid "Refresh"
+msgstr "Frissítés"
+
+#. metadata.json->name
+msgid "Monitor Input Source"
+msgstr "Monitor bemeneti forrás"
+
+#. metadata.json->description
+msgid ""
+"Change your monitors video input source directly from the cinnamon panel"
+msgstr "Módosítsa a monitor videobemenetét közvetlenül a Cinnamon panelről"

@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-28 10:34-0500\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-12 22:04-0400\n"
 "PO-Revision-Date: 2023-12-11 17:33+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -18,7 +19,40 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:170 applet.js:463
+#: applet.js:51
+msgid "Ctrl+"
+msgstr ""
+
+#: applet.js:54
+msgid "Shift+"
+msgstr ""
+
+#: applet.js:58
+msgid "Left Click"
+msgstr ""
+
+#: applet.js:60
+msgid "Middle Click"
+msgstr ""
+
+#: applet.js:62
+msgid "Right Click"
+msgstr ""
+
+#: applet.js:64
+msgid "Back Click"
+msgstr ""
+
+#: applet.js:66
+msgid "Forward Click"
+msgstr ""
+
+#: applet.js:158 applet.js:390 applet.js:392
+#, fuzzy
+msgid "Monitor input sources"
+msgstr "Sorgente di Ingresso Monitor"
+
+#: applet.js:170 applet.js:217 applet.js:480
 msgid "Detecting monitors..."
 msgstr "Rilevamento monitor..."
 
@@ -38,19 +72,23 @@ msgstr "Cancella azioni rapide"
 msgid "Help"
 msgstr "Aiuto"
 
-#: applet.js:321
+#: applet.js:339
 msgid "Required \"ddcutil\" not found"
 msgstr "Pacchetto \"ddcutil\" richiesto non trovato"
 
-#: applet.js:325
+#: applet.js:343
 msgid "Error, \"ddcutil\" exit code "
 msgstr "Errore, codice di uscita \"ddcutil\" "
 
-#: applet.js:329
+#: applet.js:347
 msgid "No capable monitors detected"
 msgstr "Nessun monitor compatibile rilevato"
 
-#: applet.js:455
+#: applet.js:386
+msgid "for"
+msgstr ""
+
+#: applet.js:473
 msgid "Refresh"
 msgstr "Aggiorna"
 
@@ -59,5 +97,8 @@ msgid "Monitor Input Source"
 msgstr "Sorgente di Ingresso Monitor"
 
 #. metadata.json->description
-msgid "Change your monitors video input source directly from the cinnamon panel"
-msgstr "Cambia la sorgente di ingresso video del tuo monitor direttamente dal pannello di Cinnamon"
+msgid ""
+"Change your monitors video input source directly from the cinnamon panel"
+msgstr ""
+"Cambia la sorgente di ingresso video del tuo monitor direttamente dal "
+"pannello di Cinnamon"
