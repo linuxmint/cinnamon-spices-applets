@@ -1674,27 +1674,28 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     if (title.includes("xml")) {
       let xml_string = title.replace(/>\s*</g, "><"); // deletes all useless spaces.
-      xml_string = HtmlEncodeDecode.decode(xml_string);
-      let json_data = xml2json(xml_string);
-      if (json_data ["ZettaLite"]) {
-        var json_title = "";
-        var json_artist = "";
-        var found = false;
-        let events = json_data ["ZettaLite"]["LogEventCollection"]["LogEvent"];
-        for (let i; i<events.length; i++) {
-          if (events[i]["Type"].toLowerCase()==="song") {
-            json_title = ""+events[i]["Asset"]["Title"];
-            json_artist = ""+events[i]["Asset"]["Artist1"];
-            found = true;
-            break
-          }
-        }
-        if (found)
-          title = capitalize_each_word(json_artist) + " - " + capitalize_each_word(json_title);
-        else
+      try {
+        xml_string = HtmlEncodeDecode.decode(xml_string);
+        let json_data = xml2json(xml_string);
+        if (json_data ["ZettaLite"]) {
+          let json_title = ""+json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Title"];
+          let json_artist = ""+json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Artist1"];
+          if (!json_title) json_title = "";
+          if (!json_artist) json_artist = "";
+          if (json_title && json_artist)
+            title = capitalize_each_word(json_artist) + " - " + capitalize_each_word(json_title);
+          else if(json_title)
+            title = capitalize_each_word(json_title);
+          else if(json_artist)
+            title = capitalize_each_word(json_artist);
+          else
+            title = "";
+        } else
           title = "";
-      } else
+      } catch(e) {
         title = "";
+        //~ logError("XML error: "+e);
+      }
     }
 
     //this.get_mpv_bitrate();
