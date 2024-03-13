@@ -282,7 +282,7 @@ class InputSourceApp extends Applet.IconApplet {
                   if (monitorCache[idx].serialNum == this.displays[i].serialNum && monitorCache[idx].productCode == this.displays[i].productCode) {
                      // Load the display settings from the persistent cache
                      //log( `Loading monitor from cache ${monitorCache[idx].name}` );
-                     this.displays.initilized = true;
+                     this.displays[i].initilized = true;
                      this.displays[i].name = monitorCache[idx].name;
                      this.displays[i].inputs = monitorCache[idx].inputs;
                      this.displays[i].inputNames = monitorCache[idx].inputNames;
