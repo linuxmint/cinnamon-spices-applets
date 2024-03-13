@@ -897,33 +897,34 @@ class Player extends PopupMenu.PopupMenuSection {
             this._title = metadata["xesam:title"].unpack();
             if (this._title.includes("xml")) {
                 let xml_string = this._title.replace(/>\s*</g, "><"); // deletes all useless spaces.
-                xml_string = HtmlEncodeDecode.decode(xml_string);
-                let json_data = xml2json(xml_string);
-                //~ log("json_data: "+JSON.stringify(json_data, null, 4), true);
-                if (json_data ["ZettaLite"]) {
-                    var json_title = "";
-                    var json_artist = "";
-                    var found = false;
-                    let events = json_data ["ZettaLite"]["LogEventCollection"]["LogEvent"];
-                    for (let i; i<events.length; i++) {
-                        if (events[i]["Type"].toLowerCase()==="song") {
-                            json_title = ""+events[i]["Asset"]["Title"];
-                            json_artist = ""+events[i]["Asset"]["Artist1"];
-                            found = true;
-                            break
+
+                try {
+                    xml_string = HtmlEncodeDecode.decode(xml_string);
+                    let json_data = xml2json(xml_string);
+                    //~ log("json_data: "+JSON.stringify(json_data, null, 4), true);
+                    if (json_data["ZettaLite"]) {
+                        //~ log("ZettaLite data!!!", true);
+                        let json_title = ""+json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Title"];
+                        let json_artist = ""+json_data["ZettaLite"]["LogEventCollection"]["LogEvent"][0]["Asset"]["Artist1"];
+                        //~ log("json_title: "+json_title, true);
+                        //~ log("json_artist: "+json_artist, true);
+                        if (json_title) {
+                            this._title = capitalize_each_word(json_title);
+                        } else {
+                            this._title = _("Unknown Title");
                         }
-                    }
-                    if (found) {
-                        this._title = capitalize_each_word(json_title);
-                        this._artist = capitalize_each_word(json_artist);
-                        this.artistLabel.set_text(this._artist);
-                    } else {
+                        if (json_artist) {
+                            this._artist = capitalize_each_word(json_artist);
+                            this.artistLabel.set_text(this._artist);
+                        } else {
+                            this._artist = _("Unknown Artist");
+                        }
+                    } else
                         this._title = _("Unknown Title");
-                        this._artist = _("Unknown Artist");
-                        this.artistLabel.set_text(this._artist);
-                    }
-                } else
+                } catch(e) {
+                    //~ logError("XML error: "+e);
                     this._title = _("Unknown Title");
+                }
             }
             else if (this._title.includes(" - ") && this._artist == _("Unknown Artist")) {
                 [this._artist, this._title] = this._title.split(" - ");
