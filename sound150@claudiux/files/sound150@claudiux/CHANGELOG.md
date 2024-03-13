@@ -1,3 +1,6 @@
+### v6.4.1~20240313
+  * Bugfixes about ZettaLite data.
+
 ### v6.4.0~20240312
   * Adds keyboard shortcut Pause/Play.
 
