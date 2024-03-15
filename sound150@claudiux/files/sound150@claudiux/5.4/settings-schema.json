@@ -27,14 +27,15 @@
       "type": "page",
       "title": "Sound",
       "sections": [
-        "section5"
+        "section5",
+        "section6"
       ]
     },
     "page_shortcuts": {
       "type": "page",
       "title": "Shortcuts",
       "sections": [
-        "section6"
+        "section7"
       ]
     },
     "section1": {
@@ -95,6 +96,14 @@
       ]
     },
     "section6": {
+      "type": "section",
+      "dependency": "soundATcinnamonDOTorg_is_loaded",
+      "title": "Remove incompatible applets",
+      "keys": [
+        "remove_soundATcinnamonDOTorg"
+      ]
+    },
+    "section7": {
       "type": "section",
       "title": "Shortcuts",
       "keys": [
@@ -320,5 +329,18 @@
   "volume": {
     "type": "generic",
     "default": "50%"
+  },
+  "mic-level": {
+    "type": "generic",
+    "default": "50%"
+  },
+  "soundATcinnamonDOTorg_is_loaded": {
+    "type": "generic",
+    "default": false
+  },
+  "remove_soundATcinnamonDOTorg": {
+    "type": "button",
+    "description": "Remove from panel the sound@cinnamon.org applet",
+    "callback": "_on_remove_soundATcinnamonDOTorg_from_panels"
   }
 }

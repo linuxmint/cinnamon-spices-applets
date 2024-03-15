@@ -1,3 +1,7 @@
+### v6.4.2~20240315
+  * Allows the user to remove the sound@cinnamon.org applet from the panel, as it is incompatible with sound150@claudiux.
+  * Fixed bugs concerning icon adaptation to volume or microphone level.
+
 ### v6.4.1~20240313
   * Bugfixes about ZettaLite data.
 
