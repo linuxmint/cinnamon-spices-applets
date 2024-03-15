@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-15 17:59+0100\n"
-"PO-Revision-Date: 2024-03-12 19:13-0300\n"
+"PO-Revision-Date: 2024-03-15 15:03-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -185,7 +185,7 @@ msgstr "Efectos sencillos"
 #: 5.4/applet.js:1453
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
-msgstr ""
+msgstr "¿Estás seguro de que quieres eliminar '%s'?"
 
 #: 5.4/applet.js:1940
 msgid "The 'playerctl' package is required!"
@@ -200,9 +200,8 @@ msgid "Reload this applet"
 msgstr "Recargar este applet"
 
 #: 5.4/applet.js:2088
-#, fuzzy
 msgid "Remove sound applet"
-msgstr "Recargar este applet"
+msgstr "Quitar el applet de sonido"
 
 #: 5.4/applet.js:2097
 msgid "Install playerctl"
@@ -600,7 +599,7 @@ msgstr "Información sobre herramientas"
 
 #. 5.4->settings-schema.json->section6->title
 msgid "Remove incompatible applets"
-msgstr ""
+msgstr "Eliminar los applets incompatibles"
 
 #. 5.4->settings-schema.json->middleShiftClickAction->description
 msgid "Action on shift+middle click"
@@ -680,4 +679,4 @@ msgstr "Bajar el volumen"
 
 #. 5.4->settings-schema.json->remove_soundATcinnamonDOTorg->description
 msgid "Remove from panel the sound@cinnamon.org applet"
-msgstr ""
+msgstr "Quitar del panel el applet sound@cinnamon.org"
