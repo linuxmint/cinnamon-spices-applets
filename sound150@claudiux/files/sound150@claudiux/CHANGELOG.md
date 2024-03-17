@@ -1,3 +1,6 @@
+### v6.4.3~20240317
+  * Removes CR errors (A wrong style had been applied; style=null should be used instead of style="").
+
 ### v6.4.2~20240315
   * Allows the user to remove the sound@cinnamon.org applet from the panel, as it is incompatible with sound150@claudiux.
   * Fixed bugs concerning icon adaptation to volume or microphone level.

@@ -111,7 +111,7 @@ x = _("Stopped");
 
 let VOLUME_ADJUSTMENT_STEP = 0.02; /* Volume adjustment step in % */
 
-const ICON_SIZE = 28*global.ui_scale;
+const ICON_SIZE = Math.trunc(28*global.ui_scale);
 
 const CINNAMON_DESKTOP_SOUNDS = "org.cinnamon.desktop.sound";
 const MAXIMUM_VOLUME_KEY = "maximum-volume";
@@ -164,10 +164,10 @@ class ControlButton {
 
 class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
     constructor(applet, stream, tooltip, app_icon) {
-        const isMic = tooltip == _("Microphone");
-        super(isMic ? 1*applet.mic_level.slice(0, -1) : 1*applet.volume.slice(0, -1));
+        const startLevel = (tooltip == _("Microphone")) ? 1*applet.mic_level.slice(0, -1) : 1*applet.volume.slice(0, -1);
+        super(startLevel);
         this.applet = applet;
-        this.oldValue = isMic ? 1*applet.mic_level.slice(0, -1) : 1*applet.volume.slice(0, -1);
+        this.oldValue = startLevel;
 
         if (tooltip)
             this.tooltipText = tooltip + ": ";
@@ -181,10 +181,18 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         this.app_icon = app_icon;
         if (this.app_icon == null) {
             this.iconName = this.isMic ? "microphone-sensitivity-muted" : "audio-volume-muted";
-            this.icon = new St.Icon({icon_name: this.iconName, icon_type: St.IconType.SYMBOLIC, icon_size: 16*global.ui_scale});
+            this.icon = new St.Icon({
+                icon_name: this.iconName,
+                icon_type: St.IconType.SYMBOLIC,
+                icon_size: Math.trunc(16*global.ui_scale)}
+            );
         }
         else {
-            this.icon = new St.Icon({icon_name: this.app_icon, icon_type: St.IconType.FULLCOLOR, icon_size: 16*global.ui_scale});
+            this.icon = new St.Icon({
+                icon_name: this.app_icon,
+                icon_type: St.IconType.FULLCOLOR,
+                icon_size: Math.trunc(16*global.ui_scale)
+            });
         }
 
         this.button = new ControlButton(
@@ -360,7 +368,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         this.setValue(value);
         if (this.isOutputSink) {
             this.button.icon.style_class = "popup-menu-icon";
-            this.button.icon.style = (visible_value > 1) ? this.applet.actor.style : "";
+            this.button.icon.style = (visible_value > 1) ? this.applet.actor.style : null;
         }
 
         // send data to applet
@@ -617,9 +625,11 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
             iconName = "audio-x-generic";
         }
 
-        let slider = new VolumeSlider(applet, stream, name, iconName);
-        slider._slider.style = "min-width: 6em;";
-        this.addMenuItem(slider);
+        this.slider = new VolumeSlider(applet, stream, name, iconName);
+        //slider._slider.style = "min-width: 6em;";
+        //~ slider._slider.style = "width: 6em;";
+        this.slider._slider.style = "width: 6em;";
+        this.addMenuItem(this.slider);
     }
 }
 
@@ -679,7 +689,10 @@ class Player extends PopupMenu.PopupMenuSection {
 
         // Player info
         this._playerBox = new St.BoxLayout();
-        this.playerIcon = new St.Icon({icon_type: St.IconType.SYMBOLIC, style_class: "popup-menu-icon"});
+        this.playerIcon = new St.Icon({
+            icon_type: St.IconType.SYMBOLIC,
+            style_class: "popup-menu-icon"
+        });
         this.playerLabel = new St.Label({
             y_expand: true, y_align: Clutter.ActorAlign.CENTER,
             x_expand: true, x_align: Clutter.ActorAlign.START
@@ -701,16 +714,21 @@ class Player extends PopupMenu.PopupMenuSection {
         this._trackCover = new St.Bin({x_align: St.Align.MIDDLE});
         this._trackCoverFile = this._trackCoverFileTmp = false;
         this.coverBox = new Clutter.Box();
-        let l = new Clutter.BinLayout({x_align: Clutter.BinAlignment.FILL, y_align: Clutter.BinAlignment.END});
-        this.coverBox.set_layout_manager(l);
+        let l = new Clutter.BinLayout({
+            x_align: Clutter.BinAlignment.FILL,
+            y_align: Clutter.BinAlignment.END
+        });
+        try {
+            this.coverBox.set_layout_manager(l);
+        } catch(e) {logError("Unable to set_layout_manager(l)!: "+e)}
 
         // Cover art
         this.cover = new St.Icon({
-                                    icon_name: "media-optical",
-                                    icon_size: 300*global.ui_scale,
-                                    //icon_type: St.IconType.FULLCOLOR
-                                    icon_type: St.IconType.SYMBOLIC
-                                });
+            icon_name: "media-optical",
+            icon_size: Math.trunc(300*global.ui_scale),
+            //icon_type: St.IconType.FULLCOLOR
+            icon_type: St.IconType.SYMBOLIC
+        });
         this.coverBox.add_actor(this.cover);
 
         this._cover_load_handle = 0;
@@ -723,10 +741,11 @@ class Player extends PopupMenu.PopupMenuSection {
         //this.trackInfo = new St.BoxLayout({style_class: 'sound-player-overlay', style: 'height: auto;', important: true, vertical: true});
         // Removing "style: 'height: auto;'" avoids warning messages "St-WARNING **: Ignoring length property that isn't a number at line 1, col 9"
         this.trackInfo = new St.BoxLayout({
-                                            style_class: 'sound-player-overlay',
-                                            important: true,
-                                            vertical: true
-                                        });
+            style_class: 'sound-player-overlay',
+            style: 'height: 6em;', // replaces 'height: auto;'
+            important: true,
+            vertical: true
+        });
         let artistInfo = new St.BoxLayout();
         let artistIcon = new St.Icon({
                                         icon_type: St.IconType.SYMBOLIC,
@@ -752,7 +771,9 @@ class Player extends PopupMenu.PopupMenuSection {
         this.coverBox.add_actor(this.trackInfo);
 
         this._trackCover.set_child(this.coverBox);
-        this.vertBox.add_actor(this._trackCover);
+        try {
+            this.vertBox.add_actor(this._trackCover);
+        } catch(e) {logError("Unable to add actor this._trackCover to this.vertBox!: "+e)}
 
         // Playback controls
         let trackControls = new St.Bin({x_align: St.Align.MIDDLE});
@@ -768,11 +789,14 @@ class Player extends PopupMenu.PopupMenuSection {
         this._nextButton = new ControlButton("media-skip-forward",
             _("Next"),
             () => this._mediaServerPlayer.NextRemote());
-        this.trackInfo.add_actor(trackControls);
+
+        try {
+            this.trackInfo.add_actor(trackControls);
+        } catch(e) {logError("Unable to add actor trackControls to this.trackInfo!")}
 
         this.controls = new St.BoxLayout();
         if (St.Widget.get_default_direction() === St.TextDirection.RTL)
-            this.controls.set_pack_start(true)
+            this.controls.set_pack_start(true);
 
         this.controls.add_actor(this._prevButton.getActor());
         this.controls.add_actor(this._playButton.getActor());
@@ -1126,7 +1150,7 @@ class Player extends PopupMenu.PopupMenuSection {
                                         style_class: 'sound-player-generic-coverart',
                                         important: true,
                                         icon_name: "media-optical",
-                                        icon_size: 300,
+                                        icon_size: Math.trunc(300*global.ui_scale),
                                         //icon_type: St.IconType.FULLCOLOR
                                         icon_type: St.IconType.SYMBOLIC
                                     });
@@ -1136,19 +1160,28 @@ class Player extends PopupMenu.PopupMenuSection {
             this._cover_path = cover_path;
             this._applet._icon_path = cover_path; // Added
             this._applet.setAppletIcon(this._applet.player, cover_path); // Added
-            this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(cover_path, 300, 300, this._on_cover_loaded.bind(this));
+            this._cover_load_handle = St.TextureCache.get_default().load_image_from_file_async(
+                cover_path,
+                Math.trunc(300*global.ui_scale),
+                Math.trunc(300*global.ui_scale),
+                this._on_cover_loaded.bind(this)
+            );
             this._applet.setIcon();
 
 
             //~ log("this._cover_path: "+this._cover_path, true);
             try {
-                let pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(this._cover_path, 300, 300);
+                let pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
+                    this._cover_path,
+                    Math.trunc(300*global.ui_scale),
+                    Math.trunc(300*global.ui_scale)
+                );
                 if (pixbuf) {
                     let image = new Clutter.Image();
                     image.set_data(
                         pixbuf.get_pixels(),
-                        //pixbuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
-                        pixbuf.get_has_alpha() ? 19 : 2,
+                        pixbuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGB_888,
+                        //~ pixbuf.get_has_alpha() ? 19 : 2,
                         pixbuf.get_width(),
                         pixbuf.get_height(),
                         pixbuf.get_rowstride()
@@ -1156,10 +1189,24 @@ class Player extends PopupMenu.PopupMenuSection {
                     this.cover = image.get_texture();
                 }
                 if (this._applet.keepAlbumAspectRatio) {
-                    this.cover = new Clutter.Texture({ width: 300, keep_aspect_ratio: true, filter_quality: 2, filename: cover_path });
+                    //TODO: Replace Texture by Image.
+                    this.cover = new Clutter.Texture({
+                        width: Math.trunc(300*global.ui_scale),
+                        keep_aspect_ratio: true,
+                        //filter_quality: 2,
+                        filter_quality: Clutter.Texture.QUALITY_HIGH,
+                        filename: cover_path
+                    });
                 }
                 else {
-                    this.cover = new Clutter.Texture({ width: 300, height: 300, keep_aspect_ratio: false, filter_quality: 2, filename: cover_path });
+                    //TODO: Replace Texture by Image.
+                    this.cover = new Clutter.Texture({
+                        width: Math.trunc(300*global.ui_scale),
+                        height: Math.trunc(300*global.ui_scale),
+                        keep_aspect_ratio: false,
+                        filter_quality: 2,
+                        filename: cover_path
+                    });
                 }
             } catch(e) {}
         }
@@ -1178,8 +1225,8 @@ class Player extends PopupMenu.PopupMenuSection {
         // Make sure any oddly-shaped album art doesn't affect the height of the applet popup
         // (and move the player controls as a result).
         //~ log("actor size (wxh): "+actor.width+"x"+actor.height, true);
-        actor.set_margin_bottom(Math.max(0, Math.trunc((300 - actor.height)*global.ui_scale)));
-        actor.set_margin_left(Math.max(0, Math.trunc((300 - actor.width)*global.ui_scale)));
+        actor.set_margin_bottom(Math.max(0, Math.trunc(300*global.ui_scale - actor.height)));
+        actor.set_margin_left(Math.max(0, Math.trunc(300*global.ui_scale - actor.width)));
 
         this.cover = actor;
         this.coverBox.add_actor(this.cover);
@@ -1200,7 +1247,7 @@ class Player extends PopupMenu.PopupMenuSection {
 
         try {
             PopupMenu.PopupMenuSection.prototype.destroy.call(this);
-        } catch(e) {}
+        } catch(e) {logError("Error destroying Player!!!: "+e)}
     }
 }
 
@@ -1214,7 +1261,9 @@ class MediaPlayerLauncher extends PopupMenu.PopupBaseMenuItem {
         this.addActor(this.label);
         this._icon = app.create_icon_texture(ICON_SIZE);
         this._icon_bin = new St.Bin({ x_align: St.Align.END, child: this._icon });
-        this.addActor(this._icon_bin, { expand: true, span: -1, align: St.Align.END });
+        try {
+            this.addActor(this._icon_bin, { expand: true, span: -1, align: St.Align.END });
+        } catch(e) {logError("Unable to add actor this._icon_bin to this!: "+e)}
 
         this.connect("activate", (event) => this._onActivate(event));
     }
@@ -1516,8 +1565,10 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         if (!this.redefine_volume_keybindings) return;
 
-        Main.keybindingManager.removeHotKey("media-keys-4");
-        Main.keybindingManager.removeHotKey("media-keys-2");
+        try {
+            Main.keybindingManager.removeHotKey("media-keys-4");
+            Main.keybindingManager.removeHotKey("media-keys-2");
+        } catch(e) {logError("Unable to removeHotKey media-keys: "+e)}
 
         Main.keybindingManager.removeHotKey("raise-volume");
         Main.keybindingManager.removeHotKey("lower-volume");
@@ -1597,7 +1648,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._dbus.disconnectSignal(this._ownerChangedId);
 
         for (let i in this._players)
-            this._players[i].destroy();
+            if (this._players[i])
+                this._players[i].destroy();
     }
 
     on_applet_clicked(event) {
@@ -2195,34 +2247,39 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (!this.themeNode) {
             this.themeNode = this.actor.get_theme_node();
         }
-        this.defaultColor = this.themeNode.get_foreground_color();
-        let color = "rgba(" + this.defaultColor.red + "," + this.defaultColor.green + "," + this.defaultColor.blue + "," + this.defaultColor.alpha + ")";
+        let defaultColor = this.themeNode.get_foreground_color();
+        let color = "rgba(" + defaultColor.red + "," + defaultColor.green + "," + defaultColor.blue + "," + defaultColor.alpha + ")";
 
         let changeColor = false;
         if (this.adaptColor) {
             let pc = Math.round(percentage.split("%")[0]);
             if (pc > 130) {
-                color = this.color131_150; //"red";
+                color = this.color131_150; //Default is "red";
                 changeColor = true;
             }
             else if (pc > 115) {
-                color = this.color116_130; //"orange";
+                color = this.color116_130; //Default is "orange";
                 changeColor = true;
             }
             else if (pc > 100) {
-                color = this.color101_115; // "yellow";
+                color = this.color101_115; //Default is "yellow";
                 changeColor = true;
             }
         }
         let _style = "color: %s;".format(color);
-        this.actor.style = _style;
 
-        if (changeColor) {
-            this._outputVolumeSection.icon.style = _style;
-            //~ this._outputVolumeSection.style = _style;
-        } else {
-            this._outputVolumeSection.icon.style = this._inputVolumeSection.icon.style
-        }
+        try {
+            this.actor.style = _style;
+
+            if (changeColor) {
+                if (this._outputVolumeSection && this._outputVolumeSection.icon)
+                    this._outputVolumeSection.icon.style = _style;
+                //~ this._outputVolumeSection.style = _style;
+            } else {
+                if (this._inputVolumeSection && this._inputVolumeSection.icon)
+                    this._outputVolumeSection.icon.style = this._inputVolumeSection.icon.style
+            }
+        } catch(e) {logError("Problem changing color!!!: "+e)}
     }
 
     _inputValuesChanged(actor, iconName, percentage) {
@@ -2280,7 +2337,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         let bin = new St.Bin({ x_align: St.Align.END, style_class: 'popup-inactive-menu-item' });
         let label = new St.Label({ text: device.origin });
         bin.add_actor(label);
-        item.addActor(bin, { expand: true, span: -1, align: St.Align.END });
+        try {
+            item.addActor(bin, { expand: true, span: -1, align: St.Align.END });
+        } catch(e) {logError("Unable to add actor bin to item!: "+e)}
 
         let selectItem = this["_select" + type[0].toUpperCase() + type.slice(1) + "DeviceItem"];
         selectItem.menu.addMenuItem(item);
