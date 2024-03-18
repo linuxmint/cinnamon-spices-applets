@@ -409,7 +409,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 }
 
 class Seeker extends Slider.Slider {
-    constructor(mediaServerPlayer, props, playerName) {
+    constructor(mediaServerPlayer, props, playerName, posLabel, durLabel) {
         super(0, true);
         this.actor.set_direction(St.TextDirection.LTR); // Do not invert on RTL layout
 
@@ -427,6 +427,11 @@ class Seeker extends Slider.Slider {
         this._mediaServerPlayer = mediaServerPlayer;
         this._prop = props;
         this._playerName = playerName;
+
+        this.startingDate = Date.now();
+
+        this.posLabel = posLabel;
+        this.durLabel = durLabel;
 
         this.connect('drag-end', () => { this._setPosition() });
         this.connect('value-changed', () => {
@@ -456,6 +461,42 @@ class Seeker extends Slider.Slider {
         });
 
         this._getCanSeek();
+        this._getPosition(); // Added
+    }
+
+    time_for_label(sec) {
+        //~ log("time_for_label("+sec+")", true);
+        let _sec = sec;
+        let _str = "";
+        let h = 0;
+        let m = 0;
+        let s = 0;
+        if (_sec > 3600) {
+            h = Math.floor(_sec / 3600);
+            _str = _str + h;
+            if (h < 10)
+                _str = "0" + _str;
+            _str += ":";
+            _sec = _sec - 3600 * h;
+        }
+        if (_sec > 60) {
+            m = Math.floor(_sec / 60);
+            if (m < 10)
+                _str = _str + "0" + m;
+            else
+                _str = _str + m;
+            _str += ":";
+            _sec = _sec - 60 * m
+        } else {
+            _str += "00:";
+        }
+        s = Math.floor(_sec);
+        if (s < 10)
+            _str = _str + "0" + s;
+        else
+            _str = _str + s;
+
+        return " "+_str+" ";
     }
 
     play() {
@@ -473,20 +514,65 @@ class Seeker extends Slider.Slider {
         this._updateTimer();
     }
 
-    setTrack(trackid, length) {
-        this._trackid = trackid;
+    setTrack(trackid, length, force_zero=false) {
+        if (trackid != this._trackid || force_zero) {
+            this.startingDate = Date.now();
+            this._currentTime = 0;
+            this._trackid = trackid;
+        }
         this._length = length;
-        this._currentTime = 0;
+        this.durLabel.set_text(this.time_for_label(length));
+        this._wantedSeekValue = 0;
         this._updateValue();
     }
 
     _updateValue() {
-        if (!this._dragging && this.canSeek) {
-            if (this._length > 0 && this._currentTime > 0)
-                this.setValue(this._currentTime / this._length);
-            else
-                this.setValue(0);
+        this._currentTime = (Date.now() - this.startingDate) / 1000;
+
+        //~ log("_updateValue: ", true);
+        //~ log("this._dragging: "+this._dragging, true);
+        //~ log("this.canSeek: "+this.canSeek, true);
+        //~ log("this._currentTime: "+this._currentTime, true);
+        //~ log("this._length: "+this._length, true);
+        //~ log("this._wantedSeekValue: "+this._wantedSeekValue, true);
+
+        if (this.canSeek) {
+            if (this._length > 0 && this._wantedSeekValue > 0) {
+                this._wantedSeekValue = this._wantedSeekValue / 1000000;
+                this.startingDate = Date.now() - this._wantedSeekValue * 1000;
+                this.setValue(this._wantedSeekValue / this._length);
+                this._currentTime = this._wantedSeekValue;
+                this.posLabel.set_text(this.time_for_label(this._currentTime));
+                this._wantedSeekValue = 0;
+            } else if (!this._dragging) {
+                if (this._length > 0 && this._currentTime > 0) {
+                    this.posLabel.set_text(this.time_for_label(this._currentTime));
+                    this.setValue(this._currentTime / this._length);
+                } else {
+                    this.setValue(0);
+                    this.posLabel.set_text(" 00:00 ")
+                }
+            }
+        } else {
+            this.setValue(0);
+            this.posLabel.set_text(" 00:00 ")
         }
+
+
+
+
+        //~ if (!this._dragging && this.canSeek) {
+            //~ if (this._length > 0 && this._currentTime > 0)
+                //~ this.setValue(this._currentTime / this._length);
+            //~ else
+                //~ //this.setValue(0); // Commented
+                //~ if (this._length > 0 && this._wantedSeekValue > 0) {//Added
+                    //~ this._wantedSeekValue = this._wantedSeekValue / 1000000;
+                    //~ this.setValue(this._wantedSeekValue / this._length); //Added
+                    //~ this._wantedSeekValue = 0;
+                //~ } else //Added
+                    //~ this.setValue(0); //Added
+        //~ }
     }
 
     _timerCallback() {
@@ -500,6 +586,10 @@ class Seeker extends Slider.Slider {
                 this._getPosition();
             }
             return GLib.SOURCE_CONTINUE;
+        } else if (this.status === 'Stopped') {
+            this._setPosition(0);
+            this._timerTicker = 0;
+            this._currentTime = 0;
         }
 
         this._timeoutId = 0;
@@ -535,6 +625,8 @@ class Seeker extends Slider.Slider {
         this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, 'CanSeek', (position, error) => {
             if (!error)
                 this._setCanSeek(position[0].get_boolean());
+            else
+                this._setCanSeek(false);
         });
     }
 
@@ -557,15 +649,17 @@ class Seeker extends Slider.Slider {
             this._updateValue();
         } else {
             let time = this._value * this._length * 1000000;
-            this._wantedSeekValue = Math.round(time);
+            this._wantedSeekValue = time;
             this._mediaServerPlayer.SetPositionRemote(this._trackid, time);
         }
     }
 
     _getPosition() {
         this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, 'Position', (position, error) => {
-            if (!error)
+            if (!error) {
+                //~ log("Position: "+position[0].get_int64(), true);
                 this._setPosition(position[0].get_int64());
+            }
         });
     }
 
@@ -626,9 +720,8 @@ class StreamMenuSection extends PopupMenu.PopupMenuSection {
         }
 
         this.slider = new VolumeSlider(applet, stream, name, iconName);
-        //slider._slider.style = "min-width: 6em;";
-        //~ slider._slider.style = "width: 6em;";
-        this.slider._slider.style = "width: 6em;";
+        this.slider._slider.style = "min-width: 6em;";
+        //~ this.slider._slider.style = "width: 6em;";
         this.addMenuItem(this.slider);
     }
 }
@@ -681,10 +774,10 @@ class Player extends PopupMenu.PopupMenuSection {
         this.addMenuItem(mainBox);
 
         this.vertBox = new St.BoxLayout({
-                                            style_class: "sound-player",
-                                            important: true,
-                                            vertical: true
-                                        });
+            style_class: "sound-player",
+            important: true,
+            vertical: true
+        });
         mainBox.addActor(this.vertBox, { expand: false });
 
         // Player info
@@ -742,7 +835,7 @@ class Player extends PopupMenu.PopupMenuSection {
         // Removing "style: 'height: auto;'" avoids warning messages "St-WARNING **: Ignoring length property that isn't a number at line 1, col 9"
         this.trackInfo = new St.BoxLayout({
             style_class: 'sound-player-overlay',
-            style: 'height: 6em;', // replaces 'height: auto;'
+            //~ style: 'min-height: 6em;', // replaces 'height: auto;' REMOVED: DEPRECATED!
             important: true,
             vertical: true
         });
@@ -810,9 +903,29 @@ class Player extends PopupMenu.PopupMenuSection {
         this._shuffleButton = new ControlButton("media-playlist-shuffle", _("No Shuffle"), () => this._toggleShuffle());
         this.controls.add_actor(this._shuffleButton.getActor());
 
+
+        let seekerBox = new St.BoxLayout();
         // Position slider
-        this._seeker = new Seeker(this._mediaServerPlayer, this._prop, this._name.toLowerCase());
-        this.vertBox.add_actor(this._seeker.actor);
+        this.durationLabel = new St.Label({text:" 00:00 "});
+        this.durationLabel.clutterText.line_wrap = false;
+        this.durationLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        this.durationLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+        this.positionLabel = new St.Label({text:" 00:00 "});
+        this.positionLabel.clutterText.line_wrap = false;
+        this.positionLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        this.positionLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+        this._seeker = new Seeker(
+            this._mediaServerPlayer,
+            this._prop,
+            this._name.toLowerCase(),
+            this.positionLabel,
+            this.durationLabel
+        );
+        seekerBox.add_actor(this.positionLabel);
+        seekerBox.add_actor(this._seeker.actor);
+        seekerBox.add_actor(this.durationLabel);
+        //~ this.vertBox.add_actor(this._seeker.actor);
+        this.vertBox.add_actor(seekerBox);
 
         this._applet._updatePlayerMenuItems();
 
@@ -918,7 +1031,7 @@ class Player extends PopupMenu.PopupMenuSection {
         if (metadata["mpris:length"]) {
             trackLength = metadata["mpris:length"].unpack() / 1000000;
         }
-        this._seeker.setTrack(trackid, trackLength);
+        //this._seeker.setTrack(trackid, trackLength);
 
         if (metadata["xesam:artist"]) {
             switch (metadata["xesam:artist"].get_type_string()) {
@@ -946,6 +1059,7 @@ class Player extends PopupMenu.PopupMenuSection {
         else
             this._album = _("Unknown Album");
 
+        let old_title = ""+this._title;
         if (metadata["xesam:title"]) {
             this._title = metadata["xesam:title"].unpack();
             if (this._title.includes("xml")) {
@@ -987,6 +1101,7 @@ class Player extends PopupMenu.PopupMenuSection {
             this._title = _("Unknown Title");
         }
         this.titleLabel.set_text(this._title);
+        this._seeker.setTrack(trackid, trackLength, old_title != this._title);
 
         let change = false;
         if (metadata["mpris:artUrl"]) {
@@ -1147,13 +1262,13 @@ class Player extends PopupMenu.PopupMenuSection {
     _showCover(cover_path) {
         if (! cover_path || ! GLib.file_test(cover_path, GLib.FileTest.EXISTS)) {
             this.cover = new St.Icon({
-                                        style_class: 'sound-player-generic-coverart',
-                                        important: true,
-                                        icon_name: "media-optical",
-                                        icon_size: Math.trunc(300*global.ui_scale),
-                                        //icon_type: St.IconType.FULLCOLOR
-                                        icon_type: St.IconType.SYMBOLIC
-                                    });
+                style_class: 'sound-player-generic-coverart',
+                important: true,
+                icon_name: "media-optical",
+                icon_size: Math.trunc(300*global.ui_scale),
+                //icon_type: St.IconType.FULLCOLOR
+                icon_type: St.IconType.SYMBOLIC
+            });
             cover_path = null;
         }
         else {
@@ -2274,7 +2389,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (changeColor) {
                 if (this._outputVolumeSection && this._outputVolumeSection.icon)
                     this._outputVolumeSection.icon.style = _style;
-                //~ this._outputVolumeSection.style = _style;
+                    //~ this._outputVolumeSection.style = _style;
             } else {
                 if (this._inputVolumeSection && this._inputVolumeSection.icon)
                     this._outputVolumeSection.icon.style = this._inputVolumeSection.icon.style
