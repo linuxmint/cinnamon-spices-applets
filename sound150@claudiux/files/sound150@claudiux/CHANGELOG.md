@@ -1,3 +1,6 @@
+### v6.5.0~20240319
+  * Improved seeker. Elapsed time and duration are now displayed on either side of the seeker in the menu.
+
 ### v6.4.3~20240317
   * Removes CR errors (A wrong style had been applied; style=null should be used instead of style="").
 
