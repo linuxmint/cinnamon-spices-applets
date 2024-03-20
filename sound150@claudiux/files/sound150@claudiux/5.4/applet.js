@@ -1763,6 +1763,11 @@ class Sound150Applet extends Applet.TextIconApplet {
     _setKeybinding() {
         Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
 
+        Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => this._volumeChange(Clutter.ScrollDirection.UP));
+        Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => this._volumeChange(Clutter.ScrollDirection.DOWN));
+        Main.keybindingManager.addHotKey("volume-mute-" + this.instance_id, "AudioMute", (...args) => this._mutedChanged(...args));
+        Main.keybindingManager.addHotKey("pause-" + this.instance_id, "AudioPlay", () => this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote());
+
         if (!this.redefine_volume_keybindings) return;
 
         try {
@@ -1777,8 +1782,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         Main.keybindingManager.removeHotKey("volume-down");
         Main.keybindingManager.removeHotKey("pause");
 
-        Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => this._volumeChange(Clutter.ScrollDirection.UP));
-        Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => this._volumeChange(Clutter.ScrollDirection.DOWN));
         if (this.pause_on_off.length > 2)
             Main.keybindingManager.addHotKey("pause", this.pause_on_off,
                 () => this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote());
@@ -1821,11 +1824,14 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_applet_removed_from_panel() {
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
+        try {
+            Main.keybindingManager.removeHotKey("raise-volume-" + this.instance_id);
+            Main.keybindingManager.removeHotKey("lower-volume-" + this.instance_id);
+            Main.keybindingManager.removeHotKey("volume-mute-" + this.instance_id);
+            Main.keybindingManager.removeHotKey("pause-" + this.instance_id);
+        } catch(e) {}
+
         if (this.redefine_volume_keybindings) {
-            try {
-                Main.keybindingManager.removeHotKey("raise-volume-" + this.instance_id);
-                Main.keybindingManager.removeHotKey("lower-volume-" + this.instance_id);
-            } catch(e) {}
             try {
                 Main.keybindingManager.removeHotKey("volume-mute");
                 Main.keybindingManager.removeHotKey("volume-up");
