@@ -72,6 +72,10 @@ function log(message, always = false) {
         global.log("[" + UUID + "]: " + message);
 }
 
+function logDebug(message) {
+    log(message, true);
+}
+
 function logError(error) {
     global.logError("[" + UUID + "]: " + error)
 }
@@ -98,12 +102,16 @@ const formatTextWrap = (text, maxLineLength) => {
   }, '');
 }
 /* global values */
-let players_without_seek_support = ['telegram desktop', 'spotify', 'totem', 'xplayer', 'gnome-mplayer', 'pithos',
+let players_without_seek_support = [
+    'telegram desktop', 'totem',
+    'xplayer', 'gnome-mplayer', 'pithos',
     'smplayer'];
 let players_with_seek_support = [
-    'clementine', 'banshee', 'rhythmbox', 'rhythmbox3', 'pragha', 'quodlibet',
-    'amarok', 'xnoise', 'gmusicbrowser', 'vlc', 'qmmp', 'deadbeef', 'audacious',
-    'celluloid', 'mpv'];
+    'clementine', 'banshee', 'rhythmbox',
+    'rhythmbox3', 'pragha', 'quodlibet',
+    'amarok', 'xnoise', 'gmusicbrowser',
+    'vlc', 'qmmp', 'deadbeef',
+    'audacious', 'celluloid', 'mpv', 'spotify'];
 /* dummy vars for translation */
 let x = _("Playing");
 x = _("Paused");
@@ -490,7 +498,7 @@ class Seeker extends Slider.Slider {
         } else {
             _str += "00:";
         }
-        s = Math.floor(_sec);
+        s = Math.round(_sec);
         if (s < 10)
             _str = _str + "0" + s;
         else
@@ -506,15 +514,53 @@ class Seeker extends Slider.Slider {
 
     pause() {
         this.status = 'Paused';
-        this._updateTimer();
+        if (this.canSeek)
+            this._updateTimer();
+        else
+            this._updateValue();
+        if (this._timeoutId > 0) {
+            try {
+                Mainloop.source_remove(this._timeoutId);
+            } catch(e) {}
+            this._timeoutId = 0;
+        }
     }
 
     stop() {
         this.status = 'Stopped';
-        this._updateTimer();
+        if (this.canSeek)
+            this._updateTimer();
+        else
+            this._updateValue();
+        if (this._timeoutId > 0) {
+            try {
+                Mainloop.source_remove(this._timeoutId);
+            } catch(e) {}
+            this._timeoutId = 0;
+        }
+    }
+
+    hideAll() {
+        this.durLabel.hide();
+        this.posLabel.hide();
+        this.actor.hide();
+        //~ this.parent.hide();
+    }
+
+    showAll() {
+        this.durLabel.show();
+        this.posLabel.show();
+        this.actor.show();
+        //~ this.parent.show();
     }
 
     setTrack(trackid, length, force_zero=false) {
+        if (length > 0) {
+            this.showAll();
+        } else {
+            this.hideAll();
+            return
+        }
         if (trackid != this._trackid || force_zero) {
             this.startingDate = Date.now();
             this._currentTime = 0;
@@ -527,16 +573,10 @@ class Seeker extends Slider.Slider {
     }
 
     _updateValue() {
-        this._currentTime = (Date.now() - this.startingDate) / 1000;
-
-        //~ log("_updateValue: ", true);
-        //~ log("this._dragging: "+this._dragging, true);
-        //~ log("this.canSeek: "+this.canSeek, true);
-        //~ log("this._currentTime: "+this._currentTime, true);
-        //~ log("this._length: "+this._length, true);
-        //~ log("this._wantedSeekValue: "+this._wantedSeekValue, true);
+        //~ this._currentTime = (Date.now() - this.startingDate) / 1000;
 
         if (this.canSeek) {
+            this.showAll();
             if (this._length > 0 && this._wantedSeekValue > 0) {
                 this._wantedSeekValue = this._wantedSeekValue / 1000000;
                 this.startingDate = Date.now() - this._wantedSeekValue * 1000;
@@ -554,25 +594,35 @@ class Seeker extends Slider.Slider {
                 }
             }
         } else {
-            this.setValue(0);
-            this.posLabel.set_text(" 00:00 ")
+            this._currentTime = (Date.now() - this.startingDate) / 1000;
+            if (this._length > 0) {
+                this.showAll();
+                if (this._wantedSeekValue > 0) {
+                    this._wantedSeekValue = this._wantedSeekValue / 1000000;
+                    this.startingDate = Date.now() - this._wantedSeekValue * 1000;
+                    this.setValue(this._wantedSeekValue / this._length);
+                    this._currentTime = this._wantedSeekValue;
+                    this.posLabel.set_text(this.time_for_label(this._currentTime));
+                    this._wantedSeekValue = 0;
+                } else if (!this._dragging) {
+                    this.posLabel.set_text(this.time_for_label(this._currentTime));
+                    this.setValue(this._currentTime / this._length);
+                    if (this._timeoutId > 0) {
+                        try {
+                            Mainloop.source_remove(this._timeoutId);
+                        } catch(e) {}
+                        this._timeoutId = 0;
+                    }
+                    this._timeoutId = Mainloop.timeout_add_seconds(1, this._updateValue.bind(this));
+                    return (this.status === "Playing") ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE;
+                }
+            } else {
+                this.setValue(0);
+                this.posLabel.set_text(" 00:00 ");
+                this.hideAll();
+            }
         }
-
-
-
-
-        //~ if (!this._dragging && this.canSeek) {
-            //~ if (this._length > 0 && this._currentTime > 0)
-                //~ this.setValue(this._currentTime / this._length);
-            //~ else
-                //~ //this.setValue(0); // Commented
-                //~ if (this._length > 0 && this._wantedSeekValue > 0) {//Added
-                    //~ this._wantedSeekValue = this._wantedSeekValue / 1000000;
-                    //~ this.setValue(this._wantedSeekValue / this._length); //Added
-                    //~ this._wantedSeekValue = 0;
-                //~ } else //Added
-                    //~ this.setValue(0); //Added
-        //~ }
+        return GLib.SOURCE_REMOVE;
     }
 
     _timerCallback() {
@@ -607,6 +657,10 @@ class Seeker extends Slider.Slider {
                 this._getPosition();
                 this._timerTicker = 0;
                 this._timeoutId = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));
+            } else if (this._length > 0) {
+                this._getPosition();
+                this._timerTicker = 0;
+                this._timeoutId = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));
             }
         } else {
             if (this.status === 'Stopped')
@@ -623,7 +677,9 @@ class Seeker extends Slider.Slider {
         }
 
         this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, 'CanSeek', (position, error) => {
-            if (!error)
+            //~ logDebug("Dbus CanSeek: "+position[0].get_boolean());
+            //~ logDebug("Dbus !error: "+!error);
+            if (!error && position[0])
                 this._setCanSeek(position[0].get_boolean());
             else
                 this._setCanSeek(false);
@@ -633,14 +689,21 @@ class Seeker extends Slider.Slider {
     _setCanSeek(seek) {
         let playback_rate = this._mediaServerPlayer.Rate;
         // Hide seek for non-standard speeds except: 0 may mean paused, Audacious returns null
-        if (seek && (playback_rate === 1 || !playback_rate)) {
+        if (seek && (playback_rate == 1.0 || !playback_rate)) {
             this.canSeek = true;
-            this.actor.show();
+            this.showAll();
+            this._getPosition();
             this._updateTimer();
         } else {
             this.canSeek = false;
-            this.actor.hide();
+            if (this._length > 0) {
+                this.showAll();
+                this._updateValue();
+            } else {
+                this.hideAll();
+            }
         }
+        //~ logDebug("this.canSeek: "+this.canSeek);
     }
 
     _setPosition(value) {
@@ -656,9 +719,23 @@ class Seeker extends Slider.Slider {
 
     _getPosition() {
         this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, 'Position', (position, error) => {
-            if (!error) {
-                //~ log("Position: "+position[0].get_int64(), true);
+            //~ logDebug("_getPosition dbus !error: "+!error);
+            if (!error && position[0]) {
+                //~ logDebug("_getPosition position: "+position[0].get_int64());
                 this._setPosition(position[0].get_int64());
+            } else {
+                let pos;
+                try {
+                    pos = position[0].get_int64();
+                } catch(e) { pos = "NaN" }
+                if (isNaN(pos)) {
+                    //~ logDebug("pos is NaN!!!");
+                    this._currentTime = (Date.now() - this.startingDate) / 1000;
+                    this._setPosition(this._currentTime * 1000);
+                } else {
+                    //~ logDebug("pos is Valid!!!");
+                    this._setPosition(pos);
+                }
             }
         });
     }
@@ -732,6 +809,7 @@ class Player extends PopupMenu.PopupMenuSection {
         this._owner = owner;
         this._busName = busname;
         this._applet = applet;
+        //~ logDebug("busname: "+busname);
 
         // We'll update this later with a proper name
         this._name = this._busName;
@@ -868,11 +946,26 @@ class Player extends PopupMenu.PopupMenuSection {
             this.vertBox.add_actor(this._trackCover);
         } catch(e) {logError("Unable to add actor this._trackCover to this.vertBox!: "+e)}
 
+        // Labels
+        this.durationLabel = new St.Label({text:" 00:00 "});
+        this.durationLabel.clutterText.line_wrap = false;
+        this.durationLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        this.durationLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+        this.positionLabel = new St.Label({text:" 00:00 "});
+        this.positionLabel.clutterText.line_wrap = false;
+        this.positionLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        this.positionLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+
         // Playback controls
         let trackControls = new St.Bin({x_align: St.Align.MIDDLE});
         this._prevButton = new ControlButton("media-skip-backward",
             _("Previous"),
-            () => this._mediaServerPlayer.PreviousRemote());
+            () => {
+                this.positionLabel.set_text(" 00:00 ");
+                this._seeker.startingDate = Date.now();
+                this._seeker._setPosition(0);
+                this._mediaServerPlayer.PreviousRemote();
+            });
         this._playButton = new ControlButton("media-playback-start",
             _("Play"),
             () => this._mediaServerPlayer.PlayPauseRemote());
@@ -906,14 +999,6 @@ class Player extends PopupMenu.PopupMenuSection {
 
         let seekerBox = new St.BoxLayout();
         // Position slider
-        this.durationLabel = new St.Label({text:" 00:00 "});
-        this.durationLabel.clutterText.line_wrap = false;
-        this.durationLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
-        this.durationLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
-        this.positionLabel = new St.Label({text:" 00:00 "});
-        this.positionLabel.clutterText.line_wrap = false;
-        this.positionLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
-        this.positionLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
         this._seeker = new Seeker(
             this._mediaServerPlayer,
             this._prop,
