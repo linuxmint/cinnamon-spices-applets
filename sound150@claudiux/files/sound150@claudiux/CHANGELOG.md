@@ -1,3 +1,6 @@
+### v6.5.1~20240320
+  * Improved seeker for Spotify.
+
 ### v6.5.0~20240319
   * Improved seeker. Elapsed time and duration are now displayed on either side of the seeker in the menu.
 
