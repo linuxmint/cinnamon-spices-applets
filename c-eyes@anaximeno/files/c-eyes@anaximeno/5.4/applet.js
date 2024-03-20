@@ -483,34 +483,30 @@ class Eye extends Applet.Applet {
 	}
 
 	_eye_timeout() {
-		if (this._eye_should_redraw()) {
+		if (this._eye_should_redraw())
 			this.area.queue_repaint();
-		}
-
 		return true;
 	}
 
 	_eye_should_redraw() {
 		const [mouse_x, mouse_y, _] = global.get_pointer();
-		let should_redraw = true;
 
+		let should_redraw = true;
 		if (this._last_mouse_x == mouse_x && this._last_mouse_y == mouse_y) {
 			should_redraw = false;
 		} else if (this._last_mouse_x == undefined || this._last_mouse_y == undefined) {
 			should_redraw = true;
 		} else {
 			const dist = (x, y) => Math.sqrt(x * x + y * y);
-
 			const [ox, oy] = this._eye_area_pos();
 			const [last_x, last_y] = [this._last_mouse_x - ox, this._last_mouse_y - oy];
 			const [current_x, current_y] = [mouse_x - ox, mouse_y - oy];
-
 			const dist_prod = dist(last_x, last_y) * dist(current_x, current_y);
-			const dot_prod = current_x * last_x + current_y * last_y;
 
 			if (dist_prod == 0) {
 				should_redraw = true;
 			} else {
+				const dot_prod = current_x * last_x + current_y * last_y;
 				const angle = Math.acos(dot_prod / dist_prod);
 				should_redraw = angle >= this.eye_repaint_angle;
 			}
