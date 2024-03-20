@@ -1,3 +1,6 @@
+### v6.5.2~20240320
+  * Fixes  #5604
+
 ### v6.5.1~20240320
   * Improved seeker for Spotify.
 
