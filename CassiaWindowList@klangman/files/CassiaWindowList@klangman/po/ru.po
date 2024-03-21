@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-20 23:58-0400\n"
+"POT-Creation-Date: 2024-03-21 05:44-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: blogdron\n"
 "Language-Team: \n"
@@ -1362,3 +1362,225 @@ msgid ""
 "Which buttons will have the custom icon color saturation applied\n"
 "This option is only available when the saturation is not set to 100%"
 msgstr ""
+
+#: SetupWizard.ui:7
+msgid "CassiaWindowList Basic Setup Wizard"
+msgstr "Мастер базовой настройки CassiaWindowList"
+
+#: SetupWizard.ui:78
+msgid "Welcome to CassiaWindowList"
+msgstr "Добро пожаловать в CassiaWindowList"
+
+#: SetupWizard.ui:95
+msgid "How would you like this applet instance to behave?"
+msgstr "Как бы вы хотели, чтобы этот экземпляр апплета вел себя?"
+
+#: SetupWizard.ui:105
+msgid ""
+"Window List (Task bar)\n"
+"Panel buttons for all running windows."
+msgstr ""
+"Список окон (панель задач)\n"
+"Кнопки на панели для всех работающих окон."
+
+#: SetupWizard.ui:125
+msgid ""
+"Panel Launcher (Quick launcher)\n"
+"Panel button only appear when you add items\n"
+"to the panel, no labels are shown, only icons."
+msgstr ""
+"Панель запуска (быстрый запуск)\n"
+"Кнопка панели появляется только при добавлении элементов\n"
+"на панели не отображаются надписи, только значки."
+
+#: SetupWizard.ui:146
+msgid ""
+"Restore configuration from an automatic\n"
+"backup"
+msgstr ""
+"Восстановление конфигурации из автоматического\n"
+"бэкапа"
+
+#: SetupWizard.ui:178
+msgid "How do you want your Window List to operate?"
+msgstr "Как вы хотите, чтобы работал ваш список окон?"
+
+#: SetupWizard.ui:192
+msgid ""
+"Basic  -  Quick window access\n"
+"Every window gets it's own window list button.\n"
+"Button labels are window titles."
+msgstr ""
+"Базовый - Быстрый доступ к окну\n"
+"Каждое окно имеет собственную кнопку списка окон.\n"
+"Надписи кнопок - это заголовки окон."
+
+#: SetupWizard.ui:213
+msgid ""
+"Grouping  -  Very compact\n"
+"One window list button per application.\n"
+"Thumbnail menus to select specific window.\n"
+"Button labels are window titles."
+msgstr ""
+"Группировка  -  Очень компактная\n"
+"Одна кнопка списка окон для каждого приложения.\n"
+"Меню миниатюр для выбора конкретного окна.\n"
+"Надписи кнопок - это заголовки окон."
+
+#: SetupWizard.ui:236
+msgid ""
+"Pooling  -  Quick access & compact\n"
+"Every window gets it's own window list button.\n"
+"Application buttons are pooled togeather.\n"
+"One button label per application pool.\n"
+"Button labels are application names."
+msgstr ""
+"Объединение в пулы - быстрый доступ и компактность\n"
+"Каждое окно имеет собственную кнопку списка окон.\n"
+"Кнопки приложений объединены вместе.\n"
+"Одна надпись кнопки для каждого пула приложений.\n"
+"Надписи кнопок - это имена приложений."
+
+#: SetupWizard.ui:273
+msgid "Just a few more options to consider"
+msgstr "Еще несколько вариантов для рассмотрения"
+
+#: SetupWizard.ui:287
+msgid "No Labels (icons only)"
+msgstr "Без надписей (только значки)"
+
+#: SetupWizard.ui:305
+msgid "No minimized window indicator character"
+msgstr "Нет символа-индикатора свернутого окна"
+
+#: SetupWizard.ui:323
+msgid "No Thumbnail window menu on mouse hover"
+msgstr "Нет меню миниатюр при наведении курсора мыши"
+
+#: SetupWizard.ui:354
+#, fuzzy
+msgid "Panel Launcher Setup"
+msgstr "Главная Панель Лаунчера"
+
+#: SetupWizard.ui:370
+#, fuzzy
+msgid ""
+"Unlike most Panel Launcher applets, this launcher keeps tack of \n"
+"running windows and uses window Thumbnail menus.\n"
+"\n"
+"You can launch additional windows by clicking the 'Back' mouse \n"
+"button or using the Left mouse button while holding the Ctrl key.\n"
+"\n"
+"How would you like the Left mouse button to behave when \n"
+"windows already exist for a launcher button?"
+msgstr ""
+"В отличие от большинства апплетов лаунчеров, этот лаунчер\n"
+"отслеживает запущенные окна и активирует\n"
+"существующие окна, а не запускать новые.\n"
+"\n"
+"Вы можете запустить дополнительные окна, нажав кнопку\n"
+"кнопку мыши 'Назад' или Ctrl+левая кнопка мыши.\n"
+"(по умолчанию).\n"
+"\n"
+"Это также использует меню миниатюр для отображения списка всех\n"
+"открытых окон"
+
+#: SetupWizard.ui:388
+#, fuzzy
+msgid "Open new window / Hold for Thumbnail menu"
+msgstr "Новое окно или удерживать для перехода к меню миниатюр"
+
+#: SetupWizard.ui:407
+#, fuzzy
+msgid "Restore most recent window / Cycle windows"
+msgstr "Восстановить последнее окно приложения"
+
+#: SetupWizard.ui:427
+#, fuzzy
+msgid "Open the Thumbnail menu"
+msgstr "Закрыть меню миниатюр"
+
+#: SetupWizard.ui:461
+#, fuzzy
+msgid "Thumbnail window menu on mouse hover"
+msgstr "Нет меню миниатюр при наведении курсора мыши"
+
+#: SetupWizard.ui:492
+msgid "All done!"
+msgstr "Все сделано!"
+
+#: SetupWizard.ui:508
+#, fuzzy
+msgid ""
+"There are many more options and features to explorer in the\n"
+"applet configurator and the window list button context menu,\n"
+"for example:\n"
+"\n"
+" • Hot-keys to launch / activate a specific window.\n"
+" • Customizable mouse button actions.\n"
+" • Customizable icon saturation (grayscale / vivid).\n"
+" • Customizable Ctrl/Shift + mouse button actions.\n"
+" • Application specific grouping and label settings.\n"
+" • Thumbnail window zooming using the scroll-wheel.\n"
+" • Automatic application grouping when space is limited.\n"
+" • And much more."
+msgstr ""
+"Есть еще много опций и функций для изучения.\n"
+"в конфигураторе апплета и кнопках списка окон\n"
+"контекстном меню, например:\n"
+"\n"
+"• Горячие клавиши для запуска/активации определенного окна.\n"
+"• Настраиваемые действия кнопок мыши.\n"
+"• Настраиваемые действия клавиш Ctrl/Shift + кнопки мыши.\n"
+"• Настройки группировки и надписей для конкретных приложений.\n"
+"• Масштабирование окна миниатюр с помощью колеса прокрутки.\n"
+"• Автоматическая группировка приложений при недостатке пространства.\n"
+"• И многое другое."
+
+#: SetupWizard.ui:530
+msgid "Exit and launch the applet configurator now"
+msgstr "Выйдите и запустите конфигуратор апплета сейчас"
+
+#: SetupWizard.ui:559
+msgid "Select a backup configuration to restore?"
+msgstr "Выбрать резервную конфигурацию для восстановления?"
+
+#: SetupWizard.ui:602
+msgid "Configuration Backup?"
+msgstr "Настроить резервирование?"
+
+#: SetupWizard.ui:618
+msgid ""
+"If you would like to maintain an automatic backup\n"
+"of this applet configuration then select or enter a\n"
+"backup file description below. All current and future\n"
+"configuration changes will be saved to this backup:"
+msgstr ""
+"Если вы хотите поддерживать автоматическое резервирование\n"
+"этой конфигурации апплета, то выберите или введите\n"
+"название файла резервной копии ниже. Все настоящее и будущее\n"
+"изменения конфигурации будут сохранены в этой резервной копии:"
+
+#: SetupWizard.ui:638
+msgid "MainWindowList"
+msgstr "Главный Список Окон"
+
+#: SetupWizard.ui:639
+msgid "MainPanelLauncher"
+msgstr "Главная Панель Лаунчера"
+
+#: SetupWizard.ui:640
+msgid "Monitor1WindowList"
+msgstr "Список Окон Монитора 1"
+
+#: SetupWizard.ui:641
+msgid "Monitor2WindowList"
+msgstr "Список Окон Монитора 2"
+
+#: SetupWizard.ui:642
+msgid "Monitor1PanelLauncher"
+msgstr "Лаунчер Панели Монитора 1"
+
+#: SetupWizard.ui:643
+msgid "Monitor2PanelLauncher"
+msgstr "Лаунчер Панели Монитора 2"

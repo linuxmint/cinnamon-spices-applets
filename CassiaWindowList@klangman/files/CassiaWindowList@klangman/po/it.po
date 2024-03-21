@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-20 23:58-0400\n"
+"POT-Creation-Date: 2024-03-21 05:44-0400\n"
 "PO-Revision-Date: 2023-12-12 19:19+0100\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -1426,3 +1426,221 @@ msgstr ""
 "personalizzata\n"
 "Questa opzione è disponibile solo quando la saturazione non è impostata al "
 "100%"
+
+#: SetupWizard.ui:7
+msgid "CassiaWindowList Basic Setup Wizard"
+msgstr "Procedura guidata di configurazione di base di CassiaWindowList"
+
+#: SetupWizard.ui:78
+msgid "Welcome to CassiaWindowList"
+msgstr "Benvenuti in CassiaWindowList"
+
+#: SetupWizard.ui:95
+msgid "How would you like this applet instance to behave?"
+msgstr "Come vorresti che si comportasse questa istanza dell'applet?"
+
+#: SetupWizard.ui:105
+msgid ""
+"Window List (Task bar)\n"
+"Panel buttons for all running windows."
+msgstr ""
+"Elenco finestre (barra delle attività)\n"
+"Pulsanti del pannello per tutte le finestre in esecuzione."
+
+#: SetupWizard.ui:125
+msgid ""
+"Panel Launcher (Quick launcher)\n"
+"Panel button only appear when you add items\n"
+"to the panel, no labels are shown, only icons."
+msgstr ""
+"Pannello di avvio (avvio rapido)\n"
+"Il pulsante del pannello viene visualizzato solo quando aggiungi elementi\n"
+"al pannello non vengono visualizzate etichette, ma solo icone."
+
+#: SetupWizard.ui:146
+msgid ""
+"Restore configuration from an automatic\n"
+"backup"
+msgstr ""
+"Ripristinare la configurazione da un backup\n"
+"automatico"
+
+#: SetupWizard.ui:178
+msgid "How do you want your Window List to operate?"
+msgstr "Come vuoi che funzioni il tuo Elenco finestre?"
+
+#: SetupWizard.ui:192
+msgid ""
+"Basic  -  Quick window access\n"
+"Every window gets it's own window list button.\n"
+"Button labels are window titles."
+msgstr ""
+"Base: accesso rapido alla finestra\n"
+"Ogni finestra ha il proprio pulsante dell'elenco delle finestre.\n"
+"Le etichette dei pulsanti sono titoli di finestre."
+
+#: SetupWizard.ui:213
+msgid ""
+"Grouping  -  Very compact\n"
+"One window list button per application.\n"
+"Thumbnail menus to select specific window.\n"
+"Button labels are window titles."
+msgstr ""
+"Raggruppamento - Molto compatto\n"
+"Un pulsante dell'elenco delle finestre per applicazione.\n"
+"Menù delle miniature per selezionare una finestra specifica.\n"
+"Le etichette dei pulsanti sono titoli di finestre."
+
+#: SetupWizard.ui:236
+msgid ""
+"Pooling  -  Quick access & compact\n"
+"Every window gets it's own window list button.\n"
+"Application buttons are pooled togeather.\n"
+"One button label per application pool.\n"
+"Button labels are application names."
+msgstr ""
+"Pooling: accesso rapido e compatto\n"
+"Ogni finestra ha il proprio pulsante dell'elenco delle finestre.\n"
+"I pulsanti dell'applicazione vengono raggruppati insieme.\n"
+"Un'etichetta del pulsante per pool di applicazioni.\n"
+"Le etichette dei pulsanti sono nomi di applicazioni."
+
+#: SetupWizard.ui:273
+msgid "Just a few more options to consider"
+msgstr "Solo qualche altra opzione da considerare"
+
+#: SetupWizard.ui:287
+msgid "No Labels (icons only)"
+msgstr "Nessuna etichetta (solo icone)"
+
+#: SetupWizard.ui:305
+msgid "No minimized window indicator character"
+msgstr "Nessun carattere indicatore di finestra ridotta a icona"
+
+#: SetupWizard.ui:323
+msgid "No Thumbnail window menu on mouse hover"
+msgstr "Nessun menù della finestra delle miniature al passaggio del mouse"
+
+#: SetupWizard.ui:354
+msgid "Panel Launcher Setup"
+msgstr "Configurazione del Panel Launcher"
+
+#: SetupWizard.ui:370
+msgid ""
+"Unlike most Panel Launcher applets, this launcher keeps tack of \n"
+"running windows and uses window Thumbnail menus.\n"
+"\n"
+"You can launch additional windows by clicking the 'Back' mouse \n"
+"button or using the Left mouse button while holding the Ctrl key.\n"
+"\n"
+"How would you like the Left mouse button to behave when \n"
+"windows already exist for a launcher button?"
+msgstr ""
+"A differenza della maggior parte delle applet di Panel Launcher,\n"
+"questo launcher mantiene il controllo delle finestre in esecuzione\n"
+"e utilizza i menù delle Miniature delle finestre.\n"
+"\n"
+"Puoi avviare finestre aggiuntive facendo clic sul tasto 'Indietro'\n"
+"del mouse o tenendo premuto il tasto Ctrl mentre si fa clic sinistro.\n"
+"\n"
+"Come vorresti che si comportasse il pulsante sinistro del mouse\n"
+"quando esistono già finestre per un pulsante di avvio?"
+
+#: SetupWizard.ui:388
+msgid "Open new window / Hold for Thumbnail menu"
+msgstr "Apri nuova finestra / Tieni premuto per il menù Anteprima"
+
+#: SetupWizard.ui:407
+msgid "Restore most recent window / Cycle windows"
+msgstr "Ripristina la finestra più recente / Scorri le finestre"
+
+#: SetupWizard.ui:427
+msgid "Open the Thumbnail menu"
+msgstr "Apri il menù Miniatura"
+
+#: SetupWizard.ui:461
+msgid "Thumbnail window menu on mouse hover"
+msgstr "Menù della finestra delle miniature al passaggio del mouse"
+
+#: SetupWizard.ui:492
+msgid "All done!"
+msgstr "Tutto fatto!"
+
+#: SetupWizard.ui:508
+msgid ""
+"There are many more options and features to explorer in the\n"
+"applet configurator and the window list button context menu,\n"
+"for example:\n"
+"\n"
+" • Hot-keys to launch / activate a specific window.\n"
+" • Customizable mouse button actions.\n"
+" • Customizable icon saturation (grayscale / vivid).\n"
+" • Customizable Ctrl/Shift + mouse button actions.\n"
+" • Application specific grouping and label settings.\n"
+" • Thumbnail window zooming using the scroll-wheel.\n"
+" • Automatic application grouping when space is limited.\n"
+" • And much more."
+msgstr ""
+"Ci sono molte altre opzioni e funzionalità da esplorare\n"
+"nel configuratore dell'applet e nel menù contestuale del pulsante\n"
+"dell'elenco delle finestre, ad esempio:\n"
+"\n"
+"  • Tasti di scelta rapida per avviare/attivare una finestra specifica.\n"
+"  • Azioni personalizzabili dei pulsanti del mouse.\n"
+"  • Saturazione delle icone personalizzabile (scala di grigi/vivido).\n"
+"  • Azioni personalizzabili Ctrl/Shift + pulsante del mouse.\n"
+"  • Impostazioni di raggruppamento ed etichetta specifiche "
+"dell'applicazione.\n"
+"  • Zoom della finestra delle miniature utilizzando la rotella di "
+"scorrimento.\n"
+"  • Raggruppamento automatico delle applicazioni quando lo spazio è "
+"limitato.\n"
+"  • E molto altro ancora."
+
+#: SetupWizard.ui:530
+msgid "Exit and launch the applet configurator now"
+msgstr "Esci e avvia subito il configuratore dell'applet"
+
+#: SetupWizard.ui:559
+msgid "Select a backup configuration to restore?"
+msgstr "Selezionare una configurazione di backup da ripristinare?"
+
+#: SetupWizard.ui:602
+msgid "Configuration Backup?"
+msgstr "Backup della configurazione?"
+
+#: SetupWizard.ui:618
+msgid ""
+"If you would like to maintain an automatic backup\n"
+"of this applet configuration then select or enter a\n"
+"backup file description below. All current and future\n"
+"configuration changes will be saved to this backup:"
+msgstr ""
+"Se desideri mantenere un backup automatico\n"
+"di questa configurazione dell'applet, seleziona o inserisci una\n"
+"descrizione del file di backup di seguito. Tutte le modifiche alla\n"
+"configurazione attuale e future verranno salvate in questo backup:"
+
+#: SetupWizard.ui:638
+msgid "MainWindowList"
+msgstr "MainWindowList"
+
+#: SetupWizard.ui:639
+msgid "MainPanelLauncher"
+msgstr "MainPanelLauncher"
+
+#: SetupWizard.ui:640
+msgid "Monitor1WindowList"
+msgstr "Monitor1WindowList"
+
+#: SetupWizard.ui:641
+msgid "Monitor2WindowList"
+msgstr "Monitor2WindowList"
+
+#: SetupWizard.ui:642
+msgid "Monitor1PanelLauncher"
+msgstr "Monitor1PanelLauncher"
+
+#: SetupWizard.ui:643
+msgid "Monitor2PanelLauncher"
+msgstr "Monitor2PanelLauncher"

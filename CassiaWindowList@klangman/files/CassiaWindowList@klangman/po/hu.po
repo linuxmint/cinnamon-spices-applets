@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-20 23:58-0400\n"
+"POT-Creation-Date: 2024-03-21 05:44-0400\n"
 "PO-Revision-Date: 2024-02-08 15:00+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
@@ -1411,3 +1411,218 @@ msgid ""
 msgstr ""
 "Mely gombokra lesz alkalmazva az egyéni ikon színtelítettsége\n"
 "Ez az opció csak akkor érhető el, ha a telítettség nincs 100%-ra állítva"
+
+#: SetupWizard.ui:7
+msgid "CassiaWindowList Basic Setup Wizard"
+msgstr "Cassia Ablaklista alapvető beállítási varázsló"
+
+#: SetupWizard.ui:78
+msgid "Welcome to CassiaWindowList"
+msgstr "Üdvözöljük az Cassia Ablaklistában"
+
+#: SetupWizard.ui:95
+msgid "How would you like this applet instance to behave?"
+msgstr "Hogyan szeretné, hogy ez a kisalkalmazáspéldány viselkedjen?"
+
+#: SetupWizard.ui:105
+msgid ""
+"Window List (Task bar)\n"
+"Panel buttons for all running windows."
+msgstr ""
+"Ablaklista (Tálca)\n"
+"Panelgombok minden futó ablakhoz."
+
+#: SetupWizard.ui:125
+msgid ""
+"Panel Launcher (Quick launcher)\n"
+"Panel button only appear when you add items\n"
+"to the panel, no labels are shown, only icons."
+msgstr ""
+"Panelindító (gyorsindító)\n"
+"A panel gomb csak akkor jelenik meg, ha elemeket ad hozzá\n"
+"a panelen nem jelennek meg címkék, csak ikonok."
+
+#: SetupWizard.ui:146
+msgid ""
+"Restore configuration from an automatic\n"
+"backup"
+msgstr ""
+"Konfiguráció visszaállítása automatikusról\n"
+"biztonsági mentés"
+
+#: SetupWizard.ui:178
+msgid "How do you want your Window List to operate?"
+msgstr "Hogyan szeretné, hogy az ablaklistája működjön?"
+
+#: SetupWizard.ui:192
+msgid ""
+"Basic  -  Quick window access\n"
+"Every window gets it's own window list button.\n"
+"Button labels are window titles."
+msgstr ""
+"Alap – Gyors hozzáférés az ablakokhoz\n"
+"Minden ablaknak megvan a maga ablaklista gombja.\n"
+"A gombcímkék ablakcímek."
+
+#: SetupWizard.ui:213
+msgid ""
+"Grouping  -  Very compact\n"
+"One window list button per application.\n"
+"Thumbnail menus to select specific window.\n"
+"Button labels are window titles."
+msgstr ""
+"Csoportosítás - Nagyon kompakt\n"
+"Alkalmazásonként egy ablaklista gomb.\n"
+"Miniatűr menük az adott ablak kiválasztásához.\n"
+"A gombcímkék ablakcímek."
+
+#: SetupWizard.ui:236
+msgid ""
+"Pooling  -  Quick access & compact\n"
+"Every window gets it's own window list button.\n"
+"Application buttons are pooled togeather.\n"
+"One button label per application pool.\n"
+"Button labels are application names."
+msgstr ""
+"Összevont - Gyors hozzáférés és kompakt\n"
+"Minden ablaknak megvan a maga ablaklista gombja.\n"
+"Az alkalmazás gombjai össze vannak vonva.\n"
+"Alkalmazáskészletenként egy gombcímke.\n"
+"A gombcímkék alkalmazásnevek."
+
+#: SetupWizard.ui:273
+msgid "Just a few more options to consider"
+msgstr "Csak néhány további lehetőség, amelyet meg kell fontolni"
+
+#: SetupWizard.ui:287
+msgid "No Labels (icons only)"
+msgstr "Nincsenek címkék (csak ikonok)"
+
+#: SetupWizard.ui:305
+msgid "No minimized window indicator character"
+msgstr "Nincs kicsinyített ablakjelző karakter"
+
+#: SetupWizard.ui:323
+msgid "No Thumbnail window menu on mouse hover"
+msgstr "Nincs miniatűr ablak menü az egérmutatón"
+
+#: SetupWizard.ui:354
+msgid "Panel Launcher Setup"
+msgstr "Panelindító beállítása"
+
+#: SetupWizard.ui:370
+msgid ""
+"Unlike most Panel Launcher applets, this launcher keeps tack of \n"
+"running windows and uses window Thumbnail menus.\n"
+"\n"
+"You can launch additional windows by clicking the 'Back' mouse \n"
+"button or using the Left mouse button while holding the Ctrl key.\n"
+"\n"
+"How would you like the Left mouse button to behave when \n"
+"windows already exist for a launcher button?"
+msgstr ""
+"A legtöbb Panel Launcher kisalkalmazással ellentétben ez az indító lépést "
+"tart\n"
+"ablakokat futtat, és az ablak miniatűr menüit használja.\n"
+"\n"
+"További ablakokat indíthat el a „Vissza” egérgombbal\n"
+"gombbal vagy a bal egérgombbal, miközben lenyomva tartja a Ctrl billentyűt.\n"
+"\n"
+"Hogyan szeretné, ha a bal egérgomb mikor viselkedne\n"
+"már léteznek ablakok az indítógombhoz?"
+
+#: SetupWizard.ui:388
+msgid "Open new window / Hold for Thumbnail menu"
+msgstr "Új ablak megnyitása / Tartsa lenyomva a Miniatűr menühöz"
+
+#: SetupWizard.ui:407
+msgid "Restore most recent window / Cycle windows"
+msgstr "A legutóbbi ablak visszaállítása / Az ablakok ciklusa"
+
+#: SetupWizard.ui:427
+msgid "Open the Thumbnail menu"
+msgstr "Nyissa meg a Miniatűr menüt"
+
+#: SetupWizard.ui:461
+msgid "Thumbnail window menu on mouse hover"
+msgstr "Bélyegkép ablak menüje az egérmutatóval"
+
+#: SetupWizard.ui:492
+msgid "All done!"
+msgstr "Minden készen van!"
+
+#: SetupWizard.ui:508
+msgid ""
+"There are many more options and features to explorer in the\n"
+"applet configurator and the window list button context menu,\n"
+"for example:\n"
+"\n"
+" • Hot-keys to launch / activate a specific window.\n"
+" • Customizable mouse button actions.\n"
+" • Customizable icon saturation (grayscale / vivid).\n"
+" • Customizable Ctrl/Shift + mouse button actions.\n"
+" • Application specific grouping and label settings.\n"
+" • Thumbnail window zooming using the scroll-wheel.\n"
+" • Automatic application grouping when space is limited.\n"
+" • And much more."
+msgstr ""
+"Számos további lehetőség és funkció áll rendelkezésre a felfedező számára\n"
+"kisalkalmazás konfigurátor és az ablaklista gomb helyi menüje,\n"
+"például:\n"
+"\n"
+"  • Gyorsbillentyűk egy adott ablak elindításához/aktiválásához.\n"
+"  • Testreszabható egérgomb műveletek.\n"
+"  • Testreszabható ikon telítettség (szürkeárnyalatos / élénk).\n"
+"  • Testreszabható Ctrl/Shift + egérgomb műveletek.\n"
+"  • Alkalmazásspecifikus csoportosítás és címkebeállítások.\n"
+"  • Miniatűr ablak nagyítása a görgő segítségével.\n"
+"  • Automatikus alkalmazások csoportosítása korlátozott hely esetén.\n"
+"  • És még sok más."
+
+#: SetupWizard.ui:530
+msgid "Exit and launch the applet configurator now"
+msgstr "Lépjen ki, és indítsa el most az kisalkalmazáskonfigurátort"
+
+#: SetupWizard.ui:559
+msgid "Select a backup configuration to restore?"
+msgstr "Válassza ki a visszaállítandó biztonsági mentési konfigurációt?"
+
+#: SetupWizard.ui:602
+msgid "Configuration Backup?"
+msgstr "Konfiguráció biztonsági mentése?"
+
+#: SetupWizard.ui:618
+msgid ""
+"If you would like to maintain an automatic backup\n"
+"of this applet configuration then select or enter a\n"
+"backup file description below. All current and future\n"
+"configuration changes will be saved to this backup:"
+msgstr ""
+"Ha szeretne automatikus biztonsági másolatot készíteni\n"
+"ennek a kisalkalmazáskonfigurációnak, majd válassza ki vagy írja be a a\n"
+"biztonsági másolat fájl leírása alább. Minden jelenlegi és jövőbeli\n"
+"a konfigurációs módosítások ebbe a biztonsági másolatba kerülnek:"
+
+#: SetupWizard.ui:638
+msgid "MainWindowList"
+msgstr "FőablAklista"
+
+#: SetupWizard.ui:639
+msgid "MainPanelLauncher"
+msgstr "FőPanelIndító"
+
+#: SetupWizard.ui:640
+msgid "Monitor1WindowList"
+msgstr "Monitor1Ablaklista"
+
+#: SetupWizard.ui:641
+msgid "Monitor2WindowList"
+msgstr "Monitor2Ablaklista"
+
+#: SetupWizard.ui:642
+msgid "Monitor1PanelLauncher"
+msgstr "Monitor1PanelIndító"
+
+#: SetupWizard.ui:643
+msgid "Monitor2PanelLauncher"
+msgstr "Monitor2PanelIndító"
