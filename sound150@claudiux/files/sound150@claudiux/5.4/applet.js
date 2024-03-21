@@ -389,9 +389,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         if (value < 0.005) {
             icon = "muted";
         } else {
-            //~ let n = Math.floor(3 * value);
             let n2 = Math.floor(300 * value)/100;
-            //~ if (!this.isMic) log("n: "+n+"  n2: "+n2, true);
             if (this.isMic) {
                 if (n2 < 1)
                     icon = "low";
@@ -1484,7 +1482,6 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         Util.spawnCommandLineAsync("bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
         Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/rm_tmp_files.sh'");
-        Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/run_playerctld.sh'");
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
@@ -1703,28 +1700,37 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.loopArt();
     }
 
+    run_playerctld() {
+        Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/run_playerctld.sh'");
+    }
+
+    kill_playerctld() {
+        Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/kill_playerctld.sh'");
+    }
+
     _on_remove_soundATcinnamonDOTorg_from_panels() {
-    let dialog = new ModalDialog.ConfirmDialog(
-      _("Are you sure you want to remove '%s'?").format("sound@cinnamon.org"),
-      () => {
-        Extension.unloadExtension("sound@cinnamon.org", Extension.Type.APPLET, false, false);
+        const TO_REMOVE = "sound@cinnamon.org";
+        let dialog = new ModalDialog.ConfirmDialog(
+            _("Are you sure you want to remove '%s'?").format(TO_REMOVE),
+                () => {
+                Extension.unloadExtension(TO_REMOVE, Extension.Type.APPLET, false, false);
 
-        let oldList = global.settings.get_strv(ENABLED_APPLETS_KEY);
-        let newList = [];
+                let oldList = global.settings.get_strv(ENABLED_APPLETS_KEY);
+                let newList = [];
 
-        for (let i = 0; i < oldList.length; i++) {
-          let info = oldList[i].split(':');
-          if (info[3] != "sound@cinnamon.org") {
-              newList.push(oldList[i]);
-          }
-        }
-        global.settings.set_strv(ENABLED_APPLETS_KEY, newList);
-        this.settings.setValue("soundATcinnamonDOTorg_is_loaded", false);
-        this._on_reload_this_applet_pressed();
-      }
-    );
-    dialog.open();
-  }
+                for (let i = 0; i < oldList.length; i++) {
+                    let info = oldList[i].split(':');
+                    if (info[3] != TO_REMOVE) {
+                        newList.push(oldList[i]);
+                    }
+                }
+                global.settings.set_strv(ENABLED_APPLETS_KEY, newList);
+                this.settings.setValue("soundATcinnamonDOTorg_is_loaded", false);
+                this._on_reload_this_applet_pressed();
+            }
+        );
+        dialog.open();
+    }
 
     get_easy_effects() {
         var commandline = null;
@@ -2610,6 +2616,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this._recordingAppsNum++ === 0) {
                 this._inputSection.actor.show();
                 this.mute_in_switch.actor.show();
+                this.run_playerctld();
             }
         }
     }
@@ -2637,6 +2644,7 @@ class Sound150Applet extends Applet.TextIconApplet {
                         this.mute_in_switch.actor.show();
                     }
                 }
+                this.kill_playerctld();
                 this._streams.splice(i, 1);
                 break;
             }
