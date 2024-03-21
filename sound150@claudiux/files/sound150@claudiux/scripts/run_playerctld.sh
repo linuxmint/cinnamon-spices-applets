@@ -5,7 +5,7 @@ PCDPATH=$(which playerctld)
 [[ -z $PCDPATH ]] && exit 1
 
 [[ -z $PCDPID ]] && {
-        playerctld &
+        playerctld daemon
 }
 
 exit 0
