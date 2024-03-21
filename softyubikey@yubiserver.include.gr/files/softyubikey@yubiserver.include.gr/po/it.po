@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-24 20:10+0800\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-21 14:16-0400\n"
 "PO-Revision-Date: 2022-06-03 19:07+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -26,10 +27,30 @@ msgstr "Fai clic qui per creare un OTP"
 msgid "Configure your SoftYubikey"
 msgstr "Configura il tuo SoftYubikey"
 
-#. softyubikey@yubiserver.include.gr->metadata.json->description
+#. metadata.json->name
+msgid "SoftYubikey"
+msgstr "SoftYubikey"
+
+#. metadata.json->description
 msgid "Click on the applet to create a OTP"
 msgstr "Fare clic sull'applet per creare un OTP"
 
-#. softyubikey@yubiserver.include.gr->metadata.json->name
-msgid "SoftYubikey"
-msgstr "SoftYubikey"
+#: ui/softyubikey.ui:27
+msgid "Public ID"
+msgstr ""
+
+#: ui/softyubikey.ui:40
+msgid "Private ID"
+msgstr ""
+
+#: ui/softyubikey.ui:53
+msgid "AES key"
+msgstr ""
+
+#: ui/softyubikey.ui:117
+msgid "Apply"
+msgstr ""
+
+#: ui/softyubikey.ui:133
+msgid "Cancel"
+msgstr ""

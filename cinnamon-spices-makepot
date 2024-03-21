@@ -112,6 +112,7 @@ def make_pot(uuid: str, _all: bool = False):
     os.chdir(uuid_dir)
     pot_path = f'po/{pot_file}'
     glade_list = glob('**/*.glade', recursive=True)
+    glade_list += glob('**/*.ui', recursive=True)
     for glade_file in glade_list:
         subprocess.run(["xgettext", "-jL", "Glade", "-o", pot_path,
                        glade_file], check=True)
@@ -142,6 +143,7 @@ def make_pot(uuid: str, _all: bool = False):
         if not os.getcwd().endswith(po_dir_str):
             os.chdir(po_dir_str)
         po_lang = po_ext.split('.')[0]
+        subprocess.run(["msguniq", "-o", po_ext, po_ext], check=True)
         subprocess.run(["intltool-update", "-g", uuid, "-d", po_lang],
                        check=True)
         subprocess.run(["msgattrib", "--no-obsolete", "-w", "79", "-o",
