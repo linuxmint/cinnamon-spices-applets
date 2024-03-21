@@ -1,3 +1,8 @@
+### v6.5.3~20240321
+  * Runs playerctld, if exists.
+  * Minor bugfixes.
+  * Ready for LM 22.
+
 ### v6.5.2~20240320
   * Fixes  #5604
 
