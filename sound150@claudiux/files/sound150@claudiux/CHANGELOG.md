@@ -1,3 +1,6 @@
+### v6.5.4~20240322
+  * Improves playerctld management.
+
 ### v6.5.3~20240321
   * Runs playerctld, if exists.
   * Minor bugfixes.

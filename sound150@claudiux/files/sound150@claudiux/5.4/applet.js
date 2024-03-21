@@ -40,6 +40,16 @@ const ENABLED_APPLETS_KEY = "enabled-applets";
 // how long to show the output icon when volume is adjusted during media playback.
 const OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
 
+function run_playerctld() {
+    Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/run_playerctld.sh'");
+}
+
+function kill_playerctld() {
+    Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/kill_playerctld.sh'");
+}
+
+
+
 /**
  * DEBUG:
  * Returns whether or not the DEBUG file is present in this applet directory ($ touch DEBUG)
@@ -506,6 +516,7 @@ class Seeker extends Slider.Slider {
     }
 
     play() {
+        run_playerctld();
         this.status = 'Playing';
         this._getCanSeek();
     }
@@ -522,6 +533,7 @@ class Seeker extends Slider.Slider {
             } catch(e) {}
             this._timeoutId = 0;
         }
+        run_playerctld();
     }
 
     stop() {
@@ -1700,14 +1712,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.loopArt();
     }
 
-    run_playerctld() {
-        Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/run_playerctld.sh'");
-    }
-
-    kill_playerctld() {
-        Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/kill_playerctld.sh'");
-    }
-
     _on_remove_soundATcinnamonDOTorg_from_panels() {
         const TO_REMOVE = "sound@cinnamon.org";
         let dialog = new ModalDialog.ConfirmDialog(
@@ -2616,7 +2620,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (this._recordingAppsNum++ === 0) {
                 this._inputSection.actor.show();
                 this.mute_in_switch.actor.show();
-                this.run_playerctld();
+                run_playerctld();
             }
         }
     }
@@ -2643,8 +2647,9 @@ class Sound150Applet extends Applet.TextIconApplet {
                         this._inputSection.actor.show();
                         this.mute_in_switch.actor.show();
                     }
+                    kill_playerctld();
                 }
-                this.kill_playerctld();
+                //~ this.kill_playerctld();
                 this._streams.splice(i, 1);
                 break;
             }
