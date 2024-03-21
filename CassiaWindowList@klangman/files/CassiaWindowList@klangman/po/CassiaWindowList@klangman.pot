@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-06 10:21-0500\n"
+"Project-Id-Version: CassiaWindowList@klangman 2.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-21 05:44-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,32 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.0/applet.js:516
+#: 4.0/applet.js:536
 msgid "all buttons"
 msgstr ""
 
-#: 4.0/applet.js:2501
+#: 4.0/applet.js:2618
 msgid "Applet Preferences"
 msgstr ""
 
-#: 4.0/applet.js:2505
+#: 4.0/applet.js:2622
 msgid "About..."
 msgstr ""
 
-#: 4.0/applet.js:2509
+#: 4.0/applet.js:2626
 msgid "Configure..."
 msgstr ""
 
-#: 4.0/applet.js:2513
+#: 4.0/applet.js:2630
 msgid "Website"
 msgstr ""
 
-#: 4.0/applet.js:2517
+#: 4.0/applet.js:2634
 #, javascript-format
 msgid "Remove '%s'"
 msgstr ""
 
-#: 4.0/applet.js:2519
+#: 4.0/applet.js:2636
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr ""
 
@@ -52,111 +52,111 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2528
+#: 4.0/applet.js:2645
 msgid "Open new window"
 msgstr ""
 
-#: 4.0/applet.js:2536
+#: 4.0/applet.js:2653
 msgid "Remove from panel"
 msgstr ""
 
-#: 4.0/applet.js:2538
+#: 4.0/applet.js:2655
 msgid "Remove from this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2544
+#: 4.0/applet.js:2661
 msgid "Pin to panel"
 msgstr ""
 
-#: 4.0/applet.js:2546
+#: 4.0/applet.js:2663
 msgid "Pin to this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2587
+#: 4.0/applet.js:2704
 msgid "Pin to other workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2608
+#: 4.0/applet.js:2725
 msgid "Pin to all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2626
+#: 4.0/applet.js:2743
 msgid "Pin to launcher"
 msgstr ""
 
-#: 4.0/applet.js:2644 4.0/applet.js:2830
+#: 4.0/applet.js:2761 4.0/applet.js:2947
 msgid "Add new Hotkey for"
 msgstr ""
 
-#: 4.0/applet.js:2658
+#: 4.0/applet.js:2775
 msgid "Recent files"
 msgstr ""
 
-#: 4.0/applet.js:2682
+#: 4.0/applet.js:2799
 msgid "Places"
 msgstr ""
 
-#: 4.0/applet.js:2724
+#: 4.0/applet.js:2841
 msgid "Only on this workspace"
 msgstr ""
 
-#: 4.0/applet.js:2726
+#: 4.0/applet.js:2843
 msgid "Visible on all workspaces"
 msgstr ""
 
-#: 4.0/applet.js:2727
+#: 4.0/applet.js:2844
 msgid "Move to another workspace"
 msgstr ""
 
-#: 4.0/applet.js:2736
+#: 4.0/applet.js:2853
 msgid " (this workspace)"
 msgstr ""
 
-#: 4.0/applet.js:2749
+#: 4.0/applet.js:2866
 msgid "Move to another monitor"
 msgstr ""
 
-#: 4.0/applet.js:2757
+#: 4.0/applet.js:2874
 msgid "Monitor"
 msgstr ""
 
-#: 4.0/applet.js:2785
+#: 4.0/applet.js:2902
 msgid "unassigned"
 msgstr ""
 
-#: 4.0/applet.js:2796 4.0/applet.js:2827
+#: 4.0/applet.js:2913 4.0/applet.js:2944
 msgid "Assign window to a hotkey"
 msgstr ""
 
-#: 4.0/applet.js:2850
+#: 4.0/applet.js:2967
 msgid "Change application label contents"
 msgstr ""
 
-#: 4.0/applet.js:2853
+#: 4.0/applet.js:2970
 msgid "Remove custom setting"
 msgstr ""
 
-#: 4.0/applet.js:2860
+#: 4.0/applet.js:2977
 msgid "Use window title"
 msgstr ""
 
-#: 4.0/applet.js:2867
+#: 4.0/applet.js:2984
 msgid "Use application name"
 msgstr ""
 
-#: 4.0/applet.js:2874
+#: 4.0/applet.js:2991
 msgid "No label"
 msgstr ""
 
-#: 4.0/applet.js:2885
+#: 4.0/applet.js:3002
 msgid "Ungroup application windows"
 msgstr ""
 
-#: 4.0/applet.js:2894
+#: 4.0/applet.js:3011
 msgid "Group application windows"
 msgstr ""
 
-#: 4.0/applet.js:2907
+#: 4.0/applet.js:3024
 msgid "Automatic grouping/ungrouping"
 msgstr ""
 
@@ -166,31 +166,31 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2937
+#: 4.0/applet.js:3054
 msgid "Move titlebar on to screen"
 msgstr ""
 
-#: 4.0/applet.js:2942
+#: 4.0/applet.js:3059
 msgid "Restore"
 msgstr ""
 
-#: 4.0/applet.js:2946
+#: 4.0/applet.js:3063
 msgid "Minimize"
 msgstr ""
 
-#: 4.0/applet.js:2952
+#: 4.0/applet.js:3069
 msgid "Unmaximize"
 msgstr ""
 
-#: 4.0/applet.js:2959
+#: 4.0/applet.js:3076
 msgid "Close others"
 msgstr ""
 
-#: 4.0/applet.js:2970
+#: 4.0/applet.js:3087
 msgid "Close all"
 msgstr ""
 
-#: 4.0/applet.js:2979
+#: 4.0/applet.js:3096
 msgid "Close"
 msgstr ""
 
@@ -768,6 +768,15 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to this workspace"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Visible on this/all workspaces"
 msgstr ""
 
@@ -841,6 +850,87 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Pin to panel toggle"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Untile window"
 msgstr ""
 
 #. 4.0->settings-schema.json->preview-middle-click->options

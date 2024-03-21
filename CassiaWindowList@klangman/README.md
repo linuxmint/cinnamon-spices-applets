@@ -1,21 +1,22 @@
 This is a Cinnamon window list and panel launcher applet based on CobiWindowList with a number of additional features
 designed to give you more control over how your window-list operates.
 
-Recent new features (Aug 2023 - Feb 2024):
+Recent new features (Aug 2023 - Mar 2024):
 
-1.  Hover peek: Option to show a full size preview when hovering buttons/thumbnails
-2.  No Click activate: Option to automatically switch focus to the button/Thumbnail last hovered
-3.  Adjustable spacing between window-list buttons
-4.  Ability to disable the new window animation
-5.  Ability to change the icon saturation from grayscale (0%) to vivid (200%)
-6.  Ability to show windows from other workspaces
-7.  Restores custom group/ungroup application setting after reboot/cinnamon-restart
-8.  Hotkey option to assign a set of 1-9 hotkeys to all window-list buttons
-9.  Hotkey hints using the (`) grave key with any registered hotkey modifiers
-10. Added a Left-Click option to start new application windows in Launcher mode
-11. Ability to show a common set of pinned buttons on all workspaces
-12. Smart numeric hotkeys to assign a set of 1-9 hotkeys to a specific application
-13. A bunch of fixes
+1.  Mouse action options for window tiling, untiling and moving window to current workspace
+2.  Hover peek: Option to show a full size preview when hovering buttons/thumbnails
+3.  No Click activate: Option to automatically switch focus to the button/Thumbnail last hovered
+4.  Adjustable spacing between window-list buttons
+5.  Ability to disable the new window animation
+6.  Ability to change the icon saturation from grayscale (0%) to vivid (200%)
+7.  Ability to show windows from other workspaces
+8.  Restores custom group/ungroup application setting after reboot/cinnamon-restart
+9.  Hotkey option to assign a set of 1-9 hotkeys to all window-list buttons
+10.  Hotkey hints using the (`) grave key with any registered hotkey modifiers
+11. Added a Left-Click option to start new application windows in Launcher mode
+12. Ability to show a common set of pinned buttons on all workspaces
+13. Smart numeric hotkeys to assign a set of 1-9 hotkeys to a specific application
+14. A bunch of fixes
 
 The design goals are to:
 

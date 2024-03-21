@@ -1,8 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-22 20:01+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-21 05:44-0400\n"
 "PO-Revision-Date: 2024-01-01 10:11+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -13,28 +14,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: 4.0/applet.js:512
+#: 4.0/applet.js:536
 msgid "all buttons"
 msgstr "alle knapper"
 
-#: 4.0/applet.js:2370
+#: 4.0/applet.js:2618
 msgid "Applet Preferences"
 msgstr "Indstillinger"
 
-#: 4.0/applet.js:2374
+#: 4.0/applet.js:2622
 msgid "About..."
 msgstr "Om …"
 
-#: 4.0/applet.js:2378
+#: 4.0/applet.js:2626
 msgid "Configure..."
 msgstr "Konfigurér …"
 
-#: 4.0/applet.js:2382
+#: 4.0/applet.js:2630
+msgid "Website"
+msgstr ""
+
+#: 4.0/applet.js:2634
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Fjern “%s”"
 
-#: 4.0/applet.js:2384
+#: 4.0/applet.js:2636
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Vil du virkelig fjerne denne forekomst af CassiaVinduesliste?"
 
@@ -44,111 +49,111 @@ msgstr "Vil du virkelig fjerne denne forekomst af CassiaVinduesliste?"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2393
+#: 4.0/applet.js:2645
 msgid "Open new window"
 msgstr "Åbn nyt vindue"
 
-#: 4.0/applet.js:2401
+#: 4.0/applet.js:2653
 msgid "Remove from panel"
 msgstr "Fjern fra panel"
 
-#: 4.0/applet.js:2403
+#: 4.0/applet.js:2655
 msgid "Remove from this workspace"
 msgstr "Fjern fra dette arbejdsområde"
 
-#: 4.0/applet.js:2409
+#: 4.0/applet.js:2661
 msgid "Pin to panel"
 msgstr "Fastgør til panel"
 
-#: 4.0/applet.js:2411
+#: 4.0/applet.js:2663
 msgid "Pin to this workspace"
 msgstr "Fastgør til dette arbejdsområde"
 
-#: 4.0/applet.js:2452
+#: 4.0/applet.js:2704
 msgid "Pin to other workspaces"
 msgstr "Fastgør til andre arbejdsområder"
 
-#: 4.0/applet.js:2473
+#: 4.0/applet.js:2725
 msgid "Pin to all workspaces"
 msgstr "Fastgør til alle arbejdsområder"
 
-#: 4.0/applet.js:2491
+#: 4.0/applet.js:2743
 msgid "Pin to launcher"
 msgstr "Fastgør til programstarter"
 
-#: 4.0/applet.js:2509 4.0/applet.js:2695
+#: 4.0/applet.js:2761 4.0/applet.js:2947
 msgid "Add new Hotkey for"
 msgstr "Tilføj ny genvejstast til"
 
-#: 4.0/applet.js:2523
+#: 4.0/applet.js:2775
 msgid "Recent files"
 msgstr "Seneste filer"
 
-#: 4.0/applet.js:2547
+#: 4.0/applet.js:2799
 msgid "Places"
 msgstr "Steder"
 
-#: 4.0/applet.js:2589
+#: 4.0/applet.js:2841
 msgid "Only on this workspace"
 msgstr "Kun på dette arbejdsområde"
 
-#: 4.0/applet.js:2591
+#: 4.0/applet.js:2843
 msgid "Visible on all workspaces"
 msgstr "Synlig på alle arbejdsområder"
 
-#: 4.0/applet.js:2592
+#: 4.0/applet.js:2844
 msgid "Move to another workspace"
 msgstr "Flyt til et andet arbejdsområde"
 
-#: 4.0/applet.js:2601
+#: 4.0/applet.js:2853
 msgid " (this workspace)"
 msgstr " (dette arbejdsområde)"
 
-#: 4.0/applet.js:2614
+#: 4.0/applet.js:2866
 msgid "Move to another monitor"
 msgstr "Flyt til en anden skærm"
 
-#: 4.0/applet.js:2622
+#: 4.0/applet.js:2874
 msgid "Monitor"
 msgstr "Skærm"
 
-#: 4.0/applet.js:2650
+#: 4.0/applet.js:2902
 msgid "unassigned"
 msgstr "ikke tildelt"
 
-#: 4.0/applet.js:2661 4.0/applet.js:2692
+#: 4.0/applet.js:2913 4.0/applet.js:2944
 msgid "Assign window to a hotkey"
 msgstr "Tildel en genvejstast til vindue"
 
-#: 4.0/applet.js:2715
+#: 4.0/applet.js:2967
 msgid "Change application label contents"
 msgstr "Ændr indholdet af programetiket"
 
-#: 4.0/applet.js:2718
+#: 4.0/applet.js:2970
 msgid "Remove custom setting"
 msgstr "Fjern brugerdefineret indstilling"
 
-#: 4.0/applet.js:2725
+#: 4.0/applet.js:2977
 msgid "Use window title"
 msgstr "Brug vinduestitel"
 
-#: 4.0/applet.js:2732
+#: 4.0/applet.js:2984
 msgid "Use application name"
 msgstr "Brug programnavn"
 
-#: 4.0/applet.js:2739
+#: 4.0/applet.js:2991
 msgid "No label"
 msgstr "Ingen etiket"
 
-#: 4.0/applet.js:2750
+#: 4.0/applet.js:3002
 msgid "Ungroup application windows"
 msgstr "Opsplit gruppen af programmervinduer"
 
-#: 4.0/applet.js:2759
+#: 4.0/applet.js:3011
 msgid "Group application windows"
 msgstr "Gruppér programvinduer"
 
-#: 4.0/applet.js:2772
+#: 4.0/applet.js:3024
 msgid "Automatic grouping/ungrouping"
 msgstr "Automatisk gruppering/opsplitning af gruppe"
 
@@ -158,31 +163,31 @@ msgstr "Automatisk gruppering/opsplitning af gruppe"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2802
+#: 4.0/applet.js:3054
 msgid "Move titlebar on to screen"
 msgstr "Flyt titellinje til skærm"
 
-#: 4.0/applet.js:2807
+#: 4.0/applet.js:3059
 msgid "Restore"
 msgstr "Gendan"
 
-#: 4.0/applet.js:2811
+#: 4.0/applet.js:3063
 msgid "Minimize"
 msgstr "Minimér"
 
-#: 4.0/applet.js:2817
+#: 4.0/applet.js:3069
 msgid "Unmaximize"
 msgstr "Gendan"
 
-#: 4.0/applet.js:2824
+#: 4.0/applet.js:3076
 msgid "Close others"
 msgstr "Luk andre"
 
-#: 4.0/applet.js:2835
+#: 4.0/applet.js:3087
 msgid "Close all"
 msgstr "Luk alle"
 
-#: 4.0/applet.js:2844
+#: 4.0/applet.js:3096
 msgid "Close"
 msgstr "Luk"
 
@@ -402,7 +407,26 @@ msgstr ""
 "fastgjorte knapper, der er placeret til højre på vindueslisten, så du kan "
 "beholde fastgjorte knapper i slutningen af vindueslisten"
 
+#. 4.0->settings-schema.json->fade-animation-time->units
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr "millisekunder"
+
+#. 4.0->settings-schema.json->fade-animation-time->description
+#, fuzzy
+msgid "Fade animation effect duration"
+msgstr "Varighed af etiketanimation"
+
+#. 4.0->settings-schema.json->fade-animation-time->tooltip
+msgid ""
+"This defines the duration of the fade-in/out animation effect. It applies to "
+"the Thumbnail menus and the full size window previews"
+msgstr ""
+
 #. 4.0->settings-schema.json->label-width->units
+#. 4.0->settings-schema.json->button-spacing->units
 msgid "pixels"
 msgstr "pixels"
 
@@ -418,14 +442,9 @@ msgstr "Dette definerer bredden på etiketdelen af en vindueslisteknap"
 msgid "Animate label"
 msgstr "Animér etiket"
 
-#. 4.0->settings-schema.json->label-animation-time->units
-#. 4.0->settings-schema.json->preview-timeout-show->units
-#. 4.0->settings-schema.json->preview-timeout-hide->units
-msgid "milliseconds"
-msgstr "millisekunder"
-
 #. 4.0->settings-schema.json->label-animation-time->description
-msgid "Label animation time"
+#, fuzzy
+msgid "Label animation duration"
 msgstr "Varighed af etiketanimation"
 
 #. 4.0->settings-schema.json->display-number->options
@@ -575,6 +594,43 @@ msgid ""
 msgstr ""
 "Når aktiveret, vil vinduer for programmer med fastgjorte knapper i andre "
 "forekomster af CassiaVinduesliste ikke blive vist på denne vinduesliste"
+
+#. 4.0->settings-schema.json->button-spacing->description
+msgid "Spacing between buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->button-spacing->tooltip
+msgid ""
+"This defines the spacing between the buttons, the value will be divided in "
+"half and added to the left of the icon and to the right of the label on "
+"horizontal panels or to the top and button of the icon on vertical panels"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->description
+msgid "Show a full size window preview when hovering over a button"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
+#, fuzzy
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a window-list button."
+msgstr ""
+"Aktivér for at vise værktøjstips med vinduestitel eller programnavn, når man "
+"holder musen over vindueslisteknapper"
+
+#. 4.0->settings-schema.json->no-click-activate->description
+msgid "Automatic focus change when leaving the panel"
+msgstr ""
+
+#. 4.0->settings-schema.json->no-click-activate->tooltip
+msgid ""
+"If enabled, the current window for a window-list button will get the focus "
+"when the mouse pointer leaves the panel. Leaving the window-list with Ctrl "
+"or Shift held or while remaining on the panel will leave the focus "
+"unchanged. This option is typically used in conjunction with the preview "
+"hovering option above."
+msgstr ""
 
 #. 4.0->settings-schema.json->menu-show-on-hover->description
 msgid "Show on hover"
@@ -769,6 +825,16 @@ msgstr "Flyt til næste arbejdsområde"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#, fuzzy
+msgid "Move to this workspace"
+msgstr "Flyt til næste arbejdsområde"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Visible on this/all workspaces"
 msgstr "Synlig på dette/alle arbejdsområder"
 
@@ -850,6 +916,88 @@ msgstr "Fastgør/frigør fra panel"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#, fuzzy
+msgid "Untile window"
+msgstr "Luk vindue"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Do nothing"
 msgstr "Gør intet"
 
@@ -864,6 +1012,29 @@ msgstr "Handling ved tilbageklik i miniaturevinduet"
 #. 4.0->settings-schema.json->preview-forward-click->description
 msgid "Thumbnail window forward button action"
 msgstr "Handling ved fremklik i miniaturevinduet"
+
+#. 4.0->settings-schema.json->hover-peek-thumbnail->description
+msgid "Show a full size window preview when hovering over a Thumbnail"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a Thumbnail menu item"
+msgstr ""
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->description
+msgid "Automatic focus change when leaving the Thumbnail menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->tooltip
+msgid ""
+"If enabled, the window associated with the Thumbnail menu item will get the "
+"focus when the mouse pointer leaves the menu. Leaving the menu with Ctrl or "
+"Shift held or leaving from either end of the menu will leave the focus "
+"unchanged. This option is typically used in conjunction with the preview "
+"hovering option above."
+msgstr ""
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
@@ -1126,6 +1297,17 @@ msgstr ""
 "https://github.com/linuxmint/cinnamon/pull/11908\n"
 "Værdierne i redigeringsdialogboksen er de korrekte værdier og dem, der vil "
 "træde i kraft."
+
+#. 4.0->settings-schema.json->animate-icon->description
+#, fuzzy
+msgid "Icon animation when launching new windows"
+msgstr "Handling ved venstreklik (med kørende vinduer)"
+
+#. 4.0->settings-schema.json->animate-icon->tooltip
+msgid ""
+"When enabled, the icon will animate when launching new windows for an "
+"application"
+msgstr ""
 
 #. 4.0->settings-schema.json->backup-file-name->description
 msgid "Settings backup name"

@@ -2,8 +2,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-03 13:17-0500\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-21 05:44-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: blogdron\n"
 "Language-Team: \n"
@@ -13,29 +14,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.1\n"
 
-#: 4.0/applet.js:1326 4.0/applet.js:2518 4.0/applet.js:4013 4.0/applet.js:4081
-#: 4.0/applet.js:4104 4.0/applet.js:4193
+#: 4.0/applet.js:536
 msgid "all buttons"
 msgstr "все кнопки"
 
-#: 4.0/applet.js:2250
+#: 4.0/applet.js:2618
 msgid "Applet Preferences"
 msgstr "Настройки Апплета"
 
-#: 4.0/applet.js:2254
+#: 4.0/applet.js:2622
 msgid "About..."
 msgstr "О Апплете..."
 
-#: 4.0/applet.js:2258
+#: 4.0/applet.js:2626
 msgid "Configure..."
 msgstr "Настроить..."
 
-#: 4.0/applet.js:2262
+#: 4.0/applet.js:2630
+msgid "Website"
+msgstr ""
+
+#: 4.0/applet.js:2634
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Удалить '%s'"
 
-#: 4.0/applet.js:2264
+#: 4.0/applet.js:2636
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "Вы действительно хотите удалить этот экземпляр CassiaWindowList?"
 
@@ -45,107 +49,112 @@ msgstr "Вы действительно хотите удалить этот э�
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2273
+#: 4.0/applet.js:2645
 msgid "Open new window"
 msgstr "Открыть новое окно"
 
-#: 4.0/applet.js:2281
+#: 4.0/applet.js:2653
 msgid "Remove from panel"
 msgstr "Удалить с панели"
 
-#: 4.0/applet.js:2283
+#: 4.0/applet.js:2655
 msgid "Remove from this workspace"
 msgstr "Удалить из этого рабочего стола"
 
-#: 4.0/applet.js:2289
+#: 4.0/applet.js:2661
 msgid "Pin to panel"
 msgstr "Закрепить на панели"
 
-#: 4.0/applet.js:2291
+#: 4.0/applet.js:2663
 msgid "Pin to this workspace"
 msgstr "Закрепить на этом рабочем столе"
 
-#: 4.0/applet.js:2332
+#: 4.0/applet.js:2704
 msgid "Pin to other workspaces"
 msgstr "Закрепить на другом рабочем столе"
 
-#: 4.0/applet.js:2353
+#: 4.0/applet.js:2725
 msgid "Pin to all workspaces"
 msgstr "Закрепить на всех рабочих столах"
 
-#: 4.0/applet.js:2371
+#: 4.0/applet.js:2743
 msgid "Pin to launcher"
 msgstr "Закрепить в лаунчере"
 
-#: 4.0/applet.js:2389 4.0/applet.js:2572
+#: 4.0/applet.js:2761 4.0/applet.js:2947
 msgid "Add new Hotkey for"
 msgstr "Добавить новую горячую клавишу для"
 
-#: 4.0/applet.js:2403
+#: 4.0/applet.js:2775
 msgid "Recent files"
 msgstr "Недавние файлы"
 
-#: 4.0/applet.js:2427
+#: 4.0/applet.js:2799
 msgid "Places"
 msgstr "Места"
 
-#: 4.0/applet.js:2469
+#: 4.0/applet.js:2841
 msgid "Only on this workspace"
 msgstr "Только на этом рабочем столе"
 
-#: 4.0/applet.js:2471
+#: 4.0/applet.js:2843
 msgid "Visible on all workspaces"
 msgstr "Видно на всех рабочих столах"
 
-#: 4.0/applet.js:2472
+#: 4.0/applet.js:2844
 msgid "Move to another workspace"
 msgstr "Переместить на другой рабочий стол"
 
-#: 4.0/applet.js:2491
+#: 4.0/applet.js:2853
+#, fuzzy
+msgid " (this workspace)"
+msgstr "Закрепить на этом рабочем столе"
+
+#: 4.0/applet.js:2866
 msgid "Move to another monitor"
 msgstr "Переместить на другой монитор"
 
-#: 4.0/applet.js:2499
+#: 4.0/applet.js:2874
 msgid "Monitor"
 msgstr "Монитор"
 
-#: 4.0/applet.js:2527
+#: 4.0/applet.js:2902
 msgid "unassigned"
 msgstr "не назначено"
 
-#: 4.0/applet.js:2538 4.0/applet.js:2569
+#: 4.0/applet.js:2913 4.0/applet.js:2944
 msgid "Assign window to a hotkey"
 msgstr "Назначить окно горячей клавише"
 
-#: 4.0/applet.js:2592
+#: 4.0/applet.js:2967
 msgid "Change application label contents"
 msgstr "Изменить текст названия приложения"
 
-#: 4.0/applet.js:2595
+#: 4.0/applet.js:2970
 msgid "Remove custom setting"
 msgstr "Удалить свои настройки"
 
-#: 4.0/applet.js:2602
+#: 4.0/applet.js:2977
 msgid "Use window title"
 msgstr "Использовать заголовок окон"
 
-#: 4.0/applet.js:2609
+#: 4.0/applet.js:2984
 msgid "Use application name"
 msgstr "Использовать названия программ"
 
-#: 4.0/applet.js:2616
+#: 4.0/applet.js:2991
 msgid "No label"
 msgstr "Без названий"
 
-#: 4.0/applet.js:2627
+#: 4.0/applet.js:3002
 msgid "Ungroup application windows"
 msgstr "Не группировать окна приложений"
 
-#: 4.0/applet.js:2636
+#: 4.0/applet.js:3011
 msgid "Group application windows"
 msgstr "Группировать окна приложений"
 
-#: 4.0/applet.js:2649
+#: 4.0/applet.js:3024
 msgid "Automatic grouping/ungrouping"
 msgstr "Автоматически группировать/разгруппировать"
 
@@ -155,43 +164,43 @@ msgstr "Автоматически группировать/разгруппир
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2679
+#: 4.0/applet.js:3054
 msgid "Move titlebar on to screen"
 msgstr "Переместить на другой экран"
 
-#: 4.0/applet.js:2684
+#: 4.0/applet.js:3059
 msgid "Restore"
 msgstr "Восстановить"
 
-#: 4.0/applet.js:2688
+#: 4.0/applet.js:3063
 msgid "Minimize"
 msgstr "Свернуть"
 
-#: 4.0/applet.js:2694
+#: 4.0/applet.js:3069
 msgid "Unmaximize"
 msgstr "Обычный размер"
 
-#: 4.0/applet.js:2701
+#: 4.0/applet.js:3076
 msgid "Close others"
 msgstr "Закрыть другие"
 
-#: 4.0/applet.js:2712
+#: 4.0/applet.js:3087
 msgid "Close all"
 msgstr "Закрыть всё"
 
-#: 4.0/applet.js:2721
+#: 4.0/applet.js:3096
 msgid "Close"
 msgstr "Закрыть"
 
-#: SetupWizard.py:162
+#: SetupWizard.py:188
 msgid "Exit"
 msgstr "Выйти"
 
-#: SetupWizard.py:184
+#: SetupWizard.py:210
 msgid "Next"
 msgstr "Следующий"
 
-#: SetupWizard.py:243
+#: SetupWizard.py:283
 msgid "Backup file already exist. Do you want to overwrite it?"
 msgstr "Файл резервной копии уже существует. Перезаписать его?"
 
@@ -396,7 +405,26 @@ msgstr ""
 "Если включено, то все новые кнопки окон будут добавляться слева от "
 "закреплённых."
 
+#. 4.0->settings-schema.json->fade-animation-time->units
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr "миллисекунд"
+
+#. 4.0->settings-schema.json->fade-animation-time->description
+#, fuzzy
+msgid "Fade animation effect duration"
+msgstr "Время анимации надписи"
+
+#. 4.0->settings-schema.json->fade-animation-time->tooltip
+msgid ""
+"This defines the duration of the fade-in/out animation effect. It applies to "
+"the Thumbnail menus and the full size window previews"
+msgstr ""
+
 #. 4.0->settings-schema.json->label-width->units
+#. 4.0->settings-schema.json->button-spacing->units
 msgid "pixels"
 msgstr "пикселей"
 
@@ -412,14 +440,9 @@ msgstr "Задать ширину надписей"
 msgid "Animate label"
 msgstr "Анимировать надписи"
 
-#. 4.0->settings-schema.json->label-animation-time->units
-#. 4.0->settings-schema.json->preview-timeout-show->units
-#. 4.0->settings-schema.json->preview-timeout-hide->units
-msgid "milliseconds"
-msgstr "миллисекунд"
-
 #. 4.0->settings-schema.json->label-animation-time->description
-msgid "Label animation time"
+#, fuzzy
+msgid "Label animation duration"
 msgstr "Время анимации надписи"
 
 #. 4.0->settings-schema.json->display-number->options
@@ -567,6 +590,43 @@ msgstr ""
 "Если этот параметр включен, окна приложений с закрепленными кнопками в "
 "других экземплярах апплета CassiaWindowList не будут отображаться в этом "
 "списке окон."
+
+#. 4.0->settings-schema.json->button-spacing->description
+msgid "Spacing between buttons"
+msgstr ""
+
+#. 4.0->settings-schema.json->button-spacing->tooltip
+msgid ""
+"This defines the spacing between the buttons, the value will be divided in "
+"half and added to the left of the icon and to the right of the label on "
+"horizontal panels or to the top and button of the icon on vertical panels"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->description
+msgid "Show a full size window preview when hovering over a button"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
+#, fuzzy
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a window-list button."
+msgstr ""
+"Включите отображение всплывающих подсказок с использованием заголовка окна "
+"или имени приложения при наведении курсора мыши на кнопки списка окон"
+
+#. 4.0->settings-schema.json->no-click-activate->description
+msgid "Automatic focus change when leaving the panel"
+msgstr ""
+
+#. 4.0->settings-schema.json->no-click-activate->tooltip
+msgid ""
+"If enabled, the current window for a window-list button will get the focus "
+"when the mouse pointer leaves the panel. Leaving the window-list with Ctrl "
+"or Shift held or while remaining on the panel will leave the focus "
+"unchanged. This option is typically used in conjunction with the preview "
+"hovering option above."
+msgstr ""
 
 #. 4.0->settings-schema.json->menu-show-on-hover->description
 msgid "Show on hover"
@@ -760,6 +820,16 @@ msgstr "Переместить на следующий рабочий стол"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#, fuzzy
+msgid "Move to this workspace"
+msgstr "Переместить на следующий рабочий стол"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Visible on this/all workspaces"
 msgstr "Видно в этом/всех рабочих столах"
 
@@ -841,6 +911,88 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#, fuzzy
+msgid "Untile window"
+msgstr "Закрой окно"
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
 msgid "Do nothing"
 msgstr "Ничего не делать"
 
@@ -855,6 +1007,29 @@ msgstr "Действие кнопки Назад для окна миниатю�
 #. 4.0->settings-schema.json->preview-forward-click->description
 msgid "Thumbnail window forward button action"
 msgstr "Действие кнопки Вперед для окна миниатюр"
+
+#. 4.0->settings-schema.json->hover-peek-thumbnail->description
+msgid "Show a full size window preview when hovering over a Thumbnail"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a Thumbnail menu item"
+msgstr ""
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->description
+msgid "Automatic focus change when leaving the Thumbnail menu"
+msgstr ""
+
+#. 4.0->settings-schema.json->no-click-activate-thumbnail->tooltip
+msgid ""
+"If enabled, the window associated with the Thumbnail menu item will get the "
+"focus when the mouse pointer leaves the menu. Leaving the menu with Ctrl or "
+"Shift held or leaving from either end of the menu will leave the focus "
+"unchanged. This option is typically used in conjunction with the preview "
+"hovering option above."
+msgstr ""
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
@@ -1107,6 +1282,17 @@ msgid ""
 "take effect."
 msgstr ""
 
+#. 4.0->settings-schema.json->animate-icon->description
+#, fuzzy
+msgid "Icon animation when launching new windows"
+msgstr "Действие левой кнопки (при запущенных окнах)"
+
+#. 4.0->settings-schema.json->animate-icon->tooltip
+msgid ""
+"When enabled, the icon will animate when launching new windows for an "
+"application"
+msgstr ""
+
 #. 4.0->settings-schema.json->backup-file-name->description
 msgid "Settings backup name"
 msgstr "Имя резервной копии настроек"
@@ -1121,6 +1307,61 @@ msgstr ""
 "сохранена под этим именем. Резервные копии будут перечислены на странице "
 "восстановления мастера установки при добавлении нового экземпляра "
 "CassiaWindowList на панель."
+
+#. 4.0->settings-schema.json->icon-saturation->units
+msgid "percent"
+msgstr ""
+
+#. 4.0->settings-schema.json->icon-saturation->description
+msgid "Icon color saturation"
+msgstr ""
+
+#. 4.0->settings-schema.json->icon-saturation->tooltip
+msgid ""
+"Sets the color saturation for icons from 0% (grayscale) to 200%, default is "
+"100%\n"
+"This option is experimental, some icons are not currently effected by this "
+"setting"
+msgstr ""
+
+#. 4.0->settings-schema.json->saturation-application->options
+#, fuzzy
+msgid "All Buttons"
+msgstr "все кнопки"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#, fuzzy
+msgid "Minimized buttons"
+msgstr "Свёрнутые окна"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#, fuzzy
+msgid "Idle pinned buttons"
+msgstr "Показывать надписи для закреплённых кнопок"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#, fuzzy
+msgid "Buttons for windows on other workspaces"
+msgstr "Закрепить на другом рабочем столе"
+
+#. 4.0->settings-schema.json->saturation-application->options
+#, fuzzy
+msgid "Buttons for windows on other monitors"
+msgstr "Показывать окна только на одном мониторе"
+
+#. 4.0->settings-schema.json->saturation-application->options
+msgid "All buttons excepted focused window"
+msgstr ""
+
+#. 4.0->settings-schema.json->saturation-application->description
+msgid "Where to apply the icon color saturation"
+msgstr ""
+
+#. 4.0->settings-schema.json->saturation-application->tooltip
+msgid ""
+"Which buttons will have the custom icon color saturation applied\n"
+"This option is only available when the saturation is not set to 100%"
+msgstr ""
 
 #: SetupWizard.ui:7
 msgid "CassiaWindowList Basic Setup Wizard"
@@ -1217,23 +1458,21 @@ msgid "No Thumbnail window menu on mouse hover"
 msgstr "Нет меню миниатюр при наведении курсора мыши"
 
 #: SetupWizard.ui:354
-msgid "Notes about the Panel Launcher behaviour"
-msgstr "Примечания о поведении панели запуска"
+#, fuzzy
+msgid "Panel Launcher Setup"
+msgstr "Главная Панель Лаунчера"
 
 #: SetupWizard.ui:370
+#, fuzzy
 msgid ""
-"Unlike most Panel Launcher applets, this launcher\n"
-"keeps tack of running windows and will activate\n"
-"existing windows rather then launching new ones.\n"
+"Unlike most Panel Launcher applets, this launcher keeps tack of \n"
+"running windows and uses window Thumbnail menus.\n"
 "\n"
-"You can launch additional windows by clicking the\n"
-"'Back' mouse button or Ctrl+Left mouse button \n"
-"(by default).\n"
+"You can launch additional windows by clicking the 'Back' mouse \n"
+"button or using the Left mouse button while holding the Ctrl key.\n"
 "\n"
-"It also uses Thumbnail menus to show a list of all\n"
-"open windows. In general it works like \"pinned\"\n"
-"buttons on a window list rather then a basic\n"
-"launcher"
+"How would you like the Left mouse button to behave when \n"
+"windows already exist for a launcher button?"
 msgstr ""
 "В отличие от большинства апплетов лаунчеров, этот лаунчер\n"
 "отслеживает запущенные окна и активирует\n"
@@ -1246,18 +1485,40 @@ msgstr ""
 "Это также использует меню миниатюр для отображения списка всех\n"
 "открытых окон"
 
-#: SetupWizard.ui:408
+#: SetupWizard.ui:388
+#, fuzzy
+msgid "Open new window / Hold for Thumbnail menu"
+msgstr "Новое окно или удерживать для перехода к меню миниатюр"
+
+#: SetupWizard.ui:407
+#, fuzzy
+msgid "Restore most recent window / Cycle windows"
+msgstr "Восстановить последнее окно приложения"
+
+#: SetupWizard.ui:427
+#, fuzzy
+msgid "Open the Thumbnail menu"
+msgstr "Закрыть меню миниатюр"
+
+#: SetupWizard.ui:461
+#, fuzzy
+msgid "Thumbnail window menu on mouse hover"
+msgstr "Нет меню миниатюр при наведении курсора мыши"
+
+#: SetupWizard.ui:492
 msgid "All done!"
 msgstr "Все сделано!"
 
-#: SetupWizard.ui:424
+#: SetupWizard.ui:508
+#, fuzzy
 msgid ""
-"There are many more options and features to explorer\n"
-"in the applet configurator and the window list button\n"
-"context menu, for example:\n"
+"There are many more options and features to explorer in the\n"
+"applet configurator and the window list button context menu,\n"
+"for example:\n"
 "\n"
 " • Hot-keys to launch / activate a specific window.\n"
 " • Customizable mouse button actions.\n"
+" • Customizable icon saturation (grayscale / vivid).\n"
 " • Customizable Ctrl/Shift + mouse button actions.\n"
 " • Application specific grouping and label settings.\n"
 " • Thumbnail window zooming using the scroll-wheel.\n"
@@ -1276,19 +1537,19 @@ msgstr ""
 "• Автоматическая группировка приложений при недостатке пространства.\n"
 "• И многое другое."
 
-#: SetupWizard.ui:445
+#: SetupWizard.ui:530
 msgid "Exit and launch the applet configurator now"
 msgstr "Выйдите и запустите конфигуратор апплета сейчас"
 
-#: SetupWizard.ui:474
+#: SetupWizard.ui:559
 msgid "Select a backup configuration to restore?"
 msgstr "Выбрать резервную конфигурацию для восстановления?"
 
-#: SetupWizard.ui:517
+#: SetupWizard.ui:602
 msgid "Configuration Backup?"
 msgstr "Настроить резервирование?"
 
-#: SetupWizard.ui:533
+#: SetupWizard.ui:618
 msgid ""
 "If you would like to maintain an automatic backup\n"
 "of this applet configuration then select or enter a\n"
@@ -1300,26 +1561,26 @@ msgstr ""
 "название файла резервной копии ниже. Все настоящее и будущее\n"
 "изменения конфигурации будут сохранены в этой резервной копии:"
 
-#: SetupWizard.ui:553
+#: SetupWizard.ui:638
 msgid "MainWindowList"
 msgstr "Главный Список Окон"
 
-#: SetupWizard.ui:554
+#: SetupWizard.ui:639
 msgid "MainPanelLauncher"
 msgstr "Главная Панель Лаунчера"
 
-#: SetupWizard.ui:555
+#: SetupWizard.ui:640
 msgid "Monitor1WindowList"
 msgstr "Список Окон Монитора 1"
 
-#: SetupWizard.ui:556
+#: SetupWizard.ui:641
 msgid "Monitor2WindowList"
 msgstr "Список Окон Монитора 2"
 
-#: SetupWizard.ui:557
+#: SetupWizard.ui:642
 msgid "Monitor1PanelLauncher"
 msgstr "Лаунчер Панели Монитора 1"
 
-#: SetupWizard.ui:558
+#: SetupWizard.ui:643
 msgid "Monitor2PanelLauncher"
 msgstr "Лаунчер Панели Монитора 2"
