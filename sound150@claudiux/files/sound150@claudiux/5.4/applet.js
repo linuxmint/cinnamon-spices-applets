@@ -727,13 +727,17 @@ class Seeker extends Slider.Slider {
                 let pos;
                 try {
                     pos = position[0].get_int64();
-                } catch(e) { pos = "NaN" }
+                } catch(e) {
+                    pos = "NaN";
+                    //~ logError("pos error: "+e);
+                }
                 if (isNaN(pos)) {
                     //~ logDebug("pos is NaN!!!");
                     this._currentTime = (Date.now() - this.startingDate) / 1000;
-                    this._setPosition(this._currentTime * 1000);
+                    //~ logDebug("this._currentTime: "+this._currentTime);
+                    this._setPosition(this._currentTime * 1000000);
                 } else {
-                    //~ logDebug("pos is Valid!!!");
+                    //~ logDebug("pos is Valid!!! pos:" + pos);
                     this._setPosition(pos);
                 }
             }
@@ -1478,7 +1482,9 @@ class Sound150Applet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
         super(orientation, panel_height, instanceId);
 
+        Util.spawnCommandLineAsync("bash -c 'cd %s && chmod 755 *.sh'".format(PATH2SCRIPTS));
         Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/rm_tmp_files.sh'");
+        Util.spawnCommandLineAsync("bash -C '"+ PATH2SCRIPTS +"/run_playerctld.sh'");
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
