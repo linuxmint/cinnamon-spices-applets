@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-20 15:57+0200\n"
-"PO-Revision-Date: 2024-03-06 21:52+0100\n"
+"PO-Revision-Date: 2024-03-22 20:53+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgstr "Automatisches Speichern von Hintergrundbildern"
 #. settings-schema.json->slideshow->tooltip
 #: applet.js:93
 msgid "Play backgrounds as a slideshow"
-msgstr "Hintergrundbilder als Diaschau abspielen"
+msgstr "Hintergrundbilder als Diashow abspielen"
 
 #. settings-schema.json->click->description
 #. settings-schema.json->click->tooltip
@@ -42,7 +42,7 @@ msgstr "Anime Desktop Hintergrundbilder"
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
-msgstr "Anime Hintergrundbilder herunterladen und auf Deinem Desktop anzeigen"
+msgstr "Anime Hintergrundbilder herunterladen und auf dem Desktop anzeigen"
 
 #. settings-schema.json->section1->description
 msgid "Configure"
@@ -86,7 +86,7 @@ msgstr "paulzzh.com"
 
 #. settings-schema.json->resource->tooltip
 msgid "Select a wallpaper resource"
-msgstr "Wähle eine Hintergrundbild-Adresse"
+msgstr "Hintergrundbild-Adresse auswählen"
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
