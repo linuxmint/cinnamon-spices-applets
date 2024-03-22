@@ -175,6 +175,8 @@ class ControlButton {
 
     setEnabled(status) {
         this.button.change_style_pseudo_class("insensitive", !status);
+        //~ this.actor.visible = status;
+        //~ this.button.visible = status;
         this.button.can_focus = status;
         this.button.reactive = status;
     }
@@ -1038,6 +1040,10 @@ class Player extends PopupMenu.PopupMenuSection {
                 this._setMetadata(props.Metadata.deep_unpack());
             if (props.CanGoNext || props.CanGoPrevious)
                 this._updateControls();
+            //~ else {
+                //~ if(!props.CanGoNext) this._nextButton.setEnabled(false);
+                //~ if(!props.CanGoPrevious) this._prevButton.setEnabled(false);
+            //~ }
             if (props.LoopStatus)
                 this._setLoopStatus(props.LoopStatus.unpack());
             if (props.Shuffle)
@@ -1098,19 +1104,28 @@ class Player extends PopupMenu.PopupMenuSection {
     }
 
     _updateControls() {
-        this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, 'CanGoNext', (value, error) => {
-            let canGoNext = false;
-            if (!error)
-                canGoNext = value[0].unpack();
-            this._nextButton.setEnabled(canGoNext);
-        });
-
-        this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, 'CanGoPrevious', (value, error) => {
-            let canGoPrevious = false;
-            if (!error)
-                canGoPrevious = value[0].unpack();
-            this._prevButton.setEnabled(canGoPrevious);
-        });
+        let canGoNext = false;
+        let canGoPrevious = false;
+        try {
+            this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, 'CanGoNext', (value, error) => {
+                if (!error)
+                    canGoNext = value[0].unpack();
+            });
+        } catch(e) {
+            canGoNext = false;
+        }
+        try {
+            this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, 'CanGoPrevious', (value, error) => {
+                if (!error)
+                    canGoPrevious = value[0].unpack();
+            });
+        } catch(e) {
+            canGoPrevious = false;
+        }
+        //~ logDebug("canGoNext: "+canGoNext);
+        //~ logDebug("canGoPrevious: "+canGoPrevious);
+        this._nextButton.setEnabled(canGoNext);
+        this._prevButton.setEnabled(canGoPrevious);
     }
 
     async _setMetadata(metadata) {
@@ -2647,9 +2662,9 @@ class Sound150Applet extends Applet.TextIconApplet {
                         this._inputSection.actor.show();
                         this.mute_in_switch.actor.show();
                     }
-                    kill_playerctld();
+                    //~ kill_playerctld();
                 }
-                //~ this.kill_playerctld();
+                kill_playerctld();
                 this._streams.splice(i, 1);
                 break;
             }
@@ -2670,6 +2685,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _on_reload_this_applet_pressed() {
+        kill_playerctld();
         // Reload this applet
         Extension.reloadExtension(UUID, Extension.Type.APPLET);
     }

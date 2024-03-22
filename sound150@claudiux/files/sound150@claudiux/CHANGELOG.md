@@ -1,3 +1,6 @@
+### v6.5.5~20240322
+  * Fixes #5622 (icon when a browser is the source).
+
 ### v6.5.4~20240322
   * Improves playerctld management.
 
