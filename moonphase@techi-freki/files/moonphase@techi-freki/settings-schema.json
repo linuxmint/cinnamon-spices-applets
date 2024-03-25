@@ -2,19 +2,38 @@
   "layout": {
     "type": "layout",
     "pages": [
-      "page-settings"
+      "page-settings",
+      "page-geolocation"
     ],
 
     "page-settings": {
       "type": "page",
       "title": "Settings",
       "sections": [
-        "section-panel",
-        "section-menu"
+        "section-general",
+        "section-update"
       ]
     },
 
-    "section-panel": {
+    "page-geolocation": {
+      "type": "page",
+      "title": "Geolocation",
+      "sections": [
+        "section-latlon"
+      ]
+    },
+
+    "section-latlon": {
+      "type": "section",
+      "title": "Coordinates",
+      "keys": [
+        "enableGeolocation",
+        "latitude",
+        "longitude"
+      ]
+    },
+
+    "section-general": {
       "type": "section",
       "title": "General Settings",
       "keys": [
@@ -27,7 +46,7 @@
         "showPercentageLabel"
       ]
     },
-    "section-menu": {
+    "section-update": {
       "type": "section",
       "title": "Update Settings",
       "keys": [
@@ -83,5 +102,22 @@
     "step": 1,
     "units": "seconds",
     "description": "Update interval"
+  },
+  "enableGeolocation": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Turn on geolocation (Used to determine moon rise and set times)."
+  },
+  "latitude": {
+    "type": "entry",
+    "default": "",
+    "description": "Latitude",
+    "dependency": "enableGeolocation"
+  },
+  "longitude": {
+    "type": "entry",
+    "default": "",
+    "description": "Longitude",
+    "dependency": "enableGeolocation"
   }
 }
