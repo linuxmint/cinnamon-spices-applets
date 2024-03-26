@@ -20,6 +20,13 @@ class MoonPhase extends Applet.TextIconApplet {
         this.settings.bind('showNameLabel', 'showNameLabel', this._onSettingsChanged.bind(this));
         this.settings.bind('showPercentageLabel', 'showPercentageLabel', this._onSettingsChanged.bind(this));
 
+        this.settings.bind('enableGeolocation', 'enableGeolocation', this._onSettingsChanged.bind(this));
+        this.settings.bind('latitude', 'latitude', this._onSettingsChanged.bind(this));
+        this.settings.bind('longitude', 'longitude', this._onSettingsChanged.bind(this));
+        this.settings.bind('elevation', 'elevation', this._onSettingsChanged.bind(this));
+        this.settings.bind('showRiseSet', 'showRiseSet', this._onSettingsChanged.bind(this));
+        this.settings.bind('showEclipse', 'showEclipse', this._onSettingsChanged.bind(this));
+
         this.settings.bind('updateInterval', 'updateInterval', this._onSettingsChanged.bind(this));
 
         this._updateApplet();
@@ -31,6 +38,10 @@ class MoonPhase extends Applet.TextIconApplet {
         }
     }
 
+    on_applet_clicked() {
+        // TODO: Add popup that displays moon rise, set, and next eclipse
+    }
+
     _onSettingsChanged(value) {
         this.useAltIcons = this.settings.getValue('useAltIcons');
         this.showTooltip = this.settings.getValue('showTooltip');
@@ -39,6 +50,13 @@ class MoonPhase extends Applet.TextIconApplet {
         this.showPhaseLabel = this.settings.getValue('showPhaseLabel');
         this.showNameLabel = this.settings.getValue('showNameLabel');
         this.showPercentageLabel = this.settings.getValue('showPercentageLabel');
+
+        this.enableGeolocation = this.settings.getValue('enableGeolocation');
+        this.latitude =  this.settings.getValue('latitude');
+        this.longitude = this.settings.getValue('longitude');
+        this.elevation = this.settings.getValue('elevation');
+        this.showRiseSet = this.settings.getValue('showRiseSet');
+        this.showEclipse = this.settings.getValue('showEclipse');
 
         this.updateInterval = this.settings.getValue('updateInterval');
 
@@ -50,7 +68,7 @@ class MoonPhase extends Applet.TextIconApplet {
             Mainloop.source_remove(this.updateLoopId);
         }
 
-        const moon = new Moon(new Date(), this.useAltIcons, this.showNameLabel, this.showPercentageLabel, this.showNameTooltip, this.showPercentageTooltip);
+        const moon = new Moon(this);
 
         this.set_applet_icon_symbolic_name(moon.currentPhaseIcon);
 

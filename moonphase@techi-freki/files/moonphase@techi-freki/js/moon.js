@@ -1,18 +1,19 @@
-const SunCalc = require('./lib/suncalc');
 const { DefaultIconSet, AltIconSet } = require('./js/iconSet');
+const { Calculator } = require('./js/calc');
 
 const UUID = "moonphase@techi-freki";
 const { get_home_dir } = imports.gi.GLib;
 const Gettext = imports.gettext;
-Gettext.bindtextdomain(UUID, get_home_dir() + "/.local/share/locale")
+Gettext.bindtextdomain(UUID, get_home_dir() + "/.local/share/locale");
 
 class Moon {
-    constructor(currentDate, useAltIcons, showNameLabel, showPercentageLabel, showNameTooltip, showPercentageTooltip) {
-        this.currentDate = currentDate;
-        this.age = this._getAge();
-        this.currentPhaseIcon = this._getCurrentPhaseIcon(useAltIcons);
-        this.currentPhaseName = this._getCurrentPhaseName(showNameLabel, showPercentageLabel);
-        this.currentTooltip = this._getCurrentPhaseName(showNameTooltip, showPercentageTooltip);
+    constructor(moonPhaseApplet) {
+        this.calc = new Calculator(moonPhaseApplet.latitude, moonPhaseApplet.longitude, moonPhaseApplet.elevation);
+        this.illumination = this.calc.getMoonIllumination();
+        this.age = Math.trunc(this.illumination.phase * 28);
+        this.currentPhaseIcon = this._getCurrentPhaseIcon(moonPhaseApplet.useAltIcons);
+        this.currentPhaseName = this._getCurrentPhaseName(moonPhaseApplet.showNameLabel, moonPhaseApplet.showPercentageLabel);
+        this.currentTooltip = this._getCurrentPhaseName(moonPhaseApplet.showNameTooltip, moonPhaseApplet.showPercentageTooltip);
     }
     // translation
     _(str) {
@@ -21,25 +22,20 @@ class Moon {
             return translated;
         return str;
     }
-    _getAge() {
-        return SunCalc.getMoonIllumination(this.currentDate).phase;
-    }
     _getCurrentPhaseIcon(useAltIcons = false) {
         const iconSet = useAltIcons ?
             new AltIconSet().getSet() :
             new DefaultIconSet().getSet();
 
-        const age = Math.trunc(this.age * 28);
-
-        return iconSet[age];
+        return iconSet[this.age];
     }
     _getCurrentPhaseName(showName = true, showPercentage = true) {
         let name = "";
-        const age = Math.trunc(this.age * 28) / 28;
+        const age = this.age / 28;
 
         // method to convert to percentage without rounding to keep precision
         const toPercentage = (n, fixed) => `${n * 100}`.match(new RegExp(`^-?\\d+(?:\.\\d{0,${fixed}})?`))[0] + "%";
-        const percent = toPercentage(SunCalc.getMoonIllumination(this.currentDate).fraction, 2);
+        const percent = toPercentage(this.illumination.fraction, 2);
 
         if (age === 0) name = this._("New Moon");
         else if (age < 0.25) name = this._("Waxing Crescent");

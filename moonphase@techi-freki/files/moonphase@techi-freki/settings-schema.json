@@ -2,8 +2,7 @@
   "layout": {
     "type": "layout",
     "pages": [
-      "page-settings",
-      "page-geolocation"
+      "page-settings"
     ],
 
     "page-settings": {
@@ -11,25 +10,22 @@
       "title": "Settings",
       "sections": [
         "section-general",
+        "section-geolocation",
         "section-update"
       ]
     },
 
-    "page-geolocation": {
-      "type": "page",
-      "title": "Geolocation",
-      "sections": [
-        "section-latlon"
-      ]
-    },
-
-    "section-latlon": {
+    "section-geolocation": {
       "type": "section",
-      "title": "Coordinates",
+      "title": "Geolocation Settings",
       "keys": [
         "enableGeolocation",
+        "geolocationLabel",
         "latitude",
-        "longitude"
+        "longitude",
+        "elevation",
+        "showRiseSet",
+        "showEclipse"
       ]
     },
 
@@ -55,6 +51,51 @@
     }
   },
 
+  "enableGeolocation": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable geolocation features"
+  },
+
+  "geolocationLabel": {
+    "type": "label",
+    "description": "(Defaults to New York, NY)",
+    "dependency": "enableGeolocation"
+  },
+  "latitude": {
+    "type": "entry",
+    "default": "40.730610",
+    "description": "Latitude",
+    "dependency": "enableGeolocation"
+  },
+  "longitude": {
+    "type": "entry",
+    "default": "-73.935242",
+    "description": "Longitude",
+    "dependency": "enableGeolocation"
+  },
+  "elevation": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 0,
+    "max": 8848,
+    "units": "meters",
+    "step": 1,
+    "description": "Elevation",
+    "dependency": "enableGeolocation"
+  },
+  "showRiseSet": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Display the moon rise and set times on click",
+    "dependency": "enableGeolocation"
+  },
+  "showEclipse": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Display the next eclipse on click and display the eclipse icon",
+    "dependency": "enableGeolocation"
+  },
   "showPhaseLabel": {
     "type": "checkbox",
     "default": false,
@@ -102,22 +143,5 @@
     "step": 1,
     "units": "seconds",
     "description": "Update interval"
-  },
-  "enableGeolocation": {
-    "type": "checkbox",
-    "default": false,
-    "description": "Turn on geolocation (Used to determine moon rise and set times)."
-  },
-  "latitude": {
-    "type": "entry",
-    "default": "",
-    "description": "Latitude",
-    "dependency": "enableGeolocation"
-  },
-  "longitude": {
-    "type": "entry",
-    "default": "",
-    "description": "Longitude",
-    "dependency": "enableGeolocation"
   }
 }

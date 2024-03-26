@@ -62,12 +62,36 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#. settings-schema.json->section-panel->title
+#. settings-schema.json->section-geolocation->title
+msgid "Geolocation Settings"
+msgstr ""
+
+#. settings-schema.json->section-general->title
 msgid "General Settings"
 msgstr ""
 
-#. settings-schema.json->section-menu->title
+#. settings-schema.json->section-update->title
 msgid "Update Settings"
+msgstr ""
+
+#. settings-schema.json->enableGeolocation->description
+msgid "Enable geolocation features"
+msgstr ""
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr ""
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr ""
+
+#. settings-schema.json->showRiseSet->description
+msgid "Display the moon rise and set times on click"
+msgstr ""
+
+#. settings-schema.json->showEclipse->description
+msgid "Display the next eclipse on click and display the eclipse icon"
 msgstr ""
 
 #. settings-schema.json->showPhaseLabel->description

@@ -4,4 +4,4 @@ A Cinnamon applet that displays the current moon phase.
 
 ## Installation
 
-Move extract and move moonphase@techi-freki to the ~./local/share/cinnamon/applets directory.
+Extract and move moonphase@techi-freki to the ~./local/share/cinnamon/applets directory.
