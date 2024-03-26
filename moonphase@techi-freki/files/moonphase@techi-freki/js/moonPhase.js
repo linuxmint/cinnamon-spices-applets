@@ -25,9 +25,10 @@ class MoonPhase extends Applet.TextIconApplet {
         this.settings.bind('longitude', 'longitude', this._onSettingsChanged.bind(this));
         this.settings.bind('elevation', 'elevation', this._onSettingsChanged.bind(this));
         this.settings.bind('showRiseSet', 'showRiseSet', this._onSettingsChanged.bind(this));
-        this.settings.bind('showEclipse', 'showEclipse', this._onSettingsChanged.bind(this));
 
         this.settings.bind('updateInterval', 'updateInterval', this._onSettingsChanged.bind(this));
+
+        this.moon = new Moon(this);
 
         this._updateApplet();
     }
@@ -39,7 +40,8 @@ class MoonPhase extends Applet.TextIconApplet {
     }
 
     on_applet_clicked() {
-        // TODO: Add popup that displays moon rise, set, and next eclipse
+        // TODO: Add popup that displays moon rise and set
+        const moon = new Moon(this);
     }
 
     _onSettingsChanged(value) {
@@ -56,9 +58,10 @@ class MoonPhase extends Applet.TextIconApplet {
         this.longitude = this.settings.getValue('longitude');
         this.elevation = this.settings.getValue('elevation');
         this.showRiseSet = this.settings.getValue('showRiseSet');
-        this.showEclipse = this.settings.getValue('showEclipse');
 
         this.updateInterval = this.settings.getValue('updateInterval');
+
+        this.moon = new Moon(this);
 
         this._updateApplet();
     }
@@ -68,18 +71,16 @@ class MoonPhase extends Applet.TextIconApplet {
             Mainloop.source_remove(this.updateLoopId);
         }
 
-        const moon = new Moon(this);
-
-        this.set_applet_icon_symbolic_name(moon.currentPhaseIcon);
+        this.set_applet_icon_symbolic_name(this.moon.currentPhaseIcon);
 
         if (this.showTooltip) {
-            this.set_applet_tooltip(moon.currentTooltip);
+            this.set_applet_tooltip(this.moon.currentTooltip);
         } else {
             this.set_applet_tooltip('');
         }
 
         if (this.showPhaseLabel) {
-            this.set_applet_label(moon.currentPhaseName);
+            this.set_applet_label(this.moon.currentPhaseName);
         } else {
             this.set_applet_label('');
         }

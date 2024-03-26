@@ -24,8 +24,7 @@
         "latitude",
         "longitude",
         "elevation",
-        "showRiseSet",
-        "showEclipse"
+        "showRiseSet"
       ]
     },
 
@@ -88,12 +87,6 @@
     "type": "checkbox",
     "default": false,
     "description": "Display the moon rise and set times on click",
-    "dependency": "enableGeolocation"
-  },
-  "showEclipse": {
-    "type": "checkbox",
-    "default": false,
-    "description": "Display the next eclipse on click and display the eclipse icon",
     "dependency": "enableGeolocation"
   },
   "showPhaseLabel": {

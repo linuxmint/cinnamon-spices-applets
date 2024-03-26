@@ -22,10 +22,12 @@ class Calculator {
     }
 
     getRiseSet() {
-        // TODO: Get rise, set, transit
-    }
+        const times = A.Moon.times(this.julianDay, this.coord);
 
-    getEclipse() {
-        // TODO: Get next eclipse and eclipse duration
+        return {
+            rise: A.Coord.secondsToHMSStr(times.rise),
+            transit: A.Coord.secondsToHMSStr(times.transit),
+            set: A.Coord.secondsToHMSStr(times.set)
+        }
     }
 }
