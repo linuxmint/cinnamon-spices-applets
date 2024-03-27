@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-21 05:44-0400\n"
+"POT-Creation-Date: 2024-03-27 09:32-0400\n"
 "PO-Revision-Date: 2024-03-21 10:46-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,32 +18,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: 4.0/applet.js:536
+#: 4.0/applet.js:536 6.0/applet.js:536
 msgid "all buttons"
 msgstr "todos los botones"
 
-#: 4.0/applet.js:2618
+#: 4.0/applet.js:2639 6.0/applet.js:2639
 msgid "Applet Preferences"
 msgstr "Preferencias del applet"
 
-#: 4.0/applet.js:2622
+#: 4.0/applet.js:2643 6.0/applet.js:2643
 msgid "About..."
 msgstr "Acerca de..."
 
-#: 4.0/applet.js:2626
+#: 4.0/applet.js:2647 6.0/applet.js:2647
 msgid "Configure..."
 msgstr "Configurar..."
 
-#: 4.0/applet.js:2630
+#: 4.0/applet.js:2651 6.0/applet.js:2651
 msgid "Website"
 msgstr "Sitio web"
 
-#: 4.0/applet.js:2634
+#: 4.0/applet.js:2655 6.0/applet.js:2655
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eliminar '%s'"
 
-#: 4.0/applet.js:2636
+#: 4.0/applet.js:2657 6.0/applet.js:2657
 msgid "Do you really want to remove this instance of CassiaWindowList?"
 msgstr "¿Realmente desea eliminar esta instancia de CassiaWindowList?"
 
@@ -53,111 +53,117 @@ msgstr "¿Realmente desea eliminar esta instancia de CassiaWindowList?"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:2645
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#: 4.0/applet.js:2666 6.0/applet.js:2666
 msgid "Open new window"
 msgstr "Abrir nueva ventana"
 
-#: 4.0/applet.js:2653
+#: 4.0/applet.js:2674 6.0/applet.js:2674
 msgid "Remove from panel"
 msgstr "Quitar del panel"
 
-#: 4.0/applet.js:2655
+#: 4.0/applet.js:2676 6.0/applet.js:2676
 msgid "Remove from this workspace"
 msgstr "Eliminar de este espacio de trabajo"
 
-#: 4.0/applet.js:2661
+#: 4.0/applet.js:2682 6.0/applet.js:2682
 msgid "Pin to panel"
 msgstr "Anclar al panel"
 
-#: 4.0/applet.js:2663
+#: 4.0/applet.js:2684 6.0/applet.js:2684
 msgid "Pin to this workspace"
 msgstr "Anclar a este espacio de trabajo"
 
-#: 4.0/applet.js:2704
+#: 4.0/applet.js:2725 6.0/applet.js:2725
 msgid "Pin to other workspaces"
 msgstr "Anclar a otros espacios de trabajo"
 
-#: 4.0/applet.js:2725
+#: 4.0/applet.js:2746 6.0/applet.js:2746
 msgid "Pin to all workspaces"
 msgstr "Anclar a todos los espacios de trabajo"
 
-#: 4.0/applet.js:2743
+#: 4.0/applet.js:2764 6.0/applet.js:2764
 msgid "Pin to launcher"
 msgstr "Anclar al lanzador"
 
-#: 4.0/applet.js:2761 4.0/applet.js:2947
+#: 4.0/applet.js:2782 4.0/applet.js:2968 6.0/applet.js:2782 6.0/applet.js:2968
 msgid "Add new Hotkey for"
 msgstr "Añadir nueva tecla de acceso rápido para"
 
-#: 4.0/applet.js:2775
+#: 4.0/applet.js:2796 6.0/applet.js:2796
 msgid "Recent files"
 msgstr "Archivos recientes"
 
-#: 4.0/applet.js:2799
+#: 4.0/applet.js:2820 6.0/applet.js:2820
 msgid "Places"
 msgstr "Lugares"
 
-#: 4.0/applet.js:2841
+#: 4.0/applet.js:2862 6.0/applet.js:2862
 msgid "Only on this workspace"
 msgstr "Sólo en este espacio de trabajo"
 
-#: 4.0/applet.js:2843
+#: 4.0/applet.js:2864 6.0/applet.js:2864
 msgid "Visible on all workspaces"
 msgstr "Visible en todos los espacios de trabajo"
 
-#: 4.0/applet.js:2844
+#: 4.0/applet.js:2865 6.0/applet.js:2865
 msgid "Move to another workspace"
 msgstr "Mover a otro espacio de trabajo"
 
-#: 4.0/applet.js:2853
+#: 4.0/applet.js:2874 6.0/applet.js:2874
 msgid " (this workspace)"
 msgstr " (este espacio de trabajo)"
 
-#: 4.0/applet.js:2866
+#: 4.0/applet.js:2887 6.0/applet.js:2887
 msgid "Move to another monitor"
 msgstr "Mover a otro monitor"
 
-#: 4.0/applet.js:2874
+#: 4.0/applet.js:2895 6.0/applet.js:2895
 msgid "Monitor"
 msgstr "Monitor"
 
-#: 4.0/applet.js:2902
+#: 4.0/applet.js:2923 6.0/applet.js:2923
 msgid "unassigned"
 msgstr "no asignado"
 
-#: 4.0/applet.js:2913 4.0/applet.js:2944
+#: 4.0/applet.js:2934 4.0/applet.js:2965 6.0/applet.js:2934 6.0/applet.js:2965
 msgid "Assign window to a hotkey"
 msgstr "Asignar ventana a una tecla de acceso rápido"
 
-#: 4.0/applet.js:2967
+#: 4.0/applet.js:2988 6.0/applet.js:2988
 msgid "Change application label contents"
 msgstr "Cambiar el contenido de la etiqueta de la aplicación"
 
-#: 4.0/applet.js:2970
+#: 4.0/applet.js:2991 6.0/applet.js:2991
 msgid "Remove custom setting"
 msgstr "Eliminar configuración personalizada"
 
-#: 4.0/applet.js:2977
+#: 4.0/applet.js:2998 6.0/applet.js:2998
 msgid "Use window title"
 msgstr "Utilizar título de ventana"
 
-#: 4.0/applet.js:2984
+#: 4.0/applet.js:3005 6.0/applet.js:3005
 msgid "Use application name"
 msgstr "Utilizar nombre de aplicación"
 
-#: 4.0/applet.js:2991
+#: 4.0/applet.js:3012 6.0/applet.js:3012
 msgid "No label"
 msgstr "Sin etiqueta"
 
-#: 4.0/applet.js:3002
+#: 4.0/applet.js:3023 6.0/applet.js:3023
 msgid "Ungroup application windows"
 msgstr "Ventanas de aplicaciones separadas"
 
-#: 4.0/applet.js:3011
+#: 4.0/applet.js:3032 6.0/applet.js:3032
 msgid "Group application windows"
 msgstr "Ventanas de aplicaciones agrupadas"
 
-#: 4.0/applet.js:3024
+#: 4.0/applet.js:3045 6.0/applet.js:3045
 msgid "Automatic grouping/ungrouping"
 msgstr "Agrupación/desagrupación automática"
 
@@ -167,31 +173,37 @@ msgstr "Agrupación/desagrupación automática"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
-#: 4.0/applet.js:3054
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+#: 4.0/applet.js:3075 6.0/applet.js:3075
 msgid "Move titlebar on to screen"
 msgstr "Mover la barra de título a la pantalla"
 
-#: 4.0/applet.js:3059
+#: 4.0/applet.js:3080 6.0/applet.js:3080
 msgid "Restore"
 msgstr "Restaurar"
 
-#: 4.0/applet.js:3063
+#: 4.0/applet.js:3084 6.0/applet.js:3084
 msgid "Minimize"
 msgstr "Minimizar"
 
-#: 4.0/applet.js:3069
+#: 4.0/applet.js:3090 6.0/applet.js:3090
 msgid "Unmaximize"
 msgstr "Desmaximizar"
 
-#: 4.0/applet.js:3076
+#: 4.0/applet.js:3097 6.0/applet.js:3097
 msgid "Close others"
 msgstr "Cerrar otros"
 
-#: 4.0/applet.js:3087
+#: 4.0/applet.js:3108 6.0/applet.js:3108
 msgid "Close all"
 msgstr "Cerrar todo"
 
-#: 4.0/applet.js:3096
+#: 4.0/applet.js:3117 6.0/applet.js:3117
 msgid "Close"
 msgstr "Cerrar"
 
@@ -220,100 +232,129 @@ msgstr ""
 "algunas características adicionales"
 
 #. 4.0->settings-schema.json->caption-page->title
+#. 6.0->settings-schema.json->caption-page->title
 msgid "Labels"
 msgstr "Etiquetas"
 
 #. 4.0->settings-schema.json->general-page->title
+#. 6.0->settings-schema.json->general-page->title
 msgid "General"
 msgstr "General"
 
 #. 4.0->settings-schema.json->preview-page->title
+#. 6.0->settings-schema.json->preview-page->title
 msgid "Thumbnails"
 msgstr "Miniaturas"
 
 #. 4.0->settings-schema.json->hotkey-page->title
+#. 6.0->settings-schema.json->hotkey-page->title
 msgid "Hotkeys"
 msgstr "Teclas de acceso rápido"
 
 #. 4.0->settings-schema.json->advanced-page->title
+#. 6.0->settings-schema.json->advanced-page->title
 msgid "Advanced"
 msgstr "Avanzado"
 
 #. 4.0->settings-schema.json->caption-settings->title
+#. 6.0->settings-schema.json->caption-settings->title
 msgid "Window list button label settings"
 msgstr "Configuración de la etiqueta del botón de la lista de ventanas"
 
 #. 4.0->settings-schema.json->caption-number-settings->title
+#. 6.0->settings-schema.json->caption-number-settings->title
 msgid "Application groups number label settings"
 msgstr "Configuración de etiquetas numéricas del grupo de aplicaciones"
 
 #. 4.0->settings-schema.json->general-settings->title
+#. 6.0->settings-schema.json->general-settings->title
 msgid "General window list settings"
 msgstr "Configuración general de la lista de ventanas"
 
 #. 4.0->settings-schema.json->general-mouse->title
+#. 6.0->settings-schema.json->general-mouse->title
 msgid "Window list mouse settings"
 msgstr "Configuración del mouse para la lista de ventanas"
 
 #. 4.0->settings-schema.json->preview-settings->title
+#. 6.0->settings-schema.json->preview-settings->title
 msgid "Thumbnails menu settings"
 msgstr "Configuración de miniaturas del menú"
 
 #. 4.0->settings-schema.json->preview-mouse-section->title
+#. 6.0->settings-schema.json->preview-mouse-section->title
 msgid "Thumbnails menu mouse settings"
 msgstr "Configuración del mouse en el menú miniaturas"
 
 #. 4.0->settings-schema.json->hotkey-settings->title
+#. 6.0->settings-schema.json->hotkey-settings->title
 msgid "Hotkey settings"
 msgstr "Configuración de teclas de acceso rápido"
 
 #. 4.0->settings-schema.json->adv-mouse-settings->title
 #. 4.0->settings-schema.json->adv-mouse-list->description
+#. 6.0->settings-schema.json->adv-mouse-settings->title
+#. 6.0->settings-schema.json->adv-mouse-list->description
 msgid "Ctrl/Shift + mouse button actions"
 msgstr "Ctrl/Shift + acciones del botón del mouse"
 
 #. 4.0->settings-schema.json->caption-type->options
+#. 6.0->settings-schema.json->caption-type->options
 msgid "Application name"
 msgstr "Nombre de la aplicación"
 
 #. 4.0->settings-schema.json->caption-type->options
+#. 6.0->settings-schema.json->caption-type->options
 msgid "Window title"
 msgstr "Título de la ventana"
 
 #. 4.0->settings-schema.json->caption-type->description
+#. 6.0->settings-schema.json->caption-type->description
 msgid "Label contents"
 msgstr "Contenido de la etiqueta"
 
 #. 4.0->settings-schema.json->caption-type->tooltip
+#. 6.0->settings-schema.json->caption-type->tooltip
 msgid "What the content of the label will be"
 msgstr "Cuál será el contenido de la etiqueta"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 #. 4.0->settings-schema.json->display-caption-for-pined->options
 #. 4.0->settings-schema.json->display-number->options
+#. 6.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-number->options
 msgid "Never"
 msgstr "Nunca"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 #. 4.0->settings-schema.json->display-caption-for-pined->options
 #. 4.0->settings-schema.json->display-number->options
+#. 6.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-number->options
 msgid "Always"
 msgstr "Siempre"
 
 #. 4.0->settings-schema.json->display-caption-for->options
 #. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
 msgid "Focused"
 msgstr "Enfocada"
 
 #. 4.0->settings-schema.json->display-caption-for->options
+#. 6.0->settings-schema.json->display-caption-for->options
 msgid "One per application pool"
 msgstr "Una por grupo de aplicaciones"
 
 #. 4.0->settings-schema.json->display-caption-for->description
+#. 6.0->settings-schema.json->display-caption-for->description
 msgid "Display labels for generic window list buttons"
 msgstr "Mostrar etiquetas para botones genéricos de lista de ventanas"
 
 #. 4.0->settings-schema.json->display-caption-for->tooltip
+#. 6.0->settings-schema.json->display-caption-for->tooltip
 msgid ""
 "Never: No windows get labels\n"
 "Always: All windows get labels\n"
@@ -328,14 +369,17 @@ msgstr ""
 "ventanas de aplicación adyacentes"
 
 #. 4.0->settings-schema.json->display-caption-for-pined->options
+#. 6.0->settings-schema.json->display-caption-for-pined->options
 msgid "Running"
 msgstr "En ejecución"
 
 #. 4.0->settings-schema.json->display-caption-for-pined->description
+#. 6.0->settings-schema.json->display-caption-for-pined->description
 msgid "Display labels for pinned buttons"
 msgstr "Mostrar etiquetas para los botones anclados"
 
 #. 4.0->settings-schema.json->display-caption-for-pined->tooltip
+#. 6.0->settings-schema.json->display-caption-for-pined->tooltip
 msgid ""
 "Never: No pinned windows will have a label\n"
 "Always: All pinned windows will have labels\n"
@@ -349,10 +393,12 @@ msgstr ""
 "Enfocada: Sólo la ventana anclada con foco tendrá una etiqueta"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->description
+#. 6.0->settings-schema.json->hide-caption-for-minimized->description
 msgid "Hide labels for minimized buttons"
 msgstr "Ocultar las etiquetas de los botones minimizados"
 
 #. 4.0->settings-schema.json->hide-caption-for-minimized->tooltip
+#. 6.0->settings-schema.json->hide-caption-for-minimized->tooltip
 msgid ""
 "For groups/pools the label will still show unless all application windows "
 "are minimized"
@@ -361,31 +407,39 @@ msgstr ""
 "ventanas de la aplicación estén minimizadas"
 
 #. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
 msgid "None"
 msgstr "Ninguna"
 
 #. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
 msgid "Minimized windows"
 msgstr "Ventanas minimizadas"
 
 #. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
 msgid "Pinned applications"
 msgstr "Aplicaciones ancladas"
 
 #. 4.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->display-indicators->options
 msgid "Minimized and pinned"
 msgstr "Minimizado y anclado"
 
 #. 4.0->settings-schema.json->display-indicators->options
 #. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->display-indicators->options
+#. 6.0->settings-schema.json->group-windows->options
 msgid "Automatic"
 msgstr "Automático"
 
 #. 4.0->settings-schema.json->display-indicators->description
+#. 6.0->settings-schema.json->display-indicators->description
 msgid "Display status indicators"
 msgstr "Mostrar indicadores de estado"
 
 #. 4.0->settings-schema.json->display-indicators->tooltip
+#. 6.0->settings-schema.json->display-indicators->tooltip
 msgid ""
 "Choose if the minimized and the pinned indicator characters will be "
 "prepended to button label text. Buttons without a text label will not "
@@ -400,10 +454,12 @@ msgstr ""
 "no haya restricciones de espacio."
 
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->description
+#. 6.0->settings-schema.json->trailing-pinned-behaviour->description
 msgid "Add new window buttons ahead of trailing pinned buttons"
 msgstr "Añadir nuevos botones de ventana antes de los botones finales añadidos"
 
 #. 4.0->settings-schema.json->trailing-pinned-behaviour->tooltip
+#. 6.0->settings-schema.json->trailing-pinned-behaviour->tooltip
 msgid ""
 "When enabled, new windows will be added to the left of any pinned buttons "
 "currently placed on the right of the window list, effectively this allows "
@@ -415,17 +471,25 @@ msgstr ""
 "la lista de ventanas"
 
 #. 4.0->settings-schema.json->fade-animation-time->units
+#. 4.0->settings-schema.json->hover-peek-delay->units
 #. 4.0->settings-schema.json->label-animation-time->units
 #. 4.0->settings-schema.json->preview-timeout-show->units
 #. 4.0->settings-schema.json->preview-timeout-hide->units
+#. 6.0->settings-schema.json->fade-animation-time->units
+#. 6.0->settings-schema.json->hover-peek-delay->units
+#. 6.0->settings-schema.json->label-animation-time->units
+#. 6.0->settings-schema.json->preview-timeout-show->units
+#. 6.0->settings-schema.json->preview-timeout-hide->units
 msgid "milliseconds"
 msgstr "milisegundos"
 
 #. 4.0->settings-schema.json->fade-animation-time->description
+#. 6.0->settings-schema.json->fade-animation-time->description
 msgid "Fade animation effect duration"
 msgstr "Duración del efecto de animación de desvanecimiento"
 
 #. 4.0->settings-schema.json->fade-animation-time->tooltip
+#. 6.0->settings-schema.json->fade-animation-time->tooltip
 msgid ""
 "This defines the duration of the fade-in/out animation effect. It applies to "
 "the Thumbnail menus and the full size window previews"
@@ -434,50 +498,77 @@ msgstr ""
 "gradual. Se aplica a los menús de miniaturas y a las vistas previas de "
 "ventanas de tamaño completo"
 
+#. 4.0->settings-schema.json->hover-peek-delay->description
+#. 6.0->settings-schema.json->hover-peek-delay->description
+#, fuzzy
+msgid "Hover time before showing a full size window preview"
+msgstr "Tiempo de permanencia antes de mostrar el menú"
+
+#. 4.0->settings-schema.json->hover-peek-delay->tooltip
+#. 6.0->settings-schema.json->hover-peek-delay->tooltip
+msgid ""
+"This defines the mouse hover time before a full size window preview will "
+"appear. It applies to both window-list buttons and thumbnail menu items (of "
+"course one of the full size window preview options must be enabled for this "
+"option to have any effect)"
+msgstr ""
+
 #. 4.0->settings-schema.json->label-width->units
 #. 4.0->settings-schema.json->button-spacing->units
+#. 6.0->settings-schema.json->label-width->units
+#. 6.0->settings-schema.json->button-spacing->units
 msgid "pixels"
 msgstr "pixeles"
 
 #. 4.0->settings-schema.json->label-width->description
+#. 6.0->settings-schema.json->label-width->description
 msgid "Label width"
 msgstr "Ancho de la etiqueta"
 
 #. 4.0->settings-schema.json->label-width->tooltip
+#. 6.0->settings-schema.json->label-width->tooltip
 msgid "This defines the width of the label section of a window list button"
 msgstr ""
 "Esto define el ancho de la sección de etiqueta de un botón de lista de "
 "ventana"
 
 #. 4.0->settings-schema.json->label-animation->description
+#. 6.0->settings-schema.json->label-animation->description
 msgid "Animate label"
 msgstr "Etiqueta animada"
 
 #. 4.0->settings-schema.json->label-animation-time->description
+#. 6.0->settings-schema.json->label-animation-time->description
 msgid "Label animation duration"
 msgstr "Duración de la animación de la etiqueta"
 
 #. 4.0->settings-schema.json->display-number->options
+#. 6.0->settings-schema.json->display-number->options
 msgid "2 or more windows"
 msgstr "2 o más ventanas"
 
 #. 4.0->settings-schema.json->display-number->description
+#. 6.0->settings-schema.json->display-number->description
 msgid "Display number"
 msgstr "Mostrar número"
 
 #. 4.0->settings-schema.json->number-style->options
+#. 6.0->settings-schema.json->number-style->options
 msgid "Icon overlay"
 msgstr "Superponer icono"
 
 #. 4.0->settings-schema.json->number-style->options
+#. 6.0->settings-schema.json->number-style->options
 msgid "Label prepend"
 msgstr "Añadir etiqueta"
 
 #. 4.0->settings-schema.json->number-style->description
+#. 6.0->settings-schema.json->number-style->description
 msgid "Number style"
 msgstr "Estilo de número"
 
 #. 4.0->settings-schema.json->number-style->tooltip
+#. 6.0->settings-schema.json->number-style->tooltip
 msgid ""
 "Controls how the number of windows in a grouped button is presented. When on "
 "a vertical panel, the \"label prepend\" option is not possible so \"icon "
@@ -488,26 +579,32 @@ msgstr ""
 "que en su lugar se utilizará \"superponer icono\""
 
 #. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
 msgid "Grouped"
 msgstr "Agrupadas"
 
 #. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
 msgid "Pooled"
 msgstr "Agrupado"
 
 #. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
 msgid "One to one"
 msgstr "Uno a uno"
 
 #. 4.0->settings-schema.json->group-windows->options
+#. 6.0->settings-schema.json->group-windows->options
 msgid "Launcher"
 msgstr "Lanzador"
 
 #. 4.0->settings-schema.json->group-windows->description
+#. 6.0->settings-schema.json->group-windows->description
 msgid "Window list behavior style"
 msgstr "Estilo de comportamiento de la lista de ventanas"
 
 #. 4.0->settings-schema.json->group-windows->tooltip
+#. 6.0->settings-schema.json->group-windows->tooltip
 msgid ""
 "Grouped: All windows for an application are managed by one button,\n"
 "Pooled: All window list buttons for an application are pooled side by side,\n"
@@ -525,22 +622,27 @@ msgstr ""
 "paneles."
 
 #. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->display-pinned->options
 msgid "Disabled"
 msgstr "Desactivado"
 
 #. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->display-pinned->options
 msgid "Unique for each workspace"
 msgstr "Único para cada espacio de trabajo"
 
 #. 4.0->settings-schema.json->display-pinned->options
+#. 6.0->settings-schema.json->display-pinned->options
 msgid "Common across workspaces"
 msgstr "Común a todos los espacios de trabajo"
 
 #. 4.0->settings-schema.json->display-pinned->description
+#. 6.0->settings-schema.json->display-pinned->description
 msgid "Pinning of window list buttons"
 msgstr "Fijación de botones de lista de ventanas"
 
 #. 4.0->settings-schema.json->display-pinned->tooltip
+#. 6.0->settings-schema.json->display-pinned->tooltip
 msgid ""
 "Controls whether window list buttons can be pinned, and whether each "
 "workspace has a unique set of pinned buttons or one common set shared across "
@@ -554,10 +656,12 @@ msgstr ""
 "mantiene en todos los espacios de trabajo."
 
 #. 4.0->settings-schema.json->synchronize-pinned->description
+#. 6.0->settings-schema.json->synchronize-pinned->description
 msgid "Synchronize launcher buttons across all workspaces"
 msgstr "Sincronizar los botones de inicio en todas las áreas de trabajo"
 
 #. 4.0->settings-schema.json->synchronize-pinned->tooltip
+#. 6.0->settings-schema.json->synchronize-pinned->tooltip
 msgid ""
 "If enabled, the number and order of launcher buttons on the panel will be "
 "synchronize across all workspaces."
@@ -566,10 +670,12 @@ msgstr ""
 "sincronizarán en todos los espacios de trabajo."
 
 #. 4.0->settings-schema.json->show-windows-for-current-monitor->description
+#. 6.0->settings-schema.json->show-windows-for-current-monitor->description
 msgid "Only show windows on the same monitor"
 msgstr "Mostrar solo ventanas en el mismo monitor"
 
 #. 4.0->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 6.0->settings-schema.json->show-windows-for-current-monitor->tooltip
 msgid ""
 "If enabled, this applet instance only manages windows\n"
 "that are displayed on the same monitor"
@@ -578,14 +684,17 @@ msgstr ""
 "que se muestran en el mismo monitor"
 
 #. 4.0->settings-schema.json->show-windows-for-all-workspaces->description
+#. 6.0->settings-schema.json->show-windows-for-all-workspaces->description
 msgid "Include windows from all workspaces"
 msgstr "Incluir ventanas de todos los espacios de trabajo"
 
 #. 4.0->settings-schema.json->show-tooltips->description
+#. 6.0->settings-schema.json->show-tooltips->description
 msgid "Show tooltips for window list buttons"
 msgstr "Mostrar información sobre los botones de la lista de ventanas"
 
 #. 4.0->settings-schema.json->show-tooltips->tooltip
+#. 6.0->settings-schema.json->show-tooltips->tooltip
 msgid ""
 "Enable to show tooltips using window title or application name when hovering "
 "over window list buttons"
@@ -595,6 +704,7 @@ msgstr ""
 "la lista de ventanas"
 
 #. 4.0->settings-schema.json->hide-panel-apps->description
+#. 6.0->settings-schema.json->hide-panel-apps->description
 msgid ""
 "Hide window buttons of pinned buttons on other CassiaWindowList instances"
 msgstr ""
@@ -602,6 +712,7 @@ msgstr ""
 "CassiaWindowList"
 
 #. 4.0->settings-schema.json->hide-panel-apps->tooltip
+#. 6.0->settings-schema.json->hide-panel-apps->tooltip
 msgid ""
 "When enabled, windows for applications with pinned buttons on other "
 "instances of the CassiaWindowList applet will not show up in this window list"
@@ -611,10 +722,12 @@ msgstr ""
 "ventanas."
 
 #. 4.0->settings-schema.json->button-spacing->description
+#. 6.0->settings-schema.json->button-spacing->description
 msgid "Spacing between buttons"
 msgstr "Espaciado entre botones"
 
 #. 4.0->settings-schema.json->button-spacing->tooltip
+#. 6.0->settings-schema.json->button-spacing->tooltip
 msgid ""
 "This defines the spacing between the buttons, the value will be divided in "
 "half and added to the left of the icon and to the right of the label on "
@@ -626,24 +739,30 @@ msgstr ""
 "verticales"
 
 #. 4.0->settings-schema.json->hover-peek-windowlist->description
+#. 6.0->settings-schema.json->hover-peek-windowlist->description
 msgid "Show a full size window preview when hovering over a button"
 msgstr ""
 "Mostrar una vista previa de la ventana a tamaño completo al pasar el ratón "
 "por encima de un botón"
 
 #. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
+#. 6.0->settings-schema.json->hover-peek-windowlist->tooltip
+#, fuzzy
 msgid ""
 "If enabled, a full size preview window will appear when the mouse pointer is "
-"hovering over a window-list button."
+"hovering over a window-list button. The delay before the preview appears is "
+"controlled by an option under the Advanced tab"
 msgstr ""
 "Si se activa, aparecerá una ventana de previsualización a tamaño completo "
 "cuando el puntero del ratón se sitúe sobre un botón de la lista de ventanas."
 
 #. 4.0->settings-schema.json->no-click-activate->description
+#. 6.0->settings-schema.json->no-click-activate->description
 msgid "Automatic focus change when leaving the panel"
 msgstr "Cambio automático de enfoque al salir del panel"
 
 #. 4.0->settings-schema.json->no-click-activate->tooltip
+#. 6.0->settings-schema.json->no-click-activate->tooltip
 msgid ""
 "If enabled, the current window for a window-list button will get the focus "
 "when the mouse pointer leaves the panel. Leaving the window-list with Ctrl "
@@ -658,10 +777,12 @@ msgstr ""
 "con la opción de vista previa."
 
 #. 4.0->settings-schema.json->menu-show-on-hover->description
+#. 6.0->settings-schema.json->menu-show-on-hover->description
 msgid "Show on hover"
 msgstr "Mostrar al pasar el ratón por encima"
 
 #. 4.0->settings-schema.json->menu-show-on-hover->tooltip
+#. 6.0->settings-schema.json->menu-show-on-hover->tooltip
 msgid ""
 "If enabled, a popup menu with a list of current windows will show when "
 "hovering"
@@ -670,11 +791,13 @@ msgstr ""
 "aparecerá un menú emergente con una lista de las ventanas actuales"
 
 #. 4.0->settings-schema.json->show-previews->description
+#. 6.0->settings-schema.json->show-previews->description
 msgid "Show window thumbnails in the popup window list menu"
 msgstr ""
 "Mostrar miniaturas de ventanas en el menú de lista de ventanas emergentes"
 
 #. 4.0->settings-schema.json->show-previews->tooltip
+#. 6.0->settings-schema.json->show-previews->tooltip
 msgid ""
 "If enabled, the popup menu will show window thumbnails,\n"
 "otherwise the menu will only show window titles\n"
@@ -686,36 +809,46 @@ msgstr ""
 "software)"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Extra large"
 msgstr "Extra grande"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Large"
 msgstr "Grande"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Medium"
 msgstr "Medio"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Small"
 msgstr "Pequeño"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->options
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->options
 msgid "Extra small"
 msgstr "Extra pequeño"
 
 #. 4.0->settings-schema.json->number-of-unshrunk-previews->description
+#. 6.0->settings-schema.json->number-of-unshrunk-previews->description
 msgid "Default thumbnail window size"
 msgstr "Tamaño predeterminado de la ventana de miniaturas"
 
 #. 4.0->settings-schema.json->menu-all-windows-of-pool->description
 #. 4.0->settings-schema.json->menu-all-windows-of-auto->description
+#. 6.0->settings-schema.json->menu-all-windows-of-pool->description
+#. 6.0->settings-schema.json->menu-all-windows-of-auto->description
 msgid "Show thumbnails for all windows of an application pool"
 msgstr "Mostrar miniaturas de todas las ventanas de un grupo de aplicaciones"
 
 #. 4.0->settings-schema.json->menu-all-windows-of-pool->tooltip
 #. 4.0->settings-schema.json->menu-all-windows-of-auto->tooltip
+#. 6.0->settings-schema.json->menu-all-windows-of-pool->tooltip
+#. 6.0->settings-schema.json->menu-all-windows-of-auto->tooltip
 msgid ""
 "If enabled, a popup menu will contain all the application windows in the "
 "application pool rather then just the selected window within the application "
@@ -726,10 +859,12 @@ msgstr ""
 "seleccionada dentro del grupo de aplicaciones"
 
 #. 4.0->settings-schema.json->preview-timeout-show->description
+#. 6.0->settings-schema.json->preview-timeout-show->description
 msgid "Hover time before showing menu"
 msgstr "Tiempo de permanencia antes de mostrar el menú"
 
 #. 4.0->settings-schema.json->preview-timeout-show->tooltip
+#. 6.0->settings-schema.json->preview-timeout-show->tooltip
 msgid ""
 "The waiting time before the thumbnail menu appears when hovering over a "
 "button\n"
@@ -740,10 +875,12 @@ msgstr ""
 "(No se utiliza cuando se pasa directamente a otro botón de la lista)"
 
 #. 4.0->settings-schema.json->preview-timeout-hide->description
+#. 6.0->settings-schema.json->preview-timeout-hide->description
 msgid "Time before closing after pointer leaves the menu"
 msgstr "Tiempo antes del cierre después de que el puntero abandone el menú"
 
 #. 4.0->settings-schema.json->preview-timeout-hide->tooltip
+#. 6.0->settings-schema.json->preview-timeout-hide->tooltip
 msgid ""
 "The waiting time for the thumbnail menu to close when leaving a button\n"
 "(Not used when moving directly to a different button in the list)"
@@ -755,6 +892,9 @@ msgstr ""
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
 #. 4.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
 msgid "Close thumbnail menu"
 msgstr "Cerrar el menú de miniaturas"
 
@@ -764,6 +904,12 @@ msgstr "Cerrar el menú de miniaturas"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Close window"
 msgstr "Cerrar ventana"
 
@@ -773,6 +919,12 @@ msgstr "Cerrar ventana"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Minimize/Restore"
 msgstr "Minimizar/Restaurar"
 
@@ -782,6 +934,12 @@ msgstr "Minimizar/Restaurar"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Maximize/Restore"
 msgstr "Maximizar/Restaurar"
 
@@ -791,6 +949,12 @@ msgstr "Maximizar/Restaurar"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Group/Ungroup windows"
 msgstr "Agrupar/Desagrupar ventanas"
 
@@ -800,6 +964,12 @@ msgstr "Agrupar/Desagrupar ventanas"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to workspace 1"
 msgstr "Desplazarse al área de trabajo 1"
 
@@ -809,6 +979,12 @@ msgstr "Desplazarse al área de trabajo 1"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to workspace 2"
 msgstr "Desplazarse al área de trabajo 2"
 
@@ -818,6 +994,12 @@ msgstr "Desplazarse al área de trabajo 2"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to workspace 3"
 msgstr "Desplazarse al área de trabajo 3"
 
@@ -827,6 +1009,12 @@ msgstr "Desplazarse al área de trabajo 3"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to workspace 4"
 msgstr "Desplazarse al área de trabajo 4"
 
@@ -836,6 +1024,12 @@ msgstr "Desplazarse al área de trabajo 4"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to previous workspace"
 msgstr "Desplazarse al espacio de trabajo anterior"
 
@@ -845,6 +1039,12 @@ msgstr "Desplazarse al espacio de trabajo anterior"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to next workspace"
 msgstr "Pasar al siguiente espacio de trabajo"
 
@@ -854,6 +1054,12 @@ msgstr "Pasar al siguiente espacio de trabajo"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to this workspace"
 msgstr "Desplazarse a este espacio de trabajo"
 
@@ -863,6 +1069,12 @@ msgstr "Desplazarse a este espacio de trabajo"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Visible on this/all workspaces"
 msgstr "Visible en este/todos los espacios de trabajo"
 
@@ -872,6 +1084,12 @@ msgstr "Visible en este/todos los espacios de trabajo"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 1"
 msgstr "Desplazarse al monitor 1"
 
@@ -881,6 +1099,12 @@ msgstr "Desplazarse al monitor 1"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 2"
 msgstr "Desplazarse al monitor 2"
 
@@ -890,6 +1114,12 @@ msgstr "Desplazarse al monitor 2"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 3"
 msgstr "Desplazarse al monitor 3"
 
@@ -899,6 +1129,12 @@ msgstr "Desplazarse al monitor 3"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to monitor 4"
 msgstr "Desplazarse al monitor 4"
 
@@ -908,6 +1144,12 @@ msgstr "Desplazarse al monitor 4"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to previous monitor"
 msgstr "Pasar al monitor anterior"
 
@@ -917,6 +1159,12 @@ msgstr "Pasar al monitor anterior"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to next monitor"
 msgstr "Pasar al siguiente monitor"
 
@@ -926,6 +1174,12 @@ msgstr "Pasar al siguiente monitor"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Move to current/next monitor"
 msgstr "Desplazarse al monitor actual/siguiente"
 
@@ -935,6 +1189,12 @@ msgstr "Desplazarse al monitor actual/siguiente"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Pin to panel toggle"
 msgstr "Habilitar/deshabilitar anclar al panel"
 
@@ -944,6 +1204,12 @@ msgstr "Habilitar/deshabilitar anclar al panel"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile left"
 msgstr "Mosaico a la izquierda"
 
@@ -953,6 +1219,12 @@ msgstr "Mosaico a la izquierda"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile top left"
 msgstr "Mosaico superior izquierda"
 
@@ -962,6 +1234,12 @@ msgstr "Mosaico superior izquierda"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile top"
 msgstr "Mosaico superior"
 
@@ -971,6 +1249,12 @@ msgstr "Mosaico superior"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile top right"
 msgstr "Mosaico superior derecha"
 
@@ -980,6 +1264,12 @@ msgstr "Mosaico superior derecha"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile right"
 msgstr "Mosaico a la derecha"
 
@@ -989,6 +1279,12 @@ msgstr "Mosaico a la derecha"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile bottom right"
 msgstr "Mosaico inferior derecha"
 
@@ -998,6 +1294,12 @@ msgstr "Mosaico inferior derecha"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile bottom"
 msgstr "Mosaico inferior"
 
@@ -1007,6 +1309,12 @@ msgstr "Mosaico inferior"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile bottom left"
 msgstr "Mosaico inferior izquierda"
 
@@ -1016,6 +1324,12 @@ msgstr "Mosaico inferior izquierda"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Untile window"
 msgstr "Salir del modo mosaico"
 
@@ -1025,41 +1339,56 @@ msgstr "Salir del modo mosaico"
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Do nothing"
 msgstr "No hacer nada"
 
 #. 4.0->settings-schema.json->preview-middle-click->description
+#. 6.0->settings-schema.json->preview-middle-click->description
 msgid "Thumbnail window middle button action"
 msgstr "Acción del botón central de la ventana de miniaturas"
 
 #. 4.0->settings-schema.json->preview-back-click->description
+#. 6.0->settings-schema.json->preview-back-click->description
 msgid "Thumbnail window back button action"
 msgstr "Acción del botón de retroceso de la ventana de miniaturas"
 
 #. 4.0->settings-schema.json->preview-forward-click->description
+#. 6.0->settings-schema.json->preview-forward-click->description
 msgid "Thumbnail window forward button action"
 msgstr "Acción del botón de avance de la ventana de miniaturas"
 
 #. 4.0->settings-schema.json->hover-peek-thumbnail->description
+#. 6.0->settings-schema.json->hover-peek-thumbnail->description
 msgid "Show a full size window preview when hovering over a Thumbnail"
 msgstr ""
 "Mostrar una vista previa de la ventana a tamaño completo al pasar el ratón "
 "por encima de una miniatura"
 
 #. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
+#. 6.0->settings-schema.json->hover-peek-thumbnail->tooltip
+#, fuzzy
 msgid ""
 "If enabled, a full size preview window will appear when the mouse pointer is "
-"hovering over a Thumbnail menu item"
+"hovering over a Thumbnail menu item. The delay before the preview appears is "
+"controlled by an option under the Advanced tab"
 msgstr ""
 "Si está activada, aparecerá una ventana de previsualización a tamaño "
 "completo cuando el puntero del ratón se sitúe sobre un elemento del menú "
 "Miniatura"
 
 #. 4.0->settings-schema.json->no-click-activate-thumbnail->description
+#. 6.0->settings-schema.json->no-click-activate-thumbnail->description
 msgid "Automatic focus change when leaving the Thumbnail menu"
 msgstr "Cambio automático del enfoque al salir del menú de miniaturas"
 
 #. 4.0->settings-schema.json->no-click-activate-thumbnail->tooltip
+#. 6.0->settings-schema.json->no-click-activate-thumbnail->tooltip
 msgid ""
 "If enabled, the window associated with the Thumbnail menu item will get the "
 "focus when the mouse pointer leaves the menu. Leaving the menu with Ctrl or "
@@ -1075,29 +1404,39 @@ msgstr ""
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore/Minimize most recent window"
 msgstr "Restaurar/Minimizar la ventana más reciente"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore then cycle windows"
 msgstr "Restablecer y luego desplpazar ventanas"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Show thumbnail menu"
 msgstr "Mostrar menú de miniaturas"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->options
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "Restore or hold for thumbnail menu"
 msgstr "Restablecer o mantener presionado para ver el menú de miniaturas"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->description
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->description
 msgid "Left button action for grouped buttons"
 msgstr "Acción del botón izquierdo para botones agrupados"
 
 #. 4.0->settings-schema.json->grouped-mouse-action-btn1->tooltip
+#. 6.0->settings-schema.json->grouped-mouse-action-btn1->tooltip
 msgid ""
 "Action taken when using the left mouse button on a window list entry for a "
 "group of windows"
@@ -1106,14 +1445,17 @@ msgstr ""
 "la lista de ventanas de un grupo de ventanas"
 
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->options
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->options
 msgid "New window or hold for thumbnail menu"
 msgstr "Nueva ventana o mantener presionado para el menú de miniaturas"
 
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->description
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->description
 msgid "Left button action (with running windows)"
 msgstr "Acción del botón izquierdo (con ventanas abiertas)"
 
 #. 4.0->settings-schema.json->launcher-mouse-action-btn1->tooltip
+#. 6.0->settings-schema.json->launcher-mouse-action-btn1->tooltip
 msgid ""
 "Action taken when using the left mouse button on a launcher button with one "
 "or more running windows"
@@ -1124,73 +1466,94 @@ msgstr ""
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Thumbnail menu toggle"
 msgstr "Activar/desactivar el menú de miniaturas"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Thumbnail menu hold"
 msgstr "Mantener el menú de miniaturas"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->options
 #. 4.0->settings-schema.json->mouse-action-btn8->options
 #. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Restore most recent application window"
 msgstr "Restaurar la ventana de la aplicación más reciente"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->description
+#. 6.0->settings-schema.json->mouse-action-btn2->description
 msgid "Middle button action"
 msgstr "Acción del botón central"
 
 #. 4.0->settings-schema.json->mouse-action-btn2->tooltip
+#. 6.0->settings-schema.json->mouse-action-btn2->tooltip
 msgid "Action taken when using the middle mouse button on window list entries"
 msgstr ""
 "Acción realizada al utilizar el botón central del ratón en las entradas de "
 "la lista de ventanas"
 
 #. 4.0->settings-schema.json->mouse-action-btn8->description
+#. 6.0->settings-schema.json->mouse-action-btn8->description
 msgid "Back button action"
 msgstr "Acción del botón de retroceso"
 
 #. 4.0->settings-schema.json->mouse-action-btn8->tooltip
+#. 6.0->settings-schema.json->mouse-action-btn8->tooltip
 msgid "Action taken when using the back mouse button on window list entries"
 msgstr ""
 "Acción realizada al utilizar el botón de retroceso del ratón en las entradas "
 "de la lista de ventanas"
 
 #. 4.0->settings-schema.json->mouse-action-btn9->description
+#. 6.0->settings-schema.json->mouse-action-btn9->description
 msgid "Forward button action"
 msgstr "Acción del botón de avance"
 
 #. 4.0->settings-schema.json->mouse-action-btn9->tooltip
+#. 6.0->settings-schema.json->mouse-action-btn9->tooltip
 msgid "Action taken when using the forward mouse button on window list entries"
 msgstr ""
 "Acción realizada al utilizar el botón de avance del ratón en las entradas de "
 "la lista de ventanas"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "Off"
 msgstr "Desactivar"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "On (temporary)"
 msgstr "Activar (temporalmente)"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "On (global default)"
 msgstr "Activar (configuración global por defecto)"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->options
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->options
 msgid "On (application default)"
 msgstr "Activar (aplicación por defecto)"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->description
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->description
 msgid "Adjust the thumbnail window sizes using the scroll-wheel"
 msgstr ""
 "Ajuste el tamaño de la ventana de miniaturas con la rueda de desplazamiento"
 
 #. 4.0->settings-schema.json->wheel-adjusts-preview-size->tooltip
+#. 6.0->settings-schema.json->wheel-adjusts-preview-size->tooltip
 msgid ""
 "If enabled, the size of thumbnail windows will respond to the mouse scroll-"
 "wheel. The new size can have a temporary effect or persist on a global or "
@@ -1201,27 +1564,34 @@ msgstr ""
 "o persistir de forma global o por aplicación"
 
 #. 4.0->settings-schema.json->hotkey-bindings->description
+#. 6.0->settings-schema.json->hotkey-bindings->description
 msgid "Hotkey binding available for assignment to a window"
 msgstr "Asignación de teclas de acceso rápido a una ventana"
 
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
 msgid "Enabled"
 msgstr "Activado"
 
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
 msgid "Cycle application windows"
 msgstr "Desplazarse por las ventanas de la aplicación"
 
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
 msgid "Key sequence"
 msgstr "Secuencia de teclas"
 
 #. 4.0->settings-schema.json->hotkey-bindings->columns->title
+#. 6.0->settings-schema.json->hotkey-bindings->columns->title
 msgid "Description"
 msgstr "Descripción"
 
 #. 4.0->settings-schema.json->hotkey-bindings->tooltip
+#. 6.0->settings-schema.json->hotkey-bindings->tooltip
 msgid ""
 "Define a list of hotkeys used to bring to the foreground specific windows."
 msgstr ""
@@ -1229,12 +1599,14 @@ msgstr ""
 "ventanas específicas."
 
 #. 4.0->settings-schema.json->hotkey-minimize->description
+#. 6.0->settings-schema.json->hotkey-minimize->description
 msgid "Minimize window when hotkey target is already in focus"
 msgstr ""
 "Minimizar la ventana cuando el objetivo de la tecla de acceso directo ya "
 "está enfocado"
 
 #. 4.0->settings-schema.json->hotkey-minimize->tooltip
+#. 6.0->settings-schema.json->hotkey-minimize->tooltip
 msgid ""
 "If enabled and application cycling is not enabled or there is only one "
 "window for the application, windows will be minimized if the window is "
@@ -1245,10 +1617,12 @@ msgstr ""
 "está en foco"
 
 #. 4.0->settings-schema.json->hotkey-new->description
+#. 6.0->settings-schema.json->hotkey-new->description
 msgid "Open a new window when the application is not running"
 msgstr "Abrir una nueva ventana cuando la aplicación no se está ejecutando"
 
 #. 4.0->settings-schema.json->hotkey-new->tooltip
+#. 6.0->settings-schema.json->hotkey-new->tooltip
 msgid ""
 "Start a new window if no window is attached to a hotkey and the hotkey "
 "description is an exact match for the application name of a pinned button or "
@@ -1260,12 +1634,14 @@ msgstr ""
 "nombre de un archivo del escritorio"
 
 #. 4.0->settings-schema.json->hotkey-sequence->description
+#. 6.0->settings-schema.json->hotkey-sequence->description
 msgid "Smart numeric hotkeys (using \"1\" automatically extends to 1-9)"
 msgstr ""
 "Teclas de acceso rápido numéricas inteligentes (el uso de \"1\" se amplía "
 "automáticamente a 1-9)"
 
 #. 4.0->settings-schema.json->hotkey-sequence->tooltip
+#. 6.0->settings-schema.json->hotkey-sequence->tooltip
 msgid ""
 "If enabled, hotkeys ending with the \"1\" key (i.e. Alt+1) will "
 "automatically create hotkeys 1 through 9 (i.e. Alt+1 through Alt+9). The "
@@ -1279,12 +1655,14 @@ msgstr ""
 "teclas de acceso rápido."
 
 #. 4.0->settings-schema.json->hotkey-grave-help->description
+#. 6.0->settings-schema.json->hotkey-grave-help->description
 msgid "Use modifier(s) + ` hotkey to show hotkey hint bubbles"
 msgstr ""
 "Utiliza modificador(es) + tecla de acceso rápido ` para mostrar burbujas de "
 "sugerencias de teclas de acceso rápido"
 
 #. 4.0->settings-schema.json->hotkey-grave-help->tooltip
+#. 6.0->settings-schema.json->hotkey-grave-help->tooltip
 msgid ""
 "If enabled, The hotkey modifier(s) + ` will be registered for each unique "
 "modifier set defined in the hotkey list. Using these hotkeys will temporally "
@@ -1296,6 +1674,7 @@ msgstr ""
 "temporalmente una burbuja de sugerencia sobre los iconos de los botones."
 
 #. 4.0->settings-schema.json->hotkey-help->description
+#. 6.0->settings-schema.json->hotkey-help->description
 msgid ""
 "Hotkeys can be assigned to a window in two ways:\n"
 "1) Manual: Use \"Assign window to a hotkey\" in the button context menu.\n"
@@ -1318,18 +1697,22 @@ msgstr ""
 "rápido asociadas a archivos de escritorio no pueden asignarse manualmente."
 
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
 msgid "Key and mouse button"
 msgstr "Tecla y botón del ratón"
 
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
 msgid "Mouse click context"
 msgstr "Contexto del clic del ratón"
 
 #. 4.0->settings-schema.json->adv-mouse-list->columns->title
+#. 6.0->settings-schema.json->adv-mouse-list->columns->title
 msgid "Action to perform"
 msgstr "Acción a realizar"
 
 #. 4.0->settings-schema.json->adv-mouse-list->tooltip
+#. 6.0->settings-schema.json->adv-mouse-list->tooltip
 msgid ""
 "Define a set of mouse button actions when the Ctrl or Shift keys are pressed."
 msgstr ""
@@ -1351,10 +1734,12 @@ msgstr ""
 "tendrán efecto."
 
 #. 4.0->settings-schema.json->animate-icon->description
+#. 6.0->settings-schema.json->animate-icon->description
 msgid "Icon animation when launching new windows"
 msgstr "Animación de iconos al abrir nuevas ventanas"
 
 #. 4.0->settings-schema.json->animate-icon->tooltip
+#. 6.0->settings-schema.json->animate-icon->tooltip
 msgid ""
 "When enabled, the icon will animate when launching new windows for an "
 "application"
@@ -1363,10 +1748,12 @@ msgstr ""
 "una aplicación"
 
 #. 4.0->settings-schema.json->backup-file-name->description
+#. 6.0->settings-schema.json->backup-file-name->description
 msgid "Settings backup name"
 msgstr "Nombre de la copia de seguridad de la configuración"
 
 #. 4.0->settings-schema.json->backup-file-name->tooltip
+#. 6.0->settings-schema.json->backup-file-name->tooltip
 msgid ""
 "If a name is entered here, the configuration of this applet instance will be "
 "backed up under that name. Backups will be listed in the Setup Wizard "
@@ -1378,14 +1765,17 @@ msgstr ""
 "nueva instancia de CassiaWindowList a un panel."
 
 #. 4.0->settings-schema.json->icon-saturation->units
+#. 6.0->settings-schema.json->icon-saturation->units
 msgid "percent"
 msgstr "por ciento"
 
 #. 4.0->settings-schema.json->icon-saturation->description
+#. 6.0->settings-schema.json->icon-saturation->description
 msgid "Icon color saturation"
 msgstr "Saturación de color de icono"
 
 #. 4.0->settings-schema.json->icon-saturation->tooltip
+#. 6.0->settings-schema.json->icon-saturation->tooltip
 msgid ""
 "Sets the color saturation for icons from 0% (grayscale) to 200%, default is "
 "100%\n"
@@ -1398,34 +1788,42 @@ msgstr ""
 "ajuste"
 
 #. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
 msgid "All Buttons"
 msgstr "Todos los botones"
 
 #. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
 msgid "Minimized buttons"
 msgstr "Botones minimizados"
 
 #. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
 msgid "Idle pinned buttons"
 msgstr "Botones anclados inactivos"
 
 #. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
 msgid "Buttons for windows on other workspaces"
 msgstr "Botones para ventanas en otros espacios de trabajo"
 
 #. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
 msgid "Buttons for windows on other monitors"
 msgstr "Botones para ventanas en otros monitores"
 
 #. 4.0->settings-schema.json->saturation-application->options
+#. 6.0->settings-schema.json->saturation-application->options
 msgid "All buttons excepted focused window"
 msgstr "Todos los botones excepto la ventana enfocada"
 
 #. 4.0->settings-schema.json->saturation-application->description
+#. 6.0->settings-schema.json->saturation-application->description
 msgid "Where to apply the icon color saturation"
 msgstr "Dónde aplicar la saturación de color del icono"
 
 #. 4.0->settings-schema.json->saturation-application->tooltip
+#. 6.0->settings-schema.json->saturation-application->tooltip
 msgid ""
 "Which buttons will have the custom icon color saturation applied\n"
 "This option is only available when the saturation is not set to 100%"
