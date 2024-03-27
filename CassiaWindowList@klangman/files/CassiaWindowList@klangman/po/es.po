@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-27 09:32-0400\n"
-"PO-Revision-Date: 2024-03-21 10:46-0300\n"
+"PO-Revision-Date: 2024-03-27 20:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -500,9 +500,10 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-delay->description
 #. 6.0->settings-schema.json->hover-peek-delay->description
-#, fuzzy
 msgid "Hover time before showing a full size window preview"
-msgstr "Tiempo de permanencia antes de mostrar el menú"
+msgstr ""
+"Tiempo de permanencia antes de mostrar una vista previa de la ventana a "
+"tamaño completo"
 
 #. 4.0->settings-schema.json->hover-peek-delay->tooltip
 #. 6.0->settings-schema.json->hover-peek-delay->tooltip
@@ -512,6 +513,11 @@ msgid ""
 "course one of the full size window preview options must be enabled for this "
 "option to have any effect)"
 msgstr ""
+"Define el tiempo que pasa el ratón por encima antes de que aparezca una "
+"vista previa de la ventana a tamaño completo. Se aplica tanto a los botones "
+"de la lista de ventanas como a los elementos del menú de miniaturas (por "
+"supuesto, una de las opciones de vista previa de la ventana a tamaño "
+"completo debe estar activada para que esta opción tenga algún efecto)"
 
 #. 4.0->settings-schema.json->label-width->units
 #. 4.0->settings-schema.json->button-spacing->units
@@ -747,14 +753,15 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
 #. 6.0->settings-schema.json->hover-peek-windowlist->tooltip
-#, fuzzy
 msgid ""
 "If enabled, a full size preview window will appear when the mouse pointer is "
 "hovering over a window-list button. The delay before the preview appears is "
 "controlled by an option under the Advanced tab"
 msgstr ""
 "Si se activa, aparecerá una ventana de previsualización a tamaño completo "
-"cuando el puntero del ratón se sitúe sobre un botón de la lista de ventanas."
+"cuando el puntero del ratón se sitúe sobre un botón de la lista de ventanas. "
+"El retardo antes de que aparezca la vista previa se controla mediante una "
+"opción de la pestaña Avanzado"
 
 #. 4.0->settings-schema.json->no-click-activate->description
 #. 6.0->settings-schema.json->no-click-activate->description
@@ -1372,7 +1379,6 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
 #. 6.0->settings-schema.json->hover-peek-thumbnail->tooltip
-#, fuzzy
 msgid ""
 "If enabled, a full size preview window will appear when the mouse pointer is "
 "hovering over a Thumbnail menu item. The delay before the preview appears is "
@@ -1380,7 +1386,8 @@ msgid ""
 msgstr ""
 "Si está activada, aparecerá una ventana de previsualización a tamaño "
 "completo cuando el puntero del ratón se sitúe sobre un elemento del menú "
-"Miniatura"
+"Miniatura. El retardo antes de que aparezca la vista previa se controla "
+"mediante una opción de la pestaña Avanzado"
 
 #. 4.0->settings-schema.json->no-click-activate-thumbnail->description
 #. 6.0->settings-schema.json->no-click-activate-thumbnail->description
