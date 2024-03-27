@@ -1,5 +1,6 @@
 const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
+const UI = imports.ui;
 const Settings = imports.ui.settings;
 const Lang = imports.lang;
 const { Moon } = require('./js/moon');
@@ -41,7 +42,6 @@ class MoonPhase extends Applet.TextIconApplet {
 
     on_applet_clicked() {
         // TODO: Add popup that displays moon rise and set
-        const moon = new Moon(this);
     }
 
     _onSettingsChanged(value) {

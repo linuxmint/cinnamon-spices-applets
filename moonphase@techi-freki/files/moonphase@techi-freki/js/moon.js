@@ -10,7 +10,7 @@ class Moon {
     constructor(moonPhaseApplet) {
         this.calc = new Calculator(moonPhaseApplet.latitude, moonPhaseApplet.longitude, moonPhaseApplet.elevation);
         this.illumination = this.calc.getMoonIllumination();
-        this.riseSetTimes = this.calc.getRiseSet();
+        this.riseSetTimes = this.calc.getRiseSetTimes();
         this.age = Math.trunc(this.illumination.phase * 28);
         this.currentPhaseIcon = this._getCurrentPhaseIcon(moonPhaseApplet.useAltIcons);
         this.currentPhaseName = this._getCurrentPhaseName(moonPhaseApplet.showNameLabel, moonPhaseApplet.showPercentageLabel);

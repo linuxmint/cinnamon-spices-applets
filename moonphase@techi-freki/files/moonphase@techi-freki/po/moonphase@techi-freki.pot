@@ -86,12 +86,16 @@ msgstr ""
 msgid "Longitude"
 msgstr ""
 
-#. settings-schema.json->showRiseSet->description
-msgid "Display the moon rise and set times on click"
+#. settings-schema.json->elevation->description
+msgid "Elevation"
 msgstr ""
 
-#. settings-schema.json->showEclipse->description
-msgid "Display the next eclipse on click and display the eclipse icon"
+#. settings-schema.json->elevation->units
+msgid "meters"
+msgstr ""
+
+#. settings-schema.json->showRiseSet->description
+msgid "Display the moon rise and set times on click"
 msgstr ""
 
 #. settings-schema.json->showPhaseLabel->description
