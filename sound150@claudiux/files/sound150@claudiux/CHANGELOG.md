@@ -1,3 +1,6 @@
+### v6.5.6~20240327
+  * Some bugfixes.
+
 ### v6.5.5~20240322
   * Fixes #5622 (icon when a browser is the source).
 

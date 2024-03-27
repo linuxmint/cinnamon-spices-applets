@@ -136,6 +136,7 @@ const MAXIMUM_VOLUME_KEY = "maximum-volume";
 
 class ControlButton {
     constructor(icon, tooltip, callback, small = false) {
+        this.destroyed = false;
         this.actor = new St.Bin();
 
         this.button = new St.Button();
@@ -157,28 +158,42 @@ class ControlButton {
     }
 
     getActor() {
+        if (this.destroyed) return null;
         return this.actor;
     }
 
     setData(icon, tooltip) {
+        if (this.destroyed) return;
         this.icon.icon_name = icon;
         this.tooltip.set_text(tooltip);
     }
 
     setIconName(icon) {
+        if (this.destroyed) return;
         this.icon.icon_name = icon;
     }
 
     setActive(status) {
+        if (this.destroyed) return;
         this.button.change_style_pseudo_class("active", status);
     }
 
     setEnabled(status) {
+        if (this.destroyed) return;
         this.button.change_style_pseudo_class("insensitive", !status);
         //~ this.actor.visible = status;
         //~ this.button.visible = status;
         this.button.can_focus = status;
         this.button.reactive = status;
+    }
+
+    destroy() {
+        this.destroyed = true;
+        this.tooltip = null;
+        this.actor.remove_actor(this.button);
+        this.button.remove_all_children();
+        this.button.destroy();
+        this.actor.destroy();
     }
 }
 
@@ -427,10 +442,11 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
 }
 
 class Seeker extends Slider.Slider {
-    constructor(mediaServerPlayer, props, playerName, posLabel, durLabel) {
+    constructor(mediaServerPlayer, props, playerName) {
         super(0, true);
         this.actor.set_direction(St.TextDirection.LTR); // Do not invert on RTL layout
 
+        this.destroyed = false;
         this.canSeek = true;
         this.status = 'Stopped';
         this._wantedSeekValue = 0;
@@ -439,7 +455,7 @@ class Seeker extends Slider.Slider {
         this._length = 0;
         this._trackid = "";
 
-        this._timeoutId = 0;
+        this._timeoutId = null;
         this._timerTicker = 0;
 
         this._mediaServerPlayer = mediaServerPlayer;
@@ -448,16 +464,35 @@ class Seeker extends Slider.Slider {
 
         this.startingDate = Date.now();
 
-        this.posLabel = posLabel;
-        this.durLabel = durLabel;
+        this.seekerBox = new St.BoxLayout();
 
-        this.connect('drag-end', () => { this._setPosition() });
+        this.posLabel = new St.Label({text:" 00:00 "});
+        //~ logDebug("this.posLabel: "+this.posLabel);
+        //~ this.posLabel.clutterText.line_wrap = false;
+        //~ this.posLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        //~ this.posLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+        this.durLabel = new St.Label({text:" 00:00 "});
+        //~ logDebug("this.durLabel: "+this.durLabel);
+        //~ this.durLabel.clutterText.line_wrap = false;
+        //~ this.durLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        //~ this.durLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+
+        this.seekerBox.add_actor(this.posLabel);
+        this.seekerBox.add_actor(this.actor);
+        this.seekerBox.add_actor(this.durLabel);
+
+        this.connect('drag-end', () => {
+            if (this.destroyed) return;
+            this._setPosition();
+        });
         this.connect('value-changed', () => {
+            if (this.destroyed) return;
             if (!this._dragging) // Update on scroll events
                 this._setPosition();
         });
 
         this._seekChangedId = mediaServerPlayer.connectSignal('Seeked', (id, sender, value) => {
+            if (this.destroyed) return;
             // Seek value sent by the player
             if (value > 0) {
                 this._setPosition(value);
@@ -480,6 +515,10 @@ class Seeker extends Slider.Slider {
 
         this._getCanSeek();
         this._getPosition(); // Added
+    }
+
+    getActor() {
+        return this.seekerBox;
     }
 
     time_for_label(sec) {
@@ -518,55 +557,60 @@ class Seeker extends Slider.Slider {
     }
 
     play() {
+        if (this.destroyed) return;
         run_playerctld();
         this.status = 'Playing';
         this._getCanSeek();
     }
 
     pause() {
+        if (this.destroyed) return;
         this.status = 'Paused';
         if (this.canSeek)
             this._updateTimer();
         else
             this._updateValue();
-        if (this._timeoutId > 0) {
-            try {
-                Mainloop.source_remove(this._timeoutId);
-            } catch(e) {}
-            this._timeoutId = 0;
+        if (this._timeoutId) {
+            Mainloop.source_remove(this._timeoutId);
+            this._timeoutId = null;
         }
         run_playerctld();
     }
 
     stop() {
+        if (this.destroyed) return;
         this.status = 'Stopped';
         if (this.canSeek)
             this._updateTimer();
         else
             this._updateValue();
-        if (this._timeoutId > 0) {
-            try {
-                Mainloop.source_remove(this._timeoutId);
-            } catch(e) {}
-            this._timeoutId = 0;
+        if (this._timeoutId) {
+            Mainloop.source_remove(this._timeoutId);
+            this._timeoutId = null;
         }
+        kill_playerctld(); //???
     }
 
     hideAll() {
-        this.durLabel.hide();
-        this.posLabel.hide();
-        this.actor.hide();
+        if (this.destroyed) return;
+        if (this.durLabel) this.durLabel.hide();
+        if (this.actor) this.actor.hide();
+        if (this.posLabel) this.posLabel.hide();
+        if (this.seekerBox) this.seekerBox.hide();
         //~ this.parent.hide();
     }
 
     showAll() {
-        this.durLabel.show();
-        this.posLabel.show();
-        this.actor.show();
+        if (this.destroyed) return;
+        if (this.seekerBox) this.seekerBox.show();
+        if (this.durLabel) this.durLabel.show();
+        if (this.posLabel) this.posLabel.show();
+        if (this.actor) this.actor.show();
         //~ this.parent.show();
     }
 
     setTrack(trackid, length, force_zero=false) {
+        if (this.destroyed) return;
         if (length > 0) {
             this.showAll();
         } else {
@@ -579,12 +623,13 @@ class Seeker extends Slider.Slider {
             this._trackid = trackid;
         }
         this._length = length;
-        this.durLabel.set_text(this.time_for_label(length));
+        if (this.status === 'Playing' && this.durLabel) this.durLabel.set_text(this.time_for_label(length));
         this._wantedSeekValue = 0;
         this._updateValue();
     }
 
     _updateValue() {
+        if (this.destroyed) return GLib.SOURCE_REMOVE;
         //~ this._currentTime = (Date.now() - this.startingDate) / 1000;
 
         if (this.canSeek) {
@@ -594,15 +639,15 @@ class Seeker extends Slider.Slider {
                 this.startingDate = Date.now() - this._wantedSeekValue * 1000;
                 this.setValue(this._wantedSeekValue / this._length);
                 this._currentTime = this._wantedSeekValue;
-                this.posLabel.set_text(this.time_for_label(this._currentTime));
+                if (this.status === 'Playing' && this.posLabel) this.posLabel.set_text(this.time_for_label(this._currentTime));
                 this._wantedSeekValue = 0;
             } else if (!this._dragging) {
                 if (this._length > 0 && this._currentTime > 0) {
-                    this.posLabel.set_text(this.time_for_label(this._currentTime));
+                    if (this.status === 'Playing' && this.posLabel) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this.setValue(this._currentTime / this._length);
                 } else {
                     this.setValue(0);
-                    this.posLabel.set_text(" 00:00 ")
+                    if (this.status === 'Playing' && this.posLabel) this.posLabel.set_text(" 00:00 ");
                 }
             }
         } else {
@@ -614,23 +659,26 @@ class Seeker extends Slider.Slider {
                     this.startingDate = Date.now() - this._wantedSeekValue * 1000;
                     this.setValue(this._wantedSeekValue / this._length);
                     this._currentTime = this._wantedSeekValue;
-                    this.posLabel.set_text(this.time_for_label(this._currentTime));
+                    if (this.status === 'Playing' && this.posLabel) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this._wantedSeekValue = 0;
                 } else if (!this._dragging) {
-                    this.posLabel.set_text(this.time_for_label(this._currentTime));
+                    if (this.status === 'Playing' && this.posLabel) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this.setValue(this._currentTime / this._length);
-                    if (this._timeoutId > 0) {
-                        try {
-                            Mainloop.source_remove(this._timeoutId);
-                        } catch(e) {}
-                        this._timeoutId = 0;
+                    if (this._timeoutId2) {
+                        Mainloop.source_remove(this._timeoutId2);
+                        this._timeoutId2 = null;
                     }
-                    this._timeoutId = Mainloop.timeout_add_seconds(1, this._updateValue.bind(this));
+                    //~ this._timeoutId = Mainloop.timeout_add_seconds(1, this._updateValue.bind(this));
+                    // Two lines removed:
+                    this._timeoutId2 = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));
                     return (this.status === "Playing") ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE;
+                    //Replaced by these two lines:
+                    //~ if (this.status === "Playing")
+                        //~ this._timeoutId = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));
                 }
             } else {
                 this.setValue(0);
-                this.posLabel.set_text(" 00:00 ");
+                if (this.status === 'Playing' && this.posLabel) this.posLabel.set_text(" 00:00 ");
                 this.hideAll();
             }
         }
@@ -638,6 +686,7 @@ class Seeker extends Slider.Slider {
     }
 
     _timerCallback() {
+        if (this.destroyed) return GLib.SOURCE_REMOVE;
         if (this.status === 'Playing') {
             if (this._timerTicker < 10) {
                 this._currentTime += 1;
@@ -653,31 +702,46 @@ class Seeker extends Slider.Slider {
             this._timerTicker = 0;
             this._currentTime = 0;
         }
-
-        this._timeoutId = 0;
+        if (this._timeoutId) Mainloop.source_remove(this._timeoutId); // Added
+        this._timeoutId = null;
         return GLib.SOURCE_REMOVE;
     }
 
     _updateTimer() {
-        if (this._timeoutId > 0) {
+        if (this._timeoutId) {
             Mainloop.source_remove(this._timeoutId);
-            this._timeoutId = 0;
+            this._timeoutId = null;
         }
+
+        if (this.destroyed) return GLib.SOURCE_REMOVE;
 
         if (this.status === 'Playing') {
             if (this.canSeek) {
                 this._getPosition();
                 this._timerTicker = 0;
+                //~ if (this._timeoutId) {
+                    //~ Mainloop.source_remove(this._timeoutId);
+                    //~ this._timeoutId = null;
+                //~ }
                 this._timeoutId = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));
             } else if (this._length > 0) {
                 this._getPosition();
                 this._timerTicker = 0;
+                //~ if (this._timeoutId) {
+                    //~ Mainloop.source_remove(this._timeoutId);
+                    //~ this._timeoutId = null;
+                //~ }
                 this._timeoutId = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));
             }
         } else {
-            if (this.status === 'Stopped')
+            if (this.status === 'Stopped') {
                 this._currentTime = 0;
-            this._updateValue();
+                //~ if (this._timeoutId) {
+                    //~ Mainloop.source_remove(this._timeoutId);
+                    //~ this._timeoutId = null;
+                //~ }
+            }
+            //this._updateValue();
         }
     }
 
@@ -698,7 +762,24 @@ class Seeker extends Slider.Slider {
         });
     }
 
+    _cantSeek() {
+        this.canSeek = false;
+        if (this.destroyed) return;
+        if (this._length > 0) {
+            this.showAll();
+            this._updateValue();
+        } else {
+            this.hideAll();
+        }
+    }
+
     _setCanSeek(seek) {
+        if (this.destroyed) return;
+
+        if (!this._mediaServerPlayer) {
+            this._cantSeek();
+            return
+        }
         let playback_rate = this._mediaServerPlayer.Rate;
         // Hide seek for non-standard speeds except: 0 may mean paused, Audacious returns null
         if (seek && (playback_rate == 1.0 || !playback_rate)) {
@@ -707,29 +788,27 @@ class Seeker extends Slider.Slider {
             this._getPosition();
             this._updateTimer();
         } else {
-            this.canSeek = false;
-            if (this._length > 0) {
-                this.showAll();
-                this._updateValue();
-            } else {
-                this.hideAll();
-            }
+            this._cantSeek();
         }
         //~ logDebug("this.canSeek: "+this.canSeek);
     }
 
     _setPosition(value) {
+        if (this.destroyed) return;
+
         if (value >= 0) {
             this._currentTime = value / 1000000;
             this._updateValue();
         } else {
             let time = this._value * this._length * 1000000;
             this._wantedSeekValue = time;
-            this._mediaServerPlayer.SetPositionRemote(this._trackid, time);
+            if (this._mediaServerPlayer) this._mediaServerPlayer.SetPositionRemote(this._trackid, time);
         }
     }
 
     _getPosition() {
+        if (this.destroyed) return;
+
         this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, 'Position', (position, error) => {
             //~ logDebug("_getPosition dbus !error: "+!error);
             if (!error && position[0]) {
@@ -757,16 +836,25 @@ class Seeker extends Slider.Slider {
     }
 
     destroy() {
-        if (this._timeoutId > 0) {
+        this.destroyed = true;
+        if (this._timeoutId) {
             Mainloop.source_remove(this._timeoutId);
-            this._timeoutId = 0;
+            this._timeoutId = null;
+        }
+        if (this._timeoutId2) {
+            Mainloop.source_remove(this._timeoutId2);
+            this._timeoutId2 = null;
         }
         if (this._seekChangedId) {
             this._mediaServerPlayer.disconnectSignal(this._seekChangedId);
-            this._seekChangedId = 0;
+            this._seekChangedId = null;
         }
 
         this.disconnectAll();
+
+        this.posLabel = null;
+        this.durLabel = null;
+        this.seekerBox = null;
         this._mediaServerPlayer = null;
         this._prop = null;
     }
@@ -963,31 +1051,37 @@ class Player extends PopupMenu.PopupMenuSection {
         } catch(e) {logError("Unable to add actor this._trackCover to this.vertBox!: "+e)}
 
         // Labels
-        this.durationLabel = new St.Label({text:" 00:00 "});
-        this.durationLabel.clutterText.line_wrap = false;
-        this.durationLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
-        this.durationLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
-        this.positionLabel = new St.Label({text:" 00:00 "});
-        this.positionLabel.clutterText.line_wrap = false;
-        this.positionLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
-        this.positionLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+        //~ durationLabel = new St.Label({text:" 00:00 "});
+        //~ durationLabel.clutterText.line_wrap = false;
+        //~ durationLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        //~ durationLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
+        //~ positionLabel = new St.Label({text:" 00:00 "});
+        //~ positionLabel.clutterText.line_wrap = false;
+        //~ positionLabel.clutterText.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        //~ positionLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
 
         // Playback controls
         let trackControls = new St.Bin({x_align: St.Align.MIDDLE});
+        if (this._prevButton) this._prevButton.destroy();
         this._prevButton = new ControlButton("media-skip-backward",
             _("Previous"),
             () => {
-                this.positionLabel.set_text(" 00:00 ");
-                this._seeker.startingDate = Date.now();
-                this._seeker._setPosition(0);
+                if (this._seeker) {
+                    if (this._seeker.status === 'Playing' && this._seeker.posLabel) this._seeker.posLabel.set_text(" 00:00 ");
+                    this._seeker.startingDate = Date.now();
+                    this._seeker._setPosition(0);
+                }
                 this._mediaServerPlayer.PreviousRemote();
             });
+        if (this._playButton) this._playButton.destroy();
         this._playButton = new ControlButton("media-playback-start",
             _("Play"),
             () => this._mediaServerPlayer.PlayPauseRemote());
+        if (this._stopButton) this._stopButton.destroy();
         this._stopButton = new ControlButton("media-playback-stop",
             _("Stop"),
             () => this._mediaServerPlayer.StopRemote());
+        if (this._nextButton) this._nextButton.destroy();
         this._nextButton = new ControlButton("media-skip-forward",
             _("Next"),
             () => this._mediaServerPlayer.NextRemote());
@@ -1013,20 +1107,18 @@ class Player extends PopupMenu.PopupMenuSection {
         this.controls.add_actor(this._shuffleButton.getActor());
 
 
-        let seekerBox = new St.BoxLayout();
         // Position slider
-        this._seeker = new Seeker(
-            this._mediaServerPlayer,
-            this._prop,
-            this._name.toLowerCase(),
-            this.positionLabel,
-            this.durationLabel
-        );
-        seekerBox.add_actor(this.positionLabel);
-        seekerBox.add_actor(this._seeker.actor);
-        seekerBox.add_actor(this.durationLabel);
-        //~ this.vertBox.add_actor(this._seeker.actor);
-        this.vertBox.add_actor(seekerBox);
+        if (this._mediaServerPlayer) {
+            if (this._seeker) this._seeker.destroy();
+            this._seeker = new Seeker(
+                this._mediaServerPlayer,
+                this._prop,
+                this._name.toLowerCase()
+            );
+            this.vertBox.add_actor(this._seeker.getActor());
+            //this.vertBox.add_actor(seekerBox);
+        }
+
 
         this._applet._updatePlayerMenuItems();
 
@@ -1104,28 +1196,45 @@ class Player extends PopupMenu.PopupMenuSection {
     }
 
     _updateControls() {
-        let canGoNext = false;
-        let canGoPrevious = false;
+        var canGoNext = false;
+        var canGoPrevious = false;
         try {
             this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, 'CanGoNext', (value, error) => {
-                if (!error)
+                //~ logDebug("error: "+error);
+                if (!error) {
+                    //~ logDebug("value[0].unpack(): "+value[0].unpack());
                     canGoNext = value[0].unpack();
+                    //~ logDebug("canGoNext from value: "+canGoNext);
+                    this._nextButton.setEnabled(canGoNext);
+                }
+                else {
+                    canGoNext = false;
+                    this._nextButton.setEnabled(canGoNext);
+                }
             });
         } catch(e) {
             canGoNext = false;
+            this._nextButton.setEnabled(canGoNext);
         }
         try {
             this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, 'CanGoPrevious', (value, error) => {
-                if (!error)
+                if (!error) {
                     canGoPrevious = value[0].unpack();
+                    this._prevButton.setEnabled(canGoPrevious);
+                }
+                else {
+                    canGoPrevious = false;
+                    this._prevButton.setEnabled(canGoPrevious);
+                }
             });
         } catch(e) {
             canGoPrevious = false;
+            this._prevButton.setEnabled(canGoPrevious);
         }
         //~ logDebug("canGoNext: "+canGoNext);
         //~ logDebug("canGoPrevious: "+canGoPrevious);
-        this._nextButton.setEnabled(canGoNext);
-        this._prevButton.setEnabled(canGoPrevious);
+        //~ this._nextButton.setEnabled(canGoNext);
+        //~ this._prevButton.setEnabled(canGoPrevious);
     }
 
     async _setMetadata(metadata) {
@@ -1459,7 +1568,7 @@ class Player extends PopupMenu.PopupMenuSection {
 
         this.cover = actor;
         this.coverBox.add_actor(this.cover);
-        this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);
+        try { this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);} catch(e) {}
         this._applet.setAppletTextIcon(this, this._cover_path);
     }
 
@@ -1469,10 +1578,13 @@ class Player extends PopupMenu.PopupMenuSection {
     }
 
     destroy() {
-        if (this._seeker)
-            this._seeker.destroy();
+        //~ if (this._seeker)
+            //~ this._seeker.destroy();
         if (this._prop)
             this._prop.disconnectSignal(this._propChangedId);
+
+        if (this._seeker)
+            this._seeker.destroy();
 
         try {
             PopupMenu.PopupMenuSection.prototype.destroy.call(this);
@@ -1881,12 +1993,23 @@ class Sound150Applet extends Applet.TextIconApplet {
             Mainloop.source_remove(this._loopArtId);
             this._loopArtId = 0;
         }
+        if (this._seeker && this._seeker._timeoutId) {
+            Mainloop.source_remove(this._seeker._timeoutId);
+            this._seeker._timeoutId = 0;
+        }
 
-        this._dbus.disconnectSignal(this._ownerChangedId);
+        if (this._ownerChangedId) {
+            this._dbus.disconnectSignal(this._ownerChangedId);
+            this._ownerChangedId = 0;
+        }
 
         for (let i in this._players)
             if (this._players[i])
                 this._players[i].destroy();
+
+        //~ for (let player of this._players)
+            //~ if (player)
+                //~ player.destroy();
     }
 
     on_applet_clicked(event) {
@@ -2092,7 +2215,12 @@ class Sound150Applet extends Applet.TextIconApplet {
             if (source === "output") {
                 // if we have an active player, but are changing the volume, show the output icon and after three seconds change back to the player icon
                 this.set_applet_icon_symbolic_name(this._outputIcon);
+                if (this._iconTimeoutId) {
+                    Mainloop.source_remove(this._iconTimeoutId);
+                    this._iconTimeoutId = 0;
+                }
                 this._iconTimeoutId = Mainloop.timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
+                    Mainloop.source_remove(this._iconTimeoutId);
                     this._iconTimeoutId = 0;
                     this.setIcon();
                 });
@@ -2115,6 +2243,10 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     loopArt() {
         if (!this._playerctl) {
+            if (this._loopArtId) {
+                Mainloop.source_remove(this._loopArtId);
+                this._loopArtId = 0;
+            }
             this._loopArtId = Mainloop.timeout_add_seconds(5, this.loopArt.bind(this));
             return
         }
@@ -2144,6 +2276,10 @@ class Sound150Applet extends Applet.TextIconApplet {
             }
             subProcess.send_signal(9);
         }));
+        if (this._loopArtId) {
+            Mainloop.source_remove(this._loopArtId);
+            this._loopArtId = 0;
+        }
         this._loopArtId = Mainloop.timeout_add_seconds(5, this.loopArt.bind(this))
     }
 
@@ -2615,6 +2751,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _onStreamAdded(control, id) {
+        //~ logDebug("_onStreamAdded. control: "+control+" ; id: "+id);
         let stream = this._control.lookup_stream_id(id);
         let appId = stream.application_id;
 
@@ -2641,6 +2778,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _onStreamRemoved(control, id) {
+        //~ logDebug("_onStreamRemoved. control: "+control+" ; id: "+id);
         for (let i = 0, l = this._streams.length; i < l; ++i) {
             if (this._streams[i].id === id) {
                 let stream = this._streams[i];
@@ -2664,6 +2802,9 @@ class Sound150Applet extends Applet.TextIconApplet {
                     }
                     //~ kill_playerctld();
                 }
+                if (this._seeker)
+                    this._seeker.destroy();
+                this._seeker = null;
                 kill_playerctld();
                 this._streams.splice(i, 1);
                 break;
