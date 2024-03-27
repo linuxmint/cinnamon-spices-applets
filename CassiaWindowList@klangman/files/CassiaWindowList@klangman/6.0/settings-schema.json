@@ -72,7 +72,7 @@
     "adv-mouse-settings" : {
       "type" : "section",
       "title" : "Ctrl/Shift + mouse button actions",
-      "keys" : ["adv-mouse-list", "adv-mouse-help"]
+      "keys" : ["adv-mouse-list"]
     },
     "adv-other-settings" : {
       "type" : "section",
@@ -783,11 +783,6 @@
                 "action": 6
             }
     ]
-  },
-
-  "adv-mouse-help" : {
-    "type" : "label",
-    "description" : "Note: The above list contents will be incorrectly displayed without this fix:\nhttps://github.com/linuxmint/cinnamon/pull/11908\nThe edit dialog box values are the correct values and the ones that will take effect."
   },
 
   "animate-icon" : {
