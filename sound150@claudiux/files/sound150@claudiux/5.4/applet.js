@@ -121,7 +121,7 @@ let players_with_seek_support = [
     'rhythmbox3', 'pragha', 'quodlibet',
     'amarok', 'xnoise', 'gmusicbrowser',
     'vlc', 'qmmp', 'deadbeef',
-    'audacious', 'celluloid', 'mpv', 'spotify'];
+    'audacious', 'celluloid', 'spotify', 'mpv'];
 /* dummy vars for translation */
 let x = _("Playing");
 x = _("Paused");
@@ -164,36 +164,50 @@ class ControlButton {
 
     setData(icon, tooltip) {
         if (this.destroyed) return;
-        this.icon.icon_name = icon;
-        this.tooltip.set_text(tooltip);
+        try {
+            if (this.icon) this.icon.icon_name = icon;
+            if (this.tooltip) this.tooltip.set_text(tooltip);
+        } catch(e) {}
     }
 
     setIconName(icon) {
         if (this.destroyed) return;
-        this.icon.icon_name = icon;
+        try {
+            this.icon.icon_name = icon;
+        } catch(e) {}
     }
 
     setActive(status) {
         if (this.destroyed) return;
-        this.button.change_style_pseudo_class("active", status);
+        try {
+            if (this.button) this.button.change_style_pseudo_class("active", status);
+        } catch(e) {}
     }
 
     setEnabled(status) {
         if (this.destroyed) return;
-        this.button.change_style_pseudo_class("insensitive", !status);
-        //~ this.actor.visible = status;
-        //~ this.button.visible = status;
-        this.button.can_focus = status;
-        this.button.reactive = status;
+        try {
+            if (this.button) this.button.change_style_pseudo_class("insensitive", !status);
+            if (this.button) this.button.can_focus = status;
+            if (this.button) this.button.reactive = status;
+        } catch(e) {}
     }
 
     destroy() {
+        if (this.destroyed) return;
         this.destroyed = true;
-        this.tooltip = null;
-        this.actor.remove_actor(this.button);
-        this.button.remove_all_children();
-        this.button.destroy();
-        this.actor.destroy();
+        try {
+            this.tooltip.destroy();
+            this.actor.remove_actor(this.button);
+            this.button.remove_all_children();
+            this.button.destroy();
+            this.actor.destroy();
+        } catch(e) {}
+        finally {
+            this.tooltip = null;
+            this.button = null;
+            this.actor = null;
+        }
     }
 }
 
@@ -456,6 +470,7 @@ class Seeker extends Slider.Slider {
         this._trackid = "";
 
         this._timeoutId = null;
+        this._timeoutId2 = null;
         this._timerTicker = 0;
 
         this._mediaServerPlayer = mediaServerPlayer;
@@ -571,7 +586,7 @@ class Seeker extends Slider.Slider {
         else
             this._updateValue();
         if (this._timeoutId) {
-            Mainloop.source_remove(this._timeoutId);
+            try {Mainloop.source_remove(this._timeoutId);} catch(e) {}
             this._timeoutId = null;
         }
         run_playerctld();
@@ -585,7 +600,7 @@ class Seeker extends Slider.Slider {
         else
             this._updateValue();
         if (this._timeoutId) {
-            Mainloop.source_remove(this._timeoutId);
+            try {Mainloop.source_remove(this._timeoutId);} catch(e) {}
             this._timeoutId = null;
         }
         kill_playerctld(); //???
@@ -623,7 +638,7 @@ class Seeker extends Slider.Slider {
             this._trackid = trackid;
         }
         this._length = length;
-        if (this.status === 'Playing' && this.durLabel) this.durLabel.set_text(this.time_for_label(length));
+        if (this.status !== 'Stopped' && this.durLabel) this.durLabel.set_text(this.time_for_label(length));
         this._wantedSeekValue = 0;
         this._updateValue();
     }
@@ -665,7 +680,7 @@ class Seeker extends Slider.Slider {
                     if (this.status === 'Playing' && this.posLabel) this.posLabel.set_text(this.time_for_label(this._currentTime));
                     this.setValue(this._currentTime / this._length);
                     if (this._timeoutId2) {
-                        Mainloop.source_remove(this._timeoutId2);
+                        try {Mainloop.source_remove(this._timeoutId2);} catch(e) {}
                         this._timeoutId2 = null;
                     }
                     //~ this._timeoutId = Mainloop.timeout_add_seconds(1, this._updateValue.bind(this));
@@ -702,14 +717,14 @@ class Seeker extends Slider.Slider {
             this._timerTicker = 0;
             this._currentTime = 0;
         }
-        if (this._timeoutId) Mainloop.source_remove(this._timeoutId); // Added
+        if (this._timeoutId) try {Mainloop.source_remove(this._timeoutId);} catch(e) {} // Added
         this._timeoutId = null;
         return GLib.SOURCE_REMOVE;
     }
 
     _updateTimer() {
         if (this._timeoutId) {
-            Mainloop.source_remove(this._timeoutId);
+            try {Mainloop.source_remove(this._timeoutId);} catch(e) {}
             this._timeoutId = null;
         }
 
@@ -723,7 +738,7 @@ class Seeker extends Slider.Slider {
                     //~ Mainloop.source_remove(this._timeoutId);
                     //~ this._timeoutId = null;
                 //~ }
-                this._timeoutId = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));
+                try {this._timeoutId = Mainloop.timeout_add_seconds(1, this._timerCallback.bind(this));} catch(e) {}
             } else if (this._length > 0) {
                 this._getPosition();
                 this._timerTicker = 0;
@@ -838,11 +853,11 @@ class Seeker extends Slider.Slider {
     destroy() {
         this.destroyed = true;
         if (this._timeoutId) {
-            Mainloop.source_remove(this._timeoutId);
+            try {Mainloop.source_remove(this._timeoutId);} catch(e) {}
             this._timeoutId = null;
         }
         if (this._timeoutId2) {
-            Mainloop.source_remove(this._timeoutId2);
+            try {Mainloop.source_remove(this._timeoutId2);} catch(e) {}
             this._timeoutId2 = null;
         }
         if (this._seekChangedId) {
@@ -1209,12 +1224,12 @@ class Player extends PopupMenu.PopupMenuSection {
                 }
                 else {
                     canGoNext = false;
-                    this._nextButton.setEnabled(canGoNext);
+                    //~ this._nextButton.setEnabled(canGoNext);
                 }
             });
         } catch(e) {
             canGoNext = false;
-            this._nextButton.setEnabled(canGoNext);
+            //~ this._nextButton.setEnabled(canGoNext);
         }
         try {
             this._prop.GetRemote(MEDIA_PLAYER_2_PLAYER_NAME, 'CanGoPrevious', (value, error) => {
@@ -1224,12 +1239,12 @@ class Player extends PopupMenu.PopupMenuSection {
                 }
                 else {
                     canGoPrevious = false;
-                    this._prevButton.setEnabled(canGoPrevious);
+                    //~ this._prevButton.setEnabled(canGoPrevious);
                 }
             });
         } catch(e) {
             canGoPrevious = false;
-            this._prevButton.setEnabled(canGoPrevious);
+            //~ this._prevButton.setEnabled(canGoPrevious);
         }
         //~ logDebug("canGoNext: "+canGoNext);
         //~ logDebug("canGoPrevious: "+canGoPrevious);
@@ -1835,7 +1850,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this._sound_settings.connect("changed::" + MAXIMUM_VOLUME_KEY, () => this._on_sound_settings_change());
 
-        this._loopArtId = 0;
+        this._loopArtId = null;
         this.loopArt();
     }
 
@@ -1986,15 +2001,15 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this.hideSystray)
             this.unregisterSystrayIcons();
         if (this._iconTimeoutId) {
-            Mainloop.source_remove(this._iconTimeoutId);
+            try {Mainloop.source_remove(this._iconTimeoutId);} catch(e) {}
             this._iconTimeoutId = 0;
         }
         if (this._loopArtId) {
-            Mainloop.source_remove(this._loopArtId);
-            this._loopArtId = 0;
+            try {Mainloop.source_remove(this._loopArtId);} catch(e) {}
+            this._loopArtId = null;
         }
         if (this._seeker && this._seeker._timeoutId) {
-            Mainloop.source_remove(this._seeker._timeoutId);
+            try {Mainloop.source_remove(this._seeker._timeoutId);} catch(e) {}
             this._seeker._timeoutId = 0;
         }
 
@@ -2199,7 +2214,7 @@ class Sound150Applet extends Applet.TextIconApplet {
     setIcon(icon, source) {
         //~ log("setIcon("+icon+", "+source+")", true);
         if (this._iconTimeoutId) {
-            Mainloop.source_remove(this._iconTimeoutId);
+            try {Mainloop.source_remove(this._iconTimeoutId);} catch(e) {}
             this._iconTimeoutId = 0;
         }
 
@@ -2216,11 +2231,11 @@ class Sound150Applet extends Applet.TextIconApplet {
                 // if we have an active player, but are changing the volume, show the output icon and after three seconds change back to the player icon
                 this.set_applet_icon_symbolic_name(this._outputIcon);
                 if (this._iconTimeoutId) {
-                    Mainloop.source_remove(this._iconTimeoutId);
+                    try {Mainloop.source_remove(this._iconTimeoutId);} catch(e) {}
                     this._iconTimeoutId = 0;
                 }
                 this._iconTimeoutId = Mainloop.timeout_add_seconds(OUTPUT_ICON_SHOW_TIME_SECONDS, () => {
-                    Mainloop.source_remove(this._iconTimeoutId);
+                    try {Mainloop.source_remove(this._iconTimeoutId);} catch(e) {}
                     this._iconTimeoutId = 0;
                     this.setIcon();
                 });
@@ -2244,8 +2259,8 @@ class Sound150Applet extends Applet.TextIconApplet {
     loopArt() {
         if (!this._playerctl) {
             if (this._loopArtId) {
-                Mainloop.source_remove(this._loopArtId);
-                this._loopArtId = 0;
+                try {Mainloop.source_remove(this._loopArtId);} catch(e) {}
+                this._loopArtId = null;
             }
             this._loopArtId = Mainloop.timeout_add_seconds(5, this.loopArt.bind(this));
             return
@@ -2277,8 +2292,8 @@ class Sound150Applet extends Applet.TextIconApplet {
             subProcess.send_signal(9);
         }));
         if (this._loopArtId) {
-            Mainloop.source_remove(this._loopArtId);
-            this._loopArtId = 0;
+            try {Mainloop.source_remove(this._loopArtId);} catch(e) {}
+            this._loopArtId = null;
         }
         this._loopArtId = Mainloop.timeout_add_seconds(5, this.loopArt.bind(this))
     }
