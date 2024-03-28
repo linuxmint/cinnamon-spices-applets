@@ -37,6 +37,9 @@ const MEDIA_PLAYER_2_PLAYER_NAME = "org.mpris.MediaPlayer2.Player";
 
 const ENABLED_APPLETS_KEY = "enabled-applets";
 
+const RUNTIME_DIR = GLib.get_user_runtime_dir();
+const R30MPVSOCKET = RUNTIME_DIR + "/mpvradiosocket";
+
 // how long to show the output icon when volume is adjusted during media playback.
 const OUTPUT_ICON_SHOW_TIME_SECONDS = 3;
 
@@ -1086,6 +1089,10 @@ class Player extends PopupMenu.PopupMenuSection {
                     this._seeker.startingDate = Date.now();
                     this._seeker._setPosition(0);
                 }
+
+                if (this._name.toLowerCase() === "mpv" && GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
+                    GLib.file_set_contents(RUNTIME_DIR + "/R30Previous", "");
+                }
                 this._mediaServerPlayer.PreviousRemote();
             });
         if (this._playButton) this._playButton.destroy();
@@ -1095,11 +1102,21 @@ class Player extends PopupMenu.PopupMenuSection {
         if (this._stopButton) this._stopButton.destroy();
         this._stopButton = new ControlButton("media-playback-stop",
             _("Stop"),
-            () => this._mediaServerPlayer.StopRemote());
+            () => {
+                    if (this._name.toLowerCase() === "mpv" && GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
+                        GLib.file_set_contents(RUNTIME_DIR + "/R30Stop", "");
+                    }
+                    this._mediaServerPlayer.StopRemote()
+                });
         if (this._nextButton) this._nextButton.destroy();
         this._nextButton = new ControlButton("media-skip-forward",
             _("Next"),
-            () => this._mediaServerPlayer.NextRemote());
+            () => {
+                if (this._name.toLowerCase() === "mpv" && GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
+                        GLib.file_set_contents(RUNTIME_DIR + "/R30Next", "");
+                    }
+                    this._mediaServerPlayer.NextRemote();
+            });
 
         try {
             this.trackInfo.add_actor(trackControls);
@@ -1194,6 +1211,9 @@ class Player extends PopupMenu.PopupMenuSection {
 
     _showCanQuit() {
         let btn = new ControlButton("window-close", _("Quit Player"), () => {
+            if (this._name.toLowerCase() === "mpv" && GLib.file_test(R30MPVSOCKET, GLib.FileTest.EXISTS)) {
+                GLib.file_set_contents(RUNTIME_DIR + "/R30Stop", "");
+            }
             this._mediaServer.QuitRemote();
             this._applet.menu.close();
         }, true);
