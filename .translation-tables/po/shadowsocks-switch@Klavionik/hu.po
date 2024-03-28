@@ -1,0 +1,60 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-12 00:22+0300\n"
+"PO-Revision-Date: 2023-12-14 08:52+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. metadata.json->name
+#: applet.js:26
+msgid "Shadowsocks Switch"
+msgstr "Shadowsocks kapcsoló"
+
+#: applet.js:38
+msgid "Enable Shadowsocks"
+msgstr "Shadowsocks bekapcsolása"
+
+#: applet.js:66
+msgid "Toggle Shadowsocks proxy"
+msgstr "Shadowsocks proxy kapcsolása"
+
+#: applet.js:102
+msgid "Cannot read Shadowsocks config."
+msgstr "Nem olvasható a Shadowsocks konfigurációja."
+
+#: applet.js:110
+msgid "Shadowsocks config is missing local port."
+msgstr "A Shadowsocks konfigurációból hiányzik a helyi port."
+
+#: applet.js:138
+msgid "Connection established."
+msgstr "A kapcsolat létrejött."
+
+#: applet.js:189
+msgid "Disconnected."
+msgstr "Szétkapcsolt."
+
+#. metadata.json->description
+msgid "Quickly toggle Shadowsocks proxy from the system tray"
+msgstr "Gyorsan kapcsolható Shadowsocks proxy a tálcáról"
+
+#. settings-schema.json->section1->description
+msgid "General"
+msgstr "Általános"
+
+#. settings-schema.json->config->description
+msgid "Shadowsocks configuration"
+msgstr "Shadowsocks konfiguráció"

@@ -1,0 +1,134 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-27 23:34+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: blogdron\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+#: applet.js:49
+msgid "Bg Radio"
+msgstr ""
+
+#: applet.js:57
+msgid "bTV Radio"
+msgstr ""
+
+#: applet.js:65
+msgid "City Radio"
+msgstr ""
+
+#: applet.js:73
+msgid "Classic FM"
+msgstr ""
+
+#: applet.js:81
+msgid "Darik"
+msgstr ""
+
+#: applet.js:89
+msgid "Darik Nostalgie"
+msgstr ""
+
+#: applet.js:97
+msgid "Energy"
+msgstr ""
+
+#: applet.js:105
+msgid "FM+"
+msgstr ""
+
+#: applet.js:113
+msgid "Fresh"
+msgstr ""
+
+#: applet.js:121
+msgid "Jazz FM"
+msgstr ""
+
+#: applet.js:129
+msgid "K2"
+msgstr ""
+
+#: applet.js:137
+msgid "Melody"
+msgstr ""
+
+#: applet.js:145
+msgid "N-Joy"
+msgstr ""
+
+#: applet.js:153
+msgid "Nova Radio"
+msgstr ""
+
+#: applet.js:161
+msgid "Radio 1"
+msgstr ""
+
+#: applet.js:169
+msgid "Radio 1 Rock"
+msgstr ""
+
+#: applet.js:177
+msgid "The Voice Radio"
+msgstr ""
+
+#: applet.js:185
+msgid "Z-Rock"
+msgstr ""
+
+#: applet.js:201
+msgid "BNT"
+msgstr ""
+
+#: applet.js:209
+msgid "BNT 2"
+msgstr ""
+
+#: applet.js:217
+msgid "BNT HD"
+msgstr ""
+
+#: applet.js:225
+msgid "BNT World"
+msgstr ""
+
+#: applet.js:233
+msgid "bTV"
+msgstr ""
+
+#: applet.js:241
+msgid "BIT"
+msgstr ""
+
+#: applet.js:249
+msgid "City"
+msgstr ""
+
+#: applet.js:257
+msgid "Kanal 3"
+msgstr ""
+
+#: applet.js:265
+msgid "Nova"
+msgstr ""
+
+#: applet.js:273
+msgid "On Air"
+msgstr ""
+
+#: applet.js:281
+msgid "The Voice"
+msgstr ""
+
+#: applet.js:289
+msgid "Magic TV"
+msgstr ""

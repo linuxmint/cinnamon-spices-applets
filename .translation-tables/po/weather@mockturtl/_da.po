@@ -1,0 +1,36 @@
+# Danish language file for cinnamon-weather.
+# Copyright (C) 2112
+# This file is distributed under the same license as the cinnamon-weather package.
+# Michael Rasmussen <mir@datanom.net>, 2012.
+# Alan Mortensen <alanmortensen.am@gmail.com>, 2015, 2017, 2021, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.4.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-01 22:49+0000\n"
+"PO-Revision-Date: 2023-12-25 11:54+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: dansk <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: 3.8/weather-applet.js:15205
+msgid ""
+"Location Service couldn't find your location, please see the logs in Looking "
+"Glass"
+msgstr ""
+
+#: 3.8/weather-applet.js:15433
+msgid "Make sure you entered a location or use Automatic location instead."
+msgstr ""
+
+#. 3.8->settings-schema.json->locationDescription->description
+msgid ""
+"If the location field matches a saved location's 'Search Entry' field, the "
+"saved location will be used instead."
+msgstr ""

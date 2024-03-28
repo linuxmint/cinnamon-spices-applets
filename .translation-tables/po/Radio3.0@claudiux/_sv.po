@@ -1,0 +1,26 @@
+# Swedish translation for Radio3.0@claudiux.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2023,2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-11 14:41+0100\n"
+"PO-Revision-Date: 2024-02-01 15:30+0100\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. settings-schema.json->database-favorite->description
+msgid "Your favorite database:"
+msgstr ""
+
+#. settings-schema.json->database-favorite->options
+msgid "Random"
+msgstr ""

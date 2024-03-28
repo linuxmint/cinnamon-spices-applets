@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-11 13:13+0800\n"
+"PO-Revision-Date: 2021-12-18 02:18-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:51
+msgid "Panel Edit mode"
+msgstr "Modo de edición del panel"
+
+#: applet.js:57
+msgid "Add applets to the panel"
+msgstr "Añadir applets al panel"
+
+#. show-hide-applets@mohammad-sn->metadata.json->description
+msgid ""
+"hide a few applet to have a neater panel, and make them show up again by a "
+"click"
+msgstr ""
+"ocultar algunos applet para tener un panel más ordenado, y hacer que "
+"aparezcan de nuevo con un clic"
+
+#. show-hide-applets@mohammad-sn->metadata.json->name
+msgid "Drawer (show/hide applets)"
+msgstr "Cajón (mostrar/ocultar applets)"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->hoveractivateshide->description
+msgid "Hide on hovering again"
+msgstr "Volver a ocultar al pasar el ratón"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->hoveractivateshide->tooltip
+msgid "toggle visibility of applets on mouse hover"
+msgstr "cambiar la visibilidad de los applets al pasar el ratón por encima"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->autohiderstime->description
+msgid "Reshowers' autohide delay: "
+msgstr "Retraso de re-activación del auto-ocultamiento: "
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->autohiderstime->units
+#. show-hide-applets@mohammad-sn->settings-schema.json->hidetime->units
+msgid "seconds"
+msgstr "segundos"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->disablestarttimeautohide->description
+msgid "Disable start time autohide"
+msgstr "Desactivar la ocultación automática al inicio"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->disablestarttimeautohide->tooltip
+msgid "if not in autohide mode"
+msgstr "si no está en modo de ocultación automática"
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->head->description
+msgid "Settings for show-hide-applets@mohammad-sn"
+msgstr "Configuración de show-hide-applets@mohammad-sn"
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->autohide->description
+msgid "Autohide"
+msgstr "Ocultar automáticamente"
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->autohide->tooltip
+msgid ""
+"check if you want to hide applets automatically, unless you should click on "
+"applet to do so"
+msgstr ""
+"marque si desea ocultar los applets automáticamente, a menos que deba hacer "
+"clic en el applet para hacerlo"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->autohiders->description
+msgid "Autohide reshowing applets"
+msgstr "Ocultar y volver a mostrar los applets automáticamente"
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->hovertime->description
+msgid "Hover activates/hides after "
+msgstr "Al pasar el ratón por encima se activa/se oculta después de  "
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->hovertime->units
+msgid "miliseconds"
+msgstr "milisegundos"
+
+#. show-hide-applets@mohammad-sn->settings-schema.json->hidetime->description
+msgid "Autohide after "
+msgstr "Ocultar automáticamente tras "
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->hoveractivates->description
+msgid "Activate on hover"
+msgstr "Activar al pasar el ratón por encima"
+
+#. show-hide-applets@mohammad-sn->settings-
+#. schema.json->hoveractivates->tooltip
+msgid "show applets on mouse hover"
+msgstr "mostrar applets al pasar el ratón por encima"

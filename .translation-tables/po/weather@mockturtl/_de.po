@@ -1,0 +1,191 @@
+# German translation originally for gnome-shell-extension-weather, now weather@mockturtl
+# Copyright (C) 2011 to 2019, Evilandi666 and Kghbln
+# This file is distributed under the same license as weather@mockturtl.
+# Evilandi666 <Evilandi.AUR@googlemail.com>, 2011.
+# Kghbln <kgh@kgh.info>, 2015, 2017, 2019.
+# michi <michi.schweitzer@gmail.com>, 2020.
+# Kim <kipuka@eclipso.eu>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: weather@mockturtl 2.6.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-01 22:49+0000\n"
+"PO-Revision-Date: 2023-03-18 21:50+0100\n"
+"Last-Translator: bigjr slade <bigjrslade@gmail.com>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: 3.8/weather-applet.js:9637
+msgid ""
+"Could not retrieve logs, log file was not found under path\n"
+" {logFilePath}"
+msgstr ""
+
+#: 3.8/weather-applet.js:9641
+msgid ""
+"Could not get contents of log file under path\n"
+" {logFilePath}"
+msgstr ""
+
+#: 3.8/weather-applet.js:10118
+msgid ""
+"MET Office UK only covers the UK, please make sure your location is in the "
+"country"
+msgstr ""
+
+#: 3.8/weather-applet.js:13953
+msgid "Deutscher Wetterdienst"
+msgstr ""
+
+#: 3.8/weather-applet.js:13966
+msgid "Please select a different provider or location"
+msgstr ""
+
+#: 3.8/weather-applet.js:14453
+msgid "The API key you provided is invalid."
+msgstr ""
+
+#: 3.8/weather-applet.js:14630 3.8/weather-applet.js:14631
+msgid "Breezy"
+msgstr ""
+
+#: 3.8/weather-applet.js:14644 3.8/weather-applet.js:14645
+msgid "Frigid"
+msgstr ""
+
+#: 3.8/weather-applet.js:14853
+msgid "Pirate Weather"
+msgstr ""
+
+#: 3.8/weather-applet.js:15205
+msgid ""
+"Location Service couldn't find your location, please see the logs in Looking "
+"Glass"
+msgstr ""
+
+#: 3.8/weather-applet.js:15433
+msgid "Make sure you entered a location or use Automatic location instead."
+msgstr ""
+
+#: 3.8/weather-applet.js:15570
+msgid ""
+"Could not retrieve config, file was not found under paths\n"
+" {configFilePath}"
+msgstr ""
+
+#: 3.8/weather-applet.js:15577
+msgid ""
+"Could not get contents of config file under path\n"
+" {configFilePath}"
+msgstr ""
+
+#: 3.8/weather-applet.js:16486
+msgid "Forecast parsing failed, see logs for more details."
+msgstr ""
+
+#: 3.8/weather-applet.js:17028
+msgid "Station Name: {stationName}"
+msgstr ""
+
+#: 3.8/weather-applet.js:17031
+msgid "Area: {stationArea}"
+msgstr ""
+
+#: 3.8/weather-applet.js:17581 3.8/weather-applet.js:17591
+msgid "Error Saving Debug Information"
+msgstr ""
+
+#: 3.8/weather-applet.js:17603
+msgid "Debug Information saved successfully"
+msgstr ""
+
+#: 3.8/weather-applet.js:17603
+msgid "Saved to {filePath}"
+msgstr ""
+
+#: 3.8/LogSaver.py:16
+msgid "Save to File"
+msgstr ""
+
+#: 3.8/LogSaver.py:29
+msgid "Select a destination"
+msgstr ""
+
+#. 3.8->settings-schema.json->debug-options->title
+#. 3.8->settings-schema.json->logLevel->options
+msgid "Debug"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Pirate Weather (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->locationDescription->description
+msgid ""
+"If the location field matches a saved location's 'Search Entry' field, the "
+"saved location will be used instead."
+msgstr ""
+
+#. 3.8->settings-schema.json->immediatePrecip->tooltip
+msgid ""
+"If you'd like to use this make sure you use your exact coordinates/address "
+"as location to help its accuracy. See Feature map on website on support for "
+"your provider"
+msgstr ""
+
+#. 3.8->settings-schema.json->tooltipTextOverride->tooltip
+msgid ""
+"Has the same behavior and available values as 'Override label on panel'."
+msgstr ""
+
+#. 3.8->settings-schema.json->alwaysShowHourlyWeather->description
+msgid "Always show Hourly Weather"
+msgstr ""
+
+#. 3.8->settings-schema.json->alwaysShowHourlyWeather->tooltip
+msgid ""
+"Hide/Show button will be hidden and Hourly weather will be permanently "
+"visible."
+msgstr ""
+
+#. 3.8->settings-schema.json->displayWindAsText->description
+msgid "Display wind direction as text"
+msgstr ""
+
+#. 3.8->settings-schema.json->displayWindAsText->tooltip
+msgid "Like SE, N instead of direction icons."
+msgstr ""
+
+#. 3.8->settings-schema.json->logLevel->description
+msgid "Log Level"
+msgstr ""
+
+#. 3.8->settings-schema.json->logLevel->tooltip
+msgid ""
+"Info is the regular logging, Debug is debug, and Verbose also logs network "
+"request payloads. Changing this will only be effective on future logs. Only "
+"change it you are instructed or you know what you are doing."
+msgstr ""
+
+#. 3.8->settings-schema.json->logLevel->options
+msgid "Verbose"
+msgstr ""
+
+#. 3.8->settings-schema.json->fileSelect->description
+msgid "Click Save to save debug information to a file"
+msgstr ""
+
+#. 3.8->settings-schema.json->fileSelect->tooltip
+msgid ""
+"This includes logs for the applet and the current settings with your API key "
+"redacted."
+msgstr ""
+
+#. 3.8->settings-schema.json->selectedLogPath->description
+msgid "Selected path to save Logs"
+msgstr ""

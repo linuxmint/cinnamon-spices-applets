@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-04 19:37+0100\n"
+"PO-Revision-Date: 2023-03-13 14:41+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:43
+msgid "Applet"
+msgstr "Kisalkalmazás"
+
+#: applet.js:44
+msgid "Desklet"
+msgstr "Asztalkalmazás"
+
+#: applet.js:45
+msgid "Extension"
+msgstr "Bővítmény"
+
+#: applet.js:48
+msgid "Applets"
+msgstr "Kisalkalmazások"
+
+#: applet.js:49
+msgid "Desklets"
+msgstr "Asztalkalmazások"
+
+#: applet.js:50
+msgid "Extensions"
+msgstr "Bővítmények"
+
+#: applet.js:93
+msgid "Middle-click: \n"
+msgstr "Kattintás a középső egérgombbal: \n"
+
+#: applet.js:93 applet.js:165
+msgid "Show .xsession-errors"
+msgstr "Az „.xsession-errors” fájl megjelenítése"
+
+#: applet.js:176
+msgid "Restart Cinnamon"
+msgstr "Cinnamon környezet újraindítása"
+
+#: applet.js:187
+msgid "--- Reload Spices ---"
+msgstr "--- Spices kiegészítők újratöltése ---"
+
+#: applet.js:193
+msgid "Reload Applet:"
+msgstr "Kisalkalmazás újratöltése:"
+
+#: applet.js:207
+msgid "Reload Desklet:"
+msgstr "Asztalkalmazás újratöltése:"
+
+#: applet.js:221
+msgid "Reload Extension:"
+msgstr "Bővítmény újratöltése:"
+
+#: applet.js:235
+msgid "--- View Code ---"
+msgstr "--- Kód megjelenítése ---"
+
+#: applet.js:241
+msgid "View Applet Code for:"
+msgstr "Kisalkalmazás forráskód megjelenítése:"
+
+#: applet.js:255
+msgid "View Desklet Code for:"
+msgstr "Asztalkalmazás forráskód megjelenítése:"
+
+#: applet.js:269
+msgid "View Extension Code for:"
+msgstr "Bővítmény forráskód megjelenítése:"
+
+#. metadata.json->name
+msgid "Xsession"
+msgstr "Xsession"
+
+#. metadata.json->description
+msgid ""
+"Allows you to restart or open the source code of Spices (applets, desklets, "
+"extensions), display in real-time the contents of your .xsession-errors "
+"file and restart Cinnamon."
+msgstr ""
+"Lehetővé teszi a Spices kiegészítők (kisalkalmazások, asztalkalmazások, "
+"bővítmények) újraindítását vagy forráskódjának megnyitását, továbbá valós "
+"időben megjeleníti a „.xsession-errors” fájl tartalmát, valamint "
+"újraindítja a Cinnamon környezetet."

@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-15 17:59+0100\n"
+"PO-Revision-Date: 2024-02-27 18:48+0100\n"
+"Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: 5.4/applet.js:192
+msgid "Mute"
+msgstr ""
+
+#: 5.4/applet.js:1453
+#, javascript-format
+msgid "Are you sure you want to remove '%s'?"
+msgstr ""
+
+#: 5.4/applet.js:2088
+msgid "Remove sound applet"
+msgstr ""
+
+#. 5.4->settings-schema.json->section6->title
+msgid "Remove incompatible applets"
+msgstr ""
+
+#. 5.4->settings-schema.json->showMicMutedOnIcon->description
+msgid "Display icon indicating that the microphone is muted, if applicable"
+msgstr ""
+
+#. 5.4->settings-schema.json->magnetic25On->description
+msgid "Magnetize all multiples of 25%"
+msgstr ""
+
+#. 5.4->settings-schema.json->redefine-volume-keybindings->description
+msgid "Redefine Volume Keyboard Shortcuts"
+msgstr ""
+
+#. 5.4->settings-schema.json->pause-on-off->description
+msgid "Pause/Play toggle"
+msgstr ""
+
+#. 5.4->settings-schema.json->remove_soundATcinnamonDOTorg->description
+msgid "Remove from panel the sound@cinnamon.org applet"
+msgstr ""

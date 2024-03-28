@@ -1,0 +1,200 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-27 09:32-0400\n"
+"PO-Revision-Date: 2024-02-08 15:00+0100\n"
+"Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. 4.0->settings-schema.json->hover-peek-delay->description
+#. 6.0->settings-schema.json->hover-peek-delay->description
+msgid "Hover time before showing a full size window preview"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-peek-delay->tooltip
+#. 6.0->settings-schema.json->hover-peek-delay->tooltip
+msgid ""
+"This defines the mouse hover time before a full size window preview will "
+"appear. It applies to both window-list buttons and thumbnail menu items (of "
+"course one of the full size window preview options must be enabled for this "
+"option to have any effect)"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
+#. 6.0->settings-schema.json->hover-peek-windowlist->tooltip
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a window-list button. The delay before the preview appears is "
+"controlled by an option under the Advanced tab"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Move to this workspace"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile top right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom right"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Tile bottom left"
+msgstr ""
+
+#. 4.0->settings-schema.json->preview-middle-click->options
+#. 4.0->settings-schema.json->preview-back-click->options
+#. 4.0->settings-schema.json->preview-forward-click->options
+#. 4.0->settings-schema.json->mouse-action-btn2->options
+#. 4.0->settings-schema.json->mouse-action-btn8->options
+#. 4.0->settings-schema.json->mouse-action-btn9->options
+#. 6.0->settings-schema.json->preview-middle-click->options
+#. 6.0->settings-schema.json->preview-back-click->options
+#. 6.0->settings-schema.json->preview-forward-click->options
+#. 6.0->settings-schema.json->mouse-action-btn2->options
+#. 6.0->settings-schema.json->mouse-action-btn8->options
+#. 6.0->settings-schema.json->mouse-action-btn9->options
+msgid "Untile window"
+msgstr ""
+
+#. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
+#. 6.0->settings-schema.json->hover-peek-thumbnail->tooltip
+msgid ""
+"If enabled, a full size preview window will appear when the mouse pointer is "
+"hovering over a Thumbnail menu item. The delay before the preview appears is "
+"controlled by an option under the Advanced tab"
+msgstr ""

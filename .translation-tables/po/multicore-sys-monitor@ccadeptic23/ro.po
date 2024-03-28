@@ -1,0 +1,459 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 14:48-0500\n"
+"PO-Revision-Date: 2020-04-19 18:49+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#: 3.2/DataProviders.js:107 3.2/prefs.js:187 4.0/DataProviders.js:55
+#: 4.0/prefs.js:303 3.4/DataProviders.js:58 3.4/prefs.js:195
+#: 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/prefsui.glade:504
+#: 4.0/prefsui.glade:580 3.4/prefsui.glade:434 3.0/prefsui.glade:452
+msgid "CPU"
+msgstr "CPU"
+
+#: 3.2/DataProviders.js:113 4.0/DataProviders.js:123 3.4/DataProviders.js:126
+#: 3.0/DataProviders.js:113
+msgid "------------- CPU ------------"
+msgstr "------------- CPU ------------"
+
+#: 3.2/DataProviders.js:117 4.0/DataProviders.js:126 3.4/DataProviders.js:129
+#: 3.0/DataProviders.js:117
+msgid "Core"
+msgstr "Nucleu"
+
+#: 3.2/DataProviders.js:157 4.0/DataProviders.js:138 3.4/DataProviders.js:141
+#: 3.0/DataProviders.js:157
+msgid "MEM"
+msgstr "MEM"
+
+#: 3.2/DataProviders.js:163 4.0/DataProviders.js:158 3.4/DataProviders.js:161
+#: 3.0/DataProviders.js:163
+msgid "----------- Memory -----------"
+msgstr "----------- Memorie ----------"
+
+#: 3.2/DataProviders.js:164 3.0/DataProviders.js:164
+msgid "Usedup:"
+msgstr "Utilizat:"
+
+#: 3.2/DataProviders.js:165 4.0/DataProviders.js:159 3.4/DataProviders.js:162
+#: 3.0/DataProviders.js:165
+msgid "Cached:"
+msgstr "În cache:"
+
+#: 3.2/DataProviders.js:166 4.0/DataProviders.js:159 3.4/DataProviders.js:162
+#: 3.0/DataProviders.js:166
+msgid "Buffer:"
+msgstr "Tampon:"
+
+#: 3.2/DataProviders.js:167 4.0/DataProviders.js:159 3.4/DataProviders.js:162
+#: 3.0/DataProviders.js:167
+msgid "Free:"
+msgstr "Liber:"
+
+#: 3.2/DataProviders.js:194 4.0/DataProviders.js:173 3.4/DataProviders.js:176
+#: 3.0/DataProviders.js:194
+msgid "SWAP"
+msgstr "SWAP"
+
+#: 3.2/DataProviders.js:199 4.0/DataProviders.js:193 3.4/DataProviders.js:194
+#: 3.0/DataProviders.js:199
+msgid "------------ Swap ------------"
+msgstr "------------ Swap ------------"
+
+#: 3.2/DataProviders.js:200 4.0/DataProviders.js:194 3.4/DataProviders.js:195
+#: 3.0/DataProviders.js:200 3.2/prefsui.glade:837 4.0/prefsui.glade:907
+#: 3.4/prefsui.glade:761 3.0/prefsui.glade:785
+msgid "Swap"
+msgstr "Swap"
+
+#: 3.2/DataProviders.js:264 4.0/DataProviders.js:204 3.4/DataProviders.js:205
+#: 3.0/DataProviders.js:264
+msgid "NET"
+msgstr "NET"
+
+#: 3.2/DataProviders.js:305 4.0/DataProviders.js:287 3.4/DataProviders.js:289
+#: 3.0/DataProviders.js:305
+msgid "---------- Networks ----------"
+msgstr "---------- Rețele ------------"
+
+#: 3.2/DataProviders.js:308 4.0/DataProviders.js:298 3.4/DataProviders.js:300
+#: 3.0/DataProviders.js:308
+msgid "Down:"
+msgstr "Descărcare:"
+
+#: 3.2/DataProviders.js:308 3.2/DataProviders.js:309 3.0/DataProviders.js:308
+#: 3.0/DataProviders.js:309
+msgid "(KiB/s)"
+msgstr "(KiB/s)"
+
+#: 3.2/DataProviders.js:309 4.0/DataProviders.js:299 3.4/DataProviders.js:301
+#: 3.0/DataProviders.js:309
+msgid "Up:"
+msgstr "Încărcare:"
+
+#: 3.2/DataProviders.js:382 4.0/DataProviders.js:315 3.4/DataProviders.js:317
+#: 3.0/DataProviders.js:382
+msgid "DISK"
+msgstr "DISC"
+
+#: 3.2/DataProviders.js:408 4.0/DataProviders.js:376 3.4/DataProviders.js:378
+#: 3.0/DataProviders.js:408
+msgid "------------ Disks -----------"
+msgstr "------------ Discuri ---------"
+
+#: 3.2/DataProviders.js:411 4.0/DataProviders.js:384 3.4/DataProviders.js:386
+#: 3.0/DataProviders.js:411
+msgid "Read:"
+msgstr "Citire:"
+
+#: 3.2/DataProviders.js:411 3.2/DataProviders.js:412 3.0/DataProviders.js:411
+#: 3.0/DataProviders.js:412
+msgid "(MiB/s)"
+msgstr "(MiB/s)"
+
+#: 3.2/DataProviders.js:412 4.0/DataProviders.js:385 3.4/DataProviders.js:387
+#: 3.0/DataProviders.js:412
+msgid "Write:"
+msgstr "Scriere:"
+
+#: 3.2/ErrorApplet.js:28 3.2/ErrorApplet.js:34 3.0/ErrorApplet.js:28
+#: 3.0/ErrorApplet.js:34
+msgid "Multi-Core System Monitor Error."
+msgstr "Eroare în Multi-Core System Monitor."
+
+#: 3.2/applet.js:139 4.0/applet.js:275 3.4/applet.js:264 3.0/applet.js:141
+msgid "Preferences"
+msgstr "Preferințe"
+
+#: 3.2/applet.js:334 3.0/applet.js:323
+msgid "Please install \"gir1.2-gtop-2.0\" package."
+msgstr "Este necesară instalarea pachetului \"gir1.2-gtop-2.0\"."
+
+#: 3.2/applet.js:339 3.0/applet.js:328
+msgid "Reload this applet"
+msgstr ""
+
+#: 3.2/prefs.js:283 3.2/prefs.js:398 4.0/prefs.js:483 4.0/prefs.js:619
+#: 3.4/prefs.js:327 3.4/prefs.js:463 3.0/prefs.js:279 3.0/prefs.js:393
+#: 3.2/prefsui.glade:356 3.2/prefsui.glade:528 3.2/prefsui.glade:908
+#: 3.2/prefsui.glade:1230 4.0/prefsui.glade:321 4.0/prefsui.glade:603
+#: 4.0/prefsui.glade:977 4.0/prefsui.glade:1312 3.4/prefsui.glade:286
+#: 3.4/prefsui.glade:457 3.4/prefsui.glade:831 3.4/prefsui.glade:1166
+#: 3.0/prefsui.glade:304 3.0/prefsui.glade:476 3.0/prefsui.glade:856
+#: 3.0/prefsui.glade:1178
+msgid "Enable"
+msgstr "Activează"
+
+#: 3.2/prefs.js:294 4.0/prefs.js:494 3.4/prefs.js:338 3.0/prefs.js:290
+msgid "Down"
+msgstr "Descărcare"
+
+#: 3.2/prefs.js:302 4.0/prefs.js:502 3.4/prefs.js:346 3.0/prefs.js:298
+msgid "Up"
+msgstr "Încărcare"
+
+#: 3.2/prefs.js:414 4.0/prefs.js:635 3.4/prefs.js:479 3.0/prefs.js:406
+msgid "Read"
+msgstr "Citire"
+
+#: 3.2/prefs.js:423 4.0/prefs.js:644 3.4/prefs.js:488 3.0/prefs.js:414
+msgid "Write"
+msgstr "Scriere"
+
+#: 3.2/prefs.js:540 3.0/prefs.js:530
+msgid "Error while saving file:"
+msgstr "Eroare la salvarea fișierului:"
+
+#: 4.0/DataProviders.js:47 3.4/DataProviders.js:49
+msgid "/s"
+msgstr "/s"
+
+#: 4.0/DataProviders.js:159 3.4/DataProviders.js:162
+msgid "Used:"
+msgstr "Utilizat:"
+
+#: 4.0/applet.js:64 3.4/applet.js:60
+msgid "Dependency missing"
+msgstr "Lipsește o dependință"
+
+#: 4.0/applet.js:66
+#, fuzzy
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"to use "
+msgstr ""
+"Este necesară instalarea pachetului GTop\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"pentru a folosi"
+
+#: 4.0/applet.js:277
+#, fuzzy
+msgid "Refresh graphs"
+msgstr "Rata de reîmprospătare (ms)"
+
+#: 4.0/prefs.js:335
+msgid "00-20"
+msgstr ""
+
+#: 4.0/prefs.js:335
+msgid "20-40"
+msgstr ""
+
+#: 4.0/prefs.js:335
+msgid "40-60"
+msgstr ""
+
+#: 4.0/prefs.js:335
+msgid "60-80"
+msgstr ""
+
+#: 4.0/prefs.js:335
+msgid "80-100"
+msgstr ""
+
+#: 3.4/applet.js:62
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"to use "
+msgstr ""
+"Este necesară instalarea pachetului GTop\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"pentru a folosi"
+
+#. metadata.json->name
+#, fuzzy
+msgid "Multi-Core System Monitor"
+msgstr "Eroare în Multi-Core System Monitor."
+
+#. metadata.json->description
+msgid "Displays in realtime the cpu usage for each core/cpu and overall memory usage."
+msgstr ""
+
+#: 3.2/prefsui.glade:49 4.0/prefsui.glade:56 3.4/prefsui.glade:49
+#: 3.0/prefsui.glade:49
+msgid "Multi-Core System Monitor Preferences"
+msgstr ""
+
+#: 3.2/prefsui.glade:81 4.0/prefsui.glade:90 3.4/prefsui.glade:83
+#: 3.0/prefsui.glade:81
+msgid "Labels"
+msgstr "Etichete"
+
+#: 3.2/prefsui.glade:132 4.0/prefsui.glade:140 3.4/prefsui.glade:133
+#: 3.0/prefsui.glade:132
+msgid "Refresh Rate (ms)"
+msgstr "Rata de reîmprospătare (ms)"
+
+#: 3.2/prefsui.glade:189 3.0/prefsui.glade:189
+msgid "Height"
+msgstr "Înălțime"
+
+#: 3.2/prefsui.glade:245 4.0/prefsui.glade:212 3.4/prefsui.glade:177
+msgid "Label Color"
+msgstr "Culoare etichete"
+
+#: 3.2/prefsui.glade:297 4.0/prefsui.glade:263 3.4/prefsui.glade:228
+#: 3.0/prefsui.glade:245
+msgid "Background Color"
+msgstr "Culoare de fundal"
+
+#: 3.2/prefsui.glade:333 4.0/prefsui.glade:299 3.4/prefsui.glade:264
+#: 3.0/prefsui.glade:281
+msgid "General"
+msgstr "General"
+
+#: 3.2/prefsui.glade:412 3.2/prefsui.glade:585 3.2/prefsui.glade:964
+#: 3.2/prefsui.glade:1297 4.0/prefsui.glade:376 4.0/prefsui.glade:659
+#: 4.0/prefsui.glade:1032 4.0/prefsui.glade:1378 3.4/prefsui.glade:341
+#: 3.4/prefsui.glade:513 3.4/prefsui.glade:886 3.4/prefsui.glade:1232
+#: 3.0/prefsui.glade:360 3.0/prefsui.glade:533 3.0/prefsui.glade:912
+#: 3.0/prefsui.glade:1245
+msgid "Width"
+msgstr "Lățime"
+
+#: 3.2/prefsui.glade:463 3.2/prefsui.glade:636 4.0/prefsui.glade:494
+#: 4.0/prefsui.glade:710 3.4/prefsui.glade:392 3.4/prefsui.glade:564
+#: 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+msgid "Colors"
+msgstr "Culori"
+
+#: 3.2/prefsui.glade:658 4.0/prefsui.glade:733 3.4/prefsui.glade:587
+#: 3.0/prefsui.glade:606
+msgid "Usedup"
+msgstr "Utilizat"
+
+#: 3.2/prefsui.glade:697 4.0/prefsui.glade:771 3.4/prefsui.glade:625
+#: 3.0/prefsui.glade:645
+msgid "Cached"
+msgstr "În cache"
+
+#: 3.2/prefsui.glade:736 4.0/prefsui.glade:809 3.4/prefsui.glade:663
+#: 3.0/prefsui.glade:684
+msgid "Buffer"
+msgstr "Tampon"
+
+#: 3.2/prefsui.glade:775 4.0/prefsui.glade:847 3.4/prefsui.glade:701
+#: 3.0/prefsui.glade:723
+msgid "Free"
+msgstr "Liber"
+
+#: 3.2/prefsui.glade:884 4.0/prefsui.glade:954 3.4/prefsui.glade:808
+#: 3.0/prefsui.glade:832
+msgid "Memory"
+msgstr "Memorie"
+
+#: 3.2/prefsui.glade:1024 3.2/prefsui.glade:1357 4.0/prefsui.glade:1093
+#: 4.0/prefsui.glade:1439 3.4/prefsui.glade:947 3.4/prefsui.glade:1293
+#: 3.0/prefsui.glade:972 3.0/prefsui.glade:1305
+msgid "Scaling"
+msgstr "Scalare"
+
+#: 3.2/prefsui.glade:1071 3.2/prefsui.glade:1404 4.0/prefsui.glade:1139
+#: 4.0/prefsui.glade:1485 3.4/prefsui.glade:993 3.4/prefsui.glade:1339
+#: 3.0/prefsui.glade:1019 3.0/prefsui.glade:1352
+msgid "Auto Scale"
+msgstr "Scalare automată"
+
+#: 3.2/prefsui.glade:1110 3.2/prefsui.glade:1443 4.0/prefsui.glade:1177
+#: 4.0/prefsui.glade:1523 3.4/prefsui.glade:1031 3.4/prefsui.glade:1377
+#: 3.0/prefsui.glade:1058 3.0/prefsui.glade:1391
+msgid "Logarithmic"
+msgstr "Logaritmică"
+
+#: 3.2/prefsui.glade:1162 3.2/prefsui.glade:1495 4.0/prefsui.glade:1228
+#: 4.0/prefsui.glade:1574 3.4/prefsui.glade:1082 3.4/prefsui.glade:1428
+#: 3.0/prefsui.glade:1110 3.0/prefsui.glade:1443
+msgid "Devices"
+msgstr "Dispozitive"
+
+#: 3.2/prefsui.glade:1206 4.0/prefsui.glade:1289 3.4/prefsui.glade:1143
+#: 3.0/prefsui.glade:1154
+msgid "Network"
+msgstr "Rețea"
+
+#: 3.2/prefsui.glade:1540 4.0/prefsui.glade:1635 3.4/prefsui.glade:1489
+#: 3.0/prefsui.glade:1488
+msgid "Disk IO"
+msgstr "Scriere/citire disc"
+
+#: 3.2/prefsui.glade:1602 4.0/prefsui.glade:1695 3.4/prefsui.glade:1549
+#: 3.0/prefsui.glade:1550
+msgid "Scaling Description"
+msgstr "Descriere scalare"
+
+#: 3.2/prefsui.glade:1614 4.0/prefsui.glade:1710 3.4/prefsui.glade:1564
+#: 3.0/prefsui.glade:1562
+msgid "Close"
+msgstr "Închide"
+
+#: 3.2/prefsui.glade:1644 3.4/prefsui.glade:1594 3.0/prefsui.glade:1592
+msgid ""
+"Auto Scaling:\n"
+"\tThis will scale the line graph by the largest reading within the\n"
+"\tdisplayed area. Once the largest reading is no longer displayed\n"
+"\tthe next largest becomes the new value by which the readings\n"
+"\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"\tHowever, it also means that if there is a large reading small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tthen slightly larger readings may appear larger than they should.\n"
+"\tIf not enabled the largest value used will be the largest reading since\n"
+"\tcinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"\tThis transforms the readings so that they are displayed using a\n"
+"\tlogarithmic scale. If you are not familiar basically, it reduces the\n"
+"\tlarge values so that they dont dominate the smaller readings."
+msgstr ""
+"Scalare automată:\n"
+"\tSe va proporționa linia graficului după cea mai mare citire din\n"
+"\tsecțiunea afișată. După ce această citire nu mai este afișată, \n"
+"\turmătoarea cea mai mare devine citirea după care se proporționează\n"
+"\tcelelalte citiri. Astfel se permite graficului mărirea pentru a arăta detalii.\n"
+"\tÎnsă înseamnă și că dacă există o citire mare, citirile mici nu se pot\n"
+"\tdistinge de 0. Iar dacă sunt numai citiri mici, citirile cu puțin mai mari\n"
+"\tpot părea mai mari decât sunt. Dacă nu este activat, cea mai mare\n"
+"\tde la pornirea Cinnamon va fi folosită ca cea mai mare valoare.\n"
+"\n"
+"Scalare logaritmică:\n"
+"\tSe transformă citirile astfel încât sunt afișate folosind o scară\n"
+"\tlogaritmică. Pe scurt, se reduc valorile mari astfel încât să nu\n"
+"\tle domine pe cele mai mici."
+
+#: 4.0/prefsui.glade:168
+msgid "Curves thickness"
+msgstr ""
+
+#: 4.0/prefsui.glade:433
+msgid "Color by activity level"
+msgstr ""
+
+#: 4.0/prefsui.glade:460
+msgid "Use automatic colors"
+msgstr ""
+
+#: 4.0/prefsui.glade:508
+msgid "by CPU:"
+msgstr ""
+
+#: 4.0/prefsui.glade:538
+msgid "by activity level (in %):"
+msgstr ""
+
+#: 4.0/prefsui.glade:1740
+#, fuzzy
+msgid ""
+"Auto Scaling:\n"
+"    This will scale the line graph by the largest reading within the\n"
+"    displayed area. Once the largest reading is no longer displayed\n"
+"    the next largest becomes the new value by which the readings\n"
+"    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"    However, it also means that if there is a large reading small readings\n"
+"    may become indistinguishable from 0. And if there are only small readings\n"
+"    then slightly larger readings may appear larger than they should.\n"
+"    If not enabled the largest value used will be the largest reading since\n"
+"    cinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"    This transforms the readings so that they are displayed using a\n"
+"    logarithmic scale. If you are not familiar basically, it reduces the\n"
+"    large values so that they dont dominate the smaller readings."
+msgstr ""
+"Scalare automată:\n"
+"\tSe va proporționa linia graficului după cea mai mare citire din\n"
+"\tsecțiunea afișată. După ce această citire nu mai este afișată, \n"
+"\turmătoarea cea mai mare devine citirea după care se proporționează\n"
+"\tcelelalte citiri. Astfel se permite graficului mărirea pentru a arăta detalii.\n"
+"\tÎnsă înseamnă și că dacă există o citire mare, citirile mici nu se pot\n"
+"\tdistinge de 0. Iar dacă sunt numai citiri mici, citirile cu puțin mai mari\n"
+"\tpot părea mai mari decât sunt. Dacă nu este activat, cea mai mare\n"
+"\tde la pornirea Cinnamon va fi folosită ca cea mai mare valoare.\n"
+"\n"
+"Scalare logaritmică:\n"
+"\tSe transformă citirile astfel încât sunt afișate folosind o scară\n"
+"\tlogaritmică. Pe scurt, se reduc valorile mari astfel încât să nu\n"
+"\tle domine pe cele mai mici."

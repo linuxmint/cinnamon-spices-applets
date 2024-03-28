@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-17 14:29+0100\n"
+"PO-Revision-Date: 2023-07-19 13:22-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#: applet.js:77
+msgid "Checking status"
+msgstr "Comprobación del estado"
+
+#: applet.js:108
+msgid "Container does not exist"
+msgstr "El contenedor no existe"
+
+#: applet.js:111
+msgid "Containername is in use"
+msgstr "Containername está en uso"
+
+#: applet.js:114
+msgid "Container is running"
+msgstr "El contenedor está en funcionamiento"
+
+#: applet.js:117
+msgid "Container is paused"
+msgstr "El contenedor está en pausa"
+
+#: applet.js:120
+msgid "Container has an error"
+msgstr "El contenedor tiene un error"
+
+#: applet.js:123
+msgid "Container is not running"
+msgstr "El contenedor no está en funcionamiento"
+
+#: applet.js:129
+msgid "Error, trying to set unknown status!"
+msgstr "¡Error, tratando de establecer un estado desconocido!"
+
+#: applet.js:158
+msgid "Error, don't know what to do on unknown status!"
+msgstr "¡Error, no sé qué hacer en caso de estado desconocido!"
+
+#. docker-ctrl@hoffis-eck.de->settings-schema.json->image->description
+msgid "docker image"
+msgstr "imagen docker"
+
+#. docker-ctrl@hoffis-eck.de->settings-schema.json->container->description
+msgid "container name"
+msgstr "nombre del contenedor"
+
+#. docker-ctrl@hoffis-eck.de->settings-schema.json->parameter->description
+msgid "parameter for the container"
+msgstr "parámetro para el contenedor"
+
+#. docker-ctrl@hoffis-eck.de->metadata.json->description
+msgid "Activates/Deactivates Docker Container"
+msgstr "Activa/Desactiva el Contenedor Docker"
+
+#. docker-ctrl@hoffis-eck.de->metadata.json->name
+msgid "Docker Control"
+msgstr "Control de Docker"

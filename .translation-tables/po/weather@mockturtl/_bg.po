@@ -1,0 +1,51 @@
+# Copyright (C) 2023
+# This file is distributed under the same license as the weather@mockturtl package.
+# DuMuT6p, 2014.
+# Peyu Yovev <spacy00001@gmail.com>, 2017
+# Angel Ivanov <angel.ivanov@outlook.com>, 2020
+# Angel Ivanov <angel.ivanov@outlook.com>, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: weather@mockturtl 2.4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-01 22:49+0000\n"
+"PO-Revision-Date: 2023-03-23 12:17+0200\n"
+"Last-Translator: Angel Ivanov <angel.ivanov@outlook.com>\n"
+"Language-Team: български <>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: 3.8/weather-applet.js:14853
+msgid "Pirate Weather"
+msgstr ""
+
+#: 3.8/weather-applet.js:15205
+msgid ""
+"Location Service couldn't find your location, please see the logs in Looking "
+"Glass"
+msgstr ""
+
+#: 3.8/weather-applet.js:15433
+msgid "Make sure you entered a location or use Automatic location instead."
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Pirate Weather (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->locationDescription->description
+msgid ""
+"If the location field matches a saved location's 'Search Entry' field, the "
+"saved location will be used instead."
+msgstr ""
+
+#. 3.8->settings-schema.json->immediatePrecip->tooltip
+msgid ""
+"If you'd like to use this make sure you use your exact coordinates/address "
+"as location to help its accuracy. See Feature map on website on support for "
+"your provider"
+msgstr ""

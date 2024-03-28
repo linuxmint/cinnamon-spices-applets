@@ -1,0 +1,1040 @@
+# Mosaab Alzoubi <moceap@hotmail.com>, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: Cinnamenu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: 2022-05-31 05:52+0100\n"
+"Last-Translator: Google translate; Med Amine <amine.griche77@protonmail.ch>\n"
+"Language-Team: Arabic <>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Initializing"
+msgstr "تهيئة الجهاز"
+
+msgid "Find files..."
+msgstr "بحث عن الملفات ..."
+
+msgid "Please wait..."
+msgstr "ارجوك انتظر..."
+
+msgid "Applications"
+msgstr "التطبيقات"
+
+msgid "Documents"
+msgstr "وثائق"
+
+msgid "Videos"
+msgstr "أشرطة فيديو"
+
+msgid "Images"
+msgstr "الصور"
+
+msgid "Music"
+msgstr "موسيقى"
+
+msgid "No recent Items"
+msgstr "لا توجد عناصر حديثة"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Click to copy"
+msgstr "انقر للنسخ"
+
+msgid "Applications and files"
+msgstr "التطبيقات والملفات"
+
+msgid "Other search results"
+msgstr "نتائج بحث أخرى"
+
+msgid "Browser bookmarks"
+msgstr "الإشارات المرجعية في المتصفح"
+
+msgid "Browser history"
+msgstr "متصفح التاريخ"
+
+msgid "Emoji"
+msgstr "تعبيري"
+
+msgid "Clear List"
+msgstr "حذف القائمة"
+
+msgid "Trash"
+msgstr "نفاية"
+
+msgid "Computer"
+msgstr "الحاسوب"
+
+msgid "Error while opening file:"
+msgstr "خطأ أثناء فتح الملف:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "عدد كبير جدًا من الإدخالات - إظهار أول 1000 إدخال فقط"
+
+#. 5.8
+#. 4.0
+msgid "All applications"
+msgstr "كل التطبيقات"
+
+msgid "Favorites"
+msgstr "المفضلة"
+
+#. 5.8
+#. 4.0
+msgid "Places"
+msgstr "الأماكن"
+
+#. 5.8
+#. 4.0
+msgid "Recent"
+msgstr "الأخيرة"
+
+#. 5.8
+#. 4.0
+msgid "Favorite apps"
+msgstr "التطبيقات المفضلة"
+
+msgid "light skin tone"
+msgstr "لون البشرة الفاتح"
+
+msgid "medium-light skin tone"
+msgstr "لون بشرة متوسط ​​إلى فاتح"
+
+msgid "medium skin tone"
+msgstr "لون بشرة متوسط"
+
+msgid "medium-dark skin tone"
+msgstr "لون بشرة متوسط ​​الغامق"
+
+msgid "dark skin tone"
+msgstr "لون البشرة الداكن"
+
+#, fuzzy
+msgid "Remove category"
+msgstr "إعادة ترتيب الفئة"
+
+#. 3.2
+msgid "Reset category order"
+msgstr "إعادة ترتيب الفئة"
+
+msgid "List settings apps separately"
+msgstr ""
+
+msgid "Single list style"
+msgstr ""
+
+#, fuzzy
+msgid "Hide hidden files"
+msgstr "أظهر الملفات المخفية"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files"
+msgstr "أظهر الملفات المخفية"
+
+msgid "Run with NVIDIA GPU"
+msgstr "تشغيل  مع NVIDIA GPU"
+
+msgid "Add to panel"
+msgstr "إضافة إلى القائمة"
+
+msgid "Add to desktop"
+msgstr "إضافة إلى المكتب"
+
+msgid "Remove from favorites"
+msgstr "إزالة من المفضلة"
+
+msgid "Add to favorites"
+msgstr "إضافة الى المفضلة"
+
+msgid "Uninstall"
+msgstr "الغاء التثبيت"
+
+msgid "App Info"
+msgstr ""
+
+msgid "This file is no longer available"
+msgstr "هذا الملف لم يعد متوفرا"
+
+msgid "Open with"
+msgstr "مفتوحة مع"
+
+msgid "Other application..."
+msgstr "تطبيق آخر ..."
+
+#, fuzzy
+msgid "Add folder as category"
+msgstr "إظهار فئة التطبيقات المفضلة"
+
+msgid "Open containing folder"
+msgstr "افتح محتوى الملف"
+
+msgid "Move to trash"
+msgstr "ارسال الى سلة المحذوفات"
+
+msgid "Error while moving file to trash:"
+msgstr "خطأ أثناء نقل الملف إلى المهملات:"
+
+msgid "Smileys & Emotion"
+msgstr ""
+
+msgid "People & Body"
+msgstr ""
+
+msgid "Animals & Nature"
+msgstr ""
+
+msgid "Food & Drink"
+msgstr ""
+
+msgid "Travel & Places"
+msgstr ""
+
+msgid "Activities"
+msgstr ""
+
+msgid "Objects"
+msgstr ""
+
+msgid "Symbols"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
+msgid "Quit"
+msgstr "Quit"
+
+msgid "Shutdown the computer"
+msgstr "إيقاف تشغيل الكمبيوتر"
+
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+msgid "Leave the session"
+msgstr "الخروج"
+
+msgid "Lock screen"
+msgstr "قفل الشاشة"
+
+msgid "Lock the screen"
+msgstr "إقفل الشاشة"
+
+msgid "Type to search..."
+msgstr "اكتب لتبحث..."
+
+msgid "No description available"
+msgstr "لا يوجد وصف متاح"
+
+msgid "Recent files"
+msgstr "الملفات الأخيرة"
+
+msgid "Bookmarks"
+msgstr "العناوين"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "حزمة gir1.2-gda-5.0 مطلوبة ل Firefox و Midori bookmarks."
+
+msgid "No recent files"
+msgstr "لا توجد ملفات حديثة"
+
+msgid "Account details"
+msgstr "تفاصيل الحساب"
+
+msgid "Grid View"
+msgstr "طريقة الشبكة"
+
+msgid "List View"
+msgstr "طريقة القائمة"
+
+msgid "Switch to grid view"
+msgstr "التبديل إلى عرض الشبكة"
+
+msgid "Switch to list view"
+msgstr "التبديل إلى عرض القائمة"
+
+msgid "Home"
+msgstr "المنزل"
+
+msgid "Browse network"
+msgstr "تصفح الشبكة"
+
+msgid "Open"
+msgstr "يفتح"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Search"
+msgstr "بحث"
+
+msgid "Start in"
+msgstr "تبدأ في"
+
+msgid "Select a folder"
+msgstr "حدد مجلدًا"
+
+msgid "Follow symlinks"
+msgstr "اتبع الروابط الرمزية"
+
+msgid "Search hidden"
+msgstr "بحث مخفي"
+
+msgid "Use regular expressions"
+msgstr "استخدم التعبيرات العادية"
+
+msgid "Stop"
+msgstr "قف"
+
+msgid "File"
+msgstr "ملف"
+
+msgid "Path"
+msgstr "طريق"
+
+msgid "Searching..."
+msgstr "يبحث..."
+
+msgid "Search Stopped"
+msgstr "توقف البحث"
+
+msgid "Searching: "
+msgstr "يبحث: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "خطأ: أذونات غير كافية لقراءة المجلد "
+
+msgid "Search Completed"
+msgstr "اكتمل البحث"
+
+msgid "Skipping"
+msgstr "التخطي"
+
+msgid " - directory already searched"
+msgstr " - الدليل بحثت بالفعل"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"عنصر القائمة هذا غير مرتبط بأي حزمة. هل تريد إزالته من القائمة على أي حال؟"
+
+msgid "The following packages will be removed:"
+msgstr "ستتم إزالة الحزم التالية:"
+
+msgid "Packages to be removed"
+msgstr "الحزم المراد إزالتها"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "لا يمكن إزالة الحزمة %s كما تتطلبها الحزم الأخرى."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "الحزمة %s تبعية للحزم التالية:"
+
+#. metadata.json
+#. 3.2
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"قائمة مرنة مع خيارات تخطيط الشبكة أو القائمة ومتصفح الملفات والبحث عن الرموز "
+"التعبيرية."
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Layout"
+msgstr "مخطط"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Behavior"
+msgstr "سلوك"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Appearance"
+msgstr "مظهر"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Tips"
+msgstr ""
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Content"
+msgstr "محتوى"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel"
+msgstr "لوحة"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Menu"
+msgstr "قائمة"
+
+#. 5.8
+#. 4.0
+msgid "Applications view mode"
+msgstr "وضع عرض التطبيقات"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "List"
+msgstr "القائمة"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Grid"
+msgstr "الشبكة"
+
+#. 5.8
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "عرض التطبيقات كقائمة أو شبكة"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show sidebar"
+msgstr "إظهار المفضلة على الشريط الجانبي"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show the sidebar in the menu"
+msgstr "إظهار فئة المجلد الرئيسي في القائمة"
+
+#. 5.8
+#. 4.0
+msgid "Sidebar location"
+msgstr "موقع الشريط الجانبي"
+
+#. 5.8
+#. 4.0
+msgid "Top"
+msgstr "أعلى"
+
+#. 5.8
+#. 4.0
+msgid "Bottom"
+msgstr "الأسفل"
+
+#. 5.8
+#. 4.0
+msgid "Left"
+msgstr "اليسار"
+
+#. 5.8
+#. 4.0
+msgid "Right"
+msgstr "حق"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show the sidebar"
+msgstr "اختر مكان إظهار الشريط الجانبي"
+
+#. 5.8
+#. 4.0
+msgid "Show favorites on sidebar"
+msgstr "إظهار المفضلة على الشريط الجانبي"
+
+#. 5.8
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+#. 4.0
+msgid "None"
+msgstr "لا يوجد"
+
+#. 5.8
+#. 4.0
+msgid "Apps only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Files only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Apps and files"
+msgstr "التطبيقات والملفات"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "اعرض رموز التطبيقات والملفات المفضلة لديك على الشريط الجانبي"
+
+#. 5.8
+#. 4.0
+msgid "Application description placement"
+msgstr "وضع وصف التطبيق"
+
+#. 5.8
+#. 4.0
+msgid "Tooltips"
+msgstr "تلميحات الأدوات"
+
+#. 5.8
+#. 4.0
+msgid "Under titles"
+msgstr "تحت العناوين"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "اختر مكان عرض أوصاف التطبيق"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show categories"
+msgstr "إظهار أيقونات الفئة"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show list of application categories"
+msgstr "عرض أيقونات التطبيق"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places"
+msgstr "عرض الإشارات المرجعية والأماكن"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "عرض الإشارات المرجعية والأماكن"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items"
+msgstr "إظهار العناصر الأخيرة"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items category in the menu"
+msgstr "إظهار فئة العناصر الحديثة في القائمة"
+
+#. 5.8
+#. 4.0
+msgid "Show favorite apps category"
+msgstr "إظهار فئة التطبيقات المفضلة"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps category in the menu"
+msgstr "اعرض فئة تطبيقاتك المفضلة في القائمة"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder"
+msgstr "إظهار المجلد الرئيسي"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder category in the menu"
+msgstr "إظهار فئة المجلد الرئيسي في القائمة"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category"
+msgstr "إظهار فئة التطبيقات المفضلة"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category in the menu"
+msgstr "إظهار فئة المجلد الرئيسي في القائمة"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu editor"
+msgstr "افتح محرر القائمة"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "اختصار لوحة المفاتيح لفتح وإغلاق القائمة"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on hover"
+msgstr "افتح القائمة عند التمرير"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "افتح القائمة عندما أحرك الماوس فوقها"
+
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+msgid "milliseconds"
+msgstr "ميلي ثانية"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Menu hover delay"
+msgstr "تأخير تحويم القائمة"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use menu animations"
+msgstr "استخدام الرسوم المتحركة القائمة"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Animate the menu on open and close"
+msgstr "السماح للقائمة لتنشيط فتح وإغلاق"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click"
+msgstr "تنشيط الفئات عند النقر"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "تنشيط الفئات عند النقر"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on category:"
+msgstr "فتح القائمة في الفئة:"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Always open the menu with this category selected"
+msgstr "افتح القائمة دائمًا مع تحديد هذه الفئة"
+
+#. 5.8
+#. 4.0
+msgid "Last used category"
+msgstr "آخر فئة مستخدمة"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Enable autoscrolling"
+msgstr "تمكين التمرير التلقائي"
+
+#. 5.8
+#. 4.0
+msgid "Autoscroll the application list on mouse hover"
+msgstr "التمرير التلقائي لقائمة التطبيقات عند تمرير الماوس"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files in folder view"
+msgstr "إظهار الملفات المخفية في عرض المجلد"
+
+#. 5.8
+#. 4.0
+msgid "Emoji search"
+msgstr "البحث عن الرموز التعبيرية"
+
+#. 5.8
+#. 4.0
+msgid "Show emojis in search results"
+msgstr "إظهار الرموز التعبيرية في نتائج البحث"
+
+#. 5.8
+#. 4.0
+msgid "Web search option"
+msgstr "خيار البحث في الويب"
+
+#. 5.8
+#. 4.0
+msgid "Show an internet search option in search results"
+msgstr "إظهار خيار البحث على الإنترنت في نتائج البحث"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Web search suggestions"
+msgstr "خيار البحث في الويب"
+
+#. 5.8
+#. 4.0
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Search home folder"
+msgstr "ابحث في المجلد الرئيسي"
+
+#. 5.8
+#. 4.0
+msgid "When searching, also search my home folder for files"
+msgstr "عند البحث ، ابحث أيضًا في مجلد منزلي عن الملفات"
+
+#. 5.8
+#. 4.0
+msgid "Web history search"
+msgstr "البحث في سجل الويب"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"عند البحث ، ابحث أيضًا في محفوظات المتصفح (Google Chrome و Chromium و Opera و "
+"Vivaldi و Brave) \n"
+" ملاحظة: محفوظات Firefox غير مدعومة حاليًا."
+
+#. 5.8
+#. 4.0
+msgid "Web bookmarks search"
+msgstr "البحث عن إشارات الويب"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"عند البحث ، ابحث أيضًا عن إشارات الويب المرجعية لمتصفحي (Google Chrome و "
+"Firefox و Chromium و Opera و Vivaldi و Brave) \n"
+" ملاحظة: للبحث عن إشارات مرجعية في Firefox ، ستحتاج إلى تثبيت الحزمة gir1.2-"
+"gda-5.0 (التوزيعات القائمة على Debian بما في ذلك Ubuntu & Linux Mint) أو "
+"حزمة libgda (التوزيعات القائمة على Arch) وأعد تشغيل الكمبيوتر."
+
+#. 5.8
+#. 4.0
+msgid "Wikipedia search"
+msgstr "بحث ويكيبيديا"
+
+#. 5.8
+#. 4.0
+msgid "Show some Wikipedia results"
+msgstr "عرض بعض نتائج ويكيبيديا"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Wikipedia language"
+msgstr "لغة ويكيبيديا"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+" ملاحظة: لا يزال من الممكن استخدام بعض خيارات البحث حتى إذا لم تقم بتمكينها "
+"هنا من خلال وضع بادئة لمصطلح البحث الخاص بك. \n"
+" على سبيل المثال: للبحث عن رمز تعبيري ، اكتب \"القلب الإلكتروني\" للعثور على "
+"رموز تعبيرية للقلب. وبالمثل ، استخدم البادئات \"f\" للبحث عن الملفات ، و \"h"
+"\" لمحفوظات الويب و \"b\" للبحث عن إشارات الويب. \n"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon"
+msgstr "استخدم أيقونة مخصصة"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon in the panel"
+msgstr "استخدم أيقونة مخصصة"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel icon"
+msgstr "رمز اللوحة"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom icon size"
+msgstr "استخدم حجم رمز مخصص"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom size for the panel icon"
+msgstr "استخدم حجمًا مخصصًا لرمز اللوحة"
+
+#. 5.8
+#. 4.0
+msgid "Panel icon size (pixels)"
+msgstr "حجم رمز اللوحة (بكسل)"
+
+#. 5.8
+#. 4.0
+msgid "Choose a custom size for the panel icon"
+msgstr "اختر حجمًا مخصصًا لرمز اللوحة"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Panel text"
+msgstr "نص اللوحة"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Text to show beside the panel icon"
+msgstr "نص يظهر بجانب أيقونة اللوحة"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Category icon size (pixels)"
+msgstr "حجم رمز الفئة (بكسل)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications list icon size (pixels)"
+msgstr "حجم أيقونة قائمة التطبيقات (بكسل)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications grid icon size (pixels)"
+msgstr "حجم أيقونة شبكة التطبيقات (بكسل)"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Sidebar icon size (pixels)"
+msgstr "حجم رمز الشريط الجانبي (بكسل)"
+
+#. 5.8
+#. 4.0
+msgid "Use sidebar box style"
+msgstr "استخدم نمط مربع الشريط الجانبي"
+
+#. 5.8
+#. 4.0
+msgid "Use a sidebar box style"
+msgstr "استخدم نمط مربع الشريط الجانبي"
+
+#. 5.8
+#. 4.0
+msgid "Use tile style"
+msgstr "استخدم نمط البلاط"
+
+#. 5.8
+#. 4.0
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr "استخدم نمط تجانب لأزرار التطبيق (ملاحظة: قد لا تعمل مع بعض السمات)"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+" معلومات / نصيحة: اسحب على حافة القائمة لتغيير حجم القائمة. \n"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+" معلومات / نصيحة: اسحب على حافة القائمة لتغيير حجم القائمة. \n"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+
+#. 3.2
+msgid "Search Providers"
+msgstr "بحث عن مزودين"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "لم يتم العثور على مزودين ملحقات"
+
+#. 3.2
+msgid "Recent files settings"
+msgstr "إعدادات الملفات الأخيرة"
+
+#. 3.2
+msgid "Enable autoscrolling in application list"
+msgstr "تمكين autoscrolling في قائمة التطبيق"
+
+#. 3.2
+msgid "Show web bookmarks"
+msgstr "إظهار إشارات الويب"
+
+#. 3.2
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"اعرض إشارات الويب الخاصة بالمستعرض في القائمة. ملاحظة: قم بتثبيت الحزمة "
+"gir1.2-gda-5.0 لقراءة إشارات Firefox المرجعية."
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "تمكين البحث عن النوافذ المفتوحة"
+
+#. 3.2
+msgid "Enable search providers"
+msgstr "تمكين موفري البحث"
+
+#. 3.2
+msgid "Include search provider results in searches"
+msgstr "تضمين نتائج مزود البحث في عمليات البحث"
+
+#. 3.2
+msgid "Example Search Providers"
+msgstr "مثال موفري البحث"
+
+#. 3.2
+msgid "columns"
+msgstr "أعمدة"
+
+#. 3.2
+#. 3.2
+msgid "Number of columns in apps grid"
+msgstr "عدد الأعمدة في شبكة التطبيقات"
+
+#. 3.2
+#. 3.2
+msgid "Show application icons"
+msgstr "عرض أيقونات التطبيق"
+
+#. 3.2
+#. 3.2
+msgid "Show category icons"
+msgstr "إظهار أيقونات الفئة"
+
+#. 3.2
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "عرض وصف التطبيق تحت العناوين"
+
+#. 3.2
+#. 3.2
+msgid "Show tooltips"
+msgstr ""
+
+#. 3.2
+#. 3.2
+msgid "Tooltip delay"
+msgstr "تأخير تلميح "
+
+#. 3.2
+#. 3.2
+msgid "Use a custom menu height"
+msgstr "استخدام ارتفاع القائمة المخصصة"
+
+#. 3.2
+#. 3.2
+msgid "Custom menu height (pixels)"
+msgstr "ارتفاع القائمة المخصص (بكسل)"
+
+#~ msgid "Home folder"
+#~ msgstr "المجلد الرئيسي"
+
+#~ msgid "Layout and Content"
+#~ msgstr "تخطيط والمحتوى"

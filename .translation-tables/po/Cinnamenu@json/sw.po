@@ -1,0 +1,1053 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: 2022-05-31 17:15+0100\n"
+"Last-Translator: Google translate\n"
+"Language-Team: \n"
+"Language: sw\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Initializing"
+msgstr "Kuanzisha"
+
+msgid "Find files..."
+msgstr "Tafuta faili..."
+
+msgid "Please wait..."
+msgstr "Tafadhali subiri..."
+
+msgid "Applications"
+msgstr "Maombi"
+
+msgid "Documents"
+msgstr "Nyaraka"
+
+msgid "Videos"
+msgstr "Video"
+
+msgid "Images"
+msgstr "Picha"
+
+msgid "Music"
+msgstr "Muziki"
+
+msgid "No recent Items"
+msgstr "Hakuna Vipengee vya hivi majuzi"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Click to copy"
+msgstr "Bofya ili kunakili"
+
+msgid "Applications and files"
+msgstr "Maombi na faili"
+
+msgid "Other search results"
+msgstr "Matokeo mengine ya utafutaji"
+
+msgid "Browser bookmarks"
+msgstr "Alamisho za kivinjari"
+
+msgid "Browser history"
+msgstr "Historia ya kivinjari"
+
+msgid "Emoji"
+msgstr "Emoji"
+
+msgid "Clear List"
+msgstr "Orodha ya wazi"
+
+msgid "Trash"
+msgstr "Takataka"
+
+msgid "Computer"
+msgstr "Kompyuta"
+
+msgid "Error while opening file:"
+msgstr "Hitilafu wakati wa kufungua faili:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Maingizo mengi sana - yanaonyesha maingizo 1000 pekee"
+
+#. 5.8
+#. 4.0
+msgid "All applications"
+msgstr "Maombi yote"
+
+msgid "Favorites"
+msgstr "Vipendwa"
+
+#. 5.8
+#. 4.0
+msgid "Places"
+msgstr "Maeneo"
+
+#. 5.8
+#. 4.0
+msgid "Recent"
+msgstr "Hivi karibuni"
+
+#. 5.8
+#. 4.0
+msgid "Favorite apps"
+msgstr "Programu unazopenda"
+
+msgid "light skin tone"
+msgstr "ngozi nyepesi"
+
+msgid "medium-light skin tone"
+msgstr "ngozi ya wastani"
+
+msgid "medium skin tone"
+msgstr "ngozi ya wastani"
+
+msgid "medium-dark skin tone"
+msgstr "ngozi ya wastani ya ngozi"
+
+msgid "dark skin tone"
+msgstr "sauti ya ngozi nyeusi"
+
+#, fuzzy
+msgid "Remove category"
+msgstr "Weka upya mpangilio wa kategoria"
+
+#. 3.2
+msgid "Reset category order"
+msgstr "Weka upya mpangilio wa kategoria"
+
+msgid "List settings apps separately"
+msgstr ""
+
+msgid "Single list style"
+msgstr ""
+
+#, fuzzy
+msgid "Hide hidden files"
+msgstr "Onyesha faili zilizofichwa"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files"
+msgstr "Onyesha faili zilizofichwa"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Endesha ukitumia NVIDIA GPU"
+
+msgid "Add to panel"
+msgstr "Ongeza kwenye paneli"
+
+msgid "Add to desktop"
+msgstr "Ongeza kwenye eneo-kazi"
+
+msgid "Remove from favorites"
+msgstr "Ondoa kutoka kwa vipendwa"
+
+msgid "Add to favorites"
+msgstr "Ongeza kwa vipendwa"
+
+msgid "Uninstall"
+msgstr "Sanidua"
+
+msgid "App Info"
+msgstr ""
+
+msgid "This file is no longer available"
+msgstr "Faili hii haipatikani tena"
+
+msgid "Open with"
+msgstr "Fungua na"
+
+msgid "Other application..."
+msgstr "Programu nyingine..."
+
+#, fuzzy
+msgid "Add folder as category"
+msgstr "Onyesha kategoria ya programu unazopenda"
+
+msgid "Open containing folder"
+msgstr "Fungua folda iliyo na"
+
+msgid "Move to trash"
+msgstr "Hamisha hadi kwenye tupio"
+
+msgid "Error while moving file to trash:"
+msgstr "Hitilafu wakati wa kuhamisha faili hadi kwenye tupio:"
+
+msgid "Smileys & Emotion"
+msgstr ""
+
+msgid "People & Body"
+msgstr ""
+
+msgid "Animals & Nature"
+msgstr ""
+
+msgid "Food & Drink"
+msgstr ""
+
+msgid "Travel & Places"
+msgstr ""
+
+msgid "Activities"
+msgstr ""
+
+msgid "Objects"
+msgstr ""
+
+msgid "Symbols"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
+msgid "Quit"
+msgstr "Acha"
+
+msgid "Shutdown the computer"
+msgstr "Zima kompyuta"
+
+msgid "Logout"
+msgstr "Ondoka"
+
+msgid "Leave the session"
+msgstr "Ondoka kwenye kikao"
+
+msgid "Lock screen"
+msgstr "Funga skrini"
+
+msgid "Lock the screen"
+msgstr "Funga skrini"
+
+msgid "Type to search..."
+msgstr "Andika ili kutafuta..."
+
+msgid "No description available"
+msgstr "Hakuna maelezo yanayopatikana"
+
+msgid "Recent files"
+msgstr "Faili za hivi majuzi"
+
+msgid "Bookmarks"
+msgstr "Alamisho"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr ""
+"gir1.2-gda-5.0 kifurushi kinachohitajika kwa alamisho za Firefox na Midori."
+
+msgid "No recent files"
+msgstr "Hakuna faili za hivi majuzi"
+
+msgid "Account details"
+msgstr "Maelezo ya akaunti"
+
+msgid "Grid View"
+msgstr "Mwonekano wa Gridi"
+
+msgid "List View"
+msgstr "Mwonekano wa Orodha"
+
+msgid "Switch to grid view"
+msgstr "Badili hadi mwonekano wa gridi"
+
+msgid "Switch to list view"
+msgstr "Badili hadi mwonekano wa orodha"
+
+msgid "Home"
+msgstr "Nyumbani"
+
+msgid "Browse network"
+msgstr "Vinjari mtandao"
+
+msgid "Open"
+msgstr "Fungua"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Search"
+msgstr "Tafuta"
+
+msgid "Start in"
+msgstr "Anza ndani"
+
+msgid "Select a folder"
+msgstr "Chagua folda"
+
+msgid "Follow symlinks"
+msgstr "Fuata ulinganifu"
+
+msgid "Search hidden"
+msgstr "Utafutaji umefichwa"
+
+msgid "Use regular expressions"
+msgstr "Tumia misemo ya kawaida"
+
+msgid "Stop"
+msgstr "Acha"
+
+msgid "File"
+msgstr "Faili"
+
+msgid "Path"
+msgstr "Njia"
+
+msgid "Searching..."
+msgstr "Inatafuta..."
+
+msgid "Search Stopped"
+msgstr "Utafutaji Umesimamishwa"
+
+msgid "Searching: "
+msgstr "Inatafuta: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Hitilafu: ruhusa haitoshi kusoma folda "
+
+msgid "Search Completed"
+msgstr "Utafutaji Umekamilika"
+
+msgid "Skipping"
+msgstr "Kuruka"
+
+msgid " - directory already searched"
+msgstr " - saraka tayari imetafutwa"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Kipengee hiki cha menyu hakihusiani na kifurushi chochote. Je, ungependa "
+"kuiondoa kwenye menyu hata hivyo?"
+
+msgid "The following packages will be removed:"
+msgstr "Vifurushi vifuatavyo vitaondolewa:"
+
+msgid "Packages to be removed"
+msgstr "Vifurushi vya kuondolewa"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Haiwezi kuondoa kifurushi %s kama inavyotakiwa na vifurushi vingine."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Kifurushi %s ni tegemezi la vifurushi vifuatavyo:"
+
+#. metadata.json
+#. 3.2
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Menyu inayoweza kunyumbulika yenye chaguzi za mpangilio wa gridi au orodha, "
+"kivinjari cha faili na utafutaji wa emoji."
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Layout"
+msgstr "Mpangilio"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Behavior"
+msgstr "Tabia"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Appearance"
+msgstr "Mwonekano"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Tips"
+msgstr ""
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Content"
+msgstr "Maudhui"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel"
+msgstr "Paneli"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Menu"
+msgstr "Menyu"
+
+#. 5.8
+#. 4.0
+msgid "Applications view mode"
+msgstr "Hali ya kutazama programu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "List"
+msgstr "Orodha"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Grid"
+msgstr "Gridi"
+
+#. 5.8
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "Tazama programu kama orodha au gridi ya taifa"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show sidebar"
+msgstr "Onyesha vipendwa kwenye utepe"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show the sidebar in the menu"
+msgstr "Onyesha kategoria ya folda ya nyumbani kwenye menyu"
+
+#. 5.8
+#. 4.0
+msgid "Sidebar location"
+msgstr "Mahali pa utepe"
+
+#. 5.8
+#. 4.0
+msgid "Top"
+msgstr "Juu"
+
+#. 5.8
+#. 4.0
+msgid "Bottom"
+msgstr "Chini"
+
+#. 5.8
+#. 4.0
+msgid "Left"
+msgstr "Kushoto"
+
+#. 5.8
+#. 4.0
+msgid "Right"
+msgstr "Haki"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show the sidebar"
+msgstr "Chagua mahali pa kuonyesha utepe"
+
+#. 5.8
+#. 4.0
+msgid "Show favorites on sidebar"
+msgstr "Onyesha vipendwa kwenye utepe"
+
+#. 5.8
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+#. 4.0
+msgid "None"
+msgstr "Hakuna"
+
+#. 5.8
+#. 4.0
+msgid "Apps only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Files only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Apps and files"
+msgstr "Maombi na faili"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr ""
+"Onyesha aikoni za programu na faili zako uzipendazo kwenye upau wa kando"
+
+#. 5.8
+#. 4.0
+msgid "Application description placement"
+msgstr "Uwekaji wa maelezo ya maombi"
+
+#. 5.8
+#. 4.0
+msgid "Tooltips"
+msgstr "Vidokezo vya zana"
+
+#. 5.8
+#. 4.0
+msgid "Under titles"
+msgstr "Chini ya majina"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "Chagua mahali pa kuonyesha maelezo ya programu"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show categories"
+msgstr "Onyesha aikoni za kategoria"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show list of application categories"
+msgstr "Onyesha ikoni za programu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places"
+msgstr "Onyesha vialamisho na maeneo"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "Onyesha alamisho na kategoria ya maeneo kwenye menyu"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items"
+msgstr "Onyesha vipengee vya hivi majuzi"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items category in the menu"
+msgstr "Onyesha kategoria ya vipengee vya hivi majuzi kwenye menyu"
+
+#. 5.8
+#. 4.0
+msgid "Show favorite apps category"
+msgstr "Onyesha kategoria ya programu unazopenda"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps category in the menu"
+msgstr "Onyesha aina ya programu unazopenda kwenye menyu"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder"
+msgstr "Onyesha folda ya nyumbani"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder category in the menu"
+msgstr "Onyesha kategoria ya folda ya nyumbani kwenye menyu"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category"
+msgstr "Onyesha kategoria ya programu unazopenda"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category in the menu"
+msgstr "Onyesha kategoria ya folda ya nyumbani kwenye menyu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu editor"
+msgstr "Fungua kihariri cha menyu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Njia ya mkato ya kibodi ili kufungua na kufunga menyu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on hover"
+msgstr "Fungua menyu kwenye kuelea"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Fungua menyu ninaposogeza kipanya changu juu ya ikoni ya paneli"
+
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+msgid "milliseconds"
+msgstr "millisekunde"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Menu hover delay"
+msgstr "Kuchelewa kwa menyu kuelea"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use menu animations"
+msgstr "Tumia uhuishaji wa menyu"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Animate the menu on open and close"
+msgstr "Huisha menyu kwenye fungua na funga"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click"
+msgstr "Washa kategoria unapobofya"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "Washa kategoria unapobofya badala ya kuelea"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on category:"
+msgstr "Fungua menyu kwenye kitengo:"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Fungua menyu kila wakati na aina hii iliyochaguliwa"
+
+#. 5.8
+#. 4.0
+msgid "Last used category"
+msgstr "Kategoria iliyotumika mwisho"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Enable autoscrolling"
+msgstr "Washa usogezaji kiotomatiki"
+
+#. 5.8
+#. 4.0
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Sogeza kiotomatiki orodha ya programu kwenye kieleezaji cha kipanya"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files in folder view"
+msgstr "Onyesha faili zilizofichwa katika mwonekano wa folda"
+
+#. 5.8
+#. 4.0
+msgid "Emoji search"
+msgstr "Utafutaji wa emoji"
+
+#. 5.8
+#. 4.0
+msgid "Show emojis in search results"
+msgstr "Onyesha emoji katika matokeo ya utafutaji"
+
+#. 5.8
+#. 4.0
+msgid "Web search option"
+msgstr "Chaguo la utafutaji kwenye wavuti"
+
+#. 5.8
+#. 4.0
+msgid "Show an internet search option in search results"
+msgstr "Onyesha chaguo la utafutaji wa mtandaoni katika matokeo ya utafutaji"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Web search suggestions"
+msgstr "Chaguo la utafutaji kwenye wavuti"
+
+#. 5.8
+#. 4.0
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Search home folder"
+msgstr "Tafuta folda ya nyumbani"
+
+#. 5.8
+#. 4.0
+msgid "When searching, also search my home folder for files"
+msgstr "Wakati wa kutafuta, pia tafuta folda yangu ya nyumbani kwa faili"
+
+#. 5.8
+#. 4.0
+msgid "Web history search"
+msgstr "Utafutaji wa historia ya wavuti"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+"Wakati wa kutafuta, tafuta pia historia ya kivinjari changu (Google Chrome, "
+"Chromium, Opera, Vivaldi, Brave)\n"
+"Kumbuka: Historia ya Firefox haitumiki kwa sasa."
+
+#. 5.8
+#. 4.0
+msgid "Web bookmarks search"
+msgstr "Utafutaji wa vialamisho vya wavuti"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Wakati wa kutafuta, tafuta pia alamisho za wavuti za kivinjari changu "
+"(Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Kumbuka: Ili kutafuta alamisho za Firefox utahitaji kusakinisha kifurushi "
+"gir1.2-gda-5.0 (Debian based distributions inc. Ubuntu) & Linux Mint) au "
+"kifurushi libgda (Usambazaji kulingana na Tao) na uwashe upya kompyuta yako."
+
+#. 5.8
+#. 4.0
+msgid "Wikipedia search"
+msgstr "Utafutaji wa Wikipedia"
+
+#. 5.8
+#. 4.0
+msgid "Show some Wikipedia results"
+msgstr "Onyesha baadhi ya matokeo ya Wikipedia"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Wikipedia language"
+msgstr "Lugha ya Wikipedia"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+"\n"
+"Kumbuka: Baadhi ya chaguo za utafutaji bado zinaweza kutumika hata kama "
+"hujaziwezesha hapa kwa kutanguliza neno lako la utafutaji.\n"
+"Kwa mfano: ili kutafuta emoji, andika 'e heart' ili kupata emoji za moyo. "
+"Vile vile, tumia viambishi awali 'f' kwa utafutaji wa faili, 'h' kwa "
+"historia ya wavuti na 'b' kwa utafutaji wa vialamisho vya wavuti.\n"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon"
+msgstr "Tumia ikoni maalum"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon in the panel"
+msgstr "Tumia ikoni maalum kwenye paneli"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel icon"
+msgstr "Aikoni ya paneli"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom icon size"
+msgstr "Tumia saizi maalum ya ikoni"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom size for the panel icon"
+msgstr "Tumia saizi maalum kwa ikoni ya paneli"
+
+#. 5.8
+#. 4.0
+msgid "Panel icon size (pixels)"
+msgstr "Ukubwa wa aikoni ya paneli (pixels)"
+
+#. 5.8
+#. 4.0
+msgid "Choose a custom size for the panel icon"
+msgstr "Chagua saizi maalum ya ikoni ya paneli"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Panel text"
+msgstr "Maandishi ya paneli"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Text to show beside the panel icon"
+msgstr "Maandishi ya kuonyesha kando ya ikoni ya paneli"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Category icon size (pixels)"
+msgstr "Ukubwa wa aikoni ya aina (pixels)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications list icon size (pixels)"
+msgstr "Saizi ya ikoni ya orodha ya programu (pixels)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications grid icon size (pixels)"
+msgstr "Ukubwa wa ikoni ya gridi ya programu (pixels)"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Sidebar icon size (pixels)"
+msgstr "Saizi ya ikoni ya upau wa kando (pixels)"
+
+#. 5.8
+#. 4.0
+msgid "Use sidebar box style"
+msgstr "Tumia mtindo wa kisanduku cha utepe"
+
+#. 5.8
+#. 4.0
+msgid "Use a sidebar box style"
+msgstr "Tumia mtindo wa kisanduku cha utepe"
+
+#. 5.8
+#. 4.0
+msgid "Use tile style"
+msgstr "Tumia mtindo wa tile"
+
+#. 5.8
+#. 4.0
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Tumia mtindo wa kigae kwa vitufe vya programu (Kumbuka: huenda isifanye kazi "
+"kwenye baadhi ya mandhari)"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"Maelezo/kidokezo: Buruta kwenye ukingo wa menyu ili kubadilisha ukubwa wa "
+"menyu.\n"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"Maelezo/kidokezo: Buruta kwenye ukingo wa menyu ili kubadilisha ukubwa wa "
+"menyu.\n"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+
+#. 3.2
+msgid "Search Providers"
+msgstr "Watoa Huduma za Utafutaji"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "Hakuna viendelezi vya mtoaji wa utafutaji vilivyopatikana"
+
+#. 3.2
+msgid "Recent files settings"
+msgstr "Mipangilio ya faili za hivi majuzi"
+
+#. 3.2
+msgid "Enable autoscrolling in application list"
+msgstr "Washa usogezaji kiotomatiki katika orodha ya programu"
+
+#. 3.2
+msgid "Show web bookmarks"
+msgstr "Onyesha alamisho za wavuti"
+
+#. 3.2
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Onyesha alamisho za wavuti za kivinjari chako kwenye menyu.\n"
+"Kumbuka: Sakinisha kifurushi cha gir1.2-gda-5.0 ili kusoma alamisho za "
+"Firefox."
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "Washa utafutaji wa madirisha wazi"
+
+#. 3.2
+msgid "Enable search providers"
+msgstr "Washa watoa huduma wa utafutaji"
+
+#. 3.2
+msgid "Include search provider results in searches"
+msgstr "Jumuisha matokeo ya mtoa huduma wa utafutaji katika utafutaji"
+
+#. 3.2
+msgid "Example Search Providers"
+msgstr "Mfano Watoa Huduma"
+
+#. 3.2
+msgid "columns"
+msgstr "nguzo"
+
+#. 3.2
+#. 3.2
+msgid "Number of columns in apps grid"
+msgstr "Idadi ya safu wima katika gridi ya programu"
+
+#. 3.2
+#. 3.2
+msgid "Show application icons"
+msgstr "Onyesha ikoni za programu"
+
+#. 3.2
+#. 3.2
+msgid "Show category icons"
+msgstr "Onyesha aikoni za kategoria"
+
+#. 3.2
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "Onyesha maelezo ya programu chini ya mada"
+
+#. 3.2
+#. 3.2
+msgid "Show tooltips"
+msgstr "Onyesha vidokezo vya zana"
+
+#. 3.2
+#. 3.2
+msgid "Tooltip delay"
+msgstr "Kuchelewa kwa kidokezo"
+
+#. 3.2
+#. 3.2
+msgid "Use a custom menu height"
+msgstr "Tumia urefu wa menyu maalum"
+
+#. 3.2
+#. 3.2
+msgid "Custom menu height (pixels)"
+msgstr "Urefu wa menyu maalum (pixels)"
+
+#~ msgid "Home folder"
+#~ msgstr "Folda ya nyumbani"
+
+#~ msgid "Layout and Content"
+#~ msgstr "Muundo na Maudhui"

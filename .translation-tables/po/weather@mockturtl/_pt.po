@@ -1,0 +1,303 @@
+# Portuguese translation for gnome-shell-extension-weather
+# Copyright (C) 2011
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# Daniel Miranda <dmiranda@gmail.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 3.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-01 22:49+0000\n"
+"PO-Revision-Date: 2024-02-01 16:18-0100\n"
+"Last-Translator: \n"
+"Language-Team: Português ; Daniel Miranda <dmiranda@gmail.com>, Luiz Rodrigo "
+"<contact@lurodrigo.com>, Zé Bento <bento2000@gmail.com>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: 3.0/applet.js:1132 3.8/weather-applet.js:16924
+msgid "mm"
+msgstr ""
+
+#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:16924
+msgid "in"
+msgstr ""
+
+#: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:10312
+#: 3.8/weather-applet.js:17089
+msgid "mi"
+msgstr ""
+
+#: 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:10313
+#: 3.8/weather-applet.js:17090
+msgid "km"
+msgstr ""
+
+#: 3.0/climacell.js:301
+msgid "Light freezing drizzle"
+msgstr ""
+
+#: 3.0/climacell.js:308 3.0/climacell.js:309 3.8/weather-applet.js:13145
+msgid "Light drizzle"
+msgstr ""
+
+#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+msgid "N"
+msgstr ""
+
+#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+msgid "NE"
+msgstr ""
+
+#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+msgid "E"
+msgstr ""
+
+#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+msgid "SE"
+msgstr ""
+
+#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+msgid "S"
+msgstr ""
+
+#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+msgid "SW"
+msgstr ""
+
+#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+msgid "W"
+msgstr ""
+
+#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+msgid "NW"
+msgstr ""
+
+#: 3.0/yahoo.js:464 3.8/weather-applet.js:14175 3.8/weather-applet.js:14176
+#: 3.8/weather-applet.js:14182 3.8/weather-applet.js:14183
+#: 3.8/weather-applet.js:14672 3.8/weather-applet.js:14673
+#: 3.8/weather-applet.js:14679 3.8/weather-applet.js:14680
+msgid "Partly Cloudy"
+msgstr ""
+
+#: 3.0/yahoo.js:467 3.8/weather-applet.js:14707 3.8/weather-applet.js:14708
+msgid "Mostly Sunny"
+msgstr ""
+
+#: 3.0/yahoo.js:469 3.8/weather-applet.js:14714 3.8/weather-applet.js:14715
+msgid "Mixed Rain and Hail"
+msgstr ""
+
+#: 3.0/yahoo.js:471 3.8/weather-applet.js:14728 3.8/weather-applet.js:14729
+msgid "Isolated Thunderstorms"
+msgstr ""
+
+#: 3.0/yahoo.js:472 3.8/weather-applet.js:14735 3.8/weather-applet.js:14736
+#: 3.8/weather-applet.js:14791 3.8/weather-applet.js:14792
+msgid "Scattered Thunderstorms"
+msgstr ""
+
+#: 3.0/yahoo.js:473 3.8/weather-applet.js:14742 3.8/weather-applet.js:14743
+#: 3.8/weather-applet.js:14777 3.8/weather-applet.js:14778
+msgid "Scattered Showers"
+msgstr ""
+
+#: 3.0/yahoo.js:474 3.8/weather-applet.js:14749 3.8/weather-applet.js:14750
+msgid "Heavy Rain"
+msgstr ""
+
+#: 3.0/yahoo.js:475 3.8/weather-applet.js:14756 3.8/weather-applet.js:14757
+#: 3.8/weather-applet.js:14784 3.8/weather-applet.js:14785
+msgid "Scattered Snow Showers"
+msgstr ""
+
+#: 3.0/yahoo.js:476 3.8/weather-applet.js:14763 3.8/weather-applet.js:14764
+msgid "Heavy Snow"
+msgstr ""
+
+#: 3.0/yahoo.js:478
+msgid "Not Available"
+msgstr ""
+
+#: 3.0/yahoo.js:479
+msgid "Scattered Thundershowers"
+msgstr ""
+
+#: 3.8/weather-applet.js:9641
+msgid ""
+"Could not get contents of log file under path\n"
+" {logFilePath}"
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:10013
+msgid "Met Office UK"
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:10662
+msgid "OpenWeatherMap"
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:11110
+msgid "MET Norway"
+msgstr ""
+
+#: 3.8/weather-applet.js:11659
+msgid "WeatherBit"
+msgstr ""
+
+#: 3.8/weather-applet.js:12080
+msgid "Tomorrow.io"
+msgstr ""
+
+#: 3.8/weather-applet.js:12411
+msgid "US Weather"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+#: 3.8/weather-applet.js:13259
+msgid "DMI Denmark"
+msgstr ""
+
+#: 3.8/weather-applet.js:13476 3.8/weather-applet.js:13477
+msgid "Slight snow"
+msgstr ""
+
+#: 3.8/weather-applet.js:13657
+msgid "AccuWeather"
+msgstr ""
+
+#: 3.8/weather-applet.js:13953
+msgid "Deutscher Wetterdienst"
+msgstr ""
+
+#: 3.8/weather-applet.js:14853
+msgid "Pirate Weather"
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+msgid "DarkSky (key needed)"
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weatherbit (key needed)"
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+msgid "Yahoo"
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+msgid "Climacell (key needed)"
+msgstr ""
+
+#. 3.0->settings-schema.json->apiKey->description
+#. 3.8->settings-schema.json->apiKey->description
+msgid "API Key"
+msgstr ""
+
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+msgid "Celsius"
+msgstr ""
+
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+msgid "Fahrenheit"
+msgstr ""
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr ""
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr ""
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr ""
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "Beaufort"
+msgstr ""
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "hPa"
+msgstr ""
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr ""
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr ""
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr ""
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr ""
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr ""
+
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Deutscher Wetterdienst (Germany only)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Met Office UK (UK only)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "US National Weather (US only)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Pirate Weather (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Visual Crossing (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Tomorrow.io (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "AccuWeather (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weather Underground (key needed)"
+msgstr ""

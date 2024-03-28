@@ -1,0 +1,42 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-24 11:51+0100\n"
+"PO-Revision-Date: 2022-11-23 17:44+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. metadata.json->name
+msgid "Timer with notifications"
+msgstr ""
+
+#. metadata.json->description
+msgid "A timer app with visual and auditory notifications."
+msgstr ""
+
+#. 3.4->settings-schema.json->sound-volume->description
+#. 3.4->settings-schema.json->sound-volume->tooltip
+msgid "Specify the playback volume"
+msgstr ""
+
+#. 3.4->settings-schema.json->auto-loop-enable->description
+#. 3.4->settings-schema.json->auto-loop-enable->tooltip
+msgid "Restart the timer automatically when time is elapsed"
+msgstr ""
+
+#. 2.6->settings-schema.json->display-message->description
+#. 2.6->settings-schema.json->display-message->tooltip
+msgid "Message displayed in notification windows"
+msgstr ""

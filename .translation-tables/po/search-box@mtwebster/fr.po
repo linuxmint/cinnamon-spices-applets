@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-13 12:52+0100\n"
+"PO-Revision-Date: 2023-03-21 23:39+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: 3.2/applet.js:73 applet.js:73
+msgid "Type to search..."
+msgstr "Tapez pour rechercher..."
+
+#: applet.js:84
+msgid "Change default programs..."
+msgstr "Modifier les programmes par défaut..."
+
+#: applet.js:86
+msgid "Edit providers"
+msgstr "Modifier les moteurs de recherche"
+
+#. 3.2->settings-schema.json->custom-provider-label->description
+msgid "Name of custom provider"
+msgstr "Nom du moteur de recherche personnalisé"
+
+#. 3.2->settings-schema.json->custom-provider-label->tooltip
+msgid "Enter label of the custom provider to show in the panel."
+msgstr "Saisissez le nom du moteur de recherche personnalisé à afficher dans le panneau."
+
+#. 3.2->settings-schema.json->selected-provider->description
+msgid "Select provider"
+msgstr "Choisir le moteur de recherche"
+
+#. 3.2->settings-schema.json->selected-provider->tooltip
+msgid "Select a search provider"
+msgstr "Choisir un moteur de recherche"
+
+#. 3.2->settings-schema.json->selected-provider->options
+msgid "Bing"
+msgstr "Bing"
+
+#. 3.2->settings-schema.json->selected-provider->options
+msgid "Google"
+msgstr "Google"
+
+#. 3.2->settings-schema.json->selected-provider->options
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#. 3.2->settings-schema.json->selected-provider->options
+msgid "Yahoo"
+msgstr "Yahoo"
+
+#. 3.2->settings-schema.json->selected-provider->options
+msgid "Ask "
+msgstr "Ask "
+
+#. 3.2->settings-schema.json->header-provider->description
+msgid "Search Provider Settings"
+msgstr "Préférences du moteur de recherche"
+
+#. 3.2->settings-schema.json->custom-keybinding->description
+msgid "Keybinding, which opens the search box"
+msgstr "Raccourci-clavier qui ouvre la boîte de recherche"
+
+#. 3.2->settings-schema.json->custom-provider-url->description
+msgid "URL of custom provider"
+msgstr "URL du moteur de recherche personnalisé"
+
+#. 3.2->settings-schema.json->custom-provider-url->tooltip
+msgid "Enter the URL of the custom search provider"
+msgstr "Entrez l'URL du moteur de recherche personnalisé"
+
+#. 3.2->settings-schema.json->use-custom-provider->description
+msgid "Use custom provider"
+msgstr "Utiliser le moteur de recherche personnalisé"
+
+#. 3.2->settings-schema.json->use-custom-provider->tooltip
+msgid "Use your own search provider"
+msgstr "Utiliser votre propre moteur de recherche"
+
+#. 3.2->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr "Raccourci-clavier"
+
+#. 3.2->settings-schema.json->show-provider->description
+msgid "Show provider"
+msgstr "Afficher le nom du moteur de recherche"
+
+#. 3.2->settings-schema.json->show-provider->tooltip
+msgid "Show selected provider in the panel"
+msgstr "Afficher dans le panneau le nom du moteur de recherche"
+
+#. search-box@mtwebster->metadata.json->description
+msgid "Perform an Internet search, using your favorite engine"
+msgstr "Effectuez une recherche sur Internet, en utilisant votre moteur préféré"
+
+#. search-box@mtwebster->metadata.json->name
+msgid "Internet Search Box"
+msgstr "Boîte de recherche sur Internet"

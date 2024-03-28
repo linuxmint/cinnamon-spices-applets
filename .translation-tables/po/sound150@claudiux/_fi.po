@@ -1,0 +1,155 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux v2.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-15 17:59+0100\n"
+"PO-Revision-Date: 2022-11-30 10:35+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: 5.4/applet.js:192
+msgid "Mute"
+msgstr ""
+
+#: 5.4/applet.js:1422
+msgid "Easy Effects"
+msgstr ""
+
+#: 5.4/applet.js:1453
+#, javascript-format
+msgid "Are you sure you want to remove '%s'?"
+msgstr ""
+
+#: 5.4/applet.js:1940
+msgid "The 'playerctl' package is required!"
+msgstr ""
+
+#: 5.4/applet.js:1941
+msgid "Please select 'Install playerctl' in this menu"
+msgstr ""
+
+#: 5.4/applet.js:2082
+msgid "Reload this applet"
+msgstr ""
+
+#: 5.4/applet.js:2088
+msgid "Remove sound applet"
+msgstr ""
+
+#: 5.4/applet.js:2097
+msgid "Install playerctl"
+msgstr ""
+
+#. 5.4->settings-schema.json->page_behavior->title
+msgid "Behavior"
+msgstr ""
+
+#. 5.4->settings-schema.json->page_icon->title
+#. 5.4->settings-schema.json->section4->title
+msgid "Icon"
+msgstr ""
+
+#. 5.4->settings-schema.json->page_sound->title
+msgid "Sound"
+msgstr ""
+
+#. 5.4->settings-schema.json->page_shortcuts->title
+#. 5.4->settings-schema.json->section7->title
+msgid "Shortcuts"
+msgstr ""
+
+#. 5.4->settings-schema.json->section3->title
+msgid "Tooltip"
+msgstr ""
+
+#. 5.4->settings-schema.json->section6->title
+msgid "Remove incompatible applets"
+msgstr ""
+
+#. 5.4->settings-schema.json->middleShiftClickAction->description
+msgid "Action on shift+middle click"
+msgstr ""
+
+#. 5.4->settings-schema.json->tooltipShowVolume->description
+msgid "Show volume in tooltip"
+msgstr ""
+
+#. 5.4->settings-schema.json->tooltipShowPlayer->description
+msgid "Show player in tooltip"
+msgstr ""
+
+#. 5.4->settings-schema.json->tooltipShowArtistTitle->description
+msgid "Show song artist and title in tooltip"
+msgstr ""
+
+#. 5.4->settings-schema.json->showVolumeLevelNearIcon->description
+msgid "Display volume level near icon"
+msgstr ""
+
+#. 5.4->settings-schema.json->showMicMutedOnIcon->description
+msgid "Display icon indicating that the microphone is muted, if applicable"
+msgstr ""
+
+#. 5.4->settings-schema.json->magnetic25On->description
+msgid "Magnetize all multiples of 25%"
+msgstr ""
+
+#. 5.4->settings-schema.json->color101_115->description
+msgid "Icon color: 101%-115%"
+msgstr ""
+
+#. 5.4->settings-schema.json->color116_130->description
+msgid "Icon color: 116%-130%"
+msgstr ""
+
+#. 5.4->settings-schema.json->color131_150->description
+msgid "Icon color: 131%-150%"
+msgstr ""
+
+#. 5.4->settings-schema.json->resetColorsButton->description
+msgid "Set colors to default values (yellow, orange, red)"
+msgstr ""
+
+#. 5.4->settings-schema.json->alwaysCanChangeMic->description
+msgid "Always allow microphone to be reactivated"
+msgstr ""
+
+#. 5.4->settings-schema.json->alwaysCanChangeMic->tooltip
+msgid "Always show the 'Mute input' switch in the context menu."
+msgstr ""
+
+#. 5.4->settings-schema.json->redefine-volume-keybindings->description
+msgid "Redefine Volume Keyboard Shortcuts"
+msgstr ""
+
+#. 5.4->settings-schema.json->pause-on-off->description
+msgid "Pause/Play toggle"
+msgstr ""
+
+#. 5.4->settings-schema.json->volume-mute->description
+msgid "Volume Mute"
+msgstr ""
+
+#. 5.4->settings-schema.json->volume-up->description
+msgid "Volume Up"
+msgstr ""
+
+#. 5.4->settings-schema.json->volume-down->description
+msgid "Volume Down"
+msgstr ""
+
+#. 5.4->settings-schema.json->remove_soundATcinnamonDOTorg->description
+msgid "Remove from panel the sound@cinnamon.org applet"
+msgstr ""

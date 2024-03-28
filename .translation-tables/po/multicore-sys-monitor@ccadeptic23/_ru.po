@@ -1,0 +1,259 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-02-05 14:48-0500\n"
+"PO-Revision-Date: 2017-05-03 21:10+0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: po\n"
+
+#: 3.2/DataProviders.js:113 4.0/DataProviders.js:123 3.4/DataProviders.js:126
+#: 3.0/DataProviders.js:113
+msgid "------------- CPU ------------"
+msgstr ""
+
+#: 3.2/DataProviders.js:117 4.0/DataProviders.js:126 3.4/DataProviders.js:129
+#: 3.0/DataProviders.js:117
+msgid "Core"
+msgstr ""
+
+#: 3.2/DataProviders.js:163 4.0/DataProviders.js:158 3.4/DataProviders.js:161
+#: 3.0/DataProviders.js:163
+msgid "----------- Memory -----------"
+msgstr ""
+
+#: 3.2/DataProviders.js:164 3.0/DataProviders.js:164
+msgid "Usedup:"
+msgstr ""
+
+#: 3.2/DataProviders.js:165 4.0/DataProviders.js:159 3.4/DataProviders.js:162
+#: 3.0/DataProviders.js:165
+msgid "Cached:"
+msgstr ""
+
+#: 3.2/DataProviders.js:166 4.0/DataProviders.js:159 3.4/DataProviders.js:162
+#: 3.0/DataProviders.js:166
+msgid "Buffer:"
+msgstr ""
+
+#: 3.2/DataProviders.js:167 4.0/DataProviders.js:159 3.4/DataProviders.js:162
+#: 3.0/DataProviders.js:167
+msgid "Free:"
+msgstr ""
+
+#: 3.2/DataProviders.js:199 4.0/DataProviders.js:193 3.4/DataProviders.js:194
+#: 3.0/DataProviders.js:199
+msgid "------------ Swap ------------"
+msgstr ""
+
+#: 3.2/DataProviders.js:305 4.0/DataProviders.js:287 3.4/DataProviders.js:289
+#: 3.0/DataProviders.js:305
+msgid "---------- Networks ----------"
+msgstr ""
+
+#: 3.2/DataProviders.js:308 4.0/DataProviders.js:298 3.4/DataProviders.js:300
+#: 3.0/DataProviders.js:308
+msgid "Down:"
+msgstr ""
+
+#: 3.2/DataProviders.js:308 3.2/DataProviders.js:309 3.0/DataProviders.js:308
+#: 3.0/DataProviders.js:309
+msgid "(KiB/s)"
+msgstr ""
+
+#: 3.2/DataProviders.js:309 4.0/DataProviders.js:299 3.4/DataProviders.js:301
+#: 3.0/DataProviders.js:309
+msgid "Up:"
+msgstr ""
+
+#: 3.2/DataProviders.js:408 4.0/DataProviders.js:376 3.4/DataProviders.js:378
+#: 3.0/DataProviders.js:408
+msgid "------------ Disks -----------"
+msgstr ""
+
+#: 3.2/DataProviders.js:411 4.0/DataProviders.js:384 3.4/DataProviders.js:386
+#: 3.0/DataProviders.js:411
+msgid "Read:"
+msgstr ""
+
+#: 3.2/DataProviders.js:411 3.2/DataProviders.js:412 3.0/DataProviders.js:411
+#: 3.0/DataProviders.js:412
+msgid "(MiB/s)"
+msgstr ""
+
+#: 3.2/DataProviders.js:412 4.0/DataProviders.js:385 3.4/DataProviders.js:387
+#: 3.0/DataProviders.js:412
+msgid "Write:"
+msgstr ""
+
+#: 3.2/ErrorApplet.js:28 3.2/ErrorApplet.js:34 3.0/ErrorApplet.js:28
+#: 3.0/ErrorApplet.js:34
+msgid "Multi-Core System Monitor Error."
+msgstr ""
+
+#: 3.2/applet.js:339 3.0/applet.js:328
+msgid "Reload this applet"
+msgstr ""
+
+#: 3.2/prefs.js:540 3.0/prefs.js:530
+msgid "Error while saving file:"
+msgstr ""
+
+#: 4.0/DataProviders.js:47 3.4/DataProviders.js:49
+msgid "/s"
+msgstr ""
+
+#: 4.0/DataProviders.js:159 3.4/DataProviders.js:162
+msgid "Used:"
+msgstr ""
+
+#: 4.0/applet.js:64 3.4/applet.js:60
+msgid "Dependency missing"
+msgstr ""
+
+#: 4.0/applet.js:66
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"to use "
+msgstr ""
+
+#: 4.0/applet.js:277
+msgid "Refresh graphs"
+msgstr ""
+
+#: 4.0/prefs.js:335
+msgid "00-20"
+msgstr ""
+
+#: 4.0/prefs.js:335
+msgid "20-40"
+msgstr ""
+
+#: 4.0/prefs.js:335
+msgid "40-60"
+msgstr ""
+
+#: 4.0/prefs.js:335
+msgid "60-80"
+msgstr ""
+
+#: 4.0/prefs.js:335
+msgid "80-100"
+msgstr ""
+
+#: 3.4/applet.js:62
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"to use "
+msgstr ""
+
+#: 3.2/prefsui.glade:49 4.0/prefsui.glade:56 3.4/prefsui.glade:49
+#: 3.0/prefsui.glade:49
+msgid "Multi-Core System Monitor Preferences"
+msgstr ""
+
+#: 3.2/prefsui.glade:245 4.0/prefsui.glade:212 3.4/prefsui.glade:177
+msgid "Label Color"
+msgstr ""
+
+#: 3.2/prefsui.glade:658 4.0/prefsui.glade:733 3.4/prefsui.glade:587
+#: 3.0/prefsui.glade:606
+msgid "Usedup"
+msgstr ""
+
+#: 3.2/prefsui.glade:697 4.0/prefsui.glade:771 3.4/prefsui.glade:625
+#: 3.0/prefsui.glade:645
+msgid "Cached"
+msgstr ""
+
+#: 3.2/prefsui.glade:736 4.0/prefsui.glade:809 3.4/prefsui.glade:663
+#: 3.0/prefsui.glade:684
+msgid "Buffer"
+msgstr ""
+
+#: 3.2/prefsui.glade:775 4.0/prefsui.glade:847 3.4/prefsui.glade:701
+#: 3.0/prefsui.glade:723
+msgid "Free"
+msgstr ""
+
+#: 3.2/prefsui.glade:1644 3.4/prefsui.glade:1594 3.0/prefsui.glade:1592
+msgid ""
+"Auto Scaling:\n"
+"\tThis will scale the line graph by the largest reading within the\n"
+"\tdisplayed area. Once the largest reading is no longer displayed\n"
+"\tthe next largest becomes the new value by which the readings\n"
+"\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"\tHowever, it also means that if there is a large reading small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tthen slightly larger readings may appear larger than they should.\n"
+"\tIf not enabled the largest value used will be the largest reading since\n"
+"\tcinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"\tThis transforms the readings so that they are displayed using a\n"
+"\tlogarithmic scale. If you are not familiar basically, it reduces the\n"
+"\tlarge values so that they dont dominate the smaller readings."
+msgstr ""
+
+#: 4.0/prefsui.glade:168
+msgid "Curves thickness"
+msgstr ""
+
+#: 4.0/prefsui.glade:433
+msgid "Color by activity level"
+msgstr ""
+
+#: 4.0/prefsui.glade:460
+msgid "Use automatic colors"
+msgstr ""
+
+#: 4.0/prefsui.glade:508
+msgid "by CPU:"
+msgstr ""
+
+#: 4.0/prefsui.glade:538
+msgid "by activity level (in %):"
+msgstr ""
+
+#: 4.0/prefsui.glade:1740
+msgid ""
+"Auto Scaling:\n"
+"    This will scale the line graph by the largest reading within the\n"
+"    displayed area. Once the largest reading is no longer displayed\n"
+"    the next largest becomes the new value by which the readings\n"
+"    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"    However, it also means that if there is a large reading small readings\n"
+"    may become indistinguishable from 0. And if there are only small "
+"readings\n"
+"    then slightly larger readings may appear larger than they should.\n"
+"    If not enabled the largest value used will be the largest reading since\n"
+"    cinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"    This transforms the readings so that they are displayed using a\n"
+"    logarithmic scale. If you are not familiar basically, it reduces the\n"
+"    large values so that they dont dominate the smaller readings."
+msgstr ""

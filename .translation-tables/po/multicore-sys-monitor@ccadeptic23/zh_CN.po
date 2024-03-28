@@ -1,0 +1,448 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 14:48-0500\n"
+"PO-Revision-Date: 2023-05-30 21:22+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.3.1\n"
+
+#: 3.2/DataProviders.js:107 3.2/prefs.js:187 4.0/DataProviders.js:55
+#: 4.0/prefs.js:303 3.4/DataProviders.js:58 3.4/prefs.js:195
+#: 3.0/DataProviders.js:107 3.0/prefs.js:183 3.2/prefsui.glade:504
+#: 4.0/prefsui.glade:580 3.4/prefsui.glade:434 3.0/prefsui.glade:452
+msgid "CPU"
+msgstr "CPU"
+
+#: 3.2/DataProviders.js:113 4.0/DataProviders.js:123 3.4/DataProviders.js:126
+#: 3.0/DataProviders.js:113
+msgid "------------- CPU ------------"
+msgstr "------------- CPU ------------"
+
+#: 3.2/DataProviders.js:117 4.0/DataProviders.js:126 3.4/DataProviders.js:129
+#: 3.0/DataProviders.js:117
+msgid "Core"
+msgstr "核心"
+
+#: 3.2/DataProviders.js:157 4.0/DataProviders.js:138 3.4/DataProviders.js:141
+#: 3.0/DataProviders.js:157
+msgid "MEM"
+msgstr "内存"
+
+#: 3.2/DataProviders.js:163 4.0/DataProviders.js:158 3.4/DataProviders.js:161
+#: 3.0/DataProviders.js:163
+msgid "----------- Memory -----------"
+msgstr "------------- 内存 ------------"
+
+#: 3.2/DataProviders.js:164 3.0/DataProviders.js:164
+msgid "Usedup:"
+msgstr "已使用："
+
+#: 3.2/DataProviders.js:165 4.0/DataProviders.js:159 3.4/DataProviders.js:162
+#: 3.0/DataProviders.js:165
+msgid "Cached:"
+msgstr "已缓存："
+
+#: 3.2/DataProviders.js:166 4.0/DataProviders.js:159 3.4/DataProviders.js:162
+#: 3.0/DataProviders.js:166
+msgid "Buffer:"
+msgstr "缓冲："
+
+#: 3.2/DataProviders.js:167 4.0/DataProviders.js:159 3.4/DataProviders.js:162
+#: 3.0/DataProviders.js:167
+msgid "Free:"
+msgstr "可用："
+
+#: 3.2/DataProviders.js:194 4.0/DataProviders.js:173 3.4/DataProviders.js:176
+#: 3.0/DataProviders.js:194
+msgid "SWAP"
+msgstr "交换分区"
+
+#: 3.2/DataProviders.js:199 4.0/DataProviders.js:193 3.4/DataProviders.js:194
+#: 3.0/DataProviders.js:199
+msgid "------------ Swap ------------"
+msgstr "----------- 交换分区 ----------"
+
+#: 3.2/DataProviders.js:200 4.0/DataProviders.js:194 3.4/DataProviders.js:195
+#: 3.0/DataProviders.js:200 3.2/prefsui.glade:837 4.0/prefsui.glade:907
+#: 3.4/prefsui.glade:761 3.0/prefsui.glade:785
+msgid "Swap"
+msgstr "交换分区"
+
+#: 3.2/DataProviders.js:264 4.0/DataProviders.js:204 3.4/DataProviders.js:205
+#: 3.0/DataProviders.js:264
+msgid "NET"
+msgstr "网络"
+
+#: 3.2/DataProviders.js:305 4.0/DataProviders.js:287 3.4/DataProviders.js:289
+#: 3.0/DataProviders.js:305
+msgid "---------- Networks ----------"
+msgstr "------------- 网络 ------------"
+
+#: 3.2/DataProviders.js:308 4.0/DataProviders.js:298 3.4/DataProviders.js:300
+#: 3.0/DataProviders.js:308
+msgid "Down:"
+msgstr "下行："
+
+#: 3.2/DataProviders.js:308 3.2/DataProviders.js:309 3.0/DataProviders.js:308
+#: 3.0/DataProviders.js:309
+msgid "(KiB/s)"
+msgstr "(KiB/s)"
+
+#: 3.2/DataProviders.js:309 4.0/DataProviders.js:299 3.4/DataProviders.js:301
+#: 3.0/DataProviders.js:309
+msgid "Up:"
+msgstr "上行："
+
+#: 3.2/DataProviders.js:382 4.0/DataProviders.js:315 3.4/DataProviders.js:317
+#: 3.0/DataProviders.js:382
+msgid "DISK"
+msgstr "磁盘"
+
+#: 3.2/DataProviders.js:408 4.0/DataProviders.js:376 3.4/DataProviders.js:378
+#: 3.0/DataProviders.js:408
+msgid "------------ Disks -----------"
+msgstr "------------- 磁盘 ------------"
+
+#: 3.2/DataProviders.js:411 4.0/DataProviders.js:384 3.4/DataProviders.js:386
+#: 3.0/DataProviders.js:411
+msgid "Read:"
+msgstr "读取："
+
+#: 3.2/DataProviders.js:411 3.2/DataProviders.js:412 3.0/DataProviders.js:411
+#: 3.0/DataProviders.js:412
+msgid "(MiB/s)"
+msgstr "(MiB/s)"
+
+#: 3.2/DataProviders.js:412 4.0/DataProviders.js:385 3.4/DataProviders.js:387
+#: 3.0/DataProviders.js:412
+msgid "Write:"
+msgstr "写入："
+
+#: 3.2/ErrorApplet.js:28 3.2/ErrorApplet.js:34 3.0/ErrorApplet.js:28
+#: 3.0/ErrorApplet.js:34
+msgid "Multi-Core System Monitor Error."
+msgstr "多核系统监视器错误。"
+
+#: 3.2/applet.js:139 4.0/applet.js:275 3.4/applet.js:264 3.0/applet.js:141
+msgid "Preferences"
+msgstr "首选项"
+
+#: 3.2/applet.js:334 3.0/applet.js:323
+msgid "Please install \"gir1.2-gtop-2.0\" package."
+msgstr "请安装 “gir1.2-gtop-2.0” 软件包。"
+
+#: 3.2/applet.js:339 3.0/applet.js:328
+msgid "Reload this applet"
+msgstr "重新加载这个小程序"
+
+#: 3.2/prefs.js:283 3.2/prefs.js:398 4.0/prefs.js:483 4.0/prefs.js:619
+#: 3.4/prefs.js:327 3.4/prefs.js:463 3.0/prefs.js:279 3.0/prefs.js:393
+#: 3.2/prefsui.glade:356 3.2/prefsui.glade:528 3.2/prefsui.glade:908
+#: 3.2/prefsui.glade:1230 4.0/prefsui.glade:321 4.0/prefsui.glade:603
+#: 4.0/prefsui.glade:977 4.0/prefsui.glade:1312 3.4/prefsui.glade:286
+#: 3.4/prefsui.glade:457 3.4/prefsui.glade:831 3.4/prefsui.glade:1166
+#: 3.0/prefsui.glade:304 3.0/prefsui.glade:476 3.0/prefsui.glade:856
+#: 3.0/prefsui.glade:1178
+msgid "Enable"
+msgstr "启用"
+
+#: 3.2/prefs.js:294 4.0/prefs.js:494 3.4/prefs.js:338 3.0/prefs.js:290
+msgid "Down"
+msgstr "下行"
+
+#: 3.2/prefs.js:302 4.0/prefs.js:502 3.4/prefs.js:346 3.0/prefs.js:298
+msgid "Up"
+msgstr "上行"
+
+#: 3.2/prefs.js:414 4.0/prefs.js:635 3.4/prefs.js:479 3.0/prefs.js:406
+msgid "Read"
+msgstr "读取"
+
+#: 3.2/prefs.js:423 4.0/prefs.js:644 3.4/prefs.js:488 3.0/prefs.js:414
+msgid "Write"
+msgstr "写入"
+
+#: 3.2/prefs.js:540 3.0/prefs.js:530
+msgid "Error while saving file:"
+msgstr "保存文件时出错："
+
+#: 4.0/DataProviders.js:47 3.4/DataProviders.js:49
+msgid "/s"
+msgstr "/s"
+
+#: 4.0/DataProviders.js:159 3.4/DataProviders.js:162
+msgid "Used:"
+msgstr "已使用："
+
+#: 4.0/applet.js:64 3.4/applet.js:60
+msgid "Dependency missing"
+msgstr "依赖缺失"
+
+#: 4.0/applet.js:66
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"to use "
+msgstr ""
+"请安装 GTop 软件包\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"\topenSUSE: libgtop-devel\n"
+"来使用 "
+
+#: 4.0/applet.js:277
+msgid "Refresh graphs"
+msgstr "刷新图表"
+
+#: 4.0/prefs.js:335
+msgid "00-20"
+msgstr "00-20"
+
+#: 4.0/prefs.js:335
+msgid "20-40"
+msgstr "20-40"
+
+#: 4.0/prefs.js:335
+msgid "40-60"
+msgstr "40-60"
+
+#: 4.0/prefs.js:335
+msgid "60-80"
+msgstr "60-80"
+
+#: 4.0/prefs.js:335
+msgid "80-100"
+msgstr "80-100"
+
+#: 3.4/applet.js:62
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"to use "
+msgstr ""
+"请安装 GTop 软件包\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"来使用 "
+
+#. metadata.json->name
+msgid "Multi-Core System Monitor"
+msgstr "多核心系统监视器"
+
+#. metadata.json->description
+msgid "Displays in realtime the cpu usage for each core/cpu and overall memory usage."
+msgstr "实时显示每个核心/cpu的cpu使用率和总体内存使用情况。"
+
+#: 3.2/prefsui.glade:49 4.0/prefsui.glade:56 3.4/prefsui.glade:49
+#: 3.0/prefsui.glade:49
+msgid "Multi-Core System Monitor Preferences"
+msgstr "多核系统监视器首选项"
+
+#: 3.2/prefsui.glade:81 4.0/prefsui.glade:90 3.4/prefsui.glade:83
+#: 3.0/prefsui.glade:81
+msgid "Labels"
+msgstr "标签"
+
+#: 3.2/prefsui.glade:132 4.0/prefsui.glade:140 3.4/prefsui.glade:133
+#: 3.0/prefsui.glade:132
+msgid "Refresh Rate (ms)"
+msgstr "刷新率 (毫秒)"
+
+#: 3.2/prefsui.glade:189 3.0/prefsui.glade:189
+msgid "Height"
+msgstr "高度"
+
+#: 3.2/prefsui.glade:245 4.0/prefsui.glade:212 3.4/prefsui.glade:177
+msgid "Label Color"
+msgstr "标签颜色"
+
+#: 3.2/prefsui.glade:297 4.0/prefsui.glade:263 3.4/prefsui.glade:228
+#: 3.0/prefsui.glade:245
+msgid "Background Color"
+msgstr "背景颜色"
+
+#: 3.2/prefsui.glade:333 4.0/prefsui.glade:299 3.4/prefsui.glade:264
+#: 3.0/prefsui.glade:281
+msgid "General"
+msgstr "常规"
+
+#: 3.2/prefsui.glade:412 3.2/prefsui.glade:585 3.2/prefsui.glade:964
+#: 3.2/prefsui.glade:1297 4.0/prefsui.glade:376 4.0/prefsui.glade:659
+#: 4.0/prefsui.glade:1032 4.0/prefsui.glade:1378 3.4/prefsui.glade:341
+#: 3.4/prefsui.glade:513 3.4/prefsui.glade:886 3.4/prefsui.glade:1232
+#: 3.0/prefsui.glade:360 3.0/prefsui.glade:533 3.0/prefsui.glade:912
+#: 3.0/prefsui.glade:1245
+msgid "Width"
+msgstr "宽度"
+
+#: 3.2/prefsui.glade:463 3.2/prefsui.glade:636 4.0/prefsui.glade:494
+#: 4.0/prefsui.glade:710 3.4/prefsui.glade:392 3.4/prefsui.glade:564
+#: 3.0/prefsui.glade:411 3.0/prefsui.glade:584
+msgid "Colors"
+msgstr "颜色"
+
+#: 3.2/prefsui.glade:658 4.0/prefsui.glade:733 3.4/prefsui.glade:587
+#: 3.0/prefsui.glade:606
+msgid "Usedup"
+msgstr "已使用"
+
+#: 3.2/prefsui.glade:697 4.0/prefsui.glade:771 3.4/prefsui.glade:625
+#: 3.0/prefsui.glade:645
+msgid "Cached"
+msgstr "已缓存"
+
+#: 3.2/prefsui.glade:736 4.0/prefsui.glade:809 3.4/prefsui.glade:663
+#: 3.0/prefsui.glade:684
+msgid "Buffer"
+msgstr "缓冲"
+
+#: 3.2/prefsui.glade:775 4.0/prefsui.glade:847 3.4/prefsui.glade:701
+#: 3.0/prefsui.glade:723
+msgid "Free"
+msgstr "可用"
+
+#: 3.2/prefsui.glade:884 4.0/prefsui.glade:954 3.4/prefsui.glade:808
+#: 3.0/prefsui.glade:832
+msgid "Memory"
+msgstr "内存"
+
+#: 3.2/prefsui.glade:1024 3.2/prefsui.glade:1357 4.0/prefsui.glade:1093
+#: 4.0/prefsui.glade:1439 3.4/prefsui.glade:947 3.4/prefsui.glade:1293
+#: 3.0/prefsui.glade:972 3.0/prefsui.glade:1305
+msgid "Scaling"
+msgstr "缩放"
+
+#: 3.2/prefsui.glade:1071 3.2/prefsui.glade:1404 4.0/prefsui.glade:1139
+#: 4.0/prefsui.glade:1485 3.4/prefsui.glade:993 3.4/prefsui.glade:1339
+#: 3.0/prefsui.glade:1019 3.0/prefsui.glade:1352
+msgid "Auto Scale"
+msgstr "自动缩放"
+
+#: 3.2/prefsui.glade:1110 3.2/prefsui.glade:1443 4.0/prefsui.glade:1177
+#: 4.0/prefsui.glade:1523 3.4/prefsui.glade:1031 3.4/prefsui.glade:1377
+#: 3.0/prefsui.glade:1058 3.0/prefsui.glade:1391
+msgid "Logarithmic"
+msgstr "对数"
+
+#: 3.2/prefsui.glade:1162 3.2/prefsui.glade:1495 4.0/prefsui.glade:1228
+#: 4.0/prefsui.glade:1574 3.4/prefsui.glade:1082 3.4/prefsui.glade:1428
+#: 3.0/prefsui.glade:1110 3.0/prefsui.glade:1443
+msgid "Devices"
+msgstr "设备"
+
+#: 3.2/prefsui.glade:1206 4.0/prefsui.glade:1289 3.4/prefsui.glade:1143
+#: 3.0/prefsui.glade:1154
+msgid "Network"
+msgstr "网络"
+
+#: 3.2/prefsui.glade:1540 4.0/prefsui.glade:1635 3.4/prefsui.glade:1489
+#: 3.0/prefsui.glade:1488
+msgid "Disk IO"
+msgstr "磁盘 IO"
+
+#: 3.2/prefsui.glade:1602 4.0/prefsui.glade:1695 3.4/prefsui.glade:1549
+#: 3.0/prefsui.glade:1550
+msgid "Scaling Description"
+msgstr "缩放描述"
+
+#: 3.2/prefsui.glade:1614 4.0/prefsui.glade:1710 3.4/prefsui.glade:1564
+#: 3.0/prefsui.glade:1562
+msgid "Close"
+msgstr "关闭"
+
+#: 3.2/prefsui.glade:1644 3.4/prefsui.glade:1594 3.0/prefsui.glade:1592
+msgid ""
+"Auto Scaling:\n"
+"\tThis will scale the line graph by the largest reading within the\n"
+"\tdisplayed area. Once the largest reading is no longer displayed\n"
+"\tthe next largest becomes the new value by which the readings\n"
+"\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"\tHowever, it also means that if there is a large reading small readings\n"
+"\tmay become indistinguishable from 0. And if there are only small readings\n"
+"\tthen slightly larger readings may appear larger than they should.\n"
+"\tIf not enabled the largest value used will be the largest reading since\n"
+"\tcinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"\tThis transforms the readings so that they are displayed using a\n"
+"\tlogarithmic scale. If you are not familiar basically, it reduces the\n"
+"\tlarge values so that they dont dominate the smaller readings."
+msgstr ""
+"自动缩放：\n"
+"\t这将以显示区域内的最大读数来缩放折线图，一旦最大读数不再显示，\n"
+"\t下一个最大读数将成为读数缩放的新值，以便让图表缩放以显示细节。\n"
+"\t然而，这也意味着如果最大读数很大，小读数可能变得与 0 无法区分，\n"
+"\t而且如果只有较小的读数，则稍大的读数可能会看起来比实际值大。\n"
+"\t如果不启用，图表的最大值将为 Cinnamon 启动以来的最大读数。\n"
+"\n"
+"对数缩放：\n"
+"\t这将转换读数，使它们用对数尺度来显示。\n"
+"\t如果您对此不熟悉，简单来说，它可以减少大数值，使小数值更容易分辨。"
+
+#: 4.0/prefsui.glade:168
+msgid "Curves thickness"
+msgstr "曲线厚度"
+
+#: 4.0/prefsui.glade:433
+msgid "Color by activity level"
+msgstr "按活动水平着色"
+
+#: 4.0/prefsui.glade:460
+msgid "Use automatic colors"
+msgstr "使用自动颜色"
+
+#: 4.0/prefsui.glade:508
+msgid "by CPU:"
+msgstr "按 CPU："
+
+#: 4.0/prefsui.glade:538
+msgid "by activity level (in %):"
+msgstr "按活动水平 (%)："
+
+#: 4.0/prefsui.glade:1740
+msgid ""
+"Auto Scaling:\n"
+"    This will scale the line graph by the largest reading within the\n"
+"    displayed area. Once the largest reading is no longer displayed\n"
+"    the next largest becomes the new value by which the readings\n"
+"    are scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+"    However, it also means that if there is a large reading small readings\n"
+"    may become indistinguishable from 0. And if there are only small readings\n"
+"    then slightly larger readings may appear larger than they should.\n"
+"    If not enabled the largest value used will be the largest reading since\n"
+"    cinnamon was started.\n"
+"\n"
+"Logarithmic Scaling:\n"
+"    This transforms the readings so that they are displayed using a\n"
+"    logarithmic scale. If you are not familiar basically, it reduces the\n"
+"    large values so that they dont dominate the smaller readings."
+msgstr ""
+"自动缩放：\n"
+"    这将以显示区域内的最大读数来缩放折线图，一旦最大读数不再显示，\n"
+"    下一个最大读数将成为读数缩放的新值，以便让图表缩放以显示细节。\n"
+"    然而，这也意味着如果最大读数很大，小读数可能变得与 0 无法区分，\n"
+"    而且如果只有较小的读数，则稍大的读数可能会看起来比实际值大。\n"
+"    如果不启用，图表的最大值将为 Cinnamon 启动以来的最大读数。\n"
+"\n"
+"对数缩放：\n"
+"    这将转换读数，使它们用对数尺度来显示。\n"
+"    如果您对此不熟悉，简单来说，它可以减少大数值，使小数值更容易分辨。"

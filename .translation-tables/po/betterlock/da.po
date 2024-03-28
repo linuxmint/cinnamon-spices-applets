@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-21 20:09+0200\n"
+"PO-Revision-Date: 2018-11-15 19:11+0200\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Scr Lock"
+msgstr "Scr Lock"
+
+msgid "Num Lock"
+msgstr "Num Lock"
+
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+msgid "Lock Keys"
+msgstr "Lock-taster"
+
+msgid "Scr lock on"
+msgstr "Scr lock on til"
+
+msgid "Scr lock off"
+msgstr "Scr lock fra"
+
+msgid "Num lock on"
+msgstr "Num lock til"
+
+msgid "Num lock off"
+msgstr "Num lock fra"
+
+msgid "Caps lock on"
+msgstr "Caps lock til"
+
+msgid "Caps lock off"
+msgstr "Caps lock fra"
+
+msgid "Show notifications"
+msgstr "Vis meddelelser"
+
+msgid "Show caps lock indicator"
+msgstr "Vis indikator for caps lock"
+
+msgid "Show num lock indicator"
+msgstr "Vis indikator for num lock"
+
+msgid "Show scr lock indicator"
+msgstr "Vis indikator for scr lock"
+
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification when "
+"these change."
+msgstr ""
+"Viser, om caps lock/num lock/scr lock er slået til, og viser en meddelelse, når "
+"disse ændres."
+
+msgid "Lock keys indicator with notifications"
+msgstr "Indikator for låsenøgler med meddelelser"

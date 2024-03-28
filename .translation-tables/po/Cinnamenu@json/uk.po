@@ -1,0 +1,1045 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-10 16:10+0100\n"
+"PO-Revision-Date: 2022-05-31 17:40+0100\n"
+"Last-Translator: Google translate\n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+msgid "Initializing"
+msgstr "Ініціалізація"
+
+msgid "Find files..."
+msgstr "Знайти файли..."
+
+msgid "Please wait..."
+msgstr "Будь ласка, зачекайте..."
+
+#, fuzzy
+msgid "Applications"
+msgstr "Усі програми"
+
+msgid "Documents"
+msgstr ""
+
+msgid "Videos"
+msgstr ""
+
+msgid "Images"
+msgstr ""
+
+msgid "Music"
+msgstr ""
+
+msgid "No recent Items"
+msgstr "Немає останніх елементів"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Click to copy"
+msgstr "Натисніть, щоб скопіювати"
+
+#, fuzzy
+msgid "Applications and files"
+msgstr "Режим перегляду програм"
+
+#, fuzzy
+msgid "Other search results"
+msgstr "Показувати смайли в результатах пошуку"
+
+#, fuzzy
+msgid "Browser bookmarks"
+msgstr "Показати веб-закладки"
+
+#, fuzzy
+msgid "Browser history"
+msgstr "Перегляд мережі"
+
+msgid "Emoji"
+msgstr ""
+
+msgid "Clear List"
+msgstr "Чіткий перелік"
+
+msgid "Trash"
+msgstr "покидьки"
+
+msgid "Computer"
+msgstr "комп'ютер"
+
+msgid "Error while opening file:"
+msgstr "Помилка під час відкриття файлу:"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Забагато записів – показуються лише перші 1000 записів"
+
+#. 5.8
+#. 4.0
+msgid "All applications"
+msgstr "Усі програми"
+
+msgid "Favorites"
+msgstr "Вибране"
+
+#. 5.8
+#. 4.0
+msgid "Places"
+msgstr "Місця"
+
+#. 5.8
+#. 4.0
+msgid "Recent"
+msgstr "Останні"
+
+#. 5.8
+#. 4.0
+msgid "Favorite apps"
+msgstr "Улюблені програми"
+
+msgid "light skin tone"
+msgstr "світлий тон шкіри"
+
+msgid "medium-light skin tone"
+msgstr "середньо-світлий тон шкіри"
+
+msgid "medium skin tone"
+msgstr "середній тон шкіри"
+
+msgid "medium-dark skin tone"
+msgstr "середньо-темний тон шкіри"
+
+msgid "dark skin tone"
+msgstr "темний тон шкіри"
+
+#, fuzzy
+msgid "Remove category"
+msgstr "Скинути порядок категорій"
+
+#. 3.2
+msgid "Reset category order"
+msgstr "Скинути порядок категорій"
+
+msgid "List settings apps separately"
+msgstr ""
+
+msgid "Single list style"
+msgstr ""
+
+#, fuzzy
+msgid "Hide hidden files"
+msgstr "Показати приховані файли"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files"
+msgstr "Показати приховані файли"
+
+msgid "Run with NVIDIA GPU"
+msgstr "Запуск із графічним процесором NVIDIA"
+
+msgid "Add to panel"
+msgstr "Додати на панель"
+
+msgid "Add to desktop"
+msgstr "Додати на робочий стіл"
+
+msgid "Remove from favorites"
+msgstr "Видалити з вибраного"
+
+msgid "Add to favorites"
+msgstr "Додати в обране"
+
+msgid "Uninstall"
+msgstr "Видалити"
+
+msgid "App Info"
+msgstr ""
+
+msgid "This file is no longer available"
+msgstr "Цей файл більше не доступний"
+
+msgid "Open with"
+msgstr "Відкрити за допомогою"
+
+msgid "Other application..."
+msgstr "Інша програма..."
+
+#, fuzzy
+msgid "Add folder as category"
+msgstr "Показати категорію улюблених програм"
+
+msgid "Open containing folder"
+msgstr "Відкрити папку, що містить"
+
+msgid "Move to trash"
+msgstr "Перемістити в кошик"
+
+msgid "Error while moving file to trash:"
+msgstr "Помилка під час переміщення файлу в кошик:"
+
+msgid "Smileys & Emotion"
+msgstr ""
+
+msgid "People & Body"
+msgstr ""
+
+msgid "Animals & Nature"
+msgstr ""
+
+msgid "Food & Drink"
+msgstr ""
+
+msgid "Travel & Places"
+msgstr ""
+
+msgid "Activities"
+msgstr ""
+
+msgid "Objects"
+msgstr ""
+
+msgid "Symbols"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
+msgid "Quit"
+msgstr "Вийти"
+
+msgid "Shutdown the computer"
+msgstr "Вимкніть комп’ютер"
+
+msgid "Logout"
+msgstr "Вийти"
+
+msgid "Leave the session"
+msgstr "Залиште сесію"
+
+msgid "Lock screen"
+msgstr "Екран блокування"
+
+msgid "Lock the screen"
+msgstr "Заблокувати екран"
+
+msgid "Type to search..."
+msgstr "Введіть для пошуку..."
+
+msgid "No description available"
+msgstr "Немає опису"
+
+msgid "Recent files"
+msgstr "Останні файли"
+
+msgid "Bookmarks"
+msgstr "Закладки"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Для закладок Firefox і Midori потрібен пакет gir1.2-gda-5.0."
+
+msgid "No recent files"
+msgstr "Немає останніх файлів"
+
+msgid "Account details"
+msgstr "Дані облікового запису"
+
+msgid "Grid View"
+msgstr "Перегляд сітки"
+
+msgid "List View"
+msgstr "Перегляд списку"
+
+msgid "Switch to grid view"
+msgstr "Перейти до перегляду сітки"
+
+msgid "Switch to list view"
+msgstr "Перейти до перегляду списку"
+
+msgid "Home"
+msgstr "Додому"
+
+msgid "Browse network"
+msgstr "Перегляд мережі"
+
+msgid "Open"
+msgstr "ВІДЧИНЕНО"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Search"
+msgstr "Пошук"
+
+msgid "Start in"
+msgstr "Почніть в"
+
+msgid "Select a folder"
+msgstr "Виберіть папку"
+
+msgid "Follow symlinks"
+msgstr "Дотримуйтесь символічних посилань"
+
+msgid "Search hidden"
+msgstr "Пошук прихований"
+
+msgid "Use regular expressions"
+msgstr "Використовуйте регулярні вирази"
+
+msgid "Stop"
+msgstr "СТОП"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Path"
+msgstr "Шлях"
+
+msgid "Searching..."
+msgstr "Пошук..."
+
+msgid "Search Stopped"
+msgstr "Пошук зупинено"
+
+msgid "Searching: "
+msgstr "Пошук: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Помилка: недостатньо дозволів для читання папки "
+
+msgid "Search Completed"
+msgstr "Пошук завершено"
+
+msgid "Skipping"
+msgstr "Пропуск"
+
+msgid " - directory already searched"
+msgstr " - каталог уже шукали"
+
+msgid ""
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
+msgstr ""
+"Цей пункт меню не пов’язаний з жодним пакетом. Ви все одно хочете видалити "
+"його з меню?"
+
+msgid "The following packages will be removed:"
+msgstr "Наступні пакети будуть видалені:"
+
+msgid "Packages to be removed"
+msgstr "Пакети для видалення"
+
+#, python-format
+msgid "Cannot remove package %s as it is required by other packages."
+msgstr "Неможливо видалити пакет %s, оскільки цього вимагають інші пакунки."
+
+#, python-format
+msgid "Package %s is a dependency of the following packages:"
+msgstr "Пакет %s є залежністю від наступних пакетів:"
+
+#. metadata.json
+#. 3.2
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json
+msgid ""
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
+msgstr ""
+"Гнучке меню з параметрами макета сітки або списку, браузером файлів і "
+"пошуком смайлів."
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Layout"
+msgstr "Макет"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Behavior"
+msgstr "Поведінка"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Appearance"
+msgstr "Зовнішній вигляд"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Tips"
+msgstr ""
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Content"
+msgstr "Зміст"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel"
+msgstr "Панель"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Menu"
+msgstr "Меню"
+
+#. 5.8
+#. 4.0
+msgid "Applications view mode"
+msgstr "Режим перегляду програм"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "List"
+msgstr "Список"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Grid"
+msgstr "Сітка"
+
+#. 5.8
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "Перегляд програм у вигляді списку або сітки"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show sidebar"
+msgstr "Показати вибране на бічній панелі"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show the sidebar in the menu"
+msgstr "Показати категорію домашньої папки в меню"
+
+#. 5.8
+#. 4.0
+msgid "Sidebar location"
+msgstr "Розташування бічної панелі"
+
+#. 5.8
+#. 4.0
+msgid "Top"
+msgstr "Верхній"
+
+#. 5.8
+#. 4.0
+msgid "Bottom"
+msgstr "Нижня частина"
+
+#. 5.8
+#. 4.0
+msgid "Left"
+msgstr "Ліворуч"
+
+#. 5.8
+#. 4.0
+msgid "Right"
+msgstr "направо"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show the sidebar"
+msgstr "Виберіть, де відображати бічну панель"
+
+#. 5.8
+#. 4.0
+msgid "Show favorites on sidebar"
+msgstr "Показати вибране на бічній панелі"
+
+#. 5.8
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+#. 4.0
+msgid "None"
+msgstr "Жодного"
+
+#. 5.8
+#. 4.0
+msgid "Apps only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Files only"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Apps and files"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps and file icons on the sidebar"
+msgstr "Покажіть свої улюблені програми та значки файлів на бічній панелі"
+
+#. 5.8
+#. 4.0
+msgid "Application description placement"
+msgstr "Розміщення опису програми"
+
+#. 5.8
+#. 4.0
+msgid "Tooltips"
+msgstr "Підказки"
+
+#. 5.8
+#. 4.0
+msgid "Under titles"
+msgstr "Під заголовками"
+
+#. 5.8
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "Виберіть, де показувати описи програми"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show categories"
+msgstr "Показати значки категорій"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show list of application categories"
+msgstr "Показати значки програм"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places"
+msgstr "Показати закладки та місця"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "Показати закладки та категорію місць у меню"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items"
+msgstr "Показати останні елементи"
+
+#. 5.8
+#. 4.0
+msgid "Show recent items category in the menu"
+msgstr "Показати категорію останніх елементів у меню"
+
+#. 5.8
+#. 4.0
+msgid "Show favorite apps category"
+msgstr "Показати категорію улюблених програм"
+
+#. 5.8
+#. 4.0
+msgid "Show your favorite apps category in the menu"
+msgstr "Покажіть у меню категорію улюблених програм"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder"
+msgstr "Показати домашню папку"
+
+#. 5.8
+#. 4.0
+msgid "Show home folder category in the menu"
+msgstr "Показати категорію домашньої папки в меню"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category"
+msgstr "Показати категорію улюблених програм"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Show emoji category in the menu"
+msgstr "Показати категорію домашньої папки в меню"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu editor"
+msgstr "Відкрийте редактор меню"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Комбінація клавіш для відкриття та закриття меню"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on hover"
+msgstr "Відкрийте меню при наведенні курсора"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Відкривати меню, коли я наводжу курсор на піктограму панелі"
+
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+msgid "milliseconds"
+msgstr "мілісекунд"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Menu hover delay"
+msgstr "Затримка наведення курсора меню"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use menu animations"
+msgstr "Використовуйте анімацію меню"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Animate the menu on open and close"
+msgstr "Анімація меню при відкритті та закритті"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click"
+msgstr "Активуйте категорії при натисканні"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "Активуйте категорії при натисканні замість наведення"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Open menu on category:"
+msgstr "Відкрити меню по категорії:"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Always open the menu with this category selected"
+msgstr "Завжди відкривайте меню з вибраною категорією"
+
+#. 5.8
+#. 4.0
+msgid "Last used category"
+msgstr "Остання використана категорія"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Enable autoscrolling"
+msgstr "Увімкнути автоматичне прокручування"
+
+#. 5.8
+#. 4.0
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Автоматична прокрутка списку програм при наведенні миші"
+
+#. 5.8
+#. 4.0
+msgid "Show hidden files in folder view"
+msgstr "Показати приховані файли в режимі перегляду папок"
+
+#. 5.8
+#. 4.0
+msgid "Emoji search"
+msgstr "Пошук Emoji"
+
+#. 5.8
+#. 4.0
+msgid "Show emojis in search results"
+msgstr "Показувати смайли в результатах пошуку"
+
+#. 5.8
+#. 4.0
+msgid "Web search option"
+msgstr "Опція веб-пошуку"
+
+#. 5.8
+#. 4.0
+msgid "Show an internet search option in search results"
+msgstr "Показати варіант пошуку в Інтернеті в результатах пошуку"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Web search suggestions"
+msgstr "Опція веб-пошуку"
+
+#. 5.8
+#. 4.0
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Search home folder"
+msgstr "Пошук у домашній папці"
+
+#. 5.8
+#. 4.0
+msgid "When searching, also search my home folder for files"
+msgstr "Під час пошуку також шукайте файли в моїй домашній папці"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid "Web history search"
+msgstr "Пошук веб-закладок"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
+"Note: Firefox history is not currently supported."
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid "Web bookmarks search"
+msgstr "Пошук веб-закладок"
+
+#. 5.8
+#. 4.0
+msgid ""
+"When searching, also search my browser's web bookmarks (Google Chrome, "
+"Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Під час пошуку також виконуйте пошук у веб-закладках мого веб-переглядача "
+"(Google Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Примітка: для пошуку закладок Firefox вам потрібно буде встановити пакет "
+"gir1.2-gda-5.0 (дистрибутиви на базі Debian, включаючи Ubuntu & Linux Mint) "
+"або запакуйте libgda (дистрибутиви на основі Arch) і перезавантажте "
+"комп’ютер."
+
+#. 5.8
+#. 4.0
+msgid "Wikipedia search"
+msgstr "Пошук у Вікіпедії"
+
+#. 5.8
+#. 4.0
+msgid "Show some Wikipedia results"
+msgstr "Покажіть деякі результати Вікіпедії"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Wikipedia language"
+msgstr "Мова Вікіпедії"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
+msgstr ""
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon"
+msgstr "Використовуйте спеціальний значок"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Use a custom icon in the panel"
+msgstr "Використовуйте спеціальний значок на панелі"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Panel icon"
+msgstr "Значок панелі"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom icon size"
+msgstr "Використовуйте власний розмір значка"
+
+#. 5.8
+#. 4.0
+msgid "Use a custom size for the panel icon"
+msgstr "Використовуйте спеціальний розмір для значка панелі"
+
+#. 5.8
+#. 4.0
+msgid "Panel icon size (pixels)"
+msgstr "Розмір значка панелі (пікселі)"
+
+#. 5.8
+#. 4.0
+msgid "Choose a custom size for the panel icon"
+msgstr "Виберіть власний розмір для значка панелі"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Panel text"
+msgstr "Текст панелі"
+
+#. 5.8
+#. 3.2
+#. 4.0
+msgid "Text to show beside the panel icon"
+msgstr "Текст, який відображатиметься біля значка панелі"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Category icon size (pixels)"
+msgstr "Розмір значка категорії (пікселі)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications list icon size (pixels)"
+msgstr "Розмір значка списку програм (пікселі)"
+
+#. 5.8
+#. 5.8
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+msgid "Applications grid icon size (pixels)"
+msgstr "Розмір значка сітки програм (пікселі)"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Sidebar icon size (pixels)"
+msgstr "Розмір значка бічної панелі (пікселі)"
+
+#. 5.8
+#. 4.0
+msgid "Use sidebar box style"
+msgstr "Використовуйте стиль бічної панелі"
+
+#. 5.8
+#. 4.0
+msgid "Use a sidebar box style"
+msgstr "Використовуйте стиль бічної панелі"
+
+#. 5.8
+#. 4.0
+msgid "Use tile style"
+msgstr "Використовуйте стиль плитки"
+
+#. 5.8
+#. 4.0
+msgid ""
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
+msgstr ""
+"Використовуйте стиль плитки для кнопок програми (Примітка: для деяких тем "
+"може не працювати)"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag on the menu edge to change the menu size."
+msgstr ""
+"\n"
+"Інформація/порада: перетягніть край меню, щоб змінити розмір меню.\n"
+
+#. 5.8
+#. 4.0
+#, fuzzy
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"Інформація/порада: перетягніть край меню, щоб змінити розмір меню.\n"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+
+#. 3.2
+msgid "Search Providers"
+msgstr "Пошук провайдерів"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "Розширень постачальника пошуку не знайдено"
+
+#. 3.2
+msgid "Recent files settings"
+msgstr "Налаштування останніх файлів"
+
+#. 3.2
+msgid "Enable autoscrolling in application list"
+msgstr "Увімкнути автопрокрутку в списку програм"
+
+#. 3.2
+msgid "Show web bookmarks"
+msgstr "Показати веб-закладки"
+
+#. 3.2
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Показуйте веб-закладки вашого браузера в меню.\n"
+"Примітка: встановіть пакет gir1.2-gda-5.0, щоб прочитати закладки firefox."
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "Увімкнути пошук відкритих вікон"
+
+#. 3.2
+msgid "Enable search providers"
+msgstr "Увімкніть пошукових постачальників"
+
+#. 3.2
+msgid "Include search provider results in searches"
+msgstr "Включіть результати пошукового постачальника в пошукові запити"
+
+#. 3.2
+msgid "Example Search Providers"
+msgstr "Приклад пошукових постачальників"
+
+#. 3.2
+msgid "columns"
+msgstr "колонки"
+
+#. 3.2
+#. 3.2
+msgid "Number of columns in apps grid"
+msgstr "Кількість стовпців у сітці програм"
+
+#. 3.2
+#. 3.2
+msgid "Show application icons"
+msgstr "Показати значки програм"
+
+#. 3.2
+#. 3.2
+msgid "Show category icons"
+msgstr "Показати значки категорій"
+
+#. 3.2
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "Показуйте описи програм під заголовками"
+
+#. 3.2
+#. 3.2
+msgid "Show tooltips"
+msgstr "Показати підказки"
+
+#. 3.2
+#. 3.2
+msgid "Tooltip delay"
+msgstr "Затримка підказки"
+
+#. 3.2
+#. 3.2
+msgid "Use a custom menu height"
+msgstr "Використовуйте спеціальну висоту меню"
+
+#. 3.2
+#. 3.2
+msgid "Custom menu height (pixels)"
+msgstr "Висота спеціального меню (пікселі)"
+
+#~ msgid "Home folder"
+#~ msgstr "Домашня папка"
+
+#~ msgid "Layout and Content"
+#~ msgstr "Макет і зміст"

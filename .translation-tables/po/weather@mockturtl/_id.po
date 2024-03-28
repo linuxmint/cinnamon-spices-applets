@@ -1,0 +1,135 @@
+# Indonesian translation for Cinnamon Applet Weather.
+# Copyright (C) 2022
+# This file is distributed under the same license as the Cinnamon Weather Applet package.
+# Ruddy Pranata <ruddy.pranata@gmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: weather@mockturtl 3.2.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-01 22:49+0000\n"
+"PO-Revision-Date: 2022-03-22 13:51+0700\n"
+"Last-Translator: Ruddy Pranata <ruddy.pranata@gmail.com>\n"
+"Language-Team: Ruddy Pranata <ruddy.pranata@gmail.com>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.3\n"
+
+#: 3.8/weather-applet.js:10118
+msgid ""
+"MET Office UK only covers the UK, please make sure your location is in the "
+"country"
+msgstr ""
+
+#: 3.8/weather-applet.js:13953
+msgid "Deutscher Wetterdienst"
+msgstr ""
+
+#: 3.8/weather-applet.js:13966
+msgid "Please select a different provider or location"
+msgstr ""
+
+#: 3.8/weather-applet.js:14263
+msgid "Weather Underground"
+msgstr ""
+
+#: 3.8/weather-applet.js:14453
+msgid "The API key you provided is invalid."
+msgstr ""
+
+#: 3.8/weather-applet.js:14460
+msgid "The location you provided was not found."
+msgstr ""
+
+#: 3.8/weather-applet.js:14496 3.8/weather-applet.js:14497
+msgid "Strong Storm"
+msgstr ""
+
+#: 3.8/weather-applet.js:14511 3.8/weather-applet.js:14512
+msgid "Rain and Snow"
+msgstr ""
+
+#: 3.8/weather-applet.js:14518 3.8/weather-applet.js:14519
+msgid "Rain and Sleet"
+msgstr ""
+
+#: 3.8/weather-applet.js:14567 3.8/weather-applet.js:14568
+msgid "Snow Showers"
+msgstr ""
+
+#: 3.8/weather-applet.js:14630 3.8/weather-applet.js:14631
+msgid "Breezy"
+msgstr ""
+
+#: 3.8/weather-applet.js:14644 3.8/weather-applet.js:14645
+msgid "Frigid"
+msgstr ""
+
+#: 3.8/weather-applet.js:14700 3.8/weather-applet.js:14701
+msgid "Mostly Clear"
+msgstr ""
+
+#: 3.8/weather-applet.js:14853
+msgid "Pirate Weather"
+msgstr ""
+
+#: 3.8/weather-applet.js:15205
+msgid ""
+"Location Service couldn't find your location, please see the logs in Looking "
+"Glass"
+msgstr ""
+
+#: 3.8/weather-applet.js:15433
+msgid "Make sure you entered a location or use Automatic location instead."
+msgstr ""
+
+#: 3.8/weather-applet.js:15570
+msgid ""
+"Could not retrieve config, file was not found under paths\n"
+" {configFilePath}"
+msgstr ""
+
+#: 3.8/weather-applet.js:17028
+msgid "Station Name: {stationName}"
+msgstr ""
+
+#: 3.8/weather-applet.js:17031
+msgid "Area: {stationArea}"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Deutscher Wetterdienst (Germany only)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Pirate Weather (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weather Underground (key needed)"
+msgstr ""
+
+#. 3.8->settings-schema.json->locationDescription->description
+msgid ""
+"If the location field matches a saved location's 'Search Entry' field, the "
+"saved location will be used instead."
+msgstr ""
+
+#. 3.8->settings-schema.json->immediatePrecip->tooltip
+msgid ""
+"If you'd like to use this make sure you use your exact coordinates/address "
+"as location to help its accuracy. See Feature map on website on support for "
+"your provider"
+msgstr ""
+
+#. 3.8->settings-schema.json->tooltipTextOverride->description
+msgid "Override tooltip on panel"
+msgstr ""
+
+#. 3.8->settings-schema.json->tooltipTextOverride->tooltip
+msgid ""
+"Has the same behavior and available values as 'Override label on panel'."
+msgstr ""

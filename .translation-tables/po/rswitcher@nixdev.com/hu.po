@@ -1,0 +1,46 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-09 16:24+0200\n"
+"PO-Revision-Date: 2021-11-07 19:59+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+
+#: applet.js:23
+msgid "Switch resolution on-the-fly, with HiDPI support"
+msgstr "Felbontás menet közbeni váltása, HiDPI támogatással"
+
+#: applet.js:33
+msgid "HiDPI 200%"
+msgstr "HiDPI 200%"
+
+#: applet.js:41
+msgid "HiDPI 150%"
+msgstr "HiDPI 150%"
+
+#: applet.js:49
+msgid "2160p"
+msgstr "2160p"
+
+#: applet.js:57
+msgid "1080p"
+msgstr "1080p"
+
+#. metadata.json->name
+msgid "Resolution Switcher"
+msgstr "Felbontásváltó"
+
+#. metadata.json->description
+msgid "Switch resolution on-the-fly with HiDPI support"
+msgstr "Felbontás menet közbeni váltása, HiDPI támogatással"
