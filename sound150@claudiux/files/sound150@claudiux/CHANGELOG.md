@@ -1,3 +1,6 @@
+### v6.7.0~20240329
+  * New icons.
+
 ### v6.6.0~20240328
   * Greater interaction with Radio3.0@claudiux: The Previous, Next, Stop and Close buttons act on this applet.
 
