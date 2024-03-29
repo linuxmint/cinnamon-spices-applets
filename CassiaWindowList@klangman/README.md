@@ -3,20 +3,21 @@ designed to give you more control over how your window-list operates.
 
 Recent new features (Aug 2023 - Mar 2024):
 
-1.  Mouse action options for window tiling, untiling and moving window to current workspace
-2.  Hover peek: Option to show a full size preview when hovering buttons/thumbnails
-3.  No Click activate: Option to automatically switch focus to the button/Thumbnail last hovered
-4.  Adjustable spacing between window-list buttons
-5.  Ability to disable the new window animation
-6.  Ability to change the icon saturation from grayscale (0%) to vivid (200%)
-7.  Ability to show windows from other workspaces
-8.  Restores custom group/ungroup application setting after reboot/cinnamon-restart
-9.  Hotkey option to assign a set of 1-9 hotkeys to all window-list buttons
-10.  Hotkey hints using the (`) grave key with any registered hotkey modifiers
-11. Added a Left-Click option to start new application windows in Launcher mode
-12. Ability to show a common set of pinned buttons on all workspaces
-13. Smart numeric hotkeys to assign a set of 1-9 hotkeys to a specific application
-14. A bunch of fixes
+1.  Added a configuration option to set the delay length before showing full size preview windows
+2.  Mouse action options for window tiling, untiling and moving window to current workspace
+3.  Hover peek: Option to show a full size preview when hovering buttons/thumbnails
+4.  No Click activate: Option to automatically switch focus to the button/Thumbnail last hovered
+5.  Adjustable spacing between window-list buttons
+6.  Ability to disable the new window animation
+7.  Ability to change the icon saturation from grayscale (0%) to vivid (200%)
+8.  Ability to show windows from other workspaces
+9.  Restores custom group/ungroup application setting after reboot/cinnamon-restart
+10.  Hotkey option to assign a set of 1-9 hotkeys to all window-list buttons
+11.  Hotkey hints using the (`) grave key with any registered hotkey modifiers
+12. Added a Left-Click option to start new application windows in Launcher mode
+13. Ability to show a common set of pinned buttons on all workspaces
+14. Smart numeric hotkeys to assign a set of 1-9 hotkeys to a specific application
+15. A bunch of fixes
 
 The design goals are to:
 

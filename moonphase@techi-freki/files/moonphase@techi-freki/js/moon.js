@@ -29,14 +29,17 @@ class Moon {
             new AltIconSet().getSet() :
             new DefaultIconSet().getSet();
 
-        const age = Math.trunc(this.age * 28); // trunc instead of round ?
+        const age = Math.trunc(this.age * 28);
 
         return iconSet[age];
     }
     _getCurrentPhaseName(showName = true, showPercentage = true) {
-        var name = "";
-        const age = Math.trunc(this.age * 28) / 28; // trunc instead of round ?
-        const percent = Math.trunc((age < 0.5 ? 2*age : 2 - 2*age) * 100) + "%";  // trunc instead of round ?
+        let name = "";
+        const age = Math.trunc(this.age * 28) / 28;
+
+        // method to convert to percentage without rounding to keep precision
+        const toPercentage = (n, fixed) => `${n * 100}`.match(new RegExp(`^-?\\d+(?:\.\\d{0,${fixed}})?`))[0] + "%";
+        const percent = toPercentage(SunCalc.getMoonIllumination(this.currentDate).fraction, 2);
 
         if (age === 0) name = this._("New Moon");
         else if (age < 0.25) name = this._("Waxing Crescent");
@@ -48,7 +51,7 @@ class Moon {
         else if (age <= 1) name = this._("Waning Crescent")
         else name = this._("New Moon");
 
-        if (showName & showPercentage) return name + " (" + percent + ")";
+        if (showName && showPercentage) return name + " (" + percent + ")";
         if (showName) return name;
         if (showPercentage) return percent;
         return _("Moon Phase");

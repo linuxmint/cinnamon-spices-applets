@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1
+
+* Added a configuration option that controls the delay before the full size preview window appears
+* For Cinnamon 6+, I removed the text on the Advanced tab describing a bug that effects the list widget on that tab. I fixed this Cinnamon bug in version 6.0 so there is no need for the message, (and this gives more GUI space for new options).
+* Prevent the full size preview window from appearing when the context or thumbnail menu is open
+
 ## 2.0.0
 
 * Added 9 mouse button actions for window tiling

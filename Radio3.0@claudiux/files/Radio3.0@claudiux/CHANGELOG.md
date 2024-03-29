@@ -1,3 +1,7 @@
+### v1.18.0~20240328
+  * Radio3.0@claudiux can now receive commands from the sound150@claudiux applet.
+
+
 ### v1.17.8~20240313
   * BugFixes about ZettaLite data.
 

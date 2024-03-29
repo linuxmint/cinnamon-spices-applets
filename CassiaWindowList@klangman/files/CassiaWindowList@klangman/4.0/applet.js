@@ -576,11 +576,16 @@ function destroyHoverPeekClone(hoverClone, delayId, time, instant=false) {
    return null;
 }
 
-function isPointerOffActor(actor, orientation) {
+function isCtrlOrShiftHeld() {
    let [px,py,mods] = global.get_pointer();
    if ((mods & (Clutter.ModifierType.SHIFT_MASK | Clutter.ModifierType.CONTROL_MASK)) != 0) {
-      return false;  // Is the user is holding one of Ctrl/Shift then return false so we don't change the focus, kinda hacky I know.
+      return true;
    }
+   return false;
+}
+
+function isPointerOffActor(actor, orientation) {
+   let [px,py,mods] = global.get_pointer();
    let [x, y] = actor.get_transformed_position();
    if (orientation == St.Side.LEFT) {
       let [w, h] = actor.get_size();
@@ -792,9 +797,13 @@ class ThumbnailMenuItem extends PopupMenu.PopupBaseMenuItem {
 
     if (this._settings.getValue("hover-peek-thumbnail")) {
        // After a short delay to avoid needless hover peeks, ease in the hover peek window
-       this._menu._hovePeekDelayId = Mainloop.timeout_add(70, Lang.bind(this, () => {
+       if(!this._menu.hoverPeekDelay) {
+          this._menu.hoverPeekDelay = this._settings.getValue("hover-peek-delay")
+       }
+       this._menu._hovePeekDelayId = Mainloop.timeout_add(this._menu.hoverPeekDelay, Lang.bind(this, () => {
          this._menu._hovePeekDelayId = destroyHoverPeekClone(this.hoverClone, this._menu._hovePeekDelayId, this._settings.getValue("fade-animation-time")*0.001); // Close if one happens to exist
          this.hoverClone = createHoverPeekClone(this._metaWindow, this._settings.getValue("fade-animation-time")*0.001);
+         this._menu.hoverPeekDelay = 60;
          } ));
     }
   }
@@ -923,6 +932,7 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
     global.focus_manager.add_group(this.actor);
     this.actor.reactive = true;
     Main.layoutManager.addChrome(this.actor);
+    this.hoverPeekDelay = null;
     this.actor.hide();
 
     this._updateOrientation();
@@ -950,7 +960,7 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
   }
 
   _onLeaveEvent() {
-    if (this.recentHoverWindow && this._settings.getValue("no-click-activate-thumbnail") && isPointerOffActor(this.actor, this._appButton._applet.orientation)) {
+    if (this.recentHoverWindow && this._settings.getValue("no-click-activate-thumbnail") && !isCtrlOrShiftHeld() && isPointerOffActor(this.actor, this._appButton._applet.orientation)) {
        Main.activateWindow(this.recentHoverWindow)
     }
     this._appButton.closeThumbnailMenuDelayed();
@@ -1030,6 +1040,7 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
     }
     if (this._settings.getValue("wheel-adjusts-preview-size")<ScrollWheelAction.OnGlobal) // Off or On
        this.numThumbs = this._settings.getValue("number-of-unshrunk-previews"); // reset the preview window size in case scroll-wheel zooming occurred.
+    this.hoverPeekDelay = null;
   }
 
   addWindow(window) {
@@ -2557,17 +2568,27 @@ class WindowListButton {
        this._buttonIdx = idx;
     }
     if (this._settings.getValue("hover-peek-windowlist")) {
-       // After a short delay to avoid needless hover peeks, ease in the hover peek window
-       this._workspace._hoverPeekDelayId = Mainloop.timeout_add(70, () => {
+       // After a delay to avoid needless hover peeks, ease in the hover peek window
+       if (!this._workspace._hoverPeekDelay) {
+          this._workspace._hoverPeekDelay = this._settings.getValue("hover-peek-delay")
+       }
+       this._workspace._hoverPeekDelayId = Mainloop.timeout_add(this._workspace._hoverPeekDelay, () => {
          this._workspace._hoverPeekDelayId = destroyHoverPeekClone(this.hoverClone, this._workspace._hoverPeekDelayId, this._settings.getValue("fade-animation-time")*0.001);  // Close if one happens to exist
-         this.hoverClone = createHoverPeekClone(this._currentWindow, this._settings.getValue("fade-animation-time")*0.001);
+         if (!this._contextMenu.isOpen && !this.menu.isOpen) {
+            this.hoverClone = createHoverPeekClone(this._currentWindow, this._settings.getValue("fade-animation-time")*0.001);
+            this._workspace._hoverPeekDelay = 60;
+         }
          } );
     }
   }
 
   _onLeaveEvent() {
+    let pointerIsOffActor = isPointerOffActor(this.actor, this._applet.orientation);
+    if (pointerIsOffActor) {
+       this._workspace._hoverPeekDelay = null;
+    }
     // If we have left the panel, we might need to remove the hover peek clone and we might need to activate the window
-    if (this._settings.getValue("no-click-activate") && isPointerOffActor(this.actor, this._applet.orientation)) {
+    if (this._settings.getValue("no-click-activate") && !isCtrlOrShiftHeld() && pointerIsOffActor) {
        if (!this._contextMenu.isOpen && !this.menu.isOpen) {
           Main.activateWindow(this._currentWindow);
        }
@@ -3291,6 +3312,7 @@ class Workspace {
     this.iconSaturation = 100;
     this.saturationType = SaturationType.All
     this._hoverPeekDelayId = null;
+    this._hoverPeekDelay = null;
     this._keyBindingsWindows = [];
 
     // Expand the pinned-apps array if required

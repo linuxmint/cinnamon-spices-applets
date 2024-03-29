@@ -104,6 +104,7 @@ const {
   FileQueryInfoFlags,
   FileType,
   FileIcon,
+  FileMonitorFlags,
   DataInputStream,
   UnixInputStream,
   Settings
@@ -316,6 +317,9 @@ const MPV_SOCKET = RUNTIME_DIR + "/mpvradiosocket";
 const MPV_TITLE_FILE = RUNTIME_DIR + "/mpv_radio_title.txt";
 const MPV_BITRATE_FILE = RUNTIME_DIR + "/mpv_radio_bitrate.txt";
 const MPV_CODEC_FILE = RUNTIME_DIR + "/mpv_radio_codec.txt";
+const R30STOP = RUNTIME_DIR + "/R30Stop";
+const R30NEXT = RUNTIME_DIR + "/R30Next";
+const R30PREVIOUS = RUNTIME_DIR + "/R30Previous";
 
 const CATEGORY_ROW_FILE = RUNTIME_DIR + "/radio_category_row.txt";
 const UPDATE_OPTIONS_FILE = RUNTIME_DIR + "/radio_update_options.txt";
@@ -497,6 +501,10 @@ function RELOAD() {
  */
 function log(message, alwaysLog=false) {
   if (DEBUG() || alwaysLog) global.log("[" + UUID + "]: " + message);
+}
+
+function logDebug(message) {
+    log(message, true);
 }
 
 function logError(error) {
@@ -834,14 +842,18 @@ class R3WebpageMenuItem extends PopupBaseMenuItem {
     super(params);
     this.parent = parent;
 
-    let boxIconLabel = new BoxLayout({ style: 'spacing: 1em' });
+    let boxIconLabel = new BoxLayout({ style: 'spacing: 1em;' });
+    //~ logDebug("boxIconLabel: "+boxIconLabel);
+
     let web_icon = new Icon({ icon_name: 'web-browser', icon_type: IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
     boxIconLabel.add_actor(web_icon);
     let label = new Label({ text: _("Radio3.0 web page...") });
     boxIconLabel.add_actor(label);
     this.addActor(boxIconLabel);
 
-    let stars = new BoxLayout({ style: 'spacing: 0.25em' });
+    let stars = new BoxLayout({ style: 'spacing: 0.25em;' });
+    //~ logDebug("stars: "+stars);
+
     let star_icon = new Icon({ icon_name: 'starred', icon_type: IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
     let star_count = new Label({ text: score.toString() });
     stars.add_actor(star_icon);
@@ -878,7 +890,9 @@ var RadioPopupSubMenuMenuItem = class RadioPopupSubMenuMenuItem extends PopupSub
 
     this.needScrollbar = needScrollbar;
 
-    let icon_box = new BoxLayout({ style: 'spacing: .25em' });
+    let icon_box = new BoxLayout({ style: 'spacing: .25em;' });
+    //~ logDebug("icon_box: "+icon_box);
+
     let radio_icon = new Icon({ icon_name: 'audio-input-microphone', icon_type: IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
     icon_box.add_actor(radio_icon);
     this.addActor(icon_box, { expand: false, span: 0, align: Align.START });
@@ -1140,6 +1154,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.monitor_mpv_title();
     this.monitor_jobs_dir();
     this.monitor_rec_folder();
+    this.monitor_r30stop();
+    this.monitor_r30next();
+    this.monitor_r30previous();
 
     // Connect signals:
     this._connect_signals();
@@ -1314,18 +1331,28 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.on_applet_middle_clicked(event);
     });
     keybindingManager.addHotKey("shortcutNext", this.shortcutNext, (event) => {
-      if (this.recentRadios.length < 2) return;
-      let next_radio = this.recentRadios[this.recent_number - 1];
-      this.stop_mpv_radio(false);
-      this.start_mpv_radio(next_radio);
+      this.on_next_event(event);
     });
     keybindingManager.addHotKey("shortcutPrevious", this.shortcutPrevious, (event) => {
-      if (this.recentRadios.length < 2) return;
-      let prev_radio = this.recentRadios[1];
-      this.stop_mpv_radio(false);
-      this.start_mpv_radio(prev_radio);
+      this.on_previous_event(event);
     });
 
+  }
+
+  on_next_event(event) {
+    spawnCommandLine("rm -f %s".format(R30NEXT));
+    if (this.recentRadios.length < 2) return;
+    let next_radio = this.recentRadios[this.recent_number - 1];
+    this.stop_mpv_radio(false);
+    this.start_mpv_radio(next_radio);
+  }
+
+  on_previous_event(event) {
+    spawnCommandLine("rm -f %s".format(R30PREVIOUS));
+    if (this.recentRadios.length < 2) return;
+    let prev_radio = this.recentRadios[1];
+    this.stop_mpv_radio(false);
+    this.start_mpv_radio(prev_radio);
   }
 
   on_rec_path_changed() {
@@ -1648,6 +1675,60 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
   }
 
+  monitor_r30stop() {
+    if (this.r30stopMonitor != null) return;
+
+    let file = file_new_for_path(R30STOP);
+
+    //if (file.query_exists(null)) {
+      try {
+        this.r30stopMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, null);
+        //this.r30stopMonitor.set_rate_limit(300); // 300 ms (default value: 800)
+
+        this.r30stopMonitorId = this.r30stopMonitor.connect('changed', Lang.bind(this, this._on_r30stop_changed));
+
+      } catch(e) {
+        logError("Unable to monitor %s!".format(R30STOP), e)
+      }
+    //}
+  }
+
+  monitor_r30next() {
+    if (this.r30nextMonitor != null) return;
+
+    let file = file_new_for_path(R30NEXT);
+
+    //if (file.query_exists(null)) {
+      try {
+        this.r30nextMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, null);
+        //this.r30nextMonitor.set_rate_limit(300); // 300 ms (default value: 800)
+
+        this.r30nextMonitorId = this.r30nextMonitor.connect('changed', Lang.bind(this, this.on_next_event));
+
+      } catch(e) {
+        logError("Unable to monitor %s!".format(R30NEXT), e)
+      }
+    //}
+  }
+
+  monitor_r30previous() {
+    if (this.r30previousMonitor != null) return;
+
+    let file = file_new_for_path(R30PREVIOUS);
+
+    //if (file.query_exists(null)) {
+      try {
+        this.r30previousMonitor = file.monitor_file(FileMonitorFlags.WATCH_MOVES, null);
+        //this.r30previousMonitor.set_rate_limit(300); // 300 ms (default value: 800)
+
+        this.r30previousMonitorId = this.r30previousMonitor.connect('changed', Lang.bind(this, this.on_previous_event));
+
+      } catch(e) {
+        logError("Unable to monitor %s!".format(R30PREVIOUS), e)
+      }
+    //}
+  }
+
   unmonitor_mpv_title() {
     //log("unmonitor_mpv_title");
     if (this.titleMonitor == null) return;
@@ -1661,6 +1742,58 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
     } catch(e) {
       logError("Unable to unmonitor %s!".format(MPV_TITLE_FILE), e)
+    }
+  }
+
+  unmonitor_r30stop() {
+    if (this.r30stopMonitor == null) return;
+
+    try {
+      if (this.r30stopMonitorId > 0) {
+        //this.r30stopMonitor.cancel();
+        this.r30stopMonitor.disconnect(this.r30stopMonitorId);
+        this.r30stopMonitor = null;
+        this.r30stopMonitorId = 0;
+      }
+    } catch(e) {
+      logError("Unable to unmonitor %s!".format(R30STOP), e)
+    }
+  }
+
+  unmonitor_r30previous() {
+    if (this.r30previousMonitor == null) return;
+
+    try {
+      if (this.r30previousMonitorId > 0) {
+        //this.r30previousMonitor.cancel();
+        this.r30previousMonitor.disconnect(this.r30previousMonitorId);
+        this.r30previousMonitor = null;
+        this.r30previousMonitorId = 0;
+      }
+    } catch(e) {
+      logError("Unable to unmonitor %s!".format(R30PREVIOUS), e)
+    }
+  }
+
+  unmonitor_r30next() {
+    if (this.r30nextMonitor == null) return;
+
+    try {
+      if (this.r30nextMonitorId > 0) {
+        //this.r30nextMonitor.cancel();
+        this.r30nextMonitor.disconnect(this.r30nextMonitorId);
+        this.r30nextMonitor = null;
+        this.r30nextMonitorId = 0;
+      }
+    } catch(e) {
+      logError("Unable to unmonitor %s!".format(R30NEXT), e)
+    }
+  }
+
+  _on_r30stop_changed() {
+    let file = file_new_for_path(R30STOP);
+    if (file.query_exists(null)) {
+      this.stop_mpv();
     }
   }
 
@@ -3068,6 +3201,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.interval = setInterval(() => this.on_progress_change(), 100);  // 100 ms.
 
     this.monitor_mpv_title();
+    this.monitor_r30stop();
+    this.monitor_r30next();
+    this.monitor_r30previous();
     spawnCommandLine("%s %s".format(this.MPV_ALIAS, _id));
     this.mpvStatus = "PLAY";
 
@@ -3105,6 +3241,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.songTitle = "";
 
     this.unmonitor_mpv_title();
+    this.unmonitor_r30stop();
+    this.unmonitor_r30previous();
+    this.unmonitor_r30next();
 
     spawnCommandLine("kill -15 " + pid);
     spawnCommandLine("rm -f %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE));
@@ -3126,6 +3265,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       source.destroyAllNotifications();
       this.radio_notify(_("Radio OFF"));
     }
+
+    let idtemp = setTimeout (() => {
+          clearTimeout(idtemp);
+    }, 3000);
 
     //pid = null;
   }
@@ -3369,6 +3512,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     //~ spawnCommandLine("rm -f %s %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE, `${SONG_ART_DIR}/R3SongArt*`));
     spawnCommandLine("rm -f %s %s %s %s".format(MPV_PID_FILE, MPV_SOCKET, MPV_BITRATE_FILE, MPV_CODEC_FILE));
+    spawnCommandLine("rm -f %s".format(R30STOP));
+    spawnCommandLine("rm -f %s".format(R30NEXT));
+    spawnCommandLine("rm -f %s".format(R30PREVIOUS));
     spawnCommandLine("bash -c '%s'".format(DEL_SONG_ARTS_SCRIPT));
   }
 
@@ -3658,9 +3804,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       this.checkYTDLPInterval = undefined;
     }
 
-    //~ // Register recent Radios:
-    //~ this.recentRadios = this.recentRadios;
-
     // Stop mpv:
     this.stop_mpv(false);
 
@@ -3677,6 +3820,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.unmonitor_interfaces();
     this.unmonitor_jobs_dir();
     this.unmonitor_mpv_title();
+    this.unmonitor_r30stop();
+    this.unmonitor_r30previous();
+    this.unmonitor_r30next();
     this.unmonitor_rec_folder();
 
     // Remove shortcuts:
