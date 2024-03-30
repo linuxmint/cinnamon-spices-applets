@@ -1,3 +1,6 @@
+### v1.0.6~20240330
+  * Code cleanup.
+
 ### v1.0.5~20231231
   * Adds the --icon parameter for zenity v4.
 
