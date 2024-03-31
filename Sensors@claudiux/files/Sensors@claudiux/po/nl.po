@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-20 15:16+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-31 10:36+0200\n"
 "PO-Revision-Date: 2023-06-10 10:37+0200\n"
 "Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
 "Language-Team: \n"
@@ -19,95 +20,104 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
-#: applet.js:90
+#: applet.js:101
 msgid "Sensors Monitor"
 msgstr "Sensoren Monitor"
 
-#: applet.js:389 applet.js:441
+#: applet.js:268
+msgid "Suspended"
+msgstr ""
+
+#: applet.js:484 applet.js:526
 msgid "high:"
 msgstr "hoog:"
 
-#: applet.js:389 applet.js:391 applet.js:441 applet.js:443 applet.js:481
+#: applet.js:484 applet.js:486 applet.js:526 applet.js:528 applet.js:569
 msgid "n/a"
 msgstr "n.v.t"
 
-#: applet.js:391 applet.js:443
+#: applet.js:486 applet.js:528
 msgid "crit:"
 msgstr "kritiek:"
 
-#: applet.js:481 applet.js:524
+#: applet.js:569 applet.js:612
 msgid "min:"
 msgstr "min:"
 
-#: applet.js:526
+#: applet.js:614
 msgid "max:"
 msgstr "max:"
 
-#: applet.js:554
+#: applet.js:642
 msgid "No intrusion detected"
 msgstr "Geen verstoring gedetecteerd"
 
-#: applet.js:554
+#: applet.js:642
 msgid "INTRUSION DETECTED!"
 msgstr "VERSTORING GEDETECTEERD!"
 
-#: applet.js:574
+#: applet.js:662
 msgid "Must be configured!"
 msgstr "Moet worden ingesteld!"
 
-#: applet.js:845
+#: applet.js:925
 msgid "Settings"
 msgstr "Instellingen"
 
-#: applet.js:845
+#: applet.js:925
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#: applet.js:852
+#: applet.js:932
 msgid "⚙ General"
 msgstr "⚙ Algemeen"
 
-#: applet.js:862
+#: applet.js:942
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Temperatuursensoren"
 
-#: applet.js:872
+#: applet.js:952
 msgid "🤂 Fan sensors"
 msgstr "🤂 Ventilatorsensoren"
 
-#: applet.js:882
+#: applet.js:962
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Spanningssensoren"
 
-#: applet.js:892
+#: applet.js:972
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Verstoringsensoren"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:903
+#: applet.js:983
 msgid "Run xsensors"
 msgstr "Uitvoeren xsensors"
 
-#: applet.js:914
+#: applet.js:992
+#, fuzzy
+msgid "Suspend Sensors"
+msgstr "Uitvoeren xsensors"
+
+#: applet.js:1003
 msgid "Reload this applet"
 msgstr "Herlaad deze hulptoepassing"
 
-#: applet.js:1206
+#: applet.js:1295
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Weet u zeker dat u '%s' wilt verwijderen?"
 
-#: lib/checkDependencies.js:300
+#: lib/checkDependencies.js:317
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "De hulptoepassing %s is volledig functioneel."
 
-#: lib/checkDependencies.js:301
+#: lib/checkDependencies.js:318
 msgid "All dependencies are installed"
 msgstr "Alle afhankelijkheden zijn geïnstalleerd"
 
-#: lib/checkDependencies.js:329
+#: lib/checkDependencies.js:346
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -115,15 +125,15 @@ msgstr ""
 "U lijkt een aantal van de programma's te missen die nodig zijn voor deze "
 "hulptoepassing om alle functies te hebben."
 
-#: lib/checkDependencies.js:330
+#: lib/checkDependencies.js:347
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Voer de commando's uit in de zojuist geopende terminal:"
 
-#: lib/checkDependencies.js:331
+#: lib/checkDependencies.js:348
 msgid "Some dependencies are not installed!"
 msgstr "Sommige afhankelijkheden zijn niet geïnstalleerd!"
 
-#: lib/util.js:243
+#: lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr "De uitvoering van '%s' is mislukt:"
@@ -209,6 +219,10 @@ msgstr "⮿ Verstoring"
 msgid "Options"
 msgstr "Opties"
 
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr ""
+
 #. settings-schema.json->section_Report->title
 msgid "Sensors values"
 msgstr "Waarden van sensoren"
@@ -219,9 +233,9 @@ msgstr ""
 "Verwijder bepaalde hulptoepassingen van paneel die ook gebruik maken van "
 "sensoren"
 
-#. settings-schema.json->section_tempHddtemp->title
-msgid "hddtemp is for now only usable by root"
-msgstr "hddtemp is voor nu alleen bruikbaar voor root"
+#. settings-schema.json->section_tempDisktemp->title
+msgid "For the time being, disk temperature can only be read by root."
+msgstr ""
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -307,8 +321,40 @@ msgid "30"
 msgstr "30"
 
 #. settings-schema.json->interval->options
-msgid "60"
-msgstr "60"
+msgid "1 minute"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
+msgstr ""
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -333,29 +379,23 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Tekengrootte (% van de standaardgrootte)"
 
-#. settings-schema.json->char_color->options
-msgid "Default"
-msgstr "Standaard"
-
-#. settings-schema.json->char_color->options
-msgid "White"
-msgstr "Wit"
-
-#. settings-schema.json->char_color->options
-msgid "Black"
-msgstr "Zwart"
-
-#. settings-schema.json->char_color->options
-msgid "Grey"
-msgstr "Grijs"
-
-#. settings-schema.json->char_color->options
-msgid "Light Grey"
-msgstr "Licht grijs"
+#. settings-schema.json->char_color_customized->description
+#, fuzzy
+msgid "Customize Text Color"
+msgstr "Kleur van de tekst"
 
 #. settings-schema.json->char_color->description
 msgid "Text Color"
 msgstr "Kleur van de tekst"
+
+#. settings-schema.json->separator->description
+msgid "Separator"
+msgstr ""
+
+#. settings-schema.json->separator->tooltip
+msgid ""
+"The string used to separate values in horizontal orientation. Default is '│'."
+msgstr ""
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -372,6 +412,10 @@ msgstr "Verwijder iconen"
 #. settings-schema.json->remove_icons->tooltip
 msgid "Whether or not to remove icons in panel."
 msgstr "Het al dan niet verwijderen van iconen in het paneel."
+
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
+msgstr ""
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
@@ -403,9 +447,10 @@ msgstr ""
 "Het al dan niet weergeven van de actie in het menu: Herstart deze "
 "hulptoepassing."
 
-#. settings-schema.json->make_hddtemp_usable_by_user->description
-msgid "Make hddtemp usable by user"
-msgstr "Hddtemp bruikbaar maken voor de gebruiker"
+#. settings-schema.json->make_disktemp_readable_by_user->description
+#, fuzzy
+msgid "Make disk temperature user-readable"
+msgstr "Schijf Temperatuursensoren"
 
 #. settings-schema.json->show_temp->description
 #. settings-schema.json->show_fan->description
@@ -708,6 +753,7 @@ msgstr ""
 "Om een weergegeven naam te resetten, kopieert/plak de naam van de sensor."
 
 #. settings-schema.json->report->description
+#: scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr "Voorbeeld van sensorwaarden van deze computer"
 
@@ -722,16 +768,3 @@ msgstr "Weergave actualiseren"
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Verwijder van het paneel de temperature@fevimu hulptoepassing"
-
-#~ msgid "Temperature scripts"
-#~ msgstr "Scripts voor temperatuur"
-
-
-
-
-
-
-
-
-
-

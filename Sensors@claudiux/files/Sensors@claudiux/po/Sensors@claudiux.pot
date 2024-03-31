@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-15 19:59+0100\n"
+"Project-Id-Version: Sensors@claudiux 3.6.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-31 10:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -310,7 +310,39 @@ msgid "30"
 msgstr ""
 
 #. settings-schema.json->interval->options
-msgid "60"
+msgid "1 minute"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
 msgstr ""
 
 #. settings-schema.json->interval->description
@@ -323,7 +355,8 @@ msgstr ""
 
 #. settings-schema.json->keep_size->tooltip
 msgid ""
-"Checked: The size of this applet remains constant, once all your preferences have been defined.\n"
+"Checked: The size of this applet remains constant, once all your preferences "
+"have been defined.\n"
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
 
@@ -345,8 +378,7 @@ msgstr ""
 
 #. settings-schema.json->separator->tooltip
 msgid ""
-"The string used to separate values in horizontal orientation. Default is "
-"'│'."
+"The string used to separate values in horizontal orientation. Default is '│'."
 msgstr ""
 
 #. settings-schema.json->remove_border->description
@@ -542,7 +574,8 @@ msgstr ""
 
 #. settings-schema.json->temp_sensors->tooltip
 msgid ""
-"Double-click on a line to change 'Shown name', 'High', 'Critical' or 'Formula'.\n"
+"Double-click on a line to change 'Shown name', 'High', 'Critical' or "
+"'Formula'.\n"
 "To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
 "'High' and 'Critical' (optional) must be valid numbers.\n"
 "'Formula' (optional):\n"
@@ -569,7 +602,8 @@ msgstr ""
 
 #. settings-schema.json->temp_disks->tooltip
 msgid ""
-"Disk name: The name of the disk, as returned by the 'lsblk' command. Please see help.\n"
+"Disk name: The name of the disk, as returned by the 'lsblk' command. Please "
+"see help.\n"
 "High and Critical values: Cf. technical manual of your disk."
 msgstr ""
 
@@ -650,6 +684,7 @@ msgid ""
 msgstr ""
 
 #. settings-schema.json->report->description
+#: scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr ""
 
