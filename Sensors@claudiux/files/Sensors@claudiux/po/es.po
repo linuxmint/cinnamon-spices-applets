@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-31 10:36+0200\n"
-"PO-Revision-Date: 2024-02-15 17:17-0300\n"
+"PO-Revision-Date: 2024-03-31 12:05-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -320,39 +320,39 @@ msgstr "30"
 
 #. settings-schema.json->interval->options
 msgid "1 minute"
-msgstr ""
+msgstr "1 minuto"
 
 #. settings-schema.json->interval->options
 msgid "2 minutes"
-msgstr ""
+msgstr "2 minutos"
 
 #. settings-schema.json->interval->options
 msgid "3 minutes"
-msgstr ""
+msgstr "3 minutos"
 
 #. settings-schema.json->interval->options
 msgid "4 minutes"
-msgstr ""
+msgstr "4 minutos"
 
 #. settings-schema.json->interval->options
 msgid "5 minutes"
-msgstr ""
+msgstr "5 minutos"
 
 #. settings-schema.json->interval->options
 msgid "10 minutes"
-msgstr ""
+msgstr "10 minutos"
 
 #. settings-schema.json->interval->options
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minutos"
 
 #. settings-schema.json->interval->options
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minutos"
 
 #. settings-schema.json->interval->options
 msgid "1 hour"
-msgstr ""
+msgstr "1 hora"
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
