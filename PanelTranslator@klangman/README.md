@@ -9,7 +9,10 @@ Uses [Google](https://translate.google.com/), [Bing](https://www.bing.com/transl
 2. Optional automatically translate and playback (Text-to-Speech) from the current selection or clipboard
 3. Middle mouse button can be configured to perform 8 different translation actions
 4. Ctrl + Middle mouse button can be configured to perform 8 different translation actions
-5. Smart language selection entry fields automatically finds language matches as you type, or use the up/down arrow keys to cycle through available languages
+5. Two hotkeys that can be configured to perform 8 different translation actions
+6. Smart language selection entry fields automatically finds language matches as you type, or use the up/down arrow keys to cycle through available languages
+
+The translation action options include translating the current selection or the clipboard contents and then showing the panel popup, playing the translation or placing the translated text into the clipboard.
 
 ## Current Limitations
 

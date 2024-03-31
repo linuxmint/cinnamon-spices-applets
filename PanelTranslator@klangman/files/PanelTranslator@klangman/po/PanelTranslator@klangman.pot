@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PanelTranslator@klangman 1.0.2\n"
+"Project-Id-Version: PanelTranslator@klangman 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-08 10:14-0500\n"
+"POT-Creation-Date: 2024-03-31 11:39-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,63 +17,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:96 applet.js:284 applet.js:286
+#: applet.js:97 applet.js:332 applet.js:334
 msgid "Translator"
 msgstr ""
 
-#: applet.js:212
+#: applet.js:260
 msgid "Unable to query available languages from translate-shell"
 msgstr ""
 
-#: applet.js:223
+#: applet.js:271
 msgid "Required \"trans\" command not found, please install translate-shell"
 msgstr ""
 
-#: applet.js:227
+#: applet.js:275
 msgid "Error, the \"trans\" command returned an exit code of "
 msgstr ""
 
-#: applet.js:307
+#: applet.js:355
 msgid "Swap Languages"
 msgstr ""
 
-#: applet.js:343
+#: applet.js:393
 msgid "{Text to translate}"
 msgstr ""
 
-#: applet.js:354
+#: applet.js:404
 msgid "{Translated text}"
 msgstr ""
 
-#: applet.js:368
+#: applet.js:418
 msgid "Configure"
 msgstr ""
 
-#: applet.js:369
+#: applet.js:419
 msgid "Help"
 msgstr ""
 
-#: applet.js:373
+#: applet.js:423
 msgid "Play"
 msgstr ""
 
-#: applet.js:377
+#: applet.js:427
 msgid "Paste"
 msgstr ""
 
-#: applet.js:381
+#: applet.js:431
 msgid "Clear"
 msgstr ""
 
-#: applet.js:385
+#: applet.js:435
 msgid "Translate"
 msgstr ""
 
-#: applet.js:390
+#: applet.js:440
 msgid "Copy"
 msgstr ""
 
-#: applet.js:396
+#: applet.js:446
 msgid "Play Translation"
 msgstr ""
 
@@ -172,41 +172,57 @@ msgstr ""
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
 msgid "Show popup dialog and translate Selection"
 msgstr ""
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
 msgid "Show popup dialog and translate Clipboard"
 msgstr ""
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
 msgid "Show popup dialog, translate Selection and play"
 msgstr ""
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
 msgid "Show popup dialog, translate Clipboard and play"
 msgstr ""
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
 msgid "Play translation of Selection"
 msgstr ""
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
 msgid "Play translation of Clipboard"
 msgstr ""
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
 msgid "Translate Selection and copy the translation"
 msgstr ""
 
 #. settings-schema.json->middle-button-action->options
 #. settings-schema.json->ctrl-middle-button-action->options
+#. settings-schema.json->hotkey1-action->options
+#. settings-schema.json->hotkey2-action->options
 msgid "Translate Clipboard and copy the translation"
 msgstr ""
 
@@ -228,4 +244,24 @@ msgstr ""
 msgid ""
 "Select the action to take when holding the Ctrl key and using the middle "
 "mouse button to click on the translator panel button"
+msgstr ""
+
+#. settings-schema.json->hotkeys-header->description
+msgid "Hotkeys"
+msgstr ""
+
+#. settings-schema.json->hotkey1-action->description
+msgid "Hotkey #1"
+msgstr ""
+
+#. settings-schema.json->hotkey1-action->tooltip
+msgid "Select the action to take when the #1 hotkey is pressed"
+msgstr ""
+
+#. settings-schema.json->hotkey2-action->description
+msgid "Hotkey #2"
+msgstr ""
+
+#. settings-schema.json->hotkey2-action->tooltip
+msgid "Select the action to take when the #2 hotkey is pressed"
 msgstr ""

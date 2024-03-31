@@ -31,6 +31,7 @@ const Config = imports.misc.config;
 const Gtk = imports.gi.Gtk;
 const GdkPixbuf = imports.gi.GdkPixbuf;
 const Cogl = imports.gi.Cogl;
+const Main = imports.ui.main;
 
 const ICONTHEME = Gtk.IconTheme.get_default();
 
@@ -47,7 +48,7 @@ const AutoPasteType = {
    Clipboard: 2
 }
 
-const MiddleBtnAction = {
+const TranslateAction = {
    DoNothing: 0,
    PopupSelection: 1,
    PopupClipboard: 2,
@@ -107,9 +108,81 @@ class PanelTranslatorApp extends Applet.IconApplet {
       this.getEngine();
       this.languages = [];
       this.getLanguages();
+      this.hotkey1Combo = null;
+      this.hotkey2Combo = null;
    }
 
    on_applet_added_to_panel() {
+      this._signalManager.connect(this.settings, "changed::hotkey-1", this._updateHotkeys, this);
+      this._signalManager.connect(this.settings, "changed::hotkey-2", this._updateHotkeys, this);
+      this._updateHotkeys()
+   }
+
+   on_applet_removed_from_panel() {
+      this._updateHotkeys(false);
+   }
+
+   _updateHotkeys(register=true) {
+      if (this.hotkey1Combo) {
+         Main.keybindingManager.removeHotKey("panelTranslator-hotkey1");
+         this.hotkey1Combo = null;
+      }
+      if (this.hotkey2Combo) {
+         Main.keybindingManager.removeHotKey("panelTranslator-hotkey2");
+         this.hotkey2Combo = null;
+      }
+      if (register) {
+         this.hotkey1Combo = this.getHotkeySequence("hotkey-1");
+         if (this.hotkey1Combo) {
+            Main.keybindingManager.addHotKey("panelTranslator-hotkey1", this.hotkey1Combo, () => this.performHotkey("hotkey1-action") );
+         }
+         this.hotkey2Combo = this.getHotkeySequence("hotkey-2");
+         if (this.hotkey2Combo) {
+            Main.keybindingManager.addHotKey("panelTranslator-hotkey2", this.hotkey2Combo, () => this.performHotkey("hotkey2-action") );
+         }
+      }
+   }
+
+   getHotkeySequence(name) {
+      let str = this.settings.getValue(name);
+      if (str && str.length>0 && str != "::") {
+         return str;
+      }
+      return null;
+   }
+
+   performHotkey(name) {
+      let action = this.settings.getValue(name);
+      this._performTranslateAction(action);
+   }
+
+   _performTranslateAction(action) {
+      switch(action) {
+         case TranslateAction.PopupSelection:
+            this.openPopupMenu(AutoPasteType.Selection, false);
+            break;
+         case TranslateAction.PopupClipboard:
+            this.openPopupMenu(AutoPasteType.Clipboard, false);
+            break;
+         case TranslateAction.PopupSelectionPlay:
+            this.openPopupMenu(AutoPasteType.Selection, true);
+            break;
+         case TranslateAction.PopupClipboardPlay:
+            this.openPopupMenu(AutoPasteType.Clipboard, true);
+            break;
+         case TranslateAction.PlaySelection:
+            this.translatorPopup.translateClipboard(AutoPasteType.Selection, true);
+            break;
+         case TranslateAction.PlayClipboard:
+            this.translatorPopup.translateClipboard(AutoPasteType.Clipboard, true);
+            break;
+         case TranslateAction.TransSelectionCopy:
+            this.translatorPopup.translateClipboard(AutoPasteType.Selection, false, true);
+            break;
+         case TranslateAction.TransClipboardCopy:
+            this.translatorPopup.translateClipboard(AutoPasteType.Clipboard, false, true);
+            break;
+      }
    }
 
    _onButtonPressEvent(actor, event) {
@@ -121,32 +194,7 @@ class PanelTranslatorApp extends Applet.IconApplet {
          } else {
             action = this.settings.getValue("middle-button-action");
          }
-         switch(action) {
-            case MiddleBtnAction.PopupSelection:
-               this.openPopupMenu(AutoPasteType.Selection, false);
-               break;
-            case MiddleBtnAction.PopupClipboard:
-               this.openPopupMenu(AutoPasteType.Clipboard, false);
-               break;
-            case MiddleBtnAction.PopupSelectionPlay:
-               this.openPopupMenu(AutoPasteType.Selection, true);
-               break;
-            case MiddleBtnAction.PopupClipboardPlay:
-               this.openPopupMenu(AutoPasteType.Clipboard, true);
-               break;
-            case MiddleBtnAction.PlaySelection:
-               this.translatorPopup.translateClipboard(AutoPasteType.Selection, true);
-               break;
-            case MiddleBtnAction.PlayClipboard:
-               this.translatorPopup.translateClipboard(AutoPasteType.Clipboard, true);
-               break;
-            case MiddleBtnAction.TransSelectionCopy:
-               this.translatorPopup.translateClipboard(AutoPasteType.Selection, false, true);
-               break;
-            case MiddleBtnAction.TransClipboardCopy:
-               this.translatorPopup.translateClipboard(AutoPasteType.Clipboard, false, true);
-               break;
-         }
+         this._performTranslateAction(action);
          return;
       }
       super._onButtonPressEvent(actor, event);
@@ -312,10 +360,12 @@ class TranslatorPopupItem extends PopupMenu.PopupMenuSection {
          if (this.fromLanguage) {
             this.toLanguage = from;
             this.toSearchEntry.set_text(fromTxt);
+            this._applet.settings.setValue("default-to-language", fromTxt);
          }
          if (this.toLanguage) {
             this.fromLanguage = to;
             this.fromSearchEntry.set_text(toTxt);
+            this._applet.settings.setValue("default-from-language", toTxt);
          }
          let fromText = this.fromTextBox.get_text();
          let toText = this.toTextBox.get_text();
