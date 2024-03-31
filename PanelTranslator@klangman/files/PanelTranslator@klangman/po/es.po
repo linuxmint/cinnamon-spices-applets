@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-31 11:39-0400\n"
-"PO-Revision-Date: 2024-02-09 20:40-0300\n"
+"PO-Revision-Date: 2024-03-31 14:02-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -263,20 +263,24 @@ msgstr ""
 
 #. settings-schema.json->hotkeys-header->description
 msgid "Hotkeys"
-msgstr ""
+msgstr "Teclas de acceso rápido"
 
 #. settings-schema.json->hotkey1-action->description
 msgid "Hotkey #1"
-msgstr ""
+msgstr "Tecla de acceso rápido #1"
 
 #. settings-schema.json->hotkey1-action->tooltip
 msgid "Select the action to take when the #1 hotkey is pressed"
 msgstr ""
+"Seleccione la acción a realizar cuando se presione la tecla de acceso rápido "
+"#1"
 
 #. settings-schema.json->hotkey2-action->description
 msgid "Hotkey #2"
-msgstr ""
+msgstr "Tecla de acceso rápido #2"
 
 #. settings-schema.json->hotkey2-action->tooltip
 msgid "Select the action to take when the #2 hotkey is pressed"
 msgstr ""
+"Seleccione la acción a realizar cuando se presione la tecla de acceso rápido "
+"#2"
