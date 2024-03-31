@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-15 19:59+0100\n"
-"PO-Revision-Date: 2024-02-15 20:00+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-31 10:36+0200\n"
+"PO-Revision-Date: 2024-03-31 10:38+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -319,8 +320,40 @@ msgid "30"
 msgstr "30"
 
 #. settings-schema.json->interval->options
-msgid "60"
-msgstr "60"
+msgid "1 minute"
+msgstr "1 minute"
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr "2 minutes"
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr "3 minutes"
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr "4 minutes"
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr "5 minutes"
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr "10 minutes"
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr "15 minutes"
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr "30 minutes"
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
+msgstr "1 heure"
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -730,6 +763,7 @@ msgstr ""
 "Pour annuler le Nom affiché, y copier/coller le Nom du capteur."
 
 #. settings-schema.json->report->description
+#: scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr "Exemple de valeurs des capteurs de cet ordinateur"
 
@@ -744,30 +778,3 @@ msgstr "Mettre à jour l'affichage"
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Retirer du panneau l'applet temperature@fevimu"
-
-#~ msgid "Default"
-#~ msgstr "Par défaut"
-
-#~ msgid "White"
-#~ msgstr "Blanc"
-
-#~ msgid "Black"
-#~ msgstr "Noir"
-
-#~ msgid "Grey"
-#~ msgstr "Gris"
-
-#~ msgid "Light Grey"
-#~ msgstr "Gris clair"
-
-#~ msgid "hddtemp is for now only usable by root"
-#~ msgstr "hddtemp est pour l'instant seulement utilisable par root"
-
-#~ msgid "Make hddtemp usable by user"
-#~ msgstr "Rendre hddtemp utilisable par les utilisateurs"
-
-#~ msgid "Temperature scripts"
-#~ msgstr "Scripts de température"
-
-#~ msgid "Sensors"
-#~ msgstr "Capteurs"

@@ -1,3 +1,6 @@
+### v3.6.1~20240331
+  * More refresh intervals.
+
 ### v3.6.0~20240215
   * Adds ability to choose the color of the text in panel.
 
