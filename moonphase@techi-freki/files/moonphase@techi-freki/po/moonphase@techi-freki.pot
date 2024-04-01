@@ -50,8 +50,17 @@ msgid "Waning Crescent"
 msgstr ""
 
 #. metadata.json->name
+#. js/moonPhase.js:76
 #: js/moon.js:54
 msgid "Moon Phase"
+msgstr ""
+
+#. js/moonPhase.js:80
+msgid "Transit"
+msgstr ""
+
+#. js/moonPhase.js:94
+msgid "Set"
 msgstr ""
 
 #. metadata.json->description

@@ -1,9 +1,10 @@
 const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
-const PopupMenu = imports.ui.popupMenu;
 const Lang = imports.lang;
 const { Moon } = require('./js/moon');
+const { Menu } = require('./js/menu');
+const { Translator } = require('./js/translator');
 
 class MoonPhase extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -12,9 +13,8 @@ class MoonPhase extends Applet.TextIconApplet {
         // setting defaults
         this.metadata = metadata;
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
-        this.menuManager = new PopupMenu.PopupMenuManager(this);
-        this.menu = new Applet.AppletPopupMenu(this, orientation);
-        this.menuManager.addMenu(this.menu);
+        this.orientation = orientation;
+        this.menu = new Applet.AppletPopupMenu(this, this.orientation);
 
         this.settings.bind('useAltIcons', 'useAltIcons', this._onSettingsChanged.bind(this));
         this.settings.bind('showTooltip', 'showTooltip', this._onSettingsChanged.bind(this));
@@ -70,16 +70,22 @@ class MoonPhase extends Applet.TextIconApplet {
     }
 
     _buildPopupMenu() {
-        // TODO: need to format this to look more like the weather applet (icons, font sizes, etc)
-        this.popupHeader = new PopupMenu.PopupMenuItem(`Moon Phase v${this.metadata.version}`, { reactive: false });
-        this.rise = new PopupMenu.PopupMenuItem(`Rise: ${this.moon.riseSetTimes.rise}`, { reactive: false });
-        this.transit = new PopupMenu.PopupMenuItem(`Transit: ${this.moon.riseSetTimes.transit}`, { reactive: false });
-        this.set = new PopupMenu.PopupMenuItem(`Set: ${this.moon.riseSetTimes.set}`, { reactive: false });
-
-        this.menu.addMenuItem(this.popupHeader);
-        this.menu.addMenuItem(this.rise);
-        this.menu.addMenuItem(this.transit);
-        this.menu.addMenuItem(this.set);
+        const menu = new Menu(this);
+        const translator = new Translator(this.metadata.uuid);
+        menu.buildMenu(translator.translate('Moon Phase'), [
+            {
+                title: translator.translate('Rise'),
+                value: this.moon.riseSetTimes.rise
+            },
+            {
+                title: translator.translate('Transit'),
+                value: this.moon.riseSetTimes.transit
+            },
+            {
+                title: translator.translate('Set'),
+                value: this.moon.riseSetTimes.set
+            }
+        ]);
     }
 
     _updateApplet() {
