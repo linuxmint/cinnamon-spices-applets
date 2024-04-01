@@ -1,7 +1,7 @@
 const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
-const UI = imports.ui;
 const Settings = imports.ui.settings;
+const PopupMenu = imports.ui.popupMenu;
 const Lang = imports.lang;
 const { Moon } = require('./js/moon');
 
@@ -12,6 +12,9 @@ class MoonPhase extends Applet.TextIconApplet {
         // setting defaults
         this.metadata = metadata;
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this.menuManager = new PopupMenu.PopupMenuManager(this);
+        this.menu = new Applet.AppletPopupMenu(this, orientation);
+        this.menuManager.addMenu(this.menu);
 
         this.settings.bind('useAltIcons', 'useAltIcons', this._onSettingsChanged.bind(this));
         this.settings.bind('showTooltip', 'showTooltip', this._onSettingsChanged.bind(this));
@@ -31,6 +34,7 @@ class MoonPhase extends Applet.TextIconApplet {
 
         this.moon = new Moon(this);
 
+        this._buildPopupMenu();
         this._updateApplet();
     }
 
@@ -42,6 +46,7 @@ class MoonPhase extends Applet.TextIconApplet {
 
     on_applet_clicked() {
         // TODO: Add popup that displays moon rise and set
+        this.menu.toggle();
     }
 
     _onSettingsChanged(value) {
@@ -63,10 +68,25 @@ class MoonPhase extends Applet.TextIconApplet {
 
         this.moon = new Moon(this);
 
+        this._buildPopupMenu();
         this._updateApplet();
     }
 
+    _buildPopupMenu() {
+        this.popupHeader = new PopupMenu.PopupMenuItem(`Moon Phase v${this.metadata.version}`, { reactive: false });
+        this.rise = new PopupMenu.PopupMenuItem(`Rise: ${this.moon.riseSetTimes.rise}`, { reactive: false });
+        this.transit = new PopupMenu.PopupMenuItem(`Transit: ${this.moon.riseSetTimes.transit}`, { reactive: false });
+        this.set = new PopupMenu.PopupMenuItem(`Set: ${this.moon.riseSetTimes.set}`, { reactive: false });
+
+        this.menu.addMenuItem(this.popupHeader);
+        this.menu.addMenuItem(this.rise);
+        this.menu.addMenuItem(this.transit);
+        this.menu.addMenuItem(this.set);
+    }
+
     _updateApplet() {
+        this.moon = new Moon(this);
+
         if (this.updateLoopId) {
             Mainloop.source_remove(this.updateLoopId);
         }

@@ -11,11 +11,13 @@ Extract and move moonphase@techi-freki to the ~./local/share/cinnamon/applets di
 ## Changelog
 
 ### v1.0.0
-- Swapped out [SunCalc](https://github.com/mourner/suncalc) for [MeeusJs](https://github.com/Fabiz/MeeusJs) for increased precision
+- Swapped out [SunCalc](https://github.com/mourner/suncalc) for [MeeusJs](https://github.com/Fabiz/MeeusJs) for increased precision and geolocation features
 - Added geolocation features
-- Added moon rise and set times
+- Added moon rise, set, and transit times
 - Refactored and cleaned up code base
-- Cleaned up versioning and added changelog
+- Cleaned up versioning to use semantic versioning and added changelog
+- Added LICENSE for icons used
+- Updated .pot file for new translations
 
 ### v0.2.11
 - Fixed percentage precision bug ([#5610](https://github.com/linuxmint/cinnamon-spices-applets/issues/5610))
