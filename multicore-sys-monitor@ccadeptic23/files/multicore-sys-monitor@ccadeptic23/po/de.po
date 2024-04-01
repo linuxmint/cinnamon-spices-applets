@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2024-02-05 14:48-0500\n"
-"PO-Revision-Date: 2023-12-24 12:33+0100\n"
+"PO-Revision-Date: 2024-04-01 09:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -264,9 +264,8 @@ msgstr "Beschriftungen"
 
 #: 3.2/prefsui.glade:132 4.0/prefsui.glade:140 3.4/prefsui.glade:133
 #: 3.0/prefsui.glade:132
-#, fuzzy
 msgid "Refresh Rate (ms)"
-msgstr "Graphen aktualisieren"
+msgstr "Aktualisierungsintervall (ms)"
 
 #: 3.2/prefsui.glade:189 3.0/prefsui.glade:189
 msgid "Height"
@@ -407,23 +406,23 @@ msgstr ""
 
 #: 4.0/prefsui.glade:168
 msgid "Curves thickness"
-msgstr ""
+msgstr "Linienstärke"
 
 #: 4.0/prefsui.glade:433
 msgid "Color by activity level"
-msgstr ""
+msgstr "Farbe nach Aktivitätsgrad"
 
 #: 4.0/prefsui.glade:460
 msgid "Use automatic colors"
-msgstr ""
+msgstr "Automatische Farben verwenden"
 
 #: 4.0/prefsui.glade:508
 msgid "by CPU:"
-msgstr ""
+msgstr "nach CPU:"
 
 #: 4.0/prefsui.glade:538
 msgid "by activity level (in %):"
-msgstr ""
+msgstr "nach Aktivitätsgrad (in %):"
 
 #: 4.0/prefsui.glade:1740
 #, fuzzy
