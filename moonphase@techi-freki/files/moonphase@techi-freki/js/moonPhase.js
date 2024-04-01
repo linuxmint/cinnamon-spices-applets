@@ -27,7 +27,6 @@ class MoonPhase extends Applet.TextIconApplet {
         this.settings.bind('enableGeolocation', 'enableGeolocation', this._onSettingsChanged.bind(this));
         this.settings.bind('latitude', 'latitude', this._onSettingsChanged.bind(this));
         this.settings.bind('longitude', 'longitude', this._onSettingsChanged.bind(this));
-        this.settings.bind('elevation', 'elevation', this._onSettingsChanged.bind(this));
         this.settings.bind('showRiseSet', 'showRiseSet', this._onSettingsChanged.bind(this));
 
         this.settings.bind('updateInterval', 'updateInterval', this._onSettingsChanged.bind(this));
@@ -45,7 +44,6 @@ class MoonPhase extends Applet.TextIconApplet {
     }
 
     on_applet_clicked() {
-        // TODO: Add popup that displays moon rise and set
         this.menu.toggle();
     }
 
@@ -61,7 +59,6 @@ class MoonPhase extends Applet.TextIconApplet {
         this.enableGeolocation = this.settings.getValue('enableGeolocation');
         this.latitude =  this.settings.getValue('latitude');
         this.longitude = this.settings.getValue('longitude');
-        this.elevation = this.settings.getValue('elevation');
         this.showRiseSet = this.settings.getValue('showRiseSet');
 
         this.updateInterval = this.settings.getValue('updateInterval');
@@ -73,6 +70,7 @@ class MoonPhase extends Applet.TextIconApplet {
     }
 
     _buildPopupMenu() {
+        // TODO: need to format this to look more like the weather applet (icons, font sizes, etc)
         this.popupHeader = new PopupMenu.PopupMenuItem(`Moon Phase v${this.metadata.version}`, { reactive: false });
         this.rise = new PopupMenu.PopupMenuItem(`Rise: ${this.moon.riseSetTimes.rise}`, { reactive: false });
         this.transit = new PopupMenu.PopupMenuItem(`Transit: ${this.moon.riseSetTimes.transit}`, { reactive: false });
