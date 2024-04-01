@@ -1,3 +1,6 @@
+### v6.7.1~20240401
+  * Improves 'audio-volume-muted' icons.
+
 ### v6.7.0~20240329
   * New icons.
 

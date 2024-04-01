@@ -12,6 +12,7 @@ const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
 const Cogl = imports.gi.Cogl; //Cogl
 const Gdk = imports.gi.Gdk;
+const Gtk = imports.gi.Gtk;
 const GdkPixbuf = imports.gi.GdkPixbuf;
 const Cvc = imports.gi.Cvc;
 const Tooltips = imports.ui.tooltips;
@@ -220,6 +221,8 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         super(startLevel);
         this.applet = applet;
         this.oldValue = startLevel;
+
+        Gtk.IconTheme.get_default().append_search_path("./icons");
 
         if (tooltip)
             this.tooltipText = tooltip + ": ";
@@ -454,7 +457,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         }
         if (this.applet.showMicMutedOnIcon && !this.isMic && (!this.applet.mute_in_switch || this.applet.mute_in_switch.state)) icon += "-with-mic-disabled";
 
-        return this.isMic ? "microphone-sensitivity-" + icon : "audio-volume-" + icon;
+        return this.isMic ? "microphone-sensitivity-" + icon + "-symbolic" : "audio-volume-" + icon + "-symbolic";
     }
 }
 
@@ -1799,7 +1802,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this._output = null;
         this._outputMutedId = 0;
-        this._outputIcon = "audio-volume-muted";
+        this._outputIcon = "audio-volume-muted-symbolic";
 
         this._input = null;
         this._inputMutedId = 0;
@@ -1811,8 +1814,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.actor.connect('scroll-event', (...args) => this._onScrollEvent(...args));
         this.actor.connect('key-press-event', (...args) => this._onKeyPressEvent(...args));
 
-        this.mute_out_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute output"), false, "audio-volume-muted", St.IconType.SYMBOLIC);
-        this.mute_in_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute input"), false, "microphone-sensitivity-muted", St.IconType.SYMBOLIC);
+        this.mute_out_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute output"), false, "audio-volume-muted-symbolic", St.IconType.SYMBOLIC);
+        this.mute_in_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute input"), false, "microphone-sensitivity-muted-symbolic", St.IconType.SYMBOLIC);
         this._applet_context_menu.addMenuItem(this.mute_out_switch);
         this._applet_context_menu.addMenuItem(this.mute_in_switch);
         if (!this.alwaysCanChangeMic)
