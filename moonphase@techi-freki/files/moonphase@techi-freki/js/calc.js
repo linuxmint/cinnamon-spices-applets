@@ -1,4 +1,5 @@
 const { A } = require('./lib/meeus.1.0.3.min');
+const SunCalc = require('./lib/suncalc3.js');
 
 class Calculator {
     constructor(lat, lon, elev) {
