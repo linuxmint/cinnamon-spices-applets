@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-31 10:36+0200\n"
-"PO-Revision-Date: 2023-12-24 11:18+0100\n"
+"PO-Revision-Date: 2024-04-01 08:41+0200\n"
 "Last-Translator: Michael Härtl <haertl.mike@gmail.com>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -26,7 +26,7 @@ msgstr "Sensorüberwachung"
 
 #: applet.js:268
 msgid "Suspended"
-msgstr ""
+msgstr "Pausiert"
 
 #: applet.js:484 applet.js:526
 msgid "high:"
@@ -95,9 +95,8 @@ msgid "Run xsensors"
 msgstr "Xsensors starten"
 
 #: applet.js:992
-#, fuzzy
 msgid "Suspend Sensors"
-msgstr "Xsensors starten"
+msgstr "Sensoren pausieren"
 
 #: applet.js:1003
 msgid "Reload this applet"
@@ -320,39 +319,39 @@ msgstr "30"
 
 #. settings-schema.json->interval->options
 msgid "1 minute"
-msgstr ""
+msgstr "1 Minute"
 
 #. settings-schema.json->interval->options
 msgid "2 minutes"
-msgstr ""
+msgstr "2 Minuten"
 
 #. settings-schema.json->interval->options
 msgid "3 minutes"
-msgstr ""
+msgstr "3 Minuten"
 
 #. settings-schema.json->interval->options
 msgid "4 minutes"
-msgstr ""
+msgstr "4 Minuten"
 
 #. settings-schema.json->interval->options
 msgid "5 minutes"
-msgstr ""
+msgstr "5 Minuten"
 
 #. settings-schema.json->interval->options
 msgid "10 minutes"
-msgstr ""
+msgstr "10 Minuten"
 
 #. settings-schema.json->interval->options
 msgid "15 minutes"
-msgstr ""
+msgstr "15 Minuten"
 
 #. settings-schema.json->interval->options
 msgid "30 minutes"
-msgstr ""
+msgstr "30 Minuten"
 
 #. settings-schema.json->interval->options
 msgid "1 hour"
-msgstr ""
+msgstr "1 Stunde"
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -377,9 +376,8 @@ msgid "Character size (% of standard size)"
 msgstr "Schriftgröße (% der Standardgröße)"
 
 #. settings-schema.json->char_color_customized->description
-#, fuzzy
 msgid "Customize Text Color"
-msgstr "Textfarbe"
+msgstr "Textfarbe anpassen"
 
 #. settings-schema.json->char_color->description
 msgid "Text Color"
@@ -393,7 +391,7 @@ msgstr "Trenner"
 msgid ""
 "The string used to separate values in horizontal orientation. Default is '│'."
 msgstr ""
-"Die Zeichenkette zum Trennen von Werten in horizontaler Richtung. Standard "
+"Die Zeichenkette zum Trennen von Werten in horizontaler Richtung. Vorgabe "
 "ist '|'."
 
 #. settings-schema.json->remove_border->description
@@ -414,7 +412,7 @@ msgstr "Entfernt die Sensor-Icons aus dem Applet."
 
 #. settings-schema.json->show_tooltip->description
 msgid "Display a tooltip on mouseover"
-msgstr ""
+msgstr "Tooltip bei Berührung mit dem Mauszeiger anzeigen"
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
@@ -433,8 +431,8 @@ msgid ""
 "Whether or not to display the names of the main sensors (those displayed in "
 "the panel) in bold italics in the tooltip."
 msgstr ""
-"Zeigt die Namen der Hauptsensoren (die im Panel zu sehen sind) in fett und "
-"kursiv im Tooltip an."
+"Zeigt die Namen der Hauptsensoren (jene, die im Panel zu sehen sind) in fett "
+"und kursiv im Tooltip an."
 
 #. settings-schema.json->restart_in_menu->description
 msgid "Show in menu the action: Restart this applet"
