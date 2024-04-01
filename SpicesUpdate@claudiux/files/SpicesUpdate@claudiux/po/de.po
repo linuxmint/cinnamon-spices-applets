@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux v1.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-22 16:29+0200\n"
-"PO-Revision-Date: 2021-02-24 21:32+0100\n"
+"PO-Revision-Date: 2024-04-01 10:26+0200\n"
 "Last-Translator: Tobias Bannert <tobannert@gmail.com>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: 4.2/applet.js:141
 msgid "You are advised to restart Cinnamon"
@@ -148,7 +148,7 @@ msgstr "(Beschreibung nicht verfügbar)"
 
 #: 4.2/applet.js:1706 3.8/applet.js:1770 2.8/applet.js:1614 4.6/applet.js:1786
 msgid "Forget new Spices"
-msgstr "Neuen Gewürze nicht wieder anzeigen"
+msgstr "Neue Spices nicht wieder anzeigen"
 
 #: 4.2/applet.js:1712 3.8/applet.js:1776 2.8/applet.js:1620 4.6/applet.js:1792
 msgid "Open useful Cinnamon Settings"
@@ -433,8 +433,8 @@ msgid ""
 "Warns you when installed Spices (applets, desklets, extensions, themes) "
 "require an update or new Spices are available."
 msgstr ""
-"Benachrichtigt, wenn für installierte Gewürze (Applets, Desklets, "
-"Erweiterungen, Themen) eine Aktualisierung vorliegt oder neue Gewürze zur "
+"Benachrichtigt, wenn für installierte Spices (Applets, Desklets, "
+"Erweiterungen, Themen) eine Aktualisierung vorliegt oder neue Spices zur "
 "Verfügung stehen."
 
 #. 4.2->settings-schema.json->section_applets1->title
@@ -748,7 +748,7 @@ msgstr ""
 #. 4.6->settings-schema.json->general_warning->description
 msgid "Notify me by changing the icon when Spices need an update"
 msgstr ""
-"Symbolfarbe ändern, wenn für installierte Gewürze Aktualisierungen zur "
+"Symbolfarbe ändern, wenn für installierte Spices Aktualisierungen zur "
 "Verfügung stehen"
 
 #. 4.2->settings-schema.json->general_warning->tooltip
@@ -760,7 +760,7 @@ msgid ""
 "when at least one of the Spices requires an update."
 msgstr ""
 "Wenn Sie dieses Kästchen auswählen, erlauben Sie diesem Applet, sein Symbol "
-"zu ändern, um Sie zu warnen, wenn mindestens eines der Gewürze eine "
+"zu ändern, um Sie zu warnen, wenn mindestens eines der Spices eine "
 "Aktualisierung erfordert."
 
 #. 4.2->settings-schema.json->events_color->description
@@ -768,7 +768,7 @@ msgstr ""
 #. 2.8->settings-schema.json->events_color->description
 #. 4.6->settings-schema.json->events_color->description
 msgid "The icon color when Spices need an update"
-msgstr "Die Symbolfarbe, wenn die Gewürze eine Aktualisierung benötigen"
+msgstr "Die Symbolfarbe, wenn Spices eine Aktualisierung benötigen"
 
 #. 4.2->settings-schema.json->events_color->tooltip
 #. 3.8->settings-schema.json->events_color->tooltip
@@ -782,7 +782,7 @@ msgstr "Knopf klicken, zur Auswahl einer anderen Farbe."
 #. 2.8->settings-schema.json->general_notifications->description
 #. 4.6->settings-schema.json->general_notifications->description
 msgid "Show notification messages about Spices updates"
-msgstr "Benachrichtigungsmeldungen über Gewürzaktualisierungen anzeigen"
+msgstr "Benachrichtigungsmeldungen über Spices-Aktualisierungen anzeigen"
 
 #. 4.2->settings-schema.json->general_notifications->tooltip
 #. 3.8->settings-schema.json->general_notifications->tooltip
@@ -792,15 +792,15 @@ msgid ""
 "By checking this box, you allow this applet to display messages about Spices "
 "updates in notifications viewer."
 msgstr ""
-"Eine Benachrichtigung anzeigen, wenn neue Gewürze oder Aktualisierungen für "
-"installierte Gewürze zur Verfügung stehen."
+"Eine Benachrichtigung anzeigen, wenn neue Spices oder Aktualisierungen für "
+"installierte Spices zur Verfügung stehen."
 
 #. 4.2->settings-schema.json->general_details_requested->description
 #. 3.8->settings-schema.json->general_details_requested->description
 #. 2.8->settings-schema.json->general_details_requested->description
 #. 4.6->settings-schema.json->general_details_requested->description
 msgid "Display the description of each update or new Spice"
-msgstr "Beschreibung für jede Aktualisierung oder neue Gewürze anzeigen"
+msgstr "Beschreibung für jede Aktualisierung oder neue Spices anzeigen"
 
 #. 4.2->settings-schema.json->general_details_requested->tooltip
 #. 3.8->settings-schema.json->general_details_requested->tooltip
@@ -811,8 +811,9 @@ msgid ""
 "description of any new Spice.\n"
 "This information will be displayed in English."
 msgstr ""
-"Bei Aktivierung werden detaillierte Änderungen zu jeder Aktualisierung bzw.\n"
-"bei neuen Gewürze angezeigt (nur in Englisch verfügbar)."
+"Bei Aktivierung werden detaillierte Änderungen zu jeder Aktualisierung "
+"sowie\n"
+"Beschreibungen neuer Spices angezeigt (nur in Englisch verfügbar)."
 
 #. 4.2->settings-schema.json->general_type_notif->options
 #. 3.8->settings-schema.json->general_type_notif->options
@@ -994,7 +995,7 @@ msgstr ""
 "\tZeigt einfache, kurze Benachrichtigungen.\n"
 "Mit Knopf:\n"
 "\tBenachrichtigungen enthalten außerdem einen Knopf, mit dem man direkt zu\n"
-"\tden Herunterlademöglichkeiten des jeweiligen Gewürzetyps springen kann\n"
+"\tden Herunterlademöglichkeiten des jeweiligen Spice-Typs springen kann\n"
 "\t(nach Datum sortiert)."
 
 #. 4.6->settings-schema.json->tooltip_max_width_screen_percentage->units
