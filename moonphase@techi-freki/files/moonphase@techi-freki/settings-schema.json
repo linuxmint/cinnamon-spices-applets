@@ -23,7 +23,6 @@
         "geolocationLabel",
         "latitude",
         "longitude",
-        "elevation",
         "showRiseSet"
       ]
     },
@@ -71,16 +70,6 @@
     "type": "entry",
     "default": "-73.935242",
     "description": "Longitude",
-    "dependency": "enableGeolocation"
-  },
-  "elevation": {
-    "type": "spinbutton",
-    "default": 10,
-    "min": 0,
-    "max": 8848,
-    "units": "meters",
-    "step": 1,
-    "description": "Elevation",
     "dependency": "enableGeolocation"
   },
   "showRiseSet": {

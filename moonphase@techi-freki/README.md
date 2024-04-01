@@ -11,7 +11,7 @@ Extract and move moonphase@techi-freki to the ~./local/share/cinnamon/applets di
 ## Changelog
 
 ### v1.0.0
-- Swapped out [SunCalc](https://github.com/mourner/suncalc) for [MeeusJs](https://github.com/Fabiz/MeeusJs) for increased precision and geolocation features
+- Swapped out [SunCalc](https://github.com/mourner/suncalc) for [SunCalc3](https://github.com/hypnos3/suncalc3) for increased precision and geolocation features
 - Added geolocation features
 - Added moon rise, set, and transit times
 - Refactored and cleaned up code base

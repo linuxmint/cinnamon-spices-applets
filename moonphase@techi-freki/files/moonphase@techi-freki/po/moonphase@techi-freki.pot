@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2023 Techi-Freki
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# D. Bryan Combs (Techi-Freki), 2023
 #
 #, fuzzy
 msgid ""
@@ -84,14 +84,6 @@ msgstr ""
 
 #. settings-schema.json->longitude->description
 msgid "Longitude"
-msgstr ""
-
-#. settings-schema.json->elevation->description
-msgid "Elevation"
-msgstr ""
-
-#. settings-schema.json->elevation->units
-msgid "meters"
 msgstr ""
 
 #. settings-schema.json->showRiseSet->description
