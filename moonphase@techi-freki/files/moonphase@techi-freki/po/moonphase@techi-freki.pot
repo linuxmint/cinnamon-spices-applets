@@ -96,7 +96,7 @@ msgid "Longitude"
 msgstr ""
 
 #. settings-schema.json->showRiseSet->description
-msgid "Display the moon rise and set times on click"
+msgid "Display the moon rise, transit, and set times on click"
 msgstr ""
 
 #. settings-schema.json->showPhaseLabel->description

@@ -16,7 +16,7 @@ Extract and move moonphase@techi-freki to the ~./local/share/cinnamon/applets di
 - Added moon rise, set, and transit times
 - Refactored and cleaned up code base
 - Cleaned up versioning to use semantic versioning and added changelog
-- Added LICENSE for icons used
+- Added LICENSE for icons and SunCalc3
 - Updated .pot file for new translations
 
 ### v0.2.11

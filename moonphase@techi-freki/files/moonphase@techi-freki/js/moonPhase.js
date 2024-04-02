@@ -44,7 +44,8 @@ class MoonPhase extends Applet.TextIconApplet {
     }
 
     on_applet_clicked() {
-        this.menu.toggle();
+        if (this.showRiseSet)
+            this.menu.toggle();
     }
 
     _onSettingsChanged(value) {
@@ -65,25 +66,27 @@ class MoonPhase extends Applet.TextIconApplet {
 
         this.moon = new Moon(this);
 
-        this._buildPopupMenu();
         this._updateApplet();
     }
 
     _buildPopupMenu() {
         const menu = new Menu(this);
         const translator = new Translator(this.metadata.uuid);
+        // TODO: add functions, events, and styling
         menu.buildMenu(translator.translate('Moon Phase'), [
             {
-                title: translator.translate('Rise'),
-                value: this.moon.riseSetTimes.rise
+                label: translator.translate('Rise'),
+                value: this.moon.riseSetTimes.rise,
+                icon: 'moonrise-symbolic'
             },
             {
-                title: translator.translate('Transit'),
+                label: translator.translate('Transit'),
                 value: this.moon.riseSetTimes.transit
             },
             {
-                title: translator.translate('Set'),
-                value: this.moon.riseSetTimes.set
+                label: translator.translate('Set'),
+                value: this.moon.riseSetTimes.set,
+                icon: 'moonset-symbolic'
             }
         ]);
     }

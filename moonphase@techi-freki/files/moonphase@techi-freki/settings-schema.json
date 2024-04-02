@@ -75,7 +75,7 @@
   "showRiseSet": {
     "type": "checkbox",
     "default": false,
-    "description": "Display the moon rise and set times on click",
+    "description": "Display the moon rise, transit, and set times on click",
     "dependency": "enableGeolocation"
   },
   "showPhaseLabel": {

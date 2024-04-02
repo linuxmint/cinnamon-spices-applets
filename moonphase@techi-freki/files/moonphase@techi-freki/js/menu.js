@@ -9,10 +9,18 @@ class Menu {
 
     buildMenu(heading, menuItems) {
         // TODO: need to format this to look more like the weather applet (icons, styling, etc)
-        this.applet.menu.addMenuItem(new PopupMenu.PopupMenuItem(`${heading} v${this.applet.metadata.version}`, { reactive: false }));
+        this.applet.menu.addMenuItem(new PopupMenu.PopupMenuItem(`${heading} v${this.applet.metadata.version}`, { reactive: false }, 'text-center'));
+        let item = null;
 
         menuItems.forEach((menuItem) => {
-            const item = new PopupMenu.PopupMenuItem(`${menuItem.title}: ${menuItem.value}`, { reactive: menuItem.reactive || false });
+            if (!menuItem.icon) {
+                item = new PopupMenu.PopupMenuItem(`${menuItem.label}\n${menuItem.value.toLocaleDateString()} ${menuItem.value.toLocaleTimeString()}`, { reactive: menuItem.reactive || false });
+            } else {
+                const iconLabel = new PopupMenu.PopupImageMenuItem(menuItem.label, menuItem.icon, { reactive: menuItem.reactive || false });
+                item = new PopupMenu.PopupMenuItem(`${menuItem.value.toLocaleDateString()} ${menuItem.value.toLocaleTimeString()}`, { reactive: menuItem.reactive || false });
+
+                this.applet.menu.addMenuItem(iconLabel);
+            }
 
             this.applet.menu.addMenuItem(item);
         });
