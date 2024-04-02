@@ -1,3 +1,6 @@
+### v6.7.2~20240402
+  * New option: whether show OSD on startup.
+
 ### v6.7.1~20240401
   * Improves 'audio-volume-muted' icons.
 
