@@ -1,3 +1,8 @@
+### v1.19.0~20240402
+  * Adds two options:
+    - Whether or not to show the sound volume OSD when changing radio station.
+    - Whether or not to magnetize all multiples of 25% of the sound volume.
+
 ### v1.18.0~20240328
   * Radio3.0@claudiux can now receive commands from the sound150@claudiux applet.
 

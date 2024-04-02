@@ -206,7 +206,9 @@
       "title": "Volume step",
       "keys": [
         "volume-step",
-        "volume-show-osd"
+        "volume-magnetic-on",
+        "volume-show-osd",
+        "volume-show-osd-starting-radio"
       ]
     },
     "sectionBehaviorTooltip": {
@@ -852,11 +854,22 @@
     },
     "tooltip": "By how much increase or decrease the volume using the mouse scroll wheel on the icon."
   },
+  "volume-magnetic-on": {
+    "type": "switch",
+    "default": false,
+    "description": "Magnetize all multiples of 25%"
+  },
   "volume-show-osd": {
     "type": "switch",
     "default": true,
     "description": "Show OSD while changing volume",
     "tooltip": "Should OSD (On-Screen Display) be displayed when changing volume?"
+  },
+  "volume-show-osd-starting-radio": {
+    "type": "switch",
+    "dependency": "volume-show-osd",
+    "default": true,
+    "description": "Show volume OSD when changing radio station"
   },
   "show-title-and-version": {
     "type": "switch",

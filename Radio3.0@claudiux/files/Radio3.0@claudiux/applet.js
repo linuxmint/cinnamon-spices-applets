@@ -1,9 +1,6 @@
 //'use strict';
 // infos on use strict: https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Strict_mode
-const { TextIconApplet,
-  AllowedLayout,
-  AppletPopupMenu
-} = imports.ui.applet; //Applet
+const { TextIconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet; //Applet
 
 const AppletManager = imports.ui.appletManager; //AppletManager
 
@@ -1174,6 +1171,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("show-volume-level-near-icon", "show_volume_level_near_icon", this.volume_near_icon.bind(this));
     this.settings.bind("dont-check-dependencies", "dont_check_dependencies");
     this.settings.bind("recentRadios", "recentRadios");
+    this.settings.bind("volume-magnetic-on", "magnetic25On");
     this.settings.bind("volume-step", "volume_step");
     this.settings.bind("volume-at-startup", "volume_at_startup");
     this.settings.bind("volume-percentage", "percentage");
@@ -1184,7 +1182,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("show-reload", "show_reload");
     this.settings.bind("show-bitrate", "show_bitrate", (...args) => this.set_show_bitrate(...args));
     this.settings.bind("show-codec", "show_codec");
+    this.settings.bind("volume-show-osd-starting-radio","showOSDonStartup");
     this.settings.bind("volume-show-osd", "volume_show_osd");
+    this.showOSD = this.volume_show_osd && this.showOSDonStartup;
 
     this.settings.bind("import-list", "import_list");
     this.settings.bind("import-dir", "import_dir");
@@ -3171,6 +3171,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   start_mpv_radio(id) {
+    this.showOSD = this.volume_show_osd && this.showOSDonStartup;
     source.destroyAllNotifications();
     let _id = ""+id;
     //log("start_mpv_radio: " + _id);
