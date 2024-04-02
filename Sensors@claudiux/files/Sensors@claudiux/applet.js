@@ -352,9 +352,11 @@ class SensorsApplet extends Applet.TextApplet {
       this.sensors_list[type].set_value(ret);
       this.updateUI();
     }
-    Util.unref(ret);
+    //Util.unref(ret);
+    ret = null;
     _known_keys = null;
-    Util.unref(toPush);
+    //Util.unref(toPush);
+    toPush = null;
     name = null;
     modified = null;
   }
@@ -696,7 +698,7 @@ class SensorsApplet extends Applet.TextApplet {
 
     // Temperatures:
     var nbr_already_shown = 0;
-    if (this.show_temp && this.temp_sensors.length !== 0
+    if (this.show_temp //&& this.temp_sensors.length !== 0
         && this.data !== undefined && Object.keys(this.data["temps"]).length != 0) {
       for (let t of this.temp_sensors) {
         if (this.data["temps"][t["sensor"]] !== undefined) {
@@ -891,7 +893,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.actor.set_style_class_name(_actor_style);
     //~ this._applet_label.set_style_class_name("tcolor"+this.char_color);
     if (!this.char_color_customized) {
-      this._applet_label.set_style("");
+      this._applet_label.set_style(null);
       this._applet_label.set_style_class_name("applet-label");
     } else {
       this._applet_label.set_style_class_name("applet-label");
@@ -1368,10 +1370,14 @@ class SensorsApplet extends Applet.TextApplet {
    */
   on_enter_event(actor, event) {
     this.tooltip_must_be_updated = true;
+    this.updateUI();
+    this.isUpdatingUI = true;
+    this.updateTooltip();
   }
 
   on_leave_event(actor, event) {
     this.tooltip_must_be_updated = false;
+    this.isUpdatingUI = false;
   }
 
   /**

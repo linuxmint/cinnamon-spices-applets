@@ -1,3 +1,6 @@
+### v3.6.2~20240402
+  * Displays the tooltip regardless of the refresh interval.
+
 ### v3.6.1~20240331
   * More refresh intervals.
 
