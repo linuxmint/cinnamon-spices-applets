@@ -92,7 +92,8 @@
         "stepVolume",
         "magneticOn",
         "magnetic25On",
-        "alwaysCanChangeMic"
+        "alwaysCanChangeMic",
+        "showOSDonStartup"
       ]
     },
     "section6": {
@@ -296,6 +297,11 @@
     "description": "Always allow microphone to be reactivated",
     "tooltip": "Always show the 'Mute input' switch in the context menu.",
     "default": true
+  },
+  "showOSDonStartup": {
+    "type": "switch",
+    "description": "Show volume level in OSD on startup",
+    "default": false
   },
   "redefine-volume-keybindings": {
     "type": "switch",

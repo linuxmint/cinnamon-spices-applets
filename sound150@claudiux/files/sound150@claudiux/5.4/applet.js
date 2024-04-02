@@ -218,6 +218,7 @@ class ControlButton {
 class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
     constructor(applet, stream, tooltip, app_icon) {
         const startLevel = (tooltip == _("Microphone")) ? 1*applet.mic_level.slice(0, -1) : 1*applet.volume.slice(0, -1);
+        applet.showOSD = applet.showOSDonStartup;
         super(startLevel);
         this.applet = applet;
         this.oldValue = startLevel;
@@ -1664,6 +1665,8 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.metadata = metadata;
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
+        this.settings.bind("showOSDonStartup", "showOSDonStartup");
+        this.showOSD = this.showOSDonStartup;
         this.settings.bind("soundATcinnamonDOTorg_is_loaded", "soundATcinnamonDOTorg_is_loaded");
         this.settings.bind("showtrack", "showtrack", this.on_settings_changed);
         this.settings.bind("middleClickAction", "middleClickAction");
@@ -2000,7 +2003,12 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     on_applet_added_to_panel() {
+        this.showOSD = this.showOSDonStartup;
         this.volume_near_icon()
+    }
+
+    on_applet_reloaded() {
+        this.showOSD = this.showOSDonStartup;
     }
 
     on_applet_removed_from_panel() {
@@ -2080,6 +2088,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         let newStatus = !this._input.is_muted;
         this._input.change_is_muted(newStatus);
         this.mute_in_switch.setToggleState(newStatus);
+        this.showOSD = true;
         this._volumeChange(null);
     }
 
@@ -2089,7 +2098,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (direction == Clutter.ScrollDirection.SMOOTH) {
             return Clutter.EVENT_PROPAGATE;
         }
-
+        this.showOSD = true;
         this._volumeChange(direction);
         this.volume_near_icon()
     }
@@ -2168,7 +2177,8 @@ class Sound150Applet extends Applet.TextIconApplet {
                 icon_name += "-with-mic-disabled";
             icon_name += "-symbolic";
             let icon = Gio.Icon.new_for_string(icon_name);
-            Main.osdWindowManager.show(-1, icon, volume, null);
+            if (this.showOSD)
+                Main.osdWindowManager.show(-1, icon, volume, null);
             this.set_applet_icon_symbolic_name(icon_name);
             var intervalId = null;
             intervalId = Util.setInterval(() => {
