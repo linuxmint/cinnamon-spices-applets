@@ -66,6 +66,7 @@ class MoonPhase extends Applet.TextIconApplet {
 
         this.moon = new Moon(this);
 
+        this._buildPopupMenu();
         this._updateApplet();
     }
 
@@ -73,20 +74,25 @@ class MoonPhase extends Applet.TextIconApplet {
         const menu = new Menu(this);
         const translator = new Translator(this.metadata.uuid);
         // TODO: add functions, events, and styling
+        // TODO: swap from popup to panel
         menu.buildMenu(translator.translate('Moon Phase'), [
             {
                 label: translator.translate('Rise'),
                 value: this.moon.riseSetTimes.rise,
-                icon: 'moonrise-symbolic'
+                icon: 'moonrise-symbolic',
+                cssClass: null
             },
             {
                 label: translator.translate('Transit'),
-                value: this.moon.riseSetTimes.transit
+                value: this.moon.riseSetTimes.transit,
+                icon: 'night-clear-symbolic',
+                cssClass: null
             },
             {
                 label: translator.translate('Set'),
                 value: this.moon.riseSetTimes.set,
-                icon: 'moonset-symbolic'
+                icon: 'moonset-symbolic',
+                cssClass: null
             }
         ]);
     }
