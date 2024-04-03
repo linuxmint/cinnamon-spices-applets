@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-07 23:19-0500\n"
-"PO-Revision-Date: 2024-02-16 10:04+0100\n"
+"PO-Revision-Date: 2024-04-03 15:28+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -32,9 +32,8 @@ msgid "Suspend computer"
 msgstr "Mise en veille de l'ordinateur"
 
 #. settings-schema.json->suspend-header->description
-#, fuzzy
 msgid "Suspend computer settings"
-msgstr "Préférences de Mise en veille de l'ordinateur"
+msgstr "Paramètres de Mise en veille de l'ordinateur"
 
 #. settings-schema.json->suspend-on-double-click->description
 msgid "Double-click to suspend"
@@ -73,6 +72,7 @@ msgstr "Durée du compte à rebours"
 #. settings-schema.json->ctrl-override-countdown->description
 msgid "Ctrl+Click to override the count down and suspend immediately"
 msgstr ""
+"Ctrl+Clic pour annuler le compte à rebours et mettre en veille immédiatement"
 
 #. settings-schema.json->ctrl-override-countdown->tooltip
 msgid ""
@@ -80,13 +80,15 @@ msgid ""
 "without starting a count down or waiting for an existing count down to "
 "finish."
 msgstr ""
+"Lorsque cette option est activée, l'utilisation de Ctrl+Clic met "
+"immédiatement en veille l'ordinateur, sans lancer de compte à rebours ni "
+"attendre la fin d'un compte à rebours existant."
 
 #. settings-schema.json->fullcolor-icon->description
 msgid "Use a full color icon"
 msgstr "Afficher une icône en couleurs"
 
 #. settings-schema.json->fullcolor-icon->tooltip
-#, fuzzy
 msgid ""
 "When enabled, a full color panel icon will be used, otherwise a symbolic "
 "icon will be used."
@@ -95,10 +97,9 @@ msgstr ""
 "sinon une icône symbolique sera utilisée."
 
 #. settings-schema.json->system-suspend-header->description
-#, fuzzy
 msgid "System suspend settings"
-msgstr "Préférences de Mise en veille de l'ordinateur"
+msgstr "Paramètres système de Mise en veille"
 
 #. settings-schema.json->config-power->description
 msgid "Open Power Management Settings"
-msgstr ""
+msgstr "Ouvrir les paramètres de Gestion d'alimentation"

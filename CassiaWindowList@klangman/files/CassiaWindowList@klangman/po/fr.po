@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-27 09:32-0400\n"
-"PO-Revision-Date: 2024-02-11 16:45+0100\n"
+"PO-Revision-Date: 2024-04-03 14:46+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -503,9 +503,10 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-delay->description
 #. 6.0->settings-schema.json->hover-peek-delay->description
-#, fuzzy
 msgid "Hover time before showing a full size window preview"
-msgstr "Durée du survol avant l'affichage du menu"
+msgstr ""
+"Temps de survol avant l'affichage d'une fenêtre de prévisualisation en "
+"taille réelle"
 
 #. 4.0->settings-schema.json->hover-peek-delay->tooltip
 #. 6.0->settings-schema.json->hover-peek-delay->tooltip
@@ -515,6 +516,11 @@ msgid ""
 "course one of the full size window preview options must be enabled for this "
 "option to have any effect)"
 msgstr ""
+"Cette option définit le temps de survol de la souris avant qu'un aperçu de "
+"la fenêtre en taille réelle n'apparaisse. Elle s'applique aux boutons de la "
+"liste des fenêtres et aux éléments du menu des vignettes (bien entendu, "
+"l'une des options de prévisualisation de la fenêtre en taille réelle doit "
+"être activée pour que cette option ait un effet)"
 
 #. 4.0->settings-schema.json->label-width->units
 #. 4.0->settings-schema.json->button-spacing->units
@@ -751,7 +757,6 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-windowlist->tooltip
 #. 6.0->settings-schema.json->hover-peek-windowlist->tooltip
-#, fuzzy
 msgid ""
 "If enabled, a full size preview window will appear when the mouse pointer is "
 "hovering over a window-list button. The delay before the preview appears is "
@@ -759,7 +764,8 @@ msgid ""
 msgstr ""
 "Si cette option est activée, une fenêtre de prévisualisation pleine taille "
 "apparaît lorsque le pointeur de la souris passe au-dessus d'un bouton de la "
-"liste des fenêtres."
+"liste des fenêtres. Le délai avant l'apparition de l'aperçu est contrôlé par "
+"une option de l'onglet Avancé"
 
 #. 4.0->settings-schema.json->no-click-activate->description
 #. 6.0->settings-schema.json->no-click-activate->description
@@ -1070,9 +1076,8 @@ msgstr "Déplacer vers l'espace de travail suivant"
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Move to this workspace"
-msgstr "Déplacer vers l'espace de travail suivant"
+msgstr "Déplacer vers cet espace de travail"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1222,7 +1227,7 @@ msgstr "Bascule d'épinglage au panneau"
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile left"
-msgstr ""
+msgstr "Placer à gauche dans la mosaïque"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1237,7 +1242,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile top left"
-msgstr ""
+msgstr "Placer en haut à gauche dans la mosaïque"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1252,7 +1257,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile top"
-msgstr ""
+msgstr "Placer en haut dans la mosaïque"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1267,7 +1272,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile top right"
-msgstr ""
+msgstr "Placer en haut à droite dans la mosaïque"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1282,7 +1287,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile right"
-msgstr ""
+msgstr "Placer à droite dans la mosaïque"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1297,7 +1302,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile bottom right"
-msgstr ""
+msgstr "Placer en bas à droite dans la mosaïque"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1312,7 +1317,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile bottom"
-msgstr ""
+msgstr "Placer en bas dans la mosaïque"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1327,7 +1332,7 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
 msgid "Tile bottom left"
-msgstr ""
+msgstr "Placer en bas à gauche dans la mosaïque"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1341,9 +1346,8 @@ msgstr ""
 #. 6.0->settings-schema.json->mouse-action-btn2->options
 #. 6.0->settings-schema.json->mouse-action-btn8->options
 #. 6.0->settings-schema.json->mouse-action-btn9->options
-#, fuzzy
 msgid "Untile window"
-msgstr "Fermer la fenêtre"
+msgstr "Enlever cette fenêtre de la mosaïque"
 
 #. 4.0->settings-schema.json->preview-middle-click->options
 #. 4.0->settings-schema.json->preview-back-click->options
@@ -1384,15 +1388,15 @@ msgstr ""
 
 #. 4.0->settings-schema.json->hover-peek-thumbnail->tooltip
 #. 6.0->settings-schema.json->hover-peek-thumbnail->tooltip
-#, fuzzy
 msgid ""
 "If enabled, a full size preview window will appear when the mouse pointer is "
 "hovering over a Thumbnail menu item. The delay before the preview appears is "
 "controlled by an option under the Advanced tab"
 msgstr ""
 "Si cette option est activée, une fenêtre de prévisualisation en taille "
-"réelle s'affiche lorsque le pointeur de la souris passe au-dessus d'un "
-"élément du menu Vignettes"
+"réelle apparaît lorsque le pointeur de la souris passe au-dessus d'un "
+"élément du menu Vignettes. Le délai avant l'apparition de l'aperçu est "
+"contrôlé par une option de l'onglet Avancé"
 
 #. 4.0->settings-schema.json->no-click-activate-thumbnail->description
 #. 6.0->settings-schema.json->no-click-activate-thumbnail->description
