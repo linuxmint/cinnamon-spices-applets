@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-05 14:36-0500\n"
-"PO-Revision-Date: 2024-02-11 17:10+0100\n"
+"PO-Revision-Date: 2024-04-03 14:55+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -28,12 +28,10 @@ msgid "Waiting"
 msgstr "En attente"
 
 #: 5.4/applet.js:327
-#, fuzzy
 msgid "Some dependencies not installed."
-msgstr "Certaines dépendances ne sont pas installées"
+msgstr "Certaines dépendances ne sont pas installées."
 
 #: 5.4/applet.js:327
-#, fuzzy
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
 "functionality including notifications and audible alerts.\n"
@@ -43,7 +41,7 @@ msgstr ""
 "'sox' et 'zenity' sont requis pour que cette applet dispose de toutes ses "
 "fonctionnalités, y compris les notifications et les alertes sonores .\n"
 "\n"
-"Veuillez consulter le README pour obtenir de l'aide sur leur installation."
+"Veuillez consulter le README pour obtenir de l'aide sur leur installation.\n"
 
 #: 5.4/applet.js:337 3.2/applet.js:193
 msgid "Battery Monitor Applet"
@@ -88,27 +86,26 @@ msgid "Waiting for battery information"
 msgstr "En attente d'information sur la batterie"
 
 #: 5.4/applet.js:444
-#, fuzzy
 msgid "Alert/Suspend:"
-msgstr "Mise en veille :"
+msgstr "Alerte/Mise en veille :"
 
 #: 5.4/applet.js:549
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Batterie faible - arrêter ou brancher sur secteur"
 
 #: 5.4/applet.js:555
-#, fuzzy
 msgid ""
 "The battery level has fallen to your alert level.\n"
 "\n"
 "Either connect to a power source or save or close down\n"
 "your work and suspend or shutdown the machine.\n"
 msgstr ""
-"La niveau de la batterie a atteint le niveau d'alerte que vous avez défini.\n"
+"La niveau de la batterie a atteint le niveau d'alerte\n"
+"que vous avez défini.\n"
 "\n"
 "Rebranchez votre ordinateur sur secteur\n"
-"ou bien fermez vos applications puis arrêtez ou mettez en veille votre "
-"ordinateur.\n"
+"ou bien fermez vos applications puis arrêtez ou\n"
+"mettez en veille votre ordinateur.\n"
 "\n"
 
 #: 5.4/applet.js:570
@@ -252,11 +249,8 @@ msgid "Percentage Charge:"
 msgstr "Pourcentage de charge :"
 
 #. metadata.json->description
-#, fuzzy
 msgid "Displays charge as percentage and allows alerts and actions"
-msgstr ""
-"Affiche la charge de la batterie, les messages d'alerte selon son niveau et "
-"agit en cas de franchissement d'un seuil critique"
+msgstr "Affiche la charge en pourcentage et propose des alertes et des actions"
 
 #. 5.4->settings-schema.json->General->title
 msgid "General"

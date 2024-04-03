@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-31 11:39-0400\n"
-"PO-Revision-Date: 2024-02-11 17:08+0100\n"
+"PO-Revision-Date: 2024-04-03 14:49+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -270,20 +270,22 @@ msgstr ""
 
 #. settings-schema.json->hotkeys-header->description
 msgid "Hotkeys"
-msgstr ""
+msgstr "Raccourcis-clavier"
 
 #. settings-schema.json->hotkey1-action->description
 msgid "Hotkey #1"
-msgstr ""
+msgstr "Raccourci-clavier n°1"
 
 #. settings-schema.json->hotkey1-action->tooltip
 msgid "Select the action to take when the #1 hotkey is pressed"
 msgstr ""
+"Sélectionner l'action à effectuer lorsque le raccourci clavier n°1 est activé"
 
 #. settings-schema.json->hotkey2-action->description
 msgid "Hotkey #2"
-msgstr ""
+msgstr "Raccourci-clavier n°2"
 
 #. settings-schema.json->hotkey2-action->tooltip
 msgid "Select the action to take when the #2 hotkey is pressed"
 msgstr ""
+"Sélectionner l'action à effectuer lorsque le raccourci clavier n°2 est activé"
