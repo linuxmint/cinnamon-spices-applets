@@ -24,11 +24,7 @@ class Moon {
         let name = "";
         const age = this.age / 28;
         const translator = new Translator(this.uuid);
-
-        // method to convert to percentage without rounding to keep precision
-        // TODO: multiply by 100 then floor then divide by 100
-        const toPercentage = (n, fixed) => `${n * 100}`.match(new RegExp(`^-?\\d+(?:\.\\d{0,${fixed}})?`))[0] + '%';
-        const percent = toPercentage(this.illumination.fraction, 2);
+        const percent = `${Math.floor((this.illumination.fraction * 100) * 100) / 100}%`;
 
         if (age === 0) name = translator.translate('New Moon');
         else if (age < 0.25) name = translator.translate('Waxing Crescent');
