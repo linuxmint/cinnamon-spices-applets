@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: directory-menu@torchipeppo 0.5.1\n"
+"Project-Id-Version: directory-menu@torchipeppo 0.6.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-07 17:27-0100\n"
+"POT-Creation-Date: 2024-04-07 18:39-0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,16 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: applet.js:43
 msgid "Directory Menu"
-msgstr ""
-
-#: popup_menu.py:71
-msgid "Open Folder"
-msgstr ""
-
-#: popup_menu.py:76
-msgid "Open in Terminal"
 msgstr ""
 
 #. metadata.json->description
@@ -45,6 +36,10 @@ msgstr ""
 
 #. settings-schema.json->icon-name->tooltip
 msgid "Must be an icon name (no path), and should be symbolic."
+msgstr ""
+
+#. settings-schema.json->tooltip->description
+msgid "Tooltip Text"
 msgstr ""
 
 #. settings-schema.json->label->description

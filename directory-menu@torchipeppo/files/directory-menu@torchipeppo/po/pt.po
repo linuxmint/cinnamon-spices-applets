@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-07 17:27-0100\n"
+"POT-Creation-Date: 2024-04-07 18:39-0100\n"
 "PO-Revision-Date: 2024-04-07 17:36-0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,17 +19,8 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
-#: applet.js:43
 msgid "Directory Menu"
 msgstr "Menu de Diretórios"
-
-#: popup_menu.py:71
-msgid "Open Folder"
-msgstr "Abrir pasta"
-
-#: popup_menu.py:76
-msgid "Open in Terminal"
-msgstr "Abrir no terminal"
 
 #. metadata.json->description
 msgid ""
@@ -49,6 +40,10 @@ msgstr "Ícone"
 #. settings-schema.json->icon-name->tooltip
 msgid "Must be an icon name (no path), and should be symbolic."
 msgstr "Precisa ser o nome de um ícone."
+
+#. settings-schema.json->tooltip->description
+msgid "Tooltip Text"
+msgstr "Texto da Dica"
 
 #. settings-schema.json->label->description
 msgid "Panel Text"
