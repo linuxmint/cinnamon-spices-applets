@@ -24,7 +24,7 @@
     "character-limit": {
         "type": "spinbutton",
         "default": 50,
-        "min": 0,
+        "min": 5,
         "max": 9999,
         "step": 5,
         "description": "Character Limit",
