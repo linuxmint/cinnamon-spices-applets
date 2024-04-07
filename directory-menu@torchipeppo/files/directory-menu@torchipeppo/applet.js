@@ -21,8 +21,22 @@ const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Cinnamon = imports.gi.Cinnamon;
 const Settings = imports.ui.settings;
+const Gettext = imports.gettext;
+
+
 const UUID = "directory-menu@torchipeppo";
 
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(text) {
+	let locText = Gettext.dgettext(UUID, text);
+
+	if (locText == text) {
+		locText = window._(text);
+	}
+
+	return locText;
+}
 
 
 class CassettoneApplet extends Applet.TextIconApplet {
