@@ -1,5 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# This file is put in the public domain.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -51,7 +52,7 @@ msgid "Limit the Maximum Number of Characters on the Submenus"
 msgstr ""
 
 #. settings-schema.json->character-limit->description
-msgid "Character Limit"
+msgid "Character Limit (-1 to disable)"
 msgstr ""
 
 #. settings-schema.json->character-limit->tooltip
@@ -62,4 +63,12 @@ msgstr ""
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
+msgstr ""
+
+#. popup_menu.py:71
+msgid "Open Folder"
+msgstr ""
+
+#. popup_menu.py:76
+msgid "Open in Terminal"
 msgstr ""

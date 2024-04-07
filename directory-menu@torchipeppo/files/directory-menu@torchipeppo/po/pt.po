@@ -23,11 +23,8 @@ msgid "Directory Menu"
 msgstr "Menu de Diretórios"
 
 #. metadata.json->description
-msgid ""
-"Quickly navigate through directories on your system using a dropdown menu."
-msgstr ""
-"Navegue rapidamente através dos diretórios do seu sistema utilizando um menu "
-"dropdown."
+msgid "Quickly navigate through directories on your system using a dropdown menu."
+msgstr "Navegue rapidamente através dos diretórios do seu sistema utilizando um menu dropdown."
 
 #. settings-schema.json->starting-uri->description
 msgid "Base Directory"
@@ -68,3 +65,11 @@ msgstr ""
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Incluir ficheiros ocultos"
+
+#. popup_menu.py:71
+msgid "Open Folder"
+msgstr "Abrir pasta"
+
+#. popup_menu.py:76
+msgid "Open in Terminal"
+msgstr "Abrir no terminal"

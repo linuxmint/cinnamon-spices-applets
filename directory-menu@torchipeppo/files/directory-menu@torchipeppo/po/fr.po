@@ -27,8 +27,8 @@ msgstr "Menu de répertoires"
 msgid ""
 "Quickly navigate through directories on your system using a dropdown menu."
 msgstr ""
-"Naviguez rapidement dans les répertoires de votre système à l'aide d'un menu "
-"déroulant."
+"Naviguez rapidement dans les répertoires de votre système à l'aide d'un "
+"menu déroulant."
 
 #. settings-schema.json->starting-uri->description
 msgid "Base Directory"
@@ -45,7 +45,7 @@ msgstr ""
 
 #. settings-schema.json->tooltip->description
 msgid "Tooltip Text"
-msgstr ""
+msgstr "Texte de l'info-bulle"
 
 #. settings-schema.json->label->description
 msgid "Panel Text"
@@ -56,8 +56,7 @@ msgid "Limit the Maximum Number of Characters on the Submenus"
 msgstr ""
 
 #. settings-schema.json->character-limit->description
-#, fuzzy
-msgid "Character Limit"
+msgid "Character Limit (-1 to disable)"
 msgstr "Nombre maximal de caractères (-1 pour désactiver)"
 
 #. settings-schema.json->character-limit->tooltip
@@ -71,3 +70,11 @@ msgstr ""
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Montrer également les fichiers cachés"
+
+#. popup_menu.py:71
+msgid "Open Folder"
+msgstr "Ouvrir le dossier"
+
+#. popup_menu.py:76
+msgid "Open in Terminal"
+msgstr "Ouvrir dans un terminal"

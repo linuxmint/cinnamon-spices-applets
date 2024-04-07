@@ -45,7 +45,7 @@ msgstr ""
 
 #. settings-schema.json->tooltip->description
 msgid "Tooltip Text"
-msgstr ""
+msgstr "Eszköztipp szövege"
 
 #. settings-schema.json->label->description
 msgid "Panel Text"
@@ -56,8 +56,7 @@ msgid "Limit the Maximum Number of Characters on the Submenus"
 msgstr ""
 
 #. settings-schema.json->character-limit->description
-#, fuzzy
-msgid "Character Limit"
+msgid "Character Limit (-1 to disable)"
 msgstr "Karakter Limit (-1 a letiltáshoz)"
 
 #. settings-schema.json->character-limit->tooltip
@@ -71,3 +70,11 @@ msgstr ""
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Tartalmazza a rejtett fájlokat is"
+
+#. popup_menu.py:71
+msgid "Open Folder"
+msgstr "Könyvtár megnyitása"
+
+#. popup_menu.py:76
+msgid "Open in Terminal"
+msgstr "Megnyitás terminálban"

@@ -24,7 +24,8 @@ msgstr "Menù delle Cartelle"
 #. metadata.json->description
 msgid ""
 "Quickly navigate through directories on your system using a dropdown menu."
-msgstr "Naviga rapidamente attraverso le tue cartelle con un menù a tendina."
+msgstr ""
+"Naviga rapidamente attraverso le tue cartelle con un menù a tendina."
 
 #. settings-schema.json->starting-uri->description
 msgid "Base Directory"
@@ -36,13 +37,11 @@ msgstr "Icona (tieni il mouse qui per info!)"
 
 #. settings-schema.json->icon-name->tooltip
 msgid "Must be an icon name (no path), and should be symbolic."
-msgstr ""
-"Deve essere il nome di un'icona (non un percorso), e l'icona dovrebbe essere "
-"simbolica."
+msgstr "Deve essere il nome di un'icona (non un percorso), e l'icona dovrebbe essere simbolica."
 
 #. settings-schema.json->tooltip->description
 msgid "Tooltip Text"
-msgstr ""
+msgstr "Didascalia"
 
 #. settings-schema.json->label->description
 msgid "Panel Text"
@@ -53,18 +52,21 @@ msgid "Limit the Maximum Number of Characters on the Submenus"
 msgstr ""
 
 #. settings-schema.json->character-limit->description
-#, fuzzy
-msgid "Character Limit"
+msgid "Character Limit (-1 to disable)"
 msgstr "Limite di caratteri (-1 per disattivare)"
 
 #. settings-schema.json->character-limit->tooltip
-msgid ""
-"(Approximately) Limit the number of characters of each entry.\n"
-"Useful if you think the menu is too wide."
-msgstr ""
-"Limita (approssimativamente) il numero di caratteri di ciascuna riga.\n"
-"Utile se il menù risulta troppo largo."
+msgid "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide."
+msgstr "Limita (approssimativamente) il numero di caratteri di ciascuna riga.\nUtile se il menù risulta troppo largo."
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Mostra i file nascosti"
+
+#. popup_menu.py:71
+msgid "Open Folder"
+msgstr "Apri cartella"
+
+#. popup_menu.py:76
+msgid "Open in Terminal"
+msgstr "Apri nel terminale"
