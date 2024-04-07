@@ -2,5 +2,6 @@
     "multiversion": true,
     "uuid": "search-box@mtwebster",
     "name": "Internet Search Box",
+    "version": "2.0.0",
     "description": "Perform an Internet search, using your favorite engine"
 }
