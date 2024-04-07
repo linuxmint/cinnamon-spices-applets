@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-10 15:22+0100\n"
+"POT-Creation-Date: 2024-04-07 17:27-0100\n"
 "PO-Revision-Date: 2024-02-13 18:12+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
@@ -20,8 +20,17 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
+#: applet.js:43
 msgid "Directory Menu"
 msgstr "Könyvtár menü"
+
+#: popup_menu.py:71
+msgid "Open Folder"
+msgstr "Könyvtár megnyitása"
+
+#: popup_menu.py:76
+msgid "Open in Terminal"
+msgstr "Megnyitás terminálban"
 
 #. metadata.json->description
 msgid ""
@@ -43,12 +52,17 @@ msgid "Must be an icon name (no path), and should be symbolic."
 msgstr ""
 "Ikonnévnek kell lennie (nincs elérési út), és szimbolikusnak kell lennie."
 
-#. settings-schema.json->tooltip->description
-msgid "Tooltip text"
-msgstr "Eszköztipp szövege"
+#. settings-schema.json->label->description
+msgid "Panel Text"
+msgstr ""
+
+#. settings-schema.json->limit-characters->description
+msgid "Limit the Maximum Number of Characters on the Submenus"
+msgstr ""
 
 #. settings-schema.json->character-limit->description
-msgid "Character Limit (-1 to disable)"
+#, fuzzy
+msgid "Character Limit"
 msgstr "Karakter Limit (-1 a letiltáshoz)"
 
 #. settings-schema.json->character-limit->tooltip
@@ -62,11 +76,3 @@ msgstr ""
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Tartalmazza a rejtett fájlokat is"
-
-#. popup_menu.py:71
-msgid "Open Folder"
-msgstr "Könyvtár megnyitása"
-
-#. popup_menu.py:76
-msgid "Open in Terminal"
-msgstr "Megnyitás terminálban"

@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-04 22:10+0000\n"
-"PO-Revision-Date: 2024-02-04 18:56-0500\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-07 17:27-0100\n"
+"PO-Revision-Date: 2024-04-07 17:36-0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt\n"
@@ -18,12 +19,24 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
+#: applet.js:43
 msgid "Directory Menu"
 msgstr "Menu de Diretórios"
 
+#: popup_menu.py:71
+msgid "Open Folder"
+msgstr "Abrir pasta"
+
+#: popup_menu.py:76
+msgid "Open in Terminal"
+msgstr "Abrir no terminal"
+
 #. metadata.json->description
-msgid "Quickly navigate through directories on your system using a dropdown menu."
-msgstr "Navegue rapidamente através dos diretórios do seu sistema utilizando um menu dropdown."
+msgid ""
+"Quickly navigate through directories on your system using a dropdown menu."
+msgstr ""
+"Navegue rapidamente através dos diretórios do seu sistema utilizando um menu "
+"dropdown."
 
 #. settings-schema.json->starting-uri->description
 msgid "Base Directory"
@@ -37,18 +50,26 @@ msgstr "Ícone"
 msgid "Must be an icon name (no path), and should be symbolic."
 msgstr "Precisa ser o nome de um ícone."
 
-#. settings-schema.json->tooltip->description
-msgid "Tooltip text"
-msgstr "Texto da dica"
+#. settings-schema.json->label->description
+msgid "Panel Text"
+msgstr "Texto do Painel"
+
+#. settings-schema.json->limit-characters->description
+msgid "Limit the Maximum Number of Characters on the Submenus"
+msgstr "Limitar o Número Máximo de Caracteres nos Submenus"
+
+#. settings-schema.json->character-limit->description
+msgid "Character Limit"
+msgstr "Limite de Caracteres"
+
+#. settings-schema.json->character-limit->tooltip
+msgid ""
+"(Approximately) Limit the number of characters of each entry.\n"
+"Useful if you think the menu is too wide."
+msgstr ""
+"(Aproximadamente) O número de caracteres para cada entrada.\n"
+"Útil caso achar que o menu está muito largo."
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Incluir ficheiros ocultos"
-
-#. popup_menu.py:71
-msgid "Open Folder"
-msgstr "Abrir pasta"
-
-#. popup_menu.py:76
-msgid "Open in Terminal"
-msgstr "Abrir no terminal"
