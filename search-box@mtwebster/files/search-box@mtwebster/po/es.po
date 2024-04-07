@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-07 23:40+0200\n"
-"PO-Revision-Date: 2021-12-26 19:19-0300\n"
+"PO-Revision-Date: 2024-04-07 19:52-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: applet.js:79 3.2/applet.js:73 5.4/applet.js:80
 msgid "Type to search..."
@@ -34,11 +34,12 @@ msgstr "Editar motor de búsqueda"
 #: 5.4/applet.js:61
 msgid "Right-click to select or add your search engine"
 msgstr ""
+"Haga clic con el botón derecho para seleccionar o añadir su motor de "
+"búsqueda"
 
 #: 5.4/applet.js:104
-#, fuzzy
 msgid "Select your Search Engine:"
-msgstr "Seleccione un motor de búsqueda"
+msgstr "Seleccione su motor de búsqueda:"
 
 #. metadata.json->name
 msgid "Internet Search Box"
@@ -129,32 +130,36 @@ msgstr "Combinación de teclas que abre el cuadro de búsqueda"
 
 #. 5.4->settings-schema.json->reset-after-search->description
 msgid "Reset query after search"
-msgstr ""
+msgstr "Restablecer la consulta tras la búsqueda"
 
 #. 5.4->settings-schema.json->reset-after-search->tooltip
 msgid ""
 "Reset query after search? This may not be useful if you want to be able to "
 "perform the same query on other search engines afterwards."
 msgstr ""
+"¿Restablecer la consulta después de la búsqueda?. Esto puede no ser útil "
+"si desea poder realizar la misma consulta en otros motores de búsqueda "
+"después."
 
 #. 5.4->settings-schema.json->providers->description
-#, fuzzy
 msgid "Providers"
-msgstr "Editar motor de búsqueda"
+msgstr "Proveedores"
 
 #. 5.4->settings-schema.json->providers->columns->title
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. 5.4->settings-schema.json->providers->columns->title
 msgid "Query URL"
-msgstr ""
+msgstr "URL de consulta"
 
 #. 5.4->settings-schema.json->providers->columns->title
 msgid ""
 "Short name\n"
 "(3 lower-case letters)"
 msgstr ""
+"Nombre corto\n"
+"(3 letras minúsculas)"
 
 #. 5.4->settings-schema.json->providers->tooltip
 msgid ""
@@ -162,3 +167,6 @@ msgid ""
 "processed by the relevant search engine.\n"
 "Example: ddg linux mint iso"
 msgstr ""
+"Si su consulta comienza con las 3 letras del nombre abreviado, será "
+"procesada por el motor de búsqueda correspondiente.\n"
+"Ejemplo: ddg linux mint iso"
