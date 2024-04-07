@@ -156,7 +156,7 @@ SearchBoxApplet.prototype = {
 
     _onMenuKeyPress: function(actor, event) {
         let symbol = event.get_key_symbol();
-        if (symbol==Clutter.KEY_Return && this.menu.isOpen) {
+        if ((symbol==Clutter.KEY_Return || symbol==Clutter.KEY_KP_Enter) && this.menu.isOpen) {
             this._search();
             return true;
         }
@@ -164,6 +164,7 @@ SearchBoxApplet.prototype = {
     },
 
     _search: function() {
+        let old_provider = ""+this.selected_provider;
         var _entry = this.searchEntry.get_text().replace(/'/g,"%27");
         let brief = _entry.split(" ", 1)[0];
         if (brief.length === 3) {
@@ -182,6 +183,7 @@ SearchBoxApplet.prototype = {
             this.searchEntry.set_text("");
             this.searchActive = false;
         }
+        this.selected_provider = old_provider;
         this.menu.close();
     },
 
