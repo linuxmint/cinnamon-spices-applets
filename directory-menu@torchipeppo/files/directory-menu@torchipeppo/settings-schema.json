@@ -11,6 +11,11 @@
         "description": "Icon (hover here for info!)",
         "tooltip": "Must be an icon name (no path), and should be symbolic."
     },
+    "tooltip": {
+        "type": "entry",
+        "default": "Directory Menu",
+        "description": "Tooltip Text"
+    },
     "label": {
         "type": "entry",
         "default": "",

@@ -50,11 +50,12 @@ class CassettoneApplet extends Applet.TextIconApplet {
         this.settings.bind("show-hidden", "show_hidden", null, null);
         this.settings.bind("icon-name", "icon_name", this.set_applet_icon_symbolic_name, null);
         this.settings.bind("label", "label", this.set_applet_label, null);
+        this.settings.bind("tooltip", "tooltip_text", (txt) => this.set_applet_tooltip(_(txt)), null);
         this.settings.bind("limit-characters", "limit_characters", null, null);
         this.settings.bind("character-limit", "character_limit", null, null);
         this.starting_uri = this.normalize_tilde(this.starting_uri);
 
-        this.set_applet_tooltip(_("Directory Menu"));
+        this.set_applet_tooltip(_(this.tooltip_text));
         this.set_applet_icon_symbolic_name(this.icon_name);
         this.set_show_label_in_vertical_panels(false);
         this.set_applet_label(this.label)
