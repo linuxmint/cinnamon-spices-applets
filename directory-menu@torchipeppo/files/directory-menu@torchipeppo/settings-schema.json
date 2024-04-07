@@ -11,10 +11,10 @@
         "description": "Icon (hover here for info!)",
         "tooltip": "Must be an icon name (no path), and should be symbolic."
     },
-    "tooltip": {
+    "label": {
         "type": "entry",
-        "default": "Directory Menu",
-        "description": "Tooltip text"
+        "default": "",
+        "description": "Panel Text"
     },
     "character-limit": {
         "type": "spinbutton",
