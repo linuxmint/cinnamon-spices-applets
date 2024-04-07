@@ -56,11 +56,13 @@ class CassettoneApplet extends Applet.TextIconApplet {
 
         this.set_applet_tooltip(_("Directory Menu"));
         this.set_applet_icon_symbolic_name(this.icon_name);
-        this.set_applet_label(this.label)
         this.set_show_label_in_vertical_panels(false);
+        this.set_applet_label(this.label)
 
         this.actor.connect('enter-event', Lang.bind(this, this.on_enter_event));
         this.actor.connect('button-release-event', Lang.bind(this, this.on_button_release_event));
+
+		this.setAllowedLayout(Applet.AllowedLayout.BOTH);
     }
 
     normalize_tilde(path) {
