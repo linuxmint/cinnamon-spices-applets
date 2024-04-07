@@ -52,8 +52,8 @@ msgid "Limit the Maximum Number of Characters on the Submenus"
 msgstr ""
 
 #. settings-schema.json->character-limit->description
-msgid "Character Limit (-1 to disable)"
-msgstr "Limite di caratteri (-1 per disattivare)"
+msgid "Character Limit"
+msgstr "Limite di caratteri"
 
 #. settings-schema.json->character-limit->tooltip
 msgid "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide."

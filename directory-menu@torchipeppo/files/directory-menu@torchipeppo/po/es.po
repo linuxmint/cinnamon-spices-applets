@@ -54,8 +54,8 @@ msgid "Limit the Maximum Number of Characters on the Submenus"
 msgstr ""
 
 #. settings-schema.json->character-limit->description
-msgid "Character Limit (-1 to disable)"
-msgstr "Límite de caracteres (-1 para desactivar)"
+msgid "Character Limit"
+msgstr "Límite de caracteres"
 
 #. settings-schema.json->character-limit->tooltip
 msgid ""
