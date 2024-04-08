@@ -21,12 +21,25 @@ const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Cinnamon = imports.gi.Cinnamon;
 const Settings = imports.ui.settings;
+const Gettext = imports.gettext;
+
+
 const UUID = "directory-menu@torchipeppo";
 
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(text) {
+	let locText = Gettext.dgettext(UUID, text);
+
+	if (locText == text) {
+		locText = window._(text);
+	}
+
+	return locText;
+}
 
 
-class CassettoneApplet extends Applet.IconApplet {
-
+class CassettoneApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
@@ -36,15 +49,21 @@ class CassettoneApplet extends Applet.IconApplet {
         this.settings.bind("starting-uri", "starting_uri", this.normalize_tilde, this.starting_uri);
         this.settings.bind("show-hidden", "show_hidden", null, null);
         this.settings.bind("icon-name", "icon_name", this.set_applet_icon_symbolic_name, null);
-        this.settings.bind("tooltip", "tooltip_text", (newtext) => {this.set_applet_tooltip(_(newtext))}, null);
+        this.settings.bind("label", "label", this.set_applet_label, null);
+        this.settings.bind("tooltip", "tooltip_text", (txt) => this.set_applet_tooltip(_(txt)), null);
+        this.settings.bind("limit-characters", "limit_characters", null, null);
         this.settings.bind("character-limit", "character_limit", null, null);
         this.starting_uri = this.normalize_tilde(this.starting_uri);
 
-        this.set_applet_icon_symbolic_name(this.icon_name);
         this.set_applet_tooltip(_(this.tooltip_text));
+        this.set_applet_icon_symbolic_name(this.icon_name);
+        this.set_show_label_in_vertical_panels(false);
+        this.set_applet_label(this.label)
 
         this.actor.connect('enter-event', Lang.bind(this, this.on_enter_event));
         this.actor.connect('button-release-event', Lang.bind(this, this.on_button_release_event));
+
+		this.setAllowedLayout(Applet.AllowedLayout.BOTH);
     }
 
     normalize_tilde(path) {
@@ -139,7 +158,7 @@ class CassettoneApplet extends Applet.IconApplet {
             "x": x,
             "y": y,
             "orientation": o,
-            "character_limit": this.character_limit,
+            "character_limit": this.limit_characters ? this.character_limit : -1,
         }
 
         Util.spawn_async(['python3', `${this.metadata.path}/popup_menu.py`, JSON.stringify(args)]);
