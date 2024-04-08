@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: directory-menu@torchipeppo 0.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-10 15:22+0100\n"
+"POT-Creation-Date: 2024-04-07 18:39-0100\n"
 "PO-Revision-Date: 2024-02-10 15:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -40,12 +40,20 @@ msgid "Must be an icon name (no path), and should be symbolic."
 msgstr "Deve essere il nome di un'icona (non un percorso), e l'icona dovrebbe essere simbolica."
 
 #. settings-schema.json->tooltip->description
-msgid "Tooltip text"
+msgid "Tooltip Text"
 msgstr "Didascalia"
 
+#. settings-schema.json->label->description
+msgid "Panel Text"
+msgstr ""
+
+#. settings-schema.json->limit-characters->description
+msgid "Limit the Maximum Number of Characters on the Submenus"
+msgstr ""
+
 #. settings-schema.json->character-limit->description
-msgid "Character Limit (-1 to disable)"
-msgstr "Limite di caratteri (-1 per disattivare)"
+msgid "Character Limit"
+msgstr "Limite di caratteri"
 
 #. settings-schema.json->character-limit->tooltip
 msgid "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide."

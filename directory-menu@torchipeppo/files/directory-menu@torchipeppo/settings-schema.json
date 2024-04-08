@@ -14,16 +14,27 @@
     "tooltip": {
         "type": "entry",
         "default": "Directory Menu",
-        "description": "Tooltip text"
+        "description": "Tooltip Text"
+    },
+    "label": {
+        "type": "entry",
+        "default": "",
+        "description": "Panel Text"
+    },
+    "limit-characters": {
+        "type": "switch",
+        "default": false,
+        "description": "Limit the Maximum Number of Characters on the Submenus"
     },
     "character-limit": {
         "type": "spinbutton",
-        "default" : -1,
-        "min": -1,
-        "max": 9999,
-        "step": 1,
-        "description" : "Character Limit (-1 to disable)",
-        "tooltip": "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide."
+        "default": 50,
+        "min": 5,
+        "max": 1000,
+        "step": 5,
+        "description": "Character Limit",
+        "tooltip": "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide.",
+        "dependency": "limit-characters"
     },
     "show-hidden": {
         "type": "switch",
