@@ -5,8 +5,11 @@ const PopupMenu = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
 const St = imports.gi.St;
 const ModalDialog = imports.ui.modalDialog;
+const Clutter = imports.gi.Clutter;
 
 const UUID = "ddcci-multi-monitor@tim-we";
+const DEFAULT_TOOLTIP = "Adjust monitor brightness via DDC/CI";
+const BRIGHTNESS_ADJUSTMENT_STEP = 5; /* Brightness adjustment step in % */
 
 function log(message, type = "debug") {
     const finalLogMessage = `[${UUID}] ${message}`;
@@ -68,7 +71,7 @@ class Monitor {
 
     setBrightness(value) {
         this.brightness = Math.round(value);
-        this.updateLabel();
+        this.updateMenu();
 
         return new Promise((resolve, reject) => {
             Util.spawnCommandLineAsync(
@@ -111,7 +114,8 @@ class DDCMultiMonitor extends Applet.IconApplet {
         super(orientation, panelHeight, instance_id);
         this.detecting = false;
         this.set_applet_icon_symbolic_name("display-brightness");
-        this.set_applet_tooltip("Adjust monitor brightness via DDC/CI");
+        this.set_applet_tooltip(DEFAULT_TOOLTIP);
+        this.actor.connect('scroll-event', (...args) => this._onScrollEvent(...args));
 
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -121,6 +125,9 @@ class DDCMultiMonitor extends Applet.IconApplet {
     }
 
     on_applet_clicked() {
+        this.monitors.forEach((monitor) => {
+            monitor.updateBrightness(); // Makes sure the brightness shown is the real brightness
+        });
         this.menu.toggle();
     }
 
@@ -187,6 +194,61 @@ class DDCMultiMonitor extends Applet.IconApplet {
         if (!init) {
             this.updateMenu();
         }
+    }
+
+    scrollBrightnessChange(mon) {
+        this.set_applet_tooltip("Brightness: " + mon.brightness + "%"); // Show a tooltip with the current brightness
+        this._applet_tooltip.show();
+        setTimeout(() => { // Waits before actually setting the brightness, to reduce weirdness when scrolling more than 1 step
+log("do");
+            monitor.setBrightness(monitor.brightness); 
+            setTimeout(() => { // Hide the tooltip
+                this._applet_tooltip.hide();
+                this.set_applet_tooltip(DEFAULT_TOOLTIP);
+            }, 1000);
+        }, 180);
+    }
+
+    // Change the brightness when scrolling on the icon
+    _onScrollEvent(actor, event) {
+        let direction = event.get_scroll_direction();
+        if (direction == Clutter.ScrollDirection.SMOOTH) { // Prevents being triggered twice
+            return
+        }
+
+        if (direction == Clutter.ScrollDirection.DOWN) {
+            this.monitors.forEach((monitor) => {
+                monitor.brightness = Math.max(0, monitor.brightness - BRIGHTNESS_ADJUSTMENT_STEP); // Decrease brightness by the step amount, making sure to not go below 0
+                // Tried making this into a function, it did not go well
+                this.set_applet_tooltip("Brightness: " + monitor.brightness + "%"); 
+                this._applet_tooltip.show();
+                setTimeout(() => { // Wait before actually changing the brightness, to prevent weirdness when scrolling multiple steps
+log("do");
+                    monitor.setBrightness(monitor.brightness); 
+                    setTimeout(() => {
+                        this._applet_tooltip.hide();
+                        this.set_applet_tooltip(DEFAULT_TOOLTIP);
+                    }, 1000);
+                }, 180);
+                
+            });
+            
+        }
+        else if (direction == Clutter.ScrollDirection.UP) { // Do the same thing for scrolling up
+            this.monitors.forEach((monitor) => {
+                monitor.brightness = Math.min(100, monitor.brightness + BRIGHTNESS_ADJUSTMENT_STEP);
+                this.set_applet_tooltip("Brightness: " + monitor.brightness + "%");
+                this._applet_tooltip.show();
+                setTimeout(() => {
+log("do");
+                    monitor.setBrightness(monitor.brightness); 
+                    setTimeout(() => {
+                        this._applet_tooltip.hide();
+                        this.set_applet_tooltip(DEFAULT_TOOLTIP);
+                    }, 1800);
+                }, 250);
+            });
+        } 
     }
 }
 
