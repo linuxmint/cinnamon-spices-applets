@@ -196,19 +196,6 @@ class DDCMultiMonitor extends Applet.IconApplet {
         }
     }
 
-    scrollBrightnessChange(mon) {
-        this.set_applet_tooltip("Brightness: " + mon.brightness + "%"); // Show a tooltip with the current brightness
-        this._applet_tooltip.show();
-        setTimeout(() => { // Waits before actually setting the brightness, to reduce weirdness when scrolling more than 1 step
-log("do");
-            monitor.setBrightness(monitor.brightness); 
-            setTimeout(() => { // Hide the tooltip
-                this._applet_tooltip.hide();
-                this.set_applet_tooltip(DEFAULT_TOOLTIP);
-            }, 1000);
-        }, 180);
-    }
-
     // Change the brightness when scrolling on the icon
     _onScrollEvent(actor, event) {
         let direction = event.get_scroll_direction();
@@ -223,7 +210,6 @@ log("do");
                 this.set_applet_tooltip("Brightness: " + monitor.brightness + "%"); 
                 this._applet_tooltip.show();
                 setTimeout(() => { // Wait before actually changing the brightness, to prevent weirdness when scrolling multiple steps
-log("do");
                     monitor.setBrightness(monitor.brightness); 
                     setTimeout(() => {
                         this._applet_tooltip.hide();
@@ -234,13 +220,12 @@ log("do");
             });
             
         }
-        else if (direction == Clutter.ScrollDirection.UP) { // Do the same thing for scrolling up
+        else if (direction == Clutter.ScrollDirection.UP) {
             this.monitors.forEach((monitor) => {
                 monitor.brightness = Math.min(100, monitor.brightness + BRIGHTNESS_ADJUSTMENT_STEP);
                 this.set_applet_tooltip("Brightness: " + monitor.brightness + "%");
                 this._applet_tooltip.show();
                 setTimeout(() => {
-log("do");
                     monitor.setBrightness(monitor.brightness); 
                     setTimeout(() => {
                         this._applet_tooltip.hide();
