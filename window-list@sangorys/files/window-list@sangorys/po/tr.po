@@ -1,175 +1,185 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 19:47+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
 "PO-Revision-Date: 2018-11-07 00:08+0300\n"
+"Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
 "Language-Team: \n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: tr\n"
 
-msgid "A window list with app grouping and window previews"
-msgstr "Uygulama gruplaması ve pencere önizlemesi içeren bir pencere listesi"
+#: applet.js:1273
+msgid "Window information"
+msgstr ""
 
-msgid "Remove this applet"
-msgstr "Bu uygulamacığı sil"
+#: applet.js:1309
+#, fuzzy
+msgid "Move to the other monitor"
+msgstr "Başka bir monitöre taşı"
 
-msgid "Open new window"
-msgstr "Yeni pencere aç"
+#: applet.js:1319
+#, fuzzy, javascript-format
+msgid "Move to monitor %d"
+msgstr "Başka bir monitöre taşı"
 
-msgid "Captions"
-msgstr "Liste Başlıkları"
-
-msgid "Caption type"
-msgstr "Liste başlık tipi"
-
-msgid "Name"
-msgstr "Ad"
-
-msgid "Title"
-msgstr "Başlık"
-
-msgid "Display Caption For"
-msgstr "Liste başlığı görüntüleme tipi"
-
-msgid "None"
-msgstr "Hiçbiri"
-
-msgid "All"
-msgstr "Tümü"
-
-msgid "Running"
-msgstr "Çalışan"
-
-msgid "Focused"
-msgstr "Odanlanan"
-
-msgid "Label width"
-msgstr "Etiketle"
-
-msgid "Animate label"
-msgstr "Etiket animasyonu"
-
-msgid "Label animation time"
-msgstr "Etiket animasyon süresi"
-
-msgid "Display Number"
-msgstr "Sayı Gösterimi"
-
-msgid "Smart"
-msgstr "Akıllı"
-
-msgid "Group Windows"
-msgstr "Gruplanmış Pencereler"
-
-msgid "Display Favorites"
-msgstr "Sık Kullanılanları Göster"
-
-msgid "Animation Time"
-msgstr "Animasyon Süresi"
-
-msgid "Preview menu"
-msgstr "Menü özizlemeleri"
-
-msgid "Show on hover"
-msgstr "Üstüne gelince göster"
-
-msgid "Timeout Show"
-msgstr "Gösterim Zaman Aşımı"
-
-msgid "Timeout Hide"
-msgstr "Gizleme Zaman Aşımı"
-
-msgid "Pin to this workspace"
+#: applet.js:1330
+#, fuzzy
+msgid "Only on this workspace"
 msgstr "Bu çalışma alanına sabitle"
 
-msgid "Pin to other workspaces"
+#: applet.js:1336
+#, fuzzy
+msgid "Visible on all workspaces"
 msgstr "Diğer çalışma alanlarına sabitle"
 
+#: applet.js:1342
+#, fuzzy
+msgid "Move to another workspace"
+msgstr "Diğer çalışma alanlarına sabitle"
+
+#: applet.js:1365
+msgid "Preferences"
+msgstr ""
+
+#: applet.js:1368
+msgid "About..."
+msgstr ""
+
+#: applet.js:1372
+msgid "Configure..."
+msgstr ""
+
+#: applet.js:1376
+msgid "Remove 'Window list'"
+msgstr ""
+
+#: applet.js:1383
+msgid "Close all"
+msgstr ""
+
+#: applet.js:1392
+msgid "Close others"
+msgstr ""
+
+#: applet.js:1406
+msgid "Restore to full opacity"
+msgstr ""
+
+#: applet.js:1414
+msgid "Restore"
+msgstr ""
+
+#: applet.js:1419
+#, fuzzy
+msgid "Minimize"
+msgstr "Tam Ekrandan Çık"
+
+#: applet.js:1427
 msgid "Unmaximize"
 msgstr "Tam Ekrandan Çık"
 
-msgid "Close window on mouse-wheel click"
-msgstr "Pencereyi orta fare tıklaması ile kapat"
+#: applet.js:1432
+#, fuzzy
+msgid "Maximize"
+msgstr "Tam Ekrandan Çık"
 
-msgid ""
-"If windows are grouped, all windows from an application are managed by the "
-"same button,\n"
-"if not grouped, all windows get an own button"
+#: applet.js:1440
+msgid "Close"
 msgstr ""
-"Pencereler gruplandırılmışsa, bir uygulamadaki tüm pencereler aynı düğme "
-"tarafından yönetilir,\n"
-"gruplandırılmamışsa, tüm pencereler kendi düğmelerini sahip olur"
 
-msgid "The flashing time when a new window is opened via a button"
-msgstr "Düğme ile yeni bir pencere açıldığında yanıp sönme süresi"
-
-msgid ""
-"If enabled, the popup menu will show window previews\n"
-"(Always disabled when running Cinnamon in Software Rendering Mode)"
+#. metadata.json->name
+msgid "My perfect window-list applet"
 msgstr ""
-"Etkinse, açılır menü pencere önizlemelerini gösterir\n"
-"(Cinnamon yazılımsal işleme kipindeyken her zaman devre dışıdır)"
 
+#. metadata.json->description
 msgid ""
-"The waiting time for the popup menu to show, when hovering a button\n"
-"(Not used when moving directly to a different button in the list)"
+"Based on the original Cinnamon window list, the window order is memorized "
+"and restored. The next huge feature is to also group window like Google "
+"Chrome groups tab. This is my definition of a perfect window list applet"
 msgstr ""
-"Bir düğmenin üzerine gelindiğinde açılır menü için bekleme süresi\n"
-"(Listedeki farklı bir düğme üzerine doğrudan geçildiğinde çalışmaz)"
 
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->show-all-workspaces->description
+msgid "Show windows from all workspaces"
+msgstr ""
+
+#. settings-schema.json->enable-alerts->description
 msgid ""
-"The waiting time for the popup menu to hide, when leaving a button\n"
-"(Not used when moving directly to a different button in the list)"
+"Show an alert in the window list when a window from another workspace "
+"requires attention"
 msgstr ""
-"Bir düğme üstünden ayrılırken açılır menü gizlemesi için bekleme süresi\n"
-"(Listedeki farklı bir düğme üzerine doğrudan geçildiğinde çalışmaz)"
 
-msgid "Only show windows on the same monitor"
-msgstr "Sadece aynı monitördeki pencereleri göster"
+#. settings-schema.json->enable-scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr ""
 
+#. settings-schema.json->reverse-scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr ""
+
+#. settings-schema.json->left-click-minimize->description
+msgid "Left click to minimize window"
+msgstr ""
+
+#. settings-schema.json->middle-click-close->description
+msgid "Middle click to close window"
+msgstr ""
+
+#. settings-schema.json->section2->description
+#, fuzzy
+msgid "Display"
+msgstr "Sayı Gösterimi"
+
+#. settings-schema.json->panel-show-label->description
+msgid "Show window names in the panel"
+msgstr ""
+
+#. settings-schema.json->button-width->units
+msgid "pixels"
+msgstr ""
+
+#. settings-schema.json->button-width->description
+msgid "Window button width in the panel"
+msgstr ""
+
+#. settings-schema.json->buttons-use-entire-space->description
 msgid ""
-"If enabled, this applet instance only manages windows\n"
-"that are displayed on the same monitor"
+"Window buttons can have different sizes and use the entire space available"
 msgstr ""
-"Eğer etkinse, bu uygulama örneği yalnızca aynı monitörde\n"
-"görüntülenen pencereleri yönetir"
 
-msgid "Move to another monitor"
-msgstr "Başka bir monitöre taşı"
-
-msgid "Always"
-msgstr "Daima"
-
-msgid "2 or more windows"
-msgstr "2 ya da daha fazla pencere"
-
-msgid "Number of unshrunk previews"
-msgstr "Önizleme daraltma sayısı"
-
-msgid "Show on click"
-msgstr "Tıklayınca göster"
-
-msgid ""
-"If enabled, a popup menu with a list of current windows will show when "
-"clicking\n"
-"(Only with 2 or more windows)"
+#. settings-schema.json->window-preview->description
+msgid "Show window thumbnails on hover"
 msgstr ""
-"Eğer etkinse, tıklandığında gruplanmış pencereleri listeleyen bir açılır "
-"menü görüntülenir\n"
-"(Sadece 2 veya daha fazla pencere ile)"
 
-msgid ""
-"If enabled, a popup menu with a list of current windows will show when "
-"hovering"
+#. settings-schema.json->window-preview-show-label->description
+msgid "Show title above thumbnail"
 msgstr ""
-"Eğer etkinse, listedeki mevcut pencerelerin üstüne gelindiğinde bir açılır "
-"menü görüntülenir"
 
-msgid "Show previews"
-msgstr "Önizlemeleri göster"
+#. settings-schema.json->window-preview-scale->description
+msgid "Thumbnail size"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Small"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Medium"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Large"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Largest"
+msgstr ""
