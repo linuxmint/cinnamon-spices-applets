@@ -17,7 +17,37 @@ class GPUUsageApplet extends Applet.TextApplet {
         this.settings.bind("decimal-places", "decimal_places", this.on_settings_changed);
         this.settings.bind("display-style", "display_style", this.on_settings_changed);
         this.settings.bind("use-compact-label", "use_compact_label", this.on_settings_changed);
+        this.settings.bind("select-gpu", "select_gpu", this.on_settings_changed);
         this.settings.bind("font-size", "font_size", this.update_font_size);
+
+        // dynamically load GPUs into select-gpu options
+        Util.spawn_async(["lshw", "-json", "-C", "display"], (gpu_info_raw) => {
+            let gpu_info_array = JSON.parse(gpu_info_raw);
+
+            // get the bus numbers of all GPUs
+            const gpu_bus_ids = [];
+            gpu_info_array.forEach(obj => {
+                const { businfo } = obj;
+
+                // match the two-digit (hexadecimal) number between two ':' chars
+                const regex_for_bus_number = /:([0-9A-Fa-f]{2}):/g;
+                const match = regex_for_bus_number.exec(businfo);
+
+                if (match && match[1]) {
+                    // Extracted bus number (e.g. "03", "0e", "0F")
+                    gpu_bus_ids.push(match[1]);
+                }
+            });
+
+            // create options to display in settings
+            const select_gpu_options = {};
+            gpu_bus_ids.forEach(bus_id => {
+                // TODO: replace the key with the name of the GPU + bus_id, making it easier to read.
+                select_gpu_options[bus_id] = bus_id;
+            });
+
+            this.settings.setOptions("select-gpu", select_gpu_options);
+        });
 
         this.set_applet_tooltip("Click for more details");
 
@@ -30,7 +60,10 @@ class GPUUsageApplet extends Applet.TextApplet {
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         const item = new PopupMenu.PopupMenuItem(_("Launch Radeontop"));
-        item.connect('activate', () => Util.spawnCommandLine("gnome-terminal -t Radeontop -- radeontop"));
+        item.connect('activate', () => {
+            const bus_arg = this.select_gpu ? " -b " + this.select_gpu : "";
+            Util.spawnCommandLine("gnome-terminal -t Radeontop -- radeontop" + bus_arg);
+        });
         this.menu.addMenuItem(item);
         this.set_applet_label("radeontop not installed");
 
@@ -48,7 +81,11 @@ class GPUUsageApplet extends Applet.TextApplet {
     }
 
     update() {
-        Util.spawn_async(["radeontop", "-l", "1", "-d", "-"], (output) => {
+        const bus_arg = this.select_gpu ? ["-b", this.select_gpu] : [];
+        let command = ["radeontop"];
+        command = command.concat(bus_arg);
+        command = command.concat(["-l", "1", "-d", "-"]);
+        Util.spawn_async(command, (output) => {
             const gpu_regex = /gpu\s([\d.]+)%/i;
             const vram_regex = /vram\s([\d.]+)%\s([\d.]+)([kmgt]b|b)\b/i;
 
