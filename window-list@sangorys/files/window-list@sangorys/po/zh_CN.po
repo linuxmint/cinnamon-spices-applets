@@ -1,8 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-28 18:37+0800\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
 "PO-Revision-Date: 2017-07-28 18:37+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,86 +14,168 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "A window list with app grouping and window previews"
-msgstr "带应用程序分组和窗口预览的窗口列表"
+#: applet.js:1273
+msgid "Window information"
+msgstr ""
 
-msgid "Remove this applet"
-msgstr "移除此小程序"
+#: applet.js:1309
+msgid "Move to the other monitor"
+msgstr ""
 
-msgid "Open new window"
-msgstr "打开新窗口"
+#: applet.js:1319
+#, javascript-format
+msgid "Move to monitor %d"
+msgstr ""
 
-msgid "Captions"
-msgstr "标题"
+#: applet.js:1330
+msgid "Only on this workspace"
+msgstr ""
 
-msgid "Caption type"
-msgstr "标题类型"
+#: applet.js:1336
+msgid "Visible on all workspaces"
+msgstr ""
 
-msgid "Name"
-msgstr "名称"
+#: applet.js:1342
+msgid "Move to another workspace"
+msgstr ""
 
-msgid "Title"
-msgstr "标题"
+#: applet.js:1365
+msgid "Preferences"
+msgstr ""
 
-msgid "Display Caption For"
-msgstr "显示标题"
+#: applet.js:1368
+msgid "About..."
+msgstr ""
 
-msgid "None"
-msgstr "无"
+#: applet.js:1372
+msgid "Configure..."
+msgstr ""
 
-msgid "All"
-msgstr "全部"
+#: applet.js:1376
+msgid "Remove 'Window list'"
+msgstr ""
 
-msgid "Running"
-msgstr "正在运行"
+#: applet.js:1383
+msgid "Close all"
+msgstr ""
 
-msgid "Focused"
-msgstr "焦点"
+#: applet.js:1392
+msgid "Close others"
+msgstr ""
 
-msgid "Label width"
-msgstr "标签宽度"
+#: applet.js:1406
+msgid "Restore to full opacity"
+msgstr ""
 
-msgid "Animate label"
-msgstr "标签动画"
+#: applet.js:1414
+msgid "Restore"
+msgstr ""
 
-msgid "Label animation time"
-msgstr "标签动画时间"
+#: applet.js:1419
+#, fuzzy
+msgid "Minimize"
+msgstr "取消最大化"
 
-msgid "Display Number"
-msgstr "显示编号"
-
-msgid "Smart"
-msgstr "智能"
-
-msgid "Group Windows"
-msgstr "分组窗口"
-
-msgid "Display Favorites"
-msgstr "显示收藏"
-
-msgid "Animation Time"
-msgstr "动画时间"
-
-msgid "Previews"
-msgstr "预览"
-
-msgid "Show on hover"
-msgstr "悬停时显示"
-
-msgid "Timeout Show"
-msgstr "超时显示"
-
-msgid "Timeout Hide"
-msgstr "超时隐藏"
-
-msgid "Pin app to window list"
-msgstr "固顶应用程序到窗口列表"
-
-msgid "Unpin app from window list"
-msgstr "取消固顶应用程序到窗口列表"
-
+#: applet.js:1427
 msgid "Unmaximize"
 msgstr "取消最大化"
 
-msgid "Close window on mouse-wheel click"
-msgstr "点击鼠标滚轮关闭窗口"
+#: applet.js:1432
+#, fuzzy
+msgid "Maximize"
+msgstr "取消最大化"
+
+#: applet.js:1440
+msgid "Close"
+msgstr ""
+
+#. metadata.json->name
+msgid "My perfect window-list applet"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Based on the original Cinnamon window list, the window order is memorized "
+"and restored. The next huge feature is to also group window like Google "
+"Chrome groups tab. This is my definition of a perfect window list applet"
+msgstr ""
+
+#. settings-schema.json->section1->description
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->show-all-workspaces->description
+msgid "Show windows from all workspaces"
+msgstr ""
+
+#. settings-schema.json->enable-alerts->description
+msgid ""
+"Show an alert in the window list when a window from another workspace "
+"requires attention"
+msgstr ""
+
+#. settings-schema.json->enable-scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr ""
+
+#. settings-schema.json->reverse-scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr ""
+
+#. settings-schema.json->left-click-minimize->description
+msgid "Left click to minimize window"
+msgstr ""
+
+#. settings-schema.json->middle-click-close->description
+msgid "Middle click to close window"
+msgstr ""
+
+#. settings-schema.json->section2->description
+#, fuzzy
+msgid "Display"
+msgstr "显示编号"
+
+#. settings-schema.json->panel-show-label->description
+msgid "Show window names in the panel"
+msgstr ""
+
+#. settings-schema.json->button-width->units
+msgid "pixels"
+msgstr ""
+
+#. settings-schema.json->button-width->description
+msgid "Window button width in the panel"
+msgstr ""
+
+#. settings-schema.json->buttons-use-entire-space->description
+msgid ""
+"Window buttons can have different sizes and use the entire space available"
+msgstr ""
+
+#. settings-schema.json->window-preview->description
+msgid "Show window thumbnails on hover"
+msgstr ""
+
+#. settings-schema.json->window-preview-show-label->description
+msgid "Show title above thumbnail"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->description
+msgid "Thumbnail size"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Small"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Medium"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Large"
+msgstr ""
+
+#. settings-schema.json->window-preview-scale->options
+msgid "Largest"
+msgstr ""

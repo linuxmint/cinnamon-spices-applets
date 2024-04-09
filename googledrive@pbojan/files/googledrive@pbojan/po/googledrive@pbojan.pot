@@ -1,0 +1,140 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: googledrive@pbojan 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "Google Drive"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"A simple applet to be able to sync Google Drive folders and files with just "
+"a few clicks."
+msgstr ""
+
+#. settings-schema.json->pageConfiguration->title
+msgid "Configuration"
+msgstr ""
+
+#. settings-schema.json->pageHelp->title
+msgid "Help"
+msgstr ""
+
+#. settings-schema.json->sectionGeneralOptions->title
+msgid "Google Drive Options"
+msgstr ""
+
+#. settings-schema.json->sectionWhitelist->title
+msgid "Whitelisted Folders"
+msgstr ""
+
+#. settings-schema.json->sectionNote->title
+msgid "Important Message"
+msgstr ""
+
+#. settings-schema.json->sectionHelp->title
+msgid "About/Help"
+msgstr ""
+
+#. settings-schema.json->sectionIssues->title
+msgid "Bugs/Issues"
+msgstr ""
+
+#. settings-schema.json->location->description
+msgid "Drive Sync Location"
+msgstr ""
+
+#. settings-schema.json->location->tooltip
+msgid ""
+"Location to an empty folder where it will sync the Google Drive data to e.g. "
+"~/Documents/Drive."
+msgstr ""
+
+#. settings-schema.json->whitelistHelp->description
+msgid ""
+"Note: If you want to sync only specific folders please make sure to add them "
+"on the list above. Please enter the names exactly as they are named in your "
+"Drive! It is also possible to add subfolders e.g. Documents/Work/Projects."
+msgstr ""
+
+#. settings-schema.json->whitelist->columns->title
+msgid "Folder Name"
+msgstr ""
+
+#. settings-schema.json->whitelist->description
+msgid "Whitelist Folders"
+msgstr ""
+
+#. settings-schema.json->whitelist->tooltip
+msgid ""
+"Whitelist folders that will be sycned from Google Drive e.g. Documents, "
+"Photos"
+msgstr ""
+
+#. settings-schema.json->note->description
+msgid ""
+"Note: This is a new release of this Applet, so your feedback and ideas are "
+"very important to make this applet better in the future. Please consider "
+"reporting any issues, bugs, instabilities, or ideas for general improvements "
+"on the links below! Thank you!"
+msgstr ""
+
+#. settings-schema.json->website->description
+msgid ""
+"To learn more about the applet please click the button below to visit the "
+"official repository for this applet."
+msgstr ""
+
+#. settings-schema.json->websiteButton->description
+msgid "Visit GitHub website"
+msgstr ""
+
+#. settings-schema.json->websiteButton->tooltip
+msgid "Opens GitHub website to learn more about this applet."
+msgstr ""
+
+#. settings-schema.json->helpAbout->description
+msgid ""
+"To learn more about the applet please click the button below to visit the "
+"official Cinnamon Spices website for this applet. You can also leave "
+"feedback in the comment section below."
+msgstr ""
+
+#. settings-schema.json->helpAboutButton->description
+msgid "Visit Cinnamon Spices website"
+msgstr ""
+
+#. settings-schema.json->helpAboutButton->tooltip
+msgid "Opens Cinnamon Spices website to learn more about this applet."
+msgstr ""
+
+#. settings-schema.json->helpIssue->description
+msgid ""
+"If you find an issue with this applet please make a report on GitHub by "
+"clicking the button below. Please make sure that the issue doesn't already "
+"exists"
+msgstr ""
+
+#. settings-schema.json->helpSubmitIssue->description
+msgid "Submit an Issue"
+msgstr ""
+
+#. settings-schema.json->helpSubmitIssue->tooltip
+msgid ""
+"Opens GitHub project page where you can submit a new issue for this applet."
+msgstr ""
