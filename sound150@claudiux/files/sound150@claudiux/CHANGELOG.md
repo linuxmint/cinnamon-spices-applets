@@ -1,3 +1,6 @@
+### v6.7.3~20240410
+  * Fixes #5678: Adds an option to keep open the player list in menu.
+
 ### v6.7.2~20240402
   * New option: whether show OSD on startup.
 

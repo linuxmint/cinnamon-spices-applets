@@ -2060,6 +2060,8 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_applet_clicked(event) {
         this._openMenu();
+        if (this.settings.getValue("keepPlayerListOpen"))
+            this._launchPlayerItem.menu.open();
     }
 
     _openMenu() {

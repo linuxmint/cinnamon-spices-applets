@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sound150@claudiux v1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-02 15:32+0200\n"
+"POT-Creation-Date: 2024-04-10 18:18+0200\n"
 "PO-Revision-Date: 2024-03-04 05:52+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -48,7 +48,7 @@ msgstr "Avsluta spelare"
 #: 3.4/applet.js:766 3.4/applet.js:770 4.4/applet.js:591 4.4/applet.js:723
 #: 4.4/applet.js:727 2.8/applet.js:529 2.8/applet.js:761 2.8/applet.js:765
 #: 5.4/applet.js:1035 5.4/applet.js:1309 5.4/applet.js:1312 5.4/applet.js:1315
-#: 5.4/applet.js:1349 5.4/applet.js:1358 5.4/applet.js:2370 5.4/applet.js:2404
+#: 5.4/applet.js:1349 5.4/applet.js:1358 5.4/applet.js:2372 5.4/applet.js:2406
 msgid "Unknown Artist"
 msgstr "Okänd artist"
 
@@ -61,7 +61,7 @@ msgstr "Okänt album"
 #: 4.6/applet.js:594 4.6/applet.js:735 3.4/applet.js:536 3.4/applet.js:782
 #: 4.4/applet.js:593 4.4/applet.js:739 2.8/applet.js:531 2.8/applet.js:777
 #: 5.4/applet.js:1037 5.4/applet.js:1343 5.4/applet.js:1352 5.4/applet.js:1355
-#: 5.4/applet.js:1363 5.4/applet.js:2407
+#: 5.4/applet.js:1363 5.4/applet.js:2409
 msgid "Unknown Title"
 msgstr "Okänd låt"
 
@@ -150,18 +150,18 @@ msgid "Input device"
 msgstr "Indataenhet"
 
 #: 4.6/applet.js:1409 3.4/applet.js:1571 4.4/applet.js:1397 2.8/applet.js:1644
-#: 5.4/applet.js:2531
+#: 5.4/applet.js:2533
 msgid "Launch player"
 msgstr "Starta spelare"
 
 #: 4.6/applet.js:1414 3.4/applet.js:1566 4.4/applet.js:1392 2.8/applet.js:1639
-#: 5.4/applet.js:2536
+#: 5.4/applet.js:2538
 msgid "Choose player controls"
 msgstr "Välj spelarkontroller"
 
 #: 4.6/applet.js:1420 4.6/applet.js:1515 3.4/applet.js:1577 3.4/applet.js:1662
 #: 4.4/applet.js:1403 4.4/applet.js:1497 2.8/applet.js:1650 2.8/applet.js:1735
-#: 5.4/applet.js:2397 5.4/applet.js:2542
+#: 5.4/applet.js:2399 5.4/applet.js:2544
 msgid "Volume"
 msgstr "Volym"
 
@@ -170,7 +170,7 @@ msgstr "Volym"
 #. 4.4->settings-schema.json->section3->description
 #. 5.4->settings-schema.json->section5->title
 #: 4.6/applet.js:1426 3.4/applet.js:1584 4.4/applet.js:1409 2.8/applet.js:1657
-#: 5.4/applet.js:2550
+#: 5.4/applet.js:2552
 msgid "Sound Settings"
 msgstr "Ljudinställningar"
 
@@ -187,24 +187,24 @@ msgstr "Lätta effekter"
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
 
-#: 5.4/applet.js:2413
+#: 5.4/applet.js:2415
 msgid "The 'playerctl' package is required!"
 msgstr "Paketet \"playerctl\" krävs!"
 
-#: 5.4/applet.js:2414
+#: 5.4/applet.js:2416
 msgid "Please select 'Install playerctl' in this menu"
 msgstr "Välj \"Installera playerctl\" i den här menyn"
 
-#: 5.4/applet.js:2555
+#: 5.4/applet.js:2557
 msgid "Reload this applet"
 msgstr "Ladda om det här panelprogrammet"
 
-#: 5.4/applet.js:2561
+#: 5.4/applet.js:2563
 #, fuzzy
 msgid "Remove sound applet"
 msgstr "Ladda om det här panelprogrammet"
 
-#: 5.4/applet.js:2570
+#: 5.4/applet.js:2572
 msgid "Install playerctl"
 msgstr "Installera playerctl"
 
@@ -595,6 +595,10 @@ msgstr "Knappbeskrivning"
 
 #. 5.4->settings-schema.json->section6->title
 msgid "Remove incompatible applets"
+msgstr ""
+
+#. 5.4->settings-schema.json->keepPlayerListOpen->description
+msgid "Keep the player list open"
 msgstr ""
 
 #. 5.4->settings-schema.json->middleShiftClickAction->description
