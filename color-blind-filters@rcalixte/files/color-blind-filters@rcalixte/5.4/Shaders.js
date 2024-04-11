@@ -1,109 +1,111 @@
-const { Clutter, GObject } = imports.gi;
+const {Clutter, GObject} = imports.gi;
 
-var DesaturateEffect = GObject.registerClass({
-    GTypeName: `Cjs_DesaturateEffect_${Math.random()}`,
-}, class DesaturateEffect extends Clutter.DesaturateEffect {
-    _init(properties) {
+var DesaturateEffect = GObject.registerClass(
+    {
+      GTypeName : `Cjs_DesaturateEffect_${Math.random()}`,
+    },
+    class DesaturateEffect extends Clutter.DesaturateEffect {
+      _init(properties) {
         super._init();
         this.updateEffect(properties);
-    }
+      }
 
-    updateEffect(properties) {
+      updateEffect(properties) {
         this.factor = properties.factor;
         this.queue_repaint();
-    }
-});
+      }
+    });
 
-var InversionEffect = GObject.registerClass({
-    GTypeName: `Cjs_InversionEffect_${Math.random()}`,
-}, class InversionEffect extends Clutter.ShaderEffect {
-    _init(properties) {
+var InversionEffect =
+    GObject.registerClass({
+      GTypeName : `Cjs_InversionEffect_${Math.random()}`,
+    },
+                          class InversionEffect extends Clutter.ShaderEffect {
+      _init(properties) {
         super._init();
         this.updateEffect(properties);
 
         this._source = ShaderLib.getInversion();
         this.set_shader_source(this._source);
-    }
+      }
 
-    updateEffect(properties) {
+      updateEffect(properties) {
         this._mode = properties.mode;
         this.queue_repaint();
-    }
+      }
 
-    vfunc_get_static_shader_source() {
-        return this._source;
-    }
+      vfunc_get_static_shader_source() { return this._source; }
 
-    vfunc_paint_target(...args) {
+      vfunc_paint_target(...args) {
         this.set_uniform_value('tex', 0);
         this.set_uniform_value('INVERSION_MODE', this._mode);
         super.vfunc_paint_target(...args);
-    }
-});
+      }
+    });
 
-var ColorMixerEffect = GObject.registerClass({
-    GTypeName: `Cjs_ColorMixerEffect_${Math.random()}`,
-}, class ColorMixerEffect extends Clutter.ShaderEffect {
-    _init(properties) {
+var ColorMixerEffect =
+    GObject.registerClass({
+      GTypeName : `Cjs_ColorMixerEffect_${Math.random()}`,
+    },
+                          class ColorMixerEffect extends Clutter.ShaderEffect {
+      _init(properties) {
         super._init();
         // 0 - GRB, 1 - BRG
         this.updateEffect(properties);
 
         this._source = ShaderLib.getChannelMix();
         this.set_shader_source(this._source);
-    }
+      }
 
-    updateEffect(properties) {
+      updateEffect(properties) {
         this._mode = properties.mode;
         this._strength = properties.factor;
         this.queue_repaint();
-    }
+      }
 
-    vfunc_get_static_shader_source() {
-        return this._source;
-    }
+      vfunc_get_static_shader_source() { return this._source; }
 
-    vfunc_paint_target(...args) {
+      vfunc_paint_target(...args) {
         this.set_uniform_value('tex', 0);
         this.set_uniform_value('MIX_MODE', this._mode);
         this.set_uniform_value('STRENGTH', this._strength);
         super.vfunc_paint_target(...args);
-    }
-});
+      }
+    });
 
-var DaltonismEffect = GObject.registerClass({
-    GTypeName: `Cjs_DaltonismEffect_${Math.random()}`,
-}, class DaltonismEffect extends Clutter.ShaderEffect {
-    _init(properties) {
+var DaltonismEffect =
+    GObject.registerClass({
+      GTypeName : `Cjs_DaltonismEffect_${Math.random()}`,
+    },
+                          class DaltonismEffect extends Clutter.ShaderEffect {
+      _init(properties) {
         super._init();
 
         this.updateEffect(properties);
 
-        this._source = ShaderLib.getDaltonism()
+        this._source = ShaderLib.getDaltonism();
         this.set_shader_source(this._source);
-    }
+      }
 
-    updateEffect(properties) {
+      updateEffect(properties) {
         this._mode = properties.mode;
         this._strength = properties.factor;
         this.queue_repaint();
-    }
+      }
 
-    vfunc_get_static_shader_source() {
-        return this._source;
-    }
+      vfunc_get_static_shader_source() { return this._source; }
 
-    vfunc_paint_target(...args) {
+      vfunc_paint_target(...args) {
         this.set_uniform_value('tex', 0);
         this.set_uniform_value('COLORBLIND_MODE', this._mode);
         this.set_uniform_value('STRENGTH', this._strength);
         super.vfunc_paint_target(...args);
-    }
-});
+      }
+    });
 
 var ShaderLib = class {
-    static getDaltonism() {
-        return `
+  static getDaltonism() {
+    return `
             uniform sampler2D tex;
             uniform float STRENGTH;
             uniform int COLORBLIND_MODE;
@@ -227,10 +229,10 @@ var ShaderLib = class {
                 }
             }
         `;
-    }
+  }
 
-    static getChannelMix() {
-        return `
+  static getChannelMix() {
+    return `
             uniform sampler2D tex;
             uniform int MIX_MODE;
             uniform float STRENGTH;
@@ -246,10 +248,10 @@ var ShaderLib = class {
                 cogl_color_out = c;
             }
         `;
-    }
+  }
 
-    static getInversion() {
-        return `
+  static getInversion() {
+    return `
             uniform sampler2D tex;
             uniform int INVERSION_MODE;
             // Modes: 0 = Lightness
@@ -282,5 +284,5 @@ var ShaderLib = class {
                 cogl_color_out = c;
             }
         `;
-    }
+  }
 }
