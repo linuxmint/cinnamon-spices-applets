@@ -1,3 +1,7 @@
+### v7.0.0~20240411
+  * Fixes #3773 #4584 #4850 #5167 #5216.
+  * This version works with Cinnamon 6.0! Even if a few adjustments need to be made.
+
 ### v6.4.3~20231209
   * Fixes #5167. Use of Soup3 (Cinnamon 6.0).
 .
