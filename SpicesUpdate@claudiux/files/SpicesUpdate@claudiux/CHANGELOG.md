@@ -1,4 +1,8 @@
 ### v7.0.0~20240411
+  * Fixes #5682 and many other bugs.
+  * TODO: Include Nemo Actions. Update all Spices of a given type.
+
+### v7.0.0~20240411
   * Fixes #3773 #4584 #4850 #5167 #5216.
   * This version works with Cinnamon 6.0! Even if a few adjustments need to be made.
 

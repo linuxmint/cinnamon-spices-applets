@@ -18,7 +18,7 @@ const Lang = imports.lang;
 //GLib:
 const { LogLevelFlags, getenv, get_language_names, filename_to_uri, find_program_in_path, mkdir_with_parents, file_set_contents, file_get_contents, markup_escape_text, SOURCE_CONTINUE, SOURCE_REMOVE } = imports.gi.GLib;
 //Gio:
-const { network_monitor_get_default, file_new_for_path, icon_new_for_string, FileQueryInfoFlags, FileType, Settings, FileCreateFlags } = imports.gi.Gio;
+const { network_monitor_get_default, NetworkConnectivity, file_new_for_path, icon_new_for_string, FileQueryInfoFlags, FileType, Settings, FileCreateFlags } = imports.gi.Gio;
 //Gtk:
 const Gtk = imports.gi.Gtk; //  /!\ Gtk.Label != St.Label
 // Gdk:
@@ -222,7 +222,7 @@ class SpicesUpdate extends IconApplet {
         this.alreadyMonitored = []; // Contains the UUIDs of xlets already monitored, to avoid multiple monitoring.
 
         // Monitoring network:
-        //this.monitor_interfaces();
+        this.monitor_interfaces();
 
         // Count of Spices to update
         this.nb_to_update = 0;
@@ -277,44 +277,43 @@ class SpicesUpdate extends IconApplet {
         this._signalsConnectId = this.signals.connect(global, "scale-changed", () => this.updateUI());
 
         // Run loop to refresh caches:
+        this._loop_refresh_cache();
         this.loopRefreshId = timeout_add_seconds(900, () => this._loop_refresh_cache());
     } // End of constructor
 
     _loop_refresh_cache() {
-        if (this.loopCacheIntervalId) return SOURCE_CONTINUE;
+        //if (this.loopCacheIntervalId) return SOURCE_CONTINUE;
 
-        var indexTypes = 0;
-        var t = TYPES[indexTypes];
-        this.loopCacheIntervalId = setInterval( () => {
-            t = TYPES[indexTypes];
+        var is_to_download = false;
+        for (let t of TYPES) {
             const jsonFile = file_new_for_path(CACHE_MAP[t]);
-            var is_to_download = false;
-            if (this.settings.getValue("check_%s".format(t))) {
-                if (jsonFile.query_exists(null)) {
-                    const jsonModifTime = jsonFile.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_date_time().tv_sec;
-                    const currentTime = parseInt(new Date / 1000);
-                    if (currentTime - jsonModifTime > 720) {
-                        // the cache is older than 12 minutes (720 seconds)
-                        is_to_download = true;
-                    }
-                } else {
-                    // the cache doesn't exist
-                    const jsonDirName = CACHE_DIR + "/" + this._get_singular_type(t);
-                    mkdir_with_parents(jsonDirName, 0o755);
+            if (jsonFile.query_exists(null)) {
+                //~ logDebug(""+CACHE_MAP[t]+" EXISTS!");
+                //~ const jsonModifTime = parseInt(jsonFile.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec);
+                const jsonModifTime = jsonFile.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_date_time().to_unix();
+                //~ logDebug("jsonModifTime = "+jsonModifTime);
+                const currentTime = parseInt(new Date / 1000);
+                //~ logDebug("currentTime = "+currentTime);
+                const difference = parseInt(currentTime - jsonModifTime);
+                //~ logDebug("difference = "+difference);
+                if (difference > 720) {
+                    // the cache is older than 12 minutes (720 seconds)
                     is_to_download = true;
+                    break
                 }
+            } else {
+                // the cache doesn't exist
+                const jsonDirName = CACHE_DIR + "/" + this._get_singular_type(t);
+                mkdir_with_parents(jsonDirName, 0o755);
+                is_to_download = true;
             }
-            if (is_to_download) {
-                logDebug("Cache refresh requested for "+t+".");
-                Util.spawnCommandLineAsync(CACHE_UPDATER+" --update "+this._get_singular_type(t));
-            }
-            indexTypes++;
-            if (indexTypes >= TYPES.length) {
-                this.next_type = TYPES[(TYPES.indexOf(this.next_type) + 1) % TYPES.length];
-                clearInterval(this.loopCacheIntervalId);
-                this.loopCacheIntervalId = null;
-            }
-        }, 30000);
+        }
+        //~ logDebug("is_to_download: "+is_to_download);
+        if (is_to_download) {
+            //~ logDebug("Cache refresh requested.");
+            Util.spawnCommandLineAsync(CACHE_UPDATER+" --update-all");
+        }
+
         return (this.applet_running) ? SOURCE_CONTINUE : SOURCE_REMOVE;
     } // End of _loop_refresh_cache
 
@@ -327,27 +326,12 @@ class SpicesUpdate extends IconApplet {
             "general_frequency",
             this.on_frequency_changed.bind(this)
         );
-        this.refreshInterval = QUICK() ? 660 * this.general_frequency : 3600 * this.general_frequency;
+        this.refreshInterval = QUICK() ? 720 * this.general_frequency : 3600 * this.general_frequency;
 
         if (this.settings.getValue("first_time")) {
             // This part of the code will only be executed the very first time SpicesUpdate 6+ is used.
             var isEmpty;
-            //~ var indexTypes = 0;
-            //~ var t = TYPES[indexTypes];
-            //~ let id = setInterval( () => {
-                //~ t = TYPES[indexTypes];
-                //~ //this.download_cache(t, true);
-                //~ isEmpty = this._is_empty_local_dir(t);
-                //~ this.settings.setValue("was_empty_%s".format(t), isEmpty);
-                //~ this.settings.setValue("check_%s".format(t), !isEmpty);
-                //~ this.settings.setValue("check_new_%s".format(t), false);
-                //~ indexTypes++;
-                //~ if (indexTypes >= TYPES.length)
-                    //~ clearInterval(id);
-            //~ }, WAITING[t]);
-
             for (let t of TYPES) {
-                //this.download_cache(t, true);
                 isEmpty = this._is_empty_local_dir(t);
                 this.settings.setValue("was_empty_%s".format(t), isEmpty);
                 this.settings.setValue("check_%s".format(t), !isEmpty);
@@ -383,7 +367,7 @@ class SpicesUpdate extends IconApplet {
         let now = Math.ceil(Date.now()/1000);
         //~ if (this.general_next_check_date === 0) {
             this.general_next_check_date = (this.first_loop) ? now + 60 : now + 300;
-            logDebug("now=%s ; this.general_next_check_date=%s".format(
+            //~ logDebug("now=%s ; this.general_next_check_date=%s".format(
               now.toString(),
               this.general_next_check_date.toString())
             );
@@ -563,25 +547,35 @@ class SpicesUpdate extends IconApplet {
         //~ this._httpSession = new Soup.Session(); // SessionAsync is deprecated. Use Session instead.
     //~ }
 
-    //monitor_interfaces() {
-        //if (this.netMonitor) return;
+    monitor_interfaces() {
+        if (this.netMonitor) return;
 
-        //this.netMonitors = [];
-        //try {
-            //this.netMonitor = network_monitor_get_default();
-            //let netMonitorId = this.netMonitor.connect(
-                //'network-changed',
-                //(monitor, network_available) => this._on_network_changed()
-            //);
-            //this.netMonitors.push([this.netMonitor, netMonitorId]);
-        //} catch(e) {
-            //logError("Unable to monitor the network interfaces! - " + e)
-        //}
-    //}
+        this.netMonitors = [];
+        try {
+            this.netMonitor = network_monitor_get_default();
+            let netMonitorId = this.netMonitor.connect(
+                'network-changed',
+                (monitor, network_available) => this._on_network_changed(monitor, network_available)
+            );
+            this.netMonitors.push([this.netMonitor, netMonitorId]);
+        } catch(e) {
+            logError("Unable to monitor the network interfaces! - " + e)
+        }
+    }
 
-    _on_network_changed() {
+    _on_network_changed(monitor, network_available) {
         //~ this.define_http_session();
-        this._on_refresh_pressed()
+        let connectivity = monitor.get_connectivity();
+        if (network_available && (connectivity === NetworkConnectivity.FULL)) {
+            //~ logDebug("The network connectivity is now FULL.");
+            //~ logDebug("this.netMonitors.length: "+this.netMonitors.length);
+            this.applet_running = true;
+            this._on_refresh_pressed();
+        } else {
+            //~ logDebug("The network connectivity has been LOST.");
+            //~ logDebug("this.netMonitors.length: "+this.netMonitors.length);
+            this.applet_running = false;
+        }
     }
 
     /**
@@ -700,7 +694,7 @@ class SpicesUpdate extends IconApplet {
             // Unable to detect language. Return English by default.
             _language = "en";
         }
-        log("_language = " + _language);
+        //~ log("_language = " + _language);
         return _language;
         // End of get_user_language
     }
@@ -933,7 +927,7 @@ class SpicesUpdate extends IconApplet {
             this.loopId = null;
         }
 
-        let coeff = QUICK() ? 120 : 3600;
+        let coeff = QUICK() ? 720 : 3600;
         this.refreshInterval = coeff * this.general_frequency;
         this.loopId = timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
         // End of on_frequency_changed
@@ -952,7 +946,7 @@ class SpicesUpdate extends IconApplet {
 
         // Refresh intervall:
         this.refreshInterval = 3600 * this.general_frequency;
-        if (QUICK()) this.refreshInterval = 120 * this.general_frequency;
+        if (QUICK()) this.refreshInterval = 720 * this.general_frequency;
 
         // Types to check
         this.types_to_check = [];
@@ -1098,95 +1092,105 @@ class SpicesUpdate extends IconApplet {
         * (true when updates are requested by the user)
     */
     populateSettingsUnprotectedSpices(type) {
-        if (this.OKtoPopulateSettings[type] === true) {
-            // Prevents multiple access to the json config file of SpiceUpdate@claudiux:
-            this.OKtoPopulateSettings[type] = false;
-            this.unprotectedList[type] = [];
-            this.unprotectedDico[type] = {};
-            var unprotectedSpices = null;
+        if (this.OKtoPopulateSettings[type] != true) return;
+
+        // Prevents multiple access to the json config file of SpiceUpdate@claudiux:
+        this.OKtoPopulateSettings[type] = false;
+        this.unprotectedList[type] = [];
+        this.unprotectedDico[type] = {};
+        var unprotectedSpices = null;
+        switch (type) {
+            case "applets":
+                unprotectedSpices = this.unprotected_applets;
+                break;
+            case "desklets":
+                unprotectedSpices = this.unprotected_desklets;
+                break;
+            case "extensions":
+                unprotectedSpices = this.unprotected_extensions;
+                break;
+            case "themes":
+                unprotectedSpices = this.unprotected_themes;
+
+        }
+
+        const blacklist = this.get_blacklisted_packages();
+        //~ logDebug("blacklist: "+blacklist);
+
+        // populate this.unprotected_<type> with the this.unprotected_<type> elements, removing uninstalled <type>:
+        let unprotectedSpices_length = unprotectedSpices.length;
+        for (var i=0; i < unprotectedSpices_length; i++) {
+            let a = unprotectedSpices[i];
+            let d = file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
+            if (d.query_exists(null)) {
+                // the blacklist takes priority over this applet:
+                var isSystemProtected = (blacklist.indexOf(a["name"]) >= 0);
+                //~ if (isSystemProtected) logDebug(a["name"]+" is system-protected!!!");
+                this.unprotectedDico[type][a["name"]] = a["isunprotected"] && !isSystemProtected;
+                let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+                if (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true) {
+                    if (this.cache[type] === "{}") this._load_cache(type);
+                    let created = this._get_member_from_cache(type, a["name"], "created");
+                    let last_edited = this._get_last_edited_from_cache(type, a["name"]);
+                    if (created !== null && last_edited !== null && created >= last_edited)
+                        created = last_edited - 3600*24*365; // last_edited - 1;
+
+                    if (created !== null) this._rewrite_metadataFile(metadataFileName, created);
+                }
+                if (!a["isunprotected"]) {
+                    this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
+                }
+                this.unprotectedList[type].push({
+                    "name": a["name"],
+                    "isunprotected": a["isunprotected"] && !isSystemProtected,
+                    "requestnewdownload": false
+                });
+            }
+        }
+
+        // Are there new applets installed? If there are, then push them in this.unprotected_applets:
+        let dir = file_new_for_path(DIR_MAP[type]);
+        if (dir.query_exists(null)) {
+            let children = dir.enumerate_children("standard::name,standard::type", FileQueryInfoFlags.NONE, null);
+            let info, file_type;
+            var name;
+            var isSystemUnprotected;
+
+            while ((info = children.next_file(null)) != null) {
+                file_type = info.get_file_type();
+                if (file_type == FileType.DIRECTORY) {
+                    name = info.get_name();
+                    isSystemUnprotected = (blacklist.indexOf(name) < 0);
+                    if (this.unprotectedDico[type][name] === undefined) {
+                        this.unprotectedList[type].push({"name": name, "isunprotected": isSystemUnprotected, "requestnewdownload": false});
+                        this.unprotectedDico[type][name] = {};
+                        this.unprotectedDico[type][name]["name"] = name;
+                        this.unprotectedDico[type][name]["isunprotected"] = isSystemUnprotected;
+                        this._get_last_edited_from_metadata(type, name);
+                    }
+                }
+            }
+
             switch (type) {
                 case "applets":
-                    unprotectedSpices = this.unprotected_applets;
+                    this.unprotected_applets = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
                     break;
                 case "desklets":
-                    unprotectedSpices = this.unprotected_desklets;
+                    this.unprotected_desklets = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
                     break;
                 case "extensions":
-                    unprotectedSpices = this.unprotected_extensions;
+                    this.unprotected_extensions = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
                     break;
                 case "themes":
-                    unprotectedSpices = this.unprotected_themes;
-
+                    this.unprotected_themes = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
             }
 
-            var blacklist = this.get_blacklisted_packages();
-
-            // populate this.unprotected_<type> with the this.unprotected_<type> elements, removing uninstalled <type>:
-            let unprotectedSpices_length = unprotectedSpices.length;
-            for (var i=0; i < unprotectedSpices_length; i++) {
-                let a = unprotectedSpices[i];
-                let d = file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
-                if (d.query_exists(null)) {
-                    this.unprotectedDico[type][a["name"]] = a["isunprotected"];
-                    let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
-                    if (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true) {
-                        if (this.cache[type] === "{}") this._load_cache(type);
-                        let created = this._get_member_from_cache(type, a["name"], "created");
-                        let last_edited = this._get_last_edited_from_cache(type, a["name"]);
-                        if (created !== null && last_edited !== null && created >= last_edited) created = last_edited - 1;
-
-                        if (created !== null) this._rewrite_metadataFile(metadataFileName, created);
-                    }
-                    if (!a["isunprotected"]) {
-                        this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
-                    }
-                    this.unprotectedList[type].push({"name": a["name"], "isunprotected": a["isunprotected"], "requestnewdownload": false});
-                }
-            }
-
-            // Are there new applets installed? If there are, then push them in this.unprotected_applets:
-            let dir = file_new_for_path(DIR_MAP[type]);
-            if (dir.query_exists(null)) {
-                let children = dir.enumerate_children("standard::name,standard::type", FileQueryInfoFlags.NONE, null);
-                let info, file_type;
-                var name;
-
-                while ((info = children.next_file(null)) != null) {
-                    file_type = info.get_file_type();
-                    if (file_type == FileType.DIRECTORY) {
-                        name = info.get_name();
-                        if (this.unprotectedDico[type][name] === undefined) {
-                            this.unprotectedList[type].push({"name": name, "isunprotected": true, "requestnewdownload": false});
-                            this.unprotectedDico[type][name] = {};
-                            this.unprotectedDico[type][name]["name"] = name;
-                            this.unprotectedDico[type][name]["isunprotected"] = true;
-                            this._get_last_edited_from_metadata(type, name);
-                        }
-                    }
-                }
-
-                switch (type) {
-                    case "applets":
-                        this.unprotected_applets = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
-                        break;
-                    case "desklets":
-                        this.unprotected_desklets = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
-                        break;
-                    case "extensions":
-                        this.unprotected_extensions = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
-                        break;
-                    case "themes":
-                        this.unprotected_themes = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
-                }
-
-                children.close(null);
-            }
-
-            WAITING[type] = (this.unprotectedList[type].length + 3) * 1000;
-            unprotectedSpices = null;
+            children.close(null);
         }
-        // End of populateSettingsUnprotectedSpices
-    }
+
+        WAITING[type] = (this.unprotectedList[type].length + 3) * 1000;
+        unprotectedSpices = null;
+    } // End of populateSettingsUnprotectedSpices
 
     populateSettingsUnprotectedApplets() {
         this.populateSettingsUnprotectedSpices("applets");
@@ -1347,7 +1351,7 @@ class SpicesUpdate extends IconApplet {
 
     //FIXME Remove this function download_cache
     download_cache(type, force = false) {
-        logDebug("Download cache requested");
+        //~ logDebug("Download cache requested");
         let jsonFile = file_new_for_path(CACHE_MAP[type]);
 
         //Should we renew the cache?
@@ -1358,13 +1362,13 @@ class SpicesUpdate extends IconApplet {
             //let jsonIsPinned = jsonFile.query_info("metadata::pinned-to-top", FileQueryInfoFlags.NONE, null).get_attribute_as_string("metadata::pinned-to-top") == "true";
             //logDebug("jsonIsPinned: "+jsonIsPinned);
 
-            let jsonModifTime = jsonFile.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_date_time().tv_sec;
-            logDebug("currentTime-jsonModifTime="+(currentTime - jsonModifTime));
+            let jsonModifTime = jsonFile.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_date_time().to_unix();
+            //~ logDebug("currentTime-jsonModifTime="+(currentTime - jsonModifTime));
             if (currentTime - jsonModifTime > 900) {
                 // the cache is too old
                 is_to_download = true;
             } else {
-                logDebug("Refreshing cache is useless!");
+                //~ logDebug("Refreshing cache is useless!");
             }
         } else {
             // the cache doesn't exist
@@ -1375,14 +1379,14 @@ class SpicesUpdate extends IconApplet {
 
         if (is_to_download === true || this.forceRefresh === true || force === true) {
             // replace local json cache file by the remote one
-            logDebug("Refreshing cache - Begin");
+            //~ logDebug("Refreshing cache - Begin");
             //~ this.updater.refresh_cache_for_type(this._get_singular_type(type));
             Util.spawnCommandLine(CACHE_UPDATER+" --update "+this._get_singular_type(type));
-            logDebug("Refreshing cache - End");
+            //~ logDebug("Refreshing cache - End");
             this._load_cache(type);
             let jsonFile = file_new_for_path(CACHE_MAP[type]);
             if (jsonFile.query_exists(null)) {
-                let jsonModifTime = jsonFile.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_date_time().tv_sec;
+                let jsonModifTime = jsonFile.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_date_time().to_unix();
 
                 let _settings_schema = "org.cinnamon";
                 if (type === "themes") _settings_schema = "org.cinnamon.theme";
@@ -1414,7 +1418,7 @@ class SpicesUpdate extends IconApplet {
                 //~ }
             //~ }, type, force);
         }
-        logDebug("Download cache ended");
+        //~ logDebug("Download cache ended");
         // End of download_cache
     }
 
@@ -1550,7 +1554,7 @@ class SpicesUpdate extends IconApplet {
                         most_recent = this._most_recent_file_in(dir);
                         // Set the last-edited member's value to the last modification time of the most_recent file, in epoch format.
                         if (most_recent !== null) {
-                            lastEdited = most_recent.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+                            lastEdited = most_recent.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_date_time().to_unix();
                             this.get_date_of_nearest_commit(type, uuid, lastEdited, metadataFileName);
                         }
                     }
@@ -1563,7 +1567,7 @@ class SpicesUpdate extends IconApplet {
 
     _most_recent_file_in(dir) {
         if (dir.query_exists(null)) {
-            var latest_time = dir.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+            var latest_time = dir.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_date_time().to_unix();
             var latest_file = dir;
             let children = dir.enumerate_children("standard::name,standard::type", FileQueryInfoFlags.NONE, null);
             let info, file_type;
@@ -1572,7 +1576,7 @@ class SpicesUpdate extends IconApplet {
                 file = children.get_child(info);
                 if (file.get_basename() === "metadata.json") continue; // ignore metadata.json file
 
-                file_time = file.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+                file_time = file.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_date_time().to_unix();
                 if (file_time > latest_time) {
                     latest_time = file_time;
                     latest_file = file;
@@ -1580,7 +1584,7 @@ class SpicesUpdate extends IconApplet {
                 file_type = info.get_file_type();
                 if (file_type == FileType.DIRECTORY) {
                     file = this._most_recent_file_in(file);
-                    file_time = file.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+                    file_time = file.query_info("time::modified", FileQueryInfoFlags.NONE, null).get_modification_date_time().to_unix();
                     if (file_time > latest_time) {
                         latest_time = file_time;
                         latest_file = file;
@@ -1696,7 +1700,7 @@ class SpicesUpdate extends IconApplet {
             type.toString(),
             uuid
         );
-        logDebug("get_last_commit_subject() - url: "+url);
+        //~ logDebug("get_last_commit_subject() - url: "+url);
         await this.fetch(url).then( (data) => {
             if (data !== null) {
                 let result;
@@ -1910,9 +1914,15 @@ class SpicesUpdate extends IconApplet {
         let _SETTINGS_KEY = "blacklisted-packages";
         let _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
         let blacklisted_packages = _interface_settings.get_strv(_SETTINGS_KEY);
-        var blacklist = new Array();
+        //~ logDebug("blacklisted_packages: "+blacklisted_packages);
+        //~ logDebug("typeOf blacklisted_packages: "+(typeOf blacklisted_packages));
+        //blacklisted_packages = blacklisted_packages.split(",");
+        var blacklist = []; //new Array();
         for (let b of blacklisted_packages) {
-            blacklist.push(to_string(b).split("=")[0])
+            //~ logDebug("b: "+b);
+            var b0 = b.split("=")[0];
+            //~ logDebug("b0: "+b0);
+            blacklist.push(b0);
         }
         return blacklist
         // End of get_blacklisted_packages
@@ -2081,8 +2091,8 @@ class SpicesUpdate extends IconApplet {
         // End of destroy_all_notifications
     }
 
-    _on_refresh_pressed(from = null) {
-        //log("_on_refresh_pressed called by: %s".format(from.toString()), true);
+    _on_refresh_pressed(from=null) {
+        //~ logDebug("_on_refresh_pressed called by: "+from);
         this.first_loop = false;
         this.refresh_requested = true;
 
@@ -2091,7 +2101,7 @@ class SpicesUpdate extends IconApplet {
                 source_remove(this.loopId);
             }
             this.loopId = null;
-            this.refreshInterval = QUICK() ? 120 * this.general_frequency : 3600 * this.general_frequency;
+            this.refreshInterval = QUICK() ? 720 * this.general_frequency : 3600 * this.general_frequency;
             this.do_rotation = true;
             this.updateLoop();
         }
@@ -2285,7 +2295,7 @@ class SpicesUpdate extends IconApplet {
     // This is the loop run at general_frequency rate to call updateUI() to update the display in the applet and tooltip
     updateLoop() {
         if (this.isLooping === true) {
-            logDebug("ONE MORE LOOP requested, but already looping");
+            //~ logDebug("ONE MORE LOOP requested, but already looping");
             this.isLooping = false;
 
             //this.loopId = timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
@@ -2293,7 +2303,7 @@ class SpicesUpdate extends IconApplet {
 
             return SOURCE_CONTINUE;
         }
-        logDebug("ONE MORE LOOP!");
+        //~ logDebug("ONE MORE LOOP!");
         this.isLooping = true;
         if (this.loopId) {
             source_remove(this.loopId);
@@ -2323,7 +2333,7 @@ class SpicesUpdate extends IconApplet {
                     this._whether_empty_or_not(t);
                 }
                 if (!this.first_loop) {
-                    this.refreshInterval = QUICK() ? 120 * this.general_frequency : 3600 * this.general_frequency;
+                    this.refreshInterval = QUICK() ? 720 * this.general_frequency : 3600 * this.general_frequency;
                     var monitor, Id;
                     for (let tuple of this.monitors) {
                         [monitor, Id] = tuple;
@@ -2339,7 +2349,7 @@ class SpicesUpdate extends IconApplet {
 
                     for (t of TYPES) {
                         //~ if (t != this.next_type && !this.refresh_requested) continue;
-                        log("Checking for "+t, true);
+                        //~ logDebug("Checking for "+t);
                         this.populateSettingsUnprotectedSpices(t);
                         if (this.is_to_check(t)) {
                             if (this.cache[t] === "{}") this._load_cache(t);
@@ -2566,20 +2576,20 @@ class SpicesUpdate extends IconApplet {
 
         this.destroy_all_notifications();
 
-        var monitor, Id;
-        for (let tuple of this.monitors) {
-            [monitor, Id] = tuple;
-            monitor.disconnect(Id)
-        }
-        this.monitors = [];
+        //~ var monitor, Id;
+        //~ for (let tuple of this.monitors) {
+            //~ [monitor, Id] = tuple;
+            //~ monitor.disconnect(Id)
+        //~ }
+        //~ this.monitors = [];
 
-        //if (this.netMonitors) {
-            //for (let tuple of this.netMonitors) {
-                //[monitor, Id] = tuple;
-                //monitor.disconnect(Id)
-            //}
-            //this.netMonitors = [];
-        //}
+        if (this.netMonitors) {
+            for (let tuple of this.netMonitors) {
+                let [monitor, Id] = tuple;
+                monitor.disconnect(Id)
+            }
+            this.netMonitors = [];
+        }
 
         while (this._connectIds.length > 0) {
             this.actor.disconnect(this._connectIds.pop());
