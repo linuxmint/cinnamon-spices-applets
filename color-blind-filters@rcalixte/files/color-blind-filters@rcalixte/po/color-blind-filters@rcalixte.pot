@@ -5,10 +5,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: color-blind-filters@rcalixte 1.0\n"
+"Project-Id-Version: color-blind-filters@rcalixte 1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-07 14:21-0500\n"
+"POT-Creation-Date: 2024-04-11 13:32-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,63 +18,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. 5.4->settings-schema.json->category->options
-#: 5.4/applet.js:122
+#: 5.4/applet.js:109
 msgid "Color Blindness - Corrections"
 msgstr ""
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:124
+#: 5.4/applet.js:112
 msgid "Protanopia Correction"
 msgstr ""
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:129
+#: 5.4/applet.js:118
 msgid "Protanopia High Contrast"
 msgstr ""
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:134
+#: 5.4/applet.js:124
 msgid "Deuteranopia Correction"
 msgstr ""
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:139
+#: 5.4/applet.js:130
 msgid "Deuteranopia High Contrast"
 msgstr ""
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:144
+#: 5.4/applet.js:136
 msgid "Tritanopia Correction"
 msgstr ""
 
 #. 5.4->settings-schema.json->category->options
-#: 5.4/applet.js:149
+#: 5.4/applet.js:142
 msgid "Color Blindness - Simulations"
 msgstr ""
 
 #. 5.4->settings-schema.json->color_simulations->options
-#: 5.4/applet.js:151
+#: 5.4/applet.js:145
 msgid "Protanopia Simulation"
 msgstr ""
 
 #. 5.4->settings-schema.json->color_simulations->options
-#: 5.4/applet.js:156
+#: 5.4/applet.js:151
 msgid "Deuteranopia Simulation"
 msgstr ""
 
 #. 5.4->settings-schema.json->color_simulations->options
-#: 5.4/applet.js:161
+#: 5.4/applet.js:157
 msgid "Tritanopia Simulation"
 msgstr ""
 
 #. 5.4->settings-schema.json->category->options
 #. 5.4->settings-schema.json->inversions->description
-#: 5.4/applet.js:166
+#: 5.4/applet.js:163
 msgid "Inversions"
 msgstr ""
 
 #. 5.4->settings-schema.json->inversions->options
-#: 5.4/applet.js:168
+#: 5.4/applet.js:166
 msgid "Lightness Inversion"
 msgstr ""
 
@@ -104,11 +104,11 @@ msgstr ""
 msgid "Channel Mixer - BRG"
 msgstr ""
 
-#: 5.4/applet.js:377
+#: 5.4/applet.js:375
 msgid "Current filter:"
 msgstr ""
 
-#: 5.4/applet.js:379
+#: 5.4/applet.js:380
 msgid "Filters disabled."
 msgstr ""
 

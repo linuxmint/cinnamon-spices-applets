@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-02-07 14:21-0500\n"
+"POT-Creation-Date: 2024-04-11 13:32-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -19,63 +19,63 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. 5.4->settings-schema.json->category->options
-#: 5.4/applet.js:122
+#: 5.4/applet.js:109
 msgid "Color Blindness - Corrections"
 msgstr "Daltonisme - Corrections"
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:124
+#: 5.4/applet.js:112
 msgid "Protanopia Correction"
 msgstr "Correction de la protanopie"
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:129
+#: 5.4/applet.js:118
 msgid "Protanopia High Contrast"
 msgstr "Protanopie à contraste élevé"
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:134
+#: 5.4/applet.js:124
 msgid "Deuteranopia Correction"
 msgstr "Correction de la deutéranopie"
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:139
+#: 5.4/applet.js:130
 msgid "Deuteranopia High Contrast"
 msgstr "Deutéranopie à fort contraste"
 
 #. 5.4->settings-schema.json->color_corrections->options
-#: 5.4/applet.js:144
+#: 5.4/applet.js:136
 msgid "Tritanopia Correction"
 msgstr "Correction de la tritanopie"
 
 #. 5.4->settings-schema.json->category->options
-#: 5.4/applet.js:149
+#: 5.4/applet.js:142
 msgid "Color Blindness - Simulations"
 msgstr "Daltonisme - Simulations"
 
 #. 5.4->settings-schema.json->color_simulations->options
-#: 5.4/applet.js:151
+#: 5.4/applet.js:145
 msgid "Protanopia Simulation"
 msgstr "Simulation de la protanopie"
 
 #. 5.4->settings-schema.json->color_simulations->options
-#: 5.4/applet.js:156
+#: 5.4/applet.js:151
 msgid "Deuteranopia Simulation"
 msgstr "Simulation de la deutéranopie"
 
 #. 5.4->settings-schema.json->color_simulations->options
-#: 5.4/applet.js:161
+#: 5.4/applet.js:157
 msgid "Tritanopia Simulation"
 msgstr "Simulation de la tritanopie"
 
 #. 5.4->settings-schema.json->category->options
 #. 5.4->settings-schema.json->inversions->description
-#: 5.4/applet.js:166
+#: 5.4/applet.js:163
 msgid "Inversions"
 msgstr "Inversions"
 
 #. 5.4->settings-schema.json->inversions->options
-#: 5.4/applet.js:168
+#: 5.4/applet.js:166
 msgid "Lightness Inversion"
 msgstr "Inversion de la luminosité"
 
@@ -105,11 +105,11 @@ msgstr "Mixeur de canaux - VBR"
 msgid "Channel Mixer - BRG"
 msgstr "Mixeur de canaux - BRV"
 
-#: 5.4/applet.js:377
+#: 5.4/applet.js:375
 msgid "Current filter:"
 msgstr "Filtre actuel :"
 
-#: 5.4/applet.js:379
+#: 5.4/applet.js:380
 msgid "Filters disabled."
 msgstr "Filtres désactivés."
 
