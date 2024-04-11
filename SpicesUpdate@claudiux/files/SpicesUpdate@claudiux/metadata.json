@@ -3,7 +3,7 @@
   "name": "Spices Update",
   "max-instances": "1",
   "hide-configuration": false,
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "Warns you when installed Spices (applets, desklets, extensions, themes) require an update or new Spices are available.",
   "multiversion": true,
   "cinnamon-version": [
@@ -21,7 +21,8 @@
     "5.0",
     "5.2",
     "5.4",
-    "5.6"
+    "5.6",
+    "6.0"
   ],
   "author": "claudiux"
 }
