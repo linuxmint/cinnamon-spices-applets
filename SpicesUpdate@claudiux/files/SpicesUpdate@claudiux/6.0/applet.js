@@ -365,13 +365,7 @@ class SpicesUpdate extends IconApplet {
             null
         );
         let now = Math.ceil(Date.now()/1000);
-        //~ if (this.general_next_check_date === 0) {
-            this.general_next_check_date = (this.first_loop) ? now + 60 : now + 300;
-            //~ logDebug("now=%s ; this.general_next_check_date=%s".format(
-              now.toString(),
-              this.general_next_check_date.toString())
-            );
-        //~ }
+        this.general_next_check_date = (this.first_loop) ? now + 60 : now + 300;
 
         this.settings.bind(
             "general_warning",

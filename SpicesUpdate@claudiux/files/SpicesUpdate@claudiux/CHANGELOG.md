@@ -1,4 +1,7 @@
-### v7.0.0~20240411
+### v7.1.1~20240412
+  * Fixed a bug that prevented SpiceUpdate from starting.
+
+### v7.1.0~20240411
   * Fixes #5682 and many other bugs.
   * TODO: Include Nemo Actions. Update all Spices of a given type.
 
