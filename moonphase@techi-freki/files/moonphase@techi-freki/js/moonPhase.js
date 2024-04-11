@@ -1,4 +1,5 @@
 const Applet = imports.ui.applet;
+const { PopupMenuManager } = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const Lang = imports.lang;
@@ -14,7 +15,10 @@ class MoonPhase extends Applet.TextIconApplet {
         this.metadata = metadata;
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.orientation = orientation;
+        this.menuManager = new PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, this.orientation);
+
+        this.menuManager.addMenu(this.menu);
 
         this.settings.bind('useAltIcons', 'useAltIcons', this._onSettingsChanged.bind(this));
         this.settings.bind('showTooltip', 'showTooltip', this._onSettingsChanged.bind(this));
@@ -41,6 +45,7 @@ class MoonPhase extends Applet.TextIconApplet {
         if (this.updateLoopId) {
             Mainloop.source_remove(this.updateLoopId);
         }
+        this.settings.finalize();
     }
 
     on_applet_clicked() {
@@ -72,29 +77,31 @@ class MoonPhase extends Applet.TextIconApplet {
 
     _buildPopupMenu() {
         const menu = new Menu(this);
-        const translator = new Translator(this.metadata.uuid);
-        // TODO: add functions, events, and styling
-        // TODO: swap from popup to panel
-        menu.buildMenu(translator.translate('Moon Phase'), [
-            {
-                label: translator.translate('Rise'),
-                value: this.moon.riseSetTimes.rise,
-                icon: 'moonrise-symbolic',
-                cssClass: null
-            },
-            {
-                label: translator.translate('Transit'),
-                value: this.moon.riseSetTimes.transit,
-                icon: 'night-clear-symbolic',
-                cssClass: null
-            },
-            {
-                label: translator.translate('Set'),
-                value: this.moon.riseSetTimes.set,
-                icon: 'moonset-symbolic',
-                cssClass: null
-            }
-        ]);
+        menu.testBoxLayout();
+
+        // const menu = new Menu(this);
+        // const translator = new Translator(this.metadata.uuid);
+        // // TODO: add functions, events, and styling
+        // menu.buildMenu(translator.translate('Moon Phase'), [
+        //     {
+        //         label: translator.translate('Rise'),
+        //         value: this.moon.riseSetTimes.rise,
+        //         icon: 'moonrise-symbolic',
+        //         cssClass: null
+        //     },
+        //     {
+        //         label: translator.translate('Transit'),
+        //         value: this.moon.riseSetTimes.transit,
+        //         icon: 'night-clear-symbolic',
+        //         cssClass: null
+        //     },
+        //     {
+        //         label: translator.translate('Set'),
+        //         value: this.moon.riseSetTimes.set,
+        //         icon: 'moonset-symbolic',
+        //         cssClass: null
+        //     }
+        // ]);
     }
 
     _updateApplet() {

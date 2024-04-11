@@ -5,7 +5,7 @@ const { Translator } = require('./js/translator');
 class Moon {
     constructor(moonPhaseApplet) {
         this.uuid = moonPhaseApplet.metadata.uuid;
-        this.calc = new Calculator(moonPhaseApplet.latitude, moonPhaseApplet.longitude, moonPhaseApplet.elevation);
+        this.calc = new Calculator(moonPhaseApplet.latitude, moonPhaseApplet.longitude);
         this.illumination = this.calc.getMoonIllumination();
         this.riseSetTimes = this.calc.getRiseSetTimes();
         this.age = Math.trunc(this.illumination.phaseValue * 28);
