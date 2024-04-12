@@ -1,18 +1,13 @@
 const { Align, BoxLayout, IconType, Icon, Label } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 const { Translator } = require('./js/translator');
+const { TimeBox } = require('./js/ui/timeBox');
 
 class MoonTimes {
     constructor(app) {
         this.app = app;
         this.translator = new Translator(this.app.metadata.uuid);
-        this.textOptions = {
-            x_fill: true,
-            x_align: Align.START,
-            y_align: Align.MIDDLE,
-            y_fill: false,
-            expand: true
-        };
+
         // TODO: Fix time formating for international with Luxon?
         this.riseUi = this._createRiseUi();
         this.transitUi = this._createTransitUi();
@@ -36,51 +31,50 @@ class MoonTimes {
         return moonTimesBox;
     }
 
-    _createUiBox(icon = null, upperLabel = null, lowerLabel = null) {
-        // TODO: Use more BoxLayouts to style this better
-        const layout = new BoxLayout({ vertical: true, style_class: 'margined-box' });
-
-        // if (upperLabel) layout.add(upperLabel, this.textOptions);
-        if (icon) layout.add(icon);
-        if (lowerLabel) layout.add(lowerLabel, this.textOptions);
-
-        return layout;
-    }
-
-    _createUiElements(icon_name, icon_type, icon_size, upperText, lowerText) {
+    _createUiElements(icon_name, icon_type, icon_size, header, info) {
         const icon = new Icon({
             icon_name,
             icon_type,
             icon_size
         });
 
-        const upperLabel = new Label({ text: this.translator.translate(upperText), style: 'text-align: center' });
-        const lowerLabel = new Label({ text: lowerText, style: 'text-align: center' });
+        const headerLabel = new Label({ text: this.translator.translate(header), style: 'text-align: center' });
+        const dateLabel = new Label({ text: info.date });
+        const timeLabel = new Label({ text: info.time });
 
-        return this._createUiBox(icon, upperLabel, lowerLabel);
+        return new TimeBox(icon, headerLabel, { date: dateLabel, time: timeLabel }).actor;
     }
 
     _createRiseUi() {
         return this._createUiElements('moonrise-symbolic',
             IconType.SYMBOLIC,
             64,
-            'Rise',
-            `${this.app.moon.riseSetTimes.rise.toLocaleDateString()} ${this.app.moon.riseSetTimes.rise.toLocaleTimeString()}`);
+            'Moon rising time',
+            {
+                date: this.app.moon.riseSetTimes.rise.toLocaleDateString(),
+                time: this.app.moon.riseSetTimes.rise.toLocaleTimeString()
+            });
     }
 
     _createTransitUi() {
         return this._createUiElements('night-clear-symbolic',
             IconType.SYMBOLIC,
             64,
-            'Transit',
-            `${this.app.moon.riseSetTimes.transit.toLocaleDateString()} ${this.app.moon.riseSetTimes.transit.toLocaleTimeString()}`);
+            'Moon transit time',
+            {
+                date: this.app.moon.riseSetTimes.transit.toLocaleDateString(),
+                time: this.app.moon.riseSetTimes.transit.toLocaleTimeString()
+            });
     }
 
     _createSetUi() {
         return this._createUiElements('moonset-symbolic',
             IconType.SYMBOLIC,
             64,
-            'Set',
-            `${this.app.moon.riseSetTimes.set.toLocaleDateString()} ${this.app.moon.riseSetTimes.set.toLocaleTimeString()}`);
+            'Moon setting time',
+            {
+                date: this.app.moon.riseSetTimes.set.toLocaleDateString(),
+                time: this.app.moon.riseSetTimes.set.toLocaleTimeString()
+            });
     }
 }

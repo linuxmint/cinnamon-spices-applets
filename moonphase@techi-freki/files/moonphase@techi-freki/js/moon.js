@@ -3,16 +3,15 @@ const { Calculator } = require('./js/calc');
 const { Translator } = require('./js/translator');
 
 class Moon {
-    constructor(moonPhaseApplet) {
-        this.uuid = moonPhaseApplet.metadata.uuid;
-        this.translator = new Translator(this.uuid);
-        this.calc = new Calculator(moonPhaseApplet.latitude, moonPhaseApplet.longitude);
+    constructor(app) {
+        this.translator = new Translator(app.metadata.uuid);
+        this.calc = new Calculator(app.latitude, app.longitude);
         this.illumination = this.calc.getMoonIllumination();
         this.riseSetTimes = this.calc.getRiseSetTimes();
         this.age = Math.trunc(this.illumination.phaseValue * 28);
-        this.currentPhaseIcon = this._getCurrentPhaseIcon(moonPhaseApplet.useAltIcons);
-        this.currentPhaseName = this._getCurrentPhaseName(moonPhaseApplet.showNameLabel, moonPhaseApplet.showPercentageLabel);
-        this.currentTooltip = this._getCurrentPhaseName(moonPhaseApplet.showNameTooltip, moonPhaseApplet.showPercentageTooltip);
+        this.currentPhaseIcon = this._getCurrentPhaseIcon(app.useAltIcons);
+        this.currentPhaseName = this._getCurrentPhaseName(app.showNameLabel, app.showPercentageLabel);
+        this.currentTooltip = this._getCurrentPhaseName(app.showNameTooltip, app.showPercentageTooltip);
     }
     _getCurrentPhaseIcon(useAltIcons = false) {
         const iconSet = useAltIcons ?
