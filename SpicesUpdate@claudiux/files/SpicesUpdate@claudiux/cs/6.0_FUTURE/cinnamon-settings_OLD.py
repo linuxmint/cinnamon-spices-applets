@@ -25,9 +25,11 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('XApp', '1.0')
 from gi.repository import Gio, Gtk, Pango, Gdk, XApp
 
-import config
+from bin import config
 sys.path.append(os.path.join(config.currentPath, "bin"))
 sys.path.append(os.path.join(config.currentPath, "modules"))
+sys.path.append(config.csPath + "/modules")
+sys.path.append(config.csPath + "/bin")
 from bin import capi
 from bin import proxygsettings
 from bin import SettingsWidgets
@@ -36,6 +38,7 @@ from bin import SettingsWidgets
 gettext.install("cinnamon", "/usr/share/locale", names=["ngettext"])
 
 # Standard setting pages... this can be expanded to include applet dirs maybe?
+print("config.currentPath", config.currentPath)
 mod_files = glob.glob(config.currentPath + "/modules/*.py")
 mod_files.sort()
 if len(mod_files) == 0:
@@ -194,7 +197,7 @@ class MainWindow(Gio.Application):
 
     def go_to_sidepage(self, sidePage: SettingsWidgets.SidePage, user_action=True):
         sidePage.build()
-        
+
         if sidePage.is_standalone:
             return  # we're done
 
@@ -214,6 +217,11 @@ class MainWindow(Gio.Application):
                             and self.sort in range(5):
                         visible_child.sort_combo.set_active(self.sort)
                         visible_child.sort_changed()
+                        if self.update_all:
+                            visible_child.refresh_button.emit('clicked')
+                            visible_child.update_all_button.emit('clicked')
+                            #self.window.emit('destroy')
+                            #self.window.close()
                 else:
                     sidePage.stack.set_visible_child(l[0])
                 if sidePage.stack.get_visible():
@@ -325,6 +333,7 @@ class MainWindow(Gio.Application):
 
         self.tab = 0  # open 'manage' tab by default
         self.sort = 1  # sorted by 'score' by default
+        self.update_all = False # "update all" is not requested
 
         self.store_by_cat: typing.Dict[str, Gtk.ListStore] = {}
         self.storeFilter = {}
@@ -337,12 +346,12 @@ class MainWindow(Gio.Application):
         if len(sys.argv) > 1:
             if self.load_sidepage_as_standalone():
                 return
-        
+
         self.init_settings_overview()
 
     def init_settings_overview(self):
         """Load the system settings overview (default)
-        
+
         This requires to initialize all settings modules.
         """
         # 1. load all python modules
@@ -440,7 +449,7 @@ class MainWindow(Gio.Application):
             arg1 = sys.argv[1]
             if arg1 in ARG_REWRITE.keys():
                 arg1 = ARG_REWRITE[arg1]
-        if len(sys.argv) > 1 and arg1 in sidePagesIters:
+        if len(sys.argv) > 1: # and arg1 in sidePagesIters:
             # Analyses arguments to know the tab to open
             # and the sort to apply if the tab is the 'more' one.
             # Examples:
@@ -471,6 +480,8 @@ class MainWindow(Gio.Application):
                         self.sort = int(arg)
                     elif arg in sorts_literal.keys():
                         self.sort = sorts_literal[arg]
+                if opt in ("-u", "--update-all"):
+                    self.update_all = True
                 # remove the args we consume
                 sys.argv.remove(opt)
                 sys.argv.remove(arg)
@@ -525,7 +536,7 @@ class MainWindow(Gio.Application):
             return False
 
         to_import = [os.path.splitext(os.path.basename(x))[0] for x in mod_files]
-        
+
         if only_module is not None:
             to_import = filter(lambda mod: only_module.replace("-", "_") in mod, to_import)
 

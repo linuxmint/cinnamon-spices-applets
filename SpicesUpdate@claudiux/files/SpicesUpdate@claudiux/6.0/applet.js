@@ -70,10 +70,8 @@ function getImageAtScale(imageFileName, width, height) {
         width, height,
         pixBuf.get_rowstride()
     );
-
     let actor = new Actor({width: width, height: height});
     actor.set_content(image);
-
     return actor;
 }
 
@@ -82,13 +80,10 @@ function SU_setup_logging(quiet = false, verbose = false) {
     if (quiet) {
         // quiet mode
         hidden_levels = LogLevelFlags.LEVEL_MESSAGE | LogLevelFlags.LEVEL_INFO | LogLevelFlags.LEVEL_DEBUG | LogLevelFlags.LEVEL_WARNING;
-
     } else if (verbose) {
         // verbose mode
-
     } else {
         // normal mode
-
     }
 }
 
@@ -394,8 +389,14 @@ class SpicesUpdate extends IconApplet {
         this.settings.bind(
             "general_show_updateall_button",
             "general_show_updateall_button",
-            null
+            () => {
+                // FUTURE:
+                //this.clear_notifications_about_updates(null);
+                //this.clear_notifications_about_news(null);
+                //this._on_refresh_pressed();
+            }
         );
+        this.general_show_updateall_button = false;
 
         this.settings.bind(
             "general_type_notif",
@@ -805,30 +806,21 @@ class SpicesUpdate extends IconApplet {
             }
 
             notification.connect("action-invoked", (self, action) => {
-                        if (action == "su-%s-symbolic".format(type.toString())) {
-                            Util.spawnCommandLine("%s %s -t %s -s %s".format(CS_PATH, type.toString(), TAB, SORT));
+                        if (action == "su-%s-symbolic".format(""+type)) {
+                            Util.spawnCommandLine("%s %s -t %s -s %s".format(CS_PATH, ""+type, TAB, SORT));
                         } else if (action == "software-update-available-symbolic") {
-                            Util.spawnCommandLine("%s %s -t %s -s %s -u".format(CS_PATH, type.toString(), TAB, SORT));
+                            Util.spawnCommandLine("%s %s -t %s -s %s -u".format(CS_PATH, ""+type, TAB, SORT));
                             let n = this.notifications_about_updates[type].pop(this.notifications_about_updates[type].indexOf(notification));
                             n.destroy(3);
                         } else if (action == "su-forget-symbolic") {
                             this._forget_new_spices(type);
-                            while (this.notifications_about_news[type].length != 0) {
-                                let n = this.notifications_about_news[type].pop();
-                                n.destroy(3);
-                            }
+                            this.clear_notifications_about_news(type);
                         } else if (action == "emblem-synchronizing-symbolic"){
                             if (this.force_notifications === true) {
                                 if (about_updates) {
-                                    while (this.notifications_about_updates[type].length != 0) {
-                                        let n = this.notifications_about_updates[type].pop();
-                                        n.destroy(3);
-                                    }
+                                    this.clear_notifications_about_updates(type)
                                 } else {
-                                    while (this.notifications_about_news[type].length != 0) {
-                                        let n = this.notifications_about_news[type].pop();
-                                        n.destroy(3);
-                                    }
+                                    this.clear_notifications_about_news(type)
                                 }
                             } else {
                                 let n = this.notifications_about_updates[type].pop(this.notifications_about_updates[type].indexOf(notification));
@@ -2035,6 +2027,7 @@ class SpicesUpdate extends IconApplet {
             _options[i].connect("activate", (event) => Util.spawnCommandLine("/usr/bin/xlet-settings applet %s -i %s -t %s".format(UUID, this.instanceId, i.toString())));
             _configure.menu.addMenuItem(_options[i])
         }
+        _configure.menu.open();
 
         // button Reload this applet
         if (DEBUG() || RELOAD()) {
@@ -2064,34 +2057,60 @@ class SpicesUpdate extends IconApplet {
         // End of makeMenu
     }
 
-    destroy_notifications(type, about = "both") {
-        if (about === "both" || about === "updates") {
+    clear_notifications_about_updates(type=null) {
+        if (type) {
             while (this.notifications_about_updates[type].length != 0) {
                 let n = this.notifications_about_updates[type].pop();
                 n.destroy(3);
             }
-            this.old_message[type] = "";
+        } else {
+            for (let t of TYPES) {
+                while (this.notifications_about_updates[t].length != 0) {
+                    let n = this.notifications_about_updates[t].pop();
+                    n.destroy(3);
+                }
+            }
         }
+    } // End of clear_notifications_about_updates
 
-        if (about === "both" || about === "news") {
+    clear_notifications_about_news(type=null) {
+        if (type) {
             while (this.notifications_about_news[type].length != 0) {
                 let n = this.notifications_about_news[type].pop();
                 n.destroy(3);
             }
+        } else {
+            for (let t of TYPES) {
+                while (this.notifications_about_news[t].length != 0) {
+                    let n = this.notifications_about_news[t].pop();
+                    n.destroy(3);
+                }
+            }
+        }
+    } // End of clear_notifications_about_news
+
+    destroy_notifications(type, about = "both") {
+        if (about === "both" || about === "updates") {
+            this.clear_notifications_about_updates(type);
+            this.old_message[type] = "";
+        }
+
+        if (about === "both" || about === "news") {
+            this.clear_notifications_about_news(type);
             this.old_watch_message[type] = "";
         }
-        // End of destroy_notifications
-    }
+    } // End of destroy_notifications
 
     destroy_all_notifications() {
         for (let t of TYPES) {
             this.destroy_notifications(t);
         }
-        // End of destroy_all_notifications
-    }
+    } // End of destroy_all_notifications
 
     _on_refresh_pressed(from=null) {
         //~ logDebug("_on_refresh_pressed called by: "+from);
+        if (this.menu.isOpen)
+            this.menu.toggle();
         this.first_loop = false;
         this.refresh_requested = true;
 
@@ -2104,8 +2123,7 @@ class SpicesUpdate extends IconApplet {
             this.do_rotation = true;
             this.updateLoop();
         }
-        // End of _on_refresh_pressed
-    }
+    } // End of _on_refresh_pressed
 
     _on_reload_this_applet_pressed() {
         // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
@@ -2124,8 +2142,7 @@ class SpicesUpdate extends IconApplet {
         for (let type of TYPES) this.monitorsPngId[type] = 0;
         // Reload this applet
         Extension.reloadExtension(UUID, Extension.Type.APPLET);
-        // End of _on_reload_this_applet_pressed
-    }
+    } // End of _on_reload_this_applet_pressed
 
     _clean_str(str) {
         let ret = str.replace(/\\'/gi, "'");

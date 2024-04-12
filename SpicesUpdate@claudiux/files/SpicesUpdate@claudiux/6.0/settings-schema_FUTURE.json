@@ -466,8 +466,11 @@
     "tooltip": "Minimal:\n\tDisplays simple and short notifications.\nWith action buttons:\n\tNotifications also contain some buttons which have these roles:\n\t\tThe leftmost button opens the Download tab in System Settings for the concerned Spices, which are sorted by date (most recent first). So you can update the Spices you want.\n\t\tThe rightmost button refreshes the cache and notifications, if necessary.\n\t\tOptionally, a central button allows you to forget new spices or update the installed ones, depending on the case."
   },
   "general_show_updateall_button": {
-    "type": "generic",
-    "default": false
+    "type": "switch",
+    "default": false,
+    "dependency": "general_type_notif!=minimal",
+    "description": "Show the 'Update Now' button in notifications",
+    "tooltip": "By checking this box, a button 'Update All' appears in notifications.\nBy pressing this button:\n 1. The Download tab of the System Settings concerning this type of Spices appears.\n 2. The cache is updated.\n 3. Your Spices are updated.\n 4. When all updates are made, just close the window."
   },
   "general_test_notif": {
     "type": "button",

@@ -1,3 +1,8 @@
+### v7.2.0~20240412
+  * Removes the "Update" button from notifications for the time being. It will be available again when cinnamon-settings is compatible.
+  * Many bugfixes.
+  * TODO: Include Nemo Actions.
+
 ### v7.1.2~20240412
   * Fixes definitively #5682: now this applet also works on distributions that don't use mintupdate.
 
