@@ -5,7 +5,7 @@ const Settings = imports.ui.settings;
 const Lang = imports.lang;
 const { Moon } = require('./js/moon');
 const { Menu } = require('./js/menu');
-const { Translator } = require('./js/translator');
+const { Config } = require('./js/config');
 
 class MoonPhase extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -20,25 +20,13 @@ class MoonPhase extends Applet.TextIconApplet {
 
         this.menuManager.addMenu(this.menu);
 
-        this.settings.bind('useAltIcons', 'useAltIcons', this._onSettingsChanged.bind(this));
-        this.settings.bind('showTooltip', 'showTooltip', this._onSettingsChanged.bind(this));
-        this.settings.bind('showNameTooltip', 'showNameTooltip', this._onSettingsChanged.bind(this));
-        this.settings.bind('showPercentageTooltip', 'showPercentageTooltip', this._onSettingsChanged.bind(this));
-        this.settings.bind('showPhaseLabel', 'showPhaseLabel', this._onSettingsChanged.bind(this));
-        this.settings.bind('showNameLabel', 'showNameLabel', this._onSettingsChanged.bind(this));
-        this.settings.bind('showPercentageLabel', 'showPercentageLabel', this._onSettingsChanged.bind(this));
-
-        this.settings.bind('enableGeolocation', 'enableGeolocation', this._onSettingsChanged.bind(this));
-        this.settings.bind('latitude', 'latitude', this._onSettingsChanged.bind(this));
-        this.settings.bind('longitude', 'longitude', this._onSettingsChanged.bind(this));
-        this.settings.bind('showRiseSet', 'showRiseSet', this._onSettingsChanged.bind(this));
-
-        this.settings.bind('updateInterval', 'updateInterval', this._onSettingsChanged.bind(this));
+        this.config = new Config(this);
+        this.config.bindSettings();
 
         this.moon = new Moon(this);
 
-        this._buildPopupMenu();
-        this._updateApplet();
+        this.buildPopupMenu();
+        this.updateApplet();
     }
 
     on_applet_removed_from_panel() {
@@ -53,34 +41,12 @@ class MoonPhase extends Applet.TextIconApplet {
             this.menu.toggle();
     }
 
-    _onSettingsChanged(value) {
-        this.useAltIcons = this.settings.getValue('useAltIcons');
-        this.showTooltip = this.settings.getValue('showTooltip');
-        this.showNameTooltip = this.settings.getValue('showNameTooltip');
-        this.showPercentageTooltip = this.settings.getValue('showPercentageTooltip');
-        this.showPhaseLabel = this.settings.getValue('showPhaseLabel');
-        this.showNameLabel = this.settings.getValue('showNameLabel');
-        this.showPercentageLabel = this.settings.getValue('showPercentageLabel');
-
-        this.enableGeolocation = this.settings.getValue('enableGeolocation');
-        this.latitude =  this.settings.getValue('latitude');
-        this.longitude = this.settings.getValue('longitude');
-        this.showRiseSet = this.settings.getValue('showRiseSet');
-
-        this.updateInterval = this.settings.getValue('updateInterval');
-
-        this.moon = new Moon(this);
-
-        this._buildPopupMenu();
-        this._updateApplet();
-    }
-
-    _buildPopupMenu() {
+    buildPopupMenu() {
         const menu = new Menu(this);
         menu.buildMenu();
     }
 
-    _updateApplet() {
+    updateApplet() {
         this.moon = new Moon(this);
 
         if (this.updateLoopId) {
@@ -101,6 +67,6 @@ class MoonPhase extends Applet.TextIconApplet {
             this.set_applet_label('');
         }
 
-        this.updateLoopId = Mainloop.timeout_add((this.updateInterval * 1000), Lang.bind(this, this._updateApplet));
+        this.updateLoopId = Mainloop.timeout_add((this.updateInterval * 1000), Lang.bind(this, this.updateApplet));
     }
 }
