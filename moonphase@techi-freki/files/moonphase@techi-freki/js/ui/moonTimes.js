@@ -37,9 +37,10 @@ class MoonTimes {
     }
 
     _createUiBox(icon = null, upperLabel = null, lowerLabel = null) {
+        // TODO: Use more BoxLayouts to style this better
         const layout = new BoxLayout({ vertical: true, style_class: 'margined-box' });
 
-        if (upperLabel) layout.add(upperLabel, this.textOptions);
+        // if (upperLabel) layout.add(upperLabel, this.textOptions);
         if (icon) layout.add(icon);
         if (lowerLabel) layout.add(lowerLabel, this.textOptions);
 
