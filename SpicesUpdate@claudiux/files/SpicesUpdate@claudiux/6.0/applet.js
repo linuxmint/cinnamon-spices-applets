@@ -531,6 +531,32 @@ class SpicesUpdate extends IconApplet {
             this.populateSettingsUnprotectedThemes.bind(this)
         );
 
+        // Nemo actions
+        this.settings.bind(
+            "check_actions",
+            "check_actions",
+            this.on_settings_changed.bind(this)
+        );
+
+        this.settings.bind(
+            "check_new_actions",
+            "check_new_actions",
+            this.on_settings_changed.bind(this)
+        );
+
+        this.settings.bind(
+            "exp_actions",
+            "exp_actions",
+            null
+        );
+        this.exp_actions = "%s\n%s\n%s".format(EXP1["actions"], EXP2["actions"], EXP3);
+
+        this.settings.bind(
+            "unprotected_actions",
+            "unprotected_actions",
+            this.populateSettingsUnprotectedActions.bind(this)
+        );
+
         // End of get_SU_settings
     }
 
@@ -995,6 +1021,12 @@ class SpicesUpdate extends IconApplet {
         // End of on_btn_refresh_applets_pressed
     }
 
+    on_btn_refresh_actions_pressed() {
+        this.next_type = "actions";
+        this._on_refresh_pressed("on_btn_refresh_actions_pressed");
+        // End of on_btn_refresh_applets_pressed
+    }
+
     on_btn_cs_applets_pressed() {
         Util.spawnCommandLineAsync("%s applets -t %s -s %s".format(CS_PATH, TAB, SORT));
         // End of on_btn_cs_applets_pressed
@@ -1012,6 +1044,11 @@ class SpicesUpdate extends IconApplet {
 
     on_btn_cs_themes_pressed() {
         Util.spawnCommandLineAsync("%s themes -t %s -s %s".format(CS_PATH, TAB, SORT));
+        // End of on_btn_cs_themes_pressed
+    }
+
+    on_btn_cs_actions_pressed() {
+        Util.spawnCommandLineAsync("%s actions -t %s -s %s".format(CS_PATH, TAB, SORT));
         // End of on_btn_cs_themes_pressed
     }
 
@@ -1097,7 +1134,9 @@ class SpicesUpdate extends IconApplet {
                 break;
             case "themes":
                 unprotectedSpices = this.unprotected_themes;
-
+                break;
+            case "actions":
+                unprotectedSpices = this.unprotected_actions;
         }
 
         const blacklist = this.get_blacklisted_packages();
@@ -1169,6 +1208,9 @@ class SpicesUpdate extends IconApplet {
                     break;
                 case "themes":
                     this.unprotected_themes = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
+                    break;
+                case "actions":
+                    this.unprotected_actions = this.unprotectedList[type].sort((a,b) => this._compare(a,b));
             }
 
             children.close(null);
@@ -1180,23 +1222,23 @@ class SpicesUpdate extends IconApplet {
 
     populateSettingsUnprotectedApplets() {
         this.populateSettingsUnprotectedSpices("applets");
-        // End of populateSettingsUnprotectedApplets
-    }
+    } // End of populateSettingsUnprotectedApplets
 
     populateSettingsUnprotectedDesklets() {
         this.populateSettingsUnprotectedSpices("desklets");
-        // End of populateSettingsUnprotectedDesklets
-    }
+    } // End of populateSettingsUnprotectedDesklets
 
     populateSettingsUnprotectedExtensions() {
         this.populateSettingsUnprotectedSpices("extensions");
-        // End of populateSettingsUnprotectedExtensions
-    }
+    } // End of populateSettingsUnprotectedExtensions
 
     populateSettingsUnprotectedThemes() {
         this.populateSettingsUnprotectedSpices("themes");
-        // End of populateSettingsUnprotectedThemes
-    }
+    } // End of populateSettingsUnprotectedThemes
+
+    populateSettingsUnprotectedActions() {
+        this.populateSettingsUnprotectedSpices("actions");
+    } // End of populateSettingsUnprotectedActions
 
     _compare(a,b) {
         // We know that a["name"] and b["name"] are different.
@@ -2016,8 +2058,8 @@ class SpicesUpdate extends IconApplet {
         let _configure = new PopupSubMenuMenuItem(_("Configure"));
         this.menu.addMenuItem(_configure);
         this.menu.addMenuItem(new PopupSeparatorMenuItem());
-        let _configureOptions = [_("General"), _("Applets"), _("Desklets"), _("Extensions"), _("Themes")];
-        let _iconNames = ["su-general", "su-applets", "su-desklets", "su-extensions", "su-themes"];
+        let _configureOptions = [_("General"), _("Applets"), _("Desklets"), _("Extensions"), _("Themes"), _("Actions")];
+        let _iconNames = ["su-general", "su-applets", "su-desklets", "su-extensions", "su-themes", "su-actions"];
         let _options = [];
         let _configureOptions_length = _configureOptions.length;
         for (let i=0; i < _configureOptions_length ; i++) {
@@ -2671,6 +2713,10 @@ class SpicesUpdate extends IconApplet {
             "themes" : {
                 get_value: () => {return this.check_themes;},
                 set_value: (v) => {this.check_themes = v}
+            },
+            "actions" : {
+                get_value: () => {return this.check_actions;},
+                set_value: (v) => {this.check_actions = v}
             }
         };
 
@@ -2690,6 +2736,10 @@ class SpicesUpdate extends IconApplet {
             "themes" : {
                 get_value: () => {return this.check_new_themes;},
                 set_value: (v) => {this.check_new_themes = v}
+            },
+            "actions" : {
+                get_value: () => {return this.check_new_actions;},
+                set_value: (v) => {this.check_new_actions = v}
             }
         };
         // End of _set_SU_checks
