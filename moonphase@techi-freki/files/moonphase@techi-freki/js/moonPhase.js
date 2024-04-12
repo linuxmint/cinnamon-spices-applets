@@ -77,31 +77,7 @@ class MoonPhase extends Applet.TextIconApplet {
 
     _buildPopupMenu() {
         const menu = new Menu(this);
-        menu.testBoxLayout();
-
-        // const menu = new Menu(this);
-        // const translator = new Translator(this.metadata.uuid);
-        // // TODO: add functions, events, and styling
-        // menu.buildMenu(translator.translate('Moon Phase'), [
-        //     {
-        //         label: translator.translate('Rise'),
-        //         value: this.moon.riseSetTimes.rise,
-        //         icon: 'moonrise-symbolic',
-        //         cssClass: null
-        //     },
-        //     {
-        //         label: translator.translate('Transit'),
-        //         value: this.moon.riseSetTimes.transit,
-        //         icon: 'night-clear-symbolic',
-        //         cssClass: null
-        //     },
-        //     {
-        //         label: translator.translate('Set'),
-        //         value: this.moon.riseSetTimes.set,
-        //         icon: 'moonset-symbolic',
-        //         cssClass: null
-        //     }
-        // ]);
+        menu.buildMenu();
     }
 
     _updateApplet() {

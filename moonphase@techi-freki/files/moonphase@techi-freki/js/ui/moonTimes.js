@@ -1,36 +1,25 @@
-const { IconType } = imports.gi.St;
-const { IconLabel } = require('./iconLabel');
-const { BaseUi } = require('./components/baseUi');
+const { Align, BoxLayout, IconType, Icon, Label } = imports.gi.St;
+const { ActorAlign } = imports.gi.Clutter;
 const { Translator } = require('./js/translator');
 
-class MoonTimes extends UiBase {
+class MoonTimes {
     constructor(app) {
-        super(app);
-        const translator = new Translator(app.uuid);
-        this.riseUi = new IconLabel(
-            'moonrise-symbolic',
-            IconType.SYMBOLIC,
-            64,
-            translator.translate('Rise'),
-            `${app.moon.rise.toLocaleDateString()} ${app.moon.riseSetTimes.rise.toLocaleTimeString()}`
-        ).create();
-        this.transitUi = new IconLabel(
-            'night-clear-symbolic',
-            IconType.SYMBOLIC,
-            64,
-            translator.translate('Transit'),
-            `${app.moon.transit.toLocaleDateString()} ${app.moon.riseSetTimes.transit.toLocaleTimeString()}`
-        ).create();
-        this.setUi = new IconLabel(
-            'moonset-symbolic',
-            IconType.SYMBOLIC,
-            64,
-            translator.translate('Set'),
-            `${app.moon.set.toLocaleDateString()} ${app.moon.toLocaleTimeString()}`
-        ).create();
+        this.app = app;
+        this.translator = new Translator(this.app.metadata.uuid);
+        this.textOptions = {
+            x_fill: true,
+            x_align: Align.START,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        };
+        this.riseUi = this._createRiseUi();
+        this.transitUi = this._createTransitUi();
+        this.setUi = this._createSetUi();
+        this.actor = this._createActor();
     }
 
-    create() {
+    _createActor() {
         const moonTimesBox = new BoxLayout({
             style_class: 'padded-box',
             x_align: ActorAlign.CENTER,
@@ -44,5 +33,52 @@ class MoonTimes extends UiBase {
         moonTimesBox.add_actor(this.setUi);
 
         return moonTimesBox;
+    }
+
+    _createUiBox(icon = null, upperLabel = null, lowerLabel = null) {
+        const layout = new BoxLayout();
+
+        if (upperLabel) layout.add(upperLabel, this.textOptions);
+        if (icon) layout.add(icon);
+        if (lowerLabel) layout.add(lowerLabel, this.textOptions);
+
+        return layout;
+    }
+
+    _createUiElements(icon_name, icon_type, icon_size, upperText, lowerText) {
+        const icon = new Icon({
+            icon_name,
+            icon_type,
+            icon_size
+        });
+
+        const upperLabel = new Label({ text: this.translator.translate(upperText) });
+        const lowerLabel = new Label({ text: lowerText });
+
+        return this._createUiBox(icon, upperLabel, lowerLabel);
+    }
+
+    _createRiseUi() {
+        return this._createUiElements('moonrise-symbolic',
+            IconType.SYMBOLIC,
+            64,
+            'Rise',
+            `${this.app.moon.riseSetTimes.rise.toLocaleDateString()} ${this.app.moon.riseSetTimes.rise.toLocaleTimeString()}`);
+    }
+
+    _createTransitUi() {
+        return this._createUiElements('night-clear-symbolic',
+            IconType.SYMBOLIC,
+            50,
+            'Transit',
+            `${this.app.moon.riseSetTimes.transit.toLocaleDateString()} ${this.app.moon.riseSetTimes.transit.toLocaleTimeString()}`);
+    }
+
+    _createSetUi() {
+        return this._createUiElements('moonset-symbolic',
+            IconType.SYMBOLIC,
+            64,
+            'Set',
+            `${this.app.moon.riseSetTimes.set.toLocaleDateString()} ${this.app.moon.riseSetTimes.set.toLocaleTimeString()}`);
     }
 }
