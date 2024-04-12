@@ -42,7 +42,7 @@
    "select-gpu": {
       "type": "combobox",
       "default": "",
-      "description": "Select GPU (bus nr.)",
+      "description": "Select GPU (bus no.)",
       "options": {
          "Loading...": ""
       },
