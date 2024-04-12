@@ -1,9 +1,9 @@
-const { UiBase } = require('./js/ui/uiBase');
+const { BaseUi } = require('./js/ui/components/baseUi');
 
 const { BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 
-class MoonTimesUi extends UiBase {
+class MoonTimesUi extends BaseUi {
     constructor(app) {
         super(app);
     }
@@ -33,6 +33,7 @@ class MoonTimesUi extends UiBase {
         const moonTimesBox = new BoxLayout({
             style_class: 'padded-box',
             x_align: ActorAlign.CENTER,
+            y_align: Align.MIDDLE,
             x_expand: true,
             y_expand: true
         });

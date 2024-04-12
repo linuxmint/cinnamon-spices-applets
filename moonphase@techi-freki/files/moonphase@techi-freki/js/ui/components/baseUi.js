@@ -1,6 +1,6 @@
-class UiBase {
-    constructor(app) {
-        this._app = app;
+class BaseUi {
+    constructor() {
+
     }
 
     create() {

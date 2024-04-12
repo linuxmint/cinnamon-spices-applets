@@ -5,6 +5,7 @@ const { Translator } = require('./js/translator');
 class Moon {
     constructor(moonPhaseApplet) {
         this.uuid = moonPhaseApplet.metadata.uuid;
+        this.translator = new Translator(this.uuid);
         this.calc = new Calculator(moonPhaseApplet.latitude, moonPhaseApplet.longitude);
         this.illumination = this.calc.getMoonIllumination();
         this.riseSetTimes = this.calc.getRiseSetTimes();
@@ -23,22 +24,21 @@ class Moon {
     _getCurrentPhaseName(showName = true, showPercentage = true) {
         let name = "";
         const age = this.age / 28;
-        const translator = new Translator(this.uuid);
         const percent = `${Math.floor((this.illumination.fraction * 100) * 100) / 100}%`;
 
-        if (age === 0) name = translator.translate('New Moon');
-        else if (age < 0.25) name = translator.translate('Waxing Crescent');
-        else if (age === 0.25) name = translator.translate('First Quarter');
-        else if (age < 0.5) name = translator.translate('Waxing Gibbous');
-        else if (age === 0.5) name = translator.translate('Full Moon');
-        else if (age < 0.75) name = translator.translate('Waning Gibbous');
-        else if (age === 0.75) name = translator.translate('Last Quarter');
-        else if (age <= 1) name = translator.translate('Waning Crescent');
-        else name = translator.translate('New Moon');
+        if (age === 0) name = this.translator.translate('New Moon');
+        else if (age < 0.25) name = this.translator.translate('Waxing Crescent');
+        else if (age === 0.25) name = this.translator.translate('First Quarter');
+        else if (age < 0.5) name = this.translator.translate('Waxing Gibbous');
+        else if (age === 0.5) name = this.translator.translate('Full Moon');
+        else if (age < 0.75) name = this.translator.translate('Waning Gibbous');
+        else if (age === 0.75) name = this.translator.translate('Last Quarter');
+        else if (age <= 1) name = this.translator.translate('Waning Crescent');
+        else name = this.translator.translate('New Moon');
 
         if (showName && showPercentage) return `${name} (${percent})`;
         if (showName) return name;
         if (showPercentage) return percent;
-        return translator.translate("Moon Phase");
+        return this.translator.translate("Moon Phase");
     }
 }

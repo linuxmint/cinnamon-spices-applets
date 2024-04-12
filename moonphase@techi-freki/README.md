@@ -1,8 +1,8 @@
-[//]: # (<p align="center"><img src="./files/moonphase@techi-freki/icon.png" width="100" alt="Moon Phase" /></p>)
+<p style="text-align: center;"><img src="./files/moonphase@techi-freki/icon.png" width="100" alt="Moon Phase" title="Moon Phase" /></p>
 
 # Moon Phase Cinnamon Applet
 
-A Cinnamon applet that displays the up to date moon related information.
+A Cinnamon applet that displays up-to-date moon related information.
 
 ## Installation
 
