@@ -1,3 +1,7 @@
+### v7.3.0~20240413
+  * Also manage Actions for nemo.
+  * Fixes #5683.
+
 ### v7.2.0~20240412
   * Removes the "Update" button from notifications for the time being. It will be available again when cinnamon-settings is compatible.
   * Many bugfixes.

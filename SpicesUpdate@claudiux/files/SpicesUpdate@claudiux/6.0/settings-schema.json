@@ -6,7 +6,8 @@
       "Applets",
       "Desklets",
       "Extensions",
-      "Themes"
+      "Themes",
+      "Actions"
     ],
     "Applets": {
       "type": "page",
@@ -38,6 +39,14 @@
       "sections": [
         "section_themes1",
         "section_themes2"
+      ]
+    },
+    "Actions": {
+      "type": "page",
+      "title": "Actions",
+      "sections": [
+        "section_actions1",
+        "section_actions2"
       ]
     },
     "General": {
@@ -120,6 +129,24 @@
         "unprotected_themes",
         "btn_refresh_themes",
         "btn_cs_themes"
+      ]
+    },
+    "section_actions1": {
+      "type": "section",
+      "title": "Checking",
+      "keys": [
+        "check_actions",
+        "check_new_actions"
+      ]
+    },
+    "section_actions2": {
+      "type": "section",
+      "title": "Monitoring",
+      "keys": [
+        "exp_actions",
+        "unprotected_actions",
+        "btn_refresh_actions",
+        "btn_cs_actions"
       ]
     },
     "section_general1": {
@@ -400,6 +427,67 @@
     "callback": "on_btn_cs_themes_pressed"
   },
   "was_empty_themes":{
+    "type": "generic",
+    "value": false,
+    "default": false
+  },
+  "check_actions": {
+    "type": "switch",
+    "default": false,
+    "description": "Check regularly whether your nemo actions are up to date",
+    "tooltip": "If nemo actions updates do not concern you, uncheck this box."
+  },
+  "check_new_actions": {
+    "type": "switch",
+    "default": false,
+    "dependency": "check_actions",
+    "description": "Check regularly whether new nemo actions are available",
+    "tooltip": "If new nemo actions do not concern you, uncheck this box."
+  },
+  "exp_actions": {
+    "type": "textview",
+    "default": "",
+    "description": "",
+    "height": 60
+  },
+  "btn_refresh_actions": {
+    "type": "button",
+    "description": "Refresh",
+    "callback": "on_btn_refresh_actions_pressed"
+  },
+  "unprotected_actions": {
+    "type": "list",
+    "description": "Update these nemo actions:",
+    "columns": [
+      {
+        "id": "name",
+        "title": "Your nemo actions",
+        "type": "string"
+      },
+      {
+        "id": "isunprotected",
+        "title": "Check for updates?",
+        "align": 0.5,
+        "type": "boolean"
+      },
+      {
+        "id": "requestnewdownload",
+        "title": "Get the latest version now",
+        "align": 0.5,
+        "type": "boolean"
+      }
+    ],
+    "default": [
+
+    ],
+    "show-buttons": false
+  },
+  "btn_cs_actions": {
+    "type": "button",
+    "description": "Open Cinnamon Settings to manage all the nemo actions",
+    "callback": "on_btn_cs_actions_pressed"
+  },
+  "was_empty_actions":{
     "type": "generic",
     "value": false,
     "default": false

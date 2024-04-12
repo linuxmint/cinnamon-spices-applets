@@ -64,34 +64,38 @@ const CACHE_UPDATER = SCRIPTS_DIR + "/spices-cache-updater.py";
 const THUMBS_UPDATER = SCRIPTS_DIR + "/thumbs-updater.py";
 const THUMB_DOWNLOADER = SCRIPTS_DIR + "/thumb-downloader.sh";
 
-const TYPES = ["applets", "desklets", "extensions", "themes"];
+const TYPES = ["applets", "desklets", "extensions", "themes", "actions"];
 
 const URL_MAP = {
   'applets': URL_SPICES_HOME + "/json/applets.json?",
   'desklets': URL_SPICES_HOME + "/json/desklets.json?",
   'extensions': URL_SPICES_HOME + "/json/extensions.json?",
-  'themes': URL_SPICES_HOME + "/json/themes.json?"
+  'themes': URL_SPICES_HOME + "/json/themes.json?",
+  'actions': URL_SPICES_HOME + "/json/actions.json?"
 }
 
 const CACHE_MAP = {
   'applets': CACHE_DIR + "/applet/index.json",
   'themes': CACHE_DIR + "/theme/index.json",
   'desklets': CACHE_DIR + "/desklet/index.json",
-  'extensions': CACHE_DIR + "/extension/index.json"
+  'extensions': CACHE_DIR + "/extension/index.json",
+  'actions': CACHE_DIR + "/action/index.json"
 }
 
 const DIR_MAP = {
   'applets': HOME_DIR + "/.local/share/cinnamon/applets",
   'themes': HOME_DIR + "/.themes",
   'desklets': HOME_DIR + "/.local/share/cinnamon/desklets",
-  'extensions': HOME_DIR + "/.local/share/cinnamon/extensions"
+  'extensions': HOME_DIR + "/.local/share/cinnamon/extensions",
+  'actions': HOME_DIR + "/.local/share/nemo/actions"
 }
 
 const DCONFCACHEUPDATED = {
   'applets': "org.cinnamon",
   'themes': "org.cinnamon.theme",
   'desklets': "org.cinnamon",
-  'extensions': "org.cinnamon"
+  'extensions': "org.cinnamon",
+  'actions': "org.nemo.plugins" //disabled-actions
 }
 
 // ++ l10n support
@@ -138,36 +142,43 @@ bidon = _("Applets");
 bidon = _("Desklets");
 bidon = _("Extensions");
 bidon = _("Themes");
+bidon = _("Actions");
 bidon = _("One desklet needs update:");
 bidon = _("One applet needs update:");
 bidon = _("One extension needs update:");
 bidon = _("One theme needs update:");
+bidon = _("One action needs update:");
 bidon = _("Some desklets need update:");
 bidon = _("Some applets need update:");
 bidon = _("Some extensions need update:");
 bidon = _("Some themes need update:");
+bidon = _("Some actions need update:");
 bidon = _("New desklet available:");
 bidon = _("New applet available:");
 bidon = _("New extension available:");
 bidon = _("New theme available:");
+bidon = _("New action available:");
 bidon = _("New desklets available:");
 bidon = _("New applets available:");
 bidon = _("New extensions available:");
 bidon = _("New themes available:");
+bidon = _("New actions available:");
 bidon = null;
 
 const EXP1 = {
   "applets": _("If you do not want an applet to be checked, uncheck its first box."),
   "desklets": _("If you do not want a desklet to be checked, uncheck its first box."),
   "extensions": _("If you do not want an extension to be checked, uncheck its first box."),
-  "themes": _("If you do not want a theme to be checked, uncheck its first box.")
+  "themes": _("If you do not want a theme to be checked, uncheck its first box."),
+  "actions": _("If you do not want a nemo action to be checked, uncheck its first box.")
 }
 
 const EXP2 = {
   "applets": _("If you want to get the latest version of an applet now, check both boxes."),
   "desklets": _("If you want to get the latest version of a desklet now, check both boxes."),
   "extensions": _("If you want to get the latest version of an extension now, check both boxes."),
-  "themes": _("If you want to get the latest version of a theme now, check both boxes.")
+  "themes": _("If you want to get the latest version of a theme now, check both boxes."),
+  "actions": _("If you want to get the latest version of a nemo action now, check both boxes.")
 }
 
 const EXP3 = _("When all your choices are made, click the Refresh button.");
