@@ -1,3 +1,6 @@
+### v7.1.2~20240412
+  * Fixes definitively #5682: now this applet also works on distributions that don't use mintupdate.
+
 ### v7.1.1~20240412
   * Fixed a bug that prevented SpiceUpdate from starting.
 

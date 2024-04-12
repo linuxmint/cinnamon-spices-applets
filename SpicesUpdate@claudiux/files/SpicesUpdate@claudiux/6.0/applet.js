@@ -1903,20 +1903,25 @@ class SpicesUpdate extends IconApplet {
     }
 
     get_blacklisted_packages() {
-        // /com/linuxmint/updates/blacklisted-packages
-        let _SETTINGS_SCHEMA = "com.linuxmint.updates";
-        let _SETTINGS_KEY = "blacklisted-packages";
-        let _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
-        let blacklisted_packages = _interface_settings.get_strv(_SETTINGS_KEY);
-        //~ logDebug("blacklisted_packages: "+blacklisted_packages);
-        //~ logDebug("typeOf blacklisted_packages: "+(typeOf blacklisted_packages));
-        //blacklisted_packages = blacklisted_packages.split(",");
         var blacklist = []; //new Array();
-        for (let b of blacklisted_packages) {
-            //~ logDebug("b: "+b);
-            var b0 = b.split("=")[0];
-            //~ logDebug("b0: "+b0);
-            blacklist.push(b0);
+        // /com/linuxmint/updates/blacklisted-packages
+        try {
+            let _SETTINGS_SCHEMA = "com.linuxmint.updates";
+            let _SETTINGS_KEY = "blacklisted-packages";
+            let _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
+            let blacklisted_packages = _interface_settings.get_strv(_SETTINGS_KEY);
+            //~ logDebug("blacklisted_packages: "+blacklisted_packages);
+            //~ logDebug("typeOf blacklisted_packages: "+(typeOf blacklisted_packages));
+            //blacklisted_packages = blacklisted_packages.split(",");
+
+            for (let b of blacklisted_packages) {
+                //~ logDebug("b: "+b);
+                var b0 = b.split("=")[0];
+                //~ logDebug("b0: "+b0);
+                blacklist.push(b0);
+            }
+        } catch(e) {
+            // The used distrib doesn't have mintupdate installed: no blacklist.
         }
         return blacklist
         // End of get_blacklisted_packages
