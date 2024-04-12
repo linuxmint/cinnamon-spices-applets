@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-07 18:39-0100\n"
-"PO-Revision-Date: 2024-04-12 20:53-0400\n"
+"PO-Revision-Date: 2024-04-12 20:58-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
+
+#: popup_menu.py:71
+msgid "Open Folder"
+msgstr "Abrir carpeta"
+
+#: popup_menu.py:76
+msgid "Open in Terminal"
+msgstr "Abrir en el terminal"
 
 #. metadata.json->name
 msgid "Directory Menu"
@@ -49,6 +57,14 @@ msgstr "Texto de información sobre herramientas"
 msgid "Panel Text"
 msgstr "Texto del panel"
 
+#. settings-schema.json->show-menu->description
+msgid "Show menu"
+msgstr ""
+
+#. settings-schema.json->show-menu->tooltip
+msgid "Set keybinding(s) to show the menu."
+msgstr ""
+
 #. settings-schema.json->limit-characters->description
 msgid "Limit the Maximum Number of Characters on the Submenus"
 msgstr "Limitar el número máximo de caracteres en los submenús"
@@ -68,11 +84,3 @@ msgstr ""
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Incluir archivos ocultos"
-
-#. popup_menu.py:71
-msgid "Open Folder"
-msgstr "Abrir carpeta"
-
-#. popup_menu.py:76
-msgid "Open in Terminal"
-msgstr "Abrir en el terminal"
