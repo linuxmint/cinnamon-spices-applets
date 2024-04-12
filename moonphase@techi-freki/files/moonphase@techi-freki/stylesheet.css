@@ -1,3 +1,7 @@
 .padded-box {
     padding: 15px;
 }
+
+.margined-box {
+    margin: 10px;
+}

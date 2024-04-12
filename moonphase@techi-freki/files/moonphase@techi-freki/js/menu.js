@@ -9,7 +9,6 @@ class Menu {
     }
 
     buildMenu(heading, menuItems) {
-        // TODO: need to format this to look more like the weather applet (icons, styling, etc)
         const moonTimes = new MoonTimes(this.applet);
         this.applet.menu.addActor(moonTimes.actor);
     }

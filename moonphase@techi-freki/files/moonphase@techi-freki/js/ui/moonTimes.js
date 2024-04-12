@@ -13,6 +13,7 @@ class MoonTimes {
             y_fill: false,
             expand: true
         };
+        // TODO: Fix time formating for international with Luxon?
         this.riseUi = this._createRiseUi();
         this.transitUi = this._createTransitUi();
         this.setUi = this._createSetUi();
@@ -36,7 +37,7 @@ class MoonTimes {
     }
 
     _createUiBox(icon = null, upperLabel = null, lowerLabel = null) {
-        const layout = new BoxLayout();
+        const layout = new BoxLayout({ vertical: true, style_class: 'margined-box' });
 
         if (upperLabel) layout.add(upperLabel, this.textOptions);
         if (icon) layout.add(icon);
@@ -52,8 +53,8 @@ class MoonTimes {
             icon_size
         });
 
-        const upperLabel = new Label({ text: this.translator.translate(upperText) });
-        const lowerLabel = new Label({ text: lowerText });
+        const upperLabel = new Label({ text: this.translator.translate(upperText), style: 'text-align: center' });
+        const lowerLabel = new Label({ text: lowerText, style: 'text-align: center' });
 
         return this._createUiBox(icon, upperLabel, lowerLabel);
     }
@@ -69,7 +70,7 @@ class MoonTimes {
     _createTransitUi() {
         return this._createUiElements('night-clear-symbolic',
             IconType.SYMBOLIC,
-            50,
+            64,
             'Transit',
             `${this.app.moon.riseSetTimes.transit.toLocaleDateString()} ${this.app.moon.riseSetTimes.transit.toLocaleTimeString()}`);
     }
