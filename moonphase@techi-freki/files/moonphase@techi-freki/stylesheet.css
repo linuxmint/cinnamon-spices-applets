@@ -1,35 +1,20 @@
-.padded-box {
-    padding: 15px;
-}
-
-.margined-box {
-    margin: 10px;
+.padding-top-3 {
+    margin: 5px;
+    padding-top: 3px;
 }
 
 .padding-15 {
     padding: 15px;
 }
 
-.padding-10 {
-    padding: 10px;
-}
-
-.padding-5 {
-    padding: 5px;
-}
-
-.margin-15 {
-    margin: 15px;
-}
-
-.margin-10 {
-    margin: 10px;
-}
-
 .margin-5 {
     margin: 5px;
 }
 
-.margin-bottom-1 {
-    margin-bottom: 1px;
+.margin-bottom-5 {
+    margin-bottom: 5px;
+}
+
+.margin-top-5 {
+    margin-top: 5px;
 }

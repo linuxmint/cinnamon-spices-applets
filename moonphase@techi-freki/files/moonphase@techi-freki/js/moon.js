@@ -9,21 +9,15 @@ class Moon {
         this.illumination = this.calc.getMoonIllumination();
         this.riseSetTimes = this.calc.getRiseSetTimes();
         this.age = Math.trunc(this.illumination.phaseValue * 28);
-        this.currentPhaseIcon = this._getCurrentPhaseIcon(app.useAltIcons);
+        this.iconSet = app.useAltIcons ? new AltIconSet().getSet() : new DefaultIconSet().getSet();
+        this.currentPhaseIcon = this.iconSet[this.age];
         this.currentPhaseName = this._getCurrentPhaseName(app.showNameLabel, app.showPercentageLabel);
         this.currentTooltip = this._getCurrentPhaseName(app.showNameTooltip, app.showPercentageTooltip);
-    }
-    _getCurrentPhaseIcon(useAltIcons = false) {
-        const iconSet = useAltIcons ?
-            new AltIconSet().getSet() :
-            new DefaultIconSet().getSet();
-
-        return iconSet[this.age];
     }
     _getCurrentPhaseName(showName = true, showPercentage = true) {
         let name = "";
         const age = this.age / 28;
-        const percent = `${Math.floor((this.illumination.fraction * 100) * 100) / 100}%`;
+        const percent = `${ Math.floor((this.illumination.fraction * 100) * 100) / 100 }%`;
 
         if (age === 0) name = this.translator.translate('New Moon');
         else if (age < 0.25) name = this.translator.translate('Waxing Crescent');

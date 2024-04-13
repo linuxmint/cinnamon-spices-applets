@@ -60,6 +60,15 @@ class IconSet {
         this.moonRise = `moonrise-symbolic`;
         this.moonSet = `moonset-symbolic`;
         this.lunarEclipse = `lunar-eclipse-symbolic`;
+        this.nightClear = `night-clear-symbolic`;
+        this.directionUp = `direction-up-symbolic`;
+        this.directionUpRight = `direction-up-right-symbolic`;
+        this.directionRight = `direction-right-symbolic`;
+        this.directionDownRight = `direction-down-right-symbolic`;
+        this.directionDown = `direction-down-symbolic`;
+        this.directionDownLeft = `direction-down-left-symbolic`;
+        this.directionLeft = `direction-left-symbolic`;
+        this.directionUpLeft = `direction-up-left-symbolic`;
     }
 
     getSet() {

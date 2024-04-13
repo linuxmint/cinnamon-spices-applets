@@ -1,4 +1,4 @@
-const { BoxLayout, Align } = imports.gi.St;
+const { BoxLayout, Label } = imports.gi.St;
 
 class TimeBox {
     constructor(icon, header, info) {
@@ -9,14 +9,21 @@ class TimeBox {
     }
 
     _createBox() {
-        const holder = new BoxLayout({ style_class: 'margin-15' });
-        const iconBox = new BoxLayout({ style_class: 'margin-10' });
-        const labelBox = new BoxLayout({ vertical: true, style_class: 'margin-5' });
+        const holder = new BoxLayout({ style_class: 'margin-5' });
+        const iconBox = new BoxLayout({ style_class: 'margin-5' });
+        const labelBox = new BoxLayout({ vertical: true, style_class: 'padding-top-3' });
+        const angleBox = new BoxLayout({ vertical: false, style_class: 'padding-top-3' });
+
+        angleBox.add(this.info.angleDirection);
+        angleBox.add(this.info.angleIcon);
+        angleBox.add(this.info.angleDegrees);
 
         iconBox.add(this.icon);
+
         labelBox.add(this.header);
         labelBox.add(this.info.date);
         labelBox.add(this.info.time);
+        labelBox.add(angleBox);
 
         holder.add(iconBox);
         holder.add(labelBox);

@@ -1,3 +1,5 @@
+const { Moon } = require('./js/moon');
+
 class Config {
     constructor(app) {
         this.app = app;

@@ -17,6 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+# TODO: Double check this for accuracy
+
 #: js/moon.js:41 js/moon.js:49
 msgid "New Moon"
 msgstr ""
@@ -55,12 +57,16 @@ msgstr ""
 msgid "Moon Phase"
 msgstr ""
 
-#. js/moonPhase.js:80
-msgid "Transit"
+#. js/ui/moonTimes.js:51
+msgid "Moon rising time"
 msgstr ""
 
-#. js/moonPhase.js:94
-msgid "Set"
+#. js/ui/moonTimes.js:62
+msgid "Moon transit time"
+msgstr ""
+
+#. js/moonTimes.js:73
+msgid "Moon setting time"
 msgstr ""
 
 #. metadata.json->description
