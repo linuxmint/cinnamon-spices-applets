@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-10 18:18+0200\n"
-"PO-Revision-Date: 2024-04-02 11:56-0300\n"
+"PO-Revision-Date: 2024-04-12 22:34-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -603,7 +603,7 @@ msgstr "Eliminar los applets incompatibles"
 
 #. 5.4->settings-schema.json->keepPlayerListOpen->description
 msgid "Keep the player list open"
-msgstr ""
+msgstr "Mantener abierta la lista de reproductores"
 
 #. 5.4->settings-schema.json->middleShiftClickAction->description
 msgid "Action on shift+middle click"
