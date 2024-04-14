@@ -119,7 +119,7 @@ class DDCMultiMonitor extends Applet.IconApplet {
         this.set_applet_icon_symbolic_name("display-brightness");
         this.set_applet_tooltip(DEFAULT_TOOLTIP);
         this.actor.connect('scroll-event', (...args) => this._onScrollEvent(...args));
-        this.lastTooltipTimeoutID = setTimeout(() => {}, 1);
+        this.lastTooltipTimeoutID = null;
 
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager = new PopupMenu.PopupMenuManager(this);
