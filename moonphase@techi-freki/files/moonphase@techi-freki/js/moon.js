@@ -7,10 +7,10 @@ class Moon {
         this.translator = new Translator(app.metadata.uuid);
         this.calc = new Calculator(app.latitude, app.longitude);
         this.illumination = this.calc.getMoonIllumination();
-        this.riseSetTimes = this.calc.getRiseSetTimes();
         this.age = Math.trunc(this.illumination.phaseValue * 28);
-        this.iconSet = app.useAltIcons ? new AltIconSet().getSet() : new DefaultIconSet().getSet();
-        this.currentPhaseIcon = this.iconSet[this.age];
+        this.iconSet = app.useAltIcons ? new AltIconSet() : new DefaultIconSet();
+        this.riseSetTimes = this.calc.getRiseSetTimes();
+        this.currentPhaseIcon = this.iconSet.getPhaseIcons()[this.age];
         this.currentPhaseName = this._getCurrentPhaseName(app.showNameLabel, app.showPercentageLabel);
         this.currentTooltip = this._getCurrentPhaseName(app.showNameTooltip, app.showPercentageTooltip);
     }

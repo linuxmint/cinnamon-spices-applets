@@ -15,12 +15,12 @@ class MoonPhase extends Applet.TextIconApplet {
         this.metadata = metadata;
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.orientation = orientation;
-        this.menuManager = new PopupMenuManager(this);
-        this.menu = new Applet.AppletPopupMenu(this, this.orientation);
-        this.menuManager.addMenu(this.menu);
         this.config = new Config(this);
         this.config.bindSettings();
         this.moon = new Moon(this);
+        this.menuManager = new PopupMenuManager(this);
+        this.menu = new Applet.AppletPopupMenu(this, this.orientation);
+        this.menuManager.addMenu(this.menu);
 
         this.buildPopupMenu();
         this.updateApplet();

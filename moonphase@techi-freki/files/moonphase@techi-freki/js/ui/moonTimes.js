@@ -9,7 +9,7 @@ class MoonTimes {
     constructor(app) {
         this.app = app;
         this.translator = new Translator(this.app.metadata.uuid);
-        this.compass = new Compass();
+        this.compass = new Compass(this.app);
         this.riseUi = this._createRiseUi();
         this.transitUi = this._createTransitUi();
         this.setUi = this._createSetUi();
@@ -61,7 +61,7 @@ class MoonTimes {
     }
 
     _createRiseUi() {
-        return this._createUiElements('moonrise-symbolic',
+        return this._createUiElements(this.app.moon.iconSet.moonRise,
             IconType.SYMBOLIC,
             64,
             'Moonrise',
@@ -74,7 +74,7 @@ class MoonTimes {
     }
 
     _createTransitUi() {
-        return this._createUiElements('night-clear-symbolic',
+        return this._createUiElements(this.app.moon.iconSet.nightClear,
             IconType.SYMBOLIC,
             48,
             'Moon transit',
@@ -87,7 +87,7 @@ class MoonTimes {
     }
 
     _createSetUi() {
-        return this._createUiElements('moonset-symbolic',
+        return this._createUiElements(this.app.moon.iconSet.moonSet,
             IconType.SYMBOLIC,
             64,
             'Moonset',

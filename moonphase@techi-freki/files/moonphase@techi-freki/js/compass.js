@@ -1,16 +1,17 @@
 const { Icon, IconType } = imports.gi.St;
 
 class Compass {
-    constructor() {
+    constructor(app) {
+        this.app = app;
         this.compassDegrees = [
-            new Direction(22.5, 'North', 'direction-up-symbolic', 18),
-            new Direction(67.5, 'North East', 'direction-up-right-symbolic', 18),
-            new Direction(112.5, 'East', 'direction-right-symbolic', 18),
-            new Direction(157.5, 'South East', 'direction-down-right-symbolic', 18),
-            new Direction(202.5, 'South', 'direction-down-symbolic', 18),
-            new Direction(247.5, 'South West', 'direction-down-left-symbolic', 18),
-            new Direction(292.5, 'West', 'direction-left-symbolic', 18),
-            new Direction(337.5, 'North West', 'direction-left-up-symbolic', 18)
+            new Direction(22.5, 'North', this.app.moon.iconSet.directionUp, 18),
+            new Direction(67.5, 'North East', this.app.moon.iconSet.directionUpRight, 18),
+            new Direction(112.5, 'East', this.app.moon.iconSet.directionRight, 18),
+            new Direction(157.5, 'South East', this.app.moon.iconSet.directionDownRight, 18),
+            new Direction(202.5, 'South', this.app.moon.iconSet.directionDown, 18),
+            new Direction(247.5, 'South West', this.app.moon.iconSet.directionDownLeft, 18),
+            new Direction(292.5, 'West', this.app.moon.iconSet.directionLeft, 18),
+            new Direction(337.5, 'North West', this.app.moon.iconSet.directionUpLeft, 18)
         ];
     }
 

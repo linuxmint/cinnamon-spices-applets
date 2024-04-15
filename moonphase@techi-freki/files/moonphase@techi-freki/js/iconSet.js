@@ -59,7 +59,6 @@ class IconSet {
         this.waningCrescent6 = waningCrescent6;
         this.moonRise = `moonrise-symbolic`;
         this.moonSet = `moonset-symbolic`;
-        this.lunarEclipse = `lunar-eclipse-symbolic`;
         this.nightClear = `night-clear-symbolic`;
         this.directionUp = `direction-up-symbolic`;
         this.directionUpRight = `direction-up-right-symbolic`;
@@ -70,9 +69,10 @@ class IconSet {
         this.directionLeft = `direction-left-symbolic`;
         this.directionUpLeft = `direction-up-left-symbolic`;
         this.warning = `warning-outline-svgrepo-com.svg`;
+        this.lunarEclipse = `lunar-eclipse-symbolic`;
     }
 
-    getSet() {
+    getPhaseIcons() {
         return [
             this.newMoon,
             this.waxingCrescent1,
