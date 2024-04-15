@@ -17,12 +17,9 @@ class MoonPhase extends Applet.TextIconApplet {
         this.orientation = orientation;
         this.menuManager = new PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, this.orientation);
-
         this.menuManager.addMenu(this.menu);
-
         this.config = new Config(this);
         this.config.bindSettings();
-
         this.moon = new Moon(this);
 
         this.buildPopupMenu();
@@ -42,6 +39,7 @@ class MoonPhase extends Applet.TextIconApplet {
     }
 
     buildPopupMenu() {
+        // TODO: needs to update but must be killed before reloading
         const menu = new Menu(this);
         menu.buildMenu();
     }

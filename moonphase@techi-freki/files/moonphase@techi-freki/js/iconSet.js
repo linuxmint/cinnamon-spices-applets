@@ -69,6 +69,7 @@ class IconSet {
         this.directionDownLeft = `direction-down-left-symbolic`;
         this.directionLeft = `direction-left-symbolic`;
         this.directionUpLeft = `direction-up-left-symbolic`;
+        this.warning = `warning-outline-svgrepo-com.svg`;
     }
 
     getSet() {

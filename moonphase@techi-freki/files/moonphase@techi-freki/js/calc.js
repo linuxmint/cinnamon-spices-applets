@@ -8,6 +8,9 @@ class Calculator {
         this.moonData = SunCalc.getMoonData(this.today, this.observerLat, this.observerLon);
         this.times = SunCalc.getMoonTimes(this.today, this.observerLat, this.observerLon);
         this.transit = SunCalc.moonTransit(this.times.rise, this.times.set, this.observerLat, this.observerLon).main;
+        this.compassDegreeTolerance = [
+
+        ];
     }
 
     getMoonIllumination() {
@@ -28,5 +31,13 @@ class Calculator {
             transitAzimuth: SunCalc.getMoonPosition(this.transit, this.observerLat, this.observerLon).azimuthDegrees,
             setAzimuth: SunCalc.getMoonPosition(this.times.set, this.observerLat, this.observerLon).azimuthDegrees
         }
+    }
+
+    getCompassDirection(degrees) {
+        let key = 0;
+        this.compassDegreeTolerance.forEach((tolerance) => {
+            if (Math.abs(degrees - tolerance) <= 1e-9) return key;
+            key++;
+        });
     }
 }

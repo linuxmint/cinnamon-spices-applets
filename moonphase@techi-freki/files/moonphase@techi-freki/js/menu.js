@@ -5,7 +5,7 @@ class Menu {
         this.app = app;
     }
 
-    buildMenu(heading, menuItems) {
+    buildMenu() {
         const moonTimes = new MoonTimes(this.app);
         this.app.menu.addActor(moonTimes.actor);
     }

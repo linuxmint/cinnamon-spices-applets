@@ -3,6 +3,10 @@
     padding-top: 3px;
 }
 
+.padding-top-5-strict {
+    padding-top: 5px;
+}
+
 .padding-15 {
     padding: 15px;
 }
@@ -17,4 +21,8 @@
 
 .margin-top-5 {
     margin-top: 5px;
+}
+
+.font-20 {
+    font-size: 20px;
 }

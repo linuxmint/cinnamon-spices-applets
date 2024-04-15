@@ -2,11 +2,14 @@ const { Align, BoxLayout, IconType, Icon, Label } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 const { Translator } = require('./js/translator');
 const { TimeBox } = require('./js/ui/timeBox');
+const { Compass } = require('./js/compass');
 
 class MoonTimes {
+    // TODO: Handle alwaysUp and alwaysDown on the gui
     constructor(app) {
         this.app = app;
         this.translator = new Translator(this.app.metadata.uuid);
+        this.compass = new Compass();
         this.riseUi = this._createRiseUi();
         this.transitUi = this._createTransitUi();
         this.setUi = this._createSetUi();
@@ -34,24 +37,26 @@ class MoonTimes {
             icon_size
         });
 
+        const direction = this.compass.getCardinalDirection(info.angle);
+
         const headerLabel = new Label({ text: this.translator.translate(header), style_class: 'margin-bottom-5' });
         const dateLabel = new Label({ text: info.date });
         const timeLabel = new Label({ text: info.time });
         const angleDegrees = new Label();
         const angleDirection = new Label();
-        const angleIcon = this._createDirectionIcon(info.angle);
+        const angleIcon = direction.icon;
 
         if (info.showAngle) {
-            angleDegrees.set_text(`(${Math.floor(info.angle * 100) / 100}°)`);
-            angleDirection.set_text(this._degreesToDirection(info.angle));
+            angleDegrees.set_text(`(${Math.floor(info.angle)}°)`);
+            angleDirection.set_text(this.translator.translate(direction.name));
         }
 
         return new TimeBox(mainIcon, headerLabel, {
             date: dateLabel,
             time: timeLabel,
-            angleDegrees: angleDegrees,
-            angleDirection: angleDirection,
-            angleIcon: angleIcon
+            angleDegrees,
+            angleDirection,
+            angleIcon
         }).actor;
     }
 
@@ -92,83 +97,5 @@ class MoonTimes {
                 showAngle: true,
                 angle: this.app.moon.riseSetTimes.setAzimuth
             });
-    }
-
-    _createDirectionIcon(degrees) {
-        // TODO: This isn't working
-        let degreeIconName = '';
-
-        switch (degrees) {
-            case degrees <= 22.5:
-                degreeIconName = 'direction-up-symbolic';
-                break;
-            case degrees <= 67.5:
-                degreeIconName = 'direction-up-right-symbolic';
-                break;
-            case degrees <= 112.5:
-                degreeIconName = 'direction-right-symbolic';
-                break;
-            case degrees <= 157.5:
-                degreeIconName = 'direction-down-right-symbolic';
-                break;
-            case degrees <= 202.5:
-                degreeIconName = 'direction-down-symbolic';
-                break;
-            case degrees <= 247.5:
-                degreeIconName = 'direction-down-left-symbolic';
-                break;
-            case degrees <= 292.5:
-                degreeIconName = 'direction-left-symbolic';
-                break;
-            case degrees <= 337.5:
-                degreeIconName = 'direction-up-left-symbolic';
-                break;
-            default:
-                degreeIconName = 'direction-up-symbolic';
-                break;
-        }
-
-        return new Icon({
-            icon_name: degreeIconName,
-            icon_size: 18,
-            icon_type: IconType.SYMBOLIC
-        });
-    }
-
-    _degreesToDirection(degrees) {
-        // TODO: This isn't working
-        let direction = ''
-
-        switch (degrees) {
-            case degrees <= 22.5:
-                direction = 'North';
-                break;
-            case degrees <= 67.5:
-                direction = 'North East';
-                break;
-            case degrees <= 112.5:
-                direction = 'East';
-                break;
-            case degrees <= 157.5:
-                direction = 'South East';
-                break;
-            case degrees <= 202.5:
-                direction = 'South';
-                break;
-            case degrees <= 247.5:
-                direction = 'South West';
-                break;
-            case degrees <= 292.5:
-                direction = 'West';
-                break;
-            case degrees <= 337.5:
-                direction = 'North West';
-                break;
-            default:
-                direction = 'North';
-                break;
-        }
-
-        return direction;
     }
 }
