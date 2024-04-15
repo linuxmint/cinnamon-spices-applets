@@ -13,7 +13,7 @@ class UpdateSpicesCache:
         parser.add_argument("--update-all", dest="update_all_caches", action="store_const", const=True,
                             help="Update all spice caches to their latest versions.")
 
-        choices = ["applet", "desklet", "extension", "theme"]
+        choices = ["applet", "desklet", "extension", "theme", "actions"]
 
         ex_group = parser.add_mutually_exclusive_group()
         ex_group.add_argument("--update", dest="update_spice_cache_of_type", action="store", choices=choices, metavar="<spice-type>",
