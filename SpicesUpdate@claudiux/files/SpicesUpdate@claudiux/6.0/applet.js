@@ -1161,7 +1161,7 @@ class SpicesUpdate extends IconApplet {
                     let created = this._get_member_from_cache(type, a["name"], "created");
                     let last_edited = this._get_last_edited_from_cache(type, a["name"]);
                     if (created !== null && last_edited !== null && created >= last_edited)
-                        created = last_edited - 3600*24*365; // last_edited - 1;
+                        created = last_edited - 1;
 
                     if (created !== null) this._rewrite_metadataFile(metadataFileName, created);
                 }
@@ -1931,13 +1931,12 @@ class SpicesUpdate extends IconApplet {
     }
 
     _on_metadatajson_changed(type, uuid) {
-        //~ if (this.isLooping) {
+        if (this.isLooping) {
             this.new_loop_requested = true;
-        //~ } else {
-            //~ this._on_refresh_pressed("_on_metadatajson_changed");
-        //~ }
-        // End of _on_metadatajson_changed
-    }
+        } else {
+            this._on_refresh_pressed("_on_metadatajson_changed");
+        }
+    } // End of _on_metadatajson_changed
 
     get_blacklisted_packages() {
         var blacklist = []; //new Array();
