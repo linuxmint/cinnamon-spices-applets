@@ -84,7 +84,7 @@ const CACHE_MAP = {
 
 const DIR_MAP = {
   'applets': HOME_DIR + "/.local/share/cinnamon/applets",
-  'themes': HOME_DIR + "/.local/share/themes",
+  'themes': HOME_DIR + "/.themes",
   'desklets': HOME_DIR + "/.local/share/cinnamon/desklets",
   'extensions': HOME_DIR + "/.local/share/cinnamon/extensions",
   'actions': HOME_DIR + "/.local/share/nemo/actions"

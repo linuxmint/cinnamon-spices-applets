@@ -1,3 +1,7 @@
+### v7.3.2~20240415
+  * Bugfixes.
+  * Checks again after installing updates.
+
 ### v7.3.1~20240415
   * Takes into account the new location of themes.
 
