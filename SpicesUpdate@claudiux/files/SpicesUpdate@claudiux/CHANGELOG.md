@@ -1,3 +1,6 @@
+### v7.3.1~20240415
+  * Takes into account the new location of themes.
+
 ### v7.3.0~20240413
   * Also manage Actions for nemo.
   * Fixes #5683.

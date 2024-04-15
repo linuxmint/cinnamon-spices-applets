@@ -165,6 +165,9 @@ class SpicesUpdate extends IconApplet {
         // To be sure that the scripts will be executable:
         Util.spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
 
+        // Move themes to their new location (from ~/.themes to ~/.local/share/themes):
+        Util.spawnCommandLineAsync(SCRIPTS_DIR + "/move_themes.sh")
+
         //http session:
         //~ this.define_http_session();
 
