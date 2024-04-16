@@ -1,3 +1,6 @@
+### v6.8.0~20240416
+  * Fixes #5721: Adds Previous and Next track shortcuts.
+
 ### v6.7.3~20240410
   * Fixes #5678: Adds an option to keep open the player list in menu.
 
