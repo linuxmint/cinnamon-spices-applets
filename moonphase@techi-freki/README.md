@@ -13,7 +13,7 @@ Extract and move moonphase@techi-freki to the ~/.local/share/cinnamon/applets di
 ### v1.0.0
 - Feature add: Added geolocation features
 - Feature add: Added moon rise, set, and transit times on left click
-- Swapped out [SunCalc](https://github.com/mourner/suncalc) for [SunCalc3](https://github.com/hypnos3/suncalc3)
+- Swapped out [SunCalc](https://github.com/mourner/suncalc) for [SunCalc3](https://github.com/hypnos3/suncalc3) for geolocation features
 - Refactored and cleaned up code base
 - Cleaned up versioning (breaking change/feature adds/patches and bug fixes)
 - Added LICENSE for icons
