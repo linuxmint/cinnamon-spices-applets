@@ -1517,6 +1517,7 @@ class Player extends PopupMenu.PopupMenuSection {
     }
 
     _onDownloadedCover() {
+        if (!this._trackCoverFileTmp) return;
         let cover_path = this._trackCoverFileTmp.get_path();
         this._showCover(cover_path);
     }
@@ -1722,6 +1723,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("volume-mute", "volume_mute", this._setKeybinding);
         this.settings.bind("volume-up", "volume_up", this._setKeybinding);
         this.settings.bind("volume-down", "volume_down", this._setKeybinding);
+        this.settings.bind("audio-next", "audio_next", this._setKeybinding);
+        this.settings.bind("audio-prev", "audio_prev", this._setKeybinding);
 
         // Whether sound@cinnamon.org is loaded:
         let enabledApplets = global.settings.get_strv(ENABLED_APPLETS_KEY);
@@ -1952,6 +1955,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         Main.keybindingManager.addHotKey("volume-mute-" + this.instance_id, "AudioMute", (...args) => this._mutedChanged(...args));
         Main.keybindingManager.addHotKey("pause-" + this.instance_id, "AudioPlay", () => this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote());
 
+        Main.keybindingManager.addHotKey("audio-next-" + this.instance_id, "AudioNext", () => this._players[this._activePlayer]._mediaServerPlayer.NextRemote());
+        Main.keybindingManager.addHotKey("audio-prev-" + this.instance_id, "AudioPrev", () => this._players[this._activePlayer]._mediaServerPlayer.PreviousRemote());
+
         if (!this.redefine_volume_keybindings) return;
 
         try {
@@ -1966,6 +1972,9 @@ class Sound150Applet extends Applet.TextIconApplet {
         Main.keybindingManager.removeHotKey("volume-down");
         Main.keybindingManager.removeHotKey("pause");
 
+        Main.keybindingManager.removeHotKey("audio-next");
+        Main.keybindingManager.removeHotKey("audio-prev");
+
         if (this.pause_on_off.length > 2)
             Main.keybindingManager.addHotKey("pause", this.pause_on_off,
                 () => this._players[this._activePlayer]._mediaServerPlayer.PlayPauseRemote());
@@ -1975,6 +1984,11 @@ class Sound150Applet extends Applet.TextIconApplet {
             Main.keybindingManager.addHotKey("volume-up", this.volume_up, () => this._volumeChange(Clutter.ScrollDirection.UP));
         if (this.volume_down.length > 2)
             Main.keybindingManager.addHotKey("volume-down", this.volume_down, () => this._volumeChange(Clutter.ScrollDirection.DOWN));
+        if (this.audio_next.length > 2)
+            Main.keybindingManager.addHotKey("audio-next", this.audio_next, () => this._players[this._activePlayer]._mediaServerPlayer.NextRemote());
+
+        if (this.audio_prev.length > 2)
+            Main.keybindingManager.addHotKey("audio-prev", this.audio_prev, () => this._players[this._activePlayer]._mediaServerPlayer.PreviousRemote());
     }
 
     _on_sound_settings_change() {
@@ -2018,6 +2032,8 @@ class Sound150Applet extends Applet.TextIconApplet {
             Main.keybindingManager.removeHotKey("lower-volume-" + this.instance_id);
             Main.keybindingManager.removeHotKey("volume-mute-" + this.instance_id);
             Main.keybindingManager.removeHotKey("pause-" + this.instance_id);
+            Main.keybindingManager.removeHotKey("audio-next-" + this.instance_id);
+            Main.keybindingManager.removeHotKey("audio-prev-" + this.instance_id);
         } catch(e) {}
 
         if (this.redefine_volume_keybindings) {
@@ -2026,6 +2042,8 @@ class Sound150Applet extends Applet.TextIconApplet {
                 Main.keybindingManager.removeHotKey("volume-up");
                 Main.keybindingManager.removeHotKey("volume-down");
                 Main.keybindingManager.removeHotKey("pause");
+                Main.keybindingManager.removeHotKey("audio-next");
+                Main.keybindingManager.removeHotKey("audio-prev");
             } catch(e) {}
         }
 
@@ -2060,7 +2078,11 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_applet_clicked(event) {
         this._openMenu();
-        if (this.settings.getValue("keepPlayerListOpen"))
+        if (!this.menu.isOpen) return;
+        let kplo = this.settings.getValue("keepPlayerListOpen");
+        if (!this._chooseActivePlayerItemActorIsHidden && kplo && this.settings.getValue("keepChoosePlayerOpen"))
+            this._chooseActivePlayerItem.menu.open();
+        if (!this._launchPlayerItemActorIsHidden && kplo)
             this._launchPlayerItem.menu.open();
     }
 
@@ -2537,6 +2559,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         // The list to use when switching between active players
         this._chooseActivePlayerItem = new PopupMenu.PopupSubMenuMenuItem(_("Choose player controls"));
         this._chooseActivePlayerItem.actor.hide();
+        this._chooseActivePlayerItemActorIsHidden = true;
         this.menu.addMenuItem(this._chooseActivePlayerItem);
 
         // between these two separators will be the player MenuSection (position 3)
@@ -2601,13 +2624,16 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         if (!this.playerControl || !availablePlayers.length) {
             this._launchPlayerItem.actor.hide();
+            this._launchPlayerItemActorIsHidden = true;
         }
     }
 
     _updatePlayerMenuItems() {
         if (this.playerControl && this._activePlayer) {
             this._launchPlayerItem.actor.show();
+            this._launchPlayerItemActorIsHidden = false;
             this._chooseActivePlayerItem.actor.show();
+            this._chooseActivePlayerItemActorIsHidden = false;
 
             // Show a dot on the active player in the switching menu
             for (let i = 0, l = this._playerItems.length; i < l; ++i) {
@@ -2620,13 +2646,17 @@ class Sound150Applet extends Applet.TextIconApplet {
             // Hide the switching menu if we only have at most one active player
             if (this._chooseActivePlayerItem.menu.numMenuItems <= 1) {
                 this._chooseActivePlayerItem.actor.hide();
+                this._chooseActivePlayerItemActorIsHidden = true;
             }
         } else {
             if (this.playerControl && this._launchPlayerItem.menu.numMenuItems) {
                 this._launchPlayerItem.actor.show();
+                this._launchPlayerItemActorIsHidden = false;
             } else {
                 this._launchPlayerItem.actor.hide();
+                this._launchPlayerItemActorIsHidden = true;
                 this._chooseActivePlayerItem.actor.hide();
+                this._chooseActivePlayerItemActorIsHidden = true;
             }
         }
     }

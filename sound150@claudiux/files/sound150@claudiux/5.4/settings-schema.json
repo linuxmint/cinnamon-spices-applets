@@ -42,9 +42,10 @@
       "type": "section",
       "title": "Menu",
       "keys": [
-        "keepPlayerListOpen",
         "playerControl",
-        "extendedPlayerControl"
+        "extendedPlayerControl",
+        "keepPlayerListOpen",
+        "keepChoosePlayerOpen"
       ]
     },
     "section2": {
@@ -114,14 +115,11 @@
         "pause-on-off",
         "volume-mute",
         "volume-up",
-        "volume-down"
+        "volume-down",
+        "audio-next",
+        "audio-prev"
       ]
     }
-  },
-  "keepPlayerListOpen": {
-    "type": "switch",
-    "default": false,
-    "description": "Keep the player list open"
   },
   "playerControl": {
     "type": "switch",
@@ -133,6 +131,18 @@
     "default": false,
     "description": "Show Loop and Shuffle controls",
     "dependency": "playerControl"
+  },
+  "keepPlayerListOpen": {
+    "type": "switch",
+    "dependency": "playerControl",
+    "default": false,
+    "description": "Keep the player list open"
+  },
+  "keepChoosePlayerOpen": {
+    "type": "switch",
+    "dependency": "keepPlayerListOpen",
+    "default": false,
+    "description": "Also keep the player selector open"
   },
   "keyOpen": {
     "type": "keybinding",
@@ -337,6 +347,18 @@
     "dependency": "redefine-volume-keybindings",
     "default": "::",
     "description": "Volume Down"
+  },
+  "audio-next": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Next Track"
+  },
+  "audio-prev": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Previous Track"
   },
   "volume": {
     "type": "generic",
