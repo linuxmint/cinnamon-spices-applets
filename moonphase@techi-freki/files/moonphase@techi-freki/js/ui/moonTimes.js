@@ -44,7 +44,11 @@ class MoonTimes {
         const timeLabel = new Label({ text: info.time });
         const angleDegrees = new Label();
         const angleDirection = new Label();
-        const angleIcon = direction.icon;
+        const angleIcon = new Icon({
+            icon_name: direction.icon_name,
+            icon_type: IconType.SYMBOLIC,
+            icon_size: 18
+        });
 
         if (info.showAngle) {
             angleDegrees.set_text(`(${Math.floor(info.angle)}°)`);

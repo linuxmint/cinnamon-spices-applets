@@ -34,12 +34,12 @@ class MoonPhase extends Applet.TextIconApplet {
     }
 
     on_applet_clicked() {
+        // TODO: rebuild menu when called to refresh the data on click
         if (this.showRiseSet)
             this.menu.toggle();
     }
 
     buildPopupMenu() {
-        // TODO: needs to update but must be killed before reloading
         const menu = new Menu(this);
         menu.buildMenu();
     }

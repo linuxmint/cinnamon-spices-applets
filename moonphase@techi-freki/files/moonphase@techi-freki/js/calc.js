@@ -6,11 +6,9 @@ class Calculator {
         this.observerLat = Number(lat);
         this.observerLon = Number(lon);
         this.moonData = SunCalc.getMoonData(this.today, this.observerLat, this.observerLon);
+        // TODO: fix issue with set times showing before rise times
         this.times = SunCalc.getMoonTimes(this.today, this.observerLat, this.observerLon);
         this.transit = SunCalc.moonTransit(this.times.rise, this.times.set, this.observerLat, this.observerLon).main;
-        this.compassDegreeTolerance = [
-
-        ];
     }
 
     getMoonIllumination() {
@@ -19,7 +17,8 @@ class Calculator {
 
     getRiseSetTimes() {
         const rise = isNaN(this.times.rise) ? null : this.times.rise;
-        const set = isNaN(this.times.set) ? null : this.times.set;
+        let set = isNaN(this.times.set) ? null : this.times.set;
+
         return {
             rise,
             set,
@@ -33,11 +32,10 @@ class Calculator {
         }
     }
 
-    getCompassDirection(degrees) {
-        let key = 0;
-        this.compassDegreeTolerance.forEach((tolerance) => {
-            if (Math.abs(degrees - tolerance) <= 1e-9) return key;
-            key++;
-        });
+    _fixSetTime(rise, set) {
+        // TODO: date time comparison and advance date by one if rise > set
+        // TODO: return updated set
+
+        return set;
     }
 }
