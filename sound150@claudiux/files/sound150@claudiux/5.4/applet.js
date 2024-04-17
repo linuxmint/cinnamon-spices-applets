@@ -1010,6 +1010,7 @@ class Player extends PopupMenu.PopupMenuSection {
         // Cover Box (art + track info)
         this._trackCover = new St.Bin({x_align: St.Align.MIDDLE});
         this._trackCoverFile = this._trackCoverFileTmp = false;
+        this._oldTrackCoverFile = false;
         this.coverBox = new Clutter.Box();
         let l = new Clutter.BinLayout({
             x_align: Clutter.BinAlignment.FILL,
@@ -1368,30 +1369,33 @@ class Player extends PopupMenu.PopupMenuSection {
         let change = false;
         if (metadata["mpris:artUrl"]) {
             let artUrl = metadata["mpris:artUrl"].unpack();
-            //if (this._trackCoverFile != artUrl) {
+            if (this._trackCoverFile != artUrl) {
                 this._trackCoverFile = artUrl;
                 change = true;
-            //}
+            }
         } else if(metadata["xesam:url"]) {
             await Util.spawnCommandLineAsyncIO("bash -C %s/get_album_art.sh".format(PATH2SCRIPTS), Lang.bind(this, function(stdout, stderr, exitCode) {
                 if (exitCode === 0) {
                     this._trackCoverFile = "file://"+stdout;
-                    let cover_path = decodeURIComponent(this._trackCoverFile);
-                    cover_path = cover_path.replace("file://", "");
-                    const file = Gio.File.new_for_path(cover_path);
-                    try {
-                        const fileInfo = file.query_info('standard::*,unix::uid',
-                            Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
-                        const size = fileInfo.get_size();
-                        if (size > 0) {
-                            this._showCover(cover_path);
-                        } else {
+                    if (this._oldTrackCoverFile != this._trackCoverFile) {
+                        this._oldTrackCoverFile = this._trackCoverFile;
+                        let cover_path = decodeURIComponent(this._trackCoverFile);
+                        cover_path = cover_path.replace("file://", "");
+                        const file = Gio.File.new_for_path(cover_path);
+                        try {
+                            const fileInfo = file.query_info('standard::*,unix::uid',
+                                Gio.FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
+                            const size = fileInfo.get_size();
+                            if (size > 0) {
+                                this._showCover(cover_path);
+                            } else {
+                                cover_path = null;
+                            }
+                        } catch(e) {
                             cover_path = null;
+                            this._trackCoverFile = null;
+                            change = true;
                         }
-                    } catch(e) {
-                        cover_path = null;
-                        this._trackCoverFile = null;
-                        change = true;
                     }
                 } else {
                     this._trackCoverFile = null;
@@ -1399,10 +1403,10 @@ class Player extends PopupMenu.PopupMenuSection {
                 }
             }));
         } else {
-            //if (this._trackCoverFile != false) {
+            if (this._trackCoverFile != false) {
                 this._trackCoverFile = false;
                 change = true;
-            //}
+            }
         }
 
         if (change) {
