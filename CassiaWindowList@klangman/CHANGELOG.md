@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.2
+
+* Prevent the Thumbnail menu from grabbing the focus. This prevents odd cursor key behaviour and it allow the workspace hotkeys to work when the Thumbnail menu is open.
+
 ## 2.0.1
 
 * Added a configuration option that controls the delay before the full size preview window appears

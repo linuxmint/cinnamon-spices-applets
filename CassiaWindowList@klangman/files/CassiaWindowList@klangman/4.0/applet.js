@@ -1124,7 +1124,7 @@ class ThumbnailMenu extends PopupMenu.PopupMenu {
 class ThumbnailMenuManager extends PopupMenu.PopupMenuManager {
 
   constructor(owner) {
-    super(owner);
+    super(owner, false);
     this.dragMotion = this.dragMotionHandler.bind(this);
     this._signals.connect(Main.xdndHandler, "drag-end", this.onDragEnd, this);
     this._signals.connect(Main.xdndHandler, "drag-begin", this.onDragBegin, this);
@@ -5003,6 +5003,7 @@ class WindowList extends Applet.Applet {
     for (let i = 0; i < this._workspaces.length; i++) {
       let ws = this._workspaces[i];
       if (ws._wsNum == currentWs) {
+        this._workspaces[currentWs].closeThumbnailMenu();
         ws.actor.show();
         ws._updateAppButtonVisibility();
         ws._updateFocus();
