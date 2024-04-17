@@ -1,3 +1,6 @@
+### v6.9.0~20240417
+  * Better management of art-covers.
+
 ### v6.8.0~20240416
   * Fixes #5721: Adds Previous and Next track shortcuts.
 
