@@ -604,7 +604,7 @@ msgstr "Maintenir ouverte la liste des lecteurs"
 
 #. 5.4->settings-schema.json->keepChoosePlayerOpen->description
 msgid "Also keep the player selector open"
-msgstr "Maintenir ouverte la liste des lecteurs"
+msgstr "Maintenir également ouverte la liste de sélection du lecteur"
 
 #. 5.4->settings-schema.json->middleShiftClickAction->description
 msgid "Action on shift+middle click"
