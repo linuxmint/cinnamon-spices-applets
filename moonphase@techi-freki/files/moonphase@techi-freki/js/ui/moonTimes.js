@@ -81,7 +81,7 @@ class MoonTimes {
         return this._createUiElements(this.app.moon.iconSet.nightClear,
             IconType.SYMBOLIC,
             48,
-            'Moon transit',
+            'Lunar Noon',
             {
                 date: this.app.moon.riseSetTimes.transit.toLocaleDateString(),
                 time: this.app.moon.riseSetTimes.transit.toLocaleTimeString(),
