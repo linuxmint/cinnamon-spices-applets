@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-13 00:18+0200\n"
-"PO-Revision-Date: 2024-04-15 12:04+0200\n"
+"PO-Revision-Date: 2024-04-19 16:02-0400\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. metadata.json->name
 #: 4.6/applet.js:214 4.6/applet.js:716 4.6/applet.js:735 4.6/applet.js:1229
@@ -467,43 +467,35 @@ msgstr ""
 #. 6.0->settings-schema.json->Actions->title
 #: 6.0/applet.js:2064 6.0/constants.js:145
 #: cs/6.0_FUTURE/modules/cs_actions.py:35
-#, fuzzy
 msgid "Actions"
-msgstr "Notificaciones"
+msgstr "Acciones"
 
 #: 6.0/constants.js:150
-#, fuzzy
 msgid "One action needs update:"
-msgstr "Una extensión necesita actualización:"
+msgstr "Una acción necesita actualización:"
 
 #: 6.0/constants.js:155
-#, fuzzy
 msgid "Some actions need update:"
-msgstr "Algunas extensiones necesitan actualización:"
+msgstr "Algunas acciones necesitan actualizarse:"
 
 #: 6.0/constants.js:160
-#, fuzzy
 msgid "New action available:"
-msgstr "Nueva extensión disponible:"
+msgstr "Nueva acción disponible:"
 
 #: 6.0/constants.js:165
-#, fuzzy
 msgid "New actions available:"
-msgstr "Nuevas extensiones disponibles:"
+msgstr "Nuevas acciones disponibles:"
 
 #: 6.0/constants.js:173
-#, fuzzy
 msgid "If you do not want a nemo action to be checked, uncheck its first box."
 msgstr ""
-"Si no desea verificar si una extensión dispone de una actualización, "
-"desmarque su primera casilla."
+"Si no desea que se marque una acción de Nemo, desmarque su primera casilla."
 
 #: 6.0/constants.js:181
-#, fuzzy
 msgid ""
 "If you want to get the latest version of a nemo action now, check both boxes."
 msgstr ""
-"Si desea obtener ahora la última versión de una extensión, marque ambas "
+"Si desea obtener la última versión de una acción nemo ahora, marque ambas "
 "casillas."
 
 #: 4.2/applet.js:141
@@ -581,16 +573,13 @@ msgstr ""
 "en TRUE."
 
 #. metadata.json->description
-#, fuzzy
-#| msgid ""
-#| "Warns you when installed Spices (applets, desklets, extensions, themes) "
-#| "require an update or new Spices are available."
 msgid ""
 "Warns you when installed Spices (actions, applets, desklets, extensions, "
 "themes) require an update or new Spices are available."
 msgstr ""
-"Le avisa cuando las Spices instaladas (applets, desklets, extensiones, "
-"temas) requieren una actualización o hay nuevas Spices disponibles."
+"Le avisa cuando los Spices instalados (acciones, applets, desklets, "
+"extensiones, temas) requieren una actualización o hay nuevos Spices "
+"disponibles."
 
 #. 4.6->settings-schema.json->section_applets1->title
 #. 4.6->settings-schema.json->section_desklets1->title
@@ -1305,41 +1294,34 @@ msgstr ""
 "descripción emergente?"
 
 #. 6.0->settings-schema.json->check_actions->description
-#, fuzzy
 msgid "Check regularly whether your nemo actions are up to date"
-msgstr "Comprobar regularmente si sus extenciones están actualizadas"
+msgstr "Compruebe regularmente si sus acciones nemo están actualizadas"
 
 #. 6.0->settings-schema.json->check_actions->tooltip
-#, fuzzy
 msgid "If nemo actions updates do not concern you, uncheck this box."
 msgstr ""
-"Si las actualizaciones de extensiones no conciernen usted, desmarque esta "
+"Si las actualizaciones de acciones de nemo no le interesan, desmarque esta "
 "casilla."
 
 #. 6.0->settings-schema.json->check_new_actions->description
-#, fuzzy
 msgid "Check regularly whether new nemo actions are available"
-msgstr "Comprobar regularmente si hay nuevas extensiones disponibles"
+msgstr "Comprueba regularmente si hay nuevas acciones nemo disponibles"
 
 #. 6.0->settings-schema.json->check_new_actions->tooltip
-#, fuzzy
 msgid "If new nemo actions do not concern you, uncheck this box."
-msgstr "Si las nuevas extensiones no le conciernen, desmarque esta casilla."
+msgstr "Si las nuevas acciones de nemo no te interesan, desmarca esta casilla."
 
 #. 6.0->settings-schema.json->unprotected_actions->description
-#, fuzzy
 msgid "Update these nemo actions:"
-msgstr "Actualizar estas extensiones:"
+msgstr "Actualice estas acciones de nemo:"
 
 #. 6.0->settings-schema.json->unprotected_actions->columns->title
-#, fuzzy
 msgid "Your nemo actions"
-msgstr "Sus Extensiones"
+msgstr "Sus acciones nemo"
 
 #. 6.0->settings-schema.json->btn_cs_actions->description
-#, fuzzy
 msgid "Open Cinnamon Settings to manage all the nemo actions"
-msgstr "Abrir Ajustes de Cinnamon para gestionar todas las extensiones"
+msgstr "Abrir Ajustes de Cinnamon para gestionar todas las acciones de nemo"
 
 #. 4.2->settings-schema.json->section_general4->title
 #. 3.8->settings-schema.json->section_general3->title
