@@ -1,4 +1,5 @@
 const { Icon, IconType, BoxLayout } = imports.gi.St;
+const TOLERANCE_MET = 'tolerance met';
 
 class Compass {
     constructor(app) {
@@ -23,11 +24,11 @@ class Compass {
 
                 if (fixedDegree <= fixedTolerance) {
                     this.direction = direction;
-                    throw new Error('tolerance met');
+                    throw new Error(TOLERANCE_MET);
                 }
             });
         } catch (e) {
-            if (e.message !== 'tolerance met') {
+            if (e.message !== TOLERANCE_MET) {
                 throw e;
             }
         }

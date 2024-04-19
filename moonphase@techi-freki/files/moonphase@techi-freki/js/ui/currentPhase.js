@@ -1,19 +1,21 @@
 const { Align, BoxLayout, IconType, Icon, Label } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
-const { Translator } = require('./js/translator');
 const { Compass } = require('./js/compass');
+const { UiElement } = require('./js/ui/uiElement');
 
-class CurrentPhase {
+class CurrentPhaseUi extends UiElement {
     constructor (app) {
-        this.app = app
-        this.translator = new Translator(this.app.metadata.uuid);
+        super(app);
     }
 
-    _createActor() {
+    create() {
+        const parent = new BoxLayout();
 
+        this.actor.add_actor(parent);
     }
 
-    _createUiElements(uiData) {
-        const headerLabel = new Label({ text: `${ this.translator.translate(uiData.header) } ${ this.app.metadata.version }`, style_class: 'margin-bottom-5, font-20' });
+    rebuild() {
+        this.destroy();
+        this.create();
     }
 }

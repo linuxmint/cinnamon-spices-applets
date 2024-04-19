@@ -35,6 +35,7 @@ class MoonPhase extends Applet.TextIconApplet {
 
     on_applet_clicked() {
         // TODO: rebuild menu when called to refresh the data on click
+        // BoxLayout.kill_all_children();
         if (this.showRiseSet)
             this.menu.toggle();
     }
