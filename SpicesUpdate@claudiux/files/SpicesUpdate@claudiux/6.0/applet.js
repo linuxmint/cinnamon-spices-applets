@@ -248,7 +248,7 @@ class SpicesUpdate extends IconApplet {
         this.on_orientation_changed(orientation);
 
         // Translated help file (html)
-        //this.help_file = this.get_translated_help_file();
+        this.help_file = this.get_translated_help_file();
 
         // Init lists of Spices:
         for (let t of TYPES) {
@@ -273,6 +273,7 @@ class SpicesUpdate extends IconApplet {
         this._signalsConnectId = this.signals.connect(global, "scale-changed", () => this.updateUI());
 
         // Run loop to refresh caches:
+        this.disable_system_auto_update();
         this._loop_refresh_cache();
         this.loopRefreshId = timeout_add_seconds(907, () => this._loop_refresh_cache()); // 907 is a prime number.
     } // End of constructor
@@ -674,7 +675,7 @@ class SpicesUpdate extends IconApplet {
     get_user_language() {
         let _language;
         try {
-            _language = ""+to_string(get_language_names()).split(",")[0];
+            _language = ""+get_language_names()[0].split("_")[0];
         } catch(e) {
             // Unable to detect language. Return English by default.
             _language = "en";
@@ -685,41 +686,41 @@ class SpicesUpdate extends IconApplet {
     /** get_translated_help_file()
      * Returns the help file in html format
      */
-    //~ get_translated_help_file() {
-        //~ let default_file_name = HELP_DIR + "/en/README.html";
-        //~ let help_file = file_new_for_path(default_file_name);
-        //~ let language = "";
-        //~ let lang = "";
-        //~ if (!help_file.query_exists(null)) {
-            //~ return null;
-        //~ }
-        //~ try {
-            //~ language = get_language_names().toString().split(",")[0].toString();
-        //~ } catch(e) {
-            //~ // Unable to detect language. Return English help file by default.
-            //~ return default_file_name;
-        //~ }
-        //~ let file_name = "%s/%s/README.html".format(HELP_DIR, language);
-        //~ help_file = file_new_for_path(file_name);
-        //~ if (help_file.query_exists(null)) {
-            //~ return file_name;
-        //~ } else {
-            //~ lang = language.split("_")[0].toString();
-            //~ if (lang === language) {
-                //~ // Not found
-                //~ return default_file_name;
-            //~ } else {
-                //~ file_name = "%s/%s/README.html".format(HELP_DIR, lang);
-                //~ help_file = file_new_for_path(file_name);
-                //~ if (help_file.query_exists(null)) {
-                    //~ return file_name;
-                //~ } else {
-                    //~ return default_file_name;
-                //~ }
-            //~ }
-        //~ }
-        //~ // End of get_translated_help_file
-    //~ }
+    get_translated_help_file() {
+        let default_file_name = HELP_DIR + "/en/README.html";
+        let help_file = file_new_for_path(default_file_name);
+        let language = "";
+        let lang = "";
+        if (!help_file.query_exists(null)) {
+            return null;
+        }
+        try {
+            language = get_language_names().toString().split(",")[0].toString();
+        } catch(e) {
+            // Unable to detect language. Return English help file by default.
+            return default_file_name;
+        }
+        let file_name = "%s/%s/README.html".format(HELP_DIR, language);
+        help_file = file_new_for_path(file_name);
+        if (help_file.query_exists(null)) {
+            return file_name;
+        } else {
+            lang = language.split("_")[0].toString();
+            if (lang === language) {
+                // Not found
+                return default_file_name;
+            } else {
+                file_name = "%s/%s/README.html".format(HELP_DIR, lang);
+                help_file = file_new_for_path(file_name);
+                if (help_file.query_exists(null)) {
+                    return file_name;
+                } else {
+                    return default_file_name;
+                }
+            }
+        }
+        // End of get_translated_help_file
+    }
 
     notify_without_button(message, type, uuid = null, about_updates = true) {
         let source = new MessageTray.SystemNotificationSource();
@@ -1721,6 +1722,17 @@ class SpicesUpdate extends IconApplet {
         }
     } // End of _on_metadatajson_changed
 
+    disable_system_auto_update() {
+        try {
+            let _SETTINGS_SCHEMA = "com.linuxmint.updates";
+            let _SETTINGS_KEY = "auto-update-cinnamon-spices";
+            let _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
+            _interface_settings.set_boolean(_SETTINGS_KEY, false);
+        } catch(e) {
+            // The used distrib doesn't have mintupdate installed: nothing to do.
+        }
+    }
+
     get_blacklisted_packages() {
         var blacklist = [];
         try {
@@ -1728,14 +1740,9 @@ class SpicesUpdate extends IconApplet {
             let _SETTINGS_KEY = "blacklisted-packages";
             let _interface_settings = new Settings({ schema_id: _SETTINGS_SCHEMA });
             let blacklisted_packages = _interface_settings.get_strv(_SETTINGS_KEY);
-            //~ logDebug("blacklisted_packages: "+blacklisted_packages);
-            //~ logDebug("typeOf blacklisted_packages: "+(typeOf blacklisted_packages));
-            //blacklisted_packages = blacklisted_packages.split(",");
 
             for (let b of blacklisted_packages) {
-                //~ logDebug("b: "+b);
                 var b0 = b.split("=")[0];
-                //~ logDebug("b0: "+b0);
                 blacklist.push(b0);
             }
             _interface_settings = undefined;
@@ -1893,7 +1900,9 @@ class SpicesUpdate extends IconApplet {
                 if (_language.startsWith("en")) {
                     Util.spawnCommandLineAsync("/usr/bin/xdg-open https://cinnamon-spices.linuxmint.com/applets/view/309");
                 } else {
-                    Util.spawnCommandLineAsync("/usr/bin/xdg-open https://translate.google.com/translate?sl=en&tl=" + _language + "&u=https%3A%2F%2Fcinnamon-spices.linuxmint.com%2Fapplets%2Fview%2F309", null, null);
+                    let url_help = "https://cinnamon--spices-linuxmint-com.translate.goog/applets/view/309?_x_tr_sl=auto&_x_tr_tl=%s&_x_tr_hl=%s&_x_tr_pto=wapp".format(_language, _language);
+                    Util.spawnCommandLineAsync("/usr/bin/xdg-open "+url_help);
+                    url_help = undefined;
                 }
             });
 
