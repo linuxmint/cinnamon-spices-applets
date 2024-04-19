@@ -1,3 +1,7 @@
+### v7.3.4~20240419
+  * Prevents telescoping with mintupdate.
+  * Uses G. Translate to display help.
+
 ### v7.3.3~20240416
   * Code cleanup.
 
