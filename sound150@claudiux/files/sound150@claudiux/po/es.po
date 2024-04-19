@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-16 13:11+0200\n"
-"PO-Revision-Date: 2024-04-12 22:34-0400\n"
+"PO-Revision-Date: 2024-04-19 15:51-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -606,9 +606,8 @@ msgid "Keep the player list open"
 msgstr "Mantener abierta la lista de reproductores"
 
 #. 5.4->settings-schema.json->keepChoosePlayerOpen->description
-#, fuzzy
 msgid "Also keep the player selector open"
-msgstr "Mantener abierta la lista de reproductores"
+msgstr "Mantener también abierto el selector de reproductores"
 
 #. 5.4->settings-schema.json->middleShiftClickAction->description
 msgid "Action on shift+middle click"
@@ -692,12 +691,11 @@ msgstr "Bajar el volumen"
 
 #. 5.4->settings-schema.json->audio-next->description
 msgid "Next Track"
-msgstr ""
+msgstr "Siguiente pista"
 
 #. 5.4->settings-schema.json->audio-prev->description
-#, fuzzy
 msgid "Previous Track"
-msgstr "Anterior"
+msgstr "Pista anterior"
 
 #. 5.4->settings-schema.json->remove_soundATcinnamonDOTorg->description
 msgid "Remove from panel the sound@cinnamon.org applet"
