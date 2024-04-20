@@ -279,8 +279,10 @@ class SpicesUpdate extends IconApplet {
     } // End of constructor
 
     _loop_refresh_cache() {
-        //if (this.loopCacheIntervalId) return SOURCE_CONTINUE;
-
+        if (this.loopRefreshId) {
+            source_remove(this.loopRefreshId);
+        }
+        this.loopRefreshId = null;
         var is_to_download = false;
         for (let t of TYPES) {
             const jsonFile = file_new_for_path(CACHE_MAP[t]);
@@ -312,7 +314,8 @@ class SpicesUpdate extends IconApplet {
         }
         is_to_download = undefined;
 
-        return (this.applet_running) ? SOURCE_CONTINUE : SOURCE_REMOVE;
+        if (this.applet_running)
+            this.loopRefreshId = timeout_add_seconds(907, () => this._loop_refresh_cache()); // 907 is a prime number.
     } // End of _loop_refresh_cache
 
     get_SU_settings() {
