@@ -4,7 +4,7 @@ const { Translator } = require('./js/translator');
 
 class Moon {
     constructor(app) {
-        this.translator = new Translator(app.metadata.uuid);
+        this.localization = new Translator(app.metadata.uuid);
         this.calc = new Calculator(app.latitude, app.longitude);
         this.illumination = this.calc.getMoonIllumination();
         this.age = Math.trunc(this.illumination.phaseValue * 28);
@@ -19,19 +19,19 @@ class Moon {
         const age = this.age / 28;
         const percent = `${ Math.floor((this.illumination.fraction * 100) * 100) / 100 }%`;
 
-        if (age === 0) name = this.translator.translate('New Moon');
-        else if (age < 0.25) name = this.translator.translate('Waxing Crescent');
-        else if (age === 0.25) name = this.translator.translate('First Quarter');
-        else if (age < 0.5) name = this.translator.translate('Waxing Gibbous');
-        else if (age === 0.5) name = this.translator.translate('Full Moon');
-        else if (age < 0.75) name = this.translator.translate('Waning Gibbous');
-        else if (age === 0.75) name = this.translator.translate('Last Quarter');
-        else if (age <= 1) name = this.translator.translate('Waning Crescent');
-        else name = this.translator.translate('New Moon');
+        if (age === 0) name = this.localization.translate('New Moon');
+        else if (age < 0.25) name = this.localization.translate('Waxing Crescent');
+        else if (age === 0.25) name = this.localization.translate('First Quarter');
+        else if (age < 0.5) name = this.localization.translate('Waxing Gibbous');
+        else if (age === 0.5) name = this.localization.translate('Full Moon');
+        else if (age < 0.75) name = this.localization.translate('Waning Gibbous');
+        else if (age === 0.75) name = this.localization.translate('Last Quarter');
+        else if (age <= 1) name = this.localization.translate('Waning Crescent');
+        else name = this.localization.translate('New Moon');
 
         if (showName && showPercentage) return `${name} (${percent})`;
         if (showName) return name;
         if (showPercentage) return percent;
-        return this.translator.translate("Moon Phase");
+        return this.localization.translate("Moon Phase");
     }
 }

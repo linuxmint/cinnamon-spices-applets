@@ -15,6 +15,6 @@ class UiElement {
     }
 
     rebuild() {
-        throw new Error('Must implement build abstract method');
+        throw new Error('Must implement rebuild abstract method');
     }
 }
