@@ -2084,7 +2084,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this._openMenu();
         if (!this.menu.isOpen) return;
         let kplo = this.settings.getValue("keepPlayerListOpen");
-        if (!this._chooseActivePlayerItemActorIsHidden && kplo && this.settings.getValue("keepChoosePlayerOpen"))
+        if (!this._chooseActivePlayerItemActorIsHidden && this.settings.getValue("keepChoosePlayerOpen"))
             this._chooseActivePlayerItem.menu.open();
         if (!this._launchPlayerItemActorIsHidden && kplo)
             this._launchPlayerItem.menu.open();
