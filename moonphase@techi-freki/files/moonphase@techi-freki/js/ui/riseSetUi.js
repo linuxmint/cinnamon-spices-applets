@@ -54,9 +54,4 @@ class RiseSetUi extends UiElement {
         this.actor.add_actor(transitElement.actor);
         this.actor.add_actor(setElement.actor);
     }
-
-    rebuild() {
-        this.destroy();
-        this.create();
-    }
 }

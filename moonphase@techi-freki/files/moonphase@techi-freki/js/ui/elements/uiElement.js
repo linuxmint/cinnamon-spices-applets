@@ -15,6 +15,7 @@ class UiElement {
     }
 
     rebuild() {
-        throw new Error('Must implement rebuild abstract method');
+        this.destroy();
+        this.create();
     }
 }

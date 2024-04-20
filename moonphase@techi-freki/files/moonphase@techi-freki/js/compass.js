@@ -1,5 +1,5 @@
-const { Icon, IconType, BoxLayout } = imports.gi.St;
 const TOLERANCE_MET = 'tolerance met';
+const { Direction } = require('./js/direction');
 
 class Compass {
     constructor(app) {
@@ -33,13 +33,5 @@ class Compass {
             }
         }
         return this.direction;
-    }
-}
-
-class Direction {
-    constructor(tolerance, direction_name, icon_name) {
-        this.tolerance = tolerance;
-        this.name = direction_name;
-        this.icon_name = icon_name;
     }
 }

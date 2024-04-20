@@ -13,9 +13,4 @@ class CurrentPhaseUi extends UiElement {
 
         this.actor.add_actor(parent);
     }
-
-    rebuild() {
-        this.destroy();
-        this.create();
-    }
 }
