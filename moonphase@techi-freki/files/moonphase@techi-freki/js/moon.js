@@ -1,10 +1,9 @@
 const { DefaultIconSet, AltIconSet } = require('./js/iconSet');
 const { Calculator } = require('./js/calc');
-const { Translator } = require('./js/translator');
 
 class Moon {
     constructor(app) {
-        this.localization = new Translator(app.metadata.uuid);
+        this.app = app;
         this.calc = new Calculator(app.latitude, app.longitude);
         this.illumination = this.calc.getMoonIllumination();
         this.age = Math.trunc(this.illumination.phaseValue * 28);
@@ -19,19 +18,19 @@ class Moon {
         const age = this.age / 28;
         const percent = `${ Math.floor((this.illumination.fraction * 100) * 100) / 100 }%`;
 
-        if (age === 0) name = this.localization.translate('New Moon');
-        else if (age < 0.25) name = this.localization.translate('Waxing Crescent');
-        else if (age === 0.25) name = this.localization.translate('First Quarter');
-        else if (age < 0.5) name = this.localization.translate('Waxing Gibbous');
-        else if (age === 0.5) name = this.localization.translate('Full Moon');
-        else if (age < 0.75) name = this.localization.translate('Waning Gibbous');
-        else if (age === 0.75) name = this.localization.translate('Last Quarter');
-        else if (age <= 1) name = this.localization.translate('Waning Crescent');
-        else name = this.localization.translate('New Moon');
+        if (age === 0) name = this.app.localization.translate('New Moon');
+        else if (age < 0.25) name = this.app.localization.translate('Waxing Crescent');
+        else if (age === 0.25) name = this.app.localization.translate('First Quarter');
+        else if (age < 0.5) name = this.app.localization.translate('Waxing Gibbous');
+        else if (age === 0.5) name = this.app.localization.translate('Full Moon');
+        else if (age < 0.75) name = this.app.localization.translate('Waning Gibbous');
+        else if (age === 0.75) name = this.app.localization.translate('Last Quarter');
+        else if (age <= 1) name = this.app.localization.translate('Waning Crescent');
+        else name = this.app.localization.translate('New Moon');
 
         if (showName && showPercentage) return `${name} (${percent})`;
         if (showName) return name;
         if (showPercentage) return percent;
-        return this.localization.translate("Moon Phase");
+        return this.app.localization.translate("Moon Phase");
     }
 }

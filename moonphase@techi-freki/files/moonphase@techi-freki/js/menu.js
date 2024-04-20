@@ -1,4 +1,5 @@
 const { MoonTimes } = require('./js/ui/moonTimes');
+const { RiseSetUi } = require('./js/ui/riseSetUi');
 
 class Menu {
     constructor(app) {

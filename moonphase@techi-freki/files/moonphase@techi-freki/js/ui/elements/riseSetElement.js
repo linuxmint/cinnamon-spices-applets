@@ -27,13 +27,13 @@ class RiseSetElement extends UiElement {
             icon_size: this.iconSize
         });
 
-        angleParent.add(new Label({ text: this.direction[1] }));
+        angleParent.add(new Label({ text: this.app.localization.translate(this.direction[1]) }));
         angleParent.add(new Icon({ icon_name : this.direction[2], icon_type: IconType.SYMBOLIC, icon_size: 18 }));
         angleParent.add(new Label({ text: `(${Math.floor(this.angle)}°)` }));
 
         iconParent.add(mainIcon);
 
-        dateTimeParent.add(new Label({ text: this.header, style_class: 'margin-bottom-5' }));
+        dateTimeParent.add(new Label({ text: this.app.localization.translate(this.header), style_class: 'margin-bottom-5' }));
         dateTimeParent.add(new Label({ text: this.date }));
         dateTimeParent.add(new Label({ text: this.time }));
         dateTimeParent.add(angleParent);

@@ -6,6 +6,7 @@ const Lang = imports.lang;
 const { Moon } = require('./js/moon');
 const { Menu } = require('./js/menu');
 const { Config } = require('./js/config');
+const { Translator } = require('./js/translator');
 
 class MoonPhase extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -21,6 +22,7 @@ class MoonPhase extends Applet.TextIconApplet {
         this.menuManager = new PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, this.orientation);
         this.menuManager.addMenu(this.menu);
+        this.localization = new Translator(this.metadata.uuid);
 
         this.buildPopupMenu();
         this.updateApplet();

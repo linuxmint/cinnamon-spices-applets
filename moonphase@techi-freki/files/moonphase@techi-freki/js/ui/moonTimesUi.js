@@ -1,5 +1,4 @@
 const { Compass } = require('./js/compass');
-const { Translator } = require('./js/translator');
 const { UiElement } = require('./js/ui/uiElement');
 const { Align, BoxLayout, Icon, IconType, Label } = imports.gi.St;
 
