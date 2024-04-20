@@ -808,9 +808,11 @@ class SpicesUpdate extends IconApplet {
                         } else if (action == "emblem-synchronizing-symbolic"){
                             if (this.force_notifications === true) {
                                 if (about_updates) {
-                                    this.clear_notifications_about_updates(type)
+                                    this.clear_notifications_about_updates(type);
+                                    this.old_message[type] = "";
                                 } else {
-                                    this.clear_notifications_about_news(type)
+                                    this.clear_notifications_about_news(type);
+                                    this.old_watch_message[type] = "";
                                 }
                             } else {
                                 let n = this.notifications_about_updates[type].pop(this.notifications_about_updates[type].indexOf(notification));
