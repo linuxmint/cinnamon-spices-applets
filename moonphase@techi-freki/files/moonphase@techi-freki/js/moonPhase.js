@@ -6,7 +6,7 @@ const Lang = imports.lang;
 const { Moon } = require('./js/moon');
 const { Menu } = require('./js/menu');
 const { Config } = require('./js/config');
-const { Translator } = require('./js/translator');
+const { RiseSetUi } = require('./js/ui/riseSetUi');
 
 class MoonPhase extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -35,8 +35,8 @@ class MoonPhase extends Applet.TextIconApplet {
     }
 
     on_applet_clicked() {
-        // TODO: rebuild menu when called to refresh the data on click
-        // BoxLayout.kill_all_children();
+        const riseSetUi = new RiseSetUi(this);
+        riseSetUi.rebuild();
         if (this.showRiseSet)
             this.menu.toggle();
     }

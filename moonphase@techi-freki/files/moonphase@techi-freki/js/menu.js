@@ -8,7 +8,7 @@ class Menu {
     buildMenu() {
         // TODO: Handle user selections
         const riseSetUi = new RiseSetUi(this.app);
-        riseSetUi.create();
+        riseSetUi.rebuild();
         this.app.menu.addActor(riseSetUi.actor);
     }
 }

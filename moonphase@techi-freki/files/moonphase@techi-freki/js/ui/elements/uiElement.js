@@ -7,7 +7,7 @@ class UiElement {
     }
 
     destroy() {
-        this.actor.kill_all_children();
+        this.actor.destroy_all_children();
     }
 
     create() {
