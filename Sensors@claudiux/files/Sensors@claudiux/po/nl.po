@@ -9,10 +9,10 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-03-31 10:36+0200\n"
-"PO-Revision-Date: 2023-06-10 10:37+0200\n"
-"Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
+"PO-Revision-Date: 2024-04-20 14:40+0200\n"
+"Last-Translator: qadzek\n"
 "Language-Team: \n"
-"Language: nl_NL\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,7 +26,7 @@ msgstr "Sensoren Monitor"
 
 #: applet.js:268
 msgid "Suspended"
-msgstr ""
+msgstr "Opgeschort"
 
 #: applet.js:484 applet.js:526
 msgid "high:"
@@ -95,9 +95,8 @@ msgid "Run xsensors"
 msgstr "Uitvoeren xsensors"
 
 #: applet.js:992
-#, fuzzy
 msgid "Suspend Sensors"
-msgstr "Uitvoeren xsensors"
+msgstr "Opschorten van sensors"
 
 #: applet.js:1003
 msgid "Reload this applet"
@@ -221,7 +220,7 @@ msgstr "Opties"
 
 #. settings-schema.json->section_Tooltip->title
 msgid "Tooltip"
-msgstr ""
+msgstr "Tekstballon"
 
 #. settings-schema.json->section_Report->title
 msgid "Sensors values"
@@ -236,6 +235,8 @@ msgstr ""
 #. settings-schema.json->section_tempDisktemp->title
 msgid "For the time being, disk temperature can only be read by root."
 msgstr ""
+"Voorlopig kan de schijftemperatuur alleen worden gelezen door de root-"
+"gebruiker."
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -322,39 +323,39 @@ msgstr "30"
 
 #. settings-schema.json->interval->options
 msgid "1 minute"
-msgstr ""
+msgstr "1 minuut"
 
 #. settings-schema.json->interval->options
 msgid "2 minutes"
-msgstr ""
+msgstr "2 minuten"
 
 #. settings-schema.json->interval->options
 msgid "3 minutes"
-msgstr ""
+msgstr "3 minuten"
 
 #. settings-schema.json->interval->options
 msgid "4 minutes"
-msgstr ""
+msgstr "4 minuten"
 
 #. settings-schema.json->interval->options
 msgid "5 minutes"
-msgstr ""
+msgstr "5 minuten"
 
 #. settings-schema.json->interval->options
 msgid "10 minutes"
-msgstr ""
+msgstr "10 minuten"
 
 #. settings-schema.json->interval->options
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minuten"
 
 #. settings-schema.json->interval->options
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minuten"
 
 #. settings-schema.json->interval->options
 msgid "1 hour"
-msgstr ""
+msgstr "1 uur"
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -380,9 +381,8 @@ msgid "Character size (% of standard size)"
 msgstr "Tekengrootte (% van de standaardgrootte)"
 
 #. settings-schema.json->char_color_customized->description
-#, fuzzy
 msgid "Customize Text Color"
-msgstr "Kleur van de tekst"
+msgstr "Tekstkleur aanpassen"
 
 #. settings-schema.json->char_color->description
 msgid "Text Color"
@@ -390,12 +390,14 @@ msgstr "Kleur van de tekst"
 
 #. settings-schema.json->separator->description
 msgid "Separator"
-msgstr ""
+msgstr "Scheidingsteken"
 
 #. settings-schema.json->separator->tooltip
 msgid ""
 "The string used to separate values in horizontal orientation. Default is '│'."
 msgstr ""
+"De tekenreeks gebruikt om waardes in horizontale oriëntatie te scheiden. "
+"Standaard is dit '|'."
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -415,7 +417,7 @@ msgstr "Het al dan niet verwijderen van iconen in het paneel."
 
 #. settings-schema.json->show_tooltip->description
 msgid "Display a tooltip on mouseover"
-msgstr ""
+msgstr "Een tekstballon weergeven bij mouseover"
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
@@ -448,9 +450,8 @@ msgstr ""
 "hulptoepassing."
 
 #. settings-schema.json->make_disktemp_readable_by_user->description
-#, fuzzy
 msgid "Make disk temperature user-readable"
-msgstr "Schijf Temperatuursensoren"
+msgstr "Maak de schijftemperatuur leesbaar voor de gebruiker."
 
 #. settings-schema.json->show_temp->description
 #. settings-schema.json->show_fan->description
