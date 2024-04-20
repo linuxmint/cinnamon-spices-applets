@@ -22,7 +22,6 @@ class MoonPhase extends Applet.TextIconApplet {
         this.menuManager = new PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, this.orientation);
         this.menuManager.addMenu(this.menu);
-        this.localization = new Translator(this.metadata.uuid);
 
         this.buildPopupMenu();
         this.updateApplet();

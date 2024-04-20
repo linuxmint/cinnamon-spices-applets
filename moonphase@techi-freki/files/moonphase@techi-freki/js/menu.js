@@ -7,7 +7,8 @@ class Menu {
     }
 
     buildMenu() {
-        const moonTimes = new MoonTimes(this.app);
+        const moonTimes = new RiseSetUi(this.app);
+        moonTimes.create();
         this.app.menu.addActor(moonTimes.actor);
     }
 }

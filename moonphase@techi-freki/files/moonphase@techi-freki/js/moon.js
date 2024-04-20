@@ -18,19 +18,19 @@ class Moon {
         const age = this.age / 28;
         const percent = `${ Math.floor((this.illumination.fraction * 100) * 100) / 100 }%`;
 
-        if (age === 0) name = this.app.localization.translate('New Moon');
-        else if (age < 0.25) name = this.app.localization.translate('Waxing Crescent');
-        else if (age === 0.25) name = this.app.localization.translate('First Quarter');
-        else if (age < 0.5) name = this.app.localization.translate('Waxing Gibbous');
-        else if (age === 0.5) name = this.app.localization.translate('Full Moon');
-        else if (age < 0.75) name = this.app.localization.translate('Waning Gibbous');
-        else if (age === 0.75) name = this.app.localization.translate('Last Quarter');
-        else if (age <= 1) name = this.app.localization.translate('Waning Crescent');
-        else name = this.app.localization.translate('New Moon');
+        if (age === 0) name = 'New Moon';
+        else if (age < 0.25) name = 'Waxing Crescent';
+        else if (age === 0.25) name = 'First Quarter';
+        else if (age < 0.5) name = 'Waxing Gibbous';
+        else if (age === 0.5) name = 'Full Moon';
+        else if (age < 0.75) name = 'Waning Gibbous';
+        else if (age === 0.75) name = 'Last Quarter';
+        else if (age <= 1) name = 'Waning Crescent';
+        else name = 'New Moon';
 
         if (showName && showPercentage) return `${name} (${percent})`;
         if (showName) return name;
         if (showPercentage) return percent;
-        return this.app.localization.translate("Moon Phase");
+        return 'Moon Phase';
     }
 }
