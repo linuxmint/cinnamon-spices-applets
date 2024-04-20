@@ -1,4 +1,3 @@
-const { MoonTimes } = require('./js/ui/moonTimes');
 const { RiseSetUi } = require('./js/ui/riseSetUi');
 
 class Menu {
@@ -7,8 +6,9 @@ class Menu {
     }
 
     buildMenu() {
-        const moonTimes = new RiseSetUi(this.app);
-        moonTimes.create();
-        this.app.menu.addActor(moonTimes.actor);
+        // TODO: Handle user selections
+        const riseSetUi = new RiseSetUi(this.app);
+        riseSetUi.create();
+        this.app.menu.addActor(riseSetUi.actor);
     }
 }

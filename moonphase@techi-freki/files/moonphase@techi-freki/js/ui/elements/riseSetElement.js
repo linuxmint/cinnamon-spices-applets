@@ -13,11 +13,11 @@ class RiseSetElement extends UiElement {
         this.date = null;
         this.time = null;
         this.angle = 0;
-        this.direction = this.compass.getCardinalDirection(this.angle);
     }
 
     create() {
         const root = new BoxLayout({ style_class: 'margin-5' });
+        const direction = this.compass.getCardinalDirection(this.angle);
         const iconParent = new BoxLayout({ style_class: 'margin-5' });
         const dateTimeParent = new BoxLayout({ vertical: true, style_class: 'padding-top-3' });
         const angleParent = new BoxLayout({ vertical: false, style_class: 'padding-top-5-strict' });
@@ -27,8 +27,8 @@ class RiseSetElement extends UiElement {
             icon_size: this.iconSize
         });
 
-        angleParent.add(new Label({ text: this.direction[1] }));
-        angleParent.add(new Icon({ icon_name : this.direction[2], icon_type: IconType.SYMBOLIC, icon_size: 18 }));
+        angleParent.add(new Label({ text: direction.name }));
+        angleParent.add(new Icon({ icon_name : direction.icon_name, icon_type: IconType.SYMBOLIC, icon_size: 18 }));
         angleParent.add(new Label({ text: `(${Math.floor(this.angle)}°)` }));
 
         iconParent.add(mainIcon);
