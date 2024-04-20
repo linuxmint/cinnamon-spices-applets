@@ -1,3 +1,6 @@
+## v7.3.6~20240420
+  * Improved Refresh action.
+
 ## v7.3.5~20240420
   * Improved cache refresh management.
 
