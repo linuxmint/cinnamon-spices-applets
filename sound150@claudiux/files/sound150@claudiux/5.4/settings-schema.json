@@ -140,9 +140,8 @@
   },
   "keepChoosePlayerOpen": {
     "type": "switch",
-    "dependency": "keepPlayerListOpen",
     "default": false,
-    "description": "Also keep the player selector open"
+    "description": "Keep the player controller selector open"
   },
   "keyOpen": {
     "type": "keybinding",

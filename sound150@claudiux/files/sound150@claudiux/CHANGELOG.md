@@ -1,3 +1,6 @@
+### v6.9.1~20240420
+  * Fixes #5767.
+
 ### v6.9.0~20240417
   * Better management of art-covers.
 
