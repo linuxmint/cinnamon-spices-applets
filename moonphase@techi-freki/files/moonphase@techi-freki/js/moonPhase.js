@@ -6,6 +6,7 @@ const Lang = imports.lang;
 const { Moon } = require('./js/moon');
 const { Menu } = require('./js/menu');
 const { Config } = require('./js/config');
+const { CurrentPhaseUi } = require('./js/ui/currentPhaseUi');
 const { RiseSetUi } = require('./js/ui/riseSetUi');
 
 class MoonPhase extends Applet.TextIconApplet {
@@ -18,10 +19,11 @@ class MoonPhase extends Applet.TextIconApplet {
         this.orientation = orientation;
         this.config = new Config(this);
         this.config.bindSettings();
-        this.moon = new Moon(this);
         this.menuManager = new PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, this.orientation);
         this.menuManager.addMenu(this.menu);
+
+        this.moon = new Moon(this);
 
         this.buildPopupMenu();
         this.updateApplet();
@@ -35,8 +37,13 @@ class MoonPhase extends Applet.TextIconApplet {
     }
 
     on_applet_clicked() {
+        const currentPhaseUi = new CurrentPhaseUi(this);
         const riseSetUi = new RiseSetUi(this);
+
+        currentPhaseUi.rebuild();
         riseSetUi.rebuild();
+
+
         if (this.showRiseSet)
             this.menu.toggle();
     }
