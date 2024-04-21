@@ -4,7 +4,7 @@ const { ActorAlign } = imports.gi.Clutter;
 class HeaderUi {
     constructor(app) {
         this.app = app;
-        // TODO: Build out a header
+        // TODO: Build out a header ({ Applet Name } v{ version })
     }
 
     create() {

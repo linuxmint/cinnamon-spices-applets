@@ -8,6 +8,7 @@ class Menu {
 
     buildMenu() {
         // TODO: Handle user selections
+        // TODO: Fix setting changes to update in real time
         const currentPhaseUi = new CurrentPhaseUi(this.app);
         const riseSetUi = new RiseSetUi(this.app);
 
