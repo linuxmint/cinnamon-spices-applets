@@ -737,8 +737,8 @@ class SpicesUpdate extends IconApplet {
             notification.setUseActionIcons(false);
             about_updates ? this.notifications_about_updates[type].push(notification) : this.notifications_about_news[type].push(notification);
             notification.connect("destroy", (self) => {
-                        about_updates ? this.old_message[type] = "" : this.old_watch_message[type] = "";
-                    });
+                about_updates ? this.old_message[type] = "" : this.old_watch_message[type] = "";
+            });
             source.notify(notification);
             notification = undefined;
         }
@@ -808,18 +808,20 @@ class SpicesUpdate extends IconApplet {
                         } else if (action == "emblem-synchronizing-symbolic"){
                             if (this.force_notifications === true) {
                                 if (about_updates) {
-                                    this.clear_notifications_about_updates(type);
-                                    this.old_message[type] = "";
+                                    this.destroy_notifications(type, "updates");
+                                    //~ this.clear_notifications_about_updates(type);
+                                    //~ this.old_message[type] = "";
                                 } else {
-                                    this.clear_notifications_about_news(type);
-                                    this.old_watch_message[type] = "";
+                                    this.destroy_notifications(type, "news");
+                                    //~ this.clear_notifications_about_news(type);
+                                    //~ this.old_watch_message[type] = "";
                                 }
                             } else {
                                 let n = this.notifications_about_updates[type].pop(this.notifications_about_updates[type].indexOf(notification));
                                 if (n) n.destroy(3);
                             }
                             about_updates ? this.old_message[type] = "" : this.old_watch_message[type] = "";
-                            this._on_refresh_pressed("notify_with_button");
+                            this._on_refresh_pressed();
                         }
                     });
             notification.connect("destroy", (self) => {
@@ -846,7 +848,7 @@ class SpicesUpdate extends IconApplet {
                 this.old_watch_message[t] = "";
             }
         }
-        this._on_refresh_pressed("on_notif_for_new_changed");
+        this._on_refresh_pressed();
     } // End of on_notif_for_new_changed
 
     on_orientation_changed (orientation) {
@@ -928,31 +930,6 @@ class SpicesUpdate extends IconApplet {
         details = undefined;
         message = undefined;
     } // End of on_btn_test_notif_pressed
-
-    on_btn_refresh_applets_pressed() {
-        this.next_type = "applets";
-        this._on_refresh_pressed("on_btn_refresh_applets_pressed");
-    } // End of on_btn_refresh_applets_pressed
-
-    on_btn_refresh_desklets_pressed() {
-        this.next_type = "desklets";
-        this._on_refresh_pressed("on_btn_refresh_desklets_pressed");
-    } // End of on_btn_refresh_applets_pressed
-
-    on_btn_refresh_extensions_pressed() {
-        this.next_type = "extensions";
-        this._on_refresh_pressed("on_btn_refresh_extensions_pressed");
-    } // End of on_btn_refresh_applets_pressed
-
-    on_btn_refresh_themes_pressed() {
-        this.next_type = "themes";
-        this._on_refresh_pressed("on_btn_refresh_themes_pressed");
-    } // End of on_btn_refresh_applets_pressed
-
-    on_btn_refresh_actions_pressed() {
-        this.next_type = "actions";
-        this._on_refresh_pressed("on_btn_refresh_actions_pressed");
-    } // End of on_btn_refresh_applets_pressed
 
     on_btn_cs_applets_pressed() {
         Util.spawnCommandLineAsync("%s applets -t %s -s %s".format(CS_PATH, TAB, SORT));
@@ -1690,7 +1667,7 @@ class SpicesUpdate extends IconApplet {
     } // End of monitor_png_directory
 
     _on_pngDir_changed(type) {
-        this._on_refresh_pressed("_on_pngDir_changed");
+        this._on_refresh_pressed();
     } // End of _on_pngDir_changed
 
     monitor_metadatajson(type, uuid) {
@@ -1723,7 +1700,7 @@ class SpicesUpdate extends IconApplet {
         if (this.isLooping) {
             this.new_loop_requested = true;
         } else {
-            this._on_refresh_pressed("_on_metadatajson_changed");
+            this._on_refresh_pressed();
         }
     } // End of _on_metadatajson_changed
 
@@ -1833,7 +1810,7 @@ class SpicesUpdate extends IconApplet {
         if (this.dependenciesMet) {
             // Refresh button
             this.refreshButton = new PopupIconMenuItem(_("Refresh"), "emblem-synchronizing-symbolic", IconType.SYMBOLIC);
-            this.refreshButton.connect("activate", (event) => this._on_refresh_pressed("makeMenu"));
+            this.refreshButton.connect("activate", (event) => this._on_refresh_pressed());
             this.menu.addMenuItem(this.refreshButton);
             this.menu.addMenuItem(new PopupSeparatorMenuItem());
         }
@@ -1965,8 +1942,7 @@ class SpicesUpdate extends IconApplet {
         }
     } // End of destroy_all_notifications
 
-    _on_refresh_pressed(from=null) {
-        //~ logDebug("_on_refresh_pressed called by: "+from);
+    _on_refresh_pressed() {
         if (this.menu.isOpen)
             this.menu.toggle();
         this.first_loop = false;
@@ -2172,10 +2148,16 @@ class SpicesUpdate extends IconApplet {
             //~ logDebug("ONE MORE LOOP requested, but already looping");
             this.isLooping = false;
 
-            //this.loopId = timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
+            if (this.loopId) {
+                source_remove(this.loopId);
+                this.loopId = null;
+            }
+
+            this.loopId = timeout_add_seconds(10, () => this.updateLoop());
+            return;
             //return false;
 
-            return SOURCE_CONTINUE;
+            //~ return SOURCE_CONTINUE;
         }
         //~ logDebug("ONE MORE LOOP!");
         this.isLooping = true;
@@ -2192,8 +2174,8 @@ class SpicesUpdate extends IconApplet {
         if (this.applet_running === true) {
             //this.get_translated_help_file();
 
-            var t;
-            for (t of TYPES) {
+            //var t;
+            for (let t of TYPES) {
                 this.OKtoPopulateSettings[t] = true;
                 //log("_was_empty_local_dir(%s): %s".format(t.toString(), this._was_empty_local_dir(t).toString() ), true);
             }
@@ -2203,7 +2185,7 @@ class SpicesUpdate extends IconApplet {
             if (!this.dependenciesMet) {
                 this.refreshInterval = 10;
             } else {
-                for (t of TYPES) {
+                for (let t of TYPES) {
                     this._whether_empty_or_not(t);
                 }
                 if (!this.first_loop) {
@@ -2221,12 +2203,13 @@ class SpicesUpdate extends IconApplet {
                     this.nb_to_update = 0;
                     this.nb_to_watch = 0;
 
-                    for (t of TYPES) {
+                    for (let t of TYPES) {
                         //~ if (t != this.next_type && !this.refresh_requested) continue;
                         //~ logDebug("Checking for "+t);
                         this.populateSettingsUnprotectedSpices(t);
                         if (this.is_to_check(t)) {
-                            if (this.cache[t] === "{}") this._load_cache(t);
+                            //if (this.cache[t] === "{}")
+                                this._load_cache(t);
 
                             // About available updates:
                             must_be_updated = this.get_must_be_updated(t);
@@ -2289,6 +2272,7 @@ class SpicesUpdate extends IconApplet {
                                 this.destroy_notifications(t);
                             }
                         }
+                        this.cache[t] = "{}";
                     }
                     //~ this.next_type = TYPES[(TYPES.indexOf(this.next_type) + 1) % TYPES.length]
                     //this.do_rotation = false;
@@ -2351,7 +2335,7 @@ class SpicesUpdate extends IconApplet {
     _onButtonPressEvent(actor, event) {
         if (event.get_button() == 2) {
             if ((this.nb_to_update + this.nb_to_watch) === 0) {
-                this._on_refresh_pressed("_onButtonPressEvent");
+                this._on_refresh_pressed();
             } else {
                 this.open_each_download_tab();
             }
