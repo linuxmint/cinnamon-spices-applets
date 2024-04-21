@@ -209,7 +209,7 @@
   "btn_refresh_applets": {
     "type": "button",
     "description": "Refresh",
-    "callback": "on_btn_refresh_applets_pressed"
+    "callback": "_on_refresh_pressed"
   },
   "unprotected_applets": {
     "type": "list",
@@ -270,7 +270,7 @@
   "btn_refresh_desklets": {
     "type": "button",
     "description": "Refresh",
-    "callback": "on_btn_refresh_desklets_pressed"
+    "callback": "_on_refresh_pressed"
   },
   "unprotected_desklets": {
     "type": "list",
@@ -331,7 +331,7 @@
   "btn_refresh_extensions": {
     "type": "button",
     "description": "Refresh",
-    "callback": "on_btn_refresh_extensions_pressed"
+    "callback": "_on_refresh_pressed"
   },
   "unprotected_extensions": {
     "type": "list",
@@ -392,7 +392,7 @@
   "btn_refresh_themes": {
     "type": "button",
     "description": "Refresh",
-    "callback": "on_btn_refresh_themes_pressed"
+    "callback": "_on_refresh_pressed"
   },
   "unprotected_themes": {
     "type": "list",
@@ -453,7 +453,7 @@
   "btn_refresh_actions": {
     "type": "button",
     "description": "Refresh",
-    "callback": "on_btn_refresh_actions_pressed"
+    "callback": "_on_refresh_pressed"
   },
   "unprotected_actions": {
     "type": "list",
