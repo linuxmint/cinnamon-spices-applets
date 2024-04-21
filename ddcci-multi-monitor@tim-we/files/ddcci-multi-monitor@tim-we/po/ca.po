@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ddcci-multi-monitor@tim-we 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-06-27 18:16+0300\n"
+"POT-Creation-Date: 2024-07-20 15:38-0400\n"
 "PO-Revision-Date: 2024-07-05 00:38+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,10 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
+#. metadata.json->description
+#: applet.js:19
+msgid "Adjust monitor brightness via DDC/CI"
+msgstr "Ajusta la brillantor del monitor a través de DDC/CI"
+
+#: applet.js:162
+msgid "Detect displays"
+msgstr ""
+
+#: applet.js:174
+msgid "Detecting displays..."
+msgstr ""
+
+#: applet.js:263
+msgid "Failed to detect displays."
+msgstr ""
+
+#: applet.js:264
+msgid "Make sure you have ddcutil installed and the correct permissions."
+msgstr ""
+
+#: applet.js:265
+msgid "Error:"
+msgstr ""
+
 #. metadata.json->name
 msgid "DDC/CI Multi-Monitor"
 msgstr "Multi-Monitor DDC/CI"
-
-#. metadata.json->description
-msgid "Adjust monitor brightness via DDC/CI"
-msgstr "Ajusta la brillantor del monitor a través de DDC/CI"
