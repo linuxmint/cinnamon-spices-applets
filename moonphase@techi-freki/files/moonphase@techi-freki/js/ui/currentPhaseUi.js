@@ -6,7 +6,7 @@ class CurrentPhaseUi extends UiElement {
     constructor (app) {
         super(app);
         this.actor = new BoxLayout({
-            style_class: 'padding-15',
+            style_class: 'padding-15; align-center',
             x_align: ActorAlign.CENTER,
             y_align: Align.MIDDLE
         });

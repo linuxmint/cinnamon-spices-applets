@@ -1,4 +1,5 @@
-const { BoxLayout } = imports.gi.St;
+const { BoxLayout, Label, Alight } = imports.gi.St;
+const { ActorAlign } = imports.gi.Clutter;
 
 class HeaderUi {
     constructor(app) {
@@ -7,7 +8,7 @@ class HeaderUi {
     }
 
     create() {
-        const parent = new BoxLayout();
+        const parent = new BoxLayout({ x_align: ActorAlign.CENTER, y_align: Align.MIDDLE, style_class: 'margin-5; align-center' });
 
         this.actor.add_actor(parent);
     }
