@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-25 22:26+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-22 10:36+1000\n"
 "PO-Revision-Date: 2024-04-21 14:36+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -17,127 +18,141 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:394
-msgid "Pomodoro started"
-msgstr "Pomodoro gestart"
+#: applet.js:265
+msgid "Short break running"
+msgstr "Korte pauze wordt uitgevoerd"
 
-#: applet.js:437 applet.js:737
-msgid "Waiting to start"
-msgstr "Wachten om te starten"
+#: applet.js:268
+msgid "Long break running"
+msgstr "Lange pauze wordt uitgevoerd"
 
-#: applet.js:455
+#: applet.js:271
 #, javascript-format
 msgid "Pomodori %d, set %d running"
 msgstr "Pomodori %d, set %d wordt uitgevoerd"
 
-#: applet.js:462
+#: applet.js:276
+msgid "Waiting to start"
+msgstr "Wachten om te starten"
+
+#: applet.js:329
+msgid "Pomodoro started"
+msgstr "Pomodoro gestart"
+
+#: applet.js:394
 msgid "Let's go to work!"
 msgstr "Laten we aan het werk gaan!"
 
-#: applet.js:477
+#: applet.js:412
 msgid "Take a short break"
 msgstr "Neem een korte pauze"
 
-#: applet.js:478
-msgid "Short break running"
-msgstr "Korte pauze wordt uitgevoerd"
-
-#: applet.js:497
+#: applet.js:432
 msgid "Take a long break"
 msgstr "Neem een lange pauze"
 
-#: applet.js:499
-msgid "Long break running"
-msgstr "Lange pauze wordt uitgevoerd"
-
-#: applet.js:533
+#: applet.js:465
 msgid "Pomodoro ended"
 msgstr "Pomodoro beëindigd"
 
-#: applet.js:665
+#: applet.js:551
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 msgstr "https://nl.wikipedia.org/wiki/Pomodorotechniek"
 
 #. metadata.json->name
-#: applet.js:837
+#: applet.js:697
 msgid "Pomodoro Timer"
 msgstr "Pomodoro Timer"
 
-#: applet.js:848
+#: applet.js:706
 msgid "Completed"
 msgstr "Voltooid"
 
-#: applet.js:861
+#: applet.js:714
 msgid "Reset Timer"
 msgstr "Timer resetten"
 
-#: applet.js:873
+#: applet.js:722
 msgid "Reset Counts and Timer"
 msgstr "Tellingen en timer resetten"
 
-#: applet.js:886
+#: applet.js:731
 msgid "What is this?"
 msgstr "Wat is dit?"
 
-#: applet.js:943
+#: applet.js:771
 msgid "None"
 msgstr "Geen"
 
-#: applet.js:973
+#: applet.js:787
 msgid "Switch Off Pomodoro"
 msgstr "Pomodoro uitschakelen"
 
-#: applet.js:979
+#: applet.js:793
 msgid "Start a new Pomodoro"
 msgstr "Start een nieuwe Pomodoro"
 
-#: applet.js:985
+#: applet.js:799
 msgid "Hide"
 msgstr "Verbergen"
 
-#: applet.js:997
+#: applet.js:811
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr "Pomodoro-set voltooid, je verdient een pauze!"
 
-#: applet.js:1005
+#: applet.js:820
 msgid "Your break is over, start another pomodoro!"
 msgstr "Je pauze is voorbij, begin met een nieuwe pomodoro!"
 
-#: applet.js:1010
+#: applet.js:826
 #, javascript-format
 msgid "A new pomodoro begins in %s."
 msgstr "Een nieuwe pomodoro begint over %s."
 
-#: applet.js:1021
+#: applet.js:838
 #, javascript-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuut"
 msgstr[1] "%d minuten"
 
-#: applet.js:1022
+#: applet.js:839
 #, javascript-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d seconde"
 msgstr[1] "%d seconden"
 
-#: applet.js:1024
+#: applet.js:841
 #, javascript-format
 msgid "%s and %s"
 msgstr "%s en %s"
 
-#: applet.js:1048
+#: applet.js:856
 msgid "Continue Current Pomodoro"
 msgstr "Doorgaan met huidige Pomodoro"
 
-#: applet.js:1054
+#: applet.js:862 applet.js:895
 msgid "Pause Pomodoro"
 msgstr "Pauzeer Pomodoro"
 
-#: applet.js:1065
+#: applet.js:873
 msgid "Short break finished, ready to continue?"
 msgstr "Korte pauze voltooid, klaar om door te gaan?"
+
+#: applet.js:889
+#, fuzzy
+msgid "Start break"
+msgstr "Neem een korte pauze"
+
+#: applet.js:906
+#, fuzzy
+msgid "Pomodoro finished, ready to take a break?"
+msgstr "Pomodoro-set voltooid, je verdient een pauze!"
+
+#. metadata.json->description
+msgid "Great tool for boosted productivity!"
+msgstr "Een geweldige tool voor verhoogde productiviteit!"
 
 #. settings-schema.json->head_durations->description
 msgid "Durations (minutes)"
@@ -167,6 +182,11 @@ msgstr "Opties"
 msgid "Show Dialog Messages"
 msgstr "Dialoogberichten weergeven"
 
+#. settings-schema.json->auto_start_after_pomodoro_ends->description
+#, fuzzy
+msgid "Auto start after a pomodoro ends"
+msgstr "Automatisch starten na het einde van een korte pauze"
+
 #. settings-schema.json->auto_start_after_short_break_ends->description
 msgid "Auto start after a short break ends"
 msgstr "Automatisch starten na het einde van een korte pauze"
@@ -186,6 +206,10 @@ msgstr "Een symbolisch pictogram gebruiken in het appletpaneel"
 #. settings-schema.json->show_timer->description
 msgid "Show the pomodoro timer in the applet panel"
 msgstr "De pomodoro-timer weergeven in het appletpaneel"
+
+#. settings-schema.json->hotkey->description
+msgid "Set the keybinding to open the applet menu"
+msgstr ""
 
 #. settings-schema.json->head_sounds->description
 msgid "Sounds"
@@ -238,7 +262,3 @@ msgstr "Startgeluid afspelen"
 #. settings-schema.json->start_sound_file->description
 msgid "Start Sound File"
 msgstr "Startgeluid bestand"
-
-#. metadata.json->description
-msgid "Great tool for boosted productivity!"
-msgstr "Een geweldige tool voor verhoogde productiviteit!"

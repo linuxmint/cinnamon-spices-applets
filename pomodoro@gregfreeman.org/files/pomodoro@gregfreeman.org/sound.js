@@ -1,132 +1,117 @@
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
-const Params = imports.misc.params;
 
 /**
+ * Spawns a command and returns the process ID (PID) of the spawned process.
+ * If the command could not be spawned or no PID is available, null is returned.
  *
- * The functions in /usr/share/cinnamon/js/misc/util.js
- * don't return the pid, we need the pid so we can stop sounds
- *
- * @param {string} command
- * @returns {number} process id
+ * @param {string} command - The command to be spawned.
+ * @returns {number|null} The process ID (PID) of the spawned process, or null if no PID is available or the command could not be spawned.
  */
 function spawnCommandAndGetPid(command) {
-    let flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.STDOUT_TO_DEV_NULL  | GLib.SpawnFlags.STDERR_TO_DEV_NULL;
-    let argv = GLib.shell_parse_argv(command)[1];
-    let pid = GLib.spawn_async(null, argv, null, flags, null, null)[1];
+    const flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.STDOUT_TO_DEV_NULL | GLib.SpawnFlags.STDERR_TO_DEV_NULL;
+    const argv = GLib.shell_parse_argv(command)[1];
+    let pid = null;
 
-    return pid;
+    try {
+        const [success, spawnedPid] = GLib.spawn_async(null, argv, null, flags, null);
+        if (!success) {
+            global.logError("Failed to spawn command: " + command);
+            return null;
+        }
+        pid = spawnedPid;
+    } catch (error) {
+        global.logError("Exception when spawning command: " + command + ", error: " + error.message);
+        return null;
+    }
+
+    return pid; // Return the PID of the successfully spawned process.
 }
 
 function addPathIfRelative(soundPath, basePath) {
-    if (soundPath.indexOf('file://') === 0) {
+    if (soundPath.startsWith('file://')) {
         soundPath = soundPath.substring(7);
     }
-
-    // user set a custom absolute path, so lets use that
-    if (soundPath.substring(0, 1) == '/') {
+    if (soundPath.startsWith('/')) {
         return soundPath;
     }
-
-    let fullPath = '';
-
-    if (basePath) {
-        fullPath += basePath + '/';
-    }
-
+    let fullPath = basePath ? `${basePath}/` : '';
     fullPath += soundPath;
-
     return fullPath;
 }
 
 function isPlayable() {
-    return GLib.find_program_in_path('play') != null;
+    return GLib.find_program_in_path('play') !== null;
 }
 
-function SoundEffect(soundPath) {
-    this._init(soundPath);
-}
-
-SoundEffect.prototype = {
-    _init: function(soundPath) {
+class SoundEffect {
+    constructor(soundPath) {
         this._pid = null;
-
         this.setSoundPath(soundPath);
-    },
+    }
 
-    setSoundPath: function(soundPath) {
+    setSoundPath(soundPath) {
         let isPlayable = this._playerExists();
-
         if (!GLib.file_test(soundPath, GLib.FileTest.EXISTS)) {
             isPlayable = false;
-            global.logError(soundPath + " is not playable");
+            global.logError(`${soundPath} is not playable`);
         }
-
         this._isPlayable = isPlayable;
         this._soundPath = soundPath;
-    },
+    }
 
     /**
-     * @param {Object} [params] Parameters
-     * @param {boolean} [params.loop=false] play the sound in loop
-     * @param {boolean} [params.preview=false] only play a 2 seconds preview of the sound
-     * @param {number} [params.volume=1] sound volume from 0 to 1
-     * @private
+     * Plays a sound with the given parameters.
+     *
+     * @param {Object} params - An object containing the parameters for the sound.
+     * @param {boolean} params.preview - If true, plays a preview of the sound for 2 seconds. Default is false.
+     * @param {number} params.volume - The volume at which to play the sound between 0 and 1. Default is 1.
+     * @param {boolean} params.loop - If true, loops the sound. Default is false.
+     * @returns {boolean} True if the sound was successfully played, false otherwise.
      */
-    play: function(params) {
+    play(params = { preview: false, volume: 1, loop: false }) {
         if (!this._isPlayable) {
             return false;
         }
-
-        if (null != this._pid) {
+        if (this._pid !== null) {
             this.stop();
         }
-
-        params = Params.parse(params, { preview: false, volume: 1, loop: false });
-
-        let command = "play";
-
-        // Volume
-        command += " --volume %.2f".format(params.volume);
-
-        // File to play
-        command += " -q %s".format(GLib.shell_quote(this._soundPath));
-
+        let command = `play --volume ${params.volume.toFixed(2)} -q ${GLib.shell_quote(this._soundPath)}`;
         if (params.loop) {
             command += " repeat 9999";
         }
-
         if (params.preview) {
             command += " trim 0 00:00:02.0";
         }
-
         this._pid = spawnCommandAndGetPid(command);
-
+        if (this._pid === null) {
+            return false;
+        }
         return true;
-    },
+    }
 
-    playOnce: function() {
+    playOnce() {
         return this.play();
-    },
+    }
 
-    stop: function() {
-        if (null == this._pid) {
+    stop() {
+        if (this._pid === null) {
             return;
         }
-
-        let command = 'kill -9 %d'.format(this._pid);
+        const command = `kill -9 ${this._pid}`;
         Util.trySpawnCommandLine(command);
-
         this._pid = null;
-    },
+    }
 
-    isPlaying: function() {
-        return this._pid != null;
-    },
+    isPlaying() {
+        return this._pid !== null;
+    }
 
-    getSoundPath: function() {
+    getSoundPath() {
         return this._soundPath;
     }
-};
 
-SoundEffect.prototype._playerExists = isPlayable;
+    _playerExists() {
+        return isPlayable();
+    }
+}
