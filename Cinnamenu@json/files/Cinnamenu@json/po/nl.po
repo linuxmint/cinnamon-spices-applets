@@ -8,14 +8,13 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-29 19:16+0100\n"
-"PO-Revision-Date: 2022-10-14 12:36+0200\n"
-"Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
-"Language-Team: nl\n"
+"PO-Revision-Date: 2024-04-22 10:55+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
 
 msgid "Type to search..."
 msgstr "Tik in om te zoeken..."
@@ -42,7 +41,8 @@ msgid "Favorite apps"
 msgstr "Favoriete toepassingen"
 
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "Voor bladwijzers van Firefox en Midori is het pakket gir1.2-gda-5.0 vereist."
+msgstr ""
+"Voor bladwijzers van Firefox en Midori is het pakket gir1.2-gda-5.0 vereist."
 
 msgid "Clear List"
 msgstr "Lijst wissen"
@@ -234,11 +234,11 @@ msgid "Flags"
 msgstr "Vlaggen"
 
 msgid ""
-"This menu item is not associated to any package. Do you want to remove it from the "
-"menu anyway?"
+"This menu item is not associated to any package. Do you want to remove it "
+"from the menu anyway?"
 msgstr ""
-"Dit menu-element is niet gekoppeld aan een pakket. Wilt u het toch uit het menu "
-"verwijderen?"
+"Dit menu-element is niet gekoppeld aan een pakket. Wilt u het toch uit het "
+"menu verwijderen?"
 
 msgid "The following packages will be removed:"
 msgstr "De volgende pakketten worden verwijderd:"
@@ -248,7 +248,8 @@ msgstr "Pakketten die moeten worden verwijderd"
 
 #, python-format
 msgid "Cannot remove package %s as it is required by other packages."
-msgstr "Kan pakket %s niet verwijderen omdat dit nodig is voor andere pakketten."
+msgstr ""
+"Kan pakket %s niet verwijderen omdat dit nodig is voor andere pakketten."
 
 #, python-format
 msgid "Package %s is a dependency of the following packages:"
@@ -309,10 +310,11 @@ msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
 msgid ""
-"A flexible menu with grid or list layout options, file browser and emoji search."
+"A flexible menu with grid or list layout options, file browser and emoji "
+"search."
 msgstr ""
-"Een flexibel menu met opties voor raster- of lijstvormgeving, bestandbeheerder en "
-"zoeken naar emotiepictogrammen."
+"Een flexibel menu met opties voor raster- of lijstvormgeving, "
+"bestandbeheerder en zoeken naar emotiepictogrammen."
 
 msgid "Behavior"
 msgstr "Gedrag"
@@ -560,7 +562,8 @@ msgid "Last used category"
 msgstr "Laatst gebruikte categorie"
 
 msgid "Autoscroll the application list on mouse hover"
-msgstr "Automatisch schuiven door de toepassingenlijst bij erboven zweven met de muis"
+msgstr ""
+"Automatisch schuiven door de toepassingenlijst bij erboven zweven met de muis"
 
 msgid "Show hidden files"
 msgstr "Toon verborgen bestanden"
@@ -583,10 +586,12 @@ msgstr "Toon een webzoekoptie in zoekresultaten"
 msgid "Web search suggestions"
 msgstr "Webzoeksuggesties"
 
-msgid "With web search option, also show search suggestions. (Note: Search suggestions are provided by DuckDuckGo)"
+msgid ""
+"With web search option, also show search suggestions. (Note: Search "
+"suggestions are provided by DuckDuckGo)"
 msgstr ""
-"Met webzoekoptie, toont ook zoeksuggesties (let op: dit gebruikt de zoek-API van "
-"DuckDuckGo)."
+"Met webzoekoptie, toont ook zoeksuggesties (let op: dit gebruikt de zoek-API "
+"van DuckDuckGo)."
 
 msgid "Search home folder"
 msgstr "Zoeken in thuismap"
@@ -598,8 +603,8 @@ msgid "Web history search"
 msgstr "Zoeken in webgeschiedenis"
 
 msgid ""
-"When searching, also search my browser's history (Google Chrome, Chromium, Opera, "
-"Vivaldi, Brave)\n"
+"When searching, also search my browser's history (Google Chrome, Chromium, "
+"Opera, Vivaldi, Brave)\n"
 "Note: Firefox history is not currently supported."
 msgstr ""
 "Zoek bij het zoeken ook in de geschiedenis van mijn browser (Google Chrome, "
@@ -610,17 +615,18 @@ msgid "Web bookmarks search"
 msgstr "Zoeken naar webbladwijzers"
 
 msgid ""
-"When searching, also search my browser's web bookmarks (Google Chrome, Firefox, "
-"Chromium, Opera, Vivaldi, Brave)\n"
-"Note: To search Firefox bookmarks you will need to install package gir1.2-gda-5.0 "
-"(Debian based distributions inc. Ubuntu & Linux Mint) or package libgda (Arch based "
-"distributions) and restart your computer."
-msgstr ""
-"Zoek bij het zoeken ook in de webbladwijzers van mijn browser (Google Chrome, "
+"When searching, also search my browser's web bookmarks (Google Chrome, "
 "Firefox, Chromium, Opera, Vivaldi, Brave)\n"
-"Opmerking: om Firefox-bladwijzers te zoeken, moet u het pakket gir1.2-gda-5.0 "
-"installeren (Debian-gebaseerde distributies incl. Ubuntu en Linux Mint) of het "
-"paskket libgda (Arch-gebaseerde distributies) en uw computer herstarten."
+"Note: To search Firefox bookmarks you will need to install package gir1.2-"
+"gda-5.0 (Debian based distributions inc. Ubuntu & Linux Mint) or package "
+"libgda (Arch based distributions) and restart your computer."
+msgstr ""
+"Zoek bij het zoeken ook in de webbladwijzers van mijn browser (Google "
+"Chrome, Firefox, Chromium, Opera, Vivaldi, Brave)\n"
+"Opmerking: om Firefox-bladwijzers te zoeken, moet u het pakket gir1.2-"
+"gda-5.0 installeren (Debian-gebaseerde distributies incl. Ubuntu en Linux "
+"Mint) of het paskket libgda (Arch-gebaseerde distributies) en uw computer "
+"herstarten."
 
 msgid "Wikipedia search"
 msgstr "Wikipedia doorzoeken"
@@ -633,19 +639,19 @@ msgstr "Wikipedia-taal"
 
 msgid ""
 "\n"
-"Note: Some search options can still be used even if you have not enabled them here "
-"by prefixing your search term.\n"
-"For example: to search for an emoji, type 'e heart' to find heart emojis. Likewise, "
-"use prefixes 'f ' for file search, 'h ' for web history and 'b ' for web bookmarks "
-"search.\n"
+"Note: Some search options can still be used even if you have not enabled "
+"them here by prefixing your search term.\n"
+"For example: to search for an emoji, type 'e heart' to find heart emojis. "
+"Likewise, use prefixes 'f ' for file search, 'h ' for web history and 'b ' "
+"for web bookmarks search.\n"
 msgstr ""
 "\n"
-"Opmerking: sommige zoekopties kunnen nog steeds worden gebruikt, zelfs als u hen "
-"hier niet hebt ingeschakeld door uw zoekterm voor te voegen.\n"
+"Opmerking: sommige zoekopties kunnen nog steeds worden gebruikt, zelfs als u "
+"hen hier niet hebt ingeschakeld door uw zoekterm voor te voegen.\n"
 "Bijvoorbeeld: om naar een emotiepictogram te zoeken, tikt u 'e heart' om "
-"hartemotiepictogrammen te vinden. Gebruik op dezelfde manier de voorvoegsels 'f' "
-"voor het zoeken naar bestanden, 'h' voor webgeschiedenis en 'b' voor het zoeken "
-"naar webbladwijzers.\n"
+"hartemotiepictogrammen te vinden. Gebruik op dezelfde manier de voorvoegsels "
+"'f' voor het zoeken naar bestanden, 'h' voor webgeschiedenis en 'b' voor het "
+"zoeken naar webbladwijzers.\n"
 
 msgid "Use a custom icon size"
 msgstr "Gebruik een aangepaste pictogramgrootte"
@@ -672,7 +678,93 @@ msgid "Use tile style"
 msgstr "Tegelstijl gebruiken"
 
 msgid ""
-"Use a tile style for the application buttons (Note: may not work on some themes)"
+"Use a tile style for the application buttons (Note: may not work on some "
+"themes)"
 msgstr ""
-"Gebruik een tegelstijl voor de toepassingsknoppen (Opmerking: werkt mogelijk niet "
-"bij sommige thema's)"
+"Gebruik een tegelstijl voor de toepassingsknoppen (Opmerking: werkt mogelijk "
+"niet bij sommige thema's)"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Remove category"
+msgstr "Categorie verwijderen"
+
+msgid "List settings apps separately"
+msgstr "Instellingen-apps apart weergeven"
+
+msgid "Single list style"
+msgstr "Enkelvoudige lijst stijl"
+
+msgid "Hide hidden files"
+msgstr "Verborgen bestanden verbergen"
+
+msgid "App Info"
+msgstr "App-informatie"
+
+msgid "Add folder as category"
+msgstr "Map toevoegen als categorie"
+
+#. 5.8
+#. 5.8
+#. 4.0
+#. 4.0
+msgid "Tips"
+msgstr "Tips"
+
+#. 5.8
+#. 4.0
+msgid "Show sidebar"
+msgstr "Zijbalk tonen"
+
+#. 5.8
+#. 4.0
+msgid "Show the sidebar in the menu"
+msgstr "De zijbalk weergeven in het menu"
+
+#. 5.8
+#. 4.0
+msgid "Show categories"
+msgstr "Categorieën tonen"
+
+#. 5.8
+#. 4.0
+msgid "Show list of application categories"
+msgstr "Lijst van applicatie-categorieën tonen"
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Drag and drop menu categories to change their order."
+msgstr ""
+"\n"
+"• Menucategorieën slepen en neerzetten om hun volgorde te wijzigen."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Folders can be set up and removed as menu categories by right-clicking on "
+"them."
+msgstr ""
+"\n"
+"• Mappen kunnen worden ingesteld en verwijderd als menucategorieën door er "
+"met de rechtermuisknop op te klikken."
+
+#. 5.8
+#. 4.0
+msgid ""
+"\n"
+"• Additional key options:\n"
+"ctrl-p — Open launcher properties dialogue of currently highlighted "
+"application.\n"
+"ctrl-d — Open .desktop file of currently highlighted app in default text "
+"editor.\n"
+msgstr ""
+"\n"
+"• Extra toetsenopties:\n"
+"ctrl-p — Open dialoogvenster in verband met start-eigenschappen van "
+"momenteel gemarkeerde applicatie.\n"
+"ctrl-d — Open .desktop bestand van de momenteel gemarkeerde app in de "
+"standaardtekstverwerker.\n"
