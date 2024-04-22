@@ -158,3 +158,15 @@ msgstr ""
 "Seleziona questa opzione per non mostrare avvertimenti testuali nei\n"
 "pannelli orizzontali.\n"
 "(Nessun avvertimento testuale sarà mostrato su pannelli verticali)"
+
+#. settings-schema.json->keep_size->description
+msgid "Avoid size changes"
+msgstr "Evita variazioni di dimensione"
+
+#. settings-schema.json->keep_size->tooltip
+msgid ""
+"Checked: The size of this applet remains constant, once all your preferences have been defined.\n"
+"Unchecked: The size of this applet is optimized, but it may change."
+msgstr ""
+"Spuntato: Le dimensioni di questo applet rimangono costanti, una volta definite tutte le tue preferenze.\n"
+"Non spuntato: Le dimensioni di questo applet sono ottimizzate, ma possono variare."
