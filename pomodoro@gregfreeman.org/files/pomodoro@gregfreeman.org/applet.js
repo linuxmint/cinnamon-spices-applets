@@ -61,6 +61,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._opt_shortBreakTimeMinutes = null;
         this._opt_longBreakTimeMinutes = null;
         this._opt_pomodoriNumber = null;
+        this._opt_startAutomaticallyOnLoad = null;
         this._opt_showDialogMessages = null;
         this._opt_autoContinueAfterPomodoro = null;
         this._opt_autoContinueAfterShortBreak = null;
@@ -116,6 +117,12 @@ class PomodoroApplet extends Applet.TextIconApplet {
 
         // Initial setup of the hotkey
         this._updateHotkey();
+
+        // start timer automatically
+        if (this._opt_startAutomaticallyOnLoad) {
+            this._appletMenu.toggleTimerState(true);
+            this._timerQueue.start();
+        }
     }
 
     _bindSettings() {
@@ -176,6 +183,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
         );
     
         // Binding simple properties that don't require logic beyond setting the value
+        this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "start_automatically_on_load", "_opt_startAutomaticallyOnLoad", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "show_dialog_messages", "_opt_showDialogMessages", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "auto_start_after_pomodoro_ends", "_opt_autoContinueAfterPomodoro", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "auto_start_after_short_break_ends", "_opt_autoContinueAfterShortBreak", emptyCallback);

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-22 13:13+1000\n"
+"POT-Creation-Date: 2024-04-22 16:51+1000\n"
 "PO-Revision-Date: 2017-03-14 22:17+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,136 +19,136 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: applet.js:265
+#: applet.js:273
 msgid "Short break running"
 msgstr "短时休息运行中"
 
-#: applet.js:268
+#: applet.js:276
 msgid "Long break running"
 msgstr "长时休息运行中"
 
-#: applet.js:271
+#: applet.js:279
 #, javascript-format
 msgid "Pomodori %d, set %d running"
 msgstr "番茄钟%d，设置%d正在运行"
 
-#: applet.js:276
+#: applet.js:284
 msgid "Waiting to start"
 msgstr "等待启动"
 
-#: applet.js:329
+#: applet.js:337
 msgid "Pomodoro started"
 msgstr "番茄钟已启动"
 
-#: applet.js:394
+#: applet.js:402
 msgid "Let's go to work!"
 msgstr "让我们工作吧！"
 
-#: applet.js:412
+#: applet.js:420
 msgid "Take a short break"
 msgstr "短时休息"
 
-#: applet.js:432
+#: applet.js:440
 msgid "Take a long break"
 msgstr "长时休息"
 
-#: applet.js:465
+#: applet.js:473
 msgid "Pomodoro ended"
 msgstr "番茄钟结束"
 
-#: applet.js:561
+#: applet.js:569
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 msgstr ""
 
 #. metadata.json->name
-#: applet.js:707
+#: applet.js:715
 msgid "Pomodoro Timer"
 msgstr "番茄钟定时器"
 
-#: applet.js:716
+#: applet.js:724
 msgid "Completed"
 msgstr "已完成"
 
-#: applet.js:724
+#: applet.js:732
 msgid "Reset Timer"
 msgstr "重置定时器"
 
-#: applet.js:732
+#: applet.js:740
 msgid "Reset Counts and Timer"
 msgstr "重置计数和定时器"
 
-#: applet.js:741
+#: applet.js:749
 msgid "Skip To Next Timer"
 msgstr ""
 
-#: applet.js:748
+#: applet.js:756
 msgid "What is this?"
 msgstr "这是什么？"
 
-#: applet.js:788
+#: applet.js:796
 msgid "None"
 msgstr "无"
 
-#: applet.js:805
+#: applet.js:813
 msgid "Switch Off Pomodoro"
 msgstr "关闭番茄钟"
 
-#: applet.js:811
+#: applet.js:819
 msgid "Start a new Pomodoro"
 msgstr "启动新的番茄钟"
 
-#: applet.js:817
+#: applet.js:825
 msgid "Hide"
 msgstr "隐藏"
 
-#: applet.js:829
+#: applet.js:837
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr "番茄钟设置完成，您该休息一下！"
 
-#: applet.js:838
+#: applet.js:846
 msgid "Your break is over, start another pomodoro!"
 msgstr "您的休息结束，请启动另一个番茄钟！"
 
-#: applet.js:844
+#: applet.js:852
 #, fuzzy, javascript-format
 msgid "A new pomodoro begins in %s."
 msgstr "新的番茄钟启动于"
 
-#: applet.js:856
+#: applet.js:864
 #, javascript-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] ""
 
-#: applet.js:857
+#: applet.js:865
 #, javascript-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] ""
 
-#: applet.js:859
+#: applet.js:867
 #, javascript-format
 msgid "%s and %s"
 msgstr ""
 
-#: applet.js:874
+#: applet.js:882
 msgid "Continue Current Pomodoro"
 msgstr "继续当前的番茄钟"
 
-#: applet.js:880 applet.js:913
+#: applet.js:888 applet.js:921
 msgid "Pause Pomodoro"
 msgstr "暂停番茄钟"
 
-#: applet.js:891
+#: applet.js:899
 msgid "Short break finished, ready to continue?"
 msgstr "短时休息已完成，准备好要继续了吗？"
 
-#: applet.js:907
+#: applet.js:915
 #, fuzzy
 msgid "Start break"
 msgstr "短时休息"
 
-#: applet.js:924
+#: applet.js:932
 #, fuzzy
 msgid "Pomodoro finished, ready to take a break?"
 msgstr "番茄钟设置完成，您该休息一下！"
@@ -184,6 +184,11 @@ msgstr "长时休息前番茄钟的数量："
 #. settings-schema.json->head_options->description
 msgid "Options"
 msgstr "选项"
+
+#. settings-schema.json->start_automatically_on_load->description
+#, fuzzy
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr "在小程序面板显示番茄钟定时器"
 
 #. settings-schema.json->show_dialog_messages->description
 msgid "Show Dialog Messages"

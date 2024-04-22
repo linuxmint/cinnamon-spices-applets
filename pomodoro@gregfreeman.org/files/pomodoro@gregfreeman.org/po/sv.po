@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pomodoro@gregfreeman.org\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-22 13:13+1000\n"
+"POT-Creation-Date: 2024-04-22 16:51+1000\n"
 "PO-Revision-Date: 2017-06-07 06:28+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -19,138 +19,138 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:265
+#: applet.js:273
 msgid "Short break running"
 msgstr "Kort paus körs"
 
-#: applet.js:268
+#: applet.js:276
 msgid "Long break running"
 msgstr "Lång rast körs"
 
-#: applet.js:271
+#: applet.js:279
 #, javascript-format
 msgid "Pomodori %d, set %d running"
 msgstr "Pomodori %d, set %d körs"
 
-#: applet.js:276
+#: applet.js:284
 msgid "Waiting to start"
 msgstr "Väntar på att starta"
 
-#: applet.js:329
+#: applet.js:337
 msgid "Pomodoro started"
 msgstr "Pomodoro startade"
 
-#: applet.js:394
+#: applet.js:402
 msgid "Let's go to work!"
 msgstr "Börja arbeta!"
 
-#: applet.js:412
+#: applet.js:420
 msgid "Take a short break"
 msgstr "Ta en kort paus"
 
-#: applet.js:432
+#: applet.js:440
 msgid "Take a long break"
 msgstr "Ta en lång rast"
 
-#: applet.js:465
+#: applet.js:473
 msgid "Pomodoro ended"
 msgstr "Pomodoro avslutades"
 
-#: applet.js:561
+#: applet.js:569
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 msgstr ""
 
 #. metadata.json->name
-#: applet.js:707
+#: applet.js:715
 msgid "Pomodoro Timer"
 msgstr "Pomodoro Tidur"
 
-#: applet.js:716
+#: applet.js:724
 msgid "Completed"
 msgstr "Klart"
 
-#: applet.js:724
+#: applet.js:732
 msgid "Reset Timer"
 msgstr "Återställ tiduret"
 
-#: applet.js:732
+#: applet.js:740
 msgid "Reset Counts and Timer"
 msgstr "Återställ antal och tidur"
 
-#: applet.js:741
+#: applet.js:749
 msgid "Skip To Next Timer"
 msgstr ""
 
-#: applet.js:748
+#: applet.js:756
 msgid "What is this?"
 msgstr "Vad är detta?"
 
-#: applet.js:788
+#: applet.js:796
 msgid "None"
 msgstr "Ingen"
 
-#: applet.js:805
+#: applet.js:813
 msgid "Switch Off Pomodoro"
 msgstr "Stäng av Pomodoro"
 
-#: applet.js:811
+#: applet.js:819
 msgid "Start a new Pomodoro"
 msgstr "Starta en ny Pomodoro"
 
-#: applet.js:817
+#: applet.js:825
 msgid "Hide"
 msgstr "Dölj"
 
-#: applet.js:829
+#: applet.js:837
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr "Pomodoro-set slutfört, du förtjänar en paus!"
 
-#: applet.js:838
+#: applet.js:846
 msgid "Your break is over, start another pomodoro!"
 msgstr "Din rast är över, starta en ny pomodoro!"
 
-#: applet.js:844
+#: applet.js:852
 #, fuzzy, javascript-format
 msgid "A new pomodoro begins in %s."
 msgstr "En ny Pomodoro börjar om "
 
-#: applet.js:856
+#: applet.js:864
 #, javascript-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: applet.js:857
+#: applet.js:865
 #, javascript-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: applet.js:859
+#: applet.js:867
 #, javascript-format
 msgid "%s and %s"
 msgstr ""
 
-#: applet.js:874
+#: applet.js:882
 msgid "Continue Current Pomodoro"
 msgstr "Fortsätt aktuell pomodoro"
 
-#: applet.js:880 applet.js:913
+#: applet.js:888 applet.js:921
 msgid "Pause Pomodoro"
 msgstr "Pausa Pomodoro"
 
-#: applet.js:891
+#: applet.js:899
 msgid "Short break finished, ready to continue?"
 msgstr "Den korta pausen är slut, vill du fortsätta?"
 
-#: applet.js:907
+#: applet.js:915
 #, fuzzy
 msgid "Start break"
 msgstr "Ta en kort paus"
 
-#: applet.js:924
+#: applet.js:932
 #, fuzzy
 msgid "Pomodoro finished, ready to take a break?"
 msgstr "Pomodoro-set slutfört, du förtjänar en paus!"
@@ -186,6 +186,11 @@ msgstr "Antal pomodori före lång rast: "
 #. settings-schema.json->head_options->description
 msgid "Options"
 msgstr "Alternativ"
+
+#. settings-schema.json->start_automatically_on_load->description
+#, fuzzy
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr "Visa pomodoros tidur i panelen"
 
 #. settings-schema.json->show_dialog_messages->description
 msgid "Show Dialog Messages"

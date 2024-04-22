@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-22 13:13+1000\n"
+"POT-Creation-Date: 2024-04-22 16:51+1000\n"
 "PO-Revision-Date: 2021-04-01 22:55+0200\n"
 "Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
 "Language-Team: \n"
@@ -19,140 +19,140 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: applet.js:265
+#: applet.js:273
 msgid "Short break running"
 msgstr "Rövid szünet folyamatban"
 
-#: applet.js:268
+#: applet.js:276
 msgid "Long break running"
 msgstr "Hosszú szünet folyamatban"
 
-#: applet.js:271
+#: applet.js:279
 #, javascript-format
 msgid "Pomodori %d, set %d running"
 msgstr "Pomodorók %d, állítsa be %d fut"
 
-#: applet.js:276
+#: applet.js:284
 msgid "Waiting to start"
 msgstr "Várakozás az indításra"
 
-#: applet.js:329
+#: applet.js:337
 msgid "Pomodoro started"
 msgstr "Pomodoro elindult"
 
-#: applet.js:394
+#: applet.js:402
 msgid "Let's go to work!"
 msgstr "Lássunk munkához!"
 
-#: applet.js:412
+#: applet.js:420
 msgid "Take a short break"
 msgstr "Tarts egy rövid szünetet"
 
-#: applet.js:432
+#: applet.js:440
 msgid "Take a long break"
 msgstr "Tarts egy hosszú szünetet"
 
-#: applet.js:465
+#: applet.js:473
 msgid "Pomodoro ended"
 msgstr "Pomodoro véget ért"
 
-#: applet.js:561
+#: applet.js:569
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 msgstr ""
 "https://en.wikipedia.org/wiki/Pomodoro_Technique Magyar leírás: https://www."
 "mindenmegtanulhato.hu/a-pomodoro-technika/"
 
 #. metadata.json->name
-#: applet.js:707
+#: applet.js:715
 msgid "Pomodoro Timer"
 msgstr "Pomodoro időmérő"
 
-#: applet.js:716
+#: applet.js:724
 msgid "Completed"
 msgstr "Befejezve"
 
-#: applet.js:724
+#: applet.js:732
 msgid "Reset Timer"
 msgstr "Időzítő ujraindítása"
 
-#: applet.js:732
+#: applet.js:740
 msgid "Reset Counts and Timer"
 msgstr "A számolt ciklusok és az időzítő visszaállítása"
 
-#: applet.js:741
+#: applet.js:749
 msgid "Skip To Next Timer"
 msgstr ""
 
-#: applet.js:748
+#: applet.js:756
 msgid "What is this?"
 msgstr "Ez meg mi?"
 
-#: applet.js:788
+#: applet.js:796
 msgid "None"
 msgstr "Nincs"
 
-#: applet.js:805
+#: applet.js:813
 msgid "Switch Off Pomodoro"
 msgstr "Pomodoro kikapcsolása"
 
-#: applet.js:811
+#: applet.js:819
 msgid "Start a new Pomodoro"
 msgstr "Új pomodoro indítása"
 
-#: applet.js:817
+#: applet.js:825
 msgid "Hide"
 msgstr "Elrejtés"
 
-#: applet.js:829
+#: applet.js:837
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr "A pomodoro szett kész, megérdemel egy kis szünetet!"
 
-#: applet.js:838
+#: applet.js:846
 msgid "Your break is over, start another pomodoro!"
 msgstr "A szünetnek vége, indítson újabb pomodorót!"
 
-#: applet.js:844
+#: applet.js:852
 #, javascript-format
 msgid "A new pomodoro begins in %s."
 msgstr "Új pomodoro indul %s múlva."
 
-#: applet.js:856
+#: applet.js:864
 #, javascript-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d perc"
 msgstr[1] "%d perc"
 
-#: applet.js:857
+#: applet.js:865
 #, javascript-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d másodperc"
 msgstr[1] "%d másodperc"
 
-#: applet.js:859
+#: applet.js:867
 #, javascript-format
 msgid "%s and %s"
 msgstr "%s és %s"
 
-#: applet.js:874
+#: applet.js:882
 msgid "Continue Current Pomodoro"
 msgstr "Jelenlegi pomodor folytatása"
 
-#: applet.js:880 applet.js:913
+#: applet.js:888 applet.js:921
 msgid "Pause Pomodoro"
 msgstr "Pomodoro szüneteltetése"
 
-#: applet.js:891
+#: applet.js:899
 msgid "Short break finished, ready to continue?"
 msgstr "A rövid szünet véget ért, készen áll a folytatásra?"
 
-#: applet.js:907
+#: applet.js:915
 #, fuzzy
 msgid "Start break"
 msgstr "Tarts egy rövid szünetet"
 
-#: applet.js:924
+#: applet.js:932
 #, fuzzy
 msgid "Pomodoro finished, ready to take a break?"
 msgstr "A pomodoro szett kész, megérdemel egy kis szünetet!"
@@ -184,6 +184,11 @@ msgstr "Pomodorók száma hosszú szünet előtt:"
 #. settings-schema.json->head_options->description
 msgid "Options"
 msgstr "Beállítások"
+
+#. settings-schema.json->start_automatically_on_load->description
+#, fuzzy
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr "Pomodoro időzítő megjelenítése a kisalkalmazás panelen"
 
 #. settings-schema.json->show_dialog_messages->description
 msgid "Show Dialog Messages"
