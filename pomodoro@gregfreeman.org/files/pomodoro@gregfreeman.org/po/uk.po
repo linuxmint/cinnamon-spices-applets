@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-22 13:13+1000\n"
+"POT-Creation-Date: 2024-04-22 16:51+1000\n"
 "PO-Revision-Date: 2022-01-05 13:55+0200\n"
 "Last-Translator: Rutar <RutarAndriy@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -20,102 +20,102 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
 
-#: applet.js:265
+#: applet.js:273
 msgid "Short break running"
 msgstr "Коротка перерва почалася"
 
-#: applet.js:268
+#: applet.js:276
 msgid "Long break running"
 msgstr "Довга перерва почалася"
 
-#: applet.js:271
+#: applet.js:279
 #, javascript-format
 msgid "Pomodori %d, set %d running"
 msgstr "Pomodoro %d, set %d працює"
 
-#: applet.js:276
+#: applet.js:284
 msgid "Waiting to start"
 msgstr "Очікування запуску"
 
-#: applet.js:329
+#: applet.js:337
 msgid "Pomodoro started"
 msgstr "Pomodoro запущено"
 
-#: applet.js:394
+#: applet.js:402
 msgid "Let's go to work!"
 msgstr "Давай працювати!"
 
-#: applet.js:412
+#: applet.js:420
 msgid "Take a short break"
 msgstr "Зробіть коротку перерву"
 
-#: applet.js:432
+#: applet.js:440
 msgid "Take a long break"
 msgstr "Зробіть довгу перерву"
 
-#: applet.js:465
+#: applet.js:473
 msgid "Pomodoro ended"
 msgstr "Pomodoro завершено"
 
-#: applet.js:561
+#: applet.js:569
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 msgstr "https://uk.wikipedia.org/wiki/Метод_Pomodoro"
 
 #. metadata.json->name
-#: applet.js:707
+#: applet.js:715
 msgid "Pomodoro Timer"
 msgstr "Pomodoro Таймер"
 
-#: applet.js:716
+#: applet.js:724
 msgid "Completed"
 msgstr "Завершено"
 
-#: applet.js:724
+#: applet.js:732
 msgid "Reset Timer"
 msgstr "Скинути таймер"
 
-#: applet.js:732
+#: applet.js:740
 msgid "Reset Counts and Timer"
 msgstr "Скинути лічильники і таймер"
 
-#: applet.js:741
+#: applet.js:749
 msgid "Skip To Next Timer"
 msgstr ""
 
-#: applet.js:748
+#: applet.js:756
 msgid "What is this?"
 msgstr "Що це?"
 
-#: applet.js:788
+#: applet.js:796
 msgid "None"
 msgstr "Жодного"
 
-#: applet.js:805
+#: applet.js:813
 msgid "Switch Off Pomodoro"
 msgstr "Вимкнути Pomodoro"
 
-#: applet.js:811
+#: applet.js:819
 msgid "Start a new Pomodoro"
 msgstr "Почати новий Pomodoro"
 
-#: applet.js:817
+#: applet.js:825
 msgid "Hide"
 msgstr "Приховати"
 
-#: applet.js:829
+#: applet.js:837
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr "Завдання Pomodoro закінчено, ви заслуговуєте на відпочинок!"
 
-#: applet.js:838
+#: applet.js:846
 msgid "Your break is over, start another pomodoro!"
 msgstr "Ваша перерва закінчилася, почніть ще один Pomodoro!"
 
-#: applet.js:844
+#: applet.js:852
 #, javascript-format
 msgid "A new pomodoro begins in %s."
 msgstr "Новий Pomodoro починається через %s."
 
-#: applet.js:856
+#: applet.js:864
 #, javascript-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -123,7 +123,7 @@ msgstr[0] "%d хвилина"
 msgstr[1] "%d хвилини"
 msgstr[2] "%d хвилин"
 
-#: applet.js:857
+#: applet.js:865
 #, javascript-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -131,29 +131,29 @@ msgstr[0] "%d секунда"
 msgstr[1] "%d секунди"
 msgstr[2] "%d секунд"
 
-#: applet.js:859
+#: applet.js:867
 #, javascript-format
 msgid "%s and %s"
 msgstr "%s і %s"
 
-#: applet.js:874
+#: applet.js:882
 msgid "Continue Current Pomodoro"
 msgstr "Продовжити поточний Pomodoro"
 
-#: applet.js:880 applet.js:913
+#: applet.js:888 applet.js:921
 msgid "Pause Pomodoro"
 msgstr "Призупинити Pomodoro"
 
-#: applet.js:891
+#: applet.js:899
 msgid "Short break finished, ready to continue?"
 msgstr "Коротка перерва закінчилася, готові продовжити?"
 
-#: applet.js:907
+#: applet.js:915
 #, fuzzy
 msgid "Start break"
 msgstr "Зробіть коротку перерву"
 
-#: applet.js:924
+#: applet.js:932
 #, fuzzy
 msgid "Pomodoro finished, ready to take a break?"
 msgstr "Завдання Pomodoro закінчено, ви заслуговуєте на відпочинок!"
@@ -185,6 +185,11 @@ msgstr "Кількість Pomodoro перед великою перервою:"
 #. settings-schema.json->head_options->description
 msgid "Options"
 msgstr "Параметри"
+
+#. settings-schema.json->start_automatically_on_load->description
+#, fuzzy
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr "Показати таймер Pomodoro на панелі аплетів"
 
 #. settings-schema.json->show_dialog_messages->description
 msgid "Show Dialog Messages"

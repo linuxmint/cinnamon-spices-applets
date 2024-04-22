@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-22 13:13+1000\n"
+"POT-Creation-Date: 2024-04-22 16:51+1000\n"
 "PO-Revision-Date: 2023-05-11 15:24+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: French\n"
@@ -20,141 +20,141 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:265
+#: applet.js:273
 msgid "Short break running"
 msgstr "Courte pose en cours"
 
-#: applet.js:268
+#: applet.js:276
 msgid "Long break running"
 msgstr "Longue pause en cours"
 
-#: applet.js:271
+#: applet.js:279
 #, javascript-format
 msgid "Pomodori %d, set %d running"
 msgstr "Pomodoro %d, set %d en cours"
 
-#: applet.js:276
+#: applet.js:284
 msgid "Waiting to start"
 msgstr "En attente pour démarrer"
 
 # notifications
-#: applet.js:329
+#: applet.js:337
 msgid "Pomodoro started"
 msgstr "Pomodoro démarré"
 
-#: applet.js:394
+#: applet.js:402
 msgid "Let's go to work!"
 msgstr "Au travail!"
 
-#: applet.js:412
+#: applet.js:420
 msgid "Take a short break"
 msgstr "Prenez une courte pause"
 
-#: applet.js:432
+#: applet.js:440
 msgid "Take a long break"
 msgstr "Prenez une longue pause"
 
-#: applet.js:465
+#: applet.js:473
 msgid "Pomodoro ended"
 msgstr "Pomodoro terminé"
 
-#: applet.js:561
+#: applet.js:569
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 msgstr "https://fr.wikipedia.org/wiki/Technique_Pomodoro"
 
 # applet menu
 #. metadata.json->name
-#: applet.js:707
+#: applet.js:715
 msgid "Pomodoro Timer"
 msgstr "Minuteur Pomodoro"
 
-#: applet.js:716
+#: applet.js:724
 msgid "Completed"
 msgstr "Terminé"
 
-#: applet.js:724
+#: applet.js:732
 msgid "Reset Timer"
 msgstr "Remise à zéro du minuteur"
 
-#: applet.js:732
+#: applet.js:740
 msgid "Reset Counts and Timer"
 msgstr "Remise à zéro des comptes et du minuteur"
 
-#: applet.js:741
+#: applet.js:749
 msgid "Skip To Next Timer"
 msgstr ""
 
-#: applet.js:748
+#: applet.js:756
 msgid "What is this?"
 msgstr "Qu'est cela ?"
 
-#: applet.js:788
+#: applet.js:796
 msgid "None"
 msgstr "Aucun"
 
 # dialog
-#: applet.js:805
+#: applet.js:813
 msgid "Switch Off Pomodoro"
 msgstr "Désactiver Pomodoro"
 
-#: applet.js:811
+#: applet.js:819
 msgid "Start a new Pomodoro"
 msgstr "Démarrer un nouveau Pomodoro"
 
-#: applet.js:817
+#: applet.js:825
 msgid "Hide"
 msgstr "Masquer"
 
-#: applet.js:829
+#: applet.js:837
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr "Pomodoro terminé, vous méritez un break !"
 
-#: applet.js:838
+#: applet.js:846
 msgid "Your break is over, start another pomodoro!"
 msgstr "Votre pause est terminée, démarrez un nouveau Pomodoro !"
 
-#: applet.js:844
+#: applet.js:852
 #, javascript-format
 msgid "A new pomodoro begins in %s."
 msgstr "Un nouveau Pomodoro débute dans %s."
 
-#: applet.js:856
+#: applet.js:864
 #, javascript-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minute"
 msgstr[1] "%d minutes"
 
-#: applet.js:857
+#: applet.js:865
 #, javascript-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d seconde"
 msgstr[1] "%d secondes"
 
-#: applet.js:859
+#: applet.js:867
 #, javascript-format
 msgid "%s and %s"
 msgstr "%s et %s"
 
-#: applet.js:874
+#: applet.js:882
 msgid "Continue Current Pomodoro"
 msgstr "Poursuivre avec le Pomodoro actuel"
 
-#: applet.js:880 applet.js:913
+#: applet.js:888 applet.js:921
 msgid "Pause Pomodoro"
 msgstr "Pause Pomodoro"
 
-#: applet.js:891
+#: applet.js:899
 msgid "Short break finished, ready to continue?"
 msgstr "Petite pause terminée, prêt à continuer ?"
 
-#: applet.js:907
+#: applet.js:915
 #, fuzzy
 msgid "Start break"
 msgstr "Prenez une courte pause"
 
-#: applet.js:924
+#: applet.js:932
 #, fuzzy
 msgid "Pomodoro finished, ready to take a break?"
 msgstr "Pomodoro terminé, vous méritez un break !"
@@ -186,6 +186,11 @@ msgstr "Nombre de Pomodoro avant une longue pause :"
 #. settings-schema.json->head_options->description
 msgid "Options"
 msgstr "Options"
+
+#. settings-schema.json->start_automatically_on_load->description
+#, fuzzy
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr "Afficher le minuteur du Pomodoro dans le panneau d'applet"
 
 #. settings-schema.json->show_dialog_messages->description
 msgid "Show Dialog Messages"

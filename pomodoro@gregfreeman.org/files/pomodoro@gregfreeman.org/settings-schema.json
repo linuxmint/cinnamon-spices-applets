@@ -45,6 +45,12 @@
         "description": "Options"
     },
 
+    "start_automatically_on_load" : {
+        "type" : "checkbox",
+        "description" : "Start the pomodoro timer as soon as the applet loads",
+        "default" : false
+    },
+
     "show_dialog_messages" : {
         "type" : "checkbox",
         "description" : "Show Dialog Messages",
