@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-22 16:51+1000\n"
-"PO-Revision-Date: 2024-04-21 14:36+0200\n"
+"PO-Revision-Date: 2024-04-22 21:02+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -76,10 +76,6 @@ msgstr "Timer resetten"
 msgid "Reset Counts and Timer"
 msgstr "Tellingen en timer resetten"
 
-#: applet.js:749
-msgid "Skip To Next Timer"
-msgstr ""
-
 #: applet.js:756
 msgid "What is this?"
 msgstr "Wat is dit?"
@@ -144,16 +140,6 @@ msgstr "Pauzeer Pomodoro"
 msgid "Short break finished, ready to continue?"
 msgstr "Korte pauze voltooid, klaar om door te gaan?"
 
-#: applet.js:915
-#, fuzzy
-msgid "Start break"
-msgstr "Neem een korte pauze"
-
-#: applet.js:932
-#, fuzzy
-msgid "Pomodoro finished, ready to take a break?"
-msgstr "Pomodoro-set voltooid, je verdient een pauze!"
-
 #. metadata.json->description
 msgid "Great tool for boosted productivity!"
 msgstr "Een geweldige tool voor verhoogde productiviteit!"
@@ -182,19 +168,9 @@ msgstr "Aantal pomodori voor lange pauze:"
 msgid "Options"
 msgstr "Opties"
 
-#. settings-schema.json->start_automatically_on_load->description
-#, fuzzy
-msgid "Start the pomodoro timer as soon as the applet loads"
-msgstr "De pomodoro-timer weergeven in het appletpaneel"
-
 #. settings-schema.json->show_dialog_messages->description
 msgid "Show Dialog Messages"
 msgstr "Dialoogberichten weergeven"
-
-#. settings-schema.json->auto_start_after_pomodoro_ends->description
-#, fuzzy
-msgid "Auto start after a pomodoro ends"
-msgstr "Automatisch starten na het einde van een korte pauze"
 
 #. settings-schema.json->auto_start_after_short_break_ends->description
 msgid "Auto start after a short break ends"
@@ -215,10 +191,6 @@ msgstr "Een symbolisch pictogram gebruiken in het appletpaneel"
 #. settings-schema.json->show_timer->description
 msgid "Show the pomodoro timer in the applet panel"
 msgstr "De pomodoro-timer weergeven in het appletpaneel"
-
-#. settings-schema.json->hotkey->description
-msgid "Set the keybinding to open the applet menu"
-msgstr ""
 
 #. settings-schema.json->head_sounds->description
 msgid "Sounds"
@@ -271,3 +243,27 @@ msgstr "Startgeluid afspelen"
 #. settings-schema.json->start_sound_file->description
 msgid "Start Sound File"
 msgstr "Startgeluid bestand"
+
+#: applet.js:749
+msgid "Skip To Next Timer"
+msgstr "Ga naar de volgende timer"
+
+#: applet.js:915
+msgid "Start break"
+msgstr "Start pauze"
+
+#: applet.js:932
+msgid "Pomodoro finished, ready to take a break?"
+msgstr "Pomodoro afgelopen, ben je klaar om een pauze te nemen?"
+
+#. settings-schema.json->start_automatically_on_load->description
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr "Start de pomodoro-timer zodra de applet wordt geladen"
+
+#. settings-schema.json->auto_start_after_pomodoro_ends->description
+msgid "Auto start after a pomodoro ends"
+msgstr "Automatisch starten nadat een pomodoro is afgelopen"
+
+#. settings-schema.json->hotkey->description
+msgid "Set the keybinding to open the applet menu"
+msgstr "Stel de toetscombinatie in om het appletmenu te openen"
