@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-22 10:36+1000\n"
+"POT-Creation-Date: 2024-04-22 13:13+1000\n"
 "PO-Revision-Date: 2021-11-19 15:05-0300\n"
 "Last-Translator: Ben Southall <stellarpower@googlemail.com>\n"
 "Language-Team: Richard Decal <decal@uw.edu>\n"
@@ -57,99 +57,103 @@ msgstr "Tome un descanso largo"
 msgid "Pomodoro ended"
 msgstr "Pomodoro finalizado"
 
-#: applet.js:551
+#: applet.js:561
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 msgstr "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 
 # applet menu
 #. metadata.json->name
-#: applet.js:697
+#: applet.js:707
 msgid "Pomodoro Timer"
 msgstr "Temporizador pomodoro"
 
-#: applet.js:706
+#: applet.js:716
 msgid "Completed"
 msgstr "Completado"
 
-#: applet.js:714
+#: applet.js:724
 msgid "Reset Timer"
 msgstr "Reiniciar el temporizador"
 
-#: applet.js:722
+#: applet.js:732
 msgid "Reset Counts and Timer"
 msgstr "Reiniciar las cuentas y el temporizador"
 
-#: applet.js:731
+#: applet.js:741
+msgid "Skip To Next Timer"
+msgstr ""
+
+#: applet.js:748
 msgid "What is this?"
 msgstr "¿Qué es Pomodoro?"
 
-#: applet.js:771
+#: applet.js:788
 msgid "None"
 msgstr "Ninguno"
 
 # dialog
-#: applet.js:787
+#: applet.js:805
 msgid "Switch Off Pomodoro"
 msgstr "Apagar pomodoro"
 
-#: applet.js:793
+#: applet.js:811
 msgid "Start a new Pomodoro"
 msgstr "Comenzar un nuevo pomodoro"
 
-#: applet.js:799
+#: applet.js:817
 msgid "Hide"
 msgstr "Esconder"
 
-#: applet.js:811
+#: applet.js:829
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr "Pomodoro terminado, ¡merece un descanso!"
 
-#: applet.js:820
+#: applet.js:838
 msgid "Your break is over, start another pomodoro!"
 msgstr "Su descanso se ha terminado, ¡empiece otro Pomodoro!"
 
-#: applet.js:826
+#: applet.js:844
 #, javascript-format
 msgid "A new pomodoro begins in %s."
 msgstr "Un pomodoro nuevo comenzará en %s."
 
-#: applet.js:838
+#: applet.js:856
 #, javascript-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuto"
 msgstr[1] "%d minutos"
 
-#: applet.js:839
+#: applet.js:857
 #, javascript-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d segundo"
 msgstr[1] "%d segundos"
 
-#: applet.js:841
+#: applet.js:859
 #, javascript-format
 msgid "%s and %s"
 msgstr "%s y %s"
 
-#: applet.js:856
+#: applet.js:874
 msgid "Continue Current Pomodoro"
 msgstr "Continuar Pomodoro actual"
 
-#: applet.js:862 applet.js:895
+#: applet.js:880 applet.js:913
 msgid "Pause Pomodoro"
 msgstr "Pausar pomodoro"
 
-#: applet.js:873
+#: applet.js:891
 msgid "Short break finished, ready to continue?"
 msgstr "Se acabó el descanso corto, ¿listo para continuar?"
 
-#: applet.js:889
+#: applet.js:907
 #, fuzzy
 msgid "Start break"
 msgstr "Tome un descanso corto"
 
-#: applet.js:906
+#: applet.js:924
 #, fuzzy
 msgid "Pomodoro finished, ready to take a break?"
 msgstr "Pomodoro terminado, ¡merece un descanso!"

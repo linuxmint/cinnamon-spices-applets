@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Pomodoro Timer\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-22 10:36+1000\n"
+"POT-Creation-Date: 2024-04-22 13:13+1000\n"
 "PO-Revision-Date: 2017-02-24 23:32+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -57,61 +57,65 @@ msgstr "Uzmite duži predah"
 msgid "Pomodoro ended"
 msgstr "Pomodoro je završio"
 
-#: applet.js:551
+#: applet.js:561
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 msgstr ""
 
 #. metadata.json->name
-#: applet.js:697
+#: applet.js:707
 msgid "Pomodoro Timer"
 msgstr "Pomodoro odbrojavanje"
 
-#: applet.js:706
+#: applet.js:716
 msgid "Completed"
 msgstr "Završeno"
 
-#: applet.js:714
+#: applet.js:724
 msgid "Reset Timer"
 msgstr "Poništi odbrojavanje"
 
-#: applet.js:722
+#: applet.js:732
 msgid "Reset Counts and Timer"
 msgstr "Poništi brojeve i odbrojavanje"
 
-#: applet.js:731
+#: applet.js:741
+msgid "Skip To Next Timer"
+msgstr ""
+
+#: applet.js:748
 msgid "What is this?"
 msgstr "Što je ovo?"
 
-#: applet.js:771
+#: applet.js:788
 msgid "None"
 msgstr "Nijedan"
 
-#: applet.js:787
+#: applet.js:805
 msgid "Switch Off Pomodoro"
 msgstr "Isključi Pomodoro"
 
-#: applet.js:793
+#: applet.js:811
 msgid "Start a new Pomodoro"
 msgstr "Pokreni novi Pomodoro"
 
-#: applet.js:799
+#: applet.js:817
 msgid "Hide"
 msgstr "Sakrij"
 
-#: applet.js:811
+#: applet.js:829
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr "Pomodoro zadatak je završio, zaslužili ste predah!"
 
-#: applet.js:820
+#: applet.js:838
 msgid "Your break is over, start another pomodoro!"
 msgstr "Vaš predah je gotov, pokrenite novi pomodoro!"
 
-#: applet.js:826
+#: applet.js:844
 #, fuzzy, javascript-format
 msgid "A new pomodoro begins in %s."
 msgstr "Novi pomodoro počinje za "
 
-#: applet.js:838
+#: applet.js:856
 #, javascript-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -119,7 +123,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: applet.js:839
+#: applet.js:857
 #, javascript-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -127,29 +131,29 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: applet.js:841
+#: applet.js:859
 #, javascript-format
 msgid "%s and %s"
 msgstr ""
 
-#: applet.js:856
+#: applet.js:874
 msgid "Continue Current Pomodoro"
 msgstr "Nastavi trenutni Pomodoro"
 
-#: applet.js:862 applet.js:895
+#: applet.js:880 applet.js:913
 msgid "Pause Pomodoro"
 msgstr "Pauziraj Pomodoro"
 
-#: applet.js:873
+#: applet.js:891
 msgid "Short break finished, ready to continue?"
 msgstr "Kratak predah je završio, spremni za nastavak?"
 
-#: applet.js:889
+#: applet.js:907
 #, fuzzy
 msgid "Start break"
 msgstr "Uzmite kratki predah"
 
-#: applet.js:906
+#: applet.js:924
 #, fuzzy
 msgid "Pomodoro finished, ready to take a break?"
 msgstr "Pomodoro zadatak je završio, zaslužili ste predah!"

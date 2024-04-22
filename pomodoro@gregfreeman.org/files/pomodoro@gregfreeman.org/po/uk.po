@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-22 10:36+1000\n"
+"POT-Creation-Date: 2024-04-22 13:13+1000\n"
 "PO-Revision-Date: 2022-01-05 13:55+0200\n"
 "Last-Translator: Rutar <RutarAndriy@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -57,61 +57,65 @@ msgstr "Зробіть довгу перерву"
 msgid "Pomodoro ended"
 msgstr "Pomodoro завершено"
 
-#: applet.js:551
+#: applet.js:561
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 msgstr "https://uk.wikipedia.org/wiki/Метод_Pomodoro"
 
 #. metadata.json->name
-#: applet.js:697
+#: applet.js:707
 msgid "Pomodoro Timer"
 msgstr "Pomodoro Таймер"
 
-#: applet.js:706
+#: applet.js:716
 msgid "Completed"
 msgstr "Завершено"
 
-#: applet.js:714
+#: applet.js:724
 msgid "Reset Timer"
 msgstr "Скинути таймер"
 
-#: applet.js:722
+#: applet.js:732
 msgid "Reset Counts and Timer"
 msgstr "Скинути лічильники і таймер"
 
-#: applet.js:731
+#: applet.js:741
+msgid "Skip To Next Timer"
+msgstr ""
+
+#: applet.js:748
 msgid "What is this?"
 msgstr "Що це?"
 
-#: applet.js:771
+#: applet.js:788
 msgid "None"
 msgstr "Жодного"
 
-#: applet.js:787
+#: applet.js:805
 msgid "Switch Off Pomodoro"
 msgstr "Вимкнути Pomodoro"
 
-#: applet.js:793
+#: applet.js:811
 msgid "Start a new Pomodoro"
 msgstr "Почати новий Pomodoro"
 
-#: applet.js:799
+#: applet.js:817
 msgid "Hide"
 msgstr "Приховати"
 
-#: applet.js:811
+#: applet.js:829
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr "Завдання Pomodoro закінчено, ви заслуговуєте на відпочинок!"
 
-#: applet.js:820
+#: applet.js:838
 msgid "Your break is over, start another pomodoro!"
 msgstr "Ваша перерва закінчилася, почніть ще один Pomodoro!"
 
-#: applet.js:826
+#: applet.js:844
 #, javascript-format
 msgid "A new pomodoro begins in %s."
 msgstr "Новий Pomodoro починається через %s."
 
-#: applet.js:838
+#: applet.js:856
 #, javascript-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -119,7 +123,7 @@ msgstr[0] "%d хвилина"
 msgstr[1] "%d хвилини"
 msgstr[2] "%d хвилин"
 
-#: applet.js:839
+#: applet.js:857
 #, javascript-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -127,29 +131,29 @@ msgstr[0] "%d секунда"
 msgstr[1] "%d секунди"
 msgstr[2] "%d секунд"
 
-#: applet.js:841
+#: applet.js:859
 #, javascript-format
 msgid "%s and %s"
 msgstr "%s і %s"
 
-#: applet.js:856
+#: applet.js:874
 msgid "Continue Current Pomodoro"
 msgstr "Продовжити поточний Pomodoro"
 
-#: applet.js:862 applet.js:895
+#: applet.js:880 applet.js:913
 msgid "Pause Pomodoro"
 msgstr "Призупинити Pomodoro"
 
-#: applet.js:873
+#: applet.js:891
 msgid "Short break finished, ready to continue?"
 msgstr "Коротка перерва закінчилася, готові продовжити?"
 
-#: applet.js:889
+#: applet.js:907
 #, fuzzy
 msgid "Start break"
 msgstr "Зробіть коротку перерву"
 
-#: applet.js:906
+#: applet.js:924
 #, fuzzy
 msgid "Pomodoro finished, ready to take a break?"
 msgstr "Завдання Pomodoro закінчено, ви заслуговуєте на відпочинок!"
