@@ -1,143 +1,155 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-25 22:26+0100\n"
+"Project-Id-Version: pomodoro@gregfreeman.org 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-22 10:36+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: applet.js:394
-msgid "Pomodoro started"
+#: applet.js:265
+msgid "Short break running"
 msgstr ""
 
-#: applet.js:437 applet.js:737
-msgid "Waiting to start"
+#: applet.js:268
+msgid "Long break running"
 msgstr ""
 
-#: applet.js:455
+#: applet.js:271
 #, javascript-format
 msgid "Pomodori %d, set %d running"
 msgstr ""
 
-#: applet.js:462
+#: applet.js:276
+msgid "Waiting to start"
+msgstr ""
+
+#: applet.js:329
+msgid "Pomodoro started"
+msgstr ""
+
+#: applet.js:394
 msgid "Let's go to work!"
 msgstr ""
 
-#: applet.js:477
+#: applet.js:412
 msgid "Take a short break"
 msgstr ""
 
-#: applet.js:478
-msgid "Short break running"
-msgstr ""
-
-#: applet.js:497
+#: applet.js:432
 msgid "Take a long break"
 msgstr ""
 
-#: applet.js:499
-msgid "Long break running"
-msgstr ""
-
-#: applet.js:533
+#: applet.js:465
 msgid "Pomodoro ended"
 msgstr ""
 
-#: applet.js:665
+#: applet.js:551
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 msgstr ""
 
 #. metadata.json->name
-#: applet.js:837
+#: applet.js:697
 msgid "Pomodoro Timer"
 msgstr ""
 
-#: applet.js:848
+#: applet.js:706
 msgid "Completed"
 msgstr ""
 
-#: applet.js:861
+#: applet.js:714
 msgid "Reset Timer"
 msgstr ""
 
-#: applet.js:873
+#: applet.js:722
 msgid "Reset Counts and Timer"
 msgstr ""
 
-#: applet.js:886
+#: applet.js:731
 msgid "What is this?"
 msgstr ""
 
-#: applet.js:943
+#: applet.js:771
 msgid "None"
 msgstr ""
 
-#: applet.js:973
+#: applet.js:787
 msgid "Switch Off Pomodoro"
 msgstr ""
 
-#: applet.js:979
+#: applet.js:793
 msgid "Start a new Pomodoro"
 msgstr ""
 
-#: applet.js:985
+#: applet.js:799
 msgid "Hide"
 msgstr ""
 
-#: applet.js:997
+#: applet.js:811
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr ""
 
-#: applet.js:1005
+#: applet.js:820
 msgid "Your break is over, start another pomodoro!"
 msgstr ""
 
-#: applet.js:1010
+#: applet.js:826
 #, javascript-format
 msgid "A new pomodoro begins in %s."
 msgstr ""
 
-#: applet.js:1021
+#: applet.js:838
 #, javascript-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: applet.js:1022
+#: applet.js:839
 #, javascript-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: applet.js:1024
+#: applet.js:841
 #, javascript-format
 msgid "%s and %s"
 msgstr ""
 
-#: applet.js:1048
+#: applet.js:856
 msgid "Continue Current Pomodoro"
 msgstr ""
 
-#: applet.js:1054
+#: applet.js:862 applet.js:895
 msgid "Pause Pomodoro"
 msgstr ""
 
-#: applet.js:1065
+#: applet.js:873
 msgid "Short break finished, ready to continue?"
+msgstr ""
+
+#: applet.js:889
+msgid "Start break"
+msgstr ""
+
+#: applet.js:906
+msgid "Pomodoro finished, ready to take a break?"
+msgstr ""
+
+#. metadata.json->description
+msgid "Great tool for boosted productivity!"
 msgstr ""
 
 #. settings-schema.json->head_durations->description
@@ -168,6 +180,10 @@ msgstr ""
 msgid "Show Dialog Messages"
 msgstr ""
 
+#. settings-schema.json->auto_start_after_pomodoro_ends->description
+msgid "Auto start after a pomodoro ends"
+msgstr ""
+
 #. settings-schema.json->auto_start_after_short_break_ends->description
 msgid "Auto start after a short break ends"
 msgstr ""
@@ -186,6 +202,10 @@ msgstr ""
 
 #. settings-schema.json->show_timer->description
 msgid "Show the pomodoro timer in the applet panel"
+msgstr ""
+
+#. settings-schema.json->hotkey->description
+msgid "Set the keybinding to open the applet menu"
 msgstr ""
 
 #. settings-schema.json->head_sounds->description
@@ -237,8 +257,4 @@ msgstr ""
 
 #. settings-schema.json->start_sound_file->description
 msgid "Start Sound File"
-msgstr ""
-
-#. metadata.json->description
-msgid "Great tool for boosted productivity!"
 msgstr ""
