@@ -76,6 +76,8 @@ class TimerQueue {
         let timer = this.getCurrentTimer();
         if (timer === undefined) return false;
         if (timer.isRunning() && this._timerFinishedHandler !== null) {
+            timer.stop();
+            timer.reset();
             this._timerFinished(timer);
         }
     }

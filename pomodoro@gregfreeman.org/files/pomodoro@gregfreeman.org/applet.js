@@ -544,7 +544,17 @@ class PomodoroApplet extends Applet.TextIconApplet {
             this._numPomodoriFinished = 0;
             this._numPomodoroSetFinished = 0;
             this._appletMenu.updateCounts(0, 0);
-            this._clearAppletTooltip();
+        });
+
+        menu.connect('skip-timer', () => {
+            let timer = this._timerQueue.getCurrentTimer();
+            this._timerQueue.skip();
+            if (timer === this._timers.longBreak) {
+                if (!this._opt_autoStartNewAfterFinish) {
+                    this._longBreakdialog.close();
+                    this._startNewTimerQueue();
+                }
+            }
         });
     
         menu.connect('what-is-this', () => {
@@ -722,10 +732,17 @@ class PomodoroMenu extends Applet.AppletPopupMenu {
         let resetAll = new PopupMenu.PopupMenuItem(_("Reset Counts and Timer"));
         resetAll.connect('activate', () => {
             this.toggleTimerState(false);
-            this.emit('reset-timer');
             this.emit('reset-counts');
+            this.emit('reset-timer');
         });
         this.addMenuItem(resetAll);
+
+        // "Skip To Next Timer" menu item for allowing the user to end the current timer early
+        let skipTimer = new PopupMenu.PopupMenuItem(_("Skip To Next Timer"));
+        skipTimer.connect('activate', () => {
+            this.emit('skip-timer');
+        });
+        this.addMenuItem(skipTimer);
 
         // "What is this?" menu item for additional information
         let whatisthis = new PopupMenu.PopupMenuItem(_("What is this?"));
@@ -743,7 +760,7 @@ class PomodoroMenu extends Applet.AppletPopupMenu {
         let text = '';
 
         if (this._pomodoroSetCount > 0) {
-            text = this._pomodoriCountLabel.text;
+            text = Array(this._pomodoroSetCount + 1).join('\u25cf');
         }
 
         if (pomodoriNumber == 4) {
@@ -769,6 +786,7 @@ class PomodoroMenu extends Applet.AppletPopupMenu {
         this._pomodoroCount = pomodoroCount;
         this._pomodoroSetCount = setCount;
         let text = setCount == 0 ? _("None") : Array(setCount + 1).join('\u25cf');
+
         this._pomodoriCountLabel.text = text;
     }
 }
