@@ -4,18 +4,23 @@
 const UUID = 'mybookmarks@markbokil.com';
 const Version = "1.0.4";
 const Lang = imports.lang;
-const St = imports.gi.St;
 const Cinnamon = imports.gi.Cinnamon;
 const Applet = imports.ui.applet;
-const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
+const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
 const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio; // file monitor
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const AppletDir = imports.ui.appletManager.appletMeta['mybookmarks@markbokil.com'].path;
-const PropertiesFile = GLib.build_filenamev([global.userdatadir, 'applets/mybookmarks@markbokil.com/mybookmarks.properties']);
+
+// When no configuration exists
+// Save all changes to this location, load this if the file exists
+const DefaultPropertiesFile = GLib.build_filenamev([global.userdatadir, 'applets/mybookmarks@markbokil.com/mybookmarks.properties']);
+const ConfigFilePath = GLib.get_home_dir() + '/.config/cinnamon/spices/' + UUID;
+const PropertiesFile = ConfigFilePath + '/mybookmarks.properties';
+
 const HelpURL = "http://markbokil.com/downloads/mybookmarks/help.php?appname=mybookmarks&version=" + Version;
 const AboutURL = "http://markbokil.com/downloads/mybookmarks/about.php?appname=mybookmarks&version=" + Version;
 const AppIcon = 'mybookmarks.svg';
@@ -72,8 +77,31 @@ MyApplet.prototype = {
 
             this.set_applet_tooltip(_("My Bookmarks"));
 
+            // Check to see if the config directory exists
+            let configFile = Gio.file_new_for_path(ConfigFilePath);
+            if (!configFile.query_exists(null)) {
+                // Make the directory
+                Util.spawnCommandLine('mkdir ' + ConfigFilePath);
+                // Give it enough time and continue with init
+                Mainloop.timeout_add(2000, () => this.__init(orientation));
+            } else {
+                this.__init(orientation);
+            }
+        } catch (e) {
+            global.logError(e);
+        }
+    },
+
+    __init: function(orientation) {
+        try {
              // watch props file for changes
             let file = Gio.file_new_for_path(PropertiesFile);
+            if (!file.query_exists(null)) {
+                // If not, duplicate the default file and monitor it for changes
+                let defaultFile = Gio.file_new_for_path(DefaultPropertiesFile);
+                defaultFile.copy(file, Gio.FileCopyFlags.OVERWRITE, null, null);
+            }
+
             this._monitor = file.monitor(Gio.FileMonitorFlags.NONE, null);
             this._monitor.connect('changed', Lang.bind(this, this._on_file_changed));
 
@@ -176,7 +204,7 @@ MyApplet.prototype = {
     },
 
     editProperties: function () {
-        Main.Util.spawnCommandLine(OpenFileCmd + " " + PropertiesFile);
+        Util.spawnCommandLine(OpenFileCmd + " " + PropertiesFile);
     },
 
     doRefresh: function () {
@@ -185,11 +213,11 @@ MyApplet.prototype = {
     },
 
     doHelp: function () {
-        Main.Util.spawnCommandLine(OpenFileCmd + " " + HelpURL);
+        Util.spawnCommandLine(OpenFileCmd + " " + HelpURL);
     },
 
     doAbout: function () {
-        Main.Util.spawnCommandLine(OpenFileCmd + " " + AboutURL);
+        Util.spawnCommandLine(OpenFileCmd + " " + AboutURL);
     },
 
     // wrapper for global.log()
