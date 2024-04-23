@@ -38,6 +38,7 @@ MyApplet.prototype = {
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         global.log(this.settings.settings);
         this.settings.bind("show-notifications", "showNotifications", null);
+        this.settings.bind("show-silent-notifications", "showSilentNotifications", null)
         this.settings.bind("show-caps-lock-indicator", "showCapsLockIndicator", this._updateIconVisibility);
         this.settings.bind("show-num-lock-indicator", "showNumLockIndicator", this._updateIconVisibility);
         this.settings.bind("show-scr-lock-indicator", "showScrLockIndicator", this._updateIconVisibility);
@@ -145,7 +146,8 @@ MyApplet.prototype = {
             icon_size: ICON_SIZE
         });
         this._notification = new MessageTray.Notification(this._source, _("Lock Keys"), text, {
-            icon: icon
+            icon: icon,
+            silent: this.showSilentNotifications
         });
         this._notification.setUrgency(MessageTray.Urgency.NORMAL);
         this._notification.setTransient(true);
