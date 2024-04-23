@@ -13,10 +13,10 @@ Cinnamenu is a full featured alternative to the standard Cinnamon menu with grid
    * View apps in a list or grid.
    * Options on where to show session and favorite app buttons.
    * Change icon sizes.
- * Built in calculator: (including constants and functions: E, PI, abs, acos, acosh, asin, asinh, atan, atanh, cbrt, ceil, cos, cosh, exp, floor, log, max, min, pow, random, round, sign, sin, sinh, sqrt, tan, tanh and trunc. All angles are in radians.)
  * Browser bookmarks and history search
  * Web search suggestions & Wikipedia search.
- * Change order of categories using drag & drop. (right click on any category to reset to default category order)
+ * Built in calculator. This is evaluated as a javascript expression so all javascript operators and Math functions are valid, including constants: E, PI and functions (trig) sin, asin, sinh, asinh, cos, tan, etc. and cbrt, exp, floor, log, log10, pow, random, round, sqrt, etc. All angles are in radians. (see [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators) for list of operators and [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) for list of constants and functions)
+
 
 ----
 

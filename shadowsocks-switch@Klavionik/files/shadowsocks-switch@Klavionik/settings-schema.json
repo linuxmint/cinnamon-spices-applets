@@ -1,0 +1,11 @@
+{
+  "section1": {
+    "type": "section",
+    "description": "General"
+  },
+  "config": {
+    "type": "filechooser",
+    "description": "Shadowsocks configuration",
+    "default": "file:///etc/shadowsocks-libev/config.json"
+  }
+}

@@ -1,7 +1,125 @@
 {
-    "head": {
-        "type": "header",
-        "description": "General Settings"
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "General",
+            "Style"
+        ],
+        "General": {
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "general",
+                "display_mode",
+                "low_alert",
+                "advanced"
+            ]
+        },
+        "Style": {
+            "type": "page",
+            "title": "Style",
+            "sections": [
+                "bam_normal",
+                "bam_discharging",
+                "bam_alert",
+                "bam_alert_discharging",
+                "bam_limit_exceeded",
+                "bam_limit_exceeded2"
+            ]
+        },
+        "general": {
+            "type": "section",
+            "title": "General Settings",
+            "keys": [
+                "refreshInterval-spinner",
+                "alertPercentage",
+                "recharged_alert",
+                "recharged_alert_percentage"
+            ]
+        },
+        "display_mode": {
+            "type": "section",
+            "title": "Display Options",
+            "keys": [
+                "displayType",
+                "iconTheme",
+                "time_remaining_display",
+                "time_remaining_toolbar",
+                "time_remaining_tooltip"
+            ]
+        },
+        "low_alert": {
+            "type": "section",
+            "title": "Battery Low Alert Settings",
+            "keys": [
+                "useBatteryLowSound",
+                "chooseBatteryLowSound",
+                "batteryLowSound",
+                "batteryShutdownSound",
+                "notifyBatteryLowSound"
+            ]
+        },
+        "advanced": {
+            "type": "section",
+            "title": "Advanced",
+            "keys": [
+                "customBatteryPath"
+            ]
+        },
+        "bam_normal": {
+            "type": "section",
+            "title": "Normal",
+            "keys": [
+                "normal_background_color",
+                "normal_border_color",
+                "normal_font_size"
+            ]
+        },
+        "bam_discharging": {
+            "type": "section",
+            "title": "Discharging",
+            "keys": [
+                "discharging_background_color",
+                "discharging_border_color",
+                "discharging_font_size"
+            ]
+        },
+        "bam_alert": {
+            "type": "section",
+            "title": "Alert",
+            "keys": [
+                "alert_background_color",
+                "alert_border_color",
+                "alert_font_size"
+            ]
+        },
+        "bam_alert_discharging": {
+            "type": "section",
+            "title": "Alert Discharging",
+            "keys": [
+                "alert_discharging_background_color",
+                "alert_discharging_border_color",
+                "alert_discharging_font_size"
+            ]
+        },
+        "bam_limit_exceeded": {
+            "type": "section",
+            "title": "Limit Exceeded",
+            "keys": [
+                "limit_exceeded_background_color",
+                "limit_exceeded_border_color",
+                "limit_exceeded_font_size"
+            ]
+        },
+        "bam_limit_exceeded2": {
+            "type": "section",
+            "title": "Limit Exceeded - Critical",
+            "keys": [
+                "limit_exceeded2_background_color",
+                "limit_exceeded2_border_color",
+                "limit_exceeded2_font_size"
+            ]
+        }
     },
     "refreshInterval-spinner": {
         "type": "spinbutton",
@@ -14,34 +132,72 @@
         "tooltip": "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine. This also governs the flash speed."
     },
     "alertPercentage": {
-        "type": "scale",
+        "type": "spinbutton",
         "default": 25,
         "min": 10,
         "max": 40,
-        "step": 1,
+        "step": 5,
+        "units": "%",
         "description": "Percentage Battery Charge at which Alert Displayed",
         "tooltip": "Percentage of Battery Charge at which Orange Warning Background is displayed - It is also shown and can be adjusted in the Applet left click menu"
     },
-    "head1": {
-        "type": "header",
-        "description": "Display Mode"
+    "recharged_alert": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Visible Alert when Recharging",
+        "tooltip": "Provide visible alert when battery is recharged to a certain threshold"
+    },
+    "recharged_alert_percentage": {
+        "type": "spinbutton",
+        "default": 80,
+        "min": 45,
+        "max": 100,
+        "step": 5,
+        "units": "%",
+        "description": "Percentage threshold for visible recharged alert",
+        "dependency": "recharged_alert"
     },
     "displayType": {
         "type": "combobox",
         "default": "classic",
         "options": {
-            "Classic - Battery Percentage with extended messages for horizontal panel": "classic",
-            "Classic Plus - Classic with addition of Battery Icon": "classicPlus",
-            "Compact - Battery Percentage without extended messages": "compact",
-            "Compact Plus - Compact with addition of Battery Icon": "compactPlus",
-            "Icon Only on coloured background indicating status": "icon"
+            "Classic": "classic",
+            "Classic Plus": "classicPlus",
+            "Compact": "compact",
+            "Compact Plus": "compactPlus",
+            "Icon Only": "icon"
         },
         "description": "Toolbar Display Type",
-        "tooltip": "This feature offers the Classic (original) display with optional battery icon and some more compact displays suitable for a vertical panel (CompactCompact Plus and Icon Only)"
+        "tooltip": "The following display options are available (including Compact, Compact Plus, and Icon Only for vertical panels):\n  Classic: Battery percentage with extended messages for horizontal panel\n  Classic Plus: Classic with the addition of a battery icon\n  Compact: Battery percentage without extended messages\n  Compact Plus: Compact with the addition of a battery icon\n  Icon Only: The battery icon on a colored background indicating the current status"
     },
-    "head2": {
-        "type": "header",
-        "description": "Battery Low Alert Settings"
+    "iconTheme": {
+        "type": "combobox",
+        "default": "classic",
+        "options": {
+            "Classic": "classic",
+            "Yaru Light": "yaru-light",
+            "Yaru Dark": "yaru-dark"
+        },
+        "description": "Icon Theme",
+        "tooltip": "Icon Theme"
+    },
+    "time_remaining_display": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Append estimated time remaining to chosen display type",
+        "tooltip": "This will append an estimate to the above option for time remaining based on the amount of remaining battery power"
+    },
+    "time_remaining_toolbar": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Append estimated time remaining to toolbar menu",
+        "tooltip": "This will append an estimate to the toolbar menu for time remaining based on the amount of remaining battery power"
+    },
+    "time_remaining_tooltip": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Append estimated time remaining to tooltip",
+        "tooltip": "This will append an estimate to the tooltip for time remaining based on the amount of remaining battery power"
     },
     "useBatteryLowSound": {
         "type": "checkbox",
@@ -78,20 +234,6 @@
         "description": "Provide notification when user specified sound file is in use (Recommended)",
         "tooltip": "To remind that the volume may need to be set sensibly in public places"
     },
-    "head3": {
-        "type": "header",
-        "description": "Household Tasks"
-    },
-    "deleteTempraryFiles": {
-        "type": "button",
-        "description": "Delete temporary files after upgrade to applet version 1.4",
-        "callback": "deleteTemporaryFiles",
-        "tooltip": "Applet versions prior to 1.4 used temporary files in the home directory. These are not needed anymore and can be deleted."
-    },
-    "head4": {
-        "type": "header",
-        "description": "Advanced"
-    },
     "customBatteryPath": {
         "default": "",
         "type": "filechooser",
@@ -99,5 +241,131 @@
         "tooltip": "Choose your own power_supply object e.g. for monitoring your secondary battery.\n\nDefault:\n/sys/class/power_supply/BAT0",
         "allow-none": true,
         "select-dir": true
+    },
+    "normal_background_color": {
+        "type": "colorchooser",
+        "description": "Background Color",
+        "default": "rgba(0, 255, 0, 0.3)",
+        "tooltip": "RGB or RGBA"
+    },
+    "normal_border_color": {
+        "type": "colorchooser",
+        "description": "Border Color",
+        "default": "rgba(0, 255, 0, 0.5)",
+        "tooltip": "RGB or RGBA"
+    },
+    "normal_font_size": {
+        "type": "spinbutton",
+        "default": 95,
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "units": "%",
+        "description": "Font Size"
+    },
+    "discharging_background_color": {
+        "type": "colorchooser",
+        "description": "Background Color",
+        "default": "rgba(0, 255, 0, 0.3)",
+        "tooltip": "RGB or RGBA"
+    },
+    "discharging_border_color": {
+        "type": "colorchooser",
+        "description": "Border Color",
+        "default": "rgba(255, 0, 0, 1)",
+        "tooltip": "RGB or RGBA"
+    },
+    "discharging_font_size": {
+        "type": "spinbutton",
+        "default": 95,
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "units": "%",
+        "description": "Font Size"
+    },
+    "alert_background_color": {
+        "type": "colorchooser",
+        "description": "Background Color",
+        "default": "rgba(255, 165, 0, 1)",
+        "tooltip": "RGB or RGBA"
+    },
+    "alert_border_color": {
+        "type": "colorchooser",
+        "description": "Border Color",
+        "default": "rgba(255, 165, 0, 1)",
+        "tooltip": "RGB or RGBA"
+    },
+    "alert_font_size": {
+        "type": "spinbutton",
+        "default": 95,
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "units": "%",
+        "description": "Font Size"
+    },
+    "alert_discharging_background_color": {
+        "type": "colorchooser",
+        "description": "Background Color",
+        "default": "rgba(255, 255, 255, 1)",
+        "tooltip": "RGB or RGBA"
+    },
+    "alert_discharging_border_color": {
+        "type": "colorchooser",
+        "description": "Border Color",
+        "default": "rgba(255, 0, 0, 1)",
+        "tooltip": "RGB or RGBA"
+    },
+    "alert_discharging_font_size": {
+        "type": "spinbutton",
+        "default": 95,
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "units": "%",
+        "description": "Font Size"
+    },
+    "limit_exceeded_background_color": {
+        "type": "colorchooser",
+        "description": "Background Color",
+        "default": "rgba(255, 0, 0, 1)",
+        "tooltip": "RGB or RGBA"
+    },
+    "limit_exceeded_border_color": {
+        "type": "colorchooser",
+        "description": "Border Color",
+        "default": "rgba(255, 0, 0, 0)",
+        "tooltip": "RGB or RGBA"
+    },
+    "limit_exceeded_font_size": {
+        "type": "spinbutton",
+        "default": 95,
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "units": "%",
+        "description": "Font Size"
+    },
+    "limit_exceeded2_background_color": {
+        "type": "colorchooser",
+        "description": "Background Color",
+        "default": "rgba(255, 255, 255, 1)",
+        "tooltip": "RGB or RGBA"
+    },
+    "limit_exceeded2_border_color": {
+        "type": "colorchooser",
+        "description": "Border Color",
+        "default": "rgba(255, 255, 255, 0)",
+        "tooltip": "RGB or RGBA"
+    },
+    "limit_exceeded2_font_size": {
+        "type": "spinbutton",
+        "default": 95,
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "units": "%",
+        "description": "Font Size"
     }
 }

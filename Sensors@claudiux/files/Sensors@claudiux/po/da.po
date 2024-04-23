@@ -2,32 +2,123 @@
 # Copyright (C) 2020 claudiux aka Claude Clerc
 # This file is distributed under the same license as the Sensors@claudiux package.
 # claudiux <claude.clerc@gmail.com>, 2020.
+# Alan Mortensen <alanmortensen.am@gmail.com>, 2020, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-24 00:44+0200\n"
-"PO-Revision-Date: 2020-12-14 15:55+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-31 10:36+0200\n"
+"PO-Revision-Date: 2023-12-23 16:27+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: checkDependencies.js:279
+#. metadata.json->name
+#: applet.js:101
+msgid "Sensors Monitor"
+msgstr "Sensorovervågning"
+
+#: applet.js:268
+msgid "Suspended"
+msgstr ""
+
+#: applet.js:484 applet.js:526
+msgid "high:"
+msgstr "høj:"
+
+#: applet.js:484 applet.js:486 applet.js:526 applet.js:528 applet.js:569
+msgid "n/a"
+msgstr "—"
+
+#: applet.js:486 applet.js:528
+msgid "crit:"
+msgstr "krit:"
+
+#: applet.js:569 applet.js:612
+msgid "min:"
+msgstr "min:"
+
+#: applet.js:614
+msgid "max:"
+msgstr "max:"
+
+#: applet.js:642
+msgid "No intrusion detected"
+msgstr "Ingen indtrængen detekteret"
+
+#: applet.js:642
+msgid "INTRUSION DETECTED!"
+msgstr "INDTRÆNGEN DETEKTERET!"
+
+#: applet.js:662
+msgid "Must be configured!"
+msgstr "Skal konfigureres!"
+
+#: applet.js:925
+msgid "Settings"
+msgstr "Indstillinger"
+
+#: applet.js:925
+msgid ":"
+msgstr ":"
+
+#. settings-schema.json->page_General->title
+#: applet.js:932
+msgid "⚙ General"
+msgstr "⚙ Generelt"
+
+#: applet.js:942
+msgid "🌡 Temperature sensors"
+msgstr "🌡 Temperatursensorer"
+
+#: applet.js:952
+msgid "🤂 Fan sensors"
+msgstr "🤂 Ventilatorsensorer"
+
+#: applet.js:962
+msgid "🗲 Voltage sensors"
+msgstr "🗲 Spændingssensorer"
+
+#: applet.js:972
+msgid "⮿ Intrusion sensors"
+msgstr "⮿ Indtrængningssensorer"
+
+#. settings-schema.json->xsensors->description
+#: applet.js:983
+msgid "Run xsensors"
+msgstr "Kør xsensors"
+
+#: applet.js:992
+#, fuzzy
+msgid "Suspend Sensors"
+msgstr "Kør xsensors"
+
+#: applet.js:1003
+msgid "Reload this applet"
+msgstr "Genindlæs panelprogrammet"
+
+#: applet.js:1295
+#, javascript-format
+msgid "Are you sure you want to remove '%s'?"
+msgstr "Er du sikker på at du vil fjerne “%s”?"
+
+#: lib/checkDependencies.js:317
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "Panelprogrammet %s er fuldt fungerende."
 
-#: checkDependencies.js:280
+#: lib/checkDependencies.js:318
 msgid "All dependencies are installed"
 msgstr "Alle afhængigheder er installeret"
 
-#: checkDependencies.js:305
+#: lib/checkDependencies.js:346
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -35,93 +126,64 @@ msgstr ""
 "Det lader til, nogle programmer mangler for at give panelprogrammet alle "
 "dets funktioner."
 
-#: checkDependencies.js:306
+#: lib/checkDependencies.js:347
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Udfør følgende kommandoer i terminalen, som lige åbnede:"
 
-#: checkDependencies.js:307
+#: lib/checkDependencies.js:348
 msgid "Some dependencies are not installed!"
 msgstr "Nogle afhængigheder er ikke installeret!"
 
-#. metadata.json->name
-#: applet.js:83
-msgid "Sensors Monitor"
-msgstr "Sensorovervågning"
-
-#: applet.js:352
-msgid "high:"
-msgstr "høj:"
-
-#: applet.js:352 applet.js:354 applet.js:379
-msgid "n/a"
-msgstr "—"
-
-#: applet.js:354
-msgid "crit:"
-msgstr "krit:"
-
-#: applet.js:379
-msgid "min:"
-msgstr "min:"
-
-#: applet.js:403
-msgid "max:"
-msgstr "max:"
-
-#: applet.js:425
-msgid "No intrusion detected"
-msgstr "Ingen indtrængen detekteret"
-
-#: applet.js:425
-msgid "INTRUSION DETECTED!"
-msgstr "INDTRÆNGEN DETEKTERET!"
-
-#: applet.js:437
-msgid "Must be configured!"
-msgstr "Skal konfigureres!"
-
-#: applet.js:589
-msgid "Settings"
-msgstr "Indstillinger"
-
-#: applet.js:589
-msgid ":"
-msgstr ":"
-
-#. settings-schema.json->page_General->title
-#: applet.js:596
-msgid "⚙ General"
-msgstr "⚙ Generelt"
-
-#: applet.js:606
-msgid "🌡 Temperature sensors"
-msgstr "🌡 Temperatursensorer"
-
-#: applet.js:616
-msgid "🤂 Fan sensors"
-msgstr "🤂 Ventilatorsensorer"
-
-#: applet.js:626
-msgid "🗲 Voltage sensors"
-msgstr "🗲 Spændingssensorer"
-
-#: applet.js:636
-msgid "⮿ Intrusion sensors"
-msgstr "⮿ Indtrængningssensorer"
-
-#. settings-schema.json->xsensors->description
-#: applet.js:647
-msgid "Run xsensors"
-msgstr "Kør xsensors"
-
-#: applet.js:658
-msgid "Reload this applet"
-msgstr "Genindlæs panelprogrammet"
-
-#: applet.js:914
+#: lib/util.js:244
 #, javascript-format
-msgid "Are you sure you want to remove '%s'?"
-msgstr "Er du sikker på at du vil fjerne “%s”?"
+msgid "Execution of '%s' failed:"
+msgstr "Kørsel af “%s” mislykkedes:"
+
+#: scripts/xs.py:206
+msgid "Previous instance"
+msgstr "Forrige forekomst"
+
+#: scripts/xs.py:210
+msgid "Next instance"
+msgstr "Næste forekomst"
+
+#: scripts/xs.py:219
+msgid "More options"
+msgstr "Flere indstillinger"
+
+#: scripts/xs.py:225
+msgid "Import from a file"
+msgstr "Importér fra en fil"
+
+#: scripts/xs.py:230
+msgid "Export to a file"
+msgstr "Eksportér til en fil"
+
+#: scripts/xs.py:235
+msgid "Reset to defaults"
+msgstr "Gendan standardindstillinger"
+
+#: scripts/xs.py:244
+#, python-format
+msgid "Reload %s"
+msgstr "Genindlæs %s"
+
+#: scripts/xs.py:425
+#, python-format
+msgid "Settings for %s"
+msgstr "Indstillinger for %s"
+
+#: scripts/xs.py:517
+msgid "Select or enter file to export to"
+msgstr "Vælg eller indtast filnavn, der skal eksporteres til"
+
+#: scripts/xs.py:525 scripts/xs.py:546
+msgid "JSON files"
+msgstr "JSON-filer"
+
+#: scripts/xs.py:539
+msgid "Select a JSON file to import"
+msgstr "Vælg en JSON-fil, der skal importeres"
 
 #. metadata.json->description
 msgid ""
@@ -157,6 +219,10 @@ msgstr "⮿ Indtrængen"
 msgid "Options"
 msgstr "Valgmuligheder"
 
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr ""
+
 #. settings-schema.json->section_Report->title
 msgid "Sensors values"
 msgstr "Sensorværdier"
@@ -164,6 +230,10 @@ msgstr "Sensorværdier"
 #. settings-schema.json->section_remove_incompatible_xlets->title
 msgid "Remove from panels certain applets that also use sensors"
 msgstr "Fjern fra panelet visse panelprogrammer, som også bruger sensorer"
+
+#. settings-schema.json->section_tempDisktemp->title
+msgid "For the time being, disk temperature can only be read by root."
+msgstr "Som det er lige nu, kan disktemperatur kun læses af administrator."
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -175,6 +245,10 @@ msgstr "Visning"
 #. settings-schema.json->section_tempSensors->title
 msgid "Temperature sensors"
 msgstr "Temperatursensorer"
+
+#. settings-schema.json->section_tempDisks->title
+msgid "Disk temperature sensors"
+msgstr "Disktemperatursensorer"
 
 #. settings-schema.json->section_fanSensors->title
 msgid "Fan sensors"
@@ -245,8 +319,40 @@ msgid "30"
 msgstr "30"
 
 #. settings-schema.json->interval->options
-msgid "60"
-msgstr "60"
+msgid "1 minute"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
+msgstr ""
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -270,6 +376,26 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Tegnstørrelse (% af standardstørrelse)"
 
+#. settings-schema.json->char_color_customized->description
+#, fuzzy
+msgid "Customize Text Color"
+msgstr "Tekstfarve"
+
+#. settings-schema.json->char_color->description
+msgid "Text Color"
+msgstr "Tekstfarve"
+
+#. settings-schema.json->separator->description
+msgid "Separator"
+msgstr "Adskiller"
+
+#. settings-schema.json->separator->tooltip
+msgid ""
+"The string used to separate values in horizontal orientation. Default is '│'."
+msgstr ""
+"Tegnet som bruges til at adskille værdier i vandret retning. Standarden er "
+"“│”."
+
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
 msgstr "Fjern kantlinje"
@@ -285,6 +411,10 @@ msgstr "Fjern ikoner"
 #. settings-schema.json->remove_icons->tooltip
 msgid "Whether or not to remove icons in panel."
 msgstr "Om ikoner i panelet skal fjernes."
+
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
+msgstr ""
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
@@ -314,6 +444,10 @@ msgstr "Vis handlingen \"Genstart panelprogrammet” i menuen"
 msgid "Whether or not to display in menu the action: Restart this applet."
 msgstr "Om handlingen \"Genstart panelprogrammet” skal vises i menuen."
 
+#. settings-schema.json->make_disktemp_readable_by_user->description
+msgid "Make disk temperature user-readable"
+msgstr "Gør disktemperatur læsbar for brugeren"
+
 #. settings-schema.json->show_temp->description
 #. settings-schema.json->show_fan->description
 #. settings-schema.json->show_volt->description
@@ -329,6 +463,23 @@ msgid ""
 "Whether or not to display the values of the sensors selected in the list "
 "below."
 msgstr "Om værdien af de valgte sensorer i listen nedenfor skal vises."
+
+#. settings-schema.json->show_temp_name->description
+#. settings-schema.json->show_fan_name->description
+#. settings-schema.json->show_volt_name->description
+#. settings-schema.json->show_intrusion_name->description
+msgid "Display the 'Shown name' of each of these selected sensors"
+msgstr "Vis “Vist navn” for hver af disse valgte sensorer"
+
+#. settings-schema.json->show_temp_name->tooltip
+#. settings-schema.json->show_fan_name->tooltip
+#. settings-schema.json->show_volt_name->tooltip
+msgid ""
+"Whether or not to display into this applet label the 'Shown name' of the "
+"sensors selected in the list below. Without effect in vertical panels."
+msgstr ""
+"Hvorvidt “Vist navn” for de sensorer, der er valgt i listen nedenfor, skal "
+"vises i dette panelprograms etiket. Har ingen effekt i lodrette paneler."
 
 #. settings-schema.json->strictly_positive_temp->description
 #. settings-schema.json->strictly_positive_fan->description
@@ -393,12 +544,13 @@ msgstr "Genopfrisk listen over sensorer"
 #. settings-schema.json->intrusion_sensors->columns->title
 msgid ""
 "Sensor name\n"
-"(Do not change this!)"
+"(Do not modify!)"
 msgstr ""
 "Sensornavn\n"
 "(Ændr det ikke!)"
 
 #. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
@@ -410,6 +562,7 @@ msgstr ""
 "i panel"
 
 #. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
@@ -422,25 +575,111 @@ msgstr ""
 
 #. settings-schema.json->temp_sensors->columns->title
 #. settings-schema.json->fan_sensors->columns->title
-#. settings-schema.json->volt_sensors->columns->title
-#. settings-schema.json->intrusion_sensors->columns->title
 msgid "Shown name"
-msgstr "Viste navn"
+msgstr "Vist navn"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid ""
+"High\n"
+"(°C)"
+msgstr ""
+"Høj\n"
+"(°C)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+msgid ""
+"Critical\n"
+"(°C)"
+msgstr ""
+"Kritisk\n"
+"(°C)"
+
+#. settings-schema.json->temp_sensors->columns->title
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->fan_sensors->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+msgid "Formula"
+msgstr "Formel"
 
 #. settings-schema.json->temp_sensors->tooltip
-#. settings-schema.json->fan_sensors->tooltip
-#. settings-schema.json->volt_sensors->tooltip
-#. settings-schema.json->intrusion_sensors->tooltip
 msgid ""
-"Double-click on a line to change Shown name.\n"
-"To reset a Shown name, copy/paste the Sensor name."
+"Double-click on a line to change 'Shown name', 'High', 'Critical' or "
+"'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'High' and 'Critical' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
 msgstr ""
-"Dobbeltklik på en linje for at ændre det viste navn.\n"
-"Nulstil det viste navn ved at kopiere og indsætte sensornavnet."
+"Dobbeltklik på en linje for at ændre “Vist navn”, “Høj”, “Kritisk” eller "
+"“Formel”.\n"
+"For at nulstille et “Vist navn” skal du kopiere/indsætte “Sensornavnet”.\n"
+"“Høj” og “Kritisk” (valgfrie) skal være gyldige tal.\n"
+"“Formel” (valgfri):\n"
+"  Brug $ som den værdi, der returneres af sensoren.\n"
+"  Du kan bruge de 4 regnearter (+-*/) og parenteser.\n"
+"  Eksempel: $*1,1+0,5"
+
+#. settings-schema.json->btn_renew_disks_list->description
+msgid "Renew the list of known disks"
+msgstr "Genopfrisk listen over kendte diske"
+
+#. settings-schema.json->temp_disks->columns->title
+msgid "Disk name"
+msgstr "Disknavn"
+
+#. settings-schema.json->temp_disks->columns->title
+#. settings-schema.json->volt_sensors->columns->title
+#. settings-schema.json->intrusion_sensors->columns->title
+msgid ""
+"Shown\n"
+"name"
+msgstr ""
+"Viste\n"
+"navn"
+
+#. settings-schema.json->temp_disks->tooltip
+msgid ""
+"Disk name: The name of the disk, as returned by the 'lsblk' command. Please "
+"see help.\n"
+"High and Critical values: Cf. technical manual of your disk."
+msgstr ""
+"Disknavn: Navnet på disken, som returneret af kommandoen “lsblk”. Se "
+"venligst hjælp.\n"
+"Høje og kritiske værdier: Jf. den tekniske manual for din disk."
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
 msgstr "Forkortelse for “rotationer i minuttet”"
+
+#. settings-schema.json->fan_sensors->columns->title
+msgid ""
+"Min\n"
+"(rpm)"
+msgstr ""
+"Min\n"
+"(rpm)"
+
+#. settings-schema.json->fan_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' (optional) must be valid number.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Dobbeltklik på en linje for at ændre “Vist navn”, “Min” eller “Formel”.\n"
+"For at nulstille et “Vist navn” skal du kopiere/indsætte “Sensornavnet”.\n"
+"“Min” (valgfrit) skal være et gyldigt tal.\n"
+"“Formel” (valgfri):\n"
+"  Brug $ som den værdi, der returneres af sensoren.\n"
+"  Du kan bruge de 4 regnearter (+-*/) og parenteser.\n"
+"  Eksempel: $*1,1+0,5"
 
 #. settings-schema.json->volt_unit->description
 msgid "Voltage unit"
@@ -458,11 +697,63 @@ msgstr "Kun V"
 msgid "mV only"
 msgstr "Kun mV"
 
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Min\n"
+"(V)"
+msgstr ""
+"Min\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->columns->title
+msgid ""
+"Max\n"
+"(V)"
+msgstr ""
+"Max\n"
+"(V)"
+
+#. settings-schema.json->volt_sensors->tooltip
+msgid ""
+"Double-click on a line to change 'Shown name', 'Min', 'Max' or 'Formula'.\n"
+"To reset a 'Shown name', copy/paste the 'Sensor name'.\n"
+"'Min' and 'Max' (optional) must be valid numbers.\n"
+"'Formula' (optional):\n"
+"  Use $ as the value returned by the sensor.\n"
+"  You can use the 4 operations (+-*/) and parentheses.\n"
+"  Example: $*1.1+0.5"
+msgstr ""
+"Dobbeltklik på en linje for at ændre “Vist navn”, “Min”, “Max” eller "
+"“Formel”.\n"
+"For at nulstille et “Vist navn” skal du kopiere/indsætte “Sensornavnet”.\n"
+"“Min” og “Max” (valgfrie) skal være gyldige tal.\n"
+"“Formel” (valgfri):\n"
+"  Brug $ som den værdi, der returneres af sensoren.\n"
+"  Du kan bruge de 4 regnearter (+-*/) og parenteser.\n"
+"  Eksempel: $*1,1+0,5"
+
+#. settings-schema.json->show_intrusion_name->tooltip
+msgid ""
+" Whether or not to display into this applet label the 'Shown name' of the "
+"sensors selected in the list below. Without effect in vertical panels."
+msgstr ""
+" Hvorvidt “Vist navn” for de sensorer, der er valgt i listen nedenfor, skal "
+"vises i dette panelprograms etiket. Har ingen effekt i lodrette paneler."
+
 #. settings-schema.json->strictly_positive_intrusion->description
 msgid "Show in the panel only when an intrusion was detected"
 msgstr "Vis kun i panelet, når en indtrængen detekteres"
 
+#. settings-schema.json->intrusion_sensors->tooltip
+msgid ""
+"Double-click on a line to change Shown name.\n"
+"To reset a Shown name, copy/paste the Sensor name."
+msgstr ""
+"Dobbeltklik på en linje for at ændre det viste navn.\n"
+"Nulstil det viste navn ved at kopiere og indsætte sensornavnet."
+
 #. settings-schema.json->report->description
+#: scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr "Eksempel på sensorværdier fra denne computer"
 

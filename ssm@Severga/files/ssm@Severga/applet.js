@@ -58,6 +58,9 @@ SSMApplet.prototype = {
 			this._applet_tooltip.set_text(_("Required GTop package missing!"));
 		} else {
 			this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace; font-size: 9pt');
+			this._applet_context_menu.addMenuItem(new Applet.MenuItem(_("Reset Peak Temperature"), "go-bottom-symbolic", () => {
+				this.maxTempEver = -283;
+			}));
 			this._applet_context_menu.addMenuItem(new Applet.MenuItem(_("Clear Cache"), "user-trash", () => {
 				let [success, argv] = GLib.shell_parse_argv("pkexec sh -c 'echo 1 >/proc/sys/vm/drop_caches'");
 				let flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD;
@@ -103,6 +106,8 @@ SSMApplet.prototype = {
 			this.memDataProvider = new MemDataProvider();
 			this.netDataProvider = new NetDataProvider();
 			
+			this.maxTempEver = -283;
+			
 			this.timeoutR = 0;
 			this.timeout = Mainloop.timeout_add_seconds(1, () => this._update());
 			this.timeout2 = Mainloop.timeout_add_seconds(0.5, () => this._update2());
@@ -145,6 +150,7 @@ SSMApplet.prototype = {
 		} else {
 			this.currentTemp = -283;
 		}
+		if (this.currentTemp > this.maxTempEver) this.maxTempEver = this.currentTemp;
 		this.waitingForSensors = false;
 	},
 	
@@ -152,7 +158,7 @@ SSMApplet.prototype = {
 		let shortInfo, shortInfo2, longInfo, tooltip;
 		[shortInfo, longInfo] = this.cpuDataProvider.data();
 		this.cpuLabel.set_text(shortInfo);
-		tooltip = "<b>" + _("CPUs") + "</b>   " + (this.sensorsFailed || this.currentTemp == -283 ? "" : "(<i>" + this.currentTemp + "°C max</i>)") + "\n" + longInfo + "\n\n";
+		tooltip = "<b>" + _("CPUs") + "</b>   " + (this.sensorsFailed || this.currentTemp == -283 ? "" : "(<i>" + this.currentTemp + _("°C max; ") + this.maxTempEver + _("°C peak") + "</i>)") + "\n" + longInfo + "\n\n";
 		[shortInfo, longInfo] = this.memDataProvider.data();
 		this.memLabel.set_text(shortInfo);
 		tooltip += "<b>" + _("Memory") + "</b> (<i>" + (this.memDataProvider.memSize / 1000000000).toFixed(1) + _("GB") + (this.memDataProvider.swapSize ? "; " + (this.memDataProvider.swapSize / 1000000000).toFixed(1) + _("GB swap") : "") + "</i>)\n" + longInfo +"\n\n";
@@ -373,7 +379,7 @@ MemDataProvider.prototype = {
 
 //<NetDataProvider (based on Multi-Core System Monitor applet... thanks!)>
 let new_NMClient = imports.gi.NM.Client.new;
-//let CONNECTED_STATE = imports.gi.NM.DeviceState.ACTIVATED;
+let CONNECTED_STATE = imports.gi.NM.DeviceState.ACTIVATED;
 
 function NetDataProvider() {
 	this._init();
@@ -387,6 +393,7 @@ NetDataProvider.prototype = {
 			this.nmClient.connect("device-added", () => this._get_devices()),
 			this.nmClient.connect("device-removed", () => this._get_devices())
 		];
+		this.devices = [];
 		this.currentReadings = [];
 		this.lastUpdatedTime = Date.now();
 		this._get_devices();
@@ -399,8 +406,8 @@ NetDataProvider.prototype = {
 			GTop.glibtop_get_netload(this.gtop, this.currentReadings[i].id);
 			this.currentReadings[i].down = this.gtop.bytes_in;
 			this.currentReadings[i].up = this.gtop.bytes_out;
-			this.currentReadings[i].downSpeed = (this.currentReadings[i].down - this.currentReadings[i].lastReading[0]) / secondsSinceLastUpdate;
-			this.currentReadings[i].upSpeed = (this.currentReadings[i].up - this.currentReadings[i].lastReading[1]) / secondsSinceLastUpdate;
+			this.currentReadings[i].downSpeed = Math.max((this.currentReadings[i].down - this.currentReadings[i].lastReading[0]) / secondsSinceLastUpdate, 0);
+			this.currentReadings[i].upSpeed = Math.max((this.currentReadings[i].up - this.currentReadings[i].lastReading[1]) / secondsSinceLastUpdate, 0);
 			this.currentReadings[i].lastReading[0] = this.currentReadings[i].down;
 			this.currentReadings[i].lastReading[1] = this.currentReadings[i].up;
 		}
@@ -408,13 +415,21 @@ NetDataProvider.prototype = {
 	},
 	
 	_get_devices: function() {
+		this.devices = this.nmClient.get_devices();
+		for (let i = 0, len = this.devices.length; i < len; i++) {
+			this.devices[i].connect("state-changed", () => this._process_devices());
+		}
+		this._process_devices();
+	},
+	
+	_process_devices: function() {
 		this.currentReadings = [];
-		let devices = this.nmClient.get_devices();
-		for (let i = 0, len = devices.length; i < len; i++) {
-			devices[i] = devices[i].get_iface();
-			GTop.glibtop_get_netload(this.gtop, devices[i]);
+		for (let i = 0, len = this.devices.length; i < len; i++) {
+			if (this.devices[i].state !== CONNECTED_STATE) continue;
+			let iface = this.devices[i].get_iface();
+			GTop.glibtop_get_netload(this.gtop, iface);
 			this.currentReadings.push({
-				id: devices[i],
+				id: iface,
 				down: 0,
 				up: 0,
 				downSpeed: 0,
@@ -422,7 +437,6 @@ NetDataProvider.prototype = {
 				lastReading: [this.gtop.bytes_in, this.gtop.bytes_out]
 			});
 		}
-		devices = null;
 	},
 	
 	data: function(blackList = [], longInfoTab = 2, longInfoSize = 5) {

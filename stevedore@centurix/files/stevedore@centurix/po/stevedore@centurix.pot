@@ -1,0 +1,263 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: stevedore@centurix 0.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:84
+msgid "Create a container from an image"
+msgstr ""
+
+#: applet.js:94
+msgid "Mount location:"
+msgstr ""
+
+#: applet.js:116
+msgid "Destination location:"
+msgstr ""
+
+#: applet.js:138
+msgid "Working directory:"
+msgstr ""
+
+#: applet.js:160
+msgid "Memory:"
+msgstr ""
+
+#: applet.js:182
+msgid "Swap size:"
+msgstr ""
+
+#: applet.js:204
+msgid "Entry point:"
+msgstr ""
+
+#: applet.js:226
+msgid "Extra parameters:"
+msgstr ""
+
+#: applet.js:248
+msgid "Start"
+msgstr ""
+
+#: applet.js:263 applet.js:342
+msgid "Cancel"
+msgstr ""
+
+#: applet.js:312
+msgid "Search for a Docker image:"
+msgstr ""
+
+#: applet.js:397
+msgid "Select"
+msgstr ""
+
+#: applet.js:424
+msgid "Searching..."
+msgstr ""
+
+#: applet.js:468
+msgid "Stevedore: Docker controller"
+msgstr ""
+
+#: applet.js:481
+msgid "Stevedor: Cannot locate Docker, is it installed?"
+msgstr ""
+
+#: applet.js:482
+msgid "Cannot locate Docker, is it installed?"
+msgstr ""
+
+#: applet.js:485 applet.js:497
+msgid "Get Docker"
+msgstr ""
+
+#: applet.js:493 applet.js:494
+msgid ""
+"Stevedor: Docker is out of date, please install version 17.03.0-ce or higher."
+msgstr ""
+
+#: applet.js:513
+msgid "Create a new image"
+msgstr ""
+
+#: applet.js:516
+msgid "Images"
+msgstr ""
+
+#: applet.js:522
+msgid "No Images Installed"
+msgstr ""
+
+#: applet.js:532
+msgid "Start a new container from this image"
+msgstr ""
+
+#: applet.js:539
+msgid "Image Home Page"
+msgstr ""
+
+#: applet.js:546
+msgid "Remove this image"
+msgstr ""
+
+#: applet.js:555
+msgid "Containers"
+msgstr ""
+
+#: applet.js:560
+msgid "No Containers Created"
+msgstr ""
+
+#: applet.js:568 applet.js:571
+msgid "Running"
+msgstr ""
+
+#: applet.js:568 applet.js:571
+msgid "Stopped"
+msgstr ""
+
+#: applet.js:578
+msgid "Memory: "
+msgstr ""
+
+#: applet.js:584
+msgid "Entry point: "
+msgstr ""
+
+#: applet.js:592
+msgid "Mount: "
+msgstr ""
+
+#: applet.js:603
+msgid "IP Address: "
+msgstr ""
+
+#: applet.js:615
+msgid "Open a terminal"
+msgstr ""
+
+#: applet.js:627
+msgid "Show TTY Session"
+msgstr ""
+
+#: applet.js:640
+msgid "Open a browser"
+msgstr ""
+
+#: applet.js:651
+msgid "Delete this container"
+msgstr ""
+
+#: applet.js:660
+msgid "Docker Version"
+msgstr ""
+
+#: applet.js:661
+msgid "Docker Version: "
+msgstr ""
+
+#: applet.js:662
+msgid "API Version: "
+msgstr ""
+
+#: applet.js:663
+msgid "Go Version: "
+msgstr ""
+
+#: applet.js:664
+msgid "Git Commit: "
+msgstr ""
+
+#: applet.js:665
+msgid "Build Date: "
+msgstr ""
+
+#: applet.js:666
+msgid "OS/Arch: "
+msgstr ""
+
+#: applet.js:670
+msgid "Refresh this menu"
+msgstr ""
+
+#: applet.js:681
+msgid "Installing image"
+msgstr ""
+
+#: applet.js:681 applet.js:797 applet.js:828
+msgid "please wait..."
+msgstr ""
+
+#: applet.js:691 applet.js:716
+msgid "Image"
+msgstr ""
+
+#: applet.js:691
+msgid "installed, ready to run."
+msgstr ""
+
+#: applet.js:716
+msgid "removed."
+msgstr ""
+
+#: applet.js:780
+msgid "Starting container"
+msgstr ""
+
+#: applet.js:782
+msgid "Container up"
+msgstr ""
+
+#: applet.js:784
+msgid "Stopping container"
+msgstr ""
+
+#: applet.js:786
+msgid "Container down"
+msgstr ""
+
+#: applet.js:797
+msgid "Creating container from"
+msgstr ""
+
+#: applet.js:800
+msgid "Image created."
+msgstr ""
+
+#: applet.js:828
+msgid "Removing container"
+msgstr ""
+
+#: applet.js:831
+msgid "Container removed"
+msgstr ""
+
+#: applet.js:838
+msgid "Copied to the clipboard"
+msgstr ""
+
+#: terminal_reader.js:60
+msgid "Command not found."
+msgstr ""
+
+#. metadata.json->description
+msgid "Docker controlling applet."
+msgstr ""
+
+#. metadata.json->name
+msgid "Stevedor - Docker controller"
+msgstr ""

@@ -1,3 +1,5 @@
+# #-#-#-#-#  hu_regi.po  #-#-#-#-#
+# #-#-#-#-#  hu_regi.po  #-#-#-#-#
 # Sensors@claudiux
 # Copyright (C) 2020 claudiux aka Claude Clerc
 # This file is distributed under the same license as the Sensors@claudiux package.
@@ -6,107 +8,117 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-20 15:16+0200\n"
-"PO-Revision-Date: 2023-05-07 21:02+0200\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-31 10:36+0200\n"
+"PO-Revision-Date: 2024-02-24 17:02+0100\n"
+"Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
-#: applet.js:90
+#: applet.js:101
 msgid "Sensors Monitor"
 msgstr "Szenzor Figyelő"
 
-#: applet.js:389 applet.js:441
+#: applet.js:268
+msgid "Suspended"
+msgstr "Felfüggesztve"
+
+#: applet.js:484 applet.js:526
 msgid "high:"
 msgstr "magas:"
 
-#: applet.js:389 applet.js:391 applet.js:441 applet.js:443 applet.js:481
+#: applet.js:484 applet.js:486 applet.js:526 applet.js:528 applet.js:569
 msgid "n/a"
 msgstr "n/a"
 
-#: applet.js:391 applet.js:443
+#: applet.js:486 applet.js:528
 msgid "crit:"
 msgstr "krit:"
 
-#: applet.js:481 applet.js:524
+#: applet.js:569 applet.js:612
 msgid "min:"
 msgstr "min:"
 
-#: applet.js:526
+#: applet.js:614
 msgid "max:"
 msgstr "max:"
 
-#: applet.js:554
+#: applet.js:642
 msgid "No intrusion detected"
 msgstr "Nem észleltünk behatolást"
 
-#: applet.js:554
+#: applet.js:642
 msgid "INTRUSION DETECTED!"
 msgstr "BEHATOLÁST ÉSZLELTÜNK!"
 
-#: applet.js:574
+#: applet.js:662
 msgid "Must be configured!"
 msgstr "Be kell állítani!"
 
-#: applet.js:845
+#: applet.js:925
 msgid "Settings"
 msgstr "Beállítások"
 
-#: applet.js:845
+#: applet.js:925
 msgid ":"
 msgstr ":"
 
 #. settings-schema.json->page_General->title
-#: applet.js:852
+#: applet.js:932
 msgid "⚙ General"
 msgstr "⚙ Általános"
 
-#: applet.js:862
+#: applet.js:942
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Hőmérséklet szenzorok"
 
-#: applet.js:872
+#: applet.js:952
 msgid "🤂 Fan sensors"
 msgstr "🤂 Ventilátor szenzorok"
 
-#: applet.js:882
+#: applet.js:962
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Feszültség szenzorok"
 
-#: applet.js:892
+#: applet.js:972
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Behatolás szenzorok"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:903
+#: applet.js:983
 msgid "Run xsensors"
 msgstr "Xsensors futtatása"
 
-#: applet.js:914
+#: applet.js:992
+msgid "Suspend Sensors"
+msgstr "Felfüggesztett Szenzorok"
+
+#: applet.js:1003
 msgid "Reload this applet"
 msgstr "Kisalkalmazás újratöltése"
 
-#: applet.js:1206
+#: applet.js:1295
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Biztosan el akarja távolítani a(z) '%s'-t)"
 
-#: lib/checkDependencies.js:300
+#: lib/checkDependencies.js:317
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "A kisalkalmazás %s teljesen működőképes."
 
-#: lib/checkDependencies.js:301
+#: lib/checkDependencies.js:318
 msgid "All dependencies are installed"
 msgstr "Minden függőség telepítve van"
 
-#: lib/checkDependencies.js:329
+#: lib/checkDependencies.js:346
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -114,16 +126,16 @@ msgstr ""
 "Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
 "kisalkalmazás minden funkcióval rendelkezzen."
 
-#: lib/checkDependencies.js:330
+#: lib/checkDependencies.js:347
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 "Kérjük, a most megnyitott terminálban hajtsa végre a következő parancsokat:"
 
-#: lib/checkDependencies.js:331
+#: lib/checkDependencies.js:348
 msgid "Some dependencies are not installed!"
 msgstr "Néhány függőség nincs telepítve!"
 
-#: lib/util.js:243
+#: lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr "A(z) „%s” végrehajtása nem sikerült:"
@@ -209,6 +221,10 @@ msgstr "⮿ Behatolás"
 msgid "Options"
 msgstr "Beállítások"
 
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr "Eszköztipp"
+
 #. settings-schema.json->section_Report->title
 msgid "Sensors values"
 msgstr "Szenzorok értékei"
@@ -219,10 +235,10 @@ msgstr ""
 "Távolítson el a panelről bizonyos kisalkalmazásokat, amelyek szintén "
 "érzékelőket használnak"
 
-#. settings-schema.json->section_tempHddtemp->title
-msgid "hddtemp is for now only usable by root"
+#. settings-schema.json->section_tempDisktemp->title
+msgid "For the time being, disk temperature can only be read by root."
 msgstr ""
-"a „hddtemp” alkalmazást kizárólag a rendszergazda felhasználó használhatja"
+"Jelenleg csak root jogosultsággal lehet leolvasni a lemez hőmérsékletét."
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -308,8 +324,40 @@ msgid "30"
 msgstr "30"
 
 #. settings-schema.json->interval->options
-msgid "60"
-msgstr "60"
+msgid "1 minute"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr ""
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
+msgstr ""
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -333,29 +381,24 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Karakter méret (az alapértelmezett %-a)"
 
-#. settings-schema.json->char_color->options
-msgid "Default"
-msgstr "Alapértelmezett"
-
-#. settings-schema.json->char_color->options
-msgid "White"
-msgstr "Fehér"
-
-#. settings-schema.json->char_color->options
-msgid "Black"
-msgstr "Fekete"
-
-#. settings-schema.json->char_color->options
-msgid "Grey"
-msgstr "Szürke"
-
-#. settings-schema.json->char_color->options
-msgid "Light Grey"
-msgstr "Világosszürke"
+#. settings-schema.json->char_color_customized->description
+msgid "Customize Text Color"
+msgstr "Szövegszín testreszabása"
 
 #. settings-schema.json->char_color->description
 msgid "Text Color"
 msgstr "Szövegszín"
+
+#. settings-schema.json->separator->description
+msgid "Separator"
+msgstr "Elválasztó"
+
+#. settings-schema.json->separator->tooltip
+msgid ""
+"The string used to separate values in horizontal orientation. Default is '│'."
+msgstr ""
+"A vízszintes elrendezésben használt értékek elválasztására szolgáló "
+"karakterlánc. Az alapértelmezett érték: „│”."
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -372,6 +415,10 @@ msgstr "Ikonok eltávolítása"
 #. settings-schema.json->remove_icons->tooltip
 msgid "Whether or not to remove icons in panel."
 msgstr "El kell-e távolítani az ikonokat a panelről vagy sem."
+
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
+msgstr "Eszköztipp megjelenítése az egérmutatóval"
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
@@ -404,9 +451,9 @@ msgstr ""
 "Megjeleníti-e a menüben ezt a műveletet vagy sem: Indítsa újra a "
 "kisalkalmazást."
 
-#. settings-schema.json->make_hddtemp_usable_by_user->description
-msgid "Make hddtemp usable by user"
-msgstr "Tegye elérhetővé a „hddtemp” alkalmazást a felhasználók számára"
+#. settings-schema.json->make_disktemp_readable_by_user->description
+msgid "Make disk temperature user-readable"
+msgstr "A lemez hőmérséklet-szenzorok felhasználó számára olvashatóvá tétele"
 
 #. settings-schema.json->show_temp->description
 #. settings-schema.json->show_fan->description
@@ -721,6 +768,7 @@ msgstr ""
 "neve” értékét."
 
 #. settings-schema.json->report->description
+#: scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr "Példa az érzékelő értékére erről a számítógépről"
 
@@ -735,6 +783,3 @@ msgstr "Megjelenítés frissítése"
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Távolítsa el a panelről a temperature@fevimu kisalkalmazást"
-
-#~ msgid "Temperature scripts"
-#~ msgstr "Hőmérséklet parancsfájlok"

@@ -124,6 +124,7 @@ MyApplet.prototype = {
                 ["net_enabled", this.on_cfg_changed_graph_enabled, 3],
                 ["net_override_graph_width", this.on_cfg_changed_graph_width, 3],
                 ["net_graph_width", this.on_cfg_changed_graph_width],
+                ["net_minimum_graph_scale", this.on_cfg_changed_graph_scale],
                 ["net_color_0", this.on_cfg_changed_color, 3],
                 ["net_color_1", this.on_cfg_changed_color, 3],
                 ["load_enabled", this.on_cfg_changed_graph_enabled, 4],
@@ -261,6 +262,13 @@ MyApplet.prototype = {
         return c;
     },
 
+    getNetGraphScale: function() {
+        if (!this.cfg_net_minimum_graph_scale)
+            return 1024;
+
+        return this.cfg_net_minimum_graph_scale * 1000000 / 8; // Mb to MB
+    },
+
     getGraphTooltipDecimals: function(graph_idx) {
         let graph_id = this.graph_ids[graph_idx];
         let prop = "cfg_" + graph_id + "_tooltip_decimals";
@@ -329,7 +337,7 @@ MyApplet.prototype = {
                 else if (i == 2)
                     this.addGraph(new Providers.SwapData(), i);
                 else if (i == 3)
-                    this.addGraph(new Providers.NetData(), i).setAutoScale(1024);
+                    this.addGraph(new Providers.NetData(), i).setAutoScale(this.getNetGraphScale());
                 else if (i == 4) {
                     let ncpu = GTop.glibtop_get_sysinfo().ncpu;
                     this.addGraph(new Providers.LoadAvgData(), i).setAutoScale(2 * ncpu);
@@ -406,6 +414,11 @@ MyApplet.prototype = {
 
     on_cfg_changed_graph_spacing: function() {
         this.resizeArea();
+        this.repaint();
+    },
+
+    on_cfg_changed_graph_scale: function() {
+        this.graphs[3].setAutoScale(this.getNetGraphScale());
         this.repaint();
     },
 

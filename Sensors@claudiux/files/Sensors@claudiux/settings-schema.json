@@ -13,6 +13,7 @@
       "title": "⚙ General",
       "sections": [
         "section_Display",
+        "section_Tooltip",
         "section_Report",
         "section_remove_incompatible_xlets"
       ]
@@ -24,6 +25,7 @@
         "section_tempDisplay",
         "section_tempOptions",
         "section_tempSensors",
+        "section_tempDisktemp",
         "section_tempDisks"
       ]
     },
@@ -61,12 +63,22 @@
         "interval",
         "keep_size",
         "char_size",
+        "char_color_customized",
         "char_color",
+        "separator",
         "remove_border",
         "remove_icons",
+        "restart_in_menu",
+        "show_tooltip"
+      ]
+    },
+    "section_Tooltip": {
+      "type": "section",
+      "dependency": "show_tooltip",
+      "title": "Tooltip",
+      "keys": [
         "bold_values",
-        "bold_italics_main_sensors",
-        "restart_in_menu"
+        "bold_italics_main_sensors"
       ]
     },
     "section_Report": {
@@ -85,13 +97,13 @@
         "remove_temperatureATfevimu"
       ]
     },
-    "section_tempHddtemp": {
+    "section_tempDisktemp": {
       "type": "section",
-      "title": "hddtemp is for now only usable by root",
+      "title": "For the time being, disk temperature can only be read by root.",
       "keys": [
-        "make_hddtemp_usable_by_user"
+        "make_disktemp_readable_by_user"
       ],
-      "dependency": "!hddtemp_is_user_accessible"
+      "dependency": "!disktemp_is_user_readable"
     },
     "section_tempDisplay": {
       "type": "section",
@@ -126,10 +138,11 @@
       "type": "section",
       "title": "Disk temperature sensors",
       "keys": [
-      "btn_renew_disks_list",
+        "btn_renew_disks_list",
         "temp_disks",
         "update_display"
-      ]
+      ],
+      "dependency": "disktemp_is_user_readable"
     },
     "section_fanDisplay": {
       "type": "section",
@@ -230,7 +243,15 @@
       "15": 15,
       "20": 20,
       "30": 30,
-      "60": 60
+      "1 minute": 60,
+      "2 minutes": 120,
+      "3 minutes": 180,
+      "4 minutes": 240,
+      "5 minutes": 300,
+      "10 minutes": 600,
+      "15 minutes": 900,
+      "30 minutes": 1800,
+      "1 hour": 3600
     },
     "description": "Refresh interval (seconds)"
   },
@@ -248,17 +269,22 @@
     "step": 1,
     "description": "Character size (% of standard size)"
   },
+  "char_color_customized": {
+    "type": "switch",
+    "default": false,
+    "description": "Customize Text Color"
+  },
   "char_color": {
-    "type": "combobox",
-    "default": "default",
-    "options": {
-      "Default": "default",
-      "White": "white",
-      "Black": "black",
-      "Grey": "grey",
-      "Light Grey": "lightgrey"
-    },
+    "type": "colorchooser",
+    "default": "#CFD8DC",
+    "dependency": "char_color_customized",
     "description": "Text Color"
+  },
+  "separator": {
+    "type": "entry",
+    "description": "Separator",
+    "default": "|",
+    "tooltip": "The string used to separate values in horizontal orientation. Default is '│'."
   },
   "remove_border": {
     "type": "switch",
@@ -272,17 +298,22 @@
     "description": "Remove icons",
     "tooltip": "Whether or not to remove icons in panel."
   },
+  "show_tooltip": {
+    "type": "switch",
+    "default": true,
+    "description": "Display a tooltip on mouseover"
+  },
   "bold_values": {
     "type": "switch",
-    "default": false,
     "dependency": "has_set_markup",
+    "default": false,
     "description": "Show values in bold in the tooltip",
     "tooltip": "Whether or not to show values in bold in the tooltip."
   },
   "bold_italics_main_sensors": {
     "type": "switch",
-    "default": false,
     "dependency": "has_set_markup",
+    "default": false,
     "description": "Show main sensors in bold italics in the tooltip",
     "tooltip": "Whether or not to display the names of the main sensors (those displayed in the panel) in bold italics in the tooltip."
   },
@@ -292,10 +323,10 @@
     "description": "Show in menu the action: Restart this applet",
     "tooltip": "Whether or not to display in menu the action: Restart this applet."
   },
-  "make_hddtemp_usable_by_user": {
+  "make_disktemp_readable_by_user": {
     "type": "button",
-    "description": "Make hddtemp usable by user",
-    "callback": "_on_hddtemp_button_pressed"
+    "description": "Make disk temperature user-readable",
+    "callback": "_on_disktemp_button_pressed"
   },
   "show_temp": {
     "type": "switch",
@@ -358,7 +389,8 @@
       {
         "id": "sensor",
         "title": "Sensor name\n(Do not modify!)",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -416,7 +448,8 @@
         "id": "disk",
         "title": "Disk name",
         "type": "string",
-        "default": ""
+        "default": "",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -513,7 +546,8 @@
       {
         "id": "sensor",
         "title": "Sensor name\n(Do not modify!)",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -603,7 +637,8 @@
       {
         "id": "sensor",
         "title": "Sensor name\n(Do not modify!)",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -682,7 +717,8 @@
       {
         "id": "sensor",
         "title": "Sensor name\n(Do not modify!)",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "show_in_panel",
@@ -743,7 +779,7 @@
     "description": "Remove from panel the temperature@fevimu applet",
     "callback": "_on_remove_temperatureATfevimu_from_panels"
   },
-  "hddtemp_is_user_accessible": {
+  "disktemp_is_user_readable": {
     "type": "generic",
     "default": false
   },

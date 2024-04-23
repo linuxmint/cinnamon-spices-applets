@@ -1,0 +1,9 @@
+---
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Linux Mint Discussions
+    url: https://github.com/orgs/linuxmint/discussions
+    about: Engage with other members of the community, e.g. ideas for new Applets 👋
+  - name: ❓ Linux Mint Forums
+    url: https://forums.linuxmint.com/
+    about: Please ask and answer questions here. 🏥

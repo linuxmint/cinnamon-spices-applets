@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-16 20:04+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 14:46-0500\n"
 "PO-Revision-Date: 2021-09-21 15:40+0300\n"
 "Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
 "Language-Team: \n"
@@ -18,88 +18,110 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:98
+#: applet.js:108
 msgid "Edit Applications"
 msgstr "Uygulamaları Düzenle"
 
-#: applet.js:647 applet.js:891
+#: applet.js:737 applet.js:1031
 msgid "Delete"
 msgstr "Sil"
 
-#: applet.js:648 applet.js:892
+#: applet.js:738 applet.js:1032
 msgid "Edit"
 msgstr "Düzenle"
 
-#: applet.js:649 applet.js:893
+#: applet.js:739 applet.js:1033
 msgid "Cancel"
 msgstr "İptal"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#: dialogs.py:33 widgets.py:27
+#: dialogs.py:45 widgets.py:36 dialogs.glade:93 dialogs.glade:326
 msgid "Name"
 msgstr "Ad"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:39
+#: dialogs.py:51 dialogs.glade:104
 msgid "Group"
 msgstr "Grup"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:40 widgets.py:33
+#: dialogs.py:52 widgets.py:43 dialogs.glade:115
 msgid "Command"
 msgstr "Komut"
 
-#: dialogs.py:120
+#: dialogs.py:203
 msgid "The name cannot be empty"
 msgstr "İsim boş olamaz"
 
-#: dialogs.py:125
+#: dialogs.py:208
 msgid "The name is already used"
 msgstr "İsim zaten kullanılıyor"
 
-#: dialogs.py:132
+#: dialogs.py:215
 msgid "Valid name"
 msgstr "Geçerli isim"
 
-#: dialogs.py:138
+#: dialogs.py:221
 msgid "Valid command"
 msgstr "Geçerli komut"
 
-#: dialogs.py:141
+#: dialogs.py:224
 msgid "The command is not valid"
 msgstr "Komut geçerli değil"
 
-#: dialogs.py:158
+#: dialogs.py:236
+msgid "Which data should be replaced from *.desktop file?"
+msgstr ""
+
+#: dialogs.py:281 dialogs.glade:561
 msgid "really delete?"
 msgstr "silmek istiyor musun?"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
 #. settings-schema.json->launcher-icon->description
-#: widgets.py:21
+#: widgets.py:29
 msgid "Icon"
 msgstr "Simge"
 
-#: widgets.py:102
+#: widgets.py:125
+#, fuzzy
+msgid "Add application"
+msgstr "Uygulamalar"
+
+#: widgets.py:126
 msgid "Add new entry"
 msgstr "Yeni girdi ekle"
 
-#: widgets.py:107
+#: widgets.py:130
+msgid "Add separator"
+msgstr ""
+
+#: widgets.py:138
 msgid "Remove selected entry"
 msgstr "Seçili girdiyi sil"
 
-#: widgets.py:113
+#: widgets.py:144
 msgid "Edit selected entry"
 msgstr "Seçili girdiyi düzenle"
 
-#: widgets.py:119
+#: widgets.py:150
+#, fuzzy
+msgid "Duplicate selected entry"
+msgstr "Seçili girdiyi düzenle"
+
+#: widgets.py:156
 msgid "Move selected entry up"
 msgstr "Seçili girdiyi yukarı taşı"
 
-#: widgets.py:125
+#: widgets.py:162
 msgid "Move selected entry down"
 msgstr "Seçili girdiyi aşağı taşı"
+
+#: widgets.py:323
+msgid "Separator"
+msgstr ""
 
 #. metadata.json->name
 msgid "App Launcher"
@@ -153,6 +175,23 @@ msgstr "Bildirim Metni"
 #. settings-schema.json->notification-text->tooltip
 msgid "%s will be your application name"
 msgstr "%s uygulama adınız olacak"
+
+#. settings-schema.json->hotkey-binding->description
+#, fuzzy
+msgid "Show menu"
+msgstr "Etiketi Göster"
+
+#. settings-schema.json->hotkey-binding->tooltip
+msgid "Set keybinding(s) to show the menu"
+msgstr ""
+
+#. settings-schema.json->fixed-menu-width->description
+msgid "Fixed Menu Width"
+msgstr ""
+
+#. settings-schema.json->fixed-menu-width->tooltip
+msgid "Based on the largest submenu item, to prevent menu width flickering"
+msgstr ""
 
 #. settings-schema.json->visible-app-icons->description
 msgid "Show Application Icons"

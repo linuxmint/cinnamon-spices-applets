@@ -8,45 +8,45 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-19 17:20+0100\n"
+"POT-Creation-Date: 2023-12-24 12:01+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: applet.js:40 applet.js:56 applet.js:99 applet.js:206 applet.js:223
+#: applet.js:51 applet.js:67 applet.js:110 applet.js:246 applet.js:260
 msgid "SSH Launcher"
 msgstr ""
 
-#: applet.js:99
+#: applet.js:110
 msgid "No suitable icon found, falling back to custom icon"
 msgstr ""
 
-#: applet.js:105
+#: applet.js:116
 msgid "Force Update from SSH config"
 msgstr ""
 
-#: applet.js:143
+#: applet.js:183
 msgid "Background (-fN)"
 msgstr ""
 
-#: applet.js:146
+#: applet.js:186
 msgid "Forward X11 (-X)"
 msgstr ""
 
-#: applet.js:187
+#: applet.js:227
 msgid "ERROR. "
 msgstr ""
 
-#: applet.js:190
+#: applet.js:230
 msgid "Edit SSH config"
 msgstr ""
 
-#: applet.js:206
+#: applet.js:246
 msgid ""
 "Error: I can't open the terminal.\n"
 "You need to set a default terminal first in Preferred Applications!\n"
@@ -54,12 +54,16 @@ msgid ""
 "(More help in Right Click->About->More Info)"
 msgstr ""
 
-#: applet.js:223
+#: applet.js:260
 msgid "Connection opened to "
 msgstr ""
 
-#: applet.js:223
+#: applet.js:260
 msgid " using "
+msgstr ""
+
+#. metadata.json->description
+msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
 msgstr ""
 
 #. settings-schema.json->headAppearance->description
@@ -86,8 +90,4 @@ msgstr ""
 msgid ""
 "Usually it should end with -e so it will execute the supplied ssh command, "
 "check your chosen terminal's manual."
-msgstr ""
-
-#. metadata.json->description
-msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
 msgstr ""

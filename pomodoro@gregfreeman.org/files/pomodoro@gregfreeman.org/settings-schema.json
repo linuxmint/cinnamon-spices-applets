@@ -45,9 +45,21 @@
         "description": "Options"
     },
 
+    "start_automatically_on_load" : {
+        "type" : "checkbox",
+        "description" : "Start the pomodoro timer as soon as the applet loads",
+        "default" : false
+    },
+
     "show_dialog_messages" : {
         "type" : "checkbox",
         "description" : "Show Dialog Messages",
+        "default" : true
+    },
+
+    "auto_start_after_pomodoro_ends" : {
+        "type" : "checkbox",
+        "description" : "Auto start after a pomodoro ends",
         "default" : true
     },
 
@@ -79,6 +91,12 @@
         "type" : "checkbox",
         "description" : "Show the pomodoro timer in the applet panel",
         "default" : true
+    },
+
+    "hotkey": {
+        "type": "keybinding",
+        "description": "Set the keybinding to open the applet menu",
+        "default": "<Super><Shift>p"
     },
 
     "head_sounds": {

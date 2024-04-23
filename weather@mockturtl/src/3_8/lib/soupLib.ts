@@ -1,6 +1,6 @@
 import { HTTPHeaders, HTTPParams, Method } from "./httpLib";
 import { Logger } from "./logger";
-const { Message, Session, SessionAsync } = imports.gi.Soup;
+const { Message, Session } = imports.gi.Soup;
 const { PRIORITY_DEFAULT }  = imports.gi.GLib;
 const ByteArray = imports.byteArray;
 
@@ -59,19 +59,26 @@ class Soup3 implements SoupLib {
             }
             else {
                 AddHeadersToMessage(message, headers);
-                (this._httpSession as any).send_and_read_async(message, PRIORITY_DEFAULT, null, (session: any, result: any) => {
-                    const res: imports.gi.GLib.Bytes | null = (this._httpSession as any).send_and_read_finish(result);
-                    const headers: Record<string, string> = {};
-                    (message as any).get_response_headers().foreach((name: string, value: string) => {
-                        headers[name] = value;
-                    })
-
-                    resolve({
-                        reason_phrase: (message as any).get_reason_phrase() ?? "",
-                        status_code: (message as any).get_status(),
-                        response_body: res != null ? ByteArray.toString(ByteArray.fromGBytes(res)) : null,
-                        response_headers: headers
-                    });
+                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, null, (session: any, result: any) => {
+					const headers: Record<string, string> = {};
+					let res: imports.gi.GLib.Bytes | null = null;
+					try {
+						res = this._httpSession.send_and_read_finish(result);
+						message.get_response_headers().foreach((name: string, value: string) => {
+							headers[name] = value;
+						})
+					}
+					catch(e) {
+						Logger.Error("Error reading http request's response: " + e);
+					}
+					finally {
+						resolve({
+							reason_phrase: message.get_reason_phrase() ?? "",
+							status_code: message.get_status(),
+							response_body: res != null ? ByteArray.toString(ByteArray.fromGBytes(res)) : null,
+							response_headers: headers
+						});
+					}
                 });
             }
         });
@@ -83,10 +90,11 @@ class Soup3 implements SoupLib {
 class Soup2 implements SoupLib {
 
     /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
-	private readonly _httpSession = new SessionAsync();
+	private readonly _httpSession: any;
 
     constructor() {
-        const {ProxyResolverDefault}  = imports.gi.Soup;
+        const { ProxyResolverDefault, SessionAsync } = (imports.gi.Soup as any);
+		this._httpSession = new SessionAsync();
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
 		this._httpSession.timeout = 10;
 		this._httpSession.idle_timeout = 10;
@@ -112,9 +120,9 @@ class Soup2 implements SoupLib {
 			}
 			else {
 				AddHeadersToMessage(message, headers);
-				this._httpSession.queue_message(message, (session, message) => {
+				this._httpSession.queue_message(message, (session: any, message: any) => {
 					const headers: Record<string, string> = {};
-					message.response_headers.foreach((name, value) => {
+					message.response_headers.foreach((name: any, value: any) => {
 						headers[name] = value;
 					})
 
@@ -132,5 +140,5 @@ class Soup2 implements SoupLib {
 	}
 }
 
-
-export const soupLib: SoupLib = imports.gi.Soup.MAJOR_VERSION == 3 ? new Soup3() : new Soup2();
+// SessionAsync is a Soup2 class
+export const soupLib: SoupLib = (imports.gi.Soup as any).SessionAsync != undefined ? new Soup2() : new Soup3();

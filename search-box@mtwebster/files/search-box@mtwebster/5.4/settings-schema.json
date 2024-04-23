@@ -1,0 +1,86 @@
+{
+    "header-provider" : {
+        "type" : "header",
+        "description" : "Search Provider Settings"
+    },
+    "show-provider" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "Show provider",
+        "tooltip": "Show selected provider in the panel"
+    },
+    "reset-after-search" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "Reset query after search",
+        "tooltip": "Reset query after search? This may not be useful if you want to be able to perform the same query on other search engines afterwards."
+    },
+    "providers": {
+        "type": "list",
+        "description": "Providers",
+        "height": 300,
+        "show-buttons": true,
+        "reorderable": true,
+        "columns": [
+            {
+                "id": "name",
+                "title": "Name",
+                "type": "string",
+                "expand-width": false,
+                "align": 0.0,
+                "default": ""
+            },
+            {
+                "id": "url",
+                "title": "Query URL",
+                "type": "string",
+                "expand-width": true,
+                "align": 0.0,
+                "default": ""
+            },
+            {
+                "id": "short",
+                "title": "Short name\n(3 lower-case letters)",
+                "type": "string",
+                "expand-width": false,
+                "align": 0.0,
+                "default": ""
+            }
+        ],
+        "default": [
+            {"name": "Ask", "url": "https://www.ask.com/web?q=", "short": "ask"},
+            {"name": "Bing", "url": "https://www.bing.com/search?q=", "short": "bng"},
+            {"name": "DuckDuckGo", "url": "https://duckduckgo.com/?q=", "short": "ddg"},
+            {"name": "Google", "url": "https://google.com/search?q=", "short": "ggl"},
+            {"name": "Lilo", "url": "https://search.lilo.org/?plugin=lilose&q=", "short": "llo"},
+            {"name": "RefSeek", "url": "https://www.refseek.com/search?q=", "short": "rsk"},
+            {"name": "Yahoo", "url": "https://search.yahoo.com/search?p=", "short": "yoo"}
+        ],
+        "tooltip": "If your query begins with the 3 letters of the short name, it will be processed by the relevant search engine.\nExample: ddg linux mint iso"
+    },
+    "selected-provider" : {
+        "type": "generic",
+        "default" : "Google"
+    },
+    "use-custom-provider" : {
+        "type" : "generic",
+        "default" : false
+    },
+    "custom-provider-label" : {
+        "type" : "generic",
+        "default" : ""
+    },
+     "custom-provider-url" : {
+        "type" : "generic",
+        "default" : ""
+    },
+    "header-keybinding" : {
+        "type" : "header",
+        "description" : "Keybinding"
+    },
+    "custom-keybinding" : {
+        "type" : "keybinding",
+        "description" : "Keybinding, which opens the search box",
+        "default" : "<Primary><Alt>f"
+    }
+}

@@ -1,3 +1,52 @@
+### v7.3.7~20240421
+  * Refresh action further improved.
+
+### v7.3.6~20240420
+  * Improved Refresh action.
+
+### v7.3.5~20240420
+  * Improved cache refresh management.
+
+### v7.3.4~20240419
+  * Prevents telescoping with mintupdate.
+  * Uses G. Translate to display help.
+
+### v7.3.3~20240416
+  * Code cleanup.
+
+### v7.3.2~20240415
+  * Bugfixes.
+  * Checks again after installing updates.
+
+### v7.3.1~20240415
+  * Takes into account the new location of themes.
+
+### v7.3.0~20240413
+  * Also manage Actions for nemo.
+  * Fixes #5683.
+
+### v7.2.0~20240412
+  * Removes the "Update" button from notifications for the time being. It will be available again when cinnamon-settings is compatible.
+  * Many bugfixes.
+  * TODO: Include Nemo Actions.
+
+### v7.1.2~20240412
+  * Fixes definitively #5682: now this applet also works on distributions that don't use mintupdate.
+
+### v7.1.1~20240412
+  * Fixed a bug that prevented SpiceUpdate from starting.
+
+### v7.1.0~20240411
+  * Fixes #5682 and many other bugs.
+  * TODO: Include Nemo Actions. Update all Spices of a given type.
+
+### v7.0.0~20240411
+  * Fixes #3773 #4584 #4850 #5167 #5216.
+  * This version works with Cinnamon 6.0! Even if a few adjustments need to be made.
+
+### v6.4.3~20231209
+  * Fixes #5167. Use of Soup3 (Cinnamon 6.0).
+.
 ### v6.4.2~20230413
   * Minor bugfix.
 

@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.40.0 -->
+<interface>
+  <requires lib="gtk+" version="3.22"/>
+  <object class="GtkDialog" id="setup_wizard_window">
+    <property name="can-focus">False</property>
+    <property name="title" translatable="yes">CassiaWindowList Basic Setup Wizard</property>
+    <property name="resizable">False</property>
+    <property name="window-position">center</property>
+    <property name="default-width">450</property>
+    <property name="default-height">400</property>
+    <property name="type-hint">dialog</property>
+    <signal name="destroy" handler="onDestroy" swapped="no"/>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">False</property>
+            <property name="layout-style">expand</property>
+            <child>
+              <object class="GtkButton" id="previous_btn">
+                <property name="label">gtk-media-previous</property>
+                <property name="width-request">90</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="use-stock">True</property>
+                <signal name="clicked" handler="onClickPrevious" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="padding">1</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="next_btn">
+                <property name="label">gtk-media-next</property>
+                <property name="width-request">90</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="use-stock">True</property>
+                <signal name="clicked" handler="onClickNext" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="padding">1</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkStack" id="stack_id">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="transition-type">slide-left</property>
+            <child>
+              <object class="GtkBox" id="welcome_page_box">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Welcome to CassiaWindowList</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Sans 15"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-top">20</property>
+                    <property name="margin-bottom">10</property>
+                    <property name="label" translatable="yes">How would you like this applet instance to behave?</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="windowlist_radio">
+                    <property name="label" translatable="yes">Window List (Task bar)
+Panel buttons for all running windows.</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">55</property>
+                    <property name="margin-end">20</property>
+                    <property name="active">True</property>
+                    <property name="draw-indicator">True</property>
+                    <signal name="toggled" handler="onWelcomeBtnToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">10</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="launcher_radio">
+                    <property name="label" translatable="yes">Panel Launcher (Quick launcher)
+Panel button only appear when you add items
+to the panel, no labels are shown, only icons.</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">55</property>
+                    <property name="margin-end">20</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">windowlist_radio</property>
+                    <signal name="toggled" handler="onWelcomeBtnToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">10</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="restore_radio">
+                    <property name="label" translatable="yes">Restore configuration from an automatic
+backup</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">55</property>
+                    <property name="margin-end">20</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">windowlist_radio</property>
+                    <signal name="toggled" handler="onWelcomeBtnToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">10</property>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">page0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="window_list_page1_box">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">How do you want your Window List to operate?</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Sans 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">20</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="one_to_one_radio">
+                    <property name="label" translatable="yes">Basic  -  Quick window access
+Every window gets it's own window list button.
+Button labels are window titles.</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">50</property>
+                    <property name="margin-end">5</property>
+                    <property name="active">True</property>
+                    <property name="draw-indicator">True</property>
+                    <signal name="toggled" handler="onWLPage1BtnToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">5</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="grouped_radio">
+                    <property name="label" translatable="yes">Grouping  -  Very compact
+One window list button per application.
+Thumbnail menus to select specific window.
+Button labels are window titles.</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">50</property>
+                    <property name="margin-end">5</property>
+                    <property name="active">True</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">one_to_one_radio</property>
+                    <signal name="toggled" handler="onWLPage1BtnToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">5</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="pooled_radio">
+                    <property name="label" translatable="yes">Pooling  -  Quick access &amp; compact
+Every window gets it's own window list button.
+Application buttons are pooled togeather.
+One button label per application pool.
+Button labels are application names.</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">50</property>
+                    <property name="margin-end">5</property>
+                    <property name="active">True</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">one_to_one_radio</property>
+                    <signal name="toggled" handler="onWLPage1BtnToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">5</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">page1</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="window_list_page2_box">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Just a few more options to consider</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Sans 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">15</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="no_label_chkbox">
+                    <property name="label" translatable="yes">No Labels (icons only)</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">55</property>
+                    <property name="margin-end">5</property>
+                    <property name="draw-indicator">True</property>
+                    <signal name="toggled" handler="onWLPage2BtnToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">10</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="no_minimized_chkbox">
+                    <property name="label" translatable="yes">No minimized window indicator character</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">55</property>
+                    <property name="margin-end">5</property>
+                    <property name="draw-indicator">True</property>
+                    <signal name="toggled" handler="onWLPage2BtnToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">10</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="no_hover_chkbox">
+                    <property name="label" translatable="yes">No Thumbnail window menu on mouse hover</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">55</property>
+                    <property name="margin-end">5</property>
+                    <property name="draw-indicator">True</property>
+                    <signal name="toggled" handler="onWLPage2BtnToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">10</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">page2</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="launcher_page_box">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Panel Launcher Setup</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Sans 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">9</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Unlike most Panel Launcher applets, this launcher keeps tack of 
+running windows and uses window Thumbnail menus.
+
+You can launch additional windows by clicking the 'Back' mouse 
+button or using the Left mouse button while holding the Ctrl key.
+
+How would you like the Left mouse button to behave when 
+windows already exist for a launcher button?</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">9</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="lc_new_window_radio">
+                    <property name="label" translatable="yes">Open new window / Hold for Thumbnail menu</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">45</property>
+                    <property name="margin-end">5</property>
+                    <property name="active">True</property>
+                    <property name="draw-indicator">True</property>
+                    <signal name="toggled" handler="onLaunchPageToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">1</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="lc_restore_radio">
+                    <property name="label" translatable="yes">Restore most recent window / Cycle windows</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">45</property>
+                    <property name="margin-end">5</property>
+                    <property name="active">True</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">lc_new_window_radio</property>
+                    <signal name="toggled" handler="onLaunchPageToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">1</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkRadioButton" id="lc_thumbnail_radio">
+                    <property name="label" translatable="yes">Open the Thumbnail menu</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">45</property>
+                    <property name="margin-end">5</property>
+                    <property name="margin-bottom">5</property>
+                    <property name="active">True</property>
+                    <property name="draw-indicator">True</property>
+                    <property name="group">lc_new_window_radio</property>
+                    <signal name="toggled" handler="onLaunchPageToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">1</property>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSeparator">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-start">20</property>
+                    <property name="margin-end">20</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">5</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="mouse_hover_chkbox">
+                    <property name="label" translatable="yes">Thumbnail window menu on mouse hover</property>
+                    <property name="name">pl_no_hover_chkbox</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">False</property>
+                    <property name="margin-start">45</property>
+                    <property name="margin-top">5</property>
+                    <property name="draw-indicator">True</property>
+                    <signal name="toggled" handler="onLaunchPageToggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">6</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">page3</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="done_page_box">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">All done!</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Sans 16"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">10</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">There are many more options and features to explorer in the
+applet configurator and the window list button context menu,
+for example:
+
+ • Hot-keys to launch / activate a specific window.
+ • Customizable mouse button actions.
+ • Customizable icon saturation (grayscale / vivid).
+ • Customizable Ctrl/Shift + mouse button actions.
+ • Application specific grouping and label settings.
+ • Thumbnail window zooming using the scroll-wheel.
+ • Automatic application grouping when space is limited.
+ • And much more.</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">5</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="config_btn">
+                    <property name="label" translatable="yes">Exit and launch the applet configurator now</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="margin-start">10</property>
+                    <property name="margin-end">10</property>
+                    <signal name="clicked" handler="onClickConfig" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">page4</property>
+                <property name="position">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="restore_page_box">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Select a backup configuration to restore?</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Sans 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">20</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkListBox" id="backupfile_list">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <signal name="row-selected" handler="onRowSelected" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">25</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="name">page6</property>
+                <property name="position">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="backup_page_box">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Configuration Backup?</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Sans 12"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">15</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">If you would like to maintain an automatic backup
+of this applet configuration then select or enter a
+backup file description below. All current and future
+configuration changes will be saved to this backup:</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">10</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="backup_file_combo">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="margin-start">45</property>
+                    <property name="margin-end">45</property>
+                    <property name="has-entry">True</property>
+                    <items>
+                      <item translatable="yes">MainWindowList</item>
+                      <item translatable="yes">MainPanelLauncher</item>
+                      <item translatable="yes">Monitor1WindowList</item>
+                      <item translatable="yes">Monitor2WindowList</item>
+                      <item translatable="yes">Monitor1PanelLauncher</item>
+                      <item translatable="yes">Monitor2PanelLauncher</item>
+                    </items>
+                    <child internal-child="entry">
+                      <object class="GtkEntry" id="backup_file_entry">
+                        <property name="name">backup_file_entry</property>
+                        <property name="can-focus">True</property>
+                        <property name="has-focus">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="name">page5</property>
+                <property name="position">6</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

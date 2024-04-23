@@ -7,420 +7,415 @@ msgid ""
 msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-11 17:07+0800\n"
-"PO-Revision-Date: 2017-04-29 14:01+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2021-02-27 00:05+0100\n"
+"PO-Revision-Date: 2023-06-01 17:30+0800\n"
+"Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.3.1\n"
 
-#: applet.js:345
-msgid "Network interface"
+#: applet.js:437
+msgid "Network interfaces"
 msgstr "网络接口"
 
-#: applet.js:366
+#: applet.js:506
 msgid "Total data start"
-msgstr "总数据开始于"
+msgstr "总数据开始"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->options
-#: applet.js:373
+#. settings-schema.json->bytes_start_time->options
+#: applet.js:513
 msgid "Launch of applet"
 msgstr "启动小程序"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->options
-#: applet.js:374
+#. settings-schema.json->bytes_start_time->options
+#: applet.js:514
 msgid "Today"
 msgstr "今天"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->options
-#: applet.js:375
+#. settings-schema.json->bytes_start_time->options
+#: applet.js:515
 msgid "Yesterday"
 msgstr "昨天"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->options
-#: applet.js:376
+#. settings-schema.json->bytes_start_time->options
+#: applet.js:516
 msgid "3 days ago"
-msgstr "3天前"
+msgstr "3 天前"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->options
-#: applet.js:377
+#. settings-schema.json->bytes_start_time->options
+#: applet.js:517
 msgid "5 days ago"
-msgstr "5天前"
+msgstr "5 天前"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->options
-#: applet.js:378
+#. settings-schema.json->bytes_start_time->options
+#: applet.js:518
 msgid "7 days ago"
-msgstr "7天前"
+msgstr "7 天前"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->options
-#: applet.js:379
+#. settings-schema.json->bytes_start_time->options
+#: applet.js:519
 msgid "10 days ago"
-msgstr "10天前"
+msgstr "10 天前"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->options
-#: applet.js:380
+#. settings-schema.json->bytes_start_time->options
+#: applet.js:520
 msgid "14 days ago"
-msgstr "14天前"
+msgstr "14 天前"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->options
-#: applet.js:381
+#. settings-schema.json->bytes_start_time->options
+#: applet.js:521
 msgid "30 days ago"
-msgstr "30天前"
+msgstr "30 天前"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->options
-#: applet.js:382
+#. settings-schema.json->bytes_start_time->options
+#: applet.js:522
 msgid "Custom date"
 msgstr "自定义日期"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_start->description
-#: applet.js:465
+#. settings-schema.json->gui_start->description
+#: applet.js:559
 msgid "Gui"
 msgstr "图形用户界面"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_speed_type->options
-#: applet.js:465
+#. settings-schema.json->gui_speed_type->options
+#: applet.js:559
 msgid "Compact"
 msgstr "小"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_speed_type->options
-#: applet.js:444
+#. settings-schema.json->gui_speed_type->options
+#: applet.js:559
 msgid "Large"
 msgstr "大"
 
-#: appletGui.js:362
+#: applet.js:825
+msgid "b"
+msgstr "b"
+
+#: appletGui.js:470
 msgid "Total download:"
 msgstr "总下载："
 
-#: appletGui.js:363
+#: appletGui.js:471
 msgid "Total upload:"
 msgstr "总上传："
 
-#. download-and-upload-speed@cardsurf->metadata.json->name
-msgid "Download and upload speed"
-msgstr "下载和上传速度"
-
-#. download-and-upload-speed@cardsurf->metadata.json->description
+#. metadata.json->description
 msgid "Shows usage of a network interface"
 msgstr "显示网络接口的使用情况"
 
-#. download-and-upload-speed@cardsurf->settings-schema.json->head->description
-msgid "Settings for download-and-upload-speed@cardsurf"
-msgstr "download-and-upload-speed@cardsurf的设置"
+#. metadata.json->name
+msgid "Download and upload speed"
+msgstr "下载和上传速度"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->configuration->description
+#. settings-schema.json->configuration->description
 msgid "Configuration"
 msgstr "配置"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->display_mode->description
+#. settings-schema.json->display_mode->description
 msgid "Show"
 msgstr "显示"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->display_mode->tooltip
-msgid "Values shown in the panel"
-msgstr "显示在面板中的值"
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->display_mode->options
+#. settings-schema.json->display_mode->options
 msgid "Average speed per second"
 msgstr "每秒的平均速度"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->display_mode->options
+#. settings-schema.json->display_mode->options
 msgid "Amount of data transferred"
 msgstr "传输的数据量"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->unit_type->description
+#. settings-schema.json->display_mode->tooltip
+msgid "Values shown in the panel"
+msgstr "显示在面板中的值"
+
+#. settings-schema.json->unit_type->description
 msgid "Unit"
 msgstr "单位"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->unit_type->tooltip
-msgid "Base data unit shown in the panel"
-msgstr "显示在面板中的基本数据单位"
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->unit_type->options
+#. settings-schema.json->unit_type->options
 msgid "Bytes"
 msgstr "字节"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->unit_type->options
+#. settings-schema.json->unit_type->options
 msgid "Bits"
 msgstr "比特"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->update_every->description
-msgid "Calculate every"
-msgstr "计算每"
+#. settings-schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
+msgstr "显示在面板中的基本数据单位"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->update_every->tooltip
-msgid "How often to calculate download and upload speed"
-msgstr "计算下载和上传速度的频率"
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->update_every->units
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->write_every->units
+#. settings-schema.json->update_every->units
+#. settings-schema.json->update_available_interfaces_every->units
+#. settings-schema.json->write_every->units
 msgid "seconds"
 msgstr "秒"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_speed_type->description
+#. settings-schema.json->update_every->description
+msgid "Calculate every"
+msgstr "计算每"
+
+#. settings-schema.json->update_every->tooltip
+msgid "How often to calculate download and upload speed"
+msgstr "计算下载和上传速度的频率"
+
+#. settings-schema.json->update_available_interfaces_every->description
+msgid "Update available interfaces every"
+msgstr "更新可用的接口每"
+
+#. settings-schema.json->update_available_interfaces_every->tooltip
+msgid ""
+"How often to update list of available network interfaces. 0 means list of "
+"available network interfaces is not updated periodically."
+msgstr "更新可用的网络接口列表的频率。0 表示不定期更新可用的网络接口列表。"
+
+#. settings-schema.json->gui_speed_type->description
 msgid "Type"
 msgstr "类型"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_speed_type->tooltip
+#. settings-schema.json->gui_speed_type->tooltip
 msgid "Applet Gui"
 msgstr "小程序图形用户界面"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->decimal_places->description
+#. settings-schema.json->gui_value_order->description
+msgid "Value order"
+msgstr "数据顺序"
+
+#. settings-schema.json->gui_value_order->options
+msgid "Download first"
+msgstr "下载在前"
+
+#. settings-schema.json->gui_value_order->options
+msgid "Upload first"
+msgstr "上传在前"
+
+#. settings-schema.json->gui_value_order->tooltip
+msgid "An order of values shown in the panel and in the hover popup"
+msgstr "在面板和悬停弹出窗口中数值的显示顺序"
+
+#. settings-schema.json->decimal_places->description
 msgid "Decimal places"
 msgstr "小数位"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->decimal_places->tooltip
-msgid "Decimal places of download and upload speed shown in the panel"
-msgstr "显示面板中下载和上传速度的小数位"
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->decimal_places->options
+#. settings-schema.json->decimal_places->options
 msgid "Auto"
 msgstr "自动"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->decimal_places->options
+#. settings-schema.json->decimal_places->options
 msgid "0 "
-msgstr "0"
+msgstr "0 "
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->decimal_places->options
+#. settings-schema.json->decimal_places->options
 msgid "1 "
-msgstr "1"
+msgstr "1 "
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->decimal_places->options
+#. settings-schema.json->decimal_places->options
 msgid "2 "
-msgstr "2"
+msgstr "2 "
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->decimal_places->options
+#. settings-schema.json->decimal_places->options
 msgid "3 "
-msgstr "3"
+msgstr "3 "
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_text_css->description
+#. settings-schema.json->decimal_places->tooltip
+msgid "Decimal places of download and upload speed shown in the panel"
+msgstr "显示面板中下载和上传速度的小数位"
+
+#. settings-schema.json->gui_text_css->description
 msgid "Text CSS"
-msgstr "文本CSS"
+msgstr "文本 CSS"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_text_css->tooltip
+#. settings-schema.json->gui_text_css->tooltip
 msgid "A CSS style applied to the text in the panel"
-msgstr "应用到面板中文本的CSS样式"
+msgstr "应用到面板中文本的 CSS 样式"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_received_icon_filename->description
+#. settings-schema.json->gui_received_icon_filename->description
 msgid "Download icon"
 msgstr "下载图标"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_received_icon_filename->tooltip
-msgid "An icon displayed next to download speed in the panel"
-msgstr "显示面板中下载速度旁边的图标"
+#. settings-schema.json->gui_received_icon_filename->tooltip
+msgid ""
+"An icon displayed next to download speed in the panel.\n"
+"To display a symbolic icon make sure its name ends with '-symbolic.svg'."
+msgstr ""
+"在面板中的下载速度旁边显示的图标。\n"
+"要显示一个符号图标，确保其名称以 “-symbolic.svg” 结尾。"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_sent_icon_filename->description
+#. settings-schema.json->gui_sent_icon_filename->description
 msgid "Upload icon"
 msgstr "上传图标"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_sent_icon_filename->tooltip
-msgid "An icon displayed next to upload speed in the panel"
-msgstr "显示面板中上传速度旁边的图标"
+#. settings-schema.json->gui_sent_icon_filename->tooltip
+msgid ""
+"An icon displayed next to upload speed in the panel.\n"
+"To display a symbolic icon make sure its name ends with '-symbolic.svg'."
+msgstr ""
+"在面板中的上传速度旁边显示的图标。\n"
+"要显示一个符号图标，确保其名称以 “-symbolic.svg” 结尾。"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->hover_popup_text_css->description
+#. settings-schema.json->gui_symbolic_icon->description
+msgid "Show a default set of symbolic icons"
+msgstr "显示一套默认的符号图标"
+
+#. settings-schema.json->hover_popup_text_css->description
 msgid "Popup text CSS"
-msgstr "弹窗文本CSS"
+msgstr "弹窗文本 CSS"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->hover_popup_text_css->tooltip
+#. settings-schema.json->hover_popup_text_css->tooltip
 msgid "A CSS style applied to the description text in the hover popup"
-msgstr "应用到悬浮弹窗中描述文本的CSS样式"
+msgstr "应用到悬浮弹窗中描述文本的 CSS 样式"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->hover_popup_numbers_css->description
+#. settings-schema.json->hover_popup_numbers_css->description
 msgid "Popup numbers CSS"
-msgstr "弹窗数字CSS"
+msgstr "弹窗数字 CSS"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->hover_popup_numbers_css->tooltip
+#. settings-schema.json->hover_popup_numbers_css->tooltip
 msgid "A CSS style applied to numbers in the hover popup"
-msgstr "应用到悬浮弹窗中的数字的CSS样式"
+msgstr "应用到悬浮弹窗中的数字的 CSS 样式"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->total_data_start->description
+#. settings-schema.json->minimum_bytes_received_to_display->units
+#. settings-schema.json->minimum_bytes_sent_to_display->units
+msgid "bytes"
+msgstr "字节"
+
+#. settings-schema.json->minimum_bytes_received_to_display->description
+msgid "Minimum displayed download value"
+msgstr "显示的最小下载值"
+
+#. settings-schema.json->minimum_bytes_received_to_display->tooltip
+msgid "A minimum download value to display in the panel"
+msgstr "在面板上显示的最小下载值"
+
+#. settings-schema.json->minimum_bytes_sent_to_display->description
+msgid "Minimum displayed upload value"
+msgstr "显示的最小上传值"
+
+#. settings-schema.json->minimum_bytes_sent_to_display->tooltip
+msgid "A minimum upload value to display in the panel"
+msgstr "在面板上显示的最小上传值"
+
+#. settings-schema.json->total_data_start->description
 msgid "Total data"
 msgstr "总数据"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->show_hover->description
+#. settings-schema.json->show_hover->description
 msgid "Show total download and upload on hover"
 msgstr "悬停时显示总下载和总上传"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->show_hover->tooltip
+#. settings-schema.json->show_hover->tooltip
 msgid "Show the hover popup with total amount of data downloaded and uploaded"
 msgstr "显示下载和上传的数据总量的悬浮弹窗"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->description
+#. settings-schema.json->bytes_start_time->description
 msgid "Start"
 msgstr "开始"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->tooltip
+#. settings-schema.json->bytes_start_time->tooltip
 msgid "Start time to count total amount of data downloaded and uploaded"
 msgstr "计算下载和上传数据总量的开始时间"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->custom_start_date->description
+#. settings-schema.json->custom_start_date->description
 msgid "Custom date "
-msgstr "自定义日期"
+msgstr "自定义日期 "
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->custom_start_date->tooltip
+#. settings-schema.json->custom_start_date->tooltip
 msgid ""
-"A custom date in YYYY-MM-DD format used as start time. The option is used if"
-" \"Custom date\" is selected in \"Start\" combobox."
+"A custom date in YYYY-MM-DD format used as start time. The option is used if "
+"\"Custom date\" is selected in \"Start\" combobox."
 msgstr ""
-"自定义日期以YYYY-MM-DD格式用作开始时间。如果在“开始”组合框中选择了“自定义日"
-"期”，则会使用该选项。"
+"一个 YYYY-MM-DD 格式的自定义日期，作为开始时间使用。如果在 “开始” 组合框中选"
+"择了 “自定义日期”，则使用该选项。"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->write_every->description
+#. settings-schema.json->write_every->description
 msgid "Save every"
 msgstr "保存每"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->write_every->tooltip
+#. settings-schema.json->write_every->tooltip
 msgid ""
 "How often to save total amount of data downloaded and uploaded to the file. "
 "0 means no saving to the file."
-msgstr "将下载和上传的数据总量保存到文件的频率。0表示不保存到文件。"
+msgstr "将下载和上传的数据总量保存到文件的频率。0 表示不保存到文件。"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->data_limit_start->description
+#. settings-schema.json->data_limit_start->description
 msgid "Data limits"
 msgstr "数据限制"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->data_limit->description
-msgid "Data limit"
-msgstr "数据限制"
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->data_limit->tooltip
-msgid "The maximum amount of data to download and upload. 0 means no limits."
-msgstr "下载和上传数据的最大数据量。0表示没有限制。"
-
-#. download-and-upload-speed@cardsurf->settings-schema.json->data_limit->units
+#. settings-schema.json->data_limit->units
 msgid "MB"
 msgstr "MB"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_data_limit_type->description
+#. settings-schema.json->data_limit->description
+msgid "Data limit"
+msgstr "数据限制"
+
+#. settings-schema.json->data_limit->tooltip
+msgid "The maximum amount of data to download and upload. 0 means no limits."
+msgstr "下载和上传数据的最大数据量。0 表示没有限制。"
+
+#. settings-schema.json->gui_data_limit_type->description
 msgid "Show data limit usage"
 msgstr "显示数据限制使用情况"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_data_limit_type->tooltip
-msgid "Show the percentage of data limit used in the panel"
-msgstr "显示面板中已使用的数据限制的百分比"
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_data_limit_type->options
+#. settings-schema.json->gui_data_limit_type->options
 msgid "None"
 msgstr "无"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_data_limit_type->options
+#. settings-schema.json->gui_data_limit_type->options
 msgid "Circle"
 msgstr "圆形"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_data_limit_type->options
+#. settings-schema.json->gui_data_limit_type->options
 msgid "Text"
 msgstr "文本"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->data_limit_command_enabled->description
+#. settings-schema.json->gui_data_limit_type->tooltip
+msgid "Show the percentage of data limit used in the panel"
+msgstr "显示面板中已使用的数据限制的百分比"
+
+#. settings-schema.json->data_limit_command_enabled->description
 msgid "Invoke command when data limit exceeded"
 msgstr "超出数据限制时调用命令"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->data_limit_command_enabled->tooltip
+#. settings-schema.json->data_limit_command_enabled->tooltip
 msgid ""
 "Invoke a command when amount of data downloaded and uploaded exceeded the "
 "limit"
 msgstr "当下载和上传的数据量超出限制时调用命令"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->data_limit_command->description
+#. settings-schema.json->data_limit_command->description
 msgid "Command"
 msgstr "命令"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->data_limit_command->tooltip
+#. settings-schema.json->data_limit_command->tooltip
 msgid "A command to invoke"
 msgstr "要调用的命令"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->connections_start->description
+#. settings-schema.json->connections_start->description
 msgid "Connections"
 msgstr "连接"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->launch_terminal->description
+#. settings-schema.json->launch_terminal->description
 msgid "List current Internet connections on left mouse click"
 msgstr "鼠标左键点击时列出当前的互联网连接"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->launch_terminal->tooltip
+#. settings-schema.json->launch_terminal->tooltip
 msgid ""
 "Open a terminal with a list of current connections on a left mouse click. "
 "The next click closes the terminal."
 msgstr "鼠标左键点击时打开一个包含当前连接列表的终端。再一次点击关闭终端。"
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->list_connections_command->description
+#. settings-schema.json->list_connections_command->description
 msgid "Command "
-msgstr "命令"
+msgstr "命令 "
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->list_connections_command->tooltip
+#. settings-schema.json->list_connections_command->tooltip
 msgid "A command used to list current Internet connections"
 msgstr "用来列出当前互联网连接的命令"
+
+#~ msgid "Settings for download-and-upload-speed@cardsurf"
+#~ msgstr "download-and-upload-speed@cardsurf的设置"
+
+#~ msgid "An icon displayed next to download speed in the panel"
+#~ msgstr "显示面板中下载速度旁边的图标"

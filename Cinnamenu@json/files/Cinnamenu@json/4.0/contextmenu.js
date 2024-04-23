@@ -10,7 +10,7 @@ const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine} = imports.misc.util;
 
-const {_, log} = require('./utils');
+const {_} = require('./utils');
 const {MODABLE, MODED} = require('./emoji');
 
 class ContextMenuItem extends PopupBaseMenuItem {
@@ -133,7 +133,12 @@ class ContextMenu {
         if (categoryId.startsWith('/')) {
             addMenuItem(new ContextMenuItem(this.appThis, _('Remove category'), 'user-trash',
                         () => {
-                            this.appThis.removeFolderCategory(categoryId);
+                            if (categoryId === GLib.get_home_dir()) {
+                                this.appThis.settings.showHomeFolder = false;
+                                this.appThis._onShowHomeFolderChange();
+                            } else {
+                                this.appThis.removeFolderCategory(categoryId);
+                            }
                             this.appThis.display.categoriesView.update();
                             this.close();
                         }));
@@ -145,6 +150,53 @@ class ContextMenu {
                                     this.close(); }));
         
         this._showMenu(e, buttonActor);
+    }
+
+    openAppsView(event) {
+        //e is used to position context menu at mouse coords.
+        this.contextMenuButtons.forEach(button => button.destroy());
+        this.contextMenuButtons = [];
+
+        //------populate menu
+        const addMenuItem = (item) => {
+            this.menu.addMenuItem(item);
+            this.contextMenuButtons.push(item);
+        };
+        if (this.appThis.currentCategory === 'all') {
+            if (this.appThis.settings.allAppsOldStyle) {
+                addMenuItem(new ContextMenuItem(this.appThis, _('List settings apps separately'), null,
+                            () => {
+                                this.appThis.settings.allAppsOldStyle = false;
+                                this.close();
+                                this.appThis.setActiveCategory(this.appThis.currentCategory);
+                            }));
+            } else {
+                addMenuItem(new ContextMenuItem(this.appThis, _('Single list style'), null,
+                            () => {
+                                this.appThis.settings.allAppsOldStyle = true;
+                                this.close();
+                                this.appThis.setActiveCategory(this.appThis.currentCategory);
+                            }));
+            }
+        } else if (this.appThis.currentCategory.startsWith('/')) {
+            if (this.appThis.settings.showHiddenFiles) {
+                addMenuItem(new ContextMenuItem(this.appThis, _('Hide hidden files'), null,
+                            () => {
+                                this.appThis.settings.showHiddenFiles = false;
+                                this.close();
+                                this.appThis.setActiveCategory(this.appThis.currentCategory);
+                            }));
+            } else {
+                addMenuItem(new ContextMenuItem(this.appThis, _('Show hidden files'), null,
+                            () => {
+                                this.appThis.settings.showHiddenFiles = true;
+                                this.close();
+                                this.appThis.setActiveCategory(this.appThis.currentCategory);
+                            }));
+            }
+        }
+        
+        this._showMenu(event);
     }
 
     _showMenu(e, buttonActor) {
@@ -247,12 +299,19 @@ class ContextMenu {
                                                 this.close(); } ));
         }
 
-        //uninstall
+        //uninstall Mint only
         if (this.appThis._canUninstallApps) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Uninstall'), 'edit-delete',
                                 () => { spawnCommandLine(__meta.path + "/mint-remove-application.py '" +
                                             app.get_app_info().get_filename() + "'");
                                         this.appThis.menu.close(); } ));
+        }
+
+        //show app info 
+        if (this.appThis._pamacManagerAvailable) {
+            addMenuItem( new ContextMenuItem(this.appThis, _('App Info'), 'dialog-information',
+                        () => { spawnCommandLine("/usr/bin/pamac-manager --details-id=" + app.id);
+                                this.appThis.menu.close(); } ));
         }
     }
 
@@ -297,39 +356,42 @@ class ContextMenu {
         //add/remove favorite
         const favs = XApp.Favorites ? XApp.Favorites.get_default() : null;
         if (favs) {//prior to cinnamon 4.8, XApp favorites are not available
-            this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
-            const updateAfterFavFileChange = () => {
-                this.appThis.display.sidebar.populate();
-                this.appThis.display.categoriesView.update();//in case fav files category needs adding/removing
-                this.appThis.display.updateMenuSize();
-                if (this.appThis.currentCategory === 'favorite_files') {
-                    this.appThis.setActiveCategory(this.appThis.currentCategory);
-                }
-            };
-            if (favs.find_by_uri(app.uri)) { //favorite
-                addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
-                                                        () => { favs.remove(app.uri);
-                                                                updateAfterFavFileChange();
-                                                                this.close(); } ));
-            } else {
-                addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
-                        () => {
-                            favs.add(app.uri);
-                            //favs list doesn't update synchronously after adding fav so add small
-                            //delay before updating menu
-                            Mainloop.timeout_add(100, () => { updateAfterFavFileChange(); });
-                            this.close();
-                        }));
+        this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
+        const updateAfterFavFileChange = () => {
+            this.appThis.display.sidebar.populate();
+            this.appThis.display.categoriesView.update();//in case fav files category needs adding/removing
+            this.appThis.display.updateMenuSize();
+            if (this.appThis.currentCategory === 'favorite_files') {
+                this.appThis.setActiveCategory(this.appThis.currentCategory);
             }
+        };
+        if (favs.find_by_uri(app.uri)) { //favorite
+            addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
+                                                    () => { favs.remove(app.uri);
+                                                            updateAfterFavFileChange();
+                                                            this.close(); } ));
+        } else {
+            addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
+                    () => {
+                        favs.add(app.uri);
+                        //favs list doesn't update synchronously after adding fav so add small
+                        //delay before updating menu
+                        Mainloop.timeout_add(100, () => { updateAfterFavFileChange(); });
+                        this.close();
+                    }));
+        }
         }
 
         //Add folder as category
-        if (app.isDirectory) {
+        if (app.isDirectory && this.appThis.settings.showCategories) {
             const path = Gio.file_new_for_uri(app.uri).get_path();
             if (!this.appThis.getIsFolderCategory(path)) {
                 this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
                 addMenuItem(new ContextMenuItem(this.appThis, _('Add folder as category'), 'list-add',
                     () => {
+                        if (path === GLib.get_home_dir()) {
+                            this.appThis.settings.showHomeFolder = true;
+                        }
                         this.appThis.addFolderCategory(path);
                         this.appThis.display.categoriesView.update();
                         this.close();
@@ -339,7 +401,7 @@ class ContextMenu {
 
         //Open containing folder
         const folder = file.get_parent();
-        if (app.isRecentFile || app.isFavoriteFile) { //not a browser folder/file
+        if (app.isRecentFile || app.isFavoriteFile || app.isFolderviewFile) {
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
             addMenuItem(new ContextMenuItem(this.appThis, _('Open containing folder'), 'go-jump',
                     () => {

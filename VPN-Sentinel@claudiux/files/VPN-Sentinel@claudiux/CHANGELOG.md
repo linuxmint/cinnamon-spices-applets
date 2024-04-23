@@ -1,6 +1,16 @@
+### v2.2.1~20240202
+  * Changes icon.png and icon.svg.
+  * Updates README.md
+
+### v2.2.0~20240120
+  * Improves sub-processes.
+
+### v2.1.1~20230528
+  * Fixes a dependence issue for Arch: `dig` is in `bind` package and not in `bind-utils`.
+
 ### v2.1.0~20230513
 
-  * Now compatble with Soup v3.0. Special thanks to @mtwebster.
+  * Now compatible with Soup v3.0. Special thanks to @mtwebster.
   * Fixes a bug with JSON.parse().
 
 ### v2.0.0~20230507

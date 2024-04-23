@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 
-import gi
-gi.require_version("Gtk", "3.0")
-gi.require_version('XApp', '1.0')
-
 import os
 import sys
 import time
 import math
 import gettext
+import gi
+gi.require_version("Gtk", "3.0")
+gi.require_version('XApp', '1.0')
+
 from gi.repository import GLib, Gio, Gtk, Gdk
 from JsonSettingsWidgets import *
 
@@ -18,6 +18,7 @@ from dialogs import EditDialog, ConfirmDialog
 UUID = 'app-launcher@mchilli'
 APP_NAME = "App Launcher"
 APPLET_DIR = os.path.join(os.path.dirname(__file__))
+HOME = os.path.expanduser("~")
 ALIGNMENT_MAP = {
     "left":     0,
     "center":   0.5,
@@ -50,13 +51,21 @@ HEADER_COLUMS = [
 ]
 
 # i18n
+gettext.bindtextdomain(UUID, os.path.join(HOME, ".local/share/locale"))
+gettext.textdomain(UUID)
 gettext.install(UUID, GLib.get_home_dir() + '/.local/share/locale')
+
+
+def _(message: str) -> str:
+    return gettext.gettext(message)
+
 
 def log(msg):
     ''' global log function for debugging
     '''
     with open(APPLET_DIR + '/debug.log', 'a') as f:
         f.write("[%s] %s\n" % (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), str(msg)))
+
 
 class CustomAppList(SettingsWidget):
     def __init__(self, info, key, settings):
@@ -65,7 +74,6 @@ class CustomAppList(SettingsWidget):
         self.settings = settings
         self.info = info
         
-        self.height = 0
         self.groups = {}
 
         self.set_orientation(Gtk.Orientation.VERTICAL)
@@ -80,6 +88,7 @@ class CustomAppList(SettingsWidget):
         self.tree_view.set_property("level-indentation", 10)
         
         self.scrollbox = Gtk.ScrolledWindow()
+        self.scrollbox.set_margin_bottom(-200)
         self.scrollbox.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         self.pack_start(self.scrollbox, True, True, 0)
         self.scrollbox.add(self.tree_view)
@@ -166,8 +175,9 @@ class CustomAppList(SettingsWidget):
         self.restore_list()
 
         def get_window(self, *args):
-                window = self.get_toplevel()
-                window.connect("check-resize", self.on_check_resize)
+            window = self.get_toplevel()
+            self.scrollbox.set_size_request(-1, window.get_size().height)
+            window.connect("size-allocate", self.on_window_size_allocate)
 
         self.connect("realize", get_window)
         self.settings.listen("list-applications", self.valid_backup_restore)
@@ -176,13 +186,10 @@ class CustomAppList(SettingsWidget):
         self.tree_view.set_activate_on_single_click(False)
         self.tree_view.connect("row-activated", self.on_row_activated)
 
-    def on_check_resize(self, window):
-        ''' hack to change the size of the listview
+    def on_window_size_allocate(self, window, size):
+        ''' resize the list to fit the window height
         '''
-        height = window.get_size().height
-        if self.height != height:
-            self.height = height
-            self.scrollbox.set_size_request(-1, self.height - 152)
+        self.scrollbox.set_size_request(-1, size.height)
 
     def on_row_activated(self, *args):
         ''' activate if row double clicked

@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is put in the public domain.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-08 21:54+0200\n"
+"Project-Id-Version: c-eyes@anaximeno 1.14.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-07 19:45-0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,20 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.2/applet.js:352 5.4/applet.js:348
-msgid "effects enabled"
+#: 4.2/applet.js:379 5.4/applet.js:374
+msgid "click to deactivate the eye"
 msgstr ""
 
-#: 4.2/applet.js:352 5.4/applet.js:348
-msgid "effects disabled"
+#: 4.2/applet.js:379 5.4/applet.js:374
+msgid "click to activate the eye"
 msgstr ""
 
-#: 4.2/applet.js:355 5.4/applet.js:351
-msgid "Click to deactivate"
-msgstr ""
-
-#: 4.2/applet.js:357 5.4/applet.js:353
-msgid "Click to activate"
+#: 4.2/applet.js:380 5.4/applet.js:375
+msgid "TIP"
 msgstr ""
 
 #. metadata.json->name
@@ -84,17 +80,7 @@ msgstr ""
 
 #. 4.2->settings-schema.json->eye-mode->options
 #. 5.4->settings-schema.json->eye-mode->options
-msgid "Lids Filled"
-msgstr ""
-
-#. 4.2->settings-schema.json->eye-mode->options
-#. 5.4->settings-schema.json->eye-mode->options
 msgid "Bulb"
-msgstr ""
-
-#. 4.2->settings-schema.json->eye-mode->options
-#. 5.4->settings-schema.json->eye-mode->options
-msgid "Bulb Filled"
 msgstr ""
 
 #. 4.2->settings-schema.json->eye-line-width->description
@@ -115,12 +101,12 @@ msgstr ""
 
 #. 4.2->settings-schema.json->eye-margin->description
 #. 5.4->settings-schema.json->eye-margin->description
-msgid "Horizontal Margin"
+msgid "Margin"
 msgstr ""
 
 #. 4.2->settings-schema.json->eye-vertical-padding->description
 #. 5.4->settings-schema.json->eye-vertical-padding->description
-msgid "Vertical Padding"
+msgid "Padding"
 msgstr ""
 
 #. 4.2->settings-schema.json->eye-repaint-interval->units
@@ -132,7 +118,33 @@ msgstr ""
 
 #. 4.2->settings-schema.json->eye-repaint-interval->description
 #. 5.4->settings-schema.json->eye-repaint-interval->description
-msgid "Repaint Interval"
+msgid "Eye Update Interval"
+msgstr ""
+
+#. 4.2->settings-schema.json->eye-repaint-interval->tooltip
+#. 5.4->settings-schema.json->eye-repaint-interval->tooltip
+msgid ""
+"This setting controls the time to redraw the eye again. Lower values "
+"(measured in miliseconds) result in smoother animation but require more "
+"processing power."
+msgstr ""
+
+#. 4.2->settings-schema.json->eye-repaint-angle->units
+#. 5.4->settings-schema.json->eye-repaint-angle->units
+msgid "radians"
+msgstr ""
+
+#. 4.2->settings-schema.json->eye-repaint-angle->description
+#. 5.4->settings-schema.json->eye-repaint-angle->description
+msgid "Eye Update Sensitivity"
+msgstr ""
+
+#. 4.2->settings-schema.json->eye-repaint-angle->tooltip
+#. 5.4->settings-schema.json->eye-repaint-angle->tooltip
+msgid ""
+"This setting controls the minimum angle change between mouse movements "
+"required to redraw the eye. Lower values (measured in radians) result in "
+"smoother animation but require more processing power."
 msgstr ""
 
 #. 4.2->settings-schema.json->eye-activate-by-default->description
@@ -160,6 +172,13 @@ msgstr ""
 #. 4.2->settings-schema.json->pupil-clicked-color->description
 #. 5.4->settings-schema.json->pupil-clicked-color->description
 msgid "Activated Pupil Color"
+msgstr ""
+
+#. 4.2->settings-schema.json->fill-lids-color-painting->description
+#. 4.2->settings-schema.json->fill-bulb-color-painting->description
+#. 5.4->settings-schema.json->fill-lids-color-painting->description
+#. 5.4->settings-schema.json->fill-bulb-color-painting->description
+msgid "Fill the Colors Inside the Eye"
 msgstr ""
 
 #. 4.2->settings-schema.json->mouse-click-enable->description

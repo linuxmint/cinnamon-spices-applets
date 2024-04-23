@@ -81,6 +81,24 @@ declare namespace imports.gi.cairo {
          */
         lineTo(x: number, y: number): void
 
+        /**
+         * Begin a new sub-path. After this call the current point will be (x, y). Since 1.0
+         * @param x the X coordinate of the new position
+         * @param y the Y coordinate of the new position
+         */
+        moveTo(x: number, y: number): void;
+
+        /**
+         * Adds a cubic Bézier spline to the path from the current point to position (x3, y3) in user-space coordinates, using (x1, y1) and (x2, y2) as the control points. After this call the current point will be (x3, y3). If there is no current point before the call to cairo_curve_to() this function will behave as if preceded by a call to cairo_move_to(cr, x1, y1). Since 1.0
+         * @param x1     the X coordinate of the first control point
+         * @param y1     the Y coordinate of the first control point
+         * @param x2     the X coordinate of the second control point
+         * @param y2     the Y coordinate of the second control point
+         * @param x3     the X coordinate of the end of the curve
+         * @param y3     the Y coordinate of the end of the curve
+         */
+        curveTo(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number): void;
+
 
         /**
          * Sets the current line width within the Context. The line width value specifies the diameter of a pen that is circular in user space, (though device-space pen may be an ellipse in general due to scaling/shear/rotation of the CTM).

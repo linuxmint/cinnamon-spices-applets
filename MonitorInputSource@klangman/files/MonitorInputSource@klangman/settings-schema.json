@@ -1,0 +1,11 @@
+{
+   "monitor-cache": {
+      "type": "generic",
+      "default": []
+   },
+
+   "mouse-actions": {
+      "type": "generic",
+      "default": []
+   }
+}

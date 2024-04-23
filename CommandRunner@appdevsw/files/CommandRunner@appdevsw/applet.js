@@ -51,11 +51,13 @@ MyApplet.prototype =
             this.form_suffix = "";
             this.form_interval = "5";
             this.form_interval_unit = "s";
+            this.form_click_command = '';
             // real parameters
             this.command = "";
             this.prefix = "|";
             this.suffix = "|";
             this.intervalMs = 0;
+            this.clickCommand = '';
             // constraint to avoid high cpu usage
             this.intervalMsMin = 100;
             this.cmdrunner = new imports.cmdrunner.CmdRunner(that, that.debug);
@@ -140,6 +142,8 @@ MyApplet.prototype =
         this.prefix = this.form_prefix;
         this.suffix = this.form_suffix;
         this.intervalMs = this.getMillis(this.form_interval, this.form_interval_unit);
+        this.clickCommand = this.form_click_command;
+        this.clickCommand = this.parseCommand(this.clickCommand);
 
         if (this.intervalMs < this.intervalMsMin)
             this.intervalMs = this.intervalMsMin;
@@ -159,6 +163,7 @@ MyApplet.prototype =
         this.settings.bindProperty(Settings.BindingDirection.IN, "form_suffix", "form_suffix");
         this.settings.bindProperty(Settings.BindingDirection.IN, "form_interval", "form_interval");
         this.settings.bindProperty(Settings.BindingDirection.IN, "form_interval_unit", "form_interval_unit");
+        this.settings.bindProperty(Settings.BindingDirection.IN, 'form_click_command', 'form_click_command');
     },
     //
     //
@@ -168,7 +173,12 @@ MyApplet.prototype =
         if (cmd == "")
             return;
         if (!cmd || cmd== null)
-            cmd = "cinnamon-settings applets " + this.metadata.uuid + " " + this.instanceId;
+        {
+            if (this.clickCommand)
+                cmd = this.clickCommand;
+            else
+                cmd = "cinnamon-settings applets " + this.metadata.uuid + " " + this.instanceId;
+        }
         try
         {
             Util.spawnCommandLine(cmd);

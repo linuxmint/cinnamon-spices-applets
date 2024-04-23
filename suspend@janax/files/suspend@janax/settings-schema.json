@@ -1,0 +1,50 @@
+{
+   "suspend-header": {
+      "type": "header",
+      "description": "Suspend computer settings"
+   },
+   "suspend-on-double-click": {
+      "type": "switch",
+      "default": 0,
+      "description": "Double-click to suspend",
+      "tooltip": "When enabled, a double-click will suspend the computer, otherwise the computer will suspend on a single click."
+   },
+   "count-down": {
+      "type": "switch",
+      "default": 0,
+      "description": "Use a count down before suspending",
+      "tooltip": "When enabled, a count down will occurs before suspending the computer.\nClicking again during the count down will cancel the suspend."
+   },
+   "count-down-duration": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 1,
+    "max": 9,
+    "units": "seconds",
+    "step": 1,
+    "description": "Count down duration",
+    "dependency" : "count-down"
+   },
+   "ctrl-override-countdown": {
+      "type": "switch",
+      "default": 0,
+      "description": "Ctrl+Click to override the count down and suspend immediately",
+      "tooltip": "When enabled, using Ctrl+Click will suspend the computer immediately, without starting a count down or waiting for an existing count down to finish.",
+      "dependency" : "count-down"
+   },
+   "fullcolor-icon": {
+      "type": "switch",
+      "default": 1,
+      "description": "Use a full color icon",
+      "tooltip": "When enabled, a full color panel icon will be used, otherwise a symbolic icon will be used."
+   },
+   "system-suspend-header": {
+      "type": "header",
+      "description": "System suspend settings"
+   },
+   "config-power": {
+      "type": "button",
+      "description" : "Open Power Management Settings",
+      "callback" : "on_config_power_pressed"
+   }
+}

@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-12 22:04-0400\n"
+"PO-Revision-Date: 2023-12-25 13:05+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:51
+msgid "Ctrl+"
+msgstr "Ctrl+"
+
+#: applet.js:54
+msgid "Shift+"
+msgstr "Maj+"
+
+#: applet.js:58
+msgid "Left Click"
+msgstr "Clic gauche"
+
+#: applet.js:60
+msgid "Middle Click"
+msgstr "Clic-molette"
+
+#: applet.js:62
+msgid "Right Click"
+msgstr "Clic droit"
+
+#: applet.js:64
+msgid "Back Click"
+msgstr "Clic Arrière"
+
+#: applet.js:66
+msgid "Forward Click"
+msgstr "Clic Avant"
+
+#: applet.js:158 applet.js:390 applet.js:392
+msgid "Monitor input sources"
+msgstr "Source d'entrée pour l'écran"
+
+#: applet.js:170 applet.js:217 applet.js:480
+msgid "Detecting monitors..."
+msgstr "Détection des écrans..."
+
+#: applet.js:176
+msgid "Options"
+msgstr "Options"
+
+#: applet.js:178
+msgid "Clear monitor cache"
+msgstr "Effacer le cache des écrans"
+
+#: applet.js:184
+msgid "Clear quick actions"
+msgstr "Effacer les actions rapides"
+
+#: applet.js:197
+msgid "Help"
+msgstr "Aide"
+
+#: applet.js:339
+msgid "Required \"ddcutil\" not found"
+msgstr "\"ddcutil\" est nécessaire et n'est pas installé"
+
+#: applet.js:343
+msgid "Error, \"ddcutil\" exit code "
+msgstr "Erreur, code de sortie de \"ddcutil\" "
+
+#: applet.js:347
+msgid "No capable monitors detected"
+msgstr "Aucun écran compatible n'a été détecté"
+
+#: applet.js:386
+msgid "for"
+msgstr "pour"
+
+#: applet.js:473
+msgid "Refresh"
+msgstr "Actualiser"
+
+#. metadata.json->name
+msgid "Monitor Input Source"
+msgstr "Source d'entrée pour l'écran"
+
+#. metadata.json->description
+msgid ""
+"Change your monitors video input source directly from the cinnamon panel"
+msgstr ""
+"Modifiez la source d'entrée vidéo de votre écran directement à partir du "
+"panneau de Cinnamon"

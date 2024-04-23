@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-18 11:06+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2024-02-05 14:46-0500\n"
 "PO-Revision-Date: 2022-11-06 19:22+0100\n"
 "Last-Translator: MCHilli\n"
 "Language-Team: \n"
@@ -18,106 +18,106 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:102
+#: applet.js:108
 msgid "Edit Applications"
 msgstr "Anwendungen bearbeiten"
 
-#: applet.js:694 applet.js:948
+#: applet.js:737 applet.js:1031
 msgid "Delete"
 msgstr "Löschen"
 
-#: applet.js:695 applet.js:949
+#: applet.js:738 applet.js:1032
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: applet.js:696 applet.js:950
+#: applet.js:739 applet.js:1033
 msgid "Cancel"
 msgstr "Abbruch"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
-#: dialogs.py:35 widgets.py:35
+#: dialogs.py:45 widgets.py:36 dialogs.glade:93 dialogs.glade:326
 msgid "Name"
 msgstr "Name"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:41
+#: dialogs.py:51 dialogs.glade:104
 msgid "Group"
 msgstr "Gruppe"
 
 #. settings-schema.json->list-applications->columns->title
-#: dialogs.py:42 widgets.py:42
+#: dialogs.py:52 widgets.py:43 dialogs.glade:115
 msgid "Command"
 msgstr "Befehl"
 
-#: dialogs.py:178
+#: dialogs.py:203
 msgid "The name cannot be empty"
 msgstr "Der Name darf nicht leer sein"
 
-#: dialogs.py:183
+#: dialogs.py:208
 msgid "The name is already used"
 msgstr "Der Name wird schon verwendet"
 
-#: dialogs.py:190
+#: dialogs.py:215
 msgid "Valid name"
 msgstr "Gültiger Name"
 
-#: dialogs.py:196
+#: dialogs.py:221
 msgid "Valid command"
 msgstr "Gültiger Befehl"
 
-#: dialogs.py:199
+#: dialogs.py:224
 msgid "The command is not valid"
 msgstr "Der Befehl ist nicht gültig"
 
-#: dialogs.py:211
+#: dialogs.py:236
 msgid "Which data should be replaced from *.desktop file?"
 msgstr "Welche Daten sollen von der *.desktop Datei ersetzt werden?"
 
-#: dialogs.py:256
+#: dialogs.py:281 dialogs.glade:561
 msgid "really delete?"
 msgstr "wirklich löschen?"
 
 #. settings-schema.json->list-applications->columns->title
 #. settings-schema.json->list-groups->columns->title
 #. settings-schema.json->launcher-icon->description
-#: widgets.py:28
+#: widgets.py:29
 msgid "Icon"
 msgstr "Symbol"
 
-#: widgets.py:116
+#: widgets.py:125
 msgid "Add application"
 msgstr "Anwendungen hinzufügen"
 
-#: widgets.py:117
+#: widgets.py:126
 msgid "Add new entry"
 msgstr "Neuer Eintrag"
 
-#: widgets.py:121
+#: widgets.py:130
 msgid "Add separator"
 msgstr "Trenner hinzufügen"
 
-#: widgets.py:129
+#: widgets.py:138
 msgid "Remove selected entry"
 msgstr "Ausgewählten Eintrag löschen"
 
-#: widgets.py:135
+#: widgets.py:144
 msgid "Edit selected entry"
 msgstr "Ausgewählten Eintrag bearbeiten"
 
-#: widgets.py:141
+#: widgets.py:150
 msgid "Duplicate selected entry"
 msgstr "Ausgewählten Eintrag duplizieren"
 
-#: widgets.py:147
+#: widgets.py:156
 msgid "Move selected entry up"
 msgstr "Ausgewählten Eintrag nach oben bewegen"
 
-#: widgets.py:153
+#: widgets.py:162
 msgid "Move selected entry down"
 msgstr "Ausgewählten Eintrag nach unten bewegen"
 
-#: widgets.py:316
+#: widgets.py:323
 msgid "Separator"
 msgstr "Trenner"
 

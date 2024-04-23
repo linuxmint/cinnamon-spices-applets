@@ -7,151 +7,187 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-21 13:54+0100\n"
-"PO-Revision-Date: 2023-01-16 22:39+0100\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"POT-Creation-Date: 2024-02-11 14:41+0100\n"
+"PO-Revision-Date: 2024-02-13 18:09+0100\n"
+"Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: applet.js:346
+#: applet.js:429
 msgid "This is your own list of Categories and Radio Stations."
-msgstr ""
+msgstr "Ez az Ön saját kategóriáinak és rádióállomásainak listája."
 
-#: applet.js:347
-#, fuzzy
+#: applet.js:430
 msgid "You can add more using the [+] button."
-msgstr "Feladatokat a fenti <b>+</b>-szal adhat hozzá"
+msgstr "Többet is hozzáadhat a [+] gombbal."
 
-#: applet.js:348
+#: applet.js:431
 msgid "For a category, fill in only its name; leave the other fields empty."
 msgstr ""
+"Egy kategória esetén csak a nevét írja be; hagyja üresen a többi mezőt."
 
-#: applet.js:349
+#: applet.js:432
 msgid "For a radio station, enter only its name and its streaming URL."
-msgstr ""
+msgstr "Rádióállomás esetén csak a nevét és a streaming URL-jét adja meg."
 
-#: applet.js:350
+#: applet.js:433
 msgid ""
 "You can order the rows by dragging and dropping or by using the buttons and "
 "tools below the list."
 msgstr ""
+"A sorokat húzással vagy a lista alatti gombok és eszközök használatával "
+"rendezheti."
 
-#: applet.js:351
+#: applet.js:434
 msgid ""
 "The buttons on the right below the list allow you to navigate page by page "
 "or category by category."
 msgstr ""
+"A lista alatt jobbra található gombok segítségével oldalanként vagy "
+"kategóriánként kategóriánként navigálhat."
 
-#: applet.js:352
+#: applet.js:435
 msgid ""
 "To search for one of your stations, click on the list and start writing its "
 "name."
 msgstr ""
+"Az egyik állomás megkereséséhez kattintson a listára, és kezdje el beírni a "
+"nevét."
 
-#: applet.js:353
+#: applet.js:436
 msgid ""
 "To easily add stations to your list, use the following 2 tabs: Search and "
 "Import."
 msgstr ""
+"Ha egyszerűen szeretne állomásokat hozzáadni a listához, használja a "
+"következő 2 lapot: Keresés és importálás."
 
-#: applet.js:354
+#: applet.js:437
 msgid "Check its 'Menu' box to display a station or category in the menu."
 msgstr ""
+"Jelölje be a „Menü” négyzetet, ha egy állomást vagy kategóriát szeretne "
+"megjeleníteni a menüben."
 
-#: applet.js:355
+#: applet.js:438
 msgid ""
 "Check its '♪/➟' box to listen to the station or move it to another category "
 "using the tools below the list."
 msgstr ""
+"Jelölje be a '♪/➟' jelölőnégyzetet az állomás hallgatásához, vagy a lista "
+"alatti eszközök segítségével áthelyezheti egy másik kategóriába."
 
-#: applet.js:357
+#: applet.js:440
 msgid "You can have your list of stations checked by internet databases."
 msgstr ""
+"Az állomások listáját internetes adatbázisok segítségével ellenőrizheti."
 
-#: applet.js:358
+#: applet.js:441
 msgid ""
 "Any station recognized by one of these databases will receive a Universal "
 "Unique Identifier (UUID) provided by this database."
 msgstr ""
+"Bármely állomás, amelyet ezen adatbázisok valamelyike felismer, kap egy "
+"univerzális egyedi azonosítót (UUID), amelyet ez az adatbázis biztosít."
 
-#: applet.js:359
+#: applet.js:442
 msgid ""
 "So, if a streaming URL was changed, a next check would update it and you can "
 "continue to listen to the affected station."
 msgstr ""
+"Tehát, ha a streaming URL megváltozott, egy következő ellenőrzés frissíti "
+"azt, és továbbra is hallgathatja az érintett állomást."
 
-#: applet.js:361
+#: applet.js:444
 msgid ""
 "Here you can search for other stations in a free radio database accessible "
 "via the Internet."
 msgstr ""
+"Itt kereshet más állomásokat az interneten keresztül elérhető ingyenes "
+"rádióadatbázisban."
 
-#: applet.js:362
+#: applet.js:445
 msgid ""
 "Fill in at least a few fields of the form below then click on the "
 "'Search ...' button."
 msgstr ""
+"Töltse ki az alábbi űrlap legalább néhány mezőjét, majd kattintson a "
+"\"Keresés...\" gombra."
 
-#: applet.js:363
+#: applet.js:446
 msgid ""
 "Each time this button is clicked, a new results page is displayed in the "
 "second part of this page, where you can test certain stations and include "
 "them in the menu."
 msgstr ""
+"Minden alkalommal, amikor erre a gombra kattint, egy új eredményoldal "
+"jelenik meg az oldal második részében, ahol tesztelhet bizonyos állomásokat, "
+"és felveheti azokat a menübe."
 
-#: applet.js:364
+#: applet.js:447
 msgid ""
 "A station already in your menu will only appear in search results if its "
 "streaming URL has changed."
 msgstr ""
+"A menüjében már szereplő állomás csak akkor jelenik meg a keresési "
+"eredmények között, ha a streaming URL-je megváltozott."
 
-#: applet.js:365
+#: applet.js:448
 msgid ""
 "When no new page appears, it means that all results matching your search "
 "criteria have been displayed."
 msgstr ""
+"Ha nem jelenik meg új oldal, az azt jelenti, hogy a keresési feltételeknek "
+"megfelelő összes eredmény megjelenik."
 
-#: applet.js:367
+#: applet.js:450
 msgid ""
 "You can import a file containing the name and streaming URL of at least one "
 "radio station."
 msgstr ""
+"Ön importálhat egy fájlt, amely legalább egy rádióállomás nevét és streaming "
+"URL-jét tartalmazza."
 
-#: applet.js:368
+#: applet.js:451
 msgid ""
 "These radio stations are displayed in the list below. You can test them by "
 "checking their ♪ box."
 msgstr ""
+"Ezek a rádióállomások az alábbi listában jelennek meg. A ♪ négyzet "
+"bejelölésével tesztelheti őket."
 
-#: applet.js:369
+#: applet.js:452
 msgid "Then manage this list with the buttons at the bottom of this tab."
-msgstr ""
+msgstr "Ezután kezelheti ezt a listát a lap alján található gombokkal."
 
-#: applet.js:371
+#: applet.js:454
 msgid ""
 "In the Shoutcast directory, click the download button to the left of the "
 "station name."
 msgstr ""
+"A Shoutcast könyvtárban kattintson az állomás nevétől balra található "
+"letöltés gombra."
 
-#: applet.js:372
+#: applet.js:455
 msgid ""
 "Select the open format (.XSPF) and save the file giving it the same name as "
 "the station."
 msgstr ""
+"Válassza ki a nyitott formátumot (.XSPF), és mentse el a fájlt az állomás "
+"névvel megegyező névvel."
 
-#: applet.js:373
-#, fuzzy
+#: applet.js:456
 msgid "This file can then be imported here."
-msgstr "Nem került fájl importálásra"
+msgstr "Ez a fájl ezután ide importálható."
 
-#: applet.js:375
+#: applet.js:458
 #, javascript-format
 msgid "%s bytes = %s GB = %s GiB"
-msgstr ""
+msgstr "%s bájt = %s GB = %s GiB"
 
 #. settings-schema.json->category-to-move->options
 #. settings-schema.json->volume-at-startup->options
@@ -159,322 +195,325 @@ msgstr ""
 #. settings-schema.json->search-country->options
 #. settings-schema.json->search-codec->options
 #. settings-schema.json->search-order->options
-#: applet.js:536 applet.js:550 applet.js:4083 applet.js:4095
+#: applet.js:618 applet.js:632 applet.js:4690 applet.js:4702
 msgid "(Undefined)"
 msgstr "(Nincs megadva)"
 
-#: applet.js:874 applet.js:1425 applet.js:1769
+#: applet.js:820
+msgid "Radio3.0 web page..."
+msgstr "Radio3.0 weboldal..."
+
+#: applet.js:1030 applet.js:1777 applet.js:2182
 msgid "Stop"
 msgstr "Leállítás"
 
-#: applet.js:1417
+#: applet.js:1769
 msgid "Start"
 msgstr "Indulás"
 
-#: applet.js:1631 applet.js:1661 applet.js:1707
-#, fuzzy
+#: applet.js:2013 applet.js:2049 applet.js:2096
 msgid "Middle-Click: Stop Recording"
-msgstr "Rögzítés indítása/leállítása…"
+msgstr "Középső kattintás: Felvétel leállítása"
 
-#: applet.js:1657 applet.js:1703
+#: applet.js:2045 applet.js:2092
 msgid "Volume: %s%"
 msgstr "Hangerő: %s%"
 
-#: applet.js:1663 applet.js:1709
-#, fuzzy
+#: applet.js:2051 applet.js:2098
 msgid "Middle-click: ON/OFF"
-msgstr "Középső kattintás utánzása"
+msgstr "Középső kattintás: BE/KI"
 
-#: applet.js:1665 applet.js:1711
-#, fuzzy
+#: applet.js:2053 applet.js:2100
 msgid "Click: Select another station"
-msgstr "Kattintás: kijelölés"
+msgstr "Kattintás: Válasszon másik állomást"
 
-#: applet.js:1678
-#, fuzzy
+#: applet.js:2066
 msgid "Click to select a station"
-msgstr "Rádióállomás keresése"
+msgstr "Kattintson egy állomás kiválasztásához"
 
-#: applet.js:1713
-#, fuzzy
+#: applet.js:2102
 msgid "Scroll wheel: volume change"
-msgstr "Egérgörgő művelet"
+msgstr "Görgő: hangerő változtatás"
 
-#: applet.js:1745 applet.js:2021 applet.js:3756
+#: applet.js:2158 applet.js:2513 applet.js:4319
 msgid "Configure..."
 msgstr "Beállítások…"
 
-#: applet.js:1749 applet.js:2013
-#, fuzzy
+#: applet.js:2162 applet.js:2505
 msgid "Search for new stations..."
-msgstr "Új keresőmappa"
+msgstr "Új állomások keresése..."
 
-#: applet.js:1755 applet.js:2025 applet.js:3793
+#: applet.js:2168 applet.js:2517 applet.js:4356
 msgid "Sound Settings"
 msgstr "Hangbeállítások"
 
-#: applet.js:1818
-#, fuzzy
+#: applet.js:2228 applet.js:2276
 msgid "Watch on YT"
-msgstr "Karóra"
+msgstr "Nézd meg a YT-n"
 
-#: applet.js:1825
+#: applet.js:2235
 msgid "Try to download it from YT (unsafe)"
-msgstr ""
+msgstr "Próbáld meg letölteni a YT-ről (nem biztonságos)"
 
-#: applet.js:1844
-#, fuzzy
+#: applet.js:2267
+#, javascript-format
+msgid "Infos on: %s"
+msgstr "Információ: %s"
+
+#: applet.js:2297
 msgid "Recently Played Stations:"
-msgstr "_Legutóbb játszott"
+msgstr "Legutóbb játszott állomások:"
 
-#: applet.js:1880
-#, fuzzy
+#: applet.js:2333
 msgid "Visit the home page of this station"
-msgstr "A(z) %s honlapja: <%s>\n"
+msgstr "Látogassa meg az állomás kezdőlapját"
 
-#: applet.js:1951
-#, fuzzy
+#: applet.js:2374
+msgid "My Categories"
+msgstr "Saját kategóriák"
+
+#: applet.js:2441
 msgid "My Radio Stations"
 msgstr "Saját rádióállomások"
 
-#: applet.js:2133
+#: applet.js:2620
 msgid "Downloading..."
 msgstr "Letöltés…"
 
-#: applet.js:2135
-#, fuzzy
+#: applet.js:2622
 msgid "Stop downloading"
-msgstr "Letöltés"
+msgstr "Letöltés leállítása"
 
-#: applet.js:2243
-#, fuzzy
+#: applet.js:2726
 msgid "Download complete"
-msgstr "„%s” letöltése kész"
+msgstr "Letöltés befejeződött"
 
-#: applet.js:2245 applet.js:2254 applet.js:3571 applet.js:3580 applet.js:3589
-#: applet.js:3845
-#, fuzzy
+#. settings-schema.json->recordings-open-folder->description
+#: applet.js:2728 applet.js:2737 applet.js:4123 applet.js:4132 applet.js:4141
+#: applet.js:4437
 msgid "Open the recordings folder"
-msgstr "Felvételek"
+msgstr "Nyissa meg a felvételek mappát"
 
-#: applet.js:2252 applet.js:3568 applet.js:3578 applet.js:3587
+#: applet.js:2735 applet.js:4120 applet.js:4130 applet.js:4139
 msgid "An error seems to have occurred during recording!"
-msgstr ""
+msgstr "Úgy tűnik, hiba történt a rögzítés közben!"
 
-#: applet.js:2253 applet.js:3570 applet.js:3579 applet.js:3588
-#, fuzzy
+#: applet.js:2736 applet.js:4122 applet.js:4131 applet.js:4140
 msgid "Please check this record."
-msgstr "Ellenőrizze a telepítést."
+msgstr "Kérjük, ellenőrizze ezt a rekordot."
 
-#: applet.js:2354 applet.js:2388
-#, fuzzy
+#: applet.js:2843 applet.js:2877
 msgid "Record from now"
-msgstr "_Felvétel"
+msgstr "Felvétel mostantól"
 
-#: applet.js:2372 applet.js:3989
-#, fuzzy
+#: applet.js:2861 applet.js:4596
 msgid "Stop Current Recording"
-msgstr "Felvétel leállítása"
+msgstr "Az aktuális rögzítés leállítása"
 
-#: applet.js:2482
+#: applet.js:2973
 #, javascript-format
 msgid "Playing %s%s"
 msgstr "Lejátszás: %s%s"
 
-#: applet.js:2529
-#, fuzzy
+#: applet.js:3022
 msgid "Radio OFF"
-msgstr "Radio++"
+msgstr "Rádió Ki"
 
-#: applet.js:2657
-#, fuzzy
+#: applet.js:3146
 msgid "Unable to record anything!"
-msgstr "_Felvétel"
+msgstr "Semmit nem lehet rögzíteni!"
 
-#: applet.js:2657 applet.js:3865
-#, fuzzy
+#: applet.js:3146 applet.js:4457
 msgid "Insufficient space"
-msgstr "Kevés a memória"
+msgstr "Elégtelen hely"
 
-#: applet.js:2657
+#: applet.js:3146
 msgid "The limit you set has been reached."
-msgstr ""
+msgstr "Elérte a beállított korlátot."
 
-#: applet.js:3075
-#, fuzzy
+#: applet.js:3517
+msgid "Please Log Out then Log In"
+msgstr "Kérjük, jelentkezzen ki, majd jelentkezzen be"
+
+#: applet.js:3517
+msgid "to finalize yt-dlp update"
+msgstr "az yt-dlp frissítés véglegesítéséhez"
+
+#: applet.js:3614
 msgid "Nothing to save."
-msgstr "Nem lehet menteni. Semmi sincs kijelölve."
+msgstr "Nincs mit menteni."
 
-#: applet.js:3088
-#, fuzzy
+#: applet.js:3627
 msgid "List of saved radio stations"
-msgstr "Rádióállomások URL-listájának megjelenítése"
+msgstr "A mentett rádióállomások listája"
 
-#: applet.js:3106
+#: applet.js:3645
 msgid "This will replace all current radio stations."
-msgstr ""
+msgstr "Ez felváltja az összes jelenlegi rádióállomást."
 
-#: applet.js:3107
-#, fuzzy
+#: applet.js:3646
 msgid "Are you sure you want to continue?"
-msgstr ""
-"Hozzá készül adni %s-t, mint %s visszavonóját. Ez a művelet nem vonható "
-"vissza! Biztosan folytatja?"
+msgstr "Biztos vagy benne, hogy folytatni akarod?"
 
-#: applet.js:3167 applet.js:3260
-#, fuzzy
+#: applet.js:3706 applet.js:3799
 msgid "Update in progress"
-msgstr "Folyamatban"
+msgstr "Frissítés folyamatban"
 
-#: applet.js:3167 applet.js:3260
-#, fuzzy
+#: applet.js:3706 applet.js:3799
 msgid "It may take a while ... Please wait."
-msgstr "Betűkészletek betöltése (ez hosszabb ideig is tarthat…)"
+msgstr "Eltarthat egy ideig... Kérem, várjon."
 
-#: applet.js:3255 applet.js:3335
-#, fuzzy
+#: applet.js:3794 applet.js:3876
 msgid "Update completed successfully"
-msgstr "Az importálás sikeresen befejeződött"
+msgstr "A frissítés sikeresen befejeződött"
 
-#: applet.js:3449 applet.js:3505
+#: applet.js:4004 applet.js:4060
 msgid "ERROR: Invalid YT video URL!"
-msgstr ""
+msgstr "HIBA: Érvénytelen YT-videó URL-je!"
 
-#: applet.js:3474
+#: applet.js:4029
 msgid "Unable to extract a single soundtrack"
-msgstr ""
+msgstr "HIBA: Érvénytelen YT-videó URL-je"
 
-#: applet.js:3474
-#, fuzzy
+#: applet.js:4029
 msgid "Maybe it's a playlist?"
-msgstr "Nem létező vagy üres lejátszólista"
+msgstr "Talán ez egy lejátszási lista?"
 
-#: applet.js:3507
+#: applet.js:4062
 msgid "Close"
 msgstr "Bezárás"
 
-#: applet.js:3726
+#: applet.js:4281
 msgid "About..."
 msgstr "Névjegy…"
 
-#: applet.js:3737
+#: applet.js:4300
 msgid "Manual..."
 msgstr "Kézi…"
 
-#: applet.js:3769
-#, fuzzy
+#: applet.js:4332
 msgid "Schedule a background record..."
-msgstr "_Felvétel"
+msgstr "Háttérrekord ütemezése..."
 
-#: applet.js:3781
+#: applet.js:4344
 msgid "Extract soundtrack from YouTube video..."
-msgstr ""
+msgstr "Hangsáv kinyerése a YouTube videóból..."
 
-#: applet.js:3802
-#, fuzzy
+#: applet.js:4365
 msgid "Pulse Effects"
-msgstr "Pulzus"
+msgstr "Pulse Effects"
 
-#: applet.js:3811
+#: applet.js:4374
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "Eltávolítás: „%s”"
 
-#: applet.js:3824
-#, fuzzy
+#: applet.js:4387
 msgid "Radio ON at startup"
-msgstr "Indítás"
+msgstr "Rádió BE indításkor"
 
-#: applet.js:3862
+#: applet.js:4401
+msgid "Display Station Logo"
+msgstr "Az állomás logójának megjelenítése"
+
+#. settings-schema.json->dont-check-dependencies->description
+#: applet.js:4415
+msgid "Do not check about dependencies"
+msgstr "Ne ellenőrizze a függőségeket"
+
+#: applet.js:4454
 msgid "(auto)"
 msgstr "(auto)"
 
-#: applet.js:3862
+#: applet.js:4454
 msgid "(manual)"
 msgstr "(kézi)"
 
-#: applet.js:3865 applet.js:4038
+#: applet.js:4457 applet.js:4645
 msgid "Stop Recording"
 msgstr "Felvétel leállítása"
 
-#: applet.js:3865
+#: applet.js:4457
 msgid "Start Recording"
 msgstr "Felvétel elindítása"
 
-#: applet.js:3886
+#: applet.js:4478
 msgid "Reload this applet"
 msgstr "Kisalkalmazás újratöltése"
 
-#: applet.js:3905
-#, fuzzy
+#. settings-schema.json->show-volume-level-near-icon->description
+#: applet.js:4494
+msgid "Display volume level near icon"
+msgstr "Hangerőszint megjelenítése az ikon közelében"
+
+#: applet.js:4512
 msgid "Cancel downloads from YT"
-msgstr "Kilépés, és letöltések megszakítása"
+msgstr "Letöltések megszakítása a YOUTUBE webhelyről"
 
-#: applet.js:4039
-#, fuzzy
+#: applet.js:4646
 msgid "Close without stopping recording"
-msgstr "Bezárás mentés _nélkül"
+msgstr "Zárja be a felvétel leállítása nélkül"
 
-#: applet.js:4249
-#, fuzzy, javascript-format
+#: applet.js:4856
+#, javascript-format
 msgid "Starting recording from %s:%s to %s:%s"
-msgstr "Másolás kezdése innen: %(VAR_SOURCE)s ide: %(VAR_TARGET)s"
+msgstr "Felvétel indítása %s:%s és %s:%s között"
 
-#: applet.js:4261
-#, fuzzy
+#: applet.js:4868
 msgid "Recording completed"
-msgstr "Befejezve"
+msgstr "Felvétel kész"
 
-#: applet.js:4355
+#: applet.js:4963
 msgid "This will import a new file containing radio stations."
-msgstr ""
+msgstr "Ezzel egy új fájlt importál, amely rádióállomásokat tartalmaz."
 
-#: applet.js:4356
+#: applet.js:4964
 msgid "Do you want to continue?"
 msgstr "Szeretné folytatni?"
 
-#: applet.js:4427
-#, fuzzy
+#: applet.js:5035
 msgid "No new radio in your list."
-msgstr "Választógombok listájának megjelenítése."
+msgstr "Nincs új rádió a listán."
 
-#: applet.js:4429
+#: applet.js:5037
 msgid "One more radio in your list."
-msgstr ""
+msgstr "Még egy rádió a listán."
 
-#: applet.js:4431
+#: applet.js:5039
 #, javascript-format
 msgid "%s more radios in your list."
-msgstr ""
+msgstr "%s további rádió a listán."
 
-#: applet.js:4636
+#: applet.js:5246
 msgid "There are no new stations to add to the Radio3.0 applet menu"
 msgstr ""
+"Nincsenek új állomások, amelyeket hozzáadhatna a Radio3.0 kisalkalmazás "
+"menühöz"
 
-#: applet.js:4638
+#: applet.js:5248
 msgid "A new station has been added to the Radio3.0 applet menu"
-msgstr ""
+msgstr "Új állomás került a Radio3.0 kisalkalmazás menüjébe"
 
-#: applet.js:4640
+#: applet.js:5250
 #, javascript-format
 msgid "%s new stations have been added to the Radio3.0 applet menu"
-msgstr ""
+msgstr "%s új állomás került a Radio3.0 kisalkalmazás menüjébe"
 
-#: applet.js:4841
-#, fuzzy, javascript-format
+#: applet.js:5451
+#, javascript-format
 msgid "%s kbps"
-msgstr "%d kb/s"
+msgstr "%s kbps"
 
-#: lib/checkDependencies.js:313
+#: lib/checkDependencies.js:384
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "A kisalkalmazás %s teljesen működőképes."
 
-#: lib/checkDependencies.js:314
+#: lib/checkDependencies.js:385
 msgid "All dependencies are installed"
 msgstr "Minden szükséges függőség telepítve"
 
-#: lib/checkDependencies.js:339
+#: lib/checkDependencies.js:413
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -482,18 +521,23 @@ msgstr ""
 "Úgy tűnik, hogy hiányzik néhány program, amely szükséges ahhoz, hogy a "
 "kisalkalmazás minden funkcióval rendelkezzen."
 
-#: lib/checkDependencies.js:340
+#: lib/checkDependencies.js:414
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 "Kérjük, a most megnyitott terminálban hajtsa végre a következő parancsokat:"
 
-#: lib/checkDependencies.js:341
+#: lib/checkDependencies.js:415
 msgid "Some dependencies are not installed!"
 msgstr "Néhány függőség nincs telepítve!"
 
 #: lib/checkTranslations.js:108
 msgid "To finalize the translation installation, please restart Cinnamon"
-msgstr ""
+msgstr "A fordítás telepítésének befejezéséhez indítsa újra a Cinnamont"
+
+#: lib/util.js:245
+#, javascript-format
+msgid "Execution of '%s' failed:"
+msgstr "A(z) „%s” végrehajtása nem sikerült:"
 
 #: xs/xlet-settings.py:214
 msgid "Previous instance"
@@ -524,20 +568,20 @@ msgstr "Alapértelmezések visszaállítása"
 msgid "Reload %s"
 msgstr "Újratöltés: %s"
 
-#: xs/xlet-settings.py:438
+#: xs/xlet-settings.py:441
 #, python-format
 msgid "Settings for %s"
 msgstr "Beállítások ehhez: %s"
 
-#: xs/xlet-settings.py:530
+#: xs/xlet-settings.py:533
 msgid "Select or enter file to export to"
 msgstr "Válassza ki vagy írja be az exportálni kívánt fájl nevét"
 
-#: xs/xlet-settings.py:538 xs/xlet-settings.py:559
+#: xs/xlet-settings.py:541 xs/xlet-settings.py:562
 msgid "JSON files"
 msgstr "JSON-fájlok"
 
-#: xs/xlet-settings.py:552
+#: xs/xlet-settings.py:555
 msgid "Select a JSON file to import"
 msgstr "Válassza ki az importálni kívánt JSON-fájlt"
 
@@ -554,9 +598,8 @@ msgid "Edit selected entry"
 msgstr "Kijelölt bejegyzés szerkesztése"
 
 #: xs/bin/R3TreeListWidgets.py:292
-#, fuzzy
 msgid "Unselect the selected row"
-msgstr "Kijelölt sor megváltoztatása"
+msgstr "Törölje a kiválasztott sor kijelölését"
 
 #: xs/bin/R3TreeListWidgets.py:297
 msgid "Move selected entry up"
@@ -567,9 +610,8 @@ msgid "Move selected entry down"
 msgstr "Kijelölt bejegyzés mozgatása le"
 
 #: xs/bin/R3TreeListWidgets.py:325
-#, fuzzy
 msgid "Go to bottom"
-msgstr "Ugrás a fájl végére."
+msgstr "Ugrás az aljára"
 
 #: xs/bin/R3TreeListWidgets.py:331
 msgid "Go to next page"
@@ -580,19 +622,16 @@ msgid "Go to previous page"
 msgstr "Ugrás az előző oldalra"
 
 #: xs/bin/R3TreeListWidgets.py:342
-#, fuzzy
 msgid "Go to top"
-msgstr "Ugrás a fájl elejére."
+msgstr "Ugrás a tetejére"
 
 #: xs/bin/R3TreeListWidgets.py:356
-#, fuzzy
 msgid "Go to next category"
-msgstr "Ugrás a következő lapcsoportra"
+msgstr "Ugrás a következő kategóriába"
 
 #: xs/bin/R3TreeListWidgets.py:366
-#, fuzzy
 msgid "Go to previous category"
-msgstr "Előző kategória"
+msgstr "Ugrás az előző kategóriába"
 
 #: xs/bin/R3TreeListWidgets.py:503
 msgid "Edit entry"
@@ -600,7 +639,7 @@ msgstr "Bejegyzés szerkesztése"
 
 #. metadata.json->description
 msgid "The Ultimate Internet Radio Receiver & Recorder for Cinnamon"
-msgstr ""
+msgstr "Az egyik legjobb internetes rádióvevő és -felvevő a Cinnamon számára"
 
 #. metadata.json->name
 msgid "Radio3.0"
@@ -609,10 +648,8 @@ msgstr "Radio3.0"
 #. settings-schema.json->pageStations->title
 #. settings-schema.json->import-list->description
 #. settings-schema.json->search-list->description
-#, fuzzy
 msgid "Radios"
-msgstr ""
-"Élvezze a zenét, hallgasson online rádiókat, vagy egyéb online adásokat."
+msgstr "Rádiók"
 
 #. settings-schema.json->pageImport->title
 msgid "Import"
@@ -641,71 +678,56 @@ msgid "YT"
 msgstr "YT"
 
 #. settings-schema.json->pageScheduling->title
-#, fuzzy
 msgid "Scheduling"
-msgstr ""
-"A folyamat prioritása meghatározza a folyamat számára rendelkezésre álló "
-"időszeletet egy egy vagy több processzorral (CPU-val vagy maggal) rendelkező "
-"rendszeren. Egy <em>nice</em> folyamat, vagy aminek magasabb a nice értéke, "
-"más folyamatok javára lemond a prioritásáról. A nice érték módosítása növeli "
-"vagy csökkenti az ütemezési prioritást."
+msgstr "Ütemezés"
 
 #. settings-schema.json->pageNetwork->title
 msgid "Network"
 msgstr "Hálózat"
 
 #. settings-schema.json->sectionStationsList->title
-#, fuzzy
 msgid "Stations and Categories on the menu"
-msgstr "Kategóriák"
+msgstr "Állomások és kategóriák a menüben"
 
 #. settings-schema.json->sectionStationsMove->title
-#, fuzzy
 msgid "Moving selected stations"
-msgstr "Rádióállomások listája"
+msgstr "A kiválasztott állomások mozgatása"
 
 #. settings-schema.json->sectionStationsSaveRestore->title
-#, fuzzy
 msgid "Save and Restore"
-msgstr "Visszaállítás"
+msgstr "Mentés és visszaállítás"
 
 #. settings-schema.json->sectionStationsUpdate->title
-#, fuzzy
 msgid "Update this station list"
-msgstr "Valcartier Állomás"
+msgstr "Frissítse ezt az állomáslistát"
 
 #. settings-schema.json->sectionImportShoutcast->title
 msgid "Get files on Shoutcast to import here"
-msgstr ""
+msgstr "Szerezzen be fájlokat a Shoutcaston az importáláshoz"
 
 #. settings-schema.json->sectionImportFile->title
-#, fuzzy
 msgid "File to import"
-msgstr "Az importálandó CVS-fájl"
+msgstr "Importálandó fájl"
 
 #. settings-schema.json->sectionImportList->title
-#, fuzzy
 msgid "File contents"
-msgstr "Nincs tároló a fájltartalom eléréséhez"
+msgstr "Fájl tartalma"
 
 #. settings-schema.json->sectionSearchOptions->title
-#, fuzzy
 msgid "Search for Radio Stations"
-msgstr "Rádióállomások URL-listájának megjelenítése"
+msgstr "Rádióállomások keresése"
 
 #. settings-schema.json->sectionSearchResults->title
 msgid "Search results"
 msgstr "Keresési eredmények"
 
 #. settings-schema.json->sectionBehaviorStartUp->title
-#, fuzzy
 msgid "Start-up"
-msgstr "Indítás"
+msgstr "Indulás"
 
 #. settings-schema.json->sectionBehaviorVolumeStep->title
-#, fuzzy
 msgid "Volume step"
-msgstr "Hangerőlépés mérete"
+msgstr "Hangerő lépték"
 
 #. settings-schema.json->sectionBehaviorTooltip->title
 msgid "Show Help"
@@ -716,22 +738,26 @@ msgid "Privacy"
 msgstr "Magánszféra"
 
 #. settings-schema.json->sectionMenuContextual->title
-#, fuzzy
 msgid "Contextual Menu"
-msgstr "Helyi menü"
+msgstr "Kontextus szerinti menü"
+
+#. settings-schema.json->sectionMenuShortcuts->title
+msgid "Keyboard shortcuts"
+msgstr "Gyorsbillentyűk"
 
 #. settings-schema.json->sectionBehaviorNotifications->title
 msgid "Notifications"
 msgstr "Értesítések"
 
 #. settings-schema.json->sectionBehaviorBitrate->title
-#, fuzzy
 msgid "Codec and Bitrate"
-msgstr "Méret-, kodek-, képkockasebesség- és bitsebesség-információk."
+msgstr "Kodek és bitráta"
 
 #. settings-schema.json->sectionBehaviorSymbolicIconColor->title
-msgid "Symbolic Icon Color"
-msgstr "Szimbolikus ikon szín"
+#. settings-schema.json->sectionRecordingIcon->title
+#. settings-schema.json->sectionYTIcon->title
+msgid "Icon"
+msgstr "Ikon"
 
 #. settings-schema.json->sectionNetworkQuality->title
 msgid "Quality"
@@ -746,9 +772,8 @@ msgid "Proxy"
 msgstr "Proxy"
 
 #. settings-schema.json->sectionNetworkDatabase->title
-#, fuzzy
 msgid "Database Info"
-msgstr "Információ"
+msgstr "Adatbázis Info"
 
 #. settings-schema.json->sectionRecordingRecordings->title
 #. settings-schema.json->sectionYTFormat->title
@@ -756,45 +781,34 @@ msgid "Recordings"
 msgstr "Felvételek"
 
 #. settings-schema.json->sectionRecordingLimits->title
-#, fuzzy
 msgid "Preservation of hard disk space"
-msgstr "_Merevlemez"
-
-#. settings-schema.json->sectionRecordingIcon->title
-#. settings-schema.json->sectionYTIcon->title
-msgid "Icon"
-msgstr "Ikon"
+msgstr "A merevlemez-terület megőrzése"
 
 #. settings-schema.json->sectionYTExtract->title
 msgid "Extract soundtrack from YouTube video"
-msgstr ""
+msgstr "Hangsáv kinyerése a YouTube-videóból"
 
 #. settings-schema.json->sectionRecordingScheduleARecording->title
-#, fuzzy
 msgid "Schedule a background recording"
-msgstr "Felvétel"
+msgstr "Ütemezzen egy háttérfelvételt"
 
 #. settings-schema.json->sectionRecordingUnableToScheduleARecording->title
-#, fuzzy
 msgid "Unable to schedule a background recording"
-msgstr ""
-"Az adatcsatorna nem állítható\n"
-" felvételi állapotba."
+msgstr "Nem sikerült ütemezni a háttérfelvételt"
 
 #. settings-schema.json->sectionRecordingScheduledRecordings->title
 #. settings-schema.json->sched-recordings->description
-#, fuzzy
 msgid "Scheduled recordings"
-msgstr "Felvételek"
+msgstr "Ütemezett felvételek"
 
 #. settings-schema.json->show-help-in-tabs->description
 msgid "Show help labels in each tab of this Settings window"
-msgstr ""
+msgstr "A súgócímkék megjelenítése a Beállítások ablak minden lapján"
 
 #. settings-schema.json->show-help-in-tabs->tooltip
 msgid ""
 "You can uncheck this option when you are familiar with all of these settings."
-msgstr ""
+msgstr "Ha ismeri ezeket a beállításokat, törölheti a jelölést."
 
 #. settings-schema.json->stations-help->description
 #. settings-schema.json->button-update-help->description
@@ -813,9 +827,8 @@ msgid "♪/➟"
 msgstr "♪/➟"
 
 #. settings-schema.json->radios->columns->title
-#, fuzzy
 msgid "Station or Category"
-msgstr "Rádióállomás keresése"
+msgstr "Állomás vagy kategória"
 
 #. settings-schema.json->radios->columns->title
 #. settings-schema.json->import-list->columns->title
@@ -834,13 +847,12 @@ msgstr "Kodek"
 
 #. settings-schema.json->radios->columns->title
 msgid "Streaming URL (empty for a category)"
-msgstr ""
+msgstr "Streaming URL (üres egy kategória esetén)"
 
 #. settings-schema.json->radios->columns->title
 #. settings-schema.json->search-list->columns->title
-#, fuzzy
 msgid "Unique identifier"
-msgstr "A hálózati hardver egyedi azonosítója."
+msgstr "Egyedi azonosító"
 
 #. settings-schema.json->radios->columns->title
 #. settings-schema.json->search-list->columns->title
@@ -852,52 +864,56 @@ msgstr "Honlap"
 msgid "Tags"
 msgstr "Címkék"
 
+#. settings-schema.json->radios->columns->title
+#. settings-schema.json->search-list->columns->title
+msgid "Favicon"
+msgstr "Favicon"
+
+#. settings-schema.json->radios->columns->title
+msgid "Artist/Title swap"
+msgstr "Előadó/Cím felcserélése"
+
 #. settings-schema.json->stations-list-play-button->description
 #. settings-schema.json->import-list-play-button->description
 #. settings-schema.json->search-list-play-button->description
 msgid "♪ Play the next station to test"
-msgstr ""
+msgstr "♪ Játsszon a következő teszteléshez"
 
 #. settings-schema.json->category-to-move->description
 msgid "Category to which to move the selected stations:"
-msgstr ""
+msgstr "Kategória, ahová a kiválasztott állomásokat áthelyezheti:"
 
 #. settings-schema.json->button-moving->description
-#, fuzzy
 msgid "➟ Move selected stations to this category"
-msgstr "A menü megnyitásakor a megadott kategória legyen kiválasztva"
+msgstr "➟ A kiválasztott állomások áthelyezése ebbe a kategóriába"
 
 #. settings-schema.json->button_go_to_category->description
-#, fuzzy
 msgid "Go to this category"
-msgstr "Kategória:"
+msgstr "Ugrás ebbe a kategóriába"
 
 #. settings-schema.json->button-show-all->description
 msgid "Show all stations and categories in the menu"
-msgstr ""
+msgstr "Az összes állomás és kategória megjelenítése a menüben"
 
 #. settings-schema.json->button-hide-all->description
 msgid "Hide all stations and categories (so the menu becomes empty)"
-msgstr ""
+msgstr "Minden állomás és kategória elrejtése (így a menü üres lesz)"
 
 #. settings-schema.json->button-save->description
-#, fuzzy
 msgid "Save this list of stations"
-msgstr "Rádióállomások listája"
+msgstr "Mentse el az állomások listáját"
 
 #. settings-schema.json->button-restore->description
-#, fuzzy
 msgid "Restore a list of stations"
-msgstr "Rádióállomások listája"
+msgstr "Állomások listájának visszaállítása"
 
 #. settings-schema.json->button_open_folder->description
-#, fuzzy
 msgid "Open the folder containing these lists"
-msgstr "Tartalmazó mappa megnyitása"
+msgstr "Nyissa meg az ezeket a listákat tartalmazó mappát"
 
 #. settings-schema.json->button-update->description
 msgid "Update my station list with the Radio Database data"
-msgstr ""
+msgstr "Frissítse az állomáslistámat a Radio Database adataival"
 
 #. settings-schema.json->scale-update->description
 #. settings-schema.json->recordings-extract-update->description
@@ -905,13 +921,12 @@ msgid "%"
 msgstr "%"
 
 #. settings-schema.json->import-shoutcast-button->description
-#, fuzzy
 msgid "Open the Shoutcast directory"
-msgstr "Shoutcast"
+msgstr "Nyissa meg a Shoutcast könyvtárat"
 
 #. settings-schema.json->import-file-button->description
 msgid "Import a .csv, .m3u, .pls, .xspf or .json file"
-msgstr ""
+msgstr ".csv, .m3u, .pls, .xspf vagy .json fájl importálása"
 
 #. settings-schema.json->import-list->columns->title
 #. settings-schema.json->search-list->columns->title
@@ -929,32 +944,28 @@ msgstr "Megszólítás"
 
 #. settings-schema.json->import-list->columns->title
 #. settings-schema.json->search-list->columns->title
-#, fuzzy
 msgid "Streaming URL"
-msgstr "_URL:"
+msgstr "Streaming URL"
 
 #. settings-schema.json->import-list-button->description
 #. settings-schema.json->search-list-button->description
 msgid "Import the selected stations into my own list"
-msgstr ""
+msgstr "Importálja a kiválasztott állomásokat a saját listámba"
 
 #. settings-schema.json->import-remove-from-list-button->description
 #. settings-schema.json->search-remove-from-list-button->description
-#, fuzzy
 msgid "Remove selected items from this list"
-msgstr "Válasszon ki elemeket a listából"
+msgstr "A kiválasztott elemek eltávolítása a listáról"
 
 #. settings-schema.json->import-select-all->description
 #. settings-schema.json->search-select-all->description
-#, fuzzy
 msgid "Select all items"
-msgstr "Minden elem kijelölése ebben az ablakban"
+msgstr "Válassza ki az összes elemet"
 
 #. settings-schema.json->import-unselect-all->description
 #. settings-schema.json->search-unselect-all->description
-#, fuzzy
 msgid "Unselect all items"
-msgstr "Kijelölések _megszüntetése"
+msgstr "Törölje az összes elem kijelölését"
 
 #. settings-schema.json->search-list->columns->title
 #. settings-schema.json->sched-recordings->columns->title
@@ -980,7 +991,7 @@ msgstr "Oldal:"
 
 #. settings-schema.json->switch-on-last-station-at-start-up->description
 msgid "Turn on the radio when Cinnamon starts up"
-msgstr ""
+msgstr "Kapcsolja be a rádiót, amikor a Cinnamon elindul"
 
 #. settings-schema.json->switch-on-last-station-at-start-up->tooltip
 msgid ""
@@ -990,10 +1001,15 @@ msgid ""
 "VPN users: By checking this, the radio broadcast could use your VPN link in "
 "the event that this one is active before the start of this applet."
 msgstr ""
+"A kiválasztott rádió lesz az utolsó, amit hallgatott, még akkor is, ha "
+"leállította.\n"
+"\n"
+"VPN-felhasználók: Ennek bejelölésével a rádióadás használhatja az Ön VPN-"
+"hivatkozását abban az esetben, ha ez a kisalkalmazás indítása előtt aktív."
 
 #. settings-schema.json->volume-at-startup->description
 msgid "Volume level starting a new radio (%)"
-msgstr ""
+msgstr "Hangerőszint új rádió indításakor (%)"
 
 #. settings-schema.json->volume-at-startup->options
 #. settings-schema.json->recent-number->options
@@ -1097,16 +1113,16 @@ msgid ""
 "Please note that you can change the volume level scrolling on this applet "
 "icon, or using the slider in the context menu."
 msgstr ""
-
-#. settings-schema.json->dont-check-dependencies->description
-#, fuzzy
-msgid "Do not check about dependencies"
-msgstr "A Tennivalók _névjegye"
+"Ha be van állítva, akkor ez megváltoztatja a hangerőt egy új rádió "
+"indításakor, az általános hangerő százalékában.\n"
+"Az alapértelmezés (Undefined): A hangerő változatlan marad.\n"
+"\n"
+"Kérjük, vegye figyelembe, hogy módosíthatja a hangerőszintet ezen a "
+"kisalkalmazásikonon görgetve, vagy a helyi menü csúszkájával."
 
 #. settings-schema.json->volume-step->description
-#, fuzzy
 msgid "Volume step scrolling on icon"
-msgstr "Hangerőlépés mérete minden egyes hangerő-változtatáskor"
+msgstr "Hangerő fokozatos görgetés az ikonon"
 
 #. settings-schema.json->volume-step->options
 msgid "±0%"
@@ -1137,16 +1153,25 @@ msgid ""
 "By how much increase or decrease the volume using the mouse scroll wheel on "
 "the icon."
 msgstr ""
+"Mennyivel növelje vagy csökkentse a hangerőt az egér görgőjének segítségével "
+"az ikonon."
+
+#. settings-schema.json->volume-show-osd->description
+msgid "Show OSD while changing volume"
+msgstr "OSD megjelenítése a hangerő módosításakor"
+
+#. settings-schema.json->volume-show-osd->tooltip
+msgid "Should OSD (On-Screen Display) be displayed when changing volume?"
+msgstr ""
+"Meg kell jeleníteni az OSD-t (On-Screen Display) a hangerő módosításakor?"
 
 #. settings-schema.json->show-title-and-version->description
-#, fuzzy
 msgid "Show the name and the version of this applet in the menu"
-msgstr ""
-"A következő műveletet megjelenítése a menüben: Indítsa újra a kisalkalmazást"
+msgstr "Mutassa meg a kisalkalmazás nevét és verzióját a menüben"
 
 #. settings-schema.json->recent-number->description
 msgid "Number of Recently Played Stations in menu"
-msgstr ""
+msgstr "Legutóbb lejátszott állomások száma a menüben"
 
 #. settings-schema.json->recent-number->options
 msgid "1"
@@ -1187,65 +1212,89 @@ msgstr "9"
 
 #. settings-schema.json->recent-number->tooltip
 msgid "How many recently listened stations do you want to display in the menu?"
-msgstr ""
+msgstr "Hány legutóbb hallgatott állomást szeretne megjeleníteni a menüben?"
 
 #. settings-schema.json->reset-recents->description
 msgid "Empty your Recently Played Stations list at startup"
-msgstr ""
+msgstr "Indításkor ürítse ki a Legutóbb lejátszott állomások listáját"
 
 #. settings-schema.json->button-reset-recents->description
 msgid "Empty your Recently Played Stations list now"
-msgstr ""
+msgstr "Ürítse ki most a Legutóbb lejátszott állomások listáját"
 
 #. settings-schema.json->show-system-items->description
-#, fuzzy
 msgid "Show system items in the menu"
-msgstr "Legutóbbi elemek kategória megjelenítése a menüben"
+msgstr "Rendszerelemek megjelenítése a menüben"
 
 #. settings-schema.json->show-system-items->tooltip
 msgid ""
 "Do you want to show 'Configure...' and 'Sound Settings' items in the menu?"
 msgstr ""
+"Meg akarja jeleníteni a 'Configure...' és a 'Hangbeállítások' elemet a "
+"menüben?"
 
 #. settings-schema.json->show-reload->description
 msgid "Show the 'Reload this applet' item in the contextual menu"
-msgstr ""
+msgstr "Jelenítse meg a „Kisalkalmazás újratöltése” elemet a helyi menüben"
 
 #. settings-schema.json->show-reload->tooltip
-#, fuzzy
 msgid "For developers only"
-msgstr ""
-"Egy példán keresztül bemutatva: Amikor a Linux Mintben telepíti az Opera, a "
-"Real Player vagy a Google Earth programokat, ezek a programok nem "
-"közvetlenül az eredeti fejlesztőtől (Opera, Real, Google) érkeznek. "
-"Természetesen a fejlesztőktől érkeznek ezek a programok, de csak azután, "
-"hogy helyesen csomagolásra majd tesztelésre kerültek. Másképpen fogalmazva "
-"Önnek soha nem kell az internetet böngészve felkutatni a programokat, hanem "
-"minden, amire számítógépén szüksége van, elérhető és tesztelésre került a "
-"Linux Mint és az Ubuntu csapatai által."
+msgstr "Csak fejlesztőknek"
+
+#. settings-schema.json->shortcut-volume-up->description
+msgid "Increase Volume"
+msgstr "Hangerő növelése"
+
+#. settings-schema.json->shortcut-volume-down->description
+msgid "Decrease Volume"
+msgstr "Hangerő csökkentése"
+
+#. settings-schema.json->shortcut-volume-cut->description
+msgid "Mute"
+msgstr "Némítás"
+
+#. settings-schema.json->shortcut-radio-on-off->description
+msgid "Radio ON/OFF"
+msgstr "Rádió Be/Ki"
+
+#. settings-schema.json->shortcut-next-recent-radio->description
+msgid "Next station"
+msgstr "Következő állomás"
+
+#. settings-schema.json->shortcut-next-recent-radio->tooltip
+msgid "Next station recently listened to"
+msgstr "A következő állomás nemrég hallgatta"
+
+#. settings-schema.json->shortcut-previous-recent-radio->description
+msgid "Previous station"
+msgstr "Előző állomás"
+
+#. settings-schema.json->shortcut-previous-recent-radio->tooltip
+msgid "Previous station recently listened to"
+msgstr "Nemrég hallgatott előző állomás"
 
 #. settings-schema.json->show-help-in-tooltip->description
 msgid "Show help for mouse actions in the tooltip"
-msgstr ""
+msgstr "Segítség megjelenítése az egérműveletekhez az eszköztippben"
 
 #. settings-schema.json->show-help-in-tooltip->tooltip
 msgid "You can uncheck this option when you are familiar with all mouse roles."
-msgstr ""
+msgstr "Ezt a lehetőséget törölheti, ha ismeri az összes egérszerepet."
 
 #. settings-schema.json->notif-station-change->description
-#, fuzzy
 msgid "Change of radio"
-msgstr "Radio++"
+msgstr "Rádióváltás"
 
 #. settings-schema.json->notif-song-change->description
-#, fuzzy
 msgid "Change of song or program"
-msgstr "{} szám"
+msgstr "Dal vagy műsor változása"
 
 #. settings-schema.json->notif-song-change->tooltip
 msgid ""
 "Please note that some radios do not notify you of a song or program change."
 msgstr ""
+"Kérjük, vegye figyelembe, hogy egyes rádiók nem értesítik Önt a dal vagy a "
+"műsor változásáról."
 
 #. settings-schema.json->notif-song-duration->units
 msgid "seconds"
@@ -1253,53 +1302,62 @@ msgstr "másodperc"
 
 #. settings-schema.json->notif-song-duration->description
 msgid "Duration of a song or program change notification"
-msgstr ""
+msgstr "Zeneszám vagy műsorváltoztatási értesítés időtartama"
 
 #. settings-schema.json->notif-buttons-allowed->description
 msgid "Show in notifications the buttons to start and stop recordings"
 msgstr ""
+"Jelenítse meg az értesítésekben a felvételek indításához és leállításához "
+"szükséges gombokat"
 
 #. settings-schema.json->notif-buttons-allowed->tooltip
 msgid ""
 "Please note that this will have no effect if you do not wish to be notified "
 "of a song or program change."
 msgstr ""
+"Kérjük, vegye figyelembe, hogy ennek nincs hatása, ha nem szeretne "
+"értesítést kapni egy dal vagy program változásáról."
 
 #. settings-schema.json->show-codec->description
-#, fuzzy
 msgid "Show codec"
-msgstr "Kodek:"
+msgstr "Kodek megjelenítése"
 
 #. settings-schema.json->show-bitrate->description
-#, fuzzy
 msgid "Show bit rate"
-msgstr "Bitsebesség:"
+msgstr "Bitráta megjelenítése"
 
 #. settings-schema.json->show-bitrate->tooltip
 msgid ""
 "Unit: kbps (kilobit per second).\n"
 "The higher this bit rate, the better the sound quality of the stream."
 msgstr ""
+"Mértékegysége: kbps (kilobit per másodperc).\n"
+"Minél nagyobb ez a bitsebesség, annál jobb az adatfolyam hangminősége."
 
 #. settings-schema.json->color-on->description
-#, fuzzy
 msgid "Color of the symbolic icon while the radio is on"
-msgstr "A szimbolikus ikon színe, amikor a rádió lejátszása szünetel"
+msgstr "A szimbolikus ikon színe, amikor a rádió be van kapcsolva"
 
 #. settings-schema.json->color-off->description
-#, fuzzy
 msgid "Color of the symbolic icon while the radio is off"
-msgstr "A szimbolikus ikon színe, amikor a rádió lejátszása szünetel"
+msgstr "A szimbolikus ikon színe, ha a rádió ki van kapcsolva"
 
 #. settings-schema.json->color-recording->description
-#, fuzzy
 msgid "Color of the symbolic icon while recording"
-msgstr "A szimbolikus ikon színe, amikor a rádió lejátszása szünetel"
+msgstr "A szimbolikus ikon színe felvétel közben"
+
+#. settings-schema.json->show-favicon->description
+msgid "Display the logo of the radio station listened to"
+msgstr "Jelenítse meg a hallgatott rádióállomás logóját"
+
+#. settings-schema.json->show-favicon->tooltip
+msgid "Replace this applet icon with the radio station logo, if it exists."
+msgstr ""
+"Cserélje ki ezt a kisalkalmazás ikont a rádióállomás logójával, ha létezik."
 
 #. settings-schema.json->network-quality->description
-#, fuzzy
 msgid "Network Quality"
-msgstr "_Minőség:"
+msgstr "Hálózati minőség"
 
 #. settings-schema.json->network-quality->options
 msgid "High"
@@ -1321,12 +1379,18 @@ msgid ""
 "sounds for example). The volume of the radio will be set to 100% in order to "
 "obtain the best possible quality."
 msgstr ""
+"Kiváló minőség: A rádióhallgatás közben készített felvételek megduplázzák a "
+"rádióhallgatáshoz általában szükséges bitsebességet. Így a felvételeket sem "
+"idegen hangok, sem a rádió hangerejének változása nem zavarja.\n"
+"\n"
+"Gyenge minőség: Ezek a felvételek közvetlenül a hangkártyáról származnak, "
+"ami tehermentesíti a hálózatot, de fennáll annak a veszélye, hogy idegen "
+"hangokkal (például rendszerhangokkal) szennyezi őket. A rádió hangereje 100%-"
+"ra lesz állítva a lehető legjobb minőség elérése érdekében."
 
 #. settings-schema.json->network-monitoring->description
-#, fuzzy
 msgid "Monitor the network"
-msgstr ""
-"A hálózati adatforgalom szűrése és ellenőrzése a tűzfal engedélyezésével."
+msgstr "Figyelje a hálózatot"
 
 #. settings-schema.json->network-monitoring->tooltip
 msgid ""
@@ -1335,6 +1399,11 @@ msgid ""
 "\n"
 "VPN users: By checking this, the radio broadcast may use your VPN link."
 msgstr ""
+"Annak meghatározása, hogy újra kell-e indítani a rádiót, ha a hálózat ismét "
+"aktívvá válik egy megszakítás után.\n"
+"\n"
+"VPN-felhasználók: Ennek bejelölésével a rádióadás használhatja az Ön VPN-"
+"kapcsolatát."
 
 #. settings-schema.json->http-proxy->description
 msgid "HTTP Proxy"
@@ -1348,31 +1417,40 @@ msgid ""
 "present.\n"
 "If set, this proxy will not be used for https requests."
 msgstr ""
+"Formátum: http://[felhasználó:pass@]URL[:port]\n"
+"Alapértelmezett: üres.\n"
+"Ha üres, akkor a http_proxy és az ALL_PROXY környezeti változókat fogja "
+"használni, ha vannak.\n"
+"Ha be van állítva, akkor ez a proxy nem lesz használva https-kérésekhez."
 
 #. settings-schema.json->apply-http-proxy->description
-#, fuzzy
 msgid "Apply HTTP Proxy"
-msgstr "_HTTP proxy:"
+msgstr "HTTP proxy alkalmazása"
+
+#. settings-schema.json->database-favorite->description
+msgid "Your favorite database:"
+msgstr "Az Ön kedvenc adatbázisa:"
+
+#. settings-schema.json->database-favorite->options
+msgid "Random"
+msgstr "Véletlenszerű"
 
 #. settings-schema.json->database-url->description
-#, fuzzy
 msgid "Database URL"
-msgstr "url"
+msgstr "Adatbázis URL"
 
 #. settings-schema.json->recording-path->description
 msgid "Path to the folder that will contain your future recordings"
 msgstr ""
+"Útvonal ahhoz a mappához, amely a jövőbeni felvételeit fogja tartalmazni"
 
 #. settings-schema.json->button-rec-path-to-default->description
-#, fuzzy
-#| msgid "Reset to defaults"
 msgid "Set this path to default one"
-msgstr "Beállítás alapértelmezettként"
+msgstr "Állítsa ezt az elérési utat alapértelmezettre"
 
 #. settings-schema.json->recording-format->description
-#, fuzzy
 msgid "Recording format"
-msgstr "Felvétel…"
+msgstr "Felvételi formátum"
 
 #. settings-schema.json->recording-format->options
 #. settings-schema.json->search-codec->options
@@ -1398,76 +1476,73 @@ msgid "WAV"
 msgstr "WAV"
 
 #. settings-schema.json->recording-ends-auto->description
-#, fuzzy
 msgid "Way to stop recording"
-msgstr "Felvétel leállítása"
+msgstr "A felvétel leállításának módja"
 
 #. settings-schema.json->recording-ends-auto->options
 msgid "automatically, when the current song ends"
-msgstr ""
+msgstr "automatikusan, amikor az aktuális dal véget ér"
 
 #. settings-schema.json->recording-ends-auto->options
 msgid "manually; thus, several recordings can follow one another"
-msgstr ""
+msgstr "manuálisan; így több felvétel követheti egymást"
 
 #. settings-schema.json->recording-ends-auto->tooltip
 msgid ""
 "Please note that this choice will have no effect on any current recording, "
 "but on subsequent ones."
 msgstr ""
+"Kérjük, vegye figyelembe, hogy ez a választás nem lesz hatással az aktuális "
+"felvételekre, hanem a későbbiekre."
 
 #. settings-schema.json->limits-hd-space-left-label->description
 msgid "Space remaining on disk when opening this window:"
-msgstr ""
+msgstr "A lemezen maradt hely az ablak megnyitásakor:"
 
 #. settings-schema.json->limits-hd-size-prefixes->description
 msgid ""
 "Disk space unit as defined in Nemo's display preferences (File size prefixes)"
 msgstr ""
+"Lemezterület egység a Nemo megjelenítési beállításaiban meghatározottak "
+"szerint (fájlméret előtagok)"
 
 #. settings-schema.json->limits-hd-size-prefixes->options
-#, fuzzy
 msgid "GB (decimal)"
-msgstr "GB"
+msgstr "GB (tizedes)"
 
 #. settings-schema.json->limits-hd-size-prefixes->options
-#, fuzzy
 msgid "GB (decimal long)"
-msgstr "Decimális (hosszú formátum)"
+msgstr "GB (tizedes hosszú)"
 
 #. settings-schema.json->limits-hd-size-prefixes->options
-#, fuzzy
 msgid "GiB (binary)"
-msgstr "Bináris"
+msgstr "GiB (bináris)"
 
 #. settings-schema.json->limits-hd-size-prefixes->options
-#, fuzzy
 msgid "GiB (binary long)"
-msgstr "Bináris (hosszú formátum)"
+msgstr "GiB (bináris hosszú)"
 
 #. settings-schema.json->limits-hd-size-prefixes->tooltip
 msgid "Changing this also changes Nemo's file size prefixes."
-msgstr ""
+msgstr "Ennek megváltoztatása megváltoztatja a Nemo fájlméret-előtagjait is."
 
 #. settings-schema.json->limits-hd-value->units
-#, fuzzy
 msgid "Units: As defined above"
-msgstr "Mértékegység"
+msgstr "Mértékegységek: A fent meghatározottak szerint"
 
 #. settings-schema.json->limits-hd-value->description
-#, fuzzy
 msgid "Space to be left free on the hard disk"
-msgstr "Szabad lemezhely ellenőrzése"
+msgstr "Szabad helyet kell hagyni a merevlemezen"
 
 #. settings-schema.json->highlight-icon-while-background-
 #. recording->description
 msgid "Highlight this applet icon during background recording"
 msgstr ""
+"Emelje ki ezt a kisalkalmazás ikont a háttérben történő rögzítés közben"
 
 #. settings-schema.json->yt-cookies-from->description
-#, fuzzy
 msgid "Use cookies from"
-msgstr "Sütik"
+msgstr "Sütik használata innen"
 
 #. settings-schema.json->yt-cookies-from->options
 msgid "(None)"
@@ -1515,20 +1590,22 @@ msgid ""
 "Chromium, you can select the method (in parentheses) you chose to save "
 "cookies."
 msgstr ""
+"A YouTube cookie-kat használ annak meghatározására, hogy mely videókat "
+"nézheti meg. A Chromium esetében kiválaszthatja (zárójelben) a cookie-k "
+"mentésének módját."
 
 #. settings-schema.json->show-yt-progress->description
 msgid "Display, under the icon, the progress of downloads from YT."
 msgstr ""
+"Az ikon alatt jelenítse meg a YOUTUBE-ból történő letöltések folyamatát."
 
 #. settings-schema.json->yt-progress-interval->description
-#, fuzzy
 msgid "Progression interval (ms)"
-msgstr "ms"
+msgstr "Progressziós intervallum (ms)"
 
 #. settings-schema.json->yt-progress-interval->options
-#, fuzzy
 msgid "Depending on network quality"
-msgstr "Minőség"
+msgstr "A hálózat minőségétől függően"
 
 #. settings-schema.json->yt-progress-interval->options
 msgid "150"
@@ -1571,43 +1648,47 @@ msgid "3000"
 msgstr "3000"
 
 #. settings-schema.json->recordings-extract-url->description
-#, fuzzy
 msgid "YouTube video link"
-msgstr "YouTube"
+msgstr "YouTube videó link"
 
 #. settings-schema.json->recordings-paste-button->description
 msgid "Paste above the YouTube link you copied"
-msgstr ""
+msgstr "Illessze be a másolt YouTube-link fölé"
 
 #. settings-schema.json->recordings-yesno-playlist->description
-#, fuzzy
 msgid "In case of playlist"
-msgstr "Lejátszólista"
+msgstr "Lejátszási lista esetén"
 
 #. settings-schema.json->recordings-yesno-playlist->options
-#, fuzzy
 msgid "Extract single soundtrack"
-msgstr "szimpla"
+msgstr "Kivonat egyetlen hangsávból"
 
 #. settings-schema.json->recordings-yesno-playlist->options
-#, fuzzy
 msgid "Extract whole playlist"
-msgstr "Lejátszólista"
+msgstr "A teljes lejátszási lista kibontása"
+
+#. settings-schema.json->recordings-keep-video->description
+msgid "Keep video (slower)"
+msgstr "Videó megtartása (lassabb)"
+
+#. settings-schema.json->recordings-keep-video->tooltip
+msgid ""
+"Whether or not to keep the intermediate video file on disk after post-"
+"processing"
+msgstr ""
+"Meg kell-e tartani a közbenső videofájlt a lemezen az utófeldolgozás után"
 
 #. settings-schema.json->recordings-subdirectory->description
-#, fuzzy
 msgid "Record in subdirectory"
-msgstr "_Felvétel"
+msgstr "Rögzítés az alkönyvtárban"
 
 #. settings-schema.json->recordings-subdirectory->tooltip
-#, fuzzy
 msgid "(without leading or trailing slash)"
-msgstr "Záró szóközök nélküli mentés"
+msgstr "(kezdő vagy záró perjel nélkül)"
 
 #. settings-schema.json->recordings-extract-button->description
-#, fuzzy
 msgid "Extract soundtrack"
-msgstr "Kibontás ide…"
+msgstr "Hangsáv kibontása"
 
 #. settings-schema.json->sched-radio->description
 msgid "Radio"
@@ -1624,27 +1705,24 @@ msgstr "Idő"
 
 #. settings-schema.json->sched-begin-time->tooltip
 #. settings-schema.json->sched-duration->tooltip
-#, fuzzy
 msgid "Seconds will be ignored."
-msgstr "másodperc"
+msgstr "A másodpercek figyelmen kívül lesznek hagyva."
 
 #. settings-schema.json->sched-duration->description
 msgid "Duration"
 msgstr "Időtartam"
 
 #. settings-schema.json->sched-button->description
-#, fuzzy
 msgid "Schedule this recording"
-msgstr "Felvétel"
+msgstr "Felvétel ütemezése"
 
 #. settings-schema.json->sched-alert-no-space->description
 msgid "You are running out of disk space. See in the Recording tab."
-msgstr ""
+msgstr "Kifogy a lemezterülete. Lásd a Felvétel lapon."
 
 #. settings-schema.json->sched-recordings->columns->title
-#, fuzzy
 msgid "Remove?"
-msgstr "E_ltávolítás"
+msgstr "El kívánja távolítani?"
 
 #. settings-schema.json->sched-recordings->columns->title
 msgid "In progress"
@@ -1661,6 +1739,7 @@ msgstr "Azonosító"
 #. settings-schema.json->sched-recordings->tooltip
 msgid "Do not modify anything in this list, except in the \"Remove?\" column"
 msgstr ""
+"Ne módosítson semmit ebben a listában, kivéve az \"Eltávolítás?\" oszlop"
 
 #. settings-schema.json->search-name->description
 msgid "Station Name"
@@ -1668,12 +1747,11 @@ msgstr "Állomásnév"
 
 #. settings-schema.json->search-name->tooltip
 msgid "OPTIONAL. Name (or part of the name) of the radio station."
-msgstr ""
+msgstr "VÁLASZTHATÓ. A rádióállomás neve (vagy a név egy része)."
 
 #. settings-schema.json->search-country->options
-#, fuzzy
 msgid "(My Country)"
-msgstr "ország"
+msgstr "(Saját országom)"
 
 #. settings-schema.json->search-country->options
 msgid "Afghanistan - AF"
@@ -1781,11 +1859,11 @@ msgstr "Bhután - BT"
 
 #. settings-schema.json->search-country->options
 msgid "Bolivia (Plurinational State Of) - BO"
-msgstr ""
+msgstr "Bolívia (többszörös állam) – BO"
 
 #. settings-schema.json->search-country->options
 msgid "Bonaire (Sint Eustatius And Saba) - BQ"
-msgstr ""
+msgstr "Bonaire (Sint Eustatius és Saba) - BQ"
 
 #. settings-schema.json->search-country->options
 msgid "Bosnia And Herzegovina - BA"
@@ -1905,7 +1983,7 @@ msgstr "Kuba - CU"
 
 #. settings-schema.json->search-country->options
 msgid "Curaçao - CW"
-msgstr ""
+msgstr "Curaçao – CW"
 
 #. settings-schema.json->search-country->options
 msgid "Cyprus - CY"
@@ -2061,7 +2139,7 @@ msgstr "Haiti - HT"
 
 #. settings-schema.json->search-country->options
 msgid "Heard Island And Mcdonald Islands - HM"
-msgstr ""
+msgstr "Heard-sziget és Mcdonald-szigetek - HM"
 
 #. settings-schema.json->search-country->options
 msgid "Holy See (Vatican City State) - VA"
@@ -2093,7 +2171,7 @@ msgstr "Indonézia - ID"
 
 #. settings-schema.json->search-country->options
 msgid "Iran (Islamic Republic Of) - IR"
-msgstr ""
+msgstr "Irán (Iszlám Köztársaság) – IR"
 
 #. settings-schema.json->search-country->options
 msgid "Iraq - IQ"
@@ -2161,7 +2239,7 @@ msgstr "Kirgizisztán - KG"
 
 #. settings-schema.json->search-country->options
 msgid "Lao People'S Democratic Republic - LA"
-msgstr ""
+msgstr "Laoszi Népi Demokratikus Köztársaság – LA"
 
 #. settings-schema.json->search-country->options
 msgid "Latvia - LV"
@@ -2201,7 +2279,7 @@ msgstr "Macao - MO"
 
 #. settings-schema.json->search-country->options
 msgid "Macedonia (The Former Yugoslav Republic Of) - MK"
-msgstr ""
+msgstr "Macedónia (A Volt Jugoszláv Köztársaság) – MK"
 
 #. settings-schema.json->search-country->options
 msgid "Madagascar - MG"
@@ -2417,7 +2495,7 @@ msgstr "Saint Barthélemy - BL"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Helena (Ascension And Tristan Da Cunha) - SH"
-msgstr ""
+msgstr "Szent Ilona (Ascension és Tristan Da Cunha) - SH"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Kitts And Nevis - KN"
@@ -2429,7 +2507,7 @@ msgstr "Saint Lucia - LC"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Martin (French Part) - MF"
-msgstr ""
+msgstr "Saint Martin (francia rész) - MF"
 
 #. settings-schema.json->search-country->options
 msgid "Saint Pierre And Miquelon - PM"
@@ -2477,7 +2555,7 @@ msgstr "Szingapúr - SG"
 
 #. settings-schema.json->search-country->options
 msgid "Sint Maarten (Dutch Part) - SX"
-msgstr ""
+msgstr "Sint Maarten (holland rész) – SX"
 
 #. settings-schema.json->search-country->options
 msgid "Slovakia - SK"
@@ -2541,11 +2619,11 @@ msgstr "Svájc - CH"
 
 #. settings-schema.json->search-country->options
 msgid "Syrian Arab Republic - SY"
-msgstr ""
+msgstr "Szíriai Arab Köztársaság – SY"
 
 #. settings-schema.json->search-country->options
 msgid "Taiwan (Province Of China) - TW"
-msgstr ""
+msgstr "Tajvan (Kína tartomány) – TW"
 
 #. settings-schema.json->search-country->options
 msgid "Tajikistan - TJ"
@@ -2553,7 +2631,7 @@ msgstr "Tádzsikisztán - TJ"
 
 #. settings-schema.json->search-country->options
 msgid "Tanzania (United Republic Of) - TZ"
-msgstr ""
+msgstr "Tanzánia (Egyesült Köztársaság) – TZ"
 
 #. settings-schema.json->search-country->options
 msgid "Thailand - TH"
@@ -2637,7 +2715,7 @@ msgstr "Vanuatu - VU"
 
 #. settings-schema.json->search-country->options
 msgid "Venezuela (Bolivarian Republic Of) - VE"
-msgstr ""
+msgstr "Venezuela (Bolivári Köztársaság) – VE"
 
 #. settings-schema.json->search-country->options
 msgid "Viet Nam - VN"
@@ -2672,9 +2750,8 @@ msgid "Zimbabwe - ZW"
 msgstr "Zimbabwe - ZW"
 
 #. settings-schema.json->search-country->tooltip
-#, fuzzy
 msgid "OPTIONAL. Choose a country."
-msgstr "Válassza ki az országát vagy területét."
+msgstr "(elhagyható) Válasszon egy országot."
 
 #. settings-schema.json->search-tag->description
 msgid "Tag"
@@ -2683,6 +2760,7 @@ msgstr "Tag"
 #. settings-schema.json->search-tag->tooltip
 msgid "OPTIONAL. Only one word, as blues or jazz or rock or talk or..."
 msgstr ""
+"VÁLASZTHATÓ. Csak egy szó, mint blues vagy jazz vagy rock, vagy talk vagy..."
 
 #. settings-schema.json->search-codec->options
 msgid "AAC"
@@ -2717,14 +2795,12 @@ msgid "Unknown,H.264"
 msgstr "Ismeretlen,H.264"
 
 #. settings-schema.json->search-codec->tooltip
-#, fuzzy
 msgid "OPTIONAL. Choose a codec."
-msgstr "(elhagyható)"
+msgstr "(elhagyható) Válasszon egy kodeket."
 
 #. settings-schema.json->search-minimalBitrate->description
-#, fuzzy
 msgid "Minimal Bitrate"
-msgstr "bitsebesség"
+msgstr "Minimális bitsebesség"
 
 #. settings-schema.json->search-minimalBitrate->options
 msgid "32"
@@ -2768,7 +2844,7 @@ msgstr "640"
 
 #. settings-schema.json->search-minimalBitrate->tooltip
 msgid "OPTIONAL. Choose a minimal bitrate (in kbps)."
-msgstr ""
+msgstr "VÁLASZTHATÓ. Válasszon minimális bitsebességet (kbps-ban)."
 
 #. settings-schema.json->search-order->description
 msgid "Order"
@@ -2800,7 +2876,7 @@ msgstr "nyelv"
 
 #. settings-schema.json->search-order->options
 msgid "votes"
-msgstr ""
+msgstr "szavazatok"
 
 #. settings-schema.json->search-order->options
 msgid "codec"
@@ -2811,29 +2887,24 @@ msgid "bitrate"
 msgstr "bitsebesség"
 
 #. settings-schema.json->search-order->options
-#, fuzzy
 msgid "last check-time"
-msgstr "Utolsó emlékeztető időpontja"
+msgstr "utolsó ellenőrzés időpontja"
 
 #. settings-schema.json->search-order->options
-#, fuzzy
 msgid "click timestamp"
-msgstr "Időbélyeg:"
+msgstr "kattintson a időbélyeghez"
 
 #. settings-schema.json->search-order->options
-#, fuzzy
 msgid "click count"
-msgstr "Szám:"
+msgstr "kattintson a számlálóhoz"
 
 #. settings-schema.json->search-order->options
-#, fuzzy
 msgid "click trend"
-msgstr "Változatlan trend színe"
+msgstr "kattintson a trendhez"
 
 #. settings-schema.json->search-order->options
-#, fuzzy
 msgid "change timestamp"
-msgstr "Időbélyeg:"
+msgstr "időbélyeg megváltoztatása"
 
 #. settings-schema.json->search-order->options
 msgid "random"
@@ -2842,20 +2913,20 @@ msgstr "véletlenszerű"
 #. settings-schema.json->search-order->tooltip
 msgid "OPTIONAL. Name of the attribute the result list will be sorted by."
 msgstr ""
+"VÁLASZTHATÓ. Az attribútum neve, amely alapján az eredménylista rendezve "
+"lesz."
 
 #. settings-schema.json->search-limit->description
 msgid "Limit"
 msgstr "Korlátozás"
 
 #. settings-schema.json->search-limit->tooltip
-#, fuzzy
 msgid "Maximum number of results per page."
-msgstr "A keresési találatok maximális száma"
+msgstr "Keresési találatok maximális száma."
 
 #. settings-schema.json->search-page->description
-#, fuzzy
 msgid "Next page number"
-msgstr "A következő oldal megtekintése"
+msgstr "Következő oldalszám"
 
 #. settings-schema.json->search-reset-button->description
 msgid "Reset"
@@ -2866,6 +2937,8 @@ msgid "Search..."
 msgstr "Keresés…"
 
 #. settings-schema.json->sched-rmbutton->description
-#, fuzzy
 msgid "Remove selected items"
-msgstr "Nincs kiválasztott elem"
+msgstr "Kiválasztott elemek eltávolítása"
+
+#~ msgid "Symbolic Icon Color"
+#~ msgstr "Szimbolikus ikon szín"

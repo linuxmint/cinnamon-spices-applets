@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-10 14:25+0200\n"
-"PO-Revision-Date: 2023-02-10 22:16+0800\n"
+"POT-Creation-Date: 2023-05-20 13:52+0200\n"
+"PO-Revision-Date: 2023-05-30 21:26+0800\n"
 "Last-Translator: Slinet6056 <slinet6056@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -16,15 +16,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
-#: applet.js:92
+#: applet.js:112
 msgid "Mark all as read"
 msgstr "全部标记为已读"
 
-#: applet.js:104
+#: applet.js:135
 msgid "No xlets found, click to reload"
 msgstr "没有找到 xlet，点击重新加载"
+
+#. metadata.json->name
+msgid "Spices notifier"
+msgstr "Spices 通知器"
+
+#. metadata.json->description
+msgid "Notifies of comments on the Cinnamon Spices website"
+msgstr "通知 Cinnamon Spices 网站上的评论"
 
 #. settings-schema.json->username->description
 msgid "GitHub user name"
@@ -42,10 +50,17 @@ msgstr "分钟"
 msgid "Hide panel icon when there are no unread comments"
 msgstr "没有未读评论时隐藏面板图标"
 
-#. metadata.json->name
-msgid "Spices notifier"
-msgstr "Spices 通知器"
+#. settings-schema.json->label-uuids->description
+msgid "Additional uuid:s:"
+msgstr "额外的 uuid:s："
 
-#. metadata.json->description
-msgid "Notifies of comments on the Cinnamon Spices website"
-msgstr "通知 Cinnamon Spices 网站上的评论"
+#. settings-schema.json->uuids->columns->title
+msgid "UUID"
+msgstr "UUID"
+
+#. settings-schema.json->uuids->tooltip
+msgid ""
+"Additional uuid:s for applets, desklets, extensions and themes you want to "
+"follow (add a row for each of them)."
+msgstr ""
+"额外的 uuid:s 用于您想订阅的小程序、桌面小工具、扩展和主题 (每行对应一个)。"

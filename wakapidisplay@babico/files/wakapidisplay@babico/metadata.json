@@ -1,0 +1,8 @@
+{
+	"uuid": "wakapidisplay@babico",
+	"version": "1.0.0",
+	"name": "Wakapi Display",
+	"description": "Displays your statistics from Wakapi",
+	"max-instances": -1,
+	"author": "babico"
+}

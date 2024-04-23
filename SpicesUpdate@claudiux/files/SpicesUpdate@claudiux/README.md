@@ -13,7 +13,7 @@ Fully supported by the author, in continuous development and in continuous use o
 
 ## Summary
 
-Cinnamon Spices are Applets, Desklets, Extensions and Themes.
+Cinnamon Spices are **Applets**, **Desklets**, **Extensions**, **Themes**... and **Actions** (for nemo, the file manager)
 
 You usually check updates for the Spices using Cinnamon Settings. But, like me, you do it too seldom.
 
@@ -21,21 +21,28 @@ You usually check updates for the Spices using Cinnamon Settings. But, like me, 
 
 The highly configurable ** Spices Update ** applet can play these roles:
 
-| Roles | Cinnamon 4.6 and + | Cinnamon 4.2 and + | Cinnamon 3.8 and + | Cinnamon < 3.8 |
-| ---:|:---:|:---:|:---:|:---:|
-| Warn user when Spices need updates | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] |
-| Warn user when new Spices are available | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] |
-| Display in a badge near the applet icon <br/>the number of Spices needing update or just born <br/>(except for Cinnamon 2.8) | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] |
-| Give user direct access to Cinnamon Settings <br/>about Applets, Desklets, Extensions and Themes | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] |
-| Open directly the Download tab of Cinnamon Settings <br/>about Applets, Desklets, Extensions and Themes, <br/>with Spices ordered by 'Upgradable' | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] |
-| Make user sure to download the latest version <br/>of a Spice that has an available update | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] |
-| Allow user to renew the download of a Spice, <br/>to be sure to get its latest version | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] |
-| Allow user to ignore the updates available <br/>for spices whose update is not desired | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] |
-| Force refresh data about new Spices and available updates<br/> or open all System Settings useful to perform the available updates <br/>by a simple middle-click on its icon | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] |
-| Update all Spices from a category (Applets, Desklets...) <br/>by pressing a button in notification | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] | ![unchecked][unchecked] |
-| Forget all new Spices from a category <br/>by pressing a button in notification | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] | ![unchecked][unchecked] |
-| Filtered and formatted tooltip content | ![checked][checked] | ![unchecked][unchecked] | ![unchecked][unchecked] | ![unchecked][unchecked] |
-| Network monitoring | ![checked][checked] | ![unchecked][unchecked] | ![unchecked][unchecked] | ![unchecked][unchecked] |
+| Roles | Cinnamon 6.0+ | Cinnamon 4.6+ | Cinnamon 4.2+ | Cinnamon 3.8+ | Cinnamon < 3.8 |
+| ---:|:---:|:---:|:---:|:---:|:---:|
+| Warn user when Spices need updates | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] |
+| Warn user when new Spices are available | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] |
+| Display in a badge near the applet icon <br/>the number of Spices needing update or just born <br/>(except for Cinnamon 2.8) | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] |
+| Give user direct access to Cinnamon Settings <br/>about Applets, Desklets, Extensions and Themes | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] |
+| Open directly the Download tab of Cinnamon Settings <br/>about Applets, Desklets, Extensions and Themes, <br/>with Spices ordered by 'Upgradable' | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] |
+| Make user sure to download the latest version <br/>of a Spice that has an available update | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] |
+| Allow user to renew the download of a Spice, <br/>to be sure to get its latest version | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] |
+| Allow user to ignore the updates available <br/>for spices whose update is not desired | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] |
+| Force refresh data about new Spices and available updates<br/> or open all System Settings useful to perform the available updates <br/>by a simple middle-click on its icon | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] |
+| Update all Spices from a category (Applets, Desklets...) <br/>by pressing a button in notification | ![unchecked][unchecked] | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] | ![unchecked][unchecked] |
+| Forget all new Spices from a category <br/>by pressing a button in notification | ![checked][checked] | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] | ![unchecked][unchecked] |
+| Filtered and formatted tooltip content | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] | ![unchecked][unchecked] | ![unchecked][unchecked] |
+| Network monitoring | ![checked][checked] | ![checked][checked] | ![unchecked][unchecked] | ![unchecked][unchecked] | ![unchecked][unchecked] |
+| Manage Actions for nemo | ![checked][checked] | ![unchecked][unchecked] | ![unchecked][unchecked] | ![unchecked][unchecked] | ![unchecked][unchecked] |
+
+### Cinnamon 6.0
+
+Update all Spices from a category (Applets, Desklets...) using the Update button in Cinnamon settings for this category.
+
+Actions for nemo are now taken into account.
 
 ### Cinnamon 2.8 -> 3.6 (Mint 17.3 -> Mint 18.3): some features are reduced
 
@@ -67,7 +74,7 @@ So you should not have to run any of the commands listed below.
 
 ## Settings
 
-There are five tabs in settings.
+There are five tabs in settings. Six for Cinnamon 6.0+.
 
 ### General
 
@@ -100,7 +107,7 @@ The first tab, _General_, allows you to:
 
 ![system_settings_applets](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/System_Settings_Applets.png)
 
-### Applets, Desklets, Extensions, Themes
+### Applets, Desklets, Extensions, Themes, Actions
 
 ![SpicesUpdate-settings_applets](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/screenshot-applets.png)
 
@@ -168,7 +175,7 @@ They have at least two buttons: firstly a button to open the System Settings pag
 
 Optionally a third button can appear between them, in notifications about updates:
 
-  * _Update it_ or _Update them all_, to open the System Settings page to download updates then automatically install these updates.
+  * _Update it_ or _Update them all_, to open the System Settings page to download updates then automatically install these updates. *Please note this button disappears in Cinnamon 6.0+.*
 
 This third button is always present in notifications about new Spices:
 
@@ -182,23 +189,11 @@ New in Spices Update v6.0.0: these buttons can be displayed as icons.
 
 Any translation is welcome. Please help many users by translating messages into new languages or improving / supplementing existing translations.
 
-### Available translations and their authors
+### Available translations
 
-| Translation | Code | Author (Github account) |
-| ---:|:---:|  --- |
-| Croatian | hr | gogogogi ([muzena](https://github.com/muzena)) |
-| Danish | da | Alan Mortensen ([mortea](https://github.com/mortea)) |
-| Dutch | nl | Jurien ([French77](https://github.com/French77)) |
-| Finnish | fi | MahtiAnkka ([mahtiankka](https://github.com/mahtiankka)) |
-| French | fr | claudiux ([claudiux](https://github.com/claudiux)) |
-| German | de | Mintulix ([Mintulix](https://github.com/Mintulix)), Tobias Bannert ([to-ba](https://github.com/to-ba)) |
-| Italian | it | Dragone2 ([Dragone2](https://github.com/Dragone2)) |
-| Romanian | ro | Andrei Miculita ([AndreiMiculita](https://github.com/AndreiMiculita)) |
-| Spanish | es | claudiux ([claudiux](https://github.com/claudiux)) |
-| Swedish | sv | Åke Engelbrektson ([eson57](https://github.com/eson57)) |
-| Turkish | tr | Serkan Önder ([serkan-maker](https://github.com/serkan-maker))|
+[Status of translations](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/SpicesUpdate%40claudiux.md)
 
-_Thank you very much to all of these authors!_
+_Thank you very much to all of translators!_
 
 ### How to offer a translation
 
@@ -229,7 +224,7 @@ _Thank you very much to all of these authors!_
 ### Manual Installation:
 
    1. Install the additional programs required.
-   2. Download the **[latest version of Spices Update][download]** from the Spices Web Site.
+   2. Download the **latest version of Spices Update** from the Spices Web Site.
    3. Unzip and extract the folder `SpicesUpdate@claudiux` into `~/.local/share/cinnamon/applets/`
    4. Enable this applet in System Settings -> Applets.
    5. You can also access the Settings Screen from System Settings -> Applets, or from the context menu of this applet (right-clicking on its icon).

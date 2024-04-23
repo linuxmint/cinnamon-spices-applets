@@ -1,0 +1,22 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-07 22:54+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: blogdron\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.1\n"
+
+#. metadata.json->name
+msgid "Bing Desktop Wallpaper"
+msgstr "Обои Рабочего Стола из Bing (Bing Desktop Wallpaper)"
+
+#. metadata.json->description
+msgid "Download and apply Today's Bing Wallpaper to your desktop"
+msgstr "Загрузите и примените Today's Bing Wallpaper к своему рабочему столу"

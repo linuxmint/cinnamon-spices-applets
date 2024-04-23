@@ -90,9 +90,9 @@ export class WeatherApplet extends TextIconApplet {
 		} catch (e) {
 			// vertical panel not supported
 		}
-		this.loop.Start();
 		this.OnNetworkConnectivityChanged();
 		NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
+		this.loop.Start();
 		// We need a full rebuild and refresh for these
 		this.config.DataServiceChanged.Subscribe(() => this.RefreshAndRebuild());
 
@@ -161,7 +161,15 @@ export class WeatherApplet extends TextIconApplet {
 			case NetworkConnectivity.PORTAL:
 				if (this.online === true)
 					break;
-				Logger.Info("Internet access now available, resuming operations.");
+
+				const name =
+					NetworkMonitor.get_default().connectivity == NetworkConnectivity.FULL ? "FULL" :
+					NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
+					: "PORTAL";
+
+				Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, resuming operations.`);
+				this.encounteredError = false;
+				this.loop.ResetErrorCount();
 				this.loop.Resume();
 				this.online = true;
 				break;
@@ -199,7 +207,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.RefreshWeather(true, loc);
 	};
 
-	public Refresh(this: WeatherApplet, loc: LocationData | null = null, rebuild: boolean = false, ): void {
+	public Refresh(this: WeatherApplet, loc: LocationData | null = null, rebuild: boolean = false): void {
 		this.RefreshWeather(rebuild, loc);
 	}
 
@@ -231,8 +239,10 @@ export class WeatherApplet extends TextIconApplet {
 			}
 
 			this.EnsureProvider();
-			if (this.provider == null)
+			if (this.provider == null) {
+				this.Unlock();
 				return RefreshState.Failure;
+			}
 
 			// No key
 			if (this.provider.needsApiKey && this.config.NoApiKey()) {
@@ -243,17 +253,18 @@ export class WeatherApplet extends TextIconApplet {
 					detail: "no key",
 					message: _("This provider requires an API key to operate")
 				});
+				this.Unlock();
 				return RefreshState.Failure;
 			}
 			let weatherInfo = await this.provider.GetWeather(location);
 			if (weatherInfo == null) {
-				this.Unlock();
 				Logger.Error("Could not refresh weather, data could not be obtained.");
 				this.ShowError({
 					type: "hard",
 					detail: "no api response",
 					message: "API did not return data"
 				})
+				this.Unlock();
 				return RefreshState.Failure;
 			}
 

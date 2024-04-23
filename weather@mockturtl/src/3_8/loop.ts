@@ -48,7 +48,8 @@ export class WeatherLoop {
 	/** Main loop */
 	public async Start(): Promise<void> {
 		while (true) {
-			if (this.IsStray()) return;
+			if (this.IsStray())
+				return;
 			await this.DoCheck();
 			await delay(this.LoopInterval());
 		}

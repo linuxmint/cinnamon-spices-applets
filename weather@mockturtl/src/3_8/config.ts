@@ -21,10 +21,11 @@ import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
 import { WeatherUnderground } from "./providers/weatherUnderground";
 import { Event } from "./lib/events";
 import { GeoIP } from "./location_services/geoip_services/base";
-import { GeoJS } from "./location_services/geoip_services/geojs.io";
 import { PirateWeather } from "./providers/pirate_weather/pirateWeather";
+import { GeoClue } from "./location_services/geoip_services/geoclue";
+import { GeoIPFedora } from "./location_services/geoip_services/geoip.fedora";
 
-const { get_home_dir, get_user_data_dir } = imports.gi.GLib;
+const { get_home_dir, get_user_data_dir, get_user_config_dir } = imports.gi.GLib;
 const { File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
@@ -163,6 +164,7 @@ export class Config {
 	private app: WeatherApplet;
 	public readonly countryCode: string | null;
 	public textColorStyle: string | null = null;
+	public ForegroundColor: imports.gi.Clutter.Color | null = null;
 
 	public get UserTimezone(): string {
 		const timezone = TimeZone.new_local();
@@ -189,6 +191,7 @@ export class Config {
 	}
 
 	private readonly autoLocProvider: GeoIP;
+	private readonly geoClue: GeoClue;
 	private readonly geoLocationService: GeoLocation;
 
 	/** Stores and retrieves manual locations */
@@ -207,7 +210,8 @@ export class Config {
 		this.currentLocale = ConstructJsLocale(get_language_names()[0]);
 		Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
 		this.countryCode = this.GetCountryCode(this.currentLocale);
-		this.autoLocProvider = new GeoJS(app); // IP location lookup
+		this.autoLocProvider = new GeoIPFedora(app); // IP location lookup
+		this.geoClue = new GeoClue(app);
 		this.geoLocationService = new GeoLocation(app);
 		this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });
 		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
@@ -311,10 +315,19 @@ export class Config {
 
 		// Automatic location
 		if (!this._manualLocation) {
+			const geoClue = await this.geoClue.GetLocation();
+			if (geoClue != null) {
+				Logger.Debug("Auto location obtained via GeoClue2.");
+				this.InjectLocationToConfig(geoClue);
+				return geoClue;
+			}
+
 			const location = await this.autoLocProvider.GetLocation();
 			// User facing errors handled by provider
-			if (!location) return null;
+			if (!location)
+				return null;
 
+			Logger.Debug("Auto location obtained via IP lookup.");
 			this.InjectLocationToConfig(location);
 			return location;
 		}
@@ -327,7 +340,7 @@ export class Config {
 				type: "hard",
 				detail: "no location",
 				userError: true,
-				message: _("Make sure you entered a location or use Automatic location instead")
+				message: _("Make sure you entered a location or use Automatic location instead.")
 			});
 			return null;
 		}
@@ -335,7 +348,7 @@ export class Config {
 		// Find location in storage
 		let location = this.LocStore.FindLocation(this._location);
 		if (location != null) {
-			Logger.Debug("location exist in locationstore, retrieve");
+			Logger.Debug("Manual Location exist in Saved Locations, retrieve.");
 			this.LocStore.SwitchToLocation(location);
 			this.InjectLocationToConfig(location, true);
 			return location;
@@ -351,6 +364,7 @@ export class Config {
 				timeZone: DateTime.now().zoneName,
 				entryText: loc,
 			}
+			Logger.Debug("Manual Location is a coordinate, using it directly.");
 			this.InjectLocationToConfig(location);
 			return location;
 		}
@@ -360,13 +374,13 @@ export class Config {
 		// User facing errors are handled by service
 		if (locationData == null) return null;
 		if (!!locationData?.entryText) {
-			Logger.Debug("Address found via address search");
+			Logger.Debug("Coordinates are found via Reverse address search");
 		}
 
 		// Maybe location is in locationStore, first search
 		location = this.LocStore.FindLocation(locationData.entryText);
 		if (location != null) {
-			Logger.Debug("Found location was found in locationStore, return that instead");
+			Logger.Debug("Entered location was found in Saved Location, switch to it instead.");
 			this.InjectLocationToConfig(location);
 			this.LocStore.SwitchToLocation(location);
 			return location;
@@ -530,20 +544,21 @@ export class Config {
 
 	public async GetAppletConfigJson(): Promise<Record<string, any>> {
 		const home = get_home_dir() ?? "~";
-		let configFilePath = `${get_user_data_dir()}/cinnamon/spices/weather@mockturtl/${this.app.instance_id}.json`;
+		let configFilePath = `${get_user_config_dir()}/cinnamon/spices/weather@mockturtl/${this.app.instance_id}.json`;
 		const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;
 		let configFile = File.new_for_path(configFilePath);
 		const oldConfigFile = File.new_for_path(oldConfigFilePath);
 
 		// Check if file exists
 		if (!await FileExists(configFile)) {
-			configFile = oldConfigFile;
-			configFilePath = oldConfigFilePath;
-			if (!await FileExists(configFile)) {
+			if (!await FileExists(oldConfigFile)) {
 				throw new Error(
 					_("Could not retrieve config, file was not found under paths\n {configFilePath}", { configFilePath: `${configFilePath}\n${oldConfigFilePath}` })
 				);
 			}
+
+			configFile = oldConfigFile;
+			configFilePath = oldConfigFilePath;
 		}
 
 		// Load file contents

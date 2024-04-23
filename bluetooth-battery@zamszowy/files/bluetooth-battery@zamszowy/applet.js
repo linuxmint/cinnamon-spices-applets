@@ -111,7 +111,7 @@ BtBattery.prototype = {
             return;
         }
 
-        if (!this.monitored_devs.includes(this.override_entry)) {
+        if (!this.override_entry || this.override_entry == "(no device available)") {
             // entry in settings page seems to be refreshing only when external process returns after a while
             Util.spawn_async(['/usr/bin/sleep', "2"], Lang.bind(this, function(stdout){
                 this.override_entry = this.monitored_devs.length > 0 ? this.monitored_devs[0] : "(no device available)";

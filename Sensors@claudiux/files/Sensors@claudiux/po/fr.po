@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-20 15:16+0200\n"
-"PO-Revision-Date: 2023-04-20 15:41+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-31 10:36+0200\n"
+"PO-Revision-Date: 2024-03-31 10:38+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,95 +20,103 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. metadata.json->name
-#: applet.js:90
+#: applet.js:101
 msgid "Sensors Monitor"
 msgstr "Moniteur de Capteurs"
 
-#: applet.js:389 applet.js:441
+#: applet.js:268
+msgid "Suspended"
+msgstr "Désactivé"
+
+#: applet.js:484 applet.js:526
 msgid "high:"
 msgstr "élevée :"
 
-#: applet.js:389 applet.js:391 applet.js:441 applet.js:443 applet.js:481
+#: applet.js:484 applet.js:486 applet.js:526 applet.js:528 applet.js:569
 msgid "n/a"
 msgstr "n/a"
 
-#: applet.js:391 applet.js:443
+#: applet.js:486 applet.js:528
 msgid "crit:"
 msgstr "critique :"
 
-#: applet.js:481 applet.js:524
+#: applet.js:569 applet.js:612
 msgid "min:"
 msgstr "min :"
 
-#: applet.js:526
+#: applet.js:614
 msgid "max:"
 msgstr "max :"
 
-#: applet.js:554
+#: applet.js:642
 msgid "No intrusion detected"
 msgstr "Aucune intrusion détectée"
 
-#: applet.js:554
+#: applet.js:642
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSION DÉTECTÉE !"
 
-#: applet.js:574
+#: applet.js:662
 msgid "Must be configured!"
 msgstr "Doit être configuré !"
 
-#: applet.js:845
+#: applet.js:925
 msgid "Settings"
 msgstr "Paramètres"
 
-#: applet.js:845
+#: applet.js:925
 msgid ":"
 msgstr " :"
 
 #. settings-schema.json->page_General->title
-#: applet.js:852
+#: applet.js:932
 msgid "⚙ General"
 msgstr "⚙ Général"
 
-#: applet.js:862
+#: applet.js:942
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Capteurs de température"
 
-#: applet.js:872
+#: applet.js:952
 msgid "🤂 Fan sensors"
 msgstr "🤂 Capteurs de ventilateur"
 
-#: applet.js:882
+#: applet.js:962
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Capteurs de tension"
 
-#: applet.js:892
+#: applet.js:972
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Capteurs d'intrusion"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:903
+#: applet.js:983
 msgid "Run xsensors"
 msgstr "Lancer xsensors"
 
-#: applet.js:914
+#: applet.js:992
+msgid "Suspend Sensors"
+msgstr "Désactiver Sensors"
+
+#: applet.js:1003
 msgid "Reload this applet"
 msgstr "Recharger cette applet"
 
-#: applet.js:1206
+#: applet.js:1295
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Êtes-vous sûr de vouloir enlever \"%s\" ?"
 
-#: lib/checkDependencies.js:300
+#: lib/checkDependencies.js:317
 #, javascript-format
 msgid "The applet %s is fully functional."
 msgstr "L'applet %s est pleinement fonctionnelle."
 
-#: lib/checkDependencies.js:301
+#: lib/checkDependencies.js:318
 msgid "All dependencies are installed"
 msgstr "Toutes les dépendances sont installées"
 
-#: lib/checkDependencies.js:329
+#: lib/checkDependencies.js:346
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -115,15 +124,15 @@ msgstr ""
 "Vous semblez ne pas disposer des programmes requis pour bénéficier de toutes "
 "les fonctionnalités de cette applet."
 
-#: lib/checkDependencies.js:330
+#: lib/checkDependencies.js:347
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Veuillez exécuter, dans le terminal qui s'est ouvert, les commandes :"
 
-#: lib/checkDependencies.js:331
+#: lib/checkDependencies.js:348
 msgid "Some dependencies are not installed!"
 msgstr "Certaines dépendances ne sont pas installées !"
 
-#: lib/util.js:243
+#: lib/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
 msgstr "L'exécution de '%s' a échoué :"
@@ -209,6 +218,10 @@ msgstr "⮿ Intrusion"
 msgid "Options"
 msgstr "Options"
 
+#. settings-schema.json->section_Tooltip->title
+msgid "Tooltip"
+msgstr "Info-bulle"
+
 #. settings-schema.json->section_Report->title
 msgid "Sensors values"
 msgstr "Valeurs des capteurs"
@@ -218,9 +231,10 @@ msgid "Remove from panels certain applets that also use sensors"
 msgstr ""
 "Supprimer des panneaux certaines applets qui utilisent également des capteurs"
 
-#. settings-schema.json->section_tempHddtemp->title
-msgid "hddtemp is for now only usable by root"
-msgstr "hddtemp est pour l'instant seulement utilisable par root"
+#. settings-schema.json->section_tempDisktemp->title
+msgid "For the time being, disk temperature can only be read by root."
+msgstr ""
+"Pour l'instant, la température du disque ne peut être lue que par root."
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -306,8 +320,40 @@ msgid "30"
 msgstr "30"
 
 #. settings-schema.json->interval->options
-msgid "60"
-msgstr "60"
+msgid "1 minute"
+msgstr "1 minute"
+
+#. settings-schema.json->interval->options
+msgid "2 minutes"
+msgstr "2 minutes"
+
+#. settings-schema.json->interval->options
+msgid "3 minutes"
+msgstr "3 minutes"
+
+#. settings-schema.json->interval->options
+msgid "4 minutes"
+msgstr "4 minutes"
+
+#. settings-schema.json->interval->options
+msgid "5 minutes"
+msgstr "5 minutes"
+
+#. settings-schema.json->interval->options
+msgid "10 minutes"
+msgstr "10 minutes"
+
+#. settings-schema.json->interval->options
+msgid "15 minutes"
+msgstr "15 minutes"
+
+#. settings-schema.json->interval->options
+msgid "30 minutes"
+msgstr "30 minutes"
+
+#. settings-schema.json->interval->options
+msgid "1 hour"
+msgstr "1 heure"
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -331,29 +377,24 @@ msgstr ""
 msgid "Character size (% of standard size)"
 msgstr "Taille des caractères (% de la taille standard)"
 
-#. settings-schema.json->char_color->options
-msgid "Default"
-msgstr "Par défaut"
-
-#. settings-schema.json->char_color->options
-msgid "White"
-msgstr "Blanc"
-
-#. settings-schema.json->char_color->options
-msgid "Black"
-msgstr "Noir"
-
-#. settings-schema.json->char_color->options
-msgid "Grey"
-msgstr "Gris"
-
-#. settings-schema.json->char_color->options
-msgid "Light Grey"
-msgstr "Gris clair"
+#. settings-schema.json->char_color_customized->description
+msgid "Customize Text Color"
+msgstr "Personnaliser la couleur du texte"
 
 #. settings-schema.json->char_color->description
 msgid "Text Color"
 msgstr "Couleur du texte"
+
+#. settings-schema.json->separator->description
+msgid "Separator"
+msgstr "Séparateur"
+
+#. settings-schema.json->separator->tooltip
+msgid ""
+"The string used to separate values in horizontal orientation. Default is '│'."
+msgstr ""
+"Chaîne utilisée pour séparer les valeurs dans l'orientation horizontale. La "
+"valeur par défaut est \"│\"."
 
 #. settings-schema.json->remove_border->description
 msgid "Remove border line"
@@ -370,6 +411,10 @@ msgstr "Supprimer les icônes"
 #. settings-schema.json->remove_icons->tooltip
 msgid "Whether or not to remove icons in panel."
 msgstr "Supprimer ou non les icônes dans le panneau."
+
+#. settings-schema.json->show_tooltip->description
+msgid "Display a tooltip on mouseover"
+msgstr "Afficher une info-bulle au survol de la souris"
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
@@ -400,9 +445,9 @@ msgstr "Afficher dans le menu l'action : Redémarrez cette applet"
 msgid "Whether or not to display in menu the action: Restart this applet."
 msgstr "Afficher ou non dans le menu l'action: Redémarrez cette applet."
 
-#. settings-schema.json->make_hddtemp_usable_by_user->description
-msgid "Make hddtemp usable by user"
-msgstr "Rendre hddtemp utilisable par les utilisateurs"
+#. settings-schema.json->make_disktemp_readable_by_user->description
+msgid "Make disk temperature user-readable"
+msgstr "Rendre la température du disque lisible par l'utilisateur"
 
 #. settings-schema.json->show_temp->description
 #. settings-schema.json->show_fan->description
@@ -718,6 +763,7 @@ msgstr ""
 "Pour annuler le Nom affiché, y copier/coller le Nom du capteur."
 
 #. settings-schema.json->report->description
+#: scripts/show_sensor_values.sh:5
 msgid "Example of sensor values from this computer"
 msgstr "Exemple de valeurs des capteurs de cet ordinateur"
 
@@ -732,9 +778,3 @@ msgstr "Mettre à jour l'affichage"
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Retirer du panneau l'applet temperature@fevimu"
-
-#~ msgid "Temperature scripts"
-#~ msgstr "Scripts de température"
-
-#~ msgid "Sensors"
-#~ msgstr "Capteurs"

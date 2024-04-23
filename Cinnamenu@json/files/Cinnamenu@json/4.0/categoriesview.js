@@ -8,7 +8,15 @@ const St = imports.gi.St;
 const {SignalManager} = imports.misc.signalManager;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 
-const {_, log, scrollToButton} = require('./utils');
+const {_, scrollToButton} = require('./utils');
+
+let buttonTimeoutId = null;
+function clearButtonTimeout() {
+    if (buttonTimeoutId) {
+        clearTimeout(buttonTimeoutId);
+        buttonTimeoutId = null;
+    }
+}
 
 class CategoryButton {
     constructor(appThis, category_id, category_name, icon_name, gicon) {
@@ -86,10 +94,7 @@ class CategoryButton {
                                 this.appThis.display.categoriesView.resetAllCategoriesOpacity());
 
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
-        //Allow motion-event to trigger handleEnter because previous enter-event may have been
-        //invalidated by this.appThis.display.badAngle === true when this is no longer the case.
-        this.signals.connect(this.actor, 'motion-event', (...args) => this.handleEnter(...args));
-        this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
+        this.signals.connect(this.actor, 'leave-event', (...args) => this.handleMouseLeave(...args));
         this.signals.connect(this.actor, 'button-release-event', (...args) =>
                                                         this._handleButtonRelease(...args));
     }
@@ -134,15 +139,24 @@ class CategoryButton {
     }
 
     handleEnter(actor, event) {
-        //this method handles enter-event, motion-event and keypress
+        //this method handles mouse and key events
         if (this.has_focus || this.disabled || this.appThis.display.contextMenu.isOpen) {
             return Clutter.EVENT_PROPAGATE;
         }
         //When "activate categories on click" is off, don't enter this button if mouse is moving
         //quickly towards appviews, i.e. badAngle === true.
         if (event && !this.appThis.settings.categoryClick && this.appThis.display.badAngle) {
+            clearButtonTimeout();
+            //badAngle now but check again in a short while
+            buttonTimeoutId = setTimeout(() => {
+                            this.appThis.display.updateMouseTracking();
+                            this.handleEnter(actor, event);
+                        },this.appThis.display.TRACKING_TIME);
             return Clutter.EVENT_PROPAGATE;
         }
+
+        this.appThis.display.categoriesView.allButtonsRemoveFocusAndHover();
+        this.has_focus = true;
 
         if (event) {//mouse
             this.appThis.display.clearFocusedActors();
@@ -150,13 +164,13 @@ class CategoryButton {
             scrollToButton(this, this.appThis.settings.enableAnimation);
         }
 
-        if (this.id === this.appThis.currentCategory || //No need to select category as already selected
-                            this.id === 'emoji:' && this.appThis.currentCategory.startsWith('emoji:')) {
+        // No need to continue if current category is already selected
+        if (this.id === this.appThis.currentCategory ||
+            this.id === 'emoji:' && this.appThis.currentCategory.startsWith('emoji:')) {
             return Clutter.EVENT_PROPAGATE;
         }
+        clearButtonTimeout();
         if (this.appThis.settings.categoryClick) {
-            this.appThis.display.categoriesView.allButtonsRemoveFocus();
-            this.has_focus = true;
             this.actor.add_style_pseudo_class('hover');
         } else {
             this.selectCategory();
@@ -164,15 +178,25 @@ class CategoryButton {
         return Clutter.EVENT_PROPAGATE;
     }
 
-    handleLeave(actor, event) {
+    handleMouseLeave(actor, event) {
         if (this.disabled || this.appThis.display.contextMenu.isOpen) {
             return false;
         }
 
+        this.removeFocusAndHover();
+
+        // return focus to currently active category
+        this.appThis.display.categoriesView.setCategoryFocus(this.appThis.currentCategory);
+    }
+
+    removeFocusAndHover() {
         this.has_focus = false;
+
         if (this.actor.has_style_pseudo_class('hover')) {
             this.actor.remove_style_pseudo_class('hover');
         }
+
+        clearButtonTimeout();
     }
 
     _handleButtonRelease(actor, event) {
@@ -193,7 +217,7 @@ class CategoryButton {
                 //Remove focus from this category button before opening it's context menu.
                 //Todo: Ideally this button should retain focus style to indicate the button the
                 //context menu was opened on.
-                this.handleLeave();
+                this.removeFocusAndHover();
             }
             this.openContextMenu(event);
             return Clutter.EVENT_STOP;
@@ -243,6 +267,9 @@ class CategoriesView {
         this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
         this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
         this.groupCategoriesWorkspacesScrollBox.set_mouse_scrolling(true);
+        if (!this.appThis.settings.showCategories) {
+            this.groupCategoriesWorkspacesScrollBox.width = 0;
+        }
     }
 
     update() {
@@ -303,7 +330,7 @@ class CategoriesView {
                     button = new CategoryButton(this.appThis, folder, displayName, null, gicon);
                     newButtons.push(button);
                 } catch(e) {
-                    log("Error creating folder category: " + folder + " ...skipping.");
+                    log("Cinnamenu:Error creating folder category: " + folder + " ...skipping.");
                     //remove this error causing element from the array.
                     folderCategories.splice(index, 1);
                 }
@@ -350,8 +377,19 @@ class CategoriesView {
                     } });
     }
 
-    allButtonsRemoveFocus() {
-        this.buttons.forEach(button => button.handleLeave());
+    setCategoryFocus(categoryId) {
+        this.buttons.forEach(categoryButton => {
+            if (categoryButton.id === categoryId ||
+                categoryButton.id === 'emoji:' && categoryId.startsWith('emoji:')) {
+                categoryButton.has_focus = true;
+            } else {
+                categoryButton.has_focus = false;
+            }
+        });
+    }
+
+    allButtonsRemoveFocusAndHover() {
+        this.buttons.forEach(button => button.removeFocusAndHover());
     }
 
     resetAllCategoriesOpacity() {

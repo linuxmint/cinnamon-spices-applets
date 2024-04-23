@@ -5,17 +5,22 @@
  },
  "off-icon": {
     "type": "iconfilechooser",
-    "default" : "video-display-symbolic",
+    "default" : "screen-inhibit-symbolic",
     "description" : "Power management allowed icon:",
     "tooltip" : "Select an icon file, or you can type an icon name into the entry box",
     "indent" : true
  },
  "on-icon": {
     "type": "iconfilechooser",
-    "default" : "dialog-error-symbolic",
+    "default" : "screen-inhibit-active-symbolic",
     "description" : "Power management prevented icon:",
     "tooltip" : "Select an icon file, or you can type an icon name into the entry box",
     "indent" : true
+ },
+ "reset-icons": {
+     "type": "button",
+     "description" : "Reset to default icons",
+     "callback": "reset_to_default_icons"
  },
  "head1" : {
     "type" : "header",
@@ -25,6 +30,16 @@
     "type" : "keybinding",
     "description" : "Set the keybinding for screensaver inhibit",
     "default" : "<Control>i",
+    "indent": true
+ },
+ "head2" : {
+    "type" : "header",
+    "description" : "Startup"
+ },
+ "inhibit-at-startup" : {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Inhibit screensaver at startup",
     "indent": true
  }
 }

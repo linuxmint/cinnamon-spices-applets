@@ -1,4 +1,151 @@
-## CHANGELOG
+### v6.9.1~20240420
+  * Fixes #5767.
+
+### v6.9.0~20240417
+  * Better management of art-covers.
+
+### v6.8.0~20240416
+  * Fixes #5721: Adds Previous and Next track shortcuts.
+
+### v6.7.3~20240410
+  * Fixes #5678: Adds an option to keep open the player list in menu.
+
+### v6.7.2~20240402
+  * New option: whether show OSD on startup.
+
+### v6.7.1~20240401
+  * Improves 'audio-volume-muted' icons.
+
+### v6.7.0~20240329
+  * New icons.
+
+### v6.6.0~20240328
+  * Greater interaction with Radio3.0@claudiux: The Previous, Next, Stop and Close buttons act on this applet.
+
+### v6.5.7~20240328
+  * Finalizing bug fixes.
+
+
+### v6.5.6~20240327
+  * Some bugfixes.
+
+### v6.5.5~20240322
+  * Fixes #5622 (icon when a browser is the source).
+
+### v6.5.4~20240322
+  * Improves playerctld management.
+
+### v6.5.3~20240321
+  * Runs playerctld, if exists.
+  * Minor bugfixes.
+  * Ready for LM 22.
+  * Fixes #5616.
+
+### v6.5.2~20240320
+  * Fixes  #5604
+
+### v6.5.1~20240320
+  * Improved seeker for Spotify.
+
+### v6.5.0~20240319
+  * Improved seeker. Elapsed time and duration are now displayed on either side of the seeker in the menu.
+
+### v6.4.3~20240317
+  * Removes CR errors (A wrong style had been applied; style=null should be used instead of style="").
+
+### v6.4.2~20240315
+  * Allows the user to remove the sound@cinnamon.org applet from the panel, as it is incompatible with sound150@claudiux.
+  * Fixed bugs concerning icon adaptation to volume or microphone level.
+
+### v6.4.1~20240313
+  * Bugfixes about ZettaLite data.
+
+### v6.4.0~20240312
+  * Adds keyboard shortcut Pause/Play.
+
+### v6.3.5~20240311
+  * Take into account XML data from ZettaLite to get artist and title.
+
+### v6.3.4~20240310
+  * Redefining volume keyboard shortcuts becomes optional.
+
+
+### v6.3.3~20240310
+  * Fixes definitively #5576.
+
+### v6.3.2~20240309
+  * Fixes  #5579.
+
+### v6.3.1~20240308
+  * Fixes #5576.
+
+### v6.3.0~20240308
+  * Allows to display icon indicating that the microphone is muted, if applicable.
+  * Sound volume: Now can magnetize all multiples of 25%.
+
+### v6.2.2~20240304
+  * Removes error messages about length which wasn't an valid value.
+
+### v6.2.1~20240226
+  * Helps the user to install playerctl.
+  * icon.png replaced.
+
+
+### v6.2.0~20240225
+  * Displays the cover of the song broadcast by the Radio3.0@claudiux applet, when available.
+
+### v6.1.0~20240224
+  * Fixes song art display for vlc when changing song.
+  * Adds the easyeffects option to the context menu when installed, to launch it.
+
+### v6.0.0~20240221
+  * The art album icon is now correctly removed when changing streams.
+  * Shows album art (or song art) even if mpris:artUrl is not in the metadata!
+
+### v5.1.1~20240118
+  * Use Ctrl-Middle-Click or Shift-Middle-Click to toggle mute as defined in settings.
+  * Takes into account an undefined input.
+  * Updates French translation.
+
+### v5.1.0~20240109
+  * Updates README.md
+  * Adds two options to the Icon tab settings that are already in the Behavior tab, but which also concern the icon.
+
+### v5.0.0~20240109
+  * Modifies the presentation of settings, with tabs.
+  * Allows the user to change the icon colors.
+
+### v4.7.0~20240106
+  * Adds the ability to redefine multimedia shortcuts.
+
+### v4.6.0~20231216
+  * Adds the ability to display the volume level near the icon.
+
+### v4.5.0~20231124
+  * Adds a shift-middle click action (mute/unmute microphone by default). Thanks to @sphh!
+
+### v4.4.1~20231103
+  * Update the contextual menu when flipping the 'Mute input' switch in the settings.
+
+### v4.4.0~20231101
+  * Allow to always show the 'Mute input' switch in contextual menu.
+
+### v4.3.0~20231026
+  * Fixes 5005: Icon color changing with theme
+
+### v4.2.0~20231012
+  * Try to distinguish between the artist and the song title.
+
+### v4.1.1~20230719
+  * Change style of 'sound-player-overlay' with "height: auto;". Thanks to Hilyxx!
+
+### v4.1.0~20230717
+  * Show entire title (wrapped) in player section (opening menu). Look at [discussion 79](]https://github.com/orgs/linuxmint/discussions/79).
+### v4.0.0~20230701
+  * Fixes alignment error, like the sound Cinnamon applet (Cinnamon 5.8).
+
+### v3.1.0~20230520
+  * Fixes a deprecation.
 
 ### v3.0.0~20230310
   * Rebase and update for cinnamon 5.4 (thanks to @rcalixte).

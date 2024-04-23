@@ -52,6 +52,8 @@ let refresh_time = 2000;
 let background = '#FFFFFF80';
 let style = DEFAULT_STYLE;
 let graph_width = '6';
+let lower_border = 20;
+let upper_border = 80;
 let digit_type = DEFAULT_DIGIT_TYPE;
 let cpus_to_monitor = DEFAULT_CPUS;
 let text_color = '#FFFF80';
@@ -111,10 +113,10 @@ function num_to_freq(num) {
 function percent_to_hex(str, num) {
     return str.format(Math.min(Math.floor(num * 256), 255)).replace(' ', '0');
 }
-function num_to_color(num, min, max) {
-    if (num >= max-1000) // max-101 is because on at least my machine there is a max of 2.401, next step is 2.4
-        return hi_color; // I'm guessing the 2.401 is for turbo boost? (i7)  so this is to ensure 'hi' level
-    if (num == min)     // at the 'normal' hi (i.e. 2.4)
+function num_to_color(num, lower, upper) {
+    if (num > upper )
+        return hi_color;
+    if (num < lower)
         return low_color;
     return mid_color;
 }
@@ -184,7 +186,7 @@ Panel_Indicator.prototype = {
         Clutter.cairo_set_source_color(cr, color);
         cr.rectangle(0, 0, width, height);
         cr.fill();
-        [res, color] = Clutter.Color.from_string(num_to_color(this._parent.avg_freq, this._parent.min, this._parent.max));
+        [res, color] = Clutter.Color.from_string(num_to_color(this._parent.avg_freq, this._parent.lower, this._parent.upper));
         Clutter.cairo_set_source_color(cr, color);
         cr.rectangle(0, height * (1 - value), width, height);
         cr.fill();
@@ -284,6 +286,9 @@ CpufreqSelectorBase.prototype = {
         try {
             this.max = rd_nums_frm_file(this.cpufreq_path + '/scaling_max_freq')[0];
             this.min = rd_nums_frm_file(this.cpufreq_path + '/scaling_min_freq')[0];
+            this.range = this.max - this.min;
+            this.upper = this.min + this.range * upper_border / 100;
+            this.lower = this.min + this.range * lower_border / 100;
             this.avail_governors = rd_frm_file(this.cpufreq_path + '/scaling_available_governors');
             try {
                 this.avail_freqs = rd_nums_frm_file(this.cpufreq_path + '/scaling_available_frequencies');
@@ -480,6 +485,16 @@ MyApplet.prototype = {
                                        this.rebuild,
                                        null);
             this.settings.bindProperty(Settings.BindingDirection.IN,
+                                       "lower-border",
+                                       "lower_border",
+                                       this.rebuild,
+                                       null);
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                                       "upper-border",
+                                       "upper_border",
+                                       this.rebuild,
+                                       null);
+            this.settings.bindProperty(Settings.BindingDirection.IN,
                                        "background",
                                        "background",
                                        this.rebuild,
@@ -512,6 +527,8 @@ MyApplet.prototype = {
             refresh_time = this.refresh_rate;
             style = this.style;
             graph_width = this.graph_width
+            lower_border = this.lower_border;
+            upper_border = this.upper_border;
             digit_type = this.digit_type;
             text_color = this.text_color;
             low_color = this.low_color;

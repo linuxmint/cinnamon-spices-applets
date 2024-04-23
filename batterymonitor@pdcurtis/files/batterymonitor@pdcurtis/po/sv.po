@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: batterymonitor@pdcurtis\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-27 19:21-0500\n"
-"PO-Revision-Date: 2022-12-29 13:37-0500\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-03-05 14:36-0500\n"
+"PO-Revision-Date: 2024-01-21 17:50-0500\n"
 "Last-Translator: eson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
@@ -16,37 +17,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4\n"
 
-#: 5.4/applet.js:139 3.2/applet.js:135
+#: 5.4/applet.js:300 3.2/applet.js:130
 msgid "--%"
 msgstr "--%"
 
-#: 5.4/applet.js:140 3.2/applet.js:136
+#: 5.4/applet.js:301 3.2/applet.js:131
 msgid "Waiting"
 msgstr "Väntar"
 
-#: 5.4/applet.js:164 3.2/applet.js:165
-msgid "Some Dependencies not Installed"
+#: 5.4/applet.js:327
+#, fuzzy
+msgid "Some dependencies not installed."
 msgstr "Vissa beroenden är inte installerade"
 
-#: 5.4/applet.js:164
+#: 5.4/applet.js:327
+#, fuzzy
 msgid ""
 "Both 'sox' and 'zenity' are required for this applet to have all of its "
-"functionality including notifications and audible alerts .\n"
+"functionality including notifications and audible alerts.\n"
 "\n"
-"Please view the README for help on installing them."
+"Please view the README for help on installing them.\n"
 msgstr ""
 "Både \"sox\" och \"zenity\" krävs för att det här panelprogrammet skall "
 "fungera fullt ut, inklusive aviseringar och ljudvarningar.\n"
 "\n"
 "Läs i hjälpfilen hur de installeras."
 
-#: 5.4/applet.js:174 3.2/applet.js:198
+#: 5.4/applet.js:337 3.2/applet.js:193
 msgid "Battery Monitor Applet"
 msgstr "Panelprogram för batteriövervakning"
 
-#: 5.4/applet.js:174
+#: 5.4/applet.js:337
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -58,51 +61,46 @@ msgstr ""
 "Tillse att ljudvolymen är på en lämplig nivå för offentliga miljöer,\n"
 "särskilt om en lång ljudfil används.\n"
 
-#: 5.4/applet.js:247 3.2/applet.js:297
+#: 5.4/applet.js:399 3.2/applet.js:307
 msgid "Open Power Statistics"
 msgstr "Öppna Strömstatistik"
 
-#: 5.4/applet.js:253 3.2/applet.js:303
+#: 5.4/applet.js:405 3.2/applet.js:313
 msgid "Open System Monitor"
 msgstr "Öppna systemövervakaren"
 
-#: 5.4/applet.js:262
+#: 5.4/applet.js:414
 msgid "Housekeeping and System Submenu"
 msgstr "Underhåll och systemundermeny"
 
-#: 5.4/applet.js:265 3.2/applet.js:315
+#: 5.4/applet.js:417 3.2/applet.js:325
 msgid "View the Changelog"
 msgstr "Visa ändringslogg"
 
-#: 5.4/applet.js:271
+#: 5.4/applet.js:423
 msgid "Open the README"
 msgstr ""
 
-#: 5.4/applet.js:277 3.2/applet.js:327
-msgid "Open stylesheet.css (Advanced Function)"
-msgstr "Öppna stylesheet.css (Avancerad funktion)"
-
-#. metadata.json->name
-#: 5.4/applet.js:293 3.2/applet.js:343
-msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
-msgstr "Batteriprogram med övervakning och avstängning (BAMS)"
-
-#: 5.4/applet.js:298 3.2/applet.js:348
+#: 5.4/applet.js:439 3.2/applet.js:358
 msgid "Waiting for battery information"
 msgstr "Väntar på batteriinformation"
 
-#: 5.4/applet.js:389
+#: 5.4/applet.js:444
+#, fuzzy
+msgid "Alert/Suspend:"
+msgstr "Pausa:"
+
+#: 5.4/applet.js:549
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Låg batterinivå - Stäng av eller anslut laddkabel"
 
-#: 5.4/applet.js:394 3.2/applet.js:433
+#: 5.4/applet.js:555
+#, fuzzy
 msgid ""
-"The Battery Level has fallen to your alert level\n"
+"The battery level has fallen to your alert level.\n"
 "\n"
-" either reconnect to a power source,\n"
-"\n"
-"close down your work and suspend or shutdown the machine\n"
-"\n"
+"Either connect to a power source or save or close down\n"
+"your work and suspend or shutdown the machine.\n"
 msgstr ""
 "Batterinivån är nere på din varningsnivå\n"
 "\n"
@@ -110,37 +108,50 @@ msgstr ""
 "\n"
 "eller avsluta ditt arbete och pausa eller stäng av datorn.\n"
 
-#: 5.4/applet.js:409
+#: 5.4/applet.js:570
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Batterinivån kritisk! Datorn kommer att pausas om den inte ansluts till "
 "strömkälla."
 
-#: 5.4/applet.js:426 3.2/applet.js:464
-msgid "Charge:"
+#: 5.4/applet.js:589
+msgid "Time to Empty:"
+msgstr ""
+
+#: 5.4/applet.js:590
+msgid "Time to Full:"
+msgstr ""
+
+#: 5.4/applet.js:593 5.4/applet.js:640
+#, fuzzy
+msgid "Current Charge:"
 msgstr "Laddning:"
 
-#: 5.4/applet.js:426 3.2/applet.js:464
+#: 5.4/applet.js:593 3.2/applet.js:474
 msgid "Alert:"
 msgstr "Varning:"
 
-#: 5.4/applet.js:426 3.2/applet.js:464
+#: 5.4/applet.js:593 3.2/applet.js:474
 msgid "Suspend:"
 msgstr "Pausa:"
 
-#: 5.4/applet.js:474 3.2/applet.js:512
-msgid "Percentage Charge:"
-msgstr "Laddning:"
-
-#: 5.4/applet.js:474 3.2/applet.js:512
+#: 5.4/applet.js:640 3.2/applet.js:522
 msgid "Alert at:"
 msgstr "Varna vid:"
 
-#: 5.4/applet.js:474 3.2/applet.js:512
+#: 5.4/applet.js:640 3.2/applet.js:522
 msgid "Suspend at:"
 msgstr "Pausa vid:"
 
-#: 3.2/applet.js:165
+#: 5.4/applet.js:646
+msgid "The battery level has been recharged to"
+msgstr ""
+
+#: 3.2/applet.js:160
+msgid "Some Dependencies not Installed"
+msgstr "Vissa beroenden är inte installerade"
+
+#: 3.2/applet.js:160
 msgid ""
 "'upower', 'sox' and 'zenity' are required for this applet to have all its "
 "facilities including notifications and audible alerts .\n"
@@ -152,7 +163,7 @@ msgstr ""
 "\n"
 "Läs i hjälpfilen hur de installeras."
 
-#: 3.2/applet.js:198
+#: 3.2/applet.js:193
 msgid ""
 "A User Defined Sound File has been Specified for Low Battery\n"
 "\n"
@@ -164,23 +175,32 @@ msgstr ""
 "Tillse att ljudvolymen är på en lämplig nivå för offentliga miljöer,\n"
 "särskilt om en lång ljudfil används.\n"
 
-#: 3.2/applet.js:312
+#: 3.2/applet.js:322
 msgid "Housekeeping and System Sub Menu"
 msgstr "Underhåll och systemundermeny"
 
-#: 3.2/applet.js:321
+#: 3.2/applet.js:331
 msgid "Open the Help file"
 msgstr "Öppna hjälpfilen"
 
-#: 3.2/applet.js:423
+#: 3.2/applet.js:337
+msgid "Open stylesheet.css (Advanced Function)"
+msgstr "Öppna stylesheet.css (Avancerad funktion)"
+
+#. metadata.json->name
+#: 3.2/applet.js:353
+msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
+msgstr "Batteriprogram med övervakning och avstängning (BAMS)"
+
+#: 3.2/applet.js:433
 msgid "Battery Low - turn off or connect to mains"
 msgstr "Låg batterinivå - Stäng av eller anslut laddkabel"
 
-#: 3.2/applet.js:431
+#: 3.2/applet.js:441
 msgid "Battery Monitor Applet Alert"
 msgstr "Batteriövervakningslarm"
 
-#: 3.2/applet.js:431
+#: 3.2/applet.js:441
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -195,18 +215,88 @@ msgstr ""
 "\n"
 "eller avsluta ditt arbete och pausa eller stäng av datorn.\n"
 
-#: 3.2/applet.js:449
+#: 3.2/applet.js:443
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source,\n"
+"\n"
+"close down your work and suspend or shutdown the machine\n"
+"\n"
+msgstr ""
+"Batterinivån är nere på din varningsnivå\n"
+"\n"
+"Anslut en strömkälla,\n"
+"\n"
+"eller avsluta ditt arbete och pausa eller stäng av datorn.\n"
+
+#: 3.2/applet.js:459
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
 "Batterinivån kritisk! Datorn kommer att pausas om den inte ansluts till "
 "strömkälla."
 
+#: 3.2/applet.js:474
+msgid "Charge:"
+msgstr "Laddning:"
+
+#: 3.2/applet.js:522
+msgid "Percentage Charge:"
+msgstr "Laddning:"
+
 #. metadata.json->description
-msgid "Displays Charge as Percentage and allows Alerts and Actions"
+#, fuzzy
+msgid "Displays charge as percentage and allows alerts and actions"
 msgstr "Visar laddning som procentsats och aktiverar varningar och åtgärder"
 
-#. 5.4->settings-schema.json->head->description
+#. 5.4->settings-schema.json->General->title
+msgid "General"
+msgstr ""
+
+#. 5.4->settings-schema.json->Style->title
+msgid "Style"
+msgstr ""
+
+#. 5.4->settings-schema.json->general->title
 msgid "General Settings"
+msgstr ""
+
+#. 5.4->settings-schema.json->display_mode->title
+#, fuzzy
+msgid "Display Options"
+msgstr "Visningsläge"
+
+#. 5.4->settings-schema.json->low_alert->title
+#. 3.2->settings-schema.json->head2->description
+msgid "Battery Low Alert Settings"
+msgstr "Inställningar för låg batterinivå"
+
+#. 5.4->settings-schema.json->advanced->title
+msgid "Advanced"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_normal->title
+msgid "Normal"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_discharging->title
+msgid "Discharging"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_alert->title
+msgid "Alert"
+msgstr "Varning"
+
+#. 5.4->settings-schema.json->bam_alert_discharging->title
+msgid "Alert Discharging"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_limit_exceeded->title
+msgid "Limit Exceeded"
+msgstr ""
+
+#. 5.4->settings-schema.json->bam_limit_exceeded2->title
+msgid "Limit Exceeded - Critical"
 msgstr ""
 
 #. 5.4->settings-schema.json->refreshInterval-spinner->units
@@ -228,6 +318,17 @@ msgstr ""
 "uppdateringsintervall om du har en långsam maskin. Detta reglerar även "
 "visningshastigheten."
 
+#. 5.4->settings-schema.json->alertPercentage->units
+#. 5.4->settings-schema.json->recharged_alert_percentage->units
+#. 5.4->settings-schema.json->normal_font_size->units
+#. 5.4->settings-schema.json->discharging_font_size->units
+#. 5.4->settings-schema.json->alert_font_size->units
+#. 5.4->settings-schema.json->alert_discharging_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded_font_size->units
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->units
+msgid "%"
+msgstr ""
+
 #. 5.4->settings-schema.json->alertPercentage->description
 #. 3.2->settings-schema.json->alertPercentage->description
 msgid "Percentage Battery Charge at which Alert Displayed"
@@ -242,57 +343,100 @@ msgstr ""
 "Batteriladdningsvärde vid vilket orange varningsbakgrund visas. Det visas "
 "också, och kan justeras i panelikonens vänsterklicksmeny."
 
-#. 5.4->settings-schema.json->head1->description
-#. 3.2->settings-schema.json->head1->description
-msgid "Display Mode"
-msgstr "Visningsläge"
-
-#. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid ""
-"Classic - Battery Percentage with extended messages for horizontal panel"
+#. 5.4->settings-schema.json->recharged_alert->description
+msgid "Visible Alert when Recharging"
 msgstr ""
-"Klassisk - Batteriprocentsats med utökade meddelanden för horisontell panel"
+
+#. 5.4->settings-schema.json->recharged_alert->tooltip
+msgid "Provide visible alert when battery is recharged to a certain threshold"
+msgstr ""
+
+#. 5.4->settings-schema.json->recharged_alert_percentage->description
+msgid "Percentage threshold for visible recharged alert"
+msgstr ""
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid "Classic Plus - Classic with addition of Battery Icon"
-msgstr "Klassisk Plus - Klassisk med batteriikon som tillägg"
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Classic"
+msgstr "Klassisk"
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid "Compact - Battery Percentage without extended messages"
-msgstr "Kompakt - Batteriprocentsats utan utökade meddelanden"
+msgid "Classic Plus"
+msgstr "Klassisk Plus"
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid "Compact Plus - Compact with addition of Battery Icon"
-msgstr "Kompakt Plus - Kompakt med batteriikon som tillägg"
+msgid "Compact"
+msgstr "Kompakt"
 
 #. 5.4->settings-schema.json->displayType->options
-#. 3.2->settings-schema.json->displayType->options
-msgid "Icon Only on coloured background indicating status"
-msgstr "Endast ikon på färgad bakgrund som statusindikation"
+msgid "Compact Plus"
+msgstr "Kompakt Plus"
+
+#. 5.4->settings-schema.json->displayType->options
+msgid "Icon Only"
+msgstr "Endast Ikon"
 
 #. 5.4->settings-schema.json->displayType->description
 msgid "Toolbar Display Type"
-msgstr ""
+msgstr "Visningstyp"
 
 #. 5.4->settings-schema.json->displayType->tooltip
-#. 3.2->settings-schema.json->displayType->tooltip
 msgid ""
-"This feature offers the Classic (original) display with optional battery "
-"icon and some more compact displays suitable for a vertical panel "
-"(CompactCompact Plus and Icon Only)"
+"The following display options are available (including Compact, Compact "
+"Plus, and Icon Only for vertical panels):\n"
+"  Classic: Battery percentage with extended messages for horizontal panel\n"
+"  Classic Plus: Classic with the addition of a battery icon\n"
+"  Compact: Battery percentage without extended messages\n"
+"  Compact Plus: Compact with the addition of a battery icon\n"
+"  Icon Only: The battery icon on a colored background indicating the current "
+"status"
 msgstr ""
-"Denna funktion erbjuder klassisk (ursprunglig) visning med valfri "
-"batteriikon och några mer kompakta visningslägen, lämpliga för vertikal "
-"panel (Kompakt, Kompakt Plus och Endast ikon)"
 
-#. 5.4->settings-schema.json->head2->description
-#. 3.2->settings-schema.json->head2->description
-msgid "Battery Low Alert Settings"
-msgstr "Inställningar för låg batterinivå"
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Light"
+msgstr ""
+
+#. 5.4->settings-schema.json->iconTheme->options
+#. 3.2->settings-schema.json->iconTheme->options
+msgid "Yaru Dark"
+msgstr ""
+
+#. 5.4->settings-schema.json->iconTheme->description
+#. 5.4->settings-schema.json->iconTheme->tooltip
+msgid "Icon Theme"
+msgstr "Ikon Tema"
+
+#. 5.4->settings-schema.json->time_remaining_display->description
+msgid "Append estimated time remaining to chosen display type"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_display->tooltip
+msgid ""
+"This will append an estimate to the above option for time remaining based on "
+"the amount of remaining battery power"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->description
+msgid "Append estimated time remaining to toolbar menu"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_toolbar->tooltip
+msgid ""
+"This will append an estimate to the toolbar menu for time remaining based on "
+"the amount of remaining battery power"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->description
+msgid "Append estimated time remaining to tooltip"
+msgstr ""
+
+#. 5.4->settings-schema.json->time_remaining_tooltip->tooltip
+msgid ""
+"This will append an estimate to the tooltip for time remaining based on the "
+"amount of remaining battery power"
+msgstr ""
 
 #. 5.4->settings-schema.json->useBatteryLowSound->description
 #. 3.2->settings-schema.json->useBatteryLowSound->description
@@ -358,27 +502,6 @@ msgstr ""
 "För att påminna användaren om att ljudvolymen bör anpassas till lämplig nivå "
 "för offentliga miljöer"
 
-#. 5.4->settings-schema.json->head3->description
-#. 3.2->settings-schema.json->head3->description
-msgid "Household Tasks"
-msgstr "Hushållsuppgifter"
-
-#. 5.4->settings-schema.json->deleteTempraryFiles->description
-msgid "Delete temporary files after upgrade to applet version 1.4"
-msgstr "Ta bort temporära filer efter uppgradering till version 1.4"
-
-#. 5.4->settings-schema.json->deleteTempraryFiles->tooltip
-msgid ""
-"Applet versions prior to 1.4 used temporary files in the home directory. "
-"These are not needed anymore and can be deleted."
-msgstr ""
-"Versioner före 1.4 använde temporära filer i hemkatalogen. Dessa används "
-"inte längre och kan tas bort."
-
-#. 5.4->settings-schema.json->head4->description
-msgid "Advanced"
-msgstr ""
-
 #. 5.4->settings-schema.json->customBatteryPath->description
 msgid "Path to battery capacity directory (device path)"
 msgstr ""
@@ -392,6 +515,48 @@ msgid ""
 "/sys/class/power_supply/BAT0"
 msgstr ""
 
+#. 5.4->settings-schema.json->normal_background_color->description
+#. 5.4->settings-schema.json->discharging_background_color->description
+#. 5.4->settings-schema.json->alert_background_color->description
+#. 5.4->settings-schema.json->alert_discharging_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded_background_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->description
+msgid "Background Color"
+msgstr ""
+
+#. 5.4->settings-schema.json->normal_background_color->tooltip
+#. 5.4->settings-schema.json->normal_border_color->tooltip
+#. 5.4->settings-schema.json->discharging_background_color->tooltip
+#. 5.4->settings-schema.json->discharging_border_color->tooltip
+#. 5.4->settings-schema.json->alert_background_color->tooltip
+#. 5.4->settings-schema.json->alert_border_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_background_color->tooltip
+#. 5.4->settings-schema.json->alert_discharging_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded_border_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_background_color->tooltip
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->tooltip
+msgid "RGB or RGBA"
+msgstr ""
+
+#. 5.4->settings-schema.json->normal_border_color->description
+#. 5.4->settings-schema.json->discharging_border_color->description
+#. 5.4->settings-schema.json->alert_border_color->description
+#. 5.4->settings-schema.json->alert_discharging_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded_border_color->description
+#. 5.4->settings-schema.json->limit_exceeded2_border_color->description
+msgid "Border Color"
+msgstr ""
+
+#. 5.4->settings-schema.json->normal_font_size->description
+#. 5.4->settings-schema.json->discharging_font_size->description
+#. 5.4->settings-schema.json->alert_font_size->description
+#. 5.4->settings-schema.json->alert_discharging_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded_font_size->description
+#. 5.4->settings-schema.json->limit_exceeded2_font_size->description
+msgid "Font Size"
+msgstr ""
+
 #. 3.2->settings-schema.json->head->description
 msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
 msgstr ""
@@ -401,9 +566,45 @@ msgstr ""
 msgid "Refresh Interval for Display:"
 msgstr "Uppdateringsintervall för panelvisning:"
 
+#. 3.2->settings-schema.json->head1->description
+msgid "Display Mode"
+msgstr "Visningsläge"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid ""
+"Classic - Battery Percentage with extended messages for horizontal panel"
+msgstr ""
+"Klassisk - Batteriprocentsats med utökade meddelanden för horisontell panel"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Classic Plus - Classic with addition of Battery Icon"
+msgstr "Klassisk Plus - Klassisk med batteriikon som tillägg"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Compact - Battery Percentage without extended messages"
+msgstr "Kompakt - Batteriprocentsats utan utökade meddelanden"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Compact Plus - Compact with addition of Battery Icon"
+msgstr "Kompakt Plus - Kompakt med batteriikon som tillägg"
+
+#. 3.2->settings-schema.json->displayType->options
+msgid "Icon Only on coloured background indicating status"
+msgstr "Endast ikon på färgad bakgrund som statusindikation"
+
 #. 3.2->settings-schema.json->displayType->description
 msgid "Type of Display in Toolbar"
 msgstr "Visningstyp i verktygsraden"
+
+#. 3.2->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional battery "
+"icon and some more compact displays suitable for a vertical panel "
+"(CompactCompact Plus and Icon Only)"
+msgstr ""
+"Denna funktion erbjuder klassisk (ursprunglig) visning med valfri "
+"batteriikon och några mer kompakta visningslägen, lämpliga för vertikal "
+"panel (Kompakt, Kompakt Plus och Endast ikon)"
 
 #. 3.2->settings-schema.json->useBatteryLowSound->tooltip
 msgid ""
@@ -454,6 +655,10 @@ msgstr ""
 "För att påminna användaren om att ljudvolymen bör anpassas till lämplig nivå "
 "för offentliga miljöer"
 
+#. 3.2->settings-schema.json->head3->description
+msgid "Household Tasks"
+msgstr "Hushållsuppgifter"
+
 #. 3.2->settings-schema.json->deleteTempraryFiles->description
 msgid "Delete temporary files after upgrade to version 1.4"
 msgstr "Ta bort temporära filer efter uppgradering till version 1.4"
@@ -466,35 +671,23 @@ msgstr ""
 "Versioner före 1.4 använde temporära filer i hemkatalogen. Dessa används "
 "inte längre och kan tas bort."
 
-#~ msgid ""
-#~ "A User Defined Sound File has been Specified for low Battery\n"
-#~ "\n"
-#~ "Please ensure the volume is set sensibly in public places\n"
-#~ "especially if a long loud file is specifed\n"
-#~ msgstr ""
-#~ "En användardefinierad ljudfil har specificerats för låg batterinivå\n"
-#~ "\n"
-#~ "Tillse att ljudvolymen är på en lämplig nivå för offentliga miljöer,\n"
-#~ "särskilt om en lång ljudfil används.\n"
+#: 5.4/suspendScript.sh:22
+msgid "WARNING: SUSPENDING SOON"
+msgstr ""
 
-#~ msgid "Type of Display"
-#~ msgstr "Visningstyp"
+#: 5.4/suspendScript.sh:23
+msgid "The battery level is critical. The machine will be suspended shortly."
+msgstr ""
 
-#~ msgid "Ok"
-#~ msgstr "OK"
+#: 5.4/suspendScript.sh:24
+msgid "Abort Suspension"
+msgstr ""
 
-#~ msgid "invalid"
-#~ msgstr "ogiltig"
+#: 5.4/suspendScript.sh:25
+#, fuzzy
+msgid "Suspend Immediately"
+msgstr "Pausa vid:"
 
-#~ msgid "Wait"
-#~ msgstr "Vänta"
-
-#~ msgid "Note: Alerts not enabled in Settings"
-#~ msgstr "OBS! Varningar är inte aktiverat i inställningarna"
-
-#~ msgid ""
-#~ "Increase or decrease this spinner value to change the refresh interval - "
-#~ "use a slow refresh if you have a slow machine"
-#~ msgstr ""
-#~ "Öka eller minska värdet för att ändra uppdateringsintervall. Långt "
-#~ "intervall för långsamma maskiner."
+#: 5.4/suspendScript.sh:26
+msgid "The machine was suspended as the battery level was critical."
+msgstr ""

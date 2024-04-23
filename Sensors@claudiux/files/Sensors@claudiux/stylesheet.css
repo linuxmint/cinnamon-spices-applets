@@ -1,3 +1,7 @@
+.sensors-monospace {
+    font-family: monospace;
+}
+
 .sensors-label {
     background: transparent;
     margin: 1px, 1px, 1px, 1px;
@@ -7,7 +11,6 @@
     border-color: rgba(127,127,127,0.5);
     text-align: center;
     vertical-align: middle;
-    font-family: monospace;
 }
 
 .sensors-high {
@@ -19,7 +22,6 @@
     border-color: rgba(255,141,0,0.5);
     text-align: center;
     vertical-align: middle;
-    font-family: monospace;
 }
 
 .sensors-critical {
@@ -31,7 +33,6 @@
     border-color: rgba(194,34,34,0.5);
     text-align: center;
     vertical-align: middle;
-    font-family: monospace;
 }
 
 .sensors-label-noborder {
@@ -41,7 +42,6 @@
     border: 0;
     text-align: center;
     vertical-align: middle;
-    font-family: monospace;
 }
 
 .sensors-high-noborder {
@@ -51,7 +51,6 @@
     border: 0;
     text-align: center;
     vertical-align: middle;
-    font-family: monospace;
 }
 
 .sensors-critical-noborder {
@@ -61,7 +60,6 @@
     border: 0;
     text-align: center;
     vertical-align: middle;
-    font-family: monospace;
 }
 
 .sensors-size80 {

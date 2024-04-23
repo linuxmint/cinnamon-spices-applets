@@ -1,3 +1,7 @@
+v2.3 - 09-02-2024
+========
+* bug fix: Main.Util is undefined
+
 v2.2 - 08-02-2021
 ========
 * bug fix: remove "const _" which generates the following error "redeclaration of const _"

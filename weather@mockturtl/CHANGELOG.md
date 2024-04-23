@@ -1,5 +1,47 @@
 # Changelog
 
+## 3.4.1
+
+Changes:
+
+* Fix [#5414](https://github.com/linuxmint/cinnamon-spices-applets/issues/5414) - Wrong Celsius temperature from Pirate Weather
+
+Fix incorrect soup version detection
+
+* Fix [#5152](https://github.com/linuxmint/cinnamon-spices-applets/issues/5152)
+* Fix [#5430](https://github.com/linuxmint/cinnamon-spices-applets/issues/5430#issuecomment-1920767915)
+
+Fix Applet not loading weather when soup throw error on reading message response - plus check network status before starting the refresh loop instead of after
+
+* Fix [#5425](https://github.com/linuxmint/cinnamon-spices-applets/issues/5425)
+* Fix [#5426](https://github.com/linuxmint/cinnamon-spices-applets/issues/5426)
+* Fix [#5457](https://github.com/linuxmint/cinnamon-spices-applets/issues/5457)
+
+## 3.4.0
+
+* Fix [#5212](https://github.com/linuxmint/cinnamon-spices-applets/issues/5212)
+* Fix [#5392](https://github.com/linuxmint/cinnamon-spices-applets/issues/5392)
+* Fix [#5355](https://github.com/linuxmint/cinnamon-spices-applets/issues/5355)
+* Add description to Manual location entry
+* Fix Saving Logs button not included the redacted config
+* Update library typings for applet
+* Use fedora geoip project for autolocation via the internet
+
+## 3.3.1
+
+Fix nominatim not getting location data due to API changes. Related issues:
+
+* Fix [#4983](https://github.com/linuxmint/cinnamon-spices-applets/issues/4983)
+* Fix [#4981](https://github.com/linuxmint/cinnamon-spices-applets/issues/4981)
+* Fix [#4980](https://github.com/linuxmint/cinnamon-spices-applets/issues/4980)
+
+## 3.3.0
+
+* Fix [#4801](https://github.com/linuxmint/cinnamon-spices-applets/issues/4801) - Link to dmi.dk location not working 
+* Fix [#4800](https://github.com/linuxmint/cinnamon-spices-applets/issues/4800) - Wrong icons (Tomorrow.io and US Weather)
+* Fix [#4780](https://github.com/linuxmint/cinnamon-spices-applets/issues/4780) - Hourly Weather Redesign
+* Fix [#4709](https://github.com/linuxmint/cinnamon-spices-applets/issues/4709) - the free space between the interface elements disappears
+
 ## 3.2.13
 
 * Add Pirate Weather as a provider

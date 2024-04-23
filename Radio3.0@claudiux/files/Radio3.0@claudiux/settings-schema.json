@@ -198,8 +198,7 @@
       "title": "Start-up",
       "keys": [
         "switch-on-last-station-at-start-up",
-        "volume-at-startup",
-        "dont-check-dependencies"
+        "volume-at-startup"
       ]
     },
     "sectionBehaviorVolumeStep": {
@@ -207,7 +206,9 @@
       "title": "Volume step",
       "keys": [
         "volume-step",
-        "volume-show-osd"
+        "volume-magnetic-on",
+        "volume-show-osd",
+        "volume-show-osd-starting-radio"
       ]
     },
     "sectionBehaviorTooltip": {
@@ -274,11 +275,13 @@
     },
     "sectionBehaviorSymbolicIconColor": {
       "type": "section",
-      "title": "Symbolic Icon Color",
+      "title": "Icon",
       "keys": [
         "color-on",
         "color-off",
-        "color-recording"
+        "color-recording",
+        "show-favicon",
+        "show-volume-level-near-icon"
       ]
     },
     "sectionNetworkQuality": {
@@ -307,6 +310,7 @@
       "type": "section",
       "title": "Database Info",
       "keys": [
+        "database-favorite",
         "database-url"
       ]
     },
@@ -315,6 +319,7 @@
       "title": "Recordings",
       "keys": [
         "recording-path",
+        "button-open-rec-folder",
         "button-rec-path-to-default",
         "recording-format",
         "recording-ends-auto"
@@ -362,7 +367,8 @@
         "recordings-keep-video",
         "recordings-subdirectory",
         "recordings-extract-button",
-        "recordings-extract-update"
+        "recordings-extract-update",
+        "recordings-open-folder"
       ]
     },
     "sectionRecordingScheduleARecording": {
@@ -431,6 +437,7 @@
         "id": "name",
         "title": "Station or Category",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
@@ -451,25 +458,43 @@
         "id": "url",
         "title": "Streaming URL (empty for a category)",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
         "id": "uuid",
         "title": "Unique identifier",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
         "id": "homepage",
         "title": "Home page",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
         "id": "tags",
         "title": "Tags",
         "type": "string",
+        "expand-width": true,
         "default": ""
+      },
+      {
+        "id": "favicon",
+        "title": "Favicon",
+        "type": "string",
+        "expand-width": true,
+        "default": ""
+      },
+      {
+        "id": "author_title_swap",
+        "title": "Artist/Title swap",
+        "type": "boolean",
+        "default": false,
+        "align": 0.5
       }
     ],
     "default": [
@@ -597,7 +622,8 @@
       {
         "id": "name",
         "title": "Title",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "bitrate",
@@ -616,7 +642,8 @@
       {
         "id": "url",
         "title": "Streaming URL",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       }
     ],
     "default": [
@@ -676,6 +703,7 @@
         "id": "name",
         "title": "Station",
         "type": "string",
+        "expand-width": true,
         "default": ""
       },
       {
@@ -701,27 +729,39 @@
       {
         "id": "tags",
         "title": "Tags",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "url",
         "title": "Streaming URL",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "country",
         "title": "Country",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "uuid",
         "title": "Unique identifier",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "homepage",
         "title": "Home page",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
+      },
+      {
+        "id": "favicon",
+        "title": "Favicon",
+        "type": "string",
+        "expand-width": true,
+        "default": ""
       }
     ],
     "default": [
@@ -796,7 +836,7 @@
     "tooltip": "If set, then this will change the volume level starting a new radio, in percentage of the general volume level.\nDefault is (Undefined): The volume level remains unchanged.\n\nPlease note that you can change the volume level scrolling on this applet icon, or using the slider in the context menu."
   },
   "dont-check-dependencies": {
-    "type": "switch",
+    "type": "generic",
     "description": "Do not check about dependencies",
     "default": false
   },
@@ -814,11 +854,22 @@
     },
     "tooltip": "By how much increase or decrease the volume using the mouse scroll wheel on the icon."
   },
+  "volume-magnetic-on": {
+    "type": "switch",
+    "default": false,
+    "description": "Magnetize all multiples of 25%"
+  },
   "volume-show-osd": {
     "type": "switch",
     "default": true,
     "description": "Show OSD while changing volume",
     "tooltip": "Should OSD (On-Screen Display) be displayed when changing volume?"
+  },
+  "volume-show-osd-starting-radio": {
+    "type": "switch",
+    "dependency": "volume-show-osd",
+    "default": true,
+    "description": "Show volume OSD when changing radio station"
   },
   "show-title-and-version": {
     "type": "switch",
@@ -962,6 +1013,12 @@
     "default": "rgb(204,0,0)",
     "description": "Color of the symbolic icon while recording"
   },
+  "show-favicon": {
+    "type": "switch",
+    "default": false,
+    "description": "Display the logo of the radio station listened to",
+    "tooltip": "Replace this applet icon with the radio station logo, if it exists."
+  },
   "network-quality": {
     "type": "combobox",
     "default": "high",
@@ -990,8 +1047,17 @@
     "callback": "set_MPV_ALIAS",
     "description": "Apply HTTP Proxy"
   },
+  "database-favorite": {
+    "type": "combobox",
+    "default": "random",
+    "description": "Your favorite database:",
+    "options": {
+      "Random": "random"
+    }
+  },
   "database-url": {
     "type": "textview",
+    "dependency": "database-favorite=random",
     "description": "Database URL",
     "default": "",
     "height": 25
@@ -1001,6 +1067,11 @@
     "description": "Path to the folder that will contain your future recordings",
     "select-dir": true,
     "default": ""
+  },
+  "button-open-rec-folder": {
+    "type": "button",
+    "description": "Open the recordings folder",
+    "callback": "open_rec_folder"
   },
   "button-rec-path-to-default": {
     "type": "button",
@@ -1017,7 +1088,8 @@
       "OGG": "ogg",
       "RAW": "raw",
       "WAV": "wav"
-    }
+    },
+    "tooltip": "Please note that this choice will have no effect on any current recording, but on subsequent ones."
   },
   "recording-ends-auto": {
     "type": "combobox",
@@ -1156,6 +1228,11 @@
     "description": "%",
     "dependency": "show-recordings-extract-update"
   },
+  "recordings-open-folder": {
+    "type": "button",
+    "description": "Open the recordings folder",
+    "callback": "on_button_YT_open_dir"
+  },
   "show-recordings-extract-update": {
     "type": "generic",
     "default": false
@@ -1242,12 +1319,14 @@
       {
         "id": "station",
         "title": "Station",
-        "type": "string"
+        "type": "string",
+        "expand-width": true
       },
       {
         "id": "uuid",
         "title": "Identifier",
         "type": "string",
+        "expand-width": true,
         "default": ""
       }
     ],
@@ -1676,6 +1755,15 @@
   },
   "scheduling-allowed": {
     "type": "generic",
+    "default": true
+  },
+  "score": {
+    "type": "generic",
+    "default": 0
+  },
+  "show-volume-level-near-icon": {
+    "type": "switch",
+    "description": "Display volume level near icon",
     "default": true
   }
 }

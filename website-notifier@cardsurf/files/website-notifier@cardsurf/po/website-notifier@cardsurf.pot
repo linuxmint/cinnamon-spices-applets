@@ -1,0 +1,211 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: website-notifier@cardsurf 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-09 14:22-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->description
+msgid "Shows a notification when a website updates"
+msgstr ""
+
+#. metadata.json->name
+msgid "Website notifier"
+msgstr ""
+
+#. settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr ""
+
+#. settings-schema.json->update_every->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->update_every->description
+msgid "Refresh every"
+msgstr ""
+
+#. settings-schema.json->update_every->tooltip
+msgid "How often to refresh a website. 0 means no refreshing."
+msgstr ""
+
+#. settings-schema.json->notification_type->description
+msgid "Notification type"
+msgstr ""
+
+#. settings-schema.json->notification_type->options
+msgid "System popup"
+msgstr ""
+
+#. settings-schema.json->notification_type->options
+msgid "Applet popup"
+msgstr ""
+
+#. settings-schema.json->notification_type->tooltip
+msgid "A user interface that shows notficiation text"
+msgstr ""
+
+#. settings-schema.json->tooltip_type->description
+msgid "Tooltip text"
+msgstr ""
+
+#. settings-schema.json->tooltip_type->options
+msgid "Time left next refresh"
+msgstr ""
+
+#. settings-schema.json->tooltip_type->options
+msgid "Next refresh time"
+msgstr ""
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last refresh time"
+msgstr ""
+
+#. settings-schema.json->tooltip_type->options
+msgid "Last notification time"
+msgstr ""
+
+#. settings-schema.json->tooltip_type->options
+msgid "None"
+msgstr ""
+
+#. settings-schema.json->tooltip_type->tooltip
+msgid "Text shown in an applet tooltip"
+msgstr ""
+
+#. settings-schema.json->primary_button_type->description
+msgid "Primary button"
+msgstr ""
+
+#. settings-schema.json->primary_button_type->options
+msgid "Left"
+msgstr ""
+
+#. settings-schema.json->primary_button_type->options
+msgid "Middle"
+msgstr ""
+
+#. settings-schema.json->primary_button_type->tooltip
+msgid ""
+"A mouse button used to perform main actions.\n"
+"The primary button refreshes a website on demand.\n"
+"The secondary button toggles an applet popup."
+msgstr ""
+
+#. settings-schema.json->applet_popup_click_type->description
+msgid "On popup clicked"
+msgstr ""
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup and open browser"
+msgstr ""
+
+#. settings-schema.json->applet_popup_click_type->options
+msgid "Close popup"
+msgstr ""
+
+#. settings-schema.json->applet_popup_click_type->tooltip
+msgid "An action to perform when an applet popup is clicked"
+msgstr ""
+
+#. settings-schema.json->gui_start->description
+msgid "Gui"
+msgstr ""
+
+#. settings-schema.json->max_title_length->units
+#. settings-schema.json->max_message_length->units
+msgid "characters"
+msgstr ""
+
+#. settings-schema.json->max_title_length->description
+msgid "Title length"
+msgstr ""
+
+#. settings-schema.json->max_title_length->tooltip
+msgid "A maximum number of characters in a notification title"
+msgstr ""
+
+#. settings-schema.json->max_message_length->description
+msgid "Message length"
+msgstr ""
+
+#. settings-schema.json->max_message_length->tooltip
+msgid "A maximum number of characters in a notification message"
+msgstr ""
+
+#. settings-schema.json->applet_popup_width->units
+#. settings-schema.json->applet_popup_height->units
+msgid "pixels"
+msgstr ""
+
+#. settings-schema.json->applet_popup_width->description
+msgid "Popup width"
+msgstr ""
+
+#. settings-schema.json->applet_popup_width->tooltip
+msgid "A width of an applet popup"
+msgstr ""
+
+#. settings-schema.json->applet_popup_height->description
+msgid "Popup height"
+msgstr ""
+
+#. settings-schema.json->applet_popup_height->tooltip
+msgid "A height of an applet popup"
+msgstr ""
+
+#. settings-schema.json->applet_popup_title_css->description
+msgid "Popup title CSS"
+msgstr ""
+
+#. settings-schema.json->applet_popup_title_css->tooltip
+msgid "A CSS style applied to a notification title in an applet popup"
+msgstr ""
+
+#. settings-schema.json->applet_popup_message_css->description
+msgid "Popup message CSS"
+msgstr ""
+
+#. settings-schema.json->applet_popup_message_css->tooltip
+msgid "A CSS style applied to a notification message in an applet popup"
+msgstr ""
+
+#. settings-schema.json->gui_icon_filepath->description
+msgid "Icon"
+msgstr ""
+
+#. settings-schema.json->gui_icon_filepath->tooltip
+msgid "An icon displayed in a panel"
+msgstr ""
+
+#. settings-schema.json->scripts_start->description
+msgid "Scripts"
+msgstr ""
+
+#. settings-schema.json->script_filepath->description
+msgid "Script"
+msgstr ""
+
+#. settings-schema.json->script_filepath->tooltip
+msgid "A path to a script that refeshes a website"
+msgstr ""
+
+#. settings-schema.json->script_separator->description
+msgid "Separator "
+msgstr ""
+
+#. settings-schema.json->script_separator->tooltip
+msgid "A string that seperates values returned from the script"
+msgstr ""
