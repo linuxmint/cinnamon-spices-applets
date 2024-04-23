@@ -6,10 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux v6.3.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
-"POT-Creation-Date: 2024-04-13 00:18+0200\n"
-"PO-Revision-Date: 2024-04-15 11:58+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-23 19:23+0200\n"
+"PO-Revision-Date: 2024-04-23 19:27+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,9 +18,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
+#: 4.6/SU_messageTray.js:1282 6.0/SU_messageTray.js:1284
+#: 5.6/SU_messageTray.js:1282 4.2/SU_messageTray.js:1282
+#: 4.8/SU_messageTray.js:1282
+msgid "Open"
+msgstr "Ouvrir"
+
+#: 4.6/SU_messageTray.js:1289 6.0/SU_messageTray.js:1291
+#: 5.6/SU_messageTray.js:1289 4.2/SU_messageTray.js:1289
+#: 4.8/SU_messageTray.js:1289
+msgid "Remove"
+msgstr "Supprimer"
+
+#: 4.6/SU_messageTray.js:1913 6.0/SU_messageTray.js:1915
+#: 5.6/SU_messageTray.js:1913 4.2/SU_messageTray.js:1913
+#: 4.8/SU_messageTray.js:1913
+msgid "System Information"
+msgstr "Infos système"
+
 #. metadata.json->name
 #: 4.6/applet.js:214 4.6/applet.js:716 4.6/applet.js:735 4.6/applet.js:1229
-#: 6.0/applet.js:144 6.0/applet.js:768 6.0/applet.js:787 6.0/applet.js:1313
+#: 6.0/applet.js:144 6.0/applet.js:743 6.0/applet.js:762 6.0/applet.js:1223
 #: 6.0/applet_OLD.js:149 6.0/applet_OLD.js:677 6.0/applet_OLD.js:696
 #: 6.0/applet_OLD.js:1200 5.6/applet.js:211 5.6/applet.js:725 5.6/applet.js:744
 #: 5.6/applet.js:1245 4.2/applet.js:162 4.2/applet.js:580 4.2/applet.js:599
@@ -34,7 +51,7 @@ msgid "Spices Update"
 msgstr "Spices Update"
 
 #: 4.6/applet.js:215 4.6/applet.js:2093 4.6/applet.js:2101 6.0/applet.js:145
-#: 6.0/applet.js:2307 6.0/applet.js:2315 6.0/applet_OLD.js:150
+#: 6.0/applet.js:2144 6.0/applet.js:2155 6.0/applet_OLD.js:150
 #: 6.0/applet_OLD.js:2140 6.0/applet_OLD.js:2148 5.6/applet.js:212
 #: 5.6/applet.js:2113 5.6/applet.js:2121 4.2/applet.js:163 4.2/applet.js:1900
 #: 4.2/applet.js:1906 2.8/applet.js:1709 2.8/applet.js:1715 3.8/applet.js:243
@@ -43,12 +60,12 @@ msgstr "Spices Update"
 msgid "Middle-Click to Refresh"
 msgstr "Clic-Molette pour Actualiser"
 
-#: 4.6/applet.js:363 6.0/applet.js:341 6.0/applet_OLD.js:320 5.6/applet.js:360
+#: 4.6/applet.js:363 6.0/applet.js:350 6.0/applet_OLD.js:320 5.6/applet.js:360
 #: 4.2/applet.js:297 4.8/applet.js:362
 msgid "Spices Update has just been installed or upgraded"
 msgstr "Spices Update vient juste d'être installé ou mis à niveau"
 
-#: 4.6/applet.js:364 6.0/applet.js:345 6.0/applet_OLD.js:321 5.6/applet.js:361
+#: 4.6/applet.js:364 6.0/applet.js:351 6.0/applet_OLD.js:321 5.6/applet.js:361
 #: 4.2/applet.js:298 4.8/applet.js:363
 msgid ""
 "Certain parameters require your vigilance: some may have been modified; "
@@ -57,7 +74,7 @@ msgstr ""
 "Certains paramètres nécessitent votre vigilance : certains peuvent avoir été "
 "modifiés ; d'autres sont nouveaux."
 
-#: 4.6/applet.js:365 6.0/applet.js:346 6.0/applet_OLD.js:322 5.6/applet.js:362
+#: 4.6/applet.js:365 6.0/applet.js:352 6.0/applet_OLD.js:322 5.6/applet.js:362
 #: 4.2/applet.js:299 4.8/applet.js:364
 msgid ""
 "Please check your settings using the menu of the SpicesUpdate applet or the "
@@ -66,27 +83,27 @@ msgstr ""
 "Veuillez vérifier vos paramètres en utilisant le menu de l'applet "
 "SpicesUpdate ou le bouton ci-dessous."
 
-#: 4.6/applet.js:367 6.0/applet.js:348 6.0/applet_OLD.js:324 5.6/applet.js:364
+#: 4.6/applet.js:367 6.0/applet.js:354 6.0/applet_OLD.js:324 5.6/applet.js:364
 #: 4.2/applet.js:301 4.8/applet.js:366
 msgid "Spices Update Settings"
 msgstr "Paramètres de Spices Update"
 
-#: 4.6/applet.js:761 6.0/applet.js:817 6.0/applet_OLD.js:722 5.6/applet.js:770
+#: 4.6/applet.js:761 6.0/applet.js:787 6.0/applet_OLD.js:722 5.6/applet.js:770
 #: 4.2/applet.js:625 4.8/applet.js:762
 msgid "Update It Now!"
 msgstr "Mettre à jour !"
 
-#: 4.6/applet.js:761 6.0/applet.js:817 6.0/applet_OLD.js:722 5.6/applet.js:770
+#: 4.6/applet.js:761 6.0/applet.js:787 6.0/applet_OLD.js:722 5.6/applet.js:770
 #: 4.2/applet.js:625 4.8/applet.js:762
 msgid "Update Them All Now!"
 msgstr "Tout mettre à jour !"
 
-#: 4.6/applet.js:767 6.0/applet.js:823 6.0/applet_OLD.js:728 5.6/applet.js:776
+#: 4.6/applet.js:767 6.0/applet.js:793 6.0/applet_OLD.js:728 5.6/applet.js:776
 #: 4.2/applet.js:631 4.8/applet.js:768
 msgid "Forget It"
 msgstr "Oublier cela"
 
-#: 4.6/applet.js:767 6.0/applet.js:823 6.0/applet_OLD.js:728 5.6/applet.js:776
+#: 4.6/applet.js:767 6.0/applet.js:793 6.0/applet_OLD.js:728 5.6/applet.js:776
 #: 4.2/applet.js:631 4.8/applet.js:768
 msgid "Forget Them All"
 msgstr "Oublier tout ça !"
@@ -116,20 +133,20 @@ msgstr "Oublier tout ça !"
 #. 4.8->settings-schema.json->btn_refresh_desklets->description
 #. 4.8->settings-schema.json->btn_refresh_extensions->description
 #. 4.8->settings-schema.json->btn_refresh_themes->description
-#: 4.6/applet.js:771 4.6/applet.js:1832 6.0/applet.js:827 6.0/applet.js:2024
+#: 4.6/applet.js:771 4.6/applet.js:1832 6.0/applet.js:797 6.0/applet.js:1856
 #: 6.0/applet_OLD.js:732 6.0/applet_OLD.js:1879 5.6/applet.js:780
 #: 5.6/applet.js:1852 4.2/applet.js:635 4.2/applet.js:1682 2.8/applet.js:574
 #: 2.8/applet.js:1590 3.8/applet.js:682 3.8/applet.js:1747 4.8/applet.js:772
-#: 4.8/applet.js:1838 cs/4.2/bin/SUExtensionCore.py:795
+#: 4.8/applet.js:1838
 msgid "Refresh"
 msgstr "Actualiser"
 
-#: 4.6/applet.js:944 6.0/applet.js:992 6.0/applet_OLD.js:906 5.6/applet.js:953
+#: 4.6/applet.js:944 6.0/applet.js:931 6.0/applet_OLD.js:906 5.6/applet.js:953
 #: 4.2/applet.js:807 2.8/applet.js:729 3.8/applet.js:847 4.8/applet.js:945
 msgid "With details here, when available."
 msgstr "Avec les détails ici, quand ils sont disponibles."
 
-#: 4.6/applet.js:945 4.6/constants.js:140 6.0/applet.js:993
+#: 4.6/applet.js:945 4.6/constants.js:140 6.0/applet.js:932
 #: 6.0/applet_OLD.js:907 6.0/constants.js:147 5.6/applet.js:954
 #: 5.6/constants.js:134 4.2/applet.js:808 4.2/constants.js:133
 #: 2.8/applet.js:105 2.8/applet.js:730 3.8/applet.js:146 3.8/applet.js:848
@@ -137,25 +154,25 @@ msgstr "Avec les détails ici, quand ils sont disponibles."
 msgid "One applet needs update:"
 msgstr "Une applet dispose d'une mise à jour :"
 
-#: 4.6/applet.js:946 6.0/applet.js:994 6.0/applet_OLD.js:908 5.6/applet.js:955
+#: 4.6/applet.js:946 6.0/applet.js:933 6.0/applet_OLD.js:908 5.6/applet.js:955
 #: 4.2/applet.js:809 2.8/applet.js:730 3.8/applet.js:848 4.8/applet.js:947
 msgid "Do not matter. This is a FAKE notification, just for the test."
 msgstr ""
 "Ne vous en préoccupez pas, c'est une fausse notification, juste pour tester."
 
-#: 4.6/applet.js:1229 6.0/applet.js:1316 6.0/applet_OLD.js:1200
+#: 4.6/applet.js:1229 6.0/applet.js:1223 6.0/applet_OLD.js:1200
 #: 5.6/applet.js:1245 4.2/applet.js:1080 2.8/applet.js:1004 3.8/applet.js:1174
 #: 4.8/applet.js:1233
 msgid "is fully functional."
 msgstr "est pleinement fonctionnel."
 
-#: 4.6/applet.js:1230 6.0/applet.js:1317 6.0/applet_OLD.js:1201
+#: 4.6/applet.js:1230 6.0/applet.js:1224 6.0/applet_OLD.js:1201
 #: 5.6/applet.js:1246 4.2/applet.js:1081 2.8/applet.js:1005 3.8/applet.js:1175
 #: 4.8/applet.js:1234
 msgid "All dependencies are installed"
 msgstr "Toutes les dépendances sont installées"
 
-#: 4.6/applet.js:1253 6.0/applet.js:1342 6.0/applet_OLD.js:1226
+#: 4.6/applet.js:1253 6.0/applet.js:1250 6.0/applet_OLD.js:1226
 #: 5.6/applet.js:1271 4.2/applet.js:1104 2.8/applet.js:1029 3.8/applet.js:1199
 #: 4.8/applet.js:1259
 msgid ""
@@ -165,39 +182,39 @@ msgstr ""
 "Vous semblez ne pas disposer des programmes requis pour bénéficier de toutes "
 "les fonctionnalités de cette applet."
 
-#: 4.6/applet.js:1254 6.0/applet.js:1343 6.0/applet_OLD.js:1227
+#: 4.6/applet.js:1254 6.0/applet.js:1251 6.0/applet_OLD.js:1227
 #: 5.6/applet.js:1272 4.2/applet.js:1105 2.8/applet.js:1030 3.8/applet.js:1200
 #: 4.8/applet.js:1260
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Veuillez exécuter, dans le terminal qui s'est ouvert, les commandes :"
 
-#: 4.6/applet.js:1255 6.0/applet.js:1344 6.0/applet_OLD.js:1228
+#: 4.6/applet.js:1255 6.0/applet.js:1252 6.0/applet_OLD.js:1228
 #: 5.6/applet.js:1273 4.2/applet.js:1106 2.8/applet.js:1031 3.8/applet.js:1201
 #: 4.8/applet.js:1261
 msgid "Some dependencies are not installed!"
 msgstr "Certaines dépendances ne sont pas installées !"
 
-#: 4.6/applet.js:1653 6.0/applet.js:1820 6.0/applet_OLD.js:1700
+#: 4.6/applet.js:1653 6.0/applet.js:1606 6.0/applet_OLD.js:1700
 #: 5.6/applet.js:1673 4.2/applet.js:1504 2.8/applet.js:1423 3.8/applet.js:1582
 #: 4.8/applet.js:1659
 msgid "(Description unavailable)"
 msgstr "(Description indisponible)"
 
-#: 4.6/applet.js:1856 6.0/applet.js:2048 6.0/applet_OLD.js:1903
+#: 4.6/applet.js:1856 6.0/applet.js:1880 6.0/applet_OLD.js:1903
 #: 5.6/applet.js:1876 4.2/applet.js:1706 2.8/applet.js:1614 3.8/applet.js:1770
 #: 4.8/applet.js:1862
 msgid "Forget new Spices"
 msgstr "Oublier les nouveautés"
 
-#: 4.6/applet.js:1862 6.0/applet.js:2054 6.0/applet_OLD.js:1909
+#: 4.6/applet.js:1862 6.0/applet.js:1886 6.0/applet_OLD.js:1909
 #: 5.6/applet.js:1882 4.2/applet.js:1712 2.8/applet.js:1620 3.8/applet.js:1776
 #: 4.8/applet.js:1868
 msgid "Open useful Cinnamon Settings"
 msgstr "Ouvrir les Paramètres système utiles"
 
-#: 4.6/applet.js:1869 6.0/applet.js:2061 6.0/applet_OLD.js:1916
+#: 4.6/applet.js:1869 6.0/applet.js:1893 6.0/applet_OLD.js:1916
 #: 5.6/applet.js:1889 4.2/applet.js:1719 2.8/applet.js:1627 3.8/applet.js:1783
-#: 4.8/applet.js:1875 cs/4.2/bin/SUExtensionCore.py:240
+#: 4.8/applet.js:1875
 msgid "Configure"
 msgstr "Configurer"
 
@@ -208,7 +225,7 @@ msgstr "Configurer"
 #. 2.8->settings-schema.json->head5->description
 #. 3.8->settings-schema.json->General->title
 #. 4.8->settings-schema.json->General->title
-#: 4.6/applet.js:1872 6.0/applet.js:2064 6.0/applet_OLD.js:1919
+#: 4.6/applet.js:1872 6.0/applet.js:1896 6.0/applet_OLD.js:1919
 #: 5.6/applet.js:1892 4.2/applet.js:1722 4.8/applet.js:1878
 msgid "General"
 msgstr "Général"
@@ -220,7 +237,7 @@ msgstr "Général"
 #. 2.8->settings-schema.json->head1->description
 #. 3.8->settings-schema.json->Applets->title
 #. 4.8->settings-schema.json->Applets->title
-#: 4.6/applet.js:1872 4.6/constants.js:135 6.0/applet.js:2064
+#: 4.6/applet.js:1872 4.6/constants.js:135 6.0/applet.js:1896
 #: 6.0/applet_OLD.js:1919 6.0/constants.js:141 5.6/applet.js:1892
 #: 5.6/constants.js:129 4.2/applet.js:1722 4.2/constants.js:128
 #: 2.8/applet.js:100 3.8/applet.js:141 4.8/applet.js:1878 4.8/constants.js:135
@@ -234,7 +251,7 @@ msgstr "Applets"
 #. 2.8->settings-schema.json->head2->description
 #. 3.8->settings-schema.json->Desklets->title
 #. 4.8->settings-schema.json->Desklets->title
-#: 4.6/applet.js:1872 4.6/constants.js:136 6.0/applet.js:2064
+#: 4.6/applet.js:1872 4.6/constants.js:136 6.0/applet.js:1896
 #: 6.0/applet_OLD.js:1919 6.0/constants.js:142 5.6/applet.js:1892
 #: 5.6/constants.js:130 4.2/applet.js:1722 4.2/constants.js:129
 #: 2.8/applet.js:101 3.8/applet.js:142 4.8/applet.js:1878 4.8/constants.js:136
@@ -248,7 +265,7 @@ msgstr "Desklets"
 #. 2.8->settings-schema.json->head3->description
 #. 3.8->settings-schema.json->Extensions->title
 #. 4.8->settings-schema.json->Extensions->title
-#: 4.6/applet.js:1872 4.6/constants.js:137 6.0/applet.js:2064
+#: 4.6/applet.js:1872 4.6/constants.js:137 6.0/applet.js:1896
 #: 6.0/applet_OLD.js:1919 6.0/constants.js:143 5.6/applet.js:1892
 #: 5.6/constants.js:131 4.2/applet.js:1722 4.2/constants.js:130
 #: 2.8/applet.js:102 3.8/applet.js:143 4.8/applet.js:1878 4.8/constants.js:137
@@ -262,31 +279,31 @@ msgstr "Extensions"
 #. 2.8->settings-schema.json->head4->description
 #. 3.8->settings-schema.json->Themes->title
 #. 4.8->settings-schema.json->Themes->title
-#: 4.6/applet.js:1872 4.6/constants.js:138 6.0/applet.js:2064
+#: 4.6/applet.js:1872 4.6/constants.js:138 6.0/applet.js:1896
 #: 6.0/applet_OLD.js:1919 6.0/constants.js:144 5.6/applet.js:1892
 #: 5.6/constants.js:132 4.2/applet.js:1722 4.2/constants.js:131
 #: 2.8/applet.js:103 3.8/applet.js:144 4.8/applet.js:1878 4.8/constants.js:138
 msgid "Themes"
 msgstr "Thèmes"
 
-#: 4.6/applet.js:1898 6.0/applet.js:2091 6.0/applet_OLD.js:1945
+#: 4.6/applet.js:1898 6.0/applet.js:1923 6.0/applet_OLD.js:1945
 #: 5.6/applet.js:1918 4.2/applet.js:1748 2.8/applet.js:1642 3.8/applet.js:1798
 #: 4.8/applet.js:1904
 msgid "Help"
 msgstr "Aide"
 
-#: 4.6/applet.js:2084 6.0/applet.js:2301 6.0/applet_OLD.js:2131
+#: 4.6/applet.js:2084 6.0/applet.js:2135 6.0/applet_OLD.js:2131
 #: 5.6/applet.js:2104 4.2/applet.js:1891 2.8/applet.js:1700 3.8/applet.js:1904
 #: 4.8/applet.js:2090
 msgid "Middle-Click to open useful Cinnamon Settings"
 msgstr "Clic-Molette : Ouvre les Paramètres système utiles"
 
-#: 4.6/applet.js:2098 6.0/applet.js:2315 6.0/applet_OLD.js:2145
+#: 4.6/applet.js:2098 6.0/applet.js:2150 6.0/applet_OLD.js:2145
 #: 5.6/applet.js:2118 4.8/applet.js:2104
 msgid "The Cinnamon Server seems to be DOWN!"
 msgstr "Le serveur Cinnamon semble EN PANNE!"
 
-#: 4.6/applet.js:2098 6.0/applet.js:2315 6.0/applet_OLD.js:2145
+#: 4.6/applet.js:2098 6.0/applet.js:2150 6.0/applet_OLD.js:2145
 #: 5.6/applet.js:2118 4.8/applet.js:2104
 msgid "Middle-Click to Retry"
 msgstr "Clic-Molette pour Réessayer"
@@ -466,8 +483,7 @@ msgid "When all your choices are made, click the Refresh button."
 msgstr "Quand tous vos choix sont faits, cliquez sur Actualiser."
 
 #. 6.0->settings-schema.json->Actions->title
-#: 6.0/applet.js:2064 6.0/constants.js:145
-#: cs/6.0_FUTURE/modules/cs_actions.py:35
+#: 6.0/applet.js:1896 6.0/constants.js:145
 msgid "Actions"
 msgstr "Actions"
 
@@ -664,6 +680,13 @@ msgstr "Notifications"
 #. 4.8->settings-schema.json->section_general3->title
 msgid "Notification contents"
 msgstr "Contenu des notifications"
+
+#. 4.6->settings-schema.json->section_general4->title
+#. 6.0->settings-schema.json->section_general4->title
+#. 5.6->settings-schema.json->section_general4->title
+#. 4.8->settings-schema.json->section_general4->title
+msgid "Display"
+msgstr "Affichage"
 
 #. 4.6->settings-schema.json->check_applets->description
 #. 6.0->settings-schema.json->check_applets->description
@@ -1090,6 +1113,7 @@ msgstr "Couleur de l'icône quand des Spices ont besoin d'une mise à jour"
 
 #. 4.6->settings-schema.json->events_color->tooltip
 #. 6.0->settings-schema.json->events_color->tooltip
+#. 6.0->settings-schema.json->processing_color->tooltip
 #. 5.6->settings-schema.json->events_color->tooltip
 #. 4.2->settings-schema.json->events_color->tooltip
 #. 2.8->settings-schema.json->events_color->tooltip
@@ -1337,6 +1361,10 @@ msgid "Open Cinnamon Settings to manage all the nemo actions"
 msgstr ""
 "Ouvrir les Préférences de Cinnamon pour gérer toutes les Actions pour nemo"
 
+#. 6.0->settings-schema.json->processing_color->description
+msgid "The icon color while SpicesUpdate is processing"
+msgstr "Couleur de l'icône quand SpicesUpdate travaille"
+
 #. 4.2->settings-schema.json->section_general4->title
 #. 3.8->settings-schema.json->section_general3->title
 msgid "Display type"
@@ -1425,15 +1453,6 @@ msgstr ""
 "\tOuvrir l'onglet Télécharger dans les Paramètres systèmes concernant ce "
 "type de Spices, avec les Spices triées par date."
 
-#~ msgid "Open"
-#~ msgstr "Ouvrir"
-
-#~ msgid "Remove"
-#~ msgstr "Supprimer"
-
-#~ msgid "System Information"
-#~ msgstr "Infos système"
-
 #~ msgid "System Settings"
 #~ msgstr "Paramètres système"
 
@@ -1460,9 +1479,6 @@ msgstr ""
 
 #~ msgid "Show icons on buttons"
 #~ msgstr "Avec des boutons sous forme d'icônes"
-
-#~ msgid "Display"
-#~ msgstr "Affichage"
 
 #~ msgid "Update"
 #~ msgstr "Mettre à jour"

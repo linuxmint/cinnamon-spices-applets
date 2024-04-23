@@ -582,8 +582,10 @@ Notification.prototype = {
         this.title = title;
         title = title ? _fixMarkup(title.replace(/\n/g, ' '), params.titleMarkup) : '';
         this._titleLabel.clutter_text.set_markup('<b>' + title + '</b>');
-        this._timeLabel.clutter_text.set_markup(this._timestamp.toLocaleTimeString());
-        this._timeLabel.hide();
+        if (this._timeLabel.clutter_text)
+            this._timeLabel.clutter_text.set_markup(this._timestamp.toLocaleTimeString());
+        if (this._timeLabel)
+            this._timeLabel.hide();
         if (Pango.find_base_dir(title, -1) == Pango.Direction.RTL)
             this._titleDirection = St.TextDirection.RTL;
         else
