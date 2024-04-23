@@ -51,9 +51,10 @@ function makePotFile {
   if [ -f "po/$potName" ]; then
       if [ $1 !=  "doNotUpdatePotFiles" ]; then
           echo "------------------------------------------------------------------------------------------------------"
-          echo "$UUID: cinnamon-json-makepot --js po/$potName (update)"
+          echo "$UUID: cinnamon-xlet-makepot -p po/$potName (update)"
           echo "------------------------------------------------------------------------------------------------------"
-          cinnamon-json-makepot --js po/$potName
+          #cinnamon-xlet-makepot --js po/$potName
+          cinnamon-xlet-makepot -p -o po/$potName $PWD
           echo ""
       fi
   else
@@ -62,9 +63,10 @@ function makePotFile {
               mkdir po
           fi
           echo "------------------------------------------------------------------------------------------------------"
-          echo "$UUID: cinnamon-json-makepot --js po/$UUID.pot (new file)"
+          echo "$UUID: cinnamon-xlet-makepot --js po/$UUID.pot (new file)"
           echo "------------------------------------------------------------------------------------------------------"
-          cinnamon-json-makepot --js po/$UUID.pot
+          #cinnamon-xlet-makepot --js po/$potName
+          cinnamon-xlet-makepot -p -o po/$potName $PWD
           echo ""
       elif [ $1 == "doNotUpdatePotFiles" ]; then
           echo "$UUID: has no .pot file"
@@ -73,7 +75,7 @@ function makePotFile {
 
 }
 
-#cinnamon-json-makepot --js po/$UUID.pot
+#cinnamon-xlet-makepot --js po/$UUID.pot
 
 if [ $# -eq 1 ]; then
     # print help
