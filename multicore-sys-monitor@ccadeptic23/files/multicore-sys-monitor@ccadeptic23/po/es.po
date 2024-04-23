@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-23 04:17+0200\n"
-"PO-Revision-Date: 2023-12-24 10:56-0300\n"
+"PO-Revision-Date: 2024-04-22 22:51-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: 6.0/DataProviders.js:47 3.4/DataProviders.js:49 4.0/DataProviders.js:47
 #: 5.6/DataProviders.js:47
@@ -160,11 +160,11 @@ msgstr "Actualizar gráficos"
 
 #: 6.0/applet.js:301
 msgid "Without any graphics"
-msgstr ""
+msgstr "Sin gráficos"
 
 #: 6.0/applet.js:307
 msgid "With graphics"
-msgstr ""
+msgstr "Con gráficos"
 
 #: 6.0/prefs.js:335 4.0/prefs.js:335 5.6/prefs.js:335
 msgid "00-20"
@@ -223,7 +223,7 @@ msgstr "Escritura"
 #: 6.0/util.js:244 5.6/util.js:244
 #, javascript-format
 msgid "Execution of '%s' failed:"
-msgstr ""
+msgstr "Error en la ejecución de '%s':"
 
 #: 3.4/applet.js:62
 msgid ""
