@@ -1,3 +1,10 @@
+### v7.4.0~20240423
+  * Now smoother so as not to be blocked by the cinnamon-spices.linuxmint.com server.
+  * New color when spices are updated or forgotten.
+  * Translations: New .pot file. New fr.po file.
+  * Seems to fix #5941.
+
+
 ### v7.3.7~20240421
   * Refresh action further improved.
 
