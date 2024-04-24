@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-24 12:38+0200\n"
-"PO-Revision-Date: 2024-04-20 20:56-0400\n"
+"PO-Revision-Date: 2024-04-24 09:46-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -599,7 +599,7 @@ msgstr "Información sobre herramientas"
 
 #. 5.4->settings-schema.json->sectionSound2->title
 msgid "OSD"
-msgstr ""
+msgstr "OSD"
 
 #. 5.4->settings-schema.json->sectionSound3->title
 msgid "Remove incompatible applets"
@@ -671,23 +671,25 @@ msgstr ""
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "disabled"
-msgstr ""
+msgstr "deshabilitado"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "small"
-msgstr ""
+msgstr "pequeño"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "medium"
-msgstr ""
+msgstr "medio"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->options
 msgid "large"
-msgstr ""
+msgstr "grande"
 
 #. 5.4->settings-schema.json->showMediaKeysOSD->description
 msgid "Whether the media keys osd is disabled or its relative display size"
 msgstr ""
+"Si el osd de las teclas multimedia está desactivado o su tamaño de "
+"visualización relativo"
 
 #. 5.4->settings-schema.json->showOSDonStartup->description
 msgid "Show volume level in OSD on startup"
