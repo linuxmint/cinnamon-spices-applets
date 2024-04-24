@@ -1,3 +1,7 @@
+### v6.10.0~20240424
+  * Created OSD section in Sound tab of settings.
+  * Adds option: Whether the media keys osd is disabled or its relative display size.
+
 ### v6.9.1~20240420
   * Fixes #5767.
 
