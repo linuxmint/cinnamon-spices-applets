@@ -84,7 +84,7 @@
     "use_symbolic_icon" : {
         "type" : "checkbox",
         "description" : "Use a symbolic icon in the applet panel",
-        "default" : false
+        "default" : true
     },
 
     "show_timer" : {
