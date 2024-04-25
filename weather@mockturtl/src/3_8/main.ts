@@ -367,7 +367,7 @@ export class WeatherApplet extends TextIconApplet {
 	public async LoadJsonAsyncWithDetails<T, E = any>(
 		this: WeatherApplet,
 		url: string,
-		cancellable?: imports.gi.Gio.Cancellable,
+		cancellable: imports.gi.Gio.Cancellable,
 		params?: HTTPParams,
 		HandleError?: (message: ErrorResponse<E>) => boolean,
 		headers?: HTTPHeaders,
