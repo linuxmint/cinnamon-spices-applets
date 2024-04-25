@@ -9764,7 +9764,7 @@ class LocationStore {
         this.locations = locs.concat(tmp);
         if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
             logger_Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.");
-            this.app.Refresh({ immediate: true });
+            this.app.Refresh();
         }
         this.InvokeStorageChanged();
     }
@@ -15324,7 +15324,7 @@ class Config {
         };
         this.OnFontChanged = () => {
             this.currentFontSize = this.GetCurrentFontSize();
-            this.app.Refresh({ rebuild: true, immediate: true });
+            this.app.Refresh({ rebuild: true });
         };
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);
@@ -15495,7 +15495,7 @@ class Config {
     DoneTypingLocation() {
         logger_Logger.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
-        this.app.Refresh();
+        this.app.Refresh({ rebuild: true });
     }
     SetLocation(value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
@@ -15738,7 +15738,7 @@ class WeatherLoop {
             logger_Logger.Debug("Main loop check started.");
             if (this.IsStray())
                 return;
-            const { rebuild = false, location = null, immediate = false } = options;
+            const { rebuild = false, location = null, immediate = true } = options;
             if (this.runningRefresh && !immediate)
                 return;
             try {
@@ -15752,7 +15752,7 @@ class WeatherLoop {
                     return;
                 }
                 const needToUpdate = this.errorCount > 0 || this.NextUpdate() < new Date();
-                if (!needToUpdate) {
+                if (!needToUpdate && !immediate) {
                     logger_Logger.Debug("No need to update yet, skipping.");
                     return;
                 }
@@ -15807,7 +15807,7 @@ class WeatherLoop {
     async Start() {
         logger_Logger.Info("Main Loop started.");
         while (true) {
-            await this.DoCheck();
+            await this.DoCheck({ immediate: false });
             await delay(this.LoopInterval());
         }
         logger_Logger.Error("Main Loop stopped.");
@@ -15824,7 +15824,7 @@ class WeatherLoop {
     }
     async Refresh(options) {
         this.pauseRefresh = false;
-        await this.DoCheck();
+        await this.DoCheck(options);
     }
     ResetErrorCount() {
         this.errorCount = 0;
@@ -16385,11 +16385,11 @@ class CurrentWeather {
     }
     NextLocationClicked() {
         const loc = this.app.config.SwitchToNextLocation();
-        this.app.Refresh({ location: loc !== null && loc !== void 0 ? loc : undefined, immediate: true });
+        this.app.Refresh({ location: loc !== null && loc !== void 0 ? loc : undefined });
     }
     PreviousLocationClicked() {
         const loc = this.app.config.SwitchToPreviousLocation();
-        this.app.Refresh({ location: loc !== null && loc !== void 0 ? loc : undefined, immediate: true });
+        this.app.Refresh({ location: loc !== null && loc !== void 0 ? loc : undefined });
     }
     onLocationStorageChanged(sender, itemCount) {
         logger_Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
@@ -17238,7 +17238,7 @@ class UI {
         if (newThemeIsLight != this.lightTheme) {
             this.lightTheme = newThemeIsLight;
         }
-        this.App.Refresh({ rebuild: true, immediate: true });
+        this.App.Refresh({ rebuild: true });
     }
     async PopupMenuToggled(caller, data) {
         if (data == false) {
@@ -17581,7 +17581,7 @@ class WeatherApplet extends TextIconApplet {
                     logger_Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, resuming operations.`);
                     this.encounteredError = false;
                     this.loop.ResetErrorCount();
-                    this.loop.Refresh({ immediate: true });
+                    this.loop.Refresh();
                     this.online = true;
                     break;
                 case NetworkConnectivity.LOCAL:
@@ -17696,7 +17696,7 @@ class WeatherApplet extends TextIconApplet {
             this.loop.Pause();
         }
         this.loop.Start();
-        this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({ immediate: true, rebuild: true }));
+        this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({ rebuild: true }));
         this.config.VerticalOrientationChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.ForecastColumnsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.ForecastRowsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
@@ -17704,11 +17704,11 @@ class WeatherApplet extends TextIconApplet {
         this.config.UseCustomMenuIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.UseSymbolicIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.ForecastHoursChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
-        this.config.ApiKeyChanged.Subscribe(() => this.loop.Refresh({ immediate: true }));
-        this.config.ShortConditionsChanged.Subscribe(() => this.loop.Refresh({ immediate: true }));
-        this.config.TranslateConditionChanged.Subscribe(() => this.loop.Refresh({ immediate: true }));
-        this.config.ManualLocationChanged.Subscribe(() => this.loop.Refresh({ immediate: true }));
-        this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Refresh());
+        this.config.ApiKeyChanged.Subscribe(() => this.loop.Refresh());
+        this.config.ShortConditionsChanged.Subscribe(() => this.loop.Refresh());
+        this.config.TranslateConditionChanged.Subscribe(() => this.loop.Refresh());
+        this.config.ManualLocationChanged.Subscribe(() => this.loop.Refresh());
+        this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Refresh({ immediate: false }));
         this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.TemperatureUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
@@ -17936,7 +17936,7 @@ The contents of the file saved from the applet help page goes here
     }
     AddRefreshButton() {
         const itemLabel = _("Refresh");
-        const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.loop.Refresh({ immediate: true, rebuild: true }));
+        const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.loop.Refresh({ rebuild: true }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
     }
     HandleHTTPError(error) {

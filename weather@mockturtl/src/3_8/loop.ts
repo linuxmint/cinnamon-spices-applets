@@ -10,8 +10,15 @@ import { delay, Guid } from "./utils";
 var weatherAppletGUIDs: GUIDStore = {};
 
 export interface RefreshOptions {
+	/** default false */
 	rebuild?: boolean,
+	/**
+	 *  default undefined
+	 */
 	location?: LocationData | undefined,
+	/**
+	 * default true
+	 */
 	immediate?: boolean
 }
 
@@ -57,7 +64,7 @@ export class WeatherLoop {
 	public async Start(): Promise<void> {
 		Logger.Info("Main Loop started.")
 		while (true) {
-			await this.DoCheck();
+			await this.DoCheck({immediate: false});
 			await delay(this.LoopInterval());
 		}
 		Logger.Error("Main Loop stopped.")
@@ -71,7 +78,7 @@ export class WeatherLoop {
 		const {
 			rebuild = false,
 			location = null,
-			immediate = false
+			immediate = true
 		} = options;
 
 		// We are in the middle of an update, just skip
@@ -93,7 +100,7 @@ export class WeatherLoop {
 			}
 
 			const needToUpdate = this.errorCount > 0 || this.NextUpdate() < new Date();
-			if (!needToUpdate) {
+			if (!needToUpdate && !immediate) {
 				Logger.Debug("No need to update yet, skipping.")
 				return;
 			}
@@ -162,7 +169,7 @@ export class WeatherLoop {
 	 */
 	public async Refresh(options?: RefreshOptions): Promise<void> {
 		this.pauseRefresh = false;
-		await this.DoCheck();
+		await this.DoCheck(options);
 	}
 
 	/** Used after a successful weather refresh. */

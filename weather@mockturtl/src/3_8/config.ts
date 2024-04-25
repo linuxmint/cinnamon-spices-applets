@@ -466,14 +466,14 @@ export class Config {
 
 	private OnFontChanged = () => {
 		this.currentFontSize = this.GetCurrentFontSize();
-		this.app.Refresh({ rebuild: true, immediate: true});
+		this.app.Refresh({ rebuild: true});
 	}
 
 	/** Called when 3 seconds is up with no change in location */
 	private DoneTypingLocation() {
 		Logger.Debug("User has finished typing, beginning refresh");
 		this.doneTypingLocation = null;
-		this.app.Refresh();
+		this.app.Refresh({ rebuild: true });
 	}
 
 	private SetLocation(value: string) {

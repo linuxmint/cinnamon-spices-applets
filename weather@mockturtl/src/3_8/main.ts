@@ -100,7 +100,7 @@ export class WeatherApplet extends TextIconApplet {
 		}
 		this.loop.Start();
 		// We need a full rebuild and refresh for these
-		this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({immediate: true, rebuild: true}));
+		this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({rebuild: true}));
 
 		// We need a full rebuild without refresh for these
 		this.config.VerticalOrientationChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
@@ -112,15 +112,15 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.ForecastHoursChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
 
 		// We need a full refresh for these
-		this.config.ApiKeyChanged.Subscribe(() => this.loop.Refresh({immediate: true}));
+		this.config.ApiKeyChanged.Subscribe(() => this.loop.Refresh());
 		// We change how we process data when this is changed
-		this.config.ShortConditionsChanged.Subscribe(() => this.loop.Refresh({immediate: true}));
+		this.config.ShortConditionsChanged.Subscribe(() => this.loop.Refresh());
 		// Some translations come from the API we need a refresh
-		this.config.TranslateConditionChanged.Subscribe(() => this.loop.Refresh({immediate: true}));
-		this.config.ManualLocationChanged.Subscribe(() => this.loop.Refresh({immediate: true}));
+		this.config.TranslateConditionChanged.Subscribe(() => this.loop.Refresh());
+		this.config.ManualLocationChanged.Subscribe(() => this.loop.Refresh());
 
 		// Misc Triggers
-		this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Refresh());
+		this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Refresh({immediate: false}));
 
 		// Panel
 		this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
@@ -152,7 +152,7 @@ export class WeatherApplet extends TextIconApplet {
 				Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, resuming operations.`);
 				this.encounteredError = false;
 				this.loop.ResetErrorCount();
-				this.loop.Refresh({immediate: true});
+				this.loop.Refresh();
 				this.online = true;
 				break;
 			case NetworkConnectivity.LOCAL:
@@ -586,7 +586,7 @@ The contents of the file saved from the applet help page goes here
 	/** Into right-click context menu */
 	private AddRefreshButton(): void {
 		const itemLabel = _("Refresh")
-		const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.loop.Refresh({immediate: true, rebuild: true}));
+		const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.loop.Refresh({rebuild: true}));
 		this._applet_context_menu.addMenuItem(refreshMenuItem);
 	}
 

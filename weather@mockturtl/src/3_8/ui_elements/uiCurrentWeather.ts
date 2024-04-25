@@ -365,12 +365,12 @@ export class CurrentWeather {
 
 	private NextLocationClicked() {
 		const loc = this.app.config.SwitchToNextLocation();
-		this.app.Refresh({location: loc ?? undefined, immediate: true});
+		this.app.Refresh({location: loc ?? undefined});
 	}
 
 	private PreviousLocationClicked() {
 		const loc = this.app.config.SwitchToPreviousLocation();
-		this.app.Refresh({location: loc ?? undefined, immediate: true});
+		this.app.Refresh({location: loc ?? undefined});
 	}
 
 	private onLocationStorageChanged(sender: LocationStore, itemCount: number): void {
