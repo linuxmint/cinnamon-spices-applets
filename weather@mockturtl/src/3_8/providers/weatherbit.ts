@@ -51,11 +51,11 @@ export class Weatherbit extends BaseProvider {
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
-		const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast) as Promise<ForecastData[]>;
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
+		const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable) as Promise<ForecastData[]>;
 		let hourlyPromise = null;
-		if (!!this.hourlyAccess) hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
-		const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent) as WeatherData;
+		if (!!this.hourlyAccess) hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable);
+		const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent, cancellable) as WeatherData;
 		if (!currentResult) return null;
 
 		const forecastResult = await forecastPromise;
@@ -72,12 +72,12 @@ export class Weatherbit extends BaseProvider {
 	 * @param baseUrl
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData(baseUrl: string, loc: LocationData, ParseFunction: (json: any) => WeatherData | ForecastData[] | HourlyForecastData[] | null) {
+	private async GetData(baseUrl: string, loc: LocationData, ParseFunction: (json: any) => WeatherData | ForecastData[] | HourlyForecastData[] | null, cancellable: imports.gi.Gio.Cancellable) {
 		const query = this.ConstructQuery(baseUrl, loc);
 		if (query == null)
 			return null;
 
-		const json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleError(e));
+		const json = await this.app.LoadJsonAsync(query, cancellable, undefined, (e) => this.HandleError(e));
 
 		if (json == null)
 			return null;
@@ -85,12 +85,12 @@ export class Weatherbit extends BaseProvider {
 		return ParseFunction(json);
 	}
 
-	private async GetHourlyData(baseUrl: string, loc: LocationData) {
+	private async GetHourlyData(baseUrl: string, loc: LocationData, cancellable: imports.gi.Gio.Cancellable) {
 		const query = this.ConstructQuery(baseUrl, loc);
 		if (query == null)
 			return null;
 
-		const json = await this.app.LoadJsonAsync<any>(query, undefined, (e) => this.HandleHourlyError(e));
+		const json = await this.app.LoadJsonAsync<any>(query, cancellable, undefined, (e) => this.HandleHourlyError(e));
 
 		if (!!json?.error) {
 			return null;

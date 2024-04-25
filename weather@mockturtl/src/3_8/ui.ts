@@ -166,7 +166,7 @@ export class UI {
 		if (newThemeIsLight != this.lightTheme) {
 			this.lightTheme = newThemeIsLight;
 		}
-		this.App.RefreshAndRebuild();
+		this.App.Refresh({rebuild: true, immediate: true});
 	}
 
 	private async PopupMenuToggled(caller: any, data: any) {

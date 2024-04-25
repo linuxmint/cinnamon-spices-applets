@@ -56,7 +56,7 @@ export class AccuWeather extends BaseProvider {
 
     private readonly locationCache: {[key: string]: LocationPayload} = {};
 
-    public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+    public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
         const locationID = `${loc.lat},${loc.lon}`;
         const userLocale = this.app.config.currentLocale?.toLowerCase() ?? "en-us";
         const locale = this.app.config._translateCondition ? userLocale : "en-us";
@@ -65,7 +65,7 @@ export class AccuWeather extends BaseProvider {
         if (this.locationCache[locationID] != null)
             location = this.locationCache[locationID];
         else
-            location = await this.app.LoadJsonAsync<LocationPayload>(this.locSearchUrl, { q: locationID, details: true, language: userLocale, apikey: this.app.config.ApiKey }, this.HandleErrors);
+            location = await this.app.LoadJsonAsync<LocationPayload>(this.locSearchUrl, cancellable, { q: locationID, details: true, language: userLocale, apikey: this.app.config.ApiKey }, this.HandleErrors);
 
         if (location == null) {
             /** Error, probably handled already */
@@ -73,9 +73,9 @@ export class AccuWeather extends BaseProvider {
         }
 
         const [current, forecast, hourly] = await Promise.all([
-            this.app.LoadJsonAsyncWithDetails<CurrentPayload[]>(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
-            this.app.LoadJsonAsyncWithDetails<DailyPayload>(this.dailyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
-            this.app.LoadJsonAsyncWithDetails<HourlyPayload[]>(this.hourlyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors)
+            this.app.LoadJsonAsyncWithDetails<CurrentPayload[]>(this.currentConditionUrl + location.Key, cancellable, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsyncWithDetails<DailyPayload>(this.dailyForecastUrl + location.Key, cancellable, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsyncWithDetails<HourlyPayload[]>(this.hourlyForecastUrl + location.Key, cancellable, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors)
         ])
 
         if (!current.Success || !forecast.Success || !hourly.Success)

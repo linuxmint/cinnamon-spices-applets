@@ -38,17 +38,17 @@ export class DanishMI extends BaseProvider {
 		super(app);
 	}
 
-	async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+	async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		if (loc == null)
 			return null;
 
 		this.GetLocationBoundingBox(loc);
-		const observations = this.OrderObservations(await this.app.LoadJsonAsync<DanishObservationPayloads>(this.url, this.observationParams), loc);
+		const observations = this.OrderObservations(await this.app.LoadJsonAsync<DanishObservationPayloads>(this.url, cancellable, this.observationParams), loc);
 
 		this.forecastParams.lat = loc.lat;
 		this.forecastParams.lon = loc.lon;
 
-		const forecasts = await this.app.LoadJsonAsync<DanishMIPayload>(this.url, this.forecastParams);
+		const forecasts = await this.app.LoadJsonAsync<DanishMIPayload>(this.url, cancellable, this.forecastParams);
 		if (forecasts == null)
 			return null;
 

@@ -47,7 +47,7 @@ export class USWeather extends BaseProvider {
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		// getting grid and station data first time or location changed
 		const locID = loc.lat.toString() + "," + loc.lon.toString();
 		if (!this.grid || !this.observationStations || this.currentLocID != locID) {
@@ -55,11 +55,11 @@ export class USWeather extends BaseProvider {
 			this.currentLoc = loc;
 			this.currentLocID = locID;
 
-			const grid = await this.GetGridData(loc);
+			const grid = await this.GetGridData(loc, cancellable);
 			if (grid == null) return null;
 			Logger.Debug("Grid found: " + JSON.stringify(grid, null, 2));
 
-			const observationStations = await this.GetStationData(grid.properties.observationStations);
+			const observationStations = await this.GetStationData(grid.properties.observationStations, cancellable);
 			if (observationStations == null)
 				return null;
 
@@ -72,10 +72,10 @@ export class USWeather extends BaseProvider {
 		}
 
 		// Long wait time, can't do Promise.all because US weather will ban IP for some time on spamming
-		const observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
+		const observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations, cancellable);
 
-		const hourlyForecastPromise = this.app.LoadJsonAsync<ForecastsPayload>(this.grid.properties.forecastHourly + "?units=si");
-		const forecastPromise = this.app.LoadJsonAsync<ForecastsPayload>(this.grid.properties.forecast);
+		const hourlyForecastPromise = this.app.LoadJsonAsync<ForecastsPayload>(this.grid.properties.forecastHourly + "?units=si", cancellable);
+		const forecastPromise = this.app.LoadJsonAsync<ForecastsPayload>(this.grid.properties.forecast, cancellable);
 		const hourly = await hourlyForecastPromise;
 		const forecast = await forecastPromise;
 
@@ -98,9 +98,9 @@ export class USWeather extends BaseProvider {
 	 * Handles App errors internally
 	 * @param loc
 	 */
-	private async GetGridData(loc: LocationData): Promise<GridPayload | null> {
+	private async GetGridData(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<GridPayload | null> {
 		// Handling out of country errors in callback
-		const siteData = await this.app.LoadJsonAsync<GridPayload>(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), {}, this.OnObtainingGridData);
+		const siteData = await this.app.LoadJsonAsync<GridPayload>(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), cancellable, {}, this.OnObtainingGridData);
 		return siteData;
 	}
 
@@ -108,8 +108,8 @@ export class USWeather extends BaseProvider {
 	 * Handles app errors internally
 	 * @param stationListUrl
 	 */
-	private async GetStationData(stationListUrl: string): Promise<StationPayload[] | undefined> {
-		const stations = await this.app.LoadJsonAsync<StationsPayload>(stationListUrl);
+	private async GetStationData(stationListUrl: string, cancellable: imports.gi.Gio.Cancellable): Promise<StationPayload[] | undefined> {
+		const stations = await this.app.LoadJsonAsync<StationsPayload>(stationListUrl, cancellable);
 		return stations?.features;
 	}
 
@@ -118,13 +118,13 @@ export class USWeather extends BaseProvider {
 	 * Data is pretty spotty so we can fill them up from stations further away later
 	 * @param range in metres
 	 */
-	private async GetObservationsInRange(range: number, loc: LocationData, stations: StationPayload[]): Promise<ObservationPayload[]> {
+	private async GetObservationsInRange(range: number, loc: LocationData, stations: StationPayload[], cancellable: imports.gi.Gio.Cancellable): Promise<ObservationPayload[]> {
 		const observations = [];
 		for (const element of stations) {
 			element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
 			if (element.dist > range) break;
 			// do not show errors here, we call multiple observation sites
-			const observation = await this.app.LoadJsonAsync<ObservationPayload>(element.id + "/observations/latest", {}, (msg) => false);
+			const observation = await this.app.LoadJsonAsync<ObservationPayload>(element.id + "/observations/latest", cancellable, {}, (msg) => false);
 			if (observation == null) {
 				Logger.Debug("Failed to get observations from " + element.id);
 			}

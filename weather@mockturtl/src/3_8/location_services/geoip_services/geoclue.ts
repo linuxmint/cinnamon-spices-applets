@@ -26,14 +26,14 @@ export class GeoClue implements GeoIP {
 		}
 	}
 
-	public async GetLocation(): Promise<LocationData | null> {
+	public async GetLocation(cancellable?: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
 		if (GeoClueLib == null || GeocodeGlib == null) {
 			return null;
 		}
 
 		const { AccuracyLevel, Simple: GeoClue } = GeoClueLib;
 		const res = await new Promise<ExtendedLocationData | null>((resolve, reject) => {
-			GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, null, (client, res) => {
+			GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, cancellable ?? null, (client, res) => {
 				const simple = GeoClue.new_finish(res);
 				const clientObj = simple.get_client();
 				if (clientObj == null || !clientObj.active) {

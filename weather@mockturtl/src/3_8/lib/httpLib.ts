@@ -15,8 +15,14 @@ export class HttpLib {
 	/**
 	 * Handles obtaining JSON over http.
 	 */
-	public async LoadJsonAsync<T, E = any>(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<T, E>> {
-		const response = await this.LoadAsync(url, params, headers, method);
+	public async LoadJsonAsync<T, E = any>(
+		url: string,
+		cancellable?: imports.gi.Gio.Cancellable,
+		params?: HTTPParams,
+		headers?: HTTPHeaders,
+		method: Method = "GET",
+	): Promise<Response<T, E>> {
+		const response = await this.LoadAsync(url, cancellable, params, headers, method);
 
 		try {
 			const payload = JSON.parse(response.Data);
@@ -43,8 +49,14 @@ export class HttpLib {
 	/**
 	 * Handles obtaining data over http.
 	 */
-	public async LoadAsync<E = any>(url: string, params?: HTTPParams, headers?: HTTPHeaders, method: Method = "GET"): Promise<Response<string | null, E>> {
-		const message = await soupLib.Send(url, params, headers, method);
+	public async LoadAsync<E = any>(
+		url: string,
+		cancellable?: imports.gi.Gio.Cancellable,
+		params?: HTTPParams,
+		headers?: HTTPHeaders,
+		method: Method = "GET",
+	): Promise<Response<string | null, E>> {
+		const message = await soupLib.Send(url, params, headers, method, cancellable);
 
 		let error: HttpError | undefined = undefined;
 

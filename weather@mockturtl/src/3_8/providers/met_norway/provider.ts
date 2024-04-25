@@ -21,10 +21,19 @@ export class MetNorway extends BaseProvider {
 
 	private baseUrl = "https://api.met.no/weatherapi";
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		const [forecast, nowcast] = await Promise.all([
-			this.app.LoadJsonAsync<MetNorwayForecastPayload>(`${this.baseUrl}/locationforecast/2.0/complete`, {lat: loc.lat, lon: loc.lon}),
-			this.app.LoadJsonAsync<MetNorwayNowcastPayload>(`${this.baseUrl}/nowcast/2.0/complete`, {lat: loc.lat, lon: loc.lon}, (e) => e.ErrorData.code != 422),
+			this.app.LoadJsonAsync<MetNorwayForecastPayload>(
+				`${this.baseUrl}/locationforecast/2.0/complete`,
+				cancellable,
+				{lat: loc.lat, lon: loc.lon}
+			),
+			this.app.LoadJsonAsync<MetNorwayNowcastPayload>(
+				`${this.baseUrl}/nowcast/2.0/complete`,
+				cancellable,
+				{lat: loc.lat, lon: loc.lon},
+				(e) => e.ErrorData.code != 422
+			),
 		]);
 
 		if (!forecast) {

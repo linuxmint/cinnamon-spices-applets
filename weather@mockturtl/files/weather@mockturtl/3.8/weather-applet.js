@@ -388,6 +388,7 @@ const ELLIPSIS = '...';
 const EN_DASH = '\u2013';
 const FORWARD_SLASH = '\u002F';
 const STYLE_HIDDEN = "weather-hidden";
+const REQUEST_TIMEOUT_SECONDS = 30;
 const US_TIMEZONES = [
     "America/Adak",
     "America/Anchorage",
@@ -9737,8 +9738,6 @@ class LocationStore {
     }
     OnLocationChanged(locs) {
         var _a;
-        if (this.app.Locked())
-            return;
         for (let index = 0; index < locs.length; index++) {
             const element = locs[index];
             if (!element.entryText) {
@@ -9765,7 +9764,7 @@ class LocationStore {
         this.locations = locs.concat(tmp);
         if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
             logger_Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.");
-            this.app.Refresh();
+            this.app.Refresh({ immediate: true });
         }
         this.InvokeStorageChanged();
     }
@@ -9868,10 +9867,6 @@ class LocationStore {
             return false;
     }
     async SaveCurrentLocation(loc) {
-        if (this.app.Locked()) {
-            NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
-            return;
-        }
         if (loc == null) {
             NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can't save an incorrect location"), true);
             return;
@@ -9933,7 +9928,7 @@ class GeoLocation {
         this.cache = {};
         this.App = app;
     }
-    async GetLocation(searchText) {
+    async GetLocation(searchText, cancellable) {
         var _a;
         try {
             searchText = searchText.trim();
@@ -9942,7 +9937,7 @@ class GeoLocation {
                 logger_Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
                 return cached;
             }
-            const locationData = await this.App.LoadJsonAsync(`${this.url}?q=${searchText}&${this.params}`);
+            const locationData = await this.App.LoadJsonAsync(`${this.url}?q=${searchText}&${this.params}`, cancellable);
             if (locationData == null)
                 return null;
             if (locationData.length == 0) {
@@ -10091,16 +10086,16 @@ class MetUk extends BaseProvider {
             }
         };
     }
-    async GetWeather(newLoc) {
+    async GetWeather(newLoc, cancellable) {
         const loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
         if (this.currentLocID == null || this.currentLocID != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
             logger_Logger.Info("Downloading new site data");
             this.currentLoc = newLoc;
             this.currentLocID = loc;
-            const forecastSite = await this.GetClosestForecastSite(newLoc);
+            const forecastSite = await this.GetClosestForecastSite(newLoc, cancellable);
             if (forecastSite == null)
                 return null;
-            const observationSites = await this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST);
+            const observationSites = await this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST, cancellable);
             if (observationSites == null)
                 return null;
             this.forecastSite = forecastSite;
@@ -10120,9 +10115,9 @@ class MetUk extends BaseProvider {
             });
             return null;
         }
-        const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc);
-        const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc);
-        const observations = await this.GetObservationData(this.observationSites);
+        const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc, cancellable);
+        const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc, cancellable);
+        const observations = await this.GetObservationData(this.observationSites, cancellable);
         const currentResult = this.ParseCurrent(observations, newLoc);
         if (!currentResult)
             return null;
@@ -10133,14 +10128,14 @@ class MetUk extends BaseProvider {
         return currentResult;
     }
     ;
-    async GetClosestForecastSite(loc) {
-        const forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
+    async GetClosestForecastSite(loc, cancellable) {
+        const forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key, cancellable);
         if (forecastSitelist == null)
             return null;
         return this.GetClosestSite(forecastSitelist, loc);
     }
-    async GetObservationSitesInRange(loc, range) {
-        const observationSiteList = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
+    async GetObservationSitesInRange(loc, range, cancellable) {
+        const observationSiteList = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key, cancellable);
         if (observationSiteList == null)
             return null;
         let observationSites = [];
@@ -10154,11 +10149,11 @@ class MetUk extends BaseProvider {
         logger_Logger.Debug("Observation sites found: " + JSON.stringify(observationSites, null, 2));
         return observationSites;
     }
-    async GetObservationData(observationSites) {
+    async GetObservationData(observationSites, cancellable) {
         const observations = [];
         for (const element of observationSites) {
             logger_Logger.Debug("Getting observation data from station: " + element.id);
-            const payload = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
+            const payload = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key, cancellable);
             if (!!payload)
                 observations.push(payload);
             else {
@@ -10167,11 +10162,11 @@ class MetUk extends BaseProvider {
         }
         return observations;
     }
-    async GetData(query, ParseFunction, loc) {
+    async GetData(query, ParseFunction, loc, cancellable) {
         if (query == null)
             return null;
         logger_Logger.Debug("Query: " + query);
-        const json = await this.app.LoadJsonAsync(query);
+        const json = await this.app.LoadJsonAsync(query, cancellable);
         if (json == null)
             return null;
         return ParseFunction(json, loc);
@@ -10687,12 +10682,12 @@ class OpenWeatherMap extends BaseProvider {
             return true;
         };
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable) {
         const params = this.ConstructParams(loc);
         const cachedID = IDCache[`${loc.lat},${loc.lon}`];
         const [json, idPayload] = await Promise.all([
-            this.app.LoadJsonAsync(this.base_url, params, this.HandleError),
-            (cachedID == null) ? this.app.LoadJsonAsync(this.id_irl, params) : Promise.resolve()
+            this.app.LoadJsonAsync(this.base_url, cancellable, params, this.HandleError),
+            (cachedID == null) ? this.app.LoadJsonAsync(this.id_irl, cancellable, params) : Promise.resolve()
         ]);
         if (cachedID == null && (idPayload === null || idPayload === void 0 ? void 0 : idPayload.id) != null)
             IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
@@ -11118,10 +11113,10 @@ class MetNorway extends BaseProvider {
         this.supportHourlyPrecipVolume = true;
         this.baseUrl = "https://api.met.no/weatherapi";
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable) {
         const [forecast, nowcast] = await Promise.all([
-            this.app.LoadJsonAsync(`${this.baseUrl}/locationforecast/2.0/complete`, { lat: loc.lat, lon: loc.lon }),
-            this.app.LoadJsonAsync(`${this.baseUrl}/nowcast/2.0/complete`, { lat: loc.lat, lon: loc.lon }, (e) => e.ErrorData.code != 422),
+            this.app.LoadJsonAsync(`${this.baseUrl}/locationforecast/2.0/complete`, cancellable, { lat: loc.lat, lon: loc.lon }),
+            this.app.LoadJsonAsync(`${this.baseUrl}/nowcast/2.0/complete`, cancellable, { lat: loc.lat, lon: loc.lon }, (e) => e.ErrorData.code != 422),
         ]);
         if (!forecast) {
             logger_Logger.Error("MET Norway: Empty response from API");
@@ -11784,12 +11779,12 @@ class Weatherbit extends BaseProvider {
             }
         };
     }
-    async GetWeather(loc) {
-        const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
+    async GetWeather(loc, cancellable) {
+        const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable);
         let hourlyPromise = null;
         if (!!this.hourlyAccess)
-            hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
-        const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent);
+            hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable);
+        const currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent, cancellable);
         if (!currentResult)
             return null;
         const forecastResult = await forecastPromise;
@@ -11799,20 +11794,20 @@ class Weatherbit extends BaseProvider {
         return currentResult;
     }
     ;
-    async GetData(baseUrl, loc, ParseFunction) {
+    async GetData(baseUrl, loc, ParseFunction, cancellable) {
         const query = this.ConstructQuery(baseUrl, loc);
         if (query == null)
             return null;
-        const json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleError(e));
+        const json = await this.app.LoadJsonAsync(query, cancellable, undefined, (e) => this.HandleError(e));
         if (json == null)
             return null;
         return ParseFunction(json);
     }
-    async GetHourlyData(baseUrl, loc) {
+    async GetHourlyData(baseUrl, loc, cancellable) {
         const query = this.ConstructQuery(baseUrl, loc);
         if (query == null)
             return null;
-        const json = await this.app.LoadJsonAsync(query, undefined, (e) => this.HandleHourlyError(e));
+        const json = await this.app.LoadJsonAsync(query, cancellable, undefined, (e) => this.HandleHourlyError(e));
         if (!!(json === null || json === void 0 ? void 0 : json.error)) {
             return null;
         }
@@ -12093,12 +12088,12 @@ class ClimacellV4 extends BaseProvider {
             fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,dewPoint,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
         };
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable) {
         if (loc == null)
             return null;
         this.params.apikey = this.app.config.ApiKey;
         this.params.location = loc.lat + "," + loc.lon;
-        const response = await this.app.LoadJsonAsync(this.url, this.params, (m) => this.HandleHTTPError(m));
+        const response = await this.app.LoadJsonAsync(this.url, cancellable, this.params, (m) => this.HandleHTTPError(m));
         if (response == null)
             return null;
         return this.ParseWeather(loc, response);
@@ -12497,18 +12492,18 @@ class USWeather extends BaseProvider {
             }
         };
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable) {
         var _a, _b;
         const locID = loc.lat.toString() + "," + loc.lon.toString();
         if (!this.grid || !this.observationStations || this.currentLocID != locID) {
             logger_Logger.Info("Downloading new site data");
             this.currentLoc = loc;
             this.currentLocID = locID;
-            const grid = await this.GetGridData(loc);
+            const grid = await this.GetGridData(loc, cancellable);
             if (grid == null)
                 return null;
             logger_Logger.Debug("Grid found: " + JSON.stringify(grid, null, 2));
-            const observationStations = await this.GetStationData(grid.properties.observationStations);
+            const observationStations = await this.GetStationData(grid.properties.observationStations, cancellable);
             if (observationStations == null)
                 return null;
             this.grid = grid;
@@ -12517,9 +12512,9 @@ class USWeather extends BaseProvider {
         else {
             logger_Logger.Debug("Site data downloading skipped");
         }
-        const observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
-        const hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si");
-        const forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
+        const observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations, cancellable);
+        const hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si", cancellable);
+        const forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast, cancellable);
         const hourly = await hourlyForecastPromise;
         const forecast = await forecastPromise;
         if (!hourly || !forecast) {
@@ -12534,21 +12529,21 @@ class USWeather extends BaseProvider {
         return weather;
     }
     ;
-    async GetGridData(loc) {
-        const siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), {}, this.OnObtainingGridData);
+    async GetGridData(loc, cancellable) {
+        const siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), cancellable, {}, this.OnObtainingGridData);
         return siteData;
     }
-    async GetStationData(stationListUrl) {
-        const stations = await this.app.LoadJsonAsync(stationListUrl);
+    async GetStationData(stationListUrl, cancellable) {
+        const stations = await this.app.LoadJsonAsync(stationListUrl, cancellable);
         return stations === null || stations === void 0 ? void 0 : stations.features;
     }
-    async GetObservationsInRange(range, loc, stations) {
+    async GetObservationsInRange(range, loc, stations, cancellable) {
         const observations = [];
         for (const element of stations) {
             element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
             if (element.dist > range)
                 break;
-            const observation = await this.app.LoadJsonAsync(element.id + "/observations/latest", {}, (msg) => false);
+            const observation = await this.app.LoadJsonAsync(element.id + "/observations/latest", cancellable, {}, (msg) => false);
             if (observation == null) {
                 logger_Logger.Debug("Failed to get observations from " + element.id);
             }
@@ -12977,7 +12972,7 @@ class VisualCrossing extends BaseProvider {
         };
         this.supportedLangs = ["en", "de", "fr", "es"];
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable) {
         if (loc == null)
             return null;
         this.params['key'] = this.app.config.ApiKey;
@@ -12987,7 +12982,7 @@ class VisualCrossing extends BaseProvider {
             translate = false;
         }
         const url = this.url + loc.lat + "," + loc.lon;
-        const json = await this.app.LoadJsonAsync(url, this.params, (e) => this.HandleHttpError(e));
+        const json = await this.app.LoadJsonAsync(url, cancellable, this.params, (e) => this.HandleHttpError(e));
         if (!json)
             return null;
         return this.ParseWeather(json, translate);
@@ -13279,14 +13274,14 @@ class DanishMI extends BaseProvider {
             north: null
         };
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable) {
         if (loc == null)
             return null;
         this.GetLocationBoundingBox(loc);
-        const observations = this.OrderObservations(await this.app.LoadJsonAsync(this.url, this.observationParams), loc);
+        const observations = this.OrderObservations(await this.app.LoadJsonAsync(this.url, cancellable, this.observationParams), loc);
         this.forecastParams.lat = loc.lat;
         this.forecastParams.lon = loc.lon;
-        const forecasts = await this.app.LoadJsonAsync(this.url, this.forecastParams);
+        const forecasts = await this.app.LoadJsonAsync(this.url, cancellable, this.forecastParams);
         if (forecasts == null)
             return null;
         return this.ParseWeather(observations, forecasts, loc);
@@ -13627,7 +13622,7 @@ class AccuWeather extends BaseProvider {
             url += "120hour";
         return url;
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable) {
         var _a, _b;
         const locationID = `${loc.lat},${loc.lon}`;
         const userLocale = (_b = (_a = this.app.config.currentLocale) === null || _a === void 0 ? void 0 : _a.toLowerCase()) !== null && _b !== void 0 ? _b : "en-us";
@@ -13636,14 +13631,14 @@ class AccuWeather extends BaseProvider {
         if (this.locationCache[locationID] != null)
             location = this.locationCache[locationID];
         else
-            location = await this.app.LoadJsonAsync(this.locSearchUrl, { q: locationID, details: true, language: userLocale, apikey: this.app.config.ApiKey }, this.HandleErrors);
+            location = await this.app.LoadJsonAsync(this.locSearchUrl, cancellable, { q: locationID, details: true, language: userLocale, apikey: this.app.config.ApiKey }, this.HandleErrors);
         if (location == null) {
             return null;
         }
         const [current, forecast, hourly] = await Promise.all([
-            this.app.LoadJsonAsyncWithDetails(this.currentConditionUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
-            this.app.LoadJsonAsyncWithDetails(this.dailyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
-            this.app.LoadJsonAsyncWithDetails(this.hourlyForecastUrl + location.Key, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors)
+            this.app.LoadJsonAsyncWithDetails(this.currentConditionUrl + location.Key, cancellable, { apikey: this.app.config.ApiKey, details: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsyncWithDetails(this.dailyForecastUrl + location.Key, cancellable, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors),
+            this.app.LoadJsonAsyncWithDetails(this.hourlyForecastUrl + location.Key, cancellable, { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, }, this.HandleErrors)
         ]);
         if (!current.Success || !forecast.Success || !hourly.Success)
             return null;
@@ -13972,11 +13967,11 @@ class DeutscherWetterdienst extends BaseProvider {
             return false;
         };
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable) {
         var _a, _b, _c, _d;
         const [current, hourly] = await Promise.all([
-            this.app.LoadJsonAsync(`${this.baseUrl}current_weather`, this.GetDefaultParams(loc), this.HandleErrors),
-            this.app.LoadJsonAsync(`${this.baseUrl}weather`, this.GetHourlyParams(loc), this.HandleErrors)
+            this.app.LoadJsonAsync(`${this.baseUrl}current_weather`, cancellable, this.GetDefaultParams(loc), this.HandleErrors),
+            this.app.LoadJsonAsync(`${this.baseUrl}weather`, cancellable, this.GetHourlyParams(loc), this.HandleErrors)
         ]);
         if (current == null || hourly == null)
             return null;
@@ -14270,15 +14265,15 @@ class WeatherUnderground extends BaseProvider {
         this.supportHourlyPrecipVolume = false;
         this.baseURl = "https://api.weather.com/";
         this.locationCache = {};
-        this.GetWeather = async (loc) => {
+        this.GetWeather = async (loc, cancellable) => {
             var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
             const locString = `${loc.lat},${loc.lon}`;
-            const location = (_a = this.locationCache[locString]) !== null && _a !== void 0 ? _a : (await this.GetNearbyStations(loc));
+            const location = (_a = this.locationCache[locString]) !== null && _a !== void 0 ? _a : (await this.GetNearbyStations(loc, cancellable));
             if (location == null) {
                 return null;
             }
             this.locationCache[locString] = location;
-            const forecast = await this.app.LoadJsonAsync(`${this.baseURl}v3/wx/forecast/daily/5day`, {
+            const forecast = await this.app.LoadJsonAsync(`${this.baseURl}v3/wx/forecast/daily/5day`, cancellable, {
                 geocode: locString,
                 language: (_b = this.app.config.currentLocale) !== null && _b !== void 0 ? _b : "en-US",
                 format: "json",
@@ -14287,7 +14282,7 @@ class WeatherUnderground extends BaseProvider {
             });
             if (forecast == null)
                 return null;
-            const observation = await this.GetObservations(location, forecast, loc);
+            const observation = await this.GetObservations(location, forecast, loc, cancellable);
             return {
                 date: observation.date,
                 temperature: (_c = observation.temperature) !== null && _c !== void 0 ? _c : null,
@@ -14320,10 +14315,10 @@ class WeatherUnderground extends BaseProvider {
                 forecasts: this.ParseForecasts(loc, forecast),
             };
         };
-        this.GetNearbyStations = async (loc) => {
+        this.GetNearbyStations = async (loc, cancellable) => {
             var _a;
             const result = [];
-            const payload = await this.app.LoadJsonAsync(`${this.baseURl}v3/location/near`, {
+            const payload = await this.app.LoadJsonAsync(`${this.baseURl}v3/location/near`, cancellable, {
                 geocode: `${loc.lat},${loc.lon}`,
                 format: "json",
                 apiKey: this.app.config.ApiKey,
@@ -14347,9 +14342,9 @@ class WeatherUnderground extends BaseProvider {
                 return null;
             return result;
         };
-        this.GetObservations = async (stations, forecast, loc) => {
+        this.GetObservations = async (stations, forecast, loc, cancellable) => {
             var _a;
-            const observationData = (await Promise.all(stations.map(v => this.GetObservation(v.stationId)))).filter(v => v != null);
+            const observationData = (await Promise.all(stations.map(v => this.GetObservation(v.stationId, cancellable)))).filter(v => v != null);
             const tz = loc.timeZone;
             const result = {
                 wind: {
@@ -14422,9 +14417,9 @@ class WeatherUnderground extends BaseProvider {
             result.sunset = DateTime.fromJSDate(times.sunset).setZone(tz);
             return result;
         };
-        this.GetObservation = async (stationID) => {
+        this.GetObservation = async (stationID, cancellable) => {
             var _a;
-            const observationString = await this.app.LoadAsync(`${this.baseURl}v2/pws/observations/current`, {
+            const observationString = await this.app.LoadAsync(`${this.baseURl}v2/pws/observations/current`, cancellable, {
                 format: "json",
                 stationId: stationID,
                 apiKey: this.app.config.ApiKey,
@@ -14884,9 +14879,9 @@ class PirateWeather extends BaseProvider {
             return true;
         };
     }
-    async GetWeather(loc) {
+    async GetWeather(loc, cancellable) {
         const unit = this.GetQueryUnit();
-        const response = await this.app.LoadJsonAsyncWithDetails(`${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`, {
+        const response = await this.app.LoadJsonAsyncWithDetails(`${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`, cancellable, {
             units: this.GetQueryUnit()
         }, this.HandleError);
         if (!response.Success)
@@ -15093,13 +15088,13 @@ class GeoClue {
             logger_Logger.Info("GeoClue2 not available, disabling it's use.");
         }
     }
-    async GetLocation() {
+    async GetLocation(cancellable) {
         if (GeoClueLib == null || GeocodeGlib == null) {
             return null;
         }
         const { AccuracyLevel, Simple: GeoClue } = GeoClueLib;
         const res = await new Promise((resolve, reject) => {
-            GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, null, (client, res) => {
+            GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, cancellable !== null && cancellable !== void 0 ? cancellable : null, (client, res) => {
                 const simple = GeoClue.new_finish(res);
                 const clientObj = simple.get_client();
                 if (clientObj == null || !clientObj.active) {
@@ -15165,8 +15160,8 @@ class GeoIPFedora {
         this.query = "https://geoip.fedoraproject.org/city";
         this.app = app;
     }
-    async GetLocation() {
-        const json = await this.app.LoadJsonAsync(this.query);
+    async GetLocation(cancellable) {
+        const json = await this.app.LoadJsonAsync(this.query, cancellable);
         if (!json) {
             logger_Logger.Info("geoip.fedoraproject didn't return any data");
             return null;
@@ -15233,7 +15228,7 @@ class GeoIPFedora {
 
 
 const { get_home_dir: config_get_home_dir, get_user_data_dir, get_user_config_dir } = imports.gi.GLib;
-const { File: config_File } = imports.gi.Gio;
+const { File: config_File, Cancellable } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -15329,7 +15324,7 @@ class Config {
         };
         this.OnFontChanged = () => {
             this.currentFontSize = this.GetCurrentFontSize();
-            this.app.RefreshAndRebuild();
+            this.app.Refresh({ rebuild: true, immediate: true });
         };
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);
@@ -15408,16 +15403,16 @@ class Config {
         return (!key || key == "");
     }
     ;
-    async EnsureLocation() {
+    async EnsureLocation(cancellable) {
         this.currentLocation = null;
         if (!this._manualLocation) {
-            const geoClue = await this.geoClue.GetLocation();
+            const geoClue = await this.geoClue.GetLocation(cancellable);
             if (geoClue != null) {
                 logger_Logger.Debug("Auto location obtained via GeoClue2.");
                 this.InjectLocationToConfig(geoClue);
                 return geoClue;
             }
-            const location = await this.autoLocProvider.GetLocation();
+            const location = await this.autoLocProvider.GetLocation(cancellable);
             if (!location)
                 return null;
             logger_Logger.Debug("Auto location obtained via IP lookup.");
@@ -15455,7 +15450,7 @@ class Config {
             return location;
         }
         logger_Logger.Debug("Location is text, geo locating...");
-        const locationData = await this.geoLocationService.GetLocation(loc);
+        const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
         if (locationData == null)
             return null;
         if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.entryText)) {
@@ -15737,11 +15732,18 @@ class WeatherLoop {
         this.appletRemoved = false;
         this.updating = false;
         this.errorCount = 0;
-        this.DoCheck = async () => {
-            if (this.updating)
+        this.runningRefresh = null;
+        this.DoCheck = async (options = {}) => {
+            var _a;
+            logger_Logger.Debug("Main loop check started.");
+            if (this.IsStray())
+                return;
+            const { rebuild = false, location = null, immediate = false } = options;
+            if (this.runningRefresh && !immediate)
                 return;
             try {
-                this.updating = true;
+                (_a = this.runningRefresh) === null || _a === void 0 ? void 0 : _a.cancel();
+                this.runningRefresh = new imports.gi.Gio.Cancellable();
                 if (this.app.encounteredError == true)
                     this.IncrementErrorCount();
                 this.ValidateLastUpdateTime();
@@ -15749,18 +15751,35 @@ class WeatherLoop {
                     logger_Logger.Debug("Configuration or network error, updating paused");
                     return;
                 }
-                if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
-                    logger_Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
-                        + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
-                        + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
-                    const state = await this.app.RefreshWeather(false, null, false);
-                    if (state == "error")
-                        logger_Logger.Info("App is currently refreshing, refresh skipped in main loop");
-                    if (state == "success" || "locked")
-                        this.lastUpdated = new Date();
+                const needToUpdate = this.errorCount > 0 || this.NextUpdate() < new Date();
+                if (!needToUpdate) {
+                    logger_Logger.Debug("No need to update yet, skipping.");
+                    return;
                 }
-                else {
-                    logger_Logger.Debug("No need to update yet, skipping");
+                logger_Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + this.lastUpdated.toLocaleString()
+                    + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
+                    + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
+                const state = await Promise.race([
+                    this.app["RefreshWeather"](rebuild, location, this.runningRefresh),
+                    delay(30000).then(() => null)
+                ]);
+                switch (state) {
+                    case null:
+                        logger_Logger.Info("Refreshing timed out, skipping this cycle.");
+                        break;
+                    case "error":
+                        logger_Logger.Info("Critical Error while refreshing weather.");
+                        this.IncrementErrorCount();
+                        break;
+                    case "success":
+                        this.lastUpdated = new Date();
+                        break;
+                    case "locked":
+                    case "display failure":
+                    case "no key":
+                    case "no location":
+                    case "no weather":
+                        break;
                 }
             }
             catch (e) {
@@ -15770,6 +15789,7 @@ class WeatherLoop {
             }
             finally {
                 this.updating = false;
+                this.runningRefresh = null;
             }
         };
         this.app = app;
@@ -15785,12 +15805,12 @@ class WeatherLoop {
         return (this.lastUpdated > oldDate);
     }
     async Start() {
+        logger_Logger.Info("Main Loop started.");
         while (true) {
-            if (this.IsStray())
-                return;
             await this.DoCheck();
             await delay(this.LoopInterval());
         }
+        logger_Logger.Error("Main Loop stopped.");
     }
     ;
     Stop() {
@@ -15799,7 +15819,10 @@ class WeatherLoop {
     Pause() {
         this.pauseRefresh = true;
     }
-    async Resume() {
+    Resume() {
+        this.pauseRefresh = false;
+    }
+    async Refresh(options) {
         this.pauseRefresh = false;
         await this.DoCheck();
     }
@@ -16221,7 +16244,7 @@ class CurrentWeather {
         this.location = this.locationButton.actor;
         this.location.connect(SIGNAL_CLICKED, () => {
             if (this.app.encounteredError)
-                this.app.RefreshWeather(true);
+                this.app.Refresh({ rebuild: true });
             else if (this.locationButton.url == null)
                 return;
             else
@@ -16362,11 +16385,11 @@ class CurrentWeather {
     }
     NextLocationClicked() {
         const loc = this.app.config.SwitchToNextLocation();
-        this.app.Refresh(loc);
+        this.app.Refresh({ location: loc !== null && loc !== void 0 ? loc : undefined, immediate: true });
     }
     PreviousLocationClicked() {
         const loc = this.app.config.SwitchToPreviousLocation();
-        this.app.Refresh(loc);
+        this.app.Refresh({ location: loc !== null && loc !== void 0 ? loc : undefined, immediate: true });
     }
     onLocationStorageChanged(sender, itemCount) {
         logger_Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
@@ -17215,7 +17238,7 @@ class UI {
         if (newThemeIsLight != this.lightTheme) {
             this.lightTheme = newThemeIsLight;
         }
-        this.App.RefreshAndRebuild();
+        this.App.Refresh({ rebuild: true, immediate: true });
     }
     async PopupMenuToggled(caller, data) {
         if (data == false) {
@@ -17303,8 +17326,11 @@ class UI {
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/soupLib.ts
 
+
+
 const { Message, Session } = imports.gi.Soup;
 const { PRIORITY_DEFAULT } = imports.gi.GLib;
+const { Cancellable: soupLib_Cancellable } = imports.gi.Gio;
 const soupLib_ByteArray = imports.byteArray;
 function AddParamsToURI(url, params) {
     let result = url;
@@ -17331,7 +17357,10 @@ class Soup3 {
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
     }
-    async Send(url, params, headers, method = "GET") {
+    async Send(url, params, headers, method = "GET", cancellable) {
+        if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
+            return Promise.resolve(null);
+        }
         url = AddParamsToURI(url, params);
         const query = encodeURI(url);
         logger_Logger.Debug("URL called: " + query);
@@ -17342,10 +17371,13 @@ class Soup3 {
             }
             else {
                 AddHeadersToMessage(message, headers);
-                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, null, (session, result) => {
+                const finalCancellable = cancellable !== null && cancellable !== void 0 ? cancellable : soupLib_Cancellable.new();
+                const timeout = utils_setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
+                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, finalCancellable, (session, result) => {
                     var _a;
                     const headers = {};
                     let res = null;
+                    clearTimeout(timeout);
                     try {
                         res = this._httpSession.send_and_read_finish(result);
                         message.get_response_headers().foreach((name, value) => {
@@ -17378,7 +17410,10 @@ class Soup2 {
         this._httpSession.idle_timeout = 10;
         this._httpSession.add_feature(new ProxyResolverDefault());
     }
-    async Send(url, params, headers, method = "GET") {
+    async Send(url, params, headers, method = "GET", cancellable) {
+        if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
+            return Promise.resolve(null);
+        }
         url = AddParamsToURI(url, params);
         const query = encodeURI(url);
         logger_Logger.Debug("URL called: " + query);
@@ -17418,8 +17453,8 @@ class HttpLib {
             this.instance = new HttpLib();
         return this.instance;
     }
-    async LoadJsonAsync(url, params, headers, method = "GET") {
-        const response = await this.LoadAsync(url, params, headers, method);
+    async LoadJsonAsync(url, cancellable, params, headers, method = "GET") {
+        const response = await this.LoadAsync(url, cancellable, params, headers, method);
         try {
             const payload = JSON.parse(response.Data);
             response.Data = payload;
@@ -17440,9 +17475,9 @@ class HttpLib {
             return response;
         }
     }
-    async LoadAsync(url, params, headers, method = "GET") {
+    async LoadAsync(url, cancellable, params, headers, method = "GET") {
         var _a, _b, _c, _d, _e, _f;
-        const message = await soupLib.Send(url, params, headers, method);
+        const message = await soupLib.Send(url, params, headers, method, cancellable);
         let error = undefined;
         if (!message) {
             error = {
@@ -17546,7 +17581,7 @@ class WeatherApplet extends TextIconApplet {
                     logger_Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, resuming operations.`);
                     this.encounteredError = false;
                     this.loop.ResetErrorCount();
-                    this.loop.Resume();
+                    this.loop.Refresh({ immediate: true });
                     this.online = true;
                     break;
                 case NetworkConnectivity.LOCAL:
@@ -17655,10 +17690,13 @@ class WeatherApplet extends TextIconApplet {
         }
         catch (e) {
         }
-        this.OnNetworkConnectivityChanged();
         NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
+        const offline = NetworkMonitor.get_default().connectivity == NetworkConnectivity.LOCAL;
+        if (offline) {
+            this.loop.Pause();
+        }
         this.loop.Start();
-        this.config.DataServiceChanged.Subscribe(() => this.RefreshAndRebuild());
+        this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({ immediate: true, rebuild: true }));
         this.config.VerticalOrientationChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.ForecastColumnsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.ForecastRowsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
@@ -17666,11 +17704,11 @@ class WeatherApplet extends TextIconApplet {
         this.config.UseCustomMenuIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.UseSymbolicIconsChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
         this.config.ForecastHoursChanged.Subscribe(this.AfterRefresh(this.onSettingNeedsRebuild));
-        this.config.ApiKeyChanged.Subscribe(() => this.Refresh());
-        this.config.ShortConditionsChanged.Subscribe(() => this.Refresh());
-        this.config.TranslateConditionChanged.Subscribe(() => this.Refresh());
-        this.config.ManualLocationChanged.Subscribe(() => this.Refresh());
-        this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Resume());
+        this.config.ApiKeyChanged.Subscribe(() => this.loop.Refresh({ immediate: true }));
+        this.config.ShortConditionsChanged.Subscribe(() => this.loop.Refresh({ immediate: true }));
+        this.config.TranslateConditionChanged.Subscribe(() => this.loop.Refresh({ immediate: true }));
+        this.config.ManualLocationChanged.Subscribe(() => this.loop.Refresh({ immediate: true }));
+        this.config.RefreshIntervalChanged.Subscribe(() => this.loop.Refresh());
         this.config.ShowCommentInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.ShowTextInPanelChanged.Subscribe(this.RefreshLabel);
         this.config.TemperatureUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
@@ -17680,58 +17718,21 @@ class WeatherApplet extends TextIconApplet {
         this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
     }
-    Locked() {
-        return this.refreshing != null;
+    async Refresh(options) {
+        return this.loop.Refresh(options);
     }
-    async Lock() {
-        if (this.refreshing != null)
-            await this.refreshing;
-        this.refreshing = new Promise((resolve, reject) => {
-            this.unlockFunc = resolve;
-        });
-    }
-    Unlock() {
-        var _a;
-        (_a = this.unlockFunc) === null || _a === void 0 ? void 0 : _a.call(this);
-        this.unlockFunc = null;
-        this.refreshing = null;
-        if (this.manualRefreshTriggeredWhileLocked) {
-            logger_Logger.Info("Refreshing triggered by config change while refreshing, starting now...");
-            this.manualRefreshTriggeredWhileLocked = false;
-            this.RefreshAndRebuild();
-        }
-    }
-    RefreshAndRebuild(loc) {
-        this.RefreshWeather(true, loc);
-    }
-    ;
-    Refresh(loc = null, rebuild = false) {
-        this.RefreshWeather(rebuild, loc);
-    }
-    async RefreshWeather(rebuild, location = null, manual = true) {
+    async RefreshWeather(rebuild, location = null, cancellable) {
         try {
-            if (this.Locked()) {
-                logger_Logger.Info("Refreshing in progress, refresh skipped.");
-                if (manual) {
-                    this.manualRefreshTriggeredWhileLocked = true;
-                    this.loop.Resume();
-                }
-                return "locked";
-            }
-            await this.Lock();
             this.encounteredError = false;
-            this.loop.Resume();
             if (!location) {
-                location = await this.config.EnsureLocation();
+                location = await this.config.EnsureLocation(cancellable);
                 if (!location) {
-                    this.Unlock();
-                    return "error";
+                    return "no location";
                 }
             }
             this.EnsureProvider();
             if (this.provider == null) {
-                this.Unlock();
-                return "fail";
+                return "error";
             }
             if (this.provider.needsApiKey && this.config.NoApiKey()) {
                 logger_Logger.Error("No API Key given");
@@ -17741,10 +17742,9 @@ class WeatherApplet extends TextIconApplet {
                     detail: "no key",
                     message: _("This provider requires an API key to operate")
                 });
-                this.Unlock();
-                return "fail";
+                return "no key";
             }
-            let weatherInfo = await this.provider.GetWeather(location);
+            let weatherInfo = await this.provider.GetWeather(location, cancellable);
             if (weatherInfo == null) {
                 logger_Logger.Error("Could not refresh weather, data could not be obtained.");
                 this.ShowError({
@@ -17752,8 +17752,7 @@ class WeatherApplet extends TextIconApplet {
                     detail: "no api response",
                     message: "API did not return data"
                 });
-                this.Unlock();
-                return "fail";
+                return "no weather";
             }
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
             this.config.Timezone = weatherInfo.location.timeZone;
@@ -17761,21 +17760,18 @@ class WeatherApplet extends TextIconApplet {
                 this.ui.Rebuild(this.config);
             if (!this.ui.Display(weatherInfo, this.config, this.provider) ||
                 !this.DisplayWeather(weatherInfo)) {
-                this.Unlock();
-                return "fail";
+                return "display failure";
             }
             this.currentWeatherInfo = weatherInfo;
             logger_Logger.Info("Weather Information refreshed");
             this.loop.ResetErrorCount();
-            this.Unlock();
             return "success";
         }
         catch (e) {
             if (e instanceof Error)
                 logger_Logger.Error("Generic Error while refreshing Weather info: " + e + ", ", e);
             this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
-            this.Unlock();
-            return "fail";
+            return "error";
         }
     }
     DisplayWeather(weather) {
@@ -17849,8 +17845,8 @@ class WeatherApplet extends TextIconApplet {
             return this.config._forecastHours;
         return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
     }
-    async LoadJsonAsyncWithDetails(url, params, HandleError, headers, method = "GET") {
-        const response = await HttpLib.Instance.LoadJsonAsync(url, params, headers, method);
+    async LoadJsonAsyncWithDetails(url, cancellable, params, HandleError, headers, method = "GET") {
+        const response = await HttpLib.Instance.LoadJsonAsync(url, cancellable, params, headers, method);
         if (!response.Success) {
             if (!!HandleError && !HandleError(response))
                 return response;
@@ -17861,12 +17857,12 @@ class WeatherApplet extends TextIconApplet {
         }
         return response;
     }
-    async LoadJsonAsync(url, params, HandleError, headers, method = "GET") {
-        const response = await this.LoadJsonAsyncWithDetails(url, params, HandleError, headers, method);
+    async LoadJsonAsync(url, cancellable, params, HandleError, headers, method = "GET") {
+        const response = await this.LoadJsonAsyncWithDetails(url, cancellable, params, HandleError, headers, method);
         return (response.Success) ? response.Data : null;
     }
-    async LoadAsync(url, params, HandleError, headers, method = "GET") {
-        const response = await HttpLib.Instance.LoadAsync(url, params, headers, method);
+    async LoadAsync(url, cancellable, params, HandleError, headers, method = "GET") {
+        const response = await HttpLib.Instance.LoadAsync(url, cancellable, params, headers, method);
         if (!response.Success) {
             if (!!HandleError && !HandleError(response))
                 return null;
@@ -17914,7 +17910,8 @@ The contents of the file saved from the applet help page goes here
     }
     on_orientation_changed(orientation) {
         this.orientation = orientation;
-        this.RefreshWeather(true);
+        if (this.currentWeatherInfo)
+            this.onSettingNeedsRebuild(this.config, null, this.currentWeatherInfo);
     }
     ;
     on_applet_removed_from_panel(deleteConfig) {
@@ -17939,7 +17936,7 @@ The contents of the file saved from the applet help page goes here
     }
     AddRefreshButton() {
         const itemLabel = _("Refresh");
-        const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.RefreshAndRebuild());
+        const refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.loop.Refresh({ immediate: true, rebuild: true }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
     }
     HandleHTTPError(error) {

@@ -21,7 +21,7 @@ export class GeoLocation {
 	 * Finds location and rebuilds entryText so it can be looked up again
 	 * @param searchText
 	 */
-	public async GetLocation(searchText: string): Promise<LocationData | null> {
+	public async GetLocation(searchText: string, cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
 		try {
 			searchText = searchText.trim();
 			const cached = this.cache?.searchText;
@@ -30,7 +30,10 @@ export class GeoLocation {
 				return cached;
 			}
 
-			const locationData = await this.App.LoadJsonAsync<any>(`${this.url}?q=${searchText}&${this.params}`);
+			const locationData = await this.App.LoadJsonAsync<any>(
+				`${this.url}?q=${searchText}&${this.params}`,
+				cancellable
+			);
 			if (locationData == null)
 				return null;
 

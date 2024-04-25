@@ -200,9 +200,12 @@ export class CurrentWeather {
 		this.locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), x_expand: true, x_align: Align.MIDDLE });
 		this.location = this.locationButton.actor;
 		this.location.connect(SIGNAL_CLICKED, () => {
-			if (this.app.encounteredError) this.app.RefreshWeather(true);
-			else if (this.locationButton.url == null) return;
-			else OpenUrl(this.locationButton);
+			if (this.app.encounteredError)
+				this.app.Refresh({rebuild: true});
+			else if (this.locationButton.url == null)
+				return;
+			else
+				OpenUrl(this.locationButton);
 		});
 
 		this.nextLocationButton = new WeatherButton({
@@ -362,12 +365,12 @@ export class CurrentWeather {
 
 	private NextLocationClicked() {
 		const loc = this.app.config.SwitchToNextLocation();
-		this.app.Refresh(loc);
+		this.app.Refresh({location: loc ?? undefined, immediate: true});
 	}
 
 	private PreviousLocationClicked() {
 		const loc = this.app.config.SwitchToPreviousLocation();
-		this.app.Refresh(loc);
+		this.app.Refresh({location: loc ?? undefined, immediate: true});
 	}
 
 	private onLocationStorageChanged(sender: LocationStore, itemCount: number): void {

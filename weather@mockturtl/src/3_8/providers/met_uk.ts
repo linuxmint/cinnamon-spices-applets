@@ -55,7 +55,7 @@ export class MetUk extends BaseProvider {
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(newLoc: LocationData): Promise<WeatherData | null> {
+	public async GetWeather(newLoc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 
 		const loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
 		// Get closest sites
@@ -64,10 +64,10 @@ export class MetUk extends BaseProvider {
 			this.currentLoc = newLoc;
 			this.currentLocID = loc;
 
-			const forecastSite = await this.GetClosestForecastSite(newLoc);
+			const forecastSite = await this.GetClosestForecastSite(newLoc, cancellable);
 			if (forecastSite == null) return null;
 
-			const observationSites = await this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST);
+			const observationSites = await this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST, cancellable);
 			if (observationSites == null) return null;
 
 			this.forecastSite = forecastSite;
@@ -92,11 +92,11 @@ export class MetUk extends BaseProvider {
 		}
 
 		// Start getting forecast data
-		const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc) as Promise<ForecastData[]>;
-		const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc) as Promise<HourlyForecastData[]>;
+		const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc, cancellable) as Promise<ForecastData[]>;
+		const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc, cancellable) as Promise<HourlyForecastData[]>;
 
 		// Get and Parse Observation data
-		const observations = await this.GetObservationData(this.observationSites);
+		const observations = await this.GetObservationData(this.observationSites, cancellable);
 		const currentResult = this.ParseCurrent(observations, newLoc);
 		if (!currentResult) return null;
 
@@ -108,16 +108,16 @@ export class MetUk extends BaseProvider {
 		return currentResult;
 	};
 
-	private async GetClosestForecastSite(loc: LocationData): Promise<WeatherSite | null> {
-		const forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
+	private async GetClosestForecastSite(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherSite | null> {
+		const forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key, cancellable);
 		if (forecastSitelist == null)
 			return null;
 
 		return this.GetClosestSite(forecastSitelist, loc);
 	}
 
-	private async GetObservationSitesInRange(loc: LocationData, range: number): Promise<WeatherSite[] | null> {
-		const observationSiteList = await this.app.LoadJsonAsync<any>(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
+	private async GetObservationSitesInRange(loc: LocationData, range: number, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherSite[] | null> {
+		const observationSiteList = await this.app.LoadJsonAsync<any>(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key, cancellable);
 		if (observationSiteList == null)
 			return null;
 
@@ -135,11 +135,11 @@ export class MetUk extends BaseProvider {
 		return observationSites;
 	}
 
-	private async GetObservationData(observationSites: WeatherSite[]) {
+	private async GetObservationData(observationSites: WeatherSite[], cancellable: imports.gi.Gio.Cancellable) {
 		const observations: METPayload<true>[] = [];
 		for (const element of observationSites) {
 			Logger.Debug("Getting observation data from station: " + element.id);
-			const payload = await this.app.LoadJsonAsync<METPayload<true>>(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
+			const payload = await this.app.LoadJsonAsync<METPayload<true>>(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key, cancellable);
 			if (!!payload)
 				observations.push(payload);
 			else {
@@ -156,12 +156,12 @@ export class MetUk extends BaseProvider {
 	 * @param baseUrl
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData(query: string, ParseFunction: (json: any, loc: LocationData) => WeatherData | ForecastData[] | HourlyForecastData[] | null, loc: LocationData) {
+	private async GetData(query: string, ParseFunction: (json: any, loc: LocationData) => WeatherData | ForecastData[] | HourlyForecastData[] | null, loc: LocationData, cancellable: imports.gi.Gio.Cancellable) {
 		if (query == null)
 			return null;
 
 		Logger.Debug("Query: " + query);
-		const json = await this.app.LoadJsonAsync(query);
+		const json = await this.app.LoadJsonAsync(query, cancellable);
 
 		if (json == null)
 			return null;

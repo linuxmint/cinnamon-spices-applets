@@ -31,10 +31,6 @@ export class LocationStore {
 	}
 
 	public OnLocationChanged(locs: LocationData[]) {
-		// this is called 4 times in a row, try to prevent that
-		if (this.app.Locked())
-			return;
-
 		// Ensure Entry text is not empty
 		for (let index = 0; index < locs.length; index++) {
 			const element = locs[index];
@@ -69,7 +65,7 @@ export class LocationStore {
 
 		if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
 			Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.")
-			this.app.Refresh();
+			this.app.Refresh({immediate: true});
 		}
 		this.InvokeStorageChanged();
 	}
@@ -205,10 +201,10 @@ export class LocationStore {
 	}
 
 	public async SaveCurrentLocation(loc: LocationData | null) {
-		if (this.app.Locked()) {
-			NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
-			return;
-		}
+		// if (this.app.Locked()) {
+		// 	NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
+		// 	return;
+		// }
 		if (loc == null) {
 			NotificationService.Instance.Send(_("Warning") + " - " + _("Location Store"), _("You can't save an incorrect location"), true);
 			return;

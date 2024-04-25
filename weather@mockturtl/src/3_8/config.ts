@@ -26,7 +26,7 @@ import { GeoClue } from "./location_services/geoip_services/geoclue";
 import { GeoIPFedora } from "./location_services/geoip_services/geoip.fedora";
 
 const { get_home_dir, get_user_data_dir, get_user_config_dir } = imports.gi.GLib;
-const { File } = imports.gi.Gio;
+const { File, Cancellable } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -310,19 +310,19 @@ export class Config {
 	 * else it returns coordinates if it was entered. If text was entered,
 	 * it looks up coordinates via geolocation api
 	 */
-	public async EnsureLocation(): Promise<LocationData | null> {
+	public async EnsureLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
 		this.currentLocation = null;
 
 		// Automatic location
 		if (!this._manualLocation) {
-			const geoClue = await this.geoClue.GetLocation();
+			const geoClue = await this.geoClue.GetLocation(cancellable);
 			if (geoClue != null) {
 				Logger.Debug("Auto location obtained via GeoClue2.");
 				this.InjectLocationToConfig(geoClue);
 				return geoClue;
 			}
 
-			const location = await this.autoLocProvider.GetLocation();
+			const location = await this.autoLocProvider.GetLocation(cancellable);
 			// User facing errors handled by provider
 			if (!location)
 				return null;
@@ -370,7 +370,7 @@ export class Config {
 		}
 
 		Logger.Debug("Location is text, geo locating...")
-		const locationData = await this.geoLocationService.GetLocation(loc);
+		const locationData = await this.geoLocationService.GetLocation(loc, cancellable);
 		// User facing errors are handled by service
 		if (locationData == null) return null;
 		if (!!locationData?.entryText) {
@@ -466,7 +466,7 @@ export class Config {
 
 	private OnFontChanged = () => {
 		this.currentFontSize = this.GetCurrentFontSize();
-		this.app.RefreshAndRebuild();
+		this.app.Refresh({ rebuild: true, immediate: true});
 	}
 
 	/** Called when 3 seconds is up with no change in location */

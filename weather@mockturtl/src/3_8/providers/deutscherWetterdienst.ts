@@ -20,10 +20,20 @@ export class DeutscherWetterdienst extends BaseProvider {
 
     private readonly baseUrl: string = "https://api.brightsky.dev/";
 
-    public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+    public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
         const [current, hourly] = await Promise.all([
-            this.app.LoadJsonAsync<CurrentWeatherPayload>(`${this.baseUrl}current_weather`, this.GetDefaultParams(loc), this.HandleErrors),
-            this.app.LoadJsonAsync<HourlyForecastPayload>(`${this.baseUrl}weather`, this.GetHourlyParams(loc), this.HandleErrors)
+            this.app.LoadJsonAsync<CurrentWeatherPayload>(
+				`${this.baseUrl}current_weather`,
+				cancellable,
+				this.GetDefaultParams(loc),
+				this.HandleErrors
+			),
+            this.app.LoadJsonAsync<HourlyForecastPayload>(
+				`${this.baseUrl}weather`,
+				cancellable,
+				this.GetHourlyParams(loc),
+				this.HandleErrors,
+			)
         ]);
 
         if (current == null || hourly == null)

@@ -38,11 +38,12 @@ export class PirateWeather extends BaseProvider {
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		const unit = this.GetQueryUnit();
 
 		const response = await this.app.LoadJsonAsyncWithDetails<PirateWeatherPayload>(
 			`${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`,
+			cancellable,
 			{
 				units: this.GetQueryUnit()
 			},

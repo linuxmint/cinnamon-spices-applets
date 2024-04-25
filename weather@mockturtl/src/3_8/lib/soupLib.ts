@@ -1,11 +1,20 @@
+import { REQUEST_TIMEOUT_SECONDS } from "../consts";
+import { setTimeout } from "../utils";
 import { HTTPHeaders, HTTPParams, Method } from "./httpLib";
 import { Logger } from "./logger";
 const { Message, Session } = imports.gi.Soup;
 const { PRIORITY_DEFAULT }  = imports.gi.GLib;
+const { Cancellable } = imports.gi.Gio;
 const ByteArray = imports.byteArray;
 
 export interface SoupLib {
-    Send: (url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method?: Method) => Promise<SoupResponse | null>;
+    Send: (
+		url: string,
+		params?: HTTPParams | null,
+		headers?: HTTPHeaders,
+		method?: Method,
+		cancellable?: imports.gi.Gio.Cancellable
+	) => Promise<SoupResponse | null>;
 }
 
 export interface SoupResponse {
@@ -46,7 +55,18 @@ class Soup3 implements SoupLib {
 		this._httpSession.idle_timeout = 10;
     }
 
-    async Send(url: string, params?: HTTPParams | null | undefined, headers?: HTTPHeaders | undefined, method: Method = "GET"): Promise<SoupResponse | null> {
+    async Send(
+		url: string,
+		params?: HTTPParams | null | undefined,
+		headers?: HTTPHeaders | undefined,
+		method: Method = "GET",
+		cancellable?: imports.gi.Gio.Cancellable,
+	): Promise<SoupResponse | null> {
+
+		if (cancellable?.is_cancelled()) {
+			return Promise.resolve(null);
+		}
+
         // Add params to url
         url = AddParamsToURI(url, params);
 
@@ -59,9 +79,12 @@ class Soup3 implements SoupLib {
             }
             else {
                 AddHeadersToMessage(message, headers);
-                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, null, (session: any, result: any) => {
+				const finalCancellable = cancellable ?? Cancellable.new();
+				const timeout = setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
+                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, finalCancellable, (session: any, result: any) => {
 					const headers: Record<string, string> = {};
 					let res: imports.gi.GLib.Bytes | null = null;
+					clearTimeout(timeout);
 					try {
 						res = this._httpSession.send_and_read_finish(result);
 						message.get_response_headers().foreach((name: string, value: string) => {
@@ -107,7 +130,17 @@ class Soup2 implements SoupLib {
 	 * @param params
 	 * @param method
 	 */
-	public async Send(url: string, params?: HTTPParams | null, headers?: HTTPHeaders, method: Method = "GET"): Promise<SoupResponse | null> {
+	public async Send(
+		url: string,
+		params?: HTTPParams | null,
+		headers?: HTTPHeaders,
+		method: Method = "GET",
+		cancellable?: imports.gi.Gio.Cancellable
+	): Promise<SoupResponse | null> {
+		if (cancellable?.is_cancelled()) {
+			return Promise.resolve(null);
+		}
+
 		// Add params to url
 		url = AddParamsToURI(url, params);
 
@@ -120,6 +153,7 @@ class Soup2 implements SoupLib {
 			}
 			else {
 				AddHeadersToMessage(message, headers);
+				// Doesn't accept cancellable here
 				this._httpSession.queue_message(message, (session: any, message: any) => {
 					const headers: Record<string, string> = {};
 					message.response_headers.foreach((name: any, value: any) => {

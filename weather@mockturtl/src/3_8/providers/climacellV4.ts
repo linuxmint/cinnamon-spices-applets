@@ -31,14 +31,14 @@ export class ClimacellV4 extends BaseProvider {
 		super(app);
 	}
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		if (loc == null)
 			return null;
 
 		this.params.apikey = this.app.config.ApiKey;
 		this.params.location = loc.lat + "," + loc.lon;
 
-		const response = await this.app.LoadJsonAsync<ClimacellV4Payload>(this.url, this.params, (m) => this.HandleHTTPError(m));
+		const response = await this.app.LoadJsonAsync<ClimacellV4Payload>(this.url, cancellable, this.params, (m) => this.HandleHTTPError(m));
 
 		if (response == null)
 			return null;
@@ -119,7 +119,7 @@ export class ClimacellV4 extends BaseProvider {
 			// bit sneaky, but setting the hourly forecast startTime to beginning of the hour
 			// so it is displayed properly
 			date = date.set({ minute: 0, second: 0, millisecond: 0 });
-			
+
 			const hour: HourlyForecastData = {
 				condition: this.ResolveCondition(element.values.weatherCode, IsNight({sunrise, sunset}, date)),
 				date,
