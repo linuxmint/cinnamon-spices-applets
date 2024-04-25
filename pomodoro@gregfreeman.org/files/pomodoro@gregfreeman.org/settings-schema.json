@@ -220,5 +220,32 @@
         "step": 1,
         "description": "Sound volume:",
         "dependency" : "start_sound"
-    }
+    },
+
+    "head_scripts": {
+        "type": "header",
+        "description": "Scripts"
+    },
+
+    "enable_scripts" : {
+        "type" : "checkbox",
+        "description" : "Enable scripts",
+        "default" : false
+    },
+
+    "custom_short_break_script": {
+        "type" : "filechooser",
+        "default" : "",
+        "description" : "Execute this custom script when a short break starts",
+        "select-dir" : false,
+        "dependency": "enable_scripts"
+     },
+
+     "custom_long_break_script": {
+        "type" : "filechooser",
+        "default" : "",
+        "description" : "Execute this custom script when a long break starts",
+        "select-dir" : false,
+        "dependency": "enable_scripts"
+     }
 }

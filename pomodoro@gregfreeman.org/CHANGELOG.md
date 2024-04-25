@@ -1,3 +1,6 @@
+### 1.0.2
+    - Added options to run custom scripts when a short break and long break starts
+
 ### 1.0.1
     - Added option to automatically start the timer on log in
 
