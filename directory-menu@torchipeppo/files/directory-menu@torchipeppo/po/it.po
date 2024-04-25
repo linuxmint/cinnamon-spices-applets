@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: directory-menu@torchipeppo 0.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-07 18:39-0100\n"
+"POT-Creation-Date: 2024-04-12 13:55-0400\n"
 "PO-Revision-Date: 2024-02-10 15:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: popup_menu.py:71
+msgid "Open Folder"
+msgstr "Apri cartella"
+
+#: popup_menu.py:76
+msgid "Open in Terminal"
+msgstr "Apri nel terminale"
+
 #. metadata.json->name
 msgid "Directory Menu"
 msgstr "Menù delle Cartelle"
@@ -24,8 +32,7 @@ msgstr "Menù delle Cartelle"
 #. metadata.json->description
 msgid ""
 "Quickly navigate through directories on your system using a dropdown menu."
-msgstr ""
-"Naviga rapidamente attraverso le tue cartelle con un menù a tendina."
+msgstr "Naviga rapidamente attraverso le tue cartelle con un menù a tendina."
 
 #. settings-schema.json->starting-uri->description
 msgid "Base Directory"
@@ -37,7 +44,9 @@ msgstr "Icona (tieni il mouse qui per info!)"
 
 #. settings-schema.json->icon-name->tooltip
 msgid "Must be an icon name (no path), and should be symbolic."
-msgstr "Deve essere il nome di un'icona (non un percorso), e l'icona dovrebbe essere simbolica."
+msgstr ""
+"Deve essere il nome di un'icona (non un percorso), e l'icona dovrebbe essere "
+"simbolica."
 
 #. settings-schema.json->tooltip->description
 msgid "Tooltip Text"
@@ -45,6 +54,14 @@ msgstr "Didascalia"
 
 #. settings-schema.json->label->description
 msgid "Panel Text"
+msgstr ""
+
+#. settings-schema.json->show-menu->description
+msgid "Show menu"
+msgstr ""
+
+#. settings-schema.json->show-menu->tooltip
+msgid "Set keybinding(s) to show the menu."
 msgstr ""
 
 #. settings-schema.json->limit-characters->description
@@ -56,17 +73,13 @@ msgid "Character Limit"
 msgstr "Limite di caratteri"
 
 #. settings-schema.json->character-limit->tooltip
-msgid "(Approximately) Limit the number of characters of each entry.\nUseful if you think the menu is too wide."
-msgstr "Limita (approssimativamente) il numero di caratteri di ciascuna riga.\nUtile se il menù risulta troppo largo."
+msgid ""
+"(Approximately) Limit the number of characters of each entry.\n"
+"Useful if you think the menu is too wide."
+msgstr ""
+"Limita (approssimativamente) il numero di caratteri di ciascuna riga.\n"
+"Utile se il menù risulta troppo largo."
 
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Mostra i file nascosti"
-
-#. popup_menu.py:71
-msgid "Open Folder"
-msgstr "Apri cartella"
-
-#. popup_menu.py:76
-msgid "Open in Terminal"
-msgstr "Apri nel terminale"
