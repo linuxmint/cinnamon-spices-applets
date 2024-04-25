@@ -1,3 +1,7 @@
+### v3.7.0~20240425
+  * Added option to record values exceeding limits.
+  * Fixes  #5606.
+
 ### v3.6.2~20240402
   * Displays the tooltip regardless of the refresh interval.
 

@@ -3,6 +3,7 @@ const Gio = imports.gi.Gio; // Needed for file infos
 //const Util = imports.misc.util;
 const Lang = imports.lang;
 const Signals = imports.signals;
+const Cinnamon = imports.gi.Cinnamon;
 const Util = require("./lib/util");
 
 const {to_string} = require("./lib/to-string");
@@ -22,6 +23,12 @@ const {
   versionCompare
 } = require("./lib/constants");
 
+var LOCAL_DATA = {
+      "temps": {},
+      "fans": {},
+      "voltages": {},
+      "intrusions": {}
+    };
 /**
  * Class SensorsReaper
  */
@@ -100,15 +107,77 @@ class SensorsReaper {
     }
   }
 
-  _sensors_reaped(output) {
-    //~ global.log("output: "+JSON.stringify(output, null, 4));
+  async _sensors_reaped(output) {
     this.raw_data = JSON.parse(output);
-    var data = {
-      "temps": {},
-      "fans": {},
-      "voltages": {},
-      "intrusions": {}
-    };
+    //~ log("this.raw_data: "+JSON.stringify(this.raw_data, null, "\t"), true);
+    //~ LOCAL_DATA = {
+      //~ "temps": {},
+      //~ "fans": {},
+      //~ "voltages": {},
+      //~ "intrusions": {}
+    //~ };
+
+    let customs = this.applet.custom_sensors;
+    for (let cs of customs) {
+      if (cs.sensor_type.length > 0 && cs.shown_name.length > 0 && cs.sysfile.length > 0) {
+        //~ log("type: "+cs.sensor_type+"; name: "+cs.shown_name+"; file: "+cs.sysfile, true);
+        switch (cs.sensor_type) {
+          case "temperature":
+            await Cinnamon.get_file_contents_utf8(cs.sysfile, Lang.bind(this, function(utf8_contents) {
+              let cs_value = utf8_contents.split("\n")[0];
+              if (cs_value && cs['user_formula'] && cs['user_formula'].length> 0) {
+                cs_value = 1.0*eval(cs["user_formula"].replace(/\$/g, cs_value));
+              }
+              let custom_name = "CUSTOM: "+cs.shown_name;
+              //~ log("cs_value: "+cs_value, true);
+              LOCAL_DATA["temps"][custom_name] = {};
+              LOCAL_DATA["temps"][custom_name]["input"] = 1.0*cs_value;
+              //~ LOCAL_DATA["temps"][custom_name]["sensor"] = custom_name;
+              //~ LOCAL_DATA["temps"][custom_name]["shown_name"] = cs.shown_name;
+              //~ LOCAL_DATA["temps"][custom_name]["show_in_panel"] = cs.show_in_panel;
+              //~ LOCAL_DATA["temps"][custom_name]["show_in_tooltip"] = cs.show_in_tooltip;
+              if (cs.high_by_user)
+                LOCAL_DATA["temps"][custom_name]["high"] = 1.0*cs.high_by_user;
+                //~ LOCAL_DATA["temps"][custom_name]["high_by_user"] = 1.0*cs.high_by_user;
+              if (cs.crit_by_user) {
+                LOCAL_DATA["temps"][custom_name]["crit"] = 1.0*cs.crit_by_user;
+                //~ LOCAL_DATA["temps"][custom_name]["crit_by_user"] = 1.0*cs.crit_by_user;
+                LOCAL_DATA["temps"][custom_name]["crit_alarm"] = 0;
+              }
+              //~ LOCAL_DATA["temps"][custom_name]["user_formula"] = cs.user_formula;
+
+              this.raw_data[custom_name] = {};
+              this.raw_data[custom_name]["Adapter"]  = "CUSTOM";
+              this.raw_data[custom_name][""+cs.shown_name] = LOCAL_DATA["temps"][custom_name];
+
+
+              //~ this.applet.temp_sensors["custom_"+cs.shown_name] = {
+                //~ "sensor": "custom_"+cs.shown_name,
+                //~ "show_in_panel": cs.show_in_panel,
+                //~ "show_in_tooltip": cs.show_in_tooltip,
+                //~ "shown_name": cs.shown_name,
+                //~ "high_by_user": cs.high_by_user,
+                //~ "crit_by_user": cs.crit_by_user,
+                //~ "user_formula": cs.user_formula
+              //~ };
+              //~ log("CUSTOM: "+JSON.stringify(this.applet.temp_sensors["custom_"+cs.shown_name], null, "\t"), true);
+            }));
+
+            break;
+          case "fan":
+
+            break;
+          case "voltage":
+
+            break;
+          case "intrusion":
+
+            break;
+        }
+      }
+    }
+    //~ log("LOCAL_DATA[temps]: " + JSON.stringify(LOCAL_DATA["temps"], null, "\t"), true);
+
     let chips = Object.keys(this.raw_data);
     var adapter = "";
     for (let chip of chips) {
@@ -164,21 +233,25 @@ class SensorsReaper {
           feature_dico[subfeature_name] = this.raw_data[chip][feature][subfeat];
         }
 
-        Util.unref(subfeatures);
+        //Util.unref(subfeatures);
+        subfeatures = null;
 
         if (type_of_feature !== "") {
-          data[type_of_feature][complete_name + ": " + feature] = feature_dico;
+          LOCAL_DATA[type_of_feature][complete_name + ": " + feature] = feature_dico;
           type_of_feature = null;
           feature_dico = null;
         }
       }
       complete_name = null;
-      Util.unref(features)
+      //Util.unref(features)
+      features = null;
     }
-    //log("data: " + JSON.stringify(data, null, "\t"));
-    this.data = data;
-    data = null;
-    Util.unref(chips);
+
+    //~ log("LOCAL_DATA[temps]: " + JSON.stringify(LOCAL_DATA["temps"], null, "\t"), true);
+    this.data = LOCAL_DATA;
+    //~ LOCAL_DATA = null;
+    //Util.unref(chips);
+    chips = null;
     adapter = null;
     this.isRunning = false;
     this.emit("sensors-data-available");
