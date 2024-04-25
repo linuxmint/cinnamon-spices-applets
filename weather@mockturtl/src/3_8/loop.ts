@@ -1,7 +1,7 @@
 import { Logger } from "./lib/logger";
 import { WeatherApplet } from "./main";
 import { LocationData, RefreshState } from "./types";
-import { delay, Guid } from "./utils";
+import { _, delay, Guid } from "./utils";
 
 /** Stores applet instance's ID's globally,
  * Checked to make sure that instance is
@@ -88,10 +88,6 @@ export class WeatherLoop {
 		try {
 			this.runningRefresh?.cancel();
 			this.runningRefresh = new imports.gi.Gio.Cancellable();
-
-			if (this.app.encounteredError == true)
-				this.IncrementErrorCount();
-
 			this.ValidateLastUpdateTime();
 
 			if (this.pauseRefresh) {
@@ -121,18 +117,33 @@ export class WeatherLoop {
 					Logger.Info("Refreshing timed out, skipping this cycle.");
 					break;
 				case RefreshState.Error:
-					Logger.Info("Critical Error while refreshing weather.");
+				case RefreshState.DisplayFailure:
 					this.IncrementErrorCount();
+					Logger.Info("Critical Error while refreshing weather.");
 					break;
 				case RefreshState.Success:
+					this.ResetErrorCount();
 					this.lastUpdated = new Date();
+					Logger.Info("Weather Information refreshed");
 					break;
-				case RefreshState.Locked:
-				case RefreshState.DisplayFailure:
-				case RefreshState.NoKey:
-				case RefreshState.NoLocation:
 				case RefreshState.NoWeather:
-					// This is already handled.
+				case RefreshState.NoLocation:
+					this.IncrementErrorCount();
+					Logger.Error("Could not refresh weather, data could not be obtained.");
+					this.app.ShowError({
+						type: "soft",
+						detail: "no api response",
+						message: "API did not return data"
+					})
+					break;
+				case RefreshState.NoKey:
+					Logger.Error("No API Key given");
+					this.app.ShowError({
+						type: "hard",
+						userError: true,
+						detail: "no key",
+						message: _("This provider requires an API key to operate")
+					});
 					break;
 			}
 
@@ -173,7 +184,7 @@ export class WeatherLoop {
 	}
 
 	/** Used after a successful weather refresh. */
-	public ResetErrorCount(): void {
+	private ResetErrorCount(): void {
 		this.errorCount = 0;
 	}
 

@@ -32,10 +32,6 @@ export const enum RefreshState {
 	 */
 	Error = "error",
 	/**
-	 * Already refreshing
-	 */
-	Locked = "locked",
-	/**
 	 * Location not obtained
 	 */
 	NoLocation = "no location",

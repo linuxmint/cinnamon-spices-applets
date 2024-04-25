@@ -151,7 +151,6 @@ export class WeatherApplet extends TextIconApplet {
 
 				Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, resuming operations.`);
 				this.encounteredError = false;
-				this.loop.ResetErrorCount();
 				this.loop.Refresh();
 				this.online = true;
 				break;
@@ -182,6 +181,11 @@ export class WeatherApplet extends TextIconApplet {
 		this.ui.Display(data, conf, this.Provider);
 	}
 
+	/**
+	 *
+	 * @param options By default it will cancel the current refresh (if any) then start a new one.
+	 * @returns
+	 */
 	public async Refresh(options?: RefreshOptions): Promise<void> {
 		return this.loop.Refresh(options);
 	}
@@ -213,23 +217,10 @@ export class WeatherApplet extends TextIconApplet {
 
 			// No key
 			if (this.provider.needsApiKey && this.config.NoApiKey()) {
-				Logger.Error("No API Key given");
-				this.ShowError({
-					type: "hard",
-					userError: true,
-					detail: "no key",
-					message: _("This provider requires an API key to operate")
-				});
 				return RefreshState.NoKey;
 			}
 			let weatherInfo = await this.provider.GetWeather(location, cancellable);
 			if (weatherInfo == null) {
-				Logger.Error("Could not refresh weather, data could not be obtained.");
-				this.ShowError({
-					type: "hard",
-					detail: "no api response",
-					message: "API did not return data"
-				})
 				return RefreshState.NoWeather;
 			}
 
@@ -245,8 +236,6 @@ export class WeatherApplet extends TextIconApplet {
 			}
 
 			this.currentWeatherInfo = weatherInfo;
-			Logger.Info("Weather Information refreshed");
-			this.loop.ResetErrorCount();
 			return RefreshState.Success;
 		}
 		catch (e) {

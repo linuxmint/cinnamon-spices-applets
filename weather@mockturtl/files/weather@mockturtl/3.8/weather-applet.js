@@ -15744,8 +15744,6 @@ class WeatherLoop {
             try {
                 (_a = this.runningRefresh) === null || _a === void 0 ? void 0 : _a.cancel();
                 this.runningRefresh = new imports.gi.Gio.Cancellable();
-                if (this.app.encounteredError == true)
-                    this.IncrementErrorCount();
                 this.ValidateLastUpdateTime();
                 if (this.pauseRefresh) {
                     logger_Logger.Debug("Configuration or network error, updating paused");
@@ -15768,17 +15766,33 @@ class WeatherLoop {
                         logger_Logger.Info("Refreshing timed out, skipping this cycle.");
                         break;
                     case "error":
-                        logger_Logger.Info("Critical Error while refreshing weather.");
+                    case "display failure":
                         this.IncrementErrorCount();
+                        logger_Logger.Info("Critical Error while refreshing weather.");
                         break;
                     case "success":
+                        this.ResetErrorCount();
                         this.lastUpdated = new Date();
+                        logger_Logger.Info("Weather Information refreshed");
                         break;
-                    case "locked":
-                    case "display failure":
-                    case "no key":
-                    case "no location":
                     case "no weather":
+                    case "no location":
+                        this.IncrementErrorCount();
+                        logger_Logger.Error("Could not refresh weather, data could not be obtained.");
+                        this.app.ShowError({
+                            type: "soft",
+                            detail: "no api response",
+                            message: "API did not return data"
+                        });
+                        break;
+                    case "no key":
+                        logger_Logger.Error("No API Key given");
+                        this.app.ShowError({
+                            type: "hard",
+                            userError: true,
+                            detail: "no key",
+                            message: _("This provider requires an API key to operate")
+                        });
                         break;
                 }
             }
@@ -17580,7 +17594,6 @@ class WeatherApplet extends TextIconApplet {
                             : "PORTAL";
                     logger_Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, resuming operations.`);
                     this.encounteredError = false;
-                    this.loop.ResetErrorCount();
                     this.loop.Refresh();
                     this.online = true;
                     break;
@@ -17735,23 +17748,10 @@ class WeatherApplet extends TextIconApplet {
                 return "error";
             }
             if (this.provider.needsApiKey && this.config.NoApiKey()) {
-                logger_Logger.Error("No API Key given");
-                this.ShowError({
-                    type: "hard",
-                    userError: true,
-                    detail: "no key",
-                    message: _("This provider requires an API key to operate")
-                });
                 return "no key";
             }
             let weatherInfo = await this.provider.GetWeather(location, cancellable);
             if (weatherInfo == null) {
-                logger_Logger.Error("Could not refresh weather, data could not be obtained.");
-                this.ShowError({
-                    type: "hard",
-                    detail: "no api response",
-                    message: "API did not return data"
-                });
                 return "no weather";
             }
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
@@ -17763,8 +17763,6 @@ class WeatherApplet extends TextIconApplet {
                 return "display failure";
             }
             this.currentWeatherInfo = weatherInfo;
-            logger_Logger.Info("Weather Information refreshed");
-            this.loop.ResetErrorCount();
             return "success";
         }
         catch (e) {
