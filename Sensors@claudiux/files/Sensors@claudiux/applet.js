@@ -1179,14 +1179,14 @@ class SensorsApplet extends Applet.TextApplet {
     this.menu.addMenuItem(_intrusion_button);
 
     // Button Custom:
-    let _custom_button = new PopupMenu.PopupMenuItem("  " + _("⛓ Custom sensors"));
-    _custom_button.connect("activate",
-      (event) => {
-        this.kill_all_pids();
-        this.pids.push(Util.spawnCommandLine("%s applet %s -t 5 &".format(XS_PATH, UUID)))
-      }
-    );
-    this.menu.addMenuItem(_custom_button);
+    //~ let _custom_button = new PopupMenu.PopupMenuItem("  " + _("⛓ Custom sensors"));
+    //~ _custom_button.connect("activate",
+      //~ (event) => {
+        //~ this.kill_all_pids();
+        //~ this.pids.push(Util.spawnCommandLine("%s applet %s -t 5 &".format(XS_PATH, UUID)))
+      //~ }
+    //~ );
+    //~ this.menu.addMenuItem(_custom_button);
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
     // Button xsensors
