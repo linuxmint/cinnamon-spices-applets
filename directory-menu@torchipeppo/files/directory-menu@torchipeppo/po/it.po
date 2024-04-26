@@ -54,19 +54,19 @@ msgstr "Didascalia"
 
 #. settings-schema.json->label->description
 msgid "Panel Text"
-msgstr ""
+msgstr "Testo sul pannello"
 
 #. settings-schema.json->show-menu->description
 msgid "Show menu"
-msgstr ""
+msgstr "Apri il menù"
 
 #. settings-schema.json->show-menu->tooltip
 msgid "Set keybinding(s) to show the menu."
-msgstr ""
+msgstr "Imposta una o più scorciatoie da tastiera per aprire il menù."
 
 #. settings-schema.json->limit-characters->description
 msgid "Limit the Maximum Number of Characters on the Submenus"
-msgstr ""
+msgstr "Limita il numero di caratteri nel menù"
 
 #. settings-schema.json->character-limit->description
 msgid "Character Limit"
