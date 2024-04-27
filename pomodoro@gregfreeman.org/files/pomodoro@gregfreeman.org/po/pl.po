@@ -61,7 +61,7 @@ msgstr "Pomodoro zakończone"
 
 #: applet.js:607
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
-msgstr "http://en.wikipedia.org/wiki/Pomodoro_Technique"
+msgstr "https://pl.wikipedia.org/wiki/Technika_Pomodoro"
 
 # applet menu
 #. metadata.json->name
