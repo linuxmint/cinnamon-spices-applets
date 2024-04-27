@@ -63,20 +63,38 @@ class MoonPhase extends Applet.TextIconApplet {
         }
 
         this.moon = new Moon(this);
+        const phaseLabel = this._createPhaseLabel(this.showPhaseLabel, this.showPercentageLabel);
+        const phaseTooltip = this._createPhaseTooltip(this.showPhaseTooltip, this.showPercentageTooltip);
         this.set_applet_icon_symbolic_name(this.moon.currentPhaseIcon);
 
         if (this.showTooltip) {
-            this.set_applet_tooltip(this.moon.currentTooltip);
+            this.set_applet_tooltip(phaseTooltip);
         } else {
             this.set_applet_tooltip('');
         }
 
         if (this.showPhaseLabel) {
-            this.set_applet_label(this.moon.currentPhaseName);
+            this.set_applet_label(phaseLabel);
         } else {
             this.set_applet_label('');
         }
 
         this.updateLoopId = Mainloop.timeout_add((this.updateInterval * 1000), Lang.bind(this, this.updateApplet));
+    }
+
+    _createPhaseLabel(showPhaseLabel, showPercentageLabel) {
+        const percent  = Math.floor(this.moon.illumination.fraction * 100 * 100) / 100;
+        if (showPhaseLabel && showPercentageLabel) return `${ this.moon.currentPhaseName } (${ percent }%)`;
+        if (showPhaseLabel) return `${ this.moon.currentPhaseName }`;
+        if (showPercentageLabel) return `${ percent }%`
+        return 'Moon Phase';
+    }
+
+    _createPhaseTooltip(showPhaseTooltip, showPercentageTooltip) {
+        const percent = Math.floor(this.moon.illumination.fraction * 100 * 100) / 100;
+        if (showPhaseTooltip && showPercentageTooltip) return `${ this.moon.currentPhaseName } (${ percent }%)`;
+        if (showPhaseTooltip) return `${ this.moon.currentPhaseName }`;
+        if (showPercentageTooltip) return `${ percent }%`;
+        return 'Moon Phase';
     }
 }

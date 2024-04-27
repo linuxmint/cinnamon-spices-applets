@@ -33,7 +33,7 @@
       "keys": [
         "useAltIcons",
         "showTooltip",
-        "showNameTooltip",
+        "showPhaseTooltip",
         "showPercentageTooltip",
         "showPhaseLabel",
         "showNameLabel",
@@ -100,7 +100,7 @@
     "default": true,
     "description": "Display a tooltip on hover"
   },
-  "showNameTooltip": {
+  "showPhaseTooltip": {
     "type": "checkbox",
     "default": true,
     "description": "Display the name of the moon phase in the tooltip",

@@ -10,10 +10,9 @@ class Moon {
         this.iconSet = app.useAltIcons ? new AltIconSet() : new DefaultIconSet();
         this.riseSetTimes = this.calc.getRiseSetTimes();
         this.currentPhaseIcon = this.iconSet.getPhaseIcons()[this.age];
-        this.currentPhaseName = this._getCurrentPhaseName(app.showNameLabel, app.showPercentageLabel);
-        this.currentTooltip = this._getCurrentPhaseName(app.showNameTooltip, app.showPercentageTooltip);
+        this.currentPhaseName = this._getCurrentPhaseName();
     }
-    _getCurrentPhaseName(showName = true, showPercentage = true) {
+    _getCurrentPhaseName() {
         let name = "";
         const age = this.age / 28;
         const percent = `${ Math.floor((this.illumination.fraction * 100) * 100) / 100 }%`;
@@ -28,9 +27,6 @@ class Moon {
         else if (age <= 1) name = 'Waning Crescent';
         else name = 'New Moon';
 
-        if (showName && showPercentage) return `${name} (${percent})`;
-        if (showName) return name;
-        if (showPercentage) return percent;
-        return 'Moon Phase';
+        return name;
     }
 }

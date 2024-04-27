@@ -8,7 +8,7 @@ class Config {
     bindSettings() {
         this.app.settings.bind('useAltIcons', 'useAltIcons', this.updateSettings.bind(this.app));
         this.app.settings.bind('showTooltip', 'showTooltip', this.updateSettings.bind(this.app));
-        this.app.settings.bind('showNameTooltip', 'showNameTooltip', this.updateSettings.bind(this.app));
+        this.app.settings.bind('showPhaseTooltip', 'showPhaseTooltip', this.updateSettings.bind(this.app));
         this.app.settings.bind('showPercentageTooltip', 'showPercentageTooltip', this.updateSettings.bind(this.app));
         this.app.settings.bind('showPhaseLabel', 'showPhaseLabel', this.updateSettings.bind(this.app));
         this.app.settings.bind('showNameLabel', 'showNameLabel', this.updateSettings.bind(this.app));
@@ -25,10 +25,9 @@ class Config {
     updateSettings() {
         this.app.useAltIcons = this.app.settings.getValue('useAltIcons');
         this.app.showTooltip = this.app.settings.getValue('showTooltip');
-        this.app.showNameTooltip = this.app.settings.getValue('showNameTooltip');
+        this.app.showPhaseTooltip = this.app.settings.getValue('showPhaseTooltip');
         this.app.showPercentageTooltip = this.app.settings.getValue('showPercentageTooltip');
         this.app.showPhaseLabel = this.app.settings.getValue('showPhaseLabel');
-        this.app.showNameLabel = this.app.settings.getValue('showNameLabel');
         this.app.showPercentageLabel = this.app.settings.getValue('showPercentageLabel');
 
         this.app.enableGeolocation = this.app.settings.getValue('enableGeolocation');
