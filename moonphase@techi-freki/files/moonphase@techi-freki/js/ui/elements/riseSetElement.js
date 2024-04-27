@@ -10,6 +10,7 @@ class RiseSetElement extends UiElement {
         this.iconType = IconType.SYMBOLIC;
         this.iconSize = 0;
         this.header = null;
+        this.dateObject = null;
         this.date = null;
         this.time = null;
         this.angle = 0;
