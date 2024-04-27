@@ -26,8 +26,6 @@ class RiseSetUi extends UiElement {
         riseElement.time = this.app.moon.riseSetTimes.rise.toLocaleTimeString();
         riseElement.angle = this.app.moon.riseSetTimes.riseAzimuth;
 
-        riseElement.create();
-
         const transitElement = new RiseSetElement(this.app);
         transitElement.iconName = this.app.moon.iconSet.nightClear;
         transitElement.iconSize = 48;
@@ -35,8 +33,6 @@ class RiseSetUi extends UiElement {
         transitElement.date = this.app.moon.riseSetTimes.transit.toLocaleDateString();
         transitElement.time = this.app.moon.riseSetTimes.transit.toLocaleTimeString();
         transitElement.angle = this.app.moon.riseSetTimes.transitAzimuth;
-
-        transitElement.create();
 
         const setElement = new RiseSetElement(this.app);
         setElement.iconName = this.app.moon.iconSet.moonSet;
@@ -47,6 +43,8 @@ class RiseSetUi extends UiElement {
         setElement.angle = this.app.moon.riseSetTimes.setAzimuth;
 
         setElement.create();
+        transitElement.create();
+        riseElement.create();
 
         // TODO: Handle element order depending on time
 

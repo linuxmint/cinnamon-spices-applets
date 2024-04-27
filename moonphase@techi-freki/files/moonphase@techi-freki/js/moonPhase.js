@@ -15,7 +15,7 @@ class MoonPhase extends Applet.TextIconApplet {
 
         // setting defaults
         this.metadata = metadata;
-        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this.settings = new Settings.AppletSettings(this, this.metadata.uuid, instance_id);
         this.orientation = orientation;
         this.config = new Config(this);
         this.config.bindSettings();
@@ -36,16 +36,20 @@ class MoonPhase extends Applet.TextIconApplet {
         this.settings.finalize();
     }
 
+    on_applet_load() {
+        if (!this.updateLoopId) {
+            this.currentPhaseUi = new CurrentPhaseUi(this);
+            this.riseSetUi = new RiseSetUi(this);
+
+            this.currentPhaseUi.create();
+            this.riseSetUi.create();
+        }
+    }
+
     on_applet_clicked() {
-        const currentPhaseUi = new CurrentPhaseUi(this);
-        const riseSetUi = new RiseSetUi(this);
-
-        currentPhaseUi.rebuild();
-        riseSetUi.rebuild();
-
-
-        if (this.showRiseSet)
+        if (this.showRiseSet) {
             this.menu.toggle();
+        }
     }
 
     buildPopupMenu() {
@@ -54,11 +58,16 @@ class MoonPhase extends Applet.TextIconApplet {
     }
 
     updateApplet() {
-        this.moon = new Moon(this);
-
         if (this.updateLoopId) {
             Mainloop.source_remove(this.updateLoopId);
         }
+
+        this.moon = new Moon(this);
+        this.currentPhaseUi = new CurrentPhaseUi(this);
+        this.riseSetUi = new RiseSetUi(this);
+
+        this.currentPhaseUi.rebuild();
+        this.riseSetUi.rebuild();
 
         this.set_applet_icon_symbolic_name(this.moon.currentPhaseIcon);
 

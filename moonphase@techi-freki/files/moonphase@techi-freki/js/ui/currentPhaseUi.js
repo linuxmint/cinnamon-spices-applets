@@ -17,6 +17,7 @@ class CurrentPhaseUi extends UiElement {
         const iconParent = new BoxLayout({ style_class: 'margin-5' });
         const infoParent = new BoxLayout({ vertical: true, style_class: 'margin-5' });
         const dateLabel = new Label({ text: new Date().toLocaleDateString() });
+        const timeLabel = new Label({ text: new Date().toLocaleTimeString() });
         const phaseLabel = new Label({ text: this.app.moon.currentPhaseName });
         const phaseIcon = new Icon({
             icon_name: this.app.moon.currentPhaseIcon,
@@ -26,8 +27,9 @@ class CurrentPhaseUi extends UiElement {
 
         iconParent.add(phaseIcon);
 
-        infoParent.add(dateLabel);
         infoParent.add(phaseLabel);
+        infoParent.add(dateLabel);
+        infoParent.add(timeLabel);
 
         parent.add(iconParent);
         parent.add(infoParent);

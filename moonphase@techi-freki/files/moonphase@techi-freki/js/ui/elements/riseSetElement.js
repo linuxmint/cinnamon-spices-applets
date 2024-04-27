@@ -13,6 +13,7 @@ class RiseSetElement extends UiElement {
         this.date = null;
         this.time = null;
         this.angle = 0;
+
     }
 
     create() {
