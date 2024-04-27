@@ -19,12 +19,20 @@
     margin-bottom: 5px;
 }
 
+.margin-bottom-15 {
+    margin-bottom: 15px;
+}
+
 .margin-top-5 {
     margin-top: 5px;
 }
 
 .font-20 {
     font-size: 20px;
+}
+
+.align-left {
+    text-align: left;
 }
 
 .align-center {

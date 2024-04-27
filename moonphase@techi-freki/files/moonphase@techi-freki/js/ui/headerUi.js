@@ -6,7 +6,8 @@ class HeaderUi extends UiElement {
     constructor(app) {
         super(app);
         this.actor = new BoxLayout({
-            x_align: ActorAlign.CENTER
+            x_align: ActorAlign.CENTER,
+            style_class: 'margin-bottom-15'
         });
     }
 
