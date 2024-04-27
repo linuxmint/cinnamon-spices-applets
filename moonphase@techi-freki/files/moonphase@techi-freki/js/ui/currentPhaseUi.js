@@ -18,7 +18,8 @@ class CurrentPhaseUi extends UiElement {
         const infoParent = new BoxLayout({ vertical: true, style_class: 'margin-5' });
         const dateLabel = new Label({ text: new Date().toLocaleDateString() });
         const timeLabel = new Label({ text: new Date().toLocaleTimeString() });
-        const phaseLabel = new Label({ text: this.app.moon.currentPhaseName });
+        // TODO: currentPhaseName is coming back as 'Moon Phase', needs to report correctly
+        const phaseLabel = new Label({ text: this.app.moon.currentPhaseName, style_class: 'margin-bottom-5' });
         const phaseIcon = new Icon({
             icon_name: this.app.moon.currentPhaseIcon,
             icon_type: IconType.SYMBOLIC,

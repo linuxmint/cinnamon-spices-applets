@@ -24,19 +24,19 @@ class Config {
 
     updateSettings() {
         this.app.useAltIcons = this.app.settings.getValue('useAltIcons');
-        this.app.showTooltip = this.settings.getValue('showTooltip');
-        this.app.showNameTooltip = this.settings.getValue('showNameTooltip');
-        this.app.showPercentageTooltip = this.settings.getValue('showPercentageTooltip');
-        this.app.showPhaseLabel = this.settings.getValue('showPhaseLabel');
-        this.app.showNameLabel = this.settings.getValue('showNameLabel');
-        this.app.showPercentageLabel = this.settings.getValue('showPercentageLabel');
+        this.app.showTooltip = this.app.settings.getValue('showTooltip');
+        this.app.showNameTooltip = this.app.settings.getValue('showNameTooltip');
+        this.app.showPercentageTooltip = this.app.settings.getValue('showPercentageTooltip');
+        this.app.showPhaseLabel = this.app.settings.getValue('showPhaseLabel');
+        this.app.showNameLabel = this.app.settings.getValue('showNameLabel');
+        this.app.showPercentageLabel = this.app.settings.getValue('showPercentageLabel');
 
-        this.app.enableGeolocation = this.settings.getValue('enableGeolocation');
-        this.app.latitude =  this.settings.getValue('latitude');
-        this.app.longitude = this.settings.getValue('longitude');
-        this.app.showRiseSet = this.settings.getValue('showRiseSet');
+        this.app.enableGeolocation = this.app.settings.getValue('enableGeolocation');
+        this.app.latitude =  this.app.settings.getValue('latitude');
+        this.app.longitude = this.app.settings.getValue('longitude');
+        this.app.showRiseSet = this.app.settings.getValue('showRiseSet');
 
-        this.app.updateInterval = this.settings.getValue('updateInterval');
+        this.app.updateInterval = this.app.settings.getValue('updateInterval');
 
         this.app.buildPopupMenu();
         this.app.updateApplet();

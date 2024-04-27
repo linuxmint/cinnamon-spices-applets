@@ -1,15 +1,17 @@
-const { BoxLayout, Label, Alight } = imports.gi.St;
+const { BoxLayout, Label, Align } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
+const { UiElement } = require('./js/ui/elements/uiElement');
 
-class HeaderUi {
+class HeaderUi extends UiElement {
     constructor(app) {
-        this.app = app;
-        // TODO: Build out a header ({ Applet Name } v{ version })
+        super(app);
+        this.actor = new BoxLayout({
+            x_align: ActorAlign.CENTER
+        });
     }
 
     create() {
-        const parent = new BoxLayout({ x_align: ActorAlign.CENTER, y_align: Align.MIDDLE, style_class: 'margin-5; align-center' });
-
-        this.actor.add_actor(parent);
+        const headerLabel = new Label({ text: `${ this.app.metadata.name } v${ this.app.metadata.version }`})
+        this.actor.add_actor(headerLabel);
     }
 }

@@ -63,12 +63,6 @@ class MoonPhase extends Applet.TextIconApplet {
         }
 
         this.moon = new Moon(this);
-        this.currentPhaseUi = new CurrentPhaseUi(this);
-        this.riseSetUi = new RiseSetUi(this);
-
-        this.currentPhaseUi.rebuild();
-        this.riseSetUi.rebuild();
-
         this.set_applet_icon_symbolic_name(this.moon.currentPhaseIcon);
 
         if (this.showTooltip) {

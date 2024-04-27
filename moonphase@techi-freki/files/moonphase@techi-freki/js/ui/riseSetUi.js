@@ -16,7 +16,7 @@ class RiseSetUi extends UiElement {
     create() {
         // TODO: Handle alwaysUp, alwaysDown
         // TODO: Handle whether rise and set times are to be displayed
-        // TODO: Handle order of rise, set and transit
+        // TODO: Handle order of rise, set and transit boxes
 
         const riseElement = new RiseSetElement(this.app);
         riseElement.iconName = this.app.moon.iconSet.moonRise;
