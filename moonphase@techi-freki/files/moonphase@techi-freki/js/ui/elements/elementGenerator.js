@@ -2,12 +2,10 @@ const { BoxLayout, Icon, IconType, Label } = imports.gi.St;
 const { UiElement } = require('./js/ui/elements/uiElement');
 
 // TODO: change name, remove inheritance
-class IconTextElement extends UiElement {
-    constructor(app) {
-        super(app);
-    }
+class ElementGenerator {
+    constructor() {}
 
-    create(iconName, iconSize, layouts, rootStyleClass = '', iconStyleClass = '') {
+    generateElement(iconName, iconSize, layouts, rootStyleClass = '', iconStyleClass = '') {
         const icon = this.generateIcon(iconName, iconSize);
         const root = new BoxLayout({ style_class: rootStyleClass });
         const iconParent = new BoxLayout({ style_class: iconStyleClass });
