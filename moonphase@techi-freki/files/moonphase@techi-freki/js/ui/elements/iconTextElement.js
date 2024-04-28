@@ -1,19 +1,16 @@
-const { BoxLayout, Icon, IconType } = imports.gi.St;
+const { BoxLayout, Icon, IconType, Label } = imports.gi.St;
 const { UiElement } = require('./js/ui/elements/uiElement');
 
+// TODO: change name, remove inheritance
 class IconTextElement extends UiElement {
     constructor(app) {
         super(app);
     }
 
-    create(iconName, iconSize, layouts) {
-        const icon = new Icon({
-            icon_name: iconName,
-            icon_size: iconSize,
-            icon_type: IconType.SYMBOLIC
-        });
-        const root = new BoxLayout({ style_class: 'margin-5' });
-        const iconParent = new BoxLayout({ style_class: 'margin-5' });
+    create(iconName, iconSize, layouts, rootStyleClass = '', iconStyleClass = '') {
+        const icon = this.generateIcon(iconName, iconSize);
+        const root = new BoxLayout({ style_class: rootStyleClass });
+        const iconParent = new BoxLayout({ style_class: iconStyleClass });
 
         iconParent.add(icon);
         root.add(iconParent);
@@ -22,6 +19,28 @@ class IconTextElement extends UiElement {
             root.add(layout);
         });
 
-        this.actor.add_actor(root);
+        return root;
+    }
+
+    generateLabel(text, styleClass = '') {
+        return new Label({ text: text, style_class: styleClass });
+    }
+
+    generateIcon(iconName, iconSize) {
+        return new Icon({
+            icon_name: iconName,
+            icon_size: iconSize,
+            icon_type: IconType.SYMBOLIC
+        });
+    }
+
+    generateLayout(labels, vertical, styleClass = '') {
+        const parent = new BoxLayout({ vertical: vertical, style_class: styleClass });
+
+        labels.forEach((label) => {
+            parent.add(label);
+        });
+
+        return parent;
     }
 }

@@ -22,8 +22,6 @@ class RiseSetUi extends UiElement {
         riseElement.iconSize = 64;
         riseElement.header = 'Moonrise';
         riseElement.dateObject = this.app.moon.riseSetTimes.rise;
-        riseElement.date = riseElement.dateObject.toLocaleDateString();
-        riseElement.time = riseElement.dateObject.toLocaleTimeString();
         riseElement.angle = this.app.moon.riseSetTimes.riseAzimuth;
 
         const transitElement = new RiseSetElement(this.app);
@@ -31,8 +29,6 @@ class RiseSetUi extends UiElement {
         transitElement.iconSize = 48;
         transitElement.header = 'Lunar Noon';
         transitElement.dateObject = this.app.moon.riseSetTimes.transit;
-        transitElement.date = transitElement.dateObject.toLocaleDateString();
-        transitElement.time = transitElement.dateObject.toLocaleTimeString();
         transitElement.angle = this.app.moon.riseSetTimes.transitAzimuth;
 
         const setElement = new RiseSetElement(this.app);
@@ -40,8 +36,6 @@ class RiseSetUi extends UiElement {
         setElement.iconSize = 64;
         setElement.header = 'Moonset';
         setElement.dateObject = this.app.moon.riseSetTimes.set;
-        setElement.date = setElement.dateObject.toLocaleDateString();
-        setElement.time = setElement.dateObject.toLocaleTimeString();
         setElement.angle = this.app.moon.riseSetTimes.setAzimuth;
 
         setElement.create();
