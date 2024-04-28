@@ -20,6 +20,9 @@ Extract and move moonphase@techi-freki to the ~/.local/share/cinnamon/applets di
 - Added LICENSE for icons
 - Updated .pot file for new translations
 
+### v0.2.12 ([#5819](https://github.com/linuxmint/cinnamon-spices-applets/pull/5819))
+- Adds Dutch translations
+
 ### v0.2.11 ([#5628](https://github.com/linuxmint/cinnamon-spices-applets/pull/5628))
 - Fixes location bug ([#5610](https://github.com/linuxmint/cinnamon-spices-applets/issues/5610))
 

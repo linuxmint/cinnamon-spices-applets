@@ -22,8 +22,8 @@ class RiseSetUi extends UiElement {
         riseElement.iconSize = 64;
         riseElement.header = 'Moonrise';
         riseElement.dateObject = this.app.moon.riseSetTimes.rise;
-        riseElement.date = this.app.moon.riseSetTimes.rise.toLocaleDateString();
-        riseElement.time = this.app.moon.riseSetTimes.rise.toLocaleTimeString();
+        riseElement.date = riseElement.dateObject.toLocaleDateString();
+        riseElement.time = riseElement.dateObject.toLocaleTimeString();
         riseElement.angle = this.app.moon.riseSetTimes.riseAzimuth;
 
         const transitElement = new RiseSetElement(this.app);
@@ -31,8 +31,8 @@ class RiseSetUi extends UiElement {
         transitElement.iconSize = 48;
         transitElement.header = 'Lunar Noon';
         transitElement.dateObject = this.app.moon.riseSetTimes.transit;
-        transitElement.date = this.app.moon.riseSetTimes.transit.toLocaleDateString();
-        transitElement.time = this.app.moon.riseSetTimes.transit.toLocaleTimeString();
+        transitElement.date = transitElement.dateObject.toLocaleDateString();
+        transitElement.time = transitElement.dateObject.toLocaleTimeString();
         transitElement.angle = this.app.moon.riseSetTimes.transitAzimuth;
 
         const setElement = new RiseSetElement(this.app);
@@ -40,23 +40,25 @@ class RiseSetUi extends UiElement {
         setElement.iconSize = 64;
         setElement.header = 'Moonset';
         setElement.dateObject = this.app.moon.riseSetTimes.set;
-        setElement.date = this.app.moon.riseSetTimes.set.toLocaleDateString();
-        setElement.time = this.app.moon.riseSetTimes.set.toLocaleTimeString();
+        setElement.date = setElement.dateObject.toLocaleDateString();
+        setElement.time = setElement.dateObject.toLocaleTimeString();
         setElement.angle = this.app.moon.riseSetTimes.setAzimuth;
 
         setElement.create();
         transitElement.create();
         riseElement.create();
 
-        let elements = [riseElement, transitElement, setElement];
-        const orderedElements = this._fixElementOrder(elements);
+        const elements = [riseElement, transitElement, setElement];
+        const orderedElements = this._orderElementsByDateAsc(elements);
+
+        // TODO: remove dates from the past and add upcoming dates
 
         orderedElements.forEach((element) => {
             this.actor.add_actor(element.actor);
         });
     }
 
-    _fixElementOrder(elements) {
+    _orderElementsByDateAsc(elements) {
         return elements.sort((a, b) => {
             return a.dateObject - b.dateObject;
         });

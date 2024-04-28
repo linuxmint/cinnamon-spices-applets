@@ -6,6 +6,7 @@ const Lang = imports.lang;
 const { Moon } = require('./js/moon');
 const { Menu } = require('./js/menu');
 const { Config } = require('./js/config');
+const { HeaderUi } = require('./js/ui/headerUi');
 const { CurrentPhaseUi } = require('./js/ui/currentPhaseUi');
 const { RiseSetUi } = require('./js/ui/riseSetUi');
 
@@ -38,15 +39,18 @@ class MoonPhase extends Applet.TextIconApplet {
 
     on_applet_load() {
         if (!this.updateLoopId) {
+            this.headerUi = new HeaderUi(this);
             this.currentPhaseUi = new CurrentPhaseUi(this);
             this.riseSetUi = new RiseSetUi(this);
 
+            this.headerUi.create();
             this.currentPhaseUi.create();
             this.riseSetUi.create();
         }
     }
 
     on_applet_clicked() {
+        // TODO: need to get this to update
         if (this.showRiseSet) {
             this.menu.toggle();
         }
@@ -72,6 +76,8 @@ class MoonPhase extends Applet.TextIconApplet {
         } else {
             this.set_applet_tooltip('');
         }
+
+        // TODO: labels settings need to be fixed
 
         if (this.showPhaseLabel) {
             this.set_applet_label(phaseLabel);
