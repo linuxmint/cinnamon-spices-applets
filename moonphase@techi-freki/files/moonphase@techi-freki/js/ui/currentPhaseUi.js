@@ -13,6 +13,7 @@ class CurrentPhaseUi extends UiElement {
     }
 
     create() {
+        // TODO: use element generator
         const parent = new BoxLayout();
         const iconParent = new BoxLayout({ style_class: 'margin-5' });
         const infoParent = new BoxLayout({ vertical: true, style_class: 'margin-5; text-align-left' });
