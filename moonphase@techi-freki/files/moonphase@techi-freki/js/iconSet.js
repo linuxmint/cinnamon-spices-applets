@@ -58,7 +58,9 @@ class IconSet {
         this.waningCrescent5 = waningCrescent5;
         this.waningCrescent6 = waningCrescent6;
         this.moonRise = `moonrise-symbolic`;
+        this.noMoonRise = `no-moonrise-symbolic`;
         this.moonSet = `moonset-symbolic`;
+        this.noMoonSet = `no-moonset-symbolic`;
         this.nightClear = `night-clear-symbolic`;
         this.directionUp = `direction-up-symbolic`;
         this.directionUpRight = `direction-up-right-symbolic`;

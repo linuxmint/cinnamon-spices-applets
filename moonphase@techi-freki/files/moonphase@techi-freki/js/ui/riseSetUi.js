@@ -1,3 +1,4 @@
+const { IconTextElementGenerator } = require('./js/ui/elements/iconTextElementGenerator');
 const { margin5 } = require('./js/ui/styles');
 const { UiElement } = require('./js/ui/elements/uiElement');
 const { RiseSetElement } = require('./js/ui/elements/riseSetElement');
@@ -12,21 +13,48 @@ class RiseSetUi extends UiElement {
             x_align: ActorAlign.CENTER,
             y_align: Align.MIDDLE
         });
+        this.alwaysUp = this.app.moon.riseSetTimes.alwaysUp;
+        this.alwaysDown = this.app.moon.riseSetTimes.alwaysDown;
+        this.elementGenerator = new IconTextElementGenerator();
     }
 
     create() {
-        const alwaysUp = this.app.moon.riseSetTimes.alwaysUp;
-        const alwaysDown = this.app.moon.riseSetTimes.alwaysDown;
+        // if (this.alwaysUp || this.alwaysDown) {
+        //     this._createNoRiseSetLayout();
+        // } else {
+        //     this._createStandardLayout();
+        // }
 
-        if (alwaysUp || alwaysDown) {
-            this._createNoRiseSetLayout();
-        } else {
-            this._createStandardLayout();
-        }
+        this._createStandardLayout();
+        this._createNoRiseLayout();
+        this._createNoSetLayout();
+
+        // TODO: style new elements properly
+        // TODO: add next setting/next rising
     }
 
     _createNoRiseSetLayout() {
+        if (this.alwaysUp) {
+            this._createNoSetLayout();
+        } else if (this.alwaysDown) {
+            this._createNoRiseLayout();
+        }
+    }
 
+    _createNoRiseLayout() {
+        const label = this.elementGenerator.generateLabel('The moon does not rise today');
+        const layout = this.elementGenerator.generateLayout([label], false);
+        const element = this.elementGenerator.generateElement(this.app.moon.iconSet.noMoonRise, 48, [layout]);
+
+        this.actor.add_actor(element);
+    }
+
+    _createNoSetLayout() {
+        const label = this.elementGenerator.generateLabel('The moon does not set today');
+        const layout = this.elementGenerator.generateLayout([label], false);
+        const element = this.elementGenerator.generateElement(this.app.moon.iconSet.noMoonSet, 48, [layout]);
+
+        this.actor.add_actor(element);
     }
 
     _createStandardLayout() {
