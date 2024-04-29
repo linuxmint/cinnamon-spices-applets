@@ -1,4 +1,4 @@
-const { padding15 } = require('./js/ui/styles');
+const { margin5 } = require('./js/ui/styles');
 const { UiElement } = require('./js/ui/elements/uiElement');
 const { RiseSetElement } = require('./js/ui/elements/riseSetElement');
 const { Align, BoxLayout } = imports.gi.St;
@@ -8,13 +8,28 @@ class RiseSetUi extends UiElement {
     constructor(app) {
         super(app);
         this.actor = new BoxLayout({
-            style_class: padding15,
+            style_class: margin5,
             x_align: ActorAlign.CENTER,
             y_align: Align.MIDDLE
         });
     }
 
     create() {
+        const alwaysUp = this.app.moon.riseSetTimes.alwaysUp;
+        const alwaysDown = this.app.moon.riseSetTimes.alwaysDown;
+
+        if (alwaysUp || alwaysDown) {
+            this._createNoRiseSetLayout();
+        } else {
+            this._createStandardLayout();
+        }
+    }
+
+    _createNoRiseSetLayout() {
+
+    }
+
+    _createStandardLayout() {
         // TODO: Handle alwaysUp, alwaysDown
         // TODO: Handle whether rise and set times are to be displayed
 
