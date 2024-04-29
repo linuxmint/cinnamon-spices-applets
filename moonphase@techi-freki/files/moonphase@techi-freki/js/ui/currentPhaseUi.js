@@ -1,7 +1,7 @@
 const { Align, BoxLayout } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 const { UiElement } = require('./js/ui/elements/uiElement');
-const { ElementGenerator } = require('./js/ui/elements/elementGenerator');
+const { IconTextElementGenerator } = require('./js/ui/elements/iconTextElementGenerator');
 
 class CurrentPhaseUi extends UiElement {
     constructor (app) {
@@ -11,7 +11,7 @@ class CurrentPhaseUi extends UiElement {
             x_align: ActorAlign.CENTER,
             y_align: Align.MIDDLE
         });
-        this.elementGenerator = new ElementGenerator();
+        this.elementGenerator = new IconTextElementGenerator();
     }
 
     create() {

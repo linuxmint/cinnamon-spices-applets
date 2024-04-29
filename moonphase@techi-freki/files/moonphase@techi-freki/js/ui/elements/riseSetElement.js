@@ -1,12 +1,12 @@
 const { UiElement } = require('./js/ui/elements/uiElement');
-const { ElementGenerator } = require('./js/ui/elements/elementGenerator');
+const { IconTextElementGenerator } = require('./js/ui/elements/iconTextElementGenerator');
 const { Compass } = require('./js/compass');
 
 class RiseSetElement extends UiElement {
     constructor(app) {
         super(app);
         this.compass = new Compass(this.app);
-        this.elementGenerator = new ElementGenerator();
+        this.elementGenerator = new IconTextElementGenerator();
         this.iconName = null;
         this.iconSize = 0;
         this.header = null;
