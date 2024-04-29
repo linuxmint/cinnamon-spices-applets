@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-24 12:38+0200\n"
+"POT-Creation-Date: 2024-04-29 14:48+0200\n"
 "PO-Revision-Date: 2024-02-27 18:48+0100\n"
 "Last-Translator: Vajda Örs <ors0092@gmail.com>\n"
 "Language-Team: \n"
@@ -213,12 +213,9 @@ msgid "Sound 150%"
 msgstr "Hang 150%"
 
 #. metadata.json->description
-msgid ""
-"An applet, based on the Cinnamon one, to control sound (up to 150% of "
-"nominal volume) and music"
-msgstr ""
-"A Cinnamon-ban található kisalkalmazáson alapuló (hagyományos hangerő 150 "
-"százalékáig működő) hangerőszabályzó és zenevezérlő"
+#, fuzzy
+msgid "Enhanced sound applet"
+msgstr "Kisalkalmazás újratöltése"
 
 #. 4.6->settings-schema.json->section1->description
 #. 3.4->settings-schema.json->section1->description

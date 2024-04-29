@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sound150@claudiux 6.10.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-24 12:38+0200\n"
+"POT-Creation-Date: 2024-04-29 14:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -210,9 +210,7 @@ msgid "Sound 150%"
 msgstr ""
 
 #. metadata.json->description
-msgid ""
-"An applet, based on the Cinnamon one, to control sound (up to 150% of "
-"nominal volume) and music"
+msgid "Enhanced sound applet"
 msgstr ""
 
 #. 4.6->settings-schema.json->section1->description
