@@ -1,3 +1,4 @@
+const { padding15 } = require('./js/ui/styles');
 const { UiElement } = require('./js/ui/elements/uiElement');
 const { RiseSetElement } = require('./js/ui/elements/riseSetElement');
 const { Align, BoxLayout } = imports.gi.St;
@@ -7,7 +8,7 @@ class RiseSetUi extends UiElement {
     constructor(app) {
         super(app);
         this.actor = new BoxLayout({
-            style_class: 'padding-15',
+            style_class: padding15,
             x_align: ActorAlign.CENTER,
             y_align: Align.MIDDLE
         });
@@ -45,7 +46,7 @@ class RiseSetUi extends UiElement {
         const elements = [riseElement, transitElement, setElement];
         const orderedElements = this._orderElementsByDateAsc(elements);
 
-        // TODO: remove dates from the past and add upcoming dates
+        // TODO: remove dates from the past and add upcoming dates?
 
         orderedElements.forEach((element) => {
             this.actor.add_actor(element.actor);

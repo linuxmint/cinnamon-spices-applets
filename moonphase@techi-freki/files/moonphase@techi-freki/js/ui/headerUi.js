@@ -1,3 +1,4 @@
+const { marginBottom5 } = require('./js/ui/styles');
 const { BoxLayout } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 const { UiElement } = require('./js/ui/elements/uiElement');
@@ -8,7 +9,7 @@ class HeaderUi extends UiElement {
         super(app);
         this.actor = new BoxLayout({
             x_align: ActorAlign.CENTER,
-            style_class: 'margin-bottom-5'
+            style_class: marginBottom5
         });
         this.elementGenerator = new IconTextElementGenerator();
     }
