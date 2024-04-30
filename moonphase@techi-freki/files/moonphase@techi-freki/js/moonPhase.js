@@ -6,9 +6,6 @@ const Lang = imports.lang;
 const { Moon } = require('./js/moon');
 const { Menu } = require('./js/menu');
 const { Config } = require('./js/config');
-const { HeaderUi } = require('./js/ui/headerUi');
-const { CurrentPhaseUi } = require('./js/ui/currentPhaseUi');
-const { RiseSetUi } = require('./js/ui/riseSetUi');
 
 class MoonPhase extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -20,13 +17,8 @@ class MoonPhase extends Applet.TextIconApplet {
         this.orientation = orientation;
         this.config = new Config(this);
         this.config.bindSettings();
-        this.menuManager = new PopupMenuManager(this);
-        this.menu = new Applet.AppletPopupMenu(this, this.orientation);
-        this.menuManager.addMenu(this.menu);
-
         this.moon = new Moon(this);
 
-        this.buildPopupMenu();
         this.updateApplet();
     }
 
@@ -37,22 +29,17 @@ class MoonPhase extends Applet.TextIconApplet {
         this.settings.finalize();
     }
 
-    on_applet_load() {
-        if (!this.updateLoopId) {
-            this.headerUi = new HeaderUi(this);
-            this.currentPhaseUi = new CurrentPhaseUi(this);
-            this.riseSetUi = new RiseSetUi(this);
-
-            this.headerUi.create();
-            this.currentPhaseUi.create();
-            this.riseSetUi.create();
-        }
-    }
-
     on_applet_clicked() {
-        // TODO: need to get this to update
-        if (this.showRiseSet) {
+        if (this.popupOpen) {
             this.menu.toggle();
+            this.popupOpen = false;
+        } else {
+            this.menuManager = new PopupMenuManager(this);
+            this.menu = new Applet.AppletPopupMenu(this, this.orientation);
+            this.menuManager.addMenu(this.menu);
+            this.buildPopupMenu();
+            this.menu.toggle();
+            this.popupOpen = true;
         }
     }
 

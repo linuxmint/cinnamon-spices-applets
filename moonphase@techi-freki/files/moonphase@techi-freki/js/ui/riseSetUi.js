@@ -57,8 +57,6 @@ class RiseSetUi extends UiElement {
     }
 
     _createStandardLayout() {
-        // TODO: Handle whether rise and set times are to be displayed
-
         const riseElement = new RiseSetElement(this.app);
         riseElement.iconName = this.app.moon.iconSet.moonRise;
         riseElement.iconSize = 64;
