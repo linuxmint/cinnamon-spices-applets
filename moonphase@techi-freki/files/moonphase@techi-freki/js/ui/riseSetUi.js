@@ -2,7 +2,8 @@ const { IconTextElementGenerator } = require('./js/ui/elements/iconTextElementGe
 const { margin5 } = require('./js/ui/styles');
 const { UiElement } = require('./js/ui/elements/uiElement');
 const { RiseSetElement } = require('./js/ui/elements/riseSetElement');
-const { Align, BoxLayout } = imports.gi.St;
+const { NoRiseSetElement } = require('./js/ui/elements/noRiseSetElement');
+const { Align, BoxLayout, Label } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 
 class RiseSetUi extends UiElement {
@@ -19,18 +20,11 @@ class RiseSetUi extends UiElement {
     }
 
     create() {
-        // if (this.alwaysUp || this.alwaysDown) {
-        //     this._createNoRiseSetLayout();
-        // } else {
-        //     this._createStandardLayout();
-        // }
-
-        this._createStandardLayout();
-        this._createNoRiseLayout();
-        this._createNoSetLayout();
-
-        // TODO: style new elements properly
-        // TODO: add next setting/next rising
+        if (this.alwaysUp || this.alwaysDown) {
+            this._createNoRiseSetLayout();
+        } else {
+            this._createStandardLayout();
+        }
     }
 
     _createNoRiseSetLayout() {
@@ -42,23 +36,27 @@ class RiseSetUi extends UiElement {
     }
 
     _createNoRiseLayout() {
-        const label = this.elementGenerator.generateLabel('The moon does not rise today');
-        const layout = this.elementGenerator.generateLayout([label], false);
-        const element = this.elementGenerator.generateElement(this.app.moon.iconSet.noMoonRise, 48, [layout]);
+        const noRiseElement = new NoRiseSetElement(this.app);
+        noRiseElement.iconName = this.app.moon.iconSet.noMoonRise;
+        noRiseElement.iconSize = 64;
+        noRiseElement.label = 'The moon is always down and will not rise today';
+        noRiseElement.create();
 
-        this.actor.add_actor(element);
+        this.actor.add_actor(noRiseElement.actor);
     }
 
     _createNoSetLayout() {
-        const label = this.elementGenerator.generateLabel('The moon does not set today');
-        const layout = this.elementGenerator.generateLayout([label], false);
-        const element = this.elementGenerator.generateElement(this.app.moon.iconSet.noMoonSet, 48, [layout]);
+        const noSetElement = new NoRiseSetElement(this.app);
+        noSetElement.iconName = this.app.moon.iconSet.noMoonSet;
+        noSetElement.iconSize = 64;
+        noSetElement.label = 'The moon is always up and will not set today.'
+        noSetElement.moonRise = false;
+        noSetElement.create();
 
-        this.actor.add_actor(element);
+        this.actor.add_actor(noSetElement.actor);
     }
 
     _createStandardLayout() {
-        // TODO: Handle alwaysUp, alwaysDown
         // TODO: Handle whether rise and set times are to be displayed
 
         const riseElement = new RiseSetElement(this.app);
@@ -88,8 +86,6 @@ class RiseSetUi extends UiElement {
 
         const elements = [riseElement, transitElement, setElement];
         const orderedElements = this._orderElementsByDateAsc(elements);
-
-        // TODO: remove dates from the past and add upcoming dates?
 
         orderedElements.forEach((element) => {
             this.actor.add_actor(element.actor);

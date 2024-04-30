@@ -1,12 +1,12 @@
 const SunCalc = require('./lib/suncalc3.js');
 
 class Calculator {
-    constructor(lat, lon) {
-        this.today = new Date();
+    constructor(lat, lon, date = new Date()) {
+        this.moonDate = date;
         this.observerLat = Number(lat);
         this.observerLon = Number(lon);
-        this.moonData = SunCalc.getMoonData(this.today, this.observerLat, this.observerLon);
-        this.times = SunCalc.getMoonTimes(this.today, this.observerLat, this.observerLon);
+        this.moonData = SunCalc.getMoonData(this.moonDate, this.observerLat, this.observerLon);
+        this.times = SunCalc.getMoonTimes(this.moonDate, this.observerLat, this.observerLon);
         this.transit = SunCalc.moonTransit(this.times.rise, this.times.set, this.observerLat, this.observerLon).main;
     }
 
@@ -16,7 +16,7 @@ class Calculator {
 
     getRiseSetTimes() {
         const rise = isNaN(this.times.rise) ? null : this.times.rise;
-        let set = isNaN(this.times.set) ? null : this.times.set;
+        const set = isNaN(this.times.set) ? null : this.times.set;
 
         return {
             rise,
