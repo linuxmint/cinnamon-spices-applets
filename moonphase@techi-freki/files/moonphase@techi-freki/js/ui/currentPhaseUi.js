@@ -1,4 +1,4 @@
-const { paddingTop5Strict, margin5, marginBottom5, textAlignLeft } = require('./js/ui/styles');
+const { paddingTop5Strict, margin5, textAlignLeft } = require('./js/ui/styles');
 const { Align, BoxLayout } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 const { UiElement } = require('./js/ui/elements/uiElement');
@@ -16,6 +16,7 @@ class CurrentPhaseUi extends UiElement {
     }
 
     create() {
+        if (!this.app.showCurrentPhaseInfo) return;
         const illumLabel = this.elementGenerator.generateLabel(`${ Math.floor(this.app.moon.illumination.fraction * 100 * 100) / 100 }% illumination`);
         const illumLayout = this.elementGenerator.generateLayout([illumLabel], false);
 

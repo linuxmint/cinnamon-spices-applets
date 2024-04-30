@@ -20,9 +20,10 @@
       "title": "Geolocation Settings",
       "keys": [
         "enableGeolocation",
-        "geolocationLabel",
         "latitude",
         "longitude",
+        "enablePopup",
+        "showCurrentPhaseInfo",
         "showRiseSet"
       ]
     },
@@ -54,12 +55,6 @@
     "default": false,
     "description": "Enable geolocation features"
   },
-
-  "geolocationLabel": {
-    "type": "label",
-    "description": "(Defaults to New York, NY)",
-    "dependency": "enableGeolocation"
-  },
   "latitude": {
     "type": "entry",
     "default": "40.730610",
@@ -72,11 +67,23 @@
     "description": "Longitude",
     "dependency": "enableGeolocation"
   },
+  "enablePopup": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable popup menu",
+    "dependency": "enableGeolocation"
+  },
+  "showCurrentPhaseInfo": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Display the current phase information",
+    "dependency": "enablePopup"
+  },
   "showRiseSet": {
     "type": "checkbox",
     "default": false,
-    "description": "Display the moon rise, transit, and set times on click",
-    "dependency": "enableGeolocation"
+    "description": "Display the moon rise, transit, and set times",
+    "dependency": "enablePopup"
   },
   "showPhaseLabel": {
     "type": "checkbox",

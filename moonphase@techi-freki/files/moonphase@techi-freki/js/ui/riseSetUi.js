@@ -20,6 +20,7 @@ class RiseSetUi extends UiElement {
     }
 
     create() {
+        if (!this.app.showRiseSet) return;
         if (this.alwaysUp || this.alwaysDown) {
             this._createNoRiseSetLayout();
         } else {
