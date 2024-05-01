@@ -2,12 +2,14 @@ import { Logger } from "./lib/logger";
 import { WeatherApplet } from "./main";
 import { LocationData, RefreshState } from "./types";
 import { _, delay, Guid } from "./utils";
+const { NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 
 /** Stores applet instance's ID's globally,
  * Checked to make sure that instance is
  * running for one applet ID
  */
 var weatherAppletGUIDs: GUIDStore = {};
+
 
 export interface RefreshOptions {
 	/** default false */
@@ -53,11 +55,16 @@ export class WeatherLoop {
 		return this.refreshing;
 	}
 
+	private get Online(): boolean {
+		return NetworkMonitor.get_default().connectivity != NetworkConnectivity.LOCAL;
+	}
+
 	constructor(app: WeatherApplet, instanceID: number) {
 		this.app = app;
 		this.instanceID = instanceID;
 		this.GUID = Guid();
 		weatherAppletGUIDs[instanceID] = this.GUID;
+		NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
 	}
 
 	public IsDataTooOld(): boolean {
@@ -66,6 +73,25 @@ export class WeatherLoop {
 		// If data is at least twice as old as refreshInterval, return true
 		oldDate.setMinutes(oldDate.getMinutes() + (this.app.config._refreshInterval * 2));
 		return (this.lastUpdated > oldDate);
+	}
+
+	private OnNetworkConnectivityChanged = () => {
+		switch (NetworkMonitor.get_default().connectivity) {
+			case NetworkConnectivity.FULL:
+			case NetworkConnectivity.LIMITED:
+			case NetworkConnectivity.PORTAL:
+				const name =
+					NetworkMonitor.get_default().connectivity == NetworkConnectivity.FULL ? "FULL" :
+					NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
+					: "PORTAL";
+
+				Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, initiating refresh.`);
+				this.DoCheck();
+				break;
+			case NetworkConnectivity.LOCAL:
+				Logger.Info(`Internet access now down with "${NetworkMonitor.get_default().connectivity}".`);
+				break;
+		}
 	}
 
 	/** Main loop */
@@ -89,9 +115,16 @@ export class WeatherLoop {
 			immediate = true
 		} = options;
 
-		// We are in the middle of an update, just skip
-		if (this.runningRefresh && !immediate)
+		if (!this.Online) {
+			Logger.Info("No network connection, skipping this cycle.");
 			return;
+		}
+
+		// We are in the middle of an update, just skip
+		if (this.runningRefresh && !immediate) {
+			Logger.Debug("Refresh in progress and this request is not forced, skipping cycle.")
+			return;
+		}
 
 		try {
 			this.runningRefresh?.cancel();
@@ -150,6 +183,7 @@ export class WeatherLoop {
 					break;
 				case RefreshState.NoKey:
 					Logger.Error("No API Key given");
+					this.Pause();
 					this.app.ShowError({
 						type: "hard",
 						userError: true,
@@ -183,6 +217,7 @@ export class WeatherLoop {
 
 	public Resume(): void {
 		this.pauseRefresh = false;
+		this.DoCheck({immediate: true});
 	}
 
 	/**

@@ -16126,12 +16126,16 @@ const Keys = {
 ;// CONCATENATED MODULE: ./src/3_8/loop.ts
 
 
+const { NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 var weatherAppletGUIDs = {};
 class WeatherLoop {
     get Refreshing() {
         if (this.refreshing == null)
             return Promise.resolve();
         return this.refreshing;
+    }
+    get Online() {
+        return NetworkMonitor.get_default().connectivity != NetworkConnectivity.LOCAL;
     }
     constructor(app, instanceID) {
         this.lastUpdated = new Date(0);
@@ -16142,14 +16146,36 @@ class WeatherLoop {
         this.runningRefresh = null;
         this.refreshingResolver = null;
         this.refreshing = null;
+        this.OnNetworkConnectivityChanged = () => {
+            switch (NetworkMonitor.get_default().connectivity) {
+                case NetworkConnectivity.FULL:
+                case NetworkConnectivity.LIMITED:
+                case NetworkConnectivity.PORTAL:
+                    const name = NetworkMonitor.get_default().connectivity == NetworkConnectivity.FULL ? "FULL" :
+                        NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
+                            : "PORTAL";
+                    logger_Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, initiating refresh.`);
+                    this.DoCheck();
+                    break;
+                case NetworkConnectivity.LOCAL:
+                    logger_Logger.Info(`Internet access now down with "${NetworkMonitor.get_default().connectivity}".`);
+                    break;
+            }
+        };
         this.DoCheck = async (options = {}) => {
             var _a, _b;
             logger_Logger.Debug("Main loop check started.");
             if (this.IsStray())
                 return;
             const { rebuild = false, location = null, immediate = true } = options;
-            if (this.runningRefresh && !immediate)
+            if (!this.Online) {
+                logger_Logger.Info("No network connection, skipping this cycle.");
                 return;
+            }
+            if (this.runningRefresh && !immediate) {
+                logger_Logger.Debug("Refresh in progress and this request is not forced, skipping cycle.");
+                return;
+            }
             try {
                 (_a = this.runningRefresh) === null || _a === void 0 ? void 0 : _a.cancel();
                 this.runningRefresh = new imports.gi.Gio.Cancellable();
@@ -16199,6 +16225,7 @@ class WeatherLoop {
                         break;
                     case "no key":
                         logger_Logger.Error("No API Key given");
+                        this.Pause();
                         this.app.ShowError({
                             type: "hard",
                             userError: true,
@@ -16222,6 +16249,7 @@ class WeatherLoop {
         this.instanceID = instanceID;
         this.GUID = Guid();
         weatherAppletGUIDs[instanceID] = this.GUID;
+        NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
     }
     IsDataTooOld() {
         if (!this.lastUpdated)
@@ -16247,6 +16275,7 @@ class WeatherLoop {
     }
     Resume() {
         this.pauseRefresh = false;
+        this.DoCheck({ immediate: true });
     }
     async Refresh(options) {
         this.pauseRefresh = false;
@@ -17765,7 +17794,7 @@ class UI {
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
-const { File: main_File, NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
+const { File: main_File, NetworkMonitor: main_NetworkMonitor, NetworkConnectivity: main_NetworkConnectivity } = imports.gi.Gio;
 const { TimeZone: main_TimeZone } = imports.gi.GLib;
 class WeatherApplet extends TextIconApplet {
     get CurrentData() {
@@ -17782,30 +17811,6 @@ class WeatherApplet extends TextIconApplet {
         this.currentWeatherInfo = null;
         this.encounteredError = false;
         this.online = null;
-        this.OnNetworkConnectivityChanged = () => {
-            switch (NetworkMonitor.get_default().connectivity) {
-                case NetworkConnectivity.FULL:
-                case NetworkConnectivity.LIMITED:
-                case NetworkConnectivity.PORTAL:
-                    if (this.online === true)
-                        break;
-                    const name = NetworkMonitor.get_default().connectivity == NetworkConnectivity.FULL ? "FULL" :
-                        NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
-                            : "PORTAL";
-                    logger_Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, resuming operations.`);
-                    this.encounteredError = false;
-                    this.loop.Refresh();
-                    this.online = true;
-                    break;
-                case NetworkConnectivity.LOCAL:
-                    if (this.online === false)
-                        break;
-                    logger_Logger.Info(`Internet access now down with "${NetworkMonitor.get_default().connectivity}", pausing refresh.`);
-                    this.loop.Pause();
-                    this.online = false;
-                    break;
-            }
-        };
         this.onSettingNeedsRebuild = (conf, changedData, data) => {
             if (this.Provider == null)
                 return;
@@ -17903,11 +17908,6 @@ class WeatherApplet extends TextIconApplet {
             this.setAllowedLayout(AllowedLayout.BOTH);
         }
         catch (e) {
-        }
-        NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
-        const offline = NetworkMonitor.get_default().connectivity == NetworkConnectivity.LOCAL;
-        if (offline) {
-            this.loop.Pause();
         }
         this.loop.Start();
         this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({ rebuild: true }));

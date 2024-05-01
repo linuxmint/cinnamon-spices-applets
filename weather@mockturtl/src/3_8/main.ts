@@ -87,13 +87,6 @@ export class WeatherApplet extends TextIconApplet {
 			// vertical panel not supported
 		}
 
-		// Network connectivity check and loop setup
-		NetworkMonitor.get_default().connect("notify::connectivity", this.OnNetworkConnectivityChanged);
-		const offline = NetworkMonitor.get_default().connectivity == NetworkConnectivity.LOCAL;
-		if (offline) {
-			// We start paused
-			this.loop.Pause();
-		}
 		this.loop.Start();
 		// We need a full rebuild and refresh for these
 		this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({rebuild: true}));
@@ -130,34 +123,6 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
 
 		this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
-	}
-
-	private OnNetworkConnectivityChanged = () => {
-		switch (NetworkMonitor.get_default().connectivity) {
-			case NetworkConnectivity.FULL:
-			case NetworkConnectivity.LIMITED:
-			case NetworkConnectivity.PORTAL:
-				if (this.online === true)
-					break;
-
-				const name =
-					NetworkMonitor.get_default().connectivity == NetworkConnectivity.FULL ? "FULL" :
-					NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
-					: "PORTAL";
-
-				Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, resuming operations.`);
-				this.encounteredError = false;
-				this.loop.Refresh();
-				this.online = true;
-				break;
-			case NetworkConnectivity.LOCAL:
-				if (this.online === false)
-					break;
-				Logger.Info(`Internet access now down with "${NetworkMonitor.get_default().connectivity}", pausing refresh.`);
-				this.loop.Pause();
-				this.online = false;
-				break;
-		}
 	}
 
 	private onSettingNeedsRebuild = (conf: Config, changedData: any, data: WeatherData) => {
