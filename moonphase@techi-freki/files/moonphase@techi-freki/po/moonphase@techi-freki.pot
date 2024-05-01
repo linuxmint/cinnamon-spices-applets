@@ -17,8 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# TODO: Double check this for accuracy, update and add new entries
-
 #: js/moon.js:22 js/moon.js:30
 msgid "New Moon"
 msgstr ""
