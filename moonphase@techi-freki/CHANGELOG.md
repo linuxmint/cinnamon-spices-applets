@@ -4,11 +4,11 @@
 - Feature add: Added geolocation features
 - Feature add: Added moon rise, set, and transit times on left click
 - Feature add: Added current moon phase information on left click
-- Swapped out [SunCalc](https://github.com/mourner/suncalc) for [SunCalc3](https://github.com/hypnos3/suncalc3) for geolocation features
-- Heavily refactored and cleaned up code base
-- Cleaned up versioning (major/minor/patch)
-- Added LICENSE for icons
-- Updated .pot file for new translations
+- Swaps out [SunCalc](https://github.com/mourner/suncalc) for [SunCalc3](https://github.com/hypnos3/suncalc3) for geolocation features
+- Heavily refactors and cleans up code base
+- Cleans up versioning (major/minor/patch)
+- Adds LICENSE for icons
+- Updates .pot file for new translations
 
 ### v0.2.12 ([#5819](https://github.com/linuxmint/cinnamon-spices-applets/pull/5819))
 - Adds Dutch translations
