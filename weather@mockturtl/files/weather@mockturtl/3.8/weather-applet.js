@@ -16163,7 +16163,7 @@ class WeatherLoop {
             }
         };
         this.DoCheck = async (options = {}) => {
-            var _a, _b;
+            var _a, _b, _c;
             logger_Logger.Debug("Main loop check started.");
             if (this.IsStray())
                 return;
@@ -16242,6 +16242,7 @@ class WeatherLoop {
             finally {
                 (_b = this.refreshingResolver) === null || _b === void 0 ? void 0 : _b.call(this);
                 this.refreshingResolver = null;
+                (_c = this.runningRefresh) === null || _c === void 0 ? void 0 : _c.cancel();
                 this.runningRefresh = null;
             }
         };

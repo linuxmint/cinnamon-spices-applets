@@ -201,6 +201,7 @@ export class WeatherLoop {
 		finally {
 			this.refreshingResolver?.();
 			this.refreshingResolver = null;
+			this.runningRefresh?.cancel();
 			this.runningRefresh = null;
 		}
 	}
