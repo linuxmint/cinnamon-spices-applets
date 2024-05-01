@@ -184,7 +184,7 @@ by making a PR (pull request) on Github or contact the current maintainer of the
 
 * Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location with some of the weather providers
 
-* DarkSky verbose conditions are only in cm/Celsius or in/Fahrenheit
+* On subsequent refreshes/relogins the popup menu's element's lose all padding.
 
 ### Report a new issue
 
