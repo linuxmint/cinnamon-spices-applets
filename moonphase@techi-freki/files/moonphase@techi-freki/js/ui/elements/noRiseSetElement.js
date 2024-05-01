@@ -8,7 +8,6 @@ const { Translator } = require('./js/translator');
 class NoRiseSetElement extends UiElement {
     constructor(app) {
         super(app);
-
         const calc = new Calculator(this.app.latitude, this.app.longitude, this._addDays(new Date(), 1));
 
         this.elementGenerator = new IconTextElementGenerator();
@@ -24,7 +23,12 @@ class NoRiseSetElement extends UiElement {
         const icon = this.elementGenerator.generateIcon(this.iconName, this.iconSize);
         const label = this.elementGenerator.generateLabel(this.label, margin5);
         const layout = this.elementGenerator.generateLayout([icon, label], true, margin5);
-        const rootLayout = this.elementGenerator.generateLayout([layout, this.moonRise ? this._createRiseElement() : this._createSetElement()], false, margin5);
+        const rootLayout = this.elementGenerator.generateLayout([
+            layout,
+            this.moonRise
+            ? this._createRiseElement()
+            : this._createSetElement()
+        ], false, margin5);
 
         this.actor.add_actor(rootLayout);
     }

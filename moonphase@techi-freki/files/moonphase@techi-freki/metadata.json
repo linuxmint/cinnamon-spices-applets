@@ -4,6 +4,5 @@
   "description": "A Cinnamon applet that displays up-to-date moon related information.",
   "version": "1.0.0",
   "max-instances": 1,
-  "author": "Techi Freki",
-  "email": "techifreki@proton.me"
+  "author": "Techi Freki"
 }

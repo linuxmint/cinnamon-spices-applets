@@ -17,7 +17,6 @@ class Moon {
     _getCurrentPhaseName() {
         let name = "";
         const age = this.age / 28;
-        const percent = `${ Math.floor((this.illumination.fraction * 100) * 100) / 100 }%`;
 
         if (age === 0) name = this.translator.translate('New Moon');
         else if (age < 0.25) name = this.translator.translate('Waxing Crescent');

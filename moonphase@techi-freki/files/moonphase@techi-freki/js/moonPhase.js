@@ -30,7 +30,6 @@ class MoonPhase extends Applet.TextIconApplet {
     }
 
     on_applet_clicked() {
-
         if (!this.enablePopup) return;
         if (!this.showCurrentPhaseInfo && !this.showRiseSet) return;
 
@@ -78,18 +77,18 @@ class MoonPhase extends Applet.TextIconApplet {
     }
 
     _createPhaseLabel(showNameLabel, showPercentageLabel) {
-        const percent  = Math.floor(this.moon.illumination.fraction * 100 * 100) / 100;
-        if (showNameLabel && showPercentageLabel) return `${ this.moon.currentPhaseName } (${ percent }%)`;
-        if (showNameLabel) return `${ this.moon.currentPhaseName }`;
-        if (showPercentageLabel) return `${ percent }%`
-        return this.metadata.name;
+        return this._createAppletDisplay(showNameLabel, showPercentageLabel);
     }
 
     _createPhaseTooltip(showPhaseTooltip, showPercentageTooltip) {
+        return this._createAppletDisplay(showPhaseTooltip, showPercentageTooltip);
+    }
+
+    _createAppletDisplay(showName, showPercentage) {
         const percent = Math.floor(this.moon.illumination.fraction * 100 * 100) / 100;
-        if (showPhaseTooltip && showPercentageTooltip) return `${ this.moon.currentPhaseName } (${ percent }%)`;
-        if (showPhaseTooltip) return `${ this.moon.currentPhaseName }`;
-        if (showPercentageTooltip) return `${ percent }%`;
+        if (showName && showPercentage) return `${ this.moon.currentPhaseName } (${ percent }%)`;
+        if (showName) return `${ this.moon.currentPhaseName }`;
+        if (showPercentage) return `${ percent }%`;
         return this.metadata.name;
     }
 }
