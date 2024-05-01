@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.3
+
+* Don't close then reopen an existing thumbnail menu when the mouse hover moves between different buttons in the same application pool (as long as the menu does have an item for the currently hovered button's window). This removes the useless thumbnail menu close then open sequence when using the application pooling behaviour.
+* Print hotkeys in a pretty way for the button context menus "Assign window to a kotkey" submenu list.
+* Minor fixes and optimizations
+
 ## 2.0.2
 
 * Prevent the Thumbnail menu from grabbing the focus. This prevents odd cursor key behaviour and it allow the workspace hotkeys to work when the Thumbnail menu is open.
