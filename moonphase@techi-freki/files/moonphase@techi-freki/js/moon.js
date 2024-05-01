@@ -1,10 +1,12 @@
 const { DefaultIconSet, AltIconSet } = require('./js/iconSet');
 const { Calculator } = require('./js/calc');
+const { Translator } = require('./js/translator');
 
 class Moon {
     constructor(app) {
         this.app = app;
         this.calc = new Calculator(app.latitude, app.longitude);
+        this.translator = new Translator(this.app.metadata.uuid);
         this.illumination = this.calc.getMoonIllumination();
         this.age = Math.trunc(this.illumination.phaseValue * 28);
         this.iconSet = app.useAltIcons ? new AltIconSet() : new DefaultIconSet();
@@ -17,15 +19,15 @@ class Moon {
         const age = this.age / 28;
         const percent = `${ Math.floor((this.illumination.fraction * 100) * 100) / 100 }%`;
 
-        if (age === 0) name = 'New Moon';
-        else if (age < 0.25) name = 'Waxing Crescent';
-        else if (age === 0.25) name = 'First Quarter';
-        else if (age < 0.5) name = 'Waxing Gibbous';
-        else if (age === 0.5) name = 'Full Moon';
-        else if (age < 0.75) name = 'Waning Gibbous';
-        else if (age === 0.75) name = 'Last Quarter';
-        else if (age <= 1) name = 'Waning Crescent';
-        else name = 'New Moon';
+        if (age === 0) name = this.translator.translate('New Moon');
+        else if (age < 0.25) name = this.translator.translate('Waxing Crescent');
+        else if (age === 0.25) name = this.translator.translate('First Quarter');
+        else if (age < 0.5) name = this.translator.translate('Waxing Gibbous');
+        else if (age === 0.5) name = this.translator.translate('Full Moon');
+        else if (age < 0.75) name = this.translator.translate('Waning Gibbous');
+        else if (age === 0.75) name = this.translator.translate('Last Quarter');
+        else if (age <= 1) name = this.translator.translate('Waning Crescent');
+        else name = this.translator.translate('New Moon');
 
         return name;
     }

@@ -82,7 +82,7 @@ class MoonPhase extends Applet.TextIconApplet {
         if (showNameLabel && showPercentageLabel) return `${ this.moon.currentPhaseName } (${ percent }%)`;
         if (showNameLabel) return `${ this.moon.currentPhaseName }`;
         if (showPercentageLabel) return `${ percent }%`
-        return 'Moon Phase';
+        return this.metadata.name;
     }
 
     _createPhaseTooltip(showPhaseTooltip, showPercentageTooltip) {
@@ -90,6 +90,6 @@ class MoonPhase extends Applet.TextIconApplet {
         if (showPhaseTooltip && showPercentageTooltip) return `${ this.moon.currentPhaseName } (${ percent }%)`;
         if (showPhaseTooltip) return `${ this.moon.currentPhaseName }`;
         if (showPercentageTooltip) return `${ percent }%`;
-        return 'Moon Phase';
+        return this.metadata.name;
     }
 }

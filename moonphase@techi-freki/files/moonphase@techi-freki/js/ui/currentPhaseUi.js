@@ -3,6 +3,7 @@ const { Align, BoxLayout } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 const { UiElement } = require('./js/ui/elements/uiElement');
 const { IconTextElementGenerator } = require('./js/ui/elements/iconTextElementGenerator');
+const { Translator } = require('./js/translator');
 
 class CurrentPhaseUi extends UiElement {
     constructor (app) {
@@ -13,11 +14,12 @@ class CurrentPhaseUi extends UiElement {
             y_align: Align.MIDDLE
         });
         this.elementGenerator = new IconTextElementGenerator();
+        this.translator = new Translator(this.app.metadata.uuid);
     }
 
     create() {
         if (!this.app.showCurrentPhaseInfo) return;
-        const illumLabel = this.elementGenerator.generateLabel(`${ Math.floor(this.app.moon.illumination.fraction * 100 * 100) / 100 }% illumination`);
+        const illumLabel = this.elementGenerator.generateLabel(`${ Math.floor(this.app.moon.illumination.fraction * 100 * 100) / 100 }%` + this.translator.translate('illumination'));
         const illumLayout = this.elementGenerator.generateLayout([illumLabel], false);
 
         const phaseLabel = this.elementGenerator.generateLabel(this.app.moon.currentPhaseName);

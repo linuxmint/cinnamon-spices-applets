@@ -2,8 +2,6 @@ const { get_home_dir } = imports.gi.GLib;
 const GetText = imports.gettext;
 
 class Translator {
-    // TODO: make sure this is being implemented everywhere it needs to
-
     constructor(uuid) {
         this.uuid = uuid;
     }

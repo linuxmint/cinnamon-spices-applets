@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# Translation file for moonphase@techi-freki
 # Copyright (C) 2023 Techi-Freki
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the moonphase@techi-freki package.
 # D. Bryan Combs (Techi-Freki), 2023
 #
 #, fuzzy
@@ -17,96 +17,132 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# TODO: Double check this for accuracy
+# TODO: Double check this for accuracy, update and add new entries
 
-#: js/moon.js:41 js/moon.js:49
+#: js/moon.js:22 js/moon.js:30
 msgid "New Moon"
 msgstr ""
 
-#: js/moon.js:42
+#: js/moon.js:23
 msgid "Waxing Crescent"
 msgstr ""
 
-#: js/moon.js:43
+#: js/moon.js:24
 msgid "First Quarter"
 msgstr ""
 
-#: js/moon.js:44
+#: js/moon.js:25
 msgid "Waxing Gibbous"
 msgstr ""
 
-#: js/moon.js:45
+#: js/moon.js:26
 msgid "Full Moon"
 msgstr ""
 
-#: js/moon.js:46
+#: js/moon.js:27
 msgid "Waning Gibbous"
 msgstr ""
 
-#: js/moon.js:47
+#: js/moon.js:28
 msgid "Last Quarter"
 msgstr ""
 
-#: js/moon.js:48
+#: js/moon.js:29
 msgid "Waning Crescent"
 msgstr ""
 
+#: js/ui/elements/noRiseSetElement.js:40
+msgid "Next Moonrise"
+msgstr ""
+
+#: js/ui/elements/noRiseSetElement.js:52
+msgid "Next Moonset"
+msgstr ""
+
+#: js/ui/elements/noRiseSetElement.js:22
+msgid "illumination"
+msgstr ""
+
+#: js/ui/elements/riseSetUi.js:45
+msgid "The moon is always down and will not rise today"
+msgstr ""
+
+#: js/ui/elements/riseSetUi.js:55
+msgid "The moon is always up and will not set today"
+msgstr ""
+
+#: js/ui/elements/riseSetUi.js:66
+msgid "Moonrise"
+msgstr ""
+
+#: js/ui/elements/riseSetUi.js:73
+msgid "Lunar Noon"
+msgstr ""
+
+#: js/ui/elements/riseSetUi.js:80
+msgid "Moonset"
+msgstr ""
+
+#: js/ui/elements/compass.js:10
+msgid "North"
+msgstr ""
+
+#: js/ui/elements/compass.js:11
+msgid "North East"
+msgstr ""
+
+#: js/ui/elements/compass.js:12
+msgid "East"
+msgstr ""
+
+#: js/ui/elements/compass.js:13
+msgid "South East"
+msgstr ""
+
+#: js/ui/elements/compass.js:14
+msgid "South"
+msgstr ""
+
+#: js/ui/elements/compass.js:15
+msgid "South West"
+msgstr ""
+
+#: js/ui/elements/compass.js:16
+msgid "West"
+msgstr ""
+
+#: js/ui/elements/compass.js:17
+msgid "North West"
+msgstr ""
+
+
+
 #. metadata.json->name
-#. js/moonPhase.js:76
-#: js/moon.js:54
 msgid "Moon Phase"
 msgstr ""
 
-#. js/ui/moonTimes.js:51
-msgid "Moon rising time"
-msgstr ""
-
-#. js/ui/moonTimes.js:62
-msgid "Moon transit time"
-msgstr ""
-
-#. js/moonTimes.js:73
-msgid "Moon setting time"
-msgstr ""
-
 #. metadata.json->description
-msgid "A Cinnamon applet that displays the current moon phase."
+msgid "A Cinnamon applet that displays up-to-date moon related information."
 msgstr ""
 
 #. settings-schema.json->page-settings->title
 msgid "Settings"
 msgstr ""
 
+#. settings-schema.json->section-panel->title
+msgid "General Settings"
+msgstr ""
+
+#. settings-schema.json->section-menu->title
+msgid "Update Settings"
+msgstr ""
+
 #. settings-schema.json->section-geolocation->title
 msgid "Geolocation Settings"
 msgstr ""
 
-#. settings-schema.json->section-general->title
-msgid "General Settings"
-msgstr ""
-
-#. settings-schema.json->section-update->title
-msgid "Update Settings"
-msgstr ""
-
-#. settings-schema.json->enableGeolocation->description
-msgid "Enable geolocation features"
-msgstr ""
-
-#. settings-schema.json->latitude->description
-msgid "Latitude"
-msgstr ""
-
-#. settings-schema.json->longitude->description
-msgid "Longitude"
-msgstr ""
-
-#. settings-schema.json->showRiseSet->description
-msgid "Display the moon rise, transit, and set times on click"
-msgstr ""
-
 #. settings-schema.json->showPhaseLabel->description
-msgid "Display the moon phase as a string"
+msgid "Display the applet label"
 msgstr ""
 
 #. settings-schema.json->showNameLabel->description
@@ -140,3 +176,28 @@ msgstr ""
 #. settings-schema.json->updateInterval->description
 msgid "Update interval"
 msgstr ""
+
+#. settings-schema.json->enableGeolocation->description
+msgid "Enable geolocation features"
+msgstr ""
+
+#. settings-schema.json->latitude->description
+msgid "Latitude"
+msgstr ""
+
+#. settings-schema.json->longitude->description
+msgid "Longitude"
+msgstr ""
+
+#. settings-schema.json->enablePopup->description
+msgid "Enable popup menu"
+msgstr ""
+
+#. settings-schema.json->showCurrentPhaseInfo->description
+msgid "Display the current phase information"
+msgstr ""
+
+#. settings-schema.json->showRiseSet->description
+msgid "Display the moon rise, transit, and set times"
+msgstr ""
+
