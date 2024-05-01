@@ -1,4 +1,4 @@
-import { ErrorResponse, HttpError } from "../../lib/httpLib";
+import { ErrorResponse, HttpError, HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
 import { WeatherApplet } from "../../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime, ImmediatePrecipitation } from "../../types";
@@ -41,7 +41,7 @@ export class PirateWeather extends BaseProvider {
 	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		const unit = this.GetQueryUnit();
 
-		const response = await this.app.LoadJsonAsyncWithDetails<PirateWeatherPayload>({
+		const response = await HttpLib.Instance.LoadJsonAsync<PirateWeatherPayload>({
 			url: `${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`,
 			cancellable,
 			params: { units: this.GetQueryUnit()},

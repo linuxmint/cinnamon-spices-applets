@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { Services } from "../config";
-import { ErrorResponse, HttpError, HTTPParams } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HttpLib, HTTPParams } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
 import { CelsiusToKelvin, IsLangSupported, _ } from "../utils";
@@ -43,7 +43,7 @@ export class VisualCrossing extends BaseProvider {
 		}
 
 		const url = this.url + loc.lat + "," + loc.lon;
-		const json = await this.app.LoadJsonAsync<VisualCrossingPayload>({
+		const json = await HttpLib.Instance.LoadJsonSimple<VisualCrossingPayload>({
 			url,
 			cancellable,
 			params: this.params,

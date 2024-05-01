@@ -6,6 +6,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
 import { WeatherApplet } from "../../main";
 import { LocationData } from "../../types";
@@ -24,7 +25,7 @@ export class IpApi implements GeoIP {
 	}
 
 	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
-		const json = await this.app.LoadJsonAsync<IpApiPayload>({ url: this.query, cancellable });
+		const json = await HttpLib.Instance.LoadJsonSimple<IpApiPayload>({ url: this.query, cancellable });
 
 		if (!json) {
 			return null;

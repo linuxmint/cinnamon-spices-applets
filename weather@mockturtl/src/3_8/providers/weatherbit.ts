@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { DateTime } from "luxon";
-import { ErrorResponse, HttpError } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HttpLib } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, LocationData } from "../types";
@@ -77,7 +77,7 @@ export class Weatherbit extends BaseProvider {
 		if (query == null)
 			return null;
 
-		const json = await this.app.LoadJsonAsync({
+		const json = await HttpLib.Instance.LoadJsonSimple({
 			url: query,
 			cancellable,
 			HandleError: (e) => this.HandleError(e)
@@ -94,7 +94,7 @@ export class Weatherbit extends BaseProvider {
 		if (query == null)
 			return null;
 
-		const json = await this.app.LoadJsonAsync<any>({
+		const json = await HttpLib.Instance.LoadJsonSimple<any>({
 			url: query,
 			cancellable,
 			HandleError: (e) => this.HandleHourlyError(e)
@@ -301,6 +301,7 @@ export class Weatherbit extends BaseProvider {
 				service: "weatherbit",
 				message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
 			});
+			return false;
 		}
 		return true;
 	}

@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { Services } from "../config";
-import { ErrorResponse, HttpError, HTTPParams } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HttpLib, HTTPParams } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
 import { CelsiusToKelvin, IsNight, _ } from "../utils";
@@ -38,7 +38,7 @@ export class ClimacellV4 extends BaseProvider {
 		this.params.apikey = this.app.config.ApiKey;
 		this.params.location = loc.lat + "," + loc.lon;
 
-		const response = await this.app.LoadJsonAsync<ClimacellV4Payload>({
+		const response = await HttpLib.Instance.LoadJsonSimple<ClimacellV4Payload>({
 			url: this.url,
 			cancellable,
 			params: this.params,

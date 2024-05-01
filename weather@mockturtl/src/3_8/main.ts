@@ -80,6 +80,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.ui = new UI(this, orientation);
 		this.ui.Rebuild(this.config);
 		this.loop = new WeatherLoop(this, instanceId);
+		HttpLib.Instance.UnhandledError.Subscribe((sender, error) => this.HandleHTTPError(error));
 		try {
 			this.setAllowedLayout(AllowedLayout.BOTH);
 		} catch (e) {
@@ -338,79 +339,6 @@ export class WeatherApplet extends TextIconApplet {
 		return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
 	}
 
-	// ------------------------------------------------------------------------
-	// IO Helpers
-
-	/**
-	 * Loads JSON response from specified URL, returns the whole response not just data
-	 * @param url URL without params
-	 * @param params param object
-	 * @param HandleError should return false to mark error handled, else true
-	 * @param method default is GET
-	 */
-	public async LoadJsonAsyncWithDetails<T, E = any>(
-		this: WeatherApplet,
-		options: LoadJsonAsyncOptions
-	): Promise<Response<T, E>> {
-		const { HandleError, url, ...params } = options;
-		const response = await HttpLib.Instance.LoadJsonAsync<T, E>(url, params);
-
-		// We have errorData inside
-		if (!response.Success) {
-			// check if caller wants
-			if (!!HandleError && !HandleError(response))
-				return response;
-			else {
-				this.HandleHTTPError(response.ErrorData);
-				return response;
-			}
-		}
-
-		return response;
-	}
-
-	/**
-	 * Loads JSON response from specified URLs
-	 * @param url URL without params
-	 * @param params param object
-	 * @param HandleError should return false to mark error handled, else true
-	 * @param method default is GET
-	 */
-	public async LoadJsonAsync<T, E = any>(
-		this: WeatherApplet,
-		options: LoadJsonAsyncOptions
-	): Promise<T | null> {
-		const response = await this.LoadJsonAsyncWithDetails<T, E>(options);
-		return (response.Success) ? response.Data : null;
-	}
-
-	/**
-	 * Loads response from specified URLs
-	 * @param url URL without params
-	 * @param params param object
-	 * @param HandleError should return false to mark error handled, else true
-	 * @param method default is GET
-	 */
-	public async LoadAsync<E = any>(
-		this: WeatherApplet,
-		options: LoadJsonAsyncOptions
-	): Promise<string | null> {
-		const { HandleError, url, ...params } = options;
-		const response = await HttpLib.Instance.LoadAsync(url, params);
-
-		// We have errorData inside
-		if (!response.Success) {
-			// check if caller wants
-			if (!!HandleError && !HandleError(response))
-				return null;
-			else {
-				this.HandleHTTPError(response.ErrorData);
-				return null;
-			}
-		}
-
-		return response.Data;
-	}
 
 	// ----------------------------------------------------------------------------
 	// Config Callbacks, do not delete

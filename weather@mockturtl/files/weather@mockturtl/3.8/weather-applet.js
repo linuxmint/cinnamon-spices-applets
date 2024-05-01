@@ -9917,7 +9917,278 @@ class LocationStore {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/lib/soupLib.ts
+
+
+
+const { Message, Session } = imports.gi.Soup;
+const { PRIORITY_DEFAULT } = imports.gi.GLib;
+const { Cancellable } = imports.gi.Gio;
+const soupLib_ByteArray = imports.byteArray;
+function AddParamsToURI(url, params) {
+    let result = url;
+    if (params != null) {
+        const items = Object.keys(params);
+        for (const [index, item] of items.entries()) {
+            result += (index == 0) ? "?" : "&";
+            result += (item) + "=" + params[item];
+        }
+    }
+    return result;
+}
+function AddHeadersToMessage(message, headers) {
+    if (headers != null) {
+        for (const key in headers) {
+            message.request_headers.append(key, headers[key]);
+        }
+    }
+}
+class Soup3 {
+    constructor() {
+        this._httpSession = new Session();
+        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
+        this._httpSession.timeout = 10;
+        this._httpSession.idle_timeout = 10;
+    }
+    async Send(url, options = {}) {
+        const { params, headers, method = "GET", cancellable } = options;
+        if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
+            return Promise.resolve(null);
+        }
+        url = AddParamsToURI(url, params);
+        const query = encodeURI(url);
+        logger_Logger.Debug("URL called: " + query);
+        const data = await new Promise((resolve, reject) => {
+            const message = Message.new(method, query);
+            if (message == null) {
+                resolve(null);
+            }
+            else {
+                AddHeadersToMessage(message, headers);
+                const finalCancellable = cancellable !== null && cancellable !== void 0 ? cancellable : Cancellable.new();
+                const timeout = utils_setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
+                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, finalCancellable, (session, result) => {
+                    var _a;
+                    const headers = {};
+                    let res = null;
+                    clearTimeout(timeout);
+                    try {
+                        res = this._httpSession.send_and_read_finish(result);
+                        message.get_response_headers().foreach((name, value) => {
+                            headers[name] = value;
+                        });
+                    }
+                    catch (e) {
+                        logger_Logger.Error("Error reading http request's response: " + e);
+                    }
+                    finally {
+                        resolve({
+                            reason_phrase: (_a = message.get_reason_phrase()) !== null && _a !== void 0 ? _a : "",
+                            status_code: message.get_status(),
+                            response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
+                            response_headers: headers
+                        });
+                    }
+                });
+            }
+        });
+        return data;
+    }
+}
+class Soup2 {
+    constructor() {
+        const { ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
+        this._httpSession = new SessionAsync();
+        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
+        this._httpSession.timeout = 10;
+        this._httpSession.idle_timeout = 10;
+        this._httpSession.use_thread_context = true;
+        this._httpSession.add_feature(new ProxyResolverDefault());
+    }
+    async Send(url, options = {}) {
+        const { params, headers, method = "GET", cancellable } = options;
+        if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
+            return Promise.resolve(null);
+        }
+        url = AddParamsToURI(url, params);
+        const query = encodeURI(url);
+        logger_Logger.Debug("URL called: " + query);
+        const data = await new Promise((resolve, reject) => {
+            const message = Message.new(method, query);
+            if (message == null) {
+                resolve(null);
+            }
+            else {
+                AddHeadersToMessage(message, headers);
+                const finalCancellable = cancellable !== null && cancellable !== void 0 ? cancellable : Cancellable.new();
+                this._httpSession.send_async(message, cancellable, async (session, result) => {
+                    const headers = {};
+                    let res = null;
+                    try {
+                        const stream = this._httpSession.send_finish(result);
+                        res = await this.read_all_bytes(stream, finalCancellable);
+                        message.response_headers.foreach((name, value) => {
+                            headers[name] = value;
+                        });
+                    }
+                    catch (e) {
+                        logger_Logger.Error("Error reading http request's response: " + e);
+                    }
+                    resolve({
+                        reason_phrase: message.reason_phrase,
+                        status_code: message.status_code,
+                        response_body: res,
+                        response_headers: headers
+                    });
+                });
+            }
+        });
+        return data;
+    }
+    async read_all_bytes(stream, cancellable) {
+        if (cancellable.is_cancelled())
+            return null;
+        const read_chunk_async = () => {
+            return new Promise((resolve) => {
+                stream.read_bytes_async(8192, 0, cancellable, (source, read_result) => {
+                    resolve(stream.read_bytes_finish(read_result));
+                });
+            });
+        };
+        let res = null;
+        let chunk;
+        chunk = await read_chunk_async();
+        while (chunk.get_size() > 0) {
+            if (cancellable.is_cancelled())
+                return res;
+            const chunkAsString = soupLib_ByteArray.fromGBytes(chunk).toString();
+            if (res === null) {
+                res = chunkAsString;
+            }
+            else {
+                res += chunkAsString;
+            }
+            chunk = await read_chunk_async();
+        }
+        return res;
+    }
+}
+const soupLib = imports.gi.Soup.SessionAsync != undefined ? new Soup2() : new Soup3();
+
+;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
+var __rest = (undefined && undefined.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+
+
+
+class HttpLib {
+    constructor() {
+        this.UnhandledError = new Event();
+    }
+    static get Instance() {
+        if (this.instance == null)
+            this.instance = new HttpLib();
+        return this.instance;
+    }
+    async LoadJsonSimple(options) {
+        const response = await this.LoadJsonAsync(options);
+        return response.Success ? response.Data : null;
+    }
+    async LoadJsonAsync(options) {
+        const { HandleError } = options, rest = __rest(options, ["HandleError"]);
+        const response = await this.LoadAsync(Object.assign(Object.assign({}, rest), { HandleError: () => false }));
+        try {
+            const payload = JSON.parse(response.Data);
+            response.Data = payload;
+        }
+        catch (e) {
+            if (response.Success) {
+                if (e instanceof Error)
+                    logger_Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
+                response.Success = false;
+                response.ErrorData = {
+                    code: -1,
+                    message: "bad api response - non json",
+                    reason_phrase: "",
+                };
+            }
+        }
+        if (!response.Success && (!HandleError || HandleError(response)))
+            this.UnhandledError.Invoke(this, response.ErrorData);
+        return response;
+    }
+    async LoadAsyncSimple(options) {
+        const response = await this.LoadAsync(options);
+        return response.Success ? response.Data : null;
+    }
+    async LoadAsync(options) {
+        var _a, _b, _c, _d, _e, _f;
+        const { url, HandleError } = options, rest = __rest(options, ["url", "HandleError"]);
+        const message = await soupLib.Send(url, rest);
+        let error = undefined;
+        if (!message) {
+            error = {
+                code: 0,
+                message: "no network response",
+                reason_phrase: "no network response",
+                response: undefined
+            };
+        }
+        else if (message.status_code < 100 && message.status_code >= 0) {
+            error = {
+                code: message.status_code,
+                message: "no network response",
+                reason_phrase: message.reason_phrase,
+                response: message
+            };
+        }
+        else if (message.status_code > 300 || message.status_code < 200) {
+            error = {
+                code: message.status_code,
+                message: "bad status code",
+                reason_phrase: message.reason_phrase,
+                response: message
+            };
+        }
+        else if (!message.response_body) {
+            error = {
+                code: message.status_code,
+                message: "no response data",
+                reason_phrase: message.reason_phrase,
+                response: message
+            };
+        }
+        if (((_a = message === null || message === void 0 ? void 0 : message.status_code) !== null && _a !== void 0 ? _a : -1) > 200 && ((_b = message === null || message === void 0 ? void 0 : message.status_code) !== null && _b !== void 0 ? _b : -1) < 300) {
+            logger_Logger.Info("Warning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
+        }
+        logger_Logger.Verbose("API full response: " + ((_c = message === null || message === void 0 ? void 0 : message.response_body) === null || _c === void 0 ? void 0 : _c.toString()));
+        const result = {
+            Success: (error == null),
+            Data: ((_d = message === null || message === void 0 ? void 0 : message.response_body) !== null && _d !== void 0 ? _d : null),
+            ResponseHeaders: message === null || message === void 0 ? void 0 : message.response_headers,
+            ErrorData: error,
+            Response: message
+        };
+        if (error != null) {
+            logger_Logger.Info(`Error calling URL: ${error.code}, ${error.reason_phrase}, ${(_f = (_e = error === null || error === void 0 ? void 0 : error.response) === null || _e === void 0 ? void 0 : _e.response_body) !== null && _f !== void 0 ? _f : "None"}`);
+        }
+        if (!result.Success && (!HandleError || HandleError(result)))
+            this.UnhandledError.Invoke(this, result.ErrorData);
+        return result;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/location_services/nominatim.ts
+
 
 
 
@@ -9937,7 +10208,7 @@ class GeoLocation {
                 logger_Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
                 return cached;
             }
-            const locationData = await this.App.LoadJsonAsync({
+            const locationData = await HttpLib.Instance.LoadJsonSimple({
                 url: `${this.url}?q=${searchText}&${this.params}`,
                 cancellable
             });
@@ -10000,6 +10271,7 @@ class BaseProvider {
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_uk.ts
+
 
 
 
@@ -10132,7 +10404,7 @@ class MetUk extends BaseProvider {
     }
     ;
     async GetClosestForecastSite(loc, cancellable) {
-        const forecastSitelist = await this.app.LoadJsonAsync({
+        const forecastSitelist = await HttpLib.Instance.LoadJsonSimple({
             url: this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key,
             cancellable
         });
@@ -10141,7 +10413,7 @@ class MetUk extends BaseProvider {
         return this.GetClosestSite(forecastSitelist, loc);
     }
     async GetObservationSitesInRange(loc, range, cancellable) {
-        const observationSiteList = await this.app.LoadJsonAsync({
+        const observationSiteList = await HttpLib.Instance.LoadJsonSimple({
             url: this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key,
             cancellable
         });
@@ -10162,7 +10434,7 @@ class MetUk extends BaseProvider {
         const observations = [];
         for (const element of observationSites) {
             logger_Logger.Debug("Getting observation data from station: " + element.id);
-            const payload = await this.app.LoadJsonAsync({
+            const payload = await HttpLib.Instance.LoadJsonSimple({
                 url: this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key,
                 cancellable
             });
@@ -10178,7 +10450,7 @@ class MetUk extends BaseProvider {
         if (query == null)
             return null;
         logger_Logger.Debug("Query: " + query);
-        const json = await this.app.LoadJsonAsync({ url: query, cancellable });
+        const json = await HttpLib.Instance.LoadJsonSimple({ url: query, cancellable });
         if (json == null)
             return null;
         return ParseFunction(json, loc);
@@ -10662,6 +10934,7 @@ class MetUk extends BaseProvider {
 
 
 
+
 const IDCache = {};
 class OpenWeatherMap extends BaseProvider {
     constructor(_app) {
@@ -10698,13 +10971,13 @@ class OpenWeatherMap extends BaseProvider {
         const params = this.ConstructParams(loc);
         const cachedID = IDCache[`${loc.lat},${loc.lon}`];
         const [json, idPayload] = await Promise.all([
-            this.app.LoadJsonAsync({
+            HttpLib.Instance.LoadJsonSimple({
                 url: this.base_url,
                 cancellable,
                 params: params,
                 HandleError: this.HandleError
             }),
-            (cachedID == null) ? this.app.LoadJsonAsync({ url: this.id_irl, cancellable, params }) : Promise.resolve()
+            (cachedID == null) ? HttpLib.Instance.LoadJsonSimple({ url: this.id_irl, cancellable, params }) : Promise.resolve()
         ]);
         if (cachedID == null && (idPayload === null || idPayload === void 0 ? void 0 : idPayload.id) != null)
             IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
@@ -11116,6 +11389,7 @@ function IsCovered(payload) {
 
 
 
+
 class MetNorway extends BaseProvider {
     constructor() {
         super(...arguments);
@@ -11132,12 +11406,12 @@ class MetNorway extends BaseProvider {
     }
     async GetWeather(loc, cancellable) {
         const [forecast, nowcast] = await Promise.all([
-            this.app.LoadJsonAsync({
+            HttpLib.Instance.LoadJsonSimple({
                 url: `${this.baseUrl}/locationforecast/2.0/complete`,
                 cancellable,
                 params: { lat: loc.lat, lon: loc.lon }
             }),
-            this.app.LoadJsonAsync({
+            HttpLib.Instance.LoadJsonSimple({
                 url: `${this.baseUrl}/nowcast/2.0/complete`,
                 cancellable,
                 params: { lat: loc.lat, lon: loc.lon },
@@ -11670,6 +11944,7 @@ class MetNorway extends BaseProvider {
 
 
 
+
 class Weatherbit extends BaseProvider {
     get remainingCalls() {
         return null;
@@ -11824,7 +12099,7 @@ class Weatherbit extends BaseProvider {
         const query = this.ConstructQuery(baseUrl, loc);
         if (query == null)
             return null;
-        const json = await this.app.LoadJsonAsync({
+        const json = await HttpLib.Instance.LoadJsonSimple({
             url: query,
             cancellable,
             HandleError: (e) => this.HandleError(e)
@@ -11837,7 +12112,7 @@ class Weatherbit extends BaseProvider {
         const query = this.ConstructQuery(baseUrl, loc);
         if (query == null)
             return null;
-        const json = await this.app.LoadJsonAsync({
+        const json = await HttpLib.Instance.LoadJsonSimple({
             url: query,
             cancellable,
             HandleError: (e) => this.HandleHourlyError(e)
@@ -11905,6 +12180,7 @@ class Weatherbit extends BaseProvider {
                 service: "weatherbit",
                 message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
             });
+            return false;
         }
         return true;
     }
@@ -12101,6 +12377,7 @@ class Weatherbit extends BaseProvider {
 
 
 
+
 class ClimacellV4 extends BaseProvider {
     constructor(app) {
         super(app);
@@ -12127,7 +12404,7 @@ class ClimacellV4 extends BaseProvider {
             return null;
         this.params.apikey = this.app.config.ApiKey;
         this.params.location = loc.lat + "," + loc.lon;
-        const response = await this.app.LoadJsonAsync({
+        const response = await HttpLib.Instance.LoadJsonSimple({
             url: this.url,
             cancellable,
             params: this.params,
@@ -12439,6 +12716,7 @@ class ClimacellV4 extends BaseProvider {
 
 
 
+
 class USWeather extends BaseProvider {
     constructor(_app) {
         super(_app);
@@ -12552,11 +12830,11 @@ class USWeather extends BaseProvider {
             logger_Logger.Debug("Site data downloading skipped");
         }
         const observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations, cancellable);
-        const hourlyForecastPromise = this.app.LoadJsonAsync({
+        const hourlyForecastPromise = HttpLib.Instance.LoadJsonSimple({
             url: this.grid.properties.forecastHourly + "?units=si",
             cancellable
         });
-        const forecastPromise = this.app.LoadJsonAsync({
+        const forecastPromise = HttpLib.Instance.LoadJsonSimple({
             url: this.grid.properties.forecast,
             cancellable
         });
@@ -12575,7 +12853,7 @@ class USWeather extends BaseProvider {
     }
     ;
     async GetGridData(loc, cancellable) {
-        const siteData = await this.app.LoadJsonAsync({
+        const siteData = await HttpLib.Instance.LoadJsonSimple({
             url: this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(),
             cancellable,
             HandleError: this.OnObtainingGridData
@@ -12583,7 +12861,7 @@ class USWeather extends BaseProvider {
         return siteData;
     }
     async GetStationData(stationListUrl, cancellable) {
-        const stations = await this.app.LoadJsonAsync({
+        const stations = await HttpLib.Instance.LoadJsonSimple({
             url: stationListUrl,
             cancellable
         });
@@ -12595,7 +12873,7 @@ class USWeather extends BaseProvider {
             element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
             if (element.dist > range)
                 break;
-            const observation = await this.app.LoadJsonAsync({
+            const observation = await HttpLib.Instance.LoadJsonSimple({
                 url: element.id + "/observations/latest",
                 cancellable,
                 HandleError: (msg) => false
@@ -13007,6 +13285,7 @@ class USWeather extends BaseProvider {
 
 
 
+
 class VisualCrossing extends BaseProvider {
     constructor(app) {
         super(app);
@@ -13038,7 +13317,7 @@ class VisualCrossing extends BaseProvider {
             translate = false;
         }
         const url = this.url + loc.lat + "," + loc.lon;
-        const json = await this.app.LoadJsonAsync({
+        const json = await HttpLib.Instance.LoadJsonSimple({
             url,
             cancellable,
             params: this.params,
@@ -13308,6 +13587,7 @@ class VisualCrossing extends BaseProvider {
 
 
 
+
 class DanishMI extends BaseProvider {
     constructor(app) {
         super(app);
@@ -13339,14 +13619,14 @@ class DanishMI extends BaseProvider {
         if (loc == null)
             return null;
         this.GetLocationBoundingBox(loc);
-        const observations = this.OrderObservations(await this.app.LoadJsonAsync({
+        const observations = this.OrderObservations(await HttpLib.Instance.LoadJsonSimple({
             url: this.url,
             cancellable,
             params: this.observationParams
         }), loc);
         this.forecastParams.lat = loc.lat;
         this.forecastParams.lon = loc.lon;
-        const forecasts = await this.app.LoadJsonAsync({
+        const forecasts = await HttpLib.Instance.LoadJsonSimple({
             url: this.url,
             cancellable,
             params: this.forecastParams
@@ -13666,6 +13946,7 @@ class DanishMI extends BaseProvider {
 
 
 
+
 class AccuWeather extends BaseProvider {
     get remainingCalls() {
         return this.remainingQuota == null ? null : Math.floor(this.remainingQuota / 3);
@@ -13701,7 +13982,7 @@ class AccuWeather extends BaseProvider {
             location = this.locationCache[locationID];
         }
         else {
-            location = await this.app.LoadJsonAsync({
+            location = await HttpLib.Instance.LoadJsonSimple({
                 url: this.locSearchUrl,
                 cancellable,
                 params: { q: locationID, details: true, language: userLocale, apikey: this.app.config.ApiKey },
@@ -13712,19 +13993,19 @@ class AccuWeather extends BaseProvider {
             return null;
         }
         const [current, forecast, hourly] = await Promise.all([
-            this.app.LoadJsonAsyncWithDetails({
+            HttpLib.Instance.LoadJsonAsync({
                 url: this.currentConditionUrl + location.Key,
                 cancellable,
                 params: { apikey: this.app.config.ApiKey, details: true, language: locale, },
                 HandleError: this.HandleErrors
             }),
-            this.app.LoadJsonAsyncWithDetails({
+            HttpLib.Instance.LoadJsonAsync({
                 url: this.dailyForecastUrl + location.Key,
                 cancellable,
                 params: { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, },
                 HandleError: this.HandleErrors
             }),
-            this.app.LoadJsonAsyncWithDetails({
+            HttpLib.Instance.LoadJsonAsync({
                 url: this.hourlyForecastUrl + location.Key,
                 cancellable,
                 params: { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, },
@@ -14032,6 +14313,7 @@ class AccuWeather extends BaseProvider {
 
 
 
+
 class DeutscherWetterdienst extends BaseProvider {
     constructor() {
         super(...arguments);
@@ -14061,13 +14343,13 @@ class DeutscherWetterdienst extends BaseProvider {
     async GetWeather(loc, cancellable) {
         var _a, _b, _c, _d;
         const [current, hourly] = await Promise.all([
-            this.app.LoadJsonAsync({
+            HttpLib.Instance.LoadJsonSimple({
                 url: `${this.baseUrl}current_weather`,
                 cancellable,
                 params: this.GetDefaultParams(loc),
                 HandleError: this.HandleErrors
             }),
-            this.app.LoadJsonAsync({
+            HttpLib.Instance.LoadJsonSimple({
                 url: `${this.baseUrl}weather`,
                 cancellable,
                 params: this.GetHourlyParams(loc),
@@ -14346,6 +14628,7 @@ class DeutscherWetterdienst extends BaseProvider {
 
 
 
+
 const unitTypeMap = {
     "us": "e",
     "lr": "e",
@@ -14374,7 +14657,7 @@ class WeatherUnderground extends BaseProvider {
                 return null;
             }
             this.locationCache[locString] = location;
-            const forecast = await this.app.LoadJsonAsync({
+            const forecast = await HttpLib.Instance.LoadJsonSimple({
                 url: `${this.baseURl}v3/wx/forecast/daily/5day`,
                 cancellable,
                 params: {
@@ -14423,7 +14706,7 @@ class WeatherUnderground extends BaseProvider {
         this.GetNearbyStations = async (loc, cancellable) => {
             var _a;
             const result = [];
-            const payload = await this.app.LoadJsonAsync({
+            const payload = await HttpLib.Instance.LoadJsonSimple({
                 url: `${this.baseURl}v3/location/near`,
                 cancellable,
                 params: {
@@ -14529,7 +14812,7 @@ class WeatherUnderground extends BaseProvider {
         };
         this.GetObservation = async (stationID, cancellable) => {
             var _a;
-            const observationString = await this.app.LoadAsync({
+            const observationString = await HttpLib.Instance.LoadAsyncSimple({
                 url: `${this.baseURl}v2/pws/observations/current`,
                 cancellable,
                 params: {
@@ -14953,6 +15236,7 @@ class WeatherUnderground extends BaseProvider {
 
 
 
+
 class PirateWeather extends BaseProvider {
     get remainingCalls() {
         return null;
@@ -14996,7 +15280,7 @@ class PirateWeather extends BaseProvider {
     }
     async GetWeather(loc, cancellable) {
         const unit = this.GetQueryUnit();
-        const response = await this.app.LoadJsonAsyncWithDetails({
+        const response = await HttpLib.Instance.LoadJsonAsync({
             url: `${this.query}${this.app.config.ApiKey}/${loc.lat},${loc.lon}`,
             cancellable,
             params: { units: this.GetQueryUnit() },
@@ -15273,13 +15557,14 @@ class GeoClue {
 ;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geoip.fedora.ts
 
 
+
 class GeoIPFedora {
     constructor(app) {
         this.query = "https://geoip.fedoraproject.org/city";
         this.app = app;
     }
     async GetLocation(cancellable) {
-        const json = await this.app.LoadJsonAsync({ url: this.query, cancellable });
+        const json = await HttpLib.Instance.LoadJsonSimple({ url: this.query, cancellable });
         if (!json) {
             logger_Logger.Info("geoip.fedoraproject didn't return any data");
             return null;
@@ -15346,7 +15631,7 @@ class GeoIPFedora {
 
 
 const { get_home_dir: config_get_home_dir, get_user_data_dir, get_user_config_dir } = imports.gi.GLib;
-const { File: config_File, Cancellable } = imports.gi.Gio;
+const { File: config_File, Cancellable: config_Cancellable } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -15926,7 +16211,6 @@ class WeatherLoop {
             catch (e) {
                 if (e instanceof Error)
                     logger_Logger.Error("Error in Main loop: " + e, e);
-                this.app.encounteredError = true;
             }
             finally {
                 (_b = this.refreshingResolver) === null || _b === void 0 ? void 0 : _b.call(this);
@@ -15986,7 +16270,6 @@ class WeatherLoop {
         return false;
     }
     IncrementErrorCount() {
-        this.app.encounteredError = false;
         this.errorCount++;
         logger_Logger.Debug("Encountered error in previous loop");
         if (this.errorCount > 60)
@@ -17466,259 +17749,7 @@ class UI {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/lib/soupLib.ts
-
-
-
-const { Message, Session } = imports.gi.Soup;
-const { PRIORITY_DEFAULT } = imports.gi.GLib;
-const { Cancellable: soupLib_Cancellable } = imports.gi.Gio;
-const soupLib_ByteArray = imports.byteArray;
-function AddParamsToURI(url, params) {
-    let result = url;
-    if (params != null) {
-        const items = Object.keys(params);
-        for (const [index, item] of items.entries()) {
-            result += (index == 0) ? "?" : "&";
-            result += (item) + "=" + params[item];
-        }
-    }
-    return result;
-}
-function AddHeadersToMessage(message, headers) {
-    if (headers != null) {
-        for (const key in headers) {
-            message.request_headers.append(key, headers[key]);
-        }
-    }
-}
-class Soup3 {
-    constructor() {
-        this._httpSession = new Session();
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
-        this._httpSession.timeout = 10;
-        this._httpSession.idle_timeout = 10;
-    }
-    async Send(url, options = {}) {
-        const { params, headers, method = "GET", cancellable } = options;
-        if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
-            return Promise.resolve(null);
-        }
-        url = AddParamsToURI(url, params);
-        const query = encodeURI(url);
-        logger_Logger.Debug("URL called: " + query);
-        const data = await new Promise((resolve, reject) => {
-            const message = Message.new(method, query);
-            if (message == null) {
-                resolve(null);
-            }
-            else {
-                AddHeadersToMessage(message, headers);
-                const finalCancellable = cancellable !== null && cancellable !== void 0 ? cancellable : soupLib_Cancellable.new();
-                const timeout = utils_setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
-                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, finalCancellable, (session, result) => {
-                    var _a;
-                    const headers = {};
-                    let res = null;
-                    clearTimeout(timeout);
-                    try {
-                        res = this._httpSession.send_and_read_finish(result);
-                        message.get_response_headers().foreach((name, value) => {
-                            headers[name] = value;
-                        });
-                    }
-                    catch (e) {
-                        logger_Logger.Error("Error reading http request's response: " + e);
-                    }
-                    finally {
-                        resolve({
-                            reason_phrase: (_a = message.get_reason_phrase()) !== null && _a !== void 0 ? _a : "",
-                            status_code: message.get_status(),
-                            response_body: res != null ? soupLib_ByteArray.toString(soupLib_ByteArray.fromGBytes(res)) : null,
-                            response_headers: headers
-                        });
-                    }
-                });
-            }
-        });
-        return data;
-    }
-}
-class Soup2 {
-    constructor() {
-        const { ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
-        this._httpSession = new SessionAsync();
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
-        this._httpSession.timeout = 10;
-        this._httpSession.idle_timeout = 10;
-        this._httpSession.use_thread_context = true;
-        this._httpSession.add_feature(new ProxyResolverDefault());
-    }
-    async Send(url, options = {}) {
-        const { params, headers, method = "GET", cancellable } = options;
-        if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
-            return Promise.resolve(null);
-        }
-        url = AddParamsToURI(url, params);
-        const query = encodeURI(url);
-        logger_Logger.Debug("URL called: " + query);
-        const data = await new Promise((resolve, reject) => {
-            const message = Message.new(method, query);
-            if (message == null) {
-                resolve(null);
-            }
-            else {
-                AddHeadersToMessage(message, headers);
-                const finalCancellable = cancellable !== null && cancellable !== void 0 ? cancellable : soupLib_Cancellable.new();
-                this._httpSession.send_async(message, cancellable, async (session, result) => {
-                    const headers = {};
-                    let res = null;
-                    try {
-                        const stream = this._httpSession.send_finish(result);
-                        res = await this.read_all_bytes(stream, finalCancellable);
-                        message.response_headers.foreach((name, value) => {
-                            headers[name] = value;
-                        });
-                    }
-                    catch (e) {
-                        logger_Logger.Error("Error reading http request's response: " + e);
-                    }
-                    resolve({
-                        reason_phrase: message.reason_phrase,
-                        status_code: message.status_code,
-                        response_body: res,
-                        response_headers: headers
-                    });
-                });
-            }
-        });
-        return data;
-    }
-    async read_all_bytes(stream, cancellable) {
-        if (cancellable.is_cancelled())
-            return null;
-        const read_chunk_async = () => {
-            return new Promise((resolve) => {
-                stream.read_bytes_async(8192, 0, cancellable, (source, read_result) => {
-                    resolve(stream.read_bytes_finish(read_result));
-                });
-            });
-        };
-        let res = null;
-        let chunk;
-        chunk = await read_chunk_async();
-        while (chunk.get_size() > 0) {
-            if (cancellable.is_cancelled())
-                return res;
-            const chunkAsString = soupLib_ByteArray.fromGBytes(chunk).toString();
-            if (res === null) {
-                res = chunkAsString;
-            }
-            else {
-                res += chunkAsString;
-            }
-            chunk = await read_chunk_async();
-        }
-        return res;
-    }
-}
-const soupLib = imports.gi.Soup.SessionAsync != undefined ? new Soup2() : new Soup3();
-
-;// CONCATENATED MODULE: ./src/3_8/lib/httpLib.ts
-
-
-class HttpLib {
-    static get Instance() {
-        if (this.instance == null)
-            this.instance = new HttpLib();
-        return this.instance;
-    }
-    async LoadJsonAsync(url, options = {}) {
-        const response = await this.LoadAsync(url, options);
-        try {
-            const payload = JSON.parse(response.Data);
-            response.Data = payload;
-        }
-        catch (e) {
-            if (response.Success) {
-                if (e instanceof Error)
-                    logger_Logger.Error("Error: API response is not JSON. The response: " + response.Data, e);
-                response.Success = false;
-                response.ErrorData = {
-                    code: -1,
-                    message: "bad api response - non json",
-                    reason_phrase: "",
-                };
-            }
-        }
-        finally {
-            return response;
-        }
-    }
-    async LoadAsync(url, options = {}) {
-        var _a, _b, _c, _d, _e, _f;
-        const message = await soupLib.Send(url, options);
-        let error = undefined;
-        if (!message) {
-            error = {
-                code: 0,
-                message: "no network response",
-                reason_phrase: "no network response",
-                response: undefined
-            };
-        }
-        else if (message.status_code < 100 && message.status_code >= 0) {
-            error = {
-                code: message.status_code,
-                message: "no network response",
-                reason_phrase: message.reason_phrase,
-                response: message
-            };
-        }
-        else if (message.status_code > 300 || message.status_code < 200) {
-            error = {
-                code: message.status_code,
-                message: "bad status code",
-                reason_phrase: message.reason_phrase,
-                response: message
-            };
-        }
-        else if (!message.response_body) {
-            error = {
-                code: message.status_code,
-                message: "no response data",
-                reason_phrase: message.reason_phrase,
-                response: message
-            };
-        }
-        if (((_a = message === null || message === void 0 ? void 0 : message.status_code) !== null && _a !== void 0 ? _a : -1) > 200 && ((_b = message === null || message === void 0 ? void 0 : message.status_code) !== null && _b !== void 0 ? _b : -1) < 300) {
-            logger_Logger.Info("Warning: API returned non-OK status code '" + (message === null || message === void 0 ? void 0 : message.status_code) + "'");
-        }
-        logger_Logger.Verbose("API full response: " + ((_c = message === null || message === void 0 ? void 0 : message.response_body) === null || _c === void 0 ? void 0 : _c.toString()));
-        if (error != null)
-            logger_Logger.Info(`Error calling URL: ${error.code}, ${error.reason_phrase}, ${(_e = (_d = error === null || error === void 0 ? void 0 : error.response) === null || _d === void 0 ? void 0 : _d.response_body) !== null && _e !== void 0 ? _e : "None"}`);
-        return {
-            Success: (error == null),
-            Data: ((_f = message === null || message === void 0 ? void 0 : message.response_body) !== null && _f !== void 0 ? _f : null),
-            ResponseHeaders: message === null || message === void 0 ? void 0 : message.response_headers,
-            ErrorData: error,
-            Response: message
-        };
-    }
-}
-
 ;// CONCATENATED MODULE: ./src/3_8/main.ts
-var __rest = (undefined && undefined.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 
 
 
@@ -17867,6 +17898,7 @@ class WeatherApplet extends TextIconApplet {
         this.ui = new UI(this, orientation);
         this.ui.Rebuild(this.config);
         this.loop = new WeatherLoop(this, instanceId);
+        HttpLib.Instance.UnhandledError.Subscribe((sender, error) => this.HandleHTTPError(error));
         try {
             this.setAllowedLayout(AllowedLayout.BOTH);
         }
@@ -18011,36 +18043,6 @@ class WeatherApplet extends TextIconApplet {
         if (!this.provider)
             return this.config._forecastHours;
         return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
-    }
-    async LoadJsonAsyncWithDetails(options) {
-        const { HandleError, url } = options, params = __rest(options, ["HandleError", "url"]);
-        const response = await HttpLib.Instance.LoadJsonAsync(url, params);
-        if (!response.Success) {
-            if (!!HandleError && !HandleError(response))
-                return response;
-            else {
-                this.HandleHTTPError(response.ErrorData);
-                return response;
-            }
-        }
-        return response;
-    }
-    async LoadJsonAsync(options) {
-        const response = await this.LoadJsonAsyncWithDetails(options);
-        return (response.Success) ? response.Data : null;
-    }
-    async LoadAsync(options) {
-        const { HandleError, url } = options, params = __rest(options, ["HandleError", "url"]);
-        const response = await HttpLib.Instance.LoadAsync(url, params);
-        if (!response.Success) {
-            if (!!HandleError && !HandleError(response))
-                return null;
-            else {
-                this.HandleHTTPError(response.ErrorData);
-                return null;
-            }
-        }
-        return response.Data;
     }
     async locationLookup() {
         const command = "xdg-open ";

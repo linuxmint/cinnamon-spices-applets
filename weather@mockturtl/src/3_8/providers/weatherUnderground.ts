@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import { getTimes } from "suncalc";
 import { Services } from "../config";
-import { ErrorResponse, HttpError } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HttpLib } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { Condition, ForecastData, LocationData, WeatherData } from "../types";
 import { CelsiusToKelvin, FahrenheitToKelvin, GetDistance, _ } from "../utils";
@@ -50,7 +50,7 @@ export class WeatherUnderground extends BaseProvider {
         }
         this.locationCache[locString] = location;
 
-        const forecast = await this.app.LoadJsonAsync<ForecastPayload>({
+        const forecast = await HttpLib.Instance.LoadJsonSimple<ForecastPayload>({
 			url: `${this.baseURl}v3/wx/forecast/daily/5day`,
 			cancellable,
 			params: {
@@ -119,7 +119,7 @@ export class WeatherUnderground extends BaseProvider {
 
     private GetNearbyStations = async (loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<NearbyStation[] | null> => {
         const result: NearbyStation[] = [];
-        const payload = await this.app.LoadJsonAsync<NearObservationPayload>({
+        const payload = await HttpLib.Instance.LoadJsonSimple<NearObservationPayload>({
 			url: `${this.baseURl}v3/location/near`,
 			cancellable,
 			params: {
@@ -240,7 +240,7 @@ export class WeatherUnderground extends BaseProvider {
     }
 
     private GetObservation = async (stationID: string, cancellable: imports.gi.Gio.Cancellable): Promise<ObservationData | null> => {
-        const observationString = await this.app.LoadAsync({
+        const observationString = await HttpLib.Instance.LoadAsyncSimple({
 			url: `${this.baseURl}v2/pws/observations/current`,
 			cancellable,
 			params: {

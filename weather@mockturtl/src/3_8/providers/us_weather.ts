@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { ErrorResponse, HttpError } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HttpLib } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { getTimes } from "suncalc";
@@ -74,11 +74,11 @@ export class USWeather extends BaseProvider {
 		// Long wait time, can't do Promise.all because US weather will ban IP for some time on spamming
 		const observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations, cancellable);
 
-		const hourlyForecastPromise = this.app.LoadJsonAsync<ForecastsPayload>({
+		const hourlyForecastPromise = HttpLib.Instance.LoadJsonSimple<ForecastsPayload>({
 			url: this.grid.properties.forecastHourly + "?units=si",
 			cancellable
 		});
-		const forecastPromise = this.app.LoadJsonAsync<ForecastsPayload>({
+		const forecastPromise = HttpLib.Instance.LoadJsonSimple<ForecastsPayload>({
 			url: this.grid.properties.forecast,
 			cancellable
 		});
@@ -106,7 +106,7 @@ export class USWeather extends BaseProvider {
 	 */
 	private async GetGridData(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<GridPayload | null> {
 		// Handling out of country errors in callback
-		const siteData = await this.app.LoadJsonAsync<GridPayload>({
+		const siteData = await HttpLib.Instance.LoadJsonSimple<GridPayload>({
 			url: this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(),
 			cancellable,
 			HandleError: this.OnObtainingGridData
@@ -119,7 +119,7 @@ export class USWeather extends BaseProvider {
 	 * @param stationListUrl
 	 */
 	private async GetStationData(stationListUrl: string, cancellable: imports.gi.Gio.Cancellable): Promise<StationPayload[] | undefined> {
-		const stations = await this.app.LoadJsonAsync<StationsPayload>({
+		const stations = await HttpLib.Instance.LoadJsonSimple<StationsPayload>({
 			url: stationListUrl,
 			cancellable
 		});
@@ -137,7 +137,7 @@ export class USWeather extends BaseProvider {
 			element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
 			if (element.dist > range) break;
 			// do not show errors here, we call multiple observation sites
-			const observation = await this.app.LoadJsonAsync<ObservationPayload>({
+			const observation = await HttpLib.Instance.LoadJsonSimple<ObservationPayload>({
 				url: element.id + "/observations/latest",
 				cancellable,
 				HandleError: (msg) => false

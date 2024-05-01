@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { Services } from "../config";
-import { HTTPParams } from "../lib/httpLib";
+import { HTTPParams, HttpLib } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
 import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
@@ -43,7 +43,7 @@ export class DanishMI extends BaseProvider {
 			return null;
 
 		this.GetLocationBoundingBox(loc);
-		const observations = this.OrderObservations(await this.app.LoadJsonAsync<DanishObservationPayloads>({
+		const observations = this.OrderObservations(await HttpLib.Instance.LoadJsonSimple<DanishObservationPayloads>({
 			url: this.url,
 			cancellable,
 			params: this.observationParams
@@ -52,7 +52,7 @@ export class DanishMI extends BaseProvider {
 		this.forecastParams.lat = loc.lat;
 		this.forecastParams.lon = loc.lon;
 
-		const forecasts = await this.app.LoadJsonAsync<DanishMIPayload>({
+		const forecasts = await HttpLib.Instance.LoadJsonSimple<DanishMIPayload>({
 			url: this.url,
 			cancellable,
 			params: this.forecastParams

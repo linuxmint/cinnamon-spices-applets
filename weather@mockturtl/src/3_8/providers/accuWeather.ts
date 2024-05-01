@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { Services } from "../config";
-import { ErrorResponse, HttpError } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HttpLib } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, Precipitation, WeatherData } from "../types";
 import { CelsiusToKelvin, KPHtoMPS, _ } from "../utils";
@@ -66,7 +66,7 @@ export class AccuWeather extends BaseProvider {
             location = this.locationCache[locationID];
 		}
         else {
-            location = await this.app.LoadJsonAsync<LocationPayload>({
+            location = await HttpLib.Instance.LoadJsonSimple<LocationPayload>({
 				url: this.locSearchUrl,
 				cancellable,
 				params: { q: locationID, details: true, language: userLocale, apikey: this.app.config.ApiKey },
@@ -80,19 +80,19 @@ export class AccuWeather extends BaseProvider {
         }
 
         const [current, forecast, hourly] = await Promise.all([
-            this.app.LoadJsonAsyncWithDetails<CurrentPayload[]>({
+            HttpLib.Instance.LoadJsonAsync<CurrentPayload[]>({
 				url: this.currentConditionUrl + location.Key,
 				cancellable,
 				params: { apikey: this.app.config.ApiKey, details: true, language: locale, },
 				HandleError: this.HandleErrors
 			}),
-            this.app.LoadJsonAsyncWithDetails<DailyPayload>({
+            HttpLib.Instance.LoadJsonAsync<DailyPayload>({
 				url: this.dailyForecastUrl + location.Key,
 				cancellable,
 				params: { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, },
 				HandleError: this.HandleErrors
 			}),
-            this.app.LoadJsonAsyncWithDetails<HourlyPayload[]>({
+            HttpLib.Instance.LoadJsonAsync<HourlyPayload[]>({
 				url: this.hourlyForecastUrl + location.Key,
 				cancellable,
 				params: { apikey: this.app.config.ApiKey, details: true, metric: true, language: locale, },

@@ -3,6 +3,7 @@ import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { LocationData } from "../types";
 import { _ } from "../utils";
+import { HttpLib } from "../lib/httpLib";
 
 /**
  * Nominatim communication interface
@@ -30,7 +31,7 @@ export class GeoLocation {
 				return cached;
 			}
 
-			const locationData = await this.App.LoadJsonAsync<any>({
+			const locationData = await HttpLib.Instance.LoadJsonSimple<any>({
 				url: `${this.url}?q=${searchText}&${this.params}`,
 				cancellable
 			});

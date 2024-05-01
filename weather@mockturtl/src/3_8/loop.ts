@@ -163,7 +163,6 @@ export class WeatherLoop {
 		catch (e) {
 			if (e instanceof Error)
 				Logger.Error("Error in Main loop: " + e, e);
-			this.app.encounteredError = true;
 		}
 		finally {
 			this.refreshingResolver?.();
@@ -218,7 +217,6 @@ export class WeatherLoop {
 	}
 
 	private IncrementErrorCount(): void {
-		this.app.encounteredError = false;
 		this.errorCount++;
 		Logger.Debug("Encountered error in previous loop");
 		// Limiting count so timeout does not expand forever

@@ -14,6 +14,7 @@ import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Conditi
 import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits, OnSameDay } from "../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "./BaseProvider";
+import { HttpLib } from "../lib/httpLib";
 
 export class MetUk extends BaseProvider {
 
@@ -109,7 +110,7 @@ export class MetUk extends BaseProvider {
 	};
 
 	private async GetClosestForecastSite(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherSite | null> {
-		const forecastSitelist = await this.app.LoadJsonAsync({
+		const forecastSitelist = await HttpLib.Instance.LoadJsonSimple({
 			url: this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key,
 			cancellable
 		});
@@ -121,7 +122,7 @@ export class MetUk extends BaseProvider {
 	}
 
 	private async GetObservationSitesInRange(loc: LocationData, range: number, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherSite[] | null> {
-		const observationSiteList = await this.app.LoadJsonAsync<any>({
+		const observationSiteList = await HttpLib.Instance.LoadJsonSimple<any>({
 			url: this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key,
 			cancellable
 		});
@@ -147,7 +148,7 @@ export class MetUk extends BaseProvider {
 		const observations: METPayload<true>[] = [];
 		for (const element of observationSites) {
 			Logger.Debug("Getting observation data from station: " + element.id);
-			const payload = await this.app.LoadJsonAsync<METPayload<true>>({
+			const payload = await HttpLib.Instance.LoadJsonSimple<METPayload<true>>({
 				url: this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key,
 				cancellable
 			});
@@ -173,7 +174,7 @@ export class MetUk extends BaseProvider {
 			return null;
 
 		Logger.Debug("Query: " + query);
-		const json = await this.app.LoadJsonAsync({ url: query, cancellable });
+		const json = await HttpLib.Instance.LoadJsonSimple({ url: query, cancellable });
 
 		if (json == null)
 			return null;
