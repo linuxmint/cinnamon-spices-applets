@@ -121,6 +121,7 @@ class Soup2 implements SoupLib {
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
 		this._httpSession.timeout = 10;
 		this._httpSession.idle_timeout = 10;
+		this._httpSession.use_thread_context = true;
 		this._httpSession.add_feature(new ProxyResolverDefault());
     }
 
@@ -153,24 +154,66 @@ class Soup2 implements SoupLib {
 			}
 			else {
 				AddHeadersToMessage(message, headers);
-				// Doesn't accept cancellable here
-				this._httpSession.queue_message(message, (session: any, message: any) => {
+				const finalCancellable = cancellable ?? Cancellable.new();
+				this._httpSession.send_async(message, cancellable, async (session: any, result: imports.gi.Gio.AsyncResult) => {
 					const headers: Record<string, string> = {};
-					message.response_headers.foreach((name: any, value: any) => {
-						headers[name] = value;
-					})
-
+					let res: string | null = null;
+					try {
+						const stream: imports.gi.Gio.InputStream = this._httpSession.send_finish(result);
+						res = await this.read_all_bytes(stream, finalCancellable);
+						message.response_headers.foreach((name: any, value: any) => {
+							headers[name] = value;
+						})
+					}
+					catch(e) {
+						Logger.Error("Error reading http request's response: " + e);
+					}
+					
 					resolve({
 						reason_phrase: message.reason_phrase,
 						status_code: message.status_code,
-						response_body: message.response_body?.data ?? null,
+						response_body: res,
 						response_headers: headers
 					});
+					
 				});
 			}
 		});
 
 		return data;
+	}
+
+	private async read_all_bytes(stream: imports.gi.Gio.InputStream, cancellable: imports.gi.Gio.Cancellable): Promise<string | null> {
+		if (cancellable.is_cancelled())
+			return null;
+
+		const read_chunk_async = () => {
+			return new Promise<imports.gi.GLib.Bytes>((resolve) => {
+				stream.read_bytes_async(8192, 0, cancellable, (source, read_result) => {
+					resolve(stream.read_bytes_finish(read_result));
+				});
+			})
+		}
+
+		let res: string | null = null;
+		let chunk: imports.gi.GLib.Bytes;
+		chunk = await read_chunk_async();
+		while (chunk.get_size() > 0) {
+			if (cancellable.is_cancelled())
+				return res;
+
+			const chunkAsString = ByteArray.fromGBytes(chunk).toString();
+			if (res === null) {
+				res = chunkAsString;
+			}
+			else {
+				(res as string) += chunkAsString;
+			}
+
+			chunk = await read_chunk_async();
+		}
+
+		return res;
 	}
 }
 
