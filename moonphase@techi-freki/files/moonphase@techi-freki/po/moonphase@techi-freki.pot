@@ -113,8 +113,6 @@ msgstr ""
 msgid "North West"
 msgstr ""
 
-
-
 #. metadata.json->name
 msgid "Moon Phase"
 msgstr ""
@@ -198,4 +196,3 @@ msgstr ""
 #. settings-schema.json->showRiseSet->description
 msgid "Display the moon rise, transit, and set times"
 msgstr ""
-

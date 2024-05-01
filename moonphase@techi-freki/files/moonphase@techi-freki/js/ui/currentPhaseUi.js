@@ -19,7 +19,7 @@ class CurrentPhaseUi extends UiElement {
 
     create() {
         if (!this.app.showCurrentPhaseInfo) return;
-        const illumLabel = this.elementGenerator.generateLabel(`${ Math.floor(this.app.moon.illumination.fraction * 100 * 100) / 100 }%` + this.translator.translate('illumination'));
+        const illumLabel = this.elementGenerator.generateLabel(`${ Math.floor(this.app.moon.illumination.fraction * 100 * 100) / 100 }% ` + this.translator.translate('illumination'));
         const illumLayout = this.elementGenerator.generateLayout([illumLabel], false);
 
         const phaseLabel = this.elementGenerator.generateLabel(this.app.moon.currentPhaseName);
