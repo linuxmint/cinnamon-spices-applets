@@ -238,7 +238,7 @@ export class WeatherApplet extends TextIconApplet {
 				if (label != "") {
 					label += " ";
 				}
-				label += TempToUserConfig(temperature, this.config);
+				label += (TempToUserConfig(temperature, this.config) ?? "");
 			}
 		}
 		// Vertical panels
@@ -247,7 +247,7 @@ export class WeatherApplet extends TextIconApplet {
 				label = TempToUserConfig(temperature, this.config, false) ?? "";
 				// Vertical panel width is more than this value then we has space
 				// to show units
-				if (this.GetPanelHeight() >= 35) {
+				if (this.GetPanelHeight() >= 35 && label) {
 					label += UnitToUnicode(this.config.TemperatureUnit);
 				}
 			}
