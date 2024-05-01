@@ -21,6 +21,12 @@
         "default": "",
         "description": "Panel Text"
     },
+    "show-menu": {
+        "type": "keybinding",
+        "description": "Show menu",
+        "default": "",
+        "tooltip": "Set keybinding(s) to show the menu."
+    },
     "limit-characters": {
         "type": "switch",
         "default": false,

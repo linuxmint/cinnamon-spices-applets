@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Pomodoro Timer\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-22 16:51+1000\n"
+"POT-Creation-Date: 2024-04-25 20:30+1000\n"
 "PO-Revision-Date: 2017-02-24 23:32+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -20,102 +20,102 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: applet.js:273
+#: applet.js:278
 msgid "Short break running"
 msgstr "Kratki predah u tijeku"
 
-#: applet.js:276
+#: applet.js:281
 msgid "Long break running"
 msgstr "Duži predah u tijeku"
 
-#: applet.js:279
+#: applet.js:284
 #, javascript-format
 msgid "Pomodori %d, set %d running"
 msgstr "Pomodoro %d, zadatak %d je pokrenut"
 
-#: applet.js:284
+#: applet.js:289
 msgid "Waiting to start"
 msgstr "Čekanje pokretanja"
 
-#: applet.js:337
+#: applet.js:342
 msgid "Pomodoro started"
 msgstr "Pomodoro je pokrenut"
 
-#: applet.js:402
+#: applet.js:407
 msgid "Let's go to work!"
 msgstr "Idemo raditi!"
 
-#: applet.js:420
+#: applet.js:425
 msgid "Take a short break"
 msgstr "Uzmite kratki predah"
 
-#: applet.js:440
+#: applet.js:448
 msgid "Take a long break"
 msgstr "Uzmite duži predah"
 
-#: applet.js:473
+#: applet.js:484
 msgid "Pomodoro ended"
 msgstr "Pomodoro je završio"
 
-#: applet.js:569
+#: applet.js:607
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
 msgstr ""
 
 #. metadata.json->name
-#: applet.js:715
+#: applet.js:753
 msgid "Pomodoro Timer"
 msgstr "Pomodoro odbrojavanje"
 
-#: applet.js:724
+#: applet.js:762
 msgid "Completed"
 msgstr "Završeno"
 
-#: applet.js:732
+#: applet.js:770
 msgid "Reset Timer"
 msgstr "Poništi odbrojavanje"
 
-#: applet.js:740
+#: applet.js:778
 msgid "Reset Counts and Timer"
 msgstr "Poništi brojeve i odbrojavanje"
 
-#: applet.js:749
+#: applet.js:787
 msgid "Skip To Next Timer"
 msgstr ""
 
-#: applet.js:756
+#: applet.js:794
 msgid "What is this?"
 msgstr "Što je ovo?"
 
-#: applet.js:796
+#: applet.js:834
 msgid "None"
 msgstr "Nijedan"
 
-#: applet.js:813
+#: applet.js:851
 msgid "Switch Off Pomodoro"
 msgstr "Isključi Pomodoro"
 
-#: applet.js:819
+#: applet.js:857
 msgid "Start a new Pomodoro"
 msgstr "Pokreni novi Pomodoro"
 
-#: applet.js:825
+#: applet.js:863
 msgid "Hide"
 msgstr "Sakrij"
 
-#: applet.js:837
+#: applet.js:875
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr "Pomodoro zadatak je završio, zaslužili ste predah!"
 
-#: applet.js:846
+#: applet.js:884
 msgid "Your break is over, start another pomodoro!"
 msgstr "Vaš predah je gotov, pokrenite novi pomodoro!"
 
-#: applet.js:852
+#: applet.js:890
 #, fuzzy, javascript-format
 msgid "A new pomodoro begins in %s."
 msgstr "Novi pomodoro počinje za "
 
-#: applet.js:864
+#: applet.js:902
 #, javascript-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -123,7 +123,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: applet.js:865
+#: applet.js:903
 #, javascript-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -131,29 +131,29 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: applet.js:867
+#: applet.js:905
 #, javascript-format
 msgid "%s and %s"
 msgstr ""
 
-#: applet.js:882
+#: applet.js:920
 msgid "Continue Current Pomodoro"
 msgstr "Nastavi trenutni Pomodoro"
 
-#: applet.js:888 applet.js:921
+#: applet.js:926 applet.js:959
 msgid "Pause Pomodoro"
 msgstr "Pauziraj Pomodoro"
 
-#: applet.js:899
+#: applet.js:937
 msgid "Short break finished, ready to continue?"
 msgstr "Kratak predah je završio, spremni za nastavak?"
 
-#: applet.js:915
+#: applet.js:953
 #, fuzzy
 msgid "Start break"
 msgstr "Uzmite kratki predah"
 
-#: applet.js:932
+#: applet.js:970
 #, fuzzy
 msgid "Pomodoro finished, ready to take a break?"
 msgstr "Pomodoro zadatak je završio, zaslužili ste predah!"
@@ -285,3 +285,19 @@ msgstr "Reproduciraj zvuk pokretanja"
 #, fuzzy
 msgid "Start Sound File"
 msgstr "Datoteka zvuka pokretanja"
+
+#. settings-schema.json->head_scripts->description
+msgid "Scripts"
+msgstr ""
+
+#. settings-schema.json->enable_scripts->description
+msgid "Enable scripts"
+msgstr ""
+
+#. settings-schema.json->custom_short_break_script->description
+msgid "Execute this custom script when a short break starts"
+msgstr ""
+
+#. settings-schema.json->custom_long_break_script->description
+msgid "Execute this custom script when a long break starts"
+msgstr ""

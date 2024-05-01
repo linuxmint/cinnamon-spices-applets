@@ -37,6 +37,8 @@ const MEDIA_PLAYER_2_NAME = "org.mpris.MediaPlayer2";
 const MEDIA_PLAYER_2_PLAYER_NAME = "org.mpris.MediaPlayer2.Player";
 
 const ENABLED_APPLETS_KEY = "enabled-applets";
+// /org/cinnamon/show-media-keys-osd
+const SHOW_MEDIA_KEYS_OSD_KEY = "show-media-keys-osd";
 
 const RUNTIME_DIR = GLib.get_user_runtime_dir();
 const R30MPVSOCKET = RUNTIME_DIR + "/mpvradiosocket";
@@ -1718,6 +1720,10 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this.settings.bind("alwaysCanChangeMic", "alwaysCanChangeMic", this.on_settings_changed);
 
+        this.settings.setValue("showMediaKeysOSD", global.settings.get_string(SHOW_MEDIA_KEYS_OSD_KEY));
+        this.settings.bind("showMediaKeysOSD", "showMediaKeysOSD", this.on_showMediaKeysOSD_changed);
+        //~ this.showMediaKeysOSD = global.settings.get_string(SHOW_MEDIA_KEYS_OSD_KEY);
+
         this.settings.bind("volume", "volume");
         this.settings.bind("mic-level", "mic_level");
         this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", this.volume_near_icon);
@@ -1885,6 +1891,10 @@ class Sound150Applet extends Applet.TextIconApplet {
 
         this._loopArtId = null;
         this.loopArt();
+    }
+
+    on_showMediaKeysOSD_changed() {
+        global.settings.set_string(SHOW_MEDIA_KEYS_OSD_KEY, this.showMediaKeysOSD);
     }
 
     _on_remove_soundATcinnamonDOTorg_from_panels() {

@@ -82,6 +82,9 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._opt_playStartSound = null;
         this._opt_startSoundPath = null;
         this._opt_startSoundVolume = null;
+        this._opt_enableScripts = null;
+        this._opt_customShortBreakScript = null;
+        this._opt_customLongBreakScript = null;
 
         this._settingsProvider = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         this._bindSettings();
@@ -126,7 +129,7 @@ class PomodoroApplet extends Applet.TextIconApplet {
     }
 
     _bindSettings() {
-        const emptyCallback = () => {}; // for cinnamon 1.8
+        const emptyCallback = () => {};
     
         this._settingsProvider.bindProperty(
             Settings.BindingDirection.IN,
@@ -182,12 +185,14 @@ class PomodoroApplet extends Applet.TextIconApplet {
             }
         );
     
-        // Binding simple properties that don't require logic beyond setting the value
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "start_automatically_on_load", "_opt_startAutomaticallyOnLoad", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "show_dialog_messages", "_opt_showDialogMessages", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "auto_start_after_pomodoro_ends", "_opt_autoContinueAfterPomodoro", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "auto_start_after_short_break_ends", "_opt_autoContinueAfterShortBreak", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "auto_start_after_break_ends", "_opt_autoStartNewAfterFinish", emptyCallback);
+        this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "enable_scripts", "_opt_enableScripts", emptyCallback);
+        this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "custom_short_break_script", "_opt_customShortBreakScript", emptyCallback);
+        this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "custom_long_break_script", "_opt_customLongBreakScript", emptyCallback);
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "display_icon", "_opt_displayIconInPanel", this._onAppletIconChanged.bind(this));
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "use_symbolic_icon", "_opt_useSymbolicIconInPanel", this._onAppletIconChanged.bind(this));
         this._settingsProvider.bindProperty(Settings.BindingDirection.IN, "show_timer", "_opt_showTimerInPanel", this._onShowTimerChanged.bind(this));
@@ -418,6 +423,9 @@ class PomodoroApplet extends Applet.TextIconApplet {
             this._appletMenu.updateCounts(this._numPomodoroSetFinished, this._numPomodoriFinished);
             this._appletMenu.showPomodoroInProgress(this._opt_pomodoriNumber);
             Main.notify(_("Take a short break"));
+            if (this._opt_enableScripts && this._opt_customShortBreakScript) {
+                this._checkAndExecuteCustomScript(this._opt_customShortBreakScript);
+            }
         });
     
         shortBreakTimer.connect('timer-stopped', () => {
@@ -438,6 +446,9 @@ class PomodoroApplet extends Applet.TextIconApplet {
                 this._longBreakdialog.open();
             } else {
                 Main.notify(_("Take a long break"));
+            }
+            if (this._opt_enableScripts && this._opt_customLongBreakScript) {
+                this._checkAndExecuteCustomScript(this._opt_customLongBreakScript);
             }
         });
     
@@ -526,6 +537,33 @@ class PomodoroApplet extends Applet.TextIconApplet {
         this._sounds.break = this._loadSoundEffect(this._sounds.break, this._opt_breakSoundPath);
         this._sounds.warn = this._loadSoundEffect(this._sounds.warn, this._opt_warnSoundPath);
         this._sounds.start = this._loadSoundEffect(this._sounds.start, this._opt_startSoundPath);
+    }
+
+    _checkAndExecuteCustomScript(filePath) {
+        if (filePath.startsWith('file://')) {
+            filePath = filePath.substr(7);
+        }
+
+        const fileExists = GLib.file_test(filePath, GLib.FileTest.EXISTS);
+        const isExecutable = GLib.file_test(filePath, GLib.FileTest.IS_EXECUTABLE);
+
+        if (!fileExists) {
+            global.logError(`Pomodoro custom script file does not exist: ${filePath}`);
+            return false;
+        }
+
+        if (!isExecutable) {
+            global.logError(`Pomodoro custom script does not have executable permissions: ${filePath}`);
+            return false;
+        }
+
+        try {
+            GLib.spawn_command_line_async(filePath);
+            return true;
+        } catch (error) {
+            global.logError(`Failed to execute Pomodoro custom script file: ${filePath}, error: ${error.message}`);
+            return false;
+        }
     }
     
     _createMenu(orientation) {

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: directory-menu@torchipeppo 0.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-07 18:39-0100\n"
+"POT-Creation-Date: 2024-04-12 13:55-0400\n"
 "PO-Revision-Date: 2024-02-11 17:20+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -19,6 +19,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
+#: popup_menu.py:71
+msgid "Open Folder"
+msgstr "Ouvrir le dossier"
+
+#: popup_menu.py:76
+msgid "Open in Terminal"
+msgstr "Ouvrir dans un terminal"
+
 #. metadata.json->name
 msgid "Directory Menu"
 msgstr "Menu de répertoires"
@@ -27,8 +35,8 @@ msgstr "Menu de répertoires"
 msgid ""
 "Quickly navigate through directories on your system using a dropdown menu."
 msgstr ""
-"Naviguez rapidement dans les répertoires de votre système à l'aide d'un "
-"menu déroulant."
+"Naviguez rapidement dans les répertoires de votre système à l'aide d'un menu "
+"déroulant."
 
 #. settings-schema.json->starting-uri->description
 msgid "Base Directory"
@@ -51,6 +59,14 @@ msgstr "Texte de l'info-bulle"
 msgid "Panel Text"
 msgstr ""
 
+#. settings-schema.json->show-menu->description
+msgid "Show menu"
+msgstr ""
+
+#. settings-schema.json->show-menu->tooltip
+msgid "Set keybinding(s) to show the menu."
+msgstr ""
+
 #. settings-schema.json->limit-characters->description
 msgid "Limit the Maximum Number of Characters on the Submenus"
 msgstr ""
@@ -70,11 +86,3 @@ msgstr ""
 #. settings-schema.json->show-hidden->description
 msgid "Include hidden files"
 msgstr "Montrer également les fichiers cachés"
-
-#. popup_menu.py:71
-msgid "Open Folder"
-msgstr "Ouvrir le dossier"
-
-#. popup_menu.py:76
-msgid "Open in Terminal"
-msgstr "Ouvrir dans un terminal"
