@@ -1,3 +1,9 @@
+### v2.0.0~20240501
+  * Added an option to display the category list alongside the radio station list in the menu.
+  * New screenshot.
+  * New .pot file.
+  * Updated fr.po file.
+
 ### v1.19.0~20240402
   * Adds two options:
     - Whether or not to show the sound volume OSD when changing radio station.
