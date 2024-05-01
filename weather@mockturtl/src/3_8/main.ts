@@ -34,18 +34,9 @@ export interface LoadJsonAsyncOptions extends LoadAsyncOptions {
 
 export class WeatherApplet extends TextIconApplet {
 	private readonly loop: WeatherLoop;
-	private refreshing: Promise<void> | null = null;
-
 	private currentWeatherInfo: WeatherData | null = null;
 	public get CurrentData(): WeatherData | null {
 		return this.currentWeatherInfo;
-	}
-
-	public get Refreshing(): Promise<void> {
-		if (this.refreshing == null)
-			return Promise.resolve();
-
-		return this.refreshing;
 	}
 
 	/** Chosen API */
@@ -516,7 +507,7 @@ The contents of the file saved from the applet help page goes here
 	 */
 	public AfterRefresh = <T, TT>(callback: (owner: T, data: TT, weatherData: WeatherData) => void | Promise<void>): ((owner: T, data: TT) => Promise<void>) => {
 		return async (owner, data) => {
-			await this.Refreshing;
+			await this.loop.Refreshing;
 			const weatherData = this.CurrentData;
 			if (weatherData == null)
 				return;

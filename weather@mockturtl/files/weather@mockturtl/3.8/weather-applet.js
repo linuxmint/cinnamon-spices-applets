@@ -15843,16 +15843,22 @@ const Keys = {
 
 var weatherAppletGUIDs = {};
 class WeatherLoop {
+    get Refreshing() {
+        if (this.refreshing == null)
+            return Promise.resolve();
+        return this.refreshing;
+    }
     constructor(app, instanceID) {
         this.lastUpdated = new Date(0);
         this.pauseRefresh = false;
         this.LOOP_INTERVAL = 15;
         this.appletRemoved = false;
-        this.updating = false;
         this.errorCount = 0;
         this.runningRefresh = null;
+        this.refreshingResolver = null;
+        this.refreshing = null;
         this.DoCheck = async (options = {}) => {
-            var _a;
+            var _a, _b;
             logger_Logger.Debug("Main loop check started.");
             if (this.IsStray())
                 return;
@@ -15862,6 +15868,9 @@ class WeatherLoop {
             try {
                 (_a = this.runningRefresh) === null || _a === void 0 ? void 0 : _a.cancel();
                 this.runningRefresh = new imports.gi.Gio.Cancellable();
+                this.refreshing = new Promise((resolve) => {
+                    this.refreshingResolver = resolve;
+                });
                 this.ValidateLastUpdateTime();
                 if (this.pauseRefresh) {
                     logger_Logger.Debug("Configuration or network error, updating paused");
@@ -15920,7 +15929,8 @@ class WeatherLoop {
                 this.app.encounteredError = true;
             }
             finally {
-                this.updating = false;
+                (_b = this.refreshingResolver) === null || _b === void 0 ? void 0 : _b.call(this);
+                this.refreshingResolver = null;
                 this.runningRefresh = null;
             }
         };
@@ -17730,11 +17740,6 @@ class WeatherApplet extends TextIconApplet {
     get CurrentData() {
         return this.currentWeatherInfo;
     }
-    get Refreshing() {
-        if (this.refreshing == null)
-            return Promise.resolve();
-        return this.refreshing;
-    }
     get Provider() {
         return this.provider;
     }
@@ -17743,7 +17748,6 @@ class WeatherApplet extends TextIconApplet {
     }
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
-        this.refreshing = null;
         this.currentWeatherInfo = null;
         this.encounteredError = false;
         this.online = null;
@@ -17825,7 +17829,7 @@ class WeatherApplet extends TextIconApplet {
         };
         this.AfterRefresh = (callback) => {
             return async (owner, data) => {
-                await this.Refreshing;
+                await this.loop.Refreshing;
                 const weatherData = this.CurrentData;
                 if (weatherData == null)
                     return;

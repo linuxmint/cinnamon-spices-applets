@@ -35,7 +35,6 @@ export class WeatherLoop {
 	private readonly LOOP_INTERVAL: number = 15;
 	private app: WeatherApplet;
 	private appletRemoved = false;
-	private updating: boolean = false;
 	private GUID: string;
 	private instanceID: number;
 	/** Slows main loop down on consecutive errors.
@@ -44,6 +43,15 @@ export class WeatherLoop {
 	private errorCount: number = 0;
 
 	private runningRefresh: imports.gi.Gio.Cancellable | null = null;
+
+	private refreshingResolver: (() => void) | null = null;
+	private refreshing: Promise<void> | null = null;
+	public get Refreshing(): Promise<void> {
+		if (this.refreshing == null)
+			return Promise.resolve();
+
+		return this.refreshing;
+	}
 
 	constructor(app: WeatherApplet, instanceID: number) {
 		this.app = app;
@@ -88,6 +96,10 @@ export class WeatherLoop {
 		try {
 			this.runningRefresh?.cancel();
 			this.runningRefresh = new imports.gi.Gio.Cancellable();
+			this.refreshing = new Promise<void>((resolve) => {
+				this.refreshingResolver = resolve;
+			});
+
 			this.ValidateLastUpdateTime();
 
 			if (this.pauseRefresh) {
@@ -154,7 +166,8 @@ export class WeatherLoop {
 			this.app.encounteredError = true;
 		}
 		finally {
-			this.updating = false;
+			this.refreshingResolver?.();
+			this.refreshingResolver = null;
 			this.runningRefresh = null;
 		}
 	}
