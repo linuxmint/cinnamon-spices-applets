@@ -7,13 +7,16 @@ const { PRIORITY_DEFAULT }  = imports.gi.GLib;
 const { Cancellable } = imports.gi.Gio;
 const ByteArray = imports.byteArray;
 
+export interface SoupLibSendOptions {
+	params?: HTTPParams | null,
+	headers?: HTTPHeaders,
+	method?: Method,
+	cancellable?: imports.gi.Gio.Cancellable
+}
 export interface SoupLib {
     Send: (
 		url: string,
-		params?: HTTPParams | null,
-		headers?: HTTPHeaders,
-		method?: Method,
-		cancellable?: imports.gi.Gio.Cancellable
+		options?: SoupLibSendOptions
 	) => Promise<SoupResponse | null>;
 }
 
@@ -57,11 +60,14 @@ class Soup3 implements SoupLib {
 
     async Send(
 		url: string,
-		params?: HTTPParams | null | undefined,
-		headers?: HTTPHeaders | undefined,
-		method: Method = "GET",
-		cancellable?: imports.gi.Gio.Cancellable,
+		options: SoupLibSendOptions = {}
 	): Promise<SoupResponse | null> {
+		const {
+			params,
+			headers,
+			method = "GET",
+			cancellable
+		} = options;
 
 		if (cancellable?.is_cancelled()) {
 			return Promise.resolve(null);
@@ -133,11 +139,15 @@ class Soup2 implements SoupLib {
 	 */
 	public async Send(
 		url: string,
-		params?: HTTPParams | null,
-		headers?: HTTPHeaders,
-		method: Method = "GET",
-		cancellable?: imports.gi.Gio.Cancellable
+		options: SoupLibSendOptions = {}
 	): Promise<SoupResponse | null> {
+		const {
+			params,
+			headers,
+			method = "GET",
+			cancellable
+		} = options;
+
 		if (cancellable?.is_cancelled()) {
 			return Promise.resolve(null);
 		}
@@ -168,14 +178,14 @@ class Soup2 implements SoupLib {
 					catch(e) {
 						Logger.Error("Error reading http request's response: " + e);
 					}
-					
+
 					resolve({
 						reason_phrase: message.reason_phrase,
 						status_code: message.status_code,
 						response_body: res,
 						response_headers: headers
 					});
-					
+
 				});
 			}
 		});

@@ -17,7 +17,7 @@ export class GeoIPLookupIO implements GeoIP {
 	}
 
 	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
-		const json = await this.app.LoadJsonAsync<GeoIPLookupPayload>(this.query, cancellable);
+		const json = await this.app.LoadJsonAsync<GeoIPLookupPayload>({ url: this.query, cancellable });
 
 		if (!json) {
 			return null;

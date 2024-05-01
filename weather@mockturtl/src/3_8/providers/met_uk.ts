@@ -109,7 +109,11 @@ export class MetUk extends BaseProvider {
 	};
 
 	private async GetClosestForecastSite(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherSite | null> {
-		const forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key, cancellable);
+		const forecastSitelist = await this.app.LoadJsonAsync({
+			url: this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key,
+			cancellable
+		});
+
 		if (forecastSitelist == null)
 			return null;
 
@@ -117,7 +121,11 @@ export class MetUk extends BaseProvider {
 	}
 
 	private async GetObservationSitesInRange(loc: LocationData, range: number, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherSite[] | null> {
-		const observationSiteList = await this.app.LoadJsonAsync<any>(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key, cancellable);
+		const observationSiteList = await this.app.LoadJsonAsync<any>({
+			url: this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key,
+			cancellable
+		});
+
 		if (observationSiteList == null)
 			return null;
 
@@ -139,7 +147,11 @@ export class MetUk extends BaseProvider {
 		const observations: METPayload<true>[] = [];
 		for (const element of observationSites) {
 			Logger.Debug("Getting observation data from station: " + element.id);
-			const payload = await this.app.LoadJsonAsync<METPayload<true>>(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key, cancellable);
+			const payload = await this.app.LoadJsonAsync<METPayload<true>>({
+				url: this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key,
+				cancellable
+			});
+
 			if (!!payload)
 				observations.push(payload);
 			else {
@@ -161,7 +173,7 @@ export class MetUk extends BaseProvider {
 			return null;
 
 		Logger.Debug("Query: " + query);
-		const json = await this.app.LoadJsonAsync(query, cancellable);
+		const json = await this.app.LoadJsonAsync({ url: query, cancellable });
 
 		if (json == null)
 			return null;

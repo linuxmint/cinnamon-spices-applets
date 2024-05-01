@@ -30,10 +30,11 @@ export class GeoLocation {
 				return cached;
 			}
 
-			const locationData = await this.App.LoadJsonAsync<any>(
-				`${this.url}?q=${searchText}&${this.params}`,
+			const locationData = await this.App.LoadJsonAsync<any>({
+				url: `${this.url}?q=${searchText}&${this.params}`,
 				cancellable
-			);
+			});
+
 			if (locationData == null)
 				return null;
 

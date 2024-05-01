@@ -38,7 +38,12 @@ export class ClimacellV4 extends BaseProvider {
 		this.params.apikey = this.app.config.ApiKey;
 		this.params.location = loc.lat + "," + loc.lon;
 
-		const response = await this.app.LoadJsonAsync<ClimacellV4Payload>(this.url, cancellable, this.params, (m) => this.HandleHTTPError(m));
+		const response = await this.app.LoadJsonAsync<ClimacellV4Payload>({
+			url: this.url,
+			cancellable,
+			params: this.params,
+			HandleError: (m) => this.HandleHTTPError(m)
+		});
 
 		if (response == null)
 			return null;

@@ -3,6 +3,13 @@ import { ErrorDetail } from "../types";
 import { _ } from "../utils";
 import { soupLib, SoupResponse } from "./soupLib";
 
+export type LoadAsyncOptions = {
+	params?: HTTPParams;
+	headers?: HTTPHeaders;
+	method?: Method;
+	cancellable?: imports.gi.Gio.Cancellable;
+};
+
 export class HttpLib {
 	private static instance: HttpLib;
 	/** Single instance of log */
@@ -17,12 +24,9 @@ export class HttpLib {
 	 */
 	public async LoadJsonAsync<T, E = any>(
 		url: string,
-		cancellable?: imports.gi.Gio.Cancellable,
-		params?: HTTPParams,
-		headers?: HTTPHeaders,
-		method: Method = "GET",
+		options: LoadAsyncOptions = {}
 	): Promise<Response<T, E>> {
-		const response = await this.LoadAsync(url, cancellable, params, headers, method);
+		const response = await this.LoadAsync(url, options);
 
 		try {
 			const payload = JSON.parse(response.Data);
@@ -51,12 +55,9 @@ export class HttpLib {
 	 */
 	public async LoadAsync<E = any>(
 		url: string,
-		cancellable?: imports.gi.Gio.Cancellable,
-		params?: HTTPParams,
-		headers?: HTTPHeaders,
-		method: Method = "GET",
+		options: LoadAsyncOptions = {}
 	): Promise<Response<string | null, E>> {
-		const message = await soupLib.Send(url, params, headers, method, cancellable);
+		const message = await soupLib.Send(url, options);
 
 		let error: HttpError | undefined = undefined;
 

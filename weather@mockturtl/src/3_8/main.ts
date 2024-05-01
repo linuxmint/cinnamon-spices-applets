@@ -11,7 +11,7 @@ import { RefreshOptions, WeatherLoop } from "./loop";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
 import { UI } from "./ui";
 import { AwareDateString, CapitalizeFirstLetter, CompassDirectionText, delay, ExtraFieldToUserUnits, GenerateLocationText, InjectValues, MPStoUserUnits, NotEmpty, PercentToLocale, PressToUserUnits, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
-import { HttpLib, HttpError, Method, HTTPParams, HTTPHeaders, ErrorResponse, Response } from "./lib/httpLib";
+import { HttpLib, HttpError, Method, HTTPParams, HTTPHeaders, ErrorResponse, Response, LoadAsyncOptions } from "./lib/httpLib";
 import { Logger } from "./lib/logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { CloseStream, OverwriteAndGetIOStream, WriteAsync } from "./lib/io_lib";
@@ -26,11 +26,15 @@ const { IconType, Side } = imports.gi.St;
 const { File, NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
 const { TimeZone } = imports.gi.GLib;
 
+export interface LoadJsonAsyncOptions extends LoadAsyncOptions {
+	url: string;
+	cancellable: imports.gi.Gio.Cancellable;
+	HandleError?: (message: ErrorResponse<any>) => boolean;
+}
+
 export class WeatherApplet extends TextIconApplet {
 	private readonly loop: WeatherLoop;
 	private refreshing: Promise<void> | null = null;
-	private unlockFunc: (() => void) | null = null;
-	private manualRefreshTriggeredWhileLocked = false;
 
 	private currentWeatherInfo: WeatherData | null = null;
 	public get CurrentData(): WeatherData | null {
@@ -355,14 +359,10 @@ export class WeatherApplet extends TextIconApplet {
 	 */
 	public async LoadJsonAsyncWithDetails<T, E = any>(
 		this: WeatherApplet,
-		url: string,
-		cancellable: imports.gi.Gio.Cancellable,
-		params?: HTTPParams,
-		HandleError?: (message: ErrorResponse<E>) => boolean,
-		headers?: HTTPHeaders,
-		method: Method = "GET",
+		options: LoadJsonAsyncOptions
 	): Promise<Response<T, E>> {
-		const response = await HttpLib.Instance.LoadJsonAsync<T, E>(url, cancellable, params, headers, method);
+		const { HandleError, url, ...params } = options;
+		const response = await HttpLib.Instance.LoadJsonAsync<T, E>(url, params);
 
 		// We have errorData inside
 		if (!response.Success) {
@@ -387,14 +387,9 @@ export class WeatherApplet extends TextIconApplet {
 	 */
 	public async LoadJsonAsync<T, E = any>(
 		this: WeatherApplet,
-		url: string,
-		cancellable: imports.gi.Gio.Cancellable,
-		params?: HTTPParams,
-		HandleError?: (message: ErrorResponse<E>) => boolean,
-		headers?: HTTPHeaders,
-		method: Method = "GET",
+		options: LoadJsonAsyncOptions
 	): Promise<T | null> {
-		const response = await this.LoadJsonAsyncWithDetails<T, E>(url, cancellable, params, HandleError, headers, method);
+		const response = await this.LoadJsonAsyncWithDetails<T, E>(options);
 		return (response.Success) ? response.Data : null;
 	}
 
@@ -407,14 +402,10 @@ export class WeatherApplet extends TextIconApplet {
 	 */
 	public async LoadAsync<E = any>(
 		this: WeatherApplet,
-		url: string,
-		cancellable: imports.gi.Gio.Cancellable,
-		params?: HTTPParams,
-		HandleError?: (message: ErrorResponse<E>) => boolean,
-		headers?: HTTPHeaders,
-		method: Method = "GET"
+		options: LoadJsonAsyncOptions
 	): Promise<string | null> {
-		const response = await HttpLib.Instance.LoadAsync(url, cancellable, params, headers, method);
+		const { HandleError, url, ...params } = options;
+		const response = await HttpLib.Instance.LoadAsync(url, params);
 
 		// We have errorData inside
 		if (!response.Success) {

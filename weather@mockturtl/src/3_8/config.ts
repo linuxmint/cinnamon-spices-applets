@@ -473,7 +473,7 @@ export class Config {
 	private DoneTypingLocation() {
 		Logger.Debug("User has finished typing, beginning refresh");
 		this.doneTypingLocation = null;
-		this.app.Refresh({ rebuild: true });
+		this.app.Refresh();
 	}
 
 	private SetLocation(value: string) {

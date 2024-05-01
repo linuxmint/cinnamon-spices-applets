@@ -43,9 +43,15 @@ export class VisualCrossing extends BaseProvider {
 		}
 
 		const url = this.url + loc.lat + "," + loc.lon;
-		const json = await this.app.LoadJsonAsync<VisualCrossingPayload>(url, cancellable, this.params, (e) => this.HandleHttpError(e));
+		const json = await this.app.LoadJsonAsync<VisualCrossingPayload>({
+			url,
+			cancellable,
+			params: this.params,
+			HandleError: (e) => this.HandleHttpError(e)
+		});
 
-		if (!json) return null;
+		if (!json)
+			return null;
 		return this.ParseWeather(json, translate);
 	}
 

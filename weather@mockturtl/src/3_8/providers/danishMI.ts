@@ -43,12 +43,21 @@ export class DanishMI extends BaseProvider {
 			return null;
 
 		this.GetLocationBoundingBox(loc);
-		const observations = this.OrderObservations(await this.app.LoadJsonAsync<DanishObservationPayloads>(this.url, cancellable, this.observationParams), loc);
+		const observations = this.OrderObservations(await this.app.LoadJsonAsync<DanishObservationPayloads>({
+			url: this.url,
+			cancellable,
+			params: this.observationParams
+		}), loc);
 
 		this.forecastParams.lat = loc.lat;
 		this.forecastParams.lon = loc.lon;
 
-		const forecasts = await this.app.LoadJsonAsync<DanishMIPayload>(this.url, cancellable, this.forecastParams);
+		const forecasts = await this.app.LoadJsonAsync<DanishMIPayload>({
+			url: this.url,
+			cancellable,
+			params: this.forecastParams
+		});
+
 		if (forecasts == null)
 			return null;
 

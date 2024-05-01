@@ -55,8 +55,13 @@ export class OpenWeatherMap extends BaseProvider {
 		// Await both of them, if already have it idPayload will be null
 		// If we don't have the ID we push a call to get it
 		const [ json, idPayload ] = await Promise.all([
-			this.app.LoadJsonAsync<OWMPayload>(this.base_url, cancellable, params, this.HandleError),
-			(cachedID == null) ? this.app.LoadJsonAsync<any>(this.id_irl, cancellable, params) : Promise.resolve()
+			this.app.LoadJsonAsync<OWMPayload>({
+				url: this.base_url,
+				cancellable,
+				params: params,
+				HandleError: this.HandleError
+			}),
+			(cachedID == null) ? this.app.LoadJsonAsync<any>({url: this.id_irl, cancellable, params}) : Promise.resolve()
 		]);
 
 		// We store the newly gotten ID if we got it

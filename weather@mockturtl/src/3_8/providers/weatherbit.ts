@@ -77,7 +77,11 @@ export class Weatherbit extends BaseProvider {
 		if (query == null)
 			return null;
 
-		const json = await this.app.LoadJsonAsync(query, cancellable, undefined, (e) => this.HandleError(e));
+		const json = await this.app.LoadJsonAsync({
+			url: query,
+			cancellable,
+			HandleError: (e) => this.HandleError(e)
+		});
 
 		if (json == null)
 			return null;
@@ -90,7 +94,11 @@ export class Weatherbit extends BaseProvider {
 		if (query == null)
 			return null;
 
-		const json = await this.app.LoadJsonAsync<any>(query, cancellable, undefined, (e) => this.HandleHourlyError(e));
+		const json = await this.app.LoadJsonAsync<any>({
+			url: query,
+			cancellable,
+			HandleError: (e) => this.HandleHourlyError(e)
+		});
 
 		if (!!json?.error) {
 			return null;

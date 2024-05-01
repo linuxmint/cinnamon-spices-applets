@@ -18,7 +18,7 @@ export class GeoIPFedora implements GeoIP {
 	}
 
 	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
-		const json = await this.app.LoadJsonAsync<GeoIPFedoraPayload>(this.query, cancellable);
+		const json = await this.app.LoadJsonAsync<GeoIPFedoraPayload>({ url: this.query, cancellable });
 
 		if (!json) {
 			Logger.Info("geoip.fedoraproject didn't return any data");

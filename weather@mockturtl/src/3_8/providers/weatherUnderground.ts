@@ -50,17 +50,17 @@ export class WeatherUnderground extends BaseProvider {
         }
         this.locationCache[locString] = location;
 
-        const forecast = await this.app.LoadJsonAsync<ForecastPayload>(
-			`${this.baseURl}v3/wx/forecast/daily/5day`,
+        const forecast = await this.app.LoadJsonAsync<ForecastPayload>({
+			url: `${this.baseURl}v3/wx/forecast/daily/5day`,
 			cancellable,
-			{
+			params: {
 				geocode: locString,
 				language: this.app.config.currentLocale ?? "en-US",
 				format: "json",
 				apiKey: this.app.config.ApiKey,
 				units: this.currentUnit,
 			}
-		);
+		});
 
         if (forecast == null)
             return null;
@@ -119,17 +119,17 @@ export class WeatherUnderground extends BaseProvider {
 
     private GetNearbyStations = async (loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<NearbyStation[] | null> => {
         const result: NearbyStation[] = [];
-        const payload = await this.app.LoadJsonAsync<NearObservationPayload>(
-			`${this.baseURl}v3/location/near`,
+        const payload = await this.app.LoadJsonAsync<NearObservationPayload>({
+			url: `${this.baseURl}v3/location/near`,
 			cancellable,
-			{
+			params: {
 				geocode: `${loc.lat},${loc.lon}`,
 				format: "json",
 				apiKey: this.app.config.ApiKey,
 				product: "pws"
 			},
-			this.HandleErrors
-		);
+			HandleError: this.HandleErrors
+		});
 
         if (payload == null)
             return null;
@@ -240,18 +240,18 @@ export class WeatherUnderground extends BaseProvider {
     }
 
     private GetObservation = async (stationID: string, cancellable: imports.gi.Gio.Cancellable): Promise<ObservationData | null> => {
-        const observationString = await this.app.LoadAsync(
-			`${this.baseURl}v2/pws/observations/current`,
+        const observationString = await this.app.LoadAsync({
+			url: `${this.baseURl}v2/pws/observations/current`,
 			cancellable,
-			{
+			params: {
 				format: "json",
 				stationId: stationID,
 				apiKey: this.app.config.ApiKey,
 				units: "s",
 				numericPrecision: "decimal",
 			},
-			this.HandleErrors
-		);
+			HandleError: this.HandleErrors
+		});
 
         let observation: ObservationPayload | null = null;
         if (observationString != null) {

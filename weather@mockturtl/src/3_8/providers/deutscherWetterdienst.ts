@@ -22,18 +22,18 @@ export class DeutscherWetterdienst extends BaseProvider {
 
     public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
         const [current, hourly] = await Promise.all([
-            this.app.LoadJsonAsync<CurrentWeatherPayload>(
-				`${this.baseUrl}current_weather`,
+            this.app.LoadJsonAsync<CurrentWeatherPayload>({
+				url: `${this.baseUrl}current_weather`,
 				cancellable,
-				this.GetDefaultParams(loc),
-				this.HandleErrors
-			),
-            this.app.LoadJsonAsync<HourlyForecastPayload>(
-				`${this.baseUrl}weather`,
+				params: this.GetDefaultParams(loc),
+				HandleError: this.HandleErrors
+			}),
+            this.app.LoadJsonAsync<HourlyForecastPayload>({
+				url: `${this.baseUrl}weather`,
 				cancellable,
-				this.GetHourlyParams(loc),
-				this.HandleErrors,
-			)
+				params: this.GetHourlyParams(loc),
+				HandleError: this.HandleErrors,
+			})
         ]);
 
         if (current == null || hourly == null)
