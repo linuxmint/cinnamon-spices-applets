@@ -9,67 +9,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
-    },
-    {
-        "inc": true,
-        "play": false,
-        "name": "Bar Legend Radio",
-        "bitrate": "320",
-        "codec": "MP3",
-        "url": "https://solid24.streamupsolutions.com/proxy/nilxzqeg?mp=/stream",
-        "uuid": "d168c5ba-9bf4-47c7-9609-b5134c90b62d",
-        "homepage": "https://www.barlegendradio.net/",
-        "tags": "blues,jazz,rock",
-        "favicon": "https://www.liveradio.ie/files/images/402053/resized/180x172c/bar_legend_radio.jpg"
-    },
-    {
-        "inc": true,
-        "play": false,
-        "name": "New Orleans Blues - Radio Caprice",
-        "bitrate": "320",
-        "codec": "AAC+",
-        "url": "http://213.141.131.10:8004/louisianablues",
-        "uuid": "71094e57-eb40-49a4-afff-a42062cdcafb",
-        "homepage": "http://radcap.ru/louisianablues.html",
-        "tags": "blues,louisiana,new orleans",
-        "favicon": "http://radcap.ru/apple-touch-icon.png"
-    },
-    {
-        "inc": true,
-        "play": false,
-        "name": "BluesWave Radio",
-        "bitrate": "320",
-        "codec": "AAC+",
-        "url": "https://blueswave.radio:8100/hifiblues",
-        "uuid": "3bd46a05-e589-4263-8eb9-680e45400947",
-        "homepage": "https://blueswave.radio/",
-        "tags": "blues",
-        "favicon": "https://blueswave.radio/wp-content/uploads/2021/01/BluesWave.Radio_.logo_.300X300.png"
-    },
-    {
-        "inc": true,
-        "play": false,
-        "name": "RDMIX RELAXING BLUES",
-        "bitrate": "320",
-        "codec": "MP3",
-        "url": "https://giorgia.radiobellissima.it:8090/radio.mp3",
-        "uuid": "754d1816-68a0-4b6c-ad88-ff16252e298a",
-        "homepage": "https://radiodimensionemix.torontocast.stream/",
-        "tags": "blues,guitar,relaxing,romantic",
-        "favicon": "https://static.wixstatic.com/media/f361b3_786c3987bd404f9f807b4ca7fb4f8337~mv2.jpg"
-    },
-    {
-        "inc": true,
-        "play": false,
-        "name": "Digital Impulse - Blues",
-        "bitrate": "320",
-        "codec": "MP3",
-        "url": "http://orion.shoutca.st:8990/stream",
-        "uuid": "961d83eb-0601-11e8-ae97-52543be04c81",
-        "homepage": "http://www.di-radio.com/blues",
-        "tags": "blues",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -81,7 +22,86 @@
         "uuid": "",
         "homepage": "https://bluesradio.gr/",
         "tags": "blues",
-        "favicon": "https://pbs.twimg.com/profile_images/1606718775813865482/tSii6qLr_400x400.jpg"
+        "favicon": "https://pbs.twimg.com/profile_images/1606718775813865482/tSii6qLr_400x400.jpg",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "A MISSISSIPPI BLUES",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "https://stream.zeno.fm/oz9orxedmqmtv",
+        "uuid": "741384ab-61fb-4166-94fb-7a57740ca00e",
+        "homepage": "https://radiosuitenetwork.torontocast.stream/amississippiblues/",
+        "tags": "blues,classi blues,country,delta blues,guitar,guitarist,jazz,mississippi,rock,rock&blues,soft blues,toronto",
+        "favicon": "https://favicon-generator.org/favicon-generator/htdocs/favicons/2024-01-12/52e7333f36406e4446d34407f6b28baf.ico.png",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Bar Legend Radio",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://solid24.streamupsolutions.com/proxy/nilxzqeg?mp=/stream",
+        "uuid": "d168c5ba-9bf4-47c7-9609-b5134c90b62d",
+        "homepage": "https://www.barlegendradio.net/",
+        "tags": "blues,jazz,rock",
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "New Orleans Blues - Radio Caprice",
+        "bitrate": "320",
+        "codec": "AAC+",
+        "url": "http://213.141.131.10:8004/louisianablues",
+        "uuid": "71094e57-eb40-49a4-afff-a42062cdcafb",
+        "homepage": "http://radcap.ru/louisianablues.html",
+        "tags": "blues,louisiana,new orleans",
+        "favicon": "http://radcap.ru/apple-touch-icon.png",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "BluesWave Radio",
+        "bitrate": "320",
+        "codec": "AAC",
+        "url": "https://blueswave.radio:8100/hifiblues",
+        "uuid": "3bd46a05-e589-4263-8eb9-680e45400947",
+        "homepage": "https://blueswave.radio",
+        "tags": "blues",
+        "favicon": "https://blueswave.radio/wp-content/uploads/2021/01/BluesWave.Radio_.logo_.300X300.png",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "RDMIX RELAXING BLUES",
+        "bitrate": "0320",
+        "codec": "MP3",
+        "url": "https://giorgia.radiobellissima.it:8090/radio.mp3",
+        "uuid": "754d1816-68a0-4b6c-ad88-ff16252e298a",
+        "homepage": "https://radiodimensionemix.torontocast.stream/",
+        "tags": "blues,guitar,relaxing,romantic",
+        "favicon": "https://static.wixstatic.com/media/f361b3_786c3987bd404f9f807b4ca7fb4f8337~mv2.jpg",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Digital Impulse - Blues",
+        "bitrate": "0320",
+        "codec": "MP3",
+        "url": "http://orion.shoutca.st:8990/stream",
+        "uuid": "961d83eb-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://www.di-radio.com/blues",
+        "tags": "blues",
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -93,19 +113,21 @@
         "uuid": "9617ccb4-0601-11e8-ae97-52543be04c81",
         "homepage": "https://www.1.fm/",
         "tags": "blues",
-        "favicon": "http://liveradio.de/media/cache/station_detail/18f08aee-f06b-4965-b607-3f25a581619c.jpg"
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Radio BluesFlac",
-        "bitrate": "1500",
-        "codec": "OGG",
+        "bitrate": "896",
+        "codec": "FLAC",
         "url": "https://streams.radiomast.io/radioblues-flac",
         "uuid": "c9d75db2-d044-465a-9ec6-ee46c8d20a0b",
         "homepage": "https://bluesflac.com/",
         "tags": "",
-        "favicon": "https://bluesflac.com/wp-content/uploads/2019/11/cropped-skull-1-180x180.png"
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -117,7 +139,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -129,7 +152,8 @@
         "uuid": "b050e081-852a-4213-82b7-c5771619f9a7",
         "homepage": "https://onlineradiobox.com/json/us/bluesmenchannelgold/play?platform=web",
         "tags": "",
-        "favicon": ""
+        "favicon": "https://onlineradiobox.com/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -141,7 +165,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -153,7 +178,8 @@
         "uuid": "56662166-bec6-4cea-90f0-fd16bb8089c6",
         "homepage": "https://bluesradio.gr/",
         "tags": "",
-        "favicon": "https://i1.wp.com/bluesradio.gr/wp-content/uploads/2021/06/cropped-24-7bug.png?fit=180%2c180&#038;ssl=1"
+        "favicon": "https://i1.wp.com/bluesradio.gr/wp-content/uploads/2021/06/cropped-24-7bug.png?fit=180%2c180&#038;ssl=1",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -165,7 +191,8 @@
         "uuid": "c4d8290e-2414-4504-8d30-91ed4d0b07cc",
         "homepage": "https://thebluescove.com/",
         "tags": "",
-        "favicon": "https://cdn-profiles.tunein.com/s299348/images/logog.png"
+        "favicon": "https://cdn-profiles.tunein.com/s299348/images/logog.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -177,7 +204,8 @@
         "uuid": "8463e3f1-9964-42f9-b3fe-f866c18da9b5",
         "homepage": "https://blues.amazingradios.com/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -189,7 +217,8 @@
         "uuid": "cc4e23dd-5485-4176-9ade-0a79a08b3ee1",
         "homepage": "http://radcap.ru/countryblues.html",
         "tags": "blues,country blues",
-        "favicon": "http://radcap.ru/apple-touch-icon.png"
+        "favicon": "http://radcap.ru/apple-touch-icon.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -201,7 +230,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -213,7 +243,8 @@
         "uuid": "dae03777-5373-11e8-a4d1-52543be04c81",
         "homepage": "http://laut.fm/bluesclub",
         "tags": "blues,legends,rock",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -225,7 +256,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -237,7 +269,8 @@
         "uuid": "87699bd5-b56d-47ed-a774-90cb07c9f78d",
         "homepage": "https://www.sfliny.com/",
         "tags": "country",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": true
     },
     {
         "inc": true,
@@ -249,7 +282,21 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Adroit Jazz Underground",
+        "bitrate": "256",
+        "codec": "MP3",
+        "url": "https://icecast.walmradio.com:8443/jazz",
+        "uuid": "ea8059be-d119-4de3-b27b-0d9bd6aedb17",
+        "homepage": "https://walmradio.com/jazz",
+        "tags": "contemporary jazz,modern,straight-ahead,mainstream jazz,mainstream,bebop,bop,post-bop,cool,cool jazz,modern big band,avant-garde,free jazz,hard bop,fusion,west coast,combos,big band,hd,walm,contemporary",
+        "favicon": "https://icecast.walmradio.com:8443/jazz.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -261,7 +308,8 @@
         "uuid": "d8104a4f-865d-438a-92c1-2ac2442459cf",
         "homepage": "https://www.le-grigri.com/",
         "tags": "african music,free jazz,hip-hop,jazz,world music",
-        "favicon": "https://www.le-grigri.com/favicon.ico"
+        "favicon": "https://www.le-grigri.com/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -273,7 +321,8 @@
         "uuid": "f184e7d5-3fa7-11ea-a9fa-52543be04c81",
         "homepage": "http://80.82.229.202:8000/",
         "tags": "classic jazz,tango,vocal jazz",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -285,7 +334,8 @@
         "uuid": "505f1686-0ddd-488b-8355-2f7d7a83ba65",
         "homepage": "https://couleursjazz.fr/",
         "tags": "jazz",
-        "favicon": "https://couleursjazz.fr/wp-content/uploads/2018/12/logo_w.svg"
+        "favicon": "https://couleursjazz.fr/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -297,7 +347,8 @@
         "uuid": "c77c45c4-cf37-414c-ae34-868f7d9cd944",
         "homepage": "https://funky.radio/",
         "tags": "60s,70s,70s disco,80s,black,black music,disco,funk,funky,motown,music,oldies,p-funk,r&b,r'n'b,rare groove,rnb,soul,usa",
-        "favicon": "https://funkyradio.streamingmedia.it/funkyradiologo.png"
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -309,7 +360,8 @@
         "uuid": "3b5438eb-0c6c-11e9-a80b-52543be04c81",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -321,7 +373,8 @@
         "uuid": "962a7ec6-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
         "tags": "jazz",
-        "favicon": "http://liveradio.de/media/cache/station_detail/18f08aee-f06b-4965-b607-3f25a581619c.jpg"
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -333,7 +386,8 @@
         "uuid": "962a6335-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
         "tags": "jazz",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -345,7 +399,8 @@
         "uuid": "9625c394-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
         "tags": "smooth jazz",
-        "favicon": "http://liveradio.de/media/cache/station_detail/18f08aee-f06b-4965-b607-3f25a581619c.jpg"
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -357,7 +412,8 @@
         "uuid": "9608ddae-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.tsfjazz.com/",
         "tags": "jazz",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -369,7 +425,8 @@
         "uuid": "96135b8e-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.jazzradio.fr/radio/webradio/13/soul",
         "tags": "soul",
-        "favicon": "http://www.jazzradio.fr/apple-touch-icon-120x120.png"
+        "favicon": "https://www.jazzradio.fr/apple-touch-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -381,7 +438,8 @@
         "uuid": "96136fe5-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.jazzradio.fr/",
         "tags": "jazz,soul",
-        "favicon": "http://www.jazzradio.fr/apple-touch-icon-120x120.png"
+        "favicon": "http://www.jazzradio.fr/apple-touch-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -393,7 +451,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -405,7 +464,34 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Raje Avignon",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "https://rajeavignon.ice.infomaniak.ch/rajeavignon-128.mp3",
+        "uuid": "74a89bfd-aa98-4352-9af7-b64817b4e4da",
+        "homepage": "https://raje.fr/",
+        "tags": "pop,rock,electro,talk",
+        "favicon": "https://raje.fr/favicon.ico",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Raje Nîmes",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "   https://rajenimes.ice.infomaniak.ch/rajenimes-128.mp3",
+        "uuid": "",
+        "homepage": "https://raje.fr/",
+        "tags": "pop,rock,electro,talk",
+        "favicon": "https://raje.fr/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -417,7 +503,8 @@
         "uuid": "df9f3312-6c04-4f1d-94cb-89bd778d5248",
         "homepage": "https://www.arte.tv/fr/",
         "tags": "cinema,culture,documentaries,europe,european,film,france,germany,news,public",
-        "favicon": "https://static-cdn.arte.tv/replay/favicons/apple-touch-icon-120x120.png"
+        "favicon": "https://static-cdn.arte.tv/replay/favicons/apple-touch-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -429,7 +516,8 @@
         "uuid": "",
         "homepage": "https://www.frequence3.com",
         "tags": "undefined",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -441,7 +529,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -453,19 +542,21 @@
         "uuid": "",
         "homepage": "https://www.frequence3.com",
         "tags": "undefined",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Fréquence 3 World (FLAC)",
-        "bitrate": "128",
-        "codec": "OGG",
+        "bitrate": "896",
+        "codec": "FLAC",
         "url": "https://frequence3.net-radio.fr/frequence3world.flac",
         "uuid": "46eb7347-e63c-49a2-80af-e7df471c9703",
         "homepage": "https://www.frequence3.com/",
         "tags": "world music",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -477,7 +568,8 @@
         "uuid": "",
         "homepage": "https://www.frequence3.com",
         "tags": "undefined",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -489,7 +581,8 @@
         "uuid": "738be51d-0eb7-4485-969c-a698cfe41043",
         "homepage": "https://www.frequence3.com/",
         "tags": "80's,90's",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -501,7 +594,8 @@
         "uuid": "b5c3c88f-cef2-43cb-87f6-2c57d81c1827",
         "homepage": "https://www.frequence3.com/les-radios-frequence-3/urban/",
         "tags": "hip-hop,r&b,rap,urban",
-        "favicon": "https://api2.frequence3.net/static/img/stations/horizontal/frequence3urban.png"
+        "favicon": "https://api2.frequence3.net/static/img/stations/horizontal/frequence3urban.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -513,7 +607,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -525,7 +620,8 @@
         "uuid": "",
         "homepage": "http://www.sing-sing-bis.org/",
         "tags": "undefined",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -537,7 +633,8 @@
         "uuid": "",
         "homepage": "http://www.sing-sing-bis.org/",
         "tags": "undefined",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -549,7 +646,8 @@
         "uuid": "",
         "homepage": "http://www.sing-sing-bis.org/",
         "tags": "undefined",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -561,7 +659,8 @@
         "uuid": "96182f72-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.sing-sing-bis.org/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -573,7 +672,8 @@
         "uuid": "31074f8a-e6f4-11e9-a96c-52543be04c81",
         "homepage": "https://www.francetvinfo.fr/en-direct/radio.html",
         "tags": "aac,information,public radio,radio france",
-        "favicon": "https://www.francetvinfo.fr/assets/common/images/pwa/ios/120-5487caf3.png"
+        "favicon": "https://www.francetvinfo.fr/assets/common/images/pwa/ios/120-5487caf3.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -585,7 +685,8 @@
         "uuid": "6a1440b2-e6f0-11e9-a96c-52543be04c81",
         "homepage": "https://www.franceculture.fr/",
         "tags": "aac,culture,public radio,radio france",
-        "favicon": "https://upload.wikimedia.org/wikipedia/fr/thumb/c/c9/France_Culture_-_2008.svg/1024px-France_Culture_-_2008.svg.png"
+        "favicon": "https://upload.wikimedia.org/wikipedia/fr/thumb/c/c9/France_Culture_-_2008.svg/1024px-France_Culture_-_2008.svg.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -597,7 +698,8 @@
         "uuid": "d2bbffaf-5d67-4a65-9772-097d8c0269d3",
         "homepage": "https://www.franceinter.fr/",
         "tags": "",
-        "favicon": "https://canada-culture.org/wp-content/uploads/2018/05/logo-france-inter.png"
+        "favicon": "https://canada-culture.org/wp-content/uploads/2018/05/logo-france-inter.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -609,7 +711,8 @@
         "uuid": "456a0101-7542-438e-a731-f63f0ec70e19",
         "homepage": "",
         "tags": "news",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -621,7 +724,8 @@
         "uuid": "96131db3-0601-11e8-ae97-52543be04c81",
         "homepage": "https://www.francebleu.fr/vaucluse",
         "tags": "",
-        "favicon": "https://www.francebleu.fr/favicons/apple-touch-icon-180x180.png"
+        "favicon": "https://www.francebleu.fr/favicons/apple-touch-icon-180x180.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -633,7 +737,8 @@
         "uuid": "ff2f925e-2e17-11ea-aa0c-52543be04c81",
         "homepage": "https://www.mouv.fr/",
         "tags": "rap",
-        "favicon": "https://www.mouv.fr/dist/favicons/logo-120.png"
+        "favicon": "https://www.mouv.fr/dist/favicons/logo-120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -645,7 +750,8 @@
         "uuid": "9636ea30-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.mouv.fr/",
         "tags": "public radio,radio france,youth",
-        "favicon": "http://www.mouv.fr/dist/favicons/logo-120.png"
+        "favicon": "http://www.mouv.fr/dist/favicons/logo-120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -657,7 +763,8 @@
         "uuid": "960b6497-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.radio-active.net/",
         "tags": "320kbps",
-        "favicon": ""
+        "favicon": "http://www.radio-active.net/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -669,7 +776,8 @@
         "uuid": "379d25e3-eb8d-11e9-a96c-52543be04c81",
         "homepage": "https://www.francemusique.fr/musiques-de-films",
         "tags": "aac,movie soundtracks,public radio,radio france",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -681,7 +789,8 @@
         "uuid": "6b1d0ed8-d9b7-402f-9178-d6165e081d44",
         "homepage": "http://www.laradiosanspub.fr/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -693,7 +802,8 @@
         "uuid": "9606c2cd-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.rtl.fr/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": false,
@@ -705,7 +815,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -717,7 +828,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -729,7 +841,8 @@
         "uuid": "96109b22-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.radiogalere.org/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -741,19 +854,21 @@
         "uuid": "a685d799-8ee0-4f8b-b6e0-77345b34863d",
         "homepage": "https://www.radio-libertaire.net/",
         "tags": "music,talk",
-        "favicon": "https://image.jimcdn.com/app/cms/image/transf/dimension=1920x400:format=jpg/path/s38eab3b1d92587b0/image/ia47e45fb52863fa6/version/1437489151/image.jpg"
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Cause Commune (Libre @ Toi)",
-        "bitrate": "128",
+        "bitrate": "160",
         "codec": "OGG",
         "url": "http://212.129.27.101:8000/voixdulat_ogg",
         "uuid": "961a2e42-0601-11e8-ae97-52543be04c81",
         "homepage": "https://cause-commune.fm/",
         "tags": "alternative,information,libre,opinion",
-        "favicon": "https://cause-commune.fm/wp-content/uploads/2018/08/logo-cc-ico-150x150.png"
+        "favicon": "https://cause-commune.fm/wp-content/uploads/2018/08/logo-cc-ico-150x150.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -765,7 +880,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -777,7 +893,8 @@
         "uuid": "932eb148-e6f6-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/",
         "tags": "aac,music,public radio,radio france",
-        "favicon": "https://upload.wikimedia.org/wikipedia/fr/thumb/d/d5/FIP_logo_2005.svg/1024px-FIP_logo_2005.svg.png"
+        "favicon": "https://upload.wikimedia.org/wikipedia/fr/thumb/d/d5/FIP_logo_2005.svg/1024px-FIP_logo_2005.svg.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -789,7 +906,8 @@
         "uuid": "a9464601-eaa5-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/tout-nouveau-tout-fip/webradio",
         "tags": "aac,music,public radio,radio france",
-        "favicon": "https://cdn.radiofrance.fr/s3/cruiser-production/2019/06/e061141c-f6b4-4502-ba43-f6ec693a049b/200x200_fip-nouveau_ok.jpg"
+        "favicon": "https://cdn.radiofrance.fr/s3/cruiser-production/2019/06/e061141c-f6b4-4502-ba43-f6ec693a049b/200x200_fip-nouveau_ok.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -801,7 +919,8 @@
         "uuid": "ddc49aac-eb85-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/rock/webradio",
         "tags": "aac,public radio,radio france,rock",
-        "favicon": "https://cdn.radiofrance.fr/s3/cruiser-production/2019/06/f5b944ca-9a21-4970-8eed-e711dac8ac15/200x200_fip-rock_ok.jpg"
+        "favicon": "https://cdn.radiofrance.fr/s3/cruiser-production/2019/06/f5b944ca-9a21-4970-8eed-e711dac8ac15/200x200_fip-rock_ok.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -813,7 +932,8 @@
         "uuid": "84764bda-eb7e-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/reggae/webradio",
         "tags": "aac,public radio,radio france,reggae",
-        "favicon": "https://cdn.radiofrance.fr/s3/cruiser-production/2019/06/15a58f25-86a5-4b1a-955e-5035d9397da3/200x200_fip-reggae_ok.jpg"
+        "favicon": "https://cdn.radiofrance.fr/s3/cruiser-production/2019/06/15a58f25-86a5-4b1a-955e-5035d9397da3/200x200_fip-reggae_ok.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -825,7 +945,8 @@
         "uuid": "76b129aa-45cc-46cf-b6b2-1fde08a2c8f9",
         "homepage": "https://www.fip.fr/pop/webradio",
         "tags": "aac,pop,public radio,radio france",
-        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png"
+        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -837,7 +958,8 @@
         "uuid": "36dda8c3-88fa-49be-992a-ada02abdf1dc",
         "homepage": "https://www.fip.fr/",
         "tags": "eclectic,pop",
-        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png"
+        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -849,7 +971,8 @@
         "uuid": "cbc50678-e70e-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/musiques-du-monde/webradio",
         "tags": "aac,public radio,radio france,world music",
-        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png"
+        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -861,7 +984,8 @@
         "uuid": "5b9ceedf-eb85-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/jazz/webradio",
         "tags": "aac,jazz,public radio,radio france",
-        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png"
+        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -873,7 +997,8 @@
         "uuid": "c454908c-eb81-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/groove/webradio",
         "tags": "aac,groove,public radio,radio france",
-        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png"
+        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -885,7 +1010,8 @@
         "uuid": "b809226c-eb82-11e9-a96c-52543be04c81",
         "homepage": "https://www.fip.fr/electro/webradio",
         "tags": "aac,electro,public radio,radio france",
-        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png"
+        "favicon": "https://www.fip.fr/dist/favicons/logo-120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -897,19 +1023,21 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Radiocratie",
-        "bitrate": "192",
+        "bitrate": "0192",
         "codec": "MP3",
         "url": "https://flux.radiocratie.com/flux",
         "uuid": "3a08f80f-b8bf-48a2-926c-17f980de85d9",
         "homepage": "https://radiocratie.com/",
-        "tags": "chanson française,electronic,hip-hop,jazz,jungle,pop",
-        "favicon": ""
+        "tags": "jazz,electronic,pop,hip-hop,jungle,chanson française",
+        "favicon": "https://radiocratie.com/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -921,7 +1049,8 @@
         "uuid": "9613fe3a-0601-11e8-ae97-52543be04c81",
         "homepage": "http://mradio.fr/",
         "tags": "chansons françaises,women",
-        "favicon": "https://mradio.fr/apple-touch-icon-120x120.png"
+        "favicon": "https://mradio.fr/apple-touch-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -933,7 +1062,8 @@
         "uuid": "4b4538de-295b-11e9-a80b-52543be04c81",
         "homepage": "https://mradio.fr/",
         "tags": "la radio 100% chanson française,maxi france",
-        "favicon": "https://mradio.fr/apple-touch-icon-120x120.png"
+        "favicon": "https://mradio.fr/apple-touch-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -945,7 +1075,8 @@
         "uuid": "96140603-0601-11e8-ae97-52543be04c81",
         "homepage": "http://mradio.fr/",
         "tags": "60s,70s,chansons françaises",
-        "favicon": "https://mradio.fr/apple-touch-icon-120x120.png"
+        "favicon": "https://mradio.fr/apple-touch-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -957,19 +1088,21 @@
         "uuid": "963cf651-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.harmonyradio.be/",
         "tags": "chansons françaises,pop",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Europe 1 Musique",
-        "bitrate": "4",
+        "bitrate": "138",
         "codec": "AAC",
         "url": "https://wr.lmn.fm/e1-wr5.aac?aw_0_1st.playerid=lgrdnwsRadioplayer",
         "uuid": "b1fe0ab1-72be-42fc-b1d1-0ff4122863ae",
         "homepage": "https://www.europe1.fr/culture/nouveau-ecoutez-europe-musique-4095053",
         "tags": "chansons,pop",
-        "favicon": "https://resize-europe1.lanmedia.fr/f/webp/r/622,311,forcex,center-middle/img/var/europe1/storage/images/europe1/culture/nouveau-ecoutez-europe-musique-4095053/58235425-1-fre-FR/NOUVEAU-Ecoutez-Europe-Musique.png"
+        "favicon": "https://resize-europe1.lanmedia.fr/f/webp/r/622,311,forcex,center-middle/img/var/europe1/storage/images/europe1/culture/nouveau-ecoutez-europe-musique-4095053/58235425-1-fre-FR/NOUVEAU-Ecoutez-Europe-Musique.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -981,7 +1114,8 @@
         "uuid": "961ed7aa-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.allzicradio.com/fr/player/listen/121/allzic-radio-enfoirs",
         "tags": "chansons françaises",
-        "favicon": ""
+        "favicon": "http://www.allzicradio.com/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -990,10 +1124,11 @@
         "bitrate": "128",
         "codec": "MP3",
         "url": "https://www.zestream.eu:8010/radiobrassens.mp3",
-        "uuid": "93a18f3a-6eea-426c-b77e-e01a5992b685",
+        "uuid": "",
         "homepage": "http://www.radiobrassens.com/",
-        "tags": "misc",
-        "favicon": "https://www.radiobrassens.com/wp-content/uploads/2017/11/logo-radio-brassens-favicon.png"
+        "tags": "",
+        "favicon": "https://www.radiobrassens.com/wp-content/uploads/2017/11/logo-radio-brassens-favicon.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1005,7 +1140,8 @@
         "uuid": "70f97520-176a-4436-b9cc-829c5c4eae9c",
         "homepage": "https://programmesradio.rts.ch/option-musique",
         "tags": "chansons,pop",
-        "favicon": "https://www.radio.fr/images/broadcasts/9e/dd/3462/5/c300.png"
+        "favicon": "https://www.radio.fr/images/broadcasts/9e/dd/3462/5/c300.png",
+        "author_title_swap": false
     },
     {
         "inc": false,
@@ -1017,7 +1153,8 @@
         "uuid": "8003bc6f-340b-11ea-afca-52543be04c81",
         "homepage": "https://www.cheriefm.fr/",
         "tags": "france",
-        "favicon": "https://www.cheriefm.fr/uploads/assets/cherie/icons/apple-icon-120x120.png"
+        "favicon": "https://www.cheriefm.fr/uploads/assets/cherie/icons/apple-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1029,7 +1166,8 @@
         "uuid": "f16938ab-d2bc-4f34-aac5-6d90b63fad1b",
         "homepage": "https://www.radiosud.be/",
         "tags": "",
-        "favicon": "https://www.radiosud.be/favicon/apple-icon-120x120.png"
+        "favicon": "https://www.radiosud.be/favicon/apple-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1041,7 +1179,8 @@
         "uuid": "0c9c8e21-3859-4bb5-9620-9234e3a74bd4",
         "homepage": "https://www.alouette.fr/",
         "tags": "",
-        "favicon": ""
+        "favicon": "https://bocir-prod-bucket.s3.amazonaws.com/radios/alouette/images/favicon.x-icon",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1053,7 +1192,8 @@
         "uuid": "961363c4-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.jazzradio.fr/radio/webradio/23/jazzy-french",
         "tags": "french music,jazz",
-        "favicon": "http://www.jazzradio.fr/apple-touch-icon-120x120.png"
+        "favicon": "http://www.jazzradio.fr/apple-touch-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1065,7 +1205,8 @@
         "uuid": "884c87a2-9dbe-46d5-a95d-dd3bf8ba6765",
         "homepage": "https://ecouterradioenligne.com/100-pour-cent-france/",
         "tags": "chansons françaises",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1077,7 +1218,8 @@
         "uuid": "9609743b-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.chantefrance.com/",
         "tags": "",
-        "favicon": ""
+        "favicon": "https://bocir-prod-bucket.s3.eu-west-1.amazonaws.com/radios/chante-france/images/favicon.x-icon",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1089,7 +1231,8 @@
         "uuid": "96147fcb-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.chantefrance.com/",
         "tags": "80s",
-        "favicon": ""
+        "favicon": "https://bocir-prod-bucket.s3.eu-west-1.amazonaws.com/radios/chante-france/images/favicon.x-icon",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1101,7 +1244,8 @@
         "uuid": "ce3b536e-2e20-11ea-aa0c-52543be04c81",
         "homepage": "https://www.chantefrance.com/",
         "tags": "chansons françaises",
-        "favicon": "https://bocir-prod-bucket.s3.eu-west-1.amazonaws.com/radios/chante-france/images/favicon.x-icon"
+        "favicon": "https://bocir-prod-bucket.s3.eu-west-1.amazonaws.com/radios/chante-france/images/favicon.x-icon",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1113,7 +1257,8 @@
         "uuid": "960db9c6-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.rmfon.pl/play,54",
         "tags": "french music",
-        "favicon": "http://www.rmfon.pl/img/favicon/favicon120.png"
+        "favicon": "http://www.rmfon.pl/img/favicon/favicon120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1125,7 +1270,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1137,7 +1283,8 @@
         "uuid": "b14eb284-7343-427f-bdfc-9bedd935b4fa",
         "homepage": "https://ici.radio-canada.ca/ohdio/premiere",
         "tags": "",
-        "favicon": "https://ici.radio-canada.ca/v5/ohdio/dist/appohdio/assets/pwa/apple-touch-icon-180x180.png"
+        "favicon": "https://ici.radio-canada.ca/v5/ohdio/dist/appohdio/assets/pwa/apple-touch-icon-180x180.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1149,7 +1296,8 @@
         "uuid": "170e9f59-e70d-11e9-a96c-52543be04c81",
         "homepage": "http://www.rfi.fr/",
         "tags": "france médias monde,information,public radio,world news",
-        "favicon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/RFI_logo_2013.svg/1024px-RFI_logo_2013.svg.png"
+        "favicon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/RFI_logo_2013.svg/1024px-RFI_logo_2013.svg.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1161,7 +1309,8 @@
         "uuid": "9608efd5-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.rts.ch/la-1ere/",
         "tags": "public radio,srg ssr",
-        "favicon": ""
+        "favicon": "https://www.rts.ch/hbv7/static/images/favicon/rts/152x152.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1173,7 +1322,8 @@
         "uuid": "3901699a-3e02-4fb4-addf-13297dc4c83a",
         "homepage": "https://www.bbc.co.uk/sounds/play/live:bbc_radio_fourfm",
         "tags": "comedy,drama,news,talk",
-        "favicon": "https://static.files.bbci.co.uk/sounds/web/sounds-web/img/sounds-apple-touch-icon.ead169771d.png"
+        "favicon": "https://static.files.bbci.co.uk/sounds/web/sounds-web/img/sounds-apple-touch-icon.ead169771d.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1185,7 +1335,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1197,19 +1348,21 @@
         "uuid": "7655e3e7-398c-4f4b-8354-acb681e3add8",
         "homepage": "https://www.radio-columbia.com/",
         "tags": "disco,funk,soul",
-        "favicon": ""
+        "favicon": "https://www.radio-columbia.com/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "FUNKY TRACKS RADIO Barcelona",
-        "bitrate": "320",
-        "codec": "MP3",
+        "bitrate": "128",
+        "codec": "AAC",
         "url": "http://streaming2.elitecomunicacion.es:8134/stream",
         "uuid": "62bf5294-65dc-4a7a-9fb1-f60550dfa15b",
         "homepage": "https://www.funkytracksradio.com/",
         "tags": "80s,disco,funky,funky 70,funky house",
-        "favicon": "https://cdn.webrad.io/images/logos/emisora-org-es/funky-tracks.png"
+        "favicon": "https://cdn.webrad.io/images/logos/emisora-org-es/funky-tracks.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1221,7 +1374,8 @@
         "uuid": "",
         "homepage": "https://www.b4bradio.com/radio-funk.html",
         "tags": "undefined",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1233,7 +1387,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "undefined",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1245,7 +1400,8 @@
         "uuid": "9613614b-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.jazzradio.fr/radio/webradio/15/groove",
         "tags": "groove,jazz",
-        "favicon": "https://www.jazzradio.fr/apple-touch-icon-120x120.png"
+        "favicon": "https://www.jazzradio.fr/apple-touch-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1257,7 +1413,73 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Rock Melodic Radio",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://i4.streams.ovh:8124/stream",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "1.FM - Gorilla FM Radio",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "http://strm112.1.fm/gorillafm_mobile_mp3",
+        "uuid": "962a803f-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://www.1.fm/",
+        "tags": "alternative rock,indie rock,progressive rock",
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Laut.FM Raus",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://stream.laut.fm/raus",
+        "uuid": "9636938e-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://laut.fm/raus",
+        "tags": "60s,beat,garage,punk,reggae,rockabilly,ska,surf",
+        "favicon": "https://lh3.ggpht.com/a4M_Oyz2Jek1bkcRe8I7v3A8clEOoOI8Y-NiYuuICuw0wOHwaZgMUit4rRgC18mGZMo_=w300",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "RdMix Classic Rock 70s 80s 90s",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "https://cast1.torontocast.com:4610/stream",
+        "uuid": "7afae7e3-8d06-42f5-b59e-a52d6e09e60e",
+        "homepage": "https://radiodimensionemix.torontocast.stream/",
+        "tags": "60s,60s and 70s.,70's,70er,70s,80's,80er,80s,90's,90er,90s,blues,blues rock,classic blues,classic hits,classic hits 60s 70a 80s,classic rock,classic rock  50's 60's 70's 80's 90's,classic rock music,classic rock oldies,classic rock oldies soul,classic rock; alternative rock indie,country,entretenimiento,fm,hard rock,high quality audio,hits,local radio,melodic hard rock,music,music 70s 80s 90s,musica,oldies,pop rock,public radio,radio,real classic rock,rhythm and blues,rock,soft rock",
+        "favicon": "https://static.wixstatic.com/media/f361b3_1bad7e5fb9a54196b2ac2c2fe71d6e4f~mv2.jpg",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Planet Rock",
+        "bitrate": "192",
+        "codec": "AAC",
+        "url": "https://stream.on.revma.com/6wa52xb1pg0uv?direct=false",
+        "uuid": "2c6ff70c-141b-4101-91ca-23e8c9455ced",
+        "homepage": "https://planetradio.co.uk/planet-rock/",
+        "tags": "",
+        "favicon": "",
+        "author_title_swap": true
     },
     {
         "inc": true,
@@ -1269,7 +1491,8 @@
         "uuid": "11467fc3-1e4f-494f-8616-6d7a378a7d53",
         "homepage": "https://www.radiofreccia.it/",
         "tags": "rock",
-        "favicon": "https://cloud.radiofreccia.it/assets/www.radiofreccia.it/1.0.27/img/logo/apple-icon-120x120.png"
+        "favicon": "https://cloud.radiofreccia.it/assets/www.radiofreccia.it/1.0.27/img/logo/apple-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1281,7 +1504,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "undefined",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1293,7 +1517,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1305,7 +1530,8 @@
         "uuid": "a438e66d-2ba7-46b4-89c9-01bc4204e161",
         "homepage": "https://grollooradio.nl/",
         "tags": "americana,blues,cajun,country,nederpop,soul",
-        "favicon": "https://grollooradio.nl/wp-content/uploads/2023/04/cropped-grollooapp-1-180x180.png"
+        "favicon": "https://grollooradio.nl/wp-content/uploads/2023/04/cropped-grollooapp-1-180x180.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1317,7 +1543,8 @@
         "uuid": "790ef988-70ac-4823-9732-c80f57a129f0",
         "homepage": "",
         "tags": "rock",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1329,7 +1556,8 @@
         "uuid": "96090f58-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.rmvradio.fr/",
         "tags": "",
-        "favicon": "http://www.rmvradio.fr/favicon.ico"
+        "favicon": "http://www.rmvradio.fr/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1341,7 +1569,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "folk, world folk",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1353,7 +1582,8 @@
         "uuid": "1ebaa481-8525-47ec-9296-9ff1eb1e400e",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1365,7 +1595,8 @@
         "uuid": "74364cf0-f739-11e8-a471-52543be04c81",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1377,7 +1608,8 @@
         "uuid": "34975b12-c845-4a2f-b39d-5acb25b10855",
         "homepage": "https://www.bigbeatbrighton.co.uk/",
         "tags": "00s,90s,dance,indie,pop",
-        "favicon": "https://ueni-favicons.s3.eu-central-1.amazonaws.com/production/232a0fb69aa04d5b992efefc9d199abd_IMG_20200628_095825_063.jpg"
+        "favicon": "https://ueni-favicons.s3.eu-central-1.amazonaws.com/production/232a0fb69aa04d5b992efefc9d199abd_IMG_20200628_095825_063.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1389,7 +1621,8 @@
         "uuid": "9646971f-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.rsa-sachsen.de/rsa-beatles-radio",
         "tags": "beatles",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1401,7 +1634,8 @@
         "uuid": "96151576-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.beatlesradio.com/",
         "tags": "60s,breakbeat,oldies,pop,rock",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1413,7 +1647,8 @@
         "uuid": "22e94a2f-51ac-4f3b-8f65-c28446e988ca",
         "homepage": "https://totallyradio.com.au/Greatest-Hits/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1425,7 +1660,8 @@
         "uuid": "df73c0cc-c668-4db8-aae5-e1fc0a077ca0",
         "homepage": "https://www.c9.fr/",
         "tags": "pop rock",
-        "favicon": "https://www.c9.fr/favicon.ico"
+        "favicon": "https://www.c9.fr/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1437,7 +1673,8 @@
         "uuid": "65908a60-3a4c-4d8c-b66c-d8eb96faefc6",
         "homepage": "https://www.radiorock.com.br/",
         "tags": "alternative rock,rock",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1449,7 +1686,8 @@
         "uuid": "717b3f02-eaf6-4bb9-8d5d-6e51c33bdb0e",
         "homepage": "https://truckersradio.nl/",
         "tags": "country,dance,funny,mix,pop,talk,top 40,truckerhits",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1461,7 +1699,8 @@
         "uuid": "82f7a749-68a4-11e8-b15b-52543be04c81",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1473,7 +1712,8 @@
         "uuid": "f34f75c1-2e52-409d-8753-5afda5d4b043",
         "homepage": "https://lebonmix.radio/",
         "tags": "electronic",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1485,7 +1725,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1497,7 +1738,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1509,7 +1751,8 @@
         "uuid": "4d951bba-4b72-42ec-a610-893862d8211d",
         "homepage": "https://www.dinoradio.be/",
         "tags": "golden oldies,goldies,oldies",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1521,7 +1764,8 @@
         "uuid": "960c569c-0601-11e8-ae97-52543be04c81",
         "homepage": "http://player.radiocontact.be/mint/player/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1533,7 +1777,47 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "181.FM - 80's HairBand",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://www.181.fm/stream/pls/181-hairband.pls",
+        "uuid": "9637d635-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://www.181.fm/",
+        "tags": "80s,hair metal,metal,waynesboro",
+        "favicon": "http://www.181.fm/favicon.ico",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "100 XR",
+        "bitrate": "96",
+        "codec": "AAC+",
+        "url": "https://xr.dockl.com/stream",
+        "uuid": "3dd6f7c4-5790-40e2-8773-eb4fbfcf9f20",
+        "homepage": "https://100xr.tumblr.com/",
+        "tags": "alternative rock,classic rock,hard rock,metal,rock",
+        "favicon": "https://64.media.tumblr.com/81bb353771451b9e90fa5493665d3c85/8fd1b411c8ca9129-f6/s128x128u_c1/95bf5bf4295ed51556eb98ef85d9a964cdeba6b2.jpg",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "1.FM - High Voltage Radio",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "http://strm112.1.fm/highvoltage_mobile_mp3",
+        "uuid": "962a73d1-0601-11e8-ae97-52543be04c81",
+        "homepage": "http://www.1.fm/",
+        "tags": "alternative rock,metal,rock",
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1545,7 +1829,8 @@
         "uuid": "680021a3-8477-45c7-9d3a-8731b9477792",
         "homepage": "https://radio.theholyroger.com/",
         "tags": "bitcoin,chiptunes,classical,community,cryptocurrency,drum & bass,electronic,funk,hip-hop,jazz,metal,phonk,request line,roger",
-        "favicon": "https://theholyroger.com/uploads/site_favicon.png"
+        "favicon": "https://theholyroger.com/uploads/site_favicon.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1557,7 +1842,8 @@
         "uuid": "e389696c-5217-43d3-aa41-bc3c5b52f049",
         "homepage": "https://www.heavy1.radio/",
         "tags": "hard rock,heavy metal,rock",
-        "favicon": ""
+        "favicon": "https://www.heavy1.radio/upload/5a43b6d1b25af8.86286060.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1569,7 +1855,8 @@
         "uuid": "13e23984-0151-4adf-9c12-eaa16f44afcd",
         "homepage": "https://france-metal-radio.com/index",
         "tags": "metal",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1581,7 +1868,8 @@
         "uuid": "52d39f8a-3288-47e1-8c07-a7d629ea7c98",
         "homepage": "https://www.metalcity.gr/?m=1",
         "tags": "",
-        "favicon": ""
+        "favicon": "https://www.metalcity.gr/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1593,7 +1881,8 @@
         "uuid": "e5b81ad3-bb7d-41a5-a3d3-0f715434778e",
         "homepage": "https://megarockradio.net/",
         "tags": "classic rock,hard rock,metal,requests",
-        "favicon": "https://megarockradio.net/wp-content/uploads/2021/10/cropped-1f918-1f3fb-180x180.png"
+        "favicon": "https://megarockradio.net/wp-content/uploads/2021/10/cropped-1f918-1f3fb-180x180.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1605,31 +1894,34 @@
         "uuid": "",
         "homepage": "",
         "tags": "undefined",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "P11 Bandit",
-        "bitrate": "192",
+        "bitrate": "191",
         "codec": "AAC",
         "url": "https://p11.p4groupaudio.com/P11_AH",
         "uuid": "a1e0f382-13c0-4946-b749-c8d6fb052678",
         "homepage": "https://www.p4.no/lyttesenter/?fbclid=IwAR16g3IasYLWw5RkXav5KrV_vWK3wb5xpIHNGytn20fQ3qTATiGoRcQ77dc",
         "tags": "hard rock,heavy metal,metal",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
-        "name": "CLASSIC METAL RADIO (classicmetalradio.net)",
-        "bitrate": "128",
+        "name": "CLASSIC METAL RADIO",
+        "bitrate": "0128",
         "codec": "MP3",
         "url": "https://hazel.torontocast.com:2280/",
         "uuid": "",
-        "homepage": "",
+        "homepage": "https://classicmetalradio.net/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1641,7 +1933,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1653,7 +1946,8 @@
         "uuid": "a76bb03c-b3f2-11ea-993a-52543be04c81",
         "homepage": "https://theblast.fm/",
         "tags": "alternative,christian,christian rock,metal,rock",
-        "favicon": ""
+        "favicon": "https://www.theblast.fm/home/wp-content/uploads/2014/07/blast_logo_full-1.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1665,7 +1959,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1677,7 +1972,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1689,7 +1985,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1701,7 +1998,8 @@
         "uuid": "4760f774-8aaf-4c35-b0a4-67026b0d32c0",
         "homepage": "http://www.radcap.ru/cyberpunk.html",
         "tags": "cyberpunk",
-        "favicon": "http://radcap.ru/stylegraf/cyberpunk-c.jpg"
+        "favicon": "http://radcap.ru/stylegraf/cyberpunk-c.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1713,7 +2011,8 @@
         "uuid": "6397f250-256e-11e8-91bf-52543be04c81",
         "homepage": "http://radcap.ru/crust.html",
         "tags": "crust,punk",
-        "favicon": "http://radcap.ru/apple-touch-icon.png"
+        "favicon": "http://radcap.ru/apple-touch-icon.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1725,7 +2024,8 @@
         "uuid": "6c3a79d6-2315-44c8-81df-f8aa5a7458cd",
         "homepage": "https://www.punkrockradio.ca/",
         "tags": "post-punk,punk,quebec",
-        "favicon": "https://cdn2.editmysite.com/images/site/footer/og-image-placeholder-blank.png"
+        "favicon": "https://www.punkrockradio.ca/uploads/1/2/9/5/129579634/published/mobile-app-launch-icon-20.png?1578796242",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1737,7 +2037,8 @@
         "uuid": "a1f18162-da2b-419e-9e86-72a81e508a40",
         "homepage": "http://punkrockers-radio.de/",
         "tags": "post-hardcore,punk,ska",
-        "favicon": "https://www.punkrockers-radio.de/img/punkrockers-radio_play-button.png"
+        "favicon": "https://www.punkrockers-radio.de/img/punkrockers-radio_play-button.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1747,9 +2048,10 @@
         "codec": "MP3",
         "url": "https://punkirratia.net:8443/punk",
         "uuid": "964165a2-0601-11e8-ae97-52543be04c81",
-        "homepage": "http://punkirratia.net",
-        "tags": "punk,anarcho-punk,hardcore",
-        "favicon": "https://punkirratia.net:8443/punkirratia.jpg"
+        "homepage": "http://punkirratia.net/",
+        "tags": "anarcho-punk,hardcore,punk",
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1761,7 +2063,8 @@
         "uuid": "f3c6ab3e-bbe1-4752-a48b-e93b3f2b08fa",
         "homepage": "https://www.punkfm.co.uk/",
         "tags": "punk",
-        "favicon": ""
+        "favicon": "https://www.punkfm.co.uk/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1773,7 +2076,8 @@
         "uuid": "f3638b19-e63a-4d0b-b116-f1e834e5479c",
         "homepage": "https://retrowave.one/",
         "tags": "80s,cyberpunk,darksynth,darkwave,electronic,outrun,retrowave,sovietwave,synthpop,synthwave,various",
-        "favicon": "https://retrowave.one/favicon.ico"
+        "favicon": "https://retrowave.one/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1785,19 +2089,21 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Radio Caprice - Ska",
         "bitrate": "320",
-        "codec": "AAC+",
+        "codec": "AAC",
         "url": "http://79.111.119.111:9043/",
         "uuid": "960d297c-0601-11e8-ae97-52543be04c81",
         "homepage": "http://radcap.ru/ska.html",
         "tags": "ska",
-        "favicon": "http://radcap.ru/apple-touch-icon.png"
+        "favicon": "http://radcap.ru/apple-touch-icon.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1809,19 +2115,34 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
-        "name": "SomaFM | Heavyweight Reggae | 80 aac",
+        "name": "Boot Boy Radio",
+        "bitrate": "192",
+        "codec": "AAC+",
+        "url": "https://streaming04.liveboxstream.uk/proxy/dwain?mp=/stream",
+        "uuid": "9bc64606-6eb1-40bd-901e-aed7c510baa0",
+        "homepage": "https://bootboyradio.net/",
+        "tags": "punk,reggae,ska,soul",
+        "favicon": "https://bootboyradio.net/wp-content/uploads/2021/02/cropped-900logosquare-192x192.jpg",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "SomaFM Heavyweight Reggae",
         "bitrate": "80",
         "codec": "AAC+",
         "url": "https://somafm.com/reggae80.pls",
         "uuid": "3e55abce-a772-448a-91a1-ce29dd65abca",
         "homepage": "https://somafm.com/reggae/",
         "tags": "reggae,rocksteady,ska",
-        "favicon": "https://somafm.com/img3/reggae400.png"
+        "favicon": "https://somafm.com/img3/reggae400.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1833,19 +2154,21 @@
         "uuid": "960f2d97-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
         "tags": "reggae",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Sensimedia Roots Reggae",
-        "bitrate": "192",
+        "bitrate": "0192",
         "codec": "MP3",
         "url": "http://144.217.129.213:9878/stream",
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1857,7 +2180,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1869,7 +2193,8 @@
         "uuid": "b6d47672-aa01-4363-bd26-32f0e8d9570e",
         "homepage": "https://house-fusion-radio5.webnode.co.uk/",
         "tags": "chillout,deep,disco,funky,house,old skool,progressive,techno",
-        "favicon": "https://a9529f376f.cbaul-cdnwnd.com/b98b49fd8fd891343f258e40ce0544f4/200000038-135391353b/450/House%20Fusion%201.jpg"
+        "favicon": "https://a9529f376f.cbaul-cdnwnd.com/b98b49fd8fd891343f258e40ce0544f4/200000038-135391353b/450/House%20Fusion%201.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1881,7 +2206,8 @@
         "uuid": "f5e8a89f-4016-4f5f-baca-aeb74aad668a",
         "homepage": "https://www.eldo.lu/radio/livestream/chill",
         "tags": "chillout",
-        "favicon": "https://www.eldo.lu/assets/images/favicon-eldo/favicon-120.png"
+        "favicon": "https://www.eldo.lu/assets/images/favicon-eldo/favicon-120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1893,7 +2219,8 @@
         "uuid": "33d39331-3f06-4350-90d6-9f1b2c526046",
         "homepage": "https://el-stacja.pl/",
         "tags": "chillout,electronic,electronica",
-        "favicon": ""
+        "favicon": "https://el-stacja.pl/assets/img/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1905,7 +2232,8 @@
         "uuid": "29995961-137e-4adb-bad1-71eaa989a598",
         "homepage": "https://www.discocafe.eu/",
         "tags": "chillout,disco,lounge,oldies",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1917,7 +2245,8 @@
         "uuid": "9619b5e8-0601-11e8-ae97-52543be04c81",
         "homepage": "http://chillout.zone/",
         "tags": "320kbps,ambient,breaks,chillout,psychill",
-        "favicon": "http://static.tumblr.com/5f6637bbc70ea25ad9381fb8a45dd96b/iggknak/AAFnk62e5/tumblr_static_3ofi0bchjmskgwswc0g8go4cw.jpg"
+        "favicon": "http://static.tumblr.com/5f6637bbc70ea25ad9381fb8a45dd96b/iggknak/AAFnk62e5/tumblr_static_3ofi0bchjmskgwswc0g8go4cw.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1929,7 +2258,8 @@
         "uuid": "961fb4b2-0601-11e8-ae97-52543be04c81",
         "homepage": "https://www.1.fm/",
         "tags": "chillout,lounge",
-        "favicon": "http://liveradio.de/media/cache/station_detail/18f08aee-f06b-4965-b607-3f25a581619c.jpg"
+        "favicon": "http://liveradio.de/media/cache/station_detail/18f08aee-f06b-4965-b607-3f25a581619c.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1941,7 +2271,47 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "TechnoBase.FM",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "http://lw2.mp3.tb-group.fm/tb.mp3",
+        "uuid": "960e96f3-0601-11e8-ae97-52543be04c81",
+        "homepage": "https://technobase.fm/",
+        "tags": "dance,eurodance,handsup,happy hardcore,hardcore,jumpstyle,techno",
+        "favicon": "https://technobase.fm/media/icons/tb/apple-touch-icon.png",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Deep House Radio",
+        "bitrate": "128",
+        "codec": "MP3",
+        "url": "http://62.210.105.16:7000/stream",
+        "uuid": "5a299b9c-71ec-4736-b1d2-57a64793ed9e",
+        "homepage": "",
+        "tags": "electronic",
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Le Bon Mix Radio 97.9",
+        "bitrate": "320",
+        "codec": "AAC+",
+        "url": "https://stream10.xdevel.com/audio13s976748-2017/stream/icecast.audio",
+        "uuid": "6affdd69-650a-46a9-94bf-cff80541e152",
+        "homepage": "https://www.lebonmix.radio/",
+        "tags": "disco,electro,funk,jazz,music,pop,raggae,rock,sanspub,soul,world",
+        "favicon": "https://admuzzum.xdevel.com/cloud/x/cid/35/im/png/XZXW/Q/XY/20dcef61bfe95be20b65258bba132163.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1953,7 +2323,8 @@
         "uuid": "411ba841-c1c8-497a-a3f8-00d8fe0ef89c",
         "homepage": "https://somafm.com/synphaera",
         "tags": "electronic",
-        "favicon": "https://somafm.com/img3/synphaera400.jpg"
+        "favicon": "https://somafm.com/img3/synphaera400.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1965,7 +2336,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "dance,techno",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -1973,23 +2345,25 @@
         "name": "Dance Wave! (FLAC)",
         "bitrate": "768",
         "codec": "OGG",
-        "url": "http://dancewave.online/dance.flac.ogg",
+        "url": "https://dancewave.online/dance.flac.ogg",
         "uuid": "540bd58d-1d2f-4cae-a5b1-414b40ce3f3f",
-        "homepage": "https://dancewave.online/",
-        "tags": "",
-        "favicon": "http://dancewave.online/dw_logo.png"
+        "homepage": "https://dancewave.online",
+        "tags": "club dance electronic house trance",
+        "favicon": "https://dancewave.online/dw_logo.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Intense Radio (Flac)",
-        "bitrate": "1411",
+        "bitrate": "1536",
         "codec": "OGG",
-        "url": "http://secure.live-streams.nl/flac.flac",
-        "uuid": "af6f51b1-0ca9-11ea-a87e-52543be04c81",
-        "homepage": "https://www.intenseradio.net/",
-        "tags": "dance,deep house,flac,hard techno,techno,trance",
-        "favicon": "https://www.intenseradio.net/wp-content/uploads/fbrfg/apple-touch-icon.png?v=gaek7lvrgd"
+        "url": "http://secure.live-streams.nl/flac.ogg",
+        "uuid": "",
+        "homepage": "https://www.IntenseRadio.net",
+        "tags": "",
+        "favicon": "https://www.intenseradio.net/wp-content/uploads/fbrfg/apple-touch-icon.png?v=gaek7lvrgd",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2001,7 +2375,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2010,10 +2385,11 @@
         "bitrate": "128",
         "codec": "MP3",
         "url": "https://stream-eurodance90.fr/radio/8000/128.mp3",
-        "uuid": "",
-        "homepage": "",
-        "tags": "",
-        "favicon": ""
+        "uuid": "a6c0da00-2c1c-4e61-b565-96aaf7d64756",
+        "homepage": "https://stream-eurodance90.fr/",
+        "tags": "eurodance",
+        "favicon": "https://stream-eurodance90.fr/static/uploads/browser_icon/120.1680701870.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2025,7 +2401,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2037,7 +2414,8 @@
         "uuid": "61bdc00f-5a55-4e0b-a841-7747d66fa7dd",
         "homepage": "https://londonmusicradio.com/",
         "tags": "",
-        "favicon": ""
+        "favicon": "https://londonmusicradio.com/wp-content/uploads/2017/04/thumbnail_Logo2-2-copyY-copy-black-e1519168864488.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2049,7 +2427,8 @@
         "uuid": "3808d861-d348-44ae-8844-589ba59bd4e5",
         "homepage": "https://www.nordiclodgeradio.com/",
         "tags": "ambient,chillout,electronic,lounge,relax",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2061,7 +2440,8 @@
         "uuid": "1f9f88c2-f9a3-4554-bee2-0afcf2483aa3",
         "homepage": "https://areena.yle.fi/audio/ohjelmat/ylex",
         "tags": "dance,pop,rap,rock",
-        "favicon": "https://images.cdn.yle.fi/f_auto,w_48,h_48,dpr_4.0/v1496664710/yle-areena-app.png"
+        "favicon": "https://images.cdn.yle.fi/f_auto,w_48,h_48,dpr_4.0/v1496664710/yle-areena-app.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2073,7 +2453,8 @@
         "uuid": "dd2cc3a5-278e-4c8e-972a-a239a86c6a81",
         "homepage": "http://radiodeepunderground.com/",
         "tags": "",
-        "favicon": "https://cdn-profiles.tunein.com/s291934/images/logog.jpg?t=153901"
+        "favicon": "https://cdn-profiles.tunein.com/s291934/images/logog.jpg?t=153901",
+        "author_title_swap": false
     },
     {
         "inc": false,
@@ -2085,7 +2466,8 @@
         "uuid": "a9183d95-50d6-11ea-b877-52543be04c81",
         "homepage": "https://www.b4bradio.com/",
         "tags": "dance,deep house",
-        "favicon": "https://www.b4bradio.com/images/favicon.png"
+        "favicon": "https://www.b4bradio.com/images/favicon.png",
+        "author_title_swap": false
     },
     {
         "inc": false,
@@ -2097,7 +2479,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": false,
@@ -2109,7 +2492,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2121,7 +2505,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2133,7 +2518,8 @@
         "uuid": "9cdf8b70-b05c-4fe6-a4c2-02b3858c5044",
         "homepage": "https://radiodimensionemix.torontocast.stream/",
         "tags": "70s,80s,90s,hits,top 100",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2145,7 +2531,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2157,7 +2544,8 @@
         "uuid": "badbee09-b4ed-4059-a7e7-7fd518a808e4",
         "homepage": "https://nationradio.uk/",
         "tags": "70's",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2169,7 +2557,8 @@
         "uuid": "46e55863-cef7-4f50-954e-3fa7feede49f",
         "homepage": "https://www.nporadio5.nl/",
         "tags": "60's,70's,80's,evergreens",
-        "favicon": "https://www.nporadio5.nl/apple-touch-icon.png"
+        "favicon": "https://www.nporadio5.nl/apple-touch-icon.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2181,7 +2570,73 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Forever 80s",
+        "bitrate": "256",
+        "codec": "MP3",
+        "url": "http://207.180.234.221:8000/stream",
+        "uuid": "c6f534e8-d40c-4775-babd-ae45d7984245",
+        "homepage": "https://radioforever.com/",
+        "tags": "80s,classic hits,italo disco,oldies",
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "rjfm club 80",
+        "bitrate": "192",
+        "codec": "MP3",
+        "url": "https://listen.radioking.com/radio/2725/stream/72647",
+        "uuid": "7e5c14a7-779c-4af1-800d-f745ca9953f7",
+        "homepage": "https://fr.radioking.com/radio/rjfm-club-80",
+        "tags": "1980s,80's,hd",
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Radio Mix",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "http://andromeda.shoutca.st:8427/stream",
+        "uuid": "c4ae3574-a582-480f-876a-2d1d28fed742",
+        "homepage": "http://radio-mix.fr/",
+        "tags": "80s,90s,alternative,oldschool",
+        "favicon": "https://static.mytuner.mobi/media/tvos_radios/fshlw6mbwcrs.png",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "The Disco Planet",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://broadcast.miami/proxy/thediscoplanet?mp=/stream/;",
+        "uuid": "9936ef24-8998-4e5b-9c12-a167dc50370b",
+        "homepage": "https://www.thediscoplanet.com/",
+        "tags": "disco,funk,soul",
+        "favicon": "https://www.thediscoplanet.com/logo/LogoDiscoPlanet_h600.jpg",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "80sFlashBack Radio",
+        "bitrate": "1792",
+        "codec": "FLAC",
+        "url": "https://c23.radioboss.fm:8129/stream",
+        "uuid": "f6e22af1-b31f-4234-a630-6a9485c831ee",
+        "homepage": "https://c23.radioboss.fm/u/129",
+        "tags": "dance 80s,disco,disco funk",
+        "favicon": "https://c23.radioboss.fm/stationlogo/png/129.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2193,7 +2648,8 @@
         "uuid": "bc910109-8c16-45dd-a337-83b631b51888",
         "homepage": "https://oxygenmusic.hu/",
         "tags": "80's,80s,classic hits",
-        "favicon": "https://oxygenmusic.hu/logo192.png"
+        "favicon": "https://oxygenmusic.hu/logo192.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2205,7 +2661,8 @@
         "uuid": "0834f9c1-3d08-480c-b6bd-5b335341e9f6",
         "homepage": "http://www.sfliny.com/",
         "tags": "80's,new wave",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2217,19 +2674,21 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Magic radio (Flac)",
-        "bitrate": "128",
+        "bitrate": "1500",
         "codec": "OGG",
         "url": "http://mp3.magic-radio.net/flac.m3u",
         "uuid": "0662acad-2d68-11ea-aa0c-52543be04c81",
         "homepage": "https://magic-radio.net/",
         "tags": "80s,flac,sanspub",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2241,7 +2700,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2253,7 +2713,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2265,7 +2726,8 @@
         "uuid": "44c862a3-27e7-4d88-be66-4c70a642bb38",
         "homepage": "https://www.70-80.it/",
         "tags": "320 kbps,70,70 80 hits,70 80 hits hq,70 music,70-80,70-80 hits,80,80 music,high quality audio,hq",
-        "favicon": "https://www.70-80.it/favicon.ico"
+        "favicon": "https://www.70-80.it/wp-content/uploads/2020/03/logo-70-80-75x75.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2277,7 +2739,8 @@
         "uuid": "9640d060-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.radiottanta.com/",
         "tags": "70s,80s,90s,classic hits,rovereto",
-        "favicon": ""
+        "favicon": "https://www.radio80.it/wp-content/uploads/2015/02/logo-radio80-1.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2289,7 +2752,8 @@
         "uuid": "9626b3f8-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
         "tags": "80s,european music",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2301,7 +2765,8 @@
         "uuid": "99a0a3ef-d6b6-42f8-bad8-63132543c363",
         "homepage": "https://0nlineradio.com/",
         "tags": "1980s,80er,80s,80s rock,classic rock,classic rock oldies,rock",
-        "favicon": "https://i.ibb.co/31QbY3f/80s-rock.jpg"
+        "favicon": "https://i.ibb.co/31QbY3f/80s-rock.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2313,7 +2778,8 @@
         "uuid": "0507b8b1-4a4d-42cd-872f-fd6f6c64712f",
         "homepage": "https://www.rm.fm/80s",
         "tags": "1980s,80,80's,80er,80s,golden oldies,goldies,oldies",
-        "favicon": "https://i.ibb.co/TbS5mh3/80s.jpg"
+        "favicon": "https://www.rm.fm/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2325,7 +2791,8 @@
         "uuid": "905d8810-1c82-4e21-b6cc-2b105e37bffa",
         "homepage": "https://www.80s80s.de/",
         "tags": "80s,mix",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2337,7 +2804,8 @@
         "uuid": "962a885b-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
         "tags": "80s",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2349,7 +2817,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2361,7 +2830,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2373,7 +2843,8 @@
         "uuid": "9d5a5d73-f563-4f60-934d-dc9452e2ea0a",
         "homepage": "https://laut.fm/80sexitos",
         "tags": "70s,80s,90s,disco,pop,rock,romantic",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2385,7 +2856,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2397,7 +2869,8 @@
         "uuid": "f3842846-f2c0-11e8-a471-52543be04c81",
         "homepage": "http://www.0nradio.com",
         "tags": "80s,80er,oldies,pop",
-        "favicon": "https://www.0nradio.com/logos/0n-80s_600x600.jpg"
+        "favicon": "https://www.0nradio.com/logos/0n-80s_600x600.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2409,7 +2882,21 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Ràdio 90 (320k)",
+        "bitrate": "320",
+        "codec": "MP3",
+        "url": "https://giss.tv:666/r90.mp3",
+        "uuid": "53379674-3ea4-446c-be0b-637294bbc08b",
+        "homepage": "https://www.r90.org/",
+        "tags": "rock,pop,funk,jazz",
+        "favicon": "https://www.r90.org/wp-content/uploads/2022/07/logo_r90_50px.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2421,7 +2908,8 @@
         "uuid": "b907e678-48a6-4b39-9883-9e1bbabfcda5",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2433,7 +2921,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2445,31 +2934,34 @@
         "uuid": "6ffa9e34-e9c0-4f60-896f-c1426c3e5b03",
         "homepage": "https://radioitalopower.com/",
         "tags": "",
-        "favicon": "https://radioitalopower.com/assets/img/apple-touch-icon.png"
+        "favicon": "https://radioitalopower.com/assets/img/apple-touch-icon.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Radio San Marino",
-        "bitrate": "218",
+        "bitrate": "216",
         "codec": "AAC",
         "url": "https://d18ufyp3q60j7u.cloudfront.net/radio-ch01/radio-ch01/playlist.m3u8",
         "uuid": "0f1d84d0-7370-11e9-af37-52543be04c81",
         "homepage": "https://www.smtvsanmarino.sm/radio/ascolta-radio-san-marino",
         "tags": "città di san marino,pop,top 40",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Radio Roma",
-        "bitrate": "1253",
+        "bitrate": "1276",
         "codec": "AAC",
         "url": "https://585b674743bbb.streamlock.net/9044/9044/playlist.m3u8",
         "uuid": "2a28487e-19fb-4ca2-9b74-43fa02e983a7",
         "homepage": "https://www.radioroma.it/",
         "tags": "pop,roma",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2481,7 +2973,8 @@
         "uuid": "07ee48b6-cd55-4557-b569-8b717841b2e9",
         "homepage": "https://radiorouge.com/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2493,31 +2986,34 @@
         "uuid": "c6fbb5a0-00a3-11ea-bbf2-52543be04c81",
         "homepage": "http://www.topitalia.fr/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "_Radio Energy Classic (Italy)",
-        "bitrate": "224",
+        "bitrate": "256",
         "codec": "MP3",
         "url": "https://gmusto3.radioca.st/stream",
         "uuid": "0f5f71e2-ee63-4054-9d0d-18f2e106b37d",
         "homepage": "https://www.radioenergy.to/",
         "tags": "70s,80s,90s,classic hits,classic rock,disco,funk,oldies,pop,pop rock,rock,soul",
-        "favicon": "https://www.radioenergy.to/favicon.ico"
+        "favicon": "https://www.radioenergy.to/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "1.FM - Italia On Air Radio",
-        "bitrate": "192",
+        "bitrate": "320",
         "codec": "MP3",
         "url": "http://strm112.1.fm/italiaonair_mobile_mp3",
         "uuid": "962a9277-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.1.fm/",
         "tags": "italian pop",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2529,7 +3025,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2541,7 +3038,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2553,7 +3051,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2565,7 +3064,8 @@
         "uuid": "42cd283f-05fd-416a-ad66-bceb3ec09cac",
         "homepage": "https://witchesradio.fr/",
         "tags": "ambiant,celtic,new age",
-        "favicon": "https://witchesradio.fr/favicon.ico"
+        "favicon": "https://witchesradio.fr/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2577,7 +3077,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2589,7 +3090,8 @@
         "uuid": "9240b9fd-5a96-4aba-9404-01af5fb7ac0e",
         "homepage": "http://www.activradio.fr/",
         "tags": "",
-        "favicon": ""
+        "favicon": "http://www.activradio.fr/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2601,7 +3103,8 @@
         "uuid": "9617a958-0601-11e8-ae97-52543be04c81",
         "homepage": "https://www.radioparadise.com/",
         "tags": "california,eclectic,free,internet,non-commercial,paradise,radio",
-        "favicon": "https://www.radioparadise.com/apple-touch-icon.png"
+        "favicon": "https://www.radioparadise.com/favicon-32x32.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2613,7 +3116,8 @@
         "uuid": "0a0bb091-69c0-11e9-af37-52543be04c81",
         "homepage": "https://www.c-lab.fr/",
         "tags": "electro,funk,hiphop,jazz,pop,rap,reggae,soul,world music",
-        "favicon": "https://www.c-lab.fr/apple-icon-120x120.png"
+        "favicon": "https://www.c-lab.fr/apple-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2625,7 +3129,8 @@
         "uuid": "9638348d-0601-11e8-ae97-52543be04c81",
         "homepage": "http://chaos-radio.fr/",
         "tags": "music",
-        "favicon": "http://chaos-radio.fr/assets/icons/icon-128x128.png"
+        "favicon": "http://chaos-radio.fr/assets/icons/icon-128x128.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2637,7 +3142,8 @@
         "uuid": "3c64d004-8a0d-4ab7-a235-49091372ea77",
         "homepage": "https://www.121gigawattradio.com/",
         "tags": "80s rock,blues,classic hits,country,evergreen,hits,jazz,metal,movie soundtracks,old school hip hop,pop,reggae,rnb,rock,soul",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2649,7 +3155,8 @@
         "uuid": "961487e8-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.mistralfm.com/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2661,7 +3168,8 @@
         "uuid": "00e280f9-3de4-4f5b-be7f-8196ae9e274e",
         "homepage": "http://www.atlantica-radio.fr/",
         "tags": "misc",
-        "favicon": "https://www.atlantica-radio.fr/storage/2017/08/cropped-logo_altantica_radio-180x180.png"
+        "favicon": "https://www.atlantica-radio.fr/storage/2017/08/cropped-logo_altantica_radio-180x180.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2673,7 +3181,8 @@
         "uuid": "249d01b0-f5af-11e9-bbf2-52543be04c81",
         "homepage": "https://radioparadise.com/",
         "tags": "eclectic",
-        "favicon": "https://radioparadise.com/apple-touch-icon.png"
+        "favicon": "https://radioparadise.com/apple-touch-icon.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2685,7 +3194,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2697,7 +3207,8 @@
         "uuid": "35eab8a2-b5ad-449e-8e4d-98725ffd727d",
         "homepage": "https://radiobrony.fr",
         "tags": "brony,fan music,live show,mlp,my little pony,my little pony: friendship is magic",
-        "favicon": "https://radiobrony.fr/img/icons/bwavatar-details.png"
+        "favicon": "https://radiobrony.fr/img/icons/bwavatar-details.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2709,7 +3220,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2721,7 +3233,8 @@
         "uuid": "9607c7d3-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.accent4.com/",
         "tags": "",
-        "favicon": "https://www.accent4.com/wp-content/uploads/2019/07/cropped-logo-white-180x180.png"
+        "favicon": "https://www.accent4.com/wp-content/uploads/2019/07/cropped-logo-white-180x180.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2733,7 +3246,8 @@
         "uuid": "eeb2f786-0868-42ec-9087-54ab82474347",
         "homepage": "https://retetoscanaclassica.it/",
         "tags": "classical",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2745,7 +3259,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2757,7 +3272,8 @@
         "uuid": "a2bd7f10-4831-416a-939c-729be46ec76a",
         "homepage": "https://www.wnyc.org/",
         "tags": "classical",
-        "favicon": "https://media.wnyc.org/i/300/300/c/80/1/wnyc_square_logo.png"
+        "favicon": "https://media.wnyc.org/i/300/300/c/80/1/wnyc_square_logo.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2769,19 +3285,21 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "The Cheese",
-        "bitrate": "768",
+        "bitrate": "1024",
         "codec": "FLAC",
         "url": "http://thecheese.ddns.net:8004/stream",
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2793,7 +3311,8 @@
         "uuid": "92ac2fd9-799b-413b-8a5c-6a6ea2421656",
         "homepage": "http://www.superstereo24bit.com/",
         "tags": "jazz",
-        "favicon": "http://www.superstereo24bit.com/img/m7.jpg"
+        "favicon": "http://www.superstereo24bit.com/img/m7.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2805,19 +3324,21 @@
         "uuid": "4ce50b53-9ea5-4b37-9393-f889b058215e",
         "homepage": "",
         "tags": "classical",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Super Stereo 5 - Rock",
-        "bitrate": "",
-        "codec": "OGG",
+        "bitrate": "1536",
+        "codec": "FLAC",
         "url": "http://198.204.228.202:8511/canal1",
         "uuid": "dfd5bf12-1d84-430a-bb2b-1e52c714bba0",
         "homepage": "",
         "tags": "rock",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2829,7 +3350,8 @@
         "uuid": "cb6deb4b-dc44-4af7-97f5-2ea791f0610c",
         "homepage": "",
         "tags": "classical",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2841,7 +3363,8 @@
         "uuid": "5f038f11-f972-4737-95d7-4cddd9cb509e",
         "homepage": "",
         "tags": "decades",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2853,7 +3376,8 @@
         "uuid": "3cb3a1e7-6a06-42a7-b72d-5e339cff6c35",
         "homepage": "",
         "tags": "classical",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2865,7 +3389,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2877,7 +3402,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2889,7 +3415,8 @@
         "uuid": "000f6a5e-fdbb-489c-90c5-89fd4c9e1113",
         "homepage": "https://hls.somafm.com/",
         "tags": "ambient,chillout,downtempo,groove,lounge,sleep",
-        "favicon": "https://somafm.com/img3/groovesalad-400.jpg"
+        "favicon": "https://somafm.com/img3/groovesalad-400.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2901,7 +3428,8 @@
         "uuid": "1577922b-0dc0-11ea-a87e-52543be04c81",
         "homepage": "http://sectorradio.ru/",
         "tags": "electronic,relaxing",
-        "favicon": "http://sectorradio.ru/icons/progressive-128.png"
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2913,31 +3441,34 @@
         "uuid": "964e557e-0601-11e8-ae97-52543be04c81",
         "homepage": "http://sectorradio.ru/",
         "tags": "music,progressive",
-        "favicon": "http://sectorradio.ru/icons/progressive-128.png"
+        "favicon": "http://sectorradio.ru/icons/progressive-128.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Sector Radio - Indigo",
-        "bitrate": "",
-        "codec": "",
+        "bitrate": "1411",
+        "codec": "OGG",
         "url": "http://89.223.45.5:8000/indigo-flac",
-        "uuid": "",
-        "homepage": "",
-        "tags": "",
-        "favicon": ""
+        "uuid": "17a1a51a-89f7-415a-98df-5eb107f24482",
+        "homepage": "http://sectorradio.ru/zed/",
+        "tags": "2000s",
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Sector Radio - Classical",
-        "bitrate": "128",
+        "bitrate": "1411",
         "codec": "OGG",
         "url": "http://89.223.45.5:8000/nota-flac",
         "uuid": "98d1b72a-8044-11e9-aa30-52543be04c81",
         "homepage": "http://sectorradio.ru/",
         "tags": "classical,instrumental,lossless",
-        "favicon": "http://sectorradio.ru/icons/progressive-128.png"
+        "favicon": "http://sectorradio.ru/icons/progressive-128.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2949,7 +3480,8 @@
         "uuid": "9644518b-0601-11e8-ae97-52543be04c81",
         "homepage": "http://sectorradio.ru/",
         "tags": "90s,music,retro",
-        "favicon": "http://sectorradio.ru/icons/progressive-128.png"
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2961,19 +3493,21 @@
         "uuid": "e2e1c43b-da27-4eaf-ad6d-c4fdfad4dbe9",
         "homepage": "",
         "tags": "classical",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Sector Radio - 10's",
-        "bitrate": "",
-        "codec": "",
+        "bitrate": "1411",
+        "codec": "OGG",
         "url": "http://89.223.45.5:8000/zed-flac",
-        "uuid": "",
-        "homepage": "",
-        "tags": "",
-        "favicon": ""
+        "uuid": "93bc6862-b0a7-42e7-8d87-d136e1c96140",
+        "homepage": "http://sectorradio.ru/zed/",
+        "tags": "2010s",
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2985,7 +3519,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -2997,7 +3532,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3009,7 +3545,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3021,7 +3558,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3033,7 +3571,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3045,7 +3584,8 @@
         "uuid": "eda5f188-318e-4246-8c83-031ace70827a",
         "homepage": "",
         "tags": "misc",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3057,7 +3597,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3069,7 +3610,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3081,7 +3623,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3093,7 +3636,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3105,7 +3649,8 @@
         "uuid": "0a55298e-7589-4dde-9c85-b0960c87193f",
         "homepage": "https://radio-calico.com/",
         "tags": "pop,rock",
-        "favicon": "https://radio-calico.com/favicon.ico"
+        "favicon": "https://radio-calico.com/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3117,7 +3662,8 @@
         "uuid": "ef1bebe7-2dd5-4acc-bd56-7853629d0050",
         "homepage": "",
         "tags": "jazz",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3129,7 +3675,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3141,7 +3688,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3153,7 +3701,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3165,19 +3714,21 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "OpenSky Radio",
         "bitrate": "",
-        "codec": "",
+        "codec": "OGG",
         "url": "https://audio.opensky.radio:8082/flac?_res_tag_=audio",
-        "uuid": "",
-        "homepage": "",
-        "tags": "",
-        "favicon": ""
+        "uuid": "697be853-6f4a-461b-ac11-5edc34cd08f4",
+        "homepage": "https://opensky.radio/",
+        "tags": "pop",
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3189,7 +3740,8 @@
         "uuid": "08502b08-ed8b-482a-9047-d0d64fc481d4",
         "homepage": "https://www.openbroadcast.ch/",
         "tags": "flac,music,open",
-        "favicon": "https://www.openbroadcast.ch/static/asset/img/artwork/touch-icon-120x120.png"
+        "favicon": "https://www.openbroadcast.ch/static/asset/img/artwork/touch-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3201,7 +3753,8 @@
         "uuid": "d8dc960b-20d2-45a1-96cf-a79af5c64a61",
         "homepage": "https://www.naimaudio.com/",
         "tags": "flac,jazz",
-        "favicon": "https://www.naimaudio.com/apple-touch-icon-120x120.png"
+        "favicon": "https://www.naimaudio.com/apple-touch-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3213,7 +3766,8 @@
         "uuid": "ddde79f4-389a-4055-b2e4-90c1dbb73084",
         "homepage": "https://www.naimaudio.com/",
         "tags": "flac",
-        "favicon": "https://www.naimaudio.com/apple-touch-icon-120x120.png"
+        "favicon": "https://www.naimaudio.com/apple-touch-icon-120x120.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3225,7 +3779,8 @@
         "uuid": "608a3ea6-953a-4345-bb30-9fe57cccd6f9",
         "homepage": "http://naimradio.com/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3237,7 +3792,8 @@
         "uuid": "af2fd7bb-4d49-4d5a-8df0-ae231c430cea",
         "homepage": "http://motherearthradio.de",
         "tags": "classical",
-        "favicon": "https://motherearthradio.de/images/mergoldcube512.png"
+        "favicon": "https://motherearthradio.de/images/mergoldcube512.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3249,7 +3805,8 @@
         "uuid": "af2fd7bb-4d49-4d5a-8df0-ae231c430cea",
         "homepage": "http://motherearthradio.de",
         "tags": "classical",
-        "favicon": "https://motherearthradio.de/images/mergoldcube512.png"
+        "favicon": "https://motherearthradio.de/images/mergoldcube512.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3261,7 +3818,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3273,7 +3831,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3285,7 +3844,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3297,19 +3857,21 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Max Radio Society - Max Radio",
         "bitrate": "",
-        "codec": "",
+        "codec": "UNKNOWN",
         "url": "https://www.maxradio.ca/UHD/MaxRadio/FLAC/Max.m3u8",
-        "uuid": "",
-        "homepage": "",
-        "tags": "",
-        "favicon": ""
+        "uuid": "0a8b9f77-50ce-40ba-bba2-35a11f93a6bc",
+        "homepage": "https://www.maxradio.ca/",
+        "tags": "multiple genres",
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3321,19 +3883,21 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Magic Radio",
-        "bitrate": "128",
+        "bitrate": "1500",
         "codec": "OGG",
         "url": "http://mp3.magic-radio.net/flac",
         "uuid": "bfdf3bab-6086-4f8a-bca8-edf60b1ec1b8",
         "homepage": "",
         "tags": "misc",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3345,7 +3909,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3357,7 +3922,8 @@
         "uuid": "0816a06c-a7e9-4f3c-9708-2682485f7a79",
         "homepage": "https://lapfoxradio.com/",
         "tags": "electronic,furry",
-        "favicon": "https://lapfoxradio.com/lapfox-radio-icon-black.png"
+        "favicon": "https://lapfoxradio.com/lapfox-radio-icon-black.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3369,7 +3935,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3381,7 +3948,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3393,7 +3961,8 @@
         "uuid": "b8c3a07d-f958-473e-b787-110eb517db0c",
         "homepage": "https://jb-radio.net/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3405,7 +3974,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3417,7 +3987,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3429,7 +4000,8 @@
         "uuid": "aece9305-b6da-46af-a565-bd992a196726",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3441,7 +4013,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3453,7 +4026,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3465,7 +4039,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3477,7 +4052,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3489,7 +4065,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3501,7 +4078,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3513,7 +4091,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3525,7 +4104,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3537,7 +4117,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3549,7 +4130,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3561,7 +4143,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3573,31 +4156,34 @@
         "uuid": "c671f4a6-802b-472e-b8bd-a18f6e8d47f7",
         "homepage": "https://www.frequence3.com/",
         "tags": "pop",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Easy Radio",
-        "bitrate": "",
-        "codec": "",
+        "bitrate": "16",
+        "codec": "OGG",
         "url": "https://easyradio.bg/m3u/easyradio.bg-flac.m3u",
-        "uuid": "",
-        "homepage": "",
-        "tags": "",
-        "favicon": ""
+        "uuid": "c38e26a0-6112-45cb-8749-50f5b4df908e",
+        "homepage": "https://easyradio.bg/",
+        "tags": "easy listening,rock",
+        "favicon": "https://easyradio.bg/apple-touch-icon.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Danubius Radio",
         "bitrate": "",
-        "codec": "",
+        "codec": "OGG",
         "url": "https://danubiusradio.hu/danubius_HiFi.m3u",
-        "uuid": "",
-        "homepage": "",
-        "tags": "",
-        "favicon": ""
+        "uuid": "8d542cbc-bb73-4a4c-ac37-a9573db41868",
+        "homepage": "https://danubiusradio.hu/",
+        "tags": "2000s,80's,90s",
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3609,7 +4195,8 @@
         "uuid": "75937095-92bb-4f6d-b09a-5c738323d4f0",
         "homepage": "https://chiru.no/",
         "tags": "anime,flac,j-pop,jpop",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3621,7 +4208,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3633,7 +4221,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3645,19 +4234,21 @@
         "uuid": "",
         "homepage": "",
         "tags": "undefined",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "BailRigg 95.3FM",
         "bitrate": "1024",
-        "codec": "",
+        "codec": "OGG",
         "url": "https://bfm-stream.lancs.ac.uk/flac",
-        "uuid": "",
-        "homepage": "",
-        "tags": "",
-        "favicon": ""
+        "uuid": "20d4d7a9-a664-4fef-9e01-e345a04f55e6",
+        "homepage": "https://bailriggradio.lancastersu.co.uk/",
+        "tags": "world music",
+        "favicon": "https://bailriggradio.lancastersu.co.uk/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3669,19 +4260,21 @@
         "uuid": "960b13e9-0601-11e8-ae97-52543be04c81",
         "homepage": "http://95bfm.com/",
         "tags": "alternative,auckland,community radio,indie",
-        "favicon": "http://95bfm.com/sites/all/themes/bfm_ui/favicons/favicon-128.png"
+        "favicon": "http://95bfm.com/sites/all/themes/bfm_ui/favicons/favicon-128.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "60 North Radio",
-        "bitrate": "896",
-        "codec": "",
+        "bitrate": "1500",
+        "codec": "OGG",
         "url": "http://r5.zetcast.net/flac",
-        "uuid": "",
-        "homepage": "",
-        "tags": "undefined",
-        "favicon": ""
+        "uuid": "b2bf1ecb-f088-4018-ae4f-5b0e71ee1a87",
+        "homepage": "https://60north.radio/",
+        "tags": "",
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3693,7 +4286,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3705,7 +4299,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3717,7 +4312,8 @@
         "uuid": "16f7eaeb-1aa0-41b2-b4f3-66e29eb53136",
         "homepage": "",
         "tags": "pop,rock",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3729,7 +4325,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3741,7 +4338,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "undefined",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3753,7 +4351,8 @@
         "uuid": "2a91de8d-abf5-11e9-88f4-52543be04c81",
         "homepage": "https://atlanticradiouk.co.uk/",
         "tags": "70s,80s,merseyside,pop,top 40,uk",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3765,7 +4364,8 @@
         "uuid": "47804b64-26f7-4af6-9d4c-2b0572da8c8c",
         "homepage": "https://theoasismel.com/",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3777,7 +4377,8 @@
         "uuid": "e69b1cef-99d9-11e8-a767-52543be04c81",
         "homepage": "",
         "tags": "ambient,chill",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3789,7 +4390,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3801,19 +4403,21 @@
         "uuid": "248a7684-7e28-4912-9812-efefc2bba2e1",
         "homepage": "https://gensokyoradio.net/",
         "tags": "anime,touhou",
-        "favicon": ""
+        "favicon": "https://gensokyoradio.net/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "J-Pop Sakura 懐かしい (Asia DREAM Radio)",
-        "bitrate": "128",
+        "bitrate": "0128",
         "codec": "MP3",
         "url": "http://igor.torontocast.com:1710/;",
         "uuid": "54bbcba8-3e53-4d18-a387-fb8d0cd5bd64",
         "homepage": "https://asiadreamradio.torontocast.stream/stations/en/index.html",
         "tags": "70s,80s,90s,classic hits,hits,j-pop,japanese,top 40",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3825,7 +4429,8 @@
         "uuid": "25b7f90e-d455-4981-a9f2-7a2954a96716",
         "homepage": "http://uknr.org/",
         "tags": "misc",
-        "favicon": "https://hips.hearstapps.com/digitalspyuk.cdnds.net/12/35/media_uknova_logo.jpg"
+        "favicon": "https://hips.hearstapps.com/digitalspyuk.cdnds.net/12/35/media_uknova_logo.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3837,7 +4442,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3849,7 +4455,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "undefined",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3861,7 +4468,8 @@
         "uuid": "964714a2-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.peacefulradio.info/",
         "tags": "new age,relax",
-        "favicon": "http://www.peacefulradio.info/wp-content/uploads/2016/05/Logo-PR2v2.png"
+        "favicon": "http://www.peacefulradio.info/wp-content/uploads/2016/05/Logo-PR2v2.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3873,19 +4481,21 @@
         "uuid": "eebe992f-b553-11e8-afe1-52543be04c81",
         "homepage": "http://jovempanfm.uol.com.br/",
         "tags": "chill,new age",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
         "play": false,
         "name": "Healing Music Radio",
-        "bitrate": "128",
+        "bitrate": "0128",
         "codec": "MP3",
         "url": "http://us3.internet-radio.com:8169/live",
         "uuid": "96500c2a-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.peteredwards.com/",
         "tags": "ambient,cinematic,easy listening,new age",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3897,7 +4507,8 @@
         "uuid": "9464f95e-03e0-4436-a743-18afa4f65955",
         "homepage": "https://info201774.wixsite.com/100suoninaturarelax",
         "tags": "ambient,ambient and relaxation music,ambiental,nature,new age,relax,relaxation,relaxation music,sounds of nature",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3909,7 +4520,8 @@
         "uuid": "31a026cf-c45f-4984-8265-69eb98b86d64",
         "homepage": "https://www.radioart.com/",
         "tags": "music,new age,vocal",
-        "favicon": ""
+        "favicon": "https://www.radioart.com/favicon.ico",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3921,7 +4533,8 @@
         "uuid": "1f532046-2ea6-42ca-8298-6cd5635d7c8e",
         "homepage": "https://www.radioart.com/",
         "tags": "easy listening,instrumental,new age,relax",
-        "favicon": "https://www.radioart.com/templates/yootheme/cache/logo-2d9baf0b.png"
+        "favicon": "https://www.radioart.com/templates/yootheme/cache/logo-2d9baf0b.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3933,7 +4546,8 @@
         "uuid": "bebfa334-df6f-11e9-a8ba-52543be04c81",
         "homepage": "http://radcap.ru/meditation.html",
         "tags": "meditation,new age,relax,yoga,zen",
-        "favicon": "http://radcap.ru/stylegraf/meditation.jpg"
+        "favicon": "http://radcap.ru/stylegraf/meditation.jpg",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3945,7 +4559,21 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "HomeBoyz Radio",
+        "bitrate": "64",
+        "codec": "AAC",
+        "url": "https://atunwadigital.streamguys1.com/homeboyzradio",
+        "uuid": "29c9032b-774f-409b-bcba-ea20db1bbe2d",
+        "homepage": "https://www.hbr.co.ke/",
+        "tags": "",
+        "favicon": "https://www.hbr.co.ke/wp-content/themes/hbradio/images/icons/hbr_logo.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3957,7 +4585,8 @@
         "uuid": "",
         "homepage": "",
         "tags": "",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3969,7 +4598,8 @@
         "uuid": "2ad985ec-f235-4e36-b362-b3b993174b40",
         "homepage": "https://www.ubuntu.fm/radio",
         "tags": "afropop,afrosoul,dancehall,folk,funk,hiphop,jazz,kwaito,latin,nu-jazz,reggae,rock,soul",
-        "favicon": "https://www.ubuntu.fm/sites/default/files//favicons/apple-touch-icon.png"
+        "favicon": "https://www.ubuntu.fm/sites/default/files//favicons/apple-touch-icon.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3981,7 +4611,8 @@
         "uuid": "98a036f9-102a-11e9-a80b-52543be04c81",
         "homepage": "http://www.mondobongoradio.com/",
         "tags": "world music",
-        "favicon": "https://www.mondobongoradio.com/apple-touch-icon.png"
+        "favicon": "https://www.mondobongoradio.com/apple-touch-icon.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -3993,7 +4624,8 @@
         "uuid": "21a282be-44f4-4b8e-aae9-b4c2041af4a5",
         "homepage": "https://radioparadise.com/",
         "tags": "eclectic,world,world music",
-        "favicon": "https://radioparadise.com/apple-touch-icon.png"
+        "favicon": "https://radioparadise.com/apple-touch-icon.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -4005,7 +4637,8 @@
         "uuid": "961be65b-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.hionline.eu/",
         "tags": "320kbps,african,ethnic,latin,latino,reggae,world music",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -4017,7 +4650,8 @@
         "uuid": "9622928a-0601-11e8-ae97-52543be04c81",
         "homepage": "http://trace.ci/",
         "tags": "african music,hiphop",
-        "favicon": "https://trace.ci/wp-content/uploads/2019/11/cropped-cropped-favicon-100x100.png"
+        "favicon": "https://trace.ci/wp-content/uploads/2019/11/cropped-cropped-favicon-100x100.png",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -4029,7 +4663,8 @@
         "uuid": "c930e523-9968-48de-8698-aca66eb8f506",
         "homepage": "",
         "tags": "world music",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -4041,7 +4676,8 @@
         "uuid": "917f7372-3e40-46ef-851f-57aaab2686f2",
         "homepage": "http://abf.net-radio.fr/",
         "tags": "80s,90s,classic hits",
-        "favicon": ""
+        "favicon": "",
+        "author_title_swap": false
     },
     {
         "inc": true,
@@ -4053,6 +4689,59 @@
         "uuid": "961fb975-0601-11e8-ae97-52543be04c81",
         "homepage": "http://www.ckonfm.com/",
         "tags": "akwesasne,country,indigenous,mohawk",
-        "favicon": "https://upload.wikimedia.org/wikipedia/en/thumb/9/95/CKON-FM.png/200px-CKON-FM.png"
+        "favicon": "https://upload.wikimedia.org/wikipedia/en/thumb/9/95/CKON-FM.png/200px-CKON-FM.png",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Youtube",
+        "bitrate": "",
+        "codec": "",
+        "url": "",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Medieval Fantasy Celtic",
+        "bitrate": "0128",
+        "codec": "OPUS",
+        "url": "https://www.youtube.com/watch?v=ipFaubyDUT4",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "NCS Radio",
+        "bitrate": "128",
+        "codec": "AAC",
+        "url": "https://www.youtube.com/watch?v=oWW5TLrrbNo",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": "",
+        "author_title_swap": false
+    },
+    {
+        "inc": true,
+        "play": false,
+        "name": "Loli Hip Hop",
+        "bitrate": "128",
+        "codec": "AAC",
+        "url": "https://www.youtube.com/watch?v=jfKfPfyJRdk",
+        "uuid": "",
+        "homepage": "",
+        "tags": "",
+        "favicon": "",
+        "author_title_swap": false
     }
 ]
