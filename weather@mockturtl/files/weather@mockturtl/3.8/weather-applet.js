@@ -14733,6 +14733,7 @@ class WeatherUnderground extends BaseProvider {
             }
             if (result.length == 0)
                 return null;
+            result.sort((a, b) => a.distanceKm - b.distanceKm);
             return result;
         };
         this.GetObservations = async (stations, forecast, loc, cancellable) => {
@@ -17981,7 +17982,7 @@ class WeatherApplet extends TextIconApplet {
         return true;
     }
     DisplayWeatherOnLabel(weather) {
-        var _a;
+        var _a, _b;
         const temperature = weather.temperature;
         const mainCondition = CapitalizeFirstLetter(weather.condition.main);
         let label = "";
@@ -17993,13 +17994,13 @@ class WeatherApplet extends TextIconApplet {
                 if (label != "") {
                     label += " ";
                 }
-                label += TempToUserConfig(temperature, this.config);
+                label += ((_a = TempToUserConfig(temperature, this.config)) !== null && _a !== void 0 ? _a : "");
             }
         }
         else {
             if (this.config._showTextInPanel) {
-                label = (_a = TempToUserConfig(temperature, this.config, false)) !== null && _a !== void 0 ? _a : "";
-                if (this.GetPanelHeight() >= 35) {
+                label = (_b = TempToUserConfig(temperature, this.config, false)) !== null && _b !== void 0 ? _b : "";
+                if (this.GetPanelHeight() >= 35 && label) {
                     label += UnitToUnicode(this.config.TemperatureUnit);
                 }
             }
