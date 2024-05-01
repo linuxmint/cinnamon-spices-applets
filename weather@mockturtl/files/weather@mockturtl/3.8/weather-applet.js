@@ -16155,7 +16155,7 @@ class WeatherLoop {
                         NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
                             : "PORTAL";
                     logger_Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, initiating refresh.`);
-                    this.DoCheck();
+                    this.Resume();
                     break;
                 case NetworkConnectivity.LOCAL:
                     logger_Logger.Info(`Internet access now down with "${NetworkMonitor.get_default().connectivity}".`);
