@@ -9468,9 +9468,16 @@ const ByteArray = imports.byteArray;
 async function GetFileInfo(file) {
     return new Promise((resolve, reject) => {
         file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
-            const result = file.query_info_finish(res);
-            resolve(result);
-            return result;
+            try {
+                const result = file.query_info_finish(res);
+                resolve(result);
+                return result;
+            }
+            catch (e) {
+                Logger.Error("Error getting file info: ", e);
+                resolve(null);
+                return null;
+            }
         });
     });
 }
@@ -9537,9 +9544,16 @@ async function OverwriteAndGetIOStream(file) {
         parent.make_directory_with_parents(null);
     return new Promise((resolve, reject) => {
         file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
-            const ioStream = file.replace_readwrite_finish(result);
-            resolve(ioStream);
-            return ioStream;
+            try {
+                const ioStream = file.replace_readwrite_finish(result);
+                resolve(ioStream);
+                return ioStream;
+            }
+            catch (e) {
+                logger_Logger.Error("Error overwriting file: ", e);
+                resolve(null);
+                return null;
+            }
         });
     });
 }
@@ -9549,18 +9563,32 @@ async function WriteAsync(outputStream, buffer) {
         return false;
     return new Promise((resolve, reject) => {
         outputStream.write_bytes_async(text, null, null, (obj, res) => {
-            const ioStream = outputStream.write_bytes_finish(res);
-            resolve(true);
-            return true;
+            try {
+                outputStream.write_bytes_finish(res);
+                resolve(true);
+                return true;
+            }
+            catch (e) {
+                logger_Logger.Error("Error writing to stream: ", e);
+                resolve(false);
+                return false;
+            }
         });
     });
 }
 async function CloseStream(stream) {
     return new Promise((resolve, reject) => {
         stream.close_async(null, null, (obj, res) => {
-            const result = stream.close_finish(res);
-            resolve(result);
-            return result;
+            try {
+                const result = stream.close_finish(res);
+                resolve(result);
+                return result;
+            }
+            catch (e) {
+                logger_Logger.Error("Error closing stream: ", e);
+                resolve(false);
+                return false;
+            }
         });
     });
 }
@@ -9578,6 +9606,57 @@ const LogLevelSeverity = {
     info: 10,
     debug: 50,
     verbose: 100
+};
+const IOErrorEnumNames = {
+    [imports.gi.Gio.IOErrorEnum.FAILED]: "FAILED",
+    [imports.gi.Gio.IOErrorEnum.NOT_FOUND]: "NOT_FOUND",
+    [imports.gi.Gio.IOErrorEnum.EXISTS]: "EXISTS",
+    [imports.gi.Gio.IOErrorEnum.IS_DIRECTORY]: "IS_DIRECTORY",
+    [imports.gi.Gio.IOErrorEnum.NOT_DIRECTORY]: "NOT_DIRECTORY",
+    [imports.gi.Gio.IOErrorEnum.NOT_EMPTY]: "NOT_EMPTY",
+    [imports.gi.Gio.IOErrorEnum.NOT_REGULAR_FILE]: "NOT_REGULAR_FILE",
+    [imports.gi.Gio.IOErrorEnum.NOT_SYMBOLIC_LINK]: "NOT_SYMBOLIC_LINK",
+    [imports.gi.Gio.IOErrorEnum.NOT_MOUNTABLE_FILE]: "NOT_MOUNTABLE_FILE",
+    [imports.gi.Gio.IOErrorEnum.FILENAME_TOO_LONG]: "FILENAME_TOO_LONG",
+    [imports.gi.Gio.IOErrorEnum.INVALID_FILENAME]: "INVALID_FILENAME",
+    [imports.gi.Gio.IOErrorEnum.TOO_MANY_LINKS]: "TOO_MANY_LINKS",
+    [imports.gi.Gio.IOErrorEnum.NO_SPACE]: "NO_SPACE",
+    [imports.gi.Gio.IOErrorEnum.INVALID_ARGUMENT]: "INVALID_ARGUMENT",
+    [imports.gi.Gio.IOErrorEnum.PERMISSION_DENIED]: "PERMISSION_DENIED",
+    [imports.gi.Gio.IOErrorEnum.NOT_SUPPORTED]: "NOT_SUPPORTED",
+    [imports.gi.Gio.IOErrorEnum.NOT_MOUNTED]: "NOT_MOUNTED",
+    [imports.gi.Gio.IOErrorEnum.ALREADY_MOUNTED]: "ALREADY_MOUNTED",
+    [imports.gi.Gio.IOErrorEnum.CLOSED]: "CLOSED",
+    [imports.gi.Gio.IOErrorEnum.CANCELLED]: "CANCELLED",
+    [imports.gi.Gio.IOErrorEnum.PENDING]: "PENDING",
+    [imports.gi.Gio.IOErrorEnum.READ_ONLY]: "READ_ONLY",
+    [imports.gi.Gio.IOErrorEnum.CANT_CREATE_BACKUP]: "CANT_CREATE_BACKUP",
+    [imports.gi.Gio.IOErrorEnum.WRONG_ETAG]: "WRONG_ETAG",
+    [imports.gi.Gio.IOErrorEnum.TIMED_OUT]: "TIMED_OUT",
+    [imports.gi.Gio.IOErrorEnum.WOULD_RECURSE]: "WOULD_RECURSE",
+    [imports.gi.Gio.IOErrorEnum.BUSY]: "BUSY",
+    [imports.gi.Gio.IOErrorEnum.WOULD_BLOCK]: "WOULD_BLOCK",
+    [imports.gi.Gio.IOErrorEnum.HOST_NOT_FOUND]: "HOST_NOT_FOUND",
+    [imports.gi.Gio.IOErrorEnum.WOULD_MERGE]: "WOULD_MERGE",
+    [imports.gi.Gio.IOErrorEnum.FAILED_HANDLED]: "FAILED_HANDLED",
+    [imports.gi.Gio.IOErrorEnum.TOO_MANY_OPEN_FILES]: "TOO_MANY_OPEN_FILES",
+    [imports.gi.Gio.IOErrorEnum.NOT_INITIALIZED]: "NOT_INITIALIZED",
+    [imports.gi.Gio.IOErrorEnum.ADDRESS_IN_USE]: "ADDRESS_IN_USE",
+    [imports.gi.Gio.IOErrorEnum.PARTIAL_INPUT]: "PARTIAL_INPUT",
+    [imports.gi.Gio.IOErrorEnum.INVALID_DATA]: "INVALID_DATA",
+    [imports.gi.Gio.IOErrorEnum.DBUS_ERROR]: "DBUS_ERROR",
+    [imports.gi.Gio.IOErrorEnum.HOST_UNREACHABLE]: "HOST_UNREACHABLE",
+    [imports.gi.Gio.IOErrorEnum.NETWORK_UNREACHABLE]: "NETWORK_UNREACHABLE",
+    [imports.gi.Gio.IOErrorEnum.CONNECTION_REFUSED]: "CONNECTION_REFUSED",
+    [imports.gi.Gio.IOErrorEnum.PROXY_FAILED]: "PROXY_FAILED",
+    [imports.gi.Gio.IOErrorEnum.PROXY_AUTH_FAILED]: "PROXY_AUTH_FAILED",
+    [imports.gi.Gio.IOErrorEnum.PROXY_NEED_AUTH]: "PROXY_NEED_AUTH",
+    [imports.gi.Gio.IOErrorEnum.PROXY_NOT_ALLOWED]: "PROXY_NOT_ALLOWED",
+    [imports.gi.Gio.IOErrorEnum.BROKEN_PIPE]: "BROKEN_PIPE",
+    [imports.gi.Gio.IOErrorEnum.CONNECTION_CLOSED]: "CONNECTION_CLOSED",
+    [imports.gi.Gio.IOErrorEnum.NOT_CONNECTED]: "NOT_CONNECTED",
+    [imports.gi.Gio.IOErrorEnum.MESSAGE_TOO_LARGE]: "MESSAGE_TOO_LARGE",
+    [imports.gi.Gio.IOErrorEnum.NO_SUCH_DEVICE]: "NO_SUCH_DEVICE",
 };
 class Log {
     constructor(_instanceId) {
@@ -9597,11 +9676,17 @@ class Log {
         global.log(msg);
     }
     Error(error, e) {
+        var _a;
         if (!this.CanLog("error"))
             return;
         global.logError("[" + UUID + "#" + this.ID + ":Error]: " + error.toString());
-        if (!!(e === null || e === void 0 ? void 0 : e.stack))
-            global.logError(e.stack);
+        if (typeof e === "string") {
+            return;
+        }
+        const gjsE = e;
+        global.logError(`GJS Error context - Name: ${gjsE.name}, domain: ${gjsE.domain}, code: ${(_a = IOErrorEnumNames[gjsE.code]) !== null && _a !== void 0 ? _a : gjsE.code}, message: ${gjsE.message}`);
+        if (gjsE.stack)
+            global.logError(gjsE.stack);
     }
     ;
     Debug(message) {
@@ -10051,7 +10136,13 @@ class Soup2 {
         const read_chunk_async = () => {
             return new Promise((resolve) => {
                 stream.read_bytes_async(8192, 0, cancellable, (source, read_result) => {
-                    resolve(stream.read_bytes_finish(read_result));
+                    try {
+                        resolve(stream.read_bytes_finish(read_result));
+                    }
+                    catch (e) {
+                        logger_Logger.Error("Error reading chunk from http request stream: " + e);
+                        resolve(imports.gi.GLib.Bytes.new());
+                    }
                 });
             });
         };
@@ -15477,6 +15568,7 @@ class PirateWeather extends BaseProvider {
 
 ;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geoclue.ts
 
+
 let GeoClueLib = undefined;
 let GeocodeGlib = undefined;
 class GeoClue {
@@ -15496,16 +15588,28 @@ class GeoClue {
         }
         const { AccuracyLevel, Simple: GeoClue } = GeoClueLib;
         const res = await new Promise((resolve, reject) => {
-            GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, cancellable !== null && cancellable !== void 0 ? cancellable : null, (client, res) => {
-                const simple = GeoClue.new_finish(res);
-                const clientObj = simple.get_client();
-                if (clientObj == null || !clientObj.active) {
-                    logger_Logger.Debug("GeoGlue2 Geolocation disabled, skipping");
+            logger_Logger.Debug("Requesting coordinates from GeoClue");
+            const start = DateTime.now();
+            GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, cancellable, (client, res) => {
+                logger_Logger.Debug(`Getting GeoClue coordinates finished, took ${start.diffNow().negate().as("seconds")} seconds.`);
+                let simple = null;
+                try {
+                    simple = GeoClue.new_finish(res);
+                    const clientObj = simple.get_client();
+                    if (clientObj == null || !clientObj.active) {
+                        logger_Logger.Debug("GeoGlue Geolocation disabled, skipping");
+                        resolve(null);
+                        return;
+                    }
+                }
+                catch (e) {
+                    logger_Logger.Error("Error while fetching GeoClue coordinates: ", e);
                     resolve(null);
                     return;
                 }
                 const loc = simple.get_location();
                 if (loc == null) {
+                    logger_Logger.Debug("GeoGlue coordinates is not known.");
                     resolve(null);
                     return;
                 }
@@ -15519,36 +15623,52 @@ class GeoClue {
                     altitude: loc.altitude,
                     accuracy: loc.accuracy,
                 };
+                logger_Logger.Debug(`GeoClue coordinates received ${JSON.stringify(result)}`);
                 resolve(result);
+                return;
             });
         });
         if (res == null) {
             return null;
         }
-        const geoCodeRes = await this.GetGeoCodeData(res.lat, res.lon, res.accuracy);
+        const geoCodeRes = await this.GetGeoCodeData(cancellable, res.lat, res.lon, res.accuracy);
         if (geoCodeRes == null) {
             return res;
         }
         return Object.assign(Object.assign({}, res), geoCodeRes);
     }
     ;
-    async GetGeoCodeData(lat, lon, accuracy) {
+    async GetGeoCodeData(cancellable, lat, lon, accuracy) {
         if (GeocodeGlib == null) {
             return null;
         }
         const geoCodeLoc = GeocodeGlib.Location.new(lat, lon, accuracy);
         const geoCodeRes = GeocodeGlib.Reverse.new_for_location(geoCodeLoc);
         return new Promise((resolve, reject) => {
-            geoCodeRes.resolve_async(null, (obj, res) => {
-                const result = geoCodeRes.resolve_finish(res);
-                if (result == null) {
+            logger_Logger.Debug("Requesting location data from GeoCode");
+            const start = DateTime.now();
+            geoCodeRes.resolve_async(cancellable, (obj, res) => {
+                logger_Logger.Debug(`Getting GeoCode location data finished, took ${start.diffNow().negate().as("seconds")} seconds.`);
+                let result = null;
+                try {
+                    result = geoCodeRes.resolve_finish(res);
+                }
+                catch (e) {
+                    logger_Logger.Error("Error while fetching GeoCode data: ", e);
                     resolve(null);
                     return;
                 }
+                if (result == null) {
+                    logger_Logger.Debug("GeoCode location data not available.");
+                    resolve(null);
+                    return;
+                }
+                logger_Logger.Debug(`GeoCode location data received ${JSON.stringify(result)}`);
                 resolve({
                     city: result.town,
                     country: result.country,
                 });
+                return;
             });
         });
     }
@@ -17856,6 +17976,10 @@ class WeatherApplet extends TextIconApplet {
             }
             const appletLogFile = main_File.new_for_path(this.config._selectedLogPath);
             const stream = await OverwriteAndGetIOStream(appletLogFile);
+            if (stream == null) {
+                NotificationService.Instance.Send(_("Error Saving Debug Information"), _("Could not open file {filePath} for writing", { filePath: this.config._selectedLogPath }));
+                return;
+            }
             await WriteAsync(stream.get_output_stream(), logLines.join("\n"));
             if (settings != null) {
                 await WriteAsync(stream.get_output_stream(), "\n\n------------------- SETTINGS JSON -----------------\n\n");

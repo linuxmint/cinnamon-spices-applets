@@ -200,7 +200,13 @@ class Soup2 implements SoupLib {
 		const read_chunk_async = () => {
 			return new Promise<imports.gi.GLib.Bytes>((resolve) => {
 				stream.read_bytes_async(8192, 0, cancellable, (source, read_result) => {
-					resolve(stream.read_bytes_finish(read_result));
+					try {
+						resolve(stream.read_bytes_finish(read_result));
+					}
+					catch(e) {
+						Logger.Error("Error reading chunk from http request stream: " + e);
+						resolve(imports.gi.GLib.Bytes.new());
+					}
 				});
 			})
 		}

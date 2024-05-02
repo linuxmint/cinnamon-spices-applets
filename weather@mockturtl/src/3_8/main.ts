@@ -380,6 +380,11 @@ The contents of the file saved from the applet help page goes here
 
 		const appletLogFile = File.new_for_path(this.config._selectedLogPath);
 		const stream = await OverwriteAndGetIOStream(appletLogFile);
+		if (stream == null) {
+			NotificationService.Instance.Send(_("Error Saving Debug Information"), _("Could not open file {filePath} for writing", {filePath: this.config._selectedLogPath} ));
+			return;
+		}
+
 		await WriteAsync(stream.get_output_stream(), logLines.join("\n"));
 
 		if (settings != null) {
