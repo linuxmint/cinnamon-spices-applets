@@ -1,3 +1,6 @@
+### v7.4.1~20240502
+  * Fixes #5969: Wait 20 seconds before executing the cache update loop, so that mintupdate runs correctly.
+
 ### v7.4.0~20240423
   * Now smoother so as not to be blocked by the cinnamon-spices.linuxmint.com server.
   * New color when spices are updated or forgotten.
