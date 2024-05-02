@@ -2676,12 +2676,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         var iCats = -1;
         for (let c of _cats) {
           iCats++;
-          catItems.push(new PopupMenuItem((c=="All Categories") ? _("All Categories") : c, { reactive: true }));
+          let _keys = Object.keys(cws[c]);
+          catItems.push(new PopupMenuItem((c=="All Categories") ? _("All Categories") + " (" + _keys.length + ")" : c + " (" + _keys.length + ")", { reactive: true }));
           this.categoriesMenu.menu.addMenuItem(catItems[iCats]);
-          catItems[iCats].actor.connect('enter-event', Lang.bind(this, function() {
+          catItems[iCats].actor.connect("enter-event", Lang.bind(this, function() {
             this.stationsMenu.menu.removeAll();
             this.stationsMenu.menu.open();
-            for (let s of Object.keys(cws[c])) {
+            for (let s of _keys) {
               let id = cws[c][s];
               let item = new PopupMenuItem(s, { reactive: true });
               item.setShowDot(id == this.last_radio_listened_to);
@@ -3578,7 +3579,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   on_applet_middle_clicked(event) {
-    //log("on_applet_middle_clicked");
     if (this.menu.isOpen) this.menu.close();
 
     if (this.record_pid != null) {
@@ -3597,7 +3597,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   _onButtonPressEvent(actor, event) {
-    //log("_onButtonPressEvent");
     if (!this._applet_enabled) {
       return false;
     }
