@@ -276,8 +276,13 @@ class SpicesUpdate extends IconApplet {
 
         // Run loop to refresh caches:
         this.disable_system_auto_update();
-        this._loop_refresh_cache();
-        this.loopRefreshId = timeout_add_seconds(907, () => this._loop_refresh_cache()); // 907 is a prime number.
+        let stoId = setTimeout( () => {
+            this._loop_refresh_cache();
+            clearTimeout(stoId);
+            stoId = null;
+        }, 20000); // Wait 20 seconds for mintupdate to run correctly.
+
+        //this.loopRefreshId = timeout_add_seconds(907, () => this._loop_refresh_cache()); // 907 is a prime number.
     } // End of constructor
 
     _loop_refresh_cache() {
@@ -1453,26 +1458,21 @@ class SpicesUpdate extends IconApplet {
     _forget_new_spices(type) {
         var newSpices = this.new_Spices[type];
         if (newSpices.length === 0) return;
-        //~ var index = 0;
-        //~ var uuid = newSpices[index];
         var uuid = newSpices[0];
         let id = setInterval( () => {
-            //~ uuid = newSpices[index];
             this.isProcessing = true;
             uuid = newSpices.pop(0);
             this.download_image(type, uuid);
             if (this.nb_to_watch > 0)
                 this.nb_to_watch -= 1;
-            if (this.nb_to_watch <= 0)
-                this.isProcessing = false;
+            //if (this.nb_to_watch <= 0)
+                //this.isProcessing = false;
             this.updateUI();
-            //~ index++;
-            //~ if (index >= newSpices.length) {
             if (newSpices.length === 0) {
                 clearInterval(id);
                 this.isProcessing = false;
+                this.updateUI();
                 newSpices = undefined;
-                //~ index = undefined;
                 uuid = undefined;
             }
         }, 10000);
