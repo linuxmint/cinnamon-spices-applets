@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { Services } from "../config";
-import { ErrorResponse, HttpError, HTTPParams } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HttpLib, HTTPParams } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
 import { CelsiusToKelvin, IsLangSupported, _ } from "../utils";
@@ -33,7 +33,7 @@ export class VisualCrossing extends BaseProvider {
 		super(app);
 	}
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		if (loc == null) return null;
 		this.params['key'] = this.app.config.ApiKey;
 		let translate = true;
@@ -43,9 +43,15 @@ export class VisualCrossing extends BaseProvider {
 		}
 
 		const url = this.url + loc.lat + "," + loc.lon;
-		const json = await this.app.LoadJsonAsync<VisualCrossingPayload>(url, this.params, (e) => this.HandleHttpError(e));
+		const json = await HttpLib.Instance.LoadJsonSimple<VisualCrossingPayload>({
+			url,
+			cancellable,
+			params: this.params,
+			HandleError: (e) => this.HandleHttpError(e)
+		});
 
-		if (!json) return null;
+		if (!json)
+			return null;
 		return this.ParseWeather(json, translate);
 	}
 

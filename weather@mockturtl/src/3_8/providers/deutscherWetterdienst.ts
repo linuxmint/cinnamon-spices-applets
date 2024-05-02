@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import { getTimes, GetTimesResult } from "suncalc";
 import { Services } from "../config";
-import { ErrorResponse, HTTPParams } from "../lib/httpLib";
+import { ErrorResponse, HttpLib, HTTPParams } from "../lib/httpLib";
 import { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData, PrecipitationType } from "../types";
 import { IsNight, _ } from "../utils";
 import { BaseProvider } from "./BaseProvider"
@@ -20,10 +20,20 @@ export class DeutscherWetterdienst extends BaseProvider {
 
     private readonly baseUrl: string = "https://api.brightsky.dev/";
 
-    public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+    public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
         const [current, hourly] = await Promise.all([
-            this.app.LoadJsonAsync<CurrentWeatherPayload>(`${this.baseUrl}current_weather`, this.GetDefaultParams(loc), this.HandleErrors),
-            this.app.LoadJsonAsync<HourlyForecastPayload>(`${this.baseUrl}weather`, this.GetHourlyParams(loc), this.HandleErrors)
+            HttpLib.Instance.LoadJsonSimple<CurrentWeatherPayload>({
+				url: `${this.baseUrl}current_weather`,
+				cancellable,
+				params: this.GetDefaultParams(loc),
+				HandleError: this.HandleErrors
+			}),
+            HttpLib.Instance.LoadJsonSimple<HourlyForecastPayload>({
+				url: `${this.baseUrl}weather`,
+				cancellable,
+				params: this.GetHourlyParams(loc),
+				HandleError: this.HandleErrors,
+			})
         ]);
 
         if (current == null || hourly == null)

@@ -7,6 +7,7 @@ import { BaseProvider } from "../BaseProvider";
 import { Conditions, conditionSeverity, TimeOfDay } from "./types/common";
 import { IsCovered, MetNorwayNowcastPayload } from "./types/nowcast";
 import { MetNorwayForecastData, MetNorwayForecastPayload } from "./types/forecast";
+import { HttpLib } from "../../lib/httpLib";
 
 export class MetNorway extends BaseProvider {
 	public readonly prettyName = _("MET Norway");
@@ -21,10 +22,19 @@ export class MetNorway extends BaseProvider {
 
 	private baseUrl = "https://api.met.no/weatherapi";
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		const [forecast, nowcast] = await Promise.all([
-			this.app.LoadJsonAsync<MetNorwayForecastPayload>(`${this.baseUrl}/locationforecast/2.0/complete`, {lat: loc.lat, lon: loc.lon}),
-			this.app.LoadJsonAsync<MetNorwayNowcastPayload>(`${this.baseUrl}/nowcast/2.0/complete`, {lat: loc.lat, lon: loc.lon}, (e) => e.ErrorData.code != 422),
+			HttpLib.Instance.LoadJsonSimple<MetNorwayForecastPayload>({
+				url: `${this.baseUrl}/locationforecast/2.0/complete`,
+				cancellable,
+				params: {lat: loc.lat, lon: loc.lon}
+			}),
+			HttpLib.Instance.LoadJsonSimple<MetNorwayNowcastPayload>({
+				url: `${this.baseUrl}/nowcast/2.0/complete`,
+				cancellable,
+				params: {lat: loc.lat, lon: loc.lon},
+				HandleError: (e) => e.ErrorData.code != 422
+			}),
 		]);
 
 		if (!forecast) {

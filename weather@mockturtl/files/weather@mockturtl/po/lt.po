@@ -7,8 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-01 22:49+0000\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-05-01 17:52+0100\n"
 "PO-Revision-Date: 2024-04-08 16:49+0300\n"
 "Last-Translator: Ernestas Žaglinskas <virtualybe@gmail.com>\n"
 "Language-Team: \n"
@@ -21,65 +22,65 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
-#: 3.8/weather-applet.js:17615
+#: 3.8/weather-applet.js:17877
 msgid "Error"
 msgstr "Klaida"
 
 #: 3.0/applet.js:167 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:174
 #: 3.0/applet.js:177 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
-#: 3.8/weather-applet.js:17616 3.8/weather-applet.js:17618
-#: 3.8/weather-applet.js:17620 3.8/weather-applet.js:17623
-#: 3.8/weather-applet.js:17626 3.8/weather-applet.js:17627
-#: 3.8/weather-applet.js:17628 3.8/weather-applet.js:17629
+#: 3.8/weather-applet.js:17878 3.8/weather-applet.js:17880
+#: 3.8/weather-applet.js:17882 3.8/weather-applet.js:17885
+#: 3.8/weather-applet.js:17888 3.8/weather-applet.js:17889
+#: 3.8/weather-applet.js:17890 3.8/weather-applet.js:17891
 msgid "Service Error"
 msgstr "Paslaugos Klaida"
 
-#: 3.0/applet.js:168 3.8/weather-applet.js:17617
+#: 3.0/applet.js:168 3.8/weather-applet.js:17879
 msgid "Incorrect API Key"
 msgstr "Neteisingas API Raktas"
 
-#: 3.0/applet.js:170 3.8/weather-applet.js:17619
+#: 3.0/applet.js:170 3.8/weather-applet.js:17881
 msgid "Incorrect Location Format"
 msgstr "Neteisingas Vietos Formatas"
 
-#: 3.0/applet.js:172 3.8/weather-applet.js:17621
+#: 3.0/applet.js:172 3.8/weather-applet.js:17883
 msgid "Key Blocked"
 msgstr "Raktas Užblokuotas"
 
-#: 3.0/applet.js:173 3.8/weather-applet.js:17622
+#: 3.0/applet.js:173 3.8/weather-applet.js:17884
 msgid "Can't find location"
 msgstr "Negalima rasti vietovės"
 
-#: 3.0/applet.js:175 3.8/weather-applet.js:17624
+#: 3.0/applet.js:175 3.8/weather-applet.js:17886
 msgid "No Api Key"
 msgstr "Nėra Api Rakto"
 
-#: 3.0/applet.js:176 3.8/weather-applet.js:17625
+#: 3.0/applet.js:176 3.8/weather-applet.js:17887
 msgid "No Location"
 msgstr "Nėra Vietovės"
 
-#: 3.0/applet.js:181 3.8/weather-applet.js:17630
+#: 3.0/applet.js:181 3.8/weather-applet.js:17892
 msgid "Missing Packages"
 msgstr "Trūksta Paketų"
 
-#: 3.0/applet.js:182 3.8/weather-applet.js:17631
+#: 3.0/applet.js:182 3.8/weather-applet.js:17893
 msgid "Location not covered"
 msgstr "Vietovė neuždengta"
 
-#: 3.0/applet.js:193 3.0/applet.js:378 3.8/weather-applet.js:9711
+#: 3.0/applet.js:193 3.0/applet.js:378 3.8/weather-applet.js:9712
 msgid "Weather Applet"
 msgstr "Orų Programa"
 
-#: 3.0/applet.js:217 3.8/weather-applet.js:17929
+#: 3.0/applet.js:217 3.8/weather-applet.js:18106
 msgid "..."
 msgstr "..."
 
-#: 3.0/applet.js:218 3.8/weather-applet.js:17930
+#: 3.0/applet.js:218 3.8/weather-applet.js:18107
 msgid "Click to open"
 msgstr "Spausti, kad atidaryti"
 
-#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:16220
-#: 3.8/weather-applet.js:17933
+#: 3.0/applet.js:232 3.0/applet.js:1244 3.8/weather-applet.js:16698
+#: 3.8/weather-applet.js:18110
 msgid "Refresh"
 msgstr "Atnaujinti"
 
@@ -89,8 +90,8 @@ msgstr "API grąžino būsenos kodą tarp 400 ir 500"
 
 #: 3.0/applet.js:426 3.0/applet.js:2032 3.0/applet.js:2036 3.0/applet.js:2040
 #: 3.0/applet.js:2049 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
-#: 3.0/applet.js:2083 3.0/applet.js:2131 3.8/weather-applet.js:9872
-#: 3.8/weather-applet.js:9876 3.8/weather-applet.js:9880
+#: 3.0/applet.js:2083 3.0/applet.js:2131 3.8/weather-applet.js:9871
+#: 3.8/weather-applet.js:9875
 msgid "Location Store"
 msgstr "Vietovių saugykla"
 
@@ -102,14 +103,14 @@ msgstr "Atsiprašome, automatiškai gautos vietos išsaugoti negalite"
 msgid "Could not get weather information"
 msgstr "Negalima gauti informacijos apie orą"
 
-#: 3.0/applet.js:624 3.8/weather-applet.js:17768
+#: 3.0/applet.js:624 3.8/weather-applet.js:17973
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 "Netikėta klaida atnaujinant orų prognozę, prašau peržiūrėti įrašus ties "
 "Looking Glass"
 
-#: 3.0/applet.js:670 3.8/weather-applet.js:18011
+#: 3.0/applet.js:670 3.8/weather-applet.js:18188
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
@@ -125,7 +126,7 @@ msgstr "Tinklo klaida, prašau žiūrėti įrašus ties \"Looking Glass\""
 msgid "As of"
 msgstr "Atnaujinta"
 
-#: 3.0/applet.js:1108 3.8/weather-applet.js:17011
+#: 3.0/applet.js:1108 3.8/weather-applet.js:17489
 msgid "Powered by"
 msgstr "Sukurta"
 
@@ -133,52 +134,52 @@ msgstr "Sukurta"
 msgid "from you"
 msgstr "nuo tavęs"
 
-#: 3.0/applet.js:1132 3.8/weather-applet.js:16924
+#: 3.0/applet.js:1132 3.8/weather-applet.js:17402
 msgid "mm"
 msgstr "mm"
 
-#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:16924
+#: 3.0/applet.js:1132 3.0/darkSky.js:71 3.8/weather-applet.js:17402
 msgid "in"
 msgstr "in"
 
-#: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:10312
-#: 3.8/weather-applet.js:17089
+#: 3.0/applet.js:1205 3.0/met_uk.js:421 3.8/weather-applet.js:10591
+#: 3.8/weather-applet.js:17567
 msgid "mi"
 msgstr "mi"
 
-#: 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:10313
-#: 3.8/weather-applet.js:17090
+#: 3.0/applet.js:1206 3.0/met_uk.js:422 3.8/weather-applet.js:10592
+#: 3.8/weather-applet.js:17568
 msgid "km"
 msgstr "km"
 
-#: 3.0/applet.js:1227 3.8/weather-applet.js:17267
+#: 3.0/applet.js:1227 3.8/weather-applet.js:17745
 msgid "Loading current weather ..."
 msgstr "Įkeliami dabartiniai orai..."
 
-#: 3.0/applet.js:1230 3.8/weather-applet.js:17270
+#: 3.0/applet.js:1230 3.8/weather-applet.js:17748
 msgid "Loading future weather ..."
 msgstr "Įkeliami būsimi orai ..."
 
-#: 3.0/applet.js:1280 3.8/weather-applet.js:16173
+#: 3.0/applet.js:1280 3.8/weather-applet.js:16651
 msgid "Loading ..."
 msgstr "Įkeliama ..."
 
-#: 3.0/applet.js:1329 3.8/weather-applet.js:16194
+#: 3.0/applet.js:1329 3.8/weather-applet.js:16672
 msgid "Temperature"
 msgstr "Temperatūra"
 
-#: 3.0/applet.js:1330 3.8/weather-applet.js:16195
+#: 3.0/applet.js:1330 3.8/weather-applet.js:16673
 msgid "Humidity"
 msgstr "Drėgmė"
 
-#: 3.0/applet.js:1331 3.8/weather-applet.js:16196
+#: 3.0/applet.js:1331 3.8/weather-applet.js:16674
 msgid "Pressure"
 msgstr "Slėgis"
 
-#: 3.0/applet.js:1332 3.8/weather-applet.js:12249 3.8/weather-applet.js:12256
-#: 3.8/weather-applet.js:12257 3.8/weather-applet.js:12263
-#: 3.8/weather-applet.js:14217 3.8/weather-applet.js:14218
-#: 3.8/weather-applet.js:16042
+#: 3.0/applet.js:1332 3.8/weather-applet.js:12560 3.8/weather-applet.js:12567
+#: 3.8/weather-applet.js:12568 3.8/weather-applet.js:12574
+#: 3.8/weather-applet.js:14595 3.8/weather-applet.js:14596
+#: 3.8/weather-applet.js:16520
 msgid "Wind"
 msgstr "Vėjas"
 
@@ -186,36 +187,35 @@ msgstr "Vėjas"
 msgid "Make sure you entered a location or use Automatic location instead"
 msgstr "Įsitikinkite, kad įvedėte vietą arba naudokite automatinę vietą"
 
-#: 3.0/applet.js:1877 3.8/weather-applet.js:9952
+#: 3.0/applet.js:1877 3.8/weather-applet.js:10221
 msgid "Could not find location based on address, please check if it's right"
 msgstr "Nepavyko rasti vietos pagal adresą, patikrinkite, ar tai teisinga"
 
-#: 3.0/applet.js:1901 3.8/weather-applet.js:9973
+#: 3.0/applet.js:1901 3.8/weather-applet.js:10242
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
 msgstr ""
 "Nepavyko susisiekti su Geografinės padėties API , dėl klaidų žr. „Looking "
 "Glass“."
 
-#: 3.0/applet.js:2032 3.0/applet.js:2036 3.8/weather-applet.js:9872
-#: 3.8/weather-applet.js:9876
+#: 3.0/applet.js:2032 3.0/applet.js:2036 3.8/weather-applet.js:9871
 msgid "Warning"
 msgstr "Įspėjimas"
 
-#: 3.0/applet.js:2032 3.8/weather-applet.js:9872
+#: 3.0/applet.js:2032
 msgid "You can only save correct locations when the applet is not refreshing"
 msgstr "Tinkamas vietoves galite įrašyti tik tada, kai programa neatnaujinama"
 
-#: 3.0/applet.js:2036 3.8/weather-applet.js:9876
+#: 3.0/applet.js:2036 3.8/weather-applet.js:9871
 msgid "You can't save an incorrect location"
 msgstr "Negalite išsaugoti neteisingos vietovės"
 
 #. 3.8->settings-schema.json->logLevel->options
 #: 3.0/applet.js:2040 3.0/applet.js:2062 3.0/applet.js:2066 3.0/applet.js:2070
-#: 3.8/weather-applet.js:9880
+#: 3.8/weather-applet.js:9875
 msgid "Info"
 msgstr "Informacija"
 
-#: 3.0/applet.js:2040 3.8/weather-applet.js:9880
+#: 3.0/applet.js:2040 3.8/weather-applet.js:9875
 msgid "Location is already saved"
 msgstr "Vietovė jau yra išsaugota"
 
@@ -253,15 +253,15 @@ msgstr ""
 
 #: 3.0/climacell.js:163 3.0/darkSky.js:143 3.0/openWeatherMap.js:129
 #: 3.0/us_weather.js:322 3.0/weatherbit.js:202 3.0/yahoo.js:141
-#: 3.8/weather-applet.js:10740 3.8/weather-applet.js:11711
-#: 3.8/weather-applet.js:12150 3.8/weather-applet.js:12659
-#: 3.8/weather-applet.js:13021 3.8/weather-applet.js:14388
-#: 3.8/weather-applet.js:14928
+#: 3.8/weather-applet.js:11025 3.8/weather-applet.js:12007
+#: 3.8/weather-applet.js:12461 3.8/weather-applet.js:12988
+#: 3.8/weather-applet.js:13356 3.8/weather-applet.js:14776
+#: 3.8/weather-applet.js:15325
 msgid "Feels Like"
 msgstr "Jutiminė"
 
 #: 3.0/climacell.js:174 3.0/darkSky.js:189 3.0/yahoo.js:166
-#: 3.8/weather-applet.js:14990
+#: 3.8/weather-applet.js:15387
 msgid "Failed to Process Weather Info"
 msgstr "Nepavyko apdoroti orų informacijos"
 
@@ -274,7 +274,7 @@ msgstr ""
 "arba pirmiausia gaukite jį adresu https://developer.climacell.co/sign-up"
 
 #: 3.0/climacell.js:239 3.0/darkSky.js:229 3.0/weatherbit.js:331
-#: 3.8/weather-applet.js:11877 3.8/weather-applet.js:14870
+#: 3.8/weather-applet.js:12181 3.8/weather-applet.js:15264
 msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
@@ -282,7 +282,7 @@ msgstr ""
 "Prašome įsitikinti ar\n"
 "teisingai įvedėte API raktą ir Jūsų paskyra nėra užrakinta"
 
-#: 3.0/climacell.js:248 3.8/weather-applet.js:12113
+#: 3.0/climacell.js:248 3.8/weather-applet.js:12424
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from Climacell"
@@ -293,60 +293,60 @@ msgstr ""
 #: 3.0/climacell.js:259 3.0/climacell.js:260 3.0/met_norway.js:308
 #: 3.0/met_norway.js:309 3.0/met_norway.js:315 3.0/met_norway.js:322
 #: 3.0/met_norway.js:329 3.0/met_uk.js:617 3.0/met_uk.js:624 3.0/met_uk.js:631
-#: 3.0/met_uk.js:632 3.8/weather-applet.js:10516 3.8/weather-applet.js:10523
-#: 3.8/weather-applet.js:10530 3.8/weather-applet.js:10531
-#: 3.8/weather-applet.js:11379 3.8/weather-applet.js:11380
-#: 3.8/weather-applet.js:11386 3.8/weather-applet.js:11393
-#: 3.8/weather-applet.js:11400 3.8/weather-applet.js:12292
-#: 3.8/weather-applet.js:13187
+#: 3.0/met_uk.js:632 3.8/weather-applet.js:10795 3.8/weather-applet.js:10802
+#: 3.8/weather-applet.js:10809 3.8/weather-applet.js:10810
+#: 3.8/weather-applet.js:11674 3.8/weather-applet.js:11675
+#: 3.8/weather-applet.js:11681 3.8/weather-applet.js:11688
+#: 3.8/weather-applet.js:11695 3.8/weather-applet.js:12603
+#: 3.8/weather-applet.js:13522
 msgid "Heavy rain"
 msgstr "Stiprus lietus"
 
 #: 3.0/climacell.js:266 3.0/climacell.js:267 3.0/met_norway.js:483
 #: 3.0/met_norway.js:484 3.0/met_norway.js:490 3.0/us_weather.js:484
 #: 3.0/us_weather.js:533 3.0/us_weather.js:534 3.0/us_weather.js:541
-#: 3.0/yahoo.js:448 3.8/weather-applet.js:11554 3.8/weather-applet.js:11555
-#: 3.8/weather-applet.js:11561 3.8/weather-applet.js:12277
-#: 3.8/weather-applet.js:12278 3.8/weather-applet.js:12284
-#: 3.8/weather-applet.js:12291 3.8/weather-applet.js:12333
-#: 3.8/weather-applet.js:12340 3.8/weather-applet.js:12347
-#: 3.8/weather-applet.js:12801 3.8/weather-applet.js:12850
-#: 3.8/weather-applet.js:12851 3.8/weather-applet.js:12858
-#: 3.8/weather-applet.js:13179 3.8/weather-applet.js:13448
-#: 3.8/weather-applet.js:13449 3.8/weather-applet.js:13490
-#: 3.8/weather-applet.js:14189 3.8/weather-applet.js:14190
-#: 3.8/weather-applet.js:14553 3.8/weather-applet.js:14554
+#: 3.0/yahoo.js:448 3.8/weather-applet.js:11849 3.8/weather-applet.js:11850
+#: 3.8/weather-applet.js:11856 3.8/weather-applet.js:12588
+#: 3.8/weather-applet.js:12589 3.8/weather-applet.js:12595
+#: 3.8/weather-applet.js:12602 3.8/weather-applet.js:12644
+#: 3.8/weather-applet.js:12651 3.8/weather-applet.js:12658
+#: 3.8/weather-applet.js:13130 3.8/weather-applet.js:13179
+#: 3.8/weather-applet.js:13180 3.8/weather-applet.js:13187
+#: 3.8/weather-applet.js:13514 3.8/weather-applet.js:13792
+#: 3.8/weather-applet.js:13793 3.8/weather-applet.js:13834
+#: 3.8/weather-applet.js:14567 3.8/weather-applet.js:14568
+#: 3.8/weather-applet.js:14946 3.8/weather-applet.js:14947
 msgid "Rain"
 msgstr "Lietus"
 
 #: 3.0/climacell.js:273 3.0/climacell.js:274 3.0/met_norway.js:392
 #: 3.0/met_norway.js:393 3.0/met_norway.js:399 3.0/met_norway.js:406
 #: 3.0/met_norway.js:413 3.0/met_uk.js:589 3.0/met_uk.js:596 3.0/met_uk.js:610
-#: 3.0/met_uk.js:611 3.0/openWeatherMap.js:381 3.8/weather-applet.js:10488
-#: 3.8/weather-applet.js:10495 3.8/weather-applet.js:10509
-#: 3.8/weather-applet.js:10510 3.8/weather-applet.js:11009
-#: 3.8/weather-applet.js:11463 3.8/weather-applet.js:11464
-#: 3.8/weather-applet.js:11470 3.8/weather-applet.js:11477
-#: 3.8/weather-applet.js:11484 3.8/weather-applet.js:12285
-#: 3.8/weather-applet.js:13189
+#: 3.0/met_uk.js:611 3.0/openWeatherMap.js:381 3.8/weather-applet.js:10767
+#: 3.8/weather-applet.js:10774 3.8/weather-applet.js:10788
+#: 3.8/weather-applet.js:10789 3.8/weather-applet.js:11294
+#: 3.8/weather-applet.js:11758 3.8/weather-applet.js:11759
+#: 3.8/weather-applet.js:11765 3.8/weather-applet.js:11772
+#: 3.8/weather-applet.js:11779 3.8/weather-applet.js:12596
+#: 3.8/weather-applet.js:13524
 msgid "Light rain"
 msgstr "Nestiprus lietus"
 
-#: 3.0/climacell.js:280 3.8/weather-applet.js:12348 3.8/weather-applet.js:13163
+#: 3.0/climacell.js:280 3.8/weather-applet.js:12659 3.8/weather-applet.js:13498
 msgid "Heavy freezing rain"
 msgstr "Stipri lijundra"
 
 #: 3.0/climacell.js:281 3.0/climacell.js:287 3.0/climacell.js:288
 #: 3.0/climacell.js:295 3.0/openWeatherMap.js:386 3.0/us_weather.js:505
 #: 3.0/us_weather.js:506 3.0/us_weather.js:512 3.0/us_weather.js:513
-#: 3.0/us_weather.js:519 3.8/weather-applet.js:11014
-#: 3.8/weather-applet.js:12334 3.8/weather-applet.js:12822
-#: 3.8/weather-applet.js:12823 3.8/weather-applet.js:12829
-#: 3.8/weather-applet.js:12830 3.8/weather-applet.js:12836
+#: 3.0/us_weather.js:519 3.8/weather-applet.js:11299
+#: 3.8/weather-applet.js:12645 3.8/weather-applet.js:13151
+#: 3.8/weather-applet.js:13152 3.8/weather-applet.js:13158
+#: 3.8/weather-applet.js:13159 3.8/weather-applet.js:13165
 msgid "Freezing rain"
 msgstr "Lijundra"
 
-#: 3.0/climacell.js:294 3.8/weather-applet.js:12341 3.8/weather-applet.js:13165
+#: 3.0/climacell.js:294 3.8/weather-applet.js:12652 3.8/weather-applet.js:13500
 msgid "Light freezing rain"
 msgstr "Nestipri lijundra"
 
@@ -354,177 +354,177 @@ msgstr "Nestipri lijundra"
 msgid "Light freezing drizzle"
 msgstr "Nestipri šąlanti dulksna"
 
-#: 3.0/climacell.js:302 3.8/weather-applet.js:12327
+#: 3.0/climacell.js:302 3.8/weather-applet.js:12638
 msgid "Freezing drizzle"
 msgstr "Šąlanti dulksna"
 
-#: 3.0/climacell.js:308 3.0/climacell.js:309 3.8/weather-applet.js:13145
+#: 3.0/climacell.js:308 3.0/climacell.js:309 3.8/weather-applet.js:13480
 msgid "Light drizzle"
 msgstr "Nestipri dulksna"
 
-#: 3.0/climacell.js:315 3.8/weather-applet.js:12362
+#: 3.0/climacell.js:315 3.8/weather-applet.js:12673
 msgid "Heavy ice pellets"
 msgstr "Sunkios ledo granulės"
 
 #: 3.0/climacell.js:316 3.0/climacell.js:322 3.0/climacell.js:323
-#: 3.0/climacell.js:330 3.8/weather-applet.js:12354 3.8/weather-applet.js:12355
-#: 3.8/weather-applet.js:12361 3.8/weather-applet.js:12368
+#: 3.0/climacell.js:330 3.8/weather-applet.js:12665 3.8/weather-applet.js:12666
+#: 3.8/weather-applet.js:12672 3.8/weather-applet.js:12679
 msgid "Ice pellets"
 msgstr "Ledo granulės"
 
-#: 3.0/climacell.js:329 3.8/weather-applet.js:12369
+#: 3.0/climacell.js:329 3.8/weather-applet.js:12680
 msgid "Light ice pellets"
 msgstr "Nestiprios ledo granulės"
 
 #: 3.0/climacell.js:336 3.0/climacell.js:337 3.0/met_norway.js:364
 #: 3.0/met_norway.js:365 3.0/met_norway.js:371 3.0/met_norway.js:378
 #: 3.0/met_norway.js:385 3.0/met_uk.js:701 3.0/met_uk.js:708 3.0/met_uk.js:715
-#: 3.0/met_uk.js:716 3.0/openWeatherMap.js:393 3.8/weather-applet.js:10600
-#: 3.8/weather-applet.js:10607 3.8/weather-applet.js:10614
-#: 3.8/weather-applet.js:10615 3.8/weather-applet.js:11021
-#: 3.8/weather-applet.js:11435 3.8/weather-applet.js:11436
-#: 3.8/weather-applet.js:11442 3.8/weather-applet.js:11449
-#: 3.8/weather-applet.js:11456 3.8/weather-applet.js:12320
-#: 3.8/weather-applet.js:13205 3.8/weather-applet.js:13525
+#: 3.0/met_uk.js:716 3.0/openWeatherMap.js:393 3.8/weather-applet.js:10879
+#: 3.8/weather-applet.js:10886 3.8/weather-applet.js:10893
+#: 3.8/weather-applet.js:10894 3.8/weather-applet.js:11306
+#: 3.8/weather-applet.js:11730 3.8/weather-applet.js:11731
+#: 3.8/weather-applet.js:11737 3.8/weather-applet.js:11744
+#: 3.8/weather-applet.js:11751 3.8/weather-applet.js:12631
+#: 3.8/weather-applet.js:13540 3.8/weather-applet.js:13869
 msgid "Heavy snow"
 msgstr "Stipriai sninga"
 
 #: 3.0/climacell.js:343 3.0/climacell.js:344 3.0/met_norway.js:539
 #: 3.0/met_norway.js:540 3.0/met_norway.js:546 3.0/openWeatherMap.js:392
 #: 3.0/us_weather.js:477 3.0/us_weather.js:478 3.0/yahoo.js:452
-#: 3.8/weather-applet.js:11020 3.8/weather-applet.js:11610
-#: 3.8/weather-applet.js:11611 3.8/weather-applet.js:11617
-#: 3.8/weather-applet.js:12298 3.8/weather-applet.js:12299
-#: 3.8/weather-applet.js:12312 3.8/weather-applet.js:12319
-#: 3.8/weather-applet.js:12794 3.8/weather-applet.js:12795
-#: 3.8/weather-applet.js:13199 3.8/weather-applet.js:13434
-#: 3.8/weather-applet.js:13518 3.8/weather-applet.js:14203
-#: 3.8/weather-applet.js:14204 3.8/weather-applet.js:14581
-#: 3.8/weather-applet.js:14582
+#: 3.8/weather-applet.js:11305 3.8/weather-applet.js:11905
+#: 3.8/weather-applet.js:11906 3.8/weather-applet.js:11912
+#: 3.8/weather-applet.js:12609 3.8/weather-applet.js:12610
+#: 3.8/weather-applet.js:12623 3.8/weather-applet.js:12630
+#: 3.8/weather-applet.js:13123 3.8/weather-applet.js:13124
+#: 3.8/weather-applet.js:13534 3.8/weather-applet.js:13778
+#: 3.8/weather-applet.js:13862 3.8/weather-applet.js:14581
+#: 3.8/weather-applet.js:14582 3.8/weather-applet.js:14974
+#: 3.8/weather-applet.js:14975
 msgid "Snow"
 msgstr "Sninga"
 
 #: 3.0/climacell.js:350 3.0/climacell.js:351 3.0/met_norway.js:448
 #: 3.0/met_norway.js:449 3.0/met_norway.js:455 3.0/met_norway.js:462
 #: 3.0/met_norway.js:469 3.0/met_uk.js:680 3.0/met_uk.js:687 3.0/met_uk.js:694
-#: 3.0/met_uk.js:695 3.0/openWeatherMap.js:391 3.8/weather-applet.js:10579
-#: 3.8/weather-applet.js:10586 3.8/weather-applet.js:10593
-#: 3.8/weather-applet.js:10594 3.8/weather-applet.js:11019
-#: 3.8/weather-applet.js:11519 3.8/weather-applet.js:11520
-#: 3.8/weather-applet.js:11526 3.8/weather-applet.js:11533
-#: 3.8/weather-applet.js:11540 3.8/weather-applet.js:12313
-#: 3.8/weather-applet.js:13207
+#: 3.0/met_uk.js:695 3.0/openWeatherMap.js:391 3.8/weather-applet.js:10858
+#: 3.8/weather-applet.js:10865 3.8/weather-applet.js:10872
+#: 3.8/weather-applet.js:10873 3.8/weather-applet.js:11304
+#: 3.8/weather-applet.js:11814 3.8/weather-applet.js:11815
+#: 3.8/weather-applet.js:11821 3.8/weather-applet.js:11828
+#: 3.8/weather-applet.js:11835 3.8/weather-applet.js:12624
+#: 3.8/weather-applet.js:13542
 msgid "Light snow"
 msgstr "Lengvai sninga"
 
-#: 3.0/climacell.js:357 3.0/climacell.js:358 3.8/weather-applet.js:12305
-#: 3.8/weather-applet.js:12306 3.8/weather-applet.js:14560
-#: 3.8/weather-applet.js:14561
+#: 3.0/climacell.js:357 3.0/climacell.js:358 3.8/weather-applet.js:12616
+#: 3.8/weather-applet.js:12617 3.8/weather-applet.js:14953
+#: 3.8/weather-applet.js:14954
 msgid "Flurries"
 msgstr "Staigūs vėjo šuorai"
 
 #: 3.0/climacell.js:364 3.0/climacell.js:365 3.0/openWeatherMap.js:366
-#: 3.0/us_weather.js:550 3.0/us_weather.js:551 3.8/weather-applet.js:10994
-#: 3.8/weather-applet.js:12375 3.8/weather-applet.js:12376
-#: 3.8/weather-applet.js:12867 3.8/weather-applet.js:12868
-#: 3.8/weather-applet.js:13211 3.8/weather-applet.js:13532
-#: 3.8/weather-applet.js:13533 3.8/weather-applet.js:14210
-#: 3.8/weather-applet.js:14211
+#: 3.0/us_weather.js:550 3.0/us_weather.js:551 3.8/weather-applet.js:11279
+#: 3.8/weather-applet.js:12686 3.8/weather-applet.js:12687
+#: 3.8/weather-applet.js:13196 3.8/weather-applet.js:13197
+#: 3.8/weather-applet.js:13546 3.8/weather-applet.js:13876
+#: 3.8/weather-applet.js:13877 3.8/weather-applet.js:14588
+#: 3.8/weather-applet.js:14589
 msgid "Thunderstorm"
 msgstr "Perkūnija"
 
-#: 3.0/climacell.js:371 3.0/climacell.js:372 3.8/weather-applet.js:12243
+#: 3.0/climacell.js:371 3.0/climacell.js:372 3.8/weather-applet.js:12554
 msgid "Light fog"
 msgstr "Lengvas rūkas"
 
 #: 3.0/climacell.js:378 3.0/climacell.js:379 3.0/met_norway.js:301
 #: 3.0/met_norway.js:302 3.0/met_uk.js:568 3.0/met_uk.js:569
 #: 3.0/openWeatherMap.js:405 3.0/us_weather.js:620 3.0/us_weather.js:621
-#: 3.8/weather-applet.js:10467 3.8/weather-applet.js:10468
-#: 3.8/weather-applet.js:11033 3.8/weather-applet.js:11372
-#: 3.8/weather-applet.js:11373 3.8/weather-applet.js:12235
-#: 3.8/weather-applet.js:12236 3.8/weather-applet.js:12242
-#: 3.8/weather-applet.js:12937 3.8/weather-applet.js:12938
-#: 3.8/weather-applet.js:13153 3.8/weather-applet.js:14161
-#: 3.8/weather-applet.js:14162 3.8/weather-applet.js:14609
-#: 3.8/weather-applet.js:14610
+#: 3.8/weather-applet.js:10746 3.8/weather-applet.js:10747
+#: 3.8/weather-applet.js:11318 3.8/weather-applet.js:11667
+#: 3.8/weather-applet.js:11668 3.8/weather-applet.js:12546
+#: 3.8/weather-applet.js:12547 3.8/weather-applet.js:12553
+#: 3.8/weather-applet.js:13266 3.8/weather-applet.js:13267
+#: 3.8/weather-applet.js:13488 3.8/weather-applet.js:14539
+#: 3.8/weather-applet.js:14540 3.8/weather-applet.js:15002
+#: 3.8/weather-applet.js:15003
 msgid "Fog"
 msgstr "Rūkas"
 
 #: 3.0/climacell.js:385 3.0/climacell.js:386 3.0/met_norway.js:287
 #: 3.0/met_norway.js:288 3.0/met_uk.js:575 3.0/met_uk.js:576 3.0/yahoo.js:462
-#: 3.8/weather-applet.js:10474 3.8/weather-applet.js:10475
-#: 3.8/weather-applet.js:11358 3.8/weather-applet.js:11359
-#: 3.8/weather-applet.js:12207 3.8/weather-applet.js:12208
-#: 3.8/weather-applet.js:13427 3.8/weather-applet.js:13428
-#: 3.8/weather-applet.js:14154 3.8/weather-applet.js:14155
-#: 3.8/weather-applet.js:14651 3.8/weather-applet.js:14652
+#: 3.8/weather-applet.js:10753 3.8/weather-applet.js:10754
+#: 3.8/weather-applet.js:11653 3.8/weather-applet.js:11654
+#: 3.8/weather-applet.js:12518 3.8/weather-applet.js:12519
+#: 3.8/weather-applet.js:13771 3.8/weather-applet.js:13772
+#: 3.8/weather-applet.js:14532 3.8/weather-applet.js:14533
+#: 3.8/weather-applet.js:15044 3.8/weather-applet.js:15045
 msgid "Cloudy"
 msgstr "Debesuota"
 
 #: 3.0/climacell.js:392 3.0/climacell.js:393 3.0/us_weather.js:428
-#: 3.0/us_weather.js:429 3.0/us_weather.js:463 3.8/weather-applet.js:12228
-#: 3.8/weather-applet.js:12229 3.8/weather-applet.js:12745
-#: 3.8/weather-applet.js:12746 3.8/weather-applet.js:12780
+#: 3.0/us_weather.js:429 3.0/us_weather.js:463 3.8/weather-applet.js:12539
+#: 3.8/weather-applet.js:12540 3.8/weather-applet.js:13074
+#: 3.8/weather-applet.js:13075 3.8/weather-applet.js:13109
 msgid "Mostly cloudy"
 msgstr "Daugiausia debesuota"
 
 #: 3.0/climacell.js:399 3.0/climacell.js:400 3.0/met_norway.js:476
 #: 3.0/met_norway.js:477 3.0/met_uk.js:540 3.0/met_uk.js:541 3.0/met_uk.js:547
 #: 3.0/met_uk.js:548 3.0/us_weather.js:421 3.0/us_weather.js:422
-#: 3.0/us_weather.js:456 3.8/weather-applet.js:10439
-#: 3.8/weather-applet.js:10440 3.8/weather-applet.js:10446
-#: 3.8/weather-applet.js:10447 3.8/weather-applet.js:11547
-#: 3.8/weather-applet.js:11548 3.8/weather-applet.js:12221
-#: 3.8/weather-applet.js:12222 3.8/weather-applet.js:12738
-#: 3.8/weather-applet.js:12739 3.8/weather-applet.js:12773
-#: 3.8/weather-applet.js:13420 3.8/weather-applet.js:13421
+#: 3.0/us_weather.js:456 3.8/weather-applet.js:10718
+#: 3.8/weather-applet.js:10719 3.8/weather-applet.js:10725
+#: 3.8/weather-applet.js:10726 3.8/weather-applet.js:11842
+#: 3.8/weather-applet.js:11843 3.8/weather-applet.js:12532
+#: 3.8/weather-applet.js:12533 3.8/weather-applet.js:13067
+#: 3.8/weather-applet.js:13068 3.8/weather-applet.js:13102
+#: 3.8/weather-applet.js:13764 3.8/weather-applet.js:13765
 msgid "Partly cloudy"
 msgstr "Protarpiais debesuota"
 
-#: 3.0/climacell.js:406 3.0/climacell.js:407 3.8/weather-applet.js:12214
-#: 3.8/weather-applet.js:12215
+#: 3.0/climacell.js:406 3.0/climacell.js:407 3.8/weather-applet.js:12525
+#: 3.8/weather-applet.js:12526
 msgid "Mostly clear"
 msgstr "Daugiausia saulėta"
 
 #: 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:526
 #: 3.0/met_uk.js:527 3.0/openWeatherMap.js:411 3.0/us_weather.js:407
 #: 3.0/us_weather.js:408 3.0/us_weather.js:442 3.0/yahoo.js:465
-#: 3.8/weather-applet.js:10425 3.8/weather-applet.js:10426
-#: 3.8/weather-applet.js:11039 3.8/weather-applet.js:12200
-#: 3.8/weather-applet.js:12201 3.8/weather-applet.js:12724
-#: 3.8/weather-applet.js:12725 3.8/weather-applet.js:12759
-#: 3.8/weather-applet.js:13223 3.8/weather-applet.js:13413
-#: 3.8/weather-applet.js:13414 3.8/weather-applet.js:14140
-#: 3.8/weather-applet.js:14141 3.8/weather-applet.js:14147
-#: 3.8/weather-applet.js:14148 3.8/weather-applet.js:14686
-#: 3.8/weather-applet.js:14687
+#: 3.8/weather-applet.js:10704 3.8/weather-applet.js:10705
+#: 3.8/weather-applet.js:11324 3.8/weather-applet.js:12511
+#: 3.8/weather-applet.js:12512 3.8/weather-applet.js:13053
+#: 3.8/weather-applet.js:13054 3.8/weather-applet.js:13088
+#: 3.8/weather-applet.js:13558 3.8/weather-applet.js:13757
+#: 3.8/weather-applet.js:13758 3.8/weather-applet.js:14518
+#: 3.8/weather-applet.js:14519 3.8/weather-applet.js:14525
+#: 3.8/weather-applet.js:14526 3.8/weather-applet.js:15079
+#: 3.8/weather-applet.js:15080
 msgid "Clear"
 msgstr "Saulėta"
 
 #: 3.0/climacell.js:413 3.0/climacell.js:414 3.0/met_uk.js:533
-#: 3.0/met_uk.js:534 3.0/yahoo.js:466 3.8/weather-applet.js:10432
-#: 3.8/weather-applet.js:10433 3.8/weather-applet.js:12200
-#: 3.8/weather-applet.js:12201 3.8/weather-applet.js:14693
-#: 3.8/weather-applet.js:14694
+#: 3.0/met_uk.js:534 3.0/yahoo.js:466 3.8/weather-applet.js:10711
+#: 3.8/weather-applet.js:10712 3.8/weather-applet.js:12511
+#: 3.8/weather-applet.js:12512 3.8/weather-applet.js:15086
+#: 3.8/weather-applet.js:15087
 msgid "Sunny"
 msgstr "Saulėta"
 
 #: 3.0/climacell.js:421 3.0/climacell.js:422 3.0/met_norway.js:568
 #: 3.0/met_norway.js:569 3.0/met_uk.js:519 3.0/met_uk.js:520 3.0/met_uk.js:554
 #: 3.0/met_uk.js:555 3.0/met_uk.js:743 3.0/met_uk.js:744 3.0/us_weather.js:627
-#: 3.0/us_weather.js:628 3.8/weather-applet.js:10418
-#: 3.8/weather-applet.js:10419 3.8/weather-applet.js:10453
-#: 3.8/weather-applet.js:10454 3.8/weather-applet.js:10642
-#: 3.8/weather-applet.js:10643 3.8/weather-applet.js:11341
-#: 3.8/weather-applet.js:11342 3.8/weather-applet.js:11639
-#: 3.8/weather-applet.js:11640 3.8/weather-applet.js:12192
-#: 3.8/weather-applet.js:12193 3.8/weather-applet.js:12715
-#: 3.8/weather-applet.js:12716 3.8/weather-applet.js:12944
-#: 3.8/weather-applet.js:12945 3.8/weather-applet.js:14073
-#: 3.8/weather-applet.js:14074 3.8/weather-applet.js:14224
-#: 3.8/weather-applet.js:14225 3.8/weather-applet.js:14797
-#: 3.8/weather-applet.js:14799
+#: 3.0/us_weather.js:628 3.8/weather-applet.js:10697
+#: 3.8/weather-applet.js:10698 3.8/weather-applet.js:10732
+#: 3.8/weather-applet.js:10733 3.8/weather-applet.js:10921
+#: 3.8/weather-applet.js:10922 3.8/weather-applet.js:11636
+#: 3.8/weather-applet.js:11637 3.8/weather-applet.js:11934
+#: 3.8/weather-applet.js:11935 3.8/weather-applet.js:12503
+#: 3.8/weather-applet.js:12504 3.8/weather-applet.js:13044
+#: 3.8/weather-applet.js:13045 3.8/weather-applet.js:13273
+#: 3.8/weather-applet.js:13274 3.8/weather-applet.js:14451
+#: 3.8/weather-applet.js:14452 3.8/weather-applet.js:14602
+#: 3.8/weather-applet.js:14603 3.8/weather-applet.js:15190
+#: 3.8/weather-applet.js:15192
 msgid "Unknown"
 msgstr "Nežinoma"
 
@@ -548,7 +548,7 @@ msgstr ""
 "Nustatymuose įveskite API raktą,\n"
 "arba pirmiausia gaukite jį https://darksky.net/dev/register"
 
-#: 3.0/darkSky.js:238 3.8/weather-applet.js:14880
+#: 3.0/darkSky.js:238 3.8/weather-applet.js:15274
 msgid ""
 "Please Make sure you\n"
 "entered the API key that you have from DarkSky"
@@ -556,7 +556,7 @@ msgstr ""
 "Prašome įsitikinti ar\n"
 "įvedėte API raktą, kurį turite iš DarkSky"
 
-#: 3.0/ipApi.js:89 3.8/weather-applet.js:15196
+#: 3.0/ipApi.js:89 3.8/weather-applet.js:15594
 msgid "Could not obtain location"
 msgstr "Nepavyko nustatyti vietovės"
 
@@ -565,121 +565,121 @@ msgid ""
 "Location Service responded with errors, please see the logs in Looking Glass"
 msgstr "Vietos paslauga atsakė su klaidomis. Žr. žurnalus Looking Glass"
 
-#: 3.0/met_norway.js:131 3.8/weather-applet.js:11203
+#: 3.0/met_norway.js:131 3.8/weather-applet.js:11498
 msgid "Cloudiness"
 msgstr "Debesuotumas"
 
 #: 3.0/met_norway.js:280 3.0/met_norway.js:281 3.0/openWeatherMap.js:412
-#: 3.8/weather-applet.js:11040 3.8/weather-applet.js:11351
-#: 3.8/weather-applet.js:11352
+#: 3.8/weather-applet.js:11325 3.8/weather-applet.js:11646
+#: 3.8/weather-applet.js:11647
 msgid "Clear sky"
 msgstr "Giedra"
 
 #: 3.0/met_norway.js:294 3.0/met_norway.js:295 3.0/yahoo.js:468
-#: 3.8/weather-applet.js:11365 3.8/weather-applet.js:11366
+#: 3.8/weather-applet.js:11660 3.8/weather-applet.js:11661
 msgid "Fair"
 msgstr "Gražus oras"
 
-#: 3.0/met_norway.js:316 3.8/weather-applet.js:11387
+#: 3.0/met_norway.js:316 3.8/weather-applet.js:11682
 msgid "Heavy rain and thunder"
 msgstr "Stiprus lietus ir perkūnija"
 
-#: 3.0/met_norway.js:323 3.8/weather-applet.js:11394
+#: 3.0/met_norway.js:323 3.8/weather-applet.js:11689
 msgid "Heavy rain showers"
 msgstr "Stiprus lietus"
 
-#: 3.0/met_norway.js:330 3.8/weather-applet.js:11401
+#: 3.0/met_norway.js:330 3.8/weather-applet.js:11696
 msgid "Heavy rain showers and thunder"
 msgstr "Stiprus lietus ir perkūnija"
 
 #: 3.0/met_norway.js:336 3.0/met_norway.js:337 3.0/met_norway.js:343
-#: 3.0/met_norway.js:350 3.0/met_norway.js:357 3.8/weather-applet.js:11407
-#: 3.8/weather-applet.js:11408 3.8/weather-applet.js:11414
-#: 3.8/weather-applet.js:11421 3.8/weather-applet.js:11428
+#: 3.0/met_norway.js:350 3.0/met_norway.js:357 3.8/weather-applet.js:11702
+#: 3.8/weather-applet.js:11703 3.8/weather-applet.js:11709
+#: 3.8/weather-applet.js:11716 3.8/weather-applet.js:11723
 msgid "Heavy sleet"
 msgstr "Stipri šlapdriba"
 
-#: 3.0/met_norway.js:344 3.8/weather-applet.js:11415
+#: 3.0/met_norway.js:344 3.8/weather-applet.js:11710
 msgid "Heavy sleet and thunder"
 msgstr "Stipri šlapdriba ir perkūnija"
 
-#: 3.0/met_norway.js:351 3.8/weather-applet.js:11422
+#: 3.0/met_norway.js:351 3.8/weather-applet.js:11717
 msgid "Heavy sleet showers"
 msgstr "Stipri šlapdriba"
 
-#: 3.0/met_norway.js:358 3.8/weather-applet.js:11429
+#: 3.0/met_norway.js:358 3.8/weather-applet.js:11724
 msgid "Heavy sleet showers and thunder"
 msgstr "Stipri šlapdriba su perkūnija"
 
-#: 3.0/met_norway.js:372 3.8/weather-applet.js:11443
+#: 3.0/met_norway.js:372 3.8/weather-applet.js:11738
 msgid "Heavy snow and thunder"
 msgstr "Stipriai sninga ir griaudi"
 
-#: 3.0/met_norway.js:379 3.8/weather-applet.js:11450
-#: 3.8/weather-applet.js:13526
+#: 3.0/met_norway.js:379 3.8/weather-applet.js:11745
+#: 3.8/weather-applet.js:13870
 msgid "Heavy snow showers"
 msgstr "Stipriai sninga"
 
-#: 3.0/met_norway.js:386 3.8/weather-applet.js:11457
+#: 3.0/met_norway.js:386 3.8/weather-applet.js:11752
 msgid "Heavy snow showers and thunder"
 msgstr "Stirpiai sninga ir griaudi"
 
-#: 3.0/met_norway.js:400 3.8/weather-applet.js:11471
+#: 3.0/met_norway.js:400 3.8/weather-applet.js:11766
 msgid "Light rain and thunder"
 msgstr "Lengvas lietus su perkūnija"
 
-#: 3.0/met_norway.js:407 3.8/weather-applet.js:11478
+#: 3.0/met_norway.js:407 3.8/weather-applet.js:11773
 msgid "Light rain showers"
 msgstr "Nestiprus lietus"
 
-#: 3.0/met_norway.js:414 3.8/weather-applet.js:11485
+#: 3.0/met_norway.js:414 3.8/weather-applet.js:11780
 msgid "Light rain showers and thunder"
 msgstr "Lengvas lietus su perkūnija"
 
 #: 3.0/met_norway.js:420 3.0/met_norway.js:421 3.0/met_norway.js:427
-#: 3.0/met_norway.js:434 3.0/met_norway.js:441 3.8/weather-applet.js:11491
-#: 3.8/weather-applet.js:11492 3.8/weather-applet.js:11498
-#: 3.8/weather-applet.js:11505 3.8/weather-applet.js:11512
+#: 3.0/met_norway.js:434 3.0/met_norway.js:441 3.8/weather-applet.js:11786
+#: 3.8/weather-applet.js:11787 3.8/weather-applet.js:11793
+#: 3.8/weather-applet.js:11800 3.8/weather-applet.js:11807
 msgid "Light sleet"
 msgstr "Nestirpi šlapdriba"
 
-#: 3.0/met_norway.js:428 3.8/weather-applet.js:11499
+#: 3.0/met_norway.js:428 3.8/weather-applet.js:11794
 msgid "Light sleet and thunder"
 msgstr "Lengva šlapdriba su perkūnija"
 
-#: 3.0/met_norway.js:435 3.8/weather-applet.js:11506
+#: 3.0/met_norway.js:435 3.8/weather-applet.js:11801
 msgid "Light sleet showers"
 msgstr "Lengva šlapdriba"
 
-#: 3.0/met_norway.js:442 3.8/weather-applet.js:11513
+#: 3.0/met_norway.js:442 3.8/weather-applet.js:11808
 msgid "Light sleet showers and thunder"
 msgstr "Lengva šlapdriba su perkūnija"
 
-#: 3.0/met_norway.js:456 3.8/weather-applet.js:11527
+#: 3.0/met_norway.js:456 3.8/weather-applet.js:11822
 msgid "Light snow and thunder"
 msgstr "Lengvai sninga ir griaudi"
 
-#: 3.0/met_norway.js:463 3.8/weather-applet.js:11534
+#: 3.0/met_norway.js:463 3.8/weather-applet.js:11829
 msgid "Light snow showers"
 msgstr "Lengvai snyguriuoja"
 
-#: 3.0/met_norway.js:470 3.8/weather-applet.js:11541
+#: 3.0/met_norway.js:470 3.8/weather-applet.js:11836
 msgid "Light snow showers and thunder"
 msgstr "Lengvai snyguriuoja ir griaudi"
 
-#: 3.0/met_norway.js:491 3.8/weather-applet.js:11562
+#: 3.0/met_norway.js:491 3.8/weather-applet.js:11857
 msgid "Rain and thunder"
 msgstr "Lietus ir perkūnija"
 
 #: 3.0/met_norway.js:497 3.0/met_norway.js:498 3.0/met_norway.js:504
-#: 3.0/us_weather.js:542 3.8/weather-applet.js:11568
-#: 3.8/weather-applet.js:11569 3.8/weather-applet.js:11575
-#: 3.8/weather-applet.js:12859 3.8/weather-applet.js:13185
-#: 3.8/weather-applet.js:13491 3.8/weather-applet.js:13497
+#: 3.0/us_weather.js:542 3.8/weather-applet.js:11863
+#: 3.8/weather-applet.js:11864 3.8/weather-applet.js:11870
+#: 3.8/weather-applet.js:13188 3.8/weather-applet.js:13520
+#: 3.8/weather-applet.js:13835 3.8/weather-applet.js:13841
 msgid "Rain showers"
 msgstr "Trumpi lietūs"
 
-#: 3.0/met_norway.js:505 3.8/weather-applet.js:11576
+#: 3.0/met_norway.js:505 3.8/weather-applet.js:11871
 msgid "Rain showers and thunder"
 msgstr "Trumpi lietūs ir perkūnija"
 
@@ -688,44 +688,44 @@ msgstr "Trumpi lietūs ir perkūnija"
 #: 3.0/met_uk.js:645 3.0/met_uk.js:652 3.0/met_uk.js:653
 #: 3.0/openWeatherMap.js:394 3.0/us_weather.js:491 3.0/us_weather.js:492
 #: 3.0/us_weather.js:498 3.0/us_weather.js:499 3.0/us_weather.js:526
-#: 3.0/us_weather.js:527 3.0/yahoo.js:454 3.8/weather-applet.js:10537
-#: 3.8/weather-applet.js:10544 3.8/weather-applet.js:10551
-#: 3.8/weather-applet.js:10552 3.8/weather-applet.js:11022
-#: 3.8/weather-applet.js:11582 3.8/weather-applet.js:11583
-#: 3.8/weather-applet.js:11589 3.8/weather-applet.js:11596
-#: 3.8/weather-applet.js:11603 3.8/weather-applet.js:12808
-#: 3.8/weather-applet.js:12809 3.8/weather-applet.js:12815
-#: 3.8/weather-applet.js:12816 3.8/weather-applet.js:12843
-#: 3.8/weather-applet.js:12844 3.8/weather-applet.js:14196
-#: 3.8/weather-applet.js:14197 3.8/weather-applet.js:14595
-#: 3.8/weather-applet.js:14596
+#: 3.0/us_weather.js:527 3.0/yahoo.js:454 3.8/weather-applet.js:10816
+#: 3.8/weather-applet.js:10823 3.8/weather-applet.js:10830
+#: 3.8/weather-applet.js:10831 3.8/weather-applet.js:11307
+#: 3.8/weather-applet.js:11877 3.8/weather-applet.js:11878
+#: 3.8/weather-applet.js:11884 3.8/weather-applet.js:11891
+#: 3.8/weather-applet.js:11898 3.8/weather-applet.js:13137
+#: 3.8/weather-applet.js:13138 3.8/weather-applet.js:13144
+#: 3.8/weather-applet.js:13145 3.8/weather-applet.js:13172
+#: 3.8/weather-applet.js:13173 3.8/weather-applet.js:14574
+#: 3.8/weather-applet.js:14575 3.8/weather-applet.js:14988
+#: 3.8/weather-applet.js:14989
 msgid "Sleet"
 msgstr "Šlapdriba"
 
-#: 3.0/met_norway.js:519 3.8/weather-applet.js:11590
+#: 3.0/met_norway.js:519 3.8/weather-applet.js:11885
 msgid "Sleet and thunder"
 msgstr "Šlapdriba ir perkūnija"
 
-#: 3.0/met_norway.js:526 3.8/weather-applet.js:11597
+#: 3.0/met_norway.js:526 3.8/weather-applet.js:11892
 msgid "Sleet showers"
 msgstr "Šlapdriba"
 
-#: 3.0/met_norway.js:533 3.8/weather-applet.js:11604
+#: 3.0/met_norway.js:533 3.8/weather-applet.js:11899
 msgid "Sleet showers and thunder"
 msgstr "Šlapdriba ir perkūnija"
 
-#: 3.0/met_norway.js:547 3.8/weather-applet.js:11618
+#: 3.0/met_norway.js:547 3.8/weather-applet.js:11913
 msgid "Snow and thunder"
 msgstr "Sninga ir griaudi"
 
 #: 3.0/met_norway.js:553 3.0/met_norway.js:554 3.0/met_norway.js:560
-#: 3.8/weather-applet.js:11624 3.8/weather-applet.js:11625
-#: 3.8/weather-applet.js:11631 3.8/weather-applet.js:13203
-#: 3.8/weather-applet.js:13519
+#: 3.8/weather-applet.js:11919 3.8/weather-applet.js:11920
+#: 3.8/weather-applet.js:11926 3.8/weather-applet.js:13538
+#: 3.8/weather-applet.js:13863
 msgid "Snow showers"
 msgstr "Vietomis pasnigs"
 
-#: 3.0/met_norway.js:561 3.8/weather-applet.js:11632
+#: 3.0/met_norway.js:561 3.8/weather-applet.js:11927
 msgid "Snow showers and thunder"
 msgstr "Vietomis pasnigs su perkūnija"
 
@@ -734,21 +734,21 @@ msgstr "Vietomis pasnigs su perkūnija"
 msgid "Unexpected response from API"
 msgstr "Netikėtas atsakymas iš API"
 
-#: 3.0/met_uk.js:316 3.8/weather-applet.js:10237
+#: 3.0/met_uk.js:316 3.8/weather-applet.js:10516
 msgid "Visibility"
 msgstr "Matomumas"
 
 #: 3.0/met_uk.js:340 3.0/openWeatherMap.js:190 3.0/us_weather.js:334
-#: 3.0/weatherbit.js:212 3.8/weather-applet.js:10265
-#: 3.8/weather-applet.js:10817 3.8/weather-applet.js:11722
-#: 3.8/weather-applet.js:12672
+#: 3.0/weatherbit.js:212 3.8/weather-applet.js:10544
+#: 3.8/weather-applet.js:11102 3.8/weather-applet.js:12018
+#: 3.8/weather-applet.js:13001
 msgid "Failed to Process Current Weather Info"
 msgstr "Nepavyko apdoroti esamos orų informacijos"
 
 #: 3.0/met_uk.js:364 3.0/met_uk.js:400 3.0/us_weather.js:371
-#: 3.0/weatherbit.js:239 3.0/weatherbit.js:274 3.8/weather-applet.js:10055
-#: 3.8/weather-applet.js:10089 3.8/weather-applet.js:11748
-#: 3.8/weather-applet.js:11782 3.8/weather-applet.js:12474
+#: 3.0/weatherbit.js:239 3.0/weatherbit.js:274 3.8/weather-applet.js:10325
+#: 3.8/weather-applet.js:10359 3.8/weather-applet.js:12044
+#: 3.8/weather-applet.js:12078 3.8/weather-applet.js:12786
 msgid "Failed to Process Forecast Info"
 msgstr "Nepavyko apdoroti orų prognozės informacijos"
 
@@ -777,88 +777,88 @@ msgid "Excellent - More than"
 msgstr "Puikus – daugiau nei"
 
 #: 3.0/met_uk.js:561 3.0/met_uk.js:562 3.0/openWeatherMap.js:401
-#: 3.8/weather-applet.js:10460 3.8/weather-applet.js:10461
-#: 3.8/weather-applet.js:11029 3.8/weather-applet.js:13175
+#: 3.8/weather-applet.js:10739 3.8/weather-applet.js:10740
+#: 3.8/weather-applet.js:11314 3.8/weather-applet.js:13510
 msgid "Mist"
 msgstr "Rūkas"
 
 #: 3.0/met_uk.js:582 3.0/met_uk.js:583 3.0/us_weather.js:435
-#: 3.0/us_weather.js:436 3.0/us_weather.js:470 3.8/weather-applet.js:10481
-#: 3.8/weather-applet.js:10482 3.8/weather-applet.js:12752
-#: 3.8/weather-applet.js:12753 3.8/weather-applet.js:12787
-#: 3.8/weather-applet.js:13219
+#: 3.0/us_weather.js:436 3.0/us_weather.js:470 3.8/weather-applet.js:10760
+#: 3.8/weather-applet.js:10761 3.8/weather-applet.js:13081
+#: 3.8/weather-applet.js:13082 3.8/weather-applet.js:13116
+#: 3.8/weather-applet.js:13554
 msgid "Overcast"
 msgstr "Apsiniaukę"
 
-#: 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/weather-applet.js:10489
-#: 3.8/weather-applet.js:10496
+#: 3.0/met_uk.js:590 3.0/met_uk.js:597 3.8/weather-applet.js:10768
+#: 3.8/weather-applet.js:10775
 msgid "Light rain shower"
 msgstr "Trumpalaikis lietus"
 
 #: 3.0/met_uk.js:603 3.0/met_uk.js:604 3.0/openWeatherMap.js:373
-#: 3.0/yahoo.js:445 3.8/weather-applet.js:10502 3.8/weather-applet.js:10503
-#: 3.8/weather-applet.js:11001 3.8/weather-applet.js:12270
-#: 3.8/weather-applet.js:12271 3.8/weather-applet.js:12326
-#: 3.8/weather-applet.js:13141 3.8/weather-applet.js:14532
-#: 3.8/weather-applet.js:14533
+#: 3.0/yahoo.js:445 3.8/weather-applet.js:10781 3.8/weather-applet.js:10782
+#: 3.8/weather-applet.js:11286 3.8/weather-applet.js:12581
+#: 3.8/weather-applet.js:12582 3.8/weather-applet.js:12637
+#: 3.8/weather-applet.js:13476 3.8/weather-applet.js:14925
+#: 3.8/weather-applet.js:14926
 msgid "Drizzle"
 msgstr "Lijundra"
 
-#: 3.0/met_uk.js:618 3.0/met_uk.js:625 3.8/weather-applet.js:10517
-#: 3.8/weather-applet.js:10524
+#: 3.0/met_uk.js:618 3.0/met_uk.js:625 3.8/weather-applet.js:10796
+#: 3.8/weather-applet.js:10803
 msgid "Heavy rain shower"
 msgstr "Stiprus, trumpalaikis lietus"
 
-#: 3.0/met_uk.js:639 3.0/met_uk.js:646 3.8/weather-applet.js:10538
-#: 3.8/weather-applet.js:10545
+#: 3.0/met_uk.js:639 3.0/met_uk.js:646 3.8/weather-applet.js:10817
+#: 3.8/weather-applet.js:10824
 msgid "Sleet shower"
 msgstr "Šlapdriba"
 
 #: 3.0/met_uk.js:659 3.0/met_uk.js:666 3.0/met_uk.js:673 3.0/met_uk.js:674
-#: 3.0/yahoo.js:453 3.8/weather-applet.js:10558 3.8/weather-applet.js:10565
-#: 3.8/weather-applet.js:10572 3.8/weather-applet.js:10573
-#: 3.8/weather-applet.js:13217 3.8/weather-applet.js:14168
-#: 3.8/weather-applet.js:14169 3.8/weather-applet.js:14588
-#: 3.8/weather-applet.js:14589
+#: 3.0/yahoo.js:453 3.8/weather-applet.js:10837 3.8/weather-applet.js:10844
+#: 3.8/weather-applet.js:10851 3.8/weather-applet.js:10852
+#: 3.8/weather-applet.js:13552 3.8/weather-applet.js:14546
+#: 3.8/weather-applet.js:14547 3.8/weather-applet.js:14981
+#: 3.8/weather-applet.js:14982
 msgid "Hail"
 msgstr "Kruša"
 
-#: 3.0/met_uk.js:660 3.0/met_uk.js:667 3.8/weather-applet.js:10559
-#: 3.8/weather-applet.js:10566
+#: 3.0/met_uk.js:660 3.0/met_uk.js:667 3.8/weather-applet.js:10838
+#: 3.8/weather-applet.js:10845
 msgid "Hail shower"
 msgstr "Trumpa kruša"
 
-#: 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/weather-applet.js:10580
-#: 3.8/weather-applet.js:10587
+#: 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/weather-applet.js:10859
+#: 3.8/weather-applet.js:10866
 msgid "Light snow shower"
 msgstr "Protarpiais snyguriuoja"
 
-#: 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/weather-applet.js:10601
-#: 3.8/weather-applet.js:10608
+#: 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/weather-applet.js:10880
+#: 3.8/weather-applet.js:10887
 msgid "Heavy snow shower"
 msgstr "Stipriai sninga"
 
 #: 3.0/met_uk.js:722 3.0/met_uk.js:729 3.0/met_uk.js:736 3.0/met_uk.js:737
-#: 3.8/weather-applet.js:10621 3.8/weather-applet.js:10628
-#: 3.8/weather-applet.js:10635 3.8/weather-applet.js:10636
+#: 3.8/weather-applet.js:10900 3.8/weather-applet.js:10907
+#: 3.8/weather-applet.js:10914 3.8/weather-applet.js:10915
 msgid "Thunder"
 msgstr "Perkūnija"
 
-#: 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/weather-applet.js:10622
-#: 3.8/weather-applet.js:10629
+#: 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/weather-applet.js:10901
+#: 3.8/weather-applet.js:10908
 msgid "Thunder shower"
 msgstr "Perkūnija"
 
-#: 3.0/openWeatherMap.js:238 3.8/weather-applet.js:10872
+#: 3.0/openWeatherMap.js:238 3.8/weather-applet.js:11157
 msgid "Please make sure Location is in the correct format in the Settings"
 msgstr "Įsitikinkite, kad nustatymuose Vietovės formatas yra teisingas"
 
-#: 3.0/openWeatherMap.js:242 3.8/weather-applet.js:10876
+#: 3.0/openWeatherMap.js:242 3.8/weather-applet.js:11161
 msgid "Make sure you entered the correct key in settings"
 msgstr "Įsitikinkite, kad nustatymuose įvedėte teisingą raktą"
 
 #: 3.0/openWeatherMap.js:246 3.0/openWeatherMap.js:266
-#: 3.8/weather-applet.js:10681 3.8/weather-applet.js:10880
+#: 3.8/weather-applet.js:10961 3.8/weather-applet.js:11165
 msgid ""
 "Location not found, make sure location is available or it is in the correct "
 "format"
@@ -866,211 +866,211 @@ msgstr ""
 "Vietovė nerasta, įsitikinkite, kad vietovė pasiekiama arba jos formatas yra "
 "tinkamas"
 
-#: 3.0/openWeatherMap.js:250 3.8/weather-applet.js:10884
+#: 3.0/openWeatherMap.js:250 3.8/weather-applet.js:11169
 msgid "If this problem persists, please contact the Author of this applet"
 msgstr "Jei ši problema išlieka, susisiekite su šios programėlės autoriumi"
 
-#: 3.0/openWeatherMap.js:254 3.8/weather-applet.js:10888
+#: 3.0/openWeatherMap.js:254 3.8/weather-applet.js:11173
 msgid "Unknown Error, please see the logs in Looking Glass"
 msgstr "Nežinoma klaida, žr. žurnalus Looking Glass"
 
-#: 3.0/openWeatherMap.js:362 3.8/weather-applet.js:10990
+#: 3.0/openWeatherMap.js:362 3.8/weather-applet.js:11275
 msgid "Thunderstorm with light rain"
 msgstr "Perkūnija su nedideliu lietumi"
 
-#: 3.0/openWeatherMap.js:363 3.8/weather-applet.js:10991
+#: 3.0/openWeatherMap.js:363 3.8/weather-applet.js:11276
 msgid "Thunderstorm with rain"
 msgstr "Perkūnija su lietumi"
 
-#: 3.0/openWeatherMap.js:364 3.8/weather-applet.js:10992
+#: 3.0/openWeatherMap.js:364 3.8/weather-applet.js:11277
 msgid "Thunderstorm with heavy rain"
 msgstr "Perkūnija su stipriu lietumi"
 
-#: 3.0/openWeatherMap.js:365 3.8/weather-applet.js:10993
+#: 3.0/openWeatherMap.js:365 3.8/weather-applet.js:11278
 msgid "Light thunderstorm"
 msgstr "Nedidelė perkūnija"
 
-#: 3.0/openWeatherMap.js:367 3.8/weather-applet.js:10995
+#: 3.0/openWeatherMap.js:367 3.8/weather-applet.js:11280
 msgid "Heavy thunderstorm"
 msgstr "Stipri perkūnija"
 
-#: 3.0/openWeatherMap.js:368 3.8/weather-applet.js:10996
+#: 3.0/openWeatherMap.js:368 3.8/weather-applet.js:11281
 msgid "Ragged thunderstorm"
 msgstr "Smarki perkūnija"
 
-#: 3.0/openWeatherMap.js:369 3.8/weather-applet.js:10997
+#: 3.0/openWeatherMap.js:369 3.8/weather-applet.js:11282
 msgid "Thunderstorm with light drizzle"
 msgstr "Perkūnija su silpna dulksna"
 
-#: 3.0/openWeatherMap.js:370 3.8/weather-applet.js:10998
+#: 3.0/openWeatherMap.js:370 3.8/weather-applet.js:11283
 msgid "Thunderstorm with drizzle"
 msgstr "Perkūnija su dulksna"
 
-#: 3.0/openWeatherMap.js:371 3.8/weather-applet.js:10999
+#: 3.0/openWeatherMap.js:371 3.8/weather-applet.js:11284
 msgid "Thunderstorm with heavy drizzle"
 msgstr "Perkūnija ir stipri dulksna"
 
-#: 3.0/openWeatherMap.js:372 3.8/weather-applet.js:11000
+#: 3.0/openWeatherMap.js:372 3.8/weather-applet.js:11285
 msgid "Light intensity drizzle"
 msgstr "Lengvo intensyvumo dulksna"
 
-#: 3.0/openWeatherMap.js:374 3.8/weather-applet.js:11002
+#: 3.0/openWeatherMap.js:374 3.8/weather-applet.js:11287
 msgid "Heavy intensity drizzle"
 msgstr "Stipraus intensyvumo dulksna"
 
-#: 3.0/openWeatherMap.js:375 3.8/weather-applet.js:11003
+#: 3.0/openWeatherMap.js:375 3.8/weather-applet.js:11288
 msgid "Light intensity drizzle rain"
 msgstr "Nestipri dulksna ir lietus"
 
-#: 3.0/openWeatherMap.js:376 3.8/weather-applet.js:11004
+#: 3.0/openWeatherMap.js:376 3.8/weather-applet.js:11289
 msgid "Drizzle rain"
 msgstr "Dulksna ir lietus"
 
-#: 3.0/openWeatherMap.js:377 3.8/weather-applet.js:11005
+#: 3.0/openWeatherMap.js:377 3.8/weather-applet.js:11290
 msgid "Heavy intensity drizzle rain"
 msgstr "Didelio intensyvumo lietus ir dulksna"
 
-#: 3.0/openWeatherMap.js:378 3.8/weather-applet.js:11006
+#: 3.0/openWeatherMap.js:378 3.8/weather-applet.js:11291
 msgid "Shower rain and drizzle"
 msgstr "Trumpas lietus ir dulksna"
 
-#: 3.0/openWeatherMap.js:379 3.8/weather-applet.js:11007
+#: 3.0/openWeatherMap.js:379 3.8/weather-applet.js:11292
 msgid "Heavy shower rain and drizzle"
 msgstr "Stiprus lietus ir dulksna"
 
-#: 3.0/openWeatherMap.js:380 3.8/weather-applet.js:11008
+#: 3.0/openWeatherMap.js:380 3.8/weather-applet.js:11293
 msgid "Shower drizzle"
 msgstr "Dulksna"
 
-#: 3.0/openWeatherMap.js:382 3.8/weather-applet.js:11010
-#: 3.8/weather-applet.js:13455 3.8/weather-applet.js:13456
+#: 3.0/openWeatherMap.js:382 3.8/weather-applet.js:11295
+#: 3.8/weather-applet.js:13799 3.8/weather-applet.js:13800
 msgid "Moderate rain"
 msgstr "Vidutinis lietus"
 
-#: 3.0/openWeatherMap.js:383 3.8/weather-applet.js:11011
+#: 3.0/openWeatherMap.js:383 3.8/weather-applet.js:11296
 msgid "Heavy intensity rain"
 msgstr "Stipraus intensyvumo lietus"
 
-#: 3.0/openWeatherMap.js:384 3.8/weather-applet.js:11012
+#: 3.0/openWeatherMap.js:384 3.8/weather-applet.js:11297
 msgid "Very heavy rain"
 msgstr "Liūtis"
 
-#: 3.0/openWeatherMap.js:385 3.8/weather-applet.js:11013
+#: 3.0/openWeatherMap.js:385 3.8/weather-applet.js:11298
 msgid "Extreme rain"
 msgstr "Liūtis"
 
-#: 3.0/openWeatherMap.js:387 3.8/weather-applet.js:11015
+#: 3.0/openWeatherMap.js:387 3.8/weather-applet.js:11300
 msgid "Light intensity shower rain"
 msgstr "Lengvo intensyvumo lietus"
 
-#: 3.0/openWeatherMap.js:388 3.8/weather-applet.js:11016
+#: 3.0/openWeatherMap.js:388 3.8/weather-applet.js:11301
 msgid "Shower rain"
 msgstr "Purškiantis lietus"
 
-#: 3.0/openWeatherMap.js:389 3.8/weather-applet.js:11017
+#: 3.0/openWeatherMap.js:389 3.8/weather-applet.js:11302
 msgid "Heavy intensity shower rain"
 msgstr "Stiprus lietus"
 
-#: 3.0/openWeatherMap.js:390 3.8/weather-applet.js:11018
+#: 3.0/openWeatherMap.js:390 3.8/weather-applet.js:11303
 msgid "Ragged shower rain"
 msgstr "Smulkus lietus"
 
-#: 3.0/openWeatherMap.js:395 3.8/weather-applet.js:11023
+#: 3.0/openWeatherMap.js:395 3.8/weather-applet.js:11308
 msgid "Shower sleet"
 msgstr "Smulki šlapdriba"
 
-#: 3.0/openWeatherMap.js:396 3.8/weather-applet.js:11024
+#: 3.0/openWeatherMap.js:396 3.8/weather-applet.js:11309
 msgid "Light rain and snow"
 msgstr "Lengvas lietus ir sniegas"
 
-#: 3.0/openWeatherMap.js:397 3.8/weather-applet.js:11025
-#: 3.8/weather-applet.js:13462 3.8/weather-applet.js:13463
-#: 3.8/weather-applet.js:13469 3.8/weather-applet.js:13504
-#: 3.8/weather-applet.js:13511
+#: 3.0/openWeatherMap.js:397 3.8/weather-applet.js:11310
+#: 3.8/weather-applet.js:13806 3.8/weather-applet.js:13807
+#: 3.8/weather-applet.js:13813 3.8/weather-applet.js:13848
+#: 3.8/weather-applet.js:13855
 msgid "Rain and snow"
 msgstr "Lietus ir sniegas"
 
-#: 3.0/openWeatherMap.js:398 3.8/weather-applet.js:11026
+#: 3.0/openWeatherMap.js:398 3.8/weather-applet.js:11311
 msgid "Light shower snow"
 msgstr "Lengvai snyguriuoja"
 
-#: 3.0/openWeatherMap.js:399 3.8/weather-applet.js:11027
+#: 3.0/openWeatherMap.js:399 3.8/weather-applet.js:11312
 msgid "Shower snow"
 msgstr "Snyguriuoja"
 
-#: 3.0/openWeatherMap.js:400 3.8/weather-applet.js:11028
+#: 3.0/openWeatherMap.js:400 3.8/weather-applet.js:11313
 msgid "Heavy shower snow"
 msgstr "Stipriai sninga"
 
 #: 3.0/openWeatherMap.js:402 3.0/us_weather.js:585 3.0/us_weather.js:586
-#: 3.8/weather-applet.js:11030 3.8/weather-applet.js:12902
-#: 3.8/weather-applet.js:12903 3.8/weather-applet.js:14623
-#: 3.8/weather-applet.js:14624
+#: 3.8/weather-applet.js:11315 3.8/weather-applet.js:13231
+#: 3.8/weather-applet.js:13232 3.8/weather-applet.js:15016
+#: 3.8/weather-applet.js:15017
 msgid "Smoke"
 msgstr "Dūmai"
 
 #: 3.0/openWeatherMap.js:403 3.0/us_weather.js:592 3.0/us_weather.js:593
-#: 3.0/yahoo.js:457 3.8/weather-applet.js:11031 3.8/weather-applet.js:12909
-#: 3.8/weather-applet.js:12910 3.8/weather-applet.js:14616
-#: 3.8/weather-applet.js:14617
+#: 3.0/yahoo.js:457 3.8/weather-applet.js:11316 3.8/weather-applet.js:13238
+#: 3.8/weather-applet.js:13239 3.8/weather-applet.js:15009
+#: 3.8/weather-applet.js:15010
 msgid "Haze"
 msgstr "Migla"
 
-#: 3.0/openWeatherMap.js:404 3.8/weather-applet.js:11032
+#: 3.0/openWeatherMap.js:404 3.8/weather-applet.js:11317
 msgid "Sand, dust whirls"
 msgstr "Smėlio ir dulkių sūkuriai"
 
-#: 3.0/openWeatherMap.js:406 3.8/weather-applet.js:11034
+#: 3.0/openWeatherMap.js:406 3.8/weather-applet.js:11319
 msgid "Sand"
 msgstr "Smėlis"
 
 #: 3.0/openWeatherMap.js:407 3.0/us_weather.js:578 3.0/us_weather.js:579
-#: 3.0/yahoo.js:455 3.8/weather-applet.js:11035 3.8/weather-applet.js:12895
-#: 3.8/weather-applet.js:12896 3.8/weather-applet.js:14602
-#: 3.8/weather-applet.js:14603
+#: 3.0/yahoo.js:455 3.8/weather-applet.js:11320 3.8/weather-applet.js:13224
+#: 3.8/weather-applet.js:13225 3.8/weather-applet.js:14995
+#: 3.8/weather-applet.js:14996
 msgid "Dust"
 msgstr "Dulkės"
 
-#: 3.0/openWeatherMap.js:408 3.8/weather-applet.js:11036
+#: 3.0/openWeatherMap.js:408 3.8/weather-applet.js:11321
 msgid "Volcanic ash"
 msgstr "Vulkaniniai pelenai"
 
-#: 3.0/openWeatherMap.js:409 3.8/weather-applet.js:11037
-#: 3.8/weather-applet.js:13209
+#: 3.0/openWeatherMap.js:409 3.8/weather-applet.js:11322
+#: 3.8/weather-applet.js:13544
 msgid "Squalls"
 msgstr "Škvalas"
 
 #: 3.0/openWeatherMap.js:410 3.0/us_weather.js:557 3.0/us_weather.js:558
-#: 3.0/yahoo.js:436 3.8/weather-applet.js:11038 3.8/weather-applet.js:12874
-#: 3.8/weather-applet.js:12875 3.8/weather-applet.js:14475
-#: 3.8/weather-applet.js:14476
+#: 3.0/yahoo.js:436 3.8/weather-applet.js:11323 3.8/weather-applet.js:13203
+#: 3.8/weather-applet.js:13204 3.8/weather-applet.js:14868
+#: 3.8/weather-applet.js:14869
 msgid "Tornado"
 msgstr "Tornadas"
 
-#: 3.0/openWeatherMap.js:413 3.8/weather-applet.js:11041
+#: 3.0/openWeatherMap.js:413 3.8/weather-applet.js:11326
 msgid "Sky is clear"
 msgstr "Giedra"
 
-#: 3.0/openWeatherMap.js:414 3.8/weather-applet.js:11042
+#: 3.0/openWeatherMap.js:414 3.8/weather-applet.js:11327
 msgid "Clouds"
 msgstr "Debesys"
 
 #: 3.0/openWeatherMap.js:415 3.0/us_weather.js:414 3.0/us_weather.js:415
-#: 3.0/us_weather.js:449 3.8/weather-applet.js:11043
-#: 3.8/weather-applet.js:12731 3.8/weather-applet.js:12732
-#: 3.8/weather-applet.js:12766
+#: 3.0/us_weather.js:449 3.8/weather-applet.js:11328
+#: 3.8/weather-applet.js:13060 3.8/weather-applet.js:13061
+#: 3.8/weather-applet.js:13095
 msgid "Few clouds"
 msgstr "Mažai debesuota"
 
-#: 3.0/openWeatherMap.js:416 3.8/weather-applet.js:11044
+#: 3.0/openWeatherMap.js:416 3.8/weather-applet.js:11329
 msgid "Scattered clouds"
 msgstr "Išblaškyti debesys"
 
-#: 3.0/openWeatherMap.js:417 3.8/weather-applet.js:11045
+#: 3.0/openWeatherMap.js:417 3.8/weather-applet.js:11330
 msgid "Broken clouds"
 msgstr "Debesuota"
 
-#: 3.0/openWeatherMap.js:418 3.8/weather-applet.js:11046
+#: 3.0/openWeatherMap.js:418 3.8/weather-applet.js:11331
 msgid "Overcast clouds"
 msgstr "Debesuota"
 
@@ -1078,80 +1078,80 @@ msgstr "Debesuota"
 msgid "Could not get forecast for your area"
 msgstr "Nepavyko gauti jūsų vietovės orų prognozės"
 
-#: 3.0/us_weather.js:231 3.8/weather-applet.js:12431
+#: 3.0/us_weather.js:231 3.8/weather-applet.js:12743
 msgid "Location is outside US, please use a different provider."
 msgstr "Vietovė yra už JAV ribų, naudokite kitą teikėją."
 
-#: 3.0/us_weather.js:394 3.8/weather-applet.js:12495
+#: 3.0/us_weather.js:394 3.8/weather-applet.js:12807
 msgid "Failed to Process Hourly Forecast Info"
 msgstr "Nepavyko apdoroti valandinės orų prognozės informacijos"
 
-#: 3.0/us_weather.js:443 3.8/weather-applet.js:12760
+#: 3.0/us_weather.js:443 3.8/weather-applet.js:13089
 msgid "Clear and windy"
 msgstr "Giedra ir vėjuota"
 
-#: 3.0/us_weather.js:450 3.8/weather-applet.js:12767
+#: 3.0/us_weather.js:450 3.8/weather-applet.js:13096
 msgid "Few clouds and windy"
 msgstr "Keli debesys ir vėjuota"
 
-#: 3.0/us_weather.js:457 3.8/weather-applet.js:12774
+#: 3.0/us_weather.js:457 3.8/weather-applet.js:13103
 msgid "Partly cloudy and windy"
 msgstr "Protarpiais debesuota ir vėjuota"
 
-#: 3.0/us_weather.js:464 3.8/weather-applet.js:12781
+#: 3.0/us_weather.js:464 3.8/weather-applet.js:13110
 msgid "Mostly cloudy and windy"
 msgstr "Daugiausia debesuota ir vėjuota"
 
-#: 3.0/us_weather.js:471 3.8/weather-applet.js:12788
+#: 3.0/us_weather.js:471 3.8/weather-applet.js:13117
 msgid "Overcast and windy"
 msgstr "Debesuota ir vėjuota"
 
-#: 3.0/us_weather.js:485 3.8/weather-applet.js:12802
+#: 3.0/us_weather.js:485 3.8/weather-applet.js:13131
 msgid "Snowy rain"
 msgstr "Sniegas ir lietus"
 
-#: 3.0/us_weather.js:520 3.8/weather-applet.js:12837
+#: 3.0/us_weather.js:520 3.8/weather-applet.js:13166
 msgid "Freezing rain and snow"
 msgstr "Šąlantis lietus ir sniegas"
 
 #: 3.0/us_weather.js:564 3.0/us_weather.js:565 3.0/utils.js:336
-#: 3.0/yahoo.js:438 3.8/weather-applet.js:9153 3.8/weather-applet.js:12881
-#: 3.8/weather-applet.js:12882 3.8/weather-applet.js:14489
-#: 3.8/weather-applet.js:14490
+#: 3.0/yahoo.js:438 3.8/weather-applet.js:9154 3.8/weather-applet.js:13210
+#: 3.8/weather-applet.js:13211 3.8/weather-applet.js:14882
+#: 3.8/weather-applet.js:14883
 msgid "Hurricane"
 msgstr "Uraganas"
 
-#: 3.0/us_weather.js:571 3.0/utils.js:331 3.8/weather-applet.js:9148
-#: 3.8/weather-applet.js:12888
+#: 3.0/us_weather.js:571 3.0/utils.js:331 3.8/weather-applet.js:9149
+#: 3.8/weather-applet.js:13217
 msgid "Storm"
 msgstr "Audra"
 
-#: 3.0/us_weather.js:572 3.8/weather-applet.js:12889
+#: 3.0/us_weather.js:572 3.8/weather-applet.js:13218
 msgid "Tropical storm"
 msgstr "Tropinė audra"
 
 #: 3.0/us_weather.js:599 3.0/us_weather.js:600 3.0/yahoo.js:470
-#: 3.8/weather-applet.js:12916 3.8/weather-applet.js:12917
-#: 3.8/weather-applet.js:14721 3.8/weather-applet.js:14722
+#: 3.8/weather-applet.js:13245 3.8/weather-applet.js:13246
+#: 3.8/weather-applet.js:15114 3.8/weather-applet.js:15115
 msgid "Hot"
 msgstr "Karšta"
 
 #: 3.0/us_weather.js:606 3.0/us_weather.js:607 3.0/yahoo.js:461
-#: 3.8/weather-applet.js:12923 3.8/weather-applet.js:12924
+#: 3.8/weather-applet.js:13252 3.8/weather-applet.js:13253
 msgid "Cold"
 msgstr "Šalta"
 
 #: 3.0/us_weather.js:613 3.0/us_weather.js:614 3.0/yahoo.js:477
-#: 3.8/weather-applet.js:12930 3.8/weather-applet.js:12931
-#: 3.8/weather-applet.js:14770 3.8/weather-applet.js:14771
+#: 3.8/weather-applet.js:13259 3.8/weather-applet.js:13260
+#: 3.8/weather-applet.js:15163 3.8/weather-applet.js:15164
 msgid "Blizzard"
 msgstr "Pūga"
 
-#: 3.0/utils.js:146 3.8/weather-applet.js:9025
+#: 3.0/utils.js:146 3.8/weather-applet.js:9026
 msgid "Today"
 msgstr "Šiandien"
 
-#: 3.0/utils.js:148 3.8/weather-applet.js:9027
+#: 3.0/utils.js:148 3.8/weather-applet.js:9028
 msgid "Tomorrow"
 msgstr "Rytoj"
 
@@ -1183,79 +1183,79 @@ msgstr "Penktadienis"
 msgid "Saturday"
 msgstr "Šeštadienis"
 
-#: 3.0/utils.js:301 3.8/weather-applet.js:9118
+#: 3.0/utils.js:301 3.8/weather-applet.js:9119
 msgid "Calm"
 msgstr "Ramu"
 
-#: 3.0/utils.js:304 3.8/weather-applet.js:9121
+#: 3.0/utils.js:304 3.8/weather-applet.js:9122
 msgid "Light air"
 msgstr "Lengvas oras"
 
-#: 3.0/utils.js:307 3.8/weather-applet.js:9124
+#: 3.0/utils.js:307 3.8/weather-applet.js:9125
 msgid "Light breeze"
 msgstr "Lengvas vėjelis"
 
-#: 3.0/utils.js:310 3.8/weather-applet.js:9127
+#: 3.0/utils.js:310 3.8/weather-applet.js:9128
 msgid "Gentle breeze"
 msgstr "Švelnus vėjelis"
 
-#: 3.0/utils.js:313 3.8/weather-applet.js:9130
+#: 3.0/utils.js:313 3.8/weather-applet.js:9131
 msgid "Moderate breeze"
 msgstr "Vidutinis vėjas"
 
-#: 3.0/utils.js:316 3.8/weather-applet.js:9133
+#: 3.0/utils.js:316 3.8/weather-applet.js:9134
 msgid "Fresh breeze"
 msgstr "Gaivus vėjas"
 
-#: 3.0/utils.js:319 3.8/weather-applet.js:9136
+#: 3.0/utils.js:319 3.8/weather-applet.js:9137
 msgid "Strong breeze"
 msgstr "Stiprus vėjas"
 
-#: 3.0/utils.js:322 3.8/weather-applet.js:9139
+#: 3.0/utils.js:322 3.8/weather-applet.js:9140
 msgid "Near gale"
 msgstr "Netoliese audra"
 
-#: 3.0/utils.js:325 3.8/weather-applet.js:9142
+#: 3.0/utils.js:325 3.8/weather-applet.js:9143
 msgid "Gale"
 msgstr "Stiprus vėjas"
 
-#: 3.0/utils.js:328 3.8/weather-applet.js:9145
+#: 3.0/utils.js:328 3.8/weather-applet.js:9146
 msgid "Strong gale"
 msgstr "Labai stiprus vėjas"
 
-#: 3.0/utils.js:334 3.8/weather-applet.js:9151
+#: 3.0/utils.js:334 3.8/weather-applet.js:9152
 msgid "Violent storm"
 msgstr "Labai didelė audra"
 
-#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+#: 3.0/utils.js:429 3.8/weather-applet.js:9302
 msgid "N"
 msgstr "Š"
 
-#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+#: 3.0/utils.js:429 3.8/weather-applet.js:9302
 msgid "NE"
 msgstr "ŠR"
 
-#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+#: 3.0/utils.js:429 3.8/weather-applet.js:9302
 msgid "E"
 msgstr "R"
 
-#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+#: 3.0/utils.js:429 3.8/weather-applet.js:9302
 msgid "SE"
 msgstr "PR"
 
-#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+#: 3.0/utils.js:429 3.8/weather-applet.js:9302
 msgid "S"
 msgstr "P"
 
-#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+#: 3.0/utils.js:429 3.8/weather-applet.js:9302
 msgid "SW"
 msgstr "PV"
 
-#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+#: 3.0/utils.js:429 3.8/weather-applet.js:9302
 msgid "W"
 msgstr "V"
 
-#: 3.0/utils.js:429 3.8/weather-applet.js:9301
+#: 3.0/utils.js:429 3.8/weather-applet.js:9302
 msgid "NW"
 msgstr "ŠV"
 
@@ -1307,7 +1307,7 @@ msgstr ""
 "Įvyko nežinoma klaida, bandant gauti orų informaciją. Daugiau informacijos "
 "rasite Looking Glass žurnale"
 
-#: 3.0/yahoo.js:437 3.8/weather-applet.js:14482 3.8/weather-applet.js:14483
+#: 3.0/yahoo.js:437 3.8/weather-applet.js:14875 3.8/weather-applet.js:14876
 msgid "Tropical Storm"
 msgstr "Tropinė audra"
 
@@ -1315,7 +1315,7 @@ msgstr "Tropinė audra"
 msgid "Severe Thunderstorms"
 msgstr "Smarki audra su perkūnija"
 
-#: 3.0/yahoo.js:440 3.8/weather-applet.js:14503 3.8/weather-applet.js:14504
+#: 3.0/yahoo.js:440 3.8/weather-applet.js:14896 3.8/weather-applet.js:14897
 msgid "Thunderstorms"
 msgstr "Perkūnija (audringa)"
 
@@ -1331,15 +1331,15 @@ msgstr "Lietus bei šlapdriba"
 msgid "Mixed Snow and Sleet"
 msgstr "Sniegas bei šlapdriba"
 
-#: 3.0/yahoo.js:444 3.8/weather-applet.js:14525 3.8/weather-applet.js:14526
+#: 3.0/yahoo.js:444 3.8/weather-applet.js:14918 3.8/weather-applet.js:14919
 msgid "Freezing Drizzle"
 msgstr "Stingdanti dulksna (šlapdriba)"
 
-#: 3.0/yahoo.js:446 3.8/weather-applet.js:14539 3.8/weather-applet.js:14540
+#: 3.0/yahoo.js:446 3.8/weather-applet.js:14932 3.8/weather-applet.js:14933
 msgid "Freezing Rain"
 msgstr "Šąlantis lietus"
 
-#: 3.0/yahoo.js:447 3.8/weather-applet.js:14546 3.8/weather-applet.js:14547
+#: 3.0/yahoo.js:447 3.8/weather-applet.js:14939 3.8/weather-applet.js:14940
 msgid "Showers"
 msgstr "Purškiantis lietus"
 
@@ -1351,11 +1351,11 @@ msgstr "Sniego šuorai"
 msgid "Light Snow Showers"
 msgstr "Lengvai snyguriuoja"
 
-#: 3.0/yahoo.js:451 3.8/weather-applet.js:14574 3.8/weather-applet.js:14575
+#: 3.0/yahoo.js:451 3.8/weather-applet.js:14967 3.8/weather-applet.js:14968
 msgid "Blowing Snow"
 msgstr "Pustomas sniegas"
 
-#: 3.0/yahoo.js:456 3.8/weather-applet.js:13441 3.8/weather-applet.js:13442
+#: 3.0/yahoo.js:456 3.8/weather-applet.js:13785 3.8/weather-applet.js:13786
 msgid "Foggy"
 msgstr "Migla"
 
@@ -1367,54 +1367,54 @@ msgstr "Dūmingas oras"
 msgid "Blustery"
 msgstr "Žvarbus oras"
 
-#: 3.0/yahoo.js:460 3.8/weather-applet.js:14637 3.8/weather-applet.js:14638
+#: 3.0/yahoo.js:460 3.8/weather-applet.js:15030 3.8/weather-applet.js:15031
 msgid "Windy"
 msgstr "Vėjuota"
 
-#: 3.0/yahoo.js:463 3.8/weather-applet.js:14658 3.8/weather-applet.js:14659
-#: 3.8/weather-applet.js:14665 3.8/weather-applet.js:14666
+#: 3.0/yahoo.js:463 3.8/weather-applet.js:15051 3.8/weather-applet.js:15052
+#: 3.8/weather-applet.js:15058 3.8/weather-applet.js:15059
 msgid "Mostly Cloudy"
 msgstr "Daugiausia debesuota"
 
-#: 3.0/yahoo.js:464 3.8/weather-applet.js:14175 3.8/weather-applet.js:14176
-#: 3.8/weather-applet.js:14182 3.8/weather-applet.js:14183
-#: 3.8/weather-applet.js:14672 3.8/weather-applet.js:14673
-#: 3.8/weather-applet.js:14679 3.8/weather-applet.js:14680
+#: 3.0/yahoo.js:464 3.8/weather-applet.js:14553 3.8/weather-applet.js:14554
+#: 3.8/weather-applet.js:14560 3.8/weather-applet.js:14561
+#: 3.8/weather-applet.js:15065 3.8/weather-applet.js:15066
+#: 3.8/weather-applet.js:15072 3.8/weather-applet.js:15073
 msgid "Partly Cloudy"
 msgstr "Protarpiais debesuota"
 
-#: 3.0/yahoo.js:467 3.8/weather-applet.js:14707 3.8/weather-applet.js:14708
+#: 3.0/yahoo.js:467 3.8/weather-applet.js:15100 3.8/weather-applet.js:15101
 msgid "Mostly Sunny"
 msgstr "Daugiausia saulėta"
 
-#: 3.0/yahoo.js:469 3.8/weather-applet.js:14714 3.8/weather-applet.js:14715
+#: 3.0/yahoo.js:469 3.8/weather-applet.js:15107 3.8/weather-applet.js:15108
 msgid "Mixed Rain and Hail"
 msgstr "Lietus bei kruša"
 
-#: 3.0/yahoo.js:471 3.8/weather-applet.js:14728 3.8/weather-applet.js:14729
+#: 3.0/yahoo.js:471 3.8/weather-applet.js:15121 3.8/weather-applet.js:15122
 msgid "Isolated Thunderstorms"
 msgstr "Izoliuotos perkūnijos"
 
-#: 3.0/yahoo.js:472 3.8/weather-applet.js:14735 3.8/weather-applet.js:14736
-#: 3.8/weather-applet.js:14791 3.8/weather-applet.js:14792
+#: 3.0/yahoo.js:472 3.8/weather-applet.js:15128 3.8/weather-applet.js:15129
+#: 3.8/weather-applet.js:15184 3.8/weather-applet.js:15185
 msgid "Scattered Thunderstorms"
 msgstr "Padrikos perkūnijos"
 
-#: 3.0/yahoo.js:473 3.8/weather-applet.js:14742 3.8/weather-applet.js:14743
-#: 3.8/weather-applet.js:14777 3.8/weather-applet.js:14778
+#: 3.0/yahoo.js:473 3.8/weather-applet.js:15135 3.8/weather-applet.js:15136
+#: 3.8/weather-applet.js:15170 3.8/weather-applet.js:15171
 msgid "Scattered Showers"
 msgstr "Padrikas lietus"
 
-#: 3.0/yahoo.js:474 3.8/weather-applet.js:14749 3.8/weather-applet.js:14750
+#: 3.0/yahoo.js:474 3.8/weather-applet.js:15142 3.8/weather-applet.js:15143
 msgid "Heavy Rain"
 msgstr "Sunkus lietus"
 
-#: 3.0/yahoo.js:475 3.8/weather-applet.js:14756 3.8/weather-applet.js:14757
-#: 3.8/weather-applet.js:14784 3.8/weather-applet.js:14785
+#: 3.0/yahoo.js:475 3.8/weather-applet.js:15149 3.8/weather-applet.js:15150
+#: 3.8/weather-applet.js:15177 3.8/weather-applet.js:15178
 msgid "Scattered Snow Showers"
 msgstr "Vietomis sninga"
 
-#: 3.0/yahoo.js:476 3.8/weather-applet.js:14763 3.8/weather-applet.js:14764
+#: 3.0/yahoo.js:476 3.8/weather-applet.js:15156 3.8/weather-applet.js:15157
 msgid "Heavy Snow"
 msgstr "Sunkus sniegas"
 
@@ -1426,7 +1426,7 @@ msgstr "Nepasiekiama"
 msgid "Scattered Thundershowers"
 msgstr "Vietomis perkūnija"
 
-#: 3.8/weather-applet.js:9637
+#: 3.8/weather-applet.js:9638
 msgid ""
 "Could not retrieve logs, log file was not found under path\n"
 " {logFilePath}"
@@ -1434,7 +1434,7 @@ msgstr ""
 "Nepavyko gauti žurnalų įrašų, žurnalo failas nerastas šioje vietoje\n"
 " {logFilePath}"
 
-#: 3.8/weather-applet.js:9641
+#: 3.8/weather-applet.js:9642
 msgid ""
 "Could not get contents of log file under path\n"
 " {logFilePath}"
@@ -1443,286 +1443,286 @@ msgstr ""
 " {logFilePath}"
 
 #. 3.0->settings-schema.json->dataService->options
-#: 3.8/weather-applet.js:10013
+#: 3.8/weather-applet.js:10283
 msgid "Met Office UK"
 msgstr "Met Office JK"
 
-#: 3.8/weather-applet.js:10118
+#: 3.8/weather-applet.js:10388
 msgid ""
 "MET Office UK only covers the UK, please make sure your location is in the "
 "country"
 msgstr ""
 "MET Office UK apima tik JK, įsitikinkite, kad jūsų vietovė yra šioje šalyje"
 
-#: 3.8/weather-applet.js:10197
+#: 3.8/weather-applet.js:10476
 msgid "Data was not found for location"
 msgstr "Vietoovės duomenų nerasta"
 
-#: 3.8/weather-applet.js:10278
+#: 3.8/weather-applet.js:10557
 msgid "Very poor"
 msgstr "Labai prastas"
 
-#: 3.8/weather-applet.js:10278
+#: 3.8/weather-applet.js:10557
 msgid "Less than {distance} {distanceUnit}"
 msgstr "Mažiau nei {distance} {distanceUnit}"
 
-#: 3.8/weather-applet.js:10282
+#: 3.8/weather-applet.js:10561
 msgid "Excellent"
 msgstr "Puikus"
 
-#: 3.8/weather-applet.js:10282
+#: 3.8/weather-applet.js:10561
 msgid "More than {distance} {distanceUnit}"
 msgstr "Daugiau nei {distance} {distanceUnit}"
 
-#: 3.8/weather-applet.js:10287
+#: 3.8/weather-applet.js:10566
 msgid "Poor"
 msgstr "Prastas"
 
-#: 3.8/weather-applet.js:10287 3.8/weather-applet.js:10292
-#: 3.8/weather-applet.js:10297 3.8/weather-applet.js:10302
-#: 3.8/weather-applet.js:10307
+#: 3.8/weather-applet.js:10566 3.8/weather-applet.js:10571
+#: 3.8/weather-applet.js:10576 3.8/weather-applet.js:10581
+#: 3.8/weather-applet.js:10586
 msgid "Between {smallerDistance}-{biggerDistance} {distanceUnit}"
 msgstr "Tarp {smallerDistance}-{biggerDistance} {distanceUnit}"
 
-#: 3.8/weather-applet.js:10292
+#: 3.8/weather-applet.js:10571
 msgid "Moderate"
 msgstr "Vidutinis"
 
-#: 3.8/weather-applet.js:10297
+#: 3.8/weather-applet.js:10576
 msgid "Good"
 msgstr "Geras"
 
-#: 3.8/weather-applet.js:10302 3.8/weather-applet.js:10307
+#: 3.8/weather-applet.js:10581 3.8/weather-applet.js:10586
 msgid "Very good"
 msgstr "Labai geras"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
-#: 3.8/weather-applet.js:10662
+#: 3.8/weather-applet.js:10942
 msgid "OpenWeatherMap"
 msgstr "OpenWeatherMap"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
-#: 3.8/weather-applet.js:11110
+#: 3.8/weather-applet.js:11396
 msgid "MET Norway"
 msgstr "MET Norway"
 
-#: 3.8/weather-applet.js:11659
+#: 3.8/weather-applet.js:11955
 msgid "WeatherBit"
 msgstr "WeatherBit"
 
-#: 3.8/weather-applet.js:12080
+#: 3.8/weather-applet.js:12386
 msgid "Tomorrow.io"
 msgstr "Tomorrow.io"
 
-#: 3.8/weather-applet.js:12250
+#: 3.8/weather-applet.js:12561
 msgid "Light wind"
 msgstr "Nestiprus vėjas"
 
-#: 3.8/weather-applet.js:12264
+#: 3.8/weather-applet.js:12575
 msgid "Strong wind"
 msgstr "Stiprus vėjas"
 
-#: 3.8/weather-applet.js:12411
+#: 3.8/weather-applet.js:12723
 msgid "US Weather"
 msgstr "US Weather"
 
-#: 3.8/weather-applet.js:12962
+#: 3.8/weather-applet.js:13292
 msgid "Visual Crossing"
 msgstr "Matomas kritimas"
 
-#: 3.8/weather-applet.js:13139
+#: 3.8/weather-applet.js:13474
 msgid "Blowing or drifting snow"
 msgstr "Pustomas, slenkantis sniegas"
 
-#: 3.8/weather-applet.js:13143
+#: 3.8/weather-applet.js:13478
 msgid "Heavy drizzle"
 msgstr "Stipri dulksna (šlapdriba)"
 
-#: 3.8/weather-applet.js:13147
+#: 3.8/weather-applet.js:13482
 msgid "Heavy drizzle/rain"
 msgstr "Stipri dulksna, lietus"
 
-#: 3.8/weather-applet.js:13149
+#: 3.8/weather-applet.js:13484
 msgid "Light drizzle/rain"
 msgstr "Lengva dulksna, lietus"
 
-#: 3.8/weather-applet.js:13151
+#: 3.8/weather-applet.js:13486
 msgid "Dust Storm"
 msgstr "Dulkių audra"
 
-#: 3.8/weather-applet.js:13155
+#: 3.8/weather-applet.js:13490
 msgid "Freezing drizzle/freezing rain"
 msgstr "Stingdanti šlapdriba/šąlantis lietus"
 
-#: 3.8/weather-applet.js:13157
+#: 3.8/weather-applet.js:13492
 msgid "Heavy freezing drizzle/freezing rain"
 msgstr "Stipri šlapdriba, dulksna / šąlantis lietus"
 
-#: 3.8/weather-applet.js:13159
+#: 3.8/weather-applet.js:13494
 msgid "Light freezing drizzle/freezing rain"
 msgstr "Lengva šlapdriba, dulksna / šąlantis lietus"
 
-#: 3.8/weather-applet.js:13161
+#: 3.8/weather-applet.js:13496
 msgid "Freezing fog"
 msgstr "Šąlantis rūkas"
 
-#: 3.8/weather-applet.js:13167
+#: 3.8/weather-applet.js:13502
 msgid "Funnel cloud/tornado"
 msgstr "Piltuvo debesis, tornadas"
 
-#: 3.8/weather-applet.js:13169
+#: 3.8/weather-applet.js:13504
 msgid "Hail showers"
 msgstr "Krušos lietus"
 
-#: 3.8/weather-applet.js:13171
+#: 3.8/weather-applet.js:13506
 msgid "Ice"
 msgstr "Ledas"
 
-#: 3.8/weather-applet.js:13173
+#: 3.8/weather-applet.js:13508
 msgid "Lightning without thunder"
 msgstr "Žaibas be griaustinio"
 
-#: 3.8/weather-applet.js:13177
+#: 3.8/weather-applet.js:13512
 msgid "Precipitation in vicinity"
 msgstr "Krituliai apylinkėse"
 
-#: 3.8/weather-applet.js:13181 3.8/weather-applet.js:13470
+#: 3.8/weather-applet.js:13516 3.8/weather-applet.js:13814
 msgid "Heavy rain and snow"
 msgstr "Stiprus lietus ir sniegas"
 
-#: 3.8/weather-applet.js:13183
+#: 3.8/weather-applet.js:13518
 msgid "Light rain And snow"
 msgstr "Nestiprus lietus ir sniegas"
 
-#: 3.8/weather-applet.js:13191
+#: 3.8/weather-applet.js:13526
 msgid "Sky coverage decreasing"
 msgstr "Dangaus aprėptis mažėja"
 
-#: 3.8/weather-applet.js:13193
+#: 3.8/weather-applet.js:13528
 msgid "Sky coverage increasing"
 msgstr "Dangaus aprėptis didėja"
 
-#: 3.8/weather-applet.js:13195
+#: 3.8/weather-applet.js:13530
 msgid "Sky unchanged"
 msgstr "Dangus nepakitęs"
 
-#: 3.8/weather-applet.js:13197
+#: 3.8/weather-applet.js:13532
 msgid "Smoke or haze"
 msgstr "Dūmai ar migla"
 
-#: 3.8/weather-applet.js:13201
+#: 3.8/weather-applet.js:13536
 msgid "Snow and rain showers"
 msgstr "Protarpiais sniegas ir lietus"
 
-#: 3.8/weather-applet.js:13213
+#: 3.8/weather-applet.js:13548
 msgid "Thunderstorm without precipitation"
 msgstr "Perkūnija be kritulių"
 
-#: 3.8/weather-applet.js:13215
+#: 3.8/weather-applet.js:13550
 msgid "Diamond dust"
 msgstr "Deimantų dulkės"
 
-#: 3.8/weather-applet.js:13221
+#: 3.8/weather-applet.js:13556
 msgid "Partially cloudy"
 msgstr "Protaroiais debesuota"
 
-#: 3.8/weather-applet.js:13243
+#: 3.8/weather-applet.js:13578
 msgid "Please make sure you entered the API key correctly"
 msgstr "Įsitikinkite, kad API raktą įvedėte teisingai"
 
 #. 3.8->settings-schema.json->dataService->options
-#: 3.8/weather-applet.js:13259
+#: 3.8/weather-applet.js:13595
 msgid "DMI Denmark"
 msgstr "DMI Danija"
 
-#: 3.8/weather-applet.js:13402 3.8/weather-applet.js:13403
-#: 3.8/weather-applet.js:13539 3.8/weather-applet.js:13540
+#: 3.8/weather-applet.js:13746 3.8/weather-applet.js:13747
+#: 3.8/weather-applet.js:13883 3.8/weather-applet.js:13884
 msgid "NOT FOUND"
 msgstr "Nerasta"
 
-#: 3.8/weather-applet.js:13435
+#: 3.8/weather-applet.js:13779
 msgid "Blowing snow"
 msgstr "Pustomas sniegas"
 
-#: 3.8/weather-applet.js:13476 3.8/weather-applet.js:13477
+#: 3.8/weather-applet.js:13820 3.8/weather-applet.js:13821
 msgid "Slight snow"
 msgstr "Nedidelis sniegas"
 
-#: 3.8/weather-applet.js:13483 3.8/weather-applet.js:13484
+#: 3.8/weather-applet.js:13827 3.8/weather-applet.js:13828
 msgid "Moderate snow"
 msgstr "Vidutinis sniegas"
 
-#: 3.8/weather-applet.js:13498
+#: 3.8/weather-applet.js:13842
 msgid "Moderate rain showers"
 msgstr "Vidutinis lietaus dulksna"
 
-#: 3.8/weather-applet.js:13505
+#: 3.8/weather-applet.js:13849
 msgid "Mixed rain and snow"
 msgstr "Lietus ir sniegas"
 
-#: 3.8/weather-applet.js:13512
+#: 3.8/weather-applet.js:13856
 msgid "Heavy mixed rain and snow"
 msgstr "Stiprus lietus su sniegu"
 
-#: 3.8/weather-applet.js:13657
+#: 3.8/weather-applet.js:14024
 msgid "AccuWeather"
 msgstr "AccuWeather"
 
-#: 3.8/weather-applet.js:13953
+#: 3.8/weather-applet.js:14321
 msgid "Deutscher Wetterdienst"
 msgstr "Deutscher Wetterdienst"
 
-#: 3.8/weather-applet.js:13966
+#: 3.8/weather-applet.js:14334
 msgid "Please select a different provider or location"
 msgstr "Pasirinkite kitą teikėją arba vietovę"
 
-#: 3.8/weather-applet.js:14263
+#: 3.8/weather-applet.js:14642
 msgid "Weather Underground"
 msgstr "Weather Underground"
 
-#: 3.8/weather-applet.js:14453
+#: 3.8/weather-applet.js:14846
 msgid "The API key you provided is invalid."
 msgstr "Jūsų pateiktas API raktas neteisingas."
 
-#: 3.8/weather-applet.js:14460
+#: 3.8/weather-applet.js:14853
 msgid "The location you provided was not found."
 msgstr "Jūsų nurodyta vietovė nerasta."
 
-#: 3.8/weather-applet.js:14496 3.8/weather-applet.js:14497
+#: 3.8/weather-applet.js:14889 3.8/weather-applet.js:14890
 msgid "Strong Storm"
 msgstr "Stipri Audra"
 
-#: 3.8/weather-applet.js:14511 3.8/weather-applet.js:14512
+#: 3.8/weather-applet.js:14904 3.8/weather-applet.js:14905
 msgid "Rain and Snow"
 msgstr "Lietus ir Sniegas"
 
-#: 3.8/weather-applet.js:14518 3.8/weather-applet.js:14519
+#: 3.8/weather-applet.js:14911 3.8/weather-applet.js:14912
 msgid "Rain and Sleet"
 msgstr "Lietus su Šlapdriba"
 
-#: 3.8/weather-applet.js:14567 3.8/weather-applet.js:14568
+#: 3.8/weather-applet.js:14960 3.8/weather-applet.js:14961
 msgid "Snow Showers"
 msgstr "Smulkiai Sninga"
 
-#: 3.8/weather-applet.js:14630 3.8/weather-applet.js:14631
+#: 3.8/weather-applet.js:15023 3.8/weather-applet.js:15024
 msgid "Breezy"
 msgstr "Vėsu"
 
-#: 3.8/weather-applet.js:14644 3.8/weather-applet.js:14645
+#: 3.8/weather-applet.js:15037 3.8/weather-applet.js:15038
 msgid "Frigid"
 msgstr "Šalta"
 
-#: 3.8/weather-applet.js:14700 3.8/weather-applet.js:14701
+#: 3.8/weather-applet.js:15093 3.8/weather-applet.js:15094
 msgid "Mostly Clear"
 msgstr "Daugiausia Giedra"
 
-#: 3.8/weather-applet.js:14853
+#: 3.8/weather-applet.js:15247
 msgid "Pirate Weather"
 msgstr "Piratų Orai"
 
-#: 3.8/weather-applet.js:15205
+#: 3.8/weather-applet.js:15603
 msgid ""
 "Location Service couldn't find your location, please see the logs in Looking "
 "Glass"
@@ -1730,13 +1730,13 @@ msgstr ""
 "Vietos tarnybai nepavyko rasti jūsų vietovės. Žiūrėti įrašų žurnalą Looking "
 "Glass"
 
-#: 3.8/weather-applet.js:15433
+#: 3.8/weather-applet.js:15831
 msgid "Make sure you entered a location or use Automatic location instead."
 msgstr ""
 "Įsitikinkite, kad įvedėte vietovę arba naudokite automatinį vietovės "
 "nustatymą."
 
-#: 3.8/weather-applet.js:15570
+#: 3.8/weather-applet.js:15968
 msgid ""
 "Could not retrieve config, file was not found under paths\n"
 " {configFilePath}"
@@ -1744,7 +1744,7 @@ msgstr ""
 "Nepavyko gauti konfigūracijos, failas nerastas šioje vietoje\n"
 " {configFilePath}"
 
-#: 3.8/weather-applet.js:15577
+#: 3.8/weather-applet.js:15975
 msgid ""
 "Could not get contents of config file under path\n"
 " {configFilePath}"
@@ -1752,58 +1752,58 @@ msgstr ""
 "Nepavyko gauti konfigūracijos failo turinio šioje vietoje\n"
 " {configFilePath}"
 
-#: 3.8/weather-applet.js:16197
+#: 3.8/weather-applet.js:16233
+msgid "This provider requires an API key to operate"
+msgstr "Šiam teikėjui reikalingas API raktas, kad jis veiktų"
+
+#: 3.8/weather-applet.js:16675
 msgid "Dew Point"
 msgstr "Rasos Taškas"
 
-#: 3.8/weather-applet.js:16269
+#: 3.8/weather-applet.js:16747
 msgid "Precipitation will end in {precipEnd} minutes"
 msgstr "Krituliai baigsis po {precipEnd} min"
 
-#: 3.8/weather-applet.js:16271
+#: 3.8/weather-applet.js:16749
 msgid "Precipitation won't end in within an hour"
 msgstr "Krituliai nesibaigs per valandą"
 
-#: 3.8/weather-applet.js:16274
+#: 3.8/weather-applet.js:16752
 msgid "Precipitation will start within {precipStart} minutes"
 msgstr "Krituliai prasidės po {precipStart} min"
 
-#: 3.8/weather-applet.js:16486
+#: 3.8/weather-applet.js:16964
 msgid "Forecast parsing failed, see logs for more details."
 msgstr ""
 "Orų prognozės analizė nepavyko, daugiau informacijos rasite žurnaluose."
 
-#: 3.8/weather-applet.js:17018 3.8/weather-applet.js:17810
+#: 3.8/weather-applet.js:17496 3.8/weather-applet.js:18014
 msgid "As of {lastUpdatedTime}"
 msgstr "Atnaujinta {lastUpdatedTime}"
 
-#: 3.8/weather-applet.js:17024
+#: 3.8/weather-applet.js:17502
 msgid "{distance} {distanceUnit} from you"
 msgstr "{distance} {distanceUnit} nuo jūsų"
 
-#: 3.8/weather-applet.js:17028
+#: 3.8/weather-applet.js:17506
 msgid "Station Name: {stationName}"
 msgstr "Stoties Pavadinimas: {stationName}"
 
-#: 3.8/weather-applet.js:17031
+#: 3.8/weather-applet.js:17509
 msgid "Area: {stationArea}"
 msgstr "Vietovė: {stationArea}"
 
-#: 3.8/weather-applet.js:17581 3.8/weather-applet.js:17591
+#: 3.8/weather-applet.js:17843 3.8/weather-applet.js:17853
 msgid "Error Saving Debug Information"
 msgstr "Klaida išsaugant derinimo informaciją"
 
-#: 3.8/weather-applet.js:17603
+#: 3.8/weather-applet.js:17865
 msgid "Debug Information saved successfully"
 msgstr "Derinimo Informacija išsaugota sėkmingai"
 
-#: 3.8/weather-applet.js:17603
+#: 3.8/weather-applet.js:17865
 msgid "Saved to {filePath}"
 msgstr "Išsaugota šioje vietoje {filePath}"
-
-#: 3.8/weather-applet.js:17734
-msgid "This provider requires an API key to operate"
-msgstr "Šiam teikėjui reikalingas API raktas, kad jis veiktų"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"

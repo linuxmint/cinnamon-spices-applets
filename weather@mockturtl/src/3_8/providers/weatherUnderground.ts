@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import { getTimes } from "suncalc";
 import { Services } from "../config";
-import { ErrorResponse, HttpError } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HttpLib } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { Condition, ForecastData, LocationData, WeatherData } from "../types";
 import { CelsiusToKelvin, FahrenheitToKelvin, GetDistance, _ } from "../utils";
@@ -41,27 +41,31 @@ export class WeatherUnderground extends BaseProvider {
             return unitTypeMap[this.app.config.countryCode.toLowerCase()] ?? "m";
     }
 
-    public GetWeather = async (loc: LocationData): Promise<WeatherData | null> => {
+    public GetWeather = async (loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> => {
         const locString = `${loc.lat},${loc.lon}`;
-        const location = this.locationCache[locString] ?? (await this.GetNearbyStations(loc));
+        const location = this.locationCache[locString] ?? (await this.GetNearbyStations(loc, cancellable));
         if (location == null) {
             // TODO: handle error
             return null;
         }
         this.locationCache[locString] = location;
 
-        const forecast = await this.app.LoadJsonAsync<ForecastPayload>(`${this.baseURl}v3/wx/forecast/daily/5day`, {
-            geocode: locString,
-            language: this.app.config.currentLocale ?? "en-US",
-            format: "json",
-            apiKey: this.app.config.ApiKey,
-            units: this.currentUnit,
-        });
+        const forecast = await HttpLib.Instance.LoadJsonSimple<ForecastPayload>({
+			url: `${this.baseURl}v3/wx/forecast/daily/5day`,
+			cancellable,
+			params: {
+				geocode: locString,
+				language: this.app.config.currentLocale ?? "en-US",
+				format: "json",
+				apiKey: this.app.config.ApiKey,
+				units: this.currentUnit,
+			}
+		});
 
         if (forecast == null)
             return null;
 
-        const observation = await this.GetObservations(location, forecast, loc);
+        const observation = await this.GetObservations(location, forecast, loc, cancellable);
 
         return {
             date: observation.date!,
@@ -113,14 +117,19 @@ export class WeatherUnderground extends BaseProvider {
         return result;
     }
 
-    private GetNearbyStations = async (loc: LocationData): Promise<NearbyStation[] | null> => {
+    private GetNearbyStations = async (loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<NearbyStation[] | null> => {
         const result: NearbyStation[] = [];
-        const payload = await this.app.LoadJsonAsync<NearObservationPayload>(`${this.baseURl}v3/location/near`, {
-            geocode: `${loc.lat},${loc.lon}`,
-            format: "json",
-            apiKey: this.app.config.ApiKey,
-            product: "pws"
-        }, this.HandleErrors);
+        const payload = await HttpLib.Instance.LoadJsonSimple<NearObservationPayload>({
+			url: `${this.baseURl}v3/location/near`,
+			cancellable,
+			params: {
+				geocode: `${loc.lat},${loc.lon}`,
+				format: "json",
+				apiKey: this.app.config.ApiKey,
+				product: "pws"
+			},
+			HandleError: this.HandleErrors
+		});
 
         if (payload == null)
             return null;
@@ -145,8 +154,8 @@ export class WeatherUnderground extends BaseProvider {
         return result;
     }
 
-    private GetObservations = async (stations: NearbyStation[], forecast: ForecastPayload, loc: LocationData): Promise<ObservationInternalData> => {
-        const observationData: ObservationData[] = (await Promise.all(stations.map(v => this.GetObservation(v.stationId)))).filter(v => v != null) as ObservationData[];
+    private GetObservations = async (stations: NearbyStation[], forecast: ForecastPayload, loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<ObservationInternalData> => {
+        const observationData: ObservationData[] = (await Promise.all(stations.map(v => this.GetObservation(v.stationId, cancellable)))).filter(v => v != null) as ObservationData[];
         const tz = loc.timeZone;
 
         const result: ObservationInternalData = {
@@ -230,14 +239,19 @@ export class WeatherUnderground extends BaseProvider {
         return result;
     }
 
-    private GetObservation = async (stationID: string): Promise<ObservationData | null> => {
-        const observationString = await this.app.LoadAsync(`${this.baseURl}v2/pws/observations/current`, {
-            format: "json",
-            stationId: stationID,
-            apiKey: this.app.config.ApiKey,
-            units: "s",
-            numericPrecision: "decimal",
-        }, this.HandleErrors);
+    private GetObservation = async (stationID: string, cancellable: imports.gi.Gio.Cancellable): Promise<ObservationData | null> => {
+        const observationString = await HttpLib.Instance.LoadAsyncSimple({
+			url: `${this.baseURl}v2/pws/observations/current`,
+			cancellable,
+			params: {
+				format: "json",
+				stationId: stationID,
+				apiKey: this.app.config.ApiKey,
+				units: "s",
+				numericPrecision: "decimal",
+			},
+			HandleError: this.HandleErrors
+		});
 
         let observation: ObservationPayload | null = null;
         if (observationString != null) {
