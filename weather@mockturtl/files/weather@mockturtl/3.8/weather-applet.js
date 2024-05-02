@@ -15644,6 +15644,7 @@ class GeoClue {
         }
         const geoCodeLoc = GeocodeGlib.Location.new(lat, lon, accuracy);
         const geoCodeRes = GeocodeGlib.Reverse.new_for_location(geoCodeLoc);
+        geoCodeRes.set_backend(GeocodeGlib.Nominatim.new("https://nominatim.openstreetmap.org", "weatherapplet@gmail.com"));
         return new Promise((resolve, reject) => {
             logger_Logger.Debug("Requesting location data from GeoCode");
             const start = DateTime.now();
@@ -15663,7 +15664,7 @@ class GeoClue {
                     resolve(null);
                     return;
                 }
-                logger_Logger.Debug(`GeoCode location data received ${JSON.stringify(result)}`);
+                logger_Logger.Debug(`GeoCode location data received ${result.town}, ${result.country}`);
                 resolve({
                     city: result.town,
                     country: result.country,

@@ -105,6 +105,9 @@ export class GeoClue implements GeoIP {
 		)
 
 		const geoCodeRes = GeocodeGlib.Reverse.new_for_location(geoCodeLoc);
+		// Gnome's default Nominatim instance is fucked, or Cinnamon misconfigures it but it's permanently not working.
+		// I set to OpenStreetMaps instance because that works.
+		geoCodeRes.set_backend(GeocodeGlib.Nominatim.new("https://nominatim.openstreetmap.org", "weatherapplet@gmail.com"))
 		return new Promise<Partial<LocationData> | null>((resolve, reject) => {
 			Logger.Debug("Requesting location data from GeoCode");
 			const start = DateTime.now();
@@ -126,7 +129,7 @@ export class GeoClue implements GeoIP {
 						return;
 					}
 
-					Logger.Debug(`GeoCode location data received ${JSON.stringify(result)}`);
+					Logger.Debug(`GeoCode location data received ${result.town}, ${result.country}`);
 					resolve({
 						city: result.town,
 						country: result.country,
