@@ -11,6 +11,9 @@ export interface SoupLibSendOptions {
 	params?: HTTPParams | null,
 	headers?: HTTPHeaders,
 	method?: Method,
+	/**
+	 * If not provided, a timeout is set to REQUEST_TIMEOUT_SECONDS automatically.
+	 */
 	cancellable?: imports.gi.Gio.Cancellable
 }
 export interface SoupLib {
@@ -86,11 +89,18 @@ class Soup3 implements SoupLib {
             else {
                 AddHeadersToMessage(message, headers);
 				const finalCancellable = cancellable ?? Cancellable.new();
-				const timeout = setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
+
+				let timeout: number | null = null;
+				// If cancellable is not provided, we create a timeout to cancel the request after REQUEST_TIMEOUT_SECONDS
+				if (cancellable == null) {
+					timeout = setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
+				}
+
                 this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, finalCancellable, (session: any, result: any) => {
 					const headers: Record<string, string> = {};
 					let res: imports.gi.GLib.Bytes | null = null;
-					clearTimeout(timeout);
+					if (timeout != null)
+						clearTimeout(timeout);
 					try {
 						res = this._httpSession.send_and_read_finish(result);
 						message.get_response_headers().foreach((name: string, value: string) => {
@@ -165,7 +175,17 @@ class Soup2 implements SoupLib {
 			else {
 				AddHeadersToMessage(message, headers);
 				const finalCancellable = cancellable ?? Cancellable.new();
+
+				let timeout: number | null = null;
+				// If cancellable is not provided, we create a timeout to cancel the request after REQUEST_TIMEOUT_SECONDS
+				if (cancellable == null) {
+					timeout = setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
+				}
+
 				this._httpSession.send_async(message, cancellable, async (session: any, result: imports.gi.Gio.AsyncResult) => {
+					if (timeout != null)
+						clearTimeout(timeout);
+
 					const headers: Record<string, string> = {};
 					let res: string | null = null;
 					try {

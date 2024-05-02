@@ -62,7 +62,6 @@ const IOErrorEnumNames: Record<imports.gi.Gio.IOErrorEnum, string> = {
 	[imports.gi.Gio.IOErrorEnum.PROXY_AUTH_FAILED]: "PROXY_AUTH_FAILED",
 	[imports.gi.Gio.IOErrorEnum.PROXY_NEED_AUTH]: "PROXY_NEED_AUTH",
 	[imports.gi.Gio.IOErrorEnum.PROXY_NOT_ALLOWED]: "PROXY_NOT_ALLOWED",
-	[imports.gi.Gio.IOErrorEnum.BROKEN_PIPE]: "BROKEN_PIPE",
 	[imports.gi.Gio.IOErrorEnum.CONNECTION_CLOSED]: "CONNECTION_CLOSED",
 	[imports.gi.Gio.IOErrorEnum.NOT_CONNECTED]: "NOT_CONNECTED",
 	[imports.gi.Gio.IOErrorEnum.MESSAGE_TOO_LARGE]: "MESSAGE_TOO_LARGE",

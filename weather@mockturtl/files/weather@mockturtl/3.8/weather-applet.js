@@ -9652,7 +9652,6 @@ const IOErrorEnumNames = {
     [imports.gi.Gio.IOErrorEnum.PROXY_AUTH_FAILED]: "PROXY_AUTH_FAILED",
     [imports.gi.Gio.IOErrorEnum.PROXY_NEED_AUTH]: "PROXY_NEED_AUTH",
     [imports.gi.Gio.IOErrorEnum.PROXY_NOT_ALLOWED]: "PROXY_NOT_ALLOWED",
-    [imports.gi.Gio.IOErrorEnum.BROKEN_PIPE]: "BROKEN_PIPE",
     [imports.gi.Gio.IOErrorEnum.CONNECTION_CLOSED]: "CONNECTION_CLOSED",
     [imports.gi.Gio.IOErrorEnum.NOT_CONNECTED]: "NOT_CONNECTED",
     [imports.gi.Gio.IOErrorEnum.MESSAGE_TOO_LARGE]: "MESSAGE_TOO_LARGE",
@@ -9781,7 +9780,6 @@ class Event {
     }
 }
 Event.eventStore = [];
-
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/notification_service.ts
 
@@ -10051,12 +10049,16 @@ class Soup3 {
             else {
                 AddHeadersToMessage(message, headers);
                 const finalCancellable = cancellable !== null && cancellable !== void 0 ? cancellable : Cancellable.new();
-                const timeout = utils_setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
+                let timeout = null;
+                if (cancellable == null) {
+                    timeout = utils_setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
+                }
                 this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, finalCancellable, (session, result) => {
                     var _a;
                     const headers = {};
                     let res = null;
-                    clearTimeout(timeout);
+                    if (timeout != null)
+                        clearTimeout(timeout);
                     try {
                         res = this._httpSession.send_and_read_finish(result);
                         message.get_response_headers().foreach((name, value) => {
@@ -10106,7 +10108,13 @@ class Soup2 {
             else {
                 AddHeadersToMessage(message, headers);
                 const finalCancellable = cancellable !== null && cancellable !== void 0 ? cancellable : Cancellable.new();
+                let timeout = null;
+                if (cancellable == null) {
+                    timeout = utils_setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
+                }
                 this._httpSession.send_async(message, cancellable, async (session, result) => {
+                    if (timeout != null)
+                        clearTimeout(timeout);
                     const headers = {};
                     let res = null;
                     try {
