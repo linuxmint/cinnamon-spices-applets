@@ -23,8 +23,7 @@ import { Event } from "./lib/events";
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
-const { File, NetworkMonitor, NetworkConnectivity } = imports.gi.Gio;
-const { TimeZone } = imports.gi.GLib;
+const { File } = imports.gi.Gio;
 
 export interface LoadJsonAsyncOptions extends LoadAsyncOptions {
 	url: string;

@@ -10,7 +10,7 @@ import { DateTime } from "luxon";
 import { ErrorResponse, HttpError, HttpLib, HTTPParams } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "../types";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation, AlertData } from "../types";
 import { _, IsLangSupported } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 
@@ -117,7 +117,8 @@ export class OpenWeatherMap extends BaseProvider {
 					value: json.current.feels_like,
 					type: "temperature"
 				},
-				forecasts: []
+				forecasts: [],
+				alerts: [],
 			};
 
 			if (json.minutely != null) {
@@ -192,6 +193,22 @@ export class OpenWeatherMap extends BaseProvider {
 			}
 
 			weather.hourlyForecasts = hourly;
+
+			const alerts: AlertData[] = [];
+			for (const alert of json.alerts ?? []) {
+				alerts.push({
+					sender_name: alert.sender_name,
+					// TODO: calculate level
+					level: "yellow",
+					event: alert.event,
+					start: alert.start,
+					end: alert.end,
+					description: alert.description,
+					tags: alert.tags
+				})
+			}
+			weather.alerts = alerts;
+
 			return weather;
 		} catch (e) {
 			if (e instanceof Error)
@@ -445,7 +462,6 @@ interface OWMPayload {
 	daily: DailyPayload[];
 	alerts?: AlertPayload[]
 }
-
 interface CurrentPayload {
 	/** Unix timestamp seconds */
 	dt: number;

@@ -11092,7 +11092,7 @@ class OpenWeatherMap extends BaseProvider {
         return null;
     }
     ParseWeather(json, loc) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
         try {
             const weather = {
                 coord: {
@@ -11125,7 +11125,8 @@ class OpenWeatherMap extends BaseProvider {
                     value: json.current.feels_like,
                     type: "temperature"
                 },
-                forecasts: []
+                forecasts: [],
+                alerts: [],
             };
             if (json.minutely != null) {
                 const immediate = {
@@ -11189,6 +11190,19 @@ class OpenWeatherMap extends BaseProvider {
                 hourly.push(forecast);
             }
             weather.hourlyForecasts = hourly;
+            const alerts = [];
+            for (const alert of (_o = json.alerts) !== null && _o !== void 0 ? _o : []) {
+                alerts.push({
+                    sender_name: alert.sender_name,
+                    level: "yellow",
+                    event: alert.event,
+                    start: alert.start,
+                    end: alert.end,
+                    description: alert.description,
+                    tags: alert.tags
+                });
+            }
+            weather.alerts = alerts;
             return weather;
         }
         catch (e) {
@@ -17579,7 +17593,8 @@ class UIHourlyForecasts {
 
 
 
-const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button, Side: uiBar_Side } = imports.gi.St;
+
+const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Bin: uiBar_Bin, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button, Side: uiBar_Side } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
 const STYLE_BAR = 'bottombar';
 class UIBar {
@@ -17592,6 +17607,22 @@ class UIBar {
         this.hourlyButton = null;
         this._timestamp = null;
         this.timestampTooltip = null;
+        this.warningButtonIcon = null;
+        this.warningButton = null;
+        this.warningButtonTooltip = null;
+        this.WarningClicked = async () => {
+            var _a;
+            if (((_a = this.app.CurrentData) === null || _a === void 0 ? void 0 : _a.alerts) == null)
+                return;
+            const alertWindowPath = this.app.AppletDir + "/AlertsWindow.py";
+            logger_Logger.Info("Alerts Window opened.");
+            const result = await SpawnProcess([alertWindowPath, JSON.stringify(this.app.CurrentData.alerts)]);
+            logger_Logger.Info("Alerts Window closed.");
+            if (!result.Success)
+                logger_Logger.Error(`Error occurred while opening Alerts Window: ${JSON.stringify(result.ErrorData)}`);
+            else
+                logger_Logger.Debug(`Alerts Window output: ${JSON.stringify(result.Data)}`);
+        };
         this.app = app;
         this.actor = new uiBar_BoxLayout({ vertical: false, style_class: STYLE_BAR });
     }
@@ -17613,7 +17644,7 @@ class UIBar {
         this._timestamp.label = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
         if (this._timestamp == null || this.providerCreditButton == null || ((_c = (_a = this.providerCreditButton) === null || _a === void 0 ? void 0 : (_b = _a.actor).is_finalized) === null || _c === void 0 ? void 0 : _c.call(_b)))
             return false;
         let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
@@ -17643,6 +17674,17 @@ class UIBar {
             this.HideHourlyToggle();
         else
             this.ShowHourlyToggle();
+        const levelOrder = ["yellow", "orange", "red"];
+        if (weather.alerts && weather.alerts.length > 0) {
+            const highestLevel = weather.alerts.reduce((prev, current) => (levelOrder.indexOf(prev.level) > levelOrder.indexOf(current.level)) ? prev : current);
+            (_h = this.warningButton) === null || _h === void 0 ? void 0 : _h.actor.show();
+            (_j = this.warningButtonTooltip) === null || _j === void 0 ? void 0 : _j.set_text(_("{count} weather alert(s)", { count: weather.alerts.length }));
+            global.log(highestLevel.level);
+            (_k = this.warningButtonIcon) === null || _k === void 0 ? void 0 : _k.set_style("color: " + highestLevel.level);
+        }
+        else {
+            (_l = this.warningButton) === null || _l === void 0 ? void 0 : _l.actor.hide();
+        }
         return true;
     }
     Destroy() {
@@ -17652,9 +17694,26 @@ class UIBar {
     }
     Rebuild(config) {
         this.Destroy();
+        const leftBox = new uiBar_BoxLayout({ vertical: false, y_align: uiBar_Align.MIDDLE });
+        this.warningButtonIcon = new uiBar_Icon({
+            icon_type: uiBar_IconType.SYMBOLIC,
+            icon_size: config.CurrentFontSize + 3,
+            icon_name: "dialog-warning-symbolic",
+        });
+        this.warningButton = new WeatherButton({
+            reactive: true,
+            can_focus: true,
+            child: this.warningButtonIcon
+        });
+        this.warningButtonTooltip = new Tooltip(this.warningButton.actor, "");
+        this.warningButton.actor.hide();
+        this.warningButton.actor.connect(SIGNAL_CLICKED, this.WarningClicked);
+        leftBox.add_actor(this.warningButton.actor);
+        leftBox.add_actor(new uiBar_Bin({ width: 5 }));
         this._timestamp = new uiBar_Button({ label: "Placeholder" });
+        leftBox.add_actor(this._timestamp);
         this.timestampTooltip = new Tooltip(this._timestamp, "");
-        this.actor.add(this._timestamp, {
+        this.actor.add(leftBox, {
             x_fill: false,
             x_align: uiBar_Align.START,
             y_align: uiBar_Align.MIDDLE,
@@ -17925,8 +17984,7 @@ class UI {
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
-const { File: main_File, NetworkMonitor: main_NetworkMonitor, NetworkConnectivity: main_NetworkConnectivity } = imports.gi.Gio;
-const { TimeZone: main_TimeZone } = imports.gi.GLib;
+const { File: main_File } = imports.gi.Gio;
 class WeatherApplet extends TextIconApplet {
     get CurrentData() {
         return this.currentWeatherInfo;

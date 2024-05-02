@@ -1,14 +1,15 @@
-import { OpenUrl } from "../lib/commandRunner";
+import { OpenUrl, SpawnProcess } from "../lib/commandRunner";
 import { Config, DistanceUnits } from "../config";
 import { SIGNAL_CLICKED, ELLIPSIS } from "../consts";
 import { Event } from "../lib/events";
 import { WeatherApplet } from "../main";
-import { CustomIcons, WeatherData, WeatherProvider } from "../types";
+import { CustomIcons, WeatherData, WeatherProvider, AlertData } from "../types";
 import { _, AwareDateString, MetreToUserUnits } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { DateTime } from "luxon";
+import { Logger } from "../lib/logger";
 
-const { BoxLayout, IconType, Label, Icon, Align, Button, Side } = imports.gi.St;
+const { BoxLayout, IconType, Bin, Icon, Align, Button, Side } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
 
 const STYLE_BAR = 'bottombar'
@@ -27,6 +28,9 @@ export class UIBar {
 	private hourlyButton: WeatherButton | null = null;
 	private _timestamp: imports.gi.St.Button | null = null;
 	private timestampTooltip: imports.ui.tooltips.Tooltip<imports.gi.St.Button> | null = null;
+	private warningButtonIcon: imports.gi.St.Icon | null = null;
+	private warningButton: WeatherButton | null = null;
+	private warningButtonTooltip: imports.ui.tooltips.Tooltip<imports.gi.St.Button> | null = null;
 
 	private app: WeatherApplet;
 
@@ -91,6 +95,19 @@ export class UIBar {
 			this.HideHourlyToggle();
 		else
 			this.ShowHourlyToggle();
+
+		const levelOrder: AlertData["level"][] = ["yellow", "orange", "red"];
+		if (weather.alerts && weather.alerts.length > 0) {
+			// TODO: choose color depending on dark/light theme.
+			const highestLevel = weather.alerts.reduce((prev, current) => (levelOrder.indexOf(prev.level) > levelOrder.indexOf(current.level)) ? prev : current);
+			this.warningButton?.actor.show();
+			this.warningButtonTooltip?.set_text(_("{count} weather alert(s)", { count: weather.alerts.length }));
+			global.log(highestLevel.level)
+			this.warningButtonIcon?.set_style("color: " + highestLevel.level);
+		}
+		else {
+			this.warningButton?.actor.hide();
+		}
 		return true;
 	}
 
@@ -101,10 +118,30 @@ export class UIBar {
 
 	public Rebuild(config: Config) {
 		this.Destroy();
+		const leftBox = new BoxLayout({ vertical: false, y_align: Align.MIDDLE   });
+		this.warningButtonIcon = new Icon({
+			icon_type: IconType.SYMBOLIC,
+			icon_size: config.CurrentFontSize + 3,
+			icon_name: "dialog-warning-symbolic",
+		});
+
+		this.warningButton = new WeatherButton({
+			reactive: true,
+			can_focus: true,
+			child: this.warningButtonIcon
+		});
+
+		this.warningButtonTooltip = new Tooltip(this.warningButton.actor, "");
+		this.warningButton.actor.hide();
+		this.warningButton.actor.connect(SIGNAL_CLICKED, this.WarningClicked);
+
+		leftBox.add_actor(this.warningButton.actor);
+		leftBox.add_actor(new Bin({ width: 5 }));
 		this._timestamp = new Button({ label: "Placeholder" });
+		leftBox.add_actor(this._timestamp);
 		this.timestampTooltip = new Tooltip(this._timestamp, "");
 
-		this.actor.add(this._timestamp, {
+		this.actor.add(leftBox, {
 			x_fill: false,
 			x_align: Align.START,
 			y_align: Align.MIDDLE,
@@ -165,6 +202,21 @@ export class UIBar {
 
 	private ShowHourlyToggle() {
 		this.hourlyButton?.actor.show();
+	}
+
+	private WarningClicked = async () => {
+		if (this.app.CurrentData?.alerts == null)
+			return;
+
+		const alertWindowPath = this.app.AppletDir + "/AlertsWindow.py";
+
+		Logger.Info("Alerts Window opened.");
+		const result = await SpawnProcess([alertWindowPath, JSON.stringify(this.app.CurrentData.alerts)]);
+		Logger.Info("Alerts Window closed.");
+		if (!result.Success)
+			Logger.Error(`Error occurred while opening Alerts Window: ${JSON.stringify(result.ErrorData)}`);
+		else
+			Logger.Debug(`Alerts Window output: ${JSON.stringify(result.Data)}`);
 	}
 
 }

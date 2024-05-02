@@ -84,6 +84,7 @@ export interface WeatherData {
 	hourlyForecasts?: HourlyForecastData[] | undefined
 	extra_field?: APIUniqueField | undefined;
 	immediatePrecipitation?: ImmediatePrecipitation;
+	alerts?: AlertData[] | undefined;
 }
 
 
@@ -122,6 +123,19 @@ export interface ForecastData {
 	/** Kelvin */
 	temp_max: number | null,
 	condition: Condition
+}
+
+export interface AlertData {
+	sender_name: string;
+	/**
+	 * Try to infer the level from the event string.
+	 */
+	level: "yellow" | "orange" | "red";
+	event: string;
+	start: number;
+	end: number;
+	description: string;
+	tags: string[];
 }
 
 export type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";

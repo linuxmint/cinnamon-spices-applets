@@ -1,8 +1,4 @@
 #!/bin/bash
-# ./build.sh
-#source ./build3_0.sh
-#rm -rf ~/.local/share/cinnamon/applets/weather@mockturtl/
-#mkdir ~/.local/share/cinnamon/applets/weather@mockturtl/
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
   DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
@@ -15,8 +11,8 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 path=${PWD}
 
 cd $DIR
-cp -rf files/weather@mockturtl/* ~/.local/share/cinnamon/applets/weather@mockturtl/
+cp -arf files/weather@mockturtl/* ~/.local/share/cinnamon/applets/weather@mockturtl/
 cd ..
-./cinnamon-spices-makepot weather@mockturtl
+# ./cinnamon-spices-makepot weather@mockturtl
 cd $PWD
 export DISPLAY=:0; cinnamon --replace &
