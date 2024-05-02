@@ -1,3 +1,6 @@
+### v2.0.1~20240502
+  * In the menu, each category indicates the number of stations it contains.
+
 ### v2.0.0~20240501
   * Added an option to display the category list alongside the radio station list in the menu.
   * New screenshot.
