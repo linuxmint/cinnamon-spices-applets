@@ -145,6 +145,8 @@ To ensure that these tables are always up-to-date, they are automatically regene
 # Javascript feature backward compatibility table
 ## (incomplete)
 To determine the backward compatibility of a javascript feature, look at it's page on [mdm web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript) to see in which version of Firefox it was introduced. Then compare with the table below.
+To find out the expiration date of a Linux Mint version, take the release date of the major version (20 or 21 or 22, without dot) and add 5 to the year; the month is always April.
+Example: Major version 21 was released on July 31, 2022, so it expires in April 2027. Sub-versions 21.1, 21.2 and 21.3 also expire in April 2027.
 
 <table><tr><th colspan="1">Mint Version</th><th colspan="1">Codename</th><th colspan="1">Release Date</th><th colspan="1">Cinnamon<br/>Version</th><th colspan="2">Firefox version<br/>(CJS JS engine)</th></tr>
 <tr><td colspan="1">17</td><td colspan="1">Qiana</td><td colspan="1">31 May 14</td><td colspan="1">2.2.14</td><td colspan="1"></td></tr>
