@@ -1064,7 +1064,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.angle = 0;
     this.rot_interval = 0;
     this.do_rotation = false;
-    this.ui_scale = global.ui_scale;
 
     // Clipboard:
     this.clipboard = Clipboard.get_default();
@@ -1264,6 +1263,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("limits-hd-size-prefixes", "size_prefixes", (...args) => set_nemo_size_prefixes(...args));
 
     this.settings.bind("last-radio-listened-to", "last_radio_listened_to");
+    this.settings.bind("last-category", "last_category");
     this.settings.bind("switch-on-last-station-at-start-up", "switch_on_last_station_at_start_up",
       this.on_switch_on_last_station_at_start_up.bind(this));
     this.settings.bind("notif-station-change", "notif_station_change");
@@ -2643,7 +2643,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
       this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
-      if (this.show_by_category) {
+      if (this.show_by_category && this.number_of_categories > 0) {
         // Category list beside of Radio Station list:
         let cws = JSON.parse(JSON.stringify(this.categories_with_stations));
         let _cats = Object.keys(cws);
@@ -2677,7 +2677,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         for (let c of _cats) {
           iCats++;
           let _keys = Object.keys(cws[c]);
-          catItems.push(new PopupMenuItem((c=="All Categories") ? _("All Categories") + " (" + _keys.length + ")" : c + " (" + _keys.length + ")", { reactive: true }));
+          let catItem = new PopupMenuItem((c=="All Categories") ? _("All Categories") + " (" + _keys.length + ")" : c + " (" + _keys.length + ")", { reactive: true });
+          catItem.setShowDot(c == this.last_category);
+          catItems.push(catItem);
           this.categoriesMenu.menu.addMenuItem(catItems[iCats]);
           catItems[iCats].actor.connect("enter-event", Lang.bind(this, function() {
             this.stationsMenu.menu.removeAll();
@@ -2686,7 +2688,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
               let id = cws[c][s];
               let item = new PopupMenuItem(s, { reactive: true });
               item.setShowDot(id == this.last_radio_listened_to);
+              if (id == this.last_radio_listened_to && c!="All Categories") {
+                catItem.setShowDot(true);
+                this.last_category = c;
+              }
               item.connect('activate', Lang.bind(this, function() {
+                this.last_category = c;
                 this.set_radio_tooltip_to_default_one();
 
                 this.stop_mpv_radio(false);

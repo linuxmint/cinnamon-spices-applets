@@ -1798,6 +1798,10 @@
     "type": "generic",
     "default": ""
   },
+  "last-category": {
+    "type": "generic",
+    "default": ""
+  },
   "storedRadios": {
     "type": "generic",
     "default": [
