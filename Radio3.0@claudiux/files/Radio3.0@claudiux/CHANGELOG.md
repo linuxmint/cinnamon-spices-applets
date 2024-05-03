@@ -1,3 +1,6 @@
+### v2.0.2~20240503
+  * Stores and displays the Category of the last radio station listened to in the new menu.
+
 ### v2.0.1~20240502
   * In the menu, each category indicates the number of stations it contains.
 
