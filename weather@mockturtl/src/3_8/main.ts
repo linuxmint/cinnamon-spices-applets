@@ -31,6 +31,12 @@ export interface LoadJsonAsyncOptions extends LoadAsyncOptions {
 	HandleError?: (message: ErrorResponse<any>) => boolean;
 }
 
+export interface LoadJsonAsyncOptions extends LoadAsyncOptions {
+	url: string;
+	cancellable: imports.gi.Gio.Cancellable;
+	HandleError?: (message: ErrorResponse<any>) => boolean;
+}
+
 export class WeatherApplet extends TextIconApplet {
 	private readonly loop: WeatherLoop;
 	private currentWeatherInfo: WeatherData | null = null;

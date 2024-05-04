@@ -1,0 +1,69 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-15 21:34+0200\n"
+"PO-Revision-Date: 2024-04-20 16:11+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Scr Lock"
+msgstr "Scr Lock"
+
+msgid "Num Lock"
+msgstr "Num Lock"
+
+msgid "Caps Lock"
+msgstr "Caps Lock"
+
+msgid "Lock Keys"
+msgstr "Toetsen vergrendelen"
+
+msgid "Scr lock on"
+msgstr "Scr lock aan"
+
+msgid "Scr lock off"
+msgstr "Scr lock uit"
+
+msgid "Num lock on"
+msgstr "Num lock aan"
+
+msgid "Num lock off"
+msgstr "Num lock uit"
+
+msgid "Caps lock on"
+msgstr "Caps lock aan"
+
+msgid "Caps lock off"
+msgstr "Caps lock uit"
+
+msgid "Show notifications"
+msgstr "Meldingen tonen"
+
+msgid "Show caps lock indicator"
+msgstr "Caps lock-indicator tonen"
+
+msgid "Show num lock indicator"
+msgstr "Num lock-indicator tonen"
+
+msgid "Show scr lock indicator"
+msgstr "Scr lock-indicator tonen"
+
+msgid ""
+"Shows whether caps lock/num lock/scr lock is on, and displays a notification "
+"when these change."
+msgstr ""
+"Toont of caps lock/num lock/scr lock aan staat, en geeft een melding wanneer "
+"deze veranderen."
+
+msgid "Lock keys indicator with notifications"
+msgstr "Vergrendelingstoetsenindicator met meldingen"

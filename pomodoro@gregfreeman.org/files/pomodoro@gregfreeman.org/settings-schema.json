@@ -45,9 +45,21 @@
         "description": "Options"
     },
 
+    "start_automatically_on_load" : {
+        "type" : "checkbox",
+        "description" : "Start the pomodoro timer as soon as the applet loads",
+        "default" : false
+    },
+
     "show_dialog_messages" : {
         "type" : "checkbox",
         "description" : "Show Dialog Messages",
+        "default" : true
+    },
+
+    "auto_start_after_pomodoro_ends" : {
+        "type" : "checkbox",
+        "description" : "Auto start after a pomodoro ends",
         "default" : true
     },
 
@@ -72,13 +84,19 @@
     "use_symbolic_icon" : {
         "type" : "checkbox",
         "description" : "Use a symbolic icon in the applet panel",
-        "default" : false
+        "default" : true
     },
 
     "show_timer" : {
         "type" : "checkbox",
         "description" : "Show the pomodoro timer in the applet panel",
         "default" : true
+    },
+
+    "hotkey": {
+        "type": "keybinding",
+        "description": "Set the keybinding to open the applet menu",
+        "default": "<Super><Shift>p"
     },
 
     "head_sounds": {
@@ -202,5 +220,32 @@
         "step": 1,
         "description": "Sound volume:",
         "dependency" : "start_sound"
-    }
+    },
+
+    "head_scripts": {
+        "type": "header",
+        "description": "Scripts"
+    },
+
+    "enable_scripts" : {
+        "type" : "checkbox",
+        "description" : "Enable scripts",
+        "default" : false
+    },
+
+    "custom_short_break_script": {
+        "type" : "filechooser",
+        "default" : "",
+        "description" : "Execute this custom script when a short break starts",
+        "select-dir" : false,
+        "dependency": "enable_scripts"
+     },
+
+     "custom_long_break_script": {
+        "type" : "filechooser",
+        "default" : "",
+        "description" : "Execute this custom script when a long break starts",
+        "select-dir" : false,
+        "dependency": "enable_scripts"
+     }
 }

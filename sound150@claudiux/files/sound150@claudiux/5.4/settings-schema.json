@@ -11,43 +11,45 @@
       "type": "page",
       "title": "Behavior",
       "sections": [
-        "section1",
-        "section2",
-        "section3"
+        "sectionBehavior1",
+        "sectionBehavior2",
+        "sectionBehavior3"
       ]
     },
     "page_icon": {
       "type": "page",
       "title": "Icon",
       "sections": [
-        "section4"
+        "sectionIcon1"
       ]
     },
     "page_sound": {
       "type": "page",
       "title": "Sound",
       "sections": [
-        "section5",
-        "section6"
+        "sectionSound1",
+        "sectionSound2",
+        "sectionSound3"
       ]
     },
     "page_shortcuts": {
       "type": "page",
       "title": "Shortcuts",
       "sections": [
-        "section7"
+        "sectionShortcuts1"
       ]
     },
-    "section1": {
+    "sectionBehavior1": {
       "type": "section",
       "title": "Menu",
       "keys": [
-        "keepPlayerListOpen",
         "playerControl",
-        "extendedPlayerControl"
+        "extendedPlayerControl",
+        "keepPlayerListOpen",
+        "keepChoosePlayerOpen"
       ]
     },
-    "section2": {
+    "sectionBehavior2": {
       "type": "section",
       "title": "Panel",
       "keys": [
@@ -61,7 +63,7 @@
         "hideSystray"
       ]
     },
-    "section3": {
+    "sectionBehavior3": {
       "type": "section",
       "title": "Tooltip",
       "keys": [
@@ -70,7 +72,7 @@
         "tooltipShowArtistTitle"
       ]
     },
-    "section4": {
+    "sectionIcon1": {
       "type": "section",
       "title": "Icon",
       "keys": [
@@ -85,7 +87,7 @@
         "resetColorsButton"
       ]
     },
-    "section5": {
+    "sectionSound1": {
       "type": "section",
       "title": "Sound Settings",
       "keys": [
@@ -93,11 +95,18 @@
         "stepVolume",
         "magneticOn",
         "magnetic25On",
-        "alwaysCanChangeMic",
+        "alwaysCanChangeMic"
+      ]
+    },
+    "sectionSound2": {
+      "type": "section",
+      "title": "OSD",
+      "keys": [
+        "showMediaKeysOSD",
         "showOSDonStartup"
       ]
     },
-    "section6": {
+    "sectionSound3": {
       "type": "section",
       "dependency": "soundATcinnamonDOTorg_is_loaded",
       "title": "Remove incompatible applets",
@@ -105,7 +114,7 @@
         "remove_soundATcinnamonDOTorg"
       ]
     },
-    "section7": {
+    "sectionShortcuts1": {
       "type": "section",
       "title": "Shortcuts",
       "keys": [
@@ -114,14 +123,11 @@
         "pause-on-off",
         "volume-mute",
         "volume-up",
-        "volume-down"
+        "volume-down",
+        "audio-next",
+        "audio-prev"
       ]
     }
-  },
-  "keepPlayerListOpen": {
-    "type": "switch",
-    "default": false,
-    "description": "Keep the player list open"
   },
   "playerControl": {
     "type": "switch",
@@ -133,6 +139,17 @@
     "default": false,
     "description": "Show Loop and Shuffle controls",
     "dependency": "playerControl"
+  },
+  "keepPlayerListOpen": {
+    "type": "switch",
+    "dependency": "playerControl",
+    "default": false,
+    "description": "Keep the player list open"
+  },
+  "keepChoosePlayerOpen": {
+    "type": "switch",
+    "default": false,
+    "description": "Keep the player controller selector open"
   },
   "keyOpen": {
     "type": "keybinding",
@@ -304,6 +321,17 @@
     "tooltip": "Always show the 'Mute input' switch in the context menu.",
     "default": true
   },
+  "showMediaKeysOSD": {
+    "type": "combobox",
+    "default": "medium",
+    "options": {
+      "disabled": "disabled",
+      "small": "small",
+      "medium": "medium",
+      "large": "large"
+    },
+    "description": "Whether the media keys osd is disabled or its relative display size"
+  },
   "showOSDonStartup": {
     "type": "switch",
     "description": "Show volume level in OSD on startup",
@@ -337,6 +365,18 @@
     "dependency": "redefine-volume-keybindings",
     "default": "::",
     "description": "Volume Down"
+  },
+  "audio-next": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Next Track"
+  },
+  "audio-prev": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Previous Track"
   },
   "volume": {
     "type": "generic",

@@ -6,139 +6,160 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-25 22:26+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-25 20:30+1000\n"
 "PO-Revision-Date: 2021-04-01 22:55+0200\n"
+"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: Bosák Balázs <bossbob88@gmail.com>\n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: applet.js:394
-msgid "Pomodoro started"
-msgstr "Pomodoro elindult"
+#: applet.js:278
+msgid "Short break running"
+msgstr "Rövid szünet folyamatban"
 
-#: applet.js:437 applet.js:737
-msgid "Waiting to start"
-msgstr "Várakozás az indításra"
+#: applet.js:281
+msgid "Long break running"
+msgstr "Hosszú szünet folyamatban"
 
-#: applet.js:455
+#: applet.js:284
 #, javascript-format
 msgid "Pomodori %d, set %d running"
 msgstr "Pomodorók %d, állítsa be %d fut"
 
-#: applet.js:462
+#: applet.js:289
+msgid "Waiting to start"
+msgstr "Várakozás az indításra"
+
+#: applet.js:342
+msgid "Pomodoro started"
+msgstr "Pomodoro elindult"
+
+#: applet.js:407
 msgid "Let's go to work!"
 msgstr "Lássunk munkához!"
 
-#: applet.js:477
+#: applet.js:425
 msgid "Take a short break"
 msgstr "Tarts egy rövid szünetet"
 
-#: applet.js:478
-msgid "Short break running"
-msgstr "Rövid szünet folyamatban"
-
-#: applet.js:497
+#: applet.js:448
 msgid "Take a long break"
 msgstr "Tarts egy hosszú szünetet"
 
-#: applet.js:499
-msgid "Long break running"
-msgstr "Hosszú szünet folyamatban"
-
-#: applet.js:533
+#: applet.js:484
 msgid "Pomodoro ended"
 msgstr "Pomodoro véget ért"
 
-#: applet.js:665
+#: applet.js:607
 msgid "http://en.wikipedia.org/wiki/Pomodoro_Technique"
-msgstr "https://en.wikipedia.org/wiki/Pomodoro_Technique Magyar leírás: https://www.mindenmegtanulhato.hu/a-pomodoro-technika/"
+msgstr ""
+"https://en.wikipedia.org/wiki/Pomodoro_Technique Magyar leírás: https://www."
+"mindenmegtanulhato.hu/a-pomodoro-technika/"
 
 #. metadata.json->name
-#: applet.js:837
+#: applet.js:753
 msgid "Pomodoro Timer"
 msgstr "Pomodoro időmérő"
 
-#: applet.js:848
+#: applet.js:762
 msgid "Completed"
 msgstr "Befejezve"
 
-#: applet.js:861
+#: applet.js:770
 msgid "Reset Timer"
 msgstr "Időzítő ujraindítása"
 
-#: applet.js:873
+#: applet.js:778
 msgid "Reset Counts and Timer"
 msgstr "A számolt ciklusok és az időzítő visszaállítása"
 
-#: applet.js:886
+#: applet.js:787
+msgid "Skip To Next Timer"
+msgstr ""
+
+#: applet.js:794
 msgid "What is this?"
 msgstr "Ez meg mi?"
 
-#: applet.js:943
+#: applet.js:834
 msgid "None"
 msgstr "Nincs"
 
-#: applet.js:973
+#: applet.js:851
 msgid "Switch Off Pomodoro"
 msgstr "Pomodoro kikapcsolása"
 
-#: applet.js:979
+#: applet.js:857
 msgid "Start a new Pomodoro"
 msgstr "Új pomodoro indítása"
 
-#: applet.js:985
+#: applet.js:863
 msgid "Hide"
 msgstr "Elrejtés"
 
-#: applet.js:997
+#: applet.js:875
 msgid "Pomodoro set finished, you deserve a break!"
 msgstr "A pomodoro szett kész, megérdemel egy kis szünetet!"
 
-#: applet.js:1005
+#: applet.js:884
 msgid "Your break is over, start another pomodoro!"
 msgstr "A szünetnek vége, indítson újabb pomodorót!"
 
-#: applet.js:1010
+#: applet.js:890
 #, javascript-format
 msgid "A new pomodoro begins in %s."
 msgstr "Új pomodoro indul %s múlva."
 
-#: applet.js:1021
+#: applet.js:902
 #, javascript-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d perc"
 msgstr[1] "%d perc"
 
-#: applet.js:1022
+#: applet.js:903
 #, javascript-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d másodperc"
 msgstr[1] "%d másodperc"
 
-#: applet.js:1024
+#: applet.js:905
 #, javascript-format
 msgid "%s and %s"
 msgstr "%s és %s"
 
-#: applet.js:1048
+#: applet.js:920
 msgid "Continue Current Pomodoro"
 msgstr "Jelenlegi pomodor folytatása"
 
-#: applet.js:1054
+#: applet.js:926 applet.js:959
 msgid "Pause Pomodoro"
 msgstr "Pomodoro szüneteltetése"
 
-#: applet.js:1065
+#: applet.js:937
 msgid "Short break finished, ready to continue?"
 msgstr "A rövid szünet véget ért, készen áll a folytatásra?"
+
+#: applet.js:953
+#, fuzzy
+msgid "Start break"
+msgstr "Tarts egy rövid szünetet"
+
+#: applet.js:970
+#, fuzzy
+msgid "Pomodoro finished, ready to take a break?"
+msgstr "A pomodoro szett kész, megérdemel egy kis szünetet!"
+
+#. metadata.json->description
+msgid "Great tool for boosted productivity!"
+msgstr "Nagyszerű eszköz a megnövelt produktivitáshoz!"
 
 #. settings-schema.json->head_durations->description
 msgid "Durations (minutes)"
@@ -164,9 +185,19 @@ msgstr "Pomodorók száma hosszú szünet előtt:"
 msgid "Options"
 msgstr "Beállítások"
 
+#. settings-schema.json->start_automatically_on_load->description
+#, fuzzy
+msgid "Start the pomodoro timer as soon as the applet loads"
+msgstr "Pomodoro időzítő megjelenítése a kisalkalmazás panelen"
+
 #. settings-schema.json->show_dialog_messages->description
 msgid "Show Dialog Messages"
 msgstr "Párbeszédüzenetek megjelenítése"
+
+#. settings-schema.json->auto_start_after_pomodoro_ends->description
+#, fuzzy
+msgid "Auto start after a pomodoro ends"
+msgstr "Az automatikus indítás egy rövid szünet után"
 
 #. settings-schema.json->auto_start_after_short_break_ends->description
 msgid "Auto start after a short break ends"
@@ -188,13 +219,19 @@ msgstr "Használjon egy szimbolikus ikont a kisalkalmazás panelen"
 msgid "Show the pomodoro timer in the applet panel"
 msgstr "Pomodoro időzítő megjelenítése a kisalkalmazás panelen"
 
+#. settings-schema.json->hotkey->description
+msgid "Set the keybinding to open the applet menu"
+msgstr ""
+
 #. settings-schema.json->head_sounds->description
 msgid "Sounds"
 msgstr "Hangok"
 
 #. settings-schema.json->sox-info->description
 msgid "Please install 'sox' and restart Cinnamon to use the sound feature!"
-msgstr "Kérjük, telepítse a 'sox' alkalmazást, és indítsa újra a Cinnamont a hangfunkció használatához!"
+msgstr ""
+"Kérjük, telepítse a 'sox' alkalmazást, és indítsa újra a Cinnamont a "
+"hangfunkció használatához!"
 
 #. settings-schema.json->timer_sound->description
 msgid "Play Timer Sound"
@@ -239,6 +276,18 @@ msgstr "Sart hang lejátszása"
 msgid "Start Sound File"
 msgstr "Start hangfájl"
 
-#. metadata.json->description
-msgid "Great tool for boosted productivity!"
-msgstr "Nagyszerű eszköz a megnövelt produktivitáshoz!"
+#. settings-schema.json->head_scripts->description
+msgid "Scripts"
+msgstr ""
+
+#. settings-schema.json->enable_scripts->description
+msgid "Enable scripts"
+msgstr ""
+
+#. settings-schema.json->custom_short_break_script->description
+msgid "Execute this custom script when a short break starts"
+msgstr ""
+
+#. settings-schema.json->custom_long_break_script->description
+msgid "Execute this custom script when a long break starts"
+msgstr ""

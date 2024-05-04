@@ -15,6 +15,7 @@ const Cinnamon = imports.gi.Cinnamon;
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
+const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
 const Gtk = imports.gi.Gtk; //needed for context menu
 const Gio = imports.gi.Gio; // file monitor
@@ -22,7 +23,13 @@ const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const AppletMeta = imports.ui.appletManager.applets['mylauncher@markbokil.com'];
 const AppletDir = imports.ui.appletManager.appletMeta['mylauncher@markbokil.com'].path;
-const PropertiesFile = GLib.build_filenamev([global.userdatadir, 'applets/mylauncher@markbokil.com/mylauncher.properties']);
+
+// When no configuration exists
+const DefaultPropertiesFile = GLib.build_filenamev([global.userdatadir, 'applets/mylauncher@markbokil.com/mylauncher.properties']);
+// Save all changes to this location, load this if the file exists
+const ConfigFilePath = GLib.get_home_dir() + '/.config/cinnamon/spices/' + UUID;
+const PropertiesFile = ConfigFilePath + '/mylauncher.properties';
+
 const SettingsJSON = GLib.build_filenamev([global.userdatadir, 'applets/mylauncher@markbokil.com/settings.js']);
 const HelpURL = "http://markbokil.com/downloads/mylauncher/help.php?appname=mylauncher&version=" + Version;
 const AboutURL = "http://markbokil.com/downloads/mylauncher/about.php?appname=mylauncher&version=" + Version;
@@ -62,9 +69,33 @@ MyApplet.prototype = {
             }
             
             this.set_applet_tooltip(_("My Launcher"));
-            
-            // watch props file for changes
+
+            // Check to see if the config directory exists
+            let configFile = Gio.file_new_for_path(ConfigFilePath);
+            if (!configFile.query_exists(null)) {
+                // Make the directory
+                Util.spawnCommandLine('mkdir ' + ConfigFilePath);
+                // Give it enough time and continue with init
+                Mainloop.timeout_add(2000, () => this.__init(orientation));
+            } else {
+                this.__init(orientation);
+            }
+        } catch (e) {
+            global.logError(e);
+        }
+    },
+
+    __init: function(orientation) {
+        try {
+            // Does the configuration file exist in the user applet config directory?
             let file = Gio.file_new_for_path(PropertiesFile);
+            if (!file.query_exists(null)) {
+                // If not, duplicate the default file and monitor it for changes
+                let defaultFile = Gio.file_new_for_path(DefaultPropertiesFile);
+                defaultFile.copy(file, Gio.FileCopyFlags.OVERWRITE, null, null);
+            }
+
+            // watch props file for changes
             this._monitor = file.monitor(Gio.FileMonitorFlags.NONE, null);
             this._monitor.connect('changed', Lang.bind(this, this._on_file_changed));
             
@@ -175,7 +206,7 @@ MyApplet.prototype = {
    
     callback: function () {
         //global.log(this.cmd);  
-        Main.Util.spawnCommandLine(this.cmd);
+        Util.spawnCommandLine(this.cmd);
     },
 
     _createContextMenu: function () {    
@@ -256,7 +287,7 @@ MyApplet.prototype = {
     },
 
     _editProperties: function () {
-        Main.Util.spawnCommandLine(this._json.OpenFileCmd + " " + PropertiesFile);
+        Util.spawnCommandLine(this._json.OpenFileCmd + " " + PropertiesFile);
     },
         
     _doRefresh: function () {
@@ -265,11 +296,11 @@ MyApplet.prototype = {
     },
     
     _doHelp: function () {
-        Main.Util.spawnCommandLine(this._json.OpenFileCmd + " " + HelpURL);
+        Util.spawnCommandLine(this._json.OpenFileCmd + " " + HelpURL);
     },
     
     _doAbout: function () {
-        Main.Util.spawnCommandLine(this._json.OpenFileCmd + " " + AboutURL);
+        Util.spawnCommandLine(this._json.OpenFileCmd + " " + AboutURL);
     },
         
 };

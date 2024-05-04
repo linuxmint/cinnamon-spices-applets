@@ -1,3 +1,36 @@
+### v7.4.1~20240502
+  * Fixes #5969: Wait 20 seconds before executing the cache update loop, so that mintupdate runs correctly.
+
+### v7.4.0~20240423
+  * Now smoother so as not to be blocked by the cinnamon-spices.linuxmint.com server.
+  * New color when spices are updated or forgotten.
+  * Translations: New .pot file. New fr.po file.
+  * Seems to fix #5941.
+
+
+### v7.3.7~20240421
+  * Refresh action further improved.
+
+### v7.3.6~20240420
+  * Improved Refresh action.
+
+### v7.3.5~20240420
+  * Improved cache refresh management.
+
+### v7.3.4~20240419
+  * Prevents telescoping with mintupdate.
+  * Uses G. Translate to display help.
+
+### v7.3.3~20240416
+  * Code cleanup.
+
+### v7.3.2~20240415
+  * Bugfixes.
+  * Checks again after installing updates.
+
+### v7.3.1~20240415
+  * Takes into account the new location of themes.
+
 ### v7.3.0~20240413
   * Also manage Actions for nemo.
   * Fixes #5683.
