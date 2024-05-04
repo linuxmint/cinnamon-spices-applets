@@ -1,3 +1,6 @@
+### v7.4.2~20240805
+  * Saves memory.
+
 ### v7.4.1~20240502
   * Fixes #5969: Wait 20 seconds before executing the cache update loop, so that mintupdate runs correctly.
 
