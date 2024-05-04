@@ -89,7 +89,6 @@ export class UIForecasts {
 
 				// Day Names
 				const dayName: string = GetDayName(forecastData.date, {
-					locale: config.currentLocale,
 					showDate: config._showForecastDates,
 					tz: weather.location.timeZone
 				});

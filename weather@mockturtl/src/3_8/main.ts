@@ -268,7 +268,7 @@ export class WeatherApplet extends TextIconApplet {
 
 	private SetAppletTooltip(weather: WeatherData, config: Config, override: string) {
 		const location = GenerateLocationText(weather, this.config);
-		const lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
+		const lastUpdatedTime = AwareDateString(weather.date, this.config._show24Hours, DateTime.local().zoneName);
 		let msg = `${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`;
 
 		if (NotEmpty(override)) {

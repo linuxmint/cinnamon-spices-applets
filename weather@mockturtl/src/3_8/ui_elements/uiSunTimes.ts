@@ -91,8 +91,8 @@ export class SunTimesUI {
 			return;
 		}
 
-		this.sunriseLabel.text = (GetHoursMinutes(sunrise, this.app.config.currentLocale, this.app.config._show24Hours, tz));
-		this.sunsetLabel.text = (GetHoursMinutes(sunset, this.app.config.currentLocale, this.app.config._show24Hours, tz));
+		this.sunriseLabel.text = (GetHoursMinutes(sunrise, this.app.config._show24Hours, tz));
+		this.sunsetLabel.text = (GetHoursMinutes(sunset, this.app.config._show24Hours, tz));
         this.actor.show();
     }
 }

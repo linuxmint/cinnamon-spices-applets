@@ -273,7 +273,7 @@ export class CurrentWeather {
 		let value: string | null = null;
 		switch (extra_field.type) {
 			case "percent":
-				value = PercentToLocale(extra_field.value, this.app.config.currentLocale);
+				value = PercentToLocale(extra_field.value);
 				break;
 			case "temperature":
 				value = TempToUserConfig(extra_field.value, this.app.config);
@@ -336,7 +336,7 @@ export class CurrentWeather {
 			return;
 		}
 
-		this.humidityLabel.text = PercentToLocale(humidity, this.app.config.currentLocale);
+		this.humidityLabel.text = PercentToLocale(humidity);
 		this.humidityCaption.remove_style_class_name(STYLE_HIDDEN);
 		this.humidityLabel.remove_style_class_name(STYLE_HIDDEN);
 	}
