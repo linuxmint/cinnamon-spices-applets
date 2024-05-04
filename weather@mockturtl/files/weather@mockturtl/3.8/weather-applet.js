@@ -9381,6 +9381,50 @@ const darkAlertColors = {
 function GetAlertColor(level, lightTheme) {
     return lightTheme ? lightAlertColors[level] : darkAlertColors[level];
 }
+function InferAlertLevel(sender_name, event, description, tags) {
+    switch (sender_name) {
+        case "UK Met Office": {
+            if (tags.includes("Amber"))
+                return "orange";
+            if (tags.includes("Yellow"))
+                return "yellow";
+            if (tags.includes("Red"))
+                return "red";
+            return undefined;
+        }
+        default:
+            return undefined;
+    }
+}
+function InferAlertIcon(sender_name, event, description, tags) {
+    switch (sender_name) {
+        case "UK Met Office": {
+            if (tags.includes("Volcano"))
+                return "volcano-symbolic";
+            if (tags.includes("Earthquake"))
+                return "earthquake-symbolic";
+            if (tags.includes("Tsunami"))
+                return "tsunami-symbolic";
+            if (tags.includes("Hurricane"))
+                return "hurricane-symbolic";
+            if (tags.includes("Tornado"))
+                return "tornado-symbolic";
+            if (tags.includes("Fire"))
+                return "fire-symbolic";
+            if (tags.includes("Flood"))
+                return "flood-symbolic";
+            if (tags.includes("Sandstorm"))
+                return "sandstorm-symbolic";
+            if (tags.includes("Thunderstorm"))
+                return "lightning-symbolic";
+            if (tags.includes("Wind"))
+                return "gale-warning-symbolic";
+            return undefined;
+        }
+        default:
+            return undefined;
+    }
+}
 function GetDistance(lat1, lon1, lat2, lon2) {
     const R = 6371e3;
     const φ1 = lat1 * Math.PI / 180;
@@ -11105,7 +11149,7 @@ class OpenWeatherMap extends BaseProvider {
         return null;
     }
     ParseWeather(json, loc) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
         try {
             const weather = {
                 coord: {
@@ -11207,7 +11251,8 @@ class OpenWeatherMap extends BaseProvider {
             for (const alert of (_o = json.alerts) !== null && _o !== void 0 ? _o : []) {
                 alerts.push({
                     sender_name: alert.sender_name,
-                    level: "yellow",
+                    level: (_p = InferAlertLevel(alert.sender_name, alert.event, alert.description, alert.tags)) !== null && _p !== void 0 ? _p : "orange",
+                    icon: InferAlertIcon(alert.sender_name, alert.event, alert.description, alert.tags),
                     event: alert.event,
                     start: alert.start,
                     end: alert.end,

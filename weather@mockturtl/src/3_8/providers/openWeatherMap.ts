@@ -11,7 +11,7 @@ import { ErrorResponse, HttpError, HttpLib, HTTPParams } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation, AlertData } from "../types";
-import { _, IsLangSupported } from "../utils";
+import { _, InferAlertIcon, InferAlertLevel, IsLangSupported } from "../utils";
 import { BaseProvider } from "./BaseProvider";
 
 /** Stores IDs for "lat,long" string, to be able to construct URLs for OpenWeatherMap Website */
@@ -198,8 +198,8 @@ export class OpenWeatherMap extends BaseProvider {
 			for (const alert of json.alerts ?? []) {
 				alerts.push({
 					sender_name: alert.sender_name,
-					// TODO: calculate level
-					level: "yellow",
+					level: InferAlertLevel(alert.sender_name, alert.event, alert.description, alert.tags) ?? "orange",
+					icon: InferAlertIcon(alert.sender_name, alert.event, alert.description, alert.tags),
 					event: alert.event,
 					start: alert.start,
 					end: alert.end,

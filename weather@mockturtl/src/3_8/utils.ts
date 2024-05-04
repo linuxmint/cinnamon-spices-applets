@@ -1,6 +1,6 @@
 import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
-import { APIUniqueField, AlertLevel, ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
+import { APIUniqueField, AlertData, AlertLevel, ArrowIcons, BuiltinIcons, CustomIcons, SunTime, WeatherData } from "./types";
 import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
@@ -624,6 +624,42 @@ const darkAlertColors: Record<AlertLevel, string> = {
  */
 export function GetAlertColor(level: AlertLevel, lightTheme: boolean): string {
 	return lightTheme ? lightAlertColors[level] : darkAlertColors[level];
+}
+
+export function InferAlertLevel(sender_name: string, event: string, description: string, tags: string[]): AlertLevel | undefined {
+	switch(sender_name) {
+		case "UK Met Office": {
+			if (tags.includes("Amber")) return "orange";
+			if (tags.includes("Yellow")) return "yellow";
+			if (tags.includes("Red")) return "red";
+
+			return undefined;
+		}
+		default:
+			return undefined;
+	}
+}
+
+export function InferAlertIcon(sender_name: string, event: string, description: string, tags: string[]): BuiltinIcons | CustomIcons | undefined {
+	switch(sender_name) {
+		case "UK Met Office": {
+			if (tags.includes("Volcano")) return "volcano-symbolic";
+			if (tags.includes("Earthquake")) return "earthquake-symbolic";
+			if (tags.includes("Tsunami")) return "tsunami-symbolic";
+			if (tags.includes("Hurricane")) return "hurricane-symbolic";
+			if (tags.includes("Tornado")) return "tornado-symbolic";
+			if (tags.includes("Fire")) return "fire-symbolic";
+			if (tags.includes("Flood")) return "flood-symbolic";
+			if (tags.includes("Sandstorm")) return "sandstorm-symbolic";
+			if (tags.includes("Thunderstorm")) return "lightning-symbolic";
+			if (tags.includes("Wind")) return "gale-warning-symbolic";
+
+
+			return undefined;
+		}
+		default:
+			return undefined;
+	}
 }
 
 /**
