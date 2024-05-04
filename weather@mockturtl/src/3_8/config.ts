@@ -119,6 +119,7 @@ export class Config {
 	public readonly _selectedLogPath!: string;
 	public readonly _panelTextOverride!: string;
 	public readonly _tooltipTextOverride!: string;
+	public readonly _showAlerts!: boolean;
 
 	public readonly DataServiceChanged = new Event<Config, Services>();
 	public readonly ApiKeyChanged = new Event<Config, string>();
@@ -155,6 +156,7 @@ export class Config {
 	public readonly DisplayWindAsTextChanged = new Event<Config, boolean>();
 	public readonly AlwaysShowHourlyWeatherChanged = new Event<Config, boolean>();
 	public readonly TooltipTextOverrideChanged = new Event<Config, string>();
+	public readonly ShowAlertsChanged = new Event<Config, string>();
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
@@ -722,7 +724,11 @@ export class Config {
 	TOOLTIP_TEXT_OVERRIDE: {
 		key: "tooltipTextOverride",
 		prop: "TooltipTextOverride"
-	}
+	},
+	SHOW_ALERTS: {
+		key: "showAlerts",
+		prop: "ShowAlerts"
+	},
 } as const;
 
 type ServiceClassMappingType = {

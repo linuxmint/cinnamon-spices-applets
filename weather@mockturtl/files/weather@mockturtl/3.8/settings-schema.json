@@ -77,7 +77,8 @@
 				"refreshInterval",
 				"forecastDays",
 				"forecastHours",
-				"immediatePrecip"
+				"immediatePrecip",
+				"showAlerts"
 			]
 		},
 		"weather-conditions": {
@@ -270,9 +271,15 @@
 	},
 	"immediatePrecip": {
 		"type": "checkbox",
-		"default": false,
+		"default": true,
 		"description": "Enable minutely precipitation forecast",
 		"tooltip": "If you'd like to use this make sure you use your exact coordinates/address as location to help its accuracy. See Feature map on website on support for your provider"
+	},
+	"showAlerts": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Enable displaying weather alerts",
+		"tooltip": "Alerts button will be visible in the popup menu if there are any active alerts for your location."
 	},
 	"temperatureUnit": {
 		"type": "radiogroup",

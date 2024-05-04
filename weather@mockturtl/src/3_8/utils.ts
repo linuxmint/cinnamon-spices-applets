@@ -626,12 +626,24 @@ export function GetAlertColor(level: AlertLevel, lightTheme: boolean): string {
 	return lightTheme ? lightAlertColors[level] : darkAlertColors[level];
 }
 
+/**
+ * TODO: Expand support or remove.
+ * @param sender_name
+ * @param event
+ * @param description
+ * @param tags
+ * @returns
+ */
 export function InferAlertLevel(sender_name: string, event: string, description: string, tags: string[]): AlertLevel | undefined {
+	sender_name = sender_name.trim().toLowerCase();
+	event = event.trim().toLowerCase();
+	tags = tags.map((tag) => tag.trim().toLowerCase());
 	switch(sender_name) {
-		case "UK Met Office": {
-			if (tags.includes("Amber")) return "orange";
-			if (tags.includes("Yellow")) return "yellow";
-			if (tags.includes("Red")) return "red";
+		case "uk met office": {
+			if (event.includes("small craft advisory")) return "yellow";
+			if (event.includes("yellow")) return "yellow";
+			if (event.includes("amber")) return "orange";
+			if (event.includes("red")) return "red";
 
 			return undefined;
 		}
@@ -640,6 +652,14 @@ export function InferAlertLevel(sender_name: string, event: string, description:
 	}
 }
 
+/**
+ * TODO: Expand support or remove.
+ * @param sender_name
+ * @param event
+ * @param description
+ * @param tags
+ * @returns
+ */
 export function InferAlertIcon(sender_name: string, event: string, description: string, tags: string[]): BuiltinIcons | CustomIcons | undefined {
 	switch(sender_name) {
 		case "UK Met Office": {

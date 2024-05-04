@@ -101,7 +101,7 @@ export class UIBar {
 			this.ShowHourlyToggle();
 
 		const levelOrder: AlertData["level"][] = ["yellow", "orange", "red"];
-		if (weather.alerts && weather.alerts.length > 0) {
+		if (config._showAlerts && weather.alerts && weather.alerts.length > 0) {
 			const highestLevel = weather.alerts.reduce((prev, current) => (levelOrder.indexOf(prev.level) > levelOrder.indexOf(current.level)) ? prev : current);
 			this.warningButtonTooltip?.set_text(_("{count} weather alert(s)", { count: weather.alerts.length }));
 			this.warningButtonIcon?.set_style("color: " + GetAlertColor(highestLevel.level, this.app.ui.LightTheme));

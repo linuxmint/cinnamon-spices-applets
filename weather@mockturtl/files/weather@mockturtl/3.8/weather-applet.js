@@ -9382,13 +9382,18 @@ function GetAlertColor(level, lightTheme) {
     return lightTheme ? lightAlertColors[level] : darkAlertColors[level];
 }
 function InferAlertLevel(sender_name, event, description, tags) {
+    sender_name = sender_name.trim().toLowerCase();
+    event = event.trim().toLowerCase();
+    tags = tags.map((tag) => tag.trim().toLowerCase());
     switch (sender_name) {
-        case "UK Met Office": {
-            if (tags.includes("Amber"))
-                return "orange";
-            if (tags.includes("Yellow"))
+        case "uk met office": {
+            if (event.includes("small craft advisory"))
                 return "yellow";
-            if (tags.includes("Red"))
+            if (event.includes("yellow"))
+                return "yellow";
+            if (event.includes("amber"))
+                return "orange";
+            if (event.includes("red"))
                 return "red";
             return undefined;
         }
@@ -15905,6 +15910,7 @@ class Config {
         this.DisplayWindAsTextChanged = new Event();
         this.AlwaysShowHourlyWeatherChanged = new Event();
         this.TooltipTextOverrideChanged = new Event();
+        this.ShowAlertsChanged = new Event();
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.textColorStyle = null;
@@ -16322,7 +16328,11 @@ const Keys = {
     TOOLTIP_TEXT_OVERRIDE: {
         key: "tooltipTextOverride",
         prop: "TooltipTextOverride"
-    }
+    },
+    SHOW_ALERTS: {
+        key: "showAlerts",
+        prop: "ShowAlerts"
+    },
 };
 
 ;// CONCATENATED MODULE: ./src/3_8/loop.ts
@@ -17726,7 +17736,7 @@ class UIBar {
         else
             this.ShowHourlyToggle();
         const levelOrder = ["yellow", "orange", "red"];
-        if (weather.alerts && weather.alerts.length > 0) {
+        if (config._showAlerts && weather.alerts && weather.alerts.length > 0) {
             const highestLevel = weather.alerts.reduce((prev, current) => (levelOrder.indexOf(prev.level) > levelOrder.indexOf(current.level)) ? prev : current);
             (_h = this.warningButtonTooltip) === null || _h === void 0 ? void 0 : _h.set_text(_("{count} weather alert(s)", { count: weather.alerts.length }));
             (_j = this.warningButtonIcon) === null || _j === void 0 ? void 0 : _j.set_style("color: " + GetAlertColor(highestLevel.level, this.app.ui.LightTheme));
@@ -18187,6 +18197,7 @@ class WeatherApplet extends TextIconApplet {
         this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+        this.config.ShowAlertsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
     }
     async Refresh(options) {
