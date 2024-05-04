@@ -9375,14 +9375,18 @@ function ConstructJsLocale(locales) {
     return null;
 }
 const lightAlertColors = {
-    "yellow": "#FFD700",
-    "orange": "#FFA500",
-    "red": "#FF0000"
+    "minor": "#FFD700",
+    "moderate": "#FFD700",
+    "severe": "#FFA500",
+    "extreme": "#FF0000",
+    "unknown": "#FFFFFF"
 };
 const darkAlertColors = {
-    "yellow": "#FFD700",
-    "orange": "#FFA500",
-    "red": "#FF0000"
+    "minor": "#FFD700",
+    "moderate": "#FFD700",
+    "severe": "#FFA500",
+    "extreme": "#FF0000",
+    "unknown": "#FFFFFF"
 };
 function GetAlertColor(level, lightTheme) {
     return lightTheme ? lightAlertColors[level] : darkAlertColors[level];
@@ -9394,17 +9398,17 @@ function InferAlertLevel(sender_name, event, description, tags) {
     switch (sender_name) {
         case "uk met office": {
             if (event.includes("small craft advisory"))
-                return "yellow";
+                return "minor";
             if (event.includes("yellow"))
-                return "yellow";
+                return "moderate";
             if (event.includes("amber"))
-                return "orange";
+                return "severe";
             if (event.includes("red"))
-                return "red";
-            return undefined;
+                return "extreme";
+            return "unknown";
         }
         default:
-            return undefined;
+            return "unknown";
     }
 }
 function InferAlertIcon(sender_name, event, description, tags) {
@@ -11264,11 +11268,8 @@ class OpenWeatherMap extends BaseProvider {
                     sender_name: alert.sender_name,
                     level: (_p = InferAlertLevel(alert.sender_name, alert.event, alert.description, alert.tags)) !== null && _p !== void 0 ? _p : "orange",
                     icon: InferAlertIcon(alert.sender_name, alert.event, alert.description, alert.tags),
-                    event: alert.event,
-                    start: alert.start,
-                    end: alert.end,
+                    title: alert.event,
                     description: alert.description,
-                    tags: alert.tags
                 });
             }
             weather.alerts = alerts;
@@ -11563,7 +11564,40 @@ function IsCovered(payload) {
     return payload.properties.meta.radar_coverage == "ok";
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/alert.ts
+
+async function GetMETNorwayAlerts(cancellable, lat, lon) {
+    const response = await HttpLib.Instance.LoadJsonSimple({
+        url: "https://api.met.no/weatherapi/metalerts/1.1/.json",
+        cancellable: cancellable,
+    });
+    if (response === null) {
+        return null;
+    }
+    const result = [];
+    for (const feature of response.features) {
+        if (!InsideGeoJsonPolygon(feature.geometry.coordinates, lat, lon)) {
+            continue;
+        }
+        result.push(feature.properties);
+    }
+    return result;
+}
+function InsideGeoJsonPolygon(polygon, lat, lon) {
+    let i;
+    let j;
+    let c = false;
+    for (i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+        if (((polygon[i][1] > lat) != (polygon[j][1] > lat)) &&
+            (lon < (polygon[j][0] - polygon[i][0]) * (lat - polygon[i][1]) / (polygon[j][1] - polygon[i][1]) + polygon[i][0])) {
+            c = !c;
+        }
+    }
+    return c;
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/provider.ts
+
 
 
 
@@ -11586,7 +11620,7 @@ class MetNorway extends BaseProvider {
         this.supportHourlyPrecipVolume = true;
         this.baseUrl = "https://api.met.no/weatherapi";
     }
-    async GetWeather(loc, cancellable) {
+    async GetWeather(loc, cancellable, config) {
         const [forecast, nowcast] = await Promise.all([
             HttpLib.Instance.LoadJsonSimple({
                 url: `${this.baseUrl}/locationforecast/2.0/complete`,
@@ -11634,6 +11668,38 @@ class MetNorway extends BaseProvider {
                     }
                     result.immediatePrecipitation = immediate;
                 }
+            }
+        }
+        if (config._showAlerts) {
+            const alerts = await GetMETNorwayAlerts(cancellable, loc.lat, loc.lon);
+            if (alerts == null) {
+                return null;
+            }
+            result.alerts = [];
+            for (const alert of alerts) {
+                let severity;
+                switch (alert.severity) {
+                    case "Extreme":
+                        severity = "extreme";
+                        break;
+                    case "Severe":
+                        severity = "severe";
+                        break;
+                    case "Moderate":
+                        severity = "moderate";
+                        break;
+                    case "Minor":
+                        severity = "minor";
+                        break;
+                    default:
+                        severity = "unknown";
+                }
+                result.alerts.push({
+                    description: `${alert.description}\n\n${alert.instruction}`,
+                    level: severity,
+                    title: alert.title,
+                    sender_name: "MET Norway",
+                });
             }
         }
         return result;
@@ -17738,7 +17804,7 @@ class UIBar {
             this.HideHourlyToggle();
         else
             this.ShowHourlyToggle();
-        const levelOrder = ["yellow", "orange", "red"];
+        const levelOrder = ["unknown", "minor", "moderate", "severe", "extreme"];
         if (config._showAlerts && weather.alerts && weather.alerts.length > 0) {
             const highestLevel = weather.alerts.reduce((prev, current) => (levelOrder.indexOf(prev.level) > levelOrder.indexOf(current.level)) ? prev : current);
             (_h = this.warningButtonTooltip) === null || _h === void 0 ? void 0 : _h.set_text(_("{count} weather alert(s)", { count: weather.alerts.length }));
@@ -18222,7 +18288,7 @@ class WeatherApplet extends TextIconApplet {
             if (this.provider.needsApiKey && this.config.NoApiKey()) {
                 return "no key";
             }
-            let weatherInfo = await this.provider.GetWeather(location, cancellable);
+            let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config);
             if (weatherInfo == null) {
                 return "no weather";
             }

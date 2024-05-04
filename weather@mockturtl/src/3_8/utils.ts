@@ -609,15 +609,21 @@ export function ConstructJsLocale(locales: string[]): string | null {
 }
 
 const lightAlertColors: Record<AlertLevel, string> = {
-	"yellow": "#FFD700",
-	"orange": "#FFA500",
-	"red": "#FF0000"
+	// TODO: decide on minor color
+	"minor": "#FFD700",
+	"moderate": "#FFD700",
+	"severe": "#FFA500",
+	"extreme": "#FF0000",
+	"unknown": "#FFFFFF"
 }
 
 const darkAlertColors: Record<AlertLevel, string> = {
-	"yellow": "#FFD700",
-	"orange": "#FFA500",
-	"red": "#FF0000"
+	// TODO: decide on minor color
+	"minor": "#FFD700",
+	"moderate": "#FFD700",
+	"severe": "#FFA500",
+	"extreme": "#FF0000",
+	"unknown": "#FFFFFF"
 }
 
 /**
@@ -637,21 +643,21 @@ export function GetAlertColor(level: AlertLevel, lightTheme: boolean): string {
  * @param tags
  * @returns
  */
-export function InferAlertLevel(sender_name: string, event: string, description: string, tags: string[]): AlertLevel | undefined {
+export function InferAlertLevel(sender_name: string, event: string, description: string, tags: string[]): AlertLevel {
 	sender_name = sender_name.trim().toLowerCase();
 	event = event.trim().toLowerCase();
 	tags = tags.map((tag) => tag.trim().toLowerCase());
 	switch(sender_name) {
 		case "uk met office": {
-			if (event.includes("small craft advisory")) return "yellow";
-			if (event.includes("yellow")) return "yellow";
-			if (event.includes("amber")) return "orange";
-			if (event.includes("red")) return "red";
+			if (event.includes("small craft advisory")) return "minor";
+			if (event.includes("yellow")) return "moderate";
+			if (event.includes("amber")) return "severe";
+			if (event.includes("red")) return "extreme";
 
-			return undefined;
+			return "unknown";
 		}
 		default:
-			return undefined;
+			return "unknown";
 	}
 }
 

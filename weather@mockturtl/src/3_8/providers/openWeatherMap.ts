@@ -200,11 +200,8 @@ export class OpenWeatherMap extends BaseProvider {
 					sender_name: alert.sender_name,
 					level: InferAlertLevel(alert.sender_name, alert.event, alert.description, alert.tags) ?? "orange",
 					icon: InferAlertIcon(alert.sender_name, alert.event, alert.description, alert.tags),
-					event: alert.event,
-					start: alert.start,
-					end: alert.end,
+					title: alert.event,
 					description: alert.description,
-					tags: alert.tags
 				})
 			}
 			weather.alerts = alerts;

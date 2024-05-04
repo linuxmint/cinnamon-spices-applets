@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { GetTimesResult } from "suncalc";
-import { Services } from "./config";
+import { Config, Services } from "./config";
 
 export type correctGetTimes = (date: Date, latitude: number, longitude: number, height?: number) => GetTimesResult;
 export interface SunTime {
@@ -22,7 +22,7 @@ export interface WeatherProvider {
 	readonly supportHourlyPrecipChance: boolean;
     readonly supportHourlyPrecipVolume: boolean;
 
-	GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null>;
+	GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null>;
 }
 
 export const enum RefreshState {
@@ -125,7 +125,7 @@ export interface ForecastData {
 	condition: Condition
 }
 
-export type AlertLevel = "yellow" | "orange" | "red";
+export type AlertLevel = "minor" | "moderate" | "severe" | "extreme" | "unknown";
 
 export interface AlertData {
 	sender_name: string;
@@ -134,11 +134,8 @@ export interface AlertData {
 	 */
 	level: AlertLevel;
 	icon?: BuiltinIcons | CustomIcons | undefined;
-	event: string;
-	start: number;
-	end: number;
+	title: string;
 	description: string;
-	tags: string[];
 }
 
 export type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";

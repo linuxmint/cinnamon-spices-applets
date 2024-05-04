@@ -28,20 +28,20 @@ You can also save locations what you entered manually and switch between them in
 
 ### Weather providers to choose from
 
-| Weather Providers          | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Immediate Forecast | Alerts | Other information             |
-| -------------------------- | ------------- | --------------------- | ---------------------- | ------------------ | ------ | ----------------------------- |
-| **OpenWeatherMap**         | No            | 8                     | 48                     | Yes                | Yes    | Default provider              |
-| **MET Norway**             | No            | 10                    | 48                     | Depends            | No     | --                            |
-| **DMI Denmark**            | No            | 10                    | 48                     | No                 | No     | --                            |
-| **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | No     | --                            |
-| **Met Office UK**          | No            | 5                     | 36                     | No                 | No     | --                            |
-| **US National Weather**    | No            | 7                     | 156                    | No                 | No     | --                            |
-| **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | No     | --                            |
-| **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | No     | --                            |
-| **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | No     | Previously known as Climacell |
-| **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | No     | Limited free calls            |
-| **Weather Underground**    | Yes           | 5                     | 0                      | No                 | No     | --                            |
-| **Pirate Weather**         | Yes           | 7                     | 168                    | Yes                | No     | --                            |
+| Weather Providers          | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Immediate Forecast | Alerts  | Other information             |
+| -------------------------- | ------------- | --------------------- | ---------------------- | ------------------ | ------- | ----------------------------- |
+| **OpenWeatherMap**         | No            | 8                     | 48                     | Yes                | Yes     | Default provider              |
+| **MET Norway**             | No            | 10                    | 48                     | Depends            | Depends | --                            |
+| **DMI Denmark**            | No            | 10                    | 48                     | No                 | No      | --                            |
+| **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | No      | --                            |
+| **Met Office UK**          | No            | 5                     | 36                     | No                 | No      | --                            |
+| **US National Weather**    | No            | 7                     | 156                    | No                 | No      | --                            |
+| **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | No      | --                            |
+| **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | No      | --                            |
+| **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | No      | Previously known as Climacell |
+| **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | No      | Limited free calls            |
+| **Weather Underground**    | Yes           | 5                     | 0                      | No                 | No      | --                            |
+| **Pirate Weather**         | Yes           | 7                     | 168                    | Yes                | No      | --                            |
 
 ### OpenWeatherMap
 
@@ -56,6 +56,8 @@ Free meteorological data and forecasts from the Norwegian Meteorological Institu
 * Nowcast (Immediate precipitation and granular observations) is not available outside Norway. In that case, observations are shown for the next hour.
 
 * Daily forecasts are generated from 6 hour forecasts (for every hour), so there is a possibility that they are inaccurate sometimes.
+
+* Alerts are only available in Norway
 
 ### DMI Denmark
 
