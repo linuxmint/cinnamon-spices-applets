@@ -9368,6 +9368,19 @@ function ConstructJsLocale(locale) {
         return null;
     return result;
 }
+const lightAlertColors = {
+    "yellow": "#FFD700",
+    "orange": "#FFA500",
+    "red": "#FF0000"
+};
+const darkAlertColors = {
+    "yellow": "#FFD700",
+    "orange": "#FFA500",
+    "red": "#FF0000"
+};
+function GetAlertColor(level, lightTheme) {
+    return lightTheme ? lightAlertColors[level] : darkAlertColors[level];
+}
 function GetDistance(lat1, lon1, lat2, lon2) {
     const R = 6371e3;
     const φ1 = lat1 * Math.PI / 180;
@@ -17614,14 +17627,7 @@ class UIBar {
             var _a;
             if (((_a = this.app.CurrentData) === null || _a === void 0 ? void 0 : _a.alerts) == null)
                 return;
-            const alertWindowPath = this.app.AppletDir + "/AlertsWindow.py";
-            logger_Logger.Info("Alerts Window opened.");
-            const result = await SpawnProcess([alertWindowPath, JSON.stringify(this.app.CurrentData.alerts)]);
-            logger_Logger.Info("Alerts Window closed.");
-            if (!result.Success)
-                logger_Logger.Error(`Error occurred while opening Alerts Window: ${JSON.stringify(result.ErrorData)}`);
-            else
-                logger_Logger.Debug(`Alerts Window output: ${JSON.stringify(result.Data)}`);
+            await this.PushAlertWindow(this.app.CurrentData.alerts.map(alert => (Object.assign(Object.assign({}, alert), { color: GetAlertColor(alert.level, this.app.ui.LightTheme) }))));
         };
         this.app = app;
         this.actor = new uiBar_BoxLayout({ vertical: false, style_class: STYLE_BAR });
@@ -17644,7 +17650,7 @@ class UIBar {
         this._timestamp.label = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
         if (this._timestamp == null || this.providerCreditButton == null || ((_c = (_a = this.providerCreditButton) === null || _a === void 0 ? void 0 : (_b = _a.actor).is_finalized) === null || _c === void 0 ? void 0 : _c.call(_b)))
             return false;
         let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
@@ -17677,13 +17683,13 @@ class UIBar {
         const levelOrder = ["yellow", "orange", "red"];
         if (weather.alerts && weather.alerts.length > 0) {
             const highestLevel = weather.alerts.reduce((prev, current) => (levelOrder.indexOf(prev.level) > levelOrder.indexOf(current.level)) ? prev : current);
-            (_h = this.warningButton) === null || _h === void 0 ? void 0 : _h.actor.show();
-            (_j = this.warningButtonTooltip) === null || _j === void 0 ? void 0 : _j.set_text(_("{count} weather alert(s)", { count: weather.alerts.length }));
-            global.log(highestLevel.level);
-            (_k = this.warningButtonIcon) === null || _k === void 0 ? void 0 : _k.set_style("color: " + highestLevel.level);
+            (_h = this.warningButtonTooltip) === null || _h === void 0 ? void 0 : _h.set_text(_("{count} weather alert(s)", { count: weather.alerts.length }));
+            (_j = this.warningButtonIcon) === null || _j === void 0 ? void 0 : _j.set_style("color: " + GetAlertColor(highestLevel.level, this.app.ui.LightTheme));
+            (_k = this.warningButtonIcon) === null || _k === void 0 ? void 0 : _k.set_icon_name((_l = highestLevel.icon) !== null && _l !== void 0 ? _l : "dialog-warning-symbolic");
+            (_m = this.warningButton) === null || _m === void 0 ? void 0 : _m.actor.show();
         }
         else {
-            (_l = this.warningButton) === null || _l === void 0 ? void 0 : _l.actor.hide();
+            (_o = this.warningButton) === null || _o === void 0 ? void 0 : _o.actor.hide();
         }
         return true;
     }
@@ -17764,6 +17770,16 @@ class UIBar {
         var _a;
         (_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.show();
     }
+    async PushAlertWindow(alerts) {
+        const alertWindowPath = this.app.AppletDir + "/AlertsWindow.py";
+        logger_Logger.Info("Alerts Window opened.");
+        const result = await SpawnProcess([alertWindowPath, JSON.stringify(alerts)]);
+        logger_Logger.Info("Alerts Window closed.");
+        if (!result.Success)
+            logger_Logger.Error(`Error occurred while opening Alerts Window: ${JSON.stringify(result.ErrorData)}`);
+        else
+            logger_Logger.Debug(`Alerts Window output: ${JSON.stringify(result.Data)}`);
+    }
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiSeparator.ts
@@ -17800,6 +17816,9 @@ const { themeManager } = imports.ui.main;
 const { SignalManager: ui_SignalManager } = imports.misc.signalManager;
 const STYLE_WEATHER_MENU = 'weather-menu';
 class UI {
+    get LightTheme() {
+        return this.lightTheme;
+    }
     constructor(app, orientation) {
         this.lightTheme = false;
         this.noHourlyWeather = false;

@@ -3,8 +3,8 @@ import { Config, DistanceUnits } from "../config";
 import { SIGNAL_CLICKED, ELLIPSIS } from "../consts";
 import { Event } from "../lib/events";
 import { WeatherApplet } from "../main";
-import { CustomIcons, WeatherData, WeatherProvider, AlertData } from "../types";
-import { _, AwareDateString, MetreToUserUnits } from "../utils";
+import { CustomIcons, WeatherData, WeatherProvider, AlertData, BuiltinIcons } from "../types";
+import { _, AwareDateString, GetAlertColor, MetreToUserUnits } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { DateTime } from "luxon";
 import { Logger } from "../lib/logger";
@@ -13,6 +13,10 @@ const { BoxLayout, IconType, Bin, Icon, Align, Button, Side } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
 
 const STYLE_BAR = 'bottombar'
+
+interface AlertWindowAlert extends AlertData {
+	color: string;
+}
 
 /** Bottom bar with timestamp, button and credits */
 export class UIBar {
@@ -98,12 +102,11 @@ export class UIBar {
 
 		const levelOrder: AlertData["level"][] = ["yellow", "orange", "red"];
 		if (weather.alerts && weather.alerts.length > 0) {
-			// TODO: choose color depending on dark/light theme.
 			const highestLevel = weather.alerts.reduce((prev, current) => (levelOrder.indexOf(prev.level) > levelOrder.indexOf(current.level)) ? prev : current);
-			this.warningButton?.actor.show();
 			this.warningButtonTooltip?.set_text(_("{count} weather alert(s)", { count: weather.alerts.length }));
-			global.log(highestLevel.level)
-			this.warningButtonIcon?.set_style("color: " + highestLevel.level);
+			this.warningButtonIcon?.set_style("color: " + GetAlertColor(highestLevel.level, this.app.ui.LightTheme));
+			this.warningButtonIcon?.set_icon_name(highestLevel.icon ?? "dialog-warning-symbolic");
+			this.warningButton?.actor.show();
 		}
 		else {
 			this.warningButton?.actor.hide();
@@ -208,10 +211,17 @@ export class UIBar {
 		if (this.app.CurrentData?.alerts == null)
 			return;
 
+		await this.PushAlertWindow(this.app.CurrentData.alerts.map(alert => ({
+			...alert,
+			color: GetAlertColor(alert.level, this.app.ui.LightTheme)
+		})));
+	}
+
+	private async PushAlertWindow(alerts: AlertWindowAlert[]) {
 		const alertWindowPath = this.app.AppletDir + "/AlertsWindow.py";
 
 		Logger.Info("Alerts Window opened.");
-		const result = await SpawnProcess([alertWindowPath, JSON.stringify(this.app.CurrentData.alerts)]);
+		const result = await SpawnProcess([alertWindowPath, JSON.stringify(alerts)]);
 		Logger.Info("Alerts Window closed.");
 		if (!result.Success)
 			Logger.Error(`Error occurred while opening Alerts Window: ${JSON.stringify(result.ErrorData)}`);

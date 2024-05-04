@@ -18,6 +18,7 @@ class Alert(TypedDict):
 	end: int
 	description: str
 	level: Literal["yellow", "orange", "red"]
+	color: str
 	icon: Optional[str]
 
 
@@ -109,7 +110,7 @@ class AlertsWindow(Gtk.Window):
 	def create_alert_icon(self, alert: Alert) -> Gtk.Image:
 		image = Gtk.Image(valign=Gtk.Align.START, halign=Gtk.Align.START)
 		image.set_from_icon_name(alert.get("icon", None) or "dialog-warning-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
-		image.modify_fg(Gtk.StateType.NORMAL, Gdk.Color.parse("yellow")[1])
+		image.modify_fg(Gtk.StateType.NORMAL, Gdk.Color.parse(alert["color"])[1])
 
 		return image
 

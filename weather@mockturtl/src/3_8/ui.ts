@@ -35,6 +35,9 @@ export class UI {
 
 	// State variables
 	private lightTheme: boolean = false;
+	public get LightTheme(): boolean {
+		return this.lightTheme;
+	}
 
 	private readonly App: WeatherApplet;
 

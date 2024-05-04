@@ -125,12 +125,15 @@ export interface ForecastData {
 	condition: Condition
 }
 
+export type AlertLevel = "yellow" | "orange" | "red";
+
 export interface AlertData {
 	sender_name: string;
 	/**
 	 * Try to infer the level from the event string.
 	 */
-	level: "yellow" | "orange" | "red";
+	level: AlertLevel;
+	icon?: BuiltinIcons | CustomIcons | undefined;
 	event: string;
 	start: number;
 	end: number;
