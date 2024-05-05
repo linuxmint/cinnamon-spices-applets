@@ -3,7 +3,12 @@ const { Align, BoxLayout } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter;
 const { UiElement } = require('./js/ui/elements/uiElement');
 const { IconTextElementGenerator } = require('./js/ui/elements/iconTextElementGenerator');
-const { Translator } = require('./js/translator');
+
+// translations
+const UUID = 'moonphase@techi-freki';
+const GetText = imports.gettext;
+const { get_home_dir } = imports.gi.GLib;
+GetText.bindtextdomain(UUID, get_home_dir() + "/.local/share/locale");
 
 class CurrentPhaseUi extends UiElement {
     constructor (app) {
@@ -14,12 +19,17 @@ class CurrentPhaseUi extends UiElement {
             y_align: Align.MIDDLE
         });
         this.elementGenerator = new IconTextElementGenerator();
-        this.translator = new Translator(this.app.metadata.uuid);
+    }
+
+    _(str) {
+        const translated = GetText.dgettext(UUID, str);
+        if (translated !== str) return translated;
+        return str;
     }
 
     create() {
         if (!this.app.showCurrentPhaseInfo) return;
-        const illumLabel = this.elementGenerator.generateLabel(`${ Math.floor(this.app.moon.illumination.fraction * 100 * 100) / 100 }% ` + this.translator.translate('illumination'));
+        const illumLabel = this.elementGenerator.generateLabel(`${ Math.floor(this.app.moon.illumination.fraction * 100 * 100) / 100 }% ` + this._('illumination'));
         const illumLayout = this.elementGenerator.generateLayout([illumLabel], false);
 
         const phaseLabel = this.elementGenerator.generateLabel(this.app.moon.currentPhaseName);

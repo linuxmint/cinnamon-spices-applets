@@ -3,7 +3,12 @@ const { IconTextElementGenerator } = require('./js/ui/elements/iconTextElementGe
 const { UiElement } = require('./js/ui/elements/uiElement');
 const { RiseSetElement } = require('./js/ui/elements/riseSetElement');
 const { Calculator } = require('./js/calc');
-const { Translator } = require('./js/translator');
+
+// translations
+const UUID = 'moonphase@techi-freki';
+const GetText = imports.gettext;
+const { get_home_dir } = imports.gi.GLib;
+GetText.bindtextdomain(UUID, get_home_dir() + "/.local/share/locale");
 
 class NoRiseSetElement extends UiElement {
     constructor(app) {
@@ -16,7 +21,12 @@ class NoRiseSetElement extends UiElement {
         this.iconSize = 0;
         this.moonRise = true;
         this.tomorrowsRiseSet = calc.getRiseSetTimes();
-        this.translator = new Translator(app.metadata.uuid);
+    }
+
+    _(str) {
+        const translated = GetText.dgettext(UUID, str);
+        if (translated !== str) return translated;
+        return str;
     }
 
     create() {
@@ -41,7 +51,7 @@ class NoRiseSetElement extends UiElement {
         const riseElement = new RiseSetElement(this.app);
         riseElement.iconName = this.app.moon.iconSet.moonRise;
         riseElement.iconSize = 64;
-        riseElement.header = this.translator.translate('Next Moonrise');
+        riseElement.header = this._('Next Moonrise');
         riseElement.dateObject = this.tomorrowsRiseSet.rise;
         riseElement.angle = this.tomorrowsRiseSet.riseAzimuth;
         riseElement.create();
@@ -53,7 +63,7 @@ class NoRiseSetElement extends UiElement {
         const setElement = new RiseSetElement(this.app);
         setElement.iconName = this.app.moon.iconSet.moonSet;
         setElement.iconSize = 64;
-        setElement.header = this.translator.translate('Next Moonset');
+        setElement.header = this._('Next Moonset');
         setElement.dateObject = this.tomorrowsRiseSet.set;
         setElement.angle = this.tomorrowsRiseSet.setAzimuth;
         setElement.create();

@@ -1,4 +1,3 @@
-const { Translator } = require('./js/translator');
 const { IconTextElementGenerator } = require('./js/ui/elements/iconTextElementGenerator');
 const { margin5 } = require('./js/ui/styles');
 const { UiElement } = require('./js/ui/elements/uiElement');
@@ -6,6 +5,12 @@ const { RiseSetElement } = require('./js/ui/elements/riseSetElement');
 const { NoRiseSetElement } = require('./js/ui/elements/noRiseSetElement');
 const { Align, BoxLayout, Label } = imports.gi.St;
 const { ActorAlign } = imports.gi.Clutter
+
+// translations
+const UUID = 'moonphase@techi-freki';
+const GetText = imports.gettext;
+const { get_home_dir } = imports.gi.GLib;
+GetText.bindtextdomain(UUID, get_home_dir() + "/.local/share/locale");
 
 class RiseSetUi extends UiElement {
     constructor(app) {
@@ -18,7 +23,12 @@ class RiseSetUi extends UiElement {
         this.alwaysUp = this.app.moon.riseSetTimes.alwaysUp;
         this.alwaysDown = this.app.moon.riseSetTimes.alwaysDown;
         this.elementGenerator = new IconTextElementGenerator();
-        this.translator = new Translator(this.app.metadata.uuid);
+    }
+
+    _(str) {
+        const translated = GetText.dgettext(UUID, str);
+        if (translated !== str) return translated;
+        return str;
     }
 
     create() {
@@ -42,7 +52,7 @@ class RiseSetUi extends UiElement {
         const noRiseElement = new NoRiseSetElement(this.app);
         noRiseElement.iconName = this.app.moon.iconSet.noMoonRise;
         noRiseElement.iconSize = 64;
-        noRiseElement.label = this.translator.translate('The moon is always down and will not rise today');
+        noRiseElement.label = this._('The moon is always down and will not rise today');
         noRiseElement.create();
 
         this.actor.add_actor(noRiseElement.actor);
@@ -52,7 +62,7 @@ class RiseSetUi extends UiElement {
         const noSetElement = new NoRiseSetElement(this.app);
         noSetElement.iconName = this.app.moon.iconSet.noMoonSet;
         noSetElement.iconSize = 64;
-        noSetElement.label = this.translator.translate('The moon is always up and will not set today');
+        noSetElement.label = this._('The moon is always up and will not set today');
         noSetElement.moonRise = false;
         noSetElement.create();
 
@@ -63,21 +73,21 @@ class RiseSetUi extends UiElement {
         const riseElement = new RiseSetElement(this.app);
         riseElement.iconName = this.app.moon.iconSet.moonRise;
         riseElement.iconSize = 64;
-        riseElement.header = this.translator.translate('Moonrise');
+        riseElement.header = this._('Moonrise');
         riseElement.dateObject = this.app.moon.riseSetTimes.rise;
         riseElement.angle = this.app.moon.riseSetTimes.riseAzimuth;
 
         const transitElement = new RiseSetElement(this.app);
         transitElement.iconName = this.app.moon.iconSet.nightClear;
         transitElement.iconSize = 48;
-        transitElement.header = this.translator.translate('Lunar Noon');
+        transitElement.header = this._('Lunar Noon');
         transitElement.dateObject = this.app.moon.riseSetTimes.transit;
         transitElement.angle = this.app.moon.riseSetTimes.transitAzimuth;
 
         const setElement = new RiseSetElement(this.app);
         setElement.iconName = this.app.moon.iconSet.moonSet;
         setElement.iconSize = 64;
-        setElement.header = this.translator.translate('Moonset');
+        setElement.header = this._('Moonset');
         setElement.dateObject = this.app.moon.riseSetTimes.set;
         setElement.angle = this.app.moon.riseSetTimes.setAzimuth;
 
