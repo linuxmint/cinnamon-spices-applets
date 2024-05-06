@@ -11566,7 +11566,60 @@ function IsCovered(payload) {
     return payload.properties.meta.radar_coverage == "ok";
 }
 
+;// CONCATENATED MODULE: ./src/3_8/lib/polygons.ts
+function PointInsidePolygon(point, vs) {
+    const maxX = Math.max(...vs.map(v => v[0]));
+    const minX = Math.min(...vs.map(v => v[0]));
+    const maxY = Math.max(...vs.map(v => v[1]));
+    const minY = Math.min(...vs.map(v => v[1]));
+    if (point[0] < minX || point[0] > maxX || point[1] < minY || point[1] > maxY) {
+        return false;
+    }
+    let intersections = 0;
+    let padding = 0.1;
+    const pv1 = [(minX - padding / point[0]), (minY - padding / point[1])];
+    const pv2 = point;
+    for (let i = 0; i < vs.length - 1; i++) {
+        const v1 = vs[i];
+        const v2 = vs[i + 1];
+        if (areIntersecting(v1[0], v1[1], v2[0], v2[1], pv1[0], pv1[1], pv2[0], pv2[1]))
+            intersections++;
+    }
+    if ((intersections & 1) == 1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function areIntersecting(v1x1, v1y1, v1x2, v1y2, v2x1, v2y1, v2x2, v2y2) {
+    let d1, d2;
+    let a1, a2, b1, b2, c1, c2;
+    a1 = v1y2 - v1y1;
+    b1 = v1x1 - v1x2;
+    c1 = (v1x2 * v1y1) - (v1x1 * v1y2);
+    d1 = (a1 * v2x1) + (b1 * v2y1) + c1;
+    d2 = (a1 * v2x2) + (b1 * v2y2) + c1;
+    if (d1 > 0 && d2 > 0)
+        return false;
+    if (d1 < 0 && d2 < 0)
+        return false;
+    a2 = v2y2 - v2y1;
+    b2 = v2x1 - v2x2;
+    c2 = (v2x2 * v2y1) - (v2x1 * v2y2);
+    d1 = (a2 * v1x1) + (b2 * v1y1) + c2;
+    d2 = (a2 * v1x2) + (b2 * v1y2) + c2;
+    if (d1 > 0 && d2 > 0)
+        return false;
+    if (d1 < 0 && d2 < 0)
+        return false;
+    if ((a1 * b2) - (a2 * b1) == 0.0)
+        return false;
+    return true;
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/alert.ts
+
 
 
 async function GetMETNorwayAlerts(cancellable, lat, lon) {
@@ -11581,7 +11634,7 @@ async function GetMETNorwayAlerts(cancellable, lat, lon) {
     for (const feature of response.features) {
         let isInside = false;
         for (const geometry of feature.geometry.coordinates) {
-            if (inside([lon, lat], geometry)) {
+            if (PointInsidePolygon([lon, lat], geometry)) {
                 isInside = true;
                 break;
             }
@@ -11645,57 +11698,6 @@ function EventToIcon(event) {
             logger_Logger.Info(`Unknown MET Norway event type: ${event}`);
             return undefined;
     }
-}
-function inside(point, vs) {
-    const maxX = Math.max(...vs.map(v => v[0]));
-    const minX = Math.min(...vs.map(v => v[0]));
-    const maxY = Math.max(...vs.map(v => v[1]));
-    const minY = Math.min(...vs.map(v => v[1]));
-    if (point[0] < minX || point[0] > maxX || point[1] < minY || point[1] > maxY) {
-        global.log("Completely outside");
-        return false;
-    }
-    let intersections = 0;
-    let padding = 0.1;
-    const pv1 = [(minX - padding / point[0]), (minY - padding / point[1])];
-    const pv2 = point;
-    for (let i = 0; i < vs.length - 1; i++) {
-        const v1 = vs[i];
-        const v2 = vs[i + 1];
-        if (areIntersecting(v1[0], v1[1], v2[0], v2[1], pv1[0], pv1[1], pv2[0], pv2[1]))
-            intersections++;
-    }
-    if ((intersections & 1) == 1) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-function areIntersecting(v1x1, v1y1, v1x2, v1y2, v2x1, v2y1, v2x2, v2y2) {
-    let d1, d2;
-    let a1, a2, b1, b2, c1, c2;
-    a1 = v1y2 - v1y1;
-    b1 = v1x1 - v1x2;
-    c1 = (v1x2 * v1y1) - (v1x1 * v1y2);
-    d1 = (a1 * v2x1) + (b1 * v2y1) + c1;
-    d2 = (a1 * v2x2) + (b1 * v2y2) + c1;
-    if (d1 > 0 && d2 > 0)
-        return false;
-    if (d1 < 0 && d2 < 0)
-        return false;
-    a2 = v2y2 - v2y1;
-    b2 = v2x1 - v2x2;
-    c2 = (v2x2 * v2y1) - (v2x1 * v2y2);
-    d1 = (a2 * v1x1) + (b2 * v1y1) + c2;
-    d2 = (a2 * v1x2) + (b2 * v1y2) + c2;
-    if (d1 > 0 && d2 > 0)
-        return false;
-    if (d1 < 0 && d2 < 0)
-        return false;
-    if ((a1 * b2) - (a2 * b1) == 0.0)
-        return false;
-    return true;
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/provider.ts
@@ -14633,7 +14635,101 @@ class AccuWeather extends BaseProvider {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/deutscherWetterdienst/alert.ts
+
+async function GetDeutscherWetterdienstAlerts(cancellable, lat, lon) {
+    var _a;
+    const response = await HttpLib.Instance.LoadJsonSimple({
+        url: "https://api.brightsky.dev/alerts",
+        cancellable: cancellable,
+        params: {
+            lat: lat,
+            lon: lon,
+        }
+    });
+    if (response === null) {
+        return null;
+    }
+    const result = [];
+    for (const alert of response.alerts) {
+        result.push({
+            title: alert.headline_de,
+            description: `${alert.status == "test" ? "{TEST} " : ""}${alert.description_de}\n\n${(_a = alert.instruction_de) !== null && _a !== void 0 ? _a : ""}`,
+            level: LevelToAlertLevel(alert.severity),
+            sender_name: "Deutscher Wetterdienst",
+            icon: EventCodeToIcon(alert.event_code),
+        });
+    }
+    return result;
+}
+function LevelToAlertLevel(level) {
+    if (level == null)
+        return "unknown";
+    return level;
+}
+function EventCodeToIcon(code) {
+    switch (code) {
+        case 22:
+            return "snowflake-cold-symbolic";
+        case 31:
+        case 33:
+        case 34:
+        case 36:
+        case 38:
+        case 40:
+        case 41:
+        case 42:
+        case 44:
+        case 45:
+        case 46:
+        case 48:
+        case 49:
+        case 95:
+        case 96:
+            return "lightning-symbolic";
+        case 51:
+        case 52:
+        case 53:
+        case 54:
+        case 55:
+        case 56:
+            return "strong-wind-symbolic";
+        case 59:
+            return undefined;
+        case 61:
+        case 62:
+        case 63:
+        case 64:
+        case 65:
+        case 66:
+            return "raindrops-symbolic";
+        case 70:
+        case 71:
+        case 72:
+        case 73:
+        case 74:
+        case 75:
+        case 76:
+            return "snowflake-cold-symbolic";
+        case 82:
+        case 84:
+        case 85:
+        case 86:
+            return "snowflake-cold-symbolic";
+        case 87:
+        case 88:
+        case 89:
+            return undefined;
+        case 98:
+        case 99:
+            return undefined;
+        default:
+            return undefined;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/deutscherWetterdienst/provider.ts
+
 
 
 
@@ -14647,7 +14743,7 @@ class DeutscherWetterdienst extends BaseProvider {
         this.name = "DeutscherWetterdienst";
         this.maxForecastSupport = 10;
         this.maxHourlyForecastSupport = 240;
-        this.website = "https://www.dwd.de/DE/Home/home_node.html";
+        this.website = "https://brightsky.dev/";
         this.remainingCalls = null;
         this.supportHourlyPrecipChance = false;
         this.supportHourlyPrecipVolume = true;
@@ -14686,7 +14782,12 @@ class DeutscherWetterdienst extends BaseProvider {
         const currentTime = DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone);
         const sunTimes = (0,suncalc.getTimes)(currentTime.toJSDate(), loc.lat, loc.lon);
         const mainSource = (_a = current.sources.find(source => source.id == current.weather.source_id)) !== null && _a !== void 0 ? _a : current.sources[0];
+        let alerts = undefined;
         if (config._showAlerts) {
+            const result = await GetDeutscherWetterdienstAlerts(cancellable, loc.lat, loc.lon);
+            if (result == null)
+                return null;
+            alerts = result;
         }
         return {
             date: DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone),
@@ -14717,7 +14818,8 @@ class DeutscherWetterdienst extends BaseProvider {
                 name: (_d = mainSource.station_name) !== null && _d !== void 0 ? _d : undefined
             },
             forecasts: this.ParseForecast(current, hourly, loc),
-            hourlyForecasts: this.ParseHourlyForecast(hourly, loc)
+            hourlyForecasts: this.ParseHourlyForecast(hourly, loc),
+            alerts: alerts
         };
     }
     ParseForecast(current, forecast, loc) {

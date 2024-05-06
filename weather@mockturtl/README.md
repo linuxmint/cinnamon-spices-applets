@@ -33,7 +33,7 @@ You can also save locations what you entered manually and switch between them in
 | **OpenWeatherMap**         | No            | 8                     | 48                     | Yes                | Yes     | Default provider              |
 | **MET Norway**             | No            | 10                    | 48                     | Depends            | Depends | --                            |
 | **DMI Denmark**            | No            | 10                    | 48                     | No                 | No      | --                            |
-| **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | No      | --                            |
+| **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | Yes     | --                            |
 | **Met Office UK**          | No            | 5                     | 36                     | No                 | No      | --                            |
 | **US National Weather**    | No            | 7                     | 156                    | No                 | No      | --                            |
 | **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | No      | --                            |

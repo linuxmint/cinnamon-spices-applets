@@ -2,9 +2,10 @@ import { DateTime } from "luxon";
 import { getTimes, GetTimesResult } from "suncalc";
 import { Config, Services } from "../../config";
 import { ErrorResponse, HttpLib, HTTPParams } from "../../lib/httpLib";
-import { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData, PrecipitationType } from "../../types";
+import { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData, PrecipitationType, AlertData } from "../../types";
 import { IsNight, _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider"
+import { GetDeutscherWetterdienstAlerts } from "./alert";
 
 
 export class DeutscherWetterdienst extends BaseProvider {
@@ -13,7 +14,7 @@ export class DeutscherWetterdienst extends BaseProvider {
     public name: Services = "DeutscherWetterdienst";
     public maxForecastSupport: number = 10;
     public maxHourlyForecastSupport: number = 240;
-    public website: string = "https://www.dwd.de/DE/Home/home_node.html";
+    public website: string = "https://brightsky.dev/";
     public remainingCalls: number | null = null;
     public readonly supportHourlyPrecipChance = false;
 	public readonly supportHourlyPrecipVolume = true;
@@ -43,8 +44,13 @@ export class DeutscherWetterdienst extends BaseProvider {
         const sunTimes = getTimes(currentTime.toJSDate(), loc.lat, loc.lon);
         const mainSource = current.sources.find(source => source.id == current.weather.source_id) ?? current.sources[0];
 
+		let alerts: AlertData[] | undefined = undefined;
 		if (config._showAlerts) {
+			const result = await GetDeutscherWetterdienstAlerts(cancellable, loc.lat, loc.lon);
+			if (result == null)
+				return null;
 
+			alerts = result;
 		}
 
         return {
@@ -76,7 +82,8 @@ export class DeutscherWetterdienst extends BaseProvider {
                 name: mainSource.station_name ?? undefined
             },
             forecasts: this.ParseForecast(current, hourly, loc),
-            hourlyForecasts: this.ParseHourlyForecast(hourly, loc)
+            hourlyForecasts: this.ParseHourlyForecast(hourly, loc),
+			alerts: alerts
         };
     }
 
