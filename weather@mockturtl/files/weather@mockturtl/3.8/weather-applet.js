@@ -11568,6 +11568,7 @@ function IsCovered(payload) {
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/alert.ts
 
+
 async function GetMETNorwayAlerts(cancellable, lat, lon) {
     const response = await HttpLib.Instance.LoadJsonSimple({
         url: "https://api.met.no/weatherapi/metalerts/1.1/.json",
@@ -11578,24 +11579,123 @@ async function GetMETNorwayAlerts(cancellable, lat, lon) {
     }
     const result = [];
     for (const feature of response.features) {
-        if (!InsideGeoJsonPolygon(feature.geometry.coordinates, lat, lon)) {
+        let isInside = false;
+        for (const geometry of feature.geometry.coordinates) {
+            if (inside([lon, lat], geometry)) {
+                isInside = true;
+                break;
+            }
+        }
+        if (!isInside) {
+            logger_Logger.Debug(`Skipping alert '${feature.properties.event}' in area '${feature.properties.area}', current location is not inside area.`);
             continue;
         }
+        logger_Logger.Debug(`Adding alert '${feature.properties.event}' in area '${feature.properties.area}'!`);
         result.push(feature.properties);
     }
-    return result;
+    return result.map(alert => ({
+        title: alert.title,
+        level: SeverityToLevel(alert.severity),
+        description: alert.description,
+        sender_name: "MET Norway",
+        icon: EventToIcon(alert.event),
+    }));
 }
-function InsideGeoJsonPolygon(polygon, lat, lon) {
-    let i;
-    let j;
-    let c = false;
-    for (i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-        if (((polygon[i][1] > lat) != (polygon[j][1] > lat)) &&
-            (lon < (polygon[j][0] - polygon[i][0]) * (lat - polygon[i][1]) / (polygon[j][1] - polygon[i][1]) + polygon[i][0])) {
-            c = !c;
-        }
+function SeverityToLevel(severity) {
+    switch (severity) {
+        case "Extreme":
+            return "extreme";
+        case "Severe":
+            return "severe";
+        case "Moderate":
+            return "moderate";
+        case "Minor":
+            return "minor";
+        default:
+            return "unknown";
     }
-    return c;
+}
+function EventToIcon(event) {
+    switch (event) {
+        case "blowingSnow":
+            return "snow-wind-symbolic";
+        case "forestFire":
+            return "fire-symbolic";
+        case "gale":
+            return "gale-warning-symbolic";
+        case "ice":
+            return "snowflake-cold-symbolic";
+        case "icing":
+            return "snowflake-cold-symbolic";
+        case "lightning":
+            return "lightning-symbolic";
+        case "polarLow":
+            return "hurricane-symbolic";
+        case "rain":
+            return "raindrop-symbolic";
+        case "rainFlood":
+            return "flood-symbolic";
+        case "snow":
+            return "snowflake-cold-symbolic";
+        case "stormSurge":
+            return "lightning-symbolic";
+        case "wind":
+            return "strong-wind-symbolic";
+        default:
+            logger_Logger.Info(`Unknown MET Norway event type: ${event}`);
+            return undefined;
+    }
+}
+function inside(point, vs) {
+    const maxX = Math.max(...vs.map(v => v[0]));
+    const minX = Math.min(...vs.map(v => v[0]));
+    const maxY = Math.max(...vs.map(v => v[1]));
+    const minY = Math.min(...vs.map(v => v[1]));
+    if (point[0] < minX || point[0] > maxX || point[1] < minY || point[1] > maxY) {
+        global.log("Completely outside");
+        return false;
+    }
+    let intersections = 0;
+    let padding = 0.1;
+    const pv1 = [(minX - padding / point[0]), (minY - padding / point[1])];
+    const pv2 = point;
+    for (let i = 0; i < vs.length - 1; i++) {
+        const v1 = vs[i];
+        const v2 = vs[i + 1];
+        if (areIntersecting(v1[0], v1[1], v2[0], v2[1], pv1[0], pv1[1], pv2[0], pv2[1]))
+            intersections++;
+    }
+    if ((intersections & 1) == 1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function areIntersecting(v1x1, v1y1, v1x2, v1y2, v2x1, v2y1, v2x2, v2y2) {
+    let d1, d2;
+    let a1, a2, b1, b2, c1, c2;
+    a1 = v1y2 - v1y1;
+    b1 = v1x1 - v1x2;
+    c1 = (v1x2 * v1y1) - (v1x1 * v1y2);
+    d1 = (a1 * v2x1) + (b1 * v2y1) + c1;
+    d2 = (a1 * v2x2) + (b1 * v2y2) + c1;
+    if (d1 > 0 && d2 > 0)
+        return false;
+    if (d1 < 0 && d2 < 0)
+        return false;
+    a2 = v2y2 - v2y1;
+    b2 = v2x1 - v2x2;
+    c2 = (v2x2 * v2y1) - (v2x1 * v2y2);
+    d1 = (a2 * v1x1) + (b2 * v1y1) + c2;
+    d2 = (a2 * v1x2) + (b2 * v1y2) + c2;
+    if (d1 > 0 && d2 > 0)
+        return false;
+    if (d1 < 0 && d2 < 0)
+        return false;
+    if ((a1 * b2) - (a2 * b1) == 0.0)
+        return false;
+    return true;
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/provider.ts
@@ -11677,32 +11777,7 @@ class MetNorway extends BaseProvider {
             if (alerts == null) {
                 return null;
             }
-            result.alerts = [];
-            for (const alert of alerts) {
-                let severity;
-                switch (alert.severity) {
-                    case "Extreme":
-                        severity = "extreme";
-                        break;
-                    case "Severe":
-                        severity = "severe";
-                        break;
-                    case "Moderate":
-                        severity = "moderate";
-                        break;
-                    case "Minor":
-                        severity = "minor";
-                        break;
-                    default:
-                        severity = "unknown";
-                }
-                result.alerts.push({
-                    description: `${alert.description}\n\n${alert.instruction}`,
-                    level: severity,
-                    title: alert.title,
-                    sender_name: "MET Norway",
-                });
-            }
+            result.alerts = alerts;
         }
         return result;
     }
@@ -17776,7 +17851,7 @@ class UIBar {
         this._timestamp.label = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
         if (this._timestamp == null || this.providerCreditButton == null || ((_c = (_a = this.providerCreditButton) === null || _a === void 0 ? void 0 : (_b = _a.actor).is_finalized) === null || _c === void 0 ? void 0 : _c.call(_b)))
             return false;
         let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
@@ -17811,11 +17886,10 @@ class UIBar {
             const highestLevel = weather.alerts.reduce((prev, current) => (levelOrder.indexOf(prev.level) > levelOrder.indexOf(current.level)) ? prev : current);
             (_h = this.warningButtonTooltip) === null || _h === void 0 ? void 0 : _h.set_text(_("{count} weather alert(s)", { count: weather.alerts.length }));
             (_j = this.warningButtonIcon) === null || _j === void 0 ? void 0 : _j.set_style("color: " + GetAlertColor(highestLevel.level, this.app.ui.LightTheme));
-            (_k = this.warningButtonIcon) === null || _k === void 0 ? void 0 : _k.set_icon_name((_l = highestLevel.icon) !== null && _l !== void 0 ? _l : "dialog-warning-symbolic");
-            (_m = this.warningButton) === null || _m === void 0 ? void 0 : _m.actor.show();
+            (_k = this.warningButton) === null || _k === void 0 ? void 0 : _k.actor.show();
         }
         else {
-            (_o = this.warningButton) === null || _o === void 0 ? void 0 : _o.actor.hide();
+            (_l = this.warningButton) === null || _l === void 0 ? void 0 : _l.actor.hide();
         }
         return true;
     }

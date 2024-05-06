@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-from re import T
-from typing import Optional, cast, Callable, List, Dict, TypedDict, Literal
+from typing_extensions import ParamSpec, TypeVar
+from typing import Optional, cast, Callable, List, TypedDict, Literal
 import os
 import argparse
 from pathlib import Path
@@ -13,11 +13,9 @@ from gi.repository import Gtk, GLib, cairo, Gdk, Pango
 
 class Alert(TypedDict):
 	sender_name: str
-	event: str
-	start: int
-	end: int
+	title: str
 	description: str
-	level: Literal["yellow", "orange", "red"]
+	level: Literal["minor", "moderate", "severe", "extreme", "unknown"]
 	color: str
 	icon: Optional[str]
 
@@ -34,13 +32,50 @@ _ = cast(Callable[[str], str], _)# type: ignore[reportUndefinedVariable]
 Gtk.IconTheme.get_default().append_search_path(str(APPLET_DIR.joinpath("icons")))
 Gtk.IconTheme.get_default().append_search_path(str(APPLET_DIR.joinpath("arrow-icons")))
 
+#region Utility types
+_P = ParamSpec("_P")
+_T = TypeVar("_T")
+
+def inherit_signature_from(
+    _to: Callable[_P, _T]
+) -> Callable[[Callable[..., _T]], Callable[_P, _T]]:
+    """Set the signature checked by pyright/vscode to the signature of another function."""
+    return lambda x: x  # type: ignore[reportReturnType]
+
+LabelParamSpec = ParamSpec('LabelParamSpec')
+
+#endregion
+
+class NotStupidLabel(Gtk.Label):
+	''' A label that doesn't have retarded defaults. '''
+	@inherit_signature_from(Gtk.Label.__init__)
+	def __init__(self, *args, **kwargs):
+		wrap: bool = kwargs.pop("wrap", True)
+		wrap_mode: Pango.WrapMode = kwargs.pop("wrap_mode", Pango.WrapMode.WORD_CHAR)
+		justify: Gtk.Justification = kwargs.pop("justify", Gtk.Justification.LEFT)
+		halign: Gtk.Align = kwargs.pop("halign", Gtk.Align.START)
+		valign: Gtk.Align = kwargs.pop("valign", Gtk.Align.START)
+		xalign: int = kwargs.pop("xalign", 0)
+		yalign: int = kwargs.pop("yalign", 0)
+		super().__init__(
+      		*args,
+			wrap=wrap,
+			wrap_mode=wrap_mode,
+			justify=justify,
+			halign=halign,
+			valign=valign,
+			xalign=xalign,
+			yalign=yalign,
+        	**kwargs
+		)
+
 class AlertsWindow(Gtk.Window):
 	alerts: List[Alert]
 
 	def __init__(self, alerts: List[Alert]):
 		self.alerts = alerts
 		Gtk.Window.__init__(self, title=_("Weather Applet Alerts"))
-		self.set_default_size(600, 300)
+		self.set_default_size(600, 500)
 		self.set_position(Gtk.WindowPosition.CENTER)
 		self.set_border_width(10)
 		self.set_resizable(True)
@@ -54,16 +89,16 @@ class AlertsWindow(Gtk.Window):
 		self.add(self.create_alerts_box())
 		self.show_all()
 
-	def create_alerts_box(self) -> Gtk.Box:
-		box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+	def create_alerts_box(self) -> Gtk.ScrolledWindow:
+		box = Gtk.VBox( orientation=Gtk.Orientation.VERTICAL, spacing=20)
 		for alert in self.alerts:
 			box.add(self.create_alert_box(alert))
-		return box
+		return Gtk.ScrolledWindow(child=Gtk.Viewport(child=box))
 
 	def create_alert_box(self, alert: Alert) -> Gtk.Box:
 		columns = Gtk.Box(
       		orientation=Gtk.Orientation.HORIZONTAL,
-        	spacing=6,
+        	spacing=15,
          	valign=Gtk.Align.START,
           	halign=Gtk.Align.START,
 		)
@@ -75,25 +110,18 @@ class AlertsWindow(Gtk.Window):
 		box = Gtk.Box(
       		orientation=Gtk.Orientation.VERTICAL,
 			spacing=6,
-			expand=False,
+			expand=True,
 			halign=Gtk.Align.START,
 			valign=Gtk.Align.START
 		)
-		description = Gtk.Label(
-			justify=Gtk.Justification.LEFT,
+		description = NotStupidLabel(
       		label=self.sanitize_text(alert['description']),
-        	wrap=True
 		)
 		description.set_size_request(400, -1)
 
-		title = Gtk.Label(
-      		label=f"{alert['event']}",
-			wrap=True,
-   			expand=False,
-			justify=Gtk.Justification.LEFT,
-			halign=Gtk.Align.START,
+		title = NotStupidLabel(
+      		label=f"{alert['title']}",
       	)
-		# title.modify_bg(Gtk.StateType.NORMAL, Gdk.Color.parse("red")[1])
 		bigger_font = Pango.FontDescription.new()
 		bigger_font.set_size(15000)
 		bigger_font.set_weight(Pango.Weight.BOLD)

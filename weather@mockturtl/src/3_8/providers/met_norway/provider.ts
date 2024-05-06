@@ -90,34 +90,7 @@ export class MetNorway extends BaseProvider {
 				return null;
 			}
 
-			result.alerts = [];
-			for (const alert of alerts) {
-				let severity: AlertLevel;
-				switch (alert.severity) {
-					case "Extreme":
-						severity = "extreme";
-						break;
-					case "Severe":
-						severity = "severe";
-						break;
-					case "Moderate":
-						severity = "moderate";
-						break;
-					case "Minor":
-						severity = "minor";
-						break;
-					default:
-						severity = "unknown";
-				}
-
-				result.alerts.push({
-					description: `${alert.description}\n\n${alert.instruction}`,
-					level: severity,
-					title: alert.title,
-					sender_name: "MET Norway",
-				})
-			}
-
+			result.alerts = alerts;
 		}
 
 		return result;
