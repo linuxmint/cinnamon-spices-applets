@@ -13037,7 +13037,7 @@ class ClimacellV4 extends BaseProvider {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/providers/us_weather.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/us_weather/provider.ts
 
 
 
@@ -13136,7 +13136,7 @@ class USWeather extends BaseProvider {
             }
         };
     }
-    async GetWeather(loc, cancellable) {
+    async GetWeather(loc, cancellable, config) {
         var _a, _b;
         const locID = loc.lat.toString() + "," + loc.lon.toString();
         if (!this.grid || !this.observationStations || this.currentLocID != locID) {

@@ -13,7 +13,7 @@ import { OpenWeatherMap } from "./providers/openWeatherMap";
 import { MetNorway } from "./providers/met_norway/provider";
 import { Weatherbit } from "./providers/weatherbit";
 import { ClimacellV4 } from "./providers/climacellV4";
-import { USWeather } from "./providers/us_weather";
+import { USWeather } from "./providers/us_weather/provider";
 import { VisualCrossing } from "./providers/visualcrossing";
 import { DanishMI } from "./providers/danishMI";
 import { AccuWeather } from "./providers/accuWeather";
