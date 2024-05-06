@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-05-06 18:45+0200\n"
-"PO-Revision-Date: 2024-05-01 12:47-0400\n"
+"PO-Revision-Date: 2024-05-06 13:30-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -599,9 +599,8 @@ msgid "OSD"
 msgstr "OSD"
 
 #. 5.4->settings-schema.json->sectionSound3->title
-#, fuzzy
 msgid "Sounds"
-msgstr "Sonido"
+msgstr "Sonidos"
 
 #. 5.4->settings-schema.json->sectionSound4->title
 msgid "Remove incompatible applets"
@@ -699,16 +698,15 @@ msgstr "Mostrar nivel de volumen en OSD al inicio"
 
 #. 5.4->settings-schema.json->volumeSoundFile->description
 msgid "Which sound to play when the volume is changed"
-msgstr ""
+msgstr "Qué sonido se reproduce al cambiar el volumen"
 
 #. 5.4->settings-schema.json->volumeSoundEnabled->description
 msgid "Whether to play a sound when the volume is changed"
-msgstr ""
+msgstr "Reproducir o no un sonido al cambiar el volumen"
 
 #. 5.4->settings-schema.json->redefine-volume-keybindings->description
-#, fuzzy
 msgid "Redefine Multimedia Keyboard Shortcuts"
-msgstr "Redefinir los atajos de teclado de volumen"
+msgstr "Redefinir los atajos de teclado multimedia"
 
 #. 5.4->settings-schema.json->pause-on-off->description
 msgid "Pause/Play toggle"
