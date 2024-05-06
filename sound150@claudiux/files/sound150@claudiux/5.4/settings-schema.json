@@ -29,7 +29,8 @@
       "sections": [
         "sectionSound1",
         "sectionSound2",
-        "sectionSound3"
+        "sectionSound3",
+        "sectionSound4"
       ]
     },
     "page_shortcuts": {
@@ -108,6 +109,14 @@
     },
     "sectionSound3": {
       "type": "section",
+      "title": "Sounds",
+      "keys": [
+        "volumeSoundFile",
+        "volumeSoundEnabled"
+      ]
+    },
+    "sectionSound4": {
+      "type": "section",
       "dependency": "soundATcinnamonDOTorg_is_loaded",
       "title": "Remove incompatible applets",
       "keys": [
@@ -120,6 +129,7 @@
       "keys": [
         "keyOpen",
         "redefine-volume-keybindings",
+        "audio-stop",
         "pause-on-off",
         "volume-mute",
         "volume-up",
@@ -337,9 +347,19 @@
     "description": "Show volume level in OSD on startup",
     "default": false
   },
+  "volumeSoundFile": {
+    "type": "soundfilechooser",
+    "description": "Which sound to play when the volume is changed",
+    "default": "/usr/share/mint-artwork/sounds/volume.oga"
+  },
+  "volumeSoundEnabled": {
+    "type": "switch",
+    "description": "Whether to play a sound when the volume is changed",
+    "default": false
+  },
   "redefine-volume-keybindings": {
     "type": "switch",
-    "description": "Redefine Volume Keyboard Shortcuts",
+    "description": "Redefine Multimedia Keyboard Shortcuts",
     "default": false
   },
   "pause-on-off": {
@@ -347,6 +367,12 @@
     "dependency": "redefine-volume-keybindings",
     "default": "::",
     "description": "Pause/Play toggle"
+  },
+  "audio-stop": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Stop"
   },
   "volume-mute": {
     "type": "keybinding",
