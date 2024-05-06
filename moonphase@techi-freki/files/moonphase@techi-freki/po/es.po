@@ -9,46 +9,46 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-05-05 18:11-0400\n"
-"PO-Revision-Date: 2023-10-29 10:31-0300\n"
+"PO-Revision-Date: 2024-05-06 13:37-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: js/compass.js:14
 msgid "North"
-msgstr ""
+msgstr "Norte"
 
 #: js/compass.js:15
 msgid "North East"
-msgstr ""
+msgstr "Noreste"
 
 #: js/compass.js:16
 msgid "East"
-msgstr ""
+msgstr "Este"
 
 #: js/compass.js:17
 msgid "South East"
-msgstr ""
+msgstr "Sureste"
 
 #: js/compass.js:18
 msgid "South"
-msgstr ""
+msgstr "Sur"
 
 #: js/compass.js:19
 msgid "South West"
-msgstr ""
+msgstr "Suroeste"
 
 #: js/compass.js:20
 msgid "West"
-msgstr ""
+msgstr "Oeste"
 
 #: js/compass.js:21
 msgid "North West"
-msgstr ""
+msgstr "Noroeste"
 
 #: js/moon.js:32 js/moon.js:40
 msgid "New Moon"
@@ -84,57 +84,53 @@ msgstr "Menguante"
 
 #: js/ui/currentPhaseUi.js:32
 msgid "illumination"
-msgstr ""
+msgstr "iluminación"
 
 #: js/ui/riseSetUi.js:55
 msgid "The moon is always down and will not rise today"
-msgstr ""
+msgstr "La luna siempre está baja y hoy no saldrá"
 
 #: js/ui/riseSetUi.js:65
 msgid "The moon is always up and will not set today"
-msgstr ""
+msgstr "La luna siempre está alta y hoy no se pondrá"
 
 #: js/ui/riseSetUi.js:76
-#, fuzzy
 msgid "Moonrise"
-msgstr "Fase lunar"
+msgstr "Salida de la luna"
 
 #: js/ui/riseSetUi.js:83
 msgid "Lunar Noon"
-msgstr ""
+msgstr "Mediodía lunar"
 
 #: js/ui/riseSetUi.js:90
-#, fuzzy
 msgid "Moonset"
-msgstr "Fase lunar"
+msgstr "Puesta de la luna"
 
 #: js/ui/elements/noRiseSetElement.js:54
-#, fuzzy
 msgid "Next Moonrise"
-msgstr "Luna Nueva"
+msgstr "Próxima salida de la luna"
 
 #: js/ui/elements/noRiseSetElement.js:66
-#, fuzzy
 msgid "Next Moonset"
-msgstr "Luna Nueva"
+msgstr "Próxima puesta de la Luna"
 
 #. metadata.json->name
 msgid "Moon Phase"
 msgstr "Fase lunar"
 
 #. metadata.json->description
-#, fuzzy
 msgid "A Cinnamon applet that displays up-to-date moon related information."
-msgstr "Un applet de Cinnamon que muestra la fase lunar actual."
+msgstr ""
+"Un applet de Cinnamon que muestra información actualizada relacionada con "
+"la luna."
 
 #. settings-schema.json->page-settings->title
 msgid "Settings"
 msgstr "Configuración"
 
 #. settings-schema.json->section-geolocation->title
-#, fuzzy
 msgid "Geolocation Settings"
-msgstr "Configuración general"
+msgstr "Configuración de geolocalización"
 
 #. settings-schema.json->section-general->title
 msgid "General Settings"
@@ -146,34 +142,31 @@ msgstr "Actualizar configuración"
 
 #. settings-schema.json->enableGeolocation->description
 msgid "Enable geolocation features"
-msgstr ""
+msgstr "Habilitar funciones de geolocalización"
 
 #. settings-schema.json->latitude->description
 msgid "Latitude"
-msgstr ""
+msgstr "Latitud"
 
 #. settings-schema.json->longitude->description
 msgid "Longitude"
-msgstr ""
+msgstr "Longitud"
 
 #. settings-schema.json->enablePopup->description
 msgid "Enable popup menu"
-msgstr ""
+msgstr "Habilitar menú emergente"
 
 #. settings-schema.json->showCurrentPhaseInfo->description
-#, fuzzy
 msgid "Display the current phase information"
-msgstr "Mostrar la fase lunar en forma de cadena"
+msgstr "Mostrar la información de la fase actual"
 
 #. settings-schema.json->showRiseSet->description
-#, fuzzy
 msgid "Display the moon rise, transit, and set times"
-msgstr "Mostrar la fase lunar en forma de cadena"
+msgstr "Visualizar las horas de salida, tránsito y puesta de la luna"
 
 #. settings-schema.json->showPhaseLabel->description
-#, fuzzy
 msgid "Display the applet label"
-msgstr "Mostrar el nombre de la fase lunar en la etiqueta"
+msgstr "Mostrar la etiqueta del applet"
 
 #. settings-schema.json->showNameLabel->description
 msgid "Display the name of the moon phase in the label"
