@@ -1,10 +1,10 @@
 import { DateTime } from "luxon";
 import { getTimes, GetTimesResult } from "suncalc";
-import { Services } from "../config";
-import { ErrorResponse, HttpLib, HTTPParams } from "../lib/httpLib";
-import { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData, PrecipitationType } from "../types";
-import { IsNight, _ } from "../utils";
-import { BaseProvider } from "./BaseProvider"
+import { Config, Services } from "../../config";
+import { ErrorResponse, HttpLib, HTTPParams } from "../../lib/httpLib";
+import { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData, PrecipitationType } from "../../types";
+import { IsNight, _ } from "../../utils";
+import { BaseProvider } from "../BaseProvider"
 
 
 export class DeutscherWetterdienst extends BaseProvider {
@@ -20,7 +20,7 @@ export class DeutscherWetterdienst extends BaseProvider {
 
     private readonly baseUrl: string = "https://api.brightsky.dev/";
 
-    public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
+    public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
         const [current, hourly] = await Promise.all([
             HttpLib.Instance.LoadJsonSimple<CurrentWeatherPayload>({
 				url: `${this.baseUrl}current_weather`,
@@ -42,6 +42,10 @@ export class DeutscherWetterdienst extends BaseProvider {
         const currentTime = DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone);
         const sunTimes = getTimes(currentTime.toJSDate(), loc.lat, loc.lon);
         const mainSource = current.sources.find(source => source.id == current.weather.source_id) ?? current.sources[0];
+
+		if (config._showAlerts) {
+
+		}
 
         return {
             date: DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone),

@@ -14633,7 +14633,7 @@ class AccuWeather extends BaseProvider {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/providers/deutscherWetterdienst.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/deutscherWetterdienst/provider.ts
 
 
 
@@ -14665,7 +14665,7 @@ class DeutscherWetterdienst extends BaseProvider {
             return false;
         };
     }
-    async GetWeather(loc, cancellable) {
+    async GetWeather(loc, cancellable, config) {
         var _a, _b, _c, _d;
         const [current, hourly] = await Promise.all([
             HttpLib.Instance.LoadJsonSimple({
@@ -14686,6 +14686,8 @@ class DeutscherWetterdienst extends BaseProvider {
         const currentTime = DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone);
         const sunTimes = (0,suncalc.getTimes)(currentTime.toJSDate(), loc.lat, loc.lon);
         const mainSource = (_a = current.sources.find(source => source.id == current.weather.source_id)) !== null && _a !== void 0 ? _a : current.sources[0];
+        if (config._showAlerts) {
+        }
         return {
             date: DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone),
             location: {

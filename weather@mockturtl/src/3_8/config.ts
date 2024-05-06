@@ -17,7 +17,7 @@ import { USWeather } from "./providers/us_weather";
 import { VisualCrossing } from "./providers/visualcrossing";
 import { DanishMI } from "./providers/danishMI";
 import { AccuWeather } from "./providers/accuWeather";
-import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
+import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst/provider";
 import { WeatherUnderground } from "./providers/weatherUnderground";
 import { Event } from "./lib/events";
 import { GeoIP } from "./location_services/geoip_services/base";
