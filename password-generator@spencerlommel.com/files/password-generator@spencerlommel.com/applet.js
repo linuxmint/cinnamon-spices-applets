@@ -23,6 +23,8 @@ class CinnamonRandomPasswordApplet extends Applet.IconApplet {
         this.settings.bind("include-uppercase", "includeUppercase", this.onSettingsChanged);
         this.settings.bind("include-symbols", "includeSymbols", this.onSettingsChanged);
         this.settings.bind("include-numbers", "includeNumbers", this.onSettingsChanged);
+        this.settings.bind("auto-copy", "autoCopy", this.onSettingsChanged);
+
 
         this.set_applet_icon_name("dialog-password");
         this.set_applet_tooltip(_("Generate Random Password"));
@@ -57,10 +59,15 @@ class CinnamonRandomPasswordApplet extends Applet.IconApplet {
     }
 
     on_applet_clicked(event) {
-        this.menu.toggle();
         let newPassword = this.generateRandomPassword();
         this.textBox.set_text(newPassword);
+        if (this.autoCopy) {
+            St.Clipboard.get_default().set_text(St.ClipboardType.CLIPBOARD, newPassword);
+        } else {
+            this.menu.toggle();
+        }
     }
+    
 
     generateRandomPassword() {
         let charset = "";

@@ -27,5 +27,11 @@
         "type": "checkbox",
         "default": true,
         "description": "Include Symbols"
+    },
+    "auto-copy": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Automatically Copy To Clipboard"
     }
+    
 }
