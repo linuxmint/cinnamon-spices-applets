@@ -163,7 +163,6 @@ def main():
 		print(e)
 		return
 
-
 	AlertsWindow(alerts)
 	Gtk.main()
 

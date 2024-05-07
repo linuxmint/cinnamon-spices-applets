@@ -10108,12 +10108,12 @@ class Soup3 {
         this._httpSession.idle_timeout = 10;
     }
     async Send(url, options = {}) {
-        const { params, headers, method = "GET", cancellable } = options;
+        const { params, headers, method = "GET", cancellable, noEncode = false } = options;
         if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
             return Promise.resolve(null);
         }
         url = AddParamsToURI(url, params);
-        const query = encodeURI(url);
+        const query = noEncode ? url : encodeURI(url);
         logger_Logger.Debug("URL called: " + query);
         const data = await new Promise((resolve, reject) => {
             const message = Message.new(method, query);
@@ -13037,7 +13037,187 @@ class ClimacellV4 extends BaseProvider {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/us_weather/alerts.ts
+
+async function GetUSWeatherAlerts(cancellable, lat, lon) {
+    var _a, _b;
+    const alerts = [];
+    let next = "https://api.weather.gov/alerts/active";
+    while (next) {
+        const response = await HttpLib.Instance.LoadJsonSimple({
+            url: next,
+            cancellable: cancellable,
+            params: {
+                point: `${lat},${lon}`
+            }
+        });
+        if (response === null) {
+            return null;
+        }
+        for (const alert of response.features) {
+            alerts.push({
+                title: alert.properties.headline,
+                description: `${alert.properties.description}\n\n${(_a = alert.properties.instruction) !== null && _a !== void 0 ? _a : ""}`,
+                level: SeverityToAlertLevel(alert.properties.severity),
+                sender_name: alert.properties.senderName,
+                icon: EventNameToIcon(alert.properties.event)
+            });
+        }
+        next = (_b = response.pagination) === null || _b === void 0 ? void 0 : _b.next;
+    }
+    return alerts;
+}
+function SeverityToAlertLevel(level) {
+    switch (level) {
+        case "Extreme":
+            return "extreme";
+        case "Severe":
+            return "severe";
+        case "Moderate":
+            return "moderate";
+        case "Minor":
+            return "minor";
+        default:
+            return "unknown";
+    }
+}
+function EventNameToIcon(event) {
+    switch (event) {
+        case "911 Telephone Outage Emergency":
+        case "Administrative Message":
+        case "Air Quality Alert":
+        case "Air Stagnation Advisory":
+        case "Arroyo And Small Stream Flood Advisory":
+        case "Ashfall Advisory":
+        case "Ashfall Warning":
+        case "Avalanche Advisory":
+        case "Avalanche Warning":
+        case "Avalanche Watch":
+        case "Beach Hazards Statement":
+        case "Blizzard Warning":
+        case "Blizzard Watch":
+        case "Blowing Dust Advisory":
+        case "Blowing Dust Warning":
+        case "Brisk Wind Advisory":
+        case "Child Abduction Emergency":
+        case "Civil Danger Warning":
+        case "Civil Emergency Message":
+        case "Coastal Flood Advisory":
+        case "Coastal Flood Statement":
+        case "Coastal Flood Warning":
+        case "Coastal Flood Watch":
+        case "Dense Fog Advisory":
+        case "Dense Smoke Advisory":
+        case "Dust Advisory":
+        case "Dust Storm Warning":
+        case "Earthquake Warning":
+        case "Evacuation - Immediate":
+        case "Excessive Heat Warning":
+        case "Excessive Heat Watch":
+        case "Extreme Cold Warning":
+        case "Extreme Cold Watch":
+        case "Extreme Fire Danger":
+        case "Extreme Wind Warning":
+        case "Fire Warning":
+        case "Fire Weather Watch":
+        case "Flash Flood Statement":
+        case "Flash Flood Warning":
+        case "Flash Flood Watch":
+        case "Flood Advisory":
+        case "Flood Statement":
+        case "Flood Warning":
+        case "Flood Watch":
+        case "Freeze Warning":
+        case "Freeze Watch":
+        case "Freezing Fog Advisory":
+        case "Freezing Rain Advisory":
+        case "Freezing Spray Advisory":
+        case "Frost Advisory":
+        case "Gale Warning":
+        case "Gale Watch":
+        case "Hard Freeze Warning":
+        case "Hard Freeze Watch":
+        case "Hazardous Materials Warning":
+        case "Hazardous Seas Warning":
+        case "Hazardous Seas Watch":
+        case "Hazardous Weather Outlook":
+        case "Heat Advisory":
+        case "Heavy Freezing Spray Warning":
+        case "Heavy Freezing Spray Watch":
+        case "High Surf Advisory":
+        case "High Surf Warning":
+        case "High Wind Warning":
+        case "High Wind Watch":
+        case "Hurricane Force Wind Warning":
+        case "Hurricane Force Wind Watch":
+        case "Hurricane Local Statement":
+        case "Hurricane Warning":
+        case "Hurricane Watch":
+        case "Hydrologic Advisory":
+        case "Hydrologic Outlook":
+        case "Ice Storm Warning":
+        case "Lake Effect Snow Advisory":
+        case "Lake Effect Snow Warning":
+        case "Lake Effect Snow Watch":
+        case "Lake Wind Advisory":
+        case "Lakeshore Flood Advisory":
+        case "Lakeshore Flood Statement":
+        case "Lakeshore Flood Warning":
+        case "Lakeshore Flood Watch":
+        case "Law Enforcement Warning":
+        case "Local Area Emergency":
+        case "Low Water Advisory":
+        case "Marine Weather Statement":
+        case "Nuclear Power Plant Warning":
+        case "Radiological Hazard Warning":
+        case "Red Flag Warning":
+        case "Rip Current Statement":
+        case "Severe Thunderstorm Warning":
+        case "Severe Thunderstorm Watch":
+        case "Severe Weather Statement":
+        case "Shelter In Place Warning":
+        case "Short Term Forecast":
+        case "Small Craft Advisory":
+        case "Small Craft Advisory For Hazardous Seas":
+        case "Small Craft Advisory For Rough Bar":
+        case "Small Craft Advisory For Winds":
+        case "Small Stream Flood Advisory":
+        case "Snow Squall Warning":
+        case "Special Marine Warning":
+        case "Special Weather Statement":
+        case "Storm Surge Warning":
+        case "Storm Surge Watch":
+        case "Storm Warning":
+        case "Storm Watch":
+        case "Test":
+        case "Tornado Warning":
+        case "Tornado Watch":
+        case "Tropical Depression Local Statement":
+        case "Tropical Storm Local Statement":
+        case "Tropical Storm Warning":
+        case "Tropical Storm Watch":
+        case "Tsunami Advisory":
+        case "Tsunami Warning":
+        case "Tsunami Watch":
+        case "Typhoon Local Statement":
+        case "Typhoon Warning":
+        case "Typhoon Watch":
+        case "Urban And Small Stream Flood Advisory":
+        case "Volcano Warning":
+        case "Wind Advisory":
+        case "Wind Chill Advisory":
+        case "Wind Chill Warning":
+        case "Wind Chill Watch":
+        case "Winter Storm Warning":
+        case "Winter Storm Watch":
+        case "Winter Weather Advisory":
+        default:
+            return undefined;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/us_weather/provider.ts
+
 
 
 
@@ -13172,9 +13352,15 @@ class USWeather extends BaseProvider {
             return null;
         }
         const weather = this.ParseCurrent(observations, hourly, loc);
-        if (!!weather) {
-            weather.forecasts = (_a = this.ParseForecast(forecast)) !== null && _a !== void 0 ? _a : [];
-            weather.hourlyForecasts = (_b = this.ParseHourlyForecast(hourly)) !== null && _b !== void 0 ? _b : undefined;
+        if (!weather)
+            return null;
+        weather.forecasts = (_a = this.ParseForecast(forecast)) !== null && _a !== void 0 ? _a : [];
+        weather.hourlyForecasts = (_b = this.ParseHourlyForecast(hourly)) !== null && _b !== void 0 ? _b : undefined;
+        if (config._showAlerts) {
+            const alerts = await GetUSWeatherAlerts(cancellable, loc.lat, loc.lon);
+            if (!alerts)
+                return null;
+            weather.alerts = alerts;
         }
         return weather;
     }
@@ -16808,8 +16994,9 @@ async function SpawnProcessJson(command) {
 async function SpawnProcess(command) {
     let cmd = "";
     for (const element of command) {
-        cmd += "'" + element + "' ";
+        cmd += "'" + element.replace(/'/g, "'\"'\"'") + "' ";
     }
+    logger_Logger.Debug("Spawning command: " + cmd);
     const response = await new Promise((resolve, reject) => {
         spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
             let result = {

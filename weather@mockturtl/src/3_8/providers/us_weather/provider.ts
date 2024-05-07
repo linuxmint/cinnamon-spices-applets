@@ -15,6 +15,7 @@ import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin,
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
 import { Config } from "../../config";
+import { GetUSWeatherAlerts } from "./alerts";
 
 export class USWeather extends BaseProvider {
 
@@ -90,13 +91,22 @@ export class USWeather extends BaseProvider {
 			Logger.Error("Failed to obtain forecast Data");
 			return null;
 		}
-
 		// Parsing data
 		const weather = this.ParseCurrent(observations, hourly, loc);
-		if (!!weather) {
-			weather.forecasts = this.ParseForecast(forecast) ?? [];
-			weather.hourlyForecasts = this.ParseHourlyForecast(hourly) ?? undefined;
+		if (!weather)
+			return null;
+
+		weather.forecasts = this.ParseForecast(forecast) ?? [];
+		weather.hourlyForecasts = this.ParseHourlyForecast(hourly) ?? undefined;
+
+		if (config._showAlerts) {
+			const alerts = await GetUSWeatherAlerts(cancellable, loc.lat, loc.lon);
+			if (!alerts)
+				return null;
+
+			weather.alerts = alerts;
 		}
+
 
 		return weather;
 	};

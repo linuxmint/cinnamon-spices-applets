@@ -14,7 +14,9 @@ export interface SoupLibSendOptions {
 	/**
 	 * If not provided, a timeout is set to REQUEST_TIMEOUT_SECONDS automatically.
 	 */
-	cancellable?: imports.gi.Gio.Cancellable
+	cancellable?: imports.gi.Gio.Cancellable,
+	/** Do not encode the url.  */
+	noEncode?: boolean
 }
 export interface SoupLib {
     Send: (
@@ -69,7 +71,8 @@ class Soup3 implements SoupLib {
 			params,
 			headers,
 			method = "GET",
-			cancellable
+			cancellable,
+			noEncode = false
 		} = options;
 
 		if (cancellable?.is_cancelled()) {
@@ -79,7 +82,7 @@ class Soup3 implements SoupLib {
         // Add params to url
         url = AddParamsToURI(url, params);
 
-        const query = encodeURI(url);
+		const query = noEncode ? url : encodeURI(url);
         Logger.Debug("URL called: " + query);
         const data: SoupResponse | null = await new Promise((resolve, reject) => {
             const message = Message.new(method, query);

@@ -35,8 +35,11 @@ export async function SpawnProcess(command: string[]): Promise<GenericResponse> 
 	// prepare command
 	let cmd = "";
 	for (const element of command) {
-		cmd += "'" + element + "' ";
+		// Amazing escaping...
+		cmd += "'" + element.replace(/'/g, "'\"'\"'") + "' ";
 	}
+
+	Logger.Debug("Spawning command: " + cmd);
 
 	const response = await new Promise((resolve, reject) => {
 		spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {

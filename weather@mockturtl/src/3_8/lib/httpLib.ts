@@ -1,13 +1,10 @@
 import { Logger } from "./logger";
 import { ErrorDetail } from "../types";
 import { _ } from "../utils";
-import { soupLib, SoupResponse } from "./soupLib";
+import { soupLib, SoupLibSendOptions, SoupResponse } from "./soupLib";
 import { Event } from "./events";
 
-export type LoadAsyncOptions = {
-	params?: HTTPParams;
-	headers?: HTTPHeaders;
-	method?: Method;
+export interface LoadAsyncOptions extends SoupLibSendOptions {
 	url: string;
 	cancellable: imports.gi.Gio.Cancellable;
 	/**
@@ -16,7 +13,7 @@ export type LoadAsyncOptions = {
 	 * If the function returns true, the error will be handled by the HttpLib.
 	 */
 	HandleError?: (message: ErrorResponse<any>) => boolean;
-};
+}
 
 export class HttpLib {
 	private static instance: HttpLib;
