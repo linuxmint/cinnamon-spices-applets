@@ -19,6 +19,7 @@ class CheckError(Exception):
 # function with checks for an xlet
 def validate_xlet(uuid):
     valid = False
+    uuid = uuid.rstrip('/')
     os.chdir(uuid)
 
     try:
