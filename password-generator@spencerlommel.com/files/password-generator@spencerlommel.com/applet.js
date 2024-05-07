@@ -1,5 +1,7 @@
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
+const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 const Settings = imports.ui.settings; // Import the Settings module
 
