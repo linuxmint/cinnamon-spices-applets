@@ -3,6 +3,13 @@ const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Settings = imports.ui.settings; // Import the Settings module
 
+const UUID = "password-generator@spencerlommel.com"
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(str) {
+    return Gettext.dgettext(UUID, str);
+}
+
 class CinnamonRandomPasswordApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -16,7 +23,7 @@ class CinnamonRandomPasswordApplet extends Applet.IconApplet {
         this.settings.bind("include-numbers", "includeNumbers", this.onSettingsChanged);
 
         this.set_applet_icon_name("dialog-password");
-        this.set_applet_tooltip("Generate Random Password");
+        this.set_applet_tooltip(_("Generate Random Password"));
 
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -25,14 +32,14 @@ class CinnamonRandomPasswordApplet extends Applet.IconApplet {
         this.menuBox = new St.BoxLayout({ vertical: false });
         this.textBox = new St.Entry({
             style_class: 'popup-menu-item',
-            hint_text: "Please enable at least one value in settings.",
+            hint_text: _("Please enable at least one value in settings."),
             x_expand: true,
             can_focus: true
         });
         this.menuBox.add(this.textBox);
 
         this.copyButton = new St.Button({
-            label: "Copy",
+            label: _("Copy"),
             style_class: 'popup-menu-item',
             reactive: true,
             can_focus: true
