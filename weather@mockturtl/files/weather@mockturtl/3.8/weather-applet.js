@@ -8918,6 +8918,7 @@ const VERSION = "3.2.0";
 ;// CONCATENATED MODULE: ./src/3_8/utils.ts
 
 
+
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
@@ -8954,7 +8955,7 @@ function GenerateLocationText(weather, config) {
 }
 function InjectValues(text, weather, config) {
     var _a, _b, _c, _d, _e, _f, _g, _h;
-    const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
+    const lastUpdatedTime = AwareDateString(weather.date, config._show24Hours, DateTime.local().zoneName);
     return text.replace(/{t}/g, (_a = TempToUserConfig(weather.temperature, config, false)) !== null && _a !== void 0 ? _a : "")
         .replace(/{u}/g, UnitToUnicode(config.TemperatureUnit))
         .replace(/{c}/g, weather.condition.main)
@@ -8998,7 +8999,7 @@ function NormalizeTimezone(tz) {
     return tz;
 }
 function GetDayName(date, options = {}) {
-    const { locale = null, showDate = false, tz = undefined, short = false, useTodayTomorrow = true } = options;
+    const { showDate = false, tz = undefined, short = false, useTodayTomorrow = true } = options;
     const params = {
         weekday: short ? "short" : "long",
     };
@@ -9017,8 +9018,6 @@ function GetDayName(date, options = {}) {
         if (date.hasSame(now, "day") || date.hasSame(tomorrow, "day"))
             delete params.weekday;
     }
-    if (!!locale)
-        date = date.setLocale(locale);
     let dateString = date.toLocaleString(params);
     dateString = CapitalizeFirstLetter(dateString);
     if (useTodayTomorrow) {
@@ -9029,7 +9028,7 @@ function GetDayName(date, options = {}) {
     }
     return dateString;
 }
-function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
+function GetHoursMinutes(date, hours24Format, tz, onlyHours = false) {
     const params = {
         hour: "numeric",
         hour12: !hours24Format,
@@ -9039,11 +9038,9 @@ function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
         params.minute = "2-digit";
     if (!!tz)
         date = date.setZone(tz);
-    if (!!locale)
-        date = date.setLocale(locale);
     return date.toLocaleString(params);
 }
-function AwareDateString(date, locale, hours24Format, tz) {
+function AwareDateString(date, hours24Format, tz) {
     const now = DateTime.utc().setZone(tz);
     date = date.setZone(tz);
     const params = {
@@ -9059,8 +9056,6 @@ function AwareDateString(date, locale, hours24Format, tz) {
         params.year = "numeric";
     }
     params.timeZone = NormalizeTimezone(tz);
-    if (!!locale)
-        date = date.setLocale(locale);
     return date.toLocaleString(params);
 }
 function MilitaryTime(date) {
@@ -9085,9 +9080,9 @@ function LocalizedColon(locale) {
         return " :";
     return ":";
 }
-function PercentToLocale(humidity, locale, withUnit = true) {
+function PercentToLocale(humidity, withUnit = true) {
     if (withUnit)
-        return (humidity / 100).toLocaleString(locale !== null && locale !== void 0 ? locale : undefined, { style: "percent" });
+        return (humidity / 100).toLocaleString(undefined, { style: "percent" });
     else
         return Math.round(humidity).toString();
 }
@@ -9097,7 +9092,7 @@ const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449;
 function ExtraFieldToUserUnits(extra_field, config, withUnit = false) {
     switch (extra_field.type) {
         case "percent":
-            return PercentToLocale(extra_field.value, config.currentLocale, withUnit);
+            return PercentToLocale(extra_field.value, withUnit);
         case "temperature":
             return TempToUserConfig(extra_field.value, config, withUnit);
         default:
@@ -9353,20 +9348,31 @@ function ShadeHexColor(color, percent) {
     var f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
     return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 }
-function ConstructJsLocale(locale) {
-    if (locale == null)
-        return null;
-    const jsLocale = locale.split(/[.\s@]/)[0].trim();
-    const tmp = jsLocale.split("_");
-    let result = "";
-    for (const [i, item] of tmp.entries()) {
-        if (i != 0)
-            result += "-";
-        result += item.toLowerCase();
+function ConstructJsLocale(locales) {
+    var _a;
+    for (const locale of locales) {
+        const jsLocale = locale.split(/[.\s@]/)[0].trim();
+        const tmp = jsLocale.split("_");
+        let result = "";
+        for (const [i, item] of tmp.entries()) {
+            if (i != 0)
+                result += "-";
+            result += item.toLowerCase();
+        }
+        try {
+            new Date().toLocaleString(result);
+        }
+        catch (e) {
+            logger_Logger.Info(`Invalid locale: ${result}, not supported by JS, ignoring.`);
+            logger_Logger.Debug((_a = e === null || e === void 0 ? void 0 : e.toString()) !== null && _a !== void 0 ? _a : "");
+            continue;
+        }
+        if (result == "c")
+            continue;
+        logger_Logger.Debug(`System locale is ${result}, original is ${locale}`);
+        return result;
     }
-    if (result == "c")
-        return null;
-    return result;
+    return null;
 }
 function GetDistance(lat1, lon1, lat2, lon2) {
     const R = 6371e3;
@@ -9682,6 +9688,8 @@ class Log {
         if (typeof e === "string") {
             return;
         }
+        if (!(e instanceof Error))
+            return;
         const gjsE = e;
         global.logError(`GJS Error context - Name: ${gjsE.name}, domain: ${gjsE.domain}, code: ${(_a = IOErrorEnumNames[gjsE.code]) !== null && _a !== void 0 ? _a : gjsE.code}, message: ${gjsE.message}`);
         if (gjsE.stack)
@@ -14832,6 +14840,7 @@ class WeatherUnderground extends BaseProvider {
             }
             if (result.length == 0)
                 return null;
+            result.sort((a, b) => a.distanceKm - b.distanceKm);
             return result;
         };
         this.GetObservations = async (stations, forecast, loc, cancellable) => {
@@ -15862,8 +15871,7 @@ class Config {
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
         this.onLogLevelUpdated();
-        this.currentLocale = ConstructJsLocale(get_language_names()[0]);
-        logger_Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
+        this.currentLocale = ConstructJsLocale(get_language_names());
         this.countryCode = this.GetCountryCode(this.currentLocale);
         this.autoLocProvider = new GeoIPFedora(app);
         this.geoClue = new GeoClue(app);
@@ -16473,8 +16481,9 @@ async function SpawnProcessJson(command) {
 async function SpawnProcess(command) {
     let cmd = "";
     for (const element of command) {
-        cmd += "'" + element + "' ";
+        cmd += "'" + element.replace(/'/g, "'\"'\"'") + "' ";
     }
+    logger_Logger.Debug("Spawning command: " + cmd);
     const response = await new Promise((resolve, reject) => {
         spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
             let result = {
@@ -16618,8 +16627,8 @@ class SunTimesUI {
             this.actor.hide();
             return;
         }
-        this.sunriseLabel.text = (GetHoursMinutes(sunrise, this.app.config.currentLocale, this.app.config._show24Hours, tz));
-        this.sunsetLabel.text = (GetHoursMinutes(sunset, this.app.config.currentLocale, this.app.config._show24Hours, tz));
+        this.sunriseLabel.text = (GetHoursMinutes(sunrise, this.app.config._show24Hours, tz));
+        this.sunsetLabel.text = (GetHoursMinutes(sunset, this.app.config._show24Hours, tz));
         this.actor.show();
     }
 }
@@ -16891,7 +16900,7 @@ class CurrentWeather {
         let value = null;
         switch (extra_field.type) {
             case "percent":
-                value = PercentToLocale(extra_field.value, this.app.config.currentLocale);
+                value = PercentToLocale(extra_field.value);
                 break;
             case "temperature":
                 value = TempToUserConfig(extra_field.value, this.app.config);
@@ -16946,7 +16955,7 @@ class CurrentWeather {
             this.humidityLabel.set_style_class_name(STYLE_HIDDEN);
             return;
         }
-        this.humidityLabel.text = PercentToLocale(humidity, this.app.config.currentLocale);
+        this.humidityLabel.text = PercentToLocale(humidity);
         this.humidityCaption.remove_style_class_name(STYLE_HIDDEN);
         this.humidityLabel.remove_style_class_name(STYLE_HIDDEN);
     }
@@ -17052,7 +17061,6 @@ class UIForecasts {
                 const forecastUi = this.forecasts[i];
                 const comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
                 const dayName = GetDayName(forecastData.date, {
-                    locale: config.currentLocale,
                     showDate: config._showForecastDates,
                     tz: weather.location.timeZone
                 });
@@ -17344,13 +17352,12 @@ class UIHourlyForecasts {
             const temp = TempToUserConfig(hour.temp, config, false);
             if (hour.date.hour == 0)
                 ui.Hour.text = GetDayName(hour.date, {
-                    locale: config.currentLocale,
                     tz: tz,
                     useTodayTomorrow: false,
                     short: true
                 });
             else
-                ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
+                ui.Hour.text = GetHoursMinutes(hour.date, config._show24Hours, tz, config._shortHourlyTime);
             ui.Temperature.text = temp ? `${temp}°` : "";
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
             ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation, config);
@@ -17621,7 +17628,7 @@ class UIBar {
         }
         this.providerCreditButton.actor.label = creditLabel;
         this.providerCreditButton.url = provider.website;
-        const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
+        const lastUpdatedTime = AwareDateString(weather.date, config._show24Hours, DateTime.local().zoneName);
         this._timestamp.label = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
         if (((_d = weather === null || weather === void 0 ? void 0 : weather.stationInfo) === null || _d === void 0 ? void 0 : _d.distanceFrom) != null) {
             const stringFormat = {
@@ -18114,7 +18121,7 @@ class WeatherApplet extends TextIconApplet {
         return true;
     }
     DisplayWeatherOnLabel(weather) {
-        var _a;
+        var _a, _b;
         const temperature = weather.temperature;
         const mainCondition = CapitalizeFirstLetter(weather.condition.main);
         let label = "";
@@ -18126,13 +18133,13 @@ class WeatherApplet extends TextIconApplet {
                 if (label != "") {
                     label += " ";
                 }
-                label += TempToUserConfig(temperature, this.config);
+                label += ((_a = TempToUserConfig(temperature, this.config)) !== null && _a !== void 0 ? _a : "");
             }
         }
         else {
             if (this.config._showTextInPanel) {
-                label = (_a = TempToUserConfig(temperature, this.config, false)) !== null && _a !== void 0 ? _a : "";
-                if (this.GetPanelHeight() >= 35) {
+                label = (_b = TempToUserConfig(temperature, this.config, false)) !== null && _b !== void 0 ? _b : "";
+                if (this.GetPanelHeight() >= 35 && label) {
                     label += UnitToUnicode(this.config.TemperatureUnit);
                 }
             }
@@ -18143,7 +18150,7 @@ class WeatherApplet extends TextIconApplet {
     }
     SetAppletTooltip(weather, config, override) {
         const location = GenerateLocationText(weather, this.config);
-        const lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours, DateTime.local().zoneName);
+        const lastUpdatedTime = AwareDateString(weather.date, this.config._show24Hours, DateTime.local().zoneName);
         let msg = `${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`;
         if (NotEmpty(override)) {
             msg = InjectValues(override, weather, config);

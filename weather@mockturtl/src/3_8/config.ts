@@ -207,8 +207,7 @@ export class Config {
 		// Bind as early as possible so that we can update the log level asap
 		this.BindSettings();
 		this.onLogLevelUpdated();
-		this.currentLocale = ConstructJsLocale(get_language_names()[0]);
-		Logger.Debug(`System locale is ${this.currentLocale}, original is ${get_language_names()[0]}`);
+		this.currentLocale = ConstructJsLocale(get_language_names());
 		this.countryCode = this.GetCountryCode(this.currentLocale);
 		this.autoLocProvider = new GeoIPFedora(app); // IP location lookup
 		this.geoClue = new GeoClue(app);

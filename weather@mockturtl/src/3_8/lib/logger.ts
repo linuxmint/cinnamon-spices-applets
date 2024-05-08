@@ -101,6 +101,9 @@ class Log {
 			return;
 		}
 
+		if (!(e instanceof Error))
+			return;
+
 		const gjsE = e as GJSError;
 		global.logError(`GJS Error context - Name: ${gjsE.name}, domain: ${gjsE.domain}, code: ${IOErrorEnumNames[gjsE.code as imports.gi.Gio.IOErrorEnum] ?? gjsE.code}, message: ${gjsE.message}`);
 
