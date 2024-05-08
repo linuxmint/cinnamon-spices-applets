@@ -1,3 +1,8 @@
+### v6.11.0~20240506
+  * Created Sounds section in Sound tab of settings.
+  * Improved keyboard shortcuts management.
+  * Fixes #5967.
+
 ### v6.10.0~20240424
   * Created OSD section in Sound tab of settings.
   * Adds option: Whether the media keys osd is disabled or its relative display size.
