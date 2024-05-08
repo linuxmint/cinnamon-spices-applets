@@ -1,9 +1,18 @@
 # Changelog
 
+## 3.4.3
+
+* Fix [#5107](https://github.com/linuxmint/cinnamon-spices-applets/issues/5107) - Do not display null if there is no temperature provided on the applet label. 
+* Fix [#5972](https://github.com/linuxmint/cinnamon-spices-applets/issues/5972) - Do not use locale explicitly when displaying dates, just use the system one and be more flexible about selecting locale.
+* Fix [#5990](https://github.com/linuxmint/cinnamon-spices-applets/issues/5990) - error logging crashes if error is not specified.
+* Add Known Issue to README
+* Fix issue when running a command - `'` characters were not escaped inside commands
+* Make sure Weather Underground stations are always sorted by distance (smallest first).
+
 ## 3.4.2
 
-* Fix [#5419]https://github.com/linuxmint/cinnamon-spices-applets/issues/5419
-* Fix [#5680]https://github.com/linuxmint/cinnamon-spices-applets/issues/5680
+* Fix [#5419](https://github.com/linuxmint/cinnamon-spices-applets/issues/5419)
+* Fix [#5680](https://github.com/linuxmint/cinnamon-spices-applets/issues/5680)
 
 ## 3.4.1
 

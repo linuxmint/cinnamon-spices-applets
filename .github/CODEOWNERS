@@ -32,6 +32,7 @@ backgroundroll@Sokawaii25/**                       @Sokawaii25
 batterymonitor@pdcurtis/**                         @pdcurtis
 batterypower@joka42/**                             @joka42
 better-backgrounds@simonmicro/**                   @simonmicro
+betterlock/**                                      @Centurix
 bible@nodeengineer.com/**                          @nodeengineer
 bing-wallpaper@starcross.dev/**                    @Starcross
 bluetooth-battery@zamszowy/**                      @zamszowy
@@ -89,6 +90,8 @@ mailnagapplet@ozderya.net/**                       @hyOzd
 mem-monitor-text@datanom.net/**                    @icarter09
 moonphase@techi-freki/**                           @Techi-Freki
 multicore-sys-monitor@ccadeptic23/**               @claudiux
+mybookmarks@markbokil.com/**                       @Centurix
+mylauncher@markbokil.com/**                        @Centurix
 netusagemonitor@pdcurtis/**                        @pdcurtis
 network@brownsr/**                                 @brownsr
 networkmonitor@axel358/**                          @axel358
@@ -100,6 +103,7 @@ notification-mute@jgillula/**                      @jgillula
 nvidiaprime@pdcurtis/**                            @pdcurtis
 octopussy@centurix/**                              @centurix
 officeCenter@scollins/**                           @collinss
+password-generator@spencerlommel.com/**            @SpencerLommel
 placesCenter@scollins/**                           @collinss
 pomodoro@gregfreeman.org/**                        @gfreeau
 power-profiles@rcalixte/**                         @rcalixte
@@ -171,7 +175,6 @@ xsession@claudiux/**                               @claudiux
 # ThemeRefresh@JosephM
 # azan@fahri.nurul.id
 # bash-sensors@pkkk
-# betterlock
 # bettersettings@bownz
 # binaryclock@entelechy
 # cinnamon-multi-line-taskbar-applet
@@ -188,8 +191,6 @@ xsession@claudiux/**                               @claudiux
 # location-detection@heimdall
 # lorem@vxstorm
 # menu@csknet.org
-# mybookmarks@markbokil.com
-# mylauncher@markbokil.com
 # pa-equalizer@jschug.com
 # paneldo@beatlink
 # places-bookmarks@dmo60.de

@@ -4,6 +4,7 @@ const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 const Settings = imports.ui.settings; // Import the Settings module
+const Gio = imports.gi.Gio;
 
 const UUID = "password-generator@spencerlommel.com"
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
@@ -23,6 +24,10 @@ class CinnamonRandomPasswordApplet extends Applet.IconApplet {
         this.settings.bind("include-uppercase", "includeUppercase", this.onSettingsChanged);
         this.settings.bind("include-symbols", "includeSymbols", this.onSettingsChanged);
         this.settings.bind("include-numbers", "includeNumbers", this.onSettingsChanged);
+        this.settings.bind("auto-copy", "autoCopy", this.onSettingsChanged);
+        this.settings.bind("play-sound", "playSound", this.onSettingsChanged);
+        this.settings.bind("sound-file", "soundFilePath", this.onSettingsChanged);
+
 
         this.set_applet_icon_name("dialog-password");
         this.set_applet_tooltip(_("Generate Random Password"));
@@ -51,16 +56,37 @@ class CinnamonRandomPasswordApplet extends Applet.IconApplet {
 
         this.copyButton.connect('clicked', () => {
             St.Clipboard.get_default().set_text(St.ClipboardType.CLIPBOARD, this.textBox.get_text());
+            if (this.playSound) {
+                this.playClickSound(); // Call play sound method after copying
+            }
         });
 
         this.onSettingsChanged(); // Apply initial settings
     }
 
     on_applet_clicked(event) {
-        this.menu.toggle();
         let newPassword = this.generateRandomPassword();
         this.textBox.set_text(newPassword);
+        if (this.autoCopy) {
+            St.Clipboard.get_default().set_text(St.ClipboardType.CLIPBOARD, newPassword);
+            this.playClickSound();
+        } else {
+            this.menu.toggle();
+        }
     }
+
+    playClickSound() {
+        if (this.playSound && this.soundFilePath) {
+            let file = Gio.File.new_for_path(this.soundFilePath);
+            let player = new Gio.Subprocess({
+                argv: ['paplay', file.get_path()],
+                flags: Gio.SubprocessFlags.NONE
+            });
+            player.init(null);
+            player.wait_async(null, () => {});
+        }
+    }
+
 
     generateRandomPassword() {
         let charset = "";
