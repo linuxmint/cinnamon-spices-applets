@@ -31,7 +31,8 @@
     "auto-copy": {
         "type": "checkbox",
         "default": false,
-        "description": "Automatically Copy To Clipboard"
+        "description": "Automatically Copy To Clipboard",
+        "tooltip": "When clicking the lock icon, instead of opening a window where the password can be copied it is instead automatically copied to your Clipboard."
     }
     
 }
