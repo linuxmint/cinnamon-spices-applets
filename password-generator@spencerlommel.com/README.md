@@ -13,3 +13,9 @@ Usage
 
 - `Left click` icon to generate password, click `Copy` top copy to keyboard
 - `Right click` to `Configure`
+
+
+
+Audio Support 
+========
+- As of now, only `.ogg` files are supported for plaing sound on copy.

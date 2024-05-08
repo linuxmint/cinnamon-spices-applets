@@ -53,8 +53,9 @@
     },
     "sound-file": {
         "type": "soundfilechooser",
-        "default": "/usr/share/mint-artwork/sounds/map.oga",
-        "description": "Play sound on copy",
+        "default": "/usr/share/sounds/freedesktop/stereo/map.oga",
+        "dependency": "play-sound",
+        "description": "Sound file",
         "tooltip": "Select a sound to play when the password is copied"
     }
         
