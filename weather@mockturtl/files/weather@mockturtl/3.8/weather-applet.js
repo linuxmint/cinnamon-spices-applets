@@ -9688,7 +9688,7 @@ class Log {
         if (typeof e === "string") {
             return;
         }
-        if (!e)
+        if (!(e instanceof Error))
             return;
         const gjsE = e;
         global.logError(`GJS Error context - Name: ${gjsE.name}, domain: ${gjsE.domain}, code: ${(_a = IOErrorEnumNames[gjsE.code]) !== null && _a !== void 0 ? _a : gjsE.code}, message: ${gjsE.message}`);

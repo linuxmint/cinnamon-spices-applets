@@ -101,7 +101,7 @@ class Log {
 			return;
 		}
 
-		if (!e)
+		if (!(e instanceof Error))
 			return;
 
 		const gjsE = e as GJSError;
