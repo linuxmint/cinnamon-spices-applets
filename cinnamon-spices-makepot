@@ -5,7 +5,7 @@ import json
 import os
 import subprocess
 import sys
-
+from concurrent.futures import ProcessPoolExecutor
 from glob import glob
 
 
@@ -92,6 +92,21 @@ def remove_po(uuid: str, _all: bool = False):
     for uuid_mo_file in uuid_mo_list:
         os.remove(uuid_mo_file)
 
+def process_po(po_file: str, uuid: str) -> str:
+    *po_dir_list, po_ext = po_file.split('/')
+    po_dir_str = '/'.join(po_dir_list)
+    if not os.getcwd().endswith(po_dir_str):
+        os.chdir(po_dir_str)
+    po_lang = po_ext.split('.')[0]
+    # redirect stderr to a string to avoid printing the output
+    out1 = subprocess.run(["msguniq", "-o", po_ext, po_ext], check=True,
+                          stderr=subprocess.STDOUT, stdout=subprocess.PIPE, text=True)
+    out2 = subprocess.run(["intltool-update", "-g", uuid, "-d", po_lang],
+                check=True, stderr=subprocess.STDOUT, stdout=subprocess.PIPE, text=True)
+    out3 = subprocess.run(["msgattrib", "--no-obsolete", "-w", "79", "-o",
+                    po_ext, po_ext],
+                check=True, stderr=subprocess.STDOUT, stdout=subprocess.PIPE, text=True)
+    return po_lang + "\n" +  out1.stdout + out2.stdout + out3.stdout
 
 def make_pot(uuid: str, _all: bool = False):
     """
@@ -141,18 +156,10 @@ def make_pot(uuid: str, _all: bool = False):
     for po_file in po_list:
         os.chmod(po_file, 0o0644)
 
-    for po_file in po_list:
-        *po_dir_list, po_ext = po_file.split('/')
-        po_dir_str = '/'.join(po_dir_list)
-        if not os.getcwd().endswith(po_dir_str):
-            os.chdir(po_dir_str)
-        po_lang = po_ext.split('.')[0]
-        subprocess.run(["msguniq", "-o", po_ext, po_ext], check=True)
-        subprocess.run(["intltool-update", "-g", uuid, "-d", po_lang],
-                       check=True)
-        subprocess.run(["msgattrib", "--no-obsolete", "-w", "79", "-o",
-                        po_ext, po_ext],
-                       check=True)
+    with ProcessPoolExecutor() as executor:
+        for item in executor.map(process_po, po_list, [uuid] * len(po_list)):
+            print(item, end='')
+        
     if po_list:
         _return_pwd += '/..'
     if _all:
