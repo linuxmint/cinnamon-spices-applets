@@ -13083,11 +13083,33 @@ function SeverityToAlertLevel(level) {
 }
 function EventNameToIcon(event) {
     switch (event) {
+        case "Extreme Fire Danger":
+        case "Fire Warning":
+        case "Fire Weather Watch":
+            return "fire-symbolic";
+        case "Flash Flood Statement":
+        case "Flash Flood Warning":
+        case "Flash Flood Watch":
+        case "Flood Advisory":
+        case "Flood Statement":
+        case "Flood Warning":
+        case "Flood Watch":
+        case "Coastal Flood Advisory":
+        case "Coastal Flood Statement":
+        case "Coastal Flood Warning":
+        case "Coastal Flood Watch":
+        case "Lakeshore Flood Advisory":
+        case "Lakeshore Flood Statement":
+        case "Lakeshore Flood Warning":
+        case "Lakeshore Flood Watch":
+        case "Arroyo And Small Stream Flood Advisory":
+        case "Small Stream Flood Advisory":
+        case "Urban And Small Stream Flood Advisory":
+            return "flood-symbolic";
         case "911 Telephone Outage Emergency":
         case "Administrative Message":
         case "Air Quality Alert":
         case "Air Stagnation Advisory":
-        case "Arroyo And Small Stream Flood Advisory":
         case "Ashfall Advisory":
         case "Ashfall Warning":
         case "Avalanche Advisory":
@@ -13102,10 +13124,6 @@ function EventNameToIcon(event) {
         case "Child Abduction Emergency":
         case "Civil Danger Warning":
         case "Civil Emergency Message":
-        case "Coastal Flood Advisory":
-        case "Coastal Flood Statement":
-        case "Coastal Flood Warning":
-        case "Coastal Flood Watch":
         case "Dense Fog Advisory":
         case "Dense Smoke Advisory":
         case "Dust Advisory":
@@ -13116,17 +13134,7 @@ function EventNameToIcon(event) {
         case "Excessive Heat Watch":
         case "Extreme Cold Warning":
         case "Extreme Cold Watch":
-        case "Extreme Fire Danger":
         case "Extreme Wind Warning":
-        case "Fire Warning":
-        case "Fire Weather Watch":
-        case "Flash Flood Statement":
-        case "Flash Flood Warning":
-        case "Flash Flood Watch":
-        case "Flood Advisory":
-        case "Flood Statement":
-        case "Flood Warning":
-        case "Flood Watch":
         case "Freeze Warning":
         case "Freeze Watch":
         case "Freezing Fog Advisory":
@@ -13160,10 +13168,6 @@ function EventNameToIcon(event) {
         case "Lake Effect Snow Warning":
         case "Lake Effect Snow Watch":
         case "Lake Wind Advisory":
-        case "Lakeshore Flood Advisory":
-        case "Lakeshore Flood Statement":
-        case "Lakeshore Flood Warning":
-        case "Lakeshore Flood Watch":
         case "Law Enforcement Warning":
         case "Local Area Emergency":
         case "Low Water Advisory":
@@ -13181,7 +13185,6 @@ function EventNameToIcon(event) {
         case "Small Craft Advisory For Hazardous Seas":
         case "Small Craft Advisory For Rough Bar":
         case "Small Craft Advisory For Winds":
-        case "Small Stream Flood Advisory":
         case "Snow Squall Warning":
         case "Special Marine Warning":
         case "Special Weather Statement":
@@ -13189,7 +13192,6 @@ function EventNameToIcon(event) {
         case "Storm Surge Watch":
         case "Storm Warning":
         case "Storm Watch":
-        case "Test":
         case "Tornado Warning":
         case "Tornado Watch":
         case "Tropical Depression Local Statement":
@@ -13202,7 +13204,6 @@ function EventNameToIcon(event) {
         case "Typhoon Local Statement":
         case "Typhoon Warning":
         case "Typhoon Watch":
-        case "Urban And Small Stream Flood Advisory":
         case "Volcano Warning":
         case "Wind Advisory":
         case "Wind Chill Advisory":
@@ -13211,6 +13212,7 @@ function EventNameToIcon(event) {
         case "Winter Storm Warning":
         case "Winter Storm Watch":
         case "Winter Weather Advisory":
+        case "Test":
         default:
             return undefined;
     }
