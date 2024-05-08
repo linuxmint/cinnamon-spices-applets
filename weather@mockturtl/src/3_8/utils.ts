@@ -1,5 +1,6 @@
 import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
+import { Logger } from "./lib/logger";
 import { APIUniqueField, ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
 import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
@@ -57,7 +58,7 @@ export function GenerateLocationText(weather: WeatherData, config: Config) {
 }
 
 export function InjectValues(text: string, weather: WeatherData, config: Config): string {
-	const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
+	const lastUpdatedTime = AwareDateString(weather.date, config._show24Hours, DateTime.local().zoneName);
 	return text.replace(/{t}/g, TempToUserConfig(weather.temperature, config, false) ?? "")
 			   .replace(/{u}/g, UnitToUnicode(config.TemperatureUnit))
 			   .replace(/{c}/g, weather.condition.main)
@@ -107,7 +108,6 @@ function NormalizeTimezone(tz?: string | undefined) {
 }
 
 interface GetDayNameOptions {
-	locale?: string | null,
 	showDate?: boolean,
 	tz?: string | undefined
 	short?: boolean
@@ -117,14 +117,13 @@ interface GetDayNameOptions {
 
 export function GetDayName(date: DateTime, options: GetDayNameOptions = {}): string {
 	const {
-		locale = null,
 		showDate = false,
 		tz = undefined,
 		short = false,
 		useTodayTomorrow = true
 	} = options;
 
-	// locale: string | null, showDate: boolean = false, tz?: string | undefined
+	// showDate: boolean = false, tz?: string | undefined
 	const params: Intl.DateTimeFormatOptions = {
 		weekday: short ? "short" : "long",
 	}
@@ -150,9 +149,6 @@ export function GetDayName(date: DateTime, options: GetDayNameOptions = {}): str
 		delete params.weekday;
 	}
 
-	if (!!locale)
-		date = date.setLocale(locale);
-
 	let dateString = date.toLocaleString(params);
 	dateString = CapitalizeFirstLetter(dateString);
 
@@ -164,7 +160,7 @@ export function GetDayName(date: DateTime, options: GetDayNameOptions = {}): str
 	return dateString;
 }
 
-export function GetHoursMinutes(date: DateTime, locale: string | null, hours24Format: boolean, tz?: string, onlyHours: boolean = false): string {
+export function GetHoursMinutes(date: DateTime, hours24Format: boolean, tz?: string, onlyHours: boolean = false): string {
 	const params: Intl.DateTimeFormatOptions = {
 		hour: "numeric",
 		hour12: !hours24Format,
@@ -176,12 +172,10 @@ export function GetHoursMinutes(date: DateTime, locale: string | null, hours24Fo
 		params.minute = "2-digit";
 	if (!!tz)
 		date = date.setZone(tz);
-	if (!!locale)
-		date = date.setLocale(locale);
 	return date.toLocaleString(params);
 }
 
-export function AwareDateString(date: DateTime, locale: string | null, hours24Format: boolean, tz: string): string {
+export function AwareDateString(date: DateTime, hours24Format: boolean, tz: string): string {
 	const now = DateTime.utc().setZone(tz);
 	date = date.setZone(tz)
 	const params: Intl.DateTimeFormatOptions = {
@@ -200,9 +194,6 @@ export function AwareDateString(date: DateTime, locale: string | null, hours24Fo
 	}
 
 	params.timeZone = NormalizeTimezone(tz);
-
-	if (!!locale)
-		date = date.setLocale(locale);
 
 	return date.toLocaleString(params);
 }
@@ -244,9 +235,9 @@ export function LocalizedColon(locale: string | null): string {
 	return ":"
 }
 
-export function PercentToLocale(humidity: number, locale: string | null, withUnit: boolean = true): string {
+export function PercentToLocale(humidity: number, withUnit: boolean = true): string {
 	if (withUnit)
-		return (humidity / 100).toLocaleString(locale ?? undefined, { style: "percent" });
+		return (humidity / 100).toLocaleString(undefined, { style: "percent" });
 	else
 		return Math.round(humidity).toString();
 }
@@ -259,7 +250,7 @@ const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449
 export function ExtraFieldToUserUnits(extra_field: APIUniqueField, config: Config, withUnit: boolean = false): string {
 	switch (extra_field.type) {
 		case "percent":
-			return PercentToLocale(extra_field.value, config.currentLocale, withUnit);
+			return PercentToLocale(extra_field.value, withUnit);
 		case "temperature":
 			return TempToUserConfig(extra_field.value, config, withUnit);
 		default:
@@ -582,27 +573,39 @@ export function ShadeHexColor(color: string, percent: number): string {
  * Convert Linux locale to JS locale format
  * @param locale Linux locale string
  */
-export function ConstructJsLocale(locale: string): string | null {
-	if (locale == null)
-		return null;
+export function ConstructJsLocale(locales: string[]): string | null {
+	for (const locale of locales) {
+		// we only need lan_country section of locale, if we have space, @ or . we need to remove everything after
+		const jsLocale: string = locale.split(/[.\s@]/)[0].trim();
+		const tmp: string[] = jsLocale.split("_");
 
-	// we only need lan_country section of locale, if we have space, @ or . we need to remove everything after
-	const jsLocale: string = locale.split(/[.\s@]/)[0].trim();
-	const tmp: string[] = jsLocale.split("_");
+		let result: string = "";
+		// Add back country code if we have it
+		for (const [i, item] of tmp.entries()) {
+			if (i != 0)
+				result += "-";
+			result += item.toLowerCase();
+		}
 
-	let result: string = "";
-	// Add back country code if we have it
-	for (const [i, item] of tmp.entries()) {
-		if (i != 0)
-			result += "-";
-		result += item.toLowerCase();
+		// If we can't use it in toLocaleString it is not valid.
+		try {
+			new Date().toLocaleString(result);
+		}
+		catch(e) {
+			Logger.Info(`Invalid locale: ${result}, not supported by JS, ignoring.`);
+			Logger.Debug(e?.toString() ?? "");
+			continue;
+		}
+
+		// Ignore C
+		if (result == "c")
+			continue;
+
+		Logger.Debug(`System locale is ${result}, original is ${locale}`);
+		return result;
 	}
 
-	// Ignore C
-	if (result == "c")
-		return null;
-
-	return result;
+	return null;
 }
 
 /**

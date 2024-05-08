@@ -65,7 +65,7 @@ export class UIBar {
 
 		this.providerCreditButton.actor.label = creditLabel;
 		this.providerCreditButton.url = provider.website;
-		const lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours, DateTime.local().zoneName);
+		const lastUpdatedTime = AwareDateString(weather.date, config._show24Hours, DateTime.local().zoneName);
 		this._timestamp.label = _("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
 
 		if (weather?.stationInfo?.distanceFrom != null) {

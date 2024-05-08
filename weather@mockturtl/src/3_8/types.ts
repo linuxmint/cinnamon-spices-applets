@@ -191,9 +191,9 @@ export interface Condition {
 /** Immediate precipitation for the next hour, currently only OpenWeatherMap uses it.
  */
 export interface ImmediatePrecipitation {
-	/** Precipitation in * minutes */
+	/** Precipitation in * minutes. -1 means it doesn't start */
 	start: number;
-	/** ends in * minutes */
+	/** ends in * minutes. -1 means it doesn't end */
 	end: number;
 }
 

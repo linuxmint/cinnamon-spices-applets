@@ -151,6 +151,9 @@ export class WeatherUnderground extends BaseProvider {
         if (result.length == 0)
             return null;
 
+		// sort ascending by distanceKm
+		result.sort((a, b) => a.distanceKm - b.distanceKm);
+
         return result;
     }
 
