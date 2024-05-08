@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: password-generator@spencerlommel.com 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-05-06 23:31-0500\n"
-"PO-Revision-Date: 2024-05-07 11:45-0400\n"
+"POT-Creation-Date: 2024-05-07 20:32-0500\n"
+"PO-Revision-Date: 2024-05-08 17:32-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: applet.js:26
+#: applet.js:33
 msgid "Generate Random Password"
 msgstr "Generar contraseña aleatoria"
 
-#: applet.js:35
+#: applet.js:42
 msgid "Please enable at least one value in settings."
 msgstr "Por favor, active al menos un valor en la configuración."
 
-#: applet.js:42
+#: applet.js:49
 msgid "Copy"
 msgstr "Copiar"
 
@@ -37,6 +37,10 @@ msgstr "Generador de contraseñas configurable"
 msgid "Password Generator"
 msgstr "Generador de contraseñas"
 
+#. settings-schema.json->password-settings-header->description
+msgid "Password Settings"
+msgstr "Configuración de la contraseña"
+
 #. settings-schema.json->password-length->units
 msgid "characters"
 msgstr "caracteres"
@@ -44,6 +48,10 @@ msgstr "caracteres"
 #. settings-schema.json->password-length->description
 msgid "Password Length"
 msgstr "Longitud de la contraseña"
+
+#. settings-schema.json->password-length->tooltip
+msgid "The password can be any length from 1 to 32 characters."
+msgstr "La contraseña puede tener entre 1 y 32 caracteres."
 
 #. settings-schema.json->include-lowercase->description
 msgid "Include Lowercase Letters"
@@ -60,3 +68,37 @@ msgstr "Incluir números"
 #. settings-schema.json->include-symbols->description
 msgid "Include Symbols"
 msgstr "Incluir símbolos"
+
+#. settings-schema.json->copy-settings-header->description
+msgid "Copy Settings"
+msgstr "Copiar configuración"
+
+#. settings-schema.json->auto-copy->description
+msgid "Automatically Copy To Clipboard"
+msgstr "Copiar automáticamente al portapapeles"
+
+#. settings-schema.json->auto-copy->tooltip
+msgid ""
+"When clicking the lock icon, instead of opening a window where the password "
+"can be copied it is instead automatically copied to your Clipboard."
+msgstr ""
+"Al hacer clic en el icono del candado, en lugar de abrirse una ventana en "
+"la que se puede copiar la contraseña, ésta se copia automáticamente en el "
+"Portapapeles."
+
+#. settings-schema.json->play-sound->description
+#. settings-schema.json->sound-file->description
+msgid "Play sound on copy"
+msgstr "Reproducir sonido al copiar"
+
+#. settings-schema.json->play-sound->tooltip
+msgid ""
+"Toggles whether or not a sound is played when the password is copied to the "
+"Clipboard"
+msgstr ""
+"Activa o desactiva la reproducción de un sonido cuando la contraseña se "
+"copia en el Portapapeles"
+
+#. settings-schema.json->sound-file->tooltip
+msgid "Select a sound to play when the password is copied"
+msgstr "Seleccione el sonido que se reproducirá al copiar la contraseña"
