@@ -98,7 +98,9 @@ def process_po(po_file: str, uuid: str) -> str:
     if not os.getcwd().endswith(po_dir_str):
         os.chdir(po_dir_str)
     po_lang = po_ext.split('.')[0]
-    # redirect stderr to a string to avoid printing the output
+    # TODO: use something like this: https://stackoverflow.com/a/4760274/14100077
+    # but better so we capture the output sterr and stdout of each command __in order__
+    # and return it with that information.
     out1 = subprocess.run(["msguniq", "-o", po_ext, po_ext], check=True,
                           stderr=subprocess.STDOUT, stdout=subprocess.PIPE, text=True)
     out2 = subprocess.run(["intltool-update", "-g", uuid, "-d", po_lang],
