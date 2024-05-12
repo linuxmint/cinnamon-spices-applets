@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-05-12 19:53+0200\n"
-"PO-Revision-Date: 2024-05-06 13:30-0400\n"
+"PO-Revision-Date: 2024-05-12 15:12-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -181,7 +181,7 @@ msgstr "Silenciar"
 
 #: 5.4/applet.js:1040
 msgid "View cover"
-msgstr ""
+msgstr "Ver portada"
 
 #: 5.4/applet.js:1896
 msgid "Easy Effects"
@@ -620,13 +620,13 @@ msgstr "Mantener abierto el selector de reproductores"
 
 #. 5.4->settings-schema.json->keySwitchPlayer->description
 msgid "Switch to next player"
-msgstr ""
+msgstr "Cambiar al siguiente reproductor"
 
 #. 5.4->settings-schema.json->keySwitchPlayer->tooltip
-#, fuzzy
 msgid "Set keybinding(s) to switch to the next player if it exists."
 msgstr ""
-"Establece la combinación de teclas para mostrar el menú del applet de sonido."
+"Configure combinaciones de teclas para cambiar al siguiente reproductor si "
+"existe."
 
 #. 5.4->settings-schema.json->middleShiftClickAction->description
 msgid "Action on shift+middle click"
