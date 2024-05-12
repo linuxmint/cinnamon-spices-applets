@@ -1,3 +1,8 @@
+### v6.12.0~20240512
+  * Adds a keyboard shortcut to switch between players.
+  * Fixes #5989.
+  * Minor bugfixes and improvements.
+
 ### v6.11.0~20240506
   * Created Sounds section in Sound tab of settings.
   * Improved keyboard shortcuts management.
