@@ -128,6 +128,7 @@
       "title": "Shortcuts",
       "keys": [
         "keyOpen",
+        "keySwitchPlayer",
         "redefine-volume-keybindings",
         "audio-stop",
         "pause-on-off",
@@ -166,6 +167,12 @@
     "description": "Show menu",
     "default": "<Shift><Super>s",
     "tooltip": "Set keybinding(s) to show the sound applet menu."
+  },
+  "keySwitchPlayer": {
+    "type": "keybinding",
+    "description": "Switch to next player",
+    "default": "::",
+    "tooltip": "Set keybinding(s) to switch to the next player if it exists."
   },
   "_knownPlayers": {
     "type": "generic",

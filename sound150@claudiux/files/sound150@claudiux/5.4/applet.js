@@ -1036,6 +1036,15 @@ class Player extends PopupMenu.PopupMenuSection {
         this._cover_load_handle = 0;
         this._cover_path = null;
 
+        this.display_cover_button = new ControlButton("x-shape-image",
+            _("View cover"),
+            () => {
+                Util.spawnCommandLineAsync("xdg-open "+this._cover_path)
+            }
+        );
+        //~ this.coverBox.add_actor(this.display_cover_button.getActor());
+        //~ this.display_cover_button.hide();
+
         // Track info (artist + title)
         this._artist = _("Unknown Artist");
         this._album = _("Unknown Album");
@@ -1068,8 +1077,10 @@ class Player extends PopupMenu.PopupMenuSection {
         this.titleLabel.clutterText.ellipsize = Pango.EllipsizeMode.NONE;
         titleInfo.add_actor(titleIcon);
         titleInfo.add_actor(this.titleLabel);
+        //~ titleInfo.add_actor(this.display_cover_button.getActor());
         this.trackInfo.add_actor(artistInfo);
         this.trackInfo.add_actor(titleInfo);
+        //~ this.trackInfo.add_actor(this.display_cover_button.getActor());
         this.coverBox.add_actor(this.trackInfo);
 
         this._trackCover.set_child(this.coverBox);
@@ -1572,7 +1583,6 @@ class Player extends PopupMenu.PopupMenuSection {
                     image.set_data(
                         pixbuf.get_pixels(),
                         pixbuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGB_888,
-                        //~ pixbuf.get_has_alpha() ? 19 : 2,
                         pixbuf.get_width(),
                         pixbuf.get_height(),
                         pixbuf.get_rowstride()
@@ -1595,10 +1605,11 @@ class Player extends PopupMenu.PopupMenuSection {
                         width: Math.trunc(300*global.ui_scale),
                         height: Math.trunc(300*global.ui_scale),
                         keep_aspect_ratio: false,
-                        filter_quality: 2,
+                        filter_quality: Clutter.Texture.QUALITY_HIGH,
                         filename: cover_path
                     });
                 }
+                //~ this.display_cover_button.show();
             } catch(e) {}
         }
     }
@@ -1621,6 +1632,9 @@ class Player extends PopupMenu.PopupMenuSection {
 
         this.cover = actor;
         this.coverBox.add_actor(this.cover);
+        //~ this.coverBox.set_reactive = true;
+        //~ this.coverBox.connect("button-press-event", (event) => Util.spawnCommandLineAsync("xdg-open "+this._cover_path));
+
         try { this.coverBox.set_child_below_sibling(this.cover, this.trackInfo);} catch(e) {}
         this._applet.setAppletTextIcon(this, this._cover_path);
     }
@@ -1633,7 +1647,7 @@ class Player extends PopupMenu.PopupMenuSection {
     destroy() {
         //~ if (this._seeker)
             //~ this._seeker.destroy();
-        if (this._prop)
+        if (this._prop && this._propChangedId)
             this._prop.disconnectSignal(this._propChangedId);
 
         if (this._seeker)
@@ -1704,6 +1718,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         if (this.hideSystray) this.registerSystrayIcons();
 
         this.settings.bind("keyOpen", "keyOpen", this._setKeybinding);
+        this.settings.bind("keySwitchPlayer", "keySwitchPlayer", this._setKeybinding);
 
         this.settings.bind("stepVolume", "stepVolume", () => {
             VOLUME_ADJUSTMENT_STEP = this.settings.getValue("stepVolume") / 100;
@@ -1985,6 +2000,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     _setKeybinding() {
         Main.keybindingManager.addHotKey("sound-open-" + this.instance_id, this.keyOpen, Lang.bind(this, this._openMenu));
+        Main.keybindingManager.addHotKey("switch-player-" + this.instance_id, this.keySwitchPlayer, Lang.bind(this, this._switchToNextPlayer));
 
         Main.keybindingManager.addHotKey("raise-volume-" + this.instance_id, "AudioRaiseVolume", () => this._volumeChange(Clutter.ScrollDirection.UP));
         Main.keybindingManager.addHotKey("lower-volume-" + this.instance_id, "AudioLowerVolume", () => this._volumeChange(Clutter.ScrollDirection.DOWN));
@@ -2112,6 +2128,7 @@ class Sound150Applet extends Applet.TextIconApplet {
 
     on_applet_removed_from_panel() {
         Main.keybindingManager.removeHotKey("sound-open-" + this.instance_id);
+        Main.keybindingManager.removeHotKey("switch-player-" + this.instance_id);
         try {
             Main.keybindingManager.removeHotKey("raise-volume-" + this.instance_id);
             Main.keybindingManager.removeHotKey("lower-volume-" + this.instance_id);
@@ -2591,6 +2608,19 @@ class Sound150Applet extends Applet.TextIconApplet {
         }
     }
 
+    _switchToNextPlayer() {
+        if (this._playerItems.length <= 1 || !this._activePlayer) return;
+
+        for (let i = 0, l = this._playerItems.length; i < l; ++i) {
+            let playerItem = this._playerItems[i];
+            if (playerItem.player._owner === this._activePlayer) {
+                let selected = (i+1)%l;
+                this._switchPlayer(this._playerItems[selected].player._owner);
+                return
+            }
+        }
+    }
+
     _removePlayerItem(owner) {
         // Remove the player from the player switching list
         for (let i = 0, l = this._playerItems.length; i < l; ++i) {
@@ -2771,7 +2801,8 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _notifyVolumeChange(stream) {
-        Main.soundManager.play("volume");
+        if (this.volumeSoundEnabled)
+            Main.soundManager.play("volume");
     }
 
     _mutedChanged(object, param_spec, property) {
