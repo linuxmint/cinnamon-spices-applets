@@ -113,12 +113,12 @@ function SeverityToAlertLevel(level: USWeatherAlert["properties"]["severity"]): 
  * @returns
  */
 function EventNameToIcon(event: string): CustomIcons | BuiltinIcons | undefined {
-	// TODO: Add icons for these
 	switch (event) {
 		case "Extreme Fire Danger":
 		case "Fire Warning":
 		case "Fire Weather Watch":
 			return "fire-symbolic";
+
 		case "Flash Flood Statement":
 		case "Flash Flood Warning":
 		case "Flash Flood Watch":
@@ -138,112 +138,138 @@ function EventNameToIcon(event: string): CustomIcons | BuiltinIcons | undefined 
 		case "Small Stream Flood Advisory":
 		case "Urban And Small Stream Flood Advisory":
 			return "flood-symbolic";
-		case "911 Telephone Outage Emergency":
-		case "Administrative Message":
-		case "Air Quality Alert":
-		case "Air Stagnation Advisory":
+
 		case "Ashfall Advisory":
 		case "Ashfall Warning":
-		case "Avalanche Advisory":
-		case "Avalanche Warning":
-		case "Avalanche Watch":
-		case "Beach Hazards Statement":
-		case "Blizzard Warning":
-		case "Blizzard Watch":
 		case "Blowing Dust Advisory":
 		case "Blowing Dust Warning":
-		case "Brisk Wind Advisory":
-		case "Child Abduction Emergency":
-		case "Civil Danger Warning":
-		case "Civil Emergency Message":
-		case "Dense Fog Advisory":
-		case "Dense Smoke Advisory":
-		case "Dust Advisory":
 		case "Dust Storm Warning":
-		case "Earthquake Warning":
-		case "Evacuation - Immediate":
-		case "Excessive Heat Warning":
-		case "Excessive Heat Watch":
+		case "Dust Advisory":
+			return "dust-symbolic";
+
+		case "Blizzard Warning":
+		case "Blizzard Watch":
 		case "Extreme Cold Warning":
 		case "Extreme Cold Watch":
-		case "Extreme Wind Warning":
 		case "Freeze Warning":
 		case "Freeze Watch":
 		case "Freezing Fog Advisory":
 		case "Freezing Rain Advisory":
 		case "Freezing Spray Advisory":
 		case "Frost Advisory":
-		case "Gale Warning":
-		case "Gale Watch":
 		case "Hard Freeze Warning":
 		case "Hard Freeze Watch":
-		case "Hazardous Materials Warning":
-		case "Hazardous Seas Warning":
-		case "Hazardous Seas Watch":
-		case "Hazardous Weather Outlook":
-		case "Heat Advisory":
+		case "Winter Storm Warning":
+		case "Winter Storm Watch":
+		case "Winter Weather Advisory":
 		case "Heavy Freezing Spray Warning":
 		case "Heavy Freezing Spray Watch":
-		case "High Surf Advisory":
-		case "High Surf Warning":
+		case "Lake Effect Snow Advisory":
+		case "Lake Effect Snow Warning":
+		case "Lake Effect Snow Watch":
+		case "Snow Squall Warning":
+			return "snowflake-cold-symbolic";
+
+		case "Dense Fog Advisory":
+			return "fog-symbolic"
+
+		case "Dense Smoke Advisory":
+			return "smoke-symbolic";
+
+		case "Brisk Wind Advisory":
+		case "Extreme Wind Warning":
 		case "High Wind Warning":
 		case "High Wind Watch":
+		case "Ice Storm Warning":
+		case "Lake Wind Advisory":
+		case "Wind Advisory":
+		case "Wind Chill Advisory":
+		case "Wind Chill Warning":
+		case "Wind Chill Watch":
+			return "strong-wind-symbolic";
+
+		case "Excessive Heat Warning":
+		case "Excessive Heat Watch":
+		case "Heat Advisory":
+			return "hot-symbolic";
+
+		case "Gale Warning":
+		case "Gale Watch":
+			return "gale-warning-symbolic";
+
 		case "Hurricane Force Wind Warning":
 		case "Hurricane Force Wind Watch":
 		case "Hurricane Local Statement":
 		case "Hurricane Warning":
 		case "Hurricane Watch":
-		case "Hydrologic Advisory":
-		case "Hydrologic Outlook":
-		case "Ice Storm Warning":
-		case "Lake Effect Snow Advisory":
-		case "Lake Effect Snow Warning":
-		case "Lake Effect Snow Watch":
-		case "Lake Wind Advisory":
+		case "Typhoon Local Statement":
+		case "Typhoon Warning":
+		case "Typhoon Watch":
+		case "Tropical Depression Local Statement":
+		case "Tropical Storm Local Statement":
+		case "Tropical Storm Warning":
+		case "Tropical Storm Watch":
+			return "hurricane-symbolic";
+
+		case "Severe Thunderstorm Warning":
+		case "Severe Thunderstorm Watch":
+		case "Severe Weather Statement":
+		case "Storm Surge Warning":
+		case "Storm Surge Watch":
+		case "Storm Warning":
+		case "Storm Watch":
+			return "lightning-symbolic";
+
+		case "Tornado Warning":
+		case "Tornado Watch":
+			return "tornado-symbolic";
+
+		case "Tsunami Advisory":
+		case "Tsunami Warning":
+		case "Tsunami Watch":
+			return "tsunami-symbolic";
+
+		case "Volcano Warning":
+			return "volcano-symbolic";
+
+		case "Earthquake Warning":
+
+		case "Special Marine Warning":
+		case "Special Weather Statement":
 		case "Law Enforcement Warning":
 		case "Local Area Emergency":
 		case "Low Water Advisory":
 		case "Marine Weather Statement":
 		case "Nuclear Power Plant Warning":
 		case "Radiological Hazard Warning":
-		case "Red Flag Warning":
-		case "Rip Current Statement":
-		case "Severe Thunderstorm Warning":
-		case "Severe Thunderstorm Watch":
-		case "Severe Weather Statement":
+		case "Hazardous Weather Outlook":
+		case "Hazardous Seas Warning":
+		case "Hazardous Seas Watch":
 		case "Shelter In Place Warning":
 		case "Short Term Forecast":
+		case "Red Flag Warning":
+		case "Rip Current Statement":
 		case "Small Craft Advisory":
 		case "Small Craft Advisory For Hazardous Seas":
 		case "Small Craft Advisory For Rough Bar":
 		case "Small Craft Advisory For Winds":
-		case "Snow Squall Warning":
-		case "Special Marine Warning":
-		case "Special Weather Statement":
-		case "Storm Surge Warning":
-		case "Storm Surge Watch":
-		case "Storm Warning":
-		case "Storm Watch":
-		case "Tornado Warning":
-		case "Tornado Watch":
-		case "Tropical Depression Local Statement":
-		case "Tropical Storm Local Statement":
-		case "Tropical Storm Warning":
-		case "Tropical Storm Watch":
-		case "Tsunami Advisory":
-		case "Tsunami Warning":
-		case "Tsunami Watch":
-		case "Typhoon Local Statement":
-		case "Typhoon Warning":
-		case "Typhoon Watch":
-		case "Volcano Warning":
-		case "Wind Advisory":
-		case "Wind Chill Advisory":
-		case "Wind Chill Warning":
-		case "Wind Chill Watch":
-		case "Winter Storm Warning":
-		case "Winter Storm Watch":
-		case "Winter Weather Advisory":
+		case "High Surf Advisory":
+		case "High Surf Warning":
+		case "Hydrologic Advisory":
+		case "Hydrologic Outlook":
+		case "Hazardous Materials Warning":
+		case "Evacuation - Immediate":
+		case "Avalanche Advisory":
+		case "Avalanche Warning":
+		case "Avalanche Watch":
+		case "Child Abduction Emergency":
+		case "Civil Danger Warning":
+		case "Civil Emergency Message":
+		case "Beach Hazards Statement":
+		case "911 Telephone Outage Emergency":
+		case "Administrative Message":
+		case "Air Quality Alert":
+		case "Air Stagnation Advisory":
 		case "Test":
 		default:
 			return undefined;
