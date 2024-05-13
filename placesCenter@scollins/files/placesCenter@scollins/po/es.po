@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-04-15 02:01+0200\n"
-"PO-Revision-Date: 2023-11-20 17:59-0300\n"
+"PO-Revision-Date: 2024-05-13 12:54-0400\n"
 "Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: applet.js:150
 msgid "(Right click to open folder)"
@@ -49,7 +49,7 @@ msgstr "Limpiar"
 
 #: applet.js:364
 msgid "Recent"
-msgstr ""
+msgstr "Recientes"
 
 #: applet.js:407
 msgid "Computer"
@@ -170,7 +170,7 @@ msgstr "kehugter - Añadió la opción de configurar el click central"
 
 #. metadata.json->contributors
 msgid "claudiux - Improvements to the 'Recent' section."
-msgstr ""
+msgstr "claudiux - Mejoras en la sección \"Recientes\"."
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -334,7 +334,7 @@ msgstr "Número de entradas visibles"
 
 #. settings-schema.json->recentShowUri->description
 msgid "Show complete path in tooltips"
-msgstr ""
+msgstr "Mostrar la ruta completa en la información sobre herramientas"
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"
