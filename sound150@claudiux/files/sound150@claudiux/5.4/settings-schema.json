@@ -47,7 +47,8 @@
         "playerControl",
         "extendedPlayerControl",
         "keepPlayerListOpen",
-        "keepChoosePlayerOpen"
+        "keepChoosePlayerOpen",
+        "avoidTwice"
       ]
     },
     "sectionBehavior2": {
@@ -161,6 +162,11 @@
     "type": "switch",
     "default": false,
     "description": "Keep the player controller selector open"
+  },
+  "avoidTwice": {
+    "type": "switch",
+    "default": false,
+    "description": "Avoid displaying controllers twice"
   },
   "keyOpen": {
     "type": "keybinding",
