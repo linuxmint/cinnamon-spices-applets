@@ -1713,6 +1713,8 @@ class Sound150Applet extends Applet.TextIconApplet {
             for (let i in this._players)
                 this._players[i].onSettingsChanged();
         });
+        this.settings.bind("avoidTwice", "avoidTwice", this._updatePlayerMenuItems);
+
 
         this.settings.bind("_knownPlayers", "_knownPlayers");
         if (this.hideSystray) this.registerSystrayIcons();
@@ -2755,6 +2757,8 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _updatePlayerMenuItems() {
+        let names = [];
+
         if (this.playerControl && this._activePlayer) {
             this._launchPlayerItem.actor.show();
             this._launchPlayerItemActorIsHidden = false;
@@ -2765,8 +2769,14 @@ class Sound150Applet extends Applet.TextIconApplet {
             for (let i = 0, l = this._playerItems.length; i < l; ++i) {
                 let playerItem = this._playerItems[i];
 
-                playerItem.item.setLabel(playerItem.player._name);
-                playerItem.item.setShowDot(playerItem.player._owner === this._activePlayer);
+                if (!this.avoidTwice || (this.avoidTwice && names.indexOf(playerItem.player._name) < 0)) {
+                    playerItem.item.setLabel(playerItem.player._name);
+                    playerItem.item.setShowDot(playerItem.player._owner === this._activePlayer);
+                    names.push(playerItem.player._name);
+                }
+                else {
+                    this._removePlayerItem(playerItem.player._owner);
+                }
             }
 
             // Hide the switching menu if we only have at most one active player
@@ -2810,7 +2820,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             this.mute_out_switch.setToggleState(this._output.is_muted);
         } else if (property == "_input") {
             this.mute_in_switch.setToggleState(this._input.is_muted);
-            this._volumeChange(null); //Added
+            this._volumeChange(null);
         }
     }
 

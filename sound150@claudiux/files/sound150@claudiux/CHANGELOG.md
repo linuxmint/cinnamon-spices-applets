@@ -1,3 +1,6 @@
+### v6.13.0~20240514
+  * Fixes #6008: Added the option to avoid displaying controllers twice.
+
 ### v6.12.0~20240512
   * Adds a keyboard shortcut to switch between players.
   * Fixes #5989.
