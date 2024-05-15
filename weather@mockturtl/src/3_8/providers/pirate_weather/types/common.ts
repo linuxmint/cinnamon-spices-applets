@@ -1,3 +1,4 @@
+import { PirateWeatherAlert } from "./alerts";
 import { PirateWeatherDailyPayload } from "./daily";
 import { PirateWeatherHourlyPayload } from "./hourly";
 import { PirateWeatherMinutelyPayload } from "./minutely";
@@ -53,6 +54,7 @@ export interface PirateWeatherPayload {
 		icon: PirateWeatherIcon;
 		data: PirateWeatherDailyPayload[]
 	}
+	alerts?: PirateWeatherAlert[];
 }
 
 export type PirateWeatherIcon =

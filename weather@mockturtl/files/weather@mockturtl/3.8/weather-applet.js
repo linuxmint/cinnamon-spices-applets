@@ -389,6 +389,7 @@ const EN_DASH = '\u2013';
 const FORWARD_SLASH = '\u002F';
 const STYLE_HIDDEN = "weather-hidden";
 const REQUEST_TIMEOUT_SECONDS = 30;
+const ALERT_LEVEL_ORDER = ["extreme", "severe", "moderate", "minor", "unknown"];
 const US_TIMEZONES = [
     "America/Adak",
     "America/Anchorage",
@@ -15867,6 +15868,7 @@ class WeatherUnderground extends BaseProvider {
 
 
 
+
 class PirateWeather extends BaseProvider {
     get remainingCalls() {
         return null;
@@ -16009,6 +16011,19 @@ class PirateWeather extends BaseProvider {
                 }
                 result.immediatePrecipitation = immediate;
             }
+            if (json.alerts != null) {
+                const alerts = [];
+                for (const alert of json.alerts) {
+                    alerts.push({
+                        title: alert.title,
+                        description: alert.description,
+                        level: this.PirateWeatherAlertSeverityToAlertLevel(alert.severity),
+                        sender_name: "",
+                    });
+                }
+                ;
+                result.alerts = alerts.sort((a, b) => ALERT_LEVEL_ORDER.indexOf(a.level) - ALERT_LEVEL_ORDER.indexOf(b.level));
+            }
             return result;
         }
         catch (e) {
@@ -16019,6 +16034,20 @@ class PirateWeather extends BaseProvider {
         }
     }
     ;
+    PirateWeatherAlertSeverityToAlertLevel(severity) {
+        switch (severity) {
+            case "Extreme":
+                return "extreme";
+            case "Severe":
+                return "severe";
+            case "Moderate":
+                return "moderate";
+            case "Minor":
+                return "minor";
+            default:
+                return "unknown";
+        }
+    }
     ResolveIcon(icon, sunTimes, date) {
         switch (icon) {
             case "rain":

@@ -35,13 +35,13 @@ You can also save locations what you entered manually and switch between them in
 | **DMI Denmark**            | No            | 10                    | 48                     | No                 | No      | --                            |
 | **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | Yes     | --                            |
 | **Met Office UK**          | No            | 5                     | 36                     | No                 | No      | --                            |
-| **US National Weather**    | No            | 7                     | 156                    | No                 | No      | --                            |
+| **US National Weather**    | No            | 7                     | 156                    | No                 | Yes     | --                            |
 | **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | No      | --                            |
 | **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | No      | --                            |
 | **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | No      | Previously known as Climacell |
 | **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | No      | Limited free calls            |
 | **Weather Underground**    | Yes           | 5                     | 0                      | No                 | No      | --                            |
-| **Pirate Weather**         | Yes           | 7                     | 168                    | Yes                | No      | --                            |
+| **Pirate Weather**         | Yes           | 7                     | 168                    | Yes                | Depends | --                            |
 
 ### OpenWeatherMap
 
@@ -141,6 +141,8 @@ Weather Underground is a privately owned, web-based weather information company.
 Direct replacement to DarkSky. Run by one guy, it's also open source. If you like the accuracy of the data or you want to keep the project going, subscribe to a paid plan. 10000 calls free. You can get an API key [here](https://pirate-weather.apiable.io/products/weather-data).
 
 You can read about the project [here](http://pirateweather.net/en/latest/).
+
+Alerts are an US only feature as of May 2024.
 
 ### Usage of "Override label on panel", "Override location label" and "Override tooltip on panel" setting
 
