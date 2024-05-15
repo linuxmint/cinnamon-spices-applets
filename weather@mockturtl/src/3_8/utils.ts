@@ -636,62 +636,6 @@ export function GetAlertColor(level: AlertLevel, lightTheme: boolean): string {
 }
 
 /**
- * TODO: Expand support or remove.
- * @param sender_name
- * @param event
- * @param description
- * @param tags
- * @returns
- */
-export function InferAlertLevel(sender_name: string, event: string, description: string, tags: string[]): AlertLevel {
-	sender_name = sender_name.trim().toLowerCase();
-	event = event.trim().toLowerCase();
-	tags = tags.map((tag) => tag.trim().toLowerCase());
-	switch(sender_name) {
-		case "uk met office": {
-			if (event.includes("small craft advisory")) return "minor";
-			if (event.includes("yellow")) return "moderate";
-			if (event.includes("amber")) return "severe";
-			if (event.includes("red")) return "extreme";
-
-			return "unknown";
-		}
-		default:
-			return "unknown";
-	}
-}
-
-/**
- * TODO: Expand support or remove.
- * @param sender_name
- * @param event
- * @param description
- * @param tags
- * @returns
- */
-export function InferAlertIcon(sender_name: string, event: string, description: string, tags: string[]): BuiltinIcons | CustomIcons | undefined {
-	switch(sender_name) {
-		case "UK Met Office": {
-			if (tags.includes("Volcano")) return "volcano-symbolic";
-			if (tags.includes("Earthquake")) return "earthquake-symbolic";
-			if (tags.includes("Tsunami")) return "tsunami-symbolic";
-			if (tags.includes("Hurricane")) return "hurricane-symbolic";
-			if (tags.includes("Tornado")) return "tornado-symbolic";
-			if (tags.includes("Fire")) return "fire-symbolic";
-			if (tags.includes("Flood")) return "flood-symbolic";
-			if (tags.includes("Sandstorm")) return "sandstorm-symbolic";
-			if (tags.includes("Thunderstorm")) return "lightning-symbolic";
-			if (tags.includes("Wind")) return "gale-warning-symbolic";
-
-
-			return undefined;
-		}
-		default:
-			return undefined;
-	}
-}
-
-/**
  * https://www.movable-type.co.uk/scripts/latlong.html
  * @param lat1
  * @param lon1

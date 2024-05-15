@@ -9392,55 +9392,6 @@ const darkAlertColors = {
 function GetAlertColor(level, lightTheme) {
     return lightTheme ? lightAlertColors[level] : darkAlertColors[level];
 }
-function InferAlertLevel(sender_name, event, description, tags) {
-    sender_name = sender_name.trim().toLowerCase();
-    event = event.trim().toLowerCase();
-    tags = tags.map((tag) => tag.trim().toLowerCase());
-    switch (sender_name) {
-        case "uk met office": {
-            if (event.includes("small craft advisory"))
-                return "minor";
-            if (event.includes("yellow"))
-                return "moderate";
-            if (event.includes("amber"))
-                return "severe";
-            if (event.includes("red"))
-                return "extreme";
-            return "unknown";
-        }
-        default:
-            return "unknown";
-    }
-}
-function InferAlertIcon(sender_name, event, description, tags) {
-    switch (sender_name) {
-        case "UK Met Office": {
-            if (tags.includes("Volcano"))
-                return "volcano-symbolic";
-            if (tags.includes("Earthquake"))
-                return "earthquake-symbolic";
-            if (tags.includes("Tsunami"))
-                return "tsunami-symbolic";
-            if (tags.includes("Hurricane"))
-                return "hurricane-symbolic";
-            if (tags.includes("Tornado"))
-                return "tornado-symbolic";
-            if (tags.includes("Fire"))
-                return "fire-symbolic";
-            if (tags.includes("Flood"))
-                return "flood-symbolic";
-            if (tags.includes("Sandstorm"))
-                return "sandstorm-symbolic";
-            if (tags.includes("Thunderstorm"))
-                return "lightning-symbolic";
-            if (tags.includes("Wind"))
-                return "gale-warning-symbolic";
-            return undefined;
-        }
-        default:
-            return undefined;
-    }
-}
 function GetDistance(lat1, lon1, lat2, lon2) {
     const R = 6371e3;
     const φ1 = lat1 * Math.PI / 180;
@@ -11167,7 +11118,7 @@ class OpenWeatherMap extends BaseProvider {
         return null;
     }
     ParseWeather(json, loc) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
         try {
             const weather = {
                 coord: {
@@ -11269,8 +11220,7 @@ class OpenWeatherMap extends BaseProvider {
             for (const alert of (_o = json.alerts) !== null && _o !== void 0 ? _o : []) {
                 alerts.push({
                     sender_name: alert.sender_name,
-                    level: (_p = InferAlertLevel(alert.sender_name, alert.event, alert.description, alert.tags)) !== null && _p !== void 0 ? _p : "orange",
-                    icon: InferAlertIcon(alert.sender_name, alert.event, alert.description, alert.tags),
+                    level: "unknown",
                     title: alert.event,
                     description: alert.description,
                 });
