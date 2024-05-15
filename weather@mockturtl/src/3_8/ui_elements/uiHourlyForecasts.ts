@@ -169,13 +169,12 @@ export class UIHourlyForecasts {
 
 			if (hour.date.hour == 0)
 				ui.Hour.text = GetDayName(hour.date, {
-					locale: config.currentLocale,
 					tz: tz,
 					useTodayTomorrow: false,
 					short: true
 				});
 			else
-				ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
+				ui.Hour.text = GetHoursMinutes(hour.date, config._show24Hours, tz, config._shortHourlyTime);
 			ui.Temperature.text = temp ? `${temp}°` : "";
 			ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
 			// ui.Summary.text = hour.condition.main;

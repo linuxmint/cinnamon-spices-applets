@@ -15,6 +15,7 @@ const Util = imports.misc.util;
 const Gettext = imports.gettext;
 const Lang = imports.lang;
 
+const HOME_DIR = GLib.get_home_dir();
 const MENU_ITEM_TEXT_LENGTH = 25;
 let menu_item_icon_size;
 let uuid;
@@ -127,7 +128,7 @@ class PlaceMenuItem extends FolderTypeMenuItem {
 }
 
 class RecentFileMenuItem extends IconMenuItem {
-    constructor(text, icon, gicon = null, uri, folderApp){
+    constructor(text, icon, gicon = null, uri, folderApp, showUri=false){
         if ( gicon ) {
             icon = new St.Icon({gicon: gicon, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
         }
@@ -145,7 +146,8 @@ class RecentFileMenuItem extends IconMenuItem {
             }
         }));
 
-        let tooltip = new Tooltips.Tooltip(this.actor, text + '\n' + _("(Right click to open folder)"));
+        let info = (showUri) ? decodeURIComponent(uri.replace("file://", "").replace(HOME_DIR, "~")) : text;
+        let tooltip = new Tooltips.Tooltip(this.actor, info + '\n' + _("(Right click to open folder)"));
     }
 }
 
@@ -159,7 +161,7 @@ class MyApplet extends Applet.TextIconApplet {
             this.on_orientation_changed(orientation);
 
             uuid = metadata.uuid;
-            Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale");
+            Gettext.bindtextdomain(uuid, HOME_DIR + "/.local/share/locale");
 
             //initiate settings
             this.bindSettings();
@@ -234,6 +236,7 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bindProperty(Settings.BindingDirection.IN, "systemCustomPlaces", "systemCustomPlaces", this.buildSystemSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "showRecentDocuments", "showRecentDocuments", this.buildMenu);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "recentSizeLimit", "recentSizeLimit", this.buildRecentDocumentsSection);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "recentShowUri", "recentShowUri", this.buildRecentDocumentsSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "keyOpen", "keyOpen", this.setKeybinding);
         let recentSizeLimit = this.recentSizeLimit;
         if ( recentSizeLimit % 5 !== 0 ) this.recentSizeLimit = Math.ceil(recentSizeLimit / 5) * 5;
@@ -280,7 +283,7 @@ class MyApplet extends Applet.TextIconApplet {
             userTitle.addActor(userSearchButton);
             let userSearchImage = new St.Icon({ icon_name: "edit-find", icon_size: 10, icon_type: St.IconType.SYMBOLIC });
             userSearchButton.add_actor(userSearchImage);
-            userSearchButton.connect("clicked", Lang.bind(this, this.search, GLib.get_home_dir()));
+            userSearchButton.connect("clicked", Lang.bind(this, this.search, HOME_DIR));
             new Tooltips.Tooltip(userSearchButton, _("Search Home Folder"));
 
             // create a scrollbox for large user section, if any
@@ -445,7 +448,7 @@ class MyApplet extends Applet.TextIconApplet {
             if ( customPlaces[i] == "" ) continue;
             try {
                 let entry = customPlaces[i].split(":");
-                let place = entry[0].replace("~/", GLib.get_home_dir() + "/");
+                let place = entry[0].replace("~/", HOME_DIR + "/");
                 while ( place[0] == " " ) place = place.substr(1);
                 if ( place.search("://") == -1 ) place = "file://" + place;
                 let file = Gio.File.new_for_uri(place);
@@ -524,9 +527,9 @@ class MyApplet extends Applet.TextIconApplet {
                 }
 
                 if ( gicon ) {
-                    recentItem = new RecentFileMenuItem( recentInfo.get_display_name(), null, gicon, recentInfo.get_uri(), appOpeningFolders );
+                    recentItem = new RecentFileMenuItem(recentInfo.get_display_name(), null, gicon, recentInfo.get_uri(), appOpeningFolders, this.recentShowUri );
                 } else {
-                    recentItem = new RecentFileMenuItem( recentInfo.get_display_name(), mimeType, null, recentInfo.get_uri(), appOpeningFolders );
+                    recentItem = new RecentFileMenuItem(recentInfo.get_display_name(), mimeType, null, recentInfo.get_uri(), appOpeningFolders, this.recentShowUri );
                 }
                 this.recentSection.addMenuItem(recentItem);
             } else if ( showCount < recentDocuments.length ) {
@@ -589,7 +592,7 @@ class MyApplet extends Applet.TextIconApplet {
     getMiddleClickUri() {
         if ( this.middleClickPath == "") return false;
 
-        let path = this.middleClickPath.replace("~", GLib.get_home_dir());
+        let path = this.middleClickPath.replace("~", HOME_DIR);
         if ( path.search("://") != -1 ) return path;
 
         if ( GLib.path_is_absolute(path) &&
@@ -597,7 +600,7 @@ class MyApplet extends Applet.TextIconApplet {
             return Gio.file_new_for_path(path).get_uri();
         }
 
-        return Gio.file_new_for_path(GLib.get_home_dir()).get_uri();
+        return Gio.file_new_for_path(HOME_DIR).get_uri();
     }
 
     search(a, b, directory) {

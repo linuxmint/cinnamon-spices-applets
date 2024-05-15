@@ -1,214 +1,101 @@
-//'use strict';
+'use strict';
 // infos on use strict: https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Strict_mode
-const { TextIconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet; //Applet
-
-const AppletManager = imports.ui.appletManager; //AppletManager
-
-const { WindowTracker,
-  AppSystem
-} = imports.gi.Cinnamon; //Cinnamon
-
+//Applet:
+const { TextIconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
+//AppletManager:
+const AppletManager = imports.ui.appletManager;
+//Cinnamon:
+const { WindowTracker, AppSystem } = imports.gi.Cinnamon;
+//Lang:
 const Lang = imports.lang;
-
-const { PopupMenuManager,
-  PopupMenuItem,
-  PopupSeparatorMenuItem,
-  PopupIconMenuItem,
-  PopupSwitchMenuItem,
-  PopupMenuSection,
-  PopupSubMenuMenuItem,
-  PopupBaseMenuItem,
-  PopupSubMenu,
-  arrowIcon
-} = imports.ui.popupMenu; //PopupMenu
-
-const {
-  AppletSettings
-} = imports.ui.settings; // Settings
-
-const {
-  spawnCommandLineAsyncIO,
-  spawnCommandLineAsync,
-  spawnCommandLine,
-  spawn_async,
-  trySpawnCommandLine,
-  //killall,
-  setTimeout,
-  clearTimeout
-} = require("./lib/util");
-
-const {
-  ScrollDirection,
-  Image,
-  Actor,
-  Color,
-  RotateAxis
-} = imports.gi.Clutter; //Clutter
-
-const {
-  bindtextdomain,
-  dgettext,
-  gettext
-} = imports.gettext; //Gettext
-
-const {
-  get_home_dir,
-  get_language_names,
-  get_user_name,
-  get_user_runtime_dir,
-  get_user_special_dir,
-  UserDirectory,
-  find_program_in_path,
-  markup_escape_text,
-  DateTime,
-  file_test,
-  FileTest,
-  file_get_contents,
-  file_set_contents,
-  mkdir_with_parents,
-  uuid_string_random,
-  random_int_range,
-  getenv,
-  PRIORITY_LOW,
-  SOURCE_REMOVE,
-  SOURCE_CONTINUE
-} = imports.gi.GLib; //GLib
-
-const {
-  FileChooserDialog,
-  FileFilter,
-  FileChooserAction,
-  STOCK_CANCEL,
-  STOCK_OPEN,
-  ResponseType,
-  PolicyType,
-  DirectionType
-} = imports.gi.Gtk; //Gtk
-
-const {
-    Display
-} = imports.gi.Gdk; // Gdk
-
+//PopupMenu:
+const { PopupMenu, PopupMenuManager, PopupMenuItem, PopupSeparatorMenuItem, PopupIconMenuItem, PopupSwitchMenuItem, PopupMenuSection, PopupSubMenuMenuItem, PopupBaseMenuItem, PopupSubMenu, arrowIcon } = imports.ui.popupMenu;
+// Settings:
+const { AppletSettings } = imports.ui.settings;
+// ./lib/util:
+const { spawnCommandLineAsyncIO, spawnCommandLineAsync, spawnCommandLine, spawn_async, trySpawnCommandLine, setTimeout, clearTimeout } = require("./lib/util");
+//Clutter:
+const { ScrollDirection, Image, Actor, Color, RotateAxis } = imports.gi.Clutter;
+//Gettext:
+const { bindtextdomain, dgettext, gettext } = imports.gettext;
+//GLib:
+const { get_home_dir, get_language_names, get_user_name, get_user_runtime_dir, get_user_special_dir, UserDirectory, find_program_in_path, markup_escape_text, DateTime, file_test, FileTest, file_get_contents, file_set_contents, mkdir_with_parents, uuid_string_random, random_int_range, getenv, PRIORITY_LOW, SOURCE_REMOVE, SOURCE_CONTINUE } = imports.gi.GLib;
+//Gtk:
+const { FileChooserDialog, FileFilter, FileChooserAction, STOCK_CANCEL, STOCK_OPEN, ResponseType, PolicyType, DirectionType } = imports.gi.Gtk;
+//Gdk:
+const { Display } = imports.gi.Gdk;
+//FileDialog:
 const FileDialog = imports.misc.fileDialog;
+//ModalDialog:
 const ModalDialog = imports.ui.modalDialog;
-
-const {
-  network_monitor_get_default,
-  NetworkConnectivity,
-  file_new_for_path,
-  app_info_get_default_for_type,
-  FileInfo,
-  FileQueryInfoFlags,
-  FileType,
-  FileIcon,
-  FileMonitorFlags,
-  DataInputStream,
-  UnixInputStream,
-  Settings
-} = imports.gi.Gio; //Gio
-
-const {
-  Icon,
-  IconType,
-  Button,
-  Widget,
-  ScrollView,
-  Align,
-  Label,
-  BoxLayout,
-  Bin,
-  Side,
-  Clipboard,
-  ClipboardType
-} = imports.gi.St; //St
-
-const {
-  Tooltip
-} = imports.ui.tooltips; // Tooltips
-
-const {
-  Urgency,
-  MessageTray,
-  SystemNotificationSource,
-  Notification
-} = imports.ui.messageTray; //MessageTray
+//Gio:
+const { network_monitor_get_default, NetworkConnectivity, file_new_for_path, app_info_get_default_for_type, FileInfo, FileQueryInfoFlags, FileType, FileIcon, FileMonitorFlags, DataInputStream, UnixInputStream, Settings } = imports.gi.Gio;
+//St:
+const { Icon, IconType, Button, Widget, ScrollView, Align, Label, BoxLayout, Bin, Side, Clipboard, ClipboardType } = imports.gi.St;
+//Tooltips:
+const { Tooltip } = imports.ui.tooltips;
+//MessageTray:
+const { Urgency, MessageTray, SystemNotificationSource, Notification } = imports.ui.messageTray;
 
 var RADIO_NOTIFICATION_TIMEOUT = 2;
 const RADIO_NOTIFICATION_CRITICAL_TIMEOUT_WITH_APPLET = 10;
-
-const {
-  timeout_add_seconds,
-  source_remove
-} = imports.mainloop; //Mainloop
-
-const {
-  parse_markup
-} = imports.gi.Pango; //Pango
-
-const {
-  reloadExtension,
-  Type
-} = imports.ui.extension; //Extension
-
-const Clutter = imports.gi.Clutter; // Clutter
-
-const {
-  Pixbuf
-} = imports.gi.GdkPixbuf; //GdkPixbuf
-
-const {
-  PixelFormat
-} = imports.gi.Cogl; //Cogl
-
-const {
-  notificationDaemon,
-  keybindingManager
-} = imports.ui.main; // Main
-
-const Cvc = imports.gi.Cvc; //Cvc
-
+//Mainloop:
+const { timeout_add_seconds, source_remove } = imports.mainloop;
+//Pango
+const { parse_markup, WrapMode, EllipsizeMode } = imports.gi.Pango;
+//Extension:
+const { reloadExtension, Type } = imports.ui.extension;
+//Clutter:
+const Clutter = imports.gi.Clutter;
+//GdkPixbuf:
+const { Pixbuf } = imports.gi.GdkPixbuf;
+//Cogl:
+const { PixelFormat } = imports.gi.Cogl;
+//Main:
+const { notificationDaemon, keybindingManager, uiGroup } = imports.ui.main;
+//Atk:
+const Atk = imports.gi.Atk;
+//Cvc:
+const Cvc = imports.gi.Cvc;
+//Signals:
 const Signals = imports.signals;
-
-
-const {
-  Dependencies,
-  criticalNotify
-} = require("./lib/checkDependencies");
-
+// checkDependencies:
+const { Dependencies, criticalNotify } = require("./lib/checkDependencies");
+// htmlEncodeDecode:
 let HtmlEncodeDecode = require('./lib/htmlEncodeDecode');
-const { xml2json } = require('lib/xml2json.min');
-
+// xml2json.min:
+const { xml2json } = require('./lib/xml2json.min');
+// filesCsv:
 const FilesCsv = require("./lib/filesCsv");
+// filesPls:
 const FilesPls = require("./lib/filesPls");
+// filesM3u:
 const FilesM3u = require("./lib/filesM3u");
+// filesXspf:
 const FilesXspf = require("./lib/filesXspf");
+// filesJson:
 const FilesJson = require("./lib/filesJson");
-
+// files:
 const Files = require("./lib/files");
-
+// volumeslider:
 const VolumeSlider = require("./lib/volumeslider");
-
+// screensaverInhibitor:
 const ScreensaverInhibitor = require("./lib/screensaverInhibitor");
-
+// to-string:
 const {to_string} = require("./lib/to-string");
-
+// httpLib:
 const {HttpLib} = require("./lib/httpLib");
-
-const {
-  fixedEncodeURIComponent
-} = require("./lib/fixedEncodeURIComponent");
-
-const {
-  are_translations_installed,
-  install_translations
-} = require("./lib/checkTranslations");
+// fixedEncodeURIComponent:
+const { fixedEncodeURIComponent } = require("./lib/fixedEncodeURIComponent");
+// checkTranslations:
+const { are_translations_installed, install_translations } = require("./lib/checkTranslations");
 
 //~ const {
   //~ Shoutcast
 //~ } = require("./lib/shoutcast");
 
 const range = (start, stop, step) =>
-      Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
+  Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
 var validChars = range("A".charCodeAt(0), "Z".charCodeAt(0), 1).map((x) =>
   String.fromCharCode(x)
 );
@@ -248,10 +135,8 @@ function getImageAtScale(imageFileName, width, height) {
     width, height,
     pixBuf.get_rowstride()
   );
-
   let actor = new Actor({width: width, height: height});
   actor.set_content(image);
-
   return actor;
 }
 
@@ -934,6 +819,189 @@ var RadioPopupSubMenuMenuItem = class RadioPopupSubMenuMenuItem extends PopupSub
   }
 }
 
+var StationsPopupSubMenuMenuItem = class StationsPopupSubMenuMenuItem extends PopupSubMenuMenuItem {
+  _connectSubMenuSignals(object, menu) {
+        /**
+         * SIGNAL:activate
+         * @menuItem (PopupBaseMenuItem): the item activated
+         * @keepMenu (boolean): whether the menu should remain opened
+         *
+         * Emitted when an item of the menu is activated.
+         */
+
+        /**
+         * SIGNAL:active-changed
+         * @menuItem (PopupBaseMenuItem): the current active item (possibly null)
+         *
+         * Emitted when the active item of menu is changed.
+         */
+
+        this._signals.connect(menu, 'activate', (submenu, submenuItem, keepMenu) => {
+            this.emit('activate', submenuItem, true); //keepMenu replaced with true
+            //~ if (!keepMenu){
+                //~ this.close(true);
+            //~ }
+        });
+        this._signals.connect(menu, 'active-changed', (submenu, submenuItem) => {
+            if (this._activeMenuItem && this._activeMenuItem != submenuItem)
+                this._activeMenuItem.setActive(false);
+            this._activeMenuItem = submenuItem;
+            this.emit('active-changed', submenuItem);
+        });
+    }
+
+    _connectItemSignals(menuItem) {
+        this._signals.connect(menuItem, 'active-changed', (menuItem, active) => {
+            if (active && this._activeMenuItem != menuItem) {
+                if (this._activeMenuItem)
+                    this._activeMenuItem.setActive(false);
+                this._activeMenuItem = menuItem;
+                this.emit('active-changed', menuItem);
+            } else if (!active && this._activeMenuItem == menuItem) {
+                this._activeMenuItem = null;
+                this.emit('active-changed', null);
+            }
+        });
+        this._signals.connect(menuItem, 'sensitive-changed', (menuItem, sensitive) => {
+            if (!sensitive && this._activeMenuItem == menuItem) {
+                if (!this.actor.navigate_focus(menuItem.actor,
+                                               Gtk.DirectionType.TAB_FORWARD,
+                                               true))
+                    this.actor.grab_key_focus();
+            } else if (sensitive && this._activeMenuItem == null) {
+                if (global.stage.get_key_focus() == this.actor)
+                    menuItem.actor.grab_key_focus();
+            }
+        });
+        this._signals.connect(menuItem, 'activate', (menuItem, event, keepMenu) => {
+            this.emit('activate', menuItem, true); //keepMenu replaced with true
+            //~ if (!keepMenu){
+                //~ this.close(true);
+            //~ }
+        });
+        this._signals.connect(menuItem, 'destroy', (emitter) => {
+            this._signals.disconnect('activate', menuItem);
+            this._signals.disconnect('active-changed', menuItem);
+            this._signals.disconnect('sensitive-changed', menuItem);
+            if (menuItem.menu) {
+                this._signals.disconnect('activate', menuItem.menu);
+                this._signals.disconnect('active-changed', menuItem.menu);
+                this._signals.disconnect('open-state-changed', this);
+            }
+            if (menuItem == this._activeMenuItem)
+                this._activeMenuItem = null;
+            this.length--;
+        });
+    }
+
+    addMenuItem(menuItem, position) {
+        let before_item = null;
+        if (position == undefined) {
+            this.box.add(menuItem.actor);
+        } else {
+            let items = this._getMenuItems();
+            if (position < items.length) {
+                before_item = items[position].actor;
+                this.box.insert_child_below(menuItem.actor, before_item);
+            } else
+                this.box.add(menuItem.actor);
+        }
+        if (menuItem instanceof PopupMenuSection) {
+            this._connectSubMenuSignals(menuItem, menuItem);
+            this._signals.connect(menuItem, 'destroy', () => {
+                this._signals.disconnect('activate', menuItem);
+                this._signals.disconnect('active-changed', menuItem);
+
+                this.length--;
+            });
+        } else if (menuItem instanceof PopupSubMenuMenuItem) {
+            if (before_item == null)
+                this.box.add(menuItem.menu.actor);
+            else
+                this.box.insert_child_below(menuItem.menu.actor, before_item);
+            this._connectSubMenuSignals(menuItem, menuItem.menu);
+            this._connectItemSignals(menuItem);
+            this._signals.connect(this, 'open-state-changed', function(self, open) {
+                //~ if (!open && menuItem.menu.isOpen) {
+                    //~ if (this.animating) {
+                        //~ menuItem.menu.closeAfterUnmap();
+                    //~ } else {
+                        //~ menuItem.menu.close(false);
+                    //~ }
+                //~ }
+            }, this);
+        } else if (menuItem instanceof PopupSeparatorMenuItem) {
+            this._connectItemSignals(menuItem);
+
+            // updateSeparatorVisibility needs to get called any time the
+            // separator's adjacent siblings change visibility or position.
+            // open-state-changed isn't exactly that, but doing it in more
+            // precise ways would require a lot more bookkeeping.
+            let updateSeparatorVisibility = this._updateSeparatorVisibility.bind(this, menuItem);
+            this._signals.connect(this, 'open-state-changed', updateSeparatorVisibility);
+        } else if (menuItem instanceof PopupBaseMenuItem)
+            this._connectItemSignals(menuItem);
+        else
+            throw TypeError("Invalid argument to PopupMenuBase.addMenuItem()");
+
+        this.length++;
+    }
+
+    toggle () {
+      this.open()
+    }
+
+    close(animate) {
+
+    }
+}
+
+class CategoriesStationsBox {
+    constructor() {
+        this.actor = new St.BoxLayout({ vertical: false });
+        this.actor._delegate = this;
+    }
+}
+
+/**
+ * #R3PopupMenu:
+ * @short_description: Applet left-click menu
+ *
+ * A popupmenu menu (left-click menu) to be used by an applet
+ *
+ * Inherits: PopupMenu.PopupMenu
+ */
+var R3PopupMenu = class R3PopupMenu extends PopupMenu {
+
+  /**
+   * _init:
+   * @launcher (Applet.Applet): The applet that contains the context menu
+   * @orientation (St.Side): The orientation of the applet
+   *
+   * Constructor function
+   */
+  _init(launcher, orientation) {
+    super._init(launcher.actor, orientation);
+    uiGroup.add_actor(this.actor);
+    this.actor.hide();
+    this.launcher = launcher;
+    if (launcher instanceof Applet) {
+      this.connect("open-state-changed", Lang.bind(this, this._onOpenStateChanged, launcher));
+      launcher.connect("orientation-changed", Lang.bind(this, this._onOrientationChanged));
+    } else if (launcher._applet) {
+      launcher._applet.connect("orientation-changed", Lang.bind(this, this._onOrientationChanged));
+    }
+  }
+
+  _onOrientationChanged(a, orientation) {
+    this.setArrowSide(orientation);
+  }
+
+  _onOpenStateChanged(menu, open, sourceActor) {
+    if (!sourceActor._applet_context_menu.isOpen)
+      sourceActor.actor.change_style_pseudo_class("checked", open);
+  }
+}
 
 class WebRadioReceiverAndRecorder extends TextIconApplet {
   constructor(orientation, panel_height, instance_id) {
@@ -996,7 +1064,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.angle = 0;
     this.rot_interval = 0;
     this.do_rotation = false;
-    this.ui_scale = global.ui_scale;
 
     // Clipboard:
     this.clipboard = Clipboard.get_default();
@@ -1070,8 +1137,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     // User's settings:
     this.settings = new R3AppletSettings(this, UUID, this.instanceId);
     let userSettings = JSON.parse(to_string(file_get_contents(RADIO30_CONFIG_FILE)[1]));
-    this.set_MPV_ALIAS();
     this.get_user_settings();
+    this.set_MPV_ALIAS();
 
     this.on_rec_path_changed();
 
@@ -1190,12 +1257,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("import-dir", "import_dir");
 
     this.settings.bind("recording-path", "recording_path", this.on_rec_path_changed.bind(this));
-    this.settings.bind("recording-format", "rec_format");
+    this.settings.bind("recording-format", "rec_format", this.set_MPV_ALIAS.bind(this));
     this.settings.bind("recording-ends-auto", "recording_ends_auto");
 
     this.settings.bind("limits-hd-size-prefixes", "size_prefixes", (...args) => set_nemo_size_prefixes(...args));
 
     this.settings.bind("last-radio-listened-to", "last_radio_listened_to");
+    this.settings.bind("last-category", "last_category");
     this.settings.bind("switch-on-last-station-at-start-up", "switch_on_last_station_at_start_up",
       this.on_switch_on_last_station_at_start_up.bind(this));
     this.settings.bind("notif-station-change", "notif_station_change");
@@ -1231,6 +1299,12 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.settings.bind("network-quality", "network_quality");
     this.settings.bind("database-url", "database_url");
     this.settings.bind("database-favorite", "database_favorite", this.on_database_favorite_changed.bind(this));
+    // Cache:
+    this.settings.bind("cache-no-cache", "cache_no_cache", this.set_MPV_ALIAS.bind(this));
+    this.settings.bind("cache-stream-size", "cache_stream_size", this.set_MPV_ALIAS.bind(this));
+    this.settings.bind("cache-mins", "cache_minutes", this.set_MPV_ALIAS.bind(this));
+    this.settings.bind("cache-on-disk", "cache_on_disk", this.set_MPV_ALIAS.bind(this));
+    this.settings.bind("cache-dir", "cache_dir", this.set_MPV_ALIAS.bind(this));
 
     // YT:
     this.settings.bind("yt-progress-interval", "yt_interval");
@@ -1485,11 +1559,33 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
   set_MPV_ALIAS() {
     //log("set_MPV_ALIAS");
-    this.MPV_ALIAS = MPV_PROGRAM() + " --no-stop-screensaver --script=%s --no-terminal --no-video --metadata-codepage=auto --input-ipc-server=%s".format(MPV_LUA_SCRIPT, MPV_SOCKET);
+    this.MPV_ALIAS = MPV_PROGRAM() + " --no-resume-playback --no-stop-screensaver --script=%s --no-terminal --no-video --metadata-codepage=auto --input-ipc-server=%s".format(MPV_LUA_SCRIPT, MPV_SOCKET); //--reset-on-next-file=all
     let proxy = ""+this.settings.getValue("http-proxy");
     proxy = proxy.trim();
     if (proxy.length > 0 && proxy.startsWith("http://"))
       this.MPV_ALIAS += " --http-proxy="+proxy;
+    let no_cache = this.cache_no_cache;
+    let cache_secs = (this.cache_minutes == 0) ? 3600000 : 60*this.cache_minutes;
+    if (no_cache)
+      this.MPV_ALIAS += " --no-cache"
+    else {
+      let stream_size = this.cache_stream_size;
+      if (stream_size.length == 1 && !this.cache_on_disk) // "0" value
+        this.MPV_ALIAS += " --cache=auto";
+      else {
+        this.MPV_ALIAS += " --cache=yes";
+        this.MPV_ALIAS += " --stream-buffer-size="+stream_size;
+        if (this.cache_on_disk) {
+          this.MPV_ALIAS += " --cache-on-disk=yes --cache-unlink-files=immediate"; //whendone
+          this.MPV_ALIAS += " --cache-secs=" + cache_secs;
+          let cache_dir = this.cache_dir.replace("file://", "");
+          this.MPV_ALIAS += " --cache-dir=" + cache_dir;
+          this.MPV_ALIAS += " --stream-record=" + cache_dir + "/stream_record."+this.rec_format;
+        } else {
+          this.MPV_ALIAS += " --cache-on-disk=no";
+        }
+      }
+    }
   }
 
   get_notifwbuttons_timeout() {
@@ -1651,7 +1747,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       } else {
         this.stop_mpv_radio();
       }
-      this.make_menu("on_network_changed");
+      this.make_menu();
       this.updateUI();
     }
   } // End of on_network_changed
@@ -1833,7 +1929,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     //this.get_mpv_bitrate();
 
-    this.on_song_changed(this.get_radio_name(this.radioId, "_on_mpv_title_changed"), title);
+    this.on_song_changed(this.get_radio_name(this.radioId), title);
   }
 
   monitor_rec_folder() {
@@ -2011,8 +2107,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.set_color();
   }
 
-  get_radio_name(id, caller="") {
-    //log("get_radio_name: caller: "+caller);
+  get_radio_name(id) {
     var name = "";
 
     if (this.radiosHash != null && this.radiosHash[""+id] != null) { // && this.radiosHash[""+id].inc == true) {
@@ -2042,9 +2137,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     return name;
   }
 
-  get_radio_favicon(id, caller="") {
-    //log("get_radio_homepage: caller: "+caller);
-
+  get_radio_favicon(id) {
     let radios = this.settings.getValue("radios");
 
     var favicon = "";
@@ -2070,9 +2163,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     return favicon;
   }
 
-  get_radio_homepage(id, caller="") {
-    //log("get_radio_homepage: caller: "+caller);
-
+  get_radio_homepage(id) {
     let radios = this.settings.getValue("radios");
 
     var homepage = "";
@@ -2224,7 +2315,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     title = title.replace(/\"/g, "");
 
     if (this.radioNameBolded === undefined)
-      this.radioNameBolded = this.in_bold(this.get_radio_name(this.last_radio_listened_to, "change_volume_in_radio_tooltip"));
+      this.radioNameBolded = this.in_bold(this.get_radio_name(this.last_radio_listened_to));
 
     let _tooltip = "" + this.radioNameBolded + this.codecAndBitrate + "\n";
     if (title.length > 0) {
@@ -2261,7 +2352,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     let _tooltip = _("Click to select a station");
 
     if (this.last_radio_listened_to != null && this.last_radio_listened_to.length > 0) {
-      this.radioNameBolded = this.in_bold(this.get_radio_name(this.last_radio_listened_to, "set_radio_tooltip_to_default_one"));
+      this.radioNameBolded = this.in_bold(this.get_radio_name(this.last_radio_listened_to));
       _tooltip = "" + this.radioNameBolded + this.codecAndBitrate;
 
       var title = "" + this.songTitle;
@@ -2359,32 +2450,17 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.menu.addMenuItem(soundSettingsItem);
   }
 
-  make_menu2(force=false, notify_user=true, change_tooltip=true) {
-    // MINIMAL MENU:
-    if (!this.radios || this.radios.length === 0) {
-      //log("!!!! make_menu: MINIMAL MENU");
-      this.minimal_menu();
-      return;
-    }
-
-    // NORMAL MENU2:
-
-  }
-
-  make_menu(caller="", force=false, notify_user=true, change_tooltip=true) {
-    //log("make_menu: caller: "+caller);
+  make_menu(force=false, notify_user=true, change_tooltip=true) {
     //log("!!!! make_menu: this.radios: "+JSON.stringify(this.radios, null, 2));
 
     // MINIMAL MENU:
     if (!this.radios || this.radios.length === 0) {
-      //log("!!!! make_menu: MINIMAL MENU");
       this.minimal_menu();
       return;
     }
 
     // NORMAL MENU
     if (force || this.oldRadios != JSON.stringify(this.radios)) {
-      //log("!!!! make_menu: NORMAL MENU");
       this.set_radio_hashtable();
 
       if (change_tooltip) this.set_radio_tooltip_to_default_one();
@@ -2411,11 +2487,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       if (this.songTitle && this.songTitle.length > 0) {
         let title = this.songTitle.replace(/\//g, " & ");
         let query = fixedEncodeURIComponent(title);
-        let proxy_option = "";
         let proxy = ""+this.settings.getValue("http-proxy");
         proxy = proxy.trim();
-        if (proxy.length > 0)
-          proxy_option = ` --proxy "${proxy}"`;
+        let proxy_option = (proxy.length > 0) ? ` --proxy "${proxy}"` : "";
         let brainz_link = `https://musicbrainz.org/search?type=recording&query=${query}`;
         let yt_watch_link = `https://www.youtube.com/results?search_query=${query}`;
 
@@ -2434,6 +2508,8 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         //~ log("yt_dl_command: "+yt_dl_command);
 
         let brainz_item = new PopupIconMenuItem(""+title, "audio-x-generic", IconType.SYMBOLIC, { reactive: true });
+        brainz_item.label.clutterText.line_wrap_mode = WrapMode.WORD_CHAR;
+        brainz_item.label.clutterText.ellipsize = EllipsizeMode.NONE;
         brainz_item.connect('activate', Lang.bind(this, function() {
           spawnCommandLineAsync("xdg-open " + brainz_link);
         }));
@@ -2516,7 +2592,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
         var indexRecentRadios = 0;
         for (let id of this.recentRadios) {
-          let title = ""+this.get_radio_name(id, "make_menu: recent radios");
+          let title = ""+this.get_radio_name(id);
           if (titles.indexOf(title) > -1) continue;
 
           if (!title || title.length === 0 || title === "undefined" || title ==="null") {
@@ -2538,6 +2614,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
               }
 
               this.stop_mpv_radio(false);
+              this.which_category_for_id(id);
               this.start_mpv_radio(id);
 
               this.menu.close();
@@ -2547,7 +2624,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
           if (""+id == ""+this.last_radio_listened_to && this.mpvStatus === "PLAY") {
             item.setShowDot(true);
-            let homepage = this.get_radio_homepage(id, "make_menu: recent radios");
+            let homepage = this.get_radio_homepage(id);
             item_homepage = null;
             if (homepage && homepage != 'null' && homepage.length > 0) {
               item_homepage = new PopupIconMenuItem(_("Visit the home page of this station"), "web-browser", IconType.SYMBOLIC, { reactive: true });
@@ -2567,97 +2644,68 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       }
       this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
-      // --- Begin Test (under development)
-      //~ let subMenuMyCategories = new RadioPopupSubMenuMenuItem(
-        //~ _("My Categories") + "  (%s)".format(""+(this.number_of_categories))
-      //~ );
+      if (this.show_by_category && this.number_of_categories > 0) {
+        // Category list beside of Radio Station list:
+        let cws = JSON.parse(JSON.stringify(this.categories_with_stations));
+        let _cats = Object.keys(cws);
+        //~ logDebug("Nbr of categories: "+_cats.length);
+        //~ logDebug("categories_with_stations: \n"+JSON.stringify(cws, null, 4));
 
-      //~ for (let radio of this.radios) {
-        //~ let title = ""+radio.name;
-        //~ let url = ""+radio.url;
-        //~ let isCategory = (url.length === 0);
+        let section = new PopupMenuSection();
+        section.box.set_vertical(false);
+        section.box.set_style("width: 900px;");
+        this.menu.addMenuItem(section);
 
-        //~ if (isCategory) {
-          //~ subMenuMyCategories.menu.addAction(title, () => {});
-        //~ }
-      //~ }
+        let sectionCats = new PopupMenuSection();
+        sectionCats.box.set_vertical(true);
+        //~ sectionCats.box.set_style("width: 200px;");
+        section.addMenuItem(sectionCats);
 
-      //~ this.menu.addMenuItem(subMenuMyCategories);
-      //~ subMenuMyCategories.menu._needsScrollbar = function() {
-        //~ return true;
-      //~ };
-      // --- End Test
+        let sectionStations = new PopupMenuSection();
+        sectionStations.box.set_vertical(true);
+        //~ sectionStations.box.set_style("width: 500px;");
+        section.addMenuItem(sectionStations);
 
-      this.show_by_category = false; // Forced to false; true doesn't work for now.
+        this.categoriesMenu = new StationsPopupSubMenuMenuItem(_("Categories"));
 
-      if (this.show_by_category) {
-        // MY CATEGORIES
-        //let allCategoriesMenu = new RadioPopupSubMenuMenuItem(_("My Categories") + "  (%s)".format(""+(this.number_of_categories)));
-        let allCategoriesMenu = new RadioPopupSubMenuMenuItem(_("My Categories") + "  (%s)".format(""+(this.number_of_categories)));
-        //let allCategoriesMenu = new PopupMenuItem(_("My Categories") + "  (%s)".format(""+(this.number_of_categories)));
-        //let allCategoriesMenu = new PopupMenuSection(null);
-        //~ allCategoriesMenu._needsScrollbar = function() {
-          //~ return true;
-        //~ };
-        //~ allCategoriesMenu.close = function(animate) {
-          //~ return true;
-        //~ };
-        //~ allCategoriesMenu.actor.set_style_class_name('menu-context-menu');
-        //allCategoriesMenu.connect('open-state-changed', Lang.bind(this, this._contextMenuOpenStateChanged));
-        //~ allCategoriesMenu.connect('open-state-changed', () => {});
+        this.stationsMenu = new PopupSubMenuMenuItem(_("Radio Stations"));
 
+        sectionCats.addMenuItem(this.categoriesMenu, { expand: true, span: 1, align: Align.START });
+        sectionStations.addMenuItem(this.stationsMenu, { expand: true, span: 1, align: Align.START });
 
-        //~ this.menuCategories = [null];
-        var indexOfLastCategory = null;
-        var i = 0, _length = (this.radios) ? this.radios.length : 0;
-        while (i < _length) {
-          //~ global.log("lastCategory is null: "+(lastCategory == null));
-          let title = ""+this.radios[i].name;
-          let id = (this.radios[i].url) ? ""+this.radios[i].url : "";
-          let isCategory = (id.length === 0);
-
-          if (isCategory) {
-            //~ log("Category: "+title, true);
-            //~ this.menuItems[i] = new PopupSubMenuMenuItem(title);
-            this.menuItems.push( new PopupSubMenuMenuItem(title) );
-            allCategoriesMenu.menu.addMenuItem(this.menuItems[-1]);
-
-            //~ this.menuItems[i].connect('open-event', Lang.bind(this, function() {
-              //~ //this.menuItems[i].menu.isOpen = false ;
-              //~ this.menuItems[i].menu.open(true);
-              //~ log(title + " open-event: " + this.menuItems[i].menu.isOpen, true)
-            //~ }));
-            //~ this.menuItems[i].connect('open-state-changed', Lang.bind(this, function() {
-              //~ log(title + " open-state-changed: " + this.menuItems[i].menu.isOpen, true)
-            //~ }));
-
-            //~ indexOfLastCategory = 0 + i;
-            indexOfLastCategory = this.menuItems.length - 1;
-          } else {
-            if (this.radios[i] != null && this.radios[i].inc === true) {
-              //~ log(" Station: "+title, true);
-              this.menuItems.push( new PopupMenuItem(title, { reactive: true }) );
-              if (indexOfLastCategory != null) {
-                this.menuItems[-1].connect('activate', () => {
-
-                  this.stop_mpv_radio(false);
-                  this.start_mpv_radio(id);
-
-                  this.menu.close();
-                  if (change_tooltip) {
-                    this.set_radio_tooltip_to_default_one();
-                  }
-                });
-                this.menuItems[indexOfLastCategory].menu.addMenuItem(this.menuItems[-1]);
-                //this.menuItems[indexOfLastCategory].menu.open(true);
-              } else {
-                //allCategoriesMenu.menu.addMenuItem(this.menuItems[i]);
+        var catItems = [];
+        var iCats = -1;
+        for (let c of _cats) {
+          iCats++;
+          let _keys = Object.keys(cws[c]);
+          let catItem = new PopupMenuItem((c=="All Categories") ? _("All Categories") + " (" + _keys.length + ")" : c + " (" + _keys.length + ")", { reactive: true });
+          catItem.setShowDot(c == this.last_category);
+          catItems.push(catItem);
+          this.categoriesMenu.menu.addMenuItem(catItems[iCats]);
+          catItems[iCats].actor.connect("enter-event", Lang.bind(this, function() {
+            this.stationsMenu.menu.removeAll();
+            this.stationsMenu.menu.open();
+            for (let s of _keys) {
+              let id = cws[c][s];
+              let item = new PopupMenuItem(s, { reactive: true });
+              item.setShowDot(id == this.last_radio_listened_to);
+              if (id == this.last_radio_listened_to && c!="All Categories") {
+                catItem.setShowDot(true);
+                this.last_category = c;
               }
+              item.connect('activate', Lang.bind(this, function() {
+                this.last_category = c;
+                this.set_radio_tooltip_to_default_one();
+
+                this.stop_mpv_radio(false);
+                this.start_mpv_radio(id);
+
+                this.menu.close();
+              }));
+              this.stationsMenu.menu.addMenuItem(item);
             }
-          }
-          i++
+          }));
         }
-        this.menu.addMenuItem(allCategoriesMenu);
       } else {
         // MY RADIO STATIONS:
         let allRadiosMenu = new RadioPopupSubMenuMenuItem(_("My Radio Stations") + "  (%s)".format(""+this.number_of_stations));
@@ -2752,6 +2800,23 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
       this.oldRadios = JSON.stringify(this.radios);
     }
+  }
+
+  which_category_for_id(id) {
+    // this.last_category
+    let cws = JSON.parse(JSON.stringify(this.categories_with_stations));
+    let _cats = Object.keys(cws);
+    for (let c of _cats) {
+      if (c == "All Categories") continue;
+      let _keys = Object.keys(cws[c]);
+      for (let s of _keys) {
+        if (id == cws[c][s]) {
+          this.last_category = c;
+          return;
+        }
+      }
+    }
+    this.last_category = "All Categories"
   }
 
   number_of_files(dir_path, reg) {
@@ -3211,7 +3276,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this._connect_signals();
 
     if (this.settings.getValue("notif-station-change") === true) {
-      this.radio_notify(_("Playing %s%s").format(this.get_radio_name(_id, "start_mpv_radio"), this.codecAndBitrate));
+      this.radio_notify(_("Playing %s%s").format(this.get_radio_name(_id), this.codecAndBitrate));
     }
 
     this.set_radio_tooltip_to_default_one();
@@ -3416,7 +3481,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     let date = DateTime.new_now_local().format("%F_%X").replace(/:/g, "-");
 
     if (!title || title.length === 0) {
-      title = this._clean_str(this.get_radio_name(this.radioId, "start_recording"));
+      title = this._clean_str(this.get_radio_name(this.radioId));
     }
 
     title = title + "_" + date;
@@ -3522,9 +3587,13 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   on_applet_clicked(event) {
     //log("on_applet_clicked");
     if (!this.menu || !this.menu.isOpen) {
-      this.make_menu("on_applet_clicked", true, false, false);
+      this.make_menu(true, false, false);
       this.change_selected_item();
-      this.menu.toggle();
+      this.menu.open();
+      if (this.categoriesMenu) {
+        this.categoriesMenu.menu.open();
+        this.stationsMenu.menu.open();
+      }
       return
     }
 
@@ -3535,7 +3604,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   on_applet_middle_clicked(event) {
-    //log("on_applet_middle_clicked");
     if (this.menu.isOpen) this.menu.close();
 
     if (this.record_pid != null) {
@@ -3554,7 +3622,6 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   _onButtonPressEvent(actor, event) {
-    //log("_onButtonPressEvent");
     if (!this._applet_enabled) {
       return false;
     }
@@ -3677,7 +3744,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
 
     //this.set_radio_hashtable();
 
-    this.get_radio_name(this.last_radio_listened_to, "on_applet_reloaded")
+    this.get_radio_name(this.last_radio_listened_to)
   }
 
   _set_default_volume() {
@@ -3787,6 +3854,9 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     }
 
     this.volume_near_icon();
+    //~ let cws = JSON.parse(JSON.stringify(this.categories_with_stations));
+    //~ logDebug("Nbr of categories: "+Object.keys(cws).length);
+    //~ logDebug("categories_with_stations: \n"+JSON.stringify(this.categories_with_stations, null, 4));
   }
 
   on_applet_removed_from_panel() {
@@ -4532,7 +4602,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
   }
 
   finalizeContextMenu() {
-    //log("finalizeContextMenu");
+    //~ logDebug("finalizeContextMenu");
 
     // Add default context menus if we're in panel edit mode, ensure their removal if we're not
     if (this.context_menu_item_manageRecording)
@@ -4540,6 +4610,7 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     this.context_menu_item_manageRecording = null;
 
     let items = this._applet_context_menu._getMenuItems();
+    //~ logDebug("items.length: "+items.length);
 
     // About...
     if (this.context_menu_item_about == null) {
@@ -4548,6 +4619,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
         IconType.SYMBOLIC);
       this.context_menu_item_about.connect('activate', Lang.bind(this, this.openAbout));
     }
+    //~ if (this.context_menu_item_about == null)
+      //~ logDebug("Unable to create this.context_menu_item_about!!!");
+    //~ else
+      //~ logDebug("this.context_menu_item_about is well created!!!");
     if (items.indexOf(this.context_menu_item_about) == -1) {
       this._applet_context_menu.addMenuItem(this.context_menu_item_about);
     }
@@ -5781,6 +5856,10 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
     return ""+_ret
   }
 
+  _on_open_cache_dir() {
+    spawnCommandLineAsync("xdg-open "+this.cache_dir);
+  }
+
   get radio_urls() {
     var _ret = [];
     let radios = this.settings.getValue("radios");
@@ -5926,6 +6005,38 @@ class WebRadioReceiverAndRecorder extends TextIconApplet {
       value = Math.pow(10, 9) * value
     }
     return value
+  }
+
+  get categories_with_stations() {
+    var cws = {"All Categories": {}};
+    let radios = this.radios;
+    var currentCat = "All Categories";
+    for (let radio of radios) {
+      if (radio.url.trim().length === 0) {
+        currentCat = radio.name;
+        cws[currentCat] = {};
+      } else {
+        let title = radio.name;
+        let elts = []
+        let bitrate = (this.show_bitrate) ? ""+parseInt(radio.bitrate) : "";
+        if (bitrate === "NaN") bitrate = "";
+        if (bitrate.length > 0) elts.unshift(bitrate);
+        let codec = (this.show_codec) ? ""+radio.codec : "";
+        if (codec.length > 0) elts.unshift(codec);
+
+        if (elts.length > 0) elts.unshift(" ─");
+        if (this.show_favicon && radio.favicon && radio.favicon.length > 0)
+          elts.push(" *");
+
+        title = title + elts.join(" ");
+
+        cws[currentCat][title] = radio.url.trim();
+        cws["All Categories"][title] = radio.url.trim();
+      }
+    }
+    radios = null;
+    currentCat = null;
+    return cws;
   }
 };
 

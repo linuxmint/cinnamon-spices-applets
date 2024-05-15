@@ -22,14 +22,22 @@ export interface WeatherProvider {
 	readonly supportHourlyPrecipChance: boolean;
     readonly supportHourlyPrecipVolume: boolean;
 
-	GetWeather(loc: LocationData): Promise<WeatherData | null>;
+	GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null>;
 }
 
 export const enum RefreshState {
 	Success = "success",
-	Failure = "fail",
+	/**
+	 * Pure technical error
+	 */
 	Error = "error",
-	Locked = "locked"
+	/**
+	 * Location not obtained
+	 */
+	NoLocation = "no location",
+	NoWeather = "no weather",
+	NoKey = "no key",
+	DisplayFailure = "display failure",
 }
 
 export interface WeatherData {
@@ -183,9 +191,9 @@ export interface Condition {
 /** Immediate precipitation for the next hour, currently only OpenWeatherMap uses it.
  */
 export interface ImmediatePrecipitation {
-	/** Precipitation in * minutes */
+	/** Precipitation in * minutes. -1 means it doesn't start */
 	start: number;
-	/** ends in * minutes */
+	/** ends in * minutes. -1 means it doesn't end */
 	end: number;
 }
 

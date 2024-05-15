@@ -16,7 +16,7 @@ export abstract class BaseProvider implements WeatherProvider {
 
     protected readonly app: WeatherApplet;
 
-    public abstract GetWeather(loc: LocationData): Promise<WeatherData | null>;
+    public abstract GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null>;
 
     public constructor(app: WeatherApplet) {
         this.app = app;

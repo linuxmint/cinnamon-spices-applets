@@ -1,3 +1,18 @@
+### v2.0.3~20240512
+  * Correctly determines the category of a recently listened-to radio station.
+
+### v2.0.2~20240503
+  * Stores and displays the Category of the last radio station listened to in the new menu.
+
+### v2.0.1~20240502
+  * In the menu, each category indicates the number of stations it contains.
+
+### v2.0.0~20240501
+  * Added an option to display the category list alongside the radio station list in the menu.
+  * New screenshot.
+  * New .pot file.
+  * Updated fr.po file.
+
 ### v1.19.0~20240402
   * Adds two options:
     - Whether or not to show the sound volume OSD when changing radio station.

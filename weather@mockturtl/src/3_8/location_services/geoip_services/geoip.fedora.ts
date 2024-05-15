@@ -1,3 +1,4 @@
+import { HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
 import { WeatherApplet } from "../../main";
 import { LocationData } from "../../types";
@@ -17,8 +18,8 @@ export class GeoIPFedora implements GeoIP {
 		this.app = app;
 	}
 
-	public async GetLocation(): Promise<LocationData | null> {
-		const json = await this.app.LoadJsonAsync<GeoIPFedoraPayload>(this.query);
+	public async GetLocation(cancellable: imports.gi.Gio.Cancellable): Promise<LocationData | null> {
+		const json = await HttpLib.Instance.LoadJsonSimple<GeoIPFedoraPayload>({ url: this.query, cancellable });
 
 		if (!json) {
 			Logger.Info("geoip.fedoraproject didn't return any data");

@@ -187,7 +187,7 @@ class SpicesUpdate extends IconApplet {
         this.unprotectedDico = {};
         this.unprotectedList = {};
         this.cache = {};
-        this.oldCache = {};
+        //~ this.oldCache = {};
         this.menuDots = {};
         this.monitorsPngId = {};
         this.nb_in_menu = {};
@@ -203,7 +203,7 @@ class SpicesUpdate extends IconApplet {
             this.unprotectedDico[t] = {};
             this.unprotectedList[t] = [];
             this.cache[t] = "{}";
-            this.oldCache[t] = "{}";
+            //~ this.oldCache[t] = "{}";
             this.menuDots[t] = false;
             this.monitorsPngId[t] = 0; // Monitoring png directories: Ids
             this.nb_in_menu[t] = 0;
@@ -276,8 +276,13 @@ class SpicesUpdate extends IconApplet {
 
         // Run loop to refresh caches:
         this.disable_system_auto_update();
-        this._loop_refresh_cache();
-        this.loopRefreshId = timeout_add_seconds(907, () => this._loop_refresh_cache()); // 907 is a prime number.
+        let stoId = setTimeout( () => {
+            this._loop_refresh_cache();
+            clearTimeout(stoId);
+            stoId = null;
+        }, 20000); // Wait 20 seconds for mintupdate to run correctly.
+
+        //this.loopRefreshId = timeout_add_seconds(907, () => this._loop_refresh_cache()); // 907 is a prime number.
     } // End of constructor
 
     _loop_refresh_cache() {
@@ -1134,6 +1139,7 @@ class SpicesUpdate extends IconApplet {
 
         //~ WAITING[type] = (this.unprotectedList[type].length + 3) * 1000;
         unprotectedSpices = undefined;
+        this.cache[type] = "{}";
     } // End of populateSettingsUnprotectedSpices
 
     populateSettingsUnprotectedApplets() {
@@ -1279,8 +1285,7 @@ class SpicesUpdate extends IconApplet {
             jsonDirName = undefined;
         }
         if (jsonFile.query_exists(null)) {
-            this.oldCache[type] = this.cache[type];
-            //this.cache[type] = file_get_contents(jsonFileName).toString().substr(5);
+            //~ this.oldCache[type] = this.cache[type];
             this.cache[type] = to_string(file_get_contents(jsonFileName)[1]);
         } else {
             this.cache[type] = "{}"
@@ -1453,26 +1458,21 @@ class SpicesUpdate extends IconApplet {
     _forget_new_spices(type) {
         var newSpices = this.new_Spices[type];
         if (newSpices.length === 0) return;
-        //~ var index = 0;
-        //~ var uuid = newSpices[index];
         var uuid = newSpices[0];
         let id = setInterval( () => {
-            //~ uuid = newSpices[index];
             this.isProcessing = true;
             uuid = newSpices.pop(0);
             this.download_image(type, uuid);
             if (this.nb_to_watch > 0)
                 this.nb_to_watch -= 1;
-            if (this.nb_to_watch <= 0)
-                this.isProcessing = false;
+            //if (this.nb_to_watch <= 0)
+                //this.isProcessing = false;
             this.updateUI();
-            //~ index++;
-            //~ if (index >= newSpices.length) {
             if (newSpices.length === 0) {
                 clearInterval(id);
                 this.isProcessing = false;
+                this.updateUI();
                 newSpices = undefined;
-                //~ index = undefined;
                 uuid = undefined;
             }
         }, 10000);
@@ -1527,6 +1527,7 @@ class SpicesUpdate extends IconApplet {
         url = undefined;
         target = undefined;
         is_theme = undefined;
+        this.cache[type] = "{}";
     } // End of download_image
 
     async get_last_commit_subject(type, uuid) {
@@ -2324,7 +2325,6 @@ class SpicesUpdate extends IconApplet {
                                 this.destroy_notifications(t);
                             }
                         }
-                        //~ this.cache[t] = "{}";
                     }
                     //~ this.next_type = TYPES[(TYPES.indexOf(this.next_type) + 1) % TYPES.length]
                     //this.do_rotation = false;
@@ -2350,6 +2350,10 @@ class SpicesUpdate extends IconApplet {
         }
 
         this.isLooping = false;
+
+        for (let t of TYPES)
+            this.cache[t] = "{}";
+
         // One more loop !
         this.loopId = timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
         //~ return SOURCE_REMOVE
@@ -2443,7 +2447,11 @@ class SpicesUpdate extends IconApplet {
     on_applet_removed_from_panel() {
         this.on_applet_reloaded();
 
-        for (let type of TYPES) this.monitorsPngId[type] = 0;
+        for (let type of TYPES) {
+            this.monitorsPngId[type] = 0;
+            this.cache[type] = "{}";
+            //~ this.oldCache[type] = "{}";
+        }
 
         if (this.settings) {
             try {

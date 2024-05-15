@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-24 20:57+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-04-15 02:01+0200\n"
 "PO-Revision-Date: 2023-08-24 12:12+0300\n"
 "Last-Translator: DmytroVoytko <Dmytro.Voytko@gmail.com>\n"
 "Language-Team: \n"
@@ -17,47 +18,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#: applet.js:148
+#: applet.js:150
 msgid "(Right click to open folder)"
 msgstr "(Клацніть правою кнопкою миші, щоб відкрити папку)"
 
-#: applet.js:170
+#: applet.js:172
 msgid "Places"
 msgstr "Місця"
 
-#: applet.js:284
+#: applet.js:287
 msgid "Search Home Folder"
 msgstr "Пошук у домашній папці"
 
-#: applet.js:307
+#: applet.js:310
 msgid "SYSTEM"
 msgstr "СИСТЕМА"
 
-#: applet.js:316
+#: applet.js:319
 msgid "Search File System"
 msgstr "Пошук у файловій системі"
 
-#: applet.js:341
+#: applet.js:344
 msgid "RECENT DOCUMENTS"
 msgstr "ОСТАННІ ДОКУМЕНТИ"
 
-#: applet.js:355
+#: applet.js:358
 msgid "Clear"
 msgstr "Очистити"
 
-#: applet.js:398
+#: applet.js:364
+msgid "Recent"
+msgstr ""
+
+#: applet.js:407
 msgid "Computer"
 msgstr "Комп'ютер"
 
-#: applet.js:404
+#: applet.js:413
 msgid "File System"
 msgstr "Файлова система"
 
-#: applet.js:420
+#: applet.js:429
 msgid "Network"
 msgstr "Мережа"
 
-#: applet.js:560
+#: applet.js:569
 msgid "Trash"
 msgstr "Смітник"
 
@@ -148,10 +153,11 @@ msgid ""
 "contribute by submitting pull requests, bug reports and feature requests to "
 "my github repo."
 msgstr ""
-"Центр місць (Places Center) – це багатофункціональний кросплатформенний аплет "
-"Cinnamon, який забезпечує легкий доступ до місць, які ви найчастіше використовуєте. "
-"Не вагайтеся зробити свій внесок, надсилаючи свої pull request, звіти про помилки та "
-"запити на нові функції до мого сховища на github."
+"Центр місць (Places Center) – це багатофункціональний кросплатформенний "
+"аплет Cinnamon, який забезпечує легкий доступ до місць, які ви найчастіше "
+"використовуєте. Не вагайтеся зробити свій внесок, надсилаючи свої pull "
+"request, звіти про помилки та запити на нові функції до мого сховища на "
+"github."
 
 #. metadata.json->contributors
 msgid "Stephen Collins - Author"
@@ -160,6 +166,10 @@ msgstr "Stephen Collins - Автор"
 #. metadata.json->contributors
 msgid "kehugter - Added configurability to middle click"
 msgstr "kehugter - Додав налаштування клацання середньою кнопкою миші"
+
+#. metadata.json->contributors
+msgid "claudiux - Improvements to the 'Recent' section."
+msgstr ""
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -245,9 +255,9 @@ msgid ""
 "iconName after the custom name."
 msgstr ""
 "«Список URIs/шляхів до файлів, які потрібно включити. Записи можна розділяти "
-"комою (,) або новим рядком. Ви можете встановити ім’я, яке відображатиметься, "
-"додавши :customName після розташування. Ви також можете встановити назву "
-"піктограми, додавши :iconName після настроюваної назви."
+"комою (,) або новим рядком. Ви можете встановити ім’я, яке "
+"відображатиметься, додавши :customName після розташування. Ви також можете "
+"встановити назву піктограми, додавши :iconName після настроюваної назви."
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
@@ -320,6 +330,10 @@ msgstr "Усі останні документи"
 #. settings-schema.json->recentSizeLimit->description
 msgid "Number to show"
 msgstr "Кількість для показу"
+
+#. settings-schema.json->recentShowUri->description
+msgid "Show complete path in tooltips"
+msgstr ""
 
 #. settings-schema.json->btnPrivacy->description
 msgid "Privacy"

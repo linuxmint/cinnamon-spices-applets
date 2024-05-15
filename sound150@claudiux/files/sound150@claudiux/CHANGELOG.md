@@ -1,3 +1,16 @@
+### v6.13.0~20240514
+  * Fixes #6008: Added the option to avoid displaying controllers twice.
+
+### v6.12.0~20240512
+  * Adds a keyboard shortcut to switch between players.
+  * Fixes #5989.
+  * Minor bugfixes and improvements.
+
+### v6.11.0~20240506
+  * Created Sounds section in Sound tab of settings.
+  * Improved keyboard shortcuts management.
+  * Fixes #5967.
+
 ### v6.10.0~20240424
   * Created OSD section in Sound tab of settings.
   * Adds option: Whether the media keys osd is disabled or its relative display size.

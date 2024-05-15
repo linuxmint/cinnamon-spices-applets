@@ -314,6 +314,23 @@
         "database-url"
       ]
     },
+    "sectionExperimental": {
+      "type": "section",
+      "title": "EXPERIMENTAL",
+      "keys": []
+    },
+    "sectionRecordingCache": {
+      "type": "section",
+      "title": "Cache",
+      "keys": [
+        "cache-no-cache",
+        "cache-mins",
+        "cache-on-disk",
+        "cache-dir",
+        "cache-dir-open",
+        "cache-stream-size"
+      ]
+    },
     "sectionRecordingRecordings": {
       "type": "section",
       "title": "Recordings",
@@ -906,8 +923,10 @@
     "callback": "empty_recents"
   },
   "show-by-category": {
-    "type": "generic",
-    "default": false
+    "type": "switch",
+    "default": false,
+    "description": "Display the Station list beside the Category list",
+    "tooltip": "Checked: Hover (without clicking) over a Category to display its list of Stations; then select your station.\nUnchecked: Single list containing each category followed by its stations."
   },
   "show-system-items": {
     "type": "switch",
@@ -1061,6 +1080,62 @@
     "description": "Database URL",
     "default": "",
     "height": 25
+  },
+  "cache-no-cache": {
+    "type": "switch",
+    "default": false,
+    "description": "No cache",
+    "tooltip": "Checking this option limits memory usage, but no longer allows the user to rewind the cache (using the sound150@claudiux applet)."
+  },
+  "cache-mins": {
+    "type": "scale",
+    "default": 0.0,
+    "dependency": "!cache-no-cache",
+    "description": "Minutes to cache\n0 means no limit (default). 1 hour = 60 minutes. 24 hours = 1440 minutes.",
+    "min": 0.0,
+    "max": 1440.0,
+    "step": 5.0,
+    "show-value": true
+  },
+  "cache-on-disk": {
+    "type": "switch",
+    "dependency": "!cache-no-cache",
+    "default": false,
+    "description": "Cache on disk\n(Write packet data to a temporary file, instead of keeping them in memory.)"
+  },
+  "cache-dir": {
+    "type": "filechooser",
+    "select-dir": true,
+    "dependency": "cache-on-disk",
+    "default": "file:///tmp",
+    "description": "Directory used for data caching\n(Use with caution on SSD disks. Prefer a directory stored in RAM, with sufficient free space.)"
+  },
+  "cache-dir-open": {
+    "type": "button",
+    "dependency": "cache-on-disk",
+    "description": "Open cache directory",
+    "callback": "_on_open_cache_dir"
+  },
+  "cache-stream-size": {
+    "type": "combobox",
+    "default": "1MiB",
+    "dependency": "!cache-no-cache",
+    "description": "Stream cache size",
+    "tooltip": "The amount of stream cache. Default: 1 MiB.\nBeware, setting this to a large value can reduce performance.",
+    "options": {
+      "No limit": "0",
+      "64 KiB": "64KiB",
+      "128 KiB": "128KiB",
+      "256 KiB": "256KiB",
+      "512 KiB": "512KiB",
+      "1 MiB": "1MiB",
+      "2 Mib": "2MiB",
+      "3 MiB": "3MiB",
+      "4 MiB": "4MiB",
+      "5 MiB": "5MiB",
+      "10 MiB": "10MiB",
+      "20 MiB": "20MiB"
+    }
   },
   "recording-path": {
     "type": "filechooser",
@@ -1720,6 +1795,10 @@
     "callback": "on_button_sched_remove_clicked"
   },
   "last-radio-listened-to": {
+    "type": "generic",
+    "default": ""
+  },
+  "last-category": {
     "type": "generic",
     "default": ""
   },

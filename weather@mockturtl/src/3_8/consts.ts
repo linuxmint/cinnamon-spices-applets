@@ -27,6 +27,8 @@ export const STYLE_HIDDEN = "weather-hidden";
 
 export type LogLevel = "info" | "debug" | "verbose" | "critical" | "error" | "always";
 
+export const REQUEST_TIMEOUT_SECONDS = 30;
+
 const US_TIMEZONES: string[] = [
     "America/Adak",
     "America/Anchorage",

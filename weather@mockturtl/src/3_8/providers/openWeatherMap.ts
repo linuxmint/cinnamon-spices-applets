@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { DateTime } from "luxon";
-import { ErrorResponse, HttpError, HTTPParams } from "../lib/httpLib";
+import { ErrorResponse, HttpError, HttpLib, HTTPParams } from "../lib/httpLib";
 import { Logger } from "../lib/logger";
 import { WeatherApplet } from "../main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "../types";
@@ -47,7 +47,7 @@ export class OpenWeatherMap extends BaseProvider {
 	//  Functions
 	//--------------------------------------------------------
 
-	public async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		const params = this.ConstructParams(loc);
 
 		const cachedID = IDCache[`${loc.lat},${loc.lon}`];
@@ -55,8 +55,13 @@ export class OpenWeatherMap extends BaseProvider {
 		// Await both of them, if already have it idPayload will be null
 		// If we don't have the ID we push a call to get it
 		const [ json, idPayload ] = await Promise.all([
-			this.app.LoadJsonAsync<OWMPayload>(this.base_url, params, this.HandleError),
-			(cachedID == null) ? this.app.LoadJsonAsync<any>(this.id_irl, params) : Promise.resolve()
+			HttpLib.Instance.LoadJsonSimple<OWMPayload>({
+				url: this.base_url,
+				cancellable,
+				params: params,
+				HandleError: this.HandleError
+			}),
+			(cachedID == null) ? HttpLib.Instance.LoadJsonSimple<any>({url: this.id_irl, cancellable, params}) : Promise.resolve()
 		]);
 
 		// We store the newly gotten ID if we got it

@@ -29,7 +29,8 @@
       "sections": [
         "sectionSound1",
         "sectionSound2",
-        "sectionSound3"
+        "sectionSound3",
+        "sectionSound4"
       ]
     },
     "page_shortcuts": {
@@ -46,7 +47,8 @@
         "playerControl",
         "extendedPlayerControl",
         "keepPlayerListOpen",
-        "keepChoosePlayerOpen"
+        "keepChoosePlayerOpen",
+        "avoidTwice"
       ]
     },
     "sectionBehavior2": {
@@ -108,6 +110,14 @@
     },
     "sectionSound3": {
       "type": "section",
+      "title": "Sounds",
+      "keys": [
+        "volumeSoundFile",
+        "volumeSoundEnabled"
+      ]
+    },
+    "sectionSound4": {
+      "type": "section",
       "dependency": "soundATcinnamonDOTorg_is_loaded",
       "title": "Remove incompatible applets",
       "keys": [
@@ -119,7 +129,9 @@
       "title": "Shortcuts",
       "keys": [
         "keyOpen",
+        "keySwitchPlayer",
         "redefine-volume-keybindings",
+        "audio-stop",
         "pause-on-off",
         "volume-mute",
         "volume-up",
@@ -151,11 +163,22 @@
     "default": false,
     "description": "Keep the player controller selector open"
   },
+  "avoidTwice": {
+    "type": "switch",
+    "default": false,
+    "description": "Avoid displaying controllers twice"
+  },
   "keyOpen": {
     "type": "keybinding",
     "description": "Show menu",
     "default": "<Shift><Super>s",
     "tooltip": "Set keybinding(s) to show the sound applet menu."
+  },
+  "keySwitchPlayer": {
+    "type": "keybinding",
+    "description": "Switch to next player",
+    "default": "::",
+    "tooltip": "Set keybinding(s) to switch to the next player if it exists."
   },
   "_knownPlayers": {
     "type": "generic",
@@ -337,9 +360,19 @@
     "description": "Show volume level in OSD on startup",
     "default": false
   },
+  "volumeSoundFile": {
+    "type": "soundfilechooser",
+    "description": "Which sound to play when the volume is changed",
+    "default": "/usr/share/mint-artwork/sounds/volume.oga"
+  },
+  "volumeSoundEnabled": {
+    "type": "switch",
+    "description": "Whether to play a sound when the volume is changed",
+    "default": false
+  },
   "redefine-volume-keybindings": {
     "type": "switch",
-    "description": "Redefine Volume Keyboard Shortcuts",
+    "description": "Redefine Multimedia Keyboard Shortcuts",
     "default": false
   },
   "pause-on-off": {
@@ -347,6 +380,12 @@
     "dependency": "redefine-volume-keybindings",
     "default": "::",
     "description": "Pause/Play toggle"
+  },
+  "audio-stop": {
+    "type": "keybinding",
+    "dependency": "redefine-volume-keybindings",
+    "default": "::",
+    "description": "Stop"
   },
   "volume-mute": {
     "type": "keybinding",

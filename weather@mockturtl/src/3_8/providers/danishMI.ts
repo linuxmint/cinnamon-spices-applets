@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { Services } from "../config";
-import { HTTPParams } from "../lib/httpLib";
+import { HTTPParams, HttpLib } from "../lib/httpLib";
 import { WeatherApplet } from "../main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
 import { CelsiusToKelvin, GetDistance, mode, _ } from "../utils";
@@ -38,17 +38,26 @@ export class DanishMI extends BaseProvider {
 		super(app);
 	}
 
-	async GetWeather(loc: LocationData): Promise<WeatherData | null> {
+	async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
 		if (loc == null)
 			return null;
 
 		this.GetLocationBoundingBox(loc);
-		const observations = this.OrderObservations(await this.app.LoadJsonAsync<DanishObservationPayloads>(this.url, this.observationParams), loc);
+		const observations = this.OrderObservations(await HttpLib.Instance.LoadJsonSimple<DanishObservationPayloads>({
+			url: this.url,
+			cancellable,
+			params: this.observationParams
+		}), loc);
 
 		this.forecastParams.lat = loc.lat;
 		this.forecastParams.lon = loc.lon;
 
-		const forecasts = await this.app.LoadJsonAsync<DanishMIPayload>(this.url, this.forecastParams);
+		const forecasts = await HttpLib.Instance.LoadJsonSimple<DanishMIPayload>({
+			url: this.url,
+			cancellable,
+			params: this.forecastParams
+		});
+
 		if (forecasts == null)
 			return null;
 

@@ -52,7 +52,7 @@ body:
     - batterymonitor@pdcurtis @pdcurtis
     - batterypower@joka42 @joka42
     - better-backgrounds@simonmicro @simonmicro
-    - betterlock
+    - betterlock @Centurix
     - bettersettings@bownz
     - BgRadio@spacy01 @spacy01
     - bible@nodeengineer.com @nodeengineer
@@ -140,8 +140,8 @@ body:
     - moonphase@techi-freki @Techi-Freki
     - multicore-sys-monitor@ccadeptic23 @claudiux
     - MuteToggler@jebeaudet.com @jebeaudet
-    - mybookmarks@markbokil.com
-    - mylauncher@markbokil.com
+    - mybookmarks@markbokil.com @Centurix
+    - mylauncher@markbokil.com @Centurix
     - netusagemonitor@pdcurtis @pdcurtis
     - network@brownsr @brownsr
     - networkmonitor@axel358 @axel358
@@ -156,6 +156,7 @@ body:
     - pa-equalizer@jschug.com
     - paneldo@beatlink
     - PanelTranslator@klangman @klangman
+    - password-generator@spencerlommel.com @SpencerLommel
     - PDFManager@cinnamon.org
     - places-bookmarks@dmo60.de
     - places-with-terminal@mtwebster
