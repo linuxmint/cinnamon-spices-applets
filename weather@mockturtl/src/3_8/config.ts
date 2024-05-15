@@ -11,7 +11,7 @@ import { MetUk } from "./providers/met_uk";
 import { BaseProvider } from "./providers/BaseProvider";
 import { OpenWeatherMap } from "./providers/openWeatherMap";
 import { MetNorway } from "./providers/met_norway/provider";
-import { Weatherbit } from "./providers/weatherbit";
+import { Weatherbit } from "./providers/weatherbit/provider";
 import { ClimacellV4 } from "./providers/climacellV4";
 import { USWeather } from "./providers/us_weather/provider";
 import { VisualCrossing } from "./providers/visualcrossing/provider";

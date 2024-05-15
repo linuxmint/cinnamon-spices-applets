@@ -97,7 +97,6 @@ export class VisualCrossing extends BaseProvider {
 					title: alert.headline,
 					description: alert.description,
 					level: "unknown",
-					// TODO: Wrap sender-name
 					sender_name: alert.link
 				});
 			}

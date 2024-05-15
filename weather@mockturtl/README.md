@@ -36,7 +36,7 @@ You can also save locations what you entered manually and switch between them in
 | **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | Yes     | --                            |
 | **Met Office UK**          | No            | 5                     | 36                     | No                 | No      | --                            |
 | **US National Weather**    | No            | 7                     | 156                    | No                 | Yes     | --                            |
-| **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | No      | --                            |
+| **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | Yes*    | --                            |
 | **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | Yes     | --                            |
 | **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | No      | Previously known as Climacell |
 | **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | No      | Limited free calls            |
@@ -97,9 +97,11 @@ Historical and Forecast Weather data service provided by Weatherbit LLC in the U
 
 * To get an API key, go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an account. Then go your [Dashboard](https://www.weatherbit.io/account/dashboard) where you should find your secret key already created.
 
-* At least 10 minutes as refresh rate is recommended, since otherwise you might exceed you daily quota, the Free API subscription is limited to 500 calls per day.
+* At least 1 hour refresh rate is recommended, otherwise you might exceed you daily quota. The Free API subscription is limited to 50 calls per day.
 
 * **Hourly Weather forecast requires a non-free account
+
+* *Using alerts will increase call usage by 33%.
 
 ### Visual Crossing
 

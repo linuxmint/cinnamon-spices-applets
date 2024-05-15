@@ -166,9 +166,7 @@ export class PirateWeather extends BaseProvider {
 						title: alert.title,
 						description: alert.description,
 						level: this.PirateWeatherAlertSeverityToAlertLevel(alert.severity),
-						// TODO: Don't want to hardcode US National Weather Service here because
-						// it's not guaranteed that the alert is from the US in the future
-						sender_name: "",
+						sender_name: alert.uri,
 					});
 				};
 

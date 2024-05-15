@@ -12217,7 +12217,7 @@ class MetNorway extends BaseProvider {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/providers/weatherbit.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/weatherbit/provider.ts
 
 
 
@@ -12247,7 +12247,36 @@ class Weatherbit extends BaseProvider {
         this.current_url = "https://api.weatherbit.io/v2.0/current?";
         this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
         this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
+        this.alerts_url = "https://api.weatherbit.io/v2.0/alerts?";
         this.hourlyAccess = true;
+        this.ParseAlerts = (json) => {
+            const alerts = [];
+            for (const alert of json.alerts) {
+                let level;
+                switch (alert.severity) {
+                    case "Advisory":
+                        level = "minor";
+                        break;
+                    case "Watch":
+                        level = "moderate";
+                        break;
+                    case "Warning":
+                        level = "severe";
+                        break;
+                    default:
+                        level = "unknown";
+                        break;
+                }
+                const alertData = {
+                    title: alert.title,
+                    description: alert.description,
+                    level,
+                    sender_name: alert.uri,
+                };
+                alerts.push(alertData);
+            }
+            return alerts;
+        };
         this.ParseCurrent = (json) => {
             json = json.data[0];
             const hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
@@ -12358,7 +12387,7 @@ class Weatherbit extends BaseProvider {
             }
         };
     }
-    async GetWeather(loc, cancellable) {
+    async GetWeather(loc, cancellable, config) {
         const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable);
         let hourlyPromise = null;
         if (!!this.hourlyAccess)
@@ -12370,6 +12399,12 @@ class Weatherbit extends BaseProvider {
         currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
         const hourlyResult = await hourlyPromise;
         currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
+        if (config._showAlerts) {
+            const alertResult = await this.GetData(this.alerts_url, loc, this.ParseAlerts, cancellable);
+            if (alertResult == null)
+                return null;
+            currentResult.alerts = alertResult;
+        }
         return currentResult;
     }
     ;
@@ -15980,7 +16015,7 @@ class PirateWeather extends BaseProvider {
                         title: alert.title,
                         description: alert.description,
                         level: this.PirateWeatherAlertSeverityToAlertLevel(alert.severity),
-                        sender_name: "",
+                        sender_name: alert.uri,
                     });
                 }
                 ;
