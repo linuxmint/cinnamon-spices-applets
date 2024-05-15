@@ -129,9 +129,8 @@ class AlertsWindow(Gtk.Window):
 
 		box.add(title)
 		box.add(description)
-		box.add(Gtk.Label(
+		box.add(NotStupidLabel(
       		label=f"{alert['sender_name']}",
-			halign=Gtk.Align.START,
         ))
 		return box
 

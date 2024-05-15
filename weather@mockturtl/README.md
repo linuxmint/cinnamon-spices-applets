@@ -37,7 +37,7 @@ You can also save locations what you entered manually and switch between them in
 | **Met Office UK**          | No            | 5                     | 36                     | No                 | No      | --                            |
 | **US National Weather**    | No            | 7                     | 156                    | No                 | Yes     | --                            |
 | **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | No      | --                            |
-| **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | No      | --                            |
+| **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | Yes     | --                            |
 | **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | No      | Previously known as Climacell |
 | **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | No      | Limited free calls            |
 | **Weather Underground**    | Yes           | 5                     | 0                      | No                 | No      | --                            |

@@ -13759,7 +13759,7 @@ class USWeather extends BaseProvider {
 }
 ;
 
-;// CONCATENATED MODULE: ./src/3_8/providers/visualcrossing.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/visualcrossing/provider.ts
 
 
 
@@ -13780,7 +13780,7 @@ class VisualCrossing extends BaseProvider {
         this.params = {
             unitGroup: "metric",
             key: null,
-            include: "fcst,hours,current",
+            include: "fcst,hours,current,alerts",
             lang: "id"
         };
         this.supportedLangs = ["en", "de", "fr", "es"];
@@ -13838,6 +13838,18 @@ class VisualCrossing extends BaseProvider {
             forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
             hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
         };
+        if (weather.alerts) {
+            const alerts = [];
+            for (const alert of weather.alerts) {
+                alerts.push({
+                    title: alert.headline,
+                    description: alert.description,
+                    level: "unknown",
+                    sender_name: alert.link
+                });
+            }
+            result.alerts = alerts;
+        }
         return result;
     }
     ParseForecasts(forecasts, translate, tz) {
