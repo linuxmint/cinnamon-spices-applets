@@ -38,7 +38,7 @@ You can also save locations what you entered manually and switch between them in
 | **US National Weather**    | No            | 7                     | 156                    | No                 | Yes     | --                            |
 | **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | Yes*    | --                            |
 | **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | Yes     | --                            |
-| **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | No      | Previously known as Climacell |
+| **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | Depends | Previously known as Climacell |
 | **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | No      | Limited free calls            |
 | **Weather Underground**    | Yes           | 5                     | 0                      | No                 | No      | --                            |
 | **Pirate Weather**         | Yes           | 7                     | 168                    | Yes                | Depends | --                            |
@@ -118,6 +118,8 @@ Meteorological data from American weather technology company with headquarters i
 * Please note that old ClimacellV4 keys are not working anymore. You need to re-register and get a new key.
 
 * API key can be obtained [here](https://app.tomorrow.io/signup?planid=5fa4047f4acee993fbd7399d&vid=153ef940-c389-41d4-847e-d83d632059d0). Register and the API key will be shown in the [Develpment section](https://app.tomorrow.io/development/keys). Free plan comes with 1000 free calls per day.
+
+* Alerts are available in the US and Canada. Seems to have repeated alerts.
 
 ### AccuWeather
 

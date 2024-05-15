@@ -12686,7 +12686,7 @@ class Weatherbit extends BaseProvider {
 }
 ;
 
-;// CONCATENATED MODULE: ./src/3_8/providers/climacellV4.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/tomorrow_io/provider.ts
 
 
 
@@ -12712,7 +12712,7 @@ class ClimacellV4 extends BaseProvider {
             fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,dewPoint,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
         };
     }
-    async GetWeather(loc, cancellable) {
+    async GetWeather(loc, cancellable, config) {
         if (loc == null)
             return null;
         this.params.apikey = this.app.config.ApiKey;
@@ -12725,7 +12725,41 @@ class ClimacellV4 extends BaseProvider {
         });
         if (response == null)
             return null;
-        return this.ParseWeather(loc, response);
+        const weather = this.ParseWeather(loc, response);
+        if (weather == null)
+            return null;
+        if (config._showAlerts) {
+            const alerts = await this.GetAlerts(loc, cancellable);
+            if (alerts != null)
+                weather.alerts = alerts;
+        }
+        return weather;
+    }
+    async GetAlerts(loc, cancellable) {
+        var _a, _b, _c, _d;
+        const response = await HttpLib.Instance.LoadJsonSimple({
+            url: "https://api.tomorrow.io/v4/events",
+            cancellable,
+            params: {
+                apikey: this.app.config.ApiKey,
+                location: loc.lat + "," + loc.lon,
+                buffer: "1",
+                insights: "air&insights=fires&insights=wind&insights=winter&insights=thunderstorms&insights=floods&insights=temperature&insights=tropical&insights=marine&insights=fog&insights=tornado"
+            },
+            HandleError: (m) => this.HandleHTTPError(m)
+        });
+        if (response == null)
+            return null;
+        const alerts = [];
+        for (const alert of response.data.events) {
+            alerts.push({
+                title: (_a = alert.eventValues.headline) !== null && _a !== void 0 ? _a : alert.eventValues.title,
+                description: `${alert.eventValues.description}\n\n${(_d = (_c = (_b = alert.eventValues.response) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.instruction) !== null && _d !== void 0 ? _d : ""}`,
+                level: alert.severity,
+                sender_name: alert.eventValues.origin,
+            });
+        }
+        return alerts;
     }
     HandleHTTPError(message) {
         if (message.ErrorData.code == 401) {

@@ -1,10 +1,11 @@
 import { DateTime } from "luxon";
-import { Services } from "../config";
-import { ErrorResponse, HttpError, HttpLib, HTTPParams } from "../lib/httpLib";
-import { WeatherApplet } from "../main";
-import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
-import { CelsiusToKelvin, IsNight, _ } from "../utils";
-import { BaseProvider } from "./BaseProvider";
+import { Config, Services } from "../../config";
+import { ErrorResponse, HttpError, HttpLib, HTTPParams } from "../../lib/httpLib";
+import { WeatherApplet } from "../../main";
+import { AlertData, Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../../types";
+import { CelsiusToKelvin, IsNight, _ } from "../../utils";
+import { BaseProvider } from "../BaseProvider";
+import { TomorrowIoAlertsResponse } from "./alerts";
 
 export class ClimacellV4 extends BaseProvider {
 	public readonly remainingCalls: number | null = null;
@@ -31,7 +32,7 @@ export class ClimacellV4 extends BaseProvider {
 		super(app);
 	}
 
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
 		if (loc == null)
 			return null;
 
@@ -48,7 +49,47 @@ export class ClimacellV4 extends BaseProvider {
 		if (response == null)
 			return null;
 
-		return this.ParseWeather(loc, response);
+		const weather = this.ParseWeather(loc, response);
+		if (weather == null)
+			return null;
+
+		if (config._showAlerts) {
+			const alerts = await this.GetAlerts(loc, cancellable);
+			if (alerts != null)
+				weather.alerts = alerts;
+		}
+
+		return weather;
+	}
+
+	private async GetAlerts(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<AlertData[] | null> {
+		const response = await HttpLib.Instance.LoadJsonSimple<TomorrowIoAlertsResponse>({
+			url: "https://api.tomorrow.io/v4/events",
+			cancellable,
+			params: {
+				apikey: this.app.config.ApiKey,
+				location: loc.lat + "," + loc.lon,
+				buffer: "1",
+				// This is a bit hacky, I should support this in httpLib
+				insights: "air&insights=fires&insights=wind&insights=winter&insights=thunderstorms&insights=floods&insights=temperature&insights=tropical&insights=marine&insights=fog&insights=tornado"
+			},
+			HandleError: (m) => this.HandleHTTPError(m)
+		});
+
+		if (response == null)
+			return null;
+
+		const alerts: AlertData[] = [];
+		for (const alert of response.data.events) {
+			alerts.push({
+				title: alert.eventValues.headline ?? alert.eventValues.title,
+				description: `${alert.eventValues.description}\n\n${alert.eventValues.response?.[0]?.instruction ?? ""}`,
+				level: alert.severity,
+				sender_name: alert.eventValues.origin,
+			});
+		}
+
+		return alerts;
 	}
 
 	private HandleHTTPError(message: ErrorResponse): boolean {
