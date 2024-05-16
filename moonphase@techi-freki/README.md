@@ -6,4 +6,4 @@ A Cinnamon applet that displays up-to-date moon related information.
 
 Extract and move moonphase@techi-freki to the ~/.local/share/cinnamon/applets directory.
 
-[Review Changelog]('https://github.com/linuxmint/cinnamon-spices-applets/tree/master/moonphase%40techi-freki/CHANGELOG.md')
+Review Changelog for latest updates

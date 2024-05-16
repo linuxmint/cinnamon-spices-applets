@@ -1,6 +1,16 @@
 ## Changelog
 
-### v1.0.0
+### v1.0.3 ([#5997](https://github.com/linuxmint/cinnamon-spices-applets/pull/5997))
+- Updates French translations
+
+
+### v1.0.2 ([#5983](https://github.com/linuxmint/cinnamon-spices-applets/pull/5983))
+- Updates Portuguese translations
+
+### v1.0.1 ([#5982](https://github.com/linuxmint/cinnamon-spices-applets/pull/5982))
+- Updates Spanish translations
+
+### v1.0.0 ([#5961](https://github.com/linuxmint/cinnamon-spices-applets/pull/5961))
 - Feature add: Added geolocation features
 - Feature add: Added moon rise, set, and transit times on left click
 - Feature add: Added current moon phase information on left click

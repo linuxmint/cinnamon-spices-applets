@@ -30,6 +30,7 @@ class MoonPhase extends Applet.TextIconApplet {
     }
 
     on_applet_clicked() {
+        // TODO: this conditional isn't working
         if (!this.enablePopup) return;
         if (!this.showCurrentPhaseInfo && !this.showRiseSet) return;
 
