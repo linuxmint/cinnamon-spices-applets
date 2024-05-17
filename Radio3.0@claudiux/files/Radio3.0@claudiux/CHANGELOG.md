@@ -1,3 +1,6 @@
+### v2.0.4~20240517
+  * Downloaded covers are now of high quality.
+
 ### v2.0.3~20240512
   * Correctly determines the category of a recently listened-to radio station.
 
