@@ -3,10 +3,10 @@
         "server": "https://api.radiodb.fr"
     },
     {
-        "server": "https://de1.api.radio-browser.info"
+        "server": "https://at1.api.radio-browser.info"
     },
     {
-        "server": "https://at1.api.radio-browser.info"
+        "server": "https://de1.api.radio-browser.info"
     },
     {
         "server": "https://nl1.api.radio-browser.info"
