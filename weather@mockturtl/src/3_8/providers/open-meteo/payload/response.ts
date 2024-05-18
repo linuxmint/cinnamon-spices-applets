@@ -29,7 +29,6 @@ export interface OpenMeteoWeatherResponse {
 }
 
 export function OpenMeteoResponseToData(payload: OpenMeteoWeatherResponse): WeatherData {
-	global.log(DateTime.fromISO(payload.current.time, { zone: payload.timezone }).toLocaleString(DateTime.DATETIME_FULL))
 	return {
 		date: DateTime.fromISO(payload.current.time, { zone: payload.timezone }),
 		sunrise: DateTime.fromISO(payload.daily.sunrise[0], { zone: payload.timezone }),

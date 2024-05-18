@@ -16589,7 +16589,6 @@ function OpenMeteoHourWeatherToData(data, timezone) {
 
 
 function OpenMeteoResponseToData(payload) {
-    global.log(DateTime.fromISO(payload.current.time, { zone: payload.timezone }).toLocaleString(DateTime.DATETIME_FULL));
     return Object.assign(Object.assign({ date: DateTime.fromISO(payload.current.time, { zone: payload.timezone }), sunrise: DateTime.fromISO(payload.daily.sunrise[0], { zone: payload.timezone }), sunset: DateTime.fromISO(payload.daily.sunset[0], { zone: payload.timezone }), coord: {
             lat: payload.latitude,
             lon: payload.longitude,
