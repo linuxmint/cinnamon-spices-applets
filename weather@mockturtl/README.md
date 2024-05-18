@@ -36,10 +36,11 @@ You can also save locations what you entered manually and switch between them in
 | **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | Yes     | --                            |
 | **Met Office UK**          | No            | 5                     | 36                     | No                 | No      | --                            |
 | **US National Weather**    | No            | 7                     | 156                    | No                 | Yes     | --                            |
+| **Open-Meteo**             | No            | 16                    | 24                     | No                 | No      | -                             |
 | **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | Yes*    | --                            |
 | **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | Yes     | --                            |
 | **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | Depends | Previously known as Climacell |
-| **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | No      | Limited free calls            |
+| **AccuWeather**            | Yes           | 5***                  | 12                     | No                 | No*     | Limited free calls            |
 | **Weather Underground**    | Yes           | 5                     | 0                      | No                 | No      | --                            |
 | **Pirate Weather**         | Yes           | 7                     | 168                    | Yes                | Depends | --                            |
 
@@ -91,6 +92,10 @@ The National Weather Service in the USA is a federal government agency formed in
 
 * Observations are quite spotty so it combines multiple observation stations if needed in a 50km area.
 
+### Open-Meteo
+
+[Open-Meteo](https://open-meteo.com/) is an open-source weather API and offers free access for non-commercial use. No API key required.
+
 ### Weatherbit.io
 
 Historical and Forecast Weather data service provided by Weatherbit LLC in the USA. [Weatherbit.io Website](https://www.weatherbit.io). Read more about the service [here](https://www.weatherbit.io/about).
@@ -130,6 +135,8 @@ Online Service from company AccuWeather Inc, founded in 1962 with headquarters i
 * ***Number of available hours and days are specified for the free plan, [paid plans allow more](https://developer.accuweather.com/packages).
 
 * API keys can be obtained [here](https://developer.accuweather.com/user/register). Register, then you must add a new App. When it's created Click on the App and the key will be displayed.
+
+* *Alerts are not provided in the Free or Standard plan as of May 2024 so it's not worth supporting in the applet.
 
 ### Weather Underground
 

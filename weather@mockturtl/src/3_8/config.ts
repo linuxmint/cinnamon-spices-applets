@@ -24,6 +24,7 @@ import { GeoIP } from "./location_services/geoip_services/base";
 import { PirateWeather } from "./providers/pirate_weather/pirateWeather";
 import { GeoClue } from "./location_services/geoip_services/geoclue";
 import { GeoIPFedora } from "./location_services/geoip_services/geoip.fedora";
+import { OpenMeteo } from "./providers/open-meteo/provider";
 
 const { get_home_dir, get_user_data_dir, get_user_config_dir } = imports.gi.GLib;
 const { File, Cancellable } = imports.gi.Gio;
@@ -56,7 +57,9 @@ export type Services =
 	"AccuWeather" |
 	"DeutscherWetterdienst" |
 	"WeatherUnderground" |
-	"PirateWeather";
+	"PirateWeather" |
+	"OpenMeteo"
+	;
 
 export const ServiceClassMapping: ServiceClassMappingType = {
 	"OpenWeatherMap": (app) => new OpenWeatherMap(app),
@@ -70,7 +73,8 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	"AccuWeather": (app) => new AccuWeather(app),
 	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
 	"WeatherUnderground": (app) => new WeatherUnderground(app),
-	"PirateWeather": (app) => new PirateWeather(app)
+	"PirateWeather": (app) => new PirateWeather(app),
+	"OpenMeteo": (app) => new OpenMeteo(app),
 }
 
 export class Config {

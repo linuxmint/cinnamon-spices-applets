@@ -478,12 +478,18 @@ export class UIHourlyForecasts {
 	}
 
 	private GeneratePrecipitationChance(precip: Precipitation | undefined, config: Config): string {
-		if (!precip) return "";
+		if (!precip)
+			return "";
+
+		// If we have a volume and it's 0, we don't need to show the chance
+		if (precip.volume != null && precip.volume == 0)
+			return "";
 
 		let precipitationText = "";
-		if (!!precip.chance) {
+		const chance = (Math.round((precip.chance ?? 0) / 10) * 10);
+		if (chance) {
 			precipitationText = (NotEmpty(precipitationText)) ? (precipitationText + ", ") : "";
-			precipitationText += ((Math.round(precip.chance / 10) * 10).toString() + "%")
+			precipitationText += (chance.toString() + "%");
 		}
 		return precipitationText;
 	}

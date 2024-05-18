@@ -16327,7 +16327,332 @@ class GeoIPFedora {
     ;
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/common.ts
+
+function OpenMeteoWeatherCodeToCondition(code, isDay) {
+    switch (code) {
+        case 0:
+            return {
+                icons: !isDay ? ["weather-clear-night"] : ["weather-clear"],
+                customIcon: !isDay ? "night-clear-symbolic" : "day-sunny-symbolic",
+                main: _("Clear"),
+                description: _("Clear sky")
+            };
+        case 1:
+            return {
+                icons: !isDay ? ["weather-few-clouds-night"] : ["weather-few-clouds"],
+                customIcon: !isDay ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                main: _("Mainly clear"),
+                description: _("Mainly clear")
+            };
+        case 2:
+            return {
+                icons: !isDay ? ["weather-few-clouds-night"] : ["weather-few-clouds"],
+                customIcon: !isDay ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                main: _("Partly cloudy"),
+                description: _("Partly cloudy")
+            };
+        case 3:
+            return {
+                icons: !isDay ? ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"],
+                customIcon: "cloudy-symbolic",
+                main: _("Overcast"),
+                description: _("Overcast")
+            };
+        case 45:
+        case 48:
+            return {
+                icons: ["weather-fog"],
+                customIcon: "fog-symbolic",
+                main: _("Fog"),
+                description: _("Fog")
+            };
+        case 51:
+            return {
+                icons: isDay ? ["weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-rain-symbolic" : "night-alt-rain-symbolic",
+                main: _("Drizzle"),
+                description: _("Light drizzle")
+            };
+        case 53:
+            return {
+                icons: isDay ? ["weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-rain-symbolic" : "night-alt-rain-symbolic",
+                main: _("Drizzle"),
+                description: _("Drizzle")
+            };
+        case 55:
+            return {
+                icons: isDay ? ["weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-rain-symbolic" : "night-alt-rain-symbolic",
+                main: _("Drizzle"),
+                description: _("Heavy drizzle")
+            };
+        case 56:
+            return {
+                icons: isDay ? ["weather-freezing-rain", "weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-freezing-rain", "weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-sleet-symbolic" : "night-alt-sleet-symbolic",
+                main: _("Drizzle"),
+                description: _("Light freezing drizzle")
+            };
+        case 57:
+            return {
+                icons: isDay ? ["weather-freezing-rain", "weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-freezing-rain", "weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-sleet-symbolic" : "night-alt-sleet-symbolic",
+                main: _("Drizzle"),
+                description: _("Freezing drizzle")
+            };
+        case 61:
+            return {
+                icons: isDay ? ["weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "rain-symbolic",
+                main: _("Rain"),
+                description: _("Light rain")
+            };
+        case 63:
+            return {
+                icons: isDay ? ["weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "rain-symbolic",
+                main: _("Rain"),
+                description: _("Rain")
+            };
+        case 65:
+            return {
+                icons: isDay ? ["weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "rain-symbolic",
+                main: _("Rain"),
+                description: _("Heavy rain")
+            };
+        case 66:
+            return {
+                icons: isDay ? ["weather-freezing-rain", "weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-freezing-rain", "weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "hail-symbolic",
+                main: _("Rain"),
+                description: _("Light freezing rain")
+            };
+        case 67:
+            return {
+                icons: isDay ? ["weather-freezing-rain", "weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-freezing-rain", "weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "hail-symbolic",
+                main: _("Rain"),
+                description: _("Freezing rain")
+            };
+        case 71:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow"),
+                description: _("Light snow")
+            };
+        case 73:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow"),
+                description: _("Snow")
+            };
+        case 75:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow"),
+                description: _("Heavy snow")
+            };
+        case 77:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow"),
+                description: _("Snow grains")
+            };
+        case 80:
+            return {
+                icons: isDay ? ["weather-showers", "weather-showers-day", "weather-rain"] : ["weather-showers", "weather-showers-night", "weather-rain"],
+                customIcon: isDay ? "day-showers-symbolic" : "night-alt-showers-symbolic",
+                main: _("Showers"),
+                description: _("Light showers")
+            };
+        case 81:
+            return {
+                icons: isDay ? ["weather-showers", "weather-showers-day", "weather-rain"] : ["weather-showers", "weather-showers-night", "weather-rain"],
+                customIcon: "showers-symbolic",
+                main: _("Showers"),
+                description: _("Showers")
+            };
+        case 82:
+            return {
+                icons: isDay ? ["weather-showers", "weather-showers-day", "weather-rain"] : ["weather-showers", "weather-showers-night", "weather-rain"],
+                customIcon: "showers-symbolic",
+                main: _("Showers"),
+                description: _("Heavy showers")
+            };
+        case 85:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow showers"),
+                description: _("Light snow showers")
+            };
+        case 86:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow showers"),
+                description: _("Snow showers")
+            };
+        case 95:
+            return {
+                icons: ["weather-storm"],
+                customIcon: "thunderstorm-symbolic",
+                main: _("Thunderstorm"),
+                description: _("Thunderstorm")
+            };
+        case 96:
+            return {
+                icons: ["weather-storm", "weather-hail"],
+                customIcon: "sleet-storm-symbolic",
+                main: _("Thunderstorm"),
+                description: _("Thunderstorm with slight hail")
+            };
+        case 99:
+            return {
+                icons: ["weather-storm", "weather-hail"],
+                customIcon: "sleet-storm-symbolic",
+                main: _("Thunderstorm"),
+                description: _("Thunderstorm with hail")
+            };
+        default:
+            return {
+                icons: ["weather-severe-alert"],
+                customIcon: "refresh-symbolic",
+                main: _("Unknown"),
+                description: _("Unknown")
+            };
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/current.ts
+
+
+function OpenMeteoCurrentWeatherToData(data) {
+    return {
+        condition: OpenMeteoWeatherCodeToCondition(data.weather_code, data.is_day === 1),
+        temperature: CelsiusToKelvin(data.temperature_2m),
+        pressure: data.surface_pressure,
+        humidity: data.relative_humidity_2m,
+        wind: {
+            speed: data.wind_speed_10m,
+            degree: data.wind_direction_10m,
+        },
+        dewPoint: null,
+        extra_field: {
+            name: _("Feels like"),
+            value: CelsiusToKelvin(data.apparent_temperature),
+            type: "temperature"
+        }
+    };
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/daily.ts
+
+
+
+function OpenMeteoDailyWeatherToData(data, timezone) {
+    const result = [];
+    for (let i = 0; i < data.time.length; i++) {
+        result.push({
+            date: DateTime.fromISO(data.time[i], { zone: timezone }),
+            temp_min: CelsiusToKelvin(data.temperature_2m_min[i]),
+            temp_max: CelsiusToKelvin(data.temperature_2m_max[i]),
+            condition: OpenMeteoWeatherCodeToCondition(data.weather_code[i], true),
+        });
+    }
+    return result;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/hour.ts
+
+
+
+function OpenMeteoHourWeatherToData(data, timezone) {
+    const result = [];
+    for (let i = 0; i < data.time.length; i++) {
+        result.push({
+            date: DateTime.fromISO(data.time[i], { zone: timezone }),
+            condition: OpenMeteoWeatherCodeToCondition(data.weather_code[i], data.is_day[i] === 1),
+            temp: CelsiusToKelvin(data.temperature_2m[i]),
+            precipitation: {
+                chance: data.precipitation_probability[i],
+                volume: data.precipitation[i],
+                type: (data.rain[i] > 0 || data.showers[i] > 0) ? "rain" : data.snowfall[i] > 0 ? "snow" : "none",
+            }
+        });
+    }
+    return result;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/response.ts
+
+
+
+
+function OpenMeteoResponseToData(payload) {
+    global.log(DateTime.fromISO(payload.current.time, { zone: payload.timezone }).toLocaleString(DateTime.DATETIME_FULL));
+    return Object.assign(Object.assign({ date: DateTime.fromISO(payload.current.time, { zone: payload.timezone }), sunrise: DateTime.fromISO(payload.daily.sunrise[0], { zone: payload.timezone }), sunset: DateTime.fromISO(payload.daily.sunset[0], { zone: payload.timezone }), coord: {
+            lat: payload.latitude,
+            lon: payload.longitude,
+        }, location: {
+            timeZone: payload.timezone,
+            tzOffset: payload.utc_offset_seconds,
+        } }, OpenMeteoCurrentWeatherToData(payload.current)), { forecasts: OpenMeteoDailyWeatherToData(payload.daily, payload.timezone), hourlyForecasts: OpenMeteoHourWeatherToData(payload.hourly, payload.timezone) });
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/provider.ts
+
+
+
+
+class OpenMeteo extends BaseProvider {
+    get remainingCalls() {
+        return null;
+    }
+    ;
+    constructor(_app) {
+        super(_app);
+        this.prettyName = _("Open Meteo");
+        this.name = "OpenMeteo";
+        this.maxForecastSupport = 16;
+        this.website = "https://open-meteo.com/";
+        this.maxHourlyForecastSupport = 24;
+        this.needsApiKey = false;
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
+        this.query = "https://api.open-meteo.com/v1/forecast";
+    }
+    async GetWeather(loc, cancellable) {
+        const result = await HttpLib.Instance.LoadJsonSimple({
+            url: this.query,
+            cancellable: cancellable,
+            noEncode: true,
+            params: {
+                latitude: loc.lat,
+                longitude: loc.lon,
+                current: "temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m",
+                hourly: "temperature_2m,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weather_code,wind_speed_10m,wind_direction_10m,is_day",
+                daily: "weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset",
+                timezone: "auto",
+                forecast_days: "16",
+                forecast_hours: "24"
+            }
+        });
+        if (!result)
+            return null;
+        return OpenMeteoResponseToData(result);
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
 
 
 
@@ -16370,7 +16695,8 @@ const ServiceClassMapping = {
     "AccuWeather": (app) => new AccuWeather(app),
     "DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
     "WeatherUnderground": (app) => new WeatherUnderground(app),
-    "PirateWeather": (app) => new PirateWeather(app)
+    "PirateWeather": (app) => new PirateWeather(app),
+    "OpenMeteo": (app) => new OpenMeteo(app),
 };
 class Config {
     get UserTimezone() {
@@ -18127,12 +18453,16 @@ class UIHourlyForecasts {
         return precipitationText;
     }
     GeneratePrecipitationChance(precip, config) {
+        var _a;
         if (!precip)
             return "";
+        if (precip.volume != null && precip.volume == 0)
+            return "";
         let precipitationText = "";
-        if (!!precip.chance) {
+        const chance = (Math.round(((_a = precip.chance) !== null && _a !== void 0 ? _a : 0) / 10) * 10);
+        if (chance) {
             precipitationText = (NotEmpty(precipitationText)) ? (precipitationText + ", ") : "";
-            precipitationText += ((Math.round(precip.chance / 10) * 10).toString() + "%");
+            precipitationText += (chance.toString() + "%");
         }
         return precipitationText;
     }
