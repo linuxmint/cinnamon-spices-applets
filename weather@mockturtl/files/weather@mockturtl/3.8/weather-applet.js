@@ -11054,359 +11054,36 @@ class MetUk extends BaseProvider {
 }
 ;
 
-;// CONCATENATED MODULE: ./src/3_8/providers/openWeatherMap.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/common.ts
 
-
-
-
-
-const IDCache = {};
-class OpenWeatherMap extends BaseProvider {
-    constructor(_app) {
-        super(_app);
-        this.prettyName = _("OpenWeatherMap");
-        this.name = "OpenWeatherMap";
-        this.maxForecastSupport = 8;
-        this.website = "https://openweathermap.org/";
-        this.maxHourlyForecastSupport = 48;
-        this.needsApiKey = false;
-        this.remainingCalls = null;
-        this.supportHourlyPrecipChance = true;
-        this.supportHourlyPrecipVolume = true;
-        this.supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
-            "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
-            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
-        ];
-        this.base_url = "https://api.openweathermap.org/data/2.5/onecall";
-        this.id_irl = "https://api.openweathermap.org/data/2.5/weather";
-        this.HandleError = (error) => {
-            if (error.ErrorData.code == 404) {
-                this.app.ShowError({
-                    detail: "location not found",
-                    message: _("Location not found, make sure location is available or it is in the correct format"),
-                    userError: true,
-                    type: "hard"
-                });
-                return false;
-            }
-            return true;
-        };
+const OWM_SUPPORTED_LANGS = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
+    "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
+    "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
+];
+function ConvertLocaleToOWMLang(systemLocale) {
+    if (systemLocale == null)
+        return "en";
+    if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
+        return systemLocale;
     }
-    async GetWeather(loc, cancellable) {
-        const params = this.ConstructParams(loc);
-        const cachedID = IDCache[`${loc.lat},${loc.lon}`];
-        const [json, idPayload] = await Promise.all([
-            HttpLib.Instance.LoadJsonSimple({
-                url: this.base_url,
-                cancellable,
-                params: params,
-                HandleError: this.HandleError
-            }),
-            (cachedID == null) ? HttpLib.Instance.LoadJsonSimple({ url: this.id_irl, cancellable, params }) : Promise.resolve()
-        ]);
-        if (cachedID == null && (idPayload === null || idPayload === void 0 ? void 0 : idPayload.id) != null)
-            IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
-        if (!json)
-            return null;
-        if (this.HadErrors(json))
-            return null;
-        json.id = cachedID !== null && cachedID !== void 0 ? cachedID : idPayload === null || idPayload === void 0 ? void 0 : idPayload.id;
-        return this.ParseWeather(json, loc);
+    const lang = systemLocale.split("-")[0];
+    if (lang == "sv") {
+        return "se";
     }
-    ;
-    RanOutOfQuota(loc) {
-        return null;
+    else if (lang == "cs") {
+        return "cz";
     }
-    ParseWeather(json, loc) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
-        try {
-            const weather = {
-                coord: {
-                    lat: json.lat,
-                    lon: json.lon
-                },
-                location: {
-                    url: (json.id == null) ? "https://openweathermap.org/city/" : `https://openweathermap.org/city/${json.id}`,
-                    timeZone: json.timezone
-                },
-                date: DateTime.fromSeconds(json.current.dt, { zone: json.timezone }),
-                sunrise: DateTime.fromSeconds(json.current.sunrise, { zone: json.timezone }),
-                sunset: DateTime.fromSeconds(json.current.sunset, { zone: json.timezone }),
-                wind: {
-                    speed: json.current.wind_speed,
-                    degree: json.current.wind_deg
-                },
-                temperature: json.current.temp,
-                pressure: json.current.pressure,
-                humidity: json.current.humidity,
-                dewPoint: json.current.dew_point,
-                condition: {
-                    main: (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main,
-                    description: (_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description,
-                    icons: this.ResolveIcon((_j = (_h = (_g = json === null || json === void 0 ? void 0 : json.current) === null || _g === void 0 ? void 0 : _g.weather) === null || _h === void 0 ? void 0 : _h[0]) === null || _j === void 0 ? void 0 : _j.icon),
-                    customIcon: this.ResolveCustomIcon((_m = (_l = (_k = json === null || json === void 0 ? void 0 : json.current) === null || _k === void 0 ? void 0 : _k.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.icon)
-                },
-                extra_field: {
-                    name: _("Feels Like"),
-                    value: json.current.feels_like,
-                    type: "temperature"
-                },
-                forecasts: [],
-                alerts: [],
-            };
-            if (json.minutely != null) {
-                const immediate = {
-                    start: -1,
-                    end: -1
-                };
-                for (const [index, element] of json.minutely.entries()) {
-                    if (element.precipitation > 0 && immediate.start == -1) {
-                        immediate.start = index;
-                        continue;
-                    }
-                    else if (element.precipitation == 0 && immediate.start != -1) {
-                        immediate.end = index;
-                        break;
-                    }
-                }
-                weather.immediatePrecipitation = immediate;
-            }
-            const forecasts = [];
-            for (const day of json.daily) {
-                const forecast = {
-                    date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
-                    temp_min: day.temp.min,
-                    temp_max: day.temp.max,
-                    condition: {
-                        main: day.weather[0].main,
-                        description: day.weather[0].description,
-                        icons: this.ResolveIcon(day.weather[0].icon),
-                        customIcon: this.ResolveCustomIcon(day.weather[0].icon)
-                    },
-                };
-                forecasts.push(forecast);
-            }
-            weather.forecasts = forecasts;
-            const hourly = [];
-            for (const hour of json.hourly) {
-                const forecast = {
-                    date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
-                    temp: hour.temp,
-                    condition: {
-                        main: hour.weather[0].main,
-                        description: hour.weather[0].description,
-                        icons: this.ResolveIcon(hour.weather[0].icon),
-                        customIcon: this.ResolveCustomIcon(hour.weather[0].icon)
-                    },
-                };
-                if (hour.pop >= 0.1) {
-                    forecast.precipitation = {
-                        chance: hour.pop * 100,
-                        type: "none",
-                    };
-                }
-                if (!!hour.rain && forecast.precipitation != null) {
-                    forecast.precipitation.volume = hour === null || hour === void 0 ? void 0 : hour.rain["1h"];
-                    forecast.precipitation.type = "rain";
-                }
-                if (!!hour.snow && forecast.precipitation != null) {
-                    forecast.precipitation.volume = hour.snow["1h"];
-                    forecast.precipitation.type = "snow";
-                }
-                hourly.push(forecast);
-            }
-            weather.hourlyForecasts = hourly;
-            const alerts = [];
-            for (const alert of (_o = json.alerts) !== null && _o !== void 0 ? _o : []) {
-                alerts.push({
-                    sender_name: alert.sender_name,
-                    level: "unknown",
-                    title: alert.event,
-                    description: alert.description,
-                });
-            }
-            weather.alerts = alerts;
-            return weather;
-        }
-        catch (e) {
-            if (e instanceof Error)
-                logger_Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
-            this.app.ShowError({
-                type: "soft",
-                service: "openweathermap",
-                detail: "unusual payload",
-                message: _("Failed to Process Current Weather Info")
-            });
-            return null;
-        }
+    else if (lang == "ko") {
+        return "kr";
     }
-    ;
-    ConstructParams(loc) {
-        const params = {
-            lat: loc.lat,
-            lon: loc.lon,
-            appid: "1c73f8259a86c6fd43c7163b543c8640"
-        };
-        const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
-        if (this.app.config._translateCondition && IsLangSupported(locale, this.supportedLanguages)) {
-            params.lang = locale;
-        }
-        return params;
+    else if (lang == "lv") {
+        return "la";
     }
-    ;
-    ConvertToAPILocale(systemLocale) {
-        if (systemLocale == null)
-            return "en";
-        if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
-            return systemLocale;
-        }
-        const lang = systemLocale.split("-")[0];
-        if (lang == "sv") {
-            return "se";
-        }
-        else if (lang == "cs") {
-            return "cz";
-        }
-        else if (lang == "ko") {
-            return "kr";
-        }
-        else if (lang == "lv") {
-            return "la";
-        }
-        else if (lang == "nn" || lang == "nb") {
-            return "no";
-        }
-        return lang;
+    else if (lang == "nn" || lang == "nb") {
+        return "no";
     }
-    HadErrors(json) {
-        if (!this.HasReturnedError(json))
-            return false;
-        const errorMsg = "OpenWeatherMap Response: ";
-        const error = {
-            service: "openweathermap",
-            type: "hard",
-        };
-        const errorPayload = json;
-        switch (errorPayload.cod) {
-            case ("400"):
-                error.detail = "bad location format";
-                error.message = _("Please make sure Location is in the correct format in the Settings");
-                break;
-            case ("401"):
-                error.detail = "bad key";
-                error.message = _("Make sure you entered the correct key in settings");
-                break;
-            case ("404"):
-                error.detail = "location not found";
-                error.message = _("Location not found, make sure location is available or it is in the correct format");
-                break;
-            case ("429"):
-                error.detail = "key blocked";
-                error.message = _("If this problem persists, please contact the Author of this applet");
-                break;
-            default:
-                error.detail = "unknown";
-                error.message = _("Unknown Error, please see the logs in Looking Glass");
-                break;
-        }
-        ;
-        this.app.ShowError(error);
-        logger_Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
-        logger_Logger.Error(errorMsg + errorPayload.message);
-        return true;
-    }
-    ;
-    HasReturnedError(json) {
-        return (!!(json === null || json === void 0 ? void 0 : json.cod));
-    }
-    ResolveIcon(icon) {
-        switch (icon) {
-            case "10d":
-                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
-            case "10n":
-                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
-            case "09n":
-                return ["weather-showers"];
-            case "09d":
-                return ["weather-showers"];
-            case "13d":
-                return ["weather-snow"];
-            case "13n":
-                return ["weather-snow"];
-            case "50d":
-                return ["weather-fog"];
-            case "50n":
-                return ["weather-fog"];
-            case "04d":
-                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
-            case "04n":
-                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
-            case "03n":
-                return ['weather-clouds-night', "weather-few-clouds-night"];
-            case "03d":
-                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
-            case "02n":
-                return ["weather-few-clouds-night"];
-            case "02d":
-                return ["weather-few-clouds"];
-            case "01n":
-                return ["weather-clear-night"];
-            case "01d":
-                return ["weather-clear"];
-            case "11d":
-                return ["weather-storm"];
-            case "11n":
-                return ["weather-storm"];
-            default:
-                return ["weather-severe-alert"];
-        }
-    }
-    ;
-    ResolveCustomIcon(icon) {
-        switch (icon) {
-            case "10d":
-                return "day-rain-symbolic";
-            case "10n":
-                return "night-rain-symbolic";
-            case "09n":
-                return "night-showers-symbolic";
-            case "09d":
-                return "day-showers-symbolic";
-            case "13d":
-                return "day-snow-symbolic";
-            case "13n":
-                return "night-alt-snow-symbolic";
-            case "50d":
-                return "day-fog-symbolic";
-            case "50n":
-                return "night-fog-symbolic";
-            case "04d":
-                return "day-cloudy-symbolic";
-            case "04n":
-                return "night-alt-cloudy-symbolic";
-            case "03n":
-                return "night-alt-cloudy-symbolic";
-            case "03d":
-                return "day-cloudy-symbolic";
-            case "02n":
-                return "night-alt-cloudy-symbolic";
-            case "02d":
-                return "day-cloudy-symbolic";
-            case "01n":
-                return "night-clear-symbolic";
-            case "01d":
-                return "day-sunny-symbolic";
-            case "11d":
-                return "day-thunderstorm-symbolic";
-            case "11n":
-                return "night-alt-thunderstorm-symbolic";
-            default:
-                return "cloud-refresh-symbolic";
-        }
-    }
-    ;
+    return lang;
 }
-;
 const openWeatherMapConditionLibrary = [
     _("Thunderstorm with light rain"),
     _("Thunderstorm with rain"),
@@ -11466,6 +11143,321 @@ const openWeatherMapConditionLibrary = [
     _("Broken clouds"),
     _("Overcast clouds")
 ];
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/condition.ts
+function OWMIconToBuiltInIcons(icon) {
+    switch (icon) {
+        case "10d":
+            return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
+        case "10n":
+            return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
+        case "09n":
+            return ["weather-showers"];
+        case "09d":
+            return ["weather-showers"];
+        case "13d":
+            return ["weather-snow"];
+        case "13n":
+            return ["weather-snow"];
+        case "50d":
+            return ["weather-fog"];
+        case "50n":
+            return ["weather-fog"];
+        case "04d":
+            return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
+        case "04n":
+            return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
+        case "03n":
+            return ['weather-clouds-night', "weather-few-clouds-night"];
+        case "03d":
+            return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
+        case "02n":
+            return ["weather-few-clouds-night"];
+        case "02d":
+            return ["weather-few-clouds"];
+        case "01n":
+            return ["weather-clear-night"];
+        case "01d":
+            return ["weather-clear"];
+        case "11d":
+            return ["weather-storm"];
+        case "11n":
+            return ["weather-storm"];
+        default:
+            return ["weather-severe-alert"];
+    }
+}
+function OWMIconToCustomIcon(icon) {
+    switch (icon) {
+        case "10d":
+            return "day-rain-symbolic";
+        case "10n":
+            return "night-rain-symbolic";
+        case "09n":
+            return "night-showers-symbolic";
+        case "09d":
+            return "day-showers-symbolic";
+        case "13d":
+            return "day-snow-symbolic";
+        case "13n":
+            return "night-alt-snow-symbolic";
+        case "50d":
+            return "day-fog-symbolic";
+        case "50n":
+            return "night-fog-symbolic";
+        case "04d":
+            return "day-cloudy-symbolic";
+        case "04n":
+            return "night-alt-cloudy-symbolic";
+        case "03n":
+            return "night-alt-cloudy-symbolic";
+        case "03d":
+            return "day-cloudy-symbolic";
+        case "02n":
+            return "night-alt-cloudy-symbolic";
+        case "02d":
+            return "day-cloudy-symbolic";
+        case "01n":
+            return "night-clear-symbolic";
+        case "01d":
+            return "day-sunny-symbolic";
+        case "11d":
+            return "day-thunderstorm-symbolic";
+        case "11n":
+            return "night-alt-thunderstorm-symbolic";
+        default:
+            return "cloud-refresh-symbolic";
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/onecall.ts
+
+
+
+function OWMOneCallToWeatherData(json) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+    const weather = {
+        coord: {
+            lat: json.lat,
+            lon: json.lon
+        },
+        location: {
+            url: (json.id == null) ? "https://openweathermap.org/city/" : `https://openweathermap.org/city/${json.id}`,
+            timeZone: json.timezone
+        },
+        date: DateTime.fromSeconds(json.current.dt, { zone: json.timezone }),
+        sunrise: DateTime.fromSeconds(json.current.sunrise, { zone: json.timezone }),
+        sunset: DateTime.fromSeconds(json.current.sunset, { zone: json.timezone }),
+        wind: {
+            speed: json.current.wind_speed,
+            degree: json.current.wind_deg
+        },
+        temperature: json.current.temp,
+        pressure: json.current.pressure,
+        humidity: json.current.humidity,
+        dewPoint: json.current.dew_point,
+        condition: {
+            main: (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main,
+            description: (_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description,
+            icons: OWMIconToBuiltInIcons((_j = (_h = (_g = json === null || json === void 0 ? void 0 : json.current) === null || _g === void 0 ? void 0 : _g.weather) === null || _h === void 0 ? void 0 : _h[0]) === null || _j === void 0 ? void 0 : _j.icon),
+            customIcon: OWMIconToCustomIcon((_m = (_l = (_k = json === null || json === void 0 ? void 0 : json.current) === null || _k === void 0 ? void 0 : _k.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.icon)
+        },
+        extra_field: {
+            name: _("Feels Like"),
+            value: json.current.feels_like,
+            type: "temperature"
+        },
+        forecasts: [],
+        alerts: [],
+    };
+    if (json.minutely != null) {
+        const immediate = {
+            start: -1,
+            end: -1
+        };
+        for (const [index, element] of json.minutely.entries()) {
+            if (element.precipitation > 0 && immediate.start == -1) {
+                immediate.start = index;
+                continue;
+            }
+            else if (element.precipitation == 0 && immediate.start != -1) {
+                immediate.end = index;
+                break;
+            }
+        }
+        weather.immediatePrecipitation = immediate;
+    }
+    const forecasts = [];
+    for (const day of json.daily) {
+        const forecast = {
+            date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
+            temp_min: day.temp.min,
+            temp_max: day.temp.max,
+            condition: {
+                main: day.weather[0].main,
+                description: day.weather[0].description,
+                icons: OWMIconToBuiltInIcons(day.weather[0].icon),
+                customIcon: OWMIconToCustomIcon(day.weather[0].icon)
+            },
+        };
+        forecasts.push(forecast);
+    }
+    weather.forecasts = forecasts;
+    const hourly = [];
+    for (const hour of json.hourly) {
+        const forecast = {
+            date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
+            temp: hour.temp,
+            condition: {
+                main: hour.weather[0].main,
+                description: hour.weather[0].description,
+                icons: OWMIconToBuiltInIcons(hour.weather[0].icon),
+                customIcon: OWMIconToCustomIcon(hour.weather[0].icon)
+            },
+        };
+        if (hour.pop >= 0.1) {
+            forecast.precipitation = {
+                chance: hour.pop * 100,
+                type: "none",
+            };
+        }
+        if (!!hour.rain && forecast.precipitation != null) {
+            forecast.precipitation.volume = hour === null || hour === void 0 ? void 0 : hour.rain["1h"];
+            forecast.precipitation.type = "rain";
+        }
+        if (!!hour.snow && forecast.precipitation != null) {
+            forecast.precipitation.volume = hour.snow["1h"];
+            forecast.precipitation.type = "snow";
+        }
+        hourly.push(forecast);
+    }
+    weather.hourlyForecasts = hourly;
+    const alerts = [];
+    for (const alert of (_o = json.alerts) !== null && _o !== void 0 ? _o : []) {
+        alerts.push({
+            sender_name: alert.sender_name,
+            level: "unknown",
+            title: alert.event,
+            description: alert.description,
+        });
+    }
+    weather.alerts = alerts;
+    return weather;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/provider-closed.ts
+
+
+
+
+
+
+const IDCache = {};
+class OpenWeatherMapOneCall extends BaseProvider {
+    constructor(_app) {
+        super(_app);
+        this.prettyName = _("OpenWeatherMap");
+        this.name = "OpenWeatherMap_OneCall";
+        this.maxForecastSupport = 8;
+        this.website = "https://openweathermap.org/";
+        this.maxHourlyForecastSupport = 48;
+        this.needsApiKey = true;
+        this.remainingCalls = null;
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
+        this.base_url = "https://api.openweathermap.org/data/3.0/onecall";
+        this.id_irl = "https://api.openweathermap.org/data/2.5/weather";
+        this.HandleError = (error) => {
+            if (error.ErrorData.code == 404) {
+                this.app.ShowError({
+                    detail: "location not found",
+                    message: _("Location not found, make sure location is available or it is in the correct format"),
+                    userError: true,
+                    type: "hard"
+                });
+                return false;
+            }
+            return true;
+        };
+    }
+    async GetWeather(loc, cancellable, config) {
+        const params = this.ConstructParams(loc, config.ApiKey);
+        const cachedID = IDCache[`${loc.lat},${loc.lon}`];
+        const [json, idPayload] = await Promise.all([
+            HttpLib.Instance.LoadJsonSimple({
+                url: this.base_url,
+                cancellable,
+                params: params,
+                HandleError: this.HandleError
+            }),
+            (cachedID == null) ? HttpLib.Instance.LoadJsonSimple({ url: this.id_irl, cancellable, params }) : Promise.resolve()
+        ]);
+        if (cachedID == null && (idPayload === null || idPayload === void 0 ? void 0 : idPayload.id) != null)
+            IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
+        if (!json)
+            return null;
+        if (this.HadErrors(json))
+            return null;
+        json.id = cachedID !== null && cachedID !== void 0 ? cachedID : idPayload === null || idPayload === void 0 ? void 0 : idPayload.id;
+        return OWMOneCallToWeatherData(json);
+    }
+    ;
+    ConstructParams(loc, key) {
+        const params = {
+            lat: loc.lat,
+            lon: loc.lon,
+            appid: key
+        };
+        const locale = ConvertLocaleToOWMLang(this.app.config.currentLocale);
+        if (this.app.config._translateCondition && IsLangSupported(locale, OWM_SUPPORTED_LANGS)) {
+            params.lang = locale;
+        }
+        return params;
+    }
+    ;
+    HadErrors(json) {
+        if (!this.HasReturnedError(json))
+            return false;
+        const errorMsg = "OpenWeatherMap Response: ";
+        const error = {
+            service: "openweathermap",
+            type: "hard",
+        };
+        const errorPayload = json;
+        switch (errorPayload.cod) {
+            case ("400"):
+                error.detail = "bad location format";
+                error.message = _("Please make sure Location is in the correct format in the Settings");
+                break;
+            case ("401"):
+                error.detail = "bad key";
+                error.message = _("Make sure you entered the correct key in settings");
+                break;
+            case ("404"):
+                error.detail = "location not found";
+                error.message = _("Location not found, make sure location is available or it is in the correct format");
+                break;
+            case ("429"):
+                error.detail = "key blocked";
+                error.message = _("If this problem persists, please contact the Author of this applet");
+                break;
+            default:
+                error.detail = "unknown";
+                error.message = _("Unknown Error, please see the logs in Looking Glass");
+                break;
+        }
+        ;
+        this.app.ShowError(error);
+        logger_Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
+        logger_Logger.Error(errorMsg + errorPayload.message);
+        return true;
+    }
+    ;
+    HasReturnedError(json) {
+        return (!!(json === null || json === void 0 ? void 0 : json.cod));
+    }
+}
+;
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/types/common.ts
 const conditionSeverity = {
@@ -16651,7 +16643,120 @@ class OpenMeteo extends BaseProvider {
     }
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/forecast_daily.ts
+
+
+function OWMDailyForecastsToData(forecast, timezone = "local") {
+    var _a, _b, _c, _d, _e, _f, _g, _h;
+    const result = [];
+    for (const day of forecast) {
+        const data = {
+            date: DateTime.fromSeconds(day.dt, { zone: timezone }),
+            temp_max: day.temp.max,
+            temp_min: day.temp.min,
+            condition: {
+                main: (_b = (_a = day.weather) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.main,
+                description: (_d = (_c = day.weather) === null || _c === void 0 ? void 0 : _c[0]) === null || _d === void 0 ? void 0 : _d.description,
+                icons: OWMIconToBuiltInIcons((_f = (_e = day.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.icon),
+                customIcon: OWMIconToCustomIcon((_h = (_g = day.weather) === null || _g === void 0 ? void 0 : _g[0]) === null || _h === void 0 ? void 0 : _h.icon)
+            }
+        };
+        result.push(data);
+    }
+    return result;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/weather.ts
+
+
+
+function OWMWeatherToWeatherData(weather, timezone = "local") {
+    var _a, _b, _c, _d;
+    return {
+        date: DateTime.fromSeconds(weather.dt, { zone: timezone }),
+        sunrise: DateTime.fromSeconds(weather.sys.sunrise, { zone: timezone }),
+        sunset: DateTime.fromSeconds(weather.sys.sunset, { zone: timezone }),
+        coord: weather.coord,
+        location: {
+            city: weather.name,
+            country: weather.sys.country,
+            url: `https://openweathermap.org/city/${weather.id}`
+        },
+        condition: {
+            main: (_a = weather.weather) === null || _a === void 0 ? void 0 : _a[0].main,
+            description: (_b = weather.weather) === null || _b === void 0 ? void 0 : _b[0].description,
+            icons: OWMIconToBuiltInIcons((_c = weather.weather) === null || _c === void 0 ? void 0 : _c[0].icon),
+            customIcon: OWMIconToCustomIcon((_d = weather.weather) === null || _d === void 0 ? void 0 : _d[0].icon)
+        },
+        wind: {
+            speed: weather.wind.speed,
+            degree: weather.wind.deg,
+        },
+        temperature: weather.main.temp,
+        pressure: weather.main.pressure,
+        humidity: weather.main.humidity,
+        dewPoint: null,
+        extra_field: {
+            type: "temperature",
+            name: _("Feels like"),
+            value: weather.main.feels_like
+        }
+    };
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/provider-open.ts
+
+
+
+
+
+
+class OpenWeatherMapOpen extends BaseProvider {
+    constructor() {
+        super(...arguments);
+        this.needsApiKey = false;
+        this.prettyName = _("OpenWeatherMap");
+        this.name = "OpenWeatherMap";
+        this.maxForecastSupport = 7;
+        this.maxHourlyForecastSupport = 0;
+        this.website = "https://openweathermap.org/";
+        this.remainingCalls = null;
+        this.supportHourlyPrecipChance = false;
+        this.supportHourlyPrecipVolume = false;
+    }
+    async GetWeather(loc, cancellable, config) {
+        const current = await HttpLib.Instance.LoadJsonSimple({
+            url: "https://api.openweathermap.org/data/2.5/weather",
+            cancellable,
+            params: this.ConstructParams(loc)
+        });
+        const daily = await HttpLib.Instance.LoadJsonSimple({
+            url: "https://api.openweathermap.org/data/2.5/forecast/daily",
+            cancellable,
+            params: this.ConstructParams(loc)
+        });
+        if (!current || !daily) {
+            return null;
+        }
+        return Object.assign(Object.assign({}, OWMWeatherToWeatherData(current, config.Timezone)), { forecasts: OWMDailyForecastsToData(daily.list, config.Timezone) });
+    }
+    ConstructParams(loc) {
+        const params = {
+            lat: loc.lat,
+            lon: loc.lon,
+            appid: "1c73f8259a86c6fd43c7163b543c8640"
+        };
+        const locale = ConvertLocaleToOWMLang(this.app.config.currentLocale);
+        if (this.app.config._translateCondition && IsLangSupported(locale, OWM_SUPPORTED_LANGS)) {
+            params.lang = locale;
+        }
+        return params;
+    }
+    ;
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
 
 
 
@@ -16684,7 +16789,8 @@ const { IconType: config_IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings: config_Settings } = imports.gi.Gio;
 const ServiceClassMapping = {
-    "OpenWeatherMap": (app) => new OpenWeatherMap(app),
+    "OpenWeatherMap": (app) => new OpenWeatherMapOpen(app),
+    "OpenWeatherMap_OneCall": (app) => new OpenWeatherMapOneCall(app),
     "MetNorway": (app) => new MetNorway(app),
     "Weatherbit": (app) => new Weatherbit(app),
     "Tomorrow.io": (app) => new ClimacellV4(app),

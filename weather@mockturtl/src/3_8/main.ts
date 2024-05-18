@@ -186,7 +186,9 @@ export class WeatherApplet extends TextIconApplet {
 			if (this.provider.needsApiKey && this.config.NoApiKey()) {
 				return RefreshState.NoKey;
 			}
+
 			let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config);
+
 			if (weatherInfo == null) {
 				return RefreshState.NoWeather;
 			}

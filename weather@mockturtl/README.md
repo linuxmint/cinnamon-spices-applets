@@ -30,13 +30,14 @@ You can also save locations what you entered manually and switch between them in
 
 | Weather Providers          | Needs API key | Maximum Forecast Days | Maximum Forecast Hours | Immediate Forecast | Alerts  | Other information             |
 | -------------------------- | ------------- | --------------------- | ---------------------- | ------------------ | ------- | ----------------------------- |
-| **OpenWeatherMap**         | No            | 8                     | 48                     | Yes                | Yes     | Default provider              |
+| **OpenWeatherMap**         | No            | 7                     | 0                      | No                 | No      | Default provider              |
 | **MET Norway**             | No            | 10                    | 48                     | Depends            | Depends | --                            |
 | **DMI Denmark**            | No            | 10                    | 48                     | No                 | No      | --                            |
 | **Deutscher Wetterdienst** | No            | 10                    | 240                    | No                 | Yes     | --                            |
 | **Met Office UK**          | No            | 5                     | 36                     | No                 | No      | --                            |
 | **US National Weather**    | No            | 7                     | 156                    | No                 | Yes     | --                            |
 | **Open-Meteo**             | No            | 16                    | 24                     | No                 | No      | -                             |
+| **OpenWeatherMap OneCall** | Yes           | 8                     | 48                     | Yes                | Alerts  | -                             |
 | **WeatherBit**             | Yes           | 16                    | 0**                    | No                 | Yes*    | --                            |
 | **Visual Crossing**        | Yes           | 15                    | 336                    | No                 | Yes     | --                            |
 | **Tomorrow.io**            | Yes           | 15                    | 108                    | No                 | Depends | Previously known as Climacell |
@@ -95,6 +96,12 @@ The National Weather Service in the USA is a federal government agency formed in
 ### Open-Meteo
 
 [Open-Meteo](https://open-meteo.com/) is an open-source weather API and offers free access for non-commercial use. No API key required.
+
+### OpenWeatherMap OneCall
+
+Version of OpenWeatherMap that supports more features (as before), but needs an API key. You can registre for an API key [here](https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base)
+
+* Provides 1000 Free calls a day
 
 ### Weatherbit.io
 

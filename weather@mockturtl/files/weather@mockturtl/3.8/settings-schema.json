@@ -194,6 +194,7 @@
 			"Deutscher Wetterdienst (Germany only)": "DeutscherWetterdienst",
 			"Met Office UK (UK only)": "Met Office UK",
 			"US National Weather (US only)": "US Weather",
+			"OpenWeatherMap OneCall (key needed)": "OpenWeatherMap_OneCall",
 			"Pirate Weather (key needed)": "PirateWeather",
 			"Visual Crossing (key needed)": "Visual Crossing",
 			"Weatherbit (key needed)": "Weatherbit",
