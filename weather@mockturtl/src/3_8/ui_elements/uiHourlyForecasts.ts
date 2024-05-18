@@ -482,8 +482,8 @@ export class UIHourlyForecasts {
 			return "";
 
 		// If we have a volume and it's 0, we don't need to show the chance
-		if (precip.volume != null && precip.volume == 0)
-			return "";
+		// if (precip.volume != null && precip.volume == 0)
+		// 	return "";
 
 		let precipitationText = "";
 		const chance = (Math.round((precip.chance ?? 0) / 10) * 10);

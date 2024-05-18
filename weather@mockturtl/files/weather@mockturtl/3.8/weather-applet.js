@@ -18562,8 +18562,6 @@ class UIHourlyForecasts {
         var _a;
         if (!precip)
             return "";
-        if (precip.volume != null && precip.volume == 0)
-            return "";
         let precipitationText = "";
         const chance = (Math.round(((_a = precip.chance) !== null && _a !== void 0 ? _a : 0) / 10) * 10);
         if (chance) {
