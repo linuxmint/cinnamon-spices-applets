@@ -99,7 +99,7 @@ The National Weather Service in the USA is a federal government agency formed in
 
 ### OpenWeatherMap OneCall
 
-Version of OpenWeatherMap that supports more features (as before), but needs an API key. You can registre for an API key [here](https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base)
+Version of OpenWeatherMap that supports more features (as before), but needs an API key. You can register for an API key [here](https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base). After that change your Call limit from 2000 to 1000 to make sure you are not charged.
 
 * Provides 1000 Free calls a day
 

@@ -17,6 +17,7 @@ import { ConvertLocaleToOWMLang, OpenWeatherMapError, OWM_SUPPORTED_LANGS, OWMWe
 import { OWMIconToBuiltInIcons, OWMIconToCustomIcon } from "./payload/condition";
 import { Config, Services } from "../../config";
 import { OWMOneCallPayload, OWMOneCallToWeatherData } from "./payload/onecall";
+import { OWMWeatherResponse } from "./payload/weather";
 
 /** Stores IDs for "lat,long" string, to be able to construct URLs for OpenWeatherMap Website */
 const IDCache: Record<string, number> = {};
@@ -60,7 +61,7 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 				params: params,
 				HandleError: this.HandleError
 			}),
-			(cachedID == null) ? HttpLib.Instance.LoadJsonSimple<any>({url: this.id_irl, cancellable, params}) : Promise.resolve()
+			(cachedID == null) ? HttpLib.Instance.LoadJsonSimple<OWMWeatherResponse>({url: this.id_irl, cancellable, params}) : Promise.resolve()
 		]);
 
 		// We store the newly gotten ID if we got it

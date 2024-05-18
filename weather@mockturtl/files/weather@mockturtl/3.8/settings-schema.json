@@ -183,12 +183,12 @@
 	},
 	"dataService": {
 		"type": "radiogroup",
-		"default": "OpenWeatherMap",
+		"default": "OpenMeteo",
 		"description": "Data service",
 		"tooltip": "You can choose between several different weather forecast providers. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to work. The options are described in detail on the Cinnamon Spices Website which you can access with the button on the Help tab.",
 		"options": {
-			"OpenWeatherMap": "OpenWeatherMap",
 			"Open-Meteo": "OpenMeteo",
+			"OpenWeatherMap": "OpenWeatherMap",
 			"MET Norway": "MetNorway",
 			"DMI Denmark": "DanishMI",
 			"Deutscher Wetterdienst (Germany only)": "DeutscherWetterdienst",
