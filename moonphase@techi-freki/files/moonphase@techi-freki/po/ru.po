@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-05-05 18:11-0400\n"
-"PO-Revision-Date: 2023-10-30 21:28+0300\n"
+"PO-Revision-Date: 2024-05-19 20:17+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -17,40 +17,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 
 #: js/compass.js:14
 msgid "North"
-msgstr ""
+msgstr "Север"
 
 #: js/compass.js:15
 msgid "North East"
-msgstr ""
+msgstr "Северо-восток"
 
 #: js/compass.js:16
 msgid "East"
-msgstr ""
+msgstr "Восток"
 
 #: js/compass.js:17
 msgid "South East"
-msgstr ""
+msgstr "Юго-восток"
 
 #: js/compass.js:18
 msgid "South"
-msgstr ""
+msgstr "Юг"
 
 #: js/compass.js:19
 msgid "South West"
-msgstr ""
+msgstr "Юго-запад"
 
 #: js/compass.js:20
 msgid "West"
-msgstr ""
+msgstr "Запад"
 
 #: js/compass.js:21
 msgid "North West"
-msgstr ""
+msgstr "Северо-запад"
 
 #: js/moon.js:32 js/moon.js:40
 msgid "New Moon"
@@ -86,46 +86,41 @@ msgstr "Убывающий полумесяц"
 
 #: js/ui/currentPhaseUi.js:32
 msgid "illumination"
-msgstr ""
+msgstr "освещенности"
 
 #: js/ui/riseSetUi.js:55
 msgid "The moon is always down and will not rise today"
-msgstr ""
+msgstr "Сегодня луна не взойдет"
 
 #: js/ui/riseSetUi.js:65
 msgid "The moon is always up and will not set today"
-msgstr ""
+msgstr "Сегодня луна не зайдет"
 
 #: js/ui/riseSetUi.js:76
-#, fuzzy
 msgid "Moonrise"
-msgstr "Фаза луны"
+msgstr "Восход луны"
 
 #: js/ui/riseSetUi.js:83
 msgid "Lunar Noon"
-msgstr ""
+msgstr "Луна в зените"
 
 #: js/ui/riseSetUi.js:90
-#, fuzzy
 msgid "Moonset"
-msgstr "Фаза луны"
+msgstr "Заход луны"
 
 #: js/ui/elements/noRiseSetElement.js:54
-#, fuzzy
 msgid "Next Moonrise"
-msgstr "Новолуние"
+msgstr "Следующий восход луны"
 
 #: js/ui/elements/noRiseSetElement.js:66
-#, fuzzy
 msgid "Next Moonset"
-msgstr "Новолуние"
+msgstr "Следующий заход луны"
 
 #. metadata.json->name
 msgid "Moon Phase"
 msgstr "Фаза луны"
 
 #. metadata.json->description
-#, fuzzy
 msgid "A Cinnamon applet that displays up-to-date moon related information."
 msgstr "Утилита панели для отражения текущей фазы луны."
 
@@ -134,9 +129,8 @@ msgid "Settings"
 msgstr "Настройки"
 
 #. settings-schema.json->section-geolocation->title
-#, fuzzy
 msgid "Geolocation Settings"
-msgstr "Общие настройки"
+msgstr "Настройки местоположения"
 
 #. settings-schema.json->section-general->title
 msgid "General Settings"
@@ -148,54 +142,51 @@ msgstr "Настройки обновления"
 
 #. settings-schema.json->enableGeolocation->description
 msgid "Enable geolocation features"
-msgstr ""
+msgstr "Активировать функционал местоположения"
 
 #. settings-schema.json->latitude->description
 msgid "Latitude"
-msgstr ""
+msgstr "Широта"
 
 #. settings-schema.json->longitude->description
 msgid "Longitude"
-msgstr ""
+msgstr "Долгота"
 
 #. settings-schema.json->enablePopup->description
 msgid "Enable popup menu"
-msgstr ""
+msgstr "Показывать подробную информацию"
 
 #. settings-schema.json->showCurrentPhaseInfo->description
-#, fuzzy
 msgid "Display the current phase information"
-msgstr "Показывать фазу луны как текст"
+msgstr "Отражать информацию о текущей фазе луны"
 
 #. settings-schema.json->showRiseSet->description
-#, fuzzy
 msgid "Display the moon rise, transit, and set times"
-msgstr "Показывать фазу луны как текст"
+msgstr "Отражать время восхода и захода"
 
 #. settings-schema.json->showPhaseLabel->description
-#, fuzzy
 msgid "Display the applet label"
-msgstr "Показывать название фазы луны на панели"
+msgstr "Отображать текст в панели"
 
 #. settings-schema.json->showNameLabel->description
 msgid "Display the name of the moon phase in the label"
-msgstr "Показывать название фазы луны на панели"
+msgstr "Отображать название фазы луны на панели"
 
 #. settings-schema.json->showPercentageLabel->description
 msgid "Display the percentage of the moon phase in the label"
-msgstr "Показывать процент фазы луны на панели"
+msgstr "Отображать процент фазы луны на панели"
 
 #. settings-schema.json->showTooltip->description
 msgid "Display a tooltip on hover"
-msgstr "Показывать подсказку при наведении указателя мыши"
+msgstr "Отображать подсказку при наведении указателя мыши"
 
 #. settings-schema.json->showPhaseTooltip->description
 msgid "Display the name of the moon phase in the tooltip"
-msgstr "Показывать название фазы луны в подсказке"
+msgstr "Отображать название фазы луны в подсказке"
 
 #. settings-schema.json->showPercentageTooltip->description
 msgid "Display percentage of the moon phase in the tooltip"
-msgstr "Показывать процент фазы луны в подсказке"
+msgstr "Отображать процент фазы луны в подсказке"
 
 #. settings-schema.json->useAltIcons->description
 msgid "Light theme"
