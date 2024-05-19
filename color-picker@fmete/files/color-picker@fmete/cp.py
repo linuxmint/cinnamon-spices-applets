@@ -22,6 +22,7 @@
 #
 import sys
 import subprocess
+import time
 import gi
 gi.require_version("Gdk", "3.0")
 from gi.repository import Gdk
@@ -71,7 +72,12 @@ def copy2Clipboard(text):
 def waitClick():
     display = Xlib.display.Display()
     root = display.screen().root
-    root.grab_pointer(1, X.ButtonReleaseMask, X.GrabModeAsync, X.GrabModeAsync, X.NONE, X.NONE, X.CurrentTime)
+
+    while 1:
+        # when grab_pointer fails, e.g. because the mouse button is still pressed (code AlreadyGrabbed), retry
+        if root.grab_pointer(1, X.ButtonReleaseMask, X.GrabModeAsync, X.GrabModeAsync, X.NONE, X.NONE, X.CurrentTime) == 0:
+            break
+        time.sleep(0.05)
 
     while 1:
         event = root.display.next_event()
