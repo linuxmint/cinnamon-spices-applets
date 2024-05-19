@@ -1,3 +1,6 @@
+### v2.1.0~20240519
+  * Improves the installation of dependencies.
+
 ### v2.0.4~20240517
   * Downloaded covers are now of high quality.
 
