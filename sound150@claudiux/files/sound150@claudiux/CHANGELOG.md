@@ -1,3 +1,6 @@
+### v6.14.0~20240520
+  * Displays above the seeker the time it will take to be in the track if clicked.
+
 ### v6.13.0~20240514
   * Fixes #6008: Added the option to avoid displaying controllers twice.
 

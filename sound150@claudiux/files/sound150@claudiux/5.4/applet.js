@@ -470,6 +470,9 @@ class Seeker extends Slider.Slider {
     constructor(mediaServerPlayer, props, playerName) {
         super(0, true);
         this.actor.set_direction(St.TextDirection.LTR); // Do not invert on RTL layout
+        //~ this.actor.set_draw_value(true);
+        this.tooltipText = "00:00";
+        this.tooltip = new Tooltips.Tooltip(this.actor, this.tooltipText);
 
         this.destroyed = false;
         this.canSeek = true;
@@ -515,6 +518,41 @@ class Seeker extends Slider.Slider {
             if (this.destroyed) return;
             if (!this._dragging) // Update on scroll events
                 this._setPosition();
+        });
+
+        //~ this.actor.connect("enter-event", (event) => {
+            //~ // let [x,y] = event.get_position();
+            //~ let [x,y] = this.tooltip.mousePosition;
+            //~ logDebug("enter-event - x: "+x);
+            //~ this.tooltipText = ""+x;
+            //~ this.tooltip.set_text(this.tooltipText);
+            //~ this.tooltip.show();
+        //~ });
+
+        this.actor.connect("motion-event", (event) => {
+            const [sliderX, sliderY] = this.actor.get_transformed_position();
+            const width = this.actor.width;
+            let [x,y] = this.tooltip.mousePosition;
+            this.tooltip.hide();
+            //~ logDebug("motion-event - x: "+(x-sliderX)/width*this._length);
+            this.tooltipText = ""+this.time_for_label((x-sliderX)/width*this._length);
+            this.tooltip.set_text(this.tooltipText);
+            this.tooltip.visible = false;
+            this.tooltip.preventShow = false;
+            //~ this.actor.queue_repaint();
+            this.tooltip.show();
+            let id = setTimeout( () => {
+                this.tooltip.hide();
+                clearTimeout(id);
+            }, 100);
+        });
+
+        this.actor.connect("leave-event", (event) => {
+            //~ logDebug("leave event");
+            let id = setTimeout( () => {
+                this.tooltip.hide();
+                clearTimeout(id);
+            }, 100);
         });
 
         this._seekChangedId = mediaServerPlayer.connectSignal("Seeked", (id, sender, value) => {
@@ -1182,33 +1220,35 @@ class Player extends PopupMenu.PopupMenuSection {
         this._setMetadata(this._mediaServerPlayer.Metadata);
 
         this._propChangedId = this._prop.connectSignal("PropertiesChanged", (proxy, sender, [iface, props]) => {
-            if (props.PlaybackStatus)
-                this._setStatus(props.PlaybackStatus.unpack());
-            if (props.Metadata)
-                this._setMetadata(props.Metadata.deep_unpack());
-            if (props.CanGoNext || props.CanGoPrevious)
-                this._updateControls();
-            //~ else {
-                //~ if(!props.CanGoNext) this._nextButton.setEnabled(false);
-                //~ if(!props.CanGoPrevious) this._prevButton.setEnabled(false);
-            //~ }
-            if (props.LoopStatus)
-                this._setLoopStatus(props.LoopStatus.unpack());
-            if (props.Shuffle)
-                this._setShuffle(props.Shuffle.unpack());
-            if (props.Identity) {
-                this._name = props.Identity.unpack();
-                this._applet._updatePlayerMenuItems();
-            }
-            if (props.CanRaise) {
-                this._showCanRaise();
-            }
-            if (props.CanQuit) {
-                this._showCanQuit();
-            }
-            if (props.DesktopEntry) {
-                this._applet.passDesktopEntry(props.DesktopEntry.unpack());
-            }
+            try {
+                if (props.PlaybackStatus)
+                    this._setStatus(props.PlaybackStatus.unpack());
+                if (props.Metadata)
+                    this._setMetadata(props.Metadata.deep_unpack());
+                if (props.CanGoNext || props.CanGoPrevious)
+                    this._updateControls();
+                //~ else {
+                    //~ if(!props.CanGoNext) this._nextButton.setEnabled(false);
+                    //~ if(!props.CanGoPrevious) this._prevButton.setEnabled(false);
+                //~ }
+                if (props.LoopStatus)
+                    this._setLoopStatus(props.LoopStatus.unpack());
+                if (props.Shuffle)
+                    this._setShuffle(props.Shuffle.unpack());
+                if (props.Identity) {
+                    this._name = props.Identity.unpack();
+                    this._applet._updatePlayerMenuItems();
+                }
+                if (props.CanRaise) {
+                    this._showCanRaise();
+                }
+                if (props.CanQuit) {
+                    this._showCanQuit();
+                }
+                if (props.DesktopEntry) {
+                    this._applet.passDesktopEntry(props.DesktopEntry.unpack());
+                }
+            } catch(e) {}
         });
 
         this._setLoopStatus(this._mediaServerPlayer.LoopStatus);
@@ -1825,7 +1865,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             );
         });
 
-        this._control = new Cvc.MixerControl({ name: "Cinnamon Volume Control" });
+        this._control = new Cvc.MixerControl({ name: "Sound150 Volume Control" });
         this._control.connect("state-changed", (...args) => this._onControlStateChanged(...args));
 
         this._control.connect("output-added", (...args) => this._onDeviceAdded(...args, "output"));
