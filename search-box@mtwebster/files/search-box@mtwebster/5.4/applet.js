@@ -105,9 +105,12 @@ SearchBoxApplet.prototype = {
         this._applet_context_menu.addMenuItem(this.context_menu_item_search_engines);
 
         for (let p of this.providers) {
-            let item = new PopupMenu.PopupMenuItem(p.name, {
+            if (p.show != undefined && p.show == false) continue;
+            p.show = true;
+            let item = new PopupMenu.PopupMenuItem((p.short.length > 0) ? p.name + " ("+p.short+")" : p.name, {
                 reactive: true
             });
+            item.setShowDot(this.selected_provider == ""+p.name);
             item.connect("activate", () => {
                 this.selected_provider = ""+p.name;
                 this.update_label_visible();
