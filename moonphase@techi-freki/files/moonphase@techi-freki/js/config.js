@@ -20,7 +20,6 @@ class Config {
         this.app.settings.bind('latitude', 'latitude', this.updateSettings.bind(this.app));
         this.app.settings.bind('longitude', 'longitude', this.updateSettings.bind(this.app));
 
-        // TODO: double check this
         this.app.settings.bind('enablePopup', 'enablePopup', this.updateSettings.bind(this.app));
         this.app.settings.bind('showCurrentPhaseInfo', 'showCurrentPhaseInfo', this.updateSettings.bind(this.app));
         this.app.settings.bind('showRiseSet', 'showRiseSet', this.updateSettings.bind(this.app));
@@ -43,7 +42,6 @@ class Config {
         this.app.latitude =  this.app.settings.getValue('latitude');
         this.app.longitude = this.app.settings.getValue('longitude');
 
-        // TODO: double check this
         this.app.enablePopup = this.app.settings.getValue('enablePopup');
         this.app.showCurrentPhaseInfo = this.app.settings.getValue('showCurrentPhaseInfo');
         this.app.showRiseSet = this.app.settings.getValue('showRiseSet');

@@ -77,13 +77,13 @@
     "type": "checkbox",
     "default": false,
     "description": "Display the current phase information",
-    "dependency": "enablePopup"
+    "dependency": "enableGeolocation"
   },
   "showRiseSet": {
     "type": "checkbox",
     "default": false,
     "description": "Display the moon rise, transit, and set times",
-    "dependency": "enablePopup"
+    "dependency": "enableGeolocation"
   },
   "showPhaseLabel": {
     "type": "checkbox",
