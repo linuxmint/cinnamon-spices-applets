@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-07 23:40+0200\n"
+"POT-Creation-Date: 2024-05-20 18:33+0200\n"
 "PO-Revision-Date: 2022-06-03 18:19+0200\n"
 "Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
@@ -142,17 +142,21 @@ msgid "Providers"
 msgstr "Modifica provider"
 
 #. 5.4->settings-schema.json->providers->columns->title
-msgid "Name"
+msgid "Show"
 msgstr ""
 
 #. 5.4->settings-schema.json->providers->columns->title
-msgid "Query URL"
+msgid "Name"
 msgstr ""
 
 #. 5.4->settings-schema.json->providers->columns->title
 msgid ""
 "Short name\n"
 "(3 lower-case letters)"
+msgstr ""
+
+#. 5.4->settings-schema.json->providers->columns->title
+msgid "Query URL"
 msgstr ""
 
 #. 5.4->settings-schema.json->providers->tooltip

@@ -23,8 +23,24 @@
         "reorderable": true,
         "columns": [
             {
+                "id": "show",
+                "title": "Show",
+                "type": "boolean",
+                "expand-width": false,
+                "align": 0.5,
+                "default": true
+            },
+            {
                 "id": "name",
                 "title": "Name",
+                "type": "string",
+                "expand-width": false,
+                "align": 0.0,
+                "default": ""
+            },
+            {
+                "id": "short",
+                "title": "Short name\n(3 lower-case letters)",
                 "type": "string",
                 "expand-width": false,
                 "align": 0.0,
@@ -37,24 +53,81 @@
                 "expand-width": true,
                 "align": 0.0,
                 "default": ""
-            },
-            {
-                "id": "short",
-                "title": "Short name\n(3 lower-case letters)",
-                "type": "string",
-                "expand-width": false,
-                "align": 0.0,
-                "default": ""
             }
         ],
         "default": [
-            {"name": "Ask", "url": "https://www.ask.com/web?q=", "short": "ask"},
-            {"name": "Bing", "url": "https://www.bing.com/search?q=", "short": "bng"},
-            {"name": "DuckDuckGo", "url": "https://duckduckgo.com/?q=", "short": "ddg"},
-            {"name": "Google", "url": "https://google.com/search?q=", "short": "ggl"},
-            {"name": "Lilo", "url": "https://search.lilo.org/?plugin=lilose&q=", "short": "llo"},
-            {"name": "RefSeek", "url": "https://www.refseek.com/search?q=", "short": "rsk"},
-            {"name": "Yahoo", "url": "https://search.yahoo.com/search?p=", "short": "yoo"}
+            {
+                "show": true,
+                "name": "Ask",
+                "short": "ask",
+                "url": "https://www.ask.com/web?q="
+            },
+            {
+                "show": true,
+                "name": "Bing",
+                "short": "bng",
+                "url": "https://www.bing.com/search?q="
+            },
+            {
+                "show": true,
+                "name": "DuckDuckGo",
+                "short": "ddg",
+                "url": "https://duckduckgo.com/?q="
+            },
+            {
+                "show": true,
+                "name": "Google",
+                "short": "ggl",
+                "url": "https://google.com/search?q="
+            },
+            {
+                "show": true,
+                "name": "Lilo",
+                "short": "llo",
+                "url": "https://search.lilo.org/?plugin=lilose&q="
+            },
+            {
+                "show": true,
+                "name": "RefSeek",
+                "short": "rsk",
+                "url": "https://www.refseek.com/search?q="
+            },
+            {
+                "show": true,
+                "name": "Yahoo",
+                "short": "yoo",
+                "url": "https://search.yahoo.com/search?p="
+            },
+            {
+                "show": true,
+                "name": "WorldCat",
+                "short": "wca",
+                "url": "https://search.worldcat.org/search?q="
+            },
+            {
+                "show": true,
+                "name": "Springer Link",
+                "short": "spg",
+                "url": "https://link.springer.com/search?query="
+            },
+            {
+                "show": true,
+                "name": "Bioline",
+                "short": "bln",
+                "url": "https://www.bioline.org.br/search?search_target=all_pub&search_string="
+            },
+            {
+                "show": true,
+                "name": "Pdf Drive",
+                "short": "pdd",
+                "url": "https://www.pdfdrive.com/search?q="
+            },
+            {
+                "show": true,
+                "name": "BASE",
+                "short": "bse",
+                "url": "https://www.base-search.net/Search/Results?lookfor="
+            }
         ],
         "tooltip": "If your query begins with the 3 letters of the short name, it will be processed by the relevant search engine.\nExample: ddg linux mint iso"
     },

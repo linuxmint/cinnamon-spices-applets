@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: search-box@mtwebster 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-07 23:40+0200\n"
+"POT-Creation-Date: 2024-05-20 18:33+0200\n"
 "PO-Revision-Date: 2024-04-21 18:06+0200\n"
 "Last-Translator: qadzek\n"
 "Language-Team: \n"
@@ -141,12 +141,12 @@ msgid "Providers"
 msgstr "Aanbieders"
 
 #. 5.4->settings-schema.json->providers->columns->title
-msgid "Name"
-msgstr "Naam"
+msgid "Show"
+msgstr ""
 
 #. 5.4->settings-schema.json->providers->columns->title
-msgid "Query URL"
-msgstr "Zoekopdracht-URL"
+msgid "Name"
+msgstr "Naam"
 
 #. 5.4->settings-schema.json->providers->columns->title
 msgid ""
@@ -155,6 +155,10 @@ msgid ""
 msgstr ""
 "Korte naam\n"
 "(3 kleine letters)"
+
+#. 5.4->settings-schema.json->providers->columns->title
+msgid "Query URL"
+msgstr "Zoekopdracht-URL"
 
 #. 5.4->settings-schema.json->providers->tooltip
 msgid ""

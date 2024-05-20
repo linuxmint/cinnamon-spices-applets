@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-04-07 23:40+0200\n"
+"POT-Creation-Date: 2024-05-20 18:33+0200\n"
 "PO-Revision-Date: 2024-04-07 19:52-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -34,8 +34,7 @@ msgstr "Editar motor de búsqueda"
 #: 5.4/applet.js:61
 msgid "Right-click to select or add your search engine"
 msgstr ""
-"Haga clic con el botón derecho para seleccionar o añadir su motor de "
-"búsqueda"
+"Haga clic con el botón derecho para seleccionar o añadir su motor de búsqueda"
 
 #: 5.4/applet.js:104
 msgid "Select your Search Engine:"
@@ -137,21 +136,20 @@ msgid ""
 "Reset query after search? This may not be useful if you want to be able to "
 "perform the same query on other search engines afterwards."
 msgstr ""
-"¿Restablecer la consulta después de la búsqueda?. Esto puede no ser útil "
-"si desea poder realizar la misma consulta en otros motores de búsqueda "
-"después."
+"¿Restablecer la consulta después de la búsqueda?. Esto puede no ser útil si "
+"desea poder realizar la misma consulta en otros motores de búsqueda después."
 
 #. 5.4->settings-schema.json->providers->description
 msgid "Providers"
 msgstr "Proveedores"
 
 #. 5.4->settings-schema.json->providers->columns->title
-msgid "Name"
-msgstr "Nombre"
+msgid "Show"
+msgstr ""
 
 #. 5.4->settings-schema.json->providers->columns->title
-msgid "Query URL"
-msgstr "URL de consulta"
+msgid "Name"
+msgstr "Nombre"
 
 #. 5.4->settings-schema.json->providers->columns->title
 msgid ""
@@ -160,6 +158,10 @@ msgid ""
 msgstr ""
 "Nombre corto\n"
 "(3 letras minúsculas)"
+
+#. 5.4->settings-schema.json->providers->columns->title
+msgid "Query URL"
+msgstr "URL de consulta"
 
 #. 5.4->settings-schema.json->providers->tooltip
 msgid ""
