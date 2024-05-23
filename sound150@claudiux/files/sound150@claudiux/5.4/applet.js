@@ -335,6 +335,13 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         this.stream.volume = volume;
         this.stream.push_volume();
 
+        let icon = Gio.Icon.new_for_string(this._volumeToIcon(this._value));
+
+        if (this.applet.showOSD) {
+            Main.osdWindowManager.show(-1, icon, Math.round(volume/this.applet._volumeNorm * 100), null);
+        }
+
+
         if (this.stream.is_muted !== muted)
             this.stream.change_is_muted(muted);
 
@@ -418,9 +425,9 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
         if (this._dragging)
             this.tooltip.show();
         const iconName = this._volumeToIcon(value);
-        const iconNameWithoutMic = iconName.replace("-with-mic-disabled", "");
+        const iconNameWithoutMic = iconName.replace("-with-mic-disabled", "").replace("-with-mic-enabled", "");
         if (this.app_icon == null) {
-            this.icon.icon_name = iconNameWithoutMic
+            this.icon.icon_name = iconNameWithoutMic;
             this.button.setIconName(iconNameWithoutMic);
             if (this.isOutputSink)
                 this.applet.set_applet_icon_symbolic_name(iconName);
@@ -461,6 +468,7 @@ class VolumeSlider extends PopupMenu.PopupSliderMenuItem {
             }
         }
         if (this.applet.showMicMutedOnIcon && !this.isMic && (!this.applet.mute_in_switch || this.applet.mute_in_switch.state)) icon += "-with-mic-disabled";
+        else if (this.applet.showMicUnmutedOnIcon && !this.isMic && (this.applet.mute_in_switch && !this.applet.mute_in_switch.state)) icon += "-with-mic-enabled";
 
         return this.isMic ? "microphone-sensitivity-" + icon + "-symbolic" : "audio-volume-" + icon + "-symbolic";
     }
@@ -520,35 +528,21 @@ class Seeker extends Slider.Slider {
                 this._setPosition();
         });
 
-        //~ this.actor.connect("enter-event", (event) => {
+        this.actor.connect("enter-event", (event) => {
+            this.show_target_time()
             //~ // let [x,y] = event.get_position();
             //~ let [x,y] = this.tooltip.mousePosition;
             //~ logDebug("enter-event - x: "+x);
             //~ this.tooltipText = ""+x;
             //~ this.tooltip.set_text(this.tooltipText);
             //~ this.tooltip.show();
-        //~ });
+        });
 
         this.actor.connect("motion-event", (event) => {
-            const [sliderX, sliderY] = this.actor.get_transformed_position();
-            const width = this.actor.width;
-            let [x,y] = this.tooltip.mousePosition;
-            this.tooltip.hide();
-            //~ logDebug("motion-event - x: "+(x-sliderX)/width*this._length);
-            this.tooltipText = ""+this.time_for_label((x-sliderX)/width*this._length);
-            this.tooltip.set_text(this.tooltipText);
-            this.tooltip.visible = false;
-            this.tooltip.preventShow = false;
-            //~ this.actor.queue_repaint();
-            this.tooltip.show();
-            let id = setTimeout( () => {
-                this.tooltip.hide();
-                clearTimeout(id);
-            }, 100);
+            this.show_target_time()
         });
 
         this.actor.connect("leave-event", (event) => {
-            //~ logDebug("leave event");
             let id = setTimeout( () => {
                 this.tooltip.hide();
                 clearTimeout(id);
@@ -579,6 +573,22 @@ class Seeker extends Slider.Slider {
 
         this._getCanSeek();
         this._getPosition(); // Added
+    }
+
+    show_target_time() {
+        const [sliderX, sliderY] = this.actor.get_transformed_position();
+        const width = this.actor.width;
+        let [x,y] = this.tooltip.mousePosition;
+        this.tooltip.hide();
+        this.tooltipText = ""+this.time_for_label((x-sliderX)/width*this._length);
+        this.tooltip.set_text(this.tooltipText);
+        this.tooltip.visible = false;
+        this.tooltip.preventShow = false;
+        this.tooltip.show();
+        let id = setTimeout( () => {
+            this.tooltip.hide();
+            clearTimeout(id);
+        }, this.seekerTooltipDelay);
     }
 
     getActor() {
@@ -1735,11 +1745,12 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         this.settings.bind("showOSDonStartup", "showOSDonStartup");
         this.showOSD = this.showOSDonStartup;
+        this.settings.bind("seekerTooltipDelay", "seekerTooltipDelay");
         this.settings.bind("soundATcinnamonDOTorg_is_loaded", "soundATcinnamonDOTorg_is_loaded");
         this.settings.bind("showtrack", "showtrack", this.on_settings_changed);
         this.settings.bind("middleClickAction", "middleClickAction");
         this.settings.bind("middleShiftClickAction", "middleShiftClickAction");
-        this.settings.bind("horizontalScroll", "horizontalScroll")
+        this.settings.bind("horizontalScroll", "horizontalScroll");
         this.settings.bind("showalbum", "showalbum", this.on_settings_changed);
         this.settings.bind("truncatetext", "truncatetext", this.on_settings_changed);
         this.settings.bind("keepAlbumAspectRatio", "keepAlbumAspectRatio", this.on_settings_changed);
@@ -1798,6 +1809,7 @@ class Sound150Applet extends Applet.TextIconApplet {
         this.settings.bind("mic-level", "mic_level");
         this.settings.bind("showVolumeLevelNearIcon", "showVolumeLevelNearIcon", this.volume_near_icon);
         this.settings.bind("showMicMutedOnIcon", "showMicMutedOnIcon", () => this._on_sound_settings_change());
+        this.settings.bind("showMicUnmutedOnIcon", "showMicUnmutedOnIcon", () => this._on_sound_settings_change());
         this.settings.bind("redefine-volume-keybindings", "redefine_volume_keybindings", this._setKeybinding);
         this.settings.bind("audio-stop", "audio_stop", this._setKeybinding);
         this.settings.bind("pause-on-off", "pause_on_off", this._setKeybinding);
@@ -2258,6 +2270,17 @@ class Sound150Applet extends Applet.TextIconApplet {
     }
 
     _onScrollEvent(actor, event) {
+        //~ logDebug("event: "+event.originalEvent.ctrlKey);
+        let _event = event;
+        this.showOSD = (this.showMediaKeysOSD != "disabled");
+        let modifiers = Cinnamon.get_event_state(event);
+        let shiftPressed = (modifiers & Clutter.ModifierType.SHIFT_MASK);
+        let ctrlPressed = (modifiers & Clutter.ModifierType.CONTROL_MASK);
+        if (ctrlPressed || shiftPressed) {
+            this._inputVolumeSection._onScrollEvent(this._inputVolumeSection.actor, _event);
+            return
+        }
+
         const direction = event.get_scroll_direction();
 
         if (direction == Clutter.ScrollDirection.SMOOTH) {
@@ -2265,7 +2288,7 @@ class Sound150Applet extends Applet.TextIconApplet {
             //~ logDebug("Scroll delta - dx: "+dx+"   dy: "+dy);
             return Clutter.EVENT_PROPAGATE;
         }
-        this.showOSD = (this.showMediaKeysOSD != "disabled");
+
         this._volumeChange(direction);
         this.volume_near_icon()
     }
@@ -2280,8 +2303,6 @@ class Sound150Applet extends Applet.TextIconApplet {
         let player = this._players[this._activePlayer];
 
         if (direction !== null) {
-            this.showOSD = (this.showMediaKeysOSD != "disabled");
-
             if (direction == Clutter.ScrollDirection.DOWN) {
                 let prev_muted = this._output.is_muted;
                 this._output.volume = Math.max(0, currentVolume - this._volumeNorm * VOLUME_ADJUSTMENT_STEP);
@@ -2348,6 +2369,10 @@ class Sound150Applet extends Applet.TextIconApplet {
                 (!this.mute_in_switch || this.mute_in_switch.state)
             )
                 icon_name += "-with-mic-disabled";
+            else if (this.showMicUnmutedOnIcon &&
+                (this.mute_in_switch && !this.mute_in_switch.state)
+            )
+                icon_name += "-with-mic-enabled";
             icon_name += "-symbolic";
             let icon = Gio.Icon.new_for_string(icon_name);
             this.set_applet_icon_symbolic_name(icon_name);
@@ -2531,6 +2556,8 @@ class Sound150Applet extends Applet.TextIconApplet {
             } else {
                 if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
                     this.setIcon("media-optical-cd-audio-with-mic-disabled", "player-name");
+                else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state))
+                    this.setIcon("media-optical-cd-audio-with-mic-enabled", "player-name");
                 else
                     this.setIcon("media-optical-cd-audio", "player-name");
             }
@@ -2538,6 +2565,8 @@ class Sound150Applet extends Applet.TextIconApplet {
         else {
             if (this.showMicMutedOnIcon && (!this.mute_in_switch || this.mute_in_switch.state))
                 this.setIcon("audio-x-generic-with-mic-disabled", "player-name");
+            else if (this.showMicUnmutedOnIcon && (this.mute_in_switch && !this.mute_in_switch.state))
+                this.setIcon("audio-x-generic-with-mic-enabled", "player-name");
             else
                 this.setIcon("audio-x-generic", "player-name");
         }
