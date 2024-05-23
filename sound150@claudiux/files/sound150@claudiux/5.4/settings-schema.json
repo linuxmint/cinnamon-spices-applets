@@ -48,7 +48,8 @@
         "extendedPlayerControl",
         "keepPlayerListOpen",
         "keepChoosePlayerOpen",
-        "avoidTwice"
+        "avoidTwice",
+        "seekerTooltipDelay"
       ]
     },
     "sectionBehavior2": {
@@ -82,6 +83,7 @@
         "keepAlbumAspectRatio",
         "showVolumeLevelNearIcon",
         "showMicMutedOnIcon",
+        "showMicUnmutedOnIcon",
         "adaptColor",
         "color101_115",
         "color116_130",
@@ -167,6 +169,15 @@
     "type": "switch",
     "default": false,
     "description": "Avoid displaying controllers twice"
+  },
+  "seekerTooltipDelay": {
+    "type": "spinbutton",
+    "default": 400,
+    "units": "ms",
+    "min": 50,
+    "max": 1500,
+    "step": 50,
+    "description": "Seeker tooltip: time to disappear"
   },
   "keyOpen": {
     "type": "keybinding",
@@ -273,6 +284,11 @@
     "type": "switch",
     "default": true,
     "description": "Display icon indicating that the microphone is muted, if applicable"
+  },
+  "showMicUnmutedOnIcon": {
+    "type": "switch",
+    "default": false,
+    "description": "Display icon indicating that the microphone is activated, if applicable"
   },
   "setAmplification": {
     "type": "button",

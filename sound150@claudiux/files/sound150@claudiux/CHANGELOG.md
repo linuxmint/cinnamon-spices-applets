@@ -1,3 +1,10 @@
+### v6.15.0~20240523
+  * From now on, use Ctrl+wheel or Shift+wheel to control microphone volume.
+  * New option: "Display icon indicating that the microphone is activated, if applicable".
+  * New icons, with green microphone.
+  * Fixes FR #6026.
+  * Allows user to set the time to disappear for the seeker tooltip.
+
 ### v6.14.0~20240520
   * Displays above the seeker the time it will take to be in the track if clicked.
 
