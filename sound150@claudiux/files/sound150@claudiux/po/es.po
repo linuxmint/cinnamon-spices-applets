@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-05-23 09:01+0200\n"
-"PO-Revision-Date: 2024-05-15 11:34-0400\n"
+"PO-Revision-Date: 2024-05-23 11:47-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: 4.6/applet.js:73 3.4/applet.js:65 4.4/applet.js:72 2.8/applet.js:65
 #: 5.4/applet.js:132
@@ -624,11 +624,11 @@ msgstr "Evite mostrar los controladores dos veces"
 
 #. 5.4->settings-schema.json->seekerTooltipDelay->units
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. 5.4->settings-schema.json->seekerTooltipDelay->description
 msgid "Seeker tooltip: time to disappear"
-msgstr ""
+msgstr "Información sobre el buscador: hora de desaparecer"
 
 #. 5.4->settings-schema.json->keySwitchPlayer->description
 msgid "Switch to next player"
@@ -667,9 +667,8 @@ msgid "Display icon indicating that the microphone is muted, if applicable"
 msgstr "Mostrar ícono que indique que el micrófono está silenciado, si procede"
 
 #. 5.4->settings-schema.json->showMicUnmutedOnIcon->description
-#, fuzzy
 msgid "Display icon indicating that the microphone is activated, if applicable"
-msgstr "Mostrar ícono que indique que el micrófono está silenciado, si procede"
+msgstr "Mostrar icono que indica que el micrófono está activado, si procede"
 
 #. 5.4->settings-schema.json->magnetic25On->description
 msgid "Magnetize all multiples of 25%"
