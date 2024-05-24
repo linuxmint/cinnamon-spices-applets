@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2024-05-24 21:21+0100\n"
-"PO-Revision-Date: 2024-01-30 09:49-0300\n"
+"PO-Revision-Date: 2024-05-24 18:47-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: 3.0/applet.js:166 3.0/applet.js:426 3.0/applet.js:2131
 #: 3.8/weather-applet.js:19123
@@ -1761,43 +1761,36 @@ msgstr ""
 "los registros en Looking Glass"
 
 #: 3.8/weather-applet.js:16350 3.8/weather-applet.js:16351
-#, fuzzy
 msgid "Mainly clear"
-msgstr "Mayormente soleado"
+msgstr "Mayormente claro"
 
 #: 3.8/weather-applet.js:16471
-#, fuzzy
 msgid "Snow grains"
-msgstr "Lluvia helada"
+msgstr "Nieve en grano"
 
 #: 3.8/weather-applet.js:16478
-#, fuzzy
 msgid "Light showers"
-msgstr "Ligeros chubascos de nieve"
+msgstr "Chubascos ligeros"
 
 #: 3.8/weather-applet.js:16492
-#, fuzzy
 msgid "Heavy showers"
-msgstr "Fuertes chubascos de nieve"
+msgstr "Chubascos fuertes"
 
 #: 3.8/weather-applet.js:16520
-#, fuzzy
 msgid "Thunderstorm with slight hail"
-msgstr "Tormenta con lluvia ligera"
+msgstr "Tormenta eléctrica con granizo ligero"
 
 #: 3.8/weather-applet.js:16527
-#, fuzzy
 msgid "Thunderstorm with hail"
-msgstr "Tormenta con lluvia"
+msgstr "Tormenta eléctrica con granizo"
 
 #: 3.8/weather-applet.js:16554 3.8/weather-applet.js:16713
-#, fuzzy
 msgid "Feels like"
 msgstr "Sensación térmica"
 
 #: 3.8/weather-applet.js:16626
 msgid "Open Meteo"
-msgstr ""
+msgstr "Abrir Meteo"
 
 #: 3.8/weather-applet.js:16995
 msgid "Make sure you entered a location or use Automatic location instead."
@@ -1867,7 +1860,7 @@ msgstr "Área: {stationArea}"
 
 #: 3.8/weather-applet.js:18722
 msgid "{count} weather alert(s)"
-msgstr ""
+msgstr "{count} alerta(s) meteorológica(s)"
 
 #: 3.8/weather-applet.js:19085 3.8/weather-applet.js:19095
 #: 3.8/weather-applet.js:19102
@@ -1875,9 +1868,8 @@ msgid "Error Saving Debug Information"
 msgstr "Error al guardar la información de depuración"
 
 #: 3.8/weather-applet.js:19102
-#, fuzzy
 msgid "Could not open file {filePath} for writing"
-msgstr "No se pudo obtener información del Clima"
+msgstr "No se pudo abrir el archivo {filePath} para escritura"
 
 #: 3.8/weather-applet.js:19111
 msgid "Debug Information saved successfully"
@@ -1888,9 +1880,8 @@ msgid "Saved to {filePath}"
 msgstr "Guardado en {filePath}"
 
 #: 3.8/AlertsWindow.py:119
-#, fuzzy
 msgid "Weather Applet Alerts"
-msgstr "Applet del Clima"
+msgstr "Applet de alertas meteorológicas"
 
 #: 3.8/LogSaver.py:16
 msgid "Save to File"
@@ -2382,7 +2373,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Open-Meteo"
-msgstr ""
+msgstr "Abrir Meteo"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Deutscher Wetterdienst (Germany only)"
@@ -2397,9 +2388,8 @@ msgid "US National Weather (US only)"
 msgstr "US National Weather (solo Estados Unidos)"
 
 #. 3.8->settings-schema.json->dataService->options
-#, fuzzy
 msgid "OpenWeatherMap OneCall (key needed)"
-msgstr "Weatherbit (necesita clave)"
+msgstr "OpenWeatherMap OneCall (necesita clave)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Pirate Weather (key needed)"
@@ -2502,13 +2492,15 @@ msgstr ""
 
 #. 3.8->settings-schema.json->showAlerts->description
 msgid "Enable displaying weather alerts"
-msgstr ""
+msgstr "Activar la visualización de alertas meteorológicas"
 
 #. 3.8->settings-schema.json->showAlerts->tooltip
 msgid ""
 "Alerts button will be visible in the popup menu if there are any active "
 "alerts for your location."
 msgstr ""
+"El botón Alertas aparecerá en el menú emergente si hay alguna alerta activa "
+"para su ubicación."
 
 #. 3.8->settings-schema.json->showBothTempUnits->description
 msgid "Show both temperature units at the same time"
