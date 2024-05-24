@@ -16586,11 +16586,11 @@ function OpenMeteoHourWeatherToData(data, timezone) {
             date: DateTime.fromISO(data.time[i], { zone: timezone }),
             condition: OpenMeteoWeatherCodeToCondition(data.weather_code[i], data.is_day[i] === 1),
             temp: CelsiusToKelvin(data.temperature_2m[i]),
-            precipitation: {
+            precipitation: data.precipitation[i] > 0 ? {
                 chance: data.precipitation_probability[i],
                 volume: data.precipitation[i],
                 type: (data.rain[i] > 0 || data.showers[i] > 0) ? "rain" : data.snowfall[i] > 0 ? "snow" : "none",
-            }
+            } : undefined
         });
     }
     return result;
