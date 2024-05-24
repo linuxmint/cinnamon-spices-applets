@@ -10149,6 +10149,7 @@ class Soup2 {
                         const stream = this._httpSession.send_finish(result);
                         logger_Logger.Debug("Reply received from " + query + " with status code " + message.status_code + " and reason: " + message.reason_phrase);
                         res = await this.read_all_bytes(stream, finalCancellable);
+                        stream.close(null);
                         message.response_headers.foreach((name, value) => {
                             headers[name] = value;
                         });

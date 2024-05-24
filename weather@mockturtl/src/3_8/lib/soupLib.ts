@@ -197,6 +197,7 @@ class Soup2 implements SoupLib {
 						const stream: imports.gi.Gio.InputStream = this._httpSession.send_finish(result);
 						Logger.Debug("Reply received from " + query + " with status code " + message.status_code + " and reason: " + message.reason_phrase);
 						res = await this.read_all_bytes(stream, finalCancellable);
+						stream.close(null);
 						message.response_headers.foreach((name: any, value: any) => {
 							headers[name] = value;
 						})
@@ -211,6 +212,7 @@ class Soup2 implements SoupLib {
 						response_body: res,
 						response_headers: headers
 					});
+
 					return;
 				});
 			}
