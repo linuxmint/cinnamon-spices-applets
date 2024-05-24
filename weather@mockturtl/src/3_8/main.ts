@@ -6,12 +6,12 @@
 //----------------------------------------------------------------------
 
 import { DateTime } from "luxon";
-import { Config, ServiceClassMapping, Services } from "./config";
+import { Config, ServiceClassMapping } from "./config";
 import { RefreshOptions, WeatherLoop } from "./loop";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
 import { UI } from "./ui";
-import { AwareDateString, CapitalizeFirstLetter, CompassDirectionText, delay, ExtraFieldToUserUnits, GenerateLocationText, InjectValues, MPStoUserUnits, NotEmpty, PercentToLocale, PressToUserUnits, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
-import { HttpLib, HttpError, Method, HTTPParams, HTTPHeaders, ErrorResponse, Response, LoadAsyncOptions } from "./lib/httpLib";
+import { AwareDateString, CapitalizeFirstLetter, GenerateLocationText, InjectValues, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
+import { HttpLib, HttpError } from "./lib/httpLib";
 import { Logger } from "./lib/logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { CloseStream, OverwriteAndGetIOStream, WriteAsync } from "./lib/io_lib";
@@ -24,18 +24,6 @@ const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
 const { File } = imports.gi.Gio;
-
-export interface LoadJsonAsyncOptions extends LoadAsyncOptions {
-	url: string;
-	cancellable: imports.gi.Gio.Cancellable;
-	HandleError?: (message: ErrorResponse<any>) => boolean;
-}
-
-export interface LoadJsonAsyncOptions extends LoadAsyncOptions {
-	url: string;
-	cancellable: imports.gi.Gio.Cancellable;
-	HandleError?: (message: ErrorResponse<any>) => boolean;
-}
 
 export class WeatherApplet extends TextIconApplet {
 	private readonly loop: WeatherLoop;

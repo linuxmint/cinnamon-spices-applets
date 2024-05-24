@@ -9376,14 +9376,14 @@ function ConstructJsLocale(locales) {
     return null;
 }
 const lightAlertColors = {
-    "minor": "#FFD700",
-    "moderate": "#FFD700",
-    "severe": "#FFA500",
+    "minor": "#7FCC00",
+    "moderate": "#FFC400",
+    "severe": "#FF6A00",
     "extreme": "#FF0000",
-    "unknown": "#FFFFFF"
+    "unknown": "#000000"
 };
 const darkAlertColors = {
-    "minor": "#FFD700",
+    "minor": "#AAFF00",
     "moderate": "#FFD700",
     "severe": "#FFA500",
     "extreme": "#FF0000",

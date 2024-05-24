@@ -609,17 +609,17 @@ export function ConstructJsLocale(locales: string[]): string | null {
 }
 
 const lightAlertColors: Record<AlertLevel, string> = {
-	// TODO: decide on minor color
-	"minor": "#FFD700",
-	"moderate": "#FFD700",
-	"severe": "#FFA500",
+	// Darker shade of darkAlertColors
+	"minor": "#7FCC00",
+	"moderate": "#FFC400",
+	"severe": "#FF6A00",
 	"extreme": "#FF0000",
-	"unknown": "#FFFFFF"
+	"unknown": "#000000"
+
 }
 
 const darkAlertColors: Record<AlertLevel, string> = {
-	// TODO: decide on minor color
-	"minor": "#FFD700",
+	"minor": "#AAFF00",
 	"moderate": "#FFD700",
 	"severe": "#FFA500",
 	"extreme": "#FF0000",

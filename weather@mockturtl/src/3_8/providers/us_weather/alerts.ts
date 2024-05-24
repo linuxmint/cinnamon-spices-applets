@@ -52,13 +52,6 @@ interface USWeatherAlertsResponse {
 	}
 }
 
-/**
- * This shit takes
- * @param cancellable
- * @param lat
- * @param lon
- * @returns
- */
 export async function GetUSWeatherAlerts(cancellable: imports.gi.Gio.Cancellable, lat: number, lon: number): Promise<AlertData[] | null> {
 	const alerts: AlertData[] = [];
 
