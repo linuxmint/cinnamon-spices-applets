@@ -17487,7 +17487,7 @@ class WeatherLoop {
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/commandRunner.ts
 
-const { spawnCommandLineAsyncIO } = imports.misc.util;
+const { spawnCommandLineAsyncIO, spawnCommandLineAsync } = imports.misc.util;
 async function SpawnProcessJson(command) {
     const response = await SpawnProcess(command);
     if (!response.Success)
@@ -17515,24 +17515,48 @@ async function SpawnProcess(command) {
         cmd += "'" + element.replace(/'/g, "'\"'\"'") + "' ";
     }
     logger_Logger.Debug("Spawning command: " + cmd);
-    const response = await new Promise((resolve, reject) => {
-        spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
-            let result = {
-                Success: exitCode == 0,
-                ErrorData: undefined,
-                Data: aStdout !== null && aStdout !== void 0 ? aStdout : null
-            };
-            if (exitCode != 0) {
-                result.ErrorData = {
-                    Code: exitCode,
-                    Message: err !== null && err !== void 0 ? err : null,
-                    Type: "unknown"
-                };
-            }
-            resolve(result);
-            return result;
+    let response;
+    if (spawnCommandLineAsyncIO === undefined) {
+        response = await new Promise((resolve, reject) => {
+            spawnCommandLineAsync(cmd, () => {
+                resolve({
+                    Success: true,
+                    ErrorData: undefined,
+                    Data: ""
+                });
+            }, () => {
+                resolve({
+                    Success: false,
+                    ErrorData: {
+                        Code: -1,
+                        Message: "Command failed",
+                        Type: "unknown"
+                    },
+                    Data: ""
+                });
+            });
         });
-    });
+    }
+    else {
+        response = await new Promise((resolve, reject) => {
+            spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
+                let result = {
+                    Success: exitCode == 0,
+                    ErrorData: undefined,
+                    Data: aStdout !== null && aStdout !== void 0 ? aStdout : null
+                };
+                if (exitCode != 0) {
+                    result.ErrorData = {
+                        Code: exitCode,
+                        Message: err !== null && err !== void 0 ? err : null,
+                        Type: "unknown"
+                    };
+                }
+                resolve(result);
+                return result;
+            });
+        });
+    }
     return response;
 }
 function OpenUrl(element) {

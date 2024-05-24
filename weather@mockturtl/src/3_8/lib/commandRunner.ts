@@ -86,6 +86,7 @@ export async function SpawnProcess(command: string[]): Promise<GenericResponse> 
 				return result;
 			},);
 		});
+	}
 
 	return response as GenericResponse;
 }
