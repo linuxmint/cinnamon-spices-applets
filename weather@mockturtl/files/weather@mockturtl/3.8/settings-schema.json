@@ -77,7 +77,8 @@
 				"refreshInterval",
 				"forecastDays",
 				"forecastHours",
-				"immediatePrecip"
+				"immediatePrecip",
+				"showAlerts"
 			]
 		},
 		"weather-conditions": {
@@ -182,16 +183,18 @@
 	},
 	"dataService": {
 		"type": "radiogroup",
-		"default": "OpenWeatherMap",
+		"default": "OpenMeteo",
 		"description": "Data service",
 		"tooltip": "You can choose between several different weather forecast providers. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to work. The options are described in detail on the Cinnamon Spices Website which you can access with the button on the Help tab.",
 		"options": {
+			"Open-Meteo": "OpenMeteo",
 			"OpenWeatherMap": "OpenWeatherMap",
 			"MET Norway": "MetNorway",
 			"DMI Denmark": "DanishMI",
 			"Deutscher Wetterdienst (Germany only)": "DeutscherWetterdienst",
 			"Met Office UK (UK only)": "Met Office UK",
 			"US National Weather (US only)": "US Weather",
+			"OpenWeatherMap OneCall (key needed)": "OpenWeatherMap_OneCall",
 			"Pirate Weather (key needed)": "PirateWeather",
 			"Visual Crossing (key needed)": "Visual Crossing",
 			"Weatherbit (key needed)": "Weatherbit",
@@ -270,9 +273,15 @@
 	},
 	"immediatePrecip": {
 		"type": "checkbox",
-		"default": false,
+		"default": true,
 		"description": "Enable minutely precipitation forecast",
 		"tooltip": "If you'd like to use this make sure you use your exact coordinates/address as location to help its accuracy. See Feature map on website on support for your provider"
+	},
+	"showAlerts": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Enable displaying weather alerts",
+		"tooltip": "Alerts button will be visible in the popup menu if there are any active alerts for your location."
 	},
 	"temperatureUnit": {
 		"type": "radiogroup",

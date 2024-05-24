@@ -9,21 +9,23 @@ import { DateTime } from "luxon";
 import { FileExists, LoadContents } from "./lib/io_lib";
 import { MetUk } from "./providers/met_uk";
 import { BaseProvider } from "./providers/BaseProvider";
-import { OpenWeatherMap } from "./providers/openWeatherMap";
+import { OpenWeatherMapOneCall } from "./providers/openweathermap/provider-closed";
 import { MetNorway } from "./providers/met_norway/provider";
-import { Weatherbit } from "./providers/weatherbit";
-import { ClimacellV4 } from "./providers/climacellV4";
-import { USWeather } from "./providers/us_weather";
-import { VisualCrossing } from "./providers/visualcrossing";
+import { Weatherbit } from "./providers/weatherbit/provider";
+import { ClimacellV4 } from "./providers/tomorrow_io/provider";
+import { USWeather } from "./providers/us_weather/provider";
+import { VisualCrossing } from "./providers/visualcrossing/provider";
 import { DanishMI } from "./providers/danishMI";
 import { AccuWeather } from "./providers/accuWeather";
-import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst";
+import { DeutscherWetterdienst } from "./providers/deutscherWetterdienst/provider";
 import { WeatherUnderground } from "./providers/weatherUnderground";
 import { Event } from "./lib/events";
 import { GeoIP } from "./location_services/geoip_services/base";
 import { PirateWeather } from "./providers/pirate_weather/pirateWeather";
 import { GeoClue } from "./location_services/geoip_services/geoclue";
 import { GeoIPFedora } from "./location_services/geoip_services/geoip.fedora";
+import { OpenMeteo } from "./providers/open-meteo/provider";
+import { OpenWeatherMapOpen } from "./providers/openweathermap/provider-open";
 
 const { get_home_dir, get_user_data_dir, get_user_config_dir } = imports.gi.GLib;
 const { File, Cancellable } = imports.gi.Gio;
@@ -56,10 +58,13 @@ export type Services =
 	"AccuWeather" |
 	"DeutscherWetterdienst" |
 	"WeatherUnderground" |
-	"PirateWeather";
+	"PirateWeather" |
+	"OpenMeteo" |
+	"OpenWeatherMap_OneCall";
 
 export const ServiceClassMapping: ServiceClassMappingType = {
-	"OpenWeatherMap": (app) => new OpenWeatherMap(app),
+	"OpenWeatherMap": (app) => new OpenWeatherMapOpen(app),
+	"OpenWeatherMap_OneCall": (app) => new OpenWeatherMapOneCall(app),
 	"MetNorway": (app) => new MetNorway(app),
 	"Weatherbit": (app) => new Weatherbit(app),
 	"Tomorrow.io": (app) => new ClimacellV4(app),
@@ -70,7 +75,8 @@ export const ServiceClassMapping: ServiceClassMappingType = {
 	"AccuWeather": (app) => new AccuWeather(app),
 	"DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
 	"WeatherUnderground": (app) => new WeatherUnderground(app),
-	"PirateWeather": (app) => new PirateWeather(app)
+	"PirateWeather": (app) => new PirateWeather(app),
+	"OpenMeteo": (app) => new OpenMeteo(app),
 }
 
 export class Config {
@@ -119,6 +125,7 @@ export class Config {
 	public readonly _selectedLogPath!: string;
 	public readonly _panelTextOverride!: string;
 	public readonly _tooltipTextOverride!: string;
+	public readonly _showAlerts!: boolean;
 
 	public readonly DataServiceChanged = new Event<Config, Services>();
 	public readonly ApiKeyChanged = new Event<Config, string>();
@@ -155,6 +162,7 @@ export class Config {
 	public readonly DisplayWindAsTextChanged = new Event<Config, boolean>();
 	public readonly AlwaysShowHourlyWeatherChanged = new Event<Config, boolean>();
 	public readonly TooltipTextOverrideChanged = new Event<Config, string>();
+	public readonly ShowAlertsChanged = new Event<Config, string>();
 
 	/** Timeout */
 	private doneTypingLocation: number | null = null;
@@ -721,7 +729,11 @@ export class Config {
 	TOOLTIP_TEXT_OVERRIDE: {
 		key: "tooltipTextOverride",
 		prop: "TooltipTextOverride"
-	}
+	},
+	SHOW_ALERTS: {
+		key: "showAlerts",
+		prop: "ShowAlerts"
+	},
 } as const;
 
 type ServiceClassMappingType = {

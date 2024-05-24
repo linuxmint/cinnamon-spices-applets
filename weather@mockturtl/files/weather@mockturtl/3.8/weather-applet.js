@@ -389,6 +389,7 @@ const EN_DASH = '\u2013';
 const FORWARD_SLASH = '\u002F';
 const STYLE_HIDDEN = "weather-hidden";
 const REQUEST_TIMEOUT_SECONDS = 30;
+const ALERT_LEVEL_ORDER = ["extreme", "severe", "moderate", "minor", "unknown"];
 const US_TIMEZONES = [
     "America/Adak",
     "America/Anchorage",
@@ -9374,6 +9375,23 @@ function ConstructJsLocale(locales) {
     }
     return null;
 }
+const lightAlertColors = {
+    "minor": "#7FCC00",
+    "moderate": "#FFC400",
+    "severe": "#FF6A00",
+    "extreme": "#FF0000",
+    "unknown": "#000000"
+};
+const darkAlertColors = {
+    "minor": "#AAFF00",
+    "moderate": "#FFD700",
+    "severe": "#FFA500",
+    "extreme": "#FF0000",
+    "unknown": "#FFFFFF"
+};
+function GetAlertColor(level, lightTheme) {
+    return lightTheme ? lightAlertColors[level] : darkAlertColors[level];
+}
 function GetDistance(lat1, lon1, lat2, lon2) {
     const R = 6371e3;
     const φ1 = lat1 * Math.PI / 180;
@@ -10042,12 +10060,12 @@ class Soup3 {
         this._httpSession.idle_timeout = 10;
     }
     async Send(url, options = {}) {
-        const { params, headers, method = "GET", cancellable } = options;
+        const { params, headers, method = "GET", cancellable, noEncode = false } = options;
         if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
             return Promise.resolve(null);
         }
         url = AddParamsToURI(url, params);
-        const query = encodeURI(url);
+        const query = noEncode ? url : encodeURI(url);
         logger_Logger.Debug("URL called: " + query);
         const data = await new Promise((resolve, reject) => {
             const message = Message.new(method, query);
@@ -10120,14 +10138,18 @@ class Soup2 {
                 if (cancellable == null) {
                     timeout = utils_setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
                 }
+                logger_Logger.Debug("Sending http request to " + query);
                 this._httpSession.send_async(message, cancellable, async (session, result) => {
                     if (timeout != null)
                         clearTimeout(timeout);
                     const headers = {};
                     let res = null;
                     try {
+                        logger_Logger.Debug("Reading reply from " + query);
                         const stream = this._httpSession.send_finish(result);
+                        logger_Logger.Debug("Reply received from " + query + " with status code " + message.status_code + " and reason: " + message.reason_phrase);
                         res = await this.read_all_bytes(stream, finalCancellable);
+                        stream.close(null);
                         message.response_headers.foreach((name, value) => {
                             headers[name] = value;
                         });
@@ -10141,6 +10163,7 @@ class Soup2 {
                         response_body: res,
                         response_headers: headers
                     });
+                    return;
                 });
             }
         });
@@ -10149,10 +10172,13 @@ class Soup2 {
     async read_all_bytes(stream, cancellable) {
         if (cancellable.is_cancelled())
             return null;
+        logger_Logger.Debug("Reading all bytes from http request stream.");
         const read_chunk_async = () => {
+            logger_Logger.Verbose("Reading chunk from http request stream.");
             return new Promise((resolve) => {
                 stream.read_bytes_async(8192, 0, cancellable, (source, read_result) => {
                     try {
+                        logger_Logger.Verbose("Reading chunk from http request stream finished.");
                         resolve(stream.read_bytes_finish(read_result));
                     }
                     catch (e) {
@@ -10164,7 +10190,9 @@ class Soup2 {
         };
         let res = null;
         let chunk;
+        logger_Logger.Verbose("Reading First chunk from http request stream.");
         chunk = await read_chunk_async();
+        logger_Logger.Verbose("Reading First chunk from http request stream finished.");
         while (chunk.get_size() > 0) {
             if (cancellable.is_cancelled())
                 return res;
@@ -10175,8 +10203,11 @@ class Soup2 {
             else {
                 res += chunkAsString;
             }
+            logger_Logger.Verbose("Reading Next chunk from http request stream.");
             chunk = await read_chunk_async();
+            logger_Logger.Verbose("Reading Next chunk from http request stream finished.");
         }
+        logger_Logger.Verbose("Reading all bytes from http request stream finished.");
         return res;
     }
 }
@@ -11036,348 +11067,36 @@ class MetUk extends BaseProvider {
 }
 ;
 
-;// CONCATENATED MODULE: ./src/3_8/providers/openWeatherMap.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/common.ts
 
-
-
-
-
-const IDCache = {};
-class OpenWeatherMap extends BaseProvider {
-    constructor(_app) {
-        super(_app);
-        this.prettyName = _("OpenWeatherMap");
-        this.name = "OpenWeatherMap";
-        this.maxForecastSupport = 8;
-        this.website = "https://openweathermap.org/";
-        this.maxHourlyForecastSupport = 48;
-        this.needsApiKey = false;
-        this.remainingCalls = null;
-        this.supportHourlyPrecipChance = true;
-        this.supportHourlyPrecipVolume = true;
-        this.supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
-            "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
-            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
-        ];
-        this.base_url = "https://api.openweathermap.org/data/2.5/onecall";
-        this.id_irl = "https://api.openweathermap.org/data/2.5/weather";
-        this.HandleError = (error) => {
-            if (error.ErrorData.code == 404) {
-                this.app.ShowError({
-                    detail: "location not found",
-                    message: _("Location not found, make sure location is available or it is in the correct format"),
-                    userError: true,
-                    type: "hard"
-                });
-                return false;
-            }
-            return true;
-        };
+const OWM_SUPPORTED_LANGS = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
+    "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
+    "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
+];
+function ConvertLocaleToOWMLang(systemLocale) {
+    if (systemLocale == null)
+        return "en";
+    if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
+        return systemLocale;
     }
-    async GetWeather(loc, cancellable) {
-        const params = this.ConstructParams(loc);
-        const cachedID = IDCache[`${loc.lat},${loc.lon}`];
-        const [json, idPayload] = await Promise.all([
-            HttpLib.Instance.LoadJsonSimple({
-                url: this.base_url,
-                cancellable,
-                params: params,
-                HandleError: this.HandleError
-            }),
-            (cachedID == null) ? HttpLib.Instance.LoadJsonSimple({ url: this.id_irl, cancellable, params }) : Promise.resolve()
-        ]);
-        if (cachedID == null && (idPayload === null || idPayload === void 0 ? void 0 : idPayload.id) != null)
-            IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
-        if (!json)
-            return null;
-        if (this.HadErrors(json))
-            return null;
-        json.id = cachedID !== null && cachedID !== void 0 ? cachedID : idPayload === null || idPayload === void 0 ? void 0 : idPayload.id;
-        return this.ParseWeather(json, loc);
+    const lang = systemLocale.split("-")[0];
+    if (lang == "sv") {
+        return "se";
     }
-    ;
-    RanOutOfQuota(loc) {
-        return null;
+    else if (lang == "cs") {
+        return "cz";
     }
-    ParseWeather(json, loc) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
-        try {
-            const weather = {
-                coord: {
-                    lat: json.lat,
-                    lon: json.lon
-                },
-                location: {
-                    url: (json.id == null) ? "https://openweathermap.org/city/" : `https://openweathermap.org/city/${json.id}`,
-                    timeZone: json.timezone
-                },
-                date: DateTime.fromSeconds(json.current.dt, { zone: json.timezone }),
-                sunrise: DateTime.fromSeconds(json.current.sunrise, { zone: json.timezone }),
-                sunset: DateTime.fromSeconds(json.current.sunset, { zone: json.timezone }),
-                wind: {
-                    speed: json.current.wind_speed,
-                    degree: json.current.wind_deg
-                },
-                temperature: json.current.temp,
-                pressure: json.current.pressure,
-                humidity: json.current.humidity,
-                dewPoint: json.current.dew_point,
-                condition: {
-                    main: (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main,
-                    description: (_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description,
-                    icons: this.ResolveIcon((_j = (_h = (_g = json === null || json === void 0 ? void 0 : json.current) === null || _g === void 0 ? void 0 : _g.weather) === null || _h === void 0 ? void 0 : _h[0]) === null || _j === void 0 ? void 0 : _j.icon),
-                    customIcon: this.ResolveCustomIcon((_m = (_l = (_k = json === null || json === void 0 ? void 0 : json.current) === null || _k === void 0 ? void 0 : _k.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.icon)
-                },
-                extra_field: {
-                    name: _("Feels Like"),
-                    value: json.current.feels_like,
-                    type: "temperature"
-                },
-                forecasts: []
-            };
-            if (json.minutely != null) {
-                const immediate = {
-                    start: -1,
-                    end: -1
-                };
-                for (const [index, element] of json.minutely.entries()) {
-                    if (element.precipitation > 0 && immediate.start == -1) {
-                        immediate.start = index;
-                        continue;
-                    }
-                    else if (element.precipitation == 0 && immediate.start != -1) {
-                        immediate.end = index;
-                        break;
-                    }
-                }
-                weather.immediatePrecipitation = immediate;
-            }
-            const forecasts = [];
-            for (const day of json.daily) {
-                const forecast = {
-                    date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
-                    temp_min: day.temp.min,
-                    temp_max: day.temp.max,
-                    condition: {
-                        main: day.weather[0].main,
-                        description: day.weather[0].description,
-                        icons: this.ResolveIcon(day.weather[0].icon),
-                        customIcon: this.ResolveCustomIcon(day.weather[0].icon)
-                    },
-                };
-                forecasts.push(forecast);
-            }
-            weather.forecasts = forecasts;
-            const hourly = [];
-            for (const hour of json.hourly) {
-                const forecast = {
-                    date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
-                    temp: hour.temp,
-                    condition: {
-                        main: hour.weather[0].main,
-                        description: hour.weather[0].description,
-                        icons: this.ResolveIcon(hour.weather[0].icon),
-                        customIcon: this.ResolveCustomIcon(hour.weather[0].icon)
-                    },
-                };
-                if (hour.pop >= 0.1) {
-                    forecast.precipitation = {
-                        chance: hour.pop * 100,
-                        type: "none",
-                    };
-                }
-                if (!!hour.rain && forecast.precipitation != null) {
-                    forecast.precipitation.volume = hour === null || hour === void 0 ? void 0 : hour.rain["1h"];
-                    forecast.precipitation.type = "rain";
-                }
-                if (!!hour.snow && forecast.precipitation != null) {
-                    forecast.precipitation.volume = hour.snow["1h"];
-                    forecast.precipitation.type = "snow";
-                }
-                hourly.push(forecast);
-            }
-            weather.hourlyForecasts = hourly;
-            return weather;
-        }
-        catch (e) {
-            if (e instanceof Error)
-                logger_Logger.Error("OpenWeatherMap Weather Parsing error: " + e, e);
-            this.app.ShowError({
-                type: "soft",
-                service: "openweathermap",
-                detail: "unusual payload",
-                message: _("Failed to Process Current Weather Info")
-            });
-            return null;
-        }
+    else if (lang == "ko") {
+        return "kr";
     }
-    ;
-    ConstructParams(loc) {
-        const params = {
-            lat: loc.lat,
-            lon: loc.lon,
-            appid: "1c73f8259a86c6fd43c7163b543c8640"
-        };
-        const locale = this.ConvertToAPILocale(this.app.config.currentLocale);
-        if (this.app.config._translateCondition && IsLangSupported(locale, this.supportedLanguages)) {
-            params.lang = locale;
-        }
-        return params;
+    else if (lang == "lv") {
+        return "la";
     }
-    ;
-    ConvertToAPILocale(systemLocale) {
-        if (systemLocale == null)
-            return "en";
-        if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
-            return systemLocale;
-        }
-        const lang = systemLocale.split("-")[0];
-        if (lang == "sv") {
-            return "se";
-        }
-        else if (lang == "cs") {
-            return "cz";
-        }
-        else if (lang == "ko") {
-            return "kr";
-        }
-        else if (lang == "lv") {
-            return "la";
-        }
-        else if (lang == "nn" || lang == "nb") {
-            return "no";
-        }
-        return lang;
+    else if (lang == "nn" || lang == "nb") {
+        return "no";
     }
-    HadErrors(json) {
-        if (!this.HasReturnedError(json))
-            return false;
-        const errorMsg = "OpenWeatherMap Response: ";
-        const error = {
-            service: "openweathermap",
-            type: "hard",
-        };
-        const errorPayload = json;
-        switch (errorPayload.cod) {
-            case ("400"):
-                error.detail = "bad location format";
-                error.message = _("Please make sure Location is in the correct format in the Settings");
-                break;
-            case ("401"):
-                error.detail = "bad key";
-                error.message = _("Make sure you entered the correct key in settings");
-                break;
-            case ("404"):
-                error.detail = "location not found";
-                error.message = _("Location not found, make sure location is available or it is in the correct format");
-                break;
-            case ("429"):
-                error.detail = "key blocked";
-                error.message = _("If this problem persists, please contact the Author of this applet");
-                break;
-            default:
-                error.detail = "unknown";
-                error.message = _("Unknown Error, please see the logs in Looking Glass");
-                break;
-        }
-        ;
-        this.app.ShowError(error);
-        logger_Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
-        logger_Logger.Error(errorMsg + errorPayload.message);
-        return true;
-    }
-    ;
-    HasReturnedError(json) {
-        return (!!(json === null || json === void 0 ? void 0 : json.cod));
-    }
-    ResolveIcon(icon) {
-        switch (icon) {
-            case "10d":
-                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
-            case "10n":
-                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
-            case "09n":
-                return ["weather-showers"];
-            case "09d":
-                return ["weather-showers"];
-            case "13d":
-                return ["weather-snow"];
-            case "13n":
-                return ["weather-snow"];
-            case "50d":
-                return ["weather-fog"];
-            case "50n":
-                return ["weather-fog"];
-            case "04d":
-                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
-            case "04n":
-                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
-            case "03n":
-                return ['weather-clouds-night', "weather-few-clouds-night"];
-            case "03d":
-                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
-            case "02n":
-                return ["weather-few-clouds-night"];
-            case "02d":
-                return ["weather-few-clouds"];
-            case "01n":
-                return ["weather-clear-night"];
-            case "01d":
-                return ["weather-clear"];
-            case "11d":
-                return ["weather-storm"];
-            case "11n":
-                return ["weather-storm"];
-            default:
-                return ["weather-severe-alert"];
-        }
-    }
-    ;
-    ResolveCustomIcon(icon) {
-        switch (icon) {
-            case "10d":
-                return "day-rain-symbolic";
-            case "10n":
-                return "night-rain-symbolic";
-            case "09n":
-                return "night-showers-symbolic";
-            case "09d":
-                return "day-showers-symbolic";
-            case "13d":
-                return "day-snow-symbolic";
-            case "13n":
-                return "night-alt-snow-symbolic";
-            case "50d":
-                return "day-fog-symbolic";
-            case "50n":
-                return "night-fog-symbolic";
-            case "04d":
-                return "day-cloudy-symbolic";
-            case "04n":
-                return "night-alt-cloudy-symbolic";
-            case "03n":
-                return "night-alt-cloudy-symbolic";
-            case "03d":
-                return "day-cloudy-symbolic";
-            case "02n":
-                return "night-alt-cloudy-symbolic";
-            case "02d":
-                return "day-cloudy-symbolic";
-            case "01n":
-                return "night-clear-symbolic";
-            case "01d":
-                return "day-sunny-symbolic";
-            case "11d":
-                return "day-thunderstorm-symbolic";
-            case "11n":
-                return "night-alt-thunderstorm-symbolic";
-            default:
-                return "cloud-refresh-symbolic";
-        }
-    }
-    ;
+    return lang;
 }
-;
 const openWeatherMapConditionLibrary = [
     _("Thunderstorm with light rain"),
     _("Thunderstorm with rain"),
@@ -11438,6 +11157,321 @@ const openWeatherMapConditionLibrary = [
     _("Overcast clouds")
 ];
 
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/condition.ts
+function OWMIconToBuiltInIcons(icon) {
+    switch (icon) {
+        case "10d":
+            return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
+        case "10n":
+            return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
+        case "09n":
+            return ["weather-showers"];
+        case "09d":
+            return ["weather-showers"];
+        case "13d":
+            return ["weather-snow"];
+        case "13n":
+            return ["weather-snow"];
+        case "50d":
+            return ["weather-fog"];
+        case "50n":
+            return ["weather-fog"];
+        case "04d":
+            return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
+        case "04n":
+            return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
+        case "03n":
+            return ['weather-clouds-night', "weather-few-clouds-night"];
+        case "03d":
+            return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
+        case "02n":
+            return ["weather-few-clouds-night"];
+        case "02d":
+            return ["weather-few-clouds"];
+        case "01n":
+            return ["weather-clear-night"];
+        case "01d":
+            return ["weather-clear"];
+        case "11d":
+            return ["weather-storm"];
+        case "11n":
+            return ["weather-storm"];
+        default:
+            return ["weather-severe-alert"];
+    }
+}
+function OWMIconToCustomIcon(icon) {
+    switch (icon) {
+        case "10d":
+            return "day-rain-symbolic";
+        case "10n":
+            return "night-rain-symbolic";
+        case "09n":
+            return "night-showers-symbolic";
+        case "09d":
+            return "day-showers-symbolic";
+        case "13d":
+            return "day-snow-symbolic";
+        case "13n":
+            return "night-alt-snow-symbolic";
+        case "50d":
+            return "day-fog-symbolic";
+        case "50n":
+            return "night-fog-symbolic";
+        case "04d":
+            return "day-cloudy-symbolic";
+        case "04n":
+            return "night-alt-cloudy-symbolic";
+        case "03n":
+            return "night-alt-cloudy-symbolic";
+        case "03d":
+            return "day-cloudy-symbolic";
+        case "02n":
+            return "night-alt-cloudy-symbolic";
+        case "02d":
+            return "day-cloudy-symbolic";
+        case "01n":
+            return "night-clear-symbolic";
+        case "01d":
+            return "day-sunny-symbolic";
+        case "11d":
+            return "day-thunderstorm-symbolic";
+        case "11n":
+            return "night-alt-thunderstorm-symbolic";
+        default:
+            return "cloud-refresh-symbolic";
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/onecall.ts
+
+
+
+function OWMOneCallToWeatherData(json) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+    const weather = {
+        coord: {
+            lat: json.lat,
+            lon: json.lon
+        },
+        location: {
+            url: (json.id == null) ? "https://openweathermap.org/city/" : `https://openweathermap.org/city/${json.id}`,
+            timeZone: json.timezone
+        },
+        date: DateTime.fromSeconds(json.current.dt, { zone: json.timezone }),
+        sunrise: DateTime.fromSeconds(json.current.sunrise, { zone: json.timezone }),
+        sunset: DateTime.fromSeconds(json.current.sunset, { zone: json.timezone }),
+        wind: {
+            speed: json.current.wind_speed,
+            degree: json.current.wind_deg
+        },
+        temperature: json.current.temp,
+        pressure: json.current.pressure,
+        humidity: json.current.humidity,
+        dewPoint: json.current.dew_point,
+        condition: {
+            main: (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main,
+            description: (_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description,
+            icons: OWMIconToBuiltInIcons((_j = (_h = (_g = json === null || json === void 0 ? void 0 : json.current) === null || _g === void 0 ? void 0 : _g.weather) === null || _h === void 0 ? void 0 : _h[0]) === null || _j === void 0 ? void 0 : _j.icon),
+            customIcon: OWMIconToCustomIcon((_m = (_l = (_k = json === null || json === void 0 ? void 0 : json.current) === null || _k === void 0 ? void 0 : _k.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.icon)
+        },
+        extra_field: {
+            name: _("Feels Like"),
+            value: json.current.feels_like,
+            type: "temperature"
+        },
+        forecasts: [],
+        alerts: [],
+    };
+    if (json.minutely != null) {
+        const immediate = {
+            start: -1,
+            end: -1
+        };
+        for (const [index, element] of json.minutely.entries()) {
+            if (element.precipitation > 0 && immediate.start == -1) {
+                immediate.start = index;
+                continue;
+            }
+            else if (element.precipitation == 0 && immediate.start != -1) {
+                immediate.end = index;
+                break;
+            }
+        }
+        weather.immediatePrecipitation = immediate;
+    }
+    const forecasts = [];
+    for (const day of json.daily) {
+        const forecast = {
+            date: DateTime.fromSeconds(day.dt, { zone: json.timezone }),
+            temp_min: day.temp.min,
+            temp_max: day.temp.max,
+            condition: {
+                main: day.weather[0].main,
+                description: day.weather[0].description,
+                icons: OWMIconToBuiltInIcons(day.weather[0].icon),
+                customIcon: OWMIconToCustomIcon(day.weather[0].icon)
+            },
+        };
+        forecasts.push(forecast);
+    }
+    weather.forecasts = forecasts;
+    const hourly = [];
+    for (const hour of json.hourly) {
+        const forecast = {
+            date: DateTime.fromSeconds(hour.dt, { zone: json.timezone }),
+            temp: hour.temp,
+            condition: {
+                main: hour.weather[0].main,
+                description: hour.weather[0].description,
+                icons: OWMIconToBuiltInIcons(hour.weather[0].icon),
+                customIcon: OWMIconToCustomIcon(hour.weather[0].icon)
+            },
+        };
+        if (hour.pop >= 0.1) {
+            forecast.precipitation = {
+                chance: hour.pop * 100,
+                type: "none",
+            };
+        }
+        if (!!hour.rain && forecast.precipitation != null) {
+            forecast.precipitation.volume = hour === null || hour === void 0 ? void 0 : hour.rain["1h"];
+            forecast.precipitation.type = "rain";
+        }
+        if (!!hour.snow && forecast.precipitation != null) {
+            forecast.precipitation.volume = hour.snow["1h"];
+            forecast.precipitation.type = "snow";
+        }
+        hourly.push(forecast);
+    }
+    weather.hourlyForecasts = hourly;
+    const alerts = [];
+    for (const alert of (_o = json.alerts) !== null && _o !== void 0 ? _o : []) {
+        alerts.push({
+            sender_name: alert.sender_name,
+            level: "unknown",
+            title: alert.event,
+            description: alert.description,
+        });
+    }
+    weather.alerts = alerts;
+    return weather;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/provider-closed.ts
+
+
+
+
+
+
+const IDCache = {};
+class OpenWeatherMapOneCall extends BaseProvider {
+    constructor(_app) {
+        super(_app);
+        this.prettyName = _("OpenWeatherMap");
+        this.name = "OpenWeatherMap_OneCall";
+        this.maxForecastSupport = 8;
+        this.website = "https://openweathermap.org/";
+        this.maxHourlyForecastSupport = 48;
+        this.needsApiKey = true;
+        this.remainingCalls = null;
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
+        this.base_url = "https://api.openweathermap.org/data/3.0/onecall";
+        this.id_irl = "https://api.openweathermap.org/data/2.5/weather";
+        this.HandleError = (error) => {
+            if (error.ErrorData.code == 404) {
+                this.app.ShowError({
+                    detail: "location not found",
+                    message: _("Location not found, make sure location is available or it is in the correct format"),
+                    userError: true,
+                    type: "hard"
+                });
+                return false;
+            }
+            return true;
+        };
+    }
+    async GetWeather(loc, cancellable, config) {
+        const params = this.ConstructParams(loc, config.ApiKey);
+        const cachedID = IDCache[`${loc.lat},${loc.lon}`];
+        const [json, idPayload] = await Promise.all([
+            HttpLib.Instance.LoadJsonSimple({
+                url: this.base_url,
+                cancellable,
+                params: params,
+                HandleError: this.HandleError
+            }),
+            (cachedID == null) ? HttpLib.Instance.LoadJsonSimple({ url: this.id_irl, cancellable, params }) : Promise.resolve()
+        ]);
+        if (cachedID == null && (idPayload === null || idPayload === void 0 ? void 0 : idPayload.id) != null)
+            IDCache[`${loc.lat},${loc.lon}`] = idPayload.id;
+        if (!json)
+            return null;
+        if (this.HadErrors(json))
+            return null;
+        json.id = cachedID !== null && cachedID !== void 0 ? cachedID : idPayload === null || idPayload === void 0 ? void 0 : idPayload.id;
+        return OWMOneCallToWeatherData(json);
+    }
+    ;
+    ConstructParams(loc, key) {
+        const params = {
+            lat: loc.lat,
+            lon: loc.lon,
+            appid: key
+        };
+        const locale = ConvertLocaleToOWMLang(this.app.config.currentLocale);
+        if (this.app.config._translateCondition && IsLangSupported(locale, OWM_SUPPORTED_LANGS)) {
+            params.lang = locale;
+        }
+        return params;
+    }
+    ;
+    HadErrors(json) {
+        if (!this.HasReturnedError(json))
+            return false;
+        const errorMsg = "OpenWeatherMap Response: ";
+        const error = {
+            service: "openweathermap",
+            type: "hard",
+        };
+        const errorPayload = json;
+        switch (errorPayload.cod) {
+            case ("400"):
+                error.detail = "bad location format";
+                error.message = _("Please make sure Location is in the correct format in the Settings");
+                break;
+            case ("401"):
+                error.detail = "bad key";
+                error.message = _("Make sure you entered the correct key in settings");
+                break;
+            case ("404"):
+                error.detail = "location not found";
+                error.message = _("Location not found, make sure location is available or it is in the correct format");
+                break;
+            case ("429"):
+                error.detail = "key blocked";
+                error.message = _("If this problem persists, please contact the Author of this applet");
+                break;
+            default:
+                error.detail = "unknown";
+                error.message = _("Unknown Error, please see the logs in Looking Glass");
+                break;
+        }
+        ;
+        this.app.ShowError(error);
+        logger_Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
+        logger_Logger.Error(errorMsg + errorPayload.message);
+        return true;
+    }
+    ;
+    HasReturnedError(json) {
+        return (!!(json === null || json === void 0 ? void 0 : json.cod));
+    }
+}
+;
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/types/common.ts
 const conditionSeverity = {
     clearsky: 1,
@@ -11488,7 +11522,142 @@ function IsCovered(payload) {
     return payload.properties.meta.radar_coverage == "ok";
 }
 
+;// CONCATENATED MODULE: ./src/3_8/lib/polygons.ts
+function PointInsidePolygon(point, vs) {
+    const maxX = Math.max(...vs.map(v => v[0]));
+    const minX = Math.min(...vs.map(v => v[0]));
+    const maxY = Math.max(...vs.map(v => v[1]));
+    const minY = Math.min(...vs.map(v => v[1]));
+    if (point[0] < minX || point[0] > maxX || point[1] < minY || point[1] > maxY) {
+        return false;
+    }
+    let intersections = 0;
+    let padding = 0.1;
+    const pv1 = [(minX - padding / point[0]), (minY - padding / point[1])];
+    const pv2 = point;
+    for (let i = 0; i < vs.length - 1; i++) {
+        const v1 = vs[i];
+        const v2 = vs[i + 1];
+        if (areIntersecting(v1[0], v1[1], v2[0], v2[1], pv1[0], pv1[1], pv2[0], pv2[1]))
+            intersections++;
+    }
+    if ((intersections & 1) == 1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function areIntersecting(v1x1, v1y1, v1x2, v1y2, v2x1, v2y1, v2x2, v2y2) {
+    let d1, d2;
+    let a1, a2, b1, b2, c1, c2;
+    a1 = v1y2 - v1y1;
+    b1 = v1x1 - v1x2;
+    c1 = (v1x2 * v1y1) - (v1x1 * v1y2);
+    d1 = (a1 * v2x1) + (b1 * v2y1) + c1;
+    d2 = (a1 * v2x2) + (b1 * v2y2) + c1;
+    if (d1 > 0 && d2 > 0)
+        return false;
+    if (d1 < 0 && d2 < 0)
+        return false;
+    a2 = v2y2 - v2y1;
+    b2 = v2x1 - v2x2;
+    c2 = (v2x2 * v2y1) - (v2x1 * v2y2);
+    d1 = (a2 * v1x1) + (b2 * v1y1) + c2;
+    d2 = (a2 * v1x2) + (b2 * v1y2) + c2;
+    if (d1 > 0 && d2 > 0)
+        return false;
+    if (d1 < 0 && d2 < 0)
+        return false;
+    if ((a1 * b2) - (a2 * b1) == 0.0)
+        return false;
+    return true;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/alert.ts
+
+
+
+async function GetMETNorwayAlerts(cancellable, lat, lon) {
+    const response = await HttpLib.Instance.LoadJsonSimple({
+        url: "https://api.met.no/weatherapi/metalerts/1.1/.json",
+        cancellable: cancellable,
+    });
+    if (response === null) {
+        return null;
+    }
+    const result = [];
+    for (const feature of response.features) {
+        let isInside = false;
+        for (const geometry of feature.geometry.coordinates) {
+            if (PointInsidePolygon([lon, lat], geometry)) {
+                isInside = true;
+                break;
+            }
+        }
+        if (!isInside) {
+            logger_Logger.Debug(`Skipping alert '${feature.properties.event}' in area '${feature.properties.area}', current location is not inside area.`);
+            continue;
+        }
+        logger_Logger.Debug(`Adding alert '${feature.properties.event}' in area '${feature.properties.area}'!`);
+        result.push(feature.properties);
+    }
+    return result.map(alert => ({
+        title: alert.title,
+        level: SeverityToLevel(alert.severity),
+        description: alert.description,
+        sender_name: "MET Norway",
+        icon: EventToIcon(alert.event),
+    }));
+}
+function SeverityToLevel(severity) {
+    switch (severity) {
+        case "Extreme":
+            return "extreme";
+        case "Severe":
+            return "severe";
+        case "Moderate":
+            return "moderate";
+        case "Minor":
+            return "minor";
+        default:
+            return "unknown";
+    }
+}
+function EventToIcon(event) {
+    switch (event) {
+        case "blowingSnow":
+            return "snow-wind-symbolic";
+        case "forestFire":
+            return "fire-symbolic";
+        case "gale":
+            return "gale-warning-symbolic";
+        case "ice":
+            return "snowflake-cold-symbolic";
+        case "icing":
+            return "snowflake-cold-symbolic";
+        case "lightning":
+            return "lightning-symbolic";
+        case "polarLow":
+            return "hurricane-symbolic";
+        case "rain":
+            return "raindrop-symbolic";
+        case "rainFlood":
+            return "flood-symbolic";
+        case "snow":
+            return "snowflake-cold-symbolic";
+        case "stormSurge":
+            return "lightning-symbolic";
+        case "wind":
+            return "strong-wind-symbolic";
+        default:
+            logger_Logger.Info(`Unknown MET Norway event type: ${event}`);
+            return undefined;
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/providers/met_norway/provider.ts
+
 
 
 
@@ -11511,7 +11680,7 @@ class MetNorway extends BaseProvider {
         this.supportHourlyPrecipVolume = true;
         this.baseUrl = "https://api.met.no/weatherapi";
     }
-    async GetWeather(loc, cancellable) {
+    async GetWeather(loc, cancellable, config) {
         const [forecast, nowcast] = await Promise.all([
             HttpLib.Instance.LoadJsonSimple({
                 url: `${this.baseUrl}/locationforecast/2.0/complete`,
@@ -11560,6 +11729,13 @@ class MetNorway extends BaseProvider {
                     result.immediatePrecipitation = immediate;
                 }
             }
+        }
+        if (config._showAlerts) {
+            const alerts = await GetMETNorwayAlerts(cancellable, loc.lat, loc.lon);
+            if (alerts == null) {
+                return null;
+            }
+            result.alerts = alerts;
         }
         return result;
     }
@@ -12046,7 +12222,7 @@ class MetNorway extends BaseProvider {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/providers/weatherbit.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/weatherbit/provider.ts
 
 
 
@@ -12076,7 +12252,36 @@ class Weatherbit extends BaseProvider {
         this.current_url = "https://api.weatherbit.io/v2.0/current?";
         this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
         this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
+        this.alerts_url = "https://api.weatherbit.io/v2.0/alerts?";
         this.hourlyAccess = true;
+        this.ParseAlerts = (json) => {
+            const alerts = [];
+            for (const alert of json.alerts) {
+                let level;
+                switch (alert.severity) {
+                    case "Advisory":
+                        level = "minor";
+                        break;
+                    case "Watch":
+                        level = "moderate";
+                        break;
+                    case "Warning":
+                        level = "severe";
+                        break;
+                    default:
+                        level = "unknown";
+                        break;
+                }
+                const alertData = {
+                    title: alert.title,
+                    description: alert.description,
+                    level,
+                    sender_name: alert.uri,
+                };
+                alerts.push(alertData);
+            }
+            return alerts;
+        };
         this.ParseCurrent = (json) => {
             json = json.data[0];
             const hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
@@ -12187,7 +12392,7 @@ class Weatherbit extends BaseProvider {
             }
         };
     }
-    async GetWeather(loc, cancellable) {
+    async GetWeather(loc, cancellable, config) {
         const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable);
         let hourlyPromise = null;
         if (!!this.hourlyAccess)
@@ -12199,6 +12404,12 @@ class Weatherbit extends BaseProvider {
         currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
         const hourlyResult = await hourlyPromise;
         currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
+        if (config._showAlerts) {
+            const alertResult = await this.GetData(this.alerts_url, loc, this.ParseAlerts, cancellable);
+            if (alertResult == null)
+                return null;
+            currentResult.alerts = alertResult;
+        }
         return currentResult;
     }
     ;
@@ -12480,7 +12691,7 @@ class Weatherbit extends BaseProvider {
 }
 ;
 
-;// CONCATENATED MODULE: ./src/3_8/providers/climacellV4.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/tomorrow_io/provider.ts
 
 
 
@@ -12506,7 +12717,7 @@ class ClimacellV4 extends BaseProvider {
             fields: "temperature,temperatureMax,temperatureMin,pressureSurfaceLevel,weatherCode,sunsetTime,dewPoint,sunriseTime,precipitationType,precipitationProbability,precipitationIntensity,windDirection,windSpeed,humidity,temperatureApparent"
         };
     }
-    async GetWeather(loc, cancellable) {
+    async GetWeather(loc, cancellable, config) {
         if (loc == null)
             return null;
         this.params.apikey = this.app.config.ApiKey;
@@ -12519,7 +12730,41 @@ class ClimacellV4 extends BaseProvider {
         });
         if (response == null)
             return null;
-        return this.ParseWeather(loc, response);
+        const weather = this.ParseWeather(loc, response);
+        if (weather == null)
+            return null;
+        if (config._showAlerts) {
+            const alerts = await this.GetAlerts(loc, cancellable);
+            if (alerts != null)
+                weather.alerts = alerts;
+        }
+        return weather;
+    }
+    async GetAlerts(loc, cancellable) {
+        var _a, _b, _c, _d;
+        const response = await HttpLib.Instance.LoadJsonSimple({
+            url: "https://api.tomorrow.io/v4/events",
+            cancellable,
+            params: {
+                apikey: this.app.config.ApiKey,
+                location: loc.lat + "," + loc.lon,
+                buffer: "1",
+                insights: "air&insights=fires&insights=wind&insights=winter&insights=thunderstorms&insights=floods&insights=temperature&insights=tropical&insights=marine&insights=fog&insights=tornado"
+            },
+            HandleError: (m) => this.HandleHTTPError(m)
+        });
+        if (response == null)
+            return null;
+        const alerts = [];
+        for (const alert of response.data.events) {
+            alerts.push({
+                title: (_a = alert.eventValues.headline) !== null && _a !== void 0 ? _a : alert.eventValues.title,
+                description: `${alert.eventValues.description}\n\n${(_d = (_c = (_b = alert.eventValues.response) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.instruction) !== null && _d !== void 0 ? _d : ""}`,
+                level: alert.severity,
+                sender_name: alert.eventValues.origin,
+            });
+        }
+        return alerts;
     }
     HandleHTTPError(message) {
         if (message.ErrorData.code == 401) {
@@ -12817,7 +13062,201 @@ class ClimacellV4 extends BaseProvider {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/providers/us_weather.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/us_weather/alerts.ts
+
+async function GetUSWeatherAlerts(cancellable, lat, lon) {
+    var _a, _b;
+    const alerts = [];
+    let next = "https://api.weather.gov/alerts/active";
+    while (next) {
+        const response = await HttpLib.Instance.LoadJsonSimple({
+            url: next,
+            cancellable: cancellable,
+            params: {
+                point: `${lat},${lon}`
+            }
+        });
+        if (response === null) {
+            return null;
+        }
+        for (const alert of response.features) {
+            alerts.push({
+                title: alert.properties.headline,
+                description: `${alert.properties.description}\n\n${(_a = alert.properties.instruction) !== null && _a !== void 0 ? _a : ""}`,
+                level: SeverityToAlertLevel(alert.properties.severity),
+                sender_name: alert.properties.senderName,
+                icon: EventNameToIcon(alert.properties.event)
+            });
+        }
+        next = (_b = response.pagination) === null || _b === void 0 ? void 0 : _b.next;
+    }
+    return alerts;
+}
+function SeverityToAlertLevel(level) {
+    switch (level) {
+        case "Extreme":
+            return "extreme";
+        case "Severe":
+            return "severe";
+        case "Moderate":
+            return "moderate";
+        case "Minor":
+            return "minor";
+        default:
+            return "unknown";
+    }
+}
+function EventNameToIcon(event) {
+    switch (event) {
+        case "Extreme Fire Danger":
+        case "Fire Warning":
+        case "Fire Weather Watch":
+            return "fire-symbolic";
+        case "Flash Flood Statement":
+        case "Flash Flood Warning":
+        case "Flash Flood Watch":
+        case "Flood Advisory":
+        case "Flood Statement":
+        case "Flood Warning":
+        case "Flood Watch":
+        case "Coastal Flood Advisory":
+        case "Coastal Flood Statement":
+        case "Coastal Flood Warning":
+        case "Coastal Flood Watch":
+        case "Lakeshore Flood Advisory":
+        case "Lakeshore Flood Statement":
+        case "Lakeshore Flood Warning":
+        case "Lakeshore Flood Watch":
+        case "Arroyo And Small Stream Flood Advisory":
+        case "Small Stream Flood Advisory":
+        case "Urban And Small Stream Flood Advisory":
+            return "flood-symbolic";
+        case "Ashfall Advisory":
+        case "Ashfall Warning":
+        case "Blowing Dust Advisory":
+        case "Blowing Dust Warning":
+        case "Dust Storm Warning":
+        case "Dust Advisory":
+            return "dust-symbolic";
+        case "Blizzard Warning":
+        case "Blizzard Watch":
+        case "Extreme Cold Warning":
+        case "Extreme Cold Watch":
+        case "Freeze Warning":
+        case "Freeze Watch":
+        case "Freezing Fog Advisory":
+        case "Freezing Rain Advisory":
+        case "Freezing Spray Advisory":
+        case "Frost Advisory":
+        case "Hard Freeze Warning":
+        case "Hard Freeze Watch":
+        case "Winter Storm Warning":
+        case "Winter Storm Watch":
+        case "Winter Weather Advisory":
+        case "Heavy Freezing Spray Warning":
+        case "Heavy Freezing Spray Watch":
+        case "Lake Effect Snow Advisory":
+        case "Lake Effect Snow Warning":
+        case "Lake Effect Snow Watch":
+        case "Snow Squall Warning":
+            return "snowflake-cold-symbolic";
+        case "Dense Fog Advisory":
+            return "fog-symbolic";
+        case "Dense Smoke Advisory":
+            return "smoke-symbolic";
+        case "Brisk Wind Advisory":
+        case "Extreme Wind Warning":
+        case "High Wind Warning":
+        case "High Wind Watch":
+        case "Ice Storm Warning":
+        case "Lake Wind Advisory":
+        case "Wind Advisory":
+        case "Wind Chill Advisory":
+        case "Wind Chill Warning":
+        case "Wind Chill Watch":
+            return "strong-wind-symbolic";
+        case "Excessive Heat Warning":
+        case "Excessive Heat Watch":
+        case "Heat Advisory":
+            return "hot-symbolic";
+        case "Gale Warning":
+        case "Gale Watch":
+            return "gale-warning-symbolic";
+        case "Hurricane Force Wind Warning":
+        case "Hurricane Force Wind Watch":
+        case "Hurricane Local Statement":
+        case "Hurricane Warning":
+        case "Hurricane Watch":
+        case "Typhoon Local Statement":
+        case "Typhoon Warning":
+        case "Typhoon Watch":
+        case "Tropical Depression Local Statement":
+        case "Tropical Storm Local Statement":
+        case "Tropical Storm Warning":
+        case "Tropical Storm Watch":
+            return "hurricane-symbolic";
+        case "Severe Thunderstorm Warning":
+        case "Severe Thunderstorm Watch":
+        case "Severe Weather Statement":
+        case "Storm Surge Warning":
+        case "Storm Surge Watch":
+        case "Storm Warning":
+        case "Storm Watch":
+            return "lightning-symbolic";
+        case "Tornado Warning":
+        case "Tornado Watch":
+            return "tornado-symbolic";
+        case "Tsunami Advisory":
+        case "Tsunami Warning":
+        case "Tsunami Watch":
+            return "tsunami-symbolic";
+        case "Volcano Warning":
+            return "volcano-symbolic";
+        case "Earthquake Warning":
+        case "Special Marine Warning":
+        case "Special Weather Statement":
+        case "Law Enforcement Warning":
+        case "Local Area Emergency":
+        case "Low Water Advisory":
+        case "Marine Weather Statement":
+        case "Nuclear Power Plant Warning":
+        case "Radiological Hazard Warning":
+        case "Hazardous Weather Outlook":
+        case "Hazardous Seas Warning":
+        case "Hazardous Seas Watch":
+        case "Shelter In Place Warning":
+        case "Short Term Forecast":
+        case "Red Flag Warning":
+        case "Rip Current Statement":
+        case "Small Craft Advisory":
+        case "Small Craft Advisory For Hazardous Seas":
+        case "Small Craft Advisory For Rough Bar":
+        case "Small Craft Advisory For Winds":
+        case "High Surf Advisory":
+        case "High Surf Warning":
+        case "Hydrologic Advisory":
+        case "Hydrologic Outlook":
+        case "Hazardous Materials Warning":
+        case "Evacuation - Immediate":
+        case "Avalanche Advisory":
+        case "Avalanche Warning":
+        case "Avalanche Watch":
+        case "Child Abduction Emergency":
+        case "Civil Danger Warning":
+        case "Civil Emergency Message":
+        case "Beach Hazards Statement":
+        case "911 Telephone Outage Emergency":
+        case "Administrative Message":
+        case "Air Quality Alert":
+        case "Air Stagnation Advisory":
+        case "Test":
+        default:
+            return undefined;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/us_weather/provider.ts
+
 
 
 
@@ -12916,7 +13355,7 @@ class USWeather extends BaseProvider {
             }
         };
     }
-    async GetWeather(loc, cancellable) {
+    async GetWeather(loc, cancellable, config) {
         var _a, _b;
         const locID = loc.lat.toString() + "," + loc.lon.toString();
         if (!this.grid || !this.observationStations || this.currentLocID != locID) {
@@ -12952,9 +13391,15 @@ class USWeather extends BaseProvider {
             return null;
         }
         const weather = this.ParseCurrent(observations, hourly, loc);
-        if (!!weather) {
-            weather.forecasts = (_a = this.ParseForecast(forecast)) !== null && _a !== void 0 ? _a : [];
-            weather.hourlyForecasts = (_b = this.ParseHourlyForecast(hourly)) !== null && _b !== void 0 ? _b : undefined;
+        if (!weather)
+            return null;
+        weather.forecasts = (_a = this.ParseForecast(forecast)) !== null && _a !== void 0 ? _a : [];
+        weather.hourlyForecasts = (_b = this.ParseHourlyForecast(hourly)) !== null && _b !== void 0 ? _b : undefined;
+        if (config._showAlerts) {
+            const alerts = await GetUSWeatherAlerts(cancellable, loc.lat, loc.lon);
+            if (!alerts)
+                return null;
+            weather.alerts = alerts;
         }
         return weather;
     }
@@ -13388,7 +13833,7 @@ class USWeather extends BaseProvider {
 }
 ;
 
-;// CONCATENATED MODULE: ./src/3_8/providers/visualcrossing.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/visualcrossing/provider.ts
 
 
 
@@ -13409,7 +13854,7 @@ class VisualCrossing extends BaseProvider {
         this.params = {
             unitGroup: "metric",
             key: null,
-            include: "fcst,hours,current",
+            include: "fcst,hours,current,alerts",
             lang: "id"
         };
         this.supportedLangs = ["en", "de", "fr", "es"];
@@ -13467,6 +13912,18 @@ class VisualCrossing extends BaseProvider {
             forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
             hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
         };
+        if (weather.alerts) {
+            const alerts = [];
+            for (const alert of weather.alerts) {
+                alerts.push({
+                    title: alert.headline,
+                    description: alert.description,
+                    level: "unknown",
+                    sender_name: alert.link
+                });
+            }
+            result.alerts = alerts;
+        }
         return result;
     }
     ParseForecasts(forecasts, translate, tz) {
@@ -14415,7 +14872,101 @@ class AccuWeather extends BaseProvider {
     }
 }
 
-;// CONCATENATED MODULE: ./src/3_8/providers/deutscherWetterdienst.ts
+;// CONCATENATED MODULE: ./src/3_8/providers/deutscherWetterdienst/alert.ts
+
+async function GetDeutscherWetterdienstAlerts(cancellable, lat, lon) {
+    var _a;
+    const response = await HttpLib.Instance.LoadJsonSimple({
+        url: "https://api.brightsky.dev/alerts",
+        cancellable: cancellable,
+        params: {
+            lat: lat,
+            lon: lon,
+        }
+    });
+    if (response === null) {
+        return null;
+    }
+    const result = [];
+    for (const alert of response.alerts) {
+        result.push({
+            title: alert.headline_de,
+            description: `${alert.status == "test" ? "{TEST} " : ""}${alert.description_de}\n\n${(_a = alert.instruction_de) !== null && _a !== void 0 ? _a : ""}`,
+            level: LevelToAlertLevel(alert.severity),
+            sender_name: "Deutscher Wetterdienst",
+            icon: EventCodeToIcon(alert.event_code),
+        });
+    }
+    return result;
+}
+function LevelToAlertLevel(level) {
+    if (level == null)
+        return "unknown";
+    return level;
+}
+function EventCodeToIcon(code) {
+    switch (code) {
+        case 22:
+            return "snowflake-cold-symbolic";
+        case 31:
+        case 33:
+        case 34:
+        case 36:
+        case 38:
+        case 40:
+        case 41:
+        case 42:
+        case 44:
+        case 45:
+        case 46:
+        case 48:
+        case 49:
+        case 95:
+        case 96:
+            return "lightning-symbolic";
+        case 51:
+        case 52:
+        case 53:
+        case 54:
+        case 55:
+        case 56:
+            return "strong-wind-symbolic";
+        case 59:
+            return undefined;
+        case 61:
+        case 62:
+        case 63:
+        case 64:
+        case 65:
+        case 66:
+            return "raindrops-symbolic";
+        case 70:
+        case 71:
+        case 72:
+        case 73:
+        case 74:
+        case 75:
+        case 76:
+            return "snowflake-cold-symbolic";
+        case 82:
+        case 84:
+        case 85:
+        case 86:
+            return "snowflake-cold-symbolic";
+        case 87:
+        case 88:
+        case 89:
+            return undefined;
+        case 98:
+        case 99:
+            return undefined;
+        default:
+            return undefined;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/deutscherWetterdienst/provider.ts
+
 
 
 
@@ -14429,7 +14980,7 @@ class DeutscherWetterdienst extends BaseProvider {
         this.name = "DeutscherWetterdienst";
         this.maxForecastSupport = 10;
         this.maxHourlyForecastSupport = 240;
-        this.website = "https://www.dwd.de/DE/Home/home_node.html";
+        this.website = "https://brightsky.dev/";
         this.remainingCalls = null;
         this.supportHourlyPrecipChance = false;
         this.supportHourlyPrecipVolume = true;
@@ -14447,7 +14998,7 @@ class DeutscherWetterdienst extends BaseProvider {
             return false;
         };
     }
-    async GetWeather(loc, cancellable) {
+    async GetWeather(loc, cancellable, config) {
         var _a, _b, _c, _d;
         const [current, hourly] = await Promise.all([
             HttpLib.Instance.LoadJsonSimple({
@@ -14468,6 +15019,13 @@ class DeutscherWetterdienst extends BaseProvider {
         const currentTime = DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone);
         const sunTimes = (0,suncalc.getTimes)(currentTime.toJSDate(), loc.lat, loc.lon);
         const mainSource = (_a = current.sources.find(source => source.id == current.weather.source_id)) !== null && _a !== void 0 ? _a : current.sources[0];
+        let alerts = undefined;
+        if (config._showAlerts) {
+            const result = await GetDeutscherWetterdienstAlerts(cancellable, loc.lat, loc.lon);
+            if (result == null)
+                return null;
+            alerts = result;
+        }
         return {
             date: DateTime.fromISO(current.weather.timestamp).setZone(loc.timeZone),
             location: {
@@ -14497,7 +15055,8 @@ class DeutscherWetterdienst extends BaseProvider {
                 name: (_d = mainSource.station_name) !== null && _d !== void 0 ? _d : undefined
             },
             forecasts: this.ParseForecast(current, hourly, loc),
-            hourlyForecasts: this.ParseHourlyForecast(hourly, loc)
+            hourlyForecasts: this.ParseHourlyForecast(hourly, loc),
+            alerts: alerts
         };
     }
     ParseForecast(current, forecast, loc) {
@@ -15345,6 +15904,7 @@ class WeatherUnderground extends BaseProvider {
 
 
 
+
 class PirateWeather extends BaseProvider {
     get remainingCalls() {
         return null;
@@ -15487,6 +16047,19 @@ class PirateWeather extends BaseProvider {
                 }
                 result.immediatePrecipitation = immediate;
             }
+            if (json.alerts != null) {
+                const alerts = [];
+                for (const alert of json.alerts) {
+                    alerts.push({
+                        title: alert.title,
+                        description: alert.description,
+                        level: this.PirateWeatherAlertSeverityToAlertLevel(alert.severity),
+                        sender_name: alert.uri,
+                    });
+                }
+                ;
+                result.alerts = alerts.sort((a, b) => ALERT_LEVEL_ORDER.indexOf(a.level) - ALERT_LEVEL_ORDER.indexOf(b.level));
+            }
             return result;
         }
         catch (e) {
@@ -15497,6 +16070,20 @@ class PirateWeather extends BaseProvider {
         }
     }
     ;
+    PirateWeatherAlertSeverityToAlertLevel(severity) {
+        switch (severity) {
+            case "Extreme":
+                return "extreme";
+            case "Severe":
+                return "severe";
+            case "Moderate":
+                return "moderate";
+            case "Minor":
+                return "minor";
+            default:
+                return "unknown";
+        }
+    }
     ResolveIcon(icon, sunTimes, date) {
         switch (icon) {
             case "rain":
@@ -15745,7 +16332,444 @@ class GeoIPFedora {
     ;
 }
 
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/common.ts
+
+function OpenMeteoWeatherCodeToCondition(code, isDay) {
+    switch (code) {
+        case 0:
+            return {
+                icons: !isDay ? ["weather-clear-night"] : ["weather-clear"],
+                customIcon: !isDay ? "night-clear-symbolic" : "day-sunny-symbolic",
+                main: _("Clear"),
+                description: _("Clear sky")
+            };
+        case 1:
+            return {
+                icons: !isDay ? ["weather-few-clouds-night"] : ["weather-few-clouds"],
+                customIcon: !isDay ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                main: _("Mainly clear"),
+                description: _("Mainly clear")
+            };
+        case 2:
+            return {
+                icons: !isDay ? ["weather-few-clouds-night"] : ["weather-few-clouds"],
+                customIcon: !isDay ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
+                main: _("Partly cloudy"),
+                description: _("Partly cloudy")
+            };
+        case 3:
+            return {
+                icons: !isDay ? ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"],
+                customIcon: "cloudy-symbolic",
+                main: _("Overcast"),
+                description: _("Overcast")
+            };
+        case 45:
+        case 48:
+            return {
+                icons: ["weather-fog"],
+                customIcon: "fog-symbolic",
+                main: _("Fog"),
+                description: _("Fog")
+            };
+        case 51:
+            return {
+                icons: isDay ? ["weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-rain-symbolic" : "night-alt-rain-symbolic",
+                main: _("Drizzle"),
+                description: _("Light drizzle")
+            };
+        case 53:
+            return {
+                icons: isDay ? ["weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-rain-symbolic" : "night-alt-rain-symbolic",
+                main: _("Drizzle"),
+                description: _("Drizzle")
+            };
+        case 55:
+            return {
+                icons: isDay ? ["weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-rain-symbolic" : "night-alt-rain-symbolic",
+                main: _("Drizzle"),
+                description: _("Heavy drizzle")
+            };
+        case 56:
+            return {
+                icons: isDay ? ["weather-freezing-rain", "weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-freezing-rain", "weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-sleet-symbolic" : "night-alt-sleet-symbolic",
+                main: _("Drizzle"),
+                description: _("Light freezing drizzle")
+            };
+        case 57:
+            return {
+                icons: isDay ? ["weather-freezing-rain", "weather-showers-scattered-day", "weather-showers-scattered", "weather-showers-day", "weather-showers"] : ["weather-freezing-rain", "weather-showers-scattered-night", "weather-showers-scattered", "weather-showers-night", "weather-showers"],
+                customIcon: isDay ? "day-sleet-symbolic" : "night-alt-sleet-symbolic",
+                main: _("Drizzle"),
+                description: _("Freezing drizzle")
+            };
+        case 61:
+            return {
+                icons: isDay ? ["weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "rain-symbolic",
+                main: _("Rain"),
+                description: _("Light rain")
+            };
+        case 63:
+            return {
+                icons: isDay ? ["weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "rain-symbolic",
+                main: _("Rain"),
+                description: _("Rain")
+            };
+        case 65:
+            return {
+                icons: isDay ? ["weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "rain-symbolic",
+                main: _("Rain"),
+                description: _("Heavy rain")
+            };
+        case 66:
+            return {
+                icons: isDay ? ["weather-freezing-rain", "weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-freezing-rain", "weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "hail-symbolic",
+                main: _("Rain"),
+                description: _("Light freezing rain")
+            };
+        case 67:
+            return {
+                icons: isDay ? ["weather-freezing-rain", "weather-rain", "weather-showers-day", "weather-showers", "weather-showers-scattered-day", "weather-showers-scattered",] : ["weather-freezing-rain", "weather-rain", "weather-showers-night", "weather-showers", "weather-showers-scattered-night", "weather-showers-scattered"],
+                customIcon: "hail-symbolic",
+                main: _("Rain"),
+                description: _("Freezing rain")
+            };
+        case 71:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow"),
+                description: _("Light snow")
+            };
+        case 73:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow"),
+                description: _("Snow")
+            };
+        case 75:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow"),
+                description: _("Heavy snow")
+            };
+        case 77:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow"),
+                description: _("Snow grains")
+            };
+        case 80:
+            return {
+                icons: isDay ? ["weather-showers", "weather-showers-day", "weather-rain"] : ["weather-showers", "weather-showers-night", "weather-rain"],
+                customIcon: isDay ? "day-showers-symbolic" : "night-alt-showers-symbolic",
+                main: _("Showers"),
+                description: _("Light showers")
+            };
+        case 81:
+            return {
+                icons: isDay ? ["weather-showers", "weather-showers-day", "weather-rain"] : ["weather-showers", "weather-showers-night", "weather-rain"],
+                customIcon: "showers-symbolic",
+                main: _("Showers"),
+                description: _("Showers")
+            };
+        case 82:
+            return {
+                icons: isDay ? ["weather-showers", "weather-showers-day", "weather-rain"] : ["weather-showers", "weather-showers-night", "weather-rain"],
+                customIcon: "showers-symbolic",
+                main: _("Showers"),
+                description: _("Heavy showers")
+            };
+        case 85:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow showers"),
+                description: _("Light snow showers")
+            };
+        case 86:
+            return {
+                icons: ["weather-snow"],
+                customIcon: "snow-symbolic",
+                main: _("Snow showers"),
+                description: _("Snow showers")
+            };
+        case 95:
+            return {
+                icons: ["weather-storm"],
+                customIcon: "thunderstorm-symbolic",
+                main: _("Thunderstorm"),
+                description: _("Thunderstorm")
+            };
+        case 96:
+            return {
+                icons: ["weather-storm", "weather-hail"],
+                customIcon: "sleet-storm-symbolic",
+                main: _("Thunderstorm"),
+                description: _("Thunderstorm with slight hail")
+            };
+        case 99:
+            return {
+                icons: ["weather-storm", "weather-hail"],
+                customIcon: "sleet-storm-symbolic",
+                main: _("Thunderstorm"),
+                description: _("Thunderstorm with hail")
+            };
+        default:
+            return {
+                icons: ["weather-severe-alert"],
+                customIcon: "refresh-symbolic",
+                main: _("Unknown"),
+                description: _("Unknown")
+            };
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/current.ts
+
+
+function OpenMeteoCurrentWeatherToData(data) {
+    return {
+        condition: OpenMeteoWeatherCodeToCondition(data.weather_code, data.is_day === 1),
+        temperature: CelsiusToKelvin(data.temperature_2m),
+        pressure: data.surface_pressure,
+        humidity: data.relative_humidity_2m,
+        wind: {
+            speed: data.wind_speed_10m,
+            degree: data.wind_direction_10m,
+        },
+        dewPoint: null,
+        extra_field: {
+            name: _("Feels like"),
+            value: CelsiusToKelvin(data.apparent_temperature),
+            type: "temperature"
+        }
+    };
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/daily.ts
+
+
+
+function OpenMeteoDailyWeatherToData(data, timezone) {
+    const result = [];
+    for (let i = 0; i < data.time.length; i++) {
+        result.push({
+            date: DateTime.fromISO(data.time[i], { zone: timezone }),
+            temp_min: CelsiusToKelvin(data.temperature_2m_min[i]),
+            temp_max: CelsiusToKelvin(data.temperature_2m_max[i]),
+            condition: OpenMeteoWeatherCodeToCondition(data.weather_code[i], true),
+        });
+    }
+    return result;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/hour.ts
+
+
+
+function OpenMeteoHourWeatherToData(data, timezone) {
+    const result = [];
+    for (let i = 0; i < data.time.length; i++) {
+        result.push({
+            date: DateTime.fromISO(data.time[i], { zone: timezone }),
+            condition: OpenMeteoWeatherCodeToCondition(data.weather_code[i], data.is_day[i] === 1),
+            temp: CelsiusToKelvin(data.temperature_2m[i]),
+            precipitation: data.precipitation[i] > 0 ? {
+                chance: data.precipitation_probability[i],
+                volume: data.precipitation[i],
+                type: (data.rain[i] > 0 || data.showers[i] > 0) ? "rain" : data.snowfall[i] > 0 ? "snow" : "none",
+            } : undefined
+        });
+    }
+    return result;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/payload/response.ts
+
+
+
+
+function OpenMeteoResponseToData(payload) {
+    return Object.assign(Object.assign({ date: DateTime.fromISO(payload.current.time, { zone: payload.timezone }), sunrise: DateTime.fromISO(payload.daily.sunrise[0], { zone: payload.timezone }), sunset: DateTime.fromISO(payload.daily.sunset[0], { zone: payload.timezone }), coord: {
+            lat: payload.latitude,
+            lon: payload.longitude,
+        }, location: {
+            timeZone: payload.timezone,
+            tzOffset: payload.utc_offset_seconds,
+        } }, OpenMeteoCurrentWeatherToData(payload.current)), { forecasts: OpenMeteoDailyWeatherToData(payload.daily, payload.timezone), hourlyForecasts: OpenMeteoHourWeatherToData(payload.hourly, payload.timezone) });
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/open-meteo/provider.ts
+
+
+
+
+class OpenMeteo extends BaseProvider {
+    get remainingCalls() {
+        return null;
+    }
+    ;
+    constructor(_app) {
+        super(_app);
+        this.prettyName = _("Open Meteo");
+        this.name = "OpenMeteo";
+        this.maxForecastSupport = 16;
+        this.website = "https://open-meteo.com/";
+        this.maxHourlyForecastSupport = 24;
+        this.needsApiKey = false;
+        this.supportHourlyPrecipChance = true;
+        this.supportHourlyPrecipVolume = true;
+        this.query = "https://api.open-meteo.com/v1/forecast";
+    }
+    async GetWeather(loc, cancellable) {
+        const result = await HttpLib.Instance.LoadJsonSimple({
+            url: this.query,
+            cancellable: cancellable,
+            noEncode: true,
+            params: {
+                latitude: loc.lat,
+                longitude: loc.lon,
+                current: "temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m",
+                hourly: "temperature_2m,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weather_code,wind_speed_10m,wind_direction_10m,is_day",
+                daily: "weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset",
+                timezone: "auto",
+                forecast_days: "16",
+                forecast_hours: "24"
+            }
+        });
+        if (!result)
+            return null;
+        return OpenMeteoResponseToData(result);
+    }
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/forecast_daily.ts
+
+
+function OWMDailyForecastsToData(forecast, timezone = "local") {
+    var _a, _b, _c, _d, _e, _f, _g, _h;
+    const result = [];
+    for (const day of forecast) {
+        const data = {
+            date: DateTime.fromSeconds(day.dt, { zone: timezone }),
+            temp_max: day.temp.max,
+            temp_min: day.temp.min,
+            condition: {
+                main: (_b = (_a = day.weather) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.main,
+                description: (_d = (_c = day.weather) === null || _c === void 0 ? void 0 : _c[0]) === null || _d === void 0 ? void 0 : _d.description,
+                icons: OWMIconToBuiltInIcons((_f = (_e = day.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.icon),
+                customIcon: OWMIconToCustomIcon((_h = (_g = day.weather) === null || _g === void 0 ? void 0 : _g[0]) === null || _h === void 0 ? void 0 : _h.icon)
+            }
+        };
+        result.push(data);
+    }
+    return result;
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/payload/weather.ts
+
+
+
+function OWMWeatherToWeatherData(weather, timezone = "local") {
+    var _a, _b, _c, _d;
+    return {
+        date: DateTime.fromSeconds(weather.dt, { zone: timezone }),
+        sunrise: DateTime.fromSeconds(weather.sys.sunrise, { zone: timezone }),
+        sunset: DateTime.fromSeconds(weather.sys.sunset, { zone: timezone }),
+        coord: weather.coord,
+        location: {
+            city: weather.name,
+            country: weather.sys.country,
+            url: `https://openweathermap.org/city/${weather.id}`
+        },
+        condition: {
+            main: (_a = weather.weather) === null || _a === void 0 ? void 0 : _a[0].main,
+            description: (_b = weather.weather) === null || _b === void 0 ? void 0 : _b[0].description,
+            icons: OWMIconToBuiltInIcons((_c = weather.weather) === null || _c === void 0 ? void 0 : _c[0].icon),
+            customIcon: OWMIconToCustomIcon((_d = weather.weather) === null || _d === void 0 ? void 0 : _d[0].icon)
+        },
+        wind: {
+            speed: weather.wind.speed,
+            degree: weather.wind.deg,
+        },
+        temperature: weather.main.temp,
+        pressure: weather.main.pressure,
+        humidity: weather.main.humidity,
+        dewPoint: null,
+        extra_field: {
+            type: "temperature",
+            name: _("Feels like"),
+            value: weather.main.feels_like
+        }
+    };
+}
+
+;// CONCATENATED MODULE: ./src/3_8/providers/openweathermap/provider-open.ts
+
+
+
+
+
+
+class OpenWeatherMapOpen extends BaseProvider {
+    constructor() {
+        super(...arguments);
+        this.needsApiKey = false;
+        this.prettyName = _("OpenWeatherMap");
+        this.name = "OpenWeatherMap";
+        this.maxForecastSupport = 7;
+        this.maxHourlyForecastSupport = 0;
+        this.website = "https://openweathermap.org/";
+        this.remainingCalls = null;
+        this.supportHourlyPrecipChance = false;
+        this.supportHourlyPrecipVolume = false;
+    }
+    async GetWeather(loc, cancellable, config) {
+        const current = await HttpLib.Instance.LoadJsonSimple({
+            url: "https://api.openweathermap.org/data/2.5/weather",
+            cancellable,
+            params: this.ConstructParams(loc)
+        });
+        const daily = await HttpLib.Instance.LoadJsonSimple({
+            url: "https://api.openweathermap.org/data/2.5/forecast/daily",
+            cancellable,
+            params: this.ConstructParams(loc)
+        });
+        if (!current || !daily) {
+            return null;
+        }
+        return Object.assign(Object.assign({}, OWMWeatherToWeatherData(current, config.Timezone)), { forecasts: OWMDailyForecastsToData(daily.list, config.Timezone) });
+    }
+    ConstructParams(loc) {
+        const params = {
+            lat: loc.lat,
+            lon: loc.lon,
+            appid: "1c73f8259a86c6fd43c7163b543c8640"
+        };
+        const locale = ConvertLocaleToOWMLang(this.app.config.currentLocale);
+        if (this.app.config._translateCondition && IsLangSupported(locale, OWM_SUPPORTED_LANGS)) {
+            params.lang = locale;
+        }
+        return params;
+    }
+    ;
+}
+
 ;// CONCATENATED MODULE: ./src/3_8/config.ts
+
+
 
 
 
@@ -15777,7 +16801,8 @@ const { IconType: config_IconType } = imports.gi.St;
 const { get_language_names, TimeZone } = imports.gi.GLib;
 const { Settings: config_Settings } = imports.gi.Gio;
 const ServiceClassMapping = {
-    "OpenWeatherMap": (app) => new OpenWeatherMap(app),
+    "OpenWeatherMap": (app) => new OpenWeatherMapOpen(app),
+    "OpenWeatherMap_OneCall": (app) => new OpenWeatherMapOneCall(app),
     "MetNorway": (app) => new MetNorway(app),
     "Weatherbit": (app) => new Weatherbit(app),
     "Tomorrow.io": (app) => new ClimacellV4(app),
@@ -15788,7 +16813,8 @@ const ServiceClassMapping = {
     "AccuWeather": (app) => new AccuWeather(app),
     "DeutscherWetterdienst": (app) => new DeutscherWetterdienst(app),
     "WeatherUnderground": (app) => new WeatherUnderground(app),
-    "PirateWeather": (app) => new PirateWeather(app)
+    "PirateWeather": (app) => new PirateWeather(app),
+    "OpenMeteo": (app) => new OpenMeteo(app),
 };
 class Config {
     get UserTimezone() {
@@ -15841,6 +16867,7 @@ class Config {
         this.DisplayWindAsTextChanged = new Event();
         this.AlwaysShowHourlyWeatherChanged = new Event();
         this.TooltipTextOverrideChanged = new Event();
+        this.ShowAlertsChanged = new Event();
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.textColorStyle = null;
@@ -16257,7 +17284,11 @@ const Keys = {
     TOOLTIP_TEXT_OVERRIDE: {
         key: "tooltipTextOverride",
         prop: "TooltipTextOverride"
-    }
+    },
+    SHOW_ALERTS: {
+        key: "showAlerts",
+        prop: "ShowAlerts"
+    },
 };
 
 ;// CONCATENATED MODULE: ./src/3_8/loop.ts
@@ -16456,7 +17487,7 @@ class WeatherLoop {
 
 ;// CONCATENATED MODULE: ./src/3_8/lib/commandRunner.ts
 
-const { spawnCommandLineAsyncIO } = imports.misc.util;
+const { spawnCommandLineAsyncIO, spawnCommandLineAsync } = imports.misc.util;
 async function SpawnProcessJson(command) {
     const response = await SpawnProcess(command);
     if (!response.Success)
@@ -16484,24 +17515,48 @@ async function SpawnProcess(command) {
         cmd += "'" + element.replace(/'/g, "'\"'\"'") + "' ";
     }
     logger_Logger.Debug("Spawning command: " + cmd);
-    const response = await new Promise((resolve, reject) => {
-        spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
-            let result = {
-                Success: exitCode == 0,
-                ErrorData: undefined,
-                Data: aStdout !== null && aStdout !== void 0 ? aStdout : null
-            };
-            if (exitCode != 0) {
-                result.ErrorData = {
-                    Code: exitCode,
-                    Message: err !== null && err !== void 0 ? err : null,
-                    Type: "unknown"
-                };
-            }
-            resolve(result);
-            return result;
+    let response;
+    if (spawnCommandLineAsyncIO === undefined) {
+        response = await new Promise((resolve, reject) => {
+            spawnCommandLineAsync(cmd, () => {
+                resolve({
+                    Success: true,
+                    ErrorData: undefined,
+                    Data: ""
+                });
+            }, () => {
+                resolve({
+                    Success: false,
+                    ErrorData: {
+                        Code: -1,
+                        Message: "Command failed",
+                        Type: "unknown"
+                    },
+                    Data: ""
+                });
+            });
         });
-    });
+    }
+    else {
+        response = await new Promise((resolve, reject) => {
+            spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
+                let result = {
+                    Success: exitCode == 0,
+                    ErrorData: undefined,
+                    Data: aStdout !== null && aStdout !== void 0 ? aStdout : null
+                };
+                if (exitCode != 0) {
+                    result.ErrorData = {
+                        Code: exitCode,
+                        Message: err !== null && err !== void 0 ? err : null,
+                        Type: "unknown"
+                    };
+                }
+                resolve(result);
+                return result;
+            });
+        });
+    }
     return response;
 }
 function OpenUrl(element) {
@@ -17540,12 +18595,14 @@ class UIHourlyForecasts {
         return precipitationText;
     }
     GeneratePrecipitationChance(precip, config) {
+        var _a;
         if (!precip)
             return "";
         let precipitationText = "";
-        if (!!precip.chance) {
+        const chance = (Math.round(((_a = precip.chance) !== null && _a !== void 0 ? _a : 0) / 10) * 10);
+        if (chance) {
             precipitationText = (NotEmpty(precipitationText)) ? (precipitationText + ", ") : "";
-            precipitationText += ((Math.round(precip.chance / 10) * 10).toString() + "%");
+            precipitationText += (chance.toString() + "%");
         }
         return precipitationText;
     }
@@ -17585,7 +18642,8 @@ class UIHourlyForecasts {
 
 
 
-const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Label: uiBar_Label, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button, Side: uiBar_Side } = imports.gi.St;
+
+const { BoxLayout: uiBar_BoxLayout, IconType: uiBar_IconType, Bin: uiBar_Bin, Icon: uiBar_Icon, Align: uiBar_Align, Button: uiBar_Button, Side: uiBar_Side } = imports.gi.St;
 const { Tooltip } = imports.ui.tooltips;
 const STYLE_BAR = 'bottombar';
 class UIBar {
@@ -17598,6 +18656,15 @@ class UIBar {
         this.hourlyButton = null;
         this._timestamp = null;
         this.timestampTooltip = null;
+        this.warningButtonIcon = null;
+        this.warningButton = null;
+        this.warningButtonTooltip = null;
+        this.WarningClicked = async () => {
+            var _a;
+            if (((_a = this.app.CurrentData) === null || _a === void 0 ? void 0 : _a.alerts) == null)
+                return;
+            await this.PushAlertWindow(this.app.CurrentData.alerts.map(alert => (Object.assign(Object.assign({}, alert), { color: GetAlertColor(alert.level, this.app.ui.LightTheme) }))));
+        };
         this.app = app;
         this.actor = new uiBar_BoxLayout({ vertical: false, style_class: STYLE_BAR });
     }
@@ -17619,7 +18686,7 @@ class UIBar {
         this._timestamp.label = msg;
     }
     Display(weather, provider, config, shouldShowToggle) {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
         if (this._timestamp == null || this.providerCreditButton == null || ((_c = (_a = this.providerCreditButton) === null || _a === void 0 ? void 0 : (_b = _a.actor).is_finalized) === null || _c === void 0 ? void 0 : _c.call(_b)))
             return false;
         let creditLabel = `${_("Powered by")} ${provider.prettyName}`;
@@ -17649,6 +18716,16 @@ class UIBar {
             this.HideHourlyToggle();
         else
             this.ShowHourlyToggle();
+        const levelOrder = ["unknown", "minor", "moderate", "severe", "extreme"];
+        if (config._showAlerts && weather.alerts && weather.alerts.length > 0) {
+            const highestLevel = weather.alerts.reduce((prev, current) => (levelOrder.indexOf(prev.level) > levelOrder.indexOf(current.level)) ? prev : current);
+            (_h = this.warningButtonTooltip) === null || _h === void 0 ? void 0 : _h.set_text(_("{count} weather alert(s)", { count: weather.alerts.length }));
+            (_j = this.warningButtonIcon) === null || _j === void 0 ? void 0 : _j.set_style("color: " + GetAlertColor(highestLevel.level, this.app.ui.LightTheme));
+            (_k = this.warningButton) === null || _k === void 0 ? void 0 : _k.actor.show();
+        }
+        else {
+            (_l = this.warningButton) === null || _l === void 0 ? void 0 : _l.actor.hide();
+        }
         return true;
     }
     Destroy() {
@@ -17658,9 +18735,26 @@ class UIBar {
     }
     Rebuild(config) {
         this.Destroy();
+        const leftBox = new uiBar_BoxLayout({ vertical: false, y_align: uiBar_Align.MIDDLE });
+        this.warningButtonIcon = new uiBar_Icon({
+            icon_type: uiBar_IconType.SYMBOLIC,
+            icon_size: config.CurrentFontSize + 3,
+            icon_name: "dialog-warning-symbolic",
+        });
+        this.warningButton = new WeatherButton({
+            reactive: true,
+            can_focus: true,
+            child: this.warningButtonIcon
+        });
+        this.warningButtonTooltip = new Tooltip(this.warningButton.actor, "");
+        this.warningButton.actor.hide();
+        this.warningButton.actor.connect(SIGNAL_CLICKED, this.WarningClicked);
+        leftBox.add_actor(this.warningButton.actor);
+        leftBox.add_actor(new uiBar_Bin({ width: 5 }));
         this._timestamp = new uiBar_Button({ label: "Placeholder" });
+        leftBox.add_actor(this._timestamp);
         this.timestampTooltip = new Tooltip(this._timestamp, "");
-        this.actor.add(this._timestamp, {
+        this.actor.add(leftBox, {
             x_fill: false,
             x_align: uiBar_Align.START,
             y_align: uiBar_Align.MIDDLE,
@@ -17711,6 +18805,16 @@ class UIBar {
         var _a;
         (_a = this.hourlyButton) === null || _a === void 0 ? void 0 : _a.actor.show();
     }
+    async PushAlertWindow(alerts) {
+        const alertWindowPath = this.app.AppletDir + "/AlertsWindow.py";
+        logger_Logger.Info("Alerts Window opened.");
+        const result = await SpawnProcess([alertWindowPath, JSON.stringify(alerts)]);
+        logger_Logger.Info("Alerts Window closed.");
+        if (!result.Success)
+            logger_Logger.Error(`Error occurred while opening Alerts Window: ${JSON.stringify(result.ErrorData)}`);
+        else
+            logger_Logger.Debug(`Alerts Window output: ${JSON.stringify(result.Data)}`);
+    }
 }
 
 ;// CONCATENATED MODULE: ./src/3_8/ui_elements/uiSeparator.ts
@@ -17747,6 +18851,9 @@ const { themeManager } = imports.ui.main;
 const { SignalManager: ui_SignalManager } = imports.misc.signalManager;
 const STYLE_WEATHER_MENU = 'weather-menu';
 class UI {
+    get LightTheme() {
+        return this.lightTheme;
+    }
     constructor(app, orientation) {
         this.lightTheme = false;
         this.noHourlyWeather = false;
@@ -17931,8 +19038,7 @@ class UI {
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType: main_IconType, Side: main_Side } = imports.gi.St;
-const { File: main_File, NetworkMonitor: main_NetworkMonitor, NetworkConnectivity: main_NetworkConnectivity } = imports.gi.Gio;
-const { TimeZone: main_TimeZone } = imports.gi.GLib;
+const { File: main_File } = imports.gi.Gio;
 class WeatherApplet extends TextIconApplet {
     get CurrentData() {
         return this.currentWeatherInfo;
@@ -18071,6 +19177,7 @@ class WeatherApplet extends TextIconApplet {
         this.config.ShowBothTempUnitsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.Show24HoursChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.DistanceUnitChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
+        this.config.ShowAlertsChanged.Subscribe(this.AfterRefresh(this.OnSettingNeedRedisplay));
         this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
     }
     async Refresh(options) {
@@ -18092,7 +19199,7 @@ class WeatherApplet extends TextIconApplet {
             if (this.provider.needsApiKey && this.config.NoApiKey()) {
                 return "no key";
             }
-            let weatherInfo = await this.provider.GetWeather(location, cancellable);
+            let weatherInfo = await this.provider.GetWeather(location, cancellable, this.config);
             if (weatherInfo == null) {
                 return "no weather";
             }

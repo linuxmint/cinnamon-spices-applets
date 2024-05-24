@@ -7,12 +7,14 @@
 //////////////////////////////////////////////////////////////
 
 import { DateTime } from "luxon";
-import { ErrorResponse, HttpError, HttpLib } from "../lib/httpLib";
-import { Logger } from "../lib/logger";
-import { WeatherApplet } from "../main";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, LocationData } from "../types";
-import { _, IsLangSupported } from "../utils";
-import { BaseProvider } from "./BaseProvider";
+import { ErrorResponse, HttpError, HttpLib } from "../../lib/httpLib";
+import { Logger } from "../../lib/logger";
+import { WeatherApplet } from "../../main";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, BuiltinIcons, CustomIcons, LocationData, AlertData, AlertLevel } from "../../types";
+import { _, IsLangSupported } from "../../utils";
+import { BaseProvider } from "../BaseProvider";
+import { Config } from "../../config";
+import { WeatherbitAlertsResponse } from "./alerts";
 
 export class Weatherbit extends BaseProvider {
 
@@ -41,6 +43,7 @@ export class Weatherbit extends BaseProvider {
 	private current_url = "https://api.weatherbit.io/v2.0/current?";
 	private daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
 	private hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
+	private alerts_url = "https://api.weatherbit.io/v2.0/alerts?";
 
 	private hourlyAccess = true;
 
@@ -51,7 +54,7 @@ export class Weatherbit extends BaseProvider {
 	//--------------------------------------------------------
 	//  Functions
 	//--------------------------------------------------------
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
 		const forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast, cancellable) as Promise<ForecastData[]>;
 		let hourlyPromise = null;
 		if (!!this.hourlyAccess) hourlyPromise = this.GetHourlyData(this.hourly_url, loc, cancellable);
@@ -62,6 +65,14 @@ export class Weatherbit extends BaseProvider {
 		currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
 		const hourlyResult = await hourlyPromise;
 		currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
+
+		if (config._showAlerts) {
+			const alertResult = await this.GetData(this.alerts_url, loc, this.ParseAlerts, cancellable);
+			if (alertResult == null)
+				return null;
+
+			currentResult.alerts = alertResult;
+		}
 		return currentResult;
 	};
 
@@ -72,7 +83,7 @@ export class Weatherbit extends BaseProvider {
 	 * @param baseUrl
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData(baseUrl: string, loc: LocationData, ParseFunction: (json: any) => WeatherData | ForecastData[] | HourlyForecastData[] | null, cancellable: imports.gi.Gio.Cancellable) {
+	private async GetData<T>(baseUrl: string, loc: LocationData, ParseFunction: (json: any) => T, cancellable: imports.gi.Gio.Cancellable) {
 		const query = this.ConstructQuery(baseUrl, loc);
 		if (query == null)
 			return null;
@@ -109,6 +120,35 @@ export class Weatherbit extends BaseProvider {
 
 		return this.ParseHourlyForecast(json);
 	};
+
+	private ParseAlerts = (json: WeatherbitAlertsResponse): AlertData[] | null => {
+		const alerts: AlertData[] = [];
+		for (const alert of json.alerts) {
+			let level: AlertLevel;
+			switch (alert.severity) {
+				case "Advisory":
+					level = "minor";
+					break;
+				case "Watch":
+					level = "moderate";
+					break;
+				case "Warning":
+					level = "severe";
+					break;
+				default:
+					level = "unknown";
+					break;
+			}
+			const alertData: AlertData = {
+				title: alert.title,
+				description: alert.description,
+				level,
+				sender_name: alert.uri,
+			};
+			alerts.push(alertData);
+		}
+		return alerts;
+	}
 
 	private ParseCurrent = (json: any): WeatherData | null => {
 		json = json.data[0];

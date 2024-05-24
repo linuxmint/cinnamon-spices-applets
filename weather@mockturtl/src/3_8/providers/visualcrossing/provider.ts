@@ -1,10 +1,11 @@
 import { DateTime } from "luxon";
-import { Services } from "../config";
-import { ErrorResponse, HttpError, HttpLib, HTTPParams } from "../lib/httpLib";
-import { WeatherApplet } from "../main";
-import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../types";
-import { CelsiusToKelvin, IsLangSupported, _ } from "../utils";
-import { BaseProvider } from "./BaseProvider";
+import { Services } from "../../config";
+import { ErrorResponse, HttpError, HttpLib, HTTPParams } from "../../lib/httpLib";
+import { WeatherApplet } from "../../main";
+import { AlertData, Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "../../types";
+import { CelsiusToKelvin, IsLangSupported, _ } from "../../utils";
+import { BaseProvider } from "../BaseProvider";
+import { VisualCrossingAlert } from "./alerts";
 
 
 export class VisualCrossing extends BaseProvider {
@@ -22,7 +23,7 @@ export class VisualCrossing extends BaseProvider {
 	private params: HTTPParams = {
 		unitGroup: "metric",
 		key: null,
-		include: "fcst,hours,current",
+		include: "fcst,hours,current,alerts",
 		/** Raw descriptor ID */
 		lang: "id"
 	}
@@ -87,6 +88,19 @@ export class VisualCrossing extends BaseProvider {
 			},
 			forecasts: this.ParseForecasts(weather.days, translate, weather.timezone),
 			hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate, weather.timezone)
+		}
+
+		if (weather.alerts) {
+			const alerts: AlertData[] = [];
+			for (const alert of weather.alerts) {
+				alerts.push({
+					title: alert.headline,
+					description: alert.description,
+					level: "unknown",
+					sender_name: alert.link
+				});
+			}
+			result.alerts = alerts;
 		}
 
 		return result;
@@ -343,7 +357,7 @@ interface VisualCrossingPayload {
 	timezone: string;
 	tzoffset: number;
 	days?: DayForecast[];
-	alerts?: any;
+	alerts?: VisualCrossingAlert[];
 	currentConditions: CurrentObservation;
 	stations: {
 		[key: string]: Station

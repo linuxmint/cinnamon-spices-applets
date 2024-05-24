@@ -1,6 +1,9 @@
 import { DateTime } from "luxon";
 import { GetTimesResult } from "suncalc";
-import { Services } from "./config";
+import { Config, Services } from "./config";
+
+export type Tuple<T, N extends number> = N extends N ? number extends N ? T[] : _TupleOf<T, N, []> : never;
+type _TupleOf<T, N extends number, R extends unknown[]> = R['length'] extends N ? R : _TupleOf<T, N, [T, ...R]>;
 
 export type correctGetTimes = (date: Date, latitude: number, longitude: number, height?: number) => GetTimesResult;
 export interface SunTime {
@@ -22,7 +25,7 @@ export interface WeatherProvider {
 	readonly supportHourlyPrecipChance: boolean;
     readonly supportHourlyPrecipVolume: boolean;
 
-	GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null>;
+	GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null>;
 }
 
 export const enum RefreshState {
@@ -84,6 +87,7 @@ export interface WeatherData {
 	hourlyForecasts?: HourlyForecastData[] | undefined
 	extra_field?: APIUniqueField | undefined;
 	immediatePrecipitation?: ImmediatePrecipitation;
+	alerts?: AlertData[] | undefined;
 }
 
 
@@ -122,6 +126,19 @@ export interface ForecastData {
 	/** Kelvin */
 	temp_max: number | null,
 	condition: Condition
+}
+
+export type AlertLevel = "minor" | "moderate" | "severe" | "extreme" | "unknown";
+
+export interface AlertData {
+	sender_name: string;
+	/**
+	 * Try to infer the level from the event string.
+	 */
+	level: AlertLevel;
+	icon?: BuiltinIcons | CustomIcons | undefined;
+	title: string;
+	description: string;
 }
 
 export type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";

@@ -1,11 +1,12 @@
 import { ErrorResponse, HttpError, HttpLib } from "../../lib/httpLib";
 import { Logger } from "../../lib/logger";
 import { WeatherApplet } from "../../main";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime, ImmediatePrecipitation } from "../../types";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, BuiltinIcons, CustomIcons, LocationData, SunTime, ImmediatePrecipitation, AlertData, AlertLevel } from "../../types";
 import { _, IsLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "../../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
 import { PirateWeatherIcon, PirateWeatherPayload, PirateWeatherQueryUnits } from "./types/common";
+import { ALERT_LEVEL_ORDER } from "../../consts";
 
 export class PirateWeather extends BaseProvider {
 
@@ -158,6 +159,20 @@ export class PirateWeather extends BaseProvider {
 				result.immediatePrecipitation = immediate;
 			}
 
+			if (json.alerts != null) {
+				const alerts: AlertData[] = [];
+				for (const alert of json.alerts) {
+					alerts.push({
+						title: alert.title,
+						description: alert.description,
+						level: this.PirateWeatherAlertSeverityToAlertLevel(alert.severity),
+						sender_name: alert.uri,
+					});
+				};
+
+				result.alerts = alerts.sort((a, b) => ALERT_LEVEL_ORDER.indexOf(a.level) - ALERT_LEVEL_ORDER.indexOf(b.level));
+			}
+
 			return result;
 		}
 		catch (e) {
@@ -167,6 +182,21 @@ export class PirateWeather extends BaseProvider {
 			return null;
 		}
 	};
+
+	private PirateWeatherAlertSeverityToAlertLevel(severity: 'Extreme' | 'Severe' | 'Moderate' | 'Minor' | "Unknown"): AlertLevel {
+		switch (severity) {
+			case "Extreme":
+				return "extreme";
+			case "Severe":
+				return "severe";
+			case "Moderate":
+				return "moderate";
+			case "Minor":
+				return "minor";
+			default:
+				return "unknown";
+		}
+	}
 
 	/**
 	 *

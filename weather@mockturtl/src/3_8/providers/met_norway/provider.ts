@@ -1,6 +1,6 @@
 import { Logger } from "../../lib/logger";
 import { getTimes } from "suncalc";
-import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime, ImmediatePrecipitation } from "../../types";
+import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData, correctGetTimes, SunTime, ImmediatePrecipitation, AlertLevel } from "../../types";
 import { CelsiusToKelvin, IsNight, OnSameDay, _ } from "../../utils";
 import { DateTime } from "luxon";
 import { BaseProvider } from "../BaseProvider";
@@ -8,6 +8,8 @@ import { Conditions, conditionSeverity, TimeOfDay } from "./types/common";
 import { IsCovered, MetNorwayNowcastPayload } from "./types/nowcast";
 import { MetNorwayForecastData, MetNorwayForecastPayload } from "./types/forecast";
 import { HttpLib } from "../../lib/httpLib";
+import { Config } from "../../config";
+import { GetMETNorwayAlerts } from "./alert";
 
 export class MetNorway extends BaseProvider {
 	public readonly prettyName = _("MET Norway");
@@ -22,7 +24,7 @@ export class MetNorway extends BaseProvider {
 
 	private baseUrl = "https://api.met.no/weatherapi";
 
-	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherData | null> {
+	public async GetWeather(loc: LocationData, cancellable: imports.gi.Gio.Cancellable, config: Config): Promise<WeatherData | null> {
 		const [forecast, nowcast] = await Promise.all([
 			HttpLib.Instance.LoadJsonSimple<MetNorwayForecastPayload>({
 				url: `${this.baseUrl}/locationforecast/2.0/complete`,
@@ -79,6 +81,16 @@ export class MetNorway extends BaseProvider {
 					result.immediatePrecipitation = immediate;
 				}
 			}
+		}
+
+
+		if (config._showAlerts) {
+			const alerts = await GetMETNorwayAlerts(cancellable, loc.lat, loc.lon);
+			if (alerts == null) {
+				return null;
+			}
+
+			result.alerts = alerts;
 		}
 
 		return result;

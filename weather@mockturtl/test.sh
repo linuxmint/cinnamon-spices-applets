@@ -13,6 +13,6 @@ path=${PWD}
 cd $DIR
 cp -arf files/weather@mockturtl/* ~/.local/share/cinnamon/applets/weather@mockturtl/
 cd ..
-./cinnamon-spices-makepot weather@mockturtl
+# ./cinnamon-spices-makepot weather@mockturtl
 cd $PWD
 export DISPLAY=:0; cinnamon --replace &

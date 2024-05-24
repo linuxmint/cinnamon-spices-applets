@@ -1,7 +1,7 @@
 import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
 import { Logger } from "./lib/logger";
-import { APIUniqueField, ArrowIcons, BuiltinIcons, SunTime, WeatherData } from "./types";
+import { APIUniqueField, AlertData, AlertLevel, ArrowIcons, BuiltinIcons, CustomIcons, SunTime, WeatherData } from "./types";
 import { DateTime } from "luxon";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
@@ -606,6 +606,33 @@ export function ConstructJsLocale(locales: string[]): string | null {
 	}
 
 	return null;
+}
+
+const lightAlertColors: Record<AlertLevel, string> = {
+	// Darker shade of darkAlertColors
+	"minor": "#7FCC00",
+	"moderate": "#FFC400",
+	"severe": "#FF6A00",
+	"extreme": "#FF0000",
+	"unknown": "#000000"
+
+}
+
+const darkAlertColors: Record<AlertLevel, string> = {
+	"minor": "#AAFF00",
+	"moderate": "#FFD700",
+	"severe": "#FFA500",
+	"extreme": "#FF0000",
+	"unknown": "#FFFFFF"
+}
+
+/**
+ * Returns hex string
+ * @param level
+ * @param lightTheme
+ */
+export function GetAlertColor(level: AlertLevel, lightTheme: boolean): string {
+	return lightTheme ? lightAlertColors[level] : darkAlertColors[level];
 }
 
 /**
