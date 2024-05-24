@@ -1,7 +1,7 @@
 import { Logger } from "./logger";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 
-const { spawnCommandLineAsyncIO } = imports.misc.util;
+const { spawnCommandLineAsyncIO, spawnCommandLineAsync } = imports.misc.util;
 
 /**
  * Doesn't do JSON typechecking, you have to do that manually
@@ -41,25 +41,52 @@ export async function SpawnProcess(command: string[]): Promise<GenericResponse> 
 
 	Logger.Debug("Spawning command: " + cmd);
 
-	const response = await new Promise((resolve, reject) => {
-		spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {
-			let result: GenericResponse = {
-				Success: exitCode == 0,
-				ErrorData: undefined,
-				Data: aStdout ?? null
-			}
-
-			if (exitCode != 0) {
-				result.ErrorData = {
-					Code: exitCode,
-					Message: err ?? null,
-					Type: "unknown"
+	let response;
+	if (spawnCommandLineAsyncIO === undefined) {
+		response = await new Promise((resolve, reject) => {
+			spawnCommandLineAsync(cmd,
+				() => {
+					resolve({
+						Success: true,
+						ErrorData: undefined,
+						Data: ""
+					});
+				},
+				() => {
+					resolve({
+						Success: false,
+						ErrorData: {
+							Code: -1,
+							Message: "Command failed",
+							Type: "unknown"
+						},
+						Data: ""
+					});
 				}
-			}
-			resolve(result);
-			return result;
+			)
 		});
-	});
+	}
+	else {
+		response = await new Promise((resolve, reject) => {
+			spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {
+				let result: GenericResponse = {
+					Success: exitCode == 0,
+					ErrorData: undefined,
+					Data: aStdout ?? null
+				}
+
+				if (exitCode != 0) {
+					result.ErrorData = {
+						Code: exitCode,
+						Message: err ?? null,
+						Type: "unknown"
+					}
+				}
+				resolve(result);
+				return result;
+			},);
+		});
+
 	return response as GenericResponse;
 }
 
