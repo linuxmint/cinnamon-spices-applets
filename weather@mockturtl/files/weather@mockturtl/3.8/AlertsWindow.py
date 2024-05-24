@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-from typing_extensions import ParamSpec, TypeVar
-from typing import Optional, cast, Callable, List, TypedDict, Literal
 import os
 import argparse
 from pathlib import Path
@@ -10,15 +8,10 @@ import json
 from gi import require_version
 require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, cairo, Gdk, Pango
+from typing import TYPE_CHECKING, Optional, cast, Callable, List, Any
 
-class Alert(TypedDict):
-	sender_name: str
-	title: str
-	description: str
-	level: Literal["minor", "moderate", "severe", "extreme", "unknown"]
-	color: str
-	icon: Optional[str]
 
+#region Utility types
 
 APPLET_DIR = Path(os.path.abspath(__file__)).parent.parent
 print(f"Running from {APPLET_DIR}")
@@ -32,17 +25,66 @@ _ = cast(Callable[[str], str], _)# type: ignore[reportUndefinedVariable]
 Gtk.IconTheme.get_default().append_search_path(str(APPLET_DIR.joinpath("icons")))
 Gtk.IconTheme.get_default().append_search_path(str(APPLET_DIR.joinpath("arrow-icons")))
 
-#region Utility types
+# Support Older versions of
+if TYPE_CHECKING:
+	from typing_extensions import ParamSpec, TypeVar, Literal
+	from typing import TypedDict
+else:
+	# Fake ParamSpec
+	class ParamSpec:
+		def __init__(self, _):
+			self.args = None
+			self.kwargs = None
+
+	class TypeVar:
+		def __init__(self, _):
+			self.args = None
+			self.kwargs = None
+
+	# Base class to be used instead Generic
+	class Empty:
+		pass
+	# Thing what returns Empty when called like Generic[P]
+	class _Generic:
+		def __getitem__(self, _):
+			return Empty
+	# Callable[anything] will return None
+	class _Callable:
+		def __getitem__(self, _):
+			return None
+	# Make instances
+	Callable = _Callable()
+	Generic = _Generic()
+
+	class _Literal:
+		def __getitem__(self, _):
+			return None
+
+	Literal = _Literal()
+
+	class TypedDict:
+		def __getitem__(self, _):
+			return None
+
+
 _P = ParamSpec("_P")
 _T = TypeVar("_T")
 
 def inherit_signature_from(
-    _to: Callable[_P, _T]
+	_to: Callable[_P, _T]
 ) -> Callable[[Callable[..., _T]], Callable[_P, _T]]:
-    """Set the signature checked by pyright/vscode to the signature of another function."""
-    return lambda x: x  # type: ignore[reportReturnType]
+	"""Set the signature checked by pyright/vscode to the signature of another function."""
+	return lambda x: x  # type: ignore[reportReturnType]
 
 LabelParamSpec = ParamSpec('LabelParamSpec')
+
+class Alert(TypedDict):
+	sender_name: str
+	title: str
+	description: str
+	level: Literal["minor", "moderate", "severe", "extreme", "unknown"]
+	color: str
+	icon: Optional[str]
 
 #endregion
 
@@ -58,7 +100,7 @@ class NotStupidLabel(Gtk.Label):
 		xalign: int = kwargs.pop("xalign", 0)
 		yalign: int = kwargs.pop("yalign", 0)
 		super().__init__(
-      		*args,
+	  		*args,
 			wrap=wrap,
 			wrap_mode=wrap_mode,
 			justify=justify,
@@ -66,7 +108,7 @@ class NotStupidLabel(Gtk.Label):
 			valign=valign,
 			xalign=xalign,
 			yalign=yalign,
-        	**kwargs
+			**kwargs
 		)
 
 class AlertsWindow(Gtk.Window):
@@ -97,10 +139,10 @@ class AlertsWindow(Gtk.Window):
 
 	def create_alert_box(self, alert: Alert) -> Gtk.Box:
 		columns = Gtk.Box(
-      		orientation=Gtk.Orientation.HORIZONTAL,
-        	spacing=15,
-         	valign=Gtk.Align.START,
-          	halign=Gtk.Align.START,
+	  		orientation=Gtk.Orientation.HORIZONTAL,
+			spacing=15,
+		 	valign=Gtk.Align.START,
+		  	halign=Gtk.Align.START,
 		)
 		columns.add(self.create_alert_icon(alert))
 		columns.add(self.create_alert_text(alert))
@@ -108,20 +150,20 @@ class AlertsWindow(Gtk.Window):
 
 	def create_alert_text(self, alert: Alert) -> Gtk.Box:
 		box = Gtk.Box(
-      		orientation=Gtk.Orientation.VERTICAL,
+	  		orientation=Gtk.Orientation.VERTICAL,
 			spacing=6,
 			expand=True,
 			halign=Gtk.Align.START,
 			valign=Gtk.Align.START
 		)
 		description = NotStupidLabel(
-      		label=self.sanitize_text(alert['description']),
+	  		label=self.sanitize_text(alert['description']),
 		)
 		description.set_size_request(400, -1)
 
 		title = NotStupidLabel(
-      		label=f"{alert['title']}",
-      	)
+	  		label=f"{alert['title']}",
+	  	)
 		bigger_font = Pango.FontDescription.new()
 		bigger_font.set_size(15000)
 		bigger_font.set_weight(Pango.Weight.BOLD)
@@ -130,8 +172,8 @@ class AlertsWindow(Gtk.Window):
 		box.add(title)
 		box.add(description)
 		box.add(NotStupidLabel(
-      		label=f"{alert['sender_name']}",
-        ))
+	  		label=f"{alert['sender_name']}",
+		))
 		return box
 
 	def create_alert_icon(self, alert: Alert) -> Gtk.Image:
@@ -168,4 +210,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+	main()
