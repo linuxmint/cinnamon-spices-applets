@@ -10138,12 +10138,14 @@ class Soup2 {
                 if (cancellable == null) {
                     timeout = utils_setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
                 }
+                logger_Logger.Debug("Sending http request to " + query);
                 this._httpSession.send_async(message, cancellable, async (session, result) => {
                     if (timeout != null)
                         clearTimeout(timeout);
                     const headers = {};
                     let res = null;
                     try {
+                        logger_Logger.Debug("Reading reply from " + query);
                         const stream = this._httpSession.send_finish(result);
                         logger_Logger.Debug("Reply received from " + query + " with status code " + message.status_code + " and reason: " + message.reason_phrase);
                         res = await this.read_all_bytes(stream, finalCancellable);

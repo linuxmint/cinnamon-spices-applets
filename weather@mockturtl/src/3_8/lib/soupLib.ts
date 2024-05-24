@@ -185,6 +185,7 @@ class Soup2 implements SoupLib {
 					timeout = setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
 				}
 
+				Logger.Debug("Sending http request to " + query);
 				this._httpSession.send_async(message, cancellable, async (session: any, result: imports.gi.Gio.AsyncResult) => {
 					if (timeout != null)
 						clearTimeout(timeout);
@@ -192,6 +193,7 @@ class Soup2 implements SoupLib {
 					const headers: Record<string, string> = {};
 					let res: string | null = null;
 					try {
+						Logger.Debug("Reading reply from " + query);
 						const stream: imports.gi.Gio.InputStream = this._httpSession.send_finish(result);
 						Logger.Debug("Reply received from " + query + " with status code " + message.status_code + " and reason: " + message.reason_phrase);
 						res = await this.read_all_bytes(stream, finalCancellable);
