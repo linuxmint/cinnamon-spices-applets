@@ -10145,6 +10145,7 @@ class Soup2 {
                     let res = null;
                     try {
                         const stream = this._httpSession.send_finish(result);
+                        logger_Logger.Debug("Reply received from " + query + " with status code " + message.status_code + " and reason: " + message.reason_phrase);
                         res = await this.read_all_bytes(stream, finalCancellable);
                         message.response_headers.foreach((name, value) => {
                             headers[name] = value;
@@ -10159,6 +10160,7 @@ class Soup2 {
                         response_body: res,
                         response_headers: headers
                     });
+                    return;
                 });
             }
         });
@@ -10167,10 +10169,13 @@ class Soup2 {
     async read_all_bytes(stream, cancellable) {
         if (cancellable.is_cancelled())
             return null;
+        logger_Logger.Debug("Reading all bytes from http request stream.");
         const read_chunk_async = () => {
+            logger_Logger.Verbose("Reading chunk from http request stream.");
             return new Promise((resolve) => {
                 stream.read_bytes_async(8192, 0, cancellable, (source, read_result) => {
                     try {
+                        logger_Logger.Verbose("Reading chunk from http request stream finished.");
                         resolve(stream.read_bytes_finish(read_result));
                     }
                     catch (e) {
@@ -10182,7 +10187,9 @@ class Soup2 {
         };
         let res = null;
         let chunk;
+        logger_Logger.Verbose("Reading First chunk from http request stream.");
         chunk = await read_chunk_async();
+        logger_Logger.Verbose("Reading First chunk from http request stream finished.");
         while (chunk.get_size() > 0) {
             if (cancellable.is_cancelled())
                 return res;
@@ -10193,8 +10200,11 @@ class Soup2 {
             else {
                 res += chunkAsString;
             }
+            logger_Logger.Verbose("Reading Next chunk from http request stream.");
             chunk = await read_chunk_async();
+            logger_Logger.Verbose("Reading Next chunk from http request stream finished.");
         }
+        logger_Logger.Verbose("Reading all bytes from http request stream finished.");
         return res;
     }
 }
