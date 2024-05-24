@@ -25,7 +25,7 @@ _ = cast(Callable[[str], str], _)# type: ignore[reportUndefinedVariable]
 Gtk.IconTheme.get_default().append_search_path(str(APPLET_DIR.joinpath("icons")))
 Gtk.IconTheme.get_default().append_search_path(str(APPLET_DIR.joinpath("arrow-icons")))
 
-# Support Older versions of
+# Support Older versions of python up until 3.6
 if TYPE_CHECKING:
 	from typing_extensions import ParamSpec, TypeVar, Literal
 	from typing import TypedDict
