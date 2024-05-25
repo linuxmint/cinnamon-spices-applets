@@ -10,6 +10,8 @@
     }
   ],
   "settings": {
+    "eslint.nodePath": "${workspaceFolder:weather}/node_modules",
+    "eslint.lintTask.enable": true,
     "cSpell.ignoreWords": [
       "Adapta",
       "CONV",
@@ -128,7 +130,9 @@
     "cSpell.words": [
       "deallocated"
     ],
-    "typescript.tsdk": "weather/node_modules/typescript/lib"
+    "typescript.tsdk": "${workspaceFolder:weather}/node_modules/typescript/lib",
+    "eslint.experimental.useFlatConfig": true,
+    "eslint.execArgv": ["${workspaceFolder:weather}/src/3_8", "--config", "${workspaceFolder:weather}/eslint.config.mjs"],
   },
   "tasks": {
     "version": "2.0.0",

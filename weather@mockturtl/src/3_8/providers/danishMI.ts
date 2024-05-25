@@ -177,6 +177,9 @@ export class DanishMI extends BaseProvider {
 			return false;
 		});
 
+		if (relevantHours.length == 0)
+			return this.ResolveCondition(undefined);
+
 		// convert night symbols to day symbols for daily
 		const normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
 
@@ -186,7 +189,7 @@ export class DanishMI extends BaseProvider {
 		if (normalizedSymbols.find(x => x > 10 && x != 45))
 			resultSymbol = Math.max(...normalizedSymbols);
 		else // get most common if there is no precipitation
-			resultSymbol = <number>mode(normalizedSymbols);
+			resultSymbol = mode(normalizedSymbols);
 
 		return this.ResolveCondition(resultSymbol);
 	}

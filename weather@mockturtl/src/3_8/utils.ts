@@ -11,7 +11,7 @@ const { Object } = imports.gi.GObject;
 // --------------------------------------------------------------
 // Text Generators
 
-export function _(str: string, args?: KeysValuePairs): string {
+export function _(str: string, args?: Record<string, string>): string {
 	let result = imports.gettext.dgettext(UUID, str);
 
 	if (result === str && result === "")
@@ -22,11 +22,7 @@ export function _(str: string, args?: KeysValuePairs): string {
 	return result;
 }
 
-interface KeysValuePairs {
-	[key: string]: any
-}
-
-export function format(str: string, args: KeysValuePairs) {
+export function format(str: string, args: Record<string, string>) {
 	for (const key in args) {
 		str = str.replace(new RegExp("\\{" + key + "\\}"), args[key]);
 	}
@@ -539,7 +535,12 @@ function HasIcon(icon: string, icon_type: imports.gi.St.IconType): boolean {
 // --------------------------------------------------------
 // ETC
 
-export function mode<T>(arr: T[]): T | null {
+/**
+ * Must be used with at leas 1 element array
+ * @param arr
+ * @returns
+ */
+export function mode<T extends number>(arr: T[]): T {
 	return arr.reduce(function (current, item) {
 		const val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
 		if (val > current.greatestFreq) {
@@ -547,7 +548,7 @@ export function mode<T>(arr: T[]): T | null {
 			current.mode = item;
 		}
 		return current;
-	}, { mode: null, greatestFreq: -Infinity, numMapping: {} as any } as { mode: T | null, greatestFreq: number, numMapping: any }).mode;
+	}, { mode: 0, greatestFreq: -Infinity, numMapping: {} } as { mode: T, greatestFreq: number, numMapping: Record<T, number> }).mode;
 };
 
 // Passing appropriate resolver function for the API, and the code
@@ -658,6 +659,7 @@ export function GetDistance(lat1: number, lon1: number, lat2: number, lon2: numb
 	return R * c; // in metres
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function GetFuncName(func: Function): string {
 	return func.name;
 }
@@ -669,7 +671,7 @@ export function Guid() {
 	});
 }
 
-export const isFinalized = function (obj: any) {
+export const isFinalized = function (obj: unknown) {
 	return obj && Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
 }
 
@@ -735,13 +737,16 @@ export function CompareVersion(v1: string, v2: string, options?: CompareVersionO
 // -----------------------------------------------------------
 // Timeout polyfill
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function setTimeout(func: Function, ms: number) {
-	let args: any[] = [];
+	let args: unknown[] = [];
 	if (arguments.length > 2) {
+		// eslint-disable-next-line prefer-rest-params
 		args = args.slice.call(arguments, 2);
 	}
 
 	const id = timeout_add(ms, () => {
+		// eslint-disable-next-line prefer-spread
 		func.apply(null, args);
 		return false; // Stop repeating
 	});
@@ -750,7 +755,7 @@ export function setTimeout(func: Function, ms: number) {
 };
 
 export async function delay(ms: number): Promise<void> {
-	return await new Promise((resolve, reject) => {
+	return await new Promise((resolve) => {
 		setTimeout(() => {
 			resolve();
 		}, ms);
@@ -761,13 +766,16 @@ export function clearTimeout(id: number) {
 	source_remove(id);
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function setInterval(func: Function, ms: number) {
-	let args: any[] = [];
+	let args: unknown[] = [];
 	if (arguments.length > 2) {
+		// eslint-disable-next-line prefer-rest-params
 		args = args.slice.call(arguments, 2);
 	}
 
 	const id = timeout_add(ms, () => {
+		// eslint-disable-next-line prefer-spread
 		func.apply(null, args);
 		return true; // Repeat
 	});

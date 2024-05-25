@@ -9335,7 +9335,7 @@ function mode(arr) {
             current.mode = item;
         }
         return current;
-    }, { mode: null, greatestFreq: -Infinity, numMapping: {} }).mode;
+    }, { mode: 0, greatestFreq: -Infinity, numMapping: {} }).mode;
 }
 ;
 function WeatherIconSafely(icons, icon_type) {
@@ -9462,7 +9462,7 @@ function utils_setTimeout(func, ms) {
 }
 ;
 async function delay(ms) {
-    return await new Promise((resolve, reject) => {
+    return await new Promise((resolve) => {
         utils_setTimeout(() => {
             resolve();
         }, ms);
@@ -10067,7 +10067,7 @@ class Soup3 {
         url = AddParamsToURI(url, params);
         const query = noEncode ? url : encodeURI(url);
         logger_Logger.Debug("URL called: " + query);
-        const data = await new Promise((resolve, reject) => {
+        const data = await new Promise((resolve) => {
             const message = Message.new(method, query);
             if (message == null) {
                 resolve(null);
@@ -10126,7 +10126,7 @@ class Soup2 {
         url = AddParamsToURI(url, params);
         const query = encodeURI(url);
         logger_Logger.Debug("URL called: " + query);
-        const data = await new Promise((resolve, reject) => {
+        const data = await new Promise((resolve) => {
             const message = Message.new(method, query);
             if (message == null) {
                 resolve(null);
@@ -14308,6 +14308,8 @@ class DanishMI extends BaseProvider {
                 return true;
             return false;
         });
+        if (relevantHours.length == 0)
+            return this.ResolveCondition(undefined);
         const normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
         let resultSymbol;
         if (normalizedSymbols.find(x => x > 10 && x != 45))
@@ -17962,12 +17964,12 @@ class CurrentWeather {
         }
         else if (precip.start == 0) {
             if (precip.end != -1)
-                this.immediatePrecipitationLabel.text = _("Precipitation will end in {precipEnd} minutes", { precipEnd: precip.end });
+                this.immediatePrecipitationLabel.text = _("Precipitation will end in {precipEnd} minutes", { precipEnd: precip.end.toString() });
             else
                 this.immediatePrecipitationLabel.text = _("Precipitation won't end in within an hour");
         }
         else {
-            this.immediatePrecipitationLabel.text = _("Precipitation will start within {precipStart} minutes", { precipStart: precip.start });
+            this.immediatePrecipitationLabel.text = _("Precipitation will start within {precipStart} minutes", { precipStart: precip.start.toString() });
         }
     }
     SetAPIUniqueField(extra_field) {
@@ -18744,7 +18746,7 @@ class UIBar {
         const levelOrder = ["unknown", "minor", "moderate", "severe", "extreme"];
         if (config._showAlerts && weather.alerts && weather.alerts.length > 0) {
             const highestLevel = weather.alerts.reduce((prev, current) => (levelOrder.indexOf(prev.level) > levelOrder.indexOf(current.level)) ? prev : current);
-            (_h = this.warningButtonTooltip) === null || _h === void 0 ? void 0 : _h.set_text(_("{count} weather alert(s)", { count: weather.alerts.length }));
+            (_h = this.warningButtonTooltip) === null || _h === void 0 ? void 0 : _h.set_text(_("{count} weather alert(s)", { count: weather.alerts.length.toString() }));
             (_j = this.warningButtonIcon) === null || _j === void 0 ? void 0 : _j.set_style("color: " + GetAlertColor(highestLevel.level, this.app.ui.LightTheme));
             (_k = this.warningButton) === null || _k === void 0 ? void 0 : _k.actor.show();
         }

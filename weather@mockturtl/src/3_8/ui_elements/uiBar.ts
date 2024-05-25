@@ -103,7 +103,7 @@ export class UIBar {
 		const levelOrder: AlertLevel[] = ["unknown", "minor", "moderate", "severe", "extreme"];
 		if (config._showAlerts && weather.alerts && weather.alerts.length > 0) {
 			const highestLevel = weather.alerts.reduce((prev, current) => (levelOrder.indexOf(prev.level) > levelOrder.indexOf(current.level)) ? prev : current);
-			this.warningButtonTooltip?.set_text(_("{count} weather alert(s)", { count: weather.alerts.length }));
+			this.warningButtonTooltip?.set_text(_("{count} weather alert(s)", { count: weather.alerts.length.toString() }));
 			this.warningButtonIcon?.set_style("color: " + GetAlertColor(highestLevel.level, this.app.ui.LightTheme));
 			this.warningButton?.actor.show();
 		}

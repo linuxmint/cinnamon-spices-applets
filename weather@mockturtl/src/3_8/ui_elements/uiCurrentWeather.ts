@@ -253,12 +253,12 @@ export class CurrentWeather {
 		}
 		else if (precip.start == 0) {
 			if (precip.end != -1)
-				this.immediatePrecipitationLabel.text = _("Precipitation will end in {precipEnd} minutes", { precipEnd: precip.end });
+				this.immediatePrecipitationLabel.text = _("Precipitation will end in {precipEnd} minutes", { precipEnd: precip.end.toString() });
 			else
 				this.immediatePrecipitationLabel.text = _("Precipitation won't end in within an hour");
 		}
 		else {
-			this.immediatePrecipitationLabel.text = _("Precipitation will start within {precipStart} minutes", { precipStart: precip.start });
+			this.immediatePrecipitationLabel.text = _("Precipitation will start within {precipStart} minutes", { precipStart: precip.start.toString() });
 		}
 	}
 

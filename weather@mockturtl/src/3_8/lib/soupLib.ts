@@ -84,7 +84,7 @@ class Soup3 implements SoupLib {
 
 		const query = noEncode ? url : encodeURI(url);
         Logger.Debug("URL called: " + query);
-        const data: SoupResponse | null = await new Promise((resolve, reject) => {
+        const data: SoupResponse | null = await new Promise((resolve) => {
             const message = Message.new(method, query);
             if (message == null) {
                 resolve(null);
@@ -99,7 +99,7 @@ class Soup3 implements SoupLib {
 					timeout = setTimeout(() => finalCancellable.cancel(), REQUEST_TIMEOUT_SECONDS * 1000);
 				}
 
-                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, finalCancellable, (session: any, result: any) => {
+                this._httpSession.send_and_read_async(message, PRIORITY_DEFAULT, finalCancellable, (session, result) => {
 					const headers: Record<string, string> = {};
 					let res: imports.gi.GLib.Bytes | null = null;
 					if (timeout != null)
@@ -132,9 +132,11 @@ class Soup3 implements SoupLib {
 class Soup2 implements SoupLib {
 
     /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private readonly _httpSession: any;
 
     constructor() {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const { ProxyResolverDefault, SessionAsync } = (imports.gi.Soup as any);
 		this._httpSession = new SessionAsync();
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
@@ -170,7 +172,7 @@ class Soup2 implements SoupLib {
 
 		const query = encodeURI(url);
 		Logger.Debug("URL called: " + query);
-		const data: SoupResponse | null = await new Promise((resolve, reject) => {
+		const data: SoupResponse | null = await new Promise((resolve) => {
 			const message = Message.new(method, query);
 			if (message == null) {
 				resolve(null);
@@ -186,7 +188,7 @@ class Soup2 implements SoupLib {
 				}
 
 				Logger.Debug("Sending http request to " + query);
-				this._httpSession.send_async(message, cancellable, async (session: any, result: imports.gi.Gio.AsyncResult) => {
+				this._httpSession.send_async(message, cancellable, async (session: unknown, result: imports.gi.Gio.AsyncResult) => {
 					if (timeout != null)
 						clearTimeout(timeout);
 
@@ -198,7 +200,7 @@ class Soup2 implements SoupLib {
 						Logger.Debug("Reply received from " + query + " with status code " + message.status_code + " and reason: " + message.reason_phrase);
 						res = await this.read_all_bytes(stream, finalCancellable);
 						stream.close(null);
-						message.response_headers.foreach((name: any, value: any) => {
+						message.response_headers.foreach((name: string, value: string) => {
 							headers[name] = value;
 						})
 					}
@@ -271,4 +273,5 @@ class Soup2 implements SoupLib {
 }
 
 // SessionAsync is a Soup2 class
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const soupLib: SoupLib = (imports.gi.Soup as any).SessionAsync != undefined ? new Soup2() : new Soup3();
