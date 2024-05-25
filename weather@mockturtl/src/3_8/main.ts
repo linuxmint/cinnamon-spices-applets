@@ -79,7 +79,7 @@ export class WeatherApplet extends TextIconApplet {
 		HttpLib.Instance.UnhandledError.Subscribe((sender, error) => this.HandleHTTPError(error));
 		try {
 			this.setAllowedLayout(AllowedLayout.BOTH);
-		} catch (e) {
+		} catch {
 			// vertical panel not supported
 		}
 
@@ -342,7 +342,7 @@ The contents of the file saved from the applet help page goes here
 
 </details>\n\n`;
 
-		const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[()#]/g, "");
+		const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[#()]/g, "");
 		spawnCommandLine(`${command} ${finalUrl}`);
 	}
 
@@ -567,7 +567,7 @@ The contents of the file saved from the applet help page goes here
 		if (error.type == "hard") {
 			Logger.Debug("Displaying hard error");
 			this.ui.Rebuild(this.config);
-			this.DisplayHardError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
+			this.DisplayHardError(this.errMsg[error.detail], error.message ?? "");
 		}
 
 		if (error.type == "soft") {

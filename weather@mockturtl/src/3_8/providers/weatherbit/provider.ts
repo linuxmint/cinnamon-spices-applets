@@ -58,9 +58,9 @@ export class Weatherbit extends BaseProvider {
 		if (!currentResult) return null;
 
 		const forecastResult = await forecastPromise;
-		currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+		currentResult.forecasts = forecastResult ?? [];
 		const hourlyResult = await hourlyPromise;
-		currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
+		currentResult.hourlyForecasts = hourlyResult ?? [];
 
 		if (config._showAlerts) {
 			const alertResult = await this.GetData(this.alerts_url, loc, this.ParseAlerts, cancellable);
@@ -296,7 +296,7 @@ export class Weatherbit extends BaseProvider {
 	}
 
 	private ParseStringTime(last_ob_time: string, tz: string): DateTime | null {
-		const split = last_ob_time.split(/[T\-\s:]/);
+		const split = last_ob_time.split(/[\s:T-]/);
 		if (split.length != 5) return null;
 		return DateTime.fromObject({
 			year: Number.parseInt(split[0]),

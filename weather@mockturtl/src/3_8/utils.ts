@@ -577,7 +577,7 @@ export function ShadeHexColor(color: string, percent: number): string {
 export function ConstructJsLocale(locales: string[]): string | null {
 	for (const locale of locales) {
 		// we only need lan_country section of locale, if we have space, @ or . we need to remove everything after
-		const jsLocale: string = locale.split(/[.\s@]/)[0].trim();
+		const jsLocale: string = locale.split(/[\s.@]/)[0].trim();
 		const tmp: string[] = jsLocale.split("_");
 
 		let result: string = "";
@@ -672,7 +672,7 @@ export function Guid() {
 }
 
 export const isFinalized = function (obj: unknown) {
-	return obj && Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
+	return obj && Object.prototype.toString.call(obj).includes('FINALIZED');
 }
 
 interface CompareVersionOptions {

@@ -76,7 +76,7 @@ class Soup3 implements SoupLib {
 		} = options;
 
 		if (cancellable?.is_cancelled()) {
-			return Promise.resolve(null);
+			return null;
 		}
 
         // Add params to url
@@ -164,7 +164,7 @@ class Soup2 implements SoupLib {
 		} = options;
 
 		if (cancellable?.is_cancelled()) {
-			return Promise.resolve(null);
+			return null;
 		}
 
 		// Add params to url

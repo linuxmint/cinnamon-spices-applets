@@ -261,7 +261,7 @@ export class WeatherUnderground extends BaseProvider {
             try {
                 observation = JSON.parse(observationString);
             }
-            catch(e) {
+            catch {
                 Logger.Debug("could not JSON parse observation payload from station ID " + stationID);
             }
         }

@@ -9352,7 +9352,7 @@ function ShadeHexColor(color, percent) {
 function ConstructJsLocale(locales) {
     var _a;
     for (const locale of locales) {
-        const jsLocale = locale.split(/[.\s@]/)[0].trim();
+        const jsLocale = locale.split(/[\s.@]/)[0].trim();
         const tmp = jsLocale.split("_");
         let result = "";
         for (const [i, item] of tmp.entries()) {
@@ -9414,7 +9414,7 @@ function Guid() {
     });
 }
 const isFinalized = function (obj) {
-    return obj && utils_Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
+    return obj && utils_Object.prototype.toString.call(obj).includes('FINALIZED');
 };
 function CompareVersion(v1, v2, options) {
     const zeroExtend = options && options.zeroExtend, v1parts = v1.split('.'), v2parts = v2.split('.');
@@ -9859,7 +9859,7 @@ class LocationStore {
         let currentlyDisplayedDeleted = false;
         if (newIndex == -1 && currentIndex == -1) {
             const tmp = [];
-            this.locations = locs.concat(tmp);
+            this.locations = [...locs, ...tmp];
             this.InvokeStorageChanged();
             return;
         }
@@ -9870,7 +9870,7 @@ class LocationStore {
         else if (newIndex != currentIndex)
             this.currentIndex = newIndex;
         const tmp = [];
-        this.locations = locs.concat(tmp);
+        this.locations = [...locs, ...tmp];
         if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
             logger_Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.");
             this.app.Refresh();
@@ -10062,7 +10062,7 @@ class Soup3 {
     async Send(url, options = {}) {
         const { params, headers, method = "GET", cancellable, noEncode = false } = options;
         if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
-            return Promise.resolve(null);
+            return null;
         }
         url = AddParamsToURI(url, params);
         const query = noEncode ? url : encodeURI(url);
@@ -10121,7 +10121,7 @@ class Soup2 {
     async Send(url, options = {}) {
         const { params, headers, method = "GET", cancellable } = options;
         if (cancellable === null || cancellable === void 0 ? void 0 : cancellable.is_cancelled()) {
-            return Promise.resolve(null);
+            return null;
         }
         url = AddParamsToURI(url, params);
         const query = encodeURI(url);
@@ -10535,9 +10535,9 @@ class MetUk extends BaseProvider {
         if (!currentResult)
             return null;
         const forecastResult = await forecastPromise;
-        currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+        currentResult.forecasts = forecastResult !== null && forecastResult !== void 0 ? forecastResult : [];
         const threeHourlyForecast = await hourlyPayload;
-        currentResult.hourlyForecasts = (!threeHourlyForecast) ? [] : threeHourlyForecast;
+        currentResult.hourlyForecasts = threeHourlyForecast !== null && threeHourlyForecast !== void 0 ? threeHourlyForecast : [];
         return currentResult;
     }
     ;
@@ -12402,9 +12402,9 @@ class Weatherbit extends BaseProvider {
         if (!currentResult)
             return null;
         const forecastResult = await forecastPromise;
-        currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+        currentResult.forecasts = forecastResult !== null && forecastResult !== void 0 ? forecastResult : [];
         const hourlyResult = await hourlyPromise;
-        currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
+        currentResult.hourlyForecasts = hourlyResult !== null && hourlyResult !== void 0 ? hourlyResult : [];
         if (config._showAlerts) {
             const alertResult = await this.GetData(this.alerts_url, loc, this.ParseAlerts, cancellable);
             if (alertResult == null)
@@ -12458,7 +12458,7 @@ class Weatherbit extends BaseProvider {
         return Math.round((incorrectTime.hour - correctTime.hour) / (1000 * 60 * 60));
     }
     ParseStringTime(last_ob_time, tz) {
-        const split = last_ob_time.split(/[T\-\s:]/);
+        const split = last_ob_time.split(/[\s:T-]/);
         if (split.length != 5)
             return null;
         return DateTime.fromObject({
@@ -13607,7 +13607,7 @@ class USWeather extends BaseProvider {
                 customIcon: "cloud-refresh-symbolic",
                 icons: ["weather-severe-alert"]
             };
-        const code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/);
+        const code = icon.match(/(?!\/)[_a-z]+(?=([,?]))/);
         switch (code === null || code === void 0 ? void 0 : code[0]) {
             case "skc":
                 return {
@@ -14309,7 +14309,7 @@ class DanishMI extends BaseProvider {
             return this.ResolveCondition(undefined);
         const normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
         let resultSymbol;
-        if (normalizedSymbols.find(x => x > 10 && x != 45))
+        if (normalizedSymbols.some(x => x > 10 && x != 45))
             resultSymbol = Math.max(...normalizedSymbols);
         else
             resultSymbol = mode(normalizedSymbols);
@@ -15134,9 +15134,9 @@ class DeutscherWetterdienst extends BaseProvider {
         }
         const severeWeathers = {};
         const regularWeather = {};
-        const regularConditions = ["clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night"];
+        const regularConditions = new Set(["clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night"]);
         for (const condition of conditions) {
-            if (regularConditions.includes(condition))
+            if (regularConditions.has(condition))
                 regularWeather[condition] == null ? regularWeather[condition] = 0 : regularWeather[condition]++;
             else
                 severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]++;
@@ -15500,7 +15500,7 @@ class WeatherUnderground extends BaseProvider {
                 try {
                     observation = JSON.parse(observationString);
                 }
-                catch (e) {
+                catch (_b) {
                     logger_Logger.Debug("could not JSON parse observation payload from station ID " + stationID);
                 }
             }
@@ -16188,7 +16188,7 @@ class GeoClue {
             GeoClueLib = imports.gi.Geoclue;
             GeocodeGlib = imports.gi.GeocodeGlib;
         }
-        catch (e) {
+        catch (_a) {
             logger_Logger.Info("GeoClue2 not available, disabling it's use.");
         }
     }
@@ -19172,7 +19172,7 @@ class WeatherApplet extends TextIconApplet {
         try {
             this.setAllowedLayout(AllowedLayout.BOTH);
         }
-        catch (e) {
+        catch (_a) {
         }
         this.loop.Start();
         this.config.DataServiceChanged.Subscribe(() => this.loop.Refresh({ rebuild: true }));
@@ -19339,7 +19339,7 @@ The contents of the file saved from the applet help page goes here
 \`\`\`
 
 </details>\n\n`;
-        const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[()#]/g, "");
+        const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[#()]/g, "");
         spawnCommandLine(`${command} ${finalUrl}`);
     }
     async saveCurrentLocation() {
@@ -19435,6 +19435,7 @@ The contents of the file saved from the applet help page goes here
     }
     ;
     ShowError(error) {
+        var _a;
         if (error == null)
             return;
         if (this.encounteredError == true)
@@ -19444,7 +19445,7 @@ The contents of the file saved from the applet help page goes here
         if (error.type == "hard") {
             logger_Logger.Debug("Displaying hard error");
             this.ui.Rebuild(this.config);
-            this.DisplayHardError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
+            this.DisplayHardError(this.errMsg[error.detail], (_a = error.message) !== null && _a !== void 0 ? _a : "");
         }
         if (error.type == "soft") {
             if (this.loop.IsDataTooOld()) {

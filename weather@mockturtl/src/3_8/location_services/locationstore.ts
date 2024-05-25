@@ -46,7 +46,7 @@ export class LocationStore {
 		// no need to do anything, not using locationstore atm
 		if (newIndex == -1 && currentIndex == -1) {
 			const tmp: LocationData[] = [];
-			this.locations = locs.concat(tmp);
+			this.locations = [...locs, ...tmp];
 			this.InvokeStorageChanged();
 			return;
 		}
@@ -61,7 +61,7 @@ export class LocationStore {
 			this.currentIndex = newIndex
 
 		const tmp: LocationData[] = [];
-		this.locations = locs.concat(tmp);
+		this.locations = [...locs, ...tmp];
 
 		if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
 			Logger.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.")

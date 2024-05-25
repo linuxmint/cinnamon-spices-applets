@@ -21,7 +21,7 @@ export class GeoClue implements GeoIP {
 			GeoClueLib = imports.gi.Geoclue;
 			GeocodeGlib = imports.gi.GeocodeGlib;
 		}
-		catch (e) {
+		catch {
 			Logger.Info("GeoClue2 not available, disabling it's use.");
 		}
 	}

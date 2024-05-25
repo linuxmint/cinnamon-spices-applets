@@ -180,10 +180,10 @@ export class DeutscherWetterdienst extends BaseProvider {
 
         const severeWeathers: Partial<Record<Icon, number>> = {};
         const regularWeather: Partial<Record<Icon, number>> = {};
-        const regularConditions: Icon[] = [ "clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night" ]
+        const regularConditions: Set<Icon> = new Set([ "clear-day", "clear-night", "cloudy", "fog", "partly-cloudy-day", "partly-cloudy-night" ])
 
         for (const condition of conditions) {
-            if (regularConditions.includes(condition))
+            if (regularConditions.has(condition))
                 regularWeather[condition] == null ? regularWeather[condition] = 0 : regularWeather[condition]!++;
             else
                 severeWeathers[condition] == null ? severeWeathers[condition] = 0 : severeWeathers[condition]!++;

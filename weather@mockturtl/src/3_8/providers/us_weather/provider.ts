@@ -436,7 +436,7 @@ export class USWeather extends BaseProvider {
 				customIcon: "cloud-refresh-symbolic",
 				icons: ["weather-severe-alert"]
 			};
-		const code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/); // Clear cruft from icon url, leave only code
+		const code = icon.match(/(?!\/)[_a-z]+(?=([,?]))/); // Clear cruft from icon url, leave only code
 		switch (code?.[0]) {
 			case "skc": // Fair/clear
 				return {

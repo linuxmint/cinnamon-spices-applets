@@ -181,7 +181,7 @@ export class DanishMI extends BaseProvider {
 		let resultSymbol: number;
 		// symbols include rain or other stuff, get most severe
 		// exclude foggy from priority symbols
-		if (normalizedSymbols.find(x => x > 10 && x != 45))
+		if (normalizedSymbols.some(x => x > 10 && x != 45))
 			resultSymbol = Math.max(...normalizedSymbols);
 		else // get most common if there is no precipitation
 			resultSymbol = mode(normalizedSymbols);

@@ -98,9 +98,9 @@ export class MetUk extends BaseProvider {
 
 		// await for forecasts if not finished
 		const forecastResult = await forecastPromise;
-		currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+		currentResult.forecasts = forecastResult ?? [];
 		const threeHourlyForecast = await hourlyPayload;
-		currentResult.hourlyForecasts = (!threeHourlyForecast) ? [] : threeHourlyForecast;
+		currentResult.hourlyForecasts = threeHourlyForecast ?? [];
 		return currentResult;
 	};
 
