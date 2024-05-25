@@ -9,7 +9,7 @@ import { DateTime } from "luxon";
 import { Config, ServiceClassMapping } from "./config";
 import type { RefreshOptions} from "./loop";
 import { WeatherLoop } from "./loop";
-import type { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, BuiltinIcons } from "./types";
+import type { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, BuiltinIcons, Metadata } from "./types";
 import { RefreshState } from "./types";
 import { UI } from "./ui";
 import { AwareDateString, CapitalizeFirstLetter, GenerateLocationText, InjectValues, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
@@ -52,7 +52,7 @@ export class WeatherApplet extends TextIconApplet {
 	public readonly config: Config;
 	public readonly ui: UI;
 
-	private readonly metadata: any;
+	private readonly metadata: Metadata;
 
 	/** Used for error handling, first error calls flips it
 	 * to prevents displaying other errors in the current loop.
@@ -61,7 +61,7 @@ export class WeatherApplet extends TextIconApplet {
 
 	private online: boolean | null = null;
 
-	public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
+	public constructor(metadata: Metadata, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
 		super(orientation, panelHeight, instanceId);
 		this.metadata = metadata;
 		this.AppletDir = metadata.path;
@@ -122,7 +122,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.config.TooltipTextOverrideChanged.Subscribe(this.AfterRefresh((conf, val, data) => this.SetAppletTooltip(data, conf, val)));
 	}
 
-	private onSettingNeedsRebuild = (conf: Config, changedData: any, data: WeatherData) => {
+	private onSettingNeedsRebuild = (conf: Config, changedData: unknown, data: WeatherData) => {
 		if (this.Provider == null)
 			return;
 
@@ -131,7 +131,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.ui.Display(data, conf, this.Provider);
 	}
 
-	private OnSettingNeedRedisplay = (conf: Config, changedData: any, data: WeatherData) => {
+	private OnSettingNeedRedisplay = (conf: Config, changedData: unknown, data: WeatherData) => {
 		if (this.Provider == null)
 			return;
 
@@ -342,7 +342,7 @@ The contents of the file saved from the applet help page goes here
 
 </details>\n\n`;
 
-		const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[\(\)#]/g, "");
+		const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[()#]/g, "");
 		spawnCommandLine(`${command} ${finalUrl}`);
 	}
 
@@ -366,7 +366,7 @@ The contents of the file saved from the applet help page goes here
 			return;
 		}
 
-		let settings: Record<string, any> | null = null;
+		let settings: Record<string, unknown> | null = null;
 		try {
 			settings = await this.config.GetAppletConfigJson();
 		}
@@ -421,19 +421,19 @@ The contents of the file saved from the applet help page goes here
 			this.onSettingNeedsRebuild(this.config, null, this.currentWeatherInfo);
 	};
 
-	public override on_applet_removed_from_panel(deleteConfig: any) {
+	public override on_applet_removed_from_panel() {
 		Logger.Info("Removing applet instance...")
 		this.loop.Stop();
 		this.config.Destroy();
 		Event.DisconnectAll();
 	}
 
-	public override on_applet_clicked(event: any): boolean {
+	public override on_applet_clicked(): boolean {
 		this.ui.Toggle();
 		return false;
 	}
 
-	public override on_applet_middle_clicked(event: any) {
+	public override on_applet_middle_clicked() {
 		return false;
 	}
 
@@ -533,7 +533,7 @@ The contents of the file saved from the applet help page goes here
 		this.set_applet_label(title);
 		this.set_applet_tooltip("Click to open");
 		this.set_applet_icon_name("weather-severe-alert");
-		this.ui.DisplayErrorMessage(msg, "hard");
+		this.ui.DisplayErrorMessage(msg);
 	};
 
 	private errMsg: NiceErrorDetail = { // Error messages to use
@@ -576,7 +576,7 @@ The contents of the file saved from the applet help page goes here
 			if (this.loop.IsDataTooOld()) {
 				this.set_applet_tooltip("Click to open");
 				this.set_applet_icon_name("weather-severe-alert");
-				this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"), "soft");
+				this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"));
 			}
 		}
 

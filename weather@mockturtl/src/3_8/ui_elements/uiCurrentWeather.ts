@@ -1,16 +1,16 @@
 import { OpenUrl } from "../lib/commandRunner";
 import type { Config } from "../config";
-import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK, STYLE_HIDDEN } from "../consts";
+import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, STYLE_HIDDEN } from "../consts";
 import type { LocationStore } from "../location_services/locationstore";
 import { Logger } from "../lib/logger";
 import type { WeatherApplet } from "../main";
 import type { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "../types";
-import { _, TempToUserConfig, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, WeatherIconSafely, LocalizedColon, PercentToLocale, CompassDirectionText } from "../utils";
+import { _, TempToUserConfig, PressToUserUnits, GenerateLocationText, WeatherIconSafely, LocalizedColon, PercentToLocale } from "../utils";
 import { WeatherButton } from "../ui_elements/weatherbutton";
 import { SunTimesUI } from "./uiSunTimes";
 import { WindBox } from "./windBox";
 
-const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
+const { BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
 const Lang: typeof imports.lang = imports.lang;
 const { ActorAlign } = imports.gi.Clutter;
 
@@ -22,7 +22,6 @@ const STYLE_ICON = 'weather-current-icon'
 const STYLE_ICONBOX = 'weather-current-iconbox'
 const STYLE_DATABOX_CAPTIONS = 'weather-current-databox-captions'
 const STYLE_DATABOX_VALUES = 'weather-current-databox-values'
-const STYLE_CURRENT = 'current'
 const STYLE_LOCATION_SELECTOR = 'location-selector';
 
 export class CurrentWeather {

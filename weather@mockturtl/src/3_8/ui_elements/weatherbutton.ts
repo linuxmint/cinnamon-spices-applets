@@ -1,17 +1,16 @@
 import { Event } from "../lib/events";
 
 const { Button } = imports.gi.St;
-const { SignalManager } = imports.misc.signalManager;
 
-export class WeatherButton {
+export class WeatherButton<T = never> {
 	public actor: imports.gi.St.Button;
 	private disabled = false;
 
-	public ID: any;
+	public ID: T | undefined;
 	public url?: string;
 
-	public Hovered: Event<WeatherButton, imports.gi.Clutter.CrossingEvent> = new Event();
-	public Clicked: Event<WeatherButton, imports.gi.Clutter.CrossingEvent | null> = new Event();
+	public Hovered: Event<WeatherButton<T>, imports.gi.Clutter.CrossingEvent> = new Event();
+	public Clicked: Event<WeatherButton<T>, imports.gi.Clutter.CrossingEvent | null> = new Event();
 
 	constructor(options: Partial<imports.gi.St.ButtonInitOptions>, doNotAddPadding: boolean = false) {
 		this.actor = new Button(options);
@@ -24,10 +23,10 @@ export class WeatherButton {
 
 		this.actor.connect("clicked", () => this.clicked());
 		this.actor.connect("enter-event", (actor, event) => this.onHoverEnter(event));
-		this.actor.connect("leave-event", (actor, event) => this.onHoverLeave(event));
+		this.actor.connect("leave-event", () => this.onHoverLeave());
 	}
 
-	handleEnter(actor?: WeatherButton) {
+	handleEnter() {
 		if (!this.disabled) this.actor.add_style_pseudo_class('active');
 		//global.set_cursor(imports.gi.Cinnamon.Cursor.POINTING_HAND);
 	}
@@ -61,7 +60,7 @@ export class WeatherButton {
 		return false;
 	}
 
-	private onHoverLeave = (event: imports.gi.Clutter.CrossingEvent) => {
+	private onHoverLeave = () => {
 		this.handleLeave();
 		return false;
 	}

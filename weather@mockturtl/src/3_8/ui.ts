@@ -2,7 +2,7 @@ import type { Config } from "./config";
 import { CurrentWeather as UICurrentWeather } from "./ui_elements/uiCurrentWeather";
 import { Logger } from "./lib/logger";
 import type { WeatherApplet } from "./main";
-import type { ErrorSeverity, WeatherData, WeatherProvider } from "./types";
+import type { WeatherData, WeatherProvider } from "./types";
 import { ShadeHexColor, delay, _ } from "./utils";
 import { UIForecasts } from "./ui_elements/uiForecasts";
 import { UIHourlyForecasts } from "./ui_elements/uiHourlyForecasts";
@@ -12,7 +12,7 @@ import type { WeatherButton } from "./ui_elements/weatherbutton";
 import type { DateTime } from "luxon";
 
 const { PopupMenuManager } = imports.ui.popupMenu;
-const { BoxLayout, IconType, Label } = imports.gi.St;
+const { IconType, Label } = imports.gi.St;
 const Lang: typeof imports.lang = imports.lang;
 const { AppletPopupMenu } = imports.ui.applet;
 const { themeManager } = imports.ui.main;
@@ -67,9 +67,10 @@ export class UI {
 		this.App.config.AlwaysShowHourlyWeatherChanged.Subscribe(this.App.AfterRefresh(this.OnConfigChanged));
 	}
 
-	private OnConfigChanged = (config: Config, confChange: any, data: WeatherData) => {
+	private OnConfigChanged = (config: Config, confChange: unknown, data: WeatherData) => {
 		if (this.App.Provider == null)
 			return;
+
 		this.Display(data, config, this.App.Provider);
 	}
 
@@ -130,7 +131,7 @@ export class UI {
 		this.HourlyWeather.UpdateIconType(iconType);
 	}
 
-	public DisplayErrorMessage(msg: string, errorType: ErrorSeverity) {
+	public DisplayErrorMessage(msg: string) {
 		this.Bar.DisplayErrorMessage(msg);
 	}
 
@@ -172,7 +173,7 @@ export class UI {
 		this.App.Refresh({rebuild: true});
 	}
 
-	private async PopupMenuToggled(caller: any, data: any) {
+	private async PopupMenuToggled(caller: unknown, data: boolean) {
 		// data - true is opened, false is closed
 		if (data == false) {
 			await delay(100); // Closing after popup menu is closed
@@ -253,7 +254,7 @@ export class UI {
 		}))
 	}
 
-	private async OnDayClicked(sender: WeatherButton, date: DateTime): Promise<void> {
+	private async OnDayClicked(sender: WeatherButton<DateTime>, date: DateTime): Promise<void> {
 		const wasOpen = this.HourlyWeather.Toggled;
 		// Open hourly weather if collapsed
 		if (!wasOpen)

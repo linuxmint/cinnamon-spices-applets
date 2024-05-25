@@ -29,19 +29,19 @@ export class UIForecasts {
 
 	private app: WeatherApplet;
 
-	public DayClicked: Event<WeatherButton, DateTime> = new Event();
-	public DayHovered: Event<WeatherButton, DateTime> = new Event();
+	public DayClicked: Event<WeatherButton<DateTime>, DateTime> = new Event();
+	public DayHovered: Event<WeatherButton<DateTime>, DateTime> = new Event();
 
 	// Callbacks with bound context, which has constant signature for event Subscription/unSubscription
-	public DayClickedCallback: (sender: WeatherButton, event: imports.gi.Clutter.CrossingEvent | null) => void;
-	public DayHoveredCallback: (sender: WeatherButton, event: imports.gi.Clutter.CrossingEvent) => void;
+	public DayClickedCallback: (sender: WeatherButton<DateTime>, event: imports.gi.Clutter.CrossingEvent | null) => void;
+	public DayHoveredCallback: (sender: WeatherButton<DateTime>, event: imports.gi.Clutter.CrossingEvent) => void;
 
 	constructor(app: WeatherApplet) {
 		this.app = app;
 		this.actor = new Bin({ style_class: STYLE_FORECAST });
 
-		this.DayClickedCallback = (s, e) => this.OnDayClicked(s, e);
-		this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
+		this.DayClickedCallback = (s) => this.OnDayClicked(s);
+		this.DayHoveredCallback = (s) => this.OnDayHovered(s);
 		this.app.config.ShowForecastDatesChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
 		this.app.config.TemperatureHighFirstChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
 		this.app.config.ForecastDaysChanged.Subscribe(this.app.AfterRefresh(this.OnForecastDaysChanged));
@@ -245,20 +245,26 @@ export class UIForecasts {
 			this.actor.get_child().destroy()
 	}
 
-	private OnDayHovered(sender: WeatherButton, event: imports.gi.Clutter.CrossingEvent): void {
-		Logger.Debug("Day Hovered: " + (sender.ID as DateTime).toJSDate().toDateString());
-		this.DayHovered.Invoke(sender, sender.ID as DateTime);
+	private OnDayHovered(sender: WeatherButton<DateTime>): void {
+		if (sender.ID == null)
+			return;
+
+		Logger.Debug("Day Hovered: " + sender.ID.toJSDate().toDateString());
+		this.DayHovered.Invoke(sender, sender.ID);
 	}
 
-	private OnDayClicked(sender: WeatherButton, event: imports.gi.Clutter.CrossingEvent | null): void {
-		Logger.Debug("Day Clicked: " + (sender.ID as DateTime).toJSDate().toDateString());
-		this.DayClicked.Invoke(sender, sender.ID as DateTime);
+	private OnDayClicked(sender: WeatherButton<DateTime>): void {
+		if (sender.ID == null)
+			return;
+
+		Logger.Debug("Day Clicked: " + sender.ID.toJSDate().toDateString());
+		this.DayClicked.Invoke(sender, sender.ID);
 	}
 }
 
 interface ForecastUI {
 	Icon: imports.gi.St.Icon,
-	Day: WeatherButton,
+	Day: WeatherButton<DateTime>,
 	Summary: imports.gi.St.Label,
 	Temperature: imports.gi.St.Label,
 }

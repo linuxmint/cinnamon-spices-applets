@@ -16807,8 +16807,8 @@ class OpenWeatherMapOpen extends BaseProvider {
 
 
 
-const { get_home_dir: config_get_home_dir, get_user_data_dir, get_user_config_dir } = imports.gi.GLib;
-const { File: config_File, Cancellable: config_Cancellable } = imports.gi.Gio;
+const { get_home_dir: config_get_home_dir, get_user_config_dir } = imports.gi.GLib;
+const { File: config_File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -17064,7 +17064,7 @@ class Config {
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this.OnKeySettingsUpdated, null);
         this.settings.bindProperty(BindingDirection.IN, "logLevel", "_logLevel", this.onLogLevelUpdated, null);
         this.settings.bind("selectedLogPath", "_selectedLogPath", this.app.saveLog);
-        keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked(null));
+        keybindingManager.addHotKey(UUID, this.keybinding, () => this.app.on_applet_clicked());
     }
     InjectLocationToConfig(loc, switchToManual = false) {
         logger_Logger.Debug("Location setting is now: " + loc.entryText);
@@ -17595,13 +17595,12 @@ function OpenUrl(element) {
 ;// CONCATENATED MODULE: ./src/3_8/ui_elements/weatherbutton.ts
 
 const { Button } = imports.gi.St;
-const { SignalManager } = imports.misc.signalManager;
 class WeatherButton {
     constructor(options, doNotAddPadding = false) {
         this.disabled = false;
         this.Hovered = new Event();
         this.Clicked = new Event();
-        this.onHoverLeave = (event) => {
+        this.onHoverLeave = () => {
             this.handleLeave();
             return false;
         };
@@ -17613,9 +17612,9 @@ class WeatherButton {
             this.actor.set_style('padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;');
         this.actor.connect("clicked", () => this.clicked());
         this.actor.connect("enter-event", (actor, event) => this.onHoverEnter(event));
-        this.actor.connect("leave-event", (actor, event) => this.onHoverLeave(event));
+        this.actor.connect("leave-event", () => this.onHoverLeave());
     }
-    handleEnter(actor) {
+    handleEnter() {
         if (!this.disabled)
             this.actor.add_style_pseudo_class('active');
     }
@@ -17788,7 +17787,7 @@ class WindBox {
 
 
 
-const { Bin, BoxLayout: uiCurrentWeather_BoxLayout, IconType: uiCurrentWeather_IconType, Label: uiCurrentWeather_Label, Icon: uiCurrentWeather_Icon, Align: uiCurrentWeather_Align } = imports.gi.St;
+const { BoxLayout: uiCurrentWeather_BoxLayout, IconType: uiCurrentWeather_IconType, Label: uiCurrentWeather_Label, Icon: uiCurrentWeather_Icon, Align: uiCurrentWeather_Align } = imports.gi.St;
 const uiCurrentWeather_Lang = imports.lang;
 const { ActorAlign: uiCurrentWeather_ActorAlign } = imports.gi.Clutter;
 const STYLE_SUMMARYBOX = 'weather-current-summarybox';
@@ -17798,7 +17797,6 @@ const STYLE_ICON = 'weather-current-icon';
 const STYLE_ICONBOX = 'weather-current-iconbox';
 const STYLE_DATABOX_CAPTIONS = 'weather-current-databox-captions';
 const STYLE_DATABOX_VALUES = 'weather-current-databox-values';
-const STYLE_CURRENT = 'current';
 const STYLE_LOCATION_SELECTOR = 'location-selector';
 class CurrentWeather {
     constructor(app) {
@@ -18091,7 +18089,7 @@ class CurrentWeather {
 
 
 
-const { Bin: uiForecasts_Bin, BoxLayout: uiForecasts_BoxLayout, Label: uiForecasts_Label, Icon: uiForecasts_Icon, Widget } = imports.gi.St;
+const { Bin, BoxLayout: uiForecasts_BoxLayout, Label: uiForecasts_Label, Icon: uiForecasts_Icon, Widget } = imports.gi.St;
 const { GridLayout, Orientation } = imports.gi.Clutter;
 const STYLE_FORECAST_ICON = 'weather-forecast-icon';
 const STYLE_FORECAST_DATABOX = 'weather-forecast-databox';
@@ -18115,9 +18113,9 @@ class UIForecasts {
             this.Display(data, config);
         };
         this.app = app;
-        this.actor = new uiForecasts_Bin({ style_class: STYLE_FORECAST });
-        this.DayClickedCallback = (s, e) => this.OnDayClicked(s, e);
-        this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
+        this.actor = new Bin({ style_class: STYLE_FORECAST });
+        this.DayClickedCallback = (s) => this.OnDayClicked(s);
+        this.DayHoveredCallback = (s) => this.OnDayHovered(s);
         this.app.config.ShowForecastDatesChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
         this.app.config.TemperatureHighFirstChanged.Subscribe(this.app.AfterRefresh(this.OnConfigChanged));
         this.app.config.ForecastDaysChanged.Subscribe(this.app.AfterRefresh(this.OnForecastDaysChanged));
@@ -18263,11 +18261,15 @@ class UIForecasts {
         if (this.actor.get_child() != null)
             this.actor.get_child().destroy();
     }
-    OnDayHovered(sender, event) {
+    OnDayHovered(sender) {
+        if (sender.ID == null)
+            return;
         logger_Logger.Debug("Day Hovered: " + sender.ID.toJSDate().toDateString());
         this.DayHovered.Invoke(sender, sender.ID);
     }
-    OnDayClicked(sender, event) {
+    OnDayClicked(sender) {
+        if (sender.ID == null)
+            return;
         logger_Logger.Debug("Day Clicked: " + sender.ID.toJSDate().toDateString());
         this.DayClicked.Invoke(sender, sender.ID);
     }
@@ -18871,11 +18873,11 @@ class UISeparator {
 
 
 const { PopupMenuManager } = imports.ui.popupMenu;
-const { BoxLayout: ui_BoxLayout, IconType: ui_IconType, Label: ui_Label } = imports.gi.St;
+const { IconType: ui_IconType, Label: ui_Label } = imports.gi.St;
 const ui_Lang = imports.lang;
 const { AppletPopupMenu } = imports.ui.applet;
 const { themeManager } = imports.ui.main;
-const { SignalManager: ui_SignalManager } = imports.misc.signalManager;
+const { SignalManager } = imports.misc.signalManager;
 const STYLE_WEATHER_MENU = 'weather-menu';
 class UI {
     get LightTheme() {
@@ -18896,7 +18898,7 @@ class UI {
         logger_Logger.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
         this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
-        this.signals = new ui_SignalManager();
+        this.signals = new SignalManager();
         this.lightTheme = this.IsLightTheme();
         this.BuildPopupMenu();
         this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
@@ -18944,7 +18946,7 @@ class UI {
         this.FutureWeather.UpdateIconType(iconType);
         this.HourlyWeather.UpdateIconType(iconType);
     }
-    DisplayErrorMessage(msg, errorType) {
+    DisplayErrorMessage(msg) {
         this.Bar.DisplayErrorMessage(msg);
     }
     Display(weather, config, provider) {
@@ -19349,7 +19351,7 @@ The contents of the file saved from the applet help page goes here
 \`\`\`
 
 </details>\n\n`;
-        const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[\(\)#]/g, "");
+        const finalUrl = `${baseUrl}?title=${encodeURI(title)}&body=${encodeURI(body)}`.replace(/[()#]/g, "");
         spawnCommandLine(`${command} ${finalUrl}`);
     }
     async saveCurrentLocation() {
@@ -19361,17 +19363,17 @@ The contents of the file saved from the applet help page goes here
             this.onSettingNeedsRebuild(this.config, null, this.currentWeatherInfo);
     }
     ;
-    on_applet_removed_from_panel(deleteConfig) {
+    on_applet_removed_from_panel() {
         logger_Logger.Info("Removing applet instance...");
         this.loop.Stop();
         this.config.Destroy();
         Event.DisconnectAll();
     }
-    on_applet_clicked(event) {
+    on_applet_clicked() {
         this.ui.Toggle();
         return false;
     }
-    on_applet_middle_clicked(event) {
+    on_applet_middle_clicked() {
         return false;
     }
     on_panel_height_changed() {
@@ -19441,7 +19443,7 @@ The contents of the file saved from the applet help page goes here
         this.set_applet_label(title);
         this.set_applet_tooltip("Click to open");
         this.set_applet_icon_name("weather-severe-alert");
-        this.ui.DisplayErrorMessage(msg, "hard");
+        this.ui.DisplayErrorMessage(msg);
     }
     ;
     ShowError(error) {
@@ -19460,7 +19462,7 @@ The contents of the file saved from the applet help page goes here
             if (this.loop.IsDataTooOld()) {
                 this.set_applet_tooltip("Click to open");
                 this.set_applet_icon_name("weather-severe-alert");
-                this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"), "soft");
+                this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"));
             }
         }
         if (error.userError) {

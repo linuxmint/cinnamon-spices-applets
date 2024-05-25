@@ -28,8 +28,8 @@ import { GeoIPFedora } from "./location_services/geoip_services/geoip.fedora";
 import { OpenMeteo } from "./providers/open-meteo/provider";
 import { OpenWeatherMapOpen } from "./providers/openweathermap/provider-open";
 
-const { get_home_dir, get_user_data_dir, get_user_config_dir } = imports.gi.GLib;
-const { File, Cancellable } = imports.gi.Gio;
+const { get_home_dir, get_user_config_dir } = imports.gi.GLib;
+const { File } = imports.gi.Gio;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -434,7 +434,7 @@ export class Config {
 			"_selectedLogPath", this.app.saveLog);
 
 		keybindingManager.addHotKey(
-			UUID, this.keybinding, () => this.app.on_applet_clicked(null));
+			UUID, this.keybinding, () => this.app.on_applet_clicked());
 	}
 
 	// UTILS
@@ -550,7 +550,7 @@ export class Config {
 		return size;
 	}
 
-	public async GetAppletConfigJson(): Promise<Record<string, any>> {
+	public async GetAppletConfigJson(): Promise<Record<string, unknown>> {
 		const home = get_home_dir() ?? "~";
 		let configFilePath = `${get_user_config_dir()}/cinnamon/spices/weather@mockturtl/${this.app.instance_id}.json`;
 		const oldConfigFilePath = `${home}/.cinnamon/configs/weather@mockturtl/${this.app.instance_id}.json`;

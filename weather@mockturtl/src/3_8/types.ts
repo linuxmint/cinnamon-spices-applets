@@ -11,6 +11,11 @@ export interface SunTime {
 	sunset: DateTime;
 }
 
+export interface Metadata {
+	path: string;
+	version: string;
+}
+
 /**
  * A WeatherProvider must implement this interface.
  */
@@ -158,7 +163,6 @@ export interface Precipitation {
 	chance?: number | undefined
 }
 
-type LocationSource = "ip-api" | "address-search" | "manual";
 export interface LocationData {
 	lat: number;
 	lon: number;
