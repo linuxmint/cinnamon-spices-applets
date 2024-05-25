@@ -9490,7 +9490,7 @@ function utils_setInterval(func, ms) {
 const Gio = imports.gi.Gio;
 const ByteArray = imports.byteArray;
 async function GetFileInfo(file) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
             try {
                 const result = file.query_info_finish(res);
@@ -9505,7 +9505,7 @@ async function GetFileInfo(file) {
         });
     });
 }
-async function FileExists(file, dictionary = false) {
+async function FileExists(file) {
     try {
         return file.query_exists(null);
     }
@@ -9538,7 +9538,7 @@ async function LoadContents(file) {
     });
 }
 async function DeleteFile(file) {
-    const result = await new Promise((resolve, reject) => {
+    const result = await new Promise((resolve) => {
         file.delete_async(null, null, (obj, res) => {
             let result = null;
             try {
@@ -9566,7 +9566,7 @@ async function OverwriteAndGetIOStream(file) {
     const parent = file.get_parent();
     if (parent != null && !FileExists(parent))
         parent.make_directory_with_parents(null);
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
             try {
                 const ioStream = file.replace_readwrite_finish(result);
@@ -9585,7 +9585,7 @@ async function WriteAsync(outputStream, buffer) {
     const text = ByteArray.fromString(buffer);
     if (outputStream.is_closed())
         return false;
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         outputStream.write_bytes_async(text, null, null, (obj, res) => {
             try {
                 outputStream.write_bytes_finish(res);
@@ -9601,7 +9601,7 @@ async function WriteAsync(outputStream, buffer) {
     });
 }
 async function CloseStream(stream) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         stream.close_async(null, null, (obj, res) => {
             try {
                 const result = stream.close_finish(res);
@@ -10225,7 +10225,6 @@ var __rest = (undefined && undefined.__rest) || function (s, e) {
         }
     return t;
 };
-
 
 
 
@@ -11468,7 +11467,9 @@ class OpenWeatherMapOneCall extends BaseProvider {
     }
     ;
     HasReturnedError(json) {
-        return (!!(json === null || json === void 0 ? void 0 : json.cod));
+        if (!json)
+            return false;
+        return (typeof json === "object" && "cod" in json && !!json.cod);
     }
 }
 ;
@@ -11551,19 +11552,18 @@ function PointInsidePolygon(point, vs) {
 }
 function areIntersecting(v1x1, v1y1, v1x2, v1y2, v2x1, v2y1, v2x2, v2y2) {
     let d1, d2;
-    let a1, a2, b1, b2, c1, c2;
-    a1 = v1y2 - v1y1;
-    b1 = v1x1 - v1x2;
-    c1 = (v1x2 * v1y1) - (v1x1 * v1y2);
+    const a1 = v1y2 - v1y1;
+    const b1 = v1x1 - v1x2;
+    const c1 = (v1x2 * v1y1) - (v1x1 * v1y2);
     d1 = (a1 * v2x1) + (b1 * v2y1) + c1;
     d2 = (a1 * v2x2) + (b1 * v2y2) + c1;
     if (d1 > 0 && d2 > 0)
         return false;
     if (d1 < 0 && d2 < 0)
         return false;
-    a2 = v2y2 - v2y1;
-    b2 = v2x1 - v2x2;
-    c2 = (v2x2 * v2y1) - (v2x1 * v2y2);
+    const a2 = v2y2 - v2y1;
+    const b2 = v2x1 - v2x2;
+    const c2 = (v2x2 * v2y1) - (v2x1 * v2y2);
     d1 = (a2 * v1x1) + (b2 * v1y1) + c2;
     d2 = (a2 * v1x2) + (b2 * v1y2) + c2;
     if (d1 > 0 && d2 > 0)
@@ -13073,9 +13073,6 @@ var PrecipType;
 
 ;// CONCATENATED MODULE: ./src/3_8/providers/us_weather/alerts.ts
 
-
-
-
 async function GetUSWeatherAlerts(cancellable, lat, lon) {
     var _a, _b;
     const alerts = [];
@@ -13402,7 +13399,7 @@ class USWeather extends BaseProvider {
             logger_Logger.Error("Failed to obtain forecast Data");
             return null;
         }
-        const weather = this.ParseCurrent(observations, hourly, loc);
+        const weather = this.ParseCurrent(observations, hourly);
         if (!weather)
             return null;
         weather.forecasts = (_a = this.ParseForecast(forecast)) !== null && _a !== void 0 ? _a : [];
@@ -13440,7 +13437,7 @@ class USWeather extends BaseProvider {
             const observation = await HttpLib.Instance.LoadJsonSimple({
                 url: element.id + "/observations/latest",
                 cancellable,
-                HandleError: (msg) => false
+                HandleError: () => false
             });
             if (observation == null) {
                 logger_Logger.Debug("Failed to get observations from " + element.id);
@@ -13504,7 +13501,7 @@ class USWeather extends BaseProvider {
         }
         return result;
     }
-    ParseCurrent(json, hourly, loc) {
+    ParseCurrent(json, hourly) {
         var _a, _b;
         const observation = this.MeshObservationData(json);
         if (observation == null || !this.observationStations[0]) {
@@ -14730,11 +14727,6 @@ class AccuWeather extends BaseProvider {
         switch (icon) {
             case 1:
                 return {
-                    customIcon: "alien-symbolic",
-                    icons: []
-                };
-            case 1:
-                return {
                     customIcon: day ? "day-sunny-symbolic" : "night-clear-symbolic",
                     icons: [day ? "weather-clear" : "weather-clear-night"]
                 };
@@ -15467,8 +15459,6 @@ class WeatherUnderground extends BaseProvider {
                         distanceFrom: station.distanceKm * 1000,
                     };
                 }
-                if (result.immediatePrecipitation == null) {
-                }
             }
             const dayPartIndex = forecast.daypart[0].daypartName.findIndex(v => v != null);
             if (result.date == null)
@@ -16187,7 +16177,6 @@ class PirateWeather extends BaseProvider {
 ;// CONCATENATED MODULE: ./src/3_8/location_services/geoip_services/geoclue.ts
 
 
-
 let GeoClueLib = undefined;
 let GeocodeGlib = undefined;
 class GeoClue {
@@ -16206,7 +16195,7 @@ class GeoClue {
             return null;
         }
         const { AccuracyLevel, Simple: GeoClue } = GeoClueLib;
-        const res = await new Promise((resolve, reject) => {
+        const res = await new Promise((resolve) => {
             logger_Logger.Debug("Requesting coordinates from GeoClue");
             const start = DateTime.now();
             GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, cancellable, (client, res) => {
@@ -16264,7 +16253,7 @@ class GeoClue {
         const geoCodeLoc = GeocodeGlib.Location.new(lat, lon, accuracy);
         const geoCodeRes = GeocodeGlib.Reverse.new_for_location(geoCodeLoc);
         geoCodeRes.set_backend(GeocodeGlib.Nominatim.new("https://nominatim.openstreetmap.org", "weatherapplet@gmail.com"));
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             logger_Logger.Debug("Requesting location data from GeoCode");
             const start = DateTime.now();
             geoCodeRes.resolve_async(cancellable, (obj, res) => {
@@ -16314,7 +16303,7 @@ class GeoIPFedora {
     ParseInformation(json) {
         var _a, _b, _c;
         if (json.latitude === null || json.longitude === null) {
-            this.HandleErrorResponse(json);
+            this.HandleErrorResponse();
             return null;
         }
         try {
@@ -16336,7 +16325,7 @@ class GeoIPFedora {
         }
     }
     ;
-    HandleErrorResponse(json) {
+    HandleErrorResponse() {
         this.app.ShowError({
             type: "hard",
             detail: "bad api response",
@@ -17345,13 +17334,14 @@ class WeatherLoop {
             switch (NetworkMonitor.get_default().connectivity) {
                 case NetworkConnectivity.FULL:
                 case NetworkConnectivity.LIMITED:
-                case NetworkConnectivity.PORTAL:
+                case NetworkConnectivity.PORTAL: {
                     const name = NetworkMonitor.get_default().connectivity == NetworkConnectivity.FULL ? "FULL" :
                         NetworkMonitor.get_default().connectivity == NetworkConnectivity.LIMITED ? "LIMITED"
                             : "PORTAL";
                     logger_Logger.Info(`Internet access "${name} (${NetworkMonitor.get_default().connectivity})" now available, initiating refresh.`);
                     this.Resume();
                     break;
+                }
                 case NetworkConnectivity.LOCAL:
                     logger_Logger.Info(`Internet access now down with "${NetworkMonitor.get_default().connectivity}".`);
                     break;
@@ -18314,7 +18304,6 @@ class UIHourlyForecasts {
             const maxPrecipVolume = this.hourlyForecastData.map(x => { var _a; return (_a = x.precipitation) === null || _a === void 0 ? void 0 : _a.volume; }).reduce((p, c) => Math.max(p !== null && p !== void 0 ? p : 0, c !== null && c !== void 0 ? c : 0));
             const totalHeight = this.hourlyContainers[0].height;
             const itemWidth = this.hourlyContainers[0].width;
-            const totalWidth = this.hourlyContainers.length * itemWidth;
             const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() + this.hourlyForecasts[0].Icon.get_height();
             const precipitationHeight = this.hourlyForecasts[0].PrecipPercent.get_height() + this.hourlyForecasts[0].PrecipVolume.get_height();
             const tempPadding = 6;
@@ -18322,13 +18311,11 @@ class UIHourlyForecasts {
             const precipitation = [];
             for (let i = 0; i < this.hourlyContainers.length; i++) {
                 const data = this.hourlyForecastData[i];
-                const items = this.hourlyForecasts[i];
                 if (data.temp == null)
                     continue;
                 const ratio = ((data.temp - minTemp) / (maxTemp - minTemp)) * (this.tempGraphHeight - (tempPadding * 2));
                 const height = this.tempGraphHeight - tempPadding - ratio + tempHeightOffset;
                 const midX = itemWidth * i + (itemWidth / 2);
-                const midY = (totalHeight / 2);
                 points.push({ x: midX, y: height });
                 precipitation.push(((_b = (_a = data.precipitation) === null || _a === void 0 ? void 0 : _a.volume) !== null && _b !== void 0 ? _b : 0));
             }
@@ -18444,7 +18431,7 @@ class UIHourlyForecasts {
                 ui.Hour.text = GetHoursMinutes(hour.date, config._show24Hours, tz, config._shortHourlyTime);
             ui.Temperature.text = temp ? `${temp}°` : "";
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
-            ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation, config);
+            ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation);
             ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
         }
         this.AdjustHourlyBoxItemWidth();
@@ -18458,14 +18445,14 @@ class UIHourlyForecasts {
         this.actor.show();
         this.actor.hide();
         this.AdjustHourlyBoxItemWidth(width);
-        const [minHeight, naturalHeight] = this.actor.get_preferred_height(width);
+        const [, naturalHeight] = this.actor.get_preferred_height(width);
         if (naturalHeight == null)
             return;
         logger_Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
         this.actor.show();
         this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
         this.hourlyToggled = true;
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             if (naturalHeight == null)
                 return;
             const height = naturalHeight;
@@ -18489,7 +18476,7 @@ class UIHourlyForecasts {
     }
     async Hide(animate = true) {
         this.hourlyToggled = false;
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
                 addTween(this.actor, {
                     height: 0,
@@ -18623,7 +18610,7 @@ class UIHourlyForecasts {
         }
         return precipitationText;
     }
-    GeneratePrecipitationChance(precip, config) {
+    GeneratePrecipitationChance(precip) {
         var _a;
         if (!precip)
             return "";

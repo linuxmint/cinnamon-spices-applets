@@ -188,7 +188,7 @@ export class MetNorway extends BaseProvider {
 					icons: [],
 					main: ""
 				},
-				date: <any>null, // we will build it below
+				date: null as never, // we will build it below
 				temp_max: Number.NEGATIVE_INFINITY,
 				temp_min: Number.POSITIVE_INFINITY
 			}

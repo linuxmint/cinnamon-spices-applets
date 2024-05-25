@@ -65,7 +65,7 @@ interface MetNorwayNowcastBaseData {
 	time: string;
 	data: {
 		instant: {
-			details: {}
+			details: unknown
 		}
 	}
 }

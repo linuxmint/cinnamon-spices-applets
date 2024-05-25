@@ -2,7 +2,6 @@ import { DateTime } from "luxon";
 import { Logger } from "../../lib/logger";
 import type { WeatherApplet } from "../../main";
 import type { LocationData } from "../../types";
-import { _ } from "../../utils";
 import type { GeoIP } from "./base";
 
 let GeoClueLib: typeof imports.gi.Geoclue | undefined = undefined;
@@ -33,7 +32,7 @@ export class GeoClue implements GeoIP {
 		}
 
 		const { AccuracyLevel, Simple: GeoClue } = GeoClueLib;
-		const res = await new Promise<ExtendedLocationData | null>((resolve, reject) => {
+		const res = await new Promise<ExtendedLocationData | null>((resolve) => {
 			Logger.Debug("Requesting coordinates from GeoClue");
 			const start = DateTime.now();
 			GeoClue.new_with_thresholds("weather_mockturtl", AccuracyLevel.EXACT, 0, 0, cancellable, (client, res) => {
@@ -108,7 +107,7 @@ export class GeoClue implements GeoIP {
 		// Gnome's default Nominatim instance is fucked, or Cinnamon misconfigures it but it's permanently not working.
 		// I set to OpenStreetMaps instance because that works.
 		geoCodeRes.set_backend(GeocodeGlib.Nominatim.new("https://nominatim.openstreetmap.org", "weatherapplet@gmail.com"))
-		return new Promise<Partial<LocationData> | null>((resolve, reject) => {
+		return new Promise<Partial<LocationData> | null>((resolve) => {
 			Logger.Debug("Requesting location data from GeoCode");
 			const start = DateTime.now();
 				geoCodeRes.resolve_async(cancellable, (obj, res) => {

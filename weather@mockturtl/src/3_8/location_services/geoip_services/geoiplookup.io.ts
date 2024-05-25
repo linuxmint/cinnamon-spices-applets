@@ -52,6 +52,8 @@ export class GeoIPLookupIO implements GeoIP {
 		}
 	};
 
+	// TODO: Add type for JSON
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	HandleErrorResponse(json: any): void {
 		this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" })
 		Logger.Error("ip-api responds with Error: " + json.reason);

@@ -1,7 +1,4 @@
-import { DateTime } from "luxon";
 import { HttpLib } from "../../lib/httpLib";
-import { Logger } from "../../lib/logger";
-import { PointInsidePolygon } from "../../lib/polygons";
 import type { AlertData, AlertLevel, BuiltinIcons, CustomIcons } from "../../types";
 
 interface USWeatherAlert {
@@ -226,7 +223,6 @@ function EventNameToIcon(event: string): CustomIcons | BuiltinIcons | undefined 
 			return "volcano-symbolic";
 
 		case "Earthquake Warning":
-
 		case "Special Marine Warning":
 		case "Special Weather Statement":
 		case "Law Enforcement Warning":

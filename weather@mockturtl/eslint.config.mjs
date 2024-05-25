@@ -16,7 +16,14 @@ export default teslint.config(
                     fixStyle: 'separate-type-imports',
                 }
             ],
-            "@typescript-eslint/no-import-type-side-effects": "error"
+            "@typescript-eslint/no-import-type-side-effects": "error",
+            "no-constant-condition": [
+                "error",
+                {
+                    // allow `while(true)` loops and the like
+                    "checkLoops": false
+                }
+            ],
         }
     }
 )

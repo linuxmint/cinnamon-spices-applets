@@ -11,7 +11,7 @@ const ByteArray = imports.byteArray;
  * @param file
  */
 export async function GetFileInfo(file: imports.gi.Gio.File): Promise<imports.gi.Gio.FileInfo | null> {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
 			try {
 				const result = file.query_info_finish(res);
@@ -27,7 +27,7 @@ export async function GetFileInfo(file: imports.gi.Gio.File): Promise<imports.gi
 	});
 }
 
-export async function FileExists(file: imports.gi.Gio.File, dictionary: boolean = false): Promise<boolean> {
+export async function FileExists(file: imports.gi.Gio.File): Promise<boolean> {
 	try {
 		return file.query_exists(null);
 		/*// fileInfo doesn't work, don't use for now
@@ -49,7 +49,7 @@ export async function FileExists(file: imports.gi.Gio.File, dictionary: boolean 
 export async function LoadContents(file: imports.gi.Gio.File): Promise<string | null> {
 	return new Promise((resolve, reject) => {
 		file.load_contents_async(null, (obj, res) => {
-			let result: boolean | null, contents: any = null;
+			let result: boolean | null, contents: number[] | string | null = null;
 			try {
 				[result, contents] = file.load_contents_finish(res);
 			}
@@ -71,7 +71,7 @@ export async function LoadContents(file: imports.gi.Gio.File): Promise<string | 
 }
 
 export async function DeleteFile(file: imports.gi.Gio.File): Promise<boolean> {
-	const result: boolean = await new Promise((resolve, reject) => {
+	const result: boolean = await new Promise((resolve) => {
 		file.delete_async(null, null, (obj, res) => {
 			let result = null;
 			try {
@@ -103,7 +103,7 @@ export async function OverwriteAndGetIOStream(file: imports.gi.Gio.File): Promis
 	if (parent != null && !FileExists(parent))
 		parent.make_directory_with_parents(null); //don't know if this is a blocking call or not
 
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		file.replace_readwrite_async(null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null, null, (source_object, result) => {
 			try {
 				const ioStream = file.replace_readwrite_finish(result);
@@ -126,8 +126,9 @@ export async function WriteAsync(outputStream: imports.gi.Gio.OutputStream, buff
 	if (outputStream.is_closed())
 		return false;
 
-	return new Promise((resolve, reject) => {
-		outputStream.write_bytes_async(text as any, null, null, (obj, res) => {
+	return new Promise((resolve) => {
+		// ByteArray is valid here
+		outputStream.write_bytes_async(text as never, null, null, (obj, res) => {
 			try {
 				outputStream.write_bytes_finish(res);
 				resolve(true);
@@ -143,7 +144,7 @@ export async function WriteAsync(outputStream: imports.gi.Gio.OutputStream, buff
 }
 
 export async function CloseStream(stream: imports.gi.Gio.OutputStream | imports.gi.Gio.InputStream | imports.gi.Gio.FileIOStream): Promise<boolean> {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		stream.close_async(null, null, (obj, res) => {
 			try {
 				const result = stream.close_finish(res);

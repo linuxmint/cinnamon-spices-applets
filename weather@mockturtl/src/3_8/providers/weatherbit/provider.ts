@@ -84,7 +84,7 @@ export class Weatherbit extends BaseProvider {
 	 * @param baseUrl
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData<T>(baseUrl: string, loc: LocationData, ParseFunction: (json: any) => T, cancellable: imports.gi.Gio.Cancellable) {
+	private async GetData<T, K>(baseUrl: string, loc: LocationData, ParseFunction: (json: K) => T, cancellable: imports.gi.Gio.Cancellable) {
 		const query = this.ConstructQuery(baseUrl, loc);
 		if (query == null)
 			return null;
@@ -98,7 +98,7 @@ export class Weatherbit extends BaseProvider {
 		if (json == null)
 			return null;
 
-		return ParseFunction(json);
+		return ParseFunction(json as K);
 	}
 
 	private async GetHourlyData(baseUrl: string, loc: LocationData, cancellable: imports.gi.Gio.Cancellable) {
@@ -106,6 +106,8 @@ export class Weatherbit extends BaseProvider {
 		if (query == null)
 			return null;
 
+		// TODO: Add type for json
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const json = await HttpLib.Instance.LoadJsonSimple<any>({
 			url: query,
 			cancellable,
@@ -151,6 +153,8 @@ export class Weatherbit extends BaseProvider {
 		return alerts;
 	}
 
+	// TODO: Add type for json
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private ParseCurrent = (json: any): WeatherData | null => {
 		json = json.data[0];
 		const hourDiff = this.HourDifference(DateTime.fromSeconds(json.ts, { zone: json.timezone }), this.ParseStringTime(json.ob_time, json.timezone));
@@ -202,6 +206,8 @@ export class Weatherbit extends BaseProvider {
 		}
 	};
 
+	// TODO: Add type for json
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private ParseForecast = (json: any): ForecastData[] | null => {
 		const forecasts: ForecastData[] = [];
 		try {
@@ -229,6 +235,8 @@ export class Weatherbit extends BaseProvider {
 		}
 	};
 
+	// TODO: Add type for json
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private ParseHourlyForecast = (json: any): HourlyForecastData[] | null => {
 		const forecasts: HourlyForecastData[] = [];
 		try {
@@ -555,10 +563,3 @@ export class Weatherbit extends BaseProvider {
 		}
 	}
 };
-
-/**
- *  M - [DEFAULT] Metric (Celsius, m/s, mm)
-	S - Scientific (Kelvin, m/s, mm)
-	I - Fahrenheit (F, mph, in)
- */
-type queryUnits = 'M' | 'S' | 'I';

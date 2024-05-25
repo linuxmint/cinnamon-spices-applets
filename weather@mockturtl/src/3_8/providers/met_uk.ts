@@ -93,8 +93,8 @@ export class MetUk extends BaseProvider {
 		}
 
 		// Start getting forecast data
-		const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc, cancellable) as Promise<ForecastData[]>;
-		const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc, cancellable) as Promise<HourlyForecastData[]>;
+		const forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast, newLoc, cancellable);
+		const hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast, newLoc, cancellable);
 
 		// Get and Parse Observation data
 		const observations = await this.GetObservationData(this.observationSites, cancellable);
@@ -105,7 +105,7 @@ export class MetUk extends BaseProvider {
 		const forecastResult = await forecastPromise;
 		currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
 		const threeHourlyForecast = await hourlyPayload;
-		currentResult.hourlyForecasts = (!threeHourlyForecast) ? [] : threeHourlyForecast as HourlyForecastData[];
+		currentResult.hourlyForecasts = (!threeHourlyForecast) ? [] : threeHourlyForecast;
 		return currentResult;
 	};
 
@@ -122,6 +122,8 @@ export class MetUk extends BaseProvider {
 	}
 
 	private async GetObservationSitesInRange(loc: LocationData, range: number, cancellable: imports.gi.Gio.Cancellable): Promise<WeatherSite[] | null> {
+		// TODO: Add type definition
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const observationSiteList = await HttpLib.Instance.LoadJsonSimple<any>({
 			url: this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key,
 			cancellable
@@ -169,7 +171,7 @@ export class MetUk extends BaseProvider {
 	 * @param baseUrl
 	 * @param ParseFunction returns WeatherData or ForecastData Object
 	 */
-	private async GetData(query: string, ParseFunction: (json: any, loc: LocationData) => WeatherData | ForecastData[] | HourlyForecastData[] | null, loc: LocationData, cancellable: imports.gi.Gio.Cancellable) {
+	private async GetData<T, R extends WeatherData | ForecastData[] | HourlyForecastData[]>(query: string, ParseFunction: (json: T, loc: LocationData) => R | null, loc: LocationData, cancellable: imports.gi.Gio.Cancellable) {
 		if (query == null)
 			return null;
 
@@ -179,7 +181,7 @@ export class MetUk extends BaseProvider {
 		if (json == null)
 			return null;
 
-		return ParseFunction(json, loc);
+		return ParseFunction(json as T, loc);
 	};
 
 	private ParseCurrent(json: METPayload<true>[], loc: LocationData): WeatherData | null {
@@ -194,7 +196,7 @@ export class MetUk extends BaseProvider {
 			dataIndex = index;
 			break;
 		}
-		const filteredJson = json as any as METPayload<false>[];
+		const filteredJson = json as unknown as METPayload<false>[];
 
 		if (dataIndex == -1) {
 			this.app.ShowError({
@@ -354,7 +356,7 @@ export class MetUk extends BaseProvider {
 	private VisibilityToText(dist: string): string {
 		const distance = parseInt(dist);
 		const unit = this.app.config.DistanceUnit;
-		const stringFormat: any = {
+		const stringFormat: Record<string, string> = {
 			distanceUnit: this.DistanceUnitFor(unit)
 		};
 
@@ -513,6 +515,8 @@ export class MetUk extends BaseProvider {
 		return (date.replace("Z", "")) + "T00:00:00Z";
 	}
 
+	// TODO: Add type definition
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private GetClosestSite(siteList: any, loc: LocationData): WeatherSite {
 		const sites = siteList.Locations.Location as WeatherSite[];
 		let closest = sites[0];
@@ -783,7 +787,7 @@ interface WeatherSite {
 interface METPayload<T extends boolean = false> {
 	SiteRep: {
 		Wx: {
-			Param: any[];
+			Param: unknown[];
 		},
 		DV: {
 			dataDate: string;

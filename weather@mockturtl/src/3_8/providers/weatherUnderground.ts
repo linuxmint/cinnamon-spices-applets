@@ -170,7 +170,7 @@ export class WeatherUnderground extends BaseProvider {
             location: {},
             sunrise: null,
             sunset: null,
-            date: null as any,
+            date: null as never,
         };
 
         for (const observations of observationData) {
@@ -210,9 +210,6 @@ export class WeatherUnderground extends BaseProvider {
                     lon: station.longitude,
                     distanceFrom: station.distanceKm * 1000,
                 };
-            }
-            if (result.immediatePrecipitation == null) {
-
             }
         }
 
@@ -643,51 +640,6 @@ export class WeatherUnderground extends BaseProvider {
             case "h":
                 return CelsiusToKelvin(c);
         }
-    }
-}
-
-
-interface LocationPayload {
-    location: {
-        latitude: number;
-        longitude: number;
-        city: string;
-        locale: {
-            locale1: string | null;
-            locale2: string | null;
-            locale3: string | null;
-            locale4: string | null;
-        },
-        neighborhood: string | null,
-        adminDistrict: string | null,
-        adminDistrictCode: string | null,
-        postalCode: string | null,
-        postalKey: string | null,
-        country: string,
-        countryCode: string,
-        ianaTimeZone: string,
-        displayName: string,
-        /** ISO DateTime */
-        dstEnd: string | null,
-        /** ISO DateTime */
-        dstStart: string | null,
-        dmaCd: string | null,
-        placeId: string | null,
-        disputedArea: boolean,
-        disputedCountries: string[] | null,
-        disputedCountryCodes: string[] | null,
-        disputedCustomers: string[] | null,
-        disputedShowCountry: boolean[],
-        canonicalCityId: string,
-        countyId: string | null,
-        locId: string,
-        locationCategory: string | null,
-        pollenId: string | null,
-        pwsId: string | null,
-        regionalSatellite: string,
-        tideId: string | null,
-        type: string,
-        zoneId: string,
     }
 }
 

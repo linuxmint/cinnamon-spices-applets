@@ -4,7 +4,7 @@ import type { Config, Services } from "../../config";
 import type { ErrorResponse, HTTPParams } from "../../lib/httpLib";
 import { HttpLib } from "../../lib/httpLib";
 import type { Condition, ForecastData, HourlyForecastData, LocationData, WeatherData, PrecipitationType, AlertData } from "../../types";
-import { IsNight, _ } from "../../utils";
+import { _ } from "../../utils";
 import { BaseProvider } from "../BaseProvider"
 import { GetDeutscherWetterdienstAlerts } from "./alert";
 
@@ -467,7 +467,7 @@ interface HourlyForecastInfo {
     /** Speed of maximum wind gust during previous hour, 10 m above the ground */
     wind_gust_speed: number | null;
     /** Object mapping meteorological parameters to the source IDs of alternative sources that were used to fill up missing values in the main source */
-    fallback_source_ids: any;
+    fallback_source_ids: unknown;
 }
 
 type DWDCondition = "dry" | "fog" | "rain" | "sleet" | "snow" | "hail" | "thunderstorm";

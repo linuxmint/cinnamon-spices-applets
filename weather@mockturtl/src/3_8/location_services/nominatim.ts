@@ -31,6 +31,8 @@ export class GeoLocation {
 				return cached;
 			}
 
+			// TODO: add type for locationData
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const locationData = await HttpLib.Instance.LoadJsonSimple<any>({
 				url: `${this.url}?q=${searchText}&${this.params}`,
 				cancellable
@@ -76,6 +78,8 @@ export class GeoLocation {
 	 * keys
 	 * @param locationData
 	 */
+	// TODO: Add type for locationData
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private BuildEntryText(locationData: any): string {
 		if (locationData.address == null) return locationData.display_name;
 		const entryText: string[] = [];

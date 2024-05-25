@@ -95,14 +95,15 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 		return params;
 	};
 
-	private HadErrors(json: any): boolean {
-		if (!this.HasReturnedError(json)) return false;
+	private HadErrors(json: unknown): boolean {
+		if (!this.HasReturnedError(json))
+			return false;
 		const errorMsg = "OpenWeatherMap Response: ";
 		const error = {
 			service: "openweathermap",
 			type: "hard",
 		} as AppletError;
-		const errorPayload: OpenWeatherMapError = json;
+		const errorPayload = json;
 		switch (errorPayload.cod) {
 			case ("400"):
 				error.detail = "bad location format";
@@ -131,8 +132,11 @@ export class OpenWeatherMapOneCall extends BaseProvider {
 		return true;
 	};
 
-	private HasReturnedError(json: any) {
-		return (!!json?.cod);
+	private HasReturnedError(json: unknown): json is OpenWeatherMapError {
+		if (!json)
+			return false;
+
+		return (typeof json === "object" && "cod" in json && !!json.cod);
 	}
 
 	public HandleError = (error: ErrorResponse): boolean => {

@@ -49,6 +49,7 @@ export function ConvertLocaleToOWMLang(systemLocale: string | null): string {
 
 
 // This is here so they are translated.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const openWeatherMapConditionLibrary = [
 	// Group 2xx: Thunderstorm
 	_("Thunderstorm with light rain"),

@@ -178,7 +178,7 @@ export class UIHourlyForecasts {
 			ui.Temperature.text = temp ? `${temp}°` : "";
 			ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
 			// ui.Summary.text = hour.condition.main;
-			ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation, config);
+			ui.PrecipPercent.text = this.GeneratePrecipitationChance(hour.precipitation);
 			ui.PrecipVolume.text = this.GeneratePrecipitationVolume(hour.precipitation, config);
 		}
 
@@ -200,7 +200,7 @@ export class UIHourlyForecasts {
 
 		this.AdjustHourlyBoxItemWidth(width);
 
-		const [minHeight, naturalHeight] = this.actor.get_preferred_height(width);
+		const [, naturalHeight] = this.actor.get_preferred_height(width);
 
 		if (naturalHeight == null)
 			return;
@@ -214,7 +214,7 @@ export class UIHourlyForecasts {
 		// interfering with animations.
 		this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
 		this.hourlyToggled = true;
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			if (naturalHeight == null)
 				return;
 
@@ -243,7 +243,7 @@ export class UIHourlyForecasts {
 
 	public async Hide(animate: boolean = true): Promise<void> {
 		this.hourlyToggled = false;
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			if (global.settings.get_boolean("desktop-effects-on-menus") && animate) {
 				// TODO: eliminate Clutter Warnings on collapse in logs
 				addTween(this.actor,
@@ -411,7 +411,7 @@ export class UIHourlyForecasts {
 		const maxPrecipVolume = this.hourlyForecastData.map(x => x.precipitation?.volume).reduce((p, c) => Math.max(p ?? 0, c ?? 0)) as number;
 		const totalHeight = this.hourlyContainers[0].height;
 		const itemWidth = this.hourlyContainers[0].width;
-		const totalWidth = this.hourlyContainers.length * itemWidth;
+		// const totalWidth = this.hourlyContainers.length * itemWidth;
 		const tempHeightOffset = this.hourlyForecasts[0].Hour.get_height() + this.hourlyForecasts[0].Icon.get_height();
 		const precipitationHeight = this.hourlyForecasts[0].PrecipPercent.get_height() + this.hourlyForecasts[0].PrecipVolume.get_height();
 		const tempPadding = 6;
@@ -420,7 +420,6 @@ export class UIHourlyForecasts {
 		const precipitation: number[] = []
 		for (let i = 0; i < this.hourlyContainers.length; i++) {
 			const data = this.hourlyForecastData[i];
-			const items = this.hourlyForecasts[i];
 
 			if (data.temp == null)
 				continue;
@@ -430,7 +429,7 @@ export class UIHourlyForecasts {
 			const height = this.tempGraphHeight - tempPadding - ratio + tempHeightOffset;
 
 			const midX = itemWidth * i + (itemWidth/2);
-			const midY = (totalHeight / 2);
+			// const midY = (totalHeight / 2);
 			points.push({x: midX, y: height});
 			precipitation.push((data.precipitation?.volume ?? 0))
 		}
@@ -477,7 +476,7 @@ export class UIHourlyForecasts {
 		return precipitationText;
 	}
 
-	private GeneratePrecipitationChance(precip: Precipitation | undefined, config: Config): string {
+	private GeneratePrecipitationChance(precip: Precipitation | undefined): string {
 		if (!precip)
 			return "";
 

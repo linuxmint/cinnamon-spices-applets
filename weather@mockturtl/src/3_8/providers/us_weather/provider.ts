@@ -93,7 +93,7 @@ export class USWeather extends BaseProvider {
 			return null;
 		}
 		// Parsing data
-		const weather = this.ParseCurrent(observations, hourly, loc);
+		const weather = this.ParseCurrent(observations, hourly);
 		if (!weather)
 			return null;
 
@@ -152,7 +152,7 @@ export class USWeather extends BaseProvider {
 			const observation = await HttpLib.Instance.LoadJsonSimple<ObservationPayload>({
 				url: element.id + "/observations/latest",
 				cancellable,
-				HandleError: (msg) => false
+				HandleError: () => false
 			});
 
 			if (observation == null) {
@@ -254,7 +254,7 @@ export class USWeather extends BaseProvider {
 	 * @param json
 	 * @param hourly can be null
 	 */
-	private ParseCurrent(json: ObservationPayload[], hourly: ForecastsPayload, loc: LocationData): WeatherData | null {
+	private ParseCurrent(json: ObservationPayload[], hourly: ForecastsPayload): WeatherData | null {
 		const observation = this.MeshObservationData(json);
 		if (observation == null || !this.observationStations[0]) {
 			Logger.Error("No observation stations/data are available");
@@ -675,7 +675,7 @@ export class USWeather extends BaseProvider {
 };
 
 interface GridPayload {
-	"@context": any,
+	"@context": unknown,
 	id: string;
 	type: string;
 	geometry: {
@@ -756,12 +756,12 @@ interface StationPayload {
 }
 
 interface StationsPayload {
-	"@context": any;
+	"@context": unknown;
 	features: StationPayload[]
 }
 
 interface ObservationPayload {
-	"@context": any;
+	"@context": unknown;
 	/** https://api.weather.gov/stations/WTHC1/observations/2020-06-25T12:57:00+00:00 */
 	id: string;
 	type: string;
@@ -784,7 +784,7 @@ interface ObservationPayload {
 		rawMessage: string;
 		textDescription: string;
 		icon: string;
-		presentWeather: any[],
+		presentWeather: unknown[],
 		temperature: {
 			value: number;
 			unitCode: string,
@@ -880,7 +880,7 @@ interface ForecastPayload {
 	/** Usually in F */
 	temperature: number;
 	temperatureUnit: string;
-	temperatureTrend: any;
+	temperatureTrend: unknown;
 	/** Like "5 mph" ?? */
 	windSpeed: string;
 	/** Like "SSW" */

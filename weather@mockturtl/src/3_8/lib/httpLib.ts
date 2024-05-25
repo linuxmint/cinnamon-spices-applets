@@ -1,6 +1,5 @@
 import { Logger } from "./logger";
 import type { ErrorDetail } from "../types";
-import { _ } from "../utils";
 import type { SoupLibSendOptions, SoupResponse } from "./soupLib";
 import { soupLib } from "./soupLib";
 import { Event } from "./events";

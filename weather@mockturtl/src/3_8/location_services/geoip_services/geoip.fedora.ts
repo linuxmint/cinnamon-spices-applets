@@ -31,7 +31,7 @@ export class GeoIPFedora implements GeoIP {
 
 	private ParseInformation(json: GeoIPFedoraPayload): LocationData | null {
 		if (json.latitude === null || json.longitude === null) {
-			this.HandleErrorResponse(json);
+			this.HandleErrorResponse();
 			return null;
 		}
 
@@ -54,7 +54,7 @@ export class GeoIPFedora implements GeoIP {
 		}
 	};
 
-	private HandleErrorResponse(json: any): void {
+	private HandleErrorResponse(): void {
 		this.app.ShowError({
 			type: "hard",
 			detail: "bad api response",

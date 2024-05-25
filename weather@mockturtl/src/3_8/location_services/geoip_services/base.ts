@@ -1,4 +1,3 @@
-import { WeatherApplet } from "../../main";
 import type { LocationData } from "../../types";
 
 export interface GeoIP {
