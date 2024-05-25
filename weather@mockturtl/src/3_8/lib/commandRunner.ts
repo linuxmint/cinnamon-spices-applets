@@ -9,10 +9,12 @@ const { spawnCommandLineAsyncIO, spawnCommandLineAsync } = imports.misc.util;
  */
 export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedResponse<TData> | TypedFailResponse> {
 	const response = await SpawnProcess(command);
-	if (!response.Success) return response as TypedFailResponse;
+	if (!response.Success)
+		return response as TypedFailResponse;
 
 	try {
 		response.Data = JSON.parse(response.Data);
+		return response as TypedResponse<TData>;
 	}
 	catch (e) {
 		if (e instanceof Error)
@@ -23,8 +25,6 @@ export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedR
 			Message: "Failed to parse JSON",
 			Type: "jsonParse",
 		}
-	}
-	finally {
 		return response as TypedFailResponse;
 	}
 }
@@ -43,7 +43,7 @@ export async function SpawnProcess(command: string[]): Promise<GenericResponse> 
 
 	let response;
 	if (spawnCommandLineAsyncIO === undefined) {
-		response = await new Promise((resolve, reject) => {
+		response = await new Promise((resolve) => {
 			spawnCommandLineAsync(cmd,
 				() => {
 					resolve({
@@ -67,7 +67,7 @@ export async function SpawnProcess(command: string[]): Promise<GenericResponse> 
 		});
 	}
 	else {
-		response = await new Promise((resolve, reject) => {
+		response = await new Promise((resolve) => {
 			spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {
 				const result: GenericResponse = {
 					Success: exitCode == 0,
@@ -115,7 +115,7 @@ interface TypedFailResponse extends ProcessResponse {
 
 interface ProcessResponse {
 	Success: boolean;
-	Data: any;
+	Data: unknown;
 	ErrorData: ErrorData | undefined;
 }
 

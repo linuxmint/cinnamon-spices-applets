@@ -118,7 +118,7 @@ export class USWeather extends BaseProvider {
 	 */
 	private async GetGridData(loc: LocationData, cancellable: imports.gi.Gio.Cancellable): Promise<GridPayload | null> {
 		// Handling out of country errors in callback
-		const siteData = await HttpLib.Instance.LoadJsonSimple<GridPayload>({
+		const siteData = await HttpLib.Instance.LoadJsonSimple<GridPayload, { title: string }>({
 			url: this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(),
 			cancellable,
 			HandleError: this.OnObtainingGridData

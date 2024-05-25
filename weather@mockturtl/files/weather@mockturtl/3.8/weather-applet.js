@@ -17511,6 +17511,7 @@ async function SpawnProcessJson(command) {
         return response;
     try {
         response.Data = JSON.parse(response.Data);
+        return response;
     }
     catch (e) {
         if (e instanceof Error)
@@ -17521,8 +17522,6 @@ async function SpawnProcessJson(command) {
             Message: "Failed to parse JSON",
             Type: "jsonParse",
         };
-    }
-    finally {
         return response;
     }
 }
@@ -17534,7 +17533,7 @@ async function SpawnProcess(command) {
     logger_Logger.Debug("Spawning command: " + cmd);
     let response;
     if (spawnCommandLineAsyncIO === undefined) {
-        response = await new Promise((resolve, reject) => {
+        response = await new Promise((resolve) => {
             spawnCommandLineAsync(cmd, () => {
                 resolve({
                     Success: true,
@@ -17555,7 +17554,7 @@ async function SpawnProcess(command) {
         });
     }
     else {
-        response = await new Promise((resolve, reject) => {
+        response = await new Promise((resolve) => {
             spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
                 const result = {
                     Success: exitCode == 0,
